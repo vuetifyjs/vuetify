@@ -16,7 +16,6 @@
     "location": "Keller, TX, USA",
     "name": "John Leider",
     "team": "company",
-    "twitter": "zeroskillz",
     "work": "Engineer @ Vuetify",
     "joined": "Jun 2016"
   },
@@ -31,7 +30,6 @@
     "location": "Keller, TX, USA",
     "name": "Heather Leider",
     "team": "company",
-    "twitter": "grneyedgrl01",
     "work": "COO @ Vuetify",
     "joined": "Nov 2019"
   },
@@ -83,7 +81,6 @@
     "location": "Rochester, NY, USA",
     "name": "Andrew Henry",
     "team": "core",
-    "twitter": "SeeMWhyK",
     "joined": "Dec 2018"
   },
   "blalan05": {
@@ -127,7 +124,6 @@
     ],
     "location": "Madrid, Spain",
     "name": "Joaquín Sánchez",
-    "twitter": "userquin",
     "team": "core",
     "joined": "Mar 2024"
   },
@@ -148,7 +144,6 @@
     "location": "California, US",
     "name": "Ken Kieu",
     "team": "core",
-    "twitter": "kieuminhcanh",
     "joined": "April 2024"
   },
   "MatthewAry": {
@@ -161,7 +156,6 @@
     ],
     "location": "Spokane, WA, USA",
     "name": "Matthew Ary",
-    "twitter": "MatthewAry",
     "linkedin": "matthewary",
     "work": "Director of Product Development at Symplsoft Inc.",
     "team": "core",
@@ -244,7 +238,6 @@
       "English",
       "Persian"
     ],
-    "twitter": "yooneskh",
     "linkedin": "yooneskh ",
     "location": "Iran",
     "name": "Yoones Khoshghadam",

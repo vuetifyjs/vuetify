@@ -17,11 +17,6 @@
   const items = computed(() => ([
     { subheader: t('social') },
     {
-      title: 'X',
-      href: 'https://x.com/vuetifyjs',
-      appendIcon: '$x',
-    },
-    {
       title: 'Discord',
       href: 'https://community.vuetifyjs.com/',
       appendIcon: '$discord',

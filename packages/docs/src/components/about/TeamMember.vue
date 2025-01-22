@@ -169,15 +169,6 @@
   const links = computed(() => {
     const links = []
 
-    if (props.member.twitter) {
-      links.push({
-        color: '#212121',
-        href: `https://x.com/${props.member.twitter}`,
-        icon: '$x',
-        tooltip: 'Xitter',
-      })
-    }
-
     if (props.member.github) {
       links.push({
         color: '#24292E',

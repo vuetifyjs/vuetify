@@ -16,7 +16,6 @@ export type Member = {
   avatar?: string
   github?: string
   team: string
-  twitter?: string
   joined?: string
 }
 

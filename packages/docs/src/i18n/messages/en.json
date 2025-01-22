@@ -343,7 +343,6 @@
   "translations": "Translations",
   "type": "Type | Types",
   "types": "Types",
-  "twitter": "Twitter",
   "ui-components": "UI Components",
   "ui-kits": "UI Kits",
   "ui": "UI",
@@ -358,6 +357,5 @@
   "view-in-github": "View on GitHub",
   "view-source": "View source",
   "viewport": "Viewport",
-  "vuetify": "Vuetify",
-  "x": "Xitter"
+  "vuetify": "Vuetify"
 }
