@@ -13,8 +13,8 @@ import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import { VTreeviewSymbol } from './shared'
+import type { VTreeviewChildrenSlots } from './VTreeviewChildren'
 import type { InternalListItem } from '@/components/VList/VList'
-import type { VListChildrenSlots } from '@/components/VList/VListChildren'
 import type { ListItem } from '@/composables/list-items'
 import type { GenericProps } from '@/util'
 
@@ -47,7 +47,7 @@ export const VTreeview = genericComponent<new <T>(
   props: {
     items?: T[]
   },
-  slots: VListChildrenSlots<T>
+  slots: VTreeviewChildrenSlots<T>
 ) => GenericProps<typeof props, typeof slots>>()({
   name: 'VTreeview',
 
