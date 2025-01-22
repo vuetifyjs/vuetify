@@ -17,6 +17,7 @@
         variant="filled"
         autofocus
         @focus="$event.target.select()"
+        @keydown.down="list?.$el.focus()"
       >
         <template #append-inner>
           <AppBtn size="small" border>
@@ -26,7 +27,6 @@
       </AppTextField>
 
       <v-card-text :class="['px-4 py-0 d-flex flex-wrap justify-center', searchString ? 'align-start' : 'align-center']">
-
         <AppSearchSearchRecent
           v-if="searches.length && !searchString"
           :searches="searches"
@@ -159,7 +159,6 @@
 
     searches.value = array
   }
-
   function onClickResult (result: any) {
     const array = searches.value.slice(0, 6)
 

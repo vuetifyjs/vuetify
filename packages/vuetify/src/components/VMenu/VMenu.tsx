@@ -24,6 +24,7 @@ import {
   provide,
   ref,
   shallowRef,
+  useId,
   watch,
 } from 'vue'
 import { VMenuSymbol } from './shared'
@@ -32,7 +33,7 @@ import {
   focusChild,
   genericComponent,
   getNextElement,
-  getUid,
+  IN_BROWSER,
   isClickInsideElement,
   omit,
   propsFactory,
@@ -75,13 +76,13 @@ export const VMenu = genericComponent<OverlaySlots>()({
     const { scopeId } = useScopeId()
     const { isRtl } = useRtl()
 
-    const uid = getUid()
+    const uid = useId()
     const id = computed(() => props.id || `v-menu-${uid}`)
 
     const overlay = ref<VOverlay>()
 
     const parent = inject(VMenuSymbol, null)
-    const openChildren = shallowRef(new Set<number>())
+    const openChildren = shallowRef(new Set<string>())
     provide(VMenuSymbol, {
       register () {
         openChildren.value.add(uid)
@@ -102,7 +103,10 @@ export const VMenu = genericComponent<OverlaySlots>()({
       },
     })
 
-    onBeforeUnmount(() => parent?.unregister())
+    onBeforeUnmount(() => {
+      parent?.unregister()
+      document.removeEventListener('focusin', onFocusIn)
+    })
     onDeactivated(() => isActive.value = false)
 
     async function onFocusIn (e: FocusEvent) {
@@ -130,12 +134,16 @@ export const VMenu = genericComponent<OverlaySlots>()({
     watch(isActive, val => {
       if (val) {
         parent?.register()
-        document.addEventListener('focusin', onFocusIn, { once: true })
+        if (IN_BROWSER) {
+          document.addEventListener('focusin', onFocusIn, { once: true })
+        }
       } else {
         parent?.unregister()
-        document.removeEventListener('focusin', onFocusIn)
+        if (IN_BROWSER) {
+          document.removeEventListener('focusin', onFocusIn)
+        }
       }
-    })
+    }, { immediate: true })
 
     function onClickOutside (e: MouseEvent) {
       parent?.closeParents(e)
