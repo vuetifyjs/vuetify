@@ -8,7 +8,7 @@ import { createLocale, LocaleSymbol } from '@/composables/locale'
 import { createTheme, ThemeSymbol } from '@/composables/theme'
 
 // Utilities
-import { effectScope, getCurrentScope, nextTick, reactive } from 'vue'
+import { effectScope, nextTick, reactive } from 'vue'
 import { defineComponent, IN_BROWSER, mergeDeep } from '@/util'
 
 // Types
