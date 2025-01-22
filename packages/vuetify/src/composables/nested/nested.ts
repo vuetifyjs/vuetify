@@ -26,6 +26,7 @@ import {
   independentSingleSelectStrategy,
   leafSelectStrategy,
   leafSingleSelectStrategy,
+  trunkSelectStrategy,
 } from './selectStrategies'
 import { consoleError, getCurrentInstance, propsFactory } from '@/util'
 
@@ -49,6 +50,7 @@ export type SelectStrategyProp =
   | 'independent'
   | 'single-independent'
   | 'classic'
+  | 'trunk'
   | SelectStrategy
   | ((mandatory: boolean) => SelectStrategy)
 export type OpenStrategyProp = 'single' | 'multiple' | 'list' | OpenStrategy
@@ -154,6 +156,7 @@ export const useNested = (props: NestedProps) => {
       case 'leaf': return leafSelectStrategy(props.mandatory)
       case 'independent': return independentSelectStrategy(props.mandatory)
       case 'single-independent': return independentSingleSelectStrategy(props.mandatory)
+      case 'trunk': return trunkSelectStrategy(props.mandatory)
       case 'classic':
       default: return classicSelectStrategy(props.mandatory)
     }
