@@ -313,7 +313,7 @@ export const VInfiniteScroll = genericComponent<VInfiniteScrollSlots>()({
                     intersecting('start')
                     intersecting('end')
                   } else {
-                    intersecting(props.side)
+                    intersecting(effectiveSide)
                   }
                 })
               })
