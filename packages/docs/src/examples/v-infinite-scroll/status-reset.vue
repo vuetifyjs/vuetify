@@ -1,25 +1,23 @@
 <template>
-  <v-app>
-    <v-container>
-      <div class="d-flex ga-3">
-        <v-chip>Server items: {{ serverItems.length }}</v-chip>
-        <v-chip>Loaded items: {{ items.length }}</v-chip>
-      </div>
-      <v-infinite-scroll ref="scroll" height="300" side="both" @load="load">
-        <template v-for="(item, index) in items" :key="index">
-          <div :class="['px-2', index % 2 === 0 ? 'bg-grey-lighten-2' : '']">
-            Item number {{ item }}
-          </div>
-        </template>
-      </v-infinite-scroll>
+  <v-container>
+    <div class="d-flex ga-3 mb-2">
+      <v-chip>Server items: {{ serverItems.length }}</v-chip>
+      <v-chip>Loaded items: {{ items.length }}</v-chip>
+    </div>
+    <v-infinite-scroll ref="scroll" height="300" side="both" @load="load">
+      <template v-for="(item, index) in items" :key="index">
+        <div :class="['px-2', index % 2 === 0 ? 'bg-grey-lighten-2' : '']">
+          Item number {{ item }}
+        </div>
+      </template>
+    </v-infinite-scroll>
 
-      <div class="d-flex ga-3 mt-2">
-        <v-btn @click="prependFewMore(); reset('start')">prepend items + reset('start')</v-btn>
-        <v-btn @click="appendFewMore(); reset('end')">append items + reset('end')</v-btn>
-        <v-btn @click="reset()">just reset()</v-btn>
-      </div>
-    </v-container>
-  </v-app>
+    <div class="d-flex ga-3 mt-2">
+      <v-btn @click="prependFewMore(); reset('start')">prepend items + reset('start')</v-btn>
+      <v-btn @click="appendFewMore(); reset('end')">append items + reset('end')</v-btn>
+      <v-btn @click="reset()">just reset()</v-btn>
+    </div>
+  </v-container>
 </template>
 
 <script setup>
