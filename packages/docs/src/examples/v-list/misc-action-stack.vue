@@ -2,9 +2,13 @@
   <v-card class="mx-auto" max-width="500">
     <v-toolbar color="pink">
       <v-btn icon="mdi-menu"></v-btn>
+
       <v-toolbar-title>Inbox</v-toolbar-title>
+
       <v-spacer></v-spacer>
+
       <v-btn icon="mdi-magnify"></v-btn>
+
       <v-btn icon="mdi-checkbox-marked-circle"></v-btn>
     </v-toolbar>
 
@@ -17,13 +21,19 @@
         class="py-3"
       >
         <v-list-item-title>{{ item.title }}</v-list-item-title>
+
         <v-list-item-subtitle class="mb-1 text-high-emphasis opacity-100">{{ item.headline }}</v-list-item-subtitle>
+
         <v-list-item-subtitle class="text-high-emphasis">{{ item.subtitle }}</v-list-item-subtitle>
+
         <template v-slot:append="{ isSelected }">
           <v-list-item-action class="flex-column align-end">
             <small class="mb-4 text-high-emphasis opacity-60">{{ item.action }}</small>
+
             <v-spacer></v-spacer>
+
             <v-icon v-if="isSelected" color="yellow-darken-3">mdi-star</v-icon>
+
             <v-icon v-else class="opacity-30">mdi-star-outline</v-icon>
           </v-list-item-action>
         </template>
@@ -33,7 +43,7 @@
 </template>
 
 <script setup>
-  import { ref } from 'vue'
+  import { shallowRef } from 'vue'
 
   const items = [
     { id: 1, action: '15 min', headline: 'Brunch this weekend?', subtitle: `I'll be in your neighborhood doing errands this weekend. Do you want to hang out?`, title: 'Ali Connors' },
@@ -43,7 +53,7 @@
     { id: 5, action: '18hr', headline: 'Recipe to try', subtitle: 'We should eat this: Grate, Squash, Corn, and tomatillo Tacos.', title: 'Britta Holt' },
   ]
 
-  const selected = ref([2])
+  const selected = shallowRef([2])
 </script>
 
 <script>
