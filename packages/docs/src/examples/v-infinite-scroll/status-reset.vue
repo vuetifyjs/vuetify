@@ -1,68 +1,127 @@
 <template>
   <v-app>
     <v-container>
-      <v-infinite-scroll ref="infiniteScrollRef" height="300" side="end" @load="load">
+      <div class="d-flex ga-3">
+        <v-chip>Server items: {{ serverItems.length }}</v-chip>
+        <v-chip>Loaded items: {{ items.length }}</v-chip>
+      </div>
+      <v-infinite-scroll ref="scroll" height="300" side="both" @load="load">
         <template v-for="(item, index) in items" :key="index">
           <div :class="['px-2', index % 2 === 0 ? 'bg-grey-lighten-2' : '']">
             Item number {{ item }}
           </div>
         </template>
       </v-infinite-scroll>
-      <v-btn @click="reset">Call reset</v-btn>
+
+      <div class="d-flex ga-3 mt-2">
+        <v-btn @click="prependFewMore(); reset('start')">prepend items + reset('start')</v-btn>
+        <v-btn @click="appendFewMore(); reset('end')">append items + reset('end')</v-btn>
+        <v-btn @click="reset()">just reset()</v-btn>
+      </div>
     </v-container>
   </v-app>
 </template>
 
 <script setup>
-  import { ref } from 'vue'
+  import { ref, useTemplateRef } from 'vue'
 
-  const infiniteScrollRef = ref(null)
+  const infiniteScrollRef = useTemplateRef('scroll')
 
   const items = ref([])
 
-  function reset () {
-    items.value = []
-    infiniteScrollRef.value.reset()
+  let firstId = 0
+  let lastId = 0
+  const serverItems = ref(Array.from({ length: 30 }, () => ++lastId))
+
+  function prependFewMore () {
+    serverItems.value = [...serverItems.value, ...Array.from({ length: 6 }, () => --firstId)]
   }
 
-  function load ({ side, done }) {
-    setTimeout(() => {
-      if (items.value.length >= 40) {
-        done('empty')
-        return
+  function appendFewMore () {
+    serverItems.value = [...serverItems.value, ...Array.from({ length: 6 }, () => ++lastId)]
+  }
+
+  function reset (side) {
+    infiniteScrollRef.value?.reset(side)
+  }
+
+  async function load ({ side, done }) {
+    await new Promise(r => setTimeout(r, 500))
+
+    let page = []
+    if (side === 'start') {
+      page = loadPreviousPage()
+      if (page.length) {
+        items.value = [...page, ...items.value]
       }
+    }
+    if (side === 'end') {
+      page = loadNextPage()
+      if (page.length) {
+        items.value = [...items.value, ...page]
+      }
+    }
+    done(page.length === 10 ? 'ok' : 'empty')
+  }
 
-      const arr = Array.from({ length: 10 }, (k, v) => (items.value.at(-1) ?? 0) + 1 + v)
-      items.value = [...items.value, ...arr]
+  function loadPreviousPage () {
+    const cursor = items.value.at(0) ?? 0
+    return serverItems.value.filter(x => x < cursor).reverse().slice(0, 10)
+  }
 
-      done('ok')
-    }, 1000)
+  function loadNextPage () {
+    const cursor = items.value.at(-1) ?? 0
+    return serverItems.value.filter(x => x > cursor).slice(0, 10)
   }
 </script>
 
 <script>
+  let firstId = 0
+  let lastId = 0
   export default {
-    data: () => ({
-      items: [],
-    }),
-
+    data: () => {
+      return {
+        items: [],
+        serverItems: Array.from({ length: 30 }, () => ++lastId),
+      }
+    },
     methods: {
-      load ({ done }) {
-        setTimeout(() => {
-          if (this.items.length >= 40) {
-            done('empty')
-            return
-          }
-
-          const arr = Array.from({ length: 10 }, (k, v) => (this.items.at(-1) ?? 0) + 1 + v)
-          this.items = [...this.items, ...arr]
-
-          done('ok')
-        }, 1000)
+      prependFewMore () {
+        this.serverItems = [...this.serverItems, ...Array.from({ length: 6 }, () => --firstId)]
       },
-      reset () {
-        this.items = []
-        this.$refs.infiniteScrollRef.reset()
+      appendFewMore () {
+        this.serverItems = [...this.serverItems, ...Array.from({ length: 6 }, () => ++lastId)]
+      },
+      reset (side) {
+        this.$refs.scroll.reset(side)
+      },
+      async load ({ side, done }) {
+        await new Promise(r => setTimeout(r, 500))
+
+        let page = []
+        if (side === 'start') {
+          page = this.loadPreviousPage()
+          if (page.length) {
+            this.items = [...page, ...this.items]
+          }
+        }
+        if (side === 'end') {
+          page = this.loadNextPage()
+          if (page.length) {
+            this.items = [...this.items, ...page]
+          }
+        }
+        done(page.length === 10 ? 'ok' : 'empty')
+      },
+
+      loadPreviousPage () {
+        const cursor = this.items.at(0) ?? 0
+        return this.serverItems.filter(x => x < cursor).reverse().slice(0, 10)
+      },
+
+      loadNextPage () {
+        const cursor = this.items.at(-1) ?? 0
+        return this.serverItems.filter(x => x > cursor).slice(0, 10)
       },
     },
   }
