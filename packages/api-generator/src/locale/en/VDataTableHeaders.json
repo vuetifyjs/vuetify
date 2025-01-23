@@ -3,7 +3,8 @@
     "disableSort": "Toggles rendering of sort button.",
     "sortAscIcon": "Icon used for ascending sort button.",
     "sortDescIcon": "Icon used for descending sort button.",
-    "sticky": "Sticks the header to the top of the table."
+    "sticky": "Deprecated, use `fixed-header` instead.",
+    "fixedHeader": "Sticks the header to the top of the table."
   },
   "slots": {
     "[`column.${string}`]": "Slot for custom rendering of a column.",
