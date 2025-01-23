@@ -46,7 +46,7 @@
   }
 
   async function load ({ side, done }) {
-    await new Promise(r => setTimeout(r, 500))
+    await new Promise(resolve => setTimeout(resolve, 500))
 
     let page = []
     if (side === 'start') {
@@ -96,7 +96,7 @@
         this.$refs.scroll.reset(side)
       },
       async load ({ side, done }) {
-        await new Promise(r => setTimeout(r, 500))
+        await new Promise(resolve => setTimeout(resolve, 500))
 
         let page = []
         if (side === 'start') {
