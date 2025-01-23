@@ -152,7 +152,9 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
                           color={ adapter.isSameDay(adapter.date(), day.date) ? 'primary' : undefined }
                           day={ day }
                           title={ day ? adapter.format(day.date, 'dayOfMonth') : 'NaN' }
-                          events={ props.events?.filter(e => adapter.isSameDay(day.date, e.start) || adapter.isSameDay(day.date, e.end)) }
+                          events={ props.events?.filter(e => adapter.isSameDay(day.date, e.start) ||
+                            adapter.isSameDay(day.date, e.end) ||
+                            adapter.isWithinRange(day.date, [e.start, e.end]))}
                           v-slots={{
                             event: slots.event,
                           }}
@@ -169,7 +171,9 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
                   { ...calendarDayProps }
                   day={ day }
                   dayIndex={ i }
-                  events={ props.events?.filter(e => adapter.isSameDay(e.start, day.date) || adapter.isSameDay(e.end, day.date)) }
+                  events={ props.events?.filter(e => adapter.isSameDay(e.start, day.date) ||
+                    adapter.isSameDay(e.end, day.date) ||
+                    adapter.isWithinRange(day.date, [e.start, e.end]))}
                 ></VCalendarDay>
               ))
             )}
@@ -182,7 +186,8 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
                 events={
                   props.events?.filter(e =>
                     adapter.isSameDay(e.start, genDays([displayValue.value as Date], adapter.date() as Date)[0].date) ||
-                    adapter.isSameDay(e.end, genDays([displayValue.value as Date], adapter.date() as Date)[0].date)
+                    adapter.isSameDay(e.end, genDays([displayValue.value as Date], adapter.date() as Date)[0].date) ||
+                    adapter.isWithinRange(genDays([displayValue.value as Date], adapter.date() as Date)[0].date, [e.start, e.end])
                   )
                 }
               ></VCalendarDay>
