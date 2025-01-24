@@ -18,7 +18,7 @@ import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
-import { computed, ref, toRef, watch } from 'vue'
+import { computed, ref, shallowRef, toRef, watch } from 'vue'
 import {
   animate,
   convertToUnit,
@@ -212,15 +212,7 @@ export const VField = genericComponent<new <T>(
       }
     }
 
-    function onKeydownClear (e: KeyboardEvent) {
-      if (e.key !== 'Enter' && e.key !== ' ') return
-
-      e.preventDefault()
-      e.stopPropagation()
-
-      props['onClick:clear']?.(new MouseEvent('click'))
-    }
-    const isHovered = ref(false)
+    const isHovered = shallowRef(false)
     function changeHover (value: boolean) {
       isHovered.value = value
     }
