@@ -6,19 +6,24 @@ import { VCalendarEvent } from './VCalendarEvent'
 import { VBtn } from '@/components/VBtn'
 
 // Utilities
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { genericComponent, getPrefixedEventHandlers, propsFactory, useRender } from '@/util'
+
+// Types
+import type { PropType } from 'vue'
+import type { CalendarDay } from '@/composables/calendar'
 
 export type VCalendarMonthDaySlots = {
-  default: never
-  content: never
-  title: { title?: number | string }
-  event: { day?: Object, allDay: boolean, event: Record<string, unknown> }
+  dayBody: { day?: CalendarDay, events?: Array<any> }
+  dayEvent: { day?: CalendarDay, allDay: boolean, event: Record<string, unknown> }
+  dayTitle: { title?: number | string }
 }
 
 export const makeVCalendarMonthDayProps = propsFactory({
   active: Boolean,
   color: String,
-  day: Object,
+  day: {
+    type: Object as PropType<CalendarDay>,
+  },
   disabled: Boolean,
   events: Array<any>,
   title: [Number, String],
@@ -29,58 +34,89 @@ export const VCalendarMonthDay = genericComponent<VCalendarMonthDaySlots>()({
 
   props: makeVCalendarMonthDayProps(),
 
-  setup (props, { emit, slots }) {
-    useRender(() => {
-      const hasTitle = !!(props.title || slots.title?.({ title: props.title }))
+  emits: {
+    'click:event': null,
+    'contextmenu:date': null,
+    'contextmenu:event': null,
+  },
 
+  setup (props, { emit, attrs, slots }) {
+    const clickEvent = (mouseEvent: any, event: any) => {
+      emit('click:event', mouseEvent, event)
+    }
+    const contextmenuDate = (mouseEvent: any, date: any) => {
+      emit('contextmenu:date', mouseEvent, date)
+    }
+
+    const contextmenuEvent = (mouseEvent: any, date: any, event: any) => {
+      emit('contextmenu:event', mouseEvent, date, event)
+    }
+
+    useRender(() => {
       return (
         <div
           class={[
             'v-calendar-month__day',
           ]}
+          onContextmenu={ event => contextmenuDate(event, props.day?.date) }
         >
-          { !props.day?.isHidden && hasTitle && (
+          { !props.day?.isHidden ? (
             <div key="title" class="v-calendar-weekly__day-label">
-              { slots.title?.({ title: props.title }) ?? (
+              { slots.dayTitle?.({ title: props.title }) ?? (
                 <VBtn
+                  { ...getPrefixedEventHandlers(attrs, ':date', () => props) }
                   class={ props.day?.isToday ? 'v-calendar-weekly__day-label__today' : undefined }
                   color={ props.color }
                   disabled={ props.disabled }
                   icon
                   size="x-small"
                   variant={ props.day?.isToday ? undefined : 'flat' }
-                >
-                  { props.title }
-                </VBtn>
-              )}
+                  text={ `${props.title}` }
+                />
+              )
+            }
             </div>
-          )}
+          ) : undefined }
 
-          { !props.day?.isHidden && (
-            <div key="content" class="v-calendar-weekly__day-content">
-              { slots.content?.() ?? (
-                <div>
+          { !props.day?.isHidden ? (
+            <div key="content" class="v-calendar-weekly__day-content" >
+              { slots.dayBody?.({ day: props.day, events: props.events }) ?? (
+                <div
+                  { ...getPrefixedEventHandlers(attrs, ':day', () => ({
+                    day: props.day,
+                    events: props.events,
+                  }))}
+                >
                   <div class="v-calendar-weekly__day-alldayevents-container">
-                    { props.events?.filter(event => event.allDay).map(event => slots.event
-                      ? slots.event({ day: props.day, allDay: true, event })
+                    { props.events?.filter(event => event.allDay).map(event => slots.dayEvent
+                      ? slots.dayEvent({ day: props.day, allDay: true, event })
                       : (
-                        <VCalendarEvent day={ props.day } event={ event } allDay />
+                        <VCalendarEvent
+                          day={ props.day }
+                          event={ event }
+                          onClick:event={ clickEvent }
+                          onContextmenu:event={ contextmenuEvent }
+                          allDay
+                        />
                       ))}
                   </div>
 
                   <div class="v-calendar-weekly__day-events-container">
-                    { props.events?.filter(event => !event.allDay).map(event => slots.event
-                      ? slots.event({ day: props.day, event, allDay: false })
+                    { props.events?.filter(event => !event.allDay).map(event => slots.dayEvent
+                      ? slots.dayEvent({ day: props.day, event, allDay: false })
                       : (
-                        <VCalendarEvent day={ props.day } event={ event } />
+                        <VCalendarEvent
+                          day={ props.day }
+                          event={ event }
+                          onClick:event={ clickEvent }
+                          onContextmenu:event={ contextmenuEvent }
+                        />
                       ))}
                   </div>
                 </div>
               )}
             </div>
-          )}
-
-          { !props.day?.isHidden && slots.default?.() }
+          ) : undefined }
         </div>
       )
     })
