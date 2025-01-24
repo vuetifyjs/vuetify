@@ -22,7 +22,7 @@ import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util
 // Types
 import type { CSSProperties, PropType, UnwrapRef } from 'vue'
 import type { provideSelection } from './composables/select'
-import type { provideSort } from './composables/sort'
+import type { provideSort, SortItem } from './composables/sort'
 import type { InternalDataTableHeader } from './types'
 import type { ItemProps } from '@/composables/list-items'
 import type { LoaderSlotProps } from '@/composables/loader'
@@ -103,14 +103,38 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
       }
     }
 
+    function getSortEntryForColumn (column: InternalDataTableHeader): SortItem|undefined {
+      return sortBy.value.find(item => item.key === column.key)
+    }
+
     function getSortIcon (column: InternalDataTableHeader) {
-      const item = sortBy.value.find(item => item.key === column.key)
+      const item = getSortEntryForColumn(column)
 
       if (!item) return props.sortAscIcon
 
       return item.order === 'asc' ? props.sortAscIcon : props.sortDescIcon
     }
 
+    function getAriaSort (column: InternalDataTableHeader) {
+      const item = getSortEntryForColumn(column)
+
+      if (!item) return undefined
+      switch (item.order) {
+        case 'asc':
+          return 'ascending'
+        case 'desc':
+          return 'descending'
+        case true:
+          return 'other'
+        default:
+          return undefined
+      }
+    }
+
+    function getAriaRole (column: InternalDataTableHeader): string|undefined {
+      if (column.sortable) return 'link'
+      return undefined
+    }
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(props, 'color')
 
     const { displayClasses, mobile } = useDisplay(props)
@@ -143,7 +167,10 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
       return (
         <VDataTableColumn
           tag="th"
+          tabindex="0"
+          scope="col"
           align={ column.align }
+          aria-sort={ getAriaSort(column) }
           class={[
             {
               'v-data-table__th--sortable': column.sortable && !props.disableSort,
@@ -194,7 +221,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
               }
 
               return (
-                <div class="v-data-table-header__content">
+                <div class="v-data-table-header__content" role={ getAriaRole(column) }>
                   <span>{ column.title }</span>
                   { column.sortable && !props.disableSort && (
                     <VIcon
