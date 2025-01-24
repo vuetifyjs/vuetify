@@ -147,11 +147,11 @@ export const VInput = genericComponent<new <T>(
       }
     })
 
-    function prependKeyDown(key: KeyboardEvent) {
-      if (key.key !== 'Enter' && key.key !== ' ') return
+    function prependKeyDown (e: KeyboardEvent) {
+      if (e.key !== 'Enter' && e.key !== ' ') return
 
-      key.preventDefault()
-      key.stopPropagation()
+      e.preventDefault()
+      e.stopPropagation()
 
       props['onClick:prepend']?.(new MouseEvent('click'))
     }
@@ -187,7 +187,7 @@ export const VInput = genericComponent<new <T>(
           ]}
         >
           { hasPrepend && (
-            <div key="prepend" class="v-input__prepend" onKeypress={prependKeyDown}>
+            <div key="prepend" class="v-input__prepend" onKeypress={ prependKeyDown }>
               { slots.prepend?.(slotProps.value) }
 
               { props.prependIcon && (
