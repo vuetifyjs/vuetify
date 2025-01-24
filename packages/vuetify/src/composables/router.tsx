@@ -116,7 +116,7 @@ export function useBackButton (router: Router | undefined, cb: (next: Navigation
   if (IN_BROWSER && router?.beforeEach) {
     nextTick(() => {
       window.addEventListener('popstate', onPopstate)
-      removeBefore = router?.beforeEach((to, from, next) => {
+      removeBefore = router.beforeEach((to, from, next) => {
         if (!inTransition) {
           setTimeout(() => popped ? cb(next) : next())
         } else {
