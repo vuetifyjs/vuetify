@@ -8,6 +8,7 @@ import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { useInputIcon } from '@/components/VInput/InputIcon'
 
 // Composables
+import { makeBorderProps, useBorder } from '@/composables/border'
 import { useBackgroundColor, useTextColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
 import { makeFocusProps, useFocus } from '@/composables/focus'
@@ -89,6 +90,7 @@ export const makeVFieldProps = propsFactory({
   'onClick:appendInner': EventProp<[MouseEvent]>(),
   'onClick:prependInner': EventProp<[MouseEvent]>(),
 
+  ...makeBorderProps(),
   ...makeComponentProps(),
   ...makeLoaderProps(),
   ...makeRoundedProps(),
@@ -118,6 +120,7 @@ export const VField = genericComponent<new <T>(
   props: {
     id: String,
 
+    ...makeBorderProps(),
     ...makeFocusProps(),
     ...makeVFieldProps(),
   },
@@ -129,12 +132,16 @@ export const VField = genericComponent<new <T>(
 
   setup (props, { attrs, emit, slots }) {
     const { themeClasses } = provideTheme(props)
+    const { borderClasses: outlineStartBorderClasses } = useBorder(props, 'v-field__outline__start')
+    const { borderClasses: outlineNotchBorderClasses } = useBorder(props, 'v-field__outline__notch')
+    const { borderClasses: outlineEndBorderClasses } = useBorder(props, 'v-field__outline__end')
     const { loaderClasses } = useLoader(props)
     const { focusClasses, isFocused, focus, blur } = useFocus(props)
     const { InputIcon } = useInputIcon(props)
     const { roundedClasses } = useRounded(props)
     const { rtlClasses } = useRtl()
 
+    const variant = computed(() => props.border ? 'outlined' : props.variant)
     const isActive = computed(() => props.dirty || props.active)
     const hasLabel = computed(() => !props.singleLine && !!(props.label || slots.label))
 
@@ -145,7 +152,7 @@ export const VField = genericComponent<new <T>(
     const labelRef = ref<VFieldLabel>()
     const floatingLabelRef = ref<VFieldLabel>()
     const controlRef = ref<HTMLElement>()
-    const isPlainOrUnderlined = computed(() => ['plain', 'underlined'].includes(props.variant))
+    const isPlainOrUnderlined = computed(() => ['plain', 'underlined'].includes(variant.value))
 
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'bgColor'))
     const { textColorClasses, textColorStyles } = useTextColor(computed(() => {
@@ -220,7 +227,7 @@ export const VField = genericComponent<new <T>(
     }
 
     useRender(() => {
-      const isOutlined = props.variant === 'outlined'
+      const isOutlined = variant.value === 'outlined' || props.border
       const hasPrepend = !!(slots['prepend-inner'] || props.prependInnerIcon)
       const hasClear = !!(props.clearable || slots.clear) && !props.disabled
       const hasAppend = !!(slots['append-inner'] || props.appendInnerIcon || hasClear)
@@ -252,7 +259,7 @@ export const VField = genericComponent<new <T>(
               'v-field--reverse': props.reverse,
               'v-field--single-line': props.singleLine,
               'v-field--no-label': !label(),
-              [`v-field--variant-${props.variant}`]: true,
+              [`v-field--variant-${variant.value}`]: true,
             },
             themeClasses.value,
             backgroundColorClasses.value,
@@ -289,7 +296,7 @@ export const VField = genericComponent<new <T>(
           )}
 
           <div class="v-field__field" data-no-activator="">
-            {['filled', 'solo', 'solo-inverted', 'solo-filled'].includes(props.variant) && hasLabel.value && (
+            {['filled', 'solo', 'solo-inverted', 'solo-filled'].includes(variant.value) && hasLabel.value && (
               <VFieldLabel
                 key="floating-label"
                 ref={ floatingLabelRef }
@@ -373,23 +380,42 @@ export const VField = genericComponent<new <T>(
           <div
             class={[
               'v-field__outline',
+              {
+                'v-field__outline--border': props.border,
+              },
               textColorClasses.value,
             ]}
             style={ textColorStyles.value }
           >
             { isOutlined && (
               <>
-                <div class="v-field__outline__start" />
+                <div
+                  class={[
+                    outlineStartBorderClasses.value,
+                    'v-field__outline__start',
+                  ]}
+                />
 
                 { hasLabel.value && (
-                  <div class="v-field__outline__notch">
+                  <div class={[
+                    'v-field__outline__notch',
+                    {
+                      'v-field__outline__notch--border': props.border,
+                    },
+                    outlineNotchBorderClasses.value,
+                  ]}
+                  >
                     <VFieldLabel ref={ floatingLabelRef } floating for={ id.value }>
                       { label() }
                     </VFieldLabel>
                   </div>
                 )}
 
-                <div class="v-field__outline__end" />
+                <div class={[
+                  'v-field__outline__end',
+                  outlineEndBorderClasses.value,
+                ]}
+                />
               </>
             )}
 

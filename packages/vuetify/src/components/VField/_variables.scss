@@ -50,6 +50,19 @@ $field-input-row-gap: 8px !default;
 // LABEL
 $field-label-floating-scale: .75 !default;
 
+// BORDER
+$field-border-prop-color: settings.$border-color-root !default;
+$field-border-prop-style: settings.$border-style-root !default;
+$field-border-prop-width: 1px !default;
+$field-border-prop-thin-width: thin !default;
+
+$field-border-prop: (
+  $field-border-prop-color,
+  $field-border-prop-style,
+  $field-border-prop-width,
+  $field-border-prop-thin-width
+) !default;
+
 // OUTLINE
 $field-outline-opacity: .38 !default;
 $field-border-width: 1px !default;

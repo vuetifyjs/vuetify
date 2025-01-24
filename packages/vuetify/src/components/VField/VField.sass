@@ -324,8 +324,11 @@
     right: 0
     width: 100%
 
+    &--border
+      --v-field-border-opacity: none
+    
     @media (hover: hover)
-      .v-field:hover &
+      .v-field:hover &:not(.v-field__outline--border)
         --v-field-border-opacity: var(--v-high-emphasis-opacity)
 
     .v-field--error:not(.v-field--disabled) &
@@ -335,7 +338,7 @@
     .v-input.v-input--error &
       --v-field-border-opacity: 1
 
-    .v-field--variant-outlined.v-field--focused &
+    .v-field--variant-outlined.v-field--focused &:not(.v-field__outline--border)
       --v-field-border-width: #{$field-focused-border-width}
 
     .v-field--variant-filled &,
@@ -377,10 +380,13 @@
         border-top-width: var(--v-field-border-width)
         border-bottom-width: var(--v-field-border-width)
         border-inline-start-width: var(--v-field-border-width)
+        border-inline-end-width: 0 !important
         border-start-start-radius: inherit
         border-start-end-radius: 0
         border-end-end-radius: 0
         border-end-start-radius: inherit
+        &--border
+          @include tools.border($field-border-prop...)
 
         @at-root
           #{selector.append('.v-field--rounded', &)},
@@ -400,7 +406,13 @@
         flex: none
         position: relative
         max-width: calc(100% - $field-control-affixed-padding)
-
+        border-inline-end-width: 0 !important
+        border-inline-start-width: 0 !important
+        &--border 
+          @include tools.border($field-border-prop...)
+          opacity: var(--v-field-border-opacity)
+          transition: opacity $field-subtle-transition-timing
+        
         &::before,
         &::after
           opacity: var(--v-field-border-opacity)
@@ -408,14 +420,15 @@
 
           @include tools.absolute(true)
 
-        &::before
+        &:not(.v-field__outline__notch--border)::before
           border-width: var(--v-field-border-width) 0 0
 
-        &::after
+        &:not(.v-field__outline__notch--border)::after
           bottom: 0
           border-width: 0 0 var(--v-field-border-width)
 
         @at-root #{selector.append('.v-field--active', &)}
+          border-top-width: 0 !important
           &::before
             opacity: 0
 
@@ -423,11 +436,15 @@
         flex: 1
         border-top-width: var(--v-field-border-width)
         border-bottom-width: var(--v-field-border-width)
+        border-inline-start-width: 0 !important
         border-inline-end-width: var(--v-field-border-width)
         border-start-start-radius: 0
         border-start-end-radius: inherit
         border-end-end-radius: inherit
         border-end-start-radius: 0
+
+        &--border
+          @include tools.border($field-border-prop...)
 
         @at-root #{selector.append('.v-field--reverse', &)}
           border-start-start-radius: inherit
