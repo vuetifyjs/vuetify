@@ -22,6 +22,9 @@
           <v-list-item prepend-icon="mdi-account-group-outline" title="Users" value="users"></v-list-item>
         </v-list>
       </v-navigation-drawer>
+
+      <v-app-bar title="Application Bar" />
+      
       <v-main style="height: 250px"></v-main>
     </v-layout>
   </v-card>
