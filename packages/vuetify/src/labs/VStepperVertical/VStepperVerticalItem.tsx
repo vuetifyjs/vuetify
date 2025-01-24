@@ -16,20 +16,20 @@ import { genericComponent, omit, propsFactory, useRender } from '@/util'
 // Types
 import type { StepperItemSlot } from '@/components/VStepper/VStepperItem'
 
-export type StepperVerticalItemActionSlot = StepperItemSlot & {
+export type StepperVerticalItemActionSlot<T = any> = StepperItemSlot<T> & {
   next: () => void
   prev: () => void
 }
 
-export type VStepperVerticalItemSlots = {
-  default: StepperItemSlot
-  icon: StepperItemSlot
-  subtitle: StepperItemSlot
-  title: StepperItemSlot
-  text: StepperItemSlot
-  prev: StepperVerticalItemActionSlot
-  next: StepperVerticalItemActionSlot
-  actions: StepperVerticalItemActionSlot
+export type VStepperVerticalItemSlots<T = any> = {
+  default: StepperItemSlot<T>
+  icon: StepperItemSlot<T>
+  subtitle: StepperItemSlot<T>
+  title: StepperItemSlot<T>
+  text: StepperItemSlot<T>
+  prev: StepperVerticalItemActionSlot<T>
+  next: StepperVerticalItemActionSlot<T>
+  actions: StepperVerticalItemActionSlot<T>
 }
 
 export const makeVStepperVerticalItemProps = propsFactory({
@@ -84,14 +84,13 @@ export const VStepperVerticalItem = genericComponent<VStepperVerticalItemSlots>(
       title: props.title,
       subtitle: props.subtitle,
       step: step.value,
-      value: props.value,
-    }))
+    } satisfies StepperItemSlot))
 
     const actionProps = computed(() => ({
       ...slotProps.value,
       prev: onClickPrev,
       next: onClickNext,
-    }))
+    } satisfies StepperVerticalItemActionSlot))
 
     function onClickNext () {
       emit('click:next')
