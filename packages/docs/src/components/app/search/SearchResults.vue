@@ -96,7 +96,7 @@
 
   const app = useAppStore()
 
-  const rootEl = ref<VList>()
+  const rootEl = ref<InstanceType<typeof VList>>()
   defineExpose({ rootEl })
 
   function makeBreadcrumbs (hierarchy: any) {

@@ -69,6 +69,11 @@ export default {
     counter: '{0} فایل',
     counterSize: '{0} فایل ({1} لە کۆی گشتی)',
   },
+  fileUpload: {
+    title: 'Drag and drop files here',
+    divider: 'or',
+    browse: 'Browse Files',
+  },
   timePicker: {
     am: 'پێش نیوەڕۆژ',
     pm: 'دوای نیوەڕۆژ',

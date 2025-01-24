@@ -69,6 +69,11 @@ export default {
     counter: '{0} קבצים',
     counterSize: '{0} קבצים ({1} בסך הכל)',
   },
+  fileUpload: {
+    title: 'Drag and drop files here',
+    divider: 'or',
+    browse: 'Browse Files',
+  },
   timePicker: {
     am: 'AM',
     pm: 'PM',

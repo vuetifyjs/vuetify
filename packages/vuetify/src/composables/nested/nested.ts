@@ -2,7 +2,17 @@
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, inject, onBeforeUnmount, provide, ref, shallowRef, toRaw, toRef } from 'vue'
+import {
+  computed,
+  inject,
+  onBeforeMount,
+  onBeforeUnmount,
+  provide,
+  ref,
+  shallowRef,
+  toRaw,
+  toRef,
+} from 'vue'
 import {
   independentActiveStrategy,
   independentSingleActiveStrategy,
@@ -329,12 +339,14 @@ export const useNestedItem = (id: Ref<unknown>, isGroup: boolean) => {
     isActivated: computed(() => parent.root.activated.value.has(toRaw(computedId.value))),
     select: (selected: boolean, e?: Event) => parent.root.select(computedId.value, selected, e),
     isSelected: computed(() => parent.root.selected.value.get(toRaw(computedId.value)) === 'on'),
-    isIndeterminate: computed(() => parent.root.selected.value.get(computedId.value) === 'indeterminate'),
+    isIndeterminate: computed(() => parent.root.selected.value.get(toRaw(computedId.value)) === 'indeterminate'),
     isLeaf: computed(() => !parent.root.children.value.get(computedId.value)),
     isGroupActivator: parent.isGroupActivator,
   }
 
-  !parent.isGroupActivator && parent.root.register(computedId.value, parent.id.value, isGroup)
+  onBeforeMount(() => {
+    !parent.isGroupActivator && parent.root.register(computedId.value, parent.id.value, isGroup)
+  })
 
   onBeforeUnmount(() => {
     !parent.isGroupActivator && parent.root.unregister(computedId.value)

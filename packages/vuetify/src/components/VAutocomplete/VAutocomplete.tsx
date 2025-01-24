@@ -166,7 +166,7 @@ export const VAutocomplete = genericComponent<new <
         : typeof props.counterValue === 'number' ? props.counterValue
         : model.value.length
     })
-    const form = useForm()
+    const form = useForm(props)
     const { filteredItems, getMatches } = useFilter(props, items, () => isPristine.value ? '' : search.value)
 
     const displayItems = computed(() => {
@@ -192,7 +192,7 @@ export const VAutocomplete = genericComponent<new <
 
     const menuDisabled = computed(() => (
       (props.hideNoData && !displayItems.value.length) ||
-      props.readonly || form?.isReadonly.value
+      form.isReadonly.value || form.isDisabled.value
     ))
 
     const listRef = ref<VList>()
@@ -219,20 +219,17 @@ export const VAutocomplete = genericComponent<new <
       menu.value = !menu.value
     }
     function onListKeydown (e: KeyboardEvent) {
-      if (checkPrintable(e)) {
+      if (e.key !== ' ' && checkPrintable(e)) {
         vTextFieldRef.value?.focus()
       }
     }
     function onKeydown (e: KeyboardEvent) {
-      if (props.readonly || form?.isReadonly.value) return
+      if (form.isReadonly.value) return
 
       const selectionStart = vTextFieldRef.value.selectionStart
       const length = model.value.length
 
-      if (
-        selectionIndex.value > -1 ||
-        ['Enter', 'ArrowDown', 'ArrowUp'].includes(e.key)
-      ) {
+      if (['Enter', 'ArrowDown', 'ArrowUp'].includes(e.key)) {
         e.preventDefault()
       }
 
@@ -265,6 +262,7 @@ export const VAutocomplete = genericComponent<new <
         ) return select(model.value[0], false)
 
         if (~selectionIndex.value) {
+          e.preventDefault()
           const originalSelectionIndex = selectionIndex.value
           select(model.value[selectionIndex.value], false)
 
@@ -272,6 +270,8 @@ export const VAutocomplete = genericComponent<new <
         } else if (e.key === 'Backspace' && !search.value) {
           selectionIndex.value = length - 1
         }
+
+        return
       }
 
       if (!props.multiple) return
@@ -289,9 +289,7 @@ export const VAutocomplete = genericComponent<new <
           selectionIndex.value = -1
           vTextFieldRef.value.setSelectionRange(search.value?.length, search.value?.length)
         }
-      }
-
-      if (e.key === 'ArrowRight') {
+      } else if (e.key === 'ArrowRight') {
         if (selectionIndex.value < 0) return
 
         const next = selectionIndex.value + 1
@@ -302,6 +300,8 @@ export const VAutocomplete = genericComponent<new <
           selectionIndex.value = -1
           vTextFieldRef.value.setSelectionRange(0, 0)
         }
+      } else if (~selectionIndex.value && checkPrintable(e)) {
+        selectionIndex.value = -1
       }
     }
 
@@ -450,7 +450,7 @@ export const VAutocomplete = genericComponent<new <
             props.class,
           ]}
           style={ props.style }
-          readonly={ props.readonly }
+          readonly={ form.isReadonly.value }
           placeholder={ isDirty ? undefined : props.placeholder }
           onClick:clear={ onClear }
           onMousedown:control={ onMousedownControl }
@@ -493,14 +493,14 @@ export const VAutocomplete = genericComponent<new <
                       { slots['prepend-item']?.() }
 
                       { !displayItems.value.length && !props.hideNoData && (slots['no-data']?.() ?? (
-                        <VListItem title={ t(props.noDataText) } />
+                        <VListItem key="no-data" title={ t(props.noDataText) } />
                       ))}
 
                       <VVirtualScroll ref={ vVirtualScrollRef } renderless items={ displayItems.value }>
                         { ({ item, index, itemRef }) => {
                           const itemProps = mergeProps(item.props, {
                             ref: itemRef,
-                            key: index,
+                            key: item.value,
                             active: (highlightFirst.value && index === 0) ? true : undefined,
                             onClick: () => select(item, null),
                           })

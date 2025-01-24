@@ -5,7 +5,7 @@ import { useRtl } from '@/composables/locale'
 import { makeRoundedProps } from '@/composables/rounded'
 
 // Utilities
-import { computed, provide, ref, shallowRef, toRef } from 'vue'
+import { computed, nextTick, provide, ref, shallowRef, toRef } from 'vue'
 import { clamp, createRange, getDecimals, propsFactory } from '@/util'
 
 // Types
@@ -237,7 +237,6 @@ export const useSlider = ({
 
     if (!activeThumbRef.value) return
 
-    activeThumbRef.value.focus()
     mousePressed.value = true
 
     if (activeThumbRef.value.contains(e.target as Node)) {
@@ -248,6 +247,7 @@ export const useSlider = ({
     }
 
     onSliderStart({ value: parseMouseMove(e) })
+    nextTick(() => activeThumbRef.value?.focus())
   }
 
   const moveListenerOptions = { passive: true, capture: true }

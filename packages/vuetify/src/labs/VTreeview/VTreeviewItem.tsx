@@ -12,7 +12,7 @@ import { IconValue } from '@/composables/icons'
 import { useLink } from '@/composables/router'
 
 // Utilities
-import { computed, inject, ref } from 'vue'
+import { computed, inject, ref, toRaw } from 'vue'
 import { EventProp, genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
@@ -47,13 +47,8 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
       (props.link || link.isClickable.value || (props.value != null && !!vListItemRef.value?.list) || isActivatableGroupActivator.value)
     )
 
-    function activateItem (e: MouseEvent | KeyboardEvent) {
-      if (
-        !isClickable.value ||
-        (!isActivatableGroupActivator.value && vListItemRef.value?.isGroupActivator)
-      ) return
-
-      if (vListItemRef.value?.root.activatable.value) {
+    function activateGroupActivator (e: MouseEvent | KeyboardEvent) {
+      if (isClickable.value && isActivatableGroupActivator.value) {
         vListItemRef.value?.activate(!vListItemRef.value?.isActivated, e)
       }
     }
@@ -73,41 +68,41 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
             'v-treeview-item',
             {
               'v-treeview-item--activatable-group-activator': isActivatableGroupActivator.value,
-              'v-treeview-item--filtered': visibleIds.value && !visibleIds.value.has(vListItemRef.value?.id),
+              'v-treeview-item--filtered': visibleIds.value && !visibleIds.value.has(toRaw(vListItemRef.value?.id)),
             },
             props.class,
           ]}
           ripple={ false }
-          onClick={ props.onClick ?? activateItem }
+          onClick={ props.onClick ?? activateGroupActivator }
         >
           {{
             ...slots,
             prepend: hasPrepend ? slotProps => {
               return (
                 <>
-                  { props.toggleIcon && (
-                    <VListItemAction start={ false }>
-                      <VBtn
-                        density="compact"
-                        icon={ props.toggleIcon }
-                        loading={ props.loading }
-                        variant="text"
-                        onClick={ props.onToggleExpand }
-                      >
-                        {{
-                          loader () {
-                            return (
-                              <VProgressCircular
-                                indeterminate="disable-shrink"
-                                size="20"
-                                width="2"
-                              />
-                            )
-                          },
-                        }}
-                      </VBtn>
-                    </VListItemAction>
-                  )}
+                  <VListItemAction start={ false }>
+                    { props.toggleIcon && (
+                        <VBtn
+                          density="compact"
+                          icon={ props.toggleIcon }
+                          loading={ props.loading }
+                          variant="text"
+                          onClick={ props.onToggleExpand }
+                        >
+                          {{
+                            loader () {
+                              return (
+                                <VProgressCircular
+                                  indeterminate="disable-shrink"
+                                  size="20"
+                                  width="2"
+                                />
+                              )
+                            },
+                          }}
+                        </VBtn>
+                    )}
+                  </VListItemAction>
 
                   { slots.prepend?.(slotProps) }
                 </>
