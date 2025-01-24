@@ -18,7 +18,7 @@ import Intersect from '@/directives/intersect'
 
 // Utilities
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, shallowRef, watch, watchEffect } from 'vue'
-import { callEvent, clamp, convertToUnit, filterInputAttrs, genericComponent, propsFactory, useRender } from '@/util'
+import { callEvent, clamp, convertToUnit, filterInputAttrs, genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -48,8 +48,8 @@ export const makeVTextareaProps = propsFactory({
   suffix: String,
   modelModifiers: Object as PropType<Record<string, boolean>>,
 
-  ...makeVInputProps(),
-  ...makeVFieldProps(),
+  ...omit(makeVInputProps(), ['centerAffix']),
+  ...omit(makeVFieldProps(), ['centerAffix']),
 }, 'VTextarea')
 
 type VTextareaSlots = Omit<VInputSlots & VFieldSlots, 'default'> & {
