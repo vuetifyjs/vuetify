@@ -18,17 +18,12 @@ import type { SelectStrategyProp } from '@/composables/nested/nested'
 import type { GenericProps } from '@/util'
 
 export type VTreeviewChildrenSlots<T> = {
-  [K in keyof Omit<VListItemSlots, 'default'>]: VListItemSlots[K] & {
+  [K in keyof Omit<VListItemSlots, 'default' | 'subtitle'>]: VListItemSlots[K] & {
     item: T
     internalItem: InternalListItem<T>
   }
 } & {
   default: never
-  item: {
-    props: InternalListItem['props']
-    item: T
-    internalItem: InternalListItem<T>
-  }
 }
 
 export const makeVTreeviewChildrenProps = propsFactory({
@@ -162,7 +157,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
           }}
         </VTreeviewGroup>
       ) : (
-        slots.item?.({ props: itemProps, item: item.raw, internalItem: item }) ?? (
+        (
           <VTreeviewItem
             { ...itemProps }
             value={ props.returnObject ? toRaw(item.raw) : itemProps.value }
