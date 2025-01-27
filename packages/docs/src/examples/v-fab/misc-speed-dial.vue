@@ -4,35 +4,43 @@
       <v-row dense>
         <v-col cols="12" sm="3">
           <h5>FAB position</h5>
+
           <v-radio-group v-model="fabPosition" density="compact" hide-details>
             <v-radio label="App (fixed)" value="fixed"></v-radio>
             <v-radio label="Absolute" value="absolute"></v-radio>
             <v-radio label="None" value=""></v-radio>
           </v-radio-group>
         </v-col>
+
         <v-col cols="12" sm="3">
           <h5>FAB location</h5>
+
           <v-radio-group v-model="fabLocation" :disabled="!fabPosition" density="compact" hide-details>
             <div class="d-flex">
               <v-radio value="top left"></v-radio>
               <v-radio value="top center"></v-radio>
               <v-radio value="top right"></v-radio>
             </div>
+
             <div class="d-flex">
               <v-radio value="left center"></v-radio>
               <v-radio :disabled="fabPosition !== 'absolute'" value="center center"></v-radio>
               <v-radio value="right center"></v-radio>
             </div>
+
             <div class="d-flex">
               <v-radio value="left bottom"></v-radio>
               <v-radio value="bottom center"></v-radio>
               <v-radio value="right bottom"></v-radio>
             </div>
           </v-radio-group>
+
           <code>({{ fabLocation }})</code>
         </v-col>
+
         <v-col cols="12" sm="3">
           <h5>Menu location</h5>
+
           <v-radio-group v-model="menuLocation" density="compact" hide-details>
             <div class="d-flex">
               <v-radio disabled></v-radio>
@@ -41,6 +49,7 @@
               <v-radio value="top right"></v-radio>
               <v-radio disabled></v-radio>
             </div>
+
             <div class="d-flex">
               <v-radio value="left top"></v-radio>
               <v-radio disabled></v-radio>
@@ -48,6 +57,7 @@
               <v-radio disabled></v-radio>
               <v-radio value="right top"></v-radio>
             </div>
+
             <div class="d-flex">
               <v-radio value="left center"></v-radio>
               <v-radio disabled></v-radio>
@@ -55,6 +65,7 @@
               <v-radio disabled></v-radio>
               <v-radio value="right center"></v-radio>
             </div>
+
             <div class="d-flex">
               <v-radio value="left bottom"></v-radio>
               <v-radio disabled></v-radio>
@@ -62,6 +73,7 @@
               <v-radio disabled></v-radio>
               <v-radio value="right bottom"></v-radio>
             </div>
+
             <div class="d-flex">
               <v-radio disabled></v-radio>
               <v-radio value="bottom left"></v-radio>
@@ -70,10 +82,13 @@
               <v-radio disabled></v-radio>
             </div>
           </v-radio-group>
+
           <code>({{ menuLocation }})</code>
         </v-col>
+
         <v-col cols="12" sm="3">
           <h5>Transition</h5>
+
           <v-radio-group v-model="transition" density="compact" hide-details>
             <v-radio label="Fade" value="fade-transition"></v-radio>
             <v-radio label="Slide y" value="slide-y-transition"></v-radio>
@@ -86,7 +101,7 @@
       </v-row>
     </v-card>
 
-    <v-card :class="fabPosition === 'absolute' ? 'demo-panel-relative' : 'demo-panel-static'" variant="outlined">
+    <v-card :class="fabPosition === 'absolute' ? 'demo-panel-relative' : 'demo-panel-static'" border flat>
       <v-fab
         :key="fabPosition"
         :absolute="fabPosition === 'absolute'"
@@ -99,13 +114,20 @@
         <v-icon>{{ open ? 'mdi-close' : 'mdi-crown' }}</v-icon>
         <v-speed-dial v-model="open" :location="menuLocation" :transition="transition" activator="parent">
           <v-btn key="1" color="success" icon>
-            <v-icon size="24">$success</v-icon></v-btn>
+            <v-icon size="24">$success</v-icon>
+          </v-btn>
+
           <v-btn key="2" color="info" icon>
-            <v-icon size="24">$info</v-icon></v-btn>
+            <v-icon size="24">$info</v-icon>
+          </v-btn>
+
           <v-btn key="3" color="warning" icon>
-            <v-icon size="24">$warning</v-icon></v-btn>
+            <v-icon size="24">$warning</v-icon>
+          </v-btn>
+
           <v-btn key="4" color="error" icon>
-            <v-icon size="24">$error</v-icon></v-btn>
+            <v-icon size="24">$error</v-icon>
+          </v-btn>
         </v-speed-dial>
       </v-fab>
     </v-card>
@@ -113,13 +135,13 @@
 </template>
 
 <script setup>
-  import { ref, watch } from 'vue'
+  import { shallowRef, watch } from 'vue'
 
-  const open = ref(false)
-  const fabPosition = ref('absolute')
-  const menuLocation = ref('left center')
-  const fabLocation = ref('right bottom')
-  const transition = ref('slide-y-reverse-transition')
+  const open = shallowRef(false)
+  const fabPosition = shallowRef('absolute')
+  const menuLocation = shallowRef('left center')
+  const fabLocation = shallowRef('right bottom')
+  const transition = shallowRef('slide-y-reverse-transition')
 
   watch(menuLocation, reopen)
   watch(transition, reopen)
