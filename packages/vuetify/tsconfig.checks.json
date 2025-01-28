@@ -1,6 +1,8 @@
 {
   "extends": "./tsconfig.dev.json",
   "compilerOptions": {
+    "rootDir": ".",
     "skipLibCheck": true
-  }
+  },
+  "exclude": ["types-temp", "**/*.spec.cy.ts", "**/*.spec.cy.tsx", "unimport/*", "src/unplugin/*.ts"]
 }
