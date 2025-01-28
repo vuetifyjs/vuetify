@@ -160,6 +160,7 @@ export const VDataTableServer = genericComponent<new <T extends readonly any[], 
           ]}
           style={ props.style }
           { ...tableProps }
+          fixedHeader={ props.fixedHeader || props.sticky }
         >
           {{
             top: () => slots.top?.(slotProps.value),
@@ -170,7 +171,6 @@ export const VDataTableServer = genericComponent<new <T extends readonly any[], 
                   <thead key="thead" class="v-data-table__thead" role="rowgroup">
                     <VDataTableHeaders
                       { ...dataTableHeadersProps }
-                      sticky={ props.fixedHeader }
                       v-slots={ slots }
                     />
                   </thead>

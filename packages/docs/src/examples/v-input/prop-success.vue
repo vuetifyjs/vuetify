@@ -1,9 +1,0 @@
-<template>
-  <v-input
-    :success-messages="['Success']"
-    disabled
-    success
-  >
-    Input
-  </v-input>
-</template>

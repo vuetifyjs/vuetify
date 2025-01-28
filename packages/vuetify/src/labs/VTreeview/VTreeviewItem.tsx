@@ -80,29 +80,29 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
             prepend: hasPrepend ? slotProps => {
               return (
                 <>
-                  { props.toggleIcon && (
-                    <VListItemAction start={ false }>
-                      <VBtn
-                        density="compact"
-                        icon={ props.toggleIcon }
-                        loading={ props.loading }
-                        variant="text"
-                        onClick={ props.onToggleExpand }
-                      >
-                        {{
-                          loader () {
-                            return (
-                              <VProgressCircular
-                                indeterminate="disable-shrink"
-                                size="20"
-                                width="2"
-                              />
-                            )
-                          },
-                        }}
-                      </VBtn>
-                    </VListItemAction>
-                  )}
+                  <VListItemAction start={ false }>
+                    { props.toggleIcon && (
+                        <VBtn
+                          density="compact"
+                          icon={ props.toggleIcon }
+                          loading={ props.loading }
+                          variant="text"
+                          onClick={ props.onToggleExpand }
+                        >
+                          {{
+                            loader () {
+                              return (
+                                <VProgressCircular
+                                  indeterminate="disable-shrink"
+                                  size="20"
+                                  width="2"
+                                />
+                              )
+                            },
+                          }}
+                        </VBtn>
+                    )}
+                  </VListItemAction>
 
                   { slots.prepend?.(slotProps) }
                 </>

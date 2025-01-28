@@ -192,6 +192,7 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
           ]}
           style={ props.style }
           { ...tableProps }
+          fixedHeader={ props.fixedHeader || props.sticky }
         >
           {{
             top: () => slots.top?.(slotProps.value),
@@ -211,7 +212,6 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
                     <thead key="thead">
                       <VDataTableHeaders
                         { ...dataTableHeadersProps }
-                        sticky={ props.fixedHeader }
                         v-slots={ slots }
                       />
                     </thead>

@@ -34,10 +34,7 @@
           </v-toolbar-items>
         </v-toolbar>
 
-        <v-list
-          lines="two"
-          subheader
-        >
+        <v-list lines="two">
           <v-list-subheader>User Controls</v-list-subheader>
 
           <v-list-item
