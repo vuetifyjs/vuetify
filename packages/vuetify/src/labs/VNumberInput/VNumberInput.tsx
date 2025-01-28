@@ -13,8 +13,8 @@ import { forwardRefs } from '@/composables/forwardRefs'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, nextTick, onMounted, ref } from 'vue'
-import { clamp, genericComponent, getDecimals, omit, propsFactory, useRender } from '@/util'
+import { computed, nextTick, onMounted, ref, watch } from 'vue'
+import { clamp, genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -39,7 +39,7 @@ const makeVNumberInputProps = propsFactory({
   inset: Boolean,
   hideInput: Boolean,
   modelValue: {
-    type: Number as PropType<Number | null>,
+    type: Number as PropType<number | null>,
     default: null,
   },
   min: {
@@ -53,6 +53,10 @@ const makeVNumberInputProps = propsFactory({
   step: {
     type: Number,
     default: 1,
+  },
+  precision: {
+    type: Number,
+    default: 0,
   },
 
   ...omit(makeVTextFieldProps({}), ['appendInnerIcon', 'modelValue', 'prependInnerIcon']),
@@ -70,34 +74,56 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
   },
 
   setup (props, { slots }) {
-    const _model = useProxiedModel(props, 'modelValue')
-
-    const model = computed({
-      get: () => _model.value,
-      // model.value could be empty string from VTextField
-      // but _model.value should be eventually kept in type Number | null
-      set (val: Number | null | string) {
-        if (val === null || val === '') {
-          _model.value = null
-          return
-        }
-
-        const value = Number(val)
-        if (!isNaN(value) && value <= props.max && value >= props.min) {
-          _model.value = value
-        }
-      },
-    })
-
     const vTextFieldRef = ref<VTextField | undefined>()
-
-    const stepDecimals = computed(() => getDecimals(props.step))
-    const modelDecimals = computed(() => typeof model.value === 'number' ? getDecimals(model.value) : 0)
+    const _inputText = ref<string | null>(null)
 
     const form = useForm(props)
     const controlsDisabled = computed(() => (
       form.isDisabled.value || form.isReadonly.value
     ))
+
+    const isFocused = ref(false)
+    function correctPrecision (val: number) {
+      return isFocused.value
+        ? Number(val.toFixed(props.precision)).toString() // trim zeros
+        : val.toFixed(props.precision)
+    }
+
+    const model = useProxiedModel(props, 'modelValue', null,
+      val => {
+        if (isFocused.value && !controlsDisabled.value) {
+          // ignore external changes
+        } else if (val == null || controlsDisabled.value) {
+          _inputText.value = val && !isNaN(val) ? String(val) : null
+        } else if (!isNaN(val)) {
+          _inputText.value = correctPrecision(val)
+        }
+        return val ?? null
+      },
+      val => val == null
+        ? val ?? null
+        : clamp(+val, props.min, props.max)
+    )
+
+    watch(model, () => {
+      // ensure proxiedModel transformIn is being called when readonly
+    }, { immediate: true })
+
+    const inputText = computed<string | null>({
+      get: () => _inputText.value,
+      set (val) {
+        if (val === null || val === '') {
+          model.value = null
+          _inputText.value = null
+          return
+        }
+
+        if (!isNaN(+val) && +val <= props.max && +val >= props.min) {
+          model.value = val as any
+          _inputText.value = val
+        }
+      },
+    })
 
     const canIncrease = computed(() => {
       if (controlsDisabled.value) return false
@@ -118,27 +144,25 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
     const controlNodeDefaultHeight = computed(() => controlVariant.value === 'stacked' ? 'auto' : '100%')
 
     const incrementSlotProps = computed(() => ({ click: onClickUp }))
-
     const decrementSlotProps = computed(() => ({ click: onClickDown }))
 
+    watch(() => props.precision, () => formatInputValue())
+
     onMounted(() => {
-      if (!controlsDisabled.value) {
-        clampModel()
-      }
+      clampModel()
     })
 
     function toggleUpDown (increment = true) {
       if (controlsDisabled.value) return
       if (model.value == null) {
-        model.value = clamp(0, props.min, props.max)
+        inputText.value = correctPrecision(clamp(0, props.min, props.max))
         return
       }
 
-      const decimals = Math.max(modelDecimals.value, stepDecimals.value)
       if (increment) {
-        if (canIncrease.value) model.value = +((((model.value as number) + props.step).toFixed(decimals)))
+        if (canIncrease.value) inputText.value = correctPrecision(model.value + props.step)
       } else {
-        if (canDecrease.value) model.value = +((((model.value as number) - props.step).toFixed(decimals)))
+        if (canDecrease.value) inputText.value = correctPrecision(model.value - props.step)
       }
     }
 
@@ -167,6 +191,14 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       if (!/^-?(\d+(\.\d*)?|(\.\d+)|\d*|\.)$/.test(potentialNewInputVal)) {
         e.preventDefault()
       }
+      // Ignore decimal digits above precision limit
+      if (potentialNewInputVal.split('.')[1]?.length > props.precision) {
+        e.preventDefault()
+      }
+      // Ignore decimal separator when precision = 0
+      if (props.precision === 0 && potentialNewInputVal.includes('.')) {
+        e.preventDefault()
+      }
     }
 
     async function onKeydown (e: KeyboardEvent) {
@@ -193,13 +225,42 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
     }
 
     function clampModel () {
+      if (controlsDisabled.value) return
       if (!vTextFieldRef.value) return
-      const inputText = vTextFieldRef.value.value
-      if (inputText && !isNaN(+inputText)) {
-        model.value = clamp(+(inputText), props.min, props.max)
+      const actualText = vTextFieldRef.value.value
+      if (actualText && !isNaN(+actualText)) {
+        inputText.value = correctPrecision(clamp(+actualText, props.min, props.max))
       } else {
-        model.value = null
+        inputText.value = null
       }
+    }
+
+    function formatInputValue () {
+      if (controlsDisabled.value) return
+      if (model.value === null || isNaN(model.value)) {
+        inputText.value = null
+        return
+      }
+      inputText.value = model.value.toFixed(props.precision)
+    }
+
+    function trimDecimalZeros () {
+      if (controlsDisabled.value) return
+      if (model.value === null || isNaN(model.value)) {
+        inputText.value = null
+        return
+      }
+      inputText.value = model.value.toString()
+    }
+
+    function onFocus () {
+      isFocused.value = true
+      trimDecimalZeros()
+    }
+
+    function onBlur () {
+      isFocused.value = false
+      clampModel()
     }
 
     useRender(() => {
@@ -320,9 +381,10 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       return (
         <VTextField
           ref={ vTextFieldRef }
-          v-model={ model.value }
+          v-model={ inputText.value }
           onBeforeinput={ onBeforeinput }
-          onChange={ clampModel }
+          onFocus={ onFocus }
+          onBlur={ onBlur }
           onKeydown={ onKeydown }
           class={[
             'v-number-input',
