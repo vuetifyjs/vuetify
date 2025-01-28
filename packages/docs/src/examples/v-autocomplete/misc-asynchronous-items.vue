@@ -5,14 +5,14 @@
     <v-autocomplete
       v-model="select"
       v-model:search="search"
-      :loading="loading"
       :items="items"
+      :loading="loading"
       class="mx-4"
       density="comfortable"
-      hide-no-data
-      hide-details
       label="What state are you from?"
       style="max-width: 300px;"
+      hide-details
+      hide-no-data
     ></v-autocomplete>
 
     <v-btn icon="mdi-dots-vertical"></v-btn>

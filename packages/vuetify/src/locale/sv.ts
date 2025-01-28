@@ -2,6 +2,7 @@ export default {
   badge: 'Bricka',
   open: 'Open',
   close: 'Stäng',
+  dismiss: 'Dismiss',
   confirmEdit: {
     ok: 'OK',
     cancel: 'Avbryt',
@@ -68,9 +69,15 @@ export default {
     counter: '{0} filer',
     counterSize: '{0} filer ({1})',
   },
+  fileUpload: {
+    title: 'Drag and drop files here',
+    divider: 'or',
+    browse: 'Browse Files',
+  },
   timePicker: {
     am: 'AM',
     pm: 'PM',
+    title: 'Select Time',
   },
   pagination: {
     ariaLabel: {

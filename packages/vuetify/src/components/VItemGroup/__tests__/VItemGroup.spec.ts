@@ -3,7 +3,6 @@ import { VItem } from '../VItem'
 import { VItemGroup } from '../VItemGroup'
 
 // Utilities
-import { describe, expect, it } from '@jest/globals'
 import { mount } from '@vue/test-utils'
 import { h } from 'vue'
 import { createVuetify } from '@/framework'
@@ -120,7 +119,7 @@ describe('VItemGroup', () => {
 
   // https://github.com/vuetifyjs/vuetify/issues/5384
   it('should not unregister children when is destroyed', async () => {
-    const change = jest.fn()
+    const change = vi.fn()
     const wrapper = mountFunction({
       props: {
         modelValue: 'foo',

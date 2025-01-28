@@ -21,15 +21,15 @@ The `v-alert` component is used to convey important information to the user thro
 
 ![Alert Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-alert/v-alert-entry.png)
 
-<page-features />
+<PageFeatures />
 
 ## Usage
 
 An alert is a [v-sheet](/components/sheets/) that specializes in getting the user's attention. While similar to [v-banner](/components/banners/) in functionality, `v-alert` is typically inline with content and used multiple times throughout an application.
 
-<usage name="v-alert" />
+<ExamplesUsage name="v-alert" />
 
-<entry />
+<PromotedEntry />
 
 ## API
 
@@ -57,7 +57,7 @@ The recommended placement of elements inside of `v-alert` is:
 | 4. Text | A content area for displaying text and other inline elements |
 | 5. Close Icon (optional) | Used to hide the `v-alert` component |
 
-<api-inline hide-links />
+<ApiInline hide-links />
 
 ## Guide
 
@@ -79,7 +79,7 @@ The following code snippet is an example of a basic `v-alert` component only con
 
 Adding a title is as easy as defining its value. The next example adds a string title to accompany the content text:
 
-<example file="v-alert/prop-content" />
+<ExamplesExample file="v-alert/prop-content" />
 
 Notice how the alert does not have a color or icon. This is defined using the **type** property.
 
@@ -89,7 +89,7 @@ Alerts have 4 contextual states: **success**, **info**, **warning**, and **error
 
 With a basic alert rendered, add your choice of contextual type. The following example puts the `v-alert` component in a success state:
 
-<example file="v-alert/prop-type" />
+<ExamplesExample file="v-alert/prop-type" />
 
 ##### Type reference
 
@@ -117,7 +117,7 @@ The **type** property acts as a shorthand for a **color** and **icon** combinati
 
 The `v-alert` component has the ability to reduce its height in intervals using the density prop. This is useful when you need to reduce the vertical space a component needs. The following example reduces the vertical space by using **density="compact"**:
 
-<example file="v-alert/prop-density" />
+<ExamplesExample file="v-alert/prop-density" />
 
 The **density** prop supports 3 levels of component height; **default**, **comfortable**, and **compact**.
 
@@ -125,13 +125,13 @@ The **density** prop supports 3 levels of component height; **default**, **comfo
 
 The `v-alert` has 6 style variants, **elevated**, **flat**, **tonal**, **outlined**, **text**, and **plain**. By default, the `v-alert` component is **flat**; which means that it has a solid background and no box-shadow (elevation). The following example modifies the overall styling of the alert with a custom variant:
 
-<example file="v-alert/prop-variant" />
+<ExamplesExample file="v-alert/prop-variant" />
 
 #### Closable
 
 The **closable** prop adds a [v-icon](/components/icons) on the far right, after the main content. This control hides the `v-alert` when clicked, setting it's internal model to **false**. Manually control the visibility of the alert by binding **v-model** or using **model-value**. The following example uses a dynamic model that shows and hides the `v-alert` component:
 
-<example file="v-alert/prop-closable" />
+<ExamplesExample file="v-alert/prop-closable" />
 
 The close icon automatically applies a default `aria-label` and is configurable by using the **close-label** prop or changing **close** value in your locale.
 
@@ -147,19 +147,19 @@ The following is a collection of `v-alert` examples that demonstrate how differe
 
 The **border-color** prop removes the alert background in order to accent the **border** prop. If a **type** is set, it will use the type's default color. If no **color** or **type** is set, the color will default to the inverted color of the applied theme (black for light and white/gray for dark).
 
-<example file="v-alert/prop-border-color" />
+<ExamplesExample file="v-alert/prop-border-color" />
 
 ### Icon
 
 The **icon** prop allows you to add an icon to the beginning of the alert component. If a **type** is provided, this will override the default type icon. Additionally, setting the **icon** prop to _false_ will remove the icon altogether.
 
-<example file="v-alert/prop-icon" />
+<ExamplesExample file="v-alert/prop-icon" />
 
 ### Outlined
 
 The **outlined** prop inverts the style of an alert, inheriting the currently applied **color**, applying it to the text and border, and making its background transparent.
 
-<example file="v-alert/prop-outlined" />
+<ExamplesExample file="v-alert/prop-outlined" />
 
 ## Accessibility
 

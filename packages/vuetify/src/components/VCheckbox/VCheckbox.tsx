@@ -10,8 +10,8 @@ import { useFocus } from '@/composables/focus'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed } from 'vue'
-import { filterInputAttrs, genericComponent, getUid, omit, propsFactory, useRender } from '@/util'
+import { computed, useId } from 'vue'
+import { filterInputAttrs, genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { VSelectionControlSlots } from '../VSelectionControl/VSelectionControl'
@@ -47,7 +47,7 @@ export const VCheckbox = genericComponent<new <T>(
     const model = useProxiedModel(props, 'modelValue')
     const { isFocused, focus, blur } = useFocus(props)
 
-    const uid = getUid()
+    const uid = useId()
     const id = computed(() => props.id || `checkbox-${uid}`)
 
     useRender(() => {
@@ -75,6 +75,7 @@ export const VCheckbox = genericComponent<new <T>(
               messagesId,
               isDisabled,
               isReadonly,
+              isValid,
             }) => (
               <VCheckboxBtn
                 { ...checkboxProps }
@@ -83,6 +84,7 @@ export const VCheckbox = genericComponent<new <T>(
                 disabled={ isDisabled.value }
                 readonly={ isReadonly.value }
                 { ...controlAttrs }
+                error={ isValid.value === false }
                 v-model={ model.value }
                 onFocus={ focus }
                 onBlur={ blur }

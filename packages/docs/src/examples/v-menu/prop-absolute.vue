@@ -7,8 +7,8 @@
       <template v-slot:activator="{ props }">
         <v-card
           class="portrait"
-          image="https://cdn.vuetifyjs.com/images/cards/girl.jpg"
           height="300"
+          image="https://cdn.vuetifyjs.com/images/cards/girl.jpg"
           width="600"
           v-bind="props"
         ></v-card>

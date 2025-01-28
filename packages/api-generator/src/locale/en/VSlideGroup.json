@@ -1,6 +1,7 @@
 {
   "props": {
     "centerActive": "Forces the selected component to be centered.",
+    "direction": "Switch between horizontal and vertical modes.",
     "mobileBreakpoint": "Sets the designated mobile breakpoint for the component.",
     "nextIcon": "The appended slot when arrows are shown.",
     "prevIcon": "The prepended slot when arrows are shown.",
@@ -14,5 +15,11 @@
     "change": "Emitted when the component value is changed by user interaction.",
     "click:prev": "Emitted when the prev is clicked.",
     "click:next": "Emitted when the next is clicked."
+  },
+  "exposed": {
+    "focus": "Focus the component.",
+    "scrollOffset": "Scroll the component to a given index.",
+    "scrollTo": "Scroll the component to a given index.",
+    "selected": "Get the selected component index."
   }
 }

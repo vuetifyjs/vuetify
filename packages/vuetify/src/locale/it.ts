@@ -2,6 +2,7 @@ export default {
   badge: 'Distintivo',
   open: 'Apri',
   close: 'Chiudi',
+  dismiss: 'Dismiss',
   confirmEdit: {
     ok: 'OK',
     cancel: 'Annulla',
@@ -68,9 +69,15 @@ export default {
     counter: '{0} file',
     counterSize: '{0} file ({1} in totale)',
   },
+  fileUpload: {
+    title: 'Drag and drop files here',
+    divider: 'or',
+    browse: 'Browse Files',
+  },
   timePicker: {
     am: 'AM',
     pm: 'PM',
+    title: 'Select Time',
   },
   pagination: {
     ariaLabel: {

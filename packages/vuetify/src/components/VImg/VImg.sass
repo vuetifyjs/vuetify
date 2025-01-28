@@ -1,34 +1,44 @@
 @use '../../styles/tools'
 @use './variables' as *
 
-.v-img
-  --v-theme-overlay-multiplier: 3
-  z-index: 0
+@include tools.layer('components')
+  .v-img
+    --v-theme-overlay-multiplier: 3
+    z-index: 0
 
-  &--booting .v-responsive__sizer
-    transition: none
+    &.v-img--absolute
+      height: 100%
+      left: 0
+      overflow: hidden
+      position: absolute
+      top: 0
+      width: 100%
+      z-index: -1
 
-  &--rounded
-    @include tools.rounded($img-rounded-border-radius)
+    &--booting .v-responsive__sizer
+      transition: none
 
-.v-img__img,
-.v-img__picture,
-.v-img__gradient,
-.v-img__placeholder,
-.v-img__error
-  z-index: -1
+    &--rounded
+      @include tools.rounded($img-rounded-border-radius)
 
-  @include tools.absolute()
+  .v-img__img,
+  .v-img__picture,
+  .v-img__gradient,
+  .v-img__placeholder,
+  .v-img__error
+    z-index: -1
 
-.v-img__img
-  &--preload
-    filter: $img-preload-filter
+    @include tools.absolute()
 
-  &--contain
-    object-fit: contain
+  .v-img__img
+    &--preload
+      filter: $img-preload-filter
 
-  &--cover
-    object-fit: cover
+    &--contain
+      object-fit: contain
 
-.v-img__gradient
-  background-repeat: no-repeat
+    &--cover
+      object-fit: cover
+
+  .v-img__gradient
+    background-repeat: no-repeat

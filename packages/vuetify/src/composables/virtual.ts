@@ -4,10 +4,11 @@ import { useResizeObserver } from '@/composables/resizeObserver'
 
 // Utilities
 import { computed, nextTick, onScopeDispose, ref, shallowRef, watch, watchEffect } from 'vue'
-import { clamp, debounce, IN_BROWSER, propsFactory } from '@/util'
+import { clamp, debounce, getPropertyFromItem, IN_BROWSER, propsFactory } from '@/util'
 
 // Types
-import type { Ref } from 'vue'
+import type { PropType, Ref } from 'vue'
+import type { SelectItemKey } from '@/util'
 
 const UP = -1
 const DOWN = 1
@@ -16,13 +17,18 @@ const DOWN = 1
 const BUFFER_PX = 100
 
 type VirtualProps = {
-  itemHeight?: number | string
-  height?: number | string
+  itemHeight: number | string | null | undefined
+  itemKey: SelectItemKey
+  height: number | string | undefined
 }
 
 export const makeVirtualProps = propsFactory({
   itemHeight: {
     type: [Number, String],
+    default: null,
+  },
+  itemKey: {
+    type: [String, Array, Function] as PropType<SelectItemKey>,
     default: null,
   },
   height: [Number, String],
@@ -107,9 +113,6 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
       })
     })
   })
-  watch(viewportHeight, (val, oldVal) => {
-    oldVal && calculateVisibleItems()
-  })
 
   onScopeDispose(() => {
     updateOffsets.clear()
@@ -139,6 +142,20 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
   let lastScrollTop = 0
   let scrollVelocity = 0
   let lastScrollTime = 0
+
+  watch(viewportHeight, (val, oldVal) => {
+    if (oldVal) {
+      calculateVisibleItems()
+      if (val < oldVal) {
+        requestAnimationFrame(() => {
+          scrollVelocity = 0
+          calculateVisibleItems()
+        })
+      }
+    }
+  })
+
+  let scrollTimeout = -1
   function handleScroll () {
     if (!containerRef.value || !markerRef.value) return
 
@@ -159,6 +176,9 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
     lastScrollTop = scrollTop
     lastScrollTime = scrollTime
 
+    window.clearTimeout(scrollTimeout)
+    scrollTimeout = window.setTimeout(handleScrollend, 500)
+
     calculateVisibleItems()
   }
   function handleScrollend () {
@@ -167,6 +187,7 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
     scrollVelocity = 0
     lastScrollTime = 0
 
+    window.clearTimeout(scrollTimeout)
     calculateVisibleItems()
   }
 
@@ -220,10 +241,14 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
   }
 
   const computedItems = computed(() => {
-    return items.value.slice(first.value, last.value).map((item, index) => ({
-      raw: item,
-      index: index + first.value,
-    }))
+    return items.value.slice(first.value, last.value).map((item, index) => {
+      const _index = index + first.value
+      return {
+        raw: item,
+        index: _index,
+        key: getPropertyFromItem(item, props.itemKey, _index),
+      }
+    })
   })
 
   watch(items, () => {
@@ -231,9 +256,10 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
     offsets = Array.from({ length: items.value.length })
     updateOffsets.immediate()
     calculateVisibleItems()
-  }, { deep: true })
+  }, { deep: 1 })
 
   return {
+    calculateVisibleItems,
     containerRef,
     markerRef,
     computedItems,

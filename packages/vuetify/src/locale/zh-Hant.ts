@@ -2,6 +2,7 @@ export default {
   badge: '徽章',
   open: 'Open',
   close: '關閉',
+  dismiss: 'Dismiss',
   confirmEdit: {
     ok: 'OK',
     cancel: 'Cancel',
@@ -68,9 +69,15 @@ export default {
     counter: '{0} 個檔案',
     counterSize: '{0} 個檔案（共 {1}）',
   },
+  fileUpload: {
+    title: 'Drag and drop files here',
+    divider: 'or',
+    browse: 'Browse Files',
+  },
   timePicker: {
     am: 'AM',
     pm: 'PM',
+    title: 'Select Time',
   },
   pagination: {
     ariaLabel: {

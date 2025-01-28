@@ -7,17 +7,19 @@ related:
   - /features/accessibility/
   - /components/locale-providers/
   - /getting-started/browser-support/
+features:
+  report: true
 ---
 
 # Internationalization (i18n)
 
 Vuetify supports language Internationalization (i18n) of its components.
 
-<page-features />
+<PageFeatures />
 
-<entry />
+<PromotedEntry />
 
-When bootstrapping your application you can specify available locales and the default locale with the **defaultLocale** option. The **locale** service also supports easy integration with [vue-i18n](https://kazupon.github.io/vue-i18n/). Using a locale that has an RTL (right-to-left) language also affects the directionality of the Vuetify components.
+When bootstrapping your application you can specify available locales and the default locale with the **defaultLocale** option. The **locale** service also supports easy integration with [vue-i18n](https://vue-i18n.intlify.dev/). Using a locale that has an RTL (right-to-left) language also affects the directionality of the Vuetify components.
 
 ## Getting started
 
@@ -80,10 +82,10 @@ If you are still using the Options API, you can access the locale settings on `t
 
 | Feature | Description |
 | - | - |
-| [useLocale](/api/use-locale/) | The locale composable is used
+| [useLocale](/api/use-locale/) | The locale composable is used |
 | [v-locale-provider](/api/v-locale-provider/) | The locale provider component is used to scope a portion of your application to a different locale than the default one |
 
-<api-inline hide-links />
+<ApiInline hide-links />
 
 ## Scoped languages
 

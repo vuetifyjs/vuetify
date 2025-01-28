@@ -2,6 +2,7 @@ export default {
   badge: 'Insignă',
   open: 'Open',
   close: 'Închideți',
+  dismiss: 'Dismiss',
   confirmEdit: {
     ok: 'OK',
     cancel: 'Anulează',
@@ -68,9 +69,15 @@ export default {
     counter: '{0} fișiere',
     counterSize: '{0} fișiere ({1} în total)',
   },
+  fileUpload: {
+    title: 'Drag and drop files here',
+    divider: 'or',
+    browse: 'Browse Files',
+  },
   timePicker: {
     am: 'AM',
     pm: 'PM',
+    title: 'Select Time',
   },
   pagination: {
     ariaLabel: {

@@ -2,6 +2,7 @@ export default {
   badge: 'バッジ',
   open: 'Open',
   close: '閉じる',
+  dismiss: 'Dismiss',
   confirmEdit: {
     ok: 'OK',
     cancel: 'Cancel',
@@ -68,9 +69,15 @@ export default {
     counter: '{0} ファイル',
     counterSize: '{0} ファイル (合計 {1})',
   },
+  fileUpload: {
+    title: 'Drag and drop files here',
+    divider: 'or',
+    browse: 'Browse Files',
+  },
   timePicker: {
     am: 'AM',
     pm: 'PM',
+    title: 'Select Time',
   },
   pagination: {
     ariaLabel: {

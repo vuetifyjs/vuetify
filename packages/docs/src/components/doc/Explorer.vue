@@ -3,38 +3,37 @@
     <v-autocomplete
       v-model="model"
       :items="components"
-      autofocus
-      auto-select-first
       base-color="disabled"
-      chips
       class="mb-2"
+      placeholder="Search Vuetify API"
+      prepend-inner-icon="mdi-database-search-outline"
+      variant="outlined"
+      auto-select-first
+      autofocus
+      chips
       clearable
       hide-details
       item-props
       persistent-clear
-      placeholder="Search Vuetify API"
-      prepend-inner-icon="mdi-database-search-outline"
-      variant="outlined"
     >
       <template #chip="{ props, item }">
         <v-chip
           v-bind="props"
           :prepend-icon="item.props.prependIcon"
           color="primary"
-          label
           variant="flat"
+          label
         />
       </template>
     </v-autocomplete>
 
     <template v-if="model">
-      <api-search ref="search" />
+      <ApiSearch ref="search" />
 
       <template v-for="(section, i) in sections" :key="i">
-        <api-section
-          :section="section"
+        <ApiSection
           :name="model"
-          show-headline
+          :section="section"
         />
       </template>
     </template>
@@ -56,20 +55,14 @@
 </template>
 
 <script setup>
-  // Utilities
-  import { camelize, nextTick, ref, shallowRef, watch } from 'vue'
-  import { useRoute, useRouter } from 'vue-router'
-  import { kebabCase } from 'lodash-es'
+  import files from 'virtual:api-list'
 
   const route = useRoute()
   const router = useRouter()
 
-  const files = import.meta.glob('../../../../api-generator/dist/api/*.json')
-
   const search = shallowRef()
 
-  const components = Object.keys(files).reduce((acc, cur) => {
-    const name = cur.split('/').pop().split('.')[0]
+  const components = files.reduce((acc, name) => {
     let prependIcon
     let subtitle
 

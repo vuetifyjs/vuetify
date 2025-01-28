@@ -1,9 +1,9 @@
 <template>
   <v-carousel
-    cycle
     height="400"
-    hide-delimiter-background
     show-arrows="hover"
+    cycle
+    hide-delimiter-background
   >
     <v-carousel-item
       v-for="(slide, i) in slides"

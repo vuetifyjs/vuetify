@@ -42,6 +42,7 @@
       "global-configuration",
       "icon-fonts",
       "internationalization",
+      "scrolling",
       "sass-variables",
       "theme",
       "treeshaking"
@@ -59,6 +60,7 @@
       {
         "subheader": "utility-classes"
       },
+      "borders",
       "border-radius",
       "content",
       "cursor",
@@ -66,7 +68,9 @@
       "elevation",
       "flex",
       "float",
+      "opacity",
       "overflow",
+      "position",
       "sizing",
       "spacing",
       "text-and-typography"
@@ -84,6 +88,7 @@
         "routePath": "explorer",
         "subtitle": "browse-components"
       },
+      "application",
       { "divider": true },
       { "subheader": "containment" },
       "bottom-sheets",
@@ -104,9 +109,11 @@
       "app-bars",
       "bottom-navigation",
       "breadcrumbs",
+      "floating-action-buttons",
       "footers",
       "navigation-drawers",
       "paginations",
+      "speed-dials",
       "system-bars",
       "tabs",
       { "divider": true },
@@ -127,11 +134,11 @@
       "textareas",
       { "divider": true },
       { "subheader": "data-and-display" },
+      "confirm-edit",
       "data-iterators",
       {
         "title": "data-tables",
         "subfolder": "components",
-        "emphasized": true,
         "activeIcon": "",
         "inactiveIcon": "",
         "items": [
@@ -144,6 +151,7 @@
           "virtual-tables"
         ]
       },
+      "sparklines",
       "infinite-scroller",
       "tables",
       "virtual-scroller",
@@ -164,6 +172,7 @@
       "alerts",
       "badges",
       "banners",
+      "empty-states",
       "hover",
       "progress-circular",
       "progress-linear",
@@ -210,6 +219,7 @@
       "resize",
       "ripple",
       "scroll",
+      "tooltip",
       "touch"
     ]
   },
@@ -221,6 +231,38 @@
       "introduction",
       {
         "title": "calendars",
+        "subfolder": "components"
+      },
+      {
+        "title": "date-inputs",
+        "subfolder": "components"
+      },
+      {
+        "title": "file-upload",
+        "subfolder": "components"
+      },
+      {
+        "title": "number-inputs",
+        "subfolder": "components"
+      },
+      {
+        "title": "pull-to-refresh",
+        "subfolder": "components"
+      },
+      {
+        "title": "snackbar-queue",
+        "subfolder": "components"
+      },
+      {
+        "title": "vertical-steppers",
+        "subfolder": "components"
+      },
+      {
+        "title": "time-pickers",
+        "subfolder": "components"
+      },
+      {
+        "title": "treeview",
         "subfolder": "components"
       }
     ]

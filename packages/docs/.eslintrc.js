@@ -3,6 +3,7 @@ module.exports = {
     'vue/setup-compiler-macros': true,
   },
   rules: {
+    'no-undef': 'off',
     'vue/multi-word-component-names': 'off',
   },
   overrides: [

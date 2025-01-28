@@ -19,13 +19,13 @@ features:
 
 Select fields components are used for collecting user provided information from a list of options.
 
-<page-features />
+<PageFeatures />
 
 ## Usage
 
-<usage name="v-select" />
+<ExamplesUsage name="v-select" />
 
-<entry />
+<PromotedEntry />
 
 ## API
 
@@ -35,7 +35,7 @@ Select fields components are used for collecting user provided information from 
 | [v-autocomplete](/api/v-autocomplete/) | A select component that allows for advanced filtering |
 | [v-combobox](/api/v-combobox/) | A select component that allows for filtering and custom values |
 
-<api-inline hide-links />
+<ApiInline hide-links />
 
 ## Caveats
 
@@ -57,43 +57,43 @@ All form inputs have a massive API that make it super easy to configure everythi
 
 You can use **density** prop to adjust vertical spacing within the component.
 
-<example file="v-select/prop-dense" />
+<ExamplesExample file="v-select/prop-dense" />
 
 #### Multiple
 
 The **multiple** prop allows for multiple selections.
 
-<example file="v-select/prop-multiple" />
+<ExamplesExample file="v-select/prop-multiple" />
 
 #### Chips
 
 Display selected items as chips with the **chips** prop.
 
-<example file="v-select/prop-chips" />
+<ExamplesExample file="v-select/prop-chips" />
 
 #### Readonly
 
 You can use the **readonly** prop on `v-select` which will prevent a user from changing its value.
 
-<example file="v-select/prop-readonly" />
+<ExamplesExample file="v-select/prop-readonly" />
 
 #### Disabled
 
 Applying the **disabled** prop to a `v-select` will prevent a user from interacting with the component.
 
-<example file="v-select/prop-disabled" />
+<ExamplesExample file="v-select/prop-disabled" />
 
 #### Custom title and value
 
 You can specify the specific properties within your items array that correspond to the title and value fields. By default, this is **title** and **value**. In this example we also use the **return-object** prop which will return the entire object of the selected item on selection.
 
-<example file="v-select/prop-custom-title-and-value" />
+<ExamplesExample file="v-select/prop-custom-title-and-value" />
 
 <!-- #### Menu props
 
 Custom props can be passed directly to `v-menu` using **menuProps** prop. In this example menu is force directed to top and shifted to top.
 
-<example file="v-select/prop-menu-props" /> -->
+<ExamplesExample file="v-select/prop-menu-props" /> -->
 
 #### Custom item props
 
@@ -122,7 +122,7 @@ const items = [
 
 Or a custom transform function can be passed to `itemProps` to generate the props for each item.
 
-<example file="v-select/prop-item-props" />
+<ExamplesExample file="v-select/prop-item-props" />
 
 See the [VListItem API](/api/v-list-item/) for a list of available props.
 
@@ -134,16 +134,16 @@ The `v-select` component offers slots that make it easy to customize the output 
 
 The item slot is used to change how items are rendered in the list. It provides `item`, an [InternalItem](/api/v-select/#slots-item) object containing the transformed item-title and item-value; and `props`, an object containing the props and events that would normally be bound to the list item.
 
-<example file="v-select/slot-item" />
+<ExamplesExample file="v-select/slot-item" />
 
 #### Append and prepend item
 
 The `v-select` component can be optionally expanded with prepended and appended items. This is perfect for customized **select-all** functionality.
 
-<example file="v-select/slot-append-and-prepend-item" />
+<ExamplesExample file="v-select/slot-append-and-prepend-item" />
 
 #### Selection
 
 The **selection** slot can be used to customize the way selected values are shown in the input. This is great when you don't want the selection to occupy multiple lines.
 
-<example file="v-select/slot-selection" />
+<ExamplesExample file="v-select/slot-selection" />

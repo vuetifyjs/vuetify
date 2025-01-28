@@ -2,6 +2,7 @@ export default {
   badge: 'badge',
   open: 'Open',
   close: 'Close',
+  dismiss: 'Dismiss',
   confirmEdit: {
     ok: 'OK',
     cancel: 'Cancel',
@@ -68,9 +69,15 @@ export default {
     counter: '{0} files',
     counterSize: '{0} files ({1} in total)',
   },
+  fileUpload: {
+    title: 'Drag and drop files here',
+    divider: 'or',
+    browse: 'Browse Files',
+  },
   timePicker: {
     am: 'AM',
     pm: 'PM',
+    title: 'Select Time',
   },
   pagination: {
     ariaLabel: {

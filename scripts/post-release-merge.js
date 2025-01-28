@@ -2,6 +2,8 @@ const shell = require('shelljs')
 
 let branch = exec('git symbolic-ref --short HEAD')
 
+if (process.env.CI) process.exit(0)
+
 function exec (command) {
   const result = shell.exec(command, { silent: true })
   if (result.code) {

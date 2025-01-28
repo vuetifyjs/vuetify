@@ -4,19 +4,19 @@
     max-width="450"
   >
     <v-toolbar color="cyan-lighten-1">
-      <v-btn variant="text" icon="mdi-menu"></v-btn>
+      <v-btn icon="mdi-menu" variant="text"></v-btn>
 
       <v-toolbar-title>Inbox</v-toolbar-title>
 
       <v-spacer></v-spacer>
 
-      <v-btn variant="text" icon="mdi-magnify"></v-btn>
+      <v-btn icon="mdi-magnify" variant="text"></v-btn>
     </v-toolbar>
 
     <v-list
       :items="items"
-      item-props
       lines="three"
+      item-props
     >
       <template v-slot:subtitle="{ subtitle }">
         <div v-html="subtitle"></div>

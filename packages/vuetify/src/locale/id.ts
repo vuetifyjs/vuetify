@@ -2,6 +2,7 @@ export default {
   badge: 'Lencana',
   open: 'Open',
   close: 'Tutup',
+  dismiss: 'Dismiss',
   confirmEdit: {
     ok: 'OK',
     cancel: 'Cancel',
@@ -68,9 +69,15 @@ export default {
     counter: '{0} berkas',
     counterSize: '{0} berkas (dari total {1})',
   },
+  fileUpload: {
+    title: 'Drag and drop files here',
+    divider: 'or',
+    browse: 'Browse Files',
+  },
   timePicker: {
     am: 'AM',
     pm: 'PM',
+    title: 'Select Time',
   },
   pagination: {
     ariaLabel: {

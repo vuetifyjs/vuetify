@@ -2,6 +2,7 @@ export default {
   badge: 'תג',
   open: 'Open',
   close: 'סגור',
+  dismiss: 'Dismiss',
   confirmEdit: {
     ok: 'OK',
     cancel: 'Cancel',
@@ -68,9 +69,15 @@ export default {
     counter: '{0} קבצים',
     counterSize: '{0} קבצים ({1} בסך הכל)',
   },
+  fileUpload: {
+    title: 'Drag and drop files here',
+    divider: 'or',
+    browse: 'Browse Files',
+  },
   timePicker: {
     am: 'AM',
     pm: 'PM',
+    title: 'Select Time',
   },
   pagination: {
     ariaLabel: {

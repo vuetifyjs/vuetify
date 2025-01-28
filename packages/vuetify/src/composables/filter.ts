@@ -2,7 +2,7 @@
 /* eslint-disable no-labels */
 
 // Utilities
-import { computed, ref, unref, watchEffect } from 'vue'
+import { computed, shallowRef, unref, watchEffect } from 'vue'
 import { getPropertyFromItem, propsFactory, wrapInArray } from '@/util'
 
 // Types
@@ -78,12 +78,12 @@ export function filterItems (
     const defaultMatches: Record<string, FilterMatch> = {}
     let match: FilterMatch = -1
 
-    if (query && !options?.noFilter) {
+    if ((query || customFiltersLength > 0) && !options?.noFilter) {
       if (typeof item === 'object') {
         const filterKeys = keys || Object.keys(transformed)
 
         for (const key of filterKeys) {
-          const value = getPropertyFromItem(transformed, key, transformed)
+          const value = getPropertyFromItem(transformed, key)
           const keyFilter = options?.customKeyFilter?.[key]
 
           match = keyFilter
@@ -139,8 +139,8 @@ export function useFilter <T extends InternalItem> (
     customKeyFilter?: MaybeRef<FilterKeyFunctions | undefined>
   }
 ) {
-  const filteredItems: Ref<T[]> = ref([])
-  const filteredMatches: Ref<Map<unknown, Record<string, FilterMatch>>> = ref(new Map())
+  const filteredItems: Ref<T[]> = shallowRef([])
+  const filteredMatches: Ref<Map<unknown, Record<string, FilterMatch>>> = shallowRef(new Map())
   const transformedItems = computed(() => (
     options?.transform
       ? unref(items).map(item => ([item, options.transform!(item)] as const))

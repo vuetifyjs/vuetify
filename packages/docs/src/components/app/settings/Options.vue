@@ -1,35 +1,30 @@
 <template>
   <div>
-    <settings-header
-      title="theme"
+    <AppSettingsSettingsHeader
       text="theme-message"
+      title="theme"
     />
 
-    <theme-option />
+    <AppSettingsOptionsThemeOption />
+
+    <AppSettingsOptionsOfflineOption />
 
     <v-divider class="mt-4 mb-3" />
 
-    <settings-header
-      title="general"
-      text="general-message"
-    />
+    <AppSettingsOptionsPinOption />
 
-    <code-option />
+    <AppSettingsOptionsCodeOption />
 
-    <api-option />
+    <AppSettingsOptionsApiOption />
 
-    <slash-search-option />
+    <AppSettingsOptionsSlashSearchOption />
 
-    <sync-option />
+    <AppSettingsOptionsAdOption v-if="one.isSubscriber" />
+
+    <AppSettingsDeveloperMode />
   </div>
 </template>
 
-<script setup>
-  // Components
-  import ApiOption from '@/components/app/settings/options/ApiOption.vue'
-  import CodeOption from '@/components/app/settings/options/CodeOption.vue'
-  import SettingsHeader from '@/components/app/settings/SettingsHeader.vue'
-  import SlashSearchOption from '@/components/app/settings/options/SlashSearchOption.vue'
-  import SyncOption from '@/components/app/settings/options/SyncOption.vue'
-  import ThemeOption from '@/components/app/settings/options/ThemeOption.vue'
+<script setup lang="ts">
+  const one = useOneStore()
 </script>

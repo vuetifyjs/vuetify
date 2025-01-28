@@ -1,10 +1,10 @@
 <template>
-  <usage-example
+  <ExamplesUsageExample
     v-model="model"
     :code="code"
-    :script="script"
     :name="name"
     :options="options"
+    :script="script"
   >
     <div>
       <v-infinite-scroll
@@ -19,14 +19,10 @@
         </template>
       </v-infinite-scroll>
     </div>
-  </usage-example>
+  </ExamplesUsageExample>
 </template>
 
 <script setup>
-  // Utilities
-  import { computed, ref } from 'vue'
-  import { propsToString } from '@/util/helpers'
-
   const name = 'v-infinite-scroll'
   const model = ref('default')
   const options = []
@@ -61,7 +57,7 @@
     return `
   <template v-for="(item, index) in items" :key="item">
     <div :class="['pa-2', index % 2 === 0 ? 'bg-grey-lighten-2' : '']">
-      Item #{{ item }}
+      Item number #{{ item }}
     </div>
   </template>
 `
@@ -72,28 +68,26 @@
   })
 
   const script = computed(() => {
-    return `export default {
-  data: () => ({
-    items: [],
-  }),
+    return `<script setup>
+  import { ref } from 'vue'
 
-  methods: {
-    async api () {
-      return new Promise(resolve => {
-        setTimeout(() => {
-          resolve(Array.from({ length: 10 }, (k, v) => v + this.items.at(-1) + 1))
-        }, 1000)
-      })
-    },
-    async load ({ done }) {
-      // Perform API call
-      const res = await this.api()
+  const items = ref(Array.from({ length: 30 }, (k, v) => v + 1))
 
-      this.items.push(...res)
+  async function api () {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        resolve(Array.from({ length: 10 }, (k, v) => v + items.value.at(-1) + 1))
+      }, 1000)
+    })
+  }
+  async function load ({ done }) {
+    // Perform API call
+    const res = await api()
 
-      done('ok')
-    },
-  },
-}`
+    items.value.push(...res)
+
+    done('ok')
+  }
+<` + '/script>'
   })
 </script>

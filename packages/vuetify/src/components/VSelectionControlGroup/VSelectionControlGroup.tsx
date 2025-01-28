@@ -10,11 +10,12 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeThemeProps } from '@/composables/theme'
 
 // Utilities
-import { computed, onScopeDispose, provide, toRef } from 'vue'
-import { deepEqual, genericComponent, getUid, propsFactory, useRender } from '@/util'
+import { computed, onScopeDispose, provide, toRef, useId } from 'vue'
+import { deepEqual, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { InjectionKey, PropType, Ref } from 'vue'
+import type { RippleDirectiveBinding } from '@/directives/ripple'
 import type { GenericProps } from '@/util'
 
 export interface VSelectionGroupContext {
@@ -38,7 +39,7 @@ export const makeSelectionControlGroupProps = propsFactory({
   falseIcon: IconValue,
   trueIcon: IconValue,
   ripple: {
-    type: Boolean,
+    type: [Boolean, Object] as PropType<RippleDirectiveBinding['value']>,
     default: true,
   },
   multiple: {
@@ -85,7 +86,7 @@ export const VSelectionControlGroup = genericComponent<new <T>(
 
   setup (props, { slots }) {
     const modelValue = useProxiedModel(props, 'modelValue')
-    const uid = getUid()
+    const uid = useId()
     const id = computed(() => props.id || `v-selection-control-group-${uid}`)
     const name = computed(() => props.name || id.value)
 

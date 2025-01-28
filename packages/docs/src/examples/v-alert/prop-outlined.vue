@@ -23,10 +23,10 @@
     <br>
 
     <v-alert
-      variant="outlined"
-      type="warning"
-      prominent
       border="top"
+      type="warning"
+      variant="outlined"
+      prominent
     >
       Duis arcu tortor, suscipit eget, imperdiet nec, imperdiet iaculis, ipsum. Suspendisse non nisl sit amet velit hendrerit rutrum. Nullam vel sem. Pellentesque dapibus hendrerit tortor.
     </v-alert>

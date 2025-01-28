@@ -11,14 +11,8 @@ related:
 ---
 
 <script setup>
-  // Components
-  import ThemeVendor from '@/components/doc/ThemeVendor.vue'
-
-  // Utilities
   import { onMounted } from 'vue'
-
-  // Stores
-  import { useShopifyStore } from '@/store/shopify'
+  import { useShopifyStore } from '@/stores/shopify'
 
   const store = useShopifyStore()
 
@@ -31,7 +25,7 @@ related:
 
 Vuetify offers both **free** and **premium** pre-made themes designed to get you started in a flash. Free themes are available to install through Vue CLI or you can simply download the source.
 
-<page-features />
+<PageFeatures />
 
 ---
 
@@ -39,7 +33,7 @@ Vuetify offers both **free** and **premium** pre-made themes designed to get you
 
 The following themes are created and maintained by Vuetify. They are available for free through the Vuetify store.
 
-<ThemeVendor name="Vuetify" />
+<DocThemeVendor name="Vuetify" />
 
 ---
 
@@ -49,7 +43,7 @@ The following themes are created and maintained by Vuetify. They are available f
 
 UI Lib is a collection of free and premium themes built on top of Vuetify.
 
-<ThemeVendor name="UI Lib" />
+<DocThemeVendor name="UI Lib" />
 
 ---
 
@@ -59,7 +53,7 @@ UI Lib is a collection of free and premium themes built on top of Vuetify.
 
 Create web apps and products using WrapPixel's product ready Vue Admin Templates, UI Kits, Themes, Templates and Dashboards.
 
-<ThemeVendor name="WrapPixel" />
+<DocThemeVendor name="WrapPixel" />
 
 ---
 
@@ -69,7 +63,7 @@ Create web apps and products using WrapPixel's product ready Vue Admin Templates
 
 Theme Selection offers an array of visually appealing, user-friendly UI kits and themes. Catering to a variety of platforms, they deliver efficient design solutions for a streamlined digital experience.
 
-<ThemeVendor name="ThemeSelection" />
+<DocThemeVendor name="ThemeSelection" />
 
 <br>
 
@@ -77,7 +71,7 @@ Theme Selection offers an array of visually appealing, user-friendly UI kits and
 
 Craft powerful web applications and products effortlessly with CodedThemes. Explore our ready-to-use Vue Admin Templates, UI Kits, Themes, and Dashboards to streamline your development process and enhance your digital projects.
 
-<ThemeVendor name="CodedThemes" />
+<DocThemeVendor name="CodedThemes" />
 
 <br>
 

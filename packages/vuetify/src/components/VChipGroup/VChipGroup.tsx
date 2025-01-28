@@ -23,6 +23,7 @@ import type { GenericProps } from '@/util'
 export const VChipGroupSymbol = Symbol.for('vuetify:v-chip-group')
 
 export const makeVChipGroupProps = propsFactory({
+  baseColor: String,
   column: Boolean,
   filter: Boolean,
   valueComparator: {
@@ -40,11 +41,11 @@ export const makeVChipGroupProps = propsFactory({
 
 type VChipGroupSlots = {
   default: {
-    isSelected: (id: number) => boolean
-    select: (id: number, value: boolean) => void
+    isSelected: (id: string) => boolean
+    select: (id: string, value: boolean) => void
     next: () => void
     prev: () => void
-    selected: readonly number[]
+    selected: readonly string[]
   }
 }
 
@@ -69,6 +70,7 @@ export const VChipGroup = genericComponent<new <T>(
 
     provideDefaults({
       VChip: {
+        baseColor: toRef(props, 'baseColor'),
         color: toRef(props, 'color'),
         disabled: toRef(props, 'disabled'),
         filter: toRef(props, 'filter'),
@@ -77,8 +79,7 @@ export const VChipGroup = genericComponent<new <T>(
     })
 
     useRender(() => {
-      // TODO: fix type
-      const [slideGroupProps] = VSlideGroup.filterProps(props) as any
+      const slideGroupProps = VSlideGroup.filterProps(props)
 
       return (
         <VSlideGroup

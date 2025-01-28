@@ -1,9 +1,9 @@
 <template>
   <v-sheet
-    border
     class="pt-8 pb-12 px-6 ma-4 mx-auto"
     max-width="350"
     width="100%"
+    border
   >
     <h3 class="text-h6 mb-1">Mobile phone verification</h3>
 
@@ -14,8 +14,8 @@
     <v-otp-input
       v-model="otp"
       class="mt-3 ms-n2"
-      placeholder="0"
       length="4"
+      placeholder="0"
       variant="underlined"
     ></v-otp-input>
 

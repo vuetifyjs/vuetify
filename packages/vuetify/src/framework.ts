@@ -2,24 +2,26 @@
 import { createDate, DateAdapterSymbol, DateOptionsSymbol } from '@/composables/date/date'
 import { createDefaults, DefaultsSymbol } from '@/composables/defaults'
 import { createDisplay, DisplaySymbol } from '@/composables/display'
+import { createGoTo, GoToSymbol } from '@/composables/goto'
 import { createIcons, IconSymbol } from '@/composables/icons'
 import { createLocale, LocaleSymbol } from '@/composables/locale'
 import { createTheme, ThemeSymbol } from '@/composables/theme'
 
 // Utilities
-import { nextTick, reactive } from 'vue'
-import { defineComponent, getUid, IN_BROWSER, mergeDeep } from '@/util'
+import { effectScope, nextTick, reactive } from 'vue'
+import { defineComponent, IN_BROWSER, mergeDeep } from '@/util'
 
 // Types
 import type { App, ComponentPublicInstance, InjectionKey } from 'vue'
 import type { DateOptions } from '@/composables/date'
 import type { DefaultsOptions } from '@/composables/defaults'
 import type { DisplayOptions, SSROptions } from '@/composables/display'
+import type { GoToOptions } from '@/composables/goto'
 import type { IconOptions } from '@/composables/icons'
 import type { LocaleOptions, RtlOptions } from '@/composables/locale'
 import type { ThemeOptions } from '@/composables/theme'
 export * from './composables'
-export type { DateOptions, DateInstance } from '@/composables/date'
+export type { DateOptions, DateInstance, DateModule } from '@/composables/date'
 
 export interface VuetifyOptions {
   aliases?: Record<string, any>
@@ -29,6 +31,7 @@ export interface VuetifyOptions {
   directives?: Record<string, any>
   defaults?: DefaultsOptions
   display?: DisplayOptions
+  goTo?: GoToOptions
   theme?: ThemeOptions
   icons?: IconOptions
   locale?: LocaleOptions & RtlOptions
@@ -46,85 +49,98 @@ export function createVuetify (vuetify: VuetifyOptions = {}) {
     directives = {},
   } = options
 
-  const defaults = createDefaults(options.defaults)
-  const display = createDisplay(options.display, options.ssr)
-  const theme = createTheme(options.theme)
-  const icons = createIcons(options.icons)
-  const locale = createLocale(options.locale)
-  const date = createDate(options.date, locale)
+  const scope = effectScope()
+  return scope.run(() => {
+    const defaults = createDefaults(options.defaults)
+    const display = createDisplay(options.display, options.ssr)
+    const theme = createTheme(options.theme)
+    const icons = createIcons(options.icons)
+    const locale = createLocale(options.locale)
+    const date = createDate(options.date, locale)
+    const goTo = createGoTo(options.goTo, locale)
 
-  const install = (app: App) => {
-    for (const key in directives) {
-      app.directive(key, directives[key])
-    }
+    function install (app: App) {
+      for (const key in directives) {
+        app.directive(key, directives[key])
+      }
 
-    for (const key in components) {
-      app.component(key, components[key])
-    }
+      for (const key in components) {
+        app.component(key, components[key])
+      }
 
-    for (const key in aliases) {
-      app.component(key, defineComponent({
-        ...aliases[key],
-        name: key,
-        aliasName: aliases[key].name,
-      }))
-    }
+      for (const key in aliases) {
+        app.component(key, defineComponent({
+          ...aliases[key],
+          name: key,
+          aliasName: aliases[key].name,
+        }))
+      }
 
-    theme.install(app)
+      const appScope = effectScope()
+      appScope.run(() => {
+        theme.install(app)
+      })
+      app.onUnmount(() => appScope.stop())
 
-    app.provide(DefaultsSymbol, defaults)
-    app.provide(DisplaySymbol, display)
-    app.provide(ThemeSymbol, theme)
-    app.provide(IconSymbol, icons)
-    app.provide(LocaleSymbol, locale)
-    app.provide(DateOptionsSymbol, date.options)
-    app.provide(DateAdapterSymbol, date.instance)
+      app.provide(DefaultsSymbol, defaults)
+      app.provide(DisplaySymbol, display)
+      app.provide(ThemeSymbol, theme)
+      app.provide(IconSymbol, icons)
+      app.provide(LocaleSymbol, locale)
+      app.provide(DateOptionsSymbol, date.options)
+      app.provide(DateAdapterSymbol, date.instance)
+      app.provide(GoToSymbol, goTo)
 
-    if (IN_BROWSER && options.ssr) {
-      if (app.$nuxt) {
-        app.$nuxt.hook('app:suspense:resolve', () => {
-          display.update()
-        })
-      } else {
-        const { mount } = app
-        app.mount = (...args) => {
-          const vm = mount(...args)
-          nextTick(() => display.update())
-          app.mount = mount
-          return vm
+      if (IN_BROWSER && options.ssr) {
+        if (app.$nuxt) {
+          app.$nuxt.hook('app:suspense:resolve', () => {
+            display.update()
+          })
+        } else {
+          const { mount } = app
+          app.mount = (...args) => {
+            const vm = mount(...args)
+            nextTick(() => display.update())
+            app.mount = mount
+            return vm
+          }
         }
+      }
+
+      if (typeof __VUE_OPTIONS_API__ !== 'boolean' || __VUE_OPTIONS_API__) {
+        app.mixin({
+          computed: {
+            $vuetify () {
+              return reactive({
+                defaults: inject.call(this, DefaultsSymbol),
+                display: inject.call(this, DisplaySymbol),
+                theme: inject.call(this, ThemeSymbol),
+                icons: inject.call(this, IconSymbol),
+                locale: inject.call(this, LocaleSymbol),
+                date: inject.call(this, DateAdapterSymbol),
+              })
+            },
+          },
+        })
       }
     }
 
-    getUid.reset()
-
-    if (typeof __VUE_OPTIONS_API__ !== 'boolean' || __VUE_OPTIONS_API__) {
-      app.mixin({
-        computed: {
-          $vuetify () {
-            return reactive({
-              defaults: inject.call(this, DefaultsSymbol),
-              display: inject.call(this, DisplaySymbol),
-              theme: inject.call(this, ThemeSymbol),
-              icons: inject.call(this, IconSymbol),
-              locale: inject.call(this, LocaleSymbol),
-              date: inject.call(this, DateAdapterSymbol),
-            })
-          },
-        },
-      })
+    function unmount () {
+      scope.stop()
     }
-  }
 
-  return {
-    install,
-    defaults,
-    display,
-    theme,
-    icons,
-    locale,
-    date,
-  }
+    return {
+      install,
+      unmount,
+      defaults,
+      display,
+      theme,
+      icons,
+      locale,
+      date,
+      goTo,
+    }
+  })
 }
 
 export const version = __VUETIFY_VERSION__

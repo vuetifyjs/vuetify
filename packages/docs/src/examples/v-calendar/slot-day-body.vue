@@ -9,9 +9,9 @@
         >
           <template v-slot:day-body="{ date, week }">
             <div
-              class="v-current-time"
               :class="{ first: date === week[0].date }"
               :style="{ top: nowY }"
+              class="v-current-time"
             ></div>
           </template>
         </v-calendar>

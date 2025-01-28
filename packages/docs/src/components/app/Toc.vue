@@ -4,16 +4,14 @@
     id="app-toc"
     v-model="tocDrawer"
     color="background"
-    floating
     location="right"
-    sticky
     width="256"
+    floating
+    sticky
   >
-    <template
-      v-if="toc?.length"
-      #prepend
-    >
-      <app-headline
+    <template #prepend>
+      <AppHeadline
+        v-if="frontmatter?.toc?.length"
         class="mt-4 mb-2 ms-4"
         path="contents"
       />
@@ -21,9 +19,9 @@
 
     <ul class="ms-5">
       <router-link
-        v-for="{ to, level, text } in toc"
-        v-slot="{ href }"
+        v-for="{ to, level, text } in frontmatter?.toc"
         :key="text"
+        v-slot="{ href }"
         :to="to"
         custom
       >
@@ -50,7 +48,7 @@
 
     <template #append>
       <v-container>
-        <app-headline
+        <AppHeadline
           v-if="sponsors.length"
           :to="rpath('/introduction/sponsors-and-backers/')"
           class="mb-1 mt-n1 text-high-emphasis text-decoration-none"
@@ -64,11 +62,12 @@
             <v-col
               v-for="sponsor of sponsors"
               :key="sponsor.slug"
+              :cols="sponsor.metadata.tier === -2 ? 12 : 6"
               class="d-inline-flex"
             >
               <sponsor-card
                 :color="dark ? undefined : 'grey-lighten-5'"
-                :max-height="sponsor.metadata.tier === -1 ? 52 : 40"
+                :max-height="sponsor.metadata.tier === -2 ? 52 : 40"
                 :sponsor="sponsor"
               />
             </v-col>
@@ -77,20 +76,18 @@
               <v-btn
                 :to="rpath('/introduction/sponsors-and-backers/')"
                 append-icon="$vuetify"
-                block
                 class="text-none"
                 color="primary"
                 size="large"
-                variant="tonal"
                 text="Support"
+                variant="tonal"
+                block
               />
             </v-col>
           </template>
 
           <v-col v-else cols="12">
             <v-btn
-              block
-              border
               class="text-none border-opacity-50 border-primary"
               color="primary"
               href="https://github.com/sponsors/johnleider"
@@ -100,17 +97,19 @@
               target="_blank"
               text="Your Logo Here"
               variant="tonal"
+              block
+              border
             />
           </v-col>
 
           <v-col
-            v-if="!user.disableAds && spot.spot"
+            v-if="(!user.disableAds || (user.showHouseAds && spot.spot.sponsor === 'Vuetify')) && spot.spot"
             cols="12"
           >
             <a
               :href="spot.spot.href"
-              target="_blank"
               rel="noopener noreferrer sponsored"
+              target="_blank"
               @click="gtagClick('toc', 'promotion', spot.spot.sponsor)"
             >
               <v-img :src="spot.spot.image.url" />
@@ -123,31 +122,6 @@
 </template>
 
 <script setup lang="ts">
-  // Components
-  import SponsorCard from '@/components/sponsor/Card.vue'
-
-  // Composables
-  import { useRoute, useRouter } from 'vue-router'
-  import { useTheme } from 'vuetify'
-
-  // Stores
-  import { useAppStore } from '@/store/app'
-  import { useUserStore } from '@vuetify/one'
-  import { useSponsorsStore } from '@/store/sponsors'
-  import { useSpotStore } from '@/store/spot'
-
-  // Utilities
-  import { computed, nextTick, onMounted, onScopeDispose, ref, watch } from 'vue'
-  import { gtagClick } from '@/util/analytics'
-  import { rpath } from '@/util/routes'
-  import { storeToRefs } from 'pinia'
-
-  type TocItem = {
-    to: string;
-    text: string;
-    level: number;
-  }
-
   const { toc: tocDrawer, scrolling } = storeToRefs(useAppStore())
 
   const route = useRoute()
@@ -155,8 +129,7 @@
   const spot = useSpotStore()
   const theme = useTheme()
   const user = useUserStore()
-
-  const routeToc = computed(() => route.meta.toc as TocItem[] | undefined)
+  const frontmatter = useFrontmatter()
 
   const activeStack = [] as string[]
   const activeItem = ref('')
@@ -168,7 +141,7 @@
         activeStack.splice(activeStack.indexOf(entry.target.id), 1)
       }
     })
-    activeItem.value = activeStack.at(-1) || activeItem.value || routeToc.value?.[0]?.to.slice(1) || ''
+    activeItem.value = activeStack.at(-1) || activeItem.value || frontmatter.value?.toc?.[0]?.to.slice(1) || ''
   }, { rootMargin: '-10% 0px -75%' })
 
   async function observeToc () {
@@ -177,13 +150,13 @@
     activeItem.value = ''
     observer.disconnect()
     await nextTick()
-    routeToc.value?.forEach(v => {
+    frontmatter.value?.toc?.forEach(v => {
       const el = document.querySelector(v.to)
       el && observer.observe(el)
     })
   }
 
-  watch(routeToc, observeToc)
+  watch(() => frontmatter.value?.toc, observeToc)
   onMounted(() => {
     observeToc()
   })
@@ -197,13 +170,14 @@
     if (!val || internalScrolling) return
 
     scrolling.value = true
+    const query = route.query
 
-    if (val === routeToc.value?.[0]?.to.slice(1) && route.hash) {
-      router.replace({ path: route.path })
+    if (val === frontmatter.value?.toc?.[0]?.to.slice(1) && route.hash) {
+      router.replace({ path: route.path, query })
     } else {
-      const toc = routeToc.value?.find(v => v.to.slice(1) === val)
+      const toc = frontmatter.value?.toc?.find(v => v.to.slice(1) === val)
       if (toc) {
-        await router.replace({ path: route.path, hash: toc.to })
+        await router.replace({ path: route.path, hash: toc.to, query })
       }
     }
     clearTimeout(timeout)
@@ -223,8 +197,6 @@
   }
 
   const sponsorStore = useSponsorsStore()
-
-  const toc = computed(() => route.meta.toc as TocItem[])
 
   const sponsors = computed(() => (
     sponsorStore.sponsors

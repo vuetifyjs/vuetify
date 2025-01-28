@@ -5,6 +5,7 @@
 
 $color-pack: true !default;
 $reset: true !default;
+$layers: false !default;
 
 $body-font-family: 'Roboto', sans-serif !default;
 $font-size-root: 1rem !default;
@@ -12,12 +13,16 @@ $line-height-root: 1.5 !default;
 $border-color-root: rgba(var(--v-border-color), var(--v-border-opacity)) !default;
 $border-radius-root: 4px !default;
 $border-style-root: solid !default;
+$border-width-root: thin !default;
+$transition-duration-root: 0.3s !default;
+$transition-move-duration-root: 0.5s !default;
 
 $borders: () !default;
 $borders: map-deep-merge(
   (
     0: 0,
-    null: thin,
+    null: $border-width-root,
+    thin: $border-width-root,
     sm: 1px,
     md: 2px,
     lg: 4px,
@@ -44,6 +49,30 @@ $border-opacities: map-deep-merge(
     100: 1
   ),
   $border-opacities
+);
+
+$opacities: () !default;
+$opacities: map-deep-merge(
+  (
+    hover: var(--v-hover-opacity),
+    focus: var(--v-focus-opacity),
+    selected: var(--v-selected-opacity),
+    activated: var(--v-activated-opacity),
+    pressed: var(--v-pressed-opacity),
+    dragged: var(--v-dragged-opacity),
+    0: 0,
+    10: .1,
+    20: .2,
+    30: .3,
+    40: .4,
+    50: .5,
+    60: .6,
+    70: .7,
+    80: .8,
+    90: .9,
+    100: 1
+  ),
+  $opacities
 );
 
 $states: () !default;
@@ -179,7 +208,7 @@ $typography: map-deep-merge(
     'h1': (
       'size': 6rem,
       'weight': 300,
-      'line-height': 6rem,
+      'line-height': 1,
       'letter-spacing': -.015625em,
       'font-family': $heading-font-family,
       'text-transform': none
@@ -187,7 +216,7 @@ $typography: map-deep-merge(
     'h2': (
       'size': 3.75rem,
       'weight': 300,
-      'line-height': 3.75rem,
+      'line-height': 1,
       'letter-spacing': -.0083333333em,
       'font-family': $heading-font-family,
       'text-transform': none
@@ -195,7 +224,7 @@ $typography: map-deep-merge(
     'h3': (
       'size': 3rem,
       'weight': 400,
-      'line-height': 3.125rem,
+      'line-height': 1.05,
       'letter-spacing': normal,
       'font-family': $heading-font-family,
       'text-transform': none
@@ -203,7 +232,7 @@ $typography: map-deep-merge(
     'h4': (
       'size': 2.125rem,
       'weight': 400,
-      'line-height': 2.5rem,
+      'line-height': 1.175,
       'letter-spacing': .0073529412em,
       'font-family': $heading-font-family,
       'text-transform': none
@@ -211,7 +240,7 @@ $typography: map-deep-merge(
     'h5': (
       'size': 1.5rem,
       'weight': 400,
-      'line-height': 2rem,
+      'line-height': 1.333,
       'letter-spacing': normal,
       'font-family': $heading-font-family,
       'text-transform': none
@@ -219,7 +248,7 @@ $typography: map-deep-merge(
     'h6': (
       'size': 1.25rem,
       'weight': 500,
-      'line-height': 2rem,
+      'line-height': 1.6,
       'letter-spacing': .0125em,
       'font-family': $heading-font-family,
       'text-transform': none
@@ -227,7 +256,7 @@ $typography: map-deep-merge(
     'subtitle-1': (
       'size': 1rem,
       'weight': normal,
-      'line-height': 1.75rem,
+      'line-height': 1.75,
       'letter-spacing': .009375em,
       'font-family': $body-font-family,
       'text-transform': none
@@ -235,7 +264,7 @@ $typography: map-deep-merge(
     'subtitle-2': (
       'size': .875rem,
       'weight': 500,
-      'line-height': 1.375rem,
+      'line-height': 1.6,
       'letter-spacing': .0071428571em,
       'font-family': $body-font-family,
       'text-transform': none
@@ -243,7 +272,7 @@ $typography: map-deep-merge(
     'body-1': (
       'size': 1rem,
       'weight': 400,
-      'line-height': 1.5rem,
+      'line-height': 1.5,
       'letter-spacing': .03125em,
       'font-family': $body-font-family,
       'text-transform': none
@@ -251,7 +280,7 @@ $typography: map-deep-merge(
     'body-2': (
       'size': .875rem,
       'weight': 400,
-      'line-height': 1.25rem,
+      'line-height': 1.425,
       'letter-spacing': .0178571429em,
       'font-family': $body-font-family,
       'text-transform': none
@@ -259,7 +288,7 @@ $typography: map-deep-merge(
     'button': (
       'size': .875rem,
       'weight': 500,
-      'line-height': 2.25rem,
+      'line-height': 2.6,
       'letter-spacing': .0892857143em,
       'font-family': $body-font-family,
       'text-transform': uppercase
@@ -267,7 +296,7 @@ $typography: map-deep-merge(
     'caption': (
       'size': .75rem,
       'weight': 400,
-      'line-height': 1.25rem,
+      'line-height': 1.667,
       'letter-spacing': .0333333333em,
       'font-family': $body-font-family,
       'text-transform': none
@@ -275,7 +304,7 @@ $typography: map-deep-merge(
     'overline': (
       'size': .75rem,
       'weight': 500,
-      'line-height': 2rem,
+      'line-height': 2.667,
       'letter-spacing': .1666666667em,
       'font-family': $body-font-family,
       'text-transform': uppercase
@@ -288,7 +317,14 @@ $flat-typography: () !default;
 @each $type, $values in $typography {
   $flat-typography: map-deep-merge(
     $flat-typography,
-    (#{$type}: map.values($values))
+    (#{$type}: (
+      map.get($values, 'size'),
+      map.get($values, 'weight'),
+      map.get($values, 'line-height'),
+      map.get($values, 'letter-spacing'),
+      map.get($values, 'font-family'),
+      map.get($values, 'text-transform'),
+    ))
   );
 }
 

@@ -5,9 +5,9 @@
       label="Show messages"
     ></v-switch>
     <v-input
+      :messages="messages"
       hint="I am hint"
       persistent-hint
-      :messages="messages"
     >
       Input
     </v-input>

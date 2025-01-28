@@ -10,26 +10,12 @@
 </template>
 
 <script setup>
-  // Utilities
-  import { computed } from 'vue'
-  import { rpath } from '@/util/routes'
-
   const tabs = computed(() => {
     return [
       {
         prependIcon: 'mdi-view-dashboard-outline',
-        text: 'Dashboard',
+        text: 'My Dashboard',
         to: rpath('/user/dashboard/'),
-      },
-      {
-        prependIcon: 'mdi-cog-outline',
-        text: 'Options',
-        to: rpath('/user/options/'),
-      },
-      {
-        prependIcon: '$vuetify',
-        text: 'Subscriptions',
-        to: rpath('/user/subscriptions/'),
       },
     ]
   })

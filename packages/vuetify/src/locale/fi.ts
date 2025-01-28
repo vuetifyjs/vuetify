@@ -2,6 +2,7 @@ export default {
   badge: 'Infopiste',
   open: 'Open',
   close: 'Sulje',
+  dismiss: 'Dismiss',
   confirmEdit: {
     ok: 'OK',
     cancel: 'Cancel',
@@ -68,9 +69,15 @@ export default {
     counter: '{0} tiedostoa',
     counterSize: '{0} tiedostoa ({1} yhteensä)',
   },
+  fileUpload: {
+    title: 'Drag and drop files here',
+    divider: 'or',
+    browse: 'Browse Files',
+  },
   timePicker: {
     am: 'ap.',
     pm: 'ip.',
+    title: 'Select Time',
   },
   pagination: {
     ariaLabel: {

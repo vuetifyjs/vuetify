@@ -4,6 +4,7 @@ import './VField.sass'
 // Components
 import { VFieldLabel } from './VFieldLabel'
 import { VExpandXTransition } from '@/components/transitions'
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { useInputIcon } from '@/components/VInput/InputIcon'
 
 // Composables
@@ -17,13 +18,12 @@ import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
-import { computed, ref, toRef, watch } from 'vue'
+import { computed, ref, toRef, useId, watch } from 'vue'
 import {
   animate,
   convertToUnit,
   EventProp,
   genericComponent,
-  getUid,
   isOn,
   nullifyTransforms,
   pick,
@@ -96,7 +96,7 @@ export const makeVFieldProps = propsFactory({
 }, 'VField')
 
 export type VFieldSlots = {
-  clear: never
+  clear: DefaultInputSlot & { props: Record<string, any> }
   'prepend-inner': DefaultInputSlot
   'append-inner': DefaultInputSlot
   label: DefaultInputSlot & { label: string | undefined, props: Record<string, any> }
@@ -138,7 +138,7 @@ export const VField = genericComponent<new <T>(
     const isActive = computed(() => props.dirty || props.active)
     const hasLabel = computed(() => !props.singleLine && !!(props.label || slots.label))
 
-    const uid = getUid()
+    const uid = useId()
     const id = computed(() => props.id || `input-${uid}`)
     const messagesId = computed(() => `${id.value}-messages`)
 
@@ -210,10 +210,19 @@ export const VField = genericComponent<new <T>(
       }
     }
 
+    function onKeydownClear (e: KeyboardEvent) {
+      if (e.key !== 'Enter' && e.key !== ' ') return
+
+      e.preventDefault()
+      e.stopPropagation()
+
+      props['onClick:clear']?.(new MouseEvent('click'))
+    }
+
     useRender(() => {
       const isOutlined = props.variant === 'outlined'
-      const hasPrepend = (slots['prepend-inner'] || props.prependInnerIcon)
-      const hasClear = !!(props.clearable || slots.clear)
+      const hasPrepend = !!(slots['prepend-inner'] || props.prependInnerIcon)
+      const hasClear = !!(props.clearable || slots.clear) && !props.disabled
       const hasAppend = !!(slots['append-inner'] || props.appendInnerIcon || hasClear)
       const label = () => (
         slots.label
@@ -293,9 +302,11 @@ export const VField = genericComponent<new <T>(
               </VFieldLabel>
             )}
 
-            <VFieldLabel ref={ labelRef } for={ id.value }>
-              { label() }
-            </VFieldLabel>
+            { hasLabel.value && (
+              <VFieldLabel key="label" ref={ labelRef } for={ id.value }>
+                { label() }
+              </VFieldLabel>
+            )}
 
             { slots.default?.({
               ...slotProps.value,
@@ -319,10 +330,32 @@ export const VField = genericComponent<new <T>(
                   e.stopPropagation()
                 }}
               >
+              <VDefaultsProvider
+                defaults={{
+                  VIcon: {
+                    icon: props.clearIcon,
+                  },
+                }}
+              >
                 { slots.clear
-                  ? slots.clear()
-                  : <InputIcon name="clear" />
-                }
+                  ? slots.clear({
+                    ...slotProps.value,
+                    props: {
+                      onKeydown: onKeydownClear,
+                      onFocus: focus,
+                      onBlur: blur,
+                      onClick: props['onClick:clear'],
+                    },
+                  })
+                  : (
+                    <InputIcon
+                      name="clear"
+                      onKeydown={ onKeydownClear }
+                      onFocus={ focus }
+                      onBlur={ blur }
+                    />
+                  )}
+                </VDefaultsProvider>
               </div>
             </VExpandXTransition>
           )}

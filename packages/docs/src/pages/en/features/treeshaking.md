@@ -7,15 +7,17 @@ related:
   - /features/sass-variables/
   - /features/blueprints/
   - /introduction/why-vuetify/
+features:
+  report: true
 ---
 
 # Treeshaking
 
 Being a component framework, Vuetify will always grow horizontally. Depending on your project, a small bundle size may be a requirement.
 
-<page-features />
+<PageFeatures />
 
-<entry />
+<PromotedEntry />
 
 ## Automatic treeshaking
 
@@ -87,7 +89,7 @@ And that's it! Vuetify components and directives will be automatically imported 
 - import * as directives from 'vuetify/directives'
 ```
 
-<promoted />
+<PromotedPromoted />
 
 ## Manual imports
 
@@ -177,7 +179,7 @@ Dynamic components using `<component>` can be registered locally:
   import { VChip } from 'vuetify/components/VChip'
   import { shallowRef } from 'vue'
 
-  const btn = shallowRef(false)
+  const button = shallowRef(false)
 </script>
 ```
 

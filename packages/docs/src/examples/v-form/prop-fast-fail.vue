@@ -1,19 +1,19 @@
 <template>
-  <v-sheet width="300" class="mx-auto">
+  <v-sheet class="mx-auto" width="300">
     <v-form fast-fail @submit.prevent>
       <v-text-field
         v-model="firstName"
-        label="First name"
         :rules="firstNameRules"
+        label="First name"
       ></v-text-field>
 
       <v-text-field
         v-model="lastName"
-        label="Last name"
         :rules="lastNameRules"
+        label="Last name"
       ></v-text-field>
 
-      <v-btn type="submit" block class="mt-2">Submit</v-btn>
+      <v-btn class="mt-2" type="submit" block>Submit</v-btn>
     </v-form>
   </v-sheet>
 </template>
@@ -24,7 +24,7 @@
   const firstName = ref('')
   const firstNameRules = [
     value => {
-      if (value?.length > 3) return true
+      if (value?.length >= 3) return true
       return 'First name must be at least 3 characters.'
     },
   ]
@@ -44,7 +44,7 @@
       firstName: '',
       firstNameRules: [
         value => {
-          if (value?.length > 3) return true
+          if (value?.length >= 3) return true
 
           return 'First name must be at least 3 characters.'
         },

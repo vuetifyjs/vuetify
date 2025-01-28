@@ -2,6 +2,7 @@ export default {
   badge: 'باج',
   open: 'Open',
   close: 'داخستن',
+  dismiss: 'Dismiss',
   confirmEdit: {
     ok: 'OK',
     cancel: 'Cancel',
@@ -68,9 +69,15 @@ export default {
     counter: '{0} فایل',
     counterSize: '{0} فایل ({1} لە کۆی گشتی)',
   },
+  fileUpload: {
+    title: 'Drag and drop files here',
+    divider: 'or',
+    browse: 'Browse Files',
+  },
   timePicker: {
     am: 'پێش نیوەڕۆژ',
     pm: 'دوای نیوەڕۆژ',
+    title: 'Select Time',
   },
   pagination: {
     ariaLabel: {

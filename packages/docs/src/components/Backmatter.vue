@@ -3,24 +3,14 @@
     id="ready-for-more"
     class="mt-16"
   >
-    <ready-for-more />
+    <DocReadyForMore />
 
-    <related-pages />
+    <DocRelatedPages />
 
-    <app-divider />
+    <AppDivider />
 
-    <up-next />
+    <DocUpNext />
 
-    <promoted />
-
-    <contribute />
+    <DocContribute />
   </section>
 </template>
-
-<script setup>
-  // Components
-  import Contribute from '@/components/doc/Contribute.vue'
-  import ReadyForMore from '@/components/doc/ReadyForMore.vue'
-  import RelatedPages from '@/components/doc/RelatedPages.vue'
-  import UpNext from '@/components/doc/UpNext.vue'
-</script>

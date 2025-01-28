@@ -2,6 +2,7 @@ export default {
   badge: 'Bedž',
   open: 'Open',
   close: 'Zatvori',
+  dismiss: 'Dismiss',
   confirmEdit: {
     ok: 'OK',
     cancel: 'Cancel',
@@ -68,9 +69,15 @@ export default {
     counter: 'Odabranih datoteka: {0}',
     counterSize: 'Odabranih datoteka: {0} ({1} ukupno)',
   },
+  fileUpload: {
+    title: 'Drag and drop files here',
+    divider: 'or',
+    browse: 'Browse Files',
+  },
   timePicker: {
     am: 'AM',
     pm: 'PM',
+    title: 'Select Time',
   },
   pagination: {
     ariaLabel: {

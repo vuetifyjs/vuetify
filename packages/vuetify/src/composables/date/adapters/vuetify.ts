@@ -160,13 +160,14 @@ const firstDay: Record<string, number> = {
   ZW: 0,
 }
 
-function getWeekArray (date: Date, locale: string) {
+function getWeekArray (date: Date, locale: string, firstDayOfWeek?: number) {
   const weeks = []
   let currentWeek = []
   const firstDayOfMonth = startOfMonth(date)
   const lastDayOfMonth = endOfMonth(date)
-  const firstDayWeekIndex = (firstDayOfMonth.getDay() - firstDay[locale.slice(-2).toUpperCase()] + 7) % 7
-  const lastDayWeekIndex = (lastDayOfMonth.getDay() - firstDay[locale.slice(-2).toUpperCase()] + 7) % 7
+  const first = firstDayOfWeek ?? firstDay[locale.slice(-2).toUpperCase()] ?? 0
+  const firstDayWeekIndex = (firstDayOfMonth.getDay() - first + 7) % 7
+  const lastDayWeekIndex = (lastDayOfMonth.getDay() - first + 7) % 7
 
   for (let i = 0; i < firstDayWeekIndex; i++) {
     const adjacentDay = new Date(firstDayOfMonth)
@@ -200,17 +201,20 @@ function getWeekArray (date: Date, locale: string) {
   return weeks
 }
 
-function startOfWeek (date: Date) {
+function startOfWeek (date: Date, locale: string, firstDayOfWeek?: number) {
+  const day = firstDayOfWeek ?? firstDay[locale.slice(-2).toUpperCase()] ?? 0
+
   const d = new Date(date)
-  while (d.getDay() !== 0) {
+  while (d.getDay() !== day) {
     d.setDate(d.getDate() - 1)
   }
   return d
 }
 
-function endOfWeek (date: Date) {
+function endOfWeek (date: Date, locale: string) {
   const d = new Date(date)
-  while (d.getDay() !== 6) {
+  const lastDay = ((firstDay[locale.slice(-2).toUpperCase()] ?? 0) + 6) % 7
+  while (d.getDay() !== lastDay) {
     d.setDate(d.getDate() + 1)
   }
   return d
@@ -255,15 +259,13 @@ function date (value?: any): Date | null {
 
 const sundayJanuarySecond2000 = new Date(2000, 0, 2)
 
-// The number of letters returned by getWeekday() varies by date library
-// So we've opted for 3-letter abbreviations for all locales
-function getWeekdays (locale: string) {
-  const daysFromSunday = firstDay[locale.slice(-2).toUpperCase()]
+function getWeekdays (locale: string, firstDayOfWeek?: number) {
+  const daysFromSunday = firstDayOfWeek ?? firstDay[locale.slice(-2).toUpperCase()] ?? 0
 
   return createRange(7).map(i => {
     const weekday = new Date(sundayJanuarySecond2000)
     weekday.setDate(sundayJanuarySecond2000.getDate() + daysFromSunday + i)
-    return new Intl.DateTimeFormat(locale, { weekday: 'short' }).format(weekday)
+    return new Intl.DateTimeFormat(locale, { weekday: 'narrow' }).format(weekday)
   })
 }
 
@@ -282,23 +284,24 @@ function format (
 
   let options: Intl.DateTimeFormatOptions = {}
   switch (formatString) {
+    case 'fullDate':
+      options = { year: 'numeric', month: 'long', day: 'numeric' }
+      break
     case 'fullDateWithWeekday':
-      options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }
+      options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
       break
-    case 'hours12h':
-      options = { hour: 'numeric', hour12: true }
-      break
+    case 'normalDate':
+      const day = newDate.getDate()
+      const month = new Intl.DateTimeFormat(locale, { month: 'long' }).format(newDate)
+      return `${day} ${month}`
     case 'normalDateWithWeekday':
       options = { weekday: 'short', day: 'numeric', month: 'short' }
       break
-    case 'keyboardDate':
-      options = { day: '2-digit', month: '2-digit', year: 'numeric' }
+    case 'shortDate':
+      options = { month: 'short', day: 'numeric' }
       break
-    case 'monthAndDate':
-      options = { month: 'long', day: 'numeric' }
-      break
-    case 'monthAndYear':
-      options = { month: 'long', year: 'numeric' }
+    case 'year':
+      options = { year: 'numeric' }
       break
     case 'month':
       options = { month: 'long' }
@@ -306,17 +309,61 @@ function format (
     case 'monthShort':
       options = { month: 'short' }
       break
-    case 'dayOfMonth':
-      options = { day: 'numeric' }
+    case 'monthAndYear':
+      options = { month: 'long', year: 'numeric' }
       break
-    case 'shortDate':
-      options = { year: '2-digit', month: 'numeric', day: 'numeric' }
+    case 'monthAndDate':
+      options = { month: 'long', day: 'numeric' }
+      break
+    case 'weekday':
+      options = { weekday: 'long' }
       break
     case 'weekdayShort':
       options = { weekday: 'short' }
       break
-    case 'year':
-      options = { year: 'numeric' }
+    case 'dayOfMonth':
+      return new Intl.NumberFormat(locale).format(newDate.getDate())
+    case 'hours12h':
+      options = { hour: 'numeric', hour12: true }
+      break
+    case 'hours24h':
+      options = { hour: 'numeric', hour12: false }
+      break
+    case 'minutes':
+      options = { minute: 'numeric' }
+      break
+    case 'seconds':
+      options = { second: 'numeric' }
+      break
+    case 'fullTime':
+      options = { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true }
+      break
+    case 'fullTime12h':
+      options = { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true }
+      break
+    case 'fullTime24h':
+      options = { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: false }
+      break
+    case 'fullDateTime':
+      options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true }
+      break
+    case 'fullDateTime12h':
+      options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true }
+      break
+    case 'fullDateTime24h':
+      options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: false }
+      break
+    case 'keyboardDate':
+      options = { year: 'numeric', month: '2-digit', day: '2-digit' }
+      break
+    case 'keyboardDateTime':
+      options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: false }
+      break
+    case 'keyboardDateTime12h':
+      options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true }
+      break
+    case 'keyboardDateTime24h':
+      options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: false }
       break
     default:
       options = customFormat ?? { timeZone: 'UTC', timeZoneName: 'short' }
@@ -366,6 +413,7 @@ function addWeeks (date: Date, amount: number) {
 
 function addMonths (date: Date, amount: number) {
   const d = new Date(date)
+  d.setDate(1)
   d.setMonth(d.getMonth() + amount)
   return d
 }
@@ -378,8 +426,16 @@ function getMonth (date: Date) {
   return date.getMonth()
 }
 
+function getDate (date: Date) {
+  return date.getDate()
+}
+
 function getNextMonth (date: Date) {
   return new Date(date.getFullYear(), date.getMonth() + 1, 1)
+}
+
+function getPreviousMonth (date: Date) {
+  return new Date(date.getFullYear(), date.getMonth() - 1, 1)
 }
 
 function getHours (date: Date) {
@@ -411,6 +467,10 @@ function isAfter (date: Date, comparing: Date) {
   return date.getTime() > comparing.getTime()
 }
 
+function isAfterDay (date: Date, comparing: Date): boolean {
+  return isAfter(startOfDay(date), startOfDay(comparing))
+}
+
 function isBefore (date: Date, comparing: Date) {
   return date.getTime() < comparing.getTime()
 }
@@ -430,15 +490,35 @@ function isSameMonth (date: Date, comparing: Date) {
     date.getFullYear() === comparing.getFullYear()
 }
 
+function isSameYear (date: Date, comparing: Date) {
+  return date.getFullYear() === comparing.getFullYear()
+}
+
 function getDiff (date: Date, comparing: Date | string, unit?: string) {
   const d = new Date(date)
   const c = new Date(comparing)
 
-  if (unit === 'month') {
-    return d.getMonth() - c.getMonth() + (d.getFullYear() - c.getFullYear()) * 12
+  switch (unit) {
+    case 'years':
+      return d.getFullYear() - c.getFullYear()
+    case 'quarters':
+      return Math.floor((d.getMonth() - c.getMonth() + (d.getFullYear() - c.getFullYear()) * 12) / 4)
+    case 'months':
+      return d.getMonth() - c.getMonth() + (d.getFullYear() - c.getFullYear()) * 12
+    case 'weeks':
+      return Math.floor((d.getTime() - c.getTime()) / (1000 * 60 * 60 * 24 * 7))
+    case 'days':
+      return Math.floor((d.getTime() - c.getTime()) / (1000 * 60 * 60 * 24))
+    case 'hours':
+      return Math.floor((d.getTime() - c.getTime()) / (1000 * 60 * 60))
+    case 'minutes':
+      return Math.floor((d.getTime() - c.getTime()) / (1000 * 60))
+    case 'seconds':
+      return Math.floor((d.getTime() - c.getTime()) / 1000)
+    default: {
+      return d.getTime() - c.getTime()
+    }
   }
-
-  return Math.floor((d.getTime() - c.getTime()) / (1000 * 60 * 60 * 24))
 }
 
 function setHours (date: Date, count: number) {
@@ -459,6 +539,12 @@ function setMonth (date: Date, count: number) {
   return d
 }
 
+function setDate (date: Date, day: number) {
+  const d = new Date(date)
+  d.setDate(day)
+  return d
+}
+
 function setYear (date: Date, year: number) {
   const d = new Date(date)
   d.setFullYear(year)
@@ -466,7 +552,7 @@ function setYear (date: Date, year: number) {
 }
 
 function startOfDay (date: Date) {
-  return new Date(date.getFullYear(), date.getMonth(), date.getDate())
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0, 0)
 }
 
 function endOfDay (date: Date) {
@@ -518,16 +604,16 @@ export class VuetifyDateAdapter implements DateAdapter<Date> {
     return addMonths(date, amount)
   }
 
-  getWeekArray (date: Date) {
-    return getWeekArray(date, this.locale)
+  getWeekArray (date: Date, firstDayOfWeek?: number | string) {
+    return getWeekArray(date, this.locale, firstDayOfWeek ? Number(firstDayOfWeek) : undefined)
   }
 
-  startOfWeek (date: Date): Date {
-    return startOfWeek(date)
+  startOfWeek (date: Date, firstDayOfWeek?: number | string): Date {
+    return startOfWeek(date, this.locale, firstDayOfWeek ? Number(firstDayOfWeek) : undefined)
   }
 
   endOfWeek (date: Date): Date {
-    return endOfWeek(date)
+    return endOfWeek(date, this.locale)
   }
 
   startOfMonth (date: Date) {
@@ -558,6 +644,10 @@ export class VuetifyDateAdapter implements DateAdapter<Date> {
     return isAfter(date, comparing)
   }
 
+  isAfterDay (date: Date, comparing: Date) {
+    return isAfterDay(date, comparing)
+  }
+
   isBefore (date: Date, comparing: Date) {
     return !isAfter(date, comparing) && !isEqual(date, comparing)
   }
@@ -568,6 +658,10 @@ export class VuetifyDateAdapter implements DateAdapter<Date> {
 
   isSameMonth (date: Date, comparing: Date) {
     return isSameMonth(date, comparing)
+  }
+
+  isSameYear (date: Date, comparing: Date) {
+    return isSameYear(date, comparing)
   }
 
   setMinutes (date: Date, count: number) {
@@ -582,6 +676,10 @@ export class VuetifyDateAdapter implements DateAdapter<Date> {
     return setMonth(date, count)
   }
 
+  setDate (date: Date, day: number): Date {
+    return setDate(date, day)
+  }
+
   setYear (date: Date, year: number) {
     return setYear(date, year)
   }
@@ -590,8 +688,8 @@ export class VuetifyDateAdapter implements DateAdapter<Date> {
     return getDiff(date, comparing, unit)
   }
 
-  getWeekdays () {
-    return getWeekdays(this.locale)
+  getWeekdays (firstDayOfWeek?: number | string) {
+    return getWeekdays(this.locale, firstDayOfWeek ? Number(firstDayOfWeek) : undefined)
   }
 
   getYear (date: Date) {
@@ -602,8 +700,16 @@ export class VuetifyDateAdapter implements DateAdapter<Date> {
     return getMonth(date)
   }
 
+  getDate (date: Date) {
+    return getDate(date)
+  }
+
   getNextMonth (date: Date) {
     return getNextMonth(date)
+  }
+
+  getPreviousMonth (date: Date) {
+    return getPreviousMonth(date)
   }
 
   getHours (date: Date) {

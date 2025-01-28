@@ -20,12 +20,12 @@
         <v-responsive max-width="160">
           <v-text-field
             density="compact"
-            flat
-            hide-details
             label="Search"
             rounded="lg"
-            single-line
             variant="solo-filled"
+            flat
+            hide-details
+            single-line
           ></v-text-field>
         </v-responsive>
       </v-container>
@@ -40,16 +40,16 @@
                 <v-list-item
                   v-for="n in 5"
                   :key="n"
-                  link
                   :title="`List Item ${n}`"
+                  link
                 ></v-list-item>
 
                 <v-divider class="my-2"></v-divider>
 
                 <v-list-item
                   color="grey-lighten-4"
-                  link
                   title="Refresh"
+                  link
                 ></v-list-item>
               </v-list>
             </v-sheet>

@@ -9,20 +9,6 @@
 <script setup lang="ts">
   // Composables
   import { useHead } from '@unhead/vue'
-  import { useI18n } from 'vue-i18n'
-  import { useRoute, useRouter } from 'vue-router'
-  import { useTheme } from 'vuetify'
-
-  // Stores
-  import { useAuthStore, useUserStore } from '@vuetify/one'
-
-  // Utilities
-  import { computed, nextTick, onBeforeMount, ref, watch, watchEffect } from 'vue'
-  import { genAppMetaInfo } from '@/util/metadata'
-  import { getMatchMedia } from '@/util/helpers'
-
-  // Globals
-  import { IN_BROWSER } from '@/util/globals'
 
   const user = useUserStore()
   const router = useRouter()
@@ -30,15 +16,16 @@
   const theme = useTheme()
   const { locale } = useI18n()
   const auth = useAuthStore()
+  const frontmatter = useFrontmatter()
 
   const path = computed(() => route.path.replace(`/${locale.value}/`, ''))
 
   const meta = computed(() => {
     return genAppMetaInfo({
       title: `${route.meta.title}${path.value === '' ? '' : ' — Vuetify'}`,
-      description: route.meta.description,
-      keywords: route.meta.keywords,
-      assets: route.meta.assets,
+      description: frontmatter.value?.meta.description,
+      keywords: frontmatter.value?.meta.keywords,
+      assets: frontmatter.value?.assets,
     })
   })
 
@@ -64,7 +51,8 @@
     // set current route lang if root
     const currentRoute = router.currentRoute.value
     if (currentRoute.path === '/') {
-      router.replace(`/${locale.value}`)
+      const query = currentRoute.query
+      router.replace({ path: `/${locale.value}`, query })
     }
   })
 

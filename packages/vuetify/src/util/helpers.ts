@@ -1,5 +1,5 @@
 // Utilities
-import { capitalize, Comment, computed, Fragment, isVNode, reactive, toRefs, unref, watchEffect } from 'vue'
+import { capitalize, Comment, computed, Fragment, isVNode, reactive, readonly, shallowRef, toRefs, unref, watchEffect } from 'vue'
 import { IN_BROWSER } from '@/util/globals'
 
 // Types
@@ -14,6 +14,7 @@ import type {
   VNode,
   VNodeArrayChildren,
   VNodeChild,
+  WatchOptions,
 } from 'vue'
 
 export function getNestedValue (obj: any, path: (string | number)[], fallback?: any): any {
@@ -130,8 +131,16 @@ export function convertToUnit (str: string | number | null | undefined, unit = '
   }
 }
 
-export function isObject (obj: any): obj is object {
+export function isObject (obj: any): obj is Record<string, any> {
   return obj !== null && typeof obj === 'object' && !Array.isArray(obj)
+}
+
+export function isPlainObject (obj: any): obj is Record<string, any> {
+  let proto
+  return obj !== null && typeof obj === 'object' && (
+    (proto = Object.getPrototypeOf(obj)) === Object.prototype ||
+    proto === null
+  )
 }
 
 export function refElement (obj?: ComponentPublicInstance<any> | HTMLElement): HTMLElement | undefined {
@@ -486,17 +495,14 @@ export function mergeDeep (
     const targetProperty = target[key]
 
     // Only continue deep merging if
-    // both properties are objects
-    if (
-      isObject(sourceProperty) &&
-      isObject(targetProperty)
-    ) {
+    // both properties are plain objects
+    if (isPlainObject(sourceProperty) && isPlainObject(targetProperty)) {
       out[key] = mergeDeep(sourceProperty, targetProperty, arrayFn)
 
       continue
     }
 
-    if (Array.isArray(sourceProperty) && Array.isArray(targetProperty) && arrayFn) {
+    if (arrayFn && Array.isArray(sourceProperty) && Array.isArray(targetProperty)) {
       out[key] = arrayFn(sourceProperty, targetProperty)
 
       continue
@@ -539,6 +545,8 @@ export function findChildrenWithProvide (
 
   if (Array.isArray(vnode)) {
     return vnode.map(child => findChildrenWithProvide(key, child)).flat(1)
+  } else if (vnode.suspense) {
+    return findChildrenWithProvide(key, vnode.ssContent!)
   } else if (Array.isArray(vnode.children)) {
     return vnode.children.map(child => findChildrenWithProvide(key, child)).flat(1)
   } else if (vnode.component) {
@@ -707,4 +715,59 @@ export function defer (timeout: number, cb: () => void) {
   const timeoutId = window.setTimeout(cb, timeout)
 
   return () => window.clearTimeout(timeoutId)
+}
+
+export function eagerComputed<T> (fn: () => T, options?: WatchOptions): Readonly<Ref<T>> {
+  const result = shallowRef()
+
+  watchEffect(() => {
+    result.value = fn()
+  }, {
+    flush: 'sync',
+    ...options,
+  })
+
+  return readonly(result)
+}
+
+export function isClickInsideElement (event: MouseEvent, targetDiv: HTMLElement) {
+  const mouseX = event.clientX
+  const mouseY = event.clientY
+
+  const divRect = targetDiv.getBoundingClientRect()
+  const divLeft = divRect.left
+  const divTop = divRect.top
+  const divRight = divRect.right
+  const divBottom = divRect.bottom
+
+  return mouseX >= divLeft && mouseX <= divRight && mouseY >= divTop && mouseY <= divBottom
+}
+
+export type TemplateRef = {
+  (target: Element | ComponentPublicInstance | null): void
+  value: HTMLElement | ComponentPublicInstance | null | undefined
+  readonly el: HTMLElement | undefined
+}
+export function templateRef () {
+  const el = shallowRef<HTMLElement | ComponentPublicInstance | null>()
+  const fn = (target: HTMLElement | ComponentPublicInstance | null) => {
+    el.value = target
+  }
+  Object.defineProperty(fn, 'value', {
+    enumerable: true,
+    get: () => el.value,
+    set: val => el.value = val,
+  })
+  Object.defineProperty(fn, 'el', {
+    enumerable: true,
+    get: () => refElement(el.value),
+  })
+
+  return fn as TemplateRef
+}
+
+export function checkPrintable (e: KeyboardEvent) {
+  const isPrintableChar = e.key.length === 1
+  const noModifier = !e.ctrlKey && !e.metaKey && !e.altKey
+  return isPrintableChar && noModifier
 }

@@ -2,10 +2,12 @@
 import './VAvatar.sass'
 
 // Components
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VIcon } from '@/components/VIcon'
 import { VImg } from '@/components/VImg'
 
 // Composables
+import { makeBorderProps, useBorder } from '@/composables/border'
 import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { IconValue } from '@/composables/icons'
@@ -25,6 +27,7 @@ export const makeVAvatarProps = propsFactory({
   image: String,
   text: String,
 
+  ...makeBorderProps(),
   ...makeComponentProps(),
   ...makeDensityProps(),
   ...makeRoundedProps(),
@@ -41,6 +44,7 @@ export const VAvatar = genericComponent()({
 
   setup (props, { slots }) {
     const { themeClasses } = provideTheme(props)
+    const { borderClasses } = useBorder(props)
     const { colorClasses, colorStyles, variantClasses } = useVariant(props)
     const { densityClasses } = useDensity(props)
     const { roundedClasses } = useRounded(props)
@@ -55,6 +59,7 @@ export const VAvatar = genericComponent()({
             'v-avatar--end': props.end,
           },
           themeClasses.value,
+          borderClasses.value,
           colorClasses.value,
           densityClasses.value,
           roundedClasses.value,
@@ -68,12 +73,28 @@ export const VAvatar = genericComponent()({
           props.style,
         ]}
       >
-        { props.image
-          ? (<VImg key="image" src={ props.image } alt="" cover />)
-          : props.icon
-            ? (<VIcon key="icon" icon={ props.icon } />)
-            : slots.default?.() ?? props.text
-        }
+        { !slots.default ? (
+          props.image
+            ? (<VImg key="image" src={ props.image } alt="" cover />)
+            : props.icon
+              ? (<VIcon key="icon" icon={ props.icon } />)
+              : props.text
+        ) : (
+          <VDefaultsProvider
+            key="content-defaults"
+            defaults={{
+              VImg: {
+                cover: true,
+                src: props.image,
+              },
+              VIcon: {
+                icon: props.icon,
+              },
+            }}
+          >
+            { slots.default() }
+          </VDefaultsProvider>
+        )}
 
         { genOverlays(false, 'v-avatar') }
       </props.tag>

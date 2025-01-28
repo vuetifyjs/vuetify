@@ -32,8 +32,8 @@
         <v-text-field
           v-if="type === 'number'"
           v-model="number"
-          type="number"
           label="Number"
+          type="number"
         ></v-text-field>
 
         <v-text-field
@@ -63,17 +63,17 @@
 
         <v-slider
           v-model="duration"
-          min="0"
-          max="1000"
           label="Duration"
+          max="1000"
+          min="0"
           thumb-label
         ></v-slider>
 
         <v-slider
           v-model="offset"
-          min="-500"
-          max="500"
           label="Offset"
+          max="500"
+          min="-500"
           thumb-label
         ></v-slider>
       </v-col>
@@ -81,8 +81,8 @@
       <v-col>
         <v-btn
           ref="button"
-          block
           color="primary"
+          block
           @click="$vuetify.goTo(target, options)"
         >
           scroll

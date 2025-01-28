@@ -2,18 +2,18 @@
   <v-container>
     <v-select
       v-model="selectionType"
-      :items="['leaf', 'independent']"
+      :items="['leaf', 'single-leaf', 'independent', 'single-independent', 'classic']"
       label="Selection type"
     ></v-select>
     <v-row>
       <v-col>
         <v-treeview
-          v-model="selection"
+          v-model:selected="selection"
           :items="items"
-          :selection-type="selectionType"
-          selectable
+          :select-strategy="selectionType"
+          item-value="id"
           return-object
-          open-all
+          selectable
         ></v-treeview>
       </v-col>
       <v-divider vertical></v-divider>
@@ -29,7 +29,7 @@
             v-for="node in selection"
             :key="node.id"
           >
-            {{ node.name }}
+            {{ node.title }}
           </div>
         </template>
       </v-col>
@@ -45,16 +45,16 @@
   const items = ref([
     {
       id: 1,
-      name: 'Root',
+      title: 'Root',
       children: [
-        { id: 2, name: 'Child #1' },
-        { id: 3, name: 'Child #2' },
+        { id: 2, title: 'Child #1' },
+        { id: 3, title: 'Child #2' },
         {
           id: 4,
-          name: 'Child #3',
+          title: 'Child #3',
           children: [
-            { id: 5, name: 'Grandchild #1' },
-            { id: 6, name: 'Grandchild #2' },
+            { id: 5, title: 'Grandchild #1' },
+            { id: 6, title: 'Grandchild #2' },
           ],
         },
       ],
@@ -70,16 +70,16 @@
       items: [
         {
           id: 1,
-          name: 'Root',
+          title: 'Root',
           children: [
-            { id: 2, name: 'Child #1' },
-            { id: 3, name: 'Child #2' },
+            { id: 2, title: 'Child #1' },
+            { id: 3, title: 'Child #2' },
             {
               id: 4,
-              name: 'Child #3',
+              title: 'Child #3',
               children: [
-                { id: 5, name: 'Grandchild #1' },
-                { id: 6, name: 'Grandchild #2' },
+                { id: 5, title: 'Grandchild #1' },
+                { id: 6, title: 'Grandchild #2' },
               ],
             },
           ],

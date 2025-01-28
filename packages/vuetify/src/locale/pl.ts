@@ -2,6 +2,7 @@ export default {
   badge: 'Odznaka',
   open: 'Otwórz',
   close: 'Zamknij',
+  dismiss: 'Dismiss',
   confirmEdit: {
     ok: 'OK',
     cancel: 'Anuluj',
@@ -68,9 +69,15 @@ export default {
     counter: 'Liczba plików: {0}',
     counterSize: 'Liczba plików: {0} (łącznie {1})',
   },
+  fileUpload: {
+    title: 'Drag and drop files here',
+    divider: 'or',
+    browse: 'Browse Files',
+  },
   timePicker: {
     am: 'AM',
     pm: 'PM',
+    title: 'Select Time',
   },
   pagination: {
     ariaLabel: {

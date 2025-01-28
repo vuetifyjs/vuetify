@@ -1,9 +1,9 @@
 <template>
-  <usage-example
+  <ExamplesUsageExample
     v-model="model"
     :code="code"
-    :options="options"
     :name="name"
+    :options="options"
   >
     <div>
       <v-responsive
@@ -17,14 +17,10 @@
     <template v-slot:configuration>
       <v-checkbox v-model="contentClass" label="Content class"></v-checkbox>
     </template>
-  </usage-example>
+  </ExamplesUsageExample>
 </template>
 
 <script setup>
-  // Utilities
-  import { computed, ref } from 'vue'
-  import { propsToString } from '@/util/helpers'
-
   const name = 'v-responsive'
   const model = ref('default')
   const options = ['16 / 9', '4 / 3']

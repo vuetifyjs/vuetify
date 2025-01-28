@@ -5,9 +5,9 @@
       ref="menu"
       v-model="menuActive"
       :close-on-content-click="false"
+      min-width="auto"
       transition="scale-transition"
       offset-y
-      min-width="auto"
     >
       <template v-slot:activator="{ on, attrs }">
         <v-text-field

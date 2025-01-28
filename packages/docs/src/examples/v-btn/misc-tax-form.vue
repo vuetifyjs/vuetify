@@ -15,29 +15,29 @@
 
       <v-text-field
         label="Enter value here"
-        single-line
         variant="outlined"
+        single-line
       ></v-text-field>
 
       <v-btn
         :disabled="loading"
         :loading="loading"
-        block
         class="text-none mb-4"
         color="indigo-darken-3"
         size="x-large"
         variant="flat"
+        block
         @click="loading = !loading"
       >
         Verify and continue
       </v-btn>
 
       <v-btn
-        block
         class="text-none"
         color="grey-lighten-3"
         size="x-large"
         variant="flat"
+        block
       >
         Cancel
       </v-btn>

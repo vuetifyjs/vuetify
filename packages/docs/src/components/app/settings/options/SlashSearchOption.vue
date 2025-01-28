@@ -1,26 +1,15 @@
 <template>
-  <v-defaults-provider
-    :defaults="{
-      VIcon: {
-        color: user.slashSearch ? 'primary' : 'disabled'
-      }
-    }"
-  >
-    <settings-switch
-      v-model="user.slashSearch"
-      :label="t('slash-search')"
-      :messages="t('slash-search-message')"
-    />
-  </v-defaults-provider>
+  <AppSettingsSettingsHeader text="slash-search-message" title="slash-search">
+    <v-defaults-provider
+      :defaults="{
+        VIcon: { color: user.slashSearch ? 'primary' : 'disabled' }
+      }"
+    >
+      <SettingsSwitch v-model="user.slashSearch" />
+    </v-defaults-provider>
+  </AppSettingsSettingsHeader>
 </template>
 
 <script setup>
-  // Composables
-  import { useI18n } from 'vue-i18n'
-
-  // Stores
-  import { useUserStore } from '@vuetify/one'
-
-  const { t } = useI18n()
   const user = useUserStore()
 </script>

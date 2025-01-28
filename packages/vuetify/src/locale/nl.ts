@@ -1,7 +1,8 @@
 export default {
-  badge: 'insigne',
+  badge: 'Insigne',
   open: 'Openen',
   close: 'Sluiten',
+  dismiss: 'Sluiten',
   confirmEdit: {
     ok: 'OK',
     cancel: 'Annuleren',
@@ -68,9 +69,15 @@ export default {
     counter: '{0} bestanden',
     counterSize: '{0} bestanden ({1} in totaal)',
   },
+  fileUpload: {
+    title: 'Sleep en zet bestanden hier neer',
+    divider: 'of',
+    browse: 'Blader door bestanden',
+  },
   timePicker: {
     am: 'AM',
     pm: 'PM',
+    title: 'Selecteer tijd',
   },
   pagination: {
     ariaLabel: {
