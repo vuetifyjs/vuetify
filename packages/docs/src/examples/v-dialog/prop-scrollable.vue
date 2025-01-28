@@ -25,7 +25,6 @@
             <v-radio-group
               v-model="dialog"
               messages="Select a Country from the radio group"
-              column
             >
               <v-radio
                 label="Bahamas, The"
