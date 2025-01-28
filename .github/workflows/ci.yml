@@ -132,7 +132,7 @@ jobs:
       - uses: vuetifyjs/setup-action@master
       - uses: ./.github/actions/download-locales
       - run: ucacher pnpm build api
-      - run: ucacher pnpm build docs
+      - run: pnpm build docs
         env:
           NODE_OPTIONS: --max-old-space-size=4096
           VITE_COSMIC_2_BUCKET_SLUG: ${{ secrets.COSMIC_2_BUCKET_SLUG }}
