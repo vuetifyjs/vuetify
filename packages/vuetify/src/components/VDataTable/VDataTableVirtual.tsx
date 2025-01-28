@@ -41,6 +41,9 @@ export type VDataTableVirtualSlots<T> = VDataTableRowsSlots<T> & VDataTableHeade
   colgroup: VDataTableVirtualSlotProps<T>
   top: VDataTableVirtualSlotProps<T>
   headers: VDataTableHeadersSlots['headers']
+  tbody: VDataTableVirtualSlotProps<T>
+  thead: VDataTableVirtualSlotProps<T>
+  tfoot: VDataTableVirtualSlotProps<T>
   bottom: VDataTableVirtualSlotProps<T>
   'body.prepend': VDataTableVirtualSlotProps<T>
   'body.append': VDataTableVirtualSlotProps<T>
@@ -213,6 +216,7 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
                       />
                     </thead>
                   )}
+                  { slots.thead?.(slotProps.value) }
                   { !props.hideDefaultBody && (
                     <tbody>
                       <tr ref={ markerRef } style={{ height: convertToUnit(paddingTop.value), border: 0 }}>
@@ -257,6 +261,8 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
                       </tr>
                     </tbody>
                   )}
+                  { slots.tbody?.(slotProps.value) }
+                  { slots.tfoot?.(slotProps.value) }
                 </table>
               </div>
             ),
