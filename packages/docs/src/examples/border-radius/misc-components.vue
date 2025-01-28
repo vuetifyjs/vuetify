@@ -4,7 +4,7 @@
       color="primary"
       rounded="pill"
       text="Update Account"
-      flat
+      variant="flat"
     ></v-btn>
   </v-container>
 </template>

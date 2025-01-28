@@ -8,11 +8,10 @@
         v-model="search"
         clear-icon="mdi-close-circle-outline"
         label="Search Company Directory"
+        variant="solo-inverted"
         clearable
-        dark
         flat
         hide-details
-        solo-inverted
       ></v-text-field>
       <v-checkbox
         v-model="caseSensitive"

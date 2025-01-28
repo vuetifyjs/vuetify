@@ -12,16 +12,14 @@
         max-width="290px"
         min-width="auto"
         transition="scale-transition"
-        offset-y
       >
-        <template v-slot:activator="{ on, attrs }">
+        <template v-slot:activator="{ props }">
           <v-text-field
             v-model="date"
             label="Picker in menu"
             prepend-icon="mdi-calendar"
             readonly
-            v-bind="attrs"
-            v-on="on"
+            v-bind="props"
           ></v-text-field>
         </template>
         <v-date-picker
@@ -60,14 +58,13 @@
         width="290px"
         persistent
       >
-        <template v-slot:activator="{ on, attrs }">
+        <template v-slot:activator="{ props }">
           <v-text-field
             v-model="date"
             label="Picker in dialog"
             prepend-icon="mdi-calendar"
             readonly
-            v-bind="attrs"
-            v-on="on"
+            v-bind="props"
           ></v-text-field>
         </template>
         <v-date-picker

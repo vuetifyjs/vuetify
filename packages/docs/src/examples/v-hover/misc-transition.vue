@@ -15,7 +15,7 @@
           <v-expand-transition>
             <div
               v-if="isHovering"
-              class="d-flex transition-fast-in-fast-out bg-orange-darken-2 v-card--reveal text-h2"
+              class="d-flex bg-orange-darken-2 v-card--reveal text-h2"
               style="height: 100%;"
             >
               $14.99

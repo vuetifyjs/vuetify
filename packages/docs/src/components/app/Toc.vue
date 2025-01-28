@@ -38,7 +38,7 @@
         >
           <a
             :href="href"
-            class="v-toc-link d-block transition-swing text-decoration-none"
+            class="v-toc-link d-block text-decoration-none"
             @click.prevent.stop="onClick(to)"
             v-text="text"
           />

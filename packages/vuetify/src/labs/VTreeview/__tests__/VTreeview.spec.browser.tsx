@@ -672,4 +672,37 @@ describe.each([
       expect(el).toBeVisible()
     })
   })
+
+  // https://github.com/vuetifyjs/vuetify/issues/20830
+  it('should return correct isOpen state in prepend slot', async () => {
+    render(() => (
+      <VTreeview
+        items={ items }
+        item-value="id"
+        open-on-click
+        return-object
+      >
+        {{
+          prepend: ({ isOpen }) => (<span class="prepend-is-open">{ `${isOpen}` }</span>),
+        }}
+      </VTreeview>
+    ))
+
+    await userEvent.click(screen.getByText(/Vuetify Human Resources/))
+    const itemsPrepend = screen.getAllByCSS('.v-treeview-item .v-list-item__prepend .prepend-is-open')
+    expect(itemsPrepend[0]).toHaveTextContent(/^true$/)
+    expect(itemsPrepend[1]).toHaveTextContent(/^false$/)
+
+    await userEvent.click(screen.getByText(/Core team/))
+    expect(itemsPrepend[0]).toHaveTextContent(/^true$/)
+    expect(itemsPrepend[1]).toHaveTextContent(/^true$/)
+
+    await userEvent.click(screen.getByText(/Core team/))
+    expect(itemsPrepend[0]).toHaveTextContent(/^true$/)
+    expect(itemsPrepend[1]).toHaveTextContent(/^false$/)
+
+    await userEvent.click(screen.getByText(/Vuetify Human Resources/))
+    expect(itemsPrepend[0]).toHaveTextContent(/^false$/)
+    expect(itemsPrepend[1]).toHaveTextContent(/^false$/)
+  })
 })
