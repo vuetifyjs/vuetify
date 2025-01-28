@@ -88,13 +88,11 @@ export const independentSingleSelectStrategy = (mandatory?: boolean): SelectStra
       return parentStrategy.select({ ...rest, id, selected: singleSelected })
     },
     in: (v, children, parents) => {
-      let map = new Map()
-
       if (v?.length) {
-        map = parentStrategy.in(v.slice(0, 1), children, parents)
+        return parentStrategy.in(v.slice(0, 1), children, parents)
       }
 
-      return map
+      return new Map()
     },
     out: (v, children, parents) => {
       return parentStrategy.out(v, children, parents)
@@ -188,7 +186,7 @@ export const classicSelectStrategy = (mandatory?: boolean): SelectStrategy => {
         map = strategy.select({
           id,
           value: true,
-          selected: new Map(map),
+          selected: map,
           children,
           parents,
         })
