@@ -233,15 +233,17 @@ export function useDisplay (
   const mobile = computed(() => {
     if (props.mobile) {
       return true
-    } else if (typeof props.mobileBreakpoint === 'number') {
-      return display.width.value < props.mobileBreakpoint
-    } else if (props.mobileBreakpoint) {
-      return display.width.value < display.thresholds.value[props.mobileBreakpoint]
-    } else if (props.mobile === null) {
-      return display.mobile.value
-    } else {
-      return false
     }
+    if (typeof props.mobileBreakpoint === 'number') {
+      return display.width.value < props.mobileBreakpoint
+    }
+    if (typeof props.mobileBreakpoint === 'string') {
+      return display.width.value < display.thresholds.value[props.mobileBreakpoint]
+    }
+    if (props.mobile === null) {
+      return display.mobile.value
+    }
+    return !!(display.mobile.value && !props.mobileBreakpoint)
   })
 
   const displayClasses = computed(() => {
