@@ -108,7 +108,7 @@ export function useItems (props: ItemProps) {
     for (const v of value) {
       // When the model value is null, return an InternalItem
       // based on null only if null is one of the items
-      if (!_hasNullItem && v == null) continue
+      if (!_hasNullItem && v === null) continue
 
       // String model value means value is a custom input value from combobox
       // Don't look up existing items if the model value is a string
