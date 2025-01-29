@@ -2,7 +2,8 @@
 import { makeElevationProps, useElevation } from '../elevation'
 
 // Utilities
-import { describe, expect, it } from '@jest/globals'
+
+// Utilities
 
 describe('elevation.ts', () => {
   it('should have the correct class', () => {

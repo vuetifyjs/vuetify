@@ -279,26 +279,39 @@ export const VSlideGroup = genericComponent<new <T>(
       }
     }
 
+    function getSiblingElement (el: HTMLElement | null, location: 'next' | 'prev') {
+      if (!el) return undefined
+      let sibling: HTMLElement | null = el
+      do {
+        sibling = sibling?.[location === 'next' ? 'nextElementSibling' : 'previousElementSibling'] as HTMLElement | null
+      } while (sibling?.hasAttribute('disabled'))
+      return sibling
+    }
+
     function focus (location?: 'next' | 'prev' | 'first' | 'last') {
       if (!contentRef.el) return
 
-      let el: HTMLElement | undefined
+      let el: HTMLElement | null | undefined
 
       if (!location) {
         const focusable = focusableChildren(contentRef.el)
         el = focusable[0]
       } else if (location === 'next') {
-        el = contentRef.el.querySelector(':focus')?.nextElementSibling as HTMLElement | undefined
+        el = getSiblingElement(contentRef.el.querySelector(':focus'), location)
 
         if (!el) return focus('first')
       } else if (location === 'prev') {
-        el = contentRef.el.querySelector(':focus')?.previousElementSibling as HTMLElement | undefined
+        el = getSiblingElement(contentRef.el.querySelector(':focus'), location)
 
         if (!el) return focus('last')
       } else if (location === 'first') {
         el = (contentRef.el.firstElementChild as HTMLElement)
+
+        if (el?.hasAttribute('disabled')) el = getSiblingElement(el, 'next')
       } else if (location === 'last') {
         el = (contentRef.el.lastElementChild as HTMLElement)
+
+        if (el?.hasAttribute('disabled')) el = getSiblingElement(el, 'prev')
       }
 
       if (el) {
@@ -451,6 +464,8 @@ export const VSlideGroup = genericComponent<new <T>(
       scrollTo,
       scrollOffset,
       focus,
+      hasPrev,
+      hasNext,
     }
   },
 })

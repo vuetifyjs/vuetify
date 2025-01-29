@@ -26,6 +26,10 @@
     &--absolute
       display: flex
 
+    &--absolute
+      position: absolute
+      inset: 0
+
     &--start,
     &--left
       justify-content: flex-start
@@ -53,11 +57,11 @@
   .v-fab__container
     align-self: center
     display: inline-flex
-    position: absolute
     vertical-align: middle
 
     .v-fab--app &
       margin: 12px
+      position: fixed
 
     .v-fab--absolute &
       position: absolute

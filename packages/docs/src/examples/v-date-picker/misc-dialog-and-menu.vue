@@ -12,16 +12,14 @@
         :close-on-content-click="false"
         min-width="auto"
         transition="scale-transition"
-        offset-y
       >
-        <template v-slot:activator="{ on, attrs }">
+        <template v-slot:activator="{ props }">
           <v-text-field
             v-model="date"
             label="Picker in menu"
             prepend-icon="mdi-calendar"
             readonly
-            v-bind="attrs"
-            v-on="on"
+            v-bind="props"
           ></v-text-field>
         </template>
         <v-date-picker
@@ -56,18 +54,16 @@
       <v-dialog
         ref="dialog"
         v-model="modal"
-        v-model:return-value="date"
         width="290px"
         persistent
       >
-        <template v-slot:activator="{ on, attrs }">
+        <template v-slot:activator="{ props }">
           <v-text-field
             v-model="date"
             label="Picker in dialog"
             prepend-icon="mdi-calendar"
             readonly
-            v-bind="attrs"
-            v-on="on"
+            v-bind="props"
           ></v-text-field>
         </template>
         <v-date-picker
@@ -100,24 +96,21 @@
       <v-menu
         v-model="menu2"
         :close-on-content-click="false"
-        :nudge-right="40"
         min-width="auto"
         transition="scale-transition"
-        offset-y
       >
-        <template v-slot:activator="{ on, attrs }">
+        <template v-slot:activator="{ props }">
           <v-text-field
             v-model="date"
             label="Picker without buttons"
             prepend-icon="mdi-calendar"
             readonly
-            v-bind="attrs"
-            v-on="on"
+            v-bind="props"
           ></v-text-field>
         </template>
         <v-date-picker
           v-model="date"
-          @input="menu2 = false"
+          @change="menu2 = false"
         ></v-date-picker>
       </v-menu>
     </v-col>

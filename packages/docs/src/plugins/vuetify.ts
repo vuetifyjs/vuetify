@@ -3,15 +3,17 @@ import 'vuetify/styles'
 
 // Imports
 import { createVuetify } from 'vuetify'
-import * as components from 'vuetify/components'
-import * as directives from 'vuetify/directives'
-import * as labs from 'vuetify/labs/components'
+import { VChip } from 'vuetify/components/VChip'
+import { VBtn } from 'vuetify/components/VBtn'
+import { VSwitch } from 'vuetify/components/VSwitch'
+import { VSvgIcon } from 'vuetify/components/VIcon'
 
 // Icons
 import { fa } from 'vuetify/iconsets/fa'
 import { md } from 'vuetify/iconsets/md'
 import { mdi } from 'vuetify/iconsets/mdi-svg'
 import * as mdiSvg from './icons'
+import { aliases } from '@vuetify/one'
 
 // Locales
 import { en, sv } from 'vuetify/locale'
@@ -23,17 +25,12 @@ import type { IconProps } from 'vuetify'
 export function installVuetify (app: App) {
   const vuetify = createVuetify({
     aliases: {
-      BorderChip: components.VChip,
-      NewInChip: components.VChip,
-      PageFeatureChip: components.VChip,
-      PrimaryBtn: components.VBtn,
-      SettingsSwitch: components.VSwitch,
+      BorderChip: VChip,
+      NewInChip: VChip,
+      PageFeatureChip: VChip,
+      PrimaryBtn: VBtn,
+      SettingsSwitch: VSwitch,
     },
-    components: {
-      ...components,
-      ...labs,
-    },
-    directives,
     defaults: {
       global: {
         eager: false,
@@ -79,6 +76,7 @@ export function installVuetify (app: App) {
         inset: true,
         trueIcon: 'mdi-check',
         falseIcon: '$close',
+        hideDetails: 'auto',
       },
       BorderChip: {
         border: true,
@@ -108,15 +106,11 @@ export function installVuetify (app: App) {
         mdi: {
           component: (props: IconProps) => {
             const icon = mdiSvg[camelize(props.icon as string) as keyof typeof mdiSvg]
-            return h(components.VSvgIcon, { ...props, icon })
+            return h(VSvgIcon, { ...props, icon })
           },
         },
       },
-      aliases: {
-        /* eslint-disable max-len */
-        x: ['M2.04875 3.00002L9.77052 13.3248L1.99998 21.7192H3.74882L10.5519 14.3697L16.0486 21.7192H22L13.8437 10.8137L21.0765 3.00002H19.3277L13.0624 9.76874L8.0001 3.00002H2.04875ZM4.62054 4.28821H7.35461L19.4278 20.4308H16.6937L4.62054 4.28821Z'],
-        /* eslint-enable max-len */
-      },
+      aliases,
     },
     theme: {
       themes: {

@@ -2,8 +2,8 @@
 import './VTimePickerControls.sass'
 
 // Components
+import { pad } from './util'
 import { VBtn } from '@/components/VBtn'
-import { pad } from '@/components/VDatePicker/util'
 
 // Composables
 import { useLocale } from '@/composables/locale'
@@ -17,6 +17,7 @@ type Period = 'am' | 'pm'
 
 export const makeVTimePickerControlsProps = propsFactory({
   ampm: Boolean,
+  ampmInTitle: Boolean,
   ampmReadonly: Boolean,
   color: String,
   disabled: Boolean,
@@ -36,8 +37,8 @@ export const VTimePickerControls = genericComponent()({
   props: makeVTimePickerControlsProps(),
 
   emits: {
-    'update:period': (data: Period) => data,
-    'update:selecting': (data: 1 | 2 | 3) => data,
+    'update:period': (data: Period) => true,
+    'update:selecting': (data: 1 | 2 | 3) => true,
   },
 
   setup (props, { emit, slots }) {
@@ -122,7 +123,7 @@ export const VTimePickerControls = genericComponent()({
             }
 
             {
-              props.ampm && (
+              props.ampm && props.ampmInTitle && (
                 <div
                   class={['v-time-picker-controls__ampm', {
                     'v-time-picker-controls__ampm--readonly': props.ampmReadonly,

@@ -10,8 +10,8 @@ import fg from 'fast-glob'
 import mm from 'micromatch'
 import MagicString from 'magic-string'
 
-import importMap from '../dist/json/importMap.json' assert { type: 'json' }
-import importMapLabs from '../dist/json/importMap-labs.json' assert { type: 'json' }
+import importMap from '../dist/json/importMap.json' with { type: 'json' }
+import importMapLabs from '../dist/json/importMap-labs.json' with { type: 'json' }
 
 const externalsPlugin = () => ({
   resolveId (source, importer) {
@@ -83,7 +83,7 @@ async function getShims () {
     )).join('\n')
 
   return (await fs.readFile(fileURLToPath(new URL('../src/shims.d.ts', import.meta.url)), { encoding: 'utf8' }))
-    .replaceAll(/^\s*\/\/ @skip-build\s+.*$/gm, '')
+    .replaceAll(/^\s*\/\/ @skip-build\s[\s\S]*?\s$/gm, '')
     .replace(/^\s*\/\/ @generate-components$/gm, components)
 }
 

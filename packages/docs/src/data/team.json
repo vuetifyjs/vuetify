@@ -53,7 +53,6 @@
     "location": "Melbourne, Australia",
     "name": "Kael Watts-Deuchar",
     "team": "core",
-    "twitter": "kaelwd",
     "joined": "Oct 2017"
   },
   "nekosaur": {
@@ -101,20 +100,6 @@
     "team": "core",
     "work": "CEO at Foundational Technologies LLC",
     "joined": "Feb 2021"
-  },
-  "elvinagarcia": {
-    "avatar": "https://cdn.vuetifyjs.com/docs/images/team/elvinagarcia.png",
-    "discord": "elvinagarcia",
-    "focus": [
-      "Design/Animations"
-    ],
-    "languages": [
-      "English"
-    ],
-    "location": "Virginia, USA",
-    "name": "Elvina Garcia",
-    "team": "core",
-    "joined": "Feb 2023"
   },
   "yuwu9145": {
     "discord": "yuwu9145",
@@ -181,6 +166,20 @@
     "work": "Director of Product Development at Symplsoft Inc.",
     "team": "core",
     "joined": "May 2024"
+  },
+  "J-Sek": {
+    "discord": "jacek#1420",
+    "focus": [
+      "[vuetifyjs/studio](https://github.com/vuetifyjs/studio)"
+    ],
+    "languages": [
+      "Polish",
+      "English"
+    ],
+    "location": "Gdańsk, Poland",
+    "name": "Jacek Czarniecki",
+    "team": "core",
+    "joined": "Nov 2024"
   },
   "jacekkarczmarczyk": {
     "discord": "jacek#3542",
@@ -252,20 +251,31 @@
     "team": "legends",
     "joined": "January 2023"
   },
-  "alexandriajackson": {
-    "avatar": "https://cdn.vuetifyjs.com/docs/images/team/alexandria.jpg",
-    "discord": "alexandriajackson_",
+  "elvinagarcia": {
+    "avatar": "https://cdn.vuetifyjs.com/docs/images/team/elvinagarcia.png",
+    "discord": "elvinagarcia",
+    "focus": [
+      "Design/Animations"
+    ],
+    "languages": [
+      "English"
+    ],
+    "location": "Virginia, USA",
+    "name": "Elvina Garcia",
+    "team": "legends",
+    "joined": "Feb 2023"
+  },
+  "iNSaNiA0821": {
+    "discord": "housexpot",
     "focus": [
       "[vuetifyjs/*](https://github.com/vuetifyjs)"
     ],
     "languages": [
       "English"
     ],
-    "location": "Dallas, TX, USA",
-    "name": "Alexandria Jackson",
-    "team": "company",
-    "twitter": "AlexxJackson96",
-    "work": "Marketing Coordinator @ Vuetify",
-    "joined": "Sept 2023"
+    "location": "Nagoya, Japan",
+    "name": "Shinji Sakai",
+    "team": "core",
+    "joined": "Oct 2024"
   }
 }

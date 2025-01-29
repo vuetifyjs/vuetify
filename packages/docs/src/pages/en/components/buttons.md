@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   nav: Buttons
   title: Button component
@@ -24,7 +25,7 @@ The `v-btn` component replaces the standard html button with a material design t
 
 <PageFeatures />
 
-<VoPromotionsCardVuetify />
+<VoPromotionsCardVuetify slug="vuetify-snips" />
 
 ## Usage
 
