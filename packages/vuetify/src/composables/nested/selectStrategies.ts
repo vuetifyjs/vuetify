@@ -50,13 +50,13 @@ export const independentSelectStrategy = (mandatory?: boolean): SelectStrategy =
       return selected
     },
     in: (v, children, parents) => {
-      let map = new Map()
+      const map = new Map()
 
       for (const id of (v || [])) {
-        map = strategy.select({
+        strategy.select({
           id,
           value: true,
-          selected: new Map(map),
+          selected: map,
           children,
           parents,
         })

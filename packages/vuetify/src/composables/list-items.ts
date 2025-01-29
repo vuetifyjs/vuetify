@@ -98,20 +98,31 @@ export function useItems (props: ItemProps) {
   const hasNullItem = computed(() => items.value.some(item => item.value === null))
 
   function transformIn (value: any[]): ListItem[] {
-    if (!hasNullItem.value) {
+    // Cache unrefed values outside the loop
+    const _items = items.value
+    const _hasNullItem = hasNullItem.value
+    const _returnObject = props.returnObject
+    const valueComparator = props.valueComparator
+
+    const returnValue: ListItem[] = []
+    for (const v of value) {
       // When the model value is null, return an InternalItem
       // based on null only if null is one of the items
-      value = value.filter(v => v !== null)
+      if (!_hasNullItem && v == null) continue
+
+      // String model value means value is a custom input value from combobox
+      // Don't look up existing items if the model value is a string
+      if (_returnObject && typeof v === 'string') {
+        returnValue.push(transformItem(props, v))
+        continue
+      }
+
+      returnValue.push(
+        _items.find(item => valueComparator(v, item.value)) || transformItem(props, v)
+      )
     }
 
-    return value.map(v => {
-      if (props.returnObject && typeof v === 'string') {
-        // String model value means value is a custom input value from combobox
-        // Don't look up existing items if the model value is a string
-        return transformItem(props, v)
-      }
-      return items.value.find(item => props.valueComparator(v, item.value)) || transformItem(props, v)
-    })
+    return returnValue
   }
 
   function transformOut (value: ListItem[]): any[] {
