@@ -10,16 +10,20 @@ import { onMounted, onUnmounted, shallowRef } from 'vue'
 
 export function useIsMousedown () {
   const isMousedown = shallowRef(false)
+
   function mousedown () {
     isMousedown.value = true
   }
+
   function mouseup () {
     isMousedown.value = false
   }
+
   onMounted(() => {
     document.body.addEventListener('mousedown', mousedown)
     document.body.addEventListener('mouseup', mouseup)
   })
+
   onUnmounted(() => {
     document.body.removeEventListener('mousedown', mousedown)
     document.body.removeEventListener('mouseup', mouseup)
