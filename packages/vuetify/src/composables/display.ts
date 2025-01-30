@@ -227,7 +227,7 @@ export const makeDisplayProps = propsFactory({
 }, 'display')
 
 export function useDisplay (
-  props: DisplayProps = {},
+  props: DisplayProps = { mobile: null },
   name = getCurrentInstanceName(),
 ) {
   const display = inject(DisplaySymbol)

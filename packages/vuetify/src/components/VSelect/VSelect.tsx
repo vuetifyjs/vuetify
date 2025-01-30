@@ -20,6 +20,7 @@ import { forwardRefs } from '@/composables/forwardRefs'
 import { IconValue } from '@/composables/icons'
 import { makeItemsProps, useItems } from '@/composables/list-items'
 import { useLocale } from '@/composables/locale'
+import { useIsMousedown } from '@/composables/mousedown'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeTransitionProps } from '@/composables/transition'
 
@@ -168,6 +169,7 @@ export const VSelect = genericComponent<new <
         : model.value.length
     })
     const form = useForm(props)
+    const { isMousedown } = useIsMousedown()
     const selectedValues = computed(() => model.value.map(selection => selection.value))
     const isFocused = shallowRef(false)
     const label = computed(() => menu.value ? props.closeText : props.openText)
@@ -282,7 +284,7 @@ export const VSelect = genericComponent<new <
       }
     }
     function onBlur (e: FocusEvent) {
-      if (!listRef.value?.$el.contains(e.relatedTarget as HTMLElement)) {
+      if (!listRef.value?.$el.contains(e.relatedTarget as HTMLElement) && !isMousedown.value) {
         menu.value = false
       }
     }
