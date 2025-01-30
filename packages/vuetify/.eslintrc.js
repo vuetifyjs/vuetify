@@ -12,6 +12,7 @@ module.exports = {
   rules: {
     'no-console': 'error',
     'no-debugger': 'error',
+    'no-labels': 'off',
 
     // 'vue/html-self-closing': 'off',
     // 'vue/html-closing-bracket-spacing': 'off',
