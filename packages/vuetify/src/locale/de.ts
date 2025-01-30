@@ -70,9 +70,9 @@ export default {
     counterSize: '{0} Dateien ({1} gesamt)',
   },
   fileUpload: {
-    title: 'Drag and drop files here',
-    divider: 'or',
-    browse: 'Browse Files',
+    title: 'Datei hier ablegen',
+    divider: 'oder',
+    browse: 'Dateien durchsuchen',
   },
   timePicker: {
     am: 'AM',
