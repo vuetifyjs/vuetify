@@ -55,7 +55,7 @@ const makeVNumberInputProps = propsFactory({
     default: 1,
   },
 
-  ...omit(makeVTextFieldProps({}), ['appendInnerIcon', 'modelValue', 'prependInnerIcon']),
+  ...omit(makeVTextFieldProps({}), ['modelValue']),
 }, 'VNumberInput')
 
 export const VNumberInput = genericComponent<VNumberInputSlots>()({
@@ -328,6 +328,8 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
             'v-number-input',
             {
               'v-number-input--default': controlVariant.value === 'default',
+              'v-number-input--append-inner-slot': !!slots['append-inner'] || props.appendInnerIcon,
+              'v-number-input--prepend-inner-slot': !!slots['prepend-inner'] || props.prependInnerIcon,
               'v-number-input--hide-input': props.hideInput,
               'v-number-input--inset': props.inset,
               'v-number-input--reverse': props.reverse,
