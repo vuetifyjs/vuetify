@@ -46,6 +46,8 @@
   "files": [
     "dist/",
     "lib/",
+    "unplugin-vue-components/",
+    "unimport/",
     "_settings.scss",
     "_styles.scss",
     "_tools.scss",
@@ -76,10 +78,30 @@
     "./labs/components": "./lib/labs/components.js",
     "./labs/*": "./lib/labs/*/index.js",
     "./util/colors": "./lib/util/colors.js",
-    "./*": "./*"
+    "./*": "./*",
+    "./unplugin-vue-components": {
+      "import": "./unplugin-vue-components/index.mjs",
+      "require": "./unplugin-vue-components/index.cjs"
+    },
+    "./unimport": {
+      "import": "./unimport/index.mjs",
+      "require": "./unimport/index.cjs"
+    }
   },
   "typesVersions": {
     "*": {
+      "lib/framework.mjs": [
+        "lib/index.d.mts"
+      ],
+      "framework": [
+        "lib/index.d.mts"
+      ],
+      "unplugin-vue-components": [
+        "unplugin-vue-components/index.d.ts"
+      ],
+      "unimport": [
+        "unimport/index.d.ts"
+      ],
       "*": [
         "*",
         "dist/*",
@@ -98,7 +120,7 @@
     "dev:ssr": "NODE_ENV=development VITE_SSR=true vite-ssr",
     "dev:prod": "concurrently \"vite build -w\" \"vite preview\"",
     "dev:typecheck": "vue-tsc --noEmit --skipLibCheck --project ./tsconfig.dev.json",
-    "build": "rimraf lib dist && concurrently \"pnpm run build:dist\" \"pnpm run build:lib\" -n \"dist,lib\" --kill-others-on-fail -r && pnpm run build:types",
+    "build": "rimraf lib dist unplugin-vue-components unimport && concurrently \"pnpm run build:dist\" \"pnpm run build:lib\" -n \"dist,lib\" --kill-others-on-fail -r && pnpm run build:types",
     "build:dist": "rollup --config build/rollup.config.js",
     "build:lib": "NODE_ENV=lib babel src --out-dir lib --source-maps --extensions \".ts\",\".tsx\",\".snap\" --copy-files --no-copy-ignored --out-file-extension .js",
     "build:types": "tspc --pretty --emitDeclarationOnly -p tsconfig.dist.json && node build/transform-types.js && rollup --config build/rollup.types.config.js",
@@ -171,7 +193,8 @@
     "ts-node": "^10.9.2",
     "ts-patch": "^3.2.1",
     "typescript-transform-paths": "^3.5.1",
-    "unplugin-auto-import": "0.17.5",
+    "unimport": "^3.13.1",
+    "unplugin-auto-import": "^0.18.3",
     "unplugin-vue-components": "^0.27.4",
     "upath": "^2.0.1",
     "vite": "^5.4.3",

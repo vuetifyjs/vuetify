@@ -8,6 +8,8 @@
 /lib/
 /lib-temp/
 /dist/
+/unimport/
+/unplugin-vue-components/
 /cypress/
 *.spec.cy.ts
 *.spec.cy.tsx
