@@ -11,7 +11,7 @@
     "groupBy": "Changes which item property should be used for grouping items. Currently only supports a single grouping in the format: `group` or `['group']`. When using an array, only the first element is considered. Can be used with `.sync` modifier.",
     "groupDesc": "Changes which direction grouping is done. Can be used with `.sync` modifier.",
     "hideDefaultFooter": "Hides default footer.",
-    "itemKey": "The property on each item that is used as a unique key.",
+    "itemId": "The property on each item that is used as a unique key.",
     "itemsPerPage": "Changes how many items per page should be visible. Can be used with `.sync` modifier. Setting this prop to `-1` will display all items on the page.",
     "loading": "If `true` and no items are provided, then a loading text will be shown.",
     "loadingText": "Text shown when `loading` is true and no items are provided.",
