@@ -91,7 +91,7 @@
       > .v-icon,
       > .v-tooltip
         ~ .v-list-item__spacer
-          width: $list-item-slim-spacer-width
+          width: var(--v-list-slim-spacer-width, $list-item-slim-spacer-width)
 
       > .v-avatar,
       > .v-badge:is(:has(.v-avatar))
@@ -133,7 +133,7 @@
       > .v-icon,
       > .v-tooltip
         ~ .v-list-item__spacer
-          width: $list-item-slim-spacer-width
+          width: var(--v-list-slim-spacer-width, $list-item-slim-spacer-width)
 
       > .v-avatar,
       > .v-badge:is(:has(.v-avatar))
@@ -313,11 +313,8 @@
     &--fluid
       --list-indent-size: 0px
 
-    &--prepend
+    &--has-prepend-icon
       --parent-padding: calc(var(--indent-padding) + var(--prepend-width))
-
-    &--fluid.v-list-group--prepend
-      --parent-padding: var(--indent-padding)
 
   .v-list-group__items
     --indent-padding: calc(var(--parent-padding) + var(--list-indent-size))
