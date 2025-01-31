@@ -47,7 +47,10 @@ export const makeVOtpInputProps = propsFactory({
     type: String as PropType<'text' | 'password' | 'number'>,
     default: 'number',
   },
-
+  masked: {
+    type: Boolean,
+    default: false,
+  },
   ...makeDimensionProps(),
   ...makeFocusProps(),
   ...only(makeVFieldProps({
@@ -270,7 +273,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
                           min={ props.type === 'number' ? 0 : undefined }
                           maxlength="1"
                           placeholder={ props.placeholder }
-                          type={ props.type === 'number' ? 'text' : props.type }
+                          type={ props.masked ? 'password' : props.type === 'number' ? 'text' : props.type }
                           value={ model.value[i] }
                           onInput={ onInput }
                           onFocus={ e => onFocus(e, i) }
