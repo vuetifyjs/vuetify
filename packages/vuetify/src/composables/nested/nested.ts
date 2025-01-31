@@ -303,13 +303,13 @@ export const useNested = (props: NestedProps) => {
         const newActivated = activeStrategy.value.activate({
           id,
           value,
-          activated: new Set(activated.value),
+          activated: activated.value,
           children: children.value,
           parents: parents.value,
           event,
         })
 
-        newActivated && (activated.value = newActivated)
+        newActivated && newActivated.size && activated.value !== newActivated && (activated.value = newActivated)
       },
       children,
       parents,
