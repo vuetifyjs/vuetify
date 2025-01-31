@@ -411,7 +411,7 @@ export const VAutocomplete = genericComponent<new <
           item => model.value.some(s => item.value === s.value)
         )
         IN_BROWSER && window.requestAnimationFrame(() => {
-          index >= 0 && vVirtualScrollRef.value?.scrollToIndex(index)
+          index >= 0 && vVirtualScrollRef.value?.focus(index)
         })
       }
     })
@@ -518,7 +518,7 @@ export const VAutocomplete = genericComponent<new <
                             index,
                             props: itemProps,
                           }) ?? (
-                            <VListItem { ...itemProps } role="option">
+                            <VListItem { ...itemProps } role="option" data-item-index={ index }>
                             {{
                               prepend: ({ isSelected }) => (
                                 <>
