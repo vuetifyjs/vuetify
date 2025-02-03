@@ -140,7 +140,7 @@ export function createVuetify (vuetify: VuetifyOptions = {}) {
       date,
       goTo,
     }
-  })
+  })!
 }
 
 export const version = __VUETIFY_VERSION__
