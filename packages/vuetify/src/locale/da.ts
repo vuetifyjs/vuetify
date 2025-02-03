@@ -38,13 +38,13 @@ export default {
   datePicker: {
     itemsSelected: '{0} selected',
     range: {
-      title: 'Select dates',
-      header: 'Enter dates',
+      title: 'Vælg datoer',
+      header: 'Indtast datoer',
     },
-    title: 'Select date',
-    header: 'Enter date',
+    title: 'Vælg dato',
+    header: 'Indtast dato',
     input: {
-      placeholder: 'Enter date',
+      placeholder: 'Indtast dato',
     },
   },
   noDataText: 'Ingen data tilgængelig',
