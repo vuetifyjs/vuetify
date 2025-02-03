@@ -24,7 +24,7 @@ describe('VNumberInput', () => {
 
   it('resets v-model to null when click:clear is triggered', async () => {
     const model = ref(5)
-    render(() => (
+    const { element } = render(() => (
       <VNumberInput
         clearable
         v-model={ model.value }
@@ -32,6 +32,7 @@ describe('VNumberInput', () => {
       />
     ))
 
+    await userEvent.click(element)
     await userEvent.click(screen.getByLabelText('Clear'))
     expect(model.value).toBeNull()
   })

@@ -87,7 +87,8 @@ describe('VFileInput', () => {
     const { element } = render(() => (
       <VFileInput v-model={ model.value } multiple />
     ))
-
+    
+    await userEvent.click(element)
     await userEvent.click(screen.getByLabelText(/clear/i))
 
     expect(element).not.toHaveTextContent('1MB file, 2MB file')

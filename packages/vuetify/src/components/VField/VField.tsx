@@ -322,7 +322,7 @@ export const VField = genericComponent<new <T>(
             } as VFieldSlot)}
           </div>
 
-          { hasClear (hasClear && (isFocused.value || isHovered.value) ) && (
+          { (hasClear && (isFocused.value || isHovered.value) ) && (
             <VExpandXTransition key="clear">
               <div
                 class="v-field__clearable"
