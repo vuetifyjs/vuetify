@@ -38,13 +38,13 @@ export default {
   datePicker: {
     itemsSelected: '{0} selected',
     range: {
-      title: 'Select dates',
-      header: 'Enter dates',
+      title: 'Valitse päivämäärät',
+      header: 'Syötä päivämäärät',
     },
-    title: 'Select date',
-    header: 'Enter date',
+    title: 'Valitse päivämäärä',
+    header: 'Syötä päivämäärä',
     input: {
-      placeholder: 'Enter date',
+      placeholder: 'Syötä päivämäärä',
     },
   },
   noDataText: 'Ei dataa',

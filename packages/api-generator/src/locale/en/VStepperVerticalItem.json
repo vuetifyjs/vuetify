@@ -2,6 +2,6 @@
   "events": {
     "click:finish": "Event emitted when clicking the finish button",
     "click:next": "Event emitted when clicking the next button",
-    "click:previous": "Event emitted when clicking the previous button"
+    "click:prev": "Event emitted when clicking the previous button"
   }
 }
