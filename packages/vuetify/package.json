@@ -76,6 +76,7 @@
     "./labs/components": "./lib/labs/components.js",
     "./labs/*": "./lib/labs/*/index.js",
     "./util/colors": "./lib/util/colors.js",
+    "./*.mjs": "./*.js",
     "./*": "./*"
   },
   "typesVersions": {
