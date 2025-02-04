@@ -9,6 +9,8 @@
 /types-temp/
 /dist/
 /dev/dist/
+/unplugin-vue-components/
+/unimport/
 
 # local env files
 .env.local

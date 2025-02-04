@@ -400,9 +400,12 @@ importers:
       markdownlint-cli:
         specifier: ^0.39.0
         version: 0.39.0
+      unimport:
+        specifier: ^3.13.1
+        version: 3.13.1(rollup@4.21.2)(webpack-sources@3.2.3)
       unplugin-auto-import:
-        specifier: 0.17.5
-        version: 0.17.5(rollup@4.21.2)
+        specifier: ^0.18.3
+        version: 0.18.3(rollup@4.21.2)(webpack-sources@3.2.3)
       unplugin-fonts:
         specifier: 1.0.3
         version: 1.0.3(vite@5.4.3(@types/node@22.5.4)(sass-embedded@1.80.1)(sass@1.80.1)(terser@5.31.3))
@@ -604,9 +607,12 @@ importers:
       typescript-transform-paths:
         specifier: ^3.5.1
         version: 3.5.1(typescript@5.5.4)
+      unimport:
+        specifier: ^3.13.1
+        version: 3.13.1(rollup@3.29.4)(webpack-sources@3.2.3)
       unplugin-auto-import:
-        specifier: 0.17.5
-        version: 0.17.5(rollup@3.29.4)
+        specifier: ^0.18.3
+        version: 0.18.3(rollup@3.29.4)(webpack-sources@3.2.3)
       unplugin-vue-components:
         specifier: ^0.27.4
         version: 0.27.4(@babel/parser@7.25.9)(rollup@3.29.4)(vue@3.5.12(typescript@5.5.4))
@@ -2416,6 +2422,15 @@ packages:
 
   '@rollup/pluginutils@5.1.0':
     resolution: {integrity: sha512-XTIWOPPcpvyKI6L1NHo0lFlCyznUEyPmPY1mc3KpPVDYulHSTvyeLNVW00QTLIAFNhR3kYnJTQHeGqU4M3n09g==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      rollup: '*'
+    peerDependenciesMeta:
+      rollup:
+        optional: true
+
+  '@rollup/pluginutils@5.1.2':
+    resolution: {integrity: sha512-/FIdS3PyZ39bjZlwqFnWqCOVnW7o963LtKMwQOD0NhQqw22gSr2YY1afu3FxRip4ZCZNsD5jq6Aaz6QV3D/Njw==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
       rollup: '*'
@@ -5929,6 +5944,9 @@ packages:
   js-tokens@4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
 
+  js-tokens@9.0.0:
+    resolution: {integrity: sha512-WriZw1luRMlmV3LGJaR6QOJjWwgLUTf89OwT2lUOyjX2dJGBwgmIkbcz+7WFZjrZM635JOIR517++e/67CP9dQ==}
+
   js-yaml@3.14.1:
     resolution: {integrity: sha512-okMH7OXXJ7YrN9Ok3/SXrnu4iX9yOk+25nqX4imS2npuvTYDmo/QEZoqwZkYaIDk3jVvBOTOIEgEhaLOynBS9g==}
     hasBin: true
@@ -7087,6 +7105,9 @@ packages:
   pkg-types@1.1.3:
     resolution: {integrity: sha512-+JrgthZG6m3ckicaOB74TwQ+tBWsFl3qVQg7mN8ulwSOElJ7gBhKzj2VkCPnZ4NlF6kEquYU+RIYNVAvzd54UA==}
 
+  pkg-types@1.2.0:
+    resolution: {integrity: sha512-+ifYuSSqOQ8CqP4MbZA5hDpb97n3E8SVWdJe+Wms9kj745lmd3b7EZJiqvmLwAlmRfjrI7Hi5z3kdBJ93lFNPA==}
+
   pkg-up@3.1.0:
     resolution: {integrity: sha512-nDywThFk1i4BQK4twPQ6TA4RT8bDY96yeuCVBWL3ePARCiEKDRSrNGbFIgUJpLp+XeIR65v8ra7WuJOFUBtkMA==}
     engines: {node: '>=8'}
@@ -7404,7 +7425,6 @@ packages:
     engines: {node: '>=0.6.0', teleport: '>=0.2.0'}
     deprecated: |-
       You or someone you depend on is using Q, the JavaScript Promise library that gave JavaScript developers strong feelings about promises. They can almost certainly migrate to the native JavaScript promise now. Thank you literally everyone for joining me in this bet against the odds. Be excellent to each other.
-
       (For a CapTP with native promises, see @endo/eventual-send and @endo/captp)
 
   qs@6.9.7:
@@ -7889,8 +7909,8 @@ packages:
     resolution: {integrity: sha512-xAg7SOnEhrm5zI3puOOKyy1OMcMlIJZYNJY7xLBwSze0UjhPLnWfj2GF2EpT0jmzaJKIWKHLsaSSajf35bcYnA==}
     engines: {node: '>=v12.22.7'}
 
-  scule@1.2.0:
-    resolution: {integrity: sha512-CRCmi5zHQnSoeCik9565PONMg0kfkvYmcSqrbOJY4txFfy1wvVULV4FDaiXhUblUgahdqz3F2NwHZ8i4eBTwUw==}
+  scule@1.3.0:
+    resolution: {integrity: sha512-6FtHJEvt+pVMIB9IBY+IcCJ6Z5f1iQnytgyfKMhDKgmzYG+TeH/wx1y3l27rshSbLiSanrR9ffZDrEsmjlQF2g==}
 
   search-insights@2.13.0:
     resolution: {integrity: sha512-Orrsjf9trHHxFRuo9/rzm0KIWmgzE8RMlZMzuhZOJ01Rnz3D0YBAe+V6473t6/H6c7irs6Lt48brULAiRWb3Vw==}
@@ -8226,8 +8246,8 @@ packages:
     resolution: {integrity: sha512-6fPc+R4ihwqP6N/aIv2f1gMH8lOVtWQHoqC4yK6oSDVVocumAsfCqjkXnqiYMhmMwS/mEHLp7Vehlt3ql6lEig==}
     engines: {node: '>=8'}
 
-  strip-literal@1.3.0:
-    resolution: {integrity: sha512-PugKzOsyXpArk0yWmUwqOZecSO0GH0bPoctLcqNDH9J04pVW3lflYE0ujElBGTloevcxF5MofAOZ7C5l2b+wLg==}
+  strip-literal@2.1.0:
+    resolution: {integrity: sha512-Op+UycaUt/8FbN/Z2TWPBLge3jWrP3xj10f3fnYxf052bKuS3EKs1ZQcVGjnEMdsNVAM+plXRdmjrZ/KgG3Skw==}
 
   strnum@1.0.5:
     resolution: {integrity: sha512-J8bbNyKKXl5qYcR36TIO8W3mVGVHrmmxsd5PAItGkmyzwJvybiw2IVq5nqd0i4LSNSkB/sx9VHllbfFdr9k1JA==}
@@ -8626,8 +8646,8 @@ packages:
     resolution: {integrity: sha512-5Zfuy9q/DFr4tfO7ZPeVXb1aPoeQSdeFMLpYuFebehDAhbuevLs5yxSZmIFN1tP5F9Wl4IpJrYojg85/zgyZHQ==}
     engines: {node: '>=4'}
 
-  unimport@3.7.1:
-    resolution: {integrity: sha512-V9HpXYfsZye5bPPYUgs0Otn3ODS1mDUciaBlXljI4C2fTwfFpvFZRywmlOu943puN9sncxROMZhsZCjNXEpzEQ==}
+  unimport@3.13.1:
+    resolution: {integrity: sha512-nNrVzcs93yrZQOW77qnyOVHtb68LegvhYFwxFMfuuWScmwQmyVCG/NBuN8tYsaGzgQUVYv34E/af+Cc9u4og4A==}
 
   unique-filename@3.0.0:
     resolution: {integrity: sha512-afXhuC55wkAmZ0P18QsVE6kp8JaxrEokN2HGIoIVv2ijHQd419H0+6EigAFcIzXeMIkcIkNBpB3L/DXB3cTS/g==}
@@ -8656,8 +8676,8 @@ packages:
     resolution: {integrity: sha512-pjy2bYhSsufwWlKwPc+l3cN7+wuJlK6uz0YdJEOlQDbl6jo/YlPi4mb8agUkVC8BF7V8NuzeyPNqRksA3hztKQ==}
     engines: {node: '>= 0.8'}
 
-  unplugin-auto-import@0.17.5:
-    resolution: {integrity: sha512-fHNDkDSxv3PGagX1wmKBYBkgaM4AKAgZmdJw/bxjhNljx9KSXSgHpGfX0MwUrq9qw6q1bhHIZVWyOwoY2koo4w==}
+  unplugin-auto-import@0.18.3:
+    resolution: {integrity: sha512-q3FUtGQjYA2e+kb1WumyiQMjHM27MrTQ05QfVwtLRVhyYe+KF6TblBYaEX9L6Z0EibsqaXAiW+RFfkcQpfaXzg==}
     engines: {node: '>=14'}
     peerDependencies:
       '@nuxt/kit': ^3.2.2
@@ -8693,6 +8713,15 @@ packages:
   unplugin@1.12.1:
     resolution: {integrity: sha512-aXEH9c5qi3uYZHo0niUtxDlT9ylG/luMW/dZslSCkbtC31wCyFkmM0kyoBBh+Grhn7CL+/kvKLfN61/EdxPxMQ==}
     engines: {node: '>=14.0.0'}
+
+  unplugin@1.14.1:
+    resolution: {integrity: sha512-lBlHbfSFPToDYp9pjXlUEFVxYLaue9f9T1HC+4OHlmj+HnMDdz9oZY+erXfoCe/5V/7gKUSY2jpXPb9S7f0f/w==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      webpack-sources: ^3
+    peerDependenciesMeta:
+      webpack-sources:
+        optional: true
 
   upath@1.2.0:
     resolution: {integrity: sha512-aZwGpamFO61g3OlfT7OQCHqhGnW43ieH9WZeP7QxN/G/jS4jfqUkZxoryvJgVPEcrl5NL/ggHsSmLMHuH64Lhg==}
@@ -11680,6 +11709,22 @@ snapshots:
       rollup: 3.29.4
 
   '@rollup/pluginutils@5.1.0(rollup@4.21.2)':
+    dependencies:
+      '@types/estree': 1.0.5
+      estree-walker: 2.0.2
+      picomatch: 2.3.1
+    optionalDependencies:
+      rollup: 4.21.2
+
+  '@rollup/pluginutils@5.1.2(rollup@3.29.4)':
+    dependencies:
+      '@types/estree': 1.0.5
+      estree-walker: 2.0.2
+      picomatch: 2.3.1
+    optionalDependencies:
+      rollup: 3.29.4
+
+  '@rollup/pluginutils@5.1.2(rollup@4.21.2)':
     dependencies:
       '@types/estree': 1.0.5
       estree-walker: 2.0.2
@@ -16028,6 +16073,8 @@ snapshots:
 
   js-tokens@4.0.0: {}
 
+  js-tokens@9.0.0: {}
+
   js-yaml@3.14.1:
     dependencies:
       argparse: 1.0.10
@@ -17371,6 +17418,12 @@ snapshots:
       mlly: 1.7.1
       pathe: 1.1.2
 
+  pkg-types@1.2.0:
+    dependencies:
+      confbox: 0.1.7
+      mlly: 1.7.1
+      pathe: 1.1.2
+
   pkg-up@3.1.0:
     dependencies:
       find-up: 3.0.0
@@ -18149,7 +18202,7 @@ snapshots:
     dependencies:
       xmlchars: 2.2.0
 
-  scule@1.2.0: {}
+  scule@1.3.0: {}
 
   search-insights@2.13.0: {}
 
@@ -18490,9 +18543,9 @@ snapshots:
 
   strip-json-comments@3.1.1: {}
 
-  strip-literal@1.3.0:
+  strip-literal@2.1.0:
     dependencies:
-      acorn: 8.12.1
+      js-tokens: 9.0.0
 
   strnum@1.0.5: {}
 
@@ -18901,9 +18954,9 @@ snapshots:
 
   unicode-property-aliases-ecmascript@2.0.0: {}
 
-  unimport@3.7.1(rollup@3.29.4):
+  unimport@3.13.1(rollup@3.29.4)(webpack-sources@3.2.3):
     dependencies:
-      '@rollup/pluginutils': 5.1.0(rollup@3.29.4)
+      '@rollup/pluginutils': 5.1.2(rollup@3.29.4)
       acorn: 8.12.1
       escape-string-regexp: 5.0.0
       estree-walker: 3.0.3
@@ -18912,16 +18965,17 @@ snapshots:
       magic-string: 0.30.11
       mlly: 1.7.1
       pathe: 1.1.2
-      pkg-types: 1.1.3
-      scule: 1.2.0
-      strip-literal: 1.3.0
-      unplugin: 1.12.1
+      pkg-types: 1.2.0
+      scule: 1.3.0
+      strip-literal: 2.1.0
+      unplugin: 1.14.1(webpack-sources@3.2.3)
     transitivePeerDependencies:
       - rollup
+      - webpack-sources
 
-  unimport@3.7.1(rollup@4.21.2):
+  unimport@3.13.1(rollup@4.21.2)(webpack-sources@3.2.3):
     dependencies:
-      '@rollup/pluginutils': 5.1.0(rollup@4.21.2)
+      '@rollup/pluginutils': 5.1.2(rollup@4.21.2)
       acorn: 8.12.1
       escape-string-regexp: 5.0.0
       estree-walker: 3.0.3
@@ -18930,12 +18984,13 @@ snapshots:
       magic-string: 0.30.11
       mlly: 1.7.1
       pathe: 1.1.2
-      pkg-types: 1.1.3
-      scule: 1.2.0
-      strip-literal: 1.3.0
-      unplugin: 1.12.1
+      pkg-types: 1.2.0
+      scule: 1.3.0
+      strip-literal: 2.1.0
+      unplugin: 1.14.1(webpack-sources@3.2.3)
     transitivePeerDependencies:
       - rollup
+      - webpack-sources
 
   unique-filename@3.0.0:
     dependencies:
@@ -18957,7 +19012,7 @@ snapshots:
 
   unpipe@1.0.0: {}
 
-  unplugin-auto-import@0.17.5(rollup@3.29.4):
+  unplugin-auto-import@0.18.3(rollup@3.29.4)(webpack-sources@3.2.3):
     dependencies:
       '@antfu/utils': 0.7.10
       '@rollup/pluginutils': 5.1.0(rollup@3.29.4)
@@ -18965,12 +19020,13 @@ snapshots:
       local-pkg: 0.5.0
       magic-string: 0.30.11
       minimatch: 9.0.5
-      unimport: 3.7.1(rollup@3.29.4)
-      unplugin: 1.12.1
+      unimport: 3.13.1(rollup@3.29.4)(webpack-sources@3.2.3)
+      unplugin: 1.14.1(webpack-sources@3.2.3)
     transitivePeerDependencies:
       - rollup
+      - webpack-sources
 
-  unplugin-auto-import@0.17.5(rollup@4.21.2):
+  unplugin-auto-import@0.18.3(rollup@4.21.2)(webpack-sources@3.2.3):
     dependencies:
       '@antfu/utils': 0.7.10
       '@rollup/pluginutils': 5.1.0(rollup@4.21.2)
@@ -18978,10 +19034,11 @@ snapshots:
       local-pkg: 0.5.0
       magic-string: 0.30.11
       minimatch: 9.0.5
-      unimport: 3.7.1(rollup@4.21.2)
-      unplugin: 1.12.1
+      unimport: 3.13.1(rollup@4.21.2)(webpack-sources@3.2.3)
+      unplugin: 1.14.1(webpack-sources@3.2.3)
     transitivePeerDependencies:
       - rollup
+      - webpack-sources
 
   unplugin-fonts@1.0.3(vite@5.4.3(@types/node@22.5.4)(sass-embedded@1.80.1)(sass@1.80.1)(terser@5.31.3)):
     dependencies:
@@ -19033,6 +19090,13 @@ snapshots:
       chokidar: 3.6.0
       webpack-sources: 3.2.3
       webpack-virtual-modules: 0.6.2
+
+  unplugin@1.14.1(webpack-sources@3.2.3):
+    dependencies:
+      acorn: 8.12.1
+      webpack-virtual-modules: 0.6.2
+    optionalDependencies:
+      webpack-sources: 3.2.3
 
   upath@1.2.0: {}
 
