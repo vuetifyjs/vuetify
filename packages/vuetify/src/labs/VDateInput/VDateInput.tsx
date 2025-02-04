@@ -66,8 +66,8 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
       props,
       'modelValue',
       props.multiple ? [] : null,
-      val => Array.isArray(val) ? val.map(item => adapter.toJsDate(item)) : val ? adapter.toJsDate(val) : null,
-      val => Array.isArray(val) ? val.map(item => adapter.date(item)) : val ? adapter.date(val) : null
+      val => Array.isArray(val) ? val.map(item => adapter.toJsDate(item)) : val ? adapter.toJsDate(val) : val,
+      val => Array.isArray(val) ? val.map(item => adapter.date(item)) : val ? adapter.date(val) : val
     )
 
     const menu = shallowRef(false)
@@ -107,7 +107,7 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
 
       const target = e.target as HTMLInputElement
 
-      model.value = adapter.toJsDate(target.value)
+      model.value = target.value
     }
 
     function onClick (e: MouseEvent) {
