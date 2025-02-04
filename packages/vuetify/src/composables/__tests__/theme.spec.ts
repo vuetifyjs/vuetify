@@ -160,19 +160,13 @@ describe('createTheme', () => {
   })
 
   it('should allow for themes to be scoped', () => {
-    const scope = '#my-app'
     const theme = createTheme({
-      scope,
+      scope: '#my-app',
     })
 
     theme.install(app)
 
-    const scopedStyles = document.getElementById('vuetify-theme-stylesheet')!.innerHTML
-    const selectors = scopedStyles.split('\n').filter(line => line.includes('{')).map(line => line.trim())
-    selectors.forEach(selector => {
-      expect(selector.startsWith(`:where(${scope})`)).toBe(true)
-      expect(selector).not.toContain(':root')
-    })
+    expect(document.head).toMatchSnapshot()
   })
 
   // it('should use vue-meta@2.3 functionality', () => {
