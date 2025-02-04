@@ -37,7 +37,7 @@ Within your application, import the **useDate** function and use it to access th
 
   const date = useDate()
 
-  console.log(date.getMonth(new Date('March 1, 2021'))) // 3
+  console.log(date.getMonth(new Date('March 1, 2021'))) // 2
 </script>
 ```
 

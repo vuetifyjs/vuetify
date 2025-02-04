@@ -8,12 +8,18 @@
   .v-treeview
     --indent-padding: 0px
 
+    &.v-list--disabled .v-list-item__prepend
+      pointer-events: auto
+
   .v-treeview-group.v-list-group
     --list-indent-size: #{$treeview-group-list-indent-size}
 
     .v-list--slim &
       --prepend-width: #{$treeview-group-list-prepend-width}
 
-    .v-list-group__items .v-list-item
-      @include tools.layer('overrides')
+    @include tools.layer('overrides')
+      .v-list-group__items .v-list-item
         padding-inline-start: calc(#{$treeview-item-padding-inline-start} + var(--indent-padding))
+
+      .v-list-group__items .v-list-item.v-list-group__header
+        padding-inline-start: calc(#{$treeview-group-header-padding-inline-start} + var(--indent-padding)) !important

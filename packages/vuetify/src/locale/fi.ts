@@ -38,13 +38,13 @@ export default {
   datePicker: {
     itemsSelected: '{0} selected',
     range: {
-      title: 'Select dates',
-      header: 'Enter dates',
+      title: 'Valitse päivämäärät',
+      header: 'Syötä päivämäärät',
     },
-    title: 'Select date',
-    header: 'Enter date',
+    title: 'Valitse päivämäärä',
+    header: 'Syötä päivämäärä',
     input: {
-      placeholder: 'Enter date',
+      placeholder: 'Syötä päivämäärä',
     },
   },
   noDataText: 'Ei dataa',
@@ -68,6 +68,11 @@ export default {
   fileInput: {
     counter: '{0} tiedostoa',
     counterSize: '{0} tiedostoa ({1} yhteensä)',
+  },
+  fileUpload: {
+    title: 'Drag and drop files here',
+    divider: 'or',
+    browse: 'Browse Files',
   },
   timePicker: {
     am: 'ap.',

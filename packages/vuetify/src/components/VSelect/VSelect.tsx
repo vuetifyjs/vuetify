@@ -20,6 +20,7 @@ import { forwardRefs } from '@/composables/forwardRefs'
 import { IconValue } from '@/composables/icons'
 import { makeItemsProps, useItems } from '@/composables/list-items'
 import { useLocale } from '@/composables/locale'
+import { useIsMousedown } from '@/composables/mousedown'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeTransitionProps } from '@/composables/transition'
 
@@ -167,7 +168,8 @@ export const VSelect = genericComponent<new <
         : typeof props.counterValue === 'number' ? props.counterValue
         : model.value.length
     })
-    const form = useForm()
+    const form = useForm(props)
+    const { isMousedown } = useIsMousedown()
     const selectedValues = computed(() => model.value.map(selection => selection.value))
     const isFocused = shallowRef(false)
     const label = computed(() => menu.value ? props.closeText : props.openText)
@@ -184,7 +186,7 @@ export const VSelect = genericComponent<new <
 
     const menuDisabled = computed(() => (
       (props.hideNoData && !displayItems.value.length) ||
-      props.readonly || form?.isReadonly.value
+      form.isReadonly.value || form.isDisabled.value
     ))
 
     const computedMenuProps = computed(() => {
@@ -215,7 +217,7 @@ export const VSelect = genericComponent<new <
       }
     }
     function onKeydown (e: KeyboardEvent) {
-      if (!e.key || props.readonly || form?.isReadonly.value) return
+      if (!e.key || form.isReadonly.value) return
 
       if (['Enter', ' ', 'ArrowDown', 'ArrowUp', 'Home', 'End'].includes(e.key)) {
         e.preventDefault()
@@ -238,7 +240,7 @@ export const VSelect = genericComponent<new <
       // html select hotkeys
       const KEYBOARD_LOOKUP_THRESHOLD = 1000 // milliseconds
 
-      if (props.multiple || !checkPrintable(e)) return
+      if (!checkPrintable(e)) return
 
       const now = performance.now()
       if (now - keyboardLookupLastTime > KEYBOARD_LOOKUP_THRESHOLD) {
@@ -282,7 +284,7 @@ export const VSelect = genericComponent<new <
       }
     }
     function onBlur (e: FocusEvent) {
-      if (!listRef.value?.$el.contains(e.relatedTarget as HTMLElement)) {
+      if (!listRef.value?.$el.contains(e.relatedTarget as HTMLElement) && !isMousedown.value) {
         menu.value = false
       }
     }
@@ -414,14 +416,14 @@ export const VSelect = genericComponent<new <
                       { slots['prepend-item']?.() }
 
                       { !displayItems.value.length && !props.hideNoData && (slots['no-data']?.() ?? (
-                        <VListItem title={ t(props.noDataText) } />
+                        <VListItem key="no-data" title={ t(props.noDataText) } />
                       ))}
 
-                      <VVirtualScroll ref={ vVirtualScrollRef } renderless items={ displayItems.value }>
+                      <VVirtualScroll ref={ vVirtualScrollRef } renderless items={ displayItems.value } itemKey="value">
                         { ({ item, index, itemRef }) => {
                           const itemProps = mergeProps(item.props, {
                             ref: itemRef,
-                            key: index,
+                            key: item.value,
                             onClick: () => select(item, null),
                           })
 

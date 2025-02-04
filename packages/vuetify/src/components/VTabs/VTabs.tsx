@@ -17,26 +17,27 @@ import { makeTagProps } from '@/composables/tag'
 
 // Utilities
 import { computed, toRef } from 'vue'
+import { VTabsSymbol } from './shared'
 import { convertToUnit, genericComponent, isObject, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import { VTabsSymbol } from './shared'
+import type { GenericProps } from '@/util'
 
 export type TabItem = string | number | Record<string, any>
 
-export type VTabsSlot = {
-  item: TabItem
+export type VTabsSlot<T> = {
+  item: T
 }
 
-export type VTabsSlots = {
+export type VTabsSlots<T> = {
   default: never
-  tab: VTabsSlot
-  item: VTabsSlot
+  tab: VTabsSlot<T>
+  item: VTabsSlot<T>
   window: never
 } & {
-  [key: `tab.${string}`]: VTabsSlot
-  [key: `item.${string}`]: VTabsSlot
+  [key: `tab.${string}`]: VTabsSlot<T>
+  [key: `item.${string}`]: VTabsSlot<T>
 }
 
 function parseItems (items: readonly TabItem[] | undefined) {
@@ -78,7 +79,12 @@ export const makeVTabsProps = propsFactory({
   ...makeTagProps(),
 }, 'VTabs')
 
-export const VTabs = genericComponent<VTabsSlots>()({
+export const VTabs = genericComponent<new <T = TabItem>(
+  props: {
+    items?: T
+  },
+  slots: VTabsSlots<T>
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VTabs',
 
   props: makeVTabsProps(),

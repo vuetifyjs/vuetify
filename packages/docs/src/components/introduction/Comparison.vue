@@ -29,7 +29,6 @@
                 height="24"
                 max-width="24"
                 width="24"
-                contain
               />
 
               <div v-text="framework.name" />

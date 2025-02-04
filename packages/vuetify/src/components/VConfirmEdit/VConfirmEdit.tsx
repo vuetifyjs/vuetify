@@ -19,7 +19,7 @@ export type VConfirmEditSlots<T> = {
     save: () => void
     cancel: () => void
     isPristine: boolean
-    get actions (): VNode
+    get actions (): (props?: {}) => VNode
   }
 }
 
@@ -77,9 +77,8 @@ export const VConfirmEdit = genericComponent<new <T> (
       emit('cancel')
     }
 
-    let actionsUsed = false
-    useRender(() => {
-      const actions = (
+    function actions (actionsProps?: {}) {
+      return (
         <>
           <VBtn
             disabled={ isPristine.value }
@@ -87,6 +86,7 @@ export const VConfirmEdit = genericComponent<new <T> (
             color={ props.color }
             onClick={ cancel }
             text={ t(props.cancelText) }
+            { ...actionsProps }
           />
 
           <VBtn
@@ -95,9 +95,14 @@ export const VConfirmEdit = genericComponent<new <T> (
             color={ props.color }
             onClick={ save }
             text={ t(props.okText) }
+            { ...actionsProps }
           />
         </>
       )
+    }
+
+    let actionsUsed = false
+    useRender(() => {
       return (
         <>
           {
@@ -113,7 +118,7 @@ export const VConfirmEdit = genericComponent<new <T> (
             })
           }
 
-          { !actionsUsed && actions }
+          { !actionsUsed && actions() }
         </>
       )
     })
