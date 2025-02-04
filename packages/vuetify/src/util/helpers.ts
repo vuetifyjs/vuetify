@@ -772,3 +772,8 @@ export function checkPrintable (e: KeyboardEvent) {
   const noModifier = !e.ctrlKey && !e.metaKey && !e.altKey
   return isPrintableChar && noModifier
 }
+
+export type Primitive = string | number | boolean | symbol | bigint
+export function isPrimitive (value: unknown): value is Primitive {
+  return typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean' || typeof value === 'bigint'
+}
