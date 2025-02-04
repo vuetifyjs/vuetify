@@ -199,7 +199,6 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
                 { ...fieldProps }
                 id={ id.value }
                 active={ isActive.value || isDirty.value }
-                clearable={ props.clearable && !isDisabled.value && !isReadonly.value }
                 dirty={ isDirty.value || props.dirty }
                 disabled={ isDisabled.value }
                 focused={ isFocused.value }
