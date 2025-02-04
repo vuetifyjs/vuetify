@@ -7,11 +7,12 @@ import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextFi
 // Composables
 import { useDate } from '@/composables/date'
 import { makeFocusProps, useFocus } from '@/composables/focus'
+import { forwardRefs } from '@/composables/forwardRefs'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, shallowRef } from 'vue'
+import { computed, ref, shallowRef } from 'vue'
 import { genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
@@ -63,6 +64,7 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
     const { isFocused, focus, blur } = useFocus(props)
     const model = useProxiedModel(props, 'modelValue', props.multiple ? [] : null)
     const menu = shallowRef(false)
+    const vDateInputRef = ref()
 
     const display = computed(() => {
       const value = wrapInArray(model.value)
@@ -112,6 +114,12 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
       menu.value = false
     }
 
+    function onUpdateModel (value: string) {
+      if (value != null) return
+
+      model.value = null
+    }
+
     useRender(() => {
       const confirmEditProps = VConfirmEdit.filterProps(props)
       const datePickerProps = VDatePicker.filterProps(omit(props, ['active', 'location']))
@@ -119,6 +127,7 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
 
       return (
         <VTextField
+          ref={ vDateInputRef }
           { ...textFieldProps }
           class={ props.class }
           style={ props.style }
@@ -129,6 +138,7 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
           onBlur={ blur }
           onClick:control={ isInteractive.value ? onClick : undefined }
           onClick:prepend={ isInteractive.value ? onClick : undefined }
+          onUpdate:modelValue={ onUpdateModel }
         >
           <VMenu
             v-model={ menu.value }
@@ -175,6 +185,8 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
         </VTextField>
       )
     })
+
+    return forwardRefs({}, vDateInputRef)
   },
 })
 
