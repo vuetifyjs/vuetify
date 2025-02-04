@@ -184,9 +184,9 @@
   },
   "peerDependencies": {
     "typescript": ">=4.7",
-    "vite-plugin-vuetify": ">=1.0.0",
+    "vite-plugin-vuetify": ">=2.1.0",
     "vue": "^3.3.0",
-    "webpack-plugin-vuetify": ">=2.0.0"
+    "webpack-plugin-vuetify": ">=3.1.0"
   },
   "peerDependenciesMeta": {
     "typescript": {
