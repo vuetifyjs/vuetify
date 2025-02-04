@@ -218,7 +218,7 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
                   )}
                   { slots.thead?.(slotProps.value) }
                   { !props.hideDefaultBody && (
-                    <tbody>
+                    <tbody key="tbody">
                       <tr ref={ markerRef } style={{ height: convertToUnit(paddingTop.value), border: 0 }}>
                         <td colspan={ columns.value.length } style={{ height: 0, border: 0 }}></td>
                       </tr>
