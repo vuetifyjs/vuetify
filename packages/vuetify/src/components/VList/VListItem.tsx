@@ -27,7 +27,7 @@ import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant
 import { Ripple } from '@/directives/ripple'
 
 // Utilities
-import { computed, onBeforeMount, watch } from 'vue'
+import { computed, onBeforeMount, toRef, watch } from 'vue'
 import { deprecate, EventProp, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -128,7 +128,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
       parent,
       openOnSelect,
       id: uid,
-    } = useNestedItem(id, false)
+    } = useNestedItem(id, toRef(props, 'disabled'), false)
     const list = useList()
     const isActive = computed(() =>
       props.active !== false &&
