@@ -40,11 +40,11 @@
 
       <template #item="{ item, props: itemProps }">
         <v-list-item
-          v-if="item?.title"
+          v-if="item.name"
           v-bind="itemProps"
         >
-          <template v-if="item.raw?.reactions" #append>
-            {{ genEmoji(item.raw.reactions.total_count) }}
+          <template v-if="item.reactions" #append>
+            {{ genEmoji(item.reactions.total_count) }}
           </template>
         </v-list-item>
 

@@ -35,7 +35,7 @@ const stories = Object.fromEntries(Object.entries({
             { ...v.props }
           >{{
             selection: ({ item }) => {
-              return item.title
+              return item
             },
           }}
           </VSelect>
@@ -64,7 +64,7 @@ describe('VSelect', () => {
       >
         {{
           selection: ({ item, index }) => {
-            return item.raw.title.toUpperCase()
+            return item.title.toUpperCase()
           },
         }}
       </VSelect>

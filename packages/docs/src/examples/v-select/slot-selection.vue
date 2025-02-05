@@ -7,7 +7,7 @@
   >
     <template v-slot:selection="{ item, index }">
       <v-chip v-if="index < 2">
-        <span>{{ item.title }}</span>
+        <span>{{ item }}</span>
       </v-chip>
       <span
         v-if="index === 2"
