@@ -111,6 +111,6 @@ The `step` prop behaves the same as the `step` attribute in the `<input type="nu
 
 #### Precision
 
-The `precision` prop enforces strict precision. It is expected to be an integer value in range between `0` and `15`. While it won't prevent user from typing or pasting the invalid value, additional validation rule helps detect the incorrect value and the field auto-corrects itself once user leaves the field (on blur).
+The `precision` prop enforces strict precision. It is expected to be an integer value in range between `0` and `15`. Input will prevent user from typing or pasting the invalid value.
 
 <ExamplesExample file="v-number-input/prop-precision" />

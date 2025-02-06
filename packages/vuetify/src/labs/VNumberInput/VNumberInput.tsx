@@ -55,8 +55,8 @@ const makeVNumberInputProps = propsFactory({
     default: 1,
   },
   precision: {
-    type: Number,
-    default: 0,
+    type: Number as PropType<number | null>,
+    default: null,
   },
 
   ...omit(makeVTextFieldProps({}), ['appendInnerIcon', 'modelValue', 'prependInnerIcon']),
@@ -83,10 +83,14 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
     ))
 
     const isFocused = ref(false)
+
     function correctPrecision (val: number) {
-      return isFocused.value
-        ? Number(val.toFixed(props.precision)).toString() // trim zeros
+      const fixed = props.precision == null
+        ? String(val)
         : val.toFixed(props.precision)
+      return isFocused.value
+        ? Number(fixed).toString() // trim zeros
+        : fixed
     }
 
     const model = useProxiedModel(props, 'modelValue', null,
@@ -191,6 +195,9 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       if (!/^-?(\d+(\.\d*)?|(\.\d+)|\d*|\.)$/.test(potentialNewInputVal)) {
         e.preventDefault()
       }
+
+      if (props.precision == null) return
+
       // Ignore decimal digits above precision limit
       if (potentialNewInputVal.split('.')[1]?.length > props.precision) {
         e.preventDefault()
@@ -241,7 +248,9 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
         inputText.value = null
         return
       }
-      inputText.value = model.value.toFixed(props.precision)
+      inputText.value = props.precision == null
+        ? String(model.value)
+        : model.value.toFixed(props.precision)
     }
 
     function trimDecimalZeros () {
