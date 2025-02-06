@@ -73,8 +73,8 @@ type NestedProvide = {
   isGroupActivator?: boolean
   root: {
     children: Ref<Map<unknown, unknown[]>>
-    disabled: Ref<Set<unknown>>
     parents: Ref<Map<unknown, unknown>>
+    disabled: Ref<Set<unknown>>
     activatable: Ref<boolean>
     selectable: Ref<boolean>
     opened: Ref<Set<unknown>>
@@ -98,8 +98,8 @@ export const emptyNested: NestedProvide = {
   root: {
     register: () => null,
     unregister: () => null,
-    parents: ref(new Map()),
     children: ref(new Map()),
+    parents: ref(new Map()),
     disabled: ref(new Set()),
     open: () => null,
     openOnSelect: () => null,
@@ -130,8 +130,8 @@ export const makeNestedProps = propsFactory({
 export const useNested = (props: NestedProps) => {
   let isUnmounted = false
   const children = ref(new Map<unknown, unknown[]>())
-  const disabled = ref(new Set<unknown>())
   const parents = ref(new Map<unknown, unknown>())
+  const disabled = ref(new Set<unknown>())
 
   const opened = useProxiedModel(props, 'opened', props.opened, v => new Set(v), v => [...v.values()])
 
@@ -184,7 +184,7 @@ export const useNested = (props: NestedProps) => {
     props,
     'selected',
     props.selected,
-    v => selectStrategy.value.in(v, children.value, disabled.value, parents.value),
+    v => selectStrategy.value.in(v, children.value, parents.value, disabled.value),
     v => selectStrategy.value.out(v, children.value, parents.value),
   )
 
@@ -291,8 +291,8 @@ export const useNested = (props: NestedProps) => {
           value,
           selected: new Map(selected.value),
           children: children.value,
-          disabled: disabled.value,
           parents: parents.value,
+          disabled: disabled.value,
           event,
         })
         newSelected && (selected.value = newSelected)
@@ -333,8 +333,8 @@ export const useNested = (props: NestedProps) => {
         }
       },
       children,
-      disabled,
       parents,
+      disabled,
       getPath,
     },
   }
@@ -367,11 +367,15 @@ export const useNestedItem = (id: Ref<unknown>, isDisabled: Ref<boolean>, isGrou
   }
 
   onBeforeMount(() => {
-    !parent.isGroupActivator && parent.root.register(computedId.value, parent.id.value, isDisabled.value, isGroup)
+    if (!parent.isGroupActivator) {
+      parent.root.register(computedId.value, parent.id.value, isDisabled.value, isGroup)
+    }
   })
 
   onBeforeUnmount(() => {
-    !parent.isGroupActivator && parent.root.unregister(computedId.value)
+    if (!parent.isGroupActivator) {
+      parent.root.unregister(computedId.value)
+    }
   })
 
   isGroup && provide(VNestedSymbol, item)

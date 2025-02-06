@@ -22,8 +22,8 @@ describe('selectStrategies', () => {
         id: '2',
         value: true,
         children,
-        disabled: new Set(),
         parents,
+        disabled: new Set(),
         selected,
       })
 
@@ -31,8 +31,8 @@ describe('selectStrategies', () => {
         id: '3',
         value: true,
         children,
-        disabled: new Set(),
         parents,
+        disabled: new Set(),
         selected,
       })
 
@@ -58,8 +58,8 @@ describe('selectStrategies', () => {
         id: '1',
         value: true,
         children,
-        disabled: new Set(),
         parents,
+        disabled: new Set(),
         selected: new Map(),
       })).toEqual(new Map([
         ['1', 'on'],
@@ -69,8 +69,8 @@ describe('selectStrategies', () => {
         id: '2',
         value: true,
         children,
-        disabled: new Set(),
         parents,
+        disabled: new Set(),
         selected: new Map(),
       })).toEqual(new Map([
         ['2', 'on'],
@@ -93,8 +93,8 @@ describe('selectStrategies', () => {
         id: '1',
         value: false,
         children,
-        disabled: new Set(),
         parents,
+        disabled: new Set(),
         selected: new Map([
           ['1', 'on'],
         ]),
@@ -106,8 +106,8 @@ describe('selectStrategies', () => {
         id: '2',
         value: false,
         children,
-        disabled: new Set(),
         parents,
+        disabled: new Set(),
         selected: new Map([
           ['2', 'on'],
         ]),
@@ -132,8 +132,8 @@ describe('selectStrategies', () => {
         id: '2',
         value: false,
         children,
-        disabled: new Set(),
         parents,
+        disabled: new Set(),
         selected: new Map([
           ['2', 'on'],
         ]),
@@ -162,8 +162,8 @@ describe('selectStrategies', () => {
         id: '2',
         value: true,
         children,
-        disabled: new Set(),
         parents,
+        disabled: new Set(),
         selected,
       })
 
@@ -171,8 +171,8 @@ describe('selectStrategies', () => {
         id: '3',
         value: true,
         children,
-        disabled: new Set(),
         parents,
+        disabled: new Set(),
         selected,
       })
 
@@ -197,8 +197,8 @@ describe('selectStrategies', () => {
         id: '1',
         value: true,
         children,
-        disabled: new Set(),
         parents,
+        disabled: new Set(),
         selected: new Map(),
       })).toEqual(new Map([
         ['1', 'on'],
@@ -208,8 +208,8 @@ describe('selectStrategies', () => {
         id: '2',
         value: true,
         children,
-        disabled: new Set(),
         parents,
+        disabled: new Set(),
         selected: new Map(),
       })).toEqual(new Map([
         ['2', 'on'],
@@ -232,8 +232,8 @@ describe('selectStrategies', () => {
         id: '1',
         value: false,
         children,
-        disabled: new Set(),
         parents,
+        disabled: new Set(),
         selected: new Map([
           ['1', 'on'],
         ]),
@@ -245,8 +245,8 @@ describe('selectStrategies', () => {
         id: '2',
         value: false,
         children,
-        disabled: new Set(),
         parents,
+        disabled: new Set(),
         selected: new Map([
           ['2', 'on'],
         ]),
@@ -271,8 +271,8 @@ describe('selectStrategies', () => {
         id: '2',
         value: false,
         children,
-        disabled: new Set(),
         parents,
+        disabled: new Set(),
         selected: new Map([
           ['2', 'on'],
         ]),
@@ -301,8 +301,8 @@ describe('selectStrategies', () => {
         id: '2',
         value: true,
         children,
-        disabled: new Set(),
         parents,
+        disabled: new Set(),
         selected,
       })
 
@@ -310,8 +310,8 @@ describe('selectStrategies', () => {
         id: '3',
         value: true,
         children,
-        disabled: new Set(),
         parents,
+        disabled: new Set(),
         selected,
       })
 
@@ -336,8 +336,8 @@ describe('selectStrategies', () => {
         id: '1',
         value: true,
         children,
-        disabled: new Set(),
         parents,
+        disabled: new Set(),
         selected: new Map(),
       })).toEqual(new Map())
 
@@ -345,8 +345,8 @@ describe('selectStrategies', () => {
         id: '2',
         value: true,
         children,
-        disabled: new Set(),
         parents,
+        disabled: new Set(),
         selected: new Map(),
       })).toEqual(new Map([
         ['2', 'on'],
@@ -369,8 +369,8 @@ describe('selectStrategies', () => {
         id: '1',
         value: false,
         children,
-        disabled: new Set(),
         parents,
+        disabled: new Set(),
         selected: new Map([
           ['1', 'on'],
         ]),
@@ -382,8 +382,8 @@ describe('selectStrategies', () => {
         id: '2',
         value: false,
         children,
-        disabled: new Set(),
         parents,
+        disabled: new Set(),
         selected: new Map([
           ['2', 'on'],
         ]),
@@ -408,8 +408,8 @@ describe('selectStrategies', () => {
         id: '2',
         value: false,
         children,
-        disabled: new Set(),
         parents,
+        disabled: new Set(),
         selected: new Map([
           ['2', 'on'],
         ]),
@@ -438,8 +438,8 @@ describe('selectStrategies', () => {
         id: '2',
         value: true,
         children,
-        disabled: new Set(),
         parents,
+        disabled: new Set(),
         selected,
       })
 
@@ -447,8 +447,8 @@ describe('selectStrategies', () => {
         id: '3',
         value: true,
         children,
-        disabled: new Set(),
         parents,
+        disabled: new Set(),
         selected,
       })
 
@@ -474,8 +474,8 @@ describe('selectStrategies', () => {
         id: '1',
         value: true,
         children,
-        disabled: new Set(),
         parents,
+        disabled: new Set(),
         selected: new Map(),
       })).toEqual(new Map())
 
@@ -483,8 +483,8 @@ describe('selectStrategies', () => {
         id: '2',
         value: true,
         children,
-        disabled: new Set(),
         parents,
+        disabled: new Set(),
         selected: new Map(),
       })).toEqual(new Map([
         ['2', 'on'],
@@ -507,8 +507,8 @@ describe('selectStrategies', () => {
         id: '1',
         value: false,
         children,
-        disabled: new Set(),
         parents,
+        disabled: new Set(),
         selected: new Map([
           ['1', 'on'],
         ]),
@@ -520,8 +520,8 @@ describe('selectStrategies', () => {
         id: '2',
         value: false,
         children,
-        disabled: new Set(),
         parents,
+        disabled: new Set(),
         selected: new Map([
           ['2', 'on'],
         ]),
@@ -546,8 +546,8 @@ describe('selectStrategies', () => {
         id: '2',
         value: false,
         children,
-        disabled: new Set(),
         parents,
+        disabled: new Set(),
         selected: new Map([
           ['2', 'on'],
         ]),
@@ -579,8 +579,8 @@ describe('selectStrategies', () => {
         id: '6',
         value: true,
         children,
-        disabled: new Set(),
         parents,
+        disabled: new Set(),
         selected: new Map(),
       })).toEqual(new Map([
         ['1', 'indeterminate'],
@@ -611,8 +611,8 @@ describe('selectStrategies', () => {
         id: '3',
         value: true,
         children,
-        disabled: new Set(),
         parents,
+        disabled: new Set(),
         selected: new Map(),
       })).toEqual(new Map([
         ['1', 'indeterminate'],
@@ -644,8 +644,8 @@ describe('selectStrategies', () => {
         id: '3',
         value: false,
         children,
-        disabled: new Set(),
         parents,
+        disabled: new Set(),
         selected: new Map([
           ['1', 'indeterminate'],
           ['3', 'on'],
@@ -680,8 +680,8 @@ describe('selectStrategies', () => {
         id: '2',
         value: true,
         children,
-        disabled: new Set(),
         parents,
+        disabled: new Set(),
         selected,
       })
 
@@ -694,8 +694,8 @@ describe('selectStrategies', () => {
         id: '3',
         value: true,
         children,
-        disabled: new Set(),
         parents,
+        disabled: new Set(),
         selected,
       })
 
@@ -727,8 +727,8 @@ describe('selectStrategies', () => {
         id: '6',
         value: false,
         children,
-        disabled: new Set(),
         parents,
+        disabled: new Set(),
         selected: new Map([
           ['1', 'indeterminate'],
           ['3', 'indeterminate'],
@@ -746,8 +746,8 @@ describe('selectStrategies', () => {
         id: '1',
         value: false,
         children,
-        disabled: new Set(),
         parents,
+        disabled: new Set(),
         selected: new Map([
           ['1', 'on'],
           ['2', 'on'],
@@ -789,8 +789,8 @@ describe('selectStrategies', () => {
         id: '1',
         value: true,
         children,
-        disabled,
         parents,
+        disabled,
         selected,
       })
 
@@ -803,8 +803,8 @@ describe('selectStrategies', () => {
         id: '1',
         value: true,
         children,
-        disabled,
         parents,
+        disabled,
         selected: new Map(),
       })
 

@@ -7,16 +7,16 @@ export type SelectStrategyFn = (data: {
   value: boolean
   selected: Map<unknown, 'on' | 'off' | 'indeterminate'>
   children: Map<unknown, unknown[]>
-  disabled: Set<unknown>
   parents: Map<unknown, unknown>
+  disabled: Set<unknown>
   event?: Event
 }) => Map<unknown, 'on' | 'off' | 'indeterminate'>
 
 export type SelectStrategyTransformInFn = (
   v: readonly unknown[] | undefined,
   children: Map<unknown, unknown[]>,
-  disabled: Set<unknown>,
   parents: Map<unknown, unknown>,
+  disabled: Set<unknown>,
 ) => Map<unknown, 'on' | 'off' | 'indeterminate'>
 
 export type SelectStrategyTransformOutFn = (
@@ -51,7 +51,7 @@ export const independentSelectStrategy = (mandatory?: boolean): SelectStrategy =
 
       return selected
     },
-    in: (v, children, parents) => {
+    in: (v, children, parents, disabled) => {
       const map = new Map()
 
       for (const id of (v || [])) {
@@ -61,6 +61,7 @@ export const independentSelectStrategy = (mandatory?: boolean): SelectStrategy =
           selected: map,
           children,
           parents,
+          disabled,
         })
       }
 
@@ -89,9 +90,9 @@ export const independentSingleSelectStrategy = (mandatory?: boolean): SelectStra
       const singleSelected = selected.has(id) ? new Map([[id, selected.get(id)!]]) : new Map()
       return parentStrategy.select({ ...rest, id, selected: singleSelected })
     },
-    in: (v, children, parents) => {
+    in: (v, children, parents, disabled) => {
       if (v?.length) {
-        return parentStrategy.in(v.slice(0, 1), children, parents)
+        return parentStrategy.in(v.slice(0, 1), children, parents, disabled)
       }
 
       return new Map()
@@ -140,7 +141,7 @@ export const leafSingleSelectStrategy = (mandatory?: boolean): SelectStrategy =>
 
 export const classicSelectStrategy = (mandatory?: boolean): SelectStrategy => {
   const strategy: SelectStrategy = {
-    select: ({ id, value, selected, children, disabled, parents }) => {
+    select: ({ id, value, selected, children, parents, disabled }) => {
       id = toRaw(id)
       const original = new Map(selected)
 
@@ -191,7 +192,7 @@ export const classicSelectStrategy = (mandatory?: boolean): SelectStrategy => {
 
       return selected
     },
-    in: (v, children, disabled, parents) => {
+    in: (v, children, parents, disabled) => {
       let map = new Map()
 
       for (const id of (v || [])) {
@@ -200,8 +201,8 @@ export const classicSelectStrategy = (mandatory?: boolean): SelectStrategy => {
           value: true,
           selected: map,
           children,
-          disabled,
           parents,
+          disabled,
         })
       }
 
