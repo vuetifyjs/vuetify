@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`VDatePicker.ts should handle date range picker with null value 1`] = `
 <div class="v-picker__title__btn v-date-picker-title__date v-picker__title__btn--active">

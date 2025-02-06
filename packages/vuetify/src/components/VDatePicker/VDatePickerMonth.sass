@@ -53,3 +53,20 @@
 
   .v-date-picker-month__day--hide-adjacent
     opacity: 0
+  .v-date-picker-month__events
+    height: $date-picker-event-size
+    left: 0
+    position: absolute
+    text-align: center
+    white-space: pre
+    width: 100%
+  
+    > div
+      height: $date-picker-event-size
+      margin: $date-picker-event-margin
+      width: $date-picker-event-size
+      margin-bottom: -1px
+    
+  .v-date-picker-month__day .v-date-picker-month__events
+    bottom: $date-picker-event-date-bottom
+
