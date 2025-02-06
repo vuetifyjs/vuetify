@@ -154,8 +154,7 @@ jobs:
   publish-docs:
     needs: [lint, test-unit, build-docs]
     runs-on: ubuntu-24.04
-    environment: Production
-    if: github.event_name == 'push' && github.repository_owner == 'vuetifyjs' && github.ref == 'refs/heads/master'
+    environment: ${{ github.ref_name }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/download-artifact@v4
