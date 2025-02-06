@@ -47,10 +47,7 @@ export const makeVOtpInputProps = propsFactory({
     type: String as PropType<'text' | 'password' | 'number'>,
     default: 'number',
   },
-  masked: {
-    type: Boolean,
-    default: false,
-  },
+  masked: Boolean,
   ...makeDimensionProps(),
   ...makeFocusProps(),
   ...only(makeVFieldProps({
