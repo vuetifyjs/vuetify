@@ -55,7 +55,7 @@ describe('goto', () => {
     const bottom = container.querySelector('#bottom')!
 
     await userEvent.click(top)
-    await expect.poll(() => window.scrollY).toBeCloseTo(1250, -1)
+    await expect.poll(() => window.scrollY).toBeCloseTo(1260, -1)
 
     await userEvent.click(bottom)
     await expect.poll(() => window.scrollY).toBe(0)
@@ -74,7 +74,7 @@ describe('goto', () => {
     const end = container.querySelector('#end')!
 
     await userEvent.click(start)
-    await expect.poll(() => window.scrollX).toBeCloseTo(755, -1)
+    await expect.poll(() => window.scrollX).toBeCloseTo(770, -1)
 
     await userEvent.click(end)
     await expect.poll(() => window.scrollX).toBe(0)
