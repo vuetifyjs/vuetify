@@ -13,7 +13,7 @@ import { forwardRefs } from '@/composables/forwardRefs'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, nextTick, onMounted, ref, watch } from 'vue'
+import { computed, nextTick, onMounted, ref, shallowRef, watch, watchEffect } from 'vue'
 import { clamp, genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
@@ -75,7 +75,6 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
 
   setup (props, { slots }) {
     const vTextFieldRef = ref<VTextField | undefined>()
-    const _inputText = ref<string | null>(null)
 
     const form = useForm(props)
     const controlsDisabled = computed(() => (
@@ -94,36 +93,30 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
     }
 
     const model = useProxiedModel(props, 'modelValue', null,
-      val => {
-        if (isFocused.value && !controlsDisabled.value) {
-          // ignore external changes
-        } else if (val == null || controlsDisabled.value) {
-          _inputText.value = val && !isNaN(val) ? String(val) : null
-        } else if (!isNaN(val)) {
-          _inputText.value = correctPrecision(val)
-        }
-        return val ?? null
-      },
+      val => val ?? null,
       val => val == null
         ? val ?? null
         : clamp(+val, props.min, props.max)
     )
 
-    watch(model, () => {
-      // ensure proxiedModel transformIn is being called when readonly
-    }, { immediate: true })
-
+    const _inputText = shallowRef<string | null>(null)
+    watchEffect(() => {
+      if (isFocused.value && !controlsDisabled.value) {
+        // ignore external changes
+      } else if (model.value == null || controlsDisabled.value) {
+        _inputText.value = model.value && !isNaN(model.value) ? String(model.value) : null
+      } else if (!isNaN(model.value)) {
+        _inputText.value = correctPrecision(model.value)
+      }
+    })
     const inputText = computed<string | null>({
       get: () => _inputText.value,
       set (val) {
         if (val === null || val === '') {
           model.value = null
           _inputText.value = null
-          return
-        }
-
-        if (!isNaN(+val) && +val <= props.max && +val >= props.min) {
-          model.value = val as any
+        } else if (!isNaN(+val) && +val <= props.max && +val >= props.min) {
+          model.value = +val
           _inputText.value = val
         }
       },
