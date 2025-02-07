@@ -111,6 +111,6 @@ The `step` prop behaves the same as the `step` attribute in the `<input type="nu
 
 #### Precision
 
-The `precision` prop enforces strict precision. It is expected to be an integer value in range between `0` and `15`. Input will prevent user from typing or pasting the invalid value.
+The `precision` prop enforces strict precision. It is expected to be an integer value in range between `0` and `15`. Input will prevent user from typing or pasting an invalid value.
 
 <ExamplesExample file="v-number-input/prop-precision" />
