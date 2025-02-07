@@ -83,10 +83,10 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
 
     const isFocused = ref(false)
 
-    function correctPrecision (val: number) {
-      const fixed = props.precision == null
+    function correctPrecision (val: number, precision = props.precision) {
+      const fixed = precision == null
         ? String(val)
-        : val.toFixed(props.precision)
+        : val.toFixed(precision)
       return isFocused.value
         ? Number(fixed).toString() // trim zeros
         : fixed
@@ -149,6 +149,13 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       clampModel()
     })
 
+    function inferPrecision (value: number | null) {
+      if (value == null) return 0
+      const str = value.toString()
+      const idx = str.indexOf('.')
+      return ~idx ? str.length - idx : 0
+    }
+
     function toggleUpDown (increment = true) {
       if (controlsDisabled.value) return
       if (model.value == null) {
@@ -156,10 +163,12 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
         return
       }
 
+      let inferredPrecision = Math.max(inferPrecision(model.value), inferPrecision(props.step))
+      if (props.precision != null) inferredPrecision = Math.max(inferredPrecision, props.precision)
       if (increment) {
-        if (canIncrease.value) inputText.value = correctPrecision(model.value + props.step)
+        if (canIncrease.value) inputText.value = correctPrecision(model.value + props.step, inferredPrecision)
       } else {
-        if (canDecrease.value) inputText.value = correctPrecision(model.value - props.step)
+        if (canDecrease.value) inputText.value = correctPrecision(model.value - props.step, inferredPrecision)
       }
     }
 
