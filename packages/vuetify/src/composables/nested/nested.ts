@@ -27,7 +27,7 @@ import {
   leafSelectStrategy,
   leafSingleSelectStrategy,
 } from './selectStrategies'
-import { consoleError, getCurrentInstance, getUid, propsFactory } from '@/util'
+import { arrayDiff, consoleError, getCurrentInstance, getUid, propsFactory } from '@/util'
 
 // Types
 import type { InjectionKey, PropType, Ref } from 'vue'
@@ -303,13 +303,13 @@ export const useNested = (props: NestedProps) => {
         const newActivated = activeStrategy.value.activate({
           id,
           value,
-          activated: activated.value,
+          activated: new Set(activated.value),
           children: children.value,
           parents: parents.value,
           event,
         })
 
-        newActivated && newActivated.size && activated.value !== newActivated && (activated.value = newActivated)
+        newActivated && arrayDiff(activated.value, newActivated).length && (activated.value = newActivated)
       },
       children,
       parents,
