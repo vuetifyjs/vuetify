@@ -378,14 +378,11 @@ export function filterInputAttrs (attrs: Record<string, unknown>) {
 
 /**
  * Returns the set difference of B and A, i.e. the set of elements in B but not in A
- * A and B can be sets, but the function always returns the result as an array.
  */
-export function arrayDiff (a: any[] | Set<any>, b: any[] | Set<any>): any[] {
+export function arrayDiff (a: any[], b: any[]): any[] {
   const diff: any[] = []
-  const aArr: any[] = a instanceof Set ? Array.from(a) : a
-  const bArr: any[] = b instanceof Set ? Array.from(b) : b
-  for (let i = 0; i < bArr.length; i++) {
-    if (!aArr.includes(bArr[i])) diff.push(bArr[i])
+  for (let i = 0; i < b.length; i++) {
+    if (!a.includes(b[i])) diff.push(b[i])
   }
   return diff
 }

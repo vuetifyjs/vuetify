@@ -27,7 +27,7 @@ import {
   leafSelectStrategy,
   leafSingleSelectStrategy,
 } from './selectStrategies'
-import { arrayDiff, consoleError, getCurrentInstance, getUid, propsFactory } from '@/util'
+import { consoleError, getCurrentInstance, getUid, propsFactory } from '@/util'
 
 // Types
 import type { InjectionKey, PropType, Ref } from 'vue'
@@ -309,7 +309,7 @@ export const useNested = (props: NestedProps) => {
           event,
         })
 
-        newActivated && arrayDiff(activated.value, newActivated).length && (activated.value = newActivated)
+        newActivated && newActivated.symmetricDifference(activated.value).size && (activated.value = newActivated)
       },
       children,
       parents,
