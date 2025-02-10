@@ -33,7 +33,7 @@
           </v-col>
 
           <v-col
-            class="hidden-xs-only text-left ms-2"
+            class="hidden-xs text-left ms-2"
             md="3"
             sm="5"
           >
@@ -55,8 +55,8 @@
               v-if="message.new"
               :color="`${message.color}-lighten-1`"
               class="ms-0 me-2"
+              size="small"
               label
-              small
             >
               {{ message.new }} new
             </v-chip>

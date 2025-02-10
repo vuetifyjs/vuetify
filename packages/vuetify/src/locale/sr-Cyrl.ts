@@ -69,6 +69,11 @@ export default {
     counter: '{0} фајлова',
     counterSize: '{0} фајлова ({1} укупно)',
   },
+  fileUpload: {
+    title: 'Drag and drop files here',
+    divider: 'or',
+    browse: 'Browse Files',
+  },
   timePicker: {
     am: 'AM',
     pm: 'PM',

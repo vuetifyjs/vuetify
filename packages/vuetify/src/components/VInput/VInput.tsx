@@ -15,8 +15,8 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeValidationProps, useValidation } from '@/composables/validation'
 
 // Utilities
-import { computed } from 'vue'
-import { EventProp, genericComponent, getUid, only, propsFactory, useRender } from '@/util'
+import { computed, useId } from 'vue'
+import { EventProp, genericComponent, only, propsFactory, useRender } from '@/util'
 
 // Types
 import type { ComputedRef, PropType, Ref } from 'vue'
@@ -105,7 +105,7 @@ export const VInput = genericComponent<new <T>(
     const { rtlClasses } = useRtl()
     const { InputIcon } = useInputIcon(props)
 
-    const uid = getUid()
+    const uid = useId()
     const id = computed(() => props.id || `input-${uid}`)
     const messagesId = computed(() => `${id.value}-messages`)
 
@@ -209,9 +209,13 @@ export const VInput = genericComponent<new <T>(
           )}
 
           { hasDetails && (
-            <div class="v-input__details">
+            <div
+              id={ messagesId.value }
+              class="v-input__details"
+              role="alert"
+              aria-live="polite"
+            >
               <VMessages
-                id={ messagesId.value }
                 active={ hasMessages }
                 messages={ messages.value }
                 v-slots={{ message: slots.message }}

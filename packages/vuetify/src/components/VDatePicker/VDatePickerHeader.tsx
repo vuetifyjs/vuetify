@@ -7,6 +7,7 @@ import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 
 // Composables
 import { useBackgroundColor } from '@/composables/color'
+import { IconValue } from '@/composables/icons'
 import { MaybeTransition } from '@/composables/transition'
 
 // Utilities
@@ -20,7 +21,7 @@ export type VDatePickerHeaderSlots = {
 }
 
 export const makeVDatePickerHeaderProps = propsFactory({
-  appendIcon: String,
+  appendIcon: IconValue,
   color: String,
   header: String,
   transition: String,

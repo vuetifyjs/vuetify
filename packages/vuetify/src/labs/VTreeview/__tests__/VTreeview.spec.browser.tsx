@@ -156,6 +156,27 @@ describe.each([
       await userEvent.click(screen.getByText(/Nekosaur/))
       expect(activated.value).toStrictEqual([203])
     })
+
+    // https://github.com/vuetifyjs/vuetify/issues/20665
+    it('should emit only once', async () => {
+      const onActivated = vi.fn()
+      render(() => (
+        <VTreeview
+          open-all
+          items={ items }
+          item-value="id"
+          activatable
+          active-strategy="independent"
+          onUpdate:activated={ onActivated }
+        />
+      ))
+
+      await userEvent.click(screen.getByText(/John/))
+      expect(onActivated).toHaveBeenCalledOnce()
+
+      await userEvent.click(screen.getByText(/Human Resources/))
+      expect(onActivated).toHaveBeenCalledTimes(2)
+    })
   })
 
   describe('select', () => {
@@ -650,5 +671,38 @@ describe.each([
     itemEl.forEach(el => {
       expect(el).toBeVisible()
     })
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/20830
+  it('should return correct isOpen state in prepend slot', async () => {
+    render(() => (
+      <VTreeview
+        items={ items }
+        item-value="id"
+        open-on-click
+        return-object
+      >
+        {{
+          prepend: ({ isOpen }) => (<span class="prepend-is-open">{ `${isOpen}` }</span>),
+        }}
+      </VTreeview>
+    ))
+
+    await userEvent.click(screen.getByText(/Vuetify Human Resources/))
+    const itemsPrepend = screen.getAllByCSS('.v-treeview-item .v-list-item__prepend .prepend-is-open')
+    expect(itemsPrepend[0]).toHaveTextContent(/^true$/)
+    expect(itemsPrepend[1]).toHaveTextContent(/^false$/)
+
+    await userEvent.click(screen.getByText(/Core team/))
+    expect(itemsPrepend[0]).toHaveTextContent(/^true$/)
+    expect(itemsPrepend[1]).toHaveTextContent(/^true$/)
+
+    await userEvent.click(screen.getByText(/Core team/))
+    expect(itemsPrepend[0]).toHaveTextContent(/^true$/)
+    expect(itemsPrepend[1]).toHaveTextContent(/^false$/)
+
+    await userEvent.click(screen.getByText(/Vuetify Human Resources/))
+    expect(itemsPrepend[0]).toHaveTextContent(/^false$/)
+    expect(itemsPrepend[1]).toHaveTextContent(/^false$/)
   })
 })

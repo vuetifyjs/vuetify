@@ -49,8 +49,8 @@
                     class="text-none"
                     size="small"
                     text="Read"
+                    variant="flat"
                     border
-                    flat
                   >
                   </v-btn>
                 </div>

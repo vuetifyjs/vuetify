@@ -27,7 +27,7 @@ import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant
 import { Ripple } from '@/directives/ripple'
 
 // Utilities
-import { computed, watch } from 'vue'
+import { computed, onBeforeMount, watch } from 'vue'
 import { deprecate, EventProp, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -135,10 +135,11 @@ export const VListItem = genericComponent<VListItemSlots>()({
       (props.active || link.isActive?.value || (root.activatable.value ? isActivated.value : isSelected.value))
     )
     const isLink = computed(() => props.link !== false && link.isLink.value)
+    const isSelectable = computed(() => (!!list && (root.selectable.value || root.activatable.value || props.value != null)))
     const isClickable = computed(() =>
       !props.disabled &&
       props.link !== false &&
-      (props.link || link.isClickable.value || (!!list && (root.selectable.value || root.activatable.value || props.value != null)))
+      (props.link || link.isClickable.value || isSelectable.value)
     )
 
     const roundedProps = computed(() => props.rounded || props.nav)
@@ -148,15 +149,21 @@ export const VListItem = genericComponent<VListItemSlots>()({
       variant: props.variant,
     }))
 
+    // useNestedItem doesn't call register until beforeMount,
+    // so this can't be an immediate watcher as we don't know parent yet
     watch(() => link.isActive?.value, val => {
-      if (val && parent.value != null) {
+      if (!val) return
+      handleActiveLink()
+    })
+    onBeforeMount(() => {
+      if (link.isActive?.value) handleActiveLink()
+    })
+    function handleActiveLink () {
+      if (parent.value != null) {
         root.open(parent.value, true)
       }
-
-      if (val) {
-        openOnSelect(val)
-      }
-    }, { immediate: true })
+      openOnSelect(true)
+    }
 
     const { themeClasses } = provideTheme(props)
     const { borderClasses } = useBorder(props)
@@ -177,6 +184,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
 
     function onClick (e: MouseEvent) {
       emit('click', e)
+      if (['INPUT', 'TEXTAREA'].includes((e.target as Element)?.tagName)) return
 
       if (!isClickable.value) return
 
@@ -194,6 +202,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
     }
 
     function onKeyDown (e: KeyboardEvent) {
+      if (['INPUT', 'TEXTAREA'].includes((e.target as Element)?.tagName)) return
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault()
         e.target!.dispatchEvent(new MouseEvent('click', e))
@@ -244,7 +253,13 @@ export const VListItem = genericComponent<VListItemSlots>()({
             props.style,
           ]}
           tabindex={ isClickable.value ? (list ? -2 : 0) : undefined }
-          aria-selected={ root.activatable.value ? isActivated.value : isSelected.value }
+          aria-selected={
+            isSelectable.value ? (
+              root.activatable.value ? isActivated.value
+              : root.selectable.value ? isSelected.value
+              : isActive.value
+            ) : undefined
+          }
           onClick={ onClick }
           onKeydown={ isClickable.value && !isLink.value && onKeyDown }
           v-ripple={ isClickable.value && props.ripple }

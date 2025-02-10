@@ -148,6 +148,11 @@
   "enable-pwa-refresh": "Enable Refresh Prompt",
   "enable-pwa-refresh-message": "Display the refresh prompt when new documentation updates have been downloaded.",
   "enterprise": "Enterprise",
+  "epicmax": {
+    "learn-more": "Learn more",
+    "title": "Need support with your Vuetify project?",
+    "message": "Epicmax is here to support you - whether it's migrating to Vue3, adjusting your Vue.js code, or building custom front-ends."
+  },
   "email-address": "Email address",
   "esc": "Esc",
   "extra-extra-large": "Extra extra large",
@@ -354,5 +359,5 @@
   "view-source": "View source",
   "viewport": "Viewport",
   "vuetify": "Vuetify",
-  "x": "X"
+  "x": "Xitter"
 }

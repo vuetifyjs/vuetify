@@ -15,6 +15,7 @@ import { makeVSheetProps, VSheet } from '@/components/VSheet/VSheet'
 import { provideDefaults } from '@/composables/defaults'
 import { makeDisplayProps, useDisplay } from '@/composables/display'
 import { makeGroupProps, useGroup } from '@/composables/group'
+import { IconValue } from '@/composables/icons'
 
 // Utilities
 import { computed, toRefs } from 'vue'
@@ -48,10 +49,10 @@ export type VStepperSlots = {
 export const makeStepperProps = propsFactory({
   altLabels: Boolean,
   bgColor: String,
-  completeIcon: String,
-  editIcon: String,
+  completeIcon: IconValue,
+  editIcon: IconValue,
   editable: Boolean,
-  errorIcon: String,
+  errorIcon: IconValue,
   hideActions: Boolean,
   items: {
     type: Array as PropType<readonly StepperItem[]>,

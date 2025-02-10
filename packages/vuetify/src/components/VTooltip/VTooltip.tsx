@@ -11,8 +11,8 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { useScopeId } from '@/composables/scopeId'
 
 // Utilities
-import { computed, mergeProps, ref } from 'vue'
-import { genericComponent, getUid, omit, propsFactory, useRender } from '@/util'
+import { computed, mergeProps, ref, useId } from 'vue'
+import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { StrategyProps } from '@/components/VOverlay/locationStrategies'
@@ -54,7 +54,7 @@ export const VTooltip = genericComponent<OverlaySlots>()({
     const isActive = useProxiedModel(props, 'modelValue')
     const { scopeId } = useScopeId()
 
-    const uid = getUid()
+    const uid = useId()
     const id = computed(() => props.id || `v-tooltip-${uid}`)
 
     const overlay = ref<VOverlay>()

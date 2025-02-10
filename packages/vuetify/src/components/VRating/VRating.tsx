@@ -15,8 +15,8 @@ import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
-import { computed, shallowRef } from 'vue'
-import { clamp, createRange, genericComponent, getUid, propsFactory, useRender } from '@/util'
+import { computed, shallowRef, useId } from 'vue'
+import { clamp, createRange, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { Prop } from 'vue'
@@ -140,7 +140,8 @@ export const VRating = genericComponent<VRatingSlots>()({
       }
     }))
 
-    const name = computed(() => props.name ?? `v-rating-${getUid()}`)
+    const uid = useId()
+    const name = computed(() => props.name ?? `v-rating-${uid}`)
 
     function VRatingItem ({ value, index, showStar = true }: { value: number, index: number, showStar?: boolean }) {
       const { onMouseenter, onMouseleave, onClick } = eventState.value[index + 1]

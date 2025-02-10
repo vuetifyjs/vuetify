@@ -18,6 +18,7 @@ export const VBreadcrumbsDivider = genericComponent()({
   setup (props, { slots }) {
     useRender(() => (
       <li
+        aria-hidden="true"
         class={[
           'v-breadcrumbs-divider',
           props.class,

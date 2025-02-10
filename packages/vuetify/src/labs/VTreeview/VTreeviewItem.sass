@@ -8,6 +8,9 @@
   .v-treeview
     --indent-padding: 0px
 
+    &.v-list--disabled .v-list-item__prepend
+      pointer-events: auto
+
   .v-treeview-group.v-list-group
     --list-indent-size: #{$treeview-group-list-indent-size}
 
@@ -16,3 +19,6 @@
 
     .v-list-group__items .v-list-item
       padding-inline-start: calc(#{$treeview-item-padding-inline-start} + var(--indent-padding)) !important
+
+    .v-list-group__items .v-list-item.v-list-group__header
+      padding-inline-start: calc(#{$treeview-group-header-padding-inline-start} + var(--indent-padding)) !important

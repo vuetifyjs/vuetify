@@ -2,6 +2,7 @@
 import { VTreeviewGroup } from './VTreeviewGroup'
 import { VTreeviewItem } from './VTreeviewItem'
 import { VCheckboxBtn } from '@/components/VCheckbox'
+import { VDivider } from '@/components/VDivider'
 
 // Composables
 import { IconValue } from '@/composables/icons'
@@ -29,9 +30,13 @@ export type VTreeviewChildrenSlots<T> = {
     item: T
     internalItem: InternalListItem<T>
   }
+  divider: { props: InternalListItem['props'] }
+  subheader: { props: InternalListItem['props'] }
+  header: { props: InternalListItem['props'] }
 }
 
 export const makeVTreeviewChildrenProps = propsFactory({
+  disabled: Boolean,
   loadChildren: Function as PropType<(item: unknown) => Promise<void>>,
   loadingIcon: {
     type: String,
@@ -67,7 +72,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
   setup (props, { slots }) {
     const isLoading = reactive(new Set<unknown>())
 
-    const isClickOnOpen = computed(() => props.openOnClick != null ? props.openOnClick : props.selectable)
+    const isClickOnOpen = computed(() => !props.disabled && (props.openOnClick != null ? props.openOnClick : props.selectable))
 
     async function checkChildren (item: InternalListItem) {
       try {
@@ -89,6 +94,12 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
     }
 
     return () => slots.default?.() ?? props.items?.map(item => {
+      if (item.type === 'divider') {
+        return slots.divider?.({ props: item.props }) ?? (
+          <VDivider { ...item.props } />
+        )
+      }
+
       const { children, props: itemProps } = item
       const loading = isLoading.has(item.value)
       const slotsWithItem = {
@@ -99,6 +110,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
                 <VCheckboxBtn
                   key={ item.value }
                   modelValue={ slotProps.isSelected }
+                  disabled={ props.disabled }
                   loading={ loading }
                   color={ props.selectedColor }
                   indeterminate={ slotProps.isIndeterminate }
@@ -120,6 +132,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
         ),
         append: slots.append ? slotProps => slots.append?.({ ...slotProps, item: item.raw, internalItem: item }) : undefined,
         title: slots.title ? slotProps => slots.title?.({ ...slotProps, item: item.raw, internalItem: item }) : undefined,
+        subtitle: slots.subtitle ? slotProps => slots.subtitle?.({ ...slotProps, item: item.raw, internalItem: item }) : undefined,
       } satisfies VTreeviewItem['$props']['$children']
 
       const treeviewGroupProps = VTreeviewGroup.filterProps(itemProps)
@@ -143,7 +156,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
               return (
                 <VTreeviewItem
                   { ...listItemProps }
-                  value={ props.returnObject ? toRaw(item.raw) : itemProps.value }
+                  value={ props.returnObject ? item.raw : itemProps.value }
                   loading={ loading }
                   v-slots={ slotsWithItem }
                 />

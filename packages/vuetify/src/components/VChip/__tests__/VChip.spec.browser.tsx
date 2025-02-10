@@ -1,4 +1,4 @@
-import { VChip } from '../'
+import { VChip } from '../VChip'
 
 // Utilities
 import { render, screen, userEvent } from '@test'

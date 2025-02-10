@@ -26,22 +26,24 @@
         v-for="item in items"
         :key="item.title"
       >
-        <v-list-item-avatar>
-          <v-icon
-            v-if="item.icon"
-            color="pink"
-          >
-            mdi-star
-          </v-icon>
-        </v-list-item-avatar>
+        <template v-slot:prepend>
+          <v-avatar>
+            <v-icon
+              v-if="item.icon"
+              color="pink"
+            >
+              mdi-star
+            </v-icon>
+          </v-avatar>
+        </template>
 
-        <v-list-item-header>
-          <v-list-item-title v-text="item.title"></v-list-item-title>
-        </v-list-item-header>
+        <v-list-item-title>{{ item.title }}</v-list-item-title>
 
-        <v-list-item-avatar>
-          <v-img :src="item.avatar"></v-img>
-        </v-list-item-avatar>
+        <template v-slot:append>
+          <v-avatar>
+            <v-img :src="item.avatar"></v-img>
+          </v-avatar>
+        </template>
       </v-list-item>
     </v-list>
   </v-card>

@@ -54,7 +54,7 @@ type VCarouselSlots = VWindowSlots & {
   item: {
     props: Record<string, any>
     item: {
-      id: number
+      id: string
       value: unknown
       disabled: boolean | undefined
     }

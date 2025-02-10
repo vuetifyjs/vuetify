@@ -11,7 +11,7 @@
 
         <v-radio-group
           v-model="type"
-          row
+          inline
         >
           <v-radio
             label="Number"

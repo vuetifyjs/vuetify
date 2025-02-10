@@ -124,6 +124,7 @@ declare module 'vue' {
     GettingStartedWireframeExamples: typeof import('./src/components/getting-started/WireframeExamples.vue')['default']
     HomeActionBtns: typeof import('./src/components/home/ActionBtns.vue')['default']
     HomeEntry: typeof import('./src/components/home/Entry.vue')['default']
+    HomeEpicmaxSupport: typeof import('./src/components/home/EpicmaxSupport.vue')['default']
     HomeFeatures: typeof import('./src/components/home/Features.vue')['default']
     HomeFooter: typeof import('./src/components/home/Footer.vue')['default']
     HomeLogo: typeof import('./src/components/home/Logo.vue')['default']

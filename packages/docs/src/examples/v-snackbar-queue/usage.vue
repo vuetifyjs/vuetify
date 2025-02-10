@@ -17,7 +17,7 @@
             :disabled="!text"
             append-icon="mdi-arrow-right"
             text="Queue"
-            flat
+            variant="flat"
             slim
             @click="onClick"
           ></v-btn>

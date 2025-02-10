@@ -85,12 +85,12 @@ Banners may have one or two text buttons that don't stand out that much.
 
 #### Icon
 
-The icon slot allows you to to explicitly control the content and functionality within it.
+The icon slot allows you to explicitly control the content and functionality within it.
 
 <ExamplesExample file="v-banner/slot-icon" />
 
 #### Prepend
 
-The prepend slot allows you to to explicitly control the content and functionality within it. Icons also help to emphasize a banner's message.
+The prepend slot allows you to explicitly control the content and functionality within it. Icons also help to emphasize a banner's message.
 
 <ExamplesExample file="v-banner/slot-prepend" />

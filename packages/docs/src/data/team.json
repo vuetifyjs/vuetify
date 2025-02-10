@@ -53,7 +53,6 @@
     "location": "Melbourne, Australia",
     "name": "Kael Watts-Deuchar",
     "team": "core",
-    "twitter": "kaelwd",
     "joined": "Oct 2017"
   },
   "nekosaur": {
@@ -167,6 +166,20 @@
     "work": "Director of Product Development at Symplsoft Inc.",
     "team": "core",
     "joined": "May 2024"
+  },
+  "J-Sek": {
+    "discord": "jacek#1420",
+    "focus": [
+      "[vuetifyjs/studio](https://github.com/vuetifyjs/studio)"
+    ],
+    "languages": [
+      "Polish",
+      "English"
+    ],
+    "location": "Gdańsk, Poland",
+    "name": "Jacek Czarniecki",
+    "team": "core",
+    "joined": "Nov 2024"
   },
   "jacekkarczmarczyk": {
     "discord": "jacek#3542",

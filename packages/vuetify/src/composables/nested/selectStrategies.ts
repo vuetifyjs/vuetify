@@ -209,3 +209,29 @@ export const classicSelectStrategy = (mandatory?: boolean): SelectStrategy => {
 
   return strategy
 }
+
+export const trunkSelectStrategy = (mandatory?: boolean): SelectStrategy => {
+  const parentStrategy = classicSelectStrategy(mandatory)
+
+  const strategy: SelectStrategy = {
+    select: parentStrategy.select,
+    in: parentStrategy.in,
+    out: (v, children, parents) => {
+      const arr = []
+
+      for (const [key, value] of v.entries()) {
+        if (value === 'on') {
+          if (parents.has(key)) {
+            const parent = parents.get(key)
+            if (v.get(parent) === 'on') continue
+          }
+          arr.push(key)
+        }
+      }
+
+      return arr
+    },
+  }
+
+  return strategy
+}

@@ -15,8 +15,8 @@ import { LoaderSlot, useLoader } from '@/composables/loader'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, ref } from 'vue'
-import { filterInputAttrs, genericComponent, getUid, IN_BROWSER, propsFactory, useRender } from '@/util'
+import { computed, ref, useId } from 'vue'
+import { filterInputAttrs, genericComponent, IN_BROWSER, propsFactory, useRender } from '@/util'
 
 // Types
 import type { ComputedRef, Ref } from 'vue'
@@ -87,7 +87,7 @@ export const VSwitch = genericComponent<new <T>(
         : props.color
     })
 
-    const uid = getUid()
+    const uid = useId()
     const id = computed(() => props.id || `switch-${uid}`)
 
     function onChange () {

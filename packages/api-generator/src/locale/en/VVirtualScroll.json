@@ -1,7 +1,7 @@
 {
   "props": {
     "height": "Height of the component as a css value/",
-    "itemKey": "Required when using **dynamic-item-height** together with object items. Should point to a property with a unique value for each item.",
+    "itemKey": "Should point to a property with a unique value for each item, if not set then item index will be used as a key which may result in unnecessary re-renders.",
     "items": "The array of items to display.",
     "renderless": "Disables default component rendering functionality."
   },

@@ -1,7 +1,7 @@
 // Utilities
-import { computed } from 'vue'
+import { computed, useId } from 'vue'
 import { makeLineProps } from './util/line'
-import { genericComponent, getPropertyFromItem, getUid, propsFactory, useRender } from '@/util'
+import { genericComponent, getPropertyFromItem, propsFactory, useRender } from '@/util'
 
 // Types
 export type VBarlineSlots = {
@@ -42,7 +42,7 @@ export const VBarline = genericComponent<VBarlineSlots>()({
   props: makeVBarlineProps(),
 
   setup (props, { slots }) {
-    const uid = getUid()
+    const uid = useId()
     const id = computed(() => props.id || `barline-${uid}`)
     const autoDrawDuration = computed(() => Number(props.autoDrawDuration) || 500)
 
@@ -123,6 +123,7 @@ export const VBarline = genericComponent<VBarlineSlots>()({
 
     const bars = computed(() => genBars(items.value, boundary.value))
     const offsetX = computed(() => (Math.abs(bars.value[0].x - bars.value[1].x) - lineWidth.value) / 2)
+    const smooth = computed(() => typeof props.smooth === 'boolean' ? (props.smooth ? 2 : 0) : Number(props.smooth))
 
     useRender(() => {
       const gradientData = !props.gradient.slice().length ? [''] : props.gradient.slice().reverse()
@@ -155,8 +156,8 @@ export const VBarline = genericComponent<VBarlineSlots>()({
                     y={ item.y }
                     width={ lineWidth.value }
                     height={ item.height }
-                    rx={ typeof props.smooth === 'number' ? props.smooth : props.smooth ? 2 : 0 }
-                    ry={ typeof props.smooth === 'number' ? props.smooth : props.smooth ? 2 : 0 }
+                    rx={ smooth.value }
+                    ry={ smooth.value }
                 >
                   { props.autoDraw && (
                     <>

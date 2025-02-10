@@ -96,7 +96,7 @@ export const VVirtualScroll = genericComponent<new <T, Renderless extends boolea
     useRender(() => {
       const children = computedItems.value.map(item => (
         <VVirtualScrollItem
-          key={ item.index }
+          key={ item.key }
           renderless={ props.renderless }
           onUpdate:height={ height => handleItemResize(item.index, height) }
         >

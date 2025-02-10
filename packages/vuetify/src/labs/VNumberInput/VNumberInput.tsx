@@ -74,14 +74,17 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
 
     const model = computed({
       get: () => _model.value,
-      set (val) {
-        if (val === null) {
+      // model.value could be empty string from VTextField
+      // but _model.value should be eventually kept in type Number | null
+      set (val: Number | null | string) {
+        if (val === null || val === '') {
           _model.value = null
           return
         }
 
-        if (!isNaN(+val) && +val <= props.max && +val >= props.min) {
-          _model.value = +val
+        const value = Number(val)
+        if (!isNaN(value) && value <= props.max && value >= props.min) {
+          _model.value = value
         }
       },
     })
@@ -91,9 +94,9 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
     const stepDecimals = computed(() => getDecimals(props.step))
     const modelDecimals = computed(() => typeof model.value === 'number' ? getDecimals(model.value) : 0)
 
-    const form = useForm()
+    const form = useForm(props)
     const controlsDisabled = computed(() => (
-      props.disabled || props.readonly || form?.isReadonly.value
+      form.isDisabled.value || form.isReadonly.value
     ))
 
     const canIncrease = computed(() => {
@@ -119,7 +122,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
     const decrementSlotProps = computed(() => ({ click: onClickDown }))
 
     onMounted(() => {
-      if (!props.readonly && !props.disabled) {
+      if (!controlsDisabled.value) {
         clampModel()
       }
     })
@@ -209,7 +212,8 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
             flat
             key="increment-btn"
             height={ controlNodeDefaultHeight.value }
-            name="increment-btn"
+            data-testid="increment"
+            aria-hidden="true"
             icon={ incrementIcon.value }
             onClick={ onClickUp }
             onMousedown={ onControlMousedown }
@@ -241,7 +245,8 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
             flat
             key="decrement-btn"
             height={ controlNodeDefaultHeight.value }
-            name="decrement-btn"
+            data-testid="decrement"
+            aria-hidden="true"
             icon={ decrementIcon.value }
             size={ controlNodeSize.value }
             tabindex="-1"
@@ -292,9 +297,9 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
 
               { incrementControlNode() }
             </div>
-          ) : (!props.reverse
-            ? <>{ dividerNode() }{ controlNode() }</>
-            : undefined)
+          ) : (props.reverse
+            ? undefined
+            : <>{ dividerNode() }{ controlNode() }</>)
 
       const hasAppendInner = slots['append-inner'] || appendInnerControl
 
