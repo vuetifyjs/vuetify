@@ -173,4 +173,19 @@ describe('validation', () => {
 
     expect(wrapper.vm.isValid).toBe(true)
   })
+
+  it.only('should rerun validation when rules changes', async () => {
+    const wrapper = mountFunction({
+      modelValue: 'bar',
+      rules: [(v: any) => v === 'foo' || 'Invalid'],
+    })
+
+    await wrapper.vm.validate()
+
+    expect(wrapper.vm.isValid).toBe(false)
+
+    await wrapper.setProps({ rules: [(v: any) => v === 'bar' || 'Invalid'] })
+
+    expect(wrapper.vm.isValid).toBe(true)
+  })
 })

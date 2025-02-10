@@ -6,7 +6,7 @@ import { useToggleScope } from '@/composables/toggleScope'
 
 // Utilities
 import { computed, nextTick, onBeforeMount, onBeforeUnmount, onMounted, ref, shallowRef, unref, watch } from 'vue'
-import { getCurrentInstance, getCurrentInstanceName, getUid, propsFactory, wrapInArray } from '@/util'
+import { deepEqual, getCurrentInstance, getCurrentInstanceName, getUid, propsFactory, wrapInArray } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -175,6 +175,8 @@ export function useValidation (
   watch([isValid, errorMessages], () => {
     form.update?.(uid.value, isValid.value, errorMessages.value)
   })
+
+  watch(() => props.rules, () => validate())
 
   async function reset () {
     model.value = null
