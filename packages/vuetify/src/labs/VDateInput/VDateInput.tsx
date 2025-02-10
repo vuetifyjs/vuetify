@@ -46,7 +46,7 @@ export const makeVDateInputProps = propsFactory({
   ...omit(makeVDatePickerProps({
     weeksInMonth: 'dynamic' as const,
     hideHeader: true,
-  }), ['active', 'location']),
+  }), ['active', 'location', 'rounded']),
 }, 'VDateInput')
 
 export const VDateInput = genericComponent<VDateInputSlots>()({
@@ -129,7 +129,7 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
 
     useRender(() => {
       const confirmEditProps = VConfirmEdit.filterProps(props)
-      const datePickerProps = VDatePicker.filterProps(omit(props, ['active', 'location']))
+      const datePickerProps = VDatePicker.filterProps(omit(props, ['active', 'location', 'rounded']))
       const textFieldProps = VTextField.filterProps(props)
 
       return (
