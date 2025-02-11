@@ -309,7 +309,22 @@ export const useNested = (props: NestedProps) => {
           event,
         })
 
-        newActivated && newActivated.symmetricDifference(activated.value).size && (activated.value = newActivated)
+        if (newActivated.size !== activated.value.size) {
+          activated.value = newActivated
+        } else {
+          for (const value of newActivated) {
+            if (!activated.value.has(value)) {
+              activated.value = newActivated
+              return
+            }
+          }
+          for (const value of activated.value) {
+            if (!newActivated.has(value)) {
+              activated.value = newActivated
+              return
+            }
+          }
+        }
       },
       children,
       parents,
