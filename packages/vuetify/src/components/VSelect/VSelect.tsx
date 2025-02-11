@@ -20,7 +20,6 @@ import { forwardRefs } from '@/composables/forwardRefs'
 import { IconValue } from '@/composables/icons'
 import { makeItemsProps, useItems } from '@/composables/list-items'
 import { useLocale } from '@/composables/locale'
-import { useIsMousedown } from '@/composables/mousedown'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeTransitionProps } from '@/composables/transition'
 
@@ -28,6 +27,7 @@ import { makeTransitionProps } from '@/composables/transition'
 import { computed, mergeProps, nextTick, ref, shallowRef, watch } from 'vue'
 import {
   checkPrintable,
+  deepEqual,
   ensureValidVNode,
   genericComponent,
   IN_BROWSER,
@@ -169,7 +169,6 @@ export const VSelect = genericComponent<new <
         : model.value.length
     })
     const form = useForm(props)
-    const { isMousedown } = useIsMousedown()
     const selectedValues = computed(() => model.value.map(selection => selection.value))
     const isFocused = shallowRef(false)
     const label = computed(() => menu.value ? props.closeText : props.openText)
@@ -179,7 +178,7 @@ export const VSelect = genericComponent<new <
 
     const displayItems = computed(() => {
       if (props.hideSelected) {
-        return items.value.filter(item => !model.value.some(s => props.valueComparator(s, item)))
+        return items.value.filter(item => !model.value.some(s => (props.valueComparator || deepEqual)(s, item)))
       }
       return items.value
     })
@@ -264,7 +263,7 @@ export const VSelect = genericComponent<new <
       if (item.props.disabled) return
 
       if (props.multiple) {
-        const index = model.value.findIndex(selection => props.valueComparator(selection.value, item.value))
+        const index = model.value.findIndex(selection => (props.valueComparator || deepEqual)(selection.value, item.value))
         const add = set == null ? !~index : set
 
         if (~index) {
@@ -284,7 +283,7 @@ export const VSelect = genericComponent<new <
       }
     }
     function onBlur (e: FocusEvent) {
-      if (!listRef.value?.$el.contains(e.relatedTarget as HTMLElement) && !isMousedown.value) {
+      if (!listRef.value?.$el.contains(e.relatedTarget as HTMLElement)) {
         menu.value = false
       }
     }
@@ -316,7 +315,7 @@ export const VSelect = genericComponent<new <
     watch(menu, () => {
       if (!props.hideSelected && menu.value && model.value.length) {
         const index = displayItems.value.findIndex(
-          item => model.value.some(s => props.valueComparator(s.value, item.value))
+          item => model.value.some(s => (props.valueComparator || deepEqual)(s.value, item.value))
         )
         IN_BROWSER && window.requestAnimationFrame(() => {
           index >= 0 && vVirtualScrollRef.value?.scrollToIndex(index)

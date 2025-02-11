@@ -23,7 +23,16 @@ import { makeVariantProps } from '@/composables/variant'
 
 // Utilities
 import { computed, ref, shallowRef, toRef } from 'vue'
-import { EventProp, focusChild, genericComponent, getPropertyFromItem, omit, propsFactory, useRender } from '@/util'
+import {
+  EventProp,
+  focusChild,
+  genericComponent,
+  getPropertyFromItem,
+  isPrimitive,
+  omit,
+  propsFactory,
+  useRender,
+} from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -33,10 +42,6 @@ import type { GenericProps, SelectItemKey } from '@/util'
 
 export interface InternalListItem<T = any> extends ListItem<T> {
   type?: 'item' | 'subheader' | 'divider'
-}
-
-function isPrimitive (value: unknown): value is string | number | boolean {
-  return typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean'
 }
 
 function transformItem (props: ItemProps & { itemType?: string }, item: any): InternalListItem {
