@@ -1,6 +1,6 @@
 // Utilities
 import { computed, shallowRef, toRaw, watchEffect } from 'vue'
-import { deepEqual, getPropertyFromItem, isPrimitive, omit, propsFactory } from '@/util'
+import { deepEqual, getPropertyFromItem, isPrimitive, omit, pick, propsFactory } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -81,7 +81,14 @@ export function transformItem (props: Omit<ItemProps, 'items'>, item: any): List
 }
 
 export function transformItems (props: Omit<ItemProps, 'items'>, items: ItemProps['items']) {
-  const _props = toRaw(props)
+  const _props = pick(props, [
+    'itemTitle',
+    'itemValue',
+    'itemChildren',
+    'itemProps',
+    'returnObject',
+    'valueComparator',
+  ])
 
   const array: ListItem[] = []
   for (const item of items) {
@@ -129,7 +136,14 @@ export function useItems (props: ItemProps) {
     const _returnObject = props.returnObject
     const hasValueComparator = !!props.valueComparator
     const valueComparator = props.valueComparator || deepEqual
-    const _props = toRaw(props)
+    const _props = pick(props, [
+      'itemTitle',
+      'itemValue',
+      'itemChildren',
+      'itemProps',
+      'returnObject',
+      'valueComparator',
+    ])
 
     const returnValue: ListItem[] = []
     main: for (const v of _value) {

@@ -100,7 +100,7 @@ describe('VBtn', () => {
     })
 
     // Pending test, is "toggle" even going to be emitted anymore?
-    it.skip('emits toggle when used within a button group', () => {
+    it.todo('emits toggle when used within a button group', () => {
       // const register = jest.fn()
       // const unregister = jest.fn()
       // const toggle = jest.fn()
@@ -118,7 +118,7 @@ describe('VBtn', () => {
 
   // These tests were copied over from the previous Jest tests,
   // but they are breaking because the features have not been implemented
-  describe.skip('activeClass', () => {
+  describe.todo('activeClass', () => {
     it('should use custom active-class', async () => {
       const { wrapper } = render(<VBtn active activeClass="my-active-class">Active Class</VBtn>)
       expect(wrapper.element).toHaveClass('my-active-class')
@@ -126,7 +126,7 @@ describe('VBtn', () => {
   })
 
   describe('href', () => {
-    it.skip('should render an <a> tag when using href prop', async () => {
+    it.todo('should render an <a> tag when using href prop', async () => {
       const anchor = { href: '#anchor', hash: 'anchor' }
       const { container } = render(<VBtn href={ anchor.href }>Click me</VBtn>)
       const link = container.querySelector('a')!
@@ -211,7 +211,7 @@ describe('VBtn', () => {
       expect.poll(() => wrapper.element as HTMLElement).not.toHaveClass('v-btn--disabled')
     })
 
-    it.skip('activeClass', async () => {
+    it.todo('activeClass', async () => {
       const { container, wrapper } = render(() => (
         <VBtn activeClass="my-active-class">Active Class</VBtn>
       ))

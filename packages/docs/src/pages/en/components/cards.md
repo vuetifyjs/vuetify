@@ -20,8 +20,6 @@ features:
 
  The `v-card` component is a versatile and enhanced version of [v-sheet](/components/sheets/) that provides a simple interface for headings, text, images, icons, and more.
 
-![Card Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-card/v-card-entry.png)
-
 <PageFeatures />
 
 <VoPromotionsCardVuetify slug="vuetify-snips" />
