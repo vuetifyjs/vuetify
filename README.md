@@ -190,7 +190,7 @@ Using [bun](https://bun.sh/)
 bun create vuetify
 ```
 
-For more information on how to get started, such as using Nuxt or Laravel, check out the official [Installation guide](/getting-started/installation/).
+For more information on how to get started, such as using Nuxt or Laravel, check out the official [Installation guide](https://vuetifyjs.com/getting-started/installation/).
 
 ### 🚀 Introduction
 

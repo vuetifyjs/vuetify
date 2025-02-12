@@ -112,7 +112,7 @@ export default [
               (await this.resolve('src/components/index.ts')).id
             )
             await Promise.all(importedIds.map(async id => {
-              const importFrom = path.relative(srcDir, id).replace(/\.ts$/, '.js')
+              const importFrom = path.relative(srcDir, id).replace(/\/index\.ts$/, '')
 
               if (await this.resolve(path.join(id, '../_variables.scss')) != null) {
                 variables.push(id)
@@ -247,7 +247,7 @@ export default [
               (await this.resolve('src/labs/components.ts')).id
             )
             await Promise.all(importedIds.map(async id => {
-              const importFrom = path.relative(srcDir, id).replace(/\.ts$/, '.js')
+              const importFrom = path.relative(srcDir, id).replace(/\/index\.ts$/, '')
 
               if (await this.resolve(path.join(id, '../_variables.scss')) != null) {
                 variables.push(id)

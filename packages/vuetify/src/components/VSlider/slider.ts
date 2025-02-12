@@ -31,7 +31,7 @@ type SliderProvide = {
   numTicks: Ref<number>
   onSliderMousedown: (e: MouseEvent) => void
   onSliderTouchstart: (e: TouchEvent) => void
-  parseMouseMove: (e: MouseEvent | TouchEvent) => number
+  parseMouseMove: (e: MouseEvent | TouchEvent) => number | void
   position: (val: number) => number
   readonly: Ref<boolean | null | undefined>
   rounded: Ref<boolean | number | string | undefined>
@@ -205,7 +205,11 @@ export const useSlider = ({
   const trackContainerRef = ref<VSliderTrack | undefined>()
   const activeThumbRef = ref<HTMLElement | undefined>()
 
-  function parseMouseMove (e: MouseEvent | TouchEvent): number {
+  function parseMouseMove (e: MouseEvent | TouchEvent): number | void {
+    const el: HTMLElement = trackContainerRef.value?.$el
+
+    if (!el) return
+
     const vertical = props.direction === 'vertical'
     const start = vertical ? 'top' : 'left'
     const length = vertical ? 'height' : 'width'
@@ -214,7 +218,7 @@ export const useSlider = ({
     const {
       [start]: trackStart,
       [length]: trackLength,
-    } = trackContainerRef.value?.$el.getBoundingClientRect()
+    } = el.getBoundingClientRect()
     const clickOffset = getPosition(e, position)
 
     // It is possible for left to be NaN, force to number
@@ -226,13 +230,17 @@ export const useSlider = ({
   }
 
   const handleStop = (e: MouseEvent | TouchEvent) => {
-    onSliderEnd({ value: parseMouseMove(e) })
+    const value = parseMouseMove(e)
+    if (value != null) {
+      onSliderEnd({ value })
+    }
 
     mousePressed.value = false
     startOffset.value = 0
   }
 
   const handleStart = (e: MouseEvent | TouchEvent) => {
+    const value = parseMouseMove(e)
     activeThumbRef.value = getActiveThumb(e)
 
     if (!activeThumbRef.value) return
@@ -243,17 +251,24 @@ export const useSlider = ({
       startOffset.value = getOffset(e, activeThumbRef.value, props.direction)
     } else {
       startOffset.value = 0
-      onSliderMove({ value: parseMouseMove(e) })
+      if (value != null) {
+        onSliderMove({ value })
+      }
     }
 
-    onSliderStart({ value: parseMouseMove(e) })
+    if (value != null) {
+      onSliderStart({ value })
+    }
     nextTick(() => activeThumbRef.value?.focus())
   }
 
   const moveListenerOptions = { passive: true, capture: true }
 
   function onMouseMove (e: MouseEvent | TouchEvent) {
-    onSliderMove({ value: parseMouseMove(e) })
+    const value = parseMouseMove(e)
+    if (value != null) {
+      onSliderMove({ value })
+    }
   }
 
   function onSliderMouseUp (e: MouseEvent) {
