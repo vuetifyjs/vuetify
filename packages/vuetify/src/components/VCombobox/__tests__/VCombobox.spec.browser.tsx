@@ -176,10 +176,10 @@ describe('VCombobox', () => {
 
       await userEvent.click(element)
       await userEvent.keyboard('Item')
-      expect(await screen.findAllByRole('option')).toHaveLength(4)
+      await expect(screen.findAllByRole('option')).resolves.toHaveLength(4)
       await userEvent.keyboard('{Control>}a{/Ctrl}{Backspace}')
       await userEvent.keyboard('Item 1')
-      expect(await screen.findAllByRole('option')).toHaveLength(2)
+      await expect(screen.findAllByRole('option')).resolves.toHaveLength(2)
       await userEvent.keyboard('{Control>}a{/Ctrl}{Backspace}')
       await userEvent.keyboard('Item 3')
       expect(screen.queryAllByRole('option')).toHaveLength(0)
@@ -199,10 +199,10 @@ describe('VCombobox', () => {
 
       await userEvent.click(element)
       await userEvent.keyboard('Item')
-      expect(await screen.findAllByRole('option')).toHaveLength(4)
+      await expect(screen.findAllByRole('option')).resolves.toHaveLength(4)
       await userEvent.keyboard('{Control>}a{/Ctrl}{Backspace}')
       await userEvent.keyboard('Item 1')
-      expect(await screen.findAllByRole('option')).toHaveLength(2)
+      await expect(screen.findAllByRole('option')).resolves.toHaveLength(2)
       await userEvent.keyboard('{Control>}a{/Ctrl}{Backspace}')
       await userEvent.keyboard('Item 3')
       expect(screen.queryAllByRole('option')).toHaveLength(0)
@@ -230,11 +230,11 @@ describe('VCombobox', () => {
 
       await userEvent.click(element)
       await userEvent.keyboard('test')
-      expect(await screen.findByRole('option')).toHaveTextContent('Test1')
+      await expect(screen.findByRole('option')).resolves.toHaveTextContent('Test1')
 
       await userEvent.keyboard('{Control>}a{/Ctrl}{Backspace}')
       await userEvent.keyboard('antonsen')
-      expect(await screen.findByRole('option')).toHaveTextContent('Antonsen PK')
+      await expect(screen.findByRole('option')).resolves.toHaveTextContent('Antonsen PK')
     })
   })
 
@@ -256,11 +256,11 @@ describe('VCombobox', () => {
 
       await userEvent.click(element)
 
-      expect(await screen.findAllByRole('option', { selected: true })).toHaveLength(2)
+      await expect(screen.findAllByRole('option', { selected: true })).resolves.toHaveLength(2)
       expect(screen.getAllByCSS('.v-chip')).toHaveLength(2)
 
       await userEvent.click(screen.getAllByTestId('close-chip')[0])
-      expect(await screen.findByRole('textbox')).toBeInTheDocument()
+      await expect(screen.findByRole('textbox')).resolves.toBeInTheDocument()
       expect(screen.getAllByCSS('.v-chip')).toHaveLength(1)
       expect(selectedItems.value).toStrictEqual(['Colorado'])
     })
@@ -307,11 +307,11 @@ describe('VCombobox', () => {
 
       await userEvent.click(element)
 
-      expect(await screen.findAllByRole('option', { selected: true })).toHaveLength(2)
+      await expect(screen.findAllByRole('option', { selected: true })).resolves.toHaveLength(2)
       expect(screen.getAllByCSS('.v-chip')).toHaveLength(2)
 
       await userEvent.click(screen.getAllByTestId('close-chip')[0])
-      expect(await screen.findByRole('textbox')).toBeInTheDocument()
+      await expect(screen.findByRole('textbox')).resolves.toBeInTheDocument()
       expect(screen.getAllByCSS('.v-chip')).toHaveLength(1)
       expect(selectedItems.value).toStrictEqual([{
         title: 'Item 2',
@@ -560,7 +560,7 @@ describe('VCombobox', () => {
       expect(screen.getAllByRole('option')).toHaveLength(6)
 
       await userEvent.keyboard('Cal')
-      expect(await screen.findByRole('option')).toHaveClass('v-list-item--active')
+      await expect(screen.findByRole('option')).resolves.toHaveClass('v-list-item--active')
       await userEvent.keyboard('{Enter}')
       await expect.poll(() => screen.queryAllByRole('option')).toHaveLength(6)
       expect(selectedItems.value).toStrictEqual(['California'])
@@ -582,7 +582,7 @@ describe('VCombobox', () => {
       expect(screen.getAllByRole('option')).toHaveLength(6)
 
       await userEvent.keyboard('Cal')
-      expect(await screen.findByRole('option')).toHaveClass('v-list-item--active')
+      await expect(screen.findByRole('option')).resolves.toHaveClass('v-list-item--active')
       await userEvent.keyboard('{Tab}')
       await expect.poll(() => screen.queryAllByRole('option')).toHaveLength(0)
       expect(selectedItems.value).toStrictEqual(['California'])
@@ -604,7 +604,7 @@ describe('VCombobox', () => {
       expect(screen.getAllByRole('option')).toHaveLength(6)
 
       await userEvent.keyboard('Cal')
-      expect(await screen.findByRole('option')).toHaveClass('v-list-item--active')
+      await expect(screen.findByRole('option')).resolves.toHaveClass('v-list-item--active')
       await userEvent.click(document.body)
       await expect.poll(() => screen.queryAllByRole('option')).toHaveLength(0)
       expect(selectedItems.value).toStrictEqual(['Cal'])
@@ -652,7 +652,7 @@ describe('VCombobox', () => {
     expect(screen.queryByRole('listbox')).toBeNull()
 
     await rerender({ items: ['Foo', 'Bar'] })
-    expect(await screen.findByRole('listbox')).toBeInTheDocument()
+    await expect(screen.findByRole('listbox')).resolves.toBeInTheDocument()
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/19346
@@ -662,7 +662,7 @@ describe('VCombobox', () => {
     })
 
     await userEvent.click(element)
-    expect(await screen.findByRole('listbox')).toBeInTheDocument()
+    await expect(screen.findByRole('listbox')).resolves.toBeInTheDocument()
 
     await userEvent.click(screen.getAllByRole('option')[0])
     await rerender({ items: ['Foo', 'Bar', 'test'] })

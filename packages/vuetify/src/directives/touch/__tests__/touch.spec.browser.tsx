@@ -39,10 +39,10 @@ describe('v-touch', () => {
 
       await commands.drag([100, 100], to)
 
-      expect(fn).toHaveBeenCalled()
-      expect(start).toHaveBeenCalled()
-      expect(move).toHaveBeenCalled()
-      expect(end).toHaveBeenCalled()
+      expect(fn).toHaveBeenCalledTimes(1)
+      expect(start).toHaveBeenCalledTimes(1)
+      expect(move).toHaveBeenCalledTimes(1)
+      expect(end).toHaveBeenCalledTimes(1)
     })
   })
 
@@ -63,11 +63,11 @@ describe('v-touch', () => {
 
       await commands.drag([100, 100], to)
 
-      expect(fn).toHaveBeenCalled()
+      expect(fn).toHaveBeenCalledTimes(1)
       expect(nope).not.toHaveBeenCalled()
-      expect(start).toHaveBeenCalled()
-      expect(move).toHaveBeenCalled()
-      expect(end).toHaveBeenCalled()
+      expect(start).toHaveBeenCalledTimes(1)
+      expect(move).toHaveBeenCalledTimes(1)
+      expect(end).toHaveBeenCalledTimes(1)
     })
   })
 
@@ -88,9 +88,9 @@ describe('v-touch', () => {
       await commands.drag([100, 100], to)
 
       expect(fn).not.toHaveBeenCalled()
-      expect(start).toHaveBeenCalled()
+      expect(start).toHaveBeenCalledTimes(1)
       expect(move).not.toHaveBeenCalled()
-      expect(end).toHaveBeenCalled()
+      expect(end).toHaveBeenCalledTimes(1)
     })
   })
 })

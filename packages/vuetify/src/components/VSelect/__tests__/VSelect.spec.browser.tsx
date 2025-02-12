@@ -130,7 +130,7 @@ describe('VSelect', () => {
       ))
 
       await userEvent.click(element)
-      expect(await screen.findAllByRole('option', { selected: true })).toHaveLength(2)
+      await expect(screen.findAllByRole('option', { selected: true })).resolves.toHaveLength(2)
 
       const option = screen.getAllByRole('option')[2]
       await commands.waitStable('.v-list')
@@ -183,7 +183,7 @@ describe('VSelect', () => {
       ))
 
       await userEvent.click(element)
-      expect(await screen.findAllByRole('option', { selected: true })).toHaveLength(2)
+      await expect(screen.findAllByRole('option', { selected: true })).resolves.toHaveLength(2)
       await commands.waitStable('.v-list')
       await userEvent.click(screen.getAllByRole('option')[2])
       expect(selectedItems.value).toStrictEqual([
@@ -486,6 +486,7 @@ describe('VSelect', () => {
     ))
 
     await userEvent.click(element)
+    await commands.waitStable('.v-list')
     await userEvent.keyboard('f')
     expect(screen.getAllByRole('option')).toHaveLength(3)
     expect(selectedItems.value).toBe('foo')
