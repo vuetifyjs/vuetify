@@ -13,7 +13,7 @@ import type { PropType } from 'vue'
 export interface CalendarProps {
   allowedDates: unknown[] | ((date: unknown) => boolean) | undefined
   disabled: boolean
-  displayValue: unknown
+  displayValue?: unknown
   modelValue: unknown[] | undefined
   max: unknown
   min: unknown

@@ -3,7 +3,7 @@
   "description": "A Vue.js project",
   "private": true,
   "author": "John Leider <john@vuetifyjs.com>",
-  "version": "3.7.10",
+  "version": "3.7.12",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/vuetifyjs/vuetify.git",
@@ -87,7 +87,7 @@
     "vite-plugin-pages": "^0.32.1",
     "vite-plugin-pwa": "^0.17.4",
     "vite-plugin-vue-layouts": "^0.11.0",
-    "vite-plugin-vuetify": "^2.0.4",
+    "vite-plugin-vuetify": "^2.1.0",
     "vue-tsc": "^2.0.29"
   },
   "publishConfig": {

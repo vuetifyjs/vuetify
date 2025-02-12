@@ -590,6 +590,47 @@ describe('VSelect', () => {
     await expect.poll(() => screen.queryByRole('listbox')).toBeNull()
   })
 
+  describe('reactivity', () => {
+    it('adds a new item', async () => {
+      const items = ref(['Foo'])
+      const { element } = render(() => (
+        <VSelect items={ items.value } />
+      ))
+
+      await userEvent.click(element)
+      await expect.poll(() => screen.queryByRole('listbox')).toBeInTheDocument()
+
+      items.value.push('Bar')
+      await expect.poll(() => screen.getByText('Bar')).toBeInTheDocument()
+    })
+
+    it('removes an item', async () => {
+      const items = ref(['Foo', 'Bar'])
+      const { element } = render(() => (
+        <VSelect items={ items.value } />
+      ))
+
+      await userEvent.click(element)
+      await expect.poll(() => screen.queryByRole('listbox')).toBeInTheDocument()
+
+      items.value.splice(1, 1)
+      await expect.element(screen.getByText('Bar')).not.toBeInTheDocument()
+    })
+
+    it('updates an item title', async () => {
+      const items = ref([{ title: 'Foo' }])
+      const { element } = render(() => (
+        <VSelect items={ items.value } />
+      ))
+
+      await userEvent.click(element)
+      await expect.poll(() => screen.queryByRole('listbox')).toBeInTheDocument()
+
+      items.value[0].title = 'Bar'
+      await expect.poll(() => screen.getByText('Bar')).toBeInTheDocument()
+    })
+  })
+
   describe('Showcase', () => {
     generate({ stories })
   })
