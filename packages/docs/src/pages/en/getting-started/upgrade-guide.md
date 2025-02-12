@@ -20,6 +20,9 @@ This page contains a detailed list of breaking changes and the steps required to
 ## Styles
 
 - Cascade layers are now being used everywhere. If you have other styles that are not using `@layer` they will now always take priority over vuetify.
+- The CSS reset has been mostly removed, with style normalisation being moved to individual components instead.
+  - `<button>`, `<input>`, `<select>` have their browser native borders and background colors.
+  - `<ul>`, `<ol>` and headings have padding and margins.
 
 ## Components
 
