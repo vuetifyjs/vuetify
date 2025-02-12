@@ -2,17 +2,17 @@
 import './VDatePickerMonth.sass'
 
 // Components
+import { VBadge } from '@/components/VBadge'
 import { VBtn } from '@/components/VBtn'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 
 // Composables
 import { makeCalendarProps, useCalendar } from '@/composables/calendar'
-import { useColor } from '@/composables/color'
 import { useDate } from '@/composables/date/date'
 import { MaybeTransition } from '@/composables/transition'
 
 // Utilities
-import { computed, h, ref, shallowRef, toRef, watch } from 'vue'
+import { computed, ref, shallowRef, watch } from 'vue'
 import { genericComponent, omit, propsFactory, wrapInArray } from '@/util'
 
 // Types
@@ -199,21 +199,20 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
       return eventColors.filter(v => v)
     }
 
-    function genEvents (date: string) {
+    function genEvents (date: string): JSX.Element | null {
       const eventColors = getEventColors(date)
-      return eventColors.length
-        ? h(
-          'div',
-          { class: 'v-date-picker-month__events' },
-          eventColors.map(color => {
-            const { colorClasses, colorStyles } = useColor(toRef({ background: color }))
-            return h('div', {
-              class: colorClasses.value,
-              style: { backgroundColor: colorStyles.value.backgroundColor },
-            })
-          })
-        )
-        : null
+
+      if (!eventColors.length) return null
+
+      return (
+        <div class="v-date-picker-month__events">
+          { eventColors.map((color: string) => {
+            return (
+              <VBadge dot color={ color } />
+            )
+          })}
+        </div>
+      )
     }
 
     return () => (

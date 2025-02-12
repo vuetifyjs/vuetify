@@ -3,21 +3,19 @@
 
 import { render, screen } from '@test'
 import { ref } from 'vue'
-import {VDatePicker} from '../VDatePicker'
+import { VDatePicker } from '../VDatePicker'
 
 describe('VDatePicker events', () => {
   it('renders event markers when events is an array', async () => {
     render(() => (
       <VDatePicker
-        type='month'
+        type="month"
         events={['2025-02-09']}
         eventColor="red"
       />
     ))
 
-    // Look for elements that should be rendered for events.
-    // In this component, event markers are wrapped in an element with class "v-date-picker-month__events"
-    const eventElements = document.querySelectorAll('.v-date-picker-month__events')
+    const eventElements = document.querySelectorAll('.v-badge')
     expect(eventElements.length).toBeGreaterThan(0)
   })
 
@@ -30,7 +28,7 @@ describe('VDatePicker events', () => {
     ))
 
     // Query the DOM for the event markers
-    const eventElements = document.querySelectorAll('.v-date-picker-month__events')
+    const eventElements = document.querySelectorAll('.v-badge')
     expect(eventElements.length).toBeGreaterThan(0)
   })
 
@@ -42,7 +40,7 @@ describe('VDatePicker events', () => {
       />
     ))
 
-    const eventElements = document.querySelectorAll('.v-date-picker-month__events')
+    const eventElements = document.querySelectorAll('.v-badge')
     expect(eventElements.length).toBeGreaterThan(0)
   })
 
@@ -54,7 +52,7 @@ describe('VDatePicker events', () => {
       />
     ))
 
-    const eventElements = document.querySelectorAll('.v-date-picker-month__events')
+    const eventElements = document.querySelectorAll('.v-badge')
     expect(eventElements.length).toBeGreaterThan(0)
   })
 })
