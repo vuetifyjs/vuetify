@@ -454,7 +454,10 @@ function endOfYear (date: Date) {
 }
 
 function isWithinRange (date: Date, range: [Date, Date]) {
-  return isAfter(date, range[0]) && isBefore(date, range[1])
+  return (
+    isEqual(date, range[0]) || isEqual(date, range[1]) ||
+    (isAfter(date, range[0]) && isBefore(date, range[1]))
+  )
 }
 
 function isValid (date: any) {
