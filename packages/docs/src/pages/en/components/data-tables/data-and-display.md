@@ -50,7 +50,7 @@ Pagination is used to split up large amounts of data into smaller chunks.
 
 ### External pagination
 
-Pagination can be controlled externally by using the individual props, or by using the **options** prop. Remember that you must apply the **.sync** modifier.
+Pagination can be controlled externally by using the individual props, or by using the **options** prop.
 
 <ExamplesExample file="v-data-table/misc-external-paginate" />
 
