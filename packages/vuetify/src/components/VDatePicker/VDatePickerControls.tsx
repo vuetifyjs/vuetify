@@ -21,8 +21,8 @@ export const makeVDatePickerControlsProps = propsFactory({
     default: undefined,
   },
   disabled: {
-    type: [Boolean, String, Array] as PropType<boolean | string | string[]>,
-    default: false,
+    type: [Boolean, String, Array] as PropType<boolean | string | string[] | null>,
+    default: null,
   },
   nextIcon: {
     type: IconValue,
