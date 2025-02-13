@@ -12,6 +12,7 @@ import { useLocale } from '@/composables/locale'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
+import type { PropType } from 'vue'
 import { SelectingTimes } from './SelectingTimes'
 type Period = 'am' | 'pm'
 
