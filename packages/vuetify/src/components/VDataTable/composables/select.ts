@@ -3,7 +3,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, inject, provide } from 'vue'
-import { deepEqual, propsFactory, wrapInArray } from '@/util'
+import { deepEqual, getObjectValueByPath, propsFactory, wrapInArray } from '@/util'
 
 // Types
 import type { InjectionKey, PropType, Ref } from 'vue'
@@ -11,6 +11,7 @@ import type { DataTableItemProps } from './items'
 import type { EventProp } from '@/util'
 
 export interface SelectableItem {
+  key: any
   value: any
   selectable: boolean
 }
@@ -18,23 +19,24 @@ export interface SelectableItem {
 export interface DataTableSelectStrategy {
   showSelectAll: boolean
   allSelected: (data: {
+    selectedSize: number
     allItems: SelectableItem[]
     currentPage: SelectableItem[]
   }) => SelectableItem[]
   select: (data: {
     items: SelectableItem[]
     value: boolean
-    selected: Set<unknown>
-  }) => Set<unknown>
+    selected: Map<string | number, unknown>
+  }) => Map<string | number, unknown>
   selectAll: (data: {
     value: boolean
     allItems: SelectableItem[]
     currentPage: SelectableItem[]
-    selected: Set<unknown>
-  }) => Set<unknown>
+    selected: Map<string | number, unknown>
+  }) => Map<string | number, unknown>
 }
 
-type SelectionProps = Pick<DataTableItemProps, 'itemValue'> & {
+type SelectionProps = Pick<DataTableItemProps, 'itemId'> & Pick<DataTableItemProps, 'itemValue'> & {
   modelValue: readonly any[]
   selectStrategy: 'single' | 'page' | 'all'
   valueComparator: typeof deepEqual
@@ -44,8 +46,10 @@ type SelectionProps = Pick<DataTableItemProps, 'itemValue'> & {
 const singleSelectStrategy: DataTableSelectStrategy = {
   showSelectAll: false,
   allSelected: () => [],
-  select: ({ items, value }) => {
-    return new Set(value ? [items[0]?.value] : [])
+  select: ({ items, value, selected }) => {
+    selected.clear()
+    if (value) selected.set(items[0].key, items[0])
+    return selected
   },
   selectAll: ({ selected }) => selected,
 }
@@ -55,8 +59,8 @@ const pageSelectStrategy: DataTableSelectStrategy = {
   allSelected: ({ currentPage }) => currentPage,
   select: ({ items, value, selected }) => {
     for (const item of items) {
-      if (value) selected.add(item.value)
-      else selected.delete(item.value)
+      if (value) selected.set(item.key, item)
+      else selected.delete(item.key)
     }
 
     return selected
@@ -69,8 +73,8 @@ const allSelectStrategy: DataTableSelectStrategy = {
   allSelected: ({ allItems }) => allItems,
   select: ({ items, value, selected }) => {
     for (const item of items) {
-      if (value) selected.add(item.value)
-      else selected.delete(item.value)
+      if (value) selected.set(item.key, item)
+      else selected.delete(item.key)
     }
 
     return selected
@@ -100,9 +104,16 @@ export function provideSelection (
   props: SelectionProps,
   { allItems, currentPage }: { allItems: Ref<SelectableItem[]>, currentPage: Ref<SelectableItem[]> }
 ) {
+  const itemId = props.itemId || 'id'
+  const extractId = typeof itemId === 'function'
+    ? (item: any) => itemId(item)
+    : (item: any) => getObjectValueByPath(item, itemId)
+  const findItem = (a: any, b: any) => extractId(a) === extractId(b)
+  const selectedItems = new Map<string | number, SelectableItem>()
+
   const selected = useProxiedModel(props, 'modelValue', props.modelValue, v => {
     return new Set(wrapInArray(v).map(v => {
-      return allItems.value.find(item => props.valueComparator(v, item.value))?.value ?? v
+      return allItems.value.find(item => findItem(v, item.value))?.value ?? v
     }))
   }, v => {
     return [...v.values()]
@@ -112,6 +123,7 @@ export function provideSelection (
   const currentPageSelectable = computed(() => currentPage.value.filter(item => item.selectable))
 
   const selectStrategy = computed(() => {
+    // TODO: this should be documented, data-iterator and data-table docs using with 'single', 'page' and 'all' values
     if (typeof props.selectStrategy === 'object') return props.selectStrategy
 
     switch (props.selectStrategy) {
@@ -122,22 +134,24 @@ export function provideSelection (
     }
   })
 
+  const itemSelected = (key: any) => selectedItems.has(key)
+
   function isSelected (items: SelectableItem | SelectableItem[]) {
-    return wrapInArray(items).every(item => selected.value.has(item.value))
+    return wrapInArray(items).every(item => itemSelected(item.key))
   }
 
   function isSomeSelected (items: SelectableItem | SelectableItem[]) {
-    return wrapInArray(items).some(item => selected.value.has(item.value))
+    return wrapInArray(items).some(item => itemSelected(item.key))
   }
 
   function select (items: SelectableItem[], value: boolean) {
-    const newSelected = selectStrategy.value.select({
+    selectStrategy.value.select({
       items,
       value,
-      selected: new Set(selected.value),
+      selected: selectedItems,
     })
 
-    selected.value = newSelected
+    selected.value = new Set(selectedItems.values())
   }
 
   function toggleSelect (item: SelectableItem) {
@@ -145,19 +159,21 @@ export function provideSelection (
   }
 
   function selectAll (value: boolean) {
-    const newSelected = selectStrategy.value.selectAll({
+    selectStrategy.value.selectAll({
       value,
       allItems: allSelectable.value,
       currentPage: currentPageSelectable.value,
-      selected: new Set(selected.value),
+      selected: selectedItems,
     })
 
-    selected.value = newSelected
+    selected.value = new Set(selectedItems.values())
   }
 
   const someSelected = computed(() => selected.value.size > 0)
   const allSelected = computed(() => {
     const items = selectStrategy.value.allSelected({
+      // required to re-compute when selected changes, otherwise will not be triggered
+      selectedSize: selected.value.size,
       allItems: allSelectable.value,
       currentPage: currentPageSelectable.value,
     })
