@@ -20,7 +20,10 @@ export const makeVTimePickerControlsProps = propsFactory({
   ampmInTitle: Boolean,
   ampmReadonly: Boolean,
   color: String,
-  disabled: Boolean,
+  disabled: {
+    type: Boolean as PropType<boolean | null>,
+    default: null,
+  },
   hour: Number,
   minute: Number,
   second: Number,
