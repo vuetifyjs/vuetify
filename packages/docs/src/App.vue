@@ -156,22 +156,8 @@
   a:not(:hover)
     text-decoration: none
 
-  p
-    margin-bottom: 1rem
-    line-height: 1.8
-
-    a, a:visited
-      color: rgb(var(--v-theme-primary))
-
-  h1
-    + p
-      font-size: 1.25rem
-      font-weight: 300
-
-  ul:not([class]),
-  ol:not([class])
-    padding-left: 20px
-    margin-bottom: 16px
+  p :is(a, a:visited)
+    color: rgb(var(--v-theme-primary))
 
   // Theme transition
   .app-copy
