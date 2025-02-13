@@ -109,11 +109,6 @@
       title: 'github',
     },
     {
-      icon: '$x',
-      href: 'https://x.com/vuetifyjs',
-      title: 'x',
-    },
-    {
       icon: 'mdi-discord',
       href: 'https://community.vuetifyjs.com',
       title: 'discord',
