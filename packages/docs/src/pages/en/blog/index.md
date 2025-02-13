@@ -18,6 +18,16 @@ Latest news, updates, and stories about Vuetify.
 
 <br>
 
+## Building a Basic Nuxt Application with Vuetify
+
+🖊️ Eric Sarrion • 📅 October 5th, 2024
+
+In this article, we will build a basic application using Vue.js and Vuetify, leveraging the Nuxt framework... { .text-medium-emphasis }
+
+[Read More](/blog/building-a-basic-nuxt-application-with-vuetify/) { .text-end }
+
+---
+
 ## State of the Union 2024
 
 🖊️ John Leider • 📅 September 8th, 2024
