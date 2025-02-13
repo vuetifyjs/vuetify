@@ -8,7 +8,12 @@ import { VSheet } from '@/components/VSheet'
 import { useDate } from '@/composables/date'
 
 // Utilities
-import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
+import { withModifiers } from 'vue'
+import { convertToUnit, genericComponent, getPrefixedEventHandlers, propsFactory, useRender } from '@/util'
+
+export type VCalendarIntervalEventSlots = {
+  intervalEvent: { height: string, margin: string, eventClass: string, event: any, interval: any }
+}
 
 export const makeVCalendarIntervalEventProps = propsFactory({
   allDay: Boolean,
@@ -28,49 +33,70 @@ export const makeVCalendarIntervalEventProps = propsFactory({
   event: Object,
 }, 'VCalendarIntervalEvent')
 
-export const VCalendarIntervalEvent = genericComponent()({
+export const VCalendarIntervalEvent = genericComponent<VCalendarIntervalEventSlots>()({
   name: 'VCalendarIntervalEvent',
 
   props: makeVCalendarIntervalEventProps(),
 
-  setup (props) {
+  emits: {
+    'click:event': null,
+    'contextmenu:event': null,
+  },
+
+  setup (props, { attrs, emit, slots }) {
     const adapter = useDate()
     const calcHeight = () => {
-      if ((!props.event?.first && !props.event?.last) || adapter.isEqual(props.event?.start, props.interval?.start)) {
-        return { height: '100%', margin: convertToUnit(0) }
+      if ((!props.event?.first && !props.event?.last) || adapter.isEqual(props.event?.end, props.interval?.end)) {
+        return { height: `${props.intervalHeight}px`, margin: convertToUnit(0) }
       } else {
         const { height, margin } = Array.from({ length: props.intervalDivisions },
-          (x: number) => x * (props.intervalDuration / props.intervalDivisions)).reduce((total, div, index) => {
-          if (adapter.isBefore(adapter.addMinutes(props.interval?.start, div), props.event?.start)) {
-            return {
-              height: convertToUnit((props.intervalHeight / props.intervalDivisions) * index),
-              margin: convertToUnit((props.intervalHeight / props.intervalDivisions) * index),
+          (_, x: number) => (x + 1) * (props.intervalDuration / props.intervalDivisions)
+        )
+          .reduce((total, div, index) => {
+            if (adapter.isBefore(adapter.addMinutes(props.interval?.start, div), props.event?.end)) {
+              return {
+                height: convertToUnit((props.intervalHeight / props.intervalDivisions) * index),
+                margin: convertToUnit((props.intervalHeight / props.intervalDivisions) * index),
+              }
             }
-          }
-          return { height: total.height, margin: total.margin }
-        }, { height: '', margin: '' })
+            return { height: total.height, margin: total.margin }
+          }, { height: '', margin: '' })
         return { height, margin }
       }
     }
 
     useRender(() => {
       return (
-        <VSheet
-          height={ calcHeight().height }
-          density="comfortable"
-          style={ `margin-top: ${calcHeight().margin}` }
-          class="v-calendar-internal-event"
-          color={ props.event?.color ?? undefined }
-          rounded={ props.event?.first && props.event?.last
-            ? true
-            : props.event?.first
-              ? 't'
-              : props.event?.last
-                ? 'b'
-                : false }
-        >
-          { props.event?.first ? props.event?.title : '' }
-        </VSheet>
+        <div>
+          {
+            slots.intervalEvent?.({
+              height: calcHeight().height,
+              margin: calcHeight().margin,
+              eventClass: 'v-calendar-internal-event',
+              event: props.event,
+              interval: props.interval,
+            }) ?? (
+              <VSheet
+                height={ calcHeight().height }
+                density="comfortable"
+                style={ `margin-top: ${calcHeight().margin}` }
+                class="v-calendar-internal-event"
+                color={ props.event?.color ?? undefined }
+                rounded={
+                  props.event?.first && props.event?.last ? true
+                  : props.event?.first ? 't'
+                  : props.event?.last ? 'b'
+                  : false
+                }
+                onClick={ withModifiers((event: any) => emit('click:event', event, props.event), ['stop']) }
+                onContextmenu={ withModifiers((event: any) => emit('contextmenu:event', event, props.event), ['stop']) }
+                { ...getPrefixedEventHandlers(attrs, ':intervalEvent', () => props) }
+              >
+                { props.event?.first ? props.event?.title : '' }
+              </VSheet>
+            )
+          }
+        </div>
       )
     })
 
