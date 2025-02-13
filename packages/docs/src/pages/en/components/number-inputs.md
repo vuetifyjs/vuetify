@@ -75,7 +75,7 @@ The `v-number-input` component has support for most of `v-field`'s props and is 
 
 #### Control-variant
 
-The `control-variant` prop offers an easy way to customize steppers button layout. The following values are valid options: **default**, **stacked** and **split**.
+The `control-variant` prop offers an easy way to customize steppers button layout. The following values are valid options: **default**, **stacked**, **split** and **hidden**.
 
 <ExamplesExample file="v-number-input/prop-control-variant" />
 
