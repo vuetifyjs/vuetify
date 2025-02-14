@@ -39,6 +39,7 @@ Control text size, alignment, wrapping, overflow, transforms and more. By defaul
 | **text-uppercase** | text-transform: uppercase; |
 | **text-lowercase** | text-transform: lowercase; |
 | **text-capitalize** | text-transform: capitalize; |
+| **text-none** | text-transform: none; |
 | **text-start** | text-align: start; |
 | **text-center** | text-align: center; |
 | **text-end** | text-align: end; |
