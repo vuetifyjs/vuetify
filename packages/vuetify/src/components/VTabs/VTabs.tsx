@@ -12,30 +12,32 @@ import { useBackgroundColor } from '@/composables/color'
 import { provideDefaults } from '@/composables/defaults'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { useScopeId } from '@/composables/scopeId'
 import { makeTagProps } from '@/composables/tag'
 
 // Utilities
 import { computed, toRef } from 'vue'
+import { VTabsSymbol } from './shared'
 import { convertToUnit, genericComponent, isObject, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import { VTabsSymbol } from './shared'
+import type { GenericProps } from '@/util'
 
 export type TabItem = string | number | Record<string, any>
 
-export type VTabsSlot = {
-  item: TabItem
+export type VTabsSlot<T> = {
+  item: T
 }
 
-export type VTabsSlots = {
+export type VTabsSlots<T> = {
   default: never
-  tab: VTabsSlot
-  item: VTabsSlot
+  tab: VTabsSlot<T>
+  item: VTabsSlot<T>
   window: never
 } & {
-  [key: `tab.${string}`]: VTabsSlot
-  [key: `item.${string}`]: VTabsSlot
+  [key: `tab.${string}`]: VTabsSlot<T>
+  [key: `item.${string}`]: VTabsSlot<T>
 }
 
 function parseItems (items: readonly TabItem[] | undefined) {
@@ -77,7 +79,12 @@ export const makeVTabsProps = propsFactory({
   ...makeTagProps(),
 }, 'VTabs')
 
-export const VTabs = genericComponent<VTabsSlots>()({
+export const VTabs = genericComponent<new <T = TabItem>(
+  props: {
+    items?: T
+  },
+  slots: VTabsSlots<T>
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VTabs',
 
   props: makeVTabsProps(),
@@ -86,11 +93,12 @@ export const VTabs = genericComponent<VTabsSlots>()({
     'update:modelValue': (v: unknown) => true,
   },
 
-  setup (props, { slots }) {
+  setup (props, { attrs, slots }) {
     const model = useProxiedModel(props, 'modelValue')
     const items = computed(() => parseItems(props.items))
     const { densityClasses } = useDensity(props)
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'bgColor'))
+    const { scopeId } = useScopeId()
 
     provideDefaults({
       VTab: {
@@ -132,6 +140,8 @@ export const VTabs = genericComponent<VTabsSlots>()({
             ]}
             role="tablist"
             symbol={ VTabsSymbol }
+            { ...scopeId }
+            { ...attrs }
           >
             { slots.default?.() ?? items.value.map(item => (
               slots.tab?.({ item }) ?? (
@@ -140,7 +150,7 @@ export const VTabs = genericComponent<VTabsSlots>()({
                   key={ item.text }
                   value={ item.value }
                   v-slots={{
-                    default: () => slots[`tab.${item.value}`]?.({ item }),
+                    default: slots[`tab.${item.value}`] ? () => slots[`tab.${item.value}`]?.({ item }) : undefined,
                   }}
                 />
               )
@@ -151,6 +161,7 @@ export const VTabs = genericComponent<VTabsSlots>()({
             <VTabsWindow
               v-model={ model.value }
               key="tabs-window"
+              { ...scopeId }
             >
               { items.value.map(item => slots.item?.({ item }) ?? (
                 <VTabsWindowItem

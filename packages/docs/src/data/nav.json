@@ -88,6 +88,7 @@
         "routePath": "explorer",
         "subtitle": "browse-components"
       },
+      "application",
       { "divider": true },
       { "subheader": "containment" },
       "bottom-sheets",
@@ -237,6 +238,10 @@
         "subfolder": "components"
       },
       {
+        "title": "file-upload",
+        "subfolder": "components"
+      },
+      {
         "title": "number-inputs",
         "subfolder": "components"
       },
@@ -246,6 +251,10 @@
       },
       {
         "title": "snackbar-queue",
+        "subfolder": "components"
+      },
+      {
+        "title": "vertical-steppers",
         "subfolder": "components"
       },
       {

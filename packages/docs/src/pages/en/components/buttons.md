@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   nav: Buttons
   title: Button component
@@ -20,11 +21,9 @@ features:
 
 The `v-btn` component replaces the standard html button with a material design theme and a multitude of options. Any color helper class can be used to alter the background or text color.
 
-![Button Entry](https://cdn.vuetifyjs.com/docs/images/components/v-btn/v-btn-entry.png)
-
 <PageFeatures />
 
-<VoPromotionsCardVuetify />
+<VoPromotionsCardVuetify slug="vuetify-snips" />
 
 ## Usage
 

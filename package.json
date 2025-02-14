@@ -1,8 +1,6 @@
 {
+  "name": "@vuetify/vuetify-root",
   "private": true,
-  "workspaces": [
-    "packages/*"
-  ],
   "husky": {
     "hooks": {
       "prepare-commit-msg": "node scripts/prepare-commit-message.js",
@@ -17,7 +15,6 @@
   "scripts": {
     "dev": "node scripts/dev.js",
     "build": "node scripts/build.js",
-    "start": "lerna run start --scope vuetifyjs.com --stream",
     "lint": "lerna run lint --parallel --stream",
     "lint:fix": "lerna run lint:fix --parallel",
     "version": "node scripts/confirm-npm-tag.js",
@@ -25,32 +22,34 @@
     "postversion": "node scripts/post-release-merge.js",
     "clean": "lerna clean",
     "changelog": "conventional-changelog -u -p vuetify",
-    "all-checks": "yarn lint && lerna run test && lerna run cy:run && yarn build"
+    "all-checks": "pnpm run lint && lerna run test && lerna run cy:run && pnpm run build",
+    "vue-ecosystem-ci:build": "pnpm --filter vuetify run build",
+    "vue-ecosystem-ci:test": "pnpm --filter vuetify run lint && pnpm --filter vuetify run test"
   },
   "engines": {
-    "node": ">=18.19.0 || >=20.6.0",
-    "yarn": "^1.19"
+    "node": ">=22.0.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.24.1",
-    "@babel/core": "^7.24.4",
-    "@babel/preset-env": "^7.24.4",
-    "@babel/preset-typescript": "^7.24.1",
-    "@mdi/font": "6.2.95",
-    "@mdi/js": "6.2.95",
-    "@mdi/svg": "6.2.95",
+    "@babel/cli": "^7.24.8",
+    "@babel/core": "^7.25.2",
+    "@babel/preset-env": "^7.25.3",
+    "@babel/preset-typescript": "^7.24.7",
+    "@mdi/font": "7.4.47",
+    "@mdi/js": "7.4.47",
+    "@mdi/svg": "7.4.47",
     "@octokit/core": "^5.2.0",
-    "@typescript-eslint/eslint-plugin": "^6.21.0",
-    "@typescript-eslint/parser": "^6.21.0",
+    "@typescript-eslint/eslint-plugin": "^7.18.0",
+    "@typescript-eslint/parser": "^7.18.0",
     "@unhead/vue": "^1.9.4",
-    "@vue/compiler-sfc": "^3.4.21",
+    "@vue/compiler-sfc": "^3.5.12",
+    "@vue/language-server": "^2.1.6",
+    "@vue/runtime-core": "^3.5.12",
+    "@vue/runtime-dom": "^3.5.12",
     "@vueuse/head": "^1.3.1",
     "babel-eslint": "^10.1.0",
-    "babel-jest": "^28.1.3",
     "conventional-changelog-cli": "^3.0.0",
     "conventional-changelog-vuetify": "^1.2.1",
     "conventional-github-releaser": "^3.1.5",
-    "cross-env": "^7.0.3",
     "cross-spawn": "^7.0.3",
     "eslint": "^8.57.0",
     "eslint-config-standard": "^17.1.0",
@@ -63,29 +62,39 @@
     "eslint-plugin-sonarjs": "^0.25.1",
     "eslint-plugin-vue": "^9.24.1",
     "eslint-plugin-vuetify": "^2.3.0",
+    "glob": "^11.0.0",
     "husky": "^3.1.0",
     "inquirer": "^6.5.2",
-    "jest": "^28.1.3",
-    "jest-cli": "^28.1.3",
-    "jest-environment-jsdom": "^28.1.3",
-    "jest-serializer-html": "^7.1.0",
-    "lerna": "^3.22.1",
+    "lerna": "^8.1.7",
     "magic-string": "^0.30.9",
     "mkdirp": "^3.0.1",
     "moment": "^2.30.1",
-    "patch-package": "^8.0.0",
     "rimraf": "^5.0.5",
-    "sass": "^1.74.1",
+    "sass": "^1.80.1",
+    "sass-embedded": "^1.80.1",
     "semver": "^7.6.0",
     "shelljs": "^0.8.5",
-    "typescript": "~5.3.3",
+    "stringify-object": "^5.0.0",
+    "typescript": "~5.5.4",
     "upath": "^2.0.1",
     "vite-plugin-inspect": "^0.8.3",
     "vite-plugin-warmup": "^0.1.0",
-    "vue": "^3.4.21",
+    "vue": "^3.5.12",
     "vue-analytics": "^5.16.1",
     "vue-router": "^4.3.0",
-    "vue-tsc": "^1.8.27",
+    "vue-tsc": "^2.0.29",
     "yargs": "^17.7.2"
+  },
+  "packageManager": "pnpm@9.10.0",
+  "pnpm": {
+    "patchedDependencies": {
+      "@mdi/js@7.4.47": "patches/@mdi__js@7.4.47.patch",
+      "@testing-library/vue": "patches/@testing-library__vue.patch"
+    },
+    "overrides": {
+      "@testing-library/dom": "npm:@vuetify/testing-library-dom@1.0.2",
+      "@types/node": "22.5.4",
+      "tough-cookie": "5.0.0-rc.4"
+    }
   }
 }

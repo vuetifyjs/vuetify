@@ -1,7 +1,8 @@
+@use 'sass:list'
 @use '../settings'
 @use '../tools'
 
-@if (settings.$utilities != false and length(settings.$utilities) > 0)
+@if (settings.$utilities != false and list.length(settings.$utilities) > 0)
   @include tools.layer('utilities')
     @each $size, $media_query in settings.$display-breakpoints
       .hidden

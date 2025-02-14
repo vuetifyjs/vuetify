@@ -2,7 +2,7 @@
   <v-card
     class="pa-4"
     height="300px"
-    img="https://cdn.vuetifyjs.com/images/toolbar/map.jpg"
+    image="https://cdn.vuetifyjs.com/images/toolbar/map.jpg"
     flat
   >
     <v-toolbar

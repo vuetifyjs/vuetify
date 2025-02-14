@@ -2,7 +2,7 @@ export default {
   badge: 'Insigne',
   open: 'Openen',
   close: 'Sluiten',
-  dismiss: 'Dismiss',
+  dismiss: 'Sluiten',
   confirmEdit: {
     ok: 'OK',
     cancel: 'Annuleren',
@@ -69,10 +69,15 @@ export default {
     counter: '{0} bestanden',
     counterSize: '{0} bestanden ({1} in totaal)',
   },
+  fileUpload: {
+    title: 'Sleep en zet bestanden hier neer',
+    divider: 'of',
+    browse: 'Blader door bestanden',
+  },
   timePicker: {
     am: 'AM',
     pm: 'PM',
-    title: 'Select Time',
+    title: 'Selecteer tijd',
   },
   pagination: {
     ariaLabel: {

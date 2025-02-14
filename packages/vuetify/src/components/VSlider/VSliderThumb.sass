@@ -35,6 +35,9 @@
     user-select: none
     background-color: currentColor
 
+    @media (forced-colors: active)
+      background-color: highlight
+
     &::before
       transition: 0.3s settings.$standard-easing
       content: ''
@@ -103,9 +106,9 @@
     .v-slider-thumb__label
       bottom: $slider-thumb-label-offset
 
-      +tools.ltr()
+      @include tools.ltr()
         transform: translateX(-50%)
-      +tools.rtl()
+      @include tools.rtl()
         transform: translateX(50%)
 
       &::before

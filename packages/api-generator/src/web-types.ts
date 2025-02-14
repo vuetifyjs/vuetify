@@ -1,7 +1,7 @@
 import fs from 'fs'
 import { capitalize } from './helpers/text'
 import type { ComponentData, DirectiveData } from './types'
-import pkg from '../package.json' assert { type: 'json' }
+import pkg from '../package.json' with { type: 'json' }
 
 export const createWebTypesApi = (componentData: ComponentData[], directiveData: DirectiveData[]) => {
   const getDocUrl = (cmp: string, heading?: string) =>

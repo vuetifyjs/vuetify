@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   nav: Snackbar Queue
   title: Snackbar Queue component
@@ -30,7 +29,7 @@ This feature requires [v3.6.0](/getting-started/release-notes/?version=v3.6.0)
 
 ## Installation
 
-Labs components require a manual import and installation of the component.
+Labs components require manual import and registration with the Vuetify instance.
 
 ```js { resource="src/plugins/vuetify.js" }
 import { VSnackbarQueue } from 'vuetify/labs/VSnackbarQueue'

@@ -12,7 +12,7 @@ related:
 
 # Data and Display
 
-Data table filtering is key feature that allows users to quickly find the data they are looking for.
+Data table filtering is a key feature that allows users to quickly find the data they are looking for.
 
 <PromotedEntry />
 
@@ -26,11 +26,11 @@ The data table exposes a **search** prop that allows you to filter your data.
 
 <ExamplesExample file="v-data-table/prop-search" />
 
-### Filterable
+### Filter Keys
 
-You can easily disable specific columns from being included when searching through table rows by setting the property **filterable** to false on the header item(s). In the example below the dessert name column is no longer searchable.
+You can easily select only the column you want to filter on by using the **filter-keys** prop. This prop accepts an array of keys from the table items that will be used for filtering. You may also choose to disable columns from filtering by setting the **filter** property to `false` on the header item(s). In the example below the we only filter on the `name` column.
 
-<ExamplesExample file="v-data-table/prop-filterable" />
+<ExamplesExample file="v-data-table/prop-filter-keys" />
 
 ### Custom filter
 
@@ -40,7 +40,7 @@ You can override the default filtering used with the **search** prop by supplyin
 (value: string, query: string, item?: any) => boolean | number | [number, number] | [number, number][]
 ```
 
-In the example below, the custom filter will only match inputs that are in completely in upper case.
+Additionally, you may apply customize the filtering on a per column basis by setting custom function to the **filter** property on the header item(s). In the example below, the custom filter will only match inputs that are in completely in upper case.
 
 <ExamplesExample file="v-data-table/prop-custom-filter" />
 
@@ -79,6 +79,12 @@ The current selection of the data-table can be accessed through the **v-model** 
 Use the **item-selectable** prop to designate a property on your items that controls if the item should be selectable or not.
 
 <ExamplesExample file="v-data-table/prop-item-selectable" />
+
+### Custom select column
+
+Use the **item.data-table-select** slot alongside `v-checkbox-btn` to customize the checkbox used for row selection. You can also use the **header.data-table-select** slot to customize the select-all checkbox in the header of the column.
+
+<ExamplesExample file="v-data-table/slot-item-data-table-select" />
 
 ### Select strategies
 

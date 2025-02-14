@@ -22,6 +22,7 @@ export const VPullToRefresh = genericComponent<VPullToRefreshSlots>()({
   name: 'VPullToRefresh',
 
   props: {
+    disabled: Boolean,
     pullDownThreshold: {
       type: Number,
       default: 64,
@@ -47,13 +48,13 @@ export const VPullToRefresh = genericComponent<VPullToRefreshSlots>()({
     const topOffset = computed(() => clamp(touchDiff.value, 0, props.pullDownThreshold))
 
     function onTouchstart (e: TouchEvent | MouseEvent) {
-      if (refreshing.value) return
+      if (refreshing.value || props.disabled) return
       touching.value = true
       touchstartY = 'clientY' in e ? e.clientY : e.touches[0].clientY
     }
 
     function onTouchmove (e: TouchEvent | MouseEvent) {
-      if (refreshing.value || !touching.value) return
+      if (refreshing.value || !touching.value || props.disabled) return
 
       const touchY = 'clientY' in e ? e.clientY : e.touches[0].clientY
 
@@ -63,7 +64,7 @@ export const VPullToRefresh = genericComponent<VPullToRefreshSlots>()({
     }
 
     function onTouchend (e: TouchEvent | MouseEvent) {
-      if (refreshing.value) return
+      if (refreshing.value || props.disabled) return
       touching.value = false
       if (canRefresh.value) {
         function done () {

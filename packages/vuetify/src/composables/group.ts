@@ -2,15 +2,15 @@
 import { useProxiedModel } from './proxiedModel'
 
 // Utilities
-import { computed, inject, onBeforeUnmount, onMounted, onUpdated, provide, reactive, toRef, unref, watch } from 'vue'
-import { consoleWarn, deepEqual, findChildrenWithProvide, getCurrentInstance, getUid, propsFactory, wrapInArray } from '@/util'
+import { computed, inject, onBeforeUnmount, onMounted, onUpdated, provide, reactive, toRef, unref, useId, watch } from 'vue'
+import { consoleWarn, deepEqual, findChildrenWithProvide, getCurrentInstance, propsFactory, wrapInArray } from '@/util'
 
 // Types
 import type { ComponentInternalInstance, ComputedRef, ExtractPropTypes, InjectionKey, PropType, Ref, UnwrapRef } from 'vue'
 import type { EventProp } from '@/util'
 
 export interface GroupItem {
-  id: number
+  id: string
   value: Ref<unknown>
   disabled: Ref<boolean | undefined>
   useIndexAsValue?: boolean
@@ -28,15 +28,15 @@ export interface GroupProps {
 
 export interface GroupProvide {
   register: (item: GroupItem, cmp: ComponentInternalInstance) => void
-  unregister: (id: number) => void
-  select: (id: number, value: boolean) => void
-  selected: Ref<Readonly<number[]>>
-  isSelected: (id: number) => boolean
+  unregister: (id: string) => void
+  select: (id: string, value: boolean) => void
+  selected: Ref<Readonly<string[]>>
+  isSelected: (id: string) => boolean
   prev: () => void
   next: () => void
   selectedClass: Ref<string | undefined>
   items: ComputedRef<{
-    id: number
+    id: string
     value: unknown
     disabled: boolean | undefined
   }[]>
@@ -45,8 +45,10 @@ export interface GroupProvide {
 }
 
 export interface GroupItemProvide {
-  id: number
+  id: string
   isSelected: Ref<boolean>
+  isFirst: Ref<boolean>
+  isLast: Ref<boolean>
   toggle: () => void
   select: (value: boolean) => void
   selectedClass: Ref<(string | undefined)[] | false>
@@ -101,7 +103,7 @@ export function useGroupItem (
     )
   }
 
-  const id = getUid()
+  const id = useId()
 
   provide(Symbol.for(`${injectKey.description}:id`), id)
 
@@ -129,6 +131,12 @@ export function useGroupItem (
   const isSelected = computed(() => {
     return group.isSelected(id)
   })
+  const isFirst = computed(() => {
+    return group.items.value[0].id === id
+  })
+  const isLast = computed(() => {
+    return group.items.value[group.items.value.length - 1].id === id
+  })
 
   const selectedClass = computed(() => isSelected.value && [group.selectedClass.value, props.selectedClass])
 
@@ -139,6 +147,8 @@ export function useGroupItem (
   return {
     id,
     isSelected,
+    isFirst,
+    isLast,
     toggle: () => group.select(id, !isSelected.value),
     select: (value: boolean) => group.select(id, value),
     selectedClass,
@@ -192,7 +202,7 @@ export function useGroup (
     }
   }
 
-  function unregister (id: number) {
+  function unregister (id: string) {
     if (isUnmounted) return
 
     // TODO: re-evaluate this line's importance in the future
@@ -230,7 +240,7 @@ export function useGroup (
     }
   })
 
-  function select (id: number, value?: boolean) {
+  function select (id: string, value?: boolean) {
     const item = items.find(item => item.id === id)
     if (value && item?.disabled) return
 
@@ -302,7 +312,7 @@ export function useGroup (
     disabled: toRef(props, 'disabled'),
     prev: () => step(items.length - 1),
     next: () => step(1),
-    isSelected: (id: number) => selected.value.includes(id),
+    isSelected: (id: string) => selected.value.includes(id),
     selectedClass: computed(() => props.selectedClass),
     items: computed(() => items),
     getItemIndex: (value: unknown) => getItemIndex(items, value),
@@ -322,7 +332,7 @@ function getItemIndex (items: UnwrapRef<GroupItem[]>, value: unknown) {
 }
 
 function getIds (items: UnwrapRef<GroupItem[]>, modelValue: any[]) {
-  const ids: number[] = []
+  const ids: string[] = []
 
   modelValue.forEach(value => {
     const item = items.find(item => deepEqual(value, item.value))

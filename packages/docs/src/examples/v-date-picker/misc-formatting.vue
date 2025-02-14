@@ -12,17 +12,15 @@
           max-width="290px"
           min-width="auto"
           transition="scale-transition"
-          offset-y
         >
-          <template v-slot:activator="{ on, attrs }">
+          <template v-slot:activator="{ props }">
             <v-text-field
               v-model="dateFormatted"
               hint="MM/DD/YYYY format"
               label="Date"
               prepend-icon="mdi-calendar"
               persistent-hint
-              v-bind="attrs"
-              v-on="on"
+              v-bind="props"
               @blur="date = parseDate(dateFormatted)"
             ></v-text-field>
           </template>
@@ -45,9 +43,8 @@
           max-width="290px"
           min-width="auto"
           transition="scale-transition"
-          offset-y
         >
-          <template v-slot:activator="{ on, attrs }">
+          <template v-slot:activator="{ props }">
             <v-text-field
               v-model="computedDateFormatted"
               hint="MM/DD/YYYY format"
@@ -55,8 +52,7 @@
               prepend-icon="mdi-calendar"
               persistent-hint
               readonly
-              v-bind="attrs"
-              v-on="on"
+              v-bind="props"
             ></v-text-field>
           </template>
           <v-date-picker

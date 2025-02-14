@@ -25,12 +25,12 @@
 
     @supports selector(:focus-visible)
       &::after
-        @include tools.absolute(true)
         pointer-events: none
         border: 2px solid currentColor
         border-radius: 4px
         opacity: 0
         transition: opacity .2s ease-in-out
+        @include tools.absolute(true)
 
       &:focus-visible::after
         opacity: calc(.15 * var(--v-theme-overlay-multiplier))
@@ -80,11 +80,11 @@
       ~ .v-list-item__spacer
         width: $list-item-icon-margin-start
 
-    > .v-avatar ~ .v-list-item__spacer
-      width: $list-item-avatar-margin-start
+    > .v-avatar,
+    > .v-badge:is(:has(.v-avatar))
+      ~ .v-list-item__spacer
+        width: $list-item-avatar-margin-start
 
-    > .v-list-item-action ~ .v-list-item__spacer
-      width: $list-item-action-spacer-width
 
     .v-list-item--slim &
       > .v-badge,
@@ -93,8 +93,10 @@
         ~ .v-list-item__spacer
           width: $list-item-slim-spacer-width
 
-      > .v-avatar ~ .v-list-item__spacer
-        width: $list-item-slim-avatar-spacer-width
+      > .v-avatar,
+      > .v-badge:is(:has(.v-avatar))
+        ~ .v-list-item__spacer
+          width: $list-item-slim-avatar-spacer-width
 
       > .v-list-item-action ~ .v-list-item__spacer
         width: $list-item-slim-action-spacer-width
@@ -118,8 +120,10 @@
       ~ .v-list-item__spacer
         width: $list-item-icon-margin-end
 
-    > .v-avatar ~ .v-list-item__spacer
-      width: $list-item-avatar-margin-end
+    > .v-avatar,
+    > .v-badge:is(:has(.v-avatar))
+      ~ .v-list-item__spacer
+        width: $list-item-avatar-margin-end
 
     > .v-list-item-action ~ .v-list-item__spacer
       width: $list-item-action-spacer-width
@@ -131,8 +135,10 @@
         ~ .v-list-item__spacer
           width: $list-item-slim-spacer-width
 
-      > .v-avatar ~ .v-list-item__spacer
-        width: $list-item-slim-avatar-spacer-width
+      > .v-avatar,
+      > .v-badge:is(:has(.v-avatar))
+        ~ .v-list-item__spacer
+          width: $list-item-slim-avatar-spacer-width
 
       > .v-list-item-action ~ .v-list-item__spacer
         width: $list-item-slim-action-spacer-width
@@ -319,7 +325,7 @@
   .v-list-group__items .v-list-item
     padding-inline-start: calc(#{$base-padding} + var(--indent-padding)) !important
 
-  .v-list-group__header.v-list-item--active
+  .v-list-group__header:not(.v-treeview-item--activatable-group-activator).v-list-item--active
     &:not(:focus-visible)
       .v-list-item__overlay
         opacity: 0

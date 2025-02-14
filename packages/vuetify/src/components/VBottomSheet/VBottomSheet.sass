@@ -1,3 +1,4 @@
+@use 'sass:map'
 @use '../../styles/settings'
 @use '../../styles/tools'
 @use './variables' as *
@@ -36,5 +37,5 @@
     &.v-bottom-sheet--inset
       max-width: none
 
-      @media #{map-get(settings.$display-breakpoints, 'sm-and-up')}
+      @media #{map.get(settings.$display-breakpoints, 'sm-and-up')}
         max-width: $bottom-sheet-inset-width

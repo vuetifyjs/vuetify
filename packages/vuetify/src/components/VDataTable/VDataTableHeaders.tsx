@@ -59,7 +59,8 @@ export type VDataTableHeadersSlots = {
 
 export const makeVDataTableHeadersProps = propsFactory({
   color: String,
-  sticky: Boolean,
+  disableSort: Boolean,
+  fixedHeader: Boolean,
   multiSort: Boolean,
   sortAscIcon: {
     type: IconValue,
@@ -72,6 +73,9 @@ export const makeVDataTableHeadersProps = propsFactory({
   headerProps: {
     type: Object as PropType<Record<string, any>>,
   },
+
+  /** @deprecated */
+  sticky: Boolean,
 
   ...makeDisplayProps(),
   ...makeLoaderProps(),
@@ -90,12 +94,12 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
     const { loaderClasses } = useLoader(props)
 
     function getFixedStyles (column: InternalDataTableHeader, y: number): CSSProperties | undefined {
-      if (!props.sticky && !column.fixed) return undefined
+      if (!(props.sticky || props.fixedHeader) && !column.fixed) return undefined
 
       return {
         position: 'sticky',
         left: column.fixed ? convertToUnit(column.fixedOffset) : undefined,
-        top: props.sticky ? `calc(var(--v-table-header-height) * ${y})` : undefined,
+        top: (props.sticky || props.fixedHeader) ? `calc(var(--v-table-header-height) * ${y})` : undefined,
       }
     }
 
@@ -126,7 +130,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
     const headerCellClasses = computed(() => ([
       'v-data-table__th',
       {
-        'v-data-table__th--sticky': props.sticky,
+        'v-data-table__th--sticky': (props.sticky || props.fixedHeader),
       },
       displayClasses.value,
       loaderClasses.value,
@@ -142,7 +146,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
           align={ column.align }
           class={[
             {
-              'v-data-table__th--sortable': column.sortable,
+              'v-data-table__th--sortable': column.sortable && !props.disableSort,
               'v-data-table__th--sorted': isSorted(column),
               'v-data-table__th--fixed': column.fixed,
             },
@@ -180,7 +184,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
               if (slots[columnSlotName]) return slots[columnSlotName]!(columnSlotProps)
 
               if (column.key === 'data-table-select') {
-                return slots['header.data-table-select']?.(columnSlotProps) ?? (showSelectAll && (
+                return slots['header.data-table-select']?.(columnSlotProps) ?? (showSelectAll.value && (
                   <VCheckboxBtn
                     modelValue={ allSelected.value }
                     indeterminate={ someSelected.value && !allSelected.value }
@@ -192,7 +196,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
               return (
                 <div class="v-data-table-header__content">
                   <span>{ column.title }</span>
-                  { column.sortable && (
+                  { column.sortable && !props.disableSort && (
                     <VIcon
                       key="icon"
                       class="v-data-table-header__sort-icon"
@@ -223,10 +227,14 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
       const headerProps = mergeProps(props.headerProps ?? {} ?? {})
 
       const displayItems = computed<ItemProps['items']>(() => {
-        return columns.value.filter(column => column?.sortable)
+        return columns.value.filter(column => column?.sortable && !props.disableSort)
       })
 
       const appendIcon = computed(() => {
+        const showSelectColumn = columns.value.find(column => column.key === 'data-table-select')
+
+        if (showSelectColumn == null) return
+
         return allSelected.value ? '$checkboxOn' : someSelected.value ? '$checkboxIndeterminate' : '$checkboxOff'
       })
 

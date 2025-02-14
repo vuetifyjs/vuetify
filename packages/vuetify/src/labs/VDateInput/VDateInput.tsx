@@ -7,21 +7,36 @@ import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextFi
 // Composables
 import { useDate } from '@/composables/date'
 import { makeFocusProps, useFocus } from '@/composables/focus'
+import { forwardRefs } from '@/composables/forwardRefs'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, shallowRef } from 'vue'
+import { computed, ref, shallowRef } from 'vue'
 import { genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
-export interface VDateInputSlots {
+import type { PropType } from 'vue'
+import type { StrategyProps } from '@/components/VOverlay/locationStrategies'
+
+// Types
+export type VDateInputActionsSlot = {
+  save: () => void
+  cancel: () => void
+  isPristine: boolean
+}
+
+export type VDateInputSlots = {
+  actions: VDateInputActionsSlot
   default: never
 }
 
 export const makeVDateInputProps = propsFactory({
   hideActions: Boolean,
-
+  location: {
+    type: String as PropType<StrategyProps['location']>,
+    default: 'bottom start',
+  },
   ...makeFocusProps(),
   ...makeVConfirmEditProps(),
   ...makeVTextFieldProps({
@@ -31,10 +46,10 @@ export const makeVDateInputProps = propsFactory({
   ...omit(makeVDatePickerProps({
     weeksInMonth: 'dynamic' as const,
     hideHeader: true,
-  }), ['active']),
+  }), ['active', 'location', 'rounded']),
 }, 'VDateInput')
 
-export const VDateInput = genericComponent()({
+export const VDateInput = genericComponent<VDateInputSlots>()({
   name: 'VDateInput',
 
   props: makeVDateInputProps(),
@@ -47,8 +62,16 @@ export const VDateInput = genericComponent()({
     const { t } = useLocale()
     const adapter = useDate()
     const { isFocused, focus, blur } = useFocus(props)
-    const model = useProxiedModel(props, 'modelValue', props.multiple ? [] : null)
+    const model = useProxiedModel(
+      props,
+      'modelValue',
+      props.multiple ? [] : null,
+      val => Array.isArray(val) ? val.map(item => adapter.toJsDate(item)) : val ? adapter.toJsDate(val) : val,
+      val => Array.isArray(val) ? val.map(item => adapter.date(item)) : val ? adapter.date(val) : val
+    )
+
     const menu = shallowRef(false)
+    const vDateInputRef = ref()
 
     const display = computed(() => {
       const value = wrapInArray(model.value)
@@ -71,6 +94,8 @@ export const VDateInput = genericComponent()({
       return adapter.isValid(model.value) ? adapter.format(model.value, 'keyboardDate') : ''
     })
 
+    const isInteractive = computed(() => !props.disabled && !props.readonly)
+
     function onKeydown (e: KeyboardEvent) {
       if (e.key !== 'Enter') return
 
@@ -82,7 +107,7 @@ export const VDateInput = genericComponent()({
 
       const target = e.target as HTMLInputElement
 
-      model.value = adapter.date(target.value)
+      model.value = target.value
     }
 
     function onClick (e: MouseEvent) {
@@ -96,26 +121,37 @@ export const VDateInput = genericComponent()({
       menu.value = false
     }
 
+    function onUpdateModel (value: string) {
+      if (value != null) return
+
+      model.value = null
+    }
+
     useRender(() => {
       const confirmEditProps = VConfirmEdit.filterProps(props)
-      const datePickerProps = VDatePicker.filterProps(omit(props, ['active']))
+      const datePickerProps = VDatePicker.filterProps(omit(props, ['active', 'location', 'rounded']))
       const textFieldProps = VTextField.filterProps(props)
 
       return (
         <VTextField
+          ref={ vDateInputRef }
           { ...textFieldProps }
+          class={ props.class }
+          style={ props.style }
           modelValue={ display.value }
-          onKeydown={ onKeydown }
+          onKeydown={ isInteractive.value ? onKeydown : undefined }
           focused={ menu.value || isFocused.value }
           onFocus={ focus }
           onBlur={ blur }
-          onClick:control={ onClick }
-          onClick:prepend={ onClick }
+          onClick:control={ isInteractive.value ? onClick : undefined }
+          onClick:prepend={ isInteractive.value ? onClick : undefined }
+          onUpdate:modelValue={ onUpdateModel }
         >
           <VMenu
             v-model={ menu.value }
             activator="parent"
             min-width="0"
+            location={ props.location }
             closeOnContentClick={ false }
             openOnClick={ false }
           >
@@ -123,9 +159,10 @@ export const VDateInput = genericComponent()({
               { ...confirmEditProps }
               v-model={ model.value }
               onSave={ onSave }
+              onCancel={ () => menu.value = false }
             >
               {{
-                default: ({ actions, model: proxyModel }) => {
+                default: ({ actions, model: proxyModel, save, cancel, isPristine }) => {
                   return (
                     <VDatePicker
                       { ...datePickerProps }
@@ -142,7 +179,7 @@ export const VDateInput = genericComponent()({
                       onMousedown={ (e: MouseEvent) => e.preventDefault() }
                     >
                       {{
-                        actions: !props.hideActions ? () => actions : undefined,
+                        actions: !props.hideActions ? () => slots.actions?.({ save, cancel, isPristine }) ?? actions() : undefined,
                       }}
                     </VDatePicker>
                   )
@@ -155,6 +192,8 @@ export const VDateInput = genericComponent()({
         </VTextField>
       )
     })
+
+    return forwardRefs({}, vDateInputRef)
   },
 })
 

@@ -135,6 +135,14 @@ export function isObject (obj: any): obj is Record<string, any> {
   return obj !== null && typeof obj === 'object' && !Array.isArray(obj)
 }
 
+export function isPlainObject (obj: any): obj is Record<string, any> {
+  let proto
+  return obj !== null && typeof obj === 'object' && (
+    (proto = Object.getPrototypeOf(obj)) === Object.prototype ||
+    proto === null
+  )
+}
+
 export function refElement (obj?: ComponentPublicInstance<any> | HTMLElement): HTMLElement | undefined {
   if (obj && '$el' in obj) {
     const el = obj.$el as HTMLElement
@@ -487,17 +495,14 @@ export function mergeDeep (
     const targetProperty = target[key]
 
     // Only continue deep merging if
-    // both properties are objects
-    if (
-      isObject(sourceProperty) &&
-      isObject(targetProperty)
-    ) {
+    // both properties are plain objects
+    if (isPlainObject(sourceProperty) && isPlainObject(targetProperty)) {
       out[key] = mergeDeep(sourceProperty, targetProperty, arrayFn)
 
       continue
     }
 
-    if (Array.isArray(sourceProperty) && Array.isArray(targetProperty) && arrayFn) {
+    if (arrayFn && Array.isArray(sourceProperty) && Array.isArray(targetProperty)) {
       out[key] = arrayFn(sourceProperty, targetProperty)
 
       continue
@@ -540,6 +545,8 @@ export function findChildrenWithProvide (
 
   if (Array.isArray(vnode)) {
     return vnode.map(child => findChildrenWithProvide(key, child)).flat(1)
+  } else if (vnode.suspense) {
+    return findChildrenWithProvide(key, vnode.ssContent!)
   } else if (Array.isArray(vnode.children)) {
     return vnode.children.map(child => findChildrenWithProvide(key, child)).flat(1)
   } else if (vnode.component) {
@@ -609,6 +616,7 @@ export function eventName (propName: string) {
   return propName[2].toLowerCase() + propName.slice(3)
 }
 
+// TODO: this should be an array but vue's types don't accept arrays: vuejs/core#8025
 export type EventProp<T extends any[] = any[], F = (...args: T) => void> = F
 export const EventProp = <T extends any[] = any[]>() => [Function, Array] as PropType<EventProp<T>>
 
@@ -617,7 +625,7 @@ export function hasEvent (props: Record<string, any>, name: string) {
   return !!(props[name] || props[`${name}Once`] || props[`${name}Capture`] || props[`${name}OnceCapture`] || props[`${name}CaptureOnce`])
 }
 
-export function callEvent<T extends any[]> (handler: EventProp<T> | undefined, ...args: T) {
+export function callEvent<T extends any[]> (handler: EventProp<T> | EventProp<T>[] | undefined, ...args: T) {
   if (Array.isArray(handler)) {
     for (const h of handler) {
       h(...args)
@@ -734,4 +742,38 @@ export function isClickInsideElement (event: MouseEvent, targetDiv: HTMLElement)
   const divBottom = divRect.bottom
 
   return mouseX >= divLeft && mouseX <= divRight && mouseY >= divTop && mouseY <= divBottom
+}
+
+export type TemplateRef = {
+  (target: Element | ComponentPublicInstance | null): void
+  value: HTMLElement | ComponentPublicInstance | null | undefined
+  readonly el: HTMLElement | undefined
+}
+export function templateRef () {
+  const el = shallowRef<HTMLElement | ComponentPublicInstance | null>()
+  const fn = (target: HTMLElement | ComponentPublicInstance | null) => {
+    el.value = target
+  }
+  Object.defineProperty(fn, 'value', {
+    enumerable: true,
+    get: () => el.value,
+    set: val => el.value = val,
+  })
+  Object.defineProperty(fn, 'el', {
+    enumerable: true,
+    get: () => refElement(el.value),
+  })
+
+  return fn as TemplateRef
+}
+
+export function checkPrintable (e: KeyboardEvent) {
+  const isPrintableChar = e.key.length === 1
+  const noModifier = !e.ctrlKey && !e.metaKey && !e.altKey
+  return isPrintableChar && noModifier
+}
+
+export type Primitive = string | number | boolean | symbol | bigint
+export function isPrimitive (value: unknown): value is Primitive {
+  return typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean' || typeof value === 'bigint'
 }

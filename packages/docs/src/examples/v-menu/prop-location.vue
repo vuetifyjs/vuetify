@@ -9,7 +9,6 @@
       <template v-slot:activator="{ props }">
         <v-btn
           color="primary"
-          dark
           v-bind="props"
         >
           Dropdown

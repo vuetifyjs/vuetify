@@ -41,7 +41,7 @@ We thank all of our project sponsors for their continued support of Vuetify. If 
 
 Thank you to our special sponsor. Your support is greatly appreciated.
 
-<SponserSponsors tier="-2" width="240" />
+<SponsorSponsors tier="-2" width="240" />
 
 <br>
 
@@ -49,7 +49,7 @@ Thank you to our special sponsor. Your support is greatly appreciated.
 
 These sponsors have pledged $1,500 per month.
 
-<SponserSponsors tier="1" />
+<SponsorSponsors tier="1" />
 
 <br>
 
@@ -57,7 +57,7 @@ These sponsors have pledged $1,500 per month.
 
 These sponsors have pledged $500 per month.
 
-<SponserSponsors tier="2" />
+<SponsorSponsors tier="2" />
 
 <br>
 
@@ -65,7 +65,7 @@ These sponsors have pledged $500 per month.
 
 These sponsors have pledged $250 per month.
 
-<SponserSponsors tier="3" />
+<SponsorSponsors tier="3" />
 
 <br>
 
@@ -73,7 +73,7 @@ These sponsors have pledged $250 per month.
 
 These sponsors help keep the lights on by providing free services to the Vuetify project.
 
-<SponserSponsors tier="6" />
+<SponsorSponsors tier="6" />
 
 <br>
 
@@ -81,7 +81,7 @@ These sponsors help keep the lights on by providing free services to the Vuetify
 
 We work with these companies to provide you with the best possible experience.
 
-<SponserSponsors tier="5" />
+<SponsorSponsors tier="5" />
 
 <br>
 

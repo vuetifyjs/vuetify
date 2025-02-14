@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   title: Number inputs
   description: The Number input component is used for ...
@@ -28,7 +27,7 @@ This feature requires [v3.5.10](/getting-started/release-notes/?version=v3.5.10)
 
 ## Installation
 
-Labs components require a manual import and installation of the component.
+Labs components require manual import and registration with the Vuetify instance.
 
 ```js { resource="src/plugins/vuetify.js" }
 import { VNumberInput } from 'vuetify/labs/VNumberInput'
@@ -55,6 +54,16 @@ Here we display a list of settings that could be applied within an application.
 | [v-number-input](/api/v-number-input/) | Primary Component |
 
 <ApiInline hide-links />
+
+## Caveats
+
+::: warning
+**v-number-input** is designed for simple numeric input usage. It has limitations with very long integers and highly precise decimal arithmetic due to JavaScript number precision issues:
+
+- For integers, **v-model** is restricted within [Number.MIN_SAFE_INTEGER](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/MIN_SAFE_INTEGER) and [Number.MAX_SAFE_INTEGER](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/MAX_SAFE_INTEGER) to ensure precision is not lost.
+
+- To cope with JavaScript floating-point issues (e.g. 0.1 + 0.2 === 0.30000000000000004), Vuetify's internal logic uses **toFixed()** with the maximum number of decimal places between v-model and step. If accurate arbitrary-precision decimal arithmetic is required, consider working with strings using [decimal.js](https://github.com/MikeMcl/decimal.js) and  [v-text-field](/components/text-fields) instead.
+:::
 
 ## Guide
 

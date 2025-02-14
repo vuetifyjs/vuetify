@@ -108,7 +108,7 @@ async function loadLocale (componentName: string, locale: string): Promise<Recor
   }
   try {
     const data = await import(`../src/locale/${cacheKey}.json`, {
-      assert: { type: 'json' },
+      with: { type: 'json' },
     })
     localeCache.set(cacheKey, data.default)
     return data.default

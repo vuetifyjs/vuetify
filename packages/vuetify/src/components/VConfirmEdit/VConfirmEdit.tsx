@@ -16,7 +16,10 @@ import type { GenericProps } from '@/util'
 export type VConfirmEditSlots<T> = {
   default: {
     model: Ref<T>
-    get actions (): VNode
+    save: () => void
+    cancel: () => void
+    isPristine: boolean
+    get actions (): (props?: {}) => VNode
   }
 }
 
@@ -74,9 +77,8 @@ export const VConfirmEdit = genericComponent<new <T> (
       emit('cancel')
     }
 
-    let actionsUsed = false
-    useRender(() => {
-      const actions = (
+    function actions (actionsProps?: {}) {
+      return (
         <>
           <VBtn
             disabled={ isPristine.value }
@@ -84,6 +86,7 @@ export const VConfirmEdit = genericComponent<new <T> (
             color={ props.color }
             onClick={ cancel }
             text={ t(props.cancelText) }
+            { ...actionsProps }
           />
 
           <VBtn
@@ -92,14 +95,22 @@ export const VConfirmEdit = genericComponent<new <T> (
             color={ props.color }
             onClick={ save }
             text={ t(props.okText) }
+            { ...actionsProps }
           />
         </>
       )
+    }
+
+    let actionsUsed = false
+    useRender(() => {
       return (
         <>
           {
             slots.default?.({
               model: internalModel,
+              save,
+              cancel,
+              isPristine: isPristine.value,
               get actions () {
                 actionsUsed = true
                 return actions
@@ -107,10 +118,16 @@ export const VConfirmEdit = genericComponent<new <T> (
             })
           }
 
-          { !actionsUsed && actions }
+          { !actionsUsed && actions() }
         </>
       )
     })
+
+    return {
+      save,
+      cancel,
+      isPristine,
+    }
   },
 })
 

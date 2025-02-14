@@ -1,5 +1,5 @@
 // Utilities
-import { computed, inject, reactive, shallowRef, toRefs, watchEffect } from 'vue'
+import { computed, inject, onScopeDispose, reactive, shallowRef, toRefs, watchEffect } from 'vue'
 import { getCurrentInstanceName, mergeDeep, propsFactory } from '@/util'
 import { IN_BROWSER, SUPPORTS_TOUCH } from '@/util/globals'
 
@@ -209,6 +209,10 @@ export function createDisplay (options?: DisplayOptions, ssr?: SSROptions): Disp
 
   if (IN_BROWSER) {
     window.addEventListener('resize', updateSize, { passive: true })
+
+    onScopeDispose(() => {
+      window.removeEventListener('resize', updateSize)
+    }, true)
   }
 
   return { ...toRefs(state), update, ssr: !!ssr }
@@ -216,14 +220,14 @@ export function createDisplay (options?: DisplayOptions, ssr?: SSROptions): Disp
 
 export const makeDisplayProps = propsFactory({
   mobile: {
-    type: Boolean,
-    default: null,
+    type: Boolean as PropType<boolean | null>,
+    default: false,
   },
   mobileBreakpoint: [Number, String] as PropType<number | DisplayBreakpoint>,
 }, 'display')
 
 export function useDisplay (
-  props: DisplayProps = {},
+  props: DisplayProps = { mobile: null },
   name = getCurrentInstanceName(),
 ) {
   const display = inject(DisplaySymbol)
@@ -231,14 +235,17 @@ export function useDisplay (
   if (!display) throw new Error('Could not find Vuetify display injection')
 
   const mobile = computed(() => {
-    if (props.mobile != null) return props.mobile
-    if (!props.mobileBreakpoint) return display.mobile.value
-
-    const breakpointValue = typeof props.mobileBreakpoint === 'number'
-      ? props.mobileBreakpoint
-      : display.thresholds.value[props.mobileBreakpoint]
-
-    return display.width.value < breakpointValue
+    if (props.mobile) {
+      return true
+    } else if (typeof props.mobileBreakpoint === 'number') {
+      return display.width.value < props.mobileBreakpoint
+    } else if (props.mobileBreakpoint) {
+      return display.width.value < display.thresholds.value[props.mobileBreakpoint]
+    } else if (props.mobile === null) {
+      return display.mobile.value
+    } else {
+      return false
+    }
   })
 
   const displayClasses = computed(() => {

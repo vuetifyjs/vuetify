@@ -4,23 +4,21 @@
 
 @include tools.layer('components')
   .v-stepper.v-sheet
+    overflow: hidden
     @include tools.elevation($stepper-elevation)
     @include tools.rounded($stepper-border-radius)
-
-    overflow: hidden
 
     &.v-stepper--flat
       @include tools.elevation(0)
 
   .v-stepper-header
-    @include tools.elevation($stepper-header-elevation)
-
     align-items: center
     display: flex
     position: relative
     overflow-x: auto
     justify-content: space-between
     z-index: 1
+    @include tools.elevation($stepper-header-elevation)
 
     .v-divider
       margin: $stepper-header-divider-margin
