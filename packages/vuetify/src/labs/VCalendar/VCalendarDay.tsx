@@ -10,7 +10,14 @@ import { useDate } from '@/composables/date'
 
 // Utilities
 import { computed } from 'vue'
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { genericComponent, getPrefixedEventHandlers, pick, propsFactory, useRender } from '@/util'
+
+// Types
+import type { VCalendarIntervalSlots } from './VCalendarInterval'
+
+export type VCalendarDaySlots = VCalendarIntervalSlots & {
+  interval: Record<string, unknown>
+}
 
 export const makeVCalendarDayProps = propsFactory({
   hideDayHeader: Boolean,
@@ -22,17 +29,35 @@ export const makeVCalendarDayProps = propsFactory({
   ...makeVCalendarIntervalProps(),
 }, 'VCalendarDay')
 
-export const VCalendarDay = genericComponent()({
+export const VCalendarDay = genericComponent<VCalendarDaySlots>()({
   name: 'VCalendarDay',
 
   props: makeVCalendarDayProps(),
 
-  setup (props) {
+  emits: {
+    'click:event': null,
+    'contextmenu:date': null,
+    'contextmenu:event': null,
+  },
+
+  setup (props, { attrs, emit, slots }) {
     const adapter = useDate()
     const intervals = computed(() => [
       ...Array.from({ length: props.intervals }, (v, i) => i)
-        .filter((int, index) => (props.intervalDuration * (index + props.intervalStart)) < 1440),
+        .filter((_, index) => (props.intervalDuration * (index + props.intervalStart)) < 1440),
     ])
+    const clickEvent = (mouseEvent: any, event: any) => {
+      emit('click:event', mouseEvent, event)
+    }
+
+    const contextmenuDate = (mouseEvent: any, date: any) => {
+      // Pass the date up the chain
+      emit('contextmenu:date', mouseEvent, date)
+    }
+
+    const contextmenuEvent = (mouseEvent: any, date: any, event: null) => {
+      emit('contextmenu:event', mouseEvent, date, event)
+    }
 
     useRender(() => {
       const calendarIntervalProps = VCalendarInterval.filterProps(props)
@@ -48,21 +73,32 @@ export const VCalendarDay = genericComponent()({
 
               <div>
                 <VBtn
+                  { ...getPrefixedEventHandlers(attrs, ':intervalDate', () => props.day) }
+                  class={ props.day?.isToday ? 'v-calendar-day-label__today' : undefined }
                   icon
                   text={ adapter.format(props.day.date, 'dayOfMonth') }
-                  variant="text"
+                  variant={ props.day?.isToday ? undefined : 'text' }
                 />
               </div>
             </div>
           )}
+          { intervals.value.map((_, index) =>
+            slots.interval?.(calendarIntervalProps) ?? (
+              <VCalendarInterval
+                index={ index }
+                onClick:event={ clickEvent }
+                onContextmenu:date={ contextmenuDate }
+                onContextmenu:event={ contextmenuEvent }
 
-          { intervals.value.map((_, index) => (
-            <VCalendarInterval
-              index={ index }
-              { ...calendarIntervalProps }
-            ></VCalendarInterval>
-          ))
-          }
+                { ...calendarIntervalProps }
+                { ...getPrefixedEventHandlers(attrs, ':interval', () => calendarIntervalProps) }
+              >
+                {{
+                  ...pick(slots, ['intervalBody', 'intervalEvent', 'intervalTitle']),
+                }}
+              </VCalendarInterval>
+            )
+          )}
         </div>
       )
     })
