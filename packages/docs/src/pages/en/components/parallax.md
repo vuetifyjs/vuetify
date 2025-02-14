@@ -10,7 +10,7 @@ related:
   - /components/images/
 features:
   github: /components/VParallax/
-  label: "C: VParallax"
+  label: 'C: VParallax'
   report: true
 ---
 
@@ -30,8 +30,8 @@ A parallax causes a shift in a background image when the user scrolls the page.
 
 ## API
 
-| Component                      | Description       |
-| ------------------------------ | ----------------- |
+| Component | Description |
+| - | - |
 | [v-parallax](/api/v-parallax/) | Primary Component |
 
 <ApiInline hide-links />
