@@ -36,7 +36,7 @@ export const makeVTreeviewProps = propsFactory({
     collapseIcon: '$treeviewCollapse',
     expandIcon: '$treeviewExpand',
     slim: true,
-  }), ['nav', 'openStrategy']),
+  }), ['itemType', 'nav', 'openStrategy']),
   modelValue: {
     type: Array,
     default: () => ([]),
