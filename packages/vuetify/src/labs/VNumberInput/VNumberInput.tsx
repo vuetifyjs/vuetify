@@ -13,7 +13,7 @@ import { forwardRefs } from '@/composables/forwardRefs'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, nextTick, onMounted, ref } from 'vue'
+import { computed, nextTick, onMounted, onUnmounted, ref } from 'vue'
 import { clamp, genericComponent, getDecimals, omit, propsFactory, useRender } from '@/util'
 
 // Types
@@ -121,10 +121,33 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
 
     const decrementSlotProps = computed(() => ({ click: onClickDown }))
 
+    // Control holding down states
+    let hldDwnReqNextTime = 0
+    let hldDwnReq = -1
+    const hldDwnReqDelay = 100
+    const hldDwnDelay = 500
+    let hldDwn: null | 'up' | 'down' = null
+    let hldDwnTimeout = -1
+
+    function controlHoldingDownWatcher (time: number) {
+      hldDwnReq = requestAnimationFrame(controlHoldingDownWatcher)
+      if (time < hldDwnReqNextTime) return
+      hldDwnReqNextTime = time + hldDwnReqDelay
+
+      if (hldDwn) {
+        toggleUpDown(hldDwn === 'up')
+      }
+    }
+
     onMounted(() => {
+      hldDwnReq = requestAnimationFrame(controlHoldingDownWatcher)
       if (!controlsDisabled.value) {
         clampModel()
       }
+    })
+
+    onUnmounted(() => {
+      cancelAnimationFrame(hldDwnReq)
     })
 
     function toggleUpDown (increment = true) {
@@ -140,16 +163,6 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       } else {
         if (canDecrease.value) model.value = +((((model.value as number) - props.step).toFixed(decimals)))
       }
-    }
-
-    function onClickUp (e: MouseEvent) {
-      e.stopPropagation()
-      toggleUpDown()
-    }
-
-    function onClickDown (e: MouseEvent) {
-      e.stopPropagation()
-      toggleUpDown(false)
     }
 
     function onBeforeinput (e: InputEvent) {
@@ -188,8 +201,37 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       }
     }
 
-    function onControlMousedown (e: MouseEvent) {
+    function onClickUp (e: MouseEvent) {
       e.stopPropagation()
+      toggleUpDown()
+    }
+
+    function onClickDown (e: MouseEvent) {
+      e.stopPropagation()
+      toggleUpDown(false)
+    }
+
+    function onControlMouseup (e: MouseEvent) {
+      e.preventDefault()
+      e.stopPropagation()
+
+      clearTimeout(hldDwnTimeout)
+      hldDwn = null
+    }
+
+    function onUpControlMousedown (e: MouseEvent) {
+      e.stopPropagation()
+
+      hldDwnTimeout = window.setTimeout(() => {
+        hldDwn = 'up'
+      }, hldDwnDelay)
+    }
+
+    function onDownControlMousedown (e: MouseEvent) {
+      e.stopPropagation()
+      hldDwnTimeout = window.setTimeout(() => {
+        hldDwn = 'down'
+      }, hldDwnDelay)
     }
 
     function clampModel () {
@@ -216,7 +258,8 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
             aria-hidden="true"
             icon={ incrementIcon.value }
             onClick={ onClickUp }
-            onMousedown={ onControlMousedown }
+            onMouseup={ onControlMouseup }
+            onMousedown={ onUpControlMousedown }
             size={ controlNodeSize.value }
             tabindex="-1"
           />
@@ -251,7 +294,8 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
             size={ controlNodeSize.value }
             tabindex="-1"
             onClick={ onClickDown }
-            onMousedown={ onControlMousedown }
+            onMouseup={ onControlMouseup }
+            onMousedown={ onDownControlMousedown }
           />
         ) : (
           <VDefaultsProvider
