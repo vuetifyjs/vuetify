@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@cosmicjs/sdk": "^1.0.11",
+    "@sentry/vue": "^9.0.1",
     "@vue/compiler-dom": "^3.4.27",
     "@vuelidate/core": "^2.0.3",
     "@vuelidate/validators": "^2.0.4",
