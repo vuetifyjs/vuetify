@@ -557,26 +557,30 @@ export const VCombobox = genericComponent<new <
                           }) ?? (
                             <VListItem { ...itemProps } role="option">
                             {{
-                              prepend: ({ isSelected }) => (
-                                <>
-                                  { props.multiple && !props.hideSelected ? (
-                                    <VCheckboxBtn
-                                      key={ item.value }
-                                      modelValue={ isSelected }
-                                      ripple={ false }
-                                      tabindex="-1"
-                                    />
-                                  ) : undefined }
+                              prepend: ({ isSelected }) => {
+                                const itemPrependIcon = item.props.prependIcon ?? item.props['prepend-icon']
+                                const itemPrependAvatar = item.props.prependAvatar ?? item.props['prepend-avatar']
+                                return (
+                                  <>
+                                    { props.multiple && !props.hideSelected ? (
+                                      <VCheckboxBtn
+                                        key={ item.value }
+                                        modelValue={ isSelected }
+                                        ripple={ false }
+                                        tabindex="-1"
+                                      />
+                                    ) : undefined }
 
-                                  { item.props.prependAvatar && (
-                                    <VAvatar image={ item.props.prependAvatar } />
-                                  )}
+                                    { itemPrependAvatar && (
+                                      <VAvatar image={ itemPrependAvatar } />
+                                    )}
 
-                                  { item.props.prependIcon && (
-                                    <VIcon icon={ item.props.prependIcon } />
-                                  )}
-                                </>
-                              ),
+                                    { itemPrependIcon && (
+                                      <VIcon icon={ itemPrependIcon } />
+                                    )}
+                                  </>
+                                )
+                              },
                               title: () => {
                                 return isPristine.value
                                   ? item.title
