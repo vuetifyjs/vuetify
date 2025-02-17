@@ -1,9 +1,10 @@
 // Utilities
 import { computed, isRef } from 'vue'
-import { destructComputed, getForeground, isCssColor, isParsableColor, parseColor } from '@/util'
+import { destructComputed, getForeground, HexToRGB, isCssColor, isParsableColor, parseColor } from '@/util'
 
 // Types
 import type { CSSProperties, Ref } from 'vue'
+import type { Hex } from '@/util'
 
 type ColorValue = string | false | null | undefined
 
@@ -26,13 +27,16 @@ export function useColor (colors: Ref<{ background?: ColorValue, text?: ColorVal
     if (colors.value.background) {
       if (isCssColor(colors.value.background)) {
         styles.backgroundColor = colors.value.background
+        styles['--v-theme-on-surface'] = colors.value.background
 
         if (!colors.value.text && isParsableColor(colors.value.background)) {
           const backgroundColor = parseColor(colors.value.background)
           if (backgroundColor.a == null || backgroundColor.a === 1) {
             const textColor = getForeground(backgroundColor)
 
-            styles.color = textColor
+            const color = HexToRGB(textColor as Hex)
+
+            styles.color = `rgba(${color.r}, ${color.g}, ${color.b}, var(--v-text-opacity))`
             styles.caretColor = textColor
           }
         }
