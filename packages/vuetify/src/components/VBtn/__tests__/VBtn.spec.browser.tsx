@@ -1,9 +1,12 @@
 import { VBtn } from '../VBtn'
 
 // Utilities
-import { generate, gridOn, render } from '@test'
-import { userEvent } from '@vitest/browser/context'
+import { generate, gridOn, render, userEvent } from '@test'
+import { ref } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
+
+// Types
+import type { Variant } from '@/composables/variant.tsx'
 
 // TODO: generate these from types
 const colors = ['success', 'info', 'warning', 'error', 'invalid']
@@ -202,13 +205,14 @@ describe('VBtn', () => {
 
   describe('Reactivity', () => {
     it('disabled', async () => {
+      const disabled = ref(true)
       const { wrapper } = render(() => (
-        <VBtn color="success" disabled></VBtn>
+        <VBtn color="success" disabled={ disabled.value }></VBtn>
       ))
       expect(wrapper.element).toHaveClass('v-btn--disabled')
 
-      await wrapper.setProps({ disabled: false })
-      expect.poll(() => wrapper.element as HTMLElement).not.toHaveClass('v-btn--disabled')
+      disabled.value = false
+      await expect.element(wrapper.element).not.toHaveClass('v-btn--disabled')
     })
 
     it.todo('activeClass', async () => {
@@ -219,19 +223,19 @@ describe('VBtn', () => {
       await wrapper.setProps({ activeClass: 'different-class' })
 
       const activeClassElement = container.querySelector('.different-class')
-      expect(activeClassElement).not.toBeInTheDocument()
+      expect(activeClassElement).not.toBeVisible()
     })
 
-    it('plain', async () => {
+    it('variant', async () => {
+      const variant = ref<Variant>('plain')
       const { wrapper } = render(() => (
-        <VBtn variant="plain">Plain</VBtn>
+        <VBtn variant={ variant.value }>Plain</VBtn>
       ))
 
       expect(wrapper.element).toHaveClass('v-btn--variant-plain')
 
-      await wrapper.setProps({ variant: 'default' })
-
-      expect.poll(() => wrapper.element as HTMLElement).not.toHaveClass('v-btn--variant-plain')
+      variant.value = 'elevated'
+      await expect.element(wrapper.element).not.toHaveClass('v-btn--variant-plain')
     })
   })
 
