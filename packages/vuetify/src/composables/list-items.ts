@@ -1,5 +1,5 @@
 // Utilities
-import { computed, shallowRef, toRaw, watchEffect } from 'vue'
+import { computed, shallowRef, watchEffect } from 'vue'
 import { deepEqual, getPropertyFromItem, isPrimitive, omit, pick, propsFactory } from '@/util'
 
 // Types
@@ -128,7 +128,7 @@ export function useItems (props: ItemProps) {
   function transformIn (value: any[]): ListItem[] {
     // Cache unrefed values outside the loop,
     // proxy getters can be slow when you call them a billion times
-    const _value = toRaw(value)
+    const _value = value
     const _items = itemsMap.value
     const _allItems = items.value
     const _keylessItems = keylessItems.value
