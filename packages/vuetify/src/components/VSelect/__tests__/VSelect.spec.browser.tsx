@@ -5,6 +5,7 @@ import { VListItem } from '@/components/VList'
 
 // Utilities
 import { commands, generate, render, screen, userEvent } from '@test'
+import { getAllByRole } from '@testing-library/vue'
 import { cloneVNode, ref } from 'vue'
 
 const variants = ['underlined', 'outlined', 'filled', 'solo', 'plain'] as const
@@ -628,6 +629,55 @@ describe('VSelect', () => {
 
       items.value[0].title = 'Bar'
       await expect.poll(() => screen.getByText('Bar')).toBeVisible()
+    })
+
+    it('adds a selection externally', async () => {
+      const items = ref(['Foo', 'Bar'])
+      const selection = ref(['Foo'])
+      const { element } = render(() => (
+        <VSelect v-model={ selection.value } items={ items.value } multiple />
+      ))
+
+      await userEvent.click(element)
+      const menu = await screen.findByRole('listbox')
+      await expect.element(menu).toBeVisible()
+
+      selection.value.push('Bar')
+      await expect.poll(() => screen.getAllByText('Bar')).toHaveLength(2)
+      expect(getAllByRole(menu, 'option', { selected: true })).toHaveLength(2)
+    })
+
+    it('removes a selection externally', async () => {
+      const items = ref(['Foo', 'Bar'])
+      const selection = ref(['Foo', 'Bar'])
+      const { element } = render(() => (
+        <VSelect v-model={ selection.value } items={ items.value } multiple />
+      ))
+
+      await userEvent.click(element)
+      const menu = await screen.findByRole('listbox')
+      await expect.element(menu).toBeVisible()
+
+      selection.value.splice(1, 1)
+      await expect.poll(() => screen.getAllByText('Bar')).toHaveLength(1)
+      expect(getAllByRole(menu, 'option', { selected: true })).toHaveLength(1)
+    })
+
+    it('adds a selected item', async () => {
+      const items = ref(['Foo'])
+      const selection = ref(['Foo'])
+      const { element } = render(() => (
+        <VSelect v-model={ selection.value } items={ items.value } multiple />
+      ))
+
+      await userEvent.click(element)
+      const menu = await screen.findByRole('listbox')
+      await expect.element(menu).toBeVisible()
+
+      items.value.push('Bar')
+      selection.value.push('Bar')
+      await expect.poll(() => screen.getAllByText('Bar')).toHaveLength(2)
+      expect(getAllByRole(menu, 'option', { selected: true })).toHaveLength(2)
     })
   })
 
