@@ -306,46 +306,49 @@ export default defineConfig(({ command, mode, isSsrBuild }) => {
         // lightweight head-only ssg
         name: 'vuetify:ssg',
         enforce: 'post',
-        async transformIndexHtml (html) {
-          if (mode !== 'production') return html
+        transformIndexHtml: {
+          order: 'post',
+          async handler (html) {
+            if (mode !== 'production') return html
 
-          await fs.mkdir('dist', { recursive: true })
-          await fs.writeFile(path.join('dist/_fallback.html'), html)
+            await fs.mkdir('dist', { recursive: true })
+            await fs.writeFile(path.join('dist/_fallback.html'), html)
 
-          const routes = allRoutes.filter(({ path: route }) => {
-            return route !== '/' &&
-              !['/eo-UY/', '/api/', '/user/', ':', '*'].some(v => route.includes(v))
-          }).map(route => {
-            const meta = genAppMetaInfo({
-              title: `${route.meta.title}${route.path === '/en/' ? '' : ' — Vuetify'}`,
-              description: route.meta.description,
-              keywords: route.meta.keywords,
+            const routes = allRoutes.filter(({ path: route }) => {
+              return route !== '/' &&
+                !['/eo-UY/', '/api/', '/user/', ':', '*'].some(v => route.includes(v))
+            }).map(route => {
+              const meta = genAppMetaInfo({
+                title: `${route.meta.title}${route.path === '/en/' ? '' : ' — Vuetify'}`,
+                description: route.meta.description,
+                keywords: route.meta.keywords,
+              })
+              const metaContent = [
+                `<title>${meta.title}</title>`,
+                ...meta.meta.map((v: any) => {
+                  const attrs = Object.keys(v).filter(k => k !== 'key').map(k => `${k}="${v[k]}"`).join(' ')
+                  return `<meta ${attrs}>`
+                }),
+                ...meta.link.map((v: any) => {
+                  const attrs = Object.keys(v).map(k => `${k}="${v[k]}"`).join(' ')
+                  return `<link ${attrs}>`
+                }),
+              ].join('\n    ')
+              const content = html.replace('<!-- @inject-meta -->', metaContent)
+              return {
+                path: route.path,
+                content
+              }
             })
-            const metaContent = [
-              `<title>${meta.title}</title>`,
-              ...meta.meta.map((v: any) => {
-                const attrs = Object.keys(v).filter(k => k !== 'key').map(k => `${k}="${v[k]}"`).join(' ')
-                return `<meta ${attrs}>`
-              }),
-              ...meta.link.map((v: any) => {
-                const attrs = Object.keys(v).map(k => `${k}="${v[k]}"`).join(' ')
-                return `<link ${attrs}>`
-              }),
-            ].join('\n    ')
-            const content = html.replace('<!-- @inject-meta -->', metaContent)
-            return {
-              path: route.path,
-              content
+
+            for (const route of routes) {
+              const filename = path.join('dist', route.path, 'index.html')
+              await fs.mkdir(path.dirname(filename), { recursive: true })
+              await fs.writeFile(filename, route.content)
             }
-          })
 
-          for (const route of routes) {
-            const filename = path.join('dist', route.path, 'index.html')
-            await fs.mkdir(path.dirname(filename), { recursive: true })
-            await fs.writeFile(filename, route.content)
+            return routes.find(r => r.path === '/en/')?.content
           }
-
-          return routes.find(r => r.path === '/en/')?.content
         },
       },
 
