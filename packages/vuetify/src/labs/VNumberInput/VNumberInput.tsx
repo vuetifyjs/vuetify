@@ -13,7 +13,7 @@ import { forwardRefs } from '@/composables/forwardRefs'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, nextTick, onMounted, onUnmounted, ref } from 'vue'
+import { computed, nextTick, onMounted, ref } from 'vue'
 import { clamp, genericComponent, getDecimals, omit, propsFactory, useRender } from '@/util'
 
 // Types
@@ -140,14 +140,9 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
     }
 
     onMounted(() => {
-      hldDwnReq = requestAnimationFrame(controlHoldingDownWatcher)
       if (!controlsDisabled.value) {
         clampModel()
       }
-    })
-
-    onUnmounted(() => {
-      cancelAnimationFrame(hldDwnReq)
     })
 
     function toggleUpDown (increment = true) {
@@ -215,6 +210,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       e.preventDefault()
       e.stopPropagation()
 
+      cancelAnimationFrame(hldDwnReq)
       clearTimeout(hldDwnTimeout)
       hldDwn = null
     }
@@ -222,6 +218,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
     function onUpControlMousedown (e: MouseEvent) {
       e.stopPropagation()
 
+      hldDwnReq = requestAnimationFrame(controlHoldingDownWatcher)
       hldDwnTimeout = window.setTimeout(() => {
         hldDwn = 'up'
       }, hldDwnDelay)
@@ -229,6 +226,8 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
 
     function onDownControlMousedown (e: MouseEvent) {
       e.stopPropagation()
+
+      hldDwnReq = requestAnimationFrame(controlHoldingDownWatcher)
       hldDwnTimeout = window.setTimeout(() => {
         hldDwn = 'down'
       }, hldDwnDelay)
