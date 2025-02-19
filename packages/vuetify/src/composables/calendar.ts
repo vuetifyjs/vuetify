@@ -32,7 +32,10 @@ export interface CalendarProps {
 // Composables
 export const makeCalendarProps = propsFactory({
   allowedDates: [Array, Function] as PropType<unknown[] | ((date: unknown) => boolean)>,
-  disabled: Boolean,
+  disabled: {
+    type: Boolean,
+    default: null,
+  },
   displayValue: null as any as PropType<unknown>,
   modelValue: Array as PropType<unknown[]>,
   month: [Number, String],

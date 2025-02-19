@@ -14,9 +14,9 @@ describe('VBottomSheet', () => {
     ))
 
     const bottomSheet = screen.getByCSS('.v-bottom-sheet')
-    expect.element(bottomSheet).toBeVisible()
-    expect.element(bottomSheet).not.toHaveClass('v-bottom-sheet--inset')
-    expect.element(bottomSheet).toHaveTextContent('Content inside bottom sheet')
+    await expect.element(bottomSheet).toBeOnScreen()
+    await expect.element(bottomSheet).not.toHaveClass('v-bottom-sheet--inset')
+    await expect.element(bottomSheet).toHaveTextContent('Content inside bottom sheet')
   })
 
   it('applies inset class when inset prop is true', async () => {
@@ -29,10 +29,10 @@ describe('VBottomSheet', () => {
     ))
 
     const bottomSheet = screen.getByCSS('.v-bottom-sheet')
-    expect.element(bottomSheet).not.toHaveClass('v-bottom-sheet--inset')
+    await expect.element(bottomSheet).not.toHaveClass('v-bottom-sheet--inset')
 
     inset.value = true
-    expect.element(bottomSheet).toHaveClass('v-bottom-sheet--inset')
+    await expect.element(bottomSheet).toHaveClass('v-bottom-sheet--inset')
   })
 
   it('applies custom styles and classes', async () => {
@@ -42,7 +42,7 @@ describe('VBottomSheet', () => {
       </VBottomSheet>
     ))
     const bottomSheet = screen.getByCSS('.v-bottom-sheet')
-    expect.element(bottomSheet).toHaveClass('custom-class')
-    expect.element(bottomSheet).toHaveStyle({ color: 'rgb(255, 0, 0)' })
+    await expect.element(bottomSheet).toHaveClass('custom-class')
+    await expect.element(bottomSheet).toHaveStyle({ color: 'rgb(255, 0, 0)' })
   })
 })

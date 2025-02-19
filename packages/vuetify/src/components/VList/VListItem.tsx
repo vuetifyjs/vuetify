@@ -385,6 +385,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
       select,
       root,
       id: uid,
+      link,
     }
   },
 })
