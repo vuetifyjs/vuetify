@@ -110,10 +110,38 @@ export const VDatePicker = genericComponent<new <
 
     const viewMode = useProxiedModel(props, 'viewMode')
     // const inputMode = useProxiedModel(props, 'inputMode')
-    const internal = computed(() => {
-      const value = adapter.date(model.value?.[0])
 
-      return value && adapter.isValid(value) ? value : adapter.date()
+    const minDate = computed(() => {
+      const date = adapter.date(props.min)
+
+      return props.min && adapter.isValid(date) ? date : null
+    })
+    const maxDate = computed(() => {
+      const date = adapter.date(props.max)
+
+      return props.max && adapter.isValid(date) ? date : null
+    })
+
+    const internal = computed(() => {
+      const today = adapter.date()
+      let value
+      if (model.value?.[0]) {
+        value = adapter.date(model.value[0])
+      } else if (minDate.value || maxDate.value) {
+        if (minDate.value && maxDate.value) {
+          value = adapter.isWithinRange(today, [minDate.value, maxDate.value])
+            ? today
+            : minDate.value
+        } else if (minDate.value) {
+          value = adapter.isBefore(today, minDate.value)
+            ? minDate.value
+            : today
+        } else {
+          value = adapter.isAfter(today, maxDate.value) ? maxDate.value : today
+        }
+      }
+
+      return value && adapter.isValid(value) ? value : today
     })
 
     const month = ref(Number(props.month ?? adapter.getMonth(adapter.startOfMonth(internal.value))))
@@ -140,16 +168,7 @@ export const VDatePicker = genericComponent<new <
     })
     // const headerIcon = computed(() => props.inputMode === 'calendar' ? props.keyboardIcon : props.calendarIcon)
     const headerTransition = computed(() => `date-picker-header${isReversing.value ? '-reverse' : ''}-transition`)
-    const minDate = computed(() => {
-      const date = adapter.date(props.min)
 
-      return props.min && adapter.isValid(date) ? date : null
-    })
-    const maxDate = computed(() => {
-      const date = adapter.date(props.max)
-
-      return props.max && adapter.isValid(date) ? date : null
-    })
     const disabled = computed(() => {
       if (props.disabled) return true
 
