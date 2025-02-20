@@ -124,21 +124,13 @@ export const VDatePicker = genericComponent<new <
 
     const internal = computed(() => {
       const today = adapter.date()
-      let value
+      let value = today
       if (model.value?.[0]) {
         value = adapter.date(model.value[0])
-      } else if (minDate.value || maxDate.value) {
-        if (minDate.value && maxDate.value) {
-          value = adapter.isWithinRange(today, [minDate.value, maxDate.value])
-            ? today
-            : minDate.value
-        } else if (minDate.value) {
-          value = adapter.isBefore(today, minDate.value)
-            ? minDate.value
-            : today
-        } else {
-          value = adapter.isAfter(today, maxDate.value) ? maxDate.value : today
-        }
+      } else if (minDate.value && adapter.isBefore(today, minDate.value)) {
+        value = minDate.value
+      } else if (maxDate.value && adapter.isAfter(today, maxDate.value)) {
+        value = maxDate.value
       }
 
       return value && adapter.isValid(value) ? value : today
