@@ -75,7 +75,7 @@ The `v-number-input` component has support for most of `v-field`'s props and is 
 
 #### Control-variant
 
-The `control-variant` prop offers an easy way to customize steppers button layout. The following values are valid options: **default**, **stacked** and **split**.
+The `control-variant` prop offers an easy way to customize steppers button layout. The following values are valid options: **default**, **stacked**, **split** and **hidden**.
 
 <ExamplesExample file="v-number-input/prop-control-variant" />
 
@@ -108,3 +108,9 @@ The `min` and `max` props specify the minimum and maximum values accepted by v-n
 The `step` prop behaves the same as the `step` attribute in the `<input type="number">`, it defines the incremental steps for adjusting the numeric value.
 
 <ExamplesExample file="v-number-input/prop-step" />
+
+#### Precision
+
+The `precision` prop enforces strict precision. It is expected to be an integer value in range between `0` and `15`. Input will prevent user from typing or pasting an invalid value.
+
+<ExamplesExample file="v-number-input/prop-precision" />

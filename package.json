@@ -41,16 +41,16 @@
     "@typescript-eslint/eslint-plugin": "^7.18.0",
     "@typescript-eslint/parser": "^7.18.0",
     "@unhead/vue": "^1.9.4",
-    "@vue/compiler-sfc": "^3.5.12",
+    "@vue/compiler-sfc": "^3.5.13",
     "@vue/language-server": "^2.1.6",
-    "@vue/runtime-core": "^3.5.12",
-    "@vue/runtime-dom": "^3.5.12",
+    "@vue/runtime-core": "^3.5.13",
+    "@vue/runtime-dom": "^3.5.13",
     "@vueuse/head": "^1.3.1",
     "babel-eslint": "^10.1.0",
     "conventional-changelog-cli": "^3.0.0",
     "conventional-changelog-vuetify": "^1.2.1",
     "conventional-github-releaser": "^3.1.5",
-    "cross-spawn": "^7.0.3",
+    "cross-spawn": "^7.0.6",
     "eslint": "^8.57.0",
     "eslint-config-standard": "^17.1.0",
     "eslint-formatter-codeframe": "^7.32.1",
@@ -62,10 +62,10 @@
     "eslint-plugin-sonarjs": "^0.25.1",
     "eslint-plugin-vue": "^9.24.1",
     "eslint-plugin-vuetify": "^2.3.0",
-    "glob": "^11.0.0",
+    "glob": "^11.0.1",
     "husky": "^3.1.0",
     "inquirer": "^6.5.2",
-    "lerna": "^8.1.7",
+    "lerna": "^8.1.9",
     "magic-string": "^0.30.9",
     "mkdirp": "^3.0.1",
     "moment": "^2.30.1",
@@ -77,11 +77,11 @@
     "stringify-object": "^5.0.0",
     "typescript": "~5.5.4",
     "upath": "^2.0.1",
-    "vite-plugin-inspect": "^0.8.3",
+    "vite-plugin-inspect": "10.2.1",
     "vite-plugin-warmup": "^0.1.0",
-    "vue": "^3.5.12",
+    "vue": "^3.5.13",
     "vue-analytics": "^5.16.1",
-    "vue-router": "^4.3.0",
+    "vue-router": "^4.5.0",
     "vue-tsc": "^2.0.29",
     "yargs": "^17.7.2"
   },
@@ -89,12 +89,20 @@
   "pnpm": {
     "patchedDependencies": {
       "@mdi/js@7.4.47": "patches/@mdi__js@7.4.47.patch",
-      "@testing-library/vue": "patches/@testing-library__vue.patch"
+      "@testing-library/vue": "patches/@testing-library__vue.patch",
+      "vue-gtag-next": "patches/vue-gtag-next.patch"
     },
     "overrides": {
       "@testing-library/dom": "npm:@vuetify/testing-library-dom@1.0.2",
       "@types/node": "22.5.4",
       "tough-cookie": "5.0.0-rc.4"
+    },
+    "peerDependencyRules": {
+      "allowedVersions": {
+        "@sentry/vue>pinia": "3",
+        "@testing-library/user-event>@testing-library/dom": "*",
+        "vite-plugin-vue-layouts>vite": "6"
+      }
     }
   }
 }

@@ -16,7 +16,7 @@ import { makeValidationProps, useValidation } from '@/composables/validation'
 
 // Utilities
 import { computed, useId } from 'vue'
-import { EventProp, genericComponent, only, propsFactory, useRender } from '@/util'
+import { EventProp, genericComponent, pick, propsFactory, useRender } from '@/util'
 
 // Types
 import type { ComputedRef, PropType, Ref } from 'vue'
@@ -64,7 +64,7 @@ export const makeVInputProps = propsFactory({
 
   ...makeComponentProps(),
   ...makeDensityProps(),
-  ...only(makeDimensionProps(), [
+  ...pick(makeDimensionProps(), [
     'maxWidth',
     'minWidth',
     'width',

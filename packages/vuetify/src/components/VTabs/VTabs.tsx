@@ -81,7 +81,7 @@ export const makeVTabsProps = propsFactory({
 
 export const VTabs = genericComponent<new <T = TabItem>(
   props: {
-    items?: T
+    items?: T[]
   },
   slots: VTabsSlots<T>
 ) => GenericProps<typeof props, typeof slots>>()({

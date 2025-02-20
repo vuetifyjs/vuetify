@@ -147,48 +147,55 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
           onClick:prepend={ isInteractive.value ? onClick : undefined }
           onUpdate:modelValue={ onUpdateModel }
         >
-          <VMenu
-            v-model={ menu.value }
-            activator="parent"
-            min-width="0"
-            location={ props.location }
-            closeOnContentClick={ false }
-            openOnClick={ false }
-          >
-            <VConfirmEdit
-              { ...confirmEditProps }
-              v-model={ model.value }
-              onSave={ onSave }
-              onCancel={ () => menu.value = false }
-            >
-              {{
-                default: ({ actions, model: proxyModel, save, cancel, isPristine }) => {
-                  return (
-                    <VDatePicker
-                      { ...datePickerProps }
-                      modelValue={ props.hideActions ? model.value : proxyModel.value }
-                      onUpdate:modelValue={ val => {
-                        if (!props.hideActions) {
-                          proxyModel.value = val
-                        } else {
-                          model.value = val
+          {{
+            ...slots,
+            default: () => (
+              <>
+                <VMenu
+                  v-model={ menu.value }
+                  activator="parent"
+                  min-width="0"
+                  location={ props.location }
+                  closeOnContentClick={ false }
+                  openOnClick={ false }
+                >
+                  <VConfirmEdit
+                    { ...confirmEditProps }
+                    v-model={ model.value }
+                    onSave={ onSave }
+                    onCancel={ () => menu.value = false }
+                  >
+                    {{
+                      default: ({ actions, model: proxyModel, save, cancel, isPristine }) => {
+                        return (
+                          <VDatePicker
+                            { ...datePickerProps }
+                            modelValue={ props.hideActions ? model.value : proxyModel.value }
+                            onUpdate:modelValue={ val => {
+                              if (!props.hideActions) {
+                                proxyModel.value = val
+                              } else {
+                                model.value = val
 
-                          if (!props.multiple) menu.value = false
-                        }
-                      }}
-                      onMousedown={ (e: MouseEvent) => e.preventDefault() }
-                    >
-                      {{
-                        actions: !props.hideActions ? () => slots.actions?.({ save, cancel, isPristine }) ?? actions() : undefined,
-                      }}
-                    </VDatePicker>
-                  )
-                },
-              }}
-            </VConfirmEdit>
-          </VMenu>
+                                if (!props.multiple) menu.value = false
+                              }
+                            }}
+                            onMousedown={ (e: MouseEvent) => e.preventDefault() }
+                          >
+                            {{
+                              actions: !props.hideActions ? () => slots.actions?.({ save, cancel, isPristine }) ?? actions() : undefined,
+                            }}
+                          </VDatePicker>
+                        )
+                      },
+                    }}
+                  </VConfirmEdit>
+                </VMenu>
 
-          { slots.default?.() }
+                { slots.default?.() }
+              </>
+            ),
+          }}
         </VTextField>
       )
     })

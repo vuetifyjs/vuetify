@@ -2,7 +2,6 @@
 import { VTreeviewGroup } from './VTreeviewGroup'
 import { VTreeviewItem } from './VTreeviewItem'
 import { VCheckboxBtn } from '@/components/VCheckbox'
-import { VDivider } from '@/components/VDivider'
 
 // Composables
 import { IconValue } from '@/composables/icons'
@@ -30,9 +29,6 @@ export type VTreeviewChildrenSlots<T> = {
     item: T
     internalItem: InternalListItem<T>
   }
-  divider: { props: InternalListItem['props'] }
-  subheader: { props: InternalListItem['props'] }
-  header: { props: InternalListItem['props'] }
 }
 
 export const makeVTreeviewChildrenProps = propsFactory({
@@ -94,12 +90,6 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
     }
 
     return () => slots.default?.() ?? props.items?.map(item => {
-      if (item.type === 'divider') {
-        return slots.divider?.({ props: item.props }) ?? (
-          <VDivider { ...item.props } />
-        )
-      }
-
       const { children, props: itemProps } = item
       const loading = isLoading.has(item.value)
       const slotsWithItem = {
