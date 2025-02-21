@@ -10,7 +10,7 @@ meta:
 
 ---
 
-🖊️ Eric Sarrion • 📅 October 5th, 2024
+🖊️ Eric Sarrion • 📅 February 21st, 2025
 
 <VoPromotionsCardVuetify />
 
@@ -24,7 +24,7 @@ In this article, we will build a basic application using Vue.js and Vuetify, lev
 
 Why do we use the Nuxt framework?
 
-1. It allows us to easily create new pages in our application using URLs such as /contact to access the contact page, or /products to ac- cess the products page.
+1. It allows us to easily create new pages in our application using URLs such as /contact to access the contact page, or /products to access the products page.
 1. It simplifies the use of Vuetify components through a simple configuration in the nuxt.config.ts file.
 1. It automatically loads Vue.js methods and the components of our application without the need to import them manually each time. No more instructions like import { ref } from "vue".
 
@@ -77,7 +77,7 @@ To do this, enter the following command in a terminal:
 npx nuxi init vuetify-app
 ```
 
-![](https://cdn.vuetifyjs.com/docs/images/blog/building-a-basic-nuxt-application-with-vuetify/1.png){ height=500 }
+<!-- ![](https://cdn.vuetifyjs.com/docs/images/blog/building-a-basic-nuxt-application-with-vuetify/1.png){ height=500 } -->
 
 The command npx nuxi init vuetify-app is used to initialize a Nuxt project with a basic configuration in a directory named vuetify-app. This command breaks down as follows:
 
@@ -85,15 +85,15 @@ The command npx nuxi init vuetify-app is used to initialize a Nuxt project with 
 
 In this case, npx runs nuxi, a utility provided by Nuxt.
 
-2. nuxi: nuxi is the command-line tool for Nuxt. It is used to create, start, and manage Nuxt projects. The features of nuxi include:
+1. nuxi: nuxi is the command-line tool for Nuxt. It is used to create, start, and manage Nuxt projects. The features of nuxi include:
 
 - Creating new Nuxt projects.
 - Starting a development server.
 - Generating static files for static applications.
 
-3. init: init is a specific command for nuxi that initializes a new Nuxt project. It creates the basic project structure (configuration files) and sets up directories like pages, components, etc., which will contain the source files of our application.
+1. init: init is a specific command for nuxi that initializes a new Nuxt project. It creates the basic project structure (configuration files) and sets up directories like pages, components, etc., which will contain the source files of our application.
 
-4. vuetify-app: This final argument is the name of the folder where the project will be created. In this example, vuetify-app is the di- rectory where Nuxt will initialize a project with the default structure. This folder should not exist, it will be created. After running this command, you should get a folder containing the basic configuration files for a Nuxt project.
+1. vuetify-app: This final argument is the name of the folder where the project will be created. In this example, vuetify-app is the directory where Nuxt will initialize a project with the default structure. This folder should not exist, it will be created. After running this command, you should get a folder containing the basic configuration files for a Nuxt project.
 
 At the end of the command execution, you will get:
 
@@ -101,7 +101,7 @@ At the end of the command execution, you will get:
 
 We now need to enter the following two commands:
 
-1. The command cd vuetify-app allows you to navigate to the direc- tory of the default Vue.js application that has been created.
+1. The command cd vuetify-app allows you to navigate to the directory of the default Vue.js application that has been created.
 1. The command npm run dev starts the server, enabling us to view our application in a browser.
 
 Let’s enter these two commands:
@@ -114,7 +114,7 @@ A local server is now running, accessible on port 3000. Simply enter the URL <ht
 
 This displays the homepage of the Vue.js application created by the Nuxt framework.
 
-Now, let’s take a look at the main files and directories generated in the de- fault application.
+Now, let’s take a look at the main files and directories generated in the default application.
 
 ## Main Files and Directories in the Nuxt-Created Application
 
@@ -124,19 +124,19 @@ In the vuetify-app directory, you can see the files and folders that have been c
 
 For our application, we will need three additional directories, which will be placed directly in the root directory of the application:
 
-- The**components** directory will contain the Vue.js components of our application.
-- The**pages** directory will contain the pages of our application. A page is a Vue.js component that will be displayed in the application using internal routing. For example, the contact.vue page, located in  the pages  directory,  will  be  displayed  using  the  URL <http://localhost:3000/contact>.
-- The**plugins** directory will contain the file associated with the Vue- tify configuration, named vuetify.js in this case.
+- The **components** directory will contain the Vue.js components of our application.
+- The **pages** directory will contain the pages of our application. A page is a Vue.js component that will be displayed in the application using internal routing. For example, the contact.vue page, located in the pages directory, will be displayed using the URL <http://localhost:3000/contact>.
+- The **plugins** directory will contain the file associated with the Vuetify configuration, named vuetify.js in this case.
 
 Thus, after creating the components, pages, and plugins directories, we will have the following structure:
 
 ![](https://cdn.vuetifyjs.com/docs/images/blog/building-a-basic-nuxt-application-with-vuetify/6.png){ height=300 }
 
-We have seen the main directories of the application created with Nuxt, now let’s configure this application to display components from the Vuetify libra- ry.
+We have seen the main directories of the application created with Nuxt, now let’s configure this application to display components from the Vuetify library.
 
 ## Configuring the Application to Use Vuetify Components
 
-The Vue.js application created with Nuxt does not yet allow the use of Vue- tify components like v-btn, which displays a stylized button.
+The Vue.js application created with Nuxt does not yet allow the use of Vuetify components like v-btn, which displays a stylized button.
 
 To enable Vuetify components, we need to create a Vuetify configuration file in the plugins directory that we previously created. This JavaScript file will be named vuetify.js and will reside in the plugins directory.
 
@@ -175,7 +175,7 @@ export default defineNuxtConfig({
 })
  ```
 
-To define that the internal routing system is used with the pages, we confi- gure access to Vuetify's CSS style files and the use of default MDI icons, as well as the location of the vuetify.js  file previously created in the plugins directory.
+To define that the internal routing system is used with the pages, we configure access to Vuetify's CSS style files and the use of default MDI icons, as well as the location of the vuetify.js file previously created in the plugins directory.
 
 The pages property set to true in the nuxt.config.ts file implies that the pages of the application will be defined in specific Vue.js components, which will be inserted into the pages directory created for this purpose. The first page to be displayed will be the homepage, corresponding to the index.vue component located in the pages directory.
 
@@ -186,17 +186,15 @@ The configuration is now complete, and we can use Vuetify components in our appl
 To create a minimal Nuxt application using Vuetify components, you need to:
 
 - Create the index.vue file for the homepage located in the pages directory.
-- Modify the app.vue component file to indicate the use of internal routing  based  on  the  URL.  For  example,  the  URL <http://localhost:3000/contact>  will  grant  access  to  the contact.vue page located in the pages directory.
+- Modify the app.vue component file to indicate the use of internal routing based on the URL. For example, the URL <http://localhost:3000/contact> will grant access to the contact.vue page located in the pages directory.
 
-Let’s start by modifying the app.vue component, which is the first com- ponent displayed in the Nuxt application. We will use the NuxtPage com- ponent from Nuxt to display the page corresponding to the indicated URL.
+Let’s start by modifying the app.vue component, which is the first component displayed in the Nuxt application. We will use the NuxtPage component from Nuxt to display the page corresponding to the indicated URL.
 
 Here is the content of app.vue:
 
-**File app.vue**
-
 ![](https://cdn.vuetifyjs.com/docs/images/blog/building-a-basic-nuxt-application-with-vuetify/0.png){ height=500 }
 
-The use of the NuxtPage component is mandatory in a Nuxt-created appli- cation because it synchronizes the displayed page with the URL in the brow- ser. This ensures that the contact.vue page in the pages directory corres- ponds to the /contact URL in the browser.
+The use of the NuxtPage component is mandatory in a Nuxt-created application because it synchronizes the displayed page with the URL in the browser. This ensures that the contact.vue page in the pages directory corresponds to the /contact URL in the browser.
 
 Now, we need to create the index.vue page, which will be displayed by default when the URL is simply <http://localhost:3000>. In this page, we can use the Vuetify v-btn component to verify that we have access to Vuetify components.
 
@@ -205,30 +203,28 @@ Here is the content of the pages/index.vue file:
 ```html { resources="pages/index.vue" }
 <template>
   <v-container>
-    <v-btn color="primary">Vuetify Button</v-btn>
+    <v-btn color="primary" text="Vuetify Button"></v-btn>
   </v-container>
 </template>
 ```
 
-We are using here the v-container component, which allows encapsula- ting one or more components with margins around them, and the v-btn component, which displays a button in the Vuetify style.
+We are using here the v-container component, which allows encapsulating one or more components with margins around them, and the v-btn component, which displays a button in the Vuetify style.
 
 We verify that the components are indeed active in the index.vue page:
 
 ![](https://cdn.vuetifyjs.com/docs/images/blog/building-a-basic-nuxt-application-with-vuetify/7.png){ height=300 }
 
-The button is correctly displayed according to the attributes specified in the v-btn component, particularly the primary color. Additionally, the effect of the v-container component is visible because a margin has been ap- plied around the button, preventing it from being positioned against the edges of the window.
+The button is correctly displayed according to the attributes specified in the v-btn component, particularly the primary color. Additionally, the effect of the v-container component is visible because a margin has been applied around the button, preventing it from being positioned against the edges of the window.
 
-Now that we have seen how to structure the Vue.js application with Vuetify and Nuxt, let’s see how to modify it to integrate components that will dis- play toolbars and a menu to access the pages of the application.
+Now that we have seen how to structure the Vue.js application with Vuetify and Nuxt, let’s see how to modify it to integrate components that will display toolbars and a menu to access the pages of the application.
 
 ## Displaying a Toolbar at the Top of the Window
 
-The first thing to do is to display a toolbar at the top of the window. This toolbar will contain the title of the application, along with a button that will open a menu displaying the pages, allowing navigation within the applica- tion.
+The first thing to do is to display a toolbar at the top of the window. This toolbar will contain the title of the application, along with a button that will open a menu displaying the pages, allowing navigation within the application.
 
 To do this, we modify the app.vue file of the application. This file contains the overall structure of the application and is the first to be displayed when the application starts in a browser.
 
 We will use the v-app-bar component, which is a Vuetify component used to display the navigation bar.
-
-**File app.vue displaying the navigation bar**
 
 ```html { resource="app.vue" }
 <template>
@@ -236,10 +232,10 @@ We will use the v-app-bar component, which is a Vuetify component used to displa
     <!-- Toolbar at the top of the screen -->
     <v-app-bar color="primary" height="48">
       <!-- Title of the application with adjusted margin and font size -->
-      <v-app-bar-title class="text-h6 ml-3">
-        <v-icon>mdi-apps</v-icon>
+      <v-app-bar-title class="text-h6 ms-3">
+        <v-icon icon="mdi-apps"></v-icon>
 
-        <span class="ml-1"> My Application </span>
+        <span class="ms-1">My Application</span>
       </v-app-bar-title>
     </v-app-bar>
 
@@ -254,37 +250,37 @@ We will use the v-app-bar component, which is a Vuetify component used to displa
 We see the necessary structure to display a toolbar with Vuetify:
 
 - The v-app-bar component uses the color and height attributes. The color attribute allows specifying a background color for the toolbar, while the height attribute allows specifying its height. If these attributes are not provided, Vuetify applies default values.
-- The v-toolbar-title component defines the content to be dis- played in the toolbar's title. Here, we use a v-icon component to le- verage the MDI icons defined in Vuetify (in this case, the mdi-apps icon, which displays an icon representing a set of applications), fol- lowed by a span element displaying the text. The Vuetify internal CSS class ml-1 adds a margin of 1 unit to the left side of the ele- ment. This helps visually separate the text from the preceding icon.
+- The v-app-bar-title component defines the content to be displayed in the toolbar's title. Here, we use a v-icon component to leverage the MDI icons defined in Vuetify (in this case, the mdi-apps icon, which displays an icon representing a set of applications), followed by a span element displaying the text. The Vuetify internal CSS class ml-1 adds a margin of 1 unit to the left side of the element. This helps visually separate the text from the preceding icon.
 
 Let's display the corresponding page:
 
 ![](https://cdn.vuetifyjs.com/docs/images/blog/building-a-basic-nuxt-application-with-vuetify/8.png){ height=500 }
 
-The toolbar has been displayed correctly, but the index.vue  page still contains the previously inserted button.
+The toolbar has been displayed correctly, but the index.vue page still contains the previously inserted button.
 
 Let's modify this index.vue page to display more appropriate content for the homepage.
 
 ## Create the homepage displayed at startup
 
-We simply need to modify the index.vue page. In it, we display an mdi- home icon followed by the text of the page: My Application's Home Page. The entire content needs to be centered on the page.
+We simply need to modify the index.vue page. In it, we display an mdi-home icon followed by the text of the page: My Application's Home Page. The entire content needs to be centered on the page.
 
 ```html { resources="pages/index.vue" }
 <template>
   <v-container class="fill-height d-flex flex-column align-center justify-center text-center">
-    <v-icon size="64">mdi-home</v-icon>
+    <v-icon icon="mdi-home" size="64"></v-icon>
 
-    <div class="mt-3">MyApplication's Home Page</div>
+    <div class="mt-3">My Application's Home Page</div>
   </v-container>
 </template>
 ```
 
-We use the v-container and v-icon components from Vuetify, as seen previously. We also apply the CSS classes defined in Vuetify to the v- container component, allowing the use of Flexbox.
+We use the v-container and v-icon components from Vuetify, as seen previously. We also apply the CSS classes defined in Vuetify to the v-container component, allowing the use of Flexbox.
 
 Now we get:
 
 ![](https://cdn.vuetifyjs.com/docs/images/blog/building-a-basic-nuxt-application-with-vuetify/9.png){ height=500 }
 
-Before handling the click on the mdi-apps button in the toolbar (which al- lows displaying the navigation menu), let's see how to integrate a footer into our application.
+Before handling the click on the mdi-apps button in the toolbar (which allows displaying the navigation menu), let's see how to integrate a footer into our application.
 
 ## Display a footer at the bottom of the window
 
@@ -294,85 +290,85 @@ The app.vue file is therefore modified:
 
 ```html { resource="app.vue" }
 <template>
-<v-app>
-  <!-- Toolbar at the top of the screen -->
-  <v-app-bar color="primary" height="48">
-  <!-- Title of the application with adjusted margin and font size -->
-    <v-app-bar-title class="text-h6 ml-3">
-      <v-icon>mdi-apps</v-icon>
+  <v-app>
+    <!-- Toolbar at the top of the screen -->
+    <v-app-bar color="primary" height="48">
+    <!-- Title of the application with adjusted margin and font size -->
+      <v-app-bar-title class="text-h6 ms-3">
+        <v-icon icon="mdi-apps"></v-icon>
 
-      <span class="ml-1"> My Application </span>
-    </v-app-bar-title>
-  </v-app-bar>
+        <span class="ms-1">My Application</span>
+      </v-app-bar-title>
+    </v-app-bar>
 
-  <!-- Main content of the application -->
-  <v-main>
-    <NuxtPage />
-  </v-main>
+    <!-- Main content of the application -->
+    <v-main>
+      <NuxtPage />
+    </v-main>
 
-  <!-- Smaller footer at the bottom of the screen -->
-  <v-footer color="secondary" height="30">
-    <v-container class="text-center" style="font-size: 12px;">
-      © {{ new Date().getFullYear() }} My Application - All Rights Reserved
-    </v-container>
-  </v-footer>
-</v-app>
+    <!-- Smaller footer at the bottom of the screen -->
+    <v-footer color="secondary" height="30">
+      <v-container class="text-center text-caption">
+        © {{ new Date().getFullYear() }} My Application - All Rights Reserved
+      </v-container>
+    </v-footer>
+  </v-app>
 </template>
 ```
 
-We simply inserted the v-footer component, specifying the color and height  attributes as before. The content is simply placed inside a v- container component.
+We simply inserted the v-footer component, specifying the color and height attributes as before. The content is simply placed inside a v-container component.
 
 Now we get:
 
 ![](https://cdn.vuetifyjs.com/docs/images/blog/building-a-basic-nuxt-application-with-vuetify/10.png){ height=500 }
 
-The footer is not positioned at the desired height. Indeed, Vuetify requires correlating the toolbar and footer by using the app attribute in both compo- nents. This app attribute indicates that these components are linked to each other, making it essential.
+The footer is not positioned at the desired height. Indeed, Vuetify requires correlating the toolbar and footer by using the app attribute in both components. This app attribute indicates that these components are linked to each other, making it essential.
 
-Let's add the app attribute to both our v-app-bar and v-footer compo- nents:
+Let's add the app attribute to both our v-app-bar and v-footer components:
 
 ```html { resource="app.vue" }
 <template>
   <v-app>
-  <!-- Toolbar at the top of the screen -->
-  <v-app-bar app color="primary" height="48">
-    <!-- Title of the application with adjusted margin and font size -->
-    <v-app-bar-title class="text-h6 ml-3">
-      <v-icon>mdi-apps</v-icon>
+    <!-- Toolbar at the top of the screen -->
+    <v-app-bar color="primary" height="48">
+      <!-- Title of the application with adjusted margin and font size -->
+      <v-app-bar-title class="text-h6 ms-3">
+        <v-icon icon="mdi-apps"></v-icon>
 
-      <span class="ml-1"> My Application </span>
-    </v-app-bar-title>
-  </v-app-bar>
+        <span class="ms-1">My Application</span>
+      </v-app-bar-title>
+    </v-app-bar>
 
-  <!-- Main content of the application -->
-  <v-main>
-    <NuxtPage />
-  </v-main>
+    <!-- Main content of the application -->
+    <v-main>
+      <NuxtPage />
+    </v-main>
 
-  <!-- Smaller footer at the bottom of the screen -->
-  <v-footer app color="secondary" height="30">
-    <v-container class="text-center" style="font-size: 12px;">
-      © {{ new Date().getFullYear() }} My Application - All Rights Reserved
-    </v-container>
-  </v-footer>
+    <!-- Smaller footer at the bottom of the screen -->
+    <v-footer app color="secondary" height="30">
+      <v-container class="text-center text-caption">
+        © {{ new Date().getFullYear() }} My Application - All Rights Reserved
+      </v-container>
+    </v-footer>
   </v-app>
 </template>
 ```
 
-The app attribute has been added to the v-app-bar component and the v- footer component.
+The app attribute has been added to the v-app-bar component and the v-footer component.
 
 Let's see the resulting output:
 
 ![](https://cdn.vuetifyjs.com/docs/images/blog/building-a-basic-nuxt-application-with-vuetify/11.png){ height=500 }
 
-The footer is now displayed correctly, taking into account the height attri- bute specified within it.
+The footer is now displayed correctly, taking into account the height attribute specified within it.
 
 ## Using a navigation menu
 
 We now need to add a navigation menu that allows selecting a page from the following options:
 
 1. The index.vue page, which is displayed by default.
-2. The products.vue page, which displays the products of our appli- cation.
-2. The contact.vue page, which allows contacting the management.
+2. The products.vue page, which displays the products of our application.
+3. The contact.vue page, which allows contacting the management.
 
 This navigation menu will be accessible by clicking on the mdi-apps icon in the toolbar.
 
@@ -382,12 +378,12 @@ The app.vue component is modified to integrate the navigation menu:
 <template>
   <v-app>
   <!-- Toolbar at the top of the screen -->
-  <v-app-bar app color="primary" height="48">
+  <v-app-bar color="primary" height="48">
     <!-- Title of the application with adjusted margin and font size -->
-    <v-app-bar-title class="text-h6 ml-3">
-      <v-icon>mdi-apps</v-icon>
+    <v-app-bar-title class="text-h6 ms-3">
+      <v-icon icon="mdi-apps"></v-icon>
 
-      <span class="ml-1"> My Application </span>
+      <span class="ms-1">My Application</span>
     </v-app-bar-title>
   </v-app-bar>
 
@@ -395,28 +391,23 @@ The app.vue component is modified to integrate the navigation menu:
   <v-navigation-drawer v-model="drawer">
     <v-list>
       <!-- Menu items in the drawer with icons -->
-      <v-list-item @click="navigateTo('/')">
-        <v-list-item-title>
-          <v-icon left>mdi-home</v-icon>
-          Home
-        </v-list-item-title>
-      </v-list-item>
+      <v-list-item
+        @click="navigateTo('/')"
+        title="Home"
+        prepend-icon="mdi-home"
+      ></v-list-item>
 
-      <v-list-item @click="navigateTo('/products')">
-        <v-list-item-title>
-          <v-icon left>mdi-cube-outline</v-icon>
+      <v-list-item
+        @click="navigateTo('/products')"
+        title="Products"
+        prepend-icon="mdi-cube-outline"
+      ></v-list-item>
 
-          Products
-        </v-list-item-title>
-      </v-list-item>
-
-      <v-list-item @click="navigateTo('/contact')">
-        <v-list-item-title>
-          <v-icon left>mdi-email</v-icon>
-
-          Contact
-        </v-list-item-title>
-      </v-list-item>
+      <v-list-item
+        @click="navigateTo('/contact')"
+        title="Contact"
+        repend-icon="mdi-email"
+      ></v-list-item>
     </v-list>
   </v-navigation-drawer>
 
@@ -427,7 +418,7 @@ The app.vue component is modified to integrate the navigation menu:
 
   <!-- Smaller footer at the bottom of the screen -->
   <v-footer app color="secondary" height="30">
-    <v-container class="text-center" style="font-size: 12px;">
+    <v-container class="text-center text-caption">
       © {{ new Date().getFullYear() }} My Application - All Rights Reserved
     </v-container>
   </v-footer>
@@ -442,9 +433,9 @@ The v-navigation-drawer component from Vuetify allows defining the elements that
 
 The appearance of the menu is controlled by a reactive variable, here named drawer. If it is set to false (default value), the menu is not displayed. As soon as it changes to true, the menu appears. The change from false to true (or vice versa) happens when the mdi-apps button in the toolbar is clicked.
 
-The menu also needs to be linked to this reactive variable. To achieve this, Vuetify uses the v-model  attribute in the v-navigation-drawer  com- ponent. Many Vuetify components use the v-model attribute to link the component to a reactive variable in the program.
+The menu also needs to be linked to this reactive variable. To achieve this, Vuetify uses the v-model attribute in the v-navigation-drawer component. Many Vuetify components use the v-model attribute to link the component to a reactive variable in the program.
 
-Clicking on each navigation menu item is handled by the @click attribute, which is a shorthand for v-on:click  provided by Vue.js. We call the navigateTo(page) method, which displays the page specified as a para- meter, such as "/"  (to display index.vue), "/products"  (to display products.vue), or "/contact" (to display the contact.vue page).
+Clicking on each navigation menu item is handled by the @click attribute, which is a shorthand for v-on:click provided by Vue.js. We call the navigateTo(page) method, which displays the page specified as a parameter, such as "/" (to display index.vue), "/products" (to display products.vue), or "/contact" (to display the contact.vue page).
 
 Let's verify the proper functioning of this mechanism by displaying the products.vue page. We assume that each page of the application has been created similarly to the index.vue page. These pages will be created in the next section if needed.
 
@@ -461,68 +452,65 @@ Here is the code describing each of the components associated with the pages of 
 ```html { resource="pages/products.vue" }
 <template>
   <v-container class="fill-height d-flex flex-column align-center justify-center text-center">
-    <v-icon size="64">mdi-cube-outline</v-icon>
+    <v-icon icon="mdi-cube-outline" size="64"></v-icon>
 
-    <div class="mt-3">MyApplication's Products Page</div>
+    <div class="mt-3">My Application's Products Page</div>
   </v-container>
 </template>
 ```
 
 ## Adding buttons to the toolbar
 
-Finally, we might want to insert new buttons into the toolbar at the top of the screen, on the right side. These buttons can provide direct access to one of the application’s pages, without using the previously implemented naviga- tion menu.
+Finally, we might want to insert new buttons into the toolbar at the top of the screen, on the right side. These buttons can provide direct access to one of the application’s pages, without using the previously implemented navigation menu.
 
-We therefore insert buttons in the form of icons into the application's tool- bar. The app.vue component becomes:
+We therefore insert buttons in the form of icons into the application's toolbar. The app.vue component becomes:
 
 ```html
 <template>
   <v-app>
     <!-- Toolbar at the top of the screen -->
-    <v-app-bar app color="primary" height="48">
+    <v-app-bar color="primary" height="48">
       <!-- Title of the application with adjusted margin and font size -->
-      <v-toolbar-title class="text-h6 ml-3">
-      <v-icon @click="drawer = !drawer">mdi-apps</v-icon>
-      <span class="ml-1"> My Application </span>
-      </v-toolbar-title>
+      <v-app-bar-title class="text-h6 ms-3">
+        <v-icon icon="mdi-apps" @click="drawer = !drawer"></v-icon>
+
+        <span class="ms-1">My Application</span>
+      </v-app-bar-title>
 
       <!-- Spacer to push the following elements to the right -->
       <v-spacer />
 
       <!-- Menu icons on the right side of the toolbar -->
-      <v-btn icon @click="navigateTo('/')">
-        <v-icon>mdi-home</v-icon>
-      </v-btn>
-      <v-btn icon @click="navigateTo('/products')">
-        <v-icon>mdi-cube-outline</v-icon>
-      </v-btn>
-      <v-btn icon @click="navigateTo('/contact')">
-        <v-icon>mdi-email</v-icon>
-      </v-btn>
+      <v-btn icon="mdi-home" @click="navigateTo('/')"></v-btn>
+
+      <v-btn icon="mdi-cube-outline" @click="navigateTo('/products')"></v-btn>
+
+      <v-btn icon="mdi-email" @click="navigateTo('/contact')"></v-btn>
     </v-app-bar>
+
     <!-- Navigation drawer for menu actions -->
     <v-navigation-drawer v-model="drawer">
       <v-list>
-      <!-- Menu items in the drawer with icons -->
-      <v-list-item @click="navigateTo('/')">
-        <v-list-item-title>
-          <v-icon left>mdi-home</v-icon>
-          Home
-        </v-list-item-title>
-      </v-list-item>
+        <!-- Menu items in the drawer with icons -->
+        <v-list-item
+          @click="navigateTo('/')"
+          title="Home"
+          prepend-icon="mdi-home"
+        ></v-list-item>
 
-      <v-list-item @click="navigateTo('/products')">
-        <v-list-item-title>
-          <v-icon left>mdi-cube-outline</v-icon>
-          Products
-        </v-list-item-title>
-      </v-list-item>
 
-      <v-list-item @click="navigateTo('/contact')">
-        <v-list-item-title>
-          <v-icon left>mdi-email</v-icon>
-          Contact
-        </v-list-item-title>
-        </v-list-item>
+        <v-list-item
+          @click="navigateTo('/products')"
+          title="Products"
+          prepend-icon="mdi-cube-outline"
+        ></v-list-item>
+
+
+        <v-list-item
+          @click="navigateTo('/contact')"
+          title="Contact"
+          prepend-icon="mdi-email"
+        ></v-list-item>
       </v-list>
     </v-navigation-drawer>
 
@@ -533,7 +521,7 @@ We therefore insert buttons in the form of icons into the application's tool- ba
 
     <!-- Smaller footer at the bottom of the screen -->
     <v-footer app color="secondary" height="30">
-      <v-container class="text-center" style="font-size: 12px;">
+      <v-container class="text-caption text-center">
         © {{ new Date().getFullYear() }} My Application - All Rights Reserved
       </v-container>
     </v-footer>
@@ -542,13 +530,13 @@ We therefore insert buttons in the form of icons into the application's tool- ba
 
 <script setup>
 // Drawer state to open/close the navigation drawer
-const drawer = ref(false);
+const drawer = shallowRef(false)
 </script>
 ```
 
-Vuetify offers the v-spacer component, which allows "pushing" the ele- ments that follow it to the right. The buttons will therefore be positioned on the right side of the toolbar.
+Vuetify offers the v-spacer component, which allows "pushing" the elements that follow it to the right. The buttons will therefore be positioned on the right side of the toolbar.
 
-To display the buttons, we use the v-btn component with the icon attri- bute. This attribute allows the button to be displayed in a circular shape, ac- cording to the icon it contains. The @click attribute is also used to handle navigation to the desired page, just as we did in the navigation menu.
+To display the buttons, we use the v-btn component with the icon attribute. This attribute allows the button to be displayed in a circular shape, according to the icon it contains. The @click attribute is also used to handle navigation to the desired page, just as we did in the navigation menu.
 
 The application is now displayed:
 
