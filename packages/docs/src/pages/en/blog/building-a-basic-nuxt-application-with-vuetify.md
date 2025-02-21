@@ -43,7 +43,7 @@ The application will consist of three simple pages, each displaying plain text c
 
 When launching the application, the homepage will be displayed like this:
 
-![](https://cdn.vuetifyjs.com/docs/images/blog/building-a-basic-nuxt-application-with-vuetify/0.png){ height=500 }
+![Homepage of the Nuxt and Vuetify application with a toolbar and footer.](https://cdn.vuetifyjs.com/docs/images/blog/building-a-basic-nuxt-application-with-vuetify/0.png){ height=500 }
 
 A toolbar is displayed at the top of the window, along with a footer at the bottom.
 
@@ -55,11 +55,11 @@ The toolbar contains the application's title (here, "My Application") and action
 
 Let’s open the navigation menu by clicking the corresponding button on the left side of the toolbar:
 
-![](https://cdn.vuetifyjs.com/docs/images/blog/building-a-basic-nuxt-application-with-vuetify/16.png){ height=500 }
+![Navigation menu opened from the sidebar.](https://cdn.vuetifyjs.com/docs/images/blog/building-a-basic-nuxt-application-with-vuetify/16.png){ height=500 }
 
 A sidebar has appeared on the left side of the screen. Each item in the displayed list allows direct navigation to the corresponding page. For example, let’s click on the "Products" item:
 
-![](https://cdn.vuetifyjs.com/docs/images/blog/building-a-basic-nuxt-application-with-vuetify/0.png){ height=500 }
+![Homepage of the Nuxt and Vuetify application with a toolbar and footer.](https://cdn.vuetifyjs.com/docs/images/blog/building-a-basic-nuxt-application-with-vuetify/0.png){ height=500 }
 
 The page displaying the products has now appeared.
 
@@ -77,7 +77,7 @@ To do this, enter the following command in a terminal:
 npx nuxi init vuetify-app
 ```
 
-<!-- ![](https://cdn.vuetifyjs.com/docs/images/blog/building-a-basic-nuxt-application-with-vuetify/1.png){ height=500 } -->
+<!-- ![Screenshot of the application](https://cdn.vuetifyjs.com/docs/images/blog/building-a-basic-nuxt-application-with-vuetify/1.png){ height=500 } -->
 
 The command npx nuxi init vuetify-app is used to initialize a Nuxt project with a basic configuration in a directory named vuetify-app. This command breaks down as follows:
 
@@ -97,7 +97,7 @@ In this case, npx runs nuxi, a utility provided by Nuxt.
 
 At the end of the command execution, you will get:
 
-![](https://cdn.vuetifyjs.com/docs/images/blog/building-a-basic-nuxt-application-with-vuetify/2.png){ height=500 }
+![Terminal output showing the successful initialization of the Nuxt project.](https://cdn.vuetifyjs.com/docs/images/blog/building-a-basic-nuxt-application-with-vuetify/2.png){ height=500 }
 
 We now need to enter the following two commands:
 
@@ -106,11 +106,11 @@ We now need to enter the following two commands:
 
 Let’s enter these two commands:
 
-![](https://cdn.vuetifyjs.com/docs/images/blog/building-a-basic-nuxt-application-with-vuetify/3.png){ height=500 }
+![Terminal output indicating the local server running on port 3000.](https://cdn.vuetifyjs.com/docs/images/blog/building-a-basic-nuxt-application-with-vuetify/3.png){ height=500 }
 
 A local server is now running, accessible on port 3000. Simply enter the URL <http://localhost:3000> in your browser to access the previously created application.
 
-![](https://cdn.vuetifyjs.com/docs/images/blog/building-a-basic-nuxt-application-with-vuetify/4.png){ height=500 }
+![The default homepage displayed in the browser.](https://cdn.vuetifyjs.com/docs/images/blog/building-a-basic-nuxt-application-with-vuetify/4.png){ height=500 }
 
 This displays the homepage of the Vue.js application created by the Nuxt framework.
 
@@ -120,7 +120,7 @@ Now, let’s take a look at the main files and directories generated in the defa
 
 In the vuetify-app directory, you can see the files and folders that have been created within the application:
 
-![](https://cdn.vuetifyjs.com/docs/images/blog/building-a-basic-nuxt-application-with-vuetify/5.png){ height=300 }
+![Directory structure of the Nuxt project with components, pages, and plugins folders.](https://cdn.vuetifyjs.com/docs/images/blog/building-a-basic-nuxt-application-with-vuetify/5.png){ height=300 }
 
 For our application, we will need three additional directories, which will be placed directly in the root directory of the application:
 
@@ -130,7 +130,7 @@ For our application, we will need three additional directories, which will be pl
 
 Thus, after creating the components, pages, and plugins directories, we will have the following structure:
 
-![](https://cdn.vuetifyjs.com/docs/images/blog/building-a-basic-nuxt-application-with-vuetify/6.png){ height=300 }
+![Terminal output showing the successful initialization of the Nuxt project.](https://cdn.vuetifyjs.com/docs/images/blog/building-a-basic-nuxt-application-with-vuetify/6.png){ height=300 }
 
 We have seen the main directories of the application created with Nuxt, now let’s configure this application to display components from the Vuetify library.
 
@@ -192,7 +192,7 @@ Let’s start by modifying the app.vue component, which is the first component d
 
 Here is the content of app.vue:
 
-![](https://cdn.vuetifyjs.com/docs/images/blog/building-a-basic-nuxt-application-with-vuetify/0.png){ height=500 }
+![Homepage of the Nuxt and Vuetify application with a toolbar and footer.](https://cdn.vuetifyjs.com/docs/images/blog/building-a-basic-nuxt-application-with-vuetify/0.png){ height=500 }
 
 The use of the NuxtPage component is mandatory in a Nuxt-created application because it synchronizes the displayed page with the URL in the browser. This ensures that the contact.vue page in the pages directory corresponds to the /contact URL in the browser.
 
@@ -212,7 +212,7 @@ We are using here the v-container component, which allows encapsulating one or m
 
 We verify that the components are indeed active in the index.vue page:
 
-![](https://cdn.vuetifyjs.com/docs/images/blog/building-a-basic-nuxt-application-with-vuetify/7.png){ height=300 }
+![Screenshot showing the Vuetify button on the homepage.](https://cdn.vuetifyjs.com/docs/images/blog/building-a-basic-nuxt-application-with-vuetify/7.png){ height=300 }
 
 The button is correctly displayed according to the attributes specified in the v-btn component, particularly the primary color. Additionally, the effect of the v-container component is visible because a margin has been applied around the button, preventing it from being positioned against the edges of the window.
 
@@ -254,7 +254,7 @@ We see the necessary structure to display a toolbar with Vuetify:
 
 Let's display the corresponding page:
 
-![](https://cdn.vuetifyjs.com/docs/images/blog/building-a-basic-nuxt-application-with-vuetify/8.png){ height=500 }
+![Application with a toolbar featuring an icon and a title.](https://cdn.vuetifyjs.com/docs/images/blog/building-a-basic-nuxt-application-with-vuetify/8.png){ height=500 }
 
 The toolbar has been displayed correctly, but the index.vue page still contains the previously inserted button.
 
@@ -278,7 +278,7 @@ We use the v-container and v-icon components from Vuetify, as seen previously. W
 
 Now we get:
 
-![](https://cdn.vuetifyjs.com/docs/images/blog/building-a-basic-nuxt-application-with-vuetify/9.png){ height=500 }
+![Homepage with an icon and text centered using Vuetify components.](https://cdn.vuetifyjs.com/docs/images/blog/building-a-basic-nuxt-application-with-vuetify/9.png){ height=500 }
 
 Before handling the click on the mdi-apps button in the toolbar (which allows displaying the navigation menu), let's see how to integrate a footer into our application.
 
@@ -320,7 +320,7 @@ We simply inserted the v-footer component, specifying the color and height attri
 
 Now we get:
 
-![](https://cdn.vuetifyjs.com/docs/images/blog/building-a-basic-nuxt-application-with-vuetify/10.png){ height=500 }
+![Footer displayed at the bottom of the application window.](https://cdn.vuetifyjs.com/docs/images/blog/building-a-basic-nuxt-application-with-vuetify/10.png){ height=500 }
 
 The footer is not positioned at the desired height. Indeed, Vuetify requires correlating the toolbar and footer by using the app attribute in both components. This app attribute indicates that these components are linked to each other, making it essential.
 
@@ -358,7 +358,7 @@ The app attribute has been added to the v-app-bar component and the v-footer com
 
 Let's see the resulting output:
 
-![](https://cdn.vuetifyjs.com/docs/images/blog/building-a-basic-nuxt-application-with-vuetify/11.png){ height=500 }
+![Footer correctly aligned at the bottom after using the app attribute.](https://cdn.vuetifyjs.com/docs/images/blog/building-a-basic-nuxt-application-with-vuetify/11.png){ height=500 }
 
 The footer is now displayed correctly, taking into account the height attribute specified within it.
 
@@ -439,7 +439,7 @@ Clicking on each navigation menu item is handled by the @click attribute, which 
 
 Let's verify the proper functioning of this mechanism by displaying the products.vue page. We assume that each page of the application has been created similarly to the index.vue page. These pages will be created in the next section if needed.
 
-![](https://cdn.vuetifyjs.com/docs/images/blog/building-a-basic-nuxt-application-with-vuetify/12.png){ height=500 }
+![Products page displayed after navigating using the sidebar menu.](https://cdn.vuetifyjs.com/docs/images/blog/building-a-basic-nuxt-application-with-vuetify/12.png){ height=500 }
 
 We can now navigate from page to page within the application.
 
@@ -540,11 +540,11 @@ To display the buttons, we use the v-btn component with the icon attribute. This
 
 The application is now displayed:
 
-![](https://cdn.vuetifyjs.com/docs/images/blog/building-a-basic-nuxt-application-with-vuetify/14.png){ height=500 }
+![Toolbar with additional navigation buttons for quick page access.](https://cdn.vuetifyjs.com/docs/images/blog/building-a-basic-nuxt-application-with-vuetify/14.png){ height=500 }
 
 Clicking on the buttons displays the desired page. For example, the /contact page:
 
-![](https://cdn.vuetifyjs.com/docs/images/blog/building-a-basic-nuxt-application-with-vuetify/15.png){ height=500 }
+![Contact page displayed after selecting it from the navigation menu.](https://cdn.vuetifyjs.com/docs/images/blog/building-a-basic-nuxt-application-with-vuetify/15.png){ height=500 }
 
 ## Conclusion
 
