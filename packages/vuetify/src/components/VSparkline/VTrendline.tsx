@@ -149,9 +149,11 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
     }, { immediate: true })
 
     function genPath (fill: boolean) {
+      const smoothValue = typeof props.smooth === 'boolean' ? (props.smooth ? 8 : 0) : Number(props.smooth)
+
       return _genPath(
         genPoints(items.value, boundary.value),
-        props.smooth ? 8 : Number(props.smooth),
+        smoothValue,
         fill,
         parseInt(props.height, 10)
       )

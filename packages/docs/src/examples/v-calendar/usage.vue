@@ -9,18 +9,18 @@
         v-model="type"
         :items="types"
         class="ma-2"
+        density="compact"
         label="View Mode"
         variant="outlined"
-        dense
         hide-details
       ></v-select>
       <v-select
         v-model="weekday"
         :items="weekdays"
         class="ma-2"
+        density="compact"
         label="weekdays"
         variant="outlined"
-        dense
         hide-details
       ></v-select>
     </v-sheet>

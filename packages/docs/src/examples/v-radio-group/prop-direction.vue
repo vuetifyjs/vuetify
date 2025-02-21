@@ -1,9 +1,6 @@
 <template>
   <v-container fluid>
-    <v-radio-group
-      v-model="column"
-      column
-    >
+    <v-radio-group v-model="column">
       <v-radio
         label="Option 1"
         value="radio-1"

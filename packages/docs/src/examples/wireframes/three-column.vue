@@ -14,8 +14,8 @@
       <v-spacer></v-spacer>
 
       <v-tabs
+        align-tabs="center"
         color="grey-darken-2"
-        centered
       >
         <v-tab
           v-for="link in links"

@@ -1,8 +1,9 @@
 // Styles
 import 'prism-theme-vars/base.css'
 
-// Pluginse
+// Plugins
 import * as Swetrix from 'swetrix'
+import * as Sentry from '@sentry/vue'
 import { createApp } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import { createHead } from '@unhead/vue'
@@ -44,6 +45,8 @@ const appStore = useAppStore(pinia)
 const localeStore = useLocaleStore(pinia)
 const userStore = useUserStore(pinia)
 
+const app = createApp(App)
+
 if (IN_BROWSER) {
   localeStore.$subscribe((_, state) => {
     window.localStorage.setItem('currentLocale', state.locale)
@@ -55,10 +58,17 @@ if (IN_BROWSER) {
     apiURL: 'https://swetrix-api.vuetifyjs.com/log',
   })
   Swetrix.trackViews()
-  Swetrix.trackErrors()
+  Sentry.init({
+    app,
+    dsn: 'https://491ef7e8180648c488b1fcc158eb9ecc@glitchtip.vuetifyjs.com/1',
+    release: import.meta.env.VITE_GITHUB_SHA,
+    environment: import.meta.env.VITE_GITHUB_REF,
+    enabled: import.meta.env.VITE_GITHUB_SHA,
+
+    sampleRate: 1,
+  })
 }
 
-const app = createApp(App)
 const router = createRouter({
   history: createWebHistory(),
   routes: [

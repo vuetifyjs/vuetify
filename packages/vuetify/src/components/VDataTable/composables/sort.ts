@@ -59,10 +59,13 @@ export function provideSort (options: {
     const item = newSortBy.find(x => x.key === column.key)
 
     if (!item) {
-      if (multiSort.value) newSortBy = [...newSortBy, { key: column.key, order: 'asc' }]
-      else newSortBy = [{ key: column.key, order: 'asc' }]
+      if (multiSort.value) {
+        newSortBy.push({ key: column.key, order: 'asc' })
+      } else {
+        newSortBy = [{ key: column.key, order: 'asc' }]
+      }
     } else if (item.order === 'desc') {
-      if (mustSort.value) {
+      if (mustSort.value && newSortBy.length === 1) {
         item.order = 'asc'
       } else {
         newSortBy = newSortBy.filter(x => x.key !== column.key)

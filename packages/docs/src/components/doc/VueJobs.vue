@@ -20,7 +20,6 @@
     >
       <v-card
         :href="job.url"
-        class="transition-swing"
         max-height="225"
         rel="sponsored"
         target="_blank"

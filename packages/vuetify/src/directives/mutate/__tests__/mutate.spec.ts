@@ -82,7 +82,7 @@ describe('v-mutate', () => {
       instance,
     } as any)
 
-    expect(callback).toHaveBeenCalled()
+    expect(callback).toHaveBeenCalledTimes(1)
     expect(el._mutate).toBeTruthy()
 
     ;(el._mutate![1]!.observer as any)?.trigger([])

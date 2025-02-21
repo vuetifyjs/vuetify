@@ -1,9 +1,12 @@
 import { VBtn } from '../VBtn'
 
 // Utilities
-import { generate, gridOn, render } from '@test'
-import { userEvent } from '@vitest/browser/context'
+import { generate, gridOn, render, userEvent } from '@test'
+import { ref } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
+
+// Types
+import type { Variant } from '@/composables/variant.tsx'
 
 // TODO: generate these from types
 const colors = ['success', 'info', 'warning', 'error', 'invalid']
@@ -100,7 +103,7 @@ describe('VBtn', () => {
     })
 
     // Pending test, is "toggle" even going to be emitted anymore?
-    it.skip('emits toggle when used within a button group', () => {
+    it.todo('emits toggle when used within a button group', () => {
       // const register = jest.fn()
       // const unregister = jest.fn()
       // const toggle = jest.fn()
@@ -118,7 +121,7 @@ describe('VBtn', () => {
 
   // These tests were copied over from the previous Jest tests,
   // but they are breaking because the features have not been implemented
-  describe.skip('activeClass', () => {
+  describe.todo('activeClass', () => {
     it('should use custom active-class', async () => {
       const { wrapper } = render(<VBtn active activeClass="my-active-class">Active Class</VBtn>)
       expect(wrapper.element).toHaveClass('my-active-class')
@@ -126,7 +129,7 @@ describe('VBtn', () => {
   })
 
   describe('href', () => {
-    it.skip('should render an <a> tag when using href prop', async () => {
+    it.todo('should render an <a> tag when using href prop', async () => {
       const anchor = { href: '#anchor', hash: 'anchor' }
       const { container } = render(<VBtn href={ anchor.href }>Click me</VBtn>)
       const link = container.querySelector('a')!
@@ -202,16 +205,17 @@ describe('VBtn', () => {
 
   describe('Reactivity', () => {
     it('disabled', async () => {
+      const disabled = ref(true)
       const { wrapper } = render(() => (
-        <VBtn color="success" disabled></VBtn>
+        <VBtn color="success" disabled={ disabled.value }></VBtn>
       ))
       expect(wrapper.element).toHaveClass('v-btn--disabled')
 
-      await wrapper.setProps({ disabled: false })
-      expect.poll(() => wrapper.element as HTMLElement).not.toHaveClass('v-btn--disabled')
+      disabled.value = false
+      await expect.element(wrapper.element).not.toHaveClass('v-btn--disabled')
     })
 
-    it.skip('activeClass', async () => {
+    it.todo('activeClass', async () => {
       const { container, wrapper } = render(() => (
         <VBtn activeClass="my-active-class">Active Class</VBtn>
       ))
@@ -219,19 +223,19 @@ describe('VBtn', () => {
       await wrapper.setProps({ activeClass: 'different-class' })
 
       const activeClassElement = container.querySelector('.different-class')
-      expect(activeClassElement).not.toBeInTheDocument()
+      expect(activeClassElement).not.toBeVisible()
     })
 
-    it('plain', async () => {
+    it('variant', async () => {
+      const variant = ref<Variant>('plain')
       const { wrapper } = render(() => (
-        <VBtn variant="plain">Plain</VBtn>
+        <VBtn variant={ variant.value }>Plain</VBtn>
       ))
 
       expect(wrapper.element).toHaveClass('v-btn--variant-plain')
 
-      await wrapper.setProps({ variant: 'default' })
-
-      expect.poll(() => wrapper.element as HTMLElement).not.toHaveClass('v-btn--variant-plain')
+      variant.value = 'elevated'
+      await expect.element(wrapper.element).not.toHaveClass('v-btn--variant-plain')
     })
   })
 

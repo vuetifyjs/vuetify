@@ -15,8 +15,18 @@
         -webkit-appearance: none
 
     .v-field
-      padding-inline-end: 0
-      padding-inline-start: 0
+      &:not(:has(.v-field__prepend-inner > .v-icon))
+        padding-inline-start: 0
+
+      &:not(:has(.v-field__append-inner > .v-icon))
+        padding-inline-end: 0
+
+    .v-field__prepend-inner:has(.v-number-input__control) > .v-icon
+      margin-inline-end: 12px
+
+    .v-field__append-inner:has(.v-number-input__control) > .v-icon
+      margin-inline-start: 12px
+
 
     &--inset
       .v-divider

@@ -12,7 +12,7 @@ import { MaybeTransition } from '@/composables/transition'
 
 // Utilities
 import { computed, ref, shallowRef, watch } from 'vue'
-import { genericComponent, propsFactory } from '@/util'
+import { genericComponent, omit, propsFactory } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -41,7 +41,7 @@ export const makeVDatePickerMonthProps = propsFactory({
     default: 'picker-reverse-transition',
   },
 
-  ...makeCalendarProps(),
+  ...omit(makeCalendarProps(), ['displayValue']),
 }, 'VDatePickerMonth')
 
 export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({

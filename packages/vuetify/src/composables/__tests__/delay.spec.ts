@@ -2,8 +2,8 @@
 import { makeDelayProps, useDelay } from '../delay'
 
 // Utilities
+import { wait } from '@test'
 import { mount } from '@vue/test-utils'
-import { wait } from '@/../test'
 
 describe('delayProps', () => {
   it('should allow setting default values', () => {

@@ -1,4 +1,5 @@
 ---
+layout: blank
 meta:
   title: API
   description: API documentation
@@ -8,6 +9,8 @@ meta:
 <script setup>
   const name = shallowRef('')
 </script>
+
+<ApiView v-on:update:name="name = $event">
 
 # {{ name }} API
 
@@ -19,4 +22,4 @@ meta:
 
 <ApiSearch />
 
-<ApiView v-on:update:name="name = $event" />
+</ApiView>

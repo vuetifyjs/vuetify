@@ -12,6 +12,7 @@
     "label": "Applies a medium size border radius.",
     "outlined": "Removes background and applies border and text color.",
     "pill": "Remove `v-avatar` padding.",
+    "size": "Sets the height, padding and the font size of the component. Accepts only predefined options: **x-small**, **small**, **default**, **large**, and **x-large**.",
     "value": "The value used when a child of a [v-chip-group](/components/chip-groups)."
   },
   "events": {

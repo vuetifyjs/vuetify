@@ -23,7 +23,6 @@
             <v-btn
               class="mb-2"
               color="primary"
-              dark
               v-bind="props"
             >
               New Item

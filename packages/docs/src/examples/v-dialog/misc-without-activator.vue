@@ -2,7 +2,6 @@
   <v-row justify="center">
     <v-btn
       color="primary"
-      dark
       @click.stop="dialog = true"
     >
       Open Dialog

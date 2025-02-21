@@ -27,6 +27,7 @@ import { makeTransitionProps } from '@/composables/transition'
 import { computed, mergeProps, nextTick, ref, shallowRef, watch } from 'vue'
 import {
   checkPrintable,
+  deepEqual,
   ensureValidVNode,
   genericComponent,
   IN_BROWSER,
@@ -177,7 +178,7 @@ export const VSelect = genericComponent<new <
 
     const displayItems = computed(() => {
       if (props.hideSelected) {
-        return items.value.filter(item => !model.value.some(s => props.valueComparator(s, item)))
+        return items.value.filter(item => !model.value.some(s => (props.valueComparator || deepEqual)(s, item)))
       }
       return items.value
     })
@@ -238,7 +239,7 @@ export const VSelect = genericComponent<new <
       // html select hotkeys
       const KEYBOARD_LOOKUP_THRESHOLD = 1000 // milliseconds
 
-      if (props.multiple || !checkPrintable(e)) return
+      if (!checkPrintable(e)) return
 
       const now = performance.now()
       if (now - keyboardLookupLastTime > KEYBOARD_LOOKUP_THRESHOLD) {
@@ -262,7 +263,7 @@ export const VSelect = genericComponent<new <
       if (item.props.disabled) return
 
       if (props.multiple) {
-        const index = model.value.findIndex(selection => props.valueComparator(selection.value, item.value))
+        const index = model.value.findIndex(selection => (props.valueComparator || deepEqual)(selection.value, item.value))
         const add = set == null ? !~index : set
 
         if (~index) {
@@ -314,7 +315,7 @@ export const VSelect = genericComponent<new <
     watch(menu, () => {
       if (!props.hideSelected && menu.value && model.value.length) {
         const index = displayItems.value.findIndex(
-          item => model.value.some(s => props.valueComparator(s.value, item.value))
+          item => model.value.some(s => (props.valueComparator || deepEqual)(s.value, item.value))
         )
         IN_BROWSER && window.requestAnimationFrame(() => {
           index >= 0 && vVirtualScrollRef.value?.scrollToIndex(index)

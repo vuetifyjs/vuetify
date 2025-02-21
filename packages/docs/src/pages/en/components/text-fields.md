@@ -19,8 +19,6 @@ features:
 
 Text field components are used for collecting user provided information.
 
-![Text-field Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-text-field/v-text-field-entry.png)
-
 <PageFeatures />
 
 ## Usage

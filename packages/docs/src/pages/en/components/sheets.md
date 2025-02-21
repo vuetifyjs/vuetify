@@ -18,8 +18,6 @@ features:
 
 The `v-sheet` component is a transformable piece of _paper_ that provides a basic foundation for Vuetify features.
 
-![Sheet Entry](https://cdn.vuetifyjs.com/docs/images/components/v-sheet/v-sheet-entry.png)
-
 <PageFeatures />
 
 ## Usage

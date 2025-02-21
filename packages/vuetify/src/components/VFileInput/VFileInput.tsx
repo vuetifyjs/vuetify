@@ -174,7 +174,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
       return (
         <VInput
           ref={ vInputRef }
-          v-model={ model.value }
+          modelValue={ props.multiple ? model.value : model.value[0] }
           class={[
             'v-file-input',
             {

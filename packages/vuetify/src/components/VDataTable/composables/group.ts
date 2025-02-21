@@ -90,7 +90,7 @@ export function provideGroupBy (options: {
         }
       }
 
-      return arr
+      return [...new Set(arr)]
     }
     return dive({ type: 'group', items, id: 'dummy', key: 'dummy', value: 'dummy', depth: 0 })
   }

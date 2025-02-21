@@ -19,8 +19,6 @@ features:
 
 The bottom sheet is a modified `v-dialog` that slides from the bottom of the screen, similar to a `v-bottom-navigation`.
 
-![Bottom Sheet Entry](https://cdn.vuetifyjs.com/docs/images/components/v-bottom-sheet/v-bottom-sheet-entry.png)
-
 <PageFeatures />
 
 <VoPromotionsCardVuetify />

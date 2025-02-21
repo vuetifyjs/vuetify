@@ -54,9 +54,8 @@
     <v-btn-toggle
       v-model="toggleExclusive"
       color="primary"
+      density="compact"
       variant="plain"
-      dense
-      group
     >
       <v-btn
         :value="1"

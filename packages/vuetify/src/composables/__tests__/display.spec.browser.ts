@@ -2,7 +2,7 @@
 import { createDisplay } from '../display'
 
 // Utilities
-import { page } from '@vitest/browser/context'
+import { page } from '@test'
 
 const breakpoints = [
   'xs',

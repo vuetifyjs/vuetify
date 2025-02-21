@@ -15,10 +15,8 @@
 
     <v-menu
       v-model="showMenu"
-      :position-x="x"
-      :position-y="y"
+      :target="[x, y]"
       absolute
-      offset-y
     >
       <v-list>
         <v-list-item

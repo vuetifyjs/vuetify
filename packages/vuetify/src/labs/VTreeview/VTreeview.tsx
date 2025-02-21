@@ -150,7 +150,6 @@ export const VTreeview = genericComponent<new <T>(
 
     useRender(() => {
       const listProps = VList.filterProps(props)
-
       const treeviewChildrenProps = VTreeviewChildren.filterProps(props)
 
       return (

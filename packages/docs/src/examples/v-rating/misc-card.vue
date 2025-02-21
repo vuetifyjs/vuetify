@@ -20,7 +20,6 @@
         height="125px"
         src="https://cdn.vuetifyjs.com/images/cards/halcyon.png"
         style="flex-basis: 125px"
-        contain
       ></v-img>
     </div>
 
