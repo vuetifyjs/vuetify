@@ -3,7 +3,8 @@ import { VBadge } from '@/components/VBadge'
 import { VChip } from '@/components/VChip'
 
 // Utilities
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { withModifiers } from 'vue'
+import { genericComponent, getPrefixedEventHandlers, propsFactory, useRender } from '@/util'
 
 export const makeVCalendarEventProps = propsFactory({
   allDay: Boolean,
@@ -16,13 +17,25 @@ export const VCalendarEvent = genericComponent()({
 
   props: makeVCalendarEventProps(),
 
-  setup (props) {
+  emits: {
+    'click:event': null,
+    'contextmenu:event': null,
+  },
+
+  setup (props, { attrs, emit, slots }) {
     useRender(() => (
       <VChip
         color={ props.allDay ? 'primary' : undefined }
         density="comfortable"
         label={ props.allDay }
         width="100%"
+        { ...getPrefixedEventHandlers(attrs, ':event', () => ({
+          allDay: props.allDay,
+          day: props.day,
+          event: props.event,
+        }))}
+        onClick={ withModifiers((event: any) => emit('click:event', event, props.event), ['stop']) }
+        onContextmenu={ withModifiers((event: any) => emit('contextmenu:event', event, props.day, props.event), ['stop']) }
       >
         <VBadge
           inline
