@@ -136,6 +136,8 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
       handleItemResize,
       handleScroll,
       handleScrollend,
+      calculateVisibleItems,
+      scrollToIndex,
     } = useVirtual(props, flatItems)
     const displayItems = computed(() => computedItems.value.map(item => item.raw))
 
@@ -271,6 +273,11 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
         </VTable>
       )
     })
+
+    return {
+      calculateVisibleItems,
+      scrollToIndex,
+    }
   },
 })
 
