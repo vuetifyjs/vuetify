@@ -16,8 +16,6 @@ meta:
 
 ---
 
-Building a Basic Application with Vuetify
-
 ## Introduction
 
 In this article, we will build a basic application using Vue.js and Vuetify, leveraging the Nuxt framework.
