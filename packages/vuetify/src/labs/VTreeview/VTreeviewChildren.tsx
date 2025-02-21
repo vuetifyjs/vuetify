@@ -8,7 +8,7 @@ import { IconValue } from '@/composables/icons'
 
 // Utilities
 import { computed, reactive, toRaw, withModifiers } from 'vue'
-import { genericComponent, propsFactory } from '@/util'
+import { genericComponent, noop, propsFactory } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -166,6 +166,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
         slots.item?.({ props: itemProps, item: item.raw, internalItem: item }) ?? (
           <VTreeviewItem
             { ...itemProps }
+            toggleIcon={ noop }
             value={ props.returnObject ? toRaw(item.raw) : itemProps.value }
             v-slots={ slotsWithItem }
           />
