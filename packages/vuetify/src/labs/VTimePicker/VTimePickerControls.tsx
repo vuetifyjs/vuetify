@@ -109,6 +109,8 @@ export const VTimePickerControls = genericComponent()({
               props.useSeconds && (
                 <VBtn
                   key="secondsVal"
+                  active={ props.selecting === 3 }
+                  color={ props.selecting === 3 ? props.color : undefined }
                   variant="tonal"
                   onClick={ () => emit('update:selecting', SelectingTimes.Second) }
                   class={{
