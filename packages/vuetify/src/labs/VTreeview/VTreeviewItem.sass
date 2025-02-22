@@ -7,15 +7,14 @@
       display: none
 
     &__level
-      width: 28px // Hardcode 28px here to match the width of the expand toggle VBtn.
+      width: $treeview-indent-padding
 
   .v-treeview
-    --indent-padding: 0px
-
     &.v-list--disabled .v-list-item__prepend
       pointer-events: auto
 
   .v-treeview-group.v-list-group
+    --indent-padding: #{$treeview-indent-padding}
     --list-indent-size: #{$treeview-group-list-indent-size}
 
     .v-list--slim &
