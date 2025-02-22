@@ -179,7 +179,7 @@ export const VMenu = genericComponent<OverlaySlots>()({
       if (props.disabled) return
 
       const el = overlay.value?.contentEl
-      if (el && isActive.value) {
+      if (el && isActive.value && !e.isComposing) {
         if (e.key === 'ArrowDown') {
           e.preventDefault()
           e.stopImmediatePropagation()
