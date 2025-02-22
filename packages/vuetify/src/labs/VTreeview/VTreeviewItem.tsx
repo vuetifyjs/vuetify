@@ -83,26 +83,29 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
               return (
                 <>
                   <VListItemAction start={ false }>
-                    <VBtn
-                      density="compact"
-                      icon={ props.toggleIcon ?? noop }
-                      disabled={ !props.toggleIcon }
-                      loading={ !!props.toggleIcon && props.loading }
-                      variant="text"
-                      onClick={ props.onToggleExpand }
-                    >
-                      {{
-                        loader () {
-                          return (
-                            <VProgressCircular
-                              indeterminate="disable-shrink"
-                              size="20"
-                              width="2"
-                            />
-                          )
-                        },
-                      }}
-                    </VBtn>
+                    { props.toggleIcon ? (
+                        <VBtn
+                          density="compact"
+                          icon={ props.toggleIcon }
+                          loading={ props.loading }
+                          variant="text"
+                          onClick={ props.onToggleExpand }
+                        >
+                          {{
+                            loader () {
+                              return (
+                                <VProgressCircular
+                                  indeterminate="disable-shrink"
+                                  size="20"
+                                  width="2"
+                                />
+                              )
+                            },
+                          }}
+                        </VBtn>
+                    ) : (
+                      <div class="v-treeview-item__level" />
+                    )}
                   </VListItemAction>
 
                   { slots.prepend?.(slotProps) }
