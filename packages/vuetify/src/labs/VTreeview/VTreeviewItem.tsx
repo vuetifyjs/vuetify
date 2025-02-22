@@ -12,7 +12,7 @@ import { IconValue } from '@/composables/icons'
 
 // Utilities
 import { computed, inject, ref, toRaw } from 'vue'
-import { EventProp, genericComponent, omit, propsFactory, useRender } from '@/util'
+import { EventProp, genericComponent, noop, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import { VTreeviewSymbol } from './shared'
@@ -83,27 +83,26 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
               return (
                 <>
                   <VListItemAction start={ false }>
-                    { props.toggleIcon && (
-                        <VBtn
-                          density="compact"
-                          icon={ props.toggleIcon }
-                          loading={ props.loading }
-                          variant="text"
-                          onClick={ props.onToggleExpand }
-                        >
-                          {{
-                            loader () {
-                              return (
-                                <VProgressCircular
-                                  indeterminate="disable-shrink"
-                                  size="20"
-                                  width="2"
-                                />
-                              )
-                            },
-                          }}
-                        </VBtn>
-                    )}
+                    <VBtn
+                      density="compact"
+                      icon={ props.toggleIcon ?? noop }
+                      disabled={ !props.toggleIcon }
+                      loading={ !!props.toggleIcon && props.loading }
+                      variant="text"
+                      onClick={ props.onToggleExpand }
+                    >
+                      {{
+                        loader () {
+                          return (
+                            <VProgressCircular
+                              indeterminate="disable-shrink"
+                              size="20"
+                              width="2"
+                            />
+                          )
+                        },
+                      }}
+                    </VBtn>
                   </VListItemAction>
 
                   { slots.prepend?.(slotProps) }
