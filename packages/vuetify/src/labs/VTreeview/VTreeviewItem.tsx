@@ -12,7 +12,7 @@ import { IconValue } from '@/composables/icons'
 
 // Utilities
 import { computed, inject, ref, toRaw } from 'vue'
-import { EventProp, genericComponent, noop, omit, propsFactory, useRender } from '@/util'
+import { EventProp, genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import { VTreeviewSymbol } from './shared'
