@@ -3,29 +3,25 @@
 
 @include tools.layer('components')
   .v-treeview-item
-    --list-indent-size: #{$treeview-indent-padding}
+    --list-indent-size: #{$treeview-indent-size}
     &.v-treeview-item--filtered
       display: none
 
     &__level
-      width: #{$treeview-indent-padding}
+      width: #{$treeview-indent-size}
 
   .v-treeview
+    &.v-list 
+      --indent-padding: #{$treeview-indent-padding}
+
     &.v-list--disabled .v-list-item__prepend
       pointer-events: auto
 
   .v-treeview-group.v-list-group
-    & > .v-treeview-item 
-      --list-indent-size: 0px
+    --list-indent-size: 0px
 
     & > .v-treeview-item__level
       width: 0px
 
-    .v-list--slim &
-      --prepend-width: #{$treeview-group-list-prepend-width}
-
     .v-list-group__items .v-list-item
       padding-inline-start: calc(var(--indent-padding)) !important
-
-    .v-list-group__items .v-list-item.v-list-group__header
-      padding-inline-start: calc(#{$treeview-group-header-padding-inline-start} + var(--indent-padding)) !important
