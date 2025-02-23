@@ -104,7 +104,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       if (isFocused.value && !controlsDisabled.value) {
         // ignore external changes
       } else if (model.value == null || controlsDisabled.value) {
-        _inputText.value = model.value && !isNaN(model.value) ? String(model.value) : null
+        _inputText.value = model.value && !isNaN(model.value) ? correctPrecision(model.value) : null
       } else if (!isNaN(model.value)) {
         _inputText.value = correctPrecision(model.value)
       }
