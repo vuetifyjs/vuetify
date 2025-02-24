@@ -12,6 +12,7 @@
           item-value="id"
           activatable
           border
+          fluid
           open-on-click
           rounded
         >

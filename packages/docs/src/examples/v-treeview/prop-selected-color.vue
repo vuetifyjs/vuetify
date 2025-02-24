@@ -2,6 +2,7 @@
   <v-treeview
     :items="items"
     selected-color="red"
+    fluid
     selectable
   ></v-treeview>
 </template>
