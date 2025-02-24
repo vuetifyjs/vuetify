@@ -10,8 +10,11 @@
     &__level
       width: #{$treeview-indent-size}
 
+      .v-treeview--fluid &
+        width: 0
+
   .v-treeview
-    &.v-list 
+    &.v-list
       --indent-padding: #{$treeview-indent-padding}
 
     &.v-list--disabled .v-list-item__prepend

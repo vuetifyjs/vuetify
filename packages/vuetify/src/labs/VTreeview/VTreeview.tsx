@@ -27,6 +27,7 @@ function flatten (items: ListItem[], flat: ListItem[] = []) {
 }
 
 export const makeVTreeviewProps = propsFactory({
+  fluid: Boolean,
   openAll: Boolean,
   search: String,
 
@@ -158,6 +159,9 @@ export const VTreeview = genericComponent<new <T>(
           { ...listProps }
           class={[
             'v-treeview',
+            {
+              'v-treeview--fluid': props.fluid,
+            },
             props.class,
           ]}
           open-strategy="multiple"
