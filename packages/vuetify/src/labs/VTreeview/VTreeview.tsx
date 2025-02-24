@@ -172,6 +172,7 @@ export const VTreeview = genericComponent<new <T>(
         >
           <VTreeviewChildren
             { ...treeviewChildrenProps }
+            density={ props.density }
             returnObject={ props.returnObject }
             items={ items.value }
             v-slots={ slots }
