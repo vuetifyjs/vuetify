@@ -111,11 +111,11 @@ You can make treeview nodes rounded.
 
 <ExamplesExample file="v-treeview/prop-rounded" /> -->
 
-<!-- #### Selectable
+#### Fluid
 
-You can easily select treeview nodes and children.
+The **fluid** prop removes the extra indentation used to line up children. This is useful when you want to reduce the horizontal space used by the treeview.
 
-<ExamplesExample file="v-treeview/prop-selectable" /> -->
+<ExamplesExample file="v-treeview/prop-fluid" />
 
 #### Selected color
 
@@ -144,6 +144,12 @@ The `v-treeview` component has several slots that allow you to customize the app
 Using the the **prepend** slot we are able to create an intuitive file explorer.
 
 <ExamplesExample file="v-treeview/slot-append-and-label" />
+
+#### Title
+
+In this example we use a custom **title** slot to apply a line-through the treeview item's text when selected.
+
+<ExamplesExample file="v-treeview/slot-title" />
 
 ## Examples
 
