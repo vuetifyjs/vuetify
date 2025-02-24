@@ -59,6 +59,12 @@ A basic example of the treeview component.
 
 <ApiInline hide-links />
 
+::: error
+
+There is a [bug](https://github.com/vuejs/babel-plugin-jsx/issues/712) related to how [babel-plugin-jsx](https://github.com/vuejs/babel-plugin-jsx) renders templates that degrades VTreeview performance. We are tracking the issue [here](https://github.com/vuetifyjs/vuetify/issues/19919).
+
+:::
+
 ## Guide
 
 The `v-treeview` component is useful for displaying large amounts of nested data. It is a tree structure that can be expanded and collapsed, allowing users to navigate through the hierarchy of items.
