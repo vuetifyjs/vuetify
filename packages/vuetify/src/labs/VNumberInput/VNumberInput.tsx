@@ -143,6 +143,23 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
     const incrementSlotProps = computed(() => ({ click: onClickUp }))
     const decrementSlotProps = computed(() => ({ click: onClickDown }))
 
+    // Control holding down states
+    let hldDwnReqNextTime = 0
+    let hldDwnReq = -1
+    const hldDwnReqDelay = 100
+    const hldDwnDelay = 500
+    let hldDwn: null | 'up' | 'down' = null
+    let hldDwnTimeout = -1
+
+    function controlHoldingDownWatcher (time: number) {
+      hldDwnReq = requestAnimationFrame(controlHoldingDownWatcher)
+      if (time < hldDwnReqNextTime) return
+      hldDwnReqNextTime = time + hldDwnReqDelay
+
+      if (hldDwn) {
+        toggleUpDown(hldDwn === 'up')
+      }
+    }
     watch(() => props.precision, () => formatInputValue())
 
     onMounted(() => {
@@ -170,16 +187,6 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       } else {
         if (canDecrease.value) inputText.value = correctPrecision(model.value - props.step, inferredPrecision)
       }
-    }
-
-    function onClickUp (e: MouseEvent) {
-      e.stopPropagation()
-      toggleUpDown()
-    }
-
-    function onClickDown (e: MouseEvent) {
-      e.stopPropagation()
-      toggleUpDown(false)
     }
 
     function onBeforeinput (e: InputEvent) {
@@ -229,8 +236,41 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       }
     }
 
-    function onControlMousedown (e: MouseEvent) {
+    function onClickUp (e: MouseEvent) {
       e.stopPropagation()
+      toggleUpDown()
+    }
+
+    function onClickDown (e: MouseEvent) {
+      e.stopPropagation()
+      toggleUpDown(false)
+    }
+
+    function onControlMouseup (e: MouseEvent) {
+      e.preventDefault()
+      e.stopPropagation()
+
+      cancelAnimationFrame(hldDwnReq)
+      clearTimeout(hldDwnTimeout)
+      hldDwn = null
+    }
+
+    function onUpControlMousedown (e: MouseEvent) {
+      e.stopPropagation()
+
+      hldDwnReq = requestAnimationFrame(controlHoldingDownWatcher)
+      hldDwnTimeout = window.setTimeout(() => {
+        hldDwn = 'up'
+      }, hldDwnDelay)
+    }
+
+    function onDownControlMousedown (e: MouseEvent) {
+      e.stopPropagation()
+
+      hldDwnReq = requestAnimationFrame(controlHoldingDownWatcher)
+      hldDwnTimeout = window.setTimeout(() => {
+        hldDwn = 'down'
+      }, hldDwnDelay)
     }
 
     function clampModel () {
@@ -288,7 +328,8 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
             aria-hidden="true"
             icon={ incrementIcon.value }
             onClick={ onClickUp }
-            onMousedown={ onControlMousedown }
+            onMouseup={ onControlMouseup }
+            onMousedown={ onUpControlMousedown }
             size={ controlNodeSize.value }
             tabindex="-1"
           />
@@ -323,7 +364,8 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
             size={ controlNodeSize.value }
             tabindex="-1"
             onClick={ onClickDown }
-            onMousedown={ onControlMousedown }
+            onMouseup={ onControlMouseup }
+            onMousedown={ onDownControlMousedown }
           />
         ) : (
           <VDefaultsProvider
