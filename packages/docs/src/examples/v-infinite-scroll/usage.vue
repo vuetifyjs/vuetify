@@ -49,7 +49,13 @@
     return {
       height: 300,
       ':items': 'items',
-      ':onLoad': 'load',
+    }
+  })
+
+  const propsWithEvents = computed(() => {
+    return {
+      ...props.value,
+      onLoad: 'load',
     }
   })
 
@@ -64,7 +70,7 @@
   })
 
   const code = computed(() => {
-    return `<v-infinite-scroll${propsToString(props.value)}>${slots.value}</v-infinite-scroll>`
+    return `<v-infinite-scroll${propsToString(propsWithEvents.value)}>${slots.value}</v-infinite-scroll>`
   })
 
   const script = computed(() => {
