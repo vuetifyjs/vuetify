@@ -37,6 +37,7 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
     next: null,
     prev: null,
     'update:modelValue': null,
+    'click:date': (value: any, e: MouseEvent) => true,
   },
 
   setup (props, { emit, slots }) {
@@ -156,6 +157,7 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
                           v-slots={{
                             event: slots.event,
                           }}
+                          onClick={ (e: MouseEvent) => emit('click:date', day, e) }
                         ></VCalendarMonthDay>
                       )),
                     ]
