@@ -1,7 +1,7 @@
 <template>
   <v-treeview
     :items="items"
-    selectable
+    fluid
   ></v-treeview>
 </template>
 
