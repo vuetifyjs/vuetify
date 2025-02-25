@@ -56,6 +56,7 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
       if (props.viewMode === 'day') {
         model.value = [adapter.addDays(displayValue.value, 1)]
       }
+      emit('next')
     }
 
     function onClickPrev () {
@@ -68,6 +69,7 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
       if (props.viewMode === 'day') {
         model.value = [adapter.addDays(displayValue.value, -1)]
       }
+      emit('prev')
     }
 
     function onClickToday () {
