@@ -1,7 +1,7 @@
 ---
 meta:
   title: Overflow
-  description: Overflow helper classes allow you to configure how content overflows when it beocomes too large.
+  description: Overflow helper classes allow you to configure how content overflows when it becomes too large.
   keywords: overflow helper classes, overflow classes, vuetify overflow
 related:
   - /styles/elevation/
