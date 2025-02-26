@@ -59,7 +59,7 @@ const makeVNumberInputProps = propsFactory({
     default: 0,
   },
 
-  ...omit(makeVTextFieldProps({}), ['modelValue']),
+  ...omit(makeVTextFieldProps(), ['modelValue', 'validationValue']),
 }, 'VNumberInput')
 
 export const VNumberInput = genericComponent<VNumberInputSlots>()({
@@ -393,6 +393,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
         <VTextField
           ref={ vTextFieldRef }
           v-model={ inputText.value }
+          validationValue={ model.value }
           onBeforeinput={ onBeforeinput }
           onFocus={ onFocus }
           onBlur={ onBlur }
