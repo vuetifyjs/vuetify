@@ -2,6 +2,7 @@
 import './VDatePickerMonth.sass'
 
 // Components
+import { VBadge } from '@/components/VBadge'
 import { VBtn } from '@/components/VBtn'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 
@@ -12,10 +13,18 @@ import { MaybeTransition } from '@/composables/transition'
 
 // Utilities
 import { computed, ref, shallowRef, watch } from 'vue'
-import { genericComponent, omit, propsFactory } from '@/util'
+import { genericComponent, omit, propsFactory, wrapInArray } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+
+export type DatePickerEventColorValue = string | string[]
+
+export type DatePickerEventColors = DatePickerEventColorValue |
+Record<string, DatePickerEventColorValue> | ((date: string) => DatePickerEventColorValue)
+
+export type DatePickerEvents = string[] |
+((date: string) => boolean | DatePickerEventColorValue) | Record<string, DatePickerEventColorValue>
 
 export type VDatePickerMonthSlots = {
   day: {
@@ -40,7 +49,14 @@ export const makeVDatePickerMonthProps = propsFactory({
     type: String,
     default: 'picker-reverse-transition',
   },
-
+  events: {
+    type: [Array, Function, Object] as PropType<DatePickerEvents | null>,
+    default: () => null,
+  },
+  eventColor: {
+    type: [Array, Function, Object, String] as PropType<DatePickerEventColors>,
+    default: () => 'warning',
+  },
   ...omit(makeCalendarProps(), ['displayValue']),
 }, 'VDatePickerMonth')
 
@@ -152,6 +168,53 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
       }
     }
 
+    function getEventColors (date: string): string[] {
+      let eventData: boolean | DatePickerEventColorValue
+      let eventColors: string[] = []
+
+      if (Array.isArray(props.events)) {
+        eventData = props.events.includes(date)
+      } else if (props.events instanceof Function) {
+        eventData = props.events(date) || false
+      } else if (props.events) {
+        eventData = props.events[date] || false
+      } else {
+        eventData = false
+      }
+
+      if (!eventData) {
+        return []
+      } else if (eventData !== true) {
+        eventColors = wrapInArray(eventData)
+      } else if (typeof props.eventColor === 'string') {
+        eventColors = [props.eventColor]
+      } else if (typeof props.eventColor === 'function') {
+        eventColors = wrapInArray(props.eventColor(date))
+      } else if (Array.isArray(props.eventColor)) {
+        eventColors = props.eventColor
+      } else {
+        eventColors = wrapInArray(props.eventColor[date])
+      }
+
+      return eventColors.filter(v => v)
+    }
+
+    function genEvents (date: string): JSX.Element | null {
+      const eventColors = getEventColors(date)
+
+      if (!eventColors.length) return null
+
+      return (
+        <div class="v-date-picker-month__events">
+          { eventColors.map((color: string) => {
+            return (
+              <VBadge dot color={ color } />
+            )
+          })}
+        </div>
+      )
+    }
+
     return () => (
       <div class="v-date-picker-month">
         { props.showWeek && (
@@ -224,7 +287,6 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
                           disabled: item.isDisabled,
                           icon: true,
                           ripple: false,
-                          text: item.localized,
                           variant: item.isDisabled
                             ? item.isToday ? 'outlined' : 'text'
                             : item.isToday && !item.isSelected ? 'outlined' : 'flat',
@@ -233,7 +295,10 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
                       }}
                     >
                       { slots.day?.(slotProps) ?? (
-                        <VBtn { ...slotProps.props } />
+                        <VBtn { ...slotProps.props }>
+                        { item.localized }
+                        { genEvents(item.isoDate) }
+                      </VBtn>
                       )}
                     </VDefaultsProvider>
                   )}
