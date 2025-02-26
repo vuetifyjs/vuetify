@@ -2,12 +2,13 @@
 import './VNumberInput.sass'
 
 // Components
-import { VBtn } from '../../components/VBtn'
-import { VDefaultsProvider } from '../../components/VDefaultsProvider'
-import { VDivider } from '../../components/VDivider'
+import { VBtn } from '@/components/VBtn'
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
+import { VDivider } from '@/components/VDivider'
 import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextField'
 
 // Composables
+import { useHold } from './hold'
 import { useForm } from '@/composables/form'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { useProxiedModel } from '@/composables/proxiedModel'
@@ -19,7 +20,6 @@ import { clamp, genericComponent, omit, propsFactory, useRender } from '@/util'
 // Types
 import type { PropType } from 'vue'
 import type { VTextFieldSlots } from '@/components/VTextField/VTextField'
-import { useHold } from '@/labs/VNumberInput/hold.ts'
 
 type ControlSlot = {
   props: Record<string, unknown>
