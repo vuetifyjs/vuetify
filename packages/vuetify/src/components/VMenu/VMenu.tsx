@@ -176,10 +176,10 @@ export const VMenu = genericComponent<OverlaySlots>()({
     }
 
     function onActivatorKeydown (e: KeyboardEvent) {
-      if (props.disabled) return
+      if (props.disabled || e.isComposing) return
 
       const el = overlay.value?.contentEl
-      if (el && isActive.value && !e.isComposing) {
+      if (el && isActive.value) {
         if (e.key === 'ArrowDown') {
           e.preventDefault()
           e.stopImmediatePropagation()
