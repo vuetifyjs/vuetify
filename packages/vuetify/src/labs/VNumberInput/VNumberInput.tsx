@@ -144,20 +144,22 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
     const decrementSlotProps = computed(() => ({ click: onClickDown }))
 
     // Control holding down states
-    let hldDwnReqNextTime = 0
-    let hldDwnReq = -1
-    const hldDwnReqDelay = 100
-    const hldDwnDelay = 500
-    let hldDwn: null | 'up' | 'down' = null
-    let hldDwnTimeout = -1
+    const HOLD_REPEAT = 100
+    const HOLD_DELAY = 500
+    const hold = {
+      nextTime: 0,
+      raf: -1,
+      timeout: -1,
+      current: null as null | 'up' | 'down',
+    }
 
     function controlHoldingDownWatcher (time: number) {
-      hldDwnReq = requestAnimationFrame(controlHoldingDownWatcher)
-      if (time < hldDwnReqNextTime) return
-      hldDwnReqNextTime = time + hldDwnReqDelay
+      hold.raf = requestAnimationFrame(controlHoldingDownWatcher)
+      if (time < hold.nextTime) return
+      hold.nextTime = time + HOLD_REPEAT
 
-      if (hldDwn) {
-        toggleUpDown(hldDwn === 'up')
+      if (hold.current) {
+        toggleUpDown(hold.current === 'up')
       }
     }
     watch(() => props.precision, () => formatInputValue())
@@ -250,27 +252,27 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       e.preventDefault()
       e.stopPropagation()
 
-      cancelAnimationFrame(hldDwnReq)
-      clearTimeout(hldDwnTimeout)
-      hldDwn = null
+      cancelAnimationFrame(hold.raf)
+      clearTimeout(hold.timeout)
+      hold.current = null
     }
 
     function onUpControlMousedown (e: MouseEvent) {
       e.stopPropagation()
 
-      hldDwnReq = requestAnimationFrame(controlHoldingDownWatcher)
-      hldDwnTimeout = window.setTimeout(() => {
-        hldDwn = 'up'
-      }, hldDwnDelay)
+      hold.raf = requestAnimationFrame(controlHoldingDownWatcher)
+      hold.timeout = window.setTimeout(() => {
+        hold.current = 'up'
+      }, HOLD_DELAY)
     }
 
     function onDownControlMousedown (e: MouseEvent) {
       e.stopPropagation()
 
-      hldDwnReq = requestAnimationFrame(controlHoldingDownWatcher)
-      hldDwnTimeout = window.setTimeout(() => {
-        hldDwn = 'down'
-      }, hldDwnDelay)
+      hold.raf = requestAnimationFrame(controlHoldingDownWatcher)
+      hold.timeout = window.setTimeout(() => {
+        hold.current = 'down'
+      }, HOLD_DELAY)
     }
 
     function clampModel () {
