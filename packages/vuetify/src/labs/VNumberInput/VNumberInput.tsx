@@ -19,9 +19,10 @@ import { clamp, genericComponent, omit, propsFactory, useRender } from '@/util'
 // Types
 import type { PropType } from 'vue'
 import type { VTextFieldSlots } from '@/components/VTextField/VTextField'
+import { useHold } from '@/labs/VNumberInput/hold.ts'
 
 type ControlSlot = {
-  click: (e: MouseEvent) => void
+  props: Record<string, unknown>
 }
 
 type VNumberInputSlots = Omit<VTextFieldSlots, 'default'> & {
@@ -76,6 +77,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
   setup (props, { slots }) {
     const vTextFieldRef = ref<VTextField | undefined>()
 
+    const { holdStart, holdStop } = useHold({ toggleUpDown })
     const form = useForm(props)
     const controlsDisabled = computed(() => (
       form.isDisabled.value || form.isReadonly.value
@@ -140,28 +142,21 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
     const controlNodeSize = computed(() => controlVariant.value === 'split' ? 'default' : 'small')
     const controlNodeDefaultHeight = computed(() => controlVariant.value === 'stacked' ? 'auto' : '100%')
 
-    const incrementSlotProps = computed(() => ({ click: onClickUp }))
-    const decrementSlotProps = computed(() => ({ click: onClickDown }))
+    const incrementSlotProps = computed(() => ({
+      props: {
+        onClick: onControlClick,
+        onPointerup: onControlMouseup,
+        onPointerdown: onUpControlMousedown,
+      },
+    }))
+    const decrementSlotProps = computed(() => ({
+      props: {
+        onClick: onControlClick,
+        onPointerup: onControlMouseup,
+        onPointerdown: onDownControlMousedown,
+      },
+    }))
 
-    // Control holding down states
-    const HOLD_REPEAT = 100
-    const HOLD_DELAY = 500
-    const hold = {
-      nextTime: 0,
-      raf: -1,
-      timeout: -1,
-      current: null as null | 'up' | 'down',
-    }
-
-    function controlHoldingDownWatcher (time: number) {
-      hold.raf = requestAnimationFrame(controlHoldingDownWatcher)
-      if (time < hold.nextTime) return
-      hold.nextTime = time + HOLD_REPEAT
-
-      if (hold.current) {
-        toggleUpDown(hold.current === 'up')
-      }
-    }
     watch(() => props.precision, () => formatInputValue())
 
     onMounted(() => {
@@ -238,41 +233,27 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       }
     }
 
-    function onClickUp (e: MouseEvent) {
+    function onControlClick (e: MouseEvent) {
       e.stopPropagation()
-      toggleUpDown()
     }
 
-    function onClickDown (e: MouseEvent) {
-      e.stopPropagation()
-      toggleUpDown(false)
-    }
-
-    function onControlMouseup (e: MouseEvent) {
+    function onControlMouseup (e: PointerEvent) {
+      e.currentTarget?.releasePointerCapture(e.pointerId)
       e.preventDefault()
       e.stopPropagation()
-
-      cancelAnimationFrame(hold.raf)
-      clearTimeout(hold.timeout)
-      hold.current = null
+      holdStop()
     }
 
-    function onUpControlMousedown (e: MouseEvent) {
+    function onUpControlMousedown (e: PointerEvent) {
+      e.currentTarget?.setPointerCapture(e.pointerId)
       e.stopPropagation()
-
-      hold.raf = requestAnimationFrame(controlHoldingDownWatcher)
-      hold.timeout = window.setTimeout(() => {
-        hold.current = 'up'
-      }, HOLD_DELAY)
+      holdStart('up')
     }
 
-    function onDownControlMousedown (e: MouseEvent) {
+    function onDownControlMousedown (e: PointerEvent) {
+      e.currentTarget?.setPointerCapture(e.pointerId)
       e.stopPropagation()
-
-      hold.raf = requestAnimationFrame(controlHoldingDownWatcher)
-      hold.timeout = window.setTimeout(() => {
-        hold.current = 'down'
-      }, HOLD_DELAY)
+      holdStart('down')
     }
 
     function clampModel () {
@@ -329,9 +310,9 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
             data-testid="increment"
             aria-hidden="true"
             icon={ incrementIcon.value }
-            onClick={ onClickUp }
-            onMouseup={ onControlMouseup }
-            onMousedown={ onUpControlMousedown }
+            onClick={ onControlClick }
+            onPointerup={ onControlMouseup }
+            onPointerdown={ onUpControlMousedown }
             size={ controlNodeSize.value }
             tabindex="-1"
           />
@@ -365,9 +346,9 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
             icon={ decrementIcon.value }
             size={ controlNodeSize.value }
             tabindex="-1"
-            onClick={ onClickDown }
-            onMouseup={ onControlMouseup }
-            onMousedown={ onDownControlMousedown }
+            onClick={ onControlClick }
+            onPointerup={ onControlMouseup }
+            onPointerdown={ onDownControlMousedown }
           />
         ) : (
           <VDefaultsProvider
