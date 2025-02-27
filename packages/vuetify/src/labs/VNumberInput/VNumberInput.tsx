@@ -2,12 +2,13 @@
 import './VNumberInput.sass'
 
 // Components
-import { VBtn } from '../../components/VBtn'
-import { VDefaultsProvider } from '../../components/VDefaultsProvider'
-import { VDivider } from '../../components/VDivider'
+import { VBtn } from '@/components/VBtn'
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
+import { VDivider } from '@/components/VDivider'
 import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextField'
 
 // Composables
+import { useHold } from './hold'
 import { useForm } from '@/composables/form'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { useProxiedModel } from '@/composables/proxiedModel'
@@ -21,7 +22,7 @@ import type { PropType } from 'vue'
 import type { VTextFieldSlots } from '@/components/VTextField/VTextField'
 
 type ControlSlot = {
-  click: (e: MouseEvent) => void
+  props: Record<string, unknown>
 }
 
 type VNumberInputSlots = Omit<VTextFieldSlots, 'default'> & {
@@ -76,6 +77,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
   setup (props, { slots }) {
     const vTextFieldRef = ref<VTextField | undefined>()
 
+    const { holdStart, holdStop } = useHold({ toggleUpDown })
     const form = useForm(props)
     const controlsDisabled = computed(() => (
       form.isDisabled.value || form.isReadonly.value
@@ -140,8 +142,20 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
     const controlNodeSize = computed(() => controlVariant.value === 'split' ? 'default' : 'small')
     const controlNodeDefaultHeight = computed(() => controlVariant.value === 'stacked' ? 'auto' : '100%')
 
-    const incrementSlotProps = computed(() => ({ click: onClickUp }))
-    const decrementSlotProps = computed(() => ({ click: onClickDown }))
+    const incrementSlotProps = computed(() => ({
+      props: {
+        onClick: onControlClick,
+        onPointerup: onControlMouseup,
+        onPointerdown: onUpControlMousedown,
+      },
+    }))
+    const decrementSlotProps = computed(() => ({
+      props: {
+        onClick: onControlClick,
+        onPointerup: onControlMouseup,
+        onPointerdown: onDownControlMousedown,
+      },
+    }))
 
     watch(() => props.precision, () => formatInputValue())
 
@@ -170,16 +184,6 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       } else {
         if (canDecrease.value) inputText.value = correctPrecision(model.value - props.step, inferredPrecision)
       }
-    }
-
-    function onClickUp (e: MouseEvent) {
-      e.stopPropagation()
-      toggleUpDown()
-    }
-
-    function onClickDown (e: MouseEvent) {
-      e.stopPropagation()
-      toggleUpDown(false)
     }
 
     function onBeforeinput (e: InputEvent) {
@@ -229,8 +233,32 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       }
     }
 
-    function onControlMousedown (e: MouseEvent) {
+    function onControlClick (e: MouseEvent) {
       e.stopPropagation()
+    }
+
+    function onControlMouseup (e: PointerEvent) {
+      const el = e.currentTarget as HTMLElement
+      el?.releasePointerCapture(e.pointerId)
+      e.preventDefault()
+      e.stopPropagation()
+      holdStop()
+    }
+
+    function onUpControlMousedown (e: PointerEvent) {
+      const el = e.currentTarget as HTMLElement
+      el?.setPointerCapture(e.pointerId)
+      e.preventDefault()
+      e.stopPropagation()
+      holdStart('up')
+    }
+
+    function onDownControlMousedown (e: PointerEvent) {
+      const el = e.currentTarget as HTMLElement
+      el?.setPointerCapture(e.pointerId)
+      e.preventDefault()
+      e.stopPropagation()
+      holdStart('down')
     }
 
     function clampModel () {
@@ -287,8 +315,9 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
             data-testid="increment"
             aria-hidden="true"
             icon={ incrementIcon.value }
-            onClick={ onClickUp }
-            onMousedown={ onControlMousedown }
+            onClick={ onControlClick }
+            onPointerup={ onControlMouseup }
+            onPointerdown={ onUpControlMousedown }
             size={ controlNodeSize.value }
             tabindex="-1"
           />
@@ -322,8 +351,9 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
             icon={ decrementIcon.value }
             size={ controlNodeSize.value }
             tabindex="-1"
-            onClick={ onClickDown }
-            onMousedown={ onControlMousedown }
+            onClick={ onControlClick }
+            onPointerup={ onControlMouseup }
+            onPointerdown={ onDownControlMousedown }
           />
         ) : (
           <VDefaultsProvider
