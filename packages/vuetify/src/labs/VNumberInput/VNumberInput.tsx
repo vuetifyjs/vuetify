@@ -238,20 +238,23 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
     }
 
     function onControlMouseup (e: PointerEvent) {
-      e.currentTarget?.releasePointerCapture(e.pointerId)
+      const el = e.currentTarget as HTMLElement
+      el?.releasePointerCapture(e.pointerId)
       e.preventDefault()
       e.stopPropagation()
       holdStop()
     }
 
     function onUpControlMousedown (e: PointerEvent) {
-      e.currentTarget?.setPointerCapture(e.pointerId)
+      const el = e.currentTarget as HTMLElement
+      el?.setPointerCapture(e.pointerId)
       e.stopPropagation()
       holdStart('up')
     }
 
     function onDownControlMousedown (e: PointerEvent) {
-      e.currentTarget?.setPointerCapture(e.pointerId)
+      const el = e.currentTarget as HTMLElement
+      el?.setPointerCapture(e.pointerId)
       e.stopPropagation()
       holdStart('down')
     }
