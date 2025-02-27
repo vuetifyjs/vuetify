@@ -83,7 +83,7 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
               return (
                 <>
                   <VListItemAction start={ false }>
-                    { props.toggleIcon && (
+                    { props.toggleIcon ? (
                         <VBtn
                           density="compact"
                           icon={ props.toggleIcon }
@@ -103,6 +103,8 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
                             },
                           }}
                         </VBtn>
+                    ) : (
+                      <div class="v-treeview-item__level" />
                     )}
                   </VListItemAction>
 

@@ -27,7 +27,7 @@ self.addEventListener('install', event => {
         messageSW(self.registration.active, { type: 'GET_MANIFEST' })
           .then(manifest => {
             PREVIOUS_MANIFEST = manifest
-            console.log('[SW] Recieved manifest')
+            console.log('[SW] Received manifest')
           }),
       ])
     }

@@ -18,6 +18,7 @@ import { genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/
 // Types
 import type { PropType } from 'vue'
 import type { StrategyProps } from '@/components/VOverlay/locationStrategies'
+import type { VTextFieldSlots } from '@/components/VTextField/VTextField'
 
 // Types
 export type VDateInputActionsSlot = {
@@ -26,7 +27,7 @@ export type VDateInputActionsSlot = {
   isPristine: boolean
 }
 
-export type VDateInputSlots = {
+export type VDateInputSlots = Omit<VTextFieldSlots, 'default'> & {
   actions: VDateInputActionsSlot
   default: never
 }
