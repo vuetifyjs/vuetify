@@ -73,7 +73,7 @@ export const makeVFieldProps = propsFactory({
     type: Boolean,
     default: null,
   },
-  labelId: { type: String, default: undefined },
+  labelId: String,
   error: Boolean,
   flat: Boolean,
   label: String,
