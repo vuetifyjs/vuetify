@@ -9,6 +9,7 @@ import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextFi
 
 // Composables
 import { useHold } from './hold'
+import { useFocus } from '@/composables/focus'
 import { useForm } from '@/composables/form'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { useProxiedModel } from '@/composables/proxiedModel'
@@ -83,7 +84,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       form.isDisabled.value || form.isReadonly.value
     ))
 
-    const isFocused = ref(false)
+    const { isFocused, focus, blur } = useFocus(props)
 
     function correctPrecision (val: number, precision = props.precision) {
       const fixed = precision == null
@@ -293,12 +294,12 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
     }
 
     function onFocus () {
-      isFocused.value = true
+      focus()
       trimDecimalZeros()
     }
 
     function onBlur () {
-      isFocused.value = false
+      blur()
       clampModel()
     }
 
