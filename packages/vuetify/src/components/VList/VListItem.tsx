@@ -202,6 +202,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
 
     function onKeyDown (e: KeyboardEvent) {
       const target = e.target as HTMLElement
+
       if (['INPUT', 'TEXTAREA'].includes(target.tagName)) return
 
       if (e.key === 'Enter' || e.key === ' ') {
