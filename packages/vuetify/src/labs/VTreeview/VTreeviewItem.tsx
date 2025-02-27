@@ -3,6 +3,7 @@ import './VTreeviewItem.sass'
 
 // Components
 import { VBtn } from '@/components/VBtn'
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VListItemAction } from '@/components/VList'
 import { makeVListItemProps, VListItem } from '@/components/VList/VListItem'
 import { VProgressCircular } from '@/components/VProgressCircular'
@@ -26,7 +27,13 @@ export const makeVTreeviewItemProps = propsFactory({
   ...makeVListItemProps({ slim: true }),
 }, 'VTreeviewItem')
 
-export const VTreeviewItem = genericComponent<VListItemSlots>()({
+export type VTreeviewItemSlots = VListItemSlots & {
+  toggle: {
+    props: { onClick?: (e: MouseEvent) => void }
+  }
+}
+
+export const VTreeviewItem = genericComponent<VTreeviewItemSlots>()({
   name: 'VTreeviewItem',
 
   props: makeVTreeviewItemProps(),
@@ -50,6 +57,12 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
       (props.link || vListItemRefIsClickable.value || isActivatableGroupActivator.value)
     )
     const isFiltered = computed(() => visibleIds.value && !visibleIds.value.has(toRaw(vListItemRef.value?.id)))
+
+    const toggleProps = computed(() => ({
+      props: {
+        onClick: props.onToggleExpand,
+      },
+    }))
 
     function activateGroupActivator (e: MouseEvent | KeyboardEvent) {
       if (isClickable.value && isActivatableGroupActivator.value) {
@@ -84,25 +97,49 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
                 <>
                   <VListItemAction start={ false }>
                     { props.toggleIcon ? (
-                        <VBtn
-                          density="compact"
-                          icon={ props.toggleIcon }
-                          loading={ props.loading }
-                          variant="text"
-                          onClick={ props.onToggleExpand }
-                        >
-                          {{
-                            loader () {
-                              return (
-                                <VProgressCircular
-                                  indeterminate="disable-shrink"
-                                  size="20"
-                                  width="2"
-                                />
-                              )
-                            },
-                          }}
-                        </VBtn>
+                      <>
+                        { !slots.toggle ? (
+                          <VBtn
+                            key="prepend-toggle"
+                            density="compact"
+                            icon={ props.toggleIcon }
+                            loading={ props.loading }
+                            variant="text"
+                            onClick={ props.onToggleExpand }
+                          >
+                            {{
+                              loader () {
+                                return (
+                                  <VProgressCircular
+                                    indeterminate="disable-shrink"
+                                    size="20"
+                                    width="2"
+                                  />
+                                )
+                              },
+                            }}
+                          </VBtn>
+                        ) : (
+                          <VDefaultsProvider
+                            key="prepend-defaults"
+                            defaults={{
+                              VBtn: {
+                                density: 'compact',
+                                icon: props.toggleIcon,
+                                variant: 'text',
+                                loading: props.loading,
+                              },
+                              VProgressCircular: {
+                                indeterminate: 'disable-shrink',
+                                size: 20,
+                                width: 2,
+                              },
+                            }}
+                          >
+                            { slots.toggle(toggleProps.value) }
+                          </VDefaultsProvider>
+                        )}
+                      </>
                     ) : (
                       <div class="v-treeview-item__level" />
                     )}
