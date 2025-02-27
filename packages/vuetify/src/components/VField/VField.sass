@@ -8,16 +8,16 @@
 @include tools.layer('components')
   /* region INPUT */
   .v-field
-    display: grid
-    grid-template-areas: "prepend-inner field clear append-inner"
-    grid-template-columns: min-content minmax(0, 1fr) min-content min-content
+    align-items: center
+    display: flex
+    flex-direction: row
+    gap: $field-flex-gap
     font-size: $field-font-size
     letter-spacing: $field-letter-spacing
     max-width: $field-max-width
     border-radius: $field-border-radius
     contain: layout
     flex: 1 0
-    grid-area: control
     position: relative
 
     --v-theme-overlay-multiplier: 1
@@ -163,7 +163,6 @@
 
   .v-field__field
     flex: 1 0
-    grid-area: field
     position: relative
     align-items: flex-start
     display: flex
@@ -171,14 +170,9 @@
   /* endregion */
   /* region AFFIXES */
   .v-field__prepend-inner
-    grid-area: prepend-inner
     padding-inline-end: var(--v-field-padding-after)
 
-  .v-field__clearable
-    grid-area: clear
-
   .v-field__append-inner
-    grid-area: append-inner
     padding-inline-start: var(--v-field-padding-after)
 
   .v-field__append-inner,
@@ -225,7 +219,6 @@
     cursor: pointer
     opacity: 0
     overflow: hidden
-    margin-inline: $field-clearable-margin
     transition: $field-transition-timing
     transition-property: opacity, transform, width
 
