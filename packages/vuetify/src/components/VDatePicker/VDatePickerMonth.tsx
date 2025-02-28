@@ -53,6 +53,7 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
     'update:modelValue': (date: unknown) => true,
     'update:month': (date: number) => true,
     'update:year': (date: number) => true,
+    'click:date': (date: Date) => true,
   },
 
   setup (props, { emit, slots }) {
@@ -150,6 +151,7 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
       } else {
         model.value = [value]
       }
+      emit('click:date', value as Date)
     }
 
     return () => (
