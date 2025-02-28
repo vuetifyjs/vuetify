@@ -11,6 +11,12 @@ export default {
     noResultsText: 'Uyğun məlumat tapılmadı',
     loadingText: 'Yüklənir... Zəhmət olmasa, gözləyin.',
   },
+  select: {
+    ariaLabel: {
+      checked: 'Checked',
+      unchecked: 'Not Checked',
+    },
+  },
   dataTable: {
     itemsPerPageText: 'Səhifə başı sətir sayı:',
     ariaLabel: {

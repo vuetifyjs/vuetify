@@ -440,7 +440,10 @@ export const VSelect = genericComponent<new <
                                         modelValue={ isSelected }
                                         ripple={ false }
                                         tabindex="-1"
-                                        aria-label={ isSelected ? 'checked' : 'not checked' }
+                                        aria-label={ isSelected
+                                          ? t('$vuetify.select.ariaLabel.checked')
+                                          : t('$vuetify.select.ariaLabel.unchecked')
+                                        }
                                       />
                                     ) : undefined }
 

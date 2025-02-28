@@ -11,6 +11,12 @@ export default {
     noResultsText: 'В результаті пошуку нічого не знайдено',
     loadingText: 'Завантаження...',
   },
+  select: {
+    ariaLabel: {
+      checked: 'Checked',
+      unchecked: 'Not Checked',
+    },
+  },
   dataTable: {
     itemsPerPageText: 'Рядків на сторінці:',
     ariaLabel: {

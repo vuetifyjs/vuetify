@@ -11,6 +11,12 @@ export default {
     noResultsText: '일치하는 항목이 없습니다.',
     loadingText: '불러오는 중...',
   },
+  select: {
+    ariaLabel: {
+      checked: 'Checked',
+      unchecked: 'Not Checked',
+    },
+  },
   dataTable: {
     itemsPerPageText: '페이지 당 행 수:',
     ariaLabel: {

@@ -11,6 +11,12 @@ export default {
     noResultsText: 'Ни један запис није пронађен',
     loadingText: 'Учитавање ставке...',
   },
+  select: {
+    ariaLabel: {
+      checked: 'Checked',
+      unchecked: 'Not Checked',
+    },
+  },
   dataTable: {
     itemsPerPageText: 'Редова по страници:',
     ariaLabel: {

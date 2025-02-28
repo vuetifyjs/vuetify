@@ -11,6 +11,12 @@ export default {
     noResultsText: 'Tidak ditemukan catatan yang cocok',
     loadingText: 'Memuat data...',
   },
+  select: {
+    ariaLabel: {
+      checked: 'Checked',
+      unchecked: 'Not Checked',
+    },
+  },
   dataTable: {
     itemsPerPageText: 'Baris per halaman:',
     ariaLabel: {

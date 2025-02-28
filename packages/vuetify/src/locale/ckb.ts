@@ -11,6 +11,12 @@ export default {
     noResultsText: 'هیچ تۆمارێکی هاوتا نەدۆزرایەوە',
     loadingText: 'بارکردنی ئایتمەکان...',
   },
+  select: {
+    ariaLabel: {
+      checked: 'Checked',
+      unchecked: 'Not Checked',
+    },
+  },
   dataTable: {
     itemsPerPageText: 'ڕیزەکان بۆ هەر پەڕەیەک:',
     ariaLabel: {

@@ -11,6 +11,12 @@ export default {
     noResultsText: 'Nijedan zapis nije pronađen',
     loadingText: 'Učitavanje stavke...',
   },
+  select: {
+    ariaLabel: {
+      checked: 'Checked',
+      unchecked: 'Not Checked',
+    },
+  },
   dataTable: {
     itemsPerPageText: 'Redova po stranici:',
     ariaLabel: {

@@ -11,6 +11,12 @@ export default {
     noResultsText: 'Nincs egyező találat',
     loadingText: 'Betöltés...',
   },
+  select: {
+    ariaLabel: {
+      checked: 'Checked',
+      unchecked: 'Not Checked',
+    },
+  },
   dataTable: {
     itemsPerPageText: 'Elem oldalanként:',
     ariaLabel: {

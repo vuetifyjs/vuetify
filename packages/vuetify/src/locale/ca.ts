@@ -11,6 +11,12 @@ export default {
     noResultsText: 'Sense dades per mostrar',
     loadingText: 'Carregant...',
   },
+  select: {
+    ariaLabel: {
+      checked: 'Checked',
+      unchecked: 'Not Checked',
+    },
+  },
   dataTable: {
     itemsPerPageText: 'Files per pàgina:',
     ariaLabel: {

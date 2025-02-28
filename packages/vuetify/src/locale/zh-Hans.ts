@@ -11,6 +11,12 @@ export default {
     noResultsText: '没有符合条件的结果',
     loadingText: '加载中……',
   },
+  select: {
+    ariaLabel: {
+      checked: 'Checked',
+      unchecked: 'Not Checked',
+    },
+  },
   dataTable: {
     itemsPerPageText: '每页数目：',
     ariaLabel: {

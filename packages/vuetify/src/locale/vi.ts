@@ -11,6 +11,12 @@ export default {
     noResultsText: 'Không tìm thấy kết quả nào',
     loadingText: 'Đang tải...',
   },
+  select: {
+    ariaLabel: {
+      checked: 'Checked',
+      unchecked: 'Not Checked',
+    },
+  },
   dataTable: {
     itemsPerPageText: 'Số hàng mỗi trang:',
     ariaLabel: {

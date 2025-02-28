@@ -11,6 +11,12 @@ export default {
     noResultsText: 'Geen overeenkomende resultaten gevonden',
     loadingText: 'Items aan het laden...',
   },
+  select: {
+    ariaLabel: {
+      checked: 'Checked',
+      unchecked: 'Not Checked',
+    },
+  },
   dataTable: {
     itemsPerPageText: 'Rijen per pagina:',
     ariaLabel: {

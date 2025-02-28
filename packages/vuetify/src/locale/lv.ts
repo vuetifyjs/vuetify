@@ -11,6 +11,12 @@ export default {
     noResultsText: 'Nekas netika atrasts',
     loadingText: 'Ielādē...',
   },
+  select: {
+    ariaLabel: {
+      checked: 'Checked',
+      unchecked: 'Not Checked',
+    },
+  },
   dataTable: {
     itemsPerPageText: 'Rādīt lapā:',
     ariaLabel: {
