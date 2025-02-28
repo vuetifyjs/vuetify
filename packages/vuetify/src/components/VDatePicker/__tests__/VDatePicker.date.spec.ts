@@ -724,7 +724,7 @@ describe.skip('VDatePicker.ts', () => { // eslint-disable-line max-statements
     expect(wrapper.vm.tableDate).toBe('2030-04')
   })
 
-  it('should not higlight not allowed dates in range', async () => {
+  it('should not highlight not allowed dates in range', async () => {
     const wrapper = mountFunction({
       propsData: {
         range: true,

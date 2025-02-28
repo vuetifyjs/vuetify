@@ -18,8 +18,6 @@ features:
 
 The `v-infinite-scroll` component displays a potentially infinite list, by loading more items of the list when scrolling. It supports either vertical or horizontal scrolling.
 
-![Infinite scroll Entry](https://cdn.vuetifyjs.com/docs/images/components/v-infinite-scroll/v-infinite-scroll-entry.png)
-
 <PageFeatures />
 
 ::: success

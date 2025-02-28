@@ -18,8 +18,6 @@ features:
 
 The `v-carousel` component is used to display large numbers of visual content on a rotating timer.
 
-<!-- ![carousel Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-carousel/v-carousel-entry.png) -->
-
 <PageFeatures />
 
 ## Usage

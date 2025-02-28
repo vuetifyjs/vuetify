@@ -17,11 +17,11 @@ describe('VConfirmEdit', () => {
       </VConfirmEdit>
     ))
 
-    expect(screen.getByText('foo')).toBeInTheDocument()
+    expect(screen.getByText('foo')).toBeVisible()
 
     externalModel.value = 'bar'
     await nextTick()
-    expect(screen.getByText('bar')).toBeInTheDocument()
+    expect(screen.getByText('bar')).toBeVisible()
   })
 
   it("doesn't mutate the original value", async () => {
@@ -38,10 +38,10 @@ describe('VConfirmEdit', () => {
       </VConfirmEdit>
     ))
 
-    expect(screen.getByText('foo')).toBeInTheDocument()
+    expect(screen.getByText('foo')).toBeVisible()
 
     await userEvent.click(screen.getByTestId('push'))
-    expect(screen.getByText('foo,bar')).toBeInTheDocument()
+    expect(screen.getByText('foo,bar')).toBeVisible()
     expect(externalModel.value).toEqual(['foo'])
 
     await userEvent.click(screen.getByText('OK'))
@@ -79,7 +79,7 @@ describe('VConfirmEdit', () => {
     it('render actions', () => {
       render(() => (
         <VConfirmEdit>
-          { ({ actions }) => actions }
+          { ({ actions }) => actions() }
         </VConfirmEdit>
       ))
       expect(screen.getAllByCSS('button')).toHaveLength(2)

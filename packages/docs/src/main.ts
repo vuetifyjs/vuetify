@@ -2,6 +2,8 @@
 import 'prism-theme-vars/base.css'
 
 // Plugins
+import * as Swetrix from 'swetrix'
+import * as Sentry from '@sentry/vue'
 import { createApp } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import { createHead } from '@unhead/vue'
@@ -43,6 +45,8 @@ const appStore = useAppStore(pinia)
 const localeStore = useLocaleStore(pinia)
 const userStore = useUserStore(pinia)
 
+const app = createApp(App)
+
 if (IN_BROWSER) {
   localeStore.$subscribe((_, state) => {
     window.localStorage.setItem('currentLocale', state.locale)
@@ -50,9 +54,21 @@ if (IN_BROWSER) {
   userStore.$subscribe(() => {
     userStore.save()
   })
+  Swetrix.init('ycvR7fW63FFz', {
+    apiURL: 'https://swetrix-api.vuetifyjs.com/log',
+  })
+  Swetrix.trackViews()
+  Sentry.init({
+    app,
+    dsn: 'https://491ef7e8180648c488b1fcc158eb9ecc@glitchtip.vuetifyjs.com/1',
+    release: import.meta.env.VITE_GITHUB_SHA,
+    environment: import.meta.env.VITE_GITHUB_REF,
+    enabled: import.meta.env.VITE_GITHUB_SHA,
+
+    sampleRate: 1,
+  })
 }
 
-const app = createApp(App)
 const router = createRouter({
   history: createWebHistory(),
   routes: [
@@ -115,6 +131,13 @@ app.use(router)
 
 app.config.errorHandler = (err, vm, info) => {
   console.error(err, vm, info)
+  Swetrix.trackError({
+    name: (err as any).name,
+    message: (err as any).message,
+    lineno: null,
+    colno: null,
+    filename: null,
+  })
 }
 app.config.warnHandler = (err, vm, info) => {
   console.warn(err, vm, info)
@@ -139,9 +162,23 @@ router.onError((err, to) => {
       location.assign(to.fullPath)
     } else {
       console.error('Dynamic import error, reloading page did not fix it', err)
+      Swetrix.trackError({
+        name: err.name,
+        message: err.message,
+        lineno: null,
+        colno: null,
+        filename: null,
+      })
     }
   } else {
     console.error(err)
+    Swetrix.trackError({
+      name: err?.name,
+      message: err?.message,
+      lineno: null,
+      colno: null,
+      filename: null,
+    })
   }
 })
 

@@ -1,8 +1,10 @@
 {
   "props": {
     "disabled": "Disables the expansion-panel content.",
-    "readonly": "Makes the expansion-panel content read only.",
-    "value": "Controls the opened/closed state of content."
+    "readonly": "Makes the expansion panel content read only.",
+    "focusable": "Makes the expansion panel content focusable.",
+    "value": "Controls the opened/closed state of content.",
+    "static": "Remove title size expansion when selected."
   },
   "events": {
     "change": "Toggles the value of the selected panel.",

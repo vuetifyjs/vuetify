@@ -264,8 +264,7 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
           break
       }
 
-      const emitChange = selecting.value === (props.useSeconds ? SelectingTimes.Second : SelectingTimes.Minute)
-
+      const emitChange = inputHour.value !== null && inputMinute.value !== null && (props.useSeconds ? inputSecond.value !== null : true)
       if (selecting.value === SelectingTimes.Hour) {
         selecting.value = SelectingTimes.Minute
       } else if (props.useSeconds && selecting.value === SelectingTimes.Minute) {
