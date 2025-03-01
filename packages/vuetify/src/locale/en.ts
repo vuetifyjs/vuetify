@@ -104,4 +104,12 @@ export default {
     loadMore: 'Load more',
     empty: 'No more',
   },
+  list: {
+    prependAction: '{0} prepended action',
+    appendAction: '{0} appended action',
+  },
+  avatar: {
+    prependAction: '{0} prepended action',
+    appendAction: '{0} appended action',
+  },
 }

@@ -2,11 +2,11 @@
 import './VListItem.sass'
 
 // Components
+import { useListAvatar } from './ListAvatar'
+import { useListIcon } from './ListIcon'
 import { VListItemSubtitle } from './VListItemSubtitle'
 import { VListItemTitle } from './VListItemTitle'
-import { VAvatar } from '@/components/VAvatar'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
-import { VIcon } from '@/components/VIcon'
 
 // Composables
 import { useList } from './list'
@@ -89,6 +89,9 @@ export const makeVListItemProps = propsFactory({
 
   onClick: EventProp<[MouseEvent | KeyboardEvent]>(),
   onClickOnce: EventProp<[MouseEvent]>(),
+
+  'onClick:prepend': EventProp<[MouseEvent]>(),
+  'onClick:append': EventProp<[MouseEvent]>(),
 
   ...makeBorderProps(),
   ...makeComponentProps(),
@@ -174,6 +177,8 @@ export const VListItem = genericComponent<VListItemSlots>()({
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(roundedProps)
+    const { ListAvatar } = useListAvatar(props)
+    const { ListIcon } = useListIcon(props)
     const lineClasses = computed(() => props.lines ? `v-list-item--${props.lines}-line` : undefined)
 
     const slotProps = computed(() => ({
@@ -201,16 +206,6 @@ export const VListItem = genericComponent<VListItemSlots>()({
       } else if (props.value != null) {
         select(!isSelected.value, e)
       }
-    }
-
-    function onPrependClick (e: MouseEvent) {
-      e.stopImmediatePropagation()
-      emit('click:prepend', e)
-    }
-
-    function onAppendClick (e: MouseEvent) {
-      e.stopImmediatePropagation()
-      emit('click:append', e)
     }
 
     function onKeyDown (e: KeyboardEvent) {
@@ -280,22 +275,20 @@ export const VListItem = genericComponent<VListItemSlots>()({
           { genOverlays(isClickable.value || isActive.value, 'v-list-item') }
 
           { hasPrepend && (
-            <div key="prepend" class="v-list-item__prepend" onClick={ prependClick }>
+            <div key="prepend" class="v-list-item__prepend">
               { !slots.prepend ? (
                 <>
                   { props.prependAvatar && (
-                    <VAvatar
+                    <ListAvatar
                       key="prepend-avatar"
-                      density={ props.density }
-                      image={ props.prependAvatar }
+                      name="prepend"
                     />
                   )}
 
                   { props.prependIcon && (
-                    <VIcon
+                    <ListIcon
                       key="prepend-icon"
-                      density={ props.density }
-                      icon={ props.prependIcon }
+                      name="prepend"
                     />
                   )}
                 </>
@@ -342,22 +335,20 @@ export const VListItem = genericComponent<VListItemSlots>()({
           </div>
 
           { hasAppend && (
-            <div key="append" class="v-list-item__append" onClick={ appendClick }>
+            <div key="append" class="v-list-item__append">
               { !slots.append ? (
                 <>
                   { props.appendIcon && (
-                    <VIcon
+                    <ListIcon
                       key="append-icon"
-                      density={ props.density }
-                      icon={ props.appendIcon }
+                      name="append"
                     />
                   )}
 
                   { props.appendAvatar && (
-                    <VAvatar
+                    <ListAvatar
                       key="append-avatar"
-                      density={ props.density }
-                      image={ props.appendAvatar }
+                      name="append"
                     />
                   )}
                 </>
