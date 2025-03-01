@@ -18,13 +18,20 @@
         ></v-checkbox-btn>
         <v-text-field
           :disabled="!enabled"
-          hide-details
           label="I only work if you check the box"
+          hide-details
         ></v-text-field>
       </div>
     </v-card-text>
   </v-card>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const includeFiles = ref(true)
+  const enabled = ref(false)
+</script>
 
 <script>
   export default {

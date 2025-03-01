@@ -2,16 +2,17 @@
 import './VGrid.sass'
 
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { breakpoints } from '@/composables/display'
 import { makeTagProps } from '@/composables/tag'
 
 // Utilities
 import { capitalize, computed, h } from 'vue'
-import { genericComponent } from '@/util'
+import { genericComponent, propsFactory } from '@/util'
 
 // Types
-import type { Breakpoint } from '@/composables/display'
 import type { Prop, PropType } from 'vue'
+import type { Breakpoint } from '@/composables/display'
 
 const ALIGNMENT = ['start', 'end', 'center'] as const
 
@@ -86,33 +87,36 @@ function breakpointClass (type: keyof typeof propMap, prop: string, val: string)
   return className.toLowerCase()
 }
 
+export const makeVRowProps = propsFactory({
+  dense: Boolean,
+  noGutters: Boolean,
+  align: {
+    type: String as PropType<typeof ALIGN_VALUES[number]>,
+    default: null,
+    validator: alignValidator,
+  },
+  ...alignProps,
+  justify: {
+    type: String as PropType<typeof ALIGN_CONTENT_VALUES[number]>,
+    default: null,
+    validator: justifyValidator,
+  },
+  ...justifyProps,
+  alignContent: {
+    type: String as PropType<typeof ALIGN_CONTENT_VALUES[number]>,
+    default: null,
+    validator: alignContentValidator,
+  },
+
+  ...alignContentProps,
+  ...makeComponentProps(),
+  ...makeTagProps(),
+}, 'VRow')
+
 export const VRow = genericComponent()({
   name: 'VRow',
 
-  props: {
-    dense: Boolean,
-    noGutters: Boolean,
-    align: {
-      type: String as PropType<typeof ALIGN_VALUES[number]>,
-      default: null,
-      validator: alignValidator,
-    },
-    ...alignProps,
-    justify: {
-      type: String as PropType<typeof ALIGN_CONTENT_VALUES[number]>,
-      default: null,
-      validator: justifyValidator,
-    },
-    ...justifyProps,
-    alignContent: {
-      type: String as PropType<typeof ALIGN_CONTENT_VALUES[number]>,
-      default: null,
-      validator: alignContentValidator,
-    },
-
-    ...alignContentProps,
-    ...makeTagProps(),
-  },
+  props: makeVRowProps(),
 
   setup (props, { slots }) {
     const classes = computed(() => {
@@ -140,7 +144,12 @@ export const VRow = genericComponent()({
     })
 
     return () => h(props.tag, {
-      class: ['v-row', classes.value],
+      class: [
+        'v-row',
+        classes.value,
+        props.class,
+      ],
+      style: props.style,
     }, slots.default?.())
   },
 })

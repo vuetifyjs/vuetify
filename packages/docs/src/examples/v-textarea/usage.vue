@@ -1,12 +1,12 @@
 <template>
-  <usage-example
+  <ExamplesUsageExample
     v-model="model"
     :code="code"
-    :options="options"
     :name="name"
+    :options="options"
   >
     <div>
-      <v-textarea v-bind="props" v-model="field"></v-textarea>
+      <v-textarea v-bind="props" v-model="field" hide-details></v-textarea>
     </div>
 
     <template v-slot:configuration>
@@ -16,27 +16,23 @@
 
       <v-checkbox v-model="clearable" label="Clearable"></v-checkbox>
     </template>
-  </usage-example>
+  </ExamplesUsageExample>
 </template>
 
 <script setup>
-  // Utilities
-  import { computed, ref, watch } from 'vue'
-  import { propsToString } from '@/util/helpers'
-
   const name = 'v-textarea'
   const model = ref('default')
   const clearable = ref(false)
   const field = ref()
   const label = ref('Label')
   const prepend = ref(false)
-  const options = ['outlined', 'solo', 'underlined']
+  const options = ['outlined', 'underlined', 'solo', 'solo-filled', 'solo-inverted']
   const props = computed(() => {
     return {
       clearable: clearable.value || undefined,
       label: label.value,
-      'prepend-icon': prepend.value ? 'mdi-vuetify' : undefined,
-      variant: ['outlined', 'solo', 'underlined'].includes(model.value) ? model.value : undefined,
+      'prepend-icon': prepend.value ? '$vuetify' : undefined,
+      variant: model.value === 'default' ? undefined : model.value,
     }
   })
 

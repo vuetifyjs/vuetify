@@ -2,10 +2,9 @@
 import { VResponsive } from '..'
 
 // Utilities
-import { createVuetify } from '@/framework'
-import { h } from 'vue'
 import { mount } from '@vue/test-utils'
-import { describe, expect, it } from '@jest/globals'
+import { h } from 'vue'
+import { createVuetify } from '@/framework'
 
 describe('VResponsive', () => {
   const vuetify = createVuetify()

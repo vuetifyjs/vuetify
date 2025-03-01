@@ -4,8 +4,8 @@
 @use "../../styles/tools/functions";
 
 // VToolbar
-$toolbar-background: rgb(var(--v-theme-on-surface-variant)) !default;
-$toolbar-color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity)) !default;
+$toolbar-background: rgb(var(--v-theme-surface-light)) !default;
+$toolbar-color: rgba(var(--v-theme-on-surface-light), var(--v-high-emphasis-opacity)) !default;
 $toolbar-border-color: settings.$border-color-root !default;
 $toolbar-border-radius: map.get(settings.$rounded, 0) !default;
 $toolbar-border-style: settings.$border-style-root !default;
@@ -14,19 +14,16 @@ $toolbar-border-width: 0 !default;
 $toolbar-btn-icon-size: 48px !default;
 $toolbar-collapsed-border-radius: 24px !default;
 $toolbar-collapsed-max-width: 112px !default;
-$toolbar-content-padding-x: 16px !default;
-$toolbar-content-padding-y: 4px !default;
 $toolbar-elevation: 0 !default;
 $toolbar-flat-elevation: 0 !default;
 $toolbar-flex: none !default;
-$toolbar-prepend-btn-margin-start: 10px !default;
-$toolbar-append-btn-margin-end: 10px !default;
+$toolbar-prepend-btn-margin-start: 4px !default;
+$toolbar-append-btn-margin-end: 4px !default;
 $toolbar-rounded-border-radius: variables.$border-radius-root !default;
 $toolbar-transition: .2s variables.$standard-easing !default;
 
 // VToolbarTitle
-$toolbar-title-margin: 16px !default;
-$toolbar-title-extended-padding: 56px !default;
+$toolbar-title-margin: 20px !default;
 $toolbar-title-font-size: 1.25rem !default;
 $toolbar-title-font-weight: 400 !default;
 $toolbar-title-letter-spacing: 0 !default;
@@ -52,7 +49,7 @@ $toolbar-title-typography: (
   $toolbar-title-letter-spacing,
   $toolbar-title-line-height,
   $toolbar-title-text-transform
-);
+) !default;
 
 $toolbar-prominent-title-typography: (
   $toolbar-prominent-title-font-size,
@@ -60,9 +57,15 @@ $toolbar-prominent-title-typography: (
   $toolbar-prominent-title-letter-spacing,
   $toolbar-prominent-title-line-height,
   $toolbar-prominent-title-text-transform
-);
+) !default;
 
 $toolbar-theme: (
   $toolbar-background,
   $toolbar-color
 ) !default;
+
+
+// Deprecated
+$toolbar-content-padding-x: 16px !default;
+$toolbar-content-padding-y: 4px !default;
+$toolbar-title-extended-padding: 56px !default;

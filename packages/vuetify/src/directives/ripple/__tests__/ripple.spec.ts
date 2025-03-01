@@ -1,11 +1,9 @@
-import { mount } from '@vue/test-utils'
-import { describe, expect, it } from '@jest/globals'
-import { defineComponent } from 'vue'
-
 // Directives
 import Ripple from '../'
 
 // Utilities
+import { mount } from '@vue/test-utils'
+import { defineComponent } from 'vue'
 import { keyCodes } from '@/util'
 
 const testComponent = defineComponent({
@@ -43,7 +41,7 @@ describe('v-ripple', () => {
   })
 
   it('should trigger ripple on mousedown', () => {
-    jest.useFakeTimers()
+    vi.useFakeTimers()
     const wrapper = mount(testComponent)
 
     const mousedownEvent = new MouseEvent('mousedown')
@@ -54,12 +52,12 @@ describe('v-ripple', () => {
     const mouseupEvent = new MouseEvent('mouseup')
     wrapper.element.dispatchEvent(mouseupEvent)
 
-    jest.runAllTimers()
+    vi.runAllTimers()
     expect(wrapper.find('.v-ripple__container').exists()).toBe(false)
   })
 
   it.each(['enter', 'space'] as const)('should trigger ripple on %s key press', key => {
-    jest.useFakeTimers()
+    vi.useFakeTimers()
     const wrapper = mount(testComponent)
 
     const keydownEvent = new KeyboardEvent('keydown', { keyCode: keyCodes[key] })
@@ -70,11 +68,13 @@ describe('v-ripple', () => {
     const keyupEvent = new KeyboardEvent('keyup')
     wrapper.element.dispatchEvent(keyupEvent)
 
-    jest.runAllTimers()
+    vi.runAllTimers()
     expect(wrapper.find('.v-ripple__container').exists()).toBe(false)
   })
 
   it('should only ripple on one element', () => {
+    vi.useFakeTimers()
+
     const wrapper = mount({
       directives: { Ripple },
       template: '<div v-ripple><div class="child" v-ripple></div></div>',
@@ -90,11 +90,12 @@ describe('v-ripple', () => {
     const mouseupEvent = new MouseEvent('mouseup', { detail: 1, bubbles: true })
     child.dispatchEvent(mouseupEvent)
 
-    jest.runAllTimers()
+    vi.runAllTimers()
     expect(wrapper.findAll('.v-ripple__container')).toHaveLength(0)
   })
 
   it('should hide ripple on blur if keyboardRipple is true', () => {
+    vi.useFakeTimers()
     const wrapper = mount(testComponent)
     const keydownEvent = new KeyboardEvent('keydown', { keyCode: 13 })
     wrapper.element.dispatchEvent(keydownEvent)
@@ -104,7 +105,7 @@ describe('v-ripple', () => {
     const blurEvent = new FocusEvent('blur')
     wrapper.element.dispatchEvent(blurEvent)
 
-    jest.runAllTimers()
+    vi.runAllTimers()
     expect(wrapper.find('.v-ripple__container').exists()).toBe(false)
   })
 })

@@ -1,8 +1,9 @@
 // Utilities
+import { APCAcontrast } from './color/APCA'
 import { consoleWarn } from './console'
-import { chunk, padEnd } from './helpers'
-import * as sRGB from '@/util/color/transformSRGB'
+import { chunk, has, padEnd } from './helpers'
 import * as CIELAB from '@/util/color/transformCIELAB'
+import * as sRGB from '@/util/color/transformSRGB'
 
 // Types
 import type { Colors } from '@/composables/theme'
@@ -13,10 +14,24 @@ export type HSV = { h: number, s: number, v: number, a?: number }
 export type RGB = { r: number, g: number, b: number, a?: number }
 export type HSL = { h: number, s: number, l: number, a?: number }
 export type Hex = string & { __hexBrand: never }
-export type Color = string | number | {}
+export type Color = string | number | HSV | RGB | HSL
 
 export function isCssColor (color?: string | null | false): boolean {
   return !!color && /^(#|var\(--|(rgb|hsl)a?\()/.test(color)
+}
+
+export function isParsableColor (color: string): boolean {
+  return isCssColor(color) && !/^((rgb|hsl)a?\()?var\(--/.test(color)
+}
+
+const cssColorRe = /^(?<fn>(?:rgb|hsl)a?)\((?<values>.+)\)/
+const mappers = {
+  rgb: (r: number, g: number, b: number, a?: number) => ({ r, g, b, a }),
+  rgba: (r: number, g: number, b: number, a?: number) => ({ r, g, b, a }),
+  hsl: (h: number, s: number, l: number, a?: number) => HSLtoRGB({ h, s, l, a }),
+  hsla: (h: number, s: number, l: number, a?: number) => HSLtoRGB({ h, s, l, a }),
+  hsv: (h: number, s: number, v: number, a?: number) => HSVtoRGB({ h, s, v, a }),
+  hsva: (h: number, s: number, v: number, a?: number) => HSVtoRGB({ h, s, v, a }),
 }
 
 export function parseColor (color: Color): RGB {
@@ -30,6 +45,23 @@ export function parseColor (color: Color): RGB {
       g: (color & 0xFF00) >> 8,
       b: (color & 0xFF),
     }
+  } else if (typeof color === 'string' && cssColorRe.test(color)) {
+    const { groups } = color.match(cssColorRe)!
+    const { fn, values } = groups as { fn: keyof typeof mappers, values: string }
+    const realValues = values.split(/,\s*|\s*\/\s*|\s+/)
+      .map((v, i) => {
+        if (
+          v.endsWith('%') ||
+          // unitless slv are %
+          (i > 0 && i < 3 && ['hsl', 'hsla', 'hsv', 'hsva'].includes(fn))
+        ) {
+          return parseFloat(v) / 100
+        } else {
+          return parseFloat(v)
+        }
+      }) as [number, number, number, number?]
+
+    return mappers[fn](...realValues)
   } else if (typeof color === 'string') {
     let hex = color.startsWith('#') ? color.slice(1) : color
 
@@ -45,9 +77,17 @@ export function parseColor (color: Color): RGB {
     }
 
     return HexToRGB(hex as Hex)
-  } else {
-    throw new TypeError(`Colors can only be numbers or strings, recieved ${color == null ? color : color.constructor.name} instead`)
+  } else if (typeof color === 'object') {
+    if (has(color, ['r', 'g', 'b'])) {
+      return color
+    } else if (has(color, ['h', 's', 'l'])) {
+      return HSVtoRGB(HSLtoHSV(color))
+    } else if (has(color, ['h', 's', 'v'])) {
+      return HSVtoRGB(color)
+    }
   }
+
+  throw new TypeError(`Invalid color: ${color == null ? color : (String(color) || (color as any).constructor.name)}\nExpected #hex, #hexa, rgb(), rgba(), hsl(), hsla(), object or number`)
 }
 
 export function RGBToInt (color: RGB) {
@@ -87,6 +127,10 @@ export function HSVtoRGB (hsva: HSV): RGB {
   const rgb = [f(5), f(3), f(1)].map(v => Math.round(v * 255))
 
   return { r: rgb[0], g: rgb[1], b: rgb[2], a }
+}
+
+export function HSLtoRGB (hsla: HSL): RGB {
+  return HSVtoRGB(HSLtoHSV(hsla))
 }
 
 /** Converts RGBA to HSVA. Based on formula from https://en.wikipedia.org/wiki/HSL_and_HSV */
@@ -244,4 +288,21 @@ export function getContrast (first: Color, second: Color) {
   const dark = Math.min(l1, l2)
 
   return (light + 0.05) / (dark + 0.05)
+}
+
+export function getForeground (color: Color) {
+  const blackContrast = Math.abs(APCAcontrast(parseColor(0), parseColor(color)))
+  const whiteContrast = Math.abs(APCAcontrast(parseColor(0xffffff), parseColor(color)))
+
+  // TODO: warn about poor color selections
+  // const contrastAsText = Math.abs(APCAcontrast(colorVal, colorToInt(theme.colors.background)))
+  // const minContrast = Math.max(blackContrast, whiteContrast)
+  // if (minContrast < 60) {
+  //   consoleInfo(`${key} theme color ${color} has poor contrast (${minContrast.toFixed()}%)`)
+  // } else if (contrastAsText < 60 && !['background', 'surface'].includes(color)) {
+  //   consoleInfo(`${key} theme color ${color} has poor contrast as text (${contrastAsText.toFixed()}%)`)
+  // }
+
+  // Prefer white text if both have an acceptable contrast ratio
+  return whiteContrast > Math.min(blackContrast, 50) ? '#fff' : '#000'
 }

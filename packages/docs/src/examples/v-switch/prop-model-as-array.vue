@@ -18,6 +18,12 @@
   </v-container>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const people = ref(['John'])
+</script>
+
 <script>
   export default {
     data () {

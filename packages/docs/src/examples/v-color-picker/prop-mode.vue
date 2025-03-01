@@ -19,6 +19,14 @@
   </div>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const color = ref('#ff00ff')
+  const mode = ref('hsla')
+  const modes = ref(['hsla', 'rgba', 'hexa'])
+</script>
+
 <script>
   export default {
     data: () => ({

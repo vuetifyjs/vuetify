@@ -9,7 +9,6 @@
       <template v-slot:activator="{ props }">
         <v-btn
           color="primary"
-          dark
           v-bind="props"
         >
           Dropdown
@@ -27,6 +26,26 @@
     </v-menu>
   </div>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const location = ref('end')
+
+  const items = [
+    { title: 'Click Me' },
+    { title: 'Click Me' },
+    { title: 'Click Me' },
+    { title: 'Click Me 2' },
+  ]
+  const locations = [
+    'top',
+    'bottom',
+    'start',
+    'end',
+    'center',
+  ]
+</script>
 
 <script>
   export default {

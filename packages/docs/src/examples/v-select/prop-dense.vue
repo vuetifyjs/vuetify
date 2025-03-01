@@ -1,15 +1,15 @@
 <template>
-  <div class="d-flex flex-column">
+  <div>
     <v-select
       :items="items"
-      label="Compact"
       density="compact"
+      label="Compact"
     ></v-select>
 
     <v-select
       :items="items"
-      label="Comfortable"
       density="comfortable"
+      label="Comfortable"
     ></v-select>
 
     <v-select
@@ -18,6 +18,10 @@
     ></v-select>
   </div>
 </template>
+
+<script setup>
+  const items = ['Foo', 'Bar', 'Fizz', 'Buzz']
+</script>
 
 <script>
   export default {

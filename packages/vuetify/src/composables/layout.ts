@@ -12,13 +12,15 @@ import {
   provide,
   reactive,
   ref,
+  shallowRef,
+  useId,
 } from 'vue'
-import { convertToUnit, findChildrenWithProvide, getCurrentInstance, getUid, propsFactory } from '@/util'
+import { convertToUnit, findChildrenWithProvide, getCurrentInstance, propsFactory } from '@/util'
 
 // Types
 import type { ComponentInternalInstance, CSSProperties, InjectionKey, Prop, Ref } from 'vue'
 
-type Position = 'top' | 'left' | 'right' | 'bottom'
+export type Position = 'top' | 'left' | 'right' | 'bottom'
 
 interface Layer {
   top: number
@@ -111,13 +113,13 @@ export function useLayoutItem (options: {
 
   if (!layout) throw new Error('[Vuetify] Could not find injected layout')
 
-  const id = options.id ?? `layout-item-${getUid()}`
+  const id = options.id ?? `layout-item-${useId()}`
 
   const vm = getCurrentInstance('useLayoutItem')
 
   provide(VuetifyLayoutItemKey, { id })
 
-  const isKeptAlive = ref(false)
+  const isKeptAlive = shallowRef(false)
   onDeactivated(() => isKeptAlive.value = true)
   onActivated(() => isKeptAlive.value = false)
 
@@ -246,7 +248,7 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
 
   const rootVm = getCurrentInstance('createLayout')
 
-  const isMounted = ref(false)
+  const isMounted = shallowRef(false)
   onMounted(() => {
     isMounted.value = true
   })
@@ -284,11 +286,13 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
         const isHorizontal = position.value === 'left' || position.value === 'right'
         const isOppositeHorizontal = position.value === 'right'
         const isOppositeVertical = position.value === 'bottom'
+        const size = elementSize.value ?? layoutSize.value
+        const unit = size === 0 ? '%' : 'px'
 
         const styles = {
           [position.value]: 0,
           zIndex: zIndex.value,
-          transform: `translate${isHorizontal ? 'X' : 'Y'}(${(active.value ? 0 : -110) * (isOppositeHorizontal || isOppositeVertical ? -1 : 1)}%)`,
+          transform: `translate${isHorizontal ? 'X' : 'Y'}(${(active.value ? 0 : -(size === 0 ? 100 : size)) * (isOppositeHorizontal || isOppositeVertical ? -1 : 1)}${unit})`,
           position: absolute.value || rootZIndex.value !== ROOT_ZINDEX ? 'absolute' : 'fixed',
           ...(transitionsEnabled.value ? undefined : { transition: 'none' }),
         } as const
@@ -349,7 +353,7 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
   ])
 
   const layoutStyles = computed(() => ({
-    zIndex: rootZIndex.value,
+    zIndex: parentLayout ? rootZIndex.value : undefined,
     position: parentLayout ? 'relative' as const : undefined,
     overflow: parentLayout ? 'hidden' : undefined,
   }))

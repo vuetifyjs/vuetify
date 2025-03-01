@@ -1,60 +1,83 @@
-export function bias (val: number) {
-  const c = 0.501
-  const x = Math.abs(val)
-  return Math.sign(val) * (x / ((1 / c - 2) * (1 - x) + 1))
-}
-
-export function calculateUpdatedOffset ({
+export function calculateUpdatedTarget ({
   selectedElement,
-  containerSize,
-  contentSize,
+  containerElement,
   isRtl,
-  currentScrollOffset,
   isHorizontal,
 }: {
   selectedElement: HTMLElement
-  containerSize: number
-  contentSize: number
+  containerElement: HTMLElement
   isRtl: boolean
-  currentScrollOffset: number
   isHorizontal: boolean
 }): number {
-  const clientSize = isHorizontal ? selectedElement.clientWidth : selectedElement.clientHeight
-  const offsetStart = isHorizontal ? selectedElement.offsetLeft : selectedElement.offsetTop
-  const adjustedOffsetStart = isRtl && isHorizontal ? (contentSize - offsetStart - clientSize) : offsetStart
+  const containerSize = getOffsetSize(isHorizontal, containerElement)
+  const scrollPosition = getScrollPosition(isHorizontal, isRtl, containerElement)
 
-  const totalSize = containerSize + currentScrollOffset
-  const itemOffset = clientSize + adjustedOffsetStart
-  const additionalOffset = clientSize * 0.4
+  const childrenSize = getOffsetSize(isHorizontal, selectedElement)
+  const childrenStartPosition = getOffsetPosition(isHorizontal, selectedElement)
 
-  if (adjustedOffsetStart <= currentScrollOffset) {
-    currentScrollOffset = Math.max(adjustedOffsetStart - additionalOffset, 0)
-  } else if (totalSize <= itemOffset) {
-    currentScrollOffset = Math.min(currentScrollOffset - (totalSize - itemOffset - additionalOffset), contentSize - containerSize)
+  const additionalOffset = childrenSize * 0.4
+
+  if (scrollPosition > childrenStartPosition) {
+    return childrenStartPosition - additionalOffset
+  } else if (scrollPosition + containerSize < childrenStartPosition + childrenSize) {
+    return childrenStartPosition - containerSize + childrenSize + additionalOffset
   }
 
-  return currentScrollOffset
+  return scrollPosition
 }
 
-export function calculateCenteredOffset ({
+export function calculateCenteredTarget ({
   selectedElement,
-  containerSize,
-  contentSize,
-  isRtl,
+  containerElement,
   isHorizontal,
 }: {
   selectedElement: HTMLElement
-  containerSize: number
-  contentSize: number
-  isRtl: boolean
+  containerElement: HTMLElement
   isHorizontal: boolean
 }): number {
-  const clientSize = isHorizontal ? selectedElement.clientWidth : selectedElement.clientHeight
-  const offsetStart = isHorizontal ? selectedElement.offsetLeft : selectedElement.offsetTop
+  const containerOffsetSize = getOffsetSize(isHorizontal, containerElement)
+  const childrenOffsetPosition = getOffsetPosition(isHorizontal, selectedElement)
+  const childrenOffsetSize = getOffsetSize(isHorizontal, selectedElement)
 
-  const offsetCentered = isRtl && isHorizontal
-    ? contentSize - offsetStart - clientSize / 2 - containerSize / 2
-    : offsetStart + clientSize / 2 - containerSize / 2
+  return childrenOffsetPosition - (containerOffsetSize / 2) + (childrenOffsetSize / 2)
+}
 
-  return Math.min(contentSize - containerSize, Math.max(0, offsetCentered))
+export function getScrollSize (isHorizontal: boolean, element?: HTMLElement) {
+  const key = isHorizontal ? 'scrollWidth' : 'scrollHeight'
+  return element?.[key] || 0
+}
+
+export function getClientSize (isHorizontal: boolean, element?: HTMLElement) {
+  const key = isHorizontal ? 'clientWidth' : 'clientHeight'
+  return element?.[key] || 0
+}
+
+export function getScrollPosition (isHorizontal: boolean, rtl: boolean, element?: HTMLElement) {
+  if (!element) {
+    return 0
+  }
+
+  const {
+    scrollLeft,
+    offsetWidth,
+    scrollWidth,
+  } = element
+
+  if (isHorizontal) {
+    return rtl
+      ? scrollWidth - offsetWidth + scrollLeft
+      : scrollLeft
+  }
+
+  return element.scrollTop
+}
+
+export function getOffsetSize (isHorizontal: boolean, element?: HTMLElement) {
+  const key = isHorizontal ? 'offsetWidth' : 'offsetHeight'
+  return element?.[key] || 0
+}
+
+export function getOffsetPosition (isHorizontal: boolean, element?: HTMLElement) {
+  const key = isHorizontal ? 'offsetLeft' : 'offsetTop'
+  return element?.[key] || 0
 }

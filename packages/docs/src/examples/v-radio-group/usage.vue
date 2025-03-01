@@ -1,29 +1,25 @@
 <template>
-  <usage-example
+  <ExamplesUsageExample
     v-model="model"
     :code="code"
-    :options="options"
     :name="name"
+    :options="options"
   >
     <div>
-      <v-radio-group v-bind="props">
-        <v-radio label="Radio 1" value="1"></v-radio>
-        <v-radio label="Radio 2" value="2"></v-radio>
-        <v-radio label="Radio 3" value="3"></v-radio>
+      <v-radio-group v-bind="props" hide-details>
+        <v-radio label="Radio One" value="one"></v-radio>
+        <v-radio label="Radio Two" value="two"></v-radio>
+        <v-radio label="Radio Three" value="three"></v-radio>
       </v-radio-group>
     </div>
 
     <template v-slot:configuration>
       <v-checkbox v-model="label" label="Radio group label"></v-checkbox>
     </template>
-  </usage-example>
+  </ExamplesUsageExample>
 </template>
 
 <script setup>
-  // Utilities
-  import { computed, ref } from 'vue'
-  import { propsToString } from '@/util/helpers'
-
   const name = 'v-radio-group'
   const model = ref('default')
   const options = ['inline']
@@ -37,9 +33,9 @@
 
   const slots = computed(() => {
     return `
-  <v-radio label="Radio 1" value="1"></v-radio>
-  <v-radio label="Radio 2" value="2"></v-radio>
-  <v-radio label="Radio 3" value="3"></v-radio>
+  <v-radio label="Radio One" value="one"></v-radio>
+  <v-radio label="Radio Two" value="two"></v-radio>
+  <v-radio label="Radio Three" value="three"></v-radio>
 `
   })
 

@@ -1,8 +1,12 @@
 /// <reference types="../../../../types/cypress" />
 
-import { VLayout } from '@/components/VLayout'
-import { VMain } from '@/components/VMain'
+// Components
 import { VNavigationDrawer } from '..'
+import { VLayout } from '@/components/VLayout'
+import { VLocaleProvider } from '@/components/VLocaleProvider'
+import { VMain } from '@/components/VMain'
+
+// Utilities
 import { ref } from 'vue'
 
 describe('VNavigationDrawer', () => {
@@ -137,5 +141,39 @@ describe('VNavigationDrawer', () => {
     ))
 
     cy.get('.v-navigation-drawer').should('have.css', 'bottom', '0px')
+  })
+
+  it('should position drawer scrim correctly', () => {
+    const visible = ref(false)
+    cy.mount((props: any) => (
+      <VLayout>
+        <VNavigationDrawer v-model={ visible.value } temporary />
+      </VLayout>
+    ))
+    cy.get('.v-navigation-drawer__scrim').should('not.exist')
+      .then(() => {
+        visible.value = true
+      })
+      .get('.v-navigation-drawer__scrim').should('be.visible')
+      .get('.v-navigation-drawer__scrim').should('have.css', 'top', '0px')
+      .get('.v-navigation-drawer__scrim').should('have.css', 'left', '0px')
+  })
+
+  it('should position drawer scrim correctly in rtl locale', () => {
+    const visible = ref(false)
+    cy.mount(() => (
+      <VLocaleProvider rtl>
+        <VLayout>
+          <VNavigationDrawer v-model={ visible.value } temporary />
+        </VLayout>
+      </VLocaleProvider>
+    ))
+      .get('.v-navigation-drawer__scrim').should('not.exist')
+      .then(() => {
+        visible.value = true
+      })
+      .get('.v-navigation-drawer__scrim').should('be.visible')
+      .get('.v-navigation-drawer__scrim').should('have.css', 'top', '0px')
+      .get('.v-navigation-drawer__scrim').should('have.css', 'left', '0px')
   })
 })

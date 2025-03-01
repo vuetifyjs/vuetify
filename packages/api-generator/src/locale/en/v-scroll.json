@@ -1,7 +1,7 @@
 {
-  "argument": "The function to invoke on target scroll.",
+  "argument": "Specify a query selector to attach the scroll event listener to. If no argument is provided then it is attached to the window object.",
+  "value": "A handler function that is invoked whenever the target element is scrolled, or an object of [event listener options](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener).",
   "modifiers": {
-    "#target": "The target watched for scroll changes. Defaults to window but can be changed to any valid id selector.",
-    "self": "Binds to the element that the the directive is attached."
+    "self": "By default the scroll event listener is attached to the argument provided to the directive, interpreted as a query selector. If no argument is provided then it is attached to the window object. If this modifier is used then it is instead attached to the element the directive is used on."
   }
 }

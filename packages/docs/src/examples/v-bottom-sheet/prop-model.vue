@@ -1,32 +1,41 @@
 <template>
   <div class="text-center">
     <v-btn
-      color="blue"
-      dark
+      size="x-large"
+      text="Click Me"
       @click="sheet = !sheet"
-    >
-      Open v-model
-    </v-btn>
+    ></v-btn>
+
     <v-bottom-sheet v-model="sheet">
-      <v-sheet
+      <v-card
         class="text-center"
-        height="200px"
+        height="200"
       >
-        <v-btn
-          class="mt-6"
-          variant="text"
-          color="red"
-          @click="sheet = !sheet"
-        >
-          close
-        </v-btn>
-        <div class="py-3">
-          This is a bottom sheet using the controlled by v-model instead of activator
-        </div>
-      </v-sheet>
+        <v-card-text>
+          <v-btn
+            variant="text"
+            @click="sheet = !sheet"
+          >
+            close
+          </v-btn>
+
+          <br>
+          <br>
+
+          <div>
+            This is a bottom sheet using the controlled by v-model instead of activator
+          </div>
+        </v-card-text>
+      </v-card>
     </v-bottom-sheet>
   </div>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const sheet = ref(false)
+</script>
 
 <script>
   export default {

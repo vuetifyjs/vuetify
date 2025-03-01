@@ -1,9 +1,6 @@
 // Utilities
-import { getCurrentInstance } from '../getCurrentInstance'
-
-// Testing
-import { describe, expect, it } from '@jest/globals'
 import { mount } from '@vue/test-utils'
+import { getCurrentInstance } from '../getCurrentInstance'
 
 describe('getCurrentInstance.ts', () => {
   it('should get and return current vm instance or throw error', () => {

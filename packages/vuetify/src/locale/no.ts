@@ -1,6 +1,12 @@
 export default {
   badge: 'Skilt',
+  open: 'Åpne',
   close: 'Lukk',
+  dismiss: 'Dismiss',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'Avbryt',
+  },
   dataIterator: {
     noResultsText: 'Fant ingen matchende elementer.',
     loadingText: 'Laster elementer...',
@@ -26,12 +32,20 @@ export default {
     lastPage: 'Siste side',
     pageText: '{0}-{1} av {2}',
   },
+  dateRangeInput: {
+    divider: 'til',
+  },
   datePicker: {
-    itemsSelected: '{0} valgt',
-    nextMonthAriaLabel: 'Neste måned',
-    nextYearAriaLabel: 'Neste år',
-    prevMonthAriaLabel: 'Forrige måned',
-    prevYearAriaLabel: 'Forrige år',
+    itemsSelected: '{0} selected',
+    range: {
+      title: 'Velg datoer',
+      header: 'Velg datoer',
+    },
+    title: 'Velg dato',
+    header: 'Velg dato',
+    input: {
+      placeholder: 'Fyll inn dato',
+    },
   },
   noDataText: 'Ingen data er tilgjengelig',
   carousel: {
@@ -43,19 +57,27 @@ export default {
   },
   calendar: {
     moreEvents: '{0} flere',
+    today: 'Today',
   },
   input: {
-    clear: 'Clear {0}',
+    clear: 'Fjern {0}',
     prependAction: '{0} prepended action',
     appendAction: '{0} appended action',
+    otp: 'Please enter OTP character {0}',
   },
   fileInput: {
     counter: '{0} filer',
     counterSize: '{0} filer ({1} totalt)',
   },
+  fileUpload: {
+    title: 'Drag and drop files here',
+    divider: 'or',
+    browse: 'Browse Files',
+  },
   timePicker: {
     am: 'AM',
     pm: 'PM',
+    title: 'Select Time',
   },
   pagination: {
     ariaLabel: {
@@ -64,13 +86,22 @@ export default {
       previous: 'Forrige side',
       page: 'Gå til side {0}',
       currentPage: 'Gjeldende side, side {0}',
-      first: 'First page',
-      last: 'Last page',
+      first: 'Første side',
+      last: 'Siste side',
     },
+  },
+  stepper: {
+    next: 'Neste',
+    prev: 'Forrige',
   },
   rating: {
     ariaLabel: {
-      item: 'Rating {0} of {1}',
+      item: 'Anmeldelse {0} av {1}',
     },
+  },
+  loading: 'Laster...',
+  infiniteScroll: {
+    loadMore: 'Last flere',
+    empty: 'Det var alt',
   },
 }

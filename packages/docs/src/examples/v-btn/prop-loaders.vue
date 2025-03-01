@@ -2,8 +2,8 @@
   <v-card
     class="mx-auto"
     max-width="450"
-    title="Strengthen your passwords"
     text="Update your weak or re-used passwords with Password Checkup. It's free and only takes a few minutes. Click the Take Checkup button to get started."
+    title="Strengthen your passwords"
   >
 
     <template v-slot:actions>
@@ -23,6 +23,16 @@
     </template>
   </v-card>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const loading = ref(false)
+  function load () {
+    loading.value = true
+    setTimeout(() => (loading.value = false), 3000)
+  }
+</script>
 
 <script>
   export default {

@@ -1,9 +1,9 @@
 <template>
   <v-app id="inspire">
     <v-navigation-drawer
-      model-value
       class="pt-4"
       color="grey-lighten-3"
+      model-value
       rail
     >
       <v-avatar
@@ -20,9 +20,3 @@
     </v-main>
   </v-app>
 </template>
-
-<script>
-  export default {
-    //
-  }
-</script>

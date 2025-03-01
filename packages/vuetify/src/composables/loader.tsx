@@ -7,7 +7,7 @@ import { getCurrentInstanceName, propsFactory } from '@/util'
 
 // Types
 import type { ExtractPropTypes, SetupContext } from 'vue'
-import type { MakeSlots, SlotsToProps } from '@/util'
+import type { SlotsToProps } from '@/util'
 
 export interface LoaderSlotProps {
   color: string | undefined
@@ -36,12 +36,13 @@ export function useLoader (
 
 export function LoaderSlot (
   props: {
+    absolute?: boolean
     active: boolean
     name: string
     color?: string
-  } & ExtractPropTypes<SlotsToProps<MakeSlots<{
-    default: [LoaderSlotProps]
-  }>>>,
+  } & ExtractPropTypes<SlotsToProps<{
+    default: LoaderSlotProps
+  }>>,
   { slots }: SetupContext,
 ) {
   return (
@@ -51,6 +52,7 @@ export function LoaderSlot (
         isActive: props.active,
       } as LoaderSlotProps) || (
         <VProgressLinear
+          absolute={ props.absolute }
           active={ props.active }
           color={ props.color }
           height="2"

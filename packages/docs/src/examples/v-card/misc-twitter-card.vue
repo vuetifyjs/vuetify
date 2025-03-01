@@ -1,8 +1,7 @@
 <template>
   <v-card
-    class="mx-auto"
+    class="mx-auto text-white"
     color="#26c6da"
-    theme="dark"
     max-width="400"
     prepend-icon="mdi-twitter"
     title="Twitter"
@@ -41,11 +40,3 @@
     </v-card-actions>
   </v-card>
 </template>
-
-<script>
-  export default {
-    data: () => ({
-      //
-    }),
-  }
-</script>

@@ -1,24 +1,25 @@
 @use '../../styles/tools'
 @use './variables' as *
 
-// Block
-.v-color-picker
-  align-self: flex-start
-  contain: content
+@include tools.layer('components')
+  // Block
+  .v-color-picker
+    align-self: flex-start
+    contain: content
 
-  &.v-sheet
-    +tools.elevation($color-picker-elevation)
-    +tools.rounded($color-picker-border-radius)
+    &.v-sheet
+      @include tools.elevation($color-picker-elevation)
+      @include tools.rounded($color-picker-border-radius)
 
-// Element
-.v-color-picker__controls
-  display: flex
-  flex-direction: column
-  padding: $color-picker-controls-padding
+  // Element
+  .v-color-picker__controls
+    display: flex
+    flex-direction: column
+    padding: $color-picker-controls-padding
 
-// Modifier
-.v-color-picker--flat
-  +tools.elevation(0)
+  // Modifier
+  .v-color-picker--flat
+    @include tools.elevation(0)
 
-  .v-color-picker__track:not(.v-input--is-disabled) .v-slider__thumb // High specificity
-    +tools.elevation(0)
+    .v-color-picker__track:not(.v-input--is-disabled) .v-slider__thumb // High specificity
+      @include tools.elevation(0)

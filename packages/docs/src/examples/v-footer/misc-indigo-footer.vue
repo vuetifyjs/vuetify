@@ -6,8 +6,8 @@
       <v-btn
         v-for="icon in icons"
         :key="icon"
-        class="mx-4"
         :icon="icon"
+        class="mx-4"
         variant="text"
       ></v-btn>
     </div>
@@ -23,6 +23,15 @@
     </div>
   </v-footer>
 </template>
+
+<script setup>
+  const icons = [
+    'mdi-facebook',
+    'mdi-twitter',
+    'mdi-linkedin',
+    'mdi-instagram',
+  ]
+</script>
 
 <script>
   export default {

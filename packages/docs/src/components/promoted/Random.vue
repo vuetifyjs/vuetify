@@ -1,7 +1,3 @@
 <template>
-  <vuetify />
+  <PromotedVuetify class="mb-5" />
 </template>
-
-<script setup>
-  //
-</script>

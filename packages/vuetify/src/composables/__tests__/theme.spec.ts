@@ -1,8 +1,12 @@
-/* eslint-disable jest/no-commented-out-tests */
+/* eslint-disable vitest/no-commented-out-tests */
 
-import { describe, expect, it } from '@jest/globals'
+// Composables
 import { createTheme } from '../theme'
+
+// Utilities
 import { createApp } from 'vue'
+
+// Types
 import type { App } from 'vue'
 
 describe('createTheme', () => {
@@ -142,6 +146,33 @@ describe('createTheme', () => {
 
     expect(theme.computedThemes.value.light.colors).toHaveProperty('color2-darken-1')
     expect(theme.computedThemes.value.light.colors).toHaveProperty('color2-lighten-1')
+  })
+
+  it('should allow for customization of the stylesheet id', () => {
+    const customStylesheetId = 'custom-vuetify-stylesheet-id'
+    const theme = createTheme({
+      stylesheetId: customStylesheetId,
+    })
+
+    theme.install(app)
+
+    expect(document.getElementById(customStylesheetId)).toBeDefined()
+  })
+
+  it('should allow for themes to be scoped', () => {
+    const scope = '#my-app'
+    const theme = createTheme({
+      scope,
+    })
+
+    theme.install(app)
+
+    const scopedStyles = document.getElementById('vuetify-theme-stylesheet')!.innerHTML
+    const selectors = scopedStyles.split('\n').filter(line => line.includes('{')).map(line => line.trim())
+    selectors.forEach(selector => {
+      expect(selector.startsWith(`:where(${scope})`)).toBe(true)
+      expect(selector).not.toContain(':root')
+    })
   })
 
   // it('should use vue-meta@2.3 functionality', () => {

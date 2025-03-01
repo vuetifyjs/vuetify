@@ -1,6 +1,6 @@
-import { defineComponent, h } from 'vue'
+// Utilities
 import { mount } from '@vue/test-utils'
-import { describe, expect, it } from '@jest/globals'
+import { defineComponent, h } from 'vue'
 import {
   attachedRoot,
 } from '../dom'

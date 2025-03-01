@@ -1,0 +1,5 @@
+{
+  "props": {
+    "scrollable": "Specify a custom scrollable function."
+  }
+}

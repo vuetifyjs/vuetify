@@ -1,0 +1,5 @@
+{
+  "props": {
+    "app": "Determines the position of the footer. If true, the footer would be given a fixed position at the bottom of the viewport. If false, the footer is set to the bottom of the page."
+  }
+}

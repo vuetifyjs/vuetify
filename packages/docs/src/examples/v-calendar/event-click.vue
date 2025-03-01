@@ -6,18 +6,18 @@
           flat
         >
           <v-btn
-            variant="outlined"
             class="me-4"
             color="grey-darken-2"
+            variant="outlined"
             @click="setToday"
           >
             Today
           </v-btn>
           <v-btn
-            fab
-            variant="text"
-            size="small"
             color="grey-darken-2"
+            size="small"
+            variant="text"
+            icon
             @click="prev"
           >
             <v-icon size="small">
@@ -25,27 +25,26 @@
             </v-icon>
           </v-btn>
           <v-btn
-            fab
-            variant="text"
-            size="small"
             color="grey-darken-2"
+            size="small"
+            variant="text"
+            icon
             @click="next"
           >
             <v-icon size="small">
               mdi-chevron-right
             </v-icon>
           </v-btn>
-          <v-toolbar-title v-if="$refs.calendar">
-            {{ $refs.calendar.title }}
+          <v-toolbar-title v-if="calendar">
+            {{ calendar.title }}
           </v-toolbar-title>
           <v-spacer></v-spacer>
           <v-menu location="bottom end">
-            <template v-slot:activator="{ on, attrs }">
+            <template v-slot:activator="{ props }">
               <v-btn
-                variant="outlined"
                 color="grey-darken-2"
-                v-bind="attrs"
-                v-on="on"
+                variant="outlined"
+                v-bind="props"
               >
                 <span>{{ typeToLabel[type] }}</span>
                 <v-icon end>
@@ -74,20 +73,20 @@
         <v-calendar
           ref="calendar"
           v-model="focus"
-          color="primary"
-          :events="events"
           :event-color="getEventColor"
+          :events="events"
           :type="type"
+          color="primary"
+          @change="updateRange"
+          @click:date="viewDay"
           @click:event="showEvent"
           @click:more="viewDay"
-          @click:date="viewDay"
-          @change="updateRange"
         ></v-calendar>
         <v-menu
           v-model="selectedOpen"
-          :close-on-content-click="false"
           :activator="selectedElement"
-          offset-x
+          :close-on-content-click="false"
+          location="end"
         >
           <v-card
             color="grey-lighten-4"
@@ -115,8 +114,8 @@
             </v-card-text>
             <v-card-actions>
               <v-btn
-                variant="text"
                 color="secondary"
+                variant="text"
                 @click="selectedOpen = false"
               >
                 Cancel
@@ -128,6 +127,88 @@
     </v-col>
   </v-row>
 </template>
+
+<script setup>
+  import { onMounted, ref } from 'vue'
+
+  const calendar = ref()
+
+  const typeToLabel = {
+    month: 'Month',
+    week: 'Week',
+    day: 'Day',
+    '4day': '4 Days',
+  }
+  const colors = ['blue', 'indigo', 'deep-purple', 'cyan', 'green', 'orange', 'grey darken-1']
+  const names = ['Meeting', 'Holiday', 'PTO', 'Travel', 'Event', 'Birthday', 'Conference', 'Party']
+
+  const focus = ref('')
+  const type = ref('month')
+  const selectedEvent = ref({})
+  const selectedElement = ref(null)
+  const selectedOpen = ref(false)
+  const events = ref([])
+
+  onMounted(() => {
+    calendar.value.checkChange()
+  })
+
+  function viewDay ({ date }) {
+    focus.value = date
+    type.value = 'day'
+  }
+  function getEventColor (event) {
+    return event.color
+  }
+  function setToday () {
+    focus.value = ''
+  }
+  function prev () {
+    calendar.value.prev()
+  }
+  function next () {
+    calendar.value.next()
+  }
+  function showEvent ({ nativeEvent, event }) {
+    const open = () => {
+      selectedEvent.value = event
+      selectedElement.value = nativeEvent.target
+      requestAnimationFrame(() => requestAnimationFrame(() => selectedOpen.value = true))
+    }
+    if (selectedOpen.value) {
+      selectedOpen.value = false
+      requestAnimationFrame(() => requestAnimationFrame(() => open()))
+    } else {
+      open()
+    }
+    nativeEvent.stopPropagation()
+  }
+  function updateRange ({ start, end }) {
+    const _events = []
+    const min = new Date(`${start.date}T00:00:00`)
+    const max = new Date(`${end.date}T23:59:59`)
+    const days = (max.getTime() - min.getTime()) / 86400000
+    const eventCount = rnd(days, days + 20)
+    for (let i = 0; i < eventCount; i++) {
+      const allDay = rnd(0, 3) === 0
+      const firstTimestamp = rnd(min.getTime(), max.getTime())
+      const first = new Date(firstTimestamp - (firstTimestamp % 900000))
+      const secondTimestamp = rnd(2, allDay ? 288 : 8) * 900000
+      const second = new Date(first.getTime() + secondTimestamp)
+      _events.push({
+        name: names[rnd(0, names.length - 1)],
+        start: first,
+        end: second,
+        color: colors[rnd(0, colors.length - 1)],
+        timed: !allDay,
+      })
+    }
+    events.value = _events
+  }
+  function rnd (a, b) {
+    return Math.floor((b - a + 1) * Math.random()) + a
+  }
+</script>
 
 <script>
   export default {

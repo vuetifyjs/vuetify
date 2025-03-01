@@ -5,46 +5,37 @@
     color="transparent"
     max-width="700"
   >
-    <v-responsive
-      class="mb-12"
-      min-height="500"
-    >
+    <v-responsive min-height="500">
       <v-row
-        dense
         justify="center"
+        dense
       >
         <v-col
           v-for="sponsor in sponsors"
           :key="sponsor.slug"
-          :md="sponsor.metadata.tier > 1 ? 3 : 5"
           class="d-flex align-center justify-center"
           cols="auto"
         >
-          <sponsor-card
+          <SponsorCard
             :comfortable="Number(sponsor.metadata.tier) === 2"
             :compact="Number(sponsor.metadata.tier) > 2"
             :sponsor="sponsor"
             v-bind="$attrs"
+            :width="Number(sponsor.metadata.tier) > 1 && smAndDown ? 90 : undefined"
           />
         </v-col>
       </v-row>
     </v-responsive>
 
-    <sponsor-link size="large" />
+    <br>
+    <br>
+
+    <SponsorLink append-icon="mdi-page-next" size="large" />
   </v-sheet>
 </template>
 
 <script setup>
-  // Components
-  import SponsorCard from '@/components/sponsor/Card.vue'
-  import SponsorLink from '@/components/sponsor/Link.vue'
-
-  // Composables
-  import { useSponsorsStore } from '@/store/sponsors'
-
-  // Utilities
-  import { computed } from 'vue'
-
+  const { smAndDown } = useDisplay()
   const sponsorStore = useSponsorsStore()
 
   const sponsors = computed(() => {

@@ -1,6 +1,12 @@
 export default {
   badge: 'バッジ',
+  open: '開く',
   close: '閉じる',
+  dismiss: '閉じる',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'キャンセル',
+  },
   dataIterator: {
     noResultsText: '検索結果が見つかりません。',
     loadingText: '項目をロード中です...',
@@ -26,12 +32,20 @@ export default {
     lastPage: '最後のページ',
     pageText: '{0}-{1} 件目 / {2}件',
   },
+  dateRangeInput: {
+    divider: 'to',
+  },
   datePicker: {
-    itemsSelected: '{0}日付選択',
-    nextMonthAriaLabel: '来月',
-    nextYearAriaLabel: '来年',
-    prevMonthAriaLabel: '前月',
-    prevYearAriaLabel: '前年',
+    itemsSelected: '{0} 選択済',
+    range: {
+      title: 'Select dates',
+      header: 'Enter dates',
+    },
+    title: '日付を選択',
+    header: '日付を入力',
+    input: {
+      placeholder: '日付を入力',
+    },
   },
   noDataText: 'データはありません。',
   carousel: {
@@ -43,19 +57,27 @@ export default {
   },
   calendar: {
     moreEvents: 'さらに{0}',
+    today: '今日',
   },
   input: {
-    clear: 'Clear {0}',
+    clear: 'クリア {0}',
     prependAction: '{0} prepended action',
     appendAction: '{0} appended action',
+    otp: '{0}番目のワンタイムパスワードを入力してください',
   },
   fileInput: {
     counter: '{0} ファイル',
     counterSize: '{0} ファイル (合計 {1})',
   },
+  fileUpload: {
+    title: 'ここにファイルをドラッグ＆ドロップ',
+    divider: 'または',
+    browse: 'ファイルを選択',
+  },
   timePicker: {
     am: 'AM',
     pm: 'PM',
+    title: '時間を選択',
   },
   pagination: {
     ariaLabel: {
@@ -68,9 +90,18 @@ export default {
       last: 'Last page',
     },
   },
+  stepper: {
+    next: '次へ',
+    prev: '前へ',
+  },
   rating: {
     ariaLabel: {
       item: '評価 {1} のうち {0}',
     },
+  },
+  loading: 'ロード中...',
+  infiniteScroll: {
+    loadMore: 'さらに読み込む',
+    empty: 'データがありません',
   },
 }

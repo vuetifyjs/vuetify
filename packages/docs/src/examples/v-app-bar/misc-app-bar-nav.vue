@@ -1,8 +1,8 @@
 <template>
   <v-layout style="overflow: hidden">
     <v-app-bar
-      absolute
       color="deep-purple"
+      absolute
     >
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 
@@ -14,17 +14,14 @@
       temporary
     >
       <v-list
+        v-model="group"
+        color="deep-purple-accent-4"
+        density="compact"
         nav
-        dense
       >
-        <v-list-item-group
-          v-model="group"
-          active-class="deep-purple--text text--accent-4"
-        >
-          <v-list-item prepend-icon="mdi-home" title="Home"></v-list-item>
+        <v-list-item prepend-icon="mdi-home" title="Home" value="home"></v-list-item>
 
-          <v-list-item prepend-icon="mdi-account" title="Account"></v-list-item>
-        </v-list-item-group>
+        <v-list-item prepend-icon="mdi-account" title="Account" value="account"></v-list-item>
       </v-list>
     </v-navigation-drawer>
     <v-main>
@@ -35,6 +32,13 @@
     </v-main>
   </v-layout>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const drawer = ref(false)
+  const group = ref(null)
+</script>
 
 <script>
   export default {

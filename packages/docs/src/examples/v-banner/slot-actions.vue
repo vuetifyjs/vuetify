@@ -1,8 +1,8 @@
 <template>
   <v-banner
-    lines="one"
-    icon="mdi-wifi-strength-alert-outline"
     color="warning"
+    icon="mdi-wifi-strength-alert-outline"
+    lines="one"
   >
     <template v-slot:text>
       No Internet connection

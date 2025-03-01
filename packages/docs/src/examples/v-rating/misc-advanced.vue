@@ -102,8 +102,8 @@
             ref="link"
             :label="copied ? 'Link copied' : 'Click to copy link'"
             class="pa-4"
-            readonly
             model-value="https://g.co/kgs/nkrK43"
+            readonly
             @click="copy"
           ></v-text-field>
         </v-card>
@@ -124,9 +124,9 @@
       >
         <template v-slot:item="props">
           <v-icon
-            size="large"
             :color="props.isFilled ? 'purple-darken-4' : ''"
             :icon="`mdi-numeric-${props.index}-box`"
+            size="large"
           ></v-icon>
         </template>
       </v-rating>
@@ -136,6 +136,22 @@
     </div>
   </v-card>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const link = ref()
+
+  const copied = ref(false)
+  const dialog = ref(false)
+  const rating = ref(10)
+
+  function copy () {
+    link.value.focus()
+    document.execCommand('selectAll', false, null)
+    copied.value = document.execCommand('copy')
+  }
+</script>
 
 <script>
   export default {

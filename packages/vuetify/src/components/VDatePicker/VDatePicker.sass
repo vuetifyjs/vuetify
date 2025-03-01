@@ -1,0 +1,10 @@
+@use '../../styles/tools'
+@use './variables' as *
+
+@include tools.layer('components')
+  .v-date-picker
+    overflow: hidden
+    width: $date-picker-width
+
+    &--show-week
+      width: $date-picker-show-week-width

@@ -32,12 +32,19 @@
   </v-card>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const items = ['foo', 'bar', 'fizz', 'buzz']
+
+  const values = ref('foo')
+</script>
+
 <script>
   export default {
     data: () => ({
       items: ['foo', 'bar', 'fizz', 'buzz'],
       values: 'foo',
-      value: null,
     }),
   }
 </script>

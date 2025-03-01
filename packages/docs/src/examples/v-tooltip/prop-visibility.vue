@@ -1,7 +1,7 @@
 <template>
   <v-container
-    fluid
     class="text-center"
+    fluid
   >
     <v-row
       class="flex"
@@ -14,8 +14,8 @@
       </v-col>
 
       <v-col
-        cols="12"
         class="mt-12"
+        cols="12"
       >
         <v-tooltip
           v-model="show"
@@ -37,6 +37,12 @@
     </v-row>
   </v-container>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const show = ref(false)
+</script>
 
 <script>
   export default {

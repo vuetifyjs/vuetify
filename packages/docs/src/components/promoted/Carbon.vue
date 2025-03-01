@@ -1,41 +1,58 @@
 <template>
-  <promoted-base
-    ref="script"
-    :class="[
-      'mb-4',
-      isDark ? 'theme--dark' : 'theme--light',
-    ]"
-    border
+  <v-responsive
+    class="align-center"
     min-height="118"
-    max-width="360"
   >
-    <promoted-script
-      id="carbonads-script"
-      script-id="_carbonads_js"
-      src="//cdn.carbonads.com/carbon.js?serve=CWYDC27W&placement=v3vuetifyjscom"
-      @script:error="error = true"
-    />
-  </promoted-base>
+    <template v-if="!error1">
+      <PromotedBase
+        ref="script"
+        :class="[
+          isDark ? 'theme--dark' : 'theme--light',
+        ]"
+        max-width="360"
+        border
+      >
+        <PromotedScript
+          v-if="!error1"
+          id="carbonads-script"
+          script-id="_carbonads_js"
+          src="//cdn.carbonads.com/carbon.js?serve=CWYDC27W&placement=v3vuetifyjscom"
+          @script:error="error1 = true"
+        />
+      </PromotedBase>
+    </template>
+
+    <VoPromotionsCardVuetify v-else />
+  </v-responsive>
 </template>
 
 <script setup lang="ts">
-  // Components
-  import PromotedBase from './Base.vue'
-  import PromotedScript from './Script.vue'
+  const error1 = shallowRef(false)
+  const script = shallowRef(null)
+  let timer = -1 as any
 
-  // Composables
-  import { useTheme } from 'vuetify'
+  function checkForElement (id: string, cb?: () => void) {
+    return setTimeout(() => {
+      if (document.getElementById(id)) return
 
-  // Utilities
-  import { computed, onBeforeUnmount, ref } from 'vue'
+      clearTimeout(timer)
 
-  const error = ref(false)
-  const script = ref(null)
+      cb?.()
+    }, 2000)
+  }
+
+  onMounted(() => {
+    timer = checkForElement('carbonads', () => {
+      error1.value = true
+    })
+  })
 
   onBeforeUnmount(() => {
-    const script = document.getElementById('carbonads-script')
+    document.getElementById('carbonads-script')?.remove()
+  })
 
-    script?.remove()
+  onScopeDispose(() => {
+    clearTimeout(timer)
   })
 
   const theme = useTheme()
@@ -44,6 +61,9 @@
 </script>
 
 <style lang="sass">
+  #carbonads-script
+    width: 100%
+
   #carbonads,
   #carbonads_1,
   #carbonads_2

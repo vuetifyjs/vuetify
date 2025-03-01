@@ -6,29 +6,34 @@ import { VImg } from '@/components/VImg'
 
 // Composables
 import { useDisplay } from '@/composables'
+import { makeComponentProps } from '@/composables/component'
 import { useIntersectionObserver } from '@/composables/intersectionObserver'
 import { useResizeObserver } from '@/composables/resizeObserver'
 
 // Utilities
-import { clamp, genericComponent, getScrollParent, useRender } from '@/util'
 import { computed, onBeforeUnmount, ref, watch, watchEffect } from 'vue'
+import { clamp, genericComponent, getScrollParent, propsFactory, useRender } from '@/util'
 
 // Types
-import type { VImgSlots } from '../VImg/VImg'
+import type { VImgSlots } from '@/components/VImg/VImg'
 
 function floor (val: number) {
   return Math.floor(Math.abs(val)) * Math.sign(val)
 }
 
+export const makeVParallaxProps = propsFactory({
+  scale: {
+    type: [Number, String],
+    default: 0.5,
+  },
+
+  ...makeComponentProps(),
+}, 'VParallax')
+
 export const VParallax = genericComponent<VImgSlots>()({
   name: 'VParallax',
 
-  props: {
-    scale: {
-      type: [Number, String],
-      default: 0.5,
-    },
-  },
+  props: makeVParallaxProps(),
 
   setup (props, { slots }) {
     const { intersectionRef, isIntersecting } = useIntersectionObserver()
@@ -91,7 +96,9 @@ export const VParallax = genericComponent<VImgSlots>()({
         class={[
           'v-parallax',
           { 'v-parallax--active': isIntersecting.value },
+          props.class,
         ]}
+        style={ props.style }
         ref={ root }
         cover
         onLoadstart={ onScroll }

@@ -2,32 +2,64 @@
 import './VColorPickerPreview.sass'
 
 // Components
+import { VBtn } from '@/components/VBtn'
 import { VSlider } from '@/components/VSlider'
 
+// Composables
+import { makeComponentProps } from '@/composables/component'
+
 // Utilities
-import { defineComponent, HSVtoCSS, useRender } from '@/util'
+import { onUnmounted } from 'vue'
 import { nullColor } from './util'
+import {
+  defineComponent,
+  HSVtoCSS,
+  parseColor,
+  propsFactory,
+  RGBtoHSV,
+  SUPPORTS_EYE_DROPPER,
+  useRender,
+} from '@/util'
 
 // Types
 import type { PropType } from 'vue'
 import type { HSV } from '@/util'
 
+export const makeVColorPickerPreviewProps = propsFactory({
+  color: {
+    type: Object as PropType<HSV | null>,
+  },
+  disabled: Boolean,
+  hideAlpha: Boolean,
+
+  ...makeComponentProps(),
+}, 'VColorPickerPreview')
+
 export const VColorPickerPreview = defineComponent({
   name: 'VColorPickerPreview',
 
-  props: {
-    color: {
-      type: Object as PropType<HSV | null>,
-    },
-    disabled: Boolean,
-    hideAlpha: Boolean,
-  },
+  props: makeVColorPickerPreviewProps(),
 
   emits: {
     'update:color': (color: HSV) => true,
   },
 
   setup (props, { emit }) {
+    const abortController = new AbortController()
+
+    onUnmounted(() => abortController.abort())
+
+    async function openEyeDropper () {
+      if (!SUPPORTS_EYE_DROPPER) return
+
+      const eyeDropper = new window.EyeDropper()
+      try {
+        const result = await eyeDropper.open({ signal: abortController.signal })
+        const colorHexValue = RGBtoHSV(parseColor(result.sRGBHex))
+        emit('update:color', { ...(props.color ?? nullColor), ...colorHexValue })
+      } catch (e) {}
+    }
+
     useRender(() => (
       <div
         class={[
@@ -35,8 +67,16 @@ export const VColorPickerPreview = defineComponent({
           {
             'v-color-picker-preview--hide-alpha': props.hideAlpha,
           },
+          props.class,
         ]}
+        style={ props.style }
       >
+        { SUPPORTS_EYE_DROPPER && (
+          <div class="v-color-picker-preview__eye-dropper" key="eyeDropper">
+            <VBtn onClick={ openEyeDropper } icon="$eyeDropper" variant="plain" density="comfortable" />
+          </div>
+        )}
+
         <div class="v-color-picker-preview__dot">
           <div style={{ background: HSVtoCSS(props.color ?? nullColor) }} />
         </div>

@@ -1,6 +1,12 @@
 export default {
   badge: 'Emblem',
+  open: 'Open',
   close: 'Luk',
+  dismiss: 'Dismiss',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'Cancel',
+  },
   dataIterator: {
     noResultsText: 'Ingen matchende data fundet',
     loadingText: 'Indhenter data...',
@@ -26,12 +32,20 @@ export default {
     lastPage: 'Sidste side',
     pageText: '{0}-{1} af {2}',
   },
+  dateRangeInput: {
+    divider: 'to',
+  },
   datePicker: {
-    itemsSelected: '{0} valgt',
-    nextMonthAriaLabel: 'Næste måned',
-    nextYearAriaLabel: 'Næste år',
-    prevMonthAriaLabel: 'Forrige måned',
-    prevYearAriaLabel: 'Forrige år',
+    itemsSelected: '{0} selected',
+    range: {
+      title: 'Vælg datoer',
+      header: 'Indtast datoer',
+    },
+    title: 'Vælg dato',
+    header: 'Indtast dato',
+    input: {
+      placeholder: 'Indtast dato',
+    },
   },
   noDataText: 'Ingen data tilgængelig',
   carousel: {
@@ -43,19 +57,27 @@ export default {
   },
   calendar: {
     moreEvents: '{0} mere',
+    today: 'Today',
   },
   input: {
     clear: 'Clear {0}',
     prependAction: '{0} prepended action',
     appendAction: '{0} appended action',
+    otp: 'Please enter OTP character {0}',
   },
   fileInput: {
     counter: '{0} filer',
     counterSize: '{0} filer ({1} total)',
   },
+  fileUpload: {
+    title: 'Drag and drop files here',
+    divider: 'or',
+    browse: 'Browse Files',
+  },
   timePicker: {
     am: 'AM',
     pm: 'PM',
+    title: 'Select Time',
   },
   pagination: {
     ariaLabel: {
@@ -68,9 +90,18 @@ export default {
       last: 'Last page',
     },
   },
+  stepper: {
+    next: 'Next',
+    prev: 'Previous',
+  },
   rating: {
     ariaLabel: {
       item: 'Bedømmelse {0} af {1}',
     },
+  },
+  loading: 'Loading...',
+  infiniteScroll: {
+    loadMore: 'Load more',
+    empty: 'No more',
   },
 }

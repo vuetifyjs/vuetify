@@ -1,6 +1,6 @@
 {
   "johnleider": {
-    "discord": "johnleider#0001",
+    "discord": "johnleider",
     "focus": [
       "[vuetifyjs/*](https://github.com/vuetifyjs)"
     ],
@@ -17,10 +17,11 @@
     "name": "John Leider",
     "team": "company",
     "twitter": "zeroskillz",
-    "work": "Engineer @ Vuetify"
+    "work": "Engineer @ Vuetify",
+    "joined": "Jun 2016"
   },
   "heatherleider": {
-    "discord": "heatherleider#7788",
+    "discord": "heatherleider",
     "focus": [
       "[vuetifyjs/*](https://github.com/vuetifyjs)"
     ],
@@ -31,10 +32,11 @@
     "name": "Heather Leider",
     "team": "company",
     "twitter": "grneyedgrl01",
-    "work": "COO @ Vuetify"
+    "work": "COO @ Vuetify",
+    "joined": "Nov 2019"
   },
   "KaelWD": {
-    "discord": "Kaelwd#6373",
+    "discord": "kaelwd",
     "focus": [
       "[vuetifyjs/*](https://github.com/vuetifyjs)",
       "[vuetify-loader](https://github.com/vuetifyjs/vuetify-loader)",
@@ -42,7 +44,8 @@
     ],
     "funding": [
       "[GitHub Sponsors](https://github.com/sponsors/kaelwd)",
-      "[Patreon](https://patreon.com/kaelwd)"
+      "[Patreon](https://patreon.com/kaelwd)",
+      "[Open Collective](https://opencollective.com/vuetify)"
     ],
     "languages": [
       "English"
@@ -50,23 +53,21 @@
     "location": "Melbourne, Australia",
     "name": "Kael Watts-Deuchar",
     "team": "core",
-    "twitter": "kaelwd"
+    "joined": "Oct 2017"
   },
   "nekosaur": {
-    "discord": "nekosaur#5406",
-    "focus": [
-      "[vuetifyjs](https://github.com/vuetifyjs)"
-    ],
+    "discord": ".nekosaur",
     "languages": [
       "Swedish",
       "English"
     ],
     "location": "Malmö, Sweden",
     "name": "Albert Kaaman",
-    "team": "core"
+    "team": "legends",
+    "joined": "Jun 2017"
   },
   "MajesticPotatoe": {
-    "discord": "MajesticPotatoe#4997",
+    "discord": "majesticpotatoe",
     "focus": [
       "[vuetifyjs](https://github.com/vuetifyjs)",
       "[vuetifyjs/docs](https://github.com/vuetifyjs/vuetify/tree/master/packages/docs)"
@@ -82,10 +83,11 @@
     "location": "Rochester, NY, USA",
     "name": "Andrew Henry",
     "team": "core",
-    "twitter": "SeeMWhyK"
+    "twitter": "SeeMWhyK",
+    "joined": "Dec 2018"
   },
   "blalan05": {
-    "discord": "blalan05#3967",
+    "discord": "blalan05",
     "focus": [
       "[vuetifyjs](https://github.com/vuetifyjs)"
     ],
@@ -95,22 +97,172 @@
     "linkedin": "blalan05",
     "location": "Wisconsin, USA",
     "name": "Blaine Landowski",
-    "team": "core"
+    "team": "core",
+    "work": "CEO at Foundational Technologies LLC",
+    "joined": "Feb 2021"
+  },
+  "yuwu9145": {
+    "discord": "yuwu9145",
+    "focus": [
+      "[vuetifyjs](https://github.com/vuetifyjs)"
+    ],
+    "languages": [
+      "English",
+      "Chinese(Mandarin)"
+    ],
+    "location": "Melbourne, Australia",
+    "name": "Yuchao Wu",
+    "team": "core",
+    "joined": "Mar 2023"
+  },
+  "userquin": {
+    "discord": "userquin",
+    "focus": [
+      "[vuetifyjs/create](https://github.com/vuetifyjs/create)",
+      "[Nuxt](https://github.com/userquin/vuetify-nuxt-module)"
+    ],
+    "languages": [
+      "Spanish",
+      "English"
+    ],
+    "location": "Madrid, Spain",
+    "name": "Joaquín Sánchez",
+    "twitter": "userquin",
+    "team": "core",
+    "joined": "Mar 2024"
+  },
+  "kieuminhcanh": {
+    "discord": "kieuminhcanh",
+    "focus": [
+      "[vuetifyjs/studio](https://github.com/vuetifyjs/studio)"
+    ],
+    "funding": [
+      "[GitHub Sponsors](https://github.com/sponsors/kieuminhcanh)",
+      "[Patreon](https://patreon.com/kieuminhcanh)",
+      "[Open Collective](https://opencollective.com/vuetify)"
+    ],
+    "languages": [
+      "English",
+      "Vietnamese"
+    ],
+    "location": "California, US",
+    "name": "Ken Kieu",
+    "team": "core",
+    "twitter": "kieuminhcanh",
+    "joined": "April 2024"
+  },
+  "MatthewAry": {
+    "discord": "bitshift_",
+    "focus": [
+      "[vuetifyjs/*](https://github.com/vuetifyjs)"
+    ],
+    "languages": [
+      "English"
+    ],
+    "location": "Spokane, WA, USA",
+    "name": "Matthew Ary",
+    "twitter": "MatthewAry",
+    "linkedin": "matthewary",
+    "work": "Director of Product Development at Symplsoft Inc.",
+    "team": "core",
+    "joined": "May 2024"
+  },
+  "J-Sek": {
+    "discord": "jacek#1420",
+    "focus": [
+      "[vuetifyjs/studio](https://github.com/vuetifyjs/studio)"
+    ],
+    "languages": [
+      "Polish",
+      "English"
+    ],
+    "location": "Gdańsk, Poland",
+    "name": "Jacek Czarniecki",
+    "team": "core",
+    "joined": "Nov 2024"
+  },
+  "jacekkarczmarczyk": {
+    "discord": "jacek#3542",
+    "languages": [
+      "Polish",
+      "English"
+    ],
+    "location": "Warsaw, Poland",
+    "name": "Jacek Karczmarczyk",
+    "team": "legends"
+  },
+  "chewy94": {
+    "avatar": "https://cdn.vuetifyjs.com/docs/images/team/chewy94.jpg",
+    "discord": "Sean Kimball#0001",
+    "languages": [
+      "English"
+    ],
+    "linkedin": "sean-kimball-b50922126",
+    "location": "Goodyear, Arizona, USA",
+    "name": "Sean Kimball",
+    "team": "legends"
+  },
+  "bdeo": {
+    "avatar": "https://cdn.vuetifyjs.com/docs/images/team/bdeo.jpg",
+    "discord": "brandondeo#0001",
+    "languages": [
+      "English"
+    ],
+    "linkedin": "brandondeo",
+    "location": "Philadelphia, PA, USA",
+    "name": "Brandon Deo",
+    "team": "legends"
   },
   "ElijahKotyluk": {
+    "avatar": "https://cdn.vuetifyjs.com/docs/images/team/ElijahKotyluk.jpg",
     "discord": "edk#4363",
-    "funding": [
-      "[GitHub Sponsors](https://github.com/sponsors/ElijahKotyluk)"
-    ],
-    "focus": [
-      "[vuetifyjs](https://github.com/vuetifyjs)",
-      "[vuetifyjs/vue-cli-plugins](https://github.com/vuetifyjs/vue-cli-plugins)"
-    ],
     "languages": [
       "English"
     ],
     "location": "USA",
     "name": "Elijah Kotyluk",
-    "team": "core"
+    "team": "legends"
+  },
+  "santiagoaloi": {
+    "avatar": "https://cdn.vuetifyjs.com/docs/images/team/santiagoaloi.jpg",
+    "discord": "lannnister",
+    "languages": [
+      "Swedish",
+      "English",
+      "Spanish"
+    ],
+    "linkedin": "santiagoaloi",
+    "location": "Stockholm, Sweden",
+    "name": "Santiago Aloi",
+    "team": "legends",
+    "joined": "Feb 2023"
+  },
+  "yooneskh": {
+    "avatar": "https://cdn.vuetifyjs.com/docs/images/team/yooneskh.png",
+    "discord": "YoonesKh#7826",
+    "languages": [
+      "English",
+      "Persian"
+    ],
+    "twitter": "yooneskh",
+    "linkedin": "yooneskh ",
+    "location": "Iran",
+    "name": "Yoones Khoshghadam",
+    "team": "legends",
+    "joined": "January 2023"
+  },
+  "elvinagarcia": {
+    "avatar": "https://cdn.vuetifyjs.com/docs/images/team/elvinagarcia.png",
+    "discord": "elvinagarcia",
+    "focus": [
+      "Design/Animations"
+    ],
+    "languages": [
+      "English"
+    ],
+    "location": "Virginia, USA",
+    "name": "Elvina Garcia",
+    "team": "legends",
+    "joined": "Feb 2023"
   }
 }

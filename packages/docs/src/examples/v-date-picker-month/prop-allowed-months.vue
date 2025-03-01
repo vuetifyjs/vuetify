@@ -3,13 +3,19 @@
     <v-date-picker
       v-model="date"
       :allowed-dates="allowedMonths"
-      type="month"
       class="mt-4"
-      min="2017-06"
       max="2019-10"
+      min="2017-06"
+      type="month"
     ></v-date-picker>
   </v-row>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const date = ref('2017-12')
+</script>
 
 <script>
   export default {

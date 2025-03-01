@@ -1,8 +1,9 @@
-import { posix as path } from 'path'
-import mkdirp from 'mkdirp'
+import path from 'upath'
+import { mkdirp } from 'mkdirp'
 import { writeFile } from 'fs/promises'
+import { fileURLToPath } from 'url'
 
-import { version } from '../package.json'
+import packageJson from '../package.json' with { type: 'json' }
 
 import alias from '@rollup/plugin-alias'
 import sass from 'rollup-plugin-sass'
@@ -17,14 +18,15 @@ import { simple as walk } from 'acorn-walk'
 
 const extensions = ['.ts', '.tsx', '.js', '.jsx', '.es6', '.es', '.mjs']
 const banner = `/*!
-* Vuetify v${version}
+* Vuetify v${packageJson.version}
 * Forged by John Leider
 * Released under the MIT License.
 */\n`
 
-function fixWindowsPath(path) {
-  return path.replace(/^[^:]+:\\/, '\\').replaceAll('\\', '/')
-}
+const root = path.resolve(fileURLToPath(import.meta.url), '../..')
+const srcDir = path.resolve(root, 'src')
+const libDir = path.resolve(root, 'lib')
+const labsDir = path.resolve(srcDir, 'labs')
 
 export default [
   {
@@ -66,10 +68,11 @@ export default [
       sass({
         options: {
           charset: false,
+          silenceDeprecations: ['legacy-js-api'],
         },
         output (styles, styleNodes) {
           // Complete CSS bundle
-          mkdirp(path.resolve(__dirname, '../dist')).then(() => {
+          mkdirp(path.resolve(root, 'dist')).then(() => {
             return Promise.all([
               postcss([autoprefixer]).process(styles, { from: 'src' }),
               postcss([autoprefixer, cssnano({
@@ -79,16 +82,14 @@ export default [
               })]).process(styles, { from: 'src' }),
             ])
           }).then(result => {
-            writeFile(path.resolve(__dirname, '../dist/vuetify.css'), banner + result[0].css, 'utf8')
-            writeFile(path.resolve(__dirname, '../dist/vuetify.min.css'), banner + result[1].css, 'utf8')
+            writeFile(path.resolve(root, 'dist/vuetify.css'), banner + result[0].css, 'utf8')
+            writeFile(path.resolve(root, 'dist/vuetify.min.css'), banner + result[1].css, 'utf8')
           })
 
           // Individual CSS files
-          for (const { id, content } of styleNodes) {
-            const out = path.parse(fixWindowsPath(id).replace(
-              path.resolve(__dirname, '../src'),
-              path.resolve(__dirname, '../lib')
-            ))
+          for (const {id, content} of styleNodes) {
+            const relativePath = path.relative(srcDir, id)
+            const out = path.parse(path.join(libDir, relativePath))
             mkdirp(out.dir).then(() => {
               writeFile(path.join(out.dir, out.name + '.css'), content, 'utf8')
             })
@@ -97,7 +98,7 @@ export default [
       }),
       alias({
         entries: [
-          { find: /^@\/(.*)/, replacement: path.resolve(__dirname, '../src/$1') },
+          { find: /^@\/(.*)/, replacement: fileURLToPath(new URL('../src/$1', import.meta.url)) },
         ],
       }),
       {
@@ -111,8 +112,7 @@ export default [
               (await this.resolve('src/components/index.ts')).id
             )
             await Promise.all(importedIds.map(async id => {
-              // Fix for Windows
-              const importFrom = path.relative(path.resolve(__dirname, '../src'), fixWindowsPath(id)).replace(/\.ts$/, '.mjs')
+              const importFrom = path.relative(srcDir, id).replace(/\/index\.ts$/, '')
 
               if (await this.resolve(path.join(id, '../_variables.scss')) != null) {
                 variables.push(id)
@@ -168,7 +168,7 @@ export default [
             source: variables.map(id => {
               return `@forward '` + path.join(
                 '../lib',
-                path.relative(path.resolve(__dirname, '../src'), id),
+                path.relative(srcDir, id),
                 '../_variables.scss'
               ) + `'`
             }).sort().join('\n'),
@@ -204,9 +204,10 @@ export default [
       sass({
         options: {
           charset: false,
+          silenceDeprecations: ['legacy-js-api'],
         },
         output (styles, styleNodes) {
-          mkdirp(path.resolve(__dirname, '../dist')).then(() => {
+          mkdirp(path.resolve(root, 'dist')).then(() => {
             return Promise.all([
               postcss([autoprefixer]).process(styles, { from: 'src' }),
               postcss([autoprefixer, cssnano({
@@ -216,17 +217,15 @@ export default [
               })]).process(styles, { from: 'src' }),
             ])
           }).then(result => {
-            writeFile(path.resolve(__dirname, '../dist/vuetify-labs.css'), banner + result[0].css, 'utf8')
-            writeFile(path.resolve(__dirname, '../dist/vuetify-labs.min.css'), banner + result[1].css, 'utf8')
+            writeFile(path.resolve(root, 'dist/vuetify-labs.css'), banner + result[0].css, 'utf8')
+            writeFile(path.resolve(root, 'dist/vuetify-labs.min.css'), banner + result[1].css, 'utf8')
           })
 
           // Individual CSS files
-          styleNodes = styleNodes.filter(node => node.id.includes('src/labs'))
+          styleNodes = styleNodes.filter(node => path.normalize(node.id).startsWith(labsDir));
           for (const { id, content } of styleNodes) {
-            const out = path.parse(fixWindowsPath(id).replace(
-              path.resolve(__dirname, '../src'),
-              path.resolve(__dirname, '../lib')
-            ))
+            const relativePath = path.relative(srcDir, id)
+            const out = path.parse(path.join(libDir, relativePath))
             mkdirp(out.dir).then(() => {
               writeFile(path.join(out.dir, out.name + '.css'), content, 'utf8')
             })
@@ -235,7 +234,7 @@ export default [
       }),
       alias({
         entries: [
-          { find: /^@\/(.*)/, replacement: path.resolve(__dirname, '../src/$1') },
+          { find: /^@\/(.*)/, replacement: fileURLToPath(new URL('../src/$1', import.meta.url)) },
         ],
       }),
       {
@@ -248,8 +247,7 @@ export default [
               (await this.resolve('src/labs/components.ts')).id
             )
             await Promise.all(importedIds.map(async id => {
-              // Fix for Windows
-              const importFrom = path.relative(path.resolve(__dirname, '../src'), fixWindowsPath(id)).replace(/\.ts$/, '.mjs')
+              const importFrom = path.relative(srcDir, id).replace(/\/index\.ts$/, '')
 
               if (await this.resolve(path.join(id, '../_variables.scss')) != null) {
                 variables.push(id)
@@ -286,7 +284,7 @@ export default [
             source: variables.map(id => {
               return `@forward '` + path.join(
                 '../lib',
-                path.relative(path.resolve(__dirname, '../src'), id),
+                path.relative(srcDir, id),
                 '../_variables.scss'
               ) + `'`
             }).sort().join('\n'),

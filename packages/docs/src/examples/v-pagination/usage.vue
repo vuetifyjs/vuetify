@@ -1,5 +1,5 @@
 <template>
-  <usage-example
+  <ExamplesUsageExample
     v-model="model"
     :code="code"
     :name="name"
@@ -12,19 +12,15 @@
     </div>
 
     <template v-slot:configuration>
-      <v-slider v-model="length" label="Length" min="1" max="20"></v-slider>
+      <v-slider v-model="length" label="Length" max="20" min="1"></v-slider>
     </template>
-  </usage-example>
+  </ExamplesUsageExample>
 </template>
 
 <script setup>
-  // Utilities
-  import { computed, ref } from 'vue'
-  import { propsToString } from '@/util/helpers'
-
   const name = 'v-pagination'
   const model = ref('default')
-  const length = ref(6)
+  const length = ref(4)
   const options = []
 
   const props = computed(() => {

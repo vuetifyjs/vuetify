@@ -1,10 +1,9 @@
 // Composables
 import { makeValidationProps, useValidation } from '../validation'
 
-// Utilites
-import { describe, expect, it } from '@jest/globals'
-import { defineComponent, nextTick } from 'vue'
+// Utilities
 import { mount } from '@vue/test-utils'
+import { defineComponent, nextTick } from 'vue'
 
 // Types
 import type { ValidationProps } from '../validation'
@@ -30,6 +29,7 @@ describe('validation', () => {
     ['', [(v: any) => new Promise<boolean | string>(resolve => resolve(!!v || 'buzz'))], ['buzz']],
     ['foo', [(v: any) => v === 'foo' || 'bar'], []],
     ['foo', [(v: any) => v === 'bar' || 'fizz'], ['fizz']],
+    ['foo', [(v: any) => v === 'bar'], ['']],
   ])('should validate rules and return array of errorMessages %#', async (modelValue, rules, expected) => {
     const props = { rules, modelValue }
     const wrapper = mountFunction(props)
@@ -110,6 +110,8 @@ describe('validation', () => {
       modelValue: '',
     })
 
+    await nextTick()
+
     expect(wrapper.vm.isPristine).toBe(true)
     expect(wrapper.vm.isValid).toBeNull()
 
@@ -135,6 +137,8 @@ describe('validation', () => {
     expect(wrapper.vm.isValid).toBe(true)
 
     wrapper.vm.reset()
+    await nextTick() // model update
+    await nextTick() // await rules
 
     expect(wrapper.vm.isPristine).toBe(true)
     expect(wrapper.vm.isValid).toBeNull()
