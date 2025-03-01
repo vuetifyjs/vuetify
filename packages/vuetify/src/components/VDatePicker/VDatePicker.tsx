@@ -94,6 +94,7 @@ export const VDatePicker = genericComponent<new <
     'update:year': (date: any) => true,
     // 'update:inputMode': (date: any) => true,
     'update:viewMode': (date: any) => true,
+    'click:date': (date: Date) => true,
   },
 
   setup (props, { emit, slots }) {
@@ -217,8 +218,9 @@ export const VDatePicker = genericComponent<new <
       onUpdateMonth(month.value)
     }
 
-    function onClickDate () {
+    function onClickDate (date: Date) {
       viewMode.value = 'month'
+      emit('click:date', date)
     }
 
     function onClickMonth () {
@@ -309,7 +311,7 @@ export const VDatePicker = genericComponent<new <
                 key="header"
                 { ...datePickerHeaderProps }
                 { ...headerProps }
-                onClick={ viewMode.value !== 'month' ? onClickDate : undefined }
+                onClick={ viewMode.value !== 'month' ? () => { viewMode.value = 'month' } : undefined }
                 v-slots={{
                   ...slots,
                   default: undefined,
@@ -357,6 +359,7 @@ export const VDatePicker = genericComponent<new <
                       v-model:year={ year.value }
                       onUpdate:month={ onUpdateMonth }
                       onUpdate:year={ onUpdateYear }
+                      onClick:date={ onClickDate }
                       min={ minDate.value }
                       max={ maxDate.value }
                     />

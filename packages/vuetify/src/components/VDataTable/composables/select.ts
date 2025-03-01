@@ -2,7 +2,7 @@
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, inject, provide, ref, shallowRef } from 'vue'
+import { computed, inject, provide, shallowRef } from 'vue'
 import { deepEqual, propsFactory, wrapInArray } from '@/util'
 
 // Types
