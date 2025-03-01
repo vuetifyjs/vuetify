@@ -108,8 +108,4 @@ export default {
     prependAction: '{0} prepended action',
     appendAction: '{0} appended action',
   },
-  avatar: {
-    prependAction: '{0} prepended action',
-    appendAction: '{0} appended action',
-  },
 }

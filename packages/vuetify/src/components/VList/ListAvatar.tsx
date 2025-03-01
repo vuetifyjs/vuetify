@@ -41,7 +41,7 @@ export function useListAvatar<T extends {}, K extends names = Listeners<T>> (pro
     }
 
     const label = listener && localeKey
-      ? t(`$vuetify.avatar.${localeKey}`, props.title ?? '')
+      ? t(`$vuetify.list.${localeKey}`, props.title ?? '')
       : undefined
 
     return (
