@@ -11,15 +11,19 @@
 
     <v-btn
       v-if="!chip"
-      close
       color="primary"
-      dark
       @click="chip = true"
     >
       Reset Chip
     </v-btn>
   </div>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const chip = ref(true)
+</script>
 
 <script>
   export default {

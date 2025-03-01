@@ -1,12 +1,12 @@
 // Utilities
-import { getCurrentInstance, hasEvent, IN_BROWSER, propsFactory } from '@/util'
 import {
   computed,
   nextTick,
-  onScopeDispose,
+  onScopeDispose, reactive,
   resolveDynamicComponent,
   toRef,
 } from 'vue'
+import { deepEqual, getCurrentInstance, hasEvent, IN_BROWSER, propsFactory } from '@/util'
 
 // Types
 import type { ComputedRef, PropType, Ref, SetupContext } from 'vue'
@@ -47,6 +47,7 @@ export interface UseLink extends Omit<Partial<ReturnType<typeof _useLink>>, 'hre
   isLink: ComputedRef<boolean>
   isClickable: ComputedRef<boolean>
   href: Ref<string | undefined>
+  linkProps: Record<string, string | undefined>
 }
 
 export function useLink (props: LinkProps & LinkListeners, attrs: SetupContext['attrs']): UseLink {
@@ -57,23 +58,45 @@ export function useLink (props: LinkProps & LinkListeners, attrs: SetupContext['
     return isLink?.value || hasEvent(attrs, 'click') || hasEvent(props, 'click')
   })
 
-  if (typeof RouterLink === 'string') {
+  if (typeof RouterLink === 'string' || !('useLink' in RouterLink)) {
+    const href = toRef(props, 'href')
     return {
       isLink,
       isClickable,
-      href: toRef(props, 'href'),
+      href,
+      linkProps: reactive({ href }),
     }
   }
+  // vue-router useLink `to` prop needs to be reactive and useLink will crash if undefined
+  const linkProps = computed(() => ({
+    ...props,
+    to: toRef(() => props.to || ''),
+  }))
 
-  const link = props.to ? RouterLink.useLink(props as UseLinkOptions) : undefined
+  const routerLink = RouterLink.useLink(linkProps.value as UseLinkOptions)
+  // Actual link needs to be undefined when to prop is not used
+  const link = computed(() => props.to ? routerLink : undefined)
+  const route = useRoute()
+  const isActive = computed(() => {
+    if (!link.value) return false
+    if (!props.exact) return link.value.isActive?.value ?? false
+    if (!route.value) return link.value.isExactActive?.value ?? false
+
+    return link.value.isExactActive?.value && deepEqual(link.value.route.value.query, route.value.query)
+  })
+  const href = computed(() => props.to ? link.value?.route.value.href : props.href)
 
   return {
     isLink,
     isClickable,
-    route: link?.route,
-    navigate: link?.navigate,
-    isActive: link && computed(() => props.exact ? link.isExactActive?.value : link.isActive?.value),
-    href: computed(() => props.to ? link?.route.value.href : props.href),
+    isActive,
+    route: link.value?.route,
+    navigate: link.value?.navigate,
+    href,
+    linkProps: reactive({
+      href,
+      'aria-current': computed(() => isActive.value ? 'page' : undefined),
+    }),
   }
 }
 
@@ -90,10 +113,10 @@ export function useBackButton (router: Router | undefined, cb: (next: Navigation
   let removeBefore: (() => void) | undefined
   let removeAfter: (() => void) | undefined
 
-  if (IN_BROWSER) {
+  if (IN_BROWSER && router?.beforeEach) {
     nextTick(() => {
       window.addEventListener('popstate', onPopstate)
-      removeBefore = router?.beforeEach((to, from, next) => {
+      removeBefore = router.beforeEach((to, from, next) => {
         if (!inTransition) {
           setTimeout(() => popped ? cb(next) : next())
         } else {

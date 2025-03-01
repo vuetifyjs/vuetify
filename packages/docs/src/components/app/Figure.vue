@@ -1,8 +1,7 @@
 <template>
-  <figure class="mb-6">
+  <figure>
     <v-img
       class="rounded bg-surface"
-      cover
       v-bind="$attrs"
     />
 
@@ -17,9 +16,6 @@
 </template>
 
 <script setup>
-  // Utilities
-  import { computed, useAttrs } from 'vue'
-
   const attrs = useAttrs()
 
   defineProps({

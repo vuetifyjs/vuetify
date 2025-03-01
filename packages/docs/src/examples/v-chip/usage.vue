@@ -1,9 +1,9 @@
 <template>
-  <usage-example
+  <ExamplesUsageExample
     v-model="model"
     :code="code"
-    :options="options"
     :name="name"
+    :options="options"
   >
     <div class="text-center">
       <v-chip v-bind="props" v-model="chipModel">
@@ -22,14 +22,10 @@
         </template>
       </v-checkbox>
     </template>
-  </usage-example>
+  </ExamplesUsageExample>
 </template>
 
 <script setup>
-  // Utilities
-  import { computed, ref, watch } from 'vue'
-  import { propsToString } from '@/util/helpers'
-
   const variants = ['outlined', 'elevated', 'text', 'plain']
   const name = 'v-chip'
   const model = ref('default')
@@ -44,8 +40,8 @@
       block: block.value || undefined,
       closable: closable.value || undefined,
       stacked: stacked.value || undefined,
-      'prepend-icon': prepend.value ? 'mdi-vuetify' : undefined,
-      'append-icon': append.value ? 'mdi-vuetify' : undefined,
+      'prepend-icon': prepend.value ? '$vuetify' : undefined,
+      'append-icon': append.value ? '$vuetify' : undefined,
       variant: variants.includes(model.value) ? model.value : undefined,
     }
   })

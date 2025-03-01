@@ -18,14 +18,14 @@
         <v-list>
           <v-list-item
             prepend-avatar="https://cdn.vuetifyjs.com/images/john.jpg"
-            title="John Leider"
             subtitle="Founder of Vuetify"
+            title="John Leider"
           >
             <template v-slot:append>
               <v-btn
-                variant="text"
                 :class="fav ? 'text-red' : ''"
                 icon="mdi-heart"
+                variant="text"
                 @click="fav = !fav"
               ></v-btn>
             </template>
@@ -75,6 +75,15 @@
     </v-menu>
   </div>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const fav = ref(true)
+  const menu = ref(false)
+  const message = ref(false)
+  const hints = ref(true)
+</script>
 
 <script>
   export default {

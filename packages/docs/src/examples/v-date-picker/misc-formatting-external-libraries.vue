@@ -10,14 +10,13 @@
           :close-on-content-click="false"
           max-width="290"
         >
-          <template v-slot:activator="{ on, attrs }">
+          <template v-slot:activator="{ props }">
             <v-text-field
               :model-value="computedDateFormattedMomentjs"
-              clearable
               label="Formatted with Moment.js"
+              clearable
               readonly
-              v-bind="attrs"
-              v-on="on"
+              v-bind="props"
               @click:clear="date = null"
             ></v-text-field>
           </template>
@@ -37,14 +36,13 @@
           :close-on-content-click="false"
           max-width="290"
         >
-          <template v-slot:activator="{ on, attrs }">
+          <template v-slot:activator="{ props }">
             <v-text-field
               :model-value="computedDateFormattedDatefns"
-              clearable
               label="Formatted with datefns"
+              clearable
               readonly
-              v-bind="attrs"
-              v-on="on"
+              v-bind="props"
               @click:clear="date = null"
             ></v-text-field>
           </template>
@@ -57,6 +55,23 @@
     </v-row>
   </v-container>
 </template>
+
+<script setup>
+  import { computed, ref } from 'vue'
+  import moment from 'moment'
+  import { format, parseISO } from 'date-fns'
+
+  const date = ref(format(parseISO(new Date().toISOString()), 'yyyy-MM-dd'))
+  const menu1 = ref(false)
+  const menu2 = ref(false)
+
+  const computedDateFormattedMomentjs = computed(() => {
+    return date.value ? moment(date.value).format('dddd, MMMM Do YYYY') : ''
+  })
+  const computedDateFormattedDatefns = computed(() => {
+    return date.value ? format(parseISO(date.value), 'EEEE, MMMM do yyyy') : ''
+  })
+</script>
 
 <script>
   import moment from 'moment'
@@ -81,11 +96,11 @@
   }
 </script>
 
-<codepen-resources lang="json">
+<playground-resources lang="json">
   {
-    "js": [
-      "https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js",
-      "https://cdnjs.cloudflare.com/ajax/libs/date-fns/1.29.0/date_fns.min.js"
-    ]
+    "imports": {
+      "moment": "https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js",
+      "date-fns": "https://cdn.jsdelivr.net/npm/date-fns@2.30.0/esm/index.js/+esm"
+    }
   }
-</codepen-resources>
+</playground-resources>

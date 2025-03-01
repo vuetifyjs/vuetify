@@ -1,15 +1,21 @@
 // Composables
-import { makeVariantProps } from '@/composables/variant'
+import { makeComponentProps } from '@/composables/component'
 import { provideDefaults } from '@/composables/defaults'
+import { makeVariantProps } from '@/composables/variant'
 
 // Utilities
-import { genericComponent, useRender } from '@/util'
 import { toRef } from 'vue'
+import { genericComponent, propsFactory, useRender } from '@/util'
+
+export const makeVToolbarItemsProps = propsFactory({
+  ...makeComponentProps(),
+  ...makeVariantProps({ variant: 'text' } as const),
+}, 'VToolbarItems')
 
 export const VToolbarItems = genericComponent()({
   name: 'VToolbarItems',
 
-  props: makeVariantProps({ variant: 'text' }),
+  props: makeVToolbarItemsProps(),
 
   setup (props, { slots }) {
     provideDefaults({
@@ -21,7 +27,13 @@ export const VToolbarItems = genericComponent()({
     })
 
     useRender(() => (
-      <div class="v-toolbar-items">
+      <div
+        class={[
+          'v-toolbar-items',
+          props.class,
+        ]}
+        style={ props.style }
+      >
         { slots.default?.() }
       </div>
     ))

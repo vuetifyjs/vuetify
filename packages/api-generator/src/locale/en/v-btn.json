@@ -1,9 +1,0 @@
-{
-  "props": {
-    "block": "Expands the button to 100% of available space.",
-    "flat": "Removes the button box shadow.",
-    "icon": "Apply a specific icon using the [v-icon](/components/icons/) component. The button will become _round_.",
-    "plain": "Removes the default background change applied when hovering over the button.",
-    "stacked": "Displays the button as a flex-column."
-  }
-}

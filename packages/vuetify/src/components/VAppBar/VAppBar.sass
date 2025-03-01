@@ -1,14 +1,15 @@
 @use '../../styles/tools'
 @use './variables' as *
 
-.v-app-bar
-  display: flex
+@include tools.layer('components')
+  .v-app-bar
+    display: flex
 
-  &.v-toolbar
-    @include tools.theme($app-bar-theme...)
+    &.v-toolbar
+      @include tools.theme($app-bar-theme...)
 
-    &:not(.v-toolbar--flat)
-      @include tools.elevation($app-bar-elevation)
+      &:not(.v-toolbar--flat)
+        @include tools.elevation($app-bar-elevation)
 
-  &:not(.v-toolbar--absolute)
-    padding-inline-end: var(--v-scrollbar-offset)
+    &:not(.v-toolbar--absolute)
+      padding-inline-end: var(--v-scrollbar-offset)

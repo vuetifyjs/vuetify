@@ -2,22 +2,20 @@
   "extends": "../../tsconfig.json",
   "include": [
     "src",
-    "dev"
+    "dev",
   ],
-  "exclude": ["types-temp"],
+  "exclude": ["**/*.spec.cy.ts", "**/*.spec.cy.tsx"],
   "compilerOptions": {
     "baseUrl": ".",
-    "outDir": "./types-temp",
     "paths": {
-      "@/*": [
-        "src/*"
-      ],
-      "types": [
-        "jest",
-        "node",
-        "vue-router"
-      ]
+      "@/*": ["src/*"],
+      "@test": ["test/index.ts"]
     },
-    "stripInternal": true
+    "types": [
+      "node",
+      "vue-router"
+    ],
+    "stripInternal": true,
+    "skipLibCheck": false
   }
 }

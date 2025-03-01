@@ -2,17 +2,17 @@
 import './VTextField.sass'
 
 // Components
+import { VCounter } from '@/components/VCounter/VCounter'
 import { filterFieldProps, makeVFieldProps, VField } from '@/components/VField/VField'
-import { filterInputProps, makeVInputProps, VInput } from '@/components/VInput/VInput'
-import { VCounter } from '@/components/VCounter'
+import { makeVInputProps, VInput } from '@/components/VInput/VInput'
+
+// Composables
+import { useFocus } from '@/composables/focus'
+import { forwardRefs } from '@/composables/forwardRefs'
+import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Directives
 import Intersect from '@/directives/intersect'
-
-// Composables
-import { forwardRefs } from '@/composables/forwardRefs'
-import { useFocus } from '@/composables/focus'
-import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { cloneVNode, computed, nextTick, ref } from 'vue'
@@ -20,38 +20,38 @@ import { callEvent, filterInputAttrs, genericComponent, propsFactory, useRender 
 
 // Types
 import type { PropType } from 'vue'
-import type { MakeSlots } from '@/util'
+import type { VCounterSlot } from '@/components/VCounter/VCounter'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
 
 const activeTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', 'month']
 
-type EventProp<T = (...args: any[]) => any> = T | T[]
-const EventProp = [Function, Array] as PropType<EventProp>
-
 export const makeVTextFieldProps = propsFactory({
   autofocus: Boolean,
-  counter: [Boolean, Number, String] as PropType<true | number | string>,
-  counterValue: Function as PropType<(value: any) => number>,
-  hint: String,
-  persistentHint: Boolean,
+  counter: [Boolean, Number, String],
+  counterValue: [Number, Function] as PropType<number | ((value: any) => number)>,
   prefix: String,
   placeholder: String,
   persistentPlaceholder: Boolean,
   persistentCounter: Boolean,
   suffix: String,
+  role: String,
   type: {
     type: String,
     default: 'text',
   },
+  modelModifiers: Object as PropType<Record<string, boolean>>,
 
   ...makeVInputProps(),
   ...makeVFieldProps(),
-}, 'v-text-field')
+}, 'VTextField')
 
-export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'default'> & MakeSlots<{
-  default: []
-}>>()({
+export type VTextFieldSlots = Omit<VInputSlots & VFieldSlots, 'default'> & {
+  default: never
+  counter: VCounterSlot
+}
+
+export const VTextField = genericComponent<VTextFieldSlots>()({
   name: 'VTextField',
 
   directives: { Intersect },
@@ -71,8 +71,8 @@ export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'defa
     const model = useProxiedModel(props, 'modelValue')
     const { isFocused, focus, blur } = useFocus(props)
     const counterValue = computed(() => {
-      return typeof props.counterValue === 'function'
-        ? props.counterValue(model.value)
+      return typeof props.counterValue === 'function' ? props.counterValue(model.value)
+        : typeof props.counterValue === 'number' ? props.counterValue
         : (model.value ?? '').toString().length
     })
     const max = computed(() => {
@@ -86,6 +86,8 @@ export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'defa
 
       return props.counter
     })
+
+    const isPlainOrUnderlined = computed(() => ['plain', 'underlined'].includes(props.variant))
 
     function onIntersect (
       isIntersecting: boolean,
@@ -102,13 +104,9 @@ export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'defa
     const isActive = computed(() => (
       activeTypes.includes(props.type) ||
       props.persistentPlaceholder ||
-      isFocused.value
+      isFocused.value ||
+      props.active
     ))
-    const messages = computed(() => {
-      return props.messages.length
-        ? props.messages
-        : (isFocused.value || props.persistentHint) ? props.hint : ''
-    })
     function onFocus () {
       if (inputRef.value !== document.activeElement) {
         inputRef.value?.focus()
@@ -143,7 +141,10 @@ export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'defa
     function onInput (e: Event) {
       const el = e.target as HTMLInputElement
       model.value = el.value
-      if (['text', 'search', 'password', 'tel', 'url'].includes(props.type)) {
+      if (
+        props.modelModifiers?.trim &&
+        ['text', 'search', 'password', 'tel', 'url'].includes(props.type)
+      ) {
         const caretPosition = [el.selectionStart, el.selectionEnd]
         nextTick(() => {
           el.selectionStart = caretPosition[0]
@@ -153,11 +154,11 @@ export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'defa
     }
 
     useRender(() => {
-      const hasCounter = !!(slots.counter || props.counter || props.counterValue)
+      const hasCounter = !!(slots.counter || (props.counter !== false && props.counter != null))
       const hasDetails = !!(hasCounter || slots.details)
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
-      const [{ modelValue: _, ...inputProps }] = filterInputProps(props)
-      const [fieldProps] = filterFieldProps(props)
+      const { modelValue: _, ...inputProps } = VInput.filterProps(props)
+      const fieldProps = filterFieldProps(props)
 
       return (
         <VInput
@@ -168,15 +169,15 @@ export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'defa
             {
               'v-text-field--prefixed': props.prefix,
               'v-text-field--suffixed': props.suffix,
-              'v-text-field--flush-details': ['plain', 'underlined'].includes(props.variant),
+              'v-input--plain-underlined': isPlainOrUnderlined.value,
             },
+            props.class,
           ]}
-          onClick:prepend={ props['onClick:prepend'] }
-          onClick:append={ props['onClick:append'] }
+          style={ props.style }
           { ...rootAttrs }
           { ...inputProps }
+          centerAffix={ !isPlainOrUnderlined.value }
           focused={ isFocused.value }
-          messages={ messages.value }
         >
           {{
             ...slots,
@@ -194,7 +195,7 @@ export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'defa
                 onClick:clear={ onClear }
                 onClick:prependInner={ props['onClick:prependInner'] }
                 onClick:appendInner={ props['onClick:appendInner'] }
-                role="textbox"
+                role={ props.role }
                 { ...fieldProps }
                 id={ id.value }
                 active={ isActive.value || isDirty.value }
@@ -234,7 +235,9 @@ export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'defa
                       <>
                         { props.prefix && (
                           <span class="v-text-field__prefix">
-                            { props.prefix }
+                            <span class="v-text-field__prefix__text">
+                              { props.prefix }
+                            </span>
                           </span>
                         )}
 
@@ -250,7 +253,9 @@ export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'defa
 
                         { props.suffix && (
                           <span class="v-text-field__suffix">
-                            { props.suffix }
+                            <span class="v-text-field__suffix__text">
+                              { props.suffix }
+                            </span>
                           </span>
                         )}
                       </>
@@ -271,6 +276,7 @@ export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'defa
                       active={ props.persistentCounter || isFocused.value }
                       value={ counterValue.value }
                       max={ max.value }
+                      disabled={ props.disabled }
                       v-slots:default={ slots.counter }
                     />
                   </>

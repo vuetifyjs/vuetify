@@ -2,8 +2,8 @@
   <v-layout class="overflow-visible" style="height: 56px;">
     <v-bottom-navigation
       v-model="value"
-      active
       color="primary"
+      active
     >
       <v-btn>
         <v-icon>mdi-history</v-icon>
@@ -25,6 +25,12 @@
     </v-bottom-navigation>
   </v-layout>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const value = ref(0)
+</script>
 
 <script>
   export default {

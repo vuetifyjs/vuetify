@@ -2,8 +2,8 @@
   <v-card
     class="mx-auto"
     color="purple"
-    elevation="20"
-    max-width="400"
+    elevation="10"
+    width="360"
   >
     <div class="d-flex justify-between">
       <v-card-title class="flex-grow-1 flex-column align-start">
@@ -16,11 +16,10 @@
       </v-card-title>
 
       <v-img
-        contain
+        class="flex-grow-0"
         height="125px"
         src="https://cdn.vuetifyjs.com/images/cards/halcyon.png"
         style="flex-basis: 125px"
-        class="flex-grow-0"
       ></v-img>
     </div>
 
@@ -37,15 +36,21 @@
 
       <v-rating
         v-model="rating"
-        color="white"
         active-color="yellow-accent-4"
+        color="white"
+        size="18"
         half-increments
         hover
-        size="18"
       ></v-rating>
     </v-card-actions>
   </v-card>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const rating = ref(4.5)
+</script>
 
 <script>
   export default {

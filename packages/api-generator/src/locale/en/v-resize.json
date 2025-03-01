@@ -1,6 +1,7 @@
 {
-  "argument": "The function to invoke on window resize.",
+  "value": "A function that will be invoked each time the browser window is resized.",
   "modifiers": {
-    "quiet": "Will **not** automatically invoke the provided callback on bind."
+    "active": "By default the resize event listener is added to window with the `passive` option. This modifier sets `passive` to **false**.",
+    "quiet": "By default the provided handler function is invoked once when the directive is attached to the element. This modifier disables that behavior."
   }
 }

@@ -6,8 +6,8 @@
           <v-container class="max-width">
             <v-pagination
               v-model="page"
-              class="my-4"
               :length="15"
+              class="my-4"
             ></v-pagination>
           </v-container>
         </v-col>
@@ -15,6 +15,12 @@
     </v-container>
   </div>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const page = ref(1)
+</script>
 
 <script>
   export default {

@@ -1,0 +1,35 @@
+@use '../../styles/tools'
+
+@include tools.layer('components')
+  .v-calendar-day
+    position: relative
+    display: flex
+    flex-direction: column
+
+  .v-calendar-weekly
+    .v-calendar__container
+      display: grid
+
+      &.days__7
+        grid-template-columns: repeat(7, 1fr)
+
+      &.days__6
+        grid-template-columns: repeat(6, 1fr)
+
+      &.days__5
+        grid-template-columns: repeat(5, 1fr)
+
+      &.days__4
+        grid-template-columns: repeat(4, 1fr)
+
+      &.days__3
+        grid-template-columns: repeat(3, 1fr)
+
+      &.days__2
+        grid-template-columns: repeat(2, 1fr)
+
+      &.days__1
+        grid-template-columns: repeat(1, 1fr)
+
+      &.days__0
+        grid-template-columns: repeat(1, 1fr)

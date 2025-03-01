@@ -11,8 +11,8 @@
           <v-item v-slot="{ isSelected, selectedClass, toggle }">
             <v-card
               :class="['d-flex align-center', selectedClass]"
-              dark
               height="200"
+              dark
               @click="toggle"
             >
               <div
@@ -27,3 +27,5 @@
     </v-container>
   </v-item-group>
 </template>
+
+<script></script>

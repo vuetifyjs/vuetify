@@ -1,6 +1,6 @@
 <template>
   <v-card
-    class="mt-4 mx-auto"
+    class="mt-8 mx-auto overflow-visible"
     max-width="400"
   >
     <v-sheet
@@ -8,10 +8,11 @@
       color="cyan"
       elevation="12"
       max-width="calc(100% - 32px)"
+      rounded="lg"
     >
       <v-sparkline
         :labels="labels"
-        :value="value"
+        :model-value="value"
         color="white"
         line-width="2"
         padding="16"
@@ -36,6 +37,31 @@
     </v-card-text>
   </v-card>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const labels = ref([
+    '12am',
+    '3am',
+    '6am',
+    '9am',
+    '12pm',
+    '3pm',
+    '6pm',
+    '9pm',
+  ])
+  const value = ref([
+    200,
+    675,
+    410,
+    390,
+    310,
+    460,
+    250,
+    240,
+  ])
+</script>
 
 <script>
   export default {

@@ -1,9 +1,9 @@
 <template>
-  <usage-example
+  <ExamplesUsageExample
     v-model="model"
     :code="code"
-    :options="options"
     :name="name"
+    :options="options"
   >
     <div>
       <v-toolbar v-bind="props">
@@ -14,20 +14,16 @@
     </div>
 
     <template v-slot:configuration>
-      <v-select v-model="density" label="Density" :items="['default', 'comfortable', 'compact']"></v-select>
+      <v-select v-model="density" :items="['default', 'comfortable', 'compact']" label="Density"></v-select>
 
       <v-text-field v-model="title" label="Title" clearable></v-text-field>
 
       <v-checkbox v-model="collapse" label="Collapsed"></v-checkbox>
     </template>
-  </usage-example>
+  </ExamplesUsageExample>
 </template>
 
 <script setup>
-  // Utilities
-  import { computed, ref } from 'vue'
-  import { propsToString } from '@/util/helpers'
-
   const name = 'v-toolbar'
   const model = ref('default')
   const collapse = ref()

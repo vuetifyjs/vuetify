@@ -4,30 +4,32 @@ import './VWindow.sass'
 // Components
 import { VBtn } from '@/components/VBtn'
 
+// Composables
+import { makeComponentProps } from '@/composables/component'
+import { useGroup } from '@/composables/group'
+import { useLocale, useRtl } from '@/composables/locale'
+import { makeTagProps } from '@/composables/tag'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
+
 // Directives
 import { Touch } from '@/directives/touch'
 
-// Composables
-import { makeTagProps } from '@/composables/tag'
-import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { useGroup } from '@/composables/group'
-import { useLocale, useRtl } from '@/composables/locale'
-
 // Utilities
-import { computed, provide, ref, watch } from 'vue'
-import { genericComponent, useRender } from '@/util'
+import { computed, provide, ref, shallowRef, watch } from 'vue'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { ComputedRef, InjectionKey, PropType, Ref } from 'vue'
 import type { GroupItemProvide, GroupProvide } from '@/composables/group'
 import type { IconValue } from '@/composables/icons'
 import type { TouchHandlers } from '@/directives/touch'
+import type { GenericProps } from '@/util'
 
 export type VWindowSlots = {
-  default: [{ group: GroupProvide }]
-  additional: [{ group: GroupProvide }]
-  prev: [{ props: ControlProps }]
-  next: [{ props: ControlProps }]
+  default: { group: GroupProvide }
+  additional: { group: GroupProvide }
+  prev: { props: ControlProps }
+  next: { props: ControlProps }
 }
 
 type WindowProvide = {
@@ -42,60 +44,70 @@ type ControlProps = {
   icon: IconValue
   class: string
   onClick: () => void
-  ariaLabel: string
+  'aria-label': string
 }
 
 export const VWindowSymbol: InjectionKey<WindowProvide> = Symbol.for('vuetify:v-window')
 export const VWindowGroupSymbol: InjectionKey<GroupItemProvide> = Symbol.for('vuetify:v-window-group')
 
-export const VWindow = genericComponent<VWindowSlots>()({
+export const makeVWindowProps = propsFactory({
+  continuous: Boolean,
+  nextIcon: {
+    type: [Boolean, String, Function, Object] as PropType<IconValue>,
+    default: '$next',
+  },
+  prevIcon: {
+    type: [Boolean, String, Function, Object] as PropType<IconValue>,
+    default: '$prev',
+  },
+  reverse: Boolean,
+  showArrows: {
+    type: [Boolean, String],
+    validator: (v: any) => typeof v === 'boolean' || v === 'hover',
+  },
+  touch: {
+    type: [Object, Boolean] as PropType<boolean | TouchHandlers>,
+    default: undefined,
+  },
+  direction: {
+    type: String as PropType<'horizontal' | 'vertical'>,
+    default: 'horizontal',
+  },
+
+  modelValue: null,
+  disabled: Boolean,
+  selectedClass: {
+    type: String,
+    default: 'v-window-item--active',
+  },
+  // TODO: mandatory should probably not be exposed but do this for now
+  mandatory: {
+    type: [Boolean, String] as PropType<boolean | 'force'>,
+    default: 'force' as const,
+  },
+
+  ...makeComponentProps(),
+  ...makeTagProps(),
+  ...makeThemeProps(),
+}, 'VWindow')
+
+export const VWindow = genericComponent<new <T>(
+  props: {
+    modelValue?: T
+    'onUpdate:modelValue'?: (value: T) => void
+  },
+  slots: VWindowSlots,
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VWindow',
 
   directives: {
     Touch,
   },
 
-  props: {
-    continuous: Boolean,
-    nextIcon: {
-      type: [Boolean, String, Function, Object] as PropType<IconValue>,
-      default: '$next',
-    },
-    prevIcon: {
-      type: [Boolean, String, Function, Object] as PropType<IconValue>,
-      default: '$prev',
-    },
-    reverse: Boolean,
-    showArrows: {
-      type: [Boolean, String],
-      validator: (v: any) => typeof v === 'boolean' || v === 'hover',
-    },
-    touch: {
-      type: [Object, Boolean] as PropType<boolean | TouchHandlers>,
-      default: undefined,
-    },
-    direction: {
-      type: String,
-      default: 'horizontal',
-    },
-
-    modelValue: null,
-    disabled: Boolean,
-    selectedClass: {
-      type: String,
-      default: 'v-window-item--active',
-    },
-    // TODO: mandatory should probably not be exposed but do this for now
-    mandatory: {
-      default: 'force' as const,
-    },
-
-    ...makeTagProps(),
-    ...makeThemeProps(),
-  },
+  props: makeVWindowProps(),
 
   emits: {
-    'update:modelValue': (v: any) => true,
+    'update:modelValue': (value: any) => true,
   },
 
   setup (props, { slots }) {
@@ -107,7 +119,7 @@ export const VWindow = genericComponent<VWindowSlots>()({
 
     const rootRef = ref()
     const isRtlReverse = computed(() => isRtl.value ? !props.reverse : props.reverse)
-    const isReversed = ref(false)
+    const isReversed = shallowRef(false)
     const transition = computed(() => {
       const axis = props.direction === 'vertical' ? 'y' : 'x'
       const reverse = isRtlReverse.value ? !isReversed.value : isReversed.value
@@ -115,7 +127,7 @@ export const VWindow = genericComponent<VWindowSlots>()({
 
       return `v-window-${axis}${direction}-transition`
     })
-    const transitionCount = ref(0)
+    const transitionCount = shallowRef(0)
     const transitionHeight = ref<undefined | string>(undefined)
 
     const activeIndex = computed(() => {
@@ -163,7 +175,7 @@ export const VWindow = genericComponent<VWindowSlots>()({
         icon: isRtl.value ? props.nextIcon : props.prevIcon,
         class: `v-window__${isRtlReverse.value ? 'right' : 'left'}`,
         onClick: group.prev,
-        ariaLabel: t('$vuetify.carousel.prev'),
+        'aria-label': t('$vuetify.carousel.prev'),
       }
 
       arrows.push(canMoveBack.value
@@ -177,7 +189,7 @@ export const VWindow = genericComponent<VWindowSlots>()({
         icon: isRtl.value ? props.prevIcon : props.nextIcon,
         class: `v-window__${isRtlReverse.value ? 'left' : 'right'}`,
         onClick: group.next,
-        ariaLabel: t('$vuetify.carousel.next'),
+        'aria-label': t('$vuetify.carousel.next'),
       }
 
       arrows.push(canMoveForward.value
@@ -220,7 +232,9 @@ export const VWindow = genericComponent<VWindowSlots>()({
             'v-window--show-arrows-on-hover': props.showArrows === 'hover',
           },
           themeClasses.value,
+          props.class,
         ]}
+        style={ props.style }
         v-touch={ touchOptions.value }
       >
         <div

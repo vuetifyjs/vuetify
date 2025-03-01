@@ -1,6 +1,12 @@
 export default {
   badge: 'شارة',
+  open: 'Open',
   close: 'إغلاق',
+  dismiss: 'Dismiss',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'Cancel',
+  },
   dataIterator: {
     noResultsText: 'لم يتم إيجاد نتائج',
     loadingText: 'يتم جلب العناصر...',
@@ -26,12 +32,20 @@ export default {
     lastPage: 'الصفحة الأخيرة',
     pageText: '{0}-{1} من {2}',
   },
+  dateRangeInput: {
+    divider: 'to',
+  },
   datePicker: {
-    itemsSelected: 'تم تحديد {0}',
-    nextMonthAriaLabel: 'الشهر القادم',
-    nextYearAriaLabel: 'العام القادم',
-    prevMonthAriaLabel: 'الشهر الماضى',
-    prevYearAriaLabel: 'السنة الماضية',
+    itemsSelected: '{0} selected',
+    range: {
+      title: 'Select dates',
+      header: 'Enter dates',
+    },
+    title: 'Select date',
+    header: 'Enter date',
+    input: {
+      placeholder: 'Enter date',
+    },
   },
   noDataText: 'لا توجد بيانات',
   carousel: {
@@ -43,19 +57,27 @@ export default {
   },
   calendar: {
     moreEvents: '{0} أكثر',
+    today: 'Today',
   },
   input: {
     clear: 'Clear {0}',
     prependAction: '{0} prepended action',
     appendAction: '{0} appended action',
+    otp: 'Please enter OTP character {0}',
   },
   fileInput: {
     counter: '{0} ملفات',
     counterSize: '{0} ملفات ({1} في المجموع)',
   },
+  fileUpload: {
+    title: 'Drag and drop files here',
+    divider: 'or',
+    browse: 'Browse Files',
+  },
   timePicker: {
     am: 'صباحاً',
     pm: 'مساءً',
+    title: 'Select Time',
   },
   pagination: {
     ariaLabel: {
@@ -68,9 +90,18 @@ export default {
       last: 'Last page',
     },
   },
+  stepper: {
+    next: 'Next',
+    prev: 'Previous',
+  },
   rating: {
     ariaLabel: {
       item: 'القييم {0} من {1}',
     },
+  },
+  loading: 'Loading...',
+  infiniteScroll: {
+    loadMore: 'Load more',
+    empty: 'No more',
   },
 }

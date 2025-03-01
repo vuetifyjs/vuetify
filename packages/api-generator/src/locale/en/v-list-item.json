@@ -10,8 +10,6 @@
   },
   "events": {
     "click": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-list-item.json))",
-    "clickOnce": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-list-item.json))",
-    "click:append": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-list-item.json))",
-    "click:prepend": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-list-item.json))"
+    "clickOnce": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-list-item.json))"
   }
 }

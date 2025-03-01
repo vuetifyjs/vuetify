@@ -1,5 +1,7 @@
-// Imports
+// Utilities
 import { onBeforeUpdate, ref } from 'vue'
+
+// Types
 import type { Ref } from 'vue'
 
 export function useRefs <T extends {}> () {

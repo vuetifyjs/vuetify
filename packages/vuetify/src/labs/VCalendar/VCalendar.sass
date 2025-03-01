@@ -1,0 +1,173 @@
+@use '../../styles/tools'
+@use './variables' as *
+
+@include tools.layer('components')
+  .v-calendar
+    @include tools.theme($calendar-theme...)
+
+  .v-calendar-weekly
+    width: 100%
+    height: 100%
+    display: flex
+    flex-direction: column
+    // https://github.com/vuetifyjs/vuetify/issues/8319
+    min-height: 0
+
+  .v-calendar__container
+    border-top: $calendar-line-width solid $calendar-line-color
+    border-left: $calendar-line-width solid $calendar-line-color
+    border-right: $calendar-line-width solid $calendar-line-color
+
+  .v-calendar-weekly__head
+    display: grid
+    grid-template-columns: $calendar-weekly-weeknumber-flex-basis repeat(7, 1fr)
+    user-select: none
+    &.days__0
+      grid-template-columns: 1fr
+      &.v-calendar-weekly__head-weeknumbers
+        grid-template-columns: $calendar-weekly-weeknumber-flex-basis 1fr
+    &.days__1
+      grid-template-columns: 1fr
+      &.v-calendar-weekly__head-weeknumbers
+        grid-template-columns: $calendar-weekly-weeknumber-flex-basis 1fr
+    &.days__2
+      grid-template-columns: repeat(2, 1fr)
+      &.v-calendar-weekly__head-weeknumbers
+        grid-template-columns: $calendar-weekly-weeknumber-flex-basis repeat(2, 1fr)
+    &.days__3
+      grid-template-columns: repeat(3, 1fr)
+      &.v-calendar-weekly__head-weeknumbers
+        grid-template-columns: $calendar-weekly-weeknumber-flex-basis repeat(3, 1fr)
+    &.days__4
+      grid-template-columns: repeat(4, 1fr)
+      &.v-calendar-weekly__head-weeknumbers
+        grid-template-columns: $calendar-weekly-weeknumber-flex-basis repeat(4, 1fr)
+    &.days__5
+      grid-template-columns: repeat(5, 1fr)
+      &.v-calendar-weekly__head-weeknumbers
+        grid-template-columns: $calendar-weekly-weeknumber-flex-basis repeat(5, 1fr)
+    &.days__6
+      grid-template-columns: repeat(6, 1fr)
+      &.v-calendar-weekly__head-weeknumbers
+        grid-template-columns: $calendar-weekly-weeknumber-flex-basis repeat(6, 1fr)
+    &.days__7
+      grid-template-columns: repeat(7, 1fr)
+      &.v-calendar-weekly__head-weeknumbers
+        grid-template-columns: $calendar-weekly-weeknumber-flex-basis repeat(7, 1fr)
+
+  .v-calendar-weekly__head-weekday, .v-calendar-weekly__head-weekday-with-weeknumber
+    flex: 1 0 20px
+    user-select: none
+    padding: $calendar-weekly-weekday-padding
+    font-size: $calendar-weekly-weekday-font-size
+    overflow: hidden
+    text-align: center
+    text-overflow: ellipsis
+    text-transform: uppercase
+    white-space: nowrap
+    // Themed
+    border-right: $calendar-line-width solid $calendar-line-color
+
+    &:last-child
+      border-right: none
+
+    // TODO change this
+    > div .v-btn
+      font-size: 1.5rem
+
+  .v-calendar-weekly__head-weeknumber
+    background: $calendar-weekly-weeknumber-background
+    color: $calendar-weekly-weeknumber-color
+
+  .v-calendar-weekly__week
+    display: flex
+    flex: 1
+    height: unset
+    // https://github.com/vuetifyjs/vuetify/issues/8319
+    min-height: 0
+
+  .v-calendar-month__weeknumber
+    padding-top: $calendar-weekly-weeknumber-padding-top
+    background: $calendar-month-weeknumber-background
+    border-bottom: $calendar-line-width solid $calendar-line-color
+    color: $calendar-month-weeknumber-color
+    text-align: center
+    font-size: $calendar-weekly-weeknumber-font-size
+    font-weight: $calendar-weekly-weeknumber-font-weight
+
+  .v-calendar-month__days
+    display: grid
+    flex: 1 1
+    > .v-calendar-month__day
+      min-height: $calendar-weekly-day-min-height
+    &.days__0
+      grid-template-columns: 1fr
+      > .v-calendar-month__day
+        border-right: none
+    &.days__1
+      grid-template-columns: 1fr
+      > .v-calendar-month__day
+        border-right: none
+    &.days__2
+      grid-template-columns: repeat(2, 1fr)
+      > .v-calendar-month__day:nth-child(2n)
+        border-right: none
+    &.days__3
+      grid-template-columns: repeat(3, 1fr)
+      > .v-calendar-month__day:nth-child(3n)
+        border-right: none
+    &.days__4
+      grid-template-columns: repeat(4, 1fr)
+      > .v-calendar-month__day:nth-child(4n)
+        border-right: none
+    &.days__5
+      grid-template-columns: repeat(5, 1fr)
+      > .v-calendar-month__day:nth-child(5n)
+        border-right: none
+    &.days__6
+      grid-template-columns: repeat(6, 1fr)
+      > .v-calendar-month__day:nth-child(6n)
+        border-right: none
+      &.v-calendar-month__weeknumbers
+        grid-template-columns: $calendar-weekly-weeknumber-flex-basis repeat(6, 1fr)
+    &.days__7
+      grid-template-columns: repeat(7, 1fr)
+      > .v-calendar-month__day:nth-child(7n)
+        border-right: none
+
+    &.days-with-weeknumbers__0
+      grid-template-columns: $calendar-weekly-weeknumber-flex-basis 1fr
+      > .v-calendar-month__day
+        border-right: none
+    &.days-with-weeknumbers__1
+      grid-template-columns: $calendar-weekly-weeknumber-flex-basis 1fr
+      > .v-calendar-month__day
+        border-right: none
+    &.days-with-weeknumbers__2
+      grid-template-columns: $calendar-weekly-weeknumber-flex-basis repeat(2, 1fr)
+      > .v-calendar-month__day:nth-child(3n)
+        border-right: none
+    &.days-with-weeknumbers__3
+      grid-template-columns: $calendar-weekly-weeknumber-flex-basis repeat(3, 1fr)
+      > .v-calendar-month__day:nth-child(4n)
+        border-right: none
+    &.days-with-weeknumbers__4
+      grid-template-columns: $calendar-weekly-weeknumber-flex-basis repeat(4, 1fr)
+      > .v-calendar-month__day:nth-child(5n)
+        border-right: none
+    &.days-with-weeknumbers__5
+      grid-template-columns: $calendar-weekly-weeknumber-flex-basis repeat(5, 1fr)
+      > .v-calendar-month__day:nth-child(6n)
+        border-right: none
+    &.days-with-weeknumbers__6
+      grid-template-columns: $calendar-weekly-weeknumber-flex-basis repeat(6, 1fr)
+      > .v-calendar-month__day:nth-child(7n)
+        border-right: none
+    &.days-with-weeknumbers__7
+      grid-template-columns: $calendar-weekly-weeknumber-flex-basis repeat(7, 1fr)
+      > .v-calendar-month__day:nth-child(7n)
+        border-right: $calendar-line-width solid $calendar-line-width
+      > .v-calendar-month__day:nth-child(8n)
+        border-right: none
+      > .v-calendar-month__day:nth-child(8n)
+        border-right: none

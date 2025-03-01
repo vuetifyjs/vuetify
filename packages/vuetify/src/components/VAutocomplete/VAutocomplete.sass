@@ -4,96 +4,103 @@
 @use '../../styles/tools'
 @use './variables' as *
 
-@at-root
-  @include tools.density('v-input', $autocomplete-chips-margin-bottom) using ($modifier)
-    --autocomplete-chips-margin-bottom: #{0px + math.div($modifier, 2)}
+@include tools.layer('components')
+  .v-autocomplete
+    .v-field
+      .v-text-field__prefix,
+      .v-text-field__suffix,
+      .v-field__input,
+      &.v-field
+        cursor: text
 
-.v-autocomplete
-  .v-field
-    .v-text-field__prefix,
-    .v-text-field__suffix,
-    .v-field__input,
-    &.v-field
-      cursor: text
+    .v-field
+      .v-field__input
+        > input
+          flex: 1 1
 
-  .v-field
-    .v-field__input
-      > input
-        align-self: flex-start
-        flex: 1 1
+    .v-field
+      input
+        min-width: $autocomplete-focused-input
 
-    .v-field__append-inner
-      > .v-icon
-        margin-inline-start: 4px
-        transition: $autocomplete-transition
+      &:not(.v-field--focused)
+        input
+          min-width: 0
 
-  .v-field:not(.v-field--focused)
-    input
-      min-width: 0
+    .v-field--dirty
+      .v-autocomplete__selection
+        margin-inline-end: $autocomplete-selection-gap
 
-  .v-field--dirty
-    .v-autocomplete__selection
-      margin-inline-end: 2px
-
-  .v-field--single-line
     .v-autocomplete__selection-text
       overflow: hidden
       text-overflow: ellipsis
       white-space: nowrap
 
-.v-autocomplete
-  &__content
-    overflow: hidden
+  .v-autocomplete
+    &__content
+      overflow: hidden
 
-    @include tools.elevation($autocomplete-content-elevation)
-    @include tools.rounded($autocomplete-content-border-radius)
+      @include tools.elevation($autocomplete-content-elevation)
+      @include tools.rounded($autocomplete-content-border-radius)
 
-  &__mask
-    background: rgb(var(--v-theme-on-surface-variant))
+    &__mask
+      background: rgb(var(--v-theme-surface-light))
 
-  &__selection
-    display: inline-flex
-    letter-spacing: inherit
-    line-height: inherit
-    max-width: 100%
+    &__selection
+      display: inline-flex
+      align-items: center
+      height: calc($input-font-size * $input-line-height)
+      letter-spacing: inherit
+      line-height: inherit
+      max-width: calc(100% - $autocomplete-selection-gap - $autocomplete-input-buffer)
 
-  &--active-menu
-    .v-field__append-inner
-      > .v-icon
-        opacity: var(--v-high-emphasis-opacity)
-        transform: rotate(180deg)
-
-  &--chips
-    .v-autocomplete__selection
-      margin-top: $autocomplete-chips-margin-top
-      margin-bottom: var(--autocomplete-chips-margin-bottom)
-
+    &__selection
       &:first-child
         margin-inline-start: 0
 
-  &--single
-    &.v-text-field input
-      flex: 1 1
-      position: absolute
-      left: 0
-      right: 0
-      width: 100%
-      padding-inline-start: inherit
-      padding-inline-end: inherit
+    &--chips.v-input--density-compact
+      .v-field--variant-solo,
+      .v-field--variant-solo-inverted,
+      .v-field--variant-filled,
+      .v-field--variant-solo-filled
+        .v-label.v-field-label
+          &--floating
+            top: 0px
 
-    .v-field--active
-      input
-        transition: none
+    &--selecting-index
+      .v-autocomplete__selection
+        opacity: var(--v-medium-emphasis-opacity)
 
-    .v-field--dirty:not(.v-field--focused)
-      input
-        opacity: 0
+        &--selected
+          opacity: 1
 
-    .v-field--focused
-      .v-autocomplete__selection-text
-        opacity: 0
+      .v-field__input > input
+        caret-color: transparent
 
-  &--selection-slot
-    &.v-text-field input
-      position: relative
-      padding-inline-start: 0
+    &--single:not(.v-autocomplete--selection-slot)
+      &.v-text-field input
+        flex: 1 1
+        position: absolute
+        left: 0
+        right: 0
+        width: 100%
+        padding-inline: inherit
+
+      .v-field--active
+        input
+          transition: none
+
+      .v-field--dirty:not(.v-field--focused)
+        input
+          opacity: 0
+
+      .v-field--focused
+        .v-autocomplete__selection
+          opacity: 0
+
+    &__menu-icon
+      margin-inline-start: 4px
+      transition: $autocomplete-transition
+
+      .v-autocomplete--active-menu &
+        opacity: var(--v-high-emphasis-opacity)
+        transform: rotate(180deg)

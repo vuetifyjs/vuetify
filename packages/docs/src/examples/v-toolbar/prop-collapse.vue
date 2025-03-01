@@ -1,9 +1,9 @@
 <template>
   <v-card
     color="grey-lighten-4"
-    flat
     height="200px"
     rounded="0"
+    flat
   >
     <v-toolbar collapse>
       <v-btn icon>

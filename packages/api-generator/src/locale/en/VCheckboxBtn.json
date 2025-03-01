@@ -1,0 +1,9 @@
+{
+  "props": {
+    "indeterminate": "Puts the control in an indeterminate state. Used with the [indeterminate-icon](#props-indeterminate-icon) property.",
+    "indeterminateIcon": "Icon used when the component is in an indeterminate state."
+  },
+  "events": {
+    "update:indeterminate": "Event that is emitted when the component's indeterminate state changes."
+  }
+}

@@ -1,7 +1,8 @@
 ---
-nav: Upgrade guide
+emphasized: true
 meta:
-  title: Guide to upgrading Vuetify
+  nav: Upgrade guide
+  title: Upgrade guide
   description: Detailed instruction on how to upgrade Vuetify to 3.0
   keywords: migration, upgrade, releases, upgrading vuetify, alpha, v3
 related:
@@ -12,18 +13,27 @@ related:
 
 # Upgrade Guide
 
-## Introduction
-
 This page contains a detailed list of breaking changes and the steps required to upgrade your application to Vuetify 3.0
-Many of these changes can be applied automatically by [eslint-plugin-vuetify](https://www.npmjs.com/package/eslint-plugin-vuetify/v/next)
 
-<entry />
+<PageFeatures />
 
-<alert type="warning">
+::: error
+  <span class="text-h6">Many of the changes on this page can be applied automatically using [eslint-plugin-vuetify](https://www.npmjs.com/package/eslint-plugin-vuetify/)</span>
+:::
 
-  This page is incomplete. Please check back later for more information, or submit a PR if you notice something missing. If you have additional questions, reach out to us in [Discord](https://community.vuetifyjs.com/)
+::: info
 
-</alert>
+Before upgrading, make sure to consult the Official [Vue 3 Migration Guide](https://v3-migration.vuejs.org/)
+
+:::
+
+::: warning
+  Not all Vuetify 2 components are currently available in Vuetify 3; These components will be released as their development is completed via [Vuetify Labs](https://vuetifyjs.com/en/labs/introduction/).
+
+- [calendar](https://github.com/vuetifyjs/vuetify/issues/13469)
+- [overflow-btn](https://github.com/vuetifyjs/vuetify/issues/13493)
+- [time-picker](https://github.com/vuetifyjs/vuetify/issues/13516)
+:::
 
 ## Setup
 
@@ -60,6 +70,7 @@ app.use(vuetify)
 - Global styles previously included as `.v-application p` or `.v-application ul` are no longer included. If you need margin for `p`, or padding-left for `ul` and `ol`, set it manually in your root component's `<style>` tag
 - `stateless`, `clipped`, `clipped-right` and `app` props have been removed from v-navigation-drawer, v-app-bar and v-system-bar. The position in the markup determines the appearance. Use the `order="number"` prop to influence it manually.
 - `$vuetify.breakpoint` has been renamed to `$vuetify.display` and extended with [new properties](/features/display-and-platform/)
+  - `*Only` properties have been removed, use `xs` instead of `xsOnly` etc.
 
 ### Theme
 
@@ -77,23 +88,35 @@ app.use(vuetify)
   - Custom properties are now also an rgb list instead of hex so `rgb()` or `rgba()` must be used to access them, for example `color: rgb(var(--v-theme-primary))` instead of `color: var(--v-primary-base)`.
 - Theme colors in the theme config are now nested inside a `colors` property, e.g. `const myTheme = { theme: { themes: { light: { colors: { primary: '#ccc' } } } } }`
 
-### SCSS
+### SASS variables
 
-- `$headings` was merged with `$typography`: Access font-size of subtitle-2 with `map-get($typography, 'subtitle-2', 'size')`
+- `$headings` was merged with `$typography`: Access font-size of subtitle-2 with `map.get($typography, 'subtitle-2', 'size')`
 - If you imported variables from `~vuetify/src/styles/settings/_variables` in v2, you have to replace it with `vuetify/settings`
-- Component variables that previously lived in e.g. `~/vuetify/src/components/VIcon/VIcon.sass` can now be imported from `vuetify/settings` directly too
-- `$displayBreakpoints` no longer includes `{breakpoint}-only` variables (e.g. xs-only), use `@media #{map-get(v.$display-breakpoints, 'xs')}` instead
+- Component variables that previously lived in e.g. `~/vuetify/src/components/VIcon/VIcon.sass` can now be imported from `vuetify/settings` directly too.
+- `$display-breakpoints` no longer includes `{breakpoint}-only` variables (e.g. xs-only), use `@media #{map.get(v.$display-breakpoints, 'xs')}` instead.
 - The `$transition` map has been removed, replaced with individual `$standard-easing`, `$decelerated-easing`, `$accelerated-easing` variables.
-- `$container-padding-x` is now 16px instead of 12px as in v2. You can replace it with `$spacer * 3` to get to the previous look
+- `$container-padding-x` is now 16px instead of 12px as in v2. You can replace it with `$spacer * 3` to get to the previous look.
+- Too many component variables to list have been renamed or removed. There is no automated way to update these as the element structure has changed significantly, you will need to manually update these along with any custom styles.
+
+### Styles and utility classes
+
+- `.hidden-{breakpoint}-only` has been renamed to `.hidden-{breakpoint}`
+- `.text-xs-{alignment}` has been renamed to `.text-{alignment}` to reflect the fact that it applies to all breakpoints.
+- Typography classes have been renamed for consistency and are all prefixed with `text-`, for example `.display-4` is now `.text-h1`
+- Transition easing classes have been removed.
+
+:::info
+  An complete list of class changes will not be provided, please use [eslint-plugin-vuetify](https://www.npmjs.com/package/eslint-plugin-vuetify/) to automatically fix them.
+:::
 
 ## Components
 
 ### General changes
 
-- `value` prop has been replaced by `model-value` on components that support `v-model` usage.
+- `value` prop has been replaced by `model-value` on components that support `v-model` usage. (Vue 3 requires this change)
   - Note that this does not apply to `value` used as a *selection value*, for example `v-btn` within `v-btn-toggle`.
-- `@input` event has been replaced by `@update:model-value` on components that support `v-model` usage.
-- `left` and `right` have been replaced by `start` and `end` respectively. This applies to utility classes too, for example `.border-r` is now `.border-e`.
+- `@input` event has been replaced by `@update:model-value` on components that support `v-model` usage. (Vue 3 requires this change)
+- `left` and `right` have been replaced by `start` and `end` respectively. This applies to utility classes too, for example `.rounded-r` is now `.rounded-e`.
 - Size props `small` / `medium` / `large` etc. have been combined into a single `size` prop.
 - `absolute` and `fixed` props have been combined into a single `position` prop.
 - `top` / `bottom` / `left` / `right` props have been combined into a single `location` prop.
@@ -122,21 +145,45 @@ app.use(vuetify)
   - Allowed values are `'elevated'`, `'flat'`, `'tonal'`, `'outlined'`, `'text'`, or `'plain'`.
 - `text` prop has new purpose. It represents the text content of the alert, if default slot is not used.
 
+### v-badge
+
+- `overlap` has been removed and is now the default style, use `floating` to restore the v2 default.
+- Transition props `mode` and `origin` have been removed.
+- `avatar` prop is no longer needed and has been removed.
+
+### v-banner
+
+- The `actions` slot no longer provides a dismiss function.
+- `shaped` prop has been removed.
+- `icon-color` has been removed.
+- `single-line` has been replaced with `lines="one"`.
+- `color` now applies to the icon and action text. Use `bg-color` to change the background color.
+
 ### v-btn/v-btn-toggle
 
-- `active-class` prop has been renamed to `selected-class`.
-- `fab` is no longer supported. If you just need a round button, use `icon` prop or apply a `.rounded-circle` class
+- `active-class` prop has been renamed to `selected-class`
+- `fab` is no longer supported. If you just need a round button, use `icon` prop or apply a `.rounded-circle` class.
 - `flat` / `outlined` / `text` / `plain` props have been combined into a single `variant` prop.
-- `depressed` has been renamed to `variant="flat"`.
-- `retain-focus-on-click` has been removed, buttons use `:focus-visible` instead.
-- `v-btn-toggle` needs `mandatory="force"` prop to achieve the same behaviour as `mandatory` prop in v2
+- `depressed` has been renamed to `variant="flat"`
+- `retain-focus-on-click` has been removed, buttons use [`:focus-visible`](https://developer.mozilla.org/en-US/docs/Web/CSS/:focus-visible) instead.
+- `v-btn-toggle` needs `mandatory="force"` prop to achieve the same behaviour as `mandatory` prop in v2.
+- Disabled buttons use a faded variant of the specified `color` instead of grey ([#15147](https://github.com/vuetifyjs/vuetify/issues/15147))
+  - The `$button-colored-disabled` sass variable can be set to false to use grey instead.
 
 ### v-checkbox/v-radio/v-switch
 
-- `input-value` prop has been renamed to `model-value`.
+- `input-value` prop has been renamed to `model-value`. (Vue 3 requires this change)
 - `on-icon` and `off-icon` props have been renamed to `true-icon` and `false-icon`.
 - `on-value` and `off-value` props have been renamed to `true-value` and `false-value`.
 - `v-checkbox`'s label slot should no longer contain a `<label>` as it is already wrapped with one
+
+### v-date-picker
+
+- Uses `Date` objects instead of strings. Some utility functions are included to help convert between the two, see [dates](/features/dates/).
+- `locale`, `locale-first-day-of-year`, `first-day-of-week`, `day-format`, `weekday-format`, `month-format`, `year-format`, `header-date-format`, and `title-date-format` are now part of the date adapter and use the globally configured [locale](/features/internationalization/) instead of being passed as props.
+- `active-picker` has been renamed to `view-mode`.
+- `picker-date` has been replaced with separate `month` and `year` props.
+- `range` is not currently implemented, will be added as a separate component in the future.
 
 ### v-form
 
@@ -145,7 +192,7 @@ app.use(vuetify)
 ### v-list
 
 - `two-line` and `three-line` props have been combined into a single `lines` prop with allowed values `'two'` or `'three'`.
-- `v-list-item-group` has been removed, just add `value` to list items to make them selectable and bind `v-model:selected` on v-list to get the selected value.
+- `v-list-item-group` has been removed, assign the item's key to the `value` prop of each `v-list-item` and bind `v-model:selected` on the `v-list` to get the selected value.
 - `v-list-item-icon` and `v-list-item-avatar` have been removed, use `v-list-item` with `icon` or `avatar` props, or put an icon or avatar in the append or prepend slot.
 - `v-list-item-content` has been removed, lists use CSS grid for layout now instead.
 - `v-list-group` can now be nested arbitrarily deep, `sub-group` prop should be removed.
@@ -154,6 +201,23 @@ app.use(vuetify)
 - `v-subheader`  has been renamed to `v-list-subheader`.
 - `v-list-item`'s `active` scoped slot prop has been renamed to `isActive`
 
+### v-menu/v-tooltip
+
+- `rounded` prop has been removed. Apply a rounded css class to the menu content element instead. e.g. `.rounded-te`
+- `internal-activator` prop has been removed, use `activator` with a ref or unique selector instead.
+- `absolute`, `offset-y` and `offset-x` props have been removed. Manual positioning is now done by passing a `[x, y]` array to the `target` prop.
+- `nudge-*` props have been removed. There is no direct replacement but `offset` can be used to achieve similar results.
+- Content is now destroyed after closing, use `eager` to keep it.
+
+### v-navigation-drawer
+
+- `stateless` prop has been removed, manually control state using `model-value` or `v-model` instead.
+
+### v-rating
+
+- `color` has been renamed to `active-color`.
+- `background-color` has been renamed to `color`.
+
 ### v-select/v-combobox/v-autocomplete
 
 - v-model values not present in `items` will now be rendered instead of being ignored.
@@ -161,7 +225,7 @@ app.use(vuetify)
 - `item-text` has been renamed to `item-title`, and now looks up the `title` property on item objects by default. `value` is unchanged.
 - `item-disabled` has been removed, and `disabled`, `header`, `divider`, and `avatar` properties are ignored on item objects.
   - Additional props to pass to `v-list-item` can be specified with the `item-props` prop. `item-props` can be a function that takes the item object and returns an object of props, or set to boolean `true` to spread item objects directly as props.
-- The `item` object in slots is now an `InternalItem` object, the original item object is available as `item.raw`.
+- The `item` object in slots is now an `ListItem` object, the original item object is available as `item.raw`.
 - The `item` slot will no longer generate a `v-list-item` component automatically, instead a `props` object is supplied with the required event listeners and props:
 
 ```html
@@ -176,6 +240,28 @@ app.use(vuetify)
 ### v-simple-table
 
 - `v-simple-table` has been renamed to `v-table`
+
+### v-stepper (vertical)
+
+- `v-stepper-step` has been renamed to `v-stepper-vertical-item`. Move content into the **title** slot.
+- `v-stepper-content` has been removed. Move content to the default slot of `v-stepper-vertical-item`.
+
+### v-data-table
+
+- Headers objects:
+  - `text` property has been renamed to `title`.
+  - `data-table-select` and `data-table-expand` must be defined as `key` instead of `value`.
+  - `class` has been replaced with `headerProps`.
+  - `cellClass` has been replaced with `cellProps` and now accepts either a function or an object.
+  - `filter` function requires `search` to be used in order for it to be triggered.
+- Tables requires `search` prop to trigger filtering. `items` array can be pre-filter with a computed.
+- Server side tables using `server-items-length` must be replaced with `<v-data-table-server items-length />`.
+- Argument order for `@click:*` events is now consistently `(event, data)`.
+  - `onRowClick (item, data, event)` should be changed to `onRowClick (event, { item })`.
+- `item-class` and `item-style` have been combined into `row-props`, and `cell-props` has been added.
+- `sort-desc` and `group-desc` have been combined into `sort-by` and `group-by`. These properties now take an array of `{ key: string, order: 'asc' | 'desc' }` objects instead of strings.
+- `current-items` event has been renamed to `update:current-items`.
+- `custom-sort` can now be done using the **sort** key in the headers object or by using the `custom-key-sort` prop.
 
 ### v-slider/v-range-slider
 
@@ -192,17 +278,6 @@ app.use(vuetify)
 
 - `contain` has been removed and is now the default behaviour. Use `cover` to fill the entire container.
 
-### v-menu
-
-- `rounded` prop has been removed. Apply a rounded css class to the menu content element instead. e.g. `.rounded-te`
-- `internal-activator` prop has been removed without replacement
-- `offset-y` and `offset-x` props have been removed. Use `offset` prop instead
-- `absolute` variant has been removed. For absolute positioning use css instead
-
-### v-skeleton-loader
-
-- This component hasn't been migrated to vuetify 3
-
 ### v-snackbar
 
 - `action` slot was renamed to `actions`
@@ -212,3 +287,17 @@ app.use(vuetify)
 - `v-expansion-panel-header` has been renamed to `v-expansion-panel-title`.
 - `v-expansion-panel-content` has been renamed to `v-expansion-panel-text`.
 - `v-expansion-panel` now has `text` and `title` props that can be used instead of subcomponents.
+
+### v-card
+
+- `v-card` does not allow content to overflow or use higher `z-index` values to display on top of elements outside it. To disable this behavior, use `<v-card style="overflow: initial; z-index: initial">` ([#17593](https://github.com/vuetifyjs/vuetify/issues/17593), [#17628](https://github.com/vuetifyjs/vuetify/issues/17628))
+
+### v-sparkline
+
+- `value` is now `model-value`
+
+## Directives
+
+### v-intersect
+
+- Handler argument order has changed from `entries, observer, isIntersecting` to `isIntersecting, entries, observer`

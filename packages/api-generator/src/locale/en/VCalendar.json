@@ -1,0 +1,29 @@
+{
+  "props": {
+    "allowedDates": "Determines which dates are selectable.",
+    "hideHeader": "Determines whether the header is hidden in the calendar view.",
+    "hideWeekNumber": "Toggles the display of week numbers in a calendar view.",
+    "intervals": "Total number of intervals in a day view.",
+    "max": "Maximum date or value that can be selected.",
+    "min": "Minimum date or value that can be selected.",
+    "month": "Specifies the month for the calendar view.",
+    "showAdjacentMonths": "Shows or hides days from adjacent months.",
+    "type": "Defines the type of calendar view, such as month, week, day, etc.",
+    "weekdays": "Specifies which days of the week to display.",
+    "year": "Specifies the year for the calendar view."
+  },
+  "slots": {
+    "header": "Slot for custom header content.",
+    "event": "Slot for custom event content."
+  },
+  "events": {
+    "next": "Emitted when moving to the next time period.",
+    "prev": "Emitted when moving to the previous time period.",
+    "updateModelValue": "Event that is emitted when the component’s model changes."
+  },
+  "exposed": {
+    "daysInMonth": "Provides data about the days in the selected month.",
+    "daysInWeek": "Provides data about the days in the selected week.",
+    "genDays": "Generates day objects based on provided dates."
+  }
+}

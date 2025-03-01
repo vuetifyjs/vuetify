@@ -1,7 +1,7 @@
 <template>
   <div
     id="up-next"
-    class="d-flex"
+    class="d-flex mb-5"
   >
     <router-link
       v-if="(prev && prev.name !== 'home')"
@@ -42,15 +42,6 @@
 </template>
 
 <script setup>
-  // Composables
-  import { useRoute, useRouter } from 'vue-router'
-  import { useRtl } from 'vuetify'
-  import { useAppStore } from '@/store/app'
-
-  // Utilities
-  import { computed } from 'vue'
-  import { rpath } from '@/util/routes'
-
   const { pages } = useAppStore()
   const route = useRoute()
   const path = computed(() => route.path.split('/').slice(2, -1))

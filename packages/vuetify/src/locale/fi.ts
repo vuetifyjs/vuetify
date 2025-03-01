@@ -1,6 +1,12 @@
 export default {
   badge: 'Infopiste',
+  open: 'Open',
   close: 'Sulje',
+  dismiss: 'Dismiss',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'Cancel',
+  },
   dataIterator: {
     noResultsText: 'Ei osumia',
     loadingText: 'Ladataan kohteita...',
@@ -26,12 +32,20 @@ export default {
     lastPage: 'Viimeinen sivu',
     pageText: '{0}-{1} ({2})',
   },
+  dateRangeInput: {
+    divider: 'to',
+  },
   datePicker: {
-    itemsSelected: '{0} valittu',
-    nextMonthAriaLabel: 'Seuraava kuukausi',
-    nextYearAriaLabel: 'Ensi vuosi',
-    prevMonthAriaLabel: 'Edellinen kuukausi',
-    prevYearAriaLabel: 'Edellinen vuosi',
+    itemsSelected: '{0} selected',
+    range: {
+      title: 'Valitse päivämäärät',
+      header: 'Syötä päivämäärät',
+    },
+    title: 'Valitse päivämäärä',
+    header: 'Syötä päivämäärä',
+    input: {
+      placeholder: 'Syötä päivämäärä',
+    },
   },
   noDataText: 'Ei dataa',
   carousel: {
@@ -43,19 +57,27 @@ export default {
   },
   calendar: {
     moreEvents: '{0} lisää',
+    today: 'Today',
   },
   input: {
     clear: 'Clear {0}',
     prependAction: '{0} prepended action',
     appendAction: '{0} appended action',
+    otp: 'Please enter OTP character {0}',
   },
   fileInput: {
     counter: '{0} tiedostoa',
     counterSize: '{0} tiedostoa ({1} yhteensä)',
   },
+  fileUpload: {
+    title: 'Drag and drop files here',
+    divider: 'or',
+    browse: 'Browse Files',
+  },
   timePicker: {
     am: 'ap.',
     pm: 'ip.',
+    title: 'Select Time',
   },
   pagination: {
     ariaLabel: {
@@ -68,9 +90,18 @@ export default {
       last: 'Last page',
     },
   },
+  stepper: {
+    next: 'Next',
+    prev: 'Previous',
+  },
   rating: {
     ariaLabel: {
       item: 'Luokitus {0}/{1}',
     },
+  },
+  loading: 'Loading...',
+  infiniteScroll: {
+    loadMore: 'Load more',
+    empty: 'No more',
   },
 }

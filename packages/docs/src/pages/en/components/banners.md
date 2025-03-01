@@ -1,6 +1,6 @@
 ---
-nav: Banners
 meta:
+  nav: Banners
   title: Banner component
   description: The banner component displays an important and concise message for a user to address. It can also indicate actions that the user can take.
   keywords: banners, vuetify banner component, vue banner component
@@ -8,23 +8,27 @@ related:
   - /components/alerts/
   - /components/icons/
   - /components/snackbars/
+features:
+  figma: true
+  github: /components/VBanner/
+  label: 'C: VBanner'
+  report: true
+  spec: https://m2.material.io/components/banners
 ---
 
 # Banners
 
-The `v-banner` component is used as a middle-interrupting message to the user with one to two actions. It comes in two variations **single-line** and **multi-line** (implicit). These can have icons and actions that you can use with your message. Note that only one banner should be shown at a time.
+The `v-banner` component is used as a middle-interrupting message to the user with one to two actions.
 
-![Banner Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-banner/v-banner-entry.png)
-
----
+<PageFeatures />
 
 ## Usage
 
-Banners can contain one to two lines of text, to which actions and icons can be added.
+Banners come in two variations **single-line** and **multi-line** (implicit). These can have icons and actions that you can use with your message.
 
-<usage name="v-banner" />
+<ExamplesUsage name="v-banner" />
 
-<entry />
+<PromotedEntry />
 
 ## API
 
@@ -34,7 +38,7 @@ Banners can contain one to two lines of text, to which actions and icons can be 
 | [v-banner-text](/api/v-banner-text/) | Sub-component used to display the `v-banner` subtitle. Wraps the `#text` slot |
 | [v-banner-actions](/api/v-banner-actions/) | Sub-component that modifies the default styling of [v-btn](/components/buttons/). Wraps the `#actions` slot |
 
-<api-inline hide-links />
+<ApiInline hide-links />
 
 ## Anatomy
 
@@ -61,13 +65,13 @@ The recommended placement of elements inside of `v-banner` is:
 
 The prop **lines** can be used to specify how the displayed text should be handled based on its length.
 
-<example file="v-banner/prop-lines" />
+<ExamplesExample file="v-banner/prop-lines" />
 
 #### Sticky
 
 You can optionally turn on the **sticky** prop to ensure that the content is pinned to the top of the screen.
 
-<example file="v-banner/prop-sticky" />
+<ExamplesExample file="v-banner/prop-sticky" />
 
 ### Slots
 
@@ -75,16 +79,16 @@ You can optionally turn on the **sticky** prop to ensure that the content is pin
 
 Banners may have one or two text buttons that don't stand out that much.
 
-<example file="v-banner/slot-actions" />
+<ExamplesExample file="v-banner/slot-actions" />
 
 #### Icon
 
-The icon slot allows you to to explicitly control the content and functionality within it.
+The icon slot allows you to explicitly control the content and functionality within it.
 
-<example file="v-banner/slot-icon" />
+<ExamplesExample file="v-banner/slot-icon" />
 
 #### Prepend
 
-The prepend slot allows you to to explicitly control the content and functionality within it. Icons also help to emphasize a banner's message.
+The prepend slot allows you to explicitly control the content and functionality within it. Icons also help to emphasize a banner's message.
 
-<example file="v-banner/slot-prepend" />
+<ExamplesExample file="v-banner/slot-prepend" />

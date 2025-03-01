@@ -9,9 +9,9 @@
         >
           <template v-slot:day-body="{ date, week }">
             <div
-              class="v-current-time"
               :class="{ first: date === week[0].date }"
               :style="{ top: nowY }"
+              class="v-current-time"
             ></div>
           </template>
         </v-calendar>
@@ -19,6 +19,40 @@
     </v-col>
   </v-row>
 </template>
+
+<script setup>
+  import { computed, onMounted, ref } from 'vue'
+
+  const calendar = ref()
+
+  const value = ref('')
+  const ready = ref(false)
+
+  const cal = computed(() => {
+    return ready.value ? calendar.value : null
+  })
+  const nowY = computed(() => {
+    return cal.value ? cal.value.timeToY(cal.value.times.now) + 'px' : '-10px'
+  })
+
+  onMounted(() => {
+    ready.value = true
+    scrollToTime()
+    updateTime()
+  })
+
+  function getCurrentTime () {
+    return cal.value ? cal.value.times.now.hour * 60 + cal.value.times.now.minute : 0
+  }
+  function scrollToTime () {
+    const time = getCurrentTime()
+    const first = Math.max(0, time - (time % 30) - 30)
+    cal.value.scrollToTime(first)
+  }
+  function updateTime () {
+    setInterval(() => cal.value.updateTimes(), 60 * 1000)
+  }
+</script>
 
 <script>
   export default {

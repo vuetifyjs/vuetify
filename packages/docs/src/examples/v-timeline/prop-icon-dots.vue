@@ -25,6 +25,27 @@
   </v-timeline>
 </template>
 
+<script setup>
+  const items = [
+    {
+      color: 'red-lighten-2',
+      icon: 'mdi-star',
+    },
+    {
+      color: 'purple-lighten-2',
+      icon: 'mdi-book-variant',
+    },
+    {
+      color: 'green-lighten-1',
+      icon: 'mdi-airballoon',
+    },
+    {
+      color: 'indigo-lighten-2',
+      icon: 'mdi-layers-triple',
+    },
+  ]
+</script>
+
 <script>
   export default {
     data: () => ({
@@ -43,7 +64,7 @@
         },
         {
           color: 'indigo-lighten-2',
-          icon: 'mdi-buffer',
+          icon: 'mdi-layers-triple',
         },
       ],
     }),

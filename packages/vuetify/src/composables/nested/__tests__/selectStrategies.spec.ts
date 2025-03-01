@@ -1,7 +1,14 @@
 /* eslint-disable max-len */
 /* eslint-disable sonarjs/no-identical-functions */
-import { describe, expect, it } from '@jest/globals'
-import { classicSelectStrategy, independentSelectStrategy, independentSingleSelectStrategy, leafSelectStrategy, leafSingleSelectStrategy } from '../selectStrategies'
+// Utilities
+import {
+  classicSelectStrategy,
+  independentSelectStrategy,
+  independentSingleSelectStrategy,
+  leafSelectStrategy,
+  leafSingleSelectStrategy,
+  trunkSelectStrategy,
+} from '../selectStrategies'
 
 describe('selectStrategies', () => {
   describe('independent', () => {
@@ -730,6 +737,58 @@ describe('selectStrategies', () => {
         ['5', 'on'],
         ['6', 'on'],
       ]))
+    })
+  })
+
+  describe('trunk', () => {
+    it('selects individual leaves', () => {
+      const strategy = trunkSelectStrategy(false)
+
+      const value = new Map([
+        ['1', 'indeterminate'],
+        ['2', 'on'],
+        ['3', 'indeterminate'],
+        ['4', 'on'],
+      ] as const)
+
+      const children = new Map([
+        ['1', ['2', '3']],
+        ['3', ['4', '5']],
+      ])
+
+      const parents = new Map([
+        ['2', '1'],
+        ['3', '1'],
+        ['4', '3'],
+        ['5', '3'],
+      ])
+
+      expect(strategy.out(value, children, parents)).toEqual(['2', '4'])
+    })
+
+    it('selects a parent node', () => {
+      const strategy = trunkSelectStrategy(false)
+
+      const value = new Map([
+        ['1', 'indeterminate'],
+        ['3', 'on'],
+        ['4', 'on'],
+        ['5', 'on'],
+      ] as const)
+
+      const children = new Map([
+        ['1', ['2', '3']],
+        ['3', ['4', '5']],
+      ])
+
+      const parents = new Map([
+        ['2', '1'],
+        ['3', '1'],
+        ['4', '3'],
+        ['5', '3'],
+      ])
+
+      expect(strategy.out(value, children, parents)).toEqual(['3'])
     })
   })
 })

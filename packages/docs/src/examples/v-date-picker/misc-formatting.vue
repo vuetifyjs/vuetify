@@ -7,23 +7,21 @@
       >
         <v-menu
           ref="menu1"
-          v-model="menu1"
+          v-model="menu1Active"
           :close-on-content-click="false"
-          transition="scale-transition"
-          offset-y
           max-width="290px"
           min-width="auto"
+          transition="scale-transition"
         >
-          <template v-slot:activator="{ on, attrs }">
+          <template v-slot:activator="{ props }">
             <v-text-field
               v-model="dateFormatted"
-              label="Date"
               hint="MM/DD/YYYY format"
-              persistent-hint
+              label="Date"
               prepend-icon="mdi-calendar"
-              v-bind="attrs"
+              persistent-hint
+              v-bind="props"
               @blur="date = parseDate(dateFormatted)"
-              v-on="on"
             ></v-text-field>
           </template>
           <v-date-picker
@@ -42,21 +40,19 @@
         <v-menu
           v-model="menu2"
           :close-on-content-click="false"
-          transition="scale-transition"
-          offset-y
           max-width="290px"
           min-width="auto"
+          transition="scale-transition"
         >
-          <template v-slot:activator="{ on, attrs }">
+          <template v-slot:activator="{ props }">
             <v-text-field
               v-model="computedDateFormatted"
-              label="Date (read only text field)"
               hint="MM/DD/YYYY format"
-              persistent-hint
+              label="Date (read only text field)"
               prepend-icon="mdi-calendar"
+              persistent-hint
               readonly
-              v-bind="attrs"
-              v-on="on"
+              v-bind="props"
             ></v-text-field>
           </template>
           <v-date-picker
@@ -70,6 +66,36 @@
     </v-row>
   </v-container>
 </template>
+
+<script setup>
+  import { computed, ref, watch } from 'vue'
+
+  const menu1 = ref()
+
+  const date = ref((new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10))
+  const dateFormatted = ref(formatDate((new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10)))
+  const menu1Active = ref(false)
+  const menu2 = ref(false)
+
+  const computedDateFormatted = computed(() => {
+    return formatDate(date.value)
+  })
+
+  watch(date, val => {
+    dateFormatted.value = formatDate(val)
+  })
+
+  function formatDate (date) {
+    if (!date) return null
+    const [year, month, day] = date.split('-')
+    return `${month}/${day}/${year}`
+  }
+  function parseDate (date) {
+    if (!date) return null
+    const [month, day, year] = date.split('/')
+    return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
+  }
+</script>
 
 <script>
   export default {

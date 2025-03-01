@@ -3,9 +3,18 @@ module.exports = {
     'vue/setup-compiler-macros': true,
   },
   rules: {
+    'no-undef': 'off',
     'vue/multi-word-component-names': 'off',
   },
   overrides: [
+    {
+      files: [
+        'src/components/**/*.vue',
+      ],
+      rules: {
+        'max-len': 'off',
+      },
+    },
     {
       files: [
         'src/examples/**/*.vue',
@@ -28,6 +37,14 @@ module.exports = {
         // 'vuetify/no-deprecated-classes': 'error',
         // 'vuetify/grid-unknown-attributes': 'error',
         // 'vuetify/no-legacy-grid': 'error',
+        'import/newline-after-import': ['error', { count: 1 }],
+
+        // Script blocks normally both run and render, but in examples we
+        // remove the options block so it is safe to import things in both
+        'import/first': 'off',
+        'import/no-duplicates': 'off',
+        'no-redeclare': 'off',
+        'no-use-before-define': 'off',
       },
     },
     {

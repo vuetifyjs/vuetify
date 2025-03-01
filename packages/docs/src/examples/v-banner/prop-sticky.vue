@@ -12,9 +12,9 @@
       <template v-slot:append>
         <v-switch
           v-model="sticky"
+          color="secondary"
           label="Sticky Banner"
           hide-details
-          color="secondary"
         ></v-switch>
       </template>
     </v-toolbar>
@@ -49,6 +49,12 @@
     </v-footer>
   </v-card>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const sticky = ref(false)
+</script>
 
 <script>
   export default {

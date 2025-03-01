@@ -7,13 +7,17 @@ related:
 - /features/blueprints/
 - /features/global-configuration/
 - /features/treeshaking/
+features:
+  report: true
 ---
 
 # Aliasing & virtual components
 
 Create virtual components that extend built-in Vuetify components using custom aliases.
 
-<entry />
+<PageFeatures />
+
+<PromotedEntry />
 
 ## Usage
 
@@ -31,11 +35,9 @@ export default createVuetify({
 })
 ```
 
-<alert type="info">
-
+::: info
 Although treeshaking is automatically applied during production builds, it is advantageous to import components by specifying their full path in development mode. For instance, using `vuetify/components/VBtn` instead of `vuetify/components` ensures that the compiler loads fewer components, thus optimizing performance.
-
-</alert>
+:::
 
 ## Virtual component defaults
 

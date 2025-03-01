@@ -1,17 +1,16 @@
 <template>
   <div>
     <v-row>
-      <v-col cols="12" class="d-flex flex-column align-center">
+      <v-col class="d-flex flex-column align-center" cols="12">
         <code>{{ code }}</code>
 
         <v-tooltip
-          :model-value="true"
           :location="location"
           :origin="origin"
           no-click-animation
         >
           <template v-slot:activator="{ props }">
-            <v-btn v-bind="props" class="my-12"></v-btn>
+            <v-btn v-bind="props" class="my-12" text="Hover Me"></v-btn>
           </template>
 
           <div>Overlay content</div>
@@ -20,90 +19,84 @@
 
       <v-col>
         <v-radio-group v-model="locationSide" label="Location side">
-          <v-radio value="top" label="top"></v-radio>
-          <v-radio value="end" label="end"></v-radio>
-          <v-radio value="bottom" label="bottom"></v-radio>
-          <v-radio value="start" label="start"></v-radio>
+          <v-radio label="top" value="top"></v-radio>
+          <v-radio label="end" value="end"></v-radio>
+          <v-radio label="bottom" value="bottom"></v-radio>
+          <v-radio label="start" value="start"></v-radio>
         </v-radio-group>
       </v-col>
 
       <v-col>
         <v-radio-group v-model="locationAlign" label="Location alignment">
-          <v-radio value="top" label="top" :disabled="locationSide === 'top' || locationSide === 'bottom'"></v-radio>
-          <v-radio value="start" label="start" :disabled="!(locationSide === 'top' || locationSide === 'bottom')"></v-radio>
-          <v-radio value="center" label="center"></v-radio>
-          <v-radio value="end" label="end" :disabled="!(locationSide === 'top' || locationSide === 'bottom')"></v-radio>
-          <v-radio value="bottom" label="bottom" :disabled="locationSide === 'top' || locationSide === 'bottom'"></v-radio>
+          <v-radio :disabled="locationSide === 'top' || locationSide === 'bottom'" label="top" value="top"></v-radio>
+          <v-radio :disabled="!(locationSide === 'top' || locationSide === 'bottom')" label="start" value="start"></v-radio>
+          <v-radio label="center" value="center"></v-radio>
+          <v-radio :disabled="!(locationSide === 'top' || locationSide === 'bottom')" label="end" value="end"></v-radio>
+          <v-radio :disabled="locationSide === 'top' || locationSide === 'bottom'" label="bottom" value="bottom"></v-radio>
         </v-radio-group>
       </v-col>
 
       <v-col>
         <v-radio-group v-model="originSide" label="Origin side">
-          <v-radio value="auto" label="auto"></v-radio>
-          <v-radio value="overlap" label="overlap"></v-radio>
-          <v-radio value="top" label="top"></v-radio>
-          <v-radio value="end" label="end"></v-radio>
-          <v-radio value="bottom" label="bottom"></v-radio>
-          <v-radio value="start" label="start"></v-radio>
+          <v-radio label="auto" value="auto"></v-radio>
+          <v-radio label="overlap" value="overlap"></v-radio>
+          <v-radio label="top" value="top"></v-radio>
+          <v-radio label="end" value="end"></v-radio>
+          <v-radio label="bottom" value="bottom"></v-radio>
+          <v-radio label="start" value="start"></v-radio>
         </v-radio-group>
       </v-col>
 
       <v-col>
         <v-radio-group v-model="originAlign" label="Origin alignment">
-          <v-radio value="top" label="top" :disabled="originDisabled || originSide === 'top' || originSide === 'bottom'"></v-radio>
-          <v-radio value="start" label="start" :disabled="originDisabled || !(originSide === 'top' || originSide === 'bottom')"></v-radio>
-          <v-radio value="center" label="center" :disabled="originDisabled"></v-radio>
-          <v-radio value="end" label="end" :disabled="originDisabled || !(originSide === 'top' || originSide === 'bottom')"></v-radio>
-          <v-radio value="bottom" label="bottom" :disabled="originDisabled || originSide === 'top' || originSide === 'bottom'"></v-radio>
+          <v-radio :disabled="originDisabled || originSide === 'top' || originSide === 'bottom'" label="top" value="top"></v-radio>
+          <v-radio :disabled="originDisabled || !(originSide === 'top' || originSide === 'bottom')" label="start" value="start"></v-radio>
+          <v-radio :disabled="originDisabled" label="center" value="center"></v-radio>
+          <v-radio :disabled="originDisabled || !(originSide === 'top' || originSide === 'bottom')" label="end" value="end"></v-radio>
+          <v-radio :disabled="originDisabled || originSide === 'top' || originSide === 'bottom'" label="bottom" value="bottom"></v-radio>
         </v-radio-group>
       </v-col>
     </v-row>
   </div>
 </template>
 
-<script>
-  export default {
-    data: () => ({
-      locationSide: 'top',
-      locationAlign: 'center',
-      originSide: 'auto',
-      originAlign: '',
-    }),
+<script setup>
+  import { computed, ref, watch } from 'vue'
 
-    computed: {
-      location () {
-        return `${this.locationSide} ${this.locationAlign}`
-      },
-      origin () {
-        return this.originDisabled ? this.originSide : `${this.originSide} ${this.originAlign}`
-      },
-      code () {
-        return `<v-tooltip location="${this.location}" origin="${this.origin}" />`
-      },
-      originDisabled () {
-        return ['auto', 'overlap'].includes(this.originSide)
-      },
-    },
+  const locationSide = ref('top')
+  const locationAlign = ref('center')
+  const originSide = ref('auto')
+  const originAlign = ref('')
 
-    watch: {
-      locationSide (val) {
-        if (['top', 'bottom'].includes(val)) {
-          this.locationAlign = {
-            top: 'start',
-            bottom: 'end',
-          }[this.locationAlign] || this.locationAlign
-        } else {
-          this.locationAlign = {
-            start: 'top',
-            end: 'bottom',
-          }[this.locationAlign] || this.locationAlign
-        }
-      },
-      originDisabled (val) {
-        if (!val && !this.originAlign) {
-          this.originAlign = 'center'
-        }
-      },
-    },
-  }
+  const location = computed(() => {
+    return `${locationSide.value} ${locationAlign.value}`
+  })
+  const origin = computed(() => {
+    return originDisabled.value ? originSide.value : `${originSide.value} ${originAlign.value}`
+  })
+  const code = computed(() => {
+    return `<v-tooltip location="${location.value}" origin="${origin.value}" />`
+  })
+  const originDisabled = computed(() => {
+    return ['auto', 'overlap'].includes(originSide.value)
+  })
+
+  watch(locationSide, val => {
+    if (['top', 'bottom'].includes(val)) {
+      locationAlign.value = {
+        top: 'start',
+        bottom: 'end',
+      }[locationAlign.value] || locationAlign.value
+    } else {
+      locationAlign.value = {
+        start: 'top',
+        end: 'bottom',
+      }[locationAlign.value] || locationAlign.value
+    }
+  })
+  watch(originDisabled, val => {
+    if (!val && !originAlign.value) {
+      originAlign.value = 'center'
+    }
+  })
 </script>

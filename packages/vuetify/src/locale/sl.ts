@@ -1,9 +1,15 @@
 export default {
   badge: 'Značka',
+  open: 'Odpri',
   close: 'Zapri',
+  dismiss: 'Dismiss',
+  confirmEdit: {
+    ok: 'V redu',
+    cancel: 'Prekliči',
+  },
   dataIterator: {
     noResultsText: 'Ni iskanega zapisa',
-    loadingText: 'Nalaganje...',
+    loadingText: 'Nalaganje ...',
   },
   dataTable: {
     itemsPerPageText: 'Vrstic na stran:',
@@ -18,59 +24,84 @@ export default {
     sortBy: 'Razvrsti po',
   },
   dataFooter: {
-    itemsPerPageText: 'Predmetov na stran:',
-    itemsPerPageAll: 'Vse',
+    itemsPerPageText: 'Elementov na stran:',
+    itemsPerPageAll: 'Vsi',
     nextPage: 'Naslednja stran',
     prevPage: 'Prejšnja stran',
     firstPage: 'Prva stran',
     lastPage: 'Zadnja stran',
     pageText: '{0}-{1} od {2}',
   },
+  dateRangeInput: {
+    divider: 'do',
+  },
   datePicker: {
-    itemsSelected: '{0} izbrano/-ih',
-    nextMonthAriaLabel: 'Naslednji mesec',
-    nextYearAriaLabel: 'Naslednje leto',
-    prevMonthAriaLabel: 'Prejšnji mesec',
-    prevYearAriaLabel: 'Prejšnje leto',
+    itemsSelected: '{0} izbranih',
+    range: {
+      title: 'Izberite datume',
+      header: 'Vnesite datume',
+    },
+    title: 'Izberite datum',
+    header: 'Vnesite datum',
+    input: {
+      placeholder: 'Vnesite datum',
+    },
   },
   noDataText: 'Ni podatkov',
   carousel: {
     prev: 'Prejšnji prikaz',
     next: 'Naslednji prikaz',
     ariaLabel: {
-      delimiter: 'Carousel slide {0} of {1}',
+      delimiter: 'Prikaz {0} od {1}',
     },
   },
   calendar: {
     moreEvents: 'Še {0}',
+    today: 'Danes',
   },
   input: {
-    clear: 'Clear {0}',
-    prependAction: '{0} prepended action',
-    appendAction: '{0} appended action',
+    clear: 'Počisti {0}',
+    prependAction: 'Dejanje pred {0}',
+    appendAction: 'Dejanje po {0}',
+    otp: 'Vnesite {0}. OTP znak',
   },
   fileInput: {
     counter: '{0} datotek',
-    counterSize: '{0} datotek ({1} skupno)',
+    counterSize: '{0} datotek (skupno {1})',
+  },
+  fileUpload: {
+    title: 'Drag and drop files here',
+    divider: 'or',
+    browse: 'Browse Files',
   },
   timePicker: {
     am: 'AM',
     pm: 'PM',
+    title: 'Izberite čas',
   },
   pagination: {
     ariaLabel: {
-      root: 'Navigacija po strani po strani',
+      root: 'Navigacija po straneh',
       next: 'Naslednja stran',
       previous: 'Prejšnja stran',
       page: 'Pojdi na stran {0}',
       currentPage: 'Trenutna stran, stran {0}',
-      first: 'First page',
-      last: 'Last page',
+      first: 'Prva stran',
+      last: 'Zadnja stran',
     },
+  },
+  stepper: {
+    next: 'Naprej',
+    prev: 'Nazaj',
   },
   rating: {
     ariaLabel: {
-      item: 'Rating {0} of {1}',
+      item: 'Ocena {0} od {1}',
     },
+  },
+  loading: 'Nalaganje ...',
+  infiniteScroll: {
+    loadMore: 'Naloži več',
+    empty: 'Konec',
   },
 }

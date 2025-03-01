@@ -1,0 +1,14 @@
+{
+  "props": {
+    "block": "Expands the button to 100% of available space.",
+    "flat": "Removes the button box shadow. This is different than using the 'flat' variant.",
+    "icon": "Apply a specific icon using the [v-icon](/components/icons/) component. The button will become _round_.",
+    "plain": "Removes the default background change applied when hovering over the button.",
+    "readonly": "Puts the button in a readonly state. Cannot be clicked or navigated to by keyboard.",
+    "stacked": "Displays the button as a flex-column.",
+    "slim": "Reduces padding to 0 8px."
+  },
+  "exposed": {
+    "group": "Internal representation when used in VBtnToggle."
+  }
+}

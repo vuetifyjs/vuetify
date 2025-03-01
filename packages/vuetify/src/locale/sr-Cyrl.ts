@@ -1,6 +1,12 @@
 export default {
   badge: 'Значка',
+  open: 'Open',
   close: 'Затвори',
+  dismiss: 'Dismiss',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'Cancel',
+  },
   dataIterator: {
     noResultsText: 'Ни један запис није пронађен',
     loadingText: 'Учитавање ставке...',
@@ -26,12 +32,20 @@ export default {
     lastPage: 'Последња страница',
     pageText: '{0}-{1} од {2}',
   },
+  dateRangeInput: {
+    divider: 'to',
+  },
   datePicker: {
-    itemsSelected: '{0} одабрано',
-    nextMonthAriaLabel: 'Следећег месеца',
-    nextYearAriaLabel: 'Следеће године',
-    prevMonthAriaLabel: 'Претходни месец',
-    prevYearAriaLabel: 'Претходна година',
+    itemsSelected: '{0} selected',
+    range: {
+      title: 'Select dates',
+      header: 'Enter dates',
+    },
+    title: 'Select date',
+    header: 'Enter date',
+    input: {
+      placeholder: 'Enter date',
+    },
   },
   noDataText: 'Нема доступних података',
   carousel: {
@@ -43,19 +57,27 @@ export default {
   },
   calendar: {
     moreEvents: '{0} више',
+    today: 'Today',
   },
   input: {
     clear: 'Clear {0}',
     prependAction: '{0} prepended action',
     appendAction: '{0} appended action',
+    otp: 'Please enter OTP character {0}',
   },
   fileInput: {
     counter: '{0} фајлова',
     counterSize: '{0} фајлова ({1} укупно)',
   },
+  fileUpload: {
+    title: 'Drag and drop files here',
+    divider: 'or',
+    browse: 'Browse Files',
+  },
   timePicker: {
     am: 'AM',
     pm: 'PM',
+    title: 'Select Time',
   },
   pagination: {
     ariaLabel: {
@@ -68,9 +90,18 @@ export default {
       last: 'Last page',
     },
   },
+  stepper: {
+    next: 'Next',
+    prev: 'Previous',
+  },
   rating: {
     ariaLabel: {
       item: 'Оцена {0} од {1}',
     },
+  },
+  loading: 'Loading...',
+  infiniteScroll: {
+    loadMore: 'Load more',
+    empty: 'No more',
   },
 }

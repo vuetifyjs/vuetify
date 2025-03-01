@@ -1,0 +1,75 @@
+@use '../../styles/tools'
+@use '../../styles/settings'
+@use './variables' as *
+
+@include tools.layer('components')
+  .v-file-upload
+    padding: $file-upload-padding
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    position: relative
+
+    &.v-sheet
+      display: flex
+      border-radius: 4px
+      border-style: dashed
+      border-width: 2px
+
+    &.v-file-upload--density-compact
+      padding: 32px 0
+      flex-direction: row
+      gap: 1rem
+
+    .v-overlay__scrim
+      pointer-events: none
+
+    &--disabled
+      pointer-events: none
+      opacity: var(--v-disabled-opacity)
+
+    &--dragging
+      > *
+        pointer-events: none
+
+    &--clickable
+      cursor: pointer
+
+    input[type="file"]
+      left: 0
+      opacity: 0
+      position: absolute
+      cursor: pointer
+      top: 0
+      z-index: -1
+
+  .v-file-upload-title
+    font-size: $file-upload-title-font-size
+    font-weight: 600
+
+  .v-file-upload-icon
+    opacity: var(--v-medium-emphasis-opacity)
+    font-size: $file-upload-icon-font-size
+    margin-bottom: $file-upload-icon-margin-bottom
+
+    .v-file-upload--density-comfortable &
+      font-size: $file-upload-icon-font-size - .5rem
+      margin-bottom: $file-upload-icon-margin-bottom - .5rem
+
+    .v-file-upload--density-compact &
+      font-size: $file-upload-icon-font-size - 1rem
+      margin-bottom: $file-upload-icon-margin-bottom - 1rem
+
+  .v-file-upload-divider
+    align-items: center
+    display: flex
+    margin: $file-upload-divider-margin
+    justify-content: center
+    width: 100%
+
+  .v-file-upload-items
+    margin: $file-upload-items-margin
+
+  .v-file-upload-item
+    &:not(:first-child)
+      margin-top: 8px

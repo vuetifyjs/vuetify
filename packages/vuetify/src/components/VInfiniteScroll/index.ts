@@ -1,0 +1,1 @@
+export { VInfiniteScroll } from './VInfiniteScroll'
