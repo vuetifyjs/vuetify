@@ -13,7 +13,7 @@ import type { PropType } from 'vue'
 export interface CalendarProps {
   allowedDates: unknown[] | ((date: unknown) => boolean) | undefined
   disabled: boolean
-  displayValue: unknown
+  displayValue?: unknown
   modelValue: unknown[] | undefined
   max: unknown
   min: unknown
@@ -51,7 +51,10 @@ export type CalendarDay = {
 // Composables
 export const makeCalendarProps = propsFactory({
   allowedDates: [Array, Function] as PropType<unknown[] | ((date: unknown) => boolean)>,
-  disabled: Boolean,
+  disabled: {
+    type: Boolean,
+    default: null,
+  },
   displayValue: null as any as PropType<unknown>,
   modelValue: Array as PropType<unknown[]>,
   month: [Number, String],
@@ -112,14 +115,17 @@ export function useCalendar (props: CalendarProps) {
     v => adapter.getMonth(v)
   )
 
+  const defaultFirstDayOfWeek = computed(() => {
+    return props.firstDayOfWeek ?? props.weekdays[0]
+  })
+
   const weekDays = computed(() => {
     const firstDayOfWeek = Number(props.firstDayOfWeek ?? 0)
-
     return props.weekdays.map(day => (day + firstDayOfWeek) % 7)
   })
 
   const weeksInMonth = computed(() => {
-    const weeks = adapter.getWeekArray(month.value, props.firstDayOfWeek)
+    const weeks = adapter.getWeekArray(month.value, defaultFirstDayOfWeek.value)
 
     const days = weeks.flat()
 

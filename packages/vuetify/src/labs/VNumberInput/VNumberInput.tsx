@@ -2,26 +2,28 @@
 import './VNumberInput.sass'
 
 // Components
-import { VBtn } from '../../components/VBtn'
-import { VDefaultsProvider } from '../../components/VDefaultsProvider'
-import { VDivider } from '../../components/VDivider'
+import { VBtn } from '@/components/VBtn'
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
+import { VDivider } from '@/components/VDivider'
 import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextField'
 
 // Composables
+import { useHold } from './hold'
+import { useFocus } from '@/composables/focus'
 import { useForm } from '@/composables/form'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, nextTick, onMounted, ref } from 'vue'
-import { clamp, genericComponent, getDecimals, omit, propsFactory, useRender } from '@/util'
+import { computed, nextTick, onMounted, ref, shallowRef, watch, watchEffect } from 'vue'
+import { clamp, genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
 import type { VTextFieldSlots } from '@/components/VTextField/VTextField'
 
 type ControlSlot = {
-  click: (e: MouseEvent) => void
+  props: Record<string, unknown>
 }
 
 type VNumberInputSlots = Omit<VTextFieldSlots, 'default'> & {
@@ -29,7 +31,7 @@ type VNumberInputSlots = Omit<VTextFieldSlots, 'default'> & {
   decrement: ControlSlot
 }
 
-type ControlVariant = 'default' | 'stacked' | 'split'
+type ControlVariant = 'default' | 'stacked' | 'split' | 'hidden'
 
 const makeVNumberInputProps = propsFactory({
   controlVariant: {
@@ -39,7 +41,7 @@ const makeVNumberInputProps = propsFactory({
   inset: Boolean,
   hideInput: Boolean,
   modelValue: {
-    type: Number as PropType<Number | null>,
+    type: Number as PropType<number | null>,
     default: null,
   },
   min: {
@@ -54,8 +56,12 @@ const makeVNumberInputProps = propsFactory({
     type: Number,
     default: 1,
   },
+  precision: {
+    type: Number as PropType<number | null>,
+    default: 0,
+  },
 
-  ...omit(makeVTextFieldProps({}), ['appendInnerIcon', 'modelValue', 'prependInnerIcon']),
+  ...omit(makeVTextFieldProps(), ['modelValue', 'validationValue']),
 }, 'VNumberInput')
 
 export const VNumberInput = genericComponent<VNumberInputSlots>()({
@@ -70,31 +76,54 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
   },
 
   setup (props, { slots }) {
-    const _model = useProxiedModel(props, 'modelValue')
+    const vTextFieldRef = ref<VTextField | undefined>()
 
-    const model = computed({
-      get: () => _model.value,
+    const { holdStart, holdStop } = useHold({ toggleUpDown })
+    const form = useForm(props)
+    const controlsDisabled = computed(() => (
+      form.isDisabled.value || form.isReadonly.value
+    ))
+
+    const { isFocused, focus, blur } = useFocus(props)
+
+    function correctPrecision (val: number, precision = props.precision) {
+      const fixed = precision == null
+        ? String(val)
+        : val.toFixed(precision)
+      return isFocused.value
+        ? Number(fixed).toString() // trim zeros
+        : fixed
+    }
+
+    const model = useProxiedModel(props, 'modelValue', null,
+      val => val ?? null,
+      val => val == null
+        ? val ?? null
+        : clamp(+val, props.min, props.max)
+    )
+
+    const _inputText = shallowRef<string | null>(null)
+    watchEffect(() => {
+      if (isFocused.value && !controlsDisabled.value) {
+        // ignore external changes
+      } else if (model.value == null) {
+        _inputText.value = null
+      } else if (!isNaN(model.value)) {
+        _inputText.value = correctPrecision(model.value)
+      }
+    })
+    const inputText = computed<string | null>({
+      get: () => _inputText.value,
       set (val) {
-        if (val === null) {
-          _model.value = null
-          return
-        }
-
-        if (!isNaN(+val) && +val <= props.max && +val >= props.min) {
-          _model.value = +val
+        if (val === null || val === '') {
+          model.value = null
+          _inputText.value = null
+        } else if (!isNaN(+val) && +val <= props.max && +val >= props.min) {
+          model.value = +val
+          _inputText.value = val
         }
       },
     })
-
-    const vTextFieldRef = ref<VTextField | undefined>()
-
-    const stepDecimals = computed(() => getDecimals(props.step))
-    const modelDecimals = computed(() => typeof model.value === 'number' ? getDecimals(model.value) : 0)
-
-    const form = useForm()
-    const controlsDisabled = computed(() => (
-      props.disabled || props.readonly || form?.isReadonly.value
-    ))
 
     const canIncrease = computed(() => {
       if (controlsDisabled.value) return false
@@ -114,39 +143,48 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
     const controlNodeSize = computed(() => controlVariant.value === 'split' ? 'default' : 'small')
     const controlNodeDefaultHeight = computed(() => controlVariant.value === 'stacked' ? 'auto' : '100%')
 
-    const incrementSlotProps = computed(() => ({ click: onClickUp }))
+    const incrementSlotProps = computed(() => ({
+      props: {
+        onClick: onControlClick,
+        onPointerup: onControlMouseup,
+        onPointerdown: onUpControlMousedown,
+      },
+    }))
+    const decrementSlotProps = computed(() => ({
+      props: {
+        onClick: onControlClick,
+        onPointerup: onControlMouseup,
+        onPointerdown: onDownControlMousedown,
+      },
+    }))
 
-    const decrementSlotProps = computed(() => ({ click: onClickDown }))
+    watch(() => props.precision, () => formatInputValue())
 
     onMounted(() => {
-      if (!props.readonly && !props.disabled) {
-        clampModel()
-      }
+      clampModel()
     })
+
+    function inferPrecision (value: number | null) {
+      if (value == null) return 0
+      const str = value.toString()
+      const idx = str.indexOf('.')
+      return ~idx ? str.length - idx : 0
+    }
 
     function toggleUpDown (increment = true) {
       if (controlsDisabled.value) return
       if (model.value == null) {
-        model.value = clamp(0, props.min, props.max)
+        inputText.value = correctPrecision(clamp(0, props.min, props.max))
         return
       }
 
-      const decimals = Math.max(modelDecimals.value, stepDecimals.value)
+      let inferredPrecision = Math.max(inferPrecision(model.value), inferPrecision(props.step))
+      if (props.precision != null) inferredPrecision = Math.max(inferredPrecision, props.precision)
       if (increment) {
-        if (canIncrease.value) model.value = +((((model.value as number) + props.step).toFixed(decimals)))
+        if (canIncrease.value) inputText.value = correctPrecision(model.value + props.step, inferredPrecision)
       } else {
-        if (canDecrease.value) model.value = +((((model.value as number) - props.step).toFixed(decimals)))
+        if (canDecrease.value) inputText.value = correctPrecision(model.value - props.step, inferredPrecision)
       }
-    }
-
-    function onClickUp (e: MouseEvent) {
-      e.stopPropagation()
-      toggleUpDown()
-    }
-
-    function onClickDown (e: MouseEvent) {
-      e.stopPropagation()
-      toggleUpDown(false)
     }
 
     function onBeforeinput (e: InputEvent) {
@@ -162,6 +200,17 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       // AND "-", "." are allowed only once
       // AND "-" is only allowed at the start
       if (!/^-?(\d+(\.\d*)?|(\.\d+)|\d*|\.)$/.test(potentialNewInputVal)) {
+        e.preventDefault()
+      }
+
+      if (props.precision == null) return
+
+      // Ignore decimal digits above precision limit
+      if (potentialNewInputVal.split('.')[1]?.length > props.precision) {
+        e.preventDefault()
+      }
+      // Ignore decimal separator when precision = 0
+      if (props.precision === 0 && potentialNewInputVal.includes('.')) {
         e.preventDefault()
       }
     }
@@ -185,18 +234,73 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       }
     }
 
-    function onControlMousedown (e: MouseEvent) {
+    function onControlClick (e: MouseEvent) {
       e.stopPropagation()
     }
 
+    function onControlMouseup (e: PointerEvent) {
+      const el = e.currentTarget as HTMLElement
+      el?.releasePointerCapture(e.pointerId)
+      e.preventDefault()
+      e.stopPropagation()
+      holdStop()
+    }
+
+    function onUpControlMousedown (e: PointerEvent) {
+      const el = e.currentTarget as HTMLElement
+      el?.setPointerCapture(e.pointerId)
+      e.preventDefault()
+      e.stopPropagation()
+      holdStart('up')
+    }
+
+    function onDownControlMousedown (e: PointerEvent) {
+      const el = e.currentTarget as HTMLElement
+      el?.setPointerCapture(e.pointerId)
+      e.preventDefault()
+      e.stopPropagation()
+      holdStart('down')
+    }
+
     function clampModel () {
+      if (controlsDisabled.value) return
       if (!vTextFieldRef.value) return
-      const inputText = vTextFieldRef.value.value
-      if (inputText && !isNaN(+inputText)) {
-        model.value = clamp(+(inputText), props.min, props.max)
+      const actualText = vTextFieldRef.value.value
+      if (actualText && !isNaN(+actualText)) {
+        inputText.value = correctPrecision(clamp(+actualText, props.min, props.max))
       } else {
-        model.value = null
+        inputText.value = null
       }
+    }
+
+    function formatInputValue () {
+      if (controlsDisabled.value) return
+      if (model.value === null || isNaN(model.value)) {
+        inputText.value = null
+        return
+      }
+      inputText.value = props.precision == null
+        ? String(model.value)
+        : model.value.toFixed(props.precision)
+    }
+
+    function trimDecimalZeros () {
+      if (controlsDisabled.value) return
+      if (model.value === null || isNaN(model.value)) {
+        inputText.value = null
+        return
+      }
+      inputText.value = model.value.toString()
+    }
+
+    function onFocus () {
+      focus()
+      trimDecimalZeros()
+    }
+
+    function onBlur () {
+      blur()
+      clampModel()
     }
 
     useRender(() => {
@@ -212,8 +316,9 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
             data-testid="increment"
             aria-hidden="true"
             icon={ incrementIcon.value }
-            onClick={ onClickUp }
-            onMousedown={ onControlMousedown }
+            onClick={ onControlClick }
+            onPointerup={ onControlMouseup }
+            onPointerdown={ onUpControlMousedown }
             size={ controlNodeSize.value }
             tabindex="-1"
           />
@@ -247,8 +352,9 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
             icon={ decrementIcon.value }
             size={ controlNodeSize.value }
             tabindex="-1"
-            onClick={ onClickDown }
-            onMousedown={ onControlMousedown }
+            onClick={ onControlClick }
+            onPointerup={ onControlMouseup }
+            onPointerdown={ onDownControlMousedown }
           />
         ) : (
           <VDefaultsProvider
@@ -294,9 +400,9 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
 
               { incrementControlNode() }
             </div>
-          ) : (!props.reverse
-            ? <>{ dividerNode() }{ controlNode() }</>
-            : undefined)
+          ) : (props.reverse || controlVariant.value === 'hidden'
+            ? undefined
+            : <>{ dividerNode() }{ controlNode() }</>)
 
       const hasAppendInner = slots['append-inner'] || appendInnerControl
 
@@ -308,7 +414,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
 
               <VDivider vertical />
             </div>
-          ) : (props.reverse
+          ) : (props.reverse && controlVariant.value !== 'hidden'
             ? <>{ controlNode() }{ dividerNode() }</>
             : undefined)
 
@@ -317,9 +423,11 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       return (
         <VTextField
           ref={ vTextFieldRef }
-          v-model={ model.value }
+          v-model={ inputText.value }
+          validationValue={ model.value }
           onBeforeinput={ onBeforeinput }
-          onChange={ clampModel }
+          onFocus={ onFocus }
+          onBlur={ onBlur }
           onKeydown={ onKeydown }
           class={[
             'v-number-input',

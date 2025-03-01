@@ -432,7 +432,7 @@ Control the layout of flex containers with alignment, justification and more wit
 
 <VoPromotionsCardVuetify />
 
-## Enabling flexbox
+## Usage
 
 Using `display` utilities you can turn any element into a flexbox container transforming **direct children elements** into flex items. Using additional flex property utilities, you can customize their interaction even further.
 

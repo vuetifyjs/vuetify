@@ -5,7 +5,7 @@
         <div>
           <v-toolbar>
             <v-btn
-              class="hidden-xs-only"
+              class="hidden-xs"
               icon
             >
               <v-icon>mdi-arrow-left</v-icon>
@@ -16,7 +16,7 @@
             <v-spacer></v-spacer>
 
             <v-btn
-              class="hidden-xs-only"
+              class="hidden-xs"
               icon
             >
               <v-icon>mdi-magnify</v-icon>

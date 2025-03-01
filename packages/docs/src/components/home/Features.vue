@@ -1,5 +1,5 @@
 <template>
-  <v-responsive class="text-xs-center">
+  <v-responsive class="text-center">
     <v-container>
       <v-row justify="center">
         <v-col
@@ -13,7 +13,7 @@
             :rel="feature.href && 'noopener noreferrer'"
             :target="feature.href && '_blank'"
             :to="feature.to"
-            class="text-xs-center mx-auto"
+            class="text-center mx-auto"
             max-width="350"
             border
             flat

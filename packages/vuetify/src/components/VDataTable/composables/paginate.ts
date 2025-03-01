@@ -129,7 +129,7 @@ export function usePaginatedItems <T> (options: {
 
   watch(paginatedItems, val => {
     vm.emit('update:currentItems', val)
-  })
+  }, { immediate: true })
 
   return { paginatedItems }
 }

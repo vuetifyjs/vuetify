@@ -36,8 +36,7 @@
 
         <v-btn-toggle
           v-model="toggle_multiple"
-          background-color="primary"
-          dark
+          color="primary"
           multiple
         >
           <v-btn>
@@ -90,11 +89,7 @@
       >
         <p>Mandatory</p>
 
-        <v-btn-toggle
-          v-model="toggle_one"
-          mandatory
-          shaped
-        >
+        <v-btn-toggle v-model="toggle_one" mandatory>
           <v-btn>
             <v-icon>mdi-format-align-left</v-icon>
           </v-btn>
@@ -149,10 +144,7 @@
       >
         <p>Text &amp; Icon Options</p>
 
-        <v-btn-toggle
-          v-model="icon"
-          borderless
-        >
+        <v-btn-toggle v-model="icon" divided>
           <v-btn value="left">
             <span class="hidden-sm-and-down">Left</span>
 

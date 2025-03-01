@@ -216,10 +216,9 @@ export function pick<
 > (obj: T, paths: U[]): MaybePick<T, U> {
   const found: any = {}
 
-  const keys = new Set(Object.keys(obj))
-  for (const path of paths) {
-    if (keys.has(path)) {
-      found[path] = obj[path]
+  for (const key of paths) {
+    if (Object.hasOwn(obj, key)) {
+      found[key] = obj[key]
     }
   }
 
@@ -269,17 +268,6 @@ export function omit<
   const clone = { ...obj }
 
   exclude.forEach(prop => delete clone[prop])
-
-  return clone
-}
-
-export function only<
-  T extends object,
-  U extends Extract<keyof T, string>
-> (obj: T, include: U[]): Pick<T, U> {
-  const clone = {} as T
-
-  include.forEach(prop => clone[prop] = obj[prop])
 
   return clone
 }
@@ -616,6 +604,7 @@ export function eventName (propName: string) {
   return propName[2].toLowerCase() + propName.slice(3)
 }
 
+// TODO: this should be an array but vue's types don't accept arrays: vuejs/core#8025
 export type EventProp<T extends any[] = any[], F = (...args: T) => void> = F
 export const EventProp = <T extends any[] = any[]>() => [Function, Array] as PropType<EventProp<T>>
 
@@ -624,7 +613,7 @@ export function hasEvent (props: Record<string, any>, name: string) {
   return !!(props[name] || props[`${name}Once`] || props[`${name}Capture`] || props[`${name}OnceCapture`] || props[`${name}CaptureOnce`])
 }
 
-export function callEvent<T extends any[]> (handler: EventProp<T> | undefined, ...args: T) {
+export function callEvent<T extends any[]> (handler: EventProp<T> | EventProp<T>[] | undefined, ...args: T) {
   if (Array.isArray(handler)) {
     for (const h of handler) {
       h(...args)
@@ -770,4 +759,9 @@ export function checkPrintable (e: KeyboardEvent) {
   const isPrintableChar = e.key.length === 1
   const noModifier = !e.ctrlKey && !e.metaKey && !e.altKey
   return isPrintableChar && noModifier
+}
+
+export type Primitive = string | number | boolean | symbol | bigint
+export function isPrimitive (value: unknown): value is Primitive {
+  return typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean' || typeof value === 'bigint'
 }

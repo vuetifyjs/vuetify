@@ -69,6 +69,11 @@ export default {
     counter: '{0} fájl',
     counterSize: '{0} fájl ({1} összesen)',
   },
+  fileUpload: {
+    title: 'Drag and drop files here',
+    divider: 'or',
+    browse: 'Browse Files',
+  },
   timePicker: {
     am: 'de',
     pm: 'du',

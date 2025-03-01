@@ -4,10 +4,7 @@
     fluid
   >
     <v-row justify="center">
-      <v-menu
-        min-width="200px"
-        rounded
-      >
+      <v-menu min-width="200px">
         <template v-slot:activator="{ props }">
           <v-btn
             icon

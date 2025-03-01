@@ -3,7 +3,7 @@ import type { components as octokitComponents } from '@octokit/openapi-types'
 
 export type Commit = octokitComponents['schemas']['commit']
 
-export type State = {
+type State = {
   commits: Commit[]
   isLoading: boolean
 }

@@ -69,6 +69,11 @@ export default {
     counter: '{0} souborů',
     counterSize: '{0} souborů ({1} celkem)',
   },
+  fileUpload: {
+    title: 'Drag and drop files here',
+    divider: 'or',
+    browse: 'Browse Files',
+  },
   timePicker: {
     am: 'AM',
     pm: 'PM',
