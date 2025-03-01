@@ -10,7 +10,7 @@ interface Vendor {
   products: Product[]
 }
 
-export type State = {
+type State = {
   vendors: Vendor[]
 }
 

@@ -73,7 +73,6 @@ export const VInfiniteScrollIntersect = defineComponent({
       type: String as PropType<InfiniteScrollSide>,
       required: true,
     },
-    rootRef: null,
     rootMargin: String,
   },
 
@@ -82,17 +81,20 @@ export const VInfiniteScrollIntersect = defineComponent({
   },
 
   setup (props, { emit }) {
-    const { intersectionRef, isIntersecting } = useIntersectionObserver(entries => {
-    }, props.rootMargin ? {
-      rootMargin: props.rootMargin,
-    } : undefined)
+    const { intersectionRef, isIntersecting } = useIntersectionObserver()
 
     watch(isIntersecting, async val => {
       emit('intersect', props.side, val)
     })
 
     useRender(() => (
-      <div class="v-infinite-scroll-intersect" ref={ intersectionRef }>&nbsp;</div>
+      <div
+        class="v-infinite-scroll-intersect"
+        style={{
+          '--v-infinite-margin-size': props.rootMargin,
+        }}
+        ref={ intersectionRef }
+      >&nbsp;</div>
     ))
 
     return {}
@@ -264,24 +266,22 @@ export const VInfiniteScroll = genericComponent<VInfiniteScrollSlots>()({
             { renderSide('start', startStatus.value) }
           </div>
 
-          { rootEl.value && hasStartIntersect && intersectMode && (
+          { hasStartIntersect && intersectMode && (
             <VInfiniteScrollIntersect
               key="start"
               side="start"
               onIntersect={ handleIntersect }
-              rootRef={ rootEl.value }
               rootMargin={ margin.value }
             />
           )}
 
           { slots.default?.() }
 
-          { rootEl.value && hasEndIntersect && intersectMode && (
+          { hasEndIntersect && intersectMode && (
             <VInfiniteScrollIntersect
               key="end"
               side="end"
               onIntersect={ handleIntersect }
-              rootRef={ rootEl.value }
               rootMargin={ margin.value }
             />
           )}

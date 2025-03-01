@@ -11,6 +11,16 @@
         <v-toolbar-title>Expandable Table</v-toolbar-title>
       </v-toolbar>
     </template>
+    <template v-slot:item.data-table-expand="{ internalItem, isExpanded, toggleExpand }">
+      <td>
+        <v-btn
+          :icon="isExpanded(internalItem) ? 'mdi-chevron-up' : 'mdi-chevron-down'"
+          size="small"
+          variant="plain"
+          @click="toggleExpand(internalItem)"
+        ></v-btn>
+      </td>
+    </template>
     <template v-slot:expanded-row="{ columns, item }">
       <tr>
         <td :colspan="columns.length">

@@ -1,5 +1,4 @@
 // Utilities
-import { describe, expect, it } from '@jest/globals'
 import { useLoader } from '../loader'
 
 describe('size', () => {

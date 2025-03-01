@@ -4,12 +4,15 @@ import { VIcon } from '@/components/VIcon'
 // Composables
 import { useLocale } from '@/composables/locale'
 
+// Utilities
+import { callEvent } from '@/util'
+
 // Types
 import type { IconValue } from '@/composables/icons'
+import type { EventProp } from '@/util'
 
 type names = 'clear' | 'prepend' | 'append' | 'appendInner' | 'prependInner'
 
-type EventProp<T = (...args: any[]) => any> = T | T[]
 type InputIconProps<T extends names> = {
   label: string | undefined
 } & {
@@ -31,7 +34,16 @@ export function useInputIcon<T extends {}, K extends names = Listeners<T>> (prop
       appendInner: 'appendAction',
       clear: 'clear',
     }[name]
-    const listener = props[`onClick:${name}`]
+    const listener = props[`onClick:${name}`] as EventProp | undefined
+
+    function onKeydown (e: KeyboardEvent) {
+      if (e.key !== 'Enter' && e.key !== ' ') return
+
+      e.preventDefault()
+      e.stopPropagation()
+      callEvent(listener, new PointerEvent('click', e))
+    }
+
     const label = listener && localeKey
       ? t(`$vuetify.input.${localeKey}`, props.label ?? '')
       : undefined
@@ -41,6 +53,7 @@ export function useInputIcon<T extends {}, K extends names = Listeners<T>> (prop
         icon={ props[`${name}Icon`] }
         aria-label={ label }
         onClick={ listener }
+        onKeydown={ onKeydown }
       />
     )
   }

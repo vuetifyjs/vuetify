@@ -38,7 +38,7 @@
         >
           <a
             :href="href"
-            class="v-toc-link d-block transition-swing text-decoration-none"
+            class="v-toc-link d-block text-decoration-none"
             @click.prevent.stop="onClick(to)"
             v-text="text"
           />
@@ -62,11 +62,12 @@
             <v-col
               v-for="sponsor of sponsors"
               :key="sponsor.slug"
+              :cols="sponsor.metadata.tier === -2 ? 12 : 6"
               class="d-inline-flex"
             >
               <sponsor-card
                 :color="dark ? undefined : 'grey-lighten-5'"
-                :max-height="sponsor.metadata.tier === -1 ? 52 : 40"
+                :max-height="sponsor.metadata.tier === -2 ? 52 : 40"
                 :sponsor="sponsor"
               />
             </v-col>

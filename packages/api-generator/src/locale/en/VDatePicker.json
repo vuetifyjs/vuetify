@@ -7,6 +7,12 @@
     "eventColor": "Sets the color for event dot. It can be string (all events will have the same color) or `object` where attribute is the event date and value is boolean/color/array of colors for specified date or `function` taking date as a parameter and returning boolean/color/array of colors for that date.",
     "events": "Array of dates or object defining events or colors or function returning boolean/color/array of colors.",
     "expandIcon": "Icon used for **view-mode** toggle.",
+    "hideHeader": "Hides the header.",
+    "hideWeekdays": "Hides the weekdays.",
+    "landscape": "Changes the picker to landscape mode.",
+    "month": "Sets the month.",
+    "weekdays": "Array of weekdays.",
+    "year": "Sets the year.",
     "firstDayOfWeek": "Sets the first day of the week, starting with 0 for Sunday.",
     "flat": "Removes  elevation.",
     "format": "Takes a date object and returns it in a specified format.",
@@ -40,10 +46,18 @@
     "yearIcon": "Sets the icon in the year selection button."
   },
   "events": {
+    "update:month": "Emitted when the month changes.",
+    "update:year": "Emitted when the year changes.",
+    "update:viewMode": "Emitted when the view mode changes.",
     "<domevent>:date": "Emitted when the specified DOM event occurs on the date button.",
     "<domevent>:month": "Emitted when the specified DOM event occurs on the month button.",
     "<domevent>:year": "Emitted when the specified DOM event occurs on the year button.",
     "change": "Reactive date picker emits `input` even when any part of the date (year/month/day) changes, but `change` event is emitted only when the day (for date pickers) or month (for month pickers) changes. If `range` prop is set, date picker emits `change` when both [from, to] are selected.",
     "update:pickerDate": "The `.sync` event for `picker-date` prop."
+  },
+  "slots": {
+    "actions": "Slot for the actions.",
+    "header": "Slot for the header.",
+    "year": "Slot for the year."
   }
 }

@@ -38,13 +38,13 @@ export default {
   datePicker: {
     itemsSelected: '{0} selected',
     range: {
-      title: 'Select dates',
-      header: 'Enter dates',
+      title: 'Vælg datoer',
+      header: 'Indtast datoer',
     },
-    title: 'Select date',
-    header: 'Enter date',
+    title: 'Vælg dato',
+    header: 'Indtast dato',
     input: {
-      placeholder: 'Enter date',
+      placeholder: 'Indtast dato',
     },
   },
   noDataText: 'Ingen data tilgængelig',
@@ -68,6 +68,11 @@ export default {
   fileInput: {
     counter: '{0} filer',
     counterSize: '{0} filer ({1} total)',
+  },
+  fileUpload: {
+    title: 'Drag and drop files here',
+    divider: 'or',
+    browse: 'Browse Files',
   },
   timePicker: {
     am: 'AM',

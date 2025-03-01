@@ -18,10 +18,9 @@
         <v-card-title>
           <v-rating
             :model-value="4"
-            background-color="orange"
             class="me-2"
             color="orange"
-            dense
+            density="compact"
             hover
           ></v-rating>
           <span class="text-primary text-subtitle-2">64 Reviews</span>

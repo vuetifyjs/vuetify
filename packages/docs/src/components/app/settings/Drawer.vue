@@ -8,7 +8,7 @@
     temporary
     touchless
   >
-    <v-toolbar :title="t('settings')" flat>
+    <v-toolbar :title="t('settings.header')" flat>
       <template #append>
         <v-btn
           icon="mdi-close"
@@ -22,10 +22,6 @@
 
     <v-container class="px-3 py-3">
       <AppSettingsOptions />
-
-      <AppSettingsOptionsAdOption v-if="one.isSubscriber" />
-
-      <AppSettingsDeveloperMode />
     </v-container>
 
     <template #append>
@@ -36,7 +32,6 @@
 
 <script setup>
   const app = useAppStore()
-  const one = useOneStore()
 
   const { t } = useI18n()
   const { isRtl } = useRtl()

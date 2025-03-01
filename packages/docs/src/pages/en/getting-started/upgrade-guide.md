@@ -90,10 +90,10 @@ app.use(vuetify)
 
 ### SASS variables
 
-- `$headings` was merged with `$typography`: Access font-size of subtitle-2 with `map-get($typography, 'subtitle-2', 'size')`
+- `$headings` was merged with `$typography`: Access font-size of subtitle-2 with `map.get($typography, 'subtitle-2', 'size')`
 - If you imported variables from `~vuetify/src/styles/settings/_variables` in v2, you have to replace it with `vuetify/settings`
 - Component variables that previously lived in e.g. `~/vuetify/src/components/VIcon/VIcon.sass` can now be imported from `vuetify/settings` directly too.
-- `$display-breakpoints` no longer includes `{breakpoint}-only` variables (e.g. xs-only), use `@media #{map-get(v.$display-breakpoints, 'xs')}` instead.
+- `$display-breakpoints` no longer includes `{breakpoint}-only` variables (e.g. xs-only), use `@media #{map.get(v.$display-breakpoints, 'xs')}` instead.
 - The `$transition` map has been removed, replaced with individual `$standard-easing`, `$decelerated-easing`, `$accelerated-easing` variables.
 - `$container-padding-x` is now 16px instead of 12px as in v2. You can replace it with `$spacer * 3` to get to the previous look.
 - Too many component variables to list have been renamed or removed. There is no automated way to update these as the element structure has changed significantly, you will need to manually update these along with any custom styles.
@@ -201,6 +201,14 @@ app.use(vuetify)
 - `v-subheader`  has been renamed to `v-list-subheader`.
 - `v-list-item`'s `active` scoped slot prop has been renamed to `isActive`
 
+### v-menu/v-tooltip
+
+- `rounded` prop has been removed. Apply a rounded css class to the menu content element instead. e.g. `.rounded-te`
+- `internal-activator` prop has been removed, use `activator` with a ref or unique selector instead.
+- `absolute`, `offset-y` and `offset-x` props have been removed. Manual positioning is now done by passing a `[x, y]` array to the `target` prop.
+- `nudge-*` props have been removed. There is no direct replacement but `offset` can be used to achieve similar results.
+- Content is now destroyed after closing, use `eager` to keep it.
+
 ### v-navigation-drawer
 
 - `stateless` prop has been removed, manually control state using `model-value` or `v-model` instead.
@@ -269,13 +277,6 @@ app.use(vuetify)
 ### v-img
 
 - `contain` has been removed and is now the default behaviour. Use `cover` to fill the entire container.
-
-### v-menu
-
-- `rounded` prop has been removed. Apply a rounded css class to the menu content element instead. e.g. `.rounded-te`
-- `internal-activator` prop has been removed, use a ref or unique selector instead.
-- `absolute`, `offset-y` and `offset-x` props have been removed. Manual positioning is now done by passing a `[x, y]` array to the `target` prop.
-- `nudge-*` props have been removed. There is no direct replacement but `offset` can be used to achieve similar results.
 
 ### v-snackbar
 

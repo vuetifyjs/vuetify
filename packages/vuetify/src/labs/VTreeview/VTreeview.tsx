@@ -27,6 +27,7 @@ function flatten (items: ListItem[], flat: ListItem[] = []) {
 }
 
 export const makeVTreeviewProps = propsFactory({
+  fluid: Boolean,
   openAll: Boolean,
   search: String,
 
@@ -86,23 +87,17 @@ export const VTreeview = genericComponent<new <T>(
     const search = toRef(props, 'search')
     const { filteredItems } = useFilter(props, flatItems, search)
     const visibleIds = computed(() => {
-      if (!search.value) {
-        return null
-      }
+      if (!search.value) return null
+      const getPath = vListRef.value?.getPath
+      if (!getPath) return null
       return new Set(filteredItems.value.flatMap(item => {
-        return [...getPath(item.props.value), ...getChildren(item.props.value)]
+        const itemVal = props.returnObject ? item.raw : item.props.value
+        return [
+          ...getPath(itemVal),
+          ...getChildren(itemVal),
+        ].map(toRaw)
       }))
     })
-
-    function getPath (id: unknown) {
-      const path: unknown[] = []
-      let parent: unknown = id
-      while (parent != null) {
-        path.unshift(parent)
-        parent = vListRef.value?.parents.get(parent)
-      }
-      return path
-    }
 
     function getChildren (id: unknown) {
       const arr: unknown[] = []
@@ -156,7 +151,6 @@ export const VTreeview = genericComponent<new <T>(
 
     useRender(() => {
       const listProps = VList.filterProps(props)
-
       const treeviewChildrenProps = VTreeviewChildren.filterProps(props)
 
       return (
@@ -165,6 +159,9 @@ export const VTreeview = genericComponent<new <T>(
           { ...listProps }
           class={[
             'v-treeview',
+            {
+              'v-treeview--fluid': props.fluid,
+            },
             props.class,
           ]}
           open-strategy="multiple"
@@ -175,6 +172,7 @@ export const VTreeview = genericComponent<new <T>(
         >
           <VTreeviewChildren
             { ...treeviewChildrenProps }
+            density={ props.density }
             returnObject={ props.returnObject }
             items={ items.value }
             v-slots={ slots }

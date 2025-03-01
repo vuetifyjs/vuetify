@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`createTheme should create style element 1`] = `
+exports[`createTheme > should create style element 1`] = `
 <head>
   <style
     id="vuetify-theme-stylesheet"
@@ -366,4 +366,4 @@ exports[`createTheme should create style element 1`] = `
 </head>
 `;
 
-exports[`createTheme should not generate style element if disabled 1`] = `<head />`;
+exports[`createTheme > should not generate style element if disabled 1`] = `<head />`;

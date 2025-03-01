@@ -90,7 +90,7 @@ pnpm dev
 
 ### Manual setup
 
-Nuxt is powered by Vite, so the steps to get Vuetify working in Nuxt 3 are quite similar to [the manual steps described below](#existing-projects).
+Nuxt is powered by Nitro and can be used with Vite or Webpack 5 bundlers, so the steps to get Vuetify working in Nuxt 3 are quite similar to [the manual steps described below](#existing-projects).
 
 Start off creating a nuxt app by executing the following commands:
 
@@ -222,9 +222,9 @@ You should now have access to all Vuetify components and tools in the Nuxt app.
 
 ### vuetify-nuxt-module
 
-Alternatively, you can use the [vuetify-nuxt-module](https://github.com/userquin/vuetify-nuxt-module) (works only with Vite). The module is strongly opinionated and has a built-in default configuration out of the box. You can use it without any configuration, and it will work for most use cases.
+Alternatively, you can use the [vuetify-nuxt-module](https://github.com/vuetifyjs/nuxt-module) (works only with Vite). The module is strongly opinionated and has a built-in default configuration out of the box. You can use it without any configuration, and it will work for most use cases.
 
-Check the [documentation](https://vuetify-nuxt-module.netlify.app/) for more information on how to use it.
+Check the [documentation](https://nuxt.vuetifyjs.com/) for more information on how to use it.
 
 ## Using Laravel Mix
 
@@ -271,6 +271,34 @@ const vuetify = createVuetify()
 
 const app = createApp()
 app.use(vuetify).mount('#app')
+```
+
+## Using as ES Module with CDN
+
+To import Vuetify (and Vue) using an [import map](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script/type/importmap) you can use the same CDN but contain it in a ES module without tooling
+
+```html
+<head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vuetify@{{ version }}/dist/vuetify.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css" />
+  <link rel="stylesheet" href="https://fonts.bunny.net/css?family=roboto:400,500,700" />
+  <script type="importmap">
+  {
+    "imports": {
+      "vue": "https://cdn.jsdelivr.net/npm/vue@latest/dist/vue.esm-browser.js",
+      "vuetify": "https://cdn.jsdelivr.net/npm/vuetify@{{ version }}/dist/vuetify.esm.js"
+    }
+  }
+  </script>
+</head>
+```
+
+```html
+<script type="module">
+  import { createApp, ref, computed } from "vue"
+  import { createVuetify } from "vuetify"
+  //... setup as usual
+</script>
 ```
 
 ## Using Vitepress
