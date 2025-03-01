@@ -10,6 +10,8 @@
   },
   "events": {
     "click": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-list-item.json))",
-    "clickOnce": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-list-item.json))"
+    "clickOnce": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-list-item.json))",
+    "click:append": "Emitted when appended icon or avatar is clicked.",
+    "click:prepend": "Emitted when prepended icon or avatar is clicked."
   }
 }
