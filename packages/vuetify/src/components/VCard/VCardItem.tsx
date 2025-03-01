@@ -1,9 +1,9 @@
 // Components
+import { useCardAvatar } from './CardAvatar'
+import { useCardIcon } from './CardIcon'
 import { VCardSubtitle } from './VCardSubtitle'
 import { VCardTitle } from './VCardTitle'
-import { VAvatar } from '@/components/VAvatar'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
-import { VIcon } from '@/components/VIcon'
 
 // Composables
 import { makeComponentProps } from '@/composables/component'
@@ -11,7 +11,7 @@ import { makeDensityProps } from '@/composables/density'
 import { IconValue } from '@/composables/icons'
 
 // Utilities
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { EventProp, genericComponent, propsFactory, useRender } from '@/util'
 
 export type VCardItemSlots = {
   default: never
@@ -28,6 +28,9 @@ export const makeCardItemProps = propsFactory({
   prependIcon: IconValue,
   subtitle: [String, Number],
   title: [String, Number],
+
+  'onClick:append': EventProp<[MouseEvent]>(),
+  'onClick:prepend': EventProp<[MouseEvent]>(),
 
   ...makeComponentProps(),
   ...makeDensityProps(),
@@ -46,6 +49,8 @@ export const VCardItem = genericComponent<VCardItemSlots>()({
       const hasAppend = !!(hasAppendMedia || slots.append)
       const hasTitle = !!(props.title != null || slots.title)
       const hasSubtitle = !!(props.subtitle != null || slots.subtitle)
+      const { CardAvatar } = useCardAvatar(props)
+      const { CardIcon } = useCardIcon(props)
 
       return (
         <div
@@ -56,22 +61,20 @@ export const VCardItem = genericComponent<VCardItemSlots>()({
           style={ props.style }
         >
           { hasPrepend && (
-            <div key="prepend" class="v-card-item__prepend" onClick={ onPrependClick }>
+            <div key="prepend" class="v-card-item__prepend">
               { !slots.prepend ? (
                 <>
                   { props.prependAvatar && (
-                    <VAvatar
+                    <CardAvatar
                       key="prepend-avatar"
-                      density={ props.density }
-                      image={ props.prependAvatar }
+                      name="prepend"
                     />
                   )}
 
                   { props.prependIcon && (
-                    <VIcon
+                    <CardIcon
                       key="prepend-icon"
-                      density={ props.density }
-                      icon={ props.prependIcon }
+                      name="prepend"
                     />
                   )}
                 </>
@@ -112,22 +115,20 @@ export const VCardItem = genericComponent<VCardItemSlots>()({
           </div>
 
           { hasAppend && (
-            <div key="append" class="v-card-item__append" onClick={ onAppendClick }>
+            <div key="append" class="v-card-item__append">
               { !slots.append ? (
                 <>
                   { props.appendIcon && (
-                    <VIcon
+                    <CardIcon
                       key="append-icon"
-                      density={ props.density }
-                      icon={ props.appendIcon }
+                      name="append"
                     />
                   )}
 
                   { props.appendAvatar && (
-                    <VAvatar
+                    <CardAvatar
                       key="append-avatar"
-                      density={ props.density }
-                      image={ props.appendAvatar }
+                      name="append"
                     />
                   )}
                 </>

@@ -10,6 +10,8 @@
     "image": "The slot used for the card image. This is used with the [image](#props-image) prop."
   },
   "events": {
-    "click": "Emitted when component is clicked - Will trigger component to ripple when clicked unless the `.native` modifier is used."
+    "click": "Emitted when component is clicked - Will trigger component to ripple when clicked unless the `.native` modifier is used.",
+    "click:append": "Emitted when appended icon or avatar is clicked.",
+    "click:prepend": "Emitted when prepended icon or avatar is clicked."
   }
 }
