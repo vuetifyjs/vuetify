@@ -2,11 +2,11 @@
 import './VListItem.sass'
 
 // Components
+import { useListAvatar } from './ListAvatar'
+import { useListIcon } from './ListIcon'
 import { VListItemSubtitle } from './VListItemSubtitle'
 import { VListItemTitle } from './VListItemTitle'
-import { VAvatar } from '@/components/VAvatar'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
-import { VIcon } from '@/components/VIcon'
 
 // Composables
 import { useList } from './list'
@@ -90,6 +90,9 @@ export const makeVListItemProps = propsFactory({
   onClick: EventProp<[MouseEvent | KeyboardEvent]>(),
   onClickOnce: EventProp<[MouseEvent]>(),
 
+  'onClick:prepend': EventProp<[MouseEvent]>(),
+  'onClick:append': EventProp<[MouseEvent]>(),
+
   ...makeBorderProps(),
   ...makeComponentProps(),
   ...makeDensityProps(),
@@ -111,6 +114,8 @@ export const VListItem = genericComponent<VListItemSlots>()({
 
   emits: {
     click: (e: MouseEvent | KeyboardEvent) => true,
+    'click:prepend': (e: MouseEvent | KeyboardEvent) => true,
+    'click:append': (e: MouseEvent | KeyboardEvent) => true,
   },
 
   setup (props, { attrs, slots, emit }) {
@@ -172,6 +177,8 @@ export const VListItem = genericComponent<VListItemSlots>()({
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(roundedProps)
+    const { ListAvatar } = useListAvatar(props)
+    const { ListIcon } = useListIcon(props)
     const lineClasses = computed(() => props.lines ? `v-list-item--${props.lines}-line` : undefined)
 
     const slotProps = computed(() => ({
@@ -272,18 +279,16 @@ export const VListItem = genericComponent<VListItemSlots>()({
               { !slots.prepend ? (
                 <>
                   { props.prependAvatar && (
-                    <VAvatar
+                    <ListAvatar
                       key="prepend-avatar"
-                      density={ props.density }
-                      image={ props.prependAvatar }
+                      name="prepend"
                     />
                   )}
 
                   { props.prependIcon && (
-                    <VIcon
+                    <ListIcon
                       key="prepend-icon"
-                      density={ props.density }
-                      icon={ props.prependIcon }
+                      name="prepend"
                     />
                   )}
                 </>
@@ -334,18 +339,16 @@ export const VListItem = genericComponent<VListItemSlots>()({
               { !slots.append ? (
                 <>
                   { props.appendIcon && (
-                    <VIcon
+                    <ListIcon
                       key="append-icon"
-                      density={ props.density }
-                      icon={ props.appendIcon }
+                      name="append"
                     />
                   )}
 
                   { props.appendAvatar && (
-                    <VAvatar
+                    <ListAvatar
                       key="append-avatar"
-                      density={ props.density }
-                      image={ props.appendAvatar }
+                      name="append"
                     />
                   )}
                 </>
