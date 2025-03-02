@@ -90,6 +90,18 @@ describe('VTextField', () => {
     expect(element).toHaveTextContent('0')
   })
 
+  // https://github.com/vuetifyjs/vuetify/issues/19998
+  it('If hide-details and counter are set, render details only when focused', async () => {
+    const { element, queryByCSS } = render(() => (
+      <VTextField hide-details="auto" counter></VTextField>
+    ))
+
+    expect(queryByCSS('.v-input__details')).toBeNull()
+
+    await userEvent.click(element)
+    expect(queryByCSS('.v-input__details')).not.toBeNull()
+  })
+
   describe('Showcase', () => {
     generate({ stories })
   })
