@@ -4,7 +4,6 @@ import { VChip } from '@/components/VChip'
 
 // Utilities
 import { genericComponent, getPrefixedEventHandlers, propsFactory, useRender } from '@/util'
-import { withModifiers } from 'vue'
 
 export const makeVCalendarEventProps = propsFactory({
   allDay: Boolean,
@@ -34,8 +33,6 @@ export const VCalendarEvent = genericComponent()({
           day: props.day,
           event: props.event,
         }))}
-        onClick={ withModifiers((event) => emit('click:event', event, props.event), ['stop']) }
-        onContextmenu={ withModifiers((event: any) => emit('contextmenu:event', event, props.day, props.event), ['stop']) }
       >
         <VBadge
           inline

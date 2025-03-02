@@ -48,9 +48,6 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
     prev: null,
     today: null,
     'update:modelValue': null,
-    'click:event': null,
-    'contextmenu:date': null,
-    'contentmenu:event': null,
   },
 
   setup (props, { attrs, emit, slots }) {
@@ -92,18 +89,6 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
       nextTick(() => {
         emit('today', model.value[0])
       })
-    }
-
-    function clickEvent (event: any) {
-      emit('click:event', event)
-    }
-
-    function contextmenuDate (mouseEvent: any, date: any) {
-      emit('contextmenu:date', mouseEvent, date)
-    }
-
-    function contextmenuEvent (mouseEvent: any, date: any, event: any) {
-      emit('contextmenu:date', mouseEvent, date, event)
     }
 
     const title = computed(() => {
@@ -188,13 +173,9 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
                           <VCalendarMonthDay
                             key={ day.date.getTime() }
                             { ...calendarDayProps }
-                            { ...getPrefixedEventHandlers(attrs, ':day', () => ({ day })) }
                             day={ day }
                             title={ adapter.format(day.date, 'dayOfMonth') }
                             events={ props.events?.filter(e => adapter.isSameDay(day.date, e.start) || adapter.isSameDay(day.date, e.end)) }
-                            onClick:event={ clickEvent }
-                            onContextmenu:date={ contextmenuDate }
-                            onContextmenu:event={ contextmenuEvent }
                           >
                             {{
                               ...pick(slots, ['dayBody', 'dayEvent', 'dayTitle']),
@@ -219,8 +200,6 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
                     day={ day }
                     dayIndex={ i }
                     events={ props.events?.filter(e => adapter.isSameDay(e.start, day.date) || adapter.isSameDay(e.end, day.date)) }
-                    onContextmenu:date={ contextmenuDate }
-                    onContextmenu:event={ contextmenuEvent }
                   >
                     {{ ...pick(slots, ['interval', 'intervalBody', 'intervalEvent', 'intervalTitle']) }}
                   </VCalendarDay>
@@ -247,8 +226,6 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
                       adapter.isSameDay(e.end, genDays([model.value[0] as Date], adapter.date() as Date)[0].date)
                     )
                   }
-                  onContextmenu:date={ contextmenuDate }
-                  onContextmenu:event={ contextmenuEvent }
                 ></VCalendarDay>
               )
             )}

@@ -71,12 +71,6 @@ export const VCalendarInterval = genericComponent<VCalendarIntervalSlots>()({
     ...makeVCalendarIntervalProps(),
   },
 
-  emits: {
-    'click:event': null,
-    'contextmenu:date': null,
-    'contextmenu:event': null
-  },
-
   setup (props, { attrs, emit, slots }) {
     const adapter = useDate()
     const interval = computed(() => {
@@ -109,23 +103,14 @@ export const VCalendarInterval = genericComponent<VCalendarIntervalSlots>()({
       }
     })
 
-    const clickEvent = (mouseEvent: any, event: any) => {
-      emit('click:event', mouseEvent, event)
-    }
-
-    const contextmenuDate = (mouseEvent: any, date: any) => {
-      emit('contextmenu:date', mouseEvent, date)
-    }
-
-    const contextmenuEvent = (mouseEvent: any, date: any, event: any) => {
-      emit('contextmenu:event', mouseEvent, date, event)
-    }
-
     useRender(() => {
       return (
         props.dayIndex === 0 ? (
           <div class="v-calendar-day__row-with-label" style={ `height: ${convertToUnit(props.intervalHeight)}` }>
-            <div class="v-calendar-day__row-label">{
+            <div
+              class="v-calendar-day__row-label"
+              { ...getPrefixedEventHandlers(attrs, ':time', () => props) }
+            >{
               slots.intervalTitle?.({ interval: interval.value }) ?? (
                 props.index
                   ? props.intervalFormat
@@ -142,18 +127,11 @@ export const VCalendarInterval = genericComponent<VCalendarIntervalSlots>()({
               class={['v-calendar-day__row-content', interval.value.events.some(e => !e.last)
                 ? 'v-calendar-day__row-content-through'
                 : '']}
-              onContextmenu={ (event) => contextmenuDate(event, interval.value?.start) }
+              { ...getPrefixedEventHandlers(attrs, ':interval', () => interval.value) }
             >
               {
                 slots.intervalBody?.({ interval: interval.value }) ?? (
-                  <div
-                    { ...getPrefixedEventHandlers(attrs, ':interval', () => ({
-                      interval: interval.value,
-                      intervalDivisions: props.intervalDivisions,
-                      intervalDuration: props.intervalDuration,
-                      intervalHeight: props.intervalHeight,
-                    }))}
-                  >
+                  <div>
                     {
                       interval.value.events?.map(event => (
                         <VCalendarIntervalEvent
@@ -162,8 +140,6 @@ export const VCalendarInterval = genericComponent<VCalendarIntervalSlots>()({
                           intervalDivisions={ props.intervalDivisions }
                           intervalDuration={ props.intervalDuration }
                           intervalHeight={ props.intervalHeight }
-                          onClick:event={ clickEvent }
-                          onContextmemu:event={ contextmenuEvent }
                         >
                           {{
                             ...(slots.intervalEvent ? {
@@ -184,28 +160,21 @@ export const VCalendarInterval = genericComponent<VCalendarIntervalSlots>()({
           <div
             class="v-calendar-day__row-without-label"
             style={ `height: ${convertToUnit(props.intervalHeight)}` }
-            onContextmenu={ (event) => contextmenuDate(event, interval.value?.start) }
           >
-          <div class={['v-calendar-day__row-content', interval.value.events.some(e => !e.last)
-            ? 'v-calendar-day__row-content-through' : '']}
+          <div
+            class={['v-calendar-day__row-content', interval.value.events.some(e => !e.last)
+              ? 'v-calendar-day__row-content-through' : '']}
+            { ...getPrefixedEventHandlers(attrs, ':interval', () => interval.value) }
           >
               {
                 slots.intervalBody?.({ interval: interval.value }) ?? (
                   interval.value.events?.map(event => (
                       <VCalendarIntervalEvent
-                        { ...getPrefixedEventHandlers(attrs, ':event', () => ({
-                          event,
-                          interval: interval.value,
-                          intervalDivisions: props.intervalDivisions,
-                          intervalDuration: props.intervalDuration,
-                          intervalHeight: props.intervalHeight,
-                        }))}
                         event={ event }
                         interval={ interval.value }
                         intervalDivisions={ props.intervalDivisions }
                         intervalDuration={ props.intervalDuration }
                         intervalHeight={ props.intervalHeight }
-                        onContextmenu:event={ contextmenuEvent }
                       >
                         {{
                           ...(slots.intervalEvent ? {

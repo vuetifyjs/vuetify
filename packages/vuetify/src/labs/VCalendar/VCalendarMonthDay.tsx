@@ -34,31 +34,13 @@ export const VCalendarMonthDay = genericComponent<VCalendarMonthDaySlots>()({
 
   props: makeVCalendarMonthDayProps(),
 
-  emits: {
-    'click:event': null,
-    'contextmenu:date': null,
-    'contextmenu:event': null
-  },
-
   setup (props, { emit, attrs, slots }) {
-    const clickEvent = (mouseEvent: any, event: any) => {
-      emit('click:event', mouseEvent, event)
-    }
-    const contextmenuDate = (mouseEvent: any, date: any) => {
-      emit('contextmenu:date', mouseEvent, date)
-    }
-
-    const contextmenuEvent = (mouseEvent: any, date: any, event: any) => {
-      emit('contextmenu:event', mouseEvent, date, event)
-    }
-
     useRender(() => {
       return (
         <div
           class={[
             'v-calendar-month__day',
           ]}
-          onContextmenu={ event => contextmenuDate(event, props.day?.date) }
         >
           { !props.day?.isHidden ? (
             <div key="title" class="v-calendar-weekly__day-label">
@@ -91,7 +73,7 @@ export const VCalendarMonthDay = genericComponent<VCalendarMonthDaySlots>()({
                     { props.events?.filter(event => event.allDay).map(event => slots.dayEvent
                       ? slots.dayEvent({ day: props.day, allDay: true, event })
                       : (
-                        <VCalendarEvent day={ props.day } event={ event } onClick:event={ clickEvent } onContextmenu:event={ contextmenuEvent } allDay />
+                        <VCalendarEvent day={ props.day } event={ event } allDay />
                       ))}
                   </div>
 
@@ -99,7 +81,7 @@ export const VCalendarMonthDay = genericComponent<VCalendarMonthDaySlots>()({
                     { props.events?.filter(event => !event.allDay).map(event => slots.dayEvent
                       ? slots.dayEvent({ day: props.day, event, allDay: false })
                       : (
-                        <VCalendarEvent day={ props.day } event={ event } onClick:event={ clickEvent } onContextmenu:event={ contextmenuEvent } />
+                        <VCalendarEvent day={ props.day } event={ event } />
                       ))}
                   </div>
                 </div>
