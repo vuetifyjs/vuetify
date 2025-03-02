@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   title: Dates
   description: Vuetify has first party date support that can easily be swapped for another date library
@@ -303,7 +304,7 @@ export default createVuetify({
 To create your own date adapter, implement the **DateAdapter** interface:
 
 ```ts
-import type { DateAdapter } from 'vuetify/labs'
+import type { DateAdapter } from 'vuetify'
 
 export interface DateAdapter<TDate> {
   date (value?: any): TDate | null
