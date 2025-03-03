@@ -223,6 +223,7 @@ export {
   mdiLabel,
   mdiLanguageHtml5,
   mdiLanguageMarkdown,
+  mdiLanguageMarkdownOutline,
   mdiLaptop,
   mdiLayersOutline,
   mdiLayersTriple,
