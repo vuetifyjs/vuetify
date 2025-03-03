@@ -32,6 +32,8 @@ export const makeVCalendarMonthDayProps = propsFactory({
 export const VCalendarMonthDay = genericComponent<VCalendarMonthDaySlots>()({
   name: 'VCalendarMonthDay',
 
+  inheritAttrs: false,
+
   props: makeVCalendarMonthDayProps(),
 
   setup (props, { emit, attrs, slots }) {
@@ -41,12 +43,12 @@ export const VCalendarMonthDay = genericComponent<VCalendarMonthDaySlots>()({
           class={[
             'v-calendar-month__day',
           ]}
+          { ...getPrefixedEventHandlers(attrs, ':date', () => props) }
         >
           { !props.day?.isHidden ? (
             <div key="title" class="v-calendar-weekly__day-label">
               { slots.dayTitle?.({ title: props.title }) ?? (
                 <VBtn
-                  { ...getPrefixedEventHandlers(attrs, ':date', () => props) }
                   class={ props.day?.isToday ? 'v-calendar-weekly__day-label__today' : undefined }
                   color={ props.color }
                   disabled={ props.disabled }
@@ -73,7 +75,7 @@ export const VCalendarMonthDay = genericComponent<VCalendarMonthDaySlots>()({
                     { props.events?.filter(event => event.allDay).map(event => slots.dayEvent
                       ? slots.dayEvent({ day: props.day, allDay: true, event })
                       : (
-                        <VCalendarEvent day={ props.day } event={ event } allDay />
+                        <VCalendarEvent day={ props.day } event={ event } allDay { ...attrs } />
                       ))}
                   </div>
 
@@ -81,7 +83,7 @@ export const VCalendarMonthDay = genericComponent<VCalendarMonthDaySlots>()({
                     { props.events?.filter(event => !event.allDay).map(event => slots.dayEvent
                       ? slots.dayEvent({ day: props.day, event, allDay: false })
                       : (
-                        <VCalendarEvent day={ props.day } event={ event } />
+                        <VCalendarEvent day={ props.day } event={ event } { ...attrs } />
                       ))}
                   </div>
                 </div>

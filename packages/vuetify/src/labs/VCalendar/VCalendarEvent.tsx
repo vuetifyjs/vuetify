@@ -14,12 +14,9 @@ export const makeVCalendarEventProps = propsFactory({
 export const VCalendarEvent = genericComponent()({
   name: 'VCalendarEvent',
 
-  props: makeVCalendarEventProps(),
+  inheritAttrs: false,
 
-  emits: {
-    'click:event': null,
-    'contextmenu:event': null
-  },
+  props: makeVCalendarEventProps(),
 
   setup (props, { attrs, emit, slots }) {
     useRender(() => (

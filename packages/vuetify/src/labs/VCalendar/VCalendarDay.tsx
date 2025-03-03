@@ -32,6 +32,8 @@ export const makeVCalendarDayProps = propsFactory({
 export const VCalendarDay = genericComponent<VCalendarDaySlots>()({
   name: 'VCalendarDay',
 
+  inheritAttrs: false,
+
   props: makeVCalendarDayProps(),
 
   setup (props, { attrs, emit, slots }) {
@@ -69,6 +71,7 @@ export const VCalendarDay = genericComponent<VCalendarDaySlots>()({
               <VCalendarInterval
                 index={ index }
                 { ...calendarIntervalProps }
+                { ...attrs }
                 { ...getPrefixedEventHandlers(attrs, ':interval', () => calendarIntervalProps) }
               >
                 {{

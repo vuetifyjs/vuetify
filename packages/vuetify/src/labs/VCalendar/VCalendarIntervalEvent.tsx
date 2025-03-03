@@ -35,6 +35,8 @@ export const makeVCalendarIntervalEventProps = propsFactory({
 export const VCalendarIntervalEvent = genericComponent<VCalendarIntervalEventSlots>()({
   name: 'VCalendarIntervalEvent',
 
+  inheritAttrs: false,
+
   props: makeVCalendarIntervalEventProps(),
 
   setup (props, { attrs, emit, slots }) {

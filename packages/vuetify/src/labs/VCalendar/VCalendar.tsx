@@ -176,6 +176,7 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
                             day={ day }
                             title={ adapter.format(day.date, 'dayOfMonth') }
                             events={ props.events?.filter(e => adapter.isSameDay(day.date, e.start) || adapter.isSameDay(day.date, e.end)) }
+                            { ...attrs }
                           >
                             {{
                               ...pick(slots, ['dayBody', 'dayEvent', 'dayTitle']),
@@ -200,6 +201,7 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
                     day={ day }
                     dayIndex={ i }
                     events={ props.events?.filter(e => adapter.isSameDay(e.start, day.date) || adapter.isSameDay(e.end, day.date)) }
+                    { ...attrs }
                   >
                     {{ ...pick(slots, ['interval', 'intervalBody', 'intervalEvent', 'intervalTitle']) }}
                   </VCalendarDay>
@@ -226,6 +228,7 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
                       adapter.isSameDay(e.end, genDays([model.value[0] as Date], adapter.date() as Date)[0].date)
                     )
                   }
+                  { ...attrs }
                 ></VCalendarDay>
               )
             )}
