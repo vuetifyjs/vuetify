@@ -109,7 +109,10 @@ export const VCalendarInterval = genericComponent<VCalendarIntervalSlots>()({
       return (
         props.dayIndex === 0 ? (
           <div class="v-calendar-day__row-with-label" style={ `height: ${convertToUnit(props.intervalHeight)}` }>
-            <div class="v-calendar-day__row-label">
+            <div
+              class="v-calendar-day__row-label"
+              { ...getPrefixedEventHandlers(attrs, ':time', () => props) }
+            >
               {
                 slots.intervalTitle?.({ interval: interval.value }) ?? (
                   props.index

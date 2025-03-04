@@ -168,7 +168,12 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
                 { chunkArray(daysInMonth.value, weekDays.value.length)
                   .map((week, wi) => (
                     [
-                      !props.hideWeekNumber ? <div class="v-calendar-month__weeknumber">{ weekNumbers.value[wi] }</div> : '',
+                      !props.hideWeekNumber ? (
+                        <div
+                          class="v-calendar-month__weeknumber"
+                          { ...getPrefixedEventHandlers(attrs, ':weekNumber', () => ({ weekNumber: weekNumbers.value[wi], week })) }
+                        >{ weekNumbers.value[wi] }</div>
+                      ) : '',
                       week.map(day => (
                           <VCalendarMonthDay
                             key={ day.date.getTime() }
