@@ -25,7 +25,7 @@ export const makeVCalendarProps = propsFactory({
   ...makeCalendarProps(),
   ...makeVCalendarDayProps(),
   ...makeVCalendarHeaderProps(),
-}, 'VCalender')
+}, 'VCalendar')
 
 export type VCalendarSlots = VCalendarDaySlots & {
   allDayContent: { day?: CalendarDay, events?: Array<any> }
@@ -141,7 +141,7 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
                     ...(!props.hideWeekNumber ? ['v-calendar-weekly__head-weeknumbers'] : []),
                   ]
                 }
-                key="calenderWeeklyHead"
+                key="calendarWeeklyHead"
               >
                 { !props.hideWeekNumber ? <div key="weekNumber0" class="v-calendar-weekly__head-weeknumber"></div> : '' }
                 {

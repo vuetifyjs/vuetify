@@ -50,7 +50,7 @@ export const VCalendarDay = genericComponent<VCalendarDaySlots>()({
         <div class="v-calendar-day__container">
           { !props.hideDayHeader && (
             <div
-              key="calender-week-name"
+              key="calendar-week-name"
               class="v-calendar-weekly__head-weekday"
             >
               { adapter.format(props.day.date, 'weekdayShort') }
