@@ -124,3 +124,17 @@ Tabs can be dynamically added and removed. In this example when we add a new tab
 You can use a menu to hold additional tabs, swapping them out on the fly.
 
 <ExamplesExample file="v-tabs/misc-overflow-to-menu" />
+
+### Slots
+
+#### Tab and window items
+
+Use the **tab** and **item** slots with the **items** prop to reduce the markup required to build tabs.
+
+::: success
+
+This feature was introduced in [v3.6.0 (Nebula)](/getting-started/release-notes/?version=v3.6.0)
+
+:::
+
+<ExamplesExample file="v-tabs/slot-tabs" />

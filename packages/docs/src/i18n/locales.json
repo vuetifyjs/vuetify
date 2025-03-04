@@ -8,7 +8,7 @@
     "title": "日本語",
     "locale": "ja-JP",
     "alternate": "ja",
-    "enabled": false
+    "enabled": true
   },
   {
     "title": "简体中文",

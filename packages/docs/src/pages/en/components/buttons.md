@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   nav: Buttons
   title: Button component
@@ -20,11 +21,9 @@ features:
 
 The `v-btn` component replaces the standard html button with a material design theme and a multitude of options. Any color helper class can be used to alter the background or text color.
 
-![Button Entry](https://cdn.vuetifyjs.com/docs/images/components/v-btn/v-btn-entry.png)
-
 <PageFeatures />
 
-<VoPromotionsCardVuetify />
+<VoPromotionsCardVuetify slug="vuetify-snips" />
 
 ## Usage
 
@@ -202,6 +201,12 @@ Buttons are often used to trigger actions within a [v-dialog](/components/dialog
 In this example we use a [v-banner](/components/banners/) component to display a custom cookie consent banner. Clicking the "Manage Cookies" button will prompt a [v-dialog](/components/dialogs/) component.
 
 <ExamplesExample file="v-btn/misc-cookie-settings" />
+
+### Readonly buttons
+
+In this example, we change the properties of the `v-btn` based upon a "subscription" state. When the user is subscribed, we want to disable interaction with the button, but not change its appearance; which is what occurs when using the **disabled** property.
+
+<ExamplesExample file="v-btn/misc-readonly" />
 
 ## Global Configuration
 

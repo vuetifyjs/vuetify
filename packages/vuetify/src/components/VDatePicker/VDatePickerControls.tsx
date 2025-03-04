@@ -5,6 +5,9 @@ import './VDatePickerControls.sass'
 import { VBtn } from '@/components/VBtn'
 import { VSpacer } from '@/components/VGrid'
 
+// Composables
+import { IconValue } from '@/composables/icons'
+
 // Utilities
 import { computed } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
@@ -18,19 +21,19 @@ export const makeVDatePickerControlsProps = propsFactory({
     default: undefined,
   },
   disabled: {
-    type: [Boolean, String, Array] as PropType<boolean | string | string[]>,
-    default: false,
+    type: [Boolean, String, Array] as PropType<boolean | string | string[] | null>,
+    default: null,
   },
   nextIcon: {
-    type: [String],
+    type: IconValue,
     default: '$next',
   },
   prevIcon: {
-    type: [String],
+    type: IconValue,
     default: '$prev',
   },
   modeIcon: {
-    type: [String],
+    type: IconValue,
     default: '$subgroup',
   },
   text: String,

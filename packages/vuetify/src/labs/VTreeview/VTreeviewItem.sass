@@ -1,19 +1,30 @@
+@use '../../styles/tools'
 @use './variables' as *
 
-.v-treeview-item--filtered
-    display: none
+@include tools.layer('components')
+  .v-treeview-item
+    --list-indent-size: #{$treeview-indent-size}
+    &.v-treeview-item--filtered
+      display: none
 
-.v-treeview
-  --indent-padding: 0px
+    &__level
+      width: #{$treeview-indent-size}
 
-.v-treeview-group.v-list-group
-  --list-indent-size: #{$treeview-group-list-indent-size}
+      .v-treeview--fluid &
+        width: 0
 
-  .v-list--slim &
-    --prepend-width: #{$treeview-group-list-prepend-width}
+  .v-treeview
+    &.v-list
+      --indent-padding: #{$treeview-indent-padding}
 
-  .v-list-group__items .v-list-item
-    padding-inline-start: calc(#{$treeview-item-padding-inline-start} + var(--indent-padding)) !important
+    &.v-list--disabled .v-list-item__prepend
+      pointer-events: auto
 
-  .v-list-group__items .v-list-item--prepend
-    // padding-inline-start: calc(#{$treeview-item-prepend-padding-inline-start} + var(--indent-padding)) !important
+  .v-treeview-group.v-list-group
+    --list-indent-size: 0px
+
+    & > .v-treeview-item__level
+      width: 0px
+
+    .v-list-group__items .v-list-item
+      padding-inline-start: calc(var(--indent-padding)) !important

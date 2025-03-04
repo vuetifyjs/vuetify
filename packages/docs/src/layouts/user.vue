@@ -8,8 +8,6 @@
 
     <AppDrawerDrawer />
 
-    <AppSnackbarQueue />
-
     <v-main>
       <router-view v-slot="{ Component }">
         <v-fade-transition hide-on-leave>

@@ -90,6 +90,10 @@
           </v-col>
         </v-row>
       </v-col>
+
+      <v-col cols="12">
+        <VoPromotionsCardHighlight class="mb-n8" max-width="1096" slug="vuetify-snips" />
+      </v-col>
     </v-row>
   </v-container>
 </template>
@@ -98,16 +102,21 @@
   const isCopying = shallowRef(false)
 
   const { mdAndDown } = useDisplay()
-  const packages = ['npm', 'yarn', 'pnpm', 'bun']
+  const packages = ['pnpm', 'yarn', 'npm', 'bun']
   const randomPackage = packages[Math.floor(Math.random() * packages.length)]
 
   function copy () {
     isCopying.value = true
 
-    navigator.clipboard.writeText('yarn create vuetify')
+    navigator.clipboard.writeText(`${randomPackage} create vuetify`)
 
     setTimeout(() => {
       isCopying.value = false
     }, 1000)
   }
 </script>
+
+<style lang="sass" scoped>
+  :deep(.v-card-item)
+    max-width: 100%
+</style>

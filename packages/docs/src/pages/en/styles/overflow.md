@@ -1,12 +1,14 @@
 ---
 meta:
   title: Overflow
-  description: Overflow helper classes allow you to configure how content overflows when it beocomes too large.
+  description: Overflow helper classes allow you to configure how content overflows when it becomes too large.
   keywords: overflow helper classes, overflow classes, vuetify overflow
 related:
   - /styles/elevation/
   - /styles/content/
   - /components/grids/
+features:
+  report: true
 ---
 
 # Overflow
@@ -15,25 +17,25 @@ Configure how content overflows when it becomes out of container bounds.
 
 <PageFeatures />
 
+| Class | Properties |
+| - | - |
+| **overflow** | overflow: auto; |
+| **overflow-auto** | overflow: auto; |
+| **overflow-hidden** | overflow: hidden; |
+| **overflow-x** | overflow-x: auto; |
+| **overflow-x-auto** | overflow-x: auto; |
+| **overflow-x-hidden** | overflow-x: hidden; |
+| **overflow-x-scroll** | overflow-x: scroll; |
+| **overflow-y** | overflow-y: auto; |
+| **overflow-y-auto** | overflow-y: auto; |
+| **overflow-y-hidden** | overflow-y: hidden; |
+| **overflow-y-scroll** | overflow-y: scroll; { style="max-height: 420px;" fixed-header } |
+
 <PromotedEntry />
 
-## How it works
+## Usage
 
 Specify the elements `overflow`, `overflow-x`, or `overflow-y` property. These classes can be applied using the following format: `{overflow}-{value}`. Where **overflow** refers to the type: `overflow`, `overflow-x` or `overflow-y` and **value** can be one of: `auto`, `hidden`, or `visible`
-
-here is a list of properties:
-
-- `overflow-auto`
-- `overflow-hidden`
-- `overflow-visible`
-- `overflow-x-auto`
-- `overflow-x-hidden`
-- `overflow-x-visible`
-- `overflow-y-auto`
-- `overflow-y-hidden`
-- `overflow-y-visible`
-
-## Examples
 
 ### Overflow property
 

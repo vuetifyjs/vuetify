@@ -2,7 +2,7 @@
 import { useProxiedModel } from './proxiedModel'
 
 // Utilities
-import { computed, inject, onBeforeUnmount, onMounted, provide, reactive, toRef, unref, watch } from 'vue'
+import { computed, inject, onBeforeUnmount, onMounted, onUpdated, provide, reactive, toRef, unref, watch } from 'vue'
 import { consoleWarn, deepEqual, findChildrenWithProvide, getCurrentInstance, getUid, propsFactory, wrapInArray } from '@/util'
 
 // Types
@@ -13,6 +13,7 @@ export interface GroupItem {
   id: number
   value: Ref<unknown>
   disabled: Ref<boolean | undefined>
+  useIndexAsValue?: boolean
 }
 
 export interface GroupProps {
@@ -46,6 +47,8 @@ export interface GroupProvide {
 export interface GroupItemProvide {
   id: number
   isSelected: Ref<boolean>
+  isFirst: Ref<boolean>
+  isLast: Ref<boolean>
   toggle: () => void
   select: (value: boolean) => void
   selectedClass: Ref<(string | undefined)[] | false>
@@ -128,6 +131,12 @@ export function useGroupItem (
   const isSelected = computed(() => {
     return group.isSelected(id)
   })
+  const isFirst = computed(() => {
+    return group.items.value[0].id === id
+  })
+  const isLast = computed(() => {
+    return group.items.value[group.items.value.length - 1].id === id
+  })
 
   const selectedClass = computed(() => isSelected.value && [group.selectedClass.value, props.selectedClass])
 
@@ -138,6 +147,8 @@ export function useGroupItem (
   return {
     id,
     isSelected,
+    isFirst,
+    isLast,
     toggle: () => group.select(id, !isSelected.value),
     select: (value: boolean) => group.select(id, value),
     selectedClass,
@@ -181,6 +192,7 @@ export function useGroup (
 
     if (unref(unwrapped.value) == null) {
       unwrapped.value = index
+      unwrapped.useIndexAsValue = true
     }
 
     if (index > -1) {
@@ -217,6 +229,15 @@ export function useGroup (
 
   onBeforeUnmount(() => {
     isUnmounted = true
+  })
+
+  onUpdated(() => {
+    // #19655 update the items that use the index as the value.
+    for (let i = 0; i < items.length; i++) {
+      if (items[i].useIndexAsValue) {
+        items[i].value = i
+      }
+    }
   })
 
   function select (id: number, value?: boolean) {

@@ -1,5 +1,1 @@
-import VSparkline from './VSparkline'
-
-export { VSparkline }
-
-export default VSparkline
+export { VSparkline } from './VSparkline'

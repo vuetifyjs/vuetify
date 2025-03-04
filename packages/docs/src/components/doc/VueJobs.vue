@@ -1,5 +1,5 @@
 <template>
-  <v-row>
+  <v-row dense>
     <v-col cols="12">
       <div class="d-flex">
         <AppTextField
@@ -15,11 +15,11 @@
       v-for="job in items"
       :key="job.id"
       :md="view ? 6 : undefined"
+      class="d-flex"
       cols="12"
     >
       <v-card
         :href="job.url"
-        class="transition-swing"
         max-height="225"
         rel="sponsored"
         target="_blank"
@@ -41,15 +41,12 @@
           </template>
 
           <template v-if="job.locations.length > 0" #subtitle>
-            <div class="d-flex align-center">
-              <v-icon
-                class="me-1"
-                icon="mdi-map-marker-outline"
-                size="14"
-              />
+            <v-icon
+              icon="mdi-map-marker-outline"
+              size="14"
+            />
 
-              {{ job.locations.join(', ') }}
-            </div>
+            {{ job.locations.join(', ') }}
           </template>
 
           <template #append>
@@ -74,10 +71,6 @@
         <v-card-text class="text-medium-emphasis py-0">
           <AppMarkdown :content="job.description" />
         </v-card-text>
-
-        <div class="text-end text-caption text-disabled mb-1 me-2">
-          via {{ job.via }}
-        </div>
       </v-card>
     </v-col>
   </v-row>

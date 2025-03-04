@@ -7,19 +7,81 @@ related:
   - /styles/text-and-typography/
   - /directives/resize/
   - /features/display-and-platform/
+features:
+  report: true
 ---
 
-# Display helpers
+# Display
 
-The display helpers allow you to control the display of content. This includes being conditionally visible based upon the current viewport, or the actual element display type.
+Display helpers control content visibility and display type based on the viewport.
 
 <PageFeatures />
 
-<PromotedEntry />
+| Class | Properties |
+| - | - |
+| **d-none** | display: none; |
+| **d-sm-none** | display: none; |
+| **d-md-none** | display: none; |
+| **d-lg-none** | display: none; |
+| **d-xl-none** | display: none; |
+| **d-xxl-none** | display: none; |
+| **d-sm-flex** | display: flex; |
+| **d-md-flex** | display: flex; |
+| **d-lg-flex** | display: flex; |
+| **d-xl-flex** | display: flex; |
+| **d-xxl-flex** | display: flex; |
+| **d-sm-inline** | display: inline; |
+| **d-md-inline** | display: inline; |
+| **d-lg-inline** | display: inline; |
+| **d-xl-inline** | display: inline; |
+| **d-xxl-inline** | display: inline; |
+| **d-sm-inline-block** | display: inline-block; |
+| **d-md-inline-block** | display: inline-block; |
+| **d-lg-inline-block** | display: inline-block; |
+| **d-xl-inline-block** | display: inline-block; |
+| **d-xxl-inline-block** | display: inline-block; |
+| **d-sm-table** | display: table; |
+| **d-md-table** | display: table; |
+| **d-lg-table** | display: table; |
+| **d-xl-table** | display: table; |
+| **d-xxl-table** | display: table; |
+| **d-sm-table-cell** | display: table-cell; |
+| **d-md-table-cell** | display: table-cell; |
+| **d-lg-table-cell** | display: table-cell; |
+| **d-xl-table-cell** | display: table-cell; |
+| **d-xxl-table-cell** | display: table-cell; |
+| **d-sm-table-row** | display: table-row; |
+| **d-md-table-row** | display: table-row; |
+| **d-lg-table-row** | display: table-row; |
+| **d-xl-table-row** | display: table-row; |
+| **d-xxl-table-row** | display: table-row; |
+| **d-sm-flex** | display: flex; |
+| **d-md-flex** | display: flex; |
+| **d-lg-flex** | display: flex; |
+| **d-xl-flex** | display: flex; |
+| **d-xxl-flex** | display: flex; |
+| **d-sm-inline-flex** | display: inline-flex; |
+| **d-md-inline-flex** | display: inline-flex; |
+| **d-lg-inline-flex** | display: inline-flex; |
+| **d-xl-inline-flex** | display: inline-flex; |
+| **d-xxl-inline-flex** | display: inline-flex; |
+| **d-print-none** | display: none; |
+| **d-print-inline** | display: inline; |
+| **d-print-inline-block** | display: inline-block; |
+| **d-print-block** | display: block; |
+| **d-print-table** | display: table; |
+| **d-print-table-cell** | display: table-cell; |
+| **d-print-table-row** | display: table-row; |
+| **d-print-flex** | display: flex; |
+| **d-print-inline-flex** | display: inline-flex; |
+| **d-sr-only** | display: none; |
+| **d-sr-only-focusable** | display: none; { style="max-height: 420px;" fixed-header } |
+
+<VoPromotionsCardVuetify />
 
 <FeaturesBreakpointsTable />
 
-## Display
+## Usage
 
 Specify the element's `display` property. These classes can be applied to all breakpoints from `xs` to `xxl`. When using a base class,`.d-{value}`, it is inferred to be `.d-xs-{value}`.
 
@@ -87,19 +149,7 @@ It is important to note that using any of the display classes above will result 
 
 ## Display in print
 
-You can also change the display property when printing.
-
-- `.d-print-none`
-- `.d-print-inline`
-- `.d-print-inline-block`
-- `.d-print-block`
-- `.d-print-table`
-- `.d-print-table-row`
-- `.d-print-table-cell`
-- `.d-print-flex`
-- `.d-print-inline-flex`
-
-Print utility classes can also be combined with none print display utilities.
+You can also change the display property when printing. Print utility classes can also be combined with none print display utilities.
 
 <ExamplesExample file="display/print" />
 

@@ -77,12 +77,11 @@ The following is a list of available and up-and-coming components for use with L
 | Component | Description | Min Version |
 | - | - | - |
 | [v-calendar](/components/calendars/) | A calendar component | [v3.4.9](/getting-started/release-notes/?version=v3.4.9) |
-| [v-confirm-edit](/components/confirm-edit/) | A component for confirming model changes | [v3.4.0](/getting-started/release-notes/?version=v3.4.0) |
-| [v-empty-state](/components/empty-states/) | A component for displaying empty states | [v3.5.7](/getting-started/release-notes/?version=v3.5.7) |
-| [v-fab](/components/floating-action-buttons/) | A layout aware [v-btn](/components/buttons/) | [v3.5.7](/getting-started/release-notes/?version=v3.5.7) |
+| [v-date-input](/components/date-inputs/) | A date input component | [v3.6.0](/getting-started/release-notes/?version=v3.6.0) |
+| [v-pull-to-refresh](/components/pull-to-refresh/) | A component to update content by screen swipes | [v3.6.0](/getting-started/release-notes/?version=v3.6.0) |
 | [v-number-input](/components/number-input/) | A component for numerical data | [v3.5.10](/getting-started/release-notes/?version=v3.5.10) |
-| [v-sparkline](/components/sparklines/) | A basic data display component | [v3.5.5](/getting-started/release-notes/?version=v3.5.5) |
-| [v-speed-dial](/components/speed-dials/) | A component for display actions | [v3.5.8](/getting-started/release-notes/?version=v3.5.8) |
+| [v-snackbar-queue](/components/snackbar-queue/) | A queue for snackbars | [v3.6.0](/getting-started/release-notes/?version=v3.6.0) |
+| [v-stepper-vertical](/components/vertical-steppers/) | Vertical version of v-stepper | [v3.6.5](/getting-started/release-notes/?version=v3.6.5) |
 | [v-time-picker](/components/time-pickers/) | A time-picker component | [v3.5.12](/getting-started/release-notes/?version=v3.5.12) |
 | [v-treeview](/components/treeview/) | A treeview component | [v3.5.9](/getting-started/release-notes/?version=v3.5.9) |
 

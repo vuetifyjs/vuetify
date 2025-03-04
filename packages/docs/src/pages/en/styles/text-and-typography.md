@@ -7,6 +7,9 @@ related:
   - /styles/display/
   - /styles/content/
   - /features/internationalization/
+features:
+  report: true
+  spec: https://m2.material.io/design/typography/the-type-system.html
 ---
 
 # Text and typography
@@ -15,9 +18,65 @@ Control text size, alignment, wrapping, overflow, transforms and more. By defaul
 
 <PageFeatures />
 
+| Class | Properties |
+| - | - |
+| **text-h1** | font-size: 6rem;<br>font-weight: 300;<br>line-height: 1;<br>letter-spacing: -0.015625em |
+| **text-h2** | font-size: 3.75rem;<br>font-weight: 300;<br>line-height: 1;<br>letter-spacing: -0.0083333333em; |
+| **text-h3** | font-size: 3rem;<br>font-weight: 400;<br>line-height: 1.05;<br>letter-spacing: normal; |
+| **text-h4** | font-size: 2.125rem;<br>font-weight: 400;<br>line-height: 1.175;<br>letter-spacing: 0.0073529412em; |
+| **text-h5** | font-size: 1.5rem;<br>font-weight: 400;<br>line-height: 1.333;<br>line-height: normal; |
+| **text-h6** | font-size: 1.25rem;<br>font-weight: 500;<br>line-height: 1.6;<br>letter-spacing: 0.0125em; |
+| **text-subtitle-1** | font-size: 1rem;<br>font-weight: normal;<br>line-height: 1.75;<br>letter-spacing: 0.009375em; |
+| **text-subtitle-2** | font-size: 0.875rem;<br>font-weight: 500;<br>line-height: 1.6;<br>letter-spacing: 0.0071428571em; |
+| **text-body-1** | font-size: 1rem;<br>font-weight: 400;<br>line-height: 1.5;<br>letter-spacing: 0.03125em; |
+| **text-body-2** | font-size: font-size: 0.875rem;<br>font-weight: 400;<br>line-height: 1.425;<br>letter-spacing: 0.0178571429em; |
+| **text-button** | font-size: 0.875rem;<br>font-weight: 500;<br>line-height: 2.6;<br>letter-spacing: 0.0892857143em;<br>text-transform: uppercase; |
+| **text-caption** | font-size: 0.75rem;<br>font-weight: 400;<br>line-height: 1.667;<br>letter-spacing: 0.0333333333em; |
+| **text-overline** | font-size: 0.75rem;<br>font-weight: 500;<br>line-height: 2.667;<br>letter-spacing: 0.1666666667em;<br>text-transform: uppercase; |
+| **text-high-emphasis** | color: rgba(var(--v-theme-on-background), var(--v-high-emphasis-opacity)); |
+| **text-medium-emphasis** | color: rgba(var(--v-theme-on-background), var(--v-medium-emphasis-opacity)); |
+| **text-disabled** | color: rgba(var(--v-theme-on-background), var(--v-disabled-opacity)); |
+| **text-uppercase** | text-transform: uppercase; |
+| **text-lowercase** | text-transform: lowercase; |
+| **text-capitalize** | text-transform: capitalize; |
+| **text-none** | text-transform: none; |
+| **text-start** | text-align: start; |
+| **text-center** | text-align: center; |
+| **text-end** | text-align: end; |
+| **text-justify** | text-align: justify; |
+| **text-left** | text-align: left; |
+| **text-right** | text-align: right; |
+| **text-truncate** | overflow: hidden;<br>text-overflow: ellipsis;<br>white-space: nowrap; |
+| **text-no-wrap** | white-space: nowrap; |
+| **text-break** | overflow-wrap: break-word; |
+| **text-decoration-none** | text-decoration: none; |
+| **text-decoration-overline** | text-decoration: overline; |
+| **text-decoration-underline** | text-decoration: underline; |
+| **text-decoration-line-through** | text-decoration: line-through; |
+| **font-weight-black** | font-weight: 900; |
+| **font-weight-bold** | font-weight: 700; |
+| **font-weight-medium** | font-weight: 500; |
+| **font-weight-regular** | font-weight: 400; |
+| **font-weight-light** | font-weight: 300; |
+| **font-weight-thin** | font-weight: 100; |
+| **font-italic** | font-style: italic; |
+| **text-{breakpoint}-h1** | Set the font size for the specified breakpoint. |
+| **text-{breakpoint}-h2** | Set the font size for the specified breakpoint. |
+| **text-{breakpoint}-h3** | Set the font size for the specified breakpoint. |
+| **text-{breakpoint}-h4** | Set the font size for the specified breakpoint. |
+| **text-{breakpoint}-h5** | Set the font size for the specified breakpoint. |
+| **text-{breakpoint}-h6** | Set the font size for the specified breakpoint. |
+| **text-{breakpoint}-subtitle-1** | Set the font size for the specified breakpoint. |
+| **text-{breakpoint}-subtitle-2** | Set the font size for the specified breakpoint. |
+| **text-{breakpoint}-body-1** | Set the font size for the specified breakpoint. |
+| **text-{breakpoint}-body-2** | Set the font size for the specified breakpoint. |
+| **text-{breakpoint}-button** | Set the font size for the specified breakpoint. |
+| **text-{breakpoint}-caption** | Set the font size for the specified breakpoint. |
+| **text-{breakpoint}-overline** | Set the font size for the specified breakpoint. { style="max-height: 600px;" fixed-header } |
+
 <PromotedEntry />
 
-## Typography
+## Usage
 
 Control the size and style of text using the Typography helper classes. These values are based upon the [Material Design type specification](https://material.io/design/typography/the-type-system.html).
 

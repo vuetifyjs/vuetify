@@ -1,7 +1,7 @@
 import fs from 'fs'
 import { capitalize } from './helpers/text'
 import type { ComponentData, DirectiveData } from './types'
-import pkg from '../package.json' assert { type: 'json' }
+import pkg from '../package.json' with { type: 'json' }
 
 export const createWebTypesApi = (componentData: ComponentData[], directiveData: DirectiveData[]) => {
   const getDocUrl = (cmp: string, heading?: string) =>
@@ -95,7 +95,7 @@ export const createWebTypesApi = (componentData: ComponentData[], directiveData:
     const createAttributeValue = (argument: any) => {
       return {
         kind: 'expression',
-        type: argument.type?.trim(),
+        type: argument.text,
       }
     }
 
@@ -106,14 +106,14 @@ export const createWebTypesApi = (componentData: ComponentData[], directiveData:
       'doc-url': getDocUrl(directive.pathName),
       default: '',
       required: false,
-      value: createAttributeValue(directive.argument),
+      value: createAttributeValue(directive.value),
       source: {
         module: './src/directives/index.ts',
         symbol: capitalize(directive.displayName.slice(2)),
       },
-      'vue-argument': directive.argument?.value && createAttributeVueArgument(directive.argument?.value), // TODO: how to use this in comparison to value?
+      'vue-argument': directive.argument && createAttributeVueArgument(directive.argument),
       'vue-modifiers': directive.modifiers &&
-        Object.entries(directive.modifiers ?? {}).map(createAttributeVueModifier),
+        Object.entries(directive.modifiers).map(createAttributeVueModifier),
     }
   }
 

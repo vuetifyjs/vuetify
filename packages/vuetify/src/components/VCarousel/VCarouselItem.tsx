@@ -27,7 +27,10 @@ export const VCarouselItem = genericComponent<VImgSlots>()({
 
       return (
         <VWindowItem
-          class="v-carousel-item"
+          class={[
+            'v-carousel-item',
+            props.class,
+          ]}
           { ...windowItemProps }
         >
           <VImg

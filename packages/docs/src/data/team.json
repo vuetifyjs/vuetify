@@ -53,7 +53,6 @@
     "location": "Melbourne, Australia",
     "name": "Kael Watts-Deuchar",
     "team": "core",
-    "twitter": "kaelwd",
     "joined": "Oct 2017"
   },
   "nekosaur": {
@@ -102,20 +101,6 @@
     "work": "CEO at Foundational Technologies LLC",
     "joined": "Feb 2021"
   },
-  "elvinagarcia": {
-    "avatar": "https://cdn.vuetifyjs.com/docs/images/team/elvinagarcia.png",
-    "discord": "elvinagarcia",
-    "focus": [
-      "Design/Animations"
-    ],
-    "languages": [
-      "English"
-    ],
-    "location": "Virginia, USA",
-    "name": "Elvina Garcia",
-    "team": "core",
-    "joined": "Feb 2023"
-  },
   "yuwu9145": {
     "discord": "yuwu9145",
     "focus": [
@@ -145,6 +130,56 @@
     "twitter": "userquin",
     "team": "core",
     "joined": "Mar 2024"
+  },
+  "kieuminhcanh": {
+    "discord": "kieuminhcanh",
+    "focus": [
+      "[vuetifyjs/studio](https://github.com/vuetifyjs/studio)"
+    ],
+    "funding": [
+      "[GitHub Sponsors](https://github.com/sponsors/kieuminhcanh)",
+      "[Patreon](https://patreon.com/kieuminhcanh)",
+      "[Open Collective](https://opencollective.com/vuetify)"
+    ],
+    "languages": [
+      "English",
+      "Vietnamese"
+    ],
+    "location": "California, US",
+    "name": "Ken Kieu",
+    "team": "core",
+    "twitter": "kieuminhcanh",
+    "joined": "April 2024"
+  },
+  "MatthewAry": {
+    "discord": "bitshift_",
+    "focus": [
+      "[vuetifyjs/*](https://github.com/vuetifyjs)"
+    ],
+    "languages": [
+      "English"
+    ],
+    "location": "Spokane, WA, USA",
+    "name": "Matthew Ary",
+    "twitter": "MatthewAry",
+    "linkedin": "matthewary",
+    "work": "Director of Product Development at Symplsoft Inc.",
+    "team": "core",
+    "joined": "May 2024"
+  },
+  "J-Sek": {
+    "discord": "jacek#1420",
+    "focus": [
+      "[vuetifyjs/studio](https://github.com/vuetifyjs/studio)"
+    ],
+    "languages": [
+      "Polish",
+      "English"
+    ],
+    "location": "Gdańsk, Poland",
+    "name": "Jacek Czarniecki",
+    "team": "core",
+    "joined": "Nov 2024"
   },
   "jacekkarczmarczyk": {
     "discord": "jacek#3542",
@@ -215,5 +250,19 @@
     "name": "Yoones Khoshghadam",
     "team": "legends",
     "joined": "January 2023"
+  },
+  "elvinagarcia": {
+    "avatar": "https://cdn.vuetifyjs.com/docs/images/team/elvinagarcia.png",
+    "discord": "elvinagarcia",
+    "focus": [
+      "Design/Animations"
+    ],
+    "languages": [
+      "English"
+    ],
+    "location": "Virginia, USA",
+    "name": "Elvina Garcia",
+    "team": "legends",
+    "joined": "Feb 2023"
   }
 }

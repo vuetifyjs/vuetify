@@ -7,13 +7,7 @@ export type Category = {
   color: string
 }
 
-export type Notification = {
-  message: string
-  timeout?: number
-  color?: string
-}
-
-export type RootState = {
+type RootState = {
   apiSearch: string
   drawer: boolean | null
   toc: boolean | null
@@ -21,7 +15,6 @@ export type RootState = {
   items: NavItem[]
   pages: string[]
   settings: boolean
-  notifications: Notification[]
   categories: Record<string, Category>
 }
 
@@ -34,8 +27,7 @@ type NavItem = {
   items?: NavItem[]
 }
 
-export const useAppStore = defineStore({
-  id: 'app',
+export const useAppStore = defineStore('app', {
   state: () => ({
     apiSearch: '',
     drawer: null,
@@ -44,7 +36,6 @@ export const useAppStore = defineStore({
     items: Array.from(data),
     pages: getPages(data as NavItem[]),
     settings: false,
-    notifications: [],
     categories: {
       api: {
         icon: 'mdi-flask-outline',
@@ -92,11 +83,6 @@ export const useAppStore = defineStore({
       },
     },
   } as RootState),
-  actions: {
-    snackbar (message: string, options: Partial<Notification> = {}) {
-      this.notifications.push({ message, ...options })
-    },
-  },
 })
 
 function getPage (item: NavItem, parent = ''): string[] {

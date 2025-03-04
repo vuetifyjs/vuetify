@@ -50,13 +50,13 @@ export const independentSelectStrategy = (mandatory?: boolean): SelectStrategy =
       return selected
     },
     in: (v, children, parents) => {
-      let map = new Map()
+      const map = new Map()
 
       for (const id of (v || [])) {
-        map = strategy.select({
+        strategy.select({
           id,
           value: true,
-          selected: new Map(map),
+          selected: map,
           children,
           parents,
         })
@@ -88,13 +88,11 @@ export const independentSingleSelectStrategy = (mandatory?: boolean): SelectStra
       return parentStrategy.select({ ...rest, id, selected: singleSelected })
     },
     in: (v, children, parents) => {
-      let map = new Map()
-
       if (v?.length) {
-        map = parentStrategy.in(v.slice(0, 1), children, parents)
+        return parentStrategy.in(v.slice(0, 1), children, parents)
       }
 
-      return map
+      return new Map()
     },
     out: (v, children, parents) => {
       return parentStrategy.out(v, children, parents)
@@ -149,23 +147,23 @@ export const classicSelectStrategy = (mandatory?: boolean): SelectStrategy => {
       while (items.length) {
         const item = items.shift()!
 
-        selected.set(item, value ? 'on' : 'off')
+        selected.set(toRaw(item), value ? 'on' : 'off')
 
         if (children.has(item)) {
           items.push(...children.get(item)!)
         }
       }
 
-      let parent = parents.get(id)
+      let parent = toRaw(parents.get(id))
 
       while (parent) {
         const childrenIds = children.get(parent)!
-        const everySelected = childrenIds.every(cid => selected.get(cid) === 'on')
-        const noneSelected = childrenIds.every(cid => !selected.has(cid) || selected.get(cid) === 'off')
+        const everySelected = childrenIds.every(cid => selected.get(toRaw(cid)) === 'on')
+        const noneSelected = childrenIds.every(cid => !selected.has(toRaw(cid)) || selected.get(toRaw(cid)) === 'off')
 
         selected.set(parent, everySelected ? 'on' : noneSelected ? 'off' : 'indeterminate')
 
-        parent = parents.get(parent)
+        parent = toRaw(parents.get(parent))
       }
 
       // If mandatory and planned deselect results in no selected
@@ -188,7 +186,7 @@ export const classicSelectStrategy = (mandatory?: boolean): SelectStrategy => {
         map = strategy.select({
           id,
           value: true,
-          selected: new Map(map),
+          selected: map,
           children,
           parents,
         })

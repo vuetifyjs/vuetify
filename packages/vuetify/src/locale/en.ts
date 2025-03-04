@@ -2,6 +2,7 @@ export default {
   badge: 'Badge',
   open: 'Open',
   close: 'Close',
+  dismiss: 'Dismiss',
   confirmEdit: {
     ok: 'OK',
     cancel: 'Cancel',
@@ -67,6 +68,11 @@ export default {
   fileInput: {
     counter: '{0} files',
     counterSize: '{0} files ({1} in total)',
+  },
+  fileUpload: {
+    title: 'Drag and drop files here',
+    divider: 'or',
+    browse: 'Browse Files',
   },
   timePicker: {
     am: 'AM',

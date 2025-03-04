@@ -4,7 +4,7 @@ import { useResizeObserver } from '@/composables/resizeObserver'
 
 // Utilities
 import { computed, nextTick, onScopeDispose, ref, shallowRef, watch, watchEffect } from 'vue'
-import { clamp, debounce, IN_BROWSER, propsFactory } from '@/util'
+import { clamp, debounce, IN_BROWSER, isObject, propsFactory } from '@/util'
 
 // Types
 import type { Ref } from 'vue'
@@ -149,6 +149,7 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
     }
   })
 
+  let scrollTimeout = -1
   function handleScroll () {
     if (!containerRef.value || !markerRef.value) return
 
@@ -169,6 +170,9 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
     lastScrollTop = scrollTop
     lastScrollTime = scrollTime
 
+    window.clearTimeout(scrollTimeout)
+    scrollTimeout = window.setTimeout(handleScrollend, 500)
+
     calculateVisibleItems()
   }
   function handleScrollend () {
@@ -177,6 +181,7 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
     scrollVelocity = 0
     lastScrollTime = 0
 
+    window.clearTimeout(scrollTimeout)
     calculateVisibleItems()
   }
 
@@ -233,6 +238,7 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
     return items.value.slice(first.value, last.value).map((item, index) => ({
       raw: item,
       index: index + first.value,
+      key: (isObject(item) && 'value' in item) ? item.value : index + first.value,
     }))
   })
 
@@ -244,6 +250,7 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
   }, { deep: true })
 
   return {
+    calculateVisibleItems,
     containerRef,
     markerRef,
     computedItems,

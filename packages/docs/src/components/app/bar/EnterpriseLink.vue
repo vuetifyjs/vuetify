@@ -3,12 +3,16 @@
     :to="rpath('/introduction/enterprise-support/')"
     class="ms-1"
     color="primary"
-    text="enterprise"
+    text="support"
     variant="outlined"
-    @click="gtagClick('app-bar', 'enterprise', name)"
+    @click="onClick"
   />
 </template>
 
 <script setup>
   const { name } = useRoute()
+
+  function onClick () {
+    gtagClick('app-bar', 'enterprise', name)
+  }
 </script>

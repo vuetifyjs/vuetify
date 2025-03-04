@@ -33,7 +33,7 @@
                 :text="tierText(tier)"
                 :variant="i === 1 ? 'flat' : 'outlined'"
                 class="mb-6 text-none"
-                color="primary"
+                color="#6458f2"
                 rel="noopener"
                 target="_blank"
                 block
@@ -76,25 +76,6 @@
   const { mdAndUp } = useDisplay()
 
   const tiers = [
-    {
-      name: 'Grass Tier',
-      price: 'Free',
-      href: 'https://community.vuetifyjs.com/',
-      src: 'https://cdn.vuetifyjs.com/docs/images/discord/tiers/grass.png',
-      text: 'Ask questions in our public Discord help channels.',
-      benefits: [
-        {
-          name: '#vuetify-3-help',
-          text: 'Ask questions and get help for Vuetify 3 from the community in this public channel.',
-          emoji: '3️⃣',
-        },
-        {
-          name: '#vuetify-2-help',
-          text: 'Ask questions and get help for Vuetify 2 from the community in this public channel.',
-          emoji: '2️⃣',
-        },
-      ],
-    },
     {
       name: 'Wood Tier',
       price: '$2.99',
@@ -151,36 +132,6 @@
           name: 'Private Help Channel',
           text: 'Get a private help channel where you can ask questions to the Core Team.',
           emoji: '🔨',
-        },
-        {
-          name: 'Priority GitHub Issues',
-          text: 'Get priority on your GitHub reported issues.',
-          emoji: '🚨',
-        },
-      ],
-    },
-    {
-      name: 'Galaxy Tier',
-      contact: true,
-      price: '$199.99',
-      suffix: '/mo',
-      href: 'mailto:support@vuetifyjs.com?subject=Galaxy%20Tier%20Support%20Request',
-      src: 'https://cdn.vuetifyjs.com/docs/images/discord/tiers/galaxy.png',
-      text: 'Get support for up to 3 developers with a private help channel.',
-      benefits: [
-        {
-          text: 'Every channel in Planetary Tier plus:',
-          emoji: '💫',
-        },
-        {
-          name: 'Extra Developers',
-          text: 'Get a private help channel where up to 3 developers can ask questions directly to the Core Team.',
-          emoji: '🛠️',
-        },
-        {
-          name: 'Direct Support Discounts',
-          text: '50% discount on all Direct Support services.',
-          emoji: '🏷️',
         },
       ],
     },

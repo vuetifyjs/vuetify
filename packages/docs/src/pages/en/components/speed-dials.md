@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   nav: Speed Dials
   title: Speed Dial component
@@ -11,6 +10,8 @@ related:
   - /styles/transitions/
 features:
   report: true
+  github: /components/VSpeedDial/
+  label: 'C: VSpeedDial'
 ---
 
 # Speed Dials
@@ -19,25 +20,11 @@ The `v-speed-dial` component can be used as a floating action button that can re
 
 <PageFeatures />
 
-::: warning
+::: success
 
-This feature requires [v3.5.8](/getting-started/release-notes/?version=v3.5.8)
+This feature was introduced in [v3.6.0](/getting-started/release-notes/?version=v3.6.0)
 
 :::
-
-## Installation
-
-Labs components require a manual import and installation of the component.
-
-```js { resource="src/plugins/vuetify.js" }
-import { VSpeedDial } from 'vuetify/labs/VSpeedDial'
-
-export default createVuetify({
-  components: {
-    VSpeedDial,
-  },
-})
-```
 
 ## Usage
 

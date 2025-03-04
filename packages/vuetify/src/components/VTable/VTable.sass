@@ -3,167 +3,167 @@
 @use './variables' as *
 @use './mixins' as *
 
-// Theme
-.v-table
-  @include tools.theme($table-theme...)
+@include tools.layer('components')
+  // Theme
+  .v-table
+    font-size: $table-font-size
+    transition-duration: $table-transition-duration
+    transition-property: $table-transition-property
+    transition-timing-function: $table-transition-timing-function
+    @include tools.theme($table-theme...)
 
-  font-size: $table-font-size
-  transition-duration: $table-transition-duration
-  transition-property: $table-transition-property
-  transition-timing-function: $table-transition-timing-function
+    .v-table-divider
+      border-right: $table-border
 
-  .v-table-divider
-    border-right: $table-border
-
-  .v-table__wrapper
-    > table
-      > thead
-        > tr
-          > th
-            border-bottom: $table-border
-
-      > tbody
-        > tr
-          &:not(:last-child)
-            > td,
-            > th
-              border-bottom: $table-border
-
-      > tfoot
-        > tr
-            > td,
-            > th
-              border-top: $table-border
-
-
-  &.v-table--hover
-    > .v-table__wrapper
-      > table
-        > tbody
-          > tr
-            > td
-              position: relative
-
-            &:hover > td::after
-              @include tools.absolute(true)
-              background: $table-hover-color
-              pointer-events: none
-
-  &.v-table--fixed-header
-    > .v-table__wrapper
+    .v-table__wrapper
       > table
         > thead
           > tr
             > th
-              background: $table-background
-              box-shadow: inset 0 -1px 0 $table-border-color
-              z-index: 1
+              border-bottom: $table-border
 
-  &.v-table--fixed-footer
-    > tfoot
-      > tr
-        > th,
-        > td
-          background: $table-background
-          box-shadow: inset 0 1px 0 $table-border-color
+        > tbody
+          > tr
+            &:not(:last-child)
+              > td,
+              > th
+                border-bottom: $table-border
 
-// Block
-.v-table
-  border-radius: inherit
-  // Do not inherit line-height
-  line-height: $table-line-height
-  max-width: 100%
-  display: flex
-  flex-direction: column
+        > tfoot
+          > tr
+              > td,
+              > th
+                border-top: $table-border
 
-  > .v-table__wrapper
-    > table
-      width: 100%
-      border-spacing: 0
 
-      > tbody,
-      > thead,
+    &.v-table--hover
+      > .v-table__wrapper
+        > table
+          > tbody
+            > tr
+              > td
+                position: relative
+
+              &:hover > td::after
+                background: $table-hover-color
+                pointer-events: none
+                @include tools.absolute(true)
+
+    &.v-table--fixed-header
+      > .v-table__wrapper
+        > table
+          > thead
+            > tr
+              > th
+                background: $table-background
+                box-shadow: inset 0 -1px 0 $table-border-color
+                z-index: 1
+
+    &.v-table--fixed-footer
       > tfoot
         > tr
-          > td,
-          > th
-            padding: $table-column-padding
-            transition-duration: $table-transition-duration
-            transition-property: $table-transition-property
-            transition-timing-function: $table-transition-timing-function
-
+          > th,
           > td
-            height: var(--v-table-row-height)
+            background: $table-background
+            box-shadow: inset 0 1px 0 $table-border-color
 
-          > th
-            height: var(--v-table-header-height)
-            font-weight: $table-header-font-weight
-            user-select: none
-            text-align: start
+  // Block
+  .v-table
+    border-radius: inherit
+    // Do not inherit line-height
+    line-height: $table-line-height
+    max-width: 100%
+    display: flex
+    flex-direction: column
 
-  @at-root
-    @include tools.density('v-table', $table-density) using ($modifier)
-      --v-table-header-height: #{$table-header-height + $modifier}
-      --v-table-row-height: #{$table-row-height + $modifier}
+    > .v-table__wrapper
+      > table
+        width: 100%
+        border-spacing: 0
 
-// Elements
-.v-table__wrapper
-  border-radius: inherit
-  overflow: auto
-  flex: 1 1 auto
+        > tbody,
+        > thead,
+        > tfoot
+          > tr
+            > td,
+            > th
+              padding: $table-column-padding
+              transition-duration: $table-transition-duration
+              transition-property: $table-transition-property
+              transition-timing-function: $table-transition-timing-function
 
-// Modifiers
-.v-table--has-top
-  > .v-table__wrapper
-    > table
-      > tbody
-        > tr
-          &:first-child
-            &:hover
-              > td
-                &:first-child
-                  border-top-left-radius: 0
+            > td
+              height: var(--v-table-row-height)
 
-                &:last-child
-                  border-top-right-radius: 0
+            > th
+              height: var(--v-table-header-height)
+              font-weight: $table-header-font-weight
+              user-select: none
+              text-align: start
 
-.v-table--has-bottom
-  > .v-table__wrapper
-    > table
-      > tbody
-        > tr
-          &:last-child
-            &:hover
-              > td
-                &:first-child
-                  border-bottom-left-radius: 0
+    @at-root
+      @include tools.density('v-table', $table-density) using ($modifier)
+        --v-table-header-height: #{$table-header-height + $modifier}
+        --v-table-row-height: #{$table-row-height + $modifier}
 
-                &:last-child
-                  border-bottom-right-radius: 0
+  // Elements
+  .v-table__wrapper
+    border-radius: inherit
+    overflow: auto
+    flex: 1 1 auto
 
-.v-table--fixed-height
-  > .v-table__wrapper
-    overflow-y: auto
+  // Modifiers
+  .v-table--has-top
+    > .v-table__wrapper
+      > table
+        > tbody
+          > tr
+            &:first-child
+              &:hover
+                > td
+                  &:first-child
+                    border-top-left-radius: 0
 
-.v-table--fixed-header
-  > .v-table__wrapper
-    > table
-      > thead
-        position: sticky
-        top: 0
-        z-index: 2
-        > tr
-          > th
-            border-bottom: 0px !important
+                  &:last-child
+                    border-top-right-radius: 0
 
-.v-table--fixed-footer
-  > .v-table__wrapper
-    > table
-      > tfoot
-        > tr
+  .v-table--has-bottom
+    > .v-table__wrapper
+      > table
+        > tbody
+          > tr
+            &:last-child
+              &:hover
+                > td
+                  &:first-child
+                    border-bottom-left-radius: 0
+
+                  &:last-child
+                    border-bottom-right-radius: 0
+
+  .v-table--fixed-height
+    > .v-table__wrapper
+      overflow-y: auto
+
+  .v-table--fixed-header
+    > .v-table__wrapper
+      > table
+        > thead
           position: sticky
-          bottom: 0
-          z-index: 1
-          > td,
-          > th
-              border-top: 0px !important
+          top: 0
+          z-index: 2
+          > tr
+            > th
+              border-bottom: 0px !important
+
+  .v-table--fixed-footer
+    > .v-table__wrapper
+      > table
+        > tfoot
+          > tr
+            position: sticky
+            bottom: 0
+            z-index: 1
+            > td,
+            > th
+                border-top: 0px !important

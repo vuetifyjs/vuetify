@@ -8,11 +8,9 @@
 
     <AppDrawerDrawer />
 
-    <AppToc />
+    <AppToc v-if="!route.meta.fluid" />
 
     <AppBackToTop />
-
-    <AppSnackbarQueue />
 
     <v-main>
       <slot>
@@ -22,13 +20,15 @@
           tag="section"
           fluid
         >
-          <router-view v-slot="{ Component }">
-            <v-fade-transition hide-on-leave>
-              <div :key="route.name">
-                <component :is="Component" />
-              </div>
-            </v-fade-transition>
-          </router-view>
+          <slot name="view">
+            <router-view v-slot="{ Component }">
+              <v-fade-transition hide-on-leave>
+                <div :key="route.name">
+                  <component :is="Component" />
+                </div>
+              </v-fade-transition>
+            </router-view>
+          </slot>
 
           <Backmatter v-if="hasBackmatter" :key="route.name" />
         </v-container>

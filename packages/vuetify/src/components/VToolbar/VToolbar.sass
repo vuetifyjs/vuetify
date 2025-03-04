@@ -1,109 +1,109 @@
 @use '../../styles/tools'
 @use './variables' as *
 
-// Block
-.v-toolbar
-  align-items: flex-start
-  display: flex
-  flex: $toolbar-flex
-  flex-direction: column
-  justify-content: space-between
-  max-width: 100%
-  position: relative
-  transition: $toolbar-transition
-  transition-property: height, width, transform, max-width, left, right, top, bottom, box-shadow
-  width: 100%
-
-  @include tools.border($toolbar-border...)
-  @include tools.elevation($toolbar-elevation)
-  @include tools.rounded($toolbar-border-radius)
-  @include tools.theme($toolbar-theme...)
-
-  &--absolute
-    position: absolute
-
-  &--collapse
-    max-width: $toolbar-collapsed-max-width
-    overflow: hidden
-    border-end-end-radius: $toolbar-collapsed-border-radius
-
-    .v-toolbar-title
-      display: none
-
-  &--flat
-    @include tools.elevation($toolbar-flat-elevation)
-
-  &--floating
-    display: inline-flex
-
-  &--rounded
-    @include tools.rounded($toolbar-rounded-border-radius)
-
-.v-toolbar__content,
-.v-toolbar__extension
-  align-items: center
-  display: flex
-  flex: 0 0 auto
-  position: relative
-  transition: inherit
-  width: 100%
-
-.v-toolbar__content
-  overflow: hidden
-
-  > .v-btn:first-child
-    margin-inline-start: $toolbar-prepend-btn-margin-start
-
-  > .v-btn:last-child
-    margin-inline-end: $toolbar-append-btn-margin-end
-
-  > .v-toolbar-title
-      margin-inline-start: $toolbar-title-margin
-
-  .v-toolbar--density-prominent &
+@include tools.layer('components')
+  // Block
+  .v-toolbar
     align-items: flex-start
+    display: flex
+    flex: $toolbar-flex
+    flex-direction: column
+    justify-content: space-between
+    max-width: 100%
+    position: relative
+    transition: $toolbar-transition
+    transition-property: height, width, transform, max-width, left, right, top, bottom, box-shadow
+    width: 100%
 
-.v-toolbar__image
-  @include tools.absolute()
+    @include tools.border($toolbar-border...)
+    @include tools.elevation($toolbar-elevation)
+    @include tools.rounded($toolbar-border-radius)
+    @include tools.theme($toolbar-theme...)
 
-  display: flex
-  opacity: var(--v-toolbar-image-opacity, 1)
-  transition-property: opacity
+    &--absolute
+      position: absolute
 
-.v-toolbar__prepend,
-.v-toolbar__append
-  align-items: center
-  align-self: stretch
-  display: flex
+    &--collapse
+      max-width: $toolbar-collapsed-max-width
+      overflow: hidden
+      border-end-end-radius: $toolbar-collapsed-border-radius
 
-.v-toolbar__prepend
-  margin-inline: $toolbar-prepend-btn-margin-start auto
+      .v-toolbar-title
+        display: none
 
-.v-toolbar__append
-  margin-inline: auto $toolbar-append-btn-margin-end
+    &--flat
+      @include tools.elevation($toolbar-flat-elevation)
 
-.v-toolbar-title
-  flex: 1 1
-  font-size: $toolbar-title-font-size
-  min-width: 0
+    &--floating
+      display: inline-flex
 
-  @include tools.typography($toolbar-title-typography...)
+    &--rounded
+      @include tools.rounded($toolbar-rounded-border-radius)
 
-  .v-toolbar--density-prominent &
-    align-self: flex-end
-    padding-bottom: 6px
+  .v-toolbar__content,
+  .v-toolbar__extension
+    align-items: center
+    display: flex
+    flex: 0 0 auto
+    position: relative
+    transition: inherit
+    width: 100%
 
-    @include tools.typography($toolbar-prominent-title-typography...)
+  .v-toolbar__content
+    overflow: hidden
 
-.v-toolbar-title__placeholder
-  overflow: hidden
-  text-overflow: ellipsis
-  white-space: nowrap
+    > .v-btn:first-child
+      margin-inline-start: $toolbar-prepend-btn-margin-start
 
-.v-toolbar-items
-  display: flex
-  height: inherit
-  align-self: stretch
+    > .v-btn:last-child
+      margin-inline-end: $toolbar-append-btn-margin-end
 
-  > .v-btn
-    border-radius: 0
+    > .v-toolbar-title
+        margin-inline-start: $toolbar-title-margin
+
+    .v-toolbar--density-prominent &
+      align-items: flex-start
+
+  .v-toolbar__image
+    display: flex
+    opacity: var(--v-toolbar-image-opacity, 1)
+    transition-property: opacity
+    @include tools.absolute()
+
+  .v-toolbar__prepend,
+  .v-toolbar__append
+    align-items: center
+    align-self: stretch
+    display: flex
+
+  .v-toolbar__prepend
+    margin-inline: $toolbar-prepend-btn-margin-start auto
+
+  .v-toolbar__append
+    margin-inline: auto $toolbar-append-btn-margin-end
+
+  .v-toolbar-title
+    flex: 1 1
+    font-size: $toolbar-title-font-size
+    min-width: 0
+
+    @include tools.typography($toolbar-title-typography...)
+
+    .v-toolbar--density-prominent &
+      align-self: flex-end
+      padding-bottom: 6px
+
+      @include tools.typography($toolbar-prominent-title-typography...)
+
+  .v-toolbar-title__placeholder
+    overflow: hidden
+    text-overflow: ellipsis
+    white-space: nowrap
+
+  .v-toolbar-items
+    display: flex
+    height: inherit
+    align-self: stretch
+
+    > .v-btn
+      border-radius: 0

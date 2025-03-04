@@ -2,6 +2,7 @@ export default {
   badge: 'Distintivo',
   open: 'Apri',
   close: 'Chiudi',
+  dismiss: 'Ignora',
   confirmEdit: {
     ok: 'OK',
     cancel: 'Annulla',
@@ -35,7 +36,7 @@ export default {
     divider: 'a',
   },
   datePicker: {
-    itemsSelected: '{0} selected',
+    itemsSelected: '{0} selezionato/i',
     range: {
       title: 'Seleziona date',
       header: 'Inserisci date',
@@ -56,7 +57,7 @@ export default {
   },
   calendar: {
     moreEvents: '{0} di più',
-    today: 'Today',
+    today: 'Oggi',
   },
   input: {
     clear: 'Cancella {0}',
@@ -68,10 +69,15 @@ export default {
     counter: '{0} file',
     counterSize: '{0} file ({1} in totale)',
   },
+  fileUpload: {
+    title: 'Trascina e rilascia i file qui',
+    divider: 'o',
+    browse: 'Sfoglia i file',
+  },
   timePicker: {
     am: 'AM',
     pm: 'PM',
-    title: 'Select Time',
+    title: 'Seleziona l\'ora',
   },
   pagination: {
     ariaLabel: {

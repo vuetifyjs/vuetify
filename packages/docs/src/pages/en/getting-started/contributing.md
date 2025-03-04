@@ -52,7 +52,7 @@ Required software:
 
 - [Git](https://git-scm.com/) >v2.20
 - [Node.js](https://nodejs.org/) LTS
-- [Yarn](https://classic.yarnpkg.com/)
+- [pnpm](https://pnpm.io/)
 
 Some of our dependencies use [node-gyp](https://github.com/nodejs/node-gyp#installation) to build themselves. You don't need to install node-gyp itself but may require additional tools, especially on windows. See the node-gyp documentation for more details.
 
@@ -77,27 +77,28 @@ Then install dependencies and perform an initial build to link all the packages 
 cd vuetify
 
 # Install all project dependencies
-yarn
+pnpm i
 
 # Build the packages
-yarn build vuetify
-yarn build api
+pnpm build vuetify
+pnpm build api
 ```
 
 The build process compiles all the Vuetify packages for development and may take a while (grab some ☕). Once the packages are built, you can start developing.
 
 ### Vuetify
 
-The Vuetify library is located in `packages/vuetify`. In `packages/vuetify/dev` you will find a `Playground.vue` file; running `yarn dev` from the project root will start a dev server on **localhost:8090** with this file loaded. Test your changes in the Playground.vue file you copied, then paste its contents into your pull request when you're ready.
+The Vuetify library is located in `packages/vuetify`. In `packages/vuetify/dev` you will find a `Playground.vue` file; running `pnpm dev` from the project root will start a dev server on **localhost:8090** with this file loaded. Test your changes in the Playground.vue file you copied, then paste its contents into your pull request when you're ready.
 
-You can also test Vuetify in your own project using [`yarn link`](https://classic.yarnpkg.com/en/docs/cli/link/):
+You can also test Vuetify in your own project using [`pnpm link`](https://pnpm.io/cli/link):
 
 - Navigate to `packages/vuetify`
-- Run `yarn link`
+- Run `pnpm link --global`
 - Navigate to your project's directory
-- Run `yarn link vuetify`
+- Run `pnpm link --global vuetify`
+- Clear Vite's cache by deleting  `node_modules/.vite` folder
 
-If your project is using vuetify-loader you will have to run `yarn build:lib` in the vuetify package to see changes, otherwise you can use `yarn watch` for incremental builds.
+If your project is using vuetify-loader you will have to run `pnpm build:lib` in the vuetify package to see changes, otherwise you can use `pnpm watch` for incremental builds.
 
 #### Playground.vue
 
@@ -119,9 +120,9 @@ The **Playground** file is a cleanroom used for Vuetify development and is the r
 
 ### Documentation
 
-The documentation is located in `packages/docs` but also uses some files from `packages/api-generator`. A dev server for the documentation can be started by running `yarn dev docs` from the project root and will be available on [localhost:8095](http://localhost:8095/) by default.
+The documentation is located in `packages/docs` but also uses some files from `packages/api-generator`. A dev server for the documentation can be started by running `pnpm dev docs` from the project root and will be available on [localhost:8095](http://localhost:8095/) by default.
 
-If you want to see changes from Vuetify in the documentation you need to run `yarn build:lib` in the vuetify package before starting the documentation server.
+If you want to see changes from Vuetify in the documentation you need to run `pnpm build:lib` in the vuetify package before starting the documentation server.
 
 ### API Generator
 

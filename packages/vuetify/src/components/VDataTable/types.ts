@@ -5,7 +5,7 @@ import type { provideSelection, SelectableItem } from './composables/select'
 import type { FilterFunction, InternalItem } from '@/composables/filter'
 import type { SelectItemKey } from '@/util'
 
-export type DataTableCompareFunction<T = any> = (a: T, b: T) => number
+export type DataTableCompareFunction<T = any> = (a: T, b: T) => number | null
 
 export type DataTableHeader<T = Record<string, any>> = {
   key?: 'data-table-group' | 'data-table-select' | 'data-table-expand' | (string & {})
@@ -18,6 +18,7 @@ export type DataTableHeader<T = Record<string, any>> = {
   width?: number | string
   minWidth?: string
   maxWidth?: string
+  nowrap?: boolean
 
   headerProps?: Record<string, any>
   cellProps?: HeaderCellProps
@@ -36,6 +37,7 @@ export type InternalDataTableHeader = Omit<DataTableHeader, 'key' | 'value' | 'c
   sortable: boolean
   fixedOffset?: number
   lastFixed?: boolean
+  nowrap?: boolean
   colspan?: number
   rowspan?: number
   children?: InternalDataTableHeader[]

@@ -3,9 +3,6 @@
 @use '../../styles/tools';
 
 // VCard
-$card-actions-flex: none !default;
-$card-actions-min-height: 52px !default;
-$card-actions-padding: .5rem !default;
 $card-append-padding-inline-start: .5rem !default;
 $card-background: rgb(var(--v-theme-surface)) !default;
 $card-border-color: settings.$border-color-root !default;
@@ -30,6 +27,13 @@ $card-prepend-padding-inline-end: .5rem !default;
 $card-transition-duration: 0.28s !default;
 $card-transition-property: box-shadow, opacity, background !default;
 $card-transition-timing-function: settings.$standard-easing !default;
+
+// VCardActions
+$card-actions-flex: none !default;
+$card-actions-min-height: 52px !default;
+$card-actions-padding: .5rem !default;
+$button-card-actions-margin: .5rem !default; // deprecated
+$card-actions-gap: $button-card-actions-margin !default;
 
 // VCardHeader
 $card-header-flex: none !default;
@@ -63,7 +67,7 @@ $card-subtitle-font-weight: tools.map-deep-get(settings.$typography, 'body-2', '
 $card-subtitle-header-padding: 0 0 .25rem !default;
 $card-subtitle-letter-spacing: tools.map-deep-get(settings.$typography, 'body-2', 'letter-spacing') !default;
 $card-subtitle-line-height: tools.map-deep-get(settings.$typography, 'body-2', 'line-height') !default;
-$card-subtitle-opacity: var(--v-medium-emphasis-opacity) !default;
+$card-subtitle-opacity: var(--v-card-subtitle-opacity, var(--v-medium-emphasis-opacity)) !default;
 $card-subtitle-overflow: hidden !default;
 $card-subtitle-padding: 0 1rem !default;
 $card-subtitle-text-overflow: ellipsis !default;
@@ -76,6 +80,7 @@ $card-text-compact-line-height: 1.15rem !default;
 $card-text-flex: 1 1 auto !default;
 $card-text-font-size: tools.map-deep-get(settings.$typography, 'body-2', 'size') !default;
 $card-text-font-weight: tools.map-deep-get(settings.$typography, 'body-2', 'weight') !default;
+$card-text-opacity: var(--v-card-text-opacity, 1) !default;
 $card-text-letter-spacing: tools.map-deep-get(settings.$typography, 'body-2', 'letter-spacing') !default;
 $card-text-line-height: tools.map-deep-get(settings.$typography, 'body-2', 'line-height') !default;
 $card-text-padding: 1rem !default;

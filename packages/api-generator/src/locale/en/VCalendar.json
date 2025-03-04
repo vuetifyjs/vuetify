@@ -1,7 +1,6 @@
 {
   "props": {
     "allowedDates": "Determines which dates are selectable.",
-    "displayValue": "Value to display for the component, possibly a formatted date.",
     "hideHeader": "Determines whether the header is hidden in the calendar view.",
     "hideWeekNumber": "Toggles the display of week numbers in a calendar view.",
     "intervals": "Total number of intervals in a day view.",
@@ -14,7 +13,8 @@
     "year": "Specifies the year for the calendar view."
   },
   "slots": {
-    "header": "Slot for custom header content."
+    "header": "Slot for custom header content.",
+    "event": "Slot for custom event content."
   },
   "events": {
     "next": "Emitted when moving to the next time period.",

@@ -1,9 +1,10 @@
 export default {
   badge: 'نشان',
-  open: 'Open',
+  open: 'باز کردن',
   close: 'بستن',
+  dismiss: 'رد کردن',
   confirmEdit: {
-    ok: 'OK',
+    ok: 'تایید',
     cancel: 'لغو',
   },
   dataIterator: {
@@ -32,10 +33,10 @@ export default {
     pageText: '{0} تا {1} از {2}',
   },
   dateRangeInput: {
-    divider: 'to',
+    divider: 'تا',
   },
   datePicker: {
-    itemsSelected: '{0} selected',
+    itemsSelected: '{0} انتخاب‌شده',
     range: {
       title: 'انتخاب تاریخ‌ها',
       header: 'تاریخ‌ها را وارد کنید',
@@ -56,22 +57,27 @@ export default {
   },
   calendar: {
     moreEvents: '{بیشتر {0',
-    today: 'Today',
+    today: 'امروز',
   },
   input: {
-    clear: 'Clear {0}',
-    prependAction: '{0} prepended action',
-    appendAction: '{0} appended action',
-    otp: 'Please enter OTP character {0}',
+    clear: 'پاکسازی {0}',
+    prependAction: '{0} اقدام پیشین',
+    appendAction: '{0} اقدام افزوده‌شده',
+    otp: 'لطفا کد را وارد کنید {0}',
   },
   fileInput: {
     counter: '{0} پرونده',
     counterSize: '{0} پرونده ({1} در کل)',
   },
+  fileUpload: {
+    title: 'فایل‌ها را اینجا بکشید و رها کنید',
+    divider: 'یا',
+    browse: 'مرور فایل‌ها',
+  },
   timePicker: {
     am: 'قبل از ظهر',
     pm: 'بعد از ظهر',
-    title: 'Select Time',
+    title: 'انتخاب زمان',
   },
   pagination: {
     ariaLabel: {
@@ -90,7 +96,7 @@ export default {
   },
   rating: {
     ariaLabel: {
-      item: 'Rating {0} of {1}',
+      item: 'امتیاز {0} از {1}',
     },
   },
   loading: 'در حال بارگذاری...',

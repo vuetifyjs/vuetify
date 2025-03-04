@@ -1,7 +1,8 @@
 import 'vue/jsx'
 
 // Types
-import type { Events, VNode } from 'vue'
+import type { ComponentInjectOptions, ComponentOptionsMixin, EmitsOptions, SlotsType } from 'vue'
+import type { ComputedOptions, Events, MethodOptions, VNode } from 'vue'
 import type { TouchStoredHandlers } from './directives/touch'
 
 declare global {
@@ -58,18 +59,9 @@ declare global {
     path?: EventTarget[]
   }
 
-  interface UIEvent {
-    initUIEvent (
-      typeArg: string,
-      canBubbleArg: boolean,
-      cancelableArg: boolean,
-      viewArg: Window,
-      detailArg: number,
-    ): void
-  }
-
   interface MouseEvent {
     sourceCapabilities?: { firesTouchEvents: boolean }
+    shadowTarget?: EventTarget | null
   }
 
   interface ColorSelectionOptions {
@@ -107,7 +99,7 @@ declare global {
   }
 }
 
-declare module '@vue/runtime-core' {
+declare module 'vue' {
   export interface ComponentCustomProperties {
     _: ComponentInternalInstance
   }
@@ -121,8 +113,21 @@ declare module '@vue/runtime-core' {
     aliasName?: string
   }
 
-  // eslint-disable-next-line max-len
-  export interface ComponentOptionsBase<Props, RawBindings, D, C extends ComputedOptions, M extends MethodOptions, Mixin extends ComponentOptionsMixin, Extends extends ComponentOptionsMixin, E extends EmitsOptions, EE extends string = string, Defaults = {}> {
+  export interface ComponentOptionsBase<
+    Props,
+    RawBindings,
+    D,
+    C extends ComputedOptions,
+    M extends MethodOptions,
+    Mixin extends ComponentOptionsMixin,
+    Extends extends ComponentOptionsMixin,
+    E extends EmitsOptions,
+    EE extends string = string,
+    Defaults = {},
+    I extends ComponentInjectOptions = {},
+    II extends string = string,
+    S extends SlotsType = {}
+  > {
     aliasName?: string
   }
 
@@ -132,10 +137,9 @@ declare module '@vue/runtime-core' {
 
   export interface VNode {
     ctx: ComponentInternalInstance | null
+    ssContent: VNode | null
   }
-}
 
-declare module '@vue/runtime-dom' {
   type UnionToIntersection<U> =
     (U extends any ? (k: U) => void : never) extends ((k: infer I) => void) ? I : never
 
@@ -164,14 +168,4 @@ declare module '@vue/runtime-dom' {
   }
 
   export interface CSSProperties extends CustomProperties {}
-}
-
-declare module 'expect' {
-  interface Matchers<R> {
-    /** console.warn */
-    toHaveBeenTipped(): R
-
-    /** console.error */
-    toHaveBeenWarned(): R
-  }
 }
