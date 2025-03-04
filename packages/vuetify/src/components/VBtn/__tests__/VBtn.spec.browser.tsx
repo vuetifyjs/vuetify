@@ -6,7 +6,7 @@ import { ref } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
 // Types
-import type { Variant } from '@/composables/variant.tsx'
+import type { Variant } from '@/composables/variant'
 
 // TODO: generate these from types
 const colors = ['success', 'info', 'warning', 'error', 'invalid']
