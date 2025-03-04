@@ -5,12 +5,12 @@
         <v-slider
           v-model="size"
           class="pt-6"
-          hide-details
           label="Size"
           max="4"
           min="0"
           step="1"
           thumb-label="always"
+          hide-details
         >
           <template v-slot:thumb-label="{ modelValue }">
             <div class="text-no-wrap">
@@ -24,12 +24,12 @@
         <v-slider
           v-model="density"
           class="pt-6"
-          hide-details
           label="Density"
           max="2"
           min="0"
           step="1"
           thumb-label="always"
+          hide-details
         >
           <template v-slot:thumb-label="{ modelValue }">
             <div class="text-no-wrap">
@@ -45,16 +45,16 @@
         <v-list-subheader>Buttons</v-list-subheader>
 
         <v-btn
-          :size="sizes[size]"
           :density="densities[density]"
+          :size="sizes[size]"
           class="me-2 mb-2"
           prepend-icon="$vuetify"
           text="Default Button"
         ></v-btn>
 
         <v-btn
-          :size="sizes[size]"
           :density="densities[density]"
+          :size="sizes[size]"
           append-icon="mdi-account-outline"
           class="me-2 mb-2"
           text="User Profile"
@@ -62,10 +62,10 @@
         ></v-btn>
 
         <v-btn
-          icon="$vuetify"
-          :size="sizes[size]"
           :density="densities[density]"
+          :size="sizes[size]"
           class="me-2 mb-2"
+          icon="$vuetify"
         ></v-btn>
       </v-col>
 
@@ -81,18 +81,18 @@
         ></v-chip>
 
         <v-chip
-          text="Reset"
-          :size="sizes[size]"
           :density="densities[density]"
+          :size="sizes[size]"
           class="me-2 mb-2"
+          text="Reset"
           variant="outlined"
         ></v-chip>
 
         <v-chip
-          text="Disabled"
-          :size="sizes[size]"
           :density="densities[density]"
+          :size="sizes[size]"
           class="me-2 mb-2"
+          text="Disabled"
           disabled
         ></v-chip>
       </v-col>
@@ -101,25 +101,25 @@
         <v-list-subheader>Avatars</v-list-subheader>
 
         <v-avatar
-          :size="sizes[size]"
           :density="densities[density]"
+          :size="sizes[size]"
+          color="surface-variant"
           image="https://cdn.vuetifyjs.com/docs/images/avatars/grass.png"
-          color="surface-variant"
         ></v-avatar>
 
         <v-avatar
-          :size="sizes[size]"
           :density="densities[density]"
+          :size="sizes[size]"
+          class="ms-2"
           image="https://cdn.vuetifyjs.com/docs/images/avatars/gold.png"
-          class="ms-2"
         ></v-avatar>
 
         <v-avatar
-          :size="sizes[size]"
           :density="densities[density]"
-          image="https://cdn.vuetifyjs.com/docs/images/avatars/planet.png"
-          color="surface-variant"
+          :size="sizes[size]"
           class="ms-2"
+          color="surface-variant"
+          image="https://cdn.vuetifyjs.com/docs/images/avatars/planet.png"
         ></v-avatar>
       </v-col>
     </v-row>

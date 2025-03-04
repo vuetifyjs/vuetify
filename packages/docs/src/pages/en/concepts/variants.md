@@ -1,7 +1,7 @@
 ---
 meta:
-  nav: Variant
-  title: Variant
+  nav: Variants
+  title: Variants
   description: Understanding and utilizing the variant prop in Vuetify
   keywords: variant, Vuetify
 related:
@@ -12,9 +12,13 @@ related:
 
 # Variants
 
-Vuetify uses variants to offer multiple distinct and unique component styles
+Variants are a powerful feature that allows you to customize the appearance and behavior of components.
 
-## Sheet Component Variants
+<PageFeatures />
+
+<PromotedEntry />
+
+## Sheet components
 
 Sheet components in Vuetify offer different stylistic variants to make it easy to fit them into different design contexts. Below is a table summarizing the six available variants.
 

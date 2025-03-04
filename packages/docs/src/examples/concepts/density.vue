@@ -7,9 +7,10 @@
         <v-btn-toggle
           v-model="density"
           class="overflow-auto"
+          color="primary"
           density="compact"
-          divided
           variant="outlined"
+          divided
         >
           <v-btn text="Default" value="default"></v-btn>
 
@@ -32,8 +33,8 @@
 
         <v-btn
           :density="density"
-          text="Load More"
           class="me-2 mb-2"
+          text="Load More"
           variant="text"
         ></v-btn>
 
@@ -85,9 +86,9 @@
 
         <v-toolbar
           :density="density"
-          border
           color="transparent"
           title="Project Settings"
+          border
         ></v-toolbar>
       </v-col>
 
@@ -112,10 +113,10 @@
         <v-text-field
           :density="density"
           label="Username"
-          hide-details
           model-value="John Leider"
           prepend-inner-icon="mdi-account-outline"
           variant="outlined"
+          hide-details
         ></v-text-field>
       </v-col>
     </v-row>

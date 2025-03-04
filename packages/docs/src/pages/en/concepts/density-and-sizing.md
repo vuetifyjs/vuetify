@@ -14,7 +14,15 @@ related:
 
 The **size** and **density** props are used to reduce the overall space a component takes up, and sometimes font-size, height, padding, and margins.
 
-## Size
+<PageFeatures />
+
+<PromotedEntry />
+
+## Guide
+
+The **size** and **density** props are used to reduce the overall space a component takes up, and sometimes font-size, height, padding, and margins.
+
+### Size
 
 This property reduces or increases the vertical and horizontal width a component takes up, as well as font-size.
 
@@ -28,9 +36,9 @@ This property reduces or increases the vertical and horizontal width a component
 
 The following example shows the size for various components:
 
-<example file="concepts/size" preview />
+<ExamplesExample file="concepts/size" preview />
 
-## Density
+### Density
 
 Reduces vertical padding and sometimes font size. Square/round components like icons will also reduce horizontal padding.
 
@@ -42,7 +50,7 @@ Reduces vertical padding and sometimes font size. Square/round components like i
 
 The following example shows the density for various components:
 
-<example file="concepts/density" preview />
+<ExamplesExample file="concepts/density" preview />
 
 ::: warning
 
@@ -50,7 +58,7 @@ Not all components have a default transition that animates height when changing 
 
 :::
 
-## Combined
+### Combined
 
 Combine the **size** and **density** props to easily change the overall size of a component.
 
@@ -58,4 +66,4 @@ Combine the **size** and **density** props to easily change the overall size of 
 
 The following example shows the size and density for various components:
 
-<example file="concepts/density-and-size" preview />
+<ExamplesExample file="concepts/density-and-size" preview />

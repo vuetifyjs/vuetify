@@ -6,10 +6,11 @@
 
         <v-btn-toggle
           v-model="size"
-          variant="outlined"
           class="overflow-auto"
+          color="primary"
           density="compact"
           direction="vertical"
+          variant="outlined"
           divided
         >
           <v-btn text="X-small" value="x-small"></v-btn>
@@ -31,8 +32,8 @@
 
         <v-btn
           :size="size"
-          text="Export"
           class="me-2 mb-2"
+          text="Export"
         ></v-btn>
 
         <v-btn
@@ -102,20 +103,20 @@
 
         <v-avatar
           :size="size"
+          class="mb-2 me-2"
           image="https://cdn.vuetifyjs.com/docs/images/avatars/dark.png"
-          class="mb-2 me-2"
         ></v-avatar>
 
         <v-avatar
           :size="size"
+          class="mb-2 me-2"
           image="https://cdn.vuetifyjs.com/docs/images/avatars/blackhole.png"
-          class="mb-2 me-2"
         ></v-avatar>
 
         <v-avatar
           :size="size"
-          image="https://cdn.vuetifyjs.com/docs/images/avatars/meteor.png"
           class="mb-2 me-2"
+          image="https://cdn.vuetifyjs.com/docs/images/avatars/meteor.png"
         ></v-avatar>
       </v-col>
     </v-row>
