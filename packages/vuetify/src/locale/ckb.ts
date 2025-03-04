@@ -1,11 +1,11 @@
 export default {
   badge: 'باج',
-  open: 'Open',
+  open: 'کردنەوە',
   close: 'داخستن',
-  dismiss: 'Dismiss',
+  dismiss: 'ڕەتکردنەوە',
   confirmEdit: {
-    ok: 'OK',
-    cancel: 'Cancel',
+    ok: 'باشە',
+    cancel: 'هەڵوەشاندنەوە',
   },
   dataIterator: {
     noResultsText: 'هیچ تۆمارێکی هاوتا نەدۆزرایەوە',
@@ -33,18 +33,18 @@ export default {
     pageText: '{0}-{1} لە {2}',
   },
   dateRangeInput: {
-    divider: 'to',
+    divider: 'بۆ',
   },
   datePicker: {
-    itemsSelected: '{0} selected',
+    itemsSelected: '{0} هەڵبژێردراوە',
     range: {
-      title: 'Select dates',
-      header: 'Enter dates',
+      title: 'بژاردنی بەروارەکان',
+      header: 'بەروارەکان بنووسە',
     },
-    title: 'Select date',
-    header: 'Enter date',
+    title: 'بژاردنی بەروار',
+    header: 'بەروار بنووسە',
     input: {
-      placeholder: 'Enter date',
+      placeholder: 'بەروار بنووسە',
     },
   },
   noDataText: 'هیچ داتایەک بەردەست نیە',
@@ -57,27 +57,27 @@ export default {
   },
   calendar: {
     moreEvents: '{0} زیاتر',
-    today: 'Today',
+    today: 'ئەمڕو',
   },
   input: {
-    clear: 'Clear {0}',
-    prependAction: '{0} prepended action',
-    appendAction: '{0} appended action',
-    otp: 'Please enter OTP character {0}',
+    clear: 'سڕینەوە {0}',
+    prependAction: '{0} کرداری پێشەوە',
+    appendAction: '{0} کرداری دواتر',
+    otp: 'تکایە نووسینی نمرەی OTP {0}',
   },
   fileInput: {
     counter: '{0} فایل',
     counterSize: '{0} فایل ({1} لە کۆی گشتی)',
   },
   fileUpload: {
-    title: 'Drag and drop files here',
-    divider: 'or',
-    browse: 'Browse Files',
+    title: 'فایلەکان بکشە و دابنێ لێرە',
+    divider: 'یان',
+    browse: 'گەڕان بۆ فایلەکان',
   },
   timePicker: {
     am: 'پێش نیوەڕۆژ',
     pm: 'دوای نیوەڕۆژ',
-    title: 'Select Time',
+    title: 'کات دیاریبکە',
   },
   pagination: {
     ariaLabel: {
@@ -85,23 +85,23 @@ export default {
       next: 'پەڕەی دواتر',
       previous: 'پەڕەی پێشوو',
       page: 'بڕۆ بۆ پەڕەی {0}',
-      currentPage: 'پەڕەی ئێستا، پەڕە{0}',
-      first: 'First page',
-      last: 'Last page',
+      currentPage: 'پەڕەی ئێستا، پەڕە {0}',
+      first: 'پەڕەی یەکەم',
+      last: 'پەڕەی کۆتایی',
     },
   },
   stepper: {
-    next: 'Next',
-    prev: 'Previous',
+    next: 'داهاتوو',
+    prev: 'پێشوو',
   },
   rating: {
     ariaLabel: {
-      item: 'Rating {0} of {1}',
+      item: 'هەڵسەنگاندن {0} لە {1}',
     },
   },
-  loading: 'Loading...',
+  loading: 'بارکردن...',
   infiniteScroll: {
-    loadMore: 'Load more',
-    empty: 'No more',
+    loadMore: 'زیاتر باربکە',
+    empty: 'هیچتر نیە',
   },
 }

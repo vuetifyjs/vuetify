@@ -1,8 +1,8 @@
 export default {
   badge: 'Odznak',
-  open: 'Otevřiť',
+  open: 'Otevřít',
   close: 'Zavřít',
-  dismiss: 'Dismiss',
+  dismiss: 'Zavřít',
   confirmEdit: {
     ok: 'OK',
     cancel: 'Zrušit',
@@ -36,7 +36,7 @@ export default {
     divider: 'do',
   },
   datePicker: {
-    itemsSelected: '{0} vybrán',
+    itemsSelected: '{0} vybráno',
     range: {
       title: 'Vyberte datumy',
       header: 'Zadejte datumy',
@@ -57,27 +57,27 @@ export default {
   },
   calendar: {
     moreEvents: '{0} dalších',
-    today: 'Today',
+    today: 'Dnes',
   },
   input: {
     clear: 'Vymazat {0}',
-    prependAction: '{0} prepended action',
-    appendAction: '{0} appended action',
-    otp: 'Vložte výhradně OTP znaky {0}',
+    prependAction: '{0} předřazená akce',
+    appendAction: '{0} připojená akce',
+    otp: 'Vložte OTP znak {0}',
   },
   fileInput: {
     counter: '{0} souborů',
     counterSize: '{0} souborů ({1} celkem)',
   },
   fileUpload: {
-    title: 'Drag and drop files here',
-    divider: 'or',
-    browse: 'Browse Files',
+    title: 'Přetáhněte soubory sem',
+    divider: 'nebo',
+    browse: 'Procházet soubory',
   },
   timePicker: {
-    am: 'AM',
-    pm: 'PM',
-    title: 'Select Time',
+    am: 'Dopoledne',
+    pm: 'Odpoledne',
+    title: 'Vyberte čas',
   },
   pagination: {
     ariaLabel: {
