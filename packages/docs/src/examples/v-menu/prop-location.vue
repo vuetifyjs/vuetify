@@ -19,6 +19,7 @@
         <v-list-item
           v-for="(item, index) in items"
           :key="index"
+          :value="index"
         >
           <v-list-item-title>{{ item.title }}</v-list-item-title>
         </v-list-item>

@@ -1,11 +1,11 @@
 export default {
   badge: 'Insígnia',
-  open: 'Open',
+  open: 'Obrir',
   close: 'Tancar',
-  dismiss: 'Dismiss',
+  dismiss: 'Descartar',
   confirmEdit: {
     ok: 'OK',
-    cancel: 'Cancel',
+    cancel: 'Cancel·lar',
   },
   dataIterator: {
     noResultsText: 'Sense dades per mostrar',
@@ -33,18 +33,18 @@ export default {
     pageText: '{0}-{1} de {2}',
   },
   dateRangeInput: {
-    divider: 'to',
+    divider: 'fins a',
   },
   datePicker: {
-    itemsSelected: '{0} selected',
+    itemsSelected: '{0} seleccionats',
     range: {
-      title: 'Select dates',
-      header: 'Enter dates',
+      title: 'Selecciona dates',
+      header: 'Introdueix les dates',
     },
-    title: 'Select date',
-    header: 'Enter date',
+    title: 'Selecciona data',
+    header: 'Introdueix la data',
     input: {
-      placeholder: 'Enter date',
+      placeholder: 'Introdueix la data',
     },
   },
   noDataText: 'Sense dades',
@@ -52,32 +52,32 @@ export default {
     prev: 'Visualització prèvia',
     next: 'Visualització següent',
     ariaLabel: {
-      delimiter: 'Diapositiva {0} of {1}',
+      delimiter: 'Diapositiva {0} de {1}',
     },
   },
   calendar: {
     moreEvents: '{0} més',
-    today: 'Today',
+    today: 'Avui',
   },
   input: {
-    clear: 'Clear {0}',
-    prependAction: '{0} prepended action',
-    appendAction: '{0} appended action',
-    otp: 'Please enter OTP character {0}',
+    clear: 'Esborra {0}',
+    prependAction: 'Acció prefixada {0}',
+    appendAction: 'Acció afegida {0}',
+    otp: 'Si us plau, introdueix el caràcter OTP {0}',
   },
   fileInput: {
     counter: '{0} fitxers',
     counterSize: '{0} fitxers ({1} en total)',
   },
   fileUpload: {
-    title: 'Drag and drop files here',
-    divider: 'or',
-    browse: 'Browse Files',
+    title: 'Arrossega i deixa anar els fitxers aquí',
+    divider: 'o',
+    browse: 'Explora fitxers',
   },
   timePicker: {
     am: 'AM',
     pm: 'PM',
-    title: 'Select Time',
+    title: 'Selecciona l’hora',
   },
   pagination: {
     ariaLabel: {
@@ -91,17 +91,17 @@ export default {
     },
   },
   stepper: {
-    next: 'Next',
-    prev: 'Previous',
+    next: 'Següent',
+    prev: 'Anterior',
   },
   rating: {
     ariaLabel: {
       item: 'Puntuació {0} de {1}',
     },
   },
-  loading: 'Loading...',
+  loading: 'Carregant...',
   infiniteScroll: {
-    loadMore: 'Load more',
-    empty: 'No more',
+    loadMore: 'Carrega més',
+    empty: 'No hi ha més',
   },
 }

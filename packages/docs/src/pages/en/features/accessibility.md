@@ -8,6 +8,7 @@ related:
   - /components/menus/
   - /components/lists/
 features:
+  label: 'a11y'
   report: true
 ---
 

@@ -2,10 +2,10 @@ export default {
   badge: 'Distintivo',
   open: 'Abrir',
   close: 'Fechar',
-  dismiss: 'Dismiss',
+  dismiss: 'Dispensar',
   confirmEdit: {
     ok: 'OK',
-    cancel: 'Cancel',
+    cancel: 'Cancelar',
   },
   dataIterator: {
     noResultsText: 'Nenhum dado encontrado',
@@ -33,7 +33,7 @@ export default {
     pageText: '{0}-{1} de {2}',
   },
   dateRangeInput: {
-    divider: 'to',
+    divider: 'até',
   },
   datePicker: {
     itemsSelected: '{0} selecionados',
@@ -57,27 +57,27 @@ export default {
   },
   calendar: {
     moreEvents: 'Mais {0}',
-    today: 'Today',
+    today: 'Hoje',
   },
   input: {
     clear: 'Limpar {0}',
-    prependAction: '{0} prepended action',
-    appendAction: '{0} appended action',
-    otp: 'Por favor insira o caracter OTP {0}',
+    prependAction: '{0} ação antes',
+    appendAction: '{0} ação depois',
+    otp: 'Por favor, insira o caractere OTP {0}',
   },
   fileInput: {
     counter: '{0} arquivo(s)',
     counterSize: '{0} arquivo(s) ({1} no total)',
   },
   fileUpload: {
-    title: 'Drag and drop files here',
-    divider: 'or',
-    browse: 'Browse Files',
+    title: 'Arraste e solte os arquivos aqui',
+    divider: 'ou',
+    browse: 'Procurar arquivos',
   },
   timePicker: {
     am: 'AM',
     pm: 'PM',
-    title: 'Select Time',
+    title: 'Selecione o horário',
   },
   pagination: {
     ariaLabel: {

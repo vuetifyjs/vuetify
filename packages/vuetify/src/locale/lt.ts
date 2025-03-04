@@ -2,9 +2,9 @@ export default {
   badge: 'Ženklelis',
   open: 'Atidaryti',
   close: 'Uždaryti',
-  dismiss: 'Dismiss',
+  dismiss: 'Atmesti',
   confirmEdit: {
-    ok: 'OK',
+    ok: 'Gerai',
     cancel: 'Atšaukti',
   },
   dataIterator: {
@@ -70,9 +70,9 @@ export default {
     counterSize: '{0} failų ({1} iš viso)',
   },
   fileUpload: {
-    title: 'Drag and drop files here',
-    divider: 'or',
-    browse: 'Browse Files',
+    title: 'Vilkite ir numeskite failus čia',
+    divider: 'arba',
+    browse: 'Naršyti failus',
   },
   timePicker: {
     am: 'AM',

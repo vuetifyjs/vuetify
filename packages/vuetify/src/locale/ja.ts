@@ -33,13 +33,13 @@ export default {
     pageText: '{0}-{1} 件目 / {2}件',
   },
   dateRangeInput: {
-    divider: 'to',
+    divider: 'から',
   },
   datePicker: {
     itemsSelected: '{0} 選択済',
     range: {
-      title: 'Select dates',
-      header: 'Enter dates',
+      title: '日付を選択',
+      header: '日付を入力',
     },
     title: '日付を選択',
     header: '日付を入力',
@@ -61,8 +61,8 @@ export default {
   },
   input: {
     clear: 'クリア {0}',
-    prependAction: '{0} prepended action',
-    appendAction: '{0} appended action',
+    prependAction: '{0} の前に追加されたアクション',
+    appendAction: '{0} の後に追加されたアクション',
     otp: '{0}番目のワンタイムパスワードを入力してください',
   },
   fileInput: {
@@ -75,8 +75,8 @@ export default {
     browse: 'ファイルを選択',
   },
   timePicker: {
-    am: 'AM',
-    pm: 'PM',
+    am: '午前',
+    pm: '午後',
     title: '時間を選択',
   },
   pagination: {
@@ -86,8 +86,8 @@ export default {
       previous: '前のページ',
       page: '{0}ページ目に移動',
       currentPage: '現在のページ、ページ {0}',
-      first: 'First page',
-      last: 'Last page',
+      first: '最初のページ',
+      last: '最後のページ',
     },
   },
   stepper: {
