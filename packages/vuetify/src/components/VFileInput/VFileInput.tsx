@@ -74,7 +74,12 @@ export const makeVFileInputProps = propsFactory({
     },
   },
 
-  ...makeVFieldProps({ clearable: true }),
+  ...makeVFieldProps({
+    clearable: true,
+    clearValue: (props: VFileInput['$props']) => {
+      return props.multiple ? [] : null
+    },
+  }),
 }, 'VFileInput')
 
 export const VFileInput = genericComponent<VFileInputSlots>()({
