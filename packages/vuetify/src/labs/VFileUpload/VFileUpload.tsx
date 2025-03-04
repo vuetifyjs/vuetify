@@ -163,9 +163,10 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
     }
 
     function onClickRemove (index: number) {
-      model.value = model.value.filter((_, i) => i !== index)
+      const newValue = model.value.filter((_, i) => i !== index)
+      model.value = newValue
 
-      if (model.value.length > 0 || !inputRef.value) return
+      if (newValue.length > 0 || !inputRef.value) return
 
       inputRef.value.value = ''
     }
