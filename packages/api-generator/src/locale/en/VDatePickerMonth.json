@@ -17,7 +17,7 @@
   "events": {
     "update:month": "Fired when the month changes.",
     "update:year": "Fired when the year changes.",
-    "day": "Fired when a day is clicked."
+    "click:date": "Fired when a date is clicked."
   },
   "slots": {
     "year": "Slot for the year."
