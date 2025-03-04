@@ -176,12 +176,6 @@ importers:
       vue:
         specifier: ^3.5.13
         version: 3.5.13(typescript@5.5.4)
-      vue-analytics:
-        specifier: ^5.16.1
-        version: 5.22.1
-      vue-router:
-        specifier: ^4.5.0
-        version: 4.5.0(vue@3.5.13(typescript@5.5.4))
       vue-tsc:
         specifier: ^2.0.29
         version: 2.0.29(typescript@5.5.4)
@@ -291,9 +285,6 @@ importers:
       vue-instantsearch:
         specifier: ^4.16.1
         version: 4.16.1(@vue/server-renderer@3.5.13(vue@3.5.13(typescript@5.5.4)))(algoliasearch@4.23.3)(vue@3.5.13(typescript@5.5.4))
-      vue-prism-component:
-        specifier: ^2.0.0
-        version: 2.0.0
       vuetify:
         specifier: workspace:*
         version: link:../vuetify
@@ -361,9 +352,6 @@ importers:
       date-fns:
         specifier: ^3.6.0
         version: 3.6.0
-      emailjs-com:
-        specifier: ^3.2.0
-        version: 3.2.0
       front-matter:
         specifier: ^4.0.2
         version: 4.0.2
@@ -397,9 +385,6 @@ importers:
       markdown-it-link-attributes:
         specifier: ^4.0.1
         version: 4.0.1
-      markdown-it-meta:
-        specifier: ^0.0.1
-        version: 0.0.1
       markdown-it-prism:
         specifier: ^2.3.0
         version: 2.3.0
@@ -447,7 +432,13 @@ importers:
         version: 3.0.0(date-fns@3.6.0)
       '@date-io/dayjs':
         specifier: ^3.0.0
-        version: 3.0.0
+        version: 3.0.0(dayjs@1.11.13)
+      '@date-io/luxon':
+        specifier: ^3.2.0
+        version: 3.2.0(luxon@3.5.0)
+      '@date-io/moment':
+        specifier: ^3.2.0
+        version: 3.2.0(moment@2.30.1)
       '@formatjs/intl':
         specifier: ^2.10.1
         version: 2.10.1(typescript@5.5.4)
@@ -556,6 +547,9 @@ importers:
       date-fns:
         specifier: ^3.6.0
         version: 3.6.0
+      dayjs:
+        specifier: ^1.11.13
+        version: 1.11.13
       dotenv:
         specifier: ^16.4.5
         version: 16.4.5
@@ -574,9 +568,15 @@ importers:
       jsdom:
         specifier: ^25.0.0
         version: 25.0.0
+      luxon:
+        specifier: ^3.5.0
+        version: 3.5.0
       micromatch:
         specifier: ^4.0.5
         version: 4.0.8
+      moment:
+        specifier: ^2.30.1
+        version: 2.30.1
       postcss:
         specifier: ^8.4.38
         version: 8.5.2
@@ -1348,6 +1348,9 @@ packages:
   '@date-io/core@3.0.0':
     resolution: {integrity: sha512-S3j+IAQVBYNkQzchVVhX40eBkGDreBpScy9RXwTS5j2+k07+62pMVPisQ44Gq76Rqy5AOG/EZXCwBpY/jbemvA==}
 
+  '@date-io/core@3.2.0':
+    resolution: {integrity: sha512-hqwXvY8/YBsT9RwQITG868ZNb1MVFFkF7W1Ecv4P472j/ZWa7EFcgSmxy8PUElNVZfvhdvfv+a8j6NWJqOX5mA==}
+
   '@date-io/date-fns@3.0.0':
     resolution: {integrity: sha512-hsLAbsdP8LKfi7OQ729cXMWfmHQEq0hn3ysXfAAoc92j6j6sBq0s0tplnkWu6O4iBUpVCYRPGuNjQQhTaOu2AA==}
     peerDependencies:
@@ -1362,6 +1365,22 @@ packages:
       dayjs: ^1.8.17
     peerDependenciesMeta:
       dayjs:
+        optional: true
+
+  '@date-io/luxon@3.2.0':
+    resolution: {integrity: sha512-oua8GrNs/KDapsj8HUhgVXTFkeGRb4078PvrbHc5EhdMxIS9TW7W8KcfElpXznj2FhU6FQQbyma4iVG98dteWw==}
+    peerDependencies:
+      luxon: ^1.21.3 || ^2.x || ^3.x
+    peerDependenciesMeta:
+      luxon:
+        optional: true
+
+  '@date-io/moment@3.2.0':
+    resolution: {integrity: sha512-/Tm+/VGvM0cOxvBeft2ZDw/xkdDRqBj2mxqGJz1TqbVpbDgfvq0tTCe/v3iSRJSHlY48lkWRO6LM/yoxBvUNpA==}
+    peerDependencies:
+      moment: ^2.24.0
+    peerDependenciesMeta:
+      moment:
         optional: true
 
   '@emailjs/browser@4.3.3':
@@ -3946,7 +3965,7 @@ packages:
     resolution: {integrity: sha512-7CEBgcMjVmitjYo5q8JTJVra6X5mQ20uTThdK+0kR7UEaDrAWEQcRiBtWJzga4eRpP6afNwwLsX2SET2JhVB1Q==}
 
   concat-map@0.0.1:
-    resolution: {integrity: sha1-2Klr13/Wjfd5OnMDajug1UBdR3s=}
+    resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
 
   concat-stream@2.0.0:
     resolution: {integrity: sha512-MWufYdFw53ccGjCA+Ol7XJYpAlW6/prSMzuPOTRnJGcGzuhLn4Scrz7qf6o8bROZ514ltazcIFJZevcfbo0x7A==}
@@ -4324,6 +4343,9 @@ packages:
   dateformat@3.0.3:
     resolution: {integrity: sha512-jyCETtSl3VMZMWeRo7iY1FL19ges1t55hMo5yaam4Jrsm5EPL89UQkoQRyiI+Yf4k8r2ZpdngkV8hr1lIdjb3Q==}
 
+  dayjs@1.11.13:
+    resolution: {integrity: sha512-oaMBel6gjolK862uaPQOVTA7q3TZhuSvuMQAAglQDOWYO9A91IrAOUJEyKVlqJlHE0vq5p5UXxzdPfMH/x6xNg==}
+
   de-indent@1.0.2:
     resolution: {integrity: sha512-e/1zu3xH5MQryN2zdVaF0OrdNLUbvWxzMbi+iNA6Bky7l1RoP8a2fIbRocyHclXt/arDrrR6lL3TqFD9pMQTsg==}
 
@@ -4566,7 +4588,7 @@ packages:
     hasBin: true
 
   ee-first@1.1.1:
-    resolution: {integrity: sha1-WQxhFWsK4vTwJVcyoViyZrxWsh0=}
+    resolution: {integrity: sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==}
 
   ejs@3.1.10:
     resolution: {integrity: sha512-UeJmFfOrAQS8OJWPZ4qtgHyWExa088/MtK5UEyoJGFH67cDEXkZSviOiKRCZ4Xij0zxI3JECgYs3oKx+AizQBA==}
@@ -4575,11 +4597,6 @@ packages:
 
   electron-to-chromium@1.5.102:
     resolution: {integrity: sha512-eHhqaja8tE/FNpIiBrvBjFV/SSKpyWHLvxuR9dPTdo+3V9ppdLmFB7ZZQ98qNovcngPLYIz0oOBF9P0FfZef5Q==}
-
-  emailjs-com@3.2.0:
-    resolution: {integrity: sha512-Prbz3E1usiAwGjMNYRv6EsJ5c373cX7/AGnZQwOfrpNJrygQJ15+E9OOq4pU8yC977Z5xMetRfc3WmDX6RcjAA==}
-    engines: {node: '>=12.0.0'}
-    deprecated: The SDK name changed to @emailjs/browser
 
   emittery@0.10.2:
     resolution: {integrity: sha512-aITqOwnLanpHLNXZJENbOgjUBeHocD+xsSJmNrjovKBW5HbSpW3d1pEls7GFQPUWXiwG9+0P4GtHfEqC/4M0Iw==}
@@ -6362,6 +6379,10 @@ packages:
     resolution: {integrity: sha512-jumlc0BIUrS3qJGgIkWZsyfAM7NCWiBcCDhnd+3NNM5KbBmLTgHVfWBcg6W+rLUsIpzpERPsvwUP7CckAQSOoA==}
     engines: {node: '>=12'}
 
+  luxon@3.5.0:
+    resolution: {integrity: sha512-rh+Zjr6DNfUYR3bPwJEnuwDdqMbxZW7LOQfUN4B54+Cl+0o5zaU9RJ6bcidfDtC1cWCZXQ+nvX8bf6bAji37QQ==}
+    engines: {node: '>=12'}
+
   lz-string@1.5.0:
     resolution: {integrity: sha512-h5bgJWpxJNswbU7qCrV0tIKQCaS3blPDrqKWx+QxzuzL1zGUzij9XCWLrSLsJPu5t+eWA/ycetzYAO5IOMcWAQ==}
     hasBin: true
@@ -6428,9 +6449,6 @@ packages:
 
   markdown-it-link-attributes@4.0.1:
     resolution: {integrity: sha512-pg5OK0jPLg62H4k7M9mRJLT61gUp9nvG0XveKYHMOOluASo9OEF13WlXrpAp2aj35LbedAy3QOCgQCw0tkLKAQ==}
-
-  markdown-it-meta@0.0.1:
-    resolution: {integrity: sha512-sCQG7mHJM3i4l6MztgzxE8t3aTQB5CSCO0wq8k6CEaqud40eryWXqPesq5AyztbYgwnxJcNIsmFsKDRkrl6Zuw==}
 
   markdown-it-prism@2.3.0:
     resolution: {integrity: sha512-ePtHY80gZyeje4bn3R3SL0jpd1C9HFaYffJW2Ma0YD+tspqa2v9TuVwUyFwboFu4jnFNcO8oPQROgbcYJbmBvw==}
@@ -7533,7 +7551,6 @@ packages:
     engines: {node: '>=0.6.0', teleport: '>=0.2.0'}
     deprecated: |-
       You or someone you depend on is using Q, the JavaScript Promise library that gave JavaScript developers strong feelings about promises. They can almost certainly migrate to the native JavaScript promise now. Thank you literally everyone for joining me in this bet against the odds. Be excellent to each other.
-
       (For a CapTP with native promises, see @endo/eventual-send and @endo/captp)
 
   qs@6.9.7:
@@ -8886,7 +8903,7 @@ packages:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
 
   utils-merge@1.0.1:
-    resolution: {integrity: sha1-n5VxD1CiZ5R7LMwSR0HBAoQn5xM=}
+    resolution: {integrity: sha512-pMZTvIkT1d+TFGvDOqodOclx0QWkkgi6Tdoa8gC8ffGAAqz9pzPTZWAybbsHHoED/ztMtkv/VoYTYyShUn81hA==}
     engines: {node: '>= 0.4.0'}
 
   uuid@10.0.0:
@@ -9190,10 +9207,6 @@ packages:
   vscode-uri@3.0.8:
     resolution: {integrity: sha512-AyFQ0EVmsOZOlAnxoFOGOq1SQDWAB7C6aqMGS23svWAllfOaxbuFvcT8D1i8z3Gyn8fraVeZNNmN6e9bxxXkKw==}
 
-  vue-analytics@5.22.1:
-    resolution: {integrity: sha512-HPKQMN7gfcUqS5SxoO0VxqLRRSPkG1H1FqglsHccz6BatBatNtm/Vyy8brApktZxNCfnAkrSVDpxg3/FNDeOgQ==}
-    deprecated: Sorry but vue-analytics is no longer maintained. I would suggest you switch to vue-gtag, with love, the guy who made the package.
-
   vue-component-type-helpers@2.0.11:
     resolution: {integrity: sha512-8aluKz5oVC8PvVQAYgyIefOlqzKVmAOTCx2imbrFBVLbF7mnJvyMsE2A7rqX/4f4uT6ee9o8u3GcoRpUWc0xsw==}
 
@@ -9237,9 +9250,6 @@ packages:
         optional: true
       vue-server-renderer:
         optional: true
-
-  vue-prism-component@2.0.0:
-    resolution: {integrity: sha512-1ofrL+GCZOv4HqtX5W3EgkhSAgadSeuD8FDTXbwhLy8kS+28RCR8t2S5VTeM9U/peAaXLBpSgRt3J25ao8KTeg==}
 
   vue-router@4.5.0:
     resolution: {integrity: sha512-HDuk+PuH5monfNuY+ct49mNmkCRK4xJAV9Ts4z9UFc4rzdDnxQLyCMGGc8pKhZhHTVzfanpNwB/lwqevcBwI4w==}
@@ -10511,15 +10521,31 @@ snapshots:
 
   '@date-io/core@3.0.0': {}
 
+  '@date-io/core@3.2.0': {}
+
   '@date-io/date-fns@3.0.0(date-fns@3.6.0)':
     dependencies:
       '@date-io/core': 3.0.0
     optionalDependencies:
       date-fns: 3.6.0
 
-  '@date-io/dayjs@3.0.0':
+  '@date-io/dayjs@3.0.0(dayjs@1.11.13)':
     dependencies:
       '@date-io/core': 3.0.0
+    optionalDependencies:
+      dayjs: 1.11.13
+
+  '@date-io/luxon@3.2.0(luxon@3.5.0)':
+    dependencies:
+      '@date-io/core': 3.2.0
+    optionalDependencies:
+      luxon: 3.5.0
+
+  '@date-io/moment@3.2.0(moment@2.30.1)':
+    dependencies:
+      '@date-io/core': 3.2.0
+    optionalDependencies:
+      moment: 2.30.1
 
   '@emailjs/browser@4.3.3': {}
 
@@ -14148,6 +14174,8 @@ snapshots:
 
   dateformat@3.0.3: {}
 
+  dayjs@1.11.13: {}
+
   de-indent@1.0.2: {}
 
   debug@2.6.9:
@@ -14343,8 +14371,6 @@ snapshots:
       jake: 10.9.2
 
   electron-to-chromium@1.5.102: {}
-
-  emailjs-com@3.2.0: {}
 
   emittery@0.10.2: {}
 
@@ -16659,6 +16685,8 @@ snapshots:
 
   lru-cache@7.18.3: {}
 
+  luxon@3.5.0: {}
+
   lz-string@1.5.0: {}
 
   magic-string@0.25.7:
@@ -16729,10 +16757,6 @@ snapshots:
   markdown-it-header-sections@1.0.0: {}
 
   markdown-it-link-attributes@4.0.1: {}
-
-  markdown-it-meta@0.0.1:
-    dependencies:
-      js-yaml: 3.14.1
 
   markdown-it-prism@2.3.0:
     dependencies:
@@ -19589,8 +19613,6 @@ snapshots:
 
   vscode-uri@3.0.8: {}
 
-  vue-analytics@5.22.1: {}
-
   vue-component-type-helpers@2.0.11: {}
 
   vue-demi@0.13.11(vue@3.5.13(typescript@5.5.4)):
@@ -19630,8 +19652,6 @@ snapshots:
       vue: 3.5.13(typescript@5.5.4)
     optionalDependencies:
       '@vue/server-renderer': 3.5.13(vue@3.5.13(typescript@5.5.4))
-
-  vue-prism-component@2.0.0: {}
 
   vue-router@4.5.0(vue@3.5.13(typescript@5.5.4)):
     dependencies:

@@ -227,6 +227,8 @@ The following are a collection of examples that demonstrate more advanced and re
 
 The **show-expand** prop will render an expand icon on each row. You can customize this with the `item.data-table-expand` slot. The position of this slot can be changed by adding a column with `key: 'data-table-expand'` to the headers array.
 
+You can override the rows expand icon via the `item.data-table-expand` slot. To call upon the expand functionality, pass the slots provided `internalItem` to the `toggleExpand` function and add it to a click handler to perform the expand functionality. You can also check the current state of the rows expansion by passing the `internalItem` to the `isExpanded` function.
+
 Just like selection, row items require a unique property on each item for expansion to work. The default is `id`, but you can use the **item-value** prop to specify a different item property.
 
 <ExamplesExample file="v-data-table/misc-expand" />

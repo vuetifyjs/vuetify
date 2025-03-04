@@ -268,7 +268,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
                           disabled={ props.disabled }
                           inputmode={ props.type === 'number' ? 'numeric' : 'text' }
                           min={ props.type === 'number' ? 0 : undefined }
-                          maxlength="1"
+                          maxlength={ i === 0 ? length.value : '1' }
                           placeholder={ props.placeholder }
                           type={ props.type === 'number' ? 'text' : props.type }
                           value={ model.value[i] }

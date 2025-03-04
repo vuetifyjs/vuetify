@@ -1,5 +1,5 @@
 import { defineWorkspace } from 'vitest/config'
-import { commands } from './test/setup/browser-commands.ts'
+import { commands } from './test/setup/browser-commands'
 import { fileURLToPath } from 'url'
 
 export default defineWorkspace([
