@@ -11,6 +11,12 @@ export default {
     noResultsText: 'Ei osumia',
     loadingText: 'Ladataan kohteita...',
   },
+  select: {
+    ariaLabel: {
+      checked: 'Checked',
+      unchecked: 'Not Checked',
+    },
+  },
   dataTable: {
     itemsPerPageText: 'Rivejä sivulla:',
     ariaLabel: {

@@ -11,6 +11,12 @@ export default {
     noResultsText: 'Keine Elemente gefunden',
     loadingText: 'Lade Elemente...',
   },
+  select: {
+    ariaLabel: {
+      checked: 'Ausgewählt',
+      unchecked: 'Nicht Ausgewählt',
+    },
+  },
   dataTable: {
     itemsPerPageText: 'Zeilen pro Seite:',
     ariaLabel: {
