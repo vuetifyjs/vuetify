@@ -36,7 +36,7 @@ export const VCalendarDay = genericComponent<VCalendarDaySlots>()({
 
   props: makeVCalendarDayProps(),
 
-  setup (props, { attrs, emit, slots }) {
+  setup (props, { attrs, slots }) {
     const adapter = useDate()
     const intervals = computed(() => [
       ...Array.from({ length: props.intervals }, (v, i) => i)
@@ -52,12 +52,13 @@ export const VCalendarDay = genericComponent<VCalendarDaySlots>()({
             <div
               key="calendar-week-name"
               class="v-calendar-weekly__head-weekday"
+              { ...getPrefixedEventHandlers(attrs, ':day', () => props.day) }
             >
               { adapter.format(props.day.date, 'weekdayShort') }
 
               <div>
                 <VBtn
-                  { ...getPrefixedEventHandlers(attrs, ':intervalDate', () => props.day) }
+                  { ...getPrefixedEventHandlers(attrs, ':date', () => props.day) }
                   class={ props.day?.isToday ? 'v-calendar-day-label__today' : undefined }
                   icon
                   text={ adapter.format(props.day.date, 'dayOfMonth') }
