@@ -16,7 +16,7 @@ Vuetify is an [MIT licensed](https://github.com/vuetifyjs/vuetify/blob/master/LI
 
 <PageFeatures />
 
-<VoPromotionsCardVuetify />
+<PromotedEntry />
 
 ## Preamble
 

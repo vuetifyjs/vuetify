@@ -21,8 +21,6 @@ The bottom sheet is a modified `v-dialog` that slides from the bottom of the scr
 
 <PageFeatures />
 
-<VoPromotionsCardVuetify />
-
 ::: success
 
 This feature was introduced in [v3.4.0 (Blackguard)](/getting-started/release-notes/?version=v3.4.0)
@@ -34,6 +32,8 @@ This feature was introduced in [v3.4.0 (Blackguard)](/getting-started/release-no
 Whereas a bottom navigation component is for buttons and specific application level actions, a bottom sheet is meant to contain anything.
 
 <ExamplesUsage name="v-bottom-sheet" />
+
+<PromotedEntry />
 
 ## API
 
