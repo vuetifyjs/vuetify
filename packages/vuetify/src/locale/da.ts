@@ -1,11 +1,11 @@
 export default {
   badge: 'Emblem',
-  open: 'Open',
+  open: 'Åbn',
   close: 'Luk',
-  dismiss: 'Dismiss',
+  dismiss: 'Afvis',
   confirmEdit: {
     ok: 'OK',
-    cancel: 'Cancel',
+    cancel: 'Annuller',
   },
   dataIterator: {
     noResultsText: 'Ingen matchende data fundet',
@@ -33,10 +33,10 @@ export default {
     pageText: '{0}-{1} af {2}',
   },
   dateRangeInput: {
-    divider: 'to',
+    divider: 'til',
   },
   datePicker: {
-    itemsSelected: '{0} selected',
+    itemsSelected: '{0} valgt',
     range: {
       title: 'Vælg datoer',
       header: 'Indtast datoer',
@@ -57,27 +57,27 @@ export default {
   },
   calendar: {
     moreEvents: '{0} mere',
-    today: 'Today',
+    today: 'I dag',
   },
   input: {
-    clear: 'Clear {0}',
-    prependAction: '{0} prepended action',
-    appendAction: '{0} appended action',
-    otp: 'Please enter OTP character {0}',
+    clear: 'Ryd {0}',
+    prependAction: '{0} foranstillet handling',
+    appendAction: '{0} efterstillet handling',
+    otp: 'Indtast OTP-tegn {0}',
   },
   fileInput: {
     counter: '{0} filer',
-    counterSize: '{0} filer ({1} total)',
+    counterSize: '{0} filer ({1} i alt)',
   },
   fileUpload: {
-    title: 'Drag and drop files here',
-    divider: 'or',
-    browse: 'Browse Files',
+    title: 'Træk og slip filer her',
+    divider: 'eller',
+    browse: 'Gennemse filer',
   },
   timePicker: {
     am: 'AM',
     pm: 'PM',
-    title: 'Select Time',
+    title: 'Vælg tidspunkt',
   },
   pagination: {
     ariaLabel: {
@@ -86,22 +86,22 @@ export default {
       previous: 'Forrige side',
       page: 'Gå til side {0}',
       currentPage: 'Nuværende side, Side {0}',
-      first: 'First page',
-      last: 'Last page',
+      first: 'Første side',
+      last: 'Sidste side',
     },
   },
   stepper: {
-    next: 'Next',
-    prev: 'Previous',
+    next: 'Næste',
+    prev: 'Forrige',
   },
   rating: {
     ariaLabel: {
       item: 'Bedømmelse {0} af {1}',
     },
   },
-  loading: 'Loading...',
+  loading: 'Indlæser...',
   infiniteScroll: {
-    loadMore: 'Load more',
-    empty: 'No more',
+    loadMore: 'Indlæs mere',
+    empty: 'Ingen flere',
   },
 }

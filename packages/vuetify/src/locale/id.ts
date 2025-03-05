@@ -1,11 +1,11 @@
 export default {
   badge: 'Lencana',
-  open: 'Open',
+  open: 'Buka',
   close: 'Tutup',
-  dismiss: 'Dismiss',
+  dismiss: 'Tutup',
   confirmEdit: {
     ok: 'OK',
-    cancel: 'Cancel',
+    cancel: 'Batal',
   },
   dataIterator: {
     noResultsText: 'Tidak ditemukan catatan yang cocok',
@@ -33,18 +33,18 @@ export default {
     pageText: '{0}-{1} dari {2}',
   },
   dateRangeInput: {
-    divider: 'to',
+    divider: 'hingga',
   },
   datePicker: {
-    itemsSelected: '{0} selected',
+    itemsSelected: '{0} dipilih',
     range: {
-      title: 'Select dates',
-      header: 'Enter dates',
+      title: 'Pilih tanggal',
+      header: 'Masukkan tanggal',
     },
-    title: 'Select date',
-    header: 'Enter date',
+    title: 'Pilih tanggal',
+    header: 'Masukkan tanggal',
     input: {
-      placeholder: 'Enter date',
+      placeholder: 'Masukkan tanggal',
     },
   },
   noDataText: 'Tidak ada data tersedia',
@@ -52,56 +52,56 @@ export default {
     prev: 'Visual sebelumnya',
     next: 'Visual selanjutnya',
     ariaLabel: {
-      delimiter: 'Carousel slide {0} of {1}',
+      delimiter: 'Slide {0} dari {1}',
     },
   },
   calendar: {
     moreEvents: '{0} lagi',
-    today: 'Today',
+    today: 'Hari ini',
   },
   input: {
-    clear: 'Clear {0}',
-    prependAction: '{0} prepended action',
-    appendAction: '{0} appended action',
-    otp: 'Please enter OTP character {0}',
+    clear: 'Bersihkan {0}',
+    prependAction: '{0} aksi diawal',
+    appendAction: '{0} aksi diakhir',
+    otp: 'Masukkan karakter OTP {0}',
   },
   fileInput: {
     counter: '{0} berkas',
     counterSize: '{0} berkas (dari total {1})',
   },
   fileUpload: {
-    title: 'Drag and drop files here',
-    divider: 'or',
-    browse: 'Browse Files',
+    title: 'Seret dan lepas berkas di sini',
+    divider: 'atau',
+    browse: 'Telusuri Berkas',
   },
   timePicker: {
     am: 'AM',
     pm: 'PM',
-    title: 'Select Time',
+    title: 'Pilih Waktu',
   },
   pagination: {
     ariaLabel: {
-      root: 'Navigasi Pagination',
+      root: 'Navigasi Halaman',
       next: 'Halaman selanjutnya',
       previous: 'Halaman sebelumnya',
       page: 'Buka halaman {0}',
-      currentPage: 'Halaman Saat Ini, Halaman {0}',
-      first: 'First page',
-      last: 'Last page',
+      currentPage: 'Halaman saat ini, Halaman {0}',
+      first: 'Halaman pertama',
+      last: 'Halaman terakhir',
     },
   },
   stepper: {
-    next: 'Next',
-    prev: 'Previous',
+    next: 'Selanjutnya',
+    prev: 'Sebelumnya',
   },
   rating: {
     ariaLabel: {
-      item: 'Rating {0} of {1}',
+      item: 'Penilaian {0} dari {1}',
     },
   },
-  loading: 'Loading...',
+  loading: 'Memuat...',
   infiniteScroll: {
-    loadMore: 'Load more',
-    empty: 'No more',
+    loadMore: 'Muat lebih banyak',
+    empty: 'Tidak ada lagi',
   },
 }

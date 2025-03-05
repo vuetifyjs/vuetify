@@ -1,115 +1,90 @@
 <template>
-  <v-card>
-    <v-card-title class="bg-indigo text-white text-h5">
-      User Directory
-    </v-card-title>
-
-    <v-row
-      class="pa-4"
-      justify="space-between"
-    >
-      <v-col cols="5">
+  <v-container fluid>
+    <v-row justify="space-between" dense>
+      <v-col cols="12" md="5">
         <v-treeview
           v-model:activated="active"
           v-model:opened="open"
           :items="items"
           :load-children="fetchUsers"
-          color="warning"
           density="compact"
           item-title="name"
           item-value="id"
           activatable
+          border
+          fluid
           open-on-click
-          transition
+          rounded
         >
           <template v-slot:prepend="{ item }">
-            <v-icon v-if="!item.children">
-              mdi-account
-            </v-icon>
+            <v-icon v-if="!item.children" icon="mdi-account"></v-icon>
           </template>
         </v-treeview>
       </v-col>
 
-      <v-divider vertical></v-divider>
+      <v-col class="d-flex text-center" cols="12" md="7">
+        <v-card
+          class="text-h6 justify-center align-center flex-1-1 d-flex"
+          color="surface-light"
+          height="100%"
+          flat
+          rounded
+        >
+          <template v-slot:text>
+            <div v-if="!selected" class="text-subtitle-1">Select a User</div>
 
-      <v-col
-        class="d-flex text-center"
-      >
-        <v-scroll-y-transition mode="out-in">
-          <div
-            v-if="!selected"
-            class="text-h6 text-grey-lighten-1 font-weight-light"
-            style="align-self: center;"
-          >
-            Select a User
-          </div>
-          <v-card
-            v-else
-            :key="selected.id"
-            class="pt-6 mx-auto"
-            max-width="400"
-            flat
-          >
-            <v-card-text>
-              <v-avatar
-                v-if="avatar"
-                size="88"
-              >
-                <v-img
-                  :src="`https://avataaars.io/${avatar}`"
-                  class="mb-6"
-                ></v-img>
-              </v-avatar>
-              <h3 class="text-h5 mb-2">
-                {{ selected.name }}
-              </h3>
-              <div class="text-blue mb-2">
-                {{ selected.email }}
-              </div>
-              <div class="text-blue subheading font-weight-bold">
-                {{ selected.username }}
-              </div>
-            </v-card-text>
-            <v-divider></v-divider>
-            <v-row
-              class="text-left"
-              tag="v-card-text"
-            >
-              <v-col
-                class="text-right me-4 mb-2"
-                cols="5"
-                tag="strong"
-              >
-                Company:
-              </v-col>
-              <v-col>{{ selected.company.name }}</v-col>
-              <v-col
-                class="text-right me-4 mb-2"
-                cols="5"
-                tag="strong"
-              >
-                Website:
-              </v-col>
-              <v-col>
-                <a
-                  :href="`//${selected.website}`"
-                  target="_blank"
-                >{{ selected.website }}</a>
-              </v-col>
-              <v-col
-                class="text-right me-4 mb-2"
-                cols="5"
-                tag="strong"
-              >
-                Phone:
-              </v-col>
-              <v-col>{{ selected.phone }}</v-col>
-            </v-row>
-          </v-card>
-        </v-scroll-y-transition>
+            <template v-else>
+              <v-avatar :image="`https://avataaars.io/${avatar}`" class="mb-2" size="88"></v-avatar>
+
+              <h3 class="text-h5">{{ selected.name }}</h3>
+
+              <div class="text-medium-emphasis">{{ selected.email }}</div>
+
+              <div class="text-medium-emphasis font-weight-bold">{{ selected.username }}</div>
+
+              <v-divider class="my-4"></v-divider>
+
+              <v-text-field
+                :model-value="selected.company.name"
+                class="mx-auto mb-2"
+                density="compact"
+                max-width="250"
+                prefix="Company:"
+                variant="solo"
+                flat
+                hide-details
+                readonly
+              ></v-text-field>
+
+              <v-text-field
+                :model-value="selected.website"
+                class="mx-auto mb-2"
+                density="compact"
+                max-width="250"
+                prefix="Website:"
+                variant="solo"
+                flat
+                hide-details
+                readonly
+              ></v-text-field>
+
+              <v-text-field
+                :model-value="selected.phone"
+                class="mx-auto"
+                density="compact"
+                max-width="250"
+                prefix="Phone:"
+                variant="solo"
+                flat
+                hide-details
+                readonly
+              ></v-text-field>
+            </template>
+          </template>
+        </v-card>
       </v-col>
     </v-row>
-  </v-card>
+  </v-container>
 </template>
 
 <script setup>
@@ -122,6 +97,7 @@
     '?accessoriesType=Round&avatarStyle=Circle&clotheColor=PastelOrange&clotheType=Overall&eyeType=Close&eyebrowType=AngryNatural&facialHairColor=Blonde&facialHairType=Blank&graphicType=Pizza&hairColor=Black&hatColor=PastelBlue&mouthType=Serious&skinColor=Light&topType=LongHairBigHair',
     '?accessoriesType=Kurt&avatarStyle=Circle&clotheColor=Gray01&clotheType=BlazerShirt&eyeType=Surprised&eyebrowType=Default&facialHairColor=Red&facialHairType=Blank&graphicType=Selena&hairColor=Red&hatColor=Blue02&mouthType=Twinkle&skinColor=Pale&topType=LongHairCurly',
   ]
+
   const pause = ms => new Promise(resolve => setTimeout(resolve, ms))
 
   const active = ref([])
@@ -129,27 +105,34 @@
   const open = ref([])
   const users = ref([])
 
-  const items = computed(() => {
-    return [
-      {
-        name: 'Users',
-        children: users.value,
-      },
-    ]
-  })
+  const items = computed(() => [
+    {
+      name: 'Users',
+      children: users.value,
+    },
+  ])
+
   const selected = computed(() => {
-    console.log(active.value)
     if (!active.value.length) return undefined
+
     const id = active.value[0]
+
     return users.value.find(user => user.id === id)
   })
 
-  watch(selected, randomAvatar)
+  watch(selected, () => {
+    randomAvatar()
+  })
 
   async function fetchUsers (item) {
     await pause(1500)
-    return fetch('https://jsonplaceholder.typicode.com/users').then(res => res.json()).then(json => (item.children.push(...json))).catch(err => console.warn(err))
+
+    return fetch('https://jsonplaceholder.typicode.com/users')
+      .then(res => res.json())
+      .then(json => (item.children.push(...json)))
+      .catch(err => console.warn(err))
   }
+
   function randomAvatar () {
     avatar.value = avatars[Math.floor(Math.random() * avatars.length)]
   }

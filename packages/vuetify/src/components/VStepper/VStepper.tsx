@@ -19,7 +19,7 @@ import { IconValue } from '@/composables/icons'
 
 // Utilities
 import { computed, toRefs } from 'vue'
-import { genericComponent, getPropertyFromItem, only, propsFactory, useRender } from '@/util'
+import { genericComponent, getPropertyFromItem, pick, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -79,7 +79,7 @@ export const makeVStepperProps = propsFactory({
     selectedClass: 'v-stepper-item--selected',
   }),
   ...makeVSheetProps(),
-  ...only(makeVStepperActionsProps(), ['prevText', 'nextText']),
+  ...pick(makeVStepperActionsProps(), ['prevText', 'nextText']),
 }, 'VStepper')
 
 export const VStepper = genericComponent<VStepperSlots>()({

@@ -15,12 +15,15 @@ describe('locales', () => {
   })
 
   it('should have same structure for all translations', () => {
+    /** replace all values of deeply nested objects with their types */
     const unfill = (o: Record<string, any>) => Object.keys(o).reduce((result, key) => {
       result[key] = typeof o[key] === 'object' ? unfill(o[key]) : typeof o[key]
       return result
     }, {} as Record<string, any>)
     const enUnfilled = unfill(locales.en)
 
-    Object.entries(locales).forEach(([locale, messages]) => locale !== 'default' && expect(unfill(messages)).toStrictEqual(enUnfilled))
+    for (const [locale, messages] of Object.entries(locales)) {
+      expect({ [locale]: unfill(messages) }).toStrictEqual(expect.objectContaining({ [locale]: enUnfilled }))
+    }
   })
 })

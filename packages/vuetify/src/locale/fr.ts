@@ -2,7 +2,7 @@ export default {
   badge: 'Badge',
   open: 'Ouvrir',
   close: 'Fermer',
-  dismiss: 'Dismiss',
+  dismiss: 'Ignorer',
   confirmEdit: {
     ok: 'OK',
     cancel: 'Annuler',
@@ -36,7 +36,7 @@ export default {
     divider: 'à',
   },
   datePicker: {
-    itemsSelected: '{0} selected',
+    itemsSelected: '{0} sélectionné(s)',
     range: {
       title: 'Sélectionner des dates',
       header: 'Entrer des dates',
@@ -70,14 +70,14 @@ export default {
     counterSize: '{0} fichier(s) ({1} au total)',
   },
   fileUpload: {
-    title: 'Drag and drop files here',
-    divider: 'or',
-    browse: 'Browse Files',
+    title: 'Glissez-déposez des fichiers ici',
+    divider: 'ou',
+    browse: 'Parcourir les fichiers',
   },
   timePicker: {
     am: 'AM',
     pm: 'PM',
-    title: 'Select Time',
+    title: 'Sélectionner une heure',
   },
   pagination: {
     ariaLabel: {

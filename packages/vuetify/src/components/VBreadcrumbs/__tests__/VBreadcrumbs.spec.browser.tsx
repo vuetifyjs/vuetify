@@ -7,7 +7,7 @@ import { VBreadcrumbsItem } from '../VBreadcrumbsItem'
 import { render, screen } from '@test'
 
 describe('VBreadcrumbs', () => {
-  it('should use item slot', () => {
+  it('should use item slot', async () => {
     render(() => (
       <VBreadcrumbs items={['hello', 'world']}>
         {{
@@ -18,7 +18,7 @@ describe('VBreadcrumbs', () => {
 
     const items = screen.getAllByText(/hello!|world!/i)
     expect(items).toHaveLength(2)
-    expect.element(items[0]).toHaveTextContent('hello!')
+    await expect.element(items[0]).toHaveTextContent('hello!')
   })
 
   it('should use divider slot', () => {
@@ -71,21 +71,21 @@ describe('VBreadcrumbs', () => {
     </VBreadcrumbs>
     ))
     // Initial check for the active color class
-    expect(screen.getByCSS('.v-breadcrumbs-item.text-primary')).toBeInTheDocument()
+    expect(screen.getByCSS('.v-breadcrumbs-item.text-primary')).toBeVisible()
 
     const items = screen.getAllByCSS('.v-breadcrumbs-item')
-    expect.element(items[0]).toHaveClass('text-primary')
+    await expect.element(items[0]).toHaveClass('text-primary')
   })
-  it('should disable last item by default if using items prop', () => {
+  it('should disable last item by default if using items prop', async () => {
     render(() => (
       <VBreadcrumbs items={['foo', 'bar']}></VBreadcrumbs>
     ))
 
     const lastItem = screen.getByCSS('.v-breadcrumbs-item:last-child')
-    expect.element(lastItem).toHaveClass('v-breadcrumbs-item--disabled')
+    await expect.element(lastItem).toHaveClass('v-breadcrumbs-item--disabled')
   })
 
-  it('should override last item disabled by default', () => {
+  it('should override last item disabled by default', async () => {
     render(() => (
       <VBreadcrumbs
         items={['foo', { title: 'bar', disabled: false }]}
@@ -93,7 +93,7 @@ describe('VBreadcrumbs', () => {
     ))
 
     const lastItem = screen.getByCSS('.v-breadcrumbs-item:last-child')
-    expect.element(lastItem).not.toHaveClass('v-breadcrumbs-item--disabled')
+    await expect.element(lastItem).not.toHaveClass('v-breadcrumbs-item--disabled')
   })
 
   it('should provide default divider', () => {
@@ -107,7 +107,7 @@ describe('VBreadcrumbs', () => {
       </VBreadcrumbs>
     ))
 
-    expect(screen.getByText('/')).toBeInTheDocument()
-    expect(screen.getByText('-')).toBeInTheDocument()
+    expect(screen.getByText('/')).toBeVisible()
+    expect(screen.getByText('-')).toBeVisible()
   })
 })

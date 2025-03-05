@@ -2,7 +2,7 @@ export default {
   badge: 'Značka',
   open: 'Odpri',
   close: 'Zapri',
-  dismiss: 'Dismiss',
+  dismiss: 'Opusti',
   confirmEdit: {
     ok: 'V redu',
     cancel: 'Prekliči',
@@ -70,9 +70,9 @@ export default {
     counterSize: '{0} datotek (skupno {1})',
   },
   fileUpload: {
-    title: 'Drag and drop files here',
-    divider: 'or',
-    browse: 'Browse Files',
+    title: 'Povlecite in spustite datoteke tukaj',
+    divider: 'ali',
+    browse: 'Prebrskaj datoteke',
   },
   timePicker: {
     am: 'AM',

@@ -2,7 +2,7 @@ export default {
   badge: 'Odznaka',
   open: 'Otwórz',
   close: 'Zamknij',
-  dismiss: 'Dismiss',
+  dismiss: 'Odrzuć',
   confirmEdit: {
     ok: 'OK',
     cancel: 'Anuluj',
@@ -36,7 +36,7 @@ export default {
     divider: 'do',
   },
   datePicker: {
-    itemsSelected: '{0} selected',
+    itemsSelected: '{0} wybrano',
     range: {
       title: 'Wybór zakresu dat',
       header: 'Wprowadź zakres dat',
@@ -57,7 +57,7 @@ export default {
   },
   calendar: {
     moreEvents: '{0} więcej',
-    today: 'Today',
+    today: 'Dzisiaj',
   },
   input: {
     clear: 'Wyczyść {0}',
@@ -70,14 +70,14 @@ export default {
     counterSize: 'Liczba plików: {0} (łącznie {1})',
   },
   fileUpload: {
-    title: 'Drag and drop files here',
-    divider: 'or',
-    browse: 'Browse Files',
+    title: 'Przeciągnij i upuść pliki tutaj',
+    divider: 'lub',
+    browse: 'Przeglądaj pliki',
   },
   timePicker: {
     am: 'AM',
     pm: 'PM',
-    title: 'Select Time',
+    title: 'Wybierz godzinę',
   },
   pagination: {
     ariaLabel: {

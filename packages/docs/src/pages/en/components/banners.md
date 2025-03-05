@@ -20,8 +20,6 @@ features:
 
 The `v-banner` component is used as a middle-interrupting message to the user with one to two actions.
 
-![Banner Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-banner/v-banner-entry.png)
-
 <PageFeatures />
 
 ## Usage

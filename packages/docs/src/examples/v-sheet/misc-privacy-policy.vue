@@ -8,7 +8,7 @@
     <h4 class="text-h5 font-weight-bold mb-4">Your Privacy</h4>
 
     <p class="mb-8">
-      This business determines the use of personal data collectied on our media properties and across the internet. We may collect data that you submit to us directly or data that we collect automatically including from cookies (such as device information or IP address).
+      This business determines the use of personal data collected on our media properties and across the internet. We may collect data that you submit to us directly or data that we collect automatically including from cookies (such as device information or IP address).
 
       <br>
       <br>

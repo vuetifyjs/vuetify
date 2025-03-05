@@ -2,8 +2,7 @@
 import { useResizeObserver } from '../resizeObserver'
 
 // Utilities
-import { waitIdle } from '@test'
-import { render, screen } from '@testing-library/vue'
+import { render, screen, waitIdle } from '@test'
 
 describe('resizeObserver', () => {
   it('calls the callback after mount', async () => {
@@ -16,7 +15,7 @@ describe('resizeObserver', () => {
       },
     })
 
-    expect(screen.getByText('foo')).toBeInTheDocument()
+    expect(screen.getByText('foo')).toBeVisible()
 
     await waitIdle()
 

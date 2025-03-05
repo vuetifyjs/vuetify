@@ -1,5 +1,0 @@
-.git/**/*
-node_modules/**/*
-/tmp/**/*
-.github/workflows/**/*
-package.json

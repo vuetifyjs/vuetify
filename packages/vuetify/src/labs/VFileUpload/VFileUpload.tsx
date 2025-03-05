@@ -19,7 +19,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { onMounted, onUnmounted, ref, shallowRef } from 'vue'
-import { filterInputAttrs, genericComponent, only, propsFactory, useRender, wrapInArray } from '@/util'
+import { filterInputAttrs, genericComponent, pick, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { PropType, VNode } from 'vue'
@@ -79,7 +79,7 @@ export const makeVFileUploadProps = propsFactory({
 
   ...makeDelayProps(),
   ...makeDensityProps(),
-  ...only(makeVDividerProps({
+  ...pick(makeVDividerProps({
     length: 150,
   }), ['length', 'thickness', 'opacity']),
   ...makeVSheetProps(),

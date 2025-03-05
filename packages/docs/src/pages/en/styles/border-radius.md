@@ -11,7 +11,7 @@ features:
   report: true
 ---
 
-# Border Radius
+# Border radius
 
 Use border utilities to quickly style the border-radius of any element.
 
