@@ -28,8 +28,6 @@ export const makeVCalendarProps = propsFactory({
 }, 'VCalendar')
 
 export type VCalendarSlots = VCalendarDaySlots & {
-  allDayContent: { day?: CalendarDay, events?: Array<any> }
-  allDayEvent: { day?: CalendarDay, event?: Record<string, unknown> }
   dayBody: { day?: CalendarDay, events?: Array<any> }
   dayTitle: { title?: number | string }
   dayEvent: { day?: CalendarDay, allDay: Boolean, event?: Record<string, unknown> }
