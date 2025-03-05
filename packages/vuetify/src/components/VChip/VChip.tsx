@@ -155,7 +155,7 @@ export const VChip = genericComponent<VChipSlots>()({
 
       if (!isClickable.value) return
 
-      link.navigate?.(e)
+      link.navigate.value?.(e)
       group?.toggle()
     }
 
