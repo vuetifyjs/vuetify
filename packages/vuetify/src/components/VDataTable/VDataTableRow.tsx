@@ -2,7 +2,6 @@
 import { VDataTableColumn } from './VDataTableColumn'
 import { VBtn } from '@/components/VBtn'
 import { VCheckboxBtn } from '@/components/VCheckbox'
-import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 
 // Composables
 import { useExpanded } from './composables/expand'
@@ -142,23 +141,14 @@ export const VDataTableRow = genericComponent<new <T>(
               {{
                 default: () => {
                   if (column.key === 'data-table-select') {
-                    return slots['item.data-table-select'] ? (
-                      <VDefaultsProvider
-                        defaults={{
-                          VCheckboxBtn: {
-                            disabled: !item.selectable,
-                            modelValue: isSelected([item]),
-                          },
-                        }}
-                      >
-                        { slots['item.data-table-select']?.({
-                          ...slotProps,
-                          props: {
-                            onClick: withModifiers(() => toggleSelect(item), ['stop']),
-                          },
-                        })}
-                      </VDefaultsProvider>
-                    ) : (
+                    return slots['item.data-table-select']?.({
+                      ...slotProps,
+                      props: {
+                        disabled: !item.selectable,
+                        modelValue: isSelected([item]),
+                        onClick: withModifiers(() => toggleSelect(item), ['stop']),
+                      },
+                    }) ?? (
                       <VCheckboxBtn
                         disabled={ !item.selectable }
                         modelValue={ isSelected([item]) }
@@ -168,24 +158,15 @@ export const VDataTableRow = genericComponent<new <T>(
                   }
 
                   if (column.key === 'data-table-expand') {
-                    return slots['item.data-table-expand'] ? (
-                      <VDefaultsProvider
-                        defaults={{
-                          VBtn: {
-                            icon: isExpanded(item) ? '$collapse' : '$expand',
-                            size: 'small',
-                            variant: 'text',
-                          },
-                        }}
-                      >
-                        { slots['item.data-table-expand']?.({
-                          ...slotProps,
-                          props: {
-                            onClick: withModifiers(() => toggleExpand(item), ['stop']),
-                          },
-                        })}
-                      </VDefaultsProvider>
-                    ) : (
+                    return slots['item.data-table-expand']?.({
+                      ...slotProps,
+                      props: {
+                        icon: isExpanded(item) ? '$collapse' : '$expand',
+                        size: 'small',
+                        variant: 'text',
+                        onClick: withModifiers(() => toggleExpand(item), ['stop']),
+                      },
+                    }) ?? (
                       <VBtn
                         icon={ isExpanded(item) ? '$collapse' : '$expand' }
                         size="small"
