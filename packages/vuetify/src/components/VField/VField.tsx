@@ -54,7 +54,7 @@ export interface VFieldSlot extends DefaultInputSlot {
 
 export const makeVFieldProps = propsFactory({
   appendInnerIcon: IconValue,
-  bloom: Boolean,
+  glow: Boolean,
   bgColor: String,
   clearable: Boolean,
   clearIcon: {
@@ -276,9 +276,9 @@ export const VField = genericComponent<new <T>(
             <div key="prepend" class="v-field__prepend-inner">
               { props.prependInnerIcon && (
                 <InputIcon
-                  key={ `prepend-icon-${props.bloom}` }
+                  key={ `prepend-icon-${props.glow}` }
                   name="prependInner"
-                  color={ props.bloom ? color.value : undefined }
+                  color={ props.glow ? color.value : undefined }
                 />
               )}
 
@@ -362,9 +362,9 @@ export const VField = genericComponent<new <T>(
 
               { props.appendInnerIcon && (
                 <InputIcon
-                  key={ `append-icon-${props.bloom}` }
+                  key={ `append-icon-${props.glow}` }
                   name="appendInner"
-                  color={ props.bloom ? color.value : undefined }
+                  color={ props.glow ? color.value : undefined }
                 />
               )}
             </div>
