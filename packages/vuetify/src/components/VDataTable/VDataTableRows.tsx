@@ -47,6 +47,7 @@ export const makeVDataTableRowsProps = propsFactory({
   },
   rowProps: [Object, Function] as PropType<RowProps<any>>,
   cellProps: [Object, Function] as PropType<CellProps<any>>,
+  getMatches: Function,
 
   ...makeDisplayProps(),
 }, 'VDataTableRows')
@@ -164,6 +165,7 @@ export const VDataTableRows = genericComponent<new <T>(
                 { slots.item ? slots.item(itemSlotProps) : (
                   <VDataTableRow
                     { ...itemSlotProps.props }
+                    getMatches={ props.getMatches }
                     v-slots={ slots }
                   />
                 )}

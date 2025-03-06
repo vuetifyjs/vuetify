@@ -104,7 +104,7 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
     const { items } = useDataTableItems(props, columns)
 
     const search = toRef(props, 'search')
-    const { filteredItems } = useFilter(props, items, search, {
+    const { filteredItems, getMatches } = useFilter(props, items, search, {
       transform: item => item.columns,
       customKeyFilter: filterFunctions,
     })
@@ -231,6 +231,7 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
                         { ...attrs }
                         { ...dataTableRowsProps }
                         items={ displayItems.value }
+                        getMatches={ getMatches }
                       >
                         {{
                           ...slots,

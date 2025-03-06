@@ -9,6 +9,7 @@ import { useHeaders } from './composables/headers'
 import { useSelection } from './composables/select'
 import { useSort } from './composables/sort'
 import { makeDisplayProps, useDisplay } from '@/composables/display'
+import { highlightResult } from '@/composables/filter'
 
 // Utilities
 import { toDisplayString, withModifiers } from 'vue'
@@ -34,6 +35,7 @@ export const makeVDataTableRowProps = propsFactory({
   index: Number,
   item: Object as PropType<DataTableItem>,
   cellProps: [Object, Function] as PropType<CellProps<any>>,
+  getMatches: Function,
   onClick: EventProp<[MouseEvent]>(),
   onContextmenu: EventProp<[MouseEvent]>(),
   onDblclick: EventProp<[MouseEvent]>(),
@@ -159,7 +161,11 @@ export const VDataTableRow = genericComponent<new <T>(
                     )
                   }
 
-                  const displayValue = toDisplayString(slotProps.value)
+                  const displayValue = highlightResult(
+                    'v-data-table',
+                    toDisplayString(slotProps.value),
+                    props.getMatches!(item)?.[column.key!]
+                  )
 
                   return !mobile.value ? displayValue : (
                     <>

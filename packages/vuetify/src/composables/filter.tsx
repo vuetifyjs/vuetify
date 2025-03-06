@@ -160,7 +160,7 @@ export function useFilter <T extends InternalItem> (
     customKeyFilter?: MaybeRef<FilterKeyFunctions | undefined>
   }
 ) {
-  const filteredItems= shallowRef<T[]>([])
+  const filteredItems = shallowRef<T[]>([])
   const filteredMatches = shallowRef(new Map<unknown, Record<string, FilterMatchArrayMultiple | undefined>>())
   const transformedItems = computed(() => (
     options?.transform
