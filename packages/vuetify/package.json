@@ -185,7 +185,7 @@
     "vitest": "^3.0.5",
     "vue": "^3.5.13",
     "vue-i18n": "^11.1.1",
-    "vue-router": "^4.3.0",
+    "vue-router": "^4.5.0",
     "webdriverio": "^8.40.5"
   },
   "peerDependencies": {
