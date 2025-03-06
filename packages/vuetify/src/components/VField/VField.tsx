@@ -54,6 +54,7 @@ export interface VFieldSlot extends DefaultInputSlot {
 
 export const makeVFieldProps = propsFactory({
   appendInnerIcon: IconValue,
+  bloom: Boolean,
   bgColor: String,
   clearable: Boolean,
   clearIcon: {
@@ -147,13 +148,14 @@ export const VField = genericComponent<new <T>(
     const floatingLabelRef = ref<VFieldLabel>()
     const controlRef = ref<HTMLElement>()
     const isPlainOrUnderlined = computed(() => ['plain', 'underlined'].includes(props.variant))
-
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'bgColor'))
-    const { textColorClasses, textColorStyles } = useTextColor(computed(() => {
+    const color = computed(() => {
       return props.error || props.disabled ? undefined
         : isActive.value && isFocused.value ? props.color
         : props.baseColor
-    }))
+    })
+
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'bgColor'))
+    const { textColorClasses, textColorStyles } = useTextColor(color)
 
     watch(isActive, val => {
       if (hasFloatingLabel.value) {
@@ -274,8 +276,9 @@ export const VField = genericComponent<new <T>(
             <div key="prepend" class="v-field__prepend-inner">
               { props.prependInnerIcon && (
                 <InputIcon
-                  key="prepend-icon"
+                  key={ `prepend-icon-${props.bloom}` }
                   name="prependInner"
+                  color={ props.bloom ? color.value : undefined }
                 />
               )}
 
@@ -359,8 +362,9 @@ export const VField = genericComponent<new <T>(
 
               { props.appendInnerIcon && (
                 <InputIcon
-                  key="append-icon"
+                  key={ `append-icon-${props.bloom}` }
                   name="appendInner"
+                  color={ props.bloom ? color.value : undefined }
                 />
               )}
             </div>
