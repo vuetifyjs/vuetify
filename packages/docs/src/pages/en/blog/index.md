@@ -12,11 +12,21 @@ meta:
 
 Latest news, updates, and stories about Vuetify.
 
-<VoPromotionsCardVuetify />
+<PromotedEntry />
 
 ---
 
 <br>
+
+## Building a Basic Nuxt Application with Vuetify
+
+🖊️ Eric Sarrion • 📅 February 21st, 2025
+
+Discover how to craft a polished Nuxt application with Vuetify in this detailed guide. Leverage Vue.js and Nuxt’s streamlined framework to build a basic app featuring a toolbar, navigation menu, and multiple pages. Ideal for developers of all levels looking to simplify their workflow with automatic imports and reusable components... { .text-medium-emphasis }
+
+[Read More](/blog/building-a-basic-nuxt-application-with-vuetify/) { .text-end }
+
+---
 
 ## State of the Union 2024
 

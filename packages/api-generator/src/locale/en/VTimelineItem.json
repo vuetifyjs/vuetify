@@ -10,7 +10,7 @@
     "iconColor": "Color of the icon.",
     "index": "Used to allow dynamically shown items to be re-inserted in the correct position.",
     "lineInset": "Specifies the distance between the line and the dot of the item.",
-    "side": "Show the item either **before** or **after** the timeline. This will override the implicit ordering of items, but will in turn be overriden by the `v-timeline` **single-side** prop.",
+    "side": "Show the item either **before** or **after** the timeline. This will override the implicit ordering of items, but will in turn be overridden by the `v-timeline` **single-side** prop.",
     "size": "Size of the item dot"
   },
   "slots": {

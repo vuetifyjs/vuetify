@@ -29,6 +29,7 @@ import { makeTransitionProps } from '@/composables/transition'
 import { computed, mergeProps, nextTick, ref, shallowRef, watch } from 'vue'
 import {
   checkPrintable,
+  deepEqual,
   ensureValidVNode,
   genericComponent,
   IN_BROWSER,
@@ -381,7 +382,7 @@ export const VCombobox = genericComponent<new <
       if (!item || item.props.disabled) return
 
       if (props.multiple) {
-        const index = model.value.findIndex(selection => props.valueComparator(selection.value, item.value))
+        const index = model.value.findIndex(selection => (props.valueComparator || deepEqual)(selection.value, item.value))
         const add = set == null ? !~index : set
 
         if (~index) {
@@ -446,7 +447,7 @@ export const VCombobox = genericComponent<new <
     watch(menu, () => {
       if (!props.hideSelected && menu.value && model.value.length) {
         const index = displayItems.value.findIndex(
-          item => model.value.some(s => props.valueComparator(s.value, item.value))
+          item => model.value.some(s => (props.valueComparator || deepEqual)(s.value, item.value))
         )
         IN_BROWSER && window.requestAnimationFrame(() => {
           index >= 0 && vVirtualScrollRef.value?.scrollToIndex(index)

@@ -1,11 +1,11 @@
 export default {
-  badge: 'Знак',
-  open: 'Open',
+  badge: 'Значок',
+  open: 'Відкрити',
   close: 'Закрити',
-  dismiss: 'Dismiss',
+  dismiss: 'Відхилити',
   confirmEdit: {
-    ok: 'OK',
-    cancel: 'Cancel',
+    ok: 'ОК',
+    cancel: 'Скасувати',
   },
   dataIterator: {
     noResultsText: 'В результаті пошуку нічого не знайдено',
@@ -33,18 +33,18 @@ export default {
     pageText: '{0}-{1} з {2}',
   },
   dateRangeInput: {
-    divider: 'to',
+    divider: 'до',
   },
   datePicker: {
-    itemsSelected: '{0} selected',
+    itemsSelected: 'Вибрано {0}',
     range: {
-      title: 'Select dates',
-      header: 'Enter dates',
+      title: 'Оберіть дати',
+      header: 'Введіть дати',
     },
-    title: 'Select date',
-    header: 'Enter date',
+    title: 'Оберіть дату',
+    header: 'Введіть дату',
     input: {
-      placeholder: 'Enter date',
+      placeholder: 'Введіть дату',
     },
   },
   noDataText: 'Немає даних для відображення',
@@ -57,27 +57,27 @@ export default {
   },
   calendar: {
     moreEvents: 'Ще {0}',
-    today: 'Today',
+    today: 'Сьогодні',
   },
   input: {
-    clear: 'Clear {0}',
-    prependAction: '{0} prepended action',
-    appendAction: '{0} appended action',
-    otp: 'Please enter OTP character {0}',
+    clear: 'Очистити {0}',
+    prependAction: '{0} попередня дія',
+    appendAction: '{0} наступна дія',
+    otp: 'Будь ласка, введіть символ OTP {0}',
   },
   fileInput: {
     counter: '{0} файлів',
     counterSize: '{0} файлів ({1} загалом)',
   },
   fileUpload: {
-    title: 'Drag and drop files here',
-    divider: 'or',
-    browse: 'Browse Files',
+    title: 'Перетягніть файли сюди',
+    divider: 'або',
+    browse: 'Переглянути файли',
   },
   timePicker: {
     am: 'AM',
     pm: 'PM',
-    title: 'Select Time',
+    title: 'Оберіть час',
   },
   pagination: {
     ariaLabel: {
@@ -86,22 +86,22 @@ export default {
       previous: 'Попередня сторінка',
       page: 'Перейти на сторінку {0}',
       currentPage: 'Поточна сторінка, Сторінка {0}',
-      first: 'First page',
-      last: 'Last page',
+      first: 'Перша сторінка',
+      last: 'Остання сторінка',
     },
   },
   stepper: {
-    next: 'Next',
-    prev: 'Previous',
+    next: 'Далі',
+    prev: 'Назад',
   },
   rating: {
     ariaLabel: {
-      item: 'Rating {0} of {1}',
+      item: 'Оцінка {0} з {1}',
     },
   },
-  loading: 'Loading...',
+  loading: 'Завантаження...',
   infiniteScroll: {
-    loadMore: 'Load more',
-    empty: 'No more',
+    loadMore: 'Завантажити більше',
+    empty: 'Немає більше даних',
   },
 }

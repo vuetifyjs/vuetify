@@ -201,6 +201,10 @@ export const VListItem = genericComponent<VListItemSlots>()({
     }
 
     function onKeyDown (e: KeyboardEvent) {
+      const target = e.target as HTMLElement
+
+      if (['INPUT', 'TEXTAREA'].includes(target.tagName)) return
+
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault()
         e.target!.dispatchEvent(new MouseEvent('click', e))
@@ -385,6 +389,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
       select,
       root,
       id: uid,
+      link,
     }
   },
 })

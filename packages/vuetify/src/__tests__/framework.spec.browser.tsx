@@ -11,7 +11,7 @@ describe('framework', () => {
     })
 
     it('should install provided components', () => {
-      const Foo = { name: 'Foo', template: '<div />' }
+      const Foo = { name: 'Foo', render: () => (<div />) }
       const vuetify = createVuetify({
         components: {
           Foo,
@@ -21,7 +21,7 @@ describe('framework', () => {
       const TestComponent = {
         name: 'TestComponent',
         props: {},
-        template: '<foo />',
+        render: () => (<foo />),
       }
 
       mount(TestComponent, {
@@ -44,7 +44,7 @@ describe('framework', () => {
       const TestComponent = {
         name: 'TestComponent',
         props: {},
-        template: '<div v-foo />',
+        render: () => (<div v-foo />),
       }
 
       mount(TestComponent, {

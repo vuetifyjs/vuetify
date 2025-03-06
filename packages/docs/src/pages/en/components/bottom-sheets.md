@@ -19,11 +19,7 @@ features:
 
 The bottom sheet is a modified `v-dialog` that slides from the bottom of the screen, similar to a `v-bottom-navigation`.
 
-![Bottom Sheet Entry](https://cdn.vuetifyjs.com/docs/images/components/v-bottom-sheet/v-bottom-sheet-entry.png)
-
 <PageFeatures />
-
-<VoPromotionsCardVuetify />
 
 ::: success
 
@@ -36,6 +32,8 @@ This feature was introduced in [v3.4.0 (Blackguard)](/getting-started/release-no
 Whereas a bottom navigation component is for buttons and specific application level actions, a bottom sheet is meant to contain anything.
 
 <ExamplesUsage name="v-bottom-sheet" />
+
+<PromotedEntry />
 
 ## API
 

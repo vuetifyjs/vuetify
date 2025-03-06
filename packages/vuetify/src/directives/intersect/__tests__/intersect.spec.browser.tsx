@@ -22,7 +22,7 @@ describe('v-intersect', () => {
   })
 
   // TODO: flaky, sometimes triggers with isIntersecting=false
-  it.skip('does not callback on mount when quiet', async () => {
+  it.todo('does not callback on mount when quiet', async () => {
     const callback = vi.fn()
 
     render({

@@ -61,8 +61,8 @@ export default {
   },
   input: {
     clear: 'پاکسازی {0}',
-    prependAction: '{0} prepended action',
-    appendAction: '{0} appended action',
+    prependAction: '{0} اقدام پیشین',
+    appendAction: '{0} اقدام افزوده‌شده',
     otp: 'لطفا کد را وارد کنید {0}',
   },
   fileInput: {
@@ -70,9 +70,9 @@ export default {
     counterSize: '{0} پرونده ({1} در کل)',
   },
   fileUpload: {
-    title: 'Drag and drop files here',
-    divider: 'or',
-    browse: 'Browse Files',
+    title: 'فایل‌ها را اینجا بکشید و رها کنید',
+    divider: 'یا',
+    browse: 'مرور فایل‌ها',
   },
   timePicker: {
     am: 'قبل از ظهر',

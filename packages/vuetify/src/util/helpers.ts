@@ -216,10 +216,9 @@ export function pick<
 > (obj: T, paths: U[]): MaybePick<T, U> {
   const found: any = {}
 
-  const keys = new Set(Object.keys(obj))
-  for (const path of paths) {
-    if (keys.has(path)) {
-      found[path] = obj[path]
+  for (const key of paths) {
+    if (Object.hasOwn(obj, key)) {
+      found[key] = obj[key]
     }
   }
 
@@ -269,17 +268,6 @@ export function omit<
   const clone = { ...obj }
 
   exclude.forEach(prop => delete clone[prop])
-
-  return clone
-}
-
-export function only<
-  T extends object,
-  U extends Extract<keyof T, string>
-> (obj: T, include: U[]): Pick<T, U> {
-  const clone = {} as T
-
-  include.forEach(prop => clone[prop] = obj[prop])
 
   return clone
 }
@@ -771,4 +759,9 @@ export function checkPrintable (e: KeyboardEvent) {
   const isPrintableChar = e.key.length === 1
   const noModifier = !e.ctrlKey && !e.metaKey && !e.altKey
   return isPrintableChar && noModifier
+}
+
+export type Primitive = string | number | boolean | symbol | bigint
+export function isPrimitive (value: unknown): value is Primitive {
+  return typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean' || typeof value === 'bigint'
 }

@@ -37,11 +37,12 @@
   <AppBtn
     append-icon="mdi-page-next"
     color="surface-variant"
-    text="Vuetify One Themes"
     to="?one=settings"
     variant="flat"
     block
-  />
+  >
+    Vuetify One Themes
+  </AppBtn>
 </template>
 
 <script setup lang="ts">

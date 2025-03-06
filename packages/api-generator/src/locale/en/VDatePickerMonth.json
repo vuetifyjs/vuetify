@@ -1,6 +1,7 @@
 {
   "props": {
     "allowedDates": "Sets the allowed dates of the month.",
+    "firstDayOfWeek": "Sets the first day of the week, starting with 0 for Sunday.",
     "hideWeekdays": "Hide the days of the week letters.",
     "max": "Sets the maximum date of the month.",
     "min": "Sets the minimum date of the month.",
@@ -17,5 +18,8 @@
     "update:month": "Fired when the month changes.",
     "update:year": "Fired when the year changes.",
     "day": "Fired when a day is clicked."
+  },
+  "slots": {
+    "year": "Slot for the year."
   }
 }

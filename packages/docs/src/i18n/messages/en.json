@@ -68,6 +68,7 @@
   },
   "component": "Component",
   "components": "Components",
+  "concepts": "Common concepts",
   "contents": "Contents",
   "containment": "Containment",
   "contribute": {
@@ -102,7 +103,7 @@
       "experience": "Experience",
       "experience-message": "These options change your browsing experience within the documentation.",
       "layout": "Layout",
-      "layout-message": "Modify various the visiblity and behavior of various elements of the documentation.",
+      "layout-message": "Modify various the visibility and behavior of various elements of the documentation.",
       "rail-drawer": "Rail drawer",
       "rail-drawer-message": "Show the navigation drawer as a rail that expands on hover",
       "disable-quickbar": "Disable Quickbar",
