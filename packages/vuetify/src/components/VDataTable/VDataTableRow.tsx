@@ -22,7 +22,7 @@ import type { VDataTableHeaderCellColumnSlotProps } from './VDataTableHeaders'
 import type { GenericProps } from '@/util'
 
 export type VDataTableItemCellColumnSlotProps<T> = Omit<ItemKeySlot<T>, 'value'> & {
-  props: { onClick: (e: MouseEvent) => void }
+  props: Record<string, unknown>
 }
 
 export type VDataTableRowSlots<T> = {
