@@ -1,5 +1,5 @@
 {
   "props": {
-    "location": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/location.json))"
+    "location": "Specifies the component's location. Can combine by using a space separated string."
   }
 }

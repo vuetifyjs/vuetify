@@ -1,39 +1,20 @@
 <template>
-  <app-tooltip-btn
-    :to="rpath('/resources/jobs-for-vue/')"
-    class="jobs-link"
-    path="jobs"
-    @click="onClick"
+  <v-badge
+    :model-value="newJobs.length > 0"
+    color="#ED561B"
+    location="top end"
+    dot
   >
-    <template #icon>
-      <v-badge
-        :model-value="newJobs.length > 0"
-        color="#ED561B"
-        dot
-        location="top end"
-      >
-        <v-icon
-          :icon="icon"
-          class="mx-1"
-          color="medium-emphasis"
-        />
-      </v-badge>
-    </template>
-  </app-tooltip-btn>
+    <AppBtn
+      :icon="icon"
+      :to="rpath('/resources/jobs-for-vue/')"
+      class="jobs-link"
+      @click="onClick"
+    />
+  </v-badge>
 </template>
 
 <script setup>
-  // Components
-  import AppTooltipBtn from '@/components/app/TooltipBtn.vue'
-
-  // Composables
-  import { useGtag } from 'vue-gtag-next'
-  import { useRoute, useRouter } from 'vue-router'
-
-  // Utilities
-  import { computed } from 'vue'
-  import { rpath } from '@/util/routes'
-
   const { currentRoute } = useRouter()
   const { event } = useGtag()
   const { name } = useRoute()

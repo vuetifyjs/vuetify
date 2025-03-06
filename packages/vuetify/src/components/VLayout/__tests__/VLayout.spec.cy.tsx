@@ -1,10 +1,13 @@
 /// <reference types="../../../../types/cypress" />
 
+// Components
+import { VLayout } from '../VLayout'
 import { VAppBar } from '@/components/VAppBar'
 import { VMain } from '@/components/VMain'
 import { VNavigationDrawer } from '@/components/VNavigationDrawer'
+
+// Utilities
 import { createRange } from '@/util'
-import { VLayout } from '../VLayout'
 
 describe('VLayout', () => {
   it('should position main component', () => {
@@ -29,9 +32,9 @@ describe('VLayout', () => {
         <VNavigationDrawer width="200" permanent></VNavigationDrawer>
         <VMain>
           <div>
-            {createRange(10).map(_ => <div>hello</div>)}
+            { createRange(10).map(_ => <div>hello</div>) }
             <nav style="position: sticky; top: var(--v-layout-top); background: grey">Sticky Header</nav>
-            {createRange(100).map(_ => <div>hello</div>)}
+            { createRange(100).map(_ => <div>hello</div>) }
           </div>
         </VMain>
       </VLayout>
@@ -48,9 +51,9 @@ describe('VLayout', () => {
         <VNavigationDrawer width="200" permanent></VNavigationDrawer>
         <VMain scrollable>
           <div>
-            {createRange(10).map(_ => <div>hello</div>)}
+            { createRange(10).map(_ => <div>hello</div>) }
             <nav style="position: sticky; top: 0px; background: grey">Sticky Header</nav>
-            {createRange(100).map(_ => <div>hello</div>)}
+            { createRange(100).map(_ => <div>hello</div>) }
           </div>
         </VMain>
       </VLayout>

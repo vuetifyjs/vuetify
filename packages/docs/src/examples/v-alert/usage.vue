@@ -1,5 +1,5 @@
 <template>
-  <usage-example
+  <ExamplesUsageExample
     v-model="model"
     :code="code"
     :name="name"
@@ -42,26 +42,22 @@
 
       <v-checkbox v-model="icon" label="Custom icon"></v-checkbox>
     </template>
-  </usage-example>
+  </ExamplesUsageExample>
 </template>
 
 <script setup>
-  // Utilities
-  import { computed, ref } from 'vue'
-  import { propsToString } from '@/util/helpers'
-
   const name = 'v-alert'
   const model = ref('default')
   const alert = ref(true)
   const closable = ref(false)
   const icon = ref(false)
   const title = ref(false)
-  const type = ref(undefined)
+  const type = ref()
   const options = ['outlined', 'tonal']
   const props = computed(() => {
     return {
       closable: closable.value || undefined,
-      icon: icon.value ? 'mdi-vuetify' : undefined,
+      icon: icon.value ? '$vuetify' : undefined,
       title: title.value ? 'Alert title' : undefined,
       text: '...',
       type: type.value || undefined,

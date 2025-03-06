@@ -1,6 +1,6 @@
 ---
-nav: Dividers
 meta:
+  nav: Dividers
   title: Divider component
   description: The divider component is a thin line commonly used to separate groups of content in lists or layouts.
   keywords: dividers, vuetify divider component, vue divider component
@@ -8,27 +8,40 @@ related:
   - /components/lists
   - /components/navigation-drawers
   - /components/toolbars
+features:
+  github: /components/VDivider/
+  label: 'C: VDivider'
+  report: true
+  spec: https://m2.material.io/components/dividers
 ---
 
 # Dividers
 
 The `v-divider` component is used to separate sections of lists or layouts.
 
-<!-- ![divider Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-divider/v-divider-entry.png) -->
-
----
+<PageFeatures />
 
 ## Usage
 
 Dividers in their simplest form display a horizontal line.
 
-<usage name="v-divider" />
+<ExamplesUsage name="v-divider" />
 
-<entry />
+::: info
+
+This example uses the **border-opacity** utility class and is not available when **$utilities** is set to **false**. More information regarding utility classes is located on the [SASS variables page](features/sass-variables/#basic-usage).
+
+:::
+
+<PromotedEntry />
 
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-divider](/api/v-divider/) | The divider component. |
+
+<ApiInline hide-links />
 
 ## Examples
 
@@ -38,13 +51,13 @@ Dividers in their simplest form display a horizontal line.
 
 Inset dividers are moved 72px to the right. This will cause them to line up with list items.
 
-<example file="v-divider/prop-inset" />
+<ExamplesExample file="v-divider/prop-inset" />
 
 #### Vertical
 
 Vertical dividers give you more tools for unique layouts.
 
-<example file="v-divider/prop-vertical" />
+<ExamplesExample file="v-divider/prop-vertical" />
 
 #### Thickness
 
@@ -56,13 +69,13 @@ By using the **thickness** prop, the thickness of the divider can be adjusted to
 
 Create custom cards to fit any use-case.
 
-<example file="v-divider/misc-portrait-view" />
+<ExamplesExample file="v-divider/misc-portrait-view" />
 
 #### Subheaders
 
 Dividers and subheaders can help break up content and can optionally line up with one another by using the same `inset` prop.
 
-<example file="v-divider/misc-subheaders" />
+<ExamplesExample file="v-divider/misc-subheaders" />
 
 ## Accessibility
 

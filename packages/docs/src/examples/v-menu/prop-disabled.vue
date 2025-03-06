@@ -14,6 +14,7 @@
         <v-list-item
           v-for="(item, index) in items"
           :key="index"
+          :value="index"
         >
           <v-list-item-title>{{ item.title }}</v-list-item-title>
         </v-list-item>
@@ -21,6 +22,15 @@
     </v-menu>
   </div>
 </template>
+
+<script setup>
+  const items = [
+    { title: 'Click Me' },
+    { title: 'Click Me' },
+    { title: 'Click Me' },
+    { title: 'Click Me 2' },
+  ]
+</script>
 
 <script>
   export default {

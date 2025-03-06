@@ -1,0 +1,6 @@
+{
+  "exposed": {
+    "isRtl": "Indicates if RTL is currently active or not.",
+    "rtlClasses": "**FOR INTERNAL USE ONLY**"
+  }
+}

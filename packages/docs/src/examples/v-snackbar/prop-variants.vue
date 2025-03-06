@@ -8,6 +8,7 @@
       <template v-slot:activator="{ props }">
         <v-btn class="ma-2" v-bind="props">open</v-btn>
       </template>
+
       Lorem ipsum dolor sit amet consectetur.
     </v-snackbar>
 
@@ -17,22 +18,22 @@
       rounded="pill"
     >
       <template v-slot:activator="{ props }">
-        <v-btn rounded="pill" color="blue-grey" class="ma-2" v-bind="props">open</v-btn>
+        <v-btn class="ma-2" color="blue-grey" rounded="pill" v-bind="props">open</v-btn>
       </template>
 
-      Lorem ipsum dolor sit amet consectetur.
+      Snackbar with <strong>rounded="pill"</strong>.
     </v-snackbar>
 
     <v-snackbar
       :timeout="2000"
+      class="elevation-24"
       color="deep-purple-accent-4"
-      elevation="24"
     >
       <template v-slot:activator="{ props }">
-        <v-btn color="deep-purple-accent-4" class="ma-2" v-bind="props">open</v-btn>
+        <v-btn class="ma-2" color="deep-purple-accent-4" v-bind="props">open</v-btn>
       </template>
 
-      Lorem ipsum dolor sit amet consectetur.
+      Snackbar with <strong>elevation="24"</strong>.
     </v-snackbar>
 
     <v-snackbar
@@ -41,10 +42,10 @@
       variant="tonal"
     >
       <template v-slot:activator="{ props }">
-        <v-btn color="primary" variant="tonal" class="ma-2" v-bind="props">open</v-btn>
+        <v-btn class="ma-2" color="primary" variant="tonal" v-bind="props">open</v-btn>
       </template>
 
-      Lorem ipsum dolor sit amet consectetur.
+      Snackbar with <strong>tonal</strong> variant.
     </v-snackbar>
 
     <v-snackbar
@@ -53,10 +54,10 @@
       variant="outlined"
     >
       <template v-slot:activator="{ props }">
-        <v-btn color="success" variant="outlined" class="ma-2" v-bind="props">open</v-btn>
+        <v-btn class="ma-2" color="success" variant="outlined" v-bind="props">open</v-btn>
       </template>
 
-      Lorem ipsum dolor sit amet consectetur.
+      Snackbar with <strong>outlined</strong> variant.
     </v-snackbar>
   </v-sheet>
 </template>

@@ -1,6 +1,12 @@
 export default {
   badge: 'Huy hiệu',
+  open: 'Mở',
   close: 'Đóng',
+  dismiss: 'Bỏ qua',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'Hủy',
+  },
   dataIterator: {
     noResultsText: 'Không tìm thấy kết quả nào',
     loadingText: 'Đang tải...',
@@ -26,36 +32,52 @@ export default {
     lastPage: 'Trang cuối',
     pageText: '{0}-{1} trên {2}',
   },
+  dateRangeInput: {
+    divider: 'đến',
+  },
   datePicker: {
-    itemsSelected: '{0} được chọn',
-    nextMonthAriaLabel: 'Tháng sau',
-    nextYearAriaLabel: 'Năm sau',
-    prevMonthAriaLabel: 'Tháng trước',
-    prevYearAriaLabel: 'Năm trước',
+    itemsSelected: '{0} mục đã chọn',
+    range: {
+      title: 'Chọn ngày',
+      header: 'Nhập ngày',
+    },
+    title: 'Chọn ngày',
+    header: 'Nhập ngày',
+    input: {
+      placeholder: 'Nhập ngày',
+    },
   },
   noDataText: 'Không có dữ liệu',
   carousel: {
-    prev: 'Ảnh tiếp theo',
-    next: 'Ảnh trước',
+    prev: 'Ảnh trước',
+    next: 'Ảnh tiếp theo',
     ariaLabel: {
       delimiter: 'Carousel slide {0} trên {1}',
     },
   },
   calendar: {
     moreEvents: '{0} nữa',
+    today: 'Hôm nay',
   },
   input: {
-    clear: 'Clear {0}',
-    prependAction: '{0} prepended action',
-    appendAction: '{0} appended action',
+    clear: 'Xóa {0}',
+    prependAction: 'Hành động trước {0}',
+    appendAction: 'Hành động sau {0}',
+    otp: 'Vui lòng nhập ký tự OTP thứ {0}',
   },
   fileInput: {
     counter: '{0} tệp',
     counterSize: '{0} tệp (tổng cộng {1})',
   },
+  fileUpload: {
+    title: 'Kéo và thả tệp vào đây',
+    divider: 'hoặc',
+    browse: 'Chọn tệp',
+  },
   timePicker: {
     am: 'SA',
     pm: 'CH',
+    title: 'Chọn thời gian',
   },
   pagination: {
     ariaLabel: {
@@ -64,13 +86,22 @@ export default {
       previous: 'Trang trước',
       page: 'Đến trang {0}',
       currentPage: 'Trang hiện tại, Trang {0}',
-      first: 'First page',
-      last: 'Last page',
+      first: 'Trang đầu tiên',
+      last: 'Trang cuối cùng',
     },
+  },
+  stepper: {
+    next: 'Tiếp theo',
+    prev: 'Trước',
   },
   rating: {
     ariaLabel: {
       item: 'Đánh giá {0} trên {1}',
     },
+  },
+  loading: 'Đang tải...',
+  infiniteScroll: {
+    loadMore: 'Tải thêm',
+    empty: 'Không còn dữ liệu',
   },
 }

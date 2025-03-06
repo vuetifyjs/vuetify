@@ -1,23 +1,31 @@
 <template>
   <v-slider
     v-model="slider"
-    class="align-center"
     :max="max"
     :min="min"
+    class="align-center"
     hide-details
   >
     <template v-slot:append>
       <v-text-field
         v-model="slider"
+        density="compact"
+        style="width: 70px"
+        type="number"
         hide-details
         single-line
-        density="compact"
-        type="number"
-        style="width: 70px"
       ></v-text-field>
     </template>
   </v-slider>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const min = ref(-50)
+  const max = ref(90)
+  const slider = ref(40)
+</script>
 
 <script>
   export default {

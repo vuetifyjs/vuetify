@@ -1,38 +1,64 @@
 // Styles
 import './VChipGroup.sass'
 
+// Components
+import { makeVSlideGroupProps, VSlideGroup } from '@/components/VSlideGroup/VSlideGroup'
+
 // Composables
+import { makeComponentProps } from '@/composables/component'
+import { provideDefaults } from '@/composables/defaults'
 import { makeGroupProps, useGroup } from '@/composables/group'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeVariantProps } from '@/composables/variant'
-import { provideDefaults } from '@/composables/defaults'
 
 // Utilities
-import { deepEqual, defineComponent, useRender } from '@/util'
 import { toRef } from 'vue'
+import { deepEqual, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import type { GenericProps } from '@/util'
 
 export const VChipGroupSymbol = Symbol.for('vuetify:v-chip-group')
 
-export const VChipGroup = defineComponent({
+export const makeVChipGroupProps = propsFactory({
+  baseColor: String,
+  column: Boolean,
+  filter: Boolean,
+  valueComparator: {
+    type: Function as PropType<typeof deepEqual>,
+    default: deepEqual,
+  },
+
+  ...makeVSlideGroupProps(),
+  ...makeComponentProps(),
+  ...makeGroupProps({ selectedClass: 'v-chip--selected' }),
+  ...makeTagProps(),
+  ...makeThemeProps(),
+  ...makeVariantProps({ variant: 'tonal' } as const),
+}, 'VChipGroup')
+
+type VChipGroupSlots = {
+  default: {
+    isSelected: (id: string) => boolean
+    select: (id: string, value: boolean) => void
+    next: () => void
+    prev: () => void
+    selected: readonly string[]
+  }
+}
+
+export const VChipGroup = genericComponent<new <T>(
+  props: {
+    modelValue?: T
+    'onUpdate:modelValue'?: (value: T) => void
+  },
+  slots: VChipGroupSlots,
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VChipGroup',
 
-  props: {
-    column: Boolean,
-    filter: Boolean,
-    valueComparator: {
-      type: Function as PropType<typeof deepEqual>,
-      default: deepEqual,
-    },
-
-    ...makeGroupProps({ selectedClass: 'v-chip--selected' }),
-    ...makeTagProps(),
-    ...makeThemeProps(),
-    ...makeVariantProps({ variant: 'tonal' } as const),
-  },
+  props: makeVChipGroupProps(),
 
   emits: {
     'update:modelValue': (value: any) => true,
@@ -44,6 +70,7 @@ export const VChipGroup = defineComponent({
 
     provideDefaults({
       VChip: {
+        baseColor: toRef(props, 'baseColor'),
         color: toRef(props, 'color'),
         disabled: toRef(props, 'disabled'),
         filter: toRef(props, 'filter'),
@@ -51,25 +78,32 @@ export const VChipGroup = defineComponent({
       },
     })
 
-    useRender(() => (
-      <props.tag
-        class={[
-          'v-chip-group',
-          {
-            'v-chip-group--column': props.column,
-          },
-          themeClasses.value,
-        ]}
-      >
-        { slots.default?.({
-          isSelected,
-          select,
-          next,
-          prev,
-          selected: selected.value,
-        }) }
-      </props.tag>
-    ))
+    useRender(() => {
+      const slideGroupProps = VSlideGroup.filterProps(props)
+
+      return (
+        <VSlideGroup
+          { ...slideGroupProps }
+          class={[
+            'v-chip-group',
+            {
+              'v-chip-group--column': props.column,
+            },
+            themeClasses.value,
+            props.class,
+          ]}
+          style={ props.style }
+        >
+          { slots.default?.({
+            isSelected,
+            select,
+            next,
+            prev,
+            selected: selected.value,
+          })}
+        </VSlideGroup>
+      )
+    })
 
     return {}
   },

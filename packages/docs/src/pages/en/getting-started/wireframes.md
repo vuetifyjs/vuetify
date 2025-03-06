@@ -4,26 +4,25 @@ meta:
   description: Select from a multitude of Vuetify Material Design layouts built to help kickstart your application.
   keywords: pre-defined layouts, layouts, application layout, material design layouts
 related:
-  - /components/application/
+  - /features/application-layout/
   - /features/theme/
-  - /resources/themes/
+  - /features/blueprints/
 ---
-<script setup>
-  import WireframeExamples from '@/components/getting-started/WireframeExamples.vue'
-</script>
 
 # Wireframes
 
 The Vuetify **layout system** makes it easy to rapidly scaffold an application's UI regions with little effort.
 
+<PageFeatures />
+
+<VoPromotionsCardVuetify />
+
 ## Examples
 
 These templates are known as **wireframes** and are designed to provide a consistent approach to layouts, layering, and shadows. They are a starting point that is meant to be modified to meet the specific needs of your application.
 
-<wireframe-examples />
+<GettingStartedWireframeExamples />
 
-<alert type="info">
-
-  Additional information on how these templates are structured is located on the [Application page](/components/application/).
-
-</alert>
+::: info
+  Additional information on how these templates are structured is located on the [Application page](/features/application-layout/).
+:::

@@ -1,8 +1,0 @@
-{
-  "props": {
-    "activeClass": "The **active-class** applied to children when they are activated.",
-    "mandatory": "Forces a value to always be selected (if available).",
-    "max": "Sets a maximum number of selections that can be made.",
-    "multiple": "Allow multiple selections. The **value** prop must be an _array_."
-  }
-}

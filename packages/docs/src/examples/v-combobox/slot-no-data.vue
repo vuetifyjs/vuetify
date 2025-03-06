@@ -5,12 +5,12 @@
       v-model:search="search"
       :hide-no-data="false"
       :items="items"
-      hide-selected
       hint="Maximum of 5 tags"
       label="Add some tags"
+      chips
+      hide-selected
       multiple
       persistent-hint
-      small-chips
     >
       <template v-slot:no-data>
         <v-list-item>
@@ -22,6 +22,21 @@
     </v-combobox>
   </v-container>
 </template>
+
+<script setup>
+  import { nextTick, ref, watch } from 'vue'
+
+  const items = ['Gaming', 'Programming', 'Vue', 'Vuetify']
+
+  const model = ref(['Vuetify'])
+  const search = ref(null)
+
+  watch(model, val => {
+    if (val.length > 5) {
+      nextTick(() => model.value.pop())
+    }
+  })
+</script>
 
 <script>
   export default {

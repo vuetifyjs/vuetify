@@ -1,309 +1,220 @@
 <template>
-  <v-container fluid>
+  <v-card>
     <v-data-iterator
-      v-model:items-per-page="itemsPerPage"
-      v-model:page="page"
-      :items="items"
+      :items="games"
+      :items-per-page="3"
       :search="search"
-      :sort-by="sortBy"
-      hide-default-footer
     >
       <template v-slot:header>
-        <v-toolbar
-          dark
-          color="blue-darken-3"
-          class="mb-1"
-        >
+        <v-toolbar class="px-2">
           <v-text-field
             v-model="search"
-            clearable
-            flat
-            solo-inverted
-            hide-details
+            density="comfortable"
+            placeholder="Search"
             prepend-inner-icon="mdi-magnify"
-            label="Search"
+            style="max-width: 300px;"
+            variant="solo"
+            clearable
+            hide-details
           ></v-text-field>
-          <template v-if="$vuetify.breakpoint.mdAndUp">
-            <v-spacer></v-spacer>
-            <v-select
-              v-model="sortBy"
-              flat
-              solo-inverted
-              hide-details
-              :items="keys"
-              prepend-inner-icon="mdi-magnify"
-              label="Sort by"
-            ></v-select>
-            <v-spacer></v-spacer>
-            <v-btn-toggle
-              v-model="sortDesc"
-              mandatory
-            >
-              <v-btn
-                size="large"
-                variant="flat"
-                color="blue"
-                :value="false"
-              >
-                <v-icon>mdi-arrow-up</v-icon>
-              </v-btn>
-              <v-btn
-                size="large"
-                variant="flat"
-                color="blue"
-                :value="true"
-              >
-                <v-icon>mdi-arrow-down</v-icon>
-              </v-btn>
-            </v-btn-toggle>
-          </template>
         </v-toolbar>
       </template>
 
-      <template v-slot:default="props">
-        <v-row>
-          <v-col
-            v-for="item in props.items"
-            :key="item.name"
-            cols="12"
-            sm="6"
-            md="4"
-            lg="3"
-          >
-            <v-card>
-              <v-card-title class="subheading font-weight-bold">
-                {{ item.name }}
-              </v-card-title>
+      <template v-slot:default="{ items }">
+        <v-container class="pa-2" fluid>
+          <v-row dense>
+            <v-col
+              v-for="item in items"
+              :key="item.title"
+              cols="auto"
+              md="4"
+            >
+              <v-card class="pb-3" border flat>
+                <v-img :src="item.raw.img"></v-img>
 
-              <v-divider></v-divider>
-
-              <v-list dense>
-                <v-list-item
-                  v-for="(key, index) in filteredKeys"
-                  :key="index"
-                >
-                  <v-list-item-content :class="{ 'blue--text': sortBy === key }">
-                    {{ key }}:
-                  </v-list-item-content>
-                  <v-list-item-content
-                    class="align-end"
-                    :class="{ 'blue--text': sortBy === key }"
-                  >
-                    {{ item[key.toLowerCase()] }}
-                  </v-list-item-content>
+                <v-list-item :subtitle="item.raw.subtitle" class="mb-2">
+                  <template v-slot:title>
+                    <strong class="text-h6 mb-2">{{ item.raw.title }}</strong>
+                  </template>
                 </v-list-item>
-              </v-list>
-            </v-card>
-          </v-col>
-        </v-row>
+
+                <div class="d-flex justify-space-between px-4">
+                  <div class="d-flex align-center text-caption text-medium-emphasis me-1">
+                    <v-icon icon="mdi-clock" start></v-icon>
+
+                    <div class="text-truncate">{{ item.raw.duration }}</div>
+                  </div>
+
+                  <v-btn
+                    class="text-none"
+                    size="small"
+                    text="Read"
+                    variant="flat"
+                    border
+                  >
+                  </v-btn>
+                </div>
+              </v-card>
+            </v-col>
+          </v-row>
+        </v-container>
       </template>
 
-      <template v-slot:footer>
-        <v-row
-          class="mt-2"
-          align="center"
-          justify="center"
-        >
-          <span class="text-grey">Items per page</span>
-          <v-menu offset-y>
-            <template v-slot:activator="{ on, attrs }">
-              <v-btn
-                dark
-                variant="text"
-                color="primary"
-                class="ms-2"
-                v-bind="attrs"
-                v-on="on"
-              >
-                {{ itemsPerPage }}
-                <v-icon>mdi-chevron-down</v-icon>
-              </v-btn>
-            </template>
-            <v-list>
-              <v-list-item
-                v-for="(number, index) in itemsPerPageArray"
-                :key="index"
-                @click="updateItemsPerPage(number)"
-              >
-                <v-list-item-title>{{ number }}</v-list-item-title>
-              </v-list-item>
-            </v-list>
-          </v-menu>
-
-          <v-spacer></v-spacer>
-
-          <span
-            class="me-4 text-grey"
-          >
-            Page {{ page }} of {{ numberOfPages }}
-          </span>
+      <template v-slot:footer="{ page, pageCount, prevPage, nextPage }">
+        <div class="d-flex align-center justify-center pa-4">
           <v-btn
-            fab
-            dark
-            color="blue-darken-3"
-            class="me-1"
-            @click="formerPage"
-          >
-            <v-icon>mdi-chevron-left</v-icon>
-          </v-btn>
+            :disabled="page === 1"
+            density="comfortable"
+            icon="mdi-arrow-left"
+            variant="tonal"
+            rounded
+            @click="prevPage"
+          ></v-btn>
+
+          <div class="mx-2 text-caption">
+            Page {{ page }} of {{ pageCount }}
+          </div>
+
           <v-btn
-            fab
-            dark
-            color="blue-darken-3"
-            class="ms-1"
+            :disabled="page >= pageCount"
+            density="comfortable"
+            icon="mdi-arrow-right"
+            variant="tonal"
+            rounded
             @click="nextPage"
-          >
-            <v-icon>mdi-chevron-right</v-icon>
-          </v-btn>
-        </v-row>
+          ></v-btn>
+        </div>
       </template>
     </v-data-iterator>
-  </v-container>
+  </v-card>
 </template>
+
+<script setup>
+  import { shallowRef } from 'vue'
+
+  const search = shallowRef('')
+  const games = [
+    {
+      img: 'https://cdn.vuetifyjs.com/docs/images/graphics/games/4.png',
+      title: 'The Sci-Fi Shooter Experience',
+      subtitle: 'Dive into a futuristic world of intense battles and alien encounters.',
+      advanced: false,
+      duration: '8 minutes',
+    },
+    {
+      img: 'https://cdn.vuetifyjs.com/docs/images/graphics/games/2.png',
+      title: 'Epic Adventures in Open Worlds',
+      subtitle: 'Embark on a journey through vast, immersive landscapes and quests.',
+      advanced: true,
+      duration: '10 minutes',
+    },
+    {
+      img: 'https://cdn.vuetifyjs.com/docs/images/graphics/games/3.png',
+      title: 'Surviving the Space Station Horror',
+      subtitle: 'Navigate a haunted space station in this chilling survival horror game.',
+      advanced: false,
+      duration: '9 minutes',
+    },
+    {
+      img: 'https://cdn.vuetifyjs.com/docs/images/graphics/games/5.png',
+      title: 'Neon-Lit High-Speed Racing Thrills',
+      subtitle: 'Experience adrenaline-pumping races in a futuristic, neon-soaked city.',
+      advanced: true,
+      duration: '12 minutes',
+    },
+    {
+      img: 'https://cdn.vuetifyjs.com/docs/images/graphics/games/6.png',
+      title: 'Retro-Style Platformer Adventures',
+      subtitle: 'Jump and dash through pixelated worlds in this classic-style platformer.',
+      advanced: false,
+      duration: '11 minutes',
+    },
+    {
+      img: 'https://cdn.vuetifyjs.com/docs/images/graphics/games/7.png',
+      title: 'Medieval Strategic War Campaigns',
+      subtitle: 'Lead armies into epic battles and conquer kingdoms in this strategic war game.',
+      advanced: true,
+      duration: '10 minutes',
+    },
+    {
+      img: 'https://cdn.vuetifyjs.com/docs/images/graphics/games/1.png',
+      title: 'Underwater VR Exploration Adventure',
+      subtitle: 'Dive deep into the ocean and discover the mysteries of the underwater world.',
+      advanced: true,
+      duration: '11 minutes',
+    },
+    {
+      img: 'https://cdn.vuetifyjs.com/docs/images/graphics/games/8.png',
+      title: '1920s Mystery Detective Chronicles',
+      subtitle: 'Solve crimes and uncover secrets in the glamorous 1920s era.',
+      advanced: false,
+      duration: '9 minutes',
+    },
+  ]
+</script>
 
 <script>
   export default {
-    data () {
-      return {
-        itemsPerPageArray: [4, 8, 12],
-        search: '',
-        filter: {},
-        sortDesc: false,
-        page: 1,
-        itemsPerPage: 4,
-        sortBy: [{ key: 'name', order: 'asc' }],
-        keys: [
-          'Name',
-          'Calories',
-          'Fat',
-          'Carbs',
-          'Protein',
-          'Sodium',
-          'Calcium',
-          'Iron',
-        ],
-        items: [
-          {
-            name: 'Frozen Yogurt',
-            calories: 159,
-            fat: 6.0,
-            carbs: 24,
-            protein: 4.0,
-            sodium: 87,
-            calcium: '14%',
-            iron: '1%',
-          },
-          {
-            name: 'Ice cream sandwich',
-            calories: 237,
-            fat: 9.0,
-            carbs: 37,
-            protein: 4.3,
-            sodium: 129,
-            calcium: '8%',
-            iron: '1%',
-          },
-          {
-            name: 'Eclair',
-            calories: 262,
-            fat: 16.0,
-            carbs: 23,
-            protein: 6.0,
-            sodium: 337,
-            calcium: '6%',
-            iron: '7%',
-          },
-          {
-            name: 'Cupcake',
-            calories: 305,
-            fat: 3.7,
-            carbs: 67,
-            protein: 4.3,
-            sodium: 413,
-            calcium: '3%',
-            iron: '8%',
-          },
-          {
-            name: 'Gingerbread',
-            calories: 356,
-            fat: 16.0,
-            carbs: 49,
-            protein: 3.9,
-            sodium: 327,
-            calcium: '7%',
-            iron: '16%',
-          },
-          {
-            name: 'Jelly bean',
-            calories: 375,
-            fat: 0.0,
-            carbs: 94,
-            protein: 0.0,
-            sodium: 50,
-            calcium: '0%',
-            iron: '0%',
-          },
-          {
-            name: 'Lollipop',
-            calories: 392,
-            fat: 0.2,
-            carbs: 98,
-            protein: 0,
-            sodium: 38,
-            calcium: '0%',
-            iron: '2%',
-          },
-          {
-            name: 'Honeycomb',
-            calories: 408,
-            fat: 3.2,
-            carbs: 87,
-            protein: 6.5,
-            sodium: 562,
-            calcium: '0%',
-            iron: '45%',
-          },
-          {
-            name: 'Donut',
-            calories: 452,
-            fat: 25.0,
-            carbs: 51,
-            protein: 4.9,
-            sodium: 326,
-            calcium: '2%',
-            iron: '22%',
-          },
-          {
-            name: 'KitKat',
-            calories: 518,
-            fat: 26.0,
-            carbs: 65,
-            protein: 7,
-            sodium: 54,
-            calcium: '12%',
-            iron: '6%',
-          },
-        ],
-      }
-    },
-    computed: {
-      numberOfPages () {
-        return Math.ceil(this.items.length / this.itemsPerPage)
-      },
-      filteredKeys () {
-        return this.keys.filter(key => key !== 'Name')
-      },
-    },
-    methods: {
-      nextPage () {
-        if (this.page + 1 <= this.numberOfPages) this.page += 1
-      },
-      formerPage () {
-        if (this.page - 1 >= 1) this.page -= 1
-      },
-      updateItemsPerPage (number) {
-        this.itemsPerPage = number
-      },
-    },
+    data: () => ({
+      search: '',
+      games: [
+        {
+          img: 'https://cdn.vuetifyjs.com/docs/images/graphics/games/4.png',
+          title: 'The Sci-Fi Shooter Experience',
+          subtitle: 'Dive into a futuristic world of intense battles and alien encounters.',
+          advanced: false,
+          duration: '8 minutes',
+        },
+        {
+          img: 'https://cdn.vuetifyjs.com/docs/images/graphics/games/2.png',
+          title: 'Epic Adventures in Open Worlds',
+          subtitle: 'Embark on a journey through vast, immersive landscapes and quests.',
+          advanced: true,
+          duration: '10 minutes',
+        },
+        {
+          img: 'https://cdn.vuetifyjs.com/docs/images/graphics/games/3.png',
+          title: 'Surviving the Space Station Horror',
+          subtitle: 'Navigate a haunted space station in this chilling survival horror game.',
+          advanced: false,
+          duration: '9 minutes',
+        },
+        {
+          img: 'https://cdn.vuetifyjs.com/docs/images/graphics/games/5.png',
+          title: 'Neon-Lit High-Speed Racing Thrills',
+          subtitle: 'Experience adrenaline-pumping races in a futuristic, neon-soaked city.',
+          advanced: true,
+          duration: '12 minutes',
+        },
+        {
+          img: 'https://cdn.vuetifyjs.com/docs/images/graphics/games/6.png',
+          title: 'Retro-Style Platformer Adventures',
+          subtitle: 'Jump and dash through pixelated worlds in this classic-style platformer.',
+          advanced: false,
+          duration: '11 minutes',
+        },
+        {
+          img: 'https://cdn.vuetifyjs.com/docs/images/graphics/games/7.png',
+          title: 'Medieval Strategic War Campaigns',
+          subtitle: 'Lead armies into epic battles and conquer kingdoms in this strategic game.',
+          advanced: true,
+          duration: '10 minutes',
+        },
+        {
+          img: 'https://cdn.vuetifyjs.com/docs/images/graphics/games/1.png',
+          title: 'Underwater VR Exploration Adventure',
+          subtitle: 'Dive deep into the ocean and discover the mysteries of the underwater world.',
+          advanced: true,
+          duration: '11 minutes',
+        },
+        {
+          img: 'https://cdn.vuetifyjs.com/docs/images/graphics/games/8.png',
+          title: '1920s Mystery Detective Chronicles',
+          subtitle: 'Solve crimes and uncover secrets in the glamorous 1920s era.',
+          advanced: false,
+          duration: '9 minutes',
+        },
+      ],
+    }),
   }
 </script>

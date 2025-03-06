@@ -3,49 +3,48 @@ import './VTooltip.sass'
 
 // Components
 import { VOverlay } from '@/components/VOverlay'
+import { makeVOverlayProps } from '@/components/VOverlay/VOverlay'
 
 // Composables
+import { forwardRefs } from '@/composables/forwardRefs'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useScopeId } from '@/composables/scopeId'
-import { forwardRefs } from '@/composables/forwardRefs'
 
 // Utilities
-import { computed, mergeProps, ref } from 'vue'
-import { genericComponent, getUid, omit, useRender } from '@/util'
-import { filterVOverlayProps, makeVOverlayProps } from '@/components/VOverlay/VOverlay'
+import { computed, mergeProps, ref, useId } from 'vue'
+import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
-import type { SlotsToProps } from '@/util'
-import type { OverlaySlots } from '@/components/VOverlay/VOverlay'
 import type { StrategyProps } from '@/components/VOverlay/locationStrategies'
+import type { OverlaySlots } from '@/components/VOverlay/VOverlay'
 
-export const VTooltip = genericComponent<new () => {
-  $props: SlotsToProps<OverlaySlots>
-}>()({
+export const makeVTooltipProps = propsFactory({
+  id: String,
+  text: String,
+
+  ...omit(makeVOverlayProps({
+    closeOnBack: false,
+    location: 'end' as const,
+    locationStrategy: 'connected' as const,
+    eager: true,
+    minWidth: 0,
+    offset: 10,
+    openOnClick: false,
+    openOnHover: true,
+    origin: 'auto' as const,
+    scrim: false,
+    scrollStrategy: 'reposition' as const,
+    transition: false,
+  }), [
+    'absolute',
+    'persistent',
+  ]),
+}, 'VTooltip')
+
+export const VTooltip = genericComponent<OverlaySlots>()({
   name: 'VTooltip',
 
-  props: {
-    id: String,
-    text: String,
-
-    ...omit(makeVOverlayProps({
-      closeOnBack: false,
-      location: 'end' as const,
-      locationStrategy: 'connected' as const,
-      minWidth: 0,
-      offset: 10,
-      openOnClick: false,
-      openOnHover: true,
-      origin: 'auto' as const,
-      scrim: false,
-      scrollStrategy: 'reposition' as const,
-      transition: false,
-    }), [
-      'absolute',
-      'persistent',
-      'eager',
-    ]),
-  },
+  props: makeVTooltipProps(),
 
   emits: {
     'update:modelValue': (value: boolean) => true,
@@ -55,7 +54,7 @@ export const VTooltip = genericComponent<new () => {
     const isActive = useProxiedModel(props, 'modelValue')
     const { scopeId } = useScopeId()
 
-    const uid = getUid()
+    const uid = useId()
     const id = computed(() => props.id || `v-tooltip-${uid}`)
 
     const overlay = ref<VOverlay>()
@@ -81,15 +80,23 @@ export const VTooltip = genericComponent<new () => {
       return isActive.value ? 'scale-transition' : 'fade-transition'
     })
 
+    const activatorProps = computed(() =>
+      mergeProps({
+        'aria-describedby': id.value,
+      }, props.activatorProps)
+    )
+
     useRender(() => {
-      const [overlayProps] = filterVOverlayProps(props)
+      const overlayProps = VOverlay.filterProps(props)
 
       return (
         <VOverlay
           ref={ overlay }
           class={[
             'v-tooltip',
+            props.class,
           ]}
+          style={ props.style }
           id={ id.value }
           { ...overlayProps }
           v-model={ isActive.value }
@@ -99,10 +106,7 @@ export const VTooltip = genericComponent<new () => {
           origin={ origin.value }
           persistent
           role="tooltip"
-          eager
-          activatorProps={ mergeProps({
-            'aria-describedby': id.value,
-          }, props.activatorProps) }
+          activatorProps={ activatorProps.value }
           _disableGlobalStack
           { ...scopeId }
         >

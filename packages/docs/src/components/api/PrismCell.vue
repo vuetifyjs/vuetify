@@ -1,7 +1,5 @@
 <template>
-  <pre
-    v-html="highlight(String(code))"
-  />
+  <pre v-html="html" />
 </template>
 
 <script setup lang="ts">
@@ -11,9 +9,8 @@
   import 'prismjs/components/prism-scss.js'
   import 'prismjs/components/prism-typescript.js'
 
-  // Utilities
-  import { insertLinks, stripLinks } from './utils'
-  import { PropType } from 'vue'
+  // Types
+  import type { PropType } from 'vue'
 
   const props = defineProps({
     code: null,
@@ -21,6 +18,11 @@
       type: String as PropType<'typescript' | 'scss'>,
       default: 'typescript',
     },
+  })
+
+  const html = ref('')
+  watchEffect(async () => {
+    html.value = highlight(String(await props.code))
   })
 
   const MAP = {

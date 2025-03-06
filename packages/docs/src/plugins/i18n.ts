@@ -2,7 +2,7 @@
 import { createI18n } from 'vue-i18n'
 
 // Types
-import type { I18nPlugin } from '@/types'
+import type { App } from 'vue'
 
 const messages = Object.fromEntries(
   Object.entries(
@@ -12,11 +12,17 @@ const messages = Object.fromEntries(
     }),
 )
 
-export const useI18n: I18nPlugin = ({ app }) => {
+export function installI18n (app: App) {
+  const localeStore = useLocaleStore()
+
   const i18n = createI18n({
     legacy: false,
-    locale: 'en',
+    locale: localeStore.locale,
     messages,
+  })
+
+  watch(() => localeStore.locale, locale => {
+    i18n.global.locale.value = locale
   })
 
   app.use(i18n)

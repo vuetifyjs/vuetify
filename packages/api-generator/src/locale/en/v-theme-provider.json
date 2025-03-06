@@ -1,9 +1,0 @@
-{
-  "props": {
-    "root": "Use the current value of `$vuetify.theme.dark` as opposed to the provided one.",
-    "withBackground": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-theme-provider.json))"
-  },
-  "slots": {
-    "default": "All child components will have their theme overridden. Must have exactly one root element."
-  }
-}

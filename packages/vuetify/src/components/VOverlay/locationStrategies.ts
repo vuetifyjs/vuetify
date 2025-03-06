@@ -1,5 +1,9 @@
+// Composables
+import { useToggleScope } from '@/composables/toggleScope'
+
 // Utilities
-import { computed, effectScope, nextTick, onScopeDispose, ref, watch, watchEffect } from 'vue'
+import { computed, nextTick, onScopeDispose, ref, watch } from 'vue'
+import { anchorToPoint, getOffset } from './util/point'
 import {
   clamp,
   consoleError,
@@ -16,16 +20,15 @@ import {
   parseAnchor,
   propsFactory,
 } from '@/util'
-import { Box, getOverflow } from '@/util/box'
-import { anchorToPoint, getOffset } from './util/point'
+import { Box, getOverflow, getTargetBox } from '@/util/box'
 
 // Types
-import type { EffectScope, PropType, Ref } from 'vue'
+import type { PropType, Ref } from 'vue'
 import type { Anchor } from '@/util'
 
 export interface LocationStrategyData {
   contentEl: Ref<HTMLElement | undefined>
-  activatorEl: Ref<HTMLElement | undefined>
+  target: Ref<HTMLElement | [x: number, y: number] | undefined>
   isActive: Ref<boolean>
   isRtl: Ref<boolean>
 }
@@ -34,7 +37,7 @@ type LocationStrategyFn = (
   data: LocationStrategyData,
   props: StrategyProps,
   contentStyles: Ref<Record<string, string>>
-) => undefined | { updateLocation: (e: Event) => void }
+) => undefined | { updateLocation: (e?: Event) => void }
 
 const locationStrategies = {
   static: staticLocationStrategy, // specific viewport position, usually centered
@@ -67,7 +70,7 @@ export const makeLocationStrategyProps = propsFactory({
     default: 'auto',
   },
   offset: [Number, String, Array] as PropType<StrategyProps['offset']>,
-}, 'v-overlay-location-strategies')
+}, 'VOverlay-location-strategies')
 
 export function useLocationStrategies (
   props: StrategyProps,
@@ -76,31 +79,23 @@ export function useLocationStrategies (
   const contentStyles = ref({})
   const updateLocation = ref<(e: Event) => void>()
 
-  let scope: EffectScope | undefined
-  watchEffect(async () => {
-    scope?.stop()
-    updateLocation.value = undefined
+  if (IN_BROWSER) {
+    useToggleScope(() => !!(data.isActive.value && props.locationStrategy), reset => {
+      watch(() => props.locationStrategy, reset)
+      onScopeDispose(() => {
+        window.removeEventListener('resize', onResize)
+        updateLocation.value = undefined
+      })
 
-    if (!(IN_BROWSER && data.isActive.value && props.locationStrategy)) return
+      window.addEventListener('resize', onResize, { passive: true })
 
-    scope = effectScope()
-    if (!(props.locationStrategy === 'connected')) { await nextTick() }
-    scope.run(() => {
       if (typeof props.locationStrategy === 'function') {
         updateLocation.value = props.locationStrategy(data, props, contentStyles)?.updateLocation
       } else {
         updateLocation.value = locationStrategies[props.locationStrategy](data, props, contentStyles)?.updateLocation
       }
     })
-  })
-
-  IN_BROWSER && window.addEventListener('resize', onResize, { passive: true })
-
-  onScopeDispose(() => {
-    IN_BROWSER && window.removeEventListener('resize', onResize)
-    updateLocation.value = undefined
-    scope?.stop()
-  })
+  }
 
   function onResize (e: Event) {
     updateLocation.value?.(e)
@@ -117,7 +112,7 @@ function staticLocationStrategy () {
 }
 
 /** Get size of element ignoring max-width/max-height */
-function getIntrinsicSize (el: HTMLElement) {
+function getIntrinsicSize (el: HTMLElement, isRtl: boolean) {
   // const scrollables = new Map<Element, [number, number]>()
   // el.querySelectorAll('*').forEach(el => {
   //   const x = el.scrollLeft
@@ -135,7 +130,11 @@ function getIntrinsicSize (el: HTMLElement) {
   /* eslint-disable-next-line sonarjs/prefer-immediate-return */
   const contentBox = nullifyTransforms(el)
 
-  contentBox.x -= parseFloat(el.style.left || 0)
+  if (isRtl) {
+    contentBox.x += parseFloat(el.style.right || 0)
+  } else {
+    contentBox.x -= parseFloat(el.style.left || 0)
+  }
   contentBox.y -= parseFloat(el.style.top || 0)
 
   // el.style.maxWidth = initialMaxWidth
@@ -148,10 +147,12 @@ function getIntrinsicSize (el: HTMLElement) {
 }
 
 function connectedLocationStrategy (data: LocationStrategyData, props: StrategyProps, contentStyles: Ref<Record<string, string>>) {
-  const activatorFixed = isFixedPosition(data.activatorEl.value)
+  const activatorFixed = Array.isArray(data.target.value) || isFixedPosition(data.target.value)
   if (activatorFixed) {
     Object.assign(contentStyles.value, {
       position: 'fixed',
+      top: 0,
+      [data.isRtl.value ? 'right' : 'left']: 0,
     })
   }
 
@@ -201,9 +202,9 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
     if (observe) updateLocation()
   })
 
-  watch([data.activatorEl, data.contentEl], ([newActivatorEl, newContentEl], [oldActivatorEl, oldContentEl]) => {
-    if (oldActivatorEl) observer.unobserve(oldActivatorEl)
-    if (newActivatorEl) observer.observe(newActivatorEl)
+  watch([data.target, data.contentEl], ([newTarget, newContentEl], [oldTarget, oldContentEl]) => {
+    if (oldTarget && !Array.isArray(oldTarget)) observer.unobserve(oldTarget)
+    if (newTarget && !Array.isArray(newTarget)) observer.observe(newTarget)
 
     if (oldContentEl) observer.unobserve(oldContentEl)
     if (newContentEl) observer.observe(newContentEl)
@@ -218,22 +219,20 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
   // eslint-disable-next-line max-statements
   function updateLocation () {
     observe = false
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => observe = true)
-    })
+    requestAnimationFrame(() => observe = true)
 
-    if (!data.activatorEl.value || !data.contentEl.value) return
+    if (!data.target.value || !data.contentEl.value) return
 
-    const targetBox = data.activatorEl.value.getBoundingClientRect()
-    const contentBox = getIntrinsicSize(data.contentEl.value)
+    const targetBox = getTargetBox(data.target.value)
+    const contentBox = getIntrinsicSize(data.contentEl.value, data.isRtl.value)
     const scrollParents = getScrollParents(data.contentEl.value)
     const viewportMargin = 12
 
     if (!scrollParents.length) {
       scrollParents.push(document.documentElement)
       if (!(data.contentEl.value.style.top && data.contentEl.value.style.left)) {
-        contentBox.x += parseFloat(document.documentElement.style.getPropertyValue('--v-body-scroll-x') || 0)
-        contentBox.y += parseFloat(document.documentElement.style.getPropertyValue('--v-body-scroll-y') || 0)
+        contentBox.x -= parseFloat(document.documentElement.style.getPropertyValue('--v-body-scroll-x') || 0)
+        contentBox.y -= parseFloat(document.documentElement.style.getPropertyValue('--v-body-scroll-y') || 0)
       }
     }
 
@@ -389,11 +388,17 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
       transformOrigin: `${placement.origin.side} ${placement.origin.align}`,
       // transform: `translate(${pixelRound(x)}px, ${pixelRound(y)}px)`,
       top: convertToUnit(pixelRound(y)),
-      left: convertToUnit(pixelRound(x)),
+      left: data.isRtl.value ? undefined : convertToUnit(pixelRound(x)),
+      right: data.isRtl.value ? convertToUnit(pixelRound(-x)) : undefined,
       minWidth: convertToUnit(axis === 'y' ? Math.min(minWidth.value, targetBox.width) : minWidth.value),
       maxWidth: convertToUnit(pixelCeil(clamp(available.x, minWidth.value === Infinity ? 0 : minWidth.value, maxWidth.value))),
       maxHeight: convertToUnit(pixelCeil(clamp(available.y, minHeight.value === Infinity ? 0 : minHeight.value, maxHeight.value))),
     })
+
+    return {
+      available,
+      contentBox,
+    }
   }
 
   watch(
@@ -407,12 +412,23 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
       props.maxHeight,
     ],
     () => updateLocation(),
-    { immediate: !activatorFixed }
   )
 
-  if (activatorFixed) nextTick(() => updateLocation())
-  requestAnimationFrame(() => {
-    if (contentStyles.value.maxHeight) updateLocation()
+  nextTick(() => {
+    const result = updateLocation()
+
+    // TODO: overflowing content should only require a single updateLocation call
+    // Icky hack to make sure the content is positioned consistently
+    if (!result) return
+    const { available, contentBox } = result
+    if (contentBox.height > available.y) {
+      requestAnimationFrame(() => {
+        updateLocation()
+        requestAnimationFrame(() => {
+          updateLocation()
+        })
+      })
+    }
   })
 
   return { updateLocation }

@@ -1,3 +1,8 @@
 {
-  "argument": "An object containing options for the ripple effect. `class` applies a custom class to the ripple, and can be used for changing color. `center` forces the ripple to originate from the center of the target."
+  "value": "An object containing options for the ripple effect. `class` applies a custom class to the ripple, and can be used for changing color. `center` forces the ripple to originate from the center of the target instead of the cursor position.",
+  "modifiers": {
+    "center": "Makes it so that the ripple originates from the center of the element, instead where the user clicked on it.",
+    "circle": "Changes the ripple behavior to better match circular elements.",
+    "stop": "Prevents ripples from being triggered on any other elements when the click event is bubbling up."
+  }
 }

@@ -103,7 +103,7 @@ describe.skip('VCombobox.ts', () => {
     expect(event).toHaveBeenCalledWith(item)
   })
 
-  it('should not populate search field if value is falsey', async () => {
+  it('should not populate search field if value is falsy', async () => {
     const wrapper = mountFunction()
 
     const event = jest.fn()
@@ -291,7 +291,7 @@ describe.skip('VCombobox.ts', () => {
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/8476
-  it('should properly compare falsey values when setting', async () => {
+  it('should properly compare falsy values when setting', async () => {
     const wrapper = mountFunction()
 
     wrapper.vm.setValue(0)
@@ -301,7 +301,7 @@ describe.skip('VCombobox.ts', () => {
     expect(wrapper.vm.internalValue).toBe('')
 
     wrapper.vm.setValue(null)
-    expect(wrapper.vm.internalValue).toBeUndefined()
+    expect(wrapper.vm.internalValue).toBeNull()
 
     wrapper.vm.setValue(undefined)
     expect(wrapper.vm.internalValue).toBeUndefined()
@@ -309,7 +309,7 @@ describe.skip('VCombobox.ts', () => {
     wrapper.setData({ lazySearch: 'foo' })
 
     wrapper.vm.setValue(null)
-    expect(wrapper.vm.internalValue).toBe('foo')
+    expect(wrapper.vm.internalValue).toBeNull()
 
     wrapper.vm.setValue(undefined)
     expect(wrapper.vm.internalValue).toBe('foo')

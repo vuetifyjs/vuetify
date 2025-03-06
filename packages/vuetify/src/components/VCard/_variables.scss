@@ -1,14 +1,9 @@
+@use 'sass:map';
 @use '../../styles/settings';
 @use '../../styles/tools';
 
 // VCard
-$card-actions-flex: none !default;
-$card-actions-min-height: 52px !default;
-$card-actions-padding: .5rem !default;
-$card-append-padding-inline-start: 1rem !default;
-$card-avatar-align-self: flex-start !default;
-$card-avatar-header-padding: 0 !default;
-$card-avatar-padding: .5rem 1rem !default;
+$card-append-padding-inline-start: .5rem !default;
 $card-background: rgb(var(--v-theme-surface)) !default;
 $card-border-color: settings.$border-color-root !default;
 $card-border-radius: settings.$border-radius-root !default;
@@ -28,10 +23,17 @@ $card-overflow-wrap: break-word !default;
 $card-padding: 0 !default;
 $card-plain-opacity: .62 !default;
 $card-positions: absolute fixed !default;
-$card-prepend-padding-inline-end: 1rem !default;
+$card-prepend-padding-inline-end: .5rem !default;
 $card-transition-duration: 0.28s !default;
 $card-transition-property: box-shadow, opacity, background !default;
 $card-transition-timing-function: settings.$standard-easing !default;
+
+// VCardActions
+$card-actions-flex: none !default;
+$card-actions-min-height: 52px !default;
+$card-actions-padding: .5rem !default;
+$button-card-actions-margin: .5rem !default; // deprecated
+$card-actions-gap: $button-card-actions-margin !default;
 
 // VCardHeader
 $card-header-flex: none !default;
@@ -48,7 +50,6 @@ $card-title-letter-spacing: tools.map-deep-get(settings.$typography, 'h6', 'lett
 $card-title-line-height: tools.map-deep-get(settings.$typography, 'h6', 'line-height') !default;
 $card-title-overflow-wrap: normal !default;
 $card-title-overflow: hidden !default;
-$card-title-padding-top: 1rem !default;
 $card-title-padding: .5rem 1rem !default;
 $card-title-text-overflow: ellipsis !default;
 $card-title-text-transform: none !default;
@@ -66,7 +67,7 @@ $card-subtitle-font-weight: tools.map-deep-get(settings.$typography, 'body-2', '
 $card-subtitle-header-padding: 0 0 .25rem !default;
 $card-subtitle-letter-spacing: tools.map-deep-get(settings.$typography, 'body-2', 'letter-spacing') !default;
 $card-subtitle-line-height: tools.map-deep-get(settings.$typography, 'body-2', 'line-height') !default;
-$card-subtitle-opacity: var(--v-medium-emphasis-opacity) !default;
+$card-subtitle-opacity: var(--v-card-subtitle-opacity, var(--v-medium-emphasis-opacity)) !default;
 $card-subtitle-overflow: hidden !default;
 $card-subtitle-padding: 0 1rem !default;
 $card-subtitle-text-overflow: ellipsis !default;
@@ -79,9 +80,9 @@ $card-text-compact-line-height: 1.15rem !default;
 $card-text-flex: 1 1 auto !default;
 $card-text-font-size: tools.map-deep-get(settings.$typography, 'body-2', 'size') !default;
 $card-text-font-weight: tools.map-deep-get(settings.$typography, 'body-2', 'weight') !default;
+$card-text-opacity: var(--v-card-text-opacity, 1) !default;
 $card-text-letter-spacing: tools.map-deep-get(settings.$typography, 'body-2', 'letter-spacing') !default;
 $card-text-line-height: tools.map-deep-get(settings.$typography, 'body-2', 'line-height') !default;
-$card-text-padding-bottom: 1rem !default;
 $card-text-padding: 1rem !default;
 $card-text-text-transform: tools.map-deep-get(settings.$typography, 'body-2', 'text-transform') !default;
 
@@ -94,27 +95,25 @@ $card-border: (
 ) !default;
 
 $card-title-densities: () !default;
-$card-title-densities: (
+$card-title-densities: map.merge((
   null: $card-title-line-height,
   'comfortable': $card-title-comfortable-line-height,
   'compact': $card-title-compact-line-height
-);
+), $card-title-densities);
 
-$card-subtitle-densities: ('default': 0, 'comfortable': -1, 'compact': -2);
-
-$card-subtitle-densities: () !default;
-$card-subtitle-densities: (
+$card-subtitle-density-line-height: () !default;
+$card-subtitle-density-line-height: map.merge((
   null: $card-subtitle-line-height,
   'comfortable': $card-subtitle-comfortable-line-height,
   'compact': $card-subtitle-compact-line-height
-);
+), $card-subtitle-density-line-height);
 
-$card-text-densities: () !default;
-$card-text-densities: (
+$card-text-density-line-height: () !default;
+$card-text-density-line-height: map.merge((
   null: $card-text-line-height,
   'comfortable': $card-text-comfortable-line-height,
   'compact': $card-text-compact-line-height
-);
+), $card-text-density-line-height);
 
 $card-variants: (
   $card-background,
@@ -122,4 +121,11 @@ $card-variants: (
   $card-elevation,
   $card-plain-opacity,
   'v-card'
-);
+) !default;
+
+// Deprecated
+$card-avatar-align-self: flex-start !default;
+$card-avatar-header-padding: 0 !default;
+$card-avatar-padding: .5rem 1rem !default;
+$card-title-padding-top: 1rem !default;
+$card-text-padding-bottom: 1rem !default;

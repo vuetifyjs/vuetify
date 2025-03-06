@@ -8,8 +8,8 @@
         >
           <v-text-field
             v-model="firstname"
-            :rules="nameRules"
             :counter="10"
+            :rules="nameRules"
             label="First name"
             required
           ></v-text-field>
@@ -21,8 +21,8 @@
         >
           <v-text-field
             v-model="lastname"
-            :rules="nameRules"
             :counter="10"
+            :rules="nameRules"
             label="Last name"
             required
           ></v-text-field>
@@ -51,13 +51,29 @@
       firstname: '',
       lastname: '',
       nameRules: [
-        v => !!v || 'Name is required',
-        v => v.length <= 10 || 'Name must be less than 10 characters',
+        value => {
+          if (value) return true
+
+          return 'Name is required.'
+        },
+        value => {
+          if (value?.length <= 10) return true
+
+          return 'Name must be less than 10 characters.'
+        },
       ],
       email: '',
       emailRules: [
-        v => !!v || 'E-mail is required',
-        v => /.+@.+/.test(v) || 'E-mail must be valid',
+        value => {
+          if (value) return true
+
+          return 'E-mail is required.'
+        },
+        value => {
+          if (/.+@.+\..+/.test(value)) return true
+
+          return 'E-mail must be valid.'
+        },
       ],
     }),
   }

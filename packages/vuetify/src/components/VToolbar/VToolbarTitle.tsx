@@ -1,39 +1,46 @@
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { makeTagProps } from '@/composables/tag'
 
 // Utilities
-import { genericComponent, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
-// Types
-import type { SlotsToProps } from '@/util'
+export const makeVToolbarTitleProps = propsFactory({
+  text: String,
 
-export const VToolbarTitle = genericComponent<new () => {
-  $props: SlotsToProps<{
-    default: []
-    text: []
-  }>
-}>()({
+  ...makeComponentProps(),
+  ...makeTagProps(),
+}, 'VToolbarTitle')
+
+export type VToolbarTitleSlots = {
+  default: never
+  text: never
+}
+
+export const VToolbarTitle = genericComponent<VToolbarTitleSlots>()({
   name: 'VToolbarTitle',
 
-  props: {
-    text: String,
-
-    ...makeTagProps(),
-  },
+  props: makeVToolbarTitleProps(),
 
   setup (props, { slots }) {
     useRender(() => {
       const hasText = !!(slots.default || slots.text || props.text)
 
       return (
-        <props.tag class="v-toolbar-title">
+        <props.tag
+          class={[
+            'v-toolbar-title',
+            props.class,
+          ]}
+          style={ props.style }
+        >
           { hasText && (
             <div class="v-toolbar-title__placeholder">
               { slots.text ? slots.text() : props.text }
 
               { slots.default?.() }
             </div>
-          ) }
+          )}
         </props.tag>
       )
     })

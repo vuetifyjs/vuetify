@@ -1,6 +1,23 @@
 // Styles
 import 'prism-theme-vars/base.css'
 
+// Plugins
+import * as Swetrix from 'swetrix'
+import * as Sentry from '@sentry/vue'
+import { createApp } from 'vue'
+import { createRouter, createWebHistory } from 'vue-router'
+import { createHead } from '@unhead/vue'
+import { installVuetify } from '@/plugins/vuetify'
+import { installPinia, pinia } from '@/plugins/pinia'
+import { installGlobalComponents } from '@/plugins/global-components'
+import { installGtag } from '@/plugins/gtag'
+import { installOne } from '@/plugins/one'
+import { installI18n } from '@/plugins/i18n'
+import { useAppStore } from '@/stores/app'
+import { useLocaleStore } from '@/stores/locale'
+import { installPwa } from '@/plugins/pwa'
+import { useUserStore } from '@vuetify/one'
+
 // App
 import App from './App.vue'
 
@@ -8,92 +25,172 @@ import App from './App.vue'
 // import 'virtual:api'
 import { setupLayouts } from 'virtual:generated-layouts'
 
-// Plugins
-import { pinia, usePinia } from '@/plugins/pinia'
-import { useGlobalComponents } from '@/plugins/global-components'
-import { useGtag } from '@/plugins/gtag'
-import { useI18n } from '@/plugins/i18n'
-import { useLocaleStore } from '@/store/locale'
-import { usePwa } from '@/plugins/pwa'
-import { useUserStore } from '@/store/user'
-import { useVuetify } from '@/plugins/vuetify'
-import { ViteSSG } from '@vuetify/vite-ssg'
-
 // Utilities
-import { fallbackLocale, generatedRoutes, rpath, trailingSlash } from '@/util/routes'
+import {
+  disabledLanguagePattern,
+  generatedRoutes,
+  languagePattern,
+  redirectRoutes,
+  rpath,
+  trailingSlash,
+} from '@/utils/routes'
+import { wrapInArray } from '@/utils/helpers'
 
 // Globals
-import { IN_BROWSER } from '@/util/globals'
+import { IN_BROWSER } from '@/utils/globals'
 
 const routes = setupLayouts(generatedRoutes)
 
+const appStore = useAppStore(pinia)
 const localeStore = useLocaleStore(pinia)
 const userStore = useUserStore(pinia)
 
-localeStore.$subscribe((_, state) => {
-  window.localStorage.setItem('currentLocale', state.locale)
-})
+const app = createApp(App)
 
-userStore.$subscribe(() => {
-  userStore.save()
-})
+if (IN_BROWSER) {
+  localeStore.$subscribe((_, state) => {
+    window.localStorage.setItem('currentLocale', state.locale)
+  })
+  userStore.$subscribe(() => {
+    userStore.save()
+  })
+  Swetrix.init('ycvR7fW63FFz', {
+    apiURL: 'https://swetrix-api.vuetifyjs.com/log',
+  })
+  Swetrix.trackViews()
+  Sentry.init({
+    app,
+    dsn: 'https://491ef7e8180648c488b1fcc158eb9ecc@glitchtip.vuetifyjs.com/1',
+    release: import.meta.env.VITE_GITHUB_SHA,
+    environment: import.meta.env.VITE_GITHUB_REF,
+    enabled: import.meta.env.VITE_GITHUB_SHA,
 
-// https://github.com/antfu/vite-ssg
-export const createApp = ViteSSG(
-  App,
-  {
-    routes: [
-      {
-        path: '/',
-        redirect: () => {
-          return { path: `/${localeStore.locale}/` }
-        },
-      },
-      ...routes,
-      {
-        path: `/:locale(${fallbackLocale})/:pathMatch(.*)*`,
-        component: () => import('@/layouts/404.vue'),
-      },
-      {
-        path: '/:pathMatch(.*)*',
-        redirect: to => {
-          return rpath(to.fullPath)
-        },
-      },
-    ],
-    scrollBehavior (to, from, savedPosition) {
-      const main = IN_BROWSER && document.querySelector('main')
+    sampleRate: 1,
+  })
+}
 
-      if (savedPosition) return savedPosition
-      if (to.hash) {
-        return {
-          el: to.hash,
-          behavior: 'smooth',
-          top: main ? parseInt(getComputedStyle(main).getPropertyValue('--v-layout-top')) : 0,
-        }
-      } else return { top: 0 }
+const router = createRouter({
+  history: createWebHistory(),
+  routes: [
+    {
+      path: '/',
+      redirect: () => {
+        return { path: `/${localeStore.locale}/` }
+      },
     },
-  },
-  ctx => {
-    ctx.app.config.errorHandler = (err, vm, info) => {
-      console.error(err, vm, info)
-    }
-    ctx.app.config.warnHandler = (err, vm, info) => {
-      console.warn(err, vm, info)
+    ...routes,
+    ...redirectRoutes,
+    {
+      path: `/:locale(${disabledLanguagePattern})/:pathMatch(.*)*`,
+      redirect: to => {
+        return rpath(wrapInArray(to.params.pathMatch).join('/'))
+      },
+    },
+    {
+      path: `/:locale(${languagePattern})/:pathMatch(.*)*`,
+      component: () => import('@/layouts/404.vue'),
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      redirect: to => {
+        return rpath(to.fullPath)
+      },
+    },
+  ],
+  async scrollBehavior (to, from, savedPosition) {
+    if (appStore.scrolling) return
+
+    let main = IN_BROWSER && document.querySelector('main')
+    // For default & hash navigation
+    let wait = 0
+
+    if (!main) {
+      // For initial page load
+      wait = 1500
+      main = document.querySelector('main')
+    } else if (to.path !== from.path && to.hash) {
+      // For cross page navigation
+      wait = 500
     }
 
-    ctx.router.beforeEach(({ path, hash }, from, next) => {
-      return path.endsWith('/') ? next() : next(`${trailingSlash(path)}` + hash)
-    })
-    ctx.router.onError(err => {
-      console.error(err)
-    })
+    await (new Promise(resolve => setTimeout(resolve, wait)))
 
-    useGlobalComponents(ctx)
-    useGtag(ctx)
-    useI18n(ctx)
-    usePwa(ctx)
-    usePinia(ctx)
-    useVuetify(ctx)
+    if (to.hash) {
+      return {
+        el: to.hash,
+        behavior: main ? 'smooth' : undefined,
+        top: main ? parseInt(getComputedStyle(main).getPropertyValue('--v-layout-top')) : 0,
+      }
+    } else if (savedPosition) return savedPosition
+    else return { top: 0 }
   },
-)
+})
+
+app.use(createHead())
+app.use(router)
+
+app.config.errorHandler = (err, vm, info) => {
+  console.error(err, vm, info)
+  Swetrix.trackError({
+    name: (err as any).name,
+    message: (err as any).message,
+    lineno: null,
+    colno: null,
+    filename: null,
+  })
+}
+app.config.warnHandler = (err, vm, info) => {
+  console.warn(err, vm, info)
+}
+
+router.beforeEach((to, from, next) => {
+  if (to.meta.locale !== from.meta.locale) {
+    localeStore.locale = to.meta.locale as string
+  }
+  return to.path.endsWith('/') ? next() : next(`${trailingSlash(to.path)}` + to.hash)
+})
+router.afterEach((to, from) => {
+  if (to.meta.locale !== from.meta.locale && from.meta.locale === 'eo-UY') {
+    setTimeout(() => window.location.reload(), 100)
+  }
+})
+router.onError((err, to) => {
+  if (err?.message?.includes?.('Failed to fetch dynamically imported module')) {
+    if (!localStorage.getItem('vuetify:dynamic-reload')) {
+      console.log('Reloading page to fix dynamic import error')
+      localStorage.setItem('vuetify:dynamic-reload', 'true')
+      location.assign(to.fullPath)
+    } else {
+      console.error('Dynamic import error, reloading page did not fix it', err)
+      Swetrix.trackError({
+        name: err.name,
+        message: err.message,
+        lineno: null,
+        colno: null,
+        filename: null,
+      })
+    }
+  } else {
+    console.error(err)
+    Swetrix.trackError({
+      name: err?.name,
+      message: err?.message,
+      lineno: null,
+      colno: null,
+      filename: null,
+    })
+  }
+})
+
+installGlobalComponents(app)
+installGtag(app, router)
+installI18n(app)
+installPwa(router)
+installPinia(app, router)
+installVuetify(app)
+installOne(app)
+
+router.isReady().then(() => {
+  localStorage.removeItem('vuetify:dynamic-reload')
+  app.mount('#app')
+})

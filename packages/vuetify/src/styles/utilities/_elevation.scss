@@ -1,0 +1,16 @@
+@use 'sass:list';
+@use '../tools';
+@use '../settings';
+
+@if (settings.$utilities != false and list.length(settings.$utilities) > 0) {
+  @include tools.layer('utilities') {
+    $z: 24;
+    @while $z >= 0 {
+      .elevation-#{$z} {
+        @include tools.elevation($z, $important: true);
+      }
+
+      $z: $z - 1;
+    }
+  }
+}

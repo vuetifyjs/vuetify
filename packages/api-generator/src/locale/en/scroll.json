@@ -1,6 +1,0 @@
-{
-  "props": {
-    "scrollTarget": "Designates the element to target for scrolling events. Uses `window` by default.",
-    "scrollThreshold": "The amount of scroll distance down before **hide-on-scroll** activates."
-  }
-}

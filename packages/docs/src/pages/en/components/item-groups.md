@@ -1,6 +1,6 @@
 ---
-nav: Item groups
 meta:
+  nav: Item groups
   title: Item group component
   description: The item group components provides the ability to create a group of selectable items out of any component.
   keywords: item groups, vuetify item group component, vue item group component
@@ -8,29 +8,34 @@ related:
   - /components/button-groups
   - /components/carousels
   - /components/tabs
+features:
+  github: /components/VItemGroup/
+  label: 'C: VItemGroup'
+  report: true
 ---
 
 # Item groups
 
 The `v-item-group` provides the ability to create a group of selectable items out of any component. This is the baseline functionality for components such as `v-tabs` and `v-carousel`.
 
-<entry />
+<PageFeatures />
 
 ## Usage
 
 The core usage of the `v-item-group` is to create groups of anything that should be controlled by a **model**.
 
-<!-- <example file="v-item-group/usage" /> -->
+<!-- <ExamplesExample file="v-item-group/usage" /> -->
+
+<PromotedEntry />
 
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-item-group](/api/v-item-group/) | The item group component. |
+| [v-item](/api/v-item/) | Sub-component used for modifying the `v-item-group` state |
 
-<!-- ## Sub-components
-
-### v-item
-
-v-item description -->
+<ApiInline hide-links />
 
 ## Examples
 
@@ -40,19 +45,19 @@ v-item description -->
 
 The **selected-class** prop allows you to designate a CSS class applied to _selected_ items.
 
-<example file="v-item-group/prop-selected-class" />
+<ExamplesExample file="v-item-group/prop-selected-class" />
 
 #### Mandatory
 
 **mandatory** item groups must have at least 1 item selected.
 
-<example file="v-item-group/prop-mandatory" />
+<ExamplesExample file="v-item-group/prop-mandatory" />
 
 #### Multiple
 
 Item groups can have **multiple** items selected.
 
-<example file="v-item-group/prop-multiple" />
+<ExamplesExample file="v-item-group/prop-multiple" />
 
 ### Misc
 
@@ -60,10 +65,10 @@ Item groups can have **multiple** items selected.
 
 Easily hook up a custom chip group.
 
-<example file="v-item-group/misc-chips" />
+<ExamplesExample file="v-item-group/misc-chips" />
 
 #### Selection
 
 Icons can be used as toggle buttons when they allow selection, or deselection, of a single choice, such as marking an item as a favorite.
 
-<example file="v-item-group/misc-selection" />
+<ExamplesExample file="v-item-group/misc-selection" />

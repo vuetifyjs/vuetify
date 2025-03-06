@@ -1,29 +1,31 @@
 <template>
-  <v-row justify="space-around">
-    <v-col
-      cols="12"
-      sm="10"
-      md="8"
+  <v-sheet class="py-4 px-1">
+    <v-chip-group
+      selected-class="text-primary"
+      mandatory
     >
-      <v-sheet
-        elevation="10"
-        class="py-4 px-1"
-      >
-        <v-chip-group
-          mandatory
-          selected-class="text-primary"
-        >
-          <v-chip
-            v-for="tag in tags"
-            :key="tag"
-          >
-            {{ tag }}
-          </v-chip>
-        </v-chip-group>
-      </v-sheet>
-    </v-col>
-  </v-row>
+      <v-chip
+        v-for="tag in tags"
+        :key="tag"
+        :text="tag"
+      ></v-chip>
+    </v-chip-group>
+  </v-sheet>
 </template>
+
+<script setup>
+  const tags = [
+    'Work',
+    'Home Improvement',
+    'Vacation',
+    'Food',
+    'Drawers',
+    'Shopping',
+    'Art',
+    'Tech',
+    'Creative Writing',
+  ]
+</script>
 
 <script>
   export default {

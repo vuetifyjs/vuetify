@@ -1,8 +1,0 @@
-{
-  "events": {
-    "group:selected": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-slide-group-item.json))"
-  },
-  "slots": {
-    "default": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-slide-group-item.json))"
-  }
-}

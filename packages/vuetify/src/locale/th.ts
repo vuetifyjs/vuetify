@@ -1,6 +1,12 @@
 export default {
   badge: 'สัญลักษณ์',
+  open: 'เปิด',
   close: 'ปิด',
+  dismiss: 'ยกเลิก',
+  confirmEdit: {
+    ok: 'ตกลง',
+    cancel: 'ยกเลิก',
+  },
   dataIterator: {
     noResultsText: 'ไม่พบข้อมูลที่ค้นหา',
     loadingText: 'กำลังโหลดข้อมูล...',
@@ -26,12 +32,20 @@ export default {
     lastPage: 'หน้าสุดท้าย',
     pageText: '{0}-{1} จาก {2}',
   },
+  dateRangeInput: {
+    divider: 'ถึง',
+  },
   datePicker: {
-    itemsSelected: 'เลือก {0} วัน',
-    nextMonthAriaLabel: 'เดือนถัดไป',
-    nextYearAriaLabel: 'ปีถัดไป',
-    prevMonthAriaLabel: 'เดือนก่อนหน้า',
-    prevYearAriaLabel: 'ปีก่อนหน้า',
+    itemsSelected: 'เลือกแล้ว {0} รายการ',
+    range: {
+      title: 'เลือกวันที่',
+      header: 'ป้อนวันที่',
+    },
+    title: 'เลือกวันที่',
+    header: 'ป้อนวันที่',
+    input: {
+      placeholder: 'ป้อนวันที่',
+    },
   },
   noDataText: 'ไม่มีข้อมูล',
   carousel: {
@@ -43,19 +57,27 @@ export default {
   },
   calendar: {
     moreEvents: 'มีอีก {0}',
+    today: 'วันนี้',
   },
   input: {
-    clear: 'Clear {0}',
-    prependAction: '{0} prepended action',
-    appendAction: '{0} appended action',
+    clear: 'ล้าง {0}',
+    prependAction: 'การกระทำก่อนหน้า {0}',
+    appendAction: 'การกระทำเพิ่มเติม {0}',
+    otp: 'กรุณากรอกตัวอักษร OTP ตัวที่ {0}',
   },
   fileInput: {
     counter: '{0} ไฟล์',
     counterSize: '{0} ไฟล์ (รวม {1})',
   },
+  fileUpload: {
+    title: 'ลากและวางไฟล์ที่นี่',
+    divider: 'หรือ',
+    browse: 'เลือกไฟล์',
+  },
   timePicker: {
-    am: 'AM',
-    pm: 'PM',
+    am: 'ช่วงเช้า',
+    pm: 'ช่วงบ่าย',
+    title: 'เลือกเวลา',
   },
   pagination: {
     ariaLabel: {
@@ -64,13 +86,22 @@ export default {
       previous: 'หน้าที่แล้ว',
       page: 'ไปที่หน้า {0}',
       currentPage: 'หน้าปัจจุบัน (หน้า {0})',
-      first: 'First page',
-      last: 'Last page',
+      first: 'หน้าแรก',
+      last: 'หน้าสุดท้าย',
     },
+  },
+  stepper: {
+    next: 'ถัดไป',
+    prev: 'ก่อนหน้า',
   },
   rating: {
     ariaLabel: {
-      item: 'Rating {0} of {1}',
+      item: 'คะแนน {0} จาก {1}',
     },
+  },
+  loading: 'กำลังโหลด...',
+  infiniteScroll: {
+    loadMore: 'โหลดเพิ่มเติม',
+    empty: 'ไม่มีข้อมูลเพิ่มเติม',
   },
 }

@@ -55,18 +55,3 @@
     </v-sheet>
   </div>
 </template>
-
-<script>
-  export default {
-    data: () => ({
-      justify: [
-        'start',
-        'end',
-        'center',
-        'baseline',
-        'auto',
-        'stretch',
-      ],
-    }),
-  }
-</script>

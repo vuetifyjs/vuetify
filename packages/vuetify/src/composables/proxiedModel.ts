@@ -1,16 +1,19 @@
-// Utilities
-import { computed, ref, watch } from 'vue'
-import { getCurrentInstance, toKebabCase } from '@/util'
+// Composables
 import { useToggleScope } from '@/composables/toggleScope'
+
+// Utilities
+import { computed, ref, toRaw, watch } from 'vue'
+import { getCurrentInstance, toKebabCase } from '@/util'
 
 // Types
 import type { Ref } from 'vue'
+import type { EventProp } from '@/util'
 
 type InnerVal<T> = T extends any[] ? Readonly<T> : T
 
 // Composables
 export function useProxiedModel<
-  Props extends object & { [key in Prop as `onUpdate:${Prop}`]: ((val: any) => void) | undefined },
+  Props extends object & { [key in Prop as `onUpdate:${Prop}`]: EventProp | undefined },
   Prop extends Extract<keyof Props, string>,
   Inner = Props[Prop],
 > (
@@ -46,14 +49,13 @@ export function useProxiedModel<
 
   const model = computed({
     get (): any {
-      return transformIn(isControlled.value ? props[prop] : internal.value)
+      const externalValue = props[prop]
+      return transformIn(isControlled.value ? externalValue : internal.value)
     },
-    set (value) {
-      const newValue = transformOut(value)
-      if (
-        (isControlled.value ? props[prop] : internal.value) === newValue ||
-        transformIn(isControlled.value ? props[prop] : internal.value) === value
-      ) {
+    set (internalValue) {
+      const newValue = transformOut(internalValue)
+      const value = toRaw(isControlled.value ? props[prop] : internal.value)
+      if (value === newValue || transformIn(value) === internalValue) {
         return
       }
       internal.value = newValue

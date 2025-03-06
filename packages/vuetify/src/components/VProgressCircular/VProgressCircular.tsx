@@ -2,44 +2,52 @@
 import './VProgressCircular.sass'
 
 // Composables
+import { useTextColor } from '@/composables/color'
+import { makeComponentProps } from '@/composables/component'
+import { useIntersectionObserver } from '@/composables/intersectionObserver'
+import { useResizeObserver } from '@/composables/resizeObserver'
 import { makeSizeProps, useSize } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { useIntersectionObserver } from '@/composables/intersectionObserver'
-import { useResizeObserver } from '@/composables/resizeObserver'
-import { useTextColor } from '@/composables/color'
 
 // Utilities
 import { computed, ref, toRef, watchEffect } from 'vue'
-import { convertToUnit, defineComponent, useRender } from '@/util'
+import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
 
-export const VProgressCircular = defineComponent({
+export const makeVProgressCircularProps = propsFactory({
+  bgColor: String,
+  color: String,
+  indeterminate: [Boolean, String] as PropType<boolean | 'disable-shrink'>,
+  modelValue: {
+    type: [Number, String],
+    default: 0,
+  },
+  rotate: {
+    type: [Number, String],
+    default: 0,
+  },
+  width: {
+    type: [Number, String],
+    default: 4,
+  },
+
+  ...makeComponentProps(),
+  ...makeSizeProps(),
+  ...makeTagProps({ tag: 'div' }),
+  ...makeThemeProps(),
+}, 'VProgressCircular')
+
+type VProgressCircularSlots = {
+  default: { value: number }
+}
+
+export const VProgressCircular = genericComponent<VProgressCircularSlots>()({
   name: 'VProgressCircular',
 
-  props: {
-    bgColor: String,
-    color: String,
-    indeterminate: [Boolean, String] as PropType<boolean | 'disable-shrink'>,
-    modelValue: {
-      type: [Number, String],
-      default: 0,
-    },
-    rotate: {
-      type: [Number, String],
-      default: 0,
-    },
-    width: {
-      type: [Number, String],
-      default: 4,
-    },
-
-    ...makeSizeProps(),
-    ...makeTagProps({ tag: 'div' }),
-    ...makeThemeProps(),
-  },
+  props: makeVProgressCircularProps(),
 
   setup (props, { slots }) {
     const MAGIC_RADIUS_CONSTANT = 20
@@ -86,10 +94,12 @@ export const VProgressCircular = defineComponent({
           themeClasses.value,
           sizeClasses.value,
           textColorClasses.value,
+          props.class,
         ]}
         style={[
           sizeStyles.value,
           textColorStyles.value,
+          props.style,
         ]}
         role="progressbar"
         aria-valuemin="0"
@@ -134,7 +144,7 @@ export const VProgressCircular = defineComponent({
           <div class="v-progress-circular__content">
             { slots.default({ value: normalizedValue.value }) }
           </div>
-        ) }
+        )}
       </props.tag>
     ))
 

@@ -1,0 +1,5 @@
+{
+  "props": {
+    "options": "Options that are passed to the [Intersection observer](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) constructor."
+  }
+}

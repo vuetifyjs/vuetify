@@ -1,35 +1,43 @@
 // Styles
 import './VColorPickerCanvas.sass'
 
+// Composables
+import { makeComponentProps } from '@/composables/component'
+import { useResizeObserver } from '@/composables/resizeObserver'
+
 // Utilities
-import { clamp, convertToUnit, defineComponent, getEventCoordinates, useRender } from '@/util'
-import { computed, onMounted, ref, watch } from 'vue'
+import { computed, onMounted, ref, shallowRef, watch } from 'vue'
+import { clamp, convertToUnit, defineComponent, getEventCoordinates, propsFactory, useRender } from '@/util'
 
 // Types
-import type { HSV } from '@/util'
 import type { PropType } from 'vue'
+import type { HSV } from '@/util'
+
+export const makeVColorPickerCanvasProps = propsFactory({
+  color: {
+    type: Object as PropType<HSV | null>,
+  },
+  disabled: Boolean,
+  dotSize: {
+    type: [Number, String],
+    default: 10,
+  },
+  height: {
+    type: [Number, String],
+    default: 150,
+  },
+  width: {
+    type: [Number, String],
+    default: 300,
+  },
+
+  ...makeComponentProps(),
+}, 'VColorPickerCanvas')
 
 export const VColorPickerCanvas = defineComponent({
   name: 'VColorPickerCanvas',
 
-  props: {
-    color: {
-      type: Object as PropType<HSV | null>,
-    },
-    disabled: Boolean,
-    dotSize: {
-      type: [Number, String],
-      default: 10,
-    },
-    height: {
-      type: [Number, String],
-      default: 150,
-    },
-    width: {
-      type: [Number, String],
-      default: 300,
-    },
-  },
+  props: makeVColorPickerCanvasProps(),
 
   emits: {
     'update:color': (color: HSV) => true,
@@ -37,9 +45,28 @@ export const VColorPickerCanvas = defineComponent({
   },
 
   setup (props, { emit }) {
-    const isInteracting = ref(false)
-    const isOutsideUpdate = ref(false)
-    const dotPosition = ref({ x: 0, y: 0 })
+    const isInteracting = shallowRef(false)
+    const canvasRef = ref<HTMLCanvasElement | null>()
+    const canvasWidth = shallowRef(parseFloat(props.width))
+    const canvasHeight = shallowRef(parseFloat(props.height))
+
+    const _dotPosition = ref({ x: 0, y: 0 })
+    const dotPosition = computed({
+      get: () => _dotPosition.value,
+      set (val) {
+        if (!canvasRef.value) return
+
+        const { x, y } = val
+        _dotPosition.value = val
+
+        emit('update:color', {
+          h: props.color?.h ?? 0,
+          s: clamp(x, 0, canvasWidth.value) / canvasWidth.value,
+          v: 1 - clamp(y, 0, canvasHeight.value) / canvasHeight.value,
+          a: props.color?.a ?? 1,
+        })
+      },
+    })
 
     const dotStyles = computed(() => {
       const { x, y } = dotPosition.value
@@ -52,7 +79,14 @@ export const VColorPickerCanvas = defineComponent({
       }
     })
 
-    const canvasRef = ref<HTMLCanvasElement | null>()
+    const { resizeRef } = useResizeObserver(entries => {
+      if (!resizeRef.el?.offsetParent) return
+
+      const { width, height } = entries[0].contentRect
+
+      canvasWidth.value = width
+      canvasHeight.value = height
+    })
 
     function updateDotPosition (x: number, y: number, rect: DOMRect) {
       const { left, top, width, height } = rect
@@ -62,19 +96,15 @@ export const VColorPickerCanvas = defineComponent({
       }
     }
 
-    function handleClick (e: MouseEvent) {
-      if (props.disabled || !canvasRef.value) return
-
-      updateDotPosition(e.clientX, e.clientY, canvasRef.value.getBoundingClientRect())
-    }
-
     function handleMouseDown (e: MouseEvent | TouchEvent) {
-      // To prevent selection while moving cursor
-      e.preventDefault()
+      if (e.type === 'mousedown') {
+        // Prevent text selection while dragging
+        e.preventDefault()
+      }
 
       if (props.disabled) return
 
-      isInteracting.value = true
+      handleMouseMove(e)
 
       window.addEventListener('mousemove', handleMouseMove)
       window.addEventListener('mouseup', handleMouseUp)
@@ -99,25 +129,6 @@ export const VColorPickerCanvas = defineComponent({
       window.removeEventListener('touchend', handleMouseUp)
     }
 
-    watch(dotPosition, () => {
-      if (isOutsideUpdate.value) {
-        isOutsideUpdate.value = false
-        return
-      }
-
-      if (!canvasRef.value) return
-
-      const { width, height } = canvasRef.value.getBoundingClientRect()
-      const { x, y } = dotPosition.value
-
-      emit('update:color', {
-        h: props.color?.h ?? 0,
-        s: clamp(x, 0, width) / width,
-        v: 1 - clamp(y, 0, height) / height,
-        a: props.color?.a ?? 1,
-      })
-    })
-
     function updateCanvas () {
       if (!canvasRef.value) return
 
@@ -133,13 +144,20 @@ export const VColorPickerCanvas = defineComponent({
       ctx.fillRect(0, 0, canvas.width, canvas.height)
 
       const valueGradient = ctx.createLinearGradient(0, 0, 0, canvas.height)
-      valueGradient.addColorStop(0, 'hsla(0, 0%, 100%, 0)') // transparent
+      valueGradient.addColorStop(0, 'hsla(0, 0%, 0%, 0)') // transparent
       valueGradient.addColorStop(1, 'hsla(0, 0%, 0%, 1)') // black
       ctx.fillStyle = valueGradient
       ctx.fillRect(0, 0, canvas.width, canvas.height)
     }
 
     watch(() => props.color?.h, updateCanvas, { immediate: true })
+    watch(() => [canvasWidth.value, canvasHeight.value], (newVal, oldVal) => {
+      updateCanvas()
+      _dotPosition.value = {
+        x: dotPosition.value.x * newVal[0] / oldVal[0],
+        y: dotPosition.value.y * newVal[1] / oldVal[1],
+      }
+    }, { flush: 'post' })
 
     watch(() => props.color, () => {
       if (isInteracting.value) {
@@ -147,43 +165,41 @@ export const VColorPickerCanvas = defineComponent({
         return
       }
 
-      if (!props.color) return
-
-      isOutsideUpdate.value = true
-
-      dotPosition.value = {
-        x: props.color.s * parseInt(props.width, 10),
-        y: (1 - props.color.v) * parseInt(props.height, 10),
-      }
+      _dotPosition.value = props.color ? {
+        x: props.color.s * canvasWidth.value,
+        y: (1 - props.color.v) * canvasHeight.value,
+      } : { x: 0, y: 0 }
     }, { deep: true, immediate: true })
 
     onMounted(() => updateCanvas())
 
     useRender(() => (
       <div
-        class="v-color-picker-canvas"
-        style={{
-          width: convertToUnit(props.width),
-          height: convertToUnit(props.height),
-        }}
-        onClick={ handleClick }
+        ref={ resizeRef }
+        class={[
+          'v-color-picker-canvas',
+          props.class,
+        ]}
+        style={ props.style }
         onMousedown={ handleMouseDown }
-        onTouchstart={ handleMouseDown }
+        onTouchstartPassive={ handleMouseDown }
       >
         <canvas
           ref={ canvasRef }
-          width={ props.width }
-          height={ props.height }
+          width={ canvasWidth.value }
+          height={ canvasHeight.value }
         />
-        <div
-          class={[
-            'v-color-picker-canvas__dot',
-            {
-              'v-color-picker-canvas__dot--disabled': props.disabled,
-            },
-          ]}
-          style={ dotStyles.value }
-        />
+        { props.color && (
+          <div
+            class={[
+              'v-color-picker-canvas__dot',
+              {
+                'v-color-picker-canvas__dot--disabled': props.disabled,
+              },
+            ]}
+            style={ dotStyles.value }
+          />
+        )}
       </div>
     ))
 

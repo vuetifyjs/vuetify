@@ -1,0 +1,5 @@
+{
+  "props": {
+    "selectedClass": "Configure the selected CSS class. This class will be available in `v-item` default scoped slot."
+  }
+}

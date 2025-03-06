@@ -1,13 +1,41 @@
 <template>
-  <v-layout>
-    <v-app-bar height="22" color="grey-darken-3" elevation="0"></v-app-bar>
-    <v-navigation-drawer width="72" color="grey-darken-2" permanent></v-navigation-drawer>
-    <v-navigation-drawer width="150" color="grey-darken-1" permanent></v-navigation-drawer>
-    <v-app-bar height="48" color="grey" elevation="0"></v-app-bar>
-    <v-navigation-drawer location="right" width="150" color="grey-lighten-1" permanent></v-navigation-drawer>
-    <v-app-bar location="bottom" height="48" color="grey-lighten-2" elevation="0"></v-app-bar>
-    <v-main>
-      <v-card elevation="0" height="400px"></v-card>
+  <v-layout class="rounded rounded-md">
+    <v-system-bar color="grey-darken-3"></v-system-bar>
+
+    <v-navigation-drawer
+      color="grey-darken-2"
+      width="72"
+      permanent
+    ></v-navigation-drawer>
+
+    <v-navigation-drawer
+      color="grey-darken-1"
+      width="150"
+      permanent
+    ></v-navigation-drawer>
+
+    <v-app-bar
+      color="grey"
+      height="48"
+      flat
+    ></v-app-bar>
+
+    <v-navigation-drawer
+      color="grey-lighten-1"
+      location="right"
+      width="150"
+      permanent
+    ></v-navigation-drawer>
+
+    <v-app-bar
+      color="grey-lighten-2"
+      height="48"
+      location="bottom"
+      flat
+    ></v-app-bar>
+
+    <v-main class="d-flex align-center justify-center" style="min-height: 300px;">
+      Main Content
     </v-main>
   </v-layout>
 </template>

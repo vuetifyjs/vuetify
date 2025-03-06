@@ -10,8 +10,8 @@
     >
       <v-row justify="center">
         <v-btn
-          color="success"
           class="mt-12"
+          color="success"
           @click="overlay = !overlay"
         >
           Show Overlay
@@ -19,8 +19,8 @@
 
         <v-overlay
           v-model="overlay"
-          contained
           class="align-center justify-center"
+          contained
         >
           <v-btn
             color="success"
@@ -33,6 +33,12 @@
     </v-card>
   </v-row>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const overlay = ref(false)
+</script>
 
 <script>
   export default {

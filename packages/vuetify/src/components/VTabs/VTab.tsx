@@ -2,68 +2,60 @@
 import './VTab.sass'
 
 // Components
-import { VBtn } from '@/components/VBtn'
+import { makeVBtnProps, VBtn } from '@/components/VBtn/VBtn'
 
 // Composables
-import { IconValue } from '@/composables/icons'
-import { makeGroupItemProps } from '@/composables/group'
-import { makeRouterProps } from '@/composables/router'
-import { makeTagProps } from '@/composables/tag'
-import { makeThemeProps } from '@/composables/theme'
 import { useTextColor } from '@/composables/color'
+import { forwardRefs } from '@/composables/forwardRefs'
 
 // Utilities
 import { computed, ref } from 'vue'
-import { animate, defineComponent, pick, standardEasing, useRender } from '@/util'
+import { VTabsSymbol } from './shared'
+import { animate, genericComponent, omit, propsFactory, standardEasing, useRender } from '@/util'
 
 // Types
-import { VTabsSymbol } from './shared'
 import type { PropType } from 'vue'
+import type { VBtnSlots } from '@/components/VBtn/VBtn'
 
-export const VTab = defineComponent({
+export const makeVTabProps = propsFactory({
+  fixed: Boolean,
+
+  sliderColor: String,
+  hideSlider: Boolean,
+
+  direction: {
+    type: String as PropType<'horizontal' | 'vertical'>,
+    default: 'horizontal',
+  },
+
+  ...omit(makeVBtnProps({
+    selectedClass: 'v-tab--selected',
+    variant: 'text' as const,
+  }), [
+    'active',
+    'block',
+    'flat',
+    'location',
+    'position',
+    'symbol',
+  ]),
+}, 'VTab')
+
+export const VTab = genericComponent<VBtnSlots>()({
   name: 'VTab',
 
-  props: {
-    fixed: Boolean,
-    icon: [Boolean, String, Function, Object] as PropType<boolean | IconValue>,
-    prependIcon: IconValue,
-    appendIcon: IconValue,
-
-    stacked: Boolean,
-    title: String,
-
-    ripple: {
-      type: Boolean,
-      default: true,
-    },
-    color: String,
-    sliderColor: String,
-    hideSlider: Boolean,
-
-    direction: {
-      type: String as PropType<'horizontal' | 'vertical'>,
-      default: 'horizontal',
-    },
-
-    ...makeTagProps(),
-    ...makeRouterProps(),
-    ...makeGroupItemProps({
-      selectedClass: 'v-tab--selected',
-    }),
-    ...makeThemeProps(),
-  },
+  props: makeVTabProps(),
 
   setup (props, { slots, attrs }) {
     const { textColorClasses: sliderColorClasses, textColorStyles: sliderColorStyles } = useTextColor(props, 'sliderColor')
-    const isHorizontal = computed(() => props.direction === 'horizontal')
-    const isSelected = ref(false)
 
     const rootEl = ref<VBtn>()
     const sliderEl = ref<HTMLElement>()
 
-    function updateSlider ({ value }: { value: boolean }) {
-      isSelected.value = value
+    const isHorizontal = computed(() => props.direction === 'horizontal')
+    const isSelected = computed(() => rootEl.value?.group?.isSelected.value ?? false)
 
+    function updateSlider ({ value }: { value: boolean }) {
       if (value) {
         const prevEl: HTMLElement | undefined = rootEl.value?.$el.parentElement?.querySelector('.v-tab--selected .v-tab__slider')
         const nextEl = sliderEl.value
@@ -90,16 +82,16 @@ export const VTab = defineComponent({
           : Math.sign(delta) < 0 ? (isHorizontal.value ? 'left' : 'top')
           : 'center'
         const size = Math.abs(delta) + (Math.sign(delta) < 0 ? prevBox[widthHeight] : nextBox[widthHeight])
-        const scale = size / Math.max(prevBox[widthHeight], nextBox[widthHeight])
-        const initialScale = prevBox[widthHeight] / nextBox[widthHeight]
+        const scale = size / Math.max(prevBox[widthHeight], nextBox[widthHeight]) || 0
+        const initialScale = prevBox[widthHeight] / nextBox[widthHeight] || 0
 
         const sigma = 1.5
         animate(nextEl, {
-          backgroundColor: [color, ''],
+          backgroundColor: [color, 'currentcolor'],
           transform: [
             `translate${XY}(${delta}px) scale${XY}(${initialScale})`,
             `translate${XY}(${delta / sigma}px) scale${XY}(${(scale - 1) / sigma + 1})`,
-            '',
+            'none',
           ],
           transformOrigin: Array(3).fill(origin),
         }, {
@@ -110,58 +102,51 @@ export const VTab = defineComponent({
     }
 
     useRender(() => {
-      const [btnProps] = pick(props, [
-        'href',
-        'to',
-        'replace',
-        'icon',
-        'stacked',
-        'prependIcon',
-        'appendIcon',
-        'ripple',
-        'theme',
-        'disabled',
-        'selectedClass',
-        'value',
-        'color',
-      ])
+      const btnProps = VBtn.filterProps(props)
 
       return (
         <VBtn
-          _as="VTab"
           symbol={ VTabsSymbol }
           ref={ rootEl }
           class={[
             'v-tab',
+            props.class,
           ]}
+          style={ props.style }
           tabindex={ isSelected.value ? 0 : -1 }
           role="tab"
           aria-selected={ String(isSelected.value) }
           active={ false }
-          block={ props.fixed }
-          maxWidth={ props.fixed ? 300 : undefined }
-          variant="text"
-          rounded={ 0 }
           { ...btnProps }
           { ...attrs }
+          block={ props.fixed }
+          maxWidth={ props.fixed ? 300 : undefined }
           onGroup:selected={ updateSlider }
         >
-          { slots.default ? slots.default() : props.title }
-          { !props.hideSlider && (
-            <div
-              ref={ sliderEl }
-              class={[
-                'v-tab__slider',
-                sliderColorClasses.value,
-              ]}
-              style={ sliderColorStyles.value }
-            />
-          ) }
+          {{
+            ...slots,
+            default: () => (
+              <>
+                { slots.default?.() ?? props.text }
+
+                { !props.hideSlider && (
+                  <div
+                    ref={ sliderEl }
+                    class={[
+                      'v-tab__slider',
+                      sliderColorClasses.value,
+                    ]}
+                    style={ sliderColorStyles.value }
+                  />
+                )}
+              </>
+            ),
+          }}
         </VBtn>
       )
     })
 
-    return {}
+    return forwardRefs({}, rootEl)
   },
 })
 

@@ -12,7 +12,7 @@
     // "checkJs": true,                       /* Report errors in .js files. */
     "jsx": "preserve",                        /* Specify JSX code generation: 'preserve', 'react-native', or 'react'. */
     "declaration": true,                      /* Generates corresponding '.d.ts' file. */
-    "declarationMap": true,
+    "declarationMap": false,
     "sourceMap": true,                        /* Generates corresponding '.map' file. */
     // "outFile": "./",                       /* Concatenate and emit output to single file. */
     "outDir": "./dist",                       /* Redirect output structure to the directory. */
@@ -23,6 +23,7 @@
     "downlevelIteration": true,               /* Provide full support for iterables in 'for-of', spread, and destructuring when targeting 'ES5' or 'ES3'. */
     // "isolatedModules": true,               /* Transpile each file as a separate module (similar to 'ts.transpileModule'). */
     "skipLibCheck": false,
+    "noErrorTruncation": true,
 
     /* Strict Type-Checking Options */
     "strict": true,                           /* Enable all strict type-checking options. */
@@ -40,7 +41,8 @@
     // "noFallthroughCasesInSwitch": true,    /* Report errors for fallthrough cases in switch statement. */
 
     /* Module Resolution Options */
-    "moduleResolution": "node",               /* Specify module resolution strategy: 'node' (Node.js) or 'classic' (TypeScript pre-1.6). */
+    "moduleResolution": "bundler",               /* Specify module resolution strategy: 'node' (Node.js) or 'classic' (TypeScript pre-1.6). */
+    "resolveJsonModule": true,
     // "baseUrl": "./",                       /* Base directory to resolve non-absolute module names. */
     // "paths": {                             /* A series of entries which re-map imports to lookup locations relative to the 'baseUrl'. */
     // },
@@ -49,6 +51,7 @@
     // "allowSyntheticDefaultImports": true,  /* Allow default imports from modules with no default export. This does not affect code emit, just typechecking. */
     "esModuleInterop": true,                  /* Enables emit interoperability between CommonJS and ES Modules via creation of namespace objects for all imports. Implies 'allowSyntheticDefaultImports'. */
     // "preserveSymlinks": true,              /* Do not resolve the real path of symlinks. */
+    // "allowImportingTsExtensions": true,
 
     /* Source Map Options */
     // "sourceRoot": "./",                    /* Specify the location where debugger should locate TypeScript files instead of source locations. */
@@ -62,5 +65,8 @@
   },
   "exclude": [
     "node_modules"
-  ]
+  ],
+  "vueCompilerOptions": {
+    "jsxSlots": true
+  }
 }

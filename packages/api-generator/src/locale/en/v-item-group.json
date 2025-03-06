@@ -1,8 +1,0 @@
-{
-  "props": {
-    "selectedClass": "Configure the selected CSS class. This class will be available in `v-item` default scoped slot."
-  },
-  "events": {
-    "update:modelValue": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-item-group.json))"
-  }
-}

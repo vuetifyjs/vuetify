@@ -1,37 +1,43 @@
+// Composables
+import { makeComponentProps } from '@/composables/component'
+import { makeGroupItemProps, useGroupItem } from '@/composables/group'
+import { makeLazyProps, useLazy } from '@/composables/lazy'
+import { useSsrBoot } from '@/composables/ssrBoot'
+import { MaybeTransition } from '@/composables/transition'
+
 // Directives
 import Touch from '@/directives/touch'
 
-// Composables
-import { makeGroupItemProps, useGroupItem } from '@/composables/group'
-import { makeLazyProps, useLazy } from '@/composables/lazy'
-import { MaybeTransition } from '@/composables/transition'
-import { useSsrBoot } from '@/composables/ssrBoot'
-
 // Utilities
-import { computed, inject, nextTick, ref } from 'vue'
-import { convertToUnit, defineComponent, useRender } from '@/util'
+import { computed, inject, nextTick, shallowRef } from 'vue'
+import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
+
+// Types
 import { VWindowGroupSymbol, VWindowSymbol } from './VWindow'
 
-export const VWindowItem = defineComponent({
+export const makeVWindowItemProps = propsFactory({
+  reverseTransition: {
+    type: [Boolean, String],
+    default: undefined,
+  },
+  transition: {
+    type: [Boolean, String],
+    default: undefined,
+  },
+
+  ...makeComponentProps(),
+  ...makeGroupItemProps(),
+  ...makeLazyProps(),
+}, 'VWindowItem')
+
+export const VWindowItem = genericComponent()({
   name: 'VWindowItem',
 
   directives: {
     Touch,
   },
 
-  props: {
-    reverseTransition: {
-      type: [Boolean, String],
-      default: undefined,
-    },
-    transition: {
-      type: [Boolean, String],
-      default: undefined,
-    },
-
-    ...makeGroupItemProps(),
-    ...makeLazyProps(),
-  },
+  props: makeVWindowItemProps(),
 
   emits: {
     'group:selected': (val: { value: boolean }) => true,
@@ -44,8 +50,12 @@ export const VWindowItem = defineComponent({
 
     if (!window || !groupItem) throw new Error('[Vuetify] VWindowItem must be used inside VWindow')
 
-    const isTransitioning = ref(false)
-    const hasTransition = computed(() => window.isReversed.value ? props.reverseTransition !== false : props.transition !== false)
+    const isTransitioning = shallowRef(false)
+    const hasTransition = computed(() => isBooted.value && (
+      window.isReversed.value
+        ? props.reverseTransition !== false
+        : props.transition !== false
+    ))
 
     function onAfterTransition () {
       if (!isTransitioning.value || !window) {
@@ -120,12 +130,14 @@ export const VWindowItem = defineComponent({
     const { hasContent } = useLazy(props, groupItem.isSelected)
 
     useRender(() => (
-      <MaybeTransition transition={ isBooted.value && transition.value } >
+      <MaybeTransition transition={ transition.value } disabled={ !isBooted.value }>
         <div
           class={[
             'v-window-item',
             groupItem.selectedClass.value,
+            props.class,
           ]}
+          style={ props.style }
           v-show={ groupItem.isSelected.value }
         >
           { hasContent.value && slots.default?.() }
@@ -133,7 +145,7 @@ export const VWindowItem = defineComponent({
       </MaybeTransition>
     ))
 
-    return {}
+    return { groupItem }
   },
 })
 

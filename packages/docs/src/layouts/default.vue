@@ -1,61 +1,47 @@
 <template>
   <v-app>
-    <app-banner />
+    <VoNotificationsBanner order="-1" />
 
-    <app-settings-drawer />
+    <AppSettingsDrawer />
 
-    <app-bar />
+    <AppBarBar />
 
-    <app-drawer />
+    <AppDrawerDrawer />
+
+    <AppToc v-if="!route.meta.fluid" />
+
+    <AppBackToTop />
 
     <v-main>
-      <v-container
-        :style="style"
-        class="pa-4 pa-sm-6 pa-md-8"
-        fluid
-        tag="section"
-      >
-        <router-view v-slot="{ Component }">
-          <v-fade-transition hide-on-leave>
-            <div :key="route.name">
-              <component :is="Component" />
-            </div>
-          </v-fade-transition>
-        </router-view>
+      <slot>
+        <v-container
+          :style="style"
+          class="pa-4 pa-sm-6 pa-md-8"
+          tag="section"
+          fluid
+        >
+          <slot name="view">
+            <router-view v-slot="{ Component }">
+              <v-fade-transition hide-on-leave>
+                <div :key="route.name">
+                  <component :is="Component" />
+                </div>
+              </v-fade-transition>
+            </router-view>
+          </slot>
 
-        <backmatter v-if="!isApi" :key="route.name" />
-      </v-container>
+          <Backmatter v-if="hasBackmatter" :key="route.name" />
+        </v-container>
+      </slot>
     </v-main>
-
-    <app-toc />
-
-    <app-pwa-snackbar />
   </v-app>
 </template>
 
 <script setup>
-  // Components
-  import AppBanner from '@/components/app/Banner.vue'
-  import AppBar from '@/components/app/bar/Bar.vue'
-  import AppDrawer from '@/components/app/drawer/Drawer.vue'
-  import AppSettingsDrawer from '@/components/app/settings/Drawer.vue'
-  import AppToc from '@/components/app/Toc.vue'
-  import AppPwaSnackbar from '@/components/app/PwaSnackbar.vue'
-
-  // Composables
-  import { useRoute } from 'vue-router'
-  import { useAppStore } from '@/store/app'
-
-  // Utilities
-  import { computed, onBeforeMount } from 'vue'
-
-  const app = useAppStore()
   const route = useRoute()
 
-  const isApi = computed(() => route.name?.toString().startsWith('api-'))
-  const style = computed(() => ({ maxWidth: isApi.value ? '1368px' : '960px' }))
-
-  onBeforeMount(() => {
-    app.drawer = null
-  })
+  const isApi = computed(() => route.meta?.category === 'api')
+  const isDashboard = computed(() => route.meta?.category === 'user')
+  const style = computed(() => ({ maxWidth: isApi.value || isDashboard.value ? '1368px' : '960px' }))
+  const hasBackmatter = computed(() => !isApi.value && route.meta?.backmatter !== false)
 </script>

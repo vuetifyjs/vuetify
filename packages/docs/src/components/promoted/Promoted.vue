@@ -1,57 +1,49 @@
 <template>
-  <a
-    v-if="ad"
-    class="d-flex mb-4"
-    style="max-width: 640px;"
-    v-bind="attrs"
-    @click="onClick"
-  >
-    <promoted-base
-      v-bind="$attrs"
-      class="v-vuetify--promoted"
-      density="compact"
-      max-width="640"
-      outlined
+  <div v-if="ad" class="mb-5">
+    <a
+      v-if="hasPromoted"
+      class="d-block"
+      style="max-width: 640px;"
+      v-bind="attrs"
+      @click="onClick"
     >
-
-      <v-img
-        :src="background"
-        class="flex-1-1-auto rounded"
-        max-height="56"
-        cover
+      <PromotedBase
+        v-bind="$attrs"
+        class="v-vuetify--promoted"
+        density="compact"
+        max-width="640"
+        outlined
       >
-        <div class="d-flex align-center fill-height">
-          <v-img
-            :alt="`Link to ${ad.title}`"
-            :src="logo"
-            class="mx-2"
-            contain
-            height="56"
-            max-width="56"
-          />
+        <v-img
+          :src="background"
+          class="flex-1-1-auto rounded"
+          max-height="56"
+          cover
+        >
+          <div class="d-flex align-center fill-height pe-3">
+            <v-img
+              :alt="`Link to ${ad.title}`"
+              :src="logo"
+              class="mx-1 mx-md-2"
+              height="56"
+              max-width="56"
+            />
 
-          <app-markdown
-            v-if="description"
-            :content="description"
-            class="text-subtitle-2 text-sm-h6 font-weight-light text-white"
-          />
-        </div>
-      </v-img>
-    </promoted-base>
-  </a>
+            <AppMarkdown
+              v-if="description"
+              :content="description"
+              class="text-subtitle-2 text-sm-h6 font-weight-light text-white"
+            />
+          </div>
+        </v-img>
+      </PromotedBase>
+    </a>
+
+    <PromotedVuetify v-else />
+  </div>
 </template>
 
 <script setup>
-  // Components
-  import PromotedBase from './Base.vue'
-
-  // Composables
-  import { createAdProps, useAd } from '@/composables/ad'
-  import { useGtag } from 'vue-gtag-next'
-
-  // Utilities
-  import { computed } from 'vue'
-
   const props = defineProps({
     ...createAdProps(),
 
@@ -63,6 +55,15 @@
 
   const { ad, attrs } = useAd(props)
   const { event } = useGtag()
+  const { name } = useRoute()
+
+  const background = computed(() => ad.value?.metadata?.images?.background?.url)
+  const hasPromoted = computed(() => {
+    return (
+      ad.value?.metadata?.description_short &&
+      background.value
+    )
+  })
 
   const description = computed(() => ad.value?.metadata?.description_short || ad.value?.metadata?.description)
   const logo = computed(() => {
@@ -72,7 +73,6 @@
 
     return ad.value?.metadata?.images?.logo?.url
   })
-  const background = computed(() => ad.value?.metadata?.images?.background?.url)
 
   function onClick () {
     const slug = ad.value?.slug
@@ -80,9 +80,9 @@
     if (!slug) return
 
     event('click', {
-      event_category: 'vuetifys',
+      event_category: 'promoted',
       event_label: slug,
-      value: 'promoted',
+      value: name?.toString().toLowerCase(),
     })
   }
 </script>

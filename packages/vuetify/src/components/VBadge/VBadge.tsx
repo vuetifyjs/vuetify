@@ -5,51 +5,60 @@ import './VBadge.sass'
 import { VIcon } from '@/components/VIcon'
 
 // Composables
+import { useBackgroundColor, useTextColor } from '@/composables/color'
+import { makeComponentProps } from '@/composables/component'
 import { IconValue } from '@/composables/icons'
+import { useLocale } from '@/composables/locale'
 import { makeLocationProps, useLocation } from '@/composables/location'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, useTheme } from '@/composables/theme'
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
-import { useBackgroundColor, useTextColor } from '@/composables/color'
-import { useLocale } from '@/composables/locale'
 
 // Utilities
-import { defineComponent, pick, useRender } from '@/util'
 import { toRef } from 'vue'
+import { genericComponent, pickWithRest, propsFactory, useRender } from '@/util'
 
-export const VBadge = defineComponent({
+export type VBadgeSlots = {
+  default: never
+  badge: never
+}
+
+export const makeVBadgeProps = propsFactory({
+  bordered: Boolean,
+  color: String,
+  content: [Number, String],
+  dot: Boolean,
+  floating: Boolean,
+  icon: IconValue,
+  inline: Boolean,
+  label: {
+    type: String,
+    default: '$vuetify.badge',
+  },
+  max: [Number, String],
+  modelValue: {
+    type: Boolean,
+    default: true,
+  },
+  offsetX: [Number, String],
+  offsetY: [Number, String],
+  textColor: String,
+
+  ...makeComponentProps(),
+  ...makeLocationProps({ location: 'top end' } as const),
+  ...makeRoundedProps(),
+  ...makeTagProps(),
+  ...makeThemeProps(),
+  ...makeTransitionProps({ transition: 'scale-rotate-transition' }),
+}, 'VBadge')
+
+export const VBadge = genericComponent<VBadgeSlots>()({
   name: 'VBadge',
 
   inheritAttrs: false,
 
-  props: {
-    bordered: Boolean,
-    color: String,
-    content: [Number, String],
-    dot: Boolean,
-    floating: Boolean,
-    icon: IconValue,
-    inline: Boolean,
-    label: {
-      type: String,
-      default: '$vuetify.badge',
-    },
-    max: [Number, String],
-    modelValue: {
-      type: Boolean,
-      default: true,
-    },
-    offsetX: [Number, String],
-    offsetY: [Number, String],
-    textColor: String,
-
-    ...makeLocationProps({ location: 'top end' } as const),
-    ...makeRoundedProps(),
-    ...makeTagProps(),
-    ...makeThemeProps(),
-    ...makeTransitionProps({ transition: 'scale-rotate-transition' }),
-  },
+  props: makeVBadgeProps(),
 
   setup (props, ctx) {
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
@@ -73,10 +82,10 @@ export const VBadge = defineComponent({
     useRender(() => {
       const value = Number(props.content)
       const content = (!props.max || isNaN(value)) ? props.content
-        : value <= props.max ? value
+        : value <= +props.max ? value
         : `${props.max}+`
 
-      const [badgeAttrs, attrs] = pick(ctx.attrs as Record<string, any>, [
+      const [badgeAttrs, attrs] = pickWithRest(ctx.attrs as Record<string, any>, [
         'aria-atomic',
         'aria-label',
         'aria-live',
@@ -94,8 +103,10 @@ export const VBadge = defineComponent({
               'v-badge--floating': props.floating,
               'v-badge--inline': props.inline,
             },
+            props.class,
           ]}
           { ...attrs }
+          style={ props.style }
         >
           <div class="v-badge__wrapper">
             { ctx.slots.default?.() }

@@ -2,84 +2,106 @@
 @use '../../styles/settings'
 @use './variables' as *
 
-.v-snackbar
-  justify-content: center
-  padding-inline-end: var(--v-scrollbar-offset)
-
-  &:not(.v-snackbar--absolute)
-    height: 100vh
-    position: fixed
+@include tools.layer('components')
+  .v-snackbar
+    justify-content: center
     z-index: $snackbar-z-index
-
-  &:not(.v-snackbar--centered):not(.v-snackbar--top)
-    align-items: flex-end
-
-  &__wrapper
-    align-items: center
-    display: flex
     margin: $snackbar-wrapper-margin
-    max-width: $snackbar-wrapper-max-width
-    min-height: $snackbar-wrapper-min-height
-    min-width: $snackbar-wrapper-min-width
-    padding: $snackbar-wrapper-padding
-    pointer-events: auto
-    position: relative
+    margin-inline-end: calc(#{$snackbar-wrapper-margin} + var(--v-scrollbar-offset))
+    padding: var(--v-layout-top) var(--v-layout-right) var(--v-layout-bottom) var(--v-layout-left)
 
-    @include tools.rounded($snackbar-border-radius)
+    &:not(.v-snackbar--center):not(.v-snackbar--top)
+      align-items: flex-end
 
-    @at-root .v-snackbar
-      @include tools.variant($snackbar-variants...)
+    &__wrapper
+      align-items: center
+      display: flex
+      max-width: $snackbar-wrapper-max-width
+      min-height: $snackbar-wrapper-min-height
+      min-width: $snackbar-wrapper-min-width
+      overflow: hidden
+      padding: $snackbar-wrapper-padding
 
-  &__content
-    flex-grow: 1
-    font-size: $snackbar-font-size
-    font-weight: $snackbar-font-weight
-    letter-spacing: $snackbar-letter-spacing
-    line-height: $snackbar-line-height
-    margin-right: auto
-    padding: $snackbar-content-padding
-    text-align: initial
+      @include tools.rounded($snackbar-border-radius)
 
-  &__actions
-    align-items: center
-    align-self: center
-    display: flex
-    margin-inline-end: $snackbar-action-margin
+      @at-root .v-snackbar
+        @include tools.variant($snackbar-variants...)
 
-    & > .v-btn
-      padding: $snackbar-btn-padding
-      min-width: auto
+    &__content
+      flex-grow: 1
+      font-size: $snackbar-font-size
+      font-weight: $snackbar-font-weight
+      letter-spacing: $snackbar-letter-spacing
+      line-height: $snackbar-line-height
+      margin-right: auto
+      padding: $snackbar-content-padding
+      text-align: initial
 
-  &--absolute
-    height: 100%
-    position: absolute
-    z-index: $snackbar-absolute-z-index
+    &__actions
+      align-items: center
+      align-self: center
+      display: flex
+      margin-inline-end: $snackbar-action-margin
 
-  &--multi-line &__wrapper
-    min-height: $snackbar-multi-line-wrapper-min-height
+      & > .v-btn
+        padding: $snackbar-btn-padding
+        min-width: auto
 
-  &--vertical &__wrapper
-    flex-direction: column
+    &__timer
+      width: 100%
+      position: absolute
+      top: 0
 
-    .v-snackbar__actions
-      align-self: flex-end
-      margin-bottom: $snackbar-vertical-action-margin-bottom
+      .v-progress-linear
+        transition: .2s linear
 
-.v-snackbar-transition
-  &-enter-active,
-  &-leave-active
-    transition-duration: .15s
-    transition-timing-function: settings.$decelerated-easing
+    &--absolute
+      position: absolute
+      z-index: $snackbar-absolute-z-index
 
-  &-enter-active
-    transition-property: opacity, transform
+    &--multi-line &__wrapper
+      min-height: $snackbar-multi-line-wrapper-min-height
 
-  &-enter-from
-    opacity: 0
-    transform: scale($snackbar-transition-scale)
+    &--vertical &__wrapper
+      flex-direction: column
 
-  &-leave-active
-    transition-property: opacity
+      .v-snackbar__actions
+        align-self: flex-end
+        margin-bottom: $snackbar-vertical-action-margin-bottom
 
-  &-leave-to
-    opacity: 0
+    &--center
+      align-items: center
+      justify-content: center
+
+    &--top
+      align-items: flex-start
+
+    &--bottom
+      align-items: flex-end
+
+    &--left,
+    &--start
+      justify-content: flex-start
+
+    &--right,
+    &--end
+      justify-content: flex-end
+
+  .v-snackbar-transition
+    &-enter-active,
+    &-leave-active
+      transition-duration: .15s
+      transition-timing-function: settings.$decelerated-easing
+
+    &-enter-active
+      transition-property: opacity, transform
+
+    &-enter-from
+      opacity: 0
+      transform: scale($snackbar-transition-scale)
+
+    &-leave-active
+      transition-property: opacity
+
+    &-leave-to
+      opacity: 0

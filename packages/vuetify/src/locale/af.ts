@@ -1,21 +1,27 @@
 export default {
-  badge: 'badge',
-  close: 'Close',
+  badge: 'Kenteken',
+  open: 'Maak oop',
+  close: 'Maak toe',
+  dismiss: 'Verwerp',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'Kanselleer',
+  },
   dataIterator: {
     noResultsText: 'Geen ooreenstemmende resultate is gevind nie',
-    loadingText: 'Loading item...',
+    loadingText: 'Laai item...',
   },
   dataTable: {
     itemsPerPageText: 'Rye per bladsy:',
     ariaLabel: {
-      sortDescending: 'Sorted descending.',
-      sortAscending: 'Sorted ascending..',
-      sortNone: 'Not sorted.',
-      activateNone: 'Activate to remove sorting.',
-      activateDescending: 'Activate to sort descending.',
-      activateAscending: 'Activate to sort ascending.',
+      sortDescending: 'Gesorteer aflopend.',
+      sortAscending: 'Gesorteer oplopend.',
+      sortNone: 'Nie gesorteer nie.',
+      activateNone: 'Aktiveer om sortering te verwyder.',
+      activateDescending: 'Aktiveer om aflopend te sorteer.',
+      activateAscending: 'Aktiveer om oplopend te sorteer.',
     },
-    sortBy: 'Sort by',
+    sortBy: 'Sorteer volgens',
   },
   dataFooter: {
     itemsPerPageText: 'Aantal per bladsy:',
@@ -26,36 +32,52 @@ export default {
     lastPage: 'Laaste bladsy',
     pageText: '{0}-{1} van {2}',
   },
+  dateRangeInput: {
+    divider: 'tot',
+  },
   datePicker: {
     itemsSelected: '{0} gekies',
-    nextMonthAriaLabel: 'Volgende maand',
-    nextYearAriaLabel: 'Volgende jaar',
-    prevMonthAriaLabel: 'Vorige maand',
-    prevYearAriaLabel: 'Vorige jaar',
+    range: {
+      title: 'Kies datums',
+      header: 'Voer datums in',
+    },
+    title: 'Kies datum',
+    header: 'Voer datum in',
+    input: {
+      placeholder: 'Voer datum in',
+    },
   },
   noDataText: 'Geen data is beskikbaar nie',
   carousel: {
     prev: 'Vorige visuele',
     next: 'Volgende visuele',
     ariaLabel: {
-      delimiter: 'Carousel slide {0} of {1}',
+      delimiter: 'Carousel skyfie {0} van {1}',
     },
   },
   calendar: {
     moreEvents: '{0} meer',
+    today: 'Vandag',
   },
   input: {
-    clear: 'Clear {0}',
-    prependAction: '{0} prepended action',
-    appendAction: '{0} appended action',
+    clear: 'Maak skoon {0}',
+    prependAction: '{0} voorafgevoegde aksie',
+    appendAction: '{0} bygevoegde aksie',
+    otp: 'Voer asseblief OTP-karakter {0} in',
   },
   fileInput: {
-    counter: '{0} files',
-    counterSize: '{0} files ({1} in total)',
+    counter: '{0} lêers',
+    counterSize: '{0} lêers ({1} in totaal)',
+  },
+  fileUpload: {
+    title: 'Sleep en los lêers hier',
+    divider: 'of',
+    browse: 'Blaai deur lêers',
   },
   timePicker: {
-    am: 'AM',
-    pm: 'PM',
+    am: 'VM',
+    pm: 'NM',
+    title: 'Kies tyd',
   },
   pagination: {
     ariaLabel: {
@@ -64,13 +86,22 @@ export default {
       previous: 'Vorige bladsy',
       page: 'Gaan na bladsy {0}',
       currentPage: 'Huidige bladsy, Bladsy {0}',
-      first: 'First page',
-      last: 'Last page',
+      first: 'Eerste bladsy',
+      last: 'Laaste bladsy',
     },
+  },
+  stepper: {
+    next: 'Volgende',
+    prev: 'Vorige',
   },
   rating: {
     ariaLabel: {
-      item: 'Rating {0} of {1}',
+      item: 'Gradering {0} van {1}',
     },
+  },
+  loading: 'Laai...',
+  infiniteScroll: {
+    loadMore: 'Laai meer',
+    empty: 'Geen meer nie',
   },
 }

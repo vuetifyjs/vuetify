@@ -1,6 +1,9 @@
 // Composables
-import { describe, expect, it } from '@jest/globals'
 import { makeElevationProps, useElevation } from '../elevation'
+
+// Utilities
+
+// Utilities
 
 describe('elevation.ts', () => {
   it('should have the correct class', () => {

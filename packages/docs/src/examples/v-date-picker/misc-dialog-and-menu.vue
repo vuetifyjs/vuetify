@@ -2,26 +2,24 @@
   <v-row>
     <v-col
       cols="12"
-      sm="6"
       md="4"
+      sm="6"
     >
       <v-menu
         ref="menu"
-        v-model="menu"
+        v-model="menuActive"
         v-model:return-value="date"
         :close-on-content-click="false"
-        transition="scale-transition"
-        offset-y
         min-width="auto"
+        transition="scale-transition"
       >
-        <template v-slot:activator="{ on, attrs }">
+        <template v-slot:activator="{ props }">
           <v-text-field
             v-model="date"
             label="Picker in menu"
             prepend-icon="mdi-calendar"
             readonly
-            v-bind="attrs"
-            v-on="on"
+            v-bind="props"
           ></v-text-field>
         </template>
         <v-date-picker
@@ -31,16 +29,16 @@
         >
           <v-spacer></v-spacer>
           <v-btn
-            variant="text"
             color="primary"
+            variant="text"
             @click="menu = false"
           >
             Cancel
           </v-btn>
           <v-btn
-            variant="text"
             color="primary"
-            @click="$refs.menu.save(date)"
+            variant="text"
+            @click="menu.save(date)"
           >
             OK
           </v-btn>
@@ -50,24 +48,22 @@
     <v-spacer></v-spacer>
     <v-col
       cols="12"
-      sm="6"
       md="4"
+      sm="6"
     >
       <v-dialog
         ref="dialog"
         v-model="modal"
-        v-model:return-value="date"
-        persistent
         width="290px"
+        persistent
       >
-        <template v-slot:activator="{ on, attrs }">
+        <template v-slot:activator="{ props }">
           <v-text-field
             v-model="date"
             label="Picker in dialog"
             prepend-icon="mdi-calendar"
             readonly
-            v-bind="attrs"
-            v-on="on"
+            v-bind="props"
           ></v-text-field>
         </template>
         <v-date-picker
@@ -76,16 +72,16 @@
         >
           <v-spacer></v-spacer>
           <v-btn
-            variant="text"
             color="primary"
+            variant="text"
             @click="modal = false"
           >
             Cancel
           </v-btn>
           <v-btn
-            variant="text"
             color="primary"
-            @click="$refs.dialog.save(date)"
+            variant="text"
+            @click="dialog.save(date)"
           >
             OK
           </v-btn>
@@ -94,30 +90,27 @@
     </v-col>
     <v-col
       cols="12"
-      sm="6"
       md="4"
+      sm="6"
     >
       <v-menu
         v-model="menu2"
         :close-on-content-click="false"
-        :nudge-right="40"
-        transition="scale-transition"
-        offset-y
         min-width="auto"
+        transition="scale-transition"
       >
-        <template v-slot:activator="{ on, attrs }">
+        <template v-slot:activator="{ props }">
           <v-text-field
             v-model="date"
             label="Picker without buttons"
             prepend-icon="mdi-calendar"
             readonly
-            v-bind="attrs"
-            v-on="on"
+            v-bind="props"
           ></v-text-field>
         </template>
         <v-date-picker
           v-model="date"
-          @input="menu2 = false"
+          @change="menu2 = false"
         ></v-date-picker>
       </v-menu>
     </v-col>
@@ -125,11 +118,22 @@
   </v-row>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const menu = ref()
+
+  const date = ref((new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10))
+  const menuActive = ref(false)
+  const modal = ref(false)
+  const menu2 = ref(false)
+</script>
+
 <script>
   export default {
     data: () => ({
       date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
-      menu: false,
+      menuActive: false,
       modal: false,
       menu2: false,
     }),

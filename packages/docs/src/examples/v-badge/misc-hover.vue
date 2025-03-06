@@ -20,6 +20,12 @@
   </div>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const hover = ref(false)
+</script>
+
 <script>
   export default {
     data: () => ({

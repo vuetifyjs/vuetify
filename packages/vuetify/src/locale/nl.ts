@@ -1,9 +1,15 @@
 export default {
-  badge: 'insigne',
+  badge: 'Insigne',
+  open: 'Openen',
   close: 'Sluiten',
+  dismiss: 'Negeren',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'Annuleren',
+  },
   dataIterator: {
     noResultsText: 'Geen overeenkomende resultaten gevonden',
-    loadingText: 'Items aan het laden...',
+    loadingText: 'Bezig met laden...',
   },
   dataTable: {
     itemsPerPageText: 'Rijen per pagina:',
@@ -15,7 +21,7 @@ export default {
       activateDescending: 'Activeer om aflopend te sorteren.',
       activateAscending: 'Activeer om oplopend te sorteren.',
     },
-    sortBy: 'Sorteer volgens',
+    sortBy: 'Sorteer op',
   },
   dataFooter: {
     itemsPerPageText: 'Aantal per pagina:',
@@ -26,51 +32,76 @@ export default {
     lastPage: 'Laatste pagina',
     pageText: '{0}-{1} van {2}',
   },
+  dateRangeInput: {
+    divider: 'tot',
+  },
   datePicker: {
     itemsSelected: '{0} geselecteerd',
-    nextMonthAriaLabel: 'Volgende maand',
-    nextYearAriaLabel: 'Volgend jaar',
-    prevMonthAriaLabel: 'Vorige maand',
-    prevYearAriaLabel: 'Vorig jaar',
+    range: {
+      title: 'Selecteer datums',
+      header: 'Voer datums in',
+    },
+    title: 'Selecteer datum',
+    header: 'Voer datum in',
+    input: {
+      placeholder: 'Voer datum in',
+    },
   },
   noDataText: 'Geen gegevens beschikbaar',
   carousel: {
-    prev: 'Vorig beeld',
-    next: 'Volgend beeld',
+    prev: 'Vorige weergave',
+    next: 'Volgende weergave',
     ariaLabel: {
-      delimiter: 'Carousel slide {0} of {1}',
+      delimiter: 'Carrousel afbeelding {0} van {1}',
     },
   },
   calendar: {
     moreEvents: '{0} meer',
+    today: 'Vandaag',
   },
   input: {
-    clear: 'Clear {0}',
-    prependAction: '{0} prepended action',
-    appendAction: '{0} appended action',
+    clear: 'Maak {0} leeg',
+    prependAction: '{0} voorafgaande actie',
+    appendAction: '{0} bijgevoegde actie',
+    otp: 'Voer OTP-teken {0} in',
   },
   fileInput: {
     counter: '{0} bestanden',
     counterSize: '{0} bestanden ({1} in totaal)',
   },
+  fileUpload: {
+    title: 'Sleep en zet bestanden hier neer',
+    divider: 'of',
+    browse: 'Blader door bestanden',
+  },
   timePicker: {
     am: 'AM',
     pm: 'PM',
+    title: 'Selecteer tijd',
   },
   pagination: {
     ariaLabel: {
-      root: 'Paginanavigatie',
+      root: 'Pagina navigatie',
       next: 'Volgende pagina',
       previous: 'Vorige pagina',
       page: 'Ga naar pagina {0}',
       currentPage: 'Huidige pagina, pagina {0}',
-      first: 'First page',
-      last: 'Last page',
+      first: 'Eerste pagina',
+      last: 'Laatste pagina',
     },
+  },
+  stepper: {
+    next: 'Volgende',
+    prev: 'Vorige',
   },
   rating: {
     ariaLabel: {
-      item: 'Rating {0} of {1}',
+      item: 'Beoordeling {0} van {1}',
     },
+  },
+  loading: 'Bezig met laden...',
+  infiniteScroll: {
+    loadMore: 'Meer laden',
+    empty: 'Geen meer items',
   },
 }

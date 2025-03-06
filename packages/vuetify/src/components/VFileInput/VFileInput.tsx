@@ -2,76 +2,105 @@
 import './VFileInput.sass'
 
 // Components
-import { filterFieldProps, makeVFieldProps } from '@/components/VField/VField'
-import { filterInputProps, makeVInputProps, VInput } from '@/components/VInput/VInput'
 import { VChip } from '@/components/VChip'
 import { VCounter } from '@/components/VCounter'
 import { VField } from '@/components/VField'
+import { filterFieldProps, makeVFieldProps } from '@/components/VField/VField'
+import { makeVInputProps, VInput } from '@/components/VInput/VInput'
 
 // Composables
+import { useFocus } from '@/composables/focus'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, nextTick, ref } from 'vue'
-import { callEvent, defineComponent, filterInputAttrs, humanReadableFileSize, useRender, wrapInArray } from '@/util'
+import { computed, nextTick, ref, watch } from 'vue'
+import {
+  callEvent,
+  filterInputAttrs,
+  genericComponent,
+  humanReadableFileSize,
+  propsFactory,
+  useRender,
+  wrapInArray,
+} from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import type { VFieldSlots } from '@/components/VField/VField'
+import type { VInputSlots } from '@/components/VInput/VInput'
 
-export const VFileInput = defineComponent({
+export type VFileInputSlots = VInputSlots & VFieldSlots & {
+  counter: never
+  selection: {
+    fileNames: string[]
+    totalBytes: number
+    totalBytesReadable: string
+  }
+}
+
+export const makeVFileInputProps = propsFactory({
+  chips: Boolean,
+  counter: Boolean,
+  counterSizeString: {
+    type: String,
+    default: '$vuetify.fileInput.counterSize',
+  },
+  counterString: {
+    type: String,
+    default: '$vuetify.fileInput.counter',
+  },
+  hideInput: Boolean,
+  multiple: Boolean,
+  showSize: {
+    type: [Boolean, Number, String] as PropType<boolean | 1000 | 1024>,
+    default: false,
+    validator: (v: boolean | number) => {
+      return (
+        typeof v === 'boolean' ||
+        [1000, 1024].includes(Number(v))
+      )
+    },
+  },
+
+  ...makeVInputProps({ prependIcon: '$file' }),
+
+  modelValue: {
+    type: [Array, Object] as PropType<File[] | File | null>,
+    default: (props: any) => props.multiple ? [] : null,
+    validator: (val: any) => {
+      return wrapInArray(val).every(v => v != null && typeof v === 'object')
+    },
+  },
+
+  ...makeVFieldProps({ clearable: true }),
+}, 'VFileInput')
+
+export const VFileInput = genericComponent<VFileInputSlots>()({
   name: 'VFileInput',
 
   inheritAttrs: false,
 
-  props: {
-    chips: Boolean,
-    counter: Boolean,
-    counterSizeString: {
-      type: String,
-      default: '$vuetify.fileInput.counterSize',
-    },
-    counterString: {
-      type: String,
-      default: '$vuetify.fileInput.counter',
-    },
-    multiple: Boolean,
-    hint: String,
-    persistentHint: Boolean,
-    placeholder: String,
-    showSize: {
-      type: [Boolean, Number] as PropType<boolean | 1000 | 1024>,
-      default: false,
-      validator: (v: boolean | number) => {
-        return (
-          typeof v === 'boolean' ||
-          [1000, 1024].includes(v)
-        )
-      },
-    },
-
-    ...makeVInputProps({ prependIcon: '$file' }),
-
-    modelValue: {
-      type: Array as PropType<File[]>,
-      default: () => ([]),
-      validator: (val: any) => {
-        return wrapInArray(val).every(v => v != null && typeof v === 'object')
-      },
-    },
-
-    ...makeVFieldProps({ clearable: true }),
-  },
+  props: makeVFileInputProps(),
 
   emits: {
     'click:control': (e: MouseEvent) => true,
-    'update:modelValue': (files: File[]) => true,
+    'mousedown:control': (e: MouseEvent) => true,
+    'update:focused': (focused: boolean) => true,
+    'update:modelValue': (files: File | File[]) => true,
   },
 
   setup (props, { attrs, emit, slots }) {
     const { t } = useLocale()
-    const model = useProxiedModel(props, 'modelValue')
+    const model = useProxiedModel(
+      props,
+      'modelValue',
+      props.modelValue,
+      val => wrapInArray(val),
+      val => (!props.multiple && Array.isArray(val)) ? val[0] : val,
+    )
+    const { isFocused, focus, blur } = useFocus(props)
     const base = computed(() => typeof props.showSize !== 'boolean' ? props.showSize : undefined)
     const totalBytes = computed(() => (model.value ?? []).reduce((bytes, { size = 0 }) => bytes + size, 0))
     const totalBytesReadable = computed(() => humanReadableFileSize(totalBytes.value, base.value))
@@ -91,25 +120,24 @@ export const VFileInput = defineComponent({
     })
     const vInputRef = ref<VInput>()
     const vFieldRef = ref<VInput>()
-    const isFocused = ref(false)
     const inputRef = ref<HTMLInputElement>()
-    const messages = computed(() => {
-      return props.messages.length
-        ? props.messages
-        : (props.persistentHint) ? props.hint : ''
-    })
+    const isActive = computed(() => (
+      isFocused.value ||
+      props.active
+    ))
+    const isPlainOrUnderlined = computed(() => ['plain', 'underlined'].includes(props.variant))
     function onFocus () {
       if (inputRef.value !== document.activeElement) {
         inputRef.value?.focus()
       }
 
-      if (!isFocused.value) {
-        isFocused.value = true
-      }
+      if (!isFocused.value) focus()
     }
     function onClickPrepend (e: MouseEvent) {
-      callEvent(props['onClick:prepend'], e)
-      onControlClick(e)
+      inputRef.value?.click()
+    }
+    function onControlMousedown (e: MouseEvent) {
+      emit('mousedown:control', e)
     }
     function onControlClick (e: MouseEvent) {
       inputRef.value?.click()
@@ -124,32 +152,54 @@ export const VFileInput = defineComponent({
       nextTick(() => {
         model.value = []
 
-        if (inputRef?.value) {
-          inputRef.value.value = ''
-        }
-
         callEvent(props['onClick:clear'], e)
       })
     }
+    function onDragover (e: DragEvent) {
+      e.preventDefault()
+    }
+    function onDrop (e: DragEvent) {
+      e.preventDefault()
+
+      if (!e.dataTransfer) return
+
+      model.value = [...e.dataTransfer.files ?? []]
+    }
+
+    watch(model, newValue => {
+      const hasModelReset = !Array.isArray(newValue) || !newValue.length
+
+      if (hasModelReset && inputRef.value) {
+        inputRef.value.value = ''
+      }
+    })
 
     useRender(() => {
       const hasCounter = !!(slots.counter || props.counter)
       const hasDetails = !!(hasCounter || slots.details)
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
-      const [{ modelValue: _, ...inputProps }] = filterInputProps(props)
-      const [fieldProps] = filterFieldProps(props)
+      const { modelValue: _, ...inputProps } = VInput.filterProps(props)
+      const fieldProps = filterFieldProps(props)
 
       return (
         <VInput
           ref={ vInputRef }
-          v-model={ model.value }
-          class="v-file-input"
+          modelValue={ props.multiple ? model.value : model.value[0] }
+          class={[
+            'v-file-input',
+            {
+              'v-file-input--chips': !!props.chips,
+              'v-file-input--hide': props.hideInput,
+              'v-input--plain-underlined': isPlainOrUnderlined.value,
+            },
+            props.class,
+          ]}
+          style={ props.style }
           onClick:prepend={ onClickPrepend }
-          onClick:append={ props['onClick:append'] }
           { ...rootAttrs }
           { ...inputProps }
+          centerAffix={ !isPlainOrUnderlined.value }
           focused={ isFocused.value }
-          messages={ messages.value }
         >
           {{
             ...slots,
@@ -163,16 +213,20 @@ export const VFileInput = defineComponent({
               <VField
                 ref={ vFieldRef }
                 prepend-icon={ props.prependIcon }
-                onClick:control={ onControlClick }
+                onMousedown={ onControlMousedown }
+                onClick={ onControlClick }
                 onClick:clear={ onClear }
                 onClick:prependInner={ props['onClick:prependInner'] }
                 onClick:appendInner={ props['onClick:appendInner'] }
                 { ...fieldProps }
                 id={ id.value }
-                active={ isDirty.value || isFocused.value }
-                dirty={ isDirty.value }
+                active={ isActive.value || isDirty.value }
+                dirty={ isDirty.value || props.dirty }
+                disabled={ isDisabled.value }
                 focused={ isFocused.value }
                 error={ isValid.value === false }
+                onDragover={ onDragover }
+                onDrop={ onDrop }
               >
                 {{
                   ...slots,
@@ -190,22 +244,24 @@ export const VFileInput = defineComponent({
                         onClick={ e => {
                           e.stopPropagation()
 
+                          if (isReadonly.value) e.preventDefault()
+
                           onFocus()
-                        } }
+                        }}
                         onChange={ e => {
                           if (!e.target) return
 
                           const target = e.target as HTMLInputElement
                           model.value = [...target.files ?? []]
-                        } }
+                        }}
                         onFocus={ onFocus }
-                        onBlur={ () => (isFocused.value = false) }
+                        onBlur={ blur }
                         { ...slotProps }
                         { ...inputAttrs }
                       />
 
                       <div class={ fieldClass }>
-                        { !!model.value?.length && (
+                        { !!model.value?.length && !props.hideInput && (
                           slots.selection ? slots.selection({
                             fileNames: fileNames.value,
                             totalBytes: totalBytes.value,
@@ -215,8 +271,8 @@ export const VFileInput = defineComponent({
                             <VChip
                               key={ text }
                               size="small"
-                              color={ props.color }
-                            >{ text }</VChip>
+                              text={ text }
+                            />
                           ))
                           : fileNames.value.join(', ')
                         )}
@@ -237,10 +293,11 @@ export const VFileInput = defineComponent({
                     <VCounter
                       active={ !!model.value?.length }
                       value={ counterValue.value }
-                      v-slots={ slots.counter }
+                      disabled={ props.disabled }
+                      v-slots:default={ slots.counter }
                     />
                   </>
-                ) }
+                )}
               </>
             ) : undefined,
           }}

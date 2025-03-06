@@ -2,8 +2,8 @@
   <div>
     <v-toolbar
       border="b"
-      color="surface"
-      density="compact"
+      class="ps-1"
+      height="44"
       flat
     >
       <v-slide-group
@@ -16,7 +16,9 @@
           <template #default="{ isSelected, toggle }">
             <v-btn
               :active="isSelected"
-              height="56"
+              class="ma-1 text-none"
+              size="small"
+              variant="text"
               @click="toggle"
             >
               Default
@@ -32,53 +34,51 @@
           <template #default="{ isSelected, toggle }">
             <v-btn
               :active="isSelected"
-              height="56"
+              class="ma-1 text-none"
+              size="small"
+              variant="text"
               @click="toggle"
             >
-              {{ option }}
+              {{ upperFirst(option) }}
             </v-btn>
           </template>
         </v-slide-group-item>
       </v-slide-group>
 
-      <v-responsive
-        v-if="$slots.configuration && display.mdAndUp.value"
-        class="border-s align-center bg-surface"
-        height="48"
-        width="100%"
-        max-width="250"
-      >
-        <div class="d-flex align-center justify-space-between">
-          <div class="ms-4">
-            <app-headline
-              v-show="tune"
-              path="options"
-            />
-          </div>
+      <v-tooltip location="bottom">
+        <template #activator="{ props: activatorProps }">
+          <v-btn
+            :href="playgroundLink"
+            class="me-1 text-medium-emphasis"
+            density="comfortable"
+            icon="$vuetify-play"
+            target="_blank"
+            v-bind="activatorProps"
+          />
+        </template>
 
-          <div>
-            <v-tooltip location="bottom">
-              <template #activator="{ props: activatorProps }">
-                <v-btn
-                  :icon="!show ? 'mdi-code-tags' : 'mdi-chevron-up'"
-                  class="me-1 text-medium-emphasis"
-                  density="comfortable"
-                  v-bind="activatorProps"
-                  @click="show = !show"
-                />
-              </template>
+        <span>{{ t('edit-in-playground') }}</span>
+      </v-tooltip>
 
-              <span>{{ show ? 'Hide code' : 'Show code' }}</span>
-            </v-tooltip>
-          </div>
-        </div>
-      </v-responsive>
+      <v-tooltip location="bottom">
+        <template #activator="{ props: activatorProps }">
+          <v-btn
+            :icon="!show ? 'mdi-code-tags' : 'mdi-chevron-up'"
+            class="me-1 text-medium-emphasis"
+            density="comfortable"
+            v-bind="activatorProps"
+            @click="show = !show"
+          />
+        </template>
+
+        <span>{{ show ? t('hide-source') : t('view-source') }}</span>
+      </v-tooltip>
     </v-toolbar>
 
-    <v-layout>
+    <v-layout :class="['border-b', !show && 'border-opacity-0']">
       <v-main>
         <v-sheet
-          class="pa-14 d-flex align-center"
+          class="py-14 px-4 d-flex align-center"
           min-height="300"
           rounded="0"
         >
@@ -93,9 +93,9 @@
         v-model="tune"
         location="right"
         name="tune"
+        width="250"
         permanent
         touchless
-        width="250"
       >
         <v-list>
           <div class="px-4 usage-example pt-2">
@@ -116,9 +116,13 @@
     </v-layout>
 
     <v-expand-transition>
-      <div v-if="show && display.mdAndUp.value">
-        <div class="pa-3">
-          <app-markup :code="code" />
+      <div v-if="show">
+        <div class="pa-2">
+          <AppMarkup :code="code" />
+        </div>
+
+        <div v-if="script" class="pa-2 pt-0">
+          <AppMarkup :code="script" language="js" />
         </div>
       </div>
     </v-expand-transition>
@@ -126,12 +130,6 @@
 </template>
 
 <script setup>
-  // Composables
-  import { useDisplay } from 'vuetify'
-
-  // Utilities
-  import { computed, ref } from 'vue'
-
   const props = defineProps({
     name: String,
     code: String,
@@ -144,10 +142,12 @@
       default: () => ([]),
       required: true,
     },
+    script: String,
   })
   const emit = defineEmits(['update:modelValue', 'update:tuneValue'])
 
   const display = useDisplay()
+  const { t } = useI18n()
 
   const tune = ref(true)
   const show = ref(true)
@@ -160,10 +160,22 @@
       emit('update:modelValue', val)
     },
   })
+  const playgroundLink = computed(() => usePlayground([
+    {
+      name: 'template',
+      language: 'html',
+      content: `<template>\n  <v-app>\n    <v-container>\n      ${props.code.replaceAll('\n', '\n      ')}\n    </v-container>\n  </v-app>\n</template>\n${props.script || ''}`,
+    },
+  ]))
 </script>
 
 <style lang="sass">
   .usage-example
     .v-text-field
       margin-bottom: 8px
+
+  // Hack to get around navigation-drawer default bgColor
+  // TODO: find a better way
+  .v-select__content .v-list
+    background: rgb(var(--v-theme-surface)) !important
 </style>

@@ -2,48 +2,63 @@
 import './VSliderThumb.sass'
 
 // Components
-import { VScaleTransition } from '../transitions'
 import { VSliderSymbol } from './slider'
+import { VScaleTransition } from '../transitions'
+
+// Composables
+import { useTextColor } from '@/composables/color'
+import { makeComponentProps } from '@/composables/component'
+import { useElevation } from '@/composables/elevation'
+import { useRtl } from '@/composables/locale'
 
 // Directives
 import Ripple from '@/directives/ripple'
 
-// Composables
-import { useElevation } from '@/composables/elevation'
-import { useTextColor } from '@/composables/color'
-
 // Utilities
 import { computed, inject } from 'vue'
-import { convertToUnit, defineComponent, keyValues, useRender } from '@/util'
+import { convertToUnit, genericComponent, keyValues, propsFactory, useRender } from '@/util'
 
-export const VSliderThumb = defineComponent({
+// Types
+import type { PropType } from 'vue'
+import type { RippleDirectiveBinding } from '@/directives/ripple'
+
+export type VSliderThumbSlots = {
+  'thumb-label': { modelValue: number }
+}
+
+export const makeVSliderThumbProps = propsFactory({
+  focused: Boolean,
+  max: {
+    type: Number,
+    required: true,
+  },
+  min: {
+    type: Number,
+    required: true,
+  },
+  modelValue: {
+    type: Number,
+    required: true,
+  },
+  position: {
+    type: Number,
+    required: true,
+  },
+  ripple: {
+    type: [Boolean, Object] as PropType<RippleDirectiveBinding['value']>,
+    default: true,
+  },
+  name: String,
+
+  ...makeComponentProps(),
+}, 'VSliderThumb')
+
+export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
   name: 'VSliderThumb',
 
   directives: { Ripple },
 
-  props: {
-    focused: Boolean,
-    max: {
-      type: Number,
-      required: true,
-    },
-    min: {
-      type: Number,
-      required: true,
-    },
-    modelValue: {
-      type: Number,
-      required: true,
-    },
-    position: {
-      type: Number,
-      required: true,
-    },
-    ripple: {
-      type: Boolean,
-      default: true,
-    },
-  },
+  props: makeVSliderThumbProps(),
 
   emits: {
     'update:modelValue': (v: number) => true,
@@ -51,25 +66,27 @@ export const VSliderThumb = defineComponent({
 
   setup (props, { slots, emit }) {
     const slider = inject(VSliderSymbol)
-
+    const { isRtl, rtlClasses } = useRtl()
     if (!slider) throw new Error('[Vuetify] v-slider-thumb must be used inside v-slider or v-range-slider')
 
     const {
       thumbColor,
       step,
-      vertical,
       disabled,
       thumbSize,
       thumbLabel,
       direction,
+      isReversed,
+      vertical,
       readonly,
       elevation,
-      isReversed,
-      horizontalDirection,
       mousePressed,
       decimals,
+      indexFromEnd,
     } = slider
 
+    const elevationProps = computed(() => !disabled.value ? elevation.value : undefined)
+    const { elevationClasses } = useElevation(elevationProps)
     const { textColorClasses, textColorStyles } = useTextColor(thumbColor)
 
     const { pageup, pagedown, end, home, left, right, down, up } = keyValues
@@ -88,7 +105,9 @@ export const VSliderThumb = defineComponent({
       const _step = step.value || 0.1
       const steps = (props.max - props.min) / _step
       if ([left, right, down, up].includes(e.key)) {
-        const increase = horizontalDirection.value === 'rtl' ? [left, up] : [right, up]
+        const increase = vertical.value
+          ? [isRtl.value ? left : right, isReversed.value ? down : up]
+          : indexFromEnd.value !== isRtl.value ? [left, up] : [right, up]
         const direction = increase.includes(e.key) ? 1 : -1
         const multiplier = e.shiftKey ? 2 : (e.ctrlKey ? 1 : 0)
 
@@ -112,8 +131,7 @@ export const VSliderThumb = defineComponent({
     }
 
     useRender(() => {
-      const positionPercentage = convertToUnit((vertical.value || isReversed.value) ? 100 - props.position : props.position, '%')
-      const { elevationClasses } = useElevation(computed(() => !disabled.value ? elevation.value : undefined))
+      const positionPercentage = convertToUnit(indexFromEnd.value ? 100 - props.position : props.position, '%')
 
       return (
         <div
@@ -123,17 +141,23 @@ export const VSliderThumb = defineComponent({
               'v-slider-thumb--focused': props.focused,
               'v-slider-thumb--pressed': props.focused && mousePressed.value,
             },
+            props.class,
+            rtlClasses.value,
           ]}
-          style={{
-            '--v-slider-thumb-position': positionPercentage,
-            '--v-slider-thumb-size': convertToUnit(thumbSize.value),
-          }}
+          style={[
+            {
+              '--v-slider-thumb-position': positionPercentage,
+              '--v-slider-thumb-size': convertToUnit(thumbSize.value),
+            },
+            props.style,
+          ]}
           role="slider"
           tabindex={ disabled.value ? -1 : 0 }
+          aria-label={ props.name }
           aria-valuemin={ props.min }
           aria-valuemax={ props.max }
           aria-valuenow={ props.modelValue }
-          aria-readonly={ readonly.value }
+          aria-readonly={ !!readonly.value }
           aria-orientation={ direction.value }
           onKeydown={ !readonly.value ? onKeydown : undefined }
         >

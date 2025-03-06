@@ -1,13 +1,13 @@
 <template>
   <v-card
     color="grey-lighten-4"
-    flat
     height="200px"
     rounded="0"
+    flat
   >
     <v-toolbar
-      extended
       extension-height="100"
+      extended
     >
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
 

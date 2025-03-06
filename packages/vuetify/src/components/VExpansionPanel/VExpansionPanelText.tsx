@@ -1,20 +1,24 @@
 // Components
+import { VExpansionPanelSymbol } from './shared'
 import { VExpandTransition } from '@/components/transitions'
-import { VExpansionPanelSymbol } from './VExpansionPanels'
 
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { makeLazyProps, useLazy } from '@/composables/lazy'
 
 // Utilities
-import { defineComponent, useRender } from '@/util'
 import { inject } from 'vue'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
-export const VExpansionPanelText = defineComponent({
+export const makeVExpansionPanelTextProps = propsFactory({
+  ...makeComponentProps(),
+  ...makeLazyProps(),
+}, 'VExpansionPanelText')
+
+export const VExpansionPanelText = genericComponent()({
   name: 'VExpansionPanelText',
 
-  props: {
-    ...makeLazyProps(),
-  },
+  props: makeVExpansionPanelTextProps(),
 
   setup (props, { slots }) {
     const expansionPanel = inject(VExpansionPanelSymbol)
@@ -26,14 +30,18 @@ export const VExpansionPanelText = defineComponent({
     useRender(() => (
       <VExpandTransition onAfterLeave={ onAfterLeave }>
         <div
-          class="v-expansion-panel-text"
+          class={[
+            'v-expansion-panel-text',
+            props.class,
+          ]}
+          style={ props.style }
           v-show={ expansionPanel.isSelected.value }
         >
           { slots.default && hasContent.value && (
             <div class="v-expansion-panel-text__wrapper">
               { slots.default?.() }
             </div>
-          ) }
+          )}
         </div>
       </VExpandTransition>
     ))

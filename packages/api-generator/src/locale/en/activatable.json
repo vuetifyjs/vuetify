@@ -1,6 +1,0 @@
-{
-  "props": {
-    "activator": "Designate a custom activator when the `activator` slot is not used. String can be any valid querySelector and Object can be any valid Node.",
-    "disabled": "Disables the ability to open the component."
-  }
-}

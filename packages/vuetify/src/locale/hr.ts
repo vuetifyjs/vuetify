@@ -1,6 +1,12 @@
 export default {
   badge: 'Bedž',
+  open: 'Otvori',
   close: 'Zatvori',
+  dismiss: 'Odbaci',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'Odustani',
+  },
   dataIterator: {
     noResultsText: 'Nisu pronađene odgovarajuće stavke',
     loadingText: 'Učitavanje...',
@@ -26,36 +32,52 @@ export default {
     lastPage: 'Posljednja stranica',
     pageText: '{0}-{1} od {2}',
   },
+  dateRangeInput: {
+    divider: 'do',
+  },
   datePicker: {
     itemsSelected: '{0} odabrano',
-    nextMonthAriaLabel: 'Sljedeći mjesec',
-    nextYearAriaLabel: 'Slijedeće godine',
-    prevMonthAriaLabel: 'Prethodni mjesec',
-    prevYearAriaLabel: 'Prošla godina',
+    range: {
+      title: 'Odaberite datume',
+      header: 'Unesite datume',
+    },
+    title: 'Odaberite datum',
+    header: 'Unesite datum',
+    input: {
+      placeholder: 'Unesite datum',
+    },
   },
   noDataText: 'Nema dostupnih podataka',
   carousel: {
     prev: 'Prethodno',
     next: 'Sljedeće',
     ariaLabel: {
-      delimiter: 'Carousel slide {0} of {1}',
+      delimiter: 'Slajd {0} od {1}',
     },
   },
   calendar: {
     moreEvents: 'Još {0}',
+    today: 'Danas',
   },
   input: {
-    clear: 'Clear {0}',
-    prependAction: '{0} prepended action',
-    appendAction: '{0} appended action',
+    clear: 'Očisti {0}',
+    prependAction: '{0} prethodna radnja',
+    appendAction: '{0} dodana radnja',
+    otp: 'Unesite OTP znak {0}',
   },
   fileInput: {
     counter: 'Odabranih datoteka: {0}',
     counterSize: 'Odabranih datoteka: {0} ({1} ukupno)',
   },
+  fileUpload: {
+    title: 'Povucite i ispustite datoteke ovdje',
+    divider: 'ili',
+    browse: 'Pregledaj datoteke',
+  },
   timePicker: {
     am: 'AM',
     pm: 'PM',
+    title: 'Odaberite vrijeme',
   },
   pagination: {
     ariaLabel: {
@@ -64,13 +86,22 @@ export default {
       previous: 'Prethodna stranica',
       page: 'Idi na stranicu {0}',
       currentPage: 'Trenutna stranica, stranica {0}',
-      first: 'First page',
-      last: 'Last page',
+      first: 'Prva stranica',
+      last: 'Posljednja stranica',
     },
+  },
+  stepper: {
+    next: 'Sljedeće',
+    prev: 'Prethodno',
   },
   rating: {
     ariaLabel: {
-      item: 'Rating {0} of {1}',
+      item: 'Ocjena {0} od {1}',
     },
+  },
+  loading: 'Učitavanje...',
+  infiniteScroll: {
+    loadMore: 'Učitaj više',
+    empty: 'Nema više',
   },
 }

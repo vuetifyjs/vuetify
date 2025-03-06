@@ -1,6 +1,0 @@
-{
-  "props": {
-    "variant": "Applies one of 6 styles: **elevated**, **flat**, **tonal**, **outlined**, **text**, and **plain**.",
-    "color": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/variant.json))"
-  }
-}

@@ -5,40 +5,12 @@ import {
   HSVtoHex,
   HSVtoHSL,
   HSVtoRGB,
-  parseHex,
   RGBtoHSV,
 } from '@/util/colorUtils'
+import { has } from '@/util/helpers'
 
 // Types
 import type { HSL, HSV, RGB } from '@/util/colorUtils'
-
-function has (obj: object, key: string[]) {
-  return key.every(k => obj.hasOwnProperty(k))
-}
-
-export function parseColor (color: any): HSV | null {
-  if (!color) return null
-
-  let hsva: HSV | null = null
-
-  if (typeof color === 'string') {
-    const hex = parseHex(color)
-
-    hsva = HexToHSV(hex)
-  }
-
-  if (typeof color === 'object') {
-    if (has(color, ['r', 'g', 'b'])) {
-      hsva = RGBtoHSV(color)
-    } else if (has(color, ['h', 's', 'l'])) {
-      hsva = HSLtoHSV(color)
-    } else if (has(color, ['h', 's', 'v'])) {
-      hsva = color
-    }
-  }
-
-  return hsva != null ? { ...hsva, a: hsva.a ?? 1 } : null
-}
 
 function stripAlpha (color: any, stripAlpha: boolean) {
   if (stripAlpha) {
@@ -52,6 +24,15 @@ function stripAlpha (color: any, stripAlpha: boolean) {
 
 export function extractColor (color: HSV, input: any) {
   if (input == null || typeof input === 'string') {
+    const hasA = color.a !== 1
+    if (input?.startsWith('rgb(')) {
+      const { r, g, b, a } = HSVtoRGB(color)
+      return `rgb(${r} ${g} ${b}` + (hasA ? ` / ${a})` : ')')
+    } else if (input?.startsWith('hsl(')) {
+      const { h, s, l, a } = HSVtoHSL(color)
+      return `hsl(${h} ${Math.round(s * 100)} ${Math.round(l * 100)}` + (hasA ? ` / ${a})` : ')')
+    }
+
     const hex = HSVtoHex(color)
 
     if (color.a === 1) return hex.slice(0, 7)
@@ -65,7 +46,7 @@ export function extractColor (color: HSV, input: any) {
     else if (has(input, ['h', 's', 'l'])) converted = HSVtoHSL(color)
     else if (has(input, ['h', 's', 'v'])) converted = color
 
-    return stripAlpha(converted, !has(input, ['a']))
+    return stripAlpha(converted, !has(input, ['a']) && color.a === 1)
   }
 
   return color
@@ -85,7 +66,7 @@ export function hasAlpha (color: any) {
   return false
 }
 
-export const nullColor = { h: 0, s: 0, v: 1, a: 1 }
+export const nullColor = { h: 0, s: 0, v: 0, a: 1 }
 
 export type ColorPickerMode = {
   inputProps: Record<string, unknown>
@@ -129,7 +110,7 @@ const rgba: ColorPickerMode = {
       label: 'A',
       max: 1,
       step: 0.01,
-      getValue: ({ a }: RGB) => a ? Math.round(a * 100) / 100 : 1,
+      getValue: ({ a }: RGB) => a != null ? Math.round(a * 100) / 100 : 1,
       getColor: (c: RGB, v: string): RGB => ({ ...c, a: Number(v) }),
     },
   ],
@@ -173,7 +154,7 @@ const hsla: ColorPickerMode = {
       label: 'A',
       max: 1,
       step: 0.01,
-      getValue: ({ a }: HSL) => a ? Math.round(a * 100) / 100 : 1,
+      getValue: ({ a }: HSL) => a != null ? Math.round(a * 100) / 100 : 1,
       getColor: (c: HSL, v: string): HSL => ({ ...c, a: Number(v) }),
     },
   ],
@@ -212,11 +193,11 @@ const hex = {
   ],
 }
 
-export const modes: Record<string, ColorPickerMode> = {
+export const modes = {
   rgb,
   rgba,
   hsl,
   hsla,
   hex,
   hexa,
-}
+} satisfies Record<string, ColorPickerMode>

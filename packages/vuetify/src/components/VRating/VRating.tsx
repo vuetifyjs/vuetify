@@ -5,20 +5,20 @@ import './VRating.sass'
 import { VBtn } from '@/components/VBtn'
 
 // Composables
-import { IconValue } from '@/composables/icons'
+import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps } from '@/composables/density'
+import { IconValue } from '@/composables/icons'
+import { useLocale } from '@/composables/locale'
+import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeSizeProps } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { useLocale } from '@/composables/locale'
-import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, ref } from 'vue'
-import { clamp, createRange, genericComponent, getUid, useRender } from '@/util'
+import { computed, shallowRef, useId } from 'vue'
+import { clamp, createRange, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
-import type { SlotsToProps } from '@/util'
 import type { Prop } from 'vue'
 import type { Variant } from '@/composables/variant'
 
@@ -30,6 +30,7 @@ type VRatingItemSlot = {
   icon: IconValue
   color?: string
   props: Record<string, unknown>
+  rating: number
 }
 
 type VRatingItemLabelSlot = {
@@ -38,56 +39,59 @@ type VRatingItemLabelSlot = {
   label?: string
 }
 
-export const VRating = genericComponent<new <T>() => {
-  $props: SlotsToProps<{
-    item: [VRatingItemSlot]
-    'item-label': [VRatingItemLabelSlot]
-  }>
-}>()({
+type VRatingSlots = {
+  item: VRatingItemSlot
+  'item-label': VRatingItemLabelSlot
+}
+
+export const makeVRatingProps = propsFactory({
+  name: String,
+  itemAriaLabel: {
+    type: String,
+    default: '$vuetify.rating.ariaLabel.item',
+  },
+  activeColor: String,
+  color: String,
+  clearable: Boolean,
+  disabled: Boolean,
+  emptyIcon: {
+    type: IconValue,
+    default: '$ratingEmpty',
+  },
+  fullIcon: {
+    type: IconValue,
+    default: '$ratingFull',
+  },
+  halfIncrements: Boolean,
+  hover: Boolean,
+  length: {
+    type: [Number, String],
+    default: 5,
+  },
+  readonly: Boolean,
+  modelValue: {
+    type: [Number, String],
+    default: 0,
+  },
+  itemLabels: Array as Prop<string[]>,
+  itemLabelPosition: {
+    type: String,
+    default: 'top',
+    validator: (v: any) => ['top', 'bottom'].includes(v),
+  },
+  ripple: Boolean,
+
+  ...makeComponentProps(),
+  ...makeDensityProps(),
+  ...makeSizeProps(),
+  ...makeTagProps(),
+  ...makeThemeProps(),
+}, 'VRating')
+
+export const VRating = genericComponent<VRatingSlots>()({
   name: 'VRating',
 
-  props: {
-    name: String,
-    itemAriaLabel: {
-      type: String,
-      default: '$vuetify.rating.ariaLabel.item',
-    },
-    activeColor: String,
-    color: String,
-    clearable: Boolean,
-    disabled: Boolean,
-    emptyIcon: {
-      type: IconValue,
-      default: '$ratingEmpty',
-    },
-    fullIcon: {
-      type: IconValue,
-      default: '$ratingFull',
-    },
-    halfIncrements: Boolean,
-    hover: Boolean,
-    length: {
-      type: [Number, String],
-      default: 5,
-    },
-    readonly: Boolean,
-    modelValue: {
-      type: [Number, String],
-      default: 0,
-    },
-    itemLabels: Array as Prop<string[]>,
-    itemLabelPosition: {
-      type: String,
-      default: 'top',
-      validator: (v: any) => ['top', 'bottom'].includes(v),
-    },
-    ripple: Boolean,
-
-    ...makeDensityProps(),
-    ...makeSizeProps(),
-    ...makeTagProps(),
-    ...makeThemeProps(),
-  },
+  props: makeVRatingProps(),
 
   emits: {
     'update:modelValue': (value: number | string) => true,
@@ -101,10 +105,7 @@ export const VRating = genericComponent<new <T>() => {
 
     const range = computed(() => createRange(Number(props.length), 1))
     const increments = computed(() => range.value.flatMap(v => props.halfIncrements ? [v - 0.5, v] : [v]))
-    const hoverIndex = ref(-1)
-    const focusIndex = ref(-1)
-    const firstRef = ref<HTMLElement>()
-    let isClicking = false
+    const hoverIndex = shallowRef(-1)
 
     const itemState = computed(() => increments.value.map(value => {
       const isHovering = props.hover && hoverIndex.value > -1
@@ -127,18 +128,6 @@ export const VRating = genericComponent<new <T>() => {
         hoverIndex.value = -1
       }
 
-      function onFocus () {
-        if (value === 0 && normalizedValue.value === 0) {
-          firstRef.value?.focus()
-        } else {
-          focusIndex.value = value
-        }
-      }
-
-      function onBlur () {
-        if (!isClicking) focusIndex.value = -1
-      }
-
       function onClick () {
         if (props.disabled || props.readonly) return
         rating.value = normalizedValue.value === value && props.clearable ? 0 : value
@@ -147,24 +136,15 @@ export const VRating = genericComponent<new <T>() => {
       return {
         onMouseenter: props.hover ? onMouseenter : undefined,
         onMouseleave: props.hover ? onMouseleave : undefined,
-        onFocus,
-        onBlur,
         onClick,
       }
     }))
 
-    function onMousedown () {
-      isClicking = true
-    }
-
-    function onMouseup () {
-      isClicking = false
-    }
-
-    const name = computed(() => props.name ?? `v-rating-${getUid()}`)
+    const uid = useId()
+    const name = computed(() => props.name ?? `v-rating-${uid}`)
 
     function VRatingItem ({ value, index, showStar = true }: { value: number, index: number, showStar?: boolean }) {
-      const { onMouseenter, onMouseleave, onFocus, onBlur, onClick } = eventState.value[index + 1]
+      const { onMouseenter, onMouseleave, onClick } = eventState.value[index + 1]
       const id = `${name.value}-${String(value).replace('.', '-')}`
       const btnProps = {
         color: itemState.value[index]?.color,
@@ -173,7 +153,6 @@ export const VRating = genericComponent<new <T>() => {
         icon: itemState.value[index]?.icon,
         ripple: props.ripple,
         size: props.size,
-        tag: 'span',
         variant: 'plain' as Variant,
       }
 
@@ -185,10 +164,9 @@ export const VRating = genericComponent<new <T>() => {
               'v-rating__item--half': props.halfIncrements && value % 1 > 0,
               'v-rating__item--full': props.halfIncrements && value % 1 === 0,
             }}
-            onMousedown={ onMousedown }
-            onMouseup={ onMouseup }
             onMouseenter={ onMouseenter }
             onMouseleave={ onMouseleave }
+            onClick={ onClick }
           >
             <span class="v-rating__hidden">{ t(props.itemAriaLabel, value, props.length) }</span>
             {
@@ -198,9 +176,13 @@ export const VRating = genericComponent<new <T>() => {
                 props: btnProps,
                 value,
                 index,
+                rating: normalizedValue.value,
               })
               : (
-                <VBtn { ...btnProps } />
+                <VBtn
+                  aria-label={ t(props.itemAriaLabel, value, props.length) }
+                  { ...btnProps }
+                />
               )
             }
           </label>
@@ -212,10 +194,7 @@ export const VRating = genericComponent<new <T>() => {
             type="radio"
             value={ value }
             checked={ normalizedValue.value === value }
-            onClick={ onClick }
-            onFocus={ onFocus }
-            onBlur={ onBlur }
-            ref={ index === 0 ? firstRef : undefined }
+            tabindex={ -1 }
             readonly={ props.readonly }
             disabled={ props.disabled }
           />
@@ -243,7 +222,9 @@ export const VRating = genericComponent<new <T>() => {
               'v-rating--readonly': props.readonly,
             },
             themeClasses.value,
+            props.class,
           ]}
+          style={ props.style }
         >
           <VRatingItem value={ 0 } index={ -1 } showStar={ false } />
 
@@ -254,14 +235,7 @@ export const VRating = genericComponent<new <T>() => {
                   ? createLabel({ value, index: i, label: props.itemLabels?.[i] })
                   : undefined
               }
-              <div
-                class={[
-                  'v-rating__item',
-                  {
-                    'v-rating__item--focused': Math.ceil(focusIndex.value) === value,
-                  },
-                ]}
-              >
+              <div class="v-rating__item">
                 { props.halfIncrements ? (
                   <>
                     <VRatingItem value={ value - 0.5 } index={ i * 2 } />
@@ -269,7 +243,7 @@ export const VRating = genericComponent<new <T>() => {
                   </>
                 ) : (
                   <VRatingItem value={ value } index={ i } />
-                ) }
+                )}
               </div>
               {
                 hasLabels && props.itemLabelPosition === 'bottom'
@@ -277,7 +251,7 @@ export const VRating = genericComponent<new <T>() => {
                   : undefined
               }
             </div>
-          )) }
+          ))}
         </props.tag>
       )
     })

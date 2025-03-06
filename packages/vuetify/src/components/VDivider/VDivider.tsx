@@ -2,38 +2,42 @@
 import './VDivider.sass'
 
 // Composables
+import { useTextColor } from '@/composables/color'
+import { makeComponentProps } from '@/composables/component'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
 import { computed, toRef } from 'vue'
-import { convertToUnit, defineComponent, useRender } from '@/util'
+import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
-// Types
-type DividerKey = 'borderRightWidth' | 'borderTopWidth' | 'maxHeight' | 'maxWidth'
+type DividerKey = 'borderRightWidth' | 'borderTopWidth' | 'height' | 'width'
 type DividerStyles = Partial<Record<DividerKey, string>>
 
-export const VDivider = defineComponent({
+export const makeVDividerProps = propsFactory({
+  color: String,
+  inset: Boolean,
+  length: [Number, String],
+  opacity: [Number, String],
+  thickness: [Number, String],
+  vertical: Boolean,
+
+  ...makeComponentProps(),
+  ...makeThemeProps(),
+}, 'VDivider')
+
+export const VDivider = genericComponent()({
   name: 'VDivider',
 
-  props: {
-    color: String,
-    inset: Boolean,
-    length: [Number, String],
-    thickness: [Number, String],
-    vertical: Boolean,
+  props: makeVDividerProps(),
 
-    ...makeThemeProps(),
-  },
-
-  setup (props, { attrs }) {
+  setup (props, { attrs, slots }) {
     const { themeClasses } = provideTheme(props)
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
+    const { textColorClasses, textColorStyles } = useTextColor(toRef(props, 'color'))
     const dividerStyles = computed(() => {
       const styles: DividerStyles = {}
 
       if (props.length) {
-        styles[props.vertical ? 'maxHeight' : 'maxWidth'] = convertToUnit(props.length)
+        styles[props.vertical ? 'height' : 'width'] = convertToUnit(props.length)
       }
 
       if (props.thickness) {
@@ -43,29 +47,56 @@ export const VDivider = defineComponent({
       return styles
     })
 
-    useRender(() => (
-      <hr
-        class={[
-          {
-            'v-divider': true,
-            'v-divider--inset': props.inset,
-            'v-divider--vertical': props.vertical,
-          },
-          themeClasses.value,
-          backgroundColorClasses.value,
-        ]}
-        style={[
-          dividerStyles.value,
-          backgroundColorStyles.value,
-        ]}
-        aria-orientation={
-          !attrs.role || attrs.role === 'separator'
-            ? props.vertical ? 'vertical' : 'horizontal'
-            : undefined
-        }
-        role={`${attrs.role || 'separator'}`}
-      />
-    ))
+    useRender(() => {
+      const divider = (
+        <hr
+          class={[
+            {
+              'v-divider': true,
+              'v-divider--inset': props.inset,
+              'v-divider--vertical': props.vertical,
+            },
+            themeClasses.value,
+            textColorClasses.value,
+            props.class,
+          ]}
+          style={[
+            dividerStyles.value,
+            textColorStyles.value,
+            { '--v-border-opacity': props.opacity },
+            props.style,
+          ]}
+          aria-orientation={
+            !attrs.role || attrs.role === 'separator'
+              ? props.vertical ? 'vertical' : 'horizontal'
+              : undefined
+          }
+          role={ `${attrs.role || 'separator'}` }
+        />
+      )
+
+      if (!slots.default) return divider
+
+      return (
+        <div
+          class={[
+            'v-divider__wrapper',
+            {
+              'v-divider__wrapper--vertical': props.vertical,
+              'v-divider__wrapper--inset': props.inset,
+            },
+          ]}
+        >
+          { divider }
+
+          <div class="v-divider__content">
+            { slots.default() }
+          </div>
+
+          { divider }
+        </div>
+      )
+    })
 
     return {}
   },

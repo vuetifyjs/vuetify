@@ -2,27 +2,30 @@
   <v-combobox
     v-model="chips"
     :items="items"
-    chips
-    clearable
     label="Your favorite hobbies"
-    multiple
     prepend-icon="mdi-filter-variant"
     variant="solo"
+    chips
+    clearable
+    closable-chips
+    multiple
   >
-    <template v-slot:selection="{ attrs, item, select, selected }">
-      <v-chip
-        v-bind="attrs"
-        :model-value="selected"
-        closable
-        @click="select"
-        @click:close="remove(item)"
-      >
-        <strong>{{ item }}</strong>&nbsp;
+    <template v-slot:chip="{ props, item }">
+      <v-chip v-bind="props">
+        <strong>{{ item.raw }}</strong>&nbsp;
         <span>(interest)</span>
       </v-chip>
     </template>
   </v-combobox>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const items = ['Streaming', 'Eating']
+
+  const chips = ref(['Programming', 'Playing video games', 'Watching movies', 'Sleeping'])
+</script>
 
 <script>
   export default {
@@ -31,13 +34,6 @@
         chips: ['Programming', 'Playing video games', 'Watching movies', 'Sleeping'],
         items: ['Streaming', 'Eating'],
       }
-    },
-
-    methods: {
-      remove (item) {
-        this.chips.splice(this.chips.indexOf(item), 1)
-        this.chips = [...this.chips]
-      },
     },
   }
 </script>

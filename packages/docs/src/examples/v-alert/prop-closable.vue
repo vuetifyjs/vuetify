@@ -3,11 +3,11 @@
     <v-alert
       v-model="alert"
       border="start"
-      variant="tonal"
-      closable
       close-label="Close Alert"
       color="deep-purple-accent-4"
       title="Closable Alert"
+      variant="tonal"
+      closable
     >
       Aenean imperdiet. Quisque id odio. Cras dapibus. Pellentesque ut neque. Cras dapibus.
 
@@ -18,15 +18,18 @@
       v-if="!alert"
       class="text-center"
     >
-      <v-btn
-
-        @click="alert = true"
-      >
+      <v-btn @click="alert = true">
         Reset
       </v-btn>
     </div>
   </div>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const alert = ref(true)
+</script>
 
 <script>
   export default {

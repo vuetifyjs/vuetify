@@ -1,6 +1,0 @@
-{
-  "props": {
-    "aspectRatio": "Sets a base aspect ratio, calculated as width/height. This will only set a **minimum** height, the component can still grow if it has a lot of content.",
-    "contentClass": "Apply a custom class to the responsive content div."
-  }
-}

@@ -5,26 +5,19 @@
         color: 'primary',
         density: 'compact',
       },
-      VTextField: {
-        color: 'primary',
-      },
-      VTextarea: {
-        color: 'primary',
-      },
     }"
   >
     <v-card
       id="request-service"
-      border
-      class="mx-auto pa-2"
-      max-width="440"
+      class="pa-2"
       title="Request Support"
       variant="flat"
+      border
     >
       <template #append>
         <v-img
-          width="96"
           :src="logo"
+          width="96"
         />
       </template>
 
@@ -33,27 +26,34 @@
         v-model="valid"
         @submit.prevent="onSubmit"
       >
-
         <v-card-text>
-          <v-label class="mb-2">Contact Information</v-label>
+          <v-label class="mb-2 font-weight-bold">Contact Information</v-label>
 
-          <v-text-field
-            v-model="name"
-            :rules="[rules.required]"
-            label="Name"
-            name="name"
-          />
+          <v-row class="mb-4">
+            <v-col cols="12" md="6">
+              <AppTextField
+                v-model="name"
+                :placeholder="t('name')"
+                :rules="[rules.required]"
+                name="name"
+                prepend-inner-icon="mdi-account-circle-outline"
+              />
+            </v-col>
 
-          <v-text-field
-            v-model="email"
-            :rules="[rules.required, rules.email]"
-            label="Email address"
-            name="email"
-          />
+            <v-col cols="12" md="6">
+              <AppTextField
+                v-model="email"
+                :placeholder="t('email-address')"
+                :rules="[rules.required, rules.email]"
+                name="email"
+                prepend-inner-icon="mdi-email-outline"
+              />
+            </v-col>
+          </v-row>
 
-          <v-label>What services are you interested in?</v-label>
+          <v-label class="mb-2 font-weight-bold">What services are you interested in?</v-label>
 
-          <div class="py-2">
+          <div class="mb-4">
             <v-checkbox-btn
               v-model="upgrade"
               label="Upgrading an existing project"
@@ -76,7 +76,7 @@
           <!-- <v-checkbox label="Training & workshops" /> -->
           </div>
 
-          <v-label>
+          <v-label class="font-weight-bold">
             Are you currently a sponsor?
           </v-label>
 
@@ -88,24 +88,14 @@
             <small class="text-primary">More Information</small>
           </a>
 
-          <div class="py-2">
-            <v-switch
-              v-model="sponsor"
-              density="compact"
-              color="primary"
-              inset
-              hide-details
-              label="Yes"
-              name="sponsor"
-            />
-          </div>
-
-          <v-label class="mb-2">Questions or comments</v-label>
-
-          <v-textarea
-            v-model="questions"
-            label="My project..."
-            name="questions"
+          <v-switch
+            v-model="sponsor"
+            color="primary"
+            density="compact"
+            label="Yes"
+            name="sponsor"
+            hide-details
+            inset
           />
 
           <small class="text-medium-emphasis">
@@ -121,10 +111,10 @@
             :color="success ? 'success' : valid ? 'primary' : undefined"
             :disabled="loading || !valid"
             :loading="loading"
-            block
             size="large"
             type="submit"
             variant="flat"
+            block
           >
             <span v-if="!success && !loading">Submit</span>
 
@@ -136,8 +126,8 @@
           <small>
             Issues with this form?
             <a
-              href="mailto:support@vuetifyjs.com?subject=Enterprise Support"
               class="text-primary"
+              href="mailto:support@vuetifyjs.com?subject=Enterprise Support"
               target="_blank"
             >
               Contact Us
@@ -151,12 +141,10 @@
 
 <script setup lang="ts">
   // Utilities
-  import { computed, ref, watch } from 'vue'
-  import { rpath } from '@/util/routes'
-  import { useTheme } from 'vuetify'
   import emailjs from '@emailjs/browser'
 
   const theme = useTheme()
+  const { t } = useI18n()
 
   const name = ref('')
   const email = ref('')
@@ -165,7 +153,6 @@
   const sla = ref(false)
   const sponsor = ref(false)
   const loading = ref(false)
-  const questions = ref('')
   const valid = ref<boolean | null>(null)
   const success = ref(false)
   const form = ref<HTMLFormElement>()

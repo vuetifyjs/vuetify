@@ -1,6 +1,6 @@
-import { capitalize } from 'lodash'
+import { capitalize } from 'lodash-es'
 
-export { camelCase, capitalize } from 'lodash'
+export { camelCase, capitalize } from 'lodash-es'
 
 export const kebabCase = (str: string) => {
   let kebab = ''

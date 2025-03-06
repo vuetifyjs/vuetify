@@ -1,15 +1,15 @@
 <template>
   <v-sparkline
-    :value="value"
-    :gradient="gradient"
-    :smooth="radius || false"
-    :padding="padding"
-    :line-width="width"
-    :stroke-linecap="lineCap"
-    :gradient-direction="gradientDirection"
-    :fill="fill"
-    :type="type"
     :auto-line-width="autoLineWidth"
+    :fill="fill"
+    :gradient="gradient"
+    :gradient-direction="gradientDirection"
+    :line-width="width"
+    :model-value="value"
+    :padding="padding"
+    :smooth="radius || false"
+    :stroke-linecap="lineCap"
+    :type="type"
     auto-draw
   ></v-sparkline>
 </template>

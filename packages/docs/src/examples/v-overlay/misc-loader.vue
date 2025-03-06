@@ -14,12 +14,23 @@
     >
       <v-progress-circular
         color="primary"
-        indeterminate
         size="64"
+        indeterminate
       ></v-progress-circular>
     </v-overlay>
   </div>
 </template>
+
+<script setup>
+  import { ref, watch } from 'vue'
+
+  const overlay = ref(false)
+  watch(overlay, val => {
+    val && setTimeout(() => {
+      overlay.value = false
+    }, 3000)
+  })
+</script>
 
 <script>
   export default {

@@ -1,167 +1,147 @@
 <template>
   <v-card>
     <v-toolbar
-      color="primary"
-      dark
+      color="surface-light"
+      density="compact"
+      title="Local hotspots"
       flat
-    >
-      <v-icon>mdi-silverware</v-icon>
-      <v-toolbar-title>Local hotspots</v-toolbar-title>
-    </v-toolbar>
+    ></v-toolbar>
 
-    <v-row>
-      <v-col>
-        <v-card-text>
-          <v-treeview
-            v-model="tree"
-            :load-children="fetch"
-            :items="items"
-            selected-color="indigo"
-            open-on-click
-            selectable
-            return-object
-            expand-icon="mdi-chevron-down"
-            on-icon="mdi-bookmark"
-            off-icon="mdi-bookmark-outline"
-            indeterminate-icon="mdi-bookmark-minus"
-          >
-          </v-treeview>
-        </v-card-text>
+    <v-row dense>
+      <v-col class="d-flex align-center" cols="12" sm="6">
+        <v-treeview
+          v-model:selected="tree"
+          :items="items"
+          :load-children="load"
+          class="flex-1-0"
+          false-icon="mdi-bookmark-outline"
+          indeterminate-icon="mdi-bookmark-minus"
+          item-title="name"
+          item-value="id"
+          select-strategy="classic"
+          true-icon="mdi-bookmark"
+          return-object
+          selectable
+        ></v-treeview>
       </v-col>
 
-      <v-divider vertical></v-divider>
+      <v-divider :vertical="$vuetify.display.mdAndUp" class="my-md-3"></v-divider>
 
-      <v-col
-        cols="12"
-        md="6"
-      >
+      <v-col cols="12" sm="6">
         <v-card-text>
           <div
             v-if="tree.length === 0"
-            key="title"
             class="text-h6 font-weight-light text-grey pa-4 text-center"
           >
             Select your favorite breweries
           </div>
 
-          <v-scroll-x-transition
-            group
-            hide-on-leave
-          >
-            <v-chip
-              v-for="(selection, i) in tree"
-              :key="i"
-              color="grey"
-              dark
-              small
-              class="ma-1"
-            >
-              <v-icon
-                start
+          <div class="d-flex flex-wrap ga-1">
+            <v-scroll-x-transition group hide-on-leave>
+              <v-chip
+                v-for="selection in tree"
+                :key="selection.id"
+                :prepend-icon="getIcon()"
+                :text="selection.name"
+                color="grey"
                 size="small"
-              >
-                mdi-beer
-              </v-icon>
-              {{ selection.name }}
-            </v-chip>
-          </v-scroll-x-transition>
+                border
+                closable
+                label
+                @click:close="onClickClose(selection)"
+              ></v-chip>
+            </v-scroll-x-transition>
+          </div>
         </v-card-text>
       </v-col>
     </v-row>
 
     <v-divider></v-divider>
 
-    <v-card-actions>
+    <template v-slot:actions>
       <v-btn
-        variant="text"
+        text="Reset"
         @click="tree = []"
-      >
-        Reset
-      </v-btn>
+      ></v-btn>
 
       <v-spacer></v-spacer>
 
       <v-btn
-        color="green-darken-1"
+        append-icon="mdi-content-save"
+        color="surface-light"
+        text="Save"
         variant="flat"
-      >
-        Save
-        <v-icon end>
-          mdi-content-save
-        </v-icon>
-      </v-btn>
-    </v-card-actions>
+        border
+      ></v-btn>
+    </template>
   </v-card>
 </template>
 
-<script>
-  export default {
-    data: () => ({
-      breweries: [],
-      isLoading: false,
-      tree: [],
-      types: [],
-    }),
+<script setup>
+  import { ref, watch } from 'vue'
 
-    computed: {
-      items () {
-        const children = this.types.map(type => ({
-          id: type,
-          name: this.getName(type),
-          children: this.getChildren(type),
-        }))
+  const icons = [
+    'mdi-beer',
+    'mdi-glass-mug',
+    'mdi-liquor',
+    'mdi-glass-mug-variant',
+  ]
 
-        return [{
-          id: 1,
-          name: 'All Breweries',
-          children,
-        }]
-      },
-      shouldShowTree () {
-        return this.breweries.length > 0 && !this.isLoading
-      },
-    },
+  const breweries = ref([])
+  const tree = ref([])
+  const types = ref([])
+  const items = ref([{
+    id: 1,
+    name: 'All Breweries',
+    children: [],
+  }])
 
-    watch: {
-      breweries (val) {
-        this.types = val.reduce((acc, cur) => {
-          const type = cur.brewery_type
+  watch(breweries, val => {
+    types.value = val.reduce((acc, cur) => {
+      const type = cur.brewery_type
+      if (!acc.includes(type)) acc.push(type)
+      return acc
+    }, []).sort()
 
-          if (!acc.includes(type)) acc.push(type)
+    const children = types.value.map(type => ({
+      id: type,
+      name: getName(type),
+      children: getChildren(type),
+    }))
+    const rootObj = items.value[0]
+    rootObj.children = children
+    items.value = [rootObj]
+  })
 
-          return acc
-        }, []).sort()
-      },
-    },
+  function load () {
+    if (breweries.value.length) return
 
-    methods: {
-      fetch () {
-        if (this.breweries.length) return
+    return fetch('https://api.openbrewerydb.org/breweries').then(res => res.json()).then(data => (breweries.value = data)).catch(err => console.log(err))
+  }
 
-        return fetch('https://api.openbrewerydb.org/breweries')
-          .then(res => res.json())
-          .then(data => (this.breweries = data))
-          .catch(err => console.log(err))
-      },
-      getChildren (type) {
-        const breweries = []
+  function getChildren (type) {
+    const _breweries = []
+    for (const brewery of breweries.value) {
+      if (brewery.brewery_type !== type) continue
+      _breweries.push({
+        ...brewery,
+        name: getName(brewery.name),
+      })
+    }
+    return _breweries.sort((a, b) => {
+      return a.name > b.name ? 1 : -1
+    })
+  }
 
-        for (const brewery of this.breweries) {
-          if (brewery.brewery_type !== type) continue
+  function getIcon () {
+    return icons[Math.floor(Math.random() * icons.length)]
+  }
 
-          breweries.push({
-            ...brewery,
-            name: this.getName(brewery.name),
-          })
-        }
+  function getName (name) {
+    return `${name.charAt(0).toUpperCase()}${name.slice(1)}`
+  }
 
-        return breweries.sort((a, b) => {
-          return a.name > b.name ? 1 : -1
-        })
-      },
-      getName (name) {
-        return `${name.charAt(0).toUpperCase()}${name.slice(1)}`
-      },
-    },
+  function onClickClose (selection) {
+    tree.value = tree.value.filter(item => item.id !== selection.id)
   }
 </script>

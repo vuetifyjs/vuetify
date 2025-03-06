@@ -1,5 +1,5 @@
 // Utilities
-import { computed, inject, provide, ref } from 'vue'
+import { computed, inject, provide, shallowRef } from 'vue'
 
 // Types
 import type { InjectionKey, Ref } from 'vue'
@@ -8,7 +8,7 @@ import type { InjectionKey, Ref } from 'vue'
 export const DepthKey: InjectionKey<Ref<number>> = Symbol.for('vuetify:depth')
 
 export function useDepth (hasPrepend?: Ref<boolean>) {
-  const parent = inject(DepthKey, ref(-1))
+  const parent = inject(DepthKey, shallowRef(-1))
 
   const depth = computed(() => parent.value + 1 + (hasPrepend?.value ? 1 : 0))
 
@@ -24,10 +24,10 @@ export const ListKey: InjectionKey<{
 }> = Symbol.for('vuetify:list')
 
 export function createList () {
-  const parent = inject(ListKey, { hasPrepend: ref(false), updateHasPrepend: () => null })
+  const parent = inject(ListKey, { hasPrepend: shallowRef(false), updateHasPrepend: () => null })
 
   const data = {
-    hasPrepend: ref(false),
+    hasPrepend: shallowRef(false),
     updateHasPrepend: (value: boolean) => {
       if (value) data.hasPrepend.value = value
     },

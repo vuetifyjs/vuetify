@@ -47,6 +47,31 @@
   </v-row>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const date = ref((new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10))
+  const done = ref([false, false, false])
+  const mouseMonth = ref(null)
+
+  function contextMenu (year, event) {
+    done.value[2] = true
+    event.preventDefault()
+    alert(`You have activated context menu for year ${year}`)
+  }
+  function dblClick (date) {
+    done.value[0] = true
+    alert(`You have just double clicked the following date: ${date}`)
+  }
+  function mouseEnter (month) {
+    done.value[1] = true
+    mouseMonth.value = month
+  }
+  function mouseLeave () {
+    mouseMonth.value = null
+  }
+</script>
+
 <script>
   export default {
     data: () => ({

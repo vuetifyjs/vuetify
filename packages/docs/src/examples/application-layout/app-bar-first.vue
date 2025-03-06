@@ -1,9 +1,15 @@
 <template>
-  <v-layout>
-    <v-app-bar color="grey-lighten-2"></v-app-bar>
-    <v-navigation-drawer color="grey-darken-2" permanent></v-navigation-drawer>
-    <v-main>
-      <v-card height="200px"></v-card>
+  <v-layout class="rounded rounded-md">
+    <v-app-bar title="Application bar"></v-app-bar>
+
+    <v-navigation-drawer>
+      <v-list>
+        <v-list-item title="Navigation drawer"></v-list-item>
+      </v-list>
+    </v-navigation-drawer>
+
+    <v-main class="d-flex align-center justify-center" style="min-height: 300px;">
+      Main Content
     </v-main>
   </v-layout>
 </template>

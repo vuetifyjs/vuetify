@@ -1,6 +1,12 @@
 export default {
   badge: 'نشان',
+  open: 'باز کردن',
   close: 'بستن',
+  dismiss: 'رد کردن',
+  confirmEdit: {
+    ok: 'تایید',
+    cancel: 'لغو',
+  },
   dataIterator: {
     noResultsText: 'نتیجه‌ای یافت نشد',
     loadingText: 'در حال بارگذاری...',
@@ -26,12 +32,20 @@ export default {
     lastPage: 'صفحه‌ی آخر',
     pageText: '{0} تا {1} از {2}',
   },
+  dateRangeInput: {
+    divider: 'تا',
+  },
   datePicker: {
-    itemsSelected: '{0} انتخاب شده',
-    nextMonthAriaLabel: 'ماه بعد',
-    nextYearAriaLabel: 'سال بعد',
-    prevMonthAriaLabel: 'ماه قبل',
-    prevYearAriaLabel: 'سال قبل',
+    itemsSelected: '{0} انتخاب‌شده',
+    range: {
+      title: 'انتخاب تاریخ‌ها',
+      header: 'تاریخ‌ها را وارد کنید',
+    },
+    title: 'انتخاب تاریخ',
+    header: 'تاریخ را وارد کنید',
+    input: {
+      placeholder: 'تاریخ را وارد کنید',
+    },
   },
   noDataText: 'داده‌ای موجود نیست',
   carousel: {
@@ -43,34 +57,51 @@ export default {
   },
   calendar: {
     moreEvents: '{بیشتر {0',
+    today: 'امروز',
   },
   input: {
-    clear: 'Clear {0}',
-    prependAction: '{0} prepended action',
-    appendAction: '{0} appended action',
+    clear: 'پاکسازی {0}',
+    prependAction: '{0} اقدام پیشین',
+    appendAction: '{0} اقدام افزوده‌شده',
+    otp: 'لطفا کد را وارد کنید {0}',
   },
   fileInput: {
     counter: '{0} پرونده',
     counterSize: '{0} پرونده ({1} در کل)',
   },
+  fileUpload: {
+    title: 'فایل‌ها را اینجا بکشید و رها کنید',
+    divider: 'یا',
+    browse: 'مرور فایل‌ها',
+  },
   timePicker: {
     am: 'قبل از ظهر',
     pm: 'بعد از ظهر',
+    title: 'انتخاب زمان',
   },
   pagination: {
     ariaLabel: {
       root: 'جهت یابی صفحه',
-      next: 'صفحه بعد',
-      previous: 'صفحه قبلی',
+      next: 'صفحه‌ی بعد',
+      previous: 'صفحه‌ی قبلی',
       page: 'برو صفحه {0}',
-      currentPage: '{0} صفحه فعلی ، صفحه',
-      first: 'First page',
-      last: 'Last page',
+      currentPage: '{0} صفحه‌ی فعلی ، صفحه‌ی',
+      first: 'صفحه‌ی اول',
+      last: 'صفحه‌ی آخر',
     },
+  },
+  stepper: {
+    next: 'بعدی',
+    prev: 'قبلی',
   },
   rating: {
     ariaLabel: {
-      item: 'Rating {0} of {1}',
+      item: 'امتیاز {0} از {1}',
     },
+  },
+  loading: 'در حال بارگذاری...',
+  infiniteScroll: {
+    loadMore: 'بارگذاری بیشتر',
+    empty: 'پایان',
   },
 }

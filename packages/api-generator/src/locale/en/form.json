@@ -2,9 +2,8 @@
   "props": {
     "disabled": "Puts all children inputs into a disabled state.",
     "fastFail": "Stop validation as soon as any rules fail.",
-    "lazyValidation": "If enabled, value will always be true unless there are visible validation errors. You can still call validate() to manually trigger validation.",
+    "modelValue": "The value representing the validity of the form. If the value is `null` then no validation has taken place yet, or the form has been reset. Otherwise the value will be a `boolean` that indicates if validation has passed or not.",
     "readonly": "Puts all children inputs into a readonly state.",
-    "modelValue": "A boolean value representing the validity of the form.",
     "validateOn": "Changes the events in which validation occurs."
   }
 }

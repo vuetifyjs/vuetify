@@ -9,15 +9,15 @@ $utilities: () !default;
       // Display utilities
       "overflow": (
         property: overflow,
-        values: auto hidden visible,
+        values: auto hidden visible scroll,
       ),
       "overflow-x": (
         property: overflow-x,
-        values: auto hidden
+        values: auto hidden scroll
       ),
       "overflow-y": (
         property: overflow-y,
-        values: auto hidden
+        values: auto hidden scroll
       ),
       "display": (
         responsive: true,
@@ -58,7 +58,21 @@ $utilities: () !default;
       "flex": (
         responsive: true,
         property: flex,
-        values: (fill: 1 1 auto)
+        values: (
+          fill: 1 1 auto,
+          '1-1': 1 1 auto,
+          '1-0': 1 0 auto,
+          '0-1': 0 1 auto,
+          '0-0': 0 0 auto,
+          '1-1-100': 1 1 100%,
+          '1-0-100': 1 0 100%,
+          '0-1-100': 0 1 100%,
+          '0-0-100': 0 0 100%,
+          '1-1-0': 1 1 0,
+          '1-0-0': 1 0 0,
+          '0-1-0': 0 1 0,
+          '0-0-0': 0 0 0,
+        )
       ),
       "flex-direction": (
         responsive: true,
@@ -160,6 +174,26 @@ $utilities: () !default;
           12: 12,
           last: 13,
         ),
+      ),
+
+      // gap utilities
+      "gap": (
+        responsive: true,
+        property: gap,
+        class: ga,
+        values: map.merge(variables.$spacers, (auto: auto))
+      ),
+      "gap-row": (
+        responsive: true,
+        property: row-gap,
+        class: gr,
+        values: map.merge(variables.$spacers, (auto: auto))
+      ),
+      "gap-column": (
+        responsive: true,
+        property: column-gap,
+        class: gc,
+        values: map.merge(variables.$spacers, (auto: auto))
       ),
 
       // Margin utilities
@@ -442,6 +476,11 @@ $utilities: () !default;
         class: text,
         values: (break: break-word)
       ),
+      "opacity": (
+        property: opacity,
+        class: opacity,
+        values: variables.$opacities
+      ),
       "text-opacity": (
         property: color,
         class: text,
@@ -468,6 +507,7 @@ $utilities: () !default;
         ),
         class: text,
         unimportant: (
+          font-family,
           font-weight,
           line-height
         ),
@@ -501,6 +541,32 @@ $utilities: () !default;
         class: position,
         values: static relative fixed absolute sticky
       ),
+      "top": (
+        property: top,
+        class: top,
+        values: 0
+      ),
+      "right": (
+        property: right,
+        class: right,
+        values: 0
+      ),
+      "bottom": (
+        property: bottom,
+        class: bottom,
+        values: 0
+      ),
+      "left": (
+        property: left,
+        class: left,
+        values: 0
+      ),
+      // Cursor
+      "cursor": (
+        property: cursor,
+        class: cursor,
+        values: auto default pointer wait text move help not-allowed progress grab grabbing none
+      ),
       // Sizing
       "fill-height": (
         property: height,
@@ -511,6 +577,7 @@ $utilities: () !default;
       ),
       "height": (
         property: height,
+        responsive: true,
         class: h,
         values: (
           auto: auto,
@@ -522,8 +589,16 @@ $utilities: () !default;
           100: 100%
         )
       ),
+      "height-screen": (
+        property: height,
+        class: h,
+        values: (
+          screen: 100dvh
+        )
+      ),
       "width": (
         property: width,
+        responsive: true,
         class: w,
         values: (
           auto: auto,

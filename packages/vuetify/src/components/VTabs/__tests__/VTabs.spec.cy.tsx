@@ -1,8 +1,11 @@
 /// <reference types="../../../../types/cypress" />
 
+// Components
+import { VTab, VTabs } from '../'
+
+// Utilities
 import { ref } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
-import { VTab, VTabs } from '../'
 
 describe('VTabs', () => {
   it('should respond to clicks', () => {
@@ -16,16 +19,11 @@ describe('VTabs', () => {
     ))
 
     cy.get('.v-tab').eq(1).click()
-
-    cy.vue().then(wrapper => {
-      const tabs = wrapper.findComponent<VTabs>('.v-tabs')
-      const emits = tabs.emitted('update:modelValue')
-
-      expect(emits).to.deep.equal([
+      .emitted(VTabs, 'update:modelValue')
+      .should('deep.equal', [
         ['foo'], // tabs will have initially set first tab as selected because of mandatory
         ['bar'],
       ])
-    })
   })
 
   it('should render slider', () => {
@@ -37,8 +35,7 @@ describe('VTabs', () => {
     ))
 
     cy.get('.v-tab').eq(0).find('.v-tab__slider').should('exist')
-
-    cy.get('.v-tab').eq(1).click().find('.v-tab__slider').should('exist')
+      .get('.v-tab').eq(1).click().find('.v-tab__slider').should('exist')
   })
 
   it('should hide slider', () => {
@@ -50,8 +47,7 @@ describe('VTabs', () => {
     ))
 
     cy.get('.v-tab').eq(0).find('.v-tab__slider').should('not.exist')
-
-    cy.get('.v-tab').eq(1).click().find('.v-tab__slider').should('not.exist')
+      .get('.v-tab').eq(1).click().find('.v-tab__slider').should('not.exist')
   })
 
   it('should respond to v-model changes', () => {
@@ -67,13 +63,9 @@ describe('VTabs', () => {
     })
 
     cy.get('.v-tab').eq(0).should('have.class', 'v-tab--selected')
-
-    cy.vue().then(wrapper => {
-      wrapper.setProps({ modelValue: 'bar' })
-    })
-
-    cy.get('.v-tab').eq(0).should('not.have.class', 'v-tab--selected')
-    cy.get('.v-tab').eq(1).should('have.class', 'v-tab--selected')
+      .setProps({ modelValue: 'bar' })
+      .get('.v-tab').eq(0).should('not.have.class', 'v-tab--selected')
+      .get('.v-tab').eq(1).should('have.class', 'v-tab--selected')
   })
 
   it('should react to router changes', () => {
@@ -102,16 +94,16 @@ describe('VTabs', () => {
       },
     })
 
-    cy.get('.v-tab').eq(1).click().then(() => {
-      expect(router.currentRoute.value.path).to.equal('/about')
-    })
-
-    cy.get('.v-tabs').then(() => {
-      router.push('/')
-    })
-
-    cy.get('.v-tab').eq(0).should('not.have.class', 'v-tab--selected')
-    cy.get('.v-tab').eq(1).should('have.class', 'v-tab--selected')
+    cy.get('.v-tab').eq(1).click()
+      .then(() => {
+        expect(router.currentRoute.value.path).to.equal('/about')
+      })
+      .get('.v-tabs')
+      .then(() => {
+        router.push('/')
+      })
+      .get('.v-tab').eq(0).should('not.have.class', 'v-tab--selected')
+      .get('.v-tab').eq(1).should('have.class', 'v-tab--selected')
   })
 
   it('should render tabs vertically', () => {
@@ -123,8 +115,7 @@ describe('VTabs', () => {
     ))
 
     cy.get('.v-tabs').should('have.class', 'v-tabs--vertical')
-
-    cy.get('.v-tab').eq(1).click().should('have.class', 'v-tab--selected')
+      .get('.v-tab').eq(1).click().should('have.class', 'v-tab--selected')
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/15237
@@ -132,7 +123,7 @@ describe('VTabs', () => {
     const model = ref('B')
     cy.mount(({ show = true }: { show?: boolean }) => (
       <div v-show={ show }>
-        <VTabs modelValue={model.value} onUpdate:modelValue={v => model.value = v as string}>
+        <VTabs modelValue={ model.value } onUpdate:modelValue={ v => model.value = v as string }>
           <VTab value="A">A</VTab>
           <VTab value="B">B</VTab>
           <VTab value="C">C</VTab>
@@ -153,5 +144,18 @@ describe('VTabs', () => {
       .then(() => {
         expect(model.value).to.equal('B')
       })
+  })
+
+  it('should render tabs using items', () => {
+    const items = [
+      { text: 'A', value: 1 },
+      { text: 'B', value: 2 },
+      { text: 'C', value: 3 },
+    ]
+    cy.mount(() => (
+      <VTabs items={ items } />
+    )).get('.v-tab').eq(0).should('have.text', 'A')
+      .get('.v-tab').eq(1).should('have.text', 'B')
+      .get('.v-tab').eq(2).should('have.text', 'C')
   })
 })

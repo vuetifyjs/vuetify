@@ -1,8 +1,8 @@
 <template>
   <v-card
     :loading="isUpdating"
-    color="blue-grey-darken-1"
     class="mx-auto"
+    color="blue-grey-darken-1"
     max-width="420"
   >
     <template v-slot:loader="{ isActive }">
@@ -15,9 +15,9 @@
     </template>
 
     <v-img
-      cover
       height="200"
       src="https://cdn.vuetifyjs.com/images/cards/dark-beach.jpg"
+      cover
     >
       <v-row class="pa-3">
         <v-col cols="12">
@@ -29,8 +29,8 @@
             <template v-slot:activator="{ props }">
               <v-btn
                 v-bind="props"
-                icon="mdi-dots-vertical"
                 density="comfortable"
+                icon="mdi-dots-vertical"
                 variant="tonal"
               ></v-btn>
             </template>
@@ -80,12 +80,12 @@
               v-model="friends"
               :disabled="isUpdating"
               :items="people"
-              chips
-              closable-chips
               color="blue-grey-lighten-2"
               item-title="name"
               item-value="name"
               label="Select"
+              chips
+              closable-chips
               multiple
             >
               <template v-slot:chip="{ props, item }">
@@ -99,9 +99,9 @@
               <template v-slot:item="{ props, item }">
                 <v-list-item
                   v-bind="props"
-                  :prepend-avatar="item?.raw?.avatar"
-                  :title="item?.raw?.name"
-                  :subtitle="item?.raw?.group"
+                  :prepend-avatar="item.raw.avatar"
+                  :subtitle="item.raw.group"
+                  :title="item.raw.name"
                 ></v-list-item>
               </template>
             </v-autocomplete>
@@ -119,8 +119,8 @@
         class="mt-0 ms-2"
         color="green-lighten-2"
         density="compact"
-        hide-details
         label="Auto Update"
+        hide-details
       ></v-switch>
 
       <v-spacer></v-spacer>
@@ -139,6 +139,42 @@
   </v-card>
 </template>
 
+<script setup>
+  import { ref, watch } from 'vue'
+
+  const srcs = {
+    1: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
+    2: 'https://cdn.vuetifyjs.com/images/lists/2.jpg',
+    3: 'https://cdn.vuetifyjs.com/images/lists/3.jpg',
+    4: 'https://cdn.vuetifyjs.com/images/lists/4.jpg',
+    5: 'https://cdn.vuetifyjs.com/images/lists/5.jpg',
+  }
+  const people = [
+    { name: 'Sandra Adams', group: 'Group 1', avatar: srcs[1] },
+    { name: 'Ali Connors', group: 'Group 1', avatar: srcs[2] },
+    { name: 'Trevor Hansen', group: 'Group 1', avatar: srcs[3] },
+    { name: 'Tucker Smith', group: 'Group 1', avatar: srcs[2] },
+    { name: 'Britta Holt', group: 'Group 2', avatar: srcs[4] },
+    { name: 'Jane Smith ', group: 'Group 2', avatar: srcs[5] },
+    { name: 'John Smith', group: 'Group 2', avatar: srcs[1] },
+    { name: 'Sandra Williams', group: 'Group 2', avatar: srcs[3] },
+  ]
+
+  const autoUpdate = ref(true)
+  const friends = ref(['Sandra Adams', 'Britta Holt'])
+  const isUpdating = ref(false)
+  const name = ref('Midnight Crew')
+  const title = ref('The summer breeze')
+
+  let timeout = -1
+  watch(isUpdating, val => {
+    clearTimeout(timeout)
+    if (val) {
+      timeout = setTimeout(() => (isUpdating.value = false), 3000)
+    }
+  })
+</script>
+
 <script>
   export default {
     data () {
@@ -156,13 +192,14 @@
         isUpdating: false,
         name: 'Midnight Crew',
         people: [
-          { header: 'Group 1' },
+          // TODO: https://github.com/vuetifyjs/vuetify/issues/15721
+          // { header: 'Group 1' },
           { name: 'Sandra Adams', group: 'Group 1', avatar: srcs[1] },
           { name: 'Ali Connors', group: 'Group 1', avatar: srcs[2] },
           { name: 'Trevor Hansen', group: 'Group 1', avatar: srcs[3] },
           { name: 'Tucker Smith', group: 'Group 1', avatar: srcs[2] },
-          { divider: true },
-          { header: 'Group 2' },
+          // { divider: true },
+          // { header: 'Group 2' },
           { name: 'Britta Holt', group: 'Group 2', avatar: srcs[4] },
           { name: 'Jane Smith ', group: 'Group 2', avatar: srcs[5] },
           { name: 'John Smith', group: 'Group 2', avatar: srcs[1] },

@@ -1,9 +1,6 @@
 <template>
   <v-container fluid>
-    <v-radio-group
-      v-model="column"
-      column
-    >
+    <v-radio-group v-model="column">
       <v-radio
         label="Option 1"
         value="radio-1"
@@ -29,6 +26,13 @@
     </v-radio-group>
   </v-container>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const column = ref(null)
+  const inline = ref(null)
+</script>
 
 <script>
   export default {

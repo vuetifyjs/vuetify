@@ -1,91 +1,86 @@
 <template>
-  <div>
-    <v-row
-      justify="center"
+  <div class="pa-4 text-center">
+    <v-btn
+      text="Open Dialog 1"
+      @click="dialog = true"
+    ></v-btn>
+
+    <v-dialog
+      v-model="dialog"
+      max-width="480"
     >
-      <v-btn
-        color="primary"
-        class="ma-2"
-        @click="dialog = true"
-      >
-        Open Dialog 1
-      </v-btn>
-      <v-dialog
-        v-model="dialog"
-      >
-        <v-card>
-          <v-card-title>
-            Dialog 1
-          </v-card-title>
-          <v-card-text>
-            <v-btn
-              color="primary"
-              class="ma-2"
-              @click="dialog2 = true"
-            >
-              Open Dialog 2
-            </v-btn>
-          </v-card-text>
-          <v-card-actions>
-            <v-btn
-              color="primary"
-              variant="text"
-              @click="dialog = false"
-            >
-              Close
-            </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
+      <v-card title="Dialog 1">
+        <template v-slot:text>
+          <v-btn
+            class="my-2"
+            text="Open Dialog 2"
+            @click="dialog2 = true"
+          ></v-btn>
+        </template>
 
-      <v-dialog
-        v-model="dialog2"
-      >
-        <v-card>
-          <v-card-title>
-            Dialog 2
-          </v-card-title>
-          <v-card-text>
-            <v-btn
-              color="primary"
-              @click="dialog3 = !dialog3"
-            >
-              Open Dialog 3
-            </v-btn>
-          </v-card-text>
-          <v-card-actions>
-            <v-btn
-              color="primary"
-              variant="text"
-              @click="dialog2 = false"
-            >
-              Close
-            </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
+        <v-card-actions>
+          <v-spacer></v-spacer>
 
-      <v-dialog
-        v-model="dialog3"
-      >
-        <v-card>
-          <v-card-title>
-            <span>Dialog 3</span>
-          </v-card-title>
-          <v-card-actions>
-            <v-btn
-              color="primary"
-              variant="text"
-              @click="dialog3 = false"
-            >
-              Close
-            </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
-    </v-row>
+          <v-btn
+            text="Close"
+            variant="text"
+            @click="dialog = false"
+          ></v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+
+    <v-dialog
+      v-model="dialog2"
+      max-width="240"
+    >
+      <v-card title="Dialog 2">
+        <template v-slot:text>
+          <v-btn
+            class="my-2"
+            text="Open Dialog 3"
+            @click="dialog3 = !dialog3"
+          ></v-btn>
+        </template>
+
+        <v-card-actions>
+          <v-spacer></v-spacer>
+
+          <v-btn
+            text="Close"
+            variant="text"
+            @click="dialog2 = false"
+          ></v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+
+    <v-dialog
+      v-model="dialog3"
+      width="auto"
+    >
+      <v-card title="Dialog 3">
+        <v-card-actions>
+          <v-spacer></v-spacer>
+
+          <v-btn
+            text="Close"
+            variant="text"
+            @click="dialog3 = false"
+          ></v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
+
+<script setup>
+  import { shallowRef } from 'vue'
+
+  const dialog = shallowRef(false)
+  const dialog2 = shallowRef(false)
+  const dialog3 = shallowRef(false)
+</script>
 
 <script>
   export default {
@@ -94,32 +89,6 @@
         dialog: false,
         dialog2: false,
         dialog3: false,
-        notifications: false,
-        sound: true,
-        widgets: false,
-        items: [
-          {
-            title: 'Click Me',
-          },
-          {
-            title: 'Click Me',
-          },
-          {
-            title: 'Click Me',
-          },
-          {
-            title: 'Click Me 2',
-          },
-        ],
-        select: [
-          { text: 'State 1' },
-          { text: 'State 2' },
-          { text: 'State 3' },
-          { text: 'State 4' },
-          { text: 'State 5' },
-          { text: 'State 6' },
-          { text: 'State 7' },
-        ],
       }
     },
   }

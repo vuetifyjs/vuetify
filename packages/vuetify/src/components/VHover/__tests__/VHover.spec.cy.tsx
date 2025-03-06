@@ -9,7 +9,7 @@ describe('VHover', () => {
       <CenteredGrid width="200px" class="v-theme--light">
         <VHover>
           {{
-            default: ({ isHovering, props }: any) => <div {...props} class={['hover-element', isHovering && 'bg-primary']}>foobar</div>,
+            default: ({ isHovering, props }: any) => <div { ...props } class={['hover-element', isHovering && 'bg-primary']}>foobar</div>,
           }}
         </VHover>
       </CenteredGrid>
@@ -26,7 +26,7 @@ describe('VHover', () => {
       <CenteredGrid width="200px" class="v-theme--light">
         <VHover disabled>
           {{
-            default: ({ isHovering, props }: any) => <div {...props} class={['hover-element', isHovering && 'bg-primary']}>foobar</div>,
+            default: ({ isHovering, props }: any) => <div { ...props } class={['hover-element', isHovering && 'bg-primary']}>foobar</div>,
           }}
         </VHover>
       </CenteredGrid>
@@ -42,9 +42,9 @@ describe('VHover', () => {
     // eslint-disable-next-line cypress/no-unnecessary-waiting
     cy.mount(() => (
       <CenteredGrid width="200px" class="v-theme--light">
-        <VHover openDelay={100} closeDelay={100}>
+        <VHover openDelay={ 100 } closeDelay={ 100 }>
           {{
-            default: ({ isHovering, props }: any) => <div {...props} class={['hover-element', isHovering && 'bg-primary']}>foobar</div>,
+            default: ({ isHovering, props }: any) => <div { ...props } class={['hover-element', isHovering && 'bg-primary']}>foobar</div>,
           }}
         </VHover>
       </CenteredGrid>

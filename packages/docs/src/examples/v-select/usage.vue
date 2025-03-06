@@ -1,9 +1,9 @@
 <template>
-  <usage-example
+  <ExamplesUsageExample
     v-model="model"
     :code="code"
-    :options="options"
     :name="name"
+    :options="options"
   >
     <div>
       <v-select v-bind="props"></v-select>
@@ -16,20 +16,16 @@
 
       <v-checkbox v-model="multiple" label="Multiple"></v-checkbox>
     </template>
-  </usage-example>
+  </ExamplesUsageExample>
 </template>
 
 <script setup>
-  // Utilities
-  import { computed, ref } from 'vue'
-  import { propsToString } from '@/util/helpers'
-
   const name = 'v-select'
   const model = ref('default')
   const clear = ref(false)
   const chips = ref(false)
   const multiple = ref(false)
-  const options = ['solo', 'underlined']
+  const options = ['outlined', 'underlined', 'solo', 'solo-filled', 'solo-inverted']
   const props = computed(() => {
     return {
       clearable: clear.value || undefined,

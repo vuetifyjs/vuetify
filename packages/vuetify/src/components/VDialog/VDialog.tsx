@@ -5,47 +5,49 @@ import './VDialog.sass'
 import { VDialogTransition } from '@/components/transitions'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VOverlay } from '@/components/VOverlay'
+import { makeVOverlayProps } from '@/components/VOverlay/VOverlay'
 
 // Composables
+import { forwardRefs } from '@/composables/forwardRefs'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useScopeId } from '@/composables/scopeId'
-import { forwardRefs } from '@/composables/forwardRefs'
 
 // Utilities
-import { mergeProps, nextTick, ref, watch } from 'vue'
-import { genericComponent, IN_BROWSER, useRender } from '@/util'
-import { filterVOverlayProps, makeVOverlayProps } from '@/components/VOverlay/VOverlay'
+import { mergeProps, nextTick, onBeforeUnmount, ref, watch } from 'vue'
+import { focusableChildren, genericComponent, IN_BROWSER, propsFactory, useRender } from '@/util'
 
 // Types
-import type { SlotsToProps } from '@/util'
+import type { Component } from 'vue'
 import type { OverlaySlots } from '@/components/VOverlay/VOverlay'
 
-export const VDialog = genericComponent<new () => {
-  $props: SlotsToProps<OverlaySlots>
-}>()({
+export const makeVDialogProps = propsFactory({
+  fullscreen: Boolean,
+  retainFocus: {
+    type: Boolean,
+    default: true,
+  },
+  scrollable: Boolean,
+
+  ...makeVOverlayProps({
+    origin: 'center center' as const,
+    scrollStrategy: 'block' as const,
+    transition: { component: VDialogTransition as Component },
+    zIndex: 2400,
+  }),
+}, 'VDialog')
+
+export const VDialog = genericComponent<OverlaySlots>()({
   name: 'VDialog',
 
-  props: {
-    fullscreen: Boolean,
-    retainFocus: {
-      type: Boolean,
-      default: true,
-    },
-    scrollable: Boolean,
-
-    ...makeVOverlayProps({
-      origin: 'center center' as const,
-      scrollStrategy: 'block' as const,
-      transition: { component: VDialogTransition },
-      zIndex: 2400,
-    }),
-  },
+  props: makeVDialogProps(),
 
   emits: {
     'update:modelValue': (value: boolean) => true,
+    afterEnter: () => true,
+    afterLeave: () => true,
   },
 
-  setup (props, { slots }) {
+  setup (props, { emit, slots }) {
     const isActive = useProxiedModel(props, 'modelValue')
     const { scopeId } = useScopeId()
 
@@ -64,9 +66,7 @@ export const VDialog = genericComponent<new () => {
         // It isn't inside the dialog body
         !overlay.value.contentEl.contains(after)
       ) {
-        const focusable = [...overlay.value.contentEl.querySelectorAll(
-          'button, [href], input:not([type="hidden"]), select, textarea, [tabindex]:not([tabindex="-1"])'
-        )].filter(el => !el.hasAttribute('disabled') && !el.matches('[tabindex="-1"]')) as HTMLElement[]
+        const focusable = focusableChildren(overlay.value.contentEl)
 
         if (!focusable.length) return
 
@@ -81,6 +81,10 @@ export const VDialog = genericComponent<new () => {
       }
     }
 
+    onBeforeUnmount(() => {
+      document.removeEventListener('focusin', onFocusin)
+    })
+
     if (IN_BROWSER) {
       watch(() => isActive.value && props.retainFocus, val => {
         val
@@ -89,17 +93,32 @@ export const VDialog = genericComponent<new () => {
       }, { immediate: true })
     }
 
+    function onAfterEnter () {
+      emit('afterEnter')
+      if (overlay.value?.contentEl && !overlay.value.contentEl.contains(document.activeElement)) {
+        overlay.value.contentEl.focus({ preventScroll: true })
+      }
+    }
+
+    function onAfterLeave () {
+      emit('afterLeave')
+    }
+
     watch(isActive, async val => {
-      await nextTick()
-      if (val) {
-        overlay.value!.contentEl?.focus({ preventScroll: true })
-      } else {
+      if (!val) {
+        await nextTick()
         overlay.value!.activatorEl?.focus({ preventScroll: true })
       }
     })
 
     useRender(() => {
-      const [overlayProps] = filterVOverlayProps(props)
+      const overlayProps = VOverlay.filterProps(props)
+      const activatorProps = mergeProps({
+        'aria-haspopup': 'dialog',
+      }, props.activatorProps)
+      const contentProps = mergeProps({
+        tabindex: -1,
+      }, props.contentProps)
 
       return (
         <VOverlay
@@ -110,21 +129,27 @@ export const VDialog = genericComponent<new () => {
               'v-dialog--fullscreen': props.fullscreen,
               'v-dialog--scrollable': props.scrollable,
             },
+            props.class,
           ]}
+          style={ props.style }
           { ...overlayProps }
           v-model={ isActive.value }
-          aria-role="dialog"
           aria-modal="true"
-          activatorProps={ mergeProps({
-            'aria-haspopup': 'dialog',
-            'aria-expanded': String(isActive.value),
-          }, props.activatorProps) }
+          activatorProps={ activatorProps }
+          contentProps={ contentProps }
+          height={ !props.fullscreen ? props.height : undefined }
+          width={ !props.fullscreen ? props.width : undefined }
+          maxHeight={ !props.fullscreen ? props.maxHeight : undefined }
+          maxWidth={ !props.fullscreen ? props.maxWidth : undefined }
+          role="dialog"
+          onAfterEnter={ onAfterEnter }
+          onAfterLeave={ onAfterLeave }
           { ...scopeId }
         >
           {{
             activator: slots.activator,
             default: (...args) => (
-              <VDefaultsProvider root>
+              <VDefaultsProvider root="VDialog">
                 { slots.default?.(...args) }
               </VDefaultsProvider>
             ),

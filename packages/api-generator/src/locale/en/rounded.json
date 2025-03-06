@@ -1,5 +1,6 @@
 {
   "props": {
-    "rounded": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/rounded.json))"
+    "rounded": "Designates the **border-radius** applied to the component. This can be **0**, **xs**, **sm**, true, **lg**, **xl**, **pill**, **circle**, and **shaped**. Find more information on available border radius classes on the [Border Radius page](/styles/border-radius).",
+    "tile": "Removes any applied **border-radius** from the component."
   }
 }

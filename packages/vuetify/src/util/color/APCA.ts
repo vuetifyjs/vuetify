@@ -3,6 +3,7 @@
  * @licence https://www.w3.org/Consortium/Legal/2015/copyright-software-and-document
  * @see https://www.w3.org/WAI/GL/task-forces/silver/wiki/Visual_Contrast_of_Text_Subgroup
  */
+// Types
 import type { RGB } from '@/util'
 
 // MAGICAL NUMBERS

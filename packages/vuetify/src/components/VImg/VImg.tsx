@@ -1,27 +1,36 @@
+// Styles
 import './VImg.sass'
 
 // Components
-import { VResponsive } from '@/components/VResponsive'
+import { makeVResponsiveProps, VResponsive } from '@/components/VResponsive/VResponsive'
+
+// Composables
+import { useBackgroundColor } from '@/composables/color'
+import { makeComponentProps } from '@/composables/component'
+import { makeRoundedProps, useRounded } from '@/composables/rounded'
+import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 
 // Directives
 import intersect from '@/directives/intersect'
-
-// Composables
-import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 
 // Utilities
 import {
   computed,
   nextTick,
   onBeforeMount,
+  onBeforeUnmount,
   ref,
+  shallowRef,
+  toRef,
   vShow,
   watch,
   withDirectives,
 } from 'vue'
 import {
   convertToUnit,
-  defineComponent,
+  genericComponent,
+  getCurrentInstance,
+  propsFactory,
   SUPPORTS_INTERSECTION,
   useRender,
 } from '@/util'
@@ -37,51 +46,83 @@ export interface srcObject {
   aspect: number
 }
 
-export const VImg = defineComponent({
+export type VImgSlots = {
+  default: never
+  placeholder: never
+  error: never
+  sources: never
+}
+
+export const makeVImgProps = propsFactory({
+  absolute: Boolean,
+  alt: String,
+  cover: Boolean,
+  color: String,
+  draggable: {
+    type: [Boolean, String] as PropType<boolean | 'true' | 'false'>,
+    default: undefined,
+  },
+  eager: Boolean,
+  gradient: String,
+  lazySrc: String,
+  options: {
+    type: Object as PropType<IntersectionObserverInit>,
+    // For more information on types, navigate to:
+    // https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
+    default: () => ({
+      root: undefined,
+      rootMargin: undefined,
+      threshold: undefined,
+    }),
+  },
+  sizes: String,
+  src: {
+    type: [String, Object] as PropType<string | srcObject>,
+    default: '',
+  },
+  crossorigin: String as PropType<'' | 'anonymous' | 'use-credentials'>,
+  referrerpolicy: String as PropType<
+    | 'no-referrer'
+    | 'no-referrer-when-downgrade'
+    | 'origin'
+    | 'origin-when-cross-origin'
+    | 'same-origin'
+    | 'strict-origin'
+    | 'strict-origin-when-cross-origin'
+    | 'unsafe-url'
+  >,
+  srcset: String,
+  position: String,
+
+  ...makeVResponsiveProps(),
+  ...makeComponentProps(),
+  ...makeRoundedProps(),
+  ...makeTransitionProps(),
+}, 'VImg')
+
+export const VImg = genericComponent<VImgSlots>()({
   name: 'VImg',
 
   directives: { intersect },
 
-  props: {
-    aspectRatio: [String, Number],
-    alt: String,
-    cover: Boolean,
-    eager: Boolean,
-    gradient: String,
-    lazySrc: String,
-    options: {
-      type: Object as PropType<IntersectionObserverInit>,
-      // For more information on types, navigate to:
-      // https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
-      default: () => ({
-        root: undefined,
-        rootMargin: undefined,
-        threshold: undefined,
-      }),
-    },
-    sizes: String,
-    src: {
-      type: [String, Object] as PropType<string | srcObject>,
-      default: '',
-    },
-    srcset: String,
-    width: [String, Number],
-
-    ...makeTransitionProps(),
-  },
+  props: makeVImgProps(),
 
   emits: {
-    loadstart: (event: string | undefined) => true,
-    load: (event: string | undefined) => true,
-    error: (event: string | undefined) => true,
+    loadstart: (value: string | undefined) => true,
+    load: (value: string | undefined) => true,
+    error: (value: string | undefined) => true,
   },
 
   setup (props, { emit, slots }) {
-    const currentSrc = ref('') // Set from srcset
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
+    const { roundedClasses } = useRounded(props)
+    const vm = getCurrentInstance('VImg')
+
+    const currentSrc = shallowRef('') // Set from srcset
     const image = ref<HTMLImageElement>()
-    const state = ref<'idle' | 'loading' | 'loaded' | 'error'>(props.eager ? 'loading' : 'idle')
-    const naturalWidth = ref<number>()
-    const naturalHeight = ref<number>()
+    const state = shallowRef<'idle' | 'loading' | 'loaded' | 'error'>(props.eager ? 'loading' : 'idle')
+    const naturalWidth = shallowRef<number>()
+    const naturalHeight = shallowRef<number>()
 
     const normalisedSrc = computed<srcObject>(() => {
       return props.src && typeof props.src === 'object'
@@ -135,29 +176,38 @@ export const VImg = defineComponent({
       nextTick(() => {
         emit('loadstart', image.value?.currentSrc || normalisedSrc.value.src)
 
-        if (image.value?.complete) {
-          if (!image.value.naturalWidth) {
-            onError()
+        setTimeout(() => {
+          if (vm.isUnmounted) return
+
+          if (image.value?.complete) {
+            if (!image.value.naturalWidth) {
+              onError()
+            }
+
+            if (state.value === 'error') return
+
+            if (!aspectRatio.value) pollForSize(image.value, null)
+            if (state.value === 'loading') onLoad()
+          } else {
+            if (!aspectRatio.value) pollForSize(image.value!)
+            getSrc()
           }
-
-          if (state.value === 'error') return
-
-          if (!aspectRatio.value) pollForSize(image.value, null)
-          onLoad()
-        } else {
-          if (!aspectRatio.value) pollForSize(image.value!)
-          getSrc()
-        }
+        })
       })
     }
 
     function onLoad () {
+      if (vm.isUnmounted) return
+
       getSrc()
+      pollForSize(image.value!)
       state.value = 'loaded'
       emit('load', image.value?.currentSrc || normalisedSrc.value.src)
     }
 
     function onError () {
+      if (vm.isUnmounted) return
+
       state.value = 'error'
       emit('error', image.value?.currentSrc || normalisedSrc.value.src)
     }
@@ -168,9 +218,16 @@ export const VImg = defineComponent({
     }
 
     let timer = -1
+
+    onBeforeUnmount(() => {
+      clearTimeout(timer)
+    })
+
     function pollForSize (img: HTMLImageElement, timeout: number | null = 100) {
       const poll = () => {
         clearTimeout(timer)
+        if (vm.isUnmounted) return
+
         const { naturalHeight: imgHeight, naturalWidth: imgWidth } = img
 
         if (imgHeight || imgWidth) {
@@ -198,9 +255,13 @@ export const VImg = defineComponent({
       const img = (
         <img
           class={['v-img__img', containClasses.value]}
+          style={{ objectPosition: props.position }}
+          crossorigin={ props.crossorigin }
           src={ normalisedSrc.value.src }
           srcset={ normalisedSrc.value.srcset }
-          alt=""
+          alt={ props.alt }
+          referrerpolicy={ props.referrerpolicy }
+          draggable={ props.draggable }
           sizes={ props.sizes }
           ref={ image }
           onLoad={ onLoad }
@@ -229,8 +290,12 @@ export const VImg = defineComponent({
         { normalisedSrc.value.lazySrc && state.value !== 'loaded' && (
           <img
             class={['v-img__img', 'v-img__img--preload', containClasses.value]}
+            style={{ objectPosition: props.position }}
+            crossorigin={ props.crossorigin }
             src={ normalisedSrc.value.lazySrc }
-            alt=""
+            alt={ props.alt }
+            referrerpolicy={ props.referrerpolicy }
+            draggable={ props.draggable }
           />
         )}
       </MaybeTransition>
@@ -266,7 +331,7 @@ export const VImg = defineComponent({
       return <div class="v-img__gradient" style={{ backgroundImage: `linear-gradient(${props.gradient})` }} />
     }
 
-    const isBooted = ref(false)
+    const isBooted = shallowRef(false)
     {
       const stop = watch(aspectRatio, val => {
         if (val) {
@@ -281,33 +346,47 @@ export const VImg = defineComponent({
       })
     }
 
-    useRender(() => (
-      <VResponsive
-        class={[
-          'v-img',
-          { 'v-img--booting': !isBooted.value },
-        ]}
-        style={{ width: convertToUnit(props.width === 'auto' ? naturalWidth.value : props.width) }}
-        aspectRatio={ aspectRatio.value }
-        aria-label={ props.alt }
-        role={ props.alt ? 'img' : undefined }
-        v-intersect={[{
-          handler: init,
-          options: props.options,
-        }, null, ['once']]}
-      >{{
-        additional: () => (
-          <>
-            <__image />
-            <__preloadImage />
-            <__gradient />
-            <__placeholder />
-            <__error />
-          </>
-        ),
-        default: slots.default,
-      }}</VResponsive>
-    ))
+    useRender(() => {
+      const responsiveProps = VResponsive.filterProps(props)
+      return (
+        <VResponsive
+          class={[
+            'v-img',
+            {
+              'v-img--absolute': props.absolute,
+              'v-img--booting': !isBooted.value,
+            },
+            backgroundColorClasses.value,
+            roundedClasses.value,
+            props.class,
+          ]}
+          style={[
+            { width: convertToUnit(props.width === 'auto' ? naturalWidth.value : props.width) },
+            backgroundColorStyles.value,
+            props.style,
+          ]}
+          { ...responsiveProps }
+          aspectRatio={ aspectRatio.value }
+          aria-label={ props.alt }
+          role={ props.alt ? 'img' : undefined }
+          v-intersect={[{
+            handler: init,
+            options: props.options,
+          }, null, ['once']]}
+        >{{
+          additional: () => (
+            <>
+              <__image />
+              <__preloadImage />
+              <__gradient />
+              <__placeholder />
+              <__error />
+            </>
+          ),
+          default: slots.default,
+        }}</VResponsive>
+      )
+    })
 
     return {
       currentSrc,

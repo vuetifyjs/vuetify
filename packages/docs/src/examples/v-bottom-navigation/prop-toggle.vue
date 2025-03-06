@@ -1,6 +1,6 @@
 <template>
-  <div class="overflow-hidden">
-    <div class="text-center mb-8">
+  <v-layout class="border rounded" style="height: 128px;">
+    <div class="mx-auto my-4">
       <v-btn
         color="deep-purple"
         variant="outlined"
@@ -11,38 +11,39 @@
     </div>
 
     <v-bottom-navigation
-      v-model="value"
-      :model-value="active"
+      :active="active"
       color="indigo"
     >
       <v-btn>
-        <span>Recents</span>
-
         <v-icon>mdi-history</v-icon>
+
+        Recents
       </v-btn>
 
       <v-btn>
-        <span>Favorites</span>
-
         <v-icon>mdi-heart</v-icon>
+
+        Favorites
       </v-btn>
 
       <v-btn>
-        <span>Nearby</span>
-
         <v-icon>mdi-map-marker</v-icon>
+
+        Nearby
       </v-btn>
     </v-bottom-navigation>
-  </div>
+
+  </v-layout>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const active = ref(true)
+</script>
 
 <script>
   export default {
-    data () {
-      return {
-        value: 1,
-        active: true,
-      }
-    },
+    data: () => ({ active: true }),
   }
 </script>

@@ -24,7 +24,6 @@
         :key="item.title"
         v-model="item.active"
         :prepend-icon="item.action"
-        no-action
       >
         <template v-slot:activator>
           <v-list-item-header>
@@ -44,6 +43,51 @@
     </v-list>
   </v-card>
 </template>
+
+<script setup>
+  const items = [
+    {
+      action: 'mdi-ticket',
+      items: [{ title: 'List Item' }],
+      title: 'Attractions',
+    },
+    {
+      action: 'mdi-silverware-fork-knife',
+      active: true,
+      items: [
+        { title: 'Breakfast & brunch' },
+        { title: 'New American' },
+        { title: 'Sushi' },
+      ],
+      title: 'Dining',
+    },
+    {
+      action: 'mdi-school',
+      items: [{ title: 'List Item' }],
+      title: 'Education',
+    },
+    {
+      action: 'mdi-human-male-female-child',
+      items: [{ title: 'List Item' }],
+      title: 'Family',
+    },
+    {
+      action: 'mdi-bottle-tonic-plus',
+      items: [{ title: 'List Item' }],
+      title: 'Health',
+    },
+    {
+      action: 'mdi-briefcase',
+      items: [{ title: 'List Item' }],
+      title: 'Office',
+    },
+    {
+      action: 'mdi-tag',
+      items: [{ title: 'List Item' }],
+      title: 'Promotions',
+    },
+  ]
+</script>
 
 <script>
   export default {
@@ -70,7 +114,7 @@
           title: 'Education',
         },
         {
-          action: 'mdi-run',
+          action: 'mdi-human-male-female-child',
           items: [{ title: 'List Item' }],
           title: 'Family',
         },
@@ -80,7 +124,7 @@
           title: 'Health',
         },
         {
-          action: 'mdi-content-cut',
+          action: 'mdi-briefcase',
           items: [{ title: 'List Item' }],
           title: 'Office',
         },

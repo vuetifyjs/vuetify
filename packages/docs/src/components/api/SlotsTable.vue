@@ -1,22 +1,13 @@
 <template>
-  <ApiTable>
-    <template #row="{ props, ...item }">
+  <ApiApiTable>
+    <template #row="{ props, item }">
       <tr v-bind="props">
-        <NameCell section="slots" :name="item.name" />
+        <ApiNameCell :name="item.name" :new-in="item.newIn" section="slots" />
       </tr>
 
-      <tr v-if="item.formatted !== 'never'">
-        <app-markup :code="getType(item)" language="ts" :rounded="false" />
+      <tr v-if="item.formatted !== 'never' && item.text !== 'undefined'">
+        <AppMarkup :code="item.formatted" :rounded="false" language="ts" />
       </tr>
     </template>
-  </ApiTable>
+  </ApiApiTable>
 </template>
-
-<script setup lang="ts">
-  // Components
-  import ApiTable from './ApiTable.vue'
-  import NameCell from './NameCell.vue'
-
-  // Utilities
-  import { getType } from './utils'
-</script>

@@ -1,26 +1,11 @@
 import fs from 'fs'
 import { capitalize } from './helpers/text'
-import type { Definition, ObjectDefinition } from './types'
-const pkg = require('../package.json')
-
-type ComponentData = {
-  props: Definition
-  slots: Definition
-  events: Definition
-  exposed: Definition
-  componentName: string
-  kebabName: string
-}
-
-type DirectiveData = {
-  name: string
-  kebabName: string
-  argument: { value: Definition }
-  modifiers: Record<string, Definition>
-}
+import type { ComponentData, DirectiveData } from './types'
+import pkg from '../package.json' with { type: 'json' }
 
 export const createWebTypesApi = (componentData: ComponentData[], directiveData: DirectiveData[]) => {
-  const getDocUrl = (cmp, heading = null) => `https://vuetifyjs.com/api/${cmp}` + (heading ? `#${heading}` : '')
+  const getDocUrl = (cmp: string, heading?: string) =>
+    `https://vuetifyjs.com/api/${cmp}` + (heading ? `#${heading}` : '')
 
   const createTypedEntity = (name: string, type: string) => {
     return {
@@ -35,7 +20,7 @@ export const createWebTypesApi = (componentData: ComponentData[], directiveData:
         name,
         pattern: undefined,
         description: slot.description.en || '',
-        'doc-url': getDocUrl(component.kebabName, 'slots'),
+        'doc-url': getDocUrl(component.pathName, 'slots'),
         'vue-properties': slot.properties &&
           Object.entries(slot.properties ?? {}).map(([name, prop]) => createTypedEntity(name, (prop as any).formatted)),
       }
@@ -45,15 +30,15 @@ export const createWebTypesApi = (componentData: ComponentData[], directiveData:
       return {
         name,
         description: event.description.en || '',
-        'doc-url': getDocUrl(component.kebabName, 'events'),
+        'doc-url': getDocUrl(component.pathName, 'events'),
         arguments: [createTypedEntity('argument', event.formatted)],
       }
     }
 
-    const createTagValue = type => {
+    const createTagValue = (type: string) => {
       return {
         kind: 'expression',
-        type,
+        type: type?.trim(),
       }
     }
 
@@ -61,7 +46,7 @@ export const createWebTypesApi = (componentData: ComponentData[], directiveData:
       return {
         name,
         description: prop.description.en || '',
-        'doc-url': getDocUrl(component.kebabName, 'props'),
+        'doc-url': getDocUrl(component.fileName, 'props'),
         default: typeof prop.default !== 'string' ? JSON.stringify(prop.default) : prop.default,
         required: undefined, // TODO: implement this
         value: createTagValue(prop.formatted),
@@ -70,14 +55,14 @@ export const createWebTypesApi = (componentData: ComponentData[], directiveData:
     }
 
     return {
-      name: component.componentName,
+      name: component.displayName,
       source: {
         module: './src/components/index.ts',
-        symbol: component.componentName,
+        symbol: component.displayName,
       },
       aliases: undefined, // TODO: are we using this? deprecated name changes?
       description: '', // TODO: we should probably include component description in locale files
-      'doc-url': getDocUrl(component.kebabName),
+      'doc-url': getDocUrl(component.pathName),
       attributes: Object.entries(component.props ?? {}).map(createTagAttribute),
       events: Object.entries(component.events ?? {}).map(createTagEvent),
       slots: Object.entries(component.slots ?? {}).map(createTagSlot),
@@ -89,11 +74,11 @@ export const createWebTypesApi = (componentData: ComponentData[], directiveData:
   }
 
   const createAttribute = (directive: DirectiveData) => {
-    const createAttributeVueArgument = argument => {
+    const createAttributeVueArgument = (argument: any) => {
       return {
         pattern: undefined,
         description: argument.description.en,
-        'doc-url': getDocUrl(directive.name, 'argument'),
+        'doc-url': getDocUrl(directive.pathName, 'argument'),
         required: undefined,
       }
     }
@@ -103,32 +88,32 @@ export const createWebTypesApi = (componentData: ComponentData[], directiveData:
         name,
         pattern: undefined,
         description: modifier.description.en || '',
-        'doc-url': getDocUrl(directive.name, 'modifiers'),
+        'doc-url': getDocUrl(directive.pathName, 'modifiers'),
       }
     }
 
-    const createAttributeValue = argument => {
+    const createAttributeValue = (argument: any) => {
       return {
         kind: 'expression',
-        type: argument.type,
+        type: argument.text,
       }
     }
 
     return {
-      name: directive.name,
+      name: directive.displayName,
       aliases: undefined,
       description: '', // TODO: we should probably include directive description in locale files
-      'doc-url': getDocUrl(directive.name),
+      'doc-url': getDocUrl(directive.pathName),
       default: '',
       required: false,
-      value: createAttributeValue(directive.argument),
+      value: createAttributeValue(directive.value),
       source: {
         module: './src/directives/index.ts',
-        symbol: capitalize(directive.name.slice(2)),
+        symbol: capitalize(directive.displayName.slice(2)),
       },
-      'vue-argument': directive.argument?.value && createAttributeVueArgument(directive.argument?.value), // TODO: how to use this in comparison to value?
+      'vue-argument': directive.argument && createAttributeVueArgument(directive.argument),
       'vue-modifiers': directive.modifiers &&
-        Object.entries(directive.modifiers ?? {}).map(createAttributeVueModifier),
+        Object.entries(directive.modifiers).map(createAttributeVueModifier),
     }
   }
 

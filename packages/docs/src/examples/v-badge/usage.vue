@@ -1,14 +1,14 @@
 <template>
-  <usage-example
+  <ExamplesUsageExample
     v-model="model"
     :code="code"
-    :options="options"
     :name="name"
+    :options="options"
   >
     <div class="text-center">
       <v-badge v-bind="props">
         <v-icon
-          icon="mdi-vuetify"
+          icon="$vuetify"
           size="x-large"
         ></v-icon>
       </v-badge>
@@ -20,19 +20,15 @@
       <v-slider
         v-model="content"
         label="Value"
-        min="0"
         max="100"
+        min="0"
         step="1"
       ></v-slider>
     </template>
-  </usage-example>
+  </ExamplesUsageExample>
 </template>
 
 <script setup>
-  // Utilities
-  import { computed, ref } from 'vue'
-  import { propsToString } from '@/util/helpers'
-
   const name = 'v-badge'
   const model = ref('default')
   const content = ref(0)
@@ -49,7 +45,7 @@
 
   const slots = computed(() => {
     return `
-  <v-icon icon="mdi-vuetify" size="x-large"></v-icon>
+  <v-icon icon="$vuetify" size="x-large"></v-icon>
 `
   })
 
