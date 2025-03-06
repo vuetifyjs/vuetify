@@ -148,7 +148,6 @@ export const VDataTableRow = genericComponent<new <T>(
                           VCheckboxBtn: {
                             disabled: !item.selectable,
                             modelValue: isSelected([item]),
-                            onClick: withModifiers(() => toggleSelect(item), ['stop']),
                           },
                         }}
                       >
