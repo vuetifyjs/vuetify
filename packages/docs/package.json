@@ -40,6 +40,7 @@
     "vue-gtag-next": "^1.14.0",
     "vue-i18n": "^11.1.1",
     "vue-instantsearch": "^4.16.1",
+    "vue-router": "^4.5.0",
     "vuetify": "workspace:*"
   },
   "devDependencies": {
