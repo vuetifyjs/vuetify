@@ -2,6 +2,7 @@
 import { VDataTableColumn } from './VDataTableColumn'
 import { VBtn } from '@/components/VBtn'
 import { VCheckboxBtn } from '@/components/VCheckbox'
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 
 // Composables
 import { useExpanded } from './composables/expand'
@@ -20,9 +21,13 @@ import type { CellProps, DataTableItem, ItemKeySlot } from './types'
 import type { VDataTableHeaderCellColumnSlotProps } from './VDataTableHeaders'
 import type { GenericProps } from '@/util'
 
+export type VDataTableItemCellColumnSlotProps<T> = Omit<ItemKeySlot<T>, 'value'> & {
+  props: { onClick: (e: MouseEvent) => void }
+}
+
 export type VDataTableRowSlots<T> = {
-  'item.data-table-select': Omit<ItemKeySlot<T>, 'value'>
-  'item.data-table-expand': Omit<ItemKeySlot<T>, 'value'>
+  'item.data-table-select': VDataTableItemCellColumnSlotProps<T>
+  'item.data-table-expand': VDataTableItemCellColumnSlotProps<T>
   'header.data-table-select': VDataTableHeaderCellColumnSlotProps
   'header.data-table-expand': VDataTableHeaderCellColumnSlotProps
 } & {
@@ -136,10 +141,25 @@ export const VDataTableRow = genericComponent<new <T>(
             >
               {{
                 default: () => {
-                  if (slots[slotName] && !mobile.value) return slots[slotName]?.(slotProps)
-
                   if (column.key === 'data-table-select') {
-                    return slots['item.data-table-select']?.(slotProps) ?? (
+                    return slots['item.data-table-select'] ? (
+                      <VDefaultsProvider
+                        defaults={{
+                          VCheckboxBtn: {
+                            disabled: !item.selectable,
+                            modelValue: isSelected([item]),
+                            onClick: withModifiers(() => toggleSelect(item), ['stop']),
+                          },
+                        }}
+                      >
+                        { slots['item.data-table-select']?.({
+                          ...slotProps,
+                          props: {
+                            onClick: withModifiers(() => toggleSelect(item), ['stop']),
+                          },
+                        })}
+                      </VDefaultsProvider>
+                    ) : (
                       <VCheckboxBtn
                         disabled={ !item.selectable }
                         modelValue={ isSelected([item]) }
@@ -149,7 +169,24 @@ export const VDataTableRow = genericComponent<new <T>(
                   }
 
                   if (column.key === 'data-table-expand') {
-                    return slots['item.data-table-expand']?.(slotProps) ?? (
+                    return slots['item.data-table-expand'] ? (
+                      <VDefaultsProvider
+                        defaults={{
+                          VBtn: {
+                            icon: isExpanded(item) ? '$collapse' : '$expand',
+                            size: 'small',
+                            variant: 'text',
+                          },
+                        }}
+                      >
+                        { slots['item.data-table-expand']?.({
+                          ...slotProps,
+                          props: {
+                            onClick: withModifiers(() => toggleExpand(item), ['stop']),
+                          },
+                        })}
+                      </VDefaultsProvider>
+                    ) : (
                       <VBtn
                         icon={ isExpanded(item) ? '$collapse' : '$expand' }
                         size="small"
@@ -158,6 +195,8 @@ export const VDataTableRow = genericComponent<new <T>(
                       />
                     )
                   }
+
+                  if (slots[slotName] && !mobile.value) return slots[slotName](slotProps)
 
                   const displayValue = toDisplayString(slotProps.value)
 
