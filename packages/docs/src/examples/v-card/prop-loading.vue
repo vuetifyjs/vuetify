@@ -1,5 +1,6 @@
 <template>
   <v-card
+    :disabled="loading"
     :loading="loading"
     class="mx-auto my-12"
     max-width="374"
@@ -14,9 +15,9 @@
     </template>
 
     <v-img
-      cover
       height="250"
       src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
+      cover
     ></v-img>
 
     <v-card-item>
@@ -42,9 +43,9 @@
           :model-value="4.5"
           color="amber"
           density="compact"
+          size="small"
           half-increments
           readonly
-          size="small"
         ></v-rating>
 
         <div class="text-grey ms-4">
@@ -63,8 +64,8 @@
 
     <v-card-title>Tonight's availability</v-card-title>
 
-    <div class="px-4">
-      <v-chip-group v-model="selection">
+    <div class="px-4 mb-2">
+      <v-chip-group v-model="selection" selected-class="bg-deep-purple-lighten-2">
         <v-chip>5:30PM</v-chip>
 
         <v-chip>7:30PM</v-chip>
@@ -78,14 +79,25 @@
     <v-card-actions>
       <v-btn
         color="deep-purple-lighten-2"
-        variant="text"
+        text="Reserve"
+        block
+        border
         @click="reserve"
-      >
-        Reserve
-      </v-btn>
+      ></v-btn>
     </v-card-actions>
   </v-card>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const loading = ref(false)
+  const selection = ref(1)
+  function reserve () {
+    loading.value = true
+    setTimeout(() => (loading.value = false), 2000)
+  }
+</script>
 
 <script>
   export default {

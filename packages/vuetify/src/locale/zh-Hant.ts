@@ -1,6 +1,12 @@
 export default {
   badge: '徽章',
+  open: '開啟',
   close: '關閉',
+  dismiss: '關閉',
+  confirmEdit: {
+    ok: '確定',
+    cancel: '取消',
+  },
   dataIterator: {
     noResultsText: '沒有符合條件的結果',
     loadingText: '讀取中...',
@@ -26,36 +32,52 @@ export default {
     lastPage: '最後頁',
     pageText: '{2} 條中的 {0}~{1} 條',
   },
+  dateRangeInput: {
+    divider: '至',
+  },
   datePicker: {
-    itemsSelected: '已選擇 {0}',
-    nextMonthAriaLabel: '下個月',
-    nextYearAriaLabel: '明年',
-    prevMonthAriaLabel: '前一個月',
-    prevYearAriaLabel: '前一年',
+    itemsSelected: '已選擇 {0} 個日期',
+    range: {
+      title: '選擇日期範圍',
+      header: '輸入日期範圍',
+    },
+    title: '選擇日期',
+    header: '輸入日期',
+    input: {
+      placeholder: '請輸入日期',
+    },
   },
   noDataText: '沒有資料',
   carousel: {
     prev: '上一張',
     next: '下一張',
     ariaLabel: {
-      delimiter: 'Carousel slide {0} of {1}',
+      delimiter: '第 {0} 張 / 共 {1} 張',
     },
   },
   calendar: {
     moreEvents: '還有其他 {0} 項',
+    today: '今天',
   },
   input: {
-    clear: 'Clear {0}',
-    prependAction: '{0} prepended action',
-    appendAction: '{0} appended action',
+    clear: '清除 {0}',
+    prependAction: '{0} 前置操作',
+    appendAction: '{0} 附加操作',
+    otp: '請輸入第 {0} 個 OTP 字元',
   },
   fileInput: {
     counter: '{0} 個檔案',
     counterSize: '{0} 個檔案（共 {1}）',
   },
+  fileUpload: {
+    title: '拖曳檔案至此',
+    divider: '或',
+    browse: '瀏覽檔案',
+  },
   timePicker: {
-    am: 'AM',
-    pm: 'PM',
+    am: '上午',
+    pm: '下午',
+    title: '選擇時間',
   },
   pagination: {
     ariaLabel: {
@@ -64,13 +86,22 @@ export default {
       previous: '上一頁',
       page: '轉到頁面 {0}',
       currentPage: '當前頁 {0}',
-      first: 'First page',
-      last: 'Last page',
+      first: '第一頁',
+      last: '最後一頁',
     },
+  },
+  stepper: {
+    next: '下一步',
+    prev: '上一步',
   },
   rating: {
     ariaLabel: {
-      item: 'Rating {0} of {1}',
+      item: '評分 {0} / {1}',
     },
+  },
+  loading: '載入中...',
+  infiniteScroll: {
+    loadMore: '載入更多',
+    empty: '沒有更多內容',
   },
 }

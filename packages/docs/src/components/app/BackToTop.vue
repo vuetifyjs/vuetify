@@ -1,40 +1,22 @@
 <template>
-  <v-layout-item
+  <v-fab
+    v-model="model"
+    color="primary"
+    elevation="8"
+    icon="mdi-chevron-up"
+    size="large"
+    app
     v-scroll="onScroll"
-    class="text-end"
-    model-value
-    position="bottom"
-    size="88"
-  >
-    <div class="ma-4">
-      <v-fab-transition>
-        <v-btn
-          v-show="model"
-          class="mt-auto"
-          color="primary"
-          elevation="8"
-          icon="mdi-chevron-up"
-          size="large"
-          @click="onClick"
-        />
-      </v-fab-transition>
-    </div>
-  </v-layout-item>
+    @click="goTo(0)"
+  />
 </template>
 
 <script setup>
-  import { ref } from 'vue'
+  const goTo = useGoTo({ layout: true })
 
-  const model = ref(false)
+  const model = shallowRef(false)
 
   function onScroll () {
     model.value = window.scrollY > 200
-  }
-
-  function onClick () {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    })
   }
 </script>

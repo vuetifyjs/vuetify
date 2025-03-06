@@ -3,10 +3,11 @@
     v-if="showBanner"
     color="#e7f0f6"
     height="52"
+    theme="light"
   >
     <div class="text-blue-darken-3 text-start ms-4">
       <div class="text-caption">
-        You are currently viewing the documentation for <strong>Vuetify 3</strong>
+        You are viewing the documentation for <strong>Vuetify 3</strong>
       </div>
     </div>
 
@@ -24,10 +25,10 @@
     </v-btn>
 
     <v-btn
-      class="ms-6 me-6"
+      class="ms-4 ms-md-6 me-2"
       density="comfortable"
-      size="small"
       icon="$clear"
+      size="small"
       variant="plain"
       @click="onClose"
     />
@@ -35,17 +36,9 @@
 </template>
 
 <script setup>
-  import { useUserStore } from '@/store/user'
-  import { computed } from 'vue'
-  import { differenceInHours } from 'date-fns'
-
   const user = useUserStore()
 
-  const showBanner = computed(() => {
-    const now = Date.now()
-
-    return differenceInHours(now, Number(user.notifications.last.v2banner)) > 1
-  })
+  const showBanner = computed(() => !user.notifications.last.v2banner)
 
   function onClose () {
     user.notifications.last.v2banner = Date.now()

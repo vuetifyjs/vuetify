@@ -2,21 +2,26 @@
 import './VInput.sass'
 
 // Components
-import { VMessages } from '@/components/VMessages'
+import { useInputIcon } from '@/components/VInput/InputIcon'
+import { VMessages } from '@/components/VMessages/VMessages'
 
 // Composables
-import { IconValue } from '@/composables/icons'
+import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps, useDensity } from '@/composables/density'
+import { makeDimensionProps, useDimension } from '@/composables/dimensions'
+import { IconValue } from '@/composables/icons'
+import { useRtl } from '@/composables/locale'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeValidationProps, useValidation } from '@/composables/validation'
 
 // Utilities
 import { computed } from 'vue'
-import { EventProp, genericComponent, getUid, isOn, pick, propsFactory, useRender } from '@/util'
+import { EventProp, genericComponent, getUid, pick, propsFactory, useRender } from '@/util'
 
 // Types
 import type { ComputedRef, PropType, Ref } from 'vue'
-import type { MakeSlots } from '@/util'
-import { useInputIcon } from '@/components/VInput/InputIcon'
+import type { VMessageSlot } from '@/components/VMessages/VMessages'
+import type { GenericProps } from '@/util'
 
 export interface VInputSlot {
   id: ComputedRef<string>
@@ -35,10 +40,17 @@ export interface VInputSlot {
 export const makeVInputProps = propsFactory({
   id: String,
   appendIcon: IconValue,
+  centerAffix: {
+    type: Boolean,
+    default: true,
+  },
   prependIcon: IconValue,
   hideDetails: [Boolean, String] as PropType<boolean | 'auto'>,
+  hideSpinButtons: Boolean,
+  hint: String,
+  persistentHint: Boolean,
   messages: {
-    type: [Array, String] as PropType<string | string[]>,
+    type: [Array, String] as PropType<string | readonly string[]>,
     default: () => ([]),
   },
   direction: {
@@ -47,21 +59,35 @@ export const makeVInputProps = propsFactory({
     validator: (v: any) => ['horizontal', 'vertical'].includes(v),
   },
 
-  'onClick:prepend': EventProp,
-  'onClick:append': EventProp,
+  'onClick:prepend': EventProp<[MouseEvent]>(),
+  'onClick:append': EventProp<[MouseEvent]>(),
 
+  ...makeComponentProps(),
   ...makeDensityProps(),
+  ...pick(makeDimensionProps(), [
+    'maxWidth',
+    'minWidth',
+    'width',
+  ]),
+  ...makeThemeProps(),
   ...makeValidationProps(),
-}, 'v-input')
+}, 'VInput')
 
-export type VInputSlots = MakeSlots<{
-  default: [VInputSlot]
-  prepend: [VInputSlot]
-  append: [VInputSlot]
-  details: [VInputSlot]
-}>
+export type VInputSlots = {
+  default: VInputSlot
+  prepend: VInputSlot
+  append: VInputSlot
+  details: VInputSlot
+  message: VMessageSlot
+}
 
-export const VInput = genericComponent<VInputSlots>()({
+export const VInput = genericComponent<new <T>(
+  props: {
+    modelValue?: T | null
+    'onUpdate:modelValue'?: (value: T | null) => void
+  },
+  slots: VInputSlots,
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VInput',
 
   props: {
@@ -69,11 +95,14 @@ export const VInput = genericComponent<VInputSlots>()({
   },
 
   emits: {
-    'update:modelValue': (val: any) => true,
+    'update:modelValue': (value: any) => true,
   },
 
   setup (props, { attrs, slots, emit }) {
     const { densityClasses } = useDensity(props)
+    const { dimensionStyles } = useDimension(props)
+    const { themeClasses } = provideTheme(props)
+    const { rtlClasses } = useRtl()
     const { InputIcon } = useInputIcon(props)
 
     const uid = getUid()
@@ -108,25 +137,44 @@ export const VInput = genericComponent<VInputSlots>()({
       validate,
     }))
 
+    const messages = computed(() => {
+      if (props.errorMessages?.length || (!isPristine.value && errorMessages.value.length)) {
+        return errorMessages.value
+      } else if (props.hint && (props.persistentHint || props.focused)) {
+        return props.hint
+      } else {
+        return props.messages
+      }
+    })
+
     useRender(() => {
       const hasPrepend = !!(slots.prepend || props.prependIcon)
       const hasAppend = !!(slots.append || props.appendIcon)
-      const hasMessages = !!(
-        props.messages?.length ||
-        errorMessages.value.length
-      )
+      const hasMessages = messages.value.length > 0
       const hasDetails = !props.hideDetails || (
         props.hideDetails === 'auto' &&
         (hasMessages || !!slots.details)
       )
 
       return (
-        <div class={[
-          'v-input',
-          `v-input--${props.direction}`,
-          densityClasses.value,
-          validationClasses.value,
-        ]}
+        <div
+          class={[
+            'v-input',
+            `v-input--${props.direction}`,
+            {
+              'v-input--center-affix': props.centerAffix,
+              'v-input--hide-spin-buttons': props.hideSpinButtons,
+            },
+            densityClasses.value,
+            themeClasses.value,
+            rtlClasses.value,
+            validationClasses.value,
+            props.class,
+          ]}
+          style={[
+            dimensionStyles.value,
+            props.style,
+          ]}
         >
           { hasPrepend && (
             <div key="prepend" class="v-input__prepend">
@@ -137,15 +185,15 @@ export const VInput = genericComponent<VInputSlots>()({
                   key="prepend-icon"
                   name="prepend"
                 />
-              ) }
+              )}
             </div>
-          ) }
+          )}
 
           { slots.default && (
             <div class="v-input__control">
               { slots.default?.(slotProps.value) }
             </div>
-          ) }
+          )}
 
           { hasAppend && (
             <div key="append" class="v-input__append">
@@ -154,27 +202,28 @@ export const VInput = genericComponent<VInputSlots>()({
                   key="append-icon"
                   name="append"
                 />
-              ) }
+              )}
 
               { slots.append?.(slotProps.value) }
             </div>
-          ) }
+          )}
 
           { hasDetails && (
-            <div class="v-input__details">
+            <div
+              id={ messagesId.value }
+              class="v-input__details"
+              role="alert"
+              aria-live="polite"
+            >
               <VMessages
-                id={ messagesId.value }
                 active={ hasMessages }
-                messages={ errorMessages.value.length > 0
-                  ? errorMessages.value
-                  : props.messages
-                }
+                messages={ messages.value }
                 v-slots={{ message: slots.message }}
               />
 
               { slots.details?.(slotProps.value) }
             </div>
-          ) }
+          )}
         </div>
       )
     })
@@ -183,13 +232,10 @@ export const VInput = genericComponent<VInputSlots>()({
       reset,
       resetValidation,
       validate,
+      isValid,
+      errorMessages,
     }
   },
 })
 
 export type VInput = InstanceType<typeof VInput>
-
-export function filterInputProps (props: Record<string, unknown>) {
-  const keys = Object.keys(VInput.props).filter(k => !isOn(k))
-  return pick(props, keys)
-}

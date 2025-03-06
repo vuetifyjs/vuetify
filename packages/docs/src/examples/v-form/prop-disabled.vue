@@ -1,5 +1,5 @@
 <template>
-  <v-sheet width="300" class="mx-auto">
+  <v-sheet class="mx-auto" width="300">
     <v-form disabled>
       <v-text-field
         v-model="firstName"
@@ -12,6 +12,13 @@
     </v-form>
   </v-sheet>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const firstName = ref('')
+  const lastName = ref('')
+</script>
 
 <script>
   export default {

@@ -3,9 +3,8 @@ import { useHydration } from '@/composables/hydration'
 
 // Utilities
 import { defineComponent } from '@/util'
-import type { GenericSlot } from '@/util'
 
-export const VNoSsr = defineComponent<GenericSlot>({
+export const VNoSsr = defineComponent({
   name: 'VNoSsr',
 
   setup (_, { slots }) {

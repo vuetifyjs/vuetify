@@ -14,6 +14,12 @@
   </v-container>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const selected = ref(['John'])
+</script>
+
 <script>
   export default {
     data () {

@@ -7,15 +7,21 @@ related:
   - /features/accessibility/
   - /components/locale-providers/
   - /getting-started/browser-support/
+features:
+  github: /composables/locale.ts
+  label: 'i18n'
+  report: true
 ---
 
 # Internationalization (i18n)
 
 Vuetify supports language Internationalization (i18n) of its components.
 
-When bootstrapping your application you can specify available locales and the default locale with the **defaultLocale** option. The **locale** service also supports easy integration with [vue-i18n](https://kazupon.github.io/vue-i18n/). Using a locale that has an RTL (right-to-left) language also affects the directionality of the Vuetify components.
+<PageFeatures />
 
-<entry />
+<PromotedEntry />
+
+When bootstrapping your application you can specify available locales and the default locale with the **defaultLocale** option. The **locale** service also supports easy integration with [vue-i18n](https://vue-i18n.intlify.dev/). Using a locale that has an RTL (right-to-left) language also affects the directionality of the Vuetify components.
 
 ## Getting started
 
@@ -37,8 +43,8 @@ const vuetify = createVuetify({
   locale: {
     locale: 'zhHans',
     fallback: 'sv',
-    messages: { zhHans, pl, sv }
-  }
+    messages: { zhHans, pl, sv },
+  },
 })
 
 app.use(vuetify)
@@ -46,45 +52,48 @@ app.use(vuetify)
 app.mount('#app')
 ```
 
-You can change the locale during runtime by using the `useLocale` composable. If you are still using the Options API, you can access the locale settings on `this.$vuetify.locale`.
+You can change the locale during runtime by using the `useLocale` composable.
 
 ```html { resource="Composition.vue" }
-<script>
+<script setup>
   import { useLocale } from 'vuetify'
 
-  export default {
-    setup () {
-      const { current } = useLocale()
+  const { current } = useLocale()
 
-      return {
-        changeLocale: locale => current.value = locale
-      }
-    }
+  function changeLocale (locale) {
+    current.value = locale
   }
 </script>
 ```
 
-```html { resource="Option.vue" }
+If you are still using the Options API, you can access the locale settings on `this.$vuetify.locale`.
+
+```html { resource="Options.vue" }
 <script>
   export default {
     methods: {
       changeLocale (locale) {
         this.$vuetify.locale.current = locale
-      }
-    }
+      },
+    },
   }
 </script>
 ```
 
 ## API
 
-<api-inline />
+| Feature | Description |
+| - | - |
+| [useLocale](/api/use-locale/) | The locale composable is used |
+| [v-locale-provider](/api/v-locale-provider/) | The locale provider component is used to scope a portion of your application to a different locale than the default one |
+
+<ApiInline hide-links />
 
 ## Scoped languages
 
 Using the `v-locale-provider` component it is possible to scope a portion of your application to a different locale than the default one.
 
-```html
+```html { resource="src/App.vue" }
 <template>
   <v-app>
     <v-select></v-select> <!-- Will use default locale -->
@@ -102,7 +111,7 @@ RTL (Right To Left) support is built in for all localizations that ship with Vue
 
 The following example demonstrates how to force RTL for a specific section of your content, without switching the current language, by using the `v-locale-provider` component:
 
-```html
+```html { resource="src/App.vue" }
 <v-app>
   <v-card>...</v-card> <!-- default locale used here -->
 
@@ -134,8 +143,8 @@ const vuetify = createVuetify({
     messages: { customLocale },
     rtl: {
       customLocale: true,
-    }
-  }
+    },
+  },
 })
 ```
 
@@ -143,37 +152,24 @@ const vuetify = createVuetify({
 
 If you are building custom Vuetify components that need to hook into the locale service, you can use the `t` function from the **useLocale** composable, or the `$vuetify.locale` property when using Options API.
 
-```html
-<!-- Custom Vuetify Component -->
-
+```html { resource="Component.vue" }
 <template>
   <div class="my-component">
-    {{ $vuetify.locale.t('$vuetify.my-component.text') }}
+    {{ text }}
   </div>
 </template>
-```
 
-```html
-<script>
+<script setup>
   import { useLocale } from 'vuetify'
 
-  export default {
-    setup () {
-      const { t } = useLocale()
-
-      return {
-        t
-      }
-    }
-  }
+  const { t } = useLocale()
+  const text = t('$vuetify.my-component.text')
 </script>
 ```
 
-<alert type="warning">
-
-  The Vuetify locale service only provides a basic translation function `t`, and should really only be used for internal or custom Vuetify components. It is recommended that you use a proper i18n library such as [vue-i18n](https://kazupon.github.io/vue-i18n/) in your own application. Vuetify does provide support for integrating with other libraries.
-
-</alert>
+::: warning
+  The Vuetify locale service only provides a basic translation function `t`, and should really only be used for internal or custom Vuetify components. It is recommended that you use a proper i18n library such as [vue-i18n](https://vue-i18n.intlify.dev/) in your own application. Vuetify does provide support for integrating with other libraries.
+:::
 
 ## vue-i18n
 
@@ -184,10 +180,12 @@ import { createApp } from 'vue'
 import { createVuetify } from 'vuetify'
 import { createVueI18nAdapter } from 'vuetify/locale/adapters/vue-i18n'
 import { createI18n, useI18n } from 'vue-i18n'
+import { en, sv } from 'vuetify/locale'
 
 const messages = {
   en: {
     $vuetify: {
+      ...en,
       dataIterator: {
         rowsPerPageText: 'Items per page:',
         pageText: '{0}-{1} of {2}',
@@ -196,6 +194,7 @@ const messages = {
   },
   sv: {
     $vuetify: {
+      ...sv,
       dataIterator: {
         rowsPerPageText: 'Element per sida:',
         pageText: '{0}-{1} av {2}',
@@ -204,7 +203,7 @@ const messages = {
   },
 }
 
-const i18n = new createI18n({
+const i18n = createI18n({
   legacy: false, // Vuetify does not support the legacy mode of vue-i18n
   locale: 'sv',
   fallbackLocale: 'en',
@@ -213,8 +212,8 @@ const i18n = new createI18n({
 
 const vuetify = createVuetify({
   locale: {
-    adapter: createVueI18nAdapter({ i18n, useI18n })
-  }
+    adapter: createVueI18nAdapter({ i18n, useI18n }),
+  },
 })
 
 const app = createApp()
@@ -251,6 +250,7 @@ Currently Vuetify provides translations in the following languages:
 - **id** - Indonesian (Indonesian)
 - **it** - Italian (Italiano)
 - **ja** - Japanese (日本語)
+- **km** - Khmer (ខ្មែរ)
 - **ko** - Korean (한국어)
 - **lt** - Lithuanian (lietuvių kalba)
 - **lv** - Latvian (latviešu valoda)

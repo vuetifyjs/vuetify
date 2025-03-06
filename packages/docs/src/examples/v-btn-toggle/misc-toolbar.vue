@@ -23,9 +23,9 @@
     <v-spacer></v-spacer>
 
     <v-btn-toggle
-      v-model="toggle_multiple"
-      variant="plain"
+      v-model="toggleMultiple"
       color="primary"
+      variant="plain"
       multiple
     >
       <v-btn
@@ -52,11 +52,10 @@
     <div class="mx-4"></div>
 
     <v-btn-toggle
-      v-model="toggle_exclusive"
-      variant="plain"
+      v-model="toggleExclusive"
       color="primary"
-      dense
-      group
+      density="compact"
+      variant="plain"
     >
       <v-btn
         :value="1"
@@ -81,25 +80,19 @@
   </v-toolbar>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const toggleExclusive = ref(2)
+  const toggleMultiple = ref([1, 2, 3])
+</script>
+
 <script>
   export default {
     data () {
       return {
-        dropdown_font: [
-          { text: 'Arial' },
-          { text: 'Calibri' },
-          { text: 'Courier' },
-          { text: 'Verdana' },
-        ],
-        dropdown_edit: [
-          { text: '100%' },
-          { text: '75%' },
-          { text: '50%' },
-          { text: '25%' },
-          { text: '0%' },
-        ],
-        toggle_exclusive: 2,
-        toggle_multiple: [1, 2, 3],
+        toggleExclusive: 2,
+        toggleMultiple: [1, 2, 3],
       }
     },
   }

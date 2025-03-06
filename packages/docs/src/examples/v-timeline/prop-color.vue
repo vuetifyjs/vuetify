@@ -1,5 +1,5 @@
 <template>
-  <v-timeline side="end" align="start">
+  <v-timeline align="start" side="end">
     <v-timeline-item
       dot-color="pink"
       size="small"

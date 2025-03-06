@@ -1,6 +1,12 @@
 export default {
-  badge: 'Знак',
+  badge: 'Значок',
+  open: 'Відкрити',
   close: 'Закрити',
+  dismiss: 'Відхилити',
+  confirmEdit: {
+    ok: 'ОК',
+    cancel: 'Скасувати',
+  },
   dataIterator: {
     noResultsText: 'В результаті пошуку нічого не знайдено',
     loadingText: 'Завантаження...',
@@ -26,12 +32,20 @@ export default {
     lastPage: 'Остання сторінка',
     pageText: '{0}-{1} з {2}',
   },
+  dateRangeInput: {
+    divider: 'до',
+  },
   datePicker: {
-    itemsSelected: '{0} вибрано',
-    nextMonthAriaLabel: 'Наступного місяця',
-    nextYearAriaLabel: 'Наступного року',
-    prevMonthAriaLabel: 'Попередній місяць',
-    prevYearAriaLabel: 'Попередній рік',
+    itemsSelected: 'Вибрано {0}',
+    range: {
+      title: 'Оберіть дати',
+      header: 'Введіть дати',
+    },
+    title: 'Оберіть дату',
+    header: 'Введіть дату',
+    input: {
+      placeholder: 'Введіть дату',
+    },
   },
   noDataText: 'Немає даних для відображення',
   carousel: {
@@ -43,19 +57,27 @@ export default {
   },
   calendar: {
     moreEvents: 'Ще {0}',
+    today: 'Сьогодні',
   },
   input: {
-    clear: 'Clear {0}',
-    prependAction: '{0} prepended action',
-    appendAction: '{0} appended action',
+    clear: 'Очистити {0}',
+    prependAction: '{0} попередня дія',
+    appendAction: '{0} наступна дія',
+    otp: 'Будь ласка, введіть символ OTP {0}',
   },
   fileInput: {
     counter: '{0} файлів',
     counterSize: '{0} файлів ({1} загалом)',
   },
+  fileUpload: {
+    title: 'Перетягніть файли сюди',
+    divider: 'або',
+    browse: 'Переглянути файли',
+  },
   timePicker: {
     am: 'AM',
     pm: 'PM',
+    title: 'Оберіть час',
   },
   pagination: {
     ariaLabel: {
@@ -64,13 +86,22 @@ export default {
       previous: 'Попередня сторінка',
       page: 'Перейти на сторінку {0}',
       currentPage: 'Поточна сторінка, Сторінка {0}',
-      first: 'First page',
-      last: 'Last page',
+      first: 'Перша сторінка',
+      last: 'Остання сторінка',
     },
+  },
+  stepper: {
+    next: 'Далі',
+    prev: 'Назад',
   },
   rating: {
     ariaLabel: {
-      item: 'Rating {0} of {1}',
+      item: 'Оцінка {0} з {1}',
     },
+  },
+  loading: 'Завантаження...',
+  infiniteScroll: {
+    loadMore: 'Завантажити більше',
+    empty: 'Немає більше даних',
   },
 }

@@ -24,6 +24,15 @@
   </v-row>
 </template>
 
+<script setup>
+  import { computed, ref } from 'vue'
+
+  const dates = ref(['2019-09-10', '2019-09-20'])
+  const dateRangeText = computed(() => {
+    return dates.value.join(' ~ ')
+  })
+</script>
+
 <script>
   export default {
     data: () => ({

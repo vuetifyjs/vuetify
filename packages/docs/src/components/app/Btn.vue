@@ -1,7 +1,7 @@
 <template>
   <v-btn
-    :variant="variant"
     :icon="!!icon"
+    :variant="variant"
     class="text-body-2 text-capitalize px-3 app-btn"
     color="medium-emphasis"
   >
@@ -20,9 +20,6 @@
 </template>
 
 <script setup>
-  // Composables
-  import { useI18n } from 'vue-i18n'
-
   defineProps({
     icon: String,
     text: String,

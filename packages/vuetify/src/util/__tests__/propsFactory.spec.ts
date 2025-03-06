@@ -1,5 +1,5 @@
+// Utilities
 import { propsFactory } from '../propsFactory'
-import { describe, expect, it } from '@jest/globals'
 
 describe('propsFactory', () => {
   it.each([

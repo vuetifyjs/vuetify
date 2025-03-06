@@ -7,7 +7,6 @@
       "why-vuetify",
       "long-term-support",
       "roadmap",
-      "meet-the-team",
       "sponsors-and-backers",
       { "divider": true },
       { "subheader": "professional-support" },
@@ -20,7 +19,9 @@
     "activeIcon": "mdi-speedometer",
     "items": [
       "installation",
+      "frequently-asked-questions",
       "wireframes",
+      "unit-testing",
       "browser-support",
       "upgrade-guide",
       "release-notes",
@@ -32,13 +33,16 @@
     "inactiveIcon": "mdi-image-edit-outline",
     "activeIcon": "mdi-image-edit",
     "items": [
+      "accessibility",
       "aliasing",
       "application-layout",
       "blueprints",
+      "dates",
       "display-and-platform",
       "global-configuration",
       "icon-fonts",
       "internationalization",
+      "scrolling",
       "sass-variables",
       "theme",
       "treeshaking"
@@ -56,16 +60,32 @@
       {
         "subheader": "utility-classes"
       },
+      "borders",
       "border-radius",
       "content",
+      "cursor",
       "display",
       "elevation",
       "flex",
       "float",
+      "opacity",
       "overflow",
+      "position",
       "sizing",
       "spacing",
       "text-and-typography"
+    ]
+  },
+  {
+    "title": "concepts",
+    "inactiveIcon": "mdi-puzzle-outline",
+    "activeIcon": "mdi-puzzle",
+    "items": [
+      "density-and-sizing",
+      "items",
+      "routing",
+      "v-model",
+      "variants"
     ]
   },
   {
@@ -74,99 +94,124 @@
     "activeIcon": "mdi-view-dashboard",
     "items": [
       "all",
-      "alerts",
-      "aspect-ratios",
-      "avatars",
-      "badges",
-      "banners",
-      "breadcrumbs",
+      {
+        "title": "explorer",
+        "routeMatch": "explorer/:name(.*)",
+        "routePath": "explorer",
+        "subtitle": "browse-components"
+      },
+      "application",
+      { "divider": true },
+      { "subheader": "containment" },
+      "bottom-sheets",
       "buttons",
       "cards",
-      "carousels",
       "chips",
-      "color-pickers",
+      "dialogs",
       "dividers",
       "expansion-panels",
+      "lists",
+      "menus",
+      "overlays",
+      "sheets",
+      "toolbars",
+      "tooltips",
+      { "divider": true },
+      { "subheader": "navigation" },
+      "app-bars",
+      "bottom-navigation",
+      "breadcrumbs",
+      "floating-action-buttons",
+      "footers",
+      "navigation-drawers",
+      "paginations",
+      "speed-dials",
+      "system-bars",
+      "tabs",
+      { "divider": true },
+      { "subheader": "form-inputs-and-controls" },
+      "autocompletes",
+      "checkboxes",
+      "combobox",
+      "file-inputs",
+      "forms",
+      "inputs",
+      "otp-input",
+      "radio-buttons",
+      "range-sliders",
+      "selects",
+      "sliders",
+      "switches",
+      "text-fields",
+      "textareas",
+      { "divider": true },
+      { "subheader": "data-and-display" },
+      "confirm-edit",
+      "data-iterators",
       {
-        "title": "form-inputs-and-controls",
+        "title": "data-tables",
+        "subfolder": "components",
         "activeIcon": "",
         "inactiveIcon": "",
         "items": [
-          "autocompletes",
-          "checkboxes",
-          "combobox",
-          "file-inputs",
-          "forms",
-          "inputs",
-          "radio-buttons",
-          "selects",
-          "sliders",
-          "range-sliders",
-          "switches",
-          "textareas",
-          "text-fields"
+          "introduction",
+          { "subheader": "guide" },
+          "basics",
+          "data-and-display",
+          { "subheader": "types" },
+          "server-side-tables",
+          "virtual-tables"
         ]
       },
+      "sparklines",
+      "infinite-scroller",
+      "tables",
+      "virtual-scroller",
+      { "divider": true },
+      { "subheader": "grids" },
       "grids",
-      {
-        "title": "groups",
-        "items": [
-          "button-groups",
-          "chip-groups",
-          "item-groups",
-          "slide-groups",
-          "windows"
-        ]
-      },
+      { "divider": true },
+      { "subheader": "selection" },
+      "button-groups",
+      "carousels",
+      "chip-groups",
+      "item-groups",
+      "slide-groups",
+      "steppers",
+      "windows",
+      { "divider": true },
+      { "subheader": "feedback" },
+      "alerts",
+      "badges",
+      "banners",
+      "empty-states",
       "hover",
+      "progress-circular",
+      "progress-linear",
+      "ratings",
+      "skeleton-loaders",
+      "snackbars",
+      "timelines",
+      { "divider": true },
+      { "subheader": "images-and-icons" },
+      "aspect-ratios",
+      "avatars",
       "icons",
       "images",
-      {
-        "title": "layout",
-        "items": [
-          "app-bars",
-          "bottom-navigation",
-          "footers",
-          "navigation-drawers",
-          "system-bars"
-        ]
-      },
-      "lazy",
-      "lists",
-      "no-ssr",
-      {
-        "title": "overlays",
-        "items": [
-          "overlays",
-          "dialogs",
-          "menus",
-          "tooltips"
-        ]
-      },
-      "paginations",
       "parallax",
-      {
-        "title": "progress",
-        "items": [
-          "progress-circular",
-          "progress-linear"
-        ]
-      },
-      {
-        "title": "providers",
-        "items": [
-          "defaults-providers",
-          "locale-providers",
-          "theme-providers"
-        ]
-      },
-      "ratings",
-      "sheets",
-      "snackbars",
-      "tables",
-      "tabs",
-      "timelines",
-      "toolbars"
+      { "divider": true },
+      { "subheader": "pickers" },
+      "color-pickers",
+      "date-pickers",
+      { "divider": true },
+      { "subheader": "providers" },
+      "defaults-providers",
+      "locale-providers",
+      "theme-providers",
+      { "divider": true },
+      { "subheader": "miscellaneous" },
+      "lazy",
+      "no-ssr"
     ]
   },
   {
@@ -186,6 +231,7 @@
       "resize",
       "ripple",
       "scroll",
+      "tooltip",
       "touch"
     ]
   },
@@ -196,23 +242,41 @@
     "items": [
       "introduction",
       {
-        "title": "data-tables",
-        "subfolder": "components",
-        "activeIcon": "",
-        "inactiveIcon": "",
-        "items": [
-          "basics",
-          "headers",
-          "sorting",
-          "pagination",
-          "filtering",
-          "grouping",
-          "slots",
-          "virtual-tables",
-          "server-side-tables"
-        ]
+        "title": "calendars",
+        "subfolder": "components"
       },
-      "virtual-scroller"
+      {
+        "title": "date-inputs",
+        "subfolder": "components"
+      },
+      {
+        "title": "file-upload",
+        "subfolder": "components"
+      },
+      {
+        "title": "number-inputs",
+        "subfolder": "components"
+      },
+      {
+        "title": "pull-to-refresh",
+        "subfolder": "components"
+      },
+      {
+        "title": "snackbar-queue",
+        "subfolder": "components"
+      },
+      {
+        "title": "vertical-steppers",
+        "subfolder": "components"
+      },
+      {
+        "title": "time-pickers",
+        "subfolder": "components"
+      },
+      {
+        "title": "treeview",
+        "subfolder": "components"
+      }
     ]
   },
   {
@@ -220,17 +284,25 @@
     "inactiveIcon": "mdi-human-male-board",
     "activeIcon": "mdi-human-male-board",
     "items": [
+      "brand-kit",
       "jobs-for-vue",
+      "made-with-vuetify",
+      "themes",
+      { "divider": true },
+      { "subheader": "guides" },
+      "search-engine",
       "ui-kits"
     ]
   },
   {
     "title": "about",
-    "inactiveIcon": "mdi-vuetify",
-    "activeIcon": "mdi-vuetify",
+    "inactiveIcon": "$vuetify-outline",
+    "activeIcon": "$vuetify",
     "items": [
-      "security-disclosure",
-      "code-of-conduct"
+      "code-of-conduct",
+      "licensing",
+      "meet-the-team",
+      "security-disclosure"
     ]
   }
 ]

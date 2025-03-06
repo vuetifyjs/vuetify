@@ -29,6 +29,16 @@
   </v-row>
 </template>
 
+<script setup>
+  const btns = [
+    ['Removed', '0'],
+    ['Large', 'lg'],
+    ['Custom', 'b-xl'],
+  ]
+  const colors = ['deep-purple accent-4', 'error', 'teal darken-1']
+  const items = Array.from({ length: 4 }, (_, i) => `Item ${i}`)
+</script>
+
 <script>
   export default {
     data: () => ({

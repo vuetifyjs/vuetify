@@ -36,6 +36,13 @@
   </div>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const panel = ref([0, 1])
+  const readonly = ref(false)
+</script>
+
 <script>
   export default {
     data: () => ({

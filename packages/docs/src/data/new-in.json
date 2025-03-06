@@ -1,0 +1,45 @@
+{
+  "VAppBar": {
+    "props": {
+      "scrollBehavior": "3.2.0"
+    }
+  },
+  "VAutocomplete": {
+    "props": {
+      "autoSelectFirst": "3.3.0"
+    }
+  },
+  "VBtn": {
+    "props": {
+      "text": "3.2.0"
+    }
+  },
+  "VListItem": {
+    "props": {
+      "baseColor": "3.3.0"
+    }
+  },
+  "VSlider": {
+    "events": {
+      "start": "3.2.0",
+      "end": "3.2.0"
+    }
+  },
+  "VSwitch": {
+    "slots": {
+      "thumb": "3.5.0",
+      "track-false": "3.5.0",
+      "track-true": "3.5.0"
+    }
+  },
+  "VTab": {
+    "props": {
+      "text": "3.2.0"
+    }
+  },
+  "VTooltip": {
+    "props": {
+      "eager": "3.2.0"
+    }
+  }
+}

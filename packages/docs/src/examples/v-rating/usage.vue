@@ -1,80 +1,75 @@
 <template>
-  <div class="text-center">
-    <v-rating
-      v-bind="$attrs"
-    ></v-rating>
-  </div>
+  <ExamplesUsageExample
+    v-model="selectedOption"
+    :code="code"
+    :name="name"
+    :options="['Hearts']"
+  >
+    <div class="text-center">
+      <v-rating v-bind="props"></v-rating>
+    </div>
+
+    <template v-slot:configuration>
+      <v-checkbox v-model="options['half-increments']" label="Half increments"></v-checkbox>
+      <v-checkbox v-model="options.hover" label="Hover"></v-checkbox>
+      <v-checkbox v-model="options.readonly" label="Readonly"></v-checkbox>
+
+      <br>
+
+      <v-slider v-model="options.length" :max="8" :min="1" label="Length"></v-slider>
+      <v-slider v-model="options.size" :max="128" :min="16" label="Size"></v-slider>
+      <v-slider v-model="options['model-value']" :max="options.length" :min="0" :step="options['half-increments'] ? 0.5 : 1" label="Value"></v-slider>
+
+      <br>
+
+      <v-select v-model="options.color" :items="colorOptions" label="Color"></v-select>
+      <v-select v-model="options['active-color']" :items="colorOptions" label="Active color"></v-select>
+    </template>
+  </ExamplesUsageExample>
 </template>
 
-<script>
-  export default {
-    name: 'Usage',
+<script setup>
+  const selectedOption = ref()
 
-    inheritAttrs: false,
+  const options = reactive({
+    'half-increments': false,
+    hover: true,
+    readonly: false,
 
-    data: () => ({
-      show: true,
-      defaults: {
-        'background-color': null,
-        dense: false,
-        color: null,
-        'empty-icon': '$mdiStarOutline',
-        'full-icon': '$mdiStar',
-        'half-icon': '$mdiStarHalfFull',
-        'half-increments': false,
-        length: 5,
-        hover: true,
-        readonly: false,
-        value: 3,
-        size: 64,
-      },
-      options: {
-        booleans: [
-          'half-increments',
-          'hover',
-          'readonly',
-        ],
-        selects: {
-          color: [
-            'primary',
-            'warning',
-            'green',
-            'red',
-            'blue',
-            'error',
-            'teal',
-            'red lighten-3',
-          ],
-          'background-color': [
-            'grey lighten-2',
-            'warning lighten-1',
-            'green lighten-2',
-            'red lighten-2',
-            'grey',
-            '#eee',
-            'cyan lighten-2',
-            'grey lighten-1',
-          ],
-          'empty-icon': [
-            '$mdiHeartOutline',
-            '$mdiStarOutline',
-          ],
-          'full-icon': [
-            '$mdiHeart',
-            '$mdiStar',
-          ],
-          'half-icon': [
-            '$mdiHeartHalfFull',
-            '$mdiStarHalfFull',
-          ],
-        },
-        sliders: {
-          length: [1, 15],
-          size: [0, 100],
-          value: [0, 15, 0.5],
-        },
-      },
-      tabs: ['dense'],
-    }),
-  }
+    length: 5,
+    size: 32,
+    'model-value': 3,
+
+    color: null,
+    'active-color': 'primary',
+  })
+
+  const name = 'v-rating'
+  const props = computed(() => {
+    return Object.fromEntries(
+      Object.entries({
+        ...options,
+        ...(selectedOption.value === 'Hearts' ? {
+          'empty-icon': 'mdi-heart-outline',
+          'half-icon': 'mdi-heart-half-full',
+          'full-icon': 'mdi-heart',
+        } : undefined),
+      }).filter(([key, value]) => value)
+    )
+  })
+
+  const code = computed(() => {
+    return `<${name}${propsToString(props.value)} />`
+  })
+
+  const colorOptions = [
+    'primary',
+    'warning',
+    'green',
+    'red',
+    'blue',
+    'error',
+    'teal',
+    'red-lighten-3',
+  ]
 </script>

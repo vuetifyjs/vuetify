@@ -1,20 +1,4 @@
 {
-  "props": {
-    "closeDelay": "Delay (in ms) after which menu closes (when open-on-hover prop is set to true)",
-    "debounce": "Duration before tooltip is shown and hidden when hovered",
-    "internalActivator": "Designates whether to use an internal activator",
-    "openDelay": "Delay (in ms) after which tooltip opens (when `open-on-hover` prop is set to **true**)",
-    "openOnClick": "Designates whether the tooltip should open on activator click",
-    "openOnHover": "Designates whether the tooltip should open on activator hover",
-    "tag": "Specifies a custom tag for the activator wrapper",
-    "id": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-tooltip.json))"
-  },
-  "exposed": {
-    "activatorEl": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-tooltip.json))",
-    "animateClick": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-tooltip.json))",
-    "contentEl": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-tooltip.json))",
-    "globalTop": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-tooltip.json))",
-    "localTop": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-tooltip.json))",
-    "updateLocation": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-tooltip.json))"
-  }
+  "argument": "Applies the VTooltip location prop.",
+  "value": "**string**: Sets the tooltip content.  \n**boolean**: Controls visibility, tooltip content will be the innerText of the bound element.  \n**object**: Use any [VTooltip props](/api/v-tooltip), content can be set with `text`. Keys are camelCase."
 }

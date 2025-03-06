@@ -1,0 +1,13 @@
+{
+  "props": {
+    "alt": "Attaches an alt property to the parallax image.",
+    "src": "The image to parallax.",
+    "scale": "The scale of the parallax image.",
+    "srcset": "A set of alternate images to use based on device size. [Read more...](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-srcset)."
+  },
+  "slots": {
+    "error": "Puts the input in a manual error state.",
+    "placeholder": "Sets the input's placeholder text.",
+    "sources": "A list of `<source>` elements."
+  }
+}

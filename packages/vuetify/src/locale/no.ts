@@ -1,9 +1,15 @@
 export default {
   badge: 'Skilt',
+  open: 'Åpne',
   close: 'Lukk',
+  dismiss: 'Avvis',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'Avbryt',
+  },
   dataIterator: {
     noResultsText: 'Fant ingen matchende elementer.',
-    loadingText: 'Laster elementer...',
+    loadingText: 'Laster...',
   },
   dataTable: {
     itemsPerPageText: 'Rader per side:',
@@ -26,12 +32,20 @@ export default {
     lastPage: 'Siste side',
     pageText: '{0}-{1} av {2}',
   },
+  dateRangeInput: {
+    divider: 'til',
+  },
   datePicker: {
     itemsSelected: '{0} valgt',
-    nextMonthAriaLabel: 'Neste måned',
-    nextYearAriaLabel: 'Neste år',
-    prevMonthAriaLabel: 'Forrige måned',
-    prevYearAriaLabel: 'Forrige år',
+    range: {
+      title: 'Velg datoer',
+      header: 'Velg datoer',
+    },
+    title: 'Velg dato',
+    header: 'Velg dato',
+    input: {
+      placeholder: 'Fyll inn dato',
+    },
   },
   noDataText: 'Ingen data er tilgjengelig',
   carousel: {
@@ -43,19 +57,27 @@ export default {
   },
   calendar: {
     moreEvents: '{0} flere',
+    today: 'I dag',
   },
   input: {
-    clear: 'Clear {0}',
-    prependAction: '{0} prepended action',
-    appendAction: '{0} appended action',
+    clear: 'Fjern {0}',
+    prependAction: '{0} foranstilt handling',
+    appendAction: '{0} etterstilt handling',
+    otp: 'Vennligst skriv inn OTP-tegn {0}',
   },
   fileInput: {
     counter: '{0} filer',
     counterSize: '{0} filer ({1} totalt)',
   },
+  fileUpload: {
+    title: 'Dra og slipp filer her',
+    divider: 'eller',
+    browse: 'Bla gjennom filer',
+  },
   timePicker: {
     am: 'AM',
     pm: 'PM',
+    title: 'Velg tid',
   },
   pagination: {
     ariaLabel: {
@@ -64,13 +86,22 @@ export default {
       previous: 'Forrige side',
       page: 'Gå til side {0}',
       currentPage: 'Gjeldende side, side {0}',
-      first: 'First page',
-      last: 'Last page',
+      first: 'Første side',
+      last: 'Siste side',
     },
+  },
+  stepper: {
+    next: 'Neste',
+    prev: 'Forrige',
   },
   rating: {
     ariaLabel: {
-      item: 'Rating {0} of {1}',
+      item: 'Anmeldelse {0} av {1}',
     },
+  },
+  loading: 'Laster...',
+  infiniteScroll: {
+    loadMore: 'Last flere',
+    empty: 'Det var alt',
   },
 }

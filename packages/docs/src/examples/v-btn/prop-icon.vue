@@ -1,70 +1,38 @@
 <template>
   <v-container>
-    <v-row justify="space-between" class="text-center">
-      <v-col>
-        <v-btn
-          icon="mdi-heart"
-          color="primary"
-        ></v-btn>
+    <v-row align="center" justify="center">
+      <v-col cols="auto">
+        <v-btn density="compact" icon="mdi-plus"></v-btn>
       </v-col>
 
-      <v-col>
-        <v-btn
-          icon="mdi-star"
-          color="secondary"
-        ></v-btn>
+      <v-col cols="auto">
+        <v-btn density="comfortable" icon="$vuetify"></v-btn>
       </v-col>
 
-      <v-col>
-        <v-btn
-          icon="mdi-cached"
-          color="info"
-        ></v-btn>
-      </v-col>
-
-      <v-col>
-        <v-btn
-          icon="mdi-thumb-up"
-          color="success"
-        ></v-btn>
+      <v-col cols="auto">
+        <v-btn density="default" icon="mdi-open-in-new"></v-btn>
       </v-col>
     </v-row>
 
-    <v-row justify="space-between" class="text-center">
-      <v-col>
-        <v-btn
-          icon
-          color="primary"
-        >
-          <v-icon>mdi-heart</v-icon>
-        </v-btn>
+    <v-row align="center" justify="center">
+      <v-col cols="auto">
+        <v-btn icon="mdi-account" size="x-small"></v-btn>
       </v-col>
 
-      <v-col>
-        <v-btn
-          icon
-          color="secondary"
-        >
-          <v-icon>mdi-star</v-icon>
-        </v-btn>
+      <v-col cols="auto">
+        <v-btn icon="mdi-plus" size="small"></v-btn>
       </v-col>
 
-      <v-col>
-        <v-btn
-          icon
-          color="info"
-        >
-          <v-icon>mdi-cached</v-icon>
-        </v-btn>
+      <v-col cols="auto">
+        <v-btn icon="$vuetify"></v-btn>
       </v-col>
 
-      <v-col>
-        <v-btn
-          icon
-          color="success"
-        >
-          <v-icon>mdi-thumb-up</v-icon>
-        </v-btn>
+      <v-col cols="auto">
+        <v-btn icon="mdi-open-in-new" size="large"></v-btn>
+      </v-col>
+
+      <v-col cols="auto">
+        <v-btn icon="mdi-calendar" size="x-large"></v-btn>
       </v-col>
     </v-row>
   </v-container>

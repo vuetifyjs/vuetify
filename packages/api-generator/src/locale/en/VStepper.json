@@ -1,0 +1,9 @@
+{
+  "props": {
+    "flat": "Removes the stepper's elevation."
+  },
+  "exposed": {
+    "next": "Move to the next step.",
+    "prev": "Move to the prev step."
+  }
+}

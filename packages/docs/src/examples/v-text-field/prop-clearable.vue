@@ -5,12 +5,18 @@
   >
     <v-text-field
       v-model="model"
-      clearable
       hide-details="auto"
       label="Last name"
+      clearable
     ></v-text-field>
   </v-responsive>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const model = ref('Leider')
+</script>
 
 <script>
   export default {

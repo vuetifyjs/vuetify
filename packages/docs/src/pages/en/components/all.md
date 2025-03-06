@@ -1,22 +1,18 @@
 ---
-nav: All Components
 meta:
+  nav: All Components
   title: All Vuetify Components
   description: Browse all of the available Vuetify components or group by category.
   keywords: components, all components, all Vuetify components
 ---
 
-<script setup>
-  import ComponentsListItem from '@/components/components/ListItem.vue'
-</script>
-
 # Components
 
 Vuetify Components are interactive building blocks for creating user interfaces.
 
-<entry />
+<PageFeatures />
 
-----
+<PromotedEntry />
 
 ## Containment
 
@@ -24,77 +20,83 @@ Containment components wrap other components and provide additional functionalit
 
 <v-row>
 
-<components-list-item name="buttons">
+<ComponentsListItem name="Button component" src="buttons">
 
   The button component allows users to take actions or make choices with a single tap
 
-</components-list-item>
+</ComponentsListItem>
 
-<components-list-item name="cards" placeholder>
+<ComponentsListItem name="Card components" src="cards">
 
   The card component is a versatile and enhanced sheet of paper that provides a simple interface for headings, text, images, and actions
 
-</components-list-item>
+</ComponentsListItem>
 
-<components-list-item name="lists">
+<ComponentsListItem name="List components" src="lists">
 
   The list component is a display interface for items
 
-</components-list-item>
+</ComponentsListItem>
 
-<components-list-item name="chips">
+<ComponentsListItem name="Chip component" src="chips">
 
   Chips are useful for displaying small pieces of information
 
-</components-list-item>
+</ComponentsListItem>
 
-<components-list-item name="dividers" placeholder>
+<ComponentsListItem name="Divider components" src="dividers">
 
   Dividers are used to separate content into distinct sections or groups
 
-</components-list-item>
+</ComponentsListItem>
 
-<components-list-item name="expansion-panels" placeholder>
+<ComponentsListItem name="Expansion panel components"  src="expansion-panels">
 
   Expansion panels are used to reveal additional content in a compact manner
 
-</components-list-item>
+</ComponentsListItem>
 
-<components-list-item name="menus" placeholder>
+<ComponentsListItem name="Menu component" src="menus">
 
   The menu component is used to display a list of actions that the user can make
 
-</components-list-item>
+</ComponentsListItem>
 
-<components-list-item name="dialogs" placeholder>
+<ComponentsListItem name="Dialog component" src="dialogs">
 
   The dialog component informs a user about a specific task and may contain critical information
 
-</components-list-item>
+</ComponentsListItem>
 
-<components-list-item name="custom-overlays" placeholder>
+<ComponentsListItem name="Bottom sheet component" src="bottom-sheets">
+
+  The bottom sheet component elevates content from the bottom of the screen
+
+</ComponentsListItem>
+
+<ComponentsListItem name="Overlay component" src="overlays">
 
   The overlay component is used to display a custom scrim that sits on top of the application
 
-</components-list-item>
+</ComponentsListItem>
 
-<components-list-item name="toolbars">
+<ComponentsListItem name="Toolbar components" src="toolbars">
 
   Toolbars are used to label a content area and / or display a list of actions that the user can make
 
-</components-list-item>
+</ComponentsListItem>
 
-<components-list-item name="tooltips" placeholder>
+<ComponentsListItem name="Tooltip component" src="tooltips">
 
   Tooltips provide additional information about an element when the user hovers over it
 
-</components-list-item>
+</ComponentsListItem>
 
-<components-list-item name="sheets" placeholder>
+<ComponentsListItem name="Sheet component" src="sheets">
 
   The sheet component is a simple piece of paper that can be used to style and customize a block of content
 
-</components-list-item>
+</ComponentsListItem>
 
 </v-row>
 
@@ -106,53 +108,65 @@ Navigation components are used to navigate between different views or pages.
 
 <v-row>
 
-<components-list-item name="app-bars">
+<ComponentsListItem name="App bars"  src="app-bars">
 
   The app bar is used for top level navigation items and current page actions
 
-</components-list-item>
+</ComponentsListItem>
 
-<components-list-item name="navigation-drawers">
+<ComponentsListItem name="FABs" src="floating-action-buttons">
+
+  The floating action button is used for a promoted actions within an application
+
+</ComponentsListItem>
+
+<ComponentsListItem name="Navigation drawers"  src="navigation-drawers">
 
   Navigation drawers contain primary application navigation links
 
-</components-list-item>
+</ComponentsListItem>
 
-<components-list-item name="pagination">
+<ComponentsListItem name="Pagination component" src="paginations">
 
   The Pagination component is used to separate long sets of data
 
-</components-list-item>
+</ComponentsListItem>
 
-<components-list-item name="bottom-navigation">
+<ComponentsListItem name="Bottom navigation"  src="bottom-navigation">
 
   The bottom navigation component is used for displaying navigation links on mobile
 
-</components-list-item>
+</ComponentsListItem>
 
-<components-list-item name="breadcrumbs">
+<ComponentsListItem name="Breadcrumbs components" src="breadcrumbs">
 
   Breadcrumbs are navigational helpers for router pages
 
-</components-list-item>
+</ComponentsListItem>
 
-<components-list-item name="footers">
+<ComponentsListItem name="Footer component" src="footers">
 
   The footer component is a simple navigation area with inner site links
 
-</components-list-item>
+</ComponentsListItem>
 
-<components-list-item name="system-bars">
+<ComponentsListItem name="Speed dials" src="speed-dials">
+
+  The speed dial component is a floating action button that can reveal additional actions when clicked
+
+</ComponentsListItem>
+
+<ComponentsListItem name="System bar"  src="system-bars">
 
   The system bar component shows application information with iconography, time, and more
 
-</components-list-item>
+</ComponentsListItem>
 
-<components-list-item name="tabs" placeholder>
+<ComponentsListItem name="Tabs components" src="tabs">
 
   Tabs are used to organize content into different sections that can be viewed independently
 
-</components-list-item>
+</ComponentsListItem>
 
 </v-row>
 
@@ -164,83 +178,95 @@ Form components are used to collect user input in a variety of ways.
 
 <v-row>
 
-<components-list-item name="autocompletes" placeholder>
+<ComponentsListItem name="Autocomplete component" src="autocompletes">
 
   Autocompletes are used to provide suggestions to the user as they type into a field
 
-</components-list-item>
+</ComponentsListItem>
 
-<components-list-item name="comboboxes" placeholder>
+<ComponentsListItem name="Combobox components" src="combobox">
 
   The combobox component is used to select a value from a list of options with the ability to enter a custom value
 
-</components-list-item>
+</ComponentsListItem>
 
-<components-list-item name="text-fields" placeholder>
+<ComponentsListItem name="Text field"  src="text-fields">
 
   The text field component accepts textual input from users and is a replacement for the native text input element
 
-</components-list-item>
+</ComponentsListItem>
 
-<components-list-item name="checkboxes" placeholder>
+<ComponentsListItem name="Checkbox components" src="checkboxes">
 
   The checkbox component is a replacement for the native input checkbox
 
-</components-list-item>
+</ComponentsListItem>
 
-<components-list-item name="switches" placeholder>
+<ComponentsListItem name="Switch components" src="switches">
 
   The switch component is an alternately styled checkbox
 
-</components-list-item>
+</ComponentsListItem>
 
-<components-list-item name="radios" placeholder>
+<ComponentsListItem name="Radio button"  src="radio-buttons">
 
   The radio component is a replacement for its native counterpart
 
-</components-list-item>
+</ComponentsListItem>
 
-<components-list-item name="file-inputs" placeholder>
+<ComponentsListItem name="File input"  src="file-inputs">
 
   The file input component is used to select files from the user's device and is a replacement for the native file input element
 
-</components-list-item>
+</ComponentsListItem>
 
-<components-list-item name="forms" placeholder>
+<ComponentsListItem name="Form component" src="forms">
 
   The form component is used to wrap form elements and provide a consistent styling and a single source for validation
 
-</components-list-item>
+</ComponentsListItem>
 
-<components-list-item name="custom-inputs" placeholder>
+<ComponentsListItem name="Inputs component" src="inputs">
 
   Create custom inputs that can be used with the v-model directive
 
-</components-list-item>
+</ComponentsListItem>
 
-<components-list-item name="selects" placeholder>
+<ComponentsListItem name="Number input component" src="number-inputs" labs>
+
+  The number input component is used for collecting numerical data from the user
+
+</ComponentsListItem>
+
+<ComponentsListItem name="OTP Input component" src="otp-input" >
+
+  The OTP input component is used for MFA authentication via input field
+
+</ComponentsListItem>
+
+<ComponentsListItem name="Select component" src="selects">
 
   The select component is used to select a value from a list of options and is a replacement for the native select element
 
-</components-list-item>
+</ComponentsListItem>
 
-<components-list-item name="sliders" placeholder>
+<ComponentsListItem name="Slider component" src="sliders">
 
   Sliders are used to select a value from a range of values by moving a slider thumb and are a replacement for the native input range element
 
-</components-list-item>
+</ComponentsListItem>
 
-<components-list-item name="range-sliders" placeholder>
+<ComponentsListItem name="Range slider"  src="range-sliders">
 
   Range sliders are regular sliders with the ability to select in a range
 
-</components-list-item>
+</ComponentsListItem>
 
-<components-list-item name="textareas" placeholder>
+<ComponentsListItem name="Textarea component" src="textareas">
 
   The textarea component is a replacement for the native textarea element
 
-</components-list-item>
+</ComponentsListItem>
 
 </v-row>
 
@@ -252,171 +278,11 @@ Layout components are used to create responsive layouts.
 
 <v-row>
 
-<components-list-item name="grids" placeholder>
+<ComponentsListItem name="grids" src="grids">
 
   The grid component is used to create responsive layouts
 
-</components-list-item>
-
-</v-row>
-
-----
-
-## Data and display
-
-These components are used to display data and information in a variety of ways.
-
-<v-row>
-
-<components-list-item name="data-tables" placeholder>
-
-  Data tables are used to display large amounts of data in a small amount of space
-
-</components-list-item>
-
-<components-list-item name="server-side-data-tables" placeholder>
-
-  Server side data tables are intended to be used with a server side data source
-
-</components-list-item>
-
-<components-list-item name="virtual-data-tables" placeholder>
-
-  The virtual data table component is used to display very large subsets of data
-
-</components-list-item>
-
-<components-list-item name="tables" placeholder>
-
-  The table component is a barebones table for manually displaying data and is a replacement for the native table element
-
-</components-list-item>
-
-<components-list-item name="virtual-scrollers" placeholder>
-
-  The virtual scroller component makes it possible to render large amounts of data without sacrificing performance
-
-</components-list-item>
-
-</v-row>
-
-----
-
-## Feedback
-
-These components are used to provide feedback to the user within content, over content, or in response to user actions.
-
-<v-row>
-
-<components-list-item name="alerts">
-
-  Alerts convey important information to the user
-
-</components-list-item>
-
-<components-list-item name="badges">
-
-  Badges superscript or subscript an avatar-like icon or text onto content.
-
-</components-list-item>
-
-<components-list-item name="banners">
-
-  Banners are used to communicate important information to the user
-
-</components-list-item>
-
-<components-list-item name="snackbars" placeholder>
-
-  The snackbar component is used to display a message to the user that hovers over existing content
-
-</components-list-item>
-
-<components-list-item name="ratings">
-
-  Ratings are useful for collecting user feedback
-
-</components-list-item>
-
-<components-list-item name="timelines" placeholder>
-
-  Timeline components are used to display a list of events in chronological order
-
-</components-list-item>
-
-<components-list-item name="hover" placeholder>
-
-  The hover component is a wrapper component that allows you to react to hover events
-
-</components-list-item>
-
-<components-list-item name="progress-circular" placeholder>
-
-  Circular progress's are a visual indicator of numerical data in a circle
-
-</components-list-item>
-
-<components-list-item name="progress-linear" placeholder>
-
-  The linear progress component is used to display numerical data in a horizontal line
-
-</components-list-item>
-
-</v-row>
-
-----
-
-## Images and icons
-
-This subset of components are used to display media in a variety of ways.
-
-<v-row>
-
-<components-list-item name="aspect-ratios">
-
-  The aspect ratio component enforces a defined ratio
-
-</components-list-item>
-
-<components-list-item name="avatars">
-
-  Avatars are used in numerous components to display avatars and profile pictures
-
-</components-list-item>
-
-<components-list-item name="icons" placeholder>
-
-  The icon component is an reusable component that can be used to display icons
-
-</components-list-item>
-
-<components-list-item name="images" placeholder>
-
-  The image component provides a flexible interface for displaying images
-
-</components-list-item>
-
-<components-list-item name="parallax" placeholder>
-
-  Creates a 3d effect that makes an image appear to move slower than the foreground
-
-</components-list-item>
-
-</v-row>
-
-----
-
-## Pickers
-
-These components are used to select a value from a specifically styled set of options.
-
-<v-row>
-
-<components-list-item name="color-pickers" placeholder>
-
-  The color picker component is used to select a color from a palette
-
-</components-list-item>
+</ComponentsListItem>
 
 </v-row>
 
@@ -428,29 +294,237 @@ These components allow a user to select one or multiple items from a list of opt
 
 <v-row>
 
-<components-list-item name="carousels">
+<ComponentsListItem name="Carousel component" src="carousels">
 
   Carousels are used to display multiple forms of visual content
 
-</components-list-item>
+</ComponentsListItem>
 
-<components-list-item name="button-toggles" placeholder>
+<ComponentsListItem name="Button group" src="button-groups">
 
-  Button toggles are used to select between multiple options using the button component
+  Button groups are used to select between multiple options using the button component
 
-</components-list-item>
+</ComponentsListItem>
 
-<components-list-item name="chip-groups" placeholder>
+<ComponentsListItem name="Chip group" src="chip-groups">
 
   Chip group is a wrapper component that makes chips interactive and allows them to be selected
 
-</components-list-item>
+</ComponentsListItem>
 
-<components-list-item name="windows" placeholder>
+<ComponentsListItem name="Window components" src="windows">
 
   The window component is used to display a block of content based upon a model
 
-</components-list-item>
+</ComponentsListItem>
+
+<ComponentsListItem name="Stepper components" src="steppers">
+
+  The stepper component is a linear progress control used to break lengthy forms into smaller logical sections
+
+</ComponentsListItem>
+
+</v-row>
+
+----
+
+## Data and display
+
+These components are used to display data and information in a variety of ways.
+
+<v-row>
+
+<ComponentsListItem name="Confirm edit component" src="confirm-edit">
+
+  The confirm edit component is used to confirm changes to data
+
+</ComponentsListItem>
+
+<ComponentsListItem name="Data iterator component" src="data-iterators">
+
+  The data iterator component provides an easy interface for paginating and sorting data
+
+</ComponentsListItem>
+
+<ComponentsListItem name="Data table component"  src="data-tables/basics">
+
+  Data tables are used to display large amounts of data in a small amount of space
+
+</ComponentsListItem>
+
+<ComponentsListItem name="Infinite scroll component"  src="infinite-scroller">
+
+  The Infinite scroll component is a container that loads more items when scrolling
+
+</ComponentsListItem>
+
+<ComponentsListItem name="Server-side table component"  src="data-tables/server-side-tables">
+
+  Server side data tables are intended to be used with a server side data source
+
+</ComponentsListItem>
+
+<ComponentsListItem name="Sparkline component" src="sparklines">
+
+  The sparkline component creates beautiful and expressive simple graphs for displaying numerical data
+
+</ComponentsListItem>
+
+<ComponentsListItem name="Virtual Data table component"  src="data-tables/virtual-tables">
+
+  The virtual data table component is used to display very large subsets of data
+
+</ComponentsListItem>
+
+<ComponentsListItem name="Table component" src="tables">
+
+  The table component is a barebones table for manually displaying data and is a replacement for the native table element
+
+</ComponentsListItem>
+
+<ComponentsListItem name="Virtual scroll component"  src="virtual-scroller">
+
+  The virtual scroller component makes it possible to render large amounts of data without sacrificing performance
+
+</ComponentsListItem>
+
+</v-row>
+
+----
+
+## Feedback
+
+These components are used to provide feedback to the user within content, over content, or in response to user actions.
+
+<v-row>
+
+<ComponentsListItem name="Alert component" src="alerts">
+
+  Alerts convey important information to the user
+
+</ComponentsListItem>
+
+<ComponentsListItem name="Badge component" src="badges">
+
+  Badges superscript or subscript an avatar-like icon or text onto content.
+
+</ComponentsListItem>
+
+<ComponentsListItem name="Banner component" src="banners">
+
+  Banners are used to communicate important information to the user
+
+</ComponentsListItem>
+
+<ComponentsListItem name="Empty state component" src="empty-states">
+
+  The empty state component is used to indicate that a page or area on a page has no content.
+
+</ComponentsListItem>
+
+<ComponentsListItem name="Skeleton loader component" src="skeleton-loaders">
+
+  Displays a content, enhancing perceived performance during data-fetching & rendering
+
+</ComponentsListItem>
+
+<ComponentsListItem name="Snackbar component" src="snackbars">
+
+  The snackbar component is used to display a message to the user that hovers over existing content
+
+</ComponentsListItem>
+
+<ComponentsListItem name="Rating component" src="ratings">
+
+  Ratings are useful for collecting user feedback
+
+</ComponentsListItem>
+
+<ComponentsListItem name="Timeline components" src="timelines">
+
+  Timeline components are used to display a list of events in chronological order
+
+</ComponentsListItem>
+
+<ComponentsListItem name="Hover component" src="hover">
+
+  The hover component is a wrapper component that allows you to react to hover events
+
+</ComponentsListItem>
+
+<ComponentsListItem name="Progress circular component"  src="progress-circular">
+
+  Circular progress's are a visual indicator of numerical data in a circle
+
+</ComponentsListItem>
+
+<ComponentsListItem name="Progress linear component"  src="progress-linear">
+
+  The linear progress component is used to display numerical data in a horizontal line
+
+</ComponentsListItem>
+
+</v-row>
+
+----
+
+## Images and icons
+
+This subset of components are used to display media in a variety of ways.
+
+<v-row>
+
+<ComponentsListItem name="Aspect ratios component"  src="aspect-ratios">
+
+  The aspect ratio component enforces a defined ratio
+
+</ComponentsListItem>
+
+<ComponentsListItem name="Avatar component" src="avatars">
+
+  Avatars are used in numerous components to display avatars and profile pictures
+
+</ComponentsListItem>
+
+<ComponentsListItem name="Icon component" src="icons">
+
+  The icon component is an reusable component that can be used to display icons
+
+</ComponentsListItem>
+
+<ComponentsListItem name="Image component" src="images">
+
+  The image component provides a flexible interface for displaying images
+
+</ComponentsListItem>
+
+<ComponentsListItem name="Parallax component" src="parallax">
+
+  Creates a 3d effect that makes an image appear to move slower than the foreground
+
+</ComponentsListItem>
+
+</v-row>
+
+----
+
+## Pickers
+
+These components are used to select a value from a specifically styled set of options.
+
+<v-row>
+
+<ComponentsListItem name="Color picker component"  src="color-pickers">
+
+  The color picker component is used to select a color from a palette
+
+</ComponentsListItem>
+
+<ComponentsListItem name="Date picker component" src="date-pickers">
+
+  The date picker component is used to select a single date from a calendar month / year.
+
+</ComponentsListItem>
 
 </v-row>
 
@@ -460,23 +534,23 @@ These components allow a user to select one or multiple items from a list of opt
 
 <v-row>
 
-<components-list-item name="defaults-provider" placeholder>
+<ComponentsListItem name="Defaults provider component"  src="defaults-providers">
 
   The defaults provider component is used to set default values for all components within a template
 
-</components-list-item>
+</ComponentsListItem>
 
-<components-list-item name="locale-providers" placeholder>
+<ComponentsListItem name="Locale provider component"  src="locale-providers">
 
   The locale provider component allows you to change the language of all components within its slot
 
-</components-list-item>
+</ComponentsListItem>
 
-<components-list-item name="theme-providers" placeholder>
+<ComponentsListItem name="Theme provider component"  src="theme-providers">
 
   The theme provider component allows you to change the theme of all children components
 
-</components-list-item>
+</ComponentsListItem>
 
 </v-row>
 
@@ -488,22 +562,20 @@ These components don't fit into a traditional category and are used for a variet
 
 <v-row>
 
-<components-list-item name="lazy" placeholder>
+<ComponentsListItem name="Lazy component" src="lazy">
 
   The lazy component is a wrapper component that prevents the rendering of its child components until it is visible in the viewport
 
-</components-list-item>
+</ComponentsListItem>
 
-<components-list-item name="no-ssr" placeholder>
+<ComponentsListItem name="No-ssr component"  src="no-ssr">
 
   This component is used to prevent the rendering of its child components on the server
 
-</components-list-item>
+</ComponentsListItem>
 
 </v-row>
 
-<alert type="info">
-
+::: info
   This page is under **design** construction and will be updated with the missing images over time.
-
-</alert>
+:::

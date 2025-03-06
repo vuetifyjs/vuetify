@@ -2,7 +2,6 @@
   <v-row justify="center">
     <v-btn
       color="primary"
-      dark
       @click.stop="dialog = true"
     >
       Open Dialog
@@ -44,6 +43,12 @@
     </v-dialog>
   </v-row>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const dialog = ref(false)
+</script>
 
 <script>
   export default {

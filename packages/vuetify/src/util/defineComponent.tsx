@@ -1,27 +1,27 @@
-// Utils
+// Composables
+import { injectDefaults, internalUseDefaults } from '@/composables/defaults'
+
+// Utilities
 import {
   defineComponent as _defineComponent, // eslint-disable-line no-restricted-imports
-  computed,
-  getCurrentInstance,
-  shallowRef,
-  watchEffect,
 } from 'vue'
 import { consoleWarn } from '@/util/console'
-import { mergeDeep, toKebabCase } from '@/util/helpers'
-import { injectSelf } from '@/util/injectSelf'
+import { pick } from '@/util/helpers'
 import { propsFactory } from '@/util/propsFactory'
-import { DefaultsSymbol, provideDefaults, useDefaults } from '@/composables/defaults'
-import { useToggleScope } from '@/composables/toggleScope'
 
 // Types
 import type {
   AllowedComponentProps,
+  Component,
   ComponentCustomProps,
+  ComponentInjectOptions,
   ComponentObjectPropsOptions,
   ComponentOptions,
   ComponentOptionsMixin,
   ComponentOptionsWithObjectProps,
+  ComponentOptionsWithoutProps,
   ComponentPropsOptions,
+  ComponentPublicInstance,
   ComputedOptions,
   DefineComponent,
   EmitsOptions,
@@ -30,17 +30,76 @@ import type {
   FunctionalComponent,
   MethodOptions,
   ObjectEmitsOptions,
+  SlotsType,
   VNode,
   VNodeChild,
   VNodeProps,
 } from 'vue'
 
-function propIsDefined (vnode: VNode, prop: string) {
-  return typeof vnode.props?.[prop] !== 'undefined' ||
-    typeof vnode.props?.[toKebabCase(prop)] !== 'undefined'
-}
+// No props
+export function defineComponent<
+  Props = {},
+  RawBindings = {},
+  D = {},
+  C extends ComputedOptions = {},
+  M extends MethodOptions = {},
+  Mixin extends ComponentOptionsMixin = ComponentOptionsMixin,
+  Extends extends ComponentOptionsMixin = ComponentOptionsMixin,
+  E extends EmitsOptions = {},
+  EE extends string = string,
+  I extends {} = {},
+  II extends string = string,
+  S extends SlotsType = {},
+>(
+  options: ComponentOptionsWithoutProps<
+    Props,
+    RawBindings,
+    D,
+    C,
+    M,
+    Mixin,
+    Extends,
+    E,
+    EE,
+    I,
+    II,
+    S
+  >
+): DefineComponent<Props, RawBindings, D, C, M, Mixin, Extends, E, EE>
 
-export const defineComponent = (function defineComponent (options: ComponentOptions) {
+// Object Props
+export function defineComponent<
+  PropsOptions extends Readonly<ComponentPropsOptions>,
+  RawBindings,
+  D,
+  C extends ComputedOptions = {},
+  M extends MethodOptions = {},
+  Mixin extends ComponentOptionsMixin = ComponentOptionsMixin,
+  Extends extends ComponentOptionsMixin = ComponentOptionsMixin,
+  E extends EmitsOptions = {},
+  EE extends string = string,
+  I extends {} = {},
+  II extends string = string,
+  S extends SlotsType = {},
+>(
+  options: ComponentOptionsWithObjectProps<
+    PropsOptions,
+    RawBindings,
+    D,
+    C,
+    M,
+    Mixin,
+    Extends,
+    E,
+    EE,
+    I,
+    II,
+    S
+  >
+): DefineComponent<PropsOptions, RawBindings, D, C, M, Mixin, Extends, E, EE> & FilterPropsOptions<PropsOptions>
+
+// Implementation
+export function defineComponent (options: ComponentOptions) {
   options._setup = options._setup ?? options.setup
 
   if (!options.name) {
@@ -50,79 +109,67 @@ export const defineComponent = (function defineComponent (options: ComponentOpti
   }
 
   if (options._setup) {
-    options.props = options.props ?? {}
-
-    options.props = propsFactory(options.props, toKebabCase(options.name))()
+    options.props = propsFactory(options.props ?? {}, options.name)()
+    const propKeys = Object.keys(options.props).filter(key => key !== 'class' && key !== 'style')
+    options.filterProps = function filterProps (props: Record<string, any>) {
+      return pick(props, propKeys)
+    }
 
     options.props._as = String
     options.setup = function setup (props: Record<string, any>, ctx) {
-      const defaults = useDefaults()
+      const defaults = injectDefaults()
 
       // Skip props proxy if defaults are not provided
       if (!defaults.value) return options._setup(props, ctx)
 
-      const vm = getCurrentInstance()!
-      const componentDefaults = computed(() => defaults.value![props._as ?? options.name!])
-      const _props = new Proxy(props, {
-        get (target, prop) {
-          if (typeof prop === 'string' && !propIsDefined(vm.vnode, prop)) {
-            return componentDefaults.value?.[prop] ?? defaults.value!.global?.[prop] ?? target[prop]
-          }
-          return Reflect.get(target, prop)
-        },
-      })
-
-      const _subcomponentDefaults = shallowRef()
-      watchEffect(() => {
-        if (componentDefaults.value) {
-          const subComponents = Object.entries(componentDefaults.value).filter(([key]) => key.startsWith(key[0].toUpperCase()))
-          if (subComponents.length) _subcomponentDefaults.value = Object.fromEntries(subComponents)
-        }
-      })
+      const { props: _props, provideSubDefaults } = internalUseDefaults(props, props._as ?? options.name, defaults)
 
       const setupBindings = options._setup(_props, ctx)
 
-      // If subcomponent defaults are provided, override any
-      // subcomponents provided by the component's setup function.
-      // This uses injectSelf so must be done after the original setup to work.
-      useToggleScope(_subcomponentDefaults, () => {
-        provideDefaults(mergeDeep(
-          injectSelf(DefaultsSymbol)?.value ?? {},
-          _subcomponentDefaults.value
-        ))
-      })
+      provideSubDefaults()
 
       return setupBindings
     }
   }
 
   return options
-}) as unknown as typeof _defineComponent
+}
 
 type ToListeners<T extends string | number | symbol> = { [K in T]: K extends `on${infer U}` ? Uncapitalize<U> : K }[T]
 
-export type SlotsToProps<T extends Record<string, any>> = T extends Record<string, Slot> ? ({
+export type SlotsToProps<
+  U extends RawSlots,
+  T = MakeInternalSlots<U>
+> = {
   $children?: (
     | VNodeChild
-    | (keyof T extends 'default' ? T['default'] : {})
+    | (T extends { default: infer V } ? V : {})
     | { [K in keyof T]?: T[K] }
   )
   'v-slots'?: { [K in keyof T]?: T[K] | false }
 } & {
   [K in keyof T as `v-slot:${K & string}`]?: T[K] | false
-}) : T extends Record<string, any[]> ? SlotsToProps<MakeSlots<T>> : never
-
-type Slot<T extends any[] = any[]> = (...args: T) => VNodeChild
-export type MakeSlots<T extends Record<string, any[]>> = {
-  [K in keyof T]?: Slot<T[K]>
 }
 
-export type GenericSlot = SlotsToProps<{ default: [] }>
+type RawSlots = Record<string, unknown>
+type Slot<T> = [T] extends [never] ? () => VNodeChild : (arg: T) => VNodeChild
+type VueSlot<T> = [T] extends [never] ? () => VNode[] : (arg: T) => VNode[]
+type MakeInternalSlots<T extends RawSlots> = {
+  [K in keyof T]: Slot<T[K]>
+}
+type MakeSlots<T extends RawSlots> = {
+  [K in keyof T]: VueSlot<T[K]>
+}
 
-type DefineComponentWithGenericProps<T extends (new () => {
+export type GenericProps<Props, Slots extends Record<string, unknown>> = {
+  $props: Props & SlotsToProps<Slots>
+  $slots: MakeSlots<Slots>
+}
+
+type DefineComponentWithGenericProps<T extends (new (props: Record<string, any>, slots: RawSlots) => {
   $props?: Record<string, any>
 })> = <
-  PropsOptions extends Readonly<ComponentPropsOptions>,
+  PropsOptions extends Readonly<ComponentObjectPropsOptions>,
   RawBindings,
   D,
   C extends ComputedOptions = {},
@@ -131,25 +178,40 @@ type DefineComponentWithGenericProps<T extends (new () => {
   Extends extends ComponentOptionsMixin = ComponentOptionsMixin,
   E extends EmitsOptions = Record<string, any>,
   EE extends string = string,
-  I = InstanceType<T>,
+  I extends ComponentInjectOptions = {},
+  II extends string = string,
+  // Slots extends RawSlots = ConstructorParameters<T> extends [any, infer SS extends RawSlots | undefined] ? Exclude<SS, undefined> : {},
+  Slots extends RawSlots = ConstructorParameters<T>[1],
+  S extends SlotsType = SlotsType<Partial<MakeSlots<Slots>>>,
+  III = InstanceType<T>,
+  P = III extends Record<'$props', any>
+    ? Omit<PropsOptions, keyof III['$props']>
+    : PropsOptions,
+  EEE extends EmitsOptions = E extends any[]
+    ? E
+    : III extends Record<'$props', any>
+      ? Omit<E, ToListeners<keyof III['$props']>>
+      : E,
   Base = DefineComponent<
-    I extends Record<'$props', any>
-      ? Omit<PropsOptions, keyof I['$props']>
-      : PropsOptions,
+    P,
     RawBindings,
     D,
     C,
     M,
     Mixin,
     Extends,
-    E extends any[] ? E : I extends Record<'$props', any> ? Omit<E, ToListeners<keyof I['$props']>> : E,
-    EE
+    EEE,
+    EE,
+    PublicProps,
+    ExtractPropTypes<P> & ({} extends E ? {} : EmitsToProps<EEE>),
+    ExtractDefaultPropTypes<P>,
+    S
   >
 >(
-  options: ComponentOptionsWithObjectProps<PropsOptions, RawBindings, D, C, M, Mixin, Extends, E, EE>
-) => Base & T
+  options: ComponentOptionsWithObjectProps<PropsOptions, RawBindings, D, C, M, Mixin, Extends, E, EE, I, II, S>
+) => Base & T & FilterPropsOptions<PropsOptions>
 
-type DefineComponentWithSlots<Slots extends Record<string, any[]> | Record<string, Slot>> = <
+type DefineComponentWithSlots<Slots extends RawSlots> = <
   PropsOptions extends Readonly<ComponentPropsOptions>,
   RawBindings,
   D,
@@ -159,8 +221,11 @@ type DefineComponentWithSlots<Slots extends Record<string, any[]> | Record<strin
   Extends extends ComponentOptionsMixin = ComponentOptionsMixin,
   E extends EmitsOptions = Record<string, any>,
   EE extends string = string,
+  I extends ComponentInjectOptions = {},
+  II extends string = string,
+  S extends SlotsType = SlotsType<Partial<MakeSlots<Slots>>>,
 >(
-  options: ComponentOptionsWithObjectProps<PropsOptions, RawBindings, D, C, M, Mixin, Extends, E, EE>
+  options: ComponentOptionsWithObjectProps<PropsOptions, RawBindings, D, C, M, Mixin, Extends, E, EE, I, II, S>
 ) => DefineComponent<
   ExtractPropTypes<PropsOptions> & SlotsToProps<Slots>,
   RawBindings,
@@ -173,25 +238,26 @@ type DefineComponentWithSlots<Slots extends Record<string, any[]> | Record<strin
   EE,
   PublicProps,
   ExtractPropTypes<PropsOptions> & SlotsToProps<Slots> & ({} extends E ? {} : EmitsToProps<E>),
-  ExtractDefaultPropTypes<PropsOptions>
->
+  ExtractDefaultPropTypes<PropsOptions>,
+  S
+> & FilterPropsOptions<PropsOptions>
 
 // No argument - simple default slot
-export function genericComponent (exposeDefaults?: boolean): DefineComponentWithSlots<{ default: [] }>
+export function genericComponent (exposeDefaults?: boolean): DefineComponentWithSlots<{ default: never }>
 
 // Generic constructor argument - generic props and slots
-export function genericComponent<T extends (new () => {
+export function genericComponent<T extends (new (props: Record<string, any>, slots: any) => {
   $props?: Record<string, any>
 })> (exposeDefaults?: boolean): DefineComponentWithGenericProps<T>
 
 // Slots argument - simple slots
 export function genericComponent<
-  Slots extends Record<string, any[]> | Record<string, Slot>
+  Slots extends RawSlots
 > (exposeDefaults?: boolean): DefineComponentWithSlots<Slots>
 
 // Implementation
 export function genericComponent (exposeDefaults = true) {
-  return (options: any) => (exposeDefaults ? defineComponent : _defineComponent)(options) as any
+  return (options: any) => ((exposeDefaults ? defineComponent : _defineComponent) as any)(options)
 }
 
 export function defineFunctionalComponent<
@@ -227,3 +293,37 @@ type PublicProps =
   & VNodeProps
   & AllowedComponentProps
   & ComponentCustomProps
+
+// Adds a filterProps method to the component options
+export interface FilterPropsOptions<PropsOptions extends Readonly<ComponentPropsOptions>, Props = ExtractPropTypes<PropsOptions>> {
+  filterProps<
+    T extends Partial<Props>,
+    U extends Exclude<keyof Props, Exclude<keyof Props, keyof T>>
+  > (props: T): Partial<Pick<T, U>>
+}
+
+// https://github.com/vuejs/core/pull/10557
+export type ComponentInstance<T> = T extends { new (): ComponentPublicInstance<any, any, any> }
+  ? InstanceType<T>
+  : T extends FunctionalComponent<infer Props, infer Emits>
+    ? ComponentPublicInstance<Props, {}, {}, {}, {}, ShortEmitsToObject<Emits>>
+    : T extends Component<
+          infer Props,
+          infer RawBindings,
+          infer D,
+          infer C,
+          infer M
+        >
+      ? // NOTE we override Props/RawBindings/D to make sure is not `unknown`
+      ComponentPublicInstance<
+          unknown extends Props ? {} : Props,
+          unknown extends RawBindings ? {} : RawBindings,
+          unknown extends D ? {} : D,
+          C,
+          M
+        >
+      : never // not a vue Component
+
+type ShortEmitsToObject<E> = E extends Record<string, any[]> ? {
+  [K in keyof E]: (...args: E[K]) => any;
+} : E;

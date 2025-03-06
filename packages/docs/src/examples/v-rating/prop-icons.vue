@@ -4,12 +4,17 @@
       v-model="rating"
       empty-icon="mdi-circle-outline"
       full-icon="mdi-circle"
-      half-icon="mdi-circle-half"
       half-increments
       hover
     ></v-rating>
   </div>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const rating = ref(3.5)
+</script>
 
 <script>
   export default {

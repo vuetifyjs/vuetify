@@ -1,6 +1,12 @@
 export default {
   badge: 'Bricka',
+  open: 'Öppna',
   close: 'Stäng',
+  dismiss: 'Avvisa',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'Avbryt',
+  },
   dataIterator: {
     noResultsText: 'Hittade inga poster',
     loadingText: 'Laddar data...',
@@ -26,12 +32,20 @@ export default {
     lastPage: 'Sista sidan',
     pageText: '{0}-{1} av {2}',
   },
+  dateRangeInput: {
+    divider: 'till',
+  },
   datePicker: {
-    itemsSelected: '{0} markerade',
-    nextMonthAriaLabel: 'Nästa månad',
-    nextYearAriaLabel: 'Nästa år',
-    prevMonthAriaLabel: 'Förra månaden',
-    prevYearAriaLabel: 'Förra året',
+    itemsSelected: '{0} valda',
+    range: {
+      title: 'Välj datum',
+      header: 'Välj datum',
+    },
+    title: 'Välj datum',
+    header: 'Välj datum',
+    input: {
+      placeholder: 'Välj datum',
+    },
   },
   noDataText: 'Ingen data tillgänglig',
   carousel: {
@@ -43,19 +57,27 @@ export default {
   },
   calendar: {
     moreEvents: '{0} fler',
+    today: 'Idag',
   },
   input: {
     clear: 'Rensa {0}',
-    prependAction: '{0} prepended action',
-    appendAction: '{0} appended action',
+    prependAction: '{0} föregående åtgärd',
+    appendAction: '{0} efterföljande åtgärd',
+    otp: 'Vänligen ange OTP-tecken {0}',
   },
   fileInput: {
     counter: '{0} filer',
     counterSize: '{0} filer ({1})',
   },
+  fileUpload: {
+    title: 'Dra och släpp filer här',
+    divider: 'eller',
+    browse: 'Bläddra bland filer',
+  },
   timePicker: {
-    am: 'AM',
-    pm: 'PM',
+    am: 'FM',
+    pm: 'EM',
+    title: 'Välj tid',
   },
   pagination: {
     ariaLabel: {
@@ -68,9 +90,18 @@ export default {
       last: 'Sista sidan',
     },
   },
+  stepper: {
+    next: 'Next',
+    prev: 'Previous',
+  },
   rating: {
     ariaLabel: {
       item: 'Betyg {0} av {1}',
     },
+  },
+  loading: 'Laddar...',
+  infiniteScroll: {
+    loadMore: 'Ladda fler',
+    empty: 'Inga fler',
   },
 }

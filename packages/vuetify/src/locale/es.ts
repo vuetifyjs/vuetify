@@ -1,6 +1,12 @@
 export default {
   badge: 'Placa',
+  open: 'Abrir',
   close: 'Cerrar',
+  dismiss: 'Descartar',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'Cancelar',
+  },
   dataIterator: {
     noResultsText: 'Ningún elemento coincide con la búsqueda',
     loadingText: 'Cargando...',
@@ -26,12 +32,20 @@ export default {
     lastPage: 'Última página',
     pageText: '{0}-{1} de {2}',
   },
+  dateRangeInput: {
+    divider: 'a',
+  },
   datePicker: {
     itemsSelected: '{0} seleccionados',
-    nextMonthAriaLabel: 'Próximo mes',
-    nextYearAriaLabel: 'Próximo año',
-    prevMonthAriaLabel: 'Mes anterior',
-    prevYearAriaLabel: 'Año anterior',
+    range: {
+      title: 'Seleccionar fechas',
+      header: 'Introducir fechas',
+    },
+    title: 'Seleccionar fecha',
+    header: 'Introducir fecha',
+    input: {
+      placeholder: 'Introducir fecha',
+    },
   },
   noDataText: 'No hay datos disponibles',
   carousel: {
@@ -43,19 +57,27 @@ export default {
   },
   calendar: {
     moreEvents: '{0} más',
+    today: 'Hoy',
   },
   input: {
-    clear: 'Clear {0}',
-    prependAction: '{0} prepended action',
-    appendAction: '{0} appended action',
+    clear: 'Borrar {0}',
+    prependAction: '{0} acción adelantada',
+    appendAction: '{0} acción añadida',
+    otp: 'Por favor, introduzca el carácter OTP {0}',
   },
   fileInput: {
     counter: '{0} archivos',
     counterSize: '{0} archivos ({1} en total)',
   },
+  fileUpload: {
+    title: 'Arrastra y suelta archivos aquí',
+    divider: 'o',
+    browse: 'Explorar archivos',
+  },
   timePicker: {
     am: 'AM',
     pm: 'PM',
+    title: 'Seleccionar hora',
   },
   pagination: {
     ariaLabel: {
@@ -64,13 +86,22 @@ export default {
       previous: 'Página anterior',
       page: 'Ir a la página {0}',
       currentPage: 'Página actual, página {0}',
-      first: 'First page',
-      last: 'Last page',
+      first: 'Primera página',
+      last: 'Última página',
     },
+  },
+  stepper: {
+    next: 'Siguiente',
+    prev: 'Anterior',
   },
   rating: {
     ariaLabel: {
       item: 'Puntuación {0} de {1}',
     },
+  },
+  loading: 'Cargando...',
+  infiniteScroll: {
+    loadMore: 'Cargar más',
+    empty: 'No hay más',
   },
 }

@@ -6,22 +6,20 @@
     >
       <v-menu
         ref="menu"
-        v-model="menu"
+        v-model="menuActive"
         v-model:return-value="date"
         :close-on-content-click="false"
-        transition="scale-transition"
-        offset-y
         max-width="290px"
         min-width="auto"
+        transition="scale-transition"
       >
-        <template v-slot:activator="{ on, attrs }">
+        <template v-slot:activator="{ props }">
           <v-text-field
             v-model="date"
             label="Picker in menu"
             prepend-icon="mdi-calendar"
             readonly
-            v-bind="attrs"
-            v-on="on"
+            v-bind="props"
           ></v-text-field>
         </template>
         <v-date-picker
@@ -32,16 +30,16 @@
         >
           <v-spacer></v-spacer>
           <v-btn
-            variant="text"
             color="primary"
+            variant="text"
             @click="menu = false"
           >
             Cancel
           </v-btn>
           <v-btn
-            variant="text"
             color="primary"
-            @click="$refs.menu.save(date)"
+            variant="text"
+            @click="menu.save(date)"
           >
             OK
           </v-btn>
@@ -57,17 +55,16 @@
         ref="dialog"
         v-model="modal"
         v-model:return-value="date"
-        persistent
         width="290px"
+        persistent
       >
-        <template v-slot:activator="{ on, attrs }">
+        <template v-slot:activator="{ props }">
           <v-text-field
             v-model="date"
             label="Picker in dialog"
             prepend-icon="mdi-calendar"
             readonly
-            v-bind="attrs"
-            v-on="on"
+            v-bind="props"
           ></v-text-field>
         </template>
         <v-date-picker
@@ -77,16 +74,16 @@
         >
           <v-spacer></v-spacer>
           <v-btn
-            variant="text"
             color="primary"
+            variant="text"
             @click="modal = false"
           >
             Cancel
           </v-btn>
           <v-btn
-            variant="text"
             color="primary"
-            @click="$refs.dialog.save(date)"
+            variant="text"
+            @click="dialog.save(date)"
           >
             OK
           </v-btn>
@@ -96,11 +93,22 @@
   </v-row>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const menu = ref()
+  const dialog = ref()
+
+  const date = ref(new Date().toISOString().substr(0, 7))
+  const menuActive = ref(false)
+  const modal = ref(false)
+</script>
+
 <script>
   export default {
     data: () => ({
       date: new Date().toISOString().substr(0, 7),
-      menu: false,
+      menuActive: false,
       modal: false,
     }),
   }

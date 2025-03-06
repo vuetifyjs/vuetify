@@ -1,0 +1,18 @@
+{
+  "props": {
+    "autofocus": "Automatically focuses the first input on page load",
+    "divider": "Specifies the dividing character between items.",
+    "focusAll": "Puts all inputs into a focus state when any are focused",
+    "length": "The OTP field's length.",
+    "placeholder": "Sets the input’s placeholder text.",
+    "type": "Supported types: `text`, `password`, `number`."
+  },
+  "events": {
+    "finish": "Emitted when the input is filled completely and cursor is blurred."
+  },
+  "exposed": {
+    "blur": "Forces the input to lose focus.",
+    "focus": "Focuses the first field in the input",
+    "reset": "Reset's the input model to an empty array"
+  }
+}

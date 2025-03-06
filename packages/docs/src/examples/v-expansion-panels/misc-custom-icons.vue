@@ -14,7 +14,7 @@
 
     <v-expansion-panels>
       <v-expansion-panel>
-        <v-expansion-panel-title expand-icon="mdi-plus" collapse-icon="mdi-minus">
+        <v-expansion-panel-title collapse-icon="mdi-minus" expand-icon="mdi-plus">
           Item
         </v-expansion-panel-title>
         <v-expansion-panel-text>

@@ -1,6 +1,12 @@
 export default {
   badge: 'Значка',
+  open: 'Отвори',
   close: 'Затвори',
+  dismiss: 'Одбаци',
+  confirmEdit: {
+    ok: 'У реду',
+    cancel: 'Откажи',
+  },
   dataIterator: {
     noResultsText: 'Ни један запис није пронађен',
     loadingText: 'Учитавање ставке...',
@@ -26,12 +32,20 @@ export default {
     lastPage: 'Последња страница',
     pageText: '{0}-{1} од {2}',
   },
+  dateRangeInput: {
+    divider: 'до',
+  },
   datePicker: {
-    itemsSelected: '{0} одабрано',
-    nextMonthAriaLabel: 'Следећег месеца',
-    nextYearAriaLabel: 'Следеће године',
-    prevMonthAriaLabel: 'Претходни месец',
-    prevYearAriaLabel: 'Претходна година',
+    itemsSelected: '{0} изабрано',
+    range: {
+      title: 'Изаберите датуме',
+      header: 'Унесите датуме',
+    },
+    title: 'Изаберите датум',
+    header: 'Унесите датум',
+    input: {
+      placeholder: 'Унесите датум',
+    },
   },
   noDataText: 'Нема доступних података',
   carousel: {
@@ -43,34 +57,51 @@ export default {
   },
   calendar: {
     moreEvents: '{0} више',
+    today: 'Данас',
   },
   input: {
-    clear: 'Clear {0}',
-    prependAction: '{0} prepended action',
-    appendAction: '{0} appended action',
+    clear: 'Очисти {0}',
+    prependAction: '{0} претходна акција',
+    appendAction: '{0} додатна акција',
+    otp: 'Унесите OTP знак {0}',
   },
   fileInput: {
     counter: '{0} фајлова',
     counterSize: '{0} фајлова ({1} укупно)',
   },
+  fileUpload: {
+    title: 'Превуците и отпустите фајлове овде',
+    divider: 'или',
+    browse: 'Прегледај фајлове',
+  },
   timePicker: {
-    am: 'AM',
-    pm: 'PM',
+    am: 'АМ',
+    pm: 'ПМ',
+    title: 'Изаберите време',
   },
   pagination: {
     ariaLabel: {
       root: 'Навигација страницама',
       next: 'Следећа страница',
       previous: 'Претходна страница',
-      page: 'Иди на страну {0}',
+      page: 'Иди на страницу {0}',
       currentPage: 'Тренутна страница, страница {0}',
-      first: 'First page',
-      last: 'Last page',
+      first: 'Прва страница',
+      last: 'Последња страница',
     },
+  },
+  stepper: {
+    next: 'Следеће',
+    prev: 'Претходно',
   },
   rating: {
     ariaLabel: {
       item: 'Оцена {0} од {1}',
     },
+  },
+  loading: 'Учитавање...',
+  infiniteScroll: {
+    loadMore: 'Учитај више',
+    empty: 'Нема више података',
   },
 }

@@ -1,11 +1,10 @@
 <template>
   <div>
     <v-toolbar
-      :color="isDark ? '#1F1F1F' : 'grey-lighten-4'"
       border="b"
       class="ps-1"
-      flat
       height="44"
+      flat
     >
       <v-slide-group
         v-model="model"
@@ -49,6 +48,21 @@
       <v-tooltip location="bottom">
         <template #activator="{ props: activatorProps }">
           <v-btn
+            :href="playgroundLink"
+            class="me-1 text-medium-emphasis"
+            density="comfortable"
+            icon="$vuetify-play"
+            target="_blank"
+            v-bind="activatorProps"
+          />
+        </template>
+
+        <span>{{ t('edit-in-playground') }}</span>
+      </v-tooltip>
+
+      <v-tooltip location="bottom">
+        <template #activator="{ props: activatorProps }">
+          <v-btn
             :icon="!show ? 'mdi-code-tags' : 'mdi-chevron-up'"
             class="me-1 text-medium-emphasis"
             density="comfortable"
@@ -64,7 +78,7 @@
     <v-layout :class="['border-b', !show && 'border-opacity-0']">
       <v-main>
         <v-sheet
-          class="pa-14 d-flex align-center"
+          class="py-14 px-4 d-flex align-center"
           min-height="300"
           rounded="0"
         >
@@ -79,9 +93,9 @@
         v-model="tune"
         location="right"
         name="tune"
+        width="250"
         permanent
         touchless
-        width="250"
       >
         <v-list>
           <div class="px-4 usage-example pt-2">
@@ -102,9 +116,13 @@
     </v-layout>
 
     <v-expand-transition>
-      <div v-if="show && display.mdAndUp.value">
-        <div class="pa-3">
-          <app-markup :code="code" />
+      <div v-if="show">
+        <div class="pa-2">
+          <AppMarkup :code="code" />
+        </div>
+
+        <div v-if="script" class="pa-2 pt-0">
+          <AppMarkup :code="script" language="js" />
         </div>
       </div>
     </v-expand-transition>
@@ -112,14 +130,6 @@
 </template>
 
 <script setup>
-  // Composables
-  import { useDisplay, useTheme } from 'vuetify'
-  import { useI18n } from 'vue-i18n'
-
-  // Utilities
-  import { computed, ref } from 'vue'
-  import { upperFirst } from 'lodash-es'
-
   const props = defineProps({
     name: String,
     code: String,
@@ -132,18 +142,15 @@
       default: () => ([]),
       required: true,
     },
+    script: String,
   })
   const emit = defineEmits(['update:modelValue', 'update:tuneValue'])
 
   const display = useDisplay()
   const { t } = useI18n()
-  const theme = useTheme()
 
   const tune = ref(true)
   const show = ref(true)
-  const isDark = computed(() => {
-    return theme.current.value.dark
-  })
 
   const model = computed({
     get () {
@@ -153,6 +160,13 @@
       emit('update:modelValue', val)
     },
   })
+  const playgroundLink = computed(() => usePlayground([
+    {
+      name: 'template',
+      language: 'html',
+      content: `<template>\n  <v-app>\n    <v-container>\n      ${props.code.replaceAll('\n', '\n      ')}\n    </v-container>\n  </v-app>\n</template>\n${props.script || ''}`,
+    },
+  ]))
 </script>
 
 <style lang="sass">

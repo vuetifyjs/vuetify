@@ -1,13 +1,18 @@
 <template>
   <v-list
     v-model:opened="opened"
-    :nav="nav"
     :items="computedItems"
     :lines="false"
+    :nav="nav"
     color="primary"
     density="compact"
     item-props
+    slim
   >
+    <template v-if="$slots.item" #item="itemProps">
+      <slot name="item" v-bind="itemProps" />
+    </template>
+
     <template #divider>
       <slot name="divider" />
 
@@ -15,6 +20,24 @@
         v-if="!$slots.divider"
         class="my-3 mb-4 ms-2 me-n2"
       />
+    </template>
+
+    <template #title="{ item }">
+      {{ item.title }}
+
+      <v-badge
+        v-if="item.emphasized"
+        class="ms-n1"
+        color="success"
+        dot
+        inline
+      />
+    </template>
+
+    <template #subtitle="{ item }">
+      <span v-if="item.subtitle" class="text-high-emphasis">
+        {{ item.subtitle }}
+      </span>
     </template>
 
     <template #subheader="{ props: subheaderProps }">
@@ -34,19 +57,14 @@
 </template>
 
 <script setup lang="ts">
-  // Composables
-  import { useI18n } from 'vue-i18n'
-
-  // Utiltities
-  import { computed, ref } from 'vue'
-  import { generatedRoutes as routes } from '@/util/routes'
-  import { RouteLocationRaw, RouteRecordRaw } from 'vue-router'
-
   // Types
+  import type { RouteLocationRaw } from 'vue-router'
   import type { Prop } from 'vue'
+  import apiList from 'virtual:api-list'
 
   export type Item = {
     title?: string
+    subtitle?: string
     appendIcon?: string
     activeIcon?: string
     inactiveIcon?: string
@@ -55,29 +73,48 @@
     divider?: boolean
     to?: RouteLocationRaw
     href?: string
-    subfolder?: boolean
+    subfolder?: string
     disabled?: boolean
+    routeMatch?: string
+    routePath?: string
+    emphasized?: boolean
+    onClick?: () => void
   }
 
   function generateApiItems (locale: string) {
-    return (routes as RouteRecordRaw[])
-      .filter(route => route.path.includes(`${locale}/api/`))
-      .sort((a, b) => a.path.localeCompare(b.path))
-      .map(route => {
-        return {
-          title: (route.meta!.title as string).slice(0, -4),
-          to: route.path,
-        }
-      })
+    return apiList.map(name => {
+      const path = kebabCase(name.startsWith('v-') ? name + '-directive' : name)
+      return {
+        title: name,
+        to: `/${locale}/api/${path}`,
+      }
+    })
   }
 
   function generateListItem (item: string | Item, path = '', locale = 'en', t = (key: string) => key): any {
-    if (typeof item === 'string') {
-      const route = routes.find((route: { path: string }) => route.path.endsWith(`/${locale}/${path}/${item}/`))
+    const isString = typeof item === 'string'
+    const isLink = !isString && (item.to || item.href)
+    const isParent = !isString && item.items
+    const isType = !isString && (item.divider || item.subheader)
+
+    if (isString || (!isLink && !isParent && !isType)) {
+      const litem = isString ? { title: item } : item
+
+      if (litem.subfolder) path = litem.subfolder
+
+      const route = litem.routeMatch
+        ? generatedRoutes.find((route: { path: string }) => route.path.endsWith(`/${locale}/${path}/${litem.routeMatch}/`))
+        : generatedRoutes.find((route: { path: string }) => route.path.endsWith(`/${locale}/${path}/${litem.title}/`))
+
+      const to = litem.routePath
+        ? `/${locale}/${path}/${litem.routePath}/`
+        : route?.path
 
       return {
-        title: route?.meta?.nav ?? route?.meta?.title ?? item,
-        to: route?.path,
+        title: route?.meta?.nav ?? route?.meta?.title ?? litem.title,
+        subtitle: litem.subtitle && te(litem.subtitle) ? t(litem.subtitle) : litem.subtitle,
+        emphasized: route?.meta?.emphasized ?? false,
+        to,
         disabled: !route,
       }
     } else if (item.divider) {
@@ -93,6 +130,7 @@
       const p = item.subfolder ? `${item.subfolder}/${item.title}` : path
       return {
         title: t(item.title!),
+        emphasized: item.emphasized,
         children: item.items.map(item => generateListItem(item, p, locale, t)),
       }
     }
@@ -128,9 +166,12 @@
         to: item?.to,
         href: item?.href,
       }),
+      onClick: item?.onClick,
       rel: item.href ? 'noopener noreferrer' : undefined,
       target: item.href ? '_blank' : undefined,
-      children: item.title === 'api' ? generateApiItems(locale.value) : generateListItems(item, item.title!, locale.value, t),
+      children: item.title === 'api'
+        ? generateApiItems(locale.value)
+        : generateListItems(item, item.title!, locale.value, t),
       prependIcon: opened.value.includes(title ?? '') ? item.activeIcon : item.inactiveIcon,
       value: title,
       appendIcon: item.appendIcon,

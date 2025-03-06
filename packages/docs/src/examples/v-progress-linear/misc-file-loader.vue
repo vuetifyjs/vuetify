@@ -3,19 +3,16 @@
     class="mx-auto"
     max-width="344"
   >
-    <v-toolbar
-      color="deep-purple-accent-4"
-      prominent
-    >
+    <v-toolbar color="deep-purple-accent-4">
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
       <v-toolbar-title>My Files</v-toolbar-title>
 
       <v-btn
-        absolute
-        location="bottom left"
         color="white"
-        fab
+        location="bottom left"
+        absolute
+        icon
       >
         <v-icon>mdi-plus</v-icon>
       </v-btn>
@@ -37,8 +34,8 @@
 
     <v-container style="height: 400px;">
       <v-row
-        class="fill-height"
         align-content="center"
+        class="fill-height"
         justify="center"
       >
         <v-col
@@ -50,9 +47,9 @@
         <v-col cols="6">
           <v-progress-linear
             color="deep-purple-accent-4"
+            height="6"
             indeterminate
             rounded
-            height="6"
           ></v-progress-linear>
         </v-col>
       </v-row>

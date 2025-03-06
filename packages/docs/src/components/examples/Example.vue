@@ -1,27 +1,30 @@
 <template>
-  <v-defaults-provider scoped>
-    <v-sheet
-      border
-      class="mb-9 overflow-hidden"
-      rounded
-    >
-      <v-lazy v-if="!preview" min-height="44">
+  <v-defaults-provider
+    :defaults="{
+      global: { eager: false }
+    }"
+    scoped
+  >
+    <AppSheet class="mb-9">
+      <v-lazy
+        v-model="hasRendered"
+        min-height="44"
+      >
         <v-toolbar
-          :color="isDark ? '#1F1F1F' : 'grey-lighten-4'"
           border="b"
           class="px-1"
-          flat
           height="44"
+          flat
         >
-          <v-fade-transition>
+          <v-fade-transition hide-on-leave>
             <div v-if="showCode">
               <v-btn
                 v-for="(section, i) of sections"
                 :key="section.name"
                 :active="template === i"
                 class="ma-1 text-none"
-                variant="text"
                 size="small"
+                variant="text"
                 @click="template = i"
               >
                 <span :class="template === i ? 'text-high-emphasis' : 'text-medium-emphasis'">
@@ -29,81 +32,89 @@
                 </span>
               </v-btn>
             </div>
+
+            <div
+              v-else-if="user.dev && file"
+              class="text-body-2 ma-1 text-medium-emphasis"
+            >
+              <v-icon icon="mdi-file-tree" />
+
+              {{ file }}.vue
+            </div>
           </v-fade-transition>
+
           <v-spacer />
 
-          <v-tooltip
-            v-for="({ path, ...action }, i) of actions"
-            :key="i"
-            location="top"
-          >
-            <template #activator="{ props: tooltip }">
-              <v-btn
-                class="ms-2 text-medium-emphasis"
-                density="comfortable"
-                variant="text"
-                v-bind="mergeProps(action as any, tooltip)"
-              />
-            </template>
+          <template v-if="!preview">
+            <v-tooltip
+              v-for="({ path, ...action }, i) of actions"
+              :key="i"
+              location="top"
+            >
+              <template #activator="{ props: tooltip }">
+                <v-fade-transition hide-on-leave>
+                  <v-btn
+                    v-show="!action.hide"
+                    :key="action.icon"
+                    class="me-2 text-medium-emphasis"
+                    density="comfortable"
+                    variant="text"
+                    v-bind="mergeProps(action as any, tooltip)"
+                  />
+                </v-fade-transition>
+              </template>
 
-            <span>{{ t(path) }}</span>
-          </v-tooltip>
-
-          <Codepen v-if="isLoaded" />
+              <span>{{ t(path) }}</span>
+            </v-tooltip>
+          </template>
         </v-toolbar>
       </v-lazy>
 
       <div class="d-flex flex-column">
-        <v-expand-transition>
-          <div v-if="showCode">
-            <v-window v-model="template">
-              <v-window-item
-                v-for="section of sections"
-                :key="section.name"
-              >
-                <v-theme-provider :theme="theme">
-                  <app-markup
-                    :code="section.content"
-                    :rounded="false"
-                  />
-                </v-theme-provider>
-              </v-window-item>
-            </v-window>
-          </div>
+        <v-expand-transition v-if="hasRendered || preview">
+          <v-window v-show="showCode" v-model="template">
+            <v-window-item
+              v-for="(section, i) of sections"
+              :key="section.name"
+              :eager="i === 0 || isEager"
+            >
+              <v-theme-provider :theme="theme">
+                <AppMarkup
+                  :code="section.content"
+                  :rounded="false"
+                />
+              </v-theme-provider>
+            </v-window-item>
+          </v-window>
         </v-expand-transition>
 
         <v-theme-provider
-          :class="showCode && 'border-t'"
+          :class="showCode && !preview && 'border-t'"
           :theme="theme"
-          class="pa-4 rounded-b"
+          class="pa-2 rounded-b"
           with-background
         >
-          <component :is="ExampleComponent" v-if="isLoaded" :file="file" />
+          <component :is="ExampleComponent" v-if="isLoaded" />
         </v-theme-provider>
       </div>
-    </v-sheet>
+    </AppSheet>
   </v-defaults-provider>
 </template>
 
 <script setup lang="ts">
   // Components
-  import ExampleMissing from './ExampleMissing.vue'
-
-  // Composables
-  import { useCodepen } from '@/composables/codepen'
-  import { useI18n } from 'vue-i18n'
-  import { useTheme } from 'vuetify'
+  import ExampleMissing from '@/components/examples/ExampleMissing.vue'
 
   // Utilities
-  import { computed, mergeProps, onMounted, ref, shallowRef } from 'vue'
-  import { getBranch } from '@/util/helpers'
   import { getExample } from 'virtual:examples'
-  import { upperFirst } from 'lodash-es'
 
+  const { xs } = useDisplay()
   const { t } = useI18n()
+  const user = useUserStore()
 
   const props = defineProps({
     inline: Boolean,
+    hideInvert: Boolean,
     file: {
       type: String,
       required: true,
@@ -113,23 +124,51 @@
   })
 
   function parseTemplate (target: string, template: string) {
-    const string = `(<${target}(.*)?>[\\w\\W]*<\\/${target}>)`
-    const regex = new RegExp(string, 'g')
-    const parsed = regex.exec(template) || []
+    const pattern = {
+      composition: /(<script setup>[\w\W]*?<\/script>)/g,
+      options: /(<script>[\w\W]*?<\/script>)/g,
+    }[target] || new RegExp(`(<${target}(.*)?>[\\w\\W]*<\\/${target}>)`, 'g')
+    const parsed = pattern.exec(template)
 
-    return parsed[1] || ''
+    return parsed?.[1]
   }
 
   const isLoaded = ref(false)
   const isError = ref(false)
   const showCode = ref(props.inline || props.open)
   const template = ref(0)
+  const hasRendered = ref(false)
+  const isEager = shallowRef(false)
+  const copied = shallowRef(false)
 
   const component = shallowRef()
   const code = ref<string>()
-  const sections = ref<{ name: string, content: string, language: string }[]>([])
   const ExampleComponent = computed(() => {
     return isError.value ? ExampleMissing : isLoaded.value ? component.value : null
+  })
+  const sections = computed(() => {
+    const _code = code.value
+    if (!_code) return []
+    const scriptContent = parseTemplate(user.composition, _code) ??
+      parseTemplate(({ composition: 'options', options: 'composition' } as any)[user.composition], _code)
+
+    return [
+      {
+        name: 'template',
+        language: 'html',
+        content: parseTemplate('template', _code),
+      },
+      {
+        name: 'script',
+        language: 'javascript',
+        content: scriptContent,
+      },
+      {
+        name: 'style',
+        language: 'css',
+        content: parseTemplate('style', _code),
+      },
+    ].filter(v => v.content) as { name: string, content: string, language: string }[]
   })
 
   onMounted(importExample)
@@ -142,23 +181,6 @@
       } = await getExample(props.file)
       component.value = _component
       code.value = _code
-      sections.value = [
-        {
-          name: 'template',
-          language: 'html',
-          content: parseTemplate('template', _code),
-        },
-        {
-          name: 'script',
-          language: 'javascript',
-          content: parseTemplate('script', _code),
-        },
-        {
-          name: 'style',
-          language: 'css',
-          content: parseTemplate('style', _code),
-        },
-      ].filter(v => v.content)
       isLoaded.value = true
       isError.value = false
     } catch (e) {
@@ -173,13 +195,19 @@
     get: () => _theme.value ?? parentTheme.name.value,
     set: val => _theme.value = val,
   })
-  const toggleTheme = () => theme.value = theme.value === 'light' ? 'dark' : 'light'
 
-  const isDark = computed(() => {
-    return parentTheme.current.value.dark
+  const playgroundLink = computed(() => {
+    if (!isLoaded.value || isError.value) return null
+
+    const resources = JSON.parse(component.value.playgroundResources || '{}')
+    const setup = component.value.playgroundSetup?.trim()
+    return usePlayground(
+      sections.value,
+      resources.css,
+      resources.imports,
+      setup,
+    )
   })
-
-  const { Codepen, openCodepen } = useCodepen({ code, sections, component })
 
   const actions = computed(() => [
     {
@@ -188,15 +216,34 @@
       onClick: toggleTheme,
     },
     {
-      icon: 'mdi-codepen',
-      path: 'edit-in-codepen',
-      onClick: openCodepen,
+      icon: '$vuetify-play',
+      path: 'edit-in-playground',
+      href: playgroundLink.value,
+      target: '_blank',
+      hide: xs.value,
     },
     {
       icon: 'mdi-github',
       path: 'view-in-github',
       href: `https://github.com/vuetifyjs/vuetify/tree/${getBranch()}/packages/docs/src/examples/${props.file}.vue`,
       target: '_blank',
+      hide: xs.value,
+    },
+    {
+      icon: copied.value ? 'mdi-check' : 'mdi-clipboard-multiple-outline',
+      path: 'copy-example-source',
+      onClick: async () => {
+        navigator.clipboard.writeText(
+          sections.value.map(section => section.content).join('\n')
+        )
+
+        copied.value = true
+
+        await wait(2000)
+
+        copied.value = false
+      },
+      hide: xs.value,
     },
     {
       icon: !showCode.value ? 'mdi-code-tags' : 'mdi-chevron-up',
@@ -206,4 +253,14 @@
       },
     },
   ])
+
+  watch(showCode, val => val && (isEager.value = true))
+
+  function toggleTheme () {
+    if (theme.value === parentTheme.name.value) {
+      theme.value = parentTheme.current.value.dark ? 'light' : 'dark'
+    } else {
+      theme.value = parentTheme.name.value
+    }
+  }
 </script>

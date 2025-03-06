@@ -4,22 +4,20 @@
       v-for="([name, wireframe], i) in wireframes"
       :key="i"
       cols="12"
-      md="6"
       lg="4"
+      md="6"
     >
       <router-link
-        :to="{
-          name: `wireframes-${wireframe}`
-        }"
+        :to="rpath(`/wireframes/${wireframe}/`)"
         class="text-decoration-none"
         rel="nofollow noopener"
         target="_blank"
       >
-        <app-figure
+        <AppFigure
           :alt="`${name} layout`"
           :aspect-ratio="16/9"
-          :title="name"
           :src="`https://cdn.vuetifyjs.com/docs/images/wireframes/${wireframe}.svg`"
+          :title="name"
           class="border"
         />
       </router-link>
@@ -28,9 +26,6 @@
 </template>
 
 <script setup>
-  // Utilities
-  import kebabCase from 'lodash/kebabCase'
-
   const wireframes = [
     'Baseline',
     'Extended toolbar',
@@ -40,5 +35,6 @@
     'Side navigation',
     'Three column',
     'Discord',
+    'Steam',
   ].map(wireframe => ([wireframe, kebabCase(wireframe)]))
 </script>

@@ -8,13 +8,13 @@
     "title": "日本語",
     "locale": "ja-JP",
     "alternate": "ja",
-    "enabled": false
+    "enabled": true
   },
   {
     "title": "简体中文",
     "locale": "zh-CN",
     "alternate": "zh-Hans",
-    "enabled": false
+    "enabled": true
   },
   {
     "title": "Deutsch",
@@ -43,6 +43,6 @@
   {
     "title": "Help translate",
     "locale": "eo-UY",
-    "enabled": false
+    "enabled": true
   }
 ]

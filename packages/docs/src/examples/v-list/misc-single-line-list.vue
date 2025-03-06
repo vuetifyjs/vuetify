@@ -15,55 +15,78 @@
       </v-btn>
     </v-toolbar>
 
-    <v-list subheader>
+    <v-list>
       <v-list-subheader>Recent chat</v-list-subheader>
 
       <v-list-item
         v-for="chat in recent"
         :key="chat.title"
       >
-        <v-list-item-avatar>
-          <v-img
-            :alt="`${chat.title} avatar`"
-            :src="chat.avatar"
-          ></v-img>
-        </v-list-item-avatar>
+        <template v-slot:prepend>
+          <v-avatar>
+            <v-img :src="chat.avatar"></v-img>
+          </v-avatar>
+        </template>
 
-        <v-list-item-header>
-          <v-list-item-title v-text="chat.title"></v-list-item-title>
-        </v-list-item-header>
+        <v-list-item-title>{{ chat.title }}</v-list-item-title>
 
-        <v-list-item-avatar>
-          <v-icon :color="chat.active ? 'deep-purple accent-4' : 'grey'">
-            mdi-message-outline
-          </v-icon>
-        </v-list-item-avatar>
+        <template v-slot:append>
+          <v-avatar>
+            <v-icon :color="chat.active ? 'deep-purple accent-4' : 'grey'">
+              mdi-message-outline
+            </v-icon>
+          </v-avatar>
+        </template>
       </v-list-item>
     </v-list>
 
     <v-divider></v-divider>
 
-    <v-list subheader>
+    <v-list>
       <v-list-subheader>Previous chats</v-list-subheader>
 
       <v-list-item
         v-for="chat in previous"
         :key="chat.title"
       >
-        <v-list-item-avatar>
-          <v-img
-            :alt="`${chat.title} avatar`"
-            :src="chat.avatar"
-          ></v-img>
-        </v-list-item-avatar>
+        <template v-slot:prepend>
+          <v-avatar>
+            <v-img :src="chat.avatar"></v-img>
+          </v-avatar>
+        </template>
 
-        <v-list-item-header>
-          <v-list-item-title v-text="chat.title"></v-list-item-title>
-        </v-list-item-header>
+        <v-list-item-title v-text="chat.title"></v-list-item-title>
       </v-list-item>
     </v-list>
   </v-card>
 </template>
+
+<script setup>
+  const recent = [
+    {
+      active: true,
+      avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
+      title: 'Jason Oner',
+    },
+    {
+      active: true,
+      avatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg',
+      title: 'Mike Carlson',
+    },
+    {
+      avatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg',
+      title: 'Cindy Baker',
+    },
+    {
+      avatar: 'https://cdn.vuetifyjs.com/images/lists/4.jpg',
+      title: 'Ali Connors',
+    },
+  ]
+  const previous = [{
+    title: 'Travis Howard',
+    avatar: 'https://cdn.vuetifyjs.com/images/lists/5.jpg',
+  }]
+</script>
 
 <script>
   export default {

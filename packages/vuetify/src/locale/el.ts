@@ -1,21 +1,27 @@
 export default {
   badge: 'Σήμα',
-  close: 'Close',
+  open: 'Άνοιγμα',
+  close: 'Κλείσιμο',
+  dismiss: 'Απόρριψη',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'Ακύρωση',
+  },
   dataIterator: {
     noResultsText: 'Δε βρέθηκαν αποτελέσματα',
-    loadingText: 'Loading item...',
+    loadingText: 'Φόρτωση αντικειμένου...',
   },
   dataTable: {
     itemsPerPageText: 'Γραμμές ανά σελίδα:',
     ariaLabel: {
-      sortDescending: 'Sorted descending.',
-      sortAscending: 'Sorted ascending.',
-      sortNone: 'Not sorted.',
-      activateNone: 'Activate to remove sorting.',
-      activateDescending: 'Activate to sort descending.',
-      activateAscending: 'Activate to sort ascending.',
+      sortDescending: 'Ταξινομημένο φθίνουσα.',
+      sortAscending: 'Ταξινομημένο αύξουσα.',
+      sortNone: 'Χωρίς ταξινόμηση.',
+      activateNone: 'Ενεργοποιήστε για να καταργήσετε την ταξινόμηση.',
+      activateDescending: 'Ενεργοποιήστε για φθίνουσα ταξινόμηση.',
+      activateAscending: 'Ενεργοποιήστε για αύξουσα ταξινόμηση.',
     },
-    sortBy: 'Sort by',
+    sortBy: 'Ταξινόμηση κατά',
   },
   dataFooter: {
     itemsPerPageText: 'Αντικείμενα ανά σελίδα:',
@@ -26,36 +32,52 @@ export default {
     lastPage: 'Τελευταία σελίδα',
     pageText: '{0}-{1} από {2}',
   },
+  dateRangeInput: {
+    divider: 'έως',
+  },
   datePicker: {
     itemsSelected: '{0} επιλεγμένα',
-    nextMonthAriaLabel: 'Τον επόμενο μήνα',
-    nextYearAriaLabel: 'Του χρόνου',
-    prevMonthAriaLabel: 'Προηγούμενος μήνας',
-    prevYearAriaLabel: 'Προηγούμενο έτος',
+    range: {
+      title: 'Επιλέξτε ημερομηνίες',
+      header: 'Εισαγάγετε ημερομηνίες',
+    },
+    title: 'Επιλέξτε ημερομηνία',
+    header: 'Εισαγάγετε ημερομηνία',
+    input: {
+      placeholder: 'Εισαγάγετε ημερομηνία',
+    },
   },
   noDataText: 'Χωρίς δεδομένα',
   carousel: {
     prev: 'הקודם חזותי',
     next: 'הבא חזותי',
     ariaLabel: {
-      delimiter: 'Carousel slide {0} of {1}',
+      delimiter: 'Διαφάνεια καρουζέλ {0} από {1}',
     },
   },
   calendar: {
     moreEvents: '{0} ακόμη',
+    today: 'Σήμερα',
   },
   input: {
-    clear: 'Clear {0}',
-    prependAction: '{0} prepended action',
-    appendAction: '{0} appended action',
+    clear: 'Καθαρισμός {0}',
+    prependAction: '{0} προσαρτημένη ενέργεια',
+    appendAction: '{0} επισυναπτόμενη ενέργεια',
+    otp: 'Παρακαλώ εισαγάγετε χαρακτήρα OTP {0}',
   },
   fileInput: {
-    counter: '{0} files',
-    counterSize: '{0} files ({1} in total)',
+    counter: '{0} αρχεία',
+    counterSize: '{0} αρχεία ({1} συνολικά)',
+  },
+  fileUpload: {
+    title: 'Σύρετε και αποθέστε αρχεία εδώ',
+    divider: 'ή',
+    browse: 'Αναζήτηση αρχείων',
   },
   timePicker: {
-    am: 'AM',
-    pm: 'PM',
+    am: 'ΠΜ',
+    pm: 'ΜΜ',
+    title: 'Επιλέξτε ώρα',
   },
   pagination: {
     ariaLabel: {
@@ -64,13 +86,22 @@ export default {
       previous: 'Προηγούμενη σελίδα',
       page: 'Πήγαινε στην σελίδα {0}',
       currentPage: 'Τρέχουσα σελίδα, σελίδα {0}',
-      first: 'First page',
-      last: 'Last page',
+      first: 'Πρώτη σελίδα',
+      last: 'Τελευταία σελίδα',
     },
+  },
+  stepper: {
+    next: 'Επόμενο',
+    prev: 'Προηγούμενο',
   },
   rating: {
     ariaLabel: {
-      item: 'Rating {0} of {1}',
+      item: 'Βαθμολογία {0} από {1}',
     },
+  },
+  loading: 'Φόρτωση...',
+  infiniteScroll: {
+    loadMore: 'Φόρτωση περισσότερων',
+    empty: 'Δεν υπάρχουν άλλα',
   },
 }

@@ -1,9 +1,0 @@
-{
-  "props": {
-    "indeterminate": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-checkbox-btn.json))",
-    "indeterminateIcon": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-checkbox-btn.json))"
-  },
-  "events": {
-    "update:indeterminate": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-checkbox-btn.json))"
-  }
-}

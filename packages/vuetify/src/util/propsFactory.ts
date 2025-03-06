@@ -1,3 +1,5 @@
+// Types
+import type { IfAny } from '@vue/shared' // eslint-disable-line vue/prefer-import-from-vue
 import type { ComponentObjectPropsOptions, Prop, PropType } from 'vue'
 
 /**
@@ -59,16 +61,21 @@ type AppendDefault<T extends ComponentObjectPropsOptions, D extends PartialKeys<
     ? T[P]
     : T[P] extends Record<string, unknown>
       ? Omit<T[P], 'type' | 'default'> & {
-        type: PropType<MergeDefault<T[P], D[P]>>
+        type: PropType<MergeTypeDefault<T[P], D[P]>>
         default: MergeDefault<T[P], D[P]>
       }
       : {
-        type: PropType<MergeDefault<T[P], D[P]>>
+        type: PropType<MergeTypeDefault<T[P], D[P]>>
         default: MergeDefault<T[P], D[P]>
       }
 }
 
-type MergeDefault<T, D> = unknown extends D ? InferPropType<T> : (NonNullable<InferPropType<T>> | D)
+type MergeTypeDefault<T, D, P = InferPropType<T>> = unknown extends D
+  ? P
+  : (P | D)
+type MergeDefault<T, D, P = InferPropType<T>> = unknown extends D
+  ? P
+  : (NonNullable<P> | D)
 
 /**
  * Like `Partial<T>` but doesn't care what the value is
@@ -76,12 +83,25 @@ type MergeDefault<T, D> = unknown extends D ? InferPropType<T> : (NonNullable<In
 type PartialKeys<T> = { [P in keyof T]?: unknown }
 
 // Copied from Vue
-type InferPropType<T> = T extends null
+type InferPropType<T> = [T] extends [null]
   ? any // null & true would fail to infer
-  : T extends { type: null | true }
-    ? any // As TS issue https://github.com/Microsoft/TypeScript/issues/14829 // somehow `ObjectConstructor` when inferred from { (): T } becomes `any` // `BooleanConstructor` when inferred from PropConstructor(with PropMethod) becomes `Boolean`
-    : T extends ObjectConstructor | { type: ObjectConstructor }
+  : [T] extends [{ type: null | true }]
+    // As TS issue https://github.com/Microsoft/TypeScript/issues/14829
+    // somehow `ObjectConstructor` when inferred from { (): T } becomes `any`
+    // `BooleanConstructor` when inferred from PropConstructor(with PropMethod) becomes `Boolean`
+    ? any
+    : [T] extends [ObjectConstructor | { type: ObjectConstructor }]
       ? Record<string, any>
-      : T extends BooleanConstructor | { type: BooleanConstructor }
+      : [T] extends [BooleanConstructor | { type: BooleanConstructor }]
         ? boolean
-        : T extends Prop<infer V, infer D> ? (unknown extends V ? D : V) : T
+        : [T] extends [DateConstructor | { type: DateConstructor }]
+          ? Date
+          : [T] extends [(infer U)[] | { type: (infer U)[] }]
+            ? U extends DateConstructor
+              ? Date | InferPropType<U>
+              : InferPropType<U>
+            : [T] extends [Prop<infer V, infer D>]
+              ? unknown extends V
+                ? IfAny<V, V, D>
+                : V
+              : T

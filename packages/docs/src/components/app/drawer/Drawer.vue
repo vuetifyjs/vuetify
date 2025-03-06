@@ -2,55 +2,80 @@
   <v-navigation-drawer
     id="app-drawer"
     v-model="app.drawer"
+    :expand-on-hover="railEnabled"
+    :image="settings.suit['drawer']"
+    :order="mobile ? -1 : undefined"
+    :rail="railEnabled"
     width="300"
+    @update:rail="onUpdateRail"
   >
-    <template #append>
-      <v-divider />
+    <AppDrawerPinnedItems :rail="rail" />
 
-      <div class="text-medium-emphasis text-caption py-2 px-3 d-flex align-center">
-        <div class="d-inline-flex align-center">
-          <v-icon start>mdi-label</v-icon>
-          Latest release:
-        </div>
-
-        <v-btn
-          :href="`https://github.com/vuetifyjs/vuetify/releases/tag/v${version}`"
-          class="text-none px-2 ms-auto"
-          density="compact"
-          rel="noopener noreferrer"
-          target="_blank"
-          variant="text"
-        >
-          v{{ version }}
-
-          <v-icon size="xs" end>mdi-open-in-new</v-icon>
-        </v-btn>
-      </div>
-    </template>
-
-    <app-list :items="app.items" nav>
+    <AppListList
+      v-model:opened="opened"
+      :items="app.items"
+      nav
+    >
       <template #divider>
-        <v-divider class="my-3 mb-4 ms-16" />
+        <v-divider class="my-3 mb-4 ms-10" />
       </template>
-    </app-list>
+    </AppListList>
+
+    <template #append>
+      <AppDrawerAppend />
+    </template>
   </v-navigation-drawer>
 </template>
 
 <script setup>
-  // Components
-  import AppList from '@/components/app/list/List.vue'
-
   // Composables
-  import { useAppStore } from '@/store/app'
-
-  // Utilities
-  import { onMounted } from 'vue'
-  import { version } from 'vuetify'
-  import { wait } from '@/util/helpers'
+  import { scrollTo } from 'vuetify/lib/composables/goto'
 
   const app = useAppStore()
+  const pins = usePinsStore()
+  const settings = useSettingsStore()
+  const user = useUserStore()
+
+  const { mobile } = useDisplay()
+
+  const rail = ref(user.railDrawer)
+  const _opened = ref([])
+  const opened = computed({
+    get: () => rail.value ? [] : _opened.value,
+    set: val => {
+      if (pins.isPinning) return
+
+      _opened.value = val
+    },
+  })
+  const railEnabled = computed(() => user.railDrawer)
+
+  // Restore scroll position when drawer is expanded
+  let scrollingElement
+  let lastScroll = 0
+  watch(rail, val => {
+    if (val) {
+      lastScroll = scrollingElement.scrollTop
+    } else {
+      scrollTo(lastScroll, {
+        container: scrollingElement,
+      })
+    }
+  })
+
+  watch(railEnabled, val => {
+    rail.value = val
+  })
 
   onMounted(async () => {
+    scrollingElement = document.querySelector('#app-drawer .v-navigation-drawer__content')
+
+    if (pins.pageIsPinned) {
+      _opened.value = []
+
+      return
+    }
+
     await wait(1000)
 
     const element = document.querySelector('#app-drawer .v-list-item--active:not(.v-list-group__header)')
@@ -58,9 +83,14 @@
     if (!element) return
 
     element.scrollIntoView({
-      behavior: 'smooth',
       block: 'center',
       inline: 'center',
     })
   })
+
+  function onUpdateRail (val) {
+    if (railEnabled.value) {
+      rail.value = val
+    }
+  }
 </script>

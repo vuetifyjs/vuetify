@@ -1,0 +1,19 @@
+{
+  "props": {
+    "firstIcon": "First icon.",
+    "firstPageLabel": "Label for first page.",
+    "itemsPerPageOptions": "Array of options to show in the items-per-page dropdown.",
+    "itemsPerPageText": "Text for items-per-page dropdown.",
+    "lastIcon": "Last icon.",
+    "lastPageLabel": "Label for last page.",
+    "nextIcon": "Next icon.",
+    "nextPageLabel": "Label for next page.",
+    "pageText": "Label for page number.",
+    "prevIcon": "Previous icon.",
+    "prevPageLabel": "Label for previous page.",
+    "showCurrentPage": "Show current page number between prev/next icons."
+  },
+  "slots": {
+    "prepend": "Extra content placed before the default pagination."
+  }
+}

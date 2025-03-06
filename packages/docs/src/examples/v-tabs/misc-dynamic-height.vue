@@ -1,45 +1,39 @@
 <template>
   <v-card>
-    <v-toolbar
-      color="purple"
-      dark
-      flat
-      prominent
-    >
+    <v-toolbar color="purple" flat>
       <v-text-field
         append-icon="mdi-microphone"
         class="mx-4"
-        flat
-        hide-details
         label="Search"
         prepend-inner-icon="mdi-magnify"
-        solo-inverted
+        variant="solo-inverted"
+        flat
+        hide-details
       ></v-text-field>
 
       <template v-slot:extension>
         <v-tabs
           v-model="tabs"
-          centered
+          align-tabs="center"
         >
           <v-tab
             v-for="n in 3"
             :key="n"
-          >
-            Item {{ n }}
-          </v-tab>
+            :text="`Item ${n}`"
+          ></v-tab>
         </v-tabs>
       </template>
     </v-toolbar>
 
-    <v-tabs-items v-model="tabs">
-      <v-tab-item>
+    <v-tabs-window v-model="tabs">
+      <v-tabs-window-item>
         <v-card flat>
           <v-card-text>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
           </v-card-text>
         </v-card>
-      </v-tab-item>
-      <v-tab-item>
+      </v-tabs-window-item>
+      <v-tabs-window-item>
         <v-card flat>
           <v-card-title class="text-h5">
             An awesome title
@@ -58,8 +52,8 @@
             </p>
           </v-card-text>
         </v-card>
-      </v-tab-item>
-      <v-tab-item>
+      </v-tabs-window-item>
+      <v-tabs-window-item>
         <v-card flat>
           <v-card-title class="text-h5">
             An even better title
@@ -74,17 +68,22 @@
             </p>
           </v-card-text>
         </v-card>
-      </v-tab-item>
-    </v-tabs-items>
+      </v-tabs-window-item>
+    </v-tabs-window>
   </v-card>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const tabs = ref(null)
+</script>
 
 <script>
   export default {
     data () {
       return {
         tabs: null,
-        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
       }
     },
   }

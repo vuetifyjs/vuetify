@@ -1,6 +1,12 @@
 export default {
   badge: 'Odznaka',
+  open: 'Otwórz',
   close: 'Zamknij',
+  dismiss: 'Odrzuć',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'Anuluj',
+  },
   dataIterator: {
     noResultsText: 'Nie znaleziono danych odpowiadających wyszukiwaniu',
     loadingText: 'Wczytywanie danych...',
@@ -26,12 +32,20 @@ export default {
     lastPage: 'Ostatnia strona',
     pageText: '{0}-{1} z {2}',
   },
+  dateRangeInput: {
+    divider: 'do',
+  },
   datePicker: {
-    itemsSelected: '{0} dat(y)',
-    nextMonthAriaLabel: 'Następny miesiąc',
-    nextYearAriaLabel: 'Następny rok',
-    prevMonthAriaLabel: 'Poprzedni miesiąc',
-    prevYearAriaLabel: 'Poprzedni rok',
+    itemsSelected: '{0} wybrano',
+    range: {
+      title: 'Wybór zakresu dat',
+      header: 'Wprowadź zakres dat',
+    },
+    title: 'Wybór daty',
+    header: 'Wprowadź datę',
+    input: {
+      placeholder: 'Wprowadź datę',
+    },
   },
   noDataText: 'Brak danych',
   carousel: {
@@ -43,19 +57,27 @@ export default {
   },
   calendar: {
     moreEvents: '{0} więcej',
+    today: 'Dzisiaj',
   },
   input: {
     clear: 'Wyczyść {0}',
     prependAction: '{0} dodatkowa akcja',
     appendAction: '{0} dodatkowa akcja',
+    otp: 'Proszę wprowadzić znak nr {0}',
   },
   fileInput: {
     counter: 'Liczba plików: {0}',
     counterSize: 'Liczba plików: {0} (łącznie {1})',
   },
+  fileUpload: {
+    title: 'Przeciągnij i upuść pliki tutaj',
+    divider: 'lub',
+    browse: 'Przeglądaj pliki',
+  },
   timePicker: {
     am: 'AM',
     pm: 'PM',
+    title: 'Wybierz godzinę',
   },
   pagination: {
     ariaLabel: {
@@ -68,9 +90,18 @@ export default {
       last: 'Ostatnia strona',
     },
   },
+  stepper: {
+    next: 'Następny',
+    prev: 'Poprzedni',
+  },
   rating: {
     ariaLabel: {
       item: 'Ocena {0} na {1}',
     },
+  },
+  loading: 'Wczytywanie danych...',
+  infiniteScroll: {
+    loadMore: 'Wczytaj więcej',
+    empty: 'Brak kolejnych danych',
   },
 }

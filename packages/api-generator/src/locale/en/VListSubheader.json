@@ -1,0 +1,8 @@
+{
+  "props": {
+    "tag": "Specify a custom tag used on the root element.",
+    "title": "Specify a title text for the component.",
+    "inset": "Insets the subheader without additional spacing, aligning it flush with the surrounding content.",
+    "sticky": "Sticks the header to the top of the table."
+  }
+}

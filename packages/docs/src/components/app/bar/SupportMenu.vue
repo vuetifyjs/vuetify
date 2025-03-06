@@ -1,31 +1,21 @@
 <template>
-  <app-btn
-    color="medium-emphasis"
+  <AppBtn
     class="ms-1"
+    color="medium-emphasis"
   >
     {{ title }}
 
-    <chevron-down />
+    <IconsChevronDown />
 
-    <app-menu
+    <AppMenuMenu
       :items="items"
       activator="parent"
       width="220"
     />
-  </app-btn>
+  </AppBtn>
 </template>
 
 <script setup>
-  // Components
-  import ChevronDown from '@/components/icons/ChevronDown.vue'
-
-  // Composables
-  import { useI18n } from 'vue-i18n'
-
-  // Utilities
-  import { computed } from 'vue'
-  import { rpath } from '@/util/routes'
-
   const { t } = useI18n()
   const title = t('support')
   const items = computed(() => ([
@@ -38,39 +28,39 @@
     {
       title: 'file-a-bug-report',
       href: 'https://issues.vuetifyjs.com/',
-      appendIcon: 'mdi-spider',
+      appendIcon: 'mdi-bug-outline',
     },
     {
-      title: 'github-discussions',
-      href: 'https://github.com/vuetifyjs/vuetify/discussions',
-      appendIcon: 'mdi-message-text',
+      title: 'faq',
+      to: rpath('/getting-started/frequently-asked-questions/'),
+      appendIcon: 'mdi-head-question-outline',
     },
-    { divider: true },
-    { subheader: t('resources') },
     {
       title: 'upgrade-guide',
       to: rpath('/getting-started/upgrade-guide/'),
       appendIcon: 'mdi-update',
     },
     {
+      title: 'github-discussions',
+      href: 'https://github.com/vuetifyjs/vuetify/discussions',
+      appendIcon: 'mdi-message-text-outline',
+    },
+    {
+      title: 'stack-overflow',
+      href: 'https://stackoverflow.com/search?q=vuetify',
+      appendIcon: 'mdi-layers-outline',
+    },
+    { divider: true },
+    { subheader: t('resources') },
+    {
       title: 'github-issues',
       href: 'https://github.com/vuetifyjs/vuetify/issues/',
       appendIcon: 'mdi-alert-circle-outline',
     },
     {
-      title: 'codepen-template',
-      href: 'https://template.vuetifyjs.com/',
-      appendIcon: 'mdi-codepen',
-    },
-    {
       title: 'documentation-status',
       href: 'https://status.vuetifyjs.com/',
-      appendIcon: 'mdi-server',
-    },
-    {
-      title: 'stack-overflow',
-      href: 'https://stackoverflow.com/search?q=vuetify',
-      appendIcon: 'mdi-stack-overflow',
+      appendIcon: 'mdi-cloud-outline',
     },
     {
       title: 'latest-releases',

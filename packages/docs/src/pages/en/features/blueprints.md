@@ -7,15 +7,18 @@ related:
   - /features/global-configuration/
   - /features/theme/
   - /features/display-and-platform/
+features:
+  github: /blueprints/
+  report: true
 ---
 
 # Blueprints
 
 Vuetify blueprints are a new way to pre-configure your entire application with a completely unique design system.
 
-![Blueprints Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/blueprints/blueprints-entry.png)
+<PageFeatures />
 
----
+<PromotedEntry />
 
 ## Usage
 
@@ -30,8 +33,6 @@ export default createVuetify({
 })
 ```
 
-<entry />
-
 ### White-label concept
 
 While Vuetify is built under the guise of Google's [Material Design](https://material.io) specification, it is still flexible enough to be used as the foundation for any design system. By default, Vuetify components have no color and are **white-label** in nature. A white-label product is a product or service produced by one company that other companies rebrand to make it appear as if they had made it.
@@ -44,6 +45,12 @@ While Vuetify is built under the guise of Google's [Material Design](https://mat
 | [Material Design 2](#material-design-2) | 2017 | ✅ Available | [Specification](https://m2.material.io) |
 | [Material Design 3](#material-design-3) | 2022 | ✅ Available | [Specification](https://m3.material.io) |
 
+::: error
+
+Blueprints require the use of utility classes to properly function.
+
+:::
+
 ### Material Design 1
 
 Released in 2014, the original Material Design specification aimed to create a visual language that combined principles and good design with technical and scientific innovation.
@@ -54,7 +61,7 @@ import { md1 } from 'vuetify/blueprints'
 
 **Preview:**
 
-<example preview file="blueprints/md1" />
+<ExamplesExample preview file="blueprints/md1" />
 
 ### Material Design 2
 
@@ -66,7 +73,7 @@ import { md2 } from 'vuetify/blueprints'
 
 **Preview:**
 
-<example preview file="blueprints/md2" />
+<ExamplesExample preview file="blueprints/md2" />
 
 ### Material Design 3
 
@@ -78,4 +85,4 @@ import { md3 } from 'vuetify/blueprints'
 
 **Preview:**
 
-<example preview file="blueprints/md3" />
+<ExamplesExample preview file="blueprints/md3" />

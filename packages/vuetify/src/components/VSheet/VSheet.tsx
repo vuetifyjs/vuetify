@@ -3,6 +3,8 @@ import './VSheet.sass'
 
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'
+import { useBackgroundColor } from '@/composables/color'
+import { makeComponentProps } from '@/composables/component'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeLocationProps, useLocation } from '@/composables/location'
@@ -10,19 +12,16 @@ import { makePositionProps, usePosition } from '@/composables/position'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
-import { genericComponent, pick, propsFactory, useRender } from '@/util'
 import { toRef } from 'vue'
-
-// Types
-import type { ExtractPropTypes } from 'vue'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
 export const makeVSheetProps = propsFactory({
   color: String,
 
   ...makeBorderProps(),
+  ...makeComponentProps(),
   ...makeDimensionProps(),
   ...makeElevationProps(),
   ...makeLocationProps(),
@@ -30,14 +29,12 @@ export const makeVSheetProps = propsFactory({
   ...makeRoundedProps(),
   ...makeTagProps(),
   ...makeThemeProps(),
-}, 'v-sheet')
+}, 'VSheet')
 
 export const VSheet = genericComponent()({
   name: 'VSheet',
 
-  props: {
-    ...makeVSheetProps(),
-  },
+  props: makeVSheetProps(),
 
   setup (props, { slots }) {
     const { themeClasses } = provideTheme(props)
@@ -59,11 +56,13 @@ export const VSheet = genericComponent()({
           elevationClasses.value,
           positionClasses.value,
           roundedClasses.value,
+          props.class,
         ]}
         style={[
           backgroundColorStyles.value,
           dimensionStyles.value,
           locationStyles.value,
+          props.style,
         ]}
         v-slots={ slots }
       />
@@ -74,7 +73,3 @@ export const VSheet = genericComponent()({
 })
 
 export type VSheet = InstanceType<typeof VSheet>
-
-export function filterSheetProps (props: ExtractPropTypes<ReturnType<typeof makeVSheetProps>>) {
-  return pick(props, Object.keys(VSheet?.props ?? {}) as any)
-}

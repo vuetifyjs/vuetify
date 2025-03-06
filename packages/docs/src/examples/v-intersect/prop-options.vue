@@ -2,10 +2,10 @@
   <div>
     <div class="d-flex align-center text-center justify-center">
       <v-avatar
-        :color="isIntersecting ? 'green-lighten-1' : 'red-darken-2'"
-        variant="flat"
+        :color="intersecting ? 'green-lighten-1' : 'red-darken-2'"
         class="me-3 swing-transition"
         size="32"
+        variant="flat"
       ></v-avatar>
     </div>
 
@@ -14,18 +14,18 @@
       max-height="400"
     >
       <v-sheet
-        height="200vh"
         class="d-flex align-center text-center pa-2"
+        height="200vh"
       >
         <v-card
+          class="mx-auto"
+          max-width="336"
           v-intersect="{
             handler: onIntersect,
             options: {
               threshold: [0, 0.5, 1.0]
             }
           }"
-          class="mx-auto"
-          max-width="336"
         >
           <v-card-title>Card title</v-card-title>
 
@@ -43,6 +43,15 @@
     </v-sheet>
   </div>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const intersecting = ref(false)
+  function onIntersect (isIntersecting, entries, observer) {
+    intersecting.value = entries[0].intersectionRatio >= 0.5
+  }
+</script>
 
 <script>
   export default {

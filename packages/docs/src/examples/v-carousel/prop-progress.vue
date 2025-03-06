@@ -1,8 +1,8 @@
 <template>
   <v-carousel
     height="400"
-    hide-delimiters
     progress="primary"
+    hide-delimiters
   >
     <v-carousel-item
       v-for="(slide, i) in slides"
@@ -20,6 +20,16 @@
     </v-carousel-item>
   </v-carousel>
 </template>
+
+<script setup>
+  const slides = [
+    'First',
+    'Second',
+    'Third',
+    'Fourth',
+    'Fifth',
+  ]
+</script>
 
 <script>
   export default {

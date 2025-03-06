@@ -3,7 +3,6 @@
     <v-menu transition="fade-transition">
       <template v-slot:activator="{ props }">
         <v-btn
-          dark
           color="primary"
           v-bind="props"
         >

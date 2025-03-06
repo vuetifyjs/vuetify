@@ -1,7 +1,7 @@
 ---
-nav: Why Vuetify?
 meta:
-  title: Why you should be using Vuetify
+  nav: Why Vuetify?
+  title: Why Vuetify?
   description: Vuetify has an extremely active community, provides easy to use Material Design components and is consistently updated.
   keywords: why vuetify, best vue framework, best ui framework, best component framework, best ui library, best component library
 related:
@@ -14,9 +14,9 @@ related:
 
 Learn more about what Vuetify is, how to create an application from scratch, browse API references, sample code, tutorials, and more.
 
-![Why Vuetify Entry](https://cdn.vuetifyjs.com/docs/images/entry/why-vuetify-entry.png)
+<PageFeatures />
 
-----
+<PromotedEntry slug="vuetify-snips" />
 
 ## What is Vuetify?
 
@@ -27,7 +27,9 @@ Since its initial release in 2014, [Vue.js](https://vuejs.org/) has grown to be 
 
 ## Getting started
 
-The fastest way to try Vuetify is in the browser at 🎮[play.vuetifyjs.com](https://play.vuetifyjs.com/). For a complete list of installation options please navigate to the [Installation page](/getting-started/installation/).
+<VoPromotionsCardHighlight class="mb-4" slug="vuemastery-getting-started" />
+
+The fastest way to try Vuetify is in the browser at [Vuetify Play](https://play.vuetifyjs.com/). For a complete list of installation options please navigate to the [Installation page](/getting-started/installation/).
 
 ## Why Vuetify? { id="why-vuetify" }
 
@@ -39,14 +41,14 @@ Vuetify is an Open Source project available for free under the [MIT licensed](ht
 
 ### Flexible components
 
-Every component in Vuetify is handcrafted under the guise of Google's [Material Design specification](https://material.io/) and comes with hundreds of customization options that fit any style or design; even if it's not Material. Write Vue templates that are as concise or verbose as you want using exlusively or a combination of **props**, **slots**, and **components**.
+Every component in Vuetify is handcrafted under the guise of Google's [Material Design specification](https://material.io/) and comes with hundreds of customization options that fit any style or design; even if it's not Material. Write Vue templates that are as concise or verbose as you want using exclusively or in combination, **props**, **slots**, and **components**.
 
 ### Tooling
 
 Vuetify has a large ecosystem of supporting tools that enrich the development experience that range from project creation to design UI kits.
 
 * 🎨 [Figma UI Component Kit](https://store.vuetifyjs.com/products/vuetify-ui-kit-figma)
-* ⚡ [First-party Vite support](https://github.com/vuetifyjs/vuetify-loader/tree/next/packages/vite-plugin)
+* ⚡ [First-party Vite support](https://github.com/vuetifyjs/vuetify-loader/tree/master/packages/vite-plugin)
 * 🏗️ [Pre-configured Vue 3 applications for TypeScript and JavaScript](https://tryvuetify.com)
 * ⌨️ Intellisense & autocomplete support for [VSCode](https://code.visualstudio.com/docs/editor/intellisense) and [JetBrains](https://www.jetbrains.com/help/rider/Auto-Completing_Code.html) products
 * 🖼️ [Wireframe examples](/getting-started/wireframes/)
@@ -55,7 +57,7 @@ Vuetify has a large ecosystem of supporting tools that enrich the development ex
 
 When you develop with Vuetify, you are never alone. Stuck on a problem? Take advantage of our massive [Discord community](https://community.vuetifyjs.com/) and collaborate with other Vuetify developers in one of our public help channels. Need a more personalized support solution? Vuetify offers [Enterprise support](/introduction/enterprise-support/) with options tailored to individuals and businesses. Check out some other ways to [Sponsor Vuetify development](/introduction/sponsors-and-backers/).
 
-<promoted slug="vuetify-discord" />
+<PromotedPromoted slug="vuetify-discord" />
 
 ### Professional and Enterprise support
 
@@ -93,6 +95,7 @@ Learn more about the inner workings of Vuetify and become a skilled **v-develope
 | [Accessibility (a11y)](/features/accessibility) | Intermediate | 10 min |
 | [Aliasing](/features/aliasing/) | Intermediate | 5 min |
 | [Application layout](/features/application-layout/) | Intermediate | 15 min |
+| [Dates](/features/dates/) | Intermediate | 10 min |
 | [Display & Platform](/features/display-and-platform/) | Intermediate | 15 min |
 | [Internationalization (i18n)](/features/internationalization/) | Intermediate | 5 min |
 | [SASS variables](/features/sass-variables/) | Intermediate | 10 min |

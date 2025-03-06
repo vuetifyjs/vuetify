@@ -1,0 +1,7 @@
+@use '../../styles/settings';
+
+$picker-actions-padding: 0 12px 12px !default;
+$picker-border-radius: settings.$border-radius-root !default;
+$picker-elevation: 0 !default;
+$picker-inactive-btn-opacity: .6 !default;
+$picker-title-font-weight: 400 !default;

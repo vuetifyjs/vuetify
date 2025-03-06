@@ -1,9 +1,0 @@
-{
-  "props": {
-    "itemTitle": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/item.json))",
-    "itemValue": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/item.json))",
-    "itemChildren": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/item.json))",
-    "itemProps": "Props object that will be applied to each item component. `true` will treat the original object as raw props and pass it directly to the component.",
-    "returnObject": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/item.json))"
-  }
-}

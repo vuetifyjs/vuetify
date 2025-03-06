@@ -13,9 +13,9 @@
       <v-progress-linear
         :active="loading"
         :indeterminate="loading"
-        absolute
-        bottom
         color="deep-purple-accent-4"
+        location="bottom"
+        absolute
       ></v-progress-linear>
 
       <v-spacer></v-spacer>
@@ -31,8 +31,8 @@
 
     <v-container style="height: 282px;">
       <v-row
-        class="fill-height"
         align="center"
+        class="fill-height"
         justify="center"
       >
         <v-scale-transition>
@@ -52,6 +52,17 @@
     </v-container>
   </v-card>
 </template>
+
+<script setup>
+  import { ref, watch } from 'vue'
+
+  const loading = ref(false)
+
+  watch(loading, val => {
+    if (!val) return
+    setTimeout(() => (loading.value = false), 3000)
+  })
+</script>
 
 <script>
   export default {

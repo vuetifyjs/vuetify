@@ -1,6 +1,8 @@
+// Composables
 import { useToggleScope } from '@/composables/toggleScope'
 
-import { computed, inject, onScopeDispose, provide, reactive, readonly, ref, toRaw, watchEffect } from 'vue'
+// Utilities
+import { computed, inject, onScopeDispose, provide, reactive, readonly, shallowRef, toRaw, watchEffect } from 'vue'
 import { getCurrentInstance } from '@/util'
 
 // Types
@@ -28,7 +30,7 @@ export function useStack (
   })
   provide(StackSymbol, stack)
 
-  const _zIndex = ref(+zIndex.value)
+  const _zIndex = shallowRef(+zIndex.value)
   useToggleScope(isActive, () => {
     const lastZIndex = globalStack.at(-1)?.[1]
     _zIndex.value = lastZIndex ? lastZIndex + 10 : +zIndex.value
@@ -49,7 +51,7 @@ export function useStack (
     })
   })
 
-  const globalTop = ref(true)
+  const globalTop = shallowRef(true)
   if (createStackEntry) {
     watchEffect(() => {
       const _isTop = globalStack.at(-1)?.[0] === vm.uid

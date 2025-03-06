@@ -1,7 +1,10 @@
-import { describe, expect, it } from '@jest/globals'
-
 // Directives
 import Resize from '../'
+
+// Utilities
+
+// Types
+import type { Mock } from 'vitest'
 
 const instance = {
   $: { uid: 1 },
@@ -9,29 +12,29 @@ const instance = {
 
 describe('v-resize', () => {
   it('should bind event on inserted', () => {
-    const callback = jest.fn()
+    const callback = vi.fn()
 
-    jest.spyOn(window, 'addEventListener')
-    jest.spyOn(window, 'removeEventListener')
+    vi.spyOn(window, 'addEventListener')
+    vi.spyOn(window, 'removeEventListener')
 
     const el = {}
 
     Resize.mounted!(el as HTMLElement, { value: callback, instance } as any)
-    expect(callback).toHaveBeenCalled()
+    expect(callback).toHaveBeenCalledWith()
     expect(window.addEventListener).toHaveBeenCalledWith('resize', callback, { passive: true })
 
     Resize.unmounted!(el as HTMLElement, { value: callback, instance } as any)
     expect(window.removeEventListener).toHaveBeenCalledWith('resize', callback, { passive: true })
 
-    ;(window.addEventListener as jest.Mock).mockClear()
-    ;(window.removeEventListener as jest.Mock).mockClear()
+    ;(window.addEventListener as Mock).mockClear()
+    ;(window.removeEventListener as Mock).mockClear()
   })
 
   it('should not run the callback in quiet mode', () => {
-    const callback = jest.fn()
+    const callback = vi.fn()
 
-    jest.spyOn(window, 'addEventListener')
-    jest.spyOn(window, 'removeEventListener')
+    vi.spyOn(window, 'addEventListener')
+    vi.spyOn(window, 'removeEventListener')
 
     const el = {}
 
@@ -42,7 +45,7 @@ describe('v-resize', () => {
     Resize.unmounted!(el as HTMLElement, { value: callback, modifiers: { quiet: true }, instance } as any)
     expect(window.removeEventListener).toHaveBeenCalledWith('resize', callback, { passive: true })
 
-    ;(window.addEventListener as jest.Mock).mockClear()
-    ;(window.removeEventListener as jest.Mock).mockClear()
+    ;(window.addEventListener as Mock).mockClear()
+    ;(window.removeEventListener as Mock).mockClear()
   })
 })

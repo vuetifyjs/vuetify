@@ -1,21 +1,17 @@
 <template>
-  <app-btn
-    href="https://play.vuetifyjs.com"
-    target="_blank"
-    rel="noopener noreferrer"
+  <AppBtn
     class="ms-1"
     color="medium-emphasis"
-    variant="text"
+    href="https://play.vuetifyjs.com"
+    rel="noopener noreferrer"
+    target="_blank"
     text="playground"
+    variant="text"
     @click="onClick"
   />
 </template>
 
 <script setup>
-  // Composables
-  import { useGtag } from 'vue-gtag-next'
-  import { useRoute } from 'vue-router'
-
   const { event } = useGtag()
   const { name } = useRoute()
 

@@ -2,7 +2,6 @@ import { VTextField } from '../VTextField'
 
 // Utilities
 import { mount } from '@vue/test-utils'
-import { describe, expect, it } from '@jest/globals'
 import { createVuetify } from '@/framework'
 
 describe('VTextField', () => {
@@ -20,10 +19,10 @@ describe('VTextField', () => {
   it('has affixed icons', () => {
     const wrapper = mountFunction(
       <VTextField
-        prependIcon="mdi-vuetify"
-        prependInnerIcon="mdi-vuetify"
-        appendInnerIcon="mdi-vuetify"
-        appendIcon="mdi-vuetify"
+        prependIcon="$vuetify"
+        prependInnerIcon="$vuetify"
+        appendInnerIcon="$vuetify"
+        appendIcon="$vuetify"
       />
     )
 
@@ -45,17 +44,17 @@ describe('VTextField', () => {
   })
 
   it('has affixed icons with actions', () => {
-    const onClickPrepend = jest.fn()
-    const onClickPrependInner = jest.fn()
-    const onClickAppendInner = jest.fn()
-    const onClickAppend = jest.fn()
+    const onClickPrepend = vi.fn()
+    const onClickPrependInner = vi.fn()
+    const onClickAppendInner = vi.fn()
+    const onClickAppend = vi.fn()
 
     const wrapper = mountFunction(
       <VTextField
-        prependIcon="mdi-vuetify"
-        prependInnerIcon="mdi-vuetify"
-        appendInnerIcon="mdi-vuetify"
-        appendIcon="mdi-vuetify"
+        prependIcon="$vuetify"
+        prependInnerIcon="$vuetify"
+        appendInnerIcon="$vuetify"
+        appendIcon="$vuetify"
         onClick:prepend={ onClickPrepend }
         onClick:prependInner={ onClickPrependInner }
         onClick:appendInner={ onClickAppendInner }

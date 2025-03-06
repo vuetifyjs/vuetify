@@ -18,11 +18,11 @@ const oppositeMap = {
 } as const
 
 export interface LocationProps {
-  location: Anchor | undefined
+  location: Anchor | null | undefined
 }
 
 export const makeLocationProps = propsFactory({
-  location: String as PropType<Anchor>,
+  location: String as PropType<Anchor | null>,
 }, 'location')
 
 export function useLocation (props: LocationProps, opposite = false, offset?: (side: string) => number) {
