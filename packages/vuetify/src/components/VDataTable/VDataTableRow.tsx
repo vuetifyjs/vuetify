@@ -164,11 +164,13 @@ export const VDataTableRow = genericComponent<new <T>(
                     )
                   }
 
-                  const displayValue = highlightResult(
-                    'v-data-table',
-                    toDisplayString(slotProps.value),
-                    props.getMatches!(item)?.[column.key!]
-                  )
+                  const displayValue = props.getMatches
+                    ? highlightResult(
+                      'v-data-table',
+                      toDisplayString(slotProps.value),
+                      props.getMatches(item)?.[column.key!]
+                    )
+                    : toDisplayString(slotProps.value)
 
                   return !mobile.value ? displayValue : (
                     <>
