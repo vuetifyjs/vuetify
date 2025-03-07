@@ -45,8 +45,8 @@ export const makeVDateInputProps = propsFactory({
     prependIcon: '$calendar',
   }),
   ...omit(makeVDatePickerProps({
-    weeksInMonth: 'dynamic' as const,
     hideHeader: true,
+    showAdjacentMonths: true,
   }), ['active', 'location', 'rounded']),
 }, 'VDateInput')
 
