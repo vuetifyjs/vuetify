@@ -122,7 +122,7 @@
         </div>
 
         <div v-if="script" class="pa-2 pt-0">
-          <AppMarkup :code="script" language="js" />
+          <AppMarkup :code="script" lang="js" />
         </div>
       </div>
     </v-expand-transition>
