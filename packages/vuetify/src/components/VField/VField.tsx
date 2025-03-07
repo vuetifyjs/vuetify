@@ -54,7 +54,6 @@ export interface VFieldSlot extends DefaultInputSlot {
 
 export const makeVFieldProps = propsFactory({
   appendInnerIcon: IconValue,
-  glow: Boolean,
   bgColor: String,
   clearable: Boolean,
   clearIcon: {
@@ -73,8 +72,10 @@ export const makeVFieldProps = propsFactory({
     type: Boolean,
     default: null,
   },
+  glow: Boolean,
   error: Boolean,
   flat: Boolean,
+  iconColor: [Boolean, String],
   label: String,
   persistentClear: Boolean,
   prependInnerIcon: IconValue,
@@ -152,6 +153,11 @@ export const VField = genericComponent<new <T>(
       return props.error || props.disabled ? undefined
         : isActive.value && isFocused.value ? props.color
         : props.baseColor
+    })
+    const iconColor = computed(() => {
+      if (!props.iconColor) return undefined
+
+      return props.iconColor === true ? color.value : props.iconColor
     })
 
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'bgColor'))
@@ -239,6 +245,7 @@ export const VField = genericComponent<new <T>(
               'v-field--disabled': props.disabled,
               'v-field--dirty': props.dirty,
               'v-field--error': props.error,
+              'v-field--glow': props.glow,
               'v-field--flat': props.flat,
               'v-field--has-background': !!props.bgColor,
               'v-field--persistent-clear': props.persistentClear,
@@ -276,9 +283,9 @@ export const VField = genericComponent<new <T>(
             <div key="prepend" class="v-field__prepend-inner">
               { props.prependInnerIcon && (
                 <InputIcon
-                  key={ `prepend-icon-${props.glow}` }
+                  key={ `prepend-icon-${props.iconColor}` }
                   name="prependInner"
-                  color={ props.glow ? color.value : undefined }
+                  color={ iconColor.value }
                 />
               )}
 
@@ -364,7 +371,7 @@ export const VField = genericComponent<new <T>(
                 <InputIcon
                   key={ `append-icon-${props.glow}` }
                   name="appendInner"
-                  color={ props.glow ? color.value : undefined }
+                  color={ iconColor.value }
                 />
               )}
             </div>

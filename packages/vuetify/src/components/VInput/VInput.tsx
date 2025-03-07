@@ -40,10 +40,14 @@ export interface VInputSlot {
 export const makeVInputProps = propsFactory({
   id: String,
   appendIcon: IconValue,
+  baseColor: String,
   centerAffix: {
     type: Boolean,
     default: true,
   },
+  color: String,
+  glow: Boolean,
+  iconColor: [Boolean, String],
   prependIcon: IconValue,
   hideDetails: [Boolean, String] as PropType<boolean | 'auto'>,
   hideSpinButtons: Boolean,
@@ -137,6 +141,18 @@ export const VInput = genericComponent<new <T>(
       validate,
     }))
 
+    const color = computed(() => {
+      return props.error || props.disabled ? undefined
+        : props.focused ? props.color
+        : props.baseColor
+    })
+
+    const iconColor = computed(() => {
+      if (!props.iconColor) return undefined
+
+      return props.iconColor === true ? color.value : props.iconColor
+    })
+
     const messages = computed(() => {
       if (props.errorMessages?.length || (!isPristine.value && errorMessages.value.length)) {
         return errorMessages.value
@@ -163,6 +179,8 @@ export const VInput = genericComponent<new <T>(
             `v-input--${props.direction}`,
             {
               'v-input--center-affix': props.centerAffix,
+              'v-input--focused': props.focused,
+              'v-input--glow': props.glow,
               'v-input--hide-spin-buttons': props.hideSpinButtons,
             },
             densityClasses.value,
@@ -182,8 +200,9 @@ export const VInput = genericComponent<new <T>(
 
               { props.prependIcon && (
                 <InputIcon
-                  key="prepend-icon"
+                  key={ `prepend-icon-${iconColor.value}` }
                   name="prepend"
+                  color={ iconColor.value }
                 />
               )}
             </div>
@@ -199,8 +218,9 @@ export const VInput = genericComponent<new <T>(
             <div key="append" class="v-input__append">
               { props.appendIcon && (
                 <InputIcon
-                  key="append-icon"
+                  key={ `append-icon-${iconColor.value}` }
                   name="append"
+                  color={ iconColor.value }
                 />
               )}
 
