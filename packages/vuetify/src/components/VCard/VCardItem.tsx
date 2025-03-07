@@ -11,6 +11,7 @@ import { makeDensityProps } from '@/composables/density'
 import { IconValue } from '@/composables/icons'
 
 // Utilities
+import { toDisplayString } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 export type VCardItemSlots = {
@@ -26,8 +27,8 @@ export const makeCardItemProps = propsFactory({
   appendIcon: IconValue,
   prependAvatar: String,
   prependIcon: IconValue,
-  subtitle: [String, Number],
-  title: [String, Number],
+  subtitle: [String, Number, Boolean],
+  title: [String, Number, Boolean],
 
   ...makeComponentProps(),
   ...makeDensityProps(),
@@ -98,13 +99,13 @@ export const VCardItem = genericComponent<VCardItemSlots>()({
           <div class="v-card-item__content">
             { hasTitle && (
               <VCardTitle key="title">
-                { slots.title?.() ?? props.title }
+                { slots.title?.() ?? toDisplayString(props.title) }
               </VCardTitle>
             )}
 
             { hasSubtitle && (
               <VCardSubtitle key="subtitle">
-                { slots.subtitle?.() ?? props.subtitle }
+                { slots.subtitle?.() ?? toDisplayString(props.subtitle) }
               </VCardSubtitle>
             )}
 
