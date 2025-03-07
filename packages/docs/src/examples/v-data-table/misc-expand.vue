@@ -37,11 +37,11 @@
                 <tr>
                   <td>
                     <v-rating
-                      :model-value="4"
+                      :model-value="item.details.rating"
                       color="orange-darken-2"
                       density="comfortable"
-                      max="10"
                       size="x-small"
+                      half-increments
                       readonly
                     ></v-rating>
                   </td>
@@ -76,7 +76,7 @@
       details: {
         synopsis: 'Two imprisoned men bond over years, finding solace and redemption through acts of decency.',
         cast: ['Tim Robbins', 'Morgan Freeman'],
-        rating: '9.3/10',
+        rating: 3.5,
       },
     },
     {
@@ -88,7 +88,7 @@
       details: {
         synopsis: 'A thief with the ability to enter dreams is tasked with stealing a secret from the subconscious.',
         cast: ['Leonardo DiCaprio', 'Joseph Gordon-Levitt'],
-        rating: '8.8/10',
+        rating: 5,
       },
     },
     {
@@ -100,7 +100,7 @@
       details: {
         synopsis: 'The aging patriarch of a crime dynasty transfers control to his reluctant son.',
         cast: ['Marlon Brando', 'Al Pacino'],
-        rating: '9.2/10',
+        rating: 4.5,
       },
     },
     {
@@ -112,7 +112,7 @@
       details: {
         synopsis: 'Interwoven stories of criminals, violence, and redemption in Los Angeles.',
         cast: ['John Travolta', 'Samuel L. Jackson'],
-        rating: '8.9/10',
+        rating: 4.5,
       },
     },
     {
@@ -124,17 +124,7 @@
       details: {
         synopsis: 'When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.',
         cast: ['Christian Bale', 'Heath Ledger'],
-        rating: '9.0/10',
-      },
-    },
-    {
-      title: 'The Lord of the Rings: The Return of the King',
-      director: 'Peter Jackson',
-      genre: 'Adventure',
-      year: 2003,
-      runtime: 201,
-      details: {
-        synopsis: '',
+        rating: 4,
       },
     },
   ]
