@@ -283,7 +283,7 @@ export const VField = genericComponent<new <T>(
             <div key="prepend" class="v-field__prepend-inner">
               { props.prependInnerIcon && (
                 <InputIcon
-                  key={ `prepend-icon-${props.iconColor}` }
+                  key="prepend-icon"
                   name="prependInner"
                   color={ iconColor.value }
                 />
@@ -369,7 +369,7 @@ export const VField = genericComponent<new <T>(
 
               { props.appendInnerIcon && (
                 <InputIcon
-                  key={ `append-icon-${props.iconColor}` }
+                  key="append-icon"
                   name="appendInner"
                   color={ iconColor.value }
                 />

@@ -200,7 +200,7 @@ export const VInput = genericComponent<new <T>(
 
               { props.prependIcon && (
                 <InputIcon
-                  key={ `prepend-icon-${iconColor.value}` }
+                  key="prepend-icon"
                   name="prepend"
                   color={ iconColor.value }
                 />
@@ -218,7 +218,7 @@ export const VInput = genericComponent<new <T>(
             <div key="append" class="v-input__append">
               { props.appendIcon && (
                 <InputIcon
-                  key={ `append-icon-${iconColor.value}` }
+                  key="append-icon"
                   name="append"
                   color={ iconColor.value }
                 />
