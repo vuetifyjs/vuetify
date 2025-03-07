@@ -369,7 +369,7 @@ export const VField = genericComponent<new <T>(
 
               { props.appendInnerIcon && (
                 <InputIcon
-                  key={ `append-icon-${props.glow}` }
+                  key={ `append-icon-${props.iconColor}` }
                   name="appendInner"
                   color={ iconColor.value }
                 />
