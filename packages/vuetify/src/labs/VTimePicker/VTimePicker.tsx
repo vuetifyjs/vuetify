@@ -95,8 +95,8 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
       const maxHour = props.max ? Number(props.max.split(':')[0]) : 23
 
       return (val: number) => {
-        return val >= minHour * 1 &&
-          val <= maxHour * 1 &&
+        return val >= Number(minHour) &&
+          val <= Number(maxHour) &&
           (!cb || cb(val))
       }
     })
@@ -117,8 +117,8 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
 
       const [minHour, minMinute] = props.min ? props.min.split(':').map(Number) : [0, 0]
       const [maxHour, maxMinute] = props.max ? props.max.split(':').map(Number) : [23, 59]
-      const minTime = minHour * 60 + minMinute * 1
-      const maxTime = maxHour * 60 + maxMinute * 1
+      const minTime = minHour * 60 + Number(minMinute)
+      const maxTime = maxHour * 60 + Number(maxMinute)
 
       return (val: number) => {
         const time = 60 * inputHour.value! + val
@@ -151,8 +151,8 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
 
       const [minHour, minMinute, minSecond] = props.min ? props.min.split(':').map(Number) : [0, 0, 0]
       const [maxHour, maxMinute, maxSecond] = props.max ? props.max.split(':').map(Number) : [23, 59, 59]
-      const minTime = minHour * 3600 + minMinute * 60 + (minSecond || 0) * 1
-      const maxTime = maxHour * 3600 + maxMinute * 60 + (maxSecond || 0) * 1
+      const minTime = minHour * 3600 + minMinute * 60 + Number(minSecond || 0)
+      const maxTime = maxHour * 3600 + maxMinute * 60 + Number(maxSecond || 0)
 
       return (val: number) => {
         const time = 3600 * inputHour.value! + 60 * inputMinute.value! + val

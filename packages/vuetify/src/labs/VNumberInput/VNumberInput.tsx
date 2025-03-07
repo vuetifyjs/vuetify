@@ -99,7 +99,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       val => val ?? null,
       val => val == null
         ? val ?? null
-        : clamp(+val, props.min, props.max)
+        : clamp(Number(val), props.min, props.max)
     )
 
     const _inputText = shallowRef<string | null>(null)
@@ -118,8 +118,8 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
         if (val === null || val === '') {
           model.value = null
           _inputText.value = null
-        } else if (!isNaN(+val) && +val <= props.max && +val >= props.min) {
-          model.value = +val
+        } else if (!isNaN(Number(val)) && Number(val) <= props.max && Number(val) >= props.min) {
+          model.value = Number(val)
           _inputText.value = val
         }
       },
@@ -266,8 +266,8 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       if (controlsDisabled.value) return
       if (!vTextFieldRef.value) return
       const actualText = vTextFieldRef.value.value
-      if (actualText && !isNaN(+actualText)) {
-        inputText.value = correctPrecision(clamp(+actualText, props.min, props.max))
+      if (actualText && !isNaN(Number(actualText))) {
+        inputText.value = correctPrecision(clamp(Number(actualText), props.min, props.max))
       } else {
         inputText.value = null
       }
