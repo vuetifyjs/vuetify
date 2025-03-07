@@ -82,7 +82,7 @@
           min-height="300"
           rounded="0"
         >
-          <div class="flex-fill">
+          <div class="flex-fill w-100">
             <slot />
           </div>
         </v-sheet>
