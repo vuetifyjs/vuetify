@@ -1,5 +1,5 @@
 <template>
-  <div class="text-center">
+  <div class="text-center mt-2 mb-4">
     <v-btn
       :disabled="loading"
       append-icon="mdi-refresh"
@@ -9,11 +9,13 @@
     ></v-btn>
   </div>
 
-  <v-data-table :items="items" :loading="loading">
-    <template v-slot:loading>
-      <v-skeleton-loader type="table-row@10"></v-skeleton-loader>
-    </template>
-  </v-data-table>
+  <v-sheet border rounded>
+    <v-data-table :items="items" :loading="loading">
+      <template v-slot:loading>
+        <v-skeleton-loader type="table-row@10"></v-skeleton-loader>
+      </template>
+    </v-data-table>
+  </v-sheet>
 </template>
 
 <script setup>
