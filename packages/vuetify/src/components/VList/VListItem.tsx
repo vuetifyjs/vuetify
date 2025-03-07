@@ -83,8 +83,14 @@ export const makeVListItemProps = propsFactory({
     default: true,
   },
   slim: Boolean,
-  subtitle: [String, Number, Boolean],
-  title: [String, Number, Boolean],
+  subtitle: {
+    type: [String, Number, Boolean],
+    default: undefined,
+  },
+  title: {
+    type: [String, Number, Boolean],
+    default: undefined,
+  },
   value: null,
 
   onClick: EventProp<[MouseEvent | KeyboardEvent]>(),

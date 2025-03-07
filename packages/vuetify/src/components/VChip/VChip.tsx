@@ -83,7 +83,10 @@ export const makeVChipProps = propsFactory({
     type: [Boolean, Object] as PropType<RippleDirectiveBinding['value']>,
     default: true,
   },
-  text: [String, Number, Boolean],
+  text: {
+    type: [String, Number, Boolean],
+    default: undefined,
+  },
   modelValue: {
     type: Boolean,
     default: true,

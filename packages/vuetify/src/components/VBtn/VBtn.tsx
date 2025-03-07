@@ -70,7 +70,10 @@ export const makeVBtnProps = propsFactory({
     default: true,
   },
 
-  text: [String, Number, Boolean],
+  text: {
+    type: [String, Number, Boolean],
+    default: undefined,
+  },
 
   ...makeBorderProps(),
   ...makeComponentProps(),

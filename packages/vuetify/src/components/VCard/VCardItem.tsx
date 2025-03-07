@@ -27,8 +27,14 @@ export const makeCardItemProps = propsFactory({
   appendIcon: IconValue,
   prependAvatar: String,
   prependIcon: IconValue,
-  subtitle: [String, Number, Boolean],
-  title: [String, Number, Boolean],
+  subtitle: {
+    type: [String, Number, Boolean],
+    default: undefined,
+  },
+  title: {
+    type: [String, Number, Boolean],
+    default: undefined,
+  },
 
   ...makeComponentProps(),
   ...makeDensityProps(),
