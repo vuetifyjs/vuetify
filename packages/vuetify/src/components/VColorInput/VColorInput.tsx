@@ -132,9 +132,9 @@ export const VColorInput = genericComponent<VColorInputSlots>()({
                             }}
                             onMousedown={ (e: MouseEvent) => e.preventDefault() }
                           >
-                            {{
+                            { /* {{
                               actions: !props.hideActions ? () => actions : undefined,
-                            }}
+                            }} */ }
                           </VColorPicker>
                         )
                       },
