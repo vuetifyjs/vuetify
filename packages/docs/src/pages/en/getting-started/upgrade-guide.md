@@ -84,6 +84,53 @@ Affected components:
   - isValid
   - items
 
+### VBtn
+
+The default text transform of _uppercase_ has been **removed**. To restore the previous behavior, set the `text-transform` prop to `uppercase`.
+
+- Set it in the SASS variables for typography:
+
+```scss
+@use 'vuetify/settings' with (
+  $typography: (
+    'button': (
+      'text-transform': 'uppercase',
+    ),
+  ),
+)
+```
+
+- Or set it in the SASS variables for buttons:
+
+```scss
+@use 'vuetify/settings' with (
+  $button-text-transform: 'uppercase',
+)
+```
+
+- Set it as a global default:
+
+```js
+import { createVuetify } from 'vuetify'
+
+const vuetify = createVuetify({
+  defaults: {
+    VBtn: {
+      class: 'text-uppercase',
+      // or if you are using $utilities: false
+      style: 'text-transform: uppercase;',
+    },
+  },
+})
+```
+
+- Manually type uppercase letters:
+
+```diff
+- <v-btn>button</v-btn>
++ <v-btn>BUTTON</v-btn>
+```
+
 ### VSelect/VCombobox/VAutocomplete
 
 #### `item` in slots has been renamed to `internalItem`
