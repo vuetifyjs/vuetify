@@ -11,6 +11,12 @@ export default {
     noResultsText: '検索結果が見つかりません。',
     loadingText: '項目をロード中です...',
   },
+  select: {
+    ariaLabel: {
+      checked: 'Checked',
+      unchecked: 'Not Checked',
+    },
+  },
   dataTable: {
     itemsPerPageText: '1ページあたりの行数：',
     ariaLabel: {
