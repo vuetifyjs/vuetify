@@ -209,7 +209,7 @@ export const VPagination = genericComponent<VPaginationSlots>()({
         const rangeStart = length.value - rangeLength + start.value
         return [start.value, props.ellipsis, ...createRange(rangeLength, rangeStart)]
       } else {
-        const rangeLength = Math.max(1, totalVisible.value - 3)
+        const rangeLength = Math.max(1, totalVisible.value - 2)
         const rangeStart = rangeLength === 1 ? page.value : page.value - Math.ceil(rangeLength / 2) + start.value
         return [start.value, props.ellipsis, ...createRange(rangeLength, rangeStart), props.ellipsis, length.value]
       }

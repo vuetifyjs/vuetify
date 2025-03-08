@@ -12,6 +12,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           triageLabel: 'S: triage'
+          staleLabel: 'S: stale'
           sponsorsFile: '.github/sponsors.yml'
           duplicateLabel: 'duplicate'
           triagedLabels: |-

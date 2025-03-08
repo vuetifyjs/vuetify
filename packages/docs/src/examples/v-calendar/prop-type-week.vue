@@ -6,9 +6,9 @@
           v-model="weekday"
           :items="weekdays"
           class="ma-2"
+          density="compact"
           label="weekdays"
           variant="outlined"
-          dense
           hide-details
         ></v-select>
       </v-sheet>

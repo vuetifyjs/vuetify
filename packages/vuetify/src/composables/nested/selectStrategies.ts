@@ -50,13 +50,13 @@ export const independentSelectStrategy = (mandatory?: boolean): SelectStrategy =
       return selected
     },
     in: (v, children, parents) => {
-      let map = new Map()
+      const map = new Map()
 
       for (const id of (v || [])) {
-        map = strategy.select({
+        strategy.select({
           id,
           value: true,
-          selected: new Map(map),
+          selected: map,
           children,
           parents,
         })
@@ -88,13 +88,11 @@ export const independentSingleSelectStrategy = (mandatory?: boolean): SelectStra
       return parentStrategy.select({ ...rest, id, selected: singleSelected })
     },
     in: (v, children, parents) => {
-      let map = new Map()
-
       if (v?.length) {
-        map = parentStrategy.in(v.slice(0, 1), children, parents)
+        return parentStrategy.in(v.slice(0, 1), children, parents)
       }
 
-      return map
+      return new Map()
     },
     out: (v, children, parents) => {
       return parentStrategy.out(v, children, parents)
@@ -188,7 +186,7 @@ export const classicSelectStrategy = (mandatory?: boolean): SelectStrategy => {
         map = strategy.select({
           id,
           value: true,
-          selected: new Map(map),
+          selected: map,
           children,
           parents,
         })
@@ -201,6 +199,32 @@ export const classicSelectStrategy = (mandatory?: boolean): SelectStrategy => {
 
       for (const [key, value] of v.entries()) {
         if (value === 'on' && !children.has(key)) arr.push(key)
+      }
+
+      return arr
+    },
+  }
+
+  return strategy
+}
+
+export const trunkSelectStrategy = (mandatory?: boolean): SelectStrategy => {
+  const parentStrategy = classicSelectStrategy(mandatory)
+
+  const strategy: SelectStrategy = {
+    select: parentStrategy.select,
+    in: parentStrategy.in,
+    out: (v, children, parents) => {
+      const arr = []
+
+      for (const [key, value] of v.entries()) {
+        if (value === 'on') {
+          if (parents.has(key)) {
+            const parent = parents.get(key)
+            if (v.get(parent) === 'on') continue
+          }
+          arr.push(key)
+        }
       }
 
       return arr

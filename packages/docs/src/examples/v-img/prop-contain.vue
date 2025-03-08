@@ -38,7 +38,6 @@
         <v-img
           aspect-ratio="1.7"
           src="https://picsum.photos/510/300?random"
-          contain
         ></v-img>
         <div class="subheading pt-4">
           Too high
@@ -46,7 +45,6 @@
         <v-img
           aspect-ratio="2"
           src="https://picsum.photos/510/300?random"
-          contain
         ></v-img>
         <div class="subheading pt-4">
           Too low
@@ -54,7 +52,6 @@
         <v-img
           aspect-ratio="1.4"
           src="https://picsum.photos/510/300?random"
-          contain
         ></v-img>
       </v-col>
     </v-row>

@@ -107,12 +107,13 @@ export const VFab = genericComponent()({
             props.class,
           ]}
           style={[
-            props.app ? {
-              ...layoutItemStyles.value,
-            } : {
-              height: 'inherit',
-              width: undefined,
-            },
+            props.app
+              ? { ...layoutItemStyles.value }
+              : {
+                height: props.absolute
+                  ? '100%'
+                  : 'inherit',
+              },
             props.style,
           ]}
         >

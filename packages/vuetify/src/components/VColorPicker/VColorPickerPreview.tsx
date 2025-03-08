@@ -13,16 +13,17 @@ import { onUnmounted } from 'vue'
 import { nullColor } from './util'
 import {
   defineComponent,
-  HexToHSV,
   HSVtoCSS,
+  parseColor,
   propsFactory,
+  RGBtoHSV,
   SUPPORTS_EYE_DROPPER,
   useRender,
 } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import type { Hex, HSV } from '@/util'
+import type { HSV } from '@/util'
 
 export const makeVColorPickerPreviewProps = propsFactory({
   color: {
@@ -54,7 +55,7 @@ export const VColorPickerPreview = defineComponent({
       const eyeDropper = new window.EyeDropper()
       try {
         const result = await eyeDropper.open({ signal: abortController.signal })
-        const colorHexValue = HexToHSV(result.sRGBHex as Hex)
+        const colorHexValue = RGBtoHSV(parseColor(result.sRGBHex))
         emit('update:color', { ...(props.color ?? nullColor), ...colorHexValue })
       } catch (e) {}
     }

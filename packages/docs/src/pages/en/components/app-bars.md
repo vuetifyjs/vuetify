@@ -24,8 +24,6 @@ features:
 
 The `v-app-bar` component is pivotal to any graphical user interface (GUI), as it generally is the primary source of site navigation.
 
-![App Bar Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-app-bar/v-app-bar-entry.png)
-
 <PageFeatures />
 
 ## Usage

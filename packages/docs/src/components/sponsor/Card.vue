@@ -16,7 +16,6 @@
       :src="src"
       :width="imgWidth"
       max-height="64"
-      contain
     />
   </v-card>
 </template>

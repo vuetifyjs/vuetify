@@ -8,6 +8,8 @@ related:
   - /styles/transitions/
   - /getting-started/wireframes/
 features:
+  github: /composables/theme.ts
+  label: 'E: theme'
   report: true
 ---
 
@@ -350,4 +352,10 @@ export const vuetify = createVuetify({
 
 ## Implementation
 
-Vuetify generates theme styles at runtime according to the given configuration. The generated styles are injected into the `<head>` section of the DOM in a `<style>` tag with an **id** of `vuetify-theme-stylesheet`.
+Vuetify generates theme styles at runtime according to the given configuration. The generated styles are injected into the `<head>` section of the DOM in a `<style>` tag with a default **id** of `vuetify-theme-stylesheet`.
+
+### Microfrontends
+
+An application using microfrontends with multiple instances of Vuetify may need to define unique **theme.stylesheetId** values for each microfrontend in order to prevent conflicts between their generated stylesheets.
+Further, such a scenario might require styles to be scoped to a specific microfrontend, which can be achieved by setting the **theme.scope** property.
+For example, a microfrontend mounted in an element `#my-app` can define a **theme.scope** of `#my-app` to scope its styles to that element and its children instead of `:root` and global classes.

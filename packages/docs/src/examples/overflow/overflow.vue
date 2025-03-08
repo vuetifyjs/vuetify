@@ -11,6 +11,7 @@
         </v-card-text>
       </v-card>
     </v-col>
+
     <v-col cols="auto">
       <v-card class="overflow-hidden" height="200" width="200">
         <v-card-text>
@@ -22,6 +23,7 @@
         </v-card-text>
       </v-card>
     </v-col>
+
     <v-col cols="auto">
       <v-card class="overflow-visible" height="200" width="200">
         <v-card-text>

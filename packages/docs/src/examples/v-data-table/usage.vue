@@ -85,7 +85,7 @@
 
   const props = computed(() => {
     return {
-      ':items': 'items',
+      items: 'items',
     }
   })
 
@@ -105,6 +105,6 @@
   })
 
   const code = computed(() => {
-    return `<v-data-table${propsToString(props.value, 2)}></v-data-table>`
+    return `<v-data-table${propsToString(props.value, ['items'])}></v-data-table>`
   })
 </script>

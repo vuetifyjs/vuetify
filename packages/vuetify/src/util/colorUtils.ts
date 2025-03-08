@@ -48,9 +48,13 @@ export function parseColor (color: Color): RGB {
   } else if (typeof color === 'string' && cssColorRe.test(color)) {
     const { groups } = color.match(cssColorRe)!
     const { fn, values } = groups as { fn: keyof typeof mappers, values: string }
-    const realValues = values.split(/,\s*/)
-      .map(v => {
-        if (v.endsWith('%') && ['hsl', 'hsla', 'hsv', 'hsva'].includes(fn)) {
+    const realValues = values.split(/,\s*|\s*\/\s*|\s+/)
+      .map((v, i) => {
+        if (
+          v.endsWith('%') ||
+          // unitless slv are %
+          (i > 0 && i < 3 && ['hsl', 'hsla', 'hsv', 'hsva'].includes(fn))
+        ) {
           return parseFloat(v) / 100
         } else {
           return parseFloat(v)

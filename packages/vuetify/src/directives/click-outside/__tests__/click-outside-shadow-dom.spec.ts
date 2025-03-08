@@ -2,7 +2,7 @@
 import ClickOutside from '../'
 
 // Utilities
-import { wait } from '@/../test'
+import { wait } from '@test'
 
 function bootstrap (args?: object) {
   const outsideEl = document.createElement('div')

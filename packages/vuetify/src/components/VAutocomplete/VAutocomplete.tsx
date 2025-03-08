@@ -16,7 +16,7 @@ import { VVirtualScroll } from '@/components/VVirtualScroll'
 // Composables
 import { useScrolling } from '../VSelect/useScrolling'
 import { useTextColor } from '@/composables/color'
-import { makeFilterProps, useFilter } from '@/composables/filter'
+import { highlightResult, makeFilterProps, useFilter } from '@/composables/filter'
 import { useForm } from '@/composables/form'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { useItems } from '@/composables/list-items'
@@ -28,6 +28,7 @@ import { makeTransitionProps } from '@/composables/transition'
 import { computed, mergeProps, nextTick, ref, shallowRef, watch } from 'vue'
 import {
   checkPrintable,
+  deepEqual,
   ensureValidVNode,
   genericComponent,
   IN_BROWSER,
@@ -43,25 +44,8 @@ import {
 import type { PropType } from 'vue'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
-import type { FilterMatch } from '@/composables/filter'
 import type { ListItem } from '@/composables/list-items'
 import type { GenericProps, SelectItemKey } from '@/util'
-
-function highlightResult (text: string, matches: FilterMatch | undefined, length: number) {
-  if (matches == null) return text
-
-  if (Array.isArray(matches)) throw new Error('Multiple matches is not implemented')
-
-  return typeof matches === 'number' && ~matches
-    ? (
-      <>
-        <span class="v-autocomplete__unmask">{ text.substr(0, matches) }</span>
-        <span class="v-autocomplete__mask">{ text.substr(matches, length) }</span>
-        <span class="v-autocomplete__unmask">{ text.substr(matches + length) }</span>
-      </>
-    )
-    : text
-}
 
 type Primitive = string | number | boolean | symbol
 
@@ -219,7 +203,7 @@ export const VAutocomplete = genericComponent<new <
       menu.value = !menu.value
     }
     function onListKeydown (e: KeyboardEvent) {
-      if (checkPrintable(e)) {
+      if (e.key !== ' ' && checkPrintable(e)) {
         vTextFieldRef.value?.focus()
       }
     }
@@ -229,10 +213,7 @@ export const VAutocomplete = genericComponent<new <
       const selectionStart = vTextFieldRef.value.selectionStart
       const length = model.value.length
 
-      if (
-        selectionIndex.value > -1 ||
-        ['Enter', 'ArrowDown', 'ArrowUp'].includes(e.key)
-      ) {
+      if (['Enter', 'ArrowDown', 'ArrowUp'].includes(e.key)) {
         e.preventDefault()
       }
 
@@ -265,6 +246,7 @@ export const VAutocomplete = genericComponent<new <
         ) return select(model.value[0], false)
 
         if (~selectionIndex.value) {
+          e.preventDefault()
           const originalSelectionIndex = selectionIndex.value
           select(model.value[selectionIndex.value], false)
 
@@ -272,6 +254,8 @@ export const VAutocomplete = genericComponent<new <
         } else if (e.key === 'Backspace' && !search.value) {
           selectionIndex.value = length - 1
         }
+
+        return
       }
 
       if (!props.multiple) return
@@ -289,9 +273,7 @@ export const VAutocomplete = genericComponent<new <
           selectionIndex.value = -1
           vTextFieldRef.value.setSelectionRange(search.value?.length, search.value?.length)
         }
-      }
-
-      if (e.key === 'ArrowRight') {
+      } else if (e.key === 'ArrowRight') {
         if (selectionIndex.value < 0) return
 
         const next = selectionIndex.value + 1
@@ -302,6 +284,8 @@ export const VAutocomplete = genericComponent<new <
           selectionIndex.value = -1
           vTextFieldRef.value.setSelectionRange(0, 0)
         }
+      } else if (~selectionIndex.value && checkPrintable(e)) {
+        selectionIndex.value = -1
       }
     }
 
@@ -346,7 +330,7 @@ export const VAutocomplete = genericComponent<new <
       if (!item || item.props.disabled) return
 
       if (props.multiple) {
-        const index = model.value.findIndex(selection => props.valueComparator(selection.value, item.value))
+        const index = model.value.findIndex(selection => (props.valueComparator || deepEqual)(selection.value, item.value))
         const add = set == null ? !~index : set
 
         if (~index) {
@@ -496,7 +480,7 @@ export const VAutocomplete = genericComponent<new <
                         <VListItem key="no-data" title={ t(props.noDataText) } />
                       ))}
 
-                      <VVirtualScroll ref={ vVirtualScrollRef } renderless items={ displayItems.value }>
+                      <VVirtualScroll ref={ vVirtualScrollRef } renderless items={ displayItems.value } itemKey="value">
                         { ({ item, index, itemRef }) => {
                           const itemProps = mergeProps(item.props, {
                             ref: itemRef,
@@ -535,7 +519,7 @@ export const VAutocomplete = genericComponent<new <
                               title: () => {
                                 return isPristine.value
                                   ? item.title
-                                  : highlightResult(item.title, getMatches(item)?.title, search.value?.length ?? 0)
+                                  : highlightResult('v-autocomplete', item.title, getMatches(item)?.title)
                               },
                             }}
                           </VListItem>

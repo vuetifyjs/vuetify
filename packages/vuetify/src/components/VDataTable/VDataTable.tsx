@@ -238,6 +238,7 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
           ]}
           style={ props.style }
           { ...tableProps }
+          fixedHeader={ props.fixedHeader || props.sticky }
         >
           {{
             top: () => slots.top?.(slotProps.value),

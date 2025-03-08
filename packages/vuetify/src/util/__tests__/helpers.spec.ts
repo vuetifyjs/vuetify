@@ -350,7 +350,7 @@ describe('helpers', () => {
       const mockCallback = vi.fn()
       defer(0, mockCallback)()
 
-      expect(mockCallback).toHaveBeenCalled()
+      expect(mockCallback).toHaveBeenCalledWith()
     })
 
     it('executes callback after specified timeout', () => {
@@ -359,7 +359,7 @@ describe('helpers', () => {
 
       expect(mockCallback).not.toHaveBeenCalled()
       vi.advanceTimersByTime(1000)
-      expect(mockCallback).toHaveBeenCalled()
+      expect(mockCallback).toHaveBeenCalledWith()
     })
 
     it('provides a function to clear the timeout', () => {

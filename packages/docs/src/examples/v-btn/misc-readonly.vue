@@ -45,7 +45,6 @@
           :variant="isSubscriber ? 'plain' : 'tonal'"
           class="me-2 text-none"
           size="small"
-          flat
           @click="isSubscriber = !isSubscriber"
         ></v-btn>
       </v-fade-transition>
@@ -60,7 +59,6 @@
           class="text-none"
           size="small"
           variant="flat"
-          flat
         ></v-btn>
       </v-fade-transition>
     </template>

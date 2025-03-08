@@ -1,11 +1,11 @@
 export default {
   badge: 'バッジ',
-  open: 'Open',
+  open: '開く',
   close: '閉じる',
-  dismiss: 'Dismiss',
+  dismiss: '閉じる',
   confirmEdit: {
     ok: 'OK',
-    cancel: 'Cancel',
+    cancel: 'キャンセル',
   },
   dataIterator: {
     noResultsText: '検索結果が見つかりません。',
@@ -33,18 +33,18 @@ export default {
     pageText: '{0}-{1} 件目 / {2}件',
   },
   dateRangeInput: {
-    divider: 'to',
+    divider: 'から',
   },
   datePicker: {
-    itemsSelected: '{0} selected',
+    itemsSelected: '{0} 選択済',
     range: {
-      title: 'Select dates',
-      header: 'Enter dates',
+      title: '日付を選択',
+      header: '日付を入力',
     },
-    title: 'Select date',
-    header: 'Enter date',
+    title: '日付を選択',
+    header: '日付を入力',
     input: {
-      placeholder: 'Enter date',
+      placeholder: '日付を入力',
     },
   },
   noDataText: 'データはありません。',
@@ -57,27 +57,27 @@ export default {
   },
   calendar: {
     moreEvents: 'さらに{0}',
-    today: 'Today',
+    today: '今日',
   },
   input: {
-    clear: 'Clear {0}',
-    prependAction: '{0} prepended action',
-    appendAction: '{0} appended action',
-    otp: 'Please enter OTP character {0}',
+    clear: 'クリア {0}',
+    prependAction: '{0} の前に追加されたアクション',
+    appendAction: '{0} の後に追加されたアクション',
+    otp: '{0}番目のワンタイムパスワードを入力してください',
   },
   fileInput: {
     counter: '{0} ファイル',
     counterSize: '{0} ファイル (合計 {1})',
   },
   fileUpload: {
-    title: 'Drag and drop files here',
-    divider: 'or',
-    browse: 'Browse Files',
+    title: 'ここにファイルをドラッグ＆ドロップ',
+    divider: 'または',
+    browse: 'ファイルを選択',
   },
   timePicker: {
-    am: 'AM',
-    pm: 'PM',
-    title: 'Select Time',
+    am: '午前',
+    pm: '午後',
+    title: '時間を選択',
   },
   pagination: {
     ariaLabel: {
@@ -86,22 +86,22 @@ export default {
       previous: '前のページ',
       page: '{0}ページ目に移動',
       currentPage: '現在のページ、ページ {0}',
-      first: 'First page',
-      last: 'Last page',
+      first: '最初のページ',
+      last: '最後のページ',
     },
   },
   stepper: {
-    next: 'Next',
-    prev: 'Previous',
+    next: '次へ',
+    prev: '前へ',
   },
   rating: {
     ariaLabel: {
       item: '評価 {1} のうち {0}',
     },
   },
-  loading: 'Loading...',
+  loading: 'ロード中...',
   infiniteScroll: {
-    loadMore: 'Load more',
-    empty: 'No more',
+    loadMore: 'さらに読み込む',
+    empty: 'データがありません',
   },
 }

@@ -18,8 +18,6 @@ features:
 
 The `v-virtual-scroll` component displays a virtual, _infinite_ list. It supports dynamic height and scrolling vertically and is a good alternative to pagination.
 
-![Virtual scroll Entry](https://cdn.vuetifyjs.com/docs/images/components/v-virtual-scroll/v-virtual-scroll-entry.png)
-
 <PageFeatures />
 
 ::: success

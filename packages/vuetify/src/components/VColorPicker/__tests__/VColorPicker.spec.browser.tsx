@@ -149,7 +149,7 @@ describe('VColorPicker', () => {
     })
 
     await userEvent.click(screen.getByCSS('canvas'))
-    expect(screen.getByCSS('.v-color-picker-canvas__dot')).toBeInTheDocument()
+    expect(screen.getByCSS('.v-color-picker-canvas__dot')).toBeVisible()
     screen.getAllByCSS('.v-color-picker-edit__input input').forEach(el => {
       expect(el).toHaveValue()
     })

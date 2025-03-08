@@ -141,7 +141,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
         aria-hidden={ props.active ? 'false' : 'true' }
         aria-valuemin="0"
         aria-valuemax={ props.max }
-        aria-valuenow={ props.indeterminate ? undefined : normalizedValue.value }
+        aria-valuenow={ props.indeterminate ? undefined : Math.min(parseFloat(progress.value), max.value) }
         onClick={ props.clickable && handleClick }
       >
         { props.stream && (

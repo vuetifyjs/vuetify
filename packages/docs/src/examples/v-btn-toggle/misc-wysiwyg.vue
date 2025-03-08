@@ -61,7 +61,6 @@
         rows="2"
         variant="outlined"
         auto-grow
-        full-width
         hide-details
       ></v-textarea>
     </v-sheet>

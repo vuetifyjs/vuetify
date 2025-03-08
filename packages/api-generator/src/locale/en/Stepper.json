@@ -17,7 +17,7 @@
     "header": "Slot for customizing the header.",
     "header-item": "Slot for customizing all header items.",
     "icon": "Slot for customizing all stepper item icons.",
-    "next": "Slot for customizing the next step functionailty",
+    "next": "Slot for customizing the next step functionality",
     "prev": "Slot for customizing the prev step functionality"
   },
   "exposed": {

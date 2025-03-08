@@ -58,7 +58,7 @@ You can specify which input modes are available to your users with the `modes` p
 
 #### Model
 
-The `v-color-picker` uses the `v-model` prop to control the color displayed. It supports hex strings such as **#FF00FF** and **#FF00FF00**, and objects representing **RGBA**, **HSLA** and **HSVA** values. The component will try to emit the color in the same format that was provided. If the value is null, then the `v-color-picker` will default to emitting hex colors.
+The `v-color-picker` uses the `v-model` prop to control the color displayed. It supports hex strings such as **#FF00FF** and **#FF00FF00**, and objects representing **RGBA**, **HSLA** and **HSVA** values. The component will try to emit the color in the same format that was provided. If the value is null or an unsupported format, then the `v-color-picker` will default to emitting hex colors.
 
 <ExamplesExample file="v-color-picker/prop-model" />
 

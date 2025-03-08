@@ -29,10 +29,7 @@
       </template>
     </v-toolbar>
 
-    <v-list
-      lines="two"
-      subheader
-    >
+    <v-list lines="two">
       <v-list-subheader title="Folders" inset></v-list-subheader>
 
       <v-list-item

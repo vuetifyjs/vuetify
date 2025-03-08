@@ -8,6 +8,8 @@ related:
   - /components/buttons
   - /components/avatars
 features:
+  github: /composables/icons.tsx
+  label: 'E: icons'
   report: true
 ---
 

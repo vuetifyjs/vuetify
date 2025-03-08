@@ -26,7 +26,8 @@ export default function (expandedParentClass = '', x = false) {
     },
 
     onEnter (el: HTMLExpandElement) {
-      const initialStyle = el._initialStyle!
+      const initialStyle = el._initialStyle
+      if (!initialStyle) return
 
       el.style.setProperty('transition', 'none', 'important')
       // Hide overflow to account for collapsed margins in the calculated height
@@ -77,8 +78,10 @@ export default function (expandedParentClass = '', x = false) {
   }
 
   function resetStyles (el: HTMLExpandElement) {
-    const size = el._initialStyle![sizeProperty]
-    el.style.overflow = el._initialStyle!.overflow
+    if (!el._initialStyle) return
+
+    const size = el._initialStyle[sizeProperty]
+    el.style.overflow = el._initialStyle.overflow
     if (size != null) el.style[sizeProperty] = size
     delete el._initialStyle
   }

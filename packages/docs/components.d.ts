@@ -96,7 +96,6 @@ declare module 'vue' {
     Backmatter: typeof import('./src/components/Backmatter.vue')['default']
     ComponentsListItem: typeof import('./src/components/components/ListItem.vue')['default']
     DashboardDashboardEmptyState: typeof import('./src/components/dashboard/DashboardEmptyState.vue')['default']
-    DocContribute: typeof import('./src/components/doc/Contribute.vue')['default']
     DocExplorer: typeof import('./src/components/doc/Explorer.vue')['default']
     DocIconList: typeof import('./src/components/doc/IconList.vue')['default']
     DocIconTable: typeof import('./src/components/doc/IconTable.vue')['default']

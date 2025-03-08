@@ -9,7 +9,7 @@
 <playground-resources lang="json">
 {
   "imports": {
-    "vuetify/locale": "https://cdn.jsdelivr.net/npm/vuetify/lib/locale/index.mjs/+esm",
+    "vuetify/locale": "https://cdn.jsdelivr.net/npm/vuetify/lib/locale/index.js/+esm",
     "@date-io/date-fns": "https://cdn.jsdelivr.net/npm/@date-io/date-fns@2.17.0/build/index.esm.js/+esm",
     "date-fns/locale/en-US": "https://cdn.jsdelivr.net/npm/date-fns@2.30.0/esm/locale/en-US/index.js/+esm",
     "date-fns/locale/sv": "https://cdn.jsdelivr.net/npm/date-fns@2.30.0/esm/locale/sv/index.js/+esm"

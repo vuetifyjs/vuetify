@@ -8,6 +8,8 @@ related:
   - /components/navigation-drawers/
   - /components/footers/
 features:
+  github: /composables/layout.ts
+  label: 'E: layout'
   report: true
 ---
 

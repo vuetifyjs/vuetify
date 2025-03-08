@@ -137,6 +137,7 @@ jobs:
           VITE_EMAILJS_TEMPLATE_ID: ${{ secrets.EMAILJS_TEMPLATE_ID }}
           VITE_API_SERVER_URL: ${{ secrets.API_SERVER_URL }}
           VITE_GITHUB_SHA: ${{ github.sha }}
+          VITE_GITHUB_REF: ${{ github.ref_name }}
       - uses: actions/upload-artifact@v4
         with:
           name: docs-dist
@@ -145,8 +146,7 @@ jobs:
   publish-docs:
     needs: [lint, test-unit, build-docs]
     runs-on: ubuntu-24.04
-    environment: Production
-    if: github.event_name == 'push' && github.repository_owner == 'vuetifyjs' && github.ref == 'refs/heads/master'
+    environment: ${{ github.ref_name }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/download-artifact@v4

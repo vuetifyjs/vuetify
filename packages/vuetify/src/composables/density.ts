@@ -7,7 +7,7 @@ import type { PropType } from 'vue'
 
 const allowedDensities = [null, 'default', 'comfortable', 'compact'] as const
 
-// typeof allowedDensities[number] evalutes to any
+// typeof allowedDensities[number] evaluates to any
 // when generating api types for whatever reason.
 export type Density = null | 'default' | 'comfortable' | 'compact'
 
