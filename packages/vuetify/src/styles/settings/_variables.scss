@@ -291,7 +291,7 @@ $typography: map-deep-merge(
       'line-height': 2.6,
       'letter-spacing': .0892857143em,
       'font-family': $body-font-family,
-      'text-transform': uppercase
+      'text-transform': none
     ),
     'caption': (
       'size': .75rem,
