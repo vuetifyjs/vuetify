@@ -8,7 +8,6 @@
         <v-color-input
           hide-details="auto"
           label="Select a color"
-          prepend-inner-icon="$pip"
         ></v-color-input>
       </v-col>
 

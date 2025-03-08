@@ -4,7 +4,6 @@ import './VColorInput.sass'
 // Components
 import { makeVColorPickerProps, VColorPicker } from '@/components/VColorPicker/VColorPicker'
 import { makeVConfirmEditProps, VConfirmEdit } from '@/components/VConfirmEdit/VConfirmEdit'
-import { VIcon } from '@/components/VIcon'
 import { VMenu } from '@/components/VMenu/VMenu'
 import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextField'
 
@@ -29,21 +28,12 @@ export type VColorInputSlots = Omit<VInputSlots & VFieldSlots, 'default'> & {
 }
 
 export const makeVColorInputProps = propsFactory({
-  colorPip: {
-    type: Boolean,
-    default: true,
-  },
   hideActions: Boolean,
-  readonlyInput: Boolean,
 
   ...makeFocusProps(),
   ...makeVConfirmEditProps(),
-  ...makeVTextFieldProps({
-    placeholder: '',
-    prependInnerIcon: '$pip',
-  }),
-  ...omit(makeVColorPickerProps({
-  }), ['width']),
+  ...makeVTextFieldProps({ prependIcon: '$color' }),
+  ...omit(makeVColorPickerProps(), ['width']),
 }, 'VColorInput')
 
 export const VColorInput = genericComponent<VColorInputSlots>()({
@@ -58,19 +48,11 @@ export const VColorInput = genericComponent<VColorInputSlots>()({
   setup (props, { slots }) {
     const { isFocused, focus, blur } = useFocus(props)
     const model = useProxiedModel(props, 'modelValue')
-    const pickerModel = useProxiedModel(props, 'modelValue')
     const menu = shallowRef(false)
 
-    const colorPip = computed(() => !!props.colorPip)
     const isInteractive = computed(() => !props.disabled && !props.readonly)
 
-    const display = computed(() => {
-      const value = model.value
-
-      if (!value) return null
-
-      return value
-    })
+    const display = computed(() => model.value || null)
 
     function onKeydown (e: KeyboardEvent) {
       if (e.key !== 'Enter') return
@@ -101,28 +83,6 @@ export const VColorInput = genericComponent<VColorInputSlots>()({
       const confirmEditProps = VConfirmEdit.filterProps(props)
       const colorPickerProps = VColorPicker.filterProps(omit(props, ['active', 'color']))
       const textFieldProps = VTextField.filterProps(omit(props, ['prependInnerIcon']))
-      const hasPrepend = !!(slots.prepend)
-      const hasPrependInner = !!(slots['prepend-inner'])
-      const hasAppendInner = !!(slots['append-inner'])
-      const hasAppend = !!(slots.append)
-
-      const isReadOnlyInput = computed(() => props.readonlyInput || props.readonly)
-
-      const pipColor = computed(() => {
-        return colorPip.value ? model.value as string ?? 'on-surface' : undefined
-      })
-
-      const getPipIcon = (key: string) => {
-        const icon = key.replace(/-([a-z])/g, (_, letter) => letter.toUpperCase()) as string
-
-        return (
-          <VIcon
-            key={ key }
-            icon={ props[icon as keyof typeof props] }
-            color={ pipColor.value }
-          />
-        )
-      }
 
       return (
         <VTextField
@@ -141,25 +101,11 @@ export const VColorInput = genericComponent<VColorInputSlots>()({
           onClick:prependInner={ isInteractive.value ? onClick : undefined }
           onClick:appendInner={ isInteractive.value ? onClick : undefined }
           onUpdate:modelValue={ val => {
-            pickerModel.value = val
             model.value = val
           }}
-          readonly={ isReadOnlyInput.value }
-          prependIcon={ undefined }
-          prependInnerIcon={ undefined }
-          appendInnerIcon={ undefined }
-          appendIcon={ undefined }
         >
           {{
             ...slots,
-            prepend: ({ ...slotProps }) => {
-              return !hasPrepend && props.prependIcon ? getPipIcon('prepend-icon')
-                : slots.prepend?.(slotProps)
-            },
-            [`prepend-inner`]: slotProps => {
-              return !hasPrependInner && props.prependInnerIcon ? getPipIcon('prepend-inner-icon')
-                : slots['prepend-inner']?.(slotProps)
-            },
             default: () => {
               return (
                 <VMenu
@@ -196,14 +142,6 @@ export const VColorInput = genericComponent<VColorInputSlots>()({
                   </VConfirmEdit>
                 </VMenu>
               )
-            },
-            [`append-inner`]: slotProps => {
-              return !hasAppendInner && props.appendInnerIcon ? getPipIcon('append-inner-icon')
-                : slots['append-inner']?.(slotProps)
-            },
-            append: slotProps => {
-              return !hasAppend && props.appendIcon ? getPipIcon('append-icon')
-                : slots.append?.(slotProps)
             },
           }}
         </VTextField>
