@@ -6,17 +6,17 @@ import { VColorPickerCanvas } from './VColorPickerCanvas'
 import { VColorPickerEdit } from './VColorPickerEdit'
 import { VColorPickerPreview } from './VColorPickerPreview'
 import { VColorPickerSwatches } from './VColorPickerSwatches'
-import { makeVSheetProps, VSheet } from '@/components/VSheet/VSheet'
+import { makeVPickerProps, VPicker } from '@/labs/VPicker/VPicker'
 
 // Composables
+import { useRtl } from '@/composables'
 import { provideDefaults } from '@/composables/defaults'
-import { useRtl } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, onBeforeMount, ref, watch } from 'vue'
 import { extractColor, modes, nullColor } from './util'
-import { consoleWarn, defineComponent, HSVtoCSS, omit, parseColor, propsFactory, RGBtoHSV, useRender } from '@/util'
+import { consoleWarn, defineComponent, HSVtoCSS, parseColor, propsFactory, RGBtoHSV, useRender } from '@/util'
 
 // Types
 import type { DeepReadonly, PropType } from 'vue'
@@ -55,14 +55,7 @@ export const makeVColorPickerProps = propsFactory({
     type: [Object, String] as PropType<Record<string, unknown> | string | undefined | null>,
   },
 
-  ...omit(makeVSheetProps({ width: 300 }), [
-    'height',
-    'location',
-    'minHeight',
-    'maxHeight',
-    'minWidth',
-    'maxWidth',
-  ]),
+  ...makeVPickerProps({ hideHeader: true }),
 }, 'VColorPicker')
 
 export const VColorPicker = defineComponent({
@@ -75,7 +68,7 @@ export const VColorPicker = defineComponent({
     'update:mode': (mode: keyof typeof modes) => true,
   },
 
-  setup (props) {
+  setup (props, { slots }) {
     const mode = useProxiedModel(props, 'mode')
     const hue = ref<number | null>(null)
     const model = useProxiedModel(
@@ -138,13 +131,11 @@ export const VColorPicker = defineComponent({
     })
 
     useRender(() => {
-      const sheetProps = VSheet.filterProps(props)
+      const pickerProps = VPicker.filterProps(props)
 
       return (
-        <VSheet
-          rounded={ props.rounded }
-          elevation={ props.elevation }
-          theme={ props.theme }
+        <VPicker
+          { ...pickerProps }
           class={[
             'v-color-picker',
             rtlClasses.value,
@@ -156,58 +147,62 @@ export const VColorPicker = defineComponent({
             },
             props.style,
           ]}
-          { ...sheetProps }
-          maxWidth={ props.width }
-        >
-          { !props.hideCanvas && (
-            <VColorPickerCanvas
-              key="canvas"
-              color={ currentColor.value }
-              onUpdate:color={ updateColor }
-              disabled={ props.disabled }
-              dotSize={ props.dotSize }
-              width={ props.width }
-              height={ props.canvasHeight }
-            />
-          )}
+          v-slots={{
+            ...slots,
+            default: () => (
+              <>
+                { !props.hideCanvas && (
+                  <VColorPickerCanvas
+                    key="canvas"
+                    color={ currentColor.value }
+                    onUpdate:color={ updateColor }
+                    disabled={ props.disabled }
+                    dotSize={ props.dotSize }
+                    width={ props.width }
+                    height={ props.canvasHeight }
+                  />
+                )}
 
-          { (!props.hideSliders || !props.hideInputs) && (
-            <div key="controls" class="v-color-picker__controls">
-              { !props.hideSliders && (
-                <VColorPickerPreview
-                  key="preview"
-                  color={ currentColor.value }
-                  onUpdate:color={ updateColor }
-                  hideAlpha={ !mode.value.endsWith('a') }
-                  disabled={ props.disabled }
-                />
-              )}
+                { (!props.hideSliders || !props.hideInputs) && (
+                  <div key="controls" class="v-color-picker__controls">
+                    { !props.hideSliders && (
+                      <VColorPickerPreview
+                        key="preview"
+                        color={ currentColor.value }
+                        onUpdate:color={ updateColor }
+                        hideAlpha={ !mode.value.endsWith('a') }
+                        disabled={ props.disabled }
+                      />
+                    )}
 
-              { !props.hideInputs && (
-                <VColorPickerEdit
-                  key="edit"
-                  modes={ props.modes }
-                  mode={ mode.value }
-                  onUpdate:mode={ m => mode.value = m }
-                  color={ currentColor.value }
-                  onUpdate:color={ updateColor }
-                  disabled={ props.disabled }
-                />
-              )}
-            </div>
-          )}
+                    { !props.hideInputs && (
+                      <VColorPickerEdit
+                        key="edit"
+                        modes={ props.modes }
+                        mode={ mode.value }
+                        onUpdate:mode={ m => mode.value = m }
+                        color={ currentColor.value }
+                        onUpdate:color={ updateColor }
+                        disabled={ props.disabled }
+                      />
+                    )}
+                  </div>
+                )}
 
-          { props.showSwatches && (
-            <VColorPickerSwatches
-              key="swatches"
-              color={ currentColor.value }
-              onUpdate:color={ updateColor }
-              maxHeight={ props.swatchesMaxHeight }
-              swatches={ props.swatches }
-              disabled={ props.disabled }
-            />
-          )}
-        </VSheet>
+                { props.showSwatches && (
+                  <VColorPickerSwatches
+                    key="swatches"
+                    color={ currentColor.value }
+                    onUpdate:color={ updateColor }
+                    maxHeight={ props.swatchesMaxHeight }
+                    swatches={ props.swatches }
+                    disabled={ props.disabled }
+                  />
+                )}
+              </>
+            ),
+          }}
+        />
       )
     })
 

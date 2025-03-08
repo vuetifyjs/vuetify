@@ -13,7 +13,7 @@ import { makeVPickerProps, VPicker } from '@/labs/VPicker/VPicker'
 
 // Composables
 import { useDate } from '@/composables/date'
-import { useLocale } from '@/composables/locale'
+import { useLocale, useRtl } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
@@ -99,6 +99,7 @@ export const VDatePicker = genericComponent<new <
   setup (props, { emit, slots }) {
     const adapter = useDate()
     const { t } = useLocale()
+    const { rtlClasses } = useRtl()
 
     const model = useProxiedModel(
       props,
@@ -287,6 +288,7 @@ export const VDatePicker = genericComponent<new <
             {
               'v-date-picker--show-week': props.showWeek,
             },
+            rtlClasses.value,
             props.class,
           ]}
           style={ props.style }
