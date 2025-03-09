@@ -62,6 +62,7 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
 
     function onClickAction (e: PointerEvent) {
       e.preventDefault()
+      e.stopPropagation()
       emit('toggleExpand', e)
     }
 
