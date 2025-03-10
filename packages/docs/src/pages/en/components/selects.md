@@ -89,11 +89,11 @@ You can specify the specific properties within your items array that correspond 
 
 <ExamplesExample file="v-select/prop-custom-title-and-value" />
 
-<!-- #### Menu props
+#### Menu props
 
-Custom props can be passed directly to `v-menu` using **menuProps** prop. In this example menu is force directed to top and shifted to top.
+Custom props can be passed directly to `v-menu` using **menu-props** prop. In this example a scrim as added to the select and the menu closes when you scroll.
 
-<ExamplesExample file="v-select/prop-menu-props" /> -->
+<ExamplesExample file="v-select/prop-menu-props" />
 
 #### Custom item props
 
