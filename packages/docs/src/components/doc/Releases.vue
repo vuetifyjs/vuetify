@@ -182,9 +182,9 @@
   const router = useRouter()
   const store = useReleasesStore()
 
-  const autocomplete = ref()
-  const clicked = ref('copy-link')
-  const model = ref<Release>()
+  const autocomplete = shallowRef()
+  const clicked = shallowRef('copy-link')
+  const model = shallowRef<Release>()
   const search = shallowRef('')
   let timeout = -1 as any
 
