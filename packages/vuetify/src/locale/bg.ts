@@ -11,6 +11,12 @@ export default {
     noResultsText: 'Не са намерени записи',
     loadingText: 'Зареждане на елементи...',
   },
+  select: {
+    ariaLabel: {
+      checked: 'Checked',
+      unchecked: 'Not Checked',
+    },
+  },
   dataTable: {
     itemsPerPageText: 'Редове на страница:',
     ariaLabel: {

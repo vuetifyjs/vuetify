@@ -11,6 +11,12 @@ export default {
     noResultsText: 'לא נמצאו תוצאות מתאימות',
     loadingText: 'טוען פריט...',
   },
+  select: {
+    ariaLabel: {
+      checked: 'Checked',
+      unchecked: 'Not Checked',
+    },
+  },
   dataTable: {
     itemsPerPageText: 'שורות לעמוד:',
     ariaLabel: {
