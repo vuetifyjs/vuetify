@@ -312,7 +312,13 @@ export const VField = genericComponent<new <T>(
               },
               focus,
               blur,
-            } as VFieldSlot)}
+            } as VFieldSlot) ?? (
+              <div
+                id={ id.value }
+                class="v-field__input"
+                aria-describedby={ messagesId.value }
+              />
+            )}
           </div>
 
           { hasClear && (
