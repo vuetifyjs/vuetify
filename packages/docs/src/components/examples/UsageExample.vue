@@ -114,7 +114,9 @@
         touchless
       >
         <v-list>
-          <div class="px-4 usage-example pt-2">
+          <v-list-subheader :title="t('configuration')" />
+
+          <div class="px-4 usage-example">
             <v-defaults-provider
               :defaults="{
                 global: {
