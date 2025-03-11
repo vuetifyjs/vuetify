@@ -17,6 +17,6 @@
   const { t } = useI18n()
 
   onBeforeMount(() => {
-    if (!commits.latest) commits.fetch()
+    // if (!commits.latest) commits.fetch()
   })
 </script>

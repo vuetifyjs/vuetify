@@ -64,6 +64,7 @@ export default defineConfig(({ command, mode, isSsrBuild }) => {
       cssCodeSplit: false,
       minify: true,
       rollupOptions: {
+        maxParallelism: 2,
         output: isSsrBuild ? { inlineDynamicImports: true } : {
           // TODO: these options currently cause a request cascade
           // experimentalMinChunkSize: 20 * 1024,
