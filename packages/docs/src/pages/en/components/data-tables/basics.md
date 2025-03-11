@@ -81,7 +81,7 @@ The headers array is the core of the table. It defines which properties to displ
 All properties are optional, but at least one of **title**, **value**, or **key** should be present to display more than just an empty column:
 
 ```js
-headers = [
+const headers = [
   { title: 'No data, just a label' },
   { key: 'quantity' },
   { value: 'price' },
@@ -107,16 +107,17 @@ The **key** property is used to identify the column in slots, events, filters, a
 **key** and **value** both support dot notation to access properties of nested objects, and **value** can also be a function to combine multiple properties or do other custom formatting. If **value** is not a string then **key** must be defined.
 
 ```js
-items = [
+const items = [
   {
     id: 1,
     name: {
       first: 'John',
       last: 'Doe',
     },
-  }
+  },
 ]
-headers = [
+
+const headers = [
   { title: 'First Name', value: 'name.first' },
   { title: 'Last Name', key: 'name.last' },
   {

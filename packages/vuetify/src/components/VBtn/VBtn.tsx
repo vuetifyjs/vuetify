@@ -30,7 +30,7 @@ import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant
 import { Ripple } from '@/directives/ripple'
 
 // Utilities
-import { computed, withDirectives } from 'vue'
+import { computed, toDisplayString, withDirectives } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -70,7 +70,10 @@ export const makeVBtnProps = propsFactory({
     default: true,
   },
 
-  text: String,
+  text: {
+    type: [String, Number, Boolean],
+    default: undefined,
+  },
 
   ...makeBorderProps(),
   ...makeComponentProps(),
@@ -257,7 +260,7 @@ export const VBtn = genericComponent<VBtnSlots>()({
                   },
                 }}
               >
-                { slots.default?.() ?? props.text }
+                { slots.default?.() ?? toDisplayString(props.text) }
               </VDefaultsProvider>
             )}
           </span>

@@ -12,7 +12,7 @@ meta:
 
 Latest news, updates, and stories about Vuetify.
 
-<VoPromotionsCardVuetify />
+<PromotedEntry />
 
 ---
 

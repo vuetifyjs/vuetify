@@ -92,7 +92,7 @@ export function useValidation (
   ))
   const errorMessages = computed(() => {
     return props.errorMessages?.length
-      ? wrapInArray(props.errorMessages).concat(internalErrorMessages.value).slice(0, Math.max(0, +props.maxErrors))
+      ? wrapInArray(props.errorMessages).concat(internalErrorMessages.value).slice(0, Math.max(0, Number(props.maxErrors)))
       : internalErrorMessages.value
   })
   const validateOn = computed(() => {
@@ -197,7 +197,7 @@ export function useValidation (
     isValidating.value = true
 
     for (const rule of props.rules) {
-      if (results.length >= +(props.maxErrors ?? 1)) {
+      if (results.length >= Number(props.maxErrors ?? 1)) {
         break
       }
 

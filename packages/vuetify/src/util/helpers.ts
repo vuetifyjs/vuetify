@@ -111,7 +111,7 @@ export function createRange (length: number, start = 0): number[] {
 export function getZIndex (el?: Element | null): number {
   if (!el || el.nodeType !== Node.ELEMENT_NODE) return 0
 
-  const index = +window.getComputedStyle(el).getPropertyValue('z-index')
+  const index = Number(window.getComputedStyle(el).getPropertyValue('z-index'))
 
   if (!index) return getZIndex(el.parentNode as Element)
   return index
@@ -122,12 +122,14 @@ export function convertToUnit (str: string | number | null | undefined, unit?: s
 export function convertToUnit (str: string | number | null | undefined, unit = 'px'): string | undefined {
   if (str == null || str === '') {
     return undefined
-  } else if (isNaN(+str!)) {
+  }
+  const num = Number(str)
+  if (isNaN(num)) {
     return String(str)
-  } else if (!isFinite(+str!)) {
+  } else if (!isFinite(num)) {
     return undefined
   } else {
-    return `${Number(str)}${unit}`
+    return `${num}${unit}`
   }
 }
 

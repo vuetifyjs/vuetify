@@ -241,8 +241,8 @@ importers:
         specifier: ^2.0.4
         version: 2.0.4(vue@3.5.13(typescript@5.5.4))
       '@vuetify/one':
-        specifier: ^1.9.5
-        version: 1.9.5(@mdi/js@7.4.47(patch_hash=wt4lkgr52gphla2wb445bnli3i))(lodash-es@4.17.21)(vue@3.5.13(typescript@5.5.4))(vuetify@packages+vuetify)
+        specifier: ^1.9.6
+        version: 1.9.6(@mdi/js@7.4.47(patch_hash=wt4lkgr52gphla2wb445bnli3i))(lodash-es@4.17.21)(vue@3.5.13(typescript@5.5.4))(vuetify@packages+vuetify)
       algoliasearch:
         specifier: ^4.23.3
         version: 4.23.3
@@ -1861,6 +1861,10 @@ packages:
     resolution: {integrity: sha512-2kGiWoXaeV8HZlhU/Nml12oTbhv7j2ufsJ5vQaa0VTjzUmZVdd/nmKFRAOJ/FtjO90Qba5AnZDwsrY7ZND5udA==}
     engines: {node: '>= 16'}
 
+  '@intlify/shared@11.1.2':
+    resolution: {integrity: sha512-dF2iMMy8P9uKVHV/20LA1ulFLL+MKSbfMiixSmn6fpwqzvix38OIc7ebgnFbBqElvghZCW9ACtzKTGKsTGTWGA==}
+    engines: {node: '>= 16'}
+
   '@intlify/unplugin-vue-i18n@6.0.3':
     resolution: {integrity: sha512-9ZDjBlhUHtgjRl23TVcgfJttgu8cNepwVhWvOv3mUMRDAhjW0pur1mWKEUKr1I8PNwE4Gvv2IQ1xcl4RL0nG0g==}
     engines: {node: '>= 18'}
@@ -3213,8 +3217,8 @@ packages:
       vue: ^3.0.0
       vuetify: ^3.0.0
 
-  '@vuetify/one@1.9.5':
-    resolution: {integrity: sha512-SnJoqgNPNG0rHx3DRE9iyhaaF1P8CiIIMwTYG2INdet0ysivDNlRR3oqo08Hf7W4Gr0FiSSH9Lp6NnDpPNuSdw==}
+  '@vuetify/one@1.9.6':
+    resolution: {integrity: sha512-865hpHf9/0j3nVJ6fi2ubPvH4lJZdhwhG0VbF2GXgmxwwsnVTAu4/h3bjUMOgPWbVQLUcZMvhfI+LozyfwAdgg==}
     peerDependencies:
       '@mdi/js': 7.4.47
       lodash-es: ^4.17.21
@@ -7554,7 +7558,6 @@ packages:
     engines: {node: '>=0.6.0', teleport: '>=0.2.0'}
     deprecated: |-
       You or someone you depend on is using Q, the JavaScript Promise library that gave JavaScript developers strong feelings about promises. They can almost certainly migrate to the native JavaScript promise now. Thank you literally everyone for joining me in this bet against the odds. Be excellent to each other.
-
       (For a CapTP with native promises, see @endo/eventual-send and @endo/captp)
 
   qs@6.9.7:
@@ -10899,11 +10902,13 @@ snapshots:
 
   '@intlify/shared@11.1.1': {}
 
+  '@intlify/shared@11.1.2': {}
+
   '@intlify/unplugin-vue-i18n@6.0.3(@vue/compiler-dom@3.5.13)(eslint@8.57.0)(rollup@4.34.8)(typescript@5.5.4)(vue-i18n@11.1.1(vue@3.5.13(typescript@5.5.4)))(vue@3.5.13(typescript@5.5.4))':
     dependencies:
       '@eslint-community/eslint-utils': 4.4.0(eslint@8.57.0)
       '@intlify/bundle-utils': 10.0.0(vue-i18n@11.1.1(vue@3.5.13(typescript@5.5.4)))
-      '@intlify/shared': 11.1.1
+      '@intlify/shared': 11.1.2
       '@intlify/vue-i18n-extensions': 8.0.0(@vue/compiler-dom@3.5.13)(vue-i18n@11.1.1(vue@3.5.13(typescript@5.5.4)))(vue@3.5.13(typescript@5.5.4))
       '@rollup/pluginutils': 5.1.0(rollup@4.34.8)
       '@typescript-eslint/scope-manager': 8.24.1
@@ -12781,7 +12786,7 @@ snapshots:
       vue: 3.5.13(typescript@5.5.4)
       vuetify: link:packages/vuetify
 
-  '@vuetify/one@1.9.5(@mdi/js@7.4.47(patch_hash=wt4lkgr52gphla2wb445bnli3i))(lodash-es@4.17.21)(vue@3.5.13(typescript@5.5.4))(vuetify@packages+vuetify)':
+  '@vuetify/one@1.9.6(@mdi/js@7.4.47(patch_hash=wt4lkgr52gphla2wb445bnli3i))(lodash-es@4.17.21)(vue@3.5.13(typescript@5.5.4))(vuetify@packages+vuetify)':
     dependencies:
       '@mdi/js': 7.4.47(patch_hash=wt4lkgr52gphla2wb445bnli3i)
       lodash-es: 4.17.21

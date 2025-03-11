@@ -430,7 +430,7 @@ Control the layout of flex containers with alignment, justification and more wit
 | **flex-lg-shrink-1** | flex-shrink: 1; |
 | **flex-xl-shrink-1** | flex-shrink: 1; { style="max-height: 420px;" fixed-header } |
 
-<VoPromotionsCardVuetify />
+<PromotedEntry />
 
 ## Usage
 

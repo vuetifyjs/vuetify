@@ -150,10 +150,10 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
     }
 
     const sizerRef = ref<HTMLTextAreaElement>()
-    const rows = ref(+props.rows)
+    const rows = ref(Number(props.rows))
     const isPlainOrUnderlined = computed(() => ['plain', 'underlined'].includes(props.variant))
     watchEffect(() => {
-      if (!props.autoGrow) rows.value = +props.rows
+      if (!props.autoGrow) rows.value = Number(props.rows)
     })
     function calculateInputHeight () {
       if (!props.autoGrow) return
