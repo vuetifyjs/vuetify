@@ -34,6 +34,7 @@ The following is a list of all planned components for the year 2024.
 | [v-date-input](/components/date-inputs/)                                | *             |                               |
 | [v-calendar](/components/calendars/)                                    | *             |                               |
 | [v-time-input](https://github.com/vuetifyjs/vuetify/pull/19709)         | Q1 2025       |                               |
+| [v-color-input](/components/color-inputs/)                              |               |                               |
 | Future - v4.1+                                                          |               | TBD { .bg-surface-light }     |
 | [v-file-upload](https://github.com/vuetifyjs/vuetify/pull/19667)        | *             |                               |
 | v-date-time-picker                                                      | Q1 2025       |                               |
