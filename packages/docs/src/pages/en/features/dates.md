@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   title: Dates
   description: Vuetify has first party date support that can easily be swapped for another date library

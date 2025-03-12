@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   nav: Buttons
   title: Button component
