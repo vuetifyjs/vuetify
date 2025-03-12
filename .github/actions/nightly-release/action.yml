@@ -47,7 +47,7 @@ runs:
       shell: bash
     - run: pnpm lerna version ${{ steps.get-version.outputs.full-version }} --no-push --no-commit-hooks --force-publish --yes
       shell: bash
-    - run: pnpm conventional-changelog -p angular --outfile ./packages/vuetify/CHANGELOG.md -r 2
+    - run: pnpm conventional-changelog -p vuetify --outfile ./packages/vuetify/CHANGELOG.md -r 2
       shell: bash
     - run: >-
         node -e "fs.writeFileSync(

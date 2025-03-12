@@ -8,15 +8,15 @@ import { ref } from 'vue'
 
 describe('VNumberInput', () => {
   it.each([
-    { typing: '---', expected: '-' }, // "-" is only allowed once
-    { typing: '1-', expected: '1' }, // "-" is only at the start
-    { typing: '.', expected: '.' }, // "." is allowed at the start
-    { typing: '..', expected: '.' }, // "." is only allowed once
-    { typing: '1...0', expected: '1.0' }, // "." is only allowed once
-    { typing: '123.45.67', expected: '123.4567' }, // "." is only allowed once
-    { typing: 'ab-c8+.iop9', expected: '-8.9' }, // Only numbers, "-", "." are allowed to type in
-  ])('prevents NaN from arbitrary input', async ({ typing, expected }) => {
-    const { element } = render(VNumberInput)
+    { precision: 0, typing: '---', expected: '-' }, // "-" is only allowed once
+    { precision: 0, typing: '1-', expected: '1' }, // "-" is only at the start
+    { precision: 1, typing: '.', expected: '.' }, // "." is allowed at the start
+    { precision: 1, typing: '..', expected: '.' }, // "." is only allowed once
+    { precision: 1, typing: '1...0', expected: '1.0' }, // "." is only allowed once
+    { precision: 4, typing: '123.45.67', expected: '123.4567' }, // "." is only allowed once
+    { precision: 1, typing: 'ab-c8+.iop9', expected: '-8.9' }, // Only numbers, "-", "." are allowed to type in
+  ])('prevents NaN from arbitrary input', async ({ precision, typing, expected }) => {
+    const { element } = render(() => <VNumberInput precision={ precision } />)
     await userEvent.click(element)
     await userEvent.keyboard(typing)
     expect(screen.getByCSS('input')).toHaveValue(expected)
@@ -28,7 +28,6 @@ describe('VNumberInput', () => {
       <VNumberInput
         clearable
         v-model={ model.value }
-        readonly
       />
     ))
 
@@ -134,6 +133,7 @@ describe('VNumberInput', () => {
           <VNumberInput
             class="disabled-input-1"
             v-model={ value3.value }
+            precision={ 1 }
             min={ 0 }
             max={ 10 }
             disabled
@@ -141,6 +141,7 @@ describe('VNumberInput', () => {
           <VNumberInput
             class="disabled-input-2"
             v-model={ value4.value }
+            precision={ 1 }
             min={ 0 }
             max={ 10 }
             disabled
@@ -162,17 +163,17 @@ describe('VNumberInput', () => {
         <VNumberInput min={ 5 } max={ 15 } v-model={ model.value } />
       )
 
-      expect.element(screen.getByCSS('input')).toHaveValue('5')
+      await expect.element(screen.getByCSS('input')).toHaveValue('5')
       expect(model.value).toBe(5)
     })
 
-    it('should not bypass max', () => {
+    it('should not bypass max', async () => {
       const model = ref(20)
       render(() =>
         <VNumberInput min={ 5 } max={ 15 } v-model={ model.value } />
       )
 
-      expect.element(screen.getByCSS('input')).toHaveValue('15')
+      await expect.element(screen.getByCSS('input')).toHaveValue('15')
       expect(model.value).toBe(15)
     })
 
@@ -181,24 +182,25 @@ describe('VNumberInput', () => {
       render(() => (
         <VNumberInput
           step={ 0.03 }
+          precision={ 2 }
           v-model={ model.value }
         />
       ))
 
       await userEvent.click(screen.getByTestId('increment'))
-      expect.element(screen.getByCSS('input')).toHaveValue('0.03')
+      await expect.element(screen.getByCSS('input')).toHaveValue('0.03')
       expect(model.value).toBe(0.03)
 
       await userEvent.click(screen.getByTestId('increment'))
-      expect.element(screen.getByCSS('input')).toHaveValue('0.06')
+      await expect.element(screen.getByCSS('input')).toHaveValue('0.06')
       expect(model.value).toBe(0.06)
 
       await userEvent.click(screen.getByTestId('decrement'))
-      expect.element(screen.getByCSS('input')).toHaveValue('0.03')
+      await expect.element(screen.getByCSS('input')).toHaveValue('0.03')
       expect(model.value).toBe(0.03)
 
       await userEvent.click(screen.getByTestId('decrement'))
-      expect.element(screen.getByCSS('input')).toHaveValue('0')
+      await expect.element(screen.getByCSS('input')).toHaveValue('0.00')
       expect(model.value).toBe(0)
     })
   })

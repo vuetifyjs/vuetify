@@ -7,7 +7,7 @@ export type Category = {
   color: string
 }
 
-export type RootState = {
+type RootState = {
   apiSearch: string
   drawer: boolean | null
   toc: boolean | null
@@ -25,10 +25,10 @@ type NavItem = {
   inactiveIcon?: string
   activeIcon?: string
   items?: NavItem[]
+  emphasized?: boolean
 }
 
-export const useAppStore = defineStore({
-  id: 'app',
+export const useAppStore = defineStore('app', {
   state: () => ({
     apiSearch: '',
     drawer: null,

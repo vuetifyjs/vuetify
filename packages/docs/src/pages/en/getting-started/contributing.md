@@ -15,7 +15,7 @@ Vuetify is made possible by an amazing community that submits issues, creates pu
 
 <PageFeatures />
 
-<VoPromotionsCardVuetify />
+<PromotedEntry />
 
 It is our job to enable you to create amazing applications. A lot of the time, you come across something that can be made better. Maybe you find a bug, or you have an idea for additional functionality. That's great! It's as easy as cloning the Vuetify repository to get started working in a development environment.
 
@@ -96,6 +96,7 @@ You can also test Vuetify in your own project using [`pnpm link`](https://pnpm.i
 - Run `pnpm link --global`
 - Navigate to your project's directory
 - Run `pnpm link --global vuetify`
+- Clear Vite's cache by deleting  `node_modules/.vite` folder
 
 If your project is using vuetify-loader you will have to run `pnpm build:lib` in the vuetify package to see changes, otherwise you can use `pnpm watch` for incremental builds.
 

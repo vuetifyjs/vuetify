@@ -26,7 +26,7 @@ This feature requires [v3.6.5](/getting-started/release-notes/?version=v3.6.5)
 
 ## Installation
 
-Labs components require a manual import and installation of the component.
+Labs components require manual import and registration with the Vuetify instance.
 
 ```js { resource="src/plugins/vuetify.js" }
 import { VStepperVertical } from 'vuetify/labs/VStepperVertical'
