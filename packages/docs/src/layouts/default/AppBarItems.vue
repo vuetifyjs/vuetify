@@ -10,10 +10,6 @@
       <enterprise-link />
 
       <template v-if="$vuetify.breakpoint.mdAndUp">
-        <vertical-divider />
-
-        <store-link />
-
         <settings-toggle />
       </template>
     </template>

@@ -1,5 +1,7 @@
 <template>
   <v-app>
+    <default-explore-system-bar />
+
     <default-bar />
 
     <default-drawer />
@@ -25,6 +27,7 @@
   // Components
   import DefaultBar from './AppBar'
   import DefaultDrawer from './Drawer'
+  import DefaultExploreSystemBar from '@/layouts/default/ExploreSystemBar'
   import DefaultFabToTop from './FabToTop'
   import DefaultPwaSnackbar from './PwaSnackbar'
   import DefaultSettings from './settings/Settings'
@@ -43,6 +46,7 @@
     components: {
       DefaultBar,
       DefaultDrawer,
+      DefaultExploreSystemBar,
       DefaultFabToTop,
       DefaultPwaSnackbar,
       DefaultSettings,

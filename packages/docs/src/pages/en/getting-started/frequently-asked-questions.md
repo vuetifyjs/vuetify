@@ -16,7 +16,8 @@ Stuck on a particular problem? Check some of these common gotchas before creatin
 
 ## Table of Contents
 
-- [When will Vuetify v3 be released?](#version-3)
+- [When will Vuetify 3 be released?](#version-3)
+- [Is Vuetify 2 still supported?](#version-2)
 - [Why is Search Vuetify not working properly?](#search-broke)
 - [My application won't compile due to sass / scss errors.](#sass-compile-error)
 - [Are there examples on how the v2 grid compares to v1.5?](#v2-v15-grid)
@@ -50,11 +51,15 @@ Have a question that belongs here? Tell us in our [Discord Community](https://co
 
 ---
 
-- **When will Vuetify v3 be released?** { #version-3 }
+- **When will Vuetify 3 be released?** { #version-3 }
 
-  Follow our progress on [GitHub](https://titan.vuetifyjs.com) or read and overview of what's to come on our [Roadmap](/introduction/roadmap/).
+  Vuetify 3 released on October 2022. For more information, you can visit the [Releases](https://vuetifyjs.com/getting-started/release-notes/?version=v3.0.0) page.
 
 <br>
+
+- **Is Vuetify 2 still supported?**{ #version-2 }
+
+  Vuetify 2 reached End of Life (EOL) on January 25th, 2025. For security and commercial support, see our partner, [HeroDevs](https://www.herodevs.com/support/vuetify-nes?utm_source=partnership&utm_medium=partnership&utm_campaign=partnership&utm_id=vuetify2).
 
 - **My application won't compile due to sass / scss errors.**{ #sass-compile-error }
 

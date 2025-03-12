@@ -119,6 +119,11 @@
           title: 'twitter',
         },
         {
+          icon: '$mdiFacebook',
+          href: 'https://www.facebook.com/vuetifyjs',
+          title: 'facebook',
+        },
+        {
           icon: '$mdiDiscord',
           href: 'https://community.vuetifyjs.com',
           title: 'discord',

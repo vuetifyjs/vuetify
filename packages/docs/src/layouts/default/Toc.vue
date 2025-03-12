@@ -19,7 +19,7 @@
       />
     </template>
 
-    <ul>
+    <ul class="mb-2">
       <router-link
         v-for="({ to, level, text }, i) in toc"
         :key="to"
@@ -46,6 +46,18 @@
         </li>
       </router-link>
     </ul>
+
+    <a
+      href="https://snips.vuetifyjs.com"
+      rel="noopener noreferrer sponsored"
+      target="_blank"
+    >
+      <v-img
+        class="mx-auto"
+        src="https://cdn.cosmicjs.com/f406ce60-2c4f-11ef-adb1-8b946b3a80e4-Snips-spot.png"
+        style="width: 200px;"
+      />
+    </a>
   </v-navigation-drawer>
 </template>
 

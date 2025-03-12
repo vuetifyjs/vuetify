@@ -1,13 +1,15 @@
 <template>
   <app-btn
-    href="https://vuetifyjs.com/en/introduction/enterprise-support/"
-    path="enterprise"
+    to="/about/eol"
     active
+    class="ml-2 mr-5"
+    min-width="0"
     color="primary"
-    class="ml-2"
     @click="onClick"
   >
-    <i18n path="get-help" />
+    <v-badge content="NEW" color="success">
+      EOL
+    </v-badge>
   </app-btn>
 </template>
 

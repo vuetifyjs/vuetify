@@ -23,6 +23,11 @@
     computed: {
       items () {
         return [
+          { heading: this.$t('commercial-support') },
+          {
+            title: 'HeroDevs',
+            href: 'https://www.herodevs.com/support/vuetify-nes?utm_source=partnership&utm_medium=partnership&utm_campaign=partnership&utm_id=vuetify2',
+          },
           { heading: this.$t('community-support') },
           {
             title: 'Discord',
