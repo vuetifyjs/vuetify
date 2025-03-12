@@ -108,11 +108,6 @@
           title: 'Reddit'
         },
         {
-          icon: 'mdi-medium',
-          href: 'https://medium.com/vuetify',
-          title: 'Medium'
-        },
-        {
           icon: 'mdi-github-circle',
           href: 'https://github.com/vuetifyjs/vuetify',
           title: 'Github'

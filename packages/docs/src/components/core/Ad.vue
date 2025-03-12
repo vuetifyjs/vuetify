@@ -4,15 +4,7 @@
     shrink
   >
     <template v-if="shouldShowAd">
-      <ad-system-bar v-if="viewport === 'xs' && $vuetify.breakpoint.xsOnly">
-        <ad-shown :viewport="viewport" />
-      </ad-system-bar>
-
-      <ad-bottom-nav v-else-if="viewport === 'sm' && $vuetify.breakpoint.smOnly">
-        <ad-shown :viewport="viewport" />
-      </ad-bottom-nav>
-
-      <ad-drawer v-else-if="viewport === 'md' && $vuetify.breakpoint.mdAndUp">
+      <ad-drawer v-if="viewport === 'md' && $vuetify.breakpoint.mdAndUp">
         <v-layout
           column
           fill-height
@@ -23,10 +15,17 @@
           >
             <core-toc />
 
-            <ad-shown
-              :viewport="viewport"
-              style="margin-bottom: 72px;"
-            />
+            <a
+              href="https://snips.vuetifyjs.com"
+              rel="noopener noreferrer sponsored"
+              target="_blank"
+            >
+              <v-img
+                class="mx-auto"
+                src="https://cdn.cosmicjs.com/f406ce60-2c4f-11ef-adb1-8b946b3a80e4-Snips-spot.png"
+                style="width: 164px;"
+              />
+            </a>
           </v-flex>
         </v-layout>
       </ad-drawer>

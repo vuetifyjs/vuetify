@@ -30,10 +30,6 @@
     <v-spacer />
 
     <v-toolbar-items>
-      <core-store />
-      <core-sponsor />
-      <core-enterprise />
-      <core-versions />
       <core-locales />
     </v-toolbar-items>
   </v-toolbar>

@@ -6,6 +6,11 @@
       "type": "section",
       "children": [
         {
+          "type": "alert",
+          "lang": "alert0",
+          "value": "error"
+        },
+        {
           "type": "heading",
           "lang": "browserHeader"
         },

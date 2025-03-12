@@ -1,7 +1,7 @@
 {
   "announcementBanner": "Aww yisss, this is an exciting announcement! Or maybe its an advertisement!",
   "heading1": "Vuetify",
-  "heading1cont": "Material Component Framework",
+  "heading1cont": "Vue Component Framework",
   "getStarted": "はじめる",
   "getHelp": "ヘルプ",
   "features": [

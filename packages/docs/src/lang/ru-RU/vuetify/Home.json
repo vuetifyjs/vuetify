@@ -1,7 +1,7 @@
 {
   "announcementBanner": "Это захватывающее объявление! Или, может быть, это реклама!",
   "heading1": "Vuetify",
-  "heading1cont": "Material Component Framework",
+  "heading1cont": "Vue Component Framework",
   "getStarted": "Начать изучение",
   "getHelp": "Помогите",
   "features": [
@@ -12,7 +12,7 @@
     },
     {
       "img": "https://cdn.vuetifyjs.com/images/home/feature2.svg",
-      "title": "Семантика Material Components",
+      "title": "Семантика Vue Components",
       "text": "Будьте готовы заполучить огромное количество специализированных компонентов в своё распоряжение. С более чем 80 компонентами, у вас будет решение для любого приложения."
     },
     {

@@ -1,4 +1,5 @@
 {
+  "alert0": "*Warning*: You are viewing documentation for Vuetify 1. For instructions on installing Vuetify 3, navigate to the [Version 3 Installation Guide](https://vuetifyjs.com/getting-started/installation/)",
   "header": "# Quick start",
   "headerText": "Use one of the Vuetify Vue CLI packages _(based on the official examples)_ to get your project started in no time. Vuetify supports **SSR** (server-side rendering), **SPA** (single page application), **PWA** (progressive web application) and standard **HTML** pages.",
   "vueCliHeader": "## Vue CLI-3 Install",
