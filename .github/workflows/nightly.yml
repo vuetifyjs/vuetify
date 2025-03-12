@@ -43,7 +43,7 @@ jobs:
               echo "Last commit was more than 24 hours ago, skipping release"
               exit 1
           fi
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         with:
           path: |
             node_modules
@@ -86,7 +86,7 @@ jobs:
               echo "Last commit was more than 24 hours ago, skipping tests"
               exit 1
           fi
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         with:
           path: |
             node_modules
