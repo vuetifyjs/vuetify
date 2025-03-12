@@ -221,6 +221,7 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
                     },
                   ]}
                   data-v-date={ !item.isDisabled ? item.isoDate : undefined }
+                  data-today={ item.isToday ? 'true' : undefined }
                 >
                   { (props.showAdjacentMonths || !item.isAdjacent) && (
                     slots.day?.(slotProps) ?? (<VBtn { ...slotProps.props } />)
