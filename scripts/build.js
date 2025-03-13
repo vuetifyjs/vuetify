@@ -1,5 +1,4 @@
 import spawn from 'cross-spawn'
-// const spawn = require('cross-spawn')
 
 let target = process.argv[2]
 const alias = {

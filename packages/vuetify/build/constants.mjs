@@ -1,6 +1,6 @@
 import packageJson from '../package.json' with { type: 'json' }
 import path from 'upath'
-import { fileURLToPath } from 'url'
+import { fileURLToPath } from 'node:url'
 
 export const banner = `/*!
 * Vuetify v${packageJson.version}

@@ -1,7 +1,7 @@
 import path from 'path'
-import fs from 'fs/promises'
-import { readFileSync } from 'fs'
-import { fileURLToPath } from 'url'
+import fs from 'node:fs/promises'
+import { readFileSync } from 'node:fs'
+import { fileURLToPath } from 'node:url'
 
 import dts from 'rollup-plugin-dts'
 import alias from '@rollup/plugin-alias'
