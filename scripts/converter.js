@@ -5,11 +5,6 @@ import glob from 'glob'
 import stringify from 'stringify-object'
 import url from 'node:url'
 
-// const fs = require('fs')
-// const path = require('path')
-// const glob = require('glob')
-// const stringify = require('stringify-object')
-// const resolve = file => path.resolve(__dirname, file)
 const root = path.dirname(url.fileURLToPath(import.meta.url))
 const resolve = file => path.resolve(root, file)
 

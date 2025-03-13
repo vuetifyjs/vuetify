@@ -1,16 +1,9 @@
-import semver from  'semver'
-import shell from  'shelljs'
-import inquirer from  'inquirer'
-import lerna from  '../lerna.json' with { type: 'json' }
-// const semver = require('semver')
-// const shell = require('shelljs')
-// const inquirer = require('inquirer')
-// const version = require('../lerna.json').version
+import semver from 'semver'
+import shell from 'shelljs'
+import inquirer from 'inquirer'
+import lerna from '../lerna.json' with { type: 'json' }
 
 if (process.env.CI) process.exit(0)
-
-console.log(lerna.version)
-process.exit(0)
 
 /** @param command {string} */
 function exec (command) {

@@ -1,5 +1,4 @@
 import shell from 'shelljs'
-// const shell = require('shelljs')
 
 let branch = exec('git symbolic-ref --short HEAD')
 

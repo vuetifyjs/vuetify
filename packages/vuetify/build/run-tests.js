@@ -1,4 +1,4 @@
-import { spawn } from 'child_process'
+import spawn from 'cross-spawn'
 
 const args = process.argv.slice(2)
 

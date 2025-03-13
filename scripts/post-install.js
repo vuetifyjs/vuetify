@@ -2,9 +2,7 @@ import shell from 'shelljs'
 import fs from 'node:fs'
 import path from 'node:path'
 import url from 'node:url'
-// const shell = require('shelljs')
-// const fs = require('fs')
-// const path = require('path')
+
 const root = path.dirname(url.fileURLToPath(import.meta.url))
 const resolve = target => path.resolve(root, target)
 

@@ -1,5 +1,4 @@
 import fs from 'node:fs'
-// const fs = require('fs')
 
 const [
   messageFile,

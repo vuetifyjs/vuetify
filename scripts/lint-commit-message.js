@@ -1,5 +1,4 @@
 import fs from 'node:fs'
-// const fs = require('fs')
 
 const reset = '\x1b[0m'
 const red = '\x1b[31m'
