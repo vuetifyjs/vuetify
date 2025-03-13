@@ -27,6 +27,7 @@ describe('mask', () => {
     [{ mask: '#', modelValue: null }, ''],
     [{ mask: '\\#(###)', modelValue: '123' }, '#(123)'],
     [{ mask: '\\####', modelValue: '1' }, '#1'],
+    [{ mask: '+38(###)', modelValue: '43' }, '+38(43'],
   ])('maskText %#', (props, expected) => {
     const { maskText } = useMask(props as MaskProps, ref(undefined))
     expect(maskText(props.modelValue)).toEqual(expected)
@@ -44,6 +45,8 @@ describe('mask', () => {
     [{ mask: '\\####', modelValue: '#(123)' }, '(123)'],
     [{ mask: '\\####', modelValue: '#1' }, '1'],
     [{ mask: '#-#', modelValue: '2-23' }, '223'],
+    [{ mask: '+38(###)', modelValue: '+38(43' }, '43'],
+    [{ mask: '+38(###)', modelValue: '43' }, '43'],
     [{ mask: '', modelValue: null }, null],
   ])('unmaskText %#', (props, expected) => {
     const { unmaskText } = useMask(props as MaskProps, ref(undefined))

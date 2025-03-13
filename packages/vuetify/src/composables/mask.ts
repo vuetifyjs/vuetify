@@ -173,8 +173,19 @@ export function useMask (props: MaskProps, inputRef: Ref<HTMLInputElement | unde
         continue
       }
 
-      if (mchar !== tchar) {
+      if (maskValidates(mchar, tchar)) {
+        // masked char
         newText += tchar
+        textIndex++
+        maskIndex++
+        continue
+      } else if (mchar !== tchar) {
+        // input doesn't match mask, skip forward until it does
+        while (true) {
+          const mchar = mask.value[maskIndex++]
+          if (mchar == null || maskValidates(mchar, tchar)) break
+        }
+        continue
       }
 
       textIndex++
