@@ -95,32 +95,70 @@ export function useMask (props: MaskProps, inputRef: Ref<HTMLInputElement | unde
     let newText = ''
 
     while (maskIndex < masks.value.length) {
-      const mask = masks.value[maskIndex]
+      const mchar = masks.value[maskIndex]
+      const tchar = text[textIndex]
 
-      // Assign the next character
-      const char = text[textIndex]
+      // Escaped character in mask, the next mask character is inserted
+      if (mchar === '\\') {
+        newText += masks.value[maskIndex + 1]
+        maskIndex += 2
+        continue
+      }
 
-      // Check if mask is delimiter
-      // and current char matches
-      if (!isMask(mask)) {
-        newText += mask
-        if (char === mask) {
+      if (!isMask(mchar)) {
+        newText += mchar
+        if (tchar === mchar) {
           textIndex++
         }
-      // Check if is mask and validates
-      } else if (maskValidates(mask as MaskType, char)) {
-        newText += convert(mask as MaskType, char)
+      } else if (maskValidates(mchar as MaskType, tchar)) {
+        newText += convert(mchar as MaskType, tchar)
         textIndex++
       } else {
-        return newText
+        break
       }
 
       maskIndex++
     }
     return newText
   }
-  function unmaskText (text: string | null): string {
-    return text ? String(text).replace(new RegExp(defaultDelimiters.source, 'g'), '') : text!
+  function unmaskText (text: string | null): string | null {
+    if (text == null) return null
+
+    if (!masks.value.length || !text.length) return text
+
+    let textIndex = 0
+    let maskIndex = 0
+    let newText = ''
+
+    while (true) {
+      const mchar = masks.value[maskIndex]
+      const tchar = text[textIndex]
+
+      if (tchar == null) break
+
+      if (mchar == null) {
+        newText += tchar
+        textIndex++
+        continue
+      }
+
+      // Escaped character in mask, skip the next input character
+      if (mchar === '\\') {
+        if (tchar === masks.value[maskIndex + 1]) {
+          textIndex++
+        }
+        maskIndex += 2
+        continue
+      }
+
+      if (mchar !== tchar) {
+        newText += tchar
+      }
+
+      textIndex++
+      maskIndex++
+    }
+    return newText
   }
   function setCaretPosition (newSelection: number) {
     selection.value = newSelection
