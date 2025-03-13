@@ -1,33 +1,43 @@
 // Utilities
 import { computed, shallowRef } from 'vue'
-import { propsFactory } from '@/util'
+import { isObject, propsFactory } from '@/util'
 
 // Types
-import type { Ref } from 'vue'
+import type { PropType, Ref } from 'vue'
 
 export interface MaskProps {
-  mask: string | undefined
+  mask: string | MaskOptions | undefined
   returnMaskedValue?: Boolean
 }
 
+export interface MaskOptions {
+  mask: string
+  tokens: Record<string, MaskItem>
+}
+
 export const makeMaskProps = propsFactory({
-  mask: String,
+  mask: [String, Object] as PropType<string | MaskOptions>,
   returnMaskedValue: Boolean,
 }, 'mask')
 
-export interface MaskItem {
-  test: (char: string) => boolean
+export type MaskItem = {
   convert?: (char: string) => string
-}
+} & ({
+  pattern?: never
+  test: (char: string) => boolean
+} | {
+  pattern: RegExp
+  test?: never
+})
 
 export const defaultDelimiters = /[-!$%^&*()_+|~=`{}[\]:";'<>?,./\\ ]/
 
-export type MaskType = '#' | 'A' | 'a' | 'N' | 'n' | 'X'
-
-const preDefinedMap: Record<string, string> = {
+const presets: Record<string, string> = {
   'credit-card': '#### - #### - #### - ####',
   date: '##/##/####',
-  'date-with-time': '##/##/#### ##:##',
+  'date-time': '##/##/#### ##:##',
+  'iso-date': '####-##-##',
+  'iso-date-time': '####-##-## ##:##',
   phone: '(###) ### - ####',
   social: '###-##-####',
   time: '##:##',
@@ -38,69 +48,80 @@ export function isMaskDelimiter (char: string): boolean {
   return char ? defaultDelimiters.test(char) : false
 }
 
-const allowedMasks: Record<MaskType, MaskItem> = {
+const defaultTokens: Record<string, MaskItem> = {
   '#': {
-    test: (char: string) => /[0-9]/.test(char),
+    pattern: /[0-9]/,
   },
   A: {
-    test: (char: string) => /[A-Z]/i.test(char),
-    convert: (char: string) => char.toUpperCase(),
+    pattern: /[A-Z]/i,
+    convert: v => v.toUpperCase(),
   },
   a: {
-    test: (char: string) => /[a-z]/i.test(char),
-    convert: (char: string) => char.toLowerCase(),
+    pattern: /[a-z]/i,
+    convert: v => v.toLowerCase(),
   },
   N: {
-    test: (char: string) => /[0-9A-Z]/i.test(char),
-    convert: (char: string) => char.toUpperCase(),
+    pattern: /[0-9A-Z]/i,
+    convert: v => v.toUpperCase(),
   },
   n: {
-    test: (char: string) => /[0-9a-z]/i.test(char),
-    convert: (char: string) => char.toLowerCase(),
+    pattern: /[0-9a-z]/i,
+    convert: v => v.toLowerCase(),
   },
   X: {
-    test: isMaskDelimiter,
+    pattern: defaultDelimiters,
   },
-}
-
-function isMask (char: string): boolean {
-  return allowedMasks.hasOwnProperty(char)
-}
-
-function maskValidates (mask: MaskType, char: string): boolean {
-  if (char == null || !isMask(mask)) return false
-  return allowedMasks[mask].test(char)
-}
-
-function convert (mask: MaskType, char: string): string {
-  return allowedMasks[mask].convert ? allowedMasks[mask].convert!(char) : char
 }
 
 export function useMask (props: MaskProps, inputRef: Ref<HTMLInputElement | undefined>) {
-  const rawMask = computed(() => {
-    const preDefined = props.mask ? preDefinedMap[props.mask] : undefined
-    return preDefined ?? props.mask
+  const mask = computed(() => {
+    if (typeof props.mask === 'string') {
+      if (props.mask in presets) return presets[props.mask]
+      return props.mask
+    }
+    return props.mask?.mask ?? ''
   })
-  const masks = computed(() => rawMask.value ? rawMask.value.split('') : [])
+  const tokens = computed(() => {
+    return {
+      ...defaultTokens,
+      ...(isObject(props.mask) ? props.mask.tokens : null),
+    }
+  })
   const selection = shallowRef(0)
   const lazySelection = shallowRef(0)
+
+  function isMask (char: string): boolean {
+    return char in tokens.value
+  }
+
+  function maskValidates (mask: string, char: string): boolean {
+    if (char == null || !isMask(mask)) return false
+    const item = tokens.value[mask]
+    if (item.pattern) return item.pattern.test(char)
+    return item.test(char)
+  }
+
+  function convert (mask: string, char: string): string {
+    const item = tokens.value[mask]
+    return item.convert ? item.convert(char) : char
+  }
 
   function maskText (text: string | null | undefined): string {
     if (text == null) return ''
 
-    if (!masks.value.length || !text.length) return text
+    if (!mask.value.length || !text.length) return text
 
     let textIndex = 0
     let maskIndex = 0
     let newText = ''
 
-    while (maskIndex < masks.value.length) {
-      const mchar = masks.value[maskIndex]
+    while (maskIndex < mask.value.length) {
+      const mchar = mask.value[maskIndex]
       const tchar = text[textIndex]
 
       // Escaped character in mask, the next mask character is inserted
       if (mchar === '\\') {
-        newText += masks.value[maskIndex + 1]
+        newText += mask.value[maskIndex + 1]
         maskIndex += 2
         continue
       }
@@ -110,8 +131,8 @@ export function useMask (props: MaskProps, inputRef: Ref<HTMLInputElement | unde
         if (tchar === mchar) {
           textIndex++
         }
-      } else if (maskValidates(mchar as MaskType, tchar)) {
-        newText += convert(mchar as MaskType, tchar)
+      } else if (maskValidates(mchar, tchar)) {
+        newText += convert(mchar, tchar)
         textIndex++
       } else {
         break
@@ -121,17 +142,18 @@ export function useMask (props: MaskProps, inputRef: Ref<HTMLInputElement | unde
     }
     return newText
   }
+
   function unmaskText (text: string | null): string | null {
     if (text == null) return null
 
-    if (!masks.value.length || !text.length) return text
+    if (!mask.value.length || !text.length) return text
 
     let textIndex = 0
     let maskIndex = 0
     let newText = ''
 
     while (true) {
-      const mchar = masks.value[maskIndex]
+      const mchar = mask.value[maskIndex]
       const tchar = text[textIndex]
 
       if (tchar == null) break
@@ -144,7 +166,7 @@ export function useMask (props: MaskProps, inputRef: Ref<HTMLInputElement | unde
 
       // Escaped character in mask, skip the next input character
       if (mchar === '\\') {
-        if (tchar === masks.value[maskIndex + 1]) {
+        if (tchar === mask.value[maskIndex + 1]) {
           textIndex++
         }
         maskIndex += 2
@@ -160,6 +182,7 @@ export function useMask (props: MaskProps, inputRef: Ref<HTMLInputElement | unde
     }
     return newText
   }
+
   function setCaretPosition (newSelection: number) {
     selection.value = newSelection
     inputRef.value && inputRef.value.setSelectionRange(selection.value, selection.value)
