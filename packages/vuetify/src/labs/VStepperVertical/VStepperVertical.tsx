@@ -12,21 +12,22 @@ import { computed, ref, toRefs } from 'vue'
 import { genericComponent, getPropertyFromItem, omit, propsFactory, useRender } from '@/util'
 
 // Types
+import type { StepperVerticalItemActionSlot } from './VStepperVerticalItem'
 import type { VStepperSlot } from '@/components/VStepper/VStepper'
-import type { StepperItem, StepperItemSlot } from '@/components/VStepper/VStepperItem'
+import type { StepperItemSlot } from '@/components/VStepper/VStepperItem'
+import type { GenericProps } from '@/util'
 
-export type VStepperVerticalSlots = {
-  actions: StepperItemSlot
-  default: VStepperSlot & { step: unknown }
-  icon: StepperItemSlot
-  title: StepperItemSlot
-  subtitle: StepperItemSlot
-  item: StepperItem
-  prev: StepperItemSlot
-  next: StepperItemSlot
+export type VStepperVerticalSlots<T> = {
+  actions: StepperVerticalItemActionSlot<T>
+  default: VStepperSlot & { step: T }
+  icon: StepperItemSlot<T>
+  title: StepperItemSlot<T>
+  subtitle: StepperItemSlot<T>
+  prev: StepperVerticalItemActionSlot<T>
+  next: StepperVerticalItemActionSlot<T>
 } & {
-  [key: `header-item.${string}`]: StepperItemSlot
-  [key: `item.${string}`]: StepperItem
+  [key: `header-item.${string}`]: StepperItemSlot<T>
+  [key: `item.${string}`]: StepperItemSlot<T>
 }
 
 export const makeVStepperVerticalProps = propsFactory({
@@ -46,7 +47,13 @@ export const makeVStepperVerticalProps = propsFactory({
   }), ['static']),
 }, 'VStepperVertical')
 
-export const VStepperVertical = genericComponent<VStepperVerticalSlots>()({
+export const VStepperVertical = genericComponent<new <T = number>(
+  props: {
+    modelValue?: T
+    'onUpdate:modelValue'?: (value: T) => void
+  },
+  slots: VStepperVerticalSlots<T>,
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VStepperVertical',
 
   props: makeVStepperVerticalProps(),
@@ -57,7 +64,7 @@ export const VStepperVertical = genericComponent<VStepperVerticalSlots>()({
 
   setup (props, { slots }) {
     const vExpansionPanelsRef = ref<typeof VExpansionPanels>()
-    const { color, editable, prevText, nextText, hideActions } = toRefs(props)
+    const { color, eager, editable, prevText, nextText, hideActions } = toRefs(props)
 
     const model = useProxiedModel(props, 'modelValue')
     const items = computed(() => props.items.map((item, index) => {
@@ -74,6 +81,7 @@ export const VStepperVertical = genericComponent<VStepperVerticalSlots>()({
     provideDefaults({
       VStepperVerticalItem: {
         color,
+        eager,
         editable,
         prevText,
         nextText,
@@ -107,10 +115,7 @@ export const VStepperVertical = genericComponent<VStepperVerticalSlots>()({
         >
           {{
             ...slots,
-            default: ({
-              prev,
-              next,
-            }) => {
+            default: ({ prev, next }) => {
               return (
                 <>
                   { items.value.map(({ raw, ...item }) => (

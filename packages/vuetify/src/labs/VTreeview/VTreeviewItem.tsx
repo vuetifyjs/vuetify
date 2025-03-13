@@ -3,24 +3,20 @@ import './VTreeviewItem.sass'
 
 // Components
 import { VBtn } from '@/components/VBtn'
-import { VListItemAction, VListItemSubtitle, VListItemTitle } from '@/components/VList'
+import { VListItemAction } from '@/components/VList'
 import { makeVListItemProps, VListItem } from '@/components/VList/VListItem'
 import { VProgressCircular } from '@/components/VProgressCircular'
 
 // Composables
-import { useDensity } from '@/composables/density'
 import { IconValue } from '@/composables/icons'
-import { useNestedItem } from '@/composables/nested/nested'
-import { useLink } from '@/composables/router'
-import { genOverlays } from '@/composables/variant'
 
 // Utilities
-import { computed, inject, ref } from 'vue'
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { computed, inject, ref, toRaw } from 'vue'
+import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import { VTreeviewSymbol } from './shared'
-import type { ListItemSlot, VListItemSlots } from '@/components/VList/VListItem'
+import type { VListItemSlots } from '@/components/VList/VListItem'
 
 export const makeVTreeviewItemProps = propsFactory({
   loading: Boolean,
@@ -34,176 +30,91 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
 
   props: makeVTreeviewItemProps(),
 
-  setup (props, { attrs, slots, emit }) {
-    const link = useLink(props, attrs)
-    const rawId = computed(() => props.value === undefined ? link.href.value : props.value)
+  emits: {
+    toggleExpand: (value: PointerEvent) => true,
+  },
+
+  setup (props, { slots, emit }) {
+    const visibleIds = inject(VTreeviewSymbol, { visibleIds: ref() }).visibleIds
+
     const vListItemRef = ref<VListItem>()
 
-    const {
-      activate,
-      isActivated,
-      select,
-      isSelected,
-      isIndeterminate,
-      isGroupActivator,
-      root,
-      id,
-    } = useNestedItem(rawId, false)
-
     const isActivatableGroupActivator = computed(() =>
-      (root.activatable.value) &&
-      isGroupActivator
+      (vListItemRef.value?.root.activatable.value) &&
+      vListItemRef.value?.isGroupActivator
     )
-
-    const { densityClasses } = useDensity(props, 'v-list-item')
-
-    const slotProps = computed(() => ({
-      isActive: isActivated.value,
-      select,
-      isSelected: isSelected.value,
-      isIndeterminate: isIndeterminate.value,
-    } satisfies ListItemSlot))
-
+    const vListItemRefIsClickable = computed(() => (
+      vListItemRef.value?.link.isClickable.value ||
+      (props.value != null && !!vListItemRef.value?.list)
+    ))
     const isClickable = computed(() =>
       !props.disabled &&
       props.link !== false &&
-      (props.link || link.isClickable.value || (props.value != null && !!vListItemRef.value?.list))
+      (props.link || vListItemRefIsClickable.value || isActivatableGroupActivator.value)
     )
+    const isFiltered = computed(() => visibleIds.value && !visibleIds.value.has(toRaw(vListItemRef.value?.id)))
 
-    function activateItem (e: MouseEvent | KeyboardEvent) {
-      if (
-        !isClickable.value ||
-        (!isActivatableGroupActivator.value && isGroupActivator)
-      ) return
-
-      if (root.activatable.value) {
-        if (isActivatableGroupActivator.value) {
-          activate(!isActivated.value, e)
-        } else {
-          vListItemRef.value?.activate(!vListItemRef.value?.isActivated, e)
-        }
+    function activateGroupActivator (e: MouseEvent | KeyboardEvent) {
+      if (isClickable.value && isActivatableGroupActivator.value) {
+        vListItemRef.value?.activate(!vListItemRef.value?.isActivated, e)
       }
     }
 
-    function onKeyDown (e: KeyboardEvent) {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault()
-        activateItem(e)
-      }
+    function onClickAction (e: PointerEvent) {
+      e.preventDefault()
+      emit('toggleExpand', e)
     }
-
-    const visibleIds = inject(VTreeviewSymbol, { visibleIds: ref() }).visibleIds
 
     useRender(() => {
-      const hasTitle = (slots.title || props.title != null)
-      const hasSubtitle = (slots.subtitle || props.subtitle != null)
-      const listItemProps = VListItem.filterProps(props)
+      const listItemProps = omit(VListItem.filterProps(props), ['onClick'])
       const hasPrepend = slots.prepend || props.toggleIcon
 
-      return isActivatableGroupActivator.value
-        ? (
-          <div
-            class={[
-              'v-list-item',
-              'v-list-item--one-line',
-              'v-treeview-item',
-              'v-treeview-item--activetable-group-activator',
-              {
-                'v-list-item--active': isActivated.value || isSelected.value,
-                'v-treeview-item--filtered': visibleIds.value && !visibleIds.value.has(id.value),
-              },
-              densityClasses.value,
-              props.class,
-            ]}
-            onClick={ activateItem }
-            v-ripple={ isClickable.value && props.ripple }
-          >
-            <>
-              { genOverlays(isActivated.value || isSelected.value, 'v-list-item') }
-              { props.toggleIcon && (
-                <VListItemAction start={ false }>
-                  <VBtn
-                    density="compact"
-                    icon={ props.toggleIcon }
-                    loading={ props.loading }
-                    variant="text"
-                    onClick={ props.onClick }
-                  >
-                    {{
-                      loader () {
-                        return (
-                          <VProgressCircular
-                            indeterminate="disable-shrink"
-                            size="20"
-                            width="2"
-                          />
-                        )
-                      },
-                    }}
-                  </VBtn>
-                </VListItemAction>
-              )}
-
-             </>
-
-            <div class="v-list-item__content" data-no-activator="">
-              { hasTitle && (
-                <VListItemTitle key="title">
-                  { slots.title?.({ title: props.title }) ?? props.title }
-                </VListItemTitle>
-              )}
-
-              { hasSubtitle && (
-                <VListItemSubtitle key="subtitle">
-                  { slots.subtitle?.({ subtitle: props.subtitle }) ?? props.subtitle }
-                </VListItemSubtitle>
-              )}
-
-              { slots.default?.(slotProps.value) }
-            </div>
-          </div>
-        ) : (
+      return (
         <VListItem
           ref={ vListItemRef }
           { ...listItemProps }
+          active={ vListItemRef.value?.isActivated }
           class={[
             'v-treeview-item',
             {
-              'v-treeview-item--filtered': visibleIds.value && !visibleIds.value.has(id.value),
+              'v-treeview-item--activatable-group-activator': isActivatableGroupActivator.value,
+              'v-treeview-item--filtered': isFiltered.value,
             },
             props.class,
           ]}
-          value={ id.value }
-          onClick={ activateItem }
-          onKeydown={ isClickable.value && onKeyDown }
+          ripple={ false }
+          onClick={ props.onClick ?? activateGroupActivator }
         >
           {{
             ...slots,
             prepend: hasPrepend ? slotProps => {
               return (
                 <>
-                  { props.toggleIcon && (
-                    <VListItemAction start={ false }>
-                      <VBtn
-                        density="compact"
-                        icon={ props.toggleIcon }
-                        loading={ props.loading }
-                        variant="text"
-                      >
-                        {{
-                          loader () {
-                            return (
-                              <VProgressCircular
-                                indeterminate="disable-shrink"
-                                size="20"
-                                width="2"
-                              />
-                            )
-                          },
-                        }}
-                      </VBtn>
-                    </VListItemAction>
-                  )}
+                  <VListItemAction start={ false }>
+                    { props.toggleIcon ? (
+                        <VBtn
+                          density="compact"
+                          icon={ props.toggleIcon }
+                          loading={ props.loading }
+                          variant="text"
+                          onClick={ onClickAction }
+                        >
+                          {{
+                            loader () {
+                              return (
+                                <VProgressCircular
+                                  indeterminate="disable-shrink"
+                                  size="20"
+                                  width="2"
+                                />
+                              )
+                            },
+                          }}
+                        </VBtn>
+                    ) : (
+                      <div class="v-treeview-item__level" />
+                    )}
+                  </VListItemAction>
 
                   { slots.prepend?.(slotProps) }
                 </>
@@ -211,7 +122,7 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
             } : undefined,
           }}
         </VListItem>
-        )
+      )
     })
 
     return {}

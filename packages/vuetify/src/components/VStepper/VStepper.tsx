@@ -15,10 +15,11 @@ import { makeVSheetProps, VSheet } from '@/components/VSheet/VSheet'
 import { provideDefaults } from '@/composables/defaults'
 import { makeDisplayProps, useDisplay } from '@/composables/display'
 import { makeGroupProps, useGroup } from '@/composables/group'
+import { IconValue } from '@/composables/icons'
 
 // Utilities
 import { computed, toRefs } from 'vue'
-import { genericComponent, getPropertyFromItem, only, propsFactory, useRender } from '@/util'
+import { genericComponent, getPropertyFromItem, pick, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -48,10 +49,10 @@ export type VStepperSlots = {
 export const makeStepperProps = propsFactory({
   altLabels: Boolean,
   bgColor: String,
-  completeIcon: String,
-  editIcon: String,
+  completeIcon: IconValue,
+  editIcon: IconValue,
   editable: Boolean,
-  errorIcon: String,
+  errorIcon: IconValue,
   hideActions: Boolean,
   items: {
     type: Array as PropType<readonly StepperItem[]>,
@@ -78,7 +79,7 @@ export const makeVStepperProps = propsFactory({
     selectedClass: 'v-stepper-item--selected',
   }),
   ...makeVSheetProps(),
-  ...only(makeVStepperActionsProps(), ['prevText', 'nextText']),
+  ...pick(makeVStepperActionsProps(), ['prevText', 'nextText']),
 }, 'VStepper')
 
 export const VStepper = genericComponent<VStepperSlots>()({

@@ -15,7 +15,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, nextTick, ref, watch } from 'vue'
-import { filterInputAttrs, focusChild, genericComponent, only, propsFactory, useRender } from '@/util'
+import { filterInputAttrs, focusChild, genericComponent, pick, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -50,7 +50,7 @@ export const makeVOtpInputProps = propsFactory({
 
   ...makeDimensionProps(),
   ...makeFocusProps(),
-  ...only(makeVFieldProps({
+  ...pick(makeVFieldProps({
     variant: 'outlined' as const,
   }), [
     'baseColor',
@@ -166,7 +166,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
       e.preventDefault()
       e.stopPropagation()
 
-      const clipboardText = e?.clipboardData?.getData('Text') ?? ''
+      const clipboardText = e?.clipboardData?.getData('Text').slice(0, length.value) ?? ''
 
       if (isValidNumber(clipboardText)) return
 
@@ -268,7 +268,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
                           disabled={ props.disabled }
                           inputmode={ props.type === 'number' ? 'numeric' : 'text' }
                           min={ props.type === 'number' ? 0 : undefined }
-                          maxlength="1"
+                          maxlength={ i === 0 ? length.value : '1' }
                           placeholder={ props.placeholder }
                           type={ props.type === 'number' ? 'text' : props.type }
                           value={ model.value[i] }

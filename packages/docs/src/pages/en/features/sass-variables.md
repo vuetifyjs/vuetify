@@ -8,6 +8,7 @@ related:
   - /features/theme/
   - /features/treeshaking/
 features:
+  label: 'sass'
   report: true
 ---
 
@@ -33,6 +34,10 @@ To begin modifying Vuetify's internal variables, install the [sass](https://sass
 
 ::: tabs
 
+```bash [pnpm]
+  pnpm install -D sass-loader sass
+```
+
 ```bash [yarn]
   yarn add -D sass
 ```
@@ -41,21 +46,17 @@ To begin modifying Vuetify's internal variables, install the [sass](https://sass
   npm install -D sass-loader sass
 ```
 
-```bash [pnpm]
-  pnpm install -D sass-loader sass
-```
-
 ```bash [bun]
   bun add -D sass-loader sass
 ```
 
 :::
 
-For additional details about css-pre-processors, please refer to the official vite page at: https://vitejs.dev/guide/features.html#css-pre-processors or official vue-cli-page at: https://cli.vuejs.org/guide/css.html#pre-processors
+For additional details about css-pre-processors, please refer to the official vite page at: <https://vitejs.dev/guide/features.html#css-pre-processors> or official vue-cli-page at: <https://cli.vuejs.org/guide/css.html#pre-processors>
 
 ## Basic usage
 
-Create a **main.scss** file in your **src/styles** directory and update the style import within your **vuetify.js** file:
+There are many SASS variables such as **font size**, **font family**, and **line height** that can be configured globally. An extensive list of configurable global SASS variables can be found [here](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/styles/settings/_variables.scss). To start, create a **main.scss** file in your **src/styles** directory and update the style import within your **vuetify.js** file:
 
 ```scss { resource="src/styles/main.scss" }
 @use 'vuetify' with (
@@ -69,6 +70,18 @@ Create a **main.scss** file in your **src/styles** directory and update the styl
 ```
 
 Within your style file, import the Vuetify styles and specify the variables you want to override, that's it.
+
+::: info
+
+`'vuetify'` should be used for [global SASS variable](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/styles/settings/_variables.scss).
+
+:::
+
+::: info
+
+`'vuetify/settings'` should be used for vuetify [component SASS Variables](features/sass-variables/#variable-api).
+
+:::
 
 ::: warning
 
@@ -272,6 +285,8 @@ Only put variables, mixins, and functions in the settings file, styles should be
 
 Vuetify loads precompiled CSS by default, enabling variable customization will switch to the base SASS files instead which must be recompiled with your project.
 This can be a performance hit if you're using more than a few vuetify components, and also forces you to use the same SASS compiler version as us.
+
+Performance can be improved with Vite by using the modern sass compiler. Replace your `sass` dependency with `sass-embedded`, update vite to 5.4 or later, and set [`css.preprocessorOptions.sass.api`](https://vitejs.dev/config/shared-options#css-preprocessoroptions) to `'modern-compiler'` in the vite config.
 
 ### Symlinks
 

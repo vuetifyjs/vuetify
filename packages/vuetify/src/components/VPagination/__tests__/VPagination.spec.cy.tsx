@@ -82,6 +82,10 @@ describe('VPagination', () => {
 
     // 5 buttons and 1 ellipsis
     cy.get('.v-pagination__item').should('have.length', 6)
+
+    cy.get('.v-btn').contains('4').click()
+    // 5 buttons and 2 ellipsis
+    cy.get('.v-pagination__item').should('have.length', 7)
   })
 
   it('should limit items when not enough space', () => {

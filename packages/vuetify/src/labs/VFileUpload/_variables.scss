@@ -1,0 +1,12 @@
+@use '../../styles/tools';
+@use '../../styles/settings';
+
+$file-upload-title-font-size: 1.5rem !default;
+$file-upload-padding: 64px 16px !default;
+$file-upload-border-radius: 4px !default;
+$file-upload-border-width: 2px !default;
+$file-upload-title-font-weight: 600 !default;
+$file-upload-icon-font-size: 3rem !default;
+$file-upload-icon-margin-bottom: 1rem !default;
+$file-upload-divider-margin: 32px 0 !default;
+$file-upload-items-margin: 16px 0 !default;

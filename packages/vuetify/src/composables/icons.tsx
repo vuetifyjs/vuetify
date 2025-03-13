@@ -6,7 +6,8 @@ import { computed, inject, unref } from 'vue'
 import { consoleWarn, defineComponent, genericComponent, mergeDeep, propsFactory } from '@/util'
 
 // Types
-import type { InjectionKey, JSXComponent, PropType, Ref } from 'vue'
+import type { InjectionKey, PropType, Ref } from 'vue'
+import type { JSXComponent } from '@/util'
 
 export type IconValue =
   | string
@@ -54,7 +55,7 @@ export interface IconAliases {
 }
 
 export interface IconProps {
-  tag: string
+  tag: string | JSXComponent
   icon?: IconValue
   disabled?: Boolean
 }
@@ -86,7 +87,7 @@ export const makeIconProps = propsFactory({
   },
   // Could not remove this and use makeTagProps, types complained because it is not required
   tag: {
-    type: String,
+    type: [String, Object, Function] as PropType<string | JSXComponent>,
     required: true,
   },
 }, 'icon')

@@ -8,6 +8,7 @@ related:
   - /features/theme/
   - /features/display-and-platform/
 features:
+  github: /blueprints/
   report: true
 ---
 

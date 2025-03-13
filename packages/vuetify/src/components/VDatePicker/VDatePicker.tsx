@@ -13,7 +13,7 @@ import { makeVPickerProps, VPicker } from '@/labs/VPicker/VPicker'
 
 // Composables
 import { useDate } from '@/composables/date'
-import { useLocale } from '@/composables/locale'
+import { useLocale, useRtl } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
@@ -99,6 +99,7 @@ export const VDatePicker = genericComponent<new <
   setup (props, { emit, slots }) {
     const adapter = useDate()
     const { t } = useLocale()
+    const { rtlClasses } = useRtl()
 
     const model = useProxiedModel(
       props,
@@ -110,10 +111,30 @@ export const VDatePicker = genericComponent<new <
 
     const viewMode = useProxiedModel(props, 'viewMode')
     // const inputMode = useProxiedModel(props, 'inputMode')
-    const internal = computed(() => {
-      const value = adapter.date(model.value?.[0])
 
-      return value && adapter.isValid(value) ? value : adapter.date()
+    const minDate = computed(() => {
+      const date = adapter.date(props.min)
+
+      return props.min && adapter.isValid(date) ? date : null
+    })
+    const maxDate = computed(() => {
+      const date = adapter.date(props.max)
+
+      return props.max && adapter.isValid(date) ? date : null
+    })
+
+    const internal = computed(() => {
+      const today = adapter.date()
+      let value = today
+      if (model.value?.[0]) {
+        value = adapter.date(model.value[0])
+      } else if (minDate.value && adapter.isBefore(today, minDate.value)) {
+        value = minDate.value
+      } else if (maxDate.value && adapter.isAfter(today, maxDate.value)) {
+        value = maxDate.value
+      }
+
+      return value && adapter.isValid(value) ? value : today
     })
 
     const month = ref(Number(props.month ?? adapter.getMonth(adapter.startOfMonth(internal.value))))
@@ -140,16 +161,7 @@ export const VDatePicker = genericComponent<new <
     })
     // const headerIcon = computed(() => props.inputMode === 'calendar' ? props.keyboardIcon : props.calendarIcon)
     const headerTransition = computed(() => `date-picker-header${isReversing.value ? '-reverse' : ''}-transition`)
-    const minDate = computed(() => {
-      const date = adapter.date(props.min)
 
-      return props.min && adapter.isValid(date) ? date : null
-    })
-    const maxDate = computed(() => {
-      const date = adapter.date(props.max)
-
-      return props.max && adapter.isValid(date) ? date : null
-    })
     const disabled = computed(() => {
       if (props.disabled) return true
 
@@ -160,8 +172,9 @@ export const VDatePicker = genericComponent<new <
       } else {
         let _date = adapter.date()
 
-        _date = adapter.setYear(_date, year.value)
+        _date = adapter.startOfMonth(_date)
         _date = adapter.setMonth(_date, month.value)
+        _date = adapter.setYear(_date, year.value)
 
         if (minDate.value) {
           const date = adapter.addDays(adapter.startOfMonth(_date), -1)
@@ -230,8 +243,13 @@ export const VDatePicker = genericComponent<new <
     }
 
     watch(model, (val, oldVal) => {
-      const before = adapter.date(wrapInArray(oldVal)[oldVal.length - 1])
-      const after = adapter.date(wrapInArray(val)[val.length - 1])
+      const arrBefore = wrapInArray(oldVal)
+      const arrAfter = wrapInArray(val)
+
+      if (!arrAfter.length) return
+
+      const before = adapter.date(arrBefore[arrBefore.length - 1])
+      const after = adapter.date(arrAfter[arrAfter.length - 1])
       const newMonth = adapter.getMonth(after)
       const newYear = adapter.getYear(after)
 
@@ -270,6 +288,7 @@ export const VDatePicker = genericComponent<new <
             {
               'v-date-picker--show-week': props.showWeek,
             },
+            rtlClasses.value,
             props.class,
           ]}
           style={ props.style }

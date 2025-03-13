@@ -34,16 +34,16 @@ Control the layout of flex containers with alignment, justification and more wit
 | **flex-md-fill** | flex: 1 1 auto; |
 | **flex-lg-fill** | flex: 1 1 auto; |
 | **flex-xl-fill** | flex: 1 1 auto; |
-| **flex-1-1** | flex: 1 1 0%; |
-| **flex-sm-1-1** | flex: 1 1 0%; |
-| **flex-md-1-1** | flex: 1 1 0%; |
-| **flex-lg-1-1** | flex: 1 1 0%; |
-| **flex-xl-1-1** | flex: 1 1 0%; |
-| **flex-1-0** | flex: 1 0 0%; |
-| **flex-sm-1-0** | flex: 1 0 0%; |
-| **flex-md-1-0** | flex: 1 0 0%; |
-| **flex-lg-1-0** | flex: 1 0 0%; |
-| **flex-xl-1-0** | flex: 1 0 0%; |
+| **flex-1-1** | flex: 1 1 auto; |
+| **flex-sm-1-1** | flex: 1 1 auto; |
+| **flex-md-1-1** | flex: 1 1 auto; |
+| **flex-lg-1-1** | flex: 1 1 auto; |
+| **flex-xl-1-1** | flex: 1 1 auto; |
+| **flex-1-0** | flex: 1 0 auto; |
+| **flex-sm-1-0** | flex: 1 0 auto; |
+| **flex-md-1-0** | flex: 1 0 auto; |
+| **flex-lg-1-0** | flex: 1 0 auto; |
+| **flex-xl-1-0** | flex: 1 0 auto; |
 | **flex-0-1** | flex: 0 1 auto; |
 | **flex-sm-0-1** | flex: 0 1 auto; |
 | **flex-md-0-1** | flex: 0 1 auto; |
@@ -430,9 +430,9 @@ Control the layout of flex containers with alignment, justification and more wit
 | **flex-lg-shrink-1** | flex-shrink: 1; |
 | **flex-xl-shrink-1** | flex-shrink: 1; { style="max-height: 420px;" fixed-header } |
 
-<VoPromotionsCardVuetify />
+<PromotedEntry />
 
-## Enabling flexbox
+## Usage
 
 Using `display` utilities you can turn any element into a flexbox container transforming **direct children elements** into flex items. Using additional flex property utilities, you can customize their interaction even further.
 

@@ -40,7 +40,7 @@
             >
               <AppFigure
                 :name="project.raw.title"
-                :src="project.raw.image"
+                :src="getPreviewImage(project.raw.image)"
                 :title="project.raw.title"
                 height="230"
                 max-height="230"
@@ -76,7 +76,7 @@
     pagination: Boolean,
   })
 
-  const page = ref(1)
+  const page = shallowRef(1)
   const store = useMadeWithVuetifyStore()
 
   const items = computed(() => {
@@ -98,5 +98,9 @@
       array[randomIndex] = temporaryValue
     }
     return array
+  }
+
+  function getPreviewImage (url) {
+    return url.replace(/(.*)\/([^/]+)\.([^.]+)$/g, '$1/conversions/$2-overview.$3')
   }
 </script>

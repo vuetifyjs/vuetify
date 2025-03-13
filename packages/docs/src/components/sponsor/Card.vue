@@ -16,7 +16,6 @@
       :src="src"
       :width="imgWidth"
       max-height="64"
-      contain
     />
   </v-card>
 </template>
@@ -34,7 +33,7 @@
   const { name } = useRoute()
   const theme = useTheme()
   const sponsorStore = useSponsorsStore()
-  const sponsor = ref(props.sponsor)
+  const sponsor = shallowRef(props.sponsor)
 
   const src = computed(() => {
     const {

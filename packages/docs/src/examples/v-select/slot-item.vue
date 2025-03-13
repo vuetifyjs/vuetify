@@ -1,7 +1,7 @@
 <template>
   <v-select :items="items" item-title="name" label="User">
-    <template v-slot:item="{ props, item }">
-      <v-list-item v-bind="props" :subtitle="item.raw.department"></v-list-item>
+    <template v-slot:item="{ props: itemProps, item }">
+      <v-list-item v-bind="itemProps" :subtitle="item.raw.department"></v-list-item>
     </template>
   </v-select>
 </template>

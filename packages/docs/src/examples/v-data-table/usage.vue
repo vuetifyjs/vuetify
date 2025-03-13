@@ -18,7 +18,7 @@
 <script setup>
   const name = 'v-data-table'
   const model = ref('default')
-  const options = []
+  const options = ['Hide header', 'Hide footer', 'Hide both']
 
   const items = [
     {
@@ -85,7 +85,9 @@
 
   const props = computed(() => {
     return {
-      ':items': 'items',
+      items: 'items',
+      'hide-default-header': ['Hide both', 'Hide header'].includes(model.value) || undefined,
+      'hide-default-footer': ['Hide both', 'Hide footer'].includes(model.value) || undefined,
     }
   })
 
@@ -105,6 +107,6 @@
   })
 
   const code = computed(() => {
-    return `<v-data-table${propsToString(props.value, 2)}></v-data-table>`
+    return `<v-data-table${propsToString(props.value, ['items'])}></v-data-table>`
   })
 </script>

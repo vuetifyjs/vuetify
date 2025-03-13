@@ -2,7 +2,7 @@ export default {
   badge: 'Odznak',
   open: 'Otvoriť',
   close: 'Zavrieť',
-  dismiss: 'Dismiss',
+  dismiss: 'Zrušiť',
   confirmEdit: {
     ok: 'OK',
     cancel: 'Zrušiť',
@@ -69,10 +69,15 @@ export default {
     counter: '{0} súborov',
     counterSize: '{0} súborov ({1} celkom)',
   },
+  fileUpload: {
+    title: 'Sem presuňte súbory',
+    divider: 'alebo',
+    browse: 'Prehliadať súbory',
+  },
   timePicker: {
     am: 'AM',
     pm: 'PM',
-    title: 'Select Time',
+    title: 'Vyberte čas',
   },
   pagination: {
     ariaLabel: {

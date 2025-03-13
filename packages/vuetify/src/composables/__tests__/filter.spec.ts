@@ -3,7 +3,6 @@ import { defaultFilter, filterItems, useFilter } from '../filter'
 import { transformItem, transformItems } from '../list-items'
 
 // Utilities
-import { describe, expect, it } from '@jest/globals'
 import { nextTick, ref } from 'vue'
 import { deepEqual } from '@/util'
 
@@ -21,15 +20,15 @@ describe('filter', () => {
     it.each([
       [null, null, -1],
       ['foo', null, -1],
-      ['foo', 'foo', 0],
-      ['foo', 'f', 0],
+      ['foo', 'foo', [[0, 3]]],
+      ['foo', 'f', [[0, 1]]],
       [null, 'foo', -1],
       ['foo', 'bar', -1],
-      [1, '1', 0],
-      ['1', 1, 0],
+      [1, '1', [[0, 1]]],
+      ['1', 1, [[0, 1]]],
     ])('should compare %s to %s and return a match result', (text, query, expected) => {
       // @ts-expect-error
-      expect(defaultFilter(text, query)).toBe(expected)
+      expect(defaultFilter(text, query)).toStrictEqual(expected)
     })
   })
 

@@ -16,15 +16,16 @@
   const theme = useTheme()
   const { locale } = useI18n()
   const auth = useAuthStore()
+  const frontmatter = useFrontmatter()
 
   const path = computed(() => route.path.replace(`/${locale.value}/`, ''))
 
   const meta = computed(() => {
     return genAppMetaInfo({
       title: `${route.meta.title}${path.value === '' ? '' : ' — Vuetify'}`,
-      description: route.meta.description,
-      keywords: route.meta.keywords,
-      assets: route.meta.assets,
+      description: frontmatter.value?.meta.description,
+      keywords: frontmatter.value?.meta.keywords,
+      assets: frontmatter.value?.assets,
     })
   })
 
@@ -124,8 +125,8 @@
       document.body.append(copy)
 
       ;(copy.querySelectorAll('[data-scroll-x], [data-scroll-y]') as NodeListOf<HTMLElement>).forEach(el => {
-        el.scrollLeft = +el.dataset.scrollX!
-        el.scrollTop = +el.dataset.scrollY!
+        el.scrollLeft = Number(el.dataset.scrollX)
+        el.scrollTop = Number(el.dataset.scrollY)
       })
 
       function onTransitionend (e: TransitionEvent) {

@@ -7,7 +7,7 @@ import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
 
 // Utilities
 import { computed, toRef } from 'vue'
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { genericComponent, propsFactory } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -33,7 +33,7 @@ export const VLayoutItem = genericComponent()({
   props: makeVLayoutItemProps(),
 
   setup (props, { slots }) {
-    const { layoutItemStyles, layoutIsReady } = useLayoutItem({
+    const { layoutItemStyles } = useLayoutItem({
       id: props.name,
       order: computed(() => parseInt(props.order, 10)),
       position: toRef(props, 'position'),
@@ -43,7 +43,7 @@ export const VLayoutItem = genericComponent()({
       absolute: toRef(props, 'absolute'),
     })
 
-    useRender(() => (
+    return () => (
       <div
         class={[
           'v-layout-item',
@@ -56,9 +56,7 @@ export const VLayoutItem = genericComponent()({
       >
         { slots.default?.() }
       </div>
-    ))
-
-    return layoutIsReady
+    )
   },
 })
 

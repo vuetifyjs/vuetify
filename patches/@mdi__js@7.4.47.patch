@@ -1,0 +1,19 @@
+diff --git a/package.json b/package.json
+index 0d142171bd1599a549c1c2a903fc3be234d1505c..a2acafcb0ec6ef6e7800d7b9467956c60780d419 100644
+--- a/package.json
++++ b/package.json
+@@ -6,6 +6,14 @@
+   "module": "mdi.js",
+   "types": "mdi.d.ts",
+   "sideEffects": false,
++  "type": "module",
++  "exports": {
++    ".": {
++      "types": "./mdi.d.ts",
++      "import": "./mdi.js",
++      "require": "./commonjs/mdi.js"
++    }
++  },
+   "scripts": {
+     "build": "npm update && npm install && npm run buildjs && npm run es5 && npm run commonjs",
+     "buildjs": "node build.js",

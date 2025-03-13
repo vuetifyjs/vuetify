@@ -10,7 +10,7 @@ $avatar-border-color: settings.$border-color-root !default;
 $avatar-border-radius: map.get(settings.$rounded, 0) !default;
 $avatar-border-style: settings.$border-style-root !default;
 $avatar-border-thin-width: thin !default;
-$avatar-border-width: thin !default;
+$avatar-border-width: 0 !default;
 $avatar-color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity)) !default;
 $avatar-density: ('default': 0, 'comfortable': -1, 'compact': -2) !default;
 $avatar-elevation: 1 !default;

@@ -17,8 +17,6 @@ features:
 
 The OTP input is used for MFA procedure of authenticating users by a one-time password.
 
-![Otp input Entry](https://cdn.vuetifyjs.com/docs/images/components/v-otp-input/v-otp-input-entry.png)
-
 <PageFeatures />
 
 ::: success

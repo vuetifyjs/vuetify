@@ -1,6 +1,20 @@
 {
   "props": {
+    "cellProps": "Props to be applied to the cell.",
     "index": "Row index.",
     "item": "Data (key, index and column values) of the displayed item."
+  },
+  "events": {
+    "contextmenu": "The event emitted when the user clicks the context menu button.",
+    "dblclick": "The event emitted when the user double clicks the row.",
+    "[`item.${string}`]": "The event emitted when the user clicks the item."
+  },
+  "slots": {
+    "[`header.${string}`]": "Slot for custom rendering of a header cell.",
+    "[`item.${string}`]": "Slot for custom rendering of a row cell.",
+    "header.data-table-expand": "Slot to replace the default `v-icon` used when expanding header.",
+    "header.data-table-select": "Slot to replace the default `v-checkbox-btn` in header.",
+    "item.data-table-expand": "Slot for the expand button in the row.",
+    "item.data-table-select": "Slot for the select checkbox in the row."
   }
 }

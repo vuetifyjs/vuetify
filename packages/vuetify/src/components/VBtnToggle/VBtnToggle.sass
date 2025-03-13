@@ -5,3 +5,6 @@
   .v-btn-toggle
     > .v-btn.v-btn--active:not(.v-btn--disabled)
       @include tools.active-states('> .v-btn__overlay', $btn-toggle-selected-opacity)
+
+      &.v-btn--variant-plain
+        opacity: 1

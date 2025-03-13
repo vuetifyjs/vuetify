@@ -1,5 +1,6 @@
 {
   "props": {
+    "absolute": "Applies position: absolute to the component.",
     "alt": "Alternate text for screen readers. Leave empty for decorative images.",
     "aspectRatio": "Calculated as `width/height`, so for a 1920x1080px image this will be `1.7778`. Will be calculated automatically if omitted.",
     "cover": "Resizes the background image to cover the entire container.",
@@ -13,7 +14,7 @@
     "src": "The image URL. This prop is mandatory.",
     "srcset": "A set of alternate images to use based on device size. [Read more...](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-srcset).",
     "transition": "The transition to use when switching from `lazy-src` to `src`. Can be one of the [built in](/styles/transitions/) or custom transition.",
-    "gradient": "The gradient to apply to the image. This can be any valid CSS gradient declaration. You can find more information on the [MDN documentation for gradients](https://developer.mozilla.org/en-US/docs/Web/CSS/gradient)."
+    "gradient": "The gradient to apply to the image. Only supports [linear-gradient](https://developer.mozilla.org/en-US/docs/Web/CSS/gradient/linear-gradient) syntax, anything else should be done with classes."
   },
   "slots": {
     "placeholder": "Display an overlay while the image is loading.",
@@ -24,5 +25,12 @@
     "error": "Emitted if the image fails to load.",
     "load": "Emitted when the image is loaded.",
     "loadstart": "Emitted when the image starts to load."
+  },
+  "exposed": {
+    "currentSrc": "The current source of the image. This is the image that is currently being displayed. This is useful for determining if the image is loading or not.",
+    "image": "The image element.",
+    "naturalHeight": "The natural height of the image.",
+    "naturalWidth": "The natural width of the image.",
+    "state": "The current state of the image. This is useful for determining if the image is loading or not."
   }
 }

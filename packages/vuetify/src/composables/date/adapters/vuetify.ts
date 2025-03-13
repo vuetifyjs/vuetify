@@ -160,13 +160,14 @@ const firstDay: Record<string, number> = {
   ZW: 0,
 }
 
-function getWeekArray (date: Date, locale: string) {
+function getWeekArray (date: Date, locale: string, firstDayOfWeek?: number) {
   const weeks = []
   let currentWeek = []
   const firstDayOfMonth = startOfMonth(date)
   const lastDayOfMonth = endOfMonth(date)
-  const firstDayWeekIndex = (firstDayOfMonth.getDay() - firstDay[locale.slice(-2).toUpperCase()] + 7) % 7
-  const lastDayWeekIndex = (lastDayOfMonth.getDay() - firstDay[locale.slice(-2).toUpperCase()] + 7) % 7
+  const first = firstDayOfWeek ?? firstDay[locale.slice(-2).toUpperCase()] ?? 0
+  const firstDayWeekIndex = (firstDayOfMonth.getDay() - first + 7) % 7
+  const lastDayWeekIndex = (lastDayOfMonth.getDay() - first + 7) % 7
 
   for (let i = 0; i < firstDayWeekIndex; i++) {
     const adjacentDay = new Date(firstDayOfMonth)
@@ -200,9 +201,11 @@ function getWeekArray (date: Date, locale: string) {
   return weeks
 }
 
-function startOfWeek (date: Date, locale: string) {
+function startOfWeek (date: Date, locale: string, firstDayOfWeek?: number) {
+  const day = firstDayOfWeek ?? firstDay[locale.slice(-2).toUpperCase()] ?? 0
+
   const d = new Date(date)
-  while (d.getDay() !== (firstDay[locale.slice(-2).toUpperCase()] ?? 0)) {
+  while (d.getDay() !== day) {
     d.setDate(d.getDate() - 1)
   }
   return d
@@ -256,8 +259,8 @@ function date (value?: any): Date | null {
 
 const sundayJanuarySecond2000 = new Date(2000, 0, 2)
 
-function getWeekdays (locale: string) {
-  const daysFromSunday = firstDay[locale.slice(-2).toUpperCase()]
+function getWeekdays (locale: string, firstDayOfWeek?: number) {
+  const daysFromSunday = firstDayOfWeek ?? firstDay[locale.slice(-2).toUpperCase()] ?? 0
 
   return createRange(7).map(i => {
     const weekday = new Date(sundayJanuarySecond2000)
@@ -333,35 +336,35 @@ function format (
       options = { second: 'numeric' }
       break
     case 'fullTime':
-      options = { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true }
+      options = { hour: 'numeric', minute: 'numeric' }
       break
     case 'fullTime12h':
-      options = { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true }
+      options = { hour: 'numeric', minute: 'numeric', hour12: true }
       break
     case 'fullTime24h':
-      options = { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: false }
+      options = { hour: 'numeric', minute: 'numeric', hour12: false }
       break
     case 'fullDateTime':
-      options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true }
+      options = { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric' }
       break
     case 'fullDateTime12h':
-      options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true }
+      options = { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true }
       break
     case 'fullDateTime24h':
-      options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: false }
+      options = { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12: false }
       break
     case 'keyboardDate':
       options = { year: 'numeric', month: '2-digit', day: '2-digit' }
       break
     case 'keyboardDateTime':
-      options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: false }
-      break
+      options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: 'numeric', minute: 'numeric' }
+      return new Intl.DateTimeFormat(locale, options).format(newDate).replace(/, /g, ' ')
     case 'keyboardDateTime12h':
-      options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true }
-      break
+      options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: 'numeric', minute: 'numeric', hour12: true }
+      return new Intl.DateTimeFormat(locale, options).format(newDate).replace(/, /g, ' ')
     case 'keyboardDateTime24h':
-      options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: false }
-      break
+      options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: 'numeric', minute: 'numeric', hour12: false }
+      return new Intl.DateTimeFormat(locale, options).format(newDate).replace(/, /g, ' ')
     default:
       options = customFormat ?? { timeZone: 'UTC', timeZoneName: 'short' }
   }
@@ -601,12 +604,12 @@ export class VuetifyDateAdapter implements DateAdapter<Date> {
     return addMonths(date, amount)
   }
 
-  getWeekArray (date: Date) {
-    return getWeekArray(date, this.locale)
+  getWeekArray (date: Date, firstDayOfWeek?: number | string) {
+    return getWeekArray(date, this.locale, firstDayOfWeek ? Number(firstDayOfWeek) : undefined)
   }
 
-  startOfWeek (date: Date): Date {
-    return startOfWeek(date, this.locale)
+  startOfWeek (date: Date, firstDayOfWeek?: number | string): Date {
+    return startOfWeek(date, this.locale, firstDayOfWeek ? Number(firstDayOfWeek) : undefined)
   }
 
   endOfWeek (date: Date): Date {
@@ -685,8 +688,8 @@ export class VuetifyDateAdapter implements DateAdapter<Date> {
     return getDiff(date, comparing, unit)
   }
 
-  getWeekdays () {
-    return getWeekdays(this.locale)
+  getWeekdays (firstDayOfWeek?: number | string) {
+    return getWeekdays(this.locale, firstDayOfWeek ? Number(firstDayOfWeek) : undefined)
   }
 
   getYear (date: Date) {

@@ -13,9 +13,9 @@
 </template>
 
 <script setup>
-  import { ref } from 'vue'
+  import { shallowRef } from 'vue'
 
-  const select = ref({ state: 'Florida', abbr: 'FL' })
+  const select = shallowRef({ state: 'Florida', abbr: 'FL' })
 
   const items = [
     { state: 'Florida', abbr: 'FL' },

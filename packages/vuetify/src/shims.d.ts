@@ -1,13 +1,19 @@
 /* eslint-disable local-rules/sort-imports */
 
 import 'vue/jsx'
-import type { FunctionalComponent, UnwrapNestedRefs, VNodeChild } from 'vue'
+import type { UnwrapNestedRefs, VNodeChild } from 'vue'
 
+// These already exist in scope in the final bundle
 // @skip-build
-import type { ComponentPublicInstance } from 'vue'
-
-// @skip-build
-import type { DateInstance, DefaultsInstance, DisplayInstance, IconOptions, LocaleInstance, RtlInstance, ThemeInstance } from './framework'
+import type {
+  DateInstance,
+  DefaultsInstance,
+  DisplayInstance,
+  IconOptions,
+  LocaleInstance,
+  RtlInstance,
+  ThemeInstance,
+} from './framework'
 
 declare global {
   namespace JSX {
@@ -18,19 +24,6 @@ declare global {
 }
 
 declare module 'vue' {
-  export type JSXComponent<Props = any> = { new (): ComponentPublicInstance<Props> } | FunctionalComponent<Props>
-}
-
-declare module '@vue/runtime-dom' {
-  export interface HTMLAttributes {
-    $children?: VNodeChild
-  }
-  export interface SVGAttributes {
-    $children?: VNodeChild
-  }
-}
-
-declare module '@vue/runtime-core' {
   interface Vuetify {
     defaults: DefaultsInstance
     display: UnwrapNestedRefs<DisplayInstance>
@@ -43,7 +36,12 @@ declare module '@vue/runtime-core' {
   export interface ComponentCustomProperties {
     $vuetify: Vuetify
   }
-
+  export interface HTMLAttributes {
+    $children?: VNodeChild
+  }
+  export interface SVGAttributes {
+    $children?: VNodeChild
+  }
   export interface GlobalComponents {
     // @generate-components
   }

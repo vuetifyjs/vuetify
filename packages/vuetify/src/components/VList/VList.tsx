@@ -13,6 +13,7 @@ import { provideDefaults } from '@/composables/defaults'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
+import { IconValue } from '@/composables/icons'
 import { makeItemsProps } from '@/composables/list-items'
 import { makeNestedProps, useNested } from '@/composables/nested/nested'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
@@ -22,7 +23,16 @@ import { makeVariantProps } from '@/composables/variant'
 
 // Utilities
 import { computed, ref, shallowRef, toRef } from 'vue'
-import { EventProp, focusChild, genericComponent, getPropertyFromItem, omit, propsFactory, useRender } from '@/util'
+import {
+  EventProp,
+  focusChild,
+  genericComponent,
+  getPropertyFromItem,
+  isPrimitive,
+  omit,
+  propsFactory,
+  useRender,
+} from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -34,11 +44,7 @@ export interface InternalListItem<T = any> extends ListItem<T> {
   type?: 'item' | 'subheader' | 'divider'
 }
 
-function isPrimitive (value: unknown): value is string | number | boolean {
-  return typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean'
-}
-
-function transformItem (props: ItemProps & { itemType: string }, item: any): InternalListItem {
+function transformItem (props: ItemProps & { itemType?: string }, item: any): InternalListItem {
   const type = getPropertyFromItem(item, props.itemType, 'item')
   const title = isPrimitive(item) ? item : getPropertyFromItem(item, props.itemTitle)
   const value = getPropertyFromItem(item, props.itemValue, undefined)
@@ -63,7 +69,7 @@ function transformItem (props: ItemProps & { itemType: string }, item: any): Int
   }
 }
 
-function transformItems (props: ItemProps & { itemType: string }, items: (string | object)[]) {
+function transformItems (props: ItemProps & { itemType?: string }, items: (string | object)[]) {
   const array: InternalListItem[] = []
 
   for (const item of items) {
@@ -73,7 +79,7 @@ function transformItems (props: ItemProps & { itemType: string }, items: (string
   return array
 }
 
-export function useListItems (props: ItemProps & { itemType: string }) {
+export function useListItems (props: ItemProps & { itemType?: string }) {
   const items = computed(() => transformItems(props, props.items))
 
   return { items }
@@ -86,8 +92,8 @@ export const makeVListProps = propsFactory({
   activeClass: String,
   bgColor: String,
   disabled: Boolean,
-  expandIcon: String,
-  collapseIcon: String,
+  expandIcon: IconValue,
+  collapseIcon: IconValue,
   lines: {
     type: [Boolean, String] as PropType<'one' | 'two' | 'three' | false>,
     default: 'one',
@@ -162,7 +168,7 @@ export const VList = genericComponent<new <
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props)
-    const { children, open, parents, select } = useNested(props)
+    const { children, open, parents, select, getPath } = useNested(props)
     const lineClasses = computed(() => props.lines ? `v-list--${props.lines}-line` : undefined)
     const activeColor = toRef(props, 'activeColor')
     const baseColor = toRef(props, 'baseColor')
@@ -264,7 +270,7 @@ export const VList = genericComponent<new <
             dimensionStyles.value,
             props.style,
           ]}
-          tabindex={ (props.disabled || isFocused.value) ? -1 : 0 }
+          tabindex={ props.disabled ? -1 : 0 }
           role="listbox"
           aria-activedescendant={ undefined }
           onFocusin={ onFocusin }
@@ -288,6 +294,7 @@ export const VList = genericComponent<new <
       focus,
       children,
       parents,
+      getPath,
     }
   },
 })

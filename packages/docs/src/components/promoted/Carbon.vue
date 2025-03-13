@@ -3,7 +3,7 @@
     class="align-center"
     min-height="118"
   >
-    <template v-if="!error1 && !error2">
+    <template v-if="!error1">
       <PromotedBase
         ref="script"
         :class="[
@@ -13,30 +13,20 @@
         border
       >
         <PromotedScript
-          v-if="!error1"
           id="carbonads-script"
           script-id="_carbonads_js"
           src="//cdn.carbonads.com/carbon.js?serve=CWYDC27W&placement=v3vuetifyjscom"
           @script:error="error1 = true"
         />
-
-        <PromotedScript
-          v-if="error1"
-          id="bsa-zone_1691166982595-9_123456"
-          :src="`https://cdn4.buysellads.net/pub/vuetifyjs.js?${Date.now() % 600000}`"
-          script-id="bsa-optimize"
-          @script:error="error2 = true"
-        />
       </PromotedBase>
     </template>
 
-    <PromotionsPromotionCard v-else />
+    <VoPromotionsCardVuetify v-else />
   </v-responsive>
 </template>
 
 <script setup lang="ts">
   const error1 = shallowRef(false)
-  const error2 = shallowRef(false)
   const script = shallowRef(null)
   let timer = -1 as any
 
@@ -50,14 +40,6 @@
     }, 2000)
   }
 
-  watch(error1, val => {
-    if (!val) return
-
-    timer = checkForElement('bsa-zone_1691166982595-9_123456', () => {
-      error2.value = true
-    })
-  })
-
   onMounted(() => {
     timer = checkForElement('carbonads', () => {
       error1.value = true
@@ -66,7 +48,6 @@
 
   onBeforeUnmount(() => {
     document.getElementById('carbonads-script')?.remove()
-    document.getElementById('bsa-zone_1691166982595-9_123456')?.remove()
   })
 
   onScopeDispose(() => {
@@ -79,16 +60,6 @@
 </script>
 
 <style lang="sass">
-  @media only screen and (min-width: 0px) and (min-height: 0px)
-    div[id^="bsa-zone_1691166982595-9_123456"]
-      min-width: 300px
-      min-height: 250px
-
-  @media only screen and (min-width: 760px) and (min-height: 0px)
-    div[id^="bsa-zone_1691166982595-9_123456"]
-      min-width: 728px
-      min-height: 90px
-
   #carbonads-script
     width: 100%
 

@@ -30,7 +30,7 @@ import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant
 import { Ripple } from '@/directives/ripple'
 
 // Utilities
-import { computed, withDirectives } from 'vue'
+import { computed, toDisplayString, withDirectives } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -70,7 +70,10 @@ export const makeVBtnProps = propsFactory({
     default: true,
   },
 
-  text: String,
+  text: {
+    type: [String, Number, Boolean],
+    default: undefined,
+  },
 
   ...makeBorderProps(),
   ...makeComponentProps(),
@@ -212,10 +215,10 @@ export const VBtn = genericComponent<VBtnSlots>()({
           ]}
           aria-busy={ props.loading ? true : undefined }
           disabled={ isDisabled.value || undefined }
-          href={ link.href.value }
           tabindex={ props.loading || props.readonly ? -1 : undefined }
           onClick={ onClick }
           value={ valueAttr.value }
+          { ...link.linkProps }
         >
           { genOverlays(true, 'v-btn') }
 
@@ -257,7 +260,7 @@ export const VBtn = genericComponent<VBtnSlots>()({
                   },
                 }}
               >
-                { slots.default?.() ?? props.text }
+                { slots.default?.() ?? toDisplayString(props.text) }
               </VDefaultsProvider>
             )}
           </span>
@@ -298,7 +301,7 @@ export const VBtn = genericComponent<VBtnSlots>()({
         </Tag>,
         [[
           Ripple,
-          !isDisabled.value && !!props.ripple,
+          !isDisabled.value && props.ripple,
           '',
           { center: !!props.icon },
         ]]

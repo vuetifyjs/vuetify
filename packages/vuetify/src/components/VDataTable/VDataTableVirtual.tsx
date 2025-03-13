@@ -19,7 +19,7 @@ import { makeFilterProps, useFilter } from '@/composables/filter'
 import { makeVirtualProps, useVirtual } from '@/composables/virtual'
 
 // Utilities
-import { computed, shallowRef, toRef } from 'vue'
+import { computed, shallowRef, toRef, toRefs } from 'vue'
 import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -41,6 +41,9 @@ export type VDataTableVirtualSlots<T> = VDataTableRowsSlots<T> & VDataTableHeade
   colgroup: VDataTableVirtualSlotProps<T>
   top: VDataTableVirtualSlotProps<T>
   headers: VDataTableHeadersSlots['headers']
+  tbody: VDataTableVirtualSlotProps<T>
+  thead: VDataTableVirtualSlotProps<T>
+  tfoot: VDataTableVirtualSlotProps<T>
   bottom: VDataTableVirtualSlotProps<T>
   'body.prepend': VDataTableVirtualSlotProps<T>
   'body.append': VDataTableVirtualSlotProps<T>
@@ -85,6 +88,7 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
   setup (props, { attrs, slots }) {
     const { groupBy } = createGroupBy(props)
     const { sortBy, multiSort, mustSort } = createSort(props)
+    const { disableSort } = toRefs(props)
 
     const {
       columns,
@@ -106,10 +110,10 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
     })
 
     const { toggleSort } = provideSort({ sortBy, multiSort, mustSort })
-    const { sortByWithGroups, opened, extractRows, isGroupOpen, toggleGroup } = provideGroupBy({ groupBy, sortBy })
+    const { sortByWithGroups, opened, extractRows, isGroupOpen, toggleGroup } = provideGroupBy({ groupBy, sortBy, disableSort })
 
     const { sortedItems } = useSortedItems(props, filteredItems, sortByWithGroups, {
-      transform: item => item.columns,
+      transform: item => ({ ...item.raw, ...item.columns }),
       sortFunctions,
       sortRawFunctions,
     })
@@ -132,6 +136,8 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
       handleItemResize,
       handleScroll,
       handleScrollend,
+      calculateVisibleItems,
+      scrollToIndex,
     } = useVirtual(props, flatItems)
     const displayItems = computed(() => computedItems.value.map(item => item.raw))
 
@@ -188,6 +194,7 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
           ]}
           style={ props.style }
           { ...tableProps }
+          fixedHeader={ props.fixedHeader || props.sticky }
         >
           {{
             top: () => slots.top?.(slotProps.value),
@@ -207,13 +214,13 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
                     <thead key="thead">
                       <VDataTableHeaders
                         { ...dataTableHeadersProps }
-                        sticky={ props.fixedHeader }
                         v-slots={ slots }
                       />
                     </thead>
                   )}
+                  { slots.thead?.(slotProps.value) }
                   { !props.hideDefaultBody && (
-                    <tbody>
+                    <tbody key="tbody">
                       <tr ref={ markerRef } style={{ height: convertToUnit(paddingTop.value), border: 0 }}>
                         <td colspan={ columns.value.length } style={{ height: 0, border: 0 }}></td>
                       </tr>
@@ -256,6 +263,8 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
                       </tr>
                     </tbody>
                   )}
+                  { slots.tbody?.(slotProps.value) }
+                  { slots.tfoot?.(slotProps.value) }
                 </table>
               </div>
             ),
@@ -264,6 +273,11 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
         </VTable>
       )
     })
+
+    return {
+      calculateVisibleItems,
+      scrollToIndex,
+    }
   },
 })
 

@@ -8,12 +8,12 @@ import { makeFilterProps, useFilter } from '@/composables/filter'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, provide, ref, toRef, watch } from 'vue'
-import { genericComponent, getCurrentInstance, omit, propsFactory, useRender } from '@/util'
+import { computed, provide, ref, toRaw, toRef } from 'vue'
+import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
-import type { ExtractPublicPropTypes } from 'vue'
 import { VTreeviewSymbol } from './shared'
+import type { InternalListItem } from '@/components/VList/VList'
 import type { VListChildrenSlots } from '@/components/VList/VListChildren'
 import type { ListItem } from '@/composables/list-items'
 import type { GenericProps } from '@/util'
@@ -27,6 +27,7 @@ function flatten (items: ListItem[], flat: ListItem[] = []) {
 }
 
 export const makeVTreeviewProps = propsFactory({
+  fluid: Boolean,
   openAll: Boolean,
   search: String,
 
@@ -35,10 +36,12 @@ export const makeVTreeviewProps = propsFactory({
   ...omit(makeVListProps({
     collapseIcon: '$treeviewCollapse',
     expandIcon: '$treeviewExpand',
-    selectStrategy: 'classic' as const,
-    openStrategy: 'multiple' as const,
     slim: true,
-  }), ['nav']),
+  }), ['itemType', 'nav', 'openStrategy']),
+  modelValue: {
+    type: Array,
+    default: () => ([]),
+  },
 }, 'VTreeview')
 
 export const VTreeview = genericComponent<new <T>(
@@ -55,43 +58,46 @@ export const VTreeview = genericComponent<new <T>(
     'update:opened': (val: unknown) => true,
     'update:activated': (val: unknown) => true,
     'update:selected': (val: unknown) => true,
+    'update:modelValue': (val: unknown) => true,
     'click:open': (value: { id: unknown, value: boolean, path: unknown[] }) => true,
     'click:select': (value: { id: unknown, value: boolean, path: unknown[] }) => true,
   },
 
   setup (props, { slots }) {
-    const vm = getCurrentInstance('VTreeview')
     const { items } = useListItems(props)
     const activeColor = toRef(props, 'activeColor')
     const baseColor = toRef(props, 'baseColor')
     const color = toRef(props, 'color')
-    const opened = useProxiedModel(props, 'opened')
     const activated = useProxiedModel(props, 'activated')
-    const selected = useProxiedModel(props, 'selected')
+    const model = useProxiedModel(props, 'modelValue')
+    const _selected = useProxiedModel(props, 'selected', props.modelValue)
+
+    const selected = computed({
+      get: () => _selected.value,
+      set (val) {
+        _selected.value = val
+        model.value = val
+      },
+    })
 
     const vListRef = ref<VList>()
 
+    const opened = computed(() => props.openAll ? openAll(items.value) : props.opened)
     const flatItems = computed(() => flatten(items.value))
     const search = toRef(props, 'search')
     const { filteredItems } = useFilter(props, flatItems, search)
     const visibleIds = computed(() => {
-      if (!search.value) {
-        return null
-      }
+      if (!search.value) return null
+      const getPath = vListRef.value?.getPath
+      if (!getPath) return null
       return new Set(filteredItems.value.flatMap(item => {
-        return [...getPath(item.props.value), ...getChildren(item.props.value)]
+        const itemVal = props.returnObject ? item.raw : item.props.value
+        return [
+          ...getPath(itemVal),
+          ...getChildren(itemVal),
+        ].map(toRaw)
       }))
     })
-
-    function getPath (id: unknown) {
-      const path: unknown[] = []
-      let parent: unknown = id
-      while (parent != null) {
-        path.unshift(parent)
-        parent = vListRef.value?.parents.get(parent)
-      }
-      return path
-    }
 
     function getChildren (id: unknown) {
       const arr: unknown[] = []
@@ -105,17 +111,13 @@ export const VTreeview = genericComponent<new <T>(
       return arr
     }
 
-    watch(() => props.openAll, val => {
-      opened.value = val ? openAll(items.value) : []
-    }, { immediate: true })
+    function openAll (items: InternalListItem<any>[]) {
+      let ids: any[] = []
 
-    function openAll (item: any) {
-      let ids: number[] = []
-
-      for (const i of item) {
+      for (const i of items) {
         if (!i.children) continue
 
-        ids.push(i.value)
+        ids.push(props.returnObject ? toRaw(i.raw) : i.value)
 
         if (i.children) {
           ids = ids.concat(openAll(i.children))
@@ -148,8 +150,7 @@ export const VTreeview = genericComponent<new <T>(
     })
 
     useRender(() => {
-      const listProps = VList.filterProps(vm.vnode.props! as ExtractPublicPropTypes<typeof makeVTreeviewProps>)
-
+      const listProps = VList.filterProps(props)
       const treeviewChildrenProps = VTreeviewChildren.filterProps(props)
 
       return (
@@ -158,14 +159,21 @@ export const VTreeview = genericComponent<new <T>(
           { ...listProps }
           class={[
             'v-treeview',
+            {
+              'v-treeview--fluid': props.fluid,
+            },
             props.class,
           ]}
+          open-strategy="multiple"
           style={ props.style }
+          opened={ opened.value }
           v-model:activated={ activated.value }
           v-model:selected={ selected.value }
         >
           <VTreeviewChildren
             { ...treeviewChildrenProps }
+            density={ props.density }
+            returnObject={ props.returnObject }
             items={ items.value }
             v-slots={ slots }
           ></VTreeviewChildren>
@@ -173,9 +181,7 @@ export const VTreeview = genericComponent<new <T>(
       )
     })
 
-    return {
-      open,
-    }
+    return { }
   },
 })
 

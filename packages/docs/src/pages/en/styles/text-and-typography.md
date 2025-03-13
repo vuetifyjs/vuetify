@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   title: Text and typography
   description: View the various typography styles. From headings to captions, with various weights, sizes and italics.
@@ -40,6 +39,7 @@ Control text size, alignment, wrapping, overflow, transforms and more. By defaul
 | **text-uppercase** | text-transform: uppercase; |
 | **text-lowercase** | text-transform: lowercase; |
 | **text-capitalize** | text-transform: capitalize; |
+| **text-none** | text-transform: none; |
 | **text-start** | text-align: start; |
 | **text-center** | text-align: center; |
 | **text-end** | text-align: end; |
@@ -76,7 +76,7 @@ Control text size, alignment, wrapping, overflow, transforms and more. By defaul
 
 <PromotedEntry />
 
-## Typography
+## Usage
 
 Control the size and style of text using the Typography helper classes. These values are based upon the [Material Design type specification](https://material.io/design/typography/the-type-system.html).
 

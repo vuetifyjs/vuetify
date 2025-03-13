@@ -98,7 +98,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
       'modelValue',
       props.modelValue,
       val => wrapInArray(val),
-      val => (props.multiple || Array.isArray(props.modelValue)) ? val : (val[0] ?? null),
+      val => (!props.multiple && Array.isArray(val)) ? val[0] : val,
     )
     const { isFocused, focus, blur } = useFocus(props)
     const base = computed(() => typeof props.showSize !== 'boolean' ? props.showSize : undefined)
@@ -155,6 +155,16 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
         callEvent(props['onClick:clear'], e)
       })
     }
+    function onDragover (e: DragEvent) {
+      e.preventDefault()
+    }
+    function onDrop (e: DragEvent) {
+      e.preventDefault()
+
+      if (!e.dataTransfer) return
+
+      model.value = [...e.dataTransfer.files ?? []]
+    }
 
     watch(model, newValue => {
       const hasModelReset = !Array.isArray(newValue) || !newValue.length
@@ -174,7 +184,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
       return (
         <VInput
           ref={ vInputRef }
-          v-model={ model.value }
+          modelValue={ props.multiple ? model.value : model.value[0] }
           class={[
             'v-file-input',
             {
@@ -215,6 +225,8 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
                 disabled={ isDisabled.value }
                 focused={ isFocused.value }
                 error={ isValid.value === false }
+                onDragover={ onDragover }
+                onDrop={ onDrop }
               >
                 {{
                   ...slots,
