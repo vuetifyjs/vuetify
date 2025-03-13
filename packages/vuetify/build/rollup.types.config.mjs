@@ -13,6 +13,7 @@ import MagicString from 'magic-string'
 import importMap from '../dist/json/importMap.json' with { type: 'json' }
 import importMapLabs from '../dist/json/importMap-labs.json' with { type: 'json' }
 
+/** @type {() => import("rollup").Plugin} */
 const externalsPlugin = () => ({
   resolveId (source, importer) {
     if (importer && (source.endsWith('.sass') || source.endsWith('.scss'))) {
@@ -25,6 +26,14 @@ const externalsPlugin = () => ({
   }
 })
 
+/**
+ *
+ * @param input {string}
+ * @param output {string}
+ * @param renderChunk {import("rollup").RenderChunkHook | undefined}
+ * @param filter {(files: string[]) => string[] | undefined}
+ * @returns {import("rollup").RollupOptions[]}
+ */
 function createTypesConfig (input, output, renderChunk, filter) {
   input = 'types-temp/' + input
   let files = fg.sync(input)
@@ -33,7 +42,8 @@ function createTypesConfig (input, output, renderChunk, filter) {
 
   return files.map(file => {
     const outputFile = output.replace('*', mm.capture(input, file)[0])
-    return {
+    /** @type {import("rollup").RollupOptions} */
+    const options = {
       input: file,
       output: [{ file: outputFile, format: 'es', sourcemap: false }],
       plugins: [
@@ -70,9 +80,11 @@ function createTypesConfig (input, output, renderChunk, filter) {
         // sourcemaps(),
       ],
     }
+    return options
   })
 }
 
+/** @returns {Promise<string>} */
 async function getShims () {
   const components = Object.keys(importMap.components).map(name => (
     `    ${name}: typeof import('vuetify/components')['${name}']`
@@ -87,7 +99,8 @@ async function getShims () {
     .replace(/^\s*\/\/ @generate-components$/gm, components)
 }
 
-export default [
+/** @type {import("rollup").RollupOptions[]} */
+const options = [
   createTypesConfig('framework.d.ts', 'lib/index.d.mts', async code => {
     code.append('\n\n')
     code.append(await getShims())
@@ -115,3 +128,5 @@ export default [
   createTypesConfig('iconsets/*.d.ts', 'lib/iconsets/*.d.mts'),
   createTypesConfig('util/colors.d.ts', 'lib/util/colors.d.mts'),
 ].flat()
+
+export default options

@@ -1,4 +1,5 @@
-const semver = require('semver')
+import semver from 'semver'
+// const semver = require('semver')
 
 const version = process.argv[2]
 

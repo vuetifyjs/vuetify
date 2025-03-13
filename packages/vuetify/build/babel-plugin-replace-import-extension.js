@@ -30,7 +30,7 @@ function getOption(state, key) {
 }
 
 
-module.exports = function ({types: t}) {
+export default function ({types: t}) {
   return {
     visitor: {
       ImportDeclaration(path, state) {

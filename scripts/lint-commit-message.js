@@ -1,4 +1,5 @@
-const fs = require('fs')
+import fs from 'node:fs'
+// const fs = require('fs')
 
 const reset = '\x1b[0m'
 const red = '\x1b[31m'
@@ -8,6 +9,10 @@ const currentMessage = fs.readFileSync(messageFile, 'utf8').replace(/^# --------
 
 const errors = []
 
+/**
+ * @param message {string}
+ * @param cb {(currentMessage: string) => boolean}
+ */
 function check (message, cb) {
   if (cb(currentMessage)) {
     errors.push(message)

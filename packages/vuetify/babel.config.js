@@ -1,6 +1,8 @@
-const vuetifyPackage = require('./package.json')
+import fs from 'node:fs/promises'
 
-module.exports = {
+const vuetifyPackage = JSON.parse(await fs.readFile('./package.json', 'utf8'))
+
+export default {
   assumptions: {
     noDocumentAll: true
   },

@@ -1,6 +1,7 @@
-const autoprefixer = require('autoprefixer')
+import autoprefixer from 'autoprefixer'
+// const autoprefixer = require('autoprefixer')
 
-module.exports = ctx => ({
+export default ctx => ({
   plugins: [
     autoprefixer({
       remove: false
