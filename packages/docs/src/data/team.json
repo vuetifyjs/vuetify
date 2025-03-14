@@ -212,8 +212,8 @@
       "[vuetifyjs/*](https://github.com/vuetifyjs)"
     ],
     "languages": [
-      "Nepali",
-      "English"
+      "English",
+      "Nepali"
     ],
     "discord": "ikushum",
     "linkedin": "ikushum",
@@ -221,12 +221,15 @@
     "location": "Kathmandu, Nepal"
   },
   "Arslan038": {
-    "name": "Arslan Ahmed",
+    "name": "Muhammad Arslan Ahmed",
     "team": "core",
-    "discord": "",
+    "discord": "dev_arslan",
+    "linkedin": "arslan-ahmed-dev",
     "focus": [],
-    "languages": [],
-    "location": ""
+    "languages": [
+      "English"
+    ],
+    "location": "Malta"
   },
   "AndreyYolkin": {
     "name": "Andrei Elkin",
