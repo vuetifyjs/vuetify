@@ -253,10 +253,16 @@
   "jcjp": {
     "name": "JC Puno",
     "team": "core",
-    "discord": "",
-    "focus": [],
-    "languages": [],
-    "location": ""
+    "discord": "psi#8085",
+    "focus": [
+      "[vuetifyjs](https://github.com/vuetifyjs)",
+      "[Nuxt](https://github.com/userquin/vuetify-nuxt-module)"
+    ],
+    "languages": [
+      "Tagalog / Filipino",
+      "English"
+    ],
+    "location": "Manila, Philipines"
   },
   "oumoussa98": {
     "name": "Abdelouahed Oumoussa",
