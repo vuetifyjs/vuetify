@@ -231,10 +231,20 @@
   "AndreyYolkin": {
     "name": "Andrei Elkin",
     "team": "core",
-    "discord": "",
-    "focus": [],
-    "languages": [],
-    "location": ""
+    "discord": "yol_kin",
+    "focus": [
+      "[vuetifyjs/create](https://github.com/vuetifyjs/create)",
+      "[vuetify-loader](https://github.com/vuetifyjs/vuetify-loader)",
+      "[Nuxt](https://github.com/vuetifyjs/nuxt-module)"
+    ],
+    "languages": [
+      "Polish",
+      "English",
+      "Russian"
+    ],
+    "location": "Kraków, Poland",
+    "linkedin": "yolkin",
+    "joined": "March 2025"
   },
   "jcjp": {
     "name": "JC Puno",
