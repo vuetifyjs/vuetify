@@ -1,8 +1,9 @@
-import { render, screen } from '@test'
-
 // Components
 import { VDefaultsProvider } from '../VDefaultsProvider'
 import { VCard } from '@/components/VCard'
+
+// Utilities
+import { render, screen } from '@test'
 
 describe('VDefaultsProvider', () => {
   it('should apply new defaults', () => {
