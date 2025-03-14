@@ -192,10 +192,10 @@
   "eesayas": {
     "name": "Isaias Briones",
     "team": "core",
-    "discord": "",
-    "focus": [],
-    "languages": [],
-    "location": ""
+    "discord": "ibriones",
+    "focus": ["[vuetifyjs/*](https://github.com/vuetifyjs)"],
+    "languages": ["English", "Filipino"],
+    "location": "Edmonton, AB, Canada"
   },
   "Haviles04": {
     "name": "Henry Aviles",
