@@ -72,8 +72,10 @@ export const makeVFieldProps = propsFactory({
     type: Boolean,
     default: null,
   },
+  glow: Boolean,
   error: Boolean,
   flat: Boolean,
+  iconColor: [Boolean, String],
   label: String,
   persistentClear: Boolean,
   prependInnerIcon: IconValue,
@@ -147,13 +149,19 @@ export const VField = genericComponent<new <T>(
     const floatingLabelRef = ref<VFieldLabel>()
     const controlRef = ref<HTMLElement>()
     const isPlainOrUnderlined = computed(() => ['plain', 'underlined'].includes(props.variant))
-
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'bgColor'))
-    const { textColorClasses, textColorStyles } = useTextColor(computed(() => {
+    const color = computed(() => {
       return props.error || props.disabled ? undefined
         : isActive.value && isFocused.value ? props.color
         : props.baseColor
-    }))
+    })
+    const iconColor = computed(() => {
+      if (!props.iconColor) return undefined
+
+      return props.iconColor === true ? color.value : props.iconColor
+    })
+
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'bgColor'))
+    const { textColorClasses, textColorStyles } = useTextColor(color)
 
     watch(isActive, val => {
       if (hasFloatingLabel.value) {
@@ -237,6 +245,7 @@ export const VField = genericComponent<new <T>(
               'v-field--disabled': props.disabled,
               'v-field--dirty': props.dirty,
               'v-field--error': props.error,
+              'v-field--glow': props.glow,
               'v-field--flat': props.flat,
               'v-field--has-background': !!props.bgColor,
               'v-field--persistent-clear': props.persistentClear,
@@ -276,6 +285,7 @@ export const VField = genericComponent<new <T>(
                 <InputIcon
                   key="prepend-icon"
                   name="prependInner"
+                  color={ iconColor.value }
                 />
               )}
 
@@ -361,6 +371,7 @@ export const VField = genericComponent<new <T>(
                 <InputIcon
                   key="append-icon"
                   name="appendInner"
+                  color={ iconColor.value }
                 />
               )}
             </div>

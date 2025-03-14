@@ -26,7 +26,7 @@ type Listeners<T extends {}, U = keyof T> = U extends `onClick:${infer V extends
 export function useInputIcon<T extends {}, K extends names = Listeners<T>> (props: T & InputIconProps<K>) {
   const { t } = useLocale()
 
-  function InputIcon ({ name }: { name: Extract<names, K> }) {
+  function InputIcon ({ name, color }: { name: Extract<names, K>, color?: string }) {
     const localeKey = {
       prepend: 'prependAction',
       prependInner: 'prependAction',
@@ -54,6 +54,7 @@ export function useInputIcon<T extends {}, K extends names = Listeners<T>> (prop
         aria-label={ label }
         onClick={ listener }
         onKeydown={ onKeydown }
+        color={ color }
       />
     )
   }
