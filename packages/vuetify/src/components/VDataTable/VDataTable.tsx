@@ -147,7 +147,7 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
     const { items } = useDataTableItems(props, columns)
 
     const search = toRef(props, 'search')
-    const { filteredItems } = useFilter(props, items, search, {
+    const { filteredItems, getMatches } = useFilter(props, items, search, {
       transform: item => item.columns,
       customKeyFilter: filterFunctions,
     })
@@ -262,6 +262,7 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
                         { ...attrs }
                         { ...dataTableRowsProps }
                         items={ paginatedItems.value }
+                        getMatches={ getMatches }
                         v-slots={ slots }
                       />
                     )}
