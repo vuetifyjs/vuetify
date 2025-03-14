@@ -1,5 +1,6 @@
 {
   "name": "@vuetify/vuetify-root",
+  "type": "module",
   "private": true,
   "husky": {
     "hooks": {

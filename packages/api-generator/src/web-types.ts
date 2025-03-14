@@ -1,4 +1,4 @@
-import fs from 'fs'
+import fs from 'node:fs'
 import { capitalize } from './helpers/text'
 import type { ComponentData, DirectiveData } from './types'
 import pkg from '../package.json' with { type: 'json' }

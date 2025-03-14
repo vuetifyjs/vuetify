@@ -1,6 +1,6 @@
-import path from 'path'
-import fs, { readFileSync } from 'fs'
-import { fileURLToPath } from 'url'
+import path from 'node:path'
+import fs, { readFileSync } from 'node:fs'
+import { fileURLToPath } from 'node:url'
 
 import fg from 'fast-glob'
 import { defineConfig, loadEnv } from 'vite'
@@ -34,12 +34,12 @@ export default defineConfig(({ mode }) => {
     root: resolve('dev'),
     server: {
       host: process.env.HOST,
-      port: process.env.TEST ? undefined : +(process.env.PORT ?? 8090),
+      port: process.env.TEST ? undefined : Number(process.env.PORT ?? 8090),
       strictPort: !!process.env.PORT && !process.env.TEST,
     },
     preview: {
       host: process.env.HOST,
-      port: +(process.env.PORT ?? 8090),
+      port: Number(process.env.PORT ?? 8090),
       strictPort: !!process.env.PORT,
     },
     resolve: {
