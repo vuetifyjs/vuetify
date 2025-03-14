@@ -1,5 +1,6 @@
 {
   "name": "vuetifyjs.com",
+  "type": "module",
   "description": "A Vue.js project",
   "private": true,
   "author": "John Leider <john@vuetifyjs.com>",
