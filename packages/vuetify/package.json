@@ -55,27 +55,52 @@
     ".": {
       "sass": "./lib/styles/main.sass",
       "style": "./lib/styles/main.css",
-      "types": "./lib/framework.d.ts",
-      "default": "./lib/framework.js"
+      "import": "./lib/framework.js"
     },
     "./styles": {
       "sass": "./lib/styles/main.sass",
       "default": "./lib/styles/main.css"
     },
     "./styles/*": "./lib/styles/*",
-    "./framework": "./lib/framework.js",
-    "./blueprints": "./lib/blueprints/index.js",
-    "./blueprints/*": "./lib/blueprints/*.js",
-    "./components": "./lib/components/index.js",
-    "./components/*": "./lib/components/*/index.js",
-    "./directives": "./lib/directives/index.js",
-    "./directives/*": "./lib/directives/*/index.js",
-    "./locale": "./lib/locale/index.js",
-    "./locale/adapters/*": "./lib/locale/adapters/*.js",
-    "./iconsets/*": "./lib/iconsets/*.js",
-    "./labs/components": "./lib/labs/components.js",
-    "./labs/*": "./lib/labs/*/index.js",
-    "./util/colors": "./lib/util/colors.js",
+    "./framework": {
+      "import": "./lib/framework.js"
+    },
+    "./blueprints": {
+      "import": "./lib/blueprints/index.js"
+    },
+    "./blueprints/*": {
+      "import": "./lib/blueprints/*.js"
+    },
+    "./components": {
+      "import": "./lib/components/index.js"
+    },
+    "./components/*": {
+      "import": "./lib/components/*/index.js"
+    },
+    "./directives": {
+      "import": "./lib/directives/index.js"
+    },
+    "./directives/*": {
+      "import": "./lib/directives/*/index.js"
+    },
+    "./locale": {
+      "import": "./lib/locale/index.js"
+    },
+    "./locale/adapters/*": {
+      "import": "./lib/locale/adapters/*.js"
+    },
+    "./iconsets/*": {
+      "import": "./lib/iconsets/*.js"
+    },
+    "./labs/components": {
+      "import": "./lib/labs/components.js"
+    },
+    "./labs/*": {
+      "import": "./lib/labs/*/index.js"
+    },
+    "./util/colors": {
+      "import": "./lib/util/colors.js"
+    },
     "./*.mjs": "./*.js",
     "./*": "./*"
   },
