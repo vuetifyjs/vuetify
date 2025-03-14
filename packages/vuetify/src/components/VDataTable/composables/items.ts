@@ -4,15 +4,10 @@ import { getPropertyFromItem, propsFactory } from '@/util'
 
 // Types
 import type { PropType, Ref } from 'vue'
-import type { CellProps, DataTableItem, InternalDataTableHeader, RowProps } from '../types'
+import type { CellProps, DataTableItem, DataTableItemProps, InternalDataTableHeader, RowProps } from '../types'
 import type { SelectItemKey } from '@/util'
 
-export interface DataTableItemProps {
-  items: any[]
-  itemValue: SelectItemKey
-  itemSelectable: SelectItemKey
-  returnObject: boolean
-}
+export type { DataTableItemProps }
 
 // Composables
 export const makeDataTableItemsProps = propsFactory({
