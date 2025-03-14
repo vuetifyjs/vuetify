@@ -208,10 +208,17 @@
   "ikushum": {
     "name": "Ishan Subedi",
     "team": "core",
-    "discord": "",
-    "focus": [],
-    "languages": [],
-    "location": ""
+    "focus": [
+      "[vuetifyjs/*](https://github.com/vuetifyjs)"
+    ],
+    "languages": [
+      "Nepali",
+      "English"
+    ],
+    "discord": "ikushum",
+    "linkedin": "ikushum",
+    "joined": "March 2025",
+    "location": "Kathmandu, Nepal"
   },
   "Arslan038": {
     "name": "Arslan Ahmed",
