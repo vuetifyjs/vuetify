@@ -1,0 +1,6 @@
+{
+  "props": {
+    "mask": "Apply a custom character mask to the input. See mask table below for more information.",
+    "returnMaskedValue": "Returns the unmodified masked string."
+  }
+}
