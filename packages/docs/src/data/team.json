@@ -260,10 +260,20 @@
   "oumoussa98": {
     "name": "Abdelouahed Oumoussa",
     "team": "core",
-    "discord": "",
-    "focus": [],
-    "languages": [],
-    "location": ""
+    "discord": "oumoussa",
+    "twitter": "oumoussa_",
+    "github": "oumoussa98",
+    "linkedin": "aoumoussa",
+    "avatar": "https://gravatar.com/avatar/7d1a8ba680ab9d49bd9cdaeff05d0e76",
+    "focus": [
+      "[vuetifyjs/*](https://github.com/vuetifyjs)"
+    ],
+    "languages": [
+      "Arabic",
+      "English"
+    ],
+    "joined": "March 2025",
+    "location": "Casablanca, Morocco"
   },
   "jacekkarczmarczyk": {
     "discord": "jacek#3542",
