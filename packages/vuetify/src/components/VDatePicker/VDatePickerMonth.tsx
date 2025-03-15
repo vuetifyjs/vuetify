@@ -130,10 +130,10 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
     }
 
     function onMultipleClick (value: unknown) {
-      const index = model.value.findIndex(selection => adapter.isSameDay(selection, value))
+      const index = model.value.findIndex(selection => adapter.isSameDay(adapter.date(selection), value))
 
       if (index === -1) {
-        model.value = [...model.value, value]
+        model.value = [...model.value, adapter.toJsDate(value)]
       } else {
         const value = [...model.value]
         value.splice(index, 1)
