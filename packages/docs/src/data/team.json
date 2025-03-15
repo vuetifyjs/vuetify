@@ -184,10 +184,14 @@
   "Spatlani": {
     "name": "Shubham Patlani",
     "team": "core",
-    "discord": "",
-    "focus": [],
-    "languages": [],
-    "location": ""
+    "discord": "spatlani",
+    "focus": ["[vuetifyjs/*](https://github.com/vuetifyjs)"],
+    "languages": ["English", "Hindi", "Punjabi"],
+    "linkedin": "in/spatlani",
+    "github": "spatlani",
+    "avatar": "https://avatars.githubusercontent.com/u/11574195",
+    "location": "Delhi, India",
+    "joined": "March 2025"
   },
   "eesayas": {
     "name": "Isaias Briones",
