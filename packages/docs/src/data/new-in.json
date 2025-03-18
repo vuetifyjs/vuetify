@@ -39,7 +39,8 @@
   },
   "VTooltip": {
     "props": {
-      "eager": "3.2.0"
+      "eager": "3.2.0",
+      "interactive": "3.8.0"
     }
   }
 }

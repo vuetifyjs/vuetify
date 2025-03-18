@@ -250,9 +250,7 @@ Color packs are handy for quickly applying a color to a component but mostly unu
 
 ## Enabling CSS cascade layers
 
-::: success
-This feature was introduced in [v3.6.0 (Nebula)](/getting-started/release-notes/?version=v3.6.0)
-:::
+<DocIntroduced version="3.6.0" />
 
 [Cascade layers](https://developer.mozilla.org/en-US/docs/Web/CSS/@layer) are a modern CSS feature that makes it easier to write custom styles without having to deal with specificity issues and `!important`. This will be included by default in Vuetify 4 but can optionally be used now:
 

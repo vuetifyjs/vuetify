@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   title: Number inputs
   description: The Number input component is used for ...
@@ -19,25 +20,7 @@ The VNumberInput extends the standard HTML number-type input, ensuring style con
 
 <page-features />
 
-::: warning
-
-This feature requires [v3.5.10](/getting-started/release-notes/?version=v3.5.10)
-
-:::
-
-## Installation
-
-Labs components require manual import and registration with the Vuetify instance.
-
-```js { resource="src/plugins/vuetify.js" }
-import { VNumberInput } from 'vuetify/labs/VNumberInput'
-
-export default createVuetify({
-  components: {
-    VNumberInput,
-  },
-})
-```
+<DocIntroduced version="3.7.0" />
 
 ## Usage
 

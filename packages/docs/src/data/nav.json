@@ -136,6 +136,7 @@
       "file-inputs",
       "forms",
       "inputs",
+      "number-inputs",
       "otp-input",
       "radio-buttons",
       "range-sliders",
@@ -191,6 +192,7 @@
       "ratings",
       "skeleton-loaders",
       "snackbars",
+      "snackbar-queue",
       "timelines",
       { "divider": true },
       { "subheader": "images-and-icons" },
@@ -254,15 +256,7 @@
         "subfolder": "components"
       },
       {
-        "title": "number-inputs",
-        "subfolder": "components"
-      },
-      {
         "title": "pull-to-refresh",
-        "subfolder": "components"
-      },
-      {
-        "title": "snackbar-queue",
         "subfolder": "components"
       },
       {
