@@ -7,6 +7,19 @@
     @include tools.border($icon-btn-border...);
     @include tools.rounded($icon-btn-border-radius);
 
+    & {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex: none;
+      cursor: pointer;
+      transform: rotate(var(--v-icon-btn-rotate, 0deg));
+      transition: 0.2s settings.$standard-easing;
+      transition-property: width, height, transform;
+      height: $icon-btn-height;
+      width: $icon-btn-width;
+    }
+
     &--start {
       margin-inline-end: $icon-btn-margin-start;
     }

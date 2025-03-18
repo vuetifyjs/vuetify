@@ -3,6 +3,7 @@ import './VIconBtn.scss'
 
 // Components
 import { VIcon } from '@/components/VIcon'
+import { VProgressCircular } from '@/components/VProgressCircular'
 
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'
@@ -14,12 +15,17 @@ import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
-import { toRef, toRefs } from 'vue'
+import { toRefs } from 'vue'
 import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
 import type { IconValue } from '@/composables/icons'
+
+export type VIconBtnSlots = {
+  default: never
+  loader: never
+}
 
 export const makeVIconBtnProps = propsFactory({
   bgColor: String,
@@ -43,7 +49,7 @@ export const makeVIconBtnProps = propsFactory({
   ...makeThemeProps(),
 }, 'VIconBtn')
 
-export const VIconBtn = genericComponent()({
+export const VIconBtn = genericComponent<VIconBtnSlots>()({
   name: 'VIconBtn',
 
   props: makeVIconBtnProps(),
@@ -75,8 +81,9 @@ export const VIconBtn = genericComponent()({
           textColorStyles.value,
           props.style,
           {
-            '--v-icon-btn-rotate: ': props.rotate,
-            '--v-icon-btn-size': convertToUnit(props.size),
+            '--v-icon-btn-rotate': props.rotate ? convertToUnit(props.rotate, 'deg') : undefined,
+            '--v-icon-btn-height': props.size ? convertToUnit(props.size) : undefined,
+            '--v-icon-btn-width': props.size ? convertToUnit(props.size) : undefined,
           },
         ]}
       >
@@ -87,6 +94,18 @@ export const VIconBtn = genericComponent()({
               icon={ props.icon }
             />
           )
+        )}
+
+        { !!props.loading && (
+            <span key="loader" class="v-icon-btn__loader">
+              { slots.loader?.() ?? (
+                <VProgressCircular
+                  color={ typeof props.loading === 'boolean' ? undefined : props.loading }
+                  indeterminate
+                  width="2"
+                />
+              )}
+            </span>
         )}
       </props.tag>
     ))
