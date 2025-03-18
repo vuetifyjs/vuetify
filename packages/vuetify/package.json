@@ -79,12 +79,12 @@
     "./dist/vuetify.js": {
       "types": "./dist/vuetify.d.ts",
       "import": "./dist/vuetify.esm.js",
-      "default": "./dist/vuetify.js"
+      "default": "./dist/vuetify.cjs"
     },
     "./dist/vuetify-labs.js": {
       "types": "./dist/vuetify-labs.d.ts",
       "import": "./dist/vuetify-labs.esm.js",
-      "default": "./dist/vuetify-labs.js"
+      "default": "./dist/vuetify-labs.cjs"
     },
     "./*.mjs": "./*.js",
     "./*": "./*"

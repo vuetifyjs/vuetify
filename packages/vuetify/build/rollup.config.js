@@ -45,6 +45,14 @@ const options = [
         banner,
       },
       {
+        file: 'dist/vuetify.cjs',
+        name: 'Vuetify',
+        format: 'umd',
+        globals: { vue: 'Vue' },
+        sourcemap: true,
+        banner,
+      },
+      {
         file: 'dist/vuetify.min.js',
         name: 'Vuetify',
         format: 'umd',
@@ -180,6 +188,13 @@ const options = [
     output: [
       {
         file: 'dist/vuetify-labs.js',
+        name: 'Vuetify',
+        format: 'umd',
+        globals: { vue: 'Vue' },
+        banner,
+      },
+      {
+        file: 'dist/vuetify-labs.cjs',
         name: 'Vuetify',
         format: 'umd',
         globals: { vue: 'Vue' },
