@@ -318,7 +318,7 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
   function getHead () {
     return {
       style: [{
-        children: styles.value,
+        textContent: styles.value,
         id: parsedOptions.stylesheetId,
         nonce: parsedOptions.cspNonce || false as never,
       }],
