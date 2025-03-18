@@ -191,6 +191,7 @@
       "ratings",
       "skeleton-loaders",
       "snackbars",
+      "snackbar-queue",
       "timelines",
       { "divider": true },
       { "subheader": "images-and-icons" },
@@ -259,10 +260,6 @@
       },
       {
         "title": "pull-to-refresh",
-        "subfolder": "components"
-      },
-      {
-        "title": "snackbar-queue",
         "subfolder": "components"
       },
       {
