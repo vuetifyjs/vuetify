@@ -20,11 +20,7 @@ The `v-confirm-edit` component is used to allow the user to verify their changes
 
 <PageFeatures />
 
-::: success
-
-This feature was introduced in [v3.6.0](/getting-started/release-notes/?version=v3.6.0)
-
-:::
+<DocIntroduced version="3.6.0" />
 
 ## Usage
 
