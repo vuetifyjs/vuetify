@@ -1,7 +1,7 @@
 {
   "props": {
     "border": "Adds a colored border to the component.",
-    "borderColor": "Specifies the color of the border. Accepts any color value.",
+    "borderColor": "Specifies the color of the border. Only used in combination with **border** prop. Accepts any color value.",
     "closable": "Adds a close icon that can hide the alert.",
     "closeIcon": "Change the default icon used for **closable** alerts.",
     "closeLabel": "Text used for *aria-label* on **closable** alerts. Can also be customized globally in [Internationalization](/customization/internationalization).",
