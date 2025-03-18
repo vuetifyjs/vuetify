@@ -4,16 +4,13 @@ import { IN_BROWSER } from '@/util/globals'
 
 // Types
 import type {
-  ComponentInternalInstance,
   ComponentPublicInstance,
   ComputedGetter,
-  InjectionKey,
   PropType,
   Ref,
   ToRefs,
   VNode,
   VNodeArrayChildren,
-  VNodeChild,
   WatchOptions,
 } from 'vue'
 
@@ -526,29 +523,6 @@ export function toKebabCase (str = '') {
 toKebabCase.cache = new Map<string, string>()
 
 export type MaybeRef<T> = T | Ref<T>
-
-export function findChildrenWithProvide (
-  key: InjectionKey<any> | symbol,
-  vnode?: VNodeChild,
-): ComponentInternalInstance[] {
-  if (!vnode || typeof vnode !== 'object') return []
-
-  if (Array.isArray(vnode)) {
-    return vnode.map(child => findChildrenWithProvide(key, child)).flat(1)
-  } else if (vnode.suspense) {
-    return findChildrenWithProvide(key, vnode.ssContent!)
-  } else if (Array.isArray(vnode.children)) {
-    return vnode.children.map(child => findChildrenWithProvide(key, child)).flat(1)
-  } else if (vnode.component) {
-    if (Object.getOwnPropertySymbols(vnode.component.provides).includes(key as symbol)) {
-      return [vnode.component]
-    } else if (vnode.component.subTree) {
-      return findChildrenWithProvide(key, vnode.component.subTree).flat(1)
-    }
-  }
-
-  return []
-}
 
 export class CircularBuffer<T = never> {
   readonly #arr: Array<T> = []
