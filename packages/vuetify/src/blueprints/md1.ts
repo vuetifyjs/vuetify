@@ -28,6 +28,17 @@ export const md1: Blueprint = {
     VCombobox: {
       variant: 'underlined',
     },
+    VDatePicker: {
+      color: 'primary',
+      controlHeight: 44,
+      elevation: 1,
+      rounded: 0,
+
+      VBtn: {
+        color: 'high-emphasis',
+        rounded: 'circle',
+      },
+    },
     VSelect: {
       variant: 'underlined',
     },
