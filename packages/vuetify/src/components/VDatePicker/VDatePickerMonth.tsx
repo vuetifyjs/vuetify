@@ -39,10 +39,6 @@ export const makeVDatePickerMonthProps = propsFactory({
     type: String,
     default: 'picker-reverse-transition',
   },
-  dateClass: {
-    type: Function,
-    default: () => [],
-  },
 
   ...omit(makeCalendarProps(), ['displayValue']),
 }, 'VDatePickerMonth')
@@ -219,7 +215,6 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
                       'v-date-picker-month__day--week-end': item.isWeekEnd,
                       'v-date-picker-month__day--week-start': item.isWeekStart,
                     },
-                    props.dateClass(item.date),
                   ]}
                   data-v-date={ !item.isDisabled ? item.isoDate : undefined }
                 >

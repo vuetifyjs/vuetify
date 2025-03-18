@@ -365,7 +365,9 @@ export const VDatePicker = genericComponent<new <
                       onUpdate:year={ onUpdateYear }
                       min={ minDate.value }
                       max={ maxDate.value }
-                    />
+                    >
+                      {{ ...slots }}
+                    </VDatePickerMonth>
                   )}
                 </VFadeTransition>
               </>
