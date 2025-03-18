@@ -20,9 +20,7 @@ The `v-virtual-scroll` component displays a virtual, _infinite_ list. It support
 
 <PageFeatures />
 
-::: success
-This feature was introduced in [v3.2.0 (Orion)](/getting-started/release-notes/?version=v3.2.0)
-:::
+<DocIntroduced version="3.2.0" />
 
 ## Usage
 

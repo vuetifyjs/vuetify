@@ -11,7 +11,7 @@ import { computed, nextTick, shallowRef, watch } from 'vue'
 import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
-import type { PropType } from 'vue'
+import type { PropType, VNodeProps } from 'vue'
 import type { GenericProps } from '@/util'
 
 export type VSnackbarQueueSlots<T extends string | SnackbarMessage> = {
@@ -27,7 +27,6 @@ export type VSnackbarQueueSlots<T extends string | SnackbarMessage> = {
 
 export type SnackbarMessage = Omit<
   VSnackbar['$props'],
-  | '$children'
   | 'modelValue'
   | 'onUpdate:modelValue'
   | 'activator'
@@ -37,6 +36,10 @@ export type SnackbarMessage = Omit<
   | 'openOnClick'
   | 'openOnFocus'
   | 'openOnHover'
+  | '$children'
+  | 'v-slots'
+  | `v-slot:${string}`
+  | keyof VNodeProps
 >
 
 export const makeVSnackbarQueueProps = propsFactory({

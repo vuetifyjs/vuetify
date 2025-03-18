@@ -20,6 +20,7 @@ import type { OverlaySlots } from '@/components/VOverlay/VOverlay'
 
 export const makeVTooltipProps = propsFactory({
   id: String,
+  interactive: Boolean,
   text: String,
 
   ...omit(makeVOverlayProps({
@@ -94,6 +95,7 @@ export const VTooltip = genericComponent<OverlaySlots>()({
           ref={ overlay }
           class={[
             'v-tooltip',
+            { 'v-tooltip--interactive': props.interactive },
             props.class,
           ]}
           style={ props.style }
