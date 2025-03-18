@@ -1,0 +1,5 @@
+{
+  "props": {
+    "hideActions": "Hide the Cancel and OK buttons, and automatically update the value when a date is selected."
+  }
+}
