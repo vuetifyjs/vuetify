@@ -21,11 +21,18 @@ import { computed, ref, shallowRef, watch } from 'vue'
 import { genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
+import type { VDatePickerMonthSlots } from './VDatePickerMonth'
+import type { VDatePickerMonthsSlots } from './VDatePickerMonths'
+import type { VDatePickerYearsSlots } from './VDatePickerYears'
 import type { VPickerSlots } from '@/labs/VPicker/VPicker'
 import type { GenericProps } from '@/util'
 
 // Types
-export type VDatePickerSlots = Omit<VPickerSlots, 'header'> & {
+export type VDatePickerSlots = Omit<
+  VDatePickerMonthSlots
+  & VDatePickerYearsSlots
+  & VDatePickerMonthsSlots
+  & VPickerSlots, 'header'> & {
   header: {
     header: string
     transition: string
@@ -344,7 +351,9 @@ export const VDatePicker = genericComponent<new <
                       min={ minDate.value }
                       max={ maxDate.value }
                       year={ year.value }
-                    />
+                    >
+                      {{ ...slots }}
+                    </VDatePickerMonths>
                   ) : viewMode.value === 'year' ? (
                     <VDatePickerYears
                       key="date-picker-years"
@@ -353,7 +362,9 @@ export const VDatePicker = genericComponent<new <
                       onUpdate:modelValue={ onUpdateYear }
                       min={ minDate.value }
                       max={ maxDate.value }
-                    />
+                    >
+                      {{ ...slots }}
+                    </VDatePickerYears>
                   ) : (
                     <VDatePickerMonth
                       key="date-picker-month"
