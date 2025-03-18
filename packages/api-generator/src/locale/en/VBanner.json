@@ -8,6 +8,7 @@
   },
   "slots": {
     "actions": "The slot used for the action's content such as a [v-btn](/components/buttons).",
-    "thumbnail": "The slot used for avatars and icon content."
+    "thumbnail": "The slot used for avatars and icon content.",
+    "prepend": "Slot for icon at beginning of banner."
   }
 }
