@@ -5,6 +5,6 @@
     "year": "Sets the year."
   },
   "slots": {
-    "year":"Slot for the year."
+    "year": "Slot for the year."
   }
 }
