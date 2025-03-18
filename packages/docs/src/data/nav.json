@@ -136,6 +136,7 @@
       "file-inputs",
       "forms",
       "inputs",
+      "number-inputs",
       "otp-input",
       "radio-buttons",
       "range-sliders",
@@ -252,10 +253,6 @@
       },
       {
         "title": "file-upload",
-        "subfolder": "components"
-      },
-      {
-        "title": "number-inputs",
         "subfolder": "components"
       },
       {
