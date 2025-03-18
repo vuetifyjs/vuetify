@@ -15,7 +15,7 @@ Add regression protection by adding unit tests to your Vuetify application
 
 <PageFeatures />
 
-<VoPromotionsCardVuetify />
+<PromotedEntry />
 
 ## Usage
 

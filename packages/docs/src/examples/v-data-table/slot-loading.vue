@@ -1,19 +1,39 @@
 <template>
-  <div class="text-center">
+  <div class="text-center mt-2 mb-4">
     <v-btn
       :disabled="loading"
-      append-icon="mdi-refresh"
+      prepend-icon="mdi-refresh"
+      rounded="lg"
       text="Refresh"
-      variant="outlined"
+      variant="text"
+      border
       @click="onClick"
     ></v-btn>
   </div>
 
-  <v-data-table :items="items" :loading="loading">
-    <template v-slot:loading>
-      <v-skeleton-loader type="table-row@10"></v-skeleton-loader>
-    </template>
-  </v-data-table>
+  <v-sheet border rounded>
+    <v-data-table :items="items" :loading="loading">
+      <template v-slot:loading>
+        <v-skeleton-loader type="table-row@10"></v-skeleton-loader>
+      </template>
+
+      <template v-slot:item.horsepower="{ value }">
+        <div class="text-medium-emphasis">
+          <span>{{ value }}</span>
+
+          <v-icon icon="mdi-horse-variant-fast" end></v-icon>
+        </div>
+      </template>
+
+      <template v-slot:item.torque="{ value }">
+        <div class="text-medium-emphasis">
+          <span>{{ value }}</span>
+
+          <v-icon icon="mdi-tire" end></v-icon>
+        </div>
+      </template>
+    </v-data-table>
+  </v-sheet>
 </template>
 
 <script setup>

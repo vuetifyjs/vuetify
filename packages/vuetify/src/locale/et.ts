@@ -1,11 +1,11 @@
 export default {
   badge: 'Märk',
-  open: 'Open',
+  open: 'Ava',
   close: 'Sulge',
-  dismiss: 'Dismiss',
+  dismiss: 'Loobu',
   confirmEdit: {
     ok: 'OK',
-    cancel: 'Cancel',
+    cancel: 'Tühista',
   },
   dataIterator: {
     noResultsText: 'Vastavaid kirjeid ei leitud',
@@ -33,18 +33,18 @@ export default {
     pageText: '{0}-{1} {2}st',
   },
   dateRangeInput: {
-    divider: 'to',
+    divider: 'kuni',
   },
   datePicker: {
-    itemsSelected: '{0} selected',
+    itemsSelected: '{0} valitud',
     range: {
-      title: 'Select dates',
-      header: 'Enter dates',
+      title: 'Vali kuupäevad',
+      header: 'Sisesta kuupäevad',
     },
-    title: 'Select date',
-    header: 'Enter date',
+    title: 'Vali kuupäev',
+    header: 'Sisesta kuupäev',
     input: {
-      placeholder: 'Enter date',
+      placeholder: 'Sisesta kuupäev',
     },
   },
   noDataText: 'Andmed puuduvad',
@@ -52,56 +52,56 @@ export default {
     prev: 'Eelmine visuaalne',
     next: 'Järgmine visuaalne',
     ariaLabel: {
-      delimiter: 'Carousel slide {0} of {1}',
+      delimiter: 'Karusselli slaid {0} {1}st',
     },
   },
   calendar: {
     moreEvents: '{0} veel',
-    today: 'Today',
+    today: 'Täna',
   },
   input: {
-    clear: 'Clear {0}',
-    prependAction: '{0} prepended action',
-    appendAction: '{0} appended action',
-    otp: 'Please enter OTP character {0}',
+    clear: 'Tühjenda {0}',
+    prependAction: '{0} eelnev toiming',
+    appendAction: '{0} lisatud toiming',
+    otp: 'Palun sisesta OTP sümbol {0}',
   },
   fileInput: {
     counter: '{0} faili',
     counterSize: '{0} faili (kokku {1})',
   },
   fileUpload: {
-    title: 'Drag and drop files here',
-    divider: 'or',
-    browse: 'Browse Files',
+    title: 'Lohista ja lase failid siia',
+    divider: 'või',
+    browse: 'Sirvi faile',
   },
   timePicker: {
     am: 'AM',
     pm: 'PM',
-    title: 'Select Time',
+    title: 'Vali aeg',
   },
   pagination: {
     ariaLabel: {
-      root: 'Pagination Navigation',
+      root: 'Lehekülgede navigeerimine',
       next: 'Järgmine lehekülg',
       previous: 'Eelmine lehekülg',
       page: 'Mine lehele {0}',
       currentPage: 'Praegune leht, leht {0}',
-      first: 'First page',
-      last: 'Last page',
+      first: 'Esimene lehekülg',
+      last: 'Viimane lehekülg',
     },
   },
   stepper: {
-    next: 'Next',
-    prev: 'Previous',
+    next: 'Järgmine',
+    prev: 'Eelmine',
   },
   rating: {
     ariaLabel: {
-      item: 'Rating {0} of {1}',
+      item: 'Hinnang {0} {1}st',
     },
   },
-  loading: 'Loading...',
+  loading: 'Laadimine...',
   infiniteScroll: {
-    loadMore: 'Load more',
-    empty: 'No more',
+    loadMore: 'Laadi rohkem',
+    empty: 'Pole rohkem',
   },
 }

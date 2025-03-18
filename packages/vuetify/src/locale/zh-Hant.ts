@@ -1,11 +1,11 @@
 export default {
   badge: '徽章',
-  open: 'Open',
+  open: '開啟',
   close: '關閉',
-  dismiss: 'Dismiss',
+  dismiss: '關閉',
   confirmEdit: {
-    ok: 'OK',
-    cancel: 'Cancel',
+    ok: '確定',
+    cancel: '取消',
   },
   dataIterator: {
     noResultsText: '沒有符合條件的結果',
@@ -33,18 +33,18 @@ export default {
     pageText: '{2} 條中的 {0}~{1} 條',
   },
   dateRangeInput: {
-    divider: 'to',
+    divider: '至',
   },
   datePicker: {
-    itemsSelected: '{0} selected',
+    itemsSelected: '已選擇 {0} 個日期',
     range: {
-      title: 'Select dates',
-      header: 'Enter dates',
+      title: '選擇日期範圍',
+      header: '輸入日期範圍',
     },
-    title: 'Select date',
-    header: 'Enter date',
+    title: '選擇日期',
+    header: '輸入日期',
     input: {
-      placeholder: 'Enter date',
+      placeholder: '請輸入日期',
     },
   },
   noDataText: '沒有資料',
@@ -52,32 +52,32 @@ export default {
     prev: '上一張',
     next: '下一張',
     ariaLabel: {
-      delimiter: 'Carousel slide {0} of {1}',
+      delimiter: '第 {0} 張 / 共 {1} 張',
     },
   },
   calendar: {
     moreEvents: '還有其他 {0} 項',
-    today: 'Today',
+    today: '今天',
   },
   input: {
-    clear: 'Clear {0}',
-    prependAction: '{0} prepended action',
-    appendAction: '{0} appended action',
-    otp: 'Please enter OTP character {0}',
+    clear: '清除 {0}',
+    prependAction: '{0} 前置操作',
+    appendAction: '{0} 附加操作',
+    otp: '請輸入第 {0} 個 OTP 字元',
   },
   fileInput: {
     counter: '{0} 個檔案',
     counterSize: '{0} 個檔案（共 {1}）',
   },
   fileUpload: {
-    title: 'Drag and drop files here',
-    divider: 'or',
-    browse: 'Browse Files',
+    title: '拖曳檔案至此',
+    divider: '或',
+    browse: '瀏覽檔案',
   },
   timePicker: {
-    am: 'AM',
-    pm: 'PM',
-    title: 'Select Time',
+    am: '上午',
+    pm: '下午',
+    title: '選擇時間',
   },
   pagination: {
     ariaLabel: {
@@ -86,22 +86,22 @@ export default {
       previous: '上一頁',
       page: '轉到頁面 {0}',
       currentPage: '當前頁 {0}',
-      first: 'First page',
-      last: 'Last page',
+      first: '第一頁',
+      last: '最後一頁',
     },
   },
   stepper: {
-    next: 'Next',
-    prev: 'Previous',
+    next: '下一步',
+    prev: '上一步',
   },
   rating: {
     ariaLabel: {
-      item: 'Rating {0} of {1}',
+      item: '評分 {0} / {1}',
     },
   },
-  loading: 'Loading...',
+  loading: '載入中...',
   infiniteScroll: {
-    loadMore: 'Load more',
-    empty: 'No more',
+    loadMore: '載入更多',
+    empty: '沒有更多內容',
   },
 }

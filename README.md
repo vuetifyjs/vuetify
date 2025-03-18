@@ -29,7 +29,7 @@
 
 ### 💖 Supporting Vuetify
 
-Vuetify is a [MIT licensed](http://opensource.org/licenses/MIT) project that is developed and maintained full-time by [John Leider](https://github.com/johnleider) and [Heather Leider](https://github.com/heatherleider); with support from the entire [Core Team](https://vuetifyjs.com/about/meet-the-team/). Sponsor Vuetify and receive some **awesome perks** and support Open Source Software at the same time! 🎉
+Vuetify is a [MIT licensed](http://opensource.org/licenses/MIT) project that is developed and maintained by the [Core Team](https://vuetifyjs.com/about/meet-the-team/). Sponsor Vuetify and receive some **awesome perks** and support Open Source Software at the same time! 🎉
 
 <ul>
   <li>
@@ -53,7 +53,7 @@ Vuetify is a [MIT licensed](http://opensource.org/licenses/MIT) project that is 
 
 ### What's the difference between GitHub Sponsors, Patreon, and OpenCollective?
 
-Funds donated through GitHub Sponsors and Patreon go directly to support John and Heather's full-time work on Vuetify. Funds donated via Open Collective are managed with transparent expenses and will be used for compensating work and expenses for Core team members. Your name/logo will receive proper recognition and exposure by donating on either platform.
+Funds donated through GitHub Sponsors and Patreon directly support [John Leider](https://github.com/sponsors/johnleider) and the ongoing development and maintenance of Vuetify. Funds donated via Open Collective are managed with transparent expenses and will be used for compensating work and expenses for Core team members. Your name/logo will receive proper recognition and exposure by donating on either platform.
 
 <h3><b>Special Sponsor</b></h3>
 

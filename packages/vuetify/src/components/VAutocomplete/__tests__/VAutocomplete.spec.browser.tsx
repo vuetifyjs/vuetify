@@ -583,7 +583,7 @@ describe('VAutocomplete', () => {
     expect(screen.queryByRole('listbox')).toBeNull()
 
     await rerender({ items: ['Foo', 'Bar'] })
-    await expect(screen.findByRole('listbox')).resolves.toBeInTheDocument()
+    await expect(screen.findByRole('listbox')).resolves.toBeVisible()
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/19346
@@ -593,7 +593,7 @@ describe('VAutocomplete', () => {
     })
 
     await userEvent.click(element)
-    await expect(screen.findByRole('listbox')).resolves.toBeInTheDocument()
+    await expect(screen.findByRole('listbox')).resolves.toBeVisible()
 
     await userEvent.click(screen.getAllByRole('option')[0])
     await rerender({ items: ['Foo', 'Bar', 'test', 'test 2'] })

@@ -1,23 +1,20 @@
 <template>
-  <div class="text-center">
+  <div class="pa-8 text-center">
     <v-btn
+      class="ma-auto"
       size="x-large"
       text="Click Me"
       @click="sheet = !sheet"
     ></v-btn>
 
     <v-bottom-sheet v-model="sheet">
-      <v-card
-        class="text-center"
-        height="200"
-      >
+      <v-card class="text-center" height="200">
         <v-card-text>
           <v-btn
+            text="Close"
             variant="text"
             @click="sheet = !sheet"
-          >
-            close
-          </v-btn>
+          ></v-btn>
 
           <br>
           <br>
@@ -32,9 +29,9 @@
 </template>
 
 <script setup>
-  import { ref } from 'vue'
+  import { shallowRef } from 'vue'
 
-  const sheet = ref(false)
+  const sheet = shallowRef(false)
 </script>
 
 <script>

@@ -16,8 +16,8 @@ export type DataTableHeader<T = Record<string, any>> = {
   align?: 'start' | 'end' | 'center'
 
   width?: number | string
-  minWidth?: string
-  maxWidth?: string
+  minWidth?: number | string
+  maxWidth?: number | string
   nowrap?: boolean
 
   headerProps?: Record<string, any>

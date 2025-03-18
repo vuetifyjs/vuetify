@@ -6,9 +6,8 @@
     multiple
   >
     <template v-slot:selection="{ item, index }">
-      <v-chip v-if="index < 2">
-        <span>{{ item.title }}</span>
-      </v-chip>
+      <v-chip v-if="index < 2" :text="item.title"></v-chip>
+
       <span
         v-if="index === 2"
         class="text-grey text-caption align-self-center"
@@ -20,18 +19,17 @@
 </template>
 
 <script setup>
-  import { ref } from 'vue'
+  import { shallowRef } from 'vue'
 
+  const value = shallowRef(['foo', 'bar', 'fizz'])
   const items = ['foo', 'bar', 'fizz', 'buzz', 'fizzbuzz', 'foobar']
-
-  const value = ref(['foo', 'bar', 'fizz'])
 </script>
 
 <script>
   export default {
     data: () => ({
-      items: ['foo', 'bar', 'fizz', 'buzz', 'fizzbuzz', 'foobar'],
       value: ['foo', 'bar', 'fizz'],
+      items: ['foo', 'bar', 'fizz', 'buzz', 'fizzbuzz', 'foobar'],
     }),
   }
 </script>

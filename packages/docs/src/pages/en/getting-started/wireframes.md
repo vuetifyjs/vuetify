@@ -15,7 +15,7 @@ The Vuetify **layout system** makes it easy to rapidly scaffold an application's
 
 <PageFeatures />
 
-<VoPromotionsCardVuetify />
+<PromotedEntry />
 
 ## Examples
 

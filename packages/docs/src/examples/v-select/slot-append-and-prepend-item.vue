@@ -39,7 +39,7 @@
 </template>
 
 <script setup>
-  import { computed, ref } from 'vue'
+  import { computed, shallowRef } from 'vue'
 
   const fruits = [
     'Apples',
@@ -90,7 +90,7 @@
     'Zucchini',
   ]
 
-  const selectedFruits = ref([])
+  const selectedFruits = shallowRef([])
 
   const likesAllFruit = computed(() => {
     return selectedFruits.value.length === fruits.length

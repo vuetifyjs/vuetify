@@ -54,6 +54,7 @@
   "composition": "Composition",
   "copied": "Copied!",
   "copy-link": "Copy link",
+  "configuration": "Configuration",
   "company": "Company",
   "comparison": {
     "average": "**Based on average of all Major/Minor/Patch releases over the last 12 months.",
@@ -68,6 +69,7 @@
   },
   "component": "Component",
   "components": "Components",
+  "concepts": "Common concepts",
   "contents": "Contents",
   "containment": "Containment",
   "contribute": {
@@ -102,7 +104,7 @@
       "experience": "Experience",
       "experience-message": "These options change your browsing experience within the documentation.",
       "layout": "Layout",
-      "layout-message": "Modify various the visiblity and behavior of various elements of the documentation.",
+      "layout-message": "Modify various the visibility and behavior of various elements of the documentation.",
       "rail-drawer": "Rail drawer",
       "rail-drawer-message": "Show the navigation drawer as a rail that expands on hover",
       "disable-quickbar": "Disable Quickbar",

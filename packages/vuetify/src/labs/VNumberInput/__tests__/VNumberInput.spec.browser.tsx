@@ -163,17 +163,17 @@ describe('VNumberInput', () => {
         <VNumberInput min={ 5 } max={ 15 } v-model={ model.value } />
       )
 
-      expect.element(screen.getByCSS('input')).toHaveValue('5')
+      await expect.element(screen.getByCSS('input')).toHaveValue('5')
       expect(model.value).toBe(5)
     })
 
-    it('should not bypass max', () => {
+    it('should not bypass max', async () => {
       const model = ref(20)
       render(() =>
         <VNumberInput min={ 5 } max={ 15 } v-model={ model.value } />
       )
 
-      expect.element(screen.getByCSS('input')).toHaveValue('15')
+      await expect.element(screen.getByCSS('input')).toHaveValue('15')
       expect(model.value).toBe(15)
     })
 
@@ -188,19 +188,19 @@ describe('VNumberInput', () => {
       ))
 
       await userEvent.click(screen.getByTestId('increment'))
-      expect.element(screen.getByCSS('input')).toHaveValue('0.03')
+      await expect.element(screen.getByCSS('input')).toHaveValue('0.03')
       expect(model.value).toBe(0.03)
 
       await userEvent.click(screen.getByTestId('increment'))
-      expect.element(screen.getByCSS('input')).toHaveValue('0.06')
+      await expect.element(screen.getByCSS('input')).toHaveValue('0.06')
       expect(model.value).toBe(0.06)
 
       await userEvent.click(screen.getByTestId('decrement'))
-      expect.element(screen.getByCSS('input')).toHaveValue('0.03')
+      await expect.element(screen.getByCSS('input')).toHaveValue('0.03')
       expect(model.value).toBe(0.03)
 
       await userEvent.click(screen.getByTestId('decrement'))
-      expect.element(screen.getByCSS('input')).toHaveValue('0')
+      await expect.element(screen.getByCSS('input')).toHaveValue('0.00')
       expect(model.value).toBe(0)
     })
   })

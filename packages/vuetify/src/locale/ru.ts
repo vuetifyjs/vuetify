@@ -2,7 +2,7 @@ export default {
   badge: 'Знак',
   open: 'Открыть',
   close: 'Закрыть',
-  dismiss: 'Dismiss',
+  dismiss: 'Отклонить',
   confirmEdit: {
     ok: 'ОК',
     cancel: 'Отмена',
@@ -57,7 +57,7 @@ export default {
   },
   calendar: {
     moreEvents: 'Еще {0}',
-    today: 'Today',
+    today: 'Сегодня',
   },
   input: {
     clear: 'Очистить {0}',
@@ -70,14 +70,14 @@ export default {
     counterSize: 'Файлов: {0} (всего {1})',
   },
   fileUpload: {
-    title: 'Drag and drop files here',
-    divider: 'or',
-    browse: 'Browse Files',
+    title: 'Перетащите файлы сюда',
+    divider: 'или',
+    browse: 'Просмотр файлов',
   },
   timePicker: {
     am: 'AM',
     pm: 'PM',
-    title: 'Select Time',
+    title: 'Выберите время',
   },
   pagination: {
     ariaLabel: {

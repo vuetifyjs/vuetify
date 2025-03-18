@@ -9,7 +9,7 @@
 
   const route = useRoute()
 
-  const error = ref(false)
+  const error = shallowRef(false)
   const name = computed(() => {
     const name = route.params.name as string
     if (name.endsWith('-directive')) return name.replace('-directive', '')

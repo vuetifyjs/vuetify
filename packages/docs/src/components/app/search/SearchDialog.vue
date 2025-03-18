@@ -100,7 +100,7 @@
     'NHT6C0IV19', // docsearch app ID
     'ffa344297924c76b0f4155384aff7ef2' // vuetify API key
   )
-  const searches = ref(JSON.parse(localStorage.getItem('searches') || '[]'))
+  const searches = shallowRef(JSON.parse(localStorage.getItem('searches') || '[]'))
 
   const locale = 'en'
 

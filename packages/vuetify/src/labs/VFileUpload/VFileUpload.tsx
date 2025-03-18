@@ -19,7 +19,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { onMounted, onUnmounted, ref, shallowRef } from 'vue'
-import { filterInputAttrs, genericComponent, only, propsFactory, useRender, wrapInArray } from '@/util'
+import { filterInputAttrs, genericComponent, pick, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { PropType, VNode } from 'vue'
@@ -79,7 +79,7 @@ export const makeVFileUploadProps = propsFactory({
 
   ...makeDelayProps(),
   ...makeDensityProps(),
-  ...only(makeVDividerProps({
+  ...pick(makeVDividerProps({
     length: 150,
   }), ['length', 'thickness', 'opacity']),
   ...makeVSheetProps(),
@@ -163,9 +163,10 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
     }
 
     function onClickRemove (index: number) {
-      model.value = model.value.filter((_, i) => i !== index)
+      const newValue = model.value.filter((_, i) => i !== index)
+      model.value = newValue
 
-      if (model.value.length > 0 || !inputRef.value) return
+      if (newValue.length > 0 || !inputRef.value) return
 
       inputRef.value.value = ''
     }

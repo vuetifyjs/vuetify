@@ -1,15 +1,13 @@
 <template>
-  <div>
-    <v-toolbar image="https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg">
-      <v-app-bar-nav-icon></v-app-bar-nav-icon>
+  <v-card height="200">
+    <v-toolbar class="text-white" image="https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg">
+      <v-btn icon="mdi-menu"></v-btn>
 
-      <v-toolbar-title>Vuetify</v-toolbar-title>
+      <v-toolbar-title text="Toolbar"></v-toolbar-title>
 
       <v-spacer></v-spacer>
 
-      <v-btn icon>
-        <v-icon>mdi-export</v-icon>
-      </v-btn>
+      <v-btn icon="mdi-export"></v-btn>
     </v-toolbar>
-  </div>
+  </v-card>
 </template>

@@ -2,8 +2,7 @@
 import Touch from '../'
 
 // Utilities
-import { render } from '@testing-library/vue'
-import { commands } from '@vitest/browser/context'
+import { commands, render } from '@test'
 import { defineComponent } from 'vue'
 
 // Types

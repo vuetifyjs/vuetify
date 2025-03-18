@@ -23,41 +23,39 @@
 
         <v-row :justify="mdAndDown ? 'center' : undefined">
           <v-col cols="auto">
-            <v-hover>
-              <template #default="{ isHovering, props }">
-                <v-sheet
-                  class="px-2 py-2 d-inline-flex align-center text-mono text-body-2 text-no-wrap"
-                  color="surface"
-                  width="215"
-                  border
-                  rounded
-                  v-bind="props"
-                >
-                  <v-icon
-                    class="me-1"
-                    color="medium-emphasis"
-                    icon="mdi-chevron-right"
-                    size="16"
-                  />
+            <v-hover v-slot="{ isHovering, props }">
+              <v-sheet
+                class="px-2 py-2 d-inline-flex align-center text-mono text-body-2 text-no-wrap"
+                color="surface"
+                width="215"
+                border
+                rounded
+                v-bind="props"
+              >
+                <v-icon
+                  class="me-1"
+                  color="medium-emphasis"
+                  icon="mdi-chevron-right"
+                  size="16"
+                />
 
-                  {{ randomPackage }} create
+                {{ randomPackage }} create
 
-                  <span class="text-primary font-weight-medium ms-2">
-                    vuetify
-                  </span>
+                <span class="text-primary font-weight-medium ms-2">
+                  vuetify
+                </span>
 
-                  <v-icon
-                    :icon="isCopying ? 'mdi-check' : 'mdi-clipboard-text-outline'"
-                    :style="{
-                      opacity: isHovering || isCopying ? 1 : 0,
-                    }"
-                    class="ms-auto"
-                    color="medium-emphasis"
-                    size="17"
-                    @click="copy"
-                  />
-                </v-sheet>
-              </template>
+                <v-icon
+                  :icon="isCopying ? 'mdi-check' : 'mdi-clipboard-text-outline'"
+                  :style="{
+                    opacity: isHovering || isCopying ? 1 : 0,
+                  }"
+                  class="ms-auto"
+                  color="medium-emphasis"
+                  size="17"
+                  @click="copy"
+                />
+              </v-sheet>
             </v-hover>
           </v-col>
 

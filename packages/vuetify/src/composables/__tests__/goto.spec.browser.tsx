@@ -1,6 +1,5 @@
 // Utilities
-import { render } from '@test'
-import { userEvent } from '@testing-library/user-event'
+import { render, userEvent } from '@test'
 import { defineComponent } from 'vue'
 import { useGoTo } from '../goto'
 

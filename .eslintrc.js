@@ -85,6 +85,7 @@ module.exports = {
       ignoreCase: true,
     }],
     'multiline-ternary': 'off',
+    'no-implicit-coercion': ['error', { boolean: false }],
 
     'sonarjs/cognitive-complexity': 'off',
     'sonarjs/no-duplicate-string': 'off',

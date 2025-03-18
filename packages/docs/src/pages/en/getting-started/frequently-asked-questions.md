@@ -15,7 +15,7 @@ Stuck on a particular problem? Check some of these common gotchas before creatin
 
 <PageFeatures />
 
-<VoPromotionsCardHighlight slug="vuetify-discord-subscriber-help" />
+<VoPromotionsCardHighlight class="mb-4" slug="vuetify-discord-subscriber-help" />
 
 ## Questions
 
@@ -100,9 +100,5 @@ The following responses are a collection of common questions asked by the Vuetif
 * **Is Vuetify 3 compatible with `@vue/compat`?**
 
   Not directly, you have to set `configureCompat({ MODE: 3 })` globally and `MODE: 2` in each of your components that you want to run in compatibility mode. There will still be some incorrect warnings that can be ignored with the `-ATTR_FALSE_VALUE` filter in devtools.
-
-* **Why don't elements exist in the DOM yet in `onMounted()`?** ([#19736](https://github.com/vuetifyjs/vuetify/issues/19736))
-
-  Some vuetify components are asynchronous, so there is no guarantee that their children will be mounted immediately. Either wait for the target element itself to be mounted with `v-on:vue:mounted` or use `onMounted` in a separate component that only has plain elements between the `<template>` and your target element.
 
 <PromotedPromoted type="theme" />

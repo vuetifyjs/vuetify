@@ -1,11 +1,11 @@
 export default {
   badge: 'Placa',
-  open: 'Open',
+  open: 'Abrir',
   close: 'Cerrar',
-  dismiss: 'Dismiss',
+  dismiss: 'Descartar',
   confirmEdit: {
     ok: 'OK',
-    cancel: 'Cancel',
+    cancel: 'Cancelar',
   },
   dataIterator: {
     noResultsText: 'Ningún elemento coincide con la búsqueda',
@@ -33,18 +33,18 @@ export default {
     pageText: '{0}-{1} de {2}',
   },
   dateRangeInput: {
-    divider: 'to',
+    divider: 'a',
   },
   datePicker: {
-    itemsSelected: '{0} selected',
+    itemsSelected: '{0} seleccionados',
     range: {
-      title: 'Select dates',
-      header: 'Enter dates',
+      title: 'Seleccionar fechas',
+      header: 'Introducir fechas',
     },
-    title: 'Select date',
-    header: 'Enter date',
+    title: 'Seleccionar fecha',
+    header: 'Introducir fecha',
     input: {
-      placeholder: 'Enter date',
+      placeholder: 'Introducir fecha',
     },
   },
   noDataText: 'No hay datos disponibles',
@@ -57,27 +57,27 @@ export default {
   },
   calendar: {
     moreEvents: '{0} más',
-    today: 'Today',
+    today: 'Hoy',
   },
   input: {
-    clear: 'Clear {0}',
-    prependAction: '{0} prepended action',
-    appendAction: '{0} appended action',
-    otp: 'Please enter OTP character {0}',
+    clear: 'Borrar {0}',
+    prependAction: '{0} acción adelantada',
+    appendAction: '{0} acción añadida',
+    otp: 'Por favor, introduzca el carácter OTP {0}',
   },
   fileInput: {
     counter: '{0} archivos',
     counterSize: '{0} archivos ({1} en total)',
   },
   fileUpload: {
-    title: 'Drag and drop files here',
-    divider: 'or',
-    browse: 'Browse Files',
+    title: 'Arrastra y suelta archivos aquí',
+    divider: 'o',
+    browse: 'Explorar archivos',
   },
   timePicker: {
     am: 'AM',
     pm: 'PM',
-    title: 'Select Time',
+    title: 'Seleccionar hora',
   },
   pagination: {
     ariaLabel: {
@@ -86,22 +86,22 @@ export default {
       previous: 'Página anterior',
       page: 'Ir a la página {0}',
       currentPage: 'Página actual, página {0}',
-      first: 'First page',
-      last: 'Last page',
+      first: 'Primera página',
+      last: 'Última página',
     },
   },
   stepper: {
-    next: 'Next',
-    prev: 'Previous',
+    next: 'Siguiente',
+    prev: 'Anterior',
   },
   rating: {
     ariaLabel: {
       item: 'Puntuación {0} de {1}',
     },
   },
-  loading: 'Loading...',
+  loading: 'Cargando...',
   infiniteScroll: {
-    loadMore: 'Load more',
-    empty: 'No more',
+    loadMore: 'Cargar más',
+    empty: 'No hay más',
   },
 }

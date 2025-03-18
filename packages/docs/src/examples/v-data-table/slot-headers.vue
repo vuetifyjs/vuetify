@@ -3,16 +3,52 @@
     :headers="headers"
     :items="desserts"
     item-value="name"
+    items-per-page="5"
+    hover
   >
+    <template v-slot:top>
+      <v-expand-transition>
+        <div v-if="headers.length < 6">
+          <v-btn
+            class="mb-2"
+            rounded="lg"
+            size="small"
+            text="Reset"
+            variant="text"
+            block
+            border
+            @click="onClickReset"
+          ></v-btn>
+
+          <v-divider></v-divider>
+        </div>
+      </v-expand-transition>
+    </template>
+
     <template v-slot:headers="{ columns, isSorted, getSortIcon, toggleSort }">
       <tr>
         <template v-for="column in columns" :key="column.key">
           <th>
-            <span class="mr-2 cursor-pointer" @click="() => toggleSort(column)">{{ column.title }}</span>
-            <template v-if="isSorted(column)">
-              <v-icon :icon="getSortIcon(column)"></v-icon>
-            </template>
-            <v-icon v-if="column.removable" icon="$close" @click="() => remove(column.key)"></v-icon>
+            <div class="d-flex align-center">
+              <span
+                class="me-2 cursor-pointer"
+                @click="toggleSort(column)"
+                v-text="column.title"
+              ></span>
+
+              <v-icon
+                v-if="isSorted(column)"
+                :icon="getSortIcon(column)"
+                color="medium-emphasis"
+              ></v-icon>
+
+              <v-icon
+                v-if="column.removable"
+                color="medium-emphasis"
+                icon="$close"
+                @click="remove(column.key)"
+              ></v-icon>
+            </div>
           </th>
         </template>
       </tr>
@@ -23,20 +59,24 @@
 <script setup>
   import { ref } from 'vue'
 
-  const headers = ref([
-    {
-      title: 'Dessert (100g serving)',
-      align: 'start',
-      key: 'name',
-      sortable: false,
-      removable: false,
-    },
-    { title: 'Calories', key: 'calories', removable: true },
-    { title: 'Fat (g)', key: 'fat', removable: true },
-    { title: 'Carbs (g)', key: 'carbs', removable: true },
-    { title: 'Protein (g)', key: 'protein', removable: true },
-    { title: 'Iron (%)', key: 'iron', removable: true },
-  ])
+  function DEFAULT_HEADERS () {
+    return [
+      {
+        title: 'Dessert',
+        align: 'start',
+        key: 'name',
+        sortable: false,
+        removable: false,
+      },
+      { title: 'Calories', key: 'calories', removable: true },
+      { title: 'Fat(g)', key: 'fat', removable: true },
+      { title: 'Carbs(g)', key: 'carbs', removable: true },
+      { title: 'Protein(g)', key: 'protein', removable: true },
+      { title: 'Iron(%)', key: 'iron', removable: true },
+    ]
+  }
+
+  const headers = ref(DEFAULT_HEADERS())
 
   const desserts = [
     {
@@ -121,28 +161,36 @@
     },
   ]
 
+  function onClickReset () {
+    headers.value = DEFAULT_HEADERS()
+  }
+
   function remove (key) {
     headers.value = headers.value.filter(header => header.key !== key)
   }
 </script>
 
 <script>
+  function DEFAULT_HEADERS () {
+    return [
+      {
+        title: 'Dessert',
+        align: 'start',
+        key: 'name',
+        sortable: false,
+        removable: false,
+      },
+      { title: 'Calories', key: 'calories', removable: true },
+      { title: 'Fat(g)', key: 'fat', removable: true },
+      { title: 'Carbs(g)', key: 'carbs', removable: true },
+      { title: 'Protein(g)', key: 'protein', removable: true },
+      { title: 'Iron(%)', key: 'iron', removable: true },
+    ]
+  }
+
   export default {
     data: () => ({
-      headers: [
-        {
-          title: 'Dessert (100g serving)',
-          align: 'start',
-          key: 'name',
-          sortable: false,
-          removable: false,
-        },
-        { title: 'Calories', key: 'calories', removable: true },
-        { title: 'Fat (g)', key: 'fat', removable: true },
-        { title: 'Carbs (g)', key: 'carbs', removable: true },
-        { title: 'Protein (g)', key: 'protein', removable: true },
-        { title: 'Iron (%)', key: 'iron', removable: true },
-      ],
+      headers: DEFAULT_HEADERS(),
       desserts: [
         {
           name: 'Frozen Yogurt',
@@ -227,6 +275,9 @@
       ],
     }),
     methods: {
+      onClickReset () {
+        this.headers = DEFAULT_HEADERS()
+      },
       remove (key) {
         this.headers = this.headers.filter(header => header.key !== key)
       },

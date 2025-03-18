@@ -14,5 +14,5 @@
 </template>
 
 <script setup>
-  const model = ref()
+  const model = shallowRef()
 </script>

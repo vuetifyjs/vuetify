@@ -48,7 +48,7 @@
   })
 
   const store = useLocaleStore()
-  const items = ref()
+  const items = shallowRef()
 
   const TableComponent = computed(() => {
     return {

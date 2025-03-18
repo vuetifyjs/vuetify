@@ -8,6 +8,8 @@ related:
   - /components/navigation-drawers/
   - /components/footers/
 features:
+  github: /composables/layout.ts
+  label: 'E: layout'
   report: true
 ---
 
@@ -34,10 +36,12 @@ The following components are compatible with the layout system:
 The final part of the layout system is the **v-main** component. Inside this is where you place your page content. It will use the remaining free space on the page after all layout components have reserved their space.
 
 ::: info
-  In the following examples, **v-app** has been replaced by **v-layout**. This is because **v-app** defaults to a minimum height of `100dvh`. In your own application you would always use **v-app** for the root layout.
+
+In the following examples, **v-app** has been replaced by **v-layout**. This is because **v-app** defaults to a minimum height of `100dvh`. In your own application you would always use **v-app** for the root layout.
+
 :::
 
-## Placing components
+## Usage
 
 By default, the order in which layout components will attempt to reserve space is simply the order that they appear in your markup. To illustrate this concept, see the following two examples where a single **v-app-bar** and **v-navigation-drawer** have changed places in the markup.
 
@@ -74,7 +78,9 @@ The layout system exposes a function `getLayoutItem` that allows you to get size
 <ExamplesExample file="application-layout/layout-information-ref" />
 
 ::: warning
-  You will not be able to directly use the composable in the same component where you are rendering the **v-app** component. The call to **useLayout** must happen in a child component, so that the layout can be properly injected.
+
+You will not be able to directly use the composable in the same component where you are rendering the **v-app** component. The call to **useLayout** must happen in a child component, so that the layout can be properly injected.
+
 :::
 
 <ExamplesExample file="application-layout/layout-information-composable" />

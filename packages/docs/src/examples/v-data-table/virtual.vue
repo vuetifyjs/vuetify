@@ -4,6 +4,7 @@
     :items="virtualBoats"
     height="400"
     item-value="name"
+    fixed-header
   ></v-data-table-virtual>
 </template>
 
@@ -12,9 +13,9 @@
 
   const headers = [
     { title: 'Boat Type', align: 'start', key: 'name' },
-    { title: 'Speed (knots)', align: 'end', key: 'speed' },
-    { title: 'Length (m)', align: 'end', key: 'length' },
-    { title: 'Price ($)', align: 'end', key: 'price' },
+    { title: 'Speed(knots)', align: 'end', key: 'speed' },
+    { title: 'Length(m)', align: 'end', key: 'length' },
+    { title: 'Price($)', align: 'end', key: 'price', value: item => formatPrice(item.price) },
     { title: 'Year', align: 'end', key: 'year' },
   ]
 
@@ -98,6 +99,10 @@
       return boat
     })
   })
+
+  function formatPrice (value) {
+    return `$${value.toFixed(0).replace(/\d(?=(\d{3})+$)/g, '$&,')}`
+  }
 </script>
 
 <script>
@@ -106,9 +111,9 @@
       return {
         headers: [
           { title: 'Boat Type', align: 'start', key: 'name' },
-          { title: 'Speed (knots)', align: 'end', key: 'speed' },
-          { title: 'Length (m)', align: 'end', key: 'length' },
-          { title: 'Price ($)', align: 'end', key: 'price' },
+          { title: 'Speed(knots)', align: 'end', key: 'speed' },
+          { title: 'Length(m)', align: 'end', key: 'length' },
+          { title: 'Price($)', align: 'end', key: 'price', value: item => formatPrice(item.price) },
           { title: 'Year', align: 'end', key: 'year' },
         ],
         boats: [
@@ -193,6 +198,12 @@
           boat.name = `${boat.name} #${i}`
           return boat
         })
+      },
+    },
+
+    methods: {
+      formatPrice (value) {
+        return `$${value.toFixed(0).replace(/\d(?=(\d{3})+$)/g, '$&,')}`
       },
     },
   }

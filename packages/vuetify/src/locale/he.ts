@@ -1,11 +1,11 @@
 export default {
   badge: 'תג',
-  open: 'Open',
+  open: 'פתח',
   close: 'סגור',
-  dismiss: 'Dismiss',
+  dismiss: 'התעלם',
   confirmEdit: {
-    ok: 'OK',
-    cancel: 'Cancel',
+    ok: 'אישור',
+    cancel: 'ביטול',
   },
   dataIterator: {
     noResultsText: 'לא נמצאו תוצאות מתאימות',
@@ -33,18 +33,18 @@ export default {
     pageText: '{0}-{1} מתוך {2}',
   },
   dateRangeInput: {
-    divider: 'to',
+    divider: 'עד',
   },
   datePicker: {
-    itemsSelected: '{0} selected',
+    itemsSelected: '{0} נבחר',
     range: {
-      title: 'Select dates',
-      header: 'Enter dates',
+      title: 'בחר תאריכים',
+      header: 'הזן תאריכים',
     },
-    title: 'Select date',
-    header: 'Enter date',
+    title: 'בחר תאריך',
+    header: 'הזן תאריך',
     input: {
-      placeholder: 'Enter date',
+      placeholder: 'הזן תאריך',
     },
   },
   noDataText: 'אין נתונים זמינים',
@@ -52,32 +52,32 @@ export default {
     prev: 'מצג קודם',
     next: 'מצג הבא',
     ariaLabel: {
-      delimiter: 'Carousel slide {0} of {1}',
+      delimiter: 'שקופית {0} מתוך {1}',
     },
   },
   calendar: {
     moreEvents: '{0} נוספים',
-    today: 'Today',
+    today: 'היום',
   },
   input: {
-    clear: 'Clear {0}',
-    prependAction: '{0} prepended action',
-    appendAction: '{0} appended action',
-    otp: 'Please enter OTP character {0}',
+    clear: 'נקה {0}',
+    prependAction: '{0} פעולה מקדימה',
+    appendAction: '{0} פעולה נוספת',
+    otp: 'נא להזין תו OTP {0}',
   },
   fileInput: {
     counter: '{0} קבצים',
     counterSize: '{0} קבצים ({1} בסך הכל)',
   },
   fileUpload: {
-    title: 'Drag and drop files here',
-    divider: 'or',
-    browse: 'Browse Files',
+    title: 'גרור ושחרר קבצים כאן',
+    divider: 'או',
+    browse: 'עיון בקבצים',
   },
   timePicker: {
-    am: 'AM',
-    pm: 'PM',
-    title: 'Select Time',
+    am: 'לפנה"צ',
+    pm: 'אחה"צ',
+    title: 'בחר שעה',
   },
   pagination: {
     ariaLabel: {
@@ -91,17 +91,17 @@ export default {
     },
   },
   stepper: {
-    next: 'Next',
-    prev: 'Previous',
+    next: 'הבא',
+    prev: 'הקודם',
   },
   rating: {
     ariaLabel: {
-      item: 'Rating {0} of {1}',
+      item: 'דירוג {0} מתוך {1}',
     },
   },
-  loading: 'Loading...',
+  loading: 'טוען...',
   infiniteScroll: {
-    loadMore: 'Load more',
-    empty: 'No more',
+    loadMore: 'טען עוד',
+    empty: 'אין עוד נתונים',
   },
 }

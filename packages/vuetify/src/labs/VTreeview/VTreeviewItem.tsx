@@ -9,11 +9,10 @@ import { VProgressCircular } from '@/components/VProgressCircular'
 
 // Composables
 import { IconValue } from '@/composables/icons'
-import { useLink } from '@/composables/router'
 
 // Utilities
 import { computed, inject, ref, toRaw } from 'vue'
-import { EventProp, genericComponent, omit, propsFactory, useRender } from '@/util'
+import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import { VTreeviewSymbol } from './shared'
@@ -21,7 +20,6 @@ import type { VListItemSlots } from '@/components/VList/VListItem'
 
 export const makeVTreeviewItemProps = propsFactory({
   loading: Boolean,
-  onToggleExpand: EventProp<[MouseEvent]>(),
   toggleIcon: IconValue,
 
   ...makeVListItemProps({ slim: true }),
@@ -32,20 +30,29 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
 
   props: makeVTreeviewItemProps(),
 
-  setup (props, { attrs, slots, emit }) {
-    const link = useLink(props, attrs)
+  emits: {
+    toggleExpand: (value: PointerEvent) => true,
+  },
+
+  setup (props, { slots, emit }) {
+    const visibleIds = inject(VTreeviewSymbol, { visibleIds: ref() }).visibleIds
+
     const vListItemRef = ref<VListItem>()
 
     const isActivatableGroupActivator = computed(() =>
       (vListItemRef.value?.root.activatable.value) &&
       vListItemRef.value?.isGroupActivator
     )
-
+    const vListItemRefIsClickable = computed(() => (
+      vListItemRef.value?.link.isClickable.value ||
+      (props.value != null && !!vListItemRef.value?.list)
+    ))
     const isClickable = computed(() =>
       !props.disabled &&
       props.link !== false &&
-      (props.link || link.isClickable.value || (props.value != null && !!vListItemRef.value?.list) || isActivatableGroupActivator.value)
+      (props.link || vListItemRefIsClickable.value || isActivatableGroupActivator.value)
     )
+    const isFiltered = computed(() => visibleIds.value && !visibleIds.value.has(toRaw(vListItemRef.value?.id)))
 
     function activateGroupActivator (e: MouseEvent | KeyboardEvent) {
       if (isClickable.value && isActivatableGroupActivator.value) {
@@ -53,7 +60,10 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
       }
     }
 
-    const visibleIds = inject(VTreeviewSymbol, { visibleIds: ref() }).visibleIds
+    function onClickAction (e: PointerEvent) {
+      e.preventDefault()
+      emit('toggleExpand', e)
+    }
 
     useRender(() => {
       const listItemProps = omit(VListItem.filterProps(props), ['onClick'])
@@ -68,7 +78,7 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
             'v-treeview-item',
             {
               'v-treeview-item--activatable-group-activator': isActivatableGroupActivator.value,
-              'v-treeview-item--filtered': visibleIds.value && !visibleIds.value.has(toRaw(vListItemRef.value?.id)),
+              'v-treeview-item--filtered': isFiltered.value,
             },
             props.class,
           ]}
@@ -81,13 +91,13 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
               return (
                 <>
                   <VListItemAction start={ false }>
-                    { props.toggleIcon && (
+                    { props.toggleIcon ? (
                         <VBtn
                           density="compact"
                           icon={ props.toggleIcon }
                           loading={ props.loading }
                           variant="text"
-                          onClick={ props.onToggleExpand }
+                          onClick={ onClickAction }
                         >
                           {{
                             loader () {
@@ -101,6 +111,8 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
                             },
                           }}
                         </VBtn>
+                    ) : (
+                      <div class="v-treeview-item__level" />
                     )}
                   </VListItemAction>
 

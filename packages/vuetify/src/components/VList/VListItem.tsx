@@ -27,7 +27,7 @@ import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant
 import { Ripple } from '@/directives/ripple'
 
 // Utilities
-import { computed, onBeforeMount, watch } from 'vue'
+import { computed, onBeforeMount, toDisplayString, watch } from 'vue'
 import { deprecate, EventProp, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -43,11 +43,11 @@ export type ListItemSlot = {
 }
 
 export type ListItemTitleSlot = {
-  title?: string | number
+  title?: string | number | boolean
 }
 
 export type ListItemSubtitleSlot = {
-  subtitle?: string | number
+  subtitle?: string | number | boolean
 }
 
 export type VListItemSlots = {
@@ -83,8 +83,14 @@ export const makeVListItemProps = propsFactory({
     default: true,
   },
   slim: Boolean,
-  subtitle: [String, Number],
-  title: [String, Number],
+  subtitle: {
+    type: [String, Number, Boolean],
+    default: undefined,
+  },
+  title: {
+    type: [String, Number, Boolean],
+    default: undefined,
+  },
   value: null,
 
   onClick: EventProp<[MouseEvent | KeyboardEvent]>(),
@@ -201,6 +207,10 @@ export const VListItem = genericComponent<VListItemSlots>()({
     }
 
     function onKeyDown (e: KeyboardEvent) {
+      const target = e.target as HTMLElement
+
+      if (['INPUT', 'TEXTAREA'].includes(target.tagName)) return
+
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault()
         e.target!.dispatchEvent(new MouseEvent('click', e))
@@ -314,13 +324,13 @@ export const VListItem = genericComponent<VListItemSlots>()({
           <div class="v-list-item__content" data-no-activator="">
             { hasTitle && (
               <VListItemTitle key="title">
-                { slots.title?.({ title: props.title }) ?? props.title }
+                { slots.title?.({ title: props.title }) ?? toDisplayString(props.title) }
               </VListItemTitle>
             )}
 
             { hasSubtitle && (
               <VListItemSubtitle key="subtitle">
-                { slots.subtitle?.({ subtitle: props.subtitle }) ?? props.subtitle }
+                { slots.subtitle?.({ subtitle: props.subtitle }) ?? toDisplayString(props.subtitle) }
               </VListItemSubtitle>
             )}
 
@@ -385,6 +395,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
       select,
       root,
       id: uid,
+      link,
     }
   },
 })

@@ -73,8 +73,8 @@ export const VBadge = genericComponent<VBadgeSlots>()({
         : (props.dot ? 8 : 12)
 
       return base + (
-        ['top', 'bottom'].includes(side) ? +(props.offsetY ?? 0)
-        : ['left', 'right'].includes(side) ? +(props.offsetX ?? 0)
+        ['top', 'bottom'].includes(side) ? Number(props.offsetY ?? 0)
+        : ['left', 'right'].includes(side) ? Number(props.offsetX ?? 0)
         : 0
       )
     })
@@ -82,7 +82,7 @@ export const VBadge = genericComponent<VBadgeSlots>()({
     useRender(() => {
       const value = Number(props.content)
       const content = (!props.max || isNaN(value)) ? props.content
-        : value <= +props.max ? value
+        : value <= Number(props.max) ? value
         : `${props.max}+`
 
       const [badgeAttrs, attrs] = pickWithRest(ctx.attrs as Record<string, any>, [

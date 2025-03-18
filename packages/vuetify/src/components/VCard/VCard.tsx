@@ -56,9 +56,18 @@ export const makeVCardProps = propsFactory({
     type: [Boolean, Object] as PropType<RippleDirectiveBinding['value']>,
     default: true,
   },
-  subtitle: [String, Number],
-  text: [String, Number],
-  title: [String, Number],
+  subtitle: {
+    type: [String, Number, Boolean],
+    default: undefined,
+  },
+  text: {
+    type: [String, Number, Boolean],
+    default: undefined,
+  },
+  title: {
+    type: [String, Number, Boolean],
+    default: undefined,
+  },
 
   ...makeBorderProps(),
   ...makeComponentProps(),

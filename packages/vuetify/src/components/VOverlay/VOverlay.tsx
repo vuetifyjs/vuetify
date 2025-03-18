@@ -129,6 +129,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
   emits: {
     'click:outside': (e: MouseEvent) => true,
     'update:modelValue': (value: boolean) => true,
+    keydown: (e: KeyboardEvent) => true,
     afterEnter: () => true,
     afterLeave: () => true,
   },
@@ -218,6 +219,9 @@ export const VOverlay = genericComponent<OverlaySlots>()({
 
     function onKeydown (e: KeyboardEvent) {
       if (e.key === 'Escape' && globalTop.value) {
+        if (!contentEl.value?.contains(document.activeElement)) {
+          emit('keydown', e)
+        }
         if (!props.persistent) {
           isActive.value = false
           if (contentEl.value?.contains(document.activeElement)) {
@@ -225,6 +229,11 @@ export const VOverlay = genericComponent<OverlaySlots>()({
           }
         } else animateClick()
       }
+    }
+    function onKeydownSelf (e: KeyboardEvent) {
+      if (e.key === 'Escape' && !globalTop.value) return
+
+      emit('keydown', e)
     }
 
     const router = useRouter()
@@ -309,6 +318,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
                 props.style,
               ]}
               ref={ root }
+              onKeydown={ onKeydownSelf }
               { ...scopeId }
               { ...attrs }
             >

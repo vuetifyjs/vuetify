@@ -103,13 +103,119 @@ The following example shows how to use the date composable to format a date stri
 
 <ApiInline hide-links />
 
-### Adapter
+## Adapter
 
 The built-in date adapter implements a subset of functionality from the [DateIOFormats](https://github.com/dmtrKovalenko/date-io/blob/master/packages/core/IUtils.d.ts) interface. Because of this, it's easy to swap in any date library supported by [date-io](https://github.com/dmtrKovalenko/date-io).
 
+### Using DateFns
+
+To use DateFns as the date adapter, install the necessary packages:
+
+::: tabs
+
+```bash [pnpm]
+pnpm install @date-io/date-fns date-fns
+```
+
+```bash [yarn]
+yarn add @date-io/date-fns date-fns
+```
+
+```bash [npm]
+npm install @date-io/date-fns date-fns
+```
+
+```bash [bun]
+bun install @date-io/date-fns date-fns
+```
+
+:::
+
+Then configure Vuetify to use DateFns:
+
 ```js { resource="src/plugins/vuetify.js" }
 import { createVuetify } from 'vuetify'
-import LuxonAdapter from "@date-io/luxon"
+import DateFnsAdapter from "@date-io/date-fns"
+
+export default createVuetify({
+  date: {
+    adapter: DateFnsAdapter,
+  },
+})
+```
+
+For more information on DateFns, visit the [date-fns](https://date-fns.org/) documentation.
+
+### Using DayJs
+
+To use DayJs as the date adapter, install the necessary packages:
+
+::: tabs
+
+```bash [pnpm]
+pnpm install @date-io/dayjs dayjs
+```
+
+```bash [yarn]
+yarn add @date-io/dayjs dayjs
+```
+
+```bash [npm]
+npm install @date-io/dayjs dayjs
+```
+
+```bash [bun]
+bun add @date-io/dayjs dayjs
+```
+
+:::
+
+Then configure Vuetify to use DayJs:
+
+```js { resource="src/plugins/vuetify.js" }
+import { createVuetify } from 'vuetify'
+import DayJsAdapter from '@date-io/dayjs'
+import { enUS } from 'date-fns/locale'
+
+export default createVuetify({
+  date: {
+    adapter: DayJsAdapter,
+    locale: { en: enUS },
+  },
+})
+```
+
+For more information on DayJs, visit the [dayjs](https://day.js.org/) documentation.
+
+### Using Luxon
+
+To use Luxon as the date adapter, install the necessary packages:
+
+::: tabs
+
+```bash [pnpm]
+pnpm install @date-io/luxon luxon
+```
+
+```bash [yarn]
+yarn add @date-io/luxon luxon
+```
+
+```bash [npm]
+npm install @date-io/luxon luxon
+```
+
+```bash [bun]
+bun add @date-io/luxon luxon
+```
+
+:::
+
+Then configure Vuetify to use Luxon:
+
+```js { resource="src/plugins/vuetify.js" }
+import { createVuetify } from 'vuetify'
+import LuxonAdapter from '@date-io/luxon'
 
 export default createVuetify({
   date: {
@@ -117,6 +223,49 @@ export default createVuetify({
   },
 })
 ```
+
+For more information on Luxon, visit the [luxon](https://moment.github.io/luxon/) documentation.
+
+### Using Moment
+
+To use Moment as the date adapter, install the necessary packages:
+
+::: tabs
+
+```bash [pnpm]
+pnpm install @date-io/moment moment
+```
+
+```bash [yarn]
+yarn add @date-io/moment moment
+```
+
+```bash [npm]
+npm install @date-io/moment moment
+```
+
+```bash [bun]
+bun add @date-io/moment moment
+```
+
+:::
+
+Then configure Vuetify to use Moment:
+
+```js { resource="src/plugins/vuetify.js" }
+import { createVuetify } from 'vuetify'
+import MomentAdapter from '@date-io/moment'
+
+export default createVuetify({
+  date: {
+    adapter: MomentAdapter,
+  },
+})
+```
+
+For more information on Moment, visit the [moment](https://momentjs.com/) documentation.
+
+## Typescript
 
 For TypeScript users, an interface is also exposed for [module augmentation](https://www.typescriptlang.org/docs/handbook/declaration-merging.html#module-augmentation):
 
@@ -132,7 +281,7 @@ declare module 'vuetify' {
 }
 ```
 
-### Localization
+## Localization
 
 The date composable will use the current vuetify [locale](/features/internationalization/) for formatting and getting the first day of the week. These do not always line up perfectly, so a list of aliases can be provided to map language codes to locales. The following configuration will look up `en` keys for translations, but use `en-GB` for date formatting:
 
@@ -149,12 +298,12 @@ export default createVuetify({
 })
 ```
 
-#### Create your own
+## Create your own
 
 To create your own date adapter, implement the **DateAdapter** interface:
 
 ```ts
-import type { DateAdapter } from 'vuetify/labs'
+import type { DateAdapter } from 'vuetify'
 
 export interface DateAdapter<TDate> {
   date (value?: any): TDate | null

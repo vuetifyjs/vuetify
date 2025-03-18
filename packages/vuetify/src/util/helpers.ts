@@ -111,7 +111,7 @@ export function createRange (length: number, start = 0): number[] {
 export function getZIndex (el?: Element | null): number {
   if (!el || el.nodeType !== Node.ELEMENT_NODE) return 0
 
-  const index = +window.getComputedStyle(el).getPropertyValue('z-index')
+  const index = Number(window.getComputedStyle(el).getPropertyValue('z-index'))
 
   if (!index) return getZIndex(el.parentNode as Element)
   return index
@@ -122,12 +122,14 @@ export function convertToUnit (str: string | number | null | undefined, unit?: s
 export function convertToUnit (str: string | number | null | undefined, unit = 'px'): string | undefined {
   if (str == null || str === '') {
     return undefined
-  } else if (isNaN(+str!)) {
+  }
+  const num = Number(str)
+  if (isNaN(num)) {
     return String(str)
-  } else if (!isFinite(+str!)) {
+  } else if (!isFinite(num)) {
     return undefined
   } else {
-    return `${Number(str)}${unit}`
+    return `${num}${unit}`
   }
 }
 
@@ -216,10 +218,9 @@ export function pick<
 > (obj: T, paths: U[]): MaybePick<T, U> {
   const found: any = {}
 
-  const keys = new Set(Object.keys(obj))
-  for (const path of paths) {
-    if (keys.has(path)) {
-      found[path] = obj[path]
+  for (const key of paths) {
+    if (Object.hasOwn(obj, key)) {
+      found[key] = obj[key]
     }
   }
 
@@ -269,17 +270,6 @@ export function omit<
   const clone = { ...obj }
 
   exclude.forEach(prop => delete clone[prop])
-
-  return clone
-}
-
-export function only<
-  T extends object,
-  U extends Extract<keyof T, string>
-> (obj: T, include: U[]): Pick<T, U> {
-  const clone = {} as T
-
-  include.forEach(prop => clone[prop] = obj[prop])
 
   return clone
 }

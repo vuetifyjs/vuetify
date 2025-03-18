@@ -9,10 +9,10 @@
 </template>
 
 <script setup>
-  import { ref } from 'vue'
+  import { shallowRef } from 'vue'
 
-  const items = ref(['foo', 'bar', 'fizz', 'buzz'])
-  const value = ref(['foo', 'bar', 'fizz', 'buzz'])
+  const items = shallowRef(['foo', 'bar', 'fizz', 'buzz'])
+  const value = shallowRef(['foo', 'bar', 'fizz', 'buzz'])
 </script>
 
 <script>

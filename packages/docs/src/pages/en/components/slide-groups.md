@@ -75,6 +75,6 @@ You can select multiple items by setting the **multiple** prop.
 
 #### Pseudo Carousel
 
-Customize the slide group to creatively display information on sheets. Using the selection, we can display auxillary information easily for the user.
+Customize the slide group to creatively display information on sheets. Using the selection, we can display auxiliary information easily for the user.
 
 <ExamplesExample file="v-slide-group/misc-pseudo-carousel" />

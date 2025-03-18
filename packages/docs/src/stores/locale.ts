@@ -1,10 +1,9 @@
 // Types
-export type RootState = {
+type RootState = {
   locale: string
 }
 
-export const useLocaleStore = defineStore({
-  id: 'locale',
+export const useLocaleStore = defineStore('locale', {
   state: () => ({
     locale: preferredLocale(),
   } as RootState),

@@ -260,7 +260,7 @@ describe('VCombobox', () => {
       expect(screen.getAllByCSS('.v-chip')).toHaveLength(2)
 
       await userEvent.click(screen.getAllByTestId('close-chip')[0])
-      await expect(screen.findByRole('textbox')).resolves.toBeInTheDocument()
+      await expect(screen.findByRole('textbox')).resolves.toBeVisible()
       expect(screen.getAllByCSS('.v-chip')).toHaveLength(1)
       expect(selectedItems.value).toStrictEqual(['Colorado'])
     })
@@ -311,7 +311,7 @@ describe('VCombobox', () => {
       expect(screen.getAllByCSS('.v-chip')).toHaveLength(2)
 
       await userEvent.click(screen.getAllByTestId('close-chip')[0])
-      await expect(screen.findByRole('textbox')).resolves.toBeInTheDocument()
+      await expect(screen.findByRole('textbox')).resolves.toBeVisible()
       expect(screen.getAllByCSS('.v-chip')).toHaveLength(1)
       expect(selectedItems.value).toStrictEqual([{
         title: 'Item 2',
@@ -479,25 +479,25 @@ describe('VCombobox', () => {
     })
 
     const input = screen.getByRole('textbox')
-    await expect.poll(() => input).toHaveAttribute('placeholder', 'Placeholder')
+    await expect.element(input).toHaveAttribute('placeholder', 'Placeholder')
 
     await rerender({ label: 'Label' })
-    await expect.poll(() => input).not.toBeVisible()
+    await expect.element(input).not.toBeVisible()
 
     await userEvent.click(input)
-    await expect.poll(() => input).toHaveAttribute('placeholder', 'Placeholder')
+    await expect.element(input).toHaveAttribute('placeholder', 'Placeholder')
     expect(input).toBeVisible()
 
     await userEvent.tab()
     await rerender({ persistentPlaceholder: true })
-    await expect.poll(() => input).toHaveAttribute('placeholder', 'Placeholder')
+    await expect.element(input).toHaveAttribute('placeholder', 'Placeholder')
     expect(input).toBeVisible()
 
     await rerender({ modelValue: 'Foobar' })
-    await expect.poll(() => input).not.toHaveAttribute('placeholder')
+    await expect.element(input).not.toHaveAttribute('placeholder')
 
     await rerender({ multiple: true, modelValue: ['Foobar'] })
-    await expect.poll(() => input).not.toHaveAttribute('placeholder')
+    await expect.element(input).not.toHaveAttribute('placeholder')
   })
 
   it('should keep TextField focused while selecting items from open menu', async () => {
@@ -652,7 +652,7 @@ describe('VCombobox', () => {
     expect(screen.queryByRole('listbox')).toBeNull()
 
     await rerender({ items: ['Foo', 'Bar'] })
-    await expect(screen.findByRole('listbox')).resolves.toBeInTheDocument()
+    await expect(screen.findByRole('listbox')).resolves.toBeVisible()
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/19346
@@ -662,7 +662,7 @@ describe('VCombobox', () => {
     })
 
     await userEvent.click(element)
-    await expect(screen.findByRole('listbox')).resolves.toBeInTheDocument()
+    await expect(screen.findByRole('listbox')).resolves.toBeVisible()
 
     await userEvent.click(screen.getAllByRole('option')[0])
     await rerender({ items: ['Foo', 'Bar', 'test'] })

@@ -1,59 +1,62 @@
 <template>
-  <v-sheet
-    ref="root"
-    :color="theme.name.value === 'light' && !user.mixedTheme ? 'surface-bright' : undefined"
-    :rounded="rounded"
-    :theme="theme.name.value === 'light' && user.mixedTheme ? 'dark' : theme.name.value"
-    class="app-markup overflow-hidden"
-    dir="ltr"
-  >
-    <v-toolbar
-      v-if="resource"
-      class="px-1"
-      height="44"
+  <v-hover v-slot="{ props: hoverProps, isHovering }">
+    <v-sheet
+      v-bind="{ ...hoverProps, ...$attrs }"
+      ref="root"
+      :color="theme.name.value === 'light' && !user.mixedTheme ? 'surface-bright' : undefined"
+      :rounded="rounded"
+      :theme="theme.name.value === 'light' && user.mixedTheme ? 'dark' : theme.name.value"
+      class="app-markup overflow-hidden"
+      dir="ltr"
     >
-      <v-sheet
+      <v-toolbar
         v-if="resource"
-        class="text-body-2 px-3 pt-3 text-medium-emphasis"
-        color="transparent"
+        class="px-1"
         height="44"
-        rounded="tl"
       >
-        <v-icon icon="mdi-file-tree" />
+        <v-sheet
+          v-if="resource"
+          class="text-body-2 px-3 pt-3 text-medium-emphasis"
+          color="transparent"
+          height="44"
+          rounded="tl"
+        >
+          <v-icon icon="mdi-file-tree" />
 
-        {{ resource }}
-      </v-sheet>
-    </v-toolbar>
+          {{ resource }}
+        </v-sheet>
+      </v-toolbar>
 
-    <v-tooltip location="start">
-      <template #activator="{ props: activatorProps }">
-        <v-fade-transition hide-on-leave>
-          <v-btn
-            :key="icon"
-            :icon="icon"
-            class="text-disabled me-3 mt-1 app-markup-btn"
-            density="comfortable"
-            style="position: absolute; right: 0; top: 0;"
-            v-bind="activatorProps"
-            variant="text"
-            @click="copy"
-          />
-        </v-fade-transition>
-      </template>
+      <v-tooltip location="start">
+        <template #activator="{ props: activatorProps }">
+          <v-fade-transition>
+            <v-btn
+              v-if="isHovering"
+              :key="icon"
+              :icon="icon"
+              class="text-disabled me-3 mt-1 app-markup-btn position-absolute right-0 top-0"
+              density="comfortable"
+              v-bind="activatorProps"
+              variant="text"
+              @click="copy"
+            />
+          </v-fade-transition>
+        </template>
 
-      <span>{{ t('copy-source') }}</span>
-    </v-tooltip>
+        <span>{{ t('copy-source') }}</span>
+      </v-tooltip>
 
-    <div class="pa-4 pe-12">
-      <slot>
-        <pre v-if="inline" :class="className">
-          <code :class="className" v-html="highlighted" />
-        </pre>
+      <div class="pa-4 pe-12">
+        <slot>
+          <pre v-if="inline" :class="className">
+        <code :class="className" v-html="highlighted" />
+      </pre>
 
-        <code v-else :class="className" v-html="highlighted" />
-      </slot>
-    </div>
-  </v-sheet>
+          <code v-else :class="className" v-html="highlighted" />
+        </slot>
+      </div>
+    </v-sheet>
+  </v-hover>
 </template>
 
 <script setup lang="ts">
@@ -102,10 +105,10 @@
   const user = useUserStore()
   const theme = useTheme()
   const { t } = useI18n()
-  const clicked = ref(false)
+  const clicked = shallowRef(false)
   const root = ref<ComponentPublicInstance>()
 
-  const highlighted = ref('')
+  const highlighted = shallowRef('')
   watchEffect(async () => {
     highlighted.value = props.code && props.language && Prism.highlight(await props.code, Prism.languages[props.language], props.language)
   })
@@ -126,16 +129,15 @@
   }
 </script>
 
+<script lang="ts">
+  export default {
+    inheritAttrs: false,
+  }
+</script>
+
 <style lang="sass">
   .v-sheet.app-markup
     position: relative
-
-    &:not(:hover)
-      .app-markup-btn
-        opacity: 0 !important
-
-    &:not(:hover) .v-btn--copy .v-icon
-      opacity: .4
 
     code,
     pre

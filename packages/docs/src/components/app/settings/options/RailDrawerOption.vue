@@ -1,23 +1,22 @@
 <template>
-  <v-defaults-provider
-    :defaults="{
-      VIcon: {
-        color: user.railDrawer && one.isSubscriber ? 'primary' : 'disabled'
-      }
-    }"
-  >
-    <SettingsSwitch
-      v-model="user.railDrawer"
-      :disabled="!one.isSubscriber"
-      :label="t('dashboard.perks.rail-drawer')"
-      :messages="t('dashboard.perks.rail-drawer-message')"
-      :readonly="!one.isSubscriber"
-    />
-  </v-defaults-provider>
+  <AppSettingsSettingsHeader text="dashboard.perks.rail-drawer-message" title="dashboard.perks.rail-drawer">
+    <v-defaults-provider
+      :defaults="{
+        VIcon: {
+          color: user.railDrawer && one.isSubscriber ? 'primary' : 'disabled'
+        }
+      }"
+    >
+      <SettingsSwitch
+        v-model="user.railDrawer"
+        :disabled="!one.isSubscriber"
+        :readonly="!one.isSubscriber"
+      />
+    </v-defaults-provider>
+  </AppSettingsSettingsHeader>
 </template>
 
 <script setup>
-  const { t } = useI18n()
   const one = useOneStore()
   const user = useUserStore()
 </script>

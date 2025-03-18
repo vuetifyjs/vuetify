@@ -8,6 +8,8 @@ related:
   - /styles/transitions/
   - /getting-started/wireframes/
 features:
+  github: /composables/theme.ts
+  label: 'E: theme'
   report: true
 ---
 

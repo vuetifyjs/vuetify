@@ -1,16 +1,16 @@
 export const usePwaStore = defineStore('pwa', () => {
-  const isOffline = ref(!navigator.onLine)
-  const isUpdating = ref(false)
-  const nextManifest = ref()
-  const pendingUpdate = ref(false)
-  const prevManifest = ref()
-  const progress = ref(0)
-  const progressTotal = ref(0)
+  const isOffline = shallowRef(!navigator.onLine)
+  const isUpdating = shallowRef(false)
+  const nextManifest = shallowRef()
+  const pendingUpdate = shallowRef(false)
+  const prevManifest = shallowRef()
+  const progress = shallowRef(0)
+  const progressTotal = shallowRef(0)
 
   window.addEventListener('online', () => isOffline.value = false)
   window.addEventListener('offline', () => isOffline.value = true)
 
-  const _availableOffline = ref(localStorage.getItem('vuetify:availableOffline') === 'true')
+  const _availableOffline = shallowRef(localStorage.getItem('vuetify:availableOffline') === 'true')
   const availableOffline = computed({
     get: () => _availableOffline.value,
     set: val => {

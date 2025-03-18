@@ -9,15 +9,17 @@ import { makeVPickerProps, VPicker } from '@/labs/VPicker/VPicker'
 
 // Composables
 import { useLocale } from '@/composables/locale'
+import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, onMounted, ref, watch } from 'vue'
-import { SelectingTimes } from './SelectingTimes'
 import { createRange, genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import type { VTimePickerViewMode } from './shared'
 import type { VPickerSlots } from '@/labs/VPicker/VPicker'
+
 type Period = 'am' | 'pm'
 type AllowFunction = (val: number) => boolean
 
@@ -25,9 +27,6 @@ const rangeHours24 = createRange(24)
 const rangeHours12am = createRange(12)
 const rangeHours12pm = rangeHours12am.map(v => v + 12)
 const range60 = createRange(60)
-const selectingNames = { 1: 'hour', 2: 'minute', 3: 'second' }
-
-export { SelectingTimes }
 
 export type VTimePickerSlots = Omit<VPickerSlots, 'header'>
 
@@ -43,6 +42,10 @@ export const makeVTimePickerProps = propsFactory({
   },
   max: String,
   min: String,
+  viewMode: {
+    type: String as PropType<VTimePickerViewMode>,
+    default: 'hour',
+  },
   modelValue: null as any as PropType<any>,
   readonly: Boolean,
   scrollable: Boolean,
@@ -61,6 +64,7 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
     'update:period': (val: Period) => true,
     'update:second': (val: number) => true,
     'update:modelValue': (val: string) => true,
+    'update:viewMode': (val: VTimePickerViewMode) => true,
   },
 
   setup (props, { emit, slots }) {
@@ -72,7 +76,7 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
     const lazyInputMinute = ref(null as number | null)
     const lazyInputSecond = ref(null as number | null)
     const period = ref('am' as Period)
-    const selecting = ref(SelectingTimes.Hour)
+    const viewMode = useProxiedModel(props, 'viewMode', 'hour')
     const controlsRef = ref<VTimePickerControls | null>(null)
     const clockRef = ref<VTimePickerClock | null>(null)
 
@@ -91,8 +95,8 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
       const maxHour = props.max ? Number(props.max.split(':')[0]) : 23
 
       return (val: number) => {
-        return val >= minHour * 1 &&
-          val <= maxHour * 1 &&
+        return val >= Number(minHour) &&
+          val <= Number(maxHour) &&
           (!cb || cb(val))
       }
     })
@@ -113,8 +117,8 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
 
       const [minHour, minMinute] = props.min ? props.min.split(':').map(Number) : [0, 0]
       const [maxHour, maxMinute] = props.max ? props.max.split(':').map(Number) : [23, 59]
-      const minTime = minHour * 60 + minMinute * 1
-      const maxTime = maxHour * 60 + maxMinute * 1
+      const minTime = minHour * 60 + Number(minMinute)
+      const maxTime = maxHour * 60 + Number(maxMinute)
 
       return (val: number) => {
         const time = 60 * inputHour.value! + val
@@ -147,8 +151,8 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
 
       const [minHour, minMinute, minSecond] = props.min ? props.min.split(':').map(Number) : [0, 0, 0]
       const [maxHour, maxMinute, maxSecond] = props.max ? props.max.split(':').map(Number) : [23, 59, 59]
-      const minTime = minHour * 3600 + minMinute * 60 + (minSecond || 0) * 1
-      const maxTime = maxHour * 3600 + maxMinute * 60 + (maxSecond || 0) * 1
+      const minTime = minHour * 3600 + minMinute * 60 + Number(minSecond || 0)
+      const maxTime = maxHour * 3600 + maxMinute * 60 + Number(maxSecond || 0)
 
       return (val: number) => {
         const time = 3600 * inputHour.value! + 60 * inputMinute.value! + val
@@ -210,7 +214,7 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
       period.value = (inputHour.value == null || inputHour.value < 12) ? 'am' : 'pm'
     }
 
-    function firstAllowed (type: 'hour' | 'minute' | 'second', value: number) {
+    function firstAllowed (type: VTimePickerViewMode, value: number) {
       const allowedFn = type === 'hour' ? isAllowedHourCb.value : (type === 'minute' ? isAllowedMinuteCb.value : isAllowedSecondCb.value)
       if (!allowedFn) return value
 
@@ -240,9 +244,9 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
     }
 
     function onInput (value: number) {
-      if (selecting.value === SelectingTimes.Hour) {
+      if (viewMode.value === 'hour') {
         inputHour.value = isAmPm.value ? convert12to24(value, period.value) : value
-      } else if (selecting.value === SelectingTimes.Minute) {
+      } else if (viewMode.value === 'minute') {
         inputMinute.value = value
       } else {
         inputSecond.value = value
@@ -250,7 +254,7 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
     }
 
     function onChange (value: number) {
-      switch (selectingNames[selecting.value]) {
+      switch (viewMode.value || 'hour') {
         case 'hour':
           emit('update:hour', value)
           break
@@ -265,10 +269,10 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
       }
 
       const emitChange = inputHour.value !== null && inputMinute.value !== null && (props.useSeconds ? inputSecond.value !== null : true)
-      if (selecting.value === SelectingTimes.Hour) {
-        selecting.value = SelectingTimes.Minute
-      } else if (props.useSeconds && selecting.value === SelectingTimes.Minute) {
-        selecting.value = SelectingTimes.Second
+      if (viewMode.value === 'hour') {
+        viewMode.value = 'minute'
+      } else if (props.useSeconds && viewMode.value === 'minute') {
+        viewMode.value = 'second'
       }
 
       if (inputHour.value === lazyInputHour.value &&
@@ -315,9 +319,9 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
                 minute={ inputMinute.value as number }
                 period={ period.value }
                 second={ inputSecond.value as number }
-                selecting={ selecting.value }
+                viewMode={ viewMode.value }
                 onUpdate:period={ (val: Period) => setPeriod(val) }
-                onUpdate:selecting={ (value: 1 | 2 | 3) => (selecting.value = value) }
+                onUpdate:viewMode={ (value: VTimePickerViewMode) => (viewMode.value = value) }
                 ref={ controlsRef }
               />
             ),
@@ -325,24 +329,24 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
               <VTimePickerClock
                 { ...timePickerClockProps }
                 allowedValues={
-                  selecting.value === SelectingTimes.Hour
+                  viewMode.value === 'hour'
                     ? isAllowedHourCb.value
-                    : (selecting.value === SelectingTimes.Minute
+                    : (viewMode.value === 'minute'
                       ? isAllowedMinuteCb.value
                       : isAllowedSecondCb.value)
                     }
-                double={ selecting.value === SelectingTimes.Hour && !isAmPm.value }
-                format={ selecting.value === SelectingTimes.Hour
+                double={ viewMode.value === 'hour' && !isAmPm.value }
+                format={ viewMode.value === 'hour'
                   ? (isAmPm.value ? convert24to12 : (val: number) => val)
                   : (val: number) => pad(val, 2)
                 }
-                max={ selecting.value === SelectingTimes.Hour ? (isAmPm.value && period.value === 'am' ? 11 : 23) : 59 }
-                min={ selecting.value === SelectingTimes.Hour && isAmPm.value && period.value === 'pm' ? 12 : 0 }
+                max={ viewMode.value === 'hour' ? (isAmPm.value && period.value === 'am' ? 11 : 23) : 59 }
+                min={ viewMode.value === 'hour' && isAmPm.value && period.value === 'pm' ? 12 : 0 }
                 size={ 20 }
-                step={ selecting.value === SelectingTimes.Hour ? 1 : 5 }
-                modelValue={ selecting.value === SelectingTimes.Hour
+                step={ viewMode.value === 'hour' ? 1 : 5 }
+                modelValue={ viewMode.value === 'hour'
                   ? inputHour.value as number
-                  : (selecting.value === SelectingTimes.Minute
+                  : (viewMode.value === 'minute'
                     ? inputMinute.value as number
                     : inputSecond.value as number)
                 }

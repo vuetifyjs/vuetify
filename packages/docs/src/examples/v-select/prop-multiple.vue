@@ -10,9 +10,9 @@
 </template>
 
 <script setup>
-  import { ref } from 'vue'
+  import { shallowRef } from 'vue'
 
-  const favorites = ref([])
+  const favorites = shallowRef([])
 
   const states = [
     'Alabama',

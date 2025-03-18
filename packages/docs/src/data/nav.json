@@ -77,6 +77,19 @@
     ]
   },
   {
+    "title": "concepts",
+    "emphasized": true,
+    "inactiveIcon": "mdi-puzzle-outline",
+    "activeIcon": "mdi-puzzle",
+    "items": [
+      "density-and-sizing",
+      "items",
+      "routing",
+      "v-model",
+      "variants"
+    ]
+  },
+  {
     "title": "components",
     "inactiveIcon": "mdi-view-dashboard-outline",
     "activeIcon": "mdi-view-dashboard",

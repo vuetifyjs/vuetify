@@ -45,6 +45,7 @@ module.exports = {
         'import/no-duplicates': 'off',
         'no-redeclare': 'off',
         'no-use-before-define': 'off',
+        'sonarjs/no-identical-functions': 'off',
       },
     },
     {

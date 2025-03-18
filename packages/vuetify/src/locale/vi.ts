@@ -1,11 +1,11 @@
 export default {
   badge: 'Huy hiệu',
-  open: 'Open',
+  open: 'Mở',
   close: 'Đóng',
-  dismiss: 'Dismiss',
+  dismiss: 'Bỏ qua',
   confirmEdit: {
     ok: 'OK',
-    cancel: 'Cancel',
+    cancel: 'Hủy',
   },
   dataIterator: {
     noResultsText: 'Không tìm thấy kết quả nào',
@@ -33,51 +33,51 @@ export default {
     pageText: '{0}-{1} trên {2}',
   },
   dateRangeInput: {
-    divider: 'to',
+    divider: 'đến',
   },
   datePicker: {
-    itemsSelected: '{0} selected',
+    itemsSelected: '{0} mục đã chọn',
     range: {
-      title: 'Select dates',
-      header: 'Enter dates',
+      title: 'Chọn ngày',
+      header: 'Nhập ngày',
     },
-    title: 'Select date',
-    header: 'Enter date',
+    title: 'Chọn ngày',
+    header: 'Nhập ngày',
     input: {
-      placeholder: 'Enter date',
+      placeholder: 'Nhập ngày',
     },
   },
   noDataText: 'Không có dữ liệu',
   carousel: {
-    prev: 'Ảnh tiếp theo',
-    next: 'Ảnh trước',
+    prev: 'Ảnh trước',
+    next: 'Ảnh tiếp theo',
     ariaLabel: {
       delimiter: 'Carousel slide {0} trên {1}',
     },
   },
   calendar: {
     moreEvents: '{0} nữa',
-    today: 'Today',
+    today: 'Hôm nay',
   },
   input: {
-    clear: 'Clear {0}',
-    prependAction: '{0} prepended action',
-    appendAction: '{0} appended action',
-    otp: 'Please enter OTP character {0}',
+    clear: 'Xóa {0}',
+    prependAction: 'Hành động trước {0}',
+    appendAction: 'Hành động sau {0}',
+    otp: 'Vui lòng nhập ký tự OTP thứ {0}',
   },
   fileInput: {
     counter: '{0} tệp',
     counterSize: '{0} tệp (tổng cộng {1})',
   },
   fileUpload: {
-    title: 'Drag and drop files here',
-    divider: 'or',
-    browse: 'Browse Files',
+    title: 'Kéo và thả tệp vào đây',
+    divider: 'hoặc',
+    browse: 'Chọn tệp',
   },
   timePicker: {
     am: 'SA',
     pm: 'CH',
-    title: 'Select Time',
+    title: 'Chọn thời gian',
   },
   pagination: {
     ariaLabel: {
@@ -86,22 +86,22 @@ export default {
       previous: 'Trang trước',
       page: 'Đến trang {0}',
       currentPage: 'Trang hiện tại, Trang {0}',
-      first: 'First page',
-      last: 'Last page',
+      first: 'Trang đầu tiên',
+      last: 'Trang cuối cùng',
     },
   },
   stepper: {
-    next: 'Next',
-    prev: 'Previous',
+    next: 'Tiếp theo',
+    prev: 'Trước',
   },
   rating: {
     ariaLabel: {
       item: 'Đánh giá {0} trên {1}',
     },
   },
-  loading: 'Loading...',
+  loading: 'Đang tải...',
   infiniteScroll: {
-    loadMore: 'Load more',
-    empty: 'No more',
+    loadMore: 'Tải thêm',
+    empty: 'Không còn dữ liệu',
   },
 }

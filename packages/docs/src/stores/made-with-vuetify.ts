@@ -1,5 +1,5 @@
 export const useMadeWithVuetifyStore = defineStore('made-with-vuetify', () => {
-  const items = ref([])
+  const items = shallowRef([])
 
   onBeforeMount(async () => {
     const res = await fetch('https://madewithvuejs.com/api/tag/vuetify', {

@@ -6,10 +6,7 @@
     scoped
   >
     <AppSheet class="mb-9">
-      <v-lazy
-        v-model="hasRendered"
-        min-height="44"
-      >
+      <v-lazy v-model="hasRendered" min-height="44">
         <v-toolbar
           border="b"
           class="px-1"
@@ -17,12 +14,12 @@
           flat
         >
           <v-fade-transition hide-on-leave>
-            <div v-if="showCode">
+            <div v-if="showCode" class="d-flex ga-1 px-1">
               <v-btn
                 v-for="(section, i) of sections"
                 :key="section.name"
                 :active="template === i"
-                class="ma-1 text-none"
+                class="text-none"
                 size="small"
                 variant="text"
                 @click="template = i"
@@ -49,15 +46,18 @@
             <v-tooltip
               v-for="({ path, ...action }, i) of actions"
               :key="i"
+              :disabled="xs"
               location="top"
+              open-delay="500"
             >
               <template #activator="{ props: tooltip }">
                 <v-fade-transition hide-on-leave>
                   <v-btn
                     v-show="!action.hide"
                     :key="action.icon"
-                    class="me-2 text-medium-emphasis"
+                    class="me-1 text-medium-emphasis"
                     density="comfortable"
+                    size="small"
                     variant="text"
                     v-bind="mergeProps(action as any, tooltip)"
                   />
@@ -133,16 +133,16 @@
     return parsed?.[1]
   }
 
-  const isLoaded = ref(false)
-  const isError = ref(false)
-  const showCode = ref(props.inline || props.open)
-  const template = ref(0)
-  const hasRendered = ref(false)
+  const isLoaded = shallowRef(false)
+  const isError = shallowRef(false)
+  const showCode = shallowRef(props.inline || props.open)
+  const template = shallowRef(0)
+  const hasRendered = shallowRef(false)
   const isEager = shallowRef(false)
   const copied = shallowRef(false)
 
   const component = shallowRef()
-  const code = ref<string>()
+  const code = shallowRef<string>()
   const ExampleComponent = computed(() => {
     return isError.value ? ExampleMissing : isLoaded.value ? component.value : null
   })
@@ -211,7 +211,7 @@
 
   const actions = computed(() => [
     {
-      icon: 'mdi-theme-light-dark',
+      icon: theme.value === 'dark' ? 'mdi-white-balance-sunny' : 'mdi-weather-night',
       path: 'invert-example-colors',
       onClick: toggleTheme,
     },
@@ -227,7 +227,7 @@
       path: 'view-in-github',
       href: `https://github.com/vuetifyjs/vuetify/tree/${getBranch()}/packages/docs/src/examples/${props.file}.vue`,
       target: '_blank',
-      hide: xs.value,
+      hide: xs.value || !user.dev,
     },
     {
       icon: copied.value ? 'mdi-check' : 'mdi-clipboard-multiple-outline',

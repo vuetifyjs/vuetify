@@ -7,9 +7,11 @@
   >
     <div>
       <v-toolbar v-bind="props">
-        <v-spacer></v-spacer>
-        <v-btn icon="mdi-menu"></v-btn>
-        <v-btn icon="mdi-dots-vertical"></v-btn>
+        <template v-slot:append>
+          <v-btn icon="mdi-menu"></v-btn>
+
+          <v-btn icon="mdi-dots-vertical"></v-btn>
+        </template>
       </v-toolbar>
     </div>
 
@@ -28,7 +30,7 @@
   const model = ref('default')
   const collapse = ref()
   const density = ref('default')
-  const title = ref('Application')
+  const title = ref('Toolbar')
   const options = ['elevated', 'bordered']
   const props = computed(() => {
     return {

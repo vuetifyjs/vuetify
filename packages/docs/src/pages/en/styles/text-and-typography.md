@@ -76,7 +76,7 @@ Control text size, alignment, wrapping, overflow, transforms and more. By defaul
 
 <PromotedEntry />
 
-## Typography
+## Usage
 
 Control the size and style of text using the Typography helper classes. These values are based upon the [Material Design type specification](https://material.io/design/typography/the-type-system.html).
 

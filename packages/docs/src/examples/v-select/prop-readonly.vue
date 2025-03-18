@@ -8,10 +8,10 @@
 </template>
 
 <script setup>
-  import { ref } from 'vue'
+  import { shallowRef } from 'vue'
 
+  const model = shallowRef('Foo')
   const items = ['Foo', 'Bar', 'Fizz', 'Buzz']
-  const model = ref('Foo')
 </script>
 
 <script>
