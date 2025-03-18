@@ -76,6 +76,16 @@
     "./labs/components": "./lib/labs/components.js",
     "./labs/*": "./lib/labs/*/index.js",
     "./util/colors": "./lib/util/colors.js",
+    "./dist/vuetify.js": {
+      "types": "./dist/vuetify.d.ts",
+      "import": "./dist/vuetify.esm.js",
+      "default": "./dist/vuetify.js"
+    },
+    "./dist/vuetify-labs.js": {
+      "types": "./dist/vuetify-labs.d.ts",
+      "import": "./dist/vuetify-labs.esm.js",
+      "default": "./dist/vuetify-labs.js"
+    },
     "./*.mjs": "./*.js",
     "./*": "./*"
   },

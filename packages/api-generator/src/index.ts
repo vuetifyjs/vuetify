@@ -1,9 +1,10 @@
 import fs from 'node:fs/promises'
 import path from 'upath'
+import { components } from 'vuetify/dist/vuetify-labs.js'
 import importMap from 'vuetify/dist/json/importMap.json' with { type: 'json' }
 import importMapLabs from 'vuetify/dist/json/importMap-labs.json' with { type: 'json' }
 import { kebabCase } from './helpers/text'
-import type { BaseData, ComponentData, DirectiveData } from './types'
+import type { ComponentData, DirectiveData } from './types'
 import { generateComposableDataFromTypes, generateDirectiveDataFromTypes } from './types'
 import Piscina from 'piscina'
 import { addDescriptions, addDirectiveDescriptions, addPropData, stringifyProps } from './utils'
@@ -15,10 +16,6 @@ import { createWebTypesApi } from './web-types'
 import inspector from 'inspector'
 import yargs from 'yargs'
 import { parseSassVariables } from './helpers/sass'
-
-import { createRequire } from 'node:module'
-
-const { components } = createRequire(import.meta.url)('vuetify/dist/vuetify-labs.js')
 
 const yar = yargs(process.argv.slice(2))
   .option('components', {
