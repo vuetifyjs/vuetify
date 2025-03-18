@@ -104,7 +104,7 @@ export const VDatePicker = genericComponent<new <
       props,
       'modelValue',
       undefined,
-      v => wrapInArray(v),
+      v => wrapInArray(v).map(i => adapter.date(i)),
       v => props.multiple ? v : v[0],
     )
 
