@@ -110,6 +110,8 @@ export const VTimePickerControls = genericComponent()({
               props.useSeconds && (
                 <VBtn
                   key="secondsVal"
+                  active={ props.viewMode === 'second' }
+                  color={ props.viewMode === 'second' ? props.color : undefined }
                   variant="tonal"
                   onClick={ () => emit('update:viewMode', 'second') }
                   class={{

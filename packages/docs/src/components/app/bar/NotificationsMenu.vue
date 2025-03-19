@@ -131,9 +131,9 @@
   const date = useDate()
   const user = useUserStore()
 
-  const menu = ref(false)
+  const menu = shallowRef(false)
   const all = ref<Notification[]>([])
-  const showArchived = ref(false)
+  const showArchived = shallowRef(false)
 
   const unread = computed(() => all.value.filter(({ slug }) => !user.notifications.read.includes(slug)))
   const read = computed(() => all.value.filter(({ slug }) => user.notifications.read.includes(slug)))

@@ -60,7 +60,7 @@ export function useCalendar (props: CalendarProps) {
     props,
     'modelValue',
     [],
-    v => wrapInArray(v),
+    v => wrapInArray(v).map(i => adapter.date(i)),
   )
   const displayValue = computed(() => {
     if (props.displayValue) return adapter.date(props.displayValue)

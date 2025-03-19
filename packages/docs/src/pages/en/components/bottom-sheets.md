@@ -102,7 +102,9 @@ The `v-bottom-sheet` component has access to all of the slots available in [v-di
 | 2. Activator | The activator slot is used to open the bottom sheet |
 
 ::: info
+
 The **activator** slot is not required when using the **v-model** prop.
+
 :::
 
 ### Examples
