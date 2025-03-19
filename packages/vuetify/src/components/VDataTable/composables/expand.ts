@@ -40,20 +40,24 @@ export function provideExpanded (props: ExpandProps) {
     return [...v.values()]
   })
 
+  function getValue (item: DataTableItem) {
+    return typeof item.value === 'string' ? item.value : item.key
+  }
+
   function expand (item: DataTableItem, value: boolean) {
     const newExpanded = new Set(expanded.value)
 
     if (!value) {
-      newExpanded.delete(item.value)
+      newExpanded.delete(getValue(item))
     } else {
-      newExpanded.add(item.value)
+      newExpanded.add(getValue(item))
     }
 
     expanded.value = newExpanded
   }
 
   function isExpanded (item: DataTableItem) {
-    return expanded.value.has(item.value)
+    return expanded.value.has(getValue(item))
   }
 
   function toggleExpand (item: DataTableItem) {
