@@ -7,6 +7,7 @@ import { VChip } from 'vuetify/components/VChip'
 import { VBtn } from 'vuetify/components/VBtn'
 import { VSwitch } from 'vuetify/components/VSwitch'
 import { VSvgIcon } from 'vuetify/components/VIcon'
+import { VSnackbarQueue } from 'vuetify/components/VSnackbarQueue'
 
 // Icons
 import { fa } from 'vuetify/iconsets/fa'
@@ -24,6 +25,9 @@ import type { IconProps } from 'vuetify'
 
 export function installVuetify (app: App) {
   const vuetify = createVuetify({
+    components: {
+      VSnackbarQueue,
+    },
     aliases: {
       BorderChip: VChip,
       NewInChip: VChip,

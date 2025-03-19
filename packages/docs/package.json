@@ -26,7 +26,7 @@
     "@vue/compiler-dom": "^3.5.13",
     "@vuelidate/core": "^2.0.3",
     "@vuelidate/validators": "^2.0.4",
-    "@vuetify/one": "^1.9.6",
+    "@vuetify/one": "^2.0.0",
     "algoliasearch": "^4.23.3",
     "fflate": "^0.8.2",
     "isomorphic-fetch": "^3.0.0",
