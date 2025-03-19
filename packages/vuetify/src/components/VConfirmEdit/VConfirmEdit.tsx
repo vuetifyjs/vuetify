@@ -34,6 +34,7 @@ export const makeVConfirmEditProps = propsFactory({
     type: String,
     default: '$vuetify.confirmEdit.ok',
   },
+  hideActions: Boolean,
 }, 'VConfirmEdit')
 
 export const VConfirmEdit = genericComponent<new <T> (
@@ -118,7 +119,7 @@ export const VConfirmEdit = genericComponent<new <T> (
             })
           }
 
-          { !actionsUsed && actions() }
+          { !props.hideActions && !actionsUsed && actions() }
         </>
       )
     })
