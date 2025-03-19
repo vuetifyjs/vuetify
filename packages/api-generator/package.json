@@ -1,7 +1,7 @@
 {
   "name": "@vuetify/api-generator",
   "type": "module",
-  "version": "3.7.16",
+  "version": "3.7.18",
   "private": true,
   "description": "",
   "scripts": {

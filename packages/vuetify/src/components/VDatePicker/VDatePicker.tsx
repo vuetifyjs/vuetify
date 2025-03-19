@@ -58,6 +58,7 @@ export const makeVDatePickerProps = propsFactory({
     type: String,
     default: '$vuetify.datePicker.header',
   },
+  headerColor: String,
 
   ...makeVDatePickerControlsProps(),
   ...makeVDatePickerMonthProps({
@@ -136,6 +137,7 @@ export const VDatePicker = genericComponent<new <
 
       return value && adapter.isValid(value) ? value : today
     })
+    const headerColor = computed(() => props.headerColor ?? props.color)
 
     const month = ref(Number(props.month ?? adapter.getMonth(adapter.startOfMonth(internal.value))))
     const year = ref(Number(props.year ?? adapter.getYear(adapter.startOfYear(adapter.setMonth(internal.value, month.value)))))
@@ -275,6 +277,7 @@ export const VDatePicker = genericComponent<new <
       const datePickerYearsProps = omit(VDatePickerYears.filterProps(props), ['modelValue'])
 
       const headerProps = {
+        color: headerColor.value,
         header: header.value,
         transition: headerTransition.value,
       }
@@ -282,6 +285,7 @@ export const VDatePicker = genericComponent<new <
       return (
         <VPicker
           { ...pickerProps }
+          color={ headerColor.value }
           class={[
             'v-date-picker',
             `v-date-picker--${viewMode.value}`,

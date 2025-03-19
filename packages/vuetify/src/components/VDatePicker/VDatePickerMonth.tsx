@@ -188,16 +188,12 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
               const slotProps = {
                 props: {
                   class: 'v-date-picker-month__day-btn',
-                  color: (item.isSelected || item.isToday) && !item.isDisabled
-                    ? props.color
-                    : undefined,
+                  color: item.isSelected || item.isToday ? props.color : undefined,
                   disabled: item.isDisabled,
                   icon: true,
                   ripple: false,
                   text: item.localized,
-                  variant: item.isDisabled
-                    ? item.isToday ? 'outlined' : 'text'
-                    : item.isToday && !item.isSelected ? 'outlined' : 'flat',
+                  variant: item.isSelected ? 'flat' : item.isToday ? 'outlined' : 'text',
                   onClick: () => onClick(item.date),
                 },
                 item,
