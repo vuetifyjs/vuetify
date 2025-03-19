@@ -1,0 +1,25 @@
+{
+  "extends": "./tsconfig.json",
+  "exclude": ["dev", "**/*.spec.*", "test"],
+  "include": ["src/node/*.ts"],
+  "compilerOptions": {
+    "target": "ESNext",
+    "rootDir": ".",
+    "moduleDetection": "force",
+    "module": "preserve",
+    "strict": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "moduleResolution": "Bundler",
+    "lib": [
+      "ESNext",
+      "dom",
+      "dom.iterable"
+    ],
+    "types": [
+      "node",
+      "vuetify",
+      "unplugin-vue-components/types"
+    ]
+  }
+}

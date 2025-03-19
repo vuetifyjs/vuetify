@@ -22,6 +22,7 @@ import {
   root,
   srcDir,
 } from './constants.js'
+import { unpluginModules } from './node-rollup.config.js'
 
 const extensions = ['.ts', '.tsx', '.js', '.jsx', '.es6', '.es', '.mjs']
 
@@ -306,6 +307,7 @@ const options = [
       }
     ],
   },
+  ...unpluginModules(),
 ]
 
 export default options

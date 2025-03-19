@@ -9,6 +9,8 @@ import MagicString from 'magic-string'
 import importMap from '../dist/json/importMap.json' with { type: 'json' }
 import importMapLabs from '../dist/json/importMap-labs.json' with { type: 'json' }
 
+import { unpluginTypes } from './node-rollup.config.js'
+
 /**
  * @param code {string}
  * @returns {string}
@@ -108,6 +110,7 @@ const options = [
     code.append('\n\n')
     code.append(await getShims(true))
   }),
+  unpluginTypes(),
 ].flat()
 
 export default options
