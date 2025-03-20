@@ -2,7 +2,7 @@
 // Utilities
 import { toRaw } from 'vue'
 
-export type SelectStrategyFn = (data: {
+type SelectStrategyFunction = (data: {
   id: unknown
   value: boolean
   selected: Map<unknown, 'on' | 'off' | 'indeterminate'>
@@ -11,22 +11,22 @@ export type SelectStrategyFn = (data: {
   event?: Event
 }) => Map<unknown, 'on' | 'off' | 'indeterminate'>
 
-export type SelectStrategyTransformInFn = (
+type SelectStrategyTransformInFunction = (
   v: readonly unknown[] | undefined,
   children: Map<unknown, unknown[]>,
   parents: Map<unknown, unknown>,
 ) => Map<unknown, 'on' | 'off' | 'indeterminate'>
 
-export type SelectStrategyTransformOutFn = (
+type SelectStrategyTransformOutFunction = (
   v: Map<unknown, 'on' | 'off' | 'indeterminate'>,
   children: Map<unknown, unknown[]>,
   parents: Map<unknown, unknown>,
 ) => unknown[]
 
 export type SelectStrategy = {
-  select: SelectStrategyFn
-  in: SelectStrategyTransformInFn
-  out: SelectStrategyTransformOutFn
+  select: SelectStrategyFunction
+  in: SelectStrategyTransformInFunction
+  out: SelectStrategyTransformOutFunction
 }
 
 export const independentSelectStrategy = (mandatory?: boolean): SelectStrategy => {
