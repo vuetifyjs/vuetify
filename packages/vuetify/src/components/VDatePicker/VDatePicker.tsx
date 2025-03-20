@@ -21,6 +21,7 @@ import { computed, ref, shallowRef, watch } from 'vue'
 import { genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
+import type { VDatePickerHeaderSlots } from './VDatePickerHeader'
 import type { VDatePickerMonthSlots } from './VDatePickerMonth'
 import type { VDatePickerMonthsSlots } from './VDatePickerMonths'
 import type { VDatePickerYearsSlots } from './VDatePickerYears'
@@ -29,10 +30,13 @@ import type { GenericProps } from '@/util'
 
 // Types
 export type VDatePickerSlots = Omit<
-  VDatePickerMonthSlots
+  & VDatePickerHeaderSlots
+  & VDatePickerMonthSlots
   & VDatePickerYearsSlots
   & VDatePickerMonthsSlots
-  & VPickerSlots, 'header'> & {
+  & VPickerSlots,
+  'header' | 'default'
+> & {
   header: {
     header: string
     transition: string
@@ -324,7 +328,12 @@ export const VDatePicker = genericComponent<new <
                 { ...datePickerHeaderProps }
                 { ...headerProps }
                 onClick={ viewMode.value !== 'month' ? onClickDate : undefined }
-              />
+              >
+                {{
+                  append: slots.append,
+                  prepend: slots.prepend,
+                }}
+              </VDatePickerHeader>
             ),
             default: () => (
               <>
