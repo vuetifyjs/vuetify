@@ -20,16 +20,34 @@ The rules composable provide a multitude of validation rules to be used with for
 
 <entry />
 
-::: success
-This feature was introduced in [v3.7.0](/getting-started/release-notes/?version=v3.7.0)
-:::
-
 ## Usage
 
 Within your application, import the useRules function and use it to access the rules composable.
 Existing rules’ error messages can also be customized on the fly, to fit specific field cases.
 
-<usage name="rules" />
+```html { resource="src/views/ValidationForm.vue" }
+<template>
+  <v-app>
+    <v-container>
+      <v-form validate-on="submit" @submit.prevent="submit">
+        <v-text-field :rules="[rules.required()]" label="Email" />
+
+        <v-btn text="Submit" type="submit"/>
+      </v-form>
+    </v-container>
+  </v-app>
+</template>
+
+<script setup>
+  import { useRules } from '@/labs/rules/rules'
+
+  const rules = useRules()
+
+  async function submit (event) {
+    await event
+  }
+</script>
+```
 
 ## Guide
 
