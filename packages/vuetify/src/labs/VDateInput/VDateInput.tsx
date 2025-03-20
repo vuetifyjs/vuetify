@@ -40,6 +40,9 @@ export const makeVDateInputProps = propsFactory({
   ...makeFocusProps(),
   ...makeVConfirmEditProps(),
   ...makeVTextFieldProps({
+    clearValue: (props: VDateInput['$props']) => {
+      return props.multiple ? [] : null
+    },
     placeholder: 'mm/dd/yyyy',
     prependIcon: '$calendar',
   }),
