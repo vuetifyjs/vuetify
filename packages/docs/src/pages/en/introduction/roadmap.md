@@ -27,15 +27,15 @@ The following is a list of all planned components for the year 2025.
 | [v3.8 (Andromeda)](https://github.com/vuetifyjs/vuetify/milestone/74)   |               | March 2025 { .bg-surface-light } |
 | [v-number-input](/components/number-inputs/)                            | *             |                                  |
 | [v-snackbar-queue](/components/snackbar-queue/)                         | *             |                                  |
+| [v3.9 (Zealot)](https://github.com/vuetifyjs/vuetify/milestone/78)      |               | Q2 2025 { .bg-surface-light }    |
+| [v-time-input](https://github.com/vuetifyjs/vuetify/pull/19709)         | Q1 2025       |                                  |
 | [v-time-picker](/components/time-pickers/)                              | *             |                                  |
 | [v-stepper-vertical](/components/vertical-steppers/)                    | *             |                                  |
-| [v3.9 (Zealot)](https://github.com/vuetifyjs/vuetify/milestone/78)      |               | Q2 2025 { .bg-surface-light }    |
 | [v-treeview](/components/treeview/)                                     | *             |                                  |
 | [v-file-upload](/components/file-upload/)                               | *             |                                  |
 | [v4.0 (Revisionist)](https://github.com/vuetifyjs/vuetify/milestone/62) |               | 2025 { .bg-surface-light }       |
 | [v-date-input](/components/date-inputs/)                                | *             |                                  |
 | [v-calendar](/components/calendars/)                                    | *             |                                  |
-| [v-time-input](https://github.com/vuetifyjs/vuetify/pull/19709)         | Q1 2025       |                                  |
 | Future - [v4.1](https://github.com/vuetifyjs/vuetify/milestone/77)+     |               | TBD { .bg-surface-light }        |
 | v-date-time-picker                                                      | Q2 2025       |                                  |
 | v-date-range-picker                                                     | Q2 2025       |                                  |
