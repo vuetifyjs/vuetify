@@ -303,7 +303,8 @@ export const VDatePicker = genericComponent<new <
             props.class,
           ]}
           style={ props.style }
-          v-slots={{
+        >
+          {{
             title: () => slots.title?.() ?? (
               <div class="v-date-picker__title">
                 { t(props.title) }
@@ -323,10 +324,6 @@ export const VDatePicker = genericComponent<new <
                 { ...datePickerHeaderProps }
                 { ...headerProps }
                 onClick={ viewMode.value !== 'month' ? onClickDate : undefined }
-                v-slots={{
-                  ...slots,
-                  default: undefined,
-                }}
               />
             ),
             default: () => (
@@ -352,7 +349,7 @@ export const VDatePicker = genericComponent<new <
                       max={ maxDate.value }
                       year={ year.value }
                     >
-                      {{ ...slots }}
+                      {{ month: slots.month }}
                     </VDatePickerMonths>
                   ) : viewMode.value === 'year' ? (
                     <VDatePickerYears
@@ -363,7 +360,7 @@ export const VDatePicker = genericComponent<new <
                       min={ minDate.value }
                       max={ maxDate.value }
                     >
-                      {{ ...slots }}
+                      {{ year: slots.year }}
                     </VDatePickerYears>
                   ) : (
                     <VDatePickerMonth
@@ -377,7 +374,7 @@ export const VDatePicker = genericComponent<new <
                       min={ minDate.value }
                       max={ maxDate.value }
                     >
-                      {{ ...slots }}
+                      {{ day: slots.day }}
                     </VDatePickerMonth>
                   )}
                 </VFadeTransition>
@@ -385,7 +382,7 @@ export const VDatePicker = genericComponent<new <
             ),
             actions: slots.actions,
           }}
-        />
+        </VPicker>
       )
     })
 
