@@ -38,7 +38,7 @@ export function createRules (options: RulesOptions | undefined, locale: LocaleIn
   return mergeDeep({
     aliases: {
       required: (err?: string) => {
-        (v: any) => {
+        return (v: any) => {
           // If the modifier .number is used, the 0 will be a number and it's a falsy value so we need to check for it
           return v === 0 || !!v || t(err || '$vuetify.rules.required')
         }
@@ -47,7 +47,7 @@ export function createRules (options: RulesOptions | undefined, locale: LocaleIn
         return (v: any) => (!v || (typeof v === 'string' && /^.+@\S+\.\S+$/.test(v))) || t(err || '$vuetify.rules.email')
       },
       number: (err?: string) => {
-        return (v: string) => !!+v || t(err || '$vuetify.rules.number')
+        return (v: string) => !!Number(v) || t(err || '$vuetify.rules.number')
       },
       integer: (err?: string) => {
         return (v: string) => (/^[\d]*$/.test(v)) || t(err || '$vuetify.rules.integer')
