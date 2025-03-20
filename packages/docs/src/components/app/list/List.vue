@@ -1,9 +1,9 @@
 <template>
   <v-list
     v-model:opened="opened"
-    :nav="nav"
     :items="computedItems"
     :lines="false"
+    :nav="nav"
     color="primary"
     density="compact"
     item-props
@@ -11,6 +11,22 @@
   >
     <template v-if="$slots.item" #item="itemProps">
       <slot name="item" v-bind="itemProps" />
+    </template>
+
+    <template #header="{ props: itemProps }">
+      <v-list-item v-bind="itemProps">
+        <template #title>
+          {{ itemProps.title }}
+
+          <v-badge
+            v-if="itemProps.emphasized"
+            class="ms-n1"
+            color="success"
+            dot
+            inline
+          />
+        </template>
+      </v-list-item>
     </template>
 
     <template #divider>
@@ -57,16 +73,10 @@
 </template>
 
 <script setup lang="ts">
-  // Composables
-  import { useI18n } from 'vue-i18n'
-
-  // Utiltities
-  import { computed, ref } from 'vue'
-  import { generatedRoutes as routes } from '@/util/routes'
-  import { RouteLocationRaw, RouteRecordRaw } from 'vue-router'
-
   // Types
+  import type { RouteLocationRaw } from 'vue-router'
   import type { Prop } from 'vue'
+  import apiList from 'virtual:api-list'
 
   export type Item = {
     title?: string
@@ -88,15 +98,13 @@
   }
 
   function generateApiItems (locale: string) {
-    return (routes as RouteRecordRaw[])
-      .filter(route => route.path.includes(`${locale}/api/`))
-      .map(route => {
-        return {
-          title: (route.meta!.title as string).slice(0, -4),
-          to: route.path,
-        }
-      })
-      .sort((a, b) => a.title.localeCompare(b.title))
+    return apiList.map(name => {
+      const path = kebabCase(name.startsWith('v-') ? name + '-directive' : name)
+      return {
+        title: name,
+        to: `/${locale}/api/${path}`,
+      }
+    })
   }
 
   function generateListItem (item: string | Item, path = '', locale = 'en', t = (key: string) => key): any {
@@ -111,8 +119,8 @@
       if (litem.subfolder) path = litem.subfolder
 
       const route = litem.routeMatch
-        ? routes.find((route: { path: string }) => route.path.endsWith(`/${locale}/${path}/${litem.routeMatch}/`))
-        : routes.find((route: { path: string }) => route.path.endsWith(`/${locale}/${path}/${litem.title}/`))
+        ? generatedRoutes.find((route: { path: string }) => route.path.endsWith(`/${locale}/${path}/${litem.routeMatch}/`))
+        : generatedRoutes.find((route: { path: string }) => route.path.endsWith(`/${locale}/${path}/${litem.title}/`))
 
       const to = litem.routePath
         ? `/${locale}/${path}/${litem.routePath}/`
@@ -177,11 +185,14 @@
       onClick: item?.onClick,
       rel: item.href ? 'noopener noreferrer' : undefined,
       target: item.href ? '_blank' : undefined,
-      children: item.title === 'api' ? generateApiItems(locale.value) : generateListItems(item, item.title!, locale.value, t),
+      children: item.title === 'api'
+        ? generateApiItems(locale.value)
+        : generateListItems(item, item.title!, locale.value, t),
       prependIcon: opened.value.includes(title ?? '') ? item.activeIcon : item.inactiveIcon,
       value: title,
       appendIcon: item.appendIcon,
       disabled: item.disabled,
+      emphasized: item.emphasized,
     }
   }))
 </script>

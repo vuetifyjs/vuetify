@@ -1,12 +1,11 @@
 <template>
-  <carbon v-if="!user.disableAds" />
+  <PromotedCarbon v-if="!user.disableAds" />
 
-  <br>
+  <VoPromotionsCardVuetify v-else-if="user.showHouseAds" />
+
+  <br v-if="!user.disableAds || user.showHouseAds">
 </template>
 
 <script setup>
-  // Stores
-  import { useUserStore } from '@vuetify/one'
-
   const user = useUserStore()
 </script>

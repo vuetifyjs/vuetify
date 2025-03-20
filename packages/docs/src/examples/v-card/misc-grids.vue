@@ -24,11 +24,23 @@
             <v-card-actions>
               <v-spacer></v-spacer>
 
-              <v-btn size="small" color="surface-variant" variant="text" icon="mdi-heart"></v-btn>
+              <v-btn
+                color="medium-emphasis"
+                icon="mdi-heart"
+                size="small"
+              ></v-btn>
 
-              <v-btn size="small" color="surface-variant" variant="text" icon="mdi-bookmark"></v-btn>
+              <v-btn
+                color="medium-emphasis"
+                icon="mdi-bookmark"
+                size="small"
+              ></v-btn>
 
-              <v-btn size="small" color="surface-variant" variant="text" icon="mdi-share-variant"></v-btn>
+              <v-btn
+                color="medium-emphasis"
+                icon="mdi-share-variant"
+                size="small"
+              ></v-btn>
             </v-card-actions>
           </v-card>
         </v-col>

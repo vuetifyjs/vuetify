@@ -9,13 +9,13 @@
         <v-toolbar class="px-2">
           <v-text-field
             v-model="search"
-            clearable
             density="comfortable"
-            hide-details
             placeholder="Search"
             prepend-inner-icon="mdi-magnify"
             style="max-width: 300px;"
             variant="solo"
+            clearable
+            hide-details
           ></v-text-field>
         </v-toolbar>
       </template>
@@ -32,7 +32,7 @@
               <v-card class="pb-3" border flat>
                 <v-img :src="item.raw.img"></v-img>
 
-                <v-list-item class="mb-2" :subtitle="item.raw.subtitle">
+                <v-list-item :subtitle="item.raw.subtitle" class="mb-2">
                   <template v-slot:title>
                     <strong class="text-h6 mb-2">{{ item.raw.title }}</strong>
                   </template>
@@ -46,11 +46,11 @@
                   </div>
 
                   <v-btn
-                    border
-                    flat
-                    size="small"
                     class="text-none"
+                    size="small"
                     text="Read"
+                    variant="flat"
+                    border
                   >
                   </v-btn>
                 </div>
@@ -64,8 +64,8 @@
         <div class="d-flex align-center justify-center pa-4">
           <v-btn
             :disabled="page === 1"
-            icon="mdi-arrow-left"
             density="comfortable"
+            icon="mdi-arrow-left"
             variant="tonal"
             rounded
             @click="prevPage"
@@ -77,8 +77,8 @@
 
           <v-btn
             :disabled="page >= pageCount"
-            icon="mdi-arrow-right"
             density="comfortable"
+            icon="mdi-arrow-right"
             variant="tonal"
             rounded
             @click="nextPage"
@@ -146,7 +146,7 @@
     {
       img: 'https://cdn.vuetifyjs.com/docs/images/graphics/games/8.png',
       title: '1920s Mystery Detective Chronicles',
-      subtitle: 'Solve crimes and uncover secrets in the glamourous 1920s era.',
+      subtitle: 'Solve crimes and uncover secrets in the glamorous 1920s era.',
       advanced: false,
       duration: '9 minutes',
     },
@@ -210,7 +210,7 @@
         {
           img: 'https://cdn.vuetifyjs.com/docs/images/graphics/games/8.png',
           title: '1920s Mystery Detective Chronicles',
-          subtitle: 'Solve crimes and uncover secrets in the glamourous 1920s era.',
+          subtitle: 'Solve crimes and uncover secrets in the glamorous 1920s era.',
           advanced: false,
           duration: '9 minutes',
         },

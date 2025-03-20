@@ -6,18 +6,18 @@
           flat
         >
           <v-btn
-            variant="outlined"
             class="me-4"
             color="grey-darken-2"
+            variant="outlined"
             @click="setToday"
           >
             Today
           </v-btn>
           <v-btn
-            fab
-            variant="text"
-            size="small"
             color="grey-darken-2"
+            size="small"
+            variant="text"
+            icon
             @click="prev"
           >
             <v-icon size="small">
@@ -25,10 +25,10 @@
             </v-icon>
           </v-btn>
           <v-btn
-            fab
-            variant="text"
-            size="small"
             color="grey-darken-2"
+            size="small"
+            variant="text"
+            icon
             @click="next"
           >
             <v-icon size="small">
@@ -40,12 +40,11 @@
           </v-toolbar-title>
           <v-spacer></v-spacer>
           <v-menu location="bottom end">
-            <template v-slot:activator="{ on, attrs }">
+            <template v-slot:activator="{ props }">
               <v-btn
-                variant="outlined"
                 color="grey-darken-2"
-                v-bind="attrs"
-                v-on="on"
+                variant="outlined"
+                v-bind="props"
               >
                 <span>{{ typeToLabel[type] }}</span>
                 <v-icon end>
@@ -74,20 +73,20 @@
         <v-calendar
           ref="calendar"
           v-model="focus"
-          color="primary"
-          :events="events"
           :event-color="getEventColor"
+          :events="events"
           :type="type"
+          color="primary"
+          @change="updateRange"
+          @click:date="viewDay"
           @click:event="showEvent"
           @click:more="viewDay"
-          @click:date="viewDay"
-          @change="updateRange"
         ></v-calendar>
         <v-menu
           v-model="selectedOpen"
-          :close-on-content-click="false"
           :activator="selectedElement"
-          offset-x
+          :close-on-content-click="false"
+          location="end"
         >
           <v-card
             color="grey-lighten-4"
@@ -115,8 +114,8 @@
             </v-card-text>
             <v-card-actions>
               <v-btn
-                variant="text"
                 color="secondary"
+                variant="text"
                 @click="selectedOpen = false"
               >
                 Cancel

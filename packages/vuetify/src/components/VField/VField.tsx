@@ -4,6 +4,7 @@ import './VField.sass'
 // Components
 import { VFieldLabel } from './VFieldLabel'
 import { VExpandXTransition } from '@/components/transitions'
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { useInputIcon } from '@/components/VInput/InputIcon'
 
 // Composables
@@ -24,9 +25,7 @@ import {
   EventProp,
   genericComponent,
   getUid,
-  isOn,
   nullifyTransforms,
-  pick,
   propsFactory,
   standardEasing,
   useRender,
@@ -96,7 +95,7 @@ export const makeVFieldProps = propsFactory({
 }, 'VField')
 
 export type VFieldSlots = {
-  clear: never
+  clear: DefaultInputSlot & { props: Record<string, any> }
   'prepend-inner': DefaultInputSlot
   'append-inner': DefaultInputSlot
   label: DefaultInputSlot & { label: string | undefined, props: Record<string, any> }
@@ -136,7 +135,8 @@ export const VField = genericComponent<new <T>(
     const { rtlClasses } = useRtl()
 
     const isActive = computed(() => props.dirty || props.active)
-    const hasLabel = computed(() => !props.singleLine && !!(props.label || slots.label))
+    const hasLabel = computed(() => !!(props.label || slots.label))
+    const hasFloatingLabel = computed(() => !props.singleLine && hasLabel.value)
 
     const uid = getUid()
     const id = computed(() => props.id || `input-${uid}`)
@@ -155,7 +155,7 @@ export const VField = genericComponent<new <T>(
     }))
 
     watch(isActive, val => {
-      if (hasLabel.value) {
+      if (hasFloatingLabel.value) {
         const el: HTMLElement = labelRef.value!.$el
         const targetEl: HTMLElement = floatingLabelRef.value!.$el
 
@@ -212,8 +212,8 @@ export const VField = genericComponent<new <T>(
 
     useRender(() => {
       const isOutlined = props.variant === 'outlined'
-      const hasPrepend = (slots['prepend-inner'] || props.prependInnerIcon)
-      const hasClear = !!(props.clearable || slots.clear)
+      const hasPrepend = !!(slots['prepend-inner'] || props.prependInnerIcon)
+      const hasClear = !!(props.clearable || slots.clear) && !props.disabled
       const hasAppend = !!(slots['append-inner'] || props.appendInnerIcon || hasClear)
       const label = () => (
         slots.label
@@ -272,7 +272,10 @@ export const VField = genericComponent<new <T>(
           { hasPrepend && (
             <div key="prepend" class="v-field__prepend-inner">
               { props.prependInnerIcon && (
-                <InputIcon key="prepend-icon" name="prependInner" />
+                <InputIcon
+                  key="prepend-icon"
+                  name="prependInner"
+                />
               )}
 
               { slots['prepend-inner']?.(slotProps.value) }
@@ -280,7 +283,7 @@ export const VField = genericComponent<new <T>(
           )}
 
           <div class="v-field__field" data-no-activator="">
-            {['filled', 'solo', 'solo-inverted', 'solo-filled'].includes(props.variant) && hasLabel.value && (
+            {['filled', 'solo', 'solo-inverted', 'solo-filled'].includes(props.variant) && hasFloatingLabel.value && (
               <VFieldLabel
                 key="floating-label"
                 ref={ floatingLabelRef }
@@ -293,9 +296,11 @@ export const VField = genericComponent<new <T>(
               </VFieldLabel>
             )}
 
-            <VFieldLabel ref={ labelRef } for={ id.value }>
-              { label() }
-            </VFieldLabel>
+            { hasLabel.value && (
+              <VFieldLabel key="label" ref={ labelRef } for={ id.value }>
+                { label() }
+              </VFieldLabel>
+            )}
 
             { slots.default?.({
               ...slotProps.value,
@@ -319,10 +324,30 @@ export const VField = genericComponent<new <T>(
                   e.stopPropagation()
                 }}
               >
+              <VDefaultsProvider
+                defaults={{
+                  VIcon: {
+                    icon: props.clearIcon,
+                  },
+                }}
+              >
                 { slots.clear
-                  ? slots.clear()
-                  : <InputIcon name="clear" />
-                }
+                  ? slots.clear({
+                    ...slotProps.value,
+                    props: {
+                      onFocus: focus,
+                      onBlur: blur,
+                      onClick: props['onClick:clear'],
+                    },
+                  })
+                  : (
+                    <InputIcon
+                      name="clear"
+                      onFocus={ focus }
+                      onBlur={ blur }
+                    />
+                  )}
+                </VDefaultsProvider>
               </div>
             </VExpandXTransition>
           )}
@@ -332,7 +357,10 @@ export const VField = genericComponent<new <T>(
               { slots['append-inner']?.(slotProps.value) }
 
               { props.appendInnerIcon && (
-                <InputIcon key="append-icon" name="appendInner" />
+                <InputIcon
+                  key="append-icon"
+                  name="appendInner"
+                />
               )}
             </div>
           )}
@@ -348,7 +376,7 @@ export const VField = genericComponent<new <T>(
               <>
                 <div class="v-field__outline__start" />
 
-                { hasLabel.value && (
+                { hasFloatingLabel.value && (
                   <div class="v-field__outline__notch">
                     <VFieldLabel ref={ floatingLabelRef } floating for={ id.value }>
                       { label() }
@@ -360,7 +388,7 @@ export const VField = genericComponent<new <T>(
               </>
             )}
 
-            { isPlainOrUnderlined.value && hasLabel.value && (
+            { isPlainOrUnderlined.value && hasFloatingLabel.value && (
               <VFieldLabel ref={ floatingLabelRef } floating for={ id.value }>
                 { label() }
               </VFieldLabel>
@@ -377,9 +405,3 @@ export const VField = genericComponent<new <T>(
 })
 
 export type VField = InstanceType<typeof VField>
-
-// TODO: this is kinda slow, might be better to implicitly inherit props instead
-export function filterFieldProps (attrs: Record<string, unknown>) {
-  const keys = Object.keys(VField.props).filter(k => !isOn(k) && k !== 'class' && k !== 'style')
-  return pick(attrs, keys)
-}

@@ -1,10 +1,11 @@
 export default {
   badge: 'Infopiste',
-  open: 'Open',
+  open: 'Avaa',
   close: 'Sulje',
+  dismiss: 'Hylkää',
   confirmEdit: {
     ok: 'OK',
-    cancel: 'Cancel',
+    cancel: 'Peruuta',
   },
   dataIterator: {
     noResultsText: 'Ei osumia',
@@ -32,18 +33,18 @@ export default {
     pageText: '{0}-{1} ({2})',
   },
   dateRangeInput: {
-    divider: 'to',
+    divider: '–',
   },
   datePicker: {
-    itemsSelected: '{0} selected',
+    itemsSelected: '{0} valittu',
     range: {
-      title: 'Select dates',
-      header: 'Enter dates',
+      title: 'Valitse päivämäärät',
+      header: 'Syötä päivämäärät',
     },
-    title: 'Select date',
-    header: 'Enter date',
+    title: 'Valitse päivämäärä',
+    header: 'Syötä päivämäärä',
     input: {
-      placeholder: 'Enter date',
+      placeholder: 'Syötä päivämäärä',
     },
   },
   noDataText: 'Ei dataa',
@@ -56,46 +57,52 @@ export default {
   },
   calendar: {
     moreEvents: '{0} lisää',
-    today: 'Today',
+    today: 'Tänään',
   },
   input: {
-    clear: 'Clear {0}',
-    prependAction: '{0} prepended action',
-    appendAction: '{0} appended action',
-    otp: 'Please enter OTP character {0}',
+    clear: 'Tyhjennä {0}',
+    prependAction: '{0} edeltävä toiminto',
+    appendAction: '{0} lisätty toiminto',
+    otp: 'Syötä OTP-merkki {0}',
   },
   fileInput: {
     counter: '{0} tiedostoa',
     counterSize: '{0} tiedostoa ({1} yhteensä)',
   },
+  fileUpload: {
+    title: 'Vedä ja pudota tiedostot tähän',
+    divider: 'tai',
+    browse: 'Selaa tiedostoja',
+  },
   timePicker: {
     am: 'ap.',
     pm: 'ip.',
+    title: 'Valitse aika',
   },
   pagination: {
     ariaLabel: {
-      root: 'Pagination Navigation',
+      root: 'Sivutuksen navigointi',
       next: 'Seuraava sivu',
       previous: 'Edellinen sivu',
       page: 'Mene sivulle {0}',
       currentPage: 'Nykyinen sivu, Sivu {0}',
-      first: 'First page',
-      last: 'Last page',
+      first: 'Ensimmäinen sivu',
+      last: 'Viimeinen sivu',
     },
   },
   stepper: {
-    next: 'Next',
-    prev: 'Previous',
+    next: 'Seuraava',
+    prev: 'Edellinen',
   },
   rating: {
     ariaLabel: {
       item: 'Luokitus {0}/{1}',
     },
   },
-  loading: 'Loading...',
+  loading: 'Ladataan...',
   infiniteScroll: {
-    loadMore: 'Load more',
-    empty: 'No more',
+    loadMore: 'Lataa lisää',
+    empty: 'Ei enempää',
   },
   rules: {
     required: 'This field is required',

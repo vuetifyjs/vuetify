@@ -17,6 +17,7 @@ import type { Component } from 'vue'
 
 export const makeVCounterProps = propsFactory({
   active: Boolean,
+  disabled: Boolean,
   max: [Number, String],
   value: {
     type: [Number, String],
@@ -57,6 +58,10 @@ export const VCounter = genericComponent<VCounterSlots>()({
           v-show={ props.active }
           class={[
             'v-counter',
+            {
+              'text-error': props.max && !props.disabled &&
+                parseFloat(props.value) > parseFloat(props.max),
+            },
             props.class,
           ]}
           style={ props.style }

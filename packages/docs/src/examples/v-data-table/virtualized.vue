@@ -1,8 +1,8 @@
 <template>
   <v-data-table
     :headers="headers"
-    :items-per-page="-1"
     :items="items"
+    :items-per-page="-1"
     height="500"
     hide-default-footer
     virtual-rows

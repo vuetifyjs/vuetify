@@ -1,14 +1,15 @@
 export default {
   badge: 'Skilt',
-  open: 'Open',
+  open: 'Åpne',
   close: 'Lukk',
+  dismiss: 'Avvis',
   confirmEdit: {
     ok: 'OK',
     cancel: 'Avbryt',
   },
   dataIterator: {
     noResultsText: 'Fant ingen matchende elementer.',
-    loadingText: 'Laster elementer...',
+    loadingText: 'Laster...',
   },
   dataTable: {
     itemsPerPageText: 'Rader per side:',
@@ -35,7 +36,7 @@ export default {
     divider: 'til',
   },
   datePicker: {
-    itemsSelected: '{0} selected',
+    itemsSelected: '{0} valgt',
     range: {
       title: 'Velg datoer',
       header: 'Velg datoer',
@@ -56,21 +57,27 @@ export default {
   },
   calendar: {
     moreEvents: '{0} flere',
-    today: 'Today',
+    today: 'I dag',
   },
   input: {
     clear: 'Fjern {0}',
-    prependAction: '{0} prepended action',
-    appendAction: '{0} appended action',
-    otp: 'Please enter OTP character {0}',
+    prependAction: '{0} foranstilt handling',
+    appendAction: '{0} etterstilt handling',
+    otp: 'Vennligst skriv inn OTP-tegn {0}',
   },
   fileInput: {
     counter: '{0} filer',
     counterSize: '{0} filer ({1} totalt)',
   },
+  fileUpload: {
+    title: 'Dra og slipp filer her',
+    divider: 'eller',
+    browse: 'Bla gjennom filer',
+  },
   timePicker: {
     am: 'AM',
     pm: 'PM',
+    title: 'Velg tid',
   },
   pagination: {
     ariaLabel: {

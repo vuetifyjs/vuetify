@@ -1,40 +1,40 @@
 <template>
   <div class="text-center">
     <v-progress-circular
+      :model-value="value"
       :rotate="360"
       :size="100"
       :width="15"
-      :model-value="value"
       color="teal"
     >
       {{ value }}
     </v-progress-circular>
 
     <v-progress-circular
+      :model-value="value"
       :rotate="-90"
       :size="100"
       :width="15"
-      :model-value="value"
       color="primary"
     >
       {{ value }}
     </v-progress-circular>
 
     <v-progress-circular
+      :model-value="value"
       :rotate="90"
       :size="100"
       :width="15"
-      :model-value="value"
       color="red"
     >
       {{ value }}
     </v-progress-circular>
 
     <v-progress-circular
+      :model-value="value"
       :rotate="180"
       :size="100"
       :width="15"
-      :model-value="value"
       color="pink"
     >
       {{ value }}

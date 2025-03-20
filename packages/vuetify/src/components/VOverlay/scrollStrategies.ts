@@ -1,5 +1,5 @@
 // Utilities
-import { effectScope, nextTick, onScopeDispose, watchEffect } from 'vue'
+import { effectScope, onScopeDispose, watchEffect } from 'vue'
 import { requestNewFrame } from './requestNewFrame'
 import { convertToUnit, getScrollParents, hasScrollbar, IN_BROWSER, propsFactory } from '@/util'
 
@@ -49,7 +49,7 @@ export function useScrollStrategies (
     if (!(data.isActive.value && props.scrollStrategy)) return
 
     scope = effectScope()
-    await nextTick()
+    await new Promise(resolve => setTimeout(resolve))
     scope.active && scope.run(() => {
       if (typeof props.scrollStrategy === 'function') {
         props.scrollStrategy(data, props, scope!)

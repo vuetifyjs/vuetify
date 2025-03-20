@@ -38,6 +38,7 @@ import {
   animate,
   convertToUnit,
   genericComponent,
+  getCurrentInstance,
   getScrollParent,
   IN_BROWSER,
   propsFactory,
@@ -48,6 +49,7 @@ import {
 // Types
 import type { PropType, Ref } from 'vue'
 import type { BackgroundColorData } from '@/composables/color'
+import type { TemplateRef } from '@/util'
 
 interface ScrimProps {
   [key: string]: unknown
@@ -74,7 +76,7 @@ function Scrim (props: ScrimProps) {
 
 export type OverlaySlots = {
   default: { isActive: Ref<boolean> }
-  activator: { isActive: boolean, props: Record<string, any> }
+  activator: { isActive: boolean, props: Record<string, any>, targetRef: TemplateRef }
 }
 
 export const makeVOverlayProps = propsFactory({
@@ -127,10 +129,16 @@ export const VOverlay = genericComponent<OverlaySlots>()({
   emits: {
     'click:outside': (e: MouseEvent) => true,
     'update:modelValue': (value: boolean) => true,
+    keydown: (e: KeyboardEvent) => true,
+    afterEnter: () => true,
     afterLeave: () => true,
   },
 
   setup (props, { slots, attrs, emit }) {
+    const vm = getCurrentInstance('VOverlay')
+    const root = ref<HTMLElement>()
+    const scrimEl = ref<HTMLElement>()
+    const contentEl = ref<HTMLElement>()
     const model = useProxiedModel(props, 'modelValue')
     const isActive = computed({
       get: () => model.value,
@@ -138,7 +146,6 @@ export const VOverlay = genericComponent<OverlaySlots>()({
         if (!(v && props.disabled)) model.value = v
       },
     })
-    const { teleportTarget } = useTeleport(computed(() => props.attach || props.contained))
     const { themeClasses } = provideTheme(props)
     const { rtlClasses, isRtl } = useRtl()
     const { hasContent, onAfterLeave: _onAfterLeave } = useLazy(props, isActive)
@@ -152,7 +159,14 @@ export const VOverlay = genericComponent<OverlaySlots>()({
       activatorEvents,
       contentEvents,
       scrimEvents,
-    } = useActivator(props, { isActive, isTop: localTop })
+    } = useActivator(props, { isActive, isTop: localTop, contentEl })
+    const { teleportTarget } = useTeleport(() => {
+      const target = props.attach || props.contained
+      if (target) return target
+      const rootNode = activatorEl?.value?.getRootNode() || vm.proxy?.$el?.getRootNode()
+      if (rootNode instanceof ShadowRoot) return rootNode
+      return false
+    })
     const { dimensionStyles } = useDimension(props)
     const isMounted = useHydration()
     const { scopeId } = useScopeId()
@@ -161,8 +175,6 @@ export const VOverlay = genericComponent<OverlaySlots>()({
       if (v) isActive.value = false
     })
 
-    const root = ref<HTMLElement>()
-    const contentEl = ref<HTMLElement>()
     const { contentStyles, updateLocation } = useLocationStrategies(props, {
       isRtl,
       contentEl,
@@ -184,8 +196,11 @@ export const VOverlay = genericComponent<OverlaySlots>()({
       else animateClick()
     }
 
-    function closeConditional () {
-      return isActive.value && globalTop.value
+    function closeConditional (e: Event) {
+      return isActive.value && globalTop.value && (
+        // If using scrim, only close if clicking on it rather than anything opened on top
+        !props.scrim || e.target === scrimEl.value || (e instanceof MouseEvent && e.shadowTarget === scrimEl.value)
+      )
     }
 
     IN_BROWSER && watch(isActive, val => {
@@ -204,6 +219,9 @@ export const VOverlay = genericComponent<OverlaySlots>()({
 
     function onKeydown (e: KeyboardEvent) {
       if (e.key === 'Escape' && globalTop.value) {
+        if (!contentEl.value?.contains(document.activeElement)) {
+          emit('keydown', e)
+        }
         if (!props.persistent) {
           isActive.value = false
           if (contentEl.value?.contains(document.activeElement)) {
@@ -211,6 +229,11 @@ export const VOverlay = genericComponent<OverlaySlots>()({
           }
         } else animateClick()
       }
+    }
+    function onKeydownSelf (e: KeyboardEvent) {
+      if (e.key === 'Escape' && !globalTop.value) return
+
+      emit('keydown', e)
     }
 
     const router = useRouter()
@@ -250,6 +273,10 @@ export const VOverlay = genericComponent<OverlaySlots>()({
       })
     }
 
+    function onAfterEnter () {
+      emit('afterEnter')
+    }
+
     function onAfterLeave () {
       _onAfterLeave()
       emit('afterLeave')
@@ -259,9 +286,9 @@ export const VOverlay = genericComponent<OverlaySlots>()({
       <>
         { slots.activator?.({
           isActive: isActive.value,
+          targetRef,
           props: mergeProps({
             ref: activatorRef,
-            targetRef,
           }, activatorEvents.value, props.activatorProps),
         })}
 
@@ -291,12 +318,14 @@ export const VOverlay = genericComponent<OverlaySlots>()({
                 props.style,
               ]}
               ref={ root }
+              onKeydown={ onKeydownSelf }
               { ...scopeId }
               { ...attrs }
             >
               <Scrim
                 color={ scrimColor }
                 modelValue={ isActive.value && !!props.scrim }
+                ref={ scrimEl }
                 { ...scrimEvents.value }
               />
               <MaybeTransition
@@ -304,6 +333,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
                 persisted
                 transition={ props.transition }
                 target={ target.value }
+                onAfterEnter={ onAfterEnter }
                 onAfterLeave={ onAfterLeave }
               >
                 <div
@@ -332,6 +362,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
 
     return {
       activatorEl,
+      scrimEl,
       target,
       animateClick,
       contentEl,

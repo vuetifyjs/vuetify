@@ -16,7 +16,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, ref } from 'vue'
-import { filterInputAttrs, genericComponent, getUid, propsFactory, useRender } from '@/util'
+import { filterInputAttrs, genericComponent, getUid, IN_BROWSER, propsFactory, useRender } from '@/util'
 
 // Types
 import type { ComputedRef, Ref } from 'vue'
@@ -79,6 +79,7 @@ export const VSwitch = genericComponent<new <T>(
     const { loaderClasses } = useLoader(props)
     const { isFocused, focus, blur } = useFocus(props)
     const control = ref<VSelectionControl>()
+    const isForcedColorsModeActive = IN_BROWSER && window.matchMedia('(forced-colors: active)').matches
 
     const loaderColor = computed(() => {
       return typeof props.loading === 'string' && props.loading !== ''
@@ -109,6 +110,7 @@ export const VSwitch = genericComponent<new <T>(
         <VInput
           class={[
             'v-switch',
+            { 'v-switch--flat': props.flat },
             { 'v-switch--inset': props.inset },
             { 'v-switch--indeterminate': indeterminate.value },
             loaderClasses.value,
@@ -157,7 +159,7 @@ export const VSwitch = genericComponent<new <T>(
                       <div
                         class={[
                           'v-switch__track',
-                          ...backgroundColorClasses.value,
+                          !isForcedColorsModeActive ? backgroundColorClasses.value : undefined,
                         ]}
                         style={ backgroundColorStyles.value }
                         onClick={ onTrackClick }
@@ -182,7 +184,7 @@ export const VSwitch = genericComponent<new <T>(
                           class={[
                             'v-switch__thumb',
                             { 'v-switch__thumb--filled': icon || props.loading },
-                            props.inset ? undefined : backgroundColorClasses.value,
+                            props.inset || isForcedColorsModeActive ? undefined : backgroundColorClasses.value,
                           ]}
                           style={ props.inset ? undefined : backgroundColorStyles.value }
                         >

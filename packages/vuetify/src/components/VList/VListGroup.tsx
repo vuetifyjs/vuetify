@@ -66,6 +66,7 @@ export const VListGroup = genericComponent<VListGroupSlots>()({
     const { isBooted } = useSsrBoot()
 
     function onClick (e: Event) {
+      e.stopPropagation()
       open(!isOpen.value, e)
     }
 
@@ -119,7 +120,9 @@ export const VListGroup = genericComponent<VListGroupSlots>()({
       </props.tag>
     ))
 
-    return {}
+    return {
+      isOpen,
+    }
   },
 })
 

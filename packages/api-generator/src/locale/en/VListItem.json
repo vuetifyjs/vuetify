@@ -1,9 +1,12 @@
 {
   "props": {
     "active": "Controls the **active** state of the item. This is typically used to highlight the component.",
-    "color": "Applies specified color to the control when in an **active** state or **input-value** is **true** - supports utility colors (for example `success` or `purple`) or css color (for example `success` or `purple`) or css color (`#033` or `rgba(255, 0, 0, 0.5)`). Find a list of built-in classes on the [colors page](/styles/colors#material-colors),",
+    "color": "Applies specified color to the control when in an **active** state or **input-value** is **true** - supports utility colors (for example `success` or `purple`) or css color (`#033` or `rgba(255, 0, 0, 0.5)`). Find a list of built-in classes on the [colors page](/styles/colors#material-colors),",
     "contained": "Changes the component style by changing how color is applied to the background.",
     "title": "Generates a `v-list-item-title` component with the supplied value. Note that this overrides the native [`title`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/title) attribute, that must be set with `v-bind:title.attr` instead.",
-    "value": "The value used for selection."
+    "value": "The value used for selection. Obtained from [`v-list`](/api/v-list)'s `v-model:selected` when the item is selected.",
+    "lines": "The line declaration specifies the minimum height of the item and can also be controlled from v-list with the same prop.",
+    "nav": "Reduces the width v-list-item takes up as well as adding a border radius.",
+    "slim": "Reduces horizontal spacing for badges, icons, tooltips, and avatars to create a more compact visual representation."
   }
 }

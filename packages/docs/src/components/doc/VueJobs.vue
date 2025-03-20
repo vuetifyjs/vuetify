@@ -1,8 +1,8 @@
 <template>
-  <v-row>
+  <v-row dense>
     <v-col cols="12">
       <div class="d-flex">
-        <app-text-field
+        <AppTextField
           v-model="search"
           :append-inner-icon="view ? 'mdi-view-grid-outline' : 'mdi-view-list-outline'"
           :placeholder="placeholder"
@@ -14,17 +14,17 @@
     <v-col
       v-for="job in items"
       :key="job.id"
-      cols="12"
       :md="view ? 6 : undefined"
+      class="d-flex"
+      cols="12"
     >
       <v-card
         :href="job.url"
-        border
-        class="transition-swing"
         max-height="225"
         rel="sponsored"
         target="_blank"
         variant="flat"
+        border
         @click="onClick(job)"
       >
         <v-list-item
@@ -33,29 +33,26 @@
         >
           <template #prepend>
             <v-avatar
-              :color="!job.avatar ? 'primary' : undefined"
               :class="!job.avatar && 'pt-1'"
+              :color="!job.avatar ? 'primary' : undefined"
               :image="job.avatar"
               icon="$vuetify"
             />
           </template>
 
           <template v-if="job.locations.length > 0" #subtitle>
-            <div class="d-flex align-center">
-              <v-icon
-                class="me-1"
-                icon="mdi-map-marker-outline"
-                size="14"
-              />
+            <v-icon
+              icon="mdi-map-marker-outline"
+              size="14"
+            />
 
-              {{ job.locations.join(', ') }}
-            </div>
+            {{ job.locations.join(', ') }}
           </template>
 
           <template #append>
             <v-btn
-              color="success"
               class="ms-6"
+              color="success"
               size="small"
               style="pointer-events: none;"
               variant="flat"
@@ -64,39 +61,27 @@
 
               <v-icon
                 icon="mdi-open-in-new"
-                end
                 size="small"
+                end
               />
             </v-btn>
           </template>
         </v-list-item>
 
         <v-card-text class="text-medium-emphasis py-0">
-          <app-markdown :content="job.description" />
+          <AppMarkdown :content="job.description" />
         </v-card-text>
-
-        <div class="text-end text-caption text-disabled mb-1 me-2">
-          via {{ job.via }}
-        </div>
       </v-card>
     </v-col>
   </v-row>
 </template>
 
 <script setup>
-  // Composables
-  import { useI18n } from 'vue-i18n'
-  import { useJobsStore } from '@/store/jobs'
-
-  // Utilities
-  import { computed, ref } from 'vue'
-  import { useGtag } from 'vue-gtag-next'
-
   const { event } = useGtag()
   const { jobs } = useJobsStore()
   const { t } = useI18n()
-  const view = ref(true)
-  const search = ref('')
+  const view = shallowRef(true)
+  const search = shallowRef('')
   const items = computed(() => {
     return jobs.filter(job => {
       if (!search.value) return true

@@ -60,6 +60,7 @@
       {
         "subheader": "utility-classes"
       },
+      "borders",
       "border-radius",
       "content",
       "cursor",
@@ -67,10 +68,25 @@
       "elevation",
       "flex",
       "float",
+      "opacity",
       "overflow",
+      "position",
       "sizing",
       "spacing",
       "text-and-typography"
+    ]
+  },
+  {
+    "title": "concepts",
+    "emphasized": true,
+    "inactiveIcon": "mdi-puzzle-outline",
+    "activeIcon": "mdi-puzzle",
+    "items": [
+      "density-and-sizing",
+      "items",
+      "routing",
+      "v-model",
+      "variants"
     ]
   },
   {
@@ -85,6 +101,7 @@
         "routePath": "explorer",
         "subtitle": "browse-components"
       },
+      "application",
       { "divider": true },
       { "subheader": "containment" },
       "bottom-sheets",
@@ -105,9 +122,11 @@
       "app-bars",
       "bottom-navigation",
       "breadcrumbs",
+      "floating-action-buttons",
       "footers",
       "navigation-drawers",
       "paginations",
+      "speed-dials",
       "system-bars",
       "tabs",
       { "divider": true },
@@ -128,6 +147,7 @@
       "textareas",
       { "divider": true },
       { "subheader": "data-and-display" },
+      "confirm-edit",
       "data-iterators",
       {
         "title": "data-tables",
@@ -144,6 +164,7 @@
           "virtual-tables"
         ]
       },
+      "sparklines",
       "infinite-scroller",
       "tables",
       "virtual-scroller",
@@ -164,6 +185,7 @@
       "alerts",
       "badges",
       "banners",
+      "empty-states",
       "hover",
       "progress-circular",
       "progress-linear",
@@ -210,6 +232,7 @@
       "resize",
       "ripple",
       "scroll",
+      "tooltip",
       "touch"
     ]
   },
@@ -224,8 +247,40 @@
         "subfolder": "components"
       },
       {
+        "title": "date-inputs",
+        "subfolder": "components"
+      },
+      {
+        "title": "file-upload",
+        "subfolder": "components"
+      },
+      {
+        "title": "number-inputs",
+        "subfolder": "components"
+      },
+      {
+        "title": "pull-to-refresh",
+        "subfolder": "components"
+      },
+      {
         "title": "rules",
         "subfolder": "features"
+      },
+      {
+        "title": "snackbar-queue",
+        "subfolder": "components"
+      },
+      {
+        "title": "vertical-steppers",
+        "subfolder": "components"
+      },
+      {
+        "title": "time-pickers",
+        "subfolder": "components"
+      },
+      {
+        "title": "treeview",
+        "subfolder": "components"
       }
     ]
   },

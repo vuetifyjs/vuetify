@@ -1,9 +1,10 @@
 <template>
-  <usage-example
+  <ExamplesUsageExample
     v-model="model"
     :code="code"
     :name="name"
     :options="options"
+    :script="script"
   >
     <div>
       <v-data-table
@@ -11,16 +12,13 @@
         :items="items"
       ></v-data-table>
     </div>
-  </usage-example>
+  </ExamplesUsageExample>
 </template>
 
 <script setup>
-  import { computed, ref } from 'vue'
-  import { propsToString } from '@/util/helpers'
-
   const name = 'v-data-table'
   const model = ref('default')
-  const options = []
+  const options = ['Hide header', 'Hide footer', 'Hide both']
 
   const items = [
     {
@@ -87,7 +85,9 @@
 
   const props = computed(() => {
     return {
-      ':items': 'items',
+      items: 'items',
+      'hide-default-header': ['Hide both', 'Hide header'].includes(model.value) || undefined,
+      'hide-default-footer': ['Hide both', 'Hide footer'].includes(model.value) || undefined,
     }
   })
 
@@ -107,6 +107,6 @@
   })
 
   const code = computed(() => {
-    return `<template>\n  <v-data-table${propsToString(props.value, 2)}></v-data-table>\n</template>\n\n${script.value}`
+    return `<v-data-table${propsToString(props.value, ['items'])}></v-data-table>`
   })
 </script>

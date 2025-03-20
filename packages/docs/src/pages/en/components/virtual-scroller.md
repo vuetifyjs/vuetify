@@ -18,9 +18,7 @@ features:
 
 The `v-virtual-scroll` component displays a virtual, _infinite_ list. It supports dynamic height and scrolling vertically and is a good alternative to pagination.
 
-![Virtual scroll Entry](https://cdn.vuetifyjs.com/docs/images/components/v-virtual-scroll/v-virtual-scroll-entry.png)
-
-<page-features />
+<PageFeatures />
 
 ::: success
 This feature was introduced in [v3.2.0 (Orion)](/getting-started/release-notes/?version=v3.2.0)
@@ -30,9 +28,9 @@ This feature was introduced in [v3.2.0 (Orion)](/getting-started/release-notes/?
 
 The virtual scroller displays just enough records to fill the viewport and uses the existing component, rehydrating it with new data.
 
-<usage name="v-virtual-scroll" />
+<ExamplesUsage name="v-virtual-scroll" />
 
-<entry />
+<PromotedEntry />
 
 ## API
 
@@ -40,7 +38,7 @@ The virtual scroller displays just enough records to fill the viewport and uses 
 | - | - |
 | [v-virtual-scroll](/api/v-virtual-scroll/) | Primary Component |
 
-<api-inline hide-links />
+<ApiInline hide-links />
 
 ## Anatomy
 
@@ -66,21 +64,21 @@ The `v-virtual-scroll` component does not have any initial height set on itself.
 
 The following code snippet uses the **height** prop:
 
-<example file="v-virtual-scroll/prop-height" />
+<ExamplesExample file="v-virtual-scroll/prop-height" />
 
 Another way of making sure that the component has height is to place it inside an element with `display: flex`.
 
-<example file="v-virtual-scroll/prop-height-parent" />
+<ExamplesExample file="v-virtual-scroll/prop-height-parent" />
 
 #### Item Height
 
 For lists where the item height is static and uniform for all items, it's recommended that you define a specific **item-height**. This value is used for `v-virtual-scroll`'s calculations.
 
-<example file="v-virtual-scroll/prop-item-height" />
+<ExamplesExample file="v-virtual-scroll/prop-item-height" />
 
 If your items are not of a uniform size, omit the **item-height** prop to have `v-virtual-scroll` dynamically calculate each item.
 
-<example file="v-virtual-scroll/prop-dynamic-item-height" />
+<ExamplesExample file="v-virtual-scroll/prop-dynamic-item-height" />
 
 ### Examples
 
@@ -90,4 +88,4 @@ The following is a collection of `v-virtual-scroll` examples that demonstrate ho
 
 The v-virtual-scroll component can render an large amount of items by rendering only what it needs to fill the scroller’s viewport.
 
-<example file="v-virtual-scroll/misc-user-directory" />
+<ExamplesExample file="v-virtual-scroll/misc-user-directory" />

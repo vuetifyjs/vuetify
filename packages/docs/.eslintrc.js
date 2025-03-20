@@ -3,6 +3,7 @@ module.exports = {
     'vue/setup-compiler-macros': true,
   },
   rules: {
+    'no-undef': 'off',
     'vue/multi-word-component-names': 'off',
   },
   overrides: [
@@ -44,6 +45,7 @@ module.exports = {
         'import/no-duplicates': 'off',
         'no-redeclare': 'off',
         'no-use-before-define': 'off',
+        'sonarjs/no-identical-functions': 'off',
       },
     },
     {

@@ -1,29 +1,22 @@
 <template>
-  <v-defaults-provider
-    :defaults="{
-      VIcon: {
-        color: user.railDrawer && auth.isSubscriber ? 'primary' : 'disabled'
-      }
-    }"
-  >
-    <settings-switch
-      v-model="user.railDrawer"
-      :disabled="!auth.isSubscriber"
-      :label="t('dashboard.perks.rail-drawer')"
-      :messages="t('dashboard.perks.rail-drawer-message')"
-      :readonly="!auth.isSubscriber"
-    />
-  </v-defaults-provider>
+  <AppSettingsSettingsHeader text="dashboard.perks.rail-drawer-message" title="dashboard.perks.rail-drawer">
+    <v-defaults-provider
+      :defaults="{
+        VIcon: {
+          color: user.railDrawer && one.isSubscriber ? 'primary' : 'disabled'
+        }
+      }"
+    >
+      <SettingsSwitch
+        v-model="user.railDrawer"
+        :disabled="!one.isSubscriber"
+        :readonly="!one.isSubscriber"
+      />
+    </v-defaults-provider>
+  </AppSettingsSettingsHeader>
 </template>
 
 <script setup>
-  // Composables
-  import { useI18n } from 'vue-i18n'
-
-  // Stores
-  import { useAuthStore, useUserStore } from '@vuetify/one'
-
-  const { t } = useI18n()
-  const auth = useAuthStore()
+  const one = useOneStore()
   const user = useUserStore()
 </script>

@@ -24,7 +24,6 @@
         :key="item.title"
         v-model="item.active"
         :prepend-icon="item.action"
-        no-action
       >
         <template v-slot:activator>
           <v-list-item-header>

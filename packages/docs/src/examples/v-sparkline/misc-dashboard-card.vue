@@ -1,6 +1,6 @@
 <template>
   <v-card
-    class="mt-4 mx-auto"
+    class="mt-8 mx-auto overflow-visible"
     max-width="400"
   >
     <v-sheet
@@ -8,10 +8,11 @@
       color="cyan"
       elevation="12"
       max-width="calc(100% - 32px)"
+      rounded="lg"
     >
       <v-sparkline
         :labels="labels"
-        :value="value"
+        :model-value="value"
         color="white"
         line-width="2"
         padding="16"

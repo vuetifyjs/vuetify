@@ -12,6 +12,7 @@ module.exports = {
   rules: {
     'no-console': 'error',
     'no-debugger': 'error',
+    'no-labels': 'off',
 
     // 'vue/html-self-closing': 'off',
     // 'vue/html-closing-bracket-spacing': 'off',
@@ -44,46 +45,27 @@ module.exports = {
       },
     },
     {
-      files: '**/*.spec.{ts,tsx}',
-      env: {
-        'jest/globals': true,
-      },
-      plugins: ['jest'],
-      extends: ['plugin:jest/recommended'],
+      files: '**/*.spec.?(browser.){ts,tsx}',
+      plugins: ['vitest'],
+      extends: ['plugin:vitest/all'],
       rules: {
-        'local-rules/jest-global-imports': 'error',
+        'local-rules/vitest-global-imports': 'error',
 
         'no-restricted-imports': 'off',
 
-        'jest/no-disabled-tests': 'off',
-        'jest/no-large-snapshots': 'warn',
-        'jest/prefer-spy-on': 'warn',
-        'jest/prefer-to-be': 'warn',
-        'jest/prefer-to-contain': 'warn',
-        'jest/prefer-to-have-length': 'warn',
-        'jest/no-standalone-expect': 'off',
-        'jest/no-conditional-expect': 'off',
-        'jest/no-identical-title': 'off',
-      },
-    },
-    {
-      files: '**/*.spec.cy.{ts,tsx}',
-      env: {
-        'cypress/globals': true,
-      },
-      plugins: ['cypress'],
-      extends: ['plugin:cypress/recommended'],
-      rules: {
-        'local-rules/cypress-types-reference': 'error',
-
-        'no-restricted-imports': 'off',
-
-        'no-unused-expressions': 'off',
-        'cypress/no-assigning-return-values': 'error',
-        'cypress/no-unnecessary-waiting': 'warn',
-        'cypress/assertion-before-screenshot': 'warn',
-        'cypress/no-async-tests': 'error',
-        'cypress/unsafe-to-chain-command': 'off',
+        'vitest/no-commented-out-tests': 'off',
+        'vitest/prefer-expect-assertions': 'off',
+        'vitest/max-expects': 'off',
+        'vitest/consistent-test-filename': 'off',
+        'vitest/prefer-to-be-truthy': 'off',
+        'vitest/prefer-to-be-falsy': 'off',
+        'vitest/no-hooks': 'off',
+        'vitest/prefer-lowercase-title': 'off',
+        'vitest/require-hook': 'off',
+        'vitest/prefer-snapshot-hint': 'off',
+        'vitest/no-disabled-tests': 'off',
+        'vitest/prefer-strict-equal': 'off',
+        'vitest/prefer-called-with': 'off',
       },
     },
   ],

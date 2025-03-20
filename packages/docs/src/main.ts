@@ -1,27 +1,29 @@
 // Styles
 import 'prism-theme-vars/base.css'
 
+// Plugins
+import * as Swetrix from 'swetrix'
+import * as Sentry from '@sentry/vue'
+import { createApp } from 'vue'
+import { createRouter, createWebHistory } from 'vue-router'
+import { createHead } from '@unhead/vue'
+import { installVuetify } from '@/plugins/vuetify'
+import { installPinia, pinia } from '@/plugins/pinia'
+import { installGlobalComponents } from '@/plugins/global-components'
+import { installGtag } from '@/plugins/gtag'
+import { installOne } from '@/plugins/one'
+import { installI18n } from '@/plugins/i18n'
+import { useAppStore } from '@/stores/app'
+import { useLocaleStore } from '@/stores/locale'
+import { installPwa } from '@/plugins/pwa'
+import { useUserStore } from '@vuetify/one'
+
 // App
 import App from './App.vue'
 
 // Virtual
 // import 'virtual:api'
 import { setupLayouts } from 'virtual:generated-layouts'
-
-// Plugins
-import { createApp } from 'vue'
-import { createRouter, createWebHistory } from 'vue-router'
-import { createHead } from '@unhead/vue'
-import { installPinia, pinia } from '@/plugins/pinia'
-import { installGlobalComponents } from '@/plugins/global-components'
-import { installGtag } from '@/plugins/gtag'
-import { installOne } from '@/plugins/one'
-import { installI18n } from '@/plugins/i18n'
-import { useAppStore } from '@/store/app'
-import { useLocaleStore } from '@/store/locale'
-import { installPwa } from '@/plugins/pwa'
-import { useUserStore } from '@vuetify/one'
-import { installVuetify } from '@/plugins/vuetify'
 
 // Utilities
 import {
@@ -31,17 +33,19 @@ import {
   redirectRoutes,
   rpath,
   trailingSlash,
-} from '@/util/routes'
-import { wrapInArray } from '@/util/helpers'
+} from '@/utils/routes'
+import { wrapInArray } from '@/utils/helpers'
 
 // Globals
-import { IN_BROWSER } from '@/util/globals'
+import { IN_BROWSER } from '@/utils/globals'
 
 const routes = setupLayouts(generatedRoutes)
 
 const appStore = useAppStore(pinia)
 const localeStore = useLocaleStore(pinia)
 const userStore = useUserStore(pinia)
+
+const app = createApp(App)
 
 if (IN_BROWSER) {
   localeStore.$subscribe((_, state) => {
@@ -50,9 +54,21 @@ if (IN_BROWSER) {
   userStore.$subscribe(() => {
     userStore.save()
   })
+  Swetrix.init('ycvR7fW63FFz', {
+    apiURL: 'https://swetrix-api.vuetifyjs.com/log',
+  })
+  Swetrix.trackViews()
+  Sentry.init({
+    app,
+    dsn: 'https://491ef7e8180648c488b1fcc158eb9ecc@glitchtip.vuetifyjs.com/1',
+    release: import.meta.env.VITE_GITHUB_SHA,
+    environment: import.meta.env.VITE_GITHUB_REF,
+    enabled: import.meta.env.VITE_GITHUB_SHA,
+
+    sampleRate: 1,
+  })
 }
 
-const app = createApp(App)
 const router = createRouter({
   history: createWebHistory(),
   routes: [
@@ -115,6 +131,13 @@ app.use(router)
 
 app.config.errorHandler = (err, vm, info) => {
   console.error(err, vm, info)
+  Swetrix.trackError({
+    name: (err as any).name,
+    message: (err as any).message,
+    lineno: null,
+    colno: null,
+    filename: null,
+  })
 }
 app.config.warnHandler = (err, vm, info) => {
   console.warn(err, vm, info)
@@ -139,9 +162,23 @@ router.onError((err, to) => {
       location.assign(to.fullPath)
     } else {
       console.error('Dynamic import error, reloading page did not fix it', err)
+      Swetrix.trackError({
+        name: err.name,
+        message: err.message,
+        lineno: null,
+        colno: null,
+        filename: null,
+      })
     }
   } else {
     console.error(err)
+    Swetrix.trackError({
+      name: err?.name,
+      message: err?.message,
+      lineno: null,
+      colno: null,
+      filename: null,
+    })
   }
 })
 

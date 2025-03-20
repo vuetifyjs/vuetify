@@ -28,6 +28,8 @@ import { makeTransitionProps } from '@/composables/transition'
 // Utilities
 import { computed, mergeProps, nextTick, ref, shallowRef, watch } from 'vue'
 import {
+  checkPrintable,
+  deepEqual,
   ensureValidVNode,
   genericComponent,
   IN_BROWSER,
@@ -144,7 +146,7 @@ export const VCombobox = genericComponent<new <
     const menu = computed({
       get: () => _menu.value,
       set: v => {
-        if (_menu.value && !v && vMenuRef.value?.ΨopenChildren) return
+        if (_menu.value && !v && vMenuRef.value?.ΨopenChildren.size) return
         _menu.value = v
       },
     })
@@ -164,15 +166,20 @@ export const VCombobox = genericComponent<new <
         return props.multiple ? transformed : (transformed[0] ?? null)
       }
     )
-    const form = useForm()
-    const _search = shallowRef(!props.multiple ? model.value[0]?.title ?? '' : '')
+    const form = useForm(props)
+
+    const hasChips = computed(() => !!(props.chips || slots.chip))
+    const hasSelectionSlot = computed(() => hasChips.value || !!slots.selection)
+
+    const _search = shallowRef(!props.multiple && !hasSelectionSlot.value ? model.value[0]?.title ?? '' : '')
+
     const search = computed<string>({
       get: () => {
         return _search.value
       },
       set: (val: string | null) => {
         _search.value = val ?? ''
-        if (!props.multiple) {
+        if (!props.multiple && !hasSelectionSlot.value) {
           model.value = [transformItem(props, val)]
         }
 
@@ -208,8 +215,9 @@ export const VCombobox = genericComponent<new <
 
       emit('update:search', value)
     })
+
     watch(model, value => {
-      if (!props.multiple) {
+      if (!props.multiple && !hasSelectionSlot.value) {
         _search.value = value[0]?.title ?? ''
       }
     })
@@ -236,11 +244,11 @@ export const VCombobox = genericComponent<new <
 
     const menuDisabled = computed(() => (
       (props.hideNoData && !displayItems.value.length) ||
-      props.readonly || form?.isReadonly.value
+      form.isReadonly.value || form.isDisabled.value
     ))
 
     const listRef = ref<VList>()
-    const { onListScroll, onListKeydown } = useScrolling(listRef, vTextFieldRef)
+    const listEvents = useScrolling(listRef, vTextFieldRef)
     function onClear (e: MouseEvent) {
       cleared = true
 
@@ -262,16 +270,19 @@ export const VCombobox = genericComponent<new <
       }
       menu.value = !menu.value
     }
+    function onListKeydown (e: KeyboardEvent) {
+      if (e.key !== ' ' && checkPrintable(e)) {
+        vTextFieldRef.value?.focus()
+      }
+    }
+    // eslint-disable-next-line complexity
     function onKeydown (e: KeyboardEvent) {
-      if (isComposingIgnoreKey(e) || props.readonly || form?.isReadonly.value) return
+      if (isComposingIgnoreKey(e) || form.isReadonly.value) return
 
       const selectionStart = vTextFieldRef.value.selectionStart
       const length = model.value.length
 
-      if (
-        selectionIndex.value > -1 ||
-        ['Enter', 'ArrowDown', 'ArrowUp'].includes(e.key)
-      ) {
+      if (['Enter', 'ArrowDown', 'ArrowUp'].includes(e.key)) {
         e.preventDefault()
       }
 
@@ -284,7 +295,11 @@ export const VCombobox = genericComponent<new <
       }
 
       if (['Enter', 'Escape', 'Tab'].includes(e.key)) {
-        if (highlightFirst.value && ['Enter', 'Tab'].includes(e.key)) {
+        if (
+          highlightFirst.value &&
+          ['Enter', 'Tab'].includes(e.key) &&
+          !model.value.some(({ value }) => value === displayItems.value[0].value)
+        ) {
           select(filteredItems.value[0])
         }
 
@@ -295,23 +310,33 @@ export const VCombobox = genericComponent<new <
         listRef.value?.focus('next')
       }
 
-      if (!props.multiple) return
+      if (e.key === 'Enter' && search.value) {
+        select(transformItem(props, search.value))
+        if (hasSelectionSlot.value) _search.value = ''
+      }
 
       if (['Backspace', 'Delete'].includes(e.key)) {
-        if (selectionIndex.value < 0) {
-          if (e.key === 'Backspace' && !search.value) {
-            selectionIndex.value = length - 1
-          }
+        if (
+          !props.multiple &&
+          hasSelectionSlot.value &&
+          model.value.length > 0 &&
+          !search.value
+        ) return select(model.value[0], false)
 
-          return
+        if (~selectionIndex.value) {
+          e.preventDefault()
+          const originalSelectionIndex = selectionIndex.value
+          select(model.value[selectionIndex.value], false)
+
+          selectionIndex.value = originalSelectionIndex >= length - 1 ? (length - 2) : originalSelectionIndex
+        } else if (e.key === 'Backspace' && !search.value) {
+          selectionIndex.value = length - 1
         }
 
-        const originalSelectionIndex = selectionIndex.value
-        const selectedItem = model.value[selectionIndex.value]
-        if (selectedItem && !selectedItem.props.disabled) select(selectedItem, false)
-
-        selectionIndex.value = originalSelectionIndex >= length - 1 ? (length - 2) : originalSelectionIndex
+        return
       }
+
+      if (!props.multiple) return
 
       if (e.key === 'ArrowLeft') {
         if (selectionIndex.value < 0 && selectionStart > 0) return
@@ -326,9 +351,7 @@ export const VCombobox = genericComponent<new <
           selectionIndex.value = -1
           vTextFieldRef.value.setSelectionRange(search.value.length, search.value.length)
         }
-      }
-
-      if (e.key === 'ArrowRight') {
+      } else if (e.key === 'ArrowRight') {
         if (selectionIndex.value < 0) return
 
         const next = selectionIndex.value + 1
@@ -339,11 +362,13 @@ export const VCombobox = genericComponent<new <
           selectionIndex.value = -1
           vTextFieldRef.value.setSelectionRange(0, 0)
         }
+      } else if (~selectionIndex.value && checkPrintable(e)) {
+        selectionIndex.value = -1
       }
-
-      if (e.key === 'Enter' && search.value) {
-        select(transformItem(props, search.value))
-        search.value = ''
+    }
+    function onAfterEnter () {
+      if (props.eager) {
+        vVirtualScrollRef.value?.calculateVisibleItems()
       }
     }
     function onAfterLeave () {
@@ -353,9 +378,11 @@ export const VCombobox = genericComponent<new <
       }
     }
     /** @param set - null means toggle */
-    function select (item: ListItem, set: boolean | null = true) {
+    function select (item: ListItem | undefined, set: boolean | null = true) {
+      if (!item || item.props.disabled) return
+
       if (props.multiple) {
-        const index = model.value.findIndex(selection => props.valueComparator(selection.value, item.value))
+        const index = model.value.findIndex(selection => (props.valueComparator || deepEqual)(selection.value, item.value))
         const add = set == null ? !~index : set
 
         if (~index) {
@@ -372,7 +399,7 @@ export const VCombobox = genericComponent<new <
       } else {
         const add = set !== false
         model.value = add ? [item] : []
-        _search.value = add ? item.title : ''
+        _search.value = add && !hasSelectionSlot.value ? item.title : ''
 
         // watch for search watcher to trigger
         nextTick(() => {
@@ -392,7 +419,7 @@ export const VCombobox = genericComponent<new <
       listHasFocus.value = false
     }
     function onUpdateModelValue (v: any) {
-      if (v == null || (v === '' && !props.multiple)) model.value = []
+      if (v == null || (v === '' && !props.multiple && !hasSelectionSlot.value)) model.value = []
     }
 
     watch(isFocused, (val, oldVal) => {
@@ -401,21 +428,26 @@ export const VCombobox = genericComponent<new <
       selectionIndex.value = -1
       menu.value = false
 
-      if (
-        highlightFirst.value &&
-        !listHasFocus.value &&
-        !model.value.some(({ value }) => value === displayItems.value[0].value)
-      ) {
-        select(displayItems.value[0])
-      } else if (props.multiple && search.value) {
-        select(transformItem(props, search.value))
+      if (search.value) {
+        if (props.multiple) {
+          select(transformItem(props, search.value))
+          return
+        }
+
+        if (!hasSelectionSlot.value) return
+
+        if (model.value.some(({ title }) => title === search.value)) {
+          _search.value = ''
+        } else {
+          select(transformItem(props, search.value))
+        }
       }
     })
 
     watch(menu, () => {
       if (!props.hideSelected && menu.value && model.value.length) {
         const index = displayItems.value.findIndex(
-          item => model.value.some(s => props.valueComparator(s.value, item.value))
+          item => model.value.some(s => (props.valueComparator || deepEqual)(s.value, item.value))
         )
         IN_BROWSER && window.requestAnimationFrame(() => {
           index >= 0 && vVirtualScrollRef.value?.scrollToIndex(index)
@@ -423,20 +455,15 @@ export const VCombobox = genericComponent<new <
       }
     })
 
-    watch(displayItems, (val, oldVal) => {
-      if (!isFocused.value) return
+    watch(() => props.items, (newVal, oldVal) => {
+      if (menu.value) return
 
-      if (!val.length && props.hideNoData) {
-        menu.value = false
-      }
-
-      if (!oldVal.length && val.length) {
+      if (isFocused.value && !oldVal.length && newVal.length) {
         menu.value = true
       }
     })
 
     useRender(() => {
-      const hasChips = !!(props.chips || slots.chip)
       const hasList = !!(
         (!props.hideNoData || displayItems.value.length) ||
         slots['prepend-item'] ||
@@ -461,14 +488,14 @@ export const VCombobox = genericComponent<new <
             {
               'v-combobox--active-menu': menu.value,
               'v-combobox--chips': !!props.chips,
-              'v-combobox--selection-slot': !!slots.selection,
+              'v-combobox--selection-slot': !!hasSelectionSlot.value,
               'v-combobox--selecting-index': selectionIndex.value > -1,
               [`v-combobox--${props.multiple ? 'multiple' : 'single'}`]: true,
             },
             props.class,
           ]}
           style={ props.style }
-          readonly={ props.readonly }
+          readonly={ form.isReadonly.value }
           placeholder={ isDirty ? undefined : props.placeholder }
           onClick:clear={ onClear }
           onMousedown:control={ onMousedownControl }
@@ -489,6 +516,7 @@ export const VCombobox = genericComponent<new <
                   openOnClick={ false }
                   closeOnContentClick={ false }
                   transition={ props.transition }
+                  onAfterEnter={ onAfterEnter }
                   onAfterLeave={ onAfterLeave }
                   { ...props.menuProps }
                 >
@@ -501,23 +529,23 @@ export const VCombobox = genericComponent<new <
                       onKeydown={ onListKeydown }
                       onFocusin={ onFocusin }
                       onFocusout={ onFocusout }
-                      onScrollPassive={ onListScroll }
                       tabindex="-1"
                       aria-live="polite"
                       color={ props.itemColor ?? props.color }
+                      { ...listEvents }
                       { ...props.listProps }
                     >
                       { slots['prepend-item']?.() }
 
                       { !displayItems.value.length && !props.hideNoData && (slots['no-data']?.() ?? (
-                        <VListItem title={ t(props.noDataText) } />
+                        <VListItem key="no-data" title={ t(props.noDataText) } />
                       ))}
 
                       <VVirtualScroll ref={ vVirtualScrollRef } renderless items={ displayItems.value }>
                         { ({ item, index, itemRef }) => {
                           const itemProps = mergeProps(item.props, {
                             ref: itemRef,
-                            key: index,
+                            key: item.value,
                             active: (highlightFirst.value && index === 0) ? true : undefined,
                             onClick: () => select(item, null),
                           })
@@ -527,7 +555,7 @@ export const VCombobox = genericComponent<new <
                             index,
                             props: itemProps,
                           }) ?? (
-                            <VListItem { ...itemProps }>
+                            <VListItem { ...itemProps } role="option">
                             {{
                               prepend: ({ isSelected }) => (
                                 <>
@@ -575,6 +603,14 @@ export const VCombobox = genericComponent<new <
 
                   const slotProps = {
                     'onClick:close': onChipClose,
+                    onKeydown (e: KeyboardEvent) {
+                      if (e.key !== 'Enter' && e.key !== ' ') return
+
+                      e.preventDefault()
+                      e.stopPropagation()
+
+                      onChipClose(e)
+                    },
                     onMousedown (e: MouseEvent) {
                       e.preventDefault()
                       e.stopPropagation()
@@ -583,10 +619,10 @@ export const VCombobox = genericComponent<new <
                     'onUpdate:modelValue': undefined,
                   }
 
-                  const hasSlot = hasChips ? !!slots.chip : !!slots.selection
+                  const hasSlot = hasChips.value ? !!slots.chip : !!slots.selection
                   const slotContent = hasSlot
                     ? ensureValidVNode(
-                      hasChips
+                      hasChips.value
                         ? slots.chip!({ item, index, props: slotProps })
                         : slots.selection!({ item, index })
                     )
@@ -606,7 +642,7 @@ export const VCombobox = genericComponent<new <
                       ]}
                       style={ index === selectionIndex.value ? textColorStyles.value : {} }
                     >
-                      { hasChips ? (
+                      { hasChips.value ? (
                         !slots.chip ? (
                           <VChip
                             key="chip"
@@ -656,6 +692,7 @@ export const VCombobox = genericComponent<new <
                     onClick={ noop }
                     aria-label={ t(label.value) }
                     title={ t(label.value) }
+                    tabindex="-1"
                   />
                 ) : undefined }
               </>

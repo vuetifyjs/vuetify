@@ -15,7 +15,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, nextTick, ref, watch } from 'vue'
-import { filterInputAttrs, focusChild, genericComponent, only, propsFactory, useRender } from '@/util'
+import { filterInputAttrs, focusChild, genericComponent, pick, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -50,7 +50,7 @@ export const makeVOtpInputProps = propsFactory({
 
   ...makeDimensionProps(),
   ...makeFocusProps(),
-  ...only(makeVFieldProps({
+  ...pick(makeVFieldProps({
     variant: 'outlined' as const,
   }), [
     'baseColor',
@@ -85,7 +85,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
       props,
       'modelValue',
       '',
-      val => String(val).split(''),
+      val => val == null ? [] : String(val).split(''),
       val => val.join('')
     )
     const { t } = useLocale()
@@ -100,10 +100,11 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
     function onInput () {
       // The maxlength attribute doesn't work for the number type input, so the text type is used.
       // The following logic simulates the behavior of a number input.
-      if (props.type === 'number' && /[^0-9]/g.test(current.value.value)) {
+      if (isValidNumber(current.value.value)) {
         current.value.value = ''
         return
       }
+
       const array = model.value.slice()
       const value = current.value.value
 
@@ -165,7 +166,11 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
       e.preventDefault()
       e.stopPropagation()
 
-      model.value = (e?.clipboardData?.getData('Text') ?? '').split('')
+      const clipboardText = e?.clipboardData?.getData('Text').slice(0, length.value) ?? ''
+
+      if (isValidNumber(clipboardText)) return
+
+      model.value = clipboardText.split('')
 
       inputRef.value?.[index].blur()
     }
@@ -184,6 +189,10 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
       blur()
 
       focusIndex.value = -1
+    }
+
+    function isValidNumber (value: string) {
+      return props.type === 'number' && /[^0-9]/g.test(value)
     }
 
     provideDefaults({
@@ -259,7 +268,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
                           disabled={ props.disabled }
                           inputmode={ props.type === 'number' ? 'numeric' : 'text' }
                           min={ props.type === 'number' ? 0 : undefined }
-                          maxlength="1"
+                          maxlength={ i === 0 ? length.value : '1' }
                           placeholder={ props.placeholder }
                           type={ props.type === 'number' ? 'text' : props.type }
                           value={ model.value[i] }

@@ -1,14 +1,15 @@
 export default {
-  badge: 'insigne',
+  badge: 'Insigne',
   open: 'Openen',
   close: 'Sluiten',
+  dismiss: 'Negeren',
   confirmEdit: {
     ok: 'OK',
     cancel: 'Annuleren',
   },
   dataIterator: {
     noResultsText: 'Geen overeenkomende resultaten gevonden',
-    loadingText: 'Items aan het laden...',
+    loadingText: 'Bezig met laden...',
   },
   dataTable: {
     itemsPerPageText: 'Rijen per pagina:',
@@ -20,7 +21,7 @@ export default {
       activateDescending: 'Activeer om aflopend te sorteren.',
       activateAscending: 'Activeer om oplopend te sorteren.',
     },
-    sortBy: 'Sorteer volgens',
+    sortBy: 'Sorteer op',
   },
   dataFooter: {
     itemsPerPageText: 'Aantal per pagina:',
@@ -48,10 +49,10 @@ export default {
   },
   noDataText: 'Geen gegevens beschikbaar',
   carousel: {
-    prev: 'Vorig beeld',
-    next: 'Volgend beeld',
+    prev: 'Vorige weergave',
+    next: 'Volgende weergave',
     ariaLabel: {
-      delimiter: 'Carrousel beeld {0} van {1}',
+      delimiter: 'Carrousel afbeelding {0} van {1}',
     },
   },
   calendar: {
@@ -62,15 +63,21 @@ export default {
     clear: 'Maak {0} leeg',
     prependAction: '{0} voorafgaande actie',
     appendAction: '{0} bijgevoegde actie',
-    otp: 'Vul alsjeblieft OTP karakter {0} in',
+    otp: 'Voer OTP-teken {0} in',
   },
   fileInput: {
     counter: '{0} bestanden',
     counterSize: '{0} bestanden ({1} in totaal)',
   },
+  fileUpload: {
+    title: 'Sleep en zet bestanden hier neer',
+    divider: 'of',
+    browse: 'Blader door bestanden',
+  },
   timePicker: {
     am: 'AM',
     pm: 'PM',
+    title: 'Selecteer tijd',
   },
   pagination: {
     ariaLabel: {
@@ -92,10 +99,10 @@ export default {
       item: 'Beoordeling {0} van {1}',
     },
   },
-  loading: 'Aan het laden...',
+  loading: 'Bezig met laden...',
   infiniteScroll: {
-    loadMore: 'Laad meer',
-    empty: 'Niet meer',
+    loadMore: 'Meer laden',
+    empty: 'Geen meer items',
   },
   rules: {
     required: 'This field is required',

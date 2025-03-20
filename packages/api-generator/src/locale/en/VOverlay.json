@@ -11,6 +11,18 @@
     "zIndex": "The z-index used for the component."
   },
   "events": {
-    "click:outside": "Event that fires when clicking outside an active overlay."
+    "click:outside": "Event that fires when clicking outside an active overlay.",
+    "afterLeave": "Event that fires after the overlay has finished transitioning out.",
+    "afterEnter": "Event that fires after the overlay has finished transitioning in."
+  },
+  "exposed": {
+    "activatorEl": "Ref to the current activator element.",
+    "animateClick": "Function invoked when user clicks outside.",
+    "contentEl": "Ref to the current content element.",
+    "globalTop": "Used by activator to determine a components position in the global stack order.",
+    "localTop": "Used by activator to determine a components position in the local stack order.",
+    "scrimEl": "Ref to the current scrim element.",
+    "target": "Ref to the current target element.",
+    "updateLocation": "Function used for locationStrategy positioning."
   }
 }

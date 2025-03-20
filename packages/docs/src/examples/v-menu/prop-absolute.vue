@@ -7,8 +7,8 @@
       <template v-slot:activator="{ props }">
         <v-card
           class="portrait"
-          image="https://cdn.vuetifyjs.com/images/cards/girl.jpg"
           height="300"
+          image="https://cdn.vuetifyjs.com/images/cards/girl.jpg"
           width="600"
           v-bind="props"
         ></v-card>
@@ -18,6 +18,7 @@
         <v-list-item
           v-for="(item, index) in items"
           :key="index"
+          :value="index"
         >
           <v-list-item-title>{{ item.title }}</v-list-item-title>
         </v-list-item>

@@ -43,8 +43,8 @@
 
         <v-stepper-actions
           :disabled="disabled"
-          @click:prev="prev"
           @click:next="next"
+          @click:prev="prev"
         ></v-stepper-actions>
       </template>
     </v-stepper>

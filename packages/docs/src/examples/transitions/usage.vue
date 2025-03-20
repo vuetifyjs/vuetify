@@ -3,8 +3,8 @@
     <v-menu transition="slide-x-transition">
       <template v-slot:activator="{ props }">
         <v-btn
-          color="primary"
           class="ma-2"
+          color="primary"
           v-bind="props"
         >
           Slide X Transition
@@ -26,8 +26,8 @@
     <v-menu transition="scroll-y-transition">
       <template v-slot:activator="{ props }">
         <v-btn
-          color="secondary"
           class="ma-2"
+          color="secondary"
           v-bind="props"
         >
           Scroll Y Transition

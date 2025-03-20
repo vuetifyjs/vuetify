@@ -10,14 +10,13 @@
           :close-on-content-click="false"
           max-width="290"
         >
-          <template v-slot:activator="{ on, attrs }">
+          <template v-slot:activator="{ props }">
             <v-text-field
               :model-value="computedDateFormattedMomentjs"
-              clearable
               label="Formatted with Moment.js"
+              clearable
               readonly
-              v-bind="attrs"
-              v-on="on"
+              v-bind="props"
               @click:clear="date = null"
             ></v-text-field>
           </template>
@@ -37,14 +36,13 @@
           :close-on-content-click="false"
           max-width="290"
         >
-          <template v-slot:activator="{ on, attrs }">
+          <template v-slot:activator="{ props }">
             <v-text-field
               :model-value="computedDateFormattedDatefns"
-              clearable
               label="Formatted with datefns"
+              clearable
               readonly
-              v-bind="attrs"
-              v-on="on"
+              v-bind="props"
               @click:clear="date = null"
             ></v-text-field>
           </template>

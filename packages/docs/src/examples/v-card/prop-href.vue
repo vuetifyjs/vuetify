@@ -1,12 +1,13 @@
 <template>
   <v-card
-    class="mx-auto my-8"
-    max-width="344"
-    title="Vuetify on GitHub"
-    prepend-icon="mdi-github"
     append-icon="mdi-open-in-new"
+    class="mx-auto"
     href="https://github.com/vuetifyjs/vuetify/"
-    target="_blank"
+    max-width="344"
+    prepend-icon="mdi-github"
     rel="noopener"
+    subtitle="Check out the official repository"
+    target="_blank"
+    title="Vuetify on GitHub"
   ></v-card>
 </template>

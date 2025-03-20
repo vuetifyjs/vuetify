@@ -70,5 +70,8 @@ export function useScrolling (listRef: Ref<VList | undefined>, textFieldRef: Ref
     }
   }
 
-  return { onListScroll, onListKeydown }
+  return {
+    onScrollPassive: onListScroll,
+    onKeydown: onListKeydown,
+  } as Record<string, Function> // typescript doesn't know about vue's event merging
 }

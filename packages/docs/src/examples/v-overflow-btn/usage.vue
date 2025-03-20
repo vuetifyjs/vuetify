@@ -1,8 +1,8 @@
 <template>
   <v-container id="dropdown-playground">
     <v-overflow-btn
-      hint="I'm a hint"
       :items="dropdownFont"
+      hint="I'm a hint"
       label="Overflow Btn"
       target="#dropdown-playground"
       v-bind="$attrs"

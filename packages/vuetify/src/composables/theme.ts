@@ -255,7 +255,7 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
   const styles = computed(() => {
     const lines: string[] = []
 
-    if (current.value.dark) {
+    if (current.value?.dark) {
       createCssClass(lines, ':root', ['color-scheme: dark'])
     }
 
@@ -294,7 +294,7 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
   function getHead () {
     return {
       style: [{
-        children: styles.value,
+        textContent: styles.value,
         id: 'vuetify-theme-stylesheet',
         nonce: parsedOptions.cspNonce || false as never,
       }],

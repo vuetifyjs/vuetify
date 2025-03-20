@@ -2,6 +2,7 @@ export default {
   badge: 'ផ្លាក',
   open: 'បើក',
   close: 'បិទ',
+  dismiss: 'បោះបង់',
   confirmEdit: {
     ok: 'យល់ព្រម',
     cancel: 'បោះបង់',
@@ -56,7 +57,7 @@ export default {
   },
   calendar: {
     moreEvents: '{0} ទៀត',
-    today: 'Today',
+    today: 'ថ្ងៃនេះ',
   },
   input: {
     clear: 'សម្អាត {0}',
@@ -68,9 +69,15 @@ export default {
     counter: '{0} ឯកសារ',
     counterSize: '{0} ឯកសារ ({1} សរុប)',
   },
+  fileUpload: {
+    title: 'អូសហើយទម្លាក់ឯកសារនៅទីនេះ',
+    divider: 'ឬ',
+    browse: 'រកមើលឯកសារ',
+  },
   timePicker: {
     am: 'ព្រឹក',
     pm: 'ល្ងាច',
+    title: 'ជ្រើសរើសម៉ោង',
   },
   pagination: {
     ariaLabel: {

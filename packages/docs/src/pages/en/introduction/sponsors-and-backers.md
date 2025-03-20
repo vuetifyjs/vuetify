@@ -14,13 +14,13 @@ related:
 
 Vuetify is an [MIT licensed](https://github.com/vuetifyjs/vuetify/blob/master/LICENSE.md) open-source project that's completely free to use.
 
-<page-features />
+<PageFeatures />
 
-<entry />
+<PromotedEntry />
 
 ## Preamble
 
-Vuetify is actively maintained by [John](https://github.com/johnleider) and [Heather](https://github.com/heatherleider) Leider as a full-time job. In addition, a Core team of open-source contributors help maintain and guide the future of the framework. The time and dedication it takes to maintain the core framework and ecosystem packages is substantial. You can support Vuetify’s open-source project by becoming a backer through one of the following methods:
+Vuetify is actively maintained by a dedicated team of open-source contributors who help guide the future of the framework. The time and dedication it takes to maintain the core framework and ecosystem packages is substantial. You can support Vuetify’s open-source project by becoming a backer through one of the following methods:
 
 ## One-time donations
 
@@ -41,7 +41,7 @@ We thank all of our project sponsors for their continued support of Vuetify. If 
 
 Thank you to our special sponsor. Your support is greatly appreciated.
 
-<sponsors tier="-2" width="240" />
+<SponsorSponsors tier="-2" width="240" />
 
 <br>
 
@@ -49,7 +49,7 @@ Thank you to our special sponsor. Your support is greatly appreciated.
 
 These sponsors have pledged $1,500 per month.
 
-<sponsors tier="1" />
+<SponsorSponsors tier="1" />
 
 <br>
 
@@ -57,7 +57,7 @@ These sponsors have pledged $1,500 per month.
 
 These sponsors have pledged $500 per month.
 
-<sponsors tier="2" />
+<SponsorSponsors tier="2" />
 
 <br>
 
@@ -65,7 +65,7 @@ These sponsors have pledged $500 per month.
 
 These sponsors have pledged $250 per month.
 
-<sponsors tier="3" />
+<SponsorSponsors tier="3" />
 
 <br>
 
@@ -73,7 +73,7 @@ These sponsors have pledged $250 per month.
 
 These sponsors help keep the lights on by providing free services to the Vuetify project.
 
-<sponsors tier="6" />
+<SponsorSponsors tier="6" />
 
 <br>
 
@@ -81,12 +81,12 @@ These sponsors help keep the lights on by providing free services to the Vuetify
 
 We work with these companies to provide you with the best possible experience.
 
-<sponsors tier="5" />
+<SponsorSponsors tier="5" />
 
 <br>
 
 ## Bottom line
 
-If you run a business and are using Vuetify in a revenue-generating product, it makes business sense to sponsor Vuetify development: *it ensures the project that your product relies on stays healthy and actively maintained*. Vuetify is a **full-time** job for John and Heather; your sponsorship and contributions help support them.
+If you run a business and are using Vuetify in a revenue-generating product, it makes business sense to sponsor Vuetify development: *it ensures the project that your product relies on stays healthy and actively maintained*. Your sponsorship and contributions help support the ongoing development and maintenance of Vuetify.
 
 If you have any questions, please reach out to [sponsor@vuetifyjs.com](mailto:sponsor@vuetifyjs.com).

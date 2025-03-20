@@ -23,7 +23,7 @@ import type { LocaleOptions, RtlOptions } from '@/composables/locale'
 import type { ThemeOptions } from '@/composables/theme'
 import type { RulesOptions } from '@/labs/rules/rules'
 export * from './composables'
-export type { DateOptions, DateInstance } from '@/composables/date'
+export type { DateOptions, DateInstance, DateModule } from '@/composables/date'
 
 export interface VuetifyOptions {
   aliases?: Record<string, any>

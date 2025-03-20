@@ -13,9 +13,9 @@ related:
 
 Stuck on a particular problem? Check some of these common gotchas before creating a ticket. If you still cannot find what you are looking for, you can submit an [issue](https://issues.vuetifyjs.com/) on GitHub or ask in our [community](https://community.vuetifyjs.com/).
 
-<page-features />
+<PageFeatures />
 
-<promoted slug="discord-subscriber-help" />
+<VoPromotionsCardHighlight class="mb-4" slug="vuetify-discord-subscriber-help" />
 
 ## Questions
 
@@ -97,8 +97,8 @@ The following responses are a collection of common questions asked by the Vuetif
 
   The `value` prop was changed in Vue 3 to support a new `v-model` syntax. See the official Vue docs for more information on [Component v-model](https://vuejs.org/guide/components/v-model.html).
 
-* **Is Vuetify 3 compatible with @vue/compact?**
+* **Is Vuetify 3 compatible with `@vue/compat`?**
 
-  No. If this changes in the future, we will update this FAQ and make a public notification.
+  Not directly, you have to set `configureCompat({ MODE: 3 })` globally and `MODE: 2` in each of your components that you want to run in compatibility mode. There will still be some incorrect warnings that can be ignored with the `-ATTR_FALSE_VALUE` filter in devtools.
 
-<promoted type="theme" />
+<PromotedPromoted type="theme" />

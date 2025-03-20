@@ -7,15 +7,17 @@ related:
 - /features/blueprints/
 - /features/global-configuration/
 - /features/treeshaking/
+features:
+  report: true
 ---
 
 # Aliasing & virtual components
 
 Create virtual components that extend built-in Vuetify components using custom aliases.
 
-<page-features />
+<PageFeatures />
 
-<entry />
+<PromotedEntry />
 
 ## Usage
 
