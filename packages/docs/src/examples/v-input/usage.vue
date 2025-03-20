@@ -17,20 +17,6 @@
   </v-container>
 </template>
 
-<script>
-  export default {
-    data () {
-      return {
-        text: '',
-      }
-    },
-    methods: {
-      appendIconCallback () {},
-      prependIconCallback () {},
-    },
-  }
-</script>
-
 <style>
   #input-usage .v-input__prepend-outer,
   #input-usage .v-input__append-outer,
