@@ -6,7 +6,6 @@ import { createGoTo, GoToSymbol } from '@/composables/goto'
 import { createIcons, IconSymbol } from '@/composables/icons'
 import { createLocale, LocaleSymbol } from '@/composables/locale'
 import { createTheme, ThemeSymbol } from '@/composables/theme'
-import { createRules, RulesSymbol } from '@/labs/rules/rules'
 
 // Utilities
 import { nextTick, reactive } from 'vue'
@@ -21,7 +20,6 @@ import type { GoToOptions } from '@/composables/goto'
 import type { IconOptions } from '@/composables/icons'
 import type { LocaleOptions, RtlOptions } from '@/composables/locale'
 import type { ThemeOptions } from '@/composables/theme'
-import type { RulesOptions } from '@/labs/rules/rules'
 export * from './composables'
 export type { DateOptions, DateInstance, DateModule } from '@/composables/date'
 
@@ -33,7 +31,6 @@ export interface VuetifyOptions {
   directives?: Record<string, any>
   defaults?: DefaultsOptions
   display?: DisplayOptions
-  rules?: RulesOptions
   goTo?: GoToOptions
   theme?: ThemeOptions
   icons?: IconOptions
@@ -57,7 +54,6 @@ export function createVuetify (vuetify: VuetifyOptions = {}) {
   const theme = createTheme(options.theme)
   const icons = createIcons(options.icons)
   const locale = createLocale(options.locale)
-  const rules = createRules(options.rules, locale)
   const date = createDate(options.date, locale)
   const goTo = createGoTo(options.goTo, locale)
 
@@ -85,7 +81,6 @@ export function createVuetify (vuetify: VuetifyOptions = {}) {
     app.provide(ThemeSymbol, theme)
     app.provide(IconSymbol, icons)
     app.provide(LocaleSymbol, locale)
-    app.provide(RulesSymbol, rules)
     app.provide(DateOptionsSymbol, date.options)
     app.provide(DateAdapterSymbol, date.instance)
     app.provide(GoToSymbol, goTo)
@@ -119,7 +114,6 @@ export function createVuetify (vuetify: VuetifyOptions = {}) {
               icons: inject.call(this, IconSymbol),
               locale: inject.call(this, LocaleSymbol),
               date: inject.call(this, DateAdapterSymbol),
-              rules: inject.call(this, RulesSymbol),
             })
           },
         },
@@ -135,7 +129,6 @@ export function createVuetify (vuetify: VuetifyOptions = {}) {
     icons,
     locale,
     date,
-    rules,
     goTo,
   }
 }
