@@ -54,7 +54,7 @@ How do we pay for this dream team? Glad you asked. The Open Collective's got $6,
 
 ![Donation to Vuetify Open Collective](https://vuetifyjs.b-cdn.net/docs/images/blog/state-of-the-union-2024-post-mortem/donation.png "Donation to Vuetify Open Collective"){ height=300 }
 
-If 30 companies matched me, we'd fund Vuetify for years. You're rolling your eyes, I can feel it—but picture this: you hit that [Open Collective link](https://opencollective.com/vuetify), and suddenly we're not just a team, we're a movement. I've seen this community rally before.
+If 30 companies matched me, we'd fund Vuetify for years. You're rolling your eyes, I can feel it—but picture this: you hit that [Open Collective link](https://opencollective.com/vuetify), and suddenly we're not just a team, we're a movement. I've seen this [community rally before](https://github.com/vuetifyjs/vuetify/issues/2240).
 
 ## Closing: The Road Ahead
 
