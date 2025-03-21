@@ -197,7 +197,9 @@ export function useFilter <T extends InternalItem> (
     results.forEach(({ index, matches }) => {
       const item = originalItems[index]
       _filteredItems.push(item)
-      _filteredMatches.set(item.value, matches)
+      if (item.value !== undefined) {
+        _filteredMatches.set(item.value, matches)
+      }
     })
     filteredItems.value = _filteredItems
     filteredMatches.value = _filteredMatches
