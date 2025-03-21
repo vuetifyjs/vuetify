@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   nav: Validation rules
   title: Validation rules composable
@@ -6,6 +7,7 @@ meta:
   keywords: Form validation, vuetify form validation, rules composable, validation rules
 related:
   - /components/forms/
+  - /features/internationalization/
 features:
   github: /labs/rules/
   label: 'E: rules'
@@ -16,14 +18,43 @@ features:
 
 The rules composable provide a multitude of validation rules to be used with form inputs.
 
-<page-features />
+<PageFeatures />
 
-<entry />
+::: warning
+
+This feature requires [v3.8.0](/getting-started/release-notes/?version=v3.8.0)
+
+:::
+
+## Installation
+
+To use the Rules plugin, you'll need to import and register it with your Vuetify instance:
+
+```js
+import { createVue } from 'vue'
+import { createVuetify } from 'vuetify'
+import { createRulesPlugin } from 'vuetify/labs/rules'
+
+const app = createVue()
+const vuetify = createVuetify()
+
+app.use(createRulesPlugin({ /* options */ }, vuetify.locale))
+```
+
+This will make the rules system available throughout your application. The plugin accepts options for customizing validation rules and integrates with Vuetify's locale system for internationalization.
+
+Inside of components, you can now import and utilize the rules composable:
+
+```js
+import { useRules } from 'vuetify/labs/rules'
+
+const rules = useRules()
+```
 
 ## Usage
 
 Within your application, import the useRules function and use it to access the rules composable.
-Existing rules’ error messages can also be customized on the fly, to fit specific field cases.
+Existing rules' error messages can also be customized on the fly, to fit specific field cases.
 
 ```html { resource="src/views/ValidationForm.vue" }
 <template>
@@ -39,7 +70,7 @@ Existing rules’ error messages can also be customized on the fly, to fit speci
 </template>
 
 <script setup>
-  import { useRules } from '@/labs/rules/rules'
+  import { useRules } from 'vuetify/labs/rules'
 
   const rules = useRules()
 
@@ -48,6 +79,8 @@ Existing rules’ error messages can also be customized on the fly, to fit speci
   }
 </script>
 ```
+
+<PromotedEntry />
 
 ## Guide
 
@@ -91,7 +124,7 @@ In this case, error message can be redefined as second parameter:
 </v-form>
 ```
 
-## Aliases
+<!-- ## Aliases
 
 Rules can also be used in inputs using the alias names syntax:
 
@@ -116,16 +149,16 @@ RuleBuilders parameters can also be passed using an Array:
     ]"
   ></v-text-field>
 </v-form>
-```
+``` -->
 
 ## Custom rules
 
 Vuetify comes with an existing set of validation rules but you can overwrite them or add yours.
 
 ```js { resource="src/plugins/vuetify.js" }
-import { createVuetify } from 'vuetify'
+import { createRulesPlugin } from 'vuetify/labs/rules'
 
-export default createVuetify({
+export default createRulesPlugin({
   rules: {
     aliases: {
       // Create a new rule named "pinCode"

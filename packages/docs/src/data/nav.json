@@ -263,10 +263,6 @@
         "subfolder": "components"
       },
       {
-        "title": "rules",
-        "subfolder": "features"
-      },
-      {
         "title": "snackbar-queue",
         "subfolder": "components"
       },
@@ -281,6 +277,10 @@
       {
         "title": "treeview",
         "subfolder": "components"
+      },
+      {
+        "title": "rules",
+        "subfolder": "features"
       }
     ]
   },
