@@ -20,6 +20,8 @@ The rules composable provide a multitude of validation rules to be used with for
 
 <PageFeatures />
 
+<PromotedEntry />
+
 ::: warning
 
 This feature requires [v3.8.0](/getting-started/release-notes/?version=v3.8.0)
@@ -79,8 +81,6 @@ Existing rules' error messages can also be customized on the fly, to fit specifi
   }
 </script>
 ```
-
-<PromotedEntry />
 
 ## Guide
 
