@@ -123,6 +123,10 @@ export const makeSliderProps = propsFactory({
     type: [Number, String],
     default: 4,
   },
+  trackDisabled: {
+    type: Boolean as PropType<boolean | null>,
+    default: null,
+  },
   direction: {
     type: String as PropType<'horizontal' | 'vertical'>,
     default: 'horizontal',
@@ -194,6 +198,7 @@ export const useSlider = ({
   const trackSize = computed(() => parseInt(props.trackSize, 10))
   const numTicks = computed(() => (max.value - min.value) / step.value)
   const disabled = toRef(props, 'disabled')
+  const trackDisabled = toRef(props, 'trackDisabled')
 
   const thumbColor = computed(() => props.error || props.disabled ? undefined : props.thumbColor ?? props.color)
   const trackColor = computed(() => props.error || props.disabled ? undefined : props.trackColor ?? props.color)
@@ -299,6 +304,10 @@ export const useSlider = ({
     if (e.button !== 0) return
 
     e.preventDefault()
+
+    if (trackDisabled.value && !(e.target as HTMLElement).closest('.v-slider-thumb')) {
+      return
+    }
 
     handleStart(e)
 
