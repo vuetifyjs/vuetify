@@ -679,6 +679,35 @@ describe('VSelect', () => {
       await expect.poll(() => screen.getAllByText('Bar')).toHaveLength(2)
       expect(getAllByRole(menu, 'option', { selected: true })).toHaveLength(2)
     })
+
+    it.only('should not fire @update:search twice when clicking bottom of input', async () => {
+      const onSearch = vi.fn()
+      const { element } = render(() => (
+        <VSelect
+          items={['Foo', 'Bar']}
+          onUpdate:search={ onSearch }
+        />
+      ))
+
+      const input = element.querySelector('.v-field__input')!
+
+      // Get the bottom position of the input
+      const rect = input.getBoundingClientRect()
+      const bottomClickY = rect.bottom - 1 // Click 1px from bottom
+
+      // Simulate click at bottom of input
+      await userEvent.click(element, {
+        clientX: rect.left + 1,
+        clientY: bottomClickY,
+      })
+      const menu = await screen.findByRole('listbox')
+      await expect.element(menu).toBeVisible()
+
+      // Wait for any potential debounced events
+      await new Promise(resolve => setTimeout(resolve, 100))
+
+      expect(onSearch).toHaveBeenCalledTimes(1)
+    })
   })
 
   describe('Showcase', () => {
