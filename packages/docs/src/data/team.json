@@ -236,7 +236,8 @@
     "languages": [
       "English"
     ],
-    "location": "Malta"
+    "location": "Malta",
+    "joined": "March 2025"
   },
   "AndreyYolkin": {
     "name": "Andrei Elkin",
@@ -268,7 +269,8 @@
       "Tagalog / Filipino",
       "English"
     ],
-    "location": "Manila, Philipines"
+    "location": "Manila, Philipines",
+    "joined": "March 2025"
   },
   "oumoussa98": {
     "name": "Abdelouahed Oumoussa",
@@ -287,6 +289,19 @@
     ],
     "joined": "March 2025",
     "location": "Casablanca, Morocco"
+  },
+  "tech-veteran71": {
+    "name": "Aaron Groenke",
+    "team": "core",
+    "github": "tech-veteran71",
+    "focus": [
+      "[vuetifyjs/labs](https://vuetifyjs.com/labs/introduction/)"
+    ],
+    "languages": [
+      "English"
+    ],
+    "joined": "March 2025",
+    "location": "USA"
   },
   "jacekkarczmarczyk": {
     "discord": "jacek#3542",
