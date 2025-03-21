@@ -10,6 +10,9 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 // Utilities
 import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
+// Types
+import type { PropType } from 'vue'
+
 export type VTableSlots = {
   default: never
   top: never
@@ -17,11 +20,18 @@ export type VTableSlots = {
   wrapper: never
 }
 
+export type Striped = null | 'odd' | 'even'
+
 export const makeVTableProps = propsFactory({
   fixedHeader: Boolean,
   fixedFooter: Boolean,
   height: [Number, String],
   hover: Boolean,
+  striped: {
+    type: String as PropType<Striped>,
+    default: null,
+    validator: (v: any) => ['even', 'odd'].includes(v),
+  },
 
   ...makeComponentProps(),
   ...makeDensityProps(),
@@ -49,6 +59,8 @@ export const VTable = genericComponent<VTableSlots>()({
             'v-table--has-top': !!slots.top,
             'v-table--has-bottom': !!slots.bottom,
             'v-table--hover': props.hover,
+            'v-table--striped-even': props.striped === 'even',
+            'v-table--striped-odd': props.striped === 'odd',
           },
           themeClasses.value,
           densityClasses.value,
