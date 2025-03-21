@@ -82,6 +82,24 @@ Existing rules' error messages can also be customized on the fly, to fit specifi
 </script>
 ```
 
+## API
+
+Below is a table of the available validation rules provided by the rules composable, including their arguments or options:
+
+| Rule Name    | Description                                                                 | Arguments/Options                  |
+|--------------|-----------------------------------------------------------------------------|------------------------------------|
+| required     | Ensures the field is not empty.                                             | `err?: string`                     |
+| email        | Validates that the field contains a valid email address.                    | `err?: string`                     |
+| number       | Validates that the field contains a number.                                 | `err?: string`                     |
+| integer      | Validates that the field contains an integer.                               | `err?: string`                     |
+| capital      | Ensures the field contains at least one capital letter.                     | `err?: string`                     |
+| maxLength    | Validates that the field does not exceed a specified maximum length.        | `len: number, err?: string`        |
+| minLength    | Validates that the field meets a specified minimum length.                  | `len: number, err?: string`        |
+| strictLength | Ensures the field has an exact specified length.                            | `len: number, err?: string`        |
+| exclude      | Ensures the field does not contain any of the specified values.             | `exclude: string[], err?: string`  |
+| notEmpty     | Ensures the field is not empty (similar to required).                       | `err?: string`                     |
+| pattern      | Validates that the field matches a specified regular expression pattern.    | `options: RegExp, err?: string`    |
+
 ## Guide
 
 The `useRules` composable doesn't return rules directly but RuleBuilders that allows to customize
