@@ -59,6 +59,8 @@
   "slots": {
     "actions": "Slot for the actions.",
     "header": "Slot for the header.",
-    "year": "Slot for the year."
+    "year": "Slot for the year.",
+    "month": "Slot for the month.",
+    "day": "Slot for the day."
   }
 }
