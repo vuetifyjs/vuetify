@@ -12,10 +12,6 @@
 
     <v-toolbar-title>My Home</v-toolbar-title>
 
-    <v-spacer></v-spacer>
-
-    <v-spacer></v-spacer>
-
     <v-toolbar-items>
       <v-btn variant="text">News</v-btn>
 

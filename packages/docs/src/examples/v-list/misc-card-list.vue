@@ -9,32 +9,23 @@
       theme="dark"
       cover
     >
-      <v-row class="fill-height">
-        <v-card-title>
+      <div class="d-flex flex-column h-100">
+        <v-card-title class="d-flex ga-4">
           <v-btn icon="mdi-chevron-left" variant="text"></v-btn>
 
           <v-spacer></v-spacer>
 
-          <v-btn
-            class="me-4"
-            icon="mdi-pencil"
-            variant="text"
-          ></v-btn>
+          <v-btn icon="mdi-pencil" variant="text"></v-btn>
 
-          <v-btn
-            icon="mdi-dots-vertical"
-            variant="text"
-          ></v-btn>
+          <v-btn icon="mdi-dots-vertical" variant="text"></v-btn>
         </v-card-title>
 
         <v-spacer></v-spacer>
 
-        <v-card-title class="ps-12 pt-12">
-          <div class="text-h4 ps-12 pt-12">
-            Ali Conners
-          </div>
+        <v-card-title class="pb-6 text-center">
+          <div class="text-h4">Ali Conners</div>
         </v-card-title>
-      </v-row>
+      </div>
     </v-img>
 
     <v-list lines="two">

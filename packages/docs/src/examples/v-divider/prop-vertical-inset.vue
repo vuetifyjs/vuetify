@@ -3,7 +3,7 @@
     color="teal"
     dark
   >
-    <v-toolbar-title>Title</v-toolbar-title>
+    <v-toolbar-title class="flex-0-0">Title</v-toolbar-title>
 
     <v-divider
       class="mx-4"
