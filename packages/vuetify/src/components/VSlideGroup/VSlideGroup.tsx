@@ -377,7 +377,7 @@ export const VSlideGroup = genericComponent<new <T>(
     })
 
     const hasNext = computed(() => {
-      if (!containerRef.value) return false
+      if (!containerRef.value || !hasAffixes.value) return false
 
       const scrollSize = getScrollSize(isHorizontal.value, containerRef.el)
       const clientSize = getClientSize(isHorizontal.value, containerRef.el)
