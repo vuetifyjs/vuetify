@@ -2,7 +2,7 @@ export default {
   badge: 'Badge',
   open: 'Ouvrir',
   close: 'Fermer',
-  dismiss: 'Dismiss',
+  dismiss: 'Ignorer',
   confirmEdit: {
     ok: 'OK',
     cancel: 'Annuler',
@@ -36,7 +36,7 @@ export default {
     divider: 'à',
   },
   datePicker: {
-    itemsSelected: '{0} selected',
+    itemsSelected: '{0} sélectionné(s)',
     range: {
       title: 'Sélectionner des dates',
       header: 'Entrer des dates',
@@ -70,14 +70,14 @@ export default {
     counterSize: '{0} fichier(s) ({1} au total)',
   },
   fileUpload: {
-    title: 'Drag and drop files here',
-    divider: 'or',
-    browse: 'Browse Files',
+    title: 'Glissez-déposez des fichiers ici',
+    divider: 'ou',
+    browse: 'Parcourir les fichiers',
   },
   timePicker: {
     am: 'AM',
     pm: 'PM',
-    title: 'Select Time',
+    title: 'Sélectionner une heure',
   },
   pagination: {
     ariaLabel: {
@@ -103,5 +103,18 @@ export default {
   infiniteScroll: {
     loadMore: 'Charger plus',
     empty: 'Aucune donnée supplémentaire',
+  },
+  rules: {
+    required: 'Ce champ est requis',
+    email: 'Veuillez entrer une adresse email valide',
+    number: 'Ce champ ne peut contenir que des chiffres',
+    integer: 'Ce champ ne peut contenir que des valeurs entières',
+    capital: 'Ce champ ne peut contenir que des lettres majuscules',
+    maxLength: 'Vous devez entrer un maximum de {0} caractères',
+    minLength: 'Vous devez entrer un minimum de {0} caractères',
+    strictLength: 'La longueur du champ entré est invalide',
+    exclude: 'Le caractère {0} n’est pas autorisé',
+    notEmpty: 'Veuillez choisir au moins une valeur',
+    pattern: 'Format invalide',
   },
 }

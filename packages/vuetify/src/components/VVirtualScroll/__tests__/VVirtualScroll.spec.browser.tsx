@@ -42,10 +42,10 @@ describe('VVirtualScroll', () => {
     await waitIdle()
     const el = await result.findByText(16)
     await scroll({ top: 400, behavior: 'smooth' }, root)
-    expect(await result.findByText(16)).toBe(el)
+    await expect(result.findByText(16)).resolves.toBe(el)
 
     await scroll({ top: 800, behavior: 'smooth' }, root)
     await scroll({ top: 200, behavior: 'smooth' }, root)
-    expect(await result.findByText(16)).not.toBe(el)
+    await expect(result.findByText(16)).resolves.not.toBe(el)
   })
 })

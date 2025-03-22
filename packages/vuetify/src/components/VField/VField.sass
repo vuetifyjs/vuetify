@@ -213,7 +213,8 @@
       opacity: var(--v-medium-emphasis-opacity)
 
     .v-field--disabled &,
-    .v-field--error &
+    .v-field--error &,
+    .v-field--glow.v-field--focused &
       > .v-icon
         opacity: 1
 
@@ -278,7 +279,9 @@
       --v-field-label-scale: #{$field-label-floating-scale}em
       font-size: var(--v-field-label-scale)
       visibility: hidden
-      max-width: 100%
+
+      .v-field--variant-outlined &
+        max-width: 100%
 
       .v-field--center-affix &
         transform: none
@@ -399,7 +402,13 @@
       &__notch
         flex: none
         position: relative
-        max-width: calc(100% - $field-control-affixed-padding)
+        max-width: calc(100% - $field-control-affixed-padding * 2)
+
+        @at-root
+          #{selector.append('.v-field--rounded', &)},
+          #{selector.append('[class^="rounded-"]', &)},
+          #{selector.append('[class*=" rounded-"]', &)}
+            max-width: calc(100% - var(--v-input-control-height))
 
         &::before,
         &::after

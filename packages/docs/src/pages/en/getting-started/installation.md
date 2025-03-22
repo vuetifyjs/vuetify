@@ -20,7 +20,7 @@ Get started with Vuetify, the world’s most popular Vue.js framework for buildi
 
 <PageFeatures />
 
-<VoPromotionsCardHighlight slug="vuemastery-getting-started" />
+<VoPromotionsCardHighlight class="mb-4" slug="vuemastery-getting-started" />
 
 ## Installation
 
@@ -82,7 +82,7 @@ cd vuetify-project
 pnpm dev
 ```
 
-<VoPromotionsCardVuetify slug="vuetify-one" />
+<PromotedEntry />
 
 ## Using Nuxt 3
 
@@ -271,6 +271,34 @@ const vuetify = createVuetify()
 
 const app = createApp()
 app.use(vuetify).mount('#app')
+```
+
+## Using as ES Module with CDN
+
+To import Vuetify (and Vue) using an [import map](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script/type/importmap) you can use the same CDN but contain it in a ES module without tooling
+
+```html
+<head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vuetify@{{ version }}/dist/vuetify.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css" />
+  <link rel="stylesheet" href="https://fonts.bunny.net/css?family=roboto:400,500,700" />
+  <script type="importmap">
+  {
+    "imports": {
+      "vue": "https://cdn.jsdelivr.net/npm/vue@latest/dist/vue.esm-browser.js",
+      "vuetify": "https://cdn.jsdelivr.net/npm/vuetify@{{ version }}/dist/vuetify.esm.js"
+    }
+  }
+  </script>
+</head>
+```
+
+```html
+<script type="module">
+  import { createApp, ref, computed } from "vue"
+  import { createVuetify } from "vuetify"
+  //... setup as usual
+</script>
 ```
 
 ## Using Vitepress

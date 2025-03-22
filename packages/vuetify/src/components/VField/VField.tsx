@@ -24,9 +24,7 @@ import {
   convertToUnit,
   EventProp,
   genericComponent,
-  isOn,
   nullifyTransforms,
-  pick,
   propsFactory,
   standardEasing,
   useRender,
@@ -72,8 +70,10 @@ export const makeVFieldProps = propsFactory({
     type: Boolean,
     default: null,
   },
+  glow: Boolean,
   error: Boolean,
   flat: Boolean,
+  iconColor: [Boolean, String],
   label: String,
   persistentClear: Boolean,
   prependInnerIcon: IconValue,
@@ -136,7 +136,8 @@ export const VField = genericComponent<new <T>(
     const { rtlClasses } = useRtl()
 
     const isActive = computed(() => props.dirty || props.active)
-    const hasLabel = computed(() => !props.singleLine && !!(props.label || slots.label))
+    const hasLabel = computed(() => !!(props.label || slots.label))
+    const hasFloatingLabel = computed(() => !props.singleLine && hasLabel.value)
 
     const uid = useId()
     const id = computed(() => props.id || `input-${uid}`)
@@ -146,16 +147,22 @@ export const VField = genericComponent<new <T>(
     const floatingLabelRef = ref<VFieldLabel>()
     const controlRef = ref<HTMLElement>()
     const isPlainOrUnderlined = computed(() => ['plain', 'underlined'].includes(props.variant))
-
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'bgColor'))
-    const { textColorClasses, textColorStyles } = useTextColor(computed(() => {
+    const color = computed(() => {
       return props.error || props.disabled ? undefined
         : isActive.value && isFocused.value ? props.color
         : props.baseColor
-    }))
+    })
+    const iconColor = computed(() => {
+      if (!props.iconColor) return undefined
+
+      return props.iconColor === true ? color.value : props.iconColor
+    })
+
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'bgColor'))
+    const { textColorClasses, textColorStyles } = useTextColor(color)
 
     watch(isActive, val => {
-      if (hasLabel.value) {
+      if (hasFloatingLabel.value) {
         const el: HTMLElement = labelRef.value!.$el
         const targetEl: HTMLElement = floatingLabelRef.value!.$el
 
@@ -210,15 +217,6 @@ export const VField = genericComponent<new <T>(
       }
     }
 
-    function onKeydownClear (e: KeyboardEvent) {
-      if (e.key !== 'Enter' && e.key !== ' ') return
-
-      e.preventDefault()
-      e.stopPropagation()
-
-      props['onClick:clear']?.(new MouseEvent('click'))
-    }
-
     useRender(() => {
       const isOutlined = props.variant === 'outlined'
       const hasPrepend = !!(slots['prepend-inner'] || props.prependInnerIcon)
@@ -245,6 +243,7 @@ export const VField = genericComponent<new <T>(
               'v-field--disabled': props.disabled,
               'v-field--dirty': props.dirty,
               'v-field--error': props.error,
+              'v-field--glow': props.glow,
               'v-field--flat': props.flat,
               'v-field--has-background': !!props.bgColor,
               'v-field--persistent-clear': props.persistentClear,
@@ -281,7 +280,11 @@ export const VField = genericComponent<new <T>(
           { hasPrepend && (
             <div key="prepend" class="v-field__prepend-inner">
               { props.prependInnerIcon && (
-                <InputIcon key="prepend-icon" name="prependInner" />
+                <InputIcon
+                  key="prepend-icon"
+                  name="prependInner"
+                  color={ iconColor.value }
+                />
               )}
 
               { slots['prepend-inner']?.(slotProps.value) }
@@ -289,7 +292,7 @@ export const VField = genericComponent<new <T>(
           )}
 
           <div class="v-field__field" data-no-activator="">
-            {['filled', 'solo', 'solo-inverted', 'solo-filled'].includes(props.variant) && hasLabel.value && (
+            {['filled', 'solo', 'solo-inverted', 'solo-filled'].includes(props.variant) && hasFloatingLabel.value && (
               <VFieldLabel
                 key="floating-label"
                 ref={ floatingLabelRef }
@@ -341,7 +344,6 @@ export const VField = genericComponent<new <T>(
                   ? slots.clear({
                     ...slotProps.value,
                     props: {
-                      onKeydown: onKeydownClear,
                       onFocus: focus,
                       onBlur: blur,
                       onClick: props['onClick:clear'],
@@ -350,7 +352,6 @@ export const VField = genericComponent<new <T>(
                   : (
                     <InputIcon
                       name="clear"
-                      onKeydown={ onKeydownClear }
                       onFocus={ focus }
                       onBlur={ blur }
                     />
@@ -365,7 +366,11 @@ export const VField = genericComponent<new <T>(
               { slots['append-inner']?.(slotProps.value) }
 
               { props.appendInnerIcon && (
-                <InputIcon key="append-icon" name="appendInner" />
+                <InputIcon
+                  key="append-icon"
+                  name="appendInner"
+                  color={ iconColor.value }
+                />
               )}
             </div>
           )}
@@ -381,7 +386,7 @@ export const VField = genericComponent<new <T>(
               <>
                 <div class="v-field__outline__start" />
 
-                { hasLabel.value && (
+                { hasFloatingLabel.value && (
                   <div class="v-field__outline__notch">
                     <VFieldLabel ref={ floatingLabelRef } floating for={ id.value }>
                       { label() }
@@ -393,7 +398,7 @@ export const VField = genericComponent<new <T>(
               </>
             )}
 
-            { isPlainOrUnderlined.value && hasLabel.value && (
+            { isPlainOrUnderlined.value && hasFloatingLabel.value && (
               <VFieldLabel ref={ floatingLabelRef } floating for={ id.value }>
                 { label() }
               </VFieldLabel>
@@ -410,9 +415,3 @@ export const VField = genericComponent<new <T>(
 })
 
 export type VField = InstanceType<typeof VField>
-
-// TODO: this is kinda slow, might be better to implicitly inherit props instead
-export function filterFieldProps (attrs: Record<string, unknown>) {
-  const keys = Object.keys(VField.props).filter(k => !isOn(k) && k !== 'class' && k !== 'style')
-  return pick(attrs, keys)
-}

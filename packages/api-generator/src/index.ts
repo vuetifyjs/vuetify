@@ -1,10 +1,10 @@
-import fs from 'fs/promises'
+import fs from 'node:fs/promises'
 import path from 'upath'
 import { components } from 'vuetify/dist/vuetify-labs.js'
 import importMap from 'vuetify/dist/json/importMap.json' with { type: 'json' }
 import importMapLabs from 'vuetify/dist/json/importMap-labs.json' with { type: 'json' }
 import { kebabCase } from './helpers/text'
-import type { BaseData, ComponentData, DirectiveData } from './types'
+import type { ComponentData, DirectiveData } from './types'
 import { generateComposableDataFromTypes, generateDirectiveDataFromTypes } from './types'
 import Piscina from 'piscina'
 import { addDescriptions, addDirectiveDescriptions, addPropData, stringifyProps } from './utils'

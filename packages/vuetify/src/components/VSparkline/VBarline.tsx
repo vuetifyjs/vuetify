@@ -90,7 +90,7 @@ export const VBarline = genericComponent<VBarlineSlots>()({
         return {
           x: minX + index * gridX,
           y: horizonY - height +
-            +(value < 0) * height,
+            Number(value < 0) * height,
           height,
           value,
         }

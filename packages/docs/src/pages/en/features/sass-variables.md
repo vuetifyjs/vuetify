@@ -8,6 +8,7 @@ related:
   - /features/theme/
   - /features/treeshaking/
 features:
+  label: 'sass'
   report: true
 ---
 
@@ -51,7 +52,7 @@ To begin modifying Vuetify's internal variables, install the [sass](https://sass
 
 :::
 
-For additional details about css-pre-processors, please refer to the official vite page at: https://vitejs.dev/guide/features.html#css-pre-processors or official vue-cli-page at: https://cli.vuejs.org/guide/css.html#pre-processors
+For additional details about css-pre-processors, please refer to the official vite page at: <https://vitejs.dev/guide/features.html#css-pre-processors> or official vue-cli-page at: <https://cli.vuejs.org/guide/css.html#pre-processors>
 
 ## Basic usage
 
@@ -249,9 +250,7 @@ Color packs are handy for quickly applying a color to a component but mostly unu
 
 ## Enabling CSS cascade layers
 
-::: success
-This feature was introduced in [v3.6.0 (Nebula)](/getting-started/release-notes/?version=v3.6.0)
-:::
+<DocIntroduced version="3.6.0" />
 
 [Cascade layers](https://developer.mozilla.org/en-US/docs/Web/CSS/@layer) are a modern CSS feature that makes it easier to write custom styles without having to deal with specificity issues and `!important`. This will be included by default in Vuetify 4 but can optionally be used now:
 

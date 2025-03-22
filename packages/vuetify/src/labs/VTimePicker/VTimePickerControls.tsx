@@ -12,7 +12,8 @@ import { useLocale } from '@/composables/locale'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
-import { SelectingTimes } from './SelectingTimes'
+import type { PropType } from 'vue'
+import type { VTimePickerViewMode } from './shared'
 type Period = 'am' | 'pm'
 
 export const makeVTimePickerControlsProps = propsFactory({
@@ -27,8 +28,8 @@ export const makeVTimePickerControlsProps = propsFactory({
   period: String,
   readonly: Boolean,
   useSeconds: Boolean,
-  selecting: Number,
   value: Number,
+  viewMode: String as PropType<VTimePickerViewMode>,
 }, 'VTimePickerControls')
 
 export const VTimePickerControls = genericComponent()({
@@ -38,7 +39,7 @@ export const VTimePickerControls = genericComponent()({
 
   emits: {
     'update:period': (data: Period) => true,
-    'update:selecting': (data: 1 | 2 | 3) => true,
+    'update:viewMode': (data: VTimePickerViewMode) => true,
   },
 
   setup (props, { emit, slots }) {
@@ -58,8 +59,8 @@ export const VTimePickerControls = genericComponent()({
             }}
           >
             <VBtn
-              active={ props.selecting === 1 }
-              color={ props.selecting === 1 ? props.color : undefined }
+              active={ props.viewMode === 'hour' }
+              color={ props.viewMode === 'hour' ? props.color : undefined }
               disabled={ props.disabled }
               variant="tonal"
               class={{
@@ -68,7 +69,7 @@ export const VTimePickerControls = genericComponent()({
                 'v-time-picker-controls__time--with-seconds__btn': props.useSeconds,
               }}
               text={ props.hour == null ? '--' : pad(`${hour}`) }
-              onClick={ () => emit('update:selecting', SelectingTimes.Hour) }
+              onClick={ () => emit('update:viewMode', 'hour') }
             />
 
             <span
@@ -79,18 +80,18 @@ export const VTimePickerControls = genericComponent()({
             >:</span>
 
             <VBtn
-              active={ props.selecting === 2 }
-              color={ props.selecting === 2 ? props.color : undefined }
+              active={ props.viewMode === 'minute' }
+              color={ props.viewMode === 'minute' ? props.color : undefined }
               class={{
                 'v-time-picker-controls__time__btn': true,
-                'v-time-picker-controls__time__btn__active': props.selecting === 2,
+                'v-time-picker-controls__time__btn__active': props.viewMode === 'minute',
                 'v-time-picker-controls__time--with-ampm__btn': props.ampm,
                 'v-time-picker-controls__time--with-seconds__btn': props.useSeconds,
               }}
               disabled={ props.disabled }
               variant="tonal"
               text={ props.minute == null ? '--' : pad(props.minute) }
-              onClick={ () => emit('update:selecting', SelectingTimes.Minute) }
+              onClick={ () => emit('update:viewMode', 'minute') }
             />
 
             {
@@ -109,11 +110,13 @@ export const VTimePickerControls = genericComponent()({
               props.useSeconds && (
                 <VBtn
                   key="secondsVal"
+                  active={ props.viewMode === 'second' }
+                  color={ props.viewMode === 'second' ? props.color : undefined }
                   variant="tonal"
-                  onClick={ () => emit('update:selecting', SelectingTimes.Second) }
+                  onClick={ () => emit('update:viewMode', 'second') }
                   class={{
                     'v-time-picker-controls__time__btn': true,
-                    'v-time-picker-controls__time__btn__active': props.selecting === 3,
+                    'v-time-picker-controls__time__btn__active': props.viewMode === 'second',
                     'v-time-picker-controls__time--with-seconds__btn': props.useSeconds,
                   }}
                   disabled={ props.disabled }

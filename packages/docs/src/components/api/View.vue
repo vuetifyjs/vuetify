@@ -1,5 +1,7 @@
 <script setup lang="ts">
   import type { PartData } from '@vuetify/api-generator/src/types'
+  import DefaultLayout from '@/layouts/default.vue'
+  import ErrorLayout from '@/layouts/404.vue'
 
   const emit = defineEmits(['update:name'])
 
@@ -7,6 +9,7 @@
 
   const route = useRoute()
 
+  const error = shallowRef(false)
   const name = computed(() => {
     const name = route.params.name as string
     if (name.endsWith('-directive')) return name.replace('-directive', '')
@@ -16,7 +19,12 @@
   const component = shallowRef<any>({})
   watch(name, async () => {
     emit('update:name', name.value)
-    component.value = await getApi(name.value)
+    try {
+      component.value = await getApi(name.value)
+      error.value = false
+    } catch (err) {
+      error.value = true
+    }
   }, { immediate: true })
 
   function getApi (name: string): Promise<{ default: PartData }> {
@@ -25,11 +33,17 @@
 </script>
 
 <template>
-  <template v-for="section of sections" :key="section">
-    <ApiSection
-      v-if="section in component && Object.keys(component[section]).length"
-      :name="name"
-      :section="section"
-    />
-  </template>
+  <ErrorLayout v-if="error" />
+  <DefaultLayout v-else>
+    <template #view>
+      <slot />
+      <template v-for="section of sections" :key="section">
+        <ApiSection
+          v-if="section in component && Object.keys(component[section]).length"
+          :name="name"
+          :section="section"
+        />
+      </template>
+    </template>
+  </DefaultLayout>
 </template>

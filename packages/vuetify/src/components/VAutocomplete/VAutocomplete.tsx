@@ -16,7 +16,7 @@ import { VVirtualScroll } from '@/components/VVirtualScroll'
 // Composables
 import { useScrolling } from '../VSelect/useScrolling'
 import { useTextColor } from '@/composables/color'
-import { makeFilterProps, useFilter } from '@/composables/filter'
+import { highlightResult, makeFilterProps, useFilter } from '@/composables/filter'
 import { useForm } from '@/composables/form'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { useItems } from '@/composables/list-items'
@@ -28,6 +28,7 @@ import { makeTransitionProps } from '@/composables/transition'
 import { computed, mergeProps, nextTick, ref, shallowRef, watch } from 'vue'
 import {
   checkPrintable,
+  deepEqual,
   ensureValidVNode,
   genericComponent,
   IN_BROWSER,
@@ -43,25 +44,8 @@ import {
 import type { PropType } from 'vue'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
-import type { FilterMatch } from '@/composables/filter'
 import type { ListItem } from '@/composables/list-items'
 import type { GenericProps, SelectItemKey } from '@/util'
-
-function highlightResult (text: string, matches: FilterMatch | undefined, length: number) {
-  if (matches == null) return text
-
-  if (Array.isArray(matches)) throw new Error('Multiple matches is not implemented')
-
-  return typeof matches === 'number' && ~matches
-    ? (
-      <>
-        <span class="v-autocomplete__unmask">{ text.substr(0, matches) }</span>
-        <span class="v-autocomplete__mask">{ text.substr(matches, length) }</span>
-        <span class="v-autocomplete__unmask">{ text.substr(matches + length) }</span>
-      </>
-    )
-    : text
-}
 
 type Primitive = string | number | boolean | symbol
 
@@ -346,7 +330,7 @@ export const VAutocomplete = genericComponent<new <
       if (!item || item.props.disabled) return
 
       if (props.multiple) {
-        const index = model.value.findIndex(selection => props.valueComparator(selection.value, item.value))
+        const index = model.value.findIndex(selection => (props.valueComparator || deepEqual)(selection.value, item.value))
         const add = set == null ? !~index : set
 
         if (~index) {
@@ -535,7 +519,7 @@ export const VAutocomplete = genericComponent<new <
                               title: () => {
                                 return isPristine.value
                                   ? item.title
-                                  : highlightResult(item.title, getMatches(item)?.title, search.value?.length ?? 0)
+                                  : highlightResult('v-autocomplete', item.title, getMatches(item)?.title)
                               },
                             }}
                           </VListItem>

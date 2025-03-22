@@ -13,7 +13,7 @@ import { makeVPickerProps, VPicker } from '@/labs/VPicker/VPicker'
 
 // Composables
 import { useDate } from '@/composables/date'
-import { useLocale } from '@/composables/locale'
+import { useLocale, useRtl } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
@@ -58,6 +58,7 @@ export const makeVDatePickerProps = propsFactory({
     type: String,
     default: '$vuetify.datePicker.header',
   },
+  headerColor: String,
 
   ...makeVDatePickerControlsProps(),
   ...makeVDatePickerMonthProps({
@@ -99,6 +100,7 @@ export const VDatePicker = genericComponent<new <
   setup (props, { emit, slots }) {
     const adapter = useDate()
     const { t } = useLocale()
+    const { rtlClasses } = useRtl()
 
     const model = useProxiedModel(
       props,
@@ -110,11 +112,32 @@ export const VDatePicker = genericComponent<new <
 
     const viewMode = useProxiedModel(props, 'viewMode')
     // const inputMode = useProxiedModel(props, 'inputMode')
-    const internal = computed(() => {
-      const value = adapter.date(model.value?.[0])
 
-      return value && adapter.isValid(value) ? value : adapter.date()
+    const minDate = computed(() => {
+      const date = adapter.date(props.min)
+
+      return props.min && adapter.isValid(date) ? date : null
     })
+    const maxDate = computed(() => {
+      const date = adapter.date(props.max)
+
+      return props.max && adapter.isValid(date) ? date : null
+    })
+
+    const internal = computed(() => {
+      const today = adapter.date()
+      let value = today
+      if (model.value?.[0]) {
+        value = adapter.date(model.value[0])
+      } else if (minDate.value && adapter.isBefore(today, minDate.value)) {
+        value = minDate.value
+      } else if (maxDate.value && adapter.isAfter(today, maxDate.value)) {
+        value = maxDate.value
+      }
+
+      return value && adapter.isValid(value) ? value : today
+    })
+    const headerColor = computed(() => props.headerColor ?? props.color)
 
     const month = ref(Number(props.month ?? adapter.getMonth(adapter.startOfMonth(internal.value))))
     const year = ref(Number(props.year ?? adapter.getYear(adapter.startOfYear(adapter.setMonth(internal.value, month.value)))))
@@ -140,16 +163,7 @@ export const VDatePicker = genericComponent<new <
     })
     // const headerIcon = computed(() => props.inputMode === 'calendar' ? props.keyboardIcon : props.calendarIcon)
     const headerTransition = computed(() => `date-picker-header${isReversing.value ? '-reverse' : ''}-transition`)
-    const minDate = computed(() => {
-      const date = adapter.date(props.min)
 
-      return props.min && adapter.isValid(date) ? date : null
-    })
-    const maxDate = computed(() => {
-      const date = adapter.date(props.max)
-
-      return props.max && adapter.isValid(date) ? date : null
-    })
     const disabled = computed(() => {
       if (props.disabled) return true
 
@@ -160,8 +174,9 @@ export const VDatePicker = genericComponent<new <
       } else {
         let _date = adapter.date()
 
-        _date = adapter.setYear(_date, year.value)
+        _date = adapter.startOfMonth(_date)
         _date = adapter.setMonth(_date, month.value)
+        _date = adapter.setYear(_date, year.value)
 
         if (minDate.value) {
           const date = adapter.addDays(adapter.startOfMonth(_date), -1)
@@ -262,6 +277,7 @@ export const VDatePicker = genericComponent<new <
       const datePickerYearsProps = omit(VDatePickerYears.filterProps(props), ['modelValue'])
 
       const headerProps = {
+        color: headerColor.value,
         header: header.value,
         transition: headerTransition.value,
       }
@@ -269,12 +285,14 @@ export const VDatePicker = genericComponent<new <
       return (
         <VPicker
           { ...pickerProps }
+          color={ headerColor.value }
           class={[
             'v-date-picker',
             `v-date-picker--${viewMode.value}`,
             {
               'v-date-picker--show-week': props.showWeek,
             },
+            rtlClasses.value,
             props.class,
           ]}
           style={ props.style }

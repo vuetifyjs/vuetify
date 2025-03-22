@@ -2,7 +2,7 @@
 // Utilities
 import { toRaw } from 'vue'
 
-export type SelectStrategyFn = (data: {
+type SelectStrategyFunction = (data: {
   id: unknown
   value: boolean
   selected: Map<unknown, 'on' | 'off' | 'indeterminate'>
@@ -11,22 +11,22 @@ export type SelectStrategyFn = (data: {
   event?: Event
 }) => Map<unknown, 'on' | 'off' | 'indeterminate'>
 
-export type SelectStrategyTransformInFn = (
+type SelectStrategyTransformInFunction = (
   v: readonly unknown[] | undefined,
   children: Map<unknown, unknown[]>,
   parents: Map<unknown, unknown>,
 ) => Map<unknown, 'on' | 'off' | 'indeterminate'>
 
-export type SelectStrategyTransformOutFn = (
+type SelectStrategyTransformOutFunction = (
   v: Map<unknown, 'on' | 'off' | 'indeterminate'>,
   children: Map<unknown, unknown[]>,
   parents: Map<unknown, unknown>,
 ) => unknown[]
 
 export type SelectStrategy = {
-  select: SelectStrategyFn
-  in: SelectStrategyTransformInFn
-  out: SelectStrategyTransformOutFn
+  select: SelectStrategyFunction
+  in: SelectStrategyTransformInFunction
+  out: SelectStrategyTransformOutFunction
 }
 
 export const independentSelectStrategy = (mandatory?: boolean): SelectStrategy => {
@@ -50,13 +50,13 @@ export const independentSelectStrategy = (mandatory?: boolean): SelectStrategy =
       return selected
     },
     in: (v, children, parents) => {
-      let map = new Map()
+      const map = new Map()
 
       for (const id of (v || [])) {
-        map = strategy.select({
+        strategy.select({
           id,
           value: true,
-          selected: new Map(map),
+          selected: map,
           children,
           parents,
         })
@@ -88,13 +88,11 @@ export const independentSingleSelectStrategy = (mandatory?: boolean): SelectStra
       return parentStrategy.select({ ...rest, id, selected: singleSelected })
     },
     in: (v, children, parents) => {
-      let map = new Map()
-
       if (v?.length) {
-        map = parentStrategy.in(v.slice(0, 1), children, parents)
+        return parentStrategy.in(v.slice(0, 1), children, parents)
       }
 
-      return map
+      return new Map()
     },
     out: (v, children, parents) => {
       return parentStrategy.out(v, children, parents)
@@ -188,7 +186,7 @@ export const classicSelectStrategy = (mandatory?: boolean): SelectStrategy => {
         map = strategy.select({
           id,
           value: true,
-          selected: new Map(map),
+          selected: map,
           children,
           parents,
         })

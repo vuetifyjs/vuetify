@@ -18,13 +18,9 @@ features:
 
 The `v-data-iterator` component is used for displaying arbitrary data, and shares a majority of its functionality with the `v-data-table` component. Features include sorting, searching, pagination, and selection.
 
-<!-- ![Data iterator Entry](https://cdn.vuetifyjs.com/docs/images/components/v-data-iterator/v-data-iterator-entry.png){ placeholder=true } -->
-
 <PageFeatures />
 
-::: success
-This feature was introduced in [v3.4.0 (Blackguard)](/getting-started/release-notes/?version=v3.4.0)
-:::
+<DocIntroduced version="3.4.0" />
 
 ## Usage
 

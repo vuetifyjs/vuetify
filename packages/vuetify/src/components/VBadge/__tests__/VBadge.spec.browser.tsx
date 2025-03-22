@@ -54,7 +54,7 @@ describe('VBadge', () => {
   describe('label', () => {
     it('should have the designated aria label', async () => {
       render(<VBadge label="label-badge">label</VBadge>)
-      expect(await screen.findByLabelText('label-badge')).toBeDefined()
+      await expect(screen.findByLabelText('label-badge')).resolves.toBeDefined()
     })
   })
 

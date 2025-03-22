@@ -8,6 +8,8 @@ related:
   - /styles/display/
   - /styles/text-and-typography/
 features:
+  github: /composables/display.ts
+  label: 'E: display'
   report: true
 ---
 
@@ -220,7 +222,7 @@ Use the **useDisplay** composable alongside Vue 3's `setup` function to harness 
 
 ### Breakpoint conditionals
 
-Breakpoint and conditional values return a `boolean` that is derived from the current viewport size. Additionally, the **breakpoint** composable follows the [Vuetify Grid](/components/grids) naming conventions and has access to properties such as **xs**, **smAndUp**, **mdAndDown**, and many others. In the following example we use the `setup` function to pass the _xs_ and _mdAndUp_ values to our template:
+Breakpoint and conditional values return a `boolean` that is derived from the current viewport size. Additionally, the **breakpoint** composable follows the [Vuetify Grid](/components/grids) naming conventions and has access to properties such as **xs**, **smAndUp**, **mdAndDown**, and many others. In the following example we use the `setup` function to pass the *xs* and *mdAndUp* values to our template:
 
 ```html { resource="Component.vue" }
 <template>
@@ -240,13 +242,11 @@ Breakpoint and conditional values return a `boolean` that is derived from the cu
 </script>
 ```
 
-Using the _dynamic_ display values, we are able to adjust the minimum height of [v-sheet](/components/sheets/) to `300` when on the _medium_ breakpoint or greater and only show rounded corners on _extra small_ screens:
+Using the *dynamic* display values, we are able to adjust the minimum height of [v-sheet](/components/sheets/) to `300` when on the *medium* breakpoint or greater and only show rounded corners on *extra small* screens:
 
 ## Component Mobile Breakpoints
 
-::: success
-This feature was introduced in [v3.4.0 (Blackguard)](/getting-started/release-notes/?version=v3.4.0)
-:::
+<DocIntroduced version="3.4.0" />
 
 Some components within Vuetify have a **mobile-breakpoint** property which allows you to override the default value. These components reference the global mobileBreakpoint value that is generated at runtime using the provided options in the `vuetify.js` file.
 
@@ -258,7 +258,7 @@ The following components have built in support for the **mobile-breakpoint** pro
 | [v-navigation-drawer](/components/navigation-drawers/) |
 | [v-slide-group](/components/slide-groups/) |
 
-By default, **mobileBreakpoint** is set to **lg**, which means that if the window is less than _1280_ pixels in width (which is the default value for the **lg** threshold), then the **useDisplay** composable will update its **mobile** value to `true`.
+By default, **mobileBreakpoint** is set to **lg**, which means that if the window is less than *1280* pixels in width (which is the default value for the **lg** threshold), then the **useDisplay** composable will update its **mobile** value to `true`.
 
 For example, the [v-banner](/components/banners/) component implements different styling when its mobile versus desktop. In the following example, The first banner uses the global **mobile-breakpoint** value of **lg** while the second overrides this default with **580**:
 
@@ -299,7 +299,7 @@ Specify a custom **mobileBreakpoint** value directly to the [useDisplay](/api/us
   import { onMounted } from 'vue'
   import { useDisplay } from 'vuetify'
 
-  const { mobile } = useDisplay({ mobileBreakpoint })
+  const { mobile } = useDisplay({ mobileBreakpoint: 580 })
 
   // Given a viewport width of 960px
   onMounted(() => {
