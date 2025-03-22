@@ -234,6 +234,9 @@
   // VPagination
   .v-pagination
     .v-btn
+      width: auto
+      padding-inline: $button-pagination-padding-inline
+      @include button-density('min-width', $button-icon-density)
       @include tools.rounded($button-pagination-border-radius)
 
       &--rounded
@@ -241,6 +244,12 @@
 
       &__overlay
         transition: none
+
+    &__prev,
+    &__next
+      .v-btn
+        padding-inline: 0
+        @include button-density('width', $button-icon-density)
 
     .v-pagination__item--is-active .v-btn__overlay
       opacity: $button-pagination-active-overlay-opacity
