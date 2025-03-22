@@ -3,7 +3,6 @@
     <v-toolbar color="purple">
       <v-btn icon="mdi-menu"></v-btn>
       <v-toolbar-title>Settings</v-toolbar-title>
-      <v-spacer></v-spacer>
       <v-btn icon="mdi-magnify"></v-btn>
     </v-toolbar>
 

@@ -38,7 +38,6 @@
           <v-toolbar-title v-if="calendar">
             {{ calendar.title }}
           </v-toolbar-title>
-          <v-spacer></v-spacer>
           <v-menu location="bottom end">
             <template v-slot:activator="{ props }">
               <v-btn
@@ -101,7 +100,6 @@
                 <v-icon>mdi-pencil</v-icon>
               </v-btn>
               <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
-              <v-spacer></v-spacer>
               <v-btn icon>
                 <v-icon>mdi-heart</v-icon>
               </v-btn>

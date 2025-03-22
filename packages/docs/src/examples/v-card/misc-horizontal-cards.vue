@@ -19,8 +19,6 @@
 
         <v-toolbar-title>My Music</v-toolbar-title>
 
-        <v-spacer></v-spacer>
-
         <v-btn icon="mdi-magnify"></v-btn>
       </v-app-bar>
 
