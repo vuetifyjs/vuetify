@@ -29,11 +29,8 @@ export type VIconBtnSlots = {
 }
 
 export const makeVIconBtnProps = propsFactory({
-  active: {
-    type: Boolean,
-    default: undefined,
-  },
-  bgColor: String,
+  active: Boolean,
+  activeColor: String,
   color: String,
   loading: Boolean,
   disabled: Boolean,
@@ -61,20 +58,16 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
   props: makeVIconBtnProps(),
 
   setup (props, { slots }) {
-    const { active, color, bgColor } = toRefs(props)
+    const { active, activeColor, color: _color } = toRefs(props)
 
     const { themeClasses } = provideTheme(props)
-    const { textColorClasses, textColorStyles } = useTextColor(color)
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(bgColor)
     const { borderClasses } = useBorder(props)
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props)
 
-    const rotate = computed(() => {
-      if (active.value == null) return props.rotate
+    const color = computed(() => active.value ? activeColor.value ?? _color.value : _color.value)
 
-      return !active.value ? 0 : props.rotate ?? 180
-    })
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(color)
 
     useRender(() => {
       const hasIcon = !!(props.icon)
@@ -93,17 +86,15 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
             borderClasses.value,
             elevationClasses.value,
             roundedClasses.value,
-            textColorClasses.value,
             props.class,
           ]}
           style={[
             {
-              '--v-icon-btn-rotate': convertToUnit(rotate.value, 'deg'),
+              '--v-icon-btn-rotate': convertToUnit(props.rotate, 'deg'),
               '--v-icon-btn-height': props.size ? convertToUnit(props.size) : undefined,
               '--v-icon-btn-width': props.size ? convertToUnit(props.size) : undefined,
             },
             backgroundColorStyles.value,
-            textColorStyles.value,
             props.style,
           ]}
           tabindex={ props.disabled || props.readonly ? -1 : 0 }

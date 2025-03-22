@@ -1,7 +1,7 @@
 @use "sass:map";
 @use '../../styles/settings';
 @use "../../styles/settings/variables";
-@use "../../styles/tools/functions";
+@use '../../styles/tools';
 
 // Defaults
 $icon-btn-border-color: settings.$border-color-root !default;
@@ -10,10 +10,12 @@ $icon-btn-border-style: settings.$border-style-root !default;
 $icon-btn-border-thin-width: thin !default;
 $icon-btn-border-width: 0 !default;
 $icon-btn-disabled-opacity: 0.26 !default;
-$icon-btn-height: var(--v-icon-btn-height, 24px) !default;
-$icon-btn-width: var(--v-icon-btn-width, 24px) !default;
+$icon-btn-font-size: tools.map-deep-get(settings.$typography, 'button', 'size') !default;
+$icon-btn-font-weight: tools.map-deep-get(settings.$typography, 'button', 'weight') !default;
+$icon-btn-height: var(--v-icon-btn-height, 32px) !default;
 $icon-btn-margin-end: map.get(variables.$grid-gutters, 'md') !default;
 $icon-btn-margin-start: map.get(variables.$grid-gutters, 'md') !default;
+$icon-btn-width: var(--v-icon-btn-width, 32px) !default;
 
 $icon-btn-border: (
   $icon-btn-border-color,

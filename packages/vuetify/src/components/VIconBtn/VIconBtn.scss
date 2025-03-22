@@ -8,15 +8,17 @@
     @include tools.rounded($icon-btn-border-radius);
 
     & {
-      display: inline-flex;
       align-items: center;
-      justify-content: center;
-      flex: none;
       cursor: pointer;
-      transform: rotate(var(--v-icon-btn-rotate, 0deg));
-      transition: 0.2s settings.$standard-easing;
-      transition-property: width, height, transform;
+      display: inline-flex;
+      flex: none;
+      font-size: $icon-btn-font-size;
+      font-weight: $icon-btn-font-weight;
       height: $icon-btn-height;
+      justify-content: center;
+      transform: rotate(var(--v-icon-btn-rotate, 0deg));
+      transition-property: width, height, transform;
+      transition: 0.2s settings.$standard-easing;
       width: $icon-btn-width;
     }
 
