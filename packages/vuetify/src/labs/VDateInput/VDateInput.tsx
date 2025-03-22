@@ -68,10 +68,7 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
       'modelValue',
       props.multiple ? [] : null,
       val => Array.isArray(val) ? val.map(item => adapter.toJsDate(item)) : val ? adapter.toJsDate(val) : val,
-      val => {
-        if (!adapter.isValid(val)) return null
-        return Array.isArray(val) ? val.map(item => adapter.date(item)) : val ? adapter.date(val) : val
-      }
+model.value = adapter.isValid(target.value) ? target.value : null
     )
 
     const menu = shallowRef(false)
