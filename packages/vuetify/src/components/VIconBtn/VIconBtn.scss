@@ -39,11 +39,19 @@
   }
 
   .v-icon-btn__content {
+    align-items: center;
+    justify-content: center;
+    display: inline-flex;
     transition: 0.2s settings.$standard-easing;
     transition-property: opacity;
+    transform-origin: center;
 
     .v-icon-btn--loading & {
       opacity: 0;
+    }
+
+    .v-icon {
+      --v-icon-size-multiplier: 1;
     }
   }
 

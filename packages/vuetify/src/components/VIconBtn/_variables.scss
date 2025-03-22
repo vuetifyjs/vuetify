@@ -10,8 +10,8 @@ $icon-btn-border-style: settings.$border-style-root !default;
 $icon-btn-border-thin-width: thin !default;
 $icon-btn-border-width: 0 !default;
 $icon-btn-disabled-opacity: 0.26 !default;
-$icon-btn-height: var(--v-icon-btn-height, 32px) !default;
-$icon-btn-width: var(--v-icon-btn-width, 32px) !default;
+$icon-btn-height: var(--v-icon-btn-height, 24px) !default;
+$icon-btn-width: var(--v-icon-btn-width, 24px) !default;
 $icon-btn-margin-end: map.get(variables.$grid-gutters, 'md') !default;
 $icon-btn-margin-start: map.get(variables.$grid-gutters, 'md') !default;
 

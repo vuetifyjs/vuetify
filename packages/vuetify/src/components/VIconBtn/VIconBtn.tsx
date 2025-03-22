@@ -16,7 +16,7 @@ import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
-import { toDisplayString, toRefs } from 'vue'
+import { computed, toDisplayString, toRefs } from 'vue'
 import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -29,6 +29,10 @@ export type VIconBtnSlots = {
 }
 
 export const makeVIconBtnProps = propsFactory({
+  active: {
+    type: Boolean,
+    default: undefined,
+  },
   bgColor: String,
   color: String,
   loading: Boolean,
@@ -57,7 +61,7 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
   props: makeVIconBtnProps(),
 
   setup (props, { slots }) {
-    const { color, bgColor } = toRefs(props)
+    const { active, color, bgColor } = toRefs(props)
 
     const { themeClasses } = provideTheme(props)
     const { textColorClasses, textColorStyles } = useTextColor(color)
@@ -65,6 +69,12 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
     const { borderClasses } = useBorder(props)
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props)
+
+    const rotate = computed(() => {
+      if (active.value == null) return props.rotate
+
+      return !active.value ? 0 : props.rotate ?? 180
+    })
 
     useRender(() => {
       const hasIcon = !!(props.icon)
@@ -88,7 +98,7 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
           ]}
           style={[
             {
-              '--v-icon-btn-rotate': props.rotate ? convertToUnit(props.rotate, 'deg') : undefined,
+              '--v-icon-btn-rotate': convertToUnit(rotate.value, 'deg'),
               '--v-icon-btn-height': props.size ? convertToUnit(props.size) : undefined,
               '--v-icon-btn-width': props.size ? convertToUnit(props.size) : undefined,
             },
