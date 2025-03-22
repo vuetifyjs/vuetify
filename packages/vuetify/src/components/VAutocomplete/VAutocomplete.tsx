@@ -386,7 +386,7 @@ export const VAutocomplete = genericComponent<new <
       } else {
         if (!props.multiple && search.value == null) model.value = []
         menu.value = false
-        if (!model.value.some(({ title }) => title === search.value)) search.value = ''
+        if (props.multiple || hasSelectionSlot.value) search.value = ''
         selectionIndex.value = -1
       }
     })
