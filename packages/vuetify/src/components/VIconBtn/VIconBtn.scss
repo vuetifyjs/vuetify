@@ -1,0 +1,68 @@
+@use '../../styles/settings';
+@use '../../styles/tools';
+@use './variables' as *;
+
+@include tools.layer('components') {
+  .v-icon-btn {
+    @include tools.border($icon-btn-border...);
+    @include tools.rounded($icon-btn-border-radius);
+
+    & {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex: none;
+      cursor: pointer;
+      transform: rotate(var(--v-icon-btn-rotate, 0deg));
+      transition: 0.2s settings.$standard-easing;
+      transition-property: width, height, transform;
+      height: $icon-btn-height;
+      width: $icon-btn-width;
+    }
+
+    &--loading,
+    &--readonly {
+      pointer-events: none;
+    }
+
+    &--disabled {
+      opacity: $icon-btn-disabled-opacity;
+    }
+
+    &--start {
+      margin-inline-end: $icon-btn-margin-start;
+    }
+
+    &--end {
+      margin-inline-start: $icon-btn-margin-end;
+    }
+  }
+
+  .v-icon-btn__content {
+    align-items: center;
+    justify-content: center;
+    display: inline-flex;
+    transition: 0.2s settings.$standard-easing;
+    transition-property: opacity;
+    transform-origin: center;
+
+    .v-icon-btn--loading & {
+      opacity: 0;
+    }
+
+    .v-icon {
+      --v-icon-size-multiplier: 1;
+    }
+  }
+
+  .v-icon-btn__loader {
+    align-items: center;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+}
