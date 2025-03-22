@@ -15,10 +15,10 @@ import {
   shallowRef,
   useId,
 } from 'vue'
-import { convertToUnit, findChildrenWithProvide, getCurrentInstance, propsFactory } from '@/util'
+import { convertToUnit, propsFactory } from '@/util'
 
 // Types
-import type { ComponentInternalInstance, CSSProperties, InjectionKey, Prop, Ref } from 'vue'
+import type { CSSProperties, InjectionKey, Prop, Ref } from 'vue'
 
 export type Position = 'top' | 'left' | 'right' | 'bottom'
 
@@ -37,7 +37,6 @@ interface LayoutItem extends Layer {
 
 interface LayoutProvide {
   register: (
-    vm: ComponentInternalInstance,
     options: {
       id: string
       order: Ref<number>
@@ -115,8 +114,6 @@ export function useLayoutItem (options: {
 
   const id = options.id ?? `layout-item-${useId()}`
 
-  const vm = getCurrentInstance('useLayoutItem')
-
   provide(VuetifyLayoutItemKey, { id })
 
   const isKeptAlive = shallowRef(false)
@@ -126,7 +123,7 @@ export function useLayoutItem (options: {
   const {
     layoutItemStyles,
     layoutItemScrimStyles,
-  } = layout.register(vm, {
+  } = layout.register({
     ...options,
     active: computed(() => isKeptAlive.value ? false : options.active.value),
     id,
@@ -246,8 +243,6 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
     return items.value.find(item => item.id === id)
   }
 
-  const rootVm = getCurrentInstance('createLayout')
-
   const isMounted = shallowRef(false)
   onMounted(() => {
     isMounted.value = true
@@ -255,7 +250,6 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
 
   provide(VuetifyLayoutKey, {
     register: (
-      vm: ComponentInternalInstance,
       {
         id,
         order,
@@ -273,11 +267,7 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
       activeItems.set(id, active)
       disableTransitions && disabledTransitions.set(id, disableTransitions)
 
-      const instances = findChildrenWithProvide(VuetifyLayoutItemKey, rootVm?.vnode)
-      const instanceIndex = instances.indexOf(vm)
-
-      if (instanceIndex > -1) registered.value.splice(instanceIndex, 0, id)
-      else registered.value.push(id)
+      registered.value.push(id)
 
       const index = computed(() => items.value.findIndex(i => i.id === id))
       const zIndex = computed(() => rootZIndex.value + (layers.value.length * 2) - (index.value * 2))
