@@ -16,11 +16,27 @@
       font-weight: $icon-btn-font-weight;
       height: $icon-btn-height;
       justify-content: center;
+      outline: none;
       transform: rotate(var(--v-icon-btn-rotate, 0deg));
       transition-property: width, height, transform;
       transition: 0.2s settings.$standard-easing;
       vertical-align: middle;
       width: $icon-btn-width;
+
+      @supports selector(:focus-visible) {
+        &::after {
+          pointer-events: none;
+          border: 2px solid currentColor;
+          border-radius: inherit;
+          opacity: 0;
+          transition: opacity .2s ease-in-out;
+          @include tools.absolute(true);
+        }
+
+        &:focus-visible::after {
+          opacity: calc(.25 * var(--v-theme-overlay-multiplier));
+        }
+      }
     }
 
     &--loading,
