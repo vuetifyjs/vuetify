@@ -83,14 +83,14 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
           props.class,
         ]}
         style={[
-          backgroundColorStyles.value,
-          textColorStyles.value,
-          props.style,
           {
             '--v-icon-btn-rotate': props.rotate ? convertToUnit(props.rotate, 'deg') : undefined,
             '--v-icon-btn-height': props.size ? convertToUnit(props.size) : undefined,
             '--v-icon-btn-width': props.size ? convertToUnit(props.size) : undefined,
           },
+          backgroundColorStyles.value,
+          textColorStyles.value,
+          props.style,
         ]}
         tabindex={ props.disabled || props.readonly ? -1 : 0 }
       >
