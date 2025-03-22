@@ -32,13 +32,14 @@ export const makeVIconBtnProps = propsFactory({
   active: Boolean,
   activeColor: String,
   color: String,
-  loading: Boolean,
   disabled: Boolean,
-  readonly: Boolean,
   icon: [String, Function, Object] as PropType<IconValue>,
+  iconColor: String,
+  loading: Boolean,
+  opacity: [Number, String],
+  readonly: Boolean,
   rotate: [Number, String],
   size: [Number, String],
-  opacity: [Number, String],
   text: {
     type: [String, Number, Boolean],
     default: undefined,
@@ -105,6 +106,7 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
                 key="content-icon"
                 icon={ props.icon }
                 opacity={ props.opacity }
+                color={ props.iconColor }
               />
             ) : (
               <VDefaultsProvider
@@ -114,6 +116,7 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
                   VIcon: {
                     icon: props.icon,
                     opacity: props.opacity,
+                    color: props.iconColor,
                   },
                 }}
               >
