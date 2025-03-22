@@ -4,19 +4,16 @@
     max-width="375"
   >
     <v-img
+      class="text-white"
       height="300px"
       src="https://cdn.vuetifyjs.com/images/lists/ali.png"
-      theme="dark"
       cover
     >
       <div class="d-flex flex-column h-100">
-        <v-card-title class="d-flex ga-4">
+        <v-card-title class="d-flex ga-2 px-2">
           <v-btn icon="mdi-chevron-left" variant="text"></v-btn>
-
           <v-spacer></v-spacer>
-
           <v-btn icon="mdi-pencil" variant="text"></v-btn>
-
           <v-btn icon="mdi-dots-vertical" variant="text"></v-btn>
         </v-card-title>
 
