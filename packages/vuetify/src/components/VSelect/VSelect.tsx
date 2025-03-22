@@ -376,7 +376,6 @@ export const VSelect = genericComponent<new <
           onMousedown:control={ onMousedownControl }
           onBlur={ onBlur }
           onKeydown={ onKeydown }
-          aria-label={ t(label.value) }
           title={ t(label.value) }
         >
           {{
@@ -441,6 +440,10 @@ export const VSelect = genericComponent<new <
                                         modelValue={ isSelected }
                                         ripple={ false }
                                         tabindex="-1"
+                                        aria-label={ isSelected
+                                          ? t('$vuetify.select.ariaLabel.checked')
+                                          : t('$vuetify.select.ariaLabel.unchecked')
+                                        }
                                       />
                                     ) : undefined }
 

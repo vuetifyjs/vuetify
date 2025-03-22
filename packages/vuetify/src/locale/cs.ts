@@ -11,6 +11,12 @@ export default {
     noResultsText: 'Nenalezeny žádné záznamy',
     loadingText: 'Načítám položky...',
   },
+  select: {
+    ariaLabel: {
+      checked: 'Checked',
+      unchecked: 'Not Checked',
+    },
+  },
   dataTable: {
     itemsPerPageText: 'Řádků na stránku:',
     ariaLabel: {
