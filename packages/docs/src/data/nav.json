@@ -200,6 +200,7 @@
       "aspect-ratios",
       "avatars",
       "icons",
+      "icon-buttons",
       "images",
       "parallax",
       { "divider": true },

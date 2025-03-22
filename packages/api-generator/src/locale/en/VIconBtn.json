@@ -1,0 +1,6 @@
+{
+  "props": {
+    "iconColor": "Explicit color applied to the icon.",
+    "rotate": "The rotation of the icon in degrees."
+  }
+}
