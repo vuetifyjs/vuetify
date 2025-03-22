@@ -6,6 +6,7 @@ import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextFi
 
 // Composables
 import { useDate } from '@/composables/date'
+import { useDisplay } from '@/composables/display'
 import { makeFocusProps, useFocus } from '@/composables/focus'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { useLocale } from '@/composables/locale'
@@ -62,6 +63,7 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
   setup (props, { slots }) {
     const { t } = useLocale()
     const adapter = useDate()
+    const { mobile } = useDisplay()
     const { isFocused, focus, blur } = useFocus(props)
     const model = useProxiedModel(
       props,
@@ -72,6 +74,7 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
     )
 
     const menu = shallowRef(false)
+    const canStartTyping = shallowRef(!mobile.value)
     const vDateInputRef = ref()
 
     const display = computed(() => {
@@ -95,6 +98,8 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
       return adapter.isValid(model.value) ? adapter.format(adapter.date(model.value), 'keyboardDate') : ''
     })
 
+    const isReadonly = computed(() => props.readonly || !canStartTyping.value)
+
     const isInteractive = computed(() => !props.disabled && !props.readonly)
 
     function onKeydown (e: KeyboardEvent) {
@@ -115,6 +120,7 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
       e.preventDefault()
       e.stopPropagation()
 
+      canStartTyping.value = true
       menu.value = true
     }
 
@@ -126,6 +132,12 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
       if (value != null) return
 
       model.value = null
+    }
+
+    function onUpdateMenuModel (isMenuOpen: boolean) {
+      if (!isMenuOpen) {
+        canStartTyping.value = !mobile.value
+      }
     }
 
     useRender(() => {
@@ -140,6 +152,7 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
           class={ props.class }
           style={ props.style }
           modelValue={ display.value }
+          readonly={ isReadonly.value }
           onKeydown={ isInteractive.value ? onKeydown : undefined }
           focused={ menu.value || isFocused.value }
           onFocus={ focus }
@@ -160,6 +173,7 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
                   location={ props.location }
                   closeOnContentClick={ false }
                   openOnClick={ false }
+                  onUpdate:modelValue={ onUpdateMenuModel }
                 >
                   <VConfirmEdit
                     { ...confirmEditProps }
