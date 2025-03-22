@@ -20,6 +20,11 @@
       "glow": "3.8.0"
     }
   },
+  "VIcon": {
+    "props": {
+      "opacity": "3.8.0"
+    }
+  },
   "VInput": {
     "props": {
       "iconColor": "3.8.0",
