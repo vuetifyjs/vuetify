@@ -16,13 +16,13 @@ The `v-resize` directive can be used for calling specific functions when the win
 
 <PageFeatures />
 
-<PromotedEntry />
-
 ## Usage
 
 Resize your window and observe the values change..
 
 <ExamplesExample file="v-resize/usage" />
+
+<PromotedEntry />
 
 ## API
 

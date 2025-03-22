@@ -132,7 +132,7 @@
   const frontmatter = useFrontmatter()
 
   const activeStack = [] as string[]
-  const activeItem = ref('')
+  const activeItem = shallowRef('')
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {

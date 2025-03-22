@@ -104,16 +104,36 @@ export const VDatePicker = genericComponent<new <
       props,
       'modelValue',
       undefined,
-      v => wrapInArray(v),
+      v => wrapInArray(v).map(i => adapter.date(i)),
       v => props.multiple ? v : v[0],
     )
 
     const viewMode = useProxiedModel(props, 'viewMode')
     // const inputMode = useProxiedModel(props, 'inputMode')
-    const internal = computed(() => {
-      const value = adapter.date(model.value?.[0])
 
-      return value && adapter.isValid(value) ? value : adapter.date()
+    const minDate = computed(() => {
+      const date = adapter.date(props.min)
+
+      return props.min && adapter.isValid(date) ? date : null
+    })
+    const maxDate = computed(() => {
+      const date = adapter.date(props.max)
+
+      return props.max && adapter.isValid(date) ? date : null
+    })
+
+    const internal = computed(() => {
+      const today = adapter.date()
+      let value = today
+      if (model.value?.[0]) {
+        value = adapter.date(model.value[0])
+      } else if (minDate.value && adapter.isBefore(today, minDate.value)) {
+        value = minDate.value
+      } else if (maxDate.value && adapter.isAfter(today, maxDate.value)) {
+        value = maxDate.value
+      }
+
+      return value && adapter.isValid(value) ? value : today
     })
 
     const month = ref(Number(props.month ?? adapter.getMonth(adapter.startOfMonth(internal.value))))
@@ -140,16 +160,7 @@ export const VDatePicker = genericComponent<new <
     })
     // const headerIcon = computed(() => props.inputMode === 'calendar' ? props.keyboardIcon : props.calendarIcon)
     const headerTransition = computed(() => `date-picker-header${isReversing.value ? '-reverse' : ''}-transition`)
-    const minDate = computed(() => {
-      const date = adapter.date(props.min)
 
-      return props.min && adapter.isValid(date) ? date : null
-    })
-    const maxDate = computed(() => {
-      const date = adapter.date(props.max)
-
-      return props.max && adapter.isValid(date) ? date : null
-    })
     const disabled = computed(() => {
       if (props.disabled) return true
 

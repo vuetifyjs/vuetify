@@ -1,480 +1,244 @@
 <template>
-  <v-data-table
-    :headers="headers"
-    :items="desserts"
-    :sort-by="[{ key: 'calories', order: 'asc' }]"
-  >
-    <template v-slot:top>
-      <v-toolbar
-        flat
-      >
-        <v-toolbar-title>My CRUD</v-toolbar-title>
-        <v-divider
-          class="mx-4"
-          inset
-          vertical
-        ></v-divider>
-        <v-spacer></v-spacer>
-        <v-dialog
-          v-model="dialog"
-          max-width="500px"
-        >
-          <template v-slot:activator="{ props }">
-            <v-btn
-              class="mb-2"
-              color="primary"
-              v-bind="props"
-            >
-              New Item
-            </v-btn>
+  <v-sheet border rounded>
+    <v-data-table
+      :headers="headers"
+      :hide-default-footer="books.length < 11"
+      :items="books"
+    >
+      <template v-slot:top>
+        <v-toolbar flat>
+          <v-toolbar-title>
+            <v-icon color="medium-emphasis" icon="mdi-book-multiple" size="x-small" start></v-icon>
+
+            Popular books
+          </v-toolbar-title>
+
+          <v-spacer></v-spacer>
+
+          <v-btn
+            class="me-2"
+            prepend-icon="mdi-plus"
+            rounded="lg"
+            text="Add a Book"
+            border
+            @click="add"
+          ></v-btn>
+        </v-toolbar>
+      </template>
+
+      <template v-slot:item.title="{ value }">
+        <v-chip :text="value" border="thin opacity-25" prepend-icon="mdi-book" label>
+          <template v-slot:prepend>
+            <v-icon color="medium-emphasis"></v-icon>
           </template>
-          <v-card>
-            <v-card-title>
-              <span class="text-h5">{{ formTitle }}</span>
-            </v-card-title>
+        </v-chip>
+      </template>
 
-            <v-card-text>
-              <v-container>
-                <v-row>
-                  <v-col
-                    cols="12"
-                    md="4"
-                    sm="6"
-                  >
-                    <v-text-field
-                      v-model="editedItem.name"
-                      label="Dessert name"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col
-                    cols="12"
-                    md="4"
-                    sm="6"
-                  >
-                    <v-text-field
-                      v-model="editedItem.calories"
-                      label="Calories"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col
-                    cols="12"
-                    md="4"
-                    sm="6"
-                  >
-                    <v-text-field
-                      v-model="editedItem.fat"
-                      label="Fat (g)"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col
-                    cols="12"
-                    md="4"
-                    sm="6"
-                  >
-                    <v-text-field
-                      v-model="editedItem.carbs"
-                      label="Carbs (g)"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col
-                    cols="12"
-                    md="4"
-                    sm="6"
-                  >
-                    <v-text-field
-                      v-model="editedItem.protein"
-                      label="Protein (g)"
-                    ></v-text-field>
-                  </v-col>
-                </v-row>
-              </v-container>
-            </v-card-text>
+      <template v-slot:item.actions="{ item }">
+        <div class="d-flex ga-2 justify-end">
+          <v-icon color="medium-emphasis" icon="mdi-pencil" size="small" @click="edit(item.id)"></v-icon>
 
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn
-                color="blue-darken-1"
-                variant="text"
-                @click="close"
-              >
-                Cancel
-              </v-btn>
-              <v-btn
-                color="blue-darken-1"
-                variant="text"
-                @click="save"
-              >
-                Save
-              </v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-dialog>
-        <v-dialog v-model="dialogDelete" max-width="500px">
-          <v-card>
-            <v-card-title class="text-h5">Are you sure you want to delete this item?</v-card-title>
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn color="blue-darken-1" variant="text" @click="closeDelete">Cancel</v-btn>
-              <v-btn color="blue-darken-1" variant="text" @click="deleteItemConfirm">OK</v-btn>
-              <v-spacer></v-spacer>
-            </v-card-actions>
-          </v-card>
-        </v-dialog>
-      </v-toolbar>
-    </template>
-    <template v-slot:item.actions="{ item }">
-      <v-icon
-        class="me-2"
-        size="small"
-        @click="editItem(item)"
-      >
-        mdi-pencil
-      </v-icon>
-      <v-icon
-        size="small"
-        @click="deleteItem(item)"
-      >
-        mdi-delete
-      </v-icon>
-    </template>
-    <template v-slot:no-data>
-      <v-btn
-        color="primary"
-        @click="initialize"
-      >
-        Reset
-      </v-btn>
-    </template>
-  </v-data-table>
+          <v-icon color="medium-emphasis" icon="mdi-delete" size="small" @click="remove(item.id)"></v-icon>
+        </div>
+      </template>
+
+      <template v-slot:no-data>
+        <v-btn
+          prepend-icon="mdi-backup-restore"
+          rounded="lg"
+          text="Reset data"
+          variant="text"
+          border
+          @click="reset"
+        ></v-btn>
+      </template>
+    </v-data-table>
+  </v-sheet>
+
+  <v-dialog v-model="dialog" max-width="500">
+    <v-card
+      :subtitle="`${isEditing ? 'Update' : 'Create'} your favorite book`"
+      :title="`${isEditing ? 'Edit' : 'Add'} a Book`"
+    >
+      <template v-slot:text>
+        <v-row>
+          <v-col cols="12">
+            <v-text-field v-model="record.title" label="Title"></v-text-field>
+          </v-col>
+
+          <v-col cols="12" md="6">
+            <v-text-field v-model="record.author" label="Author"></v-text-field>
+          </v-col>
+
+          <v-col cols="12" md="6">
+            <v-select v-model="record.genre" :items="['Fiction', 'Dystopian', 'Non-Fiction', 'Sci-Fi']" label="Genre"></v-select>
+          </v-col>
+
+          <v-col cols="12" md="6">
+            <v-number-input v-model="record.year" :max="adapter.getYear(adapter.date())" :min="1" label="Year"></v-number-input>
+          </v-col>
+
+          <v-col cols="12" md="6">
+            <v-number-input v-model="record.pages" :min="1" label="Pages"></v-number-input>
+          </v-col>
+        </v-row>
+      </template>
+
+      <v-divider></v-divider>
+
+      <v-card-actions class="bg-surface-light">
+        <v-btn text="Cancel" variant="plain" @click="dialog = false"></v-btn>
+
+        <v-spacer></v-spacer>
+
+        <v-btn text="Save" @click="save"></v-btn>
+      </v-card-actions>
+    </v-card>
+  </v-dialog>
 </template>
 
 <script setup>
-  import { computed, nextTick, ref, watch } from 'vue'
+  import { onMounted, ref, shallowRef } from 'vue'
+  import { useDate } from 'vuetify'
 
-  const dialog = ref(false)
-  const dialogDelete = ref(false)
-  const headers = ref([
-    {
-      title: 'Dessert (100g serving)',
-      align: 'start',
-      sortable: false,
-      key: 'name',
-    },
-    { title: 'Calories', key: 'calories' },
-    { title: 'Fat (g)', key: 'fat' },
-    { title: 'Carbs (g)', key: 'carbs' },
-    { title: 'Protein (g)', key: 'protein' },
-    { title: 'Actions', key: 'actions', sortable: false },
-  ])
-  const desserts = ref([])
-  const editedIndex = ref(-1)
-  const editedItem = ref({
-    name: '',
-    calories: 0,
-    fat: 0,
-    carbs: 0,
-    protein: 0,
+  const adapter = useDate()
+
+  const DEFAULT_RECORD = { title: '', author: '', genre: '', year: adapter.getYear(adapter.date()), pages: 1 }
+
+  const books = ref([])
+  const record = ref(DEFAULT_RECORD)
+  const dialog = shallowRef(false)
+  const isEditing = shallowRef(false)
+
+  const headers = [
+    { title: 'Title', key: 'title', align: 'start' },
+    { title: 'Author', key: 'author' },
+    { title: 'Genre', key: 'genre' },
+    { title: 'Year', key: 'year', align: 'end' },
+    { title: 'Pages', key: 'pages', align: 'end' },
+    { title: 'Actions', key: 'actions', align: 'end', sortable: false },
+  ]
+
+  onMounted(() => {
+    reset()
   })
-  const defaultItem = ref({
-    name: '',
-    calories: 0,
-    fat: 0,
-    carbs: 0,
-    protein: 0,
-  })
-  const formTitle = computed(() => {
-    return editedIndex.value === -1 ? 'New Item' : 'Edit Item'
-  })
-  function initialize () {
-    desserts.value = [
-      {
-        name: 'Frozen Yogurt',
-        calories: 159,
-        fat: 6,
-        carbs: 24,
-        protein: 4,
-      },
-      {
-        name: 'Ice cream sandwich',
-        calories: 237,
-        fat: 9,
-        carbs: 37,
-        protein: 4.3,
-      },
-      {
-        name: 'Eclair',
-        calories: 262,
-        fat: 16,
-        carbs: 23,
-        protein: 6,
-      },
-      {
-        name: 'Cupcake',
-        calories: 305,
-        fat: 3.7,
-        carbs: 67,
-        protein: 4.3,
-      },
-      {
-        name: 'Gingerbread',
-        calories: 356,
-        fat: 16,
-        carbs: 49,
-        protein: 3.9,
-      },
-      {
-        name: 'Jelly bean',
-        calories: 375,
-        fat: 0,
-        carbs: 94,
-        protein: 0,
-      },
-      {
-        name: 'Lollipop',
-        calories: 392,
-        fat: 0.2,
-        carbs: 98,
-        protein: 0,
-      },
-      {
-        name: 'Honeycomb',
-        calories: 408,
-        fat: 3.2,
-        carbs: 87,
-        protein: 6.5,
-      },
-      {
-        name: 'Donut',
-        calories: 452,
-        fat: 25,
-        carbs: 51,
-        protein: 4.9,
-      },
-      {
-        name: 'KitKat',
-        calories: 518,
-        fat: 26,
-        carbs: 65,
-        protein: 7,
-      },
-    ]
-  }
-  function editItem (item) {
-    editedIndex.value = desserts.value.indexOf(item)
-    editedItem.value = Object.assign({}, item)
+
+  function add () {
+    isEditing.value = false
+    record.value = DEFAULT_RECORD
     dialog.value = true
   }
-  function deleteItem (item) {
-    editedIndex.value = desserts.value.indexOf(item)
-    editedItem.value = Object.assign({}, item)
-    dialogDelete.value = true
-  }
-  function deleteItemConfirm () {
-    desserts.value.splice(editedIndex.value, 1)
-    closeDelete()
-  }
-  function close () {
-    dialog.value = false
-    nextTick(() => {
-      editedItem.value = Object.assign({}, defaultItem.value)
-      editedIndex.value = -1
-    })
-  }
-  function closeDelete () {
-    dialogDelete.value = false
-    nextTick(() => {
-      editedItem.value = Object.assign({}, defaultItem.value)
-      editedIndex.value = -1
-    })
-  }
-  function save () {
-    if (editedIndex.value > -1) {
-      Object.assign(desserts.value[editedIndex.value], editedItem.value)
-    } else {
-      desserts.value.push(editedItem.value)
+
+  function edit (id) {
+    isEditing.value = true
+
+    const found = books.value.find(book => book.id === id)
+
+    record.value = {
+      id: found.id,
+      title: found.title,
+      author: found.author,
+      genre: found.genre,
+      year: found.year,
+      pages: found.pages,
     }
-    close()
+
+    dialog.value = true
   }
-  watch(dialog, val => {
-    val || close()
-  })
-  watch(dialogDelete, val => {
-    val || closeDelete()
-  })
-  initialize()
+
+  function remove (id) {
+    const index = books.value.findIndex(book => book.id === id)
+    books.value.splice(index, 1)
+  }
+
+  function save () {
+    if (isEditing.value) {
+      const index = books.value.findIndex(book => book.id === record.value.id)
+      books.value[index] = record.value
+    } else {
+      record.value.id = books.value.length + 1
+      books.value.push(record.value)
+    }
+
+    dialog.value = false
+  }
+
+  function reset () {
+    dialog.value = false
+    record.value = DEFAULT_RECORD
+    books.value = [
+      { id: 1, title: 'To Kill a Mockingbird', author: 'Harper Lee', genre: 'Fiction', year: 1960, pages: 281 },
+      { id: 2, title: '1984', author: 'George Orwell', genre: 'Dystopian', year: 1949, pages: 328 },
+      { id: 3, title: 'The Great Gatsby', author: 'F. Scott Fitzgerald', genre: 'Fiction', year: 1925, pages: 180 },
+      { id: 4, title: 'Sapiens', author: 'Yuval Noah Harari', genre: 'Non-Fiction', year: 2011, pages: 443 },
+      { id: 5, title: 'Dune', author: 'Frank Herbert', genre: 'Sci-Fi', year: 1965, pages: 412 },
+    ]
+  }
 </script>
 
 <script>
+  import { onMounted, ref, shallowRef } from 'vue'
+  import { useDate } from 'vuetify'
+
   export default {
-    data: () => ({
-      dialog: false,
-      dialogDelete: false,
-      headers: [
-        {
-          title: 'Dessert (100g serving)',
-          align: 'start',
-          sortable: false,
-          key: 'name',
-        },
-        { title: 'Calories', key: 'calories' },
-        { title: 'Fat (g)', key: 'fat' },
-        { title: 'Carbs (g)', key: 'carbs' },
-        { title: 'Protein (g)', key: 'protein' },
-        { title: 'Actions', key: 'actions', sortable: false },
-      ],
-      desserts: [],
-      editedIndex: -1,
-      editedItem: {
-        name: '',
-        calories: 0,
-        fat: 0,
-        carbs: 0,
-        protein: 0,
-      },
-      defaultItem: {
-        name: '',
-        calories: 0,
-        fat: 0,
-        carbs: 0,
-        protein: 0,
-      },
-    }),
-
-    computed: {
-      formTitle () {
-        return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
-      },
+    data () {
+      const adapter = useDate()
+      return {
+        adapter,
+        DEFAULT_RECORD: { title: '', author: '', genre: '', year: adapter.getYear(adapter.date()), pages: 1 },
+        books: [],
+        record: { title: '', author: '', genre: '', year: adapter.getYear(adapter.date()), pages: 1 },
+        dialog: false,
+        isEditing: false,
+        headers: [
+          { title: 'Title', key: 'title', align: 'start' },
+          { title: 'Author', key: 'author' },
+          { title: 'Genre', key: 'genre' },
+          { title: 'Year', key: 'year', align: 'end' },
+          { title: 'Pages', key: 'pages', align: 'end' },
+          { title: 'Actions', key: 'actions', align: 'end', sortable: false },
+        ],
+      }
     },
-
-    watch: {
-      dialog (val) {
-        val || this.close()
-      },
-      dialogDelete (val) {
-        val || this.closeDelete()
-      },
+    mounted () {
+      this.reset()
     },
-
-    created () {
-      this.initialize()
-    },
-
     methods: {
-      initialize () {
-        this.desserts = [
-          {
-            name: 'Frozen Yogurt',
-            calories: 159,
-            fat: 6.0,
-            carbs: 24,
-            protein: 4.0,
-          },
-          {
-            name: 'Ice cream sandwich',
-            calories: 237,
-            fat: 9.0,
-            carbs: 37,
-            protein: 4.3,
-          },
-          {
-            name: 'Eclair',
-            calories: 262,
-            fat: 16.0,
-            carbs: 23,
-            protein: 6.0,
-          },
-          {
-            name: 'Cupcake',
-            calories: 305,
-            fat: 3.7,
-            carbs: 67,
-            protein: 4.3,
-          },
-          {
-            name: 'Gingerbread',
-            calories: 356,
-            fat: 16.0,
-            carbs: 49,
-            protein: 3.9,
-          },
-          {
-            name: 'Jelly bean',
-            calories: 375,
-            fat: 0.0,
-            carbs: 94,
-            protein: 0.0,
-          },
-          {
-            name: 'Lollipop',
-            calories: 392,
-            fat: 0.2,
-            carbs: 98,
-            protein: 0,
-          },
-          {
-            name: 'Honeycomb',
-            calories: 408,
-            fat: 3.2,
-            carbs: 87,
-            protein: 6.5,
-          },
-          {
-            name: 'Donut',
-            calories: 452,
-            fat: 25.0,
-            carbs: 51,
-            protein: 4.9,
-          },
-          {
-            name: 'KitKat',
-            calories: 518,
-            fat: 26.0,
-            carbs: 65,
-            protein: 7,
-          },
-        ]
-      },
-
-      editItem (item) {
-        this.editedIndex = this.desserts.indexOf(item)
-        this.editedItem = Object.assign({}, item)
+      add () {
+        this.isEditing = false
+        this.record = { ...this.DEFAULT_RECORD }
         this.dialog = true
       },
-
-      deleteItem (item) {
-        this.editedIndex = this.desserts.indexOf(item)
-        this.editedItem = Object.assign({}, item)
-        this.dialogDelete = true
+      edit (id) {
+        this.isEditing = true
+        const found = this.books.find(book => book.id === id)
+        this.record = { ...found }
+        this.dialog = true
       },
-
-      deleteItemConfirm () {
-        this.desserts.splice(this.editedIndex, 1)
-        this.closeDelete()
+      remove (id) {
+        const index = this.books.findIndex(book => book.id === id)
+        this.books.splice(index, 1)
       },
-
-      close () {
-        this.dialog = false
-        this.$nextTick(() => {
-          this.editedItem = Object.assign({}, this.defaultItem)
-          this.editedIndex = -1
-        })
-      },
-
-      closeDelete () {
-        this.dialogDelete = false
-        this.$nextTick(() => {
-          this.editedItem = Object.assign({}, this.defaultItem)
-          this.editedIndex = -1
-        })
-      },
-
       save () {
-        if (this.editedIndex > -1) {
-          Object.assign(this.desserts[this.editedIndex], this.editedItem)
+        if (this.isEditing) {
+          const index = this.books.findIndex(book => book.id === this.record.id)
+          this.books[index] = { ...this.record }
         } else {
-          this.desserts.push(this.editedItem)
+          this.record.id = this.books.length + 1
+          this.books.push({ ...this.record })
         }
-        this.close()
+        this.dialog = false
+      },
+      reset () {
+        this.dialog = false
+        this.record = { ...this.DEFAULT_RECORD }
+        this.books = [
+          { id: 1, title: 'To Kill a Mockingbird', author: 'Harper Lee', genre: 'Fiction', year: 1960, pages: 281 },
+          { id: 2, title: '1984', author: 'George Orwell', genre: 'Dystopian', year: 1949, pages: 328 },
+          { id: 3, title: 'The Great Gatsby', author: 'F. Scott Fitzgerald', genre: 'Fiction', year: 1925, pages: 180 },
+          { id: 4, title: 'Sapiens', author: 'Yuval Noah Harari', genre: 'Non-Fiction', year: 2011, pages: 443 },
+          { id: 5, title: 'Dune', author: 'Frank Herbert', genre: 'Sci-Fi', year: 1965, pages: 412 },
+        ]
       },
     },
   }

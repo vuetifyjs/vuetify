@@ -3,7 +3,7 @@ import './VTextField.sass'
 
 // Components
 import { VCounter } from '@/components/VCounter/VCounter'
-import { filterFieldProps, makeVFieldProps, VField } from '@/components/VField/VField'
+import { makeVFieldProps, VField } from '@/components/VField/VField'
 import { makeVInputProps, VInput } from '@/components/VInput/VInput'
 
 // Composables
@@ -158,7 +158,7 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
       const hasDetails = !!(hasCounter || slots.details)
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
       const { modelValue: _, ...inputProps } = VInput.filterProps(props)
-      const fieldProps = filterFieldProps(props)
+      const fieldProps = VField.filterProps(props)
 
       return (
         <VInput

@@ -1,6 +1,6 @@
 {
   "name": "@vuetify/api-generator",
-  "version": "3.7.12",
+  "version": "3.7.18",
   "private": true,
   "description": "",
   "scripts": {
@@ -16,7 +16,7 @@
     "prettier": "^3.2.5",
     "ts-morph": "^22.0.0",
     "tsx": "^4.7.2",
-    "vue": "^3.4.27",
+    "vue": "3.4.38",
     "vuetify": "workspace:*"
   },
   "devDependencies": {

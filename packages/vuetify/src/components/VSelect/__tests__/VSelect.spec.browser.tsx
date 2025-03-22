@@ -4,8 +4,8 @@ import { VForm } from '@/components/VForm'
 import { VListItem } from '@/components/VList'
 
 // Utilities
-import { generate, render, screen, userEvent } from '@test'
-import { commands } from '@vitest/browser/context'
+import { commands, generate, render, screen, userEvent } from '@test'
+import { getAllByRole } from '@testing-library/vue'
 import { cloneVNode, ref } from 'vue'
 
 const variants = ['underlined', 'outlined', 'filled', 'solo', 'plain'] as const
@@ -525,7 +525,7 @@ describe('VSelect', () => {
     await userEvent.click(screen.getByTestId('close-chip'))
     await expect.poll(() => screen.queryByRole('listbox')).toBeNull()
     await userEvent.click(element)
-    await expect.poll(() => screen.queryByRole('listbox')).toBeInTheDocument()
+    await expect.poll(() => screen.queryByRole('listbox')).toBeVisible()
     await userEvent.keyboard('{Escape}')
     await expect.poll(() => screen.queryByRole('listbox')).toBeNull()
   })
@@ -574,7 +574,7 @@ describe('VSelect', () => {
     expect(screen.queryByRole('listbox')).toBeNull()
 
     await rerender({ items: ['Foo', 'Bar'] })
-    await expect.poll(() => screen.queryByRole('listbox')).toBeInTheDocument()
+    await expect.poll(() => screen.queryByRole('listbox')).toBeVisible()
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/19346
@@ -584,7 +584,7 @@ describe('VSelect', () => {
     })
 
     await userEvent.click(element)
-    await expect.poll(() => screen.queryByRole('listbox')).toBeInTheDocument()
+    await expect.poll(() => screen.queryByRole('listbox')).toBeVisible()
     await userEvent.click(screen.getAllByRole('option')[0])
 
     await rerender({ items: ['Foo', 'Bar', 'test', 'test 2'] })
@@ -599,10 +599,10 @@ describe('VSelect', () => {
       ))
 
       await userEvent.click(element)
-      await expect.poll(() => screen.queryByRole('listbox')).toBeInTheDocument()
+      await expect.poll(() => screen.queryByRole('listbox')).toBeVisible()
 
       items.value.push('Bar')
-      await expect.poll(() => screen.getByText('Bar')).toBeInTheDocument()
+      await expect.poll(() => screen.getByText('Bar')).toBeVisible()
     })
 
     it('removes an item', async () => {
@@ -612,10 +612,10 @@ describe('VSelect', () => {
       ))
 
       await userEvent.click(element)
-      await expect.poll(() => screen.queryByRole('listbox')).toBeInTheDocument()
+      await expect.poll(() => screen.queryByRole('listbox')).toBeVisible()
 
       items.value.splice(1, 1)
-      await expect.element(screen.getByText('Bar')).not.toBeInTheDocument()
+      await expect.element(screen.getByText('Bar')).not.toBeVisible()
     })
 
     it('updates an item title', async () => {
@@ -625,10 +625,59 @@ describe('VSelect', () => {
       ))
 
       await userEvent.click(element)
-      await expect.poll(() => screen.queryByRole('listbox')).toBeInTheDocument()
+      await expect.poll(() => screen.queryByRole('listbox')).toBeVisible()
 
       items.value[0].title = 'Bar'
-      await expect.poll(() => screen.getByText('Bar')).toBeInTheDocument()
+      await expect.poll(() => screen.getByText('Bar')).toBeVisible()
+    })
+
+    it('adds a selection externally', async () => {
+      const items = ref(['Foo', 'Bar'])
+      const selection = ref(['Foo'])
+      const { element } = render(() => (
+        <VSelect v-model={ selection.value } items={ items.value } multiple />
+      ))
+
+      await userEvent.click(element)
+      const menu = await screen.findByRole('listbox')
+      await expect.element(menu).toBeVisible()
+
+      selection.value.push('Bar')
+      await expect.poll(() => screen.getAllByText('Bar')).toHaveLength(2)
+      expect(getAllByRole(menu, 'option', { selected: true })).toHaveLength(2)
+    })
+
+    it('removes a selection externally', async () => {
+      const items = ref(['Foo', 'Bar'])
+      const selection = ref(['Foo', 'Bar'])
+      const { element } = render(() => (
+        <VSelect v-model={ selection.value } items={ items.value } multiple />
+      ))
+
+      await userEvent.click(element)
+      const menu = await screen.findByRole('listbox')
+      await expect.element(menu).toBeVisible()
+
+      selection.value.splice(1, 1)
+      await expect.poll(() => screen.getAllByText('Bar')).toHaveLength(1)
+      expect(getAllByRole(menu, 'option', { selected: true })).toHaveLength(1)
+    })
+
+    it('adds a selected item', async () => {
+      const items = ref(['Foo'])
+      const selection = ref(['Foo'])
+      const { element } = render(() => (
+        <VSelect v-model={ selection.value } items={ items.value } multiple />
+      ))
+
+      await userEvent.click(element)
+      const menu = await screen.findByRole('listbox')
+      await expect.element(menu).toBeVisible()
+
+      items.value.push('Bar')
+      selection.value.push('Bar')
+      await expect.poll(() => screen.getAllByText('Bar')).toHaveLength(2)
+      expect(getAllByRole(menu, 'option', { selected: true })).toHaveLength(2)
     })
   })
 

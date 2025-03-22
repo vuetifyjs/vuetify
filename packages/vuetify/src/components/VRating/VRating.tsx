@@ -101,7 +101,7 @@ export const VRating = genericComponent<VRatingSlots>()({
     const { t } = useLocale()
     const { themeClasses } = provideTheme(props)
     const rating = useProxiedModel(props, 'modelValue')
-    const normalizedValue = computed(() => clamp(parseFloat(rating.value), 0, +props.length))
+    const normalizedValue = computed(() => clamp(parseFloat(rating.value), 0, Number(props.length)))
 
     const range = computed(() => createRange(Number(props.length), 1))
     const increments = computed(() => range.value.flatMap(v => props.halfIncrements ? [v - 0.5, v] : [v]))
