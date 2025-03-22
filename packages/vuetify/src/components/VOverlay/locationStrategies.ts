@@ -146,7 +146,9 @@ function getIntrinsicSize (el: HTMLElement, isRtl: boolean) {
   return contentBox
 }
 
-function connectedLocationStrategy (data: LocationStrategyData, props: StrategyProps, contentStyles: Ref<Record<string, string>>) {
+let retries = 0
+
+function connectedLocationStrategy(data: LocationStrategyData, props: StrategyProps, contentStyles: Ref<Record<string, string>>) {
   const activatorFixed = Array.isArray(data.target.value) || isFixedPosition(data.target.value)
   if (activatorFixed) {
     Object.assign(contentStyles.value, {
@@ -199,6 +201,7 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
 
   let observe = false
   const observer = new ResizeObserver(() => {
+    retries += 1
     if (observe) updateLocation()
   })
 
@@ -206,14 +209,15 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
     if (oldTarget && !Array.isArray(oldTarget)) observer.unobserve(oldTarget)
     if (newTarget && !Array.isArray(newTarget)) observer.observe(newTarget)
 
-    if (oldContentEl) observer.unobserve(oldContentEl)
-    if (newContentEl) observer.observe(newContentEl)
+    // if (oldContentEl) observer.unobserve(oldContentEl)
+    // if (newContentEl) observer.observe(newContentEl)
   }, {
     immediate: true,
   })
 
   onScopeDispose(() => {
     observer.disconnect()
+    retries = 0
   })
 
   // eslint-disable-next-line max-statements
@@ -298,15 +302,9 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
     }
 
     let x = 0; let y = 0
-    const available = { x: 0, y: 0 }
     const flipped = { x: false, y: false }
-    let resets = -1
-    while (true) {
-      if (resets++ > 10) {
-        consoleError('Infinite loop detected in connectedLocationStrategy')
-        break
-      }
-
+    const available = { x: 0, y: 0 }
+    while (true && retries < 1) {
       const { x: _x, y: _y, overflows } = checkOverflow(placement)
 
       x += _x
@@ -321,8 +319,8 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
         const hasOverflowX = overflows.x.before || overflows.x.after
         const hasOverflowY = overflows.y.before || overflows.y.after
 
-        let reset = false
-        ;['x', 'y'].forEach(key => {
+        let reset = false;
+        ['x', 'y'].forEach(key => {
           if (
             (key === 'x' && hasOverflowX && !flipped.x) ||
             (key === 'y' && hasOverflowY && !flipped.y)
@@ -391,8 +389,8 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
       left: data.isRtl.value ? undefined : convertToUnit(pixelRound(x)),
       right: data.isRtl.value ? convertToUnit(pixelRound(-x)) : undefined,
       minWidth: convertToUnit(axis === 'y' ? Math.min(minWidth.value, targetBox.width) : minWidth.value),
-      maxWidth: convertToUnit(pixelCeil(clamp(available.x, minWidth.value === Infinity ? 0 : minWidth.value, maxWidth.value))),
-      maxHeight: convertToUnit(pixelCeil(clamp(available.y, minHeight.value === Infinity ? 0 : minHeight.value, maxHeight.value))),
+      maxWidth: available.x > 0 && convertToUnit(pixelCeil(clamp(available.x, minWidth.value === Infinity ? 0 : minWidth.value, maxWidth.value))),
+      maxHeight: available.y > 0 && convertToUnit(pixelCeil(clamp(available.y, minHeight.value === Infinity ? 0 : minHeight.value, maxHeight.value))),
     })
 
     return {
@@ -420,15 +418,6 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
     // TODO: overflowing content should only require a single updateLocation call
     // Icky hack to make sure the content is positioned consistently
     if (!result) return
-    const { available, contentBox } = result
-    if (contentBox.height > available.y) {
-      requestAnimationFrame(() => {
-        updateLocation()
-        requestAnimationFrame(() => {
-          updateLocation()
-        })
-      })
-    }
   })
 
   return { updateLocation }
