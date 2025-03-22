@@ -4,45 +4,20 @@
 @use "../../styles/tools/functions";
 
 // Defaults
-$icon-btn-background: var(--v-theme-surface) !default;
-$icon-btn-border-radius: map.get(variables.$rounded, 'circle') !default;
 $icon-btn-border-color: settings.$border-color-root !default;
-$icon-btn-border-radius: map.get(settings.$rounded, 0) !default;
+$icon-btn-border-radius: map.get(variables.$rounded, 'circle') !default;
 $icon-btn-border-style: settings.$border-style-root !default;
 $icon-btn-border-thin-width: thin !default;
 $icon-btn-border-width: 0 !default;
-$icon-btn-color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity)) !default;
-$icon-btn-density: ('default': 0, 'comfortable': -1, 'compact': -2) !default;
-$icon-btn-elevation: 1 !default;
+$icon-btn-disabled-opacity: 0.26 !default;
 $icon-btn-height: var(--v-icon-btn-height, 32px) !default;
-$icon-btn-line-height: normal !default;
-$icon-btn-plain-opacity: .62 !default;
-$icon-btn-rounded-border-radius: variables.$border-radius-root !default;
-$icon-btn-vertical-align: middle !default;
 $icon-btn-width: var(--v-icon-btn-width, 32px) !default;
 $icon-btn-margin-end: map.get(variables.$grid-gutters, 'md') !default;
 $icon-btn-margin-start: map.get(variables.$grid-gutters, 'md') !default;
-
-$icon-btn-sizes: () !default;
-$icon-btn-sizes: functions.map-deep-merge(
-  (
-    'height': $icon-btn-height,
-    'width': $icon-btn-width
-  ),
-  $icon-btn-sizes
-);
 
 $icon-btn-border: (
   $icon-btn-border-color,
   $icon-btn-border-style,
   $icon-btn-border-width,
   $icon-btn-border-thin-width
-) !default;
-
-$icon-btn-variants: (
-  $icon-btn-background,
-  $icon-btn-color,
-  $icon-btn-elevation,
-  $icon-btn-plain-opacity,
-  'v-icon-btn'
 ) !default;

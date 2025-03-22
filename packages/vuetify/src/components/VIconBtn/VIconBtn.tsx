@@ -36,6 +36,7 @@ export const makeVIconBtnProps = propsFactory({
   icon: [String, Function, Object] as PropType<IconValue>,
   rotate: [Number, String],
   size: [Number, String],
+  opacity: [Number, String],
   text: {
     type: [String, Number, Boolean],
     default: undefined,
@@ -67,7 +68,12 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
     useRender(() => (
       <props.tag
         class={[
-          'v-icon-btn',
+          {
+            'v-icon-btn': true,
+            'v-icon-btn--disabled': props.disabled,
+            'v-icon-btn--readonly': props.readonly,
+            'v-icon-btn--loading': props.loading,
+          },
           themeClasses.value,
           backgroundColorClasses.value,
           borderClasses.value,
@@ -86,26 +92,31 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
             '--v-icon-btn-width': props.size ? convertToUnit(props.size) : undefined,
           },
         ]}
+        tabindex={ props.disabled || props.readonly ? -1 : 0 }
       >
-        { slots.default?.() ?? (
-          !props.icon ? props.text : (
-            <VIcon
-              key="icon"
-              icon={ props.icon }
-            />
-          )
-        )}
+        <div class="v-icon-btn__content">
+          { slots.default?.() ?? (
+            !props.icon ? props.text : (
+              <VIcon
+                key="icon"
+                icon={ props.icon }
+                opacity={ props.opacity }
+              />
+            )
+          )}
+        </div>
 
         { !!props.loading && (
-            <span key="loader" class="v-icon-btn__loader">
-              { slots.loader?.() ?? (
-                <VProgressCircular
-                  color={ typeof props.loading === 'boolean' ? undefined : props.loading }
-                  indeterminate
-                  width="2"
-                />
-              )}
-            </span>
+          <span key="loader" class="v-icon-btn__loader">
+            { slots.loader?.() ?? (
+              <VProgressCircular
+                color={ typeof props.loading === 'boolean' ? undefined : props.loading }
+                indeterminate="disable-shrink"
+                width="2"
+                size="20"
+              />
+            )}
+          </span>
         )}
       </props.tag>
     ))

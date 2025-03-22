@@ -20,6 +20,15 @@
       width: $icon-btn-width;
     }
 
+    &--loading,
+    &--readonly {
+      pointer-events: none;
+    }
+
+    &--disabled {
+      opacity: $icon-btn-disabled-opacity;
+    }
+
     &--start {
       margin-inline-end: $icon-btn-margin-start;
     }
@@ -27,5 +36,25 @@
     &--end {
       margin-inline-start: $icon-btn-margin-end;
     }
+  }
+
+  .v-icon-btn__content {
+    transition: 0.2s settings.$standard-easing;
+    transition-property: opacity;
+
+    .v-icon-btn--loading & {
+      opacity: 0;
+    }
+  }
+
+  .v-icon-btn__loader {
+    align-items: center;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
   }
 }
