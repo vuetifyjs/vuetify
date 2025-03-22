@@ -19,6 +19,7 @@ export const makeVIconProps = propsFactory({
   start: Boolean,
   end: Boolean,
   icon: IconValue,
+  opacity: [String, Number],
 
   ...makeComponentProps(),
   ...makeSizeProps(),
@@ -67,6 +68,9 @@ export const VIcon = genericComponent()({
             props.class,
           ]}
           style={[
+            {
+              '--v-icon-opacity': props.opacity,
+            },
             !sizeClasses.value ? ({
               fontSize: convertToUnit(props.size),
               height: convertToUnit(props.size),

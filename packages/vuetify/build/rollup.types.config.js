@@ -1,5 +1,5 @@
-import fs from 'fs/promises'
-import { fileURLToPath } from 'url'
+import fs from 'node:fs/promises'
+import { fileURLToPath } from 'node:url'
 
 import dts from 'rollup-plugin-dts'
 import fg from 'fast-glob'
@@ -9,6 +9,10 @@ import MagicString from 'magic-string'
 import importMap from '../dist/json/importMap.json' with { type: 'json' }
 import importMapLabs from '../dist/json/importMap-labs.json' with { type: 'json' }
 
+/**
+ * @param code {string}
+ * @returns {string}
+ */
 export function codeTransform (code) {
   return code
     // ignore missing vue-router
@@ -17,6 +21,13 @@ export function codeTransform (code) {
     .replaceAll(/^\s*export \{\s*\};?$/gm, '')
 }
 
+/**
+ * @param input {string}
+ * @param output {string}
+ * @param renderChunk {import("rollup").RenderChunkHook | undefined}
+ * @param filter {(files: string[]) => string[] | undefined}
+ * @returns {import("rollup").RollupOptions[]}
+ */
 function createTypesConfig (input, output, renderChunk, filter) {
   input = 'lib/' + input
   let files = fg.sync(input)
@@ -25,7 +36,8 @@ function createTypesConfig (input, output, renderChunk, filter) {
 
   return files.map(file => {
     const outputFile = output.replace('*', mm.capture(input, file)[0])
-    return {
+    /** @type {import("rollup").RollupOptions} */
+    const options = {
       input: file,
       output: [{ file: outputFile, format: 'es', sourcemap: false }],
       plugins: [
@@ -51,9 +63,14 @@ function createTypesConfig (input, output, renderChunk, filter) {
         },
       ],
     }
+    return options
   })
 }
 
+/**
+ * @param useImport {boolean|undefined}
+ * @returns {Promise<string>}
+ */
 async function getShims (useImport) {
   let components
   if (useImport) {
@@ -75,7 +92,8 @@ async function getShims (useImport) {
     .replace(/^\s*\/\/ @generate-components$/gm, components)
 }
 
-export default [
+/** @type {import("rollup").RollupOptions[]} */
+const options = [
   createTypesConfig('entry-bundler.d.ts', 'dist/vuetify.d.ts', async code => {
     code.replaceAll(/type index_d\$1_V(\w+) = V(\w+);/gm, 'declare const index_d$$1_V$1: typeof V$2;')
     code.append('\n\n')
@@ -91,3 +109,5 @@ export default [
     code.append(await getShims(true))
   }),
 ].flat()
+
+export default options

@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   title: Dates
   description: Vuetify has first party date support that can easily be swapped for another date library
@@ -22,9 +21,7 @@ Easily hook up date libraries that are used for components such as Date Picker a
 
 <PromotedEntry />
 
-::: success
-This feature was introduced in [v3.4.0 (Blackguard)](/getting-started/release-notes/?version=v3.4.0)
-:::
+<DocIntroduced version="3.4.0" />
 
 ## Usage
 

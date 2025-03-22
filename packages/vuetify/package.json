@@ -1,7 +1,7 @@
 {
   "name": "vuetify",
   "description": "Vue Material Component Framework",
-  "version": "3.7.16",
+  "version": "3.8.0-beta.0",
   "author": {
     "name": "John Leider",
     "email": "john@vuetifyjs.com"
@@ -34,7 +34,7 @@
   "module": "lib/framework.js",
   "jsdelivr": "dist/vuetify.js",
   "unpkg": "dist/vuetify.js",
-  "types": "lib/index.d.ts",
+  "types": "lib/framework.d.ts",
   "sass": "lib/styles/main.sass",
   "styles": "lib/styles/main.css",
   "sideEffects": [
@@ -55,51 +55,36 @@
     ".": {
       "sass": "./lib/styles/main.sass",
       "style": "./lib/styles/main.css",
-      "import": "./lib/framework.js"
+      "types": "./lib/framework.d.ts",
+      "default": "./lib/framework.js"
     },
     "./styles": {
       "sass": "./lib/styles/main.sass",
       "default": "./lib/styles/main.css"
     },
     "./styles/*": "./lib/styles/*",
-    "./framework": {
-      "import": "./lib/framework.js"
+    "./framework": "./lib/framework.js",
+    "./blueprints": "./lib/blueprints/index.js",
+    "./blueprints/*": "./lib/blueprints/*.js",
+    "./components": "./lib/components/index.js",
+    "./components/*": "./lib/components/*/index.js",
+    "./directives": "./lib/directives/index.js",
+    "./directives/*": "./lib/directives/*/index.js",
+    "./locale": "./lib/locale/index.js",
+    "./locale/adapters/*": "./lib/locale/adapters/*.js",
+    "./iconsets/*": "./lib/iconsets/*.js",
+    "./labs/components": "./lib/labs/components.js",
+    "./labs/*": "./lib/labs/*/index.js",
+    "./util/colors": "./lib/util/colors.js",
+    "./dist/vuetify.js": {
+      "types": "./dist/vuetify.d.ts",
+      "import": "./dist/vuetify.esm.js",
+      "default": "./dist/vuetify.cjs"
     },
-    "./blueprints": {
-      "import": "./lib/blueprints/index.js"
-    },
-    "./blueprints/*": {
-      "import": "./lib/blueprints/*.js"
-    },
-    "./components": {
-      "import": "./lib/components/index.js"
-    },
-    "./components/*": {
-      "import": "./lib/components/*/index.js"
-    },
-    "./directives": {
-      "import": "./lib/directives/index.js"
-    },
-    "./directives/*": {
-      "import": "./lib/directives/*/index.js"
-    },
-    "./locale": {
-      "import": "./lib/locale/index.js"
-    },
-    "./locale/adapters/*": {
-      "import": "./lib/locale/adapters/*.js"
-    },
-    "./iconsets/*": {
-      "import": "./lib/iconsets/*.js"
-    },
-    "./labs/components": {
-      "import": "./lib/labs/components.js"
-    },
-    "./labs/*": {
-      "import": "./lib/labs/*/index.js"
-    },
-    "./util/colors": {
-      "import": "./lib/util/colors.js"
+    "./dist/vuetify-labs.js": {
+      "types": "./dist/vuetify-labs.d.ts",
+      "import": "./dist/vuetify-labs.esm.js",
+      "default": "./dist/vuetify-labs.cjs"
     },
     "./*.mjs": "./*.js",
     "./*": "./*"

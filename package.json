@@ -1,5 +1,6 @@
 {
   "name": "@vuetify/vuetify-root",
+  "type": "module",
   "private": true,
   "husky": {
     "hooks": {
@@ -38,6 +39,7 @@
     "@mdi/js": "7.4.47",
     "@mdi/svg": "7.4.47",
     "@octokit/core": "^5.2.0",
+    "@types/yargs": "^17.0.33",
     "@typescript-eslint/eslint-plugin": "^7.18.0",
     "@typescript-eslint/parser": "^7.18.0",
     "@unhead/vue": "^1.9.4",

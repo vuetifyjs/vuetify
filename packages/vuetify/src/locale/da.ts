@@ -104,4 +104,17 @@ export default {
     loadMore: 'Indlæs mere',
     empty: 'Ingen flere',
   },
+  rules: {
+    required: 'Dette felt er påkrævet',
+    email: 'Indtast venligst en gyldig e-mail',
+    number: 'Dette felt kan kun indeholde tal',
+    integer: 'Dette felt kan kun indeholde heltal',
+    capital: 'Dette felt kan kun indeholde store bogstaver',
+    maxLength: 'Du skal indtaste maksimalt {0} tegn',
+    minLength: 'Du skal indtaste mindst {0} tegn',
+    strictLength: 'Længden af det indtastede felt er ugyldig',
+    exclude: 'Tegnet {0} er ikke tilladt',
+    notEmpty: 'Vælg venligst mindst én værdi',
+    pattern: 'Ugyldigt format',
+  },
 }

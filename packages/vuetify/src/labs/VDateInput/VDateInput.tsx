@@ -33,7 +33,6 @@ export type VDateInputSlots = Omit<VTextFieldSlots, 'default'> & {
 }
 
 export const makeVDateInputProps = propsFactory({
-  hideActions: Boolean,
   location: {
     type: String as PropType<StrategyProps['location']>,
     default: 'bottom start',
@@ -108,7 +107,7 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
 
       const target = e.target as HTMLInputElement
 
-      model.value = target.value
+      model.value = target.value === '' ? null : target.value
     }
 
     function onClick (e: MouseEvent) {
