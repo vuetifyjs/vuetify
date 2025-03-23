@@ -6,7 +6,6 @@ import { computed, nextTick, onScopeDispose, ref, watch } from 'vue'
 import { anchorToPoint, getOffset } from './util/point'
 import {
   clamp,
-  consoleError,
   convertToUnit,
   destructComputed,
   flipAlign,
@@ -146,7 +145,11 @@ function getIntrinsicSize (el: HTMLElement, isRtl: boolean) {
   return contentBox
 }
 
+// Prevents infinite loop
 let retries = 0
+// Track the last position
+let previousX = 0
+let previousY = 0
 
 function connectedLocationStrategy(data: LocationStrategyData, props: StrategyProps, contentStyles: Ref<Record<string, string>>) {
   const activatorFixed = Array.isArray(data.target.value) || isFixedPosition(data.target.value)
@@ -209,6 +212,7 @@ function connectedLocationStrategy(data: LocationStrategyData, props: StrategyPr
     if (oldTarget && !Array.isArray(oldTarget)) observer.unobserve(oldTarget)
     if (newTarget && !Array.isArray(newTarget)) observer.observe(newTarget)
 
+    // TODO: Check or test effect on other components
     // if (oldContentEl) observer.unobserve(oldContentEl)
     // if (newContentEl) observer.observe(newContentEl)
   }, {
@@ -217,6 +221,7 @@ function connectedLocationStrategy(data: LocationStrategyData, props: StrategyPr
 
   onScopeDispose(() => {
     observer.disconnect()
+    // Reset retry on close component
     retries = 0
   })
 
@@ -304,7 +309,8 @@ function connectedLocationStrategy(data: LocationStrategyData, props: StrategyPr
     let x = 0; let y = 0
     const flipped = { x: false, y: false }
     const available = { x: 0, y: 0 }
-    while (true && retries < 1) {
+    // Make the retry max x2 to get the correct position
+    while (true && retries < 2) {
       const { x: _x, y: _y, overflows } = checkOverflow(placement)
 
       x += _x
@@ -376,6 +382,10 @@ function connectedLocationStrategy(data: LocationStrategyData, props: StrategyPr
         contentBox.y += overflows.y.before
       }
 
+      // Save the last position for some reason x and y are 0 after while loop
+      previousX = x
+      previousY = y
+
       break
     }
 
@@ -385,9 +395,9 @@ function connectedLocationStrategy(data: LocationStrategyData, props: StrategyPr
       '--v-overlay-anchor-origin': `${placement.anchor.side} ${placement.anchor.align}`,
       transformOrigin: `${placement.origin.side} ${placement.origin.align}`,
       // transform: `translate(${pixelRound(x)}px, ${pixelRound(y)}px)`,
-      top: convertToUnit(pixelRound(y)),
-      left: data.isRtl.value ? undefined : convertToUnit(pixelRound(x)),
-      right: data.isRtl.value ? convertToUnit(pixelRound(-x)) : undefined,
+      top: convertToUnit(pixelRound(y > 0 ? y : previousY)),
+      left: data.isRtl.value ? undefined : convertToUnit(pixelRound(x > 0 ? x : previousX)),
+      right: data.isRtl.value ? convertToUnit(pixelRound(x > 0 ? -x : -previousX)) : undefined,
       minWidth: convertToUnit(axis === 'y' ? Math.min(minWidth.value, targetBox.width) : minWidth.value),
       maxWidth: available.x > 0 && convertToUnit(pixelCeil(clamp(available.x, minWidth.value === Infinity ? 0 : minWidth.value, maxWidth.value))),
       maxHeight: available.y > 0 && convertToUnit(pixelCeil(clamp(available.y, minHeight.value === Infinity ? 0 : minHeight.value, maxHeight.value))),
@@ -412,13 +422,7 @@ function connectedLocationStrategy(data: LocationStrategyData, props: StrategyPr
     () => updateLocation(),
   )
 
-  nextTick(() => {
-    const result = updateLocation()
-
-    // TODO: overflowing content should only require a single updateLocation call
-    // Icky hack to make sure the content is positioned consistently
-    if (!result) return
-  })
+  nextTick(() => updateLocation())
 
   return { updateLocation }
 }
