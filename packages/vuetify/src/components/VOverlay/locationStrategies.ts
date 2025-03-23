@@ -151,7 +151,7 @@ let retries = 0
 let previousX = 0
 let previousY = 0
 
-function connectedLocationStrategy(data: LocationStrategyData, props: StrategyProps, contentStyles: Ref<Record<string, string>>) {
+function connectedLocationStrategy (data: LocationStrategyData, props: StrategyProps, contentStyles: Ref<Record<string, string>>) {
   const activatorFixed = Array.isArray(data.target.value) || isFixedPosition(data.target.value)
   if (activatorFixed) {
     Object.assign(contentStyles.value, {
@@ -310,7 +310,7 @@ function connectedLocationStrategy(data: LocationStrategyData, props: StrategyPr
     const flipped = { x: false, y: false }
     const available = { x: 0, y: 0 }
     // Make the retry max x2 to get the correct position
-    while (true && retries < 2) {
+    while (retries < 2) {
       const { x: _x, y: _y, overflows } = checkOverflow(placement)
 
       x += _x
@@ -399,8 +399,18 @@ function connectedLocationStrategy(data: LocationStrategyData, props: StrategyPr
       left: data.isRtl.value ? undefined : convertToUnit(pixelRound(x > 0 ? x : previousX)),
       right: data.isRtl.value ? convertToUnit(pixelRound(x > 0 ? -x : -previousX)) : undefined,
       minWidth: convertToUnit(axis === 'y' ? Math.min(minWidth.value, targetBox.width) : minWidth.value),
-      maxWidth: available.x > 0 && convertToUnit(pixelCeil(clamp(available.x, minWidth.value === Infinity ? 0 : minWidth.value, maxWidth.value))),
-      maxHeight: available.y > 0 && convertToUnit(pixelCeil(clamp(available.y, minHeight.value === Infinity ? 0 : minHeight.value, maxHeight.value))),
+      maxWidth: available.x > 0 &&
+        convertToUnit(pixelCeil(clamp(
+          available.x, minWidth.value === Infinity
+          ? 0
+          : minWidth.value, maxWidth.value))
+        ),
+      maxHeight: available.y > 0 &&
+        convertToUnit(pixelCeil(clamp(
+          available.y, minHeight.value === Infinity
+          ? 0
+          : minHeight.value, maxHeight.value))
+        ),
     })
 
     return {
