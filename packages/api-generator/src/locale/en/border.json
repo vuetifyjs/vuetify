@@ -1,5 +1,5 @@
 {
   "props": {
-    "border": "Applies utility border classes to the component. To use it, you need to omit the `border-` prefix, (for example `border-sm` is is used as `border=\"sm\"`).  Find a list of the built-in border classes on the [borders page](/styles/borders)."
+    "border": "Applies utility border classes to the component. To use it, you need to omit the `border-` prefix, (for example use `border-sm` as `border=\"sm\"`).  Find a list of the built-in border classes on the [borders page](/styles/borders)."
   }
 }
