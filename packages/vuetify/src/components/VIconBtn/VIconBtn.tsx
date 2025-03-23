@@ -8,12 +8,12 @@ import { VProgressCircular } from '@/components/VProgressCircular'
 
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'
-import { useBackgroundColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
+import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
 
 // Utilities
 import { computed, toDisplayString, toRefs } from 'vue'
@@ -22,6 +22,7 @@ import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util
 // Types
 import type { PropType } from 'vue'
 import type { IconValue } from '@/composables/icons'
+import type { Variant } from '@/composables/variant'
 
 export type VIconBtnSlots = {
   default: never
@@ -31,7 +32,7 @@ export type VIconBtnSlots = {
 export const makeVIconBtnProps = propsFactory({
   active: Boolean,
   activeColor: String,
-  color: String,
+  activeVariant: String as PropType<Variant>,
   disabled: Boolean,
   icon: [String, Function, Object] as PropType<IconValue>,
   iconColor: String,
@@ -49,8 +50,9 @@ export const makeVIconBtnProps = propsFactory({
   ...makeComponentProps(),
   ...makeElevationProps(),
   ...makeRoundedProps(),
-  ...makeTagProps(),
+  ...makeTagProps({ tag: 'button' }),
   ...makeThemeProps(),
+  ...makeVariantProps({ variant: 'text' } as const),
 }, 'VIconBtn')
 
 export const VIconBtn = genericComponent<VIconBtnSlots>()({
@@ -59,16 +61,19 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
   props: makeVIconBtnProps(),
 
   setup (props, { slots }) {
-    const { active, activeColor, color: _color } = toRefs(props)
+    const { active, activeColor, color } = toRefs(props)
 
     const { themeClasses } = provideTheme(props)
     const { borderClasses } = useBorder(props)
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props)
 
-    const color = computed(() => active.value ? activeColor.value ?? _color.value : _color.value)
-
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(color)
+    const computedColor = computed(() => active.value ? activeColor.value ?? color.value : color.value)
+    const variantProps = computed(() => ({
+      color: computedColor.value,
+      variant: active.value ? props.activeVariant ?? props.variant : props.variant,
+    }))
+    const { colorClasses, colorStyles, variantClasses } = useVariant(variantProps)
 
     useRender(() => {
       const hasIcon = !!(props.icon)
@@ -83,10 +88,11 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
               'v-icon-btn--loading': props.loading,
             },
             themeClasses.value,
-            backgroundColorClasses.value,
+            colorClasses.value,
             borderClasses.value,
             elevationClasses.value,
             roundedClasses.value,
+            variantClasses.value,
             props.class,
           ]}
           style={[
@@ -95,11 +101,13 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
               '--v-icon-btn-height': props.size ? convertToUnit(props.size) : undefined,
               '--v-icon-btn-width': props.size ? convertToUnit(props.size) : undefined,
             },
-            backgroundColorStyles.value,
+            colorStyles.value,
             props.style,
           ]}
           tabindex={ props.disabled || props.readonly ? -1 : 0 }
         >
+          { genOverlays(true, 'v-icon-btn') }
+
           <div class="v-icon-btn__content" data-no-activator="">
             { (!slots.default && hasIcon) ? (
               <VIcon

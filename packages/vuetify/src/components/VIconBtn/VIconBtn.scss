@@ -6,6 +6,7 @@
   .v-icon-btn {
     @include tools.border($icon-btn-border...);
     @include tools.rounded($icon-btn-border-radius);
+    @include tools.variant($icon-btn-variants...);
 
     & {
       align-items: center;
@@ -14,14 +15,14 @@
       flex: none;
       font-size: $icon-btn-font-size;
       font-weight: $icon-btn-font-weight;
-      height: $icon-btn-height;
+      height: var(--v-icon-btn-height, $icon-btn-height);
       justify-content: center;
       outline: none;
       transform: rotate(var(--v-icon-btn-rotate, 0deg));
       transition-property: width, height, transform;
       transition: 0.2s settings.$standard-easing;
       vertical-align: middle;
-      width: $icon-btn-width;
+      width: var(--v-icon-btn-width, $icon-btn-width);
 
       @supports selector(:focus-visible) {
         &::after {
@@ -68,6 +69,7 @@
 
     .v-icon {
       --v-icon-size-multiplier: 1;
+      font-size: $icon-btn-icon-font-size;
       transition: 0.2s settings.$standard-easing;
       transition-property: opacity;
       transform-origin: center;
@@ -83,5 +85,22 @@
     position: absolute;
     top: 0;
     width: 100%;
+  }
+
+  .v-icon-btn__overlay {
+    background-color: currentColor;
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity .2s ease-in-out;
+    pointer-events: none;
+
+    @include tools.absolute();
+  }
+
+  .v-icon-btn__underlay {
+    border-radius: inherit;
+    pointer-events: none;
+
+    @include tools.absolute();
   }
 }
