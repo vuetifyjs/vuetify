@@ -1,7 +1,7 @@
 ---
 emphasized: true
 meta:
-  nav: Icons
+  nav: Icon buttons
   title: Icon component
   description: The icon component is compatible with multiple common icon fonts such as Material Design Icons, Font Awesome and more.
   keywords: icons, vuetify icon component, vue icon component
