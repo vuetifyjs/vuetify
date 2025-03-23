@@ -152,8 +152,8 @@ Keep in mind that to obtain settings from Vuetify, you must forward its variable
 
 Utility classes are a powerful feature of Vuetify, but they can also be unnecessary for some projects. Each utility class is generated with a set of options that are defined [here](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/styles/settings/_utilities.scss). Disable individual classes by setting their corresponding variable to `false`:
 
-```scss { resource="src/styles/settings.scss" }
-@forward 'vuetify/settings' with (
+```scss { resource="src/styles/main.scss" }
+@use 'vuetify' with (
   $utilities: (
     "align-content": false,
     "align-items": false,
@@ -232,8 +232,8 @@ Utility classes are a powerful feature of Vuetify, but they can also be unnecess
 
 To disable all utility classes, set the entire `$utilities` variable to `false`:
 
-```scss { resource="src/styles/settings.scss" }
-@forward 'vuetify/settings' with (
+```scss { resource="src/styles/main.scss" }
+@use 'vuetify' with (
   $utilities: false,
 );
 ```
@@ -242,8 +242,8 @@ To disable all utility classes, set the entire `$utilities` variable to `false`:
 
 Color packs are handy for quickly applying a color to a component but mostly unused in production. To disable them, set the `$color-pack` variable to `false`:
 
-```scss { resource="src/styles/settings.scss" }
-@forward 'vuetify/settings' with (
+```scss { resource="src/styles/main.scss" }
+@use 'vuetify' with (
   $color-pack: false,
 );
 ```
