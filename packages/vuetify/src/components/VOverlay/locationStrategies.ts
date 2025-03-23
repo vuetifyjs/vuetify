@@ -309,7 +309,10 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
     let x = 0; let y = 0
     const flipped = { x: false, y: false }
     const available = { x: 0, y: 0 }
+
     // Make the retry max x2 to get the correct position
+    // Addition happens on resizeObserver see line 207
+    // eslint-disable-next-line no-unmodified-loop-condition
     while (retries < 2) {
       const { x: _x, y: _y, overflows } = checkOverflow(placement)
 
@@ -402,14 +405,14 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
       maxWidth: available.x > 0 &&
         convertToUnit(pixelCeil(clamp(
           available.x, minWidth.value === Infinity
-          ? 0
-          : minWidth.value, maxWidth.value))
+            ? 0
+            : minWidth.value, maxWidth.value))
         ),
       maxHeight: available.y > 0 &&
         convertToUnit(pixelCeil(clamp(
           available.y, minHeight.value === Infinity
-          ? 0
-          : minHeight.value, maxHeight.value))
+            ? 0
+            : minHeight.value, maxHeight.value))
         ),
     })
 
