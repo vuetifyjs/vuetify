@@ -3,7 +3,7 @@
     class="mx-auto"
     max-width="400"
   >
-    <v-card-title>
+    <v-card-title class="d-flex">
       <h2 class="text-h4">Toothbrush</h2>
 
       <v-spacer></v-spacer>
