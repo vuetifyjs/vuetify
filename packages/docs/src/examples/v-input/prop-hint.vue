@@ -1,8 +1,8 @@
 <template>
   <v-switch
     v-model="showMessages"
-    hide-details
     label="Show messages"
+    hide-details
   ></v-switch>
   <v-input
     :messages="messages"
