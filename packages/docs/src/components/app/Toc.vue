@@ -103,7 +103,7 @@
           </v-col>
 
           <v-col
-            v-if="(!user.disableAds || (user.showHouseAds && spot.spot.sponsor === 'Vuetify')) && spot.spot"
+            v-if="spot.spot && (!user.disableAds || (user.showHouseAds && spot.spot.sponsor === 'Vuetify'))"
             cols="12"
           >
             <a
