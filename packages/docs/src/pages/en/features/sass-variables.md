@@ -73,7 +73,7 @@ Within your style file, import the Vuetify styles and specify the variables you 
 
 ::: info
 
-`'vuetify'` should be used for [global SASS variable](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/styles/settings/_variables.scss).
+`'vuetify'` should be used for [global SASS variable](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/styles/settings/_variables.scss). This is also used for [`$utilities`](/features/sass-variables/#disabling-utility-classes), [`$color-pack`](/features/sass-variables/#disabling-color-packs), and [`$layers`](/features/sass-variables/#enabling-css-cascade-layers).
 
 :::
 
