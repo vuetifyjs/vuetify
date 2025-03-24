@@ -219,7 +219,7 @@ export function pick<
   const found: any = {}
 
   for (const key of paths) {
-    if (Object.hasOwn(obj, key)) {
+    if (Object.prototype.hasOwnProperty.call(obj, key)) {
       found[key] = obj[key]
     }
   }

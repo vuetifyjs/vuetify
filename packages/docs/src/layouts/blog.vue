@@ -12,15 +12,12 @@
       </v-container>
     </v-main>
 
-    <VoPromotionsFooter v-if="!auth.user || !user.disableAds" slug="vuetify-snips" app />
-
-    <VoSocialFooter v-else app />
+    <VoSocialFooter app />
   </v-app>
 </template>
 
 <script setup>
-  const auth = useAuthStore()
-  const user = useUserStore()
+  //
 </script>
 
 <style lang="sass" scoped>

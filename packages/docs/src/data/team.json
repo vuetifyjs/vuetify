@@ -181,6 +181,128 @@
     "team": "core",
     "joined": "Nov 2024"
   },
+  "Spatlani": {
+    "name": "Shubham Patlani",
+    "team": "core",
+    "discord": "spatlani",
+    "focus": ["[vuetifyjs/*](https://github.com/vuetifyjs)"],
+    "languages": ["English", "Hindi", "Punjabi"],
+    "linkedin": "in/spatlani",
+    "github": "spatlani",
+    "avatar": "https://avatars.githubusercontent.com/u/11574195",
+    "location": "Delhi, India",
+    "joined": "March 2025"
+  },
+  "eesayas": {
+    "name": "Isaias Briones",
+    "team": "core",
+    "discord": "ibriones",
+    "focus": ["[vuetifyjs/*](https://github.com/vuetifyjs)"],
+    "languages": ["English", "Filipino"],
+    "location": "Edmonton, AB, Canada"
+  },
+  "Haviles04": {
+    "name": "Henry Aviles",
+    "team": "core",
+    "discord": "hankthetank4",
+    "linkedin": "henry-aviles",
+    "focus": ["[One](https://github.com/vuetifyjs/one)"],
+    "languages": ["English"],
+    "joined": "March 2025",
+    "location": "Huntington, NY, USA"
+  },
+  "ikushum": {
+    "name": "Ishan Subedi",
+    "team": "core",
+    "focus": [
+      "[vuetifyjs/*](https://github.com/vuetifyjs)"
+    ],
+    "languages": [
+      "Nepali",
+      "English"
+    ],
+    "discord": "ikushum",
+    "linkedin": "ikushum",
+    "joined": "March 2025",
+    "location": "Kathmandu, Nepal",
+    "avatar": "https://avatars.githubusercontent.com/u/17315781"
+  },
+  "Arslan038": {
+    "name": "Muhammad Arslan Ahmed",
+    "team": "core",
+    "discord": "dev_arslan",
+    "linkedin": "arslan-ahmed-dev",
+    "focus": [],
+    "languages": [
+      "English"
+    ],
+    "location": "Malta",
+    "joined": "March 2025"
+  },
+  "AndreyYolkin": {
+    "name": "Andrei Elkin",
+    "team": "core",
+    "discord": "yol_kin",
+    "focus": [
+      "[vuetifyjs/create](https://github.com/vuetifyjs/create)",
+      "[vuetify-loader](https://github.com/vuetifyjs/vuetify-loader)",
+      "[Nuxt](https://github.com/vuetifyjs/nuxt-module)"
+    ],
+    "languages": [
+      "Polish",
+      "English",
+      "Russian"
+    ],
+    "location": "Kraków, Poland",
+    "linkedin": "yolkin",
+    "joined": "March 2025"
+  },
+  "jcjp": {
+    "name": "JC Puno",
+    "team": "core",
+    "discord": "psi#8085",
+    "focus": [
+      "[vuetifyjs](https://github.com/vuetifyjs)",
+      "[Nuxt](https://github.com/userquin/vuetify-nuxt-module)"
+    ],
+    "languages": [
+      "Tagalog / Filipino",
+      "English"
+    ],
+    "location": "Manila, Philipines",
+    "joined": "March 2025"
+  },
+  "oumoussa98": {
+    "name": "Abdelouahed Oumoussa",
+    "team": "core",
+    "discord": "oumoussa",
+    "twitter": "oumoussa_",
+    "github": "oumoussa98",
+    "linkedin": "aoumoussa",
+    "avatar": "https://gravatar.com/avatar/7d1a8ba680ab9d49bd9cdaeff05d0e76",
+    "focus": [
+      "[vuetifyjs/*](https://github.com/vuetifyjs)"
+    ],
+    "languages": [
+      "Arabic",
+      "English"
+    ],
+    "joined": "March 2025",
+    "location": "Casablanca, Morocco"
+  },
+  "tech-veteran71": {
+    "name": "Aaron Groenke",
+    "team": "core",
+    "github": "tech-veteran71",
+    "focus": [
+      "[vuetifyjs/labs](https://vuetifyjs.com/labs/introduction/)"
+    ],
+    "languages": [
+      "English"
+    ],
+    "joined": "March 2025",
+    "location": "USA"
+  },
   "jacekkarczmarczyk": {
     "discord": "jacek#3542",
     "languages": [
