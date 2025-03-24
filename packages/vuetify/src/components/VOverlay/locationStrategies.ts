@@ -216,6 +216,8 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
     observer.disconnect()
   })
 
+  let targetBox = new Box({ x: 0, y: 0, width: 0, height: 0 })
+
   // eslint-disable-next-line max-statements
   function updateLocation () {
     observe = false
@@ -223,7 +225,10 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
 
     if (!data.target.value || !data.contentEl.value) return
 
-    const targetBox = getTargetBox(data.target.value)
+    if (Array.isArray(data.target.value) || data.target.value.offsetParent) {
+      targetBox = getTargetBox(data.target.value)
+    } // Otherwise target element is hidden, use last known value
+
     const contentBox = getIntrinsicSize(data.contentEl.value, data.isRtl.value)
     const scrollParents = getScrollParents(data.contentEl.value)
     const viewportMargin = 12
