@@ -33,6 +33,7 @@ export type VDateInputSlots = Omit<VTextFieldSlots, 'default'> & {
 }
 
 export const makeVDateInputProps = propsFactory({
+  displayFormat: [Function, String],
   location: {
     type: String as PropType<StrategyProps['location']>,
     default: 'bottom start',
@@ -55,10 +56,12 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
   props: makeVDateInputProps(),
 
   emits: {
+    save: (value: string) => true,
+    cancel: () => true,
     'update:modelValue': (val: string) => true,
   },
 
-  setup (props, { slots }) {
+  setup (props, { emit, slots }) {
     const { t } = useLocale()
     const adapter = useDate()
     const { isFocused, focus, blur } = useFocus(props)
@@ -73,6 +76,14 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
     const menu = shallowRef(false)
     const vDateInputRef = ref()
 
+    function format (date: unknown) {
+      if (typeof props.displayFormat === 'function') {
+        return props.displayFormat(date)
+      }
+
+      return adapter.format(date, props.displayFormat ?? 'keyboardDate')
+    }
+
     const display = computed(() => {
       const value = wrapInArray(model.value)
 
@@ -86,12 +97,12 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
         const start = value[0]
         const end = value[value.length - 1]
 
-        return adapter.isValid(start) && adapter.isValid(end)
-          ? `${adapter.format(adapter.date(start), 'keyboardDate')} - ${adapter.format(adapter.date(end), 'keyboardDate')}`
-          : ''
+        if (!adapter.isValid(start) || !adapter.isValid(end)) return ''
+
+        return `${format(adapter.date(start))} - ${format(adapter.date(end))}`
       }
 
-      return adapter.isValid(model.value) ? adapter.format(adapter.date(model.value), 'keyboardDate') : ''
+      return adapter.isValid(model.value) ? format(adapter.date(model.value)) : ''
     })
 
     const isInteractive = computed(() => !props.disabled && !props.readonly)
@@ -117,11 +128,17 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
       menu.value = true
     }
 
-    function onSave () {
+    function onCancel () {
+      emit('cancel')
       menu.value = false
     }
 
-    function onUpdateModel (value: string) {
+    function onSave (value: string) {
+      emit('save', value)
+      menu.value = false
+    }
+
+    function onUpdateDisplayModel (value: string) {
       if (value != null) return
 
       model.value = null
@@ -145,7 +162,7 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
           onBlur={ blur }
           onClick:control={ isInteractive.value ? onClick : undefined }
           onClick:prepend={ isInteractive.value ? onClick : undefined }
-          onUpdate:modelValue={ onUpdateModel }
+          onUpdate:modelValue={ onUpdateDisplayModel }
         >
           {{
             ...slots,
@@ -164,23 +181,30 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
                     { ...confirmEditProps }
                     v-model={ model.value }
                     onSave={ onSave }
-                    onCancel={ () => menu.value = false }
+                    onCancel={ onCancel }
                   >
                     {{
                       default: ({ actions, model: proxyModel, save, cancel, isPristine }) => {
+                        function onUpdateModel (value: string) {
+                          if (!props.hideActions) {
+                            proxyModel.value = value
+                          } else {
+                            model.value = value
+
+                            if (!props.multiple) {
+                              menu.value = false
+                            }
+                          }
+
+                          emit('save', value)
+                          vDateInputRef.value?.blur()
+                        }
+
                         return (
                           <VDatePicker
                             { ...datePickerProps }
                             modelValue={ props.hideActions ? model.value : proxyModel.value }
-                            onUpdate:modelValue={ val => {
-                              if (!props.hideActions) {
-                                proxyModel.value = val
-                              } else {
-                                model.value = val
-
-                                if (!props.multiple) menu.value = false
-                              }
-                            }}
+                            onUpdate:modelValue={ value => onUpdateModel(value) }
                             onMousedown={ (e: MouseEvent) => e.preventDefault() }
                           >
                             {{

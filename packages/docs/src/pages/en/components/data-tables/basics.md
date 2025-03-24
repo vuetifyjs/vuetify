@@ -168,7 +168,7 @@ For more information and examples, see the [selection examples](/components/data
 
 #### Simple checkbox
 
-When wanting to use a checkbox component inside of a slot template in your data tables, use the `v-checkbox-btn` component rather than the `v-checkbox` component. The `v-checkbox-btn` component is used internally and will respect header alignment.
+When wanting to use a checkbox component inside of a slot template in your data tables, use the `v-checkbox-btn` component rather than the `v-checkbox` component.
 
 <ExamplesExample file="v-data-table/slot-simple-checkbox" />
 

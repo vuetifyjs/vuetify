@@ -62,6 +62,12 @@ At its core, the `v-date-input` component is a basic container that extends [v-t
 
 The `v-date-input` component is a replacement for the standard date input. It provides a clean interface for selecting dates and shows detailed selection information.
 
+::: tip
+
+Use the built in parseISO and toISO methods available as part of the [date composable](/features/dates/) to format and parse the date input. Internally, `v-date-input` transforms the model into a plain JS Date object.
+
+:::
+
 ### Props
 
 The `v-date-input` component extends the [v-text-field](/components/text-fields/) and [v-date-picker](/components/date-pickers/) component; and supports all of their props.
@@ -89,6 +95,12 @@ Using the multiple prop with a value of **range**, select 2 dates to select them
 You can move the calendar icon within the input or entirely by utilizing the **prepend-icon** and **prepend-inner-icon** properties.
 
 <ExamplesExample file="v-date-input/prop-prepend-icon" />
+
+#### Display format
+
+You can use the **display-format** prop in conjunction with the [date composable](/features/dates/) to change the displayed format of the date in the input.
+
+<ExamplesExample file="v-date-input/prop-display-format" />
 
 ## Examples
 
