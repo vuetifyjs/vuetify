@@ -33,6 +33,7 @@ export type VDateInputSlots = Omit<VTextFieldSlots, 'default'> & {
 }
 
 export const makeVDateInputProps = propsFactory({
+  displayFormat: [Function, String],
   hideActions: Boolean,
   location: {
     type: String as PropType<StrategyProps['location']>,
@@ -76,6 +77,14 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
     const menu = shallowRef(false)
     const vDateInputRef = ref()
 
+    function format (date: unknown) {
+      if (typeof props.displayFormat === 'function') {
+        return props.displayFormat(date)
+      }
+
+      return adapter.format(date, props.displayFormat ?? 'keyboardDate')
+    }
+
     const display = computed(() => {
       const value = wrapInArray(model.value)
 
@@ -89,12 +98,12 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
         const start = value[0]
         const end = value[value.length - 1]
 
-        return adapter.isValid(start) && adapter.isValid(end)
-          ? `${adapter.format(adapter.date(start), 'keyboardDate')} - ${adapter.format(adapter.date(end), 'keyboardDate')}`
-          : ''
+        if (!adapter.isValid(start) || !adapter.isValid(end)) return ''
+
+        return `${format(adapter.date(start))} - ${format(adapter.date(end))}`
       }
 
-      return adapter.isValid(model.value) ? adapter.format(adapter.date(model.value), 'keyboardDate') : ''
+      return adapter.isValid(model.value) ? format(adapter.date(model.value)) : ''
     })
 
     const isInteractive = computed(() => !props.disabled && !props.readonly)
