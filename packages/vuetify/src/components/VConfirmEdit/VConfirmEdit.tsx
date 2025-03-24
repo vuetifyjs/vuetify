@@ -25,6 +25,7 @@ export type VConfirmEditSlots<T> = {
 
 export const makeVConfirmEditProps = propsFactory({
   modelValue: null,
+  hideActions: Boolean,
   color: String,
   cancelText: {
     type: String,
@@ -118,7 +119,7 @@ export const VConfirmEdit = genericComponent<new <T> (
             })
           }
 
-          { !actionsUsed && actions() }
+          { !props.hideActions && !actionsUsed && actions() }
         </>
       )
     })
