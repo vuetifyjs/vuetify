@@ -10,7 +10,7 @@
 </template>
 
 <script setup>
-  import { computed, shallowRef } from 'vue'
+  import { shallowRef } from 'vue'
   import { useDate } from 'vuetify'
 
   const adapter = useDate()
