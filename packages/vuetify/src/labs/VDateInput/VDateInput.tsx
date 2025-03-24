@@ -38,8 +38,11 @@ export const makeVDateInputProps = propsFactory({
     type: String as PropType<StrategyProps['location']>,
     default: 'bottom start',
   },
+
   ...makeFocusProps(),
-  ...makeVConfirmEditProps(),
+  ...makeVConfirmEditProps({
+    hideActions: true,
+  }),
   ...makeVTextFieldProps({
     placeholder: 'mm/dd/yyyy',
     prependIcon: '$calendar',
