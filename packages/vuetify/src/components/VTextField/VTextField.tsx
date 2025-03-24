@@ -108,7 +108,7 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
       props.active
     ))
     function onFocus () {
-      if (inputRef.value !== document.activeElement && !props.readonly) {
+      if (inputRef.value !== document.activeElement) {
         inputRef.value?.focus()
       }
 
