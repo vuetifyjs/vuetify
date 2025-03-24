@@ -16,12 +16,3 @@
     </v-row>
   </v-container>
 </template>
-
-<style>
-  #input-usage .v-input__prepend-outer,
-  #input-usage .v-input__append-outer,
-  #input-usage .v-input__slot,
-  #input-usage .v-messages {
-    border: 1px dashed rgba(0,0,0, .4);
-  }
-</style>
