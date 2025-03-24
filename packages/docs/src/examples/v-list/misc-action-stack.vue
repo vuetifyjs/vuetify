@@ -5,8 +5,6 @@
 
       <v-toolbar-title>Inbox</v-toolbar-title>
 
-      <v-spacer></v-spacer>
-
       <v-btn icon="mdi-magnify"></v-btn>
 
       <v-btn icon="mdi-checkbox-marked-circle"></v-btn>
