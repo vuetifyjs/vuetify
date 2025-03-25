@@ -4,7 +4,7 @@
 
 // VIconBtn
 $icon-btn-background: rgb(var(--v-theme-surface)) !default;
-$icon-btn-color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity)) !default;
+$icon-btn-color: inherit !default;
 $icon-btn-border-color: settings.$border-color-root !default;
 $icon-btn-border-radius: map.get(settings.$rounded, 'circle') !default;
 $icon-btn-border-style: settings.$border-style-root !default;

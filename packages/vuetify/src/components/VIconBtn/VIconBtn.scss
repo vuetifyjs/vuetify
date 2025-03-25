@@ -6,6 +6,7 @@
   .v-icon-btn {
     @include tools.border($icon-btn-border...);
     @include tools.rounded($icon-btn-border-radius);
+    @include tools.states('.v-icon-btn__overlay');
     @include tools.variant($icon-btn-variants...);
 
     & {
@@ -88,20 +89,17 @@
     width: 100%;
   }
 
-  .v-icon-btn__overlay {
-    background-color: currentColor;
-    border-radius: inherit;
-    opacity: 0;
-    transition: opacity .2s ease-in-out;
-    pointer-events: none;
-
-    @include tools.absolute();
-  }
-
+  .v-icon-btn__overlay,
   .v-icon-btn__underlay {
     border-radius: inherit;
     pointer-events: none;
 
     @include tools.absolute();
+  }
+
+  .v-icon-btn__overlay {
+    background-color: currentColor;
+    opacity: 0;
+    transition: opacity .2s ease-in-out;
   }
 }
