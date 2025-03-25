@@ -68,7 +68,7 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
   setup (props, { emit, slots }) {
     const { t } = useLocale()
     const adapter = useDate()
-    const { mobile } = useDisplay()
+    const { mobile } = useDisplay(props)
     const { isFocused, focus, blur } = useFocus(props)
     const model = useProxiedModel(
       props,
