@@ -27,42 +27,50 @@ export interface BackgroundColorDataGetters {
   backgroundColorStyles: () => CSSProperties
 }
 
+function getColorData (colors: { background?: ColorValue, text?: ColorValue }) {
+  const classes: string[] = []
+  const styles: CSSProperties = {}
+
+  if (colors.background) {
+    if (isCssColor(colors.background)) {
+      styles.backgroundColor = colors.background
+
+      if (!colors.text && isParsableColor(colors.background)) {
+        const backgroundColor = parseColor(colors.background)
+        if (backgroundColor.a == null || backgroundColor.a === 1) {
+          const textColor = getForeground(backgroundColor)
+
+          styles.color = textColor
+          styles.caretColor = textColor
+        }
+      }
+    } else {
+      classes.push(`bg-${colors.background}`)
+    }
+  }
+
+  if (colors.text) {
+    if (isCssColor(colors.text)) {
+      styles.color = colors.text
+      styles.caretColor = colors.text
+    } else {
+      classes.push(`text-${colors.text}`)
+    }
+  }
+
+  return { colorClasses: classes, colorStyles: styles }
+}
+
+function getColorValue <T extends Record<K, ColorValue>, K extends string> (
+  props: T | Ref<ColorValue>,
+  name?: K
+): ColorValue {
+  return isRef(props) ? props.value : (name ? props[name] : null)
+}
+
 // Composables
 export function useColor (colors: Ref<{ background?: ColorValue, text?: ColorValue }>) {
-  return destructComputed(() => {
-    const _colors = colors.value
-    const classes: string[] = []
-    const styles: CSSProperties = {}
-
-    if (_colors.background) {
-      if (isCssColor(_colors.background)) {
-        styles.backgroundColor = _colors.background
-
-        if (!_colors.text && isParsableColor(_colors.background)) {
-          const backgroundColor = parseColor(_colors.background)
-          if (backgroundColor.a == null || backgroundColor.a === 1) {
-            const textColor = getForeground(backgroundColor)
-
-            styles.color = textColor
-            styles.caretColor = textColor
-          }
-        }
-      } else {
-        classes.push(`bg-${_colors.background}`)
-      }
-    }
-
-    if (_colors.text) {
-      if (isCssColor(_colors.text)) {
-        styles.color = _colors.text
-        styles.caretColor = _colors.text
-      } else {
-        classes.push(`text-${_colors.text}`)
-      }
-    }
-
-    return { colorClasses: classes, colorStyles: styles }
-  })
+  return destructComputed(() => getColorData(colors.value))
 }
 
 export function useTextColor (color: Ref<ColorValue>): TextColorData
@@ -71,10 +79,7 @@ export function useTextColor <T extends Record<K, ColorValue>, K extends string>
   props: T | Ref<ColorValue>,
   name?: K
 ): TextColorData {
-  const colors = computed(() => ({
-    text: isRef(props) ? props.value : (name ? props[name] : null),
-  }))
-
+  const colors = computed(() => ({ text: getColorValue(props, name) }))
   const {
     colorClasses: textColorClasses,
     colorStyles: textColorStyles,
@@ -89,10 +94,7 @@ export function useBackgroundColor <T extends Record<K, ColorValue>, K extends s
   props: T | Ref<ColorValue>,
   name?: K
 ): BackgroundColorData {
-  const colors = computed(() => ({
-    background: isRef(props) ? props.value : (name ? props[name] : null),
-  }))
-
+  const colors = computed(() => ({ background: getColorValue(props, name) }))
   const {
     colorClasses: backgroundColorClasses,
     colorStyles: backgroundColorStyles,
@@ -102,40 +104,7 @@ export function useBackgroundColor <T extends Record<K, ColorValue>, K extends s
 }
 
 export function useColorFast (colors: MaybeRefOrGetter<{ background?: ColorValue, text?: ColorValue }>) {
-  return destructComputedGetter(() => {
-    const _colors = toValue(colors)
-    const classes: string[] = []
-    const styles: CSSProperties = {}
-
-    if (_colors.background) {
-      if (isCssColor(_colors.background)) {
-        styles.backgroundColor = _colors.background
-
-        if (!_colors.text && isParsableColor(_colors.background)) {
-          const backgroundColor = parseColor(_colors.background)
-          if (backgroundColor.a == null || backgroundColor.a === 1) {
-            const textColor = getForeground(backgroundColor)
-
-            styles.color = textColor
-            styles.caretColor = textColor
-          }
-        }
-      } else {
-        classes.push(`bg-${_colors.background}`)
-      }
-    }
-
-    if (_colors.text) {
-      if (isCssColor(_colors.text)) {
-        styles.color = _colors.text
-        styles.caretColor = _colors.text
-      } else {
-        classes.push(`text-${_colors.text}`)
-      }
-    }
-
-    return { colorClasses: classes, colorStyles: styles }
-  })
+  return destructComputedGetter(() => getColorData(toValue(colors)))
 }
 
 export function useTextColorFast (color: Ref<ColorValue>): TextColorDataGetters
@@ -147,9 +116,7 @@ export function useTextColorFast <T extends Record<K, ColorValue>, K extends str
   const {
     colorClasses: textColorClasses,
     colorStyles: textColorStyles,
-  } = useColorFast(() => ({
-    text: isRef(props) ? props.value : (name ? props[name] : null),
-  }))
+  } = useColorFast(() => ({ text: getColorValue(props, name) }))
 
   return { textColorClasses, textColorStyles }
 }
@@ -163,9 +130,7 @@ export function useBackgroundColorFast <T extends Record<K, ColorValue>, K exten
   const {
     colorClasses: backgroundColorClasses,
     colorStyles: backgroundColorStyles,
-  } = useColorFast(() => ({
-    background: isRef(props) ? props.value : (name ? props[name] : null),
-  }))
+  } = useColorFast(() => ({ background: getColorValue(props, name) }))
 
   return { backgroundColorClasses, backgroundColorStyles }
 }
