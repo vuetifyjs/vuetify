@@ -86,7 +86,11 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
 
     const { colorClasses, colorStyles, variantClasses } = useVariantFast(() => ({
       color: props.disabled ? undefined
-      : isActive.value ? props.activeColor ?? props.color
+      // Use an inline fallback as opposed to setting a default color
+      // because non-toggle buttons are default flat whereas toggle
+      // buttons are default tonal and active flat. The exact use
+      // case for this is a toggle button with no active color.
+      : isActive.value !== undefined && isActive.value ? props.activeColor ?? props.color ?? 'surface-variant'
       : props.color,
       variant: isActive.value === undefined ? props.variant
       : isActive.value ? props.activeVariant ?? props.variant
@@ -97,7 +101,7 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
       if (
         props.disabled ||
         props.readonly ||
-        typeof isActive.value !== 'boolean' ||
+        isActive.value === undefined ||
         (props.tag === 'a' && attrs.href)
       ) return
 
