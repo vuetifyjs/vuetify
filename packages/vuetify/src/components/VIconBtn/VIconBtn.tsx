@@ -14,10 +14,10 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
+import { genOverlays, makeVariantProps, useVariantFast } from '@/composables/variant'
 
 // Utilities
-import { computed, toDisplayString, toRefs } from 'vue'
+import { toDisplayString } from 'vue'
 import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -77,7 +77,6 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
   },
 
   setup (props, { attrs, slots }) {
-    const { activeColor, color } = toRefs(props)
     const isActive = useProxiedModel(props, 'active')
 
     const { themeClasses } = provideTheme(props)
@@ -85,37 +84,24 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props)
 
-    const isToggleBtn = computed(() => typeof isActive.value === 'boolean')
-
-    const computedColor = computed(() => {
-      if (props.disabled) return undefined
-      if (!isToggleBtn.value) return color.value
-
+    const { colorClasses, colorStyles, variantClasses } = useVariantFast(() => ({
+      color: props.disabled ? undefined
       // Use an inline fallback as opposed to setting a default color
       // because non-toggle buttons are default flat whereas toggle
       // buttons are default tonal and active flat. The exact use
       // case for this is a toggle button with no active color.
-      return isActive.value ? activeColor.value ?? props.color ?? 'surface-variant' : color.value
-    })
-
-    const variantProps = computed(() => ({
-      color: computedColor.value,
-      variant: !isToggleBtn.value ? props.variant : isActive.value
-        ? props.activeVariant ?? props.variant
-        : props.baseVariant ?? props.variant,
+      : isActive.value !== undefined && isActive.value ? props.activeColor ?? props.color ?? 'surface-variant'
+      : props.color,
+      variant: isActive.value === undefined ? props.variant
+      : isActive.value ? props.activeVariant ?? props.variant
+      : props.baseVariant ?? props.variant,
     }))
-
-    const { colorClasses, colorStyles, variantClasses } = useVariant(variantProps)
-
-    const computedIcon = computed(() => {
-      return isActive.value && props.activeIcon ? props.activeIcon : props.icon
-    })
 
     function onClick () {
       if (
         props.disabled ||
         props.readonly ||
-        !isToggleBtn.value ||
+        isActive.value === undefined ||
         (props.tag === 'a' && attrs.href)
       ) return
 
@@ -124,6 +110,7 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
 
     useRender(() => {
       const hasIcon = !!(props.icon || props.activeIcon)
+      const icon = isActive.value && props.activeIcon ? props.activeIcon : props.icon
 
       return (
         <props.tag
@@ -136,11 +123,11 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
               'v-icon-btn--loading': props.loading,
             },
             themeClasses.value,
-            colorClasses.value,
+            colorClasses(),
             borderClasses.value,
             elevationClasses.value,
             roundedClasses.value,
-            variantClasses.value,
+            variantClasses(),
             props.class,
           ]}
           style={[
@@ -149,7 +136,7 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
               '--v-icon-btn-height': convertToUnit(props.height ?? props.size),
               '--v-icon-btn-width': convertToUnit(props.width ?? props.size),
             },
-            colorStyles.value,
+            colorStyles(),
             props.style,
           ]}
           tabindex={ props.disabled || props.readonly ? -1 : 0 }
@@ -161,7 +148,7 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
             { (!slots.default && hasIcon) ? (
               <VIcon
                 key="content-icon"
-                icon={ computedIcon.value }
+                icon={ icon }
                 opacity={ props.opacity }
                 color={ props.iconColor }
               />
@@ -171,7 +158,7 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
                 disabled={ !hasIcon }
                 defaults={{
                   VIcon: {
-                    icon: computedIcon.value,
+                    icon,
                     opacity: props.opacity,
                     color: props.iconColor,
                   },
