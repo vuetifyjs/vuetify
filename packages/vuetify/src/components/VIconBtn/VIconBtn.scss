@@ -101,5 +101,9 @@
     background-color: currentColor;
     opacity: 0;
     transition: opacity .2s ease-in-out;
+
+    .v-icon-btn--active:not(:hover) & {
+      --v-activated-opacity: 0;
+    }
   }
 }

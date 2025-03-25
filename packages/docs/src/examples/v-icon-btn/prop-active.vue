@@ -1,5 +1,5 @@
 <template>
-  <v-toolbar class="px-3 mx-auto" rounded="lg" title="Toolbar">
+  <v-toolbar class="px-3 mx-auto" rounded="pill" title="Toolbar">
     <template v-slot:append>
       <v-icon-btn :active="menu" active-color="surface-variant" icon="mdi-dots-vertical">
         <v-icon></v-icon>
