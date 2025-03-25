@@ -129,6 +129,14 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
 
       if (!e.dataTransfer?.files?.length || !inputRef.value) return
 
+      const acceptType = inputRef.value?.accept
+
+      let files = Array.from(e.dataTransfer?.files ?? [])
+
+      if (acceptType) {
+        files = files.filter((file) => file.type === acceptType)
+      }
+
       const dataTransfer = new DataTransfer()
 
       for (const file of e.dataTransfer.files) {
@@ -152,6 +160,16 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
       inputRef.value.value = ''
     }
 
+    function onInputChange (e: Event) {
+      if (!e.target) return
+
+      const target = e.target as HTMLInputElement
+      const acceptType = inputRef.value?.accept
+
+      model.value = Array.from(target.files ?? [])
+        .filter((file) => file.type === acceptType)
+    }
+
     useRender(() => {
       const hasTitle = !!(slots.title || props.title)
       const hasIcon = !!(slots.icon || props.icon)
@@ -167,12 +185,7 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
           disabled={ props.disabled }
           multiple={ props.multiple }
           name={ props.name }
-          onChange={ e => {
-            if (!e.target) return
-
-            const target = e.target as HTMLInputElement
-            model.value = [...target.files ?? []]
-          }}
+          onChange={ onInputChange }
           { ...inputAttrs }
         />
       )
