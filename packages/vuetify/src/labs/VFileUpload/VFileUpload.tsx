@@ -134,7 +134,7 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
       let files = Array.from(e.dataTransfer?.files ?? [])
 
       if (acceptType) {
-        files = files.filter((file) => file.type === acceptType)
+        files = files.filter(file => file.type === acceptType)
       }
 
       const dataTransfer = new DataTransfer()
@@ -167,7 +167,7 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
       const acceptType = inputRef.value?.accept
 
       model.value = Array.from(target.files ?? [])
-        .filter((file) => file.type === acceptType)
+        .filter(file => file.type === acceptType)
     }
 
     useRender(() => {
