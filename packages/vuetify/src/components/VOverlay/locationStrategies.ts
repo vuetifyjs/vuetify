@@ -145,13 +145,13 @@ function getIntrinsicSize (el: HTMLElement, isRtl: boolean) {
   return contentBox
 }
 
-// Prevents infinite loop
-let retries = 0
-// Track the last position
-let previousX = 0
-let previousY = 0
-
 function connectedLocationStrategy (data: LocationStrategyData, props: StrategyProps, contentStyles: Ref<Record<string, string>>) {
+  // Prevents infinite loop
+  let retries = 0
+  // Track the last position
+  let previousX = 0
+  let previousY = 0
+
   const activatorFixed = Array.isArray(data.target.value) || isFixedPosition(data.target.value)
   if (activatorFixed) {
     Object.assign(contentStyles.value, {
@@ -204,7 +204,6 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
 
   let observe = false
   const observer = new ResizeObserver(() => {
-    retries += 1
     if (observe) updateLocation()
   })
 
@@ -227,6 +226,7 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
 
   // eslint-disable-next-line max-statements
   function updateLocation () {
+    retries++
     observe = false
     requestAnimationFrame(() => observe = true)
 
@@ -313,7 +313,7 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
     // Make the retry max x2 to get the correct position
     // Addition happens on resizeObserver see line 207
     // eslint-disable-next-line no-unmodified-loop-condition
-    while (retries < 2) {
+    while (retries < 3) {
       const { x: _x, y: _y, overflows } = checkOverflow(placement)
 
       x += _x
