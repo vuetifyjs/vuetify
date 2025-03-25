@@ -75,7 +75,7 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
     'update:active': (value: boolean) => true,
   },
 
-  setup (props, { slots, emit }) {
+  setup (props, { attrs, slots }) {
     const { activeColor, color } = toRefs(props)
     const isActive = useProxiedModel(props, 'active')
 
@@ -108,7 +108,8 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
       if (
         props.disabled ||
         props.readonly ||
-        typeof isActive.value !== 'boolean'
+        typeof isActive.value !== 'boolean' ||
+        (props.tag === 'a' && attrs.href)
       ) return
 
       isActive.value = !isActive.value
