@@ -78,7 +78,6 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
     const menu = shallowRef(false)
     const isEditingInput = shallowRef(false)
     const vDateInputRef = ref()
-    let editingTimer: number | undefined = undefined
 
     const display = computed(() => {
       const value = wrapInArray(model.value)
@@ -102,7 +101,9 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
     })
 
     const inputmode = computed(() => {
-      if (!mobile.value || isEditingInput.value) return undefined
+      if (!mobile.value) return undefined
+      if (isEditingInput.value) return 'text'
+
       return 'none'
     })
 
@@ -113,18 +114,10 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
 
     const isInteractive = computed(() => !props.disabled)
 
-    // Set up a watcher to enable editing mode when menu opens on mobile
-    watch(menu, (isOpen) => {
-      // Clear any existing timer
-      if (editingTimer) {
-        window.clearTimeout(editingTimer)
-        editingTimer = undefined
-      }
+    watch(menu, val => {
+      if (val) return
 
-      if (!isOpen) {
-        // Reset editing state when menu closes
-        isEditingInput.value = false
-      }
+      isEditingInput.value = false
     })
 
     function onKeydown (e: KeyboardEvent) {
@@ -146,15 +139,6 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
       if (menu.value && mobile.value) {
         // On second click (menu is already open), enable editing
         isEditingInput.value = true
-
-        // Need to prevent immediate focus and defer it slightly
-        requestAnimationFrame(() => {
-          if (vDateInputRef.value?.$el) {
-            // Move focus to the menu container to prevent auto-focus on input
-            const menuElement = vDateInputRef.value.$el.querySelector('.v-menu__content')
-            if (menuElement) menuElement.focus()
-          }
-        })
       } else {
         // First click, just open the menu
         menu.value = true
@@ -173,14 +157,18 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
     }
 
     function onUpdateMenuModel (isMenuOpen: boolean) {
-      if (!isMenuOpen) {
-        isEditingInput.value = false
+      if (isMenuOpen) return
 
-        // Clear any existing timer when menu closes
-        if (editingTimer) {
-          window.clearTimeout(editingTimer)
-          editingTimer = undefined
-        }
+      isEditingInput.value = false
+    }
+
+    function onBlur () {
+      blur()
+
+      // When in mobile mode and editing is done (due to keyboard dismissal), close the menu
+      if (mobile.value && isEditingInput.value && !isFocused.value) {
+        menu.value = false
+        isEditingInput.value = false
       }
     }
 
@@ -206,7 +194,7 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
           onKeydown={ isInteractive.value ? onKeydown : undefined }
           focused={ menu.value || isFocused.value }
           onFocus={ focus }
-          onBlur={ blur }
+          onBlur={ onBlur }
           onClick:control={ isInteractive.value ? onClick : undefined }
           onClick:prepend={ isInteractive.value ? onClick : undefined }
           onUpdate:modelValue={ onUpdateModel }
