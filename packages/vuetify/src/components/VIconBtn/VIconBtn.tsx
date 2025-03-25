@@ -44,6 +44,8 @@ export const makeVIconBtnProps = propsFactory({
     default: 'tonal',
   },
   disabled: Boolean,
+  height: [Number, String],
+  width: [Number, String],
   hideOverlay: Boolean,
   icon: [String, Function, Object] as PropType<IconValue>,
   iconColor: String,
@@ -59,7 +61,6 @@ export const makeVIconBtnProps = propsFactory({
 
   ...makeBorderProps(),
   ...makeComponentProps(),
-  ...pick(makeDimensionProps(), ['height', 'width']),
   ...makeElevationProps(),
   ...makeRoundedProps(),
   ...makeTagProps({ tag: 'button' }),
@@ -82,7 +83,6 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
 
     const { themeClasses } = provideTheme(props)
     const { borderClasses } = useBorder(props)
-    const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props)
 
@@ -140,11 +140,10 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
           style={[
             {
               '--v-icon-btn-rotate': convertToUnit(props.rotate, 'deg'),
-              '--v-icon-btn-height': props.size ? convertToUnit(props.size) : undefined,
-              '--v-icon-btn-width': props.size ? convertToUnit(props.size) : undefined,
+              '--v-icon-btn-height': convertToUnit(props.height ?? props.size),
+              '--v-icon-btn-width': convertToUnit(props.width ?? props.size),
             },
             colorStyles.value,
-            dimensionStyles.value,
             props.style,
           ]}
           tabindex={ props.disabled || props.readonly ? -1 : 0 }
