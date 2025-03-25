@@ -1,5 +1,16 @@
 // Utilities
-import { capitalize, Comment, computed, Fragment, isVNode, reactive, readonly, shallowRef, toRefs, unref, watchEffect } from 'vue'
+import {
+  capitalize,
+  Comment,
+  Fragment,
+  isVNode,
+  reactive,
+  readonly,
+  shallowRef,
+  toRefs,
+  unref,
+  watchEffect,
+} from 'vue'
 import { IN_BROWSER } from '@/util/globals'
 
 // Types
@@ -588,13 +599,33 @@ type _NotAUnion<T, U> = U extends any ? [T] extends [U] ? unknown : never : neve
 export function destructComputed<T extends object> (getter: ComputedGetter<T & NotAUnion<T>>): ToRefs<T>
 export function destructComputed<T extends object> (getter: ComputedGetter<T>) {
   const refs = reactive({}) as T
-  const base = computed(getter)
   watchEffect(() => {
-    for (const key in base.value) {
-      refs[key] = base.value[key]
+    const base = getter()
+    for (const key in base) {
+      refs[key] = base[key]
     }
   }, { flush: 'sync' })
   return toRefs(refs)
+}
+
+type ToGetters<T = any> = {
+  [K in keyof T]: () => T[K]
+}
+
+export function destructComputedGetter<T extends object> (getter: ComputedGetter<T & NotAUnion<T>>): ToGetters<T>
+export function destructComputedGetter<T extends object> (getter: ComputedGetter<T>) {
+  const refs = reactive({}) as T
+  watchEffect(() => {
+    const base = getter()
+    for (const key in base) {
+      refs[key] = base[key]
+    }
+  }, { flush: 'sync' })
+  const obj = {} as ToGetters<T>
+  for (const key in refs) {
+    obj[key] = () => refs[key]
+  }
+  return obj
 }
 
 /** Array.includes but value can be any type */
