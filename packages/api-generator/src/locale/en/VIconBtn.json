@@ -4,6 +4,7 @@
     "activeIcon": "When active is a boolean, this icon is used when active is true.",
     "activeVariant": "When active is a boolean, this variant is used when active is true.",
     "baseVariant": "When active is a boolean, this variant is used when active is false.",
+    "hideOverlay": "Hides overlay from being displayed when active or focused.",
     "iconColor": "Explicit color applied to the icon.",
     "rotate": "The rotation of the icon in degrees."
   }

@@ -44,6 +44,7 @@ export const makeVIconBtnProps = propsFactory({
     default: 'tonal',
   },
   disabled: Boolean,
+  hideOverlay: Boolean,
   icon: [String, Function, Object] as PropType<IconValue>,
   iconColor: String,
   loading: Boolean,
@@ -149,7 +150,7 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
           tabindex={ props.disabled || props.readonly ? -1 : 0 }
           onClick={ onClick }
         >
-          { genOverlays(true, 'v-icon-btn') }
+          { genOverlays(!props.hideOverlay, 'v-icon-btn') }
 
           <div class="v-icon-btn__content" data-no-activator="">
             { (!slots.default && hasIcon) ? (

@@ -36,6 +36,7 @@
           color="#f9dedc"
           icon="mdi-microphone-off"
           size="48"
+          hide-overlay
           v-ripple
           v-tooltip:top="{
             text: mic ? 'Turn off microphone' : 'Turn on microphone',
@@ -61,6 +62,7 @@
           active-icon="mdi-chevron-down"
           icon="mdi-chevron-up"
           size="48"
+          hide-overlay
           v-ripple
         ></v-icon-btn>
 
