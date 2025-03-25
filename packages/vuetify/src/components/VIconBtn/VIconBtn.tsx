@@ -93,7 +93,7 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
 
     const variantProps = computed(() => ({
       color: computedColor.value,
-      variant: typeof isActive.value === 'boolean' && isActive.value
+      variant: isActive.value === undefined ? props.variant : isActive.value
         ? props.activeVariant ?? props.variant
         : props.baseVariant ?? props.variant,
     }))
