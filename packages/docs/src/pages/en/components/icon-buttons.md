@@ -52,12 +52,18 @@ The `v-icon-btn` component is a lightweight reusable button that displays icons 
 
 ### Using with vue-router
 
-The `v-icon-btn` component does not have built in support for vue-router. The following example demonstrates how to use the `v-icon-btn` component with the `v-router-link` component:
+The `v-icon-btn` component does not have built in support for vue-router. The following example demonstrates how to use the `v-icon-btn` component with the `router-link` component:
 
 ```html
 <template>
-  <RouterLink to="/path" custom v-slot="{ navigate }">
-    <v-icon-btn icon="$vuetify" @click="navigate" />
+  <RouterLink v-slot="{ navigate, isActive }" to="/page1" custom>
+    <v-icon-btn
+      :active="isActive"
+      color="primary"
+      icon="$vuetify"
+      tag="a"
+      @click="navigate"
+    />
   </RouterLink>
 </template>
 ```
