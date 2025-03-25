@@ -311,7 +311,7 @@ export {
   mdiPencil,
   mdiPhone,
   mdiPhoneInTalk,
-  mdiPhoneOutline,
+  mdiPhoneHangupOutline,
   mdiPictureInPictureBottomRight,
   mdiPin,
   mdiPinOff,

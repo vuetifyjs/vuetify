@@ -7,8 +7,9 @@
             <v-icon-btn
               :rotate="isActive ? 180 : 0"
               icon="$dropdown"
-              opacity="var(--v-medium-emphasis-opacity)"
               size="16"
+              variant="plain"
+              hide-overlay
             ></v-icon-btn>
           </template>
         </v-btn>
