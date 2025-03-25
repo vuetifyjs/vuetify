@@ -91,7 +91,7 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
       if (props.disabled) return undefined
       if (!isToggleBtn.value) return color.value
 
-      return isActive.value ? activeColor.value : color.value
+      return isActive.value ? activeColor.value ?? props.color : color.value
     })
 
     const variantProps = computed(() => ({
