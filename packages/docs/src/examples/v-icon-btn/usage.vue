@@ -8,52 +8,20 @@
     <div class="text-center">
       <v-icon-btn v-bind="props"></v-icon-btn>
     </div>
-
-    <template v-slot:configuration>
-      <!--  -->
-    </template>
   </ExamplesUsageExample>
 </template>
 
 <script setup>
-  const variants = ['outlined', 'tonal', 'text', 'plain']
+  const variants = ['outlined', 'tonal', 'flat', 'text', 'plain']
   const name = 'v-icon-btn'
-  const model = ref('default')
-  const icon = ref(false)
+  const model = shallowRef('default')
   const options = [...variants]
-  const stacked = ref(false)
-  const prepend = ref(false)
-  const append = ref(false)
   const props = computed(() => {
     return {
       icon: '$vuetify',
+      variant: model.value !== 'default' ? model.value : undefined,
     }
   })
-
-  watch(stacked, val => {
-    if (val) {
-      prepend.value = true
-      append.value = false
-      icon.value = false
-    }
-  })
-
-  watch(prepend, val => {
-    if (val) {
-      icon.value = false
-
-      if (stacked.value) (append.value = false)
-    }
-  })
-
-  watch(append, val => {
-    if (val) {
-      icon.value = false
-
-      if (stacked.value) (prepend.value = false)
-    }
-  })
-  watch(icon, val => val && (prepend.value = false, append.value = false, stacked.value = false))
 
   const slots = computed(() => {
     return ``
