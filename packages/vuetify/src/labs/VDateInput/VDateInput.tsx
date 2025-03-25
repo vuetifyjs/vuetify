@@ -107,12 +107,8 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
       return 'none'
     })
 
-    const isReadonly = computed(() => {
-      if (mobile.value && isEditingInput.value) return false
-      return props.readonly
-    })
-
-    const isInteractive = computed(() => !props.disabled)
+    const isInteractive = computed(() => !props.disabled && !props.readonly)
+    const isReadonly = computed(() => !(mobile.value && isEditingInput.value) && props.readonly)
 
     watch(menu, val => {
       if (val) return
@@ -125,10 +121,12 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
 
       if (!menu.value || !isFocused.value) {
         menu.value = true
+
         return
       }
 
       const target = e.target as HTMLInputElement
+
       model.value = target.value === '' ? null : target.value
     }
 
@@ -137,10 +135,8 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
       e.stopPropagation()
 
       if (menu.value && mobile.value) {
-        // On second click (menu is already open), enable editing
         isEditingInput.value = true
       } else {
-        // First click, just open the menu
         menu.value = true
       }
     }
@@ -182,12 +178,7 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
           ref={ vDateInputRef }
           { ...textFieldProps }
           class={ props.class }
-          style={{
-            ...(props.style as Record<string, any>),
-            WebkitTouchCallout: 'none',
-            WebkitUserSelect: 'none',
-            userSelect: 'none',
-          }}
+          style={ props.style }
           modelValue={ display.value }
           inputmode={ inputmode.value }
           readonly={ isReadonly.value }
