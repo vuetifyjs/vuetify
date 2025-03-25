@@ -93,3 +93,9 @@ The following are a collection of examples that demonstrate more advanced and re
 The `v-icon-btn` component is perfect for closing dialogs or other components.
 
 <ExamplesExample file="v-icon-btn/misc-dialog" />
+
+#### Video controls
+
+The following example demonstrates how flexible the `v-icon-btn` component is by replicating the Google Meet video controls.
+
+<ExamplesExample file="v-icon-btn/misc-video-controls" />
