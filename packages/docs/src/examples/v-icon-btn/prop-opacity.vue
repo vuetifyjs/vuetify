@@ -1,17 +1,27 @@
 <template>
-  <v-toolbar class="px-3" title="Toolbar">
-    <template #append>
-      <div class="d-flex ga-2">
-        <v-icon-btn icon="mdi-magnify" :opacity="dialog ? 1 : 0.32">
-          <v-icon  />
+  <v-text-field
+    class="mx-auto"
+    hide-details="auto"
+    label="Search"
+    max-width="200"
+    variant="outlined"
+  >
+    <template v-slot:append-inner>
+      <v-icon-btn
+        :opacity="dialog ? 1 : 0.32"
+        icon="mdi-magnify"
+        @click.stop
+        @mousedown.stop
+      >
+        <v-icon></v-icon>
 
         <v-dialog v-model="dialog" activator="parent" width="400">
           <v-card title="Find in page">
             <v-card-text>
-              <v-text-field label="Search" hide-details="auto" />
+              <v-text-field hide-details="auto" label="Search"></v-text-field>
             </v-card-text>
 
-            <template #actions>
+            <template v-slot:actions>
               <v-btn text="Cancel" variant="plain" @click="dialog = false"></v-btn>
 
               <v-btn text="Search" @click="dialog = false"></v-btn>
@@ -19,14 +29,22 @@
           </v-card>
         </v-dialog>
       </v-icon-btn>
-      </div>
     </template>
-  </v-toolbar>
+  </v-text-field>
 </template>
 
 <script setup>
   import { shallowRef } from 'vue'
 
-  const menu = shallowRef(false)
   const dialog = shallowRef(false)
+</script>
+
+<script>
+  export default {
+    data () {
+      return {
+        dialog: false,
+      }
+    },
+  }
 </script>

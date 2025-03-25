@@ -21,7 +21,6 @@
   const model = ref('default')
   const icon = ref(false)
   const options = [...variants]
-  const block = ref(false)
   const stacked = ref(false)
   const prepend = ref(false)
   const append = ref(false)

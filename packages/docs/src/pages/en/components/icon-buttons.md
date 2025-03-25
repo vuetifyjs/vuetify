@@ -2,7 +2,7 @@
 emphasized: true
 meta:
   nav: Icon buttons
-  title: Icon component
+  title: Icon button component
   description: The icon component is compatible with multiple common icon fonts such as Material Design Icons, Font Awesome and more.
   keywords: icons, vuetify icon component, vue icon component
 related:
@@ -13,6 +13,7 @@ features:
   github: /components/VIconBtn/
   label: 'C: VIconBtn'
   report: true
+  spec: https://m3.material.io/components/icon-buttons/
 ---
 
 # Icon Buttons
@@ -49,15 +50,21 @@ The recommended placement of elements inside of `v-icon-btn` is:
 
 The `v-icon-btn` component is a lightweight reusable button that displays icons and text in various states.
 
+### Using with vue-router
+
+The `v-icon-btn` component does not have built in support for vue-router. The following example demonstrates how to use the `v-icon-btn` component with the `v-router-link` component:
+
+```html
+<template>
+  <RouterLink to="/path" custom v-slot="{ navigate }">
+    <v-icon-btn icon="$vuetify" @click="navigate" />
+  </RouterLink>
+</template>
+```
+
 ### Props
 
 The `v-icon-btn` supports various stylistic props to customize the appearance of the button and its icon.
-
-::: tip
-
-The `v-icon-btn` component does not have built in support for vue-router
-
-:::
 
 #### Active
 
@@ -77,7 +84,11 @@ The **rotate** prop is used to control the rotation of the internal icon. This i
 
 <ExamplesExample file="v-icon-btn/prop-rotate" />
 
-#### Misc
+### Examples
+
+The following are a collection of examples that demonstrate more advanced and real world use of the `v-icon-btn` component.
+
+#### Dialog
 
 The `v-icon-btn` component is perfect for closing dialogs or other components.
 
