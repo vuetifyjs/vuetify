@@ -1,5 +1,8 @@
 {
   "props": {
+    "active": "When undefined (default), the component utilizes its default variant, otherwise it will use the activeVariant if active is true, or the baseVariant if active is false.",
+    "activeVariant": "When active is a boolean, this variant is used when active is true.",
+    "baseVariant": "When active is a boolean, this variant is used when active is false.",
     "iconColor": "Explicit color applied to the icon.",
     "rotate": "The rotation of the icon in degrees."
   }

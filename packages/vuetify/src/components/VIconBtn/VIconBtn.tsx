@@ -10,6 +10,7 @@ import { VProgressCircular } from '@/components/VProgressCircular'
 import { makeBorderProps, useBorder } from '@/composables/border'
 import { makeComponentProps } from '@/composables/component'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
+import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
@@ -30,9 +31,16 @@ export type VIconBtnSlots = {
 }
 
 export const makeVIconBtnProps = propsFactory({
-  active: Boolean,
+  active: {
+    type: Boolean,
+    default: undefined,
+  },
   activeColor: String,
   activeVariant: String as PropType<Variant>,
+  baseVariant: {
+    type: String as PropType<Variant>,
+    default: 'tonal',
+  },
   disabled: Boolean,
   icon: [String, Function, Object] as PropType<IconValue>,
   iconColor: String,
@@ -52,7 +60,7 @@ export const makeVIconBtnProps = propsFactory({
   ...makeRoundedProps(),
   ...makeTagProps({ tag: 'button' }),
   ...makeThemeProps(),
-  ...makeVariantProps({ variant: 'text' } as const),
+  ...makeVariantProps({ variant: 'flat' } as const),
 }, 'VIconBtn')
 
 export const VIconBtn = genericComponent<VIconBtnSlots>()({
@@ -60,20 +68,43 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
 
   props: makeVIconBtnProps(),
 
-  setup (props, { slots }) {
-    const { active, activeColor, color } = toRefs(props)
+  emits: {
+    'update:active': (value: boolean) => true,
+  },
+
+  setup (props, { slots, emit }) {
+    const { activeColor, color } = toRefs(props)
+    const isActive = useProxiedModel(props, 'active')
 
     const { themeClasses } = provideTheme(props)
     const { borderClasses } = useBorder(props)
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props)
 
-    const computedColor = computed(() => active.value ? activeColor.value ?? color.value : color.value)
+    const computedColor = computed(() => {
+      if (props.disabled) return undefined
+
+      return isActive.value ? activeColor.value ?? color.value : color.value
+    })
+
     const variantProps = computed(() => ({
       color: computedColor.value,
-      variant: active.value ? props.activeVariant ?? props.variant : props.variant,
+      variant: typeof isActive.value === 'boolean' && isActive.value
+        ? props.activeVariant ?? props.variant
+        : props.baseVariant ?? props.variant,
     }))
+
     const { colorClasses, colorStyles, variantClasses } = useVariant(variantProps)
+
+    function onClick () {
+      if (
+        props.disabled ||
+        props.readonly ||
+        typeof isActive.value !== 'boolean'
+      ) return
+
+      isActive.value = !isActive.value
+    }
 
     useRender(() => {
       const hasIcon = !!(props.icon)
@@ -83,6 +114,7 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
           class={[
             {
               'v-icon-btn': true,
+              'v-icon-btn--active': isActive.value,
               'v-icon-btn--disabled': props.disabled,
               'v-icon-btn--readonly': props.readonly,
               'v-icon-btn--loading': props.loading,
@@ -105,6 +137,7 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
             props.style,
           ]}
           tabindex={ props.disabled || props.readonly ? -1 : 0 }
+          onClick={ onClick }
         >
           { genOverlays(true, 'v-icon-btn') }
 
