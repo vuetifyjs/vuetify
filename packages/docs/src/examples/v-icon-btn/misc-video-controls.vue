@@ -5,13 +5,13 @@
       color="surface-light"
       rounded="pill"
     >
-      <v-card
+      <v-sheet
         :rounded="!mic ? 'lg' : 'xl'"
         class="overflow-visible d-flex align-center"
-        color="surface-variant"
+        color="surface"
         height="48"
-        variant="tonal"
         width="88"
+        flat
       >
         <v-icon-btn
           v-model:active="micOptions"
@@ -22,7 +22,7 @@
           active-icon="mdi-chevron-down"
           icon="mdi-chevron-up"
           size="48"
-          v-ripple
+          hide-overlay
         ></v-icon-btn>
 
         <v-icon-btn
@@ -36,18 +36,17 @@
           color="#f9dedc"
           icon="mdi-microphone-off"
           size="48"
-          hide-overlay
           v-ripple
         ></v-icon-btn>
-      </v-card>
+      </v-sheet>
 
-      <v-card
+      <v-sheet
         :rounded="!video ? 'lg' : 'xl'"
         class="overflow-visible d-flex align-center"
-        color="surface-variant"
+        color="surface"
         height="48"
-        variant="tonal"
         width="88"
+        flat
       >
         <v-icon-btn
           v-model:active="videoOptions"
@@ -58,7 +57,7 @@
           active-icon="mdi-chevron-down"
           icon="mdi-chevron-up"
           size="48"
-          v-ripple
+          hide-overlay
         ></v-icon-btn>
 
         <v-icon-btn
@@ -72,10 +71,8 @@
           color="#f9dedc"
           icon="mdi-video-off"
           size="48"
-          hide-overlay
-          v-ripple
         ></v-icon-btn>
-      </v-card>
+      </v-sheet>
 
       <v-icon-btn
         v-model:active="caption"
@@ -87,8 +84,6 @@
         active-variant="flat"
         height="48"
         icon="mdi-closed-caption-outline"
-        hide-overlay
-        v-ripple
       ></v-icon-btn>
 
       <v-icon-btn
@@ -98,21 +93,19 @@
         :width="emoji ? 56 : 48"
         active-color="#9bbbef"
         active-icon="mdi-emoticon"
-        active-variant="flat"
-        base-variant="tonal"
         height="48"
         icon="mdi-emoticon-outline"
-        hide-overlay
-        v-ripple
       ></v-icon-btn>
 
       <v-icon-btn
-        base-variant="tonal"
-        class="mx-1"
-        color="#d1d1d1"
+        v-model:active="share"
+        :class="!share ? 'mx-1' : undefined"
+        :rounded="!share ? 'circle' : 'lg'"
+        :width="share ? 56 : 48"
+        active-color="#9bbbef"
+        active-icon="mdi-arrow-up-bold-box"
+        height="48"
         icon="mdi-arrow-up-bold-box-outline"
-        size="48"
-        v-ripple
         @click="onClick"
       ></v-icon-btn>
 
@@ -125,27 +118,64 @@
         active-icon="mdi-hand-back-right"
         height="48"
         icon="mdi-hand-back-right-outline"
-        hide-overlay
-        v-ripple
       ></v-icon-btn>
 
       <v-icon-btn
-        color="#d1d1d1"
         height="48"
         icon="mdi-dots-vertical"
         rounded="xl"
-        hide-overlay
-        v-ripple
-      ></v-icon-btn>
+        variant="tonal"
+      >
+        <v-icon></v-icon>
+
+        <v-menu activator="parent" location="top end" offset="4">
+          <v-list rounded="lg" slim>
+            <v-list-item
+              prepend-icon="mdi-radiobox-marked"
+              title="Manage recording"
+              link
+            ></v-list-item>
+
+            <v-divider class="my-2"></v-divider>
+
+            <v-list-item
+              prepend-icon="mdi-view-grid-outline"
+              title="Change layout"
+              link
+            ></v-list-item>
+
+            <v-list-item
+              prepend-icon="mdi-fullscreen"
+              title="Full screen"
+              link
+            ></v-list-item>
+
+            <v-list-item
+              prepend-icon="mdi-share-variant-outline"
+              title="Share screen"
+              link
+            ></v-list-item>
+
+            <v-divider class="my-2"></v-divider>
+
+            <v-list-item
+              prepend-icon="mdi-cog-outline"
+              title="Settings"
+              link
+            ></v-list-item>
+          </v-list>
+        </v-menu>
+      </v-icon-btn>
 
       <v-icon-btn
+        v-model:active="hangup"
+        active-variant="outlined"
+        base-variant="flat"
         color="error"
         height="48"
         icon="mdi-phone-hangup-outline"
         rounded="xl"
         width="72"
-        hide-overlay
-        v-ripple
       ></v-icon-btn>
     </v-sheet>
   </v-container>
@@ -156,14 +186,16 @@
 
   const caption = shallowRef(false)
   const emoji = shallowRef(false)
-  const raised = shallowRef(false)
+  const hangup = shallowRef(false)
   const mic = shallowRef(true)
   const micOptions = shallowRef(false)
+  const raised = shallowRef(false)
+  const share = shallowRef(false)
   const video = shallowRef(true)
   const videoOptions = shallowRef(false)
 
   function onClick () {
-    alert('Sharing your screen')
+    console.log('Sharing your screen')
   }
 </script>
 
@@ -174,6 +206,7 @@
         caption: false,
         emoji: false,
         raised: false,
+        share: false,
         mic: true,
         micOptions: false,
         video: true,
@@ -182,7 +215,7 @@
     },
     methods: {
       onClick () {
-        alert('Sharing your screen')
+        console.log('Sharing your screen')
       },
     },
   }
