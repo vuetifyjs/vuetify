@@ -9,7 +9,6 @@ import { VProgressCircular } from '@/components/VProgressCircular'
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'
 import { makeComponentProps } from '@/composables/component'
-import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
@@ -19,7 +18,7 @@ import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant
 
 // Utilities
 import { computed, toDisplayString, toRefs } from 'vue'
-import { convertToUnit, genericComponent, pick, propsFactory, useRender } from '@/util'
+import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -86,15 +85,18 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props)
 
+    const isToggleBtn = computed(() => typeof isActive.value === 'boolean')
+
     const computedColor = computed(() => {
       if (props.disabled) return undefined
+      if (!isToggleBtn.value) return color.value
 
-      return isActive.value ? activeColor.value ?? color.value : color.value
+      return isActive.value ? activeColor.value : color.value
     })
 
     const variantProps = computed(() => ({
       color: computedColor.value,
-      variant: isActive.value === undefined ? props.variant : isActive.value
+      variant: isToggleBtn.value ? props.variant : isActive.value
         ? props.activeVariant ?? props.variant
         : props.baseVariant ?? props.variant,
     }))
@@ -109,7 +111,7 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
       if (
         props.disabled ||
         props.readonly ||
-        typeof isActive.value !== 'boolean' ||
+        !isToggleBtn.value ||
         (props.tag === 'a' && attrs.href)
       ) return
 
