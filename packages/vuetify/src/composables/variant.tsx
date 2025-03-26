@@ -71,12 +71,12 @@ export function useVariantFast (
     return `${name}--variant-${variant}`
   }
 
-  const { colorClasses, colorStyles } = useColorFast(computed(() => {
+  const { colorClasses, colorStyles } = useColorFast(() => {
     const { variant, color } = toValue(props)
     return {
       [['elevated', 'flat'].includes(variant) ? 'background' : 'text']: color,
     }
-  }))
+  })
 
   return { colorClasses, colorStyles, variantClasses }
 }
