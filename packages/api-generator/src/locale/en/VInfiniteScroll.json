@@ -15,5 +15,8 @@
   },
   "events": {
     "load": "Emitted when reaching the start / end threshold, or if triggered when using manual mode."
+  },
+  "exposed": {
+    "reset": "Resets side status to 'ok' letting it trigger 'load' again. Useful to prevent given side being stuck in 'empty' or 'error' state."
   }
 }
