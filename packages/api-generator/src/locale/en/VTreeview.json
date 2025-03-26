@@ -8,6 +8,7 @@
     "expandIcon": "Icon used to indicate that a node can be expanded.",
     "hoverable": "Applies a hover class when mousing over nodes.",
     "filter": "Custom item filtering function. By default it will use case-insensitive search in item's label.",
+    "fluid": "Removes viewport maximum-width size breakpoints.",
     "indeterminateIcon": "Icon used when node is in an indeterminate state. Only visible when `selectable` is `true`.",
     "itemChildren": "Property on supplied `items` that contains its children.",
     "itemDisabled": "Property on supplied `items` that contains the disabled state of the item.",

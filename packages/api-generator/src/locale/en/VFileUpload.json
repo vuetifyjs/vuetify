@@ -1,0 +1,16 @@
+{
+  "props": {
+    "browseText": "Text for the browse button.",
+    "dividerText": "Text in the divider.",
+    "hideBrowse": "Hides the browse button.",
+    "multiple": "Allows multiple files to be uploaded.",
+    "scrim": "Determines whether an overlay is used when hovering over the component with files. Accepts true/false to enable background, and string to define color.",
+    "showSize": "Shows the size of the file."
+  },
+  "slots": {
+    "browse": "Slot for the browse button.",
+    "divider": "Slot for the divider between icon and the browse button.",
+    "icon": "Slot for a custom appearance in icon section.",
+    "input": "Define a custom native input."
+  }
+}

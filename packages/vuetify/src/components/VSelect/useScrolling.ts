@@ -6,7 +6,7 @@ import type { Ref } from 'vue'
 import type { VList } from '@/components/VList'
 import type { VTextField } from '@/components/VTextField'
 
-export function useScrolling (listRef: Ref<VList | undefined>, textFieldRef: Ref<VTextField | undefined>) {
+export function useScrolling (listRef: Ref<VList | undefined>, textFieldRef: Ref<VTextField & HTMLInputElement | undefined>) {
   const isScrolling = shallowRef(false)
   let scrollTimeout: number
   function onListScroll (e: Event) {

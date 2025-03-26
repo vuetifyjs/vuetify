@@ -80,7 +80,7 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
 
     const menu = shallowRef(false)
     const isEditingInput = shallowRef(false)
-    const vDateInputRef = ref()
+    const vTextFieldRef = ref<VTextField & HTMLInputElement>()
 
     function format (date: unknown) {
       if (typeof props.displayFormat === 'function') {
@@ -163,7 +163,7 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
       menu.value = false
     }
 
-    function onUpdateDisplayModel (value: string) {
+    function onUpdateDisplayModel (value: unknown) {
       if (value != null) return
 
       model.value = null
@@ -186,7 +186,7 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
 
       return (
         <VTextField
-          ref={ vDateInputRef }
+          ref={ vTextFieldRef }
           { ...textFieldProps }
           class={ props.class }
           style={ props.style }
@@ -234,7 +234,7 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
                           }
 
                           emit('save', value)
-                          vDateInputRef.value?.blur()
+                          vTextFieldRef.value?.blur()
                         }
 
                         return (
@@ -262,7 +262,7 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
       )
     })
 
-    return forwardRefs({}, vDateInputRef)
+    return forwardRefs({}, vTextFieldRef)
   },
 })
 
