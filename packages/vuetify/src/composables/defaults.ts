@@ -1,5 +1,5 @@
 // Utilities
-import { computed, inject, provide, ref, shallowRef, unref, watchEffect } from 'vue'
+import { computed, inject, provide, ref, shallowReactive, shallowRef, unref, watchEffect } from 'vue'
 import { getCurrentInstance } from '@/util/getCurrentInstance'
 import { mergeDeep, toKebabCase } from '@/util/helpers'
 import { injectSelf } from '@/util/injectSelf'
@@ -102,18 +102,44 @@ export function internalUseDefaults (
   }
 
   const componentDefaults = computed(() => defaults.value?.[props._as ?? name])
+  const resolvedDefaults = shallowReactive<Record<string, any>>({})
   const _props = new Proxy(props, {
     get (target, prop) {
-      const propValue = Reflect.get(target, prop)
-      if (prop === 'class' || prop === 'style') {
-        return [componentDefaults.value?.[prop], propValue].filter(v => v != null)
-      } else if (typeof prop === 'string' && !propIsDefined(vm.vnode, prop)) {
-        return componentDefaults.value?.[prop] !== undefined ? componentDefaults.value?.[prop]
-          : defaults.value?.global?.[prop] !== undefined ? defaults.value?.global?.[prop]
-          : propValue
+      if (prop in resolvedDefaults) {
+        return resolvedDefaults[prop as string]
       }
-      return propValue
+
+      return Reflect.get(target, prop)
     },
+  })
+  const seen = new Set<string>()
+  watchEffect(() => {
+    seen.clear()
+    const _componentDefaults = componentDefaults.value
+    for (const prop in _componentDefaults) {
+      const value = _componentDefaults[prop]
+      if (value === undefined) continue
+      if (prop === 'class' || prop === 'style') {
+        if (value == null) continue
+        if (props[prop] == null) resolvedDefaults[prop] = value
+        resolvedDefaults[prop] = [value, props[prop]]
+      } else if (!propIsDefined(vm.vnode, prop)) {
+        resolvedDefaults[prop] = _componentDefaults[prop]
+      }
+      seen.add(prop)
+    }
+    for (const prop in defaults.value?.global) {
+      if (seen.has(prop)) continue
+      const value = defaults.value.global[prop]
+      if (value === undefined) continue
+      resolvedDefaults[prop] = value
+      seen.add(prop)
+    }
+    for (const key in resolvedDefaults) {
+      if (!seen.has(key)) {
+        delete resolvedDefaults[key]
+      }
+    }
   })
 
   const _subcomponentDefaults = shallowRef()
