@@ -90,6 +90,12 @@ Using the multiple prop with a value of **range**, select 2 dates to select them
 
 <ExamplesExample file="v-date-input/prop-multiple-range" />
 
+::: tip
+
+On mobile devices, when the menu is open, clicking the input a second time will enable editing mode.
+
+:::
+
 #### Calendar icon
 
 You can move the calendar icon within the input or entirely by utilizing the **prepend-icon** and **prepend-inner-icon** properties.
