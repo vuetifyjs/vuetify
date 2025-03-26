@@ -138,7 +138,7 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
 
       const target = e.target as HTMLInputElement
 
-      model.value = target.value === '' ? null : target.value
+      model.value = adapter.isValid(target.value) ? target.value : null
     }
 
     function onClick (e: MouseEvent) {
