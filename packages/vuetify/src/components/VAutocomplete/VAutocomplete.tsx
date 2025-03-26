@@ -64,6 +64,7 @@ export const makeVAutocompleteProps = propsFactory({
   },
   clearOnSelect: Boolean,
   search: String,
+  disableSelectOnBackspace: Boolean,
 
   ...makeFilterProps({ filterKeys: ['title'] }),
   ...makeSelectProps(),
@@ -251,7 +252,7 @@ export const VAutocomplete = genericComponent<new <
           select(model.value[selectionIndex.value], false)
 
           selectionIndex.value = originalSelectionIndex >= length - 1 ? (length - 2) : originalSelectionIndex
-        } else if (e.key === 'Backspace' && !search.value) {
+        } else if (e.key === 'Backspace' && !search.value && !props.disableSelectOnBackspace) {
           selectionIndex.value = length - 1
         }
 
