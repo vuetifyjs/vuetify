@@ -226,7 +226,7 @@ describe('VAutocomplete', () => {
       },
     ])
 
-    const { container, getByCSS } = render(() => (
+    const { container } = render(() => (
       <VAutocomplete
         v-model={ selectedItems.value }
         items={ items.value }
