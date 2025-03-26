@@ -320,11 +320,11 @@ export const VField = genericComponent<new <T>(
             } as VFieldSlot)}
           </div>
 
-          { (hasClear && (isFocused.value || isHovered.value)) && (
+          { hasClear && (
             <VExpandXTransition key="clear">
               <div
                 class="v-field__clearable"
-                v-show={ props.dirty }
+                v-show={ props.dirty && ( isFocused.value || isHovered.value ) }
                 onMousedown={ (e: MouseEvent) => {
                   e.preventDefault()
                   e.stopPropagation()
