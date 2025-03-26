@@ -1,5 +1,5 @@
 // Utilities
-import { capitalize, Comment, computed, Fragment, isVNode, reactive, readonly, shallowRef, toRefs, unref, watchEffect } from 'vue'
+import { capitalize, Comment, computed, Fragment, isVNode, reactive, shallowRef, toRefs, unref, watchEffect } from 'vue'
 import { IN_BROWSER } from '@/util/globals'
 
 // Types
@@ -14,7 +14,6 @@ import type {
   VNode,
   VNodeArrayChildren,
   VNodeChild,
-  WatchOptions,
 } from 'vue'
 
 export function getNestedValue (obj: any, path: (string | number)[], fallback?: any): any {
