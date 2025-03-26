@@ -105,3 +105,9 @@ The `v-icon-btn` component is perfect for closing dialogs or other components.
 The following example demonstrates how flexible the `v-icon-btn` component is by replicating the Google Meet video controls.
 
 <ExamplesExample file="v-icon-btn/misc-video-controls" />
+
+#### Markdown editor
+
+The following example is a simple markdown editor that demonstrates how to use the `v-icon-btn` component to create a toolbar.
+
+<ExamplesExample file="v-icon-btn/misc-markdown-editor" />
