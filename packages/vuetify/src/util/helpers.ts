@@ -219,7 +219,7 @@ export function pick<
   const found: any = {}
 
   for (const key of paths) {
-    if (Object.hasOwn(obj, key)) {
+    if (Object.prototype.hasOwnProperty.call(obj, key)) {
       found[key] = obj[key]
     }
   }
@@ -706,19 +706,6 @@ export function defer (timeout: number, cb: () => void) {
   const timeoutId = window.setTimeout(cb, timeout)
 
   return () => window.clearTimeout(timeoutId)
-}
-
-export function eagerComputed<T> (fn: () => T, options?: WatchOptions): Readonly<Ref<T>> {
-  const result = shallowRef()
-
-  watchEffect(() => {
-    result.value = fn()
-  }, {
-    flush: 'sync',
-    ...options,
-  })
-
-  return readonly(result)
 }
 
 export function isClickInsideElement (event: MouseEvent, targetDiv: HTMLElement) {

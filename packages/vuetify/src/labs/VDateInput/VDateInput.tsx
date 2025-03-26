@@ -6,13 +6,14 @@ import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextFi
 
 // Composables
 import { useDate } from '@/composables/date'
+import { makeDisplayProps, useDisplay } from '@/composables/display'
 import { makeFocusProps, useFocus } from '@/composables/focus'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, ref, shallowRef } from 'vue'
+import { computed, ref, shallowRef, watch } from 'vue'
 import { genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
@@ -33,11 +34,14 @@ export type VDateInputSlots = Omit<VTextFieldSlots, 'default'> & {
 }
 
 export const makeVDateInputProps = propsFactory({
+  displayFormat: [Function, String],
   hideActions: Boolean,
   location: {
     type: String as PropType<StrategyProps['location']>,
     default: 'bottom start',
   },
+
+  ...makeDisplayProps(),
   ...makeFocusProps(),
   ...makeVConfirmEditProps(),
   ...makeVTextFieldProps({
@@ -56,12 +60,15 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
   props: makeVDateInputProps(),
 
   emits: {
+    save: (value: string) => true,
+    cancel: () => true,
     'update:modelValue': (val: string) => true,
   },
 
-  setup (props, { slots }) {
+  setup (props, { emit, slots }) {
     const { t } = useLocale()
     const adapter = useDate()
+    const { mobile } = useDisplay()
     const { isFocused, focus, blur } = useFocus(props)
     const model = useProxiedModel(
       props,
@@ -72,7 +79,16 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
     )
 
     const menu = shallowRef(false)
+    const isEditingInput = shallowRef(false)
     const vDateInputRef = ref()
+
+    function format (date: unknown) {
+      if (typeof props.displayFormat === 'function') {
+        return props.displayFormat(date)
+      }
+
+      return adapter.format(date, props.displayFormat ?? 'keyboardDate')
+    }
 
     const display = computed(() => {
       const value = wrapInArray(model.value)
@@ -87,15 +103,29 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
         const start = value[0]
         const end = value[value.length - 1]
 
-        return adapter.isValid(start) && adapter.isValid(end)
-          ? `${adapter.format(adapter.date(start), 'keyboardDate')} - ${adapter.format(adapter.date(end), 'keyboardDate')}`
-          : ''
+        if (!adapter.isValid(start) || !adapter.isValid(end)) return ''
+
+        return `${format(adapter.date(start))} - ${format(adapter.date(end))}`
       }
 
-      return adapter.isValid(model.value) ? adapter.format(adapter.date(model.value), 'keyboardDate') : ''
+      return adapter.isValid(model.value) ? format(adapter.date(model.value)) : ''
+    })
+
+    const inputmode = computed(() => {
+      if (!mobile.value) return undefined
+      if (isEditingInput.value) return 'text'
+
+      return 'none'
     })
 
     const isInteractive = computed(() => !props.disabled && !props.readonly)
+    const isReadonly = computed(() => !(mobile.value && isEditingInput.value) && props.readonly)
+
+    watch(menu, val => {
+      if (val) return
+
+      isEditingInput.value = false
+    })
 
     function onKeydown (e: KeyboardEvent) {
       if (e.key !== 'Enter') return
@@ -115,17 +145,44 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
       e.preventDefault()
       e.stopPropagation()
 
-      menu.value = true
+      if (menu.value && mobile.value) {
+        isEditingInput.value = true
+      } else {
+        menu.value = true
+      }
     }
 
-    function onSave () {
+    function onCancel () {
+      emit('cancel')
+      menu.value = false
+      isEditingInput.value = false
+    }
+
+    function onSave (value: string) {
+      emit('save', value)
       menu.value = false
     }
 
-    function onUpdateModel (value: string) {
+    function onUpdateDisplayModel (value: string) {
       if (value != null) return
 
       model.value = null
+    }
+
+    function onUpdateMenuModel (isMenuOpen: boolean) {
+      if (isMenuOpen) return
+
+      isEditingInput.value = false
+    }
+
+    function onBlur () {
+      blur()
+
+      // When in mobile mode and editing is done (due to keyboard dismissal), close the menu
+      if (mobile.value && isEditingInput.value && !isFocused.value) {
+        menu.value = false
+        isEditingInput.value = false
+      }
     }
 
     useRender(() => {
@@ -140,13 +197,15 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
           class={ props.class }
           style={ props.style }
           modelValue={ display.value }
+          inputmode={ inputmode.value }
+          readonly={ isReadonly.value }
           onKeydown={ isInteractive.value ? onKeydown : undefined }
           focused={ menu.value || isFocused.value }
           onFocus={ focus }
-          onBlur={ blur }
+          onBlur={ onBlur }
           onClick:control={ isInteractive.value ? onClick : undefined }
           onClick:prepend={ isInteractive.value ? onClick : undefined }
-          onUpdate:modelValue={ onUpdateModel }
+          onUpdate:modelValue={ onUpdateDisplayModel }
         >
           {{
             ...slots,
@@ -160,28 +219,36 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
                   location={ props.location }
                   closeOnContentClick={ false }
                   openOnClick={ false }
+                  onUpdate:modelValue={ onUpdateMenuModel }
                 >
                   <VConfirmEdit
                     { ...confirmEditProps }
                     v-model={ model.value }
                     onSave={ onSave }
-                    onCancel={ () => menu.value = false }
+                    onCancel={ onCancel }
                   >
                     {{
                       default: ({ actions, model: proxyModel, save, cancel, isPristine }) => {
+                        function onUpdateModel (value: string) {
+                          if (!props.hideActions) {
+                            proxyModel.value = value
+                          } else {
+                            model.value = value
+
+                            if (!props.multiple) {
+                              menu.value = false
+                            }
+                          }
+
+                          emit('save', value)
+                          vDateInputRef.value?.blur()
+                        }
+
                         return (
                           <VDatePicker
                             { ...datePickerProps }
                             modelValue={ props.hideActions ? model.value : proxyModel.value }
-                            onUpdate:modelValue={ val => {
-                              if (!props.hideActions) {
-                                proxyModel.value = val
-                              } else {
-                                model.value = val
-
-                                if (!props.multiple) menu.value = false
-                              }
-                            }}
+                            onUpdate:modelValue={ value => onUpdateModel(value) }
                             onMousedown={ (e: MouseEvent) => e.preventDefault() }
                           >
                             {{
