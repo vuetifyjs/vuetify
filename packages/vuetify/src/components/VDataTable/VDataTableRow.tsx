@@ -35,6 +35,7 @@ export type VDataTableRowSlots<T> = {
 }
 
 export const makeVDataTableRowProps = propsFactory({
+  color: String,
   index: Number,
   item: Object as PropType<DataTableItem>,
   cellProps: [Object, Function] as PropType<CellProps<any>>,
@@ -150,6 +151,7 @@ export const VDataTableRow = genericComponent<new <T>(
                       },
                     }) ?? (
                       <VCheckboxBtn
+                        color={ props.color }
                         disabled={ !item.selectable }
                         modelValue={ isSelected([item]) }
                         onClick={ withModifiers(
