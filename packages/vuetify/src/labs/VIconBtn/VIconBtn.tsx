@@ -51,7 +51,7 @@ export const makeVIconBtnProps = propsFactory({
   icon: [String, Function, Object] as PropType<IconValue>,
   iconColor: String,
   iconSize: {
-    type: [Number, String] as PropType<VIconBtnSizes | number>,
+    type: [Number, String] as PropType<VIconBtnSizes | number | string>,
     default: 'default',
   },
   iconSizes: {
@@ -69,7 +69,7 @@ export const makeVIconBtnProps = propsFactory({
   readonly: Boolean,
   rotate: [Number, String],
   size: {
-    type: [Number, String] as PropType<VIconBtnSizes | number>,
+    type: [Number, String] as PropType<VIconBtnSizes | number | string>,
     default: 'default',
   },
   sizes: {
@@ -116,13 +116,12 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
     const { colorClasses, colorStyles, variantClasses } = useVariantFast(() => ({
       color: (() => {
         if (props.disabled) return undefined
-        if (isActive.value === undefined) return props.color
+        if (isActive.value === undefined || !isActive.value) return props.color
         // Use an inline fallback as opposed to setting a default color
         // because non-toggle buttons are default flat whereas toggle
         // buttons are default tonal and active flat. The exact use
         // case for this is a toggle button with no active color.
-        if (isActive.value) return props.activeColor ?? props.color ?? 'surface-variant'
-        return props.color
+        return props.activeColor ?? props.color ?? 'surface-variant'
       })(),
       variant: (() => {
         if (isActive.value === undefined) return props.variant
@@ -157,7 +156,7 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
       const _iconSize = hasNamedSize ? size : (props.iconSize as VIconBtnSizes ?? size)
       const iconSize = iconSizeMap.get(_iconSize) ?? _iconSize
 
-      const iconProps = { icon, iconSize, iconColor: props.iconColor, opacity: props.opacity }
+      const iconProps = { icon, size: iconSize, iconColor: props.iconColor, opacity: props.opacity }
 
       return (
         <props.tag
@@ -166,8 +165,8 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
               'v-icon-btn': true,
               'v-icon-btn--active': isActive.value,
               'v-icon-btn--disabled': props.disabled,
-              'v-icon-btn--readonly': props.readonly,
               'v-icon-btn--loading': props.loading,
+              'v-icon-btn--readonly': props.readonly,
               [`v-icon-btn--${props.size}`]: true,
             },
             themeClasses.value,
