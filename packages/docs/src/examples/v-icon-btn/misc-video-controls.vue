@@ -18,8 +18,8 @@
           :active-variant="!mic ? 'flat' : 'text'"
           :base-variant="!mic ? 'flat' : 'text'"
           :color="!mic ? 'error' : ''"
+          :rotate="micOptions ? 180 : 0"
           :rounded="!mic ? 'lg' : 'circle'"
-          active-icon="mdi-chevron-down"
           icon="mdi-chevron-up"
           size="48"
           hide-overlay
@@ -53,8 +53,8 @@
           :active-variant="!video ? 'flat' : 'text'"
           :base-variant="!video ? 'flat' : 'text'"
           :color="!video ? 'error' : ''"
+          :rotate="videoOptions ? 180 : 0"
           :rounded="!video ? 'lg' : 'circle'"
-          active-icon="mdi-chevron-down"
           icon="mdi-chevron-up"
           size="48"
           hide-overlay
