@@ -23,7 +23,6 @@
               rounded="lg"
               size="32"
             >
-
               <v-icon></v-icon>
 
               <v-menu activator="parent" width="200">

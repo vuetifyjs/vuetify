@@ -146,15 +146,18 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
     }
 
     useRender(() => {
-      const hasIcon = !!(props.icon || props.activeIcon)
-      const icon = isActive.value && props.activeIcon ? props.activeIcon : props.icon
+      const icon = isActive.value ? props.activeIcon ?? props.icon : props.icon
+
       const size = props.size as VIconBtnSizes
-      const isNamed = btnSizeMap.has(size)
-      const _iconSize = isNamed ? size : props.iconSize as VIconBtnSizes ?? size
-      const _btnSize = btnSizeMap.get(size) ?? size
-      const btnHeight = props.height ?? _btnSize
-      const btnWidth = props.width ?? _btnSize
+      const hasNamedSize = btnSizeMap.has(size)
+      const btnSize = hasNamedSize ? btnSizeMap.get(size) : size
+      const btnHeight = props.height ?? btnSize
+      const btnWidth = props.width ?? btnSize
+
+      const _iconSize = hasNamedSize ? size : (props.iconSize as VIconBtnSizes ?? size)
       const iconSize = iconSizeMap.get(_iconSize) ?? _iconSize
+
+      const iconProps = { icon, iconSize, iconColor: props.iconColor, opacity: props.opacity }
 
       return (
         <props.tag
@@ -190,29 +193,20 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
           { genOverlays(!props.hideOverlay, 'v-icon-btn') }
 
           <div class="v-icon-btn__content" data-no-activator="">
-            { (!slots.default && hasIcon) ? (
+            { (!slots.default && icon) ? (
               <VIcon
                 key="content-icon"
-                icon={ icon }
-                opacity={ props.opacity }
-                color={ props.iconColor }
-                size={ iconSize }
+                { ...iconProps }
               />
             ) : (
               <VDefaultsProvider
                 key="content-defaults"
-                disabled={ !hasIcon }
-                defaults={{
-                  VIcon: {
-                    icon,
-                    opacity: props.opacity,
-                    color: props.iconColor,
-                    size: iconSize,
-                  },
+                disabled={ !icon }
+                defaults={{ VIcon: { ...iconProps } }}
+                v-slots={{
+                  default: () => slots.default?.() ?? toDisplayString(props.text),
                 }}
-              >
-                { slots.default?.() ?? toDisplayString(props.text) }
-              </VDefaultsProvider>
+              />
             )}
           </div>
 
