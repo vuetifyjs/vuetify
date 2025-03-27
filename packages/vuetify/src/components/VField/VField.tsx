@@ -18,7 +18,7 @@ import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
-import { computed, ref, toRef, useId, watch } from 'vue'
+import { computed, ref, useId, watch } from 'vue'
 import {
   animate,
   convertToUnit,
@@ -158,7 +158,7 @@ export const VField = genericComponent<new <T>(
       return props.iconColor === true ? color.value : props.iconColor
     })
 
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'bgColor'))
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.bgColor)
     const { textColorClasses, textColorStyles } = useTextColor(color)
 
     watch(isActive, val => {

@@ -97,7 +97,7 @@ export const VTabs = genericComponent<new <T = TabItem>(
     const model = useProxiedModel(props, 'modelValue')
     const items = computed(() => parseItems(props.items))
     const { densityClasses } = useDensity(props)
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'bgColor'))
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.bgColor)
     const { scopeId } = useScopeId()
 
     provideDefaults({

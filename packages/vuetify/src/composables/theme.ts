@@ -3,7 +3,7 @@ import {
   computed,
   inject,
   provide,
-  ref,
+  ref, toRef,
   watch,
   watchEffect,
 } from 'vue'
@@ -398,9 +398,9 @@ export function provideTheme (props: { theme?: string }) {
   const name = computed<string>(() => {
     return props.theme ?? theme.name.value
   })
-  const current = computed(() => theme.themes.value[name.value])
+  const current = toRef(() => theme.themes.value[name.value])
 
-  const themeClasses = computed(() => theme.isDisabled ? undefined : `v-theme--${name.value}`)
+  const themeClasses = toRef(() => theme.isDisabled ? undefined : `v-theme--${name.value}`)
 
   const newTheme: ThemeInstance = {
     ...theme,

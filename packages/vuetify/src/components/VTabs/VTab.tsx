@@ -47,7 +47,7 @@ export const VTab = genericComponent<VBtnSlots>()({
   props: makeVTabProps(),
 
   setup (props, { slots, attrs }) {
-    const { textColorClasses: sliderColorClasses, textColorStyles: sliderColorStyles } = useTextColor(props, 'sliderColor')
+    const { textColorClasses: sliderColorClasses, textColorStyles: sliderColorStyles } = useTextColor(() => props.sliderColor)
 
     const rootEl = ref<VBtn>()
     const sliderEl = ref<HTMLElement>()
