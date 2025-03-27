@@ -243,6 +243,7 @@ export {
   mdiLeaf,
   mdiLicense,
   mdiLifebuoy,
+  mdiLightningBolt,
   mdiLightbulbOnOutline,
   mdiLink,
   mdiLinkedin,
