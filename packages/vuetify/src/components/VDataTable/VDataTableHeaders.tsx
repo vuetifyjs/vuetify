@@ -95,8 +95,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
     const { loaderClasses } = useLoader(props)
 
     function getFixedStyles (column: InternalDataTableHeader, y: number): CSSProperties | undefined {
-      if (!(props.sticky || props.fixedHeader) && !(column.fixed || column.lastFixed))
-        return undefined
+      if (!(props.sticky || props.fixedHeader) && !(column.fixed || column.lastFixed)) return undefined
 
       return {
         position: 'sticky',
