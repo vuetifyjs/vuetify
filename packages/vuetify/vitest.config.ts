@@ -21,7 +21,7 @@ export default defineConfig(configEnv => {
       },
       plugins: [
         AutoImport({
-          include: '**/*.spec.?(browser.)@(ts|tsx)',
+          include: '**/*.(spec|bench).?(browser.)@(ts|tsx)',
           imports: {
             vitest: [
               'describe',
