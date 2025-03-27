@@ -149,9 +149,11 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
       const hasIcon = !!(props.icon || props.activeIcon)
       const icon = isActive.value && props.activeIcon ? props.activeIcon : props.icon
       const size = props.size as VIconBtnSizes
-      const _iconSize = props.iconSize as VIconBtnSizes
-      const btnHeight = props.height ?? btnSizeMap.get(size) ?? size
-      const btnWidth = props.width ?? btnSizeMap.get(size) ?? size
+      const isNamed = btnSizeMap.has(size)
+      const _iconSize = isNamed ? size : props.iconSize as VIconBtnSizes ?? size
+      const _btnSize = btnSizeMap.get(size) ?? size
+      const btnHeight = props.height ?? _btnSize
+      const btnWidth = props.width ?? _btnSize
       const iconSize = iconSizeMap.get(_iconSize) ?? _iconSize
 
       return (
@@ -221,7 +223,7 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
                   color={ typeof props.loading === 'boolean' ? undefined : props.loading }
                   indeterminate="disable-shrink"
                   width="2"
-                  size="20"
+                  size={ iconSize }
                 />
               )}
             </span>

@@ -74,7 +74,7 @@
 
     .v-icon {
       transition: 0.2s settings.$standard-easing;
-      transition-property: opacity;
+      transition-property: opacity, font-size, width, height;
       transform-origin: center;
     }
   }
