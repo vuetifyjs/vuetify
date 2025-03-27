@@ -61,6 +61,7 @@ export const makeVDataTableHeadersProps = propsFactory({
   color: String,
   disableSort: Boolean,
   fixedHeader: Boolean,
+  lastFixed: Boolean,
   multiSort: Boolean,
   sortAscIcon: {
     type: IconValue,
@@ -99,6 +100,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
       return {
         position: 'sticky',
         left: column.fixed ? convertToUnit(column.fixedOffset) : undefined,
+        right: column.lastFixed ? convertToUnit(column.fixedOffset) : undefined,
         top: (props.sticky || props.fixedHeader) ? `calc(var(--v-table-header-height) * ${y})` : undefined,
       }
     }
