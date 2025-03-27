@@ -1,12 +1,13 @@
 // Composables
-import { useColor, useColorFast } from '@/composables/color'
+import { useColor } from '@/composables/color'
 
 // Utilities
-import { computed, toValue, unref } from 'vue'
+import { computed, unref } from 'vue'
 import { getCurrentInstanceName, propsFactory } from '@/util'
 
 // Types
-import type { MaybeRef, MaybeRefOrGetter, PropType } from 'vue'
+import type { PropType } from 'vue'
+import type { MaybeRef } from '@/util'
 
 export const allowedVariants = [
   'elevated',
@@ -58,25 +59,6 @@ export function useVariant (
       [['elevated', 'flat'].includes(variant) ? 'background' : 'text']: color,
     }
   }))
-
-  return { colorClasses, colorStyles, variantClasses }
-}
-
-export function useVariantFast (
-  props: MaybeRefOrGetter<VariantProps>,
-  name = getCurrentInstanceName(),
-) {
-  const variantClasses = () => {
-    const { variant } = toValue(props)
-    return `${name}--variant-${variant}`
-  }
-
-  const { colorClasses, colorStyles } = useColorFast(() => {
-    const { variant, color } = toValue(props)
-    return {
-      [['elevated', 'flat'].includes(variant) ? 'background' : 'text']: color,
-    }
-  })
 
   return { colorClasses, colorStyles, variantClasses }
 }

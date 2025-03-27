@@ -14,10 +14,10 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { genOverlays, makeVariantProps, useVariantFast } from '@/composables/variant'
+import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
 
 // Utilities
-import { toDisplayString } from 'vue'
+import { toDisplayString, toRef } from 'vue'
 import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -113,7 +113,7 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props)
 
-    const { colorClasses, colorStyles, variantClasses } = useVariantFast(() => ({
+    const { colorClasses, colorStyles, variantClasses } = useVariant(toRef(() => ({
       color: (() => {
         if (props.disabled) return undefined
         if (isActive.value === undefined || !isActive.value) return props.color
@@ -128,7 +128,7 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
         if (isActive.value) return props.activeVariant ?? props.variant
         return props.baseVariant ?? props.variant
       })(),
-    }))
+    })))
 
     const btnSizeMap = new Map(props.sizes)
     const iconSizeMap = new Map(props.iconSizes)
@@ -170,11 +170,11 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
               [`v-icon-btn--${props.size}`]: true,
             },
             themeClasses.value,
-            colorClasses(),
+            colorClasses.value,
             borderClasses.value,
             elevationClasses.value,
             roundedClasses.value,
-            variantClasses(),
+            variantClasses.value,
             props.class,
           ]}
           style={[
@@ -183,7 +183,7 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
               '--v-icon-btn-height': convertToUnit(btnHeight),
               '--v-icon-btn-width': convertToUnit(btnWidth),
             },
-            colorStyles(),
+            colorStyles.value,
             props.style,
           ]}
           tabindex={ props.disabled || props.readonly ? -1 : 0 }
