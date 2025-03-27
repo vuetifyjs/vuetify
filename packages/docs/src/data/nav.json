@@ -200,7 +200,6 @@
       "aspect-ratios",
       "avatars",
       "icons",
-      "icon-buttons",
       "images",
       "parallax",
       { "divider": true },
@@ -255,6 +254,10 @@
       },
       {
         "title": "file-upload",
+        "subfolder": "components"
+      },
+      {
+        "title": "icon-buttons",
         "subfolder": "components"
       },
       {
