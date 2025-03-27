@@ -30,6 +30,8 @@ export type VIconBtnSlots = {
   loader: never
 }
 
+export type VIconBtnSizes = 'x-small' | 'small' | 'default' | 'large' | 'x-large'
+
 export const makeVIconBtnProps = propsFactory({
   active: {
     type: Boolean,
@@ -48,11 +50,34 @@ export const makeVIconBtnProps = propsFactory({
   hideOverlay: Boolean,
   icon: [String, Function, Object] as PropType<IconValue>,
   iconColor: String,
+  iconSizes: {
+    type: Array as PropType<[VIconBtnSizes, number][]>,
+    default: () => ([
+      ['x-small', 10],
+      ['small', 16],
+      ['default', 24],
+      ['large', 28],
+      ['x-large', 32],
+    ]),
+  },
   loading: Boolean,
   opacity: [Number, String],
   readonly: Boolean,
   rotate: [Number, String],
-  size: [Number, String],
+  size: {
+    type: [Number, String] as PropType<VIconBtnSizes | number>,
+    default: 'default',
+  },
+  sizes: {
+    type: Array as PropType<[VIconBtnSizes, number][]>,
+    default: () => ([
+      ['x-small', 16],
+      ['small', 24],
+      ['default', 40],
+      ['large', 48],
+      ['x-large', 56],
+    ]),
+  },
   text: {
     type: [String, Number, Boolean],
     default: undefined,
@@ -102,6 +127,9 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
       })(),
     }))
 
+    const btnSizeMap = new Map(props.sizes)
+    const iconSizeMap = new Map(props.iconSizes)
+
     function onClick () {
       if (
         props.disabled ||
@@ -116,6 +144,10 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
     useRender(() => {
       const hasIcon = !!(props.icon || props.activeIcon)
       const icon = isActive.value && props.activeIcon ? props.activeIcon : props.icon
+      const size = props.size as VIconBtnSizes
+      const btnHeight = props.height ?? btnSizeMap.get(size) ?? size
+      const btnWidth = props.width ?? btnSizeMap.get(size) ?? size
+      const iconSize = iconSizeMap.get(size) ?? size
 
       return (
         <props.tag
@@ -126,6 +158,7 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
               'v-icon-btn--disabled': props.disabled,
               'v-icon-btn--readonly': props.readonly,
               'v-icon-btn--loading': props.loading,
+              [`v-icon-btn--${props.size}`]: true,
             },
             themeClasses.value,
             colorClasses(),
@@ -138,8 +171,8 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
           style={[
             {
               '--v-icon-btn-rotate': convertToUnit(props.rotate, 'deg'),
-              '--v-icon-btn-height': convertToUnit(props.height ?? props.size),
-              '--v-icon-btn-width': convertToUnit(props.width ?? props.size),
+              '--v-icon-btn-height': convertToUnit(btnHeight),
+              '--v-icon-btn-width': convertToUnit(btnWidth),
             },
             colorStyles(),
             props.style,
@@ -156,6 +189,7 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
                 icon={ icon }
                 opacity={ props.opacity }
                 color={ props.iconColor }
+                size={ iconSize }
               />
             ) : (
               <VDefaultsProvider
@@ -166,6 +200,7 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
                     icon,
                     opacity: props.opacity,
                     color: props.iconColor,
+                    size: iconSize,
                   },
                 }}
               >

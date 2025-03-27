@@ -6,6 +6,8 @@
     "baseVariant": "When active is a boolean, this variant is used when active is false.",
     "hideOverlay": "Hides overlay from being displayed when active or focused.",
     "iconColor": "Explicit color applied to the icon.",
-    "rotate": "The rotation of the icon in degrees."
+    "iconSizes": "An array of tuples that define the icon sizes for each named size.",
+    "rotate": "The rotation of the icon in degrees.",
+    "sizes": "An array of tuples that define the button sizes for each named size."
   }
 }
