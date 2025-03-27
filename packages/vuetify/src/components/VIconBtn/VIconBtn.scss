@@ -16,14 +16,14 @@
       flex: none;
       font-size: $icon-btn-font-size;
       font-weight: $icon-btn-font-weight;
-      height: var(--v-icon-btn-height, $icon-btn-height);
+      height: #{$icon-btn-height};
       justify-content: center;
       outline: none;
-      transform: rotate(var(--v-icon-btn-rotate, 0deg));
+      position: relative;
       transition-property: width, height, transform;
       transition: 0.2s settings.$standard-easing;
       vertical-align: middle;
-      width: var(--v-icon-btn-width, $icon-btn-width);
+      width: #{$icon-btn-width};
 
       @supports selector(:focus-visible) {
         &::after {
@@ -64,6 +64,9 @@
     align-items: center;
     justify-content: center;
     display: inline-flex;
+    transition: inherit;
+    transition-property: transform;
+    transform: rotate(var(--v-icon-btn-rotate, 0deg));
 
     .v-icon-btn--loading & {
       opacity: 0;
