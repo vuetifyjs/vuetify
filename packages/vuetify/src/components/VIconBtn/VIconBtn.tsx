@@ -85,17 +85,21 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
     const { roundedClasses } = useRounded(props)
 
     const { colorClasses, colorStyles, variantClasses } = useVariantFast(() => ({
-      color: props.disabled ? undefined
-      : isActive.value === undefined ? props.color
-      // Use an inline fallback as opposed to setting a default color
-      // because non-toggle buttons are default flat whereas toggle
-      // buttons are default tonal and active flat. The exact use
-      // case for this is a toggle button with no active color.
-      : isActive.value ? props.activeColor ?? props.color ?? 'surface-variant'
-      : props.color,
-      variant: isActive.value === undefined ? props.variant
-      : isActive.value ? props.activeVariant ?? props.variant
-      : props.baseVariant ?? props.variant,
+      color: (() => {
+        if (props.disabled) return undefined
+        if (isActive.value === undefined) return props.color
+        // Use an inline fallback as opposed to setting a default color
+        // because non-toggle buttons are default flat whereas toggle
+        // buttons are default tonal and active flat. The exact use
+        // case for this is a toggle button with no active color.
+        if (isActive.value) return props.activeColor ?? props.color ?? 'surface-variant'
+        return props.color
+      })(),
+      variant: (() => {
+        if (isActive.value === undefined) return props.variant
+        if (isActive.value) return props.activeVariant ?? props.variant
+        return props.baseVariant ?? props.variant
+      })(),
     }))
 
     function onClick () {
