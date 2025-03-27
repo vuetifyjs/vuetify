@@ -70,8 +70,6 @@
     }
 
     .v-icon {
-      --v-icon-size-multiplier: 1;
-      font-size: $icon-btn-icon-font-size;
       transition: 0.2s settings.$standard-easing;
       transition-property: opacity;
       transform-origin: center;
