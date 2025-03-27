@@ -116,7 +116,7 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
     const { colorClasses, colorStyles, variantClasses } = useVariant(toRef(() => ({
       color: (() => {
         if (props.disabled) return undefined
-        if (isActive.value === undefined || !isActive.value) return props.color
+        if (!isActive.value) return props.color
         // Use an inline fallback as opposed to setting a default color
         // because non-toggle buttons are default flat whereas toggle
         // buttons are default tonal and active flat. The exact use
