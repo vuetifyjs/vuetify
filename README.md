@@ -326,6 +326,9 @@ Use our [Issue generator](https://issues.vuetifyjs.com) to report bugs and reque
 
 Please make sure to read the [Important Information](https://github.com/vuetifyjs/vuetify/blob/master/.github/CONTRIBUTING.md#important-information) before opening an issue. Issues not confirming to the guidelines may be closed immediately.
 
+2️⃣ Vuetify 2 Support
+Vuetify 2 is now End Of Life (EOL) and is no longer supported, even for security issues. Commercial support for this version is available from our partner, [HeroDevs](https://www.herodevs.com/support/vuetify-nes?utm_source=partnership&utm_medium=partnership&utm_campaign=partnership&utm_id=vuetify2).
+
 ### 📝 Changelog
 
 Detailed changes for each release are documented in the [release notes](https://vuetifyjs.com/getting-started/release-notes/).
