@@ -1,0 +1,69 @@
+@use 'sass:map'
+@use '../../styles/tools'
+@use './variables' as *
+
+@include tools.layer('components')
+  .v-pie
+    display: grid
+    column-gap: 24px
+
+    &--legend
+      &-top
+        grid-template-areas: 'title' 'legend' 'content'
+      &-bottom
+        grid-template-areas: 'title' 'content' 'legend'
+      &-right
+        grid-template-areas: 'title .' 'content legend'
+      &-left
+        grid-template-areas: '. title' 'legend content'
+
+    &__title
+      grid-area: title
+      text-align: center
+      padding: 0 0 12px
+
+    &__content
+      grid-area: content
+      position: relative
+
+      .v-overlay
+        .v-overlay__scrim,
+        .v-overlay__content
+          pointer-events: none !important
+
+    &__center-content
+      position: absolute
+      inset: 0
+      display: flex
+      align-items: center
+      justify-content: center
+
+    &__legend
+      grid-area: legend
+      align-self: center
+
+      .v-chip__content
+        width: 100%
+
+      &__text
+        font-size: 0.8125rem
+        white-space: nowrap
+        width: 100%
+
+        .v-chip--density-compact &
+          font-size: 0.66rem
+
+    .v-chip.v-chip--density-comfortable .v-avatar--start
+      margin-inline-start: -6px
+
+    .v-chip.v-chip--density-default .v-avatar--start
+      margin-inline-start: -4px
+
+  .v-pie-segment
+    pointer-events: none
+    position: absolute
+    inset: 0
+
+    .v-pie-segment__overlay
+      pointer-events: auto
+      opacity: 0
