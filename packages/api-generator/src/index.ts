@@ -4,7 +4,7 @@ import { components } from 'vuetify/dist/vuetify-labs.js'
 import importMap from 'vuetify/dist/json/importMap.json' with { type: 'json' }
 import importMapLabs from 'vuetify/dist/json/importMap-labs.json' with { type: 'json' }
 import { kebabCase } from './helpers/text'
-import type { BaseData, ComponentData, DirectiveData } from './types'
+import type { ComponentData, DirectiveData } from './types'
 import { generateComposableDataFromTypes, generateDirectiveDataFromTypes } from './types'
 import Piscina from 'piscina'
 import { addDescriptions, addDirectiveDescriptions, addPropData, stringifyProps } from './utils'
@@ -13,6 +13,7 @@ import { mkdirp } from 'mkdirp'
 import { createVeturApi } from './vetur'
 import { rimraf } from 'rimraf'
 import { createWebTypesApi } from './web-types'
+import { createVSCodeApi } from './vscode'
 import inspector from 'inspector'
 import yargs from 'yargs'
 import { parseSassVariables } from './helpers/sass'
@@ -127,10 +128,12 @@ const run = async () => {
 
   createVeturApi(componentData)
   createWebTypesApi(componentData, directives)
+  createVSCodeApi(componentData, directives)
   await fs.mkdir(path.resolve('../vuetify/dist/json'), { recursive: true })
   await fs.copyFile(path.resolve('./dist/tags.json'), path.resolve('../vuetify/dist/json/tags.json'))
   await fs.copyFile(path.resolve('./dist/attributes.json'), path.resolve('../vuetify/dist/json/attributes.json'))
   await fs.copyFile(path.resolve('./dist/web-types.json'), path.resolve('../vuetify/dist/json/web-types.json'))
+  await fs.copyFile(path.resolve('./dist/vscode.json'), path.resolve('../vuetify/dist/json/vscode.json'))
   rimraf.sync(path.resolve('./templates/tmp'))
 }
 
