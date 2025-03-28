@@ -456,7 +456,7 @@ export const VCombobox = genericComponent<new <
     })
 
     watch(() => props.items, (newVal, oldVal) => {
-      if (menu.value) return
+      if (menu.value || menuDisabled.value) return
 
       if (isFocused.value && !oldVal.length && newVal.length) {
         menu.value = true
