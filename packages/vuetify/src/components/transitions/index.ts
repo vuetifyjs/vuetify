@@ -21,6 +21,7 @@ export const VSlideXTransition = createCssTransition('slide-x-transition')
 export const VSlideXReverseTransition = createCssTransition('slide-x-reverse-transition')
 export const VSlideYTransition = createCssTransition('slide-y-transition')
 export const VSlideYReverseTransition = createCssTransition('slide-y-reverse-transition')
+export const VGooTransition = createCssTransition('goo-transition')
 
 // Javascript transitions
 export const VExpandTransition = createJavascriptTransition('expand-transition', ExpandTransitionGenerator())
@@ -43,3 +44,4 @@ export type VSlideYTransition = InstanceType<typeof VSlideYTransition>
 export type VSlideYReverseTransition = InstanceType<typeof VSlideYReverseTransition>
 export type VExpandTransition = InstanceType<typeof VExpandTransition>
 export type VExpandXTransition = InstanceType<typeof VExpandXTransition>
+export type VGooTransition = InstanceType<typeof VGooTransition>
