@@ -234,7 +234,6 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
                           }
 
                           emit('save', value)
-                          vDateInputRef.value?.blur()
                         }
 
                         return (
