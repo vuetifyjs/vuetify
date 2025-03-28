@@ -19,7 +19,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { ref, shallowRef } from 'vue'
-import { filterInputAttrs, genericComponent, pick, propsFactory, useRender, wrapInArray } from '@/util'
+import { filterFilesByAcceptType, filterInputAttrs, genericComponent, pick, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { PropType, VNode } from 'vue'
@@ -127,20 +127,25 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
       e.stopImmediatePropagation()
       isDragging.value = false
 
-      if (!e.dataTransfer?.files?.length || !inputRef.value) return
-
+      const initialFiles = e.dataTransfer?.files
       const acceptType = inputRef.value?.accept
+      let files: File[] = []
 
-      let files = Array.from(e.dataTransfer?.files ?? [])
+      if (!initialFiles || initialFiles.length === 0 || !inputRef.value) return
 
       if (acceptType) {
-        files = files.filter(file => file.type === acceptType)
+        files = filterFilesByAcceptType(acceptType, initialFiles)
       }
 
       const dataTransfer = new DataTransfer()
 
-      for (const file of e.dataTransfer.files) {
+      for (const file of files) {
         dataTransfer.items.add(file)
+      }
+      
+      if (!props.multiple) {
+        model.value = [files[0]]
+        return
       }
 
       inputRef.value.files = dataTransfer.files
@@ -160,14 +165,13 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
       inputRef.value.value = ''
     }
 
-    function onInputChange (e: Event) {
-      if (!e.target) return
-
-      const target = e.target as HTMLInputElement
+    function onFileInputChange (e: Event) {
       const acceptType = inputRef.value?.accept
+      const files = (e.target as HTMLInputElement)?.files
 
-      model.value = Array.from(target.files ?? [])
-        .filter(file => file.type === acceptType)
+      if (!files || !acceptType) return
+
+      model.value = filterFilesByAcceptType(acceptType, files)
     }
 
     useRender(() => {
@@ -185,7 +189,7 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
           disabled={ props.disabled }
           multiple={ props.multiple }
           name={ props.name }
-          onChange={ onInputChange }
+          onChange={ onFileInputChange }
           { ...inputAttrs }
         />
       )
