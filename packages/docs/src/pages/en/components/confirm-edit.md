@@ -48,6 +48,6 @@ It's easy to integrate pickers into the `v-confirm-edit` component. This allows 
 
 ### Disable actions
 
-You can control the disabled state of action buttons using `disabled` prop by either passing an array to disable targeted actions or a boolean value to disable all actions. If the `disabled` prop is not provided, the component will use internal logic to determine the disabled state.
+You can control the disabled state of action buttons using **disabled** prop by either passing an array to disable targeted actions or a boolean value to disable all actions. If the **disabled** prop is not provided, the component will use internal logic to determine the disabled state.
 
 <ExamplesExample file="v-confirm-edit/misc-disable-actions" />

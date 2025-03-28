@@ -72,7 +72,7 @@ export const VConfirmEdit = genericComponent<new <T> (
       return deepEqual(model.value, internalModel.value)
     })
 
-    const isActionDisabled = (action: 'save' | 'cancel') => {
+    function isActionDisabled (action: 'save' | 'cancel') {
       if (typeof props.disabled === 'boolean') {
         return props.disabled
       }

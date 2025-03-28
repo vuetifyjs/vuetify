@@ -50,7 +50,7 @@
   const disabled = ref([])
   const value = ref('Egg Plant')
 
-  const onClick = action => {
+  function onClick (action) {
     if (!Array.isArray(disabled.value)) {
       disabled.value = []
     }
@@ -60,5 +60,30 @@
     } else {
       disabled.value.push(action)
     }
+  }
+</script>
+
+<script>
+  export default {
+    data () {
+      return {
+        disabled: [],
+        value: 'Egg Plant',
+      }
+    },
+
+    methods: {
+      onClick (action) {
+        if (!Array.isArray(this.disabled)) {
+          this.disabled = []
+        }
+
+        if (this.disabled.includes(action)) {
+          this.disabled = this.disabled.filter(item => item !== action)
+        } else {
+          this.disabled.push(action)
+        }
+      },
+    },
   }
 </script>

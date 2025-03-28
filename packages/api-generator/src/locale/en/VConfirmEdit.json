@@ -1,7 +1,6 @@
 {
   "props": {
     "modelValue": "Represents the commited v-model value",
-    "color": "The color of the component",
     "cancelText": "Text for the cancel button",
     "okText": "Text for the ok button",
     "hideActions": "Prevent showing the default actions buttons. Does not affect `<component :is=\"actions\" />`",
