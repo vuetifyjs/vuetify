@@ -1,6 +1,7 @@
 export * from './VCalendar'
 export * from './VDateInput'
 export * from './VFileUpload'
+export * from './VIconBtn'
 export * from './VPicker'
 export * from './VStepperVertical'
 export * from './VPullToRefresh'

@@ -257,6 +257,10 @@
         "subfolder": "components"
       },
       {
+        "title": "icon-buttons",
+        "subfolder": "components"
+      },
+      {
         "title": "pull-to-refresh",
         "subfolder": "components"
       },
