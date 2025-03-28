@@ -82,6 +82,7 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
     const menu = shallowRef(false)
     const isEditingInput = shallowRef(false)
     const vDateInputRef = ref()
+    const disabledActions = ref<typeof VConfirmEdit['props']['disabled']>(['save'])
 
     function format (date: unknown) {
       if (typeof props.displayFormat === 'function') {
@@ -126,6 +127,7 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
       if (val) return
 
       isEditingInput.value = false
+      disabledActions.value = ['save']
     })
 
     function onKeydown (e: KeyboardEvent) {
@@ -225,6 +227,7 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
                   <VConfirmEdit
                     { ...confirmEditProps }
                     v-model={ model.value }
+                    disabled={ disabledActions.value }
                     onSave={ onSave }
                     onCancel={ onCancel }
                   >
@@ -243,6 +246,8 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
 
                           emit('save', value)
                           vDateInputRef.value?.blur()
+
+                          disabledActions.value = []
                         }
 
                         return (
