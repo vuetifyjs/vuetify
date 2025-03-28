@@ -3,7 +3,7 @@ import { useProxiedModel } from './proxiedModel'
 
 // Utilities
 import { computed, inject, onBeforeUnmount, onMounted, onUpdated, provide, reactive, toRef, unref, useId, watch } from 'vue'
-import { consoleWarn, deepEqual, findChildrenWithProvide, getCurrentInstance, propsFactory, wrapInArray } from '@/util'
+import { consoleWarn, deepEqual, getCurrentInstance, propsFactory, wrapInArray } from '@/util'
 
 // Types
 import type { ComponentInternalInstance, ComputedRef, ExtractPropTypes, InjectionKey, PropType, Ref, UnwrapRef } from 'vue'
@@ -180,26 +180,16 @@ export function useGroup (
     }
   )
 
-  const groupVm = getCurrentInstance('useGroup')
-
-  function register (item: GroupItem, vm: ComponentInternalInstance) {
+  function register (item: GroupItem) {
     // Is there a better way to fix this typing?
     const unwrapped = item as unknown as UnwrapRef<GroupItem>
 
-    const key = Symbol.for(`${injectKey.description}:id`)
-    const children = findChildrenWithProvide(key, groupVm?.vnode)
-    const index = children.indexOf(vm)
-
     if (unref(unwrapped.value) == null) {
-      unwrapped.value = index
+      unwrapped.value = items.length
       unwrapped.useIndexAsValue = true
     }
 
-    if (index > -1) {
-      items.splice(index, 0, unwrapped)
-    } else {
-      items.push(unwrapped)
-    }
+    items.push(unwrapped)
   }
 
   function unregister (id: string) {
