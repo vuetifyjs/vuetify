@@ -19,7 +19,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { onMounted, onUnmounted, ref, shallowRef } from 'vue'
-import { filterInputAttrs, genericComponent, pick, propsFactory, useRender, wrapInArray } from '@/util'
+import { filterFilesByAcceptType, filterInputAttrs, genericComponent, pick, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { PropType, VNode } from 'vue'
@@ -139,17 +139,19 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
 
       const acceptType = inputRef.value?.accept
 
-      let files = Array.from(e.dataTransfer?.files ?? [])
+      const files = e.dataTransfer?.files
+      let filesArray: File[] = []
 
-      if (acceptType) {
-        files = files.filter(file => file.type === acceptType)
+      if (!files || files.length === 0) {
+        return
       }
 
-      if (!files.length) return
+      if (acceptType) {
+        filesArray = filterFilesByAcceptType(acceptType, files)
+      }
 
       if (!props.multiple) {
-        model.value = [files[0]]
-
+        model.value = [filesArray[0]]
         return
       }
 
@@ -177,14 +179,13 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
       inputRef.value.value = ''
     }
 
-    function onInputChange (e: Event) {
-      if (!e.target) return
-
-      const target = e.target as HTMLInputElement
+    function onFileInputChange (e: Event) {
       const acceptType = inputRef.value?.accept
+      const files = (e.target as HTMLInputElement)?.files
 
-      model.value = Array.from(target.files ?? [])
-        .filter(file => file.type === acceptType)
+      if (!files || !acceptType) return
+
+      model.value = filterFilesByAcceptType(acceptType, files)
     }
 
     useRender(() => {
@@ -202,7 +203,7 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
           disabled={ props.disabled }
           multiple={ props.multiple }
           name={ props.name }
-          onChange={ onInputChange }
+          onChange={ onFileInputChange }
           { ...inputAttrs }
         />
       )

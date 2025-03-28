@@ -18,6 +18,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { computed, nextTick, ref, toRef, watch } from 'vue'
 import {
   callEvent,
+  filterFilesByAcceptType,
   filterInputAttrs,
   genericComponent,
   humanReadableFileSize,
@@ -158,9 +159,21 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
     function onDrop (e: DragEvent) {
       e.preventDefault()
 
-      if (!e.dataTransfer) return
+      const acceptType = inputRef.value?.accept
+      const files = e.dataTransfer?.files
 
-      model.value = [...e.dataTransfer.files ?? []]
+      if (!files || !acceptType) return
+
+      model.value = filterFilesByAcceptType(acceptType, files)
+    }
+
+    function onFileInputChange (e: Event) {
+      const acceptType = inputRef.value?.accept
+      const files = (e.target as HTMLInputElement)?.files
+
+      if (!files || !acceptType) return
+
+      model.value = filterFilesByAcceptType(acceptType, files)
     }
 
     watch(model, newValue => {
@@ -245,12 +258,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
 
                           onFocus()
                         }}
-                        onChange={ e => {
-                          if (!e.target) return
-
-                          const target = e.target as HTMLInputElement
-                          model.value = [...target.files ?? []]
-                        }}
+                        onChange={ onFileInputChange }
                         onFocus={ onFocus }
                         onBlur={ blur }
                         { ...slotProps }

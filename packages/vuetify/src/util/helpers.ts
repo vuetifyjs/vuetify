@@ -778,3 +778,9 @@ export type Primitive = string | number | boolean | symbol | bigint
 export function isPrimitive (value: unknown): value is Primitive {
   return typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean' || typeof value === 'bigint'
 }
+
+export function filterFilesByAcceptType (acceptType: string, files: null | FileList): File[] {
+  if (!acceptType || !files) return []
+  return Array.from(files).filter((file) => file.type === acceptType)
+}
+
