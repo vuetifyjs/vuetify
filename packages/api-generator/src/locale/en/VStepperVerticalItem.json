@@ -3,5 +3,10 @@
     "click:finish": "Event emitted when clicking the finish button",
     "click:next": "Event emitted when clicking the next button",
     "click:prev": "Event emitted when clicking the previous button"
+  },
+  "slots": {
+    "icon": "Slot to override the icon",
+    "next": "Slot to override the next button",
+    "prev": "Slot to override the previous button"
   }
 }

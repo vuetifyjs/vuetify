@@ -11,7 +11,7 @@
     "hide-header": "Hide the header of the picker.",
     "readonly": "Puts picker in readonly state.",
     "scrollable": "Allows changing hour/minute with mouse scroll.",
-    "use-seconds": "Toggles the use of seconds in picker.",
+    "useSeconds": "Toggles the use of seconds in picker.",
     "value": "Time picker model (ISO 8601 format, 24hr hh:mm).",
     "width": "Width of the picker.",
     "viewMode": "The current view mode of thep picker.`"

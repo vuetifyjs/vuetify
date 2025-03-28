@@ -9,5 +9,8 @@
   "events": {
     "change": "Toggles the value of the selected panel.",
     "click": "Mouse click event."
+  },
+  "exposed": {
+    "groupItem": "The current expansion panel within the group in `<v-expansion-panels>`."
   }
 }

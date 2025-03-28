@@ -13,7 +13,8 @@
   "events": {
     "click:outside": "Event that fires when clicking outside an active overlay.",
     "afterLeave": "Event that fires after the overlay has finished transitioning out.",
-    "afterEnter": "Event that fires after the overlay has finished transitioning in."
+    "afterEnter": "Event that fires after the overlay has finished transitioning in.",
+    "keydown": "Emitted when **any** key is pressed."
   },
   "exposed": {
     "activatorEl": "Ref to the current activator element.",

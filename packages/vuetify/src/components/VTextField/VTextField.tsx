@@ -292,4 +292,5 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
   },
 })
 
-export type VTextField = InstanceType<typeof VTextField>
+// Omit HTMLInputElement prop to prevent inference when generating docs
+export type VTextField = Omit<InstanceType<typeof VTextField>, keyof HTMLInputElement>

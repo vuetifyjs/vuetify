@@ -27,5 +27,11 @@
     "stacked": "Apply the stacked prop to all children v-tab components.",
     "touchless": "Disable mobile touch functionality.",
     "vertical": "Stacks tabs on top of each other vertically."
+  },
+  "slots": {
+    "[`item.${string}`]": "Dynamic slot to define custom slots for specific tab window items",
+    "[`tab.${string}`]": "Dynamic slot to define custom slots for specific tab headers in the slide group",
+    "tab": "Slot for custom tab header content.",
+    "window": "Slot for custom tab window content."
   }
 }

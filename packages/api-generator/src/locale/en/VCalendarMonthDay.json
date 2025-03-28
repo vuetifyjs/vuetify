@@ -4,6 +4,7 @@
     "events": "Array of events associated with this specific day."
   },
   "slots": {
-    "content": "Slot for custom content related to the day in the month view."
+    "content": "Slot for custom content related to the day in the month view.",
+    "event": "Slot for custom content to display in an event of a day."
   }
 }

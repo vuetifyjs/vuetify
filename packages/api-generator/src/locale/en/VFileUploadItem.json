@@ -1,0 +1,13 @@
+{
+  "props": {
+    "file": "The file object uploaded",
+    "fileIcon": "The icon prepending each uploaded file. This will be a preview image if the file is an image.",
+    "showSize": "Show the size of the file"
+  },
+  "events": {
+    "click:remove": "Emitted when the remove icon is clicked"
+  },
+  "slots": {
+    "clear": "Slot for the icon button to clear/remove a file"
+  }
+}

@@ -2,7 +2,7 @@
   "props": {
     "allowedValues": "Restricts which hours can be selected.",
     "ampm": "Displays time in a 12-hour format.",
-    "displayValue": "Used to display a custom value on the clock.",
+    "displayedValue": "Used to display a custom value on the clock.",
     "double": "If set, this probably indicates a double rotation or a mode where more than one set of values (like hours and minutes) is displayed on the clock at the same time.",
     "format": "Specifies the format of the displayed time, either 12-hour or 24-hour, depending on the component's setup.",
     "max": "Defines the maximum time value that can be selected.",

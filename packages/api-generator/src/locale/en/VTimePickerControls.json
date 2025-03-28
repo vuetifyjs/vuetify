@@ -1,0 +1,19 @@
+{
+  "props": {
+    "ampm": "Enables AM/PM mode.",
+    "ampmInTitle": "Displays AM/PM in the title.",
+    "ampmReadonly": "Makes AM/PM controls readonly.",
+    "hour": "The current hour value.",
+    "minute": "The current minute value.",
+    "second": "The current second value.",
+    "period": "The current period value. either `am` or `pm`.",
+    "readonly": "Makes the timepicker readonly.",
+    "useSeconds": "Enables the display and selection of seconds in the timepicker.",
+    "value": "The current value of the timepicker.",
+    "viewMode": "The current view mode of the timepicker. Can be either `hour`, `minute`, or `second`."
+  },
+  "events": {
+    "update:period": "Emitted when the period is changed. The event payload is either `am` or `pm`.",
+    "update:viewMode": "Emitted when the view mode is changed. The event payload is either `hour`, `minute`, or `second`."
+  }
+}

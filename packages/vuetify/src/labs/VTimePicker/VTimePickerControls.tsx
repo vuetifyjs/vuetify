@@ -25,7 +25,7 @@ export const makeVTimePickerControlsProps = propsFactory({
   hour: Number,
   minute: Number,
   second: Number,
-  period: String,
+  period: String as PropType<Period>,
   readonly: Boolean,
   useSeconds: Boolean,
   value: Number,

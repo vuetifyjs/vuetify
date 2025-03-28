@@ -11,5 +11,9 @@
     "static": "Remove title size expansion when selected.",
     "tile": "Removes the border-radius.",
     "value": "Controls the opened/closed state of content in the expansion-panel. Corresponds to a zero-based index of the currently opened content. If the `multiple` prop (previously `expand` in 1.5.x) is used then it is an array of numbers where each entry corresponds to the index of the opened content.  The index order is not relevant."
+  },
+  "exposed": {
+    "prev": "Open the previous panel from the currently selected panel.",
+    "next": "Open the next panel from the currently selected panel."
   }
 }

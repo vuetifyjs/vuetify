@@ -76,7 +76,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
   },
 
   setup (props, { slots }) {
-    const vTextFieldRef = ref<VTextField | undefined>()
+    const vTextFieldRef = ref<VTextField & HTMLInputElement | undefined>()
 
     const { holdStart, holdStop } = useHold({ toggleUpDown })
     const form = useForm(props)
