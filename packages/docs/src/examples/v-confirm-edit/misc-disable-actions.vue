@@ -45,20 +45,20 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+  import { ref } from 'vue'
 
-const disabled = ref([])
-const value = ref('Egg Plant')
+  const disabled = ref([])
+  const value = ref('Egg Plant')
 
-const onClick = action => {
-  if (!Array.isArray(disabled.value)) {
-    disabled.value = []
+  const onClick = action => {
+    if (!Array.isArray(disabled.value)) {
+      disabled.value = []
+    }
+
+    if (disabled.value.includes(action)) {
+      disabled.value = disabled.value.filter(item => item !== action)
+    } else {
+      disabled.value.push(action)
+    }
   }
-
-  if (disabled.value.includes(action)) {
-    disabled.value = disabled.value.filter(item => item !== action)
-  } else {
-    disabled.value.push(action)
-  }
-}
 </script>
