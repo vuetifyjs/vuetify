@@ -69,6 +69,8 @@ export function getObjectValueByPath (obj: any, path?: string | null, fallback?:
   return getNestedValue(obj, path.split('.'), fallback)
 }
 
+export type SelectItemId = string | undefined | ((item: any) => string)
+
 export type SelectItemKey<T = Record<string, any>> =
   | boolean | null | undefined // Ignored
   | string // Lookup by key, can use dot notation for nested objects

@@ -1,15 +1,16 @@
 // Utilities
 import { computed } from 'vue'
-import { getPropertyFromItem, propsFactory } from '@/util'
+import { getObjectValueByPath, getPropertyFromItem, propsFactory } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
 import type { GroupableItem } from '@/components/VDataTable/composables/group'
 import type { SelectableItem } from '@/components/VDataTable/composables/select'
-import type { SelectItemKey } from '@/util'
+import type { SelectItemId, SelectItemKey } from '@/util'
 
 export interface DataIteratorItemProps {
   items: any[]
+  itemId: SelectItemId
   itemValue: SelectItemKey
   itemSelectable: SelectItemKey
   returnObject: boolean
@@ -25,6 +26,10 @@ export const makeDataIteratorItemsProps = propsFactory({
     type: Array as PropType<DataIteratorItemProps['items']>,
     default: () => ([]),
   },
+  itemId: {
+    type: [String, Function] as PropType<SelectItemId>,
+    default: 'id',
+  },
   itemValue: {
     type: [String, Array, Function] as PropType<SelectItemKey>,
     default: 'id',
@@ -38,6 +43,7 @@ export const makeDataIteratorItemsProps = propsFactory({
 
 export function transformItem (
   props: Omit<DataIteratorItemProps, 'items'>,
+  id: number | string,
   item: any
 ): DataIteratorItem {
   const value = props.returnObject ? item : getPropertyFromItem(item, props.itemValue)
@@ -45,6 +51,7 @@ export function transformItem (
 
   return {
     type: 'item',
+    key: id,
     value,
     selectable,
     raw: item,
@@ -55,10 +62,15 @@ export function transformItems (
   props: Omit<DataIteratorItemProps, 'items'>,
   items: DataIteratorItemProps['items']
 ) {
+  const itemId = props.itemId || 'id'
+  const getId = typeof itemId === 'function'
+    ? (item: any) => itemId(item)
+    : (item: any) => getObjectValueByPath(item, itemId)
+
   const array: DataIteratorItem[] = []
 
   for (const item of items) {
-    array.push(transformItem(props, item))
+    array.push(transformItem(props, getId(item), item))
   }
 
   return array
