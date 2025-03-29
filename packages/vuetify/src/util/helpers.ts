@@ -802,7 +802,8 @@ export function extractNumber (text: string, decimalDigitsLimit: number | null) 
   return cleanText
 }
 
-export function filterFilesByAcceptType (acceptType: string, files: null | FileList): File[] {
-  if (!acceptType || !files) return []
+export function filterFilesByAcceptType (files: null | FileList, acceptType?: string): File[] {
+  if (!files) return []
+  if (!acceptType) return Array.from(files)
   return Array.from(files).filter(file => file.type === acceptType)
 }

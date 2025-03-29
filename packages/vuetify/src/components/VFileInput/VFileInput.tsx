@@ -176,7 +176,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
 
       const dataTransfer = new DataTransfer()
 
-      model.value = filterFilesByAcceptType(acceptType, files)
+      model.value = filterFilesByAcceptType(files, acceptType)
 
       for (const file of model.value) {
         dataTransfer.items.add(file)
@@ -189,9 +189,9 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
       const acceptType = inputRef.value?.accept
       const files = (e.target as HTMLInputElement)?.files
 
-      if (!files || !acceptType) return
+      if (!files) return
 
-      model.value = filterFilesByAcceptType(acceptType, files)
+      model.value = filterFilesByAcceptType(files, acceptType)
     }
 
     watch(model, newValue => {
