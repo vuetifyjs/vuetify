@@ -94,7 +94,7 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
 
   emits: {
     'update:modelValue': (files: File[]) => true,
-    'change': (e: DragEvent) => true
+    change: (e: DragEvent) => true,
   },
 
   setup (props, { attrs, emit, slots }) {
