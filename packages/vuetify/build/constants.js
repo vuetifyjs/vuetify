@@ -11,7 +11,7 @@ export const banner = `/*!
 export const root = path.resolve(fileURLToPath(import.meta.url), '../..')
 export const srcDir = path.resolve(root, 'src')
 export const libDir = path.resolve(root, 'lib')
-export const unpluginLibDistDir = path.resolve(libDir, 'unplugin')
+export const nodeLibDistDir = path.resolve(libDir, 'node')
 export const labsDir = path.resolve(srcDir, 'labs')
 
 export const externals = Array.from(Object.keys(packageJson.devDependencies))
