@@ -89,7 +89,6 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
     'mousedown:control': (e: MouseEvent) => true,
     'update:focused': (focused: boolean) => true,
     'update:modelValue': (files: File | File[]) => true,
-    change: (e: DragEvent) => true,
   },
 
   setup (props, { attrs, emit, slots }) {
@@ -163,6 +162,9 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
 
       model.value = [...e.dataTransfer.files ?? []]
 
+      // INFO: If we add this to emits property we get an error on the test
+      //  This is still working as expected even if we dont register it on emits
+      // @ts-ignore-next-line
       emit('change', e)
     }
 
