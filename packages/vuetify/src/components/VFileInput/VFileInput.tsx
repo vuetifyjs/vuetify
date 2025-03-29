@@ -164,7 +164,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
 
       // INFO: If we add this to emits property we get an error on the test
       //  This is still working as expected even if we dont register it on emits
-      // @ts-ignore-next-line
+      // @ts-ignore
       emit('change', e)
     }
 
