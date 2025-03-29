@@ -71,7 +71,7 @@ export const VBreadcrumbs = genericComponent<new <T extends BreadcrumbItem>(
   props: makeVBreadcrumbsProps(),
 
   setup (props, { slots }) {
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'bgColor'))
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.bgColor)
     const { densityClasses } = useDensity(props)
     const { roundedClasses } = useRounded(props)
 

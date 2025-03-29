@@ -112,18 +112,18 @@ export function useSelectionControl (
       }
     },
   })
-  const { textColorClasses, textColorStyles } = useTextColor(computed(() => {
+  const { textColorClasses, textColorStyles } = useTextColor(() => {
     if (props.error || props.disabled) return undefined
 
     return model.value ? props.color : props.baseColor
-  }))
-  const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(computed(() => {
+  })
+  const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => {
     return (
       model.value &&
       !props.error &&
       !props.disabled
     ) ? props.color : props.baseColor
-  }))
+  })
   const icon = computed(() => model.value ? props.trueIcon : props.falseIcon)
 
   return {

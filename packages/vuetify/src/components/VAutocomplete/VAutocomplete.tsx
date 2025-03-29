@@ -130,10 +130,9 @@ export const VAutocomplete = genericComponent<new <
       },
     })
     const selectionIndex = shallowRef(-1)
-    const color = computed(() => vTextFieldRef.value?.color)
     const label = computed(() => menu.value ? props.closeText : props.openText)
     const { items, transformIn, transformOut } = useItems(props)
-    const { textColorClasses, textColorStyles } = useTextColor(color)
+    const { textColorClasses, textColorStyles } = useTextColor(() => vTextFieldRef.value?.color)
     const search = useProxiedModel(props, 'search', '')
     const model = useProxiedModel(
       props,

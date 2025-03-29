@@ -45,7 +45,7 @@ export const VExpansionPanel = genericComponent<VExpansionPanelSlots>()({
 
   setup (props, { slots }) {
     const groupItem = useGroupItem(props, VExpansionPanelSymbol)
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(props, 'bgColor')
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.bgColor)
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props)
     const isDisabled = computed(() => groupItem?.disabled.value || props.disabled)

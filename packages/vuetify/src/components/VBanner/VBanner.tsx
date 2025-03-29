@@ -66,7 +66,7 @@ export const VBanner = genericComponent<VBannerSlots>()({
   props: makeVBannerProps(),
 
   setup (props, { slots }) {
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(props, 'bgColor')
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.bgColor)
     const { borderClasses } = useBorder(props)
     const { densityClasses } = useDensity(props)
     const { displayClasses, mobile } = useDisplay(props)

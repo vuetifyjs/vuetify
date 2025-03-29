@@ -68,7 +68,7 @@ export const VExpansionPanelTitle = genericComponent<VExpansionPanelTitleSlots>(
 
     if (!expansionPanel) throw new Error('[Vuetify] v-expansion-panel-title needs to be placed inside v-expansion-panel')
 
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(props, 'color')
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.color)
     const { dimensionStyles } = useDimension(props)
 
     const slotProps = computed(() => ({

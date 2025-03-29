@@ -21,7 +21,6 @@ import {
   onBeforeUnmount,
   ref,
   shallowRef,
-  toRef,
   vShow,
   watch,
   withDirectives,
@@ -114,7 +113,7 @@ export const VImg = genericComponent<VImgSlots>()({
   },
 
   setup (props, { emit, slots }) {
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.color)
     const { roundedClasses } = useRounded(props)
     const vm = getCurrentInstance('VImg')
 

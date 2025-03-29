@@ -109,7 +109,7 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
     const { isRtl } = useRtl()
     const { themeClasses } = provideTheme(props)
     const { borderClasses } = useBorder(props)
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.color)
     const { elevationClasses } = useElevation(props)
     const { displayClasses, mobile } = useDisplay(props)
     const { roundedClasses } = useRounded(props)
@@ -193,9 +193,9 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
 
     const { isStuck, stickyStyles } = useSticky({ rootEl, isSticky, layoutItemStyles })
 
-    const scrimColor = useBackgroundColor(computed(() => {
+    const scrimColor = useBackgroundColor(() => {
       return typeof props.scrim === 'string' ? props.scrim : null
-    }))
+    })
     const scrimStyles = computed(() => ({
       ...isDragging.value ? {
         opacity: dragProgress.value * 0.2,
