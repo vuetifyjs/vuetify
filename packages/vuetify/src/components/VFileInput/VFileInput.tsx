@@ -89,6 +89,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
     'mousedown:control': (e: MouseEvent) => true,
     'update:focused': (focused: boolean) => true,
     'update:modelValue': (files: File | File[]) => true,
+    'change': (e: DragEvent) => true,
   },
 
   setup (props, { attrs, emit, slots }) {
@@ -161,6 +162,8 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
       if (!e.dataTransfer) return
 
       model.value = [...e.dataTransfer.files ?? []]
+
+      emit('change', e)
     }
 
     watch(model, newValue => {

@@ -94,9 +94,10 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
 
   emits: {
     'update:modelValue': (files: File[]) => true,
+    'change': (e: DragEvent) => true,
   },
 
-  setup (props, { attrs, slots }) {
+  setup (props, { attrs, emit, slots }) {
     const { t } = useLocale()
     const { densityClasses } = useDensity(props)
     const model = useProxiedModel(
@@ -156,6 +157,8 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
       }
 
       model.value = array
+
+      emit('change', e)
     }
 
     function onClick () {
