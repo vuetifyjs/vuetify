@@ -89,7 +89,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
     'mousedown:control': (e: MouseEvent) => true,
     'update:focused': (focused: boolean) => true,
     'update:modelValue': (files: File | File[]) => true,
-    'change': (e: DragEvent) => true,
+    'change': (e: DragEvent) => true
   },
 
   setup (props, { attrs, emit, slots }) {
