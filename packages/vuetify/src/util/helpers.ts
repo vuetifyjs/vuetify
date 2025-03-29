@@ -815,6 +815,5 @@ export function camelizeProps (props: Record<string, unknown> | null | undefined
 
 export function filterFilesByAcceptType (acceptType: string, files: null | FileList): File[] {
   if (!acceptType || !files) return []
-  return Array.from(files).filter((file) => file.type === acceptType)
+  return Array.from(files).filter(file => file.type === acceptType)
 }
-
