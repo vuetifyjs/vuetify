@@ -147,7 +147,7 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
       }
 
       if (acceptType) {
-        filesArray = filterFilesByAcceptType(acceptType, files)
+        filesArray = filterFilesByAcceptType(files, acceptType)
       }
 
       if (!props.multiple) {
@@ -183,9 +183,9 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
       const acceptType = inputRef.value?.accept
       const files = (e.target as HTMLInputElement)?.files
 
-      if (!files || !acceptType) return
+      if (!files) return
 
-      model.value = filterFilesByAcceptType(acceptType, files)
+      model.value = filterFilesByAcceptType(files, acceptType)
     }
 
     useRender(() => {
