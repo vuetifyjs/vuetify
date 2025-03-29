@@ -48,7 +48,7 @@ describe('VFileInput', () => {
   it('should add file', async () => {
     const model = ref()
     const { element } = render(() => (
-      <VFileInput v-model={ model.value } accept='text/plain' />
+      <VFileInput v-model={ model.value } accept="text/plain" />
     ))
 
     const input = screen.getByCSS('input')
