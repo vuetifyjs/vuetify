@@ -1,19 +1,9 @@
 // Utilities
-import { computed, reactive, ref } from 'vue'
+import { computed, ref } from 'vue'
 import { clamp, easingPatterns, genericComponent, propsFactory, useTransition } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-
-export type VPieSegmentTooltipSlotProps = {
-  visible: boolean
-  x: number
-  y: number
-}
-
-export type VPieSegmentSlots = {
-  tooltip: VPieSegmentTooltipSlotProps
-}
 
 export const makeVPieSegmentProps = propsFactory({
   rotate: Number,
@@ -35,12 +25,12 @@ export const makeVPieSegmentProps = propsFactory({
   hideSlice: Boolean,
 }, 'VPieSegment')
 
-export const VPieSegment = genericComponent<VPieSegmentSlots>()({
+export const VPieSegment = genericComponent()({
   name: 'VPieSegment',
 
   props: makeVPieSegmentProps(),
 
-  setup (props, { slots }) {
+  setup (props) {
     const isHovering = ref(false)
 
     const transitionConfig = {
@@ -81,74 +71,61 @@ export const VPieSegment = genericComponent<VPieSegmentSlots>()({
     const currentSliceCircumference = useTransition(() => sliceCircumference.value, transitionConfig)
     const currentSliceStrokeDashOffset = useTransition(() => sliceStrokeDashOffset.value, transitionConfig)
 
-    const tooltipCoordinates = reactive({ x: 0, y: 0 })
-    function onMousemove ({ clientX, clientY }: MouseEvent) {
-      tooltipCoordinates.x = clientX
-      tooltipCoordinates.y = clientY - 32 /* tooltip height */
-    }
-
     return () => (
-      <div
+      <g
         class="v-pie-segment"
         style={{ color: props.color }}
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 100 100"
-          onMousemove={ onMousemove }
-        >
-          <g transform={ `rotate(${-90 + currentAngle.value} 50 50)` }>
-            { !props.hideSlice && props.width < 1 && (
-              <circle
-                key="inner-slice"
-                fill="transparent"
-                cx="50%"
-                cy="50%"
-                r={ currentSliceRadius.value }
-                stroke="oklch(from currentColor l c h / calc(alpha / 2))"
-                stroke-width={ currentSliceStrokeWidth.value }
-                stroke-dasharray={ currentSliceCircumference.value }
-                stroke-dashoffset={ `${currentSliceStrokeDashOffset.value}px` }
-              />
-            )}
+        <g transform={ `rotate(${-90 + currentAngle.value} 50 50)` }>
+          { !props.hideSlice && props.width < 1 && (
             <circle
-              key="outer-slice"
+              key="inner-slice"
+              fill="transparent"
+              cx="50%"
+              cy="50%"
+              r={ currentSliceRadius.value }
+              stroke="oklch(from currentColor l c h / calc(alpha / 2))"
+              stroke-width={ currentSliceStrokeWidth.value }
+              stroke-dasharray={ currentSliceCircumference.value }
+              stroke-dashoffset={ `${currentSliceStrokeDashOffset.value}px` }
+            />
+          )}
+          <circle
+            key="outer-slice"
+            fill="transparent"
+            cx="50%"
+            cy="50%"
+            r={ currentRadius.value }
+            shape-rendering="geometricPrecision"
+            stroke="currentColor"
+            stroke-width={ currentStrokeWidth.value }
+            stroke-dasharray={ currentCircumference.value }
+            stroke-dashoffset={ `${currentStrokeDashOffset.value}px` }
+          />
+          { props.pattern && (
+            <circle
+              key="pattern-overlay"
               fill="transparent"
               cx="50%"
               cy="50%"
               r={ currentRadius.value }
               shape-rendering="geometricPrecision"
-              stroke="currentColor"
+              stroke={ props.pattern }
               stroke-width={ currentStrokeWidth.value }
               stroke-dasharray={ currentCircumference.value }
               stroke-dashoffset={ `${currentStrokeDashOffset.value}px` }
             />
-            { props.pattern && (
-              <circle
-                key="pattern-overlay"
-                fill="transparent"
-                cx="50%"
-                cy="50%"
-                r={ currentRadius.value }
-                shape-rendering="geometricPrecision"
-                stroke={ props.pattern }
-                stroke-width={ currentStrokeWidth.value }
-                stroke-dasharray={ currentCircumference.value }
-                stroke-dashoffset={ `${currentStrokeDashOffset.value}px` }
-              />
-            )}
-          </g>
-          <path
-            transform={ `rotate(${currentAngle.value} 50 50)` }
-            class="v-pie-segment__overlay"
-            fill="currentColor"
-            d={ `M 50 0 A 50 50 0 ${normalizedValue.value > 50 ? 1 : 0} 1 ${x1.value} ${y1.value} L 50 50` }
-            onMouseenter={ () => isHovering.value = true }
-            onMouseleave={ () => isHovering.value = false }
-          />
-        </svg>
-        { slots.tooltip?.({ visible: isHovering.value, ...tooltipCoordinates }) }
-      </div>
+          )}
+        </g>
+        <path
+          transform={ `rotate(${currentAngle.value} 50 50)` }
+          class="v-pie-segment__overlay"
+          fill="currentColor"
+          d={ `M 50 0 A 50 50 0 ${normalizedValue.value > 50 ? 1 : 0} 1 ${x1.value} ${y1.value} L 50 50` }
+          onMouseenter={ () => isHovering.value = true }
+          onMouseleave={ () => isHovering.value = false }
+        />
+      </g>
     )
   },
 })

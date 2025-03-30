@@ -6,26 +6,24 @@ import { makeVPieSegmentProps, VPieSegment } from './VPieSegment'
 import { VAvatar } from '@/components/VAvatar'
 import { VChip } from '@/components/VChip'
 import { VChipGroup } from '@/components/VChipGroup'
-import { VOverlay } from '@/components/VOverlay'
-import { VTooltip } from '@/components/VTooltip'
+import { VPieTooltip } from './VPieTooltip'
 
 // Composables
 import { makeDensityProps } from '@/composables/density'
 
 // Utilities
-import { computed, ref, watch } from 'vue'
+import { computed, reactive, ref, watch } from 'vue'
 import { clamp, genericComponent, omit, pick, propsFactory } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
 import type { VPieSeries } from './types'
-import type { VPieSegmentTooltipSlotProps } from './VPieSegment'
 
 export type VPieSlots = {
   'center-content': { total: number }
   'legend-text': { segment: VPieSeries }
   title: never
-  'tooltip': { visible: boolean, x: number, y: number, segment: VPieSeries }
+  'tooltip': { segment: VPieSeries }
 }
 
 export const makeVPieProps = propsFactory({
@@ -47,6 +45,8 @@ export const makeVPieProps = propsFactory({
     default: 'bottom',
     validator: (v: any) => ['left', 'top', 'right', 'bottom'].includes(v),
   },
+  tooltipTitleFormat: [String, Function] as PropType<VPieTooltip['$props']['titleFormat']>,
+  tooltipSubtitleFormat: [String, Function] as PropType<VPieTooltip['$props']['subtitleFormat']>,
   ...makeDensityProps(),
   ...pick(makeVPieSegmentProps(), [
     'speed',
@@ -89,6 +89,29 @@ export const VPie = genericComponent<VPieSlots>()({
 
     function arcSize (v: number) { return v / total.value * 100 }
 
+    const tooltipProps = reactive({
+      modelValue: false,
+      target: [0, 0] satisfies [x: number, y: number],
+      segment: null as VPieSeries | null,
+    })
+
+    function onMousemove ({ clientX, clientY }: MouseEvent) {
+      tooltipProps.target = [clientX, clientY]
+    }
+
+    let mouseLeaveTimeout = null! as ReturnType<typeof setTimeout>
+
+    function onMouseenter (segment: VPieSeries) {
+      clearTimeout(mouseLeaveTimeout)
+      tooltipProps.modelValue = true
+      tooltipProps.segment = segment
+    }
+
+    function onMouseleave () {
+      clearTimeout(mouseLeaveTimeout)
+      mouseLeaveTimeout = setTimeout(() => tooltipProps.modelValue = false, 100)
+    }
+
     return () => {
       const segmentProps = VPieSegment.filterProps(omit(props, ['width']))
 
@@ -108,6 +131,11 @@ export const VPie = genericComponent<VPieSlots>()({
               width: `${props.size}px`,
             }}
           >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 100 100"
+              onMousemove={ onMousemove }
+            >
               { visibleSeries.value.map((s, index) => (
                 <VPieSegment
                   { ...segmentProps }
@@ -118,36 +146,22 @@ export const VPie = genericComponent<VPieSlots>()({
                   pattern={ s.pattern }
                   width={ props.width ? props.width / props.size : 1 }
                   zoom={ clamp(props.hoverScale ?? 0.05, 0, 0.25) }
-                  v-slots={{
-                    tooltip: ({ visible, x, y }: VPieSegmentTooltipSlotProps) => (
-                      slots.tooltip?.({ visible, x, y, segment: s }) ?? (
-                        <VTooltip
-                          absolute={ false }
-                          model-value={ visible }
-                          style={{ transform: `translate(${x}px,${y}px)` }}
-                          text={ `${s.title}: ${s.value}` }
-                        />
-                      )
-                    ),
-                  }}
+                  onMouseenter={ () => onMouseenter(s) }
+                  onMouseleave={ () => onMouseleave() }
                 />
               ))}
+            </svg>
 
-            <VOverlay
+            <div
+              class="v-pie__center-content"
               style={{
-                'pointer-events': 'none',
                 transform: `rotate(-${props.rotate || 0}deg)`,
               }}
-              model-value
-              persistent
-              contained
-              opacity={ 0 }
-              content-class="v-pie__center-content"
             >
               <div style="pointer-events: auto">
                 { slots['center-content']?.({ total: total.value }) }
               </div>
-            </VOverlay>
+            </div>
           </div>
 
           { !props.hideLegend && (
@@ -193,6 +207,12 @@ export const VPie = genericComponent<VPieSlots>()({
             </VChipGroup>
           </div>
           )}
+          <VPieTooltip
+            {...tooltipProps}
+            title-format={ props.tooltipTitleFormat }
+            subtitle-format={ props.tooltipSubtitleFormat }
+            v-slots:default={ slots.tooltip }
+          />
         </div>
       )
     }
