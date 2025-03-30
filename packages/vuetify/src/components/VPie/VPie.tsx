@@ -3,10 +3,10 @@ import './VPie.sass'
 
 // Components
 import { makeVPieSegmentProps, VPieSegment } from './VPieSegment'
+import { VPieTooltip } from './VPieTooltip'
 import { VAvatar } from '@/components/VAvatar'
 import { VChip } from '@/components/VChip'
 import { VChipGroup } from '@/components/VChipGroup'
-import { VPieTooltip } from './VPieTooltip'
 
 // Composables
 import { makeDensityProps } from '@/composables/density'
@@ -21,6 +21,7 @@ import type { VPieSeries } from './types'
 
 export type VPieSlots = {
   'center-content': { total: number }
+  legend: { isActive: (item: VPieSeries) => boolean, toggle: (item: VPieSeries) => void }
   'legend-text': { segment: VPieSeries }
   title: never
   'tooltip': { segment: VPieSeries }
@@ -31,6 +32,10 @@ export const makeVPieProps = propsFactory({
   series: {
     type: Array as PropType<VPieSeries[]>,
     default: () => [],
+  },
+  itemKey: {
+    type: String as PropType<keyof VPieSeries>,
+    default: 'id',
   },
   size: {
     type: Number,
@@ -67,15 +72,15 @@ export const VPie = genericComponent<VPieSlots>()({
 
     watch(() => props.series.length, () => {
       // reset when number of series changes
-      enabledSeries.value = props.series.map((_, index) => index)
+      enabledSeries.value = props.series.map(item => item[props.itemKey])
     }, { immediate: true })
 
     const visibleSeries = computed(() => {
       // hidden series get (value: 0) to trigger disappearing animation
-      return props.series.map((series, index) => {
-        return enabledSeries.value.includes(index)
-          ? series
-          : { ...series, value: 0 }
+      return props.series.map(item => {
+        return enabledSeries.value.includes(item[props.itemKey])
+          ? item
+          : { ...item, value: 0 }
       })
     })
 
@@ -88,6 +93,18 @@ export const VPie = genericComponent<VPieSlots>()({
     }
 
     function arcSize (v: number) { return v / total.value * 100 }
+
+    function isActive (item: VPieSeries) {
+      return enabledSeries.value.includes(item[props.itemKey])
+    }
+
+    function toggle (item: VPieSeries) {
+      if (enabledSeries.value.includes(item[props.itemKey])) {
+        enabledSeries.value = enabledSeries.value.filter(x => x !== item[props.itemKey])
+      } else {
+        enabledSeries.value.push(item[props.itemKey])
+      }
+    }
 
     const tooltipProps = reactive({
       modelValue: false,
@@ -121,6 +138,9 @@ export const VPie = genericComponent<VPieSlots>()({
             'v-pie',
             `v-pie--legend-${props.legendPosition}`,
           ]}
+          style={{
+            '--v-pie-size': `${props.size}px`
+          }}
         >
           { slots.title?.() ?? (props.title && (<div class="v-pie__title">{ props.title }</div>)) }
           <div
@@ -136,17 +156,17 @@ export const VPie = genericComponent<VPieSlots>()({
               viewBox="0 0 100 100"
               onMousemove={ onMousemove }
             >
-              { visibleSeries.value.map((s, index) => (
+              { visibleSeries.value.map((item, index) => (
                 <VPieSegment
                   { ...segmentProps }
-                  key={ s.id }
-                  color={ s.color }
-                  value={ arcSize(s.value) }
+                  key={ item[props.itemKey] }
+                  color={ item.color }
+                  value={ arcSize(item.value) }
                   rotate={ arcOffset(index) }
-                  pattern={ s.pattern }
+                  pattern={ item.pattern }
                   width={ props.width ? props.width / props.size : 1 }
                   zoom={ clamp(props.hoverScale ?? 0.05, 0, 0.25) }
-                  onMouseenter={ () => onMouseenter(s) }
+                  onMouseenter={ () => onMouseenter(item) }
                   onMouseleave={ () => onMouseleave() }
                 />
               ))}
@@ -165,50 +185,50 @@ export const VPie = genericComponent<VPieSlots>()({
           </div>
 
           { !props.hideLegend && (
-            <div
-              class="v-pie__legend"
-              style={{ 'max-width': `${props.size}px` }}
-            >
-            <VChipGroup
-              column
-              multiple
-              v-model={ enabledSeries.value }
-              direction={ legendDirection.value }
-            >
-              { props.series.map((s, index) => (
-                <VChip
-                  key={ index }
-                  density={ props.density }
-                  class={{ 'opacity-40': !enabledSeries.value.includes(index) }}
-                  v-slots={{
-                    prepend: () => (
-                      <VAvatar
-                        class="v-pie__legend__circle"
-                        color={ s.color }
-                        border="thin opacity-25"
-                        size={ legendCircleSize.value }
-                        start
-                      >
-                        { s.pattern && (
-                          <svg height="40" width="40">
-                            <rect width="40" height="40" fill={ s.pattern } />
-                          </svg>
-                        )}
-                      </VAvatar>
-                    ),
-                    default: () => (
-                      <div class="v-pie__legend__text">
-                        { slots['legend-text']?.({ segment: s }) ?? s.title }
-                      </div>
-                    ),
-                  }}
-                />
-              ))}
-            </VChipGroup>
-          </div>
+            <div class="v-pie__legend">
+              { slots.legend?.({ isActive, toggle }) ?? (
+                <VChipGroup
+                  column
+                  multiple
+                  model-value={ enabledSeries.value }
+                  direction={ legendDirection.value }
+                >
+                  { props.series.map(item => (
+                    <VChip
+                      key={ item[props.itemKey] }
+                      density={ props.density }
+                      class={{ 'opacity-40': !isActive(item) }}
+                      onClick={ () => toggle(item) }
+                      v-slots={{
+                        prepend: () => (
+                          <VAvatar
+                            class="v-pie__legend__circle"
+                            color={ item.color }
+                            border="thin opacity-25"
+                            size={ legendCircleSize.value }
+                            start
+                          >
+                            { item.pattern && (
+                              <svg height="40" width="40">
+                                <rect width="40" height="40" fill={ item.pattern } />
+                              </svg>
+                            )}
+                          </VAvatar>
+                        ),
+                        default: () => (
+                          <div class="v-pie__legend__text">
+                            { slots['legend-text']?.({ segment: item }) ?? item.title }
+                          </div>
+                        ),
+                      }}
+                    />
+                  ))}
+                </VChipGroup>
+              )}
+            </div>
           )}
           <VPieTooltip
-            {...tooltipProps}
+            { ...tooltipProps }
             title-format={ props.tooltipTitleFormat }
             subtitle-format={ props.tooltipSubtitleFormat }
             v-slots:default={ slots.tooltip }
