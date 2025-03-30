@@ -6,12 +6,15 @@
   .v-pie
     display: grid
     column-gap: 24px
+    --v-pie-size: 250px
 
     &--legend
       &-top
         grid-template-areas: 'title' 'legend' 'content'
+        grid-template-columns: var(--v-pie-size)
       &-bottom
         grid-template-areas: 'title' 'content' 'legend'
+        grid-template-columns: var(--v-pie-size)
       &-right
         grid-template-areas: 'title .' 'content legend'
       &-left
