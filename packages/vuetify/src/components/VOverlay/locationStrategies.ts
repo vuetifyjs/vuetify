@@ -211,9 +211,8 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
     if (oldTarget && !Array.isArray(oldTarget)) observer.unobserve(oldTarget)
     if (newTarget && !Array.isArray(newTarget)) observer.observe(newTarget)
 
-    // TODO: Check or test effect on other components
-    // if (oldContentEl) observer.unobserve(oldContentEl)
-    // if (newContentEl) observer.observe(newContentEl)
+    if (oldContentEl) observer.unobserve(oldContentEl)
+    if (newContentEl) observer.observe(newContentEl)
   }, {
     immediate: true,
   })
@@ -310,10 +309,8 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
     const flipped = { x: false, y: false }
     const available = { x: 0, y: 0 }
 
-    // Make the retry max x2 to get the correct position
-    // Addition happens on resizeObserver see line 207
     // eslint-disable-next-line no-unmodified-loop-condition
-    while (retries < 3) {
+    while (retries < 2) {
       const { x: _x, y: _y, overflows } = checkOverflow(placement)
 
       x += _x
@@ -399,9 +396,9 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
       transformOrigin: `${placement.origin.side} ${placement.origin.align}`,
       // transform: `translate(${pixelRound(x)}px, ${pixelRound(y)}px)`,
       top: convertToUnit(pixelRound(y > 0 ? y : previousY)),
-      left: data.isRtl.value ? undefined : convertToUnit(pixelRound(x > 0 ? x : previousX)),
+      left: data.isRtl.value ? undefined : convertToUnit(12),
       right: data.isRtl.value ? convertToUnit(pixelRound(x > 0 ? -x : -previousX)) : undefined,
-      minWidth: convertToUnit(axis === 'y' ? Math.min(minWidth.value, targetBox.width) : minWidth.value),
+      minWidth: convertToUnit(axis === 'y' ? Math.min(minWidth.value, targetBox.width - 28) : minWidth.value),
       maxWidth: available.x > 0 &&
         convertToUnit(pixelCeil(clamp(
           available.x, minWidth.value === Infinity
