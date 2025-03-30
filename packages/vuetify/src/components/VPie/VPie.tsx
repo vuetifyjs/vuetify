@@ -56,6 +56,7 @@ export const makeVPieProps = propsFactory({
   ...pick(makeVPieSegmentProps(), [
     'speed',
     'padAngle',
+    'rounded',
     'hideSlice',
   ]),
 }, 'VPie')
@@ -140,7 +141,7 @@ export const VPie = genericComponent<VPieSlots>()({
             `v-pie--legend-${props.legendPosition}`,
           ]}
           style={{
-            '--v-pie-size': `${props.size}px`
+            '--v-pie-size': `${props.size}px`,
           }}
         >
           { slots.title?.() ?? (props.title && (<div class="v-pie__title">{ props.title }</div>)) }
@@ -157,12 +158,12 @@ export const VPie = genericComponent<VPieSlots>()({
               viewBox="0 0 100 100"
               onMousemove={ onMousemove }
             >
-              { visibleSeries.value.map((item, index) => (
+              { props.series.map((item, index) => (
                 <VPieSegment
                   { ...segmentProps }
                   key={ item[props.itemKey] }
                   color={ item.color }
-                  value={ arcSize(item.value) }
+                  value={ isActive(item) ? arcSize(item.value) : 0 }
                   rotate={ arcOffset(index) }
                   pattern={ item.pattern }
                   width={ props.width ? props.width / props.size : 1 }

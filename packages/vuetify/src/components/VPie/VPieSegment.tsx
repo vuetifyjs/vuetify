@@ -1,6 +1,7 @@
 // Utilities
 import { computed, ref } from 'vue'
 import { clamp, easingPatterns, genericComponent, propsFactory, useTransition } from '@/util'
+import { roundedArc } from '@/util/svg-arc-corners'
 
 // Types
 import type { PropType } from 'vue'
@@ -21,6 +22,10 @@ export const makeVPieSegmentProps = propsFactory({
   },
   zoom: Number,
   padAngle: {
+    type: Number,
+    default: 0,
+  },
+  rounded: {
     type: Number,
     default: 0,
   },
@@ -46,8 +51,8 @@ export const VPieSegment = genericComponent()({
     }
 
     const hoverZoomRatio = computed(() => Math.max(0, Math.min(0.5, props.zoom ?? 0.05)))
-    const normalizedValue = computed(() => clamp(props.value - 100 * props.padAngle / 360, 0, 99.99))
-    const normalizedWidth = computed(() => clamp(props.width, 0, 1))
+    const normalizedValue = computed(() => clamp(props.value - 100 * props.padAngle / 360, 0.01, 99.99))
+    const normalizedWidth = computed(() => clamp(props.width, 0, props.rounded > 0 ? 0.75 : 1))
 
     const radians = computed(() => (360 * (-normalizedValue.value / 100) + 90) * (Math.PI / 180))
     const x1 = computed(() => 50 + 50 * Math.cos(radians.value))
@@ -78,25 +83,34 @@ export const VPieSegment = genericComponent()({
     const currentSliceCircumference = useTransition(() => sliceCircumference.value, transitionConfig)
     const currentSliceStrokeDashOffset = useTransition(() => sliceStrokeDashOffset.value, transitionConfig)
 
+    const arcRadius = computed(() => 50 * (isHovering.value ? 1 : (1 - hoverZoomRatio.value)))
+    const currentArcRadius = useTransition(() => arcRadius.value, transitionConfig)
+    const currentValue = useTransition(() => normalizedValue.value, transitionConfig)
+    const outerSlicePath = computed(() => {
+      const angleEnd = currentAngle.value + 360 * currentValue.value / 100
+      return roundedArc([50, 50], currentArcRadius.value, currentAngle.value, angleEnd, 50 * Math.min(0.75, normalizedWidth.value), props.rounded)
+    })
+
     return () => (
       <g
         class="v-pie-segment"
         style={{ color: props.color }}
       >
-        <g transform={ `rotate(${-90 + currentAngle.value} 50 50)` }>
-          { !props.hideSlice && props.width < 1 && (
-            <circle
-              key="inner-slice"
-              fill="transparent"
-              cx="50%"
-              cy="50%"
-              r={ currentSliceRadius.value }
-              stroke="oklch(from currentColor l c h / calc(alpha / 2))"
-              stroke-width={ currentSliceStrokeWidth.value }
-              stroke-dasharray={ currentSliceCircumference.value }
-              stroke-dashoffset={ `${currentSliceStrokeDashOffset.value}px` }
-            />
-          )}
+        <path
+          key="outer-slice"
+          fill="currentColor"
+          shape-rendering="geometricPrecision"
+          d={ outerSlicePath.value }
+        />
+        { props.pattern && (
+          <path
+            key="pattern-overlay"
+            shape-rendering="geometricPrecision"
+            fill={ props.pattern }
+            d={ outerSlicePath.value }
+          />
+        )}
+        { normalizedWidth.value === 1 && (
           <circle
             key="outer-slice"
             fill="transparent"
@@ -108,22 +122,23 @@ export const VPieSegment = genericComponent()({
             stroke-width={ currentStrokeWidth.value }
             stroke-dasharray={ currentCircumference.value }
             stroke-dashoffset={ `${currentStrokeDashOffset.value}px` }
+            transform={ `rotate(${-90 + currentAngle.value} 50 50)` }
           />
-          { props.pattern && (
-            <circle
-              key="pattern-overlay"
-              fill="transparent"
-              cx="50%"
-              cy="50%"
-              r={ currentRadius.value }
-              shape-rendering="geometricPrecision"
-              stroke={ props.pattern }
-              stroke-width={ currentStrokeWidth.value }
-              stroke-dasharray={ currentCircumference.value }
-              stroke-dashoffset={ `${currentStrokeDashOffset.value}px` }
-            />
-          )}
-        </g>
+        )}
+        { !props.hideSlice && normalizedWidth.value < 1 && (
+          <circle
+            key="inner-slice"
+            fill="transparent"
+            cx="50%"
+            cy="50%"
+            r={ currentSliceRadius.value }
+            stroke="oklch(from currentColor l c h / calc(alpha / 2))"
+            stroke-width={ currentSliceStrokeWidth.value }
+            stroke-dasharray={ currentSliceCircumference.value }
+            stroke-dashoffset={ `${currentSliceStrokeDashOffset.value}px` }
+            transform={ `rotate(${-90 + currentAngle.value} 50 50)` }
+          />
+        )}
         <path
           transform={ `rotate(${currentAngle.value} 50 50)` }
           class="v-pie-segment__overlay"
