@@ -13,7 +13,7 @@ import type { PropType } from 'vue'
 import type { VPieSeries } from './types'
 
 export type VPieTooltipSlots = {
-  default: { segment: VPieSeries },
+  default: { segment: VPieSeries }
 }
 
 export const makeVPieTooltipProps = propsFactory({
@@ -32,7 +32,7 @@ export const makeVPieTooltipProps = propsFactory({
   ...pick(makeVTooltipProps(), [
     'modelValue',
     'target',
-  ])
+  ]),
 }, 'VPieTooltip')
 
 export const VPieTooltip = genericComponent<VPieTooltipSlots>()({
@@ -41,7 +41,6 @@ export const VPieTooltip = genericComponent<VPieTooltipSlots>()({
   props: makeVPieTooltipProps(),
 
   setup (props, { slots }) {
-
     function formatTextTemplate (template: string, segment?: VPieSeries) {
       return segment
         ? template
@@ -72,7 +71,7 @@ export const VPieTooltip = genericComponent<VPieTooltipSlots>()({
       >
         { !!props.segment && (
           slots.default?.({ segment: props.segment }) ?? (
-            <VScrollYReverseTransition duration={150} mode="out-in">
+            <VScrollYReverseTransition duration={ 150 } mode="out-in">
               <VListItem
                 key={ props.segment.id }
                 class="px-0"
@@ -93,7 +92,7 @@ export const VPieTooltip = genericComponent<VPieTooltipSlots>()({
                         </svg>
                       )}
                     </VAvatar>
-                  )
+                  ),
                 }}
               />
             </VScrollYReverseTransition>
