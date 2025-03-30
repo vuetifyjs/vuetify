@@ -7,6 +7,7 @@ import { makeVTooltipProps, VTooltip } from '@/components/VTooltip/VTooltip'
 // Utilities
 import { computed } from 'vue'
 import { genericComponent, pick, propsFactory } from '@/util'
+import { formatTextTemplate } from './utils'
 
 // Types
 import type { PropType } from 'vue'
@@ -41,14 +42,6 @@ export const VPieTooltip = genericComponent<VPieTooltipSlots>()({
   props: makeVPieTooltipProps(),
 
   setup (props, { slots }) {
-    function formatTextTemplate (template: string, segment?: VPieSeries) {
-      return segment
-        ? template
-          .replaceAll('[title]', segment.title)
-          .replaceAll('[value]', String(segment.value))
-        : undefined
-    }
-
     const tooltipTitleFormatFunction = computed(() => (segment: VPieSeries) => {
       return typeof props.titleFormat === 'function'
         ? props.titleFormat(segment)

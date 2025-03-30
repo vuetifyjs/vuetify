@@ -257,6 +257,10 @@
         "subfolder": "components"
       },
       {
+        "title": "pie-chart",
+        "subfolder": "components"
+      },
+      {
         "title": "pull-to-refresh",
         "subfolder": "components"
       },

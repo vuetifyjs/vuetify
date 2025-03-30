@@ -14,6 +14,7 @@ import { makeDensityProps } from '@/composables/density'
 // Utilities
 import { computed, reactive, ref, watch } from 'vue'
 import { clamp, genericComponent, omit, pick, propsFactory } from '@/util'
+import { formatTextTemplate } from './utils'
 
 // Types
 import type { PropType } from 'vue'
@@ -50,8 +51,18 @@ export const makeVPieProps = propsFactory({
     default: 'bottom',
     validator: (v: any) => ['left', 'top', 'right', 'bottom'].includes(v),
   },
-  tooltipTitleFormat: [String, Function] as PropType<VPieTooltip['$props']['titleFormat']>,
-  tooltipSubtitleFormat: [String, Function] as PropType<VPieTooltip['$props']['subtitleFormat']>,
+  formats: {
+    type: Object as PropType<{
+      legendText: string | ((segment: VPieSeries) => string),
+      tooltipTitle: VPieTooltip['$props']['titleFormat'],
+      tooltipSubtitle: VPieTooltip['$props']['subtitleFormat'],
+    }>,
+    default: {
+      legendText: '[title]',
+      tooltipTitle: '[title]',
+      tooltipSubtitle: '[value]',
+    }
+  },
   ...makeDensityProps(),
   ...pick(makeVPieSegmentProps(), [
     'speed',
@@ -107,6 +118,12 @@ export const VPie = genericComponent<VPieSlots>()({
         enabledSeries.value.push(item[props.itemKey])
       }
     }
+
+    const legendTextFormatFunction = computed(() => (segment: VPieSeries) => {
+      return typeof props.formats.legendText === 'function'
+        ? props.formats.legendText(segment)
+        : formatTextTemplate(props.formats.legendText, segment)
+    })
 
     const tooltipProps = reactive({
       modelValue: false,
@@ -219,7 +236,7 @@ export const VPie = genericComponent<VPieSlots>()({
                         ),
                         default: () => (
                           <div class="v-pie__legend__text">
-                            { slots['legend-text']?.({ segment: item }) ?? item.title }
+                            { slots['legend-text']?.({ segment: item }) ?? legendTextFormatFunction.value(item) }
                           </div>
                         ),
                       }}
@@ -231,8 +248,8 @@ export const VPie = genericComponent<VPieSlots>()({
           )}
           <VPieTooltip
             { ...tooltipProps }
-            title-format={ props.tooltipTitleFormat }
-            subtitle-format={ props.tooltipSubtitleFormat }
+            title-format={ props.formats.tooltipTitle }
+            subtitle-format={ props.formats.tooltipSubtitle }
             v-slots:default={ slots.tooltip }
           />
         </div>
