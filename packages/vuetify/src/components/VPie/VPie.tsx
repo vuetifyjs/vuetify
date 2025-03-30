@@ -55,6 +55,7 @@ export const makeVPieProps = propsFactory({
   ...makeDensityProps(),
   ...pick(makeVPieSegmentProps(), [
     'speed',
+    'padAngle',
     'hideSlice',
   ]),
 }, 'VPie')
