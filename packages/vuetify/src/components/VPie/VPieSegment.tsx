@@ -6,7 +6,10 @@ import { clamp, easingPatterns, genericComponent, propsFactory, useTransition } 
 import type { PropType } from 'vue'
 
 export const makeVPieSegmentProps = propsFactory({
-  rotate: Number,
+  rotate: {
+    type: Number,
+    default: 0,
+  },
   value: {
     type: Number,
     required: true,
@@ -17,6 +20,10 @@ export const makeVPieSegmentProps = propsFactory({
     default: 1,
   },
   zoom: Number,
+  padAngle: {
+    type: Number,
+    default: 0,
+  },
   speed: {
     type: String as PropType<'fast' | 'slow' | 'default'>,
     default: 'default',
@@ -39,7 +46,7 @@ export const VPieSegment = genericComponent()({
     }
 
     const hoverZoomRatio = computed(() => Math.max(0, Math.min(0.5, props.zoom ?? 0.05)))
-    const normalizedValue = computed(() => clamp(props.value, 0, 99.99))
+    const normalizedValue = computed(() => clamp(props.value - 100 * props.padAngle / 360, 0, 99.99))
     const normalizedWidth = computed(() => clamp(props.width, 0, 1))
 
     const radians = computed(() => (360 * (-normalizedValue.value / 100) + 90) * (Math.PI / 180))
@@ -53,7 +60,7 @@ export const VPieSegment = genericComponent()({
     const circumference = computed(() => 2 * Math.PI * radius.value)
     const strokeDashOffset = computed(() => (((100 - normalizedValue.value) / 100) * circumference.value))
 
-    const currentAngle = useTransition(() => (props.rotate ?? 0), transitionConfig)
+    const currentAngle = useTransition(() => (props.rotate + props.padAngle / 2), transitionConfig)
     const currentRadius = useTransition(() => radius.value, transitionConfig)
     const currentStrokeWidth = useTransition(() => strokeWidth.value, transitionConfig)
     const currentCircumference = useTransition(() => circumference.value, transitionConfig)
@@ -120,7 +127,6 @@ export const VPieSegment = genericComponent()({
         <path
           transform={ `rotate(${currentAngle.value} 50 50)` }
           class="v-pie-segment__overlay"
-          fill="currentColor"
           d={ `M 50 0 A 50 50 0 ${normalizedValue.value > 50 ? 1 : 0} 1 ${x1.value} ${y1.value} L 50 50` }
           onMouseenter={ () => isHovering.value = true }
           onMouseleave={ () => isHovering.value = false }
