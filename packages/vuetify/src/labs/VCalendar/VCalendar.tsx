@@ -28,11 +28,11 @@ export const makeVCalendarProps = propsFactory({
 }, 'VCalendar')
 
 export type VCalendarSlots = VCalendarDaySlots & {
-  dayBody: { day?: CalendarDay, events?: Array<any> }
-  dayTitle: { title?: number | string }
-  dayEvent: { day?: CalendarDay, allDay: Boolean, event?: Record<string, unknown> }
+  'day-body': { day?: CalendarDay, events?: Array<any> }
+  'day-title': { title?: number | string }
+  'day-event': { day?: CalendarDay, allDay: Boolean, event?: Record<string, unknown> }
   header: { title: string, clickNext: Function, clickPrev: Function, clickToday: Function }
-  intervalDay: { day?: CalendarDay, dayIndex: Number, events?: Array<any> }
+  'day-interval': { day?: CalendarDay, dayIndex: Number, events?: Array<any> }
   title: { title?: string }
 }
 
@@ -182,7 +182,7 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
                             { ...attrs }
                           >
                             {{
-                              ...pick(slots, ['dayBody', 'dayEvent', 'dayTitle']),
+                              ...pick(slots, ['day-body', 'day-event', 'day-title']),
                             }}
                           </VCalendarMonthDay>
                       )),
@@ -193,7 +193,7 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
             )}
             { props.viewMode === 'week' && (
               daysInWeek.value.map((day, i) =>
-                slots.intervalDay ? slots.intervalDay?.({
+                slots['day-interval'] ? slots['day-interval']?.({
                   ...calendarDayProps,
                   day,
                   dayIndex: i,
@@ -213,7 +213,7 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
             }
 
             { props.viewMode === 'day' && (
-              slots.intervalDay ? slots.intervalDay({
+              slots['day-interval'] ? slots['day-interval']({
                 day: genDays([displayValue.value as Date], adapter.date() as Date)[0],
                 dayIndex: 0,
                 events: props.events?.filter(e =>
