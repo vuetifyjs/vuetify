@@ -1,6 +1,6 @@
 // Utilities
 import { computed, ref, toValue, watch } from 'vue'
-import { clamp } from '@/util'
+import { clamp } from './helpers'
 
 // Types
 import type { MaybeRefOrGetter, Ref } from 'vue'
