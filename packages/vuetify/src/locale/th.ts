@@ -1,11 +1,11 @@
 export default {
   badge: 'สัญลักษณ์',
-  open: 'Open',
+  open: 'เปิด',
   close: 'ปิด',
-  dismiss: 'Dismiss',
+  dismiss: 'ยกเลิก',
   confirmEdit: {
-    ok: 'OK',
-    cancel: 'Cancel',
+    ok: 'ตกลง',
+    cancel: 'ยกเลิก',
   },
   dataIterator: {
     noResultsText: 'ไม่พบข้อมูลที่ค้นหา',
@@ -33,18 +33,18 @@ export default {
     pageText: '{0}-{1} จาก {2}',
   },
   dateRangeInput: {
-    divider: 'to',
+    divider: 'ถึง',
   },
   datePicker: {
-    itemsSelected: '{0} selected',
+    itemsSelected: 'เลือกแล้ว {0} รายการ',
     range: {
-      title: 'Select dates',
-      header: 'Enter dates',
+      title: 'เลือกวันที่',
+      header: 'ป้อนวันที่',
     },
-    title: 'Select date',
-    header: 'Enter date',
+    title: 'เลือกวันที่',
+    header: 'ป้อนวันที่',
     input: {
-      placeholder: 'Enter date',
+      placeholder: 'ป้อนวันที่',
     },
   },
   noDataText: 'ไม่มีข้อมูล',
@@ -57,27 +57,27 @@ export default {
   },
   calendar: {
     moreEvents: 'มีอีก {0}',
-    today: 'Today',
+    today: 'วันนี้',
   },
   input: {
-    clear: 'Clear {0}',
-    prependAction: '{0} prepended action',
-    appendAction: '{0} appended action',
-    otp: 'Please enter OTP character {0}',
+    clear: 'ล้าง {0}',
+    prependAction: 'การกระทำก่อนหน้า {0}',
+    appendAction: 'การกระทำเพิ่มเติม {0}',
+    otp: 'กรุณากรอกตัวอักษร OTP ตัวที่ {0}',
   },
   fileInput: {
     counter: '{0} ไฟล์',
     counterSize: '{0} ไฟล์ (รวม {1})',
   },
   fileUpload: {
-    title: 'Drag and drop files here',
-    divider: 'or',
-    browse: 'Browse Files',
+    title: 'ลากและวางไฟล์ที่นี่',
+    divider: 'หรือ',
+    browse: 'เลือกไฟล์',
   },
   timePicker: {
-    am: 'AM',
-    pm: 'PM',
-    title: 'Select Time',
+    am: 'ช่วงเช้า',
+    pm: 'ช่วงบ่าย',
+    title: 'เลือกเวลา',
   },
   pagination: {
     ariaLabel: {
@@ -86,22 +86,22 @@ export default {
       previous: 'หน้าที่แล้ว',
       page: 'ไปที่หน้า {0}',
       currentPage: 'หน้าปัจจุบัน (หน้า {0})',
-      first: 'First page',
-      last: 'Last page',
+      first: 'หน้าแรก',
+      last: 'หน้าสุดท้าย',
     },
   },
   stepper: {
-    next: 'Next',
-    prev: 'Previous',
+    next: 'ถัดไป',
+    prev: 'ก่อนหน้า',
   },
   rating: {
     ariaLabel: {
-      item: 'Rating {0} of {1}',
+      item: 'คะแนน {0} จาก {1}',
     },
   },
-  loading: 'Loading...',
+  loading: 'กำลังโหลด...',
   infiniteScroll: {
-    loadMore: 'Load more',
-    empty: 'No more',
+    loadMore: 'โหลดเพิ่มเติม',
+    empty: 'ไม่มีข้อมูลเพิ่มเติม',
   },
 }

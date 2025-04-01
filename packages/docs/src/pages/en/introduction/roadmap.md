@@ -16,30 +16,31 @@ Vuetify is always under development. We are constantly working towards improving
 
 <PageFeatures />
 
-<VoPromotionsCardVuetify />
+<PromotedEntry />
 
-## 2024 Component Roadmap
+## 2025 Component Roadmap
 
-The following is a list of all planned components for the year 2024.
+The following is a list of all planned components for the year 2025.
 
-| Component                                                               | Entering Labs | Production Release            |
-|-------------------------------------------------------------------------|---------------|-------------------------------|
-| [v3.8 (Andromeda)](https://github.com/vuetifyjs/vuetify/milestone/74)   |               | Q1 2025 { .bg-surface-light } |
-| [v-number-input](/components/number-inputs/)                            | *             |                               |
-| [v-snackbar-queue](/components/snackbar-queue/)                         | *             |                               |
-| [v-time-picker](/components/time-pickers/)                              | *             |                               |
-| [v-treeview](/components/treeview/)                                     | *             |                               |
-| [v-stepper-vertical](/components/vertical-steppers/)                    | *             |                               |
-| [v4.0 (Revisionist)](https://github.com/vuetifyjs/vuetify/milestone/62) |               | 2025 { .bg-surface-light }    |
-| [v-date-input](/components/date-inputs/)                                | *             |                               |
-| [v-calendar](/components/calendars/)                                    | *             |                               |
-| [v-time-input](https://github.com/vuetifyjs/vuetify/pull/19709)         | Q1 2025       |                               |
-| Future - v4.1+                                                          |               | TBD { .bg-surface-light }     |
-| [v-file-upload](https://github.com/vuetifyjs/vuetify/pull/19667)        | *             |                               |
-| v-date-time-picker                                                      | Q1 2025       |                               |
-| v-date-range-picker                                                     | Q1 2025       |                               |
-| v-video                                                                 | TBD           |                               |
-| v-feature-discovery                                                     | TBD           |                               |
+| Component                                                               | Entering Labs | Production Release               |
+|-------------------------------------------------------------------------|---------------|----------------------------------|
+| [v3.8 (Andromeda)](https://github.com/vuetifyjs/vuetify/milestone/74)   |               | March 2025 { .bg-surface-light } |
+| [v-number-input](/components/number-inputs/)                            | *             |                                  |
+| [v-snackbar-queue](/components/snackbar-queue/)                         | *             |                                  |
+| [v3.9 (Zealot)](https://github.com/vuetifyjs/vuetify/milestone/78)      |               | Q2 2025 { .bg-surface-light }    |
+| [v-time-input](https://github.com/vuetifyjs/vuetify/pull/19709)         | Q1 2025       |                                  |
+| [v-time-picker](/components/time-pickers/)                              | *             |                                  |
+| [v-stepper-vertical](/components/vertical-steppers/)                    | *             |                                  |
+| [v-treeview](/components/treeview/)                                     | *             |                                  |
+| [v-file-upload](/components/file-upload/)                               | *             |                                  |
+| [v4.0 (Revisionist)](https://github.com/vuetifyjs/vuetify/milestone/62) |               | 2025 { .bg-surface-light }       |
+| [v-date-input](/components/date-inputs/)                                | *             |                                  |
+| [v-calendar](/components/calendars/)                                    | *             |                                  |
+| Future - [v4.1](https://github.com/vuetifyjs/vuetify/milestone/77)+     |               | TBD { .bg-surface-light }        |
+| v-date-time-picker                                                      | Q2 2025       |                                  |
+| v-date-range-picker                                                     | Q2 2025       |                                  |
+| v-video                                                                 | TBD           |                                  |
+| v-feature-discovery                                                     | TBD           |                                  |
 
 \* Already in Labs { .text-caption }
 

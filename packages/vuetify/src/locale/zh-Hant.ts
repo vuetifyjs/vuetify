@@ -4,7 +4,7 @@ export default {
   close: '關閉',
   dismiss: '關閉',
   confirmEdit: {
-    ok: 'OK',
+    ok: '確定',
     cancel: '取消',
   },
   dataIterator: {

@@ -5,7 +5,7 @@ import '../VTextField/VTextField.sass'
 // Components
 import { VCounter } from '@/components/VCounter/VCounter'
 import { VField } from '@/components/VField'
-import { filterFieldProps, makeVFieldProps } from '@/components/VField/VField'
+import { makeVFieldProps } from '@/components/VField/VField'
 import { makeVInputProps, VInput } from '@/components/VInput/VInput'
 
 // Composables
@@ -150,10 +150,10 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
     }
 
     const sizerRef = ref<HTMLTextAreaElement>()
-    const rows = ref(+props.rows)
+    const rows = ref(Number(props.rows))
     const isPlainOrUnderlined = computed(() => ['plain', 'underlined'].includes(props.variant))
     watchEffect(() => {
-      if (!props.autoGrow) rows.value = +props.rows
+      if (!props.autoGrow) rows.value = Number(props.rows)
     })
     function calculateInputHeight () {
       if (!props.autoGrow) return
@@ -206,7 +206,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
       const hasDetails = !!(hasCounter || slots.details)
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
       const { modelValue: _, ...inputProps } = VInput.filterProps(props)
-      const fieldProps = filterFieldProps(props)
+      const fieldProps = VField.filterProps(props)
 
       return (
         <VInput

@@ -80,7 +80,6 @@
     "vite-plugin-inspect": "10.2.1",
     "vite-plugin-warmup": "^0.1.0",
     "vue": "3.4.38",
-    "vue-analytics": "^5.16.1",
     "vue-router": "^4.5.0",
     "vue-tsc": "^2.0.29",
     "yargs": "^17.7.2"

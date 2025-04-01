@@ -109,6 +109,7 @@
     {
       name: 'Users',
       children: users.value,
+      id: 'users',
     },
   ])
 

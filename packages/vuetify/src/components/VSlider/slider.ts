@@ -149,7 +149,7 @@ type SliderData = {
 export const useSteps = (props: SliderProps) => {
   const min = computed(() => parseFloat(props.min))
   const max = computed(() => parseFloat(props.max))
-  const step = computed(() => +props.step > 0 ? parseFloat(props.step) : 0)
+  const step = computed(() => Number(props.step) > 0 ? parseFloat(props.step) : 0)
   const decimals = computed(() => Math.max(getDecimals(step.value), getDecimals(min.value)))
 
   function roundValue (value: string | number) {

@@ -13,6 +13,22 @@
       <slot name="item" v-bind="itemProps" />
     </template>
 
+    <template #header="{ props: itemProps }">
+      <v-list-item v-bind="itemProps">
+        <template #title>
+          {{ itemProps.title }}
+
+          <v-badge
+            v-if="itemProps.emphasized"
+            class="ms-n1"
+            color="success"
+            dot
+            inline
+          />
+        </template>
+      </v-list-item>
+    </template>
+
     <template #divider>
       <slot name="divider" />
 
@@ -176,6 +192,7 @@
       value: title,
       appendIcon: item.appendIcon,
       disabled: item.disabled,
+      emphasized: item.emphasized,
     }
   }))
 </script>

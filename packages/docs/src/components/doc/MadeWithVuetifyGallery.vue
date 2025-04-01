@@ -76,7 +76,7 @@
     pagination: Boolean,
   })
 
-  const page = ref(1)
+  const page = shallowRef(1)
   const store = useMadeWithVuetifyStore()
 
   const items = computed(() => {

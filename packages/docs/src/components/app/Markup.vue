@@ -1,63 +1,61 @@
 <template>
-  <v-hover>
-    <template #default="{ props: hoverProps, isHovering }">
-      <v-sheet
-        v-bind="{ ...hoverProps, ...$attrs }"
-        ref="root"
-        :color="theme.name.value === 'light' && !user.mixedTheme ? 'surface-bright' : undefined"
-        :rounded="rounded"
-        :theme="theme.name.value === 'light' && user.mixedTheme ? 'dark' : theme.name.value"
-        class="app-markup overflow-hidden"
-        dir="ltr"
+  <v-hover v-slot="{ props: hoverProps, isHovering }">
+    <v-sheet
+      v-bind="{ ...hoverProps, ...$attrs }"
+      ref="root"
+      :color="theme.name.value === 'light' && !user.mixedTheme ? 'surface-bright' : undefined"
+      :rounded="rounded"
+      :theme="theme.name.value === 'light' && user.mixedTheme ? 'dark' : theme.name.value"
+      class="app-markup overflow-hidden"
+      dir="ltr"
+    >
+      <v-toolbar
+        v-if="resource"
+        class="px-1"
+        height="44"
       >
-        <v-toolbar
+        <v-sheet
           v-if="resource"
-          class="px-1"
+          class="text-body-2 px-3 pt-3 text-medium-emphasis"
+          color="transparent"
           height="44"
+          rounded="tl"
         >
-          <v-sheet
-            v-if="resource"
-            class="text-body-2 px-3 pt-3 text-medium-emphasis"
-            color="transparent"
-            height="44"
-            rounded="tl"
-          >
-            <v-icon icon="mdi-file-tree" />
+          <v-icon icon="mdi-file-tree" />
 
-            {{ resource }}
-          </v-sheet>
-        </v-toolbar>
+          {{ resource }}
+        </v-sheet>
+      </v-toolbar>
 
-        <v-tooltip location="start">
-          <template #activator="{ props: activatorProps }">
-            <v-fade-transition>
-              <v-btn
-                v-if="isHovering"
-                :key="icon"
-                :icon="icon"
-                class="text-disabled me-3 mt-1 app-markup-btn position-absolute right-0 top-0"
-                density="comfortable"
-                v-bind="activatorProps"
-                variant="text"
-                @click="copy"
-              />
-            </v-fade-transition>
-          </template>
+      <v-tooltip location="start">
+        <template #activator="{ props: activatorProps }">
+          <v-fade-transition>
+            <v-btn
+              v-if="isHovering"
+              :key="icon"
+              :icon="icon"
+              class="text-disabled me-3 mt-1 app-markup-btn position-absolute right-0 top-0"
+              density="comfortable"
+              v-bind="activatorProps"
+              variant="text"
+              @click="copy"
+            />
+          </v-fade-transition>
+        </template>
 
-          <span>{{ t('copy-source') }}</span>
-        </v-tooltip>
+        <span>{{ t('copy-source') }}</span>
+      </v-tooltip>
 
-        <div class="pa-4 pe-12">
-          <slot>
-            <pre v-if="inline" :class="className">
-          <code :class="className" v-html="highlighted" />
-        </pre>
+      <div class="pa-4 pe-12">
+        <slot>
+          <pre v-if="inline" :class="className">
+        <code :class="className" v-html="highlighted" />
+      </pre>
 
-            <code v-else :class="className" v-html="highlighted" />
-          </slot>
-        </div>
-      </v-sheet>
-    </template>
+          <code v-else :class="className" v-html="highlighted" />
+        </slot>
+      </div>
+    </v-sheet>
   </v-hover>
 </template>
 
@@ -107,10 +105,10 @@
   const user = useUserStore()
   const theme = useTheme()
   const { t } = useI18n()
-  const clicked = ref(false)
+  const clicked = shallowRef(false)
   const root = ref<ComponentPublicInstance>()
 
-  const highlighted = ref('')
+  const highlighted = shallowRef('')
   watchEffect(async () => {
     highlighted.value = props.code && props.language && Prism.highlight(await props.code, Prism.languages[props.language], props.language)
   })

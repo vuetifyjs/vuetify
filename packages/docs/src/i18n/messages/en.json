@@ -54,6 +54,7 @@
   "composition": "Composition",
   "copied": "Copied!",
   "copy-link": "Copy link",
+  "configuration": "Configuration",
   "company": "Company",
   "comparison": {
     "average": "**Based on average of all Major/Minor/Patch releases over the last 12 months.",
@@ -68,6 +69,7 @@
   },
   "component": "Component",
   "components": "Components",
+  "concepts": "Common concepts",
   "contents": "Contents",
   "containment": "Containment",
   "contribute": {

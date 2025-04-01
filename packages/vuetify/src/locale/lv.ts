@@ -1,11 +1,11 @@
 export default {
   badge: 'Žetons',
-  open: 'Open',
+  open: 'Atvērt',
   close: 'Aizvērt',
-  dismiss: 'Dismiss',
+  dismiss: 'Noraidīt',
   confirmEdit: {
-    ok: 'OK',
-    cancel: 'Cancel',
+    ok: 'Labi',
+    cancel: 'Atcelt',
   },
   dataIterator: {
     noResultsText: 'Nekas netika atrasts',
@@ -21,7 +21,7 @@ export default {
       activateDescending: 'Aktivizēt, lai sakārtotu dilstošā secībā.',
       activateAscending: 'Aktivizēt, lai sakārtotu augošā secībā.',
     },
-    sortBy: 'Sort by',
+    sortBy: 'Kārtot pēc',
   },
   dataFooter: {
     itemsPerPageText: 'Rādīt lapā:',
@@ -33,18 +33,18 @@ export default {
     pageText: '{0}-{1} no {2}',
   },
   dateRangeInput: {
-    divider: 'to',
+    divider: 'līdz',
   },
   datePicker: {
-    itemsSelected: '{0} selected',
+    itemsSelected: '{0} izvēlēts',
     range: {
-      title: 'Select dates',
-      header: 'Enter dates',
+      title: 'Izvēlieties datumus',
+      header: 'Ievadiet datumus',
     },
-    title: 'Select date',
-    header: 'Enter date',
+    title: 'Izvēlieties datumu',
+    header: 'Ievadiet datumu',
     input: {
-      placeholder: 'Enter date',
+      placeholder: 'Ievadiet datumu',
     },
   },
   noDataText: 'Nav pieejamu datu',
@@ -52,56 +52,56 @@ export default {
     prev: 'Iepriekšējais slaids',
     next: 'Nākamais slaids',
     ariaLabel: {
-      delimiter: 'Carousel slide {0} of {1}',
+      delimiter: 'Karuseļa slaids {0} no {1}',
     },
   },
   calendar: {
     moreEvents: 'Vēl {0}',
-    today: 'Today',
+    today: 'Šodien',
   },
   input: {
-    clear: 'Clear {0}',
-    prependAction: '{0} prepended action',
-    appendAction: '{0} appended action',
-    otp: 'Please enter OTP character {0}',
+    clear: 'Notīrīt {0}',
+    prependAction: '{0} pievienota darbība sākumā',
+    appendAction: '{0} pievienota darbība beigās',
+    otp: 'Lūdzu, ievadiet OTP simbolu {0}',
   },
   fileInput: {
-    counter: '{0} files',
-    counterSize: '{0} files ({1} in total)',
+    counter: '{0} faili',
+    counterSize: '{0} faili (kopā {1})',
   },
   fileUpload: {
-    title: 'Drag and drop files here',
-    divider: 'or',
-    browse: 'Browse Files',
+    title: 'Velciet un nometiet failus šeit',
+    divider: 'vai',
+    browse: 'Pārlūkot failus',
   },
   timePicker: {
     am: 'AM',
     pm: 'PM',
-    title: 'Select Time',
+    title: 'Izvēlieties laiku',
   },
   pagination: {
     ariaLabel: {
-      root: 'Navigācija paginationā',
+      root: 'Navigācija lapošanā',
       next: 'Nākamā lapa',
       previous: 'Iepriekšējā lapa',
       page: 'Iet uz lapu {0}',
       currentPage: 'Pašreizējā lapa, lapa {0}',
-      first: 'First page',
-      last: 'Last page',
+      first: 'Pirmā lapa',
+      last: 'Pēdējā lapa',
     },
   },
   stepper: {
-    next: 'Next',
-    prev: 'Previous',
+    next: 'Nākamais',
+    prev: 'Iepriekšējais',
   },
   rating: {
     ariaLabel: {
-      item: 'Rating {0} of {1}',
+      item: 'Vērtējums {0} no {1}',
     },
   },
-  loading: 'Loading...',
+  loading: 'Ielādē...',
   infiniteScroll: {
-    loadMore: 'Load more',
-    empty: 'No more',
+    loadMore: 'Ielādēt vairāk',
+    empty: 'Nav vairāk vienumu',
   },
 }
