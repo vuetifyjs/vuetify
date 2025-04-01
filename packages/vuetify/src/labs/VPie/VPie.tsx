@@ -13,29 +13,29 @@ import { makeDensityProps } from '@/composables/density'
 
 // Utilities
 import { computed, reactive, ref, watch } from 'vue'
-import { clamp, genericComponent, omit, pick, propsFactory } from '@/util'
+import { clamp, genericComponent, pick, propsFactory } from '@/util'
 import { formatTextTemplate } from './utils'
 
 // Types
 import type { PropType } from 'vue'
-import type { VPieSeries } from './types'
+import type { TextTemplate, VPieItem } from './types'
 
 export type VPieSlots = {
   'center-content': { total: number }
-  legend: { isActive: (item: VPieSeries) => boolean, toggle: (item: VPieSeries) => void }
-  'legend-text': { segment: VPieSeries }
+  legend: { isActive: (item: VPieItem) => boolean, toggle: (item: VPieItem) => void }
+  'legend-text': { segment: VPieItem }
   title: never
-  'tooltip': { segment: VPieSeries }
+  tooltip: { segment: VPieItem }
 }
 
 export const makeVPieProps = propsFactory({
   title: String,
-  series: {
-    type: Array as PropType<VPieSeries[]>,
+  item: {
+    type: Array as PropType<VPieItem[]>,
     default: () => [],
   },
   itemKey: {
-    type: String as PropType<keyof VPieSeries>,
+    type: String as PropType<keyof VPieItem>,
     default: 'id',
   },
   size: {
@@ -53,9 +53,9 @@ export const makeVPieProps = propsFactory({
   },
   formats: {
     type: Object as PropType<{
-      legendText: string | ((segment: VPieSeries) => string),
-      tooltipTitle: VPieTooltip['$props']['titleFormat'],
-      tooltipSubtitle: VPieTooltip['$props']['subtitleFormat'],
+      legendText: TextTemplate<VPieItem>,
+      tooltipTitle: TextTemplate<VPieItem>,
+      tooltipSubtitle: TextTemplate<VPieItem>,
     }>,
     default: {
       legendText: '[title]',
@@ -81,54 +81,54 @@ export const VPie = genericComponent<VPieSlots>()({
     const legendCircleSize = computed(() => ({ default: 20, comfortable: 18, compact: 16 }[props.density ?? 'default']))
     const legendDirection = computed(() => ['left', 'right'].includes(props.legendPosition) ? 'vertical' : 'horizontal')
 
-    const enabledSeries = ref<number[]>([])
+    const visibleItemsKeys = ref<number[]>([])
 
-    watch(() => props.series.length, () => {
-      // reset when number of series changes
-      enabledSeries.value = props.series.map(item => item[props.itemKey])
+    watch(() => props.item.length, () => {
+      // reset when number of items changes
+      visibleItemsKeys.value = props.item.map(item => item[props.itemKey])
     }, { immediate: true })
 
-    const visibleSeries = computed(() => {
-      // hidden series get (value: 0) to trigger disappearing animation
-      return props.series.map(item => {
-        return enabledSeries.value.includes(item[props.itemKey])
+    const visibleItems = computed(() => {
+      // hidden items get (value: 0) to trigger disappearing animation
+      return props.item.map(item => {
+        return visibleItemsKeys.value.includes(item[props.itemKey])
           ? item
           : { ...item, value: 0 }
       })
     })
 
-    const total = computed(() => visibleSeries.value.reduce((sum, item) => sum + item.value, 0))
+    const total = computed(() => visibleItems.value.reduce((sum, item) => sum + item.value, 0))
 
     function arcOffset (index: number) {
-      return visibleSeries.value
+      return visibleItems.value
         .slice(0, index)
         .reduce((acc, s) => acc + (s.value / total.value) * 360, 0)
     }
 
     function arcSize (v: number) { return v / total.value * 100 }
 
-    function isActive (item: VPieSeries) {
-      return enabledSeries.value.includes(item[props.itemKey])
+    function isActive (item: VPieItem) {
+      return visibleItemsKeys.value.includes(item[props.itemKey])
     }
 
-    function toggle (item: VPieSeries) {
-      if (enabledSeries.value.includes(item[props.itemKey])) {
-        enabledSeries.value = enabledSeries.value.filter(x => x !== item[props.itemKey])
+    function toggle (item: VPieItem) {
+      if (visibleItemsKeys.value.includes(item[props.itemKey])) {
+        visibleItemsKeys.value = visibleItemsKeys.value.filter(x => x !== item[props.itemKey])
       } else {
-        enabledSeries.value.push(item[props.itemKey])
+        visibleItemsKeys.value.push(item[props.itemKey])
       }
     }
 
-    const legendTextFormatFunction = computed(() => (segment: VPieSeries) => {
+    const legendTextFormatFunction = computed(() => (item: VPieItem) => {
       return typeof props.formats.legendText === 'function'
-        ? props.formats.legendText(segment)
-        : formatTextTemplate(props.formats.legendText, segment)
+        ? props.formats.legendText(item)
+        : formatTextTemplate(props.formats.legendText, item)
     })
 
     const tooltipProps = reactive({
       modelValue: false,
       target: [0, 0] satisfies [x: number, y: number],
-      segment: null as VPieSeries | null,
+      item: null as VPieItem | null,
     })
 
     function onMousemove ({ clientX, clientY }: MouseEvent) {
@@ -137,10 +137,10 @@ export const VPie = genericComponent<VPieSlots>()({
 
     let mouseLeaveTimeout = null! as ReturnType<typeof setTimeout>
 
-    function onMouseenter (segment: VPieSeries) {
+    function onMouseenter (item: VPieItem) {
       clearTimeout(mouseLeaveTimeout)
       tooltipProps.modelValue = true
-      tooltipProps.segment = segment
+      tooltipProps.item = item
     }
 
     function onMouseleave () {
@@ -149,7 +149,12 @@ export const VPie = genericComponent<VPieSlots>()({
     }
 
     return () => {
-      const segmentProps = VPieSegment.filterProps(omit(props, ['width']))
+      const itemProps = VPieSegment.filterProps(pick(props, [
+        'speed',
+        'padAngle',
+        'rounded',
+        'hideSlice'
+      ]))
 
       return (
         <div
@@ -175,9 +180,9 @@ export const VPie = genericComponent<VPieSlots>()({
               viewBox="0 0 100 100"
               onMousemove={ onMousemove }
             >
-              { props.series.map((item, index) => (
+              { props.item.map((item, index) => (
                 <VPieSegment
-                  { ...segmentProps }
+                  { ...itemProps }
                   key={ item[props.itemKey] }
                   color={ item.color }
                   value={ isActive(item) ? arcSize(item.value) : 0 }
@@ -209,10 +214,10 @@ export const VPie = genericComponent<VPieSlots>()({
                 <VChipGroup
                   column
                   multiple
-                  model-value={ enabledSeries.value }
+                  model-value={ visibleItemsKeys.value }
                   direction={ legendDirection.value }
                 >
-                  { props.series.map(item => (
+                  { props.item.map(item => (
                     <VChip
                       key={ item[props.itemKey] }
                       density={ props.density }
