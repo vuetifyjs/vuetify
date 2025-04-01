@@ -6,28 +6,28 @@ import { makeVTooltipProps, VTooltip } from '@/components/VTooltip/VTooltip'
 
 // Utilities
 import { computed } from 'vue'
-import { genericComponent, pick, propsFactory } from '@/util'
 import { formatTextTemplate } from './utils'
+import { genericComponent, pick, propsFactory } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import type { TextTemplate, VPieItem } from './types'
+import type { PieItem, TextTemplate } from './types'
 
 export type VPieTooltipSlots = {
-  default: { segment: VPieItem }
+  default: { segment: PieItem }
 }
 
 export const makeVPieTooltipProps = propsFactory({
-  segment: {
-    type: Object as PropType<VPieItem | null>,
+  item: {
+    type: Object as PropType<PieItem | null>,
     default: null,
   },
   titleFormat: {
-    type: [String, Function] as PropType<TextTemplate<VPieItem>>,
+    type: [String, Function] as PropType<TextTemplate<PieItem>>,
     default: '[title]',
   },
   subtitleFormat: {
-    type: [String, Function] as PropType<TextTemplate<VPieItem>>,
+    type: [String, Function] as PropType<TextTemplate<PieItem>>,
     default: '[value]',
   },
   ...pick(makeVTooltipProps(), [
@@ -42,13 +42,13 @@ export const VPieTooltip = genericComponent<VPieTooltipSlots>()({
   props: makeVPieTooltipProps(),
 
   setup (props, { slots }) {
-    const tooltipTitleFormatFunction = computed(() => (segment: VPieItem) => {
+    const tooltipTitleFormatFunction = computed(() => (segment: PieItem) => {
       return typeof props.titleFormat === 'function'
         ? props.titleFormat(segment)
         : formatTextTemplate(props.titleFormat, segment)
     })
 
-    const tooltipSubtitleFormatFunction = computed(() => (segment: VPieItem) => {
+    const tooltipSubtitleFormatFunction = computed(() => (segment: PieItem) => {
       return typeof props.subtitleFormat === 'function'
         ? props.subtitleFormat(segment)
         : formatTextTemplate(props.subtitleFormat, segment)
@@ -62,26 +62,26 @@ export const VPieTooltip = genericComponent<VPieTooltipSlots>()({
         target={ props.target }
         content-class="v-pie__tooltip-content"
       >
-        { !!props.segment && (
-          slots.default?.({ segment: props.segment }) ?? (
+        { !!props.item && (
+          slots.default?.({ segment: props.item }) ?? (
             <VScrollYReverseTransition duration={ 150 } mode="out-in">
               <VListItem
-                key={ props.segment.id }
+                key={ props.item.key }
                 class="px-0"
                 density="compact"
                 style="zoom: 0.88"
-                title={ tooltipTitleFormatFunction.value(props.segment) }
-                subtitle={ tooltipSubtitleFormatFunction.value(props.segment) }
+                title={ tooltipTitleFormatFunction.value(props.item) }
+                subtitle={ tooltipSubtitleFormatFunction.value(props.item) }
                 v-slots={{
                   prepend: () => (
                     <VAvatar
-                      color={ props.segment!.color }
+                      color={ props.item!.color }
                       size="28"
                       border="thin opacity-25"
                     >
-                      { !!props.segment!.pattern && (
+                      { !!props.item!.pattern && (
                         <svg height="40" width="40">
-                          <circle r="40" fill={ props.segment!.pattern } />
+                          <circle r="40" fill={ props.item!.pattern } />
                         </svg>
                       )}
                     </VAvatar>

@@ -11,7 +11,15 @@ function pointOnArc (center: Point, radius: number, angle: number) {
 
 function drawCircle ([x, y]: Point, r: number, width: number) {
   const innerRadius = r - width
-  return ['M', x - r, y, 'A', r, r, 0, 1, 0, x + r, y, 'A', r, r, 0, 1, 0, x - r, y, 'M', x - innerRadius, y, 'A', innerRadius, innerRadius, 0, 1, 0, x + innerRadius, y, 'A', innerRadius, innerRadius, 0, 1, 0, x - innerRadius, y, 'Z']
+  return [
+    'M', x - r, y,
+    'A', r, r, 0, 1, 0, x + r, y,
+    'A', r, r, 0, 1, 0, x - r, y,
+    'M', x - innerRadius, y,
+    'A', innerRadius, innerRadius, 0, 1, 0, x + innerRadius, y,
+    'A', innerRadius, innerRadius, 0, 1, 0, x - innerRadius, y,
+    'Z',
+  ]
 }
 
 export function roundedArc (center: Point, radius: number, startAngle: number, endAngle: number, width: number, rounding: number): string {

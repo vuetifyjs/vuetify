@@ -72,29 +72,11 @@ Charts are more like drawings then regular HTML elements and their size needs to
 
 <ExamplesExample file="v-pie/prop-size" />
 
-#### Width
-
-With `width` prop you can make Pie into a nice looking Donut. By default semi-transparent inner-slice is visible, but you can hide it with `hide-slice`.
-
-<ExamplesExample file="v-pie/prop-width" />
-
-#### Rounded
-
-Donut version supports rounded corners and will look best with a little padding
-
-<ExamplesExample file="v-pie/prop-rounded" />
-
-#### Rotate
-
-The **rotate** prop is used to adjust the chart drawing to your project's conventions for data presentation
-
-<ExamplesExample file="v-pie/prop-rotate" />
-
 #### Legend position
 
-The legend can be moved to any side or hidden entirely
+The legend can be moved to any side or hidden entirely. With little effort you can also control legend's and tooltip's text.
 
-<ExamplesExample file="v-pie/prop-legend-position" />
+<ExamplesExample file="v-pie/prop-legend" />
 
 #### Item text overrides
 

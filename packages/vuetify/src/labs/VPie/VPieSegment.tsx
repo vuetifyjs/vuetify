@@ -18,7 +18,7 @@ export const makeVPieSegmentProps = propsFactory({
   color: String,
   width: {
     type: Number,
-    default: 1,
+    default: 100,
   },
   zoom: Number,
   padAngle: {
@@ -52,13 +52,13 @@ export const VPieSegment = genericComponent()({
 
     const hoverZoomRatio = computed(() => Math.max(0, Math.min(0.5, props.zoom ?? 0.05)))
     const normalizedValue = computed(() => clamp(props.value - 100 * props.padAngle / 360, 0.01, 99.99))
-    const normalizedWidth = computed(() => clamp(props.width, 0, props.rounded > 0 ? 0.75 : 1))
+    const normalizedWidth = computed(() => clamp(props.width / 100, 0, props.rounded > 0 ? 0.75 : 1))
 
     const radians = computed(() => (360 * (-normalizedValue.value / 100) + 90) * (Math.PI / 180))
     const x1 = computed(() => 50 + 50 * Math.cos(radians.value))
     const y1 = computed(() => 50 - 50 * Math.sin(radians.value))
 
-    const radius = computed(() => 50 * (1 - normalizedWidth.value / 2) * (isHovering.value ? 1 : (1 - hoverZoomRatio.value)))
+    const radius = computed(() => 50 * (1 - normalizedWidth.value / 2) * (isHovering.value ? 1 : (1 - hoverZoomRatio.value * 2)))
 
     const diameter = computed(() => (radius.value / (1 - normalizedWidth.value / 2)))
     const strokeWidth = computed(() => normalizedWidth.value * diameter.value)
@@ -88,7 +88,14 @@ export const VPieSegment = genericComponent()({
     const currentValue = useTransition(() => normalizedValue.value, transitionConfig)
     const outerSlicePath = computed(() => {
       const angleEnd = currentAngle.value + 360 * currentValue.value / 100
-      return roundedArc([50, 50], currentArcRadius.value, currentAngle.value, angleEnd, 50 * Math.min(0.75, normalizedWidth.value), props.rounded)
+      return roundedArc(
+        [50, 50],
+        currentArcRadius.value,
+        currentAngle.value,
+        angleEnd,
+        50 * Math.min(0.75, normalizedWidth.value),
+        props.rounded
+      )
     })
 
     return () => (
