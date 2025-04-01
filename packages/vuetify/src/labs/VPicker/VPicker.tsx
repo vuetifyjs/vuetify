@@ -23,6 +23,7 @@ export type VPickerSlots = {
 
 export const makeVPickerProps = propsFactory({
   bgColor: String,
+  divided: Boolean,
   landscape: Boolean,
   title: String,
   hideHeader: Boolean,
@@ -48,6 +49,7 @@ export const VPicker = genericComponent<VPickerSlots>()({
           class={[
             'v-picker',
             {
+              'v-picker--divided': props.divided,
               'v-picker--landscape': props.landscape,
               'v-picker--with-actions': !!slots.actions,
             },

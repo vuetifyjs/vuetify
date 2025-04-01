@@ -33,6 +33,8 @@ export type ThemeOptions = false | {
   defaultTheme?: string
   variations?: false | VariationsOptions
   themes?: Record<string, ThemeDefinition>
+  stylesheetId?: string
+  scope?: string
 }
 export type ThemeDefinition = DeepPartial<InternalThemeDefinition>
 
@@ -42,6 +44,8 @@ interface InternalThemeOptions {
   defaultTheme: string
   variations: false | VariationsOptions
   themes: Record<string, InternalThemeDefinition>
+  stylesheetId: string
+  scope?: string
 }
 
 interface VariationsOptions {
@@ -185,6 +189,7 @@ function genDefaults () {
         },
       },
     },
+    stylesheetId: 'vuetify-theme-stylesheet',
   }
 }
 
@@ -252,6 +257,25 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
   })
   const current = computed(() => computedThemes.value[name.value])
 
+  function createCssClass (lines: string[], selector: string, content: string[]) {
+    lines.push(
+      `${getScopedSelector(selector)} {\n`,
+      ...content.map(line => `  ${line};\n`),
+      '}\n',
+    )
+  }
+
+  function getScopedSelector (selector: string) {
+    if (!parsedOptions.scope) {
+      return selector
+    }
+    const scopeSelector = `:where(${parsedOptions.scope})`
+    if (selector === ':root') {
+      return scopeSelector
+    }
+    return `${scopeSelector} ${selector}`
+  }
+
   const styles = computed(() => {
     const lines: string[] = []
 
@@ -295,7 +319,7 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
     return {
       style: [{
         textContent: styles.value,
-        id: 'vuetify-theme-stylesheet',
+        id: parsedOptions.stylesheetId,
         nonce: parsedOptions.cspNonce || false as never,
       }],
     }
@@ -321,7 +345,7 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
       }
     } else {
       let styleEl = IN_BROWSER
-        ? document.getElementById('vuetify-theme-stylesheet')
+        ? document.getElementById(parsedOptions.stylesheetId)
         : null
 
       if (IN_BROWSER) {
@@ -334,7 +358,7 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
         if (typeof document !== 'undefined' && !styleEl) {
           const el = document.createElement('style')
           el.type = 'text/css'
-          el.id = 'vuetify-theme-stylesheet'
+          el.id = parsedOptions.stylesheetId
           if (parsedOptions.cspNonce) el.setAttribute('nonce', parsedOptions.cspNonce)
 
           styleEl = el
@@ -398,14 +422,6 @@ export function useTheme () {
   if (!theme) throw new Error('Could not find Vuetify theme injection')
 
   return theme
-}
-
-function createCssClass (lines: string[], selector: string, content: string[]) {
-  lines.push(
-    `${selector} {\n`,
-    ...content.map(line => `  ${line};\n`),
-    '}\n',
-  )
 }
 
 function genCssVariables (theme: InternalThemeDefinition) {

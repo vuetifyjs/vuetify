@@ -11,7 +11,7 @@ import { computed, nextTick, shallowRef, watch } from 'vue'
 import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
-import type { PropType } from 'vue'
+import type { PropType, VNodeProps } from 'vue'
 import type { GenericProps } from '@/util'
 
 export type VSnackbarQueueSlots<T extends string | SnackbarMessage> = {
@@ -25,9 +25,8 @@ export type VSnackbarQueueSlots<T extends string | SnackbarMessage> = {
   }
 }
 
-export type SnackbarMessage = Omit<
+export type SnackbarMessage = string | Omit<
   VSnackbar['$props'],
-  | '$children'
   | 'modelValue'
   | 'onUpdate:modelValue'
   | 'activator'
@@ -37,6 +36,10 @@ export type SnackbarMessage = Omit<
   | 'openOnClick'
   | 'openOnFocus'
   | 'openOnHover'
+  | '$children'
+  | 'v-slots'
+  | `v-slot:${string}`
+  | keyof VNodeProps
 >
 
 export const makeVSnackbarQueueProps = propsFactory({
@@ -47,14 +50,14 @@ export const makeVSnackbarQueueProps = propsFactory({
     default: '$vuetify.dismiss',
   },
   modelValue: {
-    type: Array as PropType<readonly (string | SnackbarMessage)[]>,
+    type: Array as PropType<readonly SnackbarMessage[]>,
     default: () => [],
   },
 
   ...omit(makeVSnackbarProps(), ['modelValue']),
 }, 'VSnackbarQueue')
 
-export const VSnackbarQueue = genericComponent<new <T extends readonly (string | SnackbarMessage)[]> (
+export const VSnackbarQueue = genericComponent<new <T extends readonly SnackbarMessage[]> (
   props: {
     modelValue?: T
     'onUpdate:modelValue'?: (val: T) => void
@@ -66,7 +69,7 @@ export const VSnackbarQueue = genericComponent<new <T extends readonly (string |
   props: makeVSnackbarQueueProps(),
 
   emits: {
-    'update:modelValue': (val: (string | SnackbarMessage)[]) => true,
+    'update:modelValue': (val: SnackbarMessage[]) => true,
   },
 
   setup (props, { emit, slots }) {
@@ -74,7 +77,7 @@ export const VSnackbarQueue = genericComponent<new <T extends readonly (string |
 
     const isActive = shallowRef(false)
     const isVisible = shallowRef(false)
-    const current = shallowRef<SnackbarMessage>()
+    const current = shallowRef<Exclude<SnackbarMessage, string>>()
 
     watch(() => props.modelValue.length, (val, oldVal) => {
       if (!isVisible.value && val > oldVal) {

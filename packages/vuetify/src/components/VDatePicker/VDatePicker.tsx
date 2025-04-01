@@ -13,7 +13,7 @@ import { makeVPickerProps, VPicker } from '@/labs/VPicker/VPicker'
 
 // Composables
 import { useDate } from '@/composables/date'
-import { useLocale } from '@/composables/locale'
+import { useLocale, useRtl } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
@@ -58,6 +58,7 @@ export const makeVDatePickerProps = propsFactory({
     type: String,
     default: '$vuetify.datePicker.header',
   },
+  headerColor: String,
 
   ...makeVDatePickerControlsProps(),
   ...makeVDatePickerMonthProps({
@@ -99,6 +100,7 @@ export const VDatePicker = genericComponent<new <
   setup (props, { emit, slots }) {
     const adapter = useDate()
     const { t } = useLocale()
+    const { rtlClasses } = useRtl()
 
     const model = useProxiedModel(
       props,
@@ -135,6 +137,7 @@ export const VDatePicker = genericComponent<new <
 
       return value && adapter.isValid(value) ? value : today
     })
+    const headerColor = computed(() => props.headerColor ?? props.color)
 
     const month = ref(Number(props.month ?? adapter.getMonth(adapter.startOfMonth(internal.value))))
     const year = ref(Number(props.year ?? adapter.getYear(adapter.startOfYear(adapter.setMonth(internal.value, month.value)))))
@@ -274,6 +277,7 @@ export const VDatePicker = genericComponent<new <
       const datePickerYearsProps = omit(VDatePickerYears.filterProps(props), ['modelValue'])
 
       const headerProps = {
+        color: headerColor.value,
         header: header.value,
         transition: headerTransition.value,
       }
@@ -281,12 +285,14 @@ export const VDatePicker = genericComponent<new <
       return (
         <VPicker
           { ...pickerProps }
+          color={ headerColor.value }
           class={[
             'v-date-picker',
             `v-date-picker--${viewMode.value}`,
             {
               'v-date-picker--show-week': props.showWeek,
             },
+            rtlClasses.value,
             props.class,
           ]}
           style={ props.style }
