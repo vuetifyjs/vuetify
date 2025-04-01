@@ -11,6 +11,12 @@ export default {
     noResultsText: 'Ingen matchende data fundet',
     loadingText: 'Indhenter data...',
   },
+  select: {
+    ariaLabel: {
+      checked: 'Checked',
+      unchecked: 'Not Checked',
+    },
+  },
   dataTable: {
     itemsPerPageText: 'Rækker pr. side:',
     ariaLabel: {
