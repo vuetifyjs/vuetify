@@ -13,55 +13,55 @@ import { makeDensityProps } from '@/composables/density'
 
 // Utilities
 import { computed, reactive, ref, watch } from 'vue'
-import { clamp, genericComponent, pick, propsFactory } from '@/util'
 import { formatTextTemplate } from './utils'
+import { clamp, genericComponent, pick, propsFactory } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import type { TextTemplate, VPieItem } from './types'
+import type { PieItem, TextTemplate } from './types'
 
 export type VPieSlots = {
   'center-content': { total: number }
-  legend: { isActive: (item: VPieItem) => boolean, toggle: (item: VPieItem) => void }
-  'legend-text': { segment: VPieItem }
+  legend: { isActive: (item: PieItem) => boolean, toggle: (item: PieItem) => void }
+  'legend-text': { item: PieItem }
   title: never
-  tooltip: { segment: VPieItem }
+  tooltip: { item: PieItem }
 }
 
 export const makeVPieProps = propsFactory({
   title: String,
-  item: {
-    type: Array as PropType<VPieItem[]>,
+  items: {
+    type: Array as PropType<PieItem[]>,
     default: () => [],
-  },
-  itemKey: {
-    type: String as PropType<keyof VPieItem>,
-    default: 'id',
   },
   size: {
     type: Number,
     default: 250,
   },
   rotate: Number,
-  hideLegend: Boolean,
   width: Number,
   hoverScale: Number,
-  legendPosition: {
-    type: String as PropType<'left' | 'top' | 'right' | 'bottom'>,
-    default: 'bottom',
-    validator: (v: any) => ['left', 'top', 'right', 'bottom'].includes(v),
+  gaugeCut: {
+    type: Number,
+    default: 0,
+  },
+  legend: {
+    type: [Boolean, Object] as PropType<boolean | {
+      visible?: boolean
+      position?: 'left' | 'top' | 'right' | 'bottom'
+      textFormat?: TextTemplate<PieItem>
+    }>,
+    default: false,
   },
   formats: {
     type: Object as PropType<{
-      legendText: TextTemplate<VPieItem>,
-      tooltipTitle: TextTemplate<VPieItem>,
-      tooltipSubtitle: TextTemplate<VPieItem>,
+      tooltipTitle?: TextTemplate<PieItem>
+      tooltipSubtitle?: TextTemplate<PieItem>
     }>,
-    default: {
-      legendText: '[title]',
+    default: () => ({
       tooltipTitle: '[title]',
       tooltipSubtitle: '[value]',
-    }
+    }),
   },
   ...makeDensityProps(),
   ...pick(makeVPieSegmentProps(), [
@@ -78,20 +78,35 @@ export const VPie = genericComponent<VPieSlots>()({
   props: makeVPieProps(),
 
   setup (props, { slots }) {
+    const legendConfig = computed(() => ({
+      visible: !!props.legend && (props.legend as any)?.visible !== false,
+      position: 'bottom',
+      textFormat: '[title]',
+      ...(typeof props.legend === 'object' ? props.legend : {}),
+    }))
+
     const legendCircleSize = computed(() => ({ default: 20, comfortable: 18, compact: 16 }[props.density ?? 'default']))
-    const legendDirection = computed(() => ['left', 'right'].includes(props.legendPosition) ? 'vertical' : 'horizontal')
+    const legendDirection = computed(() => ['left', 'right'].includes(legendConfig.value.position) ? 'vertical' : 'horizontal')
 
-    const visibleItemsKeys = ref<number[]>([])
+    const legendMode = computed<string>(() => !legendConfig.value.visible ? 'hidden' : legendConfig.value.position)
 
-    watch(() => props.item.length, () => {
+    const legendTextFormatFunction = computed(() => (item: PieItem) => {
+      return typeof legendConfig.value.textFormat === 'function'
+        ? legendConfig.value.textFormat(item)
+        : formatTextTemplate(legendConfig.value.textFormat, item)
+    })
+
+    const visibleItemsKeys = ref<PieItem['key'][]>([])
+
+    watch(() => props.items.length, () => {
       // reset when number of items changes
-      visibleItemsKeys.value = props.item.map(item => item[props.itemKey])
+      visibleItemsKeys.value = props.items.map(item => item.key)
     }, { immediate: true })
 
     const visibleItems = computed(() => {
       // hidden items get (value: 0) to trigger disappearing animation
-      return props.item.map(item => {
-        return visibleItemsKeys.value.includes(item[props.itemKey])
+      return props.items.map(item => {
+        return visibleItemsKeys.value.includes(item.key)
           ? item
           : { ...item, value: 0 }
       })
@@ -99,36 +114,33 @@ export const VPie = genericComponent<VPieSlots>()({
 
     const total = computed(() => visibleItems.value.reduce((sum, item) => sum + item.value, 0))
 
+    const gaugeOffset = computed(() => `${props.size * 0.4 * (Math.min(180, props.gaugeCut ?? 0)) / 180}px`)
+    const rotateDeg = computed(() => `${props.gaugeCut ? (180 + props.gaugeCut / 2) : (props.rotate ?? 0)}deg`)
+
     function arcOffset (index: number) {
       return visibleItems.value
         .slice(0, index)
-        .reduce((acc, s) => acc + (s.value / total.value) * 360, 0)
+        .reduce((acc, s) => acc + (s.value / total.value) * (360 - props.gaugeCut), 0)
     }
 
-    function arcSize (v: number) { return v / total.value * 100 }
+    function arcSize (v: number) { return v / total.value * (100 - props.gaugeCut / 3.6) }
 
-    function isActive (item: VPieItem) {
-      return visibleItemsKeys.value.includes(item[props.itemKey])
+    function isActive (item: PieItem) {
+      return visibleItemsKeys.value.includes(item.key)
     }
 
-    function toggle (item: VPieItem) {
-      if (visibleItemsKeys.value.includes(item[props.itemKey])) {
-        visibleItemsKeys.value = visibleItemsKeys.value.filter(x => x !== item[props.itemKey])
+    function toggle (item: PieItem) {
+      if (visibleItemsKeys.value.includes(item.key)) {
+        visibleItemsKeys.value = visibleItemsKeys.value.filter(x => x !== item.key)
       } else {
-        visibleItemsKeys.value.push(item[props.itemKey])
+        visibleItemsKeys.value.push(item.key)
       }
     }
-
-    const legendTextFormatFunction = computed(() => (item: VPieItem) => {
-      return typeof props.formats.legendText === 'function'
-        ? props.formats.legendText(item)
-        : formatTextTemplate(props.formats.legendText, item)
-    })
 
     const tooltipProps = reactive({
       modelValue: false,
       target: [0, 0] satisfies [x: number, y: number],
-      item: null as VPieItem | null,
+      item: null as PieItem | null,
     })
 
     function onMousemove ({ clientX, clientY }: MouseEvent) {
@@ -137,7 +149,7 @@ export const VPie = genericComponent<VPieSlots>()({
 
     let mouseLeaveTimeout = null! as ReturnType<typeof setTimeout>
 
-    function onMouseenter (item: VPieItem) {
+    function onMouseenter (item: PieItem) {
       clearTimeout(mouseLeaveTimeout)
       tooltipProps.modelValue = true
       tooltipProps.item = item
@@ -153,14 +165,14 @@ export const VPie = genericComponent<VPieSlots>()({
         'speed',
         'padAngle',
         'rounded',
-        'hideSlice'
+        'hideSlice',
       ]))
 
       return (
         <div
           class={[
             'v-pie',
-            `v-pie--legend-${props.legendPosition}`,
+            `v-pie--legend-${legendMode.value}`,
           ]}
           style={{
             '--v-pie-size': `${props.size}px`,
@@ -170,7 +182,8 @@ export const VPie = genericComponent<VPieSlots>()({
           <div
             class="v-pie__content"
             style={{
-              transform: `rotate(${props.rotate || 0}deg)`,
+              transform: `rotate(${rotateDeg.value})`,
+              marginBottom: `calc(-1 * ${gaugeOffset.value})`,
               height: `${props.size}px`,
               width: `${props.size}px`,
             }}
@@ -180,15 +193,15 @@ export const VPie = genericComponent<VPieSlots>()({
               viewBox="0 0 100 100"
               onMousemove={ onMousemove }
             >
-              { props.item.map((item, index) => (
+              { props.items.map((item, index) => (
                 <VPieSegment
                   { ...itemProps }
-                  key={ item[props.itemKey] }
+                  key={ item.key }
                   color={ item.color }
                   value={ isActive(item) ? arcSize(item.value) : 0 }
                   rotate={ arcOffset(index) }
                   pattern={ item.pattern }
-                  width={ props.width ? props.width / props.size : 1 }
+                  width={ props.width ?? 100 }
                   zoom={ clamp(props.hoverScale ?? 0.05, 0, 0.25) }
                   onMouseenter={ () => onMouseenter(item) }
                   onMouseleave={ () => onMouseleave() }
@@ -199,7 +212,8 @@ export const VPie = genericComponent<VPieSlots>()({
             <div
               class="v-pie__center-content"
               style={{
-                transform: `rotate(-${props.rotate || 0}deg)`,
+                transform: `rotate(-${rotateDeg.value})`,
+                marginTop: `-${40 * props.gaugeCut / 360}%`,
               }}
             >
               <div style="pointer-events: auto">
@@ -208,8 +222,8 @@ export const VPie = genericComponent<VPieSlots>()({
             </div>
           </div>
 
-          { !props.hideLegend && (
-            <div class="v-pie__legend">
+          { legendConfig.value.visible && (
+            <div class="v-pie__legend" key="legend">
               { slots.legend?.({ isActive, toggle }) ?? (
                 <VChipGroup
                   column
@@ -217,9 +231,9 @@ export const VPie = genericComponent<VPieSlots>()({
                   model-value={ visibleItemsKeys.value }
                   direction={ legendDirection.value }
                 >
-                  { props.item.map(item => (
+                  { props.items.map(item => (
                     <VChip
-                      key={ item[props.itemKey] }
+                      key={ item.key }
                       density={ props.density }
                       class={{ 'opacity-40': !isActive(item) }}
                       onClick={ () => toggle(item) }
@@ -241,7 +255,7 @@ export const VPie = genericComponent<VPieSlots>()({
                         ),
                         default: () => (
                           <div class="v-pie__legend__text">
-                            { slots['legend-text']?.({ segment: item }) ?? legendTextFormatFunction.value(item) }
+                            { slots['legend-text']?.({ item }) ?? legendTextFormatFunction.value(item) }
                           </div>
                         ),
                       }}
