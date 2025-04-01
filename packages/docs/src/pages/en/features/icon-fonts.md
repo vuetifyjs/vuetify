@@ -8,6 +8,8 @@ related:
   - /components/buttons
   - /components/avatars
 features:
+  github: /composables/icons.tsx
+  label: 'E: icons'
   report: true
 ---
 
@@ -504,6 +506,8 @@ const aliases: IconAliases = {
   checkboxOff: '...',
   checkboxIndeterminate: '...',
   delimiter: '...',
+  sortAsc: '...',
+  sortDesc: '...',
   sort: '...',
   expand: '...',
   menu: '...',
@@ -522,6 +526,7 @@ const aliases: IconAliases = {
   file: '...',
   plus: '...',
   minus: '...',
+  calendar:  '...',
 }
 
 const custom: IconSet = {

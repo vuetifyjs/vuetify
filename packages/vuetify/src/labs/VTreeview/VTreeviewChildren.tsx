@@ -4,6 +4,7 @@ import { VTreeviewItem } from './VTreeviewItem'
 import { VCheckboxBtn } from '@/components/VCheckbox'
 
 // Composables
+import { makeDensityProps } from '@/composables/density'
 import { IconValue } from '@/composables/icons'
 
 // Utilities
@@ -53,6 +54,8 @@ export const makeVTreeviewChildrenProps = propsFactory({
   selectable: Boolean,
   selectedColor: String,
   selectStrategy: [String, Function, Object] as PropType<SelectStrategyProp>,
+
+  ...makeDensityProps(),
 }, 'VTreeviewChildren')
 
 export const VTreeviewChildren = genericComponent<new <T extends InternalListItem>(
@@ -103,6 +106,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
                   disabled={ props.disabled }
                   loading={ loading }
                   color={ props.selectedColor }
+                  density={ props.density }
                   indeterminate={ slotProps.isIndeterminate }
                   indeterminateIcon={ props.indeterminateIcon }
                   falseIcon={ props.falseIcon }
@@ -122,6 +126,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
         ),
         append: slots.append ? slotProps => slots.append?.({ ...slotProps, item: item.raw, internalItem: item }) : undefined,
         title: slots.title ? slotProps => slots.title?.({ ...slotProps, item: item.raw, internalItem: item }) : undefined,
+        subtitle: slots.subtitle ? slotProps => slots.subtitle?.({ ...slotProps, item: item.raw, internalItem: item }) : undefined,
       } satisfies VTreeviewItem['$props']['$children']
 
       const treeviewGroupProps = VTreeviewGroup.filterProps(itemProps)

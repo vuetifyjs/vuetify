@@ -46,8 +46,8 @@
 
   const props = computed(() => {
     return {
-      ':items': 'items',
-      ':page': 'page',
+      items: 'items',
+      page: 'page',
     }
   })
 
@@ -67,7 +67,7 @@
   })
 
   const code = computed(() => {
-    return `<v-data-iterator${propsToString(props.value)}>${slots.value}</v-data-iterator>`
+    return `<v-data-iterator${propsToString(props.value, ['items'])}>${slots.value}</v-data-iterator>`
   })
 
   const script = computed(() => {

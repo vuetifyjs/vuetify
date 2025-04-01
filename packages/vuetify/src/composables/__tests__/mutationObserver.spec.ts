@@ -16,7 +16,7 @@ describe('mutationObserver', () => {
       },
     })
 
-    expect(callback).toHaveBeenCalled()
+    expect(callback).toHaveBeenCalledTimes(1)
   })
 
   it('should not invoke callback on mounted', async () => {

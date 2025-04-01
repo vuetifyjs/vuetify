@@ -8,6 +8,8 @@ related:
   - /features/treeshaking/
   - /features/blueprints/
 features:
+  github: /composables/defaults.ts
+  label: 'E: defaults'
   report: true
 ---
 

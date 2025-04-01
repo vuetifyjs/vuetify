@@ -1,5 +1,6 @@
 {
   "props": {
+    "absolute": "Applies position: absolute to the component.",
     "alt": "Alternate text for screen readers. Leave empty for decorative images.",
     "aspectRatio": "Calculated as `width/height`, so for a 1920x1080px image this will be `1.7778`. Will be calculated automatically if omitted.",
     "cover": "Resizes the background image to cover the entire container.",

@@ -4,6 +4,7 @@
     "hideHeader": "Hide the picker header."
   },
   "slots": {
-    "actions": "Slot for customizing the content in the actions area"
+    "actions": "Slot for customizing the content in the actions area",
+    "header": "Slot for the component's header content."
   }
 }

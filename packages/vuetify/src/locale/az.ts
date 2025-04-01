@@ -1,6 +1,6 @@
 export default {
   badge: 'Nişan',
-  open: 'Open',
+  open: 'Açıq',
   close: 'Bağla',
   dismiss: 'Rədd et',
   confirmEdit: {
@@ -16,7 +16,7 @@ export default {
     ariaLabel: {
       sortDescending: 'Azalan sıra ilə düzülmüş.',
       sortAscending: 'Artan sıra ilə düzülmüş.',
-      sortNone: 'Sıralanmamışdır. ',
+      sortNone: 'Sıralanmamışdır.',
       activateNone: 'Sıralamanı yığışdır.',
       activateDescending: 'Azalan sıra ilə düz.',
       activateAscending: 'Artan sıra ilə düz.',
@@ -33,7 +33,7 @@ export default {
     pageText: '{0} - {1} arası, Cəmi: {2} qeydiyyat',
   },
   dateRangeInput: {
-    divider: 'to',
+    divider: 'ilə',
   },
   datePicker: {
     itemsSelected: '{0} seçilib',
@@ -56,7 +56,7 @@ export default {
     },
   },
   calendar: {
-    moreEvents: '{0} ədad daha',
+    moreEvents: '{0} ədəd daha',
     today: 'Bu gün',
   },
   input: {
@@ -72,11 +72,11 @@ export default {
   fileUpload: {
     title: 'Faylları buraya sürüşdürün',
     divider: 'və ya',
-    browse: 'Faylları baxın',
+    browse: 'Fayllara baxın',
   },
   timePicker: {
-    am: 'AM',
-    pm: 'PM',
+    am: 'Səhər',
+    pm: 'Axşam',
     title: 'Vaxtı seçin',
   },
   pagination: {

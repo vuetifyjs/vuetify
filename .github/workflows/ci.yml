@@ -30,15 +30,9 @@ jobs:
     if: needs.pre_job.outputs.should_skip != 'true'
     runs-on: ubuntu-24.04
     steps:
-      - uses: earthly/setup-ucacher@b99687d79dd75262bfc326b9e5ad3a520385a18b
       - uses: actions/checkout@v4
       - uses: vuetifyjs/setup-action@master
-      - run: pnpm build:lib
-        working-directory: ./packages/vuetify
-      - run: ucacher pnpm build:dist
-        working-directory: ./packages/vuetify
-      - run: ucacher pnpm build:types
-        working-directory: ./packages/vuetify
+      - run: pnpm build vuetify
       - uses: actions/upload-artifact@v4
         with:
           name: vuetify-dist
@@ -56,14 +50,13 @@ jobs:
       matrix:
         scopes: ['--scope vuetify --scope @vuetify/api-generator', '--scope vuetifyjs.com']
     steps:
-      - uses: earthly/setup-ucacher@b99687d79dd75262bfc326b9e5ad3a520385a18b
       - uses: actions/checkout@v4
       - uses: actions/download-artifact@v4
         with:
           name: vuetify-dist
           path: packages/vuetify
       - uses: vuetifyjs/setup-action@master
-      - run: ucacher pnpm lerna run lint $SCOPES
+      - run: pnpm lerna run lint $SCOPES
         env:
           SCOPES: ${{ matrix.scopes }}
 
@@ -94,7 +87,6 @@ jobs:
     runs-on: ubuntu-24.04
     if: github.event_name == 'push' && startswith(github.ref, 'refs/tags/v') && github.repository_owner == 'vuetifyjs'
     steps:
-      - uses: earthly/setup-ucacher@b99687d79dd75262bfc326b9e5ad3a520385a18b
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
@@ -103,7 +95,7 @@ jobs:
           name: vuetify-dist
           path: packages/vuetify
       - uses: vuetifyjs/setup-action@master
-      - run: ucacher pnpm build api
+      - run: pnpm build api
       - run: echo "RELEASE_TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
       - name: NPM Release
         run: bash scripts/deploy.sh
@@ -123,7 +115,6 @@ jobs:
     if: needs.pre_job.outputs.should_skip != 'true' && github.event_name == 'push' && github.repository_owner == 'vuetifyjs' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/next')
     runs-on: ubuntu-24.04
     steps:
-      - uses: earthly/setup-ucacher@b99687d79dd75262bfc326b9e5ad3a520385a18b
       - uses: actions/checkout@v4
       - uses: actions/download-artifact@v4
         with:
@@ -131,10 +122,10 @@ jobs:
           path: packages/vuetify
       - uses: vuetifyjs/setup-action@master
       - uses: ./.github/actions/download-locales
-      - run: ucacher pnpm build api
+      - run: pnpm build api
       - run: pnpm build docs
         env:
-          NODE_OPTIONS: --max-old-space-size=4096
+          NODE_OPTIONS: --max-old-space-size=5120
           VITE_COSMIC_2_BUCKET_SLUG: ${{ secrets.COSMIC_2_BUCKET_SLUG }}
           VITE_COSMIC_2_BUCKET_READ_KEY: ${{ secrets.COSMIC_2_BUCKET_READ_KEY }}
           VITE_COSMIC_BUCKET_SLUG: ${{ secrets.COSMIC_BUCKET_SLUG }}
@@ -146,6 +137,7 @@ jobs:
           VITE_EMAILJS_TEMPLATE_ID: ${{ secrets.EMAILJS_TEMPLATE_ID }}
           VITE_API_SERVER_URL: ${{ secrets.API_SERVER_URL }}
           VITE_GITHUB_SHA: ${{ github.sha }}
+          VITE_GITHUB_REF: ${{ github.ref_name }}
       - uses: actions/upload-artifact@v4
         with:
           name: docs-dist
@@ -154,8 +146,7 @@ jobs:
   publish-docs:
     needs: [lint, test-unit, build-docs]
     runs-on: ubuntu-24.04
-    environment: Production
-    if: github.event_name == 'push' && github.repository_owner == 'vuetifyjs' && github.ref == 'refs/heads/master'
+    environment: ${{ github.ref_name }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/download-artifact@v4
