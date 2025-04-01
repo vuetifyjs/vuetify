@@ -69,7 +69,7 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
   setup (props, { emit, slots }) {
     const { t } = useLocale()
     const adapter = useDate()
-    const { mobile } = useDisplay()
+    const { mobile } = useDisplay(props)
     const { isFocused, focus, blur } = useFocus(props)
     const model = useProxiedModel(
       props,
@@ -141,7 +141,7 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
 
       const target = e.target as HTMLInputElement
 
-      model.value = target.value === '' ? null : target.value
+      model.value = adapter.isValid(target.value) ? target.value : null
     }
 
     function onClick (e: MouseEvent) {
@@ -170,12 +170,6 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
       if (value != null) return
 
       model.value = null
-    }
-
-    function onUpdateMenuModel (isMenuOpen: boolean) {
-      if (isMenuOpen) return
-
-      isEditingInput.value = false
     }
 
     function onBlur () {
@@ -222,7 +216,6 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
                   location={ props.location }
                   closeOnContentClick={ false }
                   openOnClick={ false }
-                  onUpdate:modelValue={ onUpdateMenuModel }
                 >
                   <VConfirmEdit
                     { ...confirmEditProps }
@@ -245,7 +238,6 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
                           }
 
                           emit('save', value)
-                          vDateInputRef.value?.blur()
 
                           disabledActions.value = []
                         }
