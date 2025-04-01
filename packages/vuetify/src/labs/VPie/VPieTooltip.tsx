@@ -11,23 +11,23 @@ import { formatTextTemplate } from './utils'
 
 // Types
 import type { PropType } from 'vue'
-import type { VPieSeries } from './types'
+import type { TextTemplate, VPieItem } from './types'
 
 export type VPieTooltipSlots = {
-  default: { segment: VPieSeries }
+  default: { segment: VPieItem }
 }
 
 export const makeVPieTooltipProps = propsFactory({
   segment: {
-    type: Object as PropType<VPieSeries | null>,
+    type: Object as PropType<VPieItem | null>,
     default: null,
   },
   titleFormat: {
-    type: [String, Function] as PropType<string | ((segment: VPieSeries) => string)>,
+    type: [String, Function] as PropType<TextTemplate<VPieItem>>,
     default: '[title]',
   },
   subtitleFormat: {
-    type: [String, Function] as PropType<string | ((segment: VPieSeries) => string)>,
+    type: [String, Function] as PropType<TextTemplate<VPieItem>>,
     default: '[value]',
   },
   ...pick(makeVTooltipProps(), [
@@ -42,13 +42,13 @@ export const VPieTooltip = genericComponent<VPieTooltipSlots>()({
   props: makeVPieTooltipProps(),
 
   setup (props, { slots }) {
-    const tooltipTitleFormatFunction = computed(() => (segment: VPieSeries) => {
+    const tooltipTitleFormatFunction = computed(() => (segment: VPieItem) => {
       return typeof props.titleFormat === 'function'
         ? props.titleFormat(segment)
         : formatTextTemplate(props.titleFormat, segment)
     })
 
-    const tooltipSubtitleFormatFunction = computed(() => (segment: VPieSeries) => {
+    const tooltipSubtitleFormatFunction = computed(() => (segment: VPieItem) => {
       return typeof props.subtitleFormat === 'function'
         ? props.subtitleFormat(segment)
         : formatTextTemplate(props.subtitleFormat, segment)
