@@ -22,6 +22,7 @@ interface RippleOptions {
   class?: string
   center?: boolean
   circle?: boolean
+  noTriggerOnEnter?: boolean
 }
 
 export interface RippleDirectiveBinding extends Omit<DirectiveBinding, 'modifiers' | 'value'> {
@@ -30,6 +31,7 @@ export interface RippleDirectiveBinding extends Omit<DirectiveBinding, 'modifier
     center?: boolean
     circle?: boolean
     stop?: boolean
+    noTriggerOnEnter?: boolean
   }
 }
 
@@ -250,7 +252,7 @@ function rippleCancelShow (e: MouseEvent | TouchEvent) {
 let keyboardRipple = false
 
 function keyboardRippleShow (e: KeyboardEvent) {
-  if (!keyboardRipple && (e.keyCode === keyCodes.enter || e.keyCode === keyCodes.space)) {
+  if (!keyboardRipple && (((e.keyCode === keyCodes.enter) && !modifiers.noTriggerOnEnter) || e.keyCode === keyCodes.space)) {
     keyboardRipple = true
     rippleShow(e)
   }
