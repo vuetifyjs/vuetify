@@ -22,7 +22,7 @@ The `v-snackbar-queue` component is used to display a sequence of messages to th
 
 <PageFeatures />
 
-<DocIntroduced version="3.7.0" />
+<DocIntroduced version="3.8.0" />
 
 ## Usage
 
