@@ -1,9 +1,10 @@
-import { VPieItem } from "./types";
+// Types
+import type { PieItem } from './types'
 
-export function formatTextTemplate (template: string, segment?: VPieItem) {
-  return segment
+export function formatTextTemplate (template: string, item?: PieItem) {
+  return item
     ? template
-      .replaceAll('[title]', segment.title)
-      .replaceAll('[value]', String(segment.value))
+      .replaceAll('[title]', item.title)
+      .replaceAll('[value]', String(item.value))
     : undefined
 }

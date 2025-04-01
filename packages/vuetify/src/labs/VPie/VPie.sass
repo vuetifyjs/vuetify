@@ -19,6 +19,8 @@
         grid-template-areas: 'title .' 'content legend'
       &-left
         grid-template-areas: '. title' 'legend content'
+      &-hidden
+        grid-template-areas: 'title' 'content'
 
     &__title
       grid-area: title
@@ -45,6 +47,7 @@
     &__legend
       grid-area: legend
       align-self: center
+      padding-block: 12px
 
       .v-chip__content
         width: 100%
