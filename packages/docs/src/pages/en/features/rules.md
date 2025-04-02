@@ -142,7 +142,8 @@ In this case, error message can be redefined as second parameter:
 </v-form>
 ```
 
-<!-- ## Aliases
+<!--
+## Aliases
 
 Rules can also be used in inputs using the alias names syntax:
 
@@ -167,7 +168,8 @@ RuleBuilders parameters can also be passed using an Array:
     ]"
   ></v-text-field>
 </v-form>
-``` -->
+```
+-->
 
 ## Custom rules
 

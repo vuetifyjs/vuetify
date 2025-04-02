@@ -86,7 +86,7 @@ pnpm add @mdi/font -D
 yarn add @mdi/font -D
 ```
 
-``` bash [npm]
+```bash [npm]
 npm install @mdi/font -D
 ```
 
