@@ -6,67 +6,69 @@ import type { DateAdapter } from '../DateAdapter'
 
 type CustomDateFormat = Intl.DateTimeFormatOptions | ((date: Date, formatString: string, locale: string) => string)
 
+// https://simplelocalize.io/data/locales/
+// then `new Intl.Locale(...).getWeekInfo()`
 const weekInfo: Record<string, { firstDay: number, firstWeekSize: number }> = {
   '001': { firstDay: 1, firstWeekSize: 1 }, // not covered by Intl
-  AD: { firstDay: 1, firstWeekSize: 1 },
+  AD: { firstDay: 1, firstWeekSize: 4 }, // ca-AD
   AE: { firstDay: 6, firstWeekSize: 1 }, // ar-AE
-  AF: { firstDay: 6, firstWeekSize: 1 }, // prs-AF or ps-AF
-  AG: { firstDay: 1, firstWeekSize: 1 },
-  AI: { firstDay: 1, firstWeekSize: 1 },
+  AF: { firstDay: 6, firstWeekSize: 1 }, // uz-AF or ps-AF | tk-AF
+  AG: { firstDay: 0, firstWeekSize: 1 }, // en-AG
+  AI: { firstDay: 1, firstWeekSize: 1 }, // en-AI
   AL: { firstDay: 1, firstWeekSize: 1 }, // sq-AL
   AM: { firstDay: 1, firstWeekSize: 1 }, // hy-AM
-  AN: { firstDay: 1, firstWeekSize: 4 },
+  AN: { firstDay: 1, firstWeekSize: 4 }, // nl-AN
   AR: { firstDay: 1, firstWeekSize: 1 }, // es-AR
-  AS: { firstDay: 0, firstWeekSize: 1 },
+  AS: { firstDay: 0, firstWeekSize: 1 }, // sm-AS or en-AS
   AT: { firstDay: 1, firstWeekSize: 4 }, // de-AT
   AU: { firstDay: 1, firstWeekSize: 1 }, // en-AU
-  AX: { firstDay: 1, firstWeekSize: 1 },
-  AZ: { firstDay: 1, firstWeekSize: 1 }, // az-Cyrl-AZ or az-Latn-AZ
-  BA: { firstDay: 1, firstWeekSize: 1 }, // bs-Cyrl-BA or bs-Latn-BA | hr-BA | sr-BA | sr-Cyrl-BA | sr-Latn-BA
+  AX: { firstDay: 1, firstWeekSize: 4 }, // sv-AX
+  AZ: { firstDay: 1, firstWeekSize: 1 }, // az-AZ
+  BA: { firstDay: 1, firstWeekSize: 1 }, // sr-BA or bs-BA | hr-BA
   BD: { firstDay: 0, firstWeekSize: 1 }, // bn-BD
   BE: { firstDay: 1, firstWeekSize: 4 }, // fr-BE or nl-BE
   BG: { firstDay: 1, firstWeekSize: 4 }, // bg-BG
   BH: { firstDay: 6, firstWeekSize: 1 }, // ar-BH
-  BM: { firstDay: 1, firstWeekSize: 1 },
+  BM: { firstDay: 1, firstWeekSize: 1 }, // en-BM
   BN: { firstDay: 1, firstWeekSize: 1 }, // ms-BN
   BR: { firstDay: 0, firstWeekSize: 1 }, // pt-BR
-  BS: { firstDay: 1, firstWeekSize: 1 },
-  BT: { firstDay: 1, firstWeekSize: 1 },
-  BW: { firstDay: 1, firstWeekSize: 1 },
+  BS: { firstDay: 0, firstWeekSize: 1 }, // en-BS
+  BT: { firstDay: 0, firstWeekSize: 1 }, // dz-BT
+  BW: { firstDay: 0, firstWeekSize: 1 }, // tn-BW or en-BW
   BY: { firstDay: 1, firstWeekSize: 1 }, // be-BY
   BZ: { firstDay: 0, firstWeekSize: 1 }, // en-BZ
-  CA: { firstDay: 0, firstWeekSize: 1 }, // en-CA or fr-CA | iu-Cans-CA | iu-Latn-CA | moh-CA
+  CA: { firstDay: 0, firstWeekSize: 1 }, // en-CA or fr-CA
   CH: { firstDay: 1, firstWeekSize: 4 }, // de-CH or fr-CH | it-CH | rm-CH
-  CL: { firstDay: 1, firstWeekSize: 1 }, // arn-CL or es-CL
-  CM: { firstDay: 1, firstWeekSize: 1 },
-  CN: { firstDay: 1, firstWeekSize: 1 }, // bo-CN or ii-CN | mn-Mong-CN | ug-CN | zh-CN
+  CL: { firstDay: 1, firstWeekSize: 1 }, // es-CL
+  CM: { firstDay: 1, firstWeekSize: 1 }, // fr-CM or en-CM
+  CN: { firstDay: 1, firstWeekSize: 1 }, // zh-CN
   CO: { firstDay: 0, firstWeekSize: 1 }, // es-CO
   CR: { firstDay: 1, firstWeekSize: 1 }, // es-CR
   CY: { firstDay: 1, firstWeekSize: 1 }, // el-CY
   CZ: { firstDay: 1, firstWeekSize: 4 }, // cs-CZ
-  DE: { firstDay: 1, firstWeekSize: 4 }, // de-DE or dsb-DE | hsb-DE
-  DJ: { firstDay: 1, firstWeekSize: 1 },
+  DE: { firstDay: 1, firstWeekSize: 4 }, // de-DE
+  DJ: { firstDay: 6, firstWeekSize: 1 }, // fr-DJ
   DK: { firstDay: 1, firstWeekSize: 4 }, // da-DK
-  DM: { firstDay: 1, firstWeekSize: 1 },
+  DM: { firstDay: 0, firstWeekSize: 1 }, // en-DM
   DO: { firstDay: 0, firstWeekSize: 1 }, // es-DO
-  DZ: { firstDay: 6, firstWeekSize: 1 }, // ar-DZ or tzm-Latn-DZ
-  EC: { firstDay: 1, firstWeekSize: 1 }, // es-EC or quz-EC
+  DZ: { firstDay: 6, firstWeekSize: 1 }, // ar-DZ
+  EC: { firstDay: 1, firstWeekSize: 1 }, // es-EC
   EE: { firstDay: 1, firstWeekSize: 4 }, // et-EE
   EG: { firstDay: 6, firstWeekSize: 1 }, // ar-EG
-  ES: { firstDay: 1, firstWeekSize: 4 }, // ca-ES or es-ES | eu-ES | gl-ES
+  ES: { firstDay: 1, firstWeekSize: 4 }, // es-ES
   ET: { firstDay: 0, firstWeekSize: 1 }, // am-ET
-  FI: { firstDay: 1, firstWeekSize: 4 }, // fi-FI or se-FI | smn-FI | sms-FI | sv-FI
-  FJ: { firstDay: 1, firstWeekSize: 4 },
+  FI: { firstDay: 1, firstWeekSize: 4 }, // fi-FI or sv-FI
+  FJ: { firstDay: 1, firstWeekSize: 4 }, // en-FJ
   FO: { firstDay: 1, firstWeekSize: 4 }, // fo-FO
-  FR: { firstDay: 1, firstWeekSize: 4 }, // br-FR or co-FR | fr-FR | gsw-FR | oc-FR
-  GB: { firstDay: 1, firstWeekSize: 4 }, // cy-GB or en-GB | gd-GB
+  FR: { firstDay: 1, firstWeekSize: 4 }, // fr-FR
+  GB: { firstDay: 1, firstWeekSize: 4 }, // en-GB
   'GB-alt-variant': { firstDay: 0, firstWeekSize: 4 }, // not covered by Intl
   GE: { firstDay: 1, firstWeekSize: 1 }, // ka-GE
-  GF: { firstDay: 1, firstWeekSize: 1 },
-  GP: { firstDay: 1, firstWeekSize: 1 },
+  GF: { firstDay: 1, firstWeekSize: 4 }, // fr-GF
+  GP: { firstDay: 1, firstWeekSize: 4 }, // fr-GP
   GR: { firstDay: 1, firstWeekSize: 4 }, // el-GR
-  GT: { firstDay: 0, firstWeekSize: 1 }, // es-GT or qut-GT
-  GU: { firstDay: 0, firstWeekSize: 1 },
+  GT: { firstDay: 0, firstWeekSize: 1 }, // es-GT
+  GU: { firstDay: 0, firstWeekSize: 1 }, // en-GU or ch-GU | es-GU
   HK: { firstDay: 0, firstWeekSize: 1 }, // zh-HK
   HN: { firstDay: 0, firstWeekSize: 1 }, // es-HN
   HR: { firstDay: 1, firstWeekSize: 1 }, // hr-HR
@@ -74,7 +76,7 @@ const weekInfo: Record<string, { firstDay: number, firstWeekSize: number }> = {
   ID: { firstDay: 0, firstWeekSize: 1 }, // id-ID or in-ID
   IE: { firstDay: 1, firstWeekSize: 4 }, // en-IE or ga-IE
   IL: { firstDay: 0, firstWeekSize: 1 }, // he-IL or iw-IL
-  IN: { firstDay: 0, firstWeekSize: 1 }, // as-IN or bn-IN | en-IN | gu-IN | hi-IN | kn-IN | kok-IN | ml-IN | mr-IN | or-IN | pa-IN | sa-IN | ta-IN | te-IN
+  IN: { firstDay: 0, firstWeekSize: 1 }, // en-IN or hi-IN
   IQ: { firstDay: 6, firstWeekSize: 1 }, // ar-IQ
   IR: { firstDay: 6, firstWeekSize: 1 }, // fa-IR
   IS: { firstDay: 1, firstWeekSize: 4 }, // is-IS
@@ -97,66 +99,66 @@ const weekInfo: Record<string, { firstDay: number, firstWeekSize: number }> = {
   LV: { firstDay: 1, firstWeekSize: 1 }, // lv-LV
   LY: { firstDay: 6, firstWeekSize: 1 }, // ar-LY
   MC: { firstDay: 1, firstWeekSize: 4 }, // fr-MC
-  MD: { firstDay: 1, firstWeekSize: 1 },
-  ME: { firstDay: 1, firstWeekSize: 1 }, // sr-Cyrl-ME or sr-Latn-ME | sr-ME
-  MH: { firstDay: 0, firstWeekSize: 1 },
+  MD: { firstDay: 1, firstWeekSize: 1 }, // ro-MD
+  ME: { firstDay: 1, firstWeekSize: 1 }, // sr-ME
+  MH: { firstDay: 0, firstWeekSize: 1 }, // mh-MH or en-MH
   MK: { firstDay: 1, firstWeekSize: 1 }, // mk-MK
-  MM: { firstDay: 1, firstWeekSize: 1 },
+  MM: { firstDay: 0, firstWeekSize: 1 }, // my-MM
   MN: { firstDay: 1, firstWeekSize: 1 }, // mn-MN
   MO: { firstDay: 0, firstWeekSize: 1 }, // zh-MO
-  MQ: { firstDay: 1, firstWeekSize: 1 },
-  MT: { firstDay: 0, firstWeekSize: 1 }, // en-MT or mt-MT
+  MQ: { firstDay: 1, firstWeekSize: 4 }, // fr-MQ
+  MT: { firstDay: 0, firstWeekSize: 1 }, // mt-MT or en-MT
   MV: { firstDay: 5, firstWeekSize: 1 }, // dv-MV
   MX: { firstDay: 0, firstWeekSize: 1 }, // es-MX
   MY: { firstDay: 1, firstWeekSize: 1 }, // en-MY or ms-MY
-  MZ: { firstDay: 1, firstWeekSize: 1 },
+  MZ: { firstDay: 0, firstWeekSize: 1 }, // pt-MZ
   NI: { firstDay: 0, firstWeekSize: 1 }, // es-NI
   NL: { firstDay: 1, firstWeekSize: 4 }, // fy-NL or nl-NL
-  NO: { firstDay: 1, firstWeekSize: 4 }, // nb-NO or nn-NO | se-NO | sma-NO | smj-NO
+  NO: { firstDay: 1, firstWeekSize: 4 }, // nb-NO or nn-NO | no-NO
   NP: { firstDay: 0, firstWeekSize: 1 }, // ne-NP
   NZ: { firstDay: 1, firstWeekSize: 1 }, // en-NZ or mi-NZ
   OM: { firstDay: 6, firstWeekSize: 1 }, // ar-OM
   PA: { firstDay: 0, firstWeekSize: 1 }, // es-PA
-  PE: { firstDay: 0, firstWeekSize: 1 }, // es-PE or quz-PE
-  PH: { firstDay: 0, firstWeekSize: 1 }, // en-PH or fil-PH
+  PE: { firstDay: 0, firstWeekSize: 1 }, // es-PE
+  PH: { firstDay: 0, firstWeekSize: 1 }, // en-PH
   PK: { firstDay: 0, firstWeekSize: 1 }, // ur-PK
   PL: { firstDay: 1, firstWeekSize: 4 }, // pl-PL
   PR: { firstDay: 0, firstWeekSize: 1 }, // es-PR
   PT: { firstDay: 0, firstWeekSize: 4 }, // pt-PT
   PY: { firstDay: 0, firstWeekSize: 1 }, // es-PY
   QA: { firstDay: 6, firstWeekSize: 1 }, // ar-QA
-  RE: { firstDay: 1, firstWeekSize: 1 },
+  RE: { firstDay: 1, firstWeekSize: 4 }, // fr-RE
   RO: { firstDay: 1, firstWeekSize: 1 }, // ro-RO
-  RS: { firstDay: 1, firstWeekSize: 1 }, // sr-Cyrl-RS or sr-Latn-RS | sr-RS
-  RU: { firstDay: 1, firstWeekSize: 4 }, // ba-RU or ru-RU | sah-RU | tt-RU
+  RS: { firstDay: 1, firstWeekSize: 1 }, // sr-RS
+  RU: { firstDay: 1, firstWeekSize: 4 }, // ru-RU
   SA: { firstDay: 0, firstWeekSize: 1 }, // ar-SA
   SD: { firstDay: 6, firstWeekSize: 1 }, // ar-SD
-  SE: { firstDay: 1, firstWeekSize: 4 }, // se-SE or sma-SE | smj-SE | sv-SE
-  SG: { firstDay: 0, firstWeekSize: 1 }, // en-SG or zh-SG
+  SE: { firstDay: 1, firstWeekSize: 4 }, // sv-SE
+  SG: { firstDay: 0, firstWeekSize: 1 }, // en-SG or ms-SG | ta-SG | zh-SG
   SI: { firstDay: 1, firstWeekSize: 1 }, // sl-SI
   SK: { firstDay: 1, firstWeekSize: 4 }, // sk-SK
-  SM: { firstDay: 0, firstWeekSize: 1 },
+  SM: { firstDay: 1, firstWeekSize: 4 }, // it-SM
   SV: { firstDay: 0, firstWeekSize: 1 }, // es-SV
-  SY: { firstDay: 6, firstWeekSize: 1 }, // ar-SY or syr-SY
+  SY: { firstDay: 6, firstWeekSize: 1 }, // ar-SY
   TH: { firstDay: 0, firstWeekSize: 1 }, // th-TH
-  TJ: { firstDay: 1, firstWeekSize: 1 }, // tg-Cyrl-TJ
+  TJ: { firstDay: 1, firstWeekSize: 1 }, // ru-TJ
   TM: { firstDay: 1, firstWeekSize: 1 }, // tk-TM
   TR: { firstDay: 1, firstWeekSize: 1 }, // tr-TR
   TT: { firstDay: 0, firstWeekSize: 1 }, // en-TT
   TW: { firstDay: 0, firstWeekSize: 1 }, // zh-TW
   UA: { firstDay: 1, firstWeekSize: 1 }, // uk-UA
-  UM: { firstDay: 1, firstWeekSize: 1 },
+  UM: { firstDay: 0, firstWeekSize: 1 }, // en-UM
   US: { firstDay: 0, firstWeekSize: 1 }, // en-US or es-US
   UY: { firstDay: 1, firstWeekSize: 1 }, // es-UY
-  UZ: { firstDay: 1, firstWeekSize: 1 }, // uz-Cyrl-UZ or uz-Latn-UZ
-  VA: { firstDay: 1, firstWeekSize: 1 },
+  UZ: { firstDay: 1, firstWeekSize: 1 }, // uz-UZ
+  VA: { firstDay: 1, firstWeekSize: 4 }, // fr-VA or la-VA | de-VA | it-VA
   VE: { firstDay: 0, firstWeekSize: 1 }, // es-VE
-  VI: { firstDay: 1, firstWeekSize: 1 },
+  VI: { firstDay: 0, firstWeekSize: 1 }, // en-VI
   VN: { firstDay: 1, firstWeekSize: 1 }, // vi-VN
-  WS: { firstDay: 1, firstWeekSize: 1 },
-  XK: { firstDay: 1, firstWeekSize: 1 },
+  WS: { firstDay: 0, firstWeekSize: 1 }, // sm-WS or en-WS
+  XK: { firstDay: 1, firstWeekSize: 1 }, // sq-XK or sr-XK
   YE: { firstDay: 0, firstWeekSize: 1 }, // ar-YE
-  ZA: { firstDay: 0, firstWeekSize: 1 }, // af-ZA or en-ZA | nso-ZA | tn-ZA | xh-ZA | zu-ZA
+  ZA: { firstDay: 0, firstWeekSize: 1 }, // af-ZA or 9 more...
   ZW: { firstDay: 0, firstWeekSize: 1 }, // en-ZW
 }
 
