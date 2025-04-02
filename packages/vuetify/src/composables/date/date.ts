@@ -116,30 +116,3 @@ export function useDate (): DateInstance {
 
   return createInstance(options, locale)
 }
-
-function firstWeekSize (adapter: DateAdapter<any>, year: number, startOfWeek = 0) {
-  const yearStart = adapter.startOfYear(adapter.date(`${year}-01-01`))
-  return {
-    yearStart,
-    size: 7 - adapter.getDiff(yearStart, adapter.startOfWeek(yearStart, startOfWeek), 'days')
-  }
-}
-
-type WeekCalculationOptions = { startOfWeek?: number, firstWeekMinSize?: number }
-export function getWeek (adapter: DateAdapter<any>, value: any, { startOfWeek = 0, firstWeekMinSize = 4 }: WeekCalculationOptions = {}) {
-  let year = adapter.getYear(value)
-  const currentWeekEnd = adapter.addDays(adapter.startOfWeek(value, startOfWeek), 6)
-  if (year < adapter.getYear(currentWeekEnd)) {
-    const { size } = firstWeekSize(adapter, year + 1, startOfWeek)
-    if (size >= firstWeekMinSize) {
-      year++
-    }
-  }
-
-  const { yearStart, size } = firstWeekSize(adapter, year, startOfWeek)
-  const d1w1 = size >= firstWeekMinSize
-    ? adapter.addDays(yearStart, size - 7)
-    : adapter.addDays(yearStart, size)
-
-  return 1 + adapter.getDiff(value, d1w1, 'weeks')
-}
