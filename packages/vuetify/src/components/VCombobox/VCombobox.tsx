@@ -674,6 +674,7 @@ export const VCombobox = genericComponent<new <
                 { (!props.hideNoData || props.items.length) && props.menuIcon ? (
                   <VIcon
                     class="v-combobox__menu-icon"
+                    color={ vTextFieldRef.value?.fieldIconColor }
                     icon={ props.menuIcon }
                     onMousedown={ onMousedownMenuIcon }
                     onClick={ noop }

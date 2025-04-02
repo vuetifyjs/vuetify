@@ -7,7 +7,7 @@
     "hideDetails": "Hides hint and validation errors. When set to `auto` messages will be rendered only if there's a message (hint, error message, counter value etc) to display.",
     "hideSpinButtons": "Hides spin buttons on the input when type is set to `number`.",
     "dense": "Reduces the input height.",
-    "glow": "Makes prepend/append icons full opacity when the input is focused.",
+    "glow": "Makes prepend/append icons full opacity when the input is focused and apply color.",
     "height": "Sets the height of the input.",
     "hint": "Displays hint text below the input when focused. Force this always open with the [persistent-hint](#props-persistent-hint) property.",
     "iconColor": "Sets the color of the prepend/append icons.",

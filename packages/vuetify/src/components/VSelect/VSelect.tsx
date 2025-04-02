@@ -550,6 +550,7 @@ export const VSelect = genericComponent<new <
                 { props.menuIcon ? (
                   <VIcon
                     class="v-select__menu-icon"
+                    color={ vTextFieldRef.value?.fieldIconColor }
                     icon={ props.menuIcon }
                   />
                 ) : undefined }

@@ -628,6 +628,7 @@ export const VAutocomplete = genericComponent<new <
                 { props.menuIcon ? (
                   <VIcon
                     class="v-autocomplete__menu-icon"
+                    color={ vTextFieldRef.value?.fieldIconColor }
                     icon={ props.menuIcon }
                     onMousedown={ onMousedownMenuIcon }
                     onClick={ noop }
