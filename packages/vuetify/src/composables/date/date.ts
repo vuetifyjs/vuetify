@@ -117,25 +117,29 @@ export function useDate (): DateInstance {
   return createInstance(options, locale)
 }
 
-// https://stackoverflow.com/questions/274861/how-do-i-calculate-the-week-number-given-a-date/275024#275024
-export function getWeek (adapter: DateAdapter<any>, value: any) {
-  const date = adapter.toJsDate(value)
-  let year = date.getFullYear()
-  let d1w1 = new Date(year, 0, 1)
+function firstWeekSize (adapter: DateAdapter<any>, year: number, startOfWeek = 0) {
+  const yearStart = adapter.startOfYear(adapter.date(`${year}-01-01`))
+  return {
+    yearStart,
+    size: 7 - adapter.getDiff(yearStart, adapter.startOfWeek(yearStart, startOfWeek), 'days')
+  }
+}
 
-  if (date < d1w1) {
-    year = year - 1
-    d1w1 = new Date(year, 0, 1)
-  } else {
-    const tv = new Date(year + 1, 0, 1)
-    if (date >= tv) {
-      year = year + 1
-      d1w1 = tv
+type WeekCalculationOptions = { startOfWeek?: number, firstWeekMinSize?: number }
+export function getWeek (adapter: DateAdapter<any>, value: any, { startOfWeek = 0, firstWeekMinSize = 4 }: WeekCalculationOptions = {}) {
+  let year = adapter.getYear(value)
+  const currentWeekEnd = adapter.addDays(adapter.startOfWeek(value, startOfWeek), 6)
+  if (year < adapter.getYear(currentWeekEnd)) {
+    const { size } = firstWeekSize(adapter, year + 1, startOfWeek)
+    if (size >= firstWeekMinSize) {
+      year++
     }
   }
 
-  const diffTime = Math.abs(date.getTime() - d1w1.getTime())
-  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
+  const { yearStart, size } = firstWeekSize(adapter, year, startOfWeek)
+  const d1w1 = size >= firstWeekMinSize
+    ? adapter.addDays(yearStart, size - 7)
+    : adapter.addDays(yearStart, size)
 
-  return Math.floor(diffDays / 7) + 1
+  return 1 + adapter.getDiff(value, d1w1, 'weeks')
 }

@@ -186,7 +186,7 @@ export function useCalendar (props: CalendarProps) {
 
   const weekNumbers = computed(() => {
     return weeksInMonth.value.map(week => {
-      return week.length ? getWeek(adapter, week[0]) : null
+      return week.length ? getWeek(adapter, week[0], { startOfWeek: Number(props.firstDayOfWeek ?? 0) }) : null
     })
   })
 
