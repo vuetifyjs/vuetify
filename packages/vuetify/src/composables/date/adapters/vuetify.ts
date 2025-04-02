@@ -437,10 +437,8 @@ function getWeek (date: Date, locale: string, firstDayOfWeek?: number, firstWeek
 
   let year = getYear(date)
   const currentWeekEnd = addDays(startOfWeek(date, locale, weekStart), 6)
-  if (year < getYear(currentWeekEnd)) {
-    if (firstWeekSize(year + 1) >= minWeekSize) {
-      year++
-    }
+  if (year < getYear(currentWeekEnd) && firstWeekSize(year + 1) >= minWeekSize) {
+    year++
   }
 
   const yearStart = new Date(year, 0, 1)

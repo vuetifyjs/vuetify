@@ -1,5 +1,5 @@
 // Composables
-import { getWeek, useDate } from '@/composables/date/date'
+import { useDate } from '@/composables/date/date'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
