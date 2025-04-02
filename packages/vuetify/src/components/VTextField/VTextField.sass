@@ -32,7 +32,7 @@
           @at-root #{selector.append('.v-text-field--suffixed', &)}
             --v-field-padding-end: #{$text-field-input-padding-end}
 
-      &:is(.v-field--reverse)
+      &.v-field--reverse
         .v-field__input
           @at-root #{selector.append('.v-text-field--prefixed', &)}
             --v-field-padding-end: #{$text-field-input-padding-start}
