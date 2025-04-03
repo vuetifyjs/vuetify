@@ -18,6 +18,7 @@ import { genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/
 
 // Types
 import type { PropType } from 'vue'
+import type { VDatePickerSlots } from '@/components/VDatePicker/VDatePicker'
 import type { StrategyProps } from '@/components/VOverlay/locationStrategies'
 import type { VTextFieldSlots } from '@/components/VTextField/VTextField'
 
@@ -28,7 +29,7 @@ export type VDateInputActionsSlot = {
   isPristine: boolean
 }
 
-export type VDateInputSlots = Omit<VTextFieldSlots, 'default'> & {
+export type VDateInputSlots = Omit<Omit<VDatePickerSlots, 'actions'> & VTextFieldSlots, 'default'> & {
   actions: VDateInputActionsSlot
   default: never
 }
@@ -250,6 +251,7 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
                             onMousedown={ (e: MouseEvent) => e.preventDefault() }
                           >
                             {{
+                              ...slots,
                               actions: !props.hideActions ? () => slots.actions?.({ save, cancel, isPristine }) ?? actions() : undefined,
                             }}
                           </VDatePicker>
