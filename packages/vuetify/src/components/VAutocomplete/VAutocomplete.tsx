@@ -132,7 +132,7 @@ export const VAutocomplete = genericComponent<new <
 
   setup (props, { slots }) {
     const { t } = useLocale()
-    const vTextFieldRef = ref<VTextField & HTMLInputElement>()
+    const vTextFieldRef = ref<VTextField>()
     const isFocused = shallowRef(false)
     const isPristine = shallowRef(true)
     const listHasFocus = shallowRef(false)
@@ -224,59 +224,11 @@ export const VAutocomplete = genericComponent<new <
         vTextFieldRef.value?.focus()
       }
     }
-
-    function handleBackspaceDelete (event: KeyboardEvent) {
-      if (
-        !props.multiple &&
-        hasSelectionSlot.value &&
-        model.value.length > 0 &&
-        !search.value
-      ) return select(model.value[0], false)
-
-      if (~selectionIndex.value) {
-        event.preventDefault()
-        const originalSelectionIndex = selectionIndex.value
-        select(model.value[selectionIndex.value], false)
-
-        selectionIndex.value = originalSelectionIndex >= length - 1 ? (length - 2) : originalSelectionIndex
-      } else if (event.key === 'Backspace' && !search.value) {
-        selectionIndex.value = length - 1
-      }
-    }
-
-    function handleArrowLeft (selectionStart: number) {
-      if (selectionIndex.value < 0 && selectionStart > 0) return
-
-      const prev = selectionIndex.value > -1
-        ? selectionIndex.value - 1
-        : model.value.length - 1
-
-      if (model.value[prev]) {
-        selectionIndex.value = prev
-      } else {
-        selectionIndex.value = -1
-        // default value of search is empty string
-        vTextFieldRef.value?.setSelectionRange(search.value?.length ?? 0, search.value?.length ?? 0)
-      }
-    }
-
-    function handleArrowRight () {
-      if (selectionIndex.value < 0) return
-
-      const next = selectionIndex.value + 1
-
-      if (model.value[next]) {
-        selectionIndex.value = next
-      } else {
-        selectionIndex.value = -1
-        vTextFieldRef.value?.setSelectionRange(0, 0)
-      }
-    }
-
     function onKeydown (e: KeyboardEvent) {
       if (form.isReadonly.value) return
 
       const selectionStart = vTextFieldRef.value?.selectionStart
+      const length = model.value.length
 
       if (['Enter', 'ArrowDown', 'ArrowUp'].includes(e.key)) {
         e.preventDefault()
@@ -303,15 +255,53 @@ export const VAutocomplete = genericComponent<new <
       }
 
       if (['Backspace', 'Delete'].includes(e.key)) {
-        handleBackspaceDelete(e)
+        if (
+          !props.multiple &&
+          hasSelectionSlot.value &&
+          model.value.length > 0 &&
+          !search.value
+        ) return select(model.value[0], false)
+
+        if (~selectionIndex.value) {
+          e.preventDefault()
+          const originalSelectionIndex = selectionIndex.value
+          select(model.value[selectionIndex.value], false)
+
+          selectionIndex.value = originalSelectionIndex >= length - 1 ? (length - 2) : originalSelectionIndex
+        } else if (e.key === 'Backspace' && !search.value) {
+          selectionIndex.value = length - 1
+        }
+
+        return
       }
 
       if (!props.multiple) return
 
       if (e.key === 'ArrowLeft') {
-        selectionStart && handleArrowLeft(selectionStart)
+        if (selectionIndex.value < 0 && selectionStart && selectionStart > 0) return
+
+        const prev = selectionIndex.value > -1
+          ? selectionIndex.value - 1
+          : length - 1
+
+        if (model.value[prev]) {
+          selectionIndex.value = prev
+        } else {
+          const searchLength = search.value?.length ?? null
+          selectionIndex.value = -1
+          vTextFieldRef.value?.setSelectionRange(searchLength, searchLength)
+        }
       } else if (e.key === 'ArrowRight') {
-        handleArrowRight()
+        if (selectionIndex.value < 0) return
+
+        const next = selectionIndex.value + 1
+
+        if (model.value[next]) {
+          selectionIndex.value = next
+        } else {
+          selectionIndex.value = -1
+          vTextFieldRef.value?.setSelectionRange(0, 0)
+        }
       } else if (~selectionIndex.value && checkPrintable(e)) {
         selectionIndex.value = -1
       }

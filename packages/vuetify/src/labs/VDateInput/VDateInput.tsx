@@ -80,7 +80,7 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
 
     const menu = shallowRef(false)
     const isEditingInput = shallowRef(false)
-    const vTextFieldRef = ref<VTextField & HTMLInputElement>()
+    const vTextFieldRef = ref<VTextField>()
 
     function format (date: unknown) {
       if (typeof props.displayFormat === 'function') {
