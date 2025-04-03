@@ -1,7 +1,7 @@
 import { defineConfig, mergeConfig } from 'vitest/config'
-import viteConfig from './vite.config.mjs'
+import viteConfig from './vite.config'
 import AutoImport from 'unplugin-auto-import/vite'
-import { fileURLToPath } from 'url'
+import { fileURLToPath } from 'node:url'
 
 const IS_RUN = process.argv.slice(2).some(v => v === 'run')
 

@@ -1,4 +1,5 @@
 @use '../../styles/tools'
+@use './variables' as *
 
 @include tools.layer('components')
   .v-date-picker-controls
@@ -6,6 +7,7 @@
     align-items: center
     justify-content: space-between
     font-size: .875rem
+    height: $date-picker-controls-height
     padding-top: 4px
     padding-bottom: 4px
     padding-inline-start: 6px

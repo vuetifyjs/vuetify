@@ -190,6 +190,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
 
     function onClick (e: MouseEvent) {
       emit('click', e)
+      if (['INPUT', 'TEXTAREA'].includes((e.target as Element)?.tagName)) return
 
       if (!isClickable.value) return
 

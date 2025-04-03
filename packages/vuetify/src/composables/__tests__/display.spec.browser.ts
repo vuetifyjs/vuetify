@@ -3,6 +3,7 @@ import { createDisplay } from '../display'
 
 // Utilities
 import { page } from '@test'
+import { effectScope } from 'vue'
 
 const breakpoints = [
   'xs',
@@ -262,7 +263,8 @@ describe('display', () => {
   ])('should calculate breakpoint for $description', async (options, expected) => {
     await page.viewport(options.width, options.height)
 
-    const display = createDisplay()
+    const scope = effectScope()
+    const display = scope.run(() => createDisplay())!
 
     const matched = breakpoints.reduce<(typeof breakpoints[number])[]>((acc, breakpoint) => {
       if (display[breakpoint].value) acc.push(breakpoint)
@@ -273,9 +275,10 @@ describe('display', () => {
   })
 
   it('should override default thresholds', async () => {
-    const { name } = createDisplay({
+    const scope = effectScope()
+    const { name } = scope.run(() => createDisplay({
       thresholds: { sm: 400 },
-    })
+    }))!
 
     await page.viewport(400, 900)
     await expect.poll(() => name.value).toBe('sm')
@@ -285,7 +288,8 @@ describe('display', () => {
   })
 
   it('should allow breakpoint strings for mobileBreakpoint', async () => {
-    const { mobile } = createDisplay({ mobileBreakpoint: 'lg' })
+    const scope = effectScope()
+    const { mobile } = scope.run(() => createDisplay({ mobileBreakpoint: 'lg' }))!
 
     await page.viewport(1920, 900)
     await expect.poll(() => mobile.value).toBe(false)

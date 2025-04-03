@@ -26,8 +26,9 @@ import {
   independentSingleSelectStrategy,
   leafSelectStrategy,
   leafSingleSelectStrategy,
+  trunkSelectStrategy,
 } from './selectStrategies'
-import { consoleError, getCurrentInstance, getUid, propsFactory } from '@/util'
+import { consoleError, getCurrentInstance, propsFactory } from '@/util'
 
 // Types
 import type { InjectionKey, PropType, Ref } from 'vue'
@@ -49,6 +50,7 @@ export type SelectStrategyProp =
   | 'independent'
   | 'single-independent'
   | 'classic'
+  | 'trunk'
   | SelectStrategy
   | ((mandatory: boolean) => SelectStrategy)
 export type OpenStrategyProp = 'single' | 'multiple' | 'list' | OpenStrategy
@@ -154,6 +156,7 @@ export const useNested = (props: NestedProps) => {
       case 'leaf': return leafSelectStrategy(props.mandatory)
       case 'independent': return independentSelectStrategy(props.mandatory)
       case 'single-independent': return independentSingleSelectStrategy(props.mandatory)
+      case 'trunk': return trunkSelectStrategy(props.mandatory)
       case 'classic':
       default: return classicSelectStrategy(props.mandatory)
     }
@@ -340,7 +343,7 @@ export const useNested = (props: NestedProps) => {
 export const useNestedItem = (id: Ref<unknown>, isGroup: boolean) => {
   const parent = inject(VNestedSymbol, emptyNested)
 
-  const uidSymbol = Symbol(getUid())
+  const uidSymbol = Symbol('nested item')
   const computedId = computed(() => id.value !== undefined ? id.value : uidSymbol)
 
   const item = {

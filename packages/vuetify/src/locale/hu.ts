@@ -104,4 +104,17 @@ export default {
     loadMore: 'Továbbiak betöltése',
     empty: 'Nincsen több',
   },
+  rules: {
+    required: 'Ez a mező kötelező',
+    email: 'Kérlek, adj meg egy érvényes e-mail címet',
+    number: 'Ez a mező csak számokat tartalmazhat',
+    integer: 'Ez a mező csak egész számokat tartalmazhat',
+    capital: 'Ez a mező csak nagybetűket tartalmazhat',
+    maxLength: 'Maximum {0} karaktert adhatsz meg',
+    minLength: 'Minimum {0} karaktert kell megadnod',
+    strictLength: 'A megadott mező hossza érvénytelen',
+    exclude: 'A(z) {0} karakter nem engedélyezett',
+    notEmpty: 'Kérlek, válassz legalább egy értéket',
+    pattern: 'Érvénytelen formátum',
+  },
 }

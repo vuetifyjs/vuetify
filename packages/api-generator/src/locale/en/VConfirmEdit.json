@@ -1,7 +1,10 @@
 {
   "props": {
+    "modelValue": "Represents the commited v-model value",
     "cancelText": "Text for the cancel button",
-    "okText": "Text for the ok button"
+    "okText": "Text for the ok button",
+    "hideActions": "Prevent showing the default actions buttons. Does not affect `<component :is=\"actions\" />`",
+    "disabled": "Control the disabled state of action buttons. If not provided, internal logic will be used to determine the disabled state."
   },
   "events": {
     "ok": "The event emitted when the user clicks the OK button",

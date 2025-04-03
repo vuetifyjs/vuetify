@@ -104,4 +104,17 @@ export default {
     loadMore: 'Užkrauti daugiau',
     empty: 'Daugiau nėra',
   },
+  rules: {
+    required: 'Šis laukas yra privalomas',
+    email: 'Prašome įvesti galiojantį el. pašto adresą',
+    number: 'Šiame lauke gali būti tik skaičiai',
+    integer: 'Šiame lauke gali būti tik sveiki skaičiai',
+    capital: 'Šiame lauke gali būti tik didžiosios raidės',
+    maxLength: 'Turite įvesti ne daugiau kaip {0} simbolių',
+    minLength: 'Turite įvesti bent {0} simbolius',
+    strictLength: 'Įvesto lauko ilgis yra neteisingas',
+    exclude: 'Simbolis {0} nėra leidžiamas',
+    notEmpty: 'Prašome pasirinkti bent vieną reikšmę',
+    pattern: 'Neteisingas formatas',
+  },
 }
