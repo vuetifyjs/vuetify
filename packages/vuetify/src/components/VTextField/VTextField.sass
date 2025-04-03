@@ -6,9 +6,9 @@
 @include tools.layer('components')
   /* region BLOCK */
   .v-text-field
-    input
+    .v-field__input,
+    .v-text-field__edit
       color: inherit
-      opacity: 0
       flex: $text-field-input-flex
       transition: $text-field-input-transition
       min-width: 0
@@ -24,26 +24,10 @@
     .v-field
       cursor: text
 
-    .v-field__input
-      @at-root #{selector.append('.v-text-field--prefixed', &)}
-        --v-field-padding-start: #{$text-field-input-padding-start}
-
-      @at-root #{selector.append('.v-text-field--suffixed', &)}
-        --v-field-padding-end: #{$text-field-input-padding-end}
-
     .v-input__details
       padding-inline: $text-field-details-padding-inline
       @at-root #{selector.append('.v-input--plain-underlined', &)}
         padding-inline: 0
-
-    .v-field--no-label,
-    .v-field--active
-      input
-        opacity: 1
-
-    .v-field--single-line
-      input
-        transition: none
 
   /* endregion */
   /* region ELEMENTS */
@@ -52,25 +36,15 @@
     &__suffix
       align-items: center
       color: $text-field-affix-color
-      cursor: default
       display: flex
-      opacity: 0
       transition: inherit
       white-space: nowrap
-      min-height: $field-input-min-height
-      padding-top: calc(var(--v-field-padding-top, 4px) + var(--v-input-padding-top, 0))
-      padding-bottom: var(--v-field-padding-bottom, 6px)
-
-      .v-field--active &
-        opacity: 1
 
       .v-field--disabled &
         color: $text-field-disabled-affix-color
 
-    &__prefix
-      padding-inline-start: var(--v-field-padding-start)
-
-    &__suffix
-      padding-inline-end: var(--v-field-padding-end)
-
+    &__prefix,
+    &__suffix,
+    & &__edit
+      flex: none
   /* endregion */

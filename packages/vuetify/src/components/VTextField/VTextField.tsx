@@ -139,18 +139,24 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
       })
     }
     function onInput (e: Event) {
-      const el = e.target as HTMLInputElement
-      model.value = el.value
-      if (
-        props.modelModifiers?.trim &&
-        ['text', 'search', 'password', 'tel', 'url'].includes(props.type)
-      ) {
-        const caretPosition = [el.selectionStart, el.selectionEnd]
-        nextTick(() => {
-          el.selectionStart = caretPosition[0]
-          el.selectionEnd = caretPosition[1]
-        })
-      }
+      const el = e.target as HTMLElement
+      model.value = el.innerText
+      const selection = window.getSelection()
+      const { anchorNode, anchorOffset, focusNode, focusOffset } = selection
+      nextTick(() => {
+        selection.setBaseAndExtent(anchorNode, anchorOffset, focusNode, focusOffset)
+      })
+      // TODO: use window.getSelection()
+      // if (
+      //   props.modelModifiers?.trim &&
+      //   ['text', 'search', 'password', 'tel', 'url'].includes(props.type)
+      // ) {
+      //   const caretPosition = [el.selectionStart, el.selectionEnd]
+      //   nextTick(() => {
+      //     el.selectionStart = caretPosition[0]
+      //     el.selectionEnd = caretPosition[1]
+      //   })
+      // }
     }
 
     useRender(() => {
@@ -167,8 +173,6 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
           class={[
             'v-text-field',
             {
-              'v-text-field--prefixed': props.prefix,
-              'v-text-field--suffixed': props.suffix,
               'v-input--plain-underlined': isPlainOrUnderlined.value,
             },
             props.class,
@@ -210,56 +214,46 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
                     props: { class: fieldClass, ...slotProps },
                   }) => {
                     const inputNode = (
-                      <input
-                        ref={ inputRef }
-                        value={ model.value }
+                      <div
                         onInput={ onInput }
                         v-intersect={[{
                           handler: onIntersect,
                         }, null, ['once']]}
-                        autofocus={ props.autofocus }
-                        readonly={ isReadonly.value }
-                        disabled={ isDisabled.value }
-                        name={ props.name }
-                        placeholder={ props.placeholder }
-                        size={ 1 }
-                        type={ props.type }
-                        onFocus={ onFocus }
-                        onBlur={ blur }
                         { ...slotProps }
-                        { ...inputAttrs }
-                      />
-                    )
-
-                    return (
-                      <>
+                      >
                         { props.prefix && (
-                          <span class="v-text-field__prefix">
-                            <span class="v-text-field__prefix__text">
-                              { props.prefix }
-                            </span>
-                          </span>
+                          <span
+                            key="prefix"
+                            class="v-text-field__prefix"
+                          >{ props.prefix }</span>
                         )}
-
-                        { slots.default ? (
-                          <div
-                            class={ fieldClass }
-                            data-no-activator=""
-                          >
-                            { slots.default() }
-                            { inputNode }
-                          </div>
-                        ) : cloneVNode(inputNode, { class: fieldClass })}
-
+                        <span
+                          ref={ inputRef }
+                          contenteditable="true"
+                          class="v-text-field__edit"
+                          onFocus={ onFocus }
+                          onBlur={ blur }
+                          tabindex="0"
+                          { ...inputAttrs }
+                        >{ model.value }</span>
                         { props.suffix && (
-                          <span class="v-text-field__suffix">
-                            <span class="v-text-field__suffix__text">
-                              { props.suffix }
-                            </span>
-                          </span>
+                          <span
+                            key="suffix"
+                            class="v-text-field__suffix"
+                          >{ props.suffix }</span>
                         )}
-                      </>
+                      </div>
                     )
+
+                    return slots.default ? (
+                      <div
+                        class={ fieldClass }
+                        data-no-activator=""
+                      >
+                        { slots.default() }
+                        { inputNode }
+                      </div>
+                    ) : cloneVNode(inputNode, { class: fieldClass })
                   },
                 }}
               </VField>
