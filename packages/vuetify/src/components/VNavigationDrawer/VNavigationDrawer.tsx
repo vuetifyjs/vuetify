@@ -27,7 +27,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useToggleScope } from '@/composables/toggleScope'
 
 // Utilities
-import { computed, nextTick, ref, shallowRef, toRef, Transition, watch } from 'vue'
+import { computed, nextTick, readonly, ref, shallowRef, toRef, Transition, watch } from 'vue'
 import { genericComponent, propsFactory, toPhysical, useRender } from '@/util'
 
 // Types
@@ -183,7 +183,7 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
       position: location,
       layoutSize,
       elementSize: width,
-      active: computed(() => isActive.value || isDragging.value),
+      active: readonly(isActive),
       disableTransitions: computed(() => isDragging.value),
       absolute: computed(() =>
         // eslint-disable-next-line @typescript-eslint/no-use-before-define
