@@ -278,7 +278,7 @@ function updateRipple (el: HTMLElement, binding: RippleDirectiveBinding, wasEnab
   if (!enabled) {
     ripples.hide(el)
   }
-  
+
   el._ripple = el._ripple ?? {}
   el._ripple.enabled = enabled
   el._ripple.centered = modifiers.center
