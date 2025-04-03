@@ -3,6 +3,7 @@ import './VRipple.sass'
 
 // Utilities
 import { isObject, keyCodes } from '@/util'
+import { on } from 'events'
 
 // Types
 import type { DirectiveBinding } from 'vue'
@@ -252,7 +253,9 @@ function rippleCancelShow (e: MouseEvent | TouchEvent) {
 let keyboardRipple = false
 
 function keyboardRippleShow (e: KeyboardEvent) {
-  if (!keyboardRipple && (((e.keyCode === keyCodes.enter) && !modifiers.noTriggerOnEnter) || e.keyCode === keyCodes.space)) {
+  const el = e.currentTarget as HTMLElement
+  const noTriggerOnEnter = el._ripple?.noEnter
+  if (!keyboardRipple && (((e.keyCode === keyCodes.enter) && !noTriggerOnEnter) || e.keyCode === keyCodes.space)) {
     keyboardRipple = true
     rippleShow(e)
   }
@@ -276,11 +279,13 @@ function updateRipple (el: HTMLElement, binding: RippleDirectiveBinding, wasEnab
   if (!enabled) {
     ripples.hide(el)
   }
-
+  
   el._ripple = el._ripple ?? {}
   el._ripple.enabled = enabled
   el._ripple.centered = modifiers.center
   el._ripple.circle = modifiers.circle
+  el._ripple.noEnter = modifiers.noTriggerOnEnter
+
   if (isObject(value) && value.class) {
     el._ripple.class = value.class
   }

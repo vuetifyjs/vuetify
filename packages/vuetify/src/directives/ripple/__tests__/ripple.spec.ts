@@ -72,6 +72,28 @@ describe('v-ripple', () => {
     expect(wrapper.find('.v-ripple__container').exists()).toBe(false)
   })
 
+<<<<<<< Updated upstream
+=======
+  it('should not trigger ripple on enter key press', () => {
+    vi.useFakeTimers()
+    const wrapper = mount({
+      directives: { Ripple },
+      template: '<div v-ripple.noTriggerOnEnter />',
+    })
+
+    const keydownEvent = new KeyboardEvent('keydown', { keyCode: keyCodes.enter })
+    wrapper.element.dispatchEvent(keydownEvent)
+
+    expect(wrapper.find('.v-ripple__container').exists()).toBe(false)
+
+    const keyupEvent = new KeyboardEvent('keyup')
+    wrapper.element.dispatchEvent(keyupEvent)
+
+    vi.runAllTimers()
+    expect(wrapper.find('.v-ripple__container').exists()).toBe(false)
+  })
+
+>>>>>>> Stashed changes
   it('should only ripple on one element', () => {
     vi.useFakeTimers()
 
