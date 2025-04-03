@@ -3,7 +3,6 @@ import './VRipple.sass'
 
 // Utilities
 import { isObject, keyCodes } from '@/util'
-import { on } from 'events'
 
 // Types
 import type { DirectiveBinding } from 'vue'

@@ -72,8 +72,6 @@ describe('v-ripple', () => {
     expect(wrapper.find('.v-ripple__container').exists()).toBe(false)
   })
 
-<<<<<<< Updated upstream
-=======
   it('should not trigger ripple on enter key press', () => {
     vi.useFakeTimers()
     const wrapper = mount({
@@ -93,7 +91,6 @@ describe('v-ripple', () => {
     expect(wrapper.find('.v-ripple__container').exists()).toBe(false)
   })
 
->>>>>>> Stashed changes
   it('should only ripple on one element', () => {
     vi.useFakeTimers()
 
