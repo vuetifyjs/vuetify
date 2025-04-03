@@ -20,7 +20,7 @@
           v-model="today"
           :events="events"
           color="primary"
-          type="week"
+          view-mode="week"
         ></v-calendar>
       </v-sheet>
     </v-col>

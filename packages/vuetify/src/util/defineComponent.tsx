@@ -327,3 +327,7 @@ export type ComponentInstance<T> = T extends { new (): ComponentPublicInstance<a
 type ShortEmitsToObject<E> = E extends Record<string, any[]> ? {
   [K in keyof E]: (...args: E[K]) => any;
 } : E;
+
+export type JSXComponent<Props = any> =
+  | { new (): ComponentPublicInstance<Props> }
+  | FunctionalComponent<Props>

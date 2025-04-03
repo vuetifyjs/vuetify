@@ -33,7 +33,7 @@ export interface LocationStrategyData {
   isRtl: Ref<boolean>
 }
 
-type LocationStrategyFn = (
+export type LocationStrategyFunction = (
   data: LocationStrategyData,
   props: StrategyProps,
   contentStyles: Ref<Record<string, string>>
@@ -45,7 +45,7 @@ const locationStrategies = {
 }
 
 export interface StrategyProps {
-  locationStrategy: keyof typeof locationStrategies | LocationStrategyFn
+  locationStrategy: keyof typeof locationStrategies | LocationStrategyFunction
   location: Anchor
   origin: Anchor | 'auto' | 'overlap'
   offset?: number | string | number[]

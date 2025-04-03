@@ -35,7 +35,6 @@ export type VDateInputSlots = Omit<VTextFieldSlots, 'default'> & {
 
 export const makeVDateInputProps = propsFactory({
   displayFormat: [Function, String],
-  hideActions: Boolean,
   location: {
     type: String as PropType<StrategyProps['location']>,
     default: 'bottom start',
@@ -43,7 +42,9 @@ export const makeVDateInputProps = propsFactory({
 
   ...makeDisplayProps(),
   ...makeFocusProps(),
-  ...makeVConfirmEditProps(),
+  ...makeVConfirmEditProps({
+    hideActions: true,
+  }),
   ...makeVTextFieldProps({
     placeholder: 'mm/dd/yyyy',
     prependIcon: '$calendar',
@@ -81,6 +82,7 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
     const menu = shallowRef(false)
     const isEditingInput = shallowRef(false)
     const vTextFieldRef = ref<VTextField>()
+    const disabledActions = ref<typeof VConfirmEdit['props']['disabled']>(['save'])
 
     function format (date: unknown) {
       if (typeof props.displayFormat === 'function') {
@@ -125,6 +127,7 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
       if (val) return
 
       isEditingInput.value = false
+      disabledActions.value = ['save']
     })
 
     function onKeydown (e: KeyboardEvent) {
@@ -217,6 +220,7 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
                   <VConfirmEdit
                     { ...confirmEditProps }
                     v-model={ model.value }
+                    disabled={ disabledActions.value }
                     onSave={ onSave }
                     onCancel={ onCancel }
                   >
@@ -234,7 +238,8 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
                           }
 
                           emit('save', value)
-                          vTextFieldRef.value?.blur()
+
+                          disabledActions.value = []
                         }
 
                         return (

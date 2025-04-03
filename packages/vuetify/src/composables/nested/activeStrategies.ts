@@ -3,7 +3,7 @@
 import { toRaw } from 'vue'
 import { wrapInArray } from '@/util'
 
-export type ActiveStrategyFn = (data: {
+type ActiveStrategyFunction = (data: {
   id: unknown
   value: boolean
   activated: Set<unknown>
@@ -12,22 +12,22 @@ export type ActiveStrategyFn = (data: {
   event?: Event
 }) => Set<unknown>
 
-export type ActiveStrategyTransformInFn = (
+type ActiveStrategyTransformInFunction = (
   v: unknown | undefined,
   children: Map<unknown, unknown[]>,
   parents: Map<unknown, unknown>,
 ) => Set<unknown>
 
-export type ActiveStrategyTransformOutFn = (
+type ActiveStrategyTransformOutFunction = (
   v: Set<unknown>,
   children: Map<unknown, unknown[]>,
   parents: Map<unknown, unknown>,
 ) => unknown
 
 export type ActiveStrategy = {
-  activate: ActiveStrategyFn
-  in: ActiveStrategyTransformInFn
-  out: ActiveStrategyTransformOutFn
+  activate: ActiveStrategyFunction
+  in: ActiveStrategyTransformInFunction
+  out: ActiveStrategyTransformOutFunction
 }
 
 export const independentActiveStrategy = (mandatory?: boolean): ActiveStrategy => {

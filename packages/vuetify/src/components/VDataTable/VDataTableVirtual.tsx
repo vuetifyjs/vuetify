@@ -41,6 +41,9 @@ export type VDataTableVirtualSlots<T> = VDataTableRowsSlots<T> & VDataTableHeade
   colgroup: VDataTableVirtualSlotProps<T>
   top: VDataTableVirtualSlotProps<T>
   headers: VDataTableHeadersSlots['headers']
+  tbody: VDataTableVirtualSlotProps<T>
+  thead: VDataTableVirtualSlotProps<T>
+  tfoot: VDataTableVirtualSlotProps<T>
   bottom: VDataTableVirtualSlotProps<T>
   'body.prepend': VDataTableVirtualSlotProps<T>
   'body.append': VDataTableVirtualSlotProps<T>
@@ -133,6 +136,8 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
       handleItemResize,
       handleScroll,
       handleScrollend,
+      calculateVisibleItems,
+      scrollToIndex,
     } = useVirtual(props, flatItems)
     const displayItems = computed(() => computedItems.value.map(item => item.raw))
 
@@ -213,8 +218,9 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
                       />
                     </thead>
                   )}
+                  { slots.thead?.(slotProps.value) }
                   { !props.hideDefaultBody && (
-                    <tbody>
+                    <tbody key="tbody">
                       <tr ref={ markerRef } style={{ height: convertToUnit(paddingTop.value), border: 0 }}>
                         <td colspan={ columns.value.length } style={{ height: 0, border: 0 }}></td>
                       </tr>
@@ -257,6 +263,8 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
                       </tr>
                     </tbody>
                   )}
+                  { slots.tbody?.(slotProps.value) }
+                  { slots.tfoot?.(slotProps.value) }
                 </table>
               </div>
             ),
@@ -265,6 +273,11 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
         </VTable>
       )
     })
+
+    return {
+      calculateVisibleItems,
+      scrollToIndex,
+    }
   },
 })
 

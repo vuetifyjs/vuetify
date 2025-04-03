@@ -18,6 +18,18 @@ Latest news, updates, and stories about Vuetify.
 
 <br>
 
+## Vuetify HeroDevs Partnership
+
+🖊️ Taylor Corbett • 📅 March 28th, 2025
+
+Vuetify is excited to announce a partnership with HeroDevs to provide extended long-term support for Vuetify 2 users through Vue 2 NES + Essentials. For teams that haven't yet migrated to Vuetify 3, this solution is designed to keep applications secure and up to date without requiring an immediate migration, addressing security vulnerabilities, compliance issues, and compatibility challenges... { .text-medium-emphasis }
+
+[Read More](/blog/vuetify-herodevs-partnership/) { .text-end }
+
+---
+
+<br>
+
 ## State of the Union 2024 - Post Mortem
 
 🖊️ John Leider • 📅 March 19th, 2025

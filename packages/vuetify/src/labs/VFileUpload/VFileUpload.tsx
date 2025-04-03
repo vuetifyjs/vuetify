@@ -209,6 +209,10 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
                 'v-file-upload--dragging': dragOver.value,
               },
               densityClasses.value,
+              props.class,
+            ]}
+            style={[
+              props.style,
             ]}
             onDragleave={ onDragLeave }
             onDragover={ onDragOver }

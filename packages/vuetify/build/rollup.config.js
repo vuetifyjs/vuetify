@@ -1,7 +1,7 @@
 import path from 'upath'
 import { mkdirp } from 'mkdirp'
-import { writeFile } from 'fs/promises'
-import { fileURLToPath } from 'url'
+import { writeFile } from 'node:fs/promises'
+import { fileURLToPath } from 'node:url'
 
 import packageJson from '../package.json' with { type: 'json' }
 
@@ -15,20 +15,18 @@ import autoprefixer from 'autoprefixer'
 import cssnano from 'cssnano'
 import postcss from 'postcss'
 import { simple as walk } from 'acorn-walk'
+import {
+  banner,
+  labsDir,
+  libDir,
+  root,
+  srcDir,
+} from './constants.js'
 
 const extensions = ['.ts', '.tsx', '.js', '.jsx', '.es6', '.es', '.mjs']
-const banner = `/*!
-* Vuetify v${packageJson.version}
-* Forged by John Leider
-* Released under the MIT License.
-*/\n`
 
-const root = path.resolve(fileURLToPath(import.meta.url), '../..')
-const srcDir = path.resolve(root, 'src')
-const libDir = path.resolve(root, 'lib')
-const labsDir = path.resolve(srcDir, 'labs')
-
-export default [
+/** @type {import("rollup").RollupOptions[]} */
+const options = [
   {
     input: 'src/entry-bundler.ts',
     output: [
@@ -40,6 +38,14 @@ export default [
       },
       {
         file: 'dist/vuetify.js',
+        name: 'Vuetify',
+        format: 'umd',
+        globals: { vue: 'Vue' },
+        sourcemap: true,
+        banner,
+      },
+      {
+        file: 'dist/vuetify.cjs',
         name: 'Vuetify',
         format: 'umd',
         globals: { vue: 'Vue' },
@@ -112,7 +118,7 @@ export default [
               (await this.resolve('src/components/index.ts')).id
             )
             await Promise.all(importedIds.map(async id => {
-              const importFrom = path.relative(srcDir, id).replace(/\.ts$/, '.mjs')
+              const importFrom = path.relative(srcDir, id).replace(/\/index\.ts$/, '')
 
               if (await this.resolve(path.join(id, '../_variables.scss')) != null) {
                 variables.push(id)
@@ -188,6 +194,13 @@ export default [
         banner,
       },
       {
+        file: 'dist/vuetify-labs.cjs',
+        name: 'Vuetify',
+        format: 'umd',
+        globals: { vue: 'Vue' },
+        banner,
+      },
+      {
         file: 'dist/vuetify-labs.esm.js',
         format: 'es',
         sourcemap: true,
@@ -247,7 +260,7 @@ export default [
               (await this.resolve('src/labs/components.ts')).id
             )
             await Promise.all(importedIds.map(async id => {
-              const importFrom = path.relative(srcDir, id).replace(/\.ts$/, '.mjs')
+              const importFrom = path.relative(srcDir, id).replace(/\/index\.ts$/, '')
 
               if (await this.resolve(path.join(id, '../_variables.scss')) != null) {
                 variables.push(id)
@@ -294,3 +307,5 @@ export default [
     ],
   },
 ]
+
+export default options

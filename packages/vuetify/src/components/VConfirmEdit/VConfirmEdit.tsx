@@ -10,7 +10,7 @@ import { computed, ref, toRaw, watchEffect } from 'vue'
 import { deepEqual, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
-import type { Ref, VNode } from 'vue'
+import type { PropType, Ref, VNode } from 'vue'
 import type { GenericProps } from '@/util'
 
 export type VConfirmEditSlots<T> = {
@@ -34,6 +34,11 @@ export const makeVConfirmEditProps = propsFactory({
     type: String,
     default: '$vuetify.confirmEdit.ok',
   },
+  disabled: {
+    type: [Boolean, Array] as PropType<boolean | ('save' | 'cancel')[]>,
+    default: undefined,
+  },
+  hideActions: Boolean,
 }, 'VConfirmEdit')
 
 export const VConfirmEdit = genericComponent<new <T> (
@@ -67,6 +72,21 @@ export const VConfirmEdit = genericComponent<new <T> (
       return deepEqual(model.value, internalModel.value)
     })
 
+    function isActionDisabled (action: 'save' | 'cancel') {
+      if (typeof props.disabled === 'boolean') {
+        return props.disabled
+      }
+
+      if (Array.isArray(props.disabled)) {
+        return props.disabled.includes(action)
+      }
+
+      return isPristine.value
+    }
+
+    const isSaveDisabled = computed(() => isActionDisabled('save'))
+    const isCancelDisabled = computed(() => isActionDisabled('cancel'))
+
     function save () {
       model.value = internalModel.value
       emit('save', internalModel.value)
@@ -81,7 +101,7 @@ export const VConfirmEdit = genericComponent<new <T> (
       return (
         <>
           <VBtn
-            disabled={ isPristine.value }
+            disabled={ isCancelDisabled.value }
             variant="text"
             color={ props.color }
             onClick={ cancel }
@@ -90,7 +110,7 @@ export const VConfirmEdit = genericComponent<new <T> (
           />
 
           <VBtn
-            disabled={ isPristine.value }
+            disabled={ isSaveDisabled.value }
             variant="text"
             color={ props.color }
             onClick={ save }
@@ -118,7 +138,7 @@ export const VConfirmEdit = genericComponent<new <T> (
             })
           }
 
-          { !actionsUsed && actions() }
+          { !props.hideActions && !actionsUsed && actions() }
         </>
       )
     })
