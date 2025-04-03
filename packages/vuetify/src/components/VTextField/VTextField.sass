@@ -79,13 +79,13 @@
     &__prefix
       @at-root #{selector.nest('.v-field:not(.v-field--reverse)', &)}
         padding-inline-start: var(--v-field-padding-start)
-      @at-root #{selector.nest('.v-field:is(.v-field--reverse)', &)}
+      @at-root #{selector.nest('.v-field.v-field--reverse', &)}
         padding-inline-end: var(--v-field-padding-end)
 
     &__suffix
       @at-root #{selector.nest('.v-field:not(.v-field--reverse)', &)}
         padding-inline-end: var(--v-field-padding-end)
-      @at-root #{selector.nest('.v-field:is(.v-field--reverse)', &)}
+      @at-root #{selector.nest('.v-field.v-field--reverse', &)}
         padding-inline-start: var(--v-field-padding-start)
 
   /* endregion */
