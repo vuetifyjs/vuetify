@@ -149,7 +149,7 @@ export function provideSelection (
     if (props.selectStrategy !== 'single' && event?.shiftKey && lastSelectedIndex.value !== null) {
       const [start, end] = [lastSelectedIndex.value, index].sort((a, b) => a - b)
 
-      items.push(...allItems.value.slice(start, end + 1))
+      items.push(...currentPage.value.slice(start, end + 1))
     } else {
       items.push(item)
       lastSelectedIndex.value = index
