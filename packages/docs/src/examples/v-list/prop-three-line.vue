@@ -8,8 +8,6 @@
 
       <v-toolbar-title>Inbox</v-toolbar-title>
 
-      <v-spacer></v-spacer>
-
       <v-btn icon="mdi-magnify" variant="text"></v-btn>
     </v-toolbar>
 

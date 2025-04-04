@@ -18,6 +18,26 @@ Latest news, updates, and stories about Vuetify.
 
 <br>
 
+## Vuetify HeroDevs Partnership
+
+🖊️ Taylor Corbett • 📅 March 28th, 2025
+
+Vuetify is excited to announce a partnership with HeroDevs to provide extended long-term support for Vuetify 2 users through Vue 2 NES + Essentials. For teams that haven't yet migrated to Vuetify 3, this solution is designed to keep applications secure and up to date without requiring an immediate migration, addressing security vulnerabilities, compliance issues, and compatibility challenges... { .text-medium-emphasis }
+
+[Read More](/blog/vuetify-herodevs-partnership/) { .text-end }
+
+---
+
+<br>
+
+## State of the Union 2024 - Post Mortem
+
+🖊️ John Leider • 📅 March 19th, 2025
+
+A lot has changed since the 2024 State of the Union. In this post, I want to share the journey we've been on, the challenges we've faced, and the incredible team that's come together to shape Vuetify's future. From nearly losing it all to finding renewed purpose and energy, this is a story of resilience, community, and a shared vision for what Vuetify can become... { .text-medium-emphasis }
+
+[Read More](/blog/state-of-the-union-2024-post-mortem/) { .text-end }
+
 ## Building a Basic Nuxt Application with Vuetify
 
 🖊️ Eric Sarrion • 📅 February 21st, 2025

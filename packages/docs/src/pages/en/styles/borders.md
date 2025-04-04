@@ -108,7 +108,8 @@ Components that support the **border** property can take advantage of all border
 | **border-background** | --v-border-color: var(--v-theme-background); |
 | **border-surface-light** | --v-border-color: var(--v-theme-surface-light); |
 | **border-surface-variant** | --v-border-color: var(--v-theme-surface-variant); |
-| **border-surface-bright** | --v-border-color: var(--v-theme-surface-bright); { style="max-height: 420px;" fixed-header } |
+| **border-surface-bright** | --v-border-color: var(--v-theme-surface-bright); |
+| **border-current** | --v-border-color: currentColor; { style="max-height: 420px;" fixed-header } |
 
 ### Components
 

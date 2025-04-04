@@ -257,6 +257,10 @@
         "subfolder": "components"
       },
       {
+        "title": "icon-buttons",
+        "subfolder": "components"
+      },
+      {
         "title": "pull-to-refresh",
         "subfolder": "components"
       },
@@ -271,6 +275,10 @@
       {
         "title": "treeview",
         "subfolder": "components"
+      },
+      {
+        "title": "rules",
+        "subfolder": "features"
       }
     ]
   },

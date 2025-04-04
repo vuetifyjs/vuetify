@@ -20,7 +20,7 @@ The VNumberInput extends the standard HTML number-type input, ensuring style con
 
 <page-features />
 
-<DocIntroduced version="3.7.0" />
+<DocIntroduced version="3.8.0" />
 
 ## Usage
 
