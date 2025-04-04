@@ -144,7 +144,7 @@ export function provideSelection (
 
   function toggleSelect (item: SelectableItem, index?: number, event?: MouseEvent) {
     const items = []
-    index = index ?? allItems.value.findIndex(i => i.value === item.value)
+    index = index ?? currentPage.value.findIndex(i => i.value === item.value)
 
     if (props.selectStrategy !== 'single' && event?.shiftKey && lastSelectedIndex.value !== null) {
       const [start, end] = [lastSelectedIndex.value, index].sort((a, b) => a - b)
