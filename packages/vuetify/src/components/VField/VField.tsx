@@ -153,7 +153,7 @@ export const VField = genericComponent<new <T>(
         : props.baseColor
     })
     const iconColor = computed(() => {
-      if (!props.iconColor) return undefined
+      if (!props.iconColor || (props.glow && !isFocused.value)) return undefined
 
       return props.iconColor === true ? color.value : props.iconColor
     })
@@ -416,6 +416,7 @@ export const VField = genericComponent<new <T>(
 
     return {
       controlRef,
+      fieldIconColor: iconColor,
     }
   },
 })

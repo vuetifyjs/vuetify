@@ -6,7 +6,7 @@
     "clearIcon": "The icon used when the **clearable** prop is set to true.",
     "dirty": "Manually apply the dirty state styling.",
     "disabled": "Removes the ability to click or target the input.",
-    "glow": "Makes prepend/append icons full opacity when the field is focused.",
+    "glow": "Makes prepend/append icons full opacity when the field is focused and apply color.",
     "error": "Puts the input in a manual error state.",
     "flat": "Removes box shadow when using a variant with elevation.",
     "iconColor": "Sets the color of the prepend/append icons.",

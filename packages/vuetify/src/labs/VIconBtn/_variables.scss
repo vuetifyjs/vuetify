@@ -1,0 +1,36 @@
+@use 'sass:map';
+@use '../../styles/settings';
+@use '../../styles/tools';
+
+// VIconBtn
+$icon-btn-background: rgb(var(--v-theme-surface)) !default;
+$icon-btn-color: inherit !default;
+$icon-btn-border-color: settings.$border-color-root !default;
+$icon-btn-border-radius: map.get(settings.$rounded, 'circle') !default;
+$icon-btn-border-style: settings.$border-style-root !default;
+$icon-btn-border-thin-width: thin !default;
+$icon-btn-border-width: 0 !default;
+$icon-btn-disabled-opacity: 0.26 !default;
+$icon-btn-elevation: 2 !default;
+$icon-btn-font-size: tools.map-deep-get(settings.$typography, 'button', 'size') !default;
+$icon-btn-font-weight: tools.map-deep-get(settings.$typography, 'button', 'weight') !default;
+$icon-btn-height: var(--v-icon-btn-height) !default;
+$icon-btn-width: var(--v-icon-btn-width) !default;
+$icon-btn-margin-start: map.get(settings.$grid-gutters, 'md') !default;
+$icon-btn-margin-end: map.get(settings.$grid-gutters, 'md') !default;
+$icon-btn-plain-opacity: .62 !default;
+
+$icon-btn-border: (
+  $icon-btn-border-color,
+  $icon-btn-border-style,
+  $icon-btn-border-width,
+  $icon-btn-border-thin-width
+) !default;
+
+$icon-btn-variants: (
+  $icon-btn-background,
+  $icon-btn-color,
+  $icon-btn-elevation,
+  $icon-btn-plain-opacity,
+  'v-icon-btn'
+) !default;

@@ -24,15 +24,13 @@ The following is a list of all planned components for the year 2025.
 
 | Component                                                               | Entering Labs | Production Release               |
 |-------------------------------------------------------------------------|---------------|----------------------------------|
-| [v3.8 (Andromeda)](https://github.com/vuetifyjs/vuetify/milestone/74)   |               | March 2025 { .bg-surface-light } |
-| [v-number-input](/components/number-inputs/)                            | *             |                                  |
-| [v-snackbar-queue](/components/snackbar-queue/)                         | *             |                                  |
 | [v3.9 (Zealot)](https://github.com/vuetifyjs/vuetify/milestone/78)      |               | Q2 2025 { .bg-surface-light }    |
-| [v-time-input](https://github.com/vuetifyjs/vuetify/pull/19709)         | Q1 2025       |                                  |
+| [v-time-input](https://github.com/vuetifyjs/vuetify/pull/19709)         | Q2 2025       |                                  |
 | [v-time-picker](/components/time-pickers/)                              | *             |                                  |
 | [v-stepper-vertical](/components/vertical-steppers/)                    | *             |                                  |
 | [v-treeview](/components/treeview/)                                     | *             |                                  |
 | [v-file-upload](/components/file-upload/)                               | *             |                                  |
+| [v-icon-btn](/components/icon-buttons/)                                 | *             |                                  |
 | [v4.0 (Revisionist)](https://github.com/vuetifyjs/vuetify/milestone/62) |               | 2025 { .bg-surface-light }       |
 | [v-date-input](/components/date-inputs/)                                | *             |                                  |
 | [v-calendar](/components/calendars/)                                    | *             |                                  |
@@ -47,6 +45,18 @@ The following is a list of all planned components for the year 2025.
 ## Released
 
 The following are the already released **minor** and **major** version updates. Find more information on the [latest releases](https://github.com/vuetifyjs/vuetify/releases/latest) on GitHub.
+
+### v3.8 (Andromeda)
+
+- **Released:** March 2025
+- **Target Release:** Q4 2024
+- **Notes:** [v3.8 Release](/getting-started/release-notes/?version=v3.8.0)
+- **Overview:**
+  - Improved typescript support
+  - Introduced 2 new components to the main framework from Labs:
+    - [v-number-input](/components/number-inputs/)
+    - [v-snackbar-queue](/components/snackbar-queue/)
+- **Milestone Issues:** [Github Issues](https://github.com/vuetifyjs/vuetify/milestone/74)
 
 ### v3.7 (Odyssey)
 
