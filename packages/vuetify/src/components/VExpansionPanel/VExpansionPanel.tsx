@@ -12,7 +12,7 @@ import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 
 // Utilities
-import { computed, provide } from 'vue'
+import { computed, provide, toRef } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 export const makeVExpansionPanelProps = propsFactory({
@@ -48,7 +48,7 @@ export const VExpansionPanel = genericComponent<VExpansionPanelSlots>()({
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.bgColor)
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props)
-    const isDisabled = computed(() => groupItem?.disabled.value || props.disabled)
+    const isDisabled = toRef(() => groupItem?.disabled.value || props.disabled)
 
     const selectedIndices = computed(() => groupItem.group.items.value.reduce<number[]>((arr, item, index) => {
       if (groupItem.group.selected.value.includes(item.id)) arr.push(index)

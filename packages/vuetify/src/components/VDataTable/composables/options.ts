@@ -1,5 +1,5 @@
 // Utilities
-import { computed, watch } from 'vue'
+import { watch } from 'vue'
 import { deepEqual, getCurrentInstance } from '@/util'
 
 // Types
@@ -21,24 +21,24 @@ export function useOptions ({
 }) {
   const vm = getCurrentInstance('VDataTable')
 
-  const options = computed(() => ({
+  const options = () => ({
     page: page.value,
     itemsPerPage: itemsPerPage.value,
     sortBy: sortBy.value,
     groupBy: groupBy.value,
     search: search.value,
-  }))
+  })
 
-  let oldOptions: typeof options.value | null = null
-  watch(options, () => {
-    if (deepEqual(oldOptions, options.value)) return
+  let oldOptions: ReturnType<typeof options> | null = null
+  watch(options, value => {
+    if (deepEqual(oldOptions, value)) return
 
     // Reset page when searching
-    if (oldOptions && oldOptions.search !== options.value.search) {
+    if (oldOptions && oldOptions.search !== value.search) {
       page.value = 1
     }
 
-    vm.emit('update:options', options.value)
-    oldOptions = options.value
+    vm.emit('update:options', value)
+    oldOptions = value
   }, { deep: true, immediate: true })
 }

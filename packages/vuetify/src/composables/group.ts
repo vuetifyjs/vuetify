@@ -6,7 +6,7 @@ import { computed, inject, onBeforeUnmount, onMounted, onUpdated, provide, react
 import { consoleWarn, deepEqual, findChildrenWithProvide, getCurrentInstance, propsFactory, wrapInArray } from '@/util'
 
 // Types
-import type { ComponentInternalInstance, ComputedRef, ExtractPropTypes, InjectionKey, PropType, Ref, UnwrapRef } from 'vue'
+import type { ComponentInternalInstance, ExtractPropTypes, InjectionKey, PropType, Ref, UnwrapRef } from 'vue'
 import type { EventProp } from '@/util'
 
 export interface GroupItem {
@@ -35,11 +35,11 @@ export interface GroupProvide {
   prev: () => void
   next: () => void
   selectedClass: Ref<string | undefined>
-  items: ComputedRef<{
+  items: Readonly<Ref<{
     id: string
     value: unknown
     disabled: boolean | undefined
-  }[]>
+  }[]>>
   disabled: Ref<boolean | undefined>
   getItemIndex: (value: unknown) => number
 }
@@ -313,8 +313,8 @@ export function useGroup (
     prev: () => step(items.length - 1),
     next: () => step(1),
     isSelected: (id: string) => selected.value.includes(id),
-    selectedClass: computed(() => props.selectedClass),
-    items: computed(() => items),
+    selectedClass: toRef(() => props.selectedClass),
+    items: toRef(() => items),
     getItemIndex: (value: unknown) => getItemIndex(items, value),
   }
 

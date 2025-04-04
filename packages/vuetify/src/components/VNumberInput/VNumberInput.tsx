@@ -15,7 +15,7 @@ import { forwardRefs } from '@/composables/forwardRefs'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, nextTick, onMounted, ref, shallowRef, watch, watchEffect } from 'vue'
+import { computed, nextTick, onMounted, ref, shallowRef, toRef, watch, watchEffect } from 'vue'
 import { clamp, genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
@@ -138,25 +138,25 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       return props.hideInput ? 'stacked' : props.controlVariant
     })
 
-    const incrementIcon = computed(() => controlVariant.value === 'split' ? '$plus' : '$collapse')
-    const decrementIcon = computed(() => controlVariant.value === 'split' ? '$minus' : '$expand')
-    const controlNodeSize = computed(() => controlVariant.value === 'split' ? 'default' : 'small')
-    const controlNodeDefaultHeight = computed(() => controlVariant.value === 'stacked' ? 'auto' : '100%')
+    const incrementIcon = toRef(() => controlVariant.value === 'split' ? '$plus' : '$collapse')
+    const decrementIcon = toRef(() => controlVariant.value === 'split' ? '$minus' : '$expand')
+    const controlNodeSize = toRef(() => controlVariant.value === 'split' ? 'default' : 'small')
+    const controlNodeDefaultHeight = toRef(() => controlVariant.value === 'stacked' ? 'auto' : '100%')
 
-    const incrementSlotProps = computed(() => ({
+    const incrementSlotProps = {
       props: {
         onClick: onControlClick,
         onPointerup: onControlMouseup,
         onPointerdown: onUpControlMousedown,
       },
-    }))
-    const decrementSlotProps = computed(() => ({
+    }
+    const decrementSlotProps = {
       props: {
         onClick: onControlClick,
         onPointerup: onControlMouseup,
         onPointerdown: onDownControlMousedown,
       },
-    }))
+    }
 
     watch(() => props.precision, () => formatInputValue())
 
@@ -335,7 +335,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
               },
             }}
           >
-            { slots.increment(incrementSlotProps.value) }
+            { slots.increment(incrementSlotProps) }
           </VDefaultsProvider>
         )
       }
@@ -369,7 +369,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
               },
             }}
           >
-            { slots.decrement(decrementSlotProps.value) }
+            { slots.decrement(decrementSlotProps) }
           </VDefaultsProvider>
         )
       }

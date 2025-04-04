@@ -21,6 +21,7 @@ import {
   onBeforeUnmount,
   ref,
   shallowRef,
+  toRef,
   vShow,
   watch,
   withDirectives,
@@ -243,7 +244,7 @@ export const VImg = genericComponent<VImgSlots>()({
       poll()
     }
 
-    const containClasses = computed(() => ({
+    const containClasses = toRef(() => ({
       'v-img__img--cover': props.cover,
       'v-img__img--contain': !props.cover,
     }))

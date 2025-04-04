@@ -2,7 +2,17 @@
 import { useToggleScope } from '@/composables/toggleScope'
 
 // Utilities
-import { computed, inject, onScopeDispose, provide, reactive, readonly, shallowRef, toRaw, watchEffect } from 'vue'
+import {
+  inject,
+  onScopeDispose,
+  provide,
+  reactive,
+  readonly,
+  shallowRef,
+  toRaw,
+  toRef,
+  watchEffect,
+} from 'vue'
 import { getCurrentInstance } from '@/util'
 
 // Types
@@ -59,11 +69,11 @@ export function useStack (
     })
   }
 
-  const localTop = computed(() => !stack.activeChildren.size)
+  const localTop = toRef(() => !stack.activeChildren.size)
 
   return {
     globalTop: readonly(globalTop),
     localTop,
-    stackStyles: computed(() => ({ zIndex: _zIndex.value })),
+    stackStyles: toRef(() => ({ zIndex: _zIndex.value })),
   }
 }

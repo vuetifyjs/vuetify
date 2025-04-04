@@ -133,7 +133,7 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
     const location = computed(() => {
       return toPhysical(props.location, isRtl.value) as 'left' | 'right' | 'bottom'
     })
-    const isPersistent = computed(() => props.persistent)
+    const isPersistent = toRef(() => props.persistent)
     const isTemporary = computed(() => !props.permanent && (mobile.value || props.temporary))
     const isSticky = computed(() =>
       props.sticky &&
@@ -184,7 +184,7 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
       layoutSize,
       elementSize: width,
       active: readonly(isActive),
-      disableTransitions: computed(() => isDragging.value),
+      disableTransitions: toRef(() => isDragging.value),
       absolute: computed(() =>
         // eslint-disable-next-line @typescript-eslint/no-use-before-define
         props.absolute || (isSticky.value && typeof isStuck.value !== 'string')

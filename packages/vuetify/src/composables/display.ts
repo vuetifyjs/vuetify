@@ -1,5 +1,5 @@
 // Utilities
-import { computed, inject, onScopeDispose, reactive, shallowRef, toRefs, watchEffect } from 'vue'
+import { computed, inject, onScopeDispose, reactive, shallowRef, toRef, toRefs, watchEffect } from 'vue'
 import { getCurrentInstanceName, mergeDeep, propsFactory } from '@/util'
 import { IN_BROWSER, SUPPORTS_TOUCH } from '@/util/globals'
 
@@ -248,7 +248,7 @@ export function useDisplay (
     }
   })
 
-  const displayClasses = computed(() => {
+  const displayClasses = toRef(() => {
     if (!name) return {}
 
     return { [`${name}--mobile`]: mobile.value }

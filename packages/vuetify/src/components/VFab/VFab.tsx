@@ -56,7 +56,7 @@ export const VFab = genericComponent()({
       height.value = entries[0].target.clientHeight
     })
 
-    const hasPosition = computed(() => props.app || props.absolute)
+    const hasPosition = toRef(() => props.app || props.absolute)
 
     const position = computed(() => {
       if (!hasPosition.value) return false

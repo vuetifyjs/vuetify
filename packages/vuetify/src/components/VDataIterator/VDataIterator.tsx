@@ -121,7 +121,7 @@ export const VDataIterator = genericComponent<new <T> (
     const { sortedItems } = useSortedItems(props, filteredItems, sortByWithGroups, { transform: item => item.raw })
     const { flatItems } = useGroupedItems(sortedItems, groupBy, opened)
 
-    const itemsLength = computed(() => flatItems.value.length)
+    const itemsLength = toRef(() => flatItems.value.length)
 
     const {
       startIndex,

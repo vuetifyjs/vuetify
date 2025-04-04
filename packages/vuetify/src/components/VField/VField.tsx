@@ -18,7 +18,7 @@ import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
-import { computed, ref, useId, watch } from 'vue'
+import { computed, ref, toRef, useId, watch } from 'vue'
 import {
   animate,
   convertToUnit,
@@ -135,13 +135,13 @@ export const VField = genericComponent<new <T>(
     const { roundedClasses } = useRounded(props)
     const { rtlClasses } = useRtl()
 
-    const isActive = computed(() => props.dirty || props.active)
-    const hasLabel = computed(() => !!(props.label || slots.label))
-    const hasFloatingLabel = computed(() => !props.singleLine && hasLabel.value)
+    const isActive = toRef(() => props.dirty || props.active)
+    const hasLabel = toRef(() => !!(props.label || slots.label))
+    const hasFloatingLabel = toRef(() => !props.singleLine && hasLabel.value)
 
     const uid = useId()
     const id = computed(() => props.id || `input-${uid}`)
-    const messagesId = computed(() => `${id.value}-messages`)
+    const messagesId = toRef(() => `${id.value}-messages`)
 
     const labelRef = ref<VFieldLabel>()
     const floatingLabelRef = ref<VFieldLabel>()

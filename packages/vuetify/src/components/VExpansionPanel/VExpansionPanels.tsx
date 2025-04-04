@@ -13,7 +13,7 @@ import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
-import { computed, toRef } from 'vue'
+import { toRef } from 'vue'
 import { genericComponent, pick, propsFactory, useRender } from '@/util'
 
 // Types
@@ -76,7 +76,7 @@ export const VExpansionPanels = genericComponent<VExpansionPanelSlots>()({
 
     const { themeClasses } = provideTheme(props)
 
-    const variantClass = computed(() => props.variant && `v-expansion-panels--variant-${props.variant}`)
+    const variantClass = toRef(() => props.variant && `v-expansion-panels--variant-${props.variant}`)
 
     provideDefaults({
       VExpansionPanel: {

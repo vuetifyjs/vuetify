@@ -13,7 +13,7 @@ import { IconValue } from '@/composables/icons'
 import { Ripple } from '@/directives/ripple'
 
 // Utilities
-import { computed, inject } from 'vue'
+import { computed, inject, toRef } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -79,7 +79,7 @@ export const VExpansionPanelTitle = genericComponent<VExpansionPanelTitleSlots>(
       readonly: props.readonly,
     }))
 
-    const icon = computed(() => expansionPanel.isSelected.value ? props.collapseIcon : props.expandIcon)
+    const icon = toRef(() => expansionPanel.isSelected.value ? props.collapseIcon : props.expandIcon)
 
     useRender(() => (
       <button

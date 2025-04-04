@@ -1,5 +1,5 @@
 // Utilities
-import { computed, inject } from 'vue'
+import { inject, toRef } from 'vue'
 import { useRtl } from './locale'
 import { clamp, consoleWarn, mergeDeep, refElement } from '@/util'
 
@@ -154,7 +154,7 @@ export function useGoTo (_options: GoToOptions = {}) {
   const goTo = {
     ...goToInstance,
     // can be set via VLocaleProvider
-    rtl: computed(() => goToInstance.rtl.value || isRtl.value),
+    rtl: toRef(() => goToInstance.rtl.value || isRtl.value),
   }
 
   async function go (

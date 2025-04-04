@@ -59,10 +59,10 @@ export const VFooter = genericComponent()({
       const layout = useLayoutItem({
         id: props.name,
         order: computed(() => parseInt(props.order, 10)),
-        position: computed(() => 'bottom'),
+        position: toRef(() => 'bottom'),
         layoutSize: height,
         elementSize: computed(() => props.height === 'auto' ? undefined : height.value),
-        active: computed(() => props.app),
+        active: toRef(() => props.app),
         absolute: toRef(() => props.absolute),
       })
 

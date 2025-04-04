@@ -169,7 +169,7 @@ export const VList = genericComponent<new <
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props)
     const { children, open, parents, select, getPath } = useNested(props)
-    const lineClasses = computed(() => props.lines ? `v-list--${props.lines}-line` : undefined)
+    const lineClasses = toRef(() => props.lines ? `v-list--${props.lines}-line` : undefined)
     const activeColor = toRef(() => props.activeColor)
     const baseColor = toRef(() => props.baseColor)
     const color = toRef(() => props.color)

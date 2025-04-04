@@ -16,7 +16,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { Ripple } from '@/directives/ripple'
 
 // Utilities
-import { computed, inject, nextTick, ref, shallowRef, useId } from 'vue'
+import { computed, inject, nextTick, ref, shallowRef, toRef, useId } from 'vue'
 import {
   filterInputAttrs,
   genericComponent,
@@ -175,8 +175,8 @@ export const VSelectionControl = genericComponent<new <T>(
     const isFocused = shallowRef(false)
     const isFocusVisible = shallowRef(false)
     const input = ref<HTMLInputElement>()
-    const id = computed(() => props.id || `input-${uid}`)
-    const isInteractive = computed(() => !props.disabled && !props.readonly)
+    const id = toRef(() => props.id || `input-${uid}`)
+    const isInteractive = toRef(() => !props.disabled && !props.readonly)
 
     group?.onForceUpdate(() => {
       if (input.value) {
