@@ -19,7 +19,7 @@ export interface VuetifyComponentResolverOptions {
   /**
    * Include labs components?.
    *
-   * @default false
+   * @default true
    */
   labs?: boolean
   /**
@@ -72,7 +72,7 @@ export function VuetifyVueResolver (options: VuetifyVueResolverOptions = {}) {
   const {
     paths,
     excludeDirectives,
-    labs,
+    labs = true,
     excludeComponents,
     prefixDirectives,
   } = options
