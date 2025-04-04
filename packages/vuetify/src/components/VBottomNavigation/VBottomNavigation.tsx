@@ -102,7 +102,7 @@ export const VBottomNavigation = genericComponent<new <T>(
         baseColor: toRef(props, 'baseColor'),
         color: toRef(props, 'color'),
         density: toRef(props, 'density'),
-        stacked: computed(() => props.mode !== 'horizontal'),
+        stacked: toRef(() => props.mode !== 'horizontal'),
         variant: 'text',
       },
     }, { scoped: true })

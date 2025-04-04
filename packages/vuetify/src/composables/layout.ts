@@ -324,7 +324,6 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
             : undefined,
         }
       })
-
       const layoutItemScrimStyles = computed<CSSProperties>(() => ({
         zIndex: zIndex.value - 1,
       }))
