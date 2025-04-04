@@ -75,6 +75,9 @@ describe('date.ts', () => {
     expect(adapter2.getWeek(new Date('2028-12-31'), 1)).toBe(52)
     expect(adapter2.getWeek(new Date('2029-01-01'), 1)).toBe(1)
     expect(adapter2.getWeek(new Date('2029-01-07'), 1)).toBe(1)
+
+    const adapter3 = new VuetifyDateAdapter({ locale: 'pl-PL' })
+    expect(adapter3.getWeek(new Date('2024-12-29'), 1)).toBe(52)
   })
 
   it('should adjust fallback to week start from locale', () => {

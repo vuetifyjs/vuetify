@@ -512,11 +512,13 @@ export class VuetifyDateAdapter implements DateAdapter<Date> {
   }
 
   getWeekArray (date: Date, firstDayOfWeek?: number | string) {
-    return getWeekArray(date, this.locale, firstDayOfWeek ? Number(firstDayOfWeek) : undefined)
+    const firstDay = firstDayOfWeek !== undefined ? Number(firstDayOfWeek) : undefined
+    return getWeekArray(date, this.locale, firstDay)
   }
 
   startOfWeek (date: Date, firstDayOfWeek?: number | string): Date {
-    return startOfWeek(date, this.locale, firstDayOfWeek ? Number(firstDayOfWeek) : undefined)
+    const firstDay = firstDayOfWeek !== undefined ? Number(firstDayOfWeek) : undefined
+    return startOfWeek(date, this.locale, firstDay)
   }
 
   endOfWeek (date: Date): Date {
@@ -596,7 +598,8 @@ export class VuetifyDateAdapter implements DateAdapter<Date> {
   }
 
   getWeekdays (firstDayOfWeek?: number | string) {
-    return getWeekdays(this.locale, firstDayOfWeek ? Number(firstDayOfWeek) : undefined)
+    const firstDay = firstDayOfWeek !== undefined ? Number(firstDayOfWeek) : undefined
+    return getWeekdays(this.locale, firstDay)
   }
 
   getYear (date: Date) {
@@ -608,7 +611,8 @@ export class VuetifyDateAdapter implements DateAdapter<Date> {
   }
 
   getWeek (date: Date, firstDayOfWeek?: number | string, firstWeekMinSize?: number) {
-    return getWeek(date, this.locale, firstDayOfWeek ? Number(firstDayOfWeek) : undefined, firstWeekMinSize)
+    const firstDay = firstDayOfWeek !== undefined ? Number(firstDayOfWeek) : undefined
+    return getWeek(date, this.locale, firstDay, firstWeekMinSize)
   }
 
   getDate (date: Date) {
