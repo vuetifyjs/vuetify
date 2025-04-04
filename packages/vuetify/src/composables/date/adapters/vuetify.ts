@@ -6,160 +6,41 @@ import type { DateAdapter } from '../DateAdapter'
 
 type CustomDateFormat = Intl.DateTimeFormatOptions | ((date: Date, formatString: string, locale: string) => string)
 
-// https://simplelocalize.io/data/locales/
-// then `new Intl.Locale(...).getWeekInfo()`
-const weekInfo: Record<string, { firstDay: number, firstWeekSize: number }> = {
-  '001': { firstDay: 1, firstWeekSize: 1 }, // not covered by Intl
-  AD: { firstDay: 1, firstWeekSize: 4 }, // ca-AD
-  AE: { firstDay: 6, firstWeekSize: 1 }, // ar-AE
-  AF: { firstDay: 6, firstWeekSize: 1 }, // uz-AF or ps-AF | tk-AF
-  AG: { firstDay: 0, firstWeekSize: 1 }, // en-AG
-  AI: { firstDay: 1, firstWeekSize: 1 }, // en-AI
-  AL: { firstDay: 1, firstWeekSize: 1 }, // sq-AL
-  AM: { firstDay: 1, firstWeekSize: 1 }, // hy-AM
-  AN: { firstDay: 1, firstWeekSize: 4 }, // nl-AN
-  AR: { firstDay: 1, firstWeekSize: 1 }, // es-AR
-  AS: { firstDay: 0, firstWeekSize: 1 }, // sm-AS or en-AS
-  AT: { firstDay: 1, firstWeekSize: 4 }, // de-AT
-  AU: { firstDay: 1, firstWeekSize: 1 }, // en-AU
-  AX: { firstDay: 1, firstWeekSize: 4 }, // sv-AX
-  AZ: { firstDay: 1, firstWeekSize: 1 }, // az-AZ
-  BA: { firstDay: 1, firstWeekSize: 1 }, // sr-BA or bs-BA | hr-BA
-  BD: { firstDay: 0, firstWeekSize: 1 }, // bn-BD
-  BE: { firstDay: 1, firstWeekSize: 4 }, // fr-BE or nl-BE
-  BG: { firstDay: 1, firstWeekSize: 4 }, // bg-BG
-  BH: { firstDay: 6, firstWeekSize: 1 }, // ar-BH
-  BM: { firstDay: 1, firstWeekSize: 1 }, // en-BM
-  BN: { firstDay: 1, firstWeekSize: 1 }, // ms-BN
-  BR: { firstDay: 0, firstWeekSize: 1 }, // pt-BR
-  BS: { firstDay: 0, firstWeekSize: 1 }, // en-BS
-  BT: { firstDay: 0, firstWeekSize: 1 }, // dz-BT
-  BW: { firstDay: 0, firstWeekSize: 1 }, // tn-BW or en-BW
-  BY: { firstDay: 1, firstWeekSize: 1 }, // be-BY
-  BZ: { firstDay: 0, firstWeekSize: 1 }, // en-BZ
-  CA: { firstDay: 0, firstWeekSize: 1 }, // en-CA or fr-CA
-  CH: { firstDay: 1, firstWeekSize: 4 }, // de-CH or fr-CH | it-CH | rm-CH
-  CL: { firstDay: 1, firstWeekSize: 1 }, // es-CL
-  CM: { firstDay: 1, firstWeekSize: 1 }, // fr-CM or en-CM
-  CN: { firstDay: 1, firstWeekSize: 1 }, // zh-CN
-  CO: { firstDay: 0, firstWeekSize: 1 }, // es-CO
-  CR: { firstDay: 1, firstWeekSize: 1 }, // es-CR
-  CY: { firstDay: 1, firstWeekSize: 1 }, // el-CY
-  CZ: { firstDay: 1, firstWeekSize: 4 }, // cs-CZ
-  DE: { firstDay: 1, firstWeekSize: 4 }, // de-DE
-  DJ: { firstDay: 6, firstWeekSize: 1 }, // fr-DJ
-  DK: { firstDay: 1, firstWeekSize: 4 }, // da-DK
-  DM: { firstDay: 0, firstWeekSize: 1 }, // en-DM
-  DO: { firstDay: 0, firstWeekSize: 1 }, // es-DO
-  DZ: { firstDay: 6, firstWeekSize: 1 }, // ar-DZ
-  EC: { firstDay: 1, firstWeekSize: 1 }, // es-EC
-  EE: { firstDay: 1, firstWeekSize: 4 }, // et-EE
-  EG: { firstDay: 6, firstWeekSize: 1 }, // ar-EG
-  ES: { firstDay: 1, firstWeekSize: 4 }, // es-ES
-  ET: { firstDay: 0, firstWeekSize: 1 }, // am-ET
-  FI: { firstDay: 1, firstWeekSize: 4 }, // fi-FI or sv-FI
-  FJ: { firstDay: 1, firstWeekSize: 4 }, // en-FJ
-  FO: { firstDay: 1, firstWeekSize: 4 }, // fo-FO
-  FR: { firstDay: 1, firstWeekSize: 4 }, // fr-FR
-  GB: { firstDay: 1, firstWeekSize: 4 }, // en-GB
-  'GB-alt-variant': { firstDay: 0, firstWeekSize: 4 }, // not covered by Intl
-  GE: { firstDay: 1, firstWeekSize: 1 }, // ka-GE
-  GF: { firstDay: 1, firstWeekSize: 4 }, // fr-GF
-  GP: { firstDay: 1, firstWeekSize: 4 }, // fr-GP
-  GR: { firstDay: 1, firstWeekSize: 4 }, // el-GR
-  GT: { firstDay: 0, firstWeekSize: 1 }, // es-GT
-  GU: { firstDay: 0, firstWeekSize: 1 }, // en-GU or ch-GU | es-GU
-  HK: { firstDay: 0, firstWeekSize: 1 }, // zh-HK
-  HN: { firstDay: 0, firstWeekSize: 1 }, // es-HN
-  HR: { firstDay: 1, firstWeekSize: 1 }, // hr-HR
-  HU: { firstDay: 1, firstWeekSize: 4 }, // hu-HU
-  ID: { firstDay: 0, firstWeekSize: 1 }, // id-ID or in-ID
-  IE: { firstDay: 1, firstWeekSize: 4 }, // en-IE or ga-IE
-  IL: { firstDay: 0, firstWeekSize: 1 }, // he-IL or iw-IL
-  IN: { firstDay: 0, firstWeekSize: 1 }, // en-IN or hi-IN
-  IQ: { firstDay: 6, firstWeekSize: 1 }, // ar-IQ
-  IR: { firstDay: 6, firstWeekSize: 1 }, // fa-IR
-  IS: { firstDay: 1, firstWeekSize: 4 }, // is-IS
-  IT: { firstDay: 1, firstWeekSize: 4 }, // it-IT
-  JM: { firstDay: 0, firstWeekSize: 1 }, // en-JM
-  JO: { firstDay: 6, firstWeekSize: 1 }, // ar-JO
-  JP: { firstDay: 0, firstWeekSize: 1 }, // ja-JP
-  KE: { firstDay: 0, firstWeekSize: 1 }, // sw-KE
-  KG: { firstDay: 1, firstWeekSize: 1 }, // ky-KG
-  KH: { firstDay: 0, firstWeekSize: 1 }, // km-KH
-  KR: { firstDay: 0, firstWeekSize: 1 }, // ko-KR
-  KW: { firstDay: 6, firstWeekSize: 1 }, // ar-KW
-  KZ: { firstDay: 1, firstWeekSize: 1 }, // kk-KZ
-  LA: { firstDay: 0, firstWeekSize: 1 }, // lo-LA
-  LB: { firstDay: 1, firstWeekSize: 1 }, // ar-LB
-  LI: { firstDay: 1, firstWeekSize: 4 }, // de-LI
-  LK: { firstDay: 1, firstWeekSize: 1 }, // si-LK
-  LT: { firstDay: 1, firstWeekSize: 4 }, // lt-LT
-  LU: { firstDay: 1, firstWeekSize: 4 }, // de-LU or fr-LU | lb-LU
-  LV: { firstDay: 1, firstWeekSize: 1 }, // lv-LV
-  LY: { firstDay: 6, firstWeekSize: 1 }, // ar-LY
-  MC: { firstDay: 1, firstWeekSize: 4 }, // fr-MC
-  MD: { firstDay: 1, firstWeekSize: 1 }, // ro-MD
-  ME: { firstDay: 1, firstWeekSize: 1 }, // sr-ME
-  MH: { firstDay: 0, firstWeekSize: 1 }, // mh-MH or en-MH
-  MK: { firstDay: 1, firstWeekSize: 1 }, // mk-MK
-  MM: { firstDay: 0, firstWeekSize: 1 }, // my-MM
-  MN: { firstDay: 1, firstWeekSize: 1 }, // mn-MN
-  MO: { firstDay: 0, firstWeekSize: 1 }, // zh-MO
-  MQ: { firstDay: 1, firstWeekSize: 4 }, // fr-MQ
-  MT: { firstDay: 0, firstWeekSize: 1 }, // mt-MT or en-MT
-  MV: { firstDay: 5, firstWeekSize: 1 }, // dv-MV
-  MX: { firstDay: 0, firstWeekSize: 1 }, // es-MX
-  MY: { firstDay: 1, firstWeekSize: 1 }, // en-MY or ms-MY
-  MZ: { firstDay: 0, firstWeekSize: 1 }, // pt-MZ
-  NI: { firstDay: 0, firstWeekSize: 1 }, // es-NI
-  NL: { firstDay: 1, firstWeekSize: 4 }, // fy-NL or nl-NL
-  NO: { firstDay: 1, firstWeekSize: 4 }, // nb-NO or nn-NO | no-NO
-  NP: { firstDay: 0, firstWeekSize: 1 }, // ne-NP
-  NZ: { firstDay: 1, firstWeekSize: 1 }, // en-NZ or mi-NZ
-  OM: { firstDay: 6, firstWeekSize: 1 }, // ar-OM
-  PA: { firstDay: 0, firstWeekSize: 1 }, // es-PA
-  PE: { firstDay: 0, firstWeekSize: 1 }, // es-PE
-  PH: { firstDay: 0, firstWeekSize: 1 }, // en-PH
-  PK: { firstDay: 0, firstWeekSize: 1 }, // ur-PK
-  PL: { firstDay: 1, firstWeekSize: 4 }, // pl-PL
-  PR: { firstDay: 0, firstWeekSize: 1 }, // es-PR
-  PT: { firstDay: 0, firstWeekSize: 4 }, // pt-PT
-  PY: { firstDay: 0, firstWeekSize: 1 }, // es-PY
-  QA: { firstDay: 6, firstWeekSize: 1 }, // ar-QA
-  RE: { firstDay: 1, firstWeekSize: 4 }, // fr-RE
-  RO: { firstDay: 1, firstWeekSize: 1 }, // ro-RO
-  RS: { firstDay: 1, firstWeekSize: 1 }, // sr-RS
-  RU: { firstDay: 1, firstWeekSize: 4 }, // ru-RU
-  SA: { firstDay: 0, firstWeekSize: 1 }, // ar-SA
-  SD: { firstDay: 6, firstWeekSize: 1 }, // ar-SD
-  SE: { firstDay: 1, firstWeekSize: 4 }, // sv-SE
-  SG: { firstDay: 0, firstWeekSize: 1 }, // en-SG or ms-SG | ta-SG | zh-SG
-  SI: { firstDay: 1, firstWeekSize: 1 }, // sl-SI
-  SK: { firstDay: 1, firstWeekSize: 4 }, // sk-SK
-  SM: { firstDay: 1, firstWeekSize: 4 }, // it-SM
-  SV: { firstDay: 0, firstWeekSize: 1 }, // es-SV
-  SY: { firstDay: 6, firstWeekSize: 1 }, // ar-SY
-  TH: { firstDay: 0, firstWeekSize: 1 }, // th-TH
-  TJ: { firstDay: 1, firstWeekSize: 1 }, // ru-TJ
-  TM: { firstDay: 1, firstWeekSize: 1 }, // tk-TM
-  TR: { firstDay: 1, firstWeekSize: 1 }, // tr-TR
-  TT: { firstDay: 0, firstWeekSize: 1 }, // en-TT
-  TW: { firstDay: 0, firstWeekSize: 1 }, // zh-TW
-  UA: { firstDay: 1, firstWeekSize: 1 }, // uk-UA
-  UM: { firstDay: 0, firstWeekSize: 1 }, // en-UM
-  US: { firstDay: 0, firstWeekSize: 1 }, // en-US or es-US
-  UY: { firstDay: 1, firstWeekSize: 1 }, // es-UY
-  UZ: { firstDay: 1, firstWeekSize: 1 }, // uz-UZ
-  VA: { firstDay: 1, firstWeekSize: 4 }, // fr-VA or la-VA | de-VA | it-VA
-  VE: { firstDay: 0, firstWeekSize: 1 }, // es-VE
-  VI: { firstDay: 0, firstWeekSize: 1 }, // en-VI
-  VN: { firstDay: 1, firstWeekSize: 1 }, // vi-VN
-  WS: { firstDay: 0, firstWeekSize: 1 }, // sm-WS or en-WS
-  XK: { firstDay: 1, firstWeekSize: 1 }, // sq-XK or sr-XK
-  YE: { firstDay: 0, firstWeekSize: 1 }, // ar-YE
-  ZA: { firstDay: 0, firstWeekSize: 1 }, // af-ZA or 9 more...
-  ZW: { firstDay: 0, firstWeekSize: 1 }, // en-ZW
+function weekInfo (locale: string): { firstDay: number, firstWeekSize: number } | null {
+  // https://simplelocalize.io/data/locales/
+  // then `new Intl.Locale(...).getWeekInfo()`
+  const code = locale.slice(-2).toUpperCase()
+  switch (true) {
+    case locale === 'GB-alt-variant': {
+      return { firstDay: 0, firstWeekSize: 4 }
+    }
+    case locale === '001': {
+      return { firstDay: 1, firstWeekSize: 1 }
+    }
+    case `AG AS BD BR BS BT BW BZ CA CO DM DO ET GT GU HK HN ID IL IN JM JP KE
+    KH KR LA MH MM MO MT MX MZ NI NP PA PE PH PK PR PY SA SG SV TH TT TW UM US
+    VE VI WS YE ZA ZW`.includes(code): {
+      return { firstDay: 0, firstWeekSize: 1 }
+    }
+    case `AI AL AM AR AU AZ BA BM BN BY CL CM CN CR CY EC GE HR KG KZ LB LK LV
+    MD ME MK MN MY NZ RO RS SI TJ TM TR UA UY UZ VN XK`.includes(code): {
+      return { firstDay: 1, firstWeekSize: 1 }
+    }
+    case `AD AN AT AX BE BG CH CZ DE DK EE ES FI FJ FO FR GB GF GP GR HU IE IS
+    IT LI LT LU MC MQ NL NO PL RE RU SE SK SM VA`.includes(code): {
+      return { firstDay: 1, firstWeekSize: 4 }
+    }
+    case `AE AF BH DJ DZ EG IQ IR JO KW LY OM QA SD SY`.includes(code): {
+      return { firstDay: 6, firstWeekSize: 1 }
+    }
+    case code === 'MV': {
+      return { firstDay: 5, firstWeekSize: 1 }
+    }
+    case code === 'PT': {
+      return { firstDay: 0, firstWeekSize: 4 }
+    }
+    default: return null
+  }
 }
 
 function getWeekArray (date: Date, locale: string, firstDayOfWeek?: number) {
@@ -167,7 +48,7 @@ function getWeekArray (date: Date, locale: string, firstDayOfWeek?: number) {
   let currentWeek = []
   const firstDayOfMonth = startOfMonth(date)
   const lastDayOfMonth = endOfMonth(date)
-  const first = firstDayOfWeek ?? weekInfo[locale.slice(-2).toUpperCase()]?.firstDay ?? 0
+  const first = firstDayOfWeek ?? weekInfo(locale)?.firstDay ?? 0
   const firstDayWeekIndex = (firstDayOfMonth.getDay() - first + 7) % 7
   const lastDayWeekIndex = (lastDayOfMonth.getDay() - first + 7) % 7
 
@@ -204,7 +85,7 @@ function getWeekArray (date: Date, locale: string, firstDayOfWeek?: number) {
 }
 
 function startOfWeek (date: Date, locale: string, firstDayOfWeek?: number) {
-  const day = firstDayOfWeek ?? weekInfo[locale.slice(-2).toUpperCase()]?.firstDay ?? 0
+  const day = firstDayOfWeek ?? weekInfo(locale)?.firstDay ?? 0
 
   const d = new Date(date)
   while (d.getDay() !== day) {
@@ -215,7 +96,7 @@ function startOfWeek (date: Date, locale: string, firstDayOfWeek?: number) {
 
 function endOfWeek (date: Date, locale: string) {
   const d = new Date(date)
-  const lastDay = ((weekInfo[locale.slice(-2).toUpperCase()]?.firstDay ?? 0) + 6) % 7
+  const lastDay = ((weekInfo(locale)?.firstDay ?? 0) + 6) % 7
   while (d.getDay() !== lastDay) {
     d.setDate(d.getDate() + 1)
   }
@@ -262,7 +143,7 @@ function date (value?: any): Date | null {
 const sundayJanuarySecond2000 = new Date(2000, 0, 2)
 
 function getWeekdays (locale: string, firstDayOfWeek?: number) {
-  const daysFromSunday = firstDayOfWeek ?? weekInfo[locale.slice(-2).toUpperCase()]?.firstDay ?? 0
+  const daysFromSunday = firstDayOfWeek ?? weekInfo(locale)?.firstDay ?? 0
 
   return createRange(7).map(i => {
     const weekday = new Date(sundayJanuarySecond2000)
@@ -429,7 +310,7 @@ function getMonth (date: Date) {
 }
 
 function getWeek (date: Date, locale: string, firstDayOfWeek?: number, firstWeekMinSize?: number) {
-  const weekInfoFromLocale = weekInfo[locale.slice(-2).toUpperCase()]
+  const weekInfoFromLocale = weekInfo(locale)
   const weekStart = firstDayOfWeek ?? weekInfoFromLocale?.firstDay ?? 0
   const minWeekSize = firstWeekMinSize ?? weekInfoFromLocale?.firstWeekSize ?? 1
   function firstWeekSize (year: number) {
