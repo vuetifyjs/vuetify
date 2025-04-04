@@ -77,13 +77,13 @@ export const VBreadcrumbs = genericComponent<new <T extends BreadcrumbItem>(
 
     provideDefaults({
       VBreadcrumbsDivider: {
-        divider: toRef(props, 'divider'),
+        divider: toRef(() => props.divider),
       },
       VBreadcrumbsItem: {
-        activeClass: toRef(props, 'activeClass'),
-        activeColor: toRef(props, 'activeColor'),
-        color: toRef(props, 'color'),
-        disabled: toRef(props, 'disabled'),
+        activeClass: toRef(() => props.activeClass),
+        activeColor: toRef(() => props.activeColor),
+        color: toRef(() => props.color),
+        disabled: toRef(() => props.disabled),
       },
     })
 

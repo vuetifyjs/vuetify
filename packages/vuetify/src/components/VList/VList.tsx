@@ -170,9 +170,9 @@ export const VList = genericComponent<new <
     const { roundedClasses } = useRounded(props)
     const { children, open, parents, select, getPath } = useNested(props)
     const lineClasses = computed(() => props.lines ? `v-list--${props.lines}-line` : undefined)
-    const activeColor = toRef(props, 'activeColor')
-    const baseColor = toRef(props, 'baseColor')
-    const color = toRef(props, 'color')
+    const activeColor = toRef(() => props.activeColor)
+    const baseColor = toRef(() => props.baseColor)
+    const color = toRef(() => props.color)
 
     createList()
 
@@ -181,20 +181,20 @@ export const VList = genericComponent<new <
         activeColor,
         baseColor,
         color,
-        expandIcon: toRef(props, 'expandIcon'),
-        collapseIcon: toRef(props, 'collapseIcon'),
+        expandIcon: toRef(() => props.expandIcon),
+        collapseIcon: toRef(() => props.collapseIcon),
       },
       VListItem: {
-        activeClass: toRef(props, 'activeClass'),
+        activeClass: toRef(() => props.activeClass),
         activeColor,
         baseColor,
         color,
-        density: toRef(props, 'density'),
-        disabled: toRef(props, 'disabled'),
-        lines: toRef(props, 'lines'),
-        nav: toRef(props, 'nav'),
-        slim: toRef(props, 'slim'),
-        variant: toRef(props, 'variant'),
+        density: toRef(() => props.density),
+        disabled: toRef(() => props.disabled),
+        lines: toRef(() => props.lines),
+        nav: toRef(() => props.nav),
+        slim: toRef(() => props.slim),
+        variant: toRef(() => props.variant),
       },
     })
 

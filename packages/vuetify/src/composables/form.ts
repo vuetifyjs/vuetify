@@ -176,7 +176,7 @@ export function createForm (props: FormProps) {
     isValidating,
     isValid: model,
     items,
-    validateOn: toRef(props, 'validateOn'),
+    validateOn: toRef(() => props.validateOn),
   })
 
   return {

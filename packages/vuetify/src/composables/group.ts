@@ -115,7 +115,7 @@ export function useGroupItem (
     throw new Error(`[Vuetify] Could not find useGroup injection with symbol ${injectKey.description}`)
   }
 
-  const value = toRef(props, 'value')
+  const value = toRef(() => props.value)
   const disabled = computed(() => !!(group.disabled.value || props.disabled))
 
   group.register({
@@ -309,7 +309,7 @@ export function useGroup (
     unregister,
     selected,
     select,
-    disabled: toRef(props, 'disabled'),
+    disabled: toRef(() => props.disabled),
     prev: () => step(items.length - 1),
     next: () => step(1),
     isSelected: (id: string) => selected.value.includes(id),

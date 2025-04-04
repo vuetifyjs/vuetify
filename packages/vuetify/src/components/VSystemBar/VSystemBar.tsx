@@ -47,7 +47,7 @@ export const VSystemBar = genericComponent()({
       layoutSize: height,
       elementSize: height,
       active: computed(() => true),
-      absolute: toRef(props, 'absolute'),
+      absolute: toRef(() => props.absolute),
     })
 
     useRender(() => (

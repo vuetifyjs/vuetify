@@ -107,7 +107,7 @@ export const VDataIterator = genericComponent<new <T> (
 
   setup (props, { slots }) {
     const groupBy = useProxiedModel(props, 'groupBy')
-    const search = toRef(props, 'search')
+    const search = toRef(() => props.search)
 
     const { items } = useDataIteratorItems(props)
     const { filteredItems } = useFilter(props, items, search, { transform: item => item.raw })

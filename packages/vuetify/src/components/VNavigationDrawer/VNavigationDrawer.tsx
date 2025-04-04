@@ -166,7 +166,7 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
       isActive,
       isTemporary,
       width,
-      touchless: toRef(props, 'touchless'),
+      touchless: toRef(() => props.touchless),
       position: location,
     })
 

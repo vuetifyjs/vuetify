@@ -106,20 +106,20 @@ export const VSelectionControlGroup = genericComponent<new <T>(
 
     provideDefaults({
       [props.defaultsTarget]: {
-        color: toRef(props, 'color'),
-        disabled: toRef(props, 'disabled'),
-        density: toRef(props, 'density'),
-        error: toRef(props, 'error'),
-        inline: toRef(props, 'inline'),
+        color: toRef(() => props.color),
+        disabled: toRef(() => props.disabled),
+        density: toRef(() => props.density),
+        error: toRef(() => props.error),
+        inline: toRef(() => props.inline),
         modelValue,
         multiple: computed(() => !!props.multiple || (props.multiple == null && Array.isArray(modelValue.value))),
         name,
-        falseIcon: toRef(props, 'falseIcon'),
-        trueIcon: toRef(props, 'trueIcon'),
-        readonly: toRef(props, 'readonly'),
-        ripple: toRef(props, 'ripple'),
-        type: toRef(props, 'type'),
-        valueComparator: toRef(props, 'valueComparator'),
+        falseIcon: toRef(() => props.falseIcon),
+        trueIcon: toRef(() => props.trueIcon),
+        readonly: toRef(() => props.readonly),
+        ripple: toRef(() => props.ripple),
+        type: toRef(() => props.type),
+        valueComparator: toRef(() => props.valueComparator),
       },
     })
 

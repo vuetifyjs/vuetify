@@ -58,7 +58,7 @@ export function useLink (props: LinkProps & LinkListeners, attrs: SetupContext['
   })
 
   if (typeof RouterLink === 'string' || !('useLink' in RouterLink)) {
-    const href = toRef(props, 'href')
+    const href = toRef(() => props.href)
     return {
       isLink,
       isClickable,

@@ -63,7 +63,7 @@ export const VFooter = genericComponent()({
         layoutSize: height,
         elementSize: computed(() => props.height === 'auto' ? undefined : height.value),
         active: computed(() => props.app),
-        absolute: toRef(props, 'absolute'),
+        absolute: toRef(() => props.absolute),
       })
 
       watchEffect(() => {

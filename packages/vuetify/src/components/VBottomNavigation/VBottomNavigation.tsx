@@ -92,16 +92,16 @@ export const VBottomNavigation = genericComponent<new <T>(
       layoutSize: computed(() => isActive.value ? height.value : 0),
       elementSize: height,
       active: isActive,
-      absolute: toRef(props, 'absolute'),
+      absolute: toRef(() => props.absolute),
     })
 
     useGroup(props, VBtnToggleSymbol)
 
     provideDefaults({
       VBtn: {
-        baseColor: toRef(props, 'baseColor'),
-        color: toRef(props, 'color'),
-        density: toRef(props, 'density'),
+        baseColor: toRef(() => props.baseColor),
+        color: toRef(() => props.color),
+        density: toRef(() => props.density),
         stacked: toRef(() => props.mode !== 'horizontal'),
         variant: 'text',
       },

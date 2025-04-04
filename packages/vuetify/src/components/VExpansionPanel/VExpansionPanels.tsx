@@ -80,18 +80,18 @@ export const VExpansionPanels = genericComponent<VExpansionPanelSlots>()({
 
     provideDefaults({
       VExpansionPanel: {
-        bgColor: toRef(props, 'bgColor'),
-        collapseIcon: toRef(props, 'collapseIcon'),
-        color: toRef(props, 'color'),
-        eager: toRef(props, 'eager'),
-        elevation: toRef(props, 'elevation'),
-        expandIcon: toRef(props, 'expandIcon'),
-        focusable: toRef(props, 'focusable'),
-        hideActions: toRef(props, 'hideActions'),
-        readonly: toRef(props, 'readonly'),
-        ripple: toRef(props, 'ripple'),
-        rounded: toRef(props, 'rounded'),
-        static: toRef(props, 'static'),
+        bgColor: toRef(() => props.bgColor),
+        collapseIcon: toRef(() => props.collapseIcon),
+        color: toRef(() => props.color),
+        eager: toRef(() => props.eager),
+        elevation: toRef(() => props.elevation),
+        expandIcon: toRef(() => props.expandIcon),
+        focusable: toRef(() => props.focusable),
+        hideActions: toRef(() => props.hideActions),
+        readonly: toRef(() => props.readonly),
+        ripple: toRef(() => props.ripple),
+        rounded: toRef(() => props.rounded),
+        static: toRef(() => props.static),
       },
     })
 
