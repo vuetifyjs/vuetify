@@ -1,8 +1,32 @@
 import { mergeDeep } from '@/util'
 import { computed, inject, provide, reactive, ref, watch } from 'vue'
-import type { App, InjectionKey, Reactive, Ref, WritableComputedRef } from 'vue'
+import type { App, InjectionKey, Reactive, Ref } from 'vue'
+import { createRange, darken, getForeground, getLuma, lighten, parseColor, RGBtoHex, wrapInArray } from '../src/util'
+import { palette } from '../src/blueprints/palette'
 
-type DeepPartial<T> = T extends object ? { [P in keyof T]?: DeepPartial<T[P]> } : T
+interface ThemeCache {
+  variations: Record<string, string>
+  onColors: Record<string, string>
+  unwatch?: () => void
+}
+
+export type ThemeInstance = {
+  current: Readonly<ThemeOptions>
+  themes: Reactive<Record<string, InternalThemeOptions>>
+  stylesheetId: string
+  styles: Ref<string>
+  themeClasses: Ref<string | undefined>
+  toggle: (themeName?: string | string[] | Event) => void
+  debug: () => {
+    cache: WeakMap<InternalThemeOptions, ThemeCache>
+    currentTheme: {
+      name: string
+      colors: Record<string, string>
+      variations: Record<string, string>
+      onColors: Record<string, string>
+    }
+  }
+}
 
 export type ThemePluginOptions = {
   cspNonce?: string
@@ -17,13 +41,7 @@ export type ThemePluginOptions = {
 export type ThemeOptions = {
   dark?: boolean
   colors?: Record<string, string>
-}
-
-export type ThemeInstance = {
-  current: WritableComputedRef<ThemeOptions, string>
-  themes: Reactive<Record<string, ThemeOptions>>
-  stylesheetId: string
-  styles: Ref<string>
+  variables?: Record<string, string | number>
 }
 
 interface ThemeVariationsOptions {
@@ -32,7 +50,9 @@ interface ThemeVariationsOptions {
   darken: number
 }
 
-export type InternalThemeOptions = Required<ThemeOptions>
+export type InternalThemeOptions = Required<ThemeOptions> & {
+  id: symbol
+}
 export type InternalThemePluginOptions = Required<ThemePluginOptions>
 
 export const ThemeSymbol: InjectionKey<ThemeInstance> = Symbol.for('vuetify:theme-plugin')
@@ -40,249 +60,183 @@ export const ThemeSymbol: InjectionKey<ThemeInstance> = Symbol.for('vuetify:them
 const IN_BROWSER = typeof window !== 'undefined'
 const IN_DOCUMENT = typeof document !== 'undefined'
 
-// Use-cases
-const palette = {
-  primary: {
-    0: '#000000',
-    10: '#21005d',
-    20: '#381e72',
-    30: '#4f378b',
-    40: '#6750a4',
-    50: '#7f67be',
-    60: '#9a82db',
-    70: '#b69df8',
-    80: '#d0bcff',
-    90: '#eaddff',
-    95: '#f6edff',
-    99: '#fffbfe',
-    100: '#ffffff',
-  },
-  secondary: {
-    0: '#000000',
-    10: '#1d192b',
-    20: '#332d41',
-    30: '#4a4458',
-    40: '#625b71',
-    50: '#7a7289',
-    60: '#958da5',
-    70: '#b0a7c0',
-    80: '#ccc2dc',
-    90: '#e8def8',
-    95: '#f6edff',
-    99: '#fffbfe',
-    100: '#ffffff',
-  },
-  tertiary: {
-    0: '#000000',
-    10: '#31111d',
-    20: '#492532',
-    30: '#633b48',
-    40: '#7d5260',
-    50: '#986977',
-    60: '#b58392',
-    70: '#d29dac',
-    80: '#efb8c8',
-    90: '#ffd8e4',
-    95: '#ffecf1',
-    99: '#fffbfa',
-    100: '#ffffff',
-  },
-  success: {
-    0: '#000000',
-    10: '#1f311d',
-    20: '#2b4a2b',
-    30: '#3b6341',
-    40: '#4b7d56',
-    50: '#5c9c6b',
-    60: '#6dbf7f',
-    70: '#7fe493',
-    80: '#93f3a0',
-    90: '#b3f8c8',
-    95: '#d1fce0',
-    99: '#f3fdf7',
-    100: '#ffffff',
-  },
-  info: {
-    0: '#000000',
-    10: '#1d4e89',
-    20: '#1e88e5',
-    30: '#2196f3',
-    40: '#42a5f5',
-    50: '#64b5f6',
-    60: '#90caf9',
-    70: '#bbdefb',
-    80: '#e3f2fd',
-    90: '#bbdefb',
-    95: '#e1f5fe',
-    99: '#fffbfe',
-    100: '#ffffff',
-  },
-  warning: {
-    0: '#000000',
-    10: '#4e3b00',
-    20: '#7b5f00',
-    30: '#a68300',
-    40: '#c6a700',
-    50: '#e2b700',
-    60: '#f0c200',
-    70: '#f6d600',
-    80: '#fce77f',
-    90: '#fff9c4',
-    95: '#fffde7',
-    99: '#fffbf9',
-    100: '#ffffff',
-  },
-  error: {
-    0: '#000000',
-    10: '#410e0b',
-    20: '#601410',
-    30: '#8c1d18',
-    40: '#b3261e',
-    50: '#dc362e',
-    60: '#e46962',
-    70: '#ec928e',
-    80: '#f2b8b5',
-    90: '#f9dedc',
-    95: '#fceeee',
-    99: '#fffbf9',
-    100: '#ffffff',
-  },
-  neutral: {
-    0: '#000000',
-    10: '#1c1b1f',
-    20: '#313033',
-    30: '#484649',
-    40: '#605d62',
-    50: '#787579',
-    60: '#939094',
-    70: '#aeaaae',
-    80: '#c9c5ca',
-    87: '#DED8E1',
-    90: '#e6e1e5',
-    92: '#ece6f0',
-    94: '#f3edf7',
-    95: '#f4eff4',
-    96: '#f7f2fa',
-    98: '#FEF7FF',
-    99: '#fffbfe',
-    100: '#ffffff',
-  },
-  neutralVariant: {
-    0: '#000000',
-    10: '#1d1a22',
-    20: '#322f37',
-    30: '#49454f',
-    40: '#605d66',
-    50: '#79747e',
-    60: '#938f99',
-    70: '#aea9b4',
-    80: '#cac4d0',
-    90: '#e7e0ec',
-    95: '#f5eefa',
-    99: '#fffbfe',
-    100: '#ffffff',
-  },
-}
-
 function genLightDefaults (): ThemeOptions {
   return {
     dark: false,
     colors: {
       // Primary colors
-      primary: palette.primary[40],
-      'on-primary': palette.primary[100],
-      'primary-container': palette.primary[90],
-      'on-primary-container': palette.primary[30],
+      primary: '#0F172A',
+      'primary-container': '#E2E8F0',
 
       // Secondary colors
-      secondary: palette.secondary[40],
-      'on-secondary': palette.secondary[100],
-      'secondary-container': palette.secondary[90],
-      'on-secondary-container': palette.secondary[30],
+      secondary: '#1E293B',
+      'secondary-container': '#F1F5F9',
 
       // Tertiary colors
-      tertiary: palette.tertiary[40],
-      'on-tertiary': palette.tertiary[100],
-      'tertiary-container': palette.tertiary[90],
-      'on-tertiary-container': palette.tertiary[30],
+      tertiary: '#334155',
+      'tertiary-container': '#F8FAFC',
 
       // Success colors
-      success: palette.success[40],
-      'on-success': palette.success[100],
-      'success-container': palette.success[90],
-      'on-success-container': palette.success[30],
+      success: '#15803D',
+      'success-container': '#DCFCE7',
 
       // Info colors
-      info: palette.info[40],
-      'on-info': palette.info[100],
-      'info-container': palette.info[90],
-      'on-info-container': palette.info[30],
+      info: '#0369A1',
+      'info-container': '#E0F2FE',
 
       // Warning colors
-      warning: palette.warning[40],
-      'on-warning': palette.warning[100],
-      'warning-container': palette.warning[90],
-      'on-warning-container': palette.warning[30],
+      warning: '#C2410C',
+      'warning-container': '#FFEDD5',
 
       // Error colors
-      error: palette.error[40],
-      'on-error': palette.error[100],
-      'error-container': palette.error[90],
-      'on-error-container': palette.error[30],
+      error: '#BE123C',
+      'error-container': '#FEE2E2',
 
       // Surface colors
-      surface: palette.neutral[98],
-      'on-surface': palette.neutral[10],
-      'surface-variant': palette.neutralVariant[90],
-      'on-surface-variant': palette.neutralVariant[30],
-      'surface-container-highest': palette.neutral[90],
-      'surface-container-high': palette.neutral[92],
-      'surface-container': palette.neutral[94],
-      'surface-container-low': palette.neutral[96],
-      'surface-container-lowest': palette.neutral[100],
-      'inverse-surface': palette.neutral[20],
-      'inverse-on-surface': palette.neutral[95],
-      'surface-tint': palette.primary[40],
-      'surface-tint-color': palette.primary[40],
+      surface: '#FFFFFF',
+      background: '#FFFFFF',
+      'surface-variant': '#F1F5F9',
+      'surface-container-highest': '#F8FAFC',
+      'surface-container-high': '#F1F5F9',
+      'surface-container': '#E2E8F0',
+      'surface-container-low': '#CBD5E1',
+      'surface-container-lowest': '#94A3B8',
+      'inverse-surface': '#1E293B',
+      'inverse-on-surface': '#FFFFFF',
+      'surface-tint': '#0F172A',
+      'surface-tint-color': '#0F172A',
 
       // Outline colors
-      outline: palette.neutralVariant[50],
-      'outline-variant': palette.neutralVariant[80],
+      outline: '#CBD5E1',
+      'outline-variant': '#E2E8F0',
 
       // Add-on Primary colors
-      'primary-fixed': palette.primary[90],
-      'on-primary-fixed': palette.primary[10],
-      'primary-fixed-dim': palette.primary[80],
-      'on-primary-fixed-dim': palette.primary[30],
-      'inverse-primary': palette.primary[80],
+      'primary-fixed': '#E2E8F0',
+      'primary-fixed-dim': '#CBD5E1',
+      'inverse-primary': '#FFFFFF',
 
       // Add-on Secondary colors
-      'secondary-fixed': palette.secondary[90],
-      'on-secondary-fixed': palette.secondary[10],
-      'secondary-fixed-dim': palette.secondary[80],
-      'on-secondary-fixed-dim': palette.secondary[30],
+      'secondary-fixed': '#F1F5F9',
+      'secondary-fixed-dim': '#E2E8F0',
 
       // Add-on Tertiary colors
-      'tertiary-fixed': palette.tertiary[90],
-      'on-tertiary-fixed': palette.tertiary[10],
-      'tertiary-fixed-dim': palette.tertiary[80],
-      'on-tertiary-fixed-dim': palette.tertiary[30],
+      'tertiary-fixed': '#F8FAFC',
+      'tertiary-fixed-dim': '#F1F5F9',
 
       // Add-ons Surface colors
-      background: palette.neutral[98],
-      'on-background': palette.neutral[10],
-      'surface-bright': palette.neutral[98],
-      'surface-dim': palette.neutral[87],
-      scrim: palette.neutral[0],
-      shadow: palette.neutral[0],
+      'surface-bright': '#FFFFFF',
+      'surface-dim': '#F8FAFC',
+      scrim: '#000000',
+      shadow: '#000000',
     },
+    variables: {
+      'border-color': '#E2E8F0',
+      'border-opacity': 0.12,
+      'high-emphasis-opacity': 0.87,
+      'medium-emphasis-opacity': 0.60,
+      'disabled-opacity': 0.38,
+      'idle-opacity': 0.04,
+      'hover-opacity': 0.04,
+      'focus-opacity': 0.12,
+      'selected-opacity': 0.08,
+      'activated-opacity': 0.12,
+      'pressed-opacity': 0.12,
+      'dragged-opacity': 0.08,
+      'theme-kbd': '#F1F5F9',
+      'theme-on-kbd': '#0F172A',
+      'theme-code': '#F8FAFC',
+      'theme-on-code': '#0F172A',
+    }
   }
 }
 
 function genDarkDefaults (): ThemeOptions {
   return {
     dark: true,
-    colors: {},
+    colors: {
+      // Primary colors
+      primary: '#E2E8F0',
+      'primary-container': '#1E293B',
+
+      // Secondary colors
+      secondary: '#CBD5E1',
+      'secondary-container': '#334155',
+
+      // Tertiary colors
+      tertiary: '#94A3B8',
+      'tertiary-container': '#475569',
+
+      // Success colors
+      success: '#4ADE80',
+      'success-container': '#166534',
+
+      // Info colors
+      info: '#38BDF8',
+      'info-container': '#075985',
+
+      // Warning colors
+      warning: '#FB923C',
+      'warning-container': '#9A3412',
+
+      // Error colors
+      error: '#FB7185',
+      'error-container': '#9F1239',
+
+      // Surface colors
+      surface: '#0F172A',
+      background: '#0F172A',
+      'surface-variant': '#1E293B',
+      'surface-container-highest': '#334155',
+      'surface-container-high': '#1E293B',
+      'surface-container': '#0F172A',
+      'surface-container-low': '#0F172A',
+      'surface-container-lowest': '#020617',
+      'inverse-surface': '#E2E8F0',
+      'inverse-on-surface': '#0F172A',
+      'surface-tint': '#E2E8F0',
+      'surface-tint-color': '#E2E8F0',
+
+      // Outline colors
+      outline: '#475569',
+      'outline-variant': '#1E293B',
+
+      // Add-on Primary colors
+      'primary-fixed': '#1E293B',
+      'primary-fixed-dim': '#0F172A',
+      'inverse-primary': '#0F172A',
+
+      // Add-on Secondary colors
+      'secondary-fixed': '#334155',
+      'secondary-fixed-dim': '#1E293B',
+
+      // Add-on Tertiary colors
+      'tertiary-fixed': '#475569',
+      'tertiary-fixed-dim': '#334155',
+
+      // Add-ons Surface colors
+      'surface-bright': '#1E293B',
+      'surface-dim': '#0F172A',
+      scrim: '#000000',
+      shadow: '#000000',
+    },
+    variables: {
+      'border-color': '#1E293B',
+      'border-opacity': 0.12,
+      'high-emphasis-opacity': 1,
+      'medium-emphasis-opacity': 0.70,
+      'disabled-opacity': 0.50,
+      'idle-opacity': 0.10,
+      'hover-opacity': 0.04,
+      'focus-opacity': 0.12,
+      'selected-opacity': 0.08,
+      'activated-opacity': 0.12,
+      'pressed-opacity': 0.16,
+      'dragged-opacity': 0.08,
+      'theme-kbd': '#1E293B',
+      'theme-on-kbd': '#E2E8F0',
+      'theme-code': '#1E293B',
+      'theme-on-code': '#E2E8F0',
+    }
   }
 }
 
@@ -290,10 +244,17 @@ function genThemePluginDefaults (options: Partial<ThemePluginOptions> = {}) {
   return mergeDeep({
     defaultTheme: 'light',
     themes: {
-      light: genLightDefaults(),
-      dark: genDarkDefaults(),
+      light: {
+        ...genLightDefaults(),
+        id: Symbol('light')
+      },
+      dark: {
+        ...genDarkDefaults(),
+        id: Symbol('dark')
+      },
     },
     stylesheetId: 'vuetify-theme-sheet',
+    scope: undefined,
   }, options) as InternalThemePluginOptions
 }
 
@@ -314,7 +275,7 @@ export function createThemePlugin (options: Partial<ThemePluginOptions> | false 
 
       if (IN_BROWSER) {
         watch(
-          [themeInstance.current, themeInstance.styles],
+          [() => themeInstance.current, () => themeInstance.styles.value],
           callback,
           { immediate: true, deep: true }
         )
@@ -327,29 +288,185 @@ export function createThemePlugin (options: Partial<ThemePluginOptions> | false 
   }
 }
 
+function genVariations (theme: ThemeOptions, variations?: false | ThemeVariationsOptions): Record<string, string> {
+  if (!variations) return {}
+
+  const result: Record<string, string> = {}
+  const { colors, lighten: lightenAmount, darken: darkenAmount } = variations
+
+  for (const name of colors) {
+    const color = theme.colors?.[name]
+    if (!color) continue
+
+    const parsedColor = parseColor(color)
+
+    for (const amount of createRange(lightenAmount, 1)) {
+      result[`${name}-lighten-${amount}`] = RGBtoHex(lighten(parsedColor, amount))
+    }
+
+    for (const amount of createRange(darkenAmount, 1)) {
+      result[`${name}-darken-${amount}`] = RGBtoHex(darken(parsedColor, amount))
+    }
+  }
+
+  return result
+}
+
+function genOnColors (colors: Record<string, string>) {
+  const onColors: Record<string, string> = {}
+
+  for (const [key, value] of Object.entries(colors)) {
+    if (key.startsWith('on-')) continue
+
+    const onKey = `on-${key}`
+    if (colors[onKey]) {
+      onColors[onKey] = colors[onKey]
+    } else {
+      onColors[onKey] = getForeground(value)
+    }
+  }
+
+  return onColors
+}
+
+function genCssVariables (theme: InternalThemeOptions) {
+  const lightOverlay = theme.dark ? 2 : 1
+  const darkOverlay = theme.dark ? 1 : 2
+
+  const variables: string[] = []
+  for (const [key, value] of Object.entries(theme.colors)) {
+    const rgb = parseColor(value)
+    variables.push(`--v-theme-${key}: ${rgb.r},${rgb.g},${rgb.b}`)
+    if (!key.startsWith('on-')) {
+      variables.push(`--v-theme-${key}-overlay-multiplier: ${getLuma(value) > 0.18 ? lightOverlay : darkOverlay}`)
+    }
+  }
+
+  if (theme.variables) {
+    for (const [key, value] of Object.entries(theme.variables)) {
+      const color = typeof value === 'string' && value.startsWith('#') ? parseColor(value) : undefined
+      const rgb = color ? `${color.r},${color.g},${color.b}` : undefined
+      variables.push(`--v-${key}: ${rgb ?? value}`)
+    }
+  }
+
+  return variables
+}
+
+function genCssClasses (namespace: string, theme: InternalThemeOptions, scope?: string) {
+  const lines: string[] = []
+  const scopePrefix = scope ? `:where(${scope})` : ''
+
+  if (theme.dark) {
+    lines.push(`${scopePrefix || ':root'} { color-scheme: dark }`)
+  }
+
+  lines.push(`${scopePrefix || ':root'} {`)
+  lines.push(...genCssVariables(theme).map(line => `  ${line};`))
+  lines.push('}')
+
+  for (const key of Object.keys(theme.colors)) {
+    if (key.startsWith('on-')) {
+      lines.push(`${scopePrefix} .${key} { color: rgb(var(--v-theme-${key})) !important }`)
+    } else {
+      lines.push(
+        `${scopePrefix} .bg-${key} {`,
+        `  --v-theme-overlay-multiplier: var(--v-theme-${key}-overlay-multiplier);`,
+        `  background-color: rgb(var(--v-theme-${key})) !important;`,
+        `  color: rgb(var(--v-theme-on-${key})) !important`,
+        '}',
+        `${scopePrefix} .text-${key} { color: rgb(var(--v-theme-${key})) !important }`,
+        `${scopePrefix} .border-${key} { --v-border-color: var(--v-theme-${key}) }`
+      )
+    }
+  }
+
+  return lines.join('\n')
+}
+
 export function createThemeInstance (options?: Partial<ThemePluginOptions>): ThemeInstance {
   const pluginOptions = genThemePluginDefaults(options)
   const name = ref<keyof typeof themes>(pluginOptions.defaultTheme)
-  const themes = reactive(pluginOptions.themes)
+  const themes = reactive(pluginOptions.themes as Record<string, InternalThemeOptions>)
+  const themeCache = new WeakMap<InternalThemeOptions, ThemeCache>()
 
-  const current = computed({
-    get () {
-      return themes[name.value] as InternalThemeOptions
-    },
-    set (val: keyof typeof themes) {
-      name.value = val
-    },
+  function getCachedTheme (theme: InternalThemeOptions): ThemeCache {
+    let cached = themeCache.get(theme)
+    if (!cached) {
+      const variations = genVariations(theme, pluginOptions.variations)
+      const onColors = genOnColors(theme.colors)
+
+      cached = {
+        variations,
+        onColors,
+        unwatch: watch(() => ({ ...theme.colors }), () => {
+          const newVariations = genVariations(theme, pluginOptions.variations)
+          const newOnColors = genOnColors(theme.colors)
+
+          if (cached) {
+            cached.variations = newVariations
+            cached.onColors = newOnColors
+          }
+        }, { deep: true })
+      }
+      themeCache.set(theme, cached)
+    }
+    return cached
+  }
+
+  const current = computed(() => {
+    const theme = themes[name.value]
+    const cached = getCachedTheme(theme)
+    return {
+      ...theme,
+      colors: {
+        ...theme.colors,
+        ...cached.variations,
+        ...cached.onColors
+      } as Record<string, string>
+    }
   })
 
   const styles = computed(() => {
-    return genCssClasses('root', current.value)
+    return genCssClasses('root', current.value, pluginOptions.scope)
   })
 
+  const themeClasses = computed(() => `v-theme--${name.value}`)
+
+  function set (themeName: string) {
+    if (themeName in themes) {
+      name.value = themeName
+    } else {
+      console.warn(`Theme "${themeName}" does not exist`)
+    }
+  }
+
   return {
-    current,
+    current: current.value,
     themes,
     styles,
     stylesheetId: pluginOptions.stylesheetId,
+    themeClasses,
+    toggle: function (themeName: string | string[] | Event = ['light', 'dark']) {
+      const themeArray = wrapInArray(themeName instanceof Event ? ['light', 'dark'] : themeName)
+      const currentIndex = themeArray.indexOf(name.value)
+      const nextIndex = currentIndex === -1 ? 0 : (currentIndex + 1) % themeArray.length
+      set(themeArray[nextIndex])
+    },
+    debug: function () {
+      const currentTheme = themes[name.value]
+      const cached = getCachedTheme(currentTheme)
+
+      return {
+        cache: themeCache,
+        currentTheme: {
+          name: name.value,
+          colors: currentTheme.colors,
+          variations: cached.variations,
+          onColors: cached.onColors
+        }
+      }
+    }
   }
 }
 
@@ -373,22 +490,6 @@ export function useTheme () {
   if (!theme) throw new Error('Could not find Vuetify theme injection')
 
   return theme
-}
-
-function genCssClasses (namespace: string, theme: InternalThemeOptions) {
-  return `:${namespace} {
-    ${genCssVariables(theme)}
-  }`
-}
-
-function genCssVariable (name: string, value: string, prefix = '--v-theme-') {
-  return `${prefix}${name}: ${value};`
-}
-
-function genCssVariables (theme: InternalThemeOptions) {
-  return Object.entries(theme.colors).map(([key, value]) => {
-    return genCssVariable(key, value)
-  }).join('\n')
 }
 
 function upsertStyles (id: string, styles: string) {
