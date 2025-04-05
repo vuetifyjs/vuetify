@@ -4,6 +4,7 @@
     :code="code"
     :name="name"
     :options="options"
+    :script="script"
   >
     <v-responsive
       ref="responsive"
@@ -67,18 +68,23 @@
 
   const props = computed(() => {
     return {
+      'v-model': 'isActive',
       'min-height': 200,
       options: { threshold: 0.5 },
       transition: 'fade-transition',
     }
   })
 
+  const responsiveProps = computed(() => {
+    return {
+      ref: 'responsive',
+      class: 'overflow-y-auto',
+      'max-height': 300,
+    }
+  })
+
   const slots = computed(() => {
     return `
-  <div class="text-center text-body-2 mb-12">
-    The card will appear below:
-  </div>
-
   <v-card
     class="mx-auto"
     max-width="336"
@@ -92,7 +98,35 @@
 `
   })
 
+  const script = computed(() => {
+    return `<script setup>
+  import { ref, shallowRef } from 'vue'
+  import { useGoTo } from 'vuetify'
+
+  const goTo = useGoTo()
+
+  const isActive = shallowRef(false)
+  const responsive = ref()
+
+  async function reset () {
+    await goTo(0, { container: responsive.value.$el })
+
+    isActive.value = false
+  }
+<` + '/script>'
+  })
+
   const code = computed(() => {
-    return `<v-lazy${propsToString(props.value)}>${slots.value}</v-lazy>`
+    return `<v-responsive${propsToString(responsiveProps.value)}>
+  <div class="pa-6 text-center position-sticky">Scroll down</div>
+
+  <v-responsive min-height="100vh"></v-responsive>
+  
+  <div class="text-center text-body-2 mb-12">
+    The card will appear below:
+  </div>
+
+  <${name}${propsToString(props.value)}>${slots.value}</${name}>
+</v-responsive>`
   })
 </script>
