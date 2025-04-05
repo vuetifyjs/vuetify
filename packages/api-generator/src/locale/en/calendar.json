@@ -1,6 +1,7 @@
 {
   "props": {
     "displayValue": "The value that determines the month to show. This is different from modelValue, which determines the selected value.",
+    "firstDayOfWeek": "Sets the first day of the week, starting with 0 for Sunday.",
     "month": "The current month number to show",
     "weekdays": "An array of weekdays to display.",
     "weeksInMonth": "A dynamic number of weeks in a month will grow and shrink depending on how many days are in the month. A static number always shows 7 weeks.",
