@@ -233,9 +233,9 @@ export const VSelect = genericComponent<new <
       }
 
       if (e.key === 'Home') {
-        listRef.value?.focus('first')
+        vVirtualScrollRef.value?.focus('first')
       } else if (e.key === 'End') {
-        listRef.value?.focus('last')
+        vVirtualScrollRef.value?.focus('last')
       }
 
       // html select hotkeys
@@ -255,7 +255,7 @@ export const VSelect = genericComponent<new <
         model.value = [item]
         const index = displayItems.value.indexOf(item)
         IN_BROWSER && window.requestAnimationFrame(() => {
-          index >= 0 && vVirtualScrollRef.value?.scrollToIndex(index)
+          index >= 0 && vVirtualScrollRef.value?.focus(index)
         })
       }
     }
@@ -320,7 +320,7 @@ export const VSelect = genericComponent<new <
           item => model.value.some(s => (props.valueComparator || deepEqual)(s.value, item.value))
         )
         IN_BROWSER && window.requestAnimationFrame(() => {
-          index >= 0 && vVirtualScrollRef.value?.scrollToIndex(index)
+          index >= 0 && vVirtualScrollRef.value?.focus(index)
         })
       }
     })
@@ -396,6 +396,7 @@ export const VSelect = genericComponent<new <
                   openOnClick={ false }
                   closeOnContentClick={ false }
                   transition={ props.transition }
+                  virtualScroll={ vVirtualScrollRef.value }
                   onAfterEnter={ onAfterEnter }
                   onAfterLeave={ onAfterLeave }
                   { ...computedMenuProps.value }
@@ -411,6 +412,7 @@ export const VSelect = genericComponent<new <
                       tabindex="-1"
                       aria-live="polite"
                       color={ props.itemColor ?? props.color }
+                      virtualScroll={ vVirtualScrollRef.value }
                       { ...listEvents }
                       { ...props.listProps }
                     >
@@ -433,7 +435,7 @@ export const VSelect = genericComponent<new <
                             index,
                             props: itemProps,
                           }) ?? (
-                            <VListItem { ...itemProps } role="option">
+                            <VListItem { ...itemProps } role="option" data-item-index={ index }>
                               {{
                                 prepend: ({ isSelected }) => (
                                   <>
