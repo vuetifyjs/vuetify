@@ -7,8 +7,8 @@ type DeepPartial<T> = T extends object ? { [P in keyof T]?: DeepPartial<T[P]> } 
 export type ThemePluginOptions = {
   cspNonce?: string
   isDisabled?: boolean
-  variations?: false | ThemeVariationsOptions
   defaultTheme?: string
+  variations?: false | ThemeVariationsOptions
   themes?: Record<string, Partial<ThemeOptions>>
   stylesheetId?: string
   scope?: string
@@ -25,6 +25,7 @@ export type ThemeInstance = {
   stylesheetId: string
   styles: Ref<string>
 }
+
 interface ThemeVariationsOptions {
   colors: string[]
   lighten: number
@@ -285,7 +286,7 @@ function genDarkDefaults (): ThemeOptions {
   }
 }
 
-function genThemePluginDefaults (options?: Partial<ThemePluginOptions>) {
+function genThemePluginDefaults (options: Partial<ThemePluginOptions> = {}) {
   return mergeDeep({
     defaultTheme: 'light',
     themes: {
@@ -293,19 +294,20 @@ function genThemePluginDefaults (options?: Partial<ThemePluginOptions>) {
       dark: genDarkDefaults(),
     },
     stylesheetId: 'vuetify-theme-sheet',
-  }, options || {}) as InternalThemePluginOptions
+  }, options) as InternalThemePluginOptions
 }
 
-export function createTheme (options?: ThemeOptions): Reactive<Record<string, InternalThemeOptions>> {
-  const defaults = !options?.dark ? genLightDefaults() : genDarkDefaults()
+export function createTheme (options: ThemeOptions = {}): Reactive<InternalThemeOptions> {
+  const defaults = !options.dark ? genLightDefaults() : genDarkDefaults()
+  const merged = mergeDeep(defaults, options) as InternalThemeOptions
 
-  return reactive(mergeDeep(defaults, options))
+  return reactive(merged)
 }
 
-export function createThemePlugin (options?: Partial<ThemePluginOptions> | false) {
+export function createThemePlugin (options: Partial<ThemePluginOptions> | false = {}) {
   return {
     install (app: App) {
-      if (options === false || options?.isDisabled) return
+      if (options === false || options.isDisabled) return
 
       const themeInstance = createThemeInstance(options)
       const callback = () => upsertStyles(themeInstance.stylesheetId, themeInstance.styles.value)
