@@ -3,7 +3,7 @@ import {
   createJavascriptTransition,
 } from './createTransition'
 
-import ExpandTransitionGenerator from './expand-transition'
+import { ExpandTransitionGenerator } from './expand-transition'
 
 // Component specific transitions
 export const VFabTransition = createCssTransition('fab-transition', 'center center', 'out-in')
@@ -27,6 +27,7 @@ export const VExpandTransition = createJavascriptTransition('expand-transition',
 export const VExpandXTransition = createJavascriptTransition('expand-x-transition', ExpandTransitionGenerator('', true))
 
 export { VDialogTransition } from './dialog-transition'
+export { VTableExpandTransition } from './table-expand-transition'
 
 export type VFabTransition = InstanceType<typeof VFabTransition>
 export type VDialogBottomTransition = InstanceType<typeof VDialogBottomTransition>
