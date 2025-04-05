@@ -157,6 +157,12 @@ In this example we use a custom **title** slot to apply a line-through the treev
 
 <ExamplesExample file="v-treeview/slot-title" />
 
+#### Toggle
+
+Here, a custom **toggle** slot is utilized to assign a specific color and variant to the button depending on the state of the item.
+
+<ExamplesExample file="v-treeview/slot-toggle" />
+
 ## Examples
 
 The following are a collection of examples that demonstrate more advanced and real world use of the `v-treeview` component.
