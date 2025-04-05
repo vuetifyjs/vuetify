@@ -6,7 +6,7 @@ import { makeVTrendlineProps, VTrendline } from './VTrendline'
 import { useTextColor } from '@/composables/color'
 
 // Utilities
-import { computed, toRef } from 'vue'
+import { computed } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -35,7 +35,7 @@ export const VSparkline = genericComponent<VSparklineSlots>()({
   props: makeVSparklineProps(),
 
   setup (props, { slots }) {
-    const { textColorClasses, textColorStyles } = useTextColor(toRef(props, 'color'))
+    const { textColorClasses, textColorStyles } = useTextColor(() => props.color)
     const hasLabels = computed(() => {
       return Boolean(
         props.showLabels ||

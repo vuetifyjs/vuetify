@@ -6,7 +6,7 @@ import { IconValue } from '@/composables/icons'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed } from 'vue'
+import { toRef } from 'vue'
 import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
@@ -52,13 +52,13 @@ export const VCheckboxBtn = genericComponent<new <T>(
       }
     }
 
-    const falseIcon = computed(() => {
+    const falseIcon = toRef(() => {
       return indeterminate.value
         ? props.indeterminateIcon
         : props.falseIcon
     })
 
-    const trueIcon = computed(() => {
+    const trueIcon = toRef(() => {
       return indeterminate.value
         ? props.indeterminateIcon
         : props.trueIcon

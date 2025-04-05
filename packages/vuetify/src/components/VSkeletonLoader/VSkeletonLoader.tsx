@@ -9,7 +9,7 @@ import { useLocale } from '@/composables/locale'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
-import { computed, toRef } from 'vue'
+import { computed } from 'vue'
 import { genericComponent, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
@@ -133,7 +133,7 @@ export const VSkeletonLoader = genericComponent()({
   props: makeVSkeletonLoaderProps(),
 
   setup (props, { slots }) {
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.color)
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
     const { themeClasses } = provideTheme(props)

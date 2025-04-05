@@ -39,7 +39,7 @@ export const VDatePickerHeader = genericComponent<VDatePickerHeaderSlots>()({
   },
 
   setup (props, { emit, slots }) {
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(props, 'color')
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.color)
 
     function onClick () {
       emit('click')

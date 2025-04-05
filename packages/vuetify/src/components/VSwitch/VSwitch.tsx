@@ -15,7 +15,7 @@ import { LoaderSlot, useLoader } from '@/composables/loader'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, ref, useId } from 'vue'
+import { ref, toRef, useId } from 'vue'
 import { filterInputAttrs, genericComponent, IN_BROWSER, propsFactory, useRender } from '@/util'
 
 // Types
@@ -81,14 +81,14 @@ export const VSwitch = genericComponent<new <T>(
     const control = ref<VSelectionControl>()
     const isForcedColorsModeActive = IN_BROWSER && window.matchMedia('(forced-colors: active)').matches
 
-    const loaderColor = computed(() => {
+    const loaderColor = toRef(() => {
       return typeof props.loading === 'string' && props.loading !== ''
         ? props.loading
         : props.color
     })
 
     const uid = useId()
-    const id = computed(() => props.id || `switch-${uid}`)
+    const id = toRef(() => props.id || `switch-${uid}`)
 
     function onChange () {
       if (indeterminate.value) {

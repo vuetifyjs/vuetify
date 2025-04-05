@@ -2,7 +2,7 @@
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, inject, provide, shallowRef } from 'vue'
+import { computed, inject, provide, shallowRef, toRef } from 'vue'
 import { deepEqual, propsFactory, wrapInArray } from '@/util'
 
 // Types
@@ -177,7 +177,7 @@ export function provideSelection (
     })
     return !!items.length && isSelected(items)
   })
-  const showSelectAll = computed(() => selectStrategy.value.showSelectAll)
+  const showSelectAll = toRef(() => selectStrategy.value.showSelectAll)
 
   const data = {
     toggleSelect,

@@ -12,7 +12,7 @@ import {
   provide,
   reactive,
   ref,
-  shallowRef,
+  shallowRef, toRef,
   useId,
 } from 'vue'
 import { convertToUnit, findChildrenWithProvide, getCurrentInstance, propsFactory } from '@/util'
@@ -217,14 +217,14 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
     return layers.value[layers.value.length - 1].layer
   })
 
-  const mainStyles = computed<CSSProperties>(() => {
+  const mainStyles = toRef(() => {
     return {
       '--v-layout-left': convertToUnit(mainRect.value.left),
       '--v-layout-right': convertToUnit(mainRect.value.right),
       '--v-layout-top': convertToUnit(mainRect.value.top),
       '--v-layout-bottom': convertToUnit(mainRect.value.bottom),
       ...(transitionsEnabled.value ? undefined : { transition: 'none' }),
-    }
+    } satisfies CSSProperties
   })
 
   const items = computed(() => {
@@ -324,7 +324,6 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
             : undefined,
         }
       })
-
       const layoutItemScrimStyles = computed<CSSProperties>(() => ({
         zIndex: zIndex.value - 1,
       }))
@@ -347,12 +346,12 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
     rootZIndex,
   })
 
-  const layoutClasses = computed(() => [
+  const layoutClasses = toRef(() => [
     'v-layout',
     { 'v-layout--full-height': props.fullHeight },
   ])
 
-  const layoutStyles = computed(() => ({
+  const layoutStyles = toRef(() => ({
     zIndex: parentLayout ? rootZIndex.value : undefined,
     position: parentLayout ? 'relative' as const : undefined,
     overflow: parentLayout ? 'hidden' : undefined,

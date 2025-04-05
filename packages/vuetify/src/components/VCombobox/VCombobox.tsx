@@ -26,7 +26,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeTransitionProps } from '@/composables/transition'
 
 // Utilities
-import { computed, mergeProps, nextTick, ref, shallowRef, watch } from 'vue'
+import { computed, mergeProps, nextTick, ref, shallowRef, toRef, watch } from 'vue'
 import {
   checkPrintable,
   deepEqual,
@@ -127,9 +127,8 @@ export const VCombobox = genericComponent<new <
     const vVirtualScrollRef = ref<VVirtualScroll>()
     const selectionIndex = shallowRef(-1)
     let cleared = false
-    const color = computed(() => vTextFieldRef.value?.color)
     const { items, transformIn, transformOut } = useItems(props)
-    const { textColorClasses, textColorStyles } = useTextColor(color)
+    const { textColorClasses, textColorStyles } = useTextColor(() => vTextFieldRef.value?.color)
     const model = useProxiedModel(
       props,
       'modelValue',
@@ -203,7 +202,7 @@ export const VCombobox = genericComponent<new <
       },
     })
 
-    const label = computed(() => menu.value ? props.closeText : props.openText)
+    const label = toRef(() => menu.value ? props.closeText : props.openText)
 
     watch(_search, value => {
       if (cleared) {

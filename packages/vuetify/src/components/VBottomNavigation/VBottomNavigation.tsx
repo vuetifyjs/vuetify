@@ -74,7 +74,7 @@ export const VBottomNavigation = genericComponent<new <T>(
   setup (props, { slots }) {
     const { themeClasses } = useTheme()
     const { borderClasses } = useBorder(props)
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'bgColor'))
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.bgColor)
     const { densityClasses } = useDensity(props)
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props)
@@ -92,17 +92,17 @@ export const VBottomNavigation = genericComponent<new <T>(
       layoutSize: computed(() => isActive.value ? height.value : 0),
       elementSize: height,
       active: isActive,
-      absolute: toRef(props, 'absolute'),
+      absolute: toRef(() => props.absolute),
     })
 
     useGroup(props, VBtnToggleSymbol)
 
     provideDefaults({
       VBtn: {
-        baseColor: toRef(props, 'baseColor'),
-        color: toRef(props, 'color'),
-        density: toRef(props, 'density'),
-        stacked: computed(() => props.mode !== 'horizontal'),
+        baseColor: toRef(() => props.baseColor),
+        color: toRef(() => props.color),
+        density: toRef(() => props.density),
+        stacked: toRef(() => props.mode !== 'horizontal'),
         variant: 'text',
       },
     }, { scoped: true })
