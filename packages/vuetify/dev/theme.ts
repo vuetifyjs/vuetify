@@ -2,21 +2,38 @@ import { mergeDeep } from '@/util'
 import { computed, inject, provide, reactive, ref, watch } from 'vue'
 import type { App, InjectionKey, Reactive, Ref, WritableComputedRef } from 'vue'
 
+type DeepPartial<T> = T extends object ? { [P in keyof T]?: DeepPartial<T[P]> } : T
+
 export type ThemePluginOptions = {
-  defaultTheme: string
-  themes: Record<string, ThemeOptions>
-  stylesheetId: string
+  cspNonce?: string
+  isDisabled?: boolean
+  variations?: false | ThemeVariationsOptions
+  defaultTheme?: string
+  themes?: Record<string, Partial<ThemeOptions>>
+  stylesheetId?: string
+  scope?: string
 }
+
 export type ThemeOptions = {
-  dark: boolean
-  colors: Record<string, string>
+  dark?: boolean
+  colors?: Record<string, string>
 }
+
 export type ThemeInstance = {
   current: WritableComputedRef<ThemeOptions, string>
   themes: Reactive<Record<string, ThemeOptions>>
   stylesheetId: string
   styles: Ref<string>
 }
+interface ThemeVariationsOptions {
+  colors: string[]
+  lighten: number
+  darken: number
+}
+
+export type InternalThemeOptions = Required<ThemeOptions>
+export type InternalThemePluginOptions = Required<ThemePluginOptions>
+
 export const ThemeSymbol: InjectionKey<ThemeInstance> = Symbol.for('vuetify:theme-plugin')
 
 const IN_BROWSER = typeof window !== 'undefined'
@@ -268,7 +285,7 @@ function genDarkDefaults (): ThemeOptions {
   }
 }
 
-function genThemeDefaults (options?: Partial<ThemePluginOptions>) {
+function genThemePluginDefaults (options?: Partial<ThemePluginOptions>) {
   return mergeDeep({
     defaultTheme: 'light',
     themes: {
@@ -276,18 +293,20 @@ function genThemeDefaults (options?: Partial<ThemePluginOptions>) {
       dark: genDarkDefaults(),
     },
     stylesheetId: 'vuetify-theme-sheet',
-  }, options) as ThemePluginOptions
+  }, options || {}) as InternalThemePluginOptions
 }
 
-export function createTheme (options: ThemeOptions) {
-  const defaults = !options.dark ? genLightDefaults() : genDarkDefaults()
+export function createTheme (options?: ThemeOptions): Reactive<Record<string, InternalThemeOptions>> {
+  const defaults = !options?.dark ? genLightDefaults() : genDarkDefaults()
 
   return reactive(mergeDeep(defaults, options))
 }
 
-export function createThemePlugin (options?: Partial<ThemePluginOptions>) {
+export function createThemePlugin (options?: Partial<ThemePluginOptions> | false) {
   return {
     install (app: App) {
+      if (options === false || options?.isDisabled) return
+
       const themeInstance = createThemeInstance(options)
       const callback = () => upsertStyles(themeInstance.stylesheetId, themeInstance.styles.value)
 
@@ -307,13 +326,13 @@ export function createThemePlugin (options?: Partial<ThemePluginOptions>) {
 }
 
 export function createThemeInstance (options?: Partial<ThemePluginOptions>): ThemeInstance {
-  const parsedOptions = genThemeDefaults(options)
-  const name = ref<keyof typeof themes>(parsedOptions.defaultTheme)
-  const themes = reactive(parsedOptions.themes)
+  const pluginOptions = genThemePluginDefaults(options)
+  const name = ref<keyof typeof themes>(pluginOptions.defaultTheme)
+  const themes = reactive(pluginOptions.themes)
 
   const current = computed({
     get () {
-      return themes[name.value]
+      return themes[name.value] as InternalThemeOptions
     },
     set (val: keyof typeof themes) {
       name.value = val
@@ -328,7 +347,7 @@ export function createThemeInstance (options?: Partial<ThemePluginOptions>): The
     current,
     themes,
     styles,
-    stylesheetId: parsedOptions.stylesheetId,
+    stylesheetId: pluginOptions.stylesheetId,
   }
 }
 
@@ -354,7 +373,7 @@ export function useTheme () {
   return theme
 }
 
-function genCssClasses (namespace: string, theme: ThemeOptions) {
+function genCssClasses (namespace: string, theme: InternalThemeOptions) {
   return `:${namespace} {
     ${genCssVariables(theme)}
   }`
@@ -364,7 +383,7 @@ function genCssVariable (name: string, value: string, prefix = '--v-theme-') {
   return `${prefix}${name}: ${value};`
 }
 
-function genCssVariables (theme: ThemeOptions) {
+function genCssVariables (theme: InternalThemeOptions) {
   return Object.entries(theme.colors).map(([key, value]) => {
     return genCssVariable(key, value)
   }).join('\n')
