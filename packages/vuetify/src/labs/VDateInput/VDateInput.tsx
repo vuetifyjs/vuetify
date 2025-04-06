@@ -86,7 +86,7 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
 
     const menu = shallowRef(false)
     const isEditingInput = shallowRef(false)
-    const vDateInputRef = ref()
+    const vTextFieldRef = ref<VTextField>()
     const disabledActions = ref<typeof VConfirmEdit['props']['disabled']>(['save'])
 
     function format (date: unknown) {
@@ -178,7 +178,7 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
       menu.value = false
     }
 
-    function onUpdateDisplayModel (value: string) {
+    function onUpdateDisplayModel (value: unknown) {
       if (value != null) return
 
       model.value = null
@@ -201,7 +201,7 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
 
       return (
         <VTextField
-          ref={ vDateInputRef }
+          ref={ vTextFieldRef }
           { ...textFieldProps }
           class={ props.class }
           style={ props.style }
@@ -279,7 +279,7 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
       )
     })
 
-    return forwardRefs({}, vDateInputRef)
+    return forwardRefs({}, vTextFieldRef)
   },
 })
 
