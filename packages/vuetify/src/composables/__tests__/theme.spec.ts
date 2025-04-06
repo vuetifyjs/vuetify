@@ -174,4 +174,58 @@ describe('createTheme', () => {
       expect(selector).not.toContain(':root')
     })
   })
+
+  it('should properly integrate with unhead when available', async () => {
+    const mockPush = vi.fn().mockReturnValue({ patch: vi.fn() })
+    const mockUpdateHead = vi.fn()
+    const mockUseUnhead = {
+      push: mockPush,
+      updateDOM: mockUpdateHead,
+    }
+
+    // Mock the app context with head
+    app._context = {
+      provides: {
+        usehead: mockUseUnhead,
+      },
+    } as any
+
+    const theme = createTheme()
+    theme.install(app)
+
+    // Verify the head push method was called
+    expect(mockPush).toHaveBeenCalled()
+
+    // The push method should receive a function that returns an object with a style property
+    const headObj = mockPush.mock.calls[0][0]()
+    expect(headObj).toHaveProperty('style')
+    expect(Array.isArray(headObj.style)).toBe(true)
+    expect(headObj.style[0]).toHaveProperty('textContent')
+    expect(headObj.style[0]).toHaveProperty('id', 'vuetify-theme-stylesheet')
+  })
+
+  it('should work with legacy head client methods', async () => {
+    const mockAddHeadObjs = vi.fn()
+    const mockUpdateHead = vi.fn()
+    const mockLegacyHead = {
+      addHeadObjs: mockAddHeadObjs,
+      updateDOM: mockUpdateHead,
+    }
+
+    // Mock the app context with legacy head
+    app._context = {
+      provides: {
+        usehead: mockLegacyHead,
+      },
+    } as any
+
+    const theme = createTheme()
+    theme.install(app)
+
+    // Verify the legacy addHeadObjs method was called
+    expect(mockAddHeadObjs).toHaveBeenCalled()
+
+    // Verify updateDOM is called during reactivity
+    expect(mockUpdateHead).toHaveBeenCalled()
+  })
 })
