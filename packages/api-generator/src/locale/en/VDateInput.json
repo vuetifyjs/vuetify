@@ -1,6 +1,7 @@
 {
   "props": {
     "hideActions": "Hide the Cancel and OK buttons, and automatically update the value when a date is selected.",
-    "displayFormat": "The format of the date that is displayed in the input. Can use any format [here](/features/dates/#format-options) or a custom function."
+    "displayFormat": "The format of the date that is displayed in the input. Can use any format [here](/features/dates/#format-options) or a custom function.",
+    "inputFormat": "Format for manual date input. Use yyyy, mm, dd with separators '.', '-', '/' (e.g. 'yyyy-mm-dd', 'dd/mm/yyyy')."
   }
 }

@@ -139,3 +139,60 @@ export function getWeek (adapter: DateAdapter<any>, value: any) {
 
   return Math.floor(diffDays / 7) + 1
 }
+
+export function getDateFromStringDate(dateString: string, format: string) {
+  const countConsecutiveChars = (str: string, startIndex: number): number => {
+    const char = str[startIndex]
+    let count = 0
+    while (str[startIndex + count] === char) count++
+    return count
+  }
+
+  const parseDateParts = (dateString: string, format: string) => {
+    const dateParts: Record<string, number> = {}
+    let stringIndex = 0
+    const upperFormat = format.toUpperCase()
+
+    for (let formatIndex = 0; formatIndex < upperFormat.length;) {
+      const formatChar = upperFormat[formatIndex]
+      const charCount = countConsecutiveChars(upperFormat, formatIndex)
+      const dateValue = dateString.slice(stringIndex, stringIndex + charCount)
+
+      if (['Y', 'M', 'D'].includes(formatChar)) {
+        const numValue = parseInt(dateValue)
+        if (isNaN(numValue)) return null
+        dateParts[formatChar] = numValue
+      }
+
+      formatIndex += charCount
+      stringIndex += charCount
+    }
+
+    return dateParts
+  }
+
+  const validateDateParts = (dateParts: Record<string, number>) => {
+    const { Y: year, M: month, D: day } = dateParts
+    if (!year || !month || !day) return null
+    if (month < 1 || month > 12) return null
+    if (day < 1 || day > 31) return null
+    return { year, month, day }
+  }
+
+  const validateDate = (date: Date, year: number, month: number, day: number) => {
+    return date.getFullYear() === year &&
+           date.getMonth() === month - 1 &&
+           date.getDate() === day
+  }
+
+  const dateParts = parseDateParts(dateString, format)
+  if (!dateParts) return null
+
+  const validatedParts = validateDateParts(dateParts)
+  if (!validatedParts) return null
+
+  const { year, month, day } = validatedParts
+  const date = new Date(year, month - 1, day)
+
+  return validateDate(date, year, month, day) ? date : null
+}
