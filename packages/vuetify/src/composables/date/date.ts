@@ -140,7 +140,7 @@ export function getWeek (adapter: DateAdapter<any>, value: any) {
   return Math.floor(diffDays / 7) + 1
 }
 
-export function getDateFromStringDate(dateString: string, format: string) {
+export function getDateFromStringDate (dateString: string, format: string) {
   const countConsecutiveChars = (str: string, startIndex: number): number => {
     const char = str[startIndex]
     let count = 0

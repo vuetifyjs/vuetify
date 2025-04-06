@@ -1,5 +1,5 @@
 // Composables
-import { getWeek, getDateFromStringDate } from '../date'
+import { getDateFromStringDate, getWeek } from '../date'
 
 // Utilities
 import { VuetifyDateAdapter } from '../adapters/vuetify'
