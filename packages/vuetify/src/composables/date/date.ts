@@ -141,14 +141,14 @@ export function getWeek (adapter: DateAdapter<any>, value: any) {
 }
 
 export function getDateFromStringDate (dateString: string, format: string) {
-  const countConsecutiveChars = (str: string, startIndex: number): number => {
+  function countConsecutiveChars (str: string, startIndex: number): number {
     const char = str[startIndex]
     let count = 0
     while (str[startIndex + count] === char) count++
     return count
   }
 
-  const parseDateParts = (dateString: string, format: string) => {
+  function parseDateParts (dateString: string, format: string) {
     const dateParts: Record<string, number> = {}
     let stringIndex = 0
     const upperFormat = format.toUpperCase()
@@ -171,7 +171,7 @@ export function getDateFromStringDate (dateString: string, format: string) {
     return dateParts
   }
 
-  const validateDateParts = (dateParts: Record<string, number>) => {
+  function validateDateParts (dateParts: Record<string, number>) {
     const { Y: year, M: month, D: day } = dateParts
     if (!year || !month || !day) return null
     if (month < 1 || month > 12) return null
@@ -179,7 +179,7 @@ export function getDateFromStringDate (dateString: string, format: string) {
     return { year, month, day }
   }
 
-  const validateDate = (date: Date, year: number, month: number, day: number) => {
+  function validateDate (date: Date, year: number, month: number, day: number) {
     return date.getFullYear() === year &&
            date.getMonth() === month - 1 &&
            date.getDate() === day
