@@ -174,42 +174,4 @@ describe('createTheme', () => {
       expect(selector).not.toContain(':root')
     })
   })
-
-  // it('should use vue-meta@2.3 functionality', () => {
-  //   const theme = createTheme()
-  //   const set = jest.fn()
-  //   const $meta = () => ({
-  //     addApp: () => ({ set }),
-  //   })
-  //   ;(instance as any).$meta = $meta as any
-  //   theme.init(instance)
-  //   expect(set).toHaveBeenCalled()
-  // })
-
-  // it('should set theme with vue-meta@2', () => {
-  //   const theme = mockTheme()
-  //   const anyInstance = instance as any
-  //   anyInstance.$meta = () => ({
-  //     getOptions: () => ({ keyName: 'metaInfo' }),
-  //   })
-  //   theme.init(anyInstance)
-  //   const metaKeyName = anyInstance.$meta().getOptions().keyName
-  //   expect(typeof anyInstance.$options[metaKeyName]).toBe('function')
-  //   const metaInfo = anyInstance.$options[metaKeyName]()
-  //   expect(metaInfo).toBeTruthy()
-  //   expect(metaInfo.style).toHaveLength(1)
-  //   expect(metaInfo.style[0].cssText).toMatchSnapshot()
-  // })
-
-  // it('should set theme with vue-meta@1', () => {
-  //   const theme = mockTheme()
-  //   const anyInstance = instance as any
-  //   anyInstance.$meta = () => ({})
-  //   theme.init(anyInstance)
-  //   expect(typeof anyInstance.$options.metaInfo).toBe('function')
-  //   const metaInfo = anyInstance.$options.metaInfo()
-  //   expect(metaInfo).toBeTruthy()
-  //   expect(metaInfo.style).toHaveLength(1)
-  //   expect(metaInfo.style[0].cssText).toMatchSnapshot()
-  // })
 })
