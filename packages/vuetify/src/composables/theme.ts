@@ -386,21 +386,21 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
     return lines.map((str, i) => i === 0 ? str : `    ${str}`).join('')
   })
 
-  function getHead () {
-    return {
-      style: [{
-        textContent: styles.value,
-        id: parsedOptions.stylesheetId,
-        nonce: parsedOptions.cspNonce || false as never,
-      }],
-    }
-  }
-
   function install (app: App) {
     if (parsedOptions.isDisabled) return
 
     const head = app._context.provides.usehead as HeadClient & VueHeadClient<any> | undefined
     if (head) {
+      function getHead () {
+        return {
+          style: [{
+            textContent: styles.value,
+            id: parsedOptions.stylesheetId,
+            nonce: parsedOptions.cspNonce || false as never,
+          }],
+        }
+      }
+
       if (head.push) {
         const entry = head.push(getHead)
         if (IN_BROWSER) {
@@ -455,9 +455,7 @@ export function provideTheme (props: { theme?: string }) {
 
   if (!theme) throw new Error('Could not find Vuetify theme injection')
 
-  const name = computed<string>(() => {
-    return props.theme ?? theme.name.value
-  })
+  const name = computed(() => props.theme ?? theme.name.value)
   const current = computed(() => theme.themes.value[name.value])
 
   const themeClasses = computed(() => theme.isDisabled ? undefined : `v-theme--${name.value}`)
