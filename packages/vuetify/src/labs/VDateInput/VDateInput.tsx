@@ -153,7 +153,7 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
       const target = e.target as HTMLInputElement
 
       const date = getDateFromStringDate(target.value, props.inputFormat)
-      model.value = date ?? null
+      model.value = date
     }
 
     function onClick (e: MouseEvent) {
