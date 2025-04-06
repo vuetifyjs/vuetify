@@ -5,5 +5,8 @@
     "nav": "Reduces the width of v-list-item takes and adds a border radius.",
     "slim": "Reduces the vertical padding or height of the v-treeview-item, making it more compact.",
     "toggleIcon": "Allows customization of the icon used to toggle the expansion and collapse of treeview branches."
+  },
+  "events": {
+    "toggleExpand": "Emitted when the item is toggled to expand or collapse."
   }
 }

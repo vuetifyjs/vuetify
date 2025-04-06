@@ -51,7 +51,7 @@ export default defineConfig(configEnv => {
           : [IS_RUN ? 'dot' : ['default', { summary: false }]],
         coverage: {
           provider: 'v8',
-          reporter: ['html'],
+          reporter: ['html', 'text'],
           clean: true,
         },
       },
