@@ -153,7 +153,39 @@ export default createVuetify({
 
 ## Changing theme
 
-This is used when you need to change the theme during runtime
+Changing themes at runtime is as easy as calling the **toggle** method on the theme instance. The **toggle** method accepts a theme name or an array of theme names. If no argument is passed, it will toggle between all available themes.
+
+```html
+<template>
+  <v-app>
+    <!-- Toggle between all available themes -->
+    <v-btn @click="theme.toggle()">
+      Toggle All Themes
+    </v-btn>
+
+    <!-- Change to a specific theme -->
+    <v-btn @click="theme.toggle('dark')">
+      Change to Dark Theme
+    </v-btn>
+
+    <!-- Toggle between specific themes -->
+    <v-btn @click="theme.toggle(['dark', 'utopia'])">
+      Toggle Specific Themes
+    </v-btn>
+  </v-app>
+</template>
+
+<script setup>
+  import { useTheme } from 'vuetify'
+
+  const theme = useTheme()
+</script>
+```
+
+<details>
+<summary>Usage before v3.9</summary>
+
+In versions before v3.9, you manually change the global name value on the theme instance:
 
 ```html { resource="src/App.vue" }
 <template>
@@ -173,6 +205,10 @@ function toggleTheme () {
 }
 </script>
 ```
+
+</details>
+
+<br>
 
 You should keep in mind that most of the Vuetify components support the **theme** prop. When used a new context is created for _that_ specific component and **all** of its children. In the following example, the [v-btn](/components/buttons/) uses the **dark** theme because it is applied to its parent [v-card](/components/cards/).
 

@@ -228,4 +228,58 @@ describe('createTheme', () => {
     // Verify updateDOM is called during reactivity
     expect(mockUpdateHead).toHaveBeenCalled()
   })
+
+  it('should properly handle theme toggling functionality', async () => {
+    const theme = createTheme({
+      defaultTheme: 'light',
+      themes: {
+        custom: { dark: false },
+      },
+    })
+
+    // Test 1: Toggle through all available themes when no argument provided
+    expect(theme.name.value).toBe('light')
+
+    theme.toggle()
+    expect(theme.name.value).toBe('dark')
+
+    theme.toggle()
+    expect(theme.name.value).toBe('custom')
+
+    theme.toggle()
+    expect(theme.name.value).toBe('light')
+
+    // Test 2: Toggle to a specific theme
+    theme.toggle('dark')
+    expect(theme.name.value).toBe('dark')
+
+    theme.toggle('custom')
+    expect(theme.name.value).toBe('custom')
+
+    theme.toggle('light')
+    expect(theme.name.value).toBe('light')
+
+    // Test 3: Toggle between a limited set of themes
+    theme.toggle(['light', 'dark'])
+    expect(theme.name.value).toBe('dark')
+
+    theme.toggle(['light', 'dark'])
+    expect(theme.name.value).toBe('light')
+
+    theme.toggle(['light', 'dark'])
+    expect(theme.name.value).toBe('dark')
+
+    // Test 4: Handling of event objects
+    theme.toggle(new Event('click'))
+    expect(theme.name.value).toBe('custom')
+
+    theme.toggle(new Event('click'))
+    expect(theme.name.value).toBe('light')
+
+    // Test 5: Error when toggling to a non-existent theme
+    const consoleMock = vi.spyOn(console, 'warn').mockImplementation(() => {})
+    theme.toggle('nonexistent')
+    expect(consoleMock).toHaveBeenCalledWith('[Vue warn]: Vuetify: Theme "nonexistent" not found on the Vuetify theme instance')
+    consoleMock.mockReset()
+  })
 })
