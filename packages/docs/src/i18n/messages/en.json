@@ -54,6 +54,7 @@
   "composition": "Composition",
   "copied": "Copied!",
   "copy-link": "Copy link",
+  "configuration": "Configuration",
   "company": "Company",
   "comparison": {
     "average": "**Based on average of all Major/Minor/Patch releases over the last 12 months.",
@@ -68,6 +69,7 @@
   },
   "component": "Component",
   "components": "Components",
+  "concepts": "Common concepts",
   "contents": "Contents",
   "containment": "Containment",
   "contribute": {
@@ -161,6 +163,7 @@
   "faq": "FAQs",
   "feature-guides": "Feature guides",
   "features": "Features",
+  "feature-introduced-in": "This feature was introduced in {0}",
   "feedback": "Feedback",
   "figma-design": "Figma Design",
   "file-a-bug-report": "File a bug report",

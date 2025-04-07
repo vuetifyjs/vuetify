@@ -1,6 +1,6 @@
 import path from 'upath'
-import fs from 'fs/promises'
-import { fileURLToPath } from 'url'
+import fs from 'node:fs/promises'
+import { fileURLToPath } from 'node:url'
 
 import { defineConfig, loadEnv } from 'vite'
 import AutoImport from 'unplugin-auto-import/vite'
@@ -222,6 +222,8 @@ export default defineConfig(({ command, mode, isSsrBuild }) => {
           description: 'Vuetify UI Library Documentation',
           short_name: 'Vuetify',
           theme_color: '#1867C0',
+          display: 'minimal-ui',
+          display_override: ['minimal-ui', 'browser'],
           icons: [
             {
               src: 'img/icons/android-chrome-192x192.png',

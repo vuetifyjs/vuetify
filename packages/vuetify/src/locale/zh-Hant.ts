@@ -4,7 +4,7 @@ export default {
   close: '關閉',
   dismiss: '關閉',
   confirmEdit: {
-    ok: 'OK',
+    ok: '確定',
     cancel: '取消',
   },
   dataIterator: {
@@ -103,5 +103,18 @@ export default {
   infiniteScroll: {
     loadMore: '載入更多',
     empty: '沒有更多內容',
+  },
+  rules: {
+    required: '此欄位為必填項',
+    email: '請輸入有效的電子郵件地址',
+    number: '此欄位只能包含數字',
+    integer: '此欄位只能包含整數',
+    capital: '此欄位只能包含大寫字母',
+    maxLength: '您最多可以輸入{0}個字符',
+    minLength: '您必須至少輸入{0}個字符',
+    strictLength: '輸入欄位的長度無效',
+    exclude: '字符{0}是不允許的',
+    notEmpty: '請至少選擇一個值',
+    pattern: '格式無效',
   },
 }

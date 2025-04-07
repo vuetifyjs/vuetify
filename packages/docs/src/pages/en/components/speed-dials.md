@@ -20,11 +20,7 @@ The `v-speed-dial` component can be used as a floating action button that can re
 
 <PageFeatures />
 
-::: success
-
-This feature was introduced in [v3.6.0](/getting-started/release-notes/?version=v3.6.0)
-
-:::
+<DocIntroduced version="3.6.0" />
 
 ## Usage
 

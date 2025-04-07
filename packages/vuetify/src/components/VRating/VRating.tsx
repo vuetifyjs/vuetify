@@ -15,8 +15,8 @@ import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
-import { computed, shallowRef } from 'vue'
-import { clamp, createRange, genericComponent, getUid, propsFactory, useRender } from '@/util'
+import { computed, shallowRef, useId } from 'vue'
+import { clamp, createRange, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { Prop } from 'vue'
@@ -101,7 +101,7 @@ export const VRating = genericComponent<VRatingSlots>()({
     const { t } = useLocale()
     const { themeClasses } = provideTheme(props)
     const rating = useProxiedModel(props, 'modelValue')
-    const normalizedValue = computed(() => clamp(parseFloat(rating.value), 0, +props.length))
+    const normalizedValue = computed(() => clamp(parseFloat(rating.value), 0, Number(props.length)))
 
     const range = computed(() => createRange(Number(props.length), 1))
     const increments = computed(() => range.value.flatMap(v => props.halfIncrements ? [v - 0.5, v] : [v]))
@@ -140,7 +140,8 @@ export const VRating = genericComponent<VRatingSlots>()({
       }
     }))
 
-    const name = computed(() => props.name ?? `v-rating-${getUid()}`)
+    const uid = useId()
+    const name = computed(() => props.name ?? `v-rating-${uid}`)
 
     function VRatingItem ({ value, index, showStar = true }: { value: number, index: number, showStar?: boolean }) {
       const { onMouseenter, onMouseleave, onClick } = eventState.value[index + 1]

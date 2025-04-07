@@ -13,8 +13,9 @@ import {
   reactive,
   ref,
   shallowRef,
+  useId,
 } from 'vue'
-import { convertToUnit, findChildrenWithProvide, getCurrentInstance, getUid, propsFactory } from '@/util'
+import { convertToUnit, findChildrenWithProvide, getCurrentInstance, propsFactory } from '@/util'
 
 // Types
 import type { ComponentInternalInstance, CSSProperties, InjectionKey, Prop, Ref } from 'vue'
@@ -112,7 +113,7 @@ export function useLayoutItem (options: {
 
   if (!layout) throw new Error('[Vuetify] Could not find injected layout')
 
-  const id = options.id ?? `layout-item-${getUid()}`
+  const id = options.id ?? `layout-item-${useId()}`
 
   const vm = getCurrentInstance('useLayoutItem')
 

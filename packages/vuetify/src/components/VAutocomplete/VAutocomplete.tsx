@@ -16,7 +16,7 @@ import { VVirtualScroll } from '@/components/VVirtualScroll'
 // Composables
 import { useScrolling } from '../VSelect/useScrolling'
 import { useTextColor } from '@/composables/color'
-import { makeFilterProps, useFilter } from '@/composables/filter'
+import { highlightResult, makeFilterProps, useFilter } from '@/composables/filter'
 import { useForm } from '@/composables/form'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { useItems } from '@/composables/list-items'
@@ -44,25 +44,8 @@ import {
 import type { PropType } from 'vue'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
-import type { FilterMatch } from '@/composables/filter'
 import type { ListItem } from '@/composables/list-items'
 import type { GenericProps, SelectItemKey } from '@/util'
-
-function highlightResult (text: string, matches: FilterMatch | undefined, length: number) {
-  if (matches == null) return text
-
-  if (Array.isArray(matches)) throw new Error('Multiple matches is not implemented')
-
-  return typeof matches === 'number' && ~matches
-    ? (
-      <>
-        <span class="v-autocomplete__unmask">{ text.substr(0, matches) }</span>
-        <span class="v-autocomplete__mask">{ text.substr(matches, length) }</span>
-        <span class="v-autocomplete__unmask">{ text.substr(matches + length) }</span>
-      </>
-    )
-    : text
-}
 
 type Primitive = string | number | boolean | symbol
 
@@ -132,23 +115,14 @@ export const VAutocomplete = genericComponent<new <
 
   setup (props, { slots }) {
     const { t } = useLocale()
-    const vTextFieldRef = ref()
+    const vTextFieldRef = ref<VTextField>()
     const isFocused = shallowRef(false)
     const isPristine = shallowRef(true)
     const listHasFocus = shallowRef(false)
     const vMenuRef = ref<VMenu>()
     const vVirtualScrollRef = ref<VVirtualScroll>()
-    const _menu = useProxiedModel(props, 'menu')
-    const menu = computed({
-      get: () => _menu.value,
-      set: v => {
-        if (_menu.value && !v && vMenuRef.value?.ΨopenChildren.size) return
-        _menu.value = v
-      },
-    })
     const selectionIndex = shallowRef(-1)
     const color = computed(() => vTextFieldRef.value?.color)
-    const label = computed(() => menu.value ? props.closeText : props.openText)
     const { items, transformIn, transformOut } = useItems(props)
     const { textColorClasses, textColorStyles } = useTextColor(color)
     const search = useProxiedModel(props, 'search', '')
@@ -195,6 +169,17 @@ export const VAutocomplete = genericComponent<new <
       (props.hideNoData && !displayItems.value.length) ||
       form.isReadonly.value || form.isDisabled.value
     ))
+    const _menu = useProxiedModel(props, 'menu')
+    const menu = computed({
+      get: () => _menu.value,
+      set: v => {
+        if (_menu.value && !v && vMenuRef.value?.ΨopenChildren.size) return
+        if (v && menuDisabled.value) return
+        _menu.value = v
+      },
+    })
+
+    const label = computed(() => menu.value ? props.closeText : props.openText)
 
     const listRef = ref<VList>()
     const listEvents = useScrolling(listRef, vTextFieldRef)
@@ -227,7 +212,7 @@ export const VAutocomplete = genericComponent<new <
     function onKeydown (e: KeyboardEvent) {
       if (form.isReadonly.value) return
 
-      const selectionStart = vTextFieldRef.value.selectionStart
+      const selectionStart = vTextFieldRef.value?.selectionStart
       const length = model.value.length
 
       if (['Enter', 'ArrowDown', 'ArrowUp'].includes(e.key)) {
@@ -278,7 +263,7 @@ export const VAutocomplete = genericComponent<new <
       if (!props.multiple) return
 
       if (e.key === 'ArrowLeft') {
-        if (selectionIndex.value < 0 && selectionStart > 0) return
+        if (selectionIndex.value < 0 && selectionStart && selectionStart > 0) return
 
         const prev = selectionIndex.value > -1
           ? selectionIndex.value - 1
@@ -287,8 +272,9 @@ export const VAutocomplete = genericComponent<new <
         if (model.value[prev]) {
           selectionIndex.value = prev
         } else {
+          const searchLength = search.value?.length ?? null
           selectionIndex.value = -1
-          vTextFieldRef.value.setSelectionRange(search.value?.length, search.value?.length)
+          vTextFieldRef.value?.setSelectionRange(searchLength, searchLength)
         }
       } else if (e.key === 'ArrowRight') {
         if (selectionIndex.value < 0) return
@@ -299,7 +285,7 @@ export const VAutocomplete = genericComponent<new <
           selectionIndex.value = next
         } else {
           selectionIndex.value = -1
-          vTextFieldRef.value.setSelectionRange(0, 0)
+          vTextFieldRef.value?.setSelectionRange(0, 0)
         }
       } else if (~selectionIndex.value && checkPrintable(e)) {
         selectionIndex.value = -1
@@ -386,7 +372,7 @@ export const VAutocomplete = genericComponent<new <
       } else {
         if (!props.multiple && search.value == null) model.value = []
         menu.value = false
-        if (!model.value.some(({ title }) => title === search.value)) search.value = ''
+        if (props.multiple || hasSelectionSlot.value) search.value = ''
         selectionIndex.value = -1
       }
     })
@@ -497,7 +483,7 @@ export const VAutocomplete = genericComponent<new <
                         <VListItem key="no-data" title={ t(props.noDataText) } />
                       ))}
 
-                      <VVirtualScroll ref={ vVirtualScrollRef } renderless items={ displayItems.value }>
+                      <VVirtualScroll ref={ vVirtualScrollRef } renderless items={ displayItems.value } itemKey="value">
                         { ({ item, index, itemRef }) => {
                           const itemProps = mergeProps(item.props, {
                             ref: itemRef,
@@ -536,7 +522,7 @@ export const VAutocomplete = genericComponent<new <
                               title: () => {
                                 return isPristine.value
                                   ? item.title
-                                  : highlightResult(item.title, getMatches(item)?.title, search.value?.length ?? 0)
+                                  : highlightResult('v-autocomplete', item.title, getMatches(item)?.title)
                               },
                             }}
                           </VListItem>
@@ -643,6 +629,7 @@ export const VAutocomplete = genericComponent<new <
                 { props.menuIcon ? (
                   <VIcon
                     class="v-autocomplete__menu-icon"
+                    color={ vTextFieldRef.value?.fieldIconColor }
                     icon={ props.menuIcon }
                     onMousedown={ onMousedownMenuIcon }
                     onClick={ noop }

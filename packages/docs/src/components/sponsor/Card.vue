@@ -33,7 +33,7 @@
   const { name } = useRoute()
   const theme = useTheme()
   const sponsorStore = useSponsorsStore()
-  const sponsor = ref(props.sponsor)
+  const sponsor = shallowRef(props.sponsor)
 
   const src = computed(() => {
     const {

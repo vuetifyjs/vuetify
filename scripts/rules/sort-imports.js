@@ -26,7 +26,7 @@ const groups = [
 ]
 const innerOrder = ['./', '..', '@/']
 
-module.exports = {
+export default {
   meta: {
     fixable: 'code',
   },

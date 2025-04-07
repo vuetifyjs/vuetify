@@ -1,5 +1,6 @@
 {
   "props": {
+    "baseColor": "Sets the color of component when not focused. Recommended with `color` or `filter` to properly highlight selected items.",
     "centerActive": "Forces the selected chip to be centered.",
     "column": "Remove horizontal pagination and wrap items as needed.",
     "filter": "Applies an checkmark icon in front of every chip for using it like a filter.",

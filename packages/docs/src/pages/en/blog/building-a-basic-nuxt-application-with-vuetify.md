@@ -12,7 +12,7 @@ meta:
 
 🖊️ Eric Sarrion • 📅 February 21st, 2025
 
-<VoPromotionsCardVuetify />
+<PromotedEntry />
 
 ---
 
