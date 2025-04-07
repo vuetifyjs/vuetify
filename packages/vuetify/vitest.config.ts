@@ -51,7 +51,7 @@ export default defineConfig(configEnv => {
           : [IS_RUN ? 'dot' : ['default', { summary: false }]],
         coverage: {
           provider: 'istanbul',
-          reporter: ['html', 'text'],
+          reporter: ['html', 'text-summary'],
           clean: true,
           reportsDirectory: '../coverage',
         },
