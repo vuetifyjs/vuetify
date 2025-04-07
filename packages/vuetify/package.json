@@ -125,9 +125,9 @@
     "lint:fix": "concurrently -n \"tsc,eslint\" \"tsc -p tsconfig.checks.json --noEmit --pretty\" \"eslint --fix src\""
   },
   "devDependencies": {
-    "@date-io/core": "3.0.0",
-    "@date-io/date-fns": "3.0.0",
-    "@date-io/dayjs": "^3.0.0",
+    "@date-io/core": "3.2.0",
+    "@date-io/date-fns": "3.2.0",
+    "@date-io/dayjs": "^3.2.0",
     "@date-io/luxon": "^3.2.0",
     "@date-io/moment": "^3.2.0",
     "@formatjs/intl": "^2.10.1",

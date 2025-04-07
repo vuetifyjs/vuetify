@@ -431,14 +431,14 @@ importers:
   packages/vuetify:
     devDependencies:
       '@date-io/core':
-        specifier: 3.0.0
-        version: 3.0.0
+        specifier: 3.2.0
+        version: 3.2.0
       '@date-io/date-fns':
-        specifier: 3.0.0
-        version: 3.0.0(date-fns@3.6.0)
+        specifier: 3.2.0
+        version: 3.2.0(date-fns@3.6.0)
       '@date-io/dayjs':
-        specifier: ^3.0.0
-        version: 3.0.0(dayjs@1.11.13)
+        specifier: ^3.2.0
+        version: 3.2.0(dayjs@1.11.13)
       '@date-io/luxon':
         specifier: ^3.2.0
         version: 3.2.0(luxon@3.5.0)
@@ -1347,22 +1347,19 @@ packages:
     resolution: {integrity: sha512-IchNf6dN4tHoMFIn/7OE8LWZ19Y6q/67Bmf6vnGREv8RSbBVb9LPJxEcnwrcwX6ixSvaiGoomAUvu4YSxXrVgw==}
     engines: {node: '>=12'}
 
-  '@date-io/core@3.0.0':
-    resolution: {integrity: sha512-S3j+IAQVBYNkQzchVVhX40eBkGDreBpScy9RXwTS5j2+k07+62pMVPisQ44Gq76Rqy5AOG/EZXCwBpY/jbemvA==}
-
   '@date-io/core@3.2.0':
     resolution: {integrity: sha512-hqwXvY8/YBsT9RwQITG868ZNb1MVFFkF7W1Ecv4P472j/ZWa7EFcgSmxy8PUElNVZfvhdvfv+a8j6NWJqOX5mA==}
 
-  '@date-io/date-fns@3.0.0':
-    resolution: {integrity: sha512-hsLAbsdP8LKfi7OQ729cXMWfmHQEq0hn3ysXfAAoc92j6j6sBq0s0tplnkWu6O4iBUpVCYRPGuNjQQhTaOu2AA==}
+  '@date-io/date-fns@3.2.0':
+    resolution: {integrity: sha512-qkWB6E8lTwlwWq1xodXsY7On3gUoLsibdRu5cSAL1+oklrMOqpKmTzoZ9UFdvTs4Z0RYAi1D9ZelfqOCjT2quQ==}
     peerDependencies:
       date-fns: ^3.2.0
     peerDependenciesMeta:
       date-fns:
         optional: true
 
-  '@date-io/dayjs@3.0.0':
-    resolution: {integrity: sha512-vy7DSwoQiPA2L0stRqW3le7lcEBMjoMMEmbpCNkyoX3xXizKInFvhbnOBmCyusIQ7tL/WsNC4X5bVgdNWX0JLA==}
+  '@date-io/dayjs@3.2.0':
+    resolution: {integrity: sha512-+3LV+3N+cpQbEtmrFo8odg07k02AFY7diHgbi2EKYYANOOCPkDYUjDr2ENiHuYNidTs3tZwzDKckZoVNN4NXxg==}
     peerDependencies:
       dayjs: ^1.8.17
     peerDependenciesMeta:
@@ -3963,7 +3960,7 @@ packages:
     resolution: {integrity: sha512-7CEBgcMjVmitjYo5q8JTJVra6X5mQ20uTThdK+0kR7UEaDrAWEQcRiBtWJzga4eRpP6afNwwLsX2SET2JhVB1Q==}
 
   concat-map@0.0.1:
-    resolution: {integrity: sha1-2Klr13/Wjfd5OnMDajug1UBdR3s=}
+    resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
 
   concat-stream@2.0.0:
     resolution: {integrity: sha512-MWufYdFw53ccGjCA+Ol7XJYpAlW6/prSMzuPOTRnJGcGzuhLn4Scrz7qf6o8bROZ514ltazcIFJZevcfbo0x7A==}
@@ -4586,7 +4583,7 @@ packages:
     hasBin: true
 
   ee-first@1.1.1:
-    resolution: {integrity: sha1-WQxhFWsK4vTwJVcyoViyZrxWsh0=}
+    resolution: {integrity: sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==}
 
   ejs@3.1.10:
     resolution: {integrity: sha512-UeJmFfOrAQS8OJWPZ4qtgHyWExa088/MtK5UEyoJGFH67cDEXkZSviOiKRCZ4Xij0zxI3JECgYs3oKx+AizQBA==}
@@ -7553,6 +7550,7 @@ packages:
     engines: {node: '>=0.6.0', teleport: '>=0.2.0'}
     deprecated: |-
       You or someone you depend on is using Q, the JavaScript Promise library that gave JavaScript developers strong feelings about promises. They can almost certainly migrate to the native JavaScript promise now. Thank you literally everyone for joining me in this bet against the odds. Be excellent to each other.
+
       (For a CapTP with native promises, see @endo/eventual-send and @endo/captp)
 
   qs@6.9.7:
@@ -8905,7 +8903,7 @@ packages:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
 
   utils-merge@1.0.1:
-    resolution: {integrity: sha1-n5VxD1CiZ5R7LMwSR0HBAoQn5xM=}
+    resolution: {integrity: sha512-pMZTvIkT1d+TFGvDOqodOclx0QWkkgi6Tdoa8gC8ffGAAqz9pzPTZWAybbsHHoED/ztMtkv/VoYTYyShUn81hA==}
     engines: {node: '>= 0.4.0'}
 
   uuid@10.0.0:
@@ -10519,19 +10517,17 @@ snapshots:
     dependencies:
       '@jridgewell/trace-mapping': 0.3.9
 
-  '@date-io/core@3.0.0': {}
-
   '@date-io/core@3.2.0': {}
 
-  '@date-io/date-fns@3.0.0(date-fns@3.6.0)':
+  '@date-io/date-fns@3.2.0(date-fns@3.6.0)':
     dependencies:
-      '@date-io/core': 3.0.0
+      '@date-io/core': 3.2.0
     optionalDependencies:
       date-fns: 3.6.0
 
-  '@date-io/dayjs@3.0.0(dayjs@1.11.13)':
+  '@date-io/dayjs@3.2.0(dayjs@1.11.13)':
     dependencies:
-      '@date-io/core': 3.0.0
+      '@date-io/core': 3.2.0
     optionalDependencies:
       dayjs: 1.11.13
 
