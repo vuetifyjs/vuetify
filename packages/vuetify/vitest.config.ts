@@ -50,9 +50,10 @@ export default defineConfig(configEnv => {
           ? [['default', { summary: false }], 'github-actions']
           : [IS_RUN ? 'dot' : ['default', { summary: false }]],
         coverage: {
-          provider: 'v8',
+          provider: 'istanbul',
           reporter: ['html', 'text'],
           clean: true,
+          reportsDirectory: '../coverage',
         },
       },
     })
