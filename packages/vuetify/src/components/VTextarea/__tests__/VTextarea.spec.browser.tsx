@@ -54,4 +54,20 @@ describe('VTextarea', () => {
     await userEvent.keyboard('Lorem ipsum dolor sit amet consectetur adipisicing elit. ')
     await expect.poll(() => el.offsetHeight).toBe(80)
   })
+
+  it('should emit update rows', async () => {
+    await page.viewport(500, 500)
+    const model = ref('Lorem ipsum dolor sit amet, consectetur adipiscing elit')
+    const rows = ref(1)
+    render(() => (
+      <Application>
+        <div>
+          <VTextarea auto-grow rows="1" v-model={ model.value } onUpdate:rows={ val => { rows.value = val } } />
+        </div>
+      </Application>
+    ))
+    await userEvent.tab()
+    await userEvent.keyboard('Lorem ipsum dolor')
+    expect(rows.value).toBe(2)
+  })
 })
