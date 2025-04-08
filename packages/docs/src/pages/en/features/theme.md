@@ -153,25 +153,42 @@ export default createVuetify({
 
 ## Changing theme
 
-Changing themes at runtime is as easy as calling the **toggle** method on the theme instance. The **toggle** method accepts a theme name or an array of theme names. If no argument is passed, it will toggle between all available themes.
+The theme instance has 3 functions to change the theme:
+
+- **change**: Changes to a specific name
+- **toggle**: Toggle between two themes / defaults to light and dark
+- **cycle**: Cycles between all or a specific subset of themes in any order
 
 ```html
 <template>
   <v-app>
-    <!-- Toggle between all available themes -->
-    <v-btn @click="theme.toggle()">
-      Toggle All Themes
-    </v-btn>
+    <v-main>
+      <v-container>
+        <!-- Toggle between Light / Dark -->
+        <v-btn
+          @click="theme.toggle()"
+          text="Toggle Light / Dark"
+        ></v-btn>
 
-    <!-- Change to a specific theme -->
-    <v-btn @click="theme.toggle('dark')">
-      Change to Dark Theme
-    </v-btn>
+        <!-- Change to a specific theme -->
+        <v-btn
+          @click="theme.change('dark')"
+          text="Change to Dark"
+        ></v-btn>
 
-    <!-- Toggle between specific themes -->
-    <v-btn @click="theme.toggle(['dark', 'utopia'])">
-      Toggle Specific Themes
-    </v-btn>
+        <!-- Cycle between all themes -->
+        <v-btn
+          @click="theme.cycle()"
+          text="Cycle All Themes"
+        ></v-btn>
+
+        <!-- Cycle between specific themes -->
+        <v-btn
+          @click="theme.cycle(['custom', 'light', 'utopia'])"
+          text="Cycle Specific Themes"
+        ></v-btn>
+      </v-container>
+    </v-main>
   </v-app>
 </template>
 

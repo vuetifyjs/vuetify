@@ -229,11 +229,12 @@ describe('createTheme', () => {
     expect(mockUpdateHead).toHaveBeenCalled()
   })
 
-  it('should properly handle theme toggling functionality', async () => {
+  it('should change, toggle, and cycle theme', async () => {
     const theme = createTheme({
       defaultTheme: 'light',
       themes: {
         custom: { dark: false },
+        utopia: { dark: true },
       },
     })
 
@@ -244,41 +245,32 @@ describe('createTheme', () => {
     expect(theme.name.value).toBe('dark')
 
     theme.toggle()
-    expect(theme.name.value).toBe('custom')
-
-    theme.toggle()
     expect(theme.name.value).toBe('light')
 
-    // Test 2: Toggle to a specific theme
-    theme.toggle('dark')
+    // Test 2: Change to a specific theme
+    theme.change('dark')
     expect(theme.name.value).toBe('dark')
 
-    theme.toggle('custom')
+    // Test 3: Cycle between a limited set of themes
+    theme.cycle()
     expect(theme.name.value).toBe('custom')
 
-    theme.toggle('light')
+    theme.cycle()
+    expect(theme.name.value).toBe('utopia')
+
+    theme.cycle()
     expect(theme.name.value).toBe('light')
 
-    // Test 3: Toggle between a limited set of themes
-    theme.toggle(['light', 'dark'])
-    expect(theme.name.value).toBe('dark')
+    // Test 4: Cycle between a subset of themes
+    theme.cycle(['light', 'utopia'])
+    expect(theme.name.value).toBe('utopia')
 
-    theme.toggle(['light', 'dark'])
+    theme.cycle(['light', 'utopia'])
     expect(theme.name.value).toBe('light')
 
-    theme.toggle(['light', 'dark'])
-    expect(theme.name.value).toBe('dark')
-
-    // Test 4: Handling of event objects
-    theme.toggle(new Event('click'))
-    expect(theme.name.value).toBe('custom')
-
-    theme.toggle(new Event('click'))
-    expect(theme.name.value).toBe('light')
-
-    // Test 5: Error when toggling to a non-existent theme
+    // Test 5: Error when changing to a non-existent theme
     const consoleMock = vi.spyOn(console, 'warn').mockImplementation(() => {})
-    theme.toggle('nonexistent')
+    theme.change('nonexistent')
     expect(consoleMock).toHaveBeenCalledWith('[Vue warn]: Vuetify: Theme "nonexistent" not found on the Vuetify theme instance')
     consoleMock.mockReset()
   })
