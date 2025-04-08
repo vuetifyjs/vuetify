@@ -10,7 +10,7 @@ describe('VDatePicker events', () => {
     render(() => (
       <VDatePicker
         type="month"
-        events={['2025-02-09']}
+        events={['2025-04-09']}
         eventColor="red"
       />
     ))
@@ -22,7 +22,7 @@ describe('VDatePicker events', () => {
   it('renders event markers when events is a function', async () => {
     render(() => (
       <VDatePicker
-        events={(date: string) => date === '2025-02-09'}
+        events={(date: string) => date === '2025-04-09'}
         eventColor="red"
       />
     ))
@@ -35,8 +35,8 @@ describe('VDatePicker events', () => {
   it('renders event markers with colors defined by an object', async () => {
     render(() => (
       <VDatePicker
-        events={['2025-02-09', '2025-02-20']}
-        eventColor={{ '2025-02-09': 'red', '2025-02-20': 'blue lighten-1' }}
+        events={['2025-04-09', '2025-04-20']}
+        eventColor={{ '2025-04-09': 'red', '2025-04-20': 'blue lighten-1' }}
       />
     ))
 
@@ -47,8 +47,8 @@ describe('VDatePicker events', () => {
   it('renders event markers with colors defined by a function', async () => {
     render(() => (
       <VDatePicker
-        events={['2025-02-09', '2025-02-20']}
-        eventColor={(date: string) => ({ '2025-02-09': 'red' }[date])}
+        events={['2025-04-09', '2025-04-20']}
+        eventColor={(date: string) => ({ '2025-04-09': 'red' }[date])}
       />
     ))
 
