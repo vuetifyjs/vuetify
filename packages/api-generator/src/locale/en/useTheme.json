@@ -1,5 +1,8 @@
 {
   "exposed": {
+    "change": "Change to a specific theme.",
+    "toggle": "Toggle between two themes.",
+    "cycle": "Cycle between all or a subset of themes.",
     "computedThemes": "Object containing all parsed theme definitions.",
     "current": "Current theme object.",
     "global": "Reference to the global theme instance.",

@@ -1,4 +1,11 @@
 {
+  "useTheme": {
+    "exposed": {
+      "change": "3.9.0",
+      "toggle": "3.9.0",
+      "cycle": "3.9.0"
+    }
+  },
   "VAppBar": {
     "props": {
       "scrollBehavior": "3.2.0"

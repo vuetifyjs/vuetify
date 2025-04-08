@@ -155,9 +155,9 @@ export default createVuetify({
 
 The theme instance has 3 functions to change the theme:
 
-- **change**: Changes to a specific name
+- **change**: Change to a specific name
 - **toggle**: Toggle between two themes / defaults to light and dark
-- **cycle**: Cycles between all or a specific subset of themes in any order
+- **cycle**: Cycle between all or a specific subset of themes in any order
 
 ```html
 <template>
