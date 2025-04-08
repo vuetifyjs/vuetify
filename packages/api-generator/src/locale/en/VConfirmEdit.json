@@ -10,5 +10,9 @@
     "ok": "The event emitted when the user clicks the OK button",
     "save": "The event emitted when the user clicks the Save button",
     "cancel": "The event emitted when the user clicks the Cancel button"
+  },
+  "exposed": {
+    "save": "Manually commit the change",
+    "cancel": "Manually cancel the change"
   }
 }

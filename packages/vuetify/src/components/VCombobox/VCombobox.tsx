@@ -119,7 +119,7 @@ export const VCombobox = genericComponent<new <
 
   setup (props, { emit, slots }) {
     const { t } = useLocale()
-    const vTextFieldRef = ref()
+    const vTextFieldRef = ref<VTextField>()
     const isFocused = shallowRef(false)
     const isPristine = shallowRef(true)
     const listHasFocus = shallowRef(false)
@@ -265,7 +265,7 @@ export const VCombobox = genericComponent<new <
     function onKeydown (e: KeyboardEvent) {
       if (isComposingIgnoreKey(e) || form.isReadonly.value) return
 
-      const selectionStart = vTextFieldRef.value.selectionStart
+      const selectionStart = vTextFieldRef.value?.selectionStart
       const length = model.value.length
 
       if (['Enter', 'ArrowDown', 'ArrowUp'].includes(e.key)) {
@@ -325,7 +325,7 @@ export const VCombobox = genericComponent<new <
       if (!props.multiple) return
 
       if (e.key === 'ArrowLeft') {
-        if (selectionIndex.value < 0 && selectionStart > 0) return
+        if (selectionIndex.value < 0 && selectionStart && selectionStart > 0) return
 
         const prev = selectionIndex.value > -1
           ? selectionIndex.value - 1
@@ -335,7 +335,7 @@ export const VCombobox = genericComponent<new <
           selectionIndex.value = prev
         } else {
           selectionIndex.value = -1
-          vTextFieldRef.value.setSelectionRange(search.value.length, search.value.length)
+          vTextFieldRef.value?.setSelectionRange(search.value.length, search.value.length)
         }
       } else if (e.key === 'ArrowRight') {
         if (selectionIndex.value < 0) return
@@ -346,7 +346,7 @@ export const VCombobox = genericComponent<new <
           selectionIndex.value = next
         } else {
           selectionIndex.value = -1
-          vTextFieldRef.value.setSelectionRange(0, 0)
+          vTextFieldRef.value?.setSelectionRange(0, 0)
         }
       } else if (~selectionIndex.value && checkPrintable(e)) {
         selectionIndex.value = -1

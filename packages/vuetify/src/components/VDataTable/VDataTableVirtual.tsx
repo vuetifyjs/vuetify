@@ -20,7 +20,7 @@ import { makeVirtualProps, useVirtual } from '@/composables/virtual'
 
 // Utilities
 import { computed, shallowRef, toRef, toRefs } from 'vue'
-import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
+import { convertToUnit, genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { VDataTableSlotProps } from './VDataTable'
@@ -53,7 +53,7 @@ export type VDataTableVirtualSlots<T> = VDataTableRowsSlots<T> & VDataTableHeade
 }
 
 export const makeVDataTableVirtualProps = propsFactory({
-  ...makeDataTableProps(),
+  ...omit(makeDataTableProps(), ['hideDefaultFooter']),
   ...makeDataTableGroupProps(),
   ...makeVirtualProps(),
   ...makeFilterProps(),
