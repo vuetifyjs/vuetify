@@ -7,7 +7,7 @@ import { kebabCase } from './helpers/text'
 import type { ComponentData, DirectiveData } from './types'
 import { generateComposableDataFromTypes, generateDirectiveDataFromTypes } from './types'
 import Piscina from 'piscina'
-import { addDescriptions, addDirectiveDescriptions, addPropData, stringifyProps } from './utils'
+import { addDescriptions, addDirectiveDescriptions, addPropData, sortByKey, stringifyProps } from './utils'
 import * as os from 'os'
 import { mkdirp } from 'mkdirp'
 import { createVeturApi } from './vetur'
@@ -15,7 +15,7 @@ import { rimraf } from 'rimraf'
 import { createWebTypesApi } from './web-types'
 import inspector from 'inspector'
 import yargs from 'yargs'
-import { parseSassVariables } from './helpers/sass'
+import { parseGlobalSassVariables, parseSassVariables } from './helpers/sass'
 
 const yar = yargs(process.argv.slice(2))
   .option('components', {
@@ -76,7 +76,7 @@ const run = async () => {
       const componentProps = stringifyProps(componentInstance.props)
       const sources = addPropData(componentName, data, componentProps)
       await addDescriptions(componentName, data, locales, sources)
-      const sass = parseSassVariables(componentName)
+      const sass = sortByKey(parseSassVariables(componentName))
 
       const component = {
         displayName: componentName,
@@ -90,6 +90,15 @@ const run = async () => {
       return component
     })
   )).filter(BooleanFilter)
+
+  // globalSass
+  const globalSass = {
+    fileName: 'globals',
+    displayName: 'globals',
+    pathName: 'globals',
+    sass: sortByKey(parseGlobalSassVariables()),
+  }
+  await fs.writeFile(path.resolve(outPath, `globals.json`), JSON.stringify(globalSass, null, 2))
 
   // Composables
   if (!argv.skipComposables) {
