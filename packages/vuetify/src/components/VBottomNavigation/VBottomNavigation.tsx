@@ -88,8 +88,8 @@ export const VBottomNavigation = genericComponent<new <T>(
     const { layoutItemStyles } = useLayoutItem({
       id: props.name,
       order: computed(() => parseInt(props.order, 10)),
-      position: computed(() => 'bottom'),
-      layoutSize: computed(() => isActive.value ? height.value : 0),
+      position: toRef(() => 'bottom'),
+      layoutSize: toRef(() => isActive.value ? height.value : 0),
       elementSize: height,
       active: isActive,
       absolute: toRef(() => props.absolute),
