@@ -40,6 +40,7 @@ export interface InternalItem<T = any> {
 // Composables
 export const defaultFilter: FilterFunction = (value, query, item) => {
   if (value == null || query == null) return -1
+  if (!query.length) return 0
 
   value = value.toString().toLocaleLowerCase()
   query = query.toString().toLocaleLowerCase()
