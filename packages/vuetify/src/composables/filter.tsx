@@ -57,7 +57,7 @@ export const defaultFilter: FilterFunction = (value, query, item) => {
 
 function normaliseMatch (match: FilterMatch, query: string): FilterMatchArrayMultiple | undefined {
   if (match == null || typeof match === 'boolean' || match === -1) return
-  if (typeof match === 'number') return [[match, query.length]]
+  if (typeof match === 'number') return [[match, match + query.length]]
   if (Array.isArray(match[0])) return match as FilterMatchArrayMultiple
   return [match] as FilterMatchArrayMultiple
 }
