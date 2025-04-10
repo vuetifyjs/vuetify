@@ -14,7 +14,7 @@ export default defineWorkspace([
     test: {
       name: 'unit',
       include: ['**/*.spec.{ts,tsx}'],
-      setupFiles: ['../test/setup/unit-setup.ts'],
+      setupFiles: ['../test/setup/setup.ts', '../test/setup/unit-setup.ts'],
       environment: 'jsdom',
     },
   },
@@ -23,7 +23,7 @@ export default defineWorkspace([
     test: {
       name: 'browser',
       include: ['**/*.spec.browser.{ts,tsx}'],
-      setupFiles: ['../test/setup/browser-setup.ts'],
+      setupFiles: ['../test/setup/setup.ts', '../test/setup/browser-setup.ts'],
       bail: process.env.TEST_BAIL ? 1 : undefined,
       slowTestThreshold: Infinity,
       browser: {

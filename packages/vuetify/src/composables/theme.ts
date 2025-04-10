@@ -1,6 +1,7 @@
 // Utilities
 import {
   computed,
+  getCurrentScope,
   inject,
   onScopeDispose,
   provide,
@@ -417,9 +418,11 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
 
     media.addEventListener('change', updateSystemName)
 
-    onScopeDispose(() => {
-      media.removeEventListener('change', updateSystemName)
-    })
+    if (getCurrentScope()) {
+      onScopeDispose(() => {
+        media.removeEventListener('change', updateSystemName)
+      })
+    }
   }
 
   function install (app: App) {
