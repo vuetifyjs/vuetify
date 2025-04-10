@@ -1,9 +1,9 @@
 // Types
 import type { Addon, AddonsOptions, InlinePreset, PresetImport } from 'unimport'
-import type { DirectiveName, VuetifyComponent } from './types'
+import type { ComponentName, DirectiveName, LabComponentName, VuetifyComponent } from './types'
 import { resolveVuetifyComponentFrom, resolveVuetifyImportMaps } from './utils'
 
-export type { DirectiveName }
+export type { ComponentName, DirectiveName, LabComponentName }
 
 export interface VuetifyComponentInfo {
   pascalName: string
@@ -31,6 +31,18 @@ export interface VuetifyDirectivesOptions {
    * Directives to exclude.
    */
   exclude?: DirectiveName[]
+}
+
+export interface VuetifyComponentsOptions {
+  /**
+   * Prefix Vuetify components (to allow use other components with the same name):
+   * - when prefix set to `true` will use `Vuetify` => `vuetify-<component>/Vuetify<component>: `vuetify-btn/VuetifyBtn`.
+   */
+  prefix?: true
+  /**
+   * Components to exclude.
+   */
+  exclude?: (ComponentName | LabComponentName)[]
 }
 
 export { resolveVuetifyComponentFrom }
@@ -109,29 +121,38 @@ export function buildAddonsOptions (addons?: AddonsOptions | Addon[]): AddonsOpt
   }
 }
 
-export async function prepareVuetifyComponents () {
+export async function prepareVuetifyComponents (options: VuetifyComponentsOptions = {}) {
+  const { prefix = false, exclude = [] } = options
   const info: VuetifyComponentInfo[] = []
   const [components, labs] = await Promise.all(
     resolveVuetifyImportMaps()
   )
 
-  const map = new Map<string, VuetifyComponent>()
-  Object.entries(components.components).forEach(([component, entry]) => {
-    map.set(component, {
+  const map = new Map<string, VuetifyComponent & { name: string }>()
+  for (const [component, entry] of Object.entries(components.components)) {
+    if (exclude.length > 0 && exclude.includes(component as any)) {
+      continue
+    }
+    map.set(mapComponent(prefix, component), {
       from: `vuetify/${resolveVuetifyComponentFrom(entry)}`,
+      name: component,
     })
-  })
-  Object.entries(labs.components).forEach(([component, entry]) => {
-    map.set(component, {
+  }
+  for (const [component, entry] of Object.entries(labs.components)) {
+    if (exclude.length > 0 && exclude.includes(component as any)) {
+      continue
+    }
+    map.set(mapComponent(prefix, component), {
       from: `vuetify/${resolveVuetifyComponentFrom(entry)}`,
+      name: component,
     })
-  })
+  }
 
   for (const [component, entry] of map.entries()) {
     info.push({
       pascalName: component,
       kebabName: toKebabCase(component),
-      export: component,
+      export: entry.name,
       filePath: entry.from,
     })
   }
@@ -144,4 +165,8 @@ function toKebabCase (str: string) {
     .replace(/[^a-z]/gi, '-')
     .replace(/\B([A-Z])/g, '-$1')
     .toLowerCase()
+}
+
+function mapComponent (prefix: boolean, name: string) {
+  return prefix ? name.replace(/^V/, 'Vuetify') : name
 }

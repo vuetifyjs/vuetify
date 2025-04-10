@@ -17,6 +17,11 @@ export type { ComponentName, DirectiveName, LabComponentName }
 
 export interface VuetifyComponentResolverOptions {
   /**
+   * Prefix Vuetify components (to allow use other components with the same name):
+   * - when prefix set to `true` will use `Vuetify` => `vuetify-<component>/Vuetify<component>: `vuetify-btn/VuetifyBtn`.
+   */
+  prefix?: true
+  /**
    * Include labs components?.
    *
    * @default true
@@ -54,6 +59,11 @@ export interface VuetifyDirectivesResolverOptions {
 
 export interface VuetifyVueResolverOptions extends Omit<VuetifyComponentResolverOptions, 'exclude'> {
   /**
+   * Prefix Vuetify components (to allow use other components with the same name):
+   * - when prefix set to `true` will use `Vuetify` => `vuetify-<component>/Vuetify<component>: `vuetify-btn/VuetifyBtn`.
+   */
+  prefixComponents?: true
+  /**
    * Prefix Vuetify directives (to allow use other directives with the same name):
    * - when prefix set to `true` will use `Vuetify` => `v-vuetify-<directive>: `v-vuetify-ripple`.
    */
@@ -74,6 +84,7 @@ export function VuetifyVueResolver (options: VuetifyVueResolverOptions = {}) {
     excludeDirectives,
     labs = true,
     excludeComponents,
+    prefixComponents,
     prefixDirectives,
   } = options
 
@@ -85,7 +96,7 @@ export function VuetifyVueResolver (options: VuetifyVueResolverOptions = {}) {
   )
   const components = createComponentsResolver(
     [componentsPromise, directivesPromise],
-    { exclude: excludeComponents, labs, paths }
+    { exclude: excludeComponents, labs, paths, prefix: prefixComponents },
   )
 
   return {
@@ -106,21 +117,29 @@ function createComponentsResolver (
   promises: ImportMaps,
   options: VuetifyComponentResolverOptions
 ) {
-  const { exclude, labs } = options
+  const { exclude, labs, prefix } = options
   return {
     type: 'component',
     resolve: async name => {
-      if (exclude?.some(e => e === name)) return undefined
+      let vuetifyName = name
+      if (prefix) {
+        if (!name.startsWith('Vuetify')) {
+          return undefined
+        }
+        vuetifyName = `V${name.slice('Vuetify'.length)}`
+      }
+      if (exclude?.some(e => e === vuetifyName)) return undefined
       const [components, labsComponents] = await Promise.all(promises)
-      const component = name in components.components
-        ? components.components[name]
-        : labs && name in labsComponents
-          ? labsComponents[name]
+      const component = vuetifyName in components.components
+        ? components.components[vuetifyName]
+        : labs && vuetifyName in labsComponents
+          ? labsComponents[vuetifyName]
           : undefined
 
       if (!component) return undefined
       return {
-        name,
+        name: vuetifyName,
+        as: prefix ? name : undefined,
         type: 'component',
         from: `vuetify/${resolveVuetifyComponentFrom(component)}`,
       }
