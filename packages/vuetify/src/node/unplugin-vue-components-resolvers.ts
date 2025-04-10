@@ -8,6 +8,7 @@ import type {
   LabComponentName,
 } from './types'
 import {
+  prepareTransformAssetUrls,
   resolveVuetifyComponentFrom,
   resolveVuetifyImportMap,
   resolveVuetifyImportMaps,
@@ -57,6 +58,8 @@ export interface VuetifyDirectivesResolverOptions {
   paths?: string[]
 }
 
+export { prepareTransformAssetUrls }
+
 export interface VuetifyVueResolverOptions extends Omit<VuetifyComponentResolverOptions, 'exclude'> {
   /**
    * Prefix Vuetify components (to allow use other components with the same name):
@@ -100,6 +103,7 @@ export function VuetifyVueResolver (options: VuetifyVueResolverOptions = {}) {
   )
 
   return {
+    transformAssetUrls: prepareTransformAssetUrls(prefixComponents === true),
     VuetifyDirectiveResolver: directives,
     VuetifyComponentResolver: components,
   }

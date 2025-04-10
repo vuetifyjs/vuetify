@@ -1,7 +1,13 @@
 // Types
 import type { Addon, AddonsOptions, InlinePreset, PresetImport } from 'unimport'
 import type { ComponentName, DirectiveName, LabComponentName, VuetifyComponent } from './types'
-import { resolveVuetifyComponentFrom, resolveVuetifyImportMaps } from './utils'
+import {
+  mapComponent,
+  prepareTransformAssetUrls,
+  resolveVuetifyComponentFrom,
+  resolveVuetifyImportMaps,
+  toKebabCase,
+} from './utils'
 
 export type { ComponentName, DirectiveName, LabComponentName }
 
@@ -45,7 +51,7 @@ export interface VuetifyComponentsOptions {
   exclude?: (ComponentName | LabComponentName)[]
 }
 
-export { resolveVuetifyComponentFrom }
+export { prepareTransformAssetUrls, resolveVuetifyComponentFrom }
 
 export function VuetifyComposables (options: VuetifyComposablesOptions = {}) {
   const { prefix } = options
@@ -158,15 +164,4 @@ export async function prepareVuetifyComponents (options: VuetifyComponentsOption
   }
 
   return info
-}
-
-function toKebabCase (str: string) {
-  return str
-    .replace(/[^a-z]/gi, '-')
-    .replace(/\B([A-Z])/g, '-$1')
-    .toLowerCase()
-}
-
-function mapComponent (prefix: boolean, name: string) {
-  return prefix ? name.replace(/^V/, 'Vuetify') : name
 }

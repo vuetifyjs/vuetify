@@ -12,6 +12,61 @@ export function resolveVuetifyBase (paths = [process.cwd()]) {
   return path.dirname(require.resolve('vuetify/package.json', { paths }))
 }
 
+export function toKebabCase (str: string) {
+  return str
+    .replace(/[^a-z]/gi, '-')
+    .replace(/\B([A-Z])/g, '-$1')
+    .toLowerCase()
+}
+
+export function mapComponent (prefix: boolean, name: string) {
+  return prefix ? name.replace(/^V/, 'Vuetify') : name
+}
+
+export function prepareTransformAssetUrls (prefix: boolean) {
+  const transformAssetUrls = {
+    VAppBar: ['image'],
+    VAvatar: ['image'],
+    VBanner: ['avatar'],
+    VCard: ['image', 'prependAvatar', 'appendAvatar'],
+    VCardItem: ['prependAvatar', 'appendAvatar'],
+    VCarouselItem: ['src', 'lazySrc', 'srcset'],
+    VChip: ['prependAvatar', 'appendAvatar'],
+    VImg: ['src', 'lazySrc', 'srcset'],
+    VListItem: ['prependAvatar', 'appendAvatar'],
+    VNavigationDrawer: ['image'],
+    VParallax: ['src', 'lazySrc', 'srcset'],
+    VToolbar: ['image'],
+  } as Record<string, string[]>
+
+  if (!prefix) {
+    for (const [component, attrs] of Object.entries(transformAssetUrls)) {
+      for (const attr of attrs) {
+        if (/[A-Z]/.test(attr)) {
+          attrs.push(toKebabCase(attr))
+        }
+      }
+      transformAssetUrls[toKebabCase(component)] = attrs
+    }
+
+    return transformAssetUrls
+  }
+
+  const result: Record<string, string[]> = {}
+  for (let [component, attrs] of Object.entries(transformAssetUrls)) {
+    component = mapComponent(true, component)
+    result[component] = attrs
+    for (const attr of attrs) {
+      if (/[A-Z]/.test(attr)) {
+        attrs.push(toKebabCase(attr))
+      }
+    }
+    result[toKebabCase(component)] = attrs
+  }
+
+  return result
+}
+
 export function resolveVuetifyImportMaps (
   paths = [process.cwd()]
 ): ImportMaps {
