@@ -9,8 +9,10 @@ import {
   watchEffect,
 } from 'vue'
 import {
+  consoleWarn,
   createRange,
   darken,
+  deprecate,
   getCurrentInstance,
   getForeground,
   getLuma,
@@ -88,6 +90,10 @@ interface OnColors {
 }
 
 export interface ThemeInstance {
+  change: (themeName: string) => void
+  cycle: (themeArray?: string[]) => void
+  toggle: (themeArray?: [string, string]) => void
+
   readonly isDisabled: boolean
   readonly themes: Ref<Record<string, InternalThemeDefinition>>
 
@@ -386,6 +392,9 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
     return lines.map((str, i) => i === 0 ? str : `    ${str}`).join('')
   })
 
+  const themeClasses = computed(() => parsedOptions.isDisabled ? undefined : `v-theme--${name.value}`)
+  const themeNames = computed(() => Object.keys(computedThemes.value))
+
   function install (app: App) {
     if (parsedOptions.isDisabled) return
 
@@ -430,10 +439,45 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
     }
   }
 
-  const themeClasses = computed(() => parsedOptions.isDisabled ? undefined : `v-theme--${name.value}`)
+  function change (themeName: string) {
+    if (!themeNames.value.includes(themeName)) {
+      consoleWarn(`Theme "${themeName}" not found on the Vuetify theme instance`)
+      return
+    }
+
+    name.value = themeName
+  }
+
+  function cycle (themeArray: string[] = themeNames.value) {
+    const currentIndex = themeArray.indexOf(name.value)
+    const nextIndex = currentIndex === -1 ? 0 : (currentIndex + 1) % themeArray.length
+
+    change(themeArray[nextIndex])
+  }
+
+  function toggle (themeArray: [string, string] = ['light', 'dark']) {
+    cycle(themeArray)
+  }
+
+  const globalName = new Proxy(name, {
+    get (target, prop) {
+      return target[prop as keyof typeof target]
+    },
+    set (target, prop, val) {
+      if (prop === 'value') {
+        deprecate(`theme.global.name.value = ${val}`, `theme.change('${val}')`)
+      }
+      // @ts-expect-error
+      target[prop] = val
+      return true
+    },
+  }) as typeof name
 
   return {
     install,
+    change,
+    cycle,
+    toggle,
     isDisabled: parsedOptions.isDisabled,
     name,
     themes,
@@ -442,7 +486,7 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
     themeClasses,
     styles,
     global: {
-      name,
+      name: globalName,
       current,
     },
   }

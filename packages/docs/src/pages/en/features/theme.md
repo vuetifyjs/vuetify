@@ -153,7 +153,56 @@ export default createVuetify({
 
 ## Changing theme
 
-This is used when you need to change the theme during runtime
+The theme instance has 3 functions to change the theme:
+
+- **change**: Change to a specific name
+- **toggle**: Toggle between two themes / defaults to light and dark
+- **cycle**: Cycle between all or a specific subset of themes in any order
+
+```html
+<template>
+  <v-app>
+    <v-main>
+      <v-container>
+        <!-- Toggle between Light / Dark -->
+        <v-btn
+          @click="theme.toggle()"
+          text="Toggle Light / Dark"
+        ></v-btn>
+
+        <!-- Change to a specific theme -->
+        <v-btn
+          @click="theme.change('dark')"
+          text="Change to Dark"
+        ></v-btn>
+
+        <!-- Cycle between all themes -->
+        <v-btn
+          @click="theme.cycle()"
+          text="Cycle All Themes"
+        ></v-btn>
+
+        <!-- Cycle between specific themes -->
+        <v-btn
+          @click="theme.cycle(['custom', 'light', 'utopia'])"
+          text="Cycle Specific Themes"
+        ></v-btn>
+      </v-container>
+    </v-main>
+  </v-app>
+</template>
+
+<script setup>
+  import { useTheme } from 'vuetify'
+
+  const theme = useTheme()
+</script>
+```
+
+<details>
+<summary>Usage before v3.9</summary>
+
+In versions before v3.9, you manually change the global name value on the theme instance:
 
 ```html { resource="src/App.vue" }
 <template>
@@ -173,6 +222,10 @@ function toggleTheme () {
 }
 </script>
 ```
+
+</details>
+
+<br>
 
 You should keep in mind that most of the Vuetify components support the **theme** prop. When used a new context is created for _that_ specific component and **all** of its children. In the following example, the [v-btn](/components/buttons/) uses the **dark** theme because it is applied to its parent [v-card](/components/cards/).
 
