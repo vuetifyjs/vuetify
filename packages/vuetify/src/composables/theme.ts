@@ -2,6 +2,7 @@
 import {
   computed,
   inject,
+  onScopeDispose,
   provide,
   ref,
   shallowRef,
@@ -33,7 +34,7 @@ type DeepPartial<T> = T extends object ? { [P in keyof T]?: DeepPartial<T[P]> } 
 
 export type ThemeOptions = false | {
   cspNonce?: string
-  defaultTheme?: string
+  defaultTheme?: 'light' | 'dark' | 'system' | string
   variations?: false | VariationsOptions
   themes?: Record<string, ThemeDefinition>
   stylesheetId?: string
@@ -44,7 +45,7 @@ export type ThemeDefinition = DeepPartial<InternalThemeDefinition>
 interface InternalThemeOptions {
   cspNonce?: string
   isDisabled: boolean
-  defaultTheme: string
+  defaultTheme: 'light' | 'dark' | 'system' | string
   variations: false | VariationsOptions
   themes: Record<string, InternalThemeDefinition>
   stylesheetId: string
@@ -329,8 +330,18 @@ function getOrCreateStyleElement (id: string, cspNonce?: string) {
 // Composables
 export function createTheme (options?: ThemeOptions): ThemeInstance & { install: (app: App) => void } {
   const parsedOptions = parseThemeOptions(options)
-  const name = shallowRef(parsedOptions.defaultTheme)
+  const _name = shallowRef(parsedOptions.defaultTheme)
   const themes = ref(parsedOptions.themes)
+  const systemName = shallowRef()
+
+  const name = computed({
+    get () {
+      return _name.value === 'system' ? systemName.value : _name.value
+    },
+    set (val: string) {
+      _name.value = val
+    },
+  })
 
   const computedThemes = computed(() => {
     const acc: Record<string, InternalThemeDefinition> = {}
@@ -394,6 +405,22 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
 
   const themeClasses = computed(() => parsedOptions.isDisabled ? undefined : `v-theme--${name.value}`)
   const themeNames = computed(() => Object.keys(computedThemes.value))
+
+  if (IN_BROWSER) {
+    const media = window.matchMedia('(prefers-color-scheme: dark)')
+
+    function updateSystemName () {
+      systemName.value = media.matches ? 'dark' : 'light'
+    }
+
+    updateSystemName()
+
+    media.addEventListener('change', updateSystemName)
+
+    onScopeDispose(() => {
+      media.removeEventListener('change', updateSystemName)
+    })
+  }
 
   function install (app: App) {
     if (parsedOptions.isDisabled) return
