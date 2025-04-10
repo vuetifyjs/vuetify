@@ -220,7 +220,7 @@ export function useValidation (
   }
 
   async function validate (silent = false) {
-    if (props.disabled) {
+    if (props.disabled || props.readonly) {
       internalErrorMessages.value = []
       isValidating.value = false
       return internalErrorMessages.value
