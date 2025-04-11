@@ -24,6 +24,7 @@ import {
   parseColor,
   propsFactory,
   RGBtoHex,
+  SUPPORTS_MATCH_MEDIA,
 } from '@/util'
 
 // Types
@@ -337,7 +338,7 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
 
   const name = computed({
     get () {
-      return _name.value === 'system' ? systemName.value : _name.value
+      return _name.value === 'system' ? systemName.value ?? 'light' : _name.value
     },
     set (val: string) {
       _name.value = val
@@ -407,7 +408,7 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
   const themeClasses = computed(() => parsedOptions.isDisabled ? undefined : `v-theme--${name.value}`)
   const themeNames = computed(() => Object.keys(computedThemes.value))
 
-  if (IN_BROWSER) {
+  if (SUPPORTS_MATCH_MEDIA) {
     const media = window.matchMedia('(prefers-color-scheme: dark)')
 
     function updateSystemName () {
@@ -416,7 +417,7 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
 
     updateSystemName()
 
-    media.addEventListener('change', updateSystemName)
+    media.addEventListener('change', updateSystemName, { passive: true })
 
     if (getCurrentScope()) {
       onScopeDispose(() => {
