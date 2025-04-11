@@ -334,11 +334,11 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
   const parsedOptions = parseThemeOptions(options)
   const _name = shallowRef(parsedOptions.defaultTheme)
   const themes = ref(parsedOptions.themes)
-  const systemName = shallowRef()
+  const systemName = shallowRef('light')
 
   const name = computed({
     get () {
-      return _name.value === 'system' ? systemName.value ?? 'light' : _name.value
+      return _name.value === 'system' ? systemName.value : _name.value
     },
     set (val: string) {
       _name.value = val
