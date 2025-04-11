@@ -39,6 +39,10 @@ export const makeVDateInputProps = propsFactory({
     type: String as PropType<StrategyProps['location']>,
     default: 'bottom start',
   },
+  updateOn: {
+    type: Array as PropType<('blur' | 'enter')[]>,
+    default: () => ['blur', 'enter'],
+  },
 
   ...makeDisplayProps(),
   ...makeFocusProps(),
@@ -135,13 +139,12 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
 
       if (!menu.value || !isFocused.value) {
         menu.value = true
-
         return
       }
 
-      const target = e.target as HTMLInputElement
-
-      model.value = adapter.isValid(target.value) ? target.value : null
+      if (props.updateOn.includes('enter')) {
+        onUserInput(e.target as HTMLInputElement)
+      }
     }
 
     function onClick (e: MouseEvent) {
@@ -172,7 +175,11 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
       model.value = null
     }
 
-    function onBlur () {
+    function onBlur (e: FocusEvent) {
+      if (props.updateOn.includes('blur')) {
+        onUserInput(e.target as HTMLInputElement)
+      }
+
       blur()
 
       // When in mobile mode and editing is done (due to keyboard dismissal), close the menu
@@ -180,6 +187,17 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
         menu.value = false
         isEditingInput.value = false
       }
+    }
+
+    function onUserInput (target: HTMLInputElement) {
+      const userInput = target.value
+
+      if (!userInput) {
+        model.value = null
+        return
+      }
+
+      model.value = adapter.isValid(target.value) ? target.value : null
     }
 
     useRender(() => {
