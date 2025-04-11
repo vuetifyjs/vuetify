@@ -2,6 +2,7 @@
   "props": {
     "hideActions": "Hide the Cancel and OK buttons, and automatically update the value when a date is selected.",
     "displayFormat": "The format of the date that is displayed in the input. Can use any format [here](/features/dates/#format-options) or a custom function.",
-    "location": "Specifies the date picker's location. Can combine by using a space separated string."
+    "location": "Specifies the date picker's location. Can combine by using a space separated string.",
+    "updateOn": "Specifies when the text input should update the model value. If empty, the text field will go into read-only state."
   }
 }
