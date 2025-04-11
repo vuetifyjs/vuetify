@@ -325,8 +325,8 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
         const hasOverflowX = overflows.x.before || overflows.x.after
         const hasOverflowY = overflows.y.before || overflows.y.after
 
-        let reset = false;
-        ['x', 'y'].forEach(key => {
+        let reset = false
+        ;['x', 'y'].forEach(key => {
           if (
             (key === 'x' && hasOverflowX && !flipped.x) ||
             (key === 'y' && hasOverflowY && !flipped.y)
