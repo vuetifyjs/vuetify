@@ -3,6 +3,7 @@
   "modifiers": {
     "center": "Makes it so that the ripple originates from the center of the element, instead where the user clicked on it.",
     "circle": "Changes the ripple behavior to better match circular elements.",
-    "stop": "Prevents ripples from being triggered on any other elements when the click event is bubbling up."
+    "stop": "Prevents ripples from being triggered on any other elements when the click event is bubbling up.",
+    "noTriggerOnEnter": "Prevents the ripple from being triggered when the enter key is pressed while the element is focused."
   }
 }
