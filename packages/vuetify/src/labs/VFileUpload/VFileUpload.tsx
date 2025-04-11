@@ -19,7 +19,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { onMounted, onUnmounted, ref, shallowRef } from 'vue'
-import { filterInputAttrs, genericComponent, pick, propsFactory, useRender, wrapInArray } from '@/util'
+import { filterFilesByAcceptType, filterInputAttrs, genericComponent, pick, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { PropType, VNode } from 'vue'
@@ -137,13 +137,21 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
       e.stopImmediatePropagation()
       dragOver.value = false
 
-      const files = Array.from(e.dataTransfer?.files ?? [])
+      const acceptType = inputRef.value?.accept
 
-      if (!files.length) return
+      const files = e.dataTransfer?.files
+      let filesArray: File[] = []
+
+      if (!files || files.length === 0) {
+        return
+      }
+
+      if (acceptType) {
+        filesArray = filterFilesByAcceptType(files, acceptType)
+      }
 
       if (!props.multiple) {
-        model.value = [files[0]]
-
+        model.value = [filesArray[0]]
         return
       }
 
@@ -171,6 +179,15 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
       inputRef.value.value = ''
     }
 
+    function onFileInputChange (e: Event) {
+      const acceptType = inputRef.value?.accept
+      const files = (e.target as HTMLInputElement)?.files
+
+      if (!files) return
+
+      model.value = filterFilesByAcceptType(files, acceptType)
+    }
+
     useRender(() => {
       const hasTitle = !!(slots.title || props.title)
       const hasIcon = !!(slots.icon || props.icon)
@@ -186,12 +203,7 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
           disabled={ props.disabled }
           multiple={ props.multiple }
           name={ props.name }
-          onChange={ e => {
-            if (!e.target) return
-
-            const target = e.target as HTMLInputElement
-            model.value = [...target.files ?? []]
-          }}
+          onChange={ onFileInputChange }
           { ...inputAttrs }
         />
       )
