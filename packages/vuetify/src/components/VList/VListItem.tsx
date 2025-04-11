@@ -194,7 +194,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
 
       if (!isClickable.value) return
 
-      link.navigate?.(e)
+      link.navigate.value?.(e)
 
       if (isGroupActivator) return
 
