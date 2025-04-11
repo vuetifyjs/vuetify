@@ -125,7 +125,17 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
     })
 
     const isInteractive = computed(() => !props.disabled && !props.readonly)
-    const isReadonly = computed(() => !(mobile.value && isEditingInput.value) && props.readonly)
+
+    const isReadonly = computed(() => {
+      const canUpdate = props.updateOn.length
+      if (!canUpdate) return true
+
+
+      const isEditingOnMobile = mobile.value && isEditingInput.value
+      const hasReadonlyProp = props.readonly
+
+      return !isEditingOnMobile && hasReadonlyProp
+    })
 
     watch(menu, val => {
       if (val) return
