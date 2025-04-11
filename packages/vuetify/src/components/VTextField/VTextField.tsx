@@ -9,13 +9,14 @@ import { makeVInputProps, VInput } from '@/components/VInput/VInput'
 // Composables
 import { useFocus } from '@/composables/focus'
 import { forwardRefs } from '@/composables/forwardRefs'
+import { makeMaskProps, useMask } from '@/composables/mask'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Directives
 import Intersect from '@/directives/intersect'
 
 // Utilities
-import { cloneVNode, computed, nextTick, ref } from 'vue'
+import { cloneVNode, computed, nextTick, onMounted, ref } from 'vue'
 import { callEvent, filterInputAttrs, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -44,6 +45,7 @@ export const makeVTextFieldProps = propsFactory({
 
   ...makeVInputProps(),
   ...makeVFieldProps(),
+  ...makeMaskProps(),
 }, 'VTextField')
 
 export type VTextFieldSlots = Omit<VInputSlots & VFieldSlots, 'default'> & {
@@ -68,13 +70,7 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
   },
 
   setup (props, { attrs, emit, slots }) {
-    const model = useProxiedModel(props, 'modelValue')
     const { isFocused, focus, blur } = useFocus(props)
-    const counterValue = computed(() => {
-      return typeof props.counterValue === 'function' ? props.counterValue(model.value)
-        : typeof props.counterValue === 'number' ? props.counterValue
-        : (model.value ?? '').toString().length
-    })
     const max = computed(() => {
       if (attrs.maxlength) return attrs.maxlength as unknown as undefined
 
@@ -101,6 +97,39 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
     const vInputRef = ref<VInput>()
     const vFieldRef = ref<VField>()
     const inputRef = ref<HTMLInputElement>()
+
+    const { maskText, updateRange, unmaskText } = useMask(props, inputRef)
+    const returnMaskedValue = computed(() => props.mask && props.returnMaskedValue)
+
+    const model = useProxiedModel(
+      props,
+      'modelValue',
+      undefined,
+      // Always display masked value in input when mask is applied
+      val => props.mask ? maskText(unmaskText(val)) : val,
+      val => {
+        if (props.mask) {
+          const valueBeforeChange = unmaskText(model.value)
+          // E.g. mask is #-# and the input value is '2-23'
+          // model-value should be enforced to '2-2'
+          const enforcedMaskedValue = maskText(unmaskText(val))
+          const newUnmaskedValue = unmaskText(enforcedMaskedValue)
+
+          if (newUnmaskedValue === valueBeforeChange) {
+            inputRef.value!.value = enforcedMaskedValue
+          }
+          val = newUnmaskedValue
+          updateRange()
+          return returnMaskedValue.value ? maskText(val) : val
+        }
+        return val
+      },
+    )
+    const counterValue = computed(() => {
+      return typeof props.counterValue === 'function' ? props.counterValue(model.value)
+        : typeof props.counterValue === 'number' ? props.counterValue
+        : (model.value ?? '').toString().length
+    })
     const isActive = computed(() => (
       activeTypes.includes(props.type) ||
       props.persistentPlaceholder ||
@@ -152,6 +181,12 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
         })
       }
     }
+
+    onMounted(() => {
+      if (props.returnMaskedValue) {
+        emit('update:modelValue', model.value)
+      }
+    })
 
     useRender(() => {
       const hasCounter = !!(slots.counter || (props.counter !== false && props.counter != null))
