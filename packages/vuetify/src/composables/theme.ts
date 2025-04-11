@@ -127,7 +127,7 @@ export const makeThemeProps = propsFactory({
 
 function genDefaults () {
   return {
-    defaultTheme: 'light',
+    defaultTheme: 'system',
     prefix: 'v-',
     variations: { colors: [], lighten: 0, darken: 0 },
     themes: {

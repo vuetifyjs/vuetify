@@ -21,6 +21,18 @@ This page contains a detailed list of breaking changes and the steps required to
 
 - Cascade layers are now being used everywhere. If you have other styles that are not using `@layer` they will now always take priority over vuetify.
 
+## Themes
+
+The default theme has been changed from **light** to **system**. This means that the default theme will now be the same as the user's system preference. You can change this by setting the **defaultTheme** theme option:
+
+```diff { resource="src/plugins/vuetify.ts" }
+export default createVuetify({
++ theme: {
++   defaultTheme: 'light',
++ },
+})
+```
+
 ## Components
 
 ### General changes
