@@ -1,6 +1,6 @@
 // Utilities
 import { h, mergeProps, Transition, TransitionGroup } from 'vue'
-import { propsFactory } from '@/util'
+import { onlyDefinedProps, propsFactory } from '@/util'
 
 // Types
 import type { Component, FunctionalComponent, PropType, TransitionProps } from 'vue'
@@ -35,7 +35,7 @@ export const MaybeTransition: FunctionalComponent<MaybeTransitionProps> = (props
         : customProps as any,
       typeof transition === 'string'
         ? {}
-        : Object.fromEntries(Object.entries({ disabled, group }).filter(([_, v]) => v !== undefined)),
+        : onlyDefinedProps({ disabled, group }),
       rest as any,
     ),
     slots

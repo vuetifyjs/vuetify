@@ -753,3 +753,9 @@ export type Primitive = string | number | boolean | symbol | bigint
 export function isPrimitive (value: unknown): value is Primitive {
   return typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean' || typeof value === 'bigint'
 }
+
+export function onlyDefinedProps (props: Record<string, any>) {
+  const booleanAttributes = ['checked', 'disabled']
+  return Object.fromEntries(Object.entries(props)
+    .filter(([key, v]) => booleanAttributes.includes(key) ? !!v : v !== undefined))
+}
