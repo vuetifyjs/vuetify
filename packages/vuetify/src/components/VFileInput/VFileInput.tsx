@@ -164,6 +164,11 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
       if (!e.dataTransfer) return
 
       model.value = [...e.dataTransfer.files ?? []]
+
+      // INFO: If we add this to emits property we get an error on the test
+      //  This is still working as expected even if we dont register it on emits
+      // @ts-expect-error
+      emit('change', e)
     }
 
     watch(model, newValue => {
