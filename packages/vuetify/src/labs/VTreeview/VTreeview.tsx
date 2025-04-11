@@ -65,9 +65,9 @@ export const VTreeview = genericComponent<new <T>(
 
   setup (props, { slots }) {
     const { items } = useListItems(props)
-    const activeColor = toRef(props, 'activeColor')
-    const baseColor = toRef(props, 'baseColor')
-    const color = toRef(props, 'color')
+    const activeColor = toRef(() => props.activeColor)
+    const baseColor = toRef(() => props.baseColor)
+    const color = toRef(() => props.color)
     const activated = useProxiedModel(props, 'activated')
     const model = useProxiedModel(props, 'modelValue')
     const _selected = useProxiedModel(props, 'selected', props.modelValue)
@@ -84,7 +84,7 @@ export const VTreeview = genericComponent<new <T>(
 
     const opened = computed(() => props.openAll ? openAll(items.value) : props.opened)
     const flatItems = computed(() => flatten(items.value))
-    const search = toRef(props, 'search')
+    const search = toRef(() => props.search)
     const { filteredItems } = useFilter(props, flatItems, search)
     const visibleIds = computed(() => {
       if (!search.value) return null
@@ -134,18 +134,18 @@ export const VTreeview = genericComponent<new <T>(
         activeColor,
         baseColor,
         color,
-        collapseIcon: toRef(props, 'collapseIcon'),
-        expandIcon: toRef(props, 'expandIcon'),
+        collapseIcon: toRef(() => props.collapseIcon),
+        expandIcon: toRef(() => props.expandIcon),
       },
       VTreeviewItem: {
-        activeClass: toRef(props, 'activeClass'),
+        activeClass: toRef(() => props.activeClass),
         activeColor,
         baseColor,
         color,
-        density: toRef(props, 'density'),
-        disabled: toRef(props, 'disabled'),
-        lines: toRef(props, 'lines'),
-        variant: toRef(props, 'variant'),
+        density: toRef(() => props.density),
+        disabled: toRef(() => props.disabled),
+        lines: toRef(() => props.lines),
+        variant: toRef(() => props.variant),
       },
     })
 

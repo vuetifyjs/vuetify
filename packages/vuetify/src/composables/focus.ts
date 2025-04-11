@@ -2,7 +2,7 @@
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed } from 'vue'
+import { toRef } from 'vue'
 import { EventProp, getCurrentInstanceName, propsFactory } from '@/util'
 
 // Types
@@ -22,7 +22,7 @@ export function useFocus (
   name = getCurrentInstanceName()
 ) {
   const isFocused = useProxiedModel(props, 'focused')
-  const focusClasses = computed(() => {
+  const focusClasses = toRef(() => {
     return ({
       [`${name}--focused`]: isFocused.value,
     })

@@ -21,14 +21,15 @@ export function useSize (
   name = getCurrentInstanceName(),
 ) {
   return destructComputed(() => {
+    const size = props.size
     let sizeClasses
     let sizeStyles
-    if (includes(predefinedSizes, props.size)) {
-      sizeClasses = `${name}--size-${props.size}`
-    } else if (props.size) {
+    if (includes(predefinedSizes, size)) {
+      sizeClasses = `${name}--size-${size}`
+    } else if (size) {
       sizeStyles = {
-        width: convertToUnit(props.size),
-        height: convertToUnit(props.size),
+        width: convertToUnit(size),
+        height: convertToUnit(size),
       }
     }
     return { sizeClasses, sizeStyles }

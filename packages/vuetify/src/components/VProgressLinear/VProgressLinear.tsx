@@ -76,19 +76,19 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
     const { isRtl, rtlClasses } = useRtl()
     const { themeClasses } = provideTheme(props)
     const { locationStyles } = useLocation(props)
-    const { textColorClasses, textColorStyles } = useTextColor(props, 'color')
+    const { textColorClasses, textColorStyles } = useTextColor(() => props.color)
     const {
       backgroundColorClasses,
       backgroundColorStyles,
-    } = useBackgroundColor(computed(() => props.bgColor || props.color))
+    } = useBackgroundColor(() => props.bgColor || props.color)
     const {
       backgroundColorClasses: bufferColorClasses,
       backgroundColorStyles: bufferColorStyles,
-    } = useBackgroundColor(computed(() => props.bufferColor || props.bgColor || props.color))
+    } = useBackgroundColor(() => props.bufferColor || props.bgColor || props.color)
     const {
       backgroundColorClasses: barColorClasses,
       backgroundColorStyles: barColorStyles,
-    } = useBackgroundColor(props, 'color')
+    } = useBackgroundColor(() => props.color)
     const { roundedClasses } = useRounded(props)
     const { intersectionRef, isIntersecting } = useIntersectionObserver()
 

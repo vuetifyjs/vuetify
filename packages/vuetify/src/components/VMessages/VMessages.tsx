@@ -49,7 +49,7 @@ export const VMessages = genericComponent<VMessagesSlots>()({
 
   setup (props, { slots }) {
     const messages = computed(() => wrapInArray(props.messages))
-    const { textColorClasses, textColorStyles } = useTextColor(computed(() => props.color))
+    const { textColorClasses, textColorStyles } = useTextColor(() => props.color)
 
     useRender(() => (
       <MaybeTransition
