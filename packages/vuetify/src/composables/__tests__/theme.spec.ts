@@ -274,4 +274,16 @@ describe('createTheme', () => {
     expect(consoleMock).toHaveBeenCalledWith('[Vue warn]: Vuetify: Theme "nonexistent" not found on the Vuetify theme instance')
     consoleMock.mockReset()
   })
+
+  it('should generate utility classes without !important', async () => {
+    const theme = createTheme({ unimportant: true })
+
+    theme.install(app)
+
+    const stylesheet = document.getElementById('vuetify-theme-stylesheet')
+
+    const css = stylesheet!.innerHTML
+
+    expect(css).not.toContain('!important')
+  })
 })

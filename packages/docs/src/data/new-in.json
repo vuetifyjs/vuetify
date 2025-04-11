@@ -3,7 +3,8 @@
     "exposed": {
       "change": "3.9.0",
       "toggle": "3.9.0",
-      "cycle": "3.9.0"
+      "cycle": "3.9.0",
+      "unimportant": "3.9.0"
     }
   },
   "VAppBar": {

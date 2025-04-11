@@ -10,6 +10,7 @@
     "name": "Name of current theme.",
     "styles": "**FOR INTERNAL USE ONLY**",
     "themeClasses": "**FOR INTERNAL USE ONLY**",
-    "themes": "Raw theme definitions."
+    "themes": "Raw theme definitions.",
+    "unimportant": "Generate utility classes without the !important declaration."
   }
 }

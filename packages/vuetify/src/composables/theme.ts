@@ -38,6 +38,7 @@ export type ThemeOptions = false | {
   themes?: Record<string, ThemeDefinition>
   stylesheetId?: string
   scope?: string
+  unimportant?: boolean
 }
 export type ThemeDefinition = DeepPartial<InternalThemeDefinition>
 
@@ -49,6 +50,7 @@ interface InternalThemeOptions {
   themes: Record<string, InternalThemeDefinition>
   stylesheetId: string
   scope?: string
+  unimportant: boolean
 }
 
 interface VariationsOptions {
@@ -197,6 +199,7 @@ function genDefaults () {
       },
     },
     stylesheetId: 'vuetify-theme-stylesheet',
+    unimportant: false,
   }
 }
 
@@ -357,6 +360,7 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
 
   const styles = computed(() => {
     const lines: string[] = []
+    const important = parsedOptions.unimportant ? '' : ' !important'
 
     if (current.value?.dark) {
       createCssClass(lines, ':root', ['color-scheme: dark'], parsedOptions.scope)
@@ -377,14 +381,14 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
     const colors = new Set(Object.values(computedThemes.value).flatMap(theme => Object.keys(theme.colors)))
     for (const key of colors) {
       if (key.startsWith('on-')) {
-        createCssClass(fgLines, `.${key}`, [`color: rgb(var(--v-theme-${key})) !important`], parsedOptions.scope)
+        createCssClass(fgLines, `.${key}`, [`color: rgb(var(--v-theme-${key}))${important}`], parsedOptions.scope)
       } else {
         createCssClass(bgLines, `.bg-${key}`, [
           `--v-theme-overlay-multiplier: var(--v-theme-${key}-overlay-multiplier)`,
-          `background-color: rgb(var(--v-theme-${key})) !important`,
-          `color: rgb(var(--v-theme-on-${key})) !important`,
+          `background-color: rgb(var(--v-theme-${key}))${important}`,
+          `color: rgb(var(--v-theme-on-${key}))${important}`,
         ], parsedOptions.scope)
-        createCssClass(fgLines, `.text-${key}`, [`color: rgb(var(--v-theme-${key})) !important`], parsedOptions.scope)
+        createCssClass(fgLines, `.text-${key}`, [`color: rgb(var(--v-theme-${key}))${important}`], parsedOptions.scope)
         createCssClass(fgLines, `.border-${key}`, [`--v-border-color: var(--v-theme-${key})`], parsedOptions.scope)
       }
     }
