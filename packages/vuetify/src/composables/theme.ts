@@ -302,7 +302,9 @@ function getScopedSelector (selector: string, scope?: string) {
   return selector === ':root' ? scopeSelector : `${scopeSelector} ${selector}`
 }
 
-function upsertStyles (styleEl: HTMLStyleElement | null, styles: string) {
+function upsertStyles (id: string, cspNonce: string | undefined, styles: string) {
+  const styleEl = getOrCreateStyleElement(id, cspNonce)
+
   if (!styleEl) return
 
   styleEl.innerHTML = styles
@@ -431,10 +433,7 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
       }
 
       function updateStyles () {
-        upsertStyles(
-          getOrCreateStyleElement(parsedOptions.stylesheetId, parsedOptions.cspNonce),
-          styles.value
-        )
+        upsertStyles(parsedOptions.stylesheetId, parsedOptions.cspNonce, styles.value)
       }
     }
   }
