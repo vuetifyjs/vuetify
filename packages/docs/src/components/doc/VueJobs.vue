@@ -80,8 +80,8 @@
   const { event } = useGtag()
   const { jobs } = useJobsStore()
   const { t } = useI18n()
-  const view = ref(true)
-  const search = ref('')
+  const view = shallowRef(true)
+  const search = shallowRef('')
   const items = computed(() => {
     return jobs.filter(job => {
       if (!search.value) return true

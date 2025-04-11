@@ -199,6 +199,56 @@ describe('VAutocomplete', () => {
     }])
   })
 
+  it('should clear input on blur when using multiple', async () => {
+    const items = ref([
+      {
+        text: '21',
+        id: 'item1',
+      },
+      {
+        text: '22',
+        id: 'item2',
+      },
+      {
+        text: '23',
+        id: 'item3',
+      },
+    ])
+
+    const selectedItems = ref([
+      {
+        text: '21',
+        id: 'item1',
+      },
+      {
+        text: '22',
+        id: 'item2',
+      },
+    ])
+
+    const { container } = render(() => (
+      <VAutocomplete
+        v-model={ selectedItems.value }
+        items={ items.value }
+        multiple
+        item-title="text"
+        item-value="text"
+      />
+    ))
+
+    await userEvent.click(container)
+
+    const menu = await screen.findByRole('listbox')
+
+    const activeItems = await findAllByRole(menu, 'option', { selected: true })
+    expect(activeItems).toHaveLength(2)
+
+    expect(document.activeElement).toBe(within(container).getByCSS('input'))
+
+    const input = within(container).getByCSS('input')
+    expect(input).toHaveValue('')
+  })
+
   it('should not be clickable when in readonly', async () => {
     const items = ['Item 1', 'Item 2', 'Item 3', 'Item 4']
 
@@ -583,7 +633,7 @@ describe('VAutocomplete', () => {
     expect(screen.queryByRole('listbox')).toBeNull()
 
     await rerender({ items: ['Foo', 'Bar'] })
-    expect(await screen.findByRole('listbox')).toBeInTheDocument()
+    await expect(screen.findByRole('listbox')).resolves.toBeVisible()
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/19346
@@ -593,7 +643,7 @@ describe('VAutocomplete', () => {
     })
 
     await userEvent.click(element)
-    expect(await screen.findByRole('listbox')).toBeInTheDocument()
+    await expect(screen.findByRole('listbox')).resolves.toBeVisible()
 
     await userEvent.click(screen.getAllByRole('option')[0])
     await rerender({ items: ['Foo', 'Bar', 'test', 'test 2'] })

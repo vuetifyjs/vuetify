@@ -29,7 +29,7 @@ import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant
 import { Ripple } from '@/directives/ripple'
 
 // Utilities
-import { computed } from 'vue'
+import { computed, toDisplayString } from 'vue'
 import { EventProp, genericComponent, propsFactory } from '@/util'
 
 // Types
@@ -84,7 +84,10 @@ export const makeVChipProps = propsFactory({
     type: [Boolean, Object] as PropType<RippleDirectiveBinding['value']>,
     default: true,
   },
-  text: String,
+  text: {
+    type: [String, Number, Boolean],
+    default: undefined,
+  },
   modelValue: {
     type: Boolean,
     default: true,
@@ -294,7 +297,7 @@ export const VChip = genericComponent<VChipSlots>()({
               toggle: group?.toggle,
               value: group?.value.value,
               disabled: props.disabled,
-            }) ?? props.text }
+            }) ?? toDisplayString(props.text)}
           </div>
 
           { hasAppend && (

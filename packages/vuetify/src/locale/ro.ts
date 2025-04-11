@@ -36,7 +36,7 @@ export default {
     divider: 'până la',
   },
   datePicker: {
-    itemsSelected: '{0} selected',
+    itemsSelected: '{0} selectate',
     range: {
       title: 'Selectați datele',
       header: 'Introduceți datele',
@@ -63,21 +63,21 @@ export default {
     clear: 'Șterge {0}',
     prependAction: '{0} acțiune de inserare la început',
     appendAction: '{0} acțiune de inserare la sfârșit',
-    otp: 'Please enter OTP character {0}',
+    otp: 'Introduceți caracterul OTP {0}',
   },
   fileInput: {
     counter: '{0} fișiere',
     counterSize: '{0} fișiere ({1} în total)',
   },
   fileUpload: {
-    title: 'Drag and drop files here',
-    divider: 'or',
-    browse: 'Browse Files',
+    title: 'Trageți și plasați fișierele aici',
+    divider: 'sau',
+    browse: 'Răsfoiți fișiere',
   },
   timePicker: {
     am: 'AM',
     pm: 'PM',
-    title: 'Select Time',
+    title: 'Selectați ora',
   },
   pagination: {
     ariaLabel: {
@@ -91,17 +91,30 @@ export default {
     },
   },
   stepper: {
-    next: 'Next',
-    prev: 'Previous',
+    next: 'Următor',
+    prev: 'Înapoi',
   },
   rating: {
     ariaLabel: {
-      item: 'Rating de {0} din {1}',
+      item: 'Evaluare {0} din {1}',
     },
   },
   loading: 'Se încarcă...',
   infiniteScroll: {
     loadMore: 'Încarcă mai multe',
     empty: 'Nu mai există',
+  },
+  rules: {
+    required: 'Acest câmp este obligatoriu',
+    email: 'Vă rugăm să introduceți o adresă de email validă',
+    number: 'Acest câmp poate conține doar numere',
+    integer: 'Acest câmp poate conține doar valori întregi',
+    capital: 'Acest câmp poate conține doar litere mari',
+    maxLength: 'Trebuie să introduceți maximum {0} caractere',
+    minLength: 'Trebuie să introduceți minimum {0} caractere',
+    strictLength: 'Lungimea câmpului introdus este invalidă',
+    exclude: 'Caracterele {0} nu sunt permise',
+    notEmpty: 'Vă rugăm să alegeți cel puțin o valoare',
+    pattern: 'Format invalid',
   },
 }

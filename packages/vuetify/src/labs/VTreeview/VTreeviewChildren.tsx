@@ -2,9 +2,9 @@
 import { VTreeviewGroup } from './VTreeviewGroup'
 import { VTreeviewItem } from './VTreeviewItem'
 import { VCheckboxBtn } from '@/components/VCheckbox'
-import { VDivider } from '@/components/VDivider'
 
 // Composables
+import { makeDensityProps } from '@/composables/density'
 import { IconValue } from '@/composables/icons'
 
 // Utilities
@@ -30,9 +30,6 @@ export type VTreeviewChildrenSlots<T> = {
     item: T
     internalItem: InternalListItem<T>
   }
-  divider: { props: InternalListItem['props'] }
-  subheader: { props: InternalListItem['props'] }
-  header: { props: InternalListItem['props'] }
 }
 
 export const makeVTreeviewChildrenProps = propsFactory({
@@ -57,6 +54,8 @@ export const makeVTreeviewChildrenProps = propsFactory({
   selectable: Boolean,
   selectedColor: String,
   selectStrategy: [String, Function, Object] as PropType<SelectStrategyProp>,
+
+  ...makeDensityProps(),
 }, 'VTreeviewChildren')
 
 export const VTreeviewChildren = genericComponent<new <T extends InternalListItem>(
@@ -94,12 +93,6 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
     }
 
     return () => slots.default?.() ?? props.items?.map(item => {
-      if (item.type === 'divider') {
-        return slots.divider?.({ props: item.props }) ?? (
-          <VDivider { ...item.props } />
-        )
-      }
-
       const { children, props: itemProps } = item
       const loading = isLoading.has(item.value)
       const slotsWithItem = {
@@ -113,6 +106,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
                   disabled={ props.disabled }
                   loading={ loading }
                   color={ props.selectedColor }
+                  density={ props.density }
                   indeterminate={ slotProps.isIndeterminate }
                   indeterminateIcon={ props.indeterminateIcon }
                   falseIcon={ props.falseIcon }

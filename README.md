@@ -29,7 +29,7 @@
 
 ### 💖 Supporting Vuetify
 
-Vuetify is a [MIT licensed](http://opensource.org/licenses/MIT) project that is developed and maintained full-time by [John Leider](https://github.com/johnleider) and [Heather Leider](https://github.com/heatherleider); with support from the entire [Core Team](https://vuetifyjs.com/about/meet-the-team/). Sponsor Vuetify and receive some **awesome perks** and support Open Source Software at the same time! 🎉
+Vuetify is a [MIT licensed](http://opensource.org/licenses/MIT) project that is developed and maintained by the [Core Team](https://vuetifyjs.com/about/meet-the-team/). Sponsor Vuetify and receive some **awesome perks** and support Open Source Software at the same time! 🎉
 
 <ul>
   <li>
@@ -53,7 +53,7 @@ Vuetify is a [MIT licensed](http://opensource.org/licenses/MIT) project that is 
 
 ### What's the difference between GitHub Sponsors, Patreon, and OpenCollective?
 
-Funds donated through GitHub Sponsors and Patreon go directly to support John and Heather's full-time work on Vuetify. Funds donated via Open Collective are managed with transparent expenses and will be used for compensating work and expenses for Core team members. Your name/logo will receive proper recognition and exposure by donating on either platform.
+Funds donated through GitHub Sponsors and Patreon directly support [John Leider](https://github.com/sponsors/johnleider) and the ongoing development and maintenance of Vuetify. Funds donated via Open Collective are managed with transparent expenses and will be used for compensating work and expenses for Core team members. Your name/logo will receive proper recognition and exposure by donating on either platform.
 
 <h3><b>Special Sponsor</b></h3>
 
@@ -98,11 +98,6 @@ Funds donated through GitHub Sponsors and Patreon go directly to support John an
 <table>
   <tbody>
     <tr>
-      <td>
-        <a href="http://crossword-solver.io/">
-          <img height="35px" src="https://cdn.cosmicjs.com/098aa4e0-9749-11eb-bf6a-1ffd0f06b0f7-crossword-solver-logo-light.svg">
-        </a>
-      </td>
       <td style="text-align: center;">
         <a href="https://www.muenchen.de/">
           <img height="30px" src="https://imgix.cosmicjs.com/af2ce530-eaa2-11ed-ba82-019c4666da06-itm-logo.png">
@@ -118,32 +113,19 @@ Funds donated through GitHub Sponsors and Patreon go directly to support John an
           <img height="30px" src="https://cdn.vuetifyjs.com/images/backers/vuemastery.svg">
         </a>
       </td>
-    </tr>
-    <tr></tr>
-    <tr>
       <td>
         <a href="https://views4you.com/buy-instagram-followers/">
           <img height="30px" src="https://cdn.cosmicjs.com/861b0ce0-50e4-11ef-b1ea-f56c65dfade9-views-4-you-light.png">
         </a>
       </td>
-      <td>
-        <a href="https://uk.nongamstopcasinos.net/">
-          <img height="30px" src="https://cdn.cosmicjs.com/dddf2570-6925-11ef-a492-5bdc7520fe60-logo_dark-bg.png.webp">
-        </a>
-      </td>
-      <td style="text-align: center;">
-        <a href="https://poprey.com/buy-instagram-followers">
-          <img height="30px" src="https://cdn.cosmicjs.com/69ea08d0-7b20-11ef-915f-61acd7484848-256-1.png">
-        </a>
-      </td>
+    </tr>
+    <tr></tr>
+    <tr>
       <td>
         <a href="https://www.mediamister.com/">
           <img height="30px" src="https://cdn.cosmicjs.com/750cbe80-8d34-11ef-b5a0-93db72e2be98-logo-1.svg">
         </a>
       </td>
-    </tr>
-    <tr></tr>
-    <tr>
       <td style="text-align: center;">
         <a href="https://www.slotozilla.com/">
           <img height="30px" src="https://cdn.cosmicjs.com/21525470-ab03-11ef-bee4-3bb1d3c55332-256-2.png">
@@ -154,7 +136,6 @@ Funds donated through GitHub Sponsors and Patreon go directly to support John an
           <img height="30px" src="https://cdn.cosmicjs.com/5b16bd20-afab-11ef-bee4-3bb1d3c55332-wordtips-light.svg">
         </a>
       </td>
-      <td></td>
       <td></td>
     </tr>
   </tbody>
@@ -344,6 +325,9 @@ For help and support questions, please use our [Discord community](https://commu
 Use our [Issue generator](https://issues.vuetifyjs.com) to report bugs and request new features.
 
 Please make sure to read the [Important Information](https://github.com/vuetifyjs/vuetify/blob/master/.github/CONTRIBUTING.md#important-information) before opening an issue. Issues not confirming to the guidelines may be closed immediately.
+
+2️⃣ Vuetify 2 Support
+Vuetify 2 is now End Of Life (EOL) and is no longer supported, even for security issues. Commercial support for this version is available from our partner, [HeroDevs](https://www.herodevs.com/support/vuetify-nes?utm_source=partnership&utm_medium=partnership&utm_campaign=partnership&utm_id=vuetify2).
 
 ### 📝 Changelog
 

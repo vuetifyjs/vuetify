@@ -103,7 +103,7 @@
           </v-col>
 
           <v-col
-            v-if="(!user.disableAds || (user.showHouseAds && spot.spot.sponsor === 'Vuetify')) && spot.spot"
+            v-if="spot.spot && (!user.disableAds || (user.showHouseAds && spot.spot.sponsor === 'Vuetify'))"
             cols="12"
           >
             <a
@@ -132,7 +132,7 @@
   const frontmatter = useFrontmatter()
 
   const activeStack = [] as string[]
-  const activeItem = ref('')
+  const activeItem = shallowRef('')
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {

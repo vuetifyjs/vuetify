@@ -417,6 +417,11 @@ $utilities: () !default;
         class: border,
         values: variables.$borders
       ),
+      "border-current": (
+        property: border-color,
+        class: border,
+        values: (current: currentColor)
+      ),
       "border-opacity": (
         property: --v-border-opacity,
         class: border-opacity,

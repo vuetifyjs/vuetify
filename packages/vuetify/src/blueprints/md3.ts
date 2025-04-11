@@ -39,6 +39,19 @@ export const md3: Blueprint = {
     VCombobox: {
       variant: 'filled',
     },
+    VDatePicker: {
+      controlHeight: 48,
+      color: 'primary',
+      divided: true,
+      headerColor: '',
+      elevation: 3,
+      rounded: 'xl',
+
+      VBtn: {
+        color: 'high-emphasis',
+        rounded: 'circle',
+      },
+    },
     VNavigationDrawer: {
       // VList: {
       //   nav: true,

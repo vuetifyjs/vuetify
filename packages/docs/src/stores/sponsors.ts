@@ -7,10 +7,6 @@ export interface Sponsor {
   title: string
 }
 
-export type RootState = {
-  sponsors: Sponsor[]
-}
-
 export const useSponsorsStore = defineStore('sponsors', () => {
   const sponsors = ref<Sponsor[]>([])
 

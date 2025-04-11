@@ -1,5 +1,5 @@
 {
   "props": {
-    "fluid": "Removes viewport maximum-width size breakpoints."
+    "fluid": "Removes indentation from nested items."
   }
 }

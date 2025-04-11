@@ -8,6 +8,8 @@ related:
   - /styles/transitions/
   - /getting-started/wireframes/
 features:
+  github: /composables/theme.ts
+  label: 'E: theme'
   report: true
 ---
 
@@ -30,11 +32,7 @@ Customize your application's default text colors, surfaces, and more. Easily mod
 
 ## Setup
 
-Vuetify comes with two themes pre-installed, `light` and `dark`. To set the default theme of your application, use the **defaultTheme** option.
-
-### Javascript
-
-Example with only the **defaultTheme** value
+Vuetify includes three built-in themes: **light**, **dark**, and **system**. Use the **defaultTheme** option to specify your application's default theme. The following example sets the default theme to **dark**:
 
 ```js { resource="src/plugins/vuetify.js" }
 import { createApp } from 'vue'
@@ -42,12 +40,138 @@ import { createVuetify } from 'vuetify'
 
 export default createVuetify({
   theme: {
-    defaultTheme: 'dark'
-  }
+    defaultTheme: 'dark', // 'light' | 'dark' | 'system'
+  },
 })
 ```
 
+## Changing theme
+
+The theme instance has 3 functions to change the theme:
+
+- **change**: Change to a specific name
+- **toggle**: Toggle between two themes / defaults to light and dark
+- **cycle**: Cycle between all or a specific subset of themes in any order
+
+```html
+<template>
+  <v-app>
+    <v-main>
+      <v-container>
+        <!-- Toggle between Light / Dark -->
+        <v-btn
+          @click="theme.toggle()"
+          text="Toggle Light / Dark"
+        ></v-btn>
+
+        <!-- Change to a specific theme -->
+        <v-btn
+          @click="theme.change('dark')"
+          text="Change to Dark"
+        ></v-btn>
+
+        <!-- Cycle between all themes -->
+        <v-btn
+          @click="theme.cycle()"
+          text="Cycle All Themes"
+        ></v-btn>
+
+        <!-- Cycle between specific themes -->
+        <v-btn
+          @click="theme.cycle(['custom', 'light', 'system'])"
+          text="Cycle Specific Themes"
+        ></v-btn>
+      </v-container>
+    </v-main>
+  </v-app>
+</template>
+
+<script setup>
+  import { useTheme } from 'vuetify'
+
+  const theme = useTheme()
+</script>
+```
+
+<details>
+<summary>Usage before v3.9</summary>
+
+In versions before v3.9, you manually change the global name value on the theme instance:
+
+```html { resource="src/App.vue" }
+<template>
+  <v-app>
+    <v-btn @click="toggleTheme">toggle theme</v-btn>
+    ...
+  </v-app>
+</template>
+
+<script setup>
+import { useTheme } from 'vuetify'
+
+const theme = useTheme()
+
+function toggleTheme () {
+  theme.global.name.value = theme.global.current.value.dark ? 'light' : 'dark'
+}
+</script>
+```
+
+</details>
+
+<br>
+
+You should keep in mind that most of the Vuetify components support the **theme** prop. When used a new context is created for _that_ specific component and **all** of its children. In the following example, the [v-btn](/components/buttons/) uses the **dark** theme because it is applied to its parent [v-card](/components/cards/).
+
+```html
+<template>
+  <v-app>
+    <v-card theme="dark">
+      <!-- button uses dark theme -->
+      <v-btn>foo</v-btn>
+    </v-card>
+  </v-app>
+</template>
+```
+
+You can use the `<v-theme-provider>` component to dynamically apply different themes to larger sections of your application, without having to set the **theme** prop on each individual component. In the following example, we apply a custom theme named `high-contrast`.
+
+```html
+<template>
+  <v-app>
+    <!-- uses the current default theme -->
+    <v-card>...</v-card>
+
+    <v-theme-provider theme="high-contrast">
+      <!-- uses the high-contrast theme -->
+      <v-card>...</v-card>
+      <v-btn>...</v-btn>
+    </v-theme-provider>
+  </v-app>
+</template>
+```
+
+### System theme
+
+<DocIntroduced version="3.9.0" />
+
+The **system** theme uses the user's system preference for 'light' or 'dark' mode, based on the **prefers-color-scheme** media query. It is evaluated at run-time and reacts to changes in the user's system preference.
+
+```js { resource="src/plugins/vuetify.js" }
+import { createApp } from 'vue'
+import { createVuetify } from 'vuetify'
+
+export default createVuetify({
+  theme: {
+    defaultTheme: 'system',
+  },
+})
+```
+
+## Custom themes
+
 Adding new themes is as easy as defining a new property in the **theme.themes** object. A theme is a collection of colors and options that change the overall look and feel of your application. One of these options designates the theme as being either a **light** or **dark** variation.
+
 This makes it possible for Vuetify to implement Material Design concepts such as elevated surfaces having a lighter overlay color the higher up they are. Find out more about dark themes on the official [Material Design](https://material.io/design/color/dark-theme.html) page.
 
 ```js { resource="src/plugins/vuetify.js" }
@@ -100,106 +224,6 @@ export default createVuetify({
     },
   },
 })
-```
-
-### Typescript
-
-Example with only the **defaultTheme** value
-
-```ts { resource="src/plugins/vuetify.ts" }
-import { createApp } from 'vue'
-import { createVuetify } from 'vuetify'
-
-export default createVuetify({
-  theme: {
-    defaultTheme: 'dark',
-  },
-})
-```
-
-When using Typescript you may use the `ThemeDefinition` type to get type hints for the structure of the theme object.
-
-```ts { resource="src/plugins/vuetify.ts" }
-import { createApp } from 'vue'
-import { createVuetify, type ThemeDefinition } from 'vuetify'
-
-const myCustomLightTheme: ThemeDefinition = {
-  dark: false,
-  colors: {
-    background: '#FFFFFF',
-    surface: '#FFFFFF',
-    primary: '#6200EE',
-    'primary-darken-1': '#3700B3',
-    secondary: '#03DAC6',
-    'secondary-darken-1': '#018786',
-    error: '#B00020',
-    info: '#2196F3',
-    success: '#4CAF50',
-    warning: '#FB8C00',
-  },
-}
-
-export default createVuetify({
-  theme: {
-    defaultTheme: 'myCustomLightTheme',
-    themes: {
-      myCustomLightTheme,
-    },
-  },
-})
-```
-
-## Changing theme
-
-This is used when you need to change the theme during runtime
-
-```html { resource="src/App.vue" }
-<template>
-  <v-app>
-    <v-btn @click="toggleTheme">toggle theme</v-btn>
-    ...
-  </v-app>
-</template>
-
-<script setup>
-import { useTheme } from 'vuetify'
-
-const theme = useTheme()
-
-function toggleTheme () {
-  theme.global.name.value = theme.global.current.value.dark ? 'light' : 'dark'
-}
-</script>
-```
-
-You should keep in mind that most of the Vuetify components support the **theme** prop. When used a new context is created for _that_ specific component and **all** of its children. In the following example, the [v-btn](/components/buttons/) uses the **dark** theme because it is applied to its parent [v-card](/components/cards/).
-
-```html
-<template>
-  <v-app>
-    <v-card theme="dark">
-      <!-- button uses dark theme -->
-      <v-btn>foo</v-btn>
-    </v-card>
-  </v-app>
-</template>
-```
-
-You can use the `<v-theme-provider>` component to dynamically apply different themes to larger sections of your application, without having to set the **theme** prop on each individual component. In the following example, we apply a custom theme named `high-contrast`.
-
-```html
-<template>
-  <v-app>
-    <!-- uses the current default theme -->
-    <v-card>...</v-card>
-
-    <v-theme-provider theme="high-contrast">
-      <!-- uses the high-contrast theme -->
-      <v-card>...</v-card>
-      <v-btn>...</v-btn>
-    </v-theme-provider>
-  </v-app>
-</template>
 ```
 
 ## Custom theme colors
