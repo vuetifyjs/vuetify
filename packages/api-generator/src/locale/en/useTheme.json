@@ -8,8 +8,12 @@
     "global": "Reference to the global theme instance.",
     "isDisabled": "Indicates if theming is disabled.",
     "name": "Name of current theme.",
+    "prefix": "**FOR INTERNAL USE ONLY**",
+    "scoped": "**FOR INTERNAL USE ONLY**",
     "styles": "**FOR INTERNAL USE ONLY**",
     "themeClasses": "**FOR INTERNAL USE ONLY**",
-    "themes": "Raw theme definitions."
+    "themes": "Raw theme definitions.",
+    "unimportant": "Generate utility classes without the !important declaration.",
+    "utilities": "**FOR INTERNAL USE ONLY**"
   }
 }

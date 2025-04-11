@@ -273,4 +273,56 @@ describe('createTheme', () => {
     expect(consoleMock).toHaveBeenCalledWith('[Vue warn]: Vuetify: Theme "nonexistent" not found on the Vuetify theme instance')
     consoleMock.mockReset()
   })
+
+  it('should generate utility classes without !important', async () => {
+    const theme = createTheme({ unimportant: true })
+
+    theme.install(app)
+
+    const stylesheet = document.getElementById('vuetify-theme-stylesheet')
+    const css = stylesheet!.innerHTML
+
+    expect(css).not.toContain('!important')
+  })
+
+  it('should generate utility classes with a custom prefix', async () => {
+    // @ts-expect-error next-line
+    const theme = createTheme({ prefix: 'custom-' })
+
+    theme.install(app)
+
+    const stylesheet = document.getElementById('vuetify-theme-stylesheet')
+    const css = stylesheet!.innerHTML
+
+    expect(css).not.toContain('--v-theme-primary')
+    expect(css).toContain('--custom-theme-primary')
+  })
+
+  it('should use defined prefix for utility classes', async () => {
+    // @ts-expect-error next-line
+    const theme = createTheme({ prefix: 'custom-', scoped: true })
+
+    theme.install(app)
+
+    const stylesheet = document.getElementById('vuetify-theme-stylesheet')
+    const css = stylesheet!.innerHTML
+
+    expect(css).toContain('.custom-bg-primary')
+    expect(css).toContain('.custom-text-primary')
+    expect(css).toContain('.custom-border-primary')
+  })
+
+  it('should not generate utility classes if disabled', async () => {
+    // @ts-expect-error next-line
+    const theme = createTheme({ utilities: false })
+
+    theme.install(app)
+
+    const stylesheet = document.getElementById('vuetify-theme-stylesheet')
+    const css = stylesheet!.innerHTML
+
+    expect(css).not.toContain('.bg-primary')
+    expect(css).not.toContain('.text-primary')
+    expect(css).not.toContain('.border-primary')
+  })
 })
