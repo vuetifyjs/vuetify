@@ -58,6 +58,7 @@ export const makeStepperProps = propsFactory({
     type: Array as PropType<readonly StepperItem[]>,
     default: () => ([]),
   },
+  itemProps: Boolean,
   itemTitle: {
     type: String,
     default: 'title',
@@ -99,10 +100,18 @@ export const VStepper = genericComponent<VStepperSlots>()({
     const items = computed(() => props.items.map((item, index) => {
       const title = getPropertyFromItem(item, props.itemTitle, item)
       const value = getPropertyFromItem(item, props.itemValue, index + 1)
+      const itemProps = props.itemProps ? item : getPropertyFromItem(item, props.itemProps)
 
-      return {
+      const _props = {
         title,
         value,
+        ...itemProps,
+      }
+
+      return {
+        title: _props.title,
+        value: _props.value,
+        props: _props,
         raw: item,
       }
     }))
@@ -165,7 +174,7 @@ export const VStepper = genericComponent<VStepperSlots>()({
                   { !!index && (<VDivider />) }
 
                   <VStepperItem
-                    { ...item }
+                    { ...item.props }
                     v-slots={{
                       default: slots[`header-item.${item.value}`] ?? slots.header,
                       icon: slots.icon,
