@@ -28,16 +28,10 @@ export const parseSassVariables = (componentName: string) => {
   return processVariableFile(`${rootDir}/${componentName}/_variables.scss`)
 }
 
-// export function parseGlobalSassVariables () {
-//   return [
-//     './../vuetify/src/styles/settings/_colors.scss',
-//     './../vuetify/src/styles/settings/_dark.scss',
-//     './../vuetify/src/styles/settings/_elevations.scss',
-//     './../vuetify/src/styles/settings/_light.scss',
-//     './../vuetify/src/styles/settings/_theme.scss',
-//     './../vuetify/src/styles/settings/_variables.scss',
-//   ].reduce((acc, path) => {
-//     acc.push(...processVariableFile(path))
-//     return acc
-//   }, []).sort((a, b) => a.name.localeCompare(b.name))
-// }
+export function parseGlobalSassVariables () {
+  return {
+    ...processVariableFile(`./../vuetify/src/styles/settings/_variables.scss`),
+    ...processVariableFile(`./../vuetify/src/styles/settings/_colors.scss`),
+    ...processVariableFile(`./../vuetify/src/styles/settings/_elevations.scss`),
+  }
+}

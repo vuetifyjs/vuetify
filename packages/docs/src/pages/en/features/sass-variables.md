@@ -56,7 +56,7 @@ For additional details about css-pre-processors, please refer to the official vi
 
 ## Usage
 
-There are many SASS variables such as **font size**, **font family**, and **line height** that can be configured globally. An extensive list of configurable global SASS variables can be found [here](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/styles/settings/_variables.scss). To start, Follow the plugin setup guide from [treeshaking](/features/treeshaking/) then add `styles.configFile` to the plugin options:
+There are many SASS variables such as **font size**, **font family**, and **line height** that can be configured globally. An extensive list of configurable global SASS variables can be found [here](/api/globals/). To start, Follow the plugin setup guide from [treeshaking](/features/treeshaking/) then add `styles.configFile` to the plugin options:
 
 ```js { resource="vite.config.js" }
 vuetify({
@@ -100,7 +100,7 @@ Available SASS variables are located on each component's API page.
 
 ## Usage in templates
 
-You can access [global](/api/vuetify/) and per-component variables in Vue templates simply by importing the settings file:
+You can access [global](/api/globals/) and per-component variables in Vue templates simply by importing the settings file:
 
 ```html { resource="Comp1.vue" }
 <style lang="scss">

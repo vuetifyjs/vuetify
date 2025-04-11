@@ -4,6 +4,7 @@
     :custom-filter="customFilter"
     :items="variables"
     base-color="disabled"
+    item-value="id"
     placeholder="Search SASS API"
     prepend-inner-icon="mdi-database-search-outline"
     variant="outlined"
@@ -37,15 +38,15 @@
 <script setup>
   const files = import.meta.glob('../../../../api-generator/dist/api/*.json')
 
-  const variables = shallowRef([])
+  const variables = ref([])
   const model = shallowRef([])
 
   const code = computed(() => {
     const $parsed = model.value.map(variable => {
-      return `  ${variable.title}: ${variable.value}`
+      return `  ${variable.title}: ${variable.default}`
     }).join(',\n')
 
-    return `@use 'vuetify' with (\n${$parsed},\n);`
+    return `@use 'vuetify/settings' with (\n${$parsed},\n);`
   })
 
   async function getVariables (name) {
@@ -65,15 +66,16 @@
       for (const file in files) {
         const name = file.split('/').pop().split('.')[0]
 
-        if (!name.startsWith('V')) continue
+        if (!name.startsWith('V') && name !== 'globals') continue
 
         const component = await getVariables(name)
 
         for (const variable in component.sass) {
           variables.value.push({
+            default: component.sass[variable]?.default || null,
             title: variable,
-            value: component.sass[variable]?.default || null,
             subtitle: name,
+            value: `${variable}-${name}`,
           })
         }
       }

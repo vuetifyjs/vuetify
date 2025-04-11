@@ -195,6 +195,15 @@ export async function addDirectiveDescriptions (
   }
 }
 
+export function sortByKey (data: Record<string, any>) {
+  return Object.keys(data)
+    .sort()
+    .reduce((obj: Record<string, any>, key: string) => {
+      obj[key] = data[key]
+      return obj
+    }, {})
+}
+
 export function stripLinks (str: string): [string, Record<string, string>] {
   let out = str.slice()
   const obj: Record<string, string> = {}
