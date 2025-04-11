@@ -197,7 +197,9 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
         return
       }
 
-      model.value = adapter.isValid(target.value) ? target.value : null
+      if (adapter.isValid(userInput)) {
+        model.value = userInput
+      }
     }
 
     useRender(() => {
