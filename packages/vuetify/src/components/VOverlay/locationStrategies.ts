@@ -6,7 +6,6 @@ import { computed, nextTick, onScopeDispose, ref, watch } from 'vue'
 import { anchorToPoint, getOffset } from './util/point'
 import {
   clamp,
-  consoleError,
   convertToUnit,
   destructComputed,
   flipAlign,
@@ -147,6 +146,12 @@ function getIntrinsicSize (el: HTMLElement, isRtl: boolean) {
 }
 
 function connectedLocationStrategy (data: LocationStrategyData, props: StrategyProps, contentStyles: Ref<Record<string, string>>) {
+  // Prevents infinite loop
+  let retries = 0
+  // Track the last position
+  let previousX = 0
+  let previousY = 0
+
   const activatorFixed = Array.isArray(data.target.value) || isFixedPosition(data.target.value)
   if (activatorFixed) {
     Object.assign(contentStyles.value, {
@@ -214,10 +219,13 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
 
   onScopeDispose(() => {
     observer.disconnect()
+    // Reset retry on close component
+    retries = 0
   })
 
   // eslint-disable-next-line max-statements
   function updateLocation () {
+    retries++
     observe = false
     requestAnimationFrame(() => observe = true)
 
@@ -298,15 +306,11 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
     }
 
     let x = 0; let y = 0
-    const available = { x: 0, y: 0 }
     const flipped = { x: false, y: false }
-    let resets = -1
-    while (true) {
-      if (resets++ > 10) {
-        consoleError('Infinite loop detected in connectedLocationStrategy')
-        break
-      }
+    const available = { x: 0, y: 0 }
 
+    // eslint-disable-next-line no-unmodified-loop-condition
+    while (retries < 2) {
       const { x: _x, y: _y, overflows } = checkOverflow(placement)
 
       x += _x
@@ -378,6 +382,10 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
         contentBox.y += overflows.y.before
       }
 
+      // Save the last position for some reason x and y are 0 after while loop
+      previousX = x
+      previousY = y
+
       break
     }
 
@@ -387,12 +395,22 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
       '--v-overlay-anchor-origin': `${placement.anchor.side} ${placement.anchor.align}`,
       transformOrigin: `${placement.origin.side} ${placement.origin.align}`,
       // transform: `translate(${pixelRound(x)}px, ${pixelRound(y)}px)`,
-      top: convertToUnit(pixelRound(y)),
-      left: data.isRtl.value ? undefined : convertToUnit(pixelRound(x)),
-      right: data.isRtl.value ? convertToUnit(pixelRound(-x)) : undefined,
-      minWidth: convertToUnit(axis === 'y' ? Math.min(minWidth.value, targetBox.width) : minWidth.value),
-      maxWidth: convertToUnit(pixelCeil(clamp(available.x, minWidth.value === Infinity ? 0 : minWidth.value, maxWidth.value))),
-      maxHeight: convertToUnit(pixelCeil(clamp(available.y, minHeight.value === Infinity ? 0 : minHeight.value, maxHeight.value))),
+      top: convertToUnit(pixelRound(y > 0 ? y : previousY)),
+      left: data.isRtl.value ? undefined : convertToUnit(12),
+      right: data.isRtl.value ? convertToUnit(pixelRound(x > 0 ? -x : -previousX)) : undefined,
+      minWidth: convertToUnit(axis === 'y' ? Math.min(minWidth.value, targetBox.width - 28) : minWidth.value),
+      maxWidth: available.x > 0 &&
+        convertToUnit(pixelCeil(clamp(
+          available.x, minWidth.value === Infinity
+            ? 0
+            : minWidth.value, maxWidth.value))
+        ),
+      maxHeight: available.y > 0 &&
+        convertToUnit(pixelCeil(clamp(
+          available.y, minHeight.value === Infinity
+            ? 0
+            : minHeight.value, maxHeight.value))
+        ),
     })
 
     return {
@@ -414,22 +432,7 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
     () => updateLocation(),
   )
 
-  nextTick(() => {
-    const result = updateLocation()
-
-    // TODO: overflowing content should only require a single updateLocation call
-    // Icky hack to make sure the content is positioned consistently
-    if (!result) return
-    const { available, contentBox } = result
-    if (contentBox.height > available.y) {
-      requestAnimationFrame(() => {
-        updateLocation()
-        requestAnimationFrame(() => {
-          updateLocation()
-        })
-      })
-    }
-  })
+  nextTick(() => updateLocation())
 
   return { updateLocation }
 }
