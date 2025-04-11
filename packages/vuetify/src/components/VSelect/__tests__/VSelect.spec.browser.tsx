@@ -567,14 +567,27 @@ describe('VSelect', () => {
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/18556
-  it('should show menu if focused and items are added', async () => {
-    const { rerender } = render(VSelect)
+  it('should show menu if focused and items are added when hideNoData is true"', async () => {
+    const { rerender } = render(VSelect, {
+      props: { hideNoData: true },
+    })
 
     await userEvent.keyboard('{Tab}')
     expect(screen.queryByRole('listbox')).toBeNull()
 
     await rerender({ items: ['Foo', 'Bar'] })
     await expect.poll(() => screen.queryByRole('listbox')).toBeVisible()
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/21205
+  it('should not show menu if focused and items are added when hideNoData is false', async () => {
+    const { rerender } = render(VSelect)
+
+    await userEvent.keyboard('{Tab}')
+    expect(screen.queryByRole('listbox')).toBeNull()
+
+    await rerender({ items: ['Foo', 'Bar'] })
+    await expect.poll(() => screen.queryByRole('listbox')).toBeNull()
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/19346
