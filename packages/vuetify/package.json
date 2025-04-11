@@ -46,6 +46,8 @@
   "files": [
     "dist/",
     "lib/",
+    "unplugin-vue-components-resolvers/",
+    "unimport-presets/",
     "_settings.scss",
     "_styles.scss",
     "_tools.scss",
@@ -87,10 +89,18 @@
       "default": "./dist/vuetify-labs.cjs"
     },
     "./*.mjs": "./*.js",
-    "./*": "./*"
+    "./*": "./*",
+    "./unplugin-vue-components-resolvers": "./unplugin-vue-components-resolvers/index.js",
+    "./unimport-presets": "./unimport-presets/index.js"
   },
   "typesVersions": {
     "*": {
+      "unplugin-vue-components-resolvers": [
+        "unplugin-vue-components-resolvers/index.d.ts"
+      ],
+      "unimport-presets": [
+        "unimport-presets/index.d.ts"
+      ],
       "*": [
         "*",
         "dist/*",
@@ -109,7 +119,7 @@
     "dev:ssr": "NODE_ENV=development VITE_SSR=true vite-ssr",
     "dev:prod": "concurrently \"vite build -w\" \"vite preview\"",
     "dev:typecheck": "vue-tsc --noEmit --skipLibCheck --project ./tsconfig.dev.json",
-    "build": "rimraf lib dist && concurrently \"pnpm run build:dist\" \"pnpm run build:lib\" -n \"dist,lib\" --kill-others-on-fail -r && pnpm run build:types",
+    "build": "rimraf lib dist unplugin-vue-components-resolvers unimport-presets && concurrently \"pnpm run build:dist\" \"pnpm run build:lib\" -n \"dist,lib\" --kill-others-on-fail -r && pnpm run build:types",
     "build:dist": "rollup --config build/rollup.config.js",
     "build:lib": "NODE_ENV=lib babel src --out-dir lib --source-maps --extensions \".ts\",\".tsx\",\".snap\" --copy-files --no-copy-ignored --out-file-extension .js",
     "build:types": "tspc --pretty --emitDeclarationOnly -p tsconfig.dist.json && node build/transform-types.js && rollup --config build/rollup.types.config.js",
@@ -187,8 +197,9 @@
     "ts-node": "^10.9.2",
     "ts-patch": "^3.2.1",
     "typescript-transform-paths": "^3.5.1",
+    "unimport": "^4.1.2",
     "unplugin-auto-import": "19.1.0",
-    "unplugin-vue-components": "^0.27.4",
+    "unplugin-vue-components": "^28.4.1",
     "upath": "^2.0.1",
     "vite": "^6.1.0",
     "vite-ssr": "^0.17.1",

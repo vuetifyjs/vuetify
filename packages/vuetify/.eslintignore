@@ -9,5 +9,7 @@
 /lib-temp/
 /dist/
 /cypress/
+/unimport-presets/
+/unplugin-vue-components-resolvers/
 *.spec.cy.ts
 *.spec.cy.tsx
