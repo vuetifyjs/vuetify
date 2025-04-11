@@ -2,7 +2,8 @@
   "props": {
     "alwaysDirty": "When used with the **thumb-label** prop will always show the thumb label.",
     "inverseLabel": "Reverse the label position. Works with **rtl**.",
-    "vertical": "Changes slider direction to vertical."
+    "vertical": "Changes slider direction to vertical.",
+    "trackDisabled": "Disables clicking on the slider track"
   },
   "slots": {
     "thumb-label": "Slot for the thumb label.",
