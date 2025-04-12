@@ -148,9 +148,6 @@ function getIntrinsicSize (el: HTMLElement, isRtl: boolean) {
 function connectedLocationStrategy (data: LocationStrategyData, props: StrategyProps, contentStyles: Ref<Record<string, string>>) {
   // Prevents infinite loop
   let retries = 0
-  // Track the last position
-  let previousX = 0
-  let previousY = 0
 
   const activatorFixed = Array.isArray(data.target.value) || isFixedPosition(data.target.value)
   if (activatorFixed) {
@@ -310,7 +307,7 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
     const available = { x: 0, y: 0 }
 
     // eslint-disable-next-line no-unmodified-loop-condition
-    while (retries < 2) {
+    while (retries < 4) {
       const { x: _x, y: _y, overflows } = checkOverflow(placement)
 
       x += _x
@@ -382,10 +379,6 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
         contentBox.y += overflows.y.before
       }
 
-      // Save the last position for some reason x and y are 0 after while loop
-      previousX = x
-      previousY = y
-
       break
     }
 
@@ -395,10 +388,10 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
       '--v-overlay-anchor-origin': `${placement.anchor.side} ${placement.anchor.align}`,
       transformOrigin: `${placement.origin.side} ${placement.origin.align}`,
       // transform: `translate(${pixelRound(x)}px, ${pixelRound(y)}px)`,
-      top: convertToUnit(pixelRound(y > 0 ? y : previousY)),
-      left: data.isRtl.value ? undefined : convertToUnit(12),
-      right: data.isRtl.value ? convertToUnit(pixelRound(x > 0 ? -x : -previousX)) : undefined,
-      minWidth: convertToUnit(axis === 'y' ? Math.min(minWidth.value, targetBox.width - 28) : minWidth.value),
+      top: y !== 0 && convertToUnit(pixelRound(y)),
+      left: data.isRtl.value ? undefined : x !== 0 && convertToUnit((x)),
+      right: data.isRtl.value ? x !== 0 && convertToUnit(pixelRound(-x)) : undefined,
+      minWidth: convertToUnit(axis === 'y' ? Math.min(minWidth.value, targetBox.width) : minWidth.value),
       maxWidth: available.x > 0 &&
         convertToUnit(pixelCeil(clamp(
           available.x, minWidth.value === Infinity
