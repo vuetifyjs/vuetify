@@ -54,7 +54,7 @@ export const makeVDatePickerMonthProps = propsFactory({
   },
   eventColor: {
     type: [Array, Function, Object, String] as PropType<DatePickerEventColors>,
-    default: () => 'warning',
+    default: () => null,
   },
   ...omit(makeCalendarProps(), ['displayValue']),
 }, 'VDatePickerMonth')
@@ -167,31 +167,40 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
       }
     }
     function getEventColors (date: string): string[] {
+      const { events, eventColor } = props
       let eventData: boolean | DatePickerEventColorValue
       let eventColors: string[] = []
-      if (Array.isArray(props.events)) {
-        eventData = props.events.includes(date)
-      } else if (props.events instanceof Function) {
-        eventData = props.events(date) || false
-      } else if (props.events) {
-        eventData = props.events[date] || false
+
+      if (Array.isArray(events)) {
+        eventData = events.includes(date)
+      } else if (events instanceof Function) {
+        eventData = events(date) || false
+      } else if (events) {
+        eventData = events[date] || false
       } else {
         eventData = false
       }
+
       if (!eventData) {
         return []
       } else if (eventData !== true) {
         eventColors = wrapInArray(eventData)
-      } else if (typeof props.eventColor === 'string') {
-        eventColors = [props.eventColor]
-      } else if (typeof props.eventColor === 'function') {
-        eventColors = wrapInArray(props.eventColor(date))
-      } else if (Array.isArray(props.eventColor)) {
-        eventColors = props.eventColor
-      } else {
-        eventColors = wrapInArray(props.eventColor[date])
+      } else if (typeof eventColor === 'string') {
+        eventColors = [eventColor]
+      } else if (typeof eventColor === 'function') {
+        eventColors = wrapInArray(eventColor(date))
+      } else if (Array.isArray(eventColor)) {
+        eventColors = eventColor
+      } else if (typeof eventColor === 'object' && eventColor !== null) {
+        eventColors = wrapInArray(eventColor[date])
       }
-      return eventColors.filter(v => v)
+
+      // Fallback to default color if no color is found
+      if (!eventColors.length) {
+        eventColors = ['surface-variant']
+      }
+
+      return eventColors.filter(Boolean)
     }
 
     function genEvents (date: string): JSX.Element | null {
@@ -201,11 +210,7 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
 
       return (
         <div class="v-date-picker-month__events">
-          { eventColors.map((color: string) => {
-            return (
-              <VBadge dot color={ color } />
-            )
-          })}
+          { eventColors.map((color: string) => <VBadge dot color={ color } />) }
         </div>
       )
     }

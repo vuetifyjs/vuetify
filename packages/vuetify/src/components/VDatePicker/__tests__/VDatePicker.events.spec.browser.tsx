@@ -55,4 +55,22 @@ describe('VDatePicker events', () => {
     const eventElements = document.querySelectorAll('.v-badge')
     expect(eventElements.length).toBeGreaterThan(0)
   })
+
+  it('uses default color when eventColor is null', async () => {
+    render(() => (
+      <VDatePicker
+        type="month"
+        events={{ '2025-04-09': true }}
+        eventColor={null}
+      />
+    ))
+  
+    const eventElements = document.querySelectorAll('.v-badge')
+    expect(eventElements.length).toBeGreaterThan(0)
+  
+    const hasSurfaceVariant = Array.from(eventElements).some(el => 
+      el.querySelector('.v-badge__badge')?.classList.contains('bg-surface-variant')
+    )
+    expect(hasSurfaceVariant).toBe(true)
+  })
 })
