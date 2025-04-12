@@ -89,12 +89,15 @@ export const makeSelectProps = propsFactory({
   },
   openOnClear: Boolean,
   itemColor: String,
+  autoScroll: Boolean,
 
   ...makeItemsProps({ itemChildren: false }),
 }, 'Select')
 
 export const makeVSelectProps = propsFactory({
-  ...makeSelectProps(),
+  ...makeSelectProps({
+    autoScroll: true,
+  }),
   ...omit(makeVTextFieldProps({
     modelValue: null,
     role: 'combobox',
@@ -119,7 +122,8 @@ export const VSelect = genericComponent<new <
     returnObject?: ReturnObject
     multiple?: Multiple
     modelValue?: V | null
-    'onUpdate:modelValue'?: (value: V) => void
+    'onUpdate:modelValue'?: (value: V) => void,
+    autoScroll?: boolean,
   },
   slots: Omit<VInputSlots & VFieldSlots, 'default'> & {
     item: { item: ListItem<Item>, index: number, props: Record<string, unknown> }
@@ -259,9 +263,14 @@ export const VSelect = genericComponent<new <
           model.value = [item]
         }
         const index = displayItems.value.indexOf(item)
+
         if (~index && IN_BROWSER) {
           listRef.value?.focus(index)
         }
+
+        IN_BROWSER && props.hideSelected && window.requestAnimationFrame(() => {
+          index >= 0 && vVirtualScrollRef.value?.scrollToIndex(index)
+        })
       }
     }
 
@@ -324,7 +333,7 @@ export const VSelect = genericComponent<new <
         const index = displayItems.value.findIndex(
           item => model.value.some(s => (props.valueComparator || deepEqual)(s.value, item.value))
         )
-        IN_BROWSER && window.requestAnimationFrame(() => {
+        IN_BROWSER && props.autoScroll && window.requestAnimationFrame(() => {
           index >= 0 && vVirtualScrollRef.value?.scrollToIndex(index)
         })
       }
