@@ -177,6 +177,7 @@
     "micromatch": "^4.0.5",
     "moment": "^2.30.1",
     "postcss": "^8.4.38",
+    "resize-observer-polyfill": "^1.5.1",
     "roboto-fontface": "^0.10.0",
     "rollup": "^4.34.8",
     "rollup-plugin-dts": "^6.1.0",

@@ -4,13 +4,7 @@ import { VDateInput } from '../VDateInput'
 import { mount } from '@vue/test-utils'
 import { createVuetify } from '@/framework'
 
-// Mock ResizeObserver
-class ResizeObserver {
-  observe () {}
-  unobserve () {}
-  disconnect () {}
-}
-global.ResizeObserver = ResizeObserver
+global.ResizeObserver = require('resize-observer-polyfill')
 
 describe('VDateInput', () => {
   const vuetify = createVuetify()
