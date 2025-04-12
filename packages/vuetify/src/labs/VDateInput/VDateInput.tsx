@@ -44,7 +44,9 @@ export const makeVDateInputProps = propsFactory({
     default: () => ['blur', 'enter'],
   },
 
-  ...makeDisplayProps(),
+  ...makeDisplayProps({
+    mobile: null,
+  }),
   ...makeFocusProps(),
   ...makeVConfirmEditProps({
     hideActions: true,
