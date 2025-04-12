@@ -4,10 +4,6 @@ import { VDateInput } from '../VDateInput'
 import { mount } from '@vue/test-utils'
 import { createVuetify } from '@/framework'
 
-// Types
-import type { VueWrapper } from '@vue/test-utils'
-import type { ComponentPublicInstance } from 'vue'
-
 // Mock ResizeObserver
 class ResizeObserver {
   observe () {}
@@ -31,7 +27,7 @@ describe('VDateInput', () => {
       modelValue?: string | null
     }
 
-    function mountFunction (options: MountOptions = {}): VueWrapper<ComponentPublicInstance> {
+    function mountFunction (options: MountOptions = {}) {
       return mount(VDateInput, {
         global: {
           plugins: [vuetify],
