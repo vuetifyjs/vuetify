@@ -97,7 +97,7 @@ function createInstance (options: InternalDateOptions, locale: LocaleInstance) {
       ? new options.adapter({
         locale: options.locale[locale.current.value] ?? locale.current.value,
         formats: options.formats,
-        functions: options.functions
+        functions: options.functions,
       })
       : options.adapter
   )
