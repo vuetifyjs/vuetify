@@ -1,5 +1,5 @@
 // Utilities
-import { eventName, isOn } from '@/util/helpers'
+import { eventName, isOn } from '@vuetify/shared'
 
 const handlers = new WeakMap<HTMLElement, Set<[string, () => void]>>()
 

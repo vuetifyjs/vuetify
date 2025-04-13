@@ -1,7 +1,7 @@
 // Utilities
+import { mergeDeep, toKebabCase } from '@vuetify/shared'
 import { computed, inject, provide, ref, shallowRef, unref, watchEffect } from 'vue'
 import { getCurrentInstance } from '@/util/getCurrentInstance'
-import { mergeDeep, toKebabCase } from '@/util/helpers'
 import { injectSelf } from '@/util/injectSelf'
 
 // Types

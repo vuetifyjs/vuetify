@@ -1,5 +1,5 @@
 // Utilities
-import { isOn } from '@/util/helpers'
+import { isOn } from '@vuetify/shared'
 
 type EventHandler = (event: Event) => any
 

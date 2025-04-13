@@ -1,5 +1,5 @@
 // Utilities
-import { clamp } from '@/util/helpers'
+import { clamp } from '@vuetify/shared'
 
 // Types
 import type { RGB, XYZ } from '../colorUtils'

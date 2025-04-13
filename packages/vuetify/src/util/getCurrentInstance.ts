@@ -1,6 +1,6 @@
 // Utilities
+import { toKebabCase } from '@vuetify/shared'
 import { getCurrentInstance as _getCurrentInstance } from 'vue'
-import { toKebabCase } from '@/util/helpers'
 
 export function getCurrentInstance (name: string, message?: string) {
   const vm = _getCurrentInstance()

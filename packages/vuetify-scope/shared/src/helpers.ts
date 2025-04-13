@@ -1,6 +1,6 @@
 // Utilities
 import { capitalize, Comment, computed, Fragment, isVNode, reactive, shallowRef, toRefs, unref, watchEffect } from 'vue'
-import { IN_BROWSER } from '@/util/globals'
+import { IN_BROWSER } from './globals'
 
 // Types
 import type {
@@ -534,15 +534,24 @@ export function findChildrenWithProvide (
 
   if (Array.isArray(vnode)) {
     return vnode.map(child => findChildrenWithProvide(key, child)).flat(1)
-  } else if (vnode.suspense) {
-    return findChildrenWithProvide(key, vnode.ssContent!)
-  } else if (Array.isArray(vnode.children)) {
-    return vnode.children.map(child => findChildrenWithProvide(key, child)).flat(1)
-  } else if (vnode.component) {
-    if (Object.getOwnPropertySymbols(vnode.component.provides).includes(key as symbol)) {
-      return [vnode.component]
-    } else if (vnode.component.subTree) {
-      return findChildrenWithProvide(key, vnode.component.subTree).flat(1)
+  } else if (isVNode(vnode) && vnode.type !== Comment) {
+    // Fix for ssContent
+    if ('suspense' in vnode && vnode.suspense && 'ssContent' in vnode.suspense) {
+      // Cast the suspense content to VNodeChild to fix the type error
+      return findChildrenWithProvide(key, vnode.suspense.ssContent as VNodeChild)
+    } else if (Array.isArray(vnode.children)) {
+      return vnode.children.map(child => findChildrenWithProvide(key, child)).flat(1)
+    } else if (vnode.component) {
+      // Fix for provides
+      if (
+        'provides' in vnode.component &&
+        vnode.component.provides &&
+        Object.getOwnPropertySymbols(vnode.component.provides).includes(key as symbol)
+      ) {
+        return [vnode.component]
+      } else if (vnode.component.subTree) {
+        return findChildrenWithProvide(key, vnode.component.subTree).flat(1)
+      }
     }
   }
 
@@ -652,7 +661,9 @@ export function focusChild (el: Element, location?: 'next' | 'prev' | 'first' | 
   } else if (location === 'first') {
     focusable[0]?.focus()
   } else if (location === 'last') {
-    focusable.at(-1)?.focus()
+    // Replace at(-1) with length-1 indexing for better compatibility
+    const lastElement = focusable.length > 0 ? focusable[focusable.length - 1] : undefined
+    lastElement?.focus()
   } else if (typeof location === 'number') {
     focusable[location]?.focus()
   } else {

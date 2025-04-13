@@ -1,4 +1,5 @@
 // Utilities
+import { has } from '@vuetify/shared'
 import {
   HexToHSV,
   HSLtoHSV,
@@ -7,7 +8,6 @@ import {
   HSVtoRGB,
   RGBtoHSV,
 } from '@/util/colorUtils'
-import { has } from '@/util/helpers'
 
 // Types
 import type { HSL, HSV, RGB } from '@/util/colorUtils'

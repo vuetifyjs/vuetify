@@ -13,5 +13,6 @@
     }
   },
   "npmClient": "pnpm",
-  "version": "3.8.1"
+  "version": "3.8.1",
+  "packages": ["packages/*", "packages/vuetify-scope/*"]
 }

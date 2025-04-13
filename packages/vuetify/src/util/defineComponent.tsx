@@ -2,11 +2,11 @@
 import { injectDefaults, internalUseDefaults } from '@/composables/defaults'
 
 // Utilities
+import { pick } from '@vuetify/shared'
 import {
   defineComponent as _defineComponent, // eslint-disable-line no-restricted-imports
 } from 'vue'
 import { consoleWarn } from '@/util/console'
-import { pick } from '@/util/helpers'
 import { propsFactory } from '@/util/propsFactory'
 
 // Types
