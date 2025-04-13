@@ -535,14 +535,11 @@ export function findChildrenWithProvide (
   if (Array.isArray(vnode)) {
     return vnode.map(child => findChildrenWithProvide(key, child)).flat(1)
   } else if (isVNode(vnode) && vnode.type !== Comment) {
-    // Fix for ssContent
     if ('suspense' in vnode && vnode.suspense && 'ssContent' in vnode.suspense) {
-      // Cast the suspense content to VNodeChild to fix the type error
       return findChildrenWithProvide(key, vnode.suspense.ssContent as VNodeChild)
     } else if (Array.isArray(vnode.children)) {
       return vnode.children.map(child => findChildrenWithProvide(key, child)).flat(1)
     } else if (vnode.component) {
-      // Fix for provides
       if (
         'provides' in vnode.component &&
         vnode.component.provides &&
@@ -661,9 +658,7 @@ export function focusChild (el: Element, location?: 'next' | 'prev' | 'first' | 
   } else if (location === 'first') {
     focusable[0]?.focus()
   } else if (location === 'last') {
-    // Replace at(-1) with length-1 indexing for better compatibility
-    const lastElement = focusable.length > 0 ? focusable[focusable.length - 1] : undefined
-    lastElement?.focus()
+    focusable.at(-1)?.focus()
   } else if (typeof location === 'number') {
     focusable[location]?.focus()
   } else {
