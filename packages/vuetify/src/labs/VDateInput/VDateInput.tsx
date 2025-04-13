@@ -132,16 +132,32 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
 
     function onKeydown (e: KeyboardEvent) {
       if (e.key !== 'Enter') return
-
+    
       if (!menu.value || !isFocused.value) {
         menu.value = true
 
         return
       }
-
+    
       const target = e.target as HTMLInputElement
-
-      model.value = adapter.isValid(target.value) ? target.value : null
+      model.value = getDateRangeFromInput(target.value)
+    }
+    
+    function getDateRangeFromInput(input: string) {
+      const year = adapter.getYear(adapter.date())
+      const [min, max] = [year - 100, year + 52]
+    
+      const [start, end] = input.split('-').map(str => {
+        const date = new Date(str.trim())
+        const y = adapter.getYear(date)
+        return adapter.isValid(date) && y >= min && y <= max ? date : null
+      })
+    
+      const datesInRange = start && end
+        ? Array.from({ length: adapter.getDiff(end, start, 'days') + 1 }, (_, i) => adapter.addDays(start, i))
+        : start ? [start] : []
+    
+      return datesInRange.length ? datesInRange : null
     }
 
     function onClick (e: MouseEvent) {
