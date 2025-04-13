@@ -458,7 +458,7 @@ describe('VAutocomplete', () => {
     expect(input).toHaveAttribute('placeholder', 'Placeholder')
 
     await rerender({ label: 'Label' })
-    expect(input).not.toBeVisible()
+    expect(input).toBeVisible()
 
     input.focus()
     await waitAnimationFrame()

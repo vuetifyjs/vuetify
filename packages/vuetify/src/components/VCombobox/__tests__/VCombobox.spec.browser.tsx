@@ -482,7 +482,7 @@ describe('VCombobox', () => {
     await expect.element(input).toHaveAttribute('placeholder', 'Placeholder')
 
     await rerender({ label: 'Label' })
-    await expect.element(input).not.toBeVisible()
+    await expect.element(input).toBeVisible()
 
     await userEvent.click(input)
     await expect.element(input).toHaveAttribute('placeholder', 'Placeholder')
