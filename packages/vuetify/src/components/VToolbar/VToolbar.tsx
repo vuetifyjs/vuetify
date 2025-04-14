@@ -38,7 +38,10 @@ export const makeVToolbarProps = propsFactory({
     default: 'default',
     validator: (v: any) => allowedDensities.includes(v),
   },
-  extended: Boolean,
+  extended: {
+    type: Boolean,
+    default: null,
+  },
   extensionHeight: {
     type: [Number, String],
     default: 48,
@@ -82,7 +85,7 @@ export const VToolbar = genericComponent<VToolbarSlots>()({
     const { themeClasses } = provideTheme(props)
     const { rtlClasses } = useRtl()
 
-    const isExtended = shallowRef(!!(props.extended || slots.extension?.()))
+    const isExtended = shallowRef(props.extended === null ? !!(slots.extension?.()) : props.extended)
     const contentHeight = computed(() => parseInt((
       Number(props.height) +
       (props.density === 'prominent' ? Number(props.height) : 0) -
@@ -110,7 +113,7 @@ export const VToolbar = genericComponent<VToolbarSlots>()({
       const hasImage = !!(slots.image || props.image)
 
       const extension = slots.extension?.()
-      isExtended.value = !!(props.extended || extension)
+      isExtended.value = props.extended === null ? !!extension : props.extended
 
       return (
         <props.tag
