@@ -2,13 +2,6 @@
   "name": "@vuetify/vuetify-root",
   "type": "module",
   "private": true,
-  "husky": {
-    "hooks": {
-      "prepare-commit-msg": "node scripts/prepare-commit-message.js",
-      "commit-msg": "node scripts/lint-commit-message.js",
-      "pre-commit": "node scripts/warn-npm-install.js"
-    }
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/vuetifyjs/vuetify.git"
@@ -19,7 +12,7 @@
     "lint": "lerna run lint --parallel --stream",
     "lint:fix": "lerna run lint:fix --parallel",
     "version": "node scripts/confirm-npm-tag.js",
-    "prepare": "node scripts/post-install.js",
+    "prepare": "husky; node scripts/post-install.js",
     "postversion": "node scripts/post-release-merge.js",
     "clean": "lerna clean",
     "changelog": "conventional-changelog -u -p vuetify",
