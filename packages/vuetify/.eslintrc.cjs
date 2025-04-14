@@ -47,7 +47,7 @@ module.exports = {
     {
       files: '**/*.spec.?(browser.){ts,tsx}',
       plugins: ['vitest'],
-      extends: ['plugin:vitest/all'],
+      extends: ['plugin:vitest/legacy-all'],
       rules: {
         'local-rules/vitest-global-imports': 'error',
 

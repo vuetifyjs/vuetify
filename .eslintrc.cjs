@@ -95,6 +95,7 @@ module.exports = {
     'vue/require-prop-types': 'off',
     'vue/one-component-per-file': 'off',
     'vue/custom-event-name-casing': ['error', { ignores: ['/^[a-z]+(?:-[a-z]+)*:[a-z]+(?:-[a-z]+)*$/u'] }],
+    'vue/multi-word-component-names': 'off',
 
     'vue/attributes-order': ['error', {
       order: [
@@ -128,7 +129,6 @@ module.exports = {
         'vue/singleline-html-element-content-newline': 'off',
         'vue/multiline-html-element-content-newline': 'off',
         'vue/valid-v-slot': ['error', { allowModifiers: true }],
-        'vue/multi-word-component-names': 'off',
 
         /* TODO: this really should be enabled,
             we just do it so much I didn't have time to fix them all */

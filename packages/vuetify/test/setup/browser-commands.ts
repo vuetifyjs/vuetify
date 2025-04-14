@@ -33,7 +33,7 @@ function scroll (ctx: BrowserCommandContext, x: number, y: number) {
 }
 
 export function isDisplayedInViewport (ctx: BrowserCommandContext, el: any) {
-  return ctx.browser.$(el).isDisplayedInViewport()
+  return ctx.browser.$(el).isDisplayed()
 }
 
 export async function percySnapshot (ctx: BrowserCommandContext, name: string, options?: PercyOptions) {
