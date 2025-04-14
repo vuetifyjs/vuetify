@@ -11,8 +11,9 @@ module.exports = {
     '<rootDir>/src/**/*.ts',
     '<rootDir>/src/**/*.tsx',
     '<rootDir>/src/**/*.vue',
+    '<rootDir>/src/**/*.json',
   ],
-  moduleFileExtensions: ['vue', 'ts', 'js', 'tsx'],
+  moduleFileExtensions: ['vue', 'ts', 'js', 'tsx', 'json'],
   reporters: [['jest-silent-reporter', {
     showWarnings: true,
     useDots: true,
