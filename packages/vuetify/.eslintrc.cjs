@@ -66,6 +66,8 @@ module.exports = {
         'vitest/no-disabled-tests': 'off',
         'vitest/prefer-strict-equal': 'off',
         'vitest/prefer-called-with': 'off',
+
+        'vitest/no-focused-tests': ['error', { 'fixable': false }]
       },
     },
   ],
