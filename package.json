@@ -104,6 +104,13 @@
         "@testing-library/user-event>@testing-library/dom": "*",
         "vite-plugin-vue-layouts>vite": "6"
       }
-    }
+    },
+    "onlyBuiltDependencies": [
+      "@percy/core",
+      "edgedriver",
+      "esbuild",
+      "geckodriver",
+      "nx"
+    ]
   }
 }
