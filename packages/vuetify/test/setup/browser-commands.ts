@@ -11,7 +11,7 @@ import path from 'upath'
 const require = createRequire(import.meta.url)
 
 const pkg = JSON.parse(readFileSync('../../package.json', 'utf8'))
-const wdioPkg = JSON.parse(readFileSync(path.resolve(require.resolve('webdriverio'), '../../../package.json'), 'utf8'))
+const wdioPkg = JSON.parse(readFileSync(path.resolve(require.resolve('webdriverio'), '../../package.json'), 'utf8'))
 const CLIENT_INFO = `${pkg.name}/${pkg.version}`
 const ENV_INFO = `${wdioPkg.name}/${wdioPkg.version}`
 
