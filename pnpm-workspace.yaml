@@ -1,2 +1,24 @@
 packages:
   - 'packages/*'
+
+catalog:
+  '@mdi/font': 7.4.47
+  '@mdi/js': 7.4.47
+  '@mdi/svg': 7.4.47
+  '@types/node': ^22.5.4
+  '@vitejs/plugin-vue': ^5.2.1
+  '@vue/compiler-sfc': ^3.5.13
+  'date-fns': ^3.6.0
+  'eslint': ^8.57.0
+  'lodash-es': ^4.17.21
+  'moment': ^2.30.1
+  'roboto-fontface': ^0.10.0
+  'typescript': ~5.5.4
+  'unplugin-auto-import': 19.1.0
+  'unplugin-vue-components': ^0.27.4
+  'upath': ^2.0.1
+  'vite': ^6.1.0
+  'vue-i18n': ^11.1.1
+  'vue-router': ^4.5.0
+  'vue-tsc': ^2.0.29
+  'vue': ^3.5.13

@@ -4,6 +4,66 @@ settings:
   autoInstallPeers: false
   excludeLinksFromLockfile: false
 
+catalogs:
+  default:
+    '@mdi/font':
+      specifier: 7.4.47
+      version: 7.4.47
+    '@mdi/js':
+      specifier: 7.4.47
+      version: 7.4.47
+    '@mdi/svg':
+      specifier: 7.4.47
+      version: 7.4.47
+    '@vitejs/plugin-vue':
+      specifier: ^5.2.1
+      version: 5.2.1
+    '@vue/compiler-sfc':
+      specifier: ^3.5.13
+      version: 3.5.13
+    date-fns:
+      specifier: ^3.6.0
+      version: 3.6.0
+    eslint:
+      specifier: ^8.57.0
+      version: 8.57.0
+    lodash-es:
+      specifier: ^4.17.21
+      version: 4.17.21
+    moment:
+      specifier: ^2.30.1
+      version: 2.30.1
+    roboto-fontface:
+      specifier: ^0.10.0
+      version: 0.10.0
+    typescript:
+      specifier: ~5.5.4
+      version: 5.5.4
+    unplugin-auto-import:
+      specifier: 19.1.0
+      version: 19.1.0
+    unplugin-vue-components:
+      specifier: ^0.27.4
+      version: 0.27.4
+    upath:
+      specifier: ^2.0.1
+      version: 2.0.1
+    vite:
+      specifier: ^6.1.0
+      version: 6.1.0
+    vue:
+      specifier: ^3.5.13
+      version: 3.5.13
+    vue-i18n:
+      specifier: ^11.1.1
+      version: 11.1.1
+    vue-router:
+      specifier: ^4.5.0
+      version: 4.5.0
+    vue-tsc:
+      specifier: ^2.0.29
+      version: 2.0.29
+
 overrides:
   '@testing-library/dom': npm:@vuetify/testing-library-dom@1.0.2
   '@types/node': 22.5.4
@@ -39,17 +99,20 @@ importers:
         specifier: ^7.24.7
         version: 7.24.7(@babel/core@7.26.9)
       '@mdi/font':
-        specifier: 7.4.47
+        specifier: 'catalog:'
         version: 7.4.47
       '@mdi/js':
-        specifier: 7.4.47
+        specifier: 'catalog:'
         version: 7.4.47(patch_hash=wt4lkgr52gphla2wb445bnli3i)
       '@mdi/svg':
-        specifier: 7.4.47
+        specifier: 'catalog:'
         version: 7.4.47
       '@octokit/core':
         specifier: ^5.2.0
         version: 5.2.0
+      '@types/node':
+        specifier: 22.5.4
+        version: 22.5.4
       '@types/yargs':
         specifier: ^17.0.33
         version: 17.0.33
@@ -63,7 +126,7 @@ importers:
         specifier: ^1.9.4
         version: 1.9.4(vue@3.5.13(typescript@5.5.4))
       '@vue/compiler-sfc':
-        specifier: ^3.5.13
+        specifier: 'catalog:'
         version: 3.5.13
       '@vue/language-server':
         specifier: ^2.1.6
@@ -93,7 +156,7 @@ importers:
         specifier: ^7.0.6
         version: 7.0.6
       eslint:
-        specifier: ^8.57.0
+        specifier: 'catalog:'
         version: 8.57.0
       eslint-config-standard:
         specifier: ^17.1.0
@@ -144,7 +207,7 @@ importers:
         specifier: ^3.0.1
         version: 3.0.1
       moment:
-        specifier: ^2.30.1
+        specifier: 'catalog:'
         version: 2.30.1
       rimraf:
         specifier: ^5.0.5
@@ -165,10 +228,10 @@ importers:
         specifier: ^5.0.0
         version: 5.0.0
       typescript:
-        specifier: ~5.5.4
+        specifier: 'catalog:'
         version: 5.5.4
       upath:
-        specifier: ^2.0.1
+        specifier: 'catalog:'
         version: 2.0.1
       vite-plugin-inspect:
         specifier: 10.2.1
@@ -177,10 +240,10 @@ importers:
         specifier: ^0.1.0
         version: 0.1.0(vite@6.1.0(@types/node@22.5.4)(sass-embedded@1.80.1)(sass@1.80.1)(terser@5.31.3)(yaml@2.7.0))
       vue:
-        specifier: ^3.5.13
+        specifier: 'catalog:'
         version: 3.5.13(typescript@5.5.4)
       vue-tsc:
-        specifier: ^2.0.29
+        specifier: 'catalog:'
         version: 2.0.29(typescript@5.5.4)
       yargs:
         specifier: ^17.7.2
@@ -204,7 +267,7 @@ importers:
         specifier: ^4.7.2
         version: 4.7.2
       vue:
-        specifier: ^3.5.13
+        specifier: 'catalog:'
         version: 3.5.13(typescript@5.5.4)
       vuetify:
         specifier: workspace:*
@@ -217,10 +280,10 @@ importers:
         specifier: ^4.0.5
         version: 4.0.5
       eslint:
-        specifier: ^8.57.0
+        specifier: 'catalog:'
         version: 8.57.0
       lodash-es:
-        specifier: ^4.17.21
+        specifier: 'catalog:'
         version: 4.17.21
       stringify-object:
         specifier: ^5.0.0
@@ -256,7 +319,7 @@ importers:
         specifier: ^3.0.0
         version: 3.0.0(encoding@0.1.13)
       lodash-es:
-        specifier: ^4.17.21
+        specifier: 'catalog:'
         version: 4.17.21
       pinia:
         specifier: ^3.0.1
@@ -268,7 +331,7 @@ importers:
         specifier: ^1.29.0
         version: 1.29.0
       roboto-fontface:
-        specifier: ^0.10.0
+        specifier: 'catalog:'
         version: 0.10.0
       swetrix:
         specifier: ^3.5.0
@@ -277,19 +340,19 @@ importers:
         specifier: ^4.12.6
         version: 4.12.6(vue@3.5.13(typescript@5.5.4))
       vue:
-        specifier: ^3.5.13
+        specifier: 'catalog:'
         version: 3.5.13(typescript@5.5.4)
       vue-gtag-next:
         specifier: ^1.14.0
         version: 1.14.0(patch_hash=mkgavjrgdsvimm3nsmkswaflk4)(vue@3.5.13(typescript@5.5.4))
       vue-i18n:
-        specifier: ^11.1.1
+        specifier: 'catalog:'
         version: 11.1.1(vue@3.5.13(typescript@5.5.4))
       vue-instantsearch:
         specifier: ^4.16.1
         version: 4.16.1(@vue/server-renderer@3.5.13(vue@3.5.13(typescript@5.5.4)))(algoliasearch@4.23.3)(vue@3.5.13(typescript@5.5.4))
       vue-router:
-        specifier: ^4.5.0
+        specifier: 'catalog:'
         version: 4.5.0(vue@3.5.13(typescript@5.5.4))
       vuetify:
         specifier: workspace:*
@@ -308,10 +371,10 @@ importers:
         specifier: ^6.0.5
         version: 6.0.5(@vue/compiler-dom@3.5.13)(eslint@8.57.0)(rollup@4.34.8)(typescript@5.5.4)(vue-i18n@11.1.1(vue@3.5.13(typescript@5.5.4)))(vue@3.5.13(typescript@5.5.4))
       '@mdi/js':
-        specifier: 7.4.47
+        specifier: 'catalog:'
         version: 7.4.47(patch_hash=wt4lkgr52gphla2wb445bnli3i)
       '@mdi/svg':
-        specifier: 7.4.47
+        specifier: 'catalog:'
         version: 7.4.47
       '@octokit/openapi-types':
         specifier: ^22.2.0
@@ -328,6 +391,9 @@ importers:
       '@types/markdown-it-container':
         specifier: ^2.0.10
         version: 2.0.10
+      '@types/node':
+        specifier: 22.5.4
+        version: 22.5.4
       '@types/prismjs':
         specifier: ^1.26.3
         version: 1.26.3
@@ -335,10 +401,10 @@ importers:
         specifier: ^1.2.0
         version: 1.2.0(vite@6.1.0(@types/node@22.5.4)(sass-embedded@1.80.1)(sass@1.80.1)(terser@5.31.3)(yaml@2.7.0))
       '@vitejs/plugin-vue':
-        specifier: ^5.2.1
+        specifier: 'catalog:'
         version: 5.2.1(vite@6.1.0(@types/node@22.5.4)(sass-embedded@1.80.1)(sass@1.80.1)(terser@5.31.3)(yaml@2.7.0))(vue@3.5.13(typescript@5.5.4))
       '@vue/compiler-sfc':
-        specifier: ^3.5.13
+        specifier: 'catalog:'
         version: 3.5.13
       '@vuetify/api-generator':
         specifier: workspace:*
@@ -356,8 +422,11 @@ importers:
         specifier: ^3.2.5
         version: 3.2.5
       date-fns:
-        specifier: ^3.6.0
+        specifier: 'catalog:'
         version: 3.6.0
+      eslint:
+        specifier: 'catalog:'
+        version: 8.57.0
       front-matter:
         specifier: ^4.0.2
         version: 4.0.2
@@ -397,17 +466,23 @@ importers:
       markdownlint-cli:
         specifier: ^0.39.0
         version: 0.39.0
+      typescript:
+        specifier: 'catalog:'
+        version: 5.5.4
       unplugin-auto-import:
-        specifier: 19.1.0
+        specifier: 'catalog:'
         version: 19.1.0
       unplugin-fonts:
         specifier: 1.3.1
         version: 1.3.1(vite@6.1.0(@types/node@22.5.4)(sass-embedded@1.80.1)(sass@1.80.1)(terser@5.31.3)(yaml@2.7.0))
       unplugin-vue-components:
-        specifier: ^0.27.4
+        specifier: 'catalog:'
         version: 0.27.4(@babel/parser@7.26.9)(rollup@4.34.8)(vue@3.5.13(typescript@5.5.4))
+      upath:
+        specifier: 'catalog:'
+        version: 2.0.1
       vite:
-        specifier: ^6.1.0
+        specifier: 'catalog:'
         version: 6.1.0(@types/node@22.5.4)(sass-embedded@1.80.1)(sass@1.80.1)(terser@5.31.3)(yaml@2.7.0)
       vite-plugin-md:
         specifier: ^0.21.5
@@ -425,7 +500,7 @@ importers:
         specifier: ^2.1.0
         version: 2.1.0(vite@6.1.0(@types/node@22.5.4)(sass-embedded@1.80.1)(sass@1.80.1)(terser@5.31.3)(yaml@2.7.0))(vue@3.5.13(typescript@5.5.4))(vuetify@packages+vuetify)
       vue-tsc:
-        specifier: ^2.0.29
+        specifier: 'catalog:'
         version: 2.0.29(typescript@5.5.4)
 
   packages/vuetify:
@@ -494,11 +569,11 @@ importers:
         specifier: ^0.1.11
         version: 0.1.11
       '@vitejs/plugin-vue':
-        specifier: ^5.2.1
+        specifier: 'catalog:'
         version: 5.2.1(vite@6.1.0(@types/node@22.5.4)(sass-embedded@1.80.1)(sass@1.80.1)(terser@5.31.3)(yaml@2.7.0))(vue@3.5.13(typescript@5.5.4))
       '@vitejs/plugin-vue-jsx':
         specifier: ^4.1.1
-        version: 4.1.1(vite@6.1.0(@types/node@22.5.4)(sass-embedded@1.80.1)(sass@1.80.1)(terser@5.31.3)(yaml@2.7.0))(vue@3.5.13(typescript@5.5.4))
+        version: 4.1.2(vite@6.1.0(@types/node@22.5.4)(sass-embedded@1.80.1)(sass@1.80.1)(terser@5.31.3)(yaml@2.7.0))(vue@3.5.13(typescript@5.5.4))
       '@vitest/browser':
         specifier: ^3.0.5
         version: 3.0.5(@types/node@22.5.4)(typescript@5.5.4)(vite@6.1.0(@types/node@22.5.4)(sass-embedded@1.80.1)(sass@1.80.1)(terser@5.31.3)(yaml@2.7.0))(vitest@3.0.5)(webdriverio@8.40.5(encoding@0.1.13))
@@ -511,6 +586,9 @@ importers:
       '@vue/babel-plugin-jsx':
         specifier: ^1.2.5
         version: 1.2.5(@babel/core@7.26.9)
+      '@vue/compiler-sfc':
+        specifier: 'catalog:'
+        version: 3.5.13
       '@vue/reactivity':
         specifier: ^3.5.13
         version: 3.5.13
@@ -551,7 +629,7 @@ importers:
         specifier: ^0.3.0
         version: 0.3.0
       date-fns:
-        specifier: ^3.6.0
+        specifier: 'catalog:'
         version: 3.6.0
       dayjs:
         specifier: ^1.11.13
@@ -559,6 +637,9 @@ importers:
       dotenv:
         specifier: ^16.4.5
         version: 16.4.5
+      eslint:
+        specifier: 'catalog:'
+        version: 8.57.0
       eslint-plugin-vitest:
         specifier: 0.4.1
         version: 0.4.1(@typescript-eslint/eslint-plugin@7.18.0(@typescript-eslint/parser@7.18.0(eslint@8.57.0)(typescript@5.5.4))(eslint@8.57.0)(typescript@5.5.4))(eslint@8.57.0)(typescript@5.5.4)(vitest@3.0.5(@types/debug@4.1.12)(@types/node@22.5.4)(@vitest/browser@3.0.5)(@vitest/ui@3.0.5)(happy-dom@8.9.0(encoding@0.1.13))(jsdom@25.0.0)(msw@2.7.0(@types/node@22.5.4)(typescript@5.5.4))(sass-embedded@1.80.1)(sass@1.80.1)(terser@5.31.3)(yaml@2.7.0))
@@ -574,6 +655,9 @@ importers:
       jsdom:
         specifier: ^25.0.0
         version: 25.0.0
+      lodash-es:
+        specifier: 'catalog:'
+        version: 4.17.21
       luxon:
         specifier: ^3.5.0
         version: 3.5.0
@@ -581,13 +665,13 @@ importers:
         specifier: ^4.0.5
         version: 4.0.8
       moment:
-        specifier: ^2.30.1
+        specifier: 'catalog:'
         version: 2.30.1
       postcss:
         specifier: ^8.4.38
         version: 8.5.2
       roboto-fontface:
-        specifier: ^0.10.0
+        specifier: 'catalog:'
         version: 0.10.0
       rollup:
         specifier: ^4.34.8
@@ -613,20 +697,23 @@ importers:
       ts-patch:
         specifier: ^3.2.1
         version: 3.2.1
+      typescript:
+        specifier: 'catalog:'
+        version: 5.5.4
       typescript-transform-paths:
         specifier: ^3.5.1
         version: 3.5.1(typescript@5.5.4)
       unplugin-auto-import:
-        specifier: 19.1.0
+        specifier: 'catalog:'
         version: 19.1.0
       unplugin-vue-components:
-        specifier: ^0.27.4
+        specifier: 'catalog:'
         version: 0.27.4(@babel/parser@7.26.9)(rollup@4.34.8)(vue@3.5.13(typescript@5.5.4))
       upath:
-        specifier: ^2.0.1
+        specifier: 'catalog:'
         version: 2.0.1
       vite:
-        specifier: ^6.1.0
+        specifier: 'catalog:'
         version: 6.1.0(@types/node@22.5.4)(sass-embedded@1.80.1)(sass@1.80.1)(terser@5.31.3)(yaml@2.7.0)
       vite-ssr:
         specifier: ^0.17.1
@@ -635,14 +722,17 @@ importers:
         specifier: ^3.0.5
         version: 3.0.5(@types/debug@4.1.12)(@types/node@22.5.4)(@vitest/browser@3.0.5)(@vitest/ui@3.0.5)(happy-dom@8.9.0(encoding@0.1.13))(jsdom@25.0.0)(msw@2.7.0(@types/node@22.5.4)(typescript@5.5.4))(sass-embedded@1.80.1)(sass@1.80.1)(terser@5.31.3)(yaml@2.7.0)
       vue:
-        specifier: ^3.5.13
+        specifier: 'catalog:'
         version: 3.5.13(typescript@5.5.4)
       vue-i18n:
-        specifier: ^11.1.1
+        specifier: 'catalog:'
         version: 11.1.1(vue@3.5.13(typescript@5.5.4))
       vue-router:
-        specifier: ^4.5.0
+        specifier: 'catalog:'
         version: 4.5.0(vue@3.5.13(typescript@5.5.4))
+      vue-tsc:
+        specifier: 'catalog:'
+        version: 2.0.29(typescript@5.5.4)
       webdriverio:
         specifier: ^8.40.5
         version: 8.40.5(encoding@0.1.13)
@@ -3000,8 +3090,8 @@ packages:
     peerDependencies:
       vite: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0
 
-  '@vitejs/plugin-vue-jsx@4.1.1':
-    resolution: {integrity: sha512-uMJqv/7u1zz/9NbWAD3XdjaY20tKTf17XVfQ9zq4wY1BjsB/PjpJPMe2xiG39QpP4ZdhYNhm4Hvo66uJrykNLA==}
+  '@vitejs/plugin-vue-jsx@4.1.2':
+    resolution: {integrity: sha512-4Rk0GdE0QCdsIkuMmWeg11gmM4x8UmTnZR/LWPm7QJ7+BsK4tq08udrN0isrrWqz5heFy9HLV/7bOLgFS8hUjA==}
     engines: {node: ^18.0.0 || >=20.0.0}
     peerDependencies:
       vite: ^5.0.0 || ^6.0.0
@@ -12415,7 +12505,7 @@ snapshots:
     dependencies:
       vite: 6.1.0(@types/node@22.5.4)(sass-embedded@1.80.1)(sass@1.80.1)(terser@5.31.3)(yaml@2.7.0)
 
-  '@vitejs/plugin-vue-jsx@4.1.1(vite@6.1.0(@types/node@22.5.4)(sass-embedded@1.80.1)(sass@1.80.1)(terser@5.31.3)(yaml@2.7.0))(vue@3.5.13(typescript@5.5.4))':
+  '@vitejs/plugin-vue-jsx@4.1.2(vite@6.1.0(@types/node@22.5.4)(sass-embedded@1.80.1)(sass@1.80.1)(terser@5.31.3)(yaml@2.7.0))(vue@3.5.13(typescript@5.5.4))':
     dependencies:
       '@babel/core': 7.26.9
       '@babel/plugin-transform-typescript': 7.26.8(@babel/core@7.26.9)
