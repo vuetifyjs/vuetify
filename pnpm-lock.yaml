@@ -4,6 +4,540 @@ settings:
   autoInstallPeers: false
   excludeLinksFromLockfile: false
 
+catalogs:
+  default:
+    '@babel/cli':
+      specifier: ^7.27.0
+      version: 7.27.0
+    '@babel/core':
+      specifier: ^7.26.10
+      version: 7.26.10
+    '@babel/generator':
+      specifier: ^7.27.0
+      version: 7.27.0
+    '@babel/preset-env':
+      specifier: ^7.26.9
+      version: 7.26.9
+    '@babel/preset-typescript':
+      specifier: ^7.27.0
+      version: 7.27.0
+    '@babel/types':
+      specifier: ^7.27.0
+      version: 7.27.0
+    '@cosmicjs/sdk':
+      specifier: ^1.5.2
+      version: 1.5.2
+    '@date-io/core':
+      specifier: 3.2.0
+      version: 3.2.0
+    '@date-io/date-fns':
+      specifier: 3.2.1
+      version: 3.2.1
+    '@date-io/dayjs':
+      specifier: ^3.2.0
+      version: 3.2.0
+    '@date-io/luxon':
+      specifier: ^3.2.0
+      version: 3.2.0
+    '@date-io/moment':
+      specifier: ^3.2.0
+      version: 3.2.0
+    '@emailjs/browser':
+      specifier: ^4.4.1
+      version: 4.4.1
+    '@formatjs/intl':
+      specifier: ^2.10.15
+      version: 2.10.15
+    '@fortawesome/fontawesome-svg-core':
+      specifier: ^6.7.2
+      version: 6.7.2
+    '@fortawesome/free-solid-svg-icons':
+      specifier: ^6.7.2
+      version: 6.7.2
+    '@fortawesome/vue-fontawesome':
+      specifier: ^3.0.8
+      version: 3.0.8
+    '@intlify/devtools-types':
+      specifier: ^11.1.3
+      version: 11.1.3
+    '@intlify/unplugin-vue-i18n':
+      specifier: ^6.0.5
+      version: 6.0.5
+    '@mdi/font':
+      specifier: 7.4.47
+      version: 7.4.47
+    '@mdi/js':
+      specifier: 7.4.47
+      version: 7.4.47
+    '@mdi/svg':
+      specifier: 7.4.47
+      version: 7.4.47
+    '@octokit/core':
+      specifier: ^6.1.5
+      version: 6.1.5
+    '@octokit/openapi-types':
+      specifier: ^25.0.0
+      version: 25.0.0
+    '@percy/cli':
+      specifier: ^1.30.10
+      version: 1.30.10
+    '@percy/sdk-utils':
+      specifier: ^1.30.10
+      version: 1.30.10
+    '@rollup/plugin-alias':
+      specifier: ^5.1.1
+      version: 5.1.1
+    '@rollup/plugin-babel':
+      specifier: ^6.0.4
+      version: 6.0.4
+    '@rollup/plugin-node-resolve':
+      specifier: ^16.0.1
+      version: 16.0.1
+    '@rollup/plugin-typescript':
+      specifier: ^12.1.2
+      version: 12.1.2
+    '@sentry/vue':
+      specifier: ^9.12.0
+      version: 9.12.0
+    '@testing-library/user-event':
+      specifier: ^14.6.1
+      version: 14.6.1
+    '@testing-library/vue':
+      specifier: ^8.1.0
+      version: 8.1.0
+    '@types/babel__generator':
+      specifier: ^7.27.0
+      version: 7.27.0
+    '@types/lodash-es':
+      specifier: ^4.17.12
+      version: 4.17.12
+    '@types/markdown-it':
+      specifier: ^14.1.2
+      version: 14.1.2
+    '@types/markdown-it-container':
+      specifier: ^2.0.10
+      version: 2.0.10
+    '@types/prismjs':
+      specifier: ^1.26.5
+      version: 1.26.5
+    '@types/resize-observer-browser':
+      specifier: ^0.1.11
+      version: 0.1.11
+    '@types/stringify-object':
+      specifier: ^4.0.5
+      version: 4.0.5
+    '@types/yargs':
+      specifier: ^17.0.33
+      version: 17.0.33
+    '@typescript-eslint/eslint-plugin':
+      specifier: ^7.18.0
+      version: 7.18.0
+    '@typescript-eslint/parser':
+      specifier: ^7.18.0
+      version: 7.18.0
+    '@unhead/vue':
+      specifier: ^2.0.5
+      version: 2.0.5
+    '@vitejs/plugin-basic-ssl':
+      specifier: ^2.0.0
+      version: 2.0.0
+    '@vitejs/plugin-vue':
+      specifier: ^5.2.1
+      version: 5.2.1
+    '@vitejs/plugin-vue-jsx':
+      specifier: ^4.1.2
+      version: 4.1.2
+    '@vitest/browser':
+      specifier: ^3.1.1
+      version: 3.1.1
+    '@vitest/coverage-istanbul':
+      specifier: ^3.1.1
+      version: 3.1.1
+    '@vitest/ui':
+      specifier: ^3.1.1
+      version: 3.1.1
+    '@vue/babel-plugin-jsx':
+      specifier: ^1.4.0
+      version: 1.4.0
+    '@vue/compiler-dom':
+      specifier: ^3.5.13
+      version: 3.5.13
+    '@vue/compiler-sfc':
+      specifier: ^3.5.13
+      version: 3.5.13
+    '@vue/language-server':
+      specifier: ^2.2.8
+      version: 2.2.8
+    '@vue/reactivity':
+      specifier: ^3.5.13
+      version: 3.5.13
+    '@vue/runtime-core':
+      specifier: ^3.5.13
+      version: 3.5.13
+    '@vue/runtime-dom':
+      specifier: ^3.5.13
+      version: 3.5.13
+    '@vue/shared':
+      specifier: ^3.5.13
+      version: 3.5.13
+    '@vue/test-utils':
+      specifier: ^2.4.6
+      version: 2.4.6
+    '@vuelidate/core':
+      specifier: ^2.0.3
+      version: 2.0.3
+    '@vuelidate/validators':
+      specifier: ^2.0.4
+      version: 2.0.4
+    '@vuetify/one':
+      specifier: ^2.0.0
+      version: 2.0.0
+    '@vueuse/head':
+      specifier: ^1.3.1
+      version: 1.3.1
+    '@yankeeinlondon/builder-api':
+      specifier: ^1.4.1
+      version: 1.4.1
+    acorn-walk:
+      specifier: ^8.3.4
+      version: 8.3.4
+    ajv:
+      specifier: ^8.17.1
+      version: 8.17.1
+    algoliasearch:
+      specifier: ^4.24.0
+      version: 4.24.0
+    algoliasearch-helper:
+      specifier: ^3.24.3
+      version: 3.24.3
+    async-es:
+      specifier: ^3.2.6
+      version: 3.2.6
+    autoprefixer:
+      specifier: ^10.4.21
+      version: 10.4.21
+    babel-eslint:
+      specifier: ^10.1.0
+      version: 10.1.0
+    babel-plugin-add-import-extension:
+      specifier: 1.5.1
+      version: 1.5.1
+    babel-plugin-module-resolver:
+      specifier: ^5.0.2
+      version: 5.0.2
+    babel-plugin-transform-define:
+      specifier: ^2.1.4
+      version: 2.1.4
+    babel-polyfill:
+      specifier: ^6.26.0
+      version: 6.26.0
+    concurrently:
+      specifier: ^9.1.2
+      version: 9.1.2
+    conventional-changelog-cli:
+      specifier: ^5.0.0
+      version: 5.0.0
+    conventional-changelog-vuetify:
+      specifier: ^1.2.2
+      version: 1.2.2
+    conventional-github-releaser:
+      specifier: ^3.1.5
+      version: 3.1.5
+    cross-spawn:
+      specifier: ^7.0.6
+      version: 7.0.6
+    cssnano:
+      specifier: ^7.0.6
+      version: 7.0.6
+    csstype:
+      specifier: ^3.1.3
+      version: 3.1.3
+    cy-mobile-commands:
+      specifier: ^0.3.0
+      version: 0.3.0
+    date-fns:
+      specifier: ^3.6.0
+      version: 3.6.0
+    dayjs:
+      specifier: ^1.11.13
+      version: 1.11.13
+    deepmerge:
+      specifier: ^4.3.1
+      version: 4.3.1
+    dotenv:
+      specifier: ^16.5.0
+      version: 16.5.0
+    eslint:
+      specifier: ^8.57.0
+      version: 8.57.0
+    eslint-config-standard:
+      specifier: ^17.1.0
+      version: 17.1.0
+    eslint-formatter-codeframe:
+      specifier: ^7.32.1
+      version: 7.32.1
+    eslint-plugin-import:
+      specifier: ^2.31.0
+      version: 2.31.0
+    eslint-plugin-local-rules:
+      specifier: ^2.0.1
+      version: 2.0.1
+    eslint-plugin-n:
+      specifier: ^16.6.2
+      version: 16.6.2
+    eslint-plugin-promise:
+      specifier: ^6.6.0
+      version: 6.6.0
+    eslint-plugin-react:
+      specifier: ^7.37.5
+      version: 7.37.5
+    eslint-plugin-sonarjs:
+      specifier: ^0.25.1
+      version: 0.25.1
+    eslint-plugin-vitest:
+      specifier: 0.5.4
+      version: 0.5.4
+    eslint-plugin-vue:
+      specifier: ^9.33.0
+      version: 9.33.0
+    eslint-plugin-vuetify:
+      specifier: ^2.5.2
+      version: 2.5.2
+    expect:
+      specifier: ^29.7.0
+      version: 29.7.0
+    fast-glob:
+      specifier: ^3.3.3
+      version: 3.3.3
+    fflate:
+      specifier: ^0.8.2
+      version: 0.8.2
+    front-matter:
+      specifier: ^4.0.2
+      version: 4.0.2
+    glob:
+      specifier: ^11.0.1
+      version: 11.0.1
+    husky:
+      specifier: ^9.1.7
+      version: 9.1.7
+    identity-obj-proxy:
+      specifier: ^3.0.0
+      version: 3.0.0
+    inquirer:
+      specifier: ^12.5.2
+      version: 12.5.2
+    isomorphic-fetch:
+      specifier: ^3.0.0
+      version: 3.0.0
+    jest:
+      specifier: ^29.7.0
+      version: 29.7.0
+    jest-runner-eslint:
+      specifier: ^2.2.1
+      version: 2.2.1
+    jest-silent-reporter:
+      specifier: ^0.6.0
+      version: 0.6.0
+    jsdom:
+      specifier: ^26.1.0
+      version: 26.1.0
+    lerna:
+      specifier: ^8.2.2
+      version: 8.2.2
+    lodash-es:
+      specifier: ^4.17.21
+      version: 4.17.21
+    luxon:
+      specifier: ^3.6.1
+      version: 3.6.1
+    magic-string:
+      specifier: ^0.30.17
+      version: 0.30.17
+    markdown-it:
+      specifier: ^14.1.0
+      version: 14.1.0
+    markdown-it-anchor:
+      specifier: ^9.2.0
+      version: 9.2.0
+    markdown-it-attrs:
+      specifier: ^4.3.1
+      version: 4.3.1
+    markdown-it-container:
+      specifier: ^4.0.0
+      version: 4.0.0
+    markdown-it-emoji:
+      specifier: ^2.0.2
+      version: 2.0.2
+    markdown-it-header-sections:
+      specifier: ^1.0.0
+      version: 1.0.0
+    markdown-it-link-attributes:
+      specifier: ^4.0.1
+      version: 4.0.1
+    markdown-it-prism:
+      specifier: ^3.0.0
+      version: 3.0.0
+    markdownlint-cli:
+      specifier: ^0.44.0
+      version: 0.44.0
+    micromatch:
+      specifier: ^4.0.8
+      version: 4.0.8
+    mkdirp:
+      specifier: ^3.0.1
+      version: 3.0.1
+    moment:
+      specifier: ^2.30.1
+      version: 2.30.1
+    pinia:
+      specifier: ^3.0.2
+      version: 3.0.2
+    piscina:
+      specifier: ^4.9.2
+      version: 4.9.2
+    postcss:
+      specifier: ^8.5.3
+      version: 8.5.3
+    prettier:
+      specifier: ^3.5.3
+      version: 3.5.3
+    prism-theme-vars:
+      specifier: ^0.2.5
+      version: 0.2.5
+    prismjs:
+      specifier: ^1.30.0
+      version: 1.30.0
+    rimraf:
+      specifier: ^6.0.1
+      version: 6.0.1
+    roboto-fontface:
+      specifier: ^0.10.0
+      version: 0.10.0
+    rollup:
+      specifier: ^4.40.0
+      version: 4.40.0
+    rollup-plugin-dts:
+      specifier: ^6.2.1
+      version: 6.2.1
+    rollup-plugin-sass:
+      specifier: ^1.15.2
+      version: 1.15.2
+    rollup-plugin-sourcemaps:
+      specifier: ^0.6.3
+      version: 0.6.3
+    rollup-plugin-terser:
+      specifier: ^7.0.2
+      version: 7.0.2
+    sass:
+      specifier: ^1.86.3
+      version: 1.86.3
+    sass-embedded:
+      specifier: ^1.86.3
+      version: 1.86.3
+    semver:
+      specifier: ^7.7.1
+      version: 7.7.1
+    shelljs:
+      specifier: ^0.9.2
+      version: 0.9.2
+    stringify-object:
+      specifier: ^5.0.0
+      version: 5.0.0
+    swetrix:
+      specifier: ^3.6.1
+      version: 3.6.1
+    timezone-mock:
+      specifier: ^1.3.6
+      version: 1.3.6
+    ts-morph:
+      specifier: ^25.0.1
+      version: 25.0.1
+    ts-node:
+      specifier: ^10.9.2
+      version: 10.9.2
+    ts-patch:
+      specifier: ^3.3.0
+      version: 3.3.0
+    tsx:
+      specifier: ^4.19.3
+      version: 4.19.3
+    typescript:
+      specifier: ~5.5.4
+      version: 5.5.4
+    typescript-transform-paths:
+      specifier: ^3.5.5
+      version: 3.5.5
+    unplugin-auto-import:
+      specifier: 19.1.0
+      version: 19.1.0
+    unplugin-fonts:
+      specifier: 1.3.1
+      version: 1.3.1
+    unplugin-vue-components:
+      specifier: ^0.27.4
+      version: 0.27.4
+    upath:
+      specifier: ^2.0.1
+      version: 2.0.1
+    vee-validate:
+      specifier: ^4.15.0
+      version: 4.15.0
+    vite:
+      specifier: ^6.1.0
+      version: 6.1.0
+    vite-plugin-inspect:
+      specifier: 11.0.0
+      version: 11.0.0
+    vite-plugin-md:
+      specifier: ^0.22.5
+      version: 0.22.5
+    vite-plugin-pages:
+      specifier: ^0.33.0
+      version: 0.33.0
+    vite-plugin-pwa:
+      specifier: ^1.0.0
+      version: 1.0.0
+    vite-plugin-vue-layouts:
+      specifier: ^0.11.0
+      version: 0.11.0
+    vite-plugin-vuetify:
+      specifier: ^2.1.1
+      version: 2.1.1
+    vite-plugin-warmup:
+      specifier: ^0.1.0
+      version: 0.1.0
+    vite-ssr:
+      specifier: ^0.17.2
+      version: 0.17.2
+    vitest:
+      specifier: ^3.1.1
+      version: 3.1.1
+    vue:
+      specifier: ^3.5.13
+      version: 3.5.13
+    vue-gtag-next:
+      specifier: ^1.14.0
+      version: 1.14.0
+    vue-i18n:
+      specifier: ^11.1.1
+      version: 11.1.1
+    vue-instantsearch:
+      specifier: ^4.20.6
+      version: 4.20.6
+    vue-router:
+      specifier: ^4.5.0
+      version: 4.5.0
+    vue-tsc:
+      specifier: ^2.0.29
+      version: 2.0.29
+    webdriverio:
+      specifier: ^9.12.5
+      version: 9.12.5
+    yargs:
+      specifier: ^17.7.2
+      version: 17.7.2
+
 overrides:
   '@testing-library/dom': npm:@vuetify/testing-library-dom@1.0.2
   '@types/node': 22.5.4
@@ -27,624 +561,630 @@ importers:
   .:
     devDependencies:
       '@babel/cli':
-        specifier: ^7.27.0
+        specifier: 'catalog:'
         version: 7.27.0(@babel/core@7.26.10)
       '@babel/core':
-        specifier: ^7.26.10
+        specifier: 'catalog:'
         version: 7.26.10
       '@babel/preset-env':
-        specifier: ^7.26.9
+        specifier: 'catalog:'
         version: 7.26.9(@babel/core@7.26.10)
       '@babel/preset-typescript':
-        specifier: ^7.27.0
+        specifier: 'catalog:'
         version: 7.27.0(@babel/core@7.26.10)
       '@mdi/font':
-        specifier: 7.4.47
+        specifier: 'catalog:'
         version: 7.4.47
       '@mdi/js':
-        specifier: 7.4.47
+        specifier: 'catalog:'
         version: 7.4.47(patch_hash=3c2a78b1509745df3a3100e3e59075dd87718e67632cc14dc64dd9ac34098f9f)
       '@mdi/svg':
-        specifier: 7.4.47
+        specifier: 'catalog:'
         version: 7.4.47
       '@octokit/core':
-        specifier: ^6.1.5
+        specifier: 'catalog:'
         version: 6.1.5
       '@types/yargs':
-        specifier: ^17.0.33
+        specifier: 'catalog:'
         version: 17.0.33
       '@typescript-eslint/eslint-plugin':
-        specifier: ^7.18.0
+        specifier: 'catalog:'
         version: 7.18.0(@typescript-eslint/parser@7.18.0(eslint@8.57.0)(typescript@5.5.4))(eslint@8.57.0)(typescript@5.5.4)
       '@typescript-eslint/parser':
-        specifier: ^7.18.0
+        specifier: 'catalog:'
         version: 7.18.0(eslint@8.57.0)(typescript@5.5.4)
       '@unhead/vue':
-        specifier: ^2.0.5
+        specifier: 'catalog:'
         version: 2.0.5(vue@3.5.13(typescript@5.5.4))
       '@vue/compiler-sfc':
-        specifier: ^3.5.13
+        specifier: 'catalog:'
         version: 3.5.13
       '@vue/language-server':
-        specifier: ^2.2.8
+        specifier: 'catalog:'
         version: 2.2.8(typescript@5.5.4)
       '@vue/runtime-core':
-        specifier: ^3.5.13
+        specifier: 'catalog:'
         version: 3.5.13
       '@vue/runtime-dom':
-        specifier: ^3.5.13
+        specifier: 'catalog:'
         version: 3.5.13
       '@vueuse/head':
-        specifier: ^1.3.1
+        specifier: 'catalog:'
         version: 1.3.1(vue@3.5.13(typescript@5.5.4))
       babel-eslint:
-        specifier: ^10.1.0
+        specifier: 'catalog:'
         version: 10.1.0(eslint@8.57.0)
       conventional-changelog-cli:
-        specifier: ^5.0.0
+        specifier: 'catalog:'
         version: 5.0.0(conventional-commits-filter@5.0.0)
       conventional-changelog-vuetify:
-        specifier: ^1.2.2
+        specifier: 'catalog:'
         version: 1.2.2
       conventional-github-releaser:
-        specifier: ^3.1.5
+        specifier: 'catalog:'
         version: 3.1.5
       cross-spawn:
-        specifier: ^7.0.6
+        specifier: 'catalog:'
         version: 7.0.6
       eslint:
-        specifier: ^8.57.0
+        specifier: 'catalog:'
         version: 8.57.0
       eslint-config-standard:
-        specifier: ^17.1.0
+        specifier: 'catalog:'
         version: 17.1.0(eslint-plugin-import@2.31.0(@typescript-eslint/parser@7.18.0(eslint@8.57.0)(typescript@5.5.4))(eslint@8.57.0))(eslint-plugin-n@16.6.2(eslint@8.57.0))(eslint-plugin-promise@6.6.0(eslint@8.57.0))(eslint@8.57.0)
       eslint-formatter-codeframe:
-        specifier: ^7.32.1
+        specifier: 'catalog:'
         version: 7.32.1
       eslint-plugin-import:
-        specifier: ^2.31.0
+        specifier: 'catalog:'
         version: 2.31.0(@typescript-eslint/parser@7.18.0(eslint@8.57.0)(typescript@5.5.4))(eslint@8.57.0)
       eslint-plugin-local-rules:
-        specifier: ^2.0.1
+        specifier: 'catalog:'
         version: 2.0.1
       eslint-plugin-n:
-        specifier: ^16.6.2
+        specifier: 'catalog:'
         version: 16.6.2(eslint@8.57.0)
       eslint-plugin-promise:
-        specifier: ^6.6.0
+        specifier: 'catalog:'
         version: 6.6.0(eslint@8.57.0)
       eslint-plugin-react:
-        specifier: ^7.37.5
+        specifier: 'catalog:'
         version: 7.37.5(eslint@8.57.0)
       eslint-plugin-sonarjs:
-        specifier: ^0.25.1
+        specifier: 'catalog:'
         version: 0.25.1(eslint@8.57.0)
       eslint-plugin-vue:
-        specifier: ^9.33.0
+        specifier: 'catalog:'
         version: 9.33.0(eslint@8.57.0)
       eslint-plugin-vuetify:
-        specifier: ^2.5.2
+        specifier: 'catalog:'
         version: 2.5.2(eslint@8.57.0)(vuetify@packages+vuetify)
       glob:
-        specifier: ^11.0.1
+        specifier: 'catalog:'
         version: 11.0.1
       husky:
-        specifier: ^9.1.7
+        specifier: 'catalog:'
         version: 9.1.7
       inquirer:
-        specifier: ^12.5.2
+        specifier: 'catalog:'
         version: 12.5.2(@types/node@22.5.4)
       lerna:
-        specifier: ^8.2.2
+        specifier: 'catalog:'
         version: 8.2.2(encoding@0.1.13)
       magic-string:
-        specifier: ^0.30.17
+        specifier: 'catalog:'
         version: 0.30.17
       mkdirp:
-        specifier: ^3.0.1
+        specifier: 'catalog:'
         version: 3.0.1
       moment:
-        specifier: ^2.30.1
+        specifier: 'catalog:'
         version: 2.30.1
       rimraf:
-        specifier: ^6.0.1
+        specifier: 'catalog:'
         version: 6.0.1
       sass:
-        specifier: ^1.86.3
+        specifier: 'catalog:'
         version: 1.86.3
       sass-embedded:
-        specifier: ^1.86.3
+        specifier: 'catalog:'
         version: 1.86.3
       semver:
-        specifier: ^7.7.1
+        specifier: 'catalog:'
         version: 7.7.1
       shelljs:
-        specifier: ^0.9.2
+        specifier: 'catalog:'
         version: 0.9.2
       stringify-object:
-        specifier: ^5.0.0
+        specifier: 'catalog:'
         version: 5.0.0
       typescript:
-        specifier: ~5.5.4
+        specifier: 'catalog:'
         version: 5.5.4
       upath:
-        specifier: ^2.0.1
+        specifier: 'catalog:'
         version: 2.0.1
       vite-plugin-inspect:
-        specifier: 11.0.0
+        specifier: 'catalog:'
         version: 11.0.0(vite@6.1.0(@types/node@22.5.4)(sass-embedded@1.86.3)(sass@1.86.3)(terser@5.31.3)(tsx@4.19.3)(yaml@2.7.0))
       vite-plugin-warmup:
-        specifier: ^0.1.0
+        specifier: 'catalog:'
         version: 0.1.0(vite@6.1.0(@types/node@22.5.4)(sass-embedded@1.86.3)(sass@1.86.3)(terser@5.31.3)(tsx@4.19.3)(yaml@2.7.0))
       vue:
-        specifier: ^3.5.13
+        specifier: 'catalog:'
         version: 3.5.13(typescript@5.5.4)
       vue-tsc:
-        specifier: ^2.0.29
+        specifier: 'catalog:'
         version: 2.0.29(typescript@5.5.4)
       yargs:
-        specifier: ^17.7.2
+        specifier: 'catalog:'
         version: 17.7.2
 
   packages/api-generator:
     dependencies:
       deepmerge:
-        specifier: ^4.3.1
+        specifier: 'catalog:'
         version: 4.3.1
       piscina:
-        specifier: ^4.9.2
+        specifier: 'catalog:'
         version: 4.9.2
       prettier:
-        specifier: ^3.5.3
+        specifier: 'catalog:'
         version: 3.5.3
       ts-morph:
-        specifier: ^25.0.1
+        specifier: 'catalog:'
         version: 25.0.1
       tsx:
-        specifier: ^4.19.3
+        specifier: 'catalog:'
         version: 4.19.3
       vue:
-        specifier: ^3.5.13
+        specifier: 'catalog:'
         version: 3.5.13(typescript@5.5.4)
       vuetify:
         specifier: workspace:*
         version: link:../vuetify
     devDependencies:
       '@types/lodash-es':
-        specifier: ^4.17.12
+        specifier: 'catalog:'
         version: 4.17.12
       '@types/stringify-object':
-        specifier: ^4.0.5
+        specifier: 'catalog:'
         version: 4.0.5
       eslint:
-        specifier: ^8.57.0
+        specifier: 'catalog:'
         version: 8.57.0
       lodash-es:
-        specifier: ^4.17.21
+        specifier: 'catalog:'
         version: 4.17.21
       stringify-object:
-        specifier: ^5.0.0
+        specifier: 'catalog:'
         version: 5.0.0
 
   packages/docs:
     dependencies:
       '@cosmicjs/sdk':
-        specifier: ^1.5.2
+        specifier: 'catalog:'
         version: 1.5.2
       '@sentry/vue':
-        specifier: ^9.12.0
+        specifier: 'catalog:'
         version: 9.12.0(pinia@3.0.2(typescript@5.5.4)(vue@3.5.13(typescript@5.5.4)))(vue@3.5.13(typescript@5.5.4))
       '@vue/compiler-dom':
-        specifier: ^3.5.13
+        specifier: 'catalog:'
         version: 3.5.13
       '@vuelidate/core':
-        specifier: ^2.0.3
+        specifier: 'catalog:'
         version: 2.0.3(vue@3.5.13(typescript@5.5.4))
       '@vuelidate/validators':
-        specifier: ^2.0.4
+        specifier: 'catalog:'
         version: 2.0.4(vue@3.5.13(typescript@5.5.4))
       '@vuetify/one':
-        specifier: ^2.0.0
+        specifier: 'catalog:'
         version: 2.0.0(@mdi/js@7.4.47(patch_hash=3c2a78b1509745df3a3100e3e59075dd87718e67632cc14dc64dd9ac34098f9f))(lodash-es@4.17.21)(vue@3.5.13(typescript@5.5.4))(vuetify@packages+vuetify)
       algoliasearch:
-        specifier: ^4.24.0
+        specifier: 'catalog:'
         version: 4.24.0
       fflate:
-        specifier: ^0.8.2
+        specifier: 'catalog:'
         version: 0.8.2
       isomorphic-fetch:
-        specifier: ^3.0.0
+        specifier: 'catalog:'
         version: 3.0.0(encoding@0.1.13)
       lodash-es:
-        specifier: ^4.17.21
+        specifier: 'catalog:'
         version: 4.17.21
       pinia:
-        specifier: ^3.0.2
+        specifier: 'catalog:'
         version: 3.0.2(typescript@5.5.4)(vue@3.5.13(typescript@5.5.4))
       prism-theme-vars:
-        specifier: ^0.2.5
+        specifier: 'catalog:'
         version: 0.2.5
       prismjs:
-        specifier: ^1.30.0
+        specifier: 'catalog:'
         version: 1.30.0
       roboto-fontface:
-        specifier: ^0.10.0
+        specifier: 'catalog:'
         version: 0.10.0
       swetrix:
-        specifier: ^3.6.1
+        specifier: 'catalog:'
         version: 3.6.1
       vee-validate:
-        specifier: ^4.15.0
+        specifier: 'catalog:'
         version: 4.15.0(vue@3.5.13(typescript@5.5.4))
       vue:
-        specifier: ^3.5.13
+        specifier: 'catalog:'
         version: 3.5.13(typescript@5.5.4)
       vue-gtag-next:
-        specifier: ^1.14.0
+        specifier: 'catalog:'
         version: 1.14.0(patch_hash=3469e25ae2dc6bd97138e6a2b767743de8123979b246ebc2bdbb581c76efbfbf)(vue@3.5.13(typescript@5.5.4))
       vue-i18n:
-        specifier: ^11.1.1
+        specifier: 'catalog:'
         version: 11.1.1(vue@3.5.13(typescript@5.5.4))
       vue-instantsearch:
-        specifier: ^4.20.6
+        specifier: 'catalog:'
         version: 4.20.6(@vue/server-renderer@3.5.13(vue@3.5.13(typescript@5.5.4)))(algoliasearch@4.24.0)(vue@3.5.13(typescript@5.5.4))
       vue-router:
-        specifier: ^4.5.0
+        specifier: 'catalog:'
         version: 4.5.0(vue@3.5.13(typescript@5.5.4))
       vuetify:
         specifier: workspace:*
         version: link:../vuetify
     devDependencies:
       '@babel/generator':
-        specifier: ^7.27.0
+        specifier: 'catalog:'
         version: 7.27.0
       '@babel/types':
-        specifier: ^7.27.0
+        specifier: 'catalog:'
         version: 7.27.0
       '@emailjs/browser':
-        specifier: ^4.4.1
+        specifier: 'catalog:'
         version: 4.4.1
       '@intlify/unplugin-vue-i18n':
-        specifier: ^6.0.5
+        specifier: 'catalog:'
         version: 6.0.5(@vue/compiler-dom@3.5.13)(eslint@8.57.0)(rollup@4.40.0)(typescript@5.5.4)(vue-i18n@11.1.1(vue@3.5.13(typescript@5.5.4)))(vue@3.5.13(typescript@5.5.4))
       '@mdi/js':
-        specifier: 7.4.47
+        specifier: 'catalog:'
         version: 7.4.47(patch_hash=3c2a78b1509745df3a3100e3e59075dd87718e67632cc14dc64dd9ac34098f9f)
       '@mdi/svg':
-        specifier: 7.4.47
+        specifier: 'catalog:'
         version: 7.4.47
       '@octokit/openapi-types':
-        specifier: ^25.0.0
+        specifier: 'catalog:'
         version: 25.0.0
       '@types/babel__generator':
-        specifier: ^7.27.0
+        specifier: 'catalog:'
         version: 7.27.0
       '@types/lodash-es':
-        specifier: ^4.17.12
+        specifier: 'catalog:'
         version: 4.17.12
       '@types/markdown-it':
-        specifier: ^14.1.2
+        specifier: 'catalog:'
         version: 14.1.2
       '@types/markdown-it-container':
-        specifier: ^2.0.10
+        specifier: 'catalog:'
         version: 2.0.10
       '@types/prismjs':
-        specifier: ^1.26.5
+        specifier: 'catalog:'
         version: 1.26.5
       '@vitejs/plugin-basic-ssl':
-        specifier: ^2.0.0
+        specifier: 'catalog:'
         version: 2.0.0(vite@6.1.0(@types/node@22.5.4)(sass-embedded@1.86.3)(sass@1.86.3)(terser@5.31.3)(tsx@4.19.3)(yaml@2.7.0))
       '@vitejs/plugin-vue':
-        specifier: ^5.2.1
+        specifier: 'catalog:'
         version: 5.2.1(vite@6.1.0(@types/node@22.5.4)(sass-embedded@1.86.3)(sass@1.86.3)(terser@5.31.3)(tsx@4.19.3)(yaml@2.7.0))(vue@3.5.13(typescript@5.5.4))
       '@vue/compiler-sfc':
-        specifier: ^3.5.13
+        specifier: 'catalog:'
         version: 3.5.13
       '@vuetify/api-generator':
         specifier: workspace:*
         version: link:../api-generator
       '@yankeeinlondon/builder-api':
-        specifier: ^1.4.1
+        specifier: 'catalog:'
         version: 1.4.1(@vitejs/plugin-vue@5.2.1(vite@6.1.0(@types/node@22.5.4)(sass-embedded@1.86.3)(sass@1.86.3)(terser@5.31.3)(tsx@4.19.3)(yaml@2.7.0))(vue@3.5.13(typescript@5.5.4)))(encoding@0.1.13)(vite@6.1.0(@types/node@22.5.4)(sass-embedded@1.86.3)(sass@1.86.3)(terser@5.31.3)(tsx@4.19.3)(yaml@2.7.0))
       ajv:
-        specifier: ^8.17.1
+        specifier: 'catalog:'
         version: 8.17.1
       algoliasearch-helper:
-        specifier: ^3.24.3
+        specifier: 'catalog:'
         version: 3.24.3(algoliasearch@4.24.0)
       async-es:
-        specifier: ^3.2.6
+        specifier: 'catalog:'
         version: 3.2.6
       date-fns:
-        specifier: ^3.6.0
+        specifier: 'catalog:'
         version: 3.6.0
       front-matter:
-        specifier: ^4.0.2
+        specifier: 'catalog:'
         version: 4.0.2
       jest:
-        specifier: ^29.7.0
+        specifier: 'catalog:'
         version: 29.7.0(@types/node@22.5.4)(ts-node@10.9.2(@types/node@22.5.4)(typescript@5.5.4))
       jest-runner-eslint:
-        specifier: ^2.2.1
+        specifier: 'catalog:'
         version: 2.2.1(eslint@8.57.0)(jest@29.7.0(@types/node@22.5.4)(ts-node@10.9.2(@types/node@22.5.4)(typescript@5.5.4)))
       jest-silent-reporter:
-        specifier: ^0.6.0
+        specifier: 'catalog:'
         version: 0.6.0
       markdown-it:
-        specifier: ^14.1.0
+        specifier: 'catalog:'
         version: 14.1.0
       markdown-it-anchor:
-        specifier: ^9.2.0
+        specifier: 'catalog:'
         version: 9.2.0(@types/markdown-it@14.1.2)(markdown-it@14.1.0)
       markdown-it-attrs:
-        specifier: ^4.3.1
+        specifier: 'catalog:'
         version: 4.3.1(markdown-it@14.1.0)
       markdown-it-container:
-        specifier: ^4.0.0
+        specifier: 'catalog:'
         version: 4.0.0
       markdown-it-emoji:
-        specifier: ^2.0.2
+        specifier: 'catalog:'
         version: 2.0.2
       markdown-it-header-sections:
-        specifier: ^1.0.0
+        specifier: 'catalog:'
         version: 1.0.0
       markdown-it-link-attributes:
-        specifier: ^4.0.1
+        specifier: 'catalog:'
         version: 4.0.1
       markdown-it-prism:
-        specifier: ^3.0.0
+        specifier: 'catalog:'
         version: 3.0.0
       markdownlint-cli:
-        specifier: ^0.44.0
+        specifier: 'catalog:'
         version: 0.44.0
       unplugin-auto-import:
-        specifier: 19.1.0
+        specifier: 'catalog:'
         version: 19.1.0
       unplugin-fonts:
-        specifier: 1.3.1
+        specifier: 'catalog:'
         version: 1.3.1(vite@6.1.0(@types/node@22.5.4)(sass-embedded@1.86.3)(sass@1.86.3)(terser@5.31.3)(tsx@4.19.3)(yaml@2.7.0))
       unplugin-vue-components:
-        specifier: ^0.27.4
+        specifier: 'catalog:'
         version: 0.27.4(@babel/parser@7.27.0)(rollup@4.40.0)(vue@3.5.13(typescript@5.5.4))
       vite:
-        specifier: ^6.1.0
+        specifier: 'catalog:'
         version: 6.1.0(@types/node@22.5.4)(sass-embedded@1.86.3)(sass@1.86.3)(terser@5.31.3)(tsx@4.19.3)(yaml@2.7.0)
       vite-plugin-md:
-        specifier: ^0.22.5
+        specifier: 'catalog:'
         version: 0.22.5(@vitejs/plugin-vue@5.2.1(vite@6.1.0(@types/node@22.5.4)(sass-embedded@1.86.3)(sass@1.86.3)(terser@5.31.3)(tsx@4.19.3)(yaml@2.7.0))(vue@3.5.13(typescript@5.5.4)))(encoding@0.1.13)(vite@6.1.0(@types/node@22.5.4)(sass-embedded@1.86.3)(sass@1.86.3)(terser@5.31.3)(tsx@4.19.3)(yaml@2.7.0))
       vite-plugin-pages:
-        specifier: ^0.33.0
+        specifier: 'catalog:'
         version: 0.33.0(@vue/compiler-sfc@3.5.13)(vite@6.1.0(@types/node@22.5.4)(sass-embedded@1.86.3)(sass@1.86.3)(terser@5.31.3)(tsx@4.19.3)(yaml@2.7.0))(vue-router@4.5.0(vue@3.5.13(typescript@5.5.4)))
       vite-plugin-pwa:
-        specifier: ^1.0.0
+        specifier: 'catalog:'
         version: 1.0.0(@types/babel__core@7.1.19)(vite@6.1.0(@types/node@22.5.4)(sass-embedded@1.86.3)(sass@1.86.3)(terser@5.31.3)(tsx@4.19.3)(yaml@2.7.0))
       vite-plugin-vue-layouts:
-        specifier: ^0.11.0
+        specifier: 'catalog:'
         version: 0.11.0(vite@6.1.0(@types/node@22.5.4)(sass-embedded@1.86.3)(sass@1.86.3)(terser@5.31.3)(tsx@4.19.3)(yaml@2.7.0))(vue-router@4.5.0(vue@3.5.13(typescript@5.5.4)))(vue@3.5.13(typescript@5.5.4))
       vite-plugin-vuetify:
-        specifier: ^2.1.1
+        specifier: 'catalog:'
         version: 2.1.1(vite@6.1.0(@types/node@22.5.4)(sass-embedded@1.86.3)(sass@1.86.3)(terser@5.31.3)(tsx@4.19.3)(yaml@2.7.0))(vue@3.5.13(typescript@5.5.4))(vuetify@packages+vuetify)
       vue-tsc:
-        specifier: ^2.0.29
+        specifier: 'catalog:'
         version: 2.0.29(typescript@5.5.4)
 
   packages/vuetify:
     devDependencies:
       '@date-io/core':
-        specifier: 3.2.0
+        specifier: 'catalog:'
         version: 3.2.0
       '@date-io/date-fns':
-        specifier: 3.2.1
+        specifier: 'catalog:'
         version: 3.2.1(date-fns@3.6.0)
       '@date-io/dayjs':
-        specifier: ^3.2.0
+        specifier: 'catalog:'
         version: 3.2.0(dayjs@1.11.13)
       '@date-io/luxon':
-        specifier: ^3.2.0
+        specifier: 'catalog:'
         version: 3.2.0(luxon@3.6.1)
       '@date-io/moment':
-        specifier: ^3.2.0
+        specifier: 'catalog:'
         version: 3.2.0(moment@2.30.1)
       '@formatjs/intl':
-        specifier: ^2.10.15
+        specifier: 'catalog:'
         version: 2.10.15(typescript@5.5.4)
       '@fortawesome/fontawesome-svg-core':
-        specifier: ^6.7.2
+        specifier: 'catalog:'
         version: 6.7.2
       '@fortawesome/free-solid-svg-icons':
-        specifier: ^6.7.2
+        specifier: 'catalog:'
         version: 6.7.2
       '@fortawesome/vue-fontawesome':
-        specifier: ^3.0.8
+        specifier: 'catalog:'
         version: 3.0.8(@fortawesome/fontawesome-svg-core@6.7.2)(vue@3.5.13(typescript@5.5.4))
       '@intlify/devtools-types':
-        specifier: ^11.1.3
+        specifier: 'catalog:'
         version: 11.1.3
       '@percy/cli':
-        specifier: ^1.30.10
+        specifier: 'catalog:'
         version: 1.30.10(typescript@5.5.4)
       '@percy/sdk-utils':
-        specifier: ^1.30.10
+        specifier: 'catalog:'
         version: 1.30.10
       '@rollup/plugin-alias':
-        specifier: ^5.1.1
+        specifier: 'catalog:'
         version: 5.1.1(rollup@4.40.0)
       '@rollup/plugin-babel':
-        specifier: ^6.0.4
+        specifier: 'catalog:'
         version: 6.0.4(@babel/core@7.26.10)(@types/babel__core@7.1.19)(rollup@4.40.0)
       '@rollup/plugin-node-resolve':
-        specifier: ^16.0.1
+        specifier: 'catalog:'
         version: 16.0.1(rollup@4.40.0)
       '@rollup/plugin-typescript':
-        specifier: ^12.1.2
+        specifier: 'catalog:'
         version: 12.1.2(rollup@4.40.0)(tslib@2.8.1)(typescript@5.5.4)
       '@testing-library/dom':
         specifier: npm:@vuetify/testing-library-dom@1.0.2
         version: '@vuetify/testing-library-dom@1.0.2'
       '@testing-library/user-event':
-        specifier: ^14.6.1
+        specifier: 'catalog:'
         version: 14.6.1(@vuetify/testing-library-dom@1.0.2)
       '@testing-library/vue':
-        specifier: ^8.1.0
+        specifier: 'catalog:'
         version: 8.1.0(patch_hash=15ba1e1b9f291286e3951cdf39b2e27f55b6727bc0315792f3e4558c0a3a7db8)(@vue/compiler-sfc@3.5.13)(vue@3.5.13(typescript@5.5.4))
       '@types/node':
         specifier: 22.5.4
         version: 22.5.4
       '@types/resize-observer-browser':
-        specifier: ^0.1.11
+        specifier: 'catalog:'
         version: 0.1.11
       '@vitejs/plugin-vue':
-        specifier: ^5.2.1
+        specifier: 'catalog:'
         version: 5.2.1(vite@6.1.0(@types/node@22.5.4)(sass-embedded@1.86.3)(sass@1.86.3)(terser@5.31.3)(tsx@4.19.3)(yaml@2.7.0))(vue@3.5.13(typescript@5.5.4))
       '@vitejs/plugin-vue-jsx':
-        specifier: ^4.1.2
+        specifier: 'catalog:'
         version: 4.1.2(vite@6.1.0(@types/node@22.5.4)(sass-embedded@1.86.3)(sass@1.86.3)(terser@5.31.3)(tsx@4.19.3)(yaml@2.7.0))(vue@3.5.13(typescript@5.5.4))
       '@vitest/browser':
-        specifier: ^3.1.1
+        specifier: 'catalog:'
         version: 3.1.1(vite@6.1.0(@types/node@22.5.4)(sass-embedded@1.86.3)(sass@1.86.3)(terser@5.31.3)(tsx@4.19.3)(yaml@2.7.0))(vitest@3.1.1)(webdriverio@9.12.5)
       '@vitest/coverage-istanbul':
-        specifier: ^3.1.1
+        specifier: 'catalog:'
         version: 3.1.1(vitest@3.1.1)
       '@vitest/ui':
-        specifier: ^3.1.1
+        specifier: 'catalog:'
         version: 3.1.1(vitest@3.1.1)
       '@vue/babel-plugin-jsx':
-        specifier: ^1.4.0
+        specifier: 'catalog:'
         version: 1.4.0(@babel/core@7.26.10)
       '@vue/reactivity':
-        specifier: ^3.5.13
+        specifier: 'catalog:'
         version: 3.5.13
       '@vue/shared':
-        specifier: ^3.5.13
+        specifier: 'catalog:'
         version: 3.5.13
       '@vue/test-utils':
-        specifier: ^2.4.6
+        specifier: 'catalog:'
         version: 2.4.6
       acorn-walk:
-        specifier: ^8.3.4
+        specifier: 'catalog:'
         version: 8.3.4
       autoprefixer:
-        specifier: ^10.4.21
+        specifier: 'catalog:'
         version: 10.4.21(postcss@8.5.3)
       babel-plugin-add-import-extension:
-        specifier: 1.5.1
+        specifier: 'catalog:'
         version: 1.5.1(@babel/core@7.26.10)
       babel-plugin-module-resolver:
-        specifier: ^5.0.2
+        specifier: 'catalog:'
         version: 5.0.2
       babel-plugin-transform-define:
-        specifier: ^2.1.4
+        specifier: 'catalog:'
         version: 2.1.4
       babel-polyfill:
-        specifier: ^6.26.0
+        specifier: 'catalog:'
         version: 6.26.0
       concurrently:
-        specifier: ^9.1.2
+        specifier: 'catalog:'
         version: 9.1.2
       cssnano:
-        specifier: ^7.0.6
+        specifier: 'catalog:'
         version: 7.0.6(postcss@8.5.3)
       csstype:
-        specifier: ^3.1.3
+        specifier: 'catalog:'
         version: 3.1.3
       cy-mobile-commands:
-        specifier: ^0.3.0
+        specifier: 'catalog:'
         version: 0.3.0
       date-fns:
-        specifier: ^3.6.0
+        specifier: 'catalog:'
         version: 3.6.0
       dayjs:
-        specifier: ^1.11.13
+        specifier: 'catalog:'
         version: 1.11.13
       dotenv:
-        specifier: ^16.5.0
+        specifier: 'catalog:'
         version: 16.5.0
       eslint-plugin-vitest:
-        specifier: 0.5.4
+        specifier: 'catalog:'
         version: 0.5.4(@typescript-eslint/eslint-plugin@7.18.0(@typescript-eslint/parser@7.18.0(eslint@8.57.0)(typescript@5.5.4))(eslint@8.57.0)(typescript@5.5.4))(eslint@8.57.0)(typescript@5.5.4)(vitest@3.1.1)
       expect:
-        specifier: ^29.7.0
+        specifier: 'catalog:'
         version: 29.7.0
       fast-glob:
-        specifier: ^3.3.3
+        specifier: 'catalog:'
         version: 3.3.3
       identity-obj-proxy:
-        specifier: ^3.0.0
+        specifier: 'catalog:'
         version: 3.0.0
       jsdom:
-        specifier: ^26.1.0
+        specifier: 'catalog:'
         version: 26.1.0
+      lodash-es:
+        specifier: 'catalog:'
+        version: 4.17.21
       luxon:
-        specifier: ^3.6.1
+        specifier: 'catalog:'
         version: 3.6.1
       micromatch:
-        specifier: ^4.0.8
+        specifier: 'catalog:'
         version: 4.0.8
       moment:
-        specifier: ^2.30.1
+        specifier: 'catalog:'
         version: 2.30.1
       postcss:
-        specifier: ^8.5.3
+        specifier: 'catalog:'
         version: 8.5.3
       roboto-fontface:
-        specifier: ^0.10.0
+        specifier: 'catalog:'
         version: 0.10.0
       rollup:
-        specifier: ^4.40.0
+        specifier: 'catalog:'
         version: 4.40.0
       rollup-plugin-dts:
-        specifier: ^6.2.1
+        specifier: 'catalog:'
         version: 6.2.1(rollup@4.40.0)(typescript@5.5.4)
       rollup-plugin-sass:
-        specifier: ^1.15.2
+        specifier: 'catalog:'
         version: 1.15.2(rollup@4.40.0)
       rollup-plugin-sourcemaps:
-        specifier: ^0.6.3
+        specifier: 'catalog:'
         version: 0.6.3(@types/node@22.5.4)(rollup@4.40.0)
       rollup-plugin-terser:
-        specifier: ^7.0.2
+        specifier: 'catalog:'
         version: 7.0.2(rollup@4.40.0)
       timezone-mock:
-        specifier: ^1.3.6
+        specifier: 'catalog:'
         version: 1.3.6
       ts-node:
-        specifier: ^10.9.2
+        specifier: 'catalog:'
         version: 10.9.2(@types/node@22.5.4)(typescript@5.5.4)
       ts-patch:
-        specifier: ^3.3.0
+        specifier: 'catalog:'
         version: 3.3.0
       typescript-transform-paths:
-        specifier: ^3.5.5
+        specifier: 'catalog:'
         version: 3.5.5(typescript@5.5.4)
       unplugin-auto-import:
-        specifier: 19.1.0
+        specifier: 'catalog:'
         version: 19.1.0
       unplugin-vue-components:
-        specifier: ^0.27.4
+        specifier: 'catalog:'
         version: 0.27.4(@babel/parser@7.27.0)(rollup@4.40.0)(vue@3.5.13(typescript@5.5.4))
       upath:
-        specifier: ^2.0.1
+        specifier: 'catalog:'
         version: 2.0.1
       vite:
-        specifier: ^6.1.0
+        specifier: 'catalog:'
         version: 6.1.0(@types/node@22.5.4)(sass-embedded@1.86.3)(sass@1.86.3)(terser@5.31.3)(tsx@4.19.3)(yaml@2.7.0)
       vite-ssr:
-        specifier: ^0.17.2
+        specifier: 'catalog:'
         version: 0.17.2(@vitejs/plugin-vue@5.2.1(vite@6.1.0(@types/node@22.5.4)(sass-embedded@1.86.3)(sass@1.86.3)(terser@5.31.3)(tsx@4.19.3)(yaml@2.7.0))(vue@3.5.13(typescript@5.5.4)))(@vueuse/head@1.3.1(vue@3.5.13(typescript@5.5.4)))(encoding@0.1.13)(rollup@4.40.0)(vite@6.1.0(@types/node@22.5.4)(sass-embedded@1.86.3)(sass@1.86.3)(terser@5.31.3)(tsx@4.19.3)(yaml@2.7.0))(vue-router@4.5.0(vue@3.5.13(typescript@5.5.4)))(vue@3.5.13(typescript@5.5.4))
       vitest:
-        specifier: ^3.1.1
+        specifier: 'catalog:'
         version: 3.1.1(@types/debug@4.1.12)(@types/node@22.5.4)(@vitest/browser@3.1.1)(@vitest/ui@3.1.1)(happy-dom@8.9.0(encoding@0.1.13))(jsdom@26.1.0)(sass-embedded@1.86.3)(sass@1.86.3)(terser@5.31.3)(tsx@4.19.3)(yaml@2.7.0)
       vue:
-        specifier: ^3.5.13
+        specifier: 'catalog:'
         version: 3.5.13(typescript@5.5.4)
       vue-i18n:
-        specifier: ^11.1.1
+        specifier: 'catalog:'
         version: 11.1.1(vue@3.5.13(typescript@5.5.4))
       vue-router:
-        specifier: ^4.5.0
+        specifier: 'catalog:'
         version: 4.5.0(vue@3.5.13(typescript@5.5.4))
+      vue-tsc:
+        specifier: 'catalog:'
+        version: 2.0.29(typescript@5.5.4)
       webdriverio:
-        specifier: ^9.12.5
+        specifier: 'catalog:'
         version: 9.12.5
 
 packages:
@@ -7764,6 +8304,7 @@ packages:
     engines: {node: '>=0.6.0', teleport: '>=0.2.0'}
     deprecated: |-
       You or someone you depend on is using Q, the JavaScript Promise library that gave JavaScript developers strong feelings about promises. They can almost certainly migrate to the native JavaScript promise now. Thank you literally everyone for joining me in this bet against the odds. Be excellent to each other.
+
       (For a CapTP with native promises, see @endo/eventual-send and @endo/captp)
 
   qs@6.9.7:
