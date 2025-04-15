@@ -6,7 +6,7 @@ import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextFi
 
 // Composables
 import { useDate } from '@/composables/date'
-import { getDateFromStringDate } from '@/composables/date/date'
+import { stringInputFormatter } from '@/composables/date/date'
 import { makeDisplayProps, useDisplay } from '@/composables/display'
 import { makeFocusProps, useFocus } from '@/composables/focus'
 import { forwardRefs } from '@/composables/forwardRefs'
@@ -136,24 +136,22 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
     })
 
     function onKeydown (e: KeyboardEvent) {
-      const isDeleteKey = e.key === 'Backspace' || e.key === 'Delete'
-
-      if (display.value && isDeleteKey) {
-        model.value = null
-        return
-      }
-
-      if (e.key !== 'Enter' || display.value) return
+      if (e.key !== 'Enter') return
 
       if (!menu.value || !isFocused.value) {
         menu.value = true
-        return
       }
 
       const target = e.target as HTMLInputElement
 
-      const date = getDateFromStringDate(target.value, props.inputFormat)
-      model.value = date
+      const formattedDate = stringInputFormatter(target.value, props.inputFormat)
+
+      if (!formattedDate) {
+        return
+      }
+
+      const { year, month, day } = formattedDate
+      model.value = adapter.setYear(adapter.setMonth(adapter.setDate(adapter.date(), day), month), year)
     }
 
     function onClick (e: MouseEvent) {

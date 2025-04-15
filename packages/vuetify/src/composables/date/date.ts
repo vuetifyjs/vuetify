@@ -117,7 +117,7 @@ export function useDate (): DateInstance {
   return createInstance(options, locale)
 }
 
-export function getDateFromStringDate (dateString: string, format: string) {
+export function stringInputFormatter (dateString: string, format: string) {
   function countConsecutiveChars (str: string, startIndex: number): number {
     const char = str[startIndex]
     let count = 0
@@ -171,5 +171,5 @@ export function getDateFromStringDate (dateString: string, format: string) {
   const { year, month, day } = validatedParts
   const date = new Date(year, month - 1, day)
 
-  return validateDate(date, year, month, day) ? date : null
+  return validateDate(date, year, month, day) ? { year, month, day } : null
 }
