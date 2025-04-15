@@ -32,6 +32,7 @@ export const md3: Blueprint = {
     VCheckbox: {
       color: 'secondary',
       inset: true,
+      indentDetails: true,
     },
     VChip: {
       rounded: 'sm',
@@ -74,11 +75,21 @@ export const md3: Blueprint = {
         rounded: undefined,
       },
     },
+    VRadioGroup: {
+      indentDetails: true,
+    },
     VSelect: {
       variant: 'outlined',
     },
     VSlider: {
       color: 'primary',
+      indentDetails: true,
+    },
+    VRangeSlider: {
+      indentDetails: true,
+    },
+    VSwitch: {
+      indentDetails: true,
     },
     VTabs: {
       color: 'primary',
