@@ -14,6 +14,10 @@
     &--disabled
       pointer-events: none
 
+    &--indent-details
+      .v-input__details
+        padding-inline: $input-details-padding-inline
+
     @at-root
       @include tools.density('v-input', $input-density) using ($modifier)
         --v-input-control-height: #{$input-control-height + $modifier}

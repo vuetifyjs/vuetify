@@ -190,7 +190,6 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
             {
               'v-file-input--chips': !!props.chips,
               'v-file-input--hide': props.hideInput,
-              'v-input--plain-underlined': isPlainOrUnderlined.value,
             },
             props.class,
           ]}
@@ -200,6 +199,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
           { ...inputProps }
           centerAffix={ !isPlainOrUnderlined.value }
           focused={ isFocused.value }
+          indentDetails={ props.indentDetails ?? !isPlainOrUnderlined.value }
         >
           {{
             ...slots,

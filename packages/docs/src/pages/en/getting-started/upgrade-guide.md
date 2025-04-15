@@ -35,6 +35,38 @@ export default createVuetify({
 
 ## Components
 
+### VTextField
+
+Removed the **$text-field-details-padding-inline** SASS variable.
+
+```diff { resource="src/styles/settings/_variables.scss" }
+@use 'vuetify/settings' with (
+-  $text-field-details-padding-inline: <value>
++  $input-details-padding-inline: <value>
+);
+```
+
+### VRadioGroup
+
+Removed the **$radio-group-details-padding-inline** SASS variable.
+
+```diff { resource="src/styles/settings/_variables.scss" }
+@use 'vuetify/settings' with (
+-  $radio-group-details-padding-inline: <value>
++  $input-details-padding-inline: <value>
+);
+```
+
+### VFileInput
+
+Removed the **$file-input-details-padding-inline** SASS variable.
+
+```diff { resource="src/styles/settings/_variables.scss" }
+@use 'vuetify/settings' with (
+-  $file-input-details-padding-inline: <value>
++  $input-details-padding-inline: <value>
+);
+
 ### General changes
 
 #### Slot variables are (mostly) no longer refs
