@@ -7,7 +7,7 @@
   "scripts": {
     "build": "node --import tsx --no-warnings src/index.ts",
     "lint": "eslint --ext .ts,.json src -f codeframe --max-warnings 0",
-    "lint:fix": "pnpm run lint --fix"
+    "lint:fix": "node --run lint -- --fix"
   },
   "author": "",
   "license": "ISC",
