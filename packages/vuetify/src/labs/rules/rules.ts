@@ -32,6 +32,9 @@ export type RulesOptions = {
   aliases?: Partial<RuleAliases>
 }
 
+export type ValidationRuleParams = [any, string?]
+export type ValidationAlias = string | [string, ...ValidationRuleParams]
+
 export function createRules (options: RulesOptions | undefined, locale: LocaleInstance) {
   const { t } = locale
 
@@ -86,9 +89,7 @@ export function createRules (options: RulesOptions | undefined, locale: LocaleIn
 export const RulesSymbol: InjectionKey<RulesOptions> = Symbol.for('vuetify:rules')
 
 export function useRules () {
-  const ruleOptions = inject(RulesSymbol)
+  const rules = inject(RulesSymbol, null)
 
-  if (!ruleOptions) throw new Error('Could not find Vuetify rules injection')
-
-  return ruleOptions.aliases
+  return rules?.aliases ?? {}
 }
