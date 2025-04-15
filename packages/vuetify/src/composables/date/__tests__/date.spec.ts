@@ -1,8 +1,6 @@
-// Composables
-import { stringInputFormatter } from '../date'
-
 // Utilities
 import { VuetifyDateAdapter } from '../adapters/vuetify'
+import { stringInputFormatter } from '../date'
 
 // Types
 import type { IUtils } from '@date-io/core/IUtils'

@@ -36,10 +36,7 @@ export type VDateInputSlots = Omit<VTextFieldSlots, 'default'> & {
 
 export const makeVDateInputProps = propsFactory({
   displayFormat: [Function, String],
-  inputFormat: {
-    type: String,
-    default: 'mm/dd/yyyy',
-  },
+  inputFormat: [Function, String],
   location: {
     type: String as PropType<StrategyProps['location']>,
     default: 'bottom start',
@@ -97,6 +94,25 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
       return adapter.format(date, props.displayFormat ?? 'keyboardDate')
     }
 
+    function parseUserInput (value: string) {
+      if (typeof props.inputFormat === 'function') {
+        return props.inputFormat(value)
+      }
+
+      if (typeof props.inputFormat === 'string') {
+        const formattedDate = stringInputFormatter(value, props.inputFormat)
+
+        if (!formattedDate) {
+          return null
+        }
+
+        const { year, month, day } = formattedDate
+        return adapter.setYear(adapter.setMonth(adapter.setDate(adapter.date(), day), month), year)
+      }
+
+      return adapter.isValid(value) ? adapter.date(value) : null
+    }
+
     const display = computed(() => {
       const value = wrapInArray(model.value)
 
@@ -140,18 +156,13 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
 
       if (!menu.value || !isFocused.value) {
         menu.value = true
+
+        return
       }
 
       const target = e.target as HTMLInputElement
 
-      const formattedDate = stringInputFormatter(target.value, props.inputFormat)
-
-      if (!formattedDate) {
-        return
-      }
-
-      const { year, month, day } = formattedDate
-      model.value = adapter.setYear(adapter.setMonth(adapter.setDate(adapter.date(), day), month), year)
+      model.value = parseUserInput(target.value) || model.value
     }
 
     function onClick (e: MouseEvent) {
