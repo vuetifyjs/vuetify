@@ -15,7 +15,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "preview-https": "HTTPS=true vite preview",
-    "lint": "vue-tsc --noEmit --pretty && pnpm run lint:md && jest --no-cache",
+    "lint": "concurrently 'vue-tsc --noEmit --pretty' 'pnpm run lint:md' 'jest --no-cache' -n 'tsc,md,eslint' --kill-others-on-fail -gr",
     "lint:fix": "pnpm run fix:md && JEST_FIX=true jest --no-cache",
     "lint:md": "markdownlint --config .markdownlintrc src/pages/en",
     "fix:md": "markdownlint --config .markdownlintrc src/pages/en --fix"
