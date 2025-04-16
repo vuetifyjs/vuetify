@@ -38,5 +38,8 @@
     "update:modelValue": "Emits when the component's model changes.",
     "update:options": "Emits when one of the **options** properties is updated.",
     "update:sortBy": "Emits when the **sort-by** property of the **options** prop is updated."
+  },
+  "exposed": {
+    "calculateVisibleItems": "Trigger updating the currently rendered items based on scroll position."
   }
 }
