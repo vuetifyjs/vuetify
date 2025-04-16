@@ -39,7 +39,10 @@ export const makeVDateInputProps = propsFactory({
     type: String as PropType<StrategyProps['location']>,
     default: 'bottom start',
   },
-
+  closeOnceRangeSelected: {
+    type: Boolean,
+    default: false,
+  },
   ...makeDisplayProps(),
   ...makeFocusProps(),
   ...makeVConfirmEditProps({
@@ -234,6 +237,10 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
 
                             if (!props.multiple) {
                               menu.value = false
+                            }
+
+                            if (props.closeOnceRangeSelected && props.multiple === 'range') {
+                              menu.value = value.length === 1
                             }
                           }
 

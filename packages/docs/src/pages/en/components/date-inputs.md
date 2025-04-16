@@ -96,6 +96,18 @@ On mobile devices, when the menu is open, clicking the input a second time will 
 
 :::
 
+#### Close Once Range Selected
+
+Using the **close-once-range-selected** prop allows you to close the date input menu once the user has selected a date range.
+
+<ExamplesExample file="v-date-input/prop-close-once-range-selected" />
+
+::: tip
+
+This prop only works with the `multiple` prop set to `range`.
+
+:::
+
 #### Calendar icon
 
 You can move the calendar icon within the input or entirely by utilizing the **prepend-icon** and **prepend-inner-icon** properties.
