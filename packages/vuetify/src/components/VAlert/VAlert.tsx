@@ -60,6 +60,10 @@ export const makeVAlertProps = propsFactory({
     type: [Boolean, String, Function, Object] as PropType<false | IconValue>,
     default: null,
   },
+  iconSize: {
+    type: Number,
+    default: null,
+  },
   modelValue: {
     type: Boolean,
     default: true,
@@ -189,7 +193,7 @@ export const VAlert = genericComponent<VAlertSlots>()({
                   key="prepend-icon"
                   density={ props.density }
                   icon={ icon.value }
-                  size={ props.prominent ? 44 : 28 }
+                  size={ props.iconSize ?? (props.prominent ? 44 : 28) }
                 />
               ) : (
                 <VDefaultsProvider
