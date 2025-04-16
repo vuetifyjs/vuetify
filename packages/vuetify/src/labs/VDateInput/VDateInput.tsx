@@ -107,7 +107,7 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
         }
 
         const { year, month, day } = formattedDate
-        return adapter.setYear(adapter.setMonth(adapter.setDate(adapter.date(), day), month), year)
+        return adapter.setYear(adapter.setMonth(adapter.setDate(adapter.date(), day), month - 1), year)
       }
 
       return adapter.isValid(value) ? adapter.date(value) : null
