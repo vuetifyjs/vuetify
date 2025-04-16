@@ -1,8 +1,12 @@
 import 'roboto-fontface'
 import '@/styles/main.sass'
-import { beforeEach, expect } from 'vitest'
+import { beforeAll, beforeEach, expect } from 'vitest'
 import { cleanup } from '@testing-library/vue'
-import { page } from '@vitest/browser/context'
+import { commands, page } from '@vitest/browser/context'
+
+beforeAll(async () => {
+  await commands.setFocusEmulationEnabled()
+})
 
 beforeEach(async () => {
   // Cleanup before not after, so if the test
@@ -12,26 +16,28 @@ beforeEach(async () => {
 })
 
 expect.extend({
-  async toBeOnScreen (received) {
-    const { isNot } = this
-
-    let visible = true
-    if (isNot) {
-      try {
-        expect(received).not.toBeVisible()
-        visible = false
-      } catch (err) {}
-    } else {
-      expect(received).toBeVisible()
-    }
-
-    const rect = visible && received.getBoundingClientRect()
+  /** .toBeVisible but using wdio's isDisplayed */
+  async toBeDisplayed (recieved: Element) {
+    const isDisplayed = await commands.isDisplayed(page.elementLocator(recieved).selector)
 
     return {
-      pass: visible && rect.bottom > 0 && rect.right > 0 &&
-        rect.x <= window.innerWidth &&
-        rect.y <= window.innerHeight,
-      message: () => `Expected element${isNot ? ' not' : ''} to be visible on screen`,
+      pass: isDisplayed,
+      message: () => {
+        const element = this.utils.printReceived(recieved.cloneNode(false))
+        return `Expected element${this.isNot ? ' not' : ''} to be displayed:\n${element}`
+      },
+    }
+  },
+  /** .toBeDisplayed, also checking if in viewport */
+  async toBeOnScreen (recieved: Element) {
+    const isDisplayed = await commands.isDisplayed(page.elementLocator(recieved).selector, true)
+
+    return {
+      pass: isDisplayed,
+      message: () => {
+        const element = this.utils.printReceived(recieved.cloneNode(false))
+        return `Expected element${this.isNot ? ' not' : ''} to be displayed on screen:\n${element}`
+      },
     }
   },
 })

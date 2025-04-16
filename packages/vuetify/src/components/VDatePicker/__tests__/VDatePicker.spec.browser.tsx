@@ -3,6 +3,7 @@ import { VDatePicker } from '..'
 
 // Utilities
 import { render, screen, userEvent } from '@test'
+import { commands } from '@vitest/browser/context'
 import { ref } from 'vue'
 
 describe('VDatePicker', () => {
@@ -31,10 +32,12 @@ describe('VDatePicker', () => {
     await userEvent.click(await screen.findByText('2025'))
     await userEvent.click(await screen.findByTestId('month-btn'))
     await userEvent.click(await screen.findByText('Jan'))
+    await commands.waitStable('.v-date-picker-month__days')
     await userEvent.click(await screen.findByText(7))
 
     // Select 2025-02-07
     await userEvent.click(await screen.findByTestId('next-month'))
+    await commands.waitStable('.v-date-picker-month__days')
     await userEvent.click(await screen.findByText(7))
 
     // Expect a 32-day range spanning across two months
