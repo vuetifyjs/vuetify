@@ -96,15 +96,15 @@ On mobile devices, when the menu is open, clicking the input a second time will 
 
 :::
 
-#### Close Once Range Selected
+#### Close on selection
 
-Using the **close-once-range-selected** prop allows you to close the date input menu once the user has selected a date range.
+Using the **close-on-selection** prop allows you to override default behaviour of the menu's display.
 
-<ExamplesExample file="v-date-input/prop-close-once-range-selected" />
+<ExamplesExample file="v-date-input/prop-close-on-selection" />
 
 ::: tip
 
-This prop only works with the `multiple` prop set to `range`.
+This prop is set to true by default so please consider using it only if you want to let the menu appear after selection
 
 :::
 

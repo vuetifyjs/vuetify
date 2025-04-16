@@ -39,9 +39,9 @@ export const makeVDateInputProps = propsFactory({
     type: String as PropType<StrategyProps['location']>,
     default: 'bottom start',
   },
-  closeOnceRangeSelected: {
+  closeOnSelection: {
     type: Boolean,
-    default: false,
+    default: true,
   },
   ...makeDisplayProps(),
   ...makeFocusProps(),
@@ -235,12 +235,14 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
                           } else {
                             model.value = value
 
-                            if (!props.multiple) {
-                              menu.value = false
-                            }
+                            const isRange = props.multiple === 'range'
+                            const isSingle = props.multiple !== true && !isRange
 
-                            if (props.closeOnceRangeSelected && props.multiple === 'range') {
-                              menu.value = value.length === 1
+                            if (isSingle) {
+                              menu.value = props.closeOnSelection
+                            } else if (isRange) {
+                              const isFirstSelection = value.length === 1
+                              menu.value = props.closeOnSelection ? isFirstSelection : true
                             }
                           }
 
