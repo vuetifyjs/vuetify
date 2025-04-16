@@ -22,6 +22,8 @@ export interface CalendarProps {
   weekdays: number[]
   year: number | string | undefined
   weeksInMonth: 'dynamic' | 'static'
+
+  /** @deprecated */
   firstDayOfWeek: number | string | undefined
 
   'onUpdate:modelValue': ((value: unknown[]) => void) | undefined
