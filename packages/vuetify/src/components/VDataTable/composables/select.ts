@@ -2,7 +2,7 @@
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, inject, provide } from 'vue'
+import { computed, inject, provide, shallowRef } from 'vue'
 import { deepEqual, propsFactory, wrapInArray } from '@/util'
 
 // Types
@@ -122,6 +122,8 @@ export function provideSelection (
     }
   })
 
+  const lastSelectedIndex = shallowRef<number | null>(null)
+
   function isSelected (items: SelectableItem | SelectableItem[]) {
     return wrapInArray(items).every(item => selected.value.has(item.value))
   }
@@ -140,8 +142,20 @@ export function provideSelection (
     selected.value = newSelected
   }
 
-  function toggleSelect (item: SelectableItem) {
-    select([item], !isSelected([item]))
+  function toggleSelect (item: SelectableItem, index?: number, event?: MouseEvent) {
+    const items = []
+    index = index ?? currentPage.value.findIndex(i => i.value === item.value)
+
+    if (props.selectStrategy !== 'single' && event?.shiftKey && lastSelectedIndex.value !== null) {
+      const [start, end] = [lastSelectedIndex.value, index].sort((a, b) => a - b)
+
+      items.push(...currentPage.value.slice(start, end + 1))
+    } else {
+      items.push(item)
+      lastSelectedIndex.value = index
+    }
+
+    select(items, !isSelected([item]))
   }
 
   function selectAll (value: boolean) {
@@ -174,6 +188,8 @@ export function provideSelection (
     someSelected,
     allSelected,
     showSelectAll,
+    lastSelectedIndex,
+    selectStrategy,
   }
 
   provide(VDataTableSelectionSymbol, data)

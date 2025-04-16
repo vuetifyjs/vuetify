@@ -104,4 +104,17 @@ export default {
     loadMore: 'Načítať viac',
     empty: 'Žiadne ďalšie',
   },
+  rules: {
+    required: 'Toto pole je povinné',
+    email: 'Zadajte platnú e-mailovú adresu',
+    number: 'Toto pole môže obsahovať iba čísla',
+    integer: 'Toto pole môže obsahovať iba celé čísla',
+    capital: 'Toto pole môže obsahovať iba veľké písmená',
+    maxLength: 'Musíte zadať maximálne {0} znakov',
+    minLength: 'Musíte zadať minimálne {0} znakov',
+    strictLength: 'Dĺžka zadaného poľa je neplatná',
+    exclude: 'Znak {0} nie je povolený',
+    notEmpty: 'Vyberte aspoň jednu hodnotu',
+    pattern: 'Neplatný formát',
+  },
 }

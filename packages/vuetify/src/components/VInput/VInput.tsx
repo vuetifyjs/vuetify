@@ -15,8 +15,8 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeValidationProps, useValidation } from '@/composables/validation'
 
 // Utilities
-import { computed } from 'vue'
-import { EventProp, genericComponent, getUid, pick, propsFactory, useRender } from '@/util'
+import { computed, useId } from 'vue'
+import { EventProp, genericComponent, pick, propsFactory, useRender } from '@/util'
 
 // Types
 import type { ComputedRef, PropType, Ref } from 'vue'
@@ -40,10 +40,14 @@ export interface VInputSlot {
 export const makeVInputProps = propsFactory({
   id: String,
   appendIcon: IconValue,
+  baseColor: String,
   centerAffix: {
     type: Boolean,
     default: true,
   },
+  color: String,
+  glow: Boolean,
+  iconColor: [Boolean, String],
   prependIcon: IconValue,
   hideDetails: [Boolean, String] as PropType<boolean | 'auto'>,
   hideSpinButtons: Boolean,
@@ -105,7 +109,7 @@ export const VInput = genericComponent<new <T>(
     const { rtlClasses } = useRtl()
     const { InputIcon } = useInputIcon(props)
 
-    const uid = getUid()
+    const uid = useId()
     const id = computed(() => props.id || `input-${uid}`)
     const messagesId = computed(() => `${id.value}-messages`)
 
@@ -137,6 +141,18 @@ export const VInput = genericComponent<new <T>(
       validate,
     }))
 
+    const color = computed(() => {
+      return props.error || props.disabled ? undefined
+        : props.focused ? props.color
+        : props.baseColor
+    })
+
+    const iconColor = computed(() => {
+      if (!props.iconColor) return undefined
+
+      return props.iconColor === true ? color.value : props.iconColor
+    })
+
     const messages = computed(() => {
       if (props.errorMessages?.length || (!isPristine.value && errorMessages.value.length)) {
         return errorMessages.value
@@ -163,6 +179,8 @@ export const VInput = genericComponent<new <T>(
             `v-input--${props.direction}`,
             {
               'v-input--center-affix': props.centerAffix,
+              'v-input--focused': props.focused,
+              'v-input--glow': props.glow,
               'v-input--hide-spin-buttons': props.hideSpinButtons,
             },
             densityClasses.value,
@@ -184,6 +202,7 @@ export const VInput = genericComponent<new <T>(
                 <InputIcon
                   key="prepend-icon"
                   name="prepend"
+                  color={ iconColor.value }
                 />
               )}
             </div>
@@ -201,6 +220,7 @@ export const VInput = genericComponent<new <T>(
                 <InputIcon
                   key="append-icon"
                   name="append"
+                  color={ iconColor.value }
                 />
               )}
 

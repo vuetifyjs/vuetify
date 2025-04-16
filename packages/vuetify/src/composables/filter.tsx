@@ -10,12 +10,15 @@ import type { PropType, Ref } from 'vue'
 import type { MaybeRef } from '@/util'
 
 /**
- * - match without highlight
- * - single match (index), length already known
- * - single match (start, end)
- * - multiple matches (start, end), probably shouldn't overlap
+ * - boolean: match without highlight
+ * - number: single match (index), length already known
+ * - []: single match (start, end)
+ * - [][]: multiple matches (start, end), shouldn't overlap
  */
-export type FilterMatch = boolean | number | [number, number] | [number, number][]
+export type FilterMatchArraySingle = readonly [number, number]
+export type FilterMatchArrayMultiple = readonly FilterMatchArraySingle[]
+export type FilterMatchArray = FilterMatchArraySingle | FilterMatchArrayMultiple
+export type FilterMatch = boolean | number | FilterMatchArray
 export type FilterFunction = (value: string, query: string, item?: InternalItem) => FilterMatch
 export type FilterKeyFunctions = Record<string, FilterFunction>
 export type FilterKeys = string | string[]
@@ -37,8 +40,27 @@ export interface InternalItem<T = any> {
 // Composables
 export const defaultFilter: FilterFunction = (value, query, item) => {
   if (value == null || query == null) return -1
+  if (!query.length) return 0
 
-  return value.toString().toLocaleLowerCase().indexOf(query.toString().toLocaleLowerCase())
+  value = value.toString().toLocaleLowerCase()
+  query = query.toString().toLocaleLowerCase()
+
+  const result = []
+  let idx = value.indexOf(query)
+  while (~idx) {
+    result.push([idx, idx + query.length] as const)
+
+    idx = value.indexOf(query, idx + query.length)
+  }
+
+  return result.length ? result : -1
+}
+
+function normaliseMatch (match: FilterMatch, query: string): FilterMatchArrayMultiple | undefined {
+  if (match == null || typeof match === 'boolean' || match === -1) return
+  if (typeof match === 'number') return [[match, match + query.length]]
+  if (Array.isArray(match[0])) return match as FilterMatchArrayMultiple
+  return [match] as FilterMatchArrayMultiple
 }
 
 export const makeFilterProps = propsFactory({
@@ -63,7 +85,7 @@ export function filterItems (
     noFilter?: boolean
   },
 ) {
-  const array: { index: number, matches: Record<string, FilterMatch> }[] = []
+  const array: { index: number, matches: Record<string, FilterMatchArrayMultiple | undefined> }[] = []
   // always ensure we fall back to a functioning filter
   const filter = options?.default ?? defaultFilter
   const keys = options?.filterKeys ? wrapInArray(options.filterKeys) : false
@@ -74,8 +96,8 @@ export function filterItems (
   loop:
   for (let i = 0; i < items.length; i++) {
     const [item, transformed = item] = wrapInArray(items[i]) as readonly [InternalItem, {}]
-    const customMatches: Record<string, FilterMatch> = {}
-    const defaultMatches: Record<string, FilterMatch> = {}
+    const customMatches: Record<string, FilterMatchArrayMultiple | undefined> = {}
+    const defaultMatches: Record<string, FilterMatchArrayMultiple | undefined> = {}
     let match: FilterMatch = -1
 
     if ((query || customFiltersLength > 0) && !options?.noFilter) {
@@ -91,8 +113,8 @@ export function filterItems (
             : filter(value, query, item)
 
           if (match !== -1 && match !== false) {
-            if (keyFilter) customMatches[key] = match
-            else defaultMatches[key] = match
+            if (keyFilter) customMatches[key] = normaliseMatch(match, query)
+            else defaultMatches[key] = normaliseMatch(match, query)
           } else if (options?.filterMode === 'every') {
             continue loop
           }
@@ -100,7 +122,7 @@ export function filterItems (
       } else {
         match = filter(item, query, item)
         if (match !== -1 && match !== false) {
-          defaultMatches.title = match
+          defaultMatches.title = normaliseMatch(match, query)
         }
       }
 
@@ -139,8 +161,8 @@ export function useFilter <T extends InternalItem> (
     customKeyFilter?: MaybeRef<FilterKeyFunctions | undefined>
   }
 ) {
-  const filteredItems: Ref<T[]> = shallowRef([])
-  const filteredMatches: Ref<Map<unknown, Record<string, FilterMatch>>> = shallowRef(new Map())
+  const filteredItems = shallowRef<T[]>([])
+  const filteredMatches = shallowRef(new Map<unknown, Record<string, FilterMatchArrayMultiple | undefined>>())
   const transformedItems = computed(() => (
     options?.transform
       ? unref(items).map(item => ([item, options.transform!(item)] as const))
@@ -187,4 +209,20 @@ export function useFilter <T extends InternalItem> (
   }
 
   return { filteredItems, filteredMatches, getMatches }
+}
+
+export function highlightResult (name: string, text: string, matches: FilterMatchArrayMultiple | undefined) {
+  if (matches == null || !matches.length) return text
+
+  return matches.map((match, i) => {
+    const start = i === 0 ? 0 : matches[i - 1][1]
+    const result = [
+      <span class={ `${name}__unmask` }>{ text.slice(start, match[0]) }</span>,
+      <span class={ `${name}__mask` }>{ text.slice(match[0], match[1]) }</span>,
+    ]
+    if (i === matches.length - 1) {
+      result.push(<span class={ `${name}__unmask` }>{ text.slice(match[1]) }</span>)
+    }
+    return <>{ result }</>
+  })
 }

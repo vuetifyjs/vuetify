@@ -104,4 +104,17 @@ export default {
     loadMore: 'Lataa lisää',
     empty: 'Ei enempää',
   },
+  rules: {
+    required: 'Tämä kenttä on pakollinen',
+    email: 'Anna kelvollinen sähköpostiosoite',
+    number: 'Tämä kenttä voi sisältää vain numeroita',
+    integer: 'Tämä kenttä voi sisältää vain kokonaislukuja',
+    capital: 'Tämä kenttä voi sisältää vain isoja kirjaimia',
+    maxLength: 'Sinun tulee syöttää enintään {0} merkkiä',
+    minLength: 'Sinun tulee syöttää vähintään {0} merkkiä',
+    strictLength: 'Syötetyn kentän pituus on virheellinen',
+    exclude: 'Merkki {0} ei ole sallittu',
+    notEmpty: 'Valitse ainakin yksi arvo',
+    pattern: 'Virheellinen muoto',
+  },
 }

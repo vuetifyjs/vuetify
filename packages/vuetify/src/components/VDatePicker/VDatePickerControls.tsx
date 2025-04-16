@@ -10,7 +10,7 @@ import { IconValue } from '@/composables/icons'
 
 // Utilities
 import { computed } from 'vue'
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -20,6 +20,7 @@ export const makeVDatePickerControlsProps = propsFactory({
     type: [String, Array] as PropType<string | string[]>,
     default: undefined,
   },
+  controlHeight: [Number, String],
   disabled: {
     type: [Boolean, String, Array] as PropType<boolean | string | string[] | null>,
     default: null,
@@ -101,6 +102,9 @@ export const VDatePickerControls = genericComponent()({
           class={[
             'v-date-picker-controls',
           ]}
+          style={{
+            '--v-date-picker-controls-height': convertToUnit(props.controlHeight),
+          }}
         >
           <VBtn
             class="v-date-picker-controls__month-btn"
@@ -110,7 +114,7 @@ export const VDatePickerControls = genericComponent()({
             variant="text"
             rounded
             onClick={ onClickMonth }
-          ></VBtn>
+          />
 
           <VBtn
             class="v-date-picker-controls__mode-btn"
@@ -128,6 +132,7 @@ export const VDatePickerControls = genericComponent()({
             <VBtn
               data-testid="prev-month"
               disabled={ disablePrev.value }
+              density="comfortable"
               icon={ props.prevIcon }
               variant="text"
               onClick={ onClickPrev }
@@ -137,6 +142,7 @@ export const VDatePickerControls = genericComponent()({
               data-testid="next-month"
               disabled={ disableNext.value }
               icon={ props.nextIcon }
+              density="comfortable"
               variant="text"
               onClick={ onClickNext }
             />
