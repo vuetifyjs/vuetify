@@ -22,8 +22,6 @@ export interface CalendarProps {
   weekdays: number[]
   year: number | string | undefined
   weeksInMonth: 'dynamic' | 'static'
-
-  /** @deprecated */
   firstDayOfWeek: number | string | undefined
 
   'onUpdate:modelValue': ((value: unknown[]) => void) | undefined
@@ -57,7 +55,7 @@ export const makeCalendarProps = propsFactory({
   },
   firstDayOfWeek: {
     type: [Number, String],
-    default: 0,
+    default: undefined,
   },
 }, 'calendar')
 
@@ -104,15 +102,13 @@ export function useCalendar (props: CalendarProps) {
   )
 
   const weekDays = computed(() => {
-    const firstDayOfWeek = Number(props.firstDayOfWeek)
-
+    const firstDayOfWeek = adapter.toJsDate(adapter.startOfWeek(adapter.date(), props.firstDayOfWeek)).getDay()
     // Always generate all days, regardless of props.weekdays
     return [0, 1, 2, 3, 4, 5, 6].map(day => (day + firstDayOfWeek) % 7)
   })
 
   const weeksInMonth = computed(() => {
-    const firstDayOfWeek = Number(props.firstDayOfWeek)
-    const weeks = adapter.getWeekArray(month.value, firstDayOfWeek)
+    const weeks = adapter.getWeekArray(month.value, props.firstDayOfWeek)
 
     const days = weeks.flat()
 

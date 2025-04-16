@@ -23,7 +23,7 @@ import {
 } from '@/util'
 
 // Types
-import type { VueHeadClient } from '@unhead/vue'
+import type { VueHeadClient } from '@unhead/vue/client'
 import type { HeadClient } from '@vueuse/head'
 import type { App, DeepReadonly, InjectionKey, Ref } from 'vue'
 
