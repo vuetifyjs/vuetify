@@ -14,6 +14,7 @@
     "month": "Sets the month.",
     "weekdays": "Array of weekdays.",
     "year": "Sets the year.",
+    "firstDayOfWeek": "Sets the first day of the week, starting with 0 for Sunday.",
     "flat": "Removes  elevation.",
     "format": "Takes a date object and returns it in a specified format.",
     "header": "Text shown when no **display-date** is set.",

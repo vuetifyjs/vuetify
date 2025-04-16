@@ -72,7 +72,7 @@ export const md3: Blueprint = {
       VBtn: {
         color: undefined,
         rounded: undefined,
-      }
+      },
     },
     VSelect: {
       variant: 'outlined',

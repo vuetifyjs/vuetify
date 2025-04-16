@@ -84,8 +84,8 @@ importers:
         specifier: ^5.0.0
         version: 5.0.0(conventional-commits-filter@5.0.0)
       conventional-changelog-vuetify:
-        specifier: ^1.2.2
-        version: 1.2.2
+        specifier: ^2.0.2
+        version: 2.0.2
       conventional-github-releaser:
         specifier: ^3.1.5
         version: 3.1.5
@@ -4289,9 +4289,9 @@ packages:
     resolution: {integrity: sha512-SetDSntXLk8Jh1NOAl1Gu5uLiCNSYenB5tm0YVeZKePRIgDW9lQImromTwLa3c/Gae298tsgOM+/CYT9XAl0NA==}
     engines: {node: '>=18'}
 
-  conventional-changelog-vuetify@1.2.2:
-    resolution: {integrity: sha512-d0ZQixf3ulnYkp1BeT847INcAUcdsSgACp7nlESVl7RaGVdyVxzOTJo49q+ytwC6qczEC7XhUPb5+fOxv5zn3Q==}
-    engines: {node: '>=10'}
+  conventional-changelog-vuetify@2.0.2:
+    resolution: {integrity: sha512-e/JrDFXmUXr4mspU9DBQRDq3g5yavNv1fXubrrCpNFDiLHTBAsVcvp5sSb/qw+ptqxJq3qQ49tBp6PPnxMEE3w==}
+    engines: {node: '>=18'}
 
   conventional-changelog-writer@4.1.0:
     resolution: {integrity: sha512-WwKcUp7WyXYGQmkLsX4QmU42AZ1lqlvRW9mqoyiQzdD+rJWbTepdWoKJuwXTS+yq79XKnQNa93/roViPQrAQgw==}
@@ -14118,10 +14118,10 @@ snapshots:
 
   conventional-changelog-preset-loader@5.0.0: {}
 
-  conventional-changelog-vuetify@1.2.2:
+  conventional-changelog-vuetify@2.0.2:
     dependencies:
       compare-func: 2.0.0
-      q: 1.5.1
+      upath: 2.0.1
 
   conventional-changelog-writer@4.1.0:
     dependencies:
