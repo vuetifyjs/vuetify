@@ -91,7 +91,6 @@ const run = async () => {
     })
   )).filter(BooleanFilter)
 
-
   // Composables
   if (!argv.skipComposables) {
     const composables = await Promise.all((await generateComposableDataFromTypes()).map(async composable => {
@@ -125,8 +124,8 @@ const run = async () => {
       )
     }
   }
-  
-  reportMissingDescriptions();
+
+  reportMissingDescriptions()
   createVeturApi(componentData)
   createWebTypesApi(componentData, directives)
   await fs.mkdir(path.resolve('../vuetify/dist/json'), { recursive: true })

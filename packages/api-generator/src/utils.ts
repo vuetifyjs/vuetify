@@ -134,12 +134,16 @@ type MissingDescription = {
 
 const missingDescriptions: MissingDescription[] = []
 
-export function reportMissingDescriptions() {
-  if(!missingDescriptions.length) return
-  
-  console.warn('\n\x1b[31mMissing API Descriptions:\x1b[0m')
+export function reportMissingDescriptions () {
+  if (!missingDescriptions.length) return
+
+  const red = '\x1b[31m'
+  const reset = '\x1b[0m'
+  const space = '\x20'
+
+  console.warn(`\n${red}Missing API Descriptions:${reset}`)
   missingDescriptions.forEach(({ name, section, key, locale }) => {
-    console.warn(`\x1b[31m- ${name} (${locale}): [${section}]${`\x20${key}`}\x1b[0m`)
+    console.warn(`${red}- ${name} (${locale}): [${section}]${space + key + reset}`)
   })
 
   // Clear missing descriptions in case of multiple runs
@@ -195,7 +199,6 @@ export async function addDescriptions (name: string, componentData: ComponentDat
       }
     }
   }
-
 }
 
 export async function addDirectiveDescriptions (
