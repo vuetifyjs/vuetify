@@ -35,6 +35,19 @@ export default createVuetify({
 
 ## Components
 
+### VBtn
+
+In Vuetify 3, VField's layout was changed from `display: flex` to `display: grid` to better handle its internal elements. However, the grid implementation had limitations with gap control, so in Vuetify 4 we've reverted back to using `display: flex`.
+
+The **$button-stacked-icon-margin** SASS variable has been removed and replaced with **$button-stacked-gap**. This change allows for more consistent and flexible spacing between elements within the field. If you modified this value, update its variable target:
+
+```diff { resource="styles/styles.scss"}
+  @use 'vuetify/settings' with (
+-   $button-stacked-icon-margin: 8px,
++   $button-stacked-gap,
+  );
+```
+
 ### General changes
 
 #### Slot variables are (mostly) no longer refs
