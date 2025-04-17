@@ -304,9 +304,9 @@ describe.each([
         ))
 
         await userEvent.click(screen.getByText(/Vuetify/).parentElement!.previousElementSibling!)
-        expect.element(screen.getByText(/Core/)).toBeVisible()
+        await expect.element(screen.getByText(/Core/)).toBeVisible()
         await userEvent.click(screen.getByText(/Vuetify/).parentElement!.previousElementSibling!)
-        expect.element(screen.getByText(/Core/)).not.toBeVisible()
+        await expect.element(screen.getByText(/Core/)).not.toBeVisible()
       })
 
       it('open-all should work', async () => {

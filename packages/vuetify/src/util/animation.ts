@@ -11,16 +11,16 @@ export function nullifyTransforms (el: HTMLElement): Box {
     let ta, sx, sy, dx, dy
     if (tx.startsWith('matrix3d(')) {
       ta = tx.slice(9, -1).split(/, /)
-      sx = +ta[0]
-      sy = +ta[5]
-      dx = +ta[12]
-      dy = +ta[13]
+      sx = Number(ta[0])
+      sy = Number(ta[5])
+      dx = Number(ta[12])
+      dy = Number(ta[13])
     } else if (tx.startsWith('matrix(')) {
       ta = tx.slice(7, -1).split(/, /)
-      sx = +ta[0]
-      sy = +ta[3]
-      dx = +ta[4]
-      dy = +ta[5]
+      sx = Number(ta[0])
+      sy = Number(ta[3])
+      dx = Number(ta[4])
+      dy = Number(ta[5])
     } else {
       return new Box(rect)
     }

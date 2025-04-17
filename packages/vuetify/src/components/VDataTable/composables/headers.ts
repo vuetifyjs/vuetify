@@ -115,8 +115,10 @@ function parseFixedColumns (items: InternalDataTableHeader[]) {
       } else {
         if (!seenFixed) {
           item.lastFixed = true
-        } else if (isNaN(+item.width!)) {
+        } else if (isNaN(Number(item.width))) {
           consoleError(`Multiple fixed columns should have a static width (key: ${item.key})`)
+        } else {
+          item.minWidth = Math.max(Number(item.width) || 0, Number(item.minWidth) || 0)
         }
         seenFixed = true
       }

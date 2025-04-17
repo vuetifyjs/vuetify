@@ -1,6 +1,7 @@
 {
   "props": {
-    "headerProps": "Pass props to the default header."
+    "headerProps": "Pass props to the default header.",
+    "itemKey": "The property on each item that is used as a unique key."
   },
   "slots": {
     "[`header.${string}`]": "Slot for a specific header. See [`v-data-table-virtual` API](/api/v-data-table-virtual) for more information.",
@@ -25,6 +26,9 @@
     "item.data-table-expand": "Slot to replace the default `v-icon` used when expanding rows.",
     "item.data-table-select": "Slot to replace the default checkbox used when selecting rows.",
     "loading": "Defines content for when `loading` is true and no items are provided.",
+    "tbody": "Slot to replace the default table `<tbody>`.",
+    "thead": "Slot to replace the default table `<thead>`.",
+    "tfoot": "Slot to replace the default table `<tfoot>`.",
     "top": "Slot to add content above the table"
   },
   "events": {

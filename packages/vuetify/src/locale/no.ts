@@ -2,14 +2,14 @@ export default {
   badge: 'Skilt',
   open: 'Åpne',
   close: 'Lukk',
-  dismiss: 'Dismiss',
+  dismiss: 'Avvis',
   confirmEdit: {
     ok: 'OK',
     cancel: 'Avbryt',
   },
   dataIterator: {
     noResultsText: 'Fant ingen matchende elementer.',
-    loadingText: 'Laster elementer...',
+    loadingText: 'Laster...',
   },
   dataTable: {
     itemsPerPageText: 'Rader per side:',
@@ -36,7 +36,7 @@ export default {
     divider: 'til',
   },
   datePicker: {
-    itemsSelected: '{0} selected',
+    itemsSelected: '{0} valgt',
     range: {
       title: 'Velg datoer',
       header: 'Velg datoer',
@@ -57,27 +57,27 @@ export default {
   },
   calendar: {
     moreEvents: '{0} flere',
-    today: 'Today',
+    today: 'I dag',
   },
   input: {
     clear: 'Fjern {0}',
-    prependAction: '{0} prepended action',
-    appendAction: '{0} appended action',
-    otp: 'Please enter OTP character {0}',
+    prependAction: '{0} foranstilt handling',
+    appendAction: '{0} etterstilt handling',
+    otp: 'Vennligst skriv inn OTP-tegn {0}',
   },
   fileInput: {
     counter: '{0} filer',
     counterSize: '{0} filer ({1} totalt)',
   },
   fileUpload: {
-    title: 'Drag and drop files here',
-    divider: 'or',
-    browse: 'Browse Files',
+    title: 'Dra og slipp filer her',
+    divider: 'eller',
+    browse: 'Bla gjennom filer',
   },
   timePicker: {
     am: 'AM',
     pm: 'PM',
-    title: 'Select Time',
+    title: 'Velg tid',
   },
   pagination: {
     ariaLabel: {
@@ -103,5 +103,18 @@ export default {
   infiniteScroll: {
     loadMore: 'Last flere',
     empty: 'Det var alt',
+  },
+  rules: {
+    required: 'Dette feltet er påkrevd',
+    email: 'Vennligst skriv inn en gyldig e-postadresse',
+    number: 'Dette feltet kan kun inneholde tall',
+    integer: 'Dette feltet kan kun inneholde heltall',
+    capital: 'Dette feltet kan kun inneholde store bokstaver',
+    maxLength: 'Du må skrive inn maksimalt {0} tegn',
+    minLength: 'Du må skrive inn minimum {0} tegn',
+    strictLength: 'Lengden på det angitte feltet er ugyldig',
+    exclude: 'Tegnet {0} er ikke tillatt',
+    notEmpty: 'Vennligst velg minst én verdi',
+    pattern: 'Ugyldig format',
   },
 }

@@ -1,4 +1,4 @@
-import fs from 'fs'
+import fs from 'node:fs'
 
 function processVariableFile (filePath: string) {
   if (fs.existsSync(filePath)) {

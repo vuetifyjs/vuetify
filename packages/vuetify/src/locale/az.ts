@@ -1,6 +1,6 @@
 export default {
   badge: 'Nişan',
-  open: 'Open',
+  open: 'Açıq',
   close: 'Bağla',
   dismiss: 'Rədd et',
   confirmEdit: {
@@ -16,7 +16,7 @@ export default {
     ariaLabel: {
       sortDescending: 'Azalan sıra ilə düzülmüş.',
       sortAscending: 'Artan sıra ilə düzülmüş.',
-      sortNone: 'Sıralanmamışdır. ',
+      sortNone: 'Sıralanmamışdır.',
       activateNone: 'Sıralamanı yığışdır.',
       activateDescending: 'Azalan sıra ilə düz.',
       activateAscending: 'Artan sıra ilə düz.',
@@ -33,7 +33,7 @@ export default {
     pageText: '{0} - {1} arası, Cəmi: {2} qeydiyyat',
   },
   dateRangeInput: {
-    divider: 'to',
+    divider: 'ilə',
   },
   datePicker: {
     itemsSelected: '{0} seçilib',
@@ -56,7 +56,7 @@ export default {
     },
   },
   calendar: {
-    moreEvents: '{0} ədad daha',
+    moreEvents: '{0} ədəd daha',
     today: 'Bu gün',
   },
   input: {
@@ -72,11 +72,11 @@ export default {
   fileUpload: {
     title: 'Faylları buraya sürüşdürün',
     divider: 'və ya',
-    browse: 'Faylları baxın',
+    browse: 'Fayllara baxın',
   },
   timePicker: {
-    am: 'AM',
-    pm: 'PM',
+    am: 'Səhər',
+    pm: 'Axşam',
     title: 'Vaxtı seçin',
   },
   pagination: {
@@ -103,5 +103,18 @@ export default {
   infiniteScroll: {
     loadMore: 'Daha çox yüklə',
     empty: 'Daha yoxdur',
+  },
+  rules: {
+    required: 'Bu sahə tələb olunur',
+    email: 'Zəhmət olmasa etibarlı bir e-poçt daxil edin',
+    number: 'Bu sahə yalnız rəqəmlərdən ibarət ola bilər',
+    integer: 'Bu sahə yalnız tam ədədlərdən ibarət ola bilər',
+    capital: 'Bu sahə yalnız böyük hərflərdən ibarət ola bilər',
+    maxLength: 'Maksimum {0} simvol daxil etməlisiniz',
+    minLength: 'Minimum {0} simvol daxil etməlisiniz',
+    strictLength: 'Daxil edilən sahənin uzunluğu yanlışdır',
+    exclude: '{0} simvoluna icazə verilmir',
+    notEmpty: 'Zəhmət olmasa ən azı bir dəyər seçin',
+    pattern: 'Yanlış format',
   },
 }

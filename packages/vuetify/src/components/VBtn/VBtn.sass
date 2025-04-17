@@ -9,9 +9,8 @@
   .v-btn
     align-items: center
     border-radius: $button-border-radius
-    display: inline-grid
-    grid-template-areas: "prepend content append"
-    grid-template-columns: max-content auto max-content
+    display: inline-flex
+    flex-direction: row
     font-weight: $button-font-weight
     justify-content: center
     letter-spacing: $button-text-letter-spacing
@@ -117,11 +116,10 @@
         opacity: 0
 
     &--stacked
-      grid-template-areas: "prepend" "content" "append"
-      grid-template-columns: auto
-      grid-template-rows: max-content max-content max-content
-      justify-items: center
-      align-content: center
+      align-items: center
+      flex-direction: column
+      justify-content: center
+      gap: $button-stacked-gap
 
       .v-btn__content
         flex-direction: column
@@ -132,14 +130,6 @@
       .v-btn__content > .v-icon--start,
       .v-btn__content > .v-icon--end
         margin-inline: 0
-
-      .v-btn__prepend,
-      .v-btn__content > .v-icon--start
-        margin-bottom: $button-stacked-icon-margin
-
-      .v-btn__append,
-      .v-btn__content > .v-icon--end
-        margin-top: $button-stacked-icon-margin
 
       @at-root
         @include button-sizes($button-stacked-sizes, true)
@@ -193,21 +183,18 @@
     transition: $button-content-transition
 
   .v-btn__prepend
-    grid-area: prepend
     margin-inline: $button-margin-start $button-margin-end
 
     .v-btn--slim &
       margin-inline-start: 0
 
   .v-btn__append
-    grid-area: append
     margin-inline: $button-margin-end $button-margin-start
 
     .v-btn--slim &
       margin-inline-end: 0
 
   .v-btn__content
-    grid-area: content
     justify-content: center
     white-space: $button-white-space
 

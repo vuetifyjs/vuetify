@@ -125,8 +125,8 @@
       document.body.append(copy)
 
       ;(copy.querySelectorAll('[data-scroll-x], [data-scroll-y]') as NodeListOf<HTMLElement>).forEach(el => {
-        el.scrollLeft = +el.dataset.scrollX!
-        el.scrollTop = +el.dataset.scrollY!
+        el.scrollLeft = Number(el.dataset.scrollX)
+        el.scrollTop = Number(el.dataset.scrollY)
       })
 
       function onTransitionend (e: TransitionEvent) {

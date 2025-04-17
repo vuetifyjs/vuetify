@@ -3,7 +3,7 @@
  * Some utility functions for mounting these generated examples inside of tests
  */
 import type { FunctionalComponent } from 'vue'
-import type { JSXComponent } from '@/composables'
+import type { JSXComponent } from '@/util'
 import { it } from 'vitest'
 import { commands, page } from '@vitest/browser/context'
 import { render } from '@test'

@@ -29,10 +29,15 @@ export interface CalendarProps {
   'onUpdate:year': ((value: number) => void) | undefined
 }
 
+export type CalendarWeekdays = 0 | 1 | 2 | 3 | 4 | 5 | 6
+
 // Composables
 export const makeCalendarProps = propsFactory({
   allowedDates: [Array, Function] as PropType<unknown[] | ((date: unknown) => boolean)>,
-  disabled: Boolean,
+  disabled: {
+    type: Boolean,
+    default: null,
+  },
   displayValue: null as any as PropType<unknown>,
   modelValue: Array as PropType<unknown[]>,
   month: [Number, String],
@@ -41,14 +46,17 @@ export const makeCalendarProps = propsFactory({
   showAdjacentMonths: Boolean,
   year: [Number, String],
   weekdays: {
-    type: Array<number>,
+    type: Array as PropType<CalendarWeekdays[]>,
     default: () => [0, 1, 2, 3, 4, 5, 6],
   },
   weeksInMonth: {
     type: String as PropType<'dynamic' | 'static'>,
     default: 'dynamic',
   },
-  firstDayOfWeek: [Number, String],
+  firstDayOfWeek: {
+    type: [Number, String],
+    default: 0,
+  },
 }, 'calendar')
 
 export function useCalendar (props: CalendarProps) {
@@ -57,7 +65,7 @@ export function useCalendar (props: CalendarProps) {
     props,
     'modelValue',
     [],
-    v => wrapInArray(v),
+    v => wrapInArray(v).map(i => adapter.date(i)),
   )
   const displayValue = computed(() => {
     if (props.displayValue) return adapter.date(props.displayValue)
@@ -93,17 +101,16 @@ export function useCalendar (props: CalendarProps) {
     v => adapter.getMonth(v)
   )
 
-  const defaultFirstDayOfWeek = computed(() => {
-    return props.firstDayOfWeek ?? props.weekdays[0]
-  })
-
   const weekDays = computed(() => {
-    const firstDayOfWeek = Number(props.firstDayOfWeek ?? 0)
-    return props.weekdays.map(day => (day + firstDayOfWeek) % 7)
+    const firstDayOfWeek = Number(props.firstDayOfWeek)
+
+    // Always generate all days, regardless of props.weekdays
+    return [0, 1, 2, 3, 4, 5, 6].map(day => (day + firstDayOfWeek) % 7)
   })
 
   const weeksInMonth = computed(() => {
-    const weeks = adapter.getWeekArray(month.value, defaultFirstDayOfWeek.value)
+    const firstDayOfWeek = Number(props.firstDayOfWeek)
+    const weeks = adapter.getWeekArray(month.value, firstDayOfWeek)
 
     const days = weeks.flat()
 
@@ -199,7 +206,7 @@ export function useCalendar (props: CalendarProps) {
       return !props.allowedDates(date)
     }
 
-    return false
+    return !props.weekdays.includes(adapter.toJsDate(date).getDay())
   }
 
   return {

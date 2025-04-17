@@ -183,7 +183,7 @@ export const VPagination = genericComponent<VPaginationSlots>()({
       const minButtons = props.showFirstLastPage ? 5 : 3
       return Math.max(0, Math.floor(
         // Round to two decimal places to avoid floating point errors
-        +((totalWidth - itemWidth * minButtons) / itemWidth).toFixed(2)
+        Number(((totalWidth - itemWidth * minButtons) / itemWidth).toFixed(2))
       ))
     }
 
@@ -262,7 +262,7 @@ export const VPagination = genericComponent<VPaginationSlots>()({
               ref,
               ellipsis: false,
               icon: true,
-              disabled: !!props.disabled || +props.length < 2,
+              disabled: !!props.disabled || Number(props.length) < 2,
               color: isActive ? props.activeColor : props.color,
               'aria-current': isActive,
               'aria-label': t(isActive ? props.currentPageAriaLabel : props.pageAriaLabel, item),
@@ -315,7 +315,7 @@ export const VPagination = genericComponent<VPaginationSlots>()({
     }
 
     function onKeydown (e: KeyboardEvent) {
-      if (e.key === keyValues.left && !props.disabled && page.value > +props.start) {
+      if (e.key === keyValues.left && !props.disabled && page.value > Number(props.start)) {
         page.value = page.value - 1
         nextTick(updateFocus)
       } else if (e.key === keyValues.right && !props.disabled && page.value < start.value + length.value - 1) {

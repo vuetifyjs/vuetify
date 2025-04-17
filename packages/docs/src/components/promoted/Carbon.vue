@@ -13,7 +13,6 @@
         border
       >
         <PromotedScript
-          v-if="!error1"
           id="carbonads-script"
           script-id="_carbonads_js"
           src="//cdn.carbonads.com/carbon.js?serve=CWYDC27W&placement=v3vuetifyjscom"

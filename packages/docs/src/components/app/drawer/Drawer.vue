@@ -38,8 +38,8 @@
 
   const { mobile } = useDisplay()
 
-  const rail = ref(user.railDrawer)
-  const _opened = ref([])
+  const rail = shallowRef(user.railDrawer)
+  const _opened = shallowRef([])
   const opened = computed({
     get: () => rail.value ? [] : _opened.value,
     set: val => {

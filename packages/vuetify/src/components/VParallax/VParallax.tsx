@@ -66,7 +66,7 @@ export const VParallax = genericComponent<VImgSlots>()({
     watch(() => contentRect.value?.height, onScroll)
 
     const scale = computed(() => {
-      return 1 - clamp(+props.scale)
+      return 1 - clamp(Number(props.scale))
     })
 
     let frame = -1

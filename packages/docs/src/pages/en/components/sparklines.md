@@ -19,11 +19,7 @@ The sparkline component can be used to create simple graphs, like GitHub's contr
 
 <PageFeatures />
 
-::: success
-
-This feature was introduced in [v3.6.0](/getting-started/release-notes/?version=v3.6.0)
-
-:::
+<DocIntroduced version="3.6.0" />
 
 ## Usage
 
