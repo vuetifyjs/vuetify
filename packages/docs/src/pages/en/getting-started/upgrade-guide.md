@@ -35,7 +35,7 @@ export default createVuetify({
 
 ## Components
 
-### VBtn
+### VBtn display
 
 In Vuetify 3, VField's layout was changed from `display: flex` to `display: grid` to better handle its internal elements. However, the grid implementation had limitations with gap control, so in Vuetify 4 we've reverted back to using `display: flex`.
 
@@ -48,43 +48,7 @@ The **$button-stacked-icon-margin** SASS variable has been removed and replaced 
   );
 ```
 
-### General changes
-
-#### Slot variables are (mostly) no longer refs
-
-Read-only values passed to slots are now unwrapped:
-
-```diff
-  <VForm>
-    <template #default="{ isValid, validate }">
-      <VBtn @click="validate" text="validate" />
--     Form is {{ isValid.value ? 'valid' : 'invalid' }}
-+     Form is {{ isValid ? 'valid' : 'invalid' }}
-    </template>
-  </VForm>
-```
-
-There are still some writable refs though, for example in VDialog:
-
-```html
-<VDialog>
-  <template #default="{ isActive }">
-    <VBtn @click="isActive.value = false">Close</VBtn>
-  </template>
-</VDialog>
-```
-
-Affected components:
-
-- VForm
-  - errors
-  - isDisabled
-  - isReadonly
-  - isValidating
-  - isValid
-  - items
-
-### VBtn
+### VBtn text-transform
 
 The default text transform of _uppercase_ has been **removed**. To restore the previous behavior, set the `text-transform` prop to `uppercase`.
 
@@ -170,3 +134,39 @@ Or remove `.raw`:
     </template>
   </VSelect>
 ```
+
+### General changes
+
+#### Slot variables are (mostly) no longer refs
+
+Read-only values passed to slots are now unwrapped:
+
+```diff
+  <VForm>
+    <template #default="{ isValid, validate }">
+      <VBtn @click="validate" text="validate" />
+-     Form is {{ isValid.value ? 'valid' : 'invalid' }}
++     Form is {{ isValid ? 'valid' : 'invalid' }}
+    </template>
+  </VForm>
+```
+
+There are still some writable refs though, for example in VDialog:
+
+```html
+<VDialog>
+  <template #default="{ isActive }">
+    <VBtn @click="isActive.value = false">Close</VBtn>
+  </template>
+</VDialog>
+```
+
+Affected components:
+
+- VForm
+  - errors
+  - isDisabled
+  - isReadonly
+  - isValidating
+  - isValid
+  - items
