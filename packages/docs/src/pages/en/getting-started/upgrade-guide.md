@@ -95,6 +95,18 @@ const vuetify = createVuetify({
 + <v-btn>BUTTON</v-btn>
 ```
 
+### VField
+
+In Vuetify 3, VField's layout was changed from `display: flex` to `display: grid` to better handle its internal elements. However, the grid implementation had limitations with gap control, so in Vuetify 4 we've reverted back to using `display: flex`.
+
+The **$field-clearable-margin** SASS variable has been removed and replaced with **$field-gap**. This change allows for more consistent and flexible spacing between elements within the field. If you modified this value, update its variable target:
+
+```diff { resource="styles/styles.scss"}
+  @use 'vuetify/settings' with (
+-   $field-clearable-margin: 8px,
++   $field-gap: 8px,
+```
+
 ### VSelect/VCombobox/VAutocomplete
 
 #### `item` in slots has been renamed to `internalItem`
