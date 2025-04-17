@@ -35,7 +35,7 @@ export default createVuetify({
 
 ## Components
 
-### VBtn
+### VBtn display
 
 In Vuetify 3, VField's layout was changed from `display: flex` to `display: grid` to better handle its internal elements. However, the grid implementation had limitations with gap control, so in Vuetify 4 we've reverted back to using `display: flex`.
 
@@ -48,6 +48,53 @@ The **$button-stacked-icon-margin** SASS variable has been removed and replaced 
   );
 ```
 
+### VBtn text-transform
+
+The default text transform of _uppercase_ has been **removed**. To restore the previous behavior, set the `text-transform` prop to `uppercase`.
+
+- Set it in the SASS variables for typography:
+
+```scss
+@use 'vuetify/settings' with (
+  $typography: (
+    'button': (
+      'text-transform': 'uppercase',
+    ),
+  ),
+)
+```
+
+- Or set it in the SASS variables for buttons:
+
+```scss
+@use 'vuetify/settings' with (
+  $button-text-transform: 'uppercase',
+)
+```
+
+- Set it as a global default:
+
+```js
+import { createVuetify } from 'vuetify'
+
+const vuetify = createVuetify({
+  defaults: {
+    VBtn: {
+      class: 'text-uppercase',
+      // or if you are using $utilities: false
+      style: 'text-transform: uppercase;',
+    },
+  },
+})
+```
+
+- Manually type uppercase letters:
+
+```diff
+- <v-btn>button</v-btn>
++ <v-btn>BUTTON</v-btn>
+```
+
 ### VField
 
 In Vuetify 3, VField's layout was changed from `display: flex` to `display: grid` to better handle its internal elements. However, the grid implementation had limitations with gap control, so in Vuetify 4 we've reverted back to using `display: flex`.
@@ -58,42 +105,7 @@ The **$field-clearable-margin** SASS variable has been removed and replaced with
   @use 'vuetify/settings' with (
 -   $field-clearable-margin: 8px,
 +   $field-gap: 8px,
-
-### General changes
-
-#### Slot variables are (mostly) no longer refs
-
-Read-only values passed to slots are now unwrapped:
-
-```diff
-  <VForm>
-    <template #default="{ isValid, validate }">
-      <VBtn @click="validate" text="validate" />
--     Form is {{ isValid.value ? 'valid' : 'invalid' }}
-+     Form is {{ isValid ? 'valid' : 'invalid' }}
-    </template>
-  </VForm>
 ```
-
-There are still some writable refs though, for example in VDialog:
-
-```html
-<VDialog>
-  <template #default="{ isActive }">
-    <VBtn @click="isActive.value = false">Close</VBtn>
-  </template>
-</VDialog>
-```
-
-Affected components:
-
-- VForm
-  - errors
-  - isDisabled
-  - isReadonly
-  - isValidating
-  - isValid
-  - items
 
 ### VSelect/VCombobox/VAutocomplete
 
@@ -134,3 +146,39 @@ Or remove `.raw`:
     </template>
   </VSelect>
 ```
+
+### General changes
+
+#### Slot variables are (mostly) no longer refs
+
+Read-only values passed to slots are now unwrapped:
+
+```diff
+  <VForm>
+    <template #default="{ isValid, validate }">
+      <VBtn @click="validate" text="validate" />
+-     Form is {{ isValid.value ? 'valid' : 'invalid' }}
++     Form is {{ isValid ? 'valid' : 'invalid' }}
+    </template>
+  </VForm>
+```
+
+There are still some writable refs though, for example in VDialog:
+
+```html
+<VDialog>
+  <template #default="{ isActive }">
+    <VBtn @click="isActive.value = false">Close</VBtn>
+  </template>
+</VDialog>
+```
+
+Affected components:
+
+- VForm
+  - errors
+  - isDisabled
+  - isReadonly
+  - isValidating
+  - isValid
+  - items
