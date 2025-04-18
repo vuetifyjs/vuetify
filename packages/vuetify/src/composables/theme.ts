@@ -28,7 +28,7 @@ import {
 } from '@/util'
 
 // Types
-import type { VueHeadClient } from '@unhead/vue'
+import type { VueHeadClient } from '@unhead/vue/client'
 import type { HeadClient } from '@vueuse/head'
 import type { App, DeepReadonly, InjectionKey, Ref } from 'vue'
 
@@ -175,8 +175,8 @@ function genDefaults () {
           surface: '#212121',
           'surface-bright': '#ccbfd6',
           'surface-light': '#424242',
-          'surface-variant': '#a3a3a3',
-          'on-surface-variant': '#424242',
+          'surface-variant': '#c8c8c8',
+          'on-surface-variant': '#000000',
           primary: '#2196F3',
           'primary-darken-1': '#277CC1',
           secondary: '#54B6B2',
