@@ -155,6 +155,7 @@ export const VCombobox = genericComponent<new <
         _search.value = val ?? ''
         if (!props.multiple && !hasSelectionSlot.value) {
           model.value = [transformItem(props, val)]
+          vVirtualScrollRef.value?.scrollToIndex(0)
         }
 
         if (val && props.multiple && props.delimiters?.length) {
