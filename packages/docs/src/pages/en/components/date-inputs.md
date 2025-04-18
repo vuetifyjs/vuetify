@@ -96,6 +96,18 @@ On mobile devices, when the menu is open, clicking the input a second time will 
 
 :::
 
+#### Close on selection
+
+Using the **close-on-selection** prop allows you to override default behaviour of the menu's display.
+
+<ExamplesExample file="v-date-input/prop-close-on-selection" />
+
+::: tip
+
+This prop is set to true by default so please consider using it only if you want to let the menu appear after selection
+
+:::
+
 #### Calendar icon
 
 You can move the calendar icon within the input or entirely by utilizing the **prepend-icon** and **prepend-inner-icon** properties.
