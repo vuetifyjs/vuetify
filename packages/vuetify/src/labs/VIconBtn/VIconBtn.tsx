@@ -50,10 +50,7 @@ export const makeVIconBtnProps = propsFactory({
   hideOverlay: Boolean,
   icon: [String, Function, Object] as PropType<IconValue>,
   iconColor: String,
-  iconSize: {
-    type: [Number, String] as PropType<VIconBtnSizes | number | string>,
-    default: 'default',
-  },
+  iconSize: [Number, String] as PropType<VIconBtnSizes | number | string>,
   iconSizes: {
     type: Array as PropType<[VIconBtnSizes, number][]>,
     default: () => ([
@@ -147,14 +144,18 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
     useRender(() => {
       const icon = isActive.value ? props.activeIcon ?? props.icon : props.icon
 
-      const size = props.size as VIconBtnSizes
-      const hasNamedSize = btnSizeMap.has(size)
-      const btnSize = hasNamedSize ? btnSizeMap.get(size) : size
+      const _btnSize = props.size as VIconBtnSizes
+      const hasNamedSize = btnSizeMap.has(_btnSize)
+      const btnSize = hasNamedSize ? btnSizeMap.get(_btnSize) : _btnSize
       const btnHeight = props.height ?? btnSize
       const btnWidth = props.width ?? btnSize
 
-      const _iconSize = hasNamedSize ? size : (props.iconSize as VIconBtnSizes ?? size)
-      const iconSize = iconSizeMap.get(_iconSize) ?? _iconSize
+      const _iconSize = props.iconSize as VIconBtnSizes
+      const hasNamedIconSize = iconSizeMap.has(_iconSize)
+
+      const iconSize = !_iconSize
+        ? hasNamedSize ? iconSizeMap.get(_btnSize) : iconSizeMap.get('default')
+        : hasNamedIconSize ? iconSizeMap.get(_iconSize) : _iconSize
 
       const iconProps = { icon, size: iconSize, iconColor: props.iconColor, opacity: props.opacity }
 
