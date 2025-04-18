@@ -63,6 +63,10 @@ export const makeVFieldProps = propsFactory({
     type: Boolean,
     default: undefined,
   },
+  clearValue: {
+    type: null,
+    default: null,
+  },
   color: String,
   baseColor: String,
   dirty: Boolean,

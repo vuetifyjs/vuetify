@@ -46,6 +46,9 @@ export const makeVDateInputProps = propsFactory({
     hideActions: true,
   }),
   ...makeVTextFieldProps({
+    clearValue: (props: VDateInput['$props']) => {
+      return props.multiple ? [] : null
+    },
     placeholder: 'mm/dd/yyyy',
     prependIcon: '$calendar',
   }),
