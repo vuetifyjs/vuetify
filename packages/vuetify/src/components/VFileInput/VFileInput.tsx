@@ -141,26 +141,30 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
 
       emit('click:control', e)
     }
-    function onClear (e: MouseEvent) {
+    async function onClear (e: MouseEvent) {
       e.stopPropagation()
-
       onFocus()
-
-      nextTick(() => {
-        model.value = []
-
-        callEvent(props['onClick:clear'], e)
-      })
+      model.value = []
+      if (inputRef.value) inputRef.value.files = null
+      await nextTick()
+      callEvent(props['onClick:clear'], e)
     }
     function onDragover (e: DragEvent) {
       e.preventDefault()
     }
-    function onDrop (e: DragEvent) {
-      e.preventDefault()
-
-      if (!e.dataTransfer) return
-
-      model.value = [...e.dataTransfer.files ?? []]
+    async function onDrop (e: DragEvent) {
+        e.preventDefault()
+        if (!e.dataTransfer) return
+        model.value = [...e.dataTransfer.files ?? []]
+        if (inputRef.value) inputRef.value.files = e.dataTransfer.files
+        await nextTick()
+    }
+    function onChange (e: Event) {
+      if (e.target && e.target instanceof HTMLInputElement) {
+        const target = e.target
+        model.value = [...target.files ?? []]
+        if (inputRef.value) inputRef.value.files = target.files
+      }
     }
 
     watch(model, newValue => {
@@ -245,12 +249,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
 
                           onFocus()
                         }}
-                        onChange={ e => {
-                          if (!e.target) return
-
-                          const target = e.target as HTMLInputElement
-                          model.value = [...target.files ?? []]
-                        }}
+                        onChange={ onChange }
                         onFocus={ onFocus }
                         onBlur={ blur }
                         { ...slotProps }
