@@ -153,11 +153,11 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
       e.preventDefault()
     }
     async function onDrop (e: DragEvent) {
-        e.preventDefault()
-        if (!e.dataTransfer) return
-        model.value = [...e.dataTransfer.files ?? []]
-        if (inputRef.value) inputRef.value.files = e.dataTransfer.files
-        await nextTick()
+      e.preventDefault()
+      if (!e.dataTransfer) return
+      model.value = [...e.dataTransfer.files ?? []]
+      if (inputRef.value) inputRef.value.files = e.dataTransfer.files
+      await nextTick()
     }
     function onChange (e: Event) {
       if (e.target && e.target instanceof HTMLInputElement) {
