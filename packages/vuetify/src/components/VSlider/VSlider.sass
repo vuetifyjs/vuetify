@@ -32,8 +32,15 @@
     .v-input--disabled &
       opacity: var(--v-disabled-opacity)
 
+    .v-slider--track-disabled &
+      cursor: default
+
     .v-input--error:not(.v-input--disabled) &
       color: rgb(var(--v-theme-error))
+
+  .v-slider-thumb
+    .v-slider--track-disabled &
+      cursor: pointer
 
   // Modifiers
   .v-slider.v-input--horizontal
