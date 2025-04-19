@@ -410,6 +410,7 @@ export const VSelect = genericComponent<new <
                       onFocusin={ onFocusin }
                       tabindex="-1"
                       aria-live="polite"
+                      aria-label={ `${props.label}-list` }
                       color={ props.itemColor ?? props.color }
                       { ...listEvents }
                       { ...props.listProps }
