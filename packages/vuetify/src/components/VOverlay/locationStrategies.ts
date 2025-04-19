@@ -389,9 +389,9 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
       transformOrigin: `${placement.origin.side} ${placement.origin.align}`,
       // transform: `translate(${pixelRound(x)}px, ${pixelRound(y)}px)`,
       top: y !== 0 && convertToUnit(pixelRound(y)),
-      left: data.isRtl.value ? undefined : x !== 0 && convertToUnit((x)),
+      left: data.isRtl.value ? undefined : x !== 0 && x,
       right: data.isRtl.value ? x !== 0 && convertToUnit(pixelRound(-x)) : undefined,
-      minWidth: convertToUnit(axis === 'y' ? Math.min(minWidth.value, targetBox.width) : minWidth.value),
+      minWidth: axis === 'y' ? Math.min(minWidth.value, targetBox.width) : minWidth.value,
       maxWidth: available.x > 0 &&
         convertToUnit(pixelCeil(clamp(
           available.x, minWidth.value === Infinity
@@ -405,6 +405,11 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
             : minHeight.value, maxHeight.value))
         ),
     })
+
+    const postMinWidth = Number(contentStyles.value['minWidth'])
+    const postLeft = Number(contentStyles.value['left'])
+    contentStyles.value['minWidth'] = convertToUnit(postLeft <= 12 ? postMinWidth : postMinWidth - 24)
+    contentStyles.value['left'] = convertToUnit(postLeft > 12 ? postLeft - 12 : postLeft)
 
     return {
       available,
