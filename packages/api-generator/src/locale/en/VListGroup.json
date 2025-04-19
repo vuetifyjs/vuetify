@@ -6,6 +6,7 @@
     "group": "Assign a route namespace. Accepts a string or regexp for determining active state.",
     "noAction": "Removes left padding assigned for action icons from group items.",
     "prependIcon": "Prepends an icon to the component, uses the same syntax as `v-icon`.",
+    "rawId": "Defines the root element's id attribute in the component. If it is provided, the id attribute will be dynamically generated in the format: \"v-list-group--id-[rawId]\".",
     "subgroup": "Designate the component as nested list group.",
     "value": "Expands / Collapse the list-group.",
     "fluid": "Removes the left padding assigned for action icons from group items."
