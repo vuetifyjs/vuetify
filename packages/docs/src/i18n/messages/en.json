@@ -1,7 +1,22 @@
 {
   "home": {
+    "title": "Vue Component Framework",
+    "description": "Vuetify is a no design skills required Open Source UI Library with beautifully handcrafted Vue Components.",
     "get-started": "Get Started",
-    "why-vuetify": "Why Vuetify?"
+    "why-vuetify": "Why Vuetify?",
+    "entry": {
+      "last-commit": "Latest Commit:",
+      "last-release": "Latest Release:"
+    },
+    "features": {
+      "community": "Vibrant Community",
+      "community-message": "When you run into a roadblock, you need assistance right away. Vuetify offers support in our massive community on Discord.",
+      "components": "Semantic Vue Components",
+      "components-message": "Be prepared for an armada of specialized components at your disposal. With over 80 in total, there is a solution to any situation.",
+      "scaffolding": "Ready-Made Project Scaffolding",
+      "scaffolding-message": "Vuetify supports the future of Vite tooling through its create plugin. This allows you to scaffold a new project in seconds."
+    },
+    "special-sponsor": "Special Sponsor"
   },
   "about": "About",
   "accessibility": "Accessibility (a11y)",
