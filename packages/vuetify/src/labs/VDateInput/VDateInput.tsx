@@ -6,6 +6,7 @@ import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextFi
 
 // Composables
 import { useDate } from '@/composables/date'
+import { stringInputFormatter } from '@/composables/date/date'
 import { makeDisplayProps, useDisplay } from '@/composables/display'
 import { makeFocusProps, useFocus } from '@/composables/focus'
 import { forwardRefs } from '@/composables/forwardRefs'
@@ -35,6 +36,7 @@ export type VDateInputSlots = Omit<VTextFieldSlots, 'default'> & {
 
 export const makeVDateInputProps = propsFactory({
   displayFormat: [Function, String],
+  inputFormat: [Function, String],
   location: {
     type: String as PropType<StrategyProps['location']>,
     default: 'bottom start',
@@ -92,6 +94,25 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
       return adapter.format(date, props.displayFormat ?? 'keyboardDate')
     }
 
+    function parseUserInput (value: string) {
+      if (typeof props.inputFormat === 'function') {
+        return props.inputFormat(value)
+      }
+
+      if (typeof props.inputFormat === 'string') {
+        const formattedDate = stringInputFormatter(value, props.inputFormat)
+
+        if (!formattedDate) {
+          return null
+        }
+
+        const { year, month, day } = formattedDate
+        return adapter.setYear(adapter.setMonth(adapter.setDate(adapter.date(), day), month - 1), year)
+      }
+
+      return adapter.isValid(value) ? adapter.date(value) : null
+    }
+
     const display = computed(() => {
       const value = wrapInArray(model.value)
 
@@ -141,7 +162,7 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
 
       const target = e.target as HTMLInputElement
 
-      model.value = adapter.isValid(target.value) ? target.value : null
+      model.value = parseUserInput(target.value) || model.value
     }
 
     function onClick (e: MouseEvent) {
