@@ -14,6 +14,7 @@
     const name = route.params.name as string
     if (name.endsWith('-directive')) return name.replace('-directive', '')
     else if (name.startsWith('use-')) return camelCase(name)
+    else if (name === 'globals') return name
     else return `${name.charAt(0).toUpperCase()}${camelize(name.slice(1))}`
   })
   const component = shallowRef<any>({})
