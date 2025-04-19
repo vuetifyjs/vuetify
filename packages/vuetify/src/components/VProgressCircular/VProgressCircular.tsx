@@ -11,7 +11,7 @@ import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
-import { computed, ref, toRef, watchEffect } from 'vue'
+import { ref, toRef, watchEffect } from 'vue'
 import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -57,14 +57,14 @@ export const VProgressCircular = genericComponent<VProgressCircularSlots>()({
 
     const { themeClasses } = provideTheme(props)
     const { sizeClasses, sizeStyles } = useSize(props)
-    const { textColorClasses, textColorStyles } = useTextColor(toRef(props, 'color'))
-    const { textColorClasses: underlayColorClasses, textColorStyles: underlayColorStyles } = useTextColor(toRef(props, 'bgColor'))
+    const { textColorClasses, textColorStyles } = useTextColor(() => props.color)
+    const { textColorClasses: underlayColorClasses, textColorStyles: underlayColorStyles } = useTextColor(() => props.bgColor)
     const { intersectionRef, isIntersecting } = useIntersectionObserver()
     const { resizeRef, contentRect } = useResizeObserver()
 
-    const normalizedValue = computed(() => Math.max(0, Math.min(100, parseFloat(props.modelValue))))
-    const width = computed(() => Number(props.width))
-    const size = computed(() => {
+    const normalizedValue = toRef(() => Math.max(0, Math.min(100, parseFloat(props.modelValue))))
+    const width = toRef(() => Number(props.width))
+    const size = toRef(() => {
       // Get size from element if size prop value is small, large etc
       return sizeStyles.value
         ? Number(props.size)
@@ -72,9 +72,9 @@ export const VProgressCircular = genericComponent<VProgressCircularSlots>()({
           ? contentRect.value.width
           : Math.max(width.value, 32)
     })
-    const diameter = computed(() => (MAGIC_RADIUS_CONSTANT / (1 - width.value / size.value)) * 2)
-    const strokeWidth = computed(() => width.value / size.value * diameter.value)
-    const strokeDashOffset = computed(() => convertToUnit(((100 - normalizedValue.value) / 100) * CIRCUMFERENCE))
+    const diameter = toRef(() => (MAGIC_RADIUS_CONSTANT / (1 - width.value / size.value)) * 2)
+    const strokeWidth = toRef(() => width.value / size.value * diameter.value)
+    const strokeDashOffset = toRef(() => convertToUnit(((100 - normalizedValue.value) / 100) * CIRCUMFERENCE))
 
     watchEffect(() => {
       intersectionRef.value = root.value

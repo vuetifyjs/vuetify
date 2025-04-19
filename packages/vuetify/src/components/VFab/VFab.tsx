@@ -56,7 +56,7 @@ export const VFab = genericComponent()({
       height.value = entries[0].target.clientHeight
     })
 
-    const hasPosition = computed(() => props.app || props.absolute)
+    const hasPosition = toRef(() => props.app || props.absolute)
 
     const position = computed(() => {
       if (!hasPosition.value) return false
@@ -78,7 +78,7 @@ export const VFab = genericComponent()({
         layoutSize: computed(() => props.layout ? height.value + 24 : 0),
         elementSize: computed(() => height.value + 24),
         active: computed(() => props.app && model.value),
-        absolute: toRef(props, 'absolute'),
+        absolute: toRef(() => props.absolute),
       })
 
       watchEffect(() => {

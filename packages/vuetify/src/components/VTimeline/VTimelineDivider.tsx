@@ -11,7 +11,6 @@ import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeSizeProps, useSize } from '@/composables/size'
 
 // Utilities
-import { toRef } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 export const makeVTimelineDividerProps = propsFactory({
@@ -35,13 +34,13 @@ export const VTimelineDivider = genericComponent()({
 
   setup (props, { slots }) {
     const { sizeClasses, sizeStyles } = useSize(props, 'v-timeline-divider__dot')
-    const { backgroundColorStyles, backgroundColorClasses } = useBackgroundColor(toRef(props, 'dotColor'))
+    const { backgroundColorStyles, backgroundColorClasses } = useBackgroundColor(() => props.dotColor)
     const { roundedClasses } = useRounded(props, 'v-timeline-divider__dot')
     const { elevationClasses } = useElevation(props)
     const {
       backgroundColorClasses: lineColorClasses,
       backgroundColorStyles: lineColorStyles,
-    } = useBackgroundColor(toRef(props, 'lineColor'))
+    } = useBackgroundColor(() => props.lineColor)
 
     useRender(() => (
       <div

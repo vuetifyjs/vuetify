@@ -5,6 +5,7 @@ import {
   provide,
   ref,
   shallowRef,
+  toRef,
   watch,
   watchEffect,
 } from 'vue'
@@ -345,7 +346,7 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
     return acc
   })
 
-  const current = computed(() => computedThemes.value[name.value])
+  const current = toRef(() => computedThemes.value[name.value])
 
   const styles = computed(() => {
     const lines: string[] = []
@@ -408,7 +409,7 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
         }
       } else {
         if (IN_BROWSER) {
-          head.addHeadObjs(computed(getHead))
+          head.addHeadObjs(toRef(getHead))
           watchEffect(() => head.updateDOM())
         } else {
           head.addHeadObjs(getHead())
@@ -430,7 +431,7 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
     }
   }
 
-  const themeClasses = computed(() => parsedOptions.isDisabled ? undefined : `v-theme--${name.value}`)
+  const themeClasses = toRef(() => parsedOptions.isDisabled ? undefined : `v-theme--${name.value}`)
 
   return {
     install,
@@ -455,10 +456,10 @@ export function provideTheme (props: { theme?: string }) {
 
   if (!theme) throw new Error('Could not find Vuetify theme injection')
 
-  const name = computed(() => props.theme ?? theme.name.value)
-  const current = computed(() => theme.themes.value[name.value])
+  const name = toRef(() => props.theme ?? theme.name.value)
+  const current = toRef(() => theme.themes.value[name.value])
 
-  const themeClasses = computed(() => theme.isDisabled ? undefined : `v-theme--${name.value}`)
+  const themeClasses = toRef(() => theme.isDisabled ? undefined : `v-theme--${name.value}`)
 
   const newTheme: ThemeInstance = {
     ...theme,

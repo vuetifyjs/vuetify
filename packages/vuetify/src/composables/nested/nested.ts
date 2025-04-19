@@ -212,8 +212,8 @@ export const useNested = (props: NestedProps) => {
     id: shallowRef(),
     root: {
       opened,
-      activatable: toRef(props, 'activatable'),
-      selectable: toRef(props, 'selectable'),
+      activatable: toRef(() => props.activatable),
+      selectable: toRef(() => props.selectable),
       activated,
       selected,
       selectedValues: computed(() => {

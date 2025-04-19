@@ -30,7 +30,6 @@ import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant
 import { Ripple } from '@/directives/ripple'
 
 // Utilities
-import { computed } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -113,15 +112,14 @@ export const VCard = genericComponent<VCardSlots>()({
     const { roundedClasses } = useRounded(props)
     const link = useLink(props, attrs)
 
-    const isLink = computed(() => props.link !== false && link.isLink.value)
-    const isClickable = computed(() =>
-      !props.disabled &&
-      props.link !== false &&
-      (props.link || link.isClickable.value)
-    )
-
     useRender(() => {
-      const Tag = isLink.value ? 'a' : props.tag
+      const isLink = props.link !== false && link.isLink.value
+      const isClickable = (
+        !props.disabled &&
+        props.link !== false &&
+        (props.link || link.isClickable.value)
+      )
+      const Tag = isLink ? 'a' : props.tag
       const hasTitle = !!(slots.title || props.title != null)
       const hasSubtitle = !!(slots.subtitle || props.subtitle != null)
       const hasHeader = hasTitle || hasSubtitle
@@ -139,7 +137,7 @@ export const VCard = genericComponent<VCardSlots>()({
               'v-card--disabled': props.disabled,
               'v-card--flat': props.flat,
               'v-card--hover': props.hover && !(props.disabled || props.flat),
-              'v-card--link': isClickable.value,
+              'v-card--link': isClickable,
             },
             themeClasses.value,
             borderClasses.value,
@@ -158,8 +156,8 @@ export const VCard = genericComponent<VCardSlots>()({
             locationStyles.value,
             props.style,
           ]}
-          onClick={ isClickable.value && link.navigate }
-          v-ripple={ isClickable.value && props.ripple }
+          onClick={ isClickable && link.navigate }
+          v-ripple={ isClickable && props.ripple }
           tabindex={ props.disabled ? -1 : undefined }
           { ...link.linkProps }
         >
@@ -226,7 +224,7 @@ export const VCard = genericComponent<VCardSlots>()({
             <VCardActions v-slots={{ default: slots.actions }} />
           )}
 
-          { genOverlays(isClickable.value, 'v-card') }
+          { genOverlays(isClickable, 'v-card') }
         </Tag>
       )
     })

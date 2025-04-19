@@ -27,7 +27,7 @@ import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant
 import { Ripple } from '@/directives/ripple'
 
 // Utilities
-import { computed, onBeforeMount, toDisplayString, watch } from 'vue'
+import { computed, onBeforeMount, toDisplayString, toRef, watch } from 'vue'
 import { deprecate, EventProp, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -140,7 +140,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
       props.active !== false &&
       (props.active || link.isActive?.value || (root.activatable.value ? isActivated.value : isSelected.value))
     )
-    const isLink = computed(() => props.link !== false && link.isLink.value)
+    const isLink = toRef(() => props.link !== false && link.isLink.value)
     const isSelectable = computed(() => (!!list && (root.selectable.value || root.activatable.value || props.value != null)))
     const isClickable = computed(() =>
       !props.disabled &&
@@ -148,9 +148,9 @@ export const VListItem = genericComponent<VListItemSlots>()({
       (props.link || link.isClickable.value || isSelectable.value)
     )
 
-    const roundedProps = computed(() => props.rounded || props.nav)
-    const color = computed(() => props.color ?? props.activeColor)
-    const variantProps = computed(() => ({
+    const roundedProps = toRef(() => props.rounded || props.nav)
+    const color = toRef(() => props.color ?? props.activeColor)
+    const variantProps = toRef(() => ({
       color: isActive.value ? color.value ?? props.baseColor : props.baseColor,
       variant: props.variant,
     }))
@@ -178,7 +178,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(roundedProps)
-    const lineClasses = computed(() => props.lines ? `v-list-item--${props.lines}-line` : undefined)
+    const lineClasses = toRef(() => props.lines ? `v-list-item--${props.lines}-line` : undefined)
 
     const slotProps = computed(() => ({
       isActive: isActive.value,

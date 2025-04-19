@@ -24,7 +24,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
 
 // Utilities
-import { computed, toRef } from 'vue'
+import { toRef } from 'vue'
 import { genericComponent, propsFactory } from '@/util'
 
 // Types
@@ -105,29 +105,28 @@ export const VAlert = genericComponent<VAlertSlots>()({
 
   setup (props, { emit, slots }) {
     const isActive = useProxiedModel(props, 'modelValue')
-    const icon = computed(() => {
+    const icon = toRef(() => {
       if (props.icon === false) return undefined
       if (!props.type) return props.icon
 
       return props.icon ?? `$${props.type}`
     })
-    const variantProps = computed(() => ({
+
+    const { themeClasses } = provideTheme(props)
+    const { colorClasses, colorStyles, variantClasses } = useVariant(() => ({
       color: props.color ?? props.type,
       variant: props.variant,
     }))
-
-    const { themeClasses } = provideTheme(props)
-    const { colorClasses, colorStyles, variantClasses } = useVariant(variantProps)
     const { densityClasses } = useDensity(props)
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
     const { locationStyles } = useLocation(props)
     const { positionClasses } = usePosition(props)
     const { roundedClasses } = useRounded(props)
-    const { textColorClasses, textColorStyles } = useTextColor(toRef(props, 'borderColor'))
+    const { textColorClasses, textColorStyles } = useTextColor(() => props.borderColor)
     const { t } = useLocale()
 
-    const closeProps = computed(() => ({
+    const closeProps = toRef(() => ({
       'aria-label': t(props.closeLabel),
       onClick (e: MouseEvent) {
         isActive.value = false

@@ -111,7 +111,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
       return item.order === 'asc' ? props.sortAscIcon : props.sortDescIcon
     }
 
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(props, 'color')
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.color)
 
     const { displayClasses, mobile } = useDisplay(props)
 
