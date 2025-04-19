@@ -55,7 +55,7 @@ export const VBreadcrumbsItem = genericComponent()({
           { !link.isLink.value ? slots.default?.() ?? props.title : (
             <a
               class="v-breadcrumbs-item--link"
-              onClick={ link.navigate }
+              onClick={ link.navigate.value }
               { ...link.linkProps }
             >
               { slots.default?.() ?? props.title }
