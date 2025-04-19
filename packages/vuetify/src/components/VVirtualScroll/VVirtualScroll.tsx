@@ -14,12 +14,14 @@ import { makeVirtualProps, useVirtual } from '@/composables/virtual'
 import { onMounted, onScopeDispose, toRef } from 'vue'
 import {
   convertToUnit,
+  focusableChildren,
   genericComponent,
   getCurrentInstance,
   getScrollParent,
   propsFactory,
   useRender,
 } from '@/util'
+import { getNextElement } from '@/util/helpers'
 
 // Types
 import type { PropType, Ref } from 'vue'
@@ -72,6 +74,65 @@ export const VVirtualScroll = genericComponent<new <T, Renderless extends boolea
       paddingBottom,
       computedItems,
     } = useVirtual(props, toRef(props, 'items'))
+
+    async function focus (location: 'next' | 'prev' | 'first' | 'last' | number) {
+      if (!containerRef.value) return
+
+      function resolveIndex (container: HTMLElement, location: 'next' | 'prev' | 'first' | 'last' | number) {
+        let index, shouldScroll
+        if (typeof (location) === 'number') {
+          index = location
+          shouldScroll = true
+        } else {
+          const focusable = focusableChildren(container)
+          if ((location === 'prev' || location === 'next') && !getNextElement(focusable, location)) {
+            const effectiveLocation = location === 'next' ? 'first' : 'last'
+            if (effectiveLocation === 'first') {
+              index = 0
+              shouldScroll = true
+            } else {
+              index = props.items.length - 1
+              shouldScroll = true
+            }
+          } else {
+            shouldScroll = false
+            const currentElementIndex = Number((document.activeElement as HTMLElement).dataset?.itemIndex)
+            if (Number.isNaN(currentElementIndex)) {
+              index = 0
+            } else {
+              index = location === 'prev'
+                ? currentElementIndex - 1
+                : currentElementIndex + 1
+            }
+          }
+        }
+
+        return {
+          index,
+          shouldScroll,
+        }
+      }
+
+      const { index, shouldScroll } = resolveIndex(containerRef.value, location)
+
+      if (shouldScroll) {
+        scrollToIndex(index)
+      }
+
+      // TODO: allow only one loop
+      const started = performance.now()
+      await new Promise(resolve => setTimeout(resolve, 100)); // wait for VMenu render
+      (function findAndFocus () {
+        window.requestAnimationFrame(() => {
+          const listItemElement = containerRef.value?.querySelector(`[data-item-index='${index}']`) as HTMLElement
+          if (!listItemElement && performance.now() < started + 3000) {
+            findAndFocus()
+          } else {
+            listItemElement.focus()
+          }
+        })
+      })()
+    }
 
     useToggleScope(() => props.renderless, () => {
       function handleListeners (add = false) {
@@ -140,7 +201,7 @@ export const VVirtualScroll = genericComponent<new <T, Renderless extends boolea
 
     return {
       calculateVisibleItems,
-      scrollToIndex,
+      focus,
     }
   },
 })
