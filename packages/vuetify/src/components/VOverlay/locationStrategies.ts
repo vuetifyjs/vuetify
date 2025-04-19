@@ -406,10 +406,10 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
         ),
     })
 
-    const postMinWidth = Number(contentStyles.value['minWidth'])
-    const postLeft = Number(contentStyles.value['left'])
-    contentStyles.value['minWidth'] = convertToUnit(postLeft <= 12 ? postMinWidth : postMinWidth - 24)
-    contentStyles.value['left'] = convertToUnit(postLeft > 12 ? postLeft - 12 : postLeft)
+    const postMinWidth = Number(contentStyles.value.minWidth)
+    const postLeft = Number(contentStyles.value.left)
+    contentStyles.value.minWidth = convertToUnit(postLeft <= 12 ? postMinWidth : postMinWidth - 24)
+    contentStyles.value.left = convertToUnit(postLeft > 12 ? postLeft - 12 : postLeft)
 
     return {
       available,
