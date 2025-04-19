@@ -8,7 +8,12 @@
     "iconColor": "Explicit color applied to the icon.",
     "iconSize": "The specific size of the icon, can use named sizes.",
     "iconSizes": "An array of tuples that define the icon sizes for each named size.",
+    "loading": "Displays circular progress bar in place of the icon.",
+    "readonly": "Puts the button in a readonly state. Cannot be clicked or navigated to by keyboard.",
     "rotate": "The rotation of the icon in degrees.",
     "sizes": "An array of tuples that define the button sizes for each named size."
+  },
+  "events": {
+    "update:active": "Event that is emitted when the active state changes."
   }
 }
