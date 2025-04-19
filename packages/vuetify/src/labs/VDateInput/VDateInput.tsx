@@ -39,8 +39,14 @@ export const makeVDateInputProps = propsFactory({
     type: String as PropType<StrategyProps['location']>,
     default: 'bottom start',
   },
+  updateOn: {
+    type: Array as PropType<('blur' | 'enter')[]>,
+    default: () => ['blur', 'enter'],
+  },
 
-  ...makeDisplayProps(),
+  ...makeDisplayProps({
+    mobile: null,
+  }),
   ...makeFocusProps(),
   ...makeVConfirmEditProps({
     hideActions: true,
@@ -121,7 +127,12 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
     })
 
     const isInteractive = computed(() => !props.disabled && !props.readonly)
-    const isReadonly = computed(() => !(mobile.value && isEditingInput.value) && props.readonly)
+
+    const isReadonly = computed(() => {
+      if (!props.updateOn.length) return true
+
+      return !(mobile.value && isEditingInput.value) && props.readonly
+    })
 
     watch(menu, val => {
       if (val) return
@@ -135,13 +146,12 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
 
       if (!menu.value || !isFocused.value) {
         menu.value = true
-
         return
       }
 
-      const target = e.target as HTMLInputElement
-
-      model.value = adapter.isValid(target.value) ? target.value : null
+      if (props.updateOn.includes('enter')) {
+        onUserInput(e.target as HTMLInputElement)
+      }
     }
 
     function onClick (e: MouseEvent) {
@@ -172,13 +182,30 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
       model.value = null
     }
 
-    function onBlur () {
+    function onBlur (e: FocusEvent) {
+      if (props.updateOn.includes('blur')) {
+        onUserInput(e.target as HTMLInputElement)
+      }
+
       blur()
 
       // When in mobile mode and editing is done (due to keyboard dismissal), close the menu
       if (mobile.value && isEditingInput.value && !isFocused.value) {
         menu.value = false
         isEditingInput.value = false
+      }
+    }
+
+    function onUserInput (target: HTMLInputElement) {
+      const userInput = target.value
+
+      if (!userInput) {
+        model.value = null
+        return
+      }
+
+      if (adapter.isValid(userInput)) {
+        model.value = userInput
       }
     }
 
