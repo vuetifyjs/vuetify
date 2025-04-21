@@ -25,7 +25,7 @@ export namespace DateModule {
 }
 
 export type InternalDateOptions = {
-  adapter: (new (options: { locale: any, formats?: any}) => DateInstance) | DateInstance
+  adapter: (new (options: { locale: any, formats?: any }) => DateInstance) | DateInstance
   formats?: Record<string, any>
   locale: Record<string, any>
 }
