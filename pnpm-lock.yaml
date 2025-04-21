@@ -84,8 +84,8 @@ importers:
         specifier: ^5.0.0
         version: 5.0.0(conventional-commits-filter@5.0.0)
       conventional-changelog-vuetify:
-        specifier: ^1.2.2
-        version: 1.2.2
+        specifier: ^2.0.2
+        version: 2.0.2
       conventional-github-releaser:
         specifier: ^3.1.5
         version: 3.1.5
@@ -247,8 +247,8 @@ importers:
         specifier: ^2.0.4
         version: 2.0.4(vue@3.5.13(typescript@5.5.4))
       '@vuetify/one':
-        specifier: ^2.0.0
-        version: 2.0.0(@mdi/js@7.4.47(patch_hash=3c2a78b1509745df3a3100e3e59075dd87718e67632cc14dc64dd9ac34098f9f))(lodash-es@4.17.21)(vue@3.5.13(typescript@5.5.4))(vuetify@packages+vuetify)
+        specifier: ^2.1.0
+        version: 2.1.0(@mdi/js@7.4.47(patch_hash=3c2a78b1509745df3a3100e3e59075dd87718e67632cc14dc64dd9ac34098f9f))(lodash-es@4.17.21)(vue@3.5.13(typescript@5.5.4))(vuetify@packages+vuetify)
       algoliasearch:
         specifier: ^4.24.0
         version: 4.24.0
@@ -3412,13 +3412,13 @@ packages:
       vue: ^3.0.0
       vuetify: ^3.0.0
 
-  '@vuetify/one@2.0.0':
-    resolution: {integrity: sha512-4iv+z49m7buTqXla82dpPG4UVSfHWzKCTpnilmQuXboKYMxeJWvPu0zv4ZZ7vFOwKD7qnm890cG7z03EJkhqHg==}
+  '@vuetify/one@2.1.0':
+    resolution: {integrity: sha512-Ld/r7e3ULaSrZtmWZg3B3PADuf7xLmo25oCZvpwhBFgmbjIPPZGzqBfpMRNhacP2+qOsQPR5xjYyWcM/3uc4vg==}
     peerDependencies:
       '@mdi/js': 7.4.47
       lodash-es: ^4.17.21
-      vue: ^3.4.0
-      vuetify: ^3.6.1
+      vue: ^3.5.13
+      vuetify: ^3.8.0
 
   '@vuetify/testing-library-dom@1.0.2':
     resolution: {integrity: sha512-tQo3A63uCq2646IhgYLIFugC8HRVyBssvRidzu+iQLkCWSO8ikz9z6tqDU3NjbAxSXxeAFa5x1Nq7VMDxrQ4Lw==}
@@ -4289,9 +4289,9 @@ packages:
     resolution: {integrity: sha512-SetDSntXLk8Jh1NOAl1Gu5uLiCNSYenB5tm0YVeZKePRIgDW9lQImromTwLa3c/Gae298tsgOM+/CYT9XAl0NA==}
     engines: {node: '>=18'}
 
-  conventional-changelog-vuetify@1.2.2:
-    resolution: {integrity: sha512-d0ZQixf3ulnYkp1BeT847INcAUcdsSgACp7nlESVl7RaGVdyVxzOTJo49q+ytwC6qczEC7XhUPb5+fOxv5zn3Q==}
-    engines: {node: '>=10'}
+  conventional-changelog-vuetify@2.0.2:
+    resolution: {integrity: sha512-e/JrDFXmUXr4mspU9DBQRDq3g5yavNv1fXubrrCpNFDiLHTBAsVcvp5sSb/qw+ptqxJq3qQ49tBp6PPnxMEE3w==}
+    engines: {node: '>=18'}
 
   conventional-changelog-writer@4.1.0:
     resolution: {integrity: sha512-WwKcUp7WyXYGQmkLsX4QmU42AZ1lqlvRW9mqoyiQzdD+rJWbTepdWoKJuwXTS+yq79XKnQNa93/roViPQrAQgw==}
@@ -13075,7 +13075,7 @@ snapshots:
       vue: 3.5.13(typescript@5.5.4)
       vuetify: link:packages/vuetify
 
-  '@vuetify/one@2.0.0(@mdi/js@7.4.47(patch_hash=3c2a78b1509745df3a3100e3e59075dd87718e67632cc14dc64dd9ac34098f9f))(lodash-es@4.17.21)(vue@3.5.13(typescript@5.5.4))(vuetify@packages+vuetify)':
+  '@vuetify/one@2.1.0(@mdi/js@7.4.47(patch_hash=3c2a78b1509745df3a3100e3e59075dd87718e67632cc14dc64dd9ac34098f9f))(lodash-es@4.17.21)(vue@3.5.13(typescript@5.5.4))(vuetify@packages+vuetify)':
     dependencies:
       '@mdi/js': 7.4.47(patch_hash=3c2a78b1509745df3a3100e3e59075dd87718e67632cc14dc64dd9ac34098f9f)
       lodash-es: 4.17.21
@@ -14118,10 +14118,10 @@ snapshots:
 
   conventional-changelog-preset-loader@5.0.0: {}
 
-  conventional-changelog-vuetify@1.2.2:
+  conventional-changelog-vuetify@2.0.2:
     dependencies:
       compare-func: 2.0.0
-      q: 1.5.1
+      upath: 2.0.1
 
   conventional-changelog-writer@4.1.0:
     dependencies:

@@ -13,6 +13,10 @@ import { genericComponent, propsFactory, useRender } from '@/util'
 // Types
 import type { PropType } from 'vue'
 
+export type VCalendarHeaderSlots = {
+  title: { title?: string }
+}
+
 export const makeVCalendarHeaderProps = propsFactory({
   nextIcon: {
     type: String,
@@ -33,7 +37,7 @@ export const makeVCalendarHeaderProps = propsFactory({
   },
 }, 'VCalendarHeader')
 
-export const VCalendarHeader = genericComponent()({
+export const VCalendarHeader = genericComponent<VCalendarHeaderSlots>()({
   name: 'VCalendarHeader',
 
   props: makeVCalendarHeaderProps(),
@@ -44,7 +48,7 @@ export const VCalendarHeader = genericComponent()({
     'click:toToday': () => true,
   },
 
-  setup (props, { emit }) {
+  setup (props, { emit, slots }) {
     const { t } = useLocale()
 
     function prev () {
@@ -85,7 +89,11 @@ export const VCalendarHeader = genericComponent()({
           onClick={ next }
         />
 
-        <div class="v-calendar-header__title">{ props.title }</div>
+        <div class="v-calendar-header__title">
+          { slots.title?.({ title: props.title }) ?? (
+            <span>{ props.title }</span>
+          )}
+        </div>
       </div>
     ))
 
