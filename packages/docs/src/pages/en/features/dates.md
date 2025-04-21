@@ -372,6 +372,7 @@ export class MyAdapter extends VuetifyDateAdapter {
   const adapter = useDate() as MyAdapter
 </script>
 ```
+
 By adding the module declaration
 
 ```ts
@@ -382,7 +383,7 @@ declare module 'vuetify' {
 
 you can simply use it in the same way as the default implementation:
 
-```
+```vue
 <template>
   <v-app>
     <v-container>
