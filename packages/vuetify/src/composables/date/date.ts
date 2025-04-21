@@ -25,10 +25,9 @@ export namespace DateModule {
 }
 
 export type InternalDateOptions = {
-  adapter: (new (options: { locale: any, formats?: any, functions?: any}) => DateInstance) | DateInstance
+  adapter: (new (options: { locale: any, formats?: any}) => DateInstance) | DateInstance
   formats?: Record<string, any>
   locale: Record<string, any>
-  functions: Record<string, any>
 }
 
 export type DateOptions = Partial<InternalDateOptions>
@@ -97,7 +96,6 @@ function createInstance (options: InternalDateOptions, locale: LocaleInstance) {
       ? new options.adapter({
         locale: options.locale[locale.current.value] ?? locale.current.value,
         formats: options.formats,
-        functions: options.functions,
       })
       : options.adapter
   )
