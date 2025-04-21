@@ -353,6 +353,7 @@ export class MyAdapter extends VuetifyDateAdapter {
   }
 }
 ```
+
 ```vue
 <template>
   <v-app>
@@ -372,6 +373,7 @@ export class MyAdapter extends VuetifyDateAdapter {
 </script>
 ```
 By adding the module declaration
+
 ```ts
 declare module 'vuetify' {
   export interface DateInstance extends MyAdapter { }
@@ -379,6 +381,7 @@ declare module 'vuetify' {
 ```
 
 you can simply use it in the same way as the default implementation:
+
 ```
 <template>
   <v-app>
