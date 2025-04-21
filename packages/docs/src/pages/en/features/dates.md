@@ -1,3 +1,4 @@
+
 ---
 meta:
   title: Dates
@@ -337,4 +338,61 @@ export interface DateAdapter<TDate> {
   setMonth (date: TDate, month: number): TDate
   getNextMonth (date: TDate): TDate
 }
+```
+
+## Inheritance
+
+You can also extend the build-in DateAdatper with your own functions
+
+```ts
+import { VuetifyDateAdapter } from 'vuetify/lib/composables/date/adapters/vuetify.js'
+
+export class MyAdapter extends VuetifyDateAdapter {
+  sayHello() {
+    return `Hello, current week starts at ${this.startOfWeek(this.date())}`
+  }
+}
+```
+```vue
+<template>
+  <v-app>
+    <v-container>
+      <v-alert title="Message from custom adapter">
+        {{ adapter.sayHello() }}
+      </v-alert>
+    </v-container>
+  </v-app>
+</template>
+
+<script setup lang="ts">
+  import { useDate } from 'vuetify'
+  import type { MyAdapter } from './my-adapter'
+
+  const adapter = useDate() as MyAdapter
+</script>
+```
+By adding the module declaration
+```ts
+declare module 'vuetify' {
+  export interface DateInstance extends MyAdapter { }
+}
+```
+
+you can simply use it in the same way as the default implementation:
+```
+<template>
+  <v-app>
+    <v-container>
+      <v-alert title="Message from custom adapter">
+        {{ adapter.sayHello() }}
+      </v-alert>
+    </v-container>
+  </v-app>
+</template>
+
+<script setup lang="ts">
+  import { useDate } from 'vuetify'
+
+  const adapter = useDate()
+</script>
 ```
