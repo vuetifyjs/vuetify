@@ -11,8 +11,12 @@ import { makeCalendarProps, useCalendar } from '@/composables/calendar'
 import { useDate } from '@/composables/date/date'
 
 // Utilities
-import { computed } from 'vue'
-import { chunkArray, genericComponent, propsFactory, useRender } from '@/util'
+import { computed, nextTick } from 'vue'
+import { chunkArray, genericComponent, getPrefixedEventHandlers, pick, propsFactory, useRender } from '@/util'
+
+// Types
+import type { VCalendarDaySlots } from './VCalendarDay'
+import type { CalendarDay } from '@/composables/calendar'
 
 export const makeVCalendarProps = propsFactory({
   hideHeader: Boolean,
@@ -21,11 +25,15 @@ export const makeVCalendarProps = propsFactory({
   ...makeCalendarProps(),
   ...makeVCalendarDayProps(),
   ...makeVCalendarHeaderProps(),
-}, 'VCalender')
+}, 'VCalendar')
 
-export type VCalendarSlots = {
-  header: { title: string }
-  event: { day?: Object, allDay: boolean, event: Record<string, unknown> }
+export type VCalendarSlots = VCalendarDaySlots & {
+  'day-body': { day?: CalendarDay, events?: Array<any> }
+  'day-title': { title?: number | string }
+  'day-event': { day?: CalendarDay, allDay: Boolean, event?: Record<string, unknown> }
+  header: { title: string, clickNext: Function, clickPrev: Function, clickToday: Function }
+  'day-interval': { day?: CalendarDay, dayIndex: Number, events?: Array<any> }
+  title: { title?: string }
 }
 
 export const VCalendar = genericComponent<VCalendarSlots>()({
@@ -36,10 +44,11 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
   emits: {
     next: null,
     prev: null,
+    today: null,
     'update:modelValue': null,
   },
 
-  setup (props, { emit, slots }) {
+  setup (props, { attrs, emit, slots }) {
     const adapter = useDate()
 
     const { daysInMonth, daysInWeek, genDays, model, displayValue, weekNumbers, weekDays } = useCalendar(props as any)
@@ -49,29 +58,35 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
     function onClickNext () {
       if (props.viewMode === 'month') {
         model.value = [adapter.addMonths(displayValue.value, 1)]
-      }
-      if (props.viewMode === 'week') {
+      } else if (props.viewMode === 'week') {
         model.value = [adapter.addDays(displayValue.value, 7)]
-      }
-      if (props.viewMode === 'day') {
+      } else if (props.viewMode === 'day') {
         model.value = [adapter.addDays(displayValue.value, 1)]
       }
+      nextTick(() => {
+        emit('next', model.value[0])
+      })
     }
 
     function onClickPrev () {
       if (props.viewMode === 'month') {
         model.value = [adapter.addMonths(displayValue.value, -1)]
-      }
-      if (props.viewMode === 'week') {
+      } else if (props.viewMode === 'week') {
         model.value = [adapter.addDays(displayValue.value, -7)]
-      }
-      if (props.viewMode === 'day') {
+      } else if (props.viewMode === 'day') {
         model.value = [adapter.addDays(displayValue.value, -1)]
       }
+      nextTick(() => {
+        emit('prev', model.value[0])
+      })
     }
 
     function onClickToday () {
-      model.value = [adapter.date()]
+      const date = adapter.date()
+      model.value = [date]
+      nextTick(() => {
+        emit('today', model.value[0])
+      })
     }
 
     const title = computed(() => {
@@ -94,7 +109,12 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
         >
           <div>
             { !props.hideHeader && (
-              !slots.header ? (
+              slots.header?.({
+                title: title.value,
+                clickNext: onClickNext,
+                clickPrev: onClickPrev,
+                clickToday: onClickToday,
+              }) ?? (
                 <VCalendarHeader
                   key="calendar-header"
                   { ...calendarHeaderProps }
@@ -102,9 +122,9 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
                   onClick:next={ onClickNext }
                   onClick:prev={ onClickPrev }
                   onClick:toToday={ onClickToday }
-                />
-              ) : (
-                slots.header({ title: title.value })
+                >
+                  {{ title: slots.title }}
+                </VCalendarHeader>
               )
             )}
           </div>
@@ -119,7 +139,7 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
                     ...(!props.hideWeekNumber ? ['v-calendar-weekly__head-weeknumbers'] : []),
                   ]
                 }
-                key="calenderWeeklyHead"
+                key="calendarWeeklyHead"
               >
                 { !props.hideWeekNumber ? <div key="weekNumber0" class="v-calendar-weekly__head-weeknumber"></div> : '' }
                 {
@@ -146,46 +166,74 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
                 { chunkArray(daysInMonth.value, weekDays.value.length)
                   .map((week, wi) => (
                     [
-                      !props.hideWeekNumber ? <div class="v-calendar-month__weeknumber">{ weekNumbers.value[wi] }</div> : '',
+                      !props.hideWeekNumber ? (
+                        <div
+                          class="v-calendar-month__weeknumber"
+                          { ...getPrefixedEventHandlers(attrs, ':weekNumber', () => ({ weekNumber: weekNumbers.value[wi], week })) }
+                        >{ weekNumbers.value[wi] }</div>
+                      ) : '',
                       week.map(day => (
-                        <VCalendarMonthDay
-                          color={ adapter.isSameDay(adapter.date(), day.date) ? 'primary' : undefined }
-                          day={ day }
-                          title={ day ? adapter.format(day.date, 'dayOfMonth') : 'NaN' }
-                          events={ props.events?.filter(e => adapter.isSameDay(day.date, e.start) || adapter.isSameDay(day.date, e.end)) }
-                          v-slots={{
-                            event: slots.event,
-                          }}
-                        ></VCalendarMonthDay>
+                          <VCalendarMonthDay
+                            key={ day.date.getTime() }
+                            { ...calendarDayProps }
+                            day={ day }
+                            title={ adapter.format(day.date, 'dayOfMonth') }
+                            events={ props.events?.filter(e => adapter.isSameDay(day.date, e.start) || adapter.isSameDay(day.date, e.end)) }
+                            { ...attrs }
+                          >
+                            {{
+                              ...pick(slots, ['day-body', 'day-event', 'day-title']),
+                            }}
+                          </VCalendarMonthDay>
                       )),
                     ]
-                  ))}
+                  ))
+                }
               </div>
             )}
-
             { props.viewMode === 'week' && (
-              daysInWeek.value.map((day, i) => (
-                <VCalendarDay
-                  { ...calendarDayProps }
-                  day={ day }
-                  dayIndex={ i }
-                  events={ props.events?.filter(e => adapter.isSameDay(e.start, day.date) || adapter.isSameDay(e.end, day.date)) }
-                ></VCalendarDay>
+              daysInWeek.value.map((day, i) =>
+                slots['day-interval'] ? slots['day-interval']?.({
+                  ...calendarDayProps,
+                  day,
+                  dayIndex: i,
+                  events: props.events?.filter(e => adapter.isSameDay(e.start, day.date) || adapter.isSameDay(e.end, day.date)),
+                }) : (
+                  <VCalendarDay
+                    { ...calendarDayProps }
+                    day={ day }
+                    dayIndex={ i }
+                    events={ props.events?.filter(e => adapter.isSameDay(e.start, day.date) || adapter.isSameDay(e.end, day.date)) }
+                    { ...attrs }
+                  >
+                    {{ ...pick(slots, ['interval', 'intervalBody', 'intervalEvent', 'intervalTitle']) }}
+                  </VCalendarDay>
+                )
               ))
-            )}
+            }
 
             { props.viewMode === 'day' && (
-              <VCalendarDay
-                { ...calendarDayProps }
-                day={ genDays([displayValue.value as Date], adapter.date() as Date)[0] }
-                dayIndex={ 0 }
-                events={
-                  props.events?.filter(e =>
-                    adapter.isSameDay(e.start, genDays([displayValue.value as Date], adapter.date() as Date)[0].date) ||
-                    adapter.isSameDay(e.end, genDays([displayValue.value as Date], adapter.date() as Date)[0].date)
-                  )
-                }
-              ></VCalendarDay>
+              slots['day-interval'] ? slots['day-interval']({
+                day: genDays([displayValue.value as Date], adapter.date() as Date)[0],
+                dayIndex: 0,
+                events: props.events?.filter(e =>
+                  adapter.isSameDay(e.start, genDays([displayValue.value as Date], adapter.date() as Date)[0].date) ||
+                  adapter.isSameDay(e.end, genDays([displayValue.value as Date], adapter.date() as Date)[0].date)
+                ),
+              }) : (
+                <VCalendarDay
+                  { ...calendarDayProps }
+                  day={ genDays([model.value[0] as Date], adapter.date() as Date)[0] }
+                  dayIndex={ 0 }
+                  events={
+                    props.events?.filter(e =>
+                      adapter.isSameDay(e.start, genDays([model.value[0] as Date], adapter.date() as Date)[0].date) ||
+                      adapter.isSameDay(e.end, genDays([model.value[0] as Date], adapter.date() as Date)[0].date)
+                    )
+                  }
+                  { ...attrs }
+                ></VCalendarDay>
+              )
             )}
           </div>
         </div>

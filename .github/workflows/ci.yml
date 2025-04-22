@@ -81,6 +81,13 @@ jobs:
       - uses: vuetifyjs/setup-action@master
       - run: pnpm run test --project browser
         working-directory: ./packages/vuetify
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: Test screenshots
+          path: packages/vuetify/test/__screenshots__
+          if-no-files-found: ignore
+          overwrite: true
 
   deploy:
     needs: [lint, test-unit, test-e2e, build-vuetify]
