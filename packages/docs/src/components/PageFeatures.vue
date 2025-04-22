@@ -1,6 +1,7 @@
 <template>
   <div class="mb-4">
     <page-feature-chip
+      v-show="!isApiPage"
       :href="contribute"
       prepend-icon="mdi-language-markdown-outline"
       rel="noopener noreferrer"
@@ -102,6 +103,10 @@
 
   const pinned = computed(() => {
     return pins.pins.some(p => p.to === route.path)
+  })
+
+  const isApiPage = computed(() => {
+    return route.path.indexOf('/api/') > -1
   })
 
   const label = computed(() => {
