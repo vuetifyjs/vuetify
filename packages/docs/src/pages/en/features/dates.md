@@ -341,61 +341,32 @@ export interface DateAdapter<TDate> {
 
 ## Inheritance
 
-You can also extend the build-in DateAdatper with your own functions
+You can also extend and override build-in DateAdapter using class inheritance:
 
 ```ts
-import { VuetifyDateAdapter } from 'vuetify/lib/composables/date/adapters/vuetify.js'
+import { VuetifyDateAdapter } from 'vuetify/lib/composables/date'
 
 export class MyAdapter extends VuetifyDateAdapter {
   sayHello() {
     return `Hello, current week starts at ${this.startOfWeek(this.date())}`
   }
+  override startOfWeek(date: Date, firstDayOfWeek?: string | number): Date {
+    return super.startOfWeek(date, 2) // forcing Tuesday
+  }
 }
 ```
 
-```vue
-<template>
-  <v-app>
-    <v-container>
-      <v-alert title="Message from custom adapter">
-        {{ adapter.sayHello() }}
-      </v-alert>
-    </v-container>
-  </v-app>
-</template>
+```ts { resource="src/plugins/vuetify.js" }
+export default createVuetify({
+  date: {
+    adapter: MyAdapter,
+  },
+  ...
+})
 
-<script setup lang="ts">
-  import { useDate } from 'vuetify'
-  import type { MyAdapter } from './my-adapter'
-
-  const adapter = useDate() as MyAdapter
-</script>
-```
-
-By adding the module declaration
-
-```ts
 declare module 'vuetify' {
-  export interface DateInstance extends MyAdapter { }
+  namespace DateModule {
+    interface Adapter extends MyAdapter {}
+  }
 }
-```
-
-you can simply use it in the same way as the default implementation:
-
-```vue
-<template>
-  <v-app>
-    <v-container>
-      <v-alert title="Message from custom adapter">
-        {{ adapter.sayHello() }}
-      </v-alert>
-    </v-container>
-  </v-app>
-</template>
-
-<script setup lang="ts">
-  import { useDate } from 'vuetify'
-
-  const adapter = useDate()
-</script>
 ```
