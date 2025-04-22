@@ -6,7 +6,7 @@ import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextFi
 
 // Composables
 import { useDate } from '@/composables/date'
-import { stringInputFormatter } from '@/composables/date/date'
+import { parseDateString } from '@/composables/date/date'
 import { makeDisplayProps, useDisplay } from '@/composables/display'
 import { makeFocusProps, useFocus } from '@/composables/focus'
 import { forwardRefs } from '@/composables/forwardRefs'
@@ -100,7 +100,7 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
       }
 
       if (typeof props.inputFormat === 'string') {
-        const formattedDate = stringInputFormatter(value, props.inputFormat)
+        const formattedDate = parseDateString(value, props.inputFormat)
 
         if (!formattedDate) {
           return null

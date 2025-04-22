@@ -117,7 +117,7 @@ export function useDate (): DateInstance {
   return createInstance(options, locale)
 }
 
-export function stringInputFormatter (dateString: string, format: string) {
+export function parseDateString (dateString: string, format: string) {
   function countConsecutiveChars (str: string, startIndex: number): number {
     const char = str[startIndex]
     let count = 0
