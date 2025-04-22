@@ -586,9 +586,6 @@ importers:
       postcss:
         specifier: ^8.5.3
         version: 8.5.3
-      resize-observer-polyfill:
-        specifier: ^1.5.1
-        version: 1.5.1
       roboto-fontface:
         specifier: ^0.10.0
         version: 0.10.0
@@ -7947,9 +7944,6 @@ packages:
 
   reselect@4.1.7:
     resolution: {integrity: sha512-Zu1xbUt3/OPwsXL46hvOOoQrap2azE7ZQbokq61BQfiXvhewsKDwhMeZjTX9sX0nvw1t/U5Audyn1I9P/m9z0A==}
-
-  resize-observer-polyfill@1.5.1:
-    resolution: {integrity: sha512-LwZrotdHOo12nQuZlHEmtuXdqGoOD0OhaxopaNFxWzInpEgaLWoVuAMbTzixuosCx2nEG58ngzW3vxdWoxIgdg==}
 
   resolve-cwd@3.0.0:
     resolution: {integrity: sha512-OrZaX2Mb+rJCpH/6CpSqt9xFVpN++x01XnN2ie9g6P5/3xelLAkXWVADpdz1IHD/KFfEXyE6V0U01OQ3UO2rEg==}
@@ -18595,8 +18589,6 @@ snapshots:
   requireindex@1.2.0: {}
 
   reselect@4.1.7: {}
-
-  resize-observer-polyfill@1.5.1: {}
 
   resolve-cwd@3.0.0:
     dependencies:

@@ -4,7 +4,7 @@ import { VDateInput } from '../VDateInput'
 import { mount } from '@vue/test-utils'
 import { createVuetify } from '@/framework'
 
-global.ResizeObserver = require('resize-observer-polyfill')
+// global.ResizeObserver = require('resize-observer-polyfill')
 
 describe('VDateInput', () => {
   const vuetify = createVuetify()
@@ -13,28 +13,25 @@ describe('VDateInput', () => {
     vi.clearAllMocks()
   })
 
+  function mountFunction (component: any, options = {}) {
+    return mount(component, {
+      global: {
+        plugins: [vuetify],
+      },
+      ...options,
+    })
+  }
+
   describe('update-on prop', () => {
     const TEST_DATE = '2025-01-01'
 
-    interface MountOptions {
-      updateOn?: ('blur' | 'enter')[]
-      modelValue?: string | null
-    }
-
-    function mountFunction (options: MountOptions = {}) {
-      return mount(VDateInput, {
-        global: {
-          plugins: [vuetify],
-        },
-        props: {
-          updateOn: options.updateOn ?? [],
-          modelValue: options.modelValue ?? null,
-        },
-      })
-    }
-
     it('should update modelValue only on enter key press', async () => {
-      const wrapper = mountFunction({ updateOn: ['enter'] })
+      const wrapper = mountFunction(
+        <VDateInput
+          updateOn={['enter']}
+          modelValue={ null }
+        />
+      )
       const input = wrapper.find('input')
 
       await input.trigger('click')
@@ -49,7 +46,12 @@ describe('VDateInput', () => {
     })
 
     it('should update modelValue only on blur event', async () => {
-      const wrapper = mountFunction({ updateOn: ['blur'] })
+      const wrapper = mountFunction(
+        <VDateInput
+          updateOn={['blur']}
+          modelValue={ null }
+        />
+      )
       const input = wrapper.find('input')
 
       await input.trigger('click')
@@ -64,7 +66,12 @@ describe('VDateInput', () => {
     })
 
     it('should update modelValue on both enter key press and blur event', async () => {
-      const wrapper = mountFunction({ updateOn: ['enter', 'blur'] })
+      const wrapper = mountFunction(
+        <VDateInput
+          updateOn={['enter', 'blur']}
+          modelValue={ null }
+        />
+      )
       const input = wrapper.find('input')
 
       await input.trigger('click')
@@ -79,7 +86,12 @@ describe('VDateInput', () => {
     })
 
     it('should make the input readonly and prevent value updates', async () => {
-      const wrapper = mountFunction({ updateOn: [] })
+      const wrapper = mountFunction(
+        <VDateInput
+          updateOn={[]}
+          modelValue={ null }
+        />
+      )
       const input = wrapper.find('input')
 
       expect(input.attributes('readonly')).toBeDefined()
