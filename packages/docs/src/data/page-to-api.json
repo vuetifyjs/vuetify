@@ -173,7 +173,7 @@
   "features/scrolling": ["useGoTo"],
   "features/global-configuration": ["VDefaultsProvider"],
   "features/internationalization": ["useLocale", "VLocaleProvider"],
-  "features/theme": ["VThemeProvider"],
+  "features/theme": ["useTheme", "VThemeProvider"],
   "styles/transitions": [
     "VDialogBottomTransition",
     "VDialogTopTransition",
