@@ -9,17 +9,17 @@ overrides:
   '@types/node': 22.5.4
   tough-cookie: 5.0.0-rc.4
 
-pnpmfileChecksum: sha256-grQ7keQLE6IY6tCi9f26NtYQ2j+RuK1OR3hPnrfzUSE=
+pnpmfileChecksum: hdycaw5dzspbcs5sui7ue3czcu
 
 patchedDependencies:
   '@mdi/js@7.4.47':
-    hash: 3c2a78b1509745df3a3100e3e59075dd87718e67632cc14dc64dd9ac34098f9f
+    hash: wt4lkgr52gphla2wb445bnli3i
     path: patches/@mdi__js@7.4.47.patch
   '@testing-library/vue':
-    hash: 15ba1e1b9f291286e3951cdf39b2e27f55b6727bc0315792f3e4558c0a3a7db8
+    hash: 3limad3b7od6m3nrz2f3jnaixy
     path: patches/@testing-library__vue.patch
   vue-gtag-next:
-    hash: 3469e25ae2dc6bd97138e6a2b767743de8123979b246ebc2bdbb581c76efbfbf
+    hash: mkgavjrgdsvimm3nsmkswaflk4
     path: patches/vue-gtag-next.patch
 
 importers:
@@ -43,7 +43,7 @@ importers:
         version: 7.4.47
       '@mdi/js':
         specifier: 7.4.47
-        version: 7.4.47(patch_hash=3c2a78b1509745df3a3100e3e59075dd87718e67632cc14dc64dd9ac34098f9f)
+        version: 7.4.47(patch_hash=wt4lkgr52gphla2wb445bnli3i)
       '@mdi/svg':
         specifier: 7.4.47
         version: 7.4.47
@@ -247,8 +247,8 @@ importers:
         specifier: ^2.0.4
         version: 2.0.4(vue@3.5.13(typescript@5.5.4))
       '@vuetify/one':
-        specifier: ^2.1.0
-        version: 2.1.0(@mdi/js@7.4.47(patch_hash=3c2a78b1509745df3a3100e3e59075dd87718e67632cc14dc64dd9ac34098f9f))(lodash-es@4.17.21)(vue@3.5.13(typescript@5.5.4))(vuetify@packages+vuetify)
+        specifier: ^2.1.1
+        version: 2.1.2(@mdi/js@7.4.47(patch_hash=wt4lkgr52gphla2wb445bnli3i))(lodash-es@4.17.21)(vue@3.5.13(typescript@5.5.4))(vuetify@packages+vuetify)
       algoliasearch:
         specifier: ^4.24.0
         version: 4.24.0
@@ -284,7 +284,7 @@ importers:
         version: 3.5.13(typescript@5.5.4)
       vue-gtag-next:
         specifier: ^1.14.0
-        version: 1.14.0(patch_hash=3469e25ae2dc6bd97138e6a2b767743de8123979b246ebc2bdbb581c76efbfbf)(vue@3.5.13(typescript@5.5.4))
+        version: 1.14.0(patch_hash=mkgavjrgdsvimm3nsmkswaflk4)(vue@3.5.13(typescript@5.5.4))
       vue-i18n:
         specifier: ^11.1.1
         version: 11.1.1(vue@3.5.13(typescript@5.5.4))
@@ -312,7 +312,7 @@ importers:
         version: 6.0.5(@vue/compiler-dom@3.5.13)(eslint@8.57.0)(rollup@4.40.0)(typescript@5.5.4)(vue-i18n@11.1.1(vue@3.5.13(typescript@5.5.4)))(vue@3.5.13(typescript@5.5.4))
       '@mdi/js':
         specifier: 7.4.47
-        version: 7.4.47(patch_hash=3c2a78b1509745df3a3100e3e59075dd87718e67632cc14dc64dd9ac34098f9f)
+        version: 7.4.47(patch_hash=wt4lkgr52gphla2wb445bnli3i)
       '@mdi/svg':
         specifier: 7.4.47
         version: 7.4.47
@@ -489,7 +489,7 @@ importers:
         version: 14.6.1(@vuetify/testing-library-dom@1.0.2)
       '@testing-library/vue':
         specifier: ^8.1.0
-        version: 8.1.0(patch_hash=15ba1e1b9f291286e3951cdf39b2e27f55b6727bc0315792f3e4558c0a3a7db8)(@vue/compiler-sfc@3.5.13)(vue@3.5.13(typescript@5.5.4))
+        version: 8.1.0(patch_hash=3limad3b7od6m3nrz2f3jnaixy)(@vue/compiler-sfc@3.5.13)(vue@3.5.13(typescript@5.5.4))
       '@types/node':
         specifier: 22.5.4
         version: 22.5.4
@@ -2902,7 +2902,7 @@ packages:
     resolution: {integrity: sha512-vq7fv0rnt+QTXgPxr5Hjc210p6YKq2kmdziLgnsZGgLJ9e6VAShx1pACLuRjd/AS/sr7phAR58OIIpf0LlmQNw==}
     engines: {node: '>=12', npm: '>=6'}
     peerDependencies:
-      '@testing-library/dom': '>=7.21.4'
+      '@testing-library/dom': npm:@vuetify/testing-library-dom@1.0.2
 
   '@testing-library/vue@8.1.0':
     resolution: {integrity: sha512-ls4RiHO1ta4mxqqajWRh8158uFObVrrtAPoxk7cIp4HrnQUj/ScKzqz53HxYpG3X6Zb7H2v+0eTGLSoy8HQ2nA==}
@@ -3412,8 +3412,8 @@ packages:
       vue: ^3.0.0
       vuetify: ^3.0.0
 
-  '@vuetify/one@2.1.0':
-    resolution: {integrity: sha512-Ld/r7e3ULaSrZtmWZg3B3PADuf7xLmo25oCZvpwhBFgmbjIPPZGzqBfpMRNhacP2+qOsQPR5xjYyWcM/3uc4vg==}
+  '@vuetify/one@2.1.2':
+    resolution: {integrity: sha512-jIKWfyLArjhgraIPUhLmRFPRF+hLClCsgs3/FyNPMsl6WcBThR+j6Yk5a+V+cJaReptIfJL68d8/ob49Omz7dA==}
     peerDependencies:
       '@mdi/js': 7.4.47
       lodash-es: ^4.17.21
@@ -11502,7 +11502,7 @@ snapshots:
 
   '@mdi/font@7.4.47': {}
 
-  '@mdi/js@7.4.47(patch_hash=3c2a78b1509745df3a3100e3e59075dd87718e67632cc14dc64dd9ac34098f9f)': {}
+  '@mdi/js@7.4.47(patch_hash=wt4lkgr52gphla2wb445bnli3i)': {}
 
   '@mdi/svg@7.4.47': {}
 
@@ -12386,7 +12386,7 @@ snapshots:
     dependencies:
       '@testing-library/dom': '@vuetify/testing-library-dom@1.0.2'
 
-  '@testing-library/vue@8.1.0(patch_hash=15ba1e1b9f291286e3951cdf39b2e27f55b6727bc0315792f3e4558c0a3a7db8)(@vue/compiler-sfc@3.5.13)(vue@3.5.13(typescript@5.5.4))':
+  '@testing-library/vue@8.1.0(patch_hash=3limad3b7od6m3nrz2f3jnaixy)(@vue/compiler-sfc@3.5.13)(vue@3.5.13(typescript@5.5.4))':
     dependencies:
       '@babel/runtime': 7.24.4
       '@testing-library/dom': '@vuetify/testing-library-dom@1.0.2'
@@ -13075,9 +13075,9 @@ snapshots:
       vue: 3.5.13(typescript@5.5.4)
       vuetify: link:packages/vuetify
 
-  '@vuetify/one@2.1.0(@mdi/js@7.4.47(patch_hash=3c2a78b1509745df3a3100e3e59075dd87718e67632cc14dc64dd9ac34098f9f))(lodash-es@4.17.21)(vue@3.5.13(typescript@5.5.4))(vuetify@packages+vuetify)':
+  '@vuetify/one@2.1.2(@mdi/js@7.4.47(patch_hash=wt4lkgr52gphla2wb445bnli3i))(lodash-es@4.17.21)(vue@3.5.13(typescript@5.5.4))(vuetify@packages+vuetify)':
     dependencies:
-      '@mdi/js': 7.4.47(patch_hash=3c2a78b1509745df3a3100e3e59075dd87718e67632cc14dc64dd9ac34098f9f)
+      '@mdi/js': 7.4.47(patch_hash=wt4lkgr52gphla2wb445bnli3i)
       lodash-es: 4.17.21
       vue: 3.5.13(typescript@5.5.4)
       vuetify: link:packages/vuetify
@@ -20094,7 +20094,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  vue-gtag-next@1.14.0(patch_hash=3469e25ae2dc6bd97138e6a2b767743de8123979b246ebc2bdbb581c76efbfbf)(vue@3.5.13(typescript@5.5.4)):
+  vue-gtag-next@1.14.0(patch_hash=mkgavjrgdsvimm3nsmkswaflk4)(vue@3.5.13(typescript@5.5.4)):
     dependencies:
       vue: 3.5.13(typescript@5.5.4)
 
