@@ -31,9 +31,9 @@
         :title="item.title"
         :value="item.value"
       >
-        <template v-slot:prepend="{ isSelected }">
+        <template v-slot:prepend="{ isSelected, select }">
           <v-list-item-action start>
-            <v-checkbox-btn :model-value="isSelected"></v-checkbox-btn>
+            <v-checkbox-btn :model-value="isSelected" @update:model-value="select"></v-checkbox-btn>
           </v-list-item-action>
         </template>
       </v-list-item>
