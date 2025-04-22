@@ -71,10 +71,13 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
     const adapter = useDate()
     const { mobile } = useDisplay(props)
     const { isFocused, focus, blur } = useFocus(props)
+
+    const emptyModelValue = () => props.multiple ? [] : null
+
     const model = useProxiedModel(
       props,
       'modelValue',
-      props.multiple ? [] : null,
+      emptyModelValue(),
       val => Array.isArray(val) ? val.map(item => adapter.toJsDate(item)) : val ? adapter.toJsDate(val) : val,
       val => Array.isArray(val) ? val.map(item => adapter.date(item)) : val ? adapter.date(val) : val
     )
@@ -141,7 +144,7 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
 
       const target = e.target as HTMLInputElement
 
-      model.value = adapter.isValid(target.value) ? target.value : null
+      model.value = adapter.isValid(target.value) ? target.value : emptyModelValue()
     }
 
     function onClick (e: MouseEvent) {
@@ -169,7 +172,7 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
     function onUpdateDisplayModel (value: unknown) {
       if (value != null) return
 
-      model.value = null
+      model.value = emptyModelValue()
     }
 
     function onBlur () {
