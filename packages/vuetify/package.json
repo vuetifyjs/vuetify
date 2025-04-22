@@ -76,6 +76,7 @@
     "./labs/components": "./lib/labs/components.js",
     "./labs/*": "./lib/labs/*/index.js",
     "./util/colors": "./lib/util/colors.js",
+    "./date/adapters/*": "./lib/composables/date/adapters/*.js",
     "./dist/vuetify.js": {
       "types": "./dist/vuetify.d.ts",
       "import": "./dist/vuetify.esm.js",
