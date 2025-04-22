@@ -12,7 +12,7 @@ import { makeTagProps } from '@/composables/tag'
 import { MaybeTransition } from '@/composables/transition'
 
 // Utilities
-import { computed, toRef } from 'vue'
+import { computed } from 'vue'
 import { defineComponent, genericComponent, propsFactory, useRender } from '@/util'
 
 export type VListGroupSlots = {
@@ -60,7 +60,7 @@ export const VListGroup = genericComponent<VListGroupSlots>()({
   props: makeVListGroupProps(),
 
   setup (props, { slots }) {
-    const { isOpen, open, id: _id } = useNestedItem(toRef(() => props.value), true)
+    const { isOpen, open, id: _id } = useNestedItem(() => props.value, true)
     const id = computed(() => `v-list-group--id-${String(_id.value)}`)
     const list = useList()
     const { isBooted } = useSsrBoot()

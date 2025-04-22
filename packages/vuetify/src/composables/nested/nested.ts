@@ -11,7 +11,7 @@ import {
   ref,
   shallowRef,
   toRaw,
-  toRef,
+  toRef, toValue,
 } from 'vue'
 import {
   independentActiveStrategy,
@@ -31,7 +31,7 @@ import {
 import { consoleError, getCurrentInstance, propsFactory } from '@/util'
 
 // Types
-import type { InjectionKey, PropType, Ref } from 'vue'
+import type { InjectionKey, MaybeRefOrGetter, PropType, Ref } from 'vue'
 import type { ActiveStrategy } from './activeStrategies'
 import type { OpenStrategy } from './openStrategies'
 import type { SelectStrategy } from './selectStrategies'
@@ -340,11 +340,11 @@ export const useNested = (props: NestedProps) => {
   return nested.root
 }
 
-export const useNestedItem = (id: Ref<unknown>, isGroup: boolean) => {
+export const useNestedItem = (id: MaybeRefOrGetter<unknown>, isGroup: boolean) => {
   const parent = inject(VNestedSymbol, emptyNested)
 
   const uidSymbol = Symbol('nested item')
-  const computedId = computed(() => id.value !== undefined ? id.value : uidSymbol)
+  const computedId = computed(() => toValue(id) ?? uidSymbol)
 
   const item = {
     ...parent,
