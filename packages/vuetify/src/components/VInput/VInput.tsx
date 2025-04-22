@@ -15,7 +15,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeValidationProps, useValidation } from '@/composables/validation'
 
 // Utilities
-import { computed, useId } from 'vue'
+import { computed, toRef, useId } from 'vue'
 import { EventProp, genericComponent, pick, propsFactory, useRender } from '@/util'
 
 // Types
@@ -141,13 +141,13 @@ export const VInput = genericComponent<new <T>(
       validate,
     }))
 
-    const color = computed(() => {
+    const color = toRef(() => {
       return props.error || props.disabled ? undefined
         : props.focused ? props.color
         : props.baseColor
     })
 
-    const iconColor = computed(() => {
+    const iconColor = toRef(() => {
       if (!props.iconColor) return undefined
 
       return props.iconColor === true ? color.value : props.iconColor

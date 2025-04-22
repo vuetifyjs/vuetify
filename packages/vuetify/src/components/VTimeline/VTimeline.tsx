@@ -73,17 +73,17 @@ export const VTimeline = genericComponent()({
 
     provideDefaults({
       VTimelineDivider: {
-        lineColor: toRef(props, 'lineColor'),
+        lineColor: toRef(() => props.lineColor),
       },
       VTimelineItem: {
-        density: toRef(props, 'density'),
-        dotColor: toRef(props, 'dotColor'),
-        fillDot: toRef(props, 'fillDot'),
-        hideOpposite: toRef(props, 'hideOpposite'),
-        iconColor: toRef(props, 'iconColor'),
-        lineColor: toRef(props, 'lineColor'),
-        lineInset: toRef(props, 'lineInset'),
-        size: toRef(props, 'size'),
+        density: toRef(() => props.density),
+        dotColor: toRef(() => props.dotColor),
+        fillDot: toRef(() => props.fillDot),
+        hideOpposite: toRef(() => props.hideOpposite),
+        iconColor: toRef(() => props.iconColor),
+        lineColor: toRef(() => props.lineColor),
+        lineInset: toRef(() => props.lineInset),
+        size: toRef(() => props.size),
       },
     })
 

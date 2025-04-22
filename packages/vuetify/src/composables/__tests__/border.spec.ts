@@ -25,8 +25,8 @@ describe('border.ts', () => {
     [{ border: null }, []],
     [{ border: 1 }, []],
     // Border only
-    [{ border: true }, ['foo--border']],
-    [{ border: '' }, ['foo--border']],
+    [{ border: true }, 'foo--border'],
+    [{ border: '' }, 'foo--border'],
     // Border with 0 or false
     [{ border: '0' }, ['border-0']],
     [{ border: 0 }, ['border-0']],

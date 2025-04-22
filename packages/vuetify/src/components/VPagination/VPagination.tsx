@@ -226,13 +226,13 @@ export const VPagination = genericComponent<VPaginationSlots>()({
 
     provideDefaults({
       VPaginationBtn: {
-        color: toRef(props, 'color'),
-        border: toRef(props, 'border'),
-        density: toRef(props, 'density'),
-        size: toRef(props, 'size'),
-        variant: toRef(props, 'variant'),
-        rounded: toRef(props, 'rounded'),
-        elevation: toRef(props, 'elevation'),
+        color: toRef(() => props.color),
+        border: toRef(() => props.border),
+        density: toRef(() => props.density),
+        size: toRef(() => props.size),
+        variant: toRef(() => props.variant),
+        rounded: toRef(() => props.rounded),
+        elevation: toRef(() => props.elevation),
       },
     })
 

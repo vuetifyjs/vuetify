@@ -85,7 +85,7 @@ export const VAppBar = genericComponent<VToolbarSlots>()({
       scrollRatio,
     } = useScroll(props, { canScroll })
 
-    const canHide = computed(() => (
+    const canHide = toRef(() => (
       scrollBehavior.value.hide ||
       scrollBehavior.value.fullyHide
     ))
@@ -118,7 +118,7 @@ export const VAppBar = genericComponent<VToolbarSlots>()({
         : height
     })
 
-    useToggleScope(computed(() => !!props.scrollBehavior), () => {
+    useToggleScope(() => !!props.scrollBehavior, () => {
       watchEffect(() => {
         if (canHide.value) {
           if (scrollBehavior.value.inverted) {
@@ -136,11 +136,11 @@ export const VAppBar = genericComponent<VToolbarSlots>()({
     const { layoutItemStyles } = useLayoutItem({
       id: props.name,
       order: computed(() => parseInt(props.order, 10)),
-      position: toRef(props, 'location'),
+      position: toRef(() => props.location),
       layoutSize: height,
       elementSize: shallowRef(undefined),
       active: isActive,
-      absolute: toRef(props, 'absolute'),
+      absolute: toRef(() => props.absolute),
     })
 
     useRender(() => {
