@@ -565,6 +565,10 @@ export class CircularBuffer<T = never> {
 
   constructor (public readonly size: number) {}
 
+  get isFull () {
+    return this.#arr.length === this.size
+  }
+
   push (val: T) {
     this.#arr[this.#pointer] = val
     this.#pointer = (this.#pointer + 1) % this.size
@@ -572,6 +576,11 @@ export class CircularBuffer<T = never> {
 
   values (): T[] {
     return this.#arr.slice(this.#pointer).concat(this.#arr.slice(0, this.#pointer))
+  }
+
+  clear () {
+    this.#arr.length = 0
+    this.#pointer = 0
   }
 }
 

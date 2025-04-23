@@ -5,9 +5,11 @@ import { useToggleScope } from '@/composables/toggleScope'
 import { computed, nextTick, onScopeDispose, ref, watch } from 'vue'
 import { anchorToPoint, getOffset } from './util/point'
 import {
+  CircularBuffer,
   clamp,
   consoleError,
   convertToUnit,
+  deepEqual,
   destructComputed,
   flipAlign,
   flipCorner,
@@ -198,8 +200,29 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
   })
 
   let observe = false
+  let lastFrame = -1
+  const flipped = new CircularBuffer<{ x: boolean, y: boolean }>(4)
   const observer = new ResizeObserver(() => {
-    if (observe) updateLocation()
+    if (!observe) return
+
+    // Detect consecutive frames
+    requestAnimationFrame(newTime => {
+      if (newTime !== lastFrame) flipped.clear()
+      requestAnimationFrame(newNewTime => {
+        lastFrame = newNewTime
+      })
+    })
+
+    if (flipped.isFull) {
+      const values = flipped.values()
+      if (deepEqual(values.at(-1), values.at(-3))) {
+        // Flipping is causing a container resize loop
+        return
+      }
+    }
+
+    const result = updateLocation()
+    if (result) flipped.push(result.flipped)
   })
 
   watch([data.target, data.contentEl], ([newTarget, newContentEl], [oldTarget, oldContentEl]) => {
@@ -403,6 +426,7 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
     return {
       available,
       contentBox,
+      flipped,
     }
   }
 
