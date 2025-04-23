@@ -46,6 +46,8 @@ export const makeCalendarProps = propsFactory({
   max: null as any as PropType<unknown>,
   min: null as any as PropType<unknown>,
   showAdjacentMonths: Boolean,
+  outOfRangeDatesClass: String,
+  notAllowedDatesClass: String,
   year: [Number, String],
   weekdays: {
     type: Array as PropType<CalendarWeekdays[]>,
@@ -150,7 +152,8 @@ export function useCalendar (props: CalendarProps) {
         formatted: adapter.format(date, 'keyboardDate'),
         year: adapter.getYear(date),
         month: adapter.getMonth(date),
-        isDisabled: isDisabled(date),
+        isDisabled: isDisabled(date).disableValue,
+        disabledFrom: isDisabled(date).from,
         isWeekStart: index % 7 === 0,
         isWeekEnd: index % 7 === 6,
         isToday: adapter.isSameDay(date, today),
@@ -191,22 +194,31 @@ export function useCalendar (props: CalendarProps) {
   })
 
   function isDisabled (value: unknown) {
-    if (props.disabled) return true
+    if (props.disabled) return { disableValue: true, from: 'notAllowed' }
 
     const date = adapter.date(value)
 
-    if (props.min && adapter.isAfter(adapter.date(props.min), date)) return true
-    if (props.max && adapter.isAfter(date, adapter.date(props.max))) return true
+    if (props.min && adapter.isAfter(adapter.date(props.min), date)) return { disableValue: true, from: 'outOfRange' }
+    if (props.max && adapter.isAfter(date, adapter.date(props.max))) return { disableValue: true, from: 'outOfRange' }
 
     if (Array.isArray(props.allowedDates) && props.allowedDates.length > 0) {
-      return !props.allowedDates.some(d => adapter.isSameDay(adapter.date(d), date))
+      return {
+        disableValue: !props.allowedDates.some(d => adapter.isSameDay(adapter.date(d), date)),
+        from: 'notAllowed',
+      }
     }
 
     if (typeof props.allowedDates === 'function') {
-      return !props.allowedDates(date)
+      return {
+        disableValue: !props.allowedDates(date),
+        from: 'notAllowed',
+      }
     }
 
-    return !props.weekdays.includes(adapter.toJsDate(date).getDay())
+    return {
+      disableValue: !props.weekdays.includes(adapter.toJsDate(date).getDay()),
+      from: 'notAllowed',
+    }
   }
 
   return {

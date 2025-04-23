@@ -351,4 +351,29 @@ describe.skip('VDatePicker.ts', () => {
     expect(wrapper.findAll('.v-date-picker-table--month tbody button.v-date-picker--last-in-range')
       .exists()).toBe(true)
   })
+
+  it('should add custom class for disabled range date', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        allowedDates: val => new Date(val).getDate() % 2 === 0,
+        notAllowedDatesClass: "not-allowed-dates-class"
+      },
+    })
+
+    expect(wrapper.findAll('.not-allowed-dates-class')
+      .exists()).toBe(true)
+  })
+
+  it('should add custom class for disabled range date', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        min: "2016-06-15",
+        max: "2018-03-20",
+        outOfRangeDatesClass: "out-of-range-dates-class"
+      },
+    })
+
+    expect(wrapper.findAll('.out-of-range-dates-class')
+      .exists()).toBe(true)
+  })
 })

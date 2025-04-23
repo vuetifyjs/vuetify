@@ -185,9 +185,17 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
             ))}
 
             { daysInMonth.value.map((item, i) => {
+              function getDisableDayClass () {
+                if (!item.isDisabled) return ''
+                if (item.disabledFrom === 'notAllowed') {
+                  return props.notAllowedDatesClass
+                }
+                return props.outOfRangeDatesClass
+              }
+
               const slotProps = {
                 props: {
-                  class: 'v-date-picker-month__day-btn',
+                  class: `v-date-picker-month__day-btn ${getDisableDayClass()}`,
                   color: item.isSelected || item.isToday ? props.color : undefined,
                   disabled: item.isDisabled,
                   icon: true,
