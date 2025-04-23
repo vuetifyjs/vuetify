@@ -125,8 +125,6 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
       e.preventDefault()
     }
     function onControlClick (e: MouseEvent) {
-      onFocus()
-
       emit('click:control', e)
     }
     function onClear (e: MouseEvent) {
