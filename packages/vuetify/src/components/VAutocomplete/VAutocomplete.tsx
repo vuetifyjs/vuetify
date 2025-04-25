@@ -204,7 +204,7 @@ export const VAutocomplete = genericComponent<new <
       menu.value = !menu.value
     }
     function onListKeydown (e: KeyboardEvent) {
-      if (e.key !== ' ' && checkPrintable(e)) {
+      if (checkPrintable(e)) {
         vTextFieldRef.value?.focus()
       }
     }
@@ -464,6 +464,7 @@ export const VAutocomplete = genericComponent<new <
                   { hasList && (
                     <VList
                       ref={ listRef }
+                      filterable
                       selected={ selectedValues.value }
                       selectStrategy={ props.multiple ? 'independent' : 'single-independent' }
                       onMousedown={ (e: MouseEvent) => e.preventDefault() }

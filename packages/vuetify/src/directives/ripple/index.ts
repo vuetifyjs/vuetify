@@ -25,7 +25,10 @@ interface RippleOptions {
 }
 
 export interface RippleDirectiveBinding extends Omit<DirectiveBinding, 'modifiers' | 'value'> {
-  value?: boolean | { class: string }
+  value?: boolean | {
+    class?: string
+    keys?: number[]
+  }
   modifiers: {
     center?: boolean
     circle?: boolean
@@ -157,7 +160,7 @@ const ripples = {
   },
 }
 
-function isRippleEnabled (value: any): value is true {
+function isRippleEnabled (value: any) {
   return typeof value === 'undefined' || !!value
 }
 
@@ -249,8 +252,8 @@ function rippleCancelShow (e: MouseEvent | TouchEvent) {
 
 let keyboardRipple = false
 
-function keyboardRippleShow (e: KeyboardEvent) {
-  if (!keyboardRipple && (e.keyCode === keyCodes.enter || e.keyCode === keyCodes.space)) {
+function keyboardRippleShow (e: KeyboardEvent, keys: number[]) {
+  if (!keyboardRipple && keys.includes(e.keyCode)) {
     keyboardRipple = true
     rippleShow(e)
   }
@@ -271,6 +274,7 @@ function focusRippleHide (e: FocusEvent) {
 function updateRipple (el: HTMLElement, binding: RippleDirectiveBinding, wasEnabled: boolean) {
   const { value, modifiers } = binding
   const enabled = isRippleEnabled(value)
+  const allowedKeys = (typeof value === 'object' ? value.keys : null) ?? [keyCodes.enter, keyCodes.space]
   if (!enabled) {
     ripples.hide(el)
   }
@@ -299,7 +303,7 @@ function updateRipple (el: HTMLElement, binding: RippleDirectiveBinding, wasEnab
     el.addEventListener('mouseup', rippleHide)
     el.addEventListener('mouseleave', rippleHide)
 
-    el.addEventListener('keydown', keyboardRippleShow)
+    el.addEventListener('keydown', (e) => keyboardRippleShow(e, allowedKeys))
     el.addEventListener('keyup', keyboardRippleHide)
 
     el.addEventListener('blur', focusRippleHide)
