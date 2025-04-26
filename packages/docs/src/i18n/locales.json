@@ -5,6 +5,12 @@
     "enabled": true
   },
   {
+    "title": "Español",
+    "locale": "es-MX",
+    "alternate": "es",
+    "enabled": true
+  },
+  {
     "title": "日本語",
     "locale": "ja-JP",
     "alternate": "ja",
