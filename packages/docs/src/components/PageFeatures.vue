@@ -1,7 +1,7 @@
 <template>
   <div class="mb-4">
     <page-feature-chip
-      v-show="!isApiPage"
+      v-if="!isGeneratedPage"
       :href="contribute"
       prepend-icon="mdi-language-markdown-outline"
       rel="noopener noreferrer"
@@ -105,8 +105,8 @@
     return pins.pins.some(p => p.to === route.path)
   })
 
-  const isApiPage = computed(() => {
-    return route.path.indexOf('/api/') > -1
+  const isGeneratedPage = computed(() => {
+    return route.path.includes('/api/')
   })
 
   const label = computed(() => {
