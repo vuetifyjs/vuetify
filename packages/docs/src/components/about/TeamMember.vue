@@ -1,6 +1,6 @@
 <template>
   <v-lazy min-height="128">
-    <div class="d-flex">
+    <div class="d-flex team-member">
       <v-avatar color="grey-lighten-2" size="72">
         <v-img v-if="member.avatar" :src="member.avatar" />
         <v-icon v-else color="grey" size="35"> mdi-image</v-icon>
@@ -42,8 +42,8 @@
                   @click.prevent="copyTextToClipboard(link.copyText)"
                 >
                   <v-icon
-                    :icon="link.icon"
                     :color="link.color"
+                    :icon="link.icon"
                     size="small"
                   />
                 </div>
@@ -67,7 +67,7 @@
           </div>
 
           <template v-for="(focus, k) in member.focus" :key="k">
-            <app-markdown :content="focus" />
+            <AppMarkdown :content="focus" />
 
             <span
               v-if="k < member.focus.length - 1"
@@ -92,7 +92,7 @@
           </div>
 
           <template v-for="(funding, k) in member.funding" :key="k">
-            <app-markdown :content="funding" />
+            <AppMarkdown :content="funding" />
 
             <span
               v-if="k < member.funding.length - 1"
@@ -111,13 +111,13 @@
             class="text-subtitle d-flex align-center my-2"
           >
             <v-icon
-              start
               :icon="icons[field]"
+              start
             />
 
             <template v-if="Array.isArray(member[field])">
               <template v-for="(focus, j) in member[field]" :key="j">
-                <app-markdown :content="focus" />
+                <AppMarkdown :content="focus" />
 
                 <span
                   v-if="j < member[field]!.length - 1"
@@ -135,32 +135,19 @@
           </div>
         </template>
 
-        <v-chip
+        <border-chip
           v-if="member.joined"
           :text="t('joined', { date: member.joined })"
-          border
           prepend-icon="mdi-calendar"
-          size="small"
-          variant="text"
-        >
-          <template #prepend>
-            <v-icon color="medium-emphasis" size="small" />
-          </template>
-        </v-chip>
+        />
       </div>
     </div>
   </v-lazy>
 </template>
 
 <script setup lang="ts">
-  // Composables
-  import { useI18n } from 'vue-i18n'
-
-  // Utilities
-  import { computed } from 'vue'
-
   // Types
-  import type { Member } from '@/store/team'
+  import type { Member } from '@/stores/team'
   import type { PropType } from 'vue'
 
   const props = defineProps({
@@ -187,7 +174,7 @@
         color: '#212121',
         href: `https://x.com/${props.member.twitter}`,
         icon: '$x',
-        tooltip: 'X',
+        tooltip: 'Xitter',
       })
     }
 
@@ -227,8 +214,9 @@
   }
 </script>
 
-<style>
-  .cursor-pointer {
-    cursor: pointer;
-  }
+<style lang="sass">
+  .team-member
+    .v-markdown
+      > p
+        margin: 0
 </style>

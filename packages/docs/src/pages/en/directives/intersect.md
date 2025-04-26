@@ -14,21 +14,23 @@ related:
 
 The `v-intersect` directive utilizes the [Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API). It provides an easy-to-use interface for detecting when elements are visible within the user's viewport. This is also used for the [v-lazy](/components/lazy) component.
 
-<entry />
+<PageFeatures />
 
 ## Usage
 
 Scroll the window and watch the colored dot. Notice as the [v-card](/components/cards) comes into view that it changes from error to success.
 
-<example file="v-intersect/usage" />
+<ExamplesExample file="v-intersect/usage" />
+
+<PromotedEntry />
 
 ## API
 
-| Directive | Description |
-| - | - |
-| [v-intersect](/api/v-intersect/) | The intersection observer directive |
+| Directive                                  | Description                         |
+|--------------------------------------------|-------------------------------------|
+| [v-intersect](/api/v-intersect-directive/) | The intersection observer directive |
 
-<api-inline hide-links />
+<ApiInline hide-links />
 
 ## Examples
 
@@ -38,4 +40,4 @@ Scroll the window and watch the colored dot. Notice as the [v-card](/components/
 
 The `v-intersect` directive accepts options. Available options can be found in the [Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API). Below is an example using the `threshold` option.
 
-<example file="v-intersect/prop-options" />
+<ExamplesExample file="v-intersect/prop-options" />

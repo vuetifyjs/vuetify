@@ -5,7 +5,7 @@ import { useRtl } from '@/composables/locale'
 import { makeRoundedProps } from '@/composables/rounded'
 
 // Utilities
-import { computed, provide, ref, shallowRef, toRef } from 'vue'
+import { computed, nextTick, provide, ref, shallowRef, toRef } from 'vue'
 import { clamp, createRange, getDecimals, propsFactory } from '@/util'
 
 // Types
@@ -31,7 +31,7 @@ type SliderProvide = {
   numTicks: Ref<number>
   onSliderMousedown: (e: MouseEvent) => void
   onSliderTouchstart: (e: TouchEvent) => void
-  parseMouseMove: (e: MouseEvent | TouchEvent) => number
+  parseMouseMove: (e: MouseEvent | TouchEvent) => number | void
   position: (val: number) => number
   readonly: Ref<boolean | null | undefined>
   rounded: Ref<boolean | number | string | undefined>
@@ -52,7 +52,7 @@ type SliderProvide = {
   parsedTicks: Ref<Tick[]>
   hasLabels: Ref<boolean>
   isReversed: Ref<boolean>
-  horizontalDirection: Ref<'ltr' | 'rtl'>
+  indexFromEnd: Ref<boolean>
 }
 
 export const VSliderSymbol: InjectionKey<SliderProvide> = Symbol.for('vuetify:v-slider')
@@ -149,7 +149,7 @@ type SliderData = {
 export const useSteps = (props: SliderProps) => {
   const min = computed(() => parseFloat(props.min))
   const max = computed(() => parseFloat(props.max))
-  const step = computed(() => +props.step > 0 ? parseFloat(props.step) : 0)
+  const step = computed(() => Number(props.step) > 0 ? parseFloat(props.step) : 0)
   const decimals = computed(() => Math.max(getDecimals(step.value), getDecimals(min.value)))
 
   function roundValue (value: string | number) {
@@ -184,15 +184,8 @@ export const useSlider = ({
 }) => {
   const { isRtl } = useRtl()
   const isReversed = toRef(props, 'reverse')
-  const horizontalDirection = computed(() => {
-    let hd: 'ltr' | 'rtl' = isRtl.value ? 'rtl' : 'ltr'
-
-    if (props.reverse) {
-      hd = hd === 'rtl' ? 'ltr' : 'rtl'
-    }
-
-    return hd
-  })
+  const vertical = computed(() => props.direction === 'vertical')
+  const indexFromEnd = computed(() => vertical.value !== isReversed.value)
 
   const { min, max, step, decimals, roundValue } = steps
 
@@ -201,7 +194,6 @@ export const useSlider = ({
   const trackSize = computed(() => parseInt(props.trackSize, 10))
   const numTicks = computed(() => (max.value - min.value) / step.value)
   const disabled = toRef(props, 'disabled')
-  const vertical = computed(() => props.direction === 'vertical')
 
   const thumbColor = computed(() => props.error || props.disabled ? undefined : props.thumbColor ?? props.color)
   const trackColor = computed(() => props.error || props.disabled ? undefined : props.trackColor ?? props.color)
@@ -213,7 +205,11 @@ export const useSlider = ({
   const trackContainerRef = ref<VSliderTrack | undefined>()
   const activeThumbRef = ref<HTMLElement | undefined>()
 
-  function parseMouseMove (e: MouseEvent | TouchEvent): number {
+  function parseMouseMove (e: MouseEvent | TouchEvent): number | void {
+    const el: HTMLElement = trackContainerRef.value?.$el
+
+    if (!el) return
+
     const vertical = props.direction === 'vertical'
     const start = vertical ? 'top' : 'left'
     const length = vertical ? 'height' : 'width'
@@ -222,46 +218,57 @@ export const useSlider = ({
     const {
       [start]: trackStart,
       [length]: trackLength,
-    } = trackContainerRef.value?.$el.getBoundingClientRect()
+    } = el.getBoundingClientRect()
     const clickOffset = getPosition(e, position)
 
     // It is possible for left to be NaN, force to number
     let clickPos = Math.min(Math.max((clickOffset - trackStart - startOffset.value) / trackLength, 0), 1) || 0
 
-    if (vertical || horizontalDirection.value === 'rtl') clickPos = 1 - clickPos
+    if (vertical ? indexFromEnd.value : indexFromEnd.value !== isRtl.value) clickPos = 1 - clickPos
 
     return roundValue(min.value + clickPos * (max.value - min.value))
   }
 
   const handleStop = (e: MouseEvent | TouchEvent) => {
-    onSliderEnd({ value: parseMouseMove(e) })
+    const value = parseMouseMove(e)
+    if (value != null) {
+      onSliderEnd({ value })
+    }
 
     mousePressed.value = false
     startOffset.value = 0
   }
 
   const handleStart = (e: MouseEvent | TouchEvent) => {
+    const value = parseMouseMove(e)
     activeThumbRef.value = getActiveThumb(e)
 
     if (!activeThumbRef.value) return
 
-    activeThumbRef.value.focus()
     mousePressed.value = true
 
     if (activeThumbRef.value.contains(e.target as Node)) {
       startOffset.value = getOffset(e, activeThumbRef.value, props.direction)
     } else {
       startOffset.value = 0
-      onSliderMove({ value: parseMouseMove(e) })
+      if (value != null) {
+        onSliderMove({ value })
+      }
     }
 
-    onSliderStart({ value: parseMouseMove(e) })
+    if (value != null) {
+      onSliderStart({ value })
+    }
+    nextTick(() => activeThumbRef.value?.focus())
   }
 
   const moveListenerOptions = { passive: true, capture: true }
 
   function onMouseMove (e: MouseEvent | TouchEvent) {
-    onSliderMove({ value: parseMouseMove(e) })
+    const value = parseMouseMove(e)
+    if (value != null) {
+      onSliderMove({ value })
+    }
   }
 
   function onSliderMouseUp (e: MouseEvent) {
@@ -289,6 +296,8 @@ export const useSlider = ({
   }
 
   function onSliderMousedown (e: MouseEvent) {
+    if (e.button !== 0) return
+
     e.preventDefault()
 
     handleStart(e)
@@ -333,8 +342,8 @@ export const useSlider = ({
     direction: toRef(props, 'direction'),
     elevation: toRef(props, 'elevation'),
     hasLabels,
-    horizontalDirection,
     isReversed,
+    indexFromEnd,
     min,
     max,
     mousePressed,

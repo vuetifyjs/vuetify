@@ -1,5 +1,5 @@
 <template>
-  <usage-example
+  <ExamplesUsageExample
     v-model="model"
     :code="code"
     :name="name"
@@ -16,41 +16,37 @@
     <template v-slot:configuration>
       <v-select
         v-model="type"
-        :items="items"
-        clearable
+        :items="types"
         label="Type"
+        clearable
       ></v-select>
 
       <v-select
         v-model="color"
         :items="colors"
-        clearable
         label="Color"
+        clearable
       ></v-select>
 
       <v-slider
         v-model="elevation"
         label="Elevation"
-        min="0"
         max="24"
+        min="0"
       ></v-slider>
     </template>
-  </usage-example>
+  </ExamplesUsageExample>
 </template>
 
 <script setup>
-  // Utilities
-  import { computed, ref } from 'vue'
-  import { propsToString } from '@/util/helpers'
-
   const name = 'v-skeleton-loader'
   const model = ref('default')
   const options = ['boilerplate']
   const elevation = ref()
   const color = ref()
   const colors = ['primary', 'secondary', 'success', 'info', 'warning', 'error']
-  const items = ['card', 'paragraph', 'list-item-avatar', 'article', 'card-avatar']
-  const type = ref()
+  const type = ref('card')
+  const types = ['card', 'paragraph', 'list-item-avatar', 'article', 'card-avatar']
 
   const props = computed(() => {
     return {

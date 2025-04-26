@@ -1,7 +1,12 @@
 export default {
   badge: 'Placa',
-  open: 'Open',
+  open: 'Abrir',
   close: 'Cerrar',
+  dismiss: 'Descartar',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'Cancelar',
+  },
   dataIterator: {
     noResultsText: 'Ningún elemento coincide con la búsqueda',
     loadingText: 'Cargando...',
@@ -28,19 +33,18 @@ export default {
     pageText: '{0}-{1} de {2}',
   },
   dateRangeInput: {
-    divider: 'to',
+    divider: 'a',
   },
   datePicker: {
-    ok: 'OK',
-    cancel: 'Cancel',
+    itemsSelected: '{0} seleccionados',
     range: {
-      title: 'Select dates',
-      header: 'Enter dates',
+      title: 'Seleccionar fechas',
+      header: 'Introducir fechas',
     },
-    title: 'Select date',
-    header: 'Enter date',
+    title: 'Seleccionar fecha',
+    header: 'Introducir fecha',
     input: {
-      placeholder: 'Enter date',
+      placeholder: 'Introducir fecha',
     },
   },
   noDataText: 'No hay datos disponibles',
@@ -53,20 +57,27 @@ export default {
   },
   calendar: {
     moreEvents: '{0} más',
+    today: 'Hoy',
   },
   input: {
-    clear: 'Clear {0}',
-    prependAction: '{0} prepended action',
-    appendAction: '{0} appended action',
-    otp: 'Please enter OTP character {0}',
+    clear: 'Borrar {0}',
+    prependAction: '{0} acción adelantada',
+    appendAction: '{0} acción añadida',
+    otp: 'Por favor, introduzca el carácter OTP {0}',
   },
   fileInput: {
     counter: '{0} archivos',
     counterSize: '{0} archivos ({1} en total)',
   },
+  fileUpload: {
+    title: 'Arrastra y suelta archivos aquí',
+    divider: 'o',
+    browse: 'Explorar archivos',
+  },
   timePicker: {
     am: 'AM',
     pm: 'PM',
+    title: 'Seleccionar hora',
   },
   pagination: {
     ariaLabel: {
@@ -75,22 +86,35 @@ export default {
       previous: 'Página anterior',
       page: 'Ir a la página {0}',
       currentPage: 'Página actual, página {0}',
-      first: 'First page',
-      last: 'Last page',
+      first: 'Primera página',
+      last: 'Última página',
     },
   },
   stepper: {
-    next: 'Next',
-    prev: 'Previous',
+    next: 'Siguiente',
+    prev: 'Anterior',
   },
   rating: {
     ariaLabel: {
       item: 'Puntuación {0} de {1}',
     },
   },
-  loading: 'Loading...',
+  loading: 'Cargando...',
   infiniteScroll: {
-    loadMore: 'Load more',
-    empty: 'No more',
+    loadMore: 'Cargar más',
+    empty: 'No hay más',
+  },
+  rules: {
+    required: 'Este campo es obligatorio',
+    email: 'Por favor, introduce un correo electrónico válido',
+    number: 'Este campo solo puede contener números',
+    integer: 'Este campo solo puede contener valores enteros',
+    capital: 'Este campo solo puede contener letras mayúsculas',
+    maxLength: 'Debes introducir un máximo de {0} caracteres',
+    minLength: 'Debes introducir un mínimo de {0} caracteres',
+    strictLength: 'La longitud del campo introducido no es válida',
+    exclude: 'El carácter {0} no está permitido',
+    notEmpty: 'Por favor, elige al menos un valor',
+    pattern: 'Formato inválido',
   },
 }

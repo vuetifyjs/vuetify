@@ -3,8 +3,8 @@
     <v-toolbar
       border="b"
       class="ps-1"
-      flat
       height="44"
+      flat
     >
       <v-slide-group
         v-model="model"
@@ -18,11 +18,10 @@
               :active="isSelected"
               class="ma-1 text-none"
               size="small"
+              text="Default"
               variant="text"
               @click="toggle"
-            >
-              Default
-            </v-btn>
+            />
           </template>
         </v-slide-group-item>
 
@@ -34,23 +33,55 @@
           <template #default="{ isSelected, toggle }">
             <v-btn
               :active="isSelected"
+              :text="upperFirst(option)"
               class="ma-1 text-none"
               size="small"
               variant="text"
               @click="toggle"
-            >
-              {{ upperFirst(option) }}
-            </v-btn>
+            />
           </template>
         </v-slide-group-item>
       </v-slide-group>
 
-      <v-tooltip location="bottom">
+      <v-tooltip :disabled="$vuetify.display.xs" location="top" open-delay="500">
+        <template #activator="{ props: activatorProps }">
+          <v-btn
+            :href="playgroundLink"
+            class="me-1 text-medium-emphasis"
+            density="comfortable"
+            icon="$vuetify-play"
+            size="small"
+            target="_blank"
+            v-bind="activatorProps"
+          />
+        </template>
+
+        <span>{{ t('edit-in-playground') }}</span>
+      </v-tooltip>
+
+      <v-tooltip :disabled="$vuetify.display.xs" location="top" open-delay="500">
+        <template #activator="{ props: activatorProps }">
+          <v-btn
+            :icon="copied ? 'mdi-check' : 'mdi-clipboard-multiple-outline'"
+            class="me-1 text-medium-emphasis"
+            density="comfortable"
+            size="small"
+            target="_blank"
+            v-bind="activatorProps"
+            @click="onClickCopy"
+          />
+        </template>
+
+        <span>{{ t('copy-example-source') }}</span>
+      </v-tooltip>
+
+      <v-tooltip :disabled="$vuetify.display.xs" location="top" open-delay="500">
         <template #activator="{ props: activatorProps }">
           <v-btn
             :icon="!show ? 'mdi-code-tags' : 'mdi-chevron-up'"
             class="me-1 text-medium-emphasis"
             density="comfortable"
+            size="small"
             v-bind="activatorProps"
             @click="show = !show"
           />
@@ -67,7 +98,7 @@
           min-height="300"
           rounded="0"
         >
-          <div class="flex-fill">
+          <div class="flex-fill w-100">
             <slot />
           </div>
         </v-sheet>
@@ -78,12 +109,14 @@
         v-model="tune"
         location="right"
         name="tune"
+        width="250"
         permanent
         touchless
-        width="250"
       >
         <v-list>
-          <div class="px-4 usage-example pt-2">
+          <v-list-subheader :title="t('configuration')" />
+
+          <div class="px-4 usage-example">
             <v-defaults-provider
               :defaults="{
                 global: {
@@ -101,13 +134,13 @@
     </v-layout>
 
     <v-expand-transition>
-      <div v-if="show && display.mdAndUp.value">
+      <div v-if="show">
         <div class="pa-2">
-          <app-markup :code="code" />
+          <AppMarkup :code="code" />
         </div>
 
         <div v-if="script" class="pa-2 pt-0">
-          <app-markup :code="script" language="js" />
+          <AppMarkup :code="script" lang="js" />
         </div>
       </div>
     </v-expand-transition>
@@ -115,14 +148,6 @@
 </template>
 
 <script setup>
-  // Composables
-  import { useDisplay } from 'vuetify'
-  import { useI18n } from 'vue-i18n'
-
-  // Utilities
-  import { computed, ref } from 'vue'
-  import { upperFirst } from 'lodash-es'
-
   const props = defineProps({
     name: String,
     code: String,
@@ -133,7 +158,6 @@
     modelValue: {
       type: [Array, String],
       default: () => ([]),
-      required: true,
     },
     script: String,
   })
@@ -142,8 +166,9 @@
   const display = useDisplay()
   const { t } = useI18n()
 
-  const tune = ref(true)
-  const show = ref(true)
+  const tune = shallowRef(true)
+  const show = shallowRef(true)
+  const copied = shallowRef(false)
 
   const model = computed({
     get () {
@@ -153,6 +178,44 @@
       emit('update:modelValue', val)
     },
   })
+  const playgroundLink = computed(() => usePlayground([
+    {
+      name: 'template',
+      language: 'html',
+      content: `<template>\n  <v-app>\n    <v-container>\n      ${props.code.replaceAll('\n', '\n      ')}\n    </v-container>\n  </v-app>\n</template>\n${props.script || ''}`,
+    },
+  ]))
+
+  // TODO: Mimic how Example handles actions
+
+  const sections = computed(() => {
+    const scriptContent = props.script ? props.script : null
+
+    return [
+      {
+        name: 'template',
+        language: 'html',
+        content: props.code,
+      },
+      {
+        name: 'script',
+        language: 'javascript',
+        content: scriptContent,
+      },
+    ].filter(v => v.content)
+  })
+
+  async function onClickCopy () {
+    navigator.clipboard.writeText(
+      sections.value.map(section => section.content).join('\n')
+    )
+
+    copied.value = true
+
+    await wait(2000)
+
+    copied.value = false
+  }
 </script>
 
 <style lang="sass">

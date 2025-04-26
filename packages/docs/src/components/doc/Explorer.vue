@@ -3,38 +3,37 @@
     <v-autocomplete
       v-model="model"
       :items="components"
-      auto-select-first
       base-color="disabled"
-      chips
       class="mb-2"
+      placeholder="Search Vuetify API"
+      prepend-inner-icon="mdi-database-search-outline"
+      variant="outlined"
+      auto-select-first
+      autofocus
+      chips
       clearable
       hide-details
       item-props
       persistent-clear
-      placeholder="Search Vuetify API"
-      prepend-inner-icon="mdi-database-search-outline"
-      return-object
-      variant="outlined"
     >
       <template #chip="{ props, item }">
         <v-chip
           v-bind="props"
           :prepend-icon="item.props.prependIcon"
           color="primary"
-          label
           variant="flat"
+          label
         />
       </template>
     </v-autocomplete>
 
     <template v-if="model">
-      <api-search ref="search" />
+      <ApiSearch ref="search" />
 
       <template v-for="(section, i) in sections" :key="i">
-        <api-section
-          :section="section"
+        <ApiSection
           :name="model"
-          show-headline
+          :section="section"
         />
       </template>
     </template>
@@ -56,16 +55,14 @@
 </template>
 
 <script setup>
-  // Utilities
-  import { nextTick, ref, shallowRef, watch } from 'vue'
+  import files from 'virtual:api-list'
 
-  const files = import.meta.glob('../../../../api-generator/dist/api/*.json')
+  const route = useRoute()
+  const router = useRouter()
 
-  const model = ref()
   const search = shallowRef()
 
-  const components = Object.keys(files).reduce((acc, cur) => {
-    const name = cur.split('/').pop().split('.')[0]
+  const components = files.reduce((acc, name) => {
     let prependIcon
     let subtitle
 
@@ -92,6 +89,10 @@
     return acc
   }, [])
 
+  const name = route.params.name?.replace('/', '')
+  const pascalName = name ? `${name.charAt(0).toUpperCase()}${camelize(name.slice(1))}` : undefined
+  const model = shallowRef(components.some(v => v.value === name) ? name : pascalName)
+
   const sections = ['props', 'events', 'slots', 'exposed', 'sass', 'options', 'argument', 'modifiers']
 
   watch(model, async () => {
@@ -100,5 +101,6 @@
     await nextTick()
 
     search.value.$el.querySelector('input').focus()
+    router.replace({ params: { name: kebabCase(model.value) } })
   })
 </script>

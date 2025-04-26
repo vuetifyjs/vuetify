@@ -7,7 +7,7 @@ import { makeComponentProps } from '@/composables/component'
 import { IconValue, useIcon } from '@/composables/icons'
 import { makeSizeProps, useSize } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
-import { makeThemeProps, provideTheme } from '@/composables/theme'
+import { makeThemeProps, useTheme } from '@/composables/theme'
 
 // Utilities
 import { computed, ref, Text, toRef } from 'vue'
@@ -15,9 +15,11 @@ import { convertToUnit, flattenFragments, genericComponent, propsFactory, useRen
 
 export const makeVIconProps = propsFactory({
   color: String,
+  disabled: Boolean,
   start: Boolean,
   end: Boolean,
   icon: IconValue,
+  opacity: [String, Number],
 
   ...makeComponentProps(),
   ...makeSizeProps(),
@@ -33,7 +35,7 @@ export const VIcon = genericComponent()({
   setup (props, { attrs, slots }) {
     const slotIcon = ref<string>()
 
-    const { themeClasses } = provideTheme(props)
+    const { themeClasses } = useTheme()
     const { iconData } = useIcon(computed(() => slotIcon.value || props.icon))
     const { sizeClasses } = useSize(props)
     const { textColorClasses, textColorStyles } = useTextColor(toRef(props, 'color'))
@@ -45,6 +47,7 @@ export const VIcon = genericComponent()({
           node.type === Text && node.children && typeof node.children === 'string'
         )[0]?.children as string
       }
+      const hasClick = !!(attrs.onClick || attrs.onClickOnce)
 
       return (
         <iconData.value.component
@@ -57,13 +60,17 @@ export const VIcon = genericComponent()({
             sizeClasses.value,
             textColorClasses.value,
             {
-              'v-icon--clickable': !!attrs.onClick,
+              'v-icon--clickable': hasClick,
+              'v-icon--disabled': props.disabled,
               'v-icon--start': props.start,
               'v-icon--end': props.end,
             },
             props.class,
           ]}
           style={[
+            {
+              '--v-icon-opacity': props.opacity,
+            },
             !sizeClasses.value ? ({
               fontSize: convertToUnit(props.size),
               height: convertToUnit(props.size),
@@ -72,8 +79,9 @@ export const VIcon = genericComponent()({
             textColorStyles.value,
             props.style,
           ]}
-          role={ attrs.onClick ? 'button' : undefined }
-          aria-hidden={ !attrs.onClick }
+          role={ hasClick ? 'button' : undefined }
+          aria-hidden={ !hasClick }
+          tabindex={ hasClick ? props.disabled ? -1 : 0 : undefined }
         >
           { slotValue }
         </iconData.value.component>

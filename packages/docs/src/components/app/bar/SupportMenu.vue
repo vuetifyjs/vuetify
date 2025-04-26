@@ -1,31 +1,21 @@
 <template>
-  <app-btn
-    color="medium-emphasis"
+  <AppBtn
     class="ms-1"
+    color="medium-emphasis"
   >
     {{ title }}
 
-    <chevron-down />
+    <IconsChevronDown />
 
-    <app-menu
+    <AppMenuMenu
       :items="items"
       activator="parent"
       width="220"
     />
-  </app-btn>
+  </AppBtn>
 </template>
 
 <script setup>
-  // Components
-  import ChevronDown from '@/components/icons/ChevronDown.vue'
-
-  // Composables
-  import { useI18n } from 'vue-i18n'
-
-  // Utilities
-  import { computed } from 'vue'
-  import { rpath } from '@/util/routes'
-
   const { t } = useI18n()
   const title = t('support')
   const items = computed(() => ([
@@ -62,11 +52,6 @@
     },
     { divider: true },
     { subheader: t('resources') },
-    {
-      title: 'brand-kit',
-      to: rpath('/resources/brand-kit/'),
-      appendIcon: 'mdi-image-outline',
-    },
     {
       title: 'github-issues',
       href: 'https://github.com/vuetifyjs/vuetify/issues/',

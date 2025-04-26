@@ -10,6 +10,9 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 // Utilities
 import { genericComponent, propsFactory } from '@/util'
 
+// Types
+import type { GenericProps } from '@/util'
+
 export const VItemGroupSymbol = Symbol.for('vuetify:v-item-group')
 
 export const makeVItemGroupProps = propsFactory({
@@ -23,15 +26,21 @@ export const makeVItemGroupProps = propsFactory({
 
 type VItemGroupSlots = {
   default: {
-    isSelected: (id: number) => boolean
-    select: (id: number, value: boolean) => void
+    isSelected: (id: string) => boolean
+    select: (id: string, value: boolean) => void
     next: () => void
     prev: () => void
-    selected: readonly number[]
+    selected: readonly string[]
   }
 }
 
-export const VItemGroup = genericComponent<VItemGroupSlots>()({
+export const VItemGroup = genericComponent<new <T>(
+  props: {
+    modelValue?: T
+    'onUpdate:modelValue'?: (value: T) => void
+  },
+  slots: VItemGroupSlots,
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VItemGroup',
 
   props: makeVItemGroupProps(),

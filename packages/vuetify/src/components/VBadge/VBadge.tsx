@@ -17,7 +17,7 @@ import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 
 // Utilities
 import { toRef } from 'vue'
-import { genericComponent, pick, propsFactory, useRender } from '@/util'
+import { genericComponent, pickWithRest, propsFactory, useRender } from '@/util'
 
 export type VBadgeSlots = {
   default: never
@@ -73,8 +73,8 @@ export const VBadge = genericComponent<VBadgeSlots>()({
         : (props.dot ? 8 : 12)
 
       return base + (
-        ['top', 'bottom'].includes(side) ? +(props.offsetY ?? 0)
-        : ['left', 'right'].includes(side) ? +(props.offsetX ?? 0)
+        ['top', 'bottom'].includes(side) ? Number(props.offsetY ?? 0)
+        : ['left', 'right'].includes(side) ? Number(props.offsetX ?? 0)
         : 0
       )
     })
@@ -82,10 +82,10 @@ export const VBadge = genericComponent<VBadgeSlots>()({
     useRender(() => {
       const value = Number(props.content)
       const content = (!props.max || isNaN(value)) ? props.content
-        : value <= +props.max ? value
+        : value <= Number(props.max) ? value
         : `${props.max}+`
 
-      const [badgeAttrs, attrs] = pick(ctx.attrs as Record<string, any>, [
+      const [badgeAttrs, attrs] = pickWithRest(ctx.attrs as Record<string, any>, [
         'aria-atomic',
         'aria-label',
         'aria-live',

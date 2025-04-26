@@ -16,11 +16,10 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { Ripple } from '@/directives/ripple'
 
 // Utilities
-import { computed, inject, nextTick, ref, shallowRef } from 'vue'
+import { computed, inject, nextTick, ref, shallowRef, useId } from 'vue'
 import {
   filterInputAttrs,
   genericComponent,
-  getUid,
   matchesSelector,
   propsFactory,
   useRender,
@@ -30,10 +29,10 @@ import {
 // Types
 import type { CSSProperties, ExtractPropTypes, Ref, VNode, WritableComputedRef } from 'vue'
 import type { IconValue } from '@/composables/icons'
-import type { GenericProps } from '@/util'
+import type { EventProp, GenericProps } from '@/util'
 
 export type SelectionControlSlot = {
-  model: WritableComputedRef<any>
+  model: WritableComputedRef<boolean>
   textColorClasses: Ref<string[]>
   textColorStyles: Ref<CSSProperties>
   backgroundColorClasses: Ref<string[]>
@@ -69,7 +68,7 @@ export const makeVSelectionControlProps = propsFactory({
 
 export function useSelectionControl (
   props: ExtractPropTypes<ReturnType<typeof makeVSelectionControlProps>> & {
-    'onUpdate:modelValue': ((val: any) => void) | undefined
+    'onUpdate:modelValue': EventProp | undefined
   }
 ) {
   const group = inject(VSelectionControlGroupSymbol, undefined)
@@ -90,7 +89,7 @@ export function useSelectionControl (
       const val = group ? group.modelValue.value : modelValue.value
 
       return isMultiple.value
-        ? val.some((v: any) => props.valueComparator(v, trueValue.value))
+        ? wrapInArray(val).some((v: any) => props.valueComparator(v, trueValue.value))
         : props.valueComparator(val, trueValue.value)
     },
     set (val: boolean) {
@@ -123,7 +122,7 @@ export function useSelectionControl (
       model.value &&
       !props.error &&
       !props.disabled
-    ) ? props.color : undefined
+    ) ? props.color : props.baseColor
   }))
   const icon = computed(() => model.value ? props.trueIcon : props.falseIcon)
 
@@ -144,7 +143,7 @@ export function useSelectionControl (
 export const VSelectionControl = genericComponent<new <T>(
   props: {
     modelValue?: T
-    'onUpdate:modelValue'?: (val: T) => any
+    'onUpdate:modelValue'?: (value: T) => void
   },
   slots: VSelectionControlSlots,
 ) => GenericProps<typeof props, typeof slots>>()({
@@ -157,7 +156,7 @@ export const VSelectionControl = genericComponent<new <T>(
   props: makeVSelectionControlProps(),
 
   emits: {
-    'update:modelValue': (val: any) => true,
+    'update:modelValue': (value: any) => true,
   },
 
   setup (props, { attrs, slots }) {
@@ -172,11 +171,12 @@ export const VSelectionControl = genericComponent<new <T>(
       backgroundColorStyles,
       trueValue,
     } = useSelectionControl(props)
-    const uid = getUid()
-    const id = computed(() => props.id || `input-${uid}`)
+    const uid = useId()
     const isFocused = shallowRef(false)
     const isFocusVisible = shallowRef(false)
     const input = ref<HTMLInputElement>()
+    const id = computed(() => props.id || `input-${uid}`)
+    const isInteractive = computed(() => !props.disabled && !props.readonly)
 
     group?.onForceUpdate(() => {
       if (input.value) {
@@ -185,6 +185,8 @@ export const VSelectionControl = genericComponent<new <T>(
     })
 
     function onFocus (e: FocusEvent) {
+      if (!isInteractive.value) return
+
       isFocused.value = true
       if (matchesSelector(e.target as HTMLElement, ':focus-visible') !== false) {
         isFocusVisible.value = true
@@ -196,7 +198,22 @@ export const VSelectionControl = genericComponent<new <T>(
       isFocusVisible.value = false
     }
 
+    function onClickLabel (e: Event) {
+      e.stopPropagation()
+    }
+
     function onInput (e: Event) {
+      if (!isInteractive.value) {
+        if (input.value) {
+          // model value is not updated when input is not interactive
+          // but the internal checked state of the input is still updated,
+          // so here it's value is restored
+          input.value.checked = model.value
+        }
+
+        return
+      }
+
       if (props.readonly && group) {
         nextTick(() => group.forceUpdate())
       }
@@ -216,12 +233,13 @@ export const VSelectionControl = genericComponent<new <T>(
         <input
           ref={ input }
           checked={ model.value }
-          disabled={ !!(props.readonly || props.disabled) }
+          disabled={ !!props.disabled }
           id={ id.value }
           onBlur={ onBlur }
           onFocus={ onFocus }
           onInput={ onInput }
-          aria-disabled={ !!(props.readonly || props.disabled) }
+          aria-disabled={ !!props.disabled }
+          aria-label={ props.label }
           type={ props.type }
           value={ trueValue.value }
           name={ props.name }
@@ -294,7 +312,7 @@ export const VSelectionControl = genericComponent<new <T>(
           </div>
 
           { label && (
-            <VLabel for={ id.value } clickable onClick={ (e: Event) => e.stopPropagation() }>
+            <VLabel for={ id.value } onClick={ onClickLabel }>
               { label }
             </VLabel>
           )}

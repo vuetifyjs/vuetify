@@ -3,6 +3,7 @@ import './VSelect.sass'
 
 // Components
 import { VDialogTransition } from '@/components/transitions'
+import { VAvatar } from '@/components/VAvatar'
 import { VCheckboxBtn } from '@/components/VCheckbox'
 import { VChip } from '@/components/VChip'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
@@ -23,11 +24,12 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeTransitionProps } from '@/composables/transition'
 
 // Utilities
-import { computed, mergeProps, ref, shallowRef, watch } from 'vue'
+import { computed, mergeProps, nextTick, ref, shallowRef, watch } from 'vue'
 import {
+  checkPrintable,
   deepEqual,
+  ensureValidVNode,
   genericComponent,
-  getPropertyFromItem,
   IN_BROWSER,
   matchesSelector,
   omit,
@@ -41,7 +43,7 @@ import type { Component, PropType } from 'vue'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
 import type { ListItem } from '@/composables/list-items'
-import type { GenericProps } from '@/util'
+import type { GenericProps, SelectItemKey } from '@/util'
 
 type Primitive = string | number | boolean | symbol
 
@@ -68,6 +70,9 @@ export const makeSelectProps = propsFactory({
   eager: Boolean,
   hideNoData: Boolean,
   hideSelected: Boolean,
+  listProps: {
+    type: Object as PropType<VList['$props']>,
+  },
   menu: Boolean,
   menuIcon: {
     type: IconValue,
@@ -82,10 +87,6 @@ export const makeSelectProps = propsFactory({
     default: '$vuetify.noDataText',
   },
   openOnClear: Boolean,
-  valueComparator: {
-    type: Function as PropType<typeof deepEqual>,
-    default: deepEqual,
-  },
   itemColor: String,
 
   ...makeItemsProps({ itemChildren: false }),
@@ -95,24 +96,29 @@ export const makeVSelectProps = propsFactory({
   ...makeSelectProps(),
   ...omit(makeVTextFieldProps({
     modelValue: null,
-    role: 'button',
+    role: 'combobox',
   }), ['validationValue', 'dirty', 'appendInnerIcon']),
   ...makeTransitionProps({ transition: { component: VDialogTransition as Component } }),
 }, 'VSelect')
 
+type ItemType<T> = T extends readonly (infer U)[] ? U : never
+
 export const VSelect = genericComponent<new <
   T extends readonly any[],
-  Item = T extends readonly (infer U)[] ? U : never,
+  Item = ItemType<T>,
   ReturnObject extends boolean = false,
   Multiple extends boolean = false,
   V extends Value<Item, ReturnObject, Multiple> = Value<Item, ReturnObject, Multiple>
 >(
   props: {
     items?: T
+    itemTitle?: SelectItemKey<ItemType<T>>
+    itemValue?: SelectItemKey<ItemType<T>>
+    itemProps?: SelectItemKey<ItemType<T>>
     returnObject?: ReturnObject
     multiple?: Multiple
     modelValue?: V | null
-    'onUpdate:modelValue'?: (val: V) => void
+    'onUpdate:modelValue'?: (value: V) => void
   },
   slots: Omit<VInputSlots & VFieldSlots, 'default'> & {
     item: { item: ListItem<Item>, index: number, props: Record<string, unknown> }
@@ -129,23 +135,15 @@ export const VSelect = genericComponent<new <
 
   emits: {
     'update:focused': (focused: boolean) => true,
-    'update:modelValue': (val: any) => true,
-    'update:menu': (val: boolean) => true,
+    'update:modelValue': (value: any) => true,
+    'update:menu': (ue: boolean) => true,
   },
 
   setup (props, { slots }) {
     const { t } = useLocale()
-    const vTextFieldRef = ref()
+    const vTextFieldRef = ref<VTextField>()
     const vMenuRef = ref<VMenu>()
     const vVirtualScrollRef = ref<VVirtualScroll>()
-    const _menu = useProxiedModel(props, 'menu')
-    const menu = computed({
-      get: () => _menu.value,
-      set: v => {
-        if (_menu.value && !v && vMenuRef.value?.ΨopenChildren) return
-        _menu.value = v
-      },
-    })
     const { items, transformIn, transformOut } = useItems(props)
     const model = useProxiedModel(
       props,
@@ -157,42 +155,53 @@ export const VSelect = genericComponent<new <
         return props.multiple ? transformed : (transformed[0] ?? null)
       }
     )
-    const form = useForm()
-    const selections = computed(() => {
-      return model.value.map(v => {
-        return items.value.find(item => {
-          const itemRawValue = getPropertyFromItem(item.raw, props.itemValue)
-          const modelRawValue = getPropertyFromItem(v.raw, props.itemValue)
-
-          if (itemRawValue === undefined || modelRawValue === undefined) return false
-
-          return props.returnObject
-            ? props.valueComparator(itemRawValue, modelRawValue)
-            : props.valueComparator(item.value, v.value)
-        }) || v
-      })
+    const counterValue = computed(() => {
+      return typeof props.counterValue === 'function' ? props.counterValue(model.value)
+        : typeof props.counterValue === 'number' ? props.counterValue
+        : model.value.length
     })
-    const selected = computed(() => selections.value.map(selection => selection.props.value))
+    const form = useForm(props)
+    const selectedValues = computed(() => model.value.map(selection => selection.value))
     const isFocused = shallowRef(false)
-    const label = computed(() => menu.value ? props.closeText : props.openText)
 
     let keyboardLookupPrefix = ''
     let keyboardLookupLastTime: number
 
     const displayItems = computed(() => {
       if (props.hideSelected) {
-        return items.value.filter(item => !selections.value.some(s => s === item))
+        return items.value.filter(item => !model.value.some(s => (props.valueComparator || deepEqual)(s, item)))
       }
       return items.value
     })
 
     const menuDisabled = computed(() => (
-      (props.hideNoData && !items.value.length) ||
-      props.readonly || form?.isReadonly.value
+      (props.hideNoData && !displayItems.value.length) ||
+      form.isReadonly.value || form.isDisabled.value
     ))
+    const _menu = useProxiedModel(props, 'menu')
+    const menu = computed({
+      get: () => _menu.value,
+      set: v => {
+        if (_menu.value && !v && vMenuRef.value?.ΨopenChildren.size) return
+        if (v && menuDisabled.value) return
+        _menu.value = v
+      },
+    })
+
+    const label = computed(() => menu.value ? props.closeText : props.openText)
+
+    const computedMenuProps = computed(() => {
+      return {
+        ...props.menuProps,
+        activatorProps: {
+          ...(props.menuProps?.activatorProps || {}),
+          'aria-haspopup': 'listbox', // Set aria-haspopup to 'listbox'
+        },
+      }
+    })
 
     const listRef = ref<VList>()
-    const { onListScroll, onListKeydown } = useScrolling(listRef, vTextFieldRef)
+    const listEvents = useScrolling(listRef, vTextFieldRef)
     function onClear (e: MouseEvent) {
       if (props.openOnClear) {
         menu.value = true
@@ -203,8 +212,13 @@ export const VSelect = genericComponent<new <
 
       menu.value = !menu.value
     }
+    function onListKeydown (e: KeyboardEvent) {
+      if (checkPrintable(e)) {
+        onKeydown(e)
+      }
+    }
     function onKeydown (e: KeyboardEvent) {
-      if (!e.key || props.readonly || form?.isReadonly.value) return
+      if (!e.key || form.isReadonly.value) return
 
       if (['Enter', ' ', 'ArrowDown', 'ArrowUp', 'Home', 'End'].includes(e.key)) {
         e.preventDefault()
@@ -227,13 +241,7 @@ export const VSelect = genericComponent<new <
       // html select hotkeys
       const KEYBOARD_LOOKUP_THRESHOLD = 1000 // milliseconds
 
-      function checkPrintable (e: KeyboardEvent) {
-        const isPrintableChar = e.key.length === 1
-        const noModifier = !e.ctrlKey && !e.metaKey && !e.altKey
-        return isPrintableChar && noModifier
-      }
-
-      if (props.multiple || !checkPrintable(e)) return
+      if (!checkPrintable(e)) return
 
       const now = performance.now()
       if (now - keyboardLookupLastTime > KEYBOARD_LOOKUP_THRESHOLD) {
@@ -245,27 +253,45 @@ export const VSelect = genericComponent<new <
       const item = items.value.find(item => item.title.toLowerCase().startsWith(keyboardLookupPrefix))
       if (item !== undefined) {
         model.value = [item]
+        const index = displayItems.value.indexOf(item)
+        IN_BROWSER && window.requestAnimationFrame(() => {
+          index >= 0 && vVirtualScrollRef.value?.scrollToIndex(index)
+        })
       }
     }
-    function select (item: ListItem) {
-      if (props.multiple) {
-        const index = selected.value.findIndex(selection => props.valueComparator(selection, item.value))
 
-        if (index === -1) {
-          model.value = [...model.value, item]
-        } else {
-          const value = [...model.value]
+    /** @param set - null means toggle */
+    function select (item: ListItem, set: boolean | null = true) {
+      if (item.props.disabled) return
+
+      if (props.multiple) {
+        const index = model.value.findIndex(selection => (props.valueComparator || deepEqual)(selection.value, item.value))
+        const add = set == null ? !~index : set
+
+        if (~index) {
+          const value = add ? [...model.value, item] : [...model.value]
           value.splice(index, 1)
           model.value = value
+        } else if (add) {
+          model.value = [...model.value, item]
         }
       } else {
-        model.value = [item]
-        menu.value = false
+        const add = set !== false
+        model.value = add ? [item] : []
+
+        nextTick(() => {
+          menu.value = false
+        })
       }
     }
     function onBlur (e: FocusEvent) {
       if (!listRef.value?.$el.contains(e.relatedTarget as HTMLElement)) {
         menu.value = false
+      }
+    }
+    function onAfterEnter () {
+      if (props.eager) {
+        vVirtualScrollRef.value?.calculateVisibleItems()
       }
     }
     function onAfterLeave () {
@@ -289,13 +315,21 @@ export const VSelect = genericComponent<new <
     }
 
     watch(menu, () => {
-      if (!props.hideSelected && menu.value && selections.value.length) {
+      if (!props.hideSelected && menu.value && model.value.length) {
         const index = displayItems.value.findIndex(
-          item => selections.value.some(s => item.value === s.value)
+          item => model.value.some(s => (props.valueComparator || deepEqual)(s.value, item.value))
         )
         IN_BROWSER && window.requestAnimationFrame(() => {
           index >= 0 && vVirtualScrollRef.value?.scrollToIndex(index)
         })
+      }
+    })
+
+    watch(() => props.items, (newVal, oldVal) => {
+      if (menu.value) return
+
+      if (isFocused.value && !oldVal.length && newVal.length) {
+        menu.value = true
       }
     })
 
@@ -308,7 +342,7 @@ export const VSelect = genericComponent<new <
         slots['no-data']
       )
       const isDirty = model.value.length > 0
-      const [textFieldProps] = VTextField.filterProps(props)
+      const textFieldProps = VTextField.filterProps(props)
 
       const placeholder = isDirty || (
         !isFocused.value &&
@@ -324,6 +358,7 @@ export const VSelect = genericComponent<new <
           onUpdate:modelValue={ onModelUpdate }
           v-model:focused={ isFocused.value }
           validationValue={ model.externalValue }
+          counterValue={ counterValue.value }
           dirty={ isDirty }
           class={[
             'v-select',
@@ -361,33 +396,36 @@ export const VSelect = genericComponent<new <
                   openOnClick={ false }
                   closeOnContentClick={ false }
                   transition={ props.transition }
+                  onAfterEnter={ onAfterEnter }
                   onAfterLeave={ onAfterLeave }
-                  { ...props.menuProps }
+                  { ...computedMenuProps.value }
                 >
                   { hasList && (
                     <VList
                       ref={ listRef }
-                      selected={ selected.value }
+                      selected={ selectedValues.value }
                       selectStrategy={ props.multiple ? 'independent' : 'single-independent' }
                       onMousedown={ (e: MouseEvent) => e.preventDefault() }
                       onKeydown={ onListKeydown }
                       onFocusin={ onFocusin }
-                      onScrollPassive={ onListScroll }
                       tabindex="-1"
+                      aria-live="polite"
                       color={ props.itemColor ?? props.color }
+                      { ...listEvents }
+                      { ...props.listProps }
                     >
                       { slots['prepend-item']?.() }
 
                       { !displayItems.value.length && !props.hideNoData && (slots['no-data']?.() ?? (
-                        <VListItem title={ t(props.noDataText) } />
+                        <VListItem key="no-data" title={ t(props.noDataText) } />
                       ))}
 
-                      <VVirtualScroll ref={ vVirtualScrollRef } renderless items={ displayItems.value }>
+                      <VVirtualScroll ref={ vVirtualScrollRef } renderless items={ displayItems.value } itemKey="value">
                         { ({ item, index, itemRef }) => {
                           const itemProps = mergeProps(item.props, {
                             ref: itemRef,
-                            key: index,
-                            onClick: () => select(item),
+                            key: item.value,
+                            onClick: () => select(item, null),
                           })
 
                           return slots.item?.({
@@ -395,7 +433,7 @@ export const VSelect = genericComponent<new <
                             index,
                             props: itemProps,
                           }) ?? (
-                            <VListItem { ...itemProps }>
+                            <VListItem { ...itemProps } role="option">
                               {{
                                 prepend: ({ isSelected }) => (
                                   <>
@@ -407,6 +445,10 @@ export const VSelect = genericComponent<new <
                                         tabindex="-1"
                                       />
                                     ) : undefined }
+
+                                    { item.props.prependAvatar && (
+                                      <VAvatar image={ item.props.prependAvatar } />
+                                    )}
 
                                     { item.props.prependIcon && (
                                       <VIcon icon={ item.props.prependIcon } />
@@ -424,16 +466,24 @@ export const VSelect = genericComponent<new <
                   )}
                 </VMenu>
 
-                { selections.value.map((item, index) => {
+                { model.value.map((item, index) => {
                   function onChipClose (e: Event) {
                     e.stopPropagation()
                     e.preventDefault()
 
-                    select(item)
+                    select(item, false)
                   }
 
                   const slotProps = {
                     'onClick:close': onChipClose,
+                    onKeydown (e: KeyboardEvent) {
+                      if (e.key !== 'Enter' && e.key !== ' ') return
+
+                      e.preventDefault()
+                      e.stopPropagation()
+
+                      onChipClose(e)
+                    },
                     onMousedown (e: MouseEvent) {
                       e.preventDefault()
                       e.stopPropagation()
@@ -441,6 +491,17 @@ export const VSelect = genericComponent<new <
                     modelValue: true,
                     'onUpdate:modelValue': undefined,
                   }
+
+                  const hasSlot = hasChips ? !!slots.chip : !!slots.selection
+                  const slotContent = hasSlot
+                    ? ensureValidVNode(
+                      hasChips
+                        ? slots.chip!({ item, index, props: slotProps })
+                        : slots.selection!({ item, index })
+                    )
+                    : undefined
+
+                  if (hasSlot && !slotContent) return undefined
 
                   return (
                     <div key={ item.value } class="v-select__selection">
@@ -451,6 +512,7 @@ export const VSelect = genericComponent<new <
                             closable={ props.closableChips }
                             size="small"
                             text={ item.title }
+                            disabled={ item.props.disabled }
                             { ...slotProps }
                           />
                         ) : (
@@ -464,14 +526,14 @@ export const VSelect = genericComponent<new <
                               },
                             }}
                           >
-                            { slots.chip?.({ item, index, props: slotProps }) }
+                            { slotContent }
                           </VDefaultsProvider>
                         )
                       ) : (
-                        slots.selection?.({ item, index }) ?? (
+                        slotContent ?? (
                           <span class="v-select__selection-text">
                             { item.title }
-                            { props.multiple && (index < selections.value.length - 1) && (
+                            { props.multiple && (index < model.value.length - 1) && (
                               <span class="v-select__selection-comma">,</span>
                             )}
                           </span>
@@ -488,6 +550,7 @@ export const VSelect = genericComponent<new <
                 { props.menuIcon ? (
                   <VIcon
                     class="v-select__menu-icon"
+                    color={ vTextFieldRef.value?.fieldIconColor }
                     icon={ props.menuIcon }
                   />
                 ) : undefined }

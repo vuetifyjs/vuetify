@@ -1,115 +1,110 @@
 @use '../../styles/tools'
 @use './variables' as *
 
-// Block
-.v-toolbar
-  align-items: flex-start
-  display: flex
-  flex: $toolbar-flex
-  flex-direction: column
-  justify-content: space-between
-  max-width: 100%
-  overflow: hidden
-  position: relative
-  transition: $toolbar-transition
-  transition-property: height, width, transform, max-width, left, right, top, bottom, box-shadow
-  width: 100%
+@include tools.layer('components')
+  // Block
+  .v-toolbar
+    align-items: flex-start
+    display: flex
+    flex: $toolbar-flex
+    flex-direction: column
+    justify-content: space-between
+    max-width: 100%
+    position: relative
+    transition: $toolbar-transition
+    transition-property: height, width, transform, max-width, left, right, top, bottom, box-shadow
+    width: 100%
 
-  @include tools.border($toolbar-border...)
-  @include tools.elevation($toolbar-elevation)
-  @include tools.rounded($toolbar-border-radius)
-  @include tools.theme($toolbar-theme...)
+    @include tools.border($toolbar-border...)
+    @include tools.elevation($toolbar-elevation)
+    @include tools.rounded($toolbar-border-radius)
+    @include tools.theme($toolbar-theme...)
 
-  &--absolute
-    position: absolute
+    &--absolute
+      position: absolute
 
-  &--collapse
-    max-width: $toolbar-collapsed-max-width
+    &--collapse
+      max-width: $toolbar-collapsed-max-width
+      overflow: hidden
+      border-end-end-radius: $toolbar-collapsed-border-radius
+
+      .v-toolbar-title
+        display: none
+
+    &--flat
+      @include tools.elevation($toolbar-flat-elevation)
+
+    &--floating
+      display: inline-flex
+      width: auto
+
+    &--rounded
+      @include tools.rounded($toolbar-rounded-border-radius)
+
+  .v-toolbar__content,
+  .v-toolbar__extension
+    align-items: center
+    display: flex
+    flex: 0 0 auto
+    position: relative
+    transition: inherit
+    width: 100%
+
+  .v-toolbar__content
     overflow: hidden
 
-    .v-toolbar-title
-      display: none
+    > .v-btn:first-child
+      margin-inline-start: $toolbar-prepend-btn-margin-start
 
-    @include tools.ltr()
-      border-bottom-right-radius: $toolbar-collapsed-border-radius
+    > .v-btn:last-child
+      margin-inline-end: $toolbar-append-btn-margin-end
 
-    @include tools.rtl()
-      border-bottom-left-radius: $toolbar-collapsed-border-radius
+    > .v-toolbar-title
+        margin-inline-start: $toolbar-title-margin
 
-  &--flat
-    @include tools.elevation($toolbar-flat-elevation)
+    .v-toolbar--density-prominent &
+      align-items: flex-start
 
-  &--floating
-    display: inline-flex
+  .v-toolbar__image
+    display: flex
+    opacity: var(--v-toolbar-image-opacity, 1)
+    transition-property: opacity
+    @include tools.absolute()
 
-  &--rounded
-    @include tools.rounded($toolbar-rounded-border-radius)
+  .v-toolbar__prepend,
+  .v-toolbar__append
+    align-items: center
+    align-self: stretch
+    display: flex
 
-.v-toolbar__content,
-.v-toolbar__extension
-  align-items: center
-  display: flex
-  flex: 0 0 auto
-  position: relative
-  transition: inherit
-  width: 100%
+  .v-toolbar__prepend
+    margin-inline: $toolbar-prepend-btn-margin-start auto
 
-.v-toolbar__content
-  > .v-btn:first-child
-    margin-inline-start: $toolbar-prepend-btn-margin-start
+  .v-toolbar__append
+    margin-inline: auto $toolbar-append-btn-margin-end
 
-  > .v-btn:last-child
-    margin-inline-end: $toolbar-append-btn-margin-end
+  .v-toolbar-title
+    flex: 1 1
+    font-size: $toolbar-title-font-size
+    min-width: 0
 
-  > .v-toolbar-title
-      margin-inline-start: $toolbar-title-margin
+    @include tools.typography($toolbar-title-typography...)
 
-  .v-toolbar--density-prominent &
-    align-items: flex-start
+    .v-toolbar--density-prominent &
+      align-self: flex-end
+      padding-bottom: 6px
 
-.v-toolbar__image
-  @include tools.absolute()
+      @include tools.typography($toolbar-prominent-title-typography...)
 
-  display: flex
-  opacity: var(--v-toolbar-image-opacity, 1)
-  transition-property: opacity
+  .v-toolbar-title__placeholder
+    overflow: hidden
+    text-overflow: ellipsis
+    white-space: nowrap
 
-.v-toolbar__prepend,
-.v-toolbar__append
-  align-items: center
-  align-self: stretch
-  display: flex
+  .v-toolbar-items
+    display: flex
+    height: inherit
+    align-self: stretch
 
-.v-toolbar__prepend
-  margin-inline-start: $toolbar-prepend-btn-margin-start
-  margin-inline-end: auto
-
-.v-toolbar__append
-  margin-inline-start: auto
-  margin-inline-end: $toolbar-append-btn-margin-end
-
-.v-toolbar-title
-  flex: 1 1
-  font-size: $toolbar-title-font-size
-  min-width: 0
-
-  @include tools.typography($toolbar-title-typography...)
-
-  .v-toolbar--density-prominent &
-    align-self: flex-end
-    padding-bottom: 6px
-
-    @include tools.typography($toolbar-prominent-title-typography...)
-
-.v-toolbar-title__placeholder
-  overflow: hidden
-  text-overflow: ellipsis
-  white-space: nowrap
-
-.v-toolbar-items
-  display: flex
-  height: inherit
-  align-self: stretch
-
-  > .v-btn
-    border-radius: 0
+    > .v-btn
+      border-radius: 0

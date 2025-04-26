@@ -1,9 +1,23 @@
+// import DateFnsAdapter from '@date-io/date-fns'
+// import { enAU, enUS, ja, sv } from 'date-fns/locale'
+
+// import DayJsAdapter from '@date-io/dayjs'
+
+// import LuxonAdapter from '@date-io/luxon'
+
+// import MomentAdapter from '@date-io/moment'
+
 export default {
-  // adapter: DateIoDateFnsAdapter,
+  // adapter: DateFnsAdapter,
+  formats: {
+    // dayOfMonth: date => date.getDate(),
+  },
   locale: {
     en: 'en-US',
     // en: 'en-AU',
-    // en: datefnsen,
-    // sv: datefnssv,
+    // en: enAU,
+    // en: enUS,
+    // ja,
+    // sv,
   },
 }

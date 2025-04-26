@@ -4,14 +4,12 @@
     color="purple-lighten-1"
     max-width="500"
   >
-    <v-toolbar flat color="purple">
+    <v-toolbar color="purple" flat>
       <v-btn icon="mdi-account"></v-btn>
 
       <v-toolbar-title class="font-weight-light">
         User Profile
       </v-toolbar-title>
-
-      <v-spacer></v-spacer>
 
       <v-btn
         icon
@@ -28,15 +26,15 @@
     <v-card-text>
       <v-text-field
         :disabled="!isEditing"
-        color="white"
+        base-color="white"
         label="Name"
       ></v-text-field>
 
       <v-autocomplete
+        :custom-filter="customFilter"
         :disabled="!isEditing"
         :items="states"
-        :custom-filter="customFilter"
-        color="white"
+        base-color="white"
         item-title="name"
         item-value="abbr"
         label="State"
@@ -59,9 +57,9 @@
     <v-snackbar
       v-model="hasSaved"
       :timeout="2000"
-      attach
-      position="absolute"
       location="bottom left"
+      position="absolute"
+      attach
     >
       Your profile has been updated
     </v-snackbar>

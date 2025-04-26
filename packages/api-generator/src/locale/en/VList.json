@@ -1,27 +1,40 @@
 {
   "props": {
-    "disabled": "Puts all children inputs into a disabled state",
-    "inactive": "If set, the list tile will not be rendered as a link even if it has to/href prop or @click handler",
-    "link": "Applies `v-list-item` hover styles. Useful when using the item is an _activator_.",
-    "nav": "An alternative styling that reduces `v-list-item` width and rounds the corners. Typically used with **[v-navigation-drawer](/components/navigation-drawers)**",
-    "subheader": "Removes the top padding from `v-list-subheader` components. When used as a **String**, renders a subheader for you",
+    "itemType": "Designates the key on the supplied items that is used for determining the nodes type.",
+    "activatable": "Designates whether the list items are activatable.",
+    "disabled": "Puts all children inputs into a disabled state.",
+    "inactive": "If set, the list tile will not be rendered as a link even if it has to/href prop or @click handler.",
     "lines": "Designates a **minimum-height** for all children `v-list-item` components. This prop uses [line-clamp](https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-line-clamp) and is not supported in all browsers.",
-    "itemType": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-list.json))"
+    "link": "Applies `v-list-item` hover styles. Useful when using the item is an _activator_.",
+    "nav": "An alternative styling that reduces `v-list-item` width and rounds the corners. Typically used with **[v-navigation-drawer](/components/navigation-drawers)**.",
+    "subheader": "Removes the top padding from `v-list-subheader` components. When used as a **String**, renders a subheader for you.",
+    "slim": "Reduces horizontal spacing for badges, icons, tooltips, and avatars within slim list items to create a more compact visual representation.",
+    "collapseIcon": "Icon to display when the list item is expanded.",
+    "expandIcon": "Icon to display when the list item is collapsed.",
+    "selectable": "Designates whether the list items are selectable."
   },
   "events": {
-    "update:selected": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-list.json))",
-    "update:opened": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-list.json))",
-    "click:open": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-list.json))",
-    "click:select": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-list.json))"
+    "click:activate": "Emitted when the list item is activated.",
+    "click:open": "Emitted when the list item is opened.",
+    "click:select": "Emitted when the list item is selected.",
+    "update:activated": "Emitted when the list item is activated.",
+    "update:opened": "Emitted when the list item is opened.",
+    "update:selected": "Emitted when the list item is selected."
   },
   "slots": {
-    "subheader": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-list.json))",
-    "header": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-list.json))",
-    "item": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-list.json))"
+    "divider": "Slot for the divider.",
+    "header": "Slot for the header.",
+    "subheader": "Removes the top padding from `v-list-subheader` components. When used as a **String**, renders a subheader for you.",
+    "children": "Slot for the children.",
+    "focus": "Slot for the focus.",
+    "open": "Slot for the open.",
+    "parents": "Slot for the parents."
   },
   "exposed": {
-    "open": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-list.json))",
-    "select": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-list.json))",
-    "focus": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-list.json))"
+    "children": "The nested list items within the component.",
+    "focus": "Focus the list item.",
+    "getPath": "Get the position of an item within the nested structure.",
+    "open": "Open the list item.",
+    "parents": "The parent list items within the component."
   }
 }

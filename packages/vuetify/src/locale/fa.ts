@@ -1,7 +1,12 @@
 export default {
   badge: 'نشان',
-  open: 'Open',
+  open: 'باز کردن',
   close: 'بستن',
+  dismiss: 'رد کردن',
+  confirmEdit: {
+    ok: 'تایید',
+    cancel: 'لغو',
+  },
   dataIterator: {
     noResultsText: 'نتیجه‌ای یافت نشد',
     loadingText: 'در حال بارگذاری...',
@@ -28,11 +33,10 @@ export default {
     pageText: '{0} تا {1} از {2}',
   },
   dateRangeInput: {
-    divider: 'to',
+    divider: 'تا',
   },
   datePicker: {
-    ok: 'OK',
-    cancel: 'لغو',
+    itemsSelected: '{0} انتخاب‌شده',
     range: {
       title: 'انتخاب تاریخ‌ها',
       header: 'تاریخ‌ها را وارد کنید',
@@ -53,20 +57,27 @@ export default {
   },
   calendar: {
     moreEvents: '{بیشتر {0',
+    today: 'امروز',
   },
   input: {
-    clear: 'Clear {0}',
-    prependAction: '{0} prepended action',
-    appendAction: '{0} appended action',
-    otp: 'Please enter OTP character {0}',
+    clear: 'پاکسازی {0}',
+    prependAction: '{0} اقدام پیشین',
+    appendAction: '{0} اقدام افزوده‌شده',
+    otp: 'لطفا کد را وارد کنید {0}',
   },
   fileInput: {
     counter: '{0} پرونده',
     counterSize: '{0} پرونده ({1} در کل)',
   },
+  fileUpload: {
+    title: 'فایل‌ها را اینجا بکشید و رها کنید',
+    divider: 'یا',
+    browse: 'مرور فایل‌ها',
+  },
   timePicker: {
     am: 'قبل از ظهر',
     pm: 'بعد از ظهر',
+    title: 'انتخاب زمان',
   },
   pagination: {
     ariaLabel: {
@@ -85,12 +96,25 @@ export default {
   },
   rating: {
     ariaLabel: {
-      item: 'Rating {0} of {1}',
+      item: 'امتیاز {0} از {1}',
     },
   },
   loading: 'در حال بارگذاری...',
   infiniteScroll: {
     loadMore: 'بارگذاری بیشتر',
     empty: 'پایان',
+  },
+  rules: {
+    required: 'این فیلد الزامی است',
+    email: 'لطفاً یک ایمیل معتبر وارد کنید',
+    number: 'این فیلد فقط می‌تواند شامل اعداد باشد',
+    integer: 'این فیلد فقط می‌تواند شامل اعداد صحیح باشد',
+    capital: 'این فیلد فقط می‌تواند شامل حروف بزرگ باشد',
+    maxLength: 'حداکثر باید {0} کاراکتر وارد کنید',
+    minLength: 'حداقل باید {0} کاراکتر وارد کنید',
+    strictLength: 'طول فیلد وارد شده نامعتبر است',
+    exclude: 'کاراکتر {0} مجاز نیست',
+    notEmpty: 'لطفاً حداقل یک مقدار انتخاب کنید',
+    pattern: 'فرمت نامعتبر',
   },
 }

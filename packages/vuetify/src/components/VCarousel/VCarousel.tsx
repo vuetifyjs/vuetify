@@ -20,6 +20,7 @@ import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util
 import type { PropType } from 'vue'
 import type { VWindowSlots } from '@/components/VWindow/VWindow'
 import type { GroupProvide } from '@/composables/group'
+import type { GenericProps } from '@/util'
 
 export const makeVCarouselProps = propsFactory({
   color: String,
@@ -53,26 +54,32 @@ type VCarouselSlots = VWindowSlots & {
   item: {
     props: Record<string, any>
     item: {
-      id: number
+      id: string
       value: unknown
       disabled: boolean | undefined
     }
   }
 }
 
-export const VCarousel = genericComponent<VCarouselSlots>()({
+export const VCarousel = genericComponent<new <T>(
+  props: {
+    modelValue?: T
+    'onUpdate:modelValue'?: (value: T) => void
+  },
+  slots: VCarouselSlots,
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VCarousel',
 
   props: makeVCarouselProps(),
 
   emits: {
-    'update:modelValue': (val: any) => true,
+    'update:modelValue': (value: any) => true,
   },
 
   setup (props, { slots }) {
     const model = useProxiedModel(props, 'modelValue')
     const { t } = useLocale()
-    const windowRef = ref<typeof VWindow>()
+    const windowRef = ref<VWindow>()
 
     let slideTimeout = -1
     watch(model, restartTimeout)
@@ -87,7 +94,10 @@ export const VCarousel = genericComponent<VCarouselSlots>()({
     function startTimeout () {
       if (!props.cycle || !windowRef.value) return
 
-      slideTimeout = window.setTimeout(windowRef.value.group.next, +props.interval > 0 ? +props.interval : 6000)
+      slideTimeout = window.setTimeout(
+        windowRef.value.group.next,
+        Number(props.interval) > 0 ? Number(props.interval) : 6000
+      )
     }
 
     function restartTimeout () {
@@ -96,7 +106,7 @@ export const VCarousel = genericComponent<VCarouselSlots>()({
     }
 
     useRender(() => {
-      const [windowProps] = VWindow.filterProps(props)
+      const windowProps = VWindow.filterProps(props)
 
       return (
         <VWindow
@@ -144,7 +154,10 @@ export const VCarousel = genericComponent<VCarouselSlots>()({
                           const props = {
                             id: `carousel-item-${item.id}`,
                             'aria-label': t('$vuetify.carousel.ariaLabel.delimiter', index + 1, group.items.value.length),
-                            class: [group.isSelected(item.id) && 'v-btn--active'],
+                            class: [
+                              'v-carousel__controls__item',
+                              group.isSelected(item.id) && 'v-btn--active',
+                            ],
                             onClick: () => group.select(item.id, true),
                           }
 

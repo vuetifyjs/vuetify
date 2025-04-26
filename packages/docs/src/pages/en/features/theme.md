@@ -7,13 +7,19 @@ related:
   - /styles/colors/
   - /styles/transitions/
   - /getting-started/wireframes/
+features:
+  github: /composables/theme.ts
+  label: 'E: theme'
+  report: true
 ---
 
 # Theme configuration
 
 Customize your application's default text colors, surfaces, and more. Easily modify your theme programmatically in real time. Vuetify comes with standard support for light and dark variants.
 
-<entry />
+<PageFeatures />
+
+<PromotedEntry />
 
 ## API
 
@@ -22,15 +28,11 @@ Customize your application's default text colors, surfaces, and more. Easily mod
 | [useTheme](/api/use-theme/) | The theme composable allows you to get information about, and modify the current theme |
 | [v-theme-provider](/api/v-theme-provider/) | The theme provider component modifies the theme of all its children |
 
-<api-inline hide-links />
+<ApiInline hide-links />
 
 ## Setup
 
-Vuetify comes with two themes pre-installed, `light` and `dark`. To set the default theme of your application, use the **defaultTheme** option.
-
-### Javascript
-
-Example with only the **defaultTheme** value
+Vuetify includes three built-in themes: **light**, **dark**, and **system**. Use the **defaultTheme** option to specify your application's default theme. The following example sets the default theme to **dark**:
 
 ```js { resource="src/plugins/vuetify.js" }
 import { createApp } from 'vue'
@@ -38,94 +40,63 @@ import { createVuetify } from 'vuetify'
 
 export default createVuetify({
   theme: {
-    defaultTheme: 'dark'
-  }
-})
-```
-
-Adding new themes is as easy as defining a new property in the **theme.themes** object. A theme is a collection of colors and options that change the overall look and feel of your application. One of these options designates the theme as being either a **light** or **dark** variation.
-This makes it possible for Vuetify to implement Material Design concepts such as elevated surfaces having a lighter overlay color the higher up they are. Find out more about dark themes on the official [Material Design](https://material.io/design/color/dark-theme.html) page.
-
-```js { resource="src/plugins/vuetify.js" }
-import { createApp } from 'vue'
-import { createVuetify, ThemeDefinition } from 'vuetify'
-
-const myCustomLightTheme = {
-  dark: false,
-  colors: {
-    background: '#FFFFFF',
-    surface: '#FFFFFF',
-    primary: '#6200EE',
-    'primary-darken-1': '#3700B3',
-    secondary: '#03DAC6',
-    'secondary-darken-1': '#018786',
-    error: '#B00020',
-    info: '#2196F3',
-    success: '#4CAF50',
-    warning: '#FB8C00',
-  },
-}
-
-export default createVuetify({
-  theme: {
-    defaultTheme: 'myCustomLightTheme',
-    themes: {
-      myCustomLightTheme,
-    },
-  },
-})
-```
-
-### Typescript
-
-Example with only the **defaultTheme** value
-
-```ts { resource="src/plugins/vuetify.ts" }
-import { createApp } from 'vue'
-import { createVuetify } from 'vuetify'
-
-export default createVuetify({
-  theme: {
-    defaultTheme: 'dark',
-  },
-})
-```
-
-When using Typescript you may use the `ThemeDefinition` type to get type hints for the structure of the theme object.
-
-```ts { resource="src/plugins/vuetify.ts" }
-import { createApp } from 'vue'
-import { createVuetify, ThemeDefinition } from 'vuetify'
-
-const myCustomLightTheme: ThemeDefinition = {
-  dark: false,
-  colors: {
-    background: '#FFFFFF',
-    surface: '#FFFFFF',
-    primary: '#6200EE',
-    'primary-darken-1': '#3700B3',
-    secondary: '#03DAC6',
-    'secondary-darken-1': '#018786',
-    error: '#B00020',
-    info: '#2196F3',
-    success: '#4CAF50',
-    warning: '#FB8C00',
-  },
-}
-
-export default createVuetify({
-  theme: {
-    defaultTheme: 'myCustomLightTheme',
-    themes: {
-      myCustomLightTheme,
-    },
+    defaultTheme: 'dark', // 'light' | 'dark' | 'system'
   },
 })
 ```
 
 ## Changing theme
 
-This is used when you need to change the theme during runtime
+The theme instance has 3 functions to change the theme:
+
+- **change**: Change to a specific name
+- **toggle**: Toggle between two themes / defaults to light and dark
+- **cycle**: Cycle between all or a specific subset of themes in any order
+
+```html
+<template>
+  <v-app>
+    <v-main>
+      <v-container>
+        <!-- Toggle between Light / Dark -->
+        <v-btn
+          @click="theme.toggle()"
+          text="Toggle Light / Dark"
+        ></v-btn>
+
+        <!-- Change to a specific theme -->
+        <v-btn
+          @click="theme.change('dark')"
+          text="Change to Dark"
+        ></v-btn>
+
+        <!-- Cycle between all themes -->
+        <v-btn
+          @click="theme.cycle()"
+          text="Cycle All Themes"
+        ></v-btn>
+
+        <!-- Cycle between specific themes -->
+        <v-btn
+          @click="theme.cycle(['custom', 'light', 'system'])"
+          text="Cycle Specific Themes"
+        ></v-btn>
+      </v-container>
+    </v-main>
+  </v-app>
+</template>
+
+<script setup>
+  import { useTheme } from 'vuetify'
+
+  const theme = useTheme()
+</script>
+```
+
+<details>
+<summary>Usage before v3.9</summary>
+
+In versions before v3.9, you manually change the global name value on the theme instance:
 
 ```html { resource="src/App.vue" }
 <template>
@@ -145,6 +116,10 @@ function toggleTheme () {
 }
 </script>
 ```
+
+</details>
+
+<br>
 
 You should keep in mind that most of the Vuetify components support the **theme** prop. When used a new context is created for _that_ specific component and **all** of its children. In the following example, the [v-btn](/components/buttons/) uses the **dark** theme because it is applied to its parent [v-card](/components/cards/).
 
@@ -174,6 +149,81 @@ You can use the `<v-theme-provider>` component to dynamically apply different th
     </v-theme-provider>
   </v-app>
 </template>
+```
+
+### System theme
+
+<DocIntroduced version="3.9.0" />
+
+The **system** theme uses the user's system preference for 'light' or 'dark' mode, based on the **prefers-color-scheme** media query. It is evaluated at run-time and reacts to changes in the user's system preference.
+
+```js { resource="src/plugins/vuetify.js" }
+import { createApp } from 'vue'
+import { createVuetify } from 'vuetify'
+
+export default createVuetify({
+  theme: {
+    defaultTheme: 'system',
+  },
+})
+```
+
+## Custom themes
+
+Adding new themes is as easy as defining a new property in the **theme.themes** object. A theme is a collection of colors and options that change the overall look and feel of your application. One of these options designates the theme as being either a **light** or **dark** variation.
+
+This makes it possible for Vuetify to implement Material Design concepts such as elevated surfaces having a lighter overlay color the higher up they are. Find out more about dark themes on the official [Material Design](https://material.io/design/color/dark-theme.html) page.
+
+```js { resource="src/plugins/vuetify.js" }
+import { createApp } from 'vue'
+import { createVuetify } from 'vuetify'
+
+const myCustomLightTheme = {
+  dark: false,
+  colors: {
+    background: '#FFFFFF',
+    surface: '#FFFFFF',
+    'surface-bright': '#FFFFFF',
+    'surface-light': '#EEEEEE',
+    'surface-variant': '#424242',
+    'on-surface-variant': '#EEEEEE',
+    primary: '#1867C0',
+    'primary-darken-1': '#1F5592',
+    secondary: '#48A9A6',
+    'secondary-darken-1': '#018786',
+    error: '#B00020',
+    info: '#2196F3',
+    success: '#4CAF50',
+    warning: '#FB8C00',
+  },
+  variables: {
+    'border-color': '#000000',
+    'border-opacity': 0.12,
+    'high-emphasis-opacity': 0.87,
+    'medium-emphasis-opacity': 0.60,
+    'disabled-opacity': 0.38,
+    'idle-opacity': 0.04,
+    'hover-opacity': 0.04,
+    'focus-opacity': 0.12,
+    'selected-opacity': 0.08,
+    'activated-opacity': 0.12,
+    'pressed-opacity': 0.12,
+    'dragged-opacity': 0.08,
+    'theme-kbd': '#212529',
+    'theme-on-kbd': '#FFFFFF',
+    'theme-code': '#F5F5F5',
+    'theme-on-code': '#000000',
+  }
+}
+
+export default createVuetify({
+  theme: {
+    defaultTheme: 'myCustomLightTheme',
+    themes: {
+      myCustomLightTheme,
+    },
+  },
+})
 ```
 
 ## Custom theme colors
@@ -324,4 +374,10 @@ export const vuetify = createVuetify({
 
 ## Implementation
 
-Vuetify generates theme styles at runtime according to the given configuration. The generated styles are injected into the `<head>` section of the DOM in a `<style>` tag with an **id** of `vuetify-theme-stylesheet`.
+Vuetify generates theme styles at runtime according to the given configuration. The generated styles are injected into the `<head>` section of the DOM in a `<style>` tag with a default **id** of `vuetify-theme-stylesheet`.
+
+### Microfrontends
+
+An application using microfrontends with multiple instances of Vuetify may need to define unique **theme.stylesheetId** values for each microfrontend in order to prevent conflicts between their generated stylesheets.
+Further, such a scenario might require styles to be scoped to a specific microfrontend, which can be achieved by setting the **theme.scope** property.
+For example, a microfrontend mounted in an element `#my-app` can define a **theme.scope** of `#my-app` to scope its styles to that element and its children instead of `:root` and global classes.

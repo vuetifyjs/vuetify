@@ -10,25 +10,25 @@
     <div class="text-caption">Always show ticks</div>
 
     <v-slider
-      step="10"
       show-ticks="always"
+      step="10"
     ></v-slider>
 
     <div class="text-caption">Tick size</div>
 
     <v-slider
-      step="10"
       show-ticks="always"
+      step="10"
       tick-size="4"
     ></v-slider>
 
     <div class="text-caption">Tick labels</div>
 
     <v-slider
-      :ticks="tickLabels"
       :max="3"
-      step="1"
+      :ticks="tickLabels"
       show-ticks="always"
+      step="1"
       tick-size="4"
     ></v-slider>
   </div>

@@ -1,6 +1,10 @@
 // Styles
 import './VNavigationDrawer.sass'
 
+// Components
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
+import { VImg } from '@/components/VImg'
+
 // Composables
 import { useSticky } from './sticky'
 import { useTouch } from './touch'
@@ -9,6 +13,7 @@ import { makeBorderProps, useBorder } from '@/composables/border'
 import { useBackgroundColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
 import { provideDefaults } from '@/composables/defaults'
+import { makeDelayProps, useDelay } from '@/composables/delay'
 import { makeDisplayProps, useDisplay } from '@/composables/display'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
@@ -19,9 +24,10 @@ import { useScopeId } from '@/composables/scopeId'
 import { useSsrBoot } from '@/composables/ssrBoot'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
+import { useToggleScope } from '@/composables/toggleScope'
 
 // Utilities
-import { computed, nextTick, onBeforeMount, ref, shallowRef, toRef, Transition, watch } from 'vue'
+import { computed, nextTick, readonly, ref, shallowRef, toRef, Transition, watch } from 'vue'
 import { genericComponent, propsFactory, toPhysical, useRender } from '@/util'
 
 // Types
@@ -65,6 +71,7 @@ export const makeVNavigationDrawerProps = propsFactory({
   },
   image: String,
   temporary: Boolean,
+  persistent: Boolean,
   touchless: Boolean,
   width: {
     type: [Number, String],
@@ -79,7 +86,8 @@ export const makeVNavigationDrawerProps = propsFactory({
 
   ...makeBorderProps(),
   ...makeComponentProps(),
-  ...makeDisplayProps(),
+  ...makeDelayProps(),
+  ...makeDisplayProps({ mobile: null }),
   ...makeElevationProps(),
   ...makeLayoutItemProps(),
   ...makeRoundedProps(),
@@ -113,6 +121,10 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
     const rootEl = ref<HTMLElement>()
     const isHovering = shallowRef(false)
 
+    const { runOpenDelay, runCloseDelay } = useDelay(props, value => {
+      isHovering.value = value
+    })
+
     const width = computed(() => {
       return (props.rail && props.expandOnHover && isHovering.value)
         ? Number(props.width)
@@ -121,6 +133,7 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
     const location = computed(() => {
       return toPhysical(props.location, isRtl.value) as 'left' | 'right' | 'bottom'
     })
+    const isPersistent = computed(() => props.persistent)
     const isTemporary = computed(() => !props.permanent && (mobile.value || props.temporary))
     const isSticky = computed(() =>
       props.sticky &&
@@ -128,29 +141,28 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
       location.value !== 'bottom'
     )
 
-    if (props.expandOnHover && props.rail != null) {
+    useToggleScope(() => props.expandOnHover && props.rail != null, () => {
       watch(isHovering, val => emit('update:rail', !val))
-    }
+    })
 
-    if (!props.disableResizeWatcher) {
+    useToggleScope(() => !props.disableResizeWatcher, () => {
       watch(isTemporary, val => !props.permanent && (nextTick(() => isActive.value = !val)))
-    }
+    })
 
-    if (!props.disableRouteWatcher && router) {
-      watch(router.currentRoute, () => isTemporary.value && (isActive.value = false))
-    }
+    useToggleScope(() => !props.disableRouteWatcher && !!router, () => {
+      watch(router!.currentRoute, () => isTemporary.value && (isActive.value = false))
+    })
 
     watch(() => props.permanent, val => {
       if (val) isActive.value = true
     })
 
-    onBeforeMount(() => {
-      if (props.modelValue != null || isTemporary.value) return
-
+    if (props.modelValue == null && !isTemporary.value) {
       isActive.value = props.permanent || !mobile.value
-    })
+    }
 
-    const { isDragging, dragProgress, dragStyles } = useTouch({
+    const { isDragging, dragProgress } = useTouch({
+      el: rootEl,
       isActive,
       isTemporary,
       width,
@@ -165,14 +177,13 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
 
       return isDragging.value ? size * dragProgress.value : size
     })
-
     const { layoutItemStyles, layoutItemScrimStyles } = useLayoutItem({
       id: props.name,
       order: computed(() => parseInt(props.order, 10)),
       position: location,
       layoutSize,
       elementSize: width,
-      active: computed(() => isActive.value || isDragging.value),
+      active: readonly(isActive),
       disableTransitions: computed(() => isDragging.value),
       absolute: computed(() =>
         // eslint-disable-next-line @typescript-eslint/no-use-before-define
@@ -199,13 +210,6 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
       },
     })
 
-    function onMouseenter () {
-      isHovering.value = true
-    }
-    function onMouseleave () {
-      isHovering.value = false
-    }
-
     useRender(() => {
       const hasImage = (slots.image || props.image)
 
@@ -213,8 +217,8 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
         <>
           <props.tag
             ref={ rootEl }
-            onMouseenter={ onMouseenter }
-            onMouseleave={ onMouseleave }
+            onMouseenter={ runOpenDelay }
+            onMouseleave={ runCloseDelay }
             class={[
               'v-navigation-drawer',
               `v-navigation-drawer--${location.value}`,
@@ -224,6 +228,7 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
                 'v-navigation-drawer--is-hovering': isHovering.value,
                 'v-navigation-drawer--rail': props.rail,
                 'v-navigation-drawer--temporary': isTemporary.value,
+                'v-navigation-drawer--persistent': isPersistent.value,
                 'v-navigation-drawer--active': isActive.value,
                 'v-navigation-drawer--sticky': isSticky.value,
               },
@@ -238,7 +243,6 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
             style={[
               backgroundColorStyles.value,
               layoutItemStyles.value,
-              dragStyles.value,
               ssrBootStyles.value,
               stickyStyles.value,
               props.style,
@@ -248,10 +252,29 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
           >
             { hasImage && (
               <div key="image" class="v-navigation-drawer__img">
-                { slots.image
-                  ? slots.image?.({ image: props.image })
-                  : (<img src={ props.image } alt="" />)
-                }
+                { !slots.image ? (
+                  <VImg
+                    key="image-img"
+                    alt=""
+                    cover
+                    height="inherit"
+                    src={ props.image }
+                  />
+                ) : (
+                  <VDefaultsProvider
+                    key="image-defaults"
+                    disabled={ !props.image }
+                    defaults={{
+                      VImg: {
+                        alt: '',
+                        cover: true,
+                        height: 'inherit',
+                        src: props.image,
+                      },
+                    }}
+                    v-slots:default={ slots.image }
+                  />
+                )}
               </div>
             )}
 
@@ -277,7 +300,10 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
               <div
                 class={['v-navigation-drawer__scrim', scrimColor.backgroundColorClasses.value]}
                 style={[scrimStyles.value, scrimColor.backgroundColorStyles.value]}
-                onClick={ () => isActive.value = false }
+                onClick={ () => {
+                  if (isPersistent.value) return
+                  isActive.value = false
+                }}
                 { ...scopeId }
               />
             )}

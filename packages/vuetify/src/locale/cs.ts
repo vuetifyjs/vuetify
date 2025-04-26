@@ -1,7 +1,12 @@
 export default {
   badge: 'Odznak',
-  open: 'Open',
+  open: 'Otevřít',
   close: 'Zavřít',
+  dismiss: 'Zavřít',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'Zrušit',
+  },
   dataIterator: {
     noResultsText: 'Nenalezeny žádné záznamy',
     loadingText: 'Načítám položky...',
@@ -28,19 +33,18 @@ export default {
     pageText: '{0}-{1} z {2}',
   },
   dateRangeInput: {
-    divider: 'to',
+    divider: 'do',
   },
   datePicker: {
-    ok: 'OK',
-    cancel: 'Cancel',
+    itemsSelected: '{0} vybráno',
     range: {
-      title: 'Select dates',
-      header: 'Enter dates',
+      title: 'Vyberte datumy',
+      header: 'Zadejte datumy',
     },
-    title: 'Select date',
-    header: 'Enter date',
+    title: 'Vyberte datum',
+    header: 'Zadejte datum',
     input: {
-      placeholder: 'Enter date',
+      placeholder: 'Zadejte datum',
     },
   },
   noDataText: 'Nejsou dostupná žádná data',
@@ -48,25 +52,32 @@ export default {
     prev: 'Předchozí obrázek',
     next: 'Další obrázek',
     ariaLabel: {
-      delimiter: 'Slide {0} z {1}',
+      delimiter: 'Obrázek {0} z {1}',
     },
   },
   calendar: {
     moreEvents: '{0} dalších',
+    today: 'Dnes',
   },
   input: {
-    clear: 'Clear {0}',
-    prependAction: '{0} prepended action',
-    appendAction: '{0} appended action',
-    otp: 'Please enter OTP character {0}',
+    clear: 'Vymazat {0}',
+    prependAction: '{0} předřazená akce',
+    appendAction: '{0} připojená akce',
+    otp: 'Vložte OTP znak {0}',
   },
   fileInput: {
     counter: '{0} souborů',
     counterSize: '{0} souborů ({1} celkem)',
   },
+  fileUpload: {
+    title: 'Přetáhněte soubory sem',
+    divider: 'nebo',
+    browse: 'Procházet soubory',
+  },
   timePicker: {
-    am: 'AM',
-    pm: 'PM',
+    am: 'Dopoledne',
+    pm: 'Odpoledne',
+    title: 'Vyberte čas',
   },
   pagination: {
     ariaLabel: {
@@ -75,22 +86,35 @@ export default {
       previous: 'Předchozí strana',
       page: 'Přejít na stránku {0}',
       currentPage: 'Aktuální stránka, stránka {0}',
-      first: 'First page',
-      last: 'Last page',
+      first: 'První stránka',
+      last: 'Poslední stránka',
     },
   },
   stepper: {
-    next: 'Next',
-    prev: 'Previous',
+    next: 'Další',
+    prev: 'Předchozí',
   },
   rating: {
     ariaLabel: {
       item: 'Hodnocení {0} z {1}',
     },
   },
-  loading: 'Loading...',
+  loading: 'Načítám...',
   infiniteScroll: {
-    loadMore: 'Load more',
-    empty: 'No more',
+    loadMore: 'Načíst více',
+    empty: 'Žádné další',
+  },
+  rules: {
+    required: 'Toto pole je povinné',
+    email: 'Zadejte platný e-mail',
+    number: 'Toto pole může obsahovat pouze čísla',
+    integer: 'Toto pole může obsahovat pouze celá čísla',
+    capital: 'Toto pole může obsahovat pouze velká písmena',
+    maxLength: 'Musíte zadat maximálně {0} znaků',
+    minLength: 'Musíte zadat minimálně {0} znaků',
+    strictLength: 'Délka zadaného pole je neplatná',
+    exclude: 'Znak {0} není povolen',
+    notEmpty: 'Vyberte alespoň jednu hodnotu',
+    pattern: 'Neplatný formát',
   },
 }

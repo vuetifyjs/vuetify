@@ -20,6 +20,7 @@ import { genericComponent, propsFactory, useRender } from '@/util'
 import type { PropType } from 'vue'
 
 export const makeVBtnGroupProps = propsFactory({
+  baseColor: String,
   divided: Boolean,
   direction: {
     type: String as PropType<'horizontal' | 'vertical'>,
@@ -51,6 +52,7 @@ export const VBtnGroup = genericComponent()({
     provideDefaults({
       VBtn: {
         height: props.direction === 'horizontal' ? 'auto' : null,
+        baseColor: toRef(props, 'baseColor'),
         color: toRef(props, 'color'),
         density: toRef(props, 'density'),
         flat: true,

@@ -1,12 +1,18 @@
 // Types
-import type { ComponentPublicInstance, Ref, UnwrapRef } from 'vue'
+import type { ComponentOptionsBase, ComponentPublicInstance, Ref, UnwrapRef } from 'vue'
 import type { UnionToIntersection } from '@/util'
 
 const Refs = Symbol('Forwarded refs')
 
 /** Omit properties starting with P */
-type OmitPrefix<T, P extends string> = [Extract<keyof T, `${P}${any}`>] extends [never] ? T : Omit<T, `${P}${any}`>
+type OmitPrefix<
+  T,
+  P extends string,
+  E = Extract<keyof T, `${P}${any}`>,
+> = [E] extends [never] ? T : Omit<T, `${P}${any}`>
+type OmitPrivate<T> = OmitPrefix<T, '$'>
 
+/** Omit keyof $props from T */
 type OmitProps<T> = T extends { $props: any } ? Omit<T, keyof T['$props']> : T
 
 function getDescriptor (obj: any, key: PropertyKey) {
@@ -19,10 +25,21 @@ function getDescriptor (obj: any, key: PropertyKey) {
   return undefined
 }
 
-export function forwardRefs<T extends {}, U extends Ref<HTMLElement | Omit<ComponentPublicInstance, '$emit' | '$slots'> | undefined>[]> (
-  target: T,
-  ...refs: U
-): T & UnionToIntersection<{ [K in keyof U]: OmitPrefix<OmitProps<NonNullable<UnwrapRef<U[K]>>>, '$'> }[number]> {
+export function forwardRefs<
+  T extends {},
+  U extends Ref<HTMLElement | Omit<ComponentPublicInstance, '$emit' | '$slots'> | undefined>[],
+  UU = { [K in keyof U]: NonNullable<UnwrapRef<U[K]>> }[number],
+  UC = { [K in keyof U]: OmitPrivate<OmitProps<NonNullable<UnwrapRef<U[K]>>>> }[number],
+  R = T & UnionToIntersection<UC> & {
+    _allExposed: T | (
+      UU extends { $options: infer O }
+        ? O extends ComponentOptionsBase<any, infer E, any, any, any, any, any, any>
+          ? E
+          : never
+        : never
+    )
+  }
+> (target: T, ...refs: U): R {
   (target as any)[Refs] = refs
 
   return new Proxy(target, {
@@ -32,7 +49,7 @@ export function forwardRefs<T extends {}, U extends Ref<HTMLElement | Omit<Compo
       }
 
       // Skip internal properties
-      if (typeof key === 'symbol' || key.startsWith('__')) return
+      if (typeof key === 'symbol' || key.startsWith('$') || key.startsWith('__')) return
 
       for (const ref of refs) {
         if (ref.value && Reflect.has(ref.value, key)) {
@@ -49,7 +66,7 @@ export function forwardRefs<T extends {}, U extends Ref<HTMLElement | Omit<Compo
       }
 
       // Skip internal properties
-      if (typeof key === 'symbol' || key.startsWith('__')) return false
+      if (typeof key === 'symbol' || key.startsWith('$') || key.startsWith('__')) return false
 
       for (const ref of refs) {
         if (ref.value && Reflect.has(ref.value, key)) {
@@ -64,7 +81,7 @@ export function forwardRefs<T extends {}, U extends Ref<HTMLElement | Omit<Compo
       }
 
       // Skip internal properties
-      if (typeof key === 'symbol' || key.startsWith('__')) return false
+      if (typeof key === 'symbol' || key.startsWith('$') || key.startsWith('__')) return false
 
       for (const ref of refs) {
         if (ref.value && Reflect.has(ref.value, key)) {
@@ -79,7 +96,7 @@ export function forwardRefs<T extends {}, U extends Ref<HTMLElement | Omit<Compo
       if (descriptor) return descriptor
 
       // Skip internal properties
-      if (typeof key === 'symbol' || key.startsWith('__')) return
+      if (typeof key === 'symbol' || key.startsWith('$') || key.startsWith('__')) return
 
       // Check each ref's own properties
       for (const ref of refs) {

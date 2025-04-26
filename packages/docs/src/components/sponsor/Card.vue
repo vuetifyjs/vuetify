@@ -6,31 +6,21 @@
     class="d-inline-flex align-center pa-2"
     color="transparent"
     rel="noopener"
-    rounded
     target="_blank"
     variant="flat"
+    rounded
     @click="onClick"
   >
     <v-img
       :alt="sponsor?.metadata.name"
       :src="src"
       :width="imgWidth"
-      contain
       max-height="64"
     />
   </v-card>
 </template>
 
 <script setup>
-  // Composables
-  import { useGtag } from 'vue-gtag-next'
-  import { useRoute } from 'vue-router'
-  import { useSponsorsStore } from '@/store/sponsors'
-  import { useTheme } from 'vuetify'
-
-  // Utilities
-  import { computed, ref, watch } from 'vue'
-
   const props = defineProps({
     slug: String,
     sponsor: Object,
@@ -43,7 +33,7 @@
   const { name } = useRoute()
   const theme = useTheme()
   const sponsorStore = useSponsorsStore()
-  const sponsor = ref(props.sponsor)
+  const sponsor = shallowRef(props.sponsor)
 
   const src = computed(() => {
     const {

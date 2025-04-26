@@ -1,5 +1,5 @@
 <template>
-  <v-card width="400" style="margin: auto">
+  <v-card style="margin: auto" width="400">
     <v-responsive
       :style="{ background: `rgb(${red}, ${green}, ${blue})` }"
       height="300px"
@@ -10,18 +10,18 @@
         v-model="red"
         :max="255"
         :step="1"
+        class="ma-4"
         label="R"
         hide-details
-        class="ma-4"
       >
         <template v-slot:append>
           <v-text-field
             v-model="red"
-            type="number"
-            style="width: 80px"
             density="compact"
-            hide-details
+            style="width: 80px"
+            type="number"
             variant="outlined"
+            hide-details
           ></v-text-field>
         </template>
       </v-slider>
@@ -30,18 +30,18 @@
         v-model="green"
         :max="255"
         :step="1"
+        class="ma-4"
         label="G"
         hide-details
-        class="ma-4"
       >
         <template v-slot:append>
           <v-text-field
             v-model="green"
-            type="number"
-            style="width: 80px"
             density="compact"
-            hide-details
+            style="width: 80px"
+            type="number"
             variant="outlined"
+            hide-details
           ></v-text-field>
         </template>
       </v-slider>
@@ -50,18 +50,18 @@
         v-model="blue"
         :max="255"
         :step="1"
+        class="ma-4"
         label="B"
         hide-details
-        class="ma-4"
       >
         <template v-slot:append>
           <v-text-field
             v-model="blue"
-            type="number"
-            style="width: 80px"
             density="compact"
-            hide-details
+            style="width: 80px"
+            type="number"
             variant="outlined"
+            hide-details
           ></v-text-field>
         </template>
       </v-slider>

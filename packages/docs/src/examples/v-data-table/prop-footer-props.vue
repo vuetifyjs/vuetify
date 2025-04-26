@@ -8,9 +8,8 @@
       nextIcon: 'mdi-plus'
     }"
     :headers="headers"
-    :items-per-page="5"
     :items="desserts"
-    class="elevation-1"
+    :items-per-page="5"
     item-key="name"
   ></v-data-table>
 </template>

@@ -8,13 +8,19 @@ related:
   - /features/internationalization/
   - /features/global-configuration/
   - /getting-started/browser-support/
+features:
+  github: /components/VLocaleProvider/
+  label: 'C: VLocaleProvider'
+  report: true
 ---
 
 # Locale providers
 
 The locale provider allows you to provide specific default prop values to components in a section of your application
 
-<entry />
+<PageFeatures />
+
+<PromotedEntry />
 
 ## API
 
@@ -22,7 +28,7 @@ The locale provider allows you to provide specific default prop values to compon
 | - | - |
 | [v-locale-provider](/api/v-locale-provider/) | Primary Component |
 
-<api-inline hide-links />
+<ApiInline hide-links />
 
 ## Examples
 

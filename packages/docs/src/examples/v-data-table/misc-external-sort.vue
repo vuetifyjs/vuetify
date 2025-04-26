@@ -8,8 +8,8 @@
     ></v-data-table>
     <div class="text-center pt-2">
       <v-btn
-        color="primary"
         class="me-2"
+        color="primary"
         @click="toggleOrder"
       >
         Toggle sort order

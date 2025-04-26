@@ -8,19 +8,26 @@ related:
   - /components/grids
   - /components/buttons
   - /components/toolbars
+features:
+  figma: true
+  label: 'C: VFooter'
+  report: true
+  github: /components/VFooter/
 ---
 
 # Footers
 
 The `v-footer` component is used for displaying general information that a user might want to access from any page within your site.
 
+<PageFeatures />
+
 ## Usage
 
 The `v-footer` component in its simplest form is a container.
 
-<usage name="v-footer" />
+<ExamplesUsage name="v-footer" />
 
-<entry />
+<PromotedEntry />
 
 ## API
 
@@ -28,7 +35,7 @@ The `v-footer` component in its simplest form is a container.
 | - | - |
 | [v-footer](/api/v-footer/) | The footer component. |
 
-<api-inline hide-links />
+<ApiInline hide-links />
 
 ## Examples
 
@@ -38,16 +45,16 @@ The `v-footer` component in its simplest form is a container.
 
 The footer component as a basic company footer with links.
 
-<example file="v-footer/misc-company-footer" />
+<ExamplesExample file="v-footer/misc-company-footer" />
 
 #### Indigo Footer
 
 The footer component with Indigo background color and social media icons and button.
 
-<example file="v-footer/misc-indigo-footer" />
+<ExamplesExample file="v-footer/misc-indigo-footer" />
 
 #### Teal Footer
 
 The footer component with a Teal color header and columns and rows of links.
 
-<example file="v-footer/misc-teal-footer" />
+<ExamplesExample file="v-footer/misc-teal-footer" />

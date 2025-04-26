@@ -1,27 +1,30 @@
 {
   "props": {
+    "allowedHours": "Restricts which hours can be selected.",
+    "allowedMinutes": "Restricts which minutes can be selected.",
+    "allowedSeconds": "Restricts which seconds can be selected.",
+    "ampmInTitle": "Place AM/PM switch in title, not near the clock.",
+    "flat": "Removes  elevation.",
     "format": "Defines the format of a time displayed in picker. Available options are `ampm` and `24hr`.",
-    "allowedHours": "Restricts which hours can be selected",
-    "allowedMinutes": "Restricts which minutes can be selected",
-    "allowedSeconds": "Restricts which seconds can be selected",
-    "flat": "Removes  elevation",
-    "scrollable": "Allows changing hour/minute with mouse scroll",
-    "min": "Minimum allowed time",
-    "max": "Maximum allowed time",
-    "readonly": "Puts picker in readonly state",
-    "useSeconds": "Toggles the use of seconds in picker",
-    "value": "Time picker model (ISO 8601 format, 24hr hh:mm)",
-    "width": "Width of the picker",
-    "ampmInTitle": "Place AM/PM switch in title, not near the clock."
+    "max": "Maximum allowed time.",
+    "min": "Minimum allowed time.",
+    "hide-header": "Hide the header of the picker.",
+    "readonly": "Puts picker in readonly state.",
+    "scrollable": "Allows changing hour/minute with mouse scroll.",
+    "useSeconds": "Toggles the use of seconds in picker.",
+    "value": "Time picker model (ISO 8601 format, 24hr hh:mm).",
+    "width": "Width of the picker.",
+    "viewMode": "The current view mode of thep picker.`"
   },
   "slots": {
     "default": "Displayed below the clock, can be used for example for adding action button (`OK` and `Cancel`)"
   },
   "events": {
-    "click:hour": "Emitted when user selects the hour",
-    "click:minute": "Emitted when user selects the minute",
-    "click:second": "Emitted when user selects the second",
-    "change": "Emitted when the time selection is done (when user changes the minute for HH:MM picker and the second for HH:MM:SS picker",
-    "update:period": "Emitted when user clicks the AM/PM button"
+    "change": "Emitted when the time selection is done (when user changes the minute for HH:MM picker and the second for HH:MM:SS picker.",
+    "update:hour": "Emitted when user selects the hour.",
+    "update:minute": "Emitted when user selects the minute.",
+    "update:second": "Emitted when user selects the second.",
+    "update:period": "Emitted when user clicks the AM/PM button.",
+    "update:viewMode": "Emitted when the view mode changes."
   }
 }

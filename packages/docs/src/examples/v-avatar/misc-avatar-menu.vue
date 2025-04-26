@@ -1,13 +1,10 @@
 <template>
   <v-container
-    fluid
     style="height: 300px"
+    fluid
   >
     <v-row justify="center">
-      <v-menu
-        min-width="200px"
-        rounded
-      >
+      <v-menu min-width="200px">
         <template v-slot:activator="{ props }">
           <v-btn
             icon
@@ -35,15 +32,15 @@
               </p>
               <v-divider class="my-3"></v-divider>
               <v-btn
-                rounded
                 variant="text"
+                rounded
               >
                 Edit Account
               </v-btn>
               <v-divider class="my-3"></v-divider>
               <v-btn
-                rounded
                 variant="text"
+                rounded
               >
                 Disconnect
               </v-btn>

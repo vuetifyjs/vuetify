@@ -13,16 +13,17 @@ import { onUnmounted } from 'vue'
 import { nullColor } from './util'
 import {
   defineComponent,
-  HexToHSV,
   HSVtoCSS,
+  parseColor,
   propsFactory,
+  RGBtoHSV,
   SUPPORTS_EYE_DROPPER,
   useRender,
 } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import type { Hex, HSV } from '@/util'
+import type { HSV } from '@/util'
 
 export const makeVColorPickerPreviewProps = propsFactory({
   color: {
@@ -49,12 +50,12 @@ export const VColorPickerPreview = defineComponent({
     onUnmounted(() => abortController.abort())
 
     async function openEyeDropper () {
-      if (!SUPPORTS_EYE_DROPPER) return
+      if (!SUPPORTS_EYE_DROPPER || props.disabled) return
 
       const eyeDropper = new window.EyeDropper()
       try {
         const result = await eyeDropper.open({ signal: abortController.signal })
-        const colorHexValue = HexToHSV(result.sRGBHex as Hex)
+        const colorHexValue = RGBtoHSV(parseColor(result.sRGBHex))
         emit('update:color', { ...(props.color ?? nullColor), ...colorHexValue })
       } catch (e) {}
     }
@@ -72,7 +73,7 @@ export const VColorPickerPreview = defineComponent({
       >
         { SUPPORTS_EYE_DROPPER && (
           <div class="v-color-picker-preview__eye-dropper" key="eyeDropper">
-            <VBtn onClick={ openEyeDropper } icon="$eyeDropper" variant="plain" density="comfortable" />
+            <VBtn density="comfortable" disabled={ props.disabled } icon="$eyeDropper" variant="plain" onClick={ openEyeDropper } />
           </div>
         )}
 

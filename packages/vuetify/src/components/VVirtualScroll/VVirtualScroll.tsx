@@ -61,8 +61,11 @@ export const VVirtualScroll = genericComponent<new <T, Renderless extends boolea
     const vm = getCurrentInstance('VVirtualScroll')
     const { dimensionStyles } = useDimension(props)
     const {
+      calculateVisibleItems,
       containerRef,
+      markerRef,
       handleScroll,
+      handleScrollend,
       handleItemResize,
       scrollToIndex,
       paddingTop,
@@ -71,19 +74,29 @@ export const VVirtualScroll = genericComponent<new <T, Renderless extends boolea
     } = useVirtual(props, toRef(props, 'items'))
 
     useToggleScope(() => props.renderless, () => {
+      function handleListeners (add = false) {
+        const method = add ? 'addEventListener' : 'removeEventListener'
+
+        if (containerRef.value === document.documentElement) {
+          document[method]('scroll', handleScroll, { passive: true })
+          document[method]('scrollend', handleScrollend)
+        } else {
+          containerRef.value?.[method]('scroll', handleScroll, { passive: true })
+          containerRef.value?.[method]('scrollend', handleScrollend)
+        }
+      }
+
       onMounted(() => {
         containerRef.value = getScrollParent(vm.vnode.el as HTMLElement, true)
-        containerRef.value?.addEventListener('scroll', handleScroll)
+        handleListeners(true)
       })
-      onScopeDispose(() => {
-        containerRef.value?.removeEventListener('scroll', handleScroll)
-      })
+      onScopeDispose(handleListeners)
     })
 
     useRender(() => {
       const children = computedItems.value.map(item => (
         <VVirtualScrollItem
-          key={ item.index }
+          key={ item.key }
           renderless={ props.renderless }
           onUpdate:height={ height => handleItemResize(item.index, height) }
         >
@@ -93,7 +106,7 @@ export const VVirtualScroll = genericComponent<new <T, Renderless extends boolea
 
       return props.renderless ? (
         <>
-          <div class="v-virtual-scroll__spacer" style={{ paddingTop: convertToUnit(paddingTop.value) }} />
+          <div ref={ markerRef } class="v-virtual-scroll__spacer" style={{ paddingTop: convertToUnit(paddingTop.value) }} />
           { children }
           <div class="v-virtual-scroll__spacer" style={{ paddingBottom: convertToUnit(paddingBottom.value) }} />
         </>
@@ -104,13 +117,15 @@ export const VVirtualScroll = genericComponent<new <T, Renderless extends boolea
             'v-virtual-scroll',
             props.class,
           ]}
-          onScroll={ handleScroll }
+          onScrollPassive={ handleScroll }
+          onScrollend={ handleScrollend }
           style={[
             dimensionStyles.value,
             props.style,
           ]}
         >
           <div
+            ref={ markerRef }
             class="v-virtual-scroll__container"
             style={{
               paddingTop: convertToUnit(paddingTop.value),
@@ -124,6 +139,7 @@ export const VVirtualScroll = genericComponent<new <T, Renderless extends boolea
     })
 
     return {
+      calculateVisibleItems,
       scrollToIndex,
     }
   },

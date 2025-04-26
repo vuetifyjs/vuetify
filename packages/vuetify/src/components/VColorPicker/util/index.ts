@@ -24,6 +24,15 @@ function stripAlpha (color: any, stripAlpha: boolean) {
 
 export function extractColor (color: HSV, input: any) {
   if (input == null || typeof input === 'string') {
+    const hasA = color.a !== 1
+    if (input?.startsWith('rgb(')) {
+      const { r, g, b, a } = HSVtoRGB(color)
+      return `rgb(${r} ${g} ${b}` + (hasA ? ` / ${a})` : ')')
+    } else if (input?.startsWith('hsl(')) {
+      const { h, s, l, a } = HSVtoHSL(color)
+      return `hsl(${h} ${Math.round(s * 100)} ${Math.round(l * 100)}` + (hasA ? ` / ${a})` : ')')
+    }
+
     const hex = HSVtoHex(color)
 
     if (color.a === 1) return hex.slice(0, 7)
@@ -57,7 +66,7 @@ export function hasAlpha (color: any) {
   return false
 }
 
-export const nullColor = { h: 0, s: 0, v: 1, a: 1 }
+export const nullColor = { h: 0, s: 0, v: 0, a: 1 }
 
 export type ColorPickerMode = {
   inputProps: Record<string, unknown>

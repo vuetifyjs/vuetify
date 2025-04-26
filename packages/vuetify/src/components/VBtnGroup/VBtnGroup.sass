@@ -3,78 +3,77 @@
 @use '../VBtn/variables' as *
 @use './variables' as *
 
-.v-btn-group
-  $root: &
+@include tools.layer('components')
+  .v-btn-group
+    $root: &
 
-  display: inline-flex
-  flex-wrap: nowrap
-  max-width: 100%
-  min-width: 0
-  overflow: hidden
-  vertical-align: middle
+    display: inline-flex
+    flex-wrap: nowrap
+    max-width: 100%
+    min-width: 0
+    overflow: hidden
+    vertical-align: middle
 
-  @include tools.border($btn-group-border...)
-  @include tools.elevation($btn-group-elevation)
-  @include tools.rounded($btn-group-border-radius)
-  @include tools.theme($btn-group-theme...)
+    @include tools.border($btn-group-border...)
+    @include tools.elevation($btn-group-elevation)
+    @include tools.rounded($btn-group-border-radius)
+    @include tools.theme($btn-group-theme...)
 
-  @at-root
-    @include tools.density('v-btn-group', $button-density) using ($modifier)
-      @at-root #{selector.append(&, $root)}
-        height: $btn-group-height + $modifier
+    @at-root
+      @include tools.density('v-btn-group', $button-density) using ($modifier)
+        @at-root #{selector.append(&, $root)}
+          height: $btn-group-height + $modifier
 
-  &--tile
-    @include tools.rounded($btn-group-tile-border-radius)
+    .v-btn
+      border-radius: 0
+      border-color: inherit
 
-  &--divided:not(.v-btn-group--vertical)
-    .v-btn:not(:last-child)
-      border-inline-end-width: $btn-group-border-thin-width
-      border-inline-end-style: $btn-group-border-style
-      border-inline-end-color: $btn-group-border-color
+    &--tile
+      @include tools.rounded($btn-group-tile-border-radius)
 
-  &--divided:is(.v-btn-group--vertical)
-    .v-btn:not(:last-child)
-      border-bottom-width: $btn-group-border-thin-width
-      border-bottom-style: $btn-group-border-style
-      border-bottom-color: $btn-group-border-color
+    &--horizontal
+      .v-btn
+        &:not(:last-child)
+          border-inline-end: none
 
-.v-btn-group--horizontal
-  .v-btn
-    border-radius: 0
-    border-color: inherit
+        &:not(:first-child)
+          border-inline-start: none
 
-    &:not(:last-child)
-      border-inline-end: none
+        &:first-child
+          border-start-start-radius: inherit
+          border-end-start-radius: inherit
 
-    &:not(:first-child)
-      border-inline-start: none
+        &:last-child
+          border-start-end-radius: inherit
+          border-end-end-radius: inherit
 
-    &:first-child
-      border-start-start-radius: inherit
-      border-end-start-radius: inherit
+      &.v-btn-group--divided
+        .v-btn:not(:last-child)
+          border-inline-end-width: $btn-group-border-thin-width
+          border-inline-end-style: $btn-group-border-style
+          border-inline-end-color: $btn-group-border-color
 
-    &:last-child
-      border-start-end-radius: inherit
-      border-end-end-radius: inherit
+    &--vertical
+      flex-direction: column
+      height: auto !important
 
-.v-btn-group--vertical
-  flex-direction: column
-  height: auto !important
+      .v-btn
+        &:not(:last-child)
+          border-block-end: none
 
-  .v-btn
-    border-radius: 0
-    border-color: inherit
+        &:not(:first-child)
+          border-block-start: none
 
-    &:not(:last-child)
-      border-bottom: none
+        &:first-child
+          border-start-start-radius: inherit
+          border-start-end-radius: inherit
 
-    &:not(:first-child)
-      border-top: none
+        &:last-child
+          border-end-start-radius: inherit
+          border-end-end-radius: inherit
 
-    &:first-child
-      border-start-start-radius: inherit
-      border-start-end-radius: inherit
-
-    &:last-child
-      border-end-start-radius: inherit
-      border-end-end-radius: inherit
+      &.v-btn-group--divided
+        .v-btn:not(:last-child)
+          border-block-end-width: $btn-group-border-thin-width
+          border-block-end-style: $btn-group-border-style
+          border-block-end-color: $btn-group-border-color

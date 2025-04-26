@@ -40,8 +40,8 @@ type ControlSlot = {
   icon: IconValue
   onClick: (e: Event) => void
   disabled: boolean
-  ariaLabel: string
-  ariaDisabled: boolean
+  'aria-label': string
+  'aria-disabled': boolean
 }
 
 export type VPaginationSlots = {
@@ -174,7 +174,7 @@ export const VPagination = genericComponent<VPaginationSlots>()({
     const start = computed(() => parseInt(props.start, 10))
 
     const totalVisible = computed(() => {
-      if (props.totalVisible) return parseInt(props.totalVisible, 10)
+      if (props.totalVisible != null) return parseInt(props.totalVisible, 10)
       else if (maxButtons.value >= 0) return maxButtons.value
       return getMax(width.value, 58)
     })
@@ -183,14 +183,15 @@ export const VPagination = genericComponent<VPaginationSlots>()({
       const minButtons = props.showFirstLastPage ? 5 : 3
       return Math.max(0, Math.floor(
         // Round to two decimal places to avoid floating point errors
-        +((totalWidth - itemWidth * minButtons) / itemWidth).toFixed(2)
+        Number(((totalWidth - itemWidth * minButtons) / itemWidth).toFixed(2))
       ))
     }
 
     const range = computed(() => {
       if (length.value <= 0 || isNaN(length.value) || length.value > Number.MAX_SAFE_INTEGER) return []
 
-      if (totalVisible.value <= 1) return [page.value]
+      if (totalVisible.value <= 0) return []
+      else if (totalVisible.value === 1) return [page.value]
 
       if (length.value <= totalVisible.value) {
         return createRange(length.value, start.value)
@@ -208,7 +209,7 @@ export const VPagination = genericComponent<VPaginationSlots>()({
         const rangeStart = length.value - rangeLength + start.value
         return [start.value, props.ellipsis, ...createRange(rangeLength, rangeStart)]
       } else {
-        const rangeLength = Math.max(1, totalVisible.value - 3)
+        const rangeLength = Math.max(1, totalVisible.value - 2)
         const rangeStart = rangeLength === 1 ? page.value : page.value - Math.ceil(rangeLength / 2) + start.value
         return [start.value, props.ellipsis, ...createRange(rangeLength, rangeStart), props.ellipsis, length.value]
       }
@@ -261,10 +262,10 @@ export const VPagination = genericComponent<VPaginationSlots>()({
               ref,
               ellipsis: false,
               icon: true,
-              disabled: !!props.disabled || +props.length < 2,
+              disabled: !!props.disabled || Number(props.length) < 2,
               color: isActive ? props.activeColor : props.color,
-              ariaCurrent: isActive,
-              ariaLabel: t(isActive ? props.currentPageAriaLabel : props.pageAriaLabel, item),
+              'aria-current': isActive,
+              'aria-label': t(isActive ? props.currentPageAriaLabel : props.pageAriaLabel, item),
               onClick: (e: Event) => setValue(e, item),
             },
           }
@@ -281,29 +282,29 @@ export const VPagination = genericComponent<VPaginationSlots>()({
           icon: isRtl.value ? props.lastIcon : props.firstIcon,
           onClick: (e: Event) => setValue(e, start.value, 'first'),
           disabled: prevDisabled,
-          ariaLabel: t(props.firstAriaLabel),
-          ariaDisabled: prevDisabled,
+          'aria-label': t(props.firstAriaLabel),
+          'aria-disabled': prevDisabled,
         } : undefined,
         prev: {
           icon: isRtl.value ? props.nextIcon : props.prevIcon,
           onClick: (e: Event) => setValue(e, page.value - 1, 'prev'),
           disabled: prevDisabled,
-          ariaLabel: t(props.previousAriaLabel),
-          ariaDisabled: prevDisabled,
+          'aria-label': t(props.previousAriaLabel),
+          'aria-disabled': prevDisabled,
         },
         next: {
           icon: isRtl.value ? props.prevIcon : props.nextIcon,
           onClick: (e: Event) => setValue(e, page.value + 1, 'next'),
           disabled: nextDisabled,
-          ariaLabel: t(props.nextAriaLabel),
-          ariaDisabled: nextDisabled,
+          'aria-label': t(props.nextAriaLabel),
+          'aria-disabled': nextDisabled,
         },
         last: props.showFirstLastPage ? {
           icon: isRtl.value ? props.firstIcon : props.lastIcon,
           onClick: (e: Event) => setValue(e, start.value + length.value - 1, 'last'),
           disabled: nextDisabled,
-          ariaLabel: t(props.lastAriaLabel),
-          ariaDisabled: nextDisabled,
+          'aria-label': t(props.lastAriaLabel),
+          'aria-disabled': nextDisabled,
         } : undefined,
       }
     })
@@ -314,7 +315,7 @@ export const VPagination = genericComponent<VPaginationSlots>()({
     }
 
     function onKeydown (e: KeyboardEvent) {
-      if (e.key === keyValues.left && !props.disabled && page.value > +props.start) {
+      if (e.key === keyValues.left && !props.disabled && page.value > Number(props.start)) {
         page.value = page.value - 1
         nextTick(updateFocus)
       } else if (e.key === keyValues.right && !props.disabled && page.value < start.value + length.value - 1) {

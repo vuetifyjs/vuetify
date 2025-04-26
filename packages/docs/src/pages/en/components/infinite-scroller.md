@@ -8,27 +8,29 @@ related:
   - /components/lists/
   - /components/data-tables/basics/
   - /components/data-iterators/
+features:
+  github: /components/VInfiniteScroll/
+  label: 'C: VInfiniteScroll'
+  report: true
 ---
 
-# Infinite scroller
+# Infinite scrollers
 
 The `v-infinite-scroll` component displays a potentially infinite list, by loading more items of the list when scrolling. It supports either vertical or horizontal scrolling.
 
-----
+<PageFeatures />
 
-::: warning
-This feature requires [v3.2.0 (Orion)](/getting-started/release-notes/?version=v3.2.0)
-:::
+<DocIntroduced version="3.4.0" />
 
 ## Usage
 
 When scrolling towards the bottom, new items will be rendered either automatically, or manually with the click of a button.
 
-<usage name="v-infinite-scroll" />
+<ExamplesUsage name="v-infinite-scroll" />
 
 A **load** event will be emitted when the component needs to load more content. The argument passed is an object with two properties.
 
-- `side` tells you at which side new content should be added, either at the `'start'` or `'end'`. The return value of the function is a string which describes if the new content was loaded successfully or not.
+- `side` tells you on which side new content should be added, either at the `'start'` or `'end'`. The return value of the function is a string that describes if the new content was loaded successfully or not.
 - `done` is a callback function that should be called when the loading of new content is done. It takes a single parameter `status` that describes if the load was successful or not. See the table below for the possible values.
 
 |Status|Description|
@@ -36,23 +38,9 @@ A **load** event will be emitted when the component needs to load more content. 
 |`'ok'`|Content was added succesfully|
 |`'error'`|Something went wrong when adding content. This will display the `error` slot|
 |`'empty'`|There is no more content to fetch. This will display the `empty` slot|
-|`'loading'`|Content is currently loading. This will display a message that content is loading. This status is only set internally by the component and should not be used with the **done** function|
+|`'loading'`|Content is currently loading. This will display a message that the content is loading. This status is only set internally by the component and should not be used with the **done** function|
 
-<entry />
-
-## Installation
-
-Labs components require a manual import and installation of the component.
-
-```js { resource="src/plugins/vuetify.js" }
-import { VInfiniteScroll } from 'vuetify/labs/VInfiniteScroll'
-
-export default createVuetify({
-  components: {
-    VInfiniteScroll,
-  },
-})
-```
+<PromotedEntry />
 
 ## API
 
@@ -60,70 +48,101 @@ export default createVuetify({
 | - | - |
 | [v-infinite-scroll](/api/v-infinite-scroll/) | Primary Component |
 
-## Examples
+<ApiInline hide-links />
+
+## Anatomy
+
+The `v-infinite-scroll` works with any content in its default slot.
+
+![Infinite scroll Anatomy](https://cdn.vuetifyjs.com/docs/images/components/v-infinite-scroll/v-infinite-scroll-anatomy.png)
+
+| Element / Area | Description                                                              |
+|----------------|-----------------------------------------|
+| 1. Container   | The infinite scroller content container |
+| 2. Loader      | The loader content area                 |
+
+## Guide
+
+The `v-infinite-scroll` component is a container that allows you to react to a user reaching the end of the content area. It is useful when you need to display an unknown but large number of items, and you don't want to load them all at once.
 
 ### Props
 
+The `v-infinite-scroll` component has several props that can be used to customize its behavior.
+
 #### Mode
 
-The default behaviour of the component is to try to load more content automatically when the scrollbar gets close to the end. However a manual mode is also supported, where the user needs to do some interaction to load the content. By default this a button, but it can be customized with a [slot](#load-more)
+The default behavior of the component is to try to load more content automatically when the scrollbar gets close to the end. However, a manual mode is also supported, where the user needs to do some interaction to load the content. By default this is a button, but it can be customized with a [slot](#load-more)
 
-<example file="v-infinite-scroll/prop-mode" />
+<ExamplesExample file="v-infinite-scroll/prop-mode" />
 
 #### Direction
 
-The `v-infinite-scroll` component can be used with either vertical and horizontal scrolling.
+The `v-infinite-scroll` component can be used with either vertical or horizontal scrolling.
 
-<example file="v-infinite-scroll/prop-direction" />
+<ExamplesExample file="v-infinite-scroll/prop-direction" />
 
 #### Side
 
-By default the `v-infinite-scroll` component assumes that new content will be appearing at the end of existing content. But it also supports content being added to the start, and content appearing both at the start and the end.
+By default, the `v-infinite-scroll` component assumes that new content will appear at the end of existing content. But it also supports content being added to the start and appearing both at the beginning and the end.
 
-When using the **start** side for content, the scrolllbar will start at the bottom of the content.
+When using the **start** side for content, the scrollbar will start at the bottom of the content.
 
-<example file="v-infinite-scroll/prop-side-start" />
+<ExamplesExample file="v-infinite-scroll/prop-side-start" />
 
 When using **both** sides for content, the scrollbar will start in the middle of the content.
 
-<example file="v-infinite-scroll/prop-side-both" />
+<ExamplesExample file="v-infinite-scroll/prop-side-both" />
 
 #### Color
 
 The default load more button and loading spinner can be colored with the **color** prop.
 
-<example file="v-infinite-scroll/prop-color" />
+<ExamplesExample file="v-infinite-scroll/prop-color" />
 
 ### Slots
+
+The `v-infinite-scroll` component exposes several slots that allow you to further customize its behaviour.
+
+![Infinite scroll Slots](https://cdn.vuetifyjs.com/docs/images/components/v-infinite-scroll/v-infinite-scroll-slots.png)
+
+| Element / Area | Description |
+| - | - |
+| 1. Container | The default slot |
+| 2. Load-more | The slot shown when the mode is set to `manual` and the status is not `loading` |
+| 3. Loading | The slot is shown when the mode is set to `manual` and status is `loading` |
+| 4. Empty | The slot shown when the status is `empty` |
+| 5. Error | The slot is shown when the status is `error` |
 
 #### Loading
 
 You can customize the loading message with the **loading** slot.
 
-<example file="v-infinite-scroll/slot-loading" />
+<ExamplesExample file="v-infinite-scroll/slot-loading" />
 
 #### Load more
 
 When using **manual** mode you can customize the action required to load more content with the **load-more** slot.
 
-<example file="v-infinite-scroll/slot-load-more" />
+<ExamplesExample file="v-infinite-scroll/slot-load-more" />
 
 #### Empty
 
 You can customize the empty message with the **empty** slot.
 
-<example file="v-infinite-scroll/slot-empty" />
+<ExamplesExample file="v-infinite-scroll/slot-empty" />
 
 #### Error
 
 The **error** slot is shown if the status `'error'` is returned from the `done` callback.
 
-<example file="v-infinite-scroll/slot-error" />
+<ExamplesExample file="v-infinite-scroll/slot-error" />
 
-### Misc
+### Examples
+
+The following is a collection of examples that demonstrate more advanced and real-world use of the `v-infinite-scroll` component.
 
 #### Virtualized infinite scroller
 
-If the items in your infinite list are of a uniform size, you can quite easily virtualize the list to only render a small amount of items regardless of how far you scroll in either direction.
+If the items in your infinite list are of a uniform size, you can quite easily virtualize the list to only render a small number of items regardless of how far you scroll in either direction.
 
-<example file="v-infinite-scroll/misc-virtual" />
+<ExamplesExample file="v-infinite-scroll/misc-virtual" />

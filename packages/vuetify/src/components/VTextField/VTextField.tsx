@@ -3,7 +3,7 @@ import './VTextField.sass'
 
 // Components
 import { VCounter } from '@/components/VCounter/VCounter'
-import { filterFieldProps, makeVFieldProps, VField } from '@/components/VField/VField'
+import { makeVFieldProps, VField } from '@/components/VField/VField'
 import { makeVInputProps, VInput } from '@/components/VInput/VInput'
 
 // Composables
@@ -28,8 +28,8 @@ const activeTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', 
 
 export const makeVTextFieldProps = propsFactory({
   autofocus: Boolean,
-  counter: [Boolean, Number, String] as PropType<true | number | string>,
-  counterValue: Function as PropType<(value: any) => number>,
+  counter: [Boolean, Number, String],
+  counterValue: [Number, Function] as PropType<number | ((value: any) => number)>,
   prefix: String,
   placeholder: String,
   persistentPlaceholder: Boolean,
@@ -71,8 +71,8 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
     const model = useProxiedModel(props, 'modelValue')
     const { isFocused, focus, blur } = useFocus(props)
     const counterValue = computed(() => {
-      return typeof props.counterValue === 'function'
-        ? props.counterValue(model.value)
+      return typeof props.counterValue === 'function' ? props.counterValue(model.value)
+        : typeof props.counterValue === 'number' ? props.counterValue
         : (model.value ?? '').toString().length
     })
     const max = computed(() => {
@@ -154,11 +154,11 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
     }
 
     useRender(() => {
-      const hasCounter = !!(slots.counter || props.counter || props.counterValue)
+      const hasCounter = !!(slots.counter || (props.counter !== false && props.counter != null))
       const hasDetails = !!(hasCounter || slots.details)
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
-      const [{ modelValue: _, ...inputProps }] = VInput.filterProps(props)
-      const [fieldProps] = filterFieldProps(props)
+      const { modelValue: _, ...inputProps } = VInput.filterProps(props)
+      const fieldProps = VField.filterProps(props)
 
       return (
         <VInput
@@ -169,7 +169,7 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
             {
               'v-text-field--prefixed': props.prefix,
               'v-text-field--suffixed': props.suffix,
-              'v-text-field--plain-underlined': ['plain', 'underlined'].includes(props.variant),
+              'v-input--plain-underlined': isPlainOrUnderlined.value,
             },
             props.class,
           ]}
@@ -276,6 +276,7 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
                       active={ props.persistentCounter || isFocused.value }
                       value={ counterValue.value }
                       max={ max.value }
+                      disabled={ props.disabled }
                       v-slots:default={ slots.counter }
                     />
                   </>

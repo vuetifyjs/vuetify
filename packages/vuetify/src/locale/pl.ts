@@ -1,7 +1,12 @@
 export default {
   badge: 'Odznaka',
-  open: 'Open',
+  open: 'Otwórz',
   close: 'Zamknij',
+  dismiss: 'Odrzuć',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'Anuluj',
+  },
   dataIterator: {
     noResultsText: 'Nie znaleziono danych odpowiadających wyszukiwaniu',
     loadingText: 'Wczytywanie danych...',
@@ -28,19 +33,18 @@ export default {
     pageText: '{0}-{1} z {2}',
   },
   dateRangeInput: {
-    divider: 'to',
+    divider: 'do',
   },
   datePicker: {
-    ok: 'OK',
-    cancel: 'Cancel',
+    itemsSelected: '{0} wybrano',
     range: {
-      title: 'Select dates',
-      header: 'Enter dates',
+      title: 'Wybór zakresu dat',
+      header: 'Wprowadź zakres dat',
     },
-    title: 'Select date',
-    header: 'Enter date',
+    title: 'Wybór daty',
+    header: 'Wprowadź datę',
     input: {
-      placeholder: 'Enter date',
+      placeholder: 'Wprowadź datę',
     },
   },
   noDataText: 'Brak danych',
@@ -53,20 +57,27 @@ export default {
   },
   calendar: {
     moreEvents: '{0} więcej',
+    today: 'Dzisiaj',
   },
   input: {
     clear: 'Wyczyść {0}',
     prependAction: '{0} dodatkowa akcja',
     appendAction: '{0} dodatkowa akcja',
-    otp: 'Please enter OTP character {0}',
+    otp: 'Proszę wprowadzić znak nr {0}',
   },
   fileInput: {
     counter: 'Liczba plików: {0}',
     counterSize: 'Liczba plików: {0} (łącznie {1})',
   },
+  fileUpload: {
+    title: 'Przeciągnij i upuść pliki tutaj',
+    divider: 'lub',
+    browse: 'Przeglądaj pliki',
+  },
   timePicker: {
     am: 'AM',
     pm: 'PM',
+    title: 'Wybierz godzinę',
   },
   pagination: {
     ariaLabel: {
@@ -80,17 +91,30 @@ export default {
     },
   },
   stepper: {
-    next: 'Next',
-    prev: 'Previous',
+    next: 'Następny',
+    prev: 'Poprzedni',
   },
   rating: {
     ariaLabel: {
       item: 'Ocena {0} na {1}',
     },
   },
-  loading: 'Loading...',
+  loading: 'Wczytywanie danych...',
   infiniteScroll: {
-    loadMore: 'Load more',
-    empty: 'No more',
+    loadMore: 'Wczytaj więcej',
+    empty: 'Brak kolejnych danych',
+  },
+  rules: {
+    required: 'To pole jest wymagane',
+    email: 'Proszę podać prawidłowy adres e-mail',
+    number: 'To pole może zawierać tylko cyfry',
+    integer: 'To pole może zawierać tylko liczby całkowite',
+    capital: 'To pole może zawierać tylko wielkie litery',
+    maxLength: 'Musisz wprowadzić maksymalnie {0} znaków',
+    minLength: 'Musisz wprowadzić co najmniej {0} znaków',
+    strictLength: 'Długość wprowadzonego pola jest nieprawidłowa',
+    exclude: 'Znak {0} nie jest dozwolony',
+    notEmpty: 'Proszę wybrać co najmniej jedną wartość',
+    pattern: 'Nieprawidłowy format',
   },
 }

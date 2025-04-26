@@ -10,10 +10,13 @@ export const md3: Blueprint = {
       flat: true,
     },
     VAutocomplete: {
-      variant: 'filled',
+      variant: 'outlined',
     },
     VBanner: {
       color: 'primary',
+    },
+    VBottomSheet: {
+      contentClass: 'rounded-t-xl overflow-hidden',
     },
     VBtn: {
       color: 'primary',
@@ -34,7 +37,26 @@ export const md3: Blueprint = {
       rounded: 'sm',
     },
     VCombobox: {
-      variant: 'filled',
+      variant: 'outlined',
+    },
+    VDateInput: {
+      variant: 'outlined',
+    },
+    VDatePicker: {
+      controlHeight: 48,
+      color: 'primary',
+      divided: true,
+      headerColor: '',
+      elevation: 3,
+      rounded: 'xl',
+
+      VBtn: {
+        color: 'high-emphasis',
+        rounded: 'circle',
+      },
+    },
+    VFileInput: {
+      variant: 'outlined',
     },
     VNavigationDrawer: {
       // VList: {
@@ -44,8 +66,16 @@ export const md3: Blueprint = {
       //   },
       // },
     },
+    VNumberInput: {
+      variant: 'outlined',
+
+      VBtn: {
+        color: undefined,
+        rounded: undefined,
+      },
+    },
     VSelect: {
-      variant: 'filled',
+      variant: 'outlined',
     },
     VSlider: {
       color: 'primary',
@@ -54,10 +84,10 @@ export const md3: Blueprint = {
       color: 'primary',
     },
     VTextarea: {
-      variant: 'filled',
+      variant: 'outlined',
     },
     VTextField: {
-      variant: 'filled',
+      variant: 'outlined',
     },
     VToolbar: {
       VBtn: {

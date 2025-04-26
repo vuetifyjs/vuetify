@@ -1,0 +1,60 @@
+@use '../../styles/tools'
+@use './variables' as *
+
+@include tools.layer('components')
+  .v-date-picker-controls
+    display: flex
+    align-items: center
+    justify-content: space-between
+    font-size: .875rem
+    height: $date-picker-controls-height
+    padding-top: 4px
+    padding-bottom: 4px
+    padding-inline-start: 6px
+    padding-inline-end: 12px
+
+    > .v-btn:first-child
+      text-transform: none
+      font-weight: 400
+      line-height: initial
+      letter-spacing: initial
+
+    &--variant-classic
+      padding-inline-start: 12px
+
+    &--variant-modern
+      .v-date-picker__title
+          &:not(:hover)
+            opacity: .7
+
+          .v-date-picker--month &
+            cursor: pointer
+
+          .v-date-picker--year &
+            opacity: 1
+
+    .v-btn:last-child
+      margin-inline-start: 4px
+
+    .v-date-picker--year &
+      .v-date-picker-controls__mode-btn
+        transform: rotate(180deg)
+
+  .v-date-picker-controls__date
+    margin-inline-end: 4px
+
+    .v-date-picker-controls--variant-classic &
+      margin: auto
+      text-align: center
+
+  .v-date-picker-controls__month
+    display: flex
+
+    @include tools.rtl()
+      flex-direction: row-reverse
+
+    .v-date-picker-controls--variant-classic &
+      flex: 1 0 auto
+
+  .v-date-picker__title
+    display: inline-block

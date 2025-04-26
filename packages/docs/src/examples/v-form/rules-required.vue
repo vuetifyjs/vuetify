@@ -1,12 +1,12 @@
 <template>
-  <v-sheet width="300" class="mx-auto">
+  <v-sheet class="mx-auto" width="300">
     <v-form @submit.prevent>
       <v-text-field
         v-model="firstName"
         :rules="rules"
         label="First name"
       ></v-text-field>
-      <v-btn type="submit" block class="mt-2">Submit</v-btn>
+      <v-btn class="mt-2" type="submit" block>Submit</v-btn>
     </v-form>
   </v-sheet>
 </template>

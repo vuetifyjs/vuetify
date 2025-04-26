@@ -21,15 +21,12 @@ env:
 
 jobs:
   upload-to-crowdin:
-    runs-on: ubuntu-latest
-
+    runs-on: ubuntu-24.04
     steps:
-
-    - name: Checkout
-      uses: actions/checkout@v2
-
-    - name: Upload
-      uses: crowdin/github-action@v1.8.0
-      with:
-        config: crowdin.yml
-        crowdin_branch_name: ${{ env.CROWDIN_BRANCH }}
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Upload
+        uses: crowdin/github-action@v1.19.0
+        with:
+          config: crowdin.yml
+          crowdin_branch_name: ${{ env.CROWDIN_BRANCH }}

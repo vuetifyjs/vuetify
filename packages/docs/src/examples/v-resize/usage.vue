@@ -1,8 +1,8 @@
 <template>
   <v-row
-    v-resize="onResize"
     align="center"
     justify="center"
+    v-resize="onResize"
   >
     <v-col class="text-center">
       <div class="text-subtitle-2">Window Size</div>

@@ -1,0 +1,155 @@
+{
+  "useTheme": {
+    "exposed": {
+      "change": "3.9.0",
+      "toggle": "3.9.0",
+      "cycle": "3.9.0",
+      "unimportant": "3.9.0"
+    }
+  },
+  "VAppBar": {
+    "props": {
+      "scrollBehavior": "3.2.0"
+    }
+  },
+  "VAutocomplete": {
+    "props": {
+      "autoSelectFirst": "3.3.0",
+      "clearOnSelect": "3.5.0",
+      "listProps": "3.5.0"
+    }
+  },
+  "VAvatar": {
+    "props": {
+      "text": "3.4.0",
+      "border": "3.7.0"
+    }
+  },
+  "VBanner": {
+    "props": {
+      "bgColor": "3.4.0"
+    }
+  },
+  "VBtn": {
+    "props": {
+      "text": "3.2.0",
+      "slim": "3.4.0",
+      "readonly": "3.6.0",
+      "activeColor": "3.7.0"
+    }
+  },
+  "VChip": {
+    "props": {
+      "baseColor": "3.8.0"
+    }
+  },
+  "VCombobox": {
+    "props": {
+      "clearOnSelect": "3.5.0",
+      "listProps": "3.5.0"
+    }
+  },
+  "VConfirmEdit": {
+    "props": {
+      "hideActions": "3.8.0"
+    }
+  },
+  "VDatePicker": {
+    "props": {
+      "controlHeight": "3.8.0",
+      "headerColor": "3.8.0"
+    }
+  },
+  "VDataTable": {
+    "props": {
+      "headerProps": "3.5.0"
+    }
+  },
+  "VExpansionPanels": {
+    "props": {
+      "static": "3.4.0"
+    }
+  },
+  "VField": {
+    "props": {
+      "iconColor": "3.8.0",
+      "glow": "3.8.0"
+    }
+  },
+  "VIcon": {
+    "props": {
+      "opacity": "3.8.0"
+    }
+  },
+  "VImg": {
+    "props": {
+      "position": "3.4.0",
+      "draggable": "3.4.0",
+      "referrerpolicy": "3.4.0",
+      "crossorigin": "3.4.0",
+      "absolute": "3.7.0"
+    }
+  },
+  "VInput": {
+    "props": {
+      "iconColor": "3.8.0",
+      "glow": "3.8.0"
+    }
+  },
+  "VListItem": {
+    "props": {
+      "baseColor": "3.3.0",
+      "slim": "3.4.0"
+    }
+  },
+  "VMenu": {
+    "props": {
+      "submenu": "3.7.0"
+    }
+  },
+  "VNavigationDrawer": {
+    "props": {
+      "persistent": "3.6.0"
+    }
+  },
+  "VSelect": {
+    "props": {
+      "listProps": "3.5.0"
+    }
+  },
+  "VSlider": {
+    "events": {
+      "start": "3.2.0",
+      "end": "3.2.0"
+    }
+  },
+  "VSnackbar": {
+    "props": {
+      "timer": "3.4.0",
+      "text": "3.4.0"
+    }
+  },
+  "VSwitch": {
+    "slots": {
+      "thumb": "3.5.0",
+      "track-false": "3.5.0",
+      "track-true": "3.5.0"
+    }
+  },
+  "VTab": {
+    "props": {
+      "text": "3.2.0"
+    }
+  },
+  "VTooltip": {
+    "props": {
+      "eager": "3.2.0",
+      "interactive": "3.8.0"
+    }
+  },
+  "VVirtualScroll": {
+    "props": {
+      "itemKey": "3.8.0"
+    }
+  }
+}

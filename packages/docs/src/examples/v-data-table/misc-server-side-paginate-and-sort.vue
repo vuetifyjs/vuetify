@@ -2,11 +2,10 @@
   <v-data-table-server
     v-model:items-per-page="itemsPerPage"
     :headers="headers"
-    :items-length="totalItems"
     :items="serverItems"
+    :items-length="totalItems"
     :loading="loading"
     :search="search"
-    class="elevation-1"
     item-value="name"
     @update:options="loadItems"
   ></v-data-table-server>
@@ -113,7 +112,7 @@
               return sortOrder === 'desc' ? bValue - aValue : aValue - bValue
             })
           }
-          const paginated = items.slice(start, end)
+          const paginated = items.slice(start, end === -1 ? undefined : end)
           resolve({ items: paginated, total: items.length })
         }, 500)
       })

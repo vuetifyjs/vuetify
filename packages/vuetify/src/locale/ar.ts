@@ -2,6 +2,11 @@ export default {
   badge: 'شارة',
   open: 'Open',
   close: 'إغلاق',
+  dismiss: 'Dismiss',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'Cancel',
+  },
   dataIterator: {
     noResultsText: 'لم يتم إيجاد نتائج',
     loadingText: 'يتم جلب العناصر...',
@@ -31,8 +36,7 @@ export default {
     divider: 'to',
   },
   datePicker: {
-    ok: 'OK',
-    cancel: 'Cancel',
+    itemsSelected: '{0} selected',
     range: {
       title: 'Select dates',
       header: 'Enter dates',
@@ -53,6 +57,7 @@ export default {
   },
   calendar: {
     moreEvents: '{0} أكثر',
+    today: 'Today',
   },
   input: {
     clear: 'Clear {0}',
@@ -64,9 +69,15 @@ export default {
     counter: '{0} ملفات',
     counterSize: '{0} ملفات ({1} في المجموع)',
   },
+  fileUpload: {
+    title: 'Drag and drop files here',
+    divider: 'or',
+    browse: 'Browse Files',
+  },
   timePicker: {
     am: 'صباحاً',
     pm: 'مساءً',
+    title: 'Select Time',
   },
   pagination: {
     ariaLabel: {
@@ -92,5 +103,18 @@ export default {
   infiniteScroll: {
     loadMore: 'Load more',
     empty: 'No more',
+  },
+  rules: {
+    required: 'هذه الخانة مطلوبه',
+    email: 'يرجى إدخال بريد إلكتروني صالح',
+    number: 'هذه الخانة يمكن أن تحتوي على أرقام فقط',
+    integer: 'هذه الخانة يمكن أن تحتوي على أعداد صحيحة فقط',
+    capital: 'هذه الخانة يمكن أن تحتوي على أحرف كبيرة فقط',
+    maxLength: 'يجب أن تدخل بحد أقصى {0} حرف',
+    minLength: 'يجب أن تدخل بحد أدنى {0} حرف',
+    strictLength: 'طول الحقل المدخل غير صالح',
+    exclude: 'الحرف {0} غير مسموح به',
+    notEmpty: 'يرجى اختيار قيمة واحدة على الأقل',
+    pattern: 'تنسيق غير صالح',
   },
 }

@@ -1,0 +1,9 @@
+{
+  "props": {
+  },
+  "events": {
+  },
+  "slots": {
+    "icon": "Slot for customizing all stepper item icons."
+  }
+}

@@ -2,6 +2,11 @@ export default {
   badge: 'Значка',
   open: 'Отвори',
   close: 'Затвори',
+  dismiss: 'Отхвърли',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'Отмяна',
+  },
   dataIterator: {
     noResultsText: 'Не са намерени записи',
     loadingText: 'Зареждане на елементи...',
@@ -31,8 +36,7 @@ export default {
     divider: 'до',
   },
   datePicker: {
-    ok: 'ОК',
-    cancel: 'Отмяна',
+    itemsSelected: '{0} избрани',
     range: {
       title: 'Избор на дати',
       header: 'Въвеждане на дати',
@@ -53,6 +57,7 @@ export default {
   },
   calendar: {
     moreEvents: 'Още {0}',
+    today: 'Днес',
   },
   input: {
     clear: 'Изчисти {0}',
@@ -64,9 +69,15 @@ export default {
     counter: '{0} файла',
     counterSize: '{0} файла ({1} общо)',
   },
+  fileUpload: {
+    title: 'Плъзнете и пуснете файлове тук',
+    divider: 'или',
+    browse: 'Разгледайте файлове',
+  },
   timePicker: {
     am: 'пр. обяд',
     pm: 'сл. обяд',
+    title: 'Изберете време',
   },
   pagination: {
     ariaLabel: {
@@ -92,5 +103,18 @@ export default {
   infiniteScroll: {
     loadMore: 'Зареди още',
     empty: 'Няма повече',
+  },
+  rules: {
+    required: 'Това поле е задължително',
+    email: 'Моля, въведете валиден имейл',
+    number: 'Това поле може да съдържа само числа',
+    integer: 'Това поле може да съдържа само цели числа',
+    capital: 'Това поле може да съдържа само главни букви',
+    maxLength: 'Трябва да въведете максимум {0} символа',
+    minLength: 'Трябва да въведете минимум {0} символа',
+    strictLength: 'Дължината на въведеното поле е невалидна',
+    exclude: 'Символът {0} не е позволен',
+    notEmpty: 'Моля, изберете поне една стойност',
+    pattern: 'Невалиден формат',
   },
 }

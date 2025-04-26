@@ -3,23 +3,19 @@ import { VItem } from '../VItem'
 import { VItemGroup } from '../VItemGroup'
 
 // Utilities
-import { describe, expect, it } from '@jest/globals'
 import { mount } from '@vue/test-utils'
 import { h } from 'vue'
 import { createVuetify } from '@/framework'
 
-// Types
-import type { VueWrapper } from '@vue/test-utils'
-
 describe('VItemGroup', () => {
   const vuetify = createVuetify()
   const mountFunction = (options = {}) => {
-    return mount<any>(VItemGroup, {
+    return mount(VItemGroup, {
       ...options,
       global: {
         plugins: [vuetify],
       },
-    }) as VueWrapper<VItemGroup>
+    })
   }
 
   const defaultSlot = () => [
@@ -123,7 +119,7 @@ describe('VItemGroup', () => {
 
   // https://github.com/vuetifyjs/vuetify/issues/5384
   it('should not unregister children when is destroyed', async () => {
-    const change = jest.fn()
+    const change = vi.fn()
     const wrapper = mountFunction({
       props: {
         modelValue: 'foo',

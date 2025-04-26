@@ -1,31 +1,31 @@
 <template>
   <v-autocomplete
     v-model="model"
-    :items="variables"
     :custom-filter="customFilter"
-    item-props
-    auto-select-first
+    :items="variables"
     base-color="disabled"
-    chips
-    clearable
-    multiple
-    persistent-clear
     placeholder="Search SASS API"
     prepend-inner-icon="mdi-database-search-outline"
     variant="outlined"
+    auto-select-first
+    chips
+    clearable
+    item-props
+    multiple
+    persistent-clear
     return-object
   >
     <template #chip="{ props }">
       <v-chip
         v-bind="props"
         color="primary"
-        label
         variant="flat"
+        label
       />
     </template>
   </v-autocomplete>
 
-  <app-markup
+  <AppMarkup
     v-if="model.length > 0"
     :code="code"
     class="mb-6"
@@ -35,17 +35,14 @@
 </template>
 
 <script setup>
-  // Utilities
-  import { computed, ref } from 'vue'
-
   const files = import.meta.glob('../../../../api-generator/dist/api/*.json')
 
-  const variables = ref([])
-  const model = ref([])
+  const variables = shallowRef([])
+  const model = shallowRef([])
 
   const code = computed(() => {
     const $parsed = model.value.map(variable => {
-      return `  ${variable}: null`
+      return `  ${variable.title}: ${variable.value}`
     }).join(',\n')
 
     return `@use 'vuetify' with (\n${$parsed},\n);`
@@ -75,7 +72,7 @@
         for (const variable in component.sass) {
           variables.value.push({
             title: variable,
-            value: variable,
+            value: component.sass[variable]?.default || null,
             subtitle: name,
           })
         }

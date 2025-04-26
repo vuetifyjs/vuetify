@@ -14,21 +14,15 @@ related:
 
 Server-side Data tables are used for showing data coming from an API.
 
-<entry />
+<PromotedEntry />
 
-## Installation
+## API
 
-Labs components require a manual import and installation of the component.
+| Component | Description |
+| - | - |
+| [v-data-table-server](/api/v-data-table-server/) | Primary Component |
 
-```js { resource="src/plugins/vuetify.js" }
-import { VDataTableServer } from 'vuetify/labs/VDataTable'
-
-export default createVuetify({
-  components: {
-    VDataTableServer,
-  },
-})
-```
+<ApiInline hide-links />
 
 ## Examples
 
@@ -36,16 +30,16 @@ export default createVuetify({
 
 To use data from an API, listen to the **@update:options** event to know when to fetch new data. Use the **loading** prop to display a progress bar while fetching the data.
 
-<example file="v-data-table/misc-server-side-paginate-and-sort" />
+<ExamplesExample file="v-data-table/misc-server-side-paginate-and-sort" />
 
 ### Server-side search
 
 If you need to support search functionality, use the **search** prop to let the table know when new search input is available. Since the table does not actually do any filtering on its own, the **search** input does not need to be the actual value being searched for. In this example we have multiple values searchable, so we just make sure to set **search** to _anything_ when we need to fetch new data.
 
-<example file="v-data-table/server-search" />
+<ExamplesExample file="v-data-table/server-search" />
 
 ### Loading
 
 You can use the **loading** prop to indicate that data in the table is currently loading. If there is no data in the table, a loading message will also be displayed. This message can be customized using the **loading-text** prop or the `loading` slot.
 
-<example file="v-data-table/prop-loading" />
+<ExamplesExample file="v-data-table/prop-loading" />

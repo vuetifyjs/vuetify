@@ -4,6 +4,8 @@
 $divider-border-color: null !default;
 $divider-border-style: settings.$border-style-root !default;
 $divider-border-width: thin 0 0 0 !default;
+$divider-content-padding: 0 16px !default;
+$divider-content-vertical-padding: 4px 0 !default;
 $divider-flex: 1 1 100% !default;
 $divider-inset-margin: 72px !default;
 $divider-inset-max-width: calc(100% - #{$divider-inset-margin}) !default;

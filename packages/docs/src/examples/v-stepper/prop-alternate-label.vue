@@ -1,15 +1,15 @@
 <template>
   <v-stepper alt-labels>
     <v-stepper-header>
-      <v-stepper-item value="1" title="Ad unit details"></v-stepper-item>
+      <v-stepper-item title="Ad unit details" value="1"></v-stepper-item>
 
       <v-divider></v-divider>
 
-      <v-stepper-item value="2" title="Ad sizes"></v-stepper-item>
+      <v-stepper-item title="Ad sizes" value="2"></v-stepper-item>
 
       <v-divider></v-divider>
 
-      <v-stepper-item value="3" title="Ad templates"></v-stepper-item>
+      <v-stepper-item title="Ad templates" value="3"></v-stepper-item>
     </v-stepper-header>
   </v-stepper>
 </template>

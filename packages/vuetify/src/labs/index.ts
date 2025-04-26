@@ -1,3 +1,2 @@
 export * as components from './components'
-
-export * from './date'
+export * as composables from './composables'

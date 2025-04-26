@@ -1,7 +1,12 @@
 export default {
   badge: 'Jelvény',
-  open: 'Open',
+  open: 'Megnyit',
   close: 'Bezárás',
+  dismiss: 'Elutasít',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'Mégsem',
+  },
   dataIterator: {
     noResultsText: 'Nincs egyező találat',
     loadingText: 'Betöltés...',
@@ -28,19 +33,18 @@ export default {
     pageText: '{0}-{1} / {2}',
   },
   dateRangeInput: {
-    divider: 'to',
+    divider: '–',
   },
   datePicker: {
-    ok: 'OK',
-    cancel: 'Cancel',
+    itemsSelected: '{0} kiválasztva',
     range: {
-      title: 'Select dates',
-      header: 'Enter dates',
+      title: 'Válassza ki a dátumokat',
+      header: 'Adja meg a dátumokat',
     },
-    title: 'Select date',
-    header: 'Enter date',
+    title: 'Válassza ki a dátumot',
+    header: 'Adja meg a dátumot',
     input: {
-      placeholder: 'Enter date',
+      placeholder: 'Adja meg a dátumot',
     },
   },
   noDataText: 'Nincs elérhető adat',
@@ -53,20 +57,27 @@ export default {
   },
   calendar: {
     moreEvents: '{0} további',
+    today: 'Ma',
   },
   input: {
-    clear: 'Clear {0}',
-    prependAction: '{0} prepended action',
-    appendAction: '{0} appended action',
-    otp: 'Please enter OTP character {0}',
+    clear: 'Törlés {0}',
+    prependAction: '{0} előrehozott művelet',
+    appendAction: '{0} hozzáadott művelet',
+    otp: 'Kérjük, adja meg az OTP karaktert: {0}',
   },
   fileInput: {
     counter: '{0} fájl',
     counterSize: '{0} fájl ({1} összesen)',
   },
+  fileUpload: {
+    title: 'Húzza ide a fájlokat',
+    divider: 'vagy',
+    browse: 'Tallózás',
+  },
   timePicker: {
     am: 'de',
     pm: 'du',
+    title: 'Válassza ki az időpontot',
   },
   pagination: {
     ariaLabel: {
@@ -75,22 +86,35 @@ export default {
       previous: 'Előző oldal',
       page: 'Menj a(z) {0}. oldalra',
       currentPage: 'Aktuális oldal: {0}',
-      first: 'First page',
-      last: 'Last page',
+      first: 'Első oldal',
+      last: 'Utolsó oldal',
     },
   },
   stepper: {
-    next: 'Next',
-    prev: 'Previous',
+    next: 'Következő',
+    prev: 'Előző',
   },
   rating: {
     ariaLabel: {
-      item: 'Rating {0} of {1}',
+      item: 'Értékelés: {0} / {1}',
     },
   },
-  loading: 'Loading...',
+  loading: 'Betöltés...',
   infiniteScroll: {
-    loadMore: 'Load more',
-    empty: 'No more',
+    loadMore: 'Továbbiak betöltése',
+    empty: 'Nincsen több',
+  },
+  rules: {
+    required: 'Ez a mező kötelező',
+    email: 'Kérlek, adj meg egy érvényes e-mail címet',
+    number: 'Ez a mező csak számokat tartalmazhat',
+    integer: 'Ez a mező csak egész számokat tartalmazhat',
+    capital: 'Ez a mező csak nagybetűket tartalmazhat',
+    maxLength: 'Maximum {0} karaktert adhatsz meg',
+    minLength: 'Minimum {0} karaktert kell megadnod',
+    strictLength: 'A megadott mező hossza érvénytelen',
+    exclude: 'A(z) {0} karakter nem engedélyezett',
+    notEmpty: 'Kérlek, válassz legalább egy értéket',
+    pattern: 'Érvénytelen formátum',
   },
 }

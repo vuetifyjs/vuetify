@@ -22,17 +22,17 @@
 
     <v-select
       v-model="select.value.value"
-      :items="items"
       :error-messages="select.errorMessage.value"
+      :items="items"
       label="Select"
     ></v-select>
 
     <v-checkbox
       v-model="checkbox.value.value"
       :error-messages="checkbox.errorMessage.value"
-      value="1"
       label="Option"
       type="checkbox"
+      value="1"
     ></v-checkbox>
 
     <v-btn
@@ -60,9 +60,9 @@
         return 'Name needs to be at least 2 characters.'
       },
       phone (value) {
-        if (value?.length > 9 && /[0-9-]+/.test(value)) return true
+        if (/^[0-9-]{7,}$/.test(value)) return true
 
-        return 'Phone number needs to be at least 9 digits.'
+        return 'Phone number needs to be at least 7 digits.'
       },
       email (value) {
         if (/^[a-z.-]+@[a-z.-]+\.[a-z]+$/i.test(value)) return true

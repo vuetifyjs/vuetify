@@ -1,0 +1,18 @@
+{
+  "props": {
+    "disableSort": "Toggles rendering of sort button.",
+    "sortAscIcon": "Icon used for ascending sort button.",
+    "sortDescIcon": "Icon used for descending sort button.",
+    "sticky": "Deprecated, use `fixed-header` instead.",
+    "fixedHeader": "Sticks the header to the top of the table.",
+    "multiSort": "Sort on multiple columns at the same time.",
+    "headerProps": "Additional props to be be passed to the default header"
+  },
+  "slots": {
+    "[`column.${string}`]": "Slot for custom rendering of a column.",
+    "[`header.${string}`]": "Slot for custom rendering of a header cell.",
+    "header.data-table-expand": "Slot for the expand button in the header.",
+    "header.data-table-select": "Slot for the select-all checkbox in the header.",
+    "headers": "Slot to replace the default rendering of the `<thead>` element."
+  }
+}

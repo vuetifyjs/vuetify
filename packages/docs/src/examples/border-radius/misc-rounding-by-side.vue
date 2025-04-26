@@ -1,19 +1,33 @@
 <template>
-  <div class="d-flex justify-space-around">
-    <div class="pa-4 bg-secondary rounded-t-xl">
-      .rounded-t-xl
-    </div>
+  <v-container>
+    <v-row justify="space-around">
+      <v-col cols="auto">
+        <div class="text-center">
+          <div class="bg-surface-variant rounded-t-lg mx-auto" style="height: 64px; width: 64px;"></div>
+          <div class="text-caption">rounded-t-lg</div>
+        </div>
+      </v-col>
 
-    <div class="pa-4 bg-secondary rounded-b-xl">
-      .rounded-b-xl
-    </div>
+      <v-col cols="auto">
+        <div class="text-center">
+          <div class="bg-surface-variant rounded-e-lg mx-auto" style="height: 64px; width: 64px;"></div>
+          <div class="text-caption">rounded-e-lg</div>
+        </div>
+      </v-col>
 
-    <div class="pa-4 bg-secondary rounded-s-xl">
-      .rounded-s-xl
-    </div>
+      <v-col cols="auto">
+        <div class="text-center">
+          <div class="bg-surface-variant rounded-b-lg mx-auto" style="height: 64px; width: 64px;"></div>
+          <div class="text-caption">rounded-b-lg</div>
+        </div>
+      </v-col>
 
-    <div class="pa-4 bg-secondary rounded-e-xl">
-      .rounded-e-xl
-    </div>
-  </div>
+      <v-col cols="auto">
+        <div class="text-center">
+          <div class="bg-surface-variant rounded-s-lg mx-auto" style="height: 64px; width: 64px;"></div>
+          <div class="text-caption">rounded-s-lg</div>
+        </div>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>

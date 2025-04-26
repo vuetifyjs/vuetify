@@ -2,19 +2,19 @@
   <v-app id="inspire">
     <v-app-bar
       class="px-3"
-      flat
       density="compact"
+      flat
     >
       <v-avatar
-        color="grey-darken-1"
         class="hidden-md-and-up"
+        color="grey-darken-1"
         size="32"
       ></v-avatar>
 
       <v-spacer></v-spacer>
 
       <v-tabs
-        centered
+        align-tabs="center"
         color="grey-darken-2"
       >
         <v-tab
@@ -40,8 +40,8 @@
             md="2"
           >
             <v-sheet
-              rounded="lg"
               min-height="268"
+              rounded="lg"
             >
               <!--  -->
             </v-sheet>
@@ -64,8 +64,8 @@
             md="2"
           >
             <v-sheet
-              rounded="lg"
               min-height="268"
+              rounded="lg"
             >
               <!--  -->
             </v-sheet>

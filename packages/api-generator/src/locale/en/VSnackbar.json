@@ -11,11 +11,12 @@
     "actions": "Used to bind styles to [v-btn](/components/buttons) to match MD2 specification."
   },
   "exposed": {
-    "activatorEl": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-snackbar.json))",
-    "animateClick": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-snackbar.json))",
-    "contentEl": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-snackbar.json))",
-    "globalTop": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-snackbar.json))",
-    "localTop": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-snackbar.json))",
-    "updateLocation": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-snackbar.json))"
+    "activatorEl": "Ref to the current activator element.",
+    "animateClick": "Function invoked when user clicks outside.",
+    "contentEl": "Ref to the current content element.",
+    "globalTop": "Used by activator to determine a components position in the global stack order.",
+    "localTop": "Used by activator to determine a components position in the local stack order.",
+    "scrimEl": "Ref to the current scrim element.",
+    "updateLocation": "Function used for locationStrategy positioning."
   }
 }

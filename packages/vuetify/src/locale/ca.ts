@@ -1,7 +1,12 @@
 export default {
   badge: 'Insígnia',
-  open: 'Open',
+  open: 'Obrir',
   close: 'Tancar',
+  dismiss: 'Descartar',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'Cancel·lar',
+  },
   dataIterator: {
     noResultsText: 'Sense dades per mostrar',
     loadingText: 'Carregant...',
@@ -28,19 +33,18 @@ export default {
     pageText: '{0}-{1} de {2}',
   },
   dateRangeInput: {
-    divider: 'to',
+    divider: 'fins a',
   },
   datePicker: {
-    ok: 'OK',
-    cancel: 'Cancel',
+    itemsSelected: '{0} seleccionats',
     range: {
-      title: 'Select dates',
-      header: 'Enter dates',
+      title: 'Selecciona dates',
+      header: 'Introdueix les dates',
     },
-    title: 'Select date',
-    header: 'Enter date',
+    title: 'Selecciona data',
+    header: 'Introdueix la data',
     input: {
-      placeholder: 'Enter date',
+      placeholder: 'Introdueix la data',
     },
   },
   noDataText: 'Sense dades',
@@ -48,25 +52,32 @@ export default {
     prev: 'Visualització prèvia',
     next: 'Visualització següent',
     ariaLabel: {
-      delimiter: 'Diapositiva {0} of {1}',
+      delimiter: 'Diapositiva {0} de {1}',
     },
   },
   calendar: {
     moreEvents: '{0} més',
+    today: 'Avui',
   },
   input: {
-    clear: 'Clear {0}',
-    prependAction: '{0} prepended action',
-    appendAction: '{0} appended action',
-    otp: 'Please enter OTP character {0}',
+    clear: 'Esborra {0}',
+    prependAction: 'Acció prefixada {0}',
+    appendAction: 'Acció afegida {0}',
+    otp: 'Si us plau, introdueix el caràcter OTP {0}',
   },
   fileInput: {
     counter: '{0} fitxers',
     counterSize: '{0} fitxers ({1} en total)',
   },
+  fileUpload: {
+    title: 'Arrossega i deixa anar els fitxers aquí',
+    divider: 'o',
+    browse: 'Explora fitxers',
+  },
   timePicker: {
     am: 'AM',
     pm: 'PM',
+    title: 'Selecciona l’hora',
   },
   pagination: {
     ariaLabel: {
@@ -80,17 +91,30 @@ export default {
     },
   },
   stepper: {
-    next: 'Next',
-    prev: 'Previous',
+    next: 'Següent',
+    prev: 'Anterior',
   },
   rating: {
     ariaLabel: {
       item: 'Puntuació {0} de {1}',
     },
   },
-  loading: 'Loading...',
+  loading: 'Carregant...',
   infiniteScroll: {
-    loadMore: 'Load more',
-    empty: 'No more',
+    loadMore: 'Carrega més',
+    empty: 'No hi ha més',
+  },
+  rules: {
+    required: 'Aquest camp és obligatori',
+    email: 'Si us plau, introdueix un correu electrònic vàlid',
+    number: 'Aquest camp només pot contenir números',
+    integer: 'Aquest camp només pot contenir valors enters',
+    capital: 'Aquest camp només pot contenir lletres majúscules',
+    maxLength: 'Has d’introduir un màxim de {0} caràcters',
+    minLength: 'Has d’introduir un mínim de {0} caràcters',
+    strictLength: 'La longitud del camp introduït no és vàlida',
+    exclude: 'El caràcter {0} no està permès',
+    notEmpty: 'Si us plau, tria almenys un valor',
+    pattern: 'Format no vàlid',
   },
 }

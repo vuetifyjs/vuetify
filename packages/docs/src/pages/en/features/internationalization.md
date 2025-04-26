@@ -7,15 +7,21 @@ related:
   - /features/accessibility/
   - /components/locale-providers/
   - /getting-started/browser-support/
+features:
+  github: /composables/locale.ts
+  label: 'i18n'
+  report: true
 ---
 
 # Internationalization (i18n)
 
 Vuetify supports language Internationalization (i18n) of its components.
 
-<entry />
+<PageFeatures />
 
-When bootstrapping your application you can specify available locales and the default locale with the **defaultLocale** option. The **locale** service also supports easy integration with [vue-i18n](https://kazupon.github.io/vue-i18n/). Using a locale that has an RTL (right-to-left) language also affects the directionality of the Vuetify components.
+<PromotedEntry />
+
+When bootstrapping your application you can specify available locales and the default locale with the **defaultLocale** option. The **locale** service also supports easy integration with [vue-i18n](https://vue-i18n.intlify.dev/). Using a locale that has an RTL (right-to-left) language also affects the directionality of the Vuetify components.
 
 ## Getting started
 
@@ -78,10 +84,10 @@ If you are still using the Options API, you can access the locale settings on `t
 
 | Feature | Description |
 | - | - |
-| [useLocale](/api/use-locale/) | The locale composable is used
+| [useLocale](/api/use-locale/) | The locale composable is used |
 | [v-locale-provider](/api/v-locale-provider/) | The locale provider component is used to scope a portion of your application to a different locale than the default one |
 
-<api-inline hide-links />
+<ApiInline hide-links />
 
 ## Scoped languages
 
@@ -162,7 +168,7 @@ If you are building custom Vuetify components that need to hook into the locale 
 ```
 
 ::: warning
-  The Vuetify locale service only provides a basic translation function `t`, and should really only be used for internal or custom Vuetify components. It is recommended that you use a proper i18n library such as [vue-i18n](https://kazupon.github.io/vue-i18n/) in your own application. Vuetify does provide support for integrating with other libraries.
+  The Vuetify locale service only provides a basic translation function `t`, and should really only be used for internal or custom Vuetify components. It is recommended that you use a proper i18n library such as [vue-i18n](https://vue-i18n.intlify.dev/) in your own application. Vuetify does provide support for integrating with other libraries.
 :::
 
 ## vue-i18n
@@ -174,10 +180,12 @@ import { createApp } from 'vue'
 import { createVuetify } from 'vuetify'
 import { createVueI18nAdapter } from 'vuetify/locale/adapters/vue-i18n'
 import { createI18n, useI18n } from 'vue-i18n'
+import { en, sv } from 'vuetify/locale'
 
 const messages = {
   en: {
     $vuetify: {
+      ...en,
       dataIterator: {
         rowsPerPageText: 'Items per page:',
         pageText: '{0}-{1} of {2}',
@@ -186,6 +194,7 @@ const messages = {
   },
   sv: {
     $vuetify: {
+      ...sv,
       dataIterator: {
         rowsPerPageText: 'Element per sida:',
         pageText: '{0}-{1} av {2}',
@@ -194,7 +203,7 @@ const messages = {
   },
 }
 
-const i18n = new createI18n({
+const i18n = createI18n({
   legacy: false, // Vuetify does not support the legacy mode of vue-i18n
   locale: 'sv',
   fallbackLocale: 'en',
@@ -241,6 +250,7 @@ Currently Vuetify provides translations in the following languages:
 - **id** - Indonesian (Indonesian)
 - **it** - Italian (Italiano)
 - **ja** - Japanese (日本語)
+- **km** - Khmer (ខ្មែរ)
 - **ko** - Korean (한국어)
 - **lt** - Lithuanian (lietuvių kalba)
 - **lv** - Latvian (latviešu valoda)

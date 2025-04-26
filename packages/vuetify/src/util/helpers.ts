@@ -1,5 +1,5 @@
 // Utilities
-import { camelize, capitalize, computed, Fragment, reactive, toRefs, watchEffect } from 'vue'
+import { capitalize, Comment, computed, Fragment, isVNode, reactive, shallowRef, toRefs, unref, watchEffect } from 'vue'
 import { IN_BROWSER } from '@/util/globals'
 
 // Types
@@ -10,9 +10,9 @@ import type {
   InjectionKey,
   PropType,
   Ref,
-  Slots,
   ToRefs,
   VNode,
+  VNodeArrayChildren,
   VNodeChild,
 } from 'vue'
 
@@ -60,7 +60,7 @@ export function deepEqual (a: any, b: any): boolean {
   return props.every(p => deepEqual(a[p], b[p]))
 }
 
-export function getObjectValueByPath (obj: any, path: string, fallback?: any): any {
+export function getObjectValueByPath (obj: any, path?: string | null, fallback?: any): any {
   // credit: http://stackoverflow.com/questions/6491463/accessing-nested-javascript-objects-with-string-key#comment55278413_6491621
   if (obj == null || !path || typeof path !== 'string') return fallback
   if (obj[path] !== undefined) return obj[path]
@@ -69,18 +69,20 @@ export function getObjectValueByPath (obj: any, path: string, fallback?: any): a
   return getNestedValue(obj, path.split('.'), fallback)
 }
 
-export type SelectItemKey =
-  | boolean // Ignored
+export type SelectItemKey<T = Record<string, any>> =
+  | boolean | null | undefined // Ignored
   | string // Lookup by key, can use dot notation for nested objects
-  | (string | number)[] // Nested lookup by key, each array item is a key in the next level
-  | ((item: Record<string, any>, fallback?: any) => any)
+  | readonly (string | number)[] // Nested lookup by key, each array item is a key in the next level
+  | ((item: T, fallback?: any) => any)
 
 export function getPropertyFromItem (
   item: any,
   property: SelectItemKey,
   fallback?: any
 ): any {
-  if (property == null) return item === undefined ? fallback : item
+  if (property === true) return item === undefined ? fallback : item
+
+  if (property == null || typeof property === 'boolean') return fallback
 
   if (item !== Object(item)) {
     if (typeof property !== 'function') return fallback
@@ -108,7 +110,7 @@ export function createRange (length: number, start = 0): number[] {
 export function getZIndex (el?: Element | null): number {
   if (!el || el.nodeType !== Node.ELEMENT_NODE) return 0
 
-  const index = +window.getComputedStyle(el).getPropertyValue('z-index')
+  const index = Number(window.getComputedStyle(el).getPropertyValue('z-index'))
 
   if (!index) return getZIndex(el.parentNode as Element)
   return index
@@ -119,17 +121,27 @@ export function convertToUnit (str: string | number | null | undefined, unit?: s
 export function convertToUnit (str: string | number | null | undefined, unit = 'px'): string | undefined {
   if (str == null || str === '') {
     return undefined
-  } else if (isNaN(+str!)) {
+  }
+  const num = Number(str)
+  if (isNaN(num)) {
     return String(str)
-  } else if (!isFinite(+str!)) {
+  } else if (!isFinite(num)) {
     return undefined
   } else {
-    return `${Number(str)}${unit}`
+    return `${num}${unit}`
   }
 }
 
-export function isObject (obj: any): obj is object {
+export function isObject (obj: any): obj is Record<string, any> {
   return obj !== null && typeof obj === 'object' && !Array.isArray(obj)
+}
+
+export function isPlainObject (obj: any): obj is Record<string, any> {
+  let proto
+  return obj !== null && typeof obj === 'object' && (
+    (proto = Object.getPrototypeOf(obj)) === Object.prototype ||
+    proto === null
+  )
 }
 
 export function refElement (obj?: ComponentPublicInstance<any> | HTMLElement): HTMLElement | undefined {
@@ -201,16 +213,32 @@ type MaybePick<
 // Array of keys
 export function pick<
   T extends object,
+  U extends Extract<keyof T, string>
+> (obj: T, paths: U[]): MaybePick<T, U> {
+  const found: any = {}
+
+  for (const key of paths) {
+    if (Object.prototype.hasOwnProperty.call(obj, key)) {
+      found[key] = obj[key]
+    }
+  }
+
+  return found
+}
+
+// Array of keys
+export function pickWithRest<
+  T extends object,
   U extends Extract<keyof T, string>,
   E extends Extract<keyof T, string>
 > (obj: T, paths: U[], exclude?: E[]): [yes: MaybePick<T, Exclude<U, E>>, no: Omit<T, Exclude<U, E>>]
 // Array of keys or RegExp to test keys against
-export function pick<
+export function pickWithRest<
   T extends object,
   U extends Extract<keyof T, string>,
   E extends Extract<keyof T, string>
 > (obj: T, paths: (U | RegExp)[], exclude?: E[]): [yes: Partial<T>, no: Partial<T>]
-export function pick<
+export function pickWithRest<
   T extends object,
   U extends Extract<keyof T, string>,
   E extends Extract<keyof T, string>
@@ -241,17 +269,6 @@ export function omit<
   const clone = { ...obj }
 
   exclude.forEach(prop => delete clone[prop])
-
-  return clone
-}
-
-export function only<
-  T extends object,
-  U extends Extract<keyof T, string>
-> (obj: T, include: U[]): Pick<T, U> {
-  const clone = {} as T
-
-  include.forEach(prop => clone[prop] = obj[prop])
 
   return clone
 }
@@ -319,15 +336,30 @@ const bubblingEvents = [
   'onWheel',
 ]
 
+const compositionIgnoreKeys = [
+  'ArrowUp',
+  'ArrowDown',
+  'ArrowRight',
+  'ArrowLeft',
+  'Enter',
+  'Escape',
+  'Tab',
+  ' ',
+]
+
+export function isComposingIgnoreKey (e: KeyboardEvent): boolean {
+  return e.isComposing && compositionIgnoreKeys.includes(e.key)
+}
+
 /**
  * Filter attributes that should be applied to
  * the root element of an input component. Remaining
  * attributes should be passed to the <input> element inside.
  */
 export function filterInputAttrs (attrs: Record<string, unknown>) {
-  const [events, props] = pick(attrs, [onRE])
+  const [events, props] = pickWithRest(attrs, [onRE])
   const inputEvents = omit(events, bubblingEvents)
-  const [rootAttrs, inputAttrs] = pick(props, ['class', 'style', 'id', /^data-/])
+  const [rootAttrs, inputAttrs] = pickWithRest(props, ['class', 'style', 'id', /^data-/])
   Object.assign(rootAttrs, events)
   Object.assign(inputAttrs, inputEvents)
   return [rootAttrs, inputAttrs]
@@ -363,20 +395,17 @@ export function defaultFilter (value: any, search: string | null, item: any) {
     value.toString().toLocaleLowerCase().indexOf(search.toLocaleLowerCase()) !== -1
 }
 
-export function searchItems<T extends any = any> (items: T[], search: string): T[] {
-  if (!search) return items
-  search = search.toString().toLowerCase()
-  if (search.trim() === '') return items
-
-  return items.filter((item: any) => Object.keys(item).some(key => defaultFilter(getObjectValueByPath(item, key), search, item)))
-}
-
-export function debounce (fn: Function, delay: number) {
+export function debounce (fn: Function, delay: MaybeRef<number>) {
   let timeoutId = 0 as any
-  return (...args: any[]) => {
+  const wrap = (...args: any[]) => {
     clearTimeout(timeoutId)
-    timeoutId = setTimeout(() => fn(...args), delay)
+    timeoutId = setTimeout(() => fn(...args), unref(delay))
   }
+  wrap.clear = () => {
+    clearTimeout(timeoutId)
+  }
+  wrap.immediate = fn
+  return wrap
 }
 
 export function throttle<T extends (...args: any[]) => any> (fn: T, limit: number) {
@@ -388,22 +417,6 @@ export function throttle<T extends (...args: any[]) => any> (fn: T, limit: numbe
       return fn(...args)
     }
   }
-}
-
-type Writable<T> = {
-  -readonly [P in keyof T]: T[P]
-}
-
-/**
- * Filters slots to only those starting with `prefix`, removing the prefix
- */
-export function getPrefixedSlots (prefix: string, slots: Slots): Slots {
-  return Object.keys(slots)
-    .filter(k => k.startsWith(prefix))
-    .reduce<Writable<Slots>>((obj, k) => {
-      obj[k.replace(prefix, '')] = slots[k]
-      return obj
-    }, {})
 }
 
 export function clamp (value: number, min = 0, max = 1) {
@@ -435,6 +448,12 @@ export function chunk (str: string, size = 1) {
   return chunked
 }
 
+export function chunkArray (array: any[], size = 1) {
+  return Array.from({ length: Math.ceil(array.length / size) }, (v, i) =>
+    array.slice(i * size, i * size + size)
+  )
+}
+
 export function humanReadableFileSize (bytes: number, base: 1000 | 1024 = 1000): string {
   if (bytes < base) {
     return `${bytes} B`
@@ -447,15 +466,6 @@ export function humanReadableFileSize (bytes: number, base: 1000 | 1024 = 1000):
     ++unit
   }
   return `${bytes.toFixed(1)} ${prefix[unit]}B`
-}
-
-export function camelizeObjectKeys (obj: Record<string, any> | null | undefined) {
-  if (!obj) return {}
-
-  return Object.keys(obj).reduce((o: any, key: string) => {
-    o[camelize(key)] = obj[key]
-    return o
-  }, {})
 }
 
 export function mergeDeep (
@@ -474,17 +484,14 @@ export function mergeDeep (
     const targetProperty = target[key]
 
     // Only continue deep merging if
-    // both properties are objects
-    if (
-      isObject(sourceProperty) &&
-      isObject(targetProperty)
-    ) {
+    // both properties are plain objects
+    if (isPlainObject(sourceProperty) && isPlainObject(targetProperty)) {
       out[key] = mergeDeep(sourceProperty, targetProperty, arrayFn)
 
       continue
     }
 
-    if (Array.isArray(sourceProperty) && Array.isArray(targetProperty) && arrayFn) {
+    if (arrayFn && Array.isArray(sourceProperty) && Array.isArray(targetProperty)) {
       out[key] = arrayFn(sourceProperty, targetProperty)
 
       continue
@@ -496,10 +503,6 @@ export function mergeDeep (
   return out
 }
 
-export function fillArray<T> (length: number, obj: T) {
-  return Array(length).fill(obj)
-}
-
 export function flattenFragments (nodes: VNode[]): VNode[] {
   return nodes.map(node => {
     if (node.type === Fragment) {
@@ -508,11 +511,6 @@ export function flattenFragments (nodes: VNode[]): VNode[] {
       return node
     }
   }).flat()
-}
-
-export const randomHexColor = () => {
-  const n = (Math.random() * 0xfffff * 1000000).toString(16)
-  return '#' + n.slice(0, 6)
 }
 
 export function toKebabCase (str = '') {
@@ -528,30 +526,6 @@ toKebabCase.cache = new Map<string, string>()
 
 export type MaybeRef<T> = T | Ref<T>
 
-export function findChildren (vnode?: VNodeChild): ComponentInternalInstance[] {
-  if (!vnode || typeof vnode !== 'object') {
-    return []
-  }
-
-  if (Array.isArray(vnode)) {
-    return vnode
-      .map(child => findChildren(child))
-      .filter(v => v)
-      .flat(1)
-  } else if (Array.isArray(vnode.children)) {
-    return vnode.children
-      .map(child => findChildren(child))
-      .filter(v => v)
-      .flat(1)
-  } else if (vnode.component) {
-    return [vnode.component, ...findChildren(vnode.component?.subTree)]
-      .filter(v => v)
-      .flat(1)
-  }
-
-  return []
-}
-
 export function findChildrenWithProvide (
   key: InjectionKey<any> | symbol,
   vnode?: VNodeChild,
@@ -560,6 +534,8 @@ export function findChildrenWithProvide (
 
   if (Array.isArray(vnode)) {
     return vnode.map(child => findChildrenWithProvide(key, child)).flat(1)
+  } else if (vnode.suspense) {
+    return findChildrenWithProvide(key, vnode.ssContent!)
   } else if (Array.isArray(vnode.children)) {
     return vnode.children.map(child => findChildrenWithProvide(key, child)).flat(1)
   } else if (vnode.component) {
@@ -629,7 +605,8 @@ export function eventName (propName: string) {
   return propName[2].toLowerCase() + propName.slice(3)
 }
 
-export type EventProp<T extends any[] = any[], F = (...args: T) => any> = F | F[]
+// TODO: this should be an array but vue's types don't accept arrays: vuejs/core#8025
+export type EventProp<T extends any[] = any[], F = (...args: T) => void> = F
 export const EventProp = <T extends any[] = any[]>() => [Function, Array] as PropType<EventProp<T>>
 
 export function hasEvent (props: Record<string, any>, name: string) {
@@ -637,7 +614,7 @@ export function hasEvent (props: Record<string, any>, name: string) {
   return !!(props[name] || props[`${name}Once`] || props[`${name}Capture`] || props[`${name}OnceCapture`] || props[`${name}CaptureOnce`])
 }
 
-export function callEvent<T extends any[]> (handler: EventProp<T> | undefined, ...args: T) {
+export function callEvent<T extends any[]> (handler: EventProp<T> | EventProp<T>[] | undefined, ...args: T) {
   if (Array.isArray(handler)) {
     for (const h of handler) {
       h(...args)
@@ -705,4 +682,74 @@ export function matchesSelector (el: Element | undefined, selector: string): boo
   } catch (err) {
     return null
   }
+}
+
+export function ensureValidVNode (vnodes: VNodeArrayChildren): VNodeArrayChildren | null {
+  return vnodes.some(child => {
+    if (!isVNode(child)) return true
+    if (child.type === Comment) return false
+    return child.type !== Fragment ||
+      ensureValidVNode(child.children as VNodeArrayChildren)
+  })
+    ? vnodes
+    : null
+}
+
+export function defer (timeout: number, cb: () => void) {
+  if (!IN_BROWSER || timeout === 0) {
+    cb()
+
+    return () => {}
+  }
+
+  const timeoutId = window.setTimeout(cb, timeout)
+
+  return () => window.clearTimeout(timeoutId)
+}
+
+export function isClickInsideElement (event: MouseEvent, targetDiv: HTMLElement) {
+  const mouseX = event.clientX
+  const mouseY = event.clientY
+
+  const divRect = targetDiv.getBoundingClientRect()
+  const divLeft = divRect.left
+  const divTop = divRect.top
+  const divRight = divRect.right
+  const divBottom = divRect.bottom
+
+  return mouseX >= divLeft && mouseX <= divRight && mouseY >= divTop && mouseY <= divBottom
+}
+
+export type TemplateRef = {
+  (target: Element | ComponentPublicInstance | null): void
+  value: HTMLElement | ComponentPublicInstance | null | undefined
+  readonly el: HTMLElement | undefined
+}
+export function templateRef () {
+  const el = shallowRef<HTMLElement | ComponentPublicInstance | null>()
+  const fn = (target: HTMLElement | ComponentPublicInstance | null) => {
+    el.value = target
+  }
+  Object.defineProperty(fn, 'value', {
+    enumerable: true,
+    get: () => el.value,
+    set: val => el.value = val,
+  })
+  Object.defineProperty(fn, 'el', {
+    enumerable: true,
+    get: () => refElement(el.value),
+  })
+
+  return fn as TemplateRef
+}
+
+export function checkPrintable (e: KeyboardEvent) {
+  const isPrintableChar = e.key.length === 1
+  const noModifier = !e.ctrlKey && !e.metaKey && !e.altKey
+  return isPrintableChar && noModifier
+}
+
+export type Primitive = string | number | boolean | symbol | bigint
+export function isPrimitive (value: unknown): value is Primitive {
+  return typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean' || typeof value === 'bigint'
 }

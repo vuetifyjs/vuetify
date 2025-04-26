@@ -1,9 +1,9 @@
 <template>
-  <usage-example
+  <ExamplesUsageExample
     v-model="model"
     :code="code"
-    :options="options"
     :name="name"
+    :options="options"
   >
     <div>
       <v-banner
@@ -41,14 +41,10 @@
 
       <v-checkbox v-if="actions" v-model="stacked" label="Stacked"></v-checkbox>
     </template>
-  </usage-example>
+  </ExamplesUsageExample>
 </template>
 
 <script setup>
-  // Utilities
-  import { computed, ref } from 'vue'
-  import { propsToString } from '@/util/helpers'
-
   const name = 'v-banner'
   const model = ref('default')
   const options = ['One line', 'Two lines', 'Three lines']

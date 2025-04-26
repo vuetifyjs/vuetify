@@ -1,7 +1,12 @@
 export default {
   badge: 'Badge',
-  open: 'Open',
+  open: 'Ouvrir',
   close: 'Fermer',
+  dismiss: 'Ignorer',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'Annuler',
+  },
   dataIterator: {
     noResultsText: 'Aucun enregistrement correspondant trouvé',
     loadingText: `Chargement de l'élément...`,
@@ -19,7 +24,7 @@ export default {
     sortBy: 'Trier par',
   },
   dataFooter: {
-    itemsPerPageText: 'Élements par page :',
+    itemsPerPageText: 'Éléments par page :',
     itemsPerPageAll: 'Tous',
     nextPage: 'Page suivante',
     prevPage: 'Page précédente',
@@ -28,19 +33,18 @@ export default {
     pageText: '{0}-{1} de {2}',
   },
   dateRangeInput: {
-    divider: 'to',
+    divider: 'à',
   },
   datePicker: {
-    ok: 'OK',
-    cancel: 'Cancel',
+    itemsSelected: '{0} sélectionné(s)',
     range: {
-      title: 'Select dates',
-      header: 'Enter dates',
+      title: 'Sélectionner des dates',
+      header: 'Entrer des dates',
     },
-    title: 'Select date',
-    header: 'Enter date',
+    title: 'Sélectionner une date',
+    header: 'Entrer une date',
     input: {
-      placeholder: 'Enter date',
+      placeholder: 'Entrer une date',
     },
   },
   noDataText: 'Aucune donnée disponible',
@@ -53,20 +57,27 @@ export default {
   },
   calendar: {
     moreEvents: '{0} de plus',
+    today: 'Aujourd\'hui',
   },
   input: {
-    clear: 'Clear {0}',
-    prependAction: '{0} prepended action',
-    appendAction: '{0} appended action',
-    otp: 'Please enter OTP character {0}',
+    clear: 'Vider {0}',
+    prependAction: '{0} action avant',
+    appendAction: '{0} action après',
+    otp: 'Caractère {0} du mot de passe à usage unique',
   },
   fileInput: {
     counter: '{0} fichier(s)',
     counterSize: '{0} fichier(s) ({1} au total)',
   },
+  fileUpload: {
+    title: 'Glissez-déposez des fichiers ici',
+    divider: 'ou',
+    browse: 'Parcourir les fichiers',
+  },
   timePicker: {
     am: 'AM',
     pm: 'PM',
+    title: 'Sélectionner une heure',
   },
   pagination: {
     ariaLabel: {
@@ -75,22 +86,35 @@ export default {
       previous: 'Page précédente',
       page: 'Aller à la page {0}',
       currentPage: 'Page actuelle, Page {0}',
-      first: 'First page',
-      last: 'Last page',
+      first: 'Première page',
+      last: 'Dernière page',
     },
   },
   stepper: {
-    next: 'Next',
-    prev: 'Previous',
+    next: 'Suivant',
+    prev: 'Précédent',
   },
   rating: {
     ariaLabel: {
       item: 'Note de {0} sur {1}',
     },
   },
-  loading: 'Loading...',
+  loading: 'Chargement...',
   infiniteScroll: {
-    loadMore: 'Load more',
-    empty: 'No more',
+    loadMore: 'Charger plus',
+    empty: 'Aucune donnée supplémentaire',
+  },
+  rules: {
+    required: 'Ce champ est requis',
+    email: 'Veuillez entrer une adresse email valide',
+    number: 'Ce champ ne peut contenir que des chiffres',
+    integer: 'Ce champ ne peut contenir que des valeurs entières',
+    capital: 'Ce champ ne peut contenir que des lettres majuscules',
+    maxLength: 'Vous devez entrer un maximum de {0} caractères',
+    minLength: 'Vous devez entrer un minimum de {0} caractères',
+    strictLength: 'La longueur du champ entré est invalide',
+    exclude: 'Le caractère {0} n’est pas autorisé',
+    notEmpty: 'Veuillez choisir au moins une valeur',
+    pattern: 'Format invalide',
   },
 }

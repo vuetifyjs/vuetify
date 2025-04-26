@@ -1,7 +1,12 @@
 export default {
   badge: 'Ženklelis',
-  open: 'Open',
+  open: 'Atidaryti',
   close: 'Uždaryti',
+  dismiss: 'Atmesti',
+  confirmEdit: {
+    ok: 'Gerai',
+    cancel: 'Atšaukti',
+  },
   dataIterator: {
     noResultsText: 'Nerasta atitinkančių įrašų',
     loadingText: 'Kraunama...',
@@ -16,7 +21,7 @@ export default {
       activateDescending: 'Suaktyvinkite, jei norite rikiuoti mažėjimo tvarka.',
       activateAscending: 'Suaktyvinkite, jei norite rikiuoti didėjimo tvarka.',
     },
-    sortBy: 'Sort by',
+    sortBy: 'Rikiuoti pagal',
   },
   dataFooter: {
     itemsPerPageText: 'Įrašai per puslapį:',
@@ -28,19 +33,18 @@ export default {
     pageText: '{0}-{1} iš {2}',
   },
   dateRangeInput: {
-    divider: 'to',
+    divider: 'iki',
   },
   datePicker: {
-    ok: 'OK',
-    cancel: 'Cancel',
+    itemsSelected: '{0} parinkta',
     range: {
-      title: 'Select dates',
-      header: 'Enter dates',
+      title: 'Pasirinkite datas',
+      header: 'Įveskite datas',
     },
-    title: 'Select date',
-    header: 'Enter date',
+    title: 'Pasirinkite datą',
+    header: 'Įveskite datą',
     input: {
-      placeholder: 'Enter date',
+      placeholder: 'Įveskite datą',
     },
   },
   noDataText: 'Nėra duomenų',
@@ -48,25 +52,32 @@ export default {
     prev: 'Ankstesnioji skaidrė',
     next: 'Kita skaidrė',
     ariaLabel: {
-      delimiter: 'Carousel slide {0} of {1}',
+      delimiter: 'Skaidrė {0} iš {1}',
     },
   },
   calendar: {
     moreEvents: 'Daugiau {0}',
+    today: 'Šiandien',
   },
   input: {
-    clear: 'Clear {0}',
-    prependAction: '{0} prepended action',
-    appendAction: '{0} appended action',
-    otp: 'Please enter OTP character {0}',
+    clear: 'Išvalyti {0}',
+    prependAction: '{0} pridėtas veiksmas',
+    appendAction: '{0} pridėtas veiksmas',
+    otp: 'Prašome įvesti OTP simbolį {0}',
   },
   fileInput: {
     counter: '{0} failų',
     counterSize: '{0} failų ({1} iš viso)',
   },
+  fileUpload: {
+    title: 'Vilkite ir numeskite failus čia',
+    divider: 'arba',
+    browse: 'Naršyti failus',
+  },
   timePicker: {
     am: 'AM',
     pm: 'PM',
+    title: 'Pasirinkite laiką',
   },
   pagination: {
     ariaLabel: {
@@ -75,22 +86,35 @@ export default {
       previous: 'Ankstesnis puslapis',
       page: 'Eiti į puslapį {0}',
       currentPage: 'Dabartinis puslapis, puslapis {0}',
-      first: 'First page',
-      last: 'Last page',
+      first: 'Pirmas puslapis',
+      last: 'Paskutinis puslapis',
     },
   },
   stepper: {
-    next: 'Next',
-    prev: 'Previous',
+    next: 'Kitas',
+    prev: 'Ankstesnis',
   },
   rating: {
     ariaLabel: {
-      item: 'Rating {0} of {1}',
+      item: 'Įvertinimas {0} iš {1}',
     },
   },
-  loading: 'Loading...',
+  loading: 'Kraunama...',
   infiniteScroll: {
-    loadMore: 'Load more',
-    empty: 'No more',
+    loadMore: 'Užkrauti daugiau',
+    empty: 'Daugiau nėra',
+  },
+  rules: {
+    required: 'Šis laukas yra privalomas',
+    email: 'Prašome įvesti galiojantį el. pašto adresą',
+    number: 'Šiame lauke gali būti tik skaičiai',
+    integer: 'Šiame lauke gali būti tik sveiki skaičiai',
+    capital: 'Šiame lauke gali būti tik didžiosios raidės',
+    maxLength: 'Turite įvesti ne daugiau kaip {0} simbolių',
+    minLength: 'Turite įvesti bent {0} simbolius',
+    strictLength: 'Įvesto lauko ilgis yra neteisingas',
+    exclude: 'Simbolis {0} nėra leidžiamas',
+    notEmpty: 'Prašome pasirinkti bent vieną reikšmę',
+    pattern: 'Neteisingas formatas',
   },
 }

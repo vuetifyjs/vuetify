@@ -37,9 +37,11 @@ describe('VPagination', () => {
   })
 
   it('should react to keyboard navigation', () => {
-    cy.mount(defineComponent(() => {
-      const model = ref(2)
-      return () => <VPagination v-model={ model.value } length={ 3 } />
+    cy.mount(defineComponent({
+      setup () {
+        const model = ref(2)
+        return () => <VPagination v-model={ model.value } length={ 3 } />
+      },
     }))
 
     cy.get('.v-pagination__item').first().find('.v-btn').focus()
@@ -80,6 +82,10 @@ describe('VPagination', () => {
 
     // 5 buttons and 1 ellipsis
     cy.get('.v-pagination__item').should('have.length', 6)
+
+    cy.get('.v-btn').contains('4').click()
+    // 5 buttons and 2 ellipsis
+    cy.get('.v-pagination__item').should('have.length', 7)
   })
 
   it('should limit items when not enough space', () => {

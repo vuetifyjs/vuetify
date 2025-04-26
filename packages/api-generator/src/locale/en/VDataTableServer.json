@@ -1,0 +1,45 @@
+{
+  "props": {
+    "itemsLength": "Number of all items.",
+    "headerProps": "Pass props to the default header. See [`v-data-table-server` API](/api/v-data-table-server) for more information."
+  },
+  "slots": {
+    "[`header.${string}`]": "Slot for a specific header. See [`v-data-table-server` API](/api/v-data-table-server) for more information.",
+    "[`column.${string}`]": "Slot for custom rendering of a column.",
+    "[`item.${string}`]": "Slot for custom rendering of a row cell.",
+    "body": "Slot to replace the default rendering of the `<tbody>` element.",
+    "body.append": "Adds content to the empty space in the body.",
+    "body.prepend": "Adds content to the empty space in the body.",
+    "header.data-table-expand": "Slot for the expand button in the header.",
+    "header.data-table-select": "Slot for the select-all checkbox in the header.",
+    "bottom": "Slot to add content below the table.",
+    "colgroup": "Slot to replace the default rendering of the `<colgroup>` element.",
+    "column.data-table-expand": "Slot to replace the default `v-icon` used when expanding rows.",
+    "column.data-table-select": "Slot to replace the default `v-checkbox-btn` used when selecting rows.",
+    "dataTableGroup": "Slot for custom rendering of a group.",
+    "data-table-select": "Slot for custom rendering of a header cell with the select checkbox.",
+    "disableSort": "Disables sorting completely.",
+    "expanded-row": "Slot for custom rendering of an expanded row.",
+    "footer.prepend": "Adds content to the empty space in the footer.",
+    "group-header": "Slot for custom rendering of a group header.",
+    "headers": "Slot to replace the default rendering of the `<thead>` element.",
+    "item": "Slot to replace the default rendering of a row.",
+    "item.data-table-expand": "Slot to replace the default `v-icon` used when expanding rows.",
+    "item.data-table-select": "Slot to replace the default checkbox used when selecting rows.",
+    "loading": "Defines content for when `loading` is true and no items are provided.",
+    "tbody": "Slot to replace the default rendering of the `<tbody>` element.",
+    "tfoot": "Slot to replace the default rendering of the `<tfoot>` element.",
+    "thead": "Slot to replace the default rendering of the `<thead>` element.",
+    "top": "Slot to add content above the table."
+  },
+  "events": {
+    "click:row": "Emits when a table row is clicked. This event provides 2 arguments: the first is the native click event, and the second is an object containing the corresponding item for that row. **NOTE:** will not emit when table rows are defined through a slot such as `item` or `body`.",
+    "update:expanded": "Emits when the **expanded** property of the **options** prop is updated.",
+    "update:groupBy": "Emits when the **group-by** property of the **options** property is updated.",
+    "update:itemsPerPage": "Emits when the **items-per-page** property of the **options** prop is updated.",
+    "update:modelValue": "Emits when the component's model changes.",
+    "update:options": "Emits when one of the **options** properties is updated.",
+    "update:page": "Emits when the **page** property of the **options** prop is updated.",
+    "update:sortBy": "Emits when the **sort-by** property of the **options** prop is updated."
+  }
+}

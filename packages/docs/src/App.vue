@@ -1,40 +1,31 @@
 <template>
-  <v-progress-linear v-if="pwa.loading" indeterminate color="primary" height="3" class="pwa-loader" />
-  <router-view />
+  <router-view v-slot="{ Component }">
+    <v-fade-transition appear>
+      <component :is="Component" />
+    </v-fade-transition>
+  </router-view>
 </template>
 
 <script setup lang="ts">
   // Composables
-  import { useHead } from '@vueuse/head'
-  import { useI18n } from 'vue-i18n'
-  import { useRoute, useRouter } from 'vue-router'
-  import { useTheme } from 'vuetify'
-  import { useUserStore } from '@/store/user'
-  import { usePwaStore } from '@/store/pwa'
-
-  // Utilities
-  import { computed, nextTick, onBeforeMount, ref, watch, watchEffect } from 'vue'
-  import { genAppMetaInfo } from '@/util/metadata'
-  import { getMatchMedia } from '@/util/helpers'
-
-  // Globals
-  import { IN_BROWSER } from '@/util/globals'
+  import { useHead } from '@unhead/vue'
 
   const user = useUserStore()
-  const pwa = usePwaStore()
   const router = useRouter()
   const route = useRoute()
   const theme = useTheme()
   const { locale } = useI18n()
+  const auth = useAuthStore()
+  const frontmatter = useFrontmatter()
 
   const path = computed(() => route.path.replace(`/${locale.value}/`, ''))
 
   const meta = computed(() => {
     return genAppMetaInfo({
       title: `${route.meta.title}${path.value === '' ? '' : ' — Vuetify'}`,
-      description: route.meta.description,
-      keywords: route.meta.keywords,
-      assets: route.meta.assets,
+      description: frontmatter.value?.meta.description,
+      keywords: frontmatter.value?.meta.keywords,
+      assets: frontmatter.value?.assets,
     })
   })
 
@@ -60,20 +51,24 @@
     // set current route lang if root
     const currentRoute = router.currentRoute.value
     if (currentRoute.path === '/') {
-      router.replace(`/${locale.value}`)
+      const query = currentRoute.query
+      router.replace({ path: `/${locale.value}`, query })
     }
   })
 
   const systemTheme = ref('light')
   if (IN_BROWSER) {
     let media: MediaQueryList
+
+    auth.verify()
+
     watch(() => user.theme, val => {
       if (val === 'system') {
         media = getMatchMedia()!
-        media.addListener(onThemeChange)
+        media.addEventListener('change', onThemeChange)
         onThemeChange()
       } else if (media) {
-        media.removeListener(onThemeChange)
+        media.removeEventListener('change', onThemeChange)
       }
     }, { immediate: true })
     function onThemeChange () {
@@ -130,8 +125,8 @@
       document.body.append(copy)
 
       ;(copy.querySelectorAll('[data-scroll-x], [data-scroll-y]') as NodeListOf<HTMLElement>).forEach(el => {
-        el.scrollLeft = +el.dataset.scrollX!
-        el.scrollTop = +el.dataset.scrollY!
+        el.scrollLeft = Number(el.dataset.scrollX)
+        el.scrollTop = Number(el.dataset.scrollY)
       })
 
       function onTransitionend (e: TransitionEvent) {

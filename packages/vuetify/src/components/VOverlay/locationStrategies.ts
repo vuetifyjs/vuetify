@@ -33,11 +33,11 @@ export interface LocationStrategyData {
   isRtl: Ref<boolean>
 }
 
-type LocationStrategyFn = (
+export type LocationStrategyFunction = (
   data: LocationStrategyData,
   props: StrategyProps,
   contentStyles: Ref<Record<string, string>>
-) => undefined | { updateLocation: (e: Event) => void }
+) => undefined | { updateLocation: (e?: Event) => void }
 
 const locationStrategies = {
   static: staticLocationStrategy, // specific viewport position, usually centered
@@ -45,7 +45,7 @@ const locationStrategies = {
 }
 
 export interface StrategyProps {
-  locationStrategy: keyof typeof locationStrategies | LocationStrategyFn
+  locationStrategy: keyof typeof locationStrategies | LocationStrategyFunction
   location: Anchor
   origin: Anchor | 'auto' | 'overlap'
   offset?: number | string | number[]
@@ -83,21 +83,17 @@ export function useLocationStrategies (
     useToggleScope(() => !!(data.isActive.value && props.locationStrategy), reset => {
       watch(() => props.locationStrategy, reset)
       onScopeDispose(() => {
+        window.removeEventListener('resize', onResize)
         updateLocation.value = undefined
       })
+
+      window.addEventListener('resize', onResize, { passive: true })
 
       if (typeof props.locationStrategy === 'function') {
         updateLocation.value = props.locationStrategy(data, props, contentStyles)?.updateLocation
       } else {
         updateLocation.value = locationStrategies[props.locationStrategy](data, props, contentStyles)?.updateLocation
       }
-    })
-
-    window.addEventListener('resize', onResize, { passive: true })
-
-    onScopeDispose(() => {
-      window.removeEventListener('resize', onResize)
-      updateLocation.value = undefined
     })
   }
 
@@ -130,12 +126,6 @@ function getIntrinsicSize (el: HTMLElement, isRtl: boolean) {
   // const initialMaxHeight = el.style.maxHeight
   // el.style.removeProperty('max-width')
   // el.style.removeProperty('max-height')
-
-  if (isRtl) {
-    el.style.removeProperty('left')
-  } else {
-    el.style.removeProperty('right')
-  }
 
   /* eslint-disable-next-line sonarjs/prefer-immediate-return */
   const contentBox = nullifyTransforms(el)
@@ -229,9 +219,7 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
   // eslint-disable-next-line max-statements
   function updateLocation () {
     observe = false
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => observe = true)
-    })
+    requestAnimationFrame(() => observe = true)
 
     if (!data.target.value || !data.contentEl.value) return
 

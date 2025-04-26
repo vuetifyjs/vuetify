@@ -1,28 +1,25 @@
 <template>
   <v-treeview
-    v-model="tree"
-    :open="initiallyOpen"
+    v-model:opened="open"
     :items="items"
+    density="compact"
+    item-value="title"
     activatable
-    item-key="name"
     open-on-click
   >
-    <template v-slot:prepend="{ item, open }">
-      <v-icon v-if="!item.file">
-        {{ open ? 'mdi-folder-open' : 'mdi-folder' }}
-      </v-icon>
-      <v-icon v-else>
-        {{ files[item.file] }}
-      </v-icon>
+    <template v-slot:prepend="{ item, isOpen }">
+      <v-icon v-if="!item.file" :icon="isOpen ? 'mdi-folder-open' : 'mdi-folder'"></v-icon>
+
+      <v-icon v-else :icon="files[item.file]"></v-icon>
     </template>
   </v-treeview>
 </template>
 
 <script setup>
-  import { ref } from 'vue'
+  import { shallowRef } from 'vue'
 
-  const initiallyOpen = ref(['public'])
-  const files = ref({
+  const open = shallowRef(['public'])
+  const files = shallowRef({
     html: 'mdi-language-html5',
     js: 'mdi-nodejs',
     json: 'mdi-code-json',
@@ -32,128 +29,57 @@
     txt: 'mdi-file-document-outline',
     xls: 'mdi-file-excel',
   })
-  const tree = ref([])
-  const items = ref([
+
+  const items = [
     {
-      name: '.git',
+      title: '.git',
     },
     {
-      name: 'node_modules',
+      title: 'node_modules',
     },
     {
-      name: 'public',
+      title: 'public',
       children: [
         {
-          name: 'static',
+          title: 'static',
           children: [{
-            name: 'logo.png',
+            title: 'logo.png',
             file: 'png',
           }],
         },
         {
-          name: 'favicon.ico',
+          title: 'favicon.ico',
           file: 'png',
         },
         {
-          name: 'index.html',
+          title: 'index.html',
           file: 'html',
         },
       ],
     },
     {
-      name: '.gitignore',
+      title: '.gitignore',
       file: 'txt',
     },
     {
-      name: 'babel.config.js',
+      title: 'babel.config.js',
       file: 'js',
     },
     {
-      name: 'package.json',
+      title: 'package.json',
       file: 'json',
     },
     {
-      name: 'README.md',
+      title: 'README.md',
       file: 'md',
     },
     {
-      name: 'vue.config.js',
+      title: 'vue.config.js',
       file: 'js',
     },
     {
-      name: 'yarn.lock',
+      title: 'yarn.lock',
       file: 'txt',
     },
-  ])
-</script>
-
-<script>
-  export default {
-    data: () => ({
-      initiallyOpen: ['public'],
-      files: {
-        html: 'mdi-language-html5',
-        js: 'mdi-nodejs',
-        json: 'mdi-code-json',
-        md: 'mdi-language-markdown',
-        pdf: 'mdi-file-pdf-box',
-        png: 'mdi-file-image',
-        txt: 'mdi-file-document-outline',
-        xls: 'mdi-file-excel',
-      },
-      tree: [],
-      items: [
-        {
-          name: '.git',
-        },
-        {
-          name: 'node_modules',
-        },
-        {
-          name: 'public',
-          children: [
-            {
-              name: 'static',
-              children: [{
-                name: 'logo.png',
-                file: 'png',
-              }],
-            },
-            {
-              name: 'favicon.ico',
-              file: 'png',
-            },
-            {
-              name: 'index.html',
-              file: 'html',
-            },
-          ],
-        },
-        {
-          name: '.gitignore',
-          file: 'txt',
-        },
-        {
-          name: 'babel.config.js',
-          file: 'js',
-        },
-        {
-          name: 'package.json',
-          file: 'json',
-        },
-        {
-          name: 'README.md',
-          file: 'md',
-        },
-        {
-          name: 'vue.config.js',
-          file: 'js',
-        },
-        {
-          name: 'yarn.lock',
-          file: 'txt',
-        },
-      ],
-    }),
-  }
+  ]
 </script>

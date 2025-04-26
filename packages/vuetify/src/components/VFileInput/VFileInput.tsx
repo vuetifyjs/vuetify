@@ -5,7 +5,7 @@ import './VFileInput.sass'
 import { VChip } from '@/components/VChip'
 import { VCounter } from '@/components/VCounter'
 import { VField } from '@/components/VField'
-import { filterFieldProps, makeVFieldProps } from '@/components/VField/VField'
+import { makeVFieldProps } from '@/components/VField/VField'
 import { makeVInputProps, VInput } from '@/components/VInput/VInput'
 
 // Composables
@@ -51,14 +51,15 @@ export const makeVFileInputProps = propsFactory({
     type: String,
     default: '$vuetify.fileInput.counter',
   },
+  hideInput: Boolean,
   multiple: Boolean,
   showSize: {
-    type: [Boolean, Number] as PropType<boolean | 1000 | 1024>,
+    type: [Boolean, Number, String] as PropType<boolean | 1000 | 1024>,
     default: false,
     validator: (v: boolean | number) => {
       return (
         typeof v === 'boolean' ||
-        [1000, 1024].includes(v)
+        [1000, 1024].includes(Number(v))
       )
     },
   },
@@ -66,8 +67,8 @@ export const makeVFileInputProps = propsFactory({
   ...makeVInputProps({ prependIcon: '$file' }),
 
   modelValue: {
-    type: Array as PropType<File[]>,
-    default: () => ([]),
+    type: [Array, Object] as PropType<File[] | File | null>,
+    default: (props: any) => props.multiple ? [] : null,
     validator: (val: any) => {
       return wrapInArray(val).every(v => v != null && typeof v === 'object')
     },
@@ -87,12 +88,18 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
     'click:control': (e: MouseEvent) => true,
     'mousedown:control': (e: MouseEvent) => true,
     'update:focused': (focused: boolean) => true,
-    'update:modelValue': (files: File[]) => true,
+    'update:modelValue': (files: File | File[]) => true,
   },
 
   setup (props, { attrs, emit, slots }) {
     const { t } = useLocale()
-    const model = useProxiedModel(props, 'modelValue')
+    const model = useProxiedModel(
+      props,
+      'modelValue',
+      props.modelValue,
+      val => wrapInArray(val),
+      val => (!props.multiple && Array.isArray(val)) ? val[0] : val,
+    )
     const { isFocused, focus, blur } = useFocus(props)
     const base = computed(() => typeof props.showSize !== 'boolean' ? props.showSize : undefined)
     const totalBytes = computed(() => (model.value ?? []).reduce((bytes, { size = 0 }) => bytes + size, 0))
@@ -127,7 +134,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
       if (!isFocused.value) focus()
     }
     function onClickPrepend (e: MouseEvent) {
-      onControlClick(e)
+      inputRef.value?.click()
     }
     function onControlMousedown (e: MouseEvent) {
       emit('mousedown:control', e)
@@ -148,6 +155,16 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
         callEvent(props['onClick:clear'], e)
       })
     }
+    function onDragover (e: DragEvent) {
+      e.preventDefault()
+    }
+    function onDrop (e: DragEvent) {
+      e.preventDefault()
+
+      if (!e.dataTransfer) return
+
+      model.value = [...e.dataTransfer.files ?? []]
+    }
 
     watch(model, newValue => {
       const hasModelReset = !Array.isArray(newValue) || !newValue.length
@@ -161,17 +178,19 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
       const hasCounter = !!(slots.counter || props.counter)
       const hasDetails = !!(hasCounter || slots.details)
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
-      const [{ modelValue: _, ...inputProps }] = VInput.filterProps(props)
-      const [fieldProps] = filterFieldProps(props)
+      const { modelValue: _, ...inputProps } = VInput.filterProps(props)
+      const fieldProps = VField.filterProps(props)
 
       return (
         <VInput
           ref={ vInputRef }
-          v-model={ model.value }
+          modelValue={ props.multiple ? model.value : model.value[0] }
           class={[
             'v-file-input',
             {
-              'v-text-field--plain-underlined': isPlainOrUnderlined.value,
+              'v-file-input--chips': !!props.chips,
+              'v-file-input--hide': props.hideInput,
+              'v-input--plain-underlined': isPlainOrUnderlined.value,
             },
             props.class,
           ]}
@@ -202,10 +221,12 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
                 { ...fieldProps }
                 id={ id.value }
                 active={ isActive.value || isDirty.value }
-                dirty={ isDirty.value }
+                dirty={ isDirty.value || props.dirty }
                 disabled={ isDisabled.value }
                 focused={ isFocused.value }
                 error={ isValid.value === false }
+                onDragover={ onDragover }
+                onDrop={ onDrop }
               >
                 {{
                   ...slots,
@@ -240,7 +261,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
                       />
 
                       <div class={ fieldClass }>
-                        { !!model.value?.length && (
+                        { !!model.value?.length && !props.hideInput && (
                           slots.selection ? slots.selection({
                             fileNames: fileNames.value,
                             totalBytes: totalBytes.value,
@@ -250,8 +271,8 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
                             <VChip
                               key={ text }
                               size="small"
-                              color={ props.color }
-                            >{ text }</VChip>
+                              text={ text }
+                            />
                           ))
                           : fileNames.value.join(', ')
                         )}
@@ -272,6 +293,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
                     <VCounter
                       active={ !!model.value?.length }
                       value={ counterValue.value }
+                      disabled={ props.disabled }
                       v-slots:default={ slots.counter }
                     />
                   </>

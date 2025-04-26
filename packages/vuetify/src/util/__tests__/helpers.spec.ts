@@ -1,7 +1,10 @@
+// Utilities
+import { isProxy, isRef, ref } from 'vue'
 import {
   arrayDiff,
   convertToUnit,
   deepEqual,
+  defer,
   destructComputed,
   getNestedValue,
   getObjectValueByPath,
@@ -10,10 +13,6 @@ import {
   isEmpty,
   mergeDeep,
 } from '../helpers'
-
-// Utilities
-import { describe, expect, it } from '@jest/globals'
-import { isProxy, isRef, ref } from 'vue'
 
 describe('helpers', () => {
   it('should return set difference of arrays A and B', () => {
@@ -191,7 +190,7 @@ describe('helpers', () => {
     expect(getPropertyFromItem(obj, 'c.0')).toBe(2)
     expect(getPropertyFromItem(obj, 'c.2.d')).toBe('d')
     expect(getPropertyFromItem(obj, 'c.2.d.x', 'fallback')).toBe('fallback')
-    expect(getPropertyFromItem(obj, o => +o.a.b + +o.c[0])).toBe(3)
+    expect(getPropertyFromItem(obj, o => Number(o.a.b) + Number(o.c[0]))).toBe(3)
     expect(getPropertyFromItem(obj, ['c', 2, 'd'])).toBe('d')
     expect(getPropertyFromItem(obj, 'x.y')).toBe('comp')
     expect(getPropertyFromItem(obj, ['x', 'y'])).toBe('nested')
@@ -287,6 +286,16 @@ describe('helpers', () => {
     it('should use arrayFn function if provided', () => {
       expect(mergeDeep({ a: ['foo'] }, { a: ['bar'] }, (a, b) => [...a, ...b])).toEqual({ a: ['foo', 'bar'] })
     })
+
+    it('should not recursively merge non-plain objects', () => {
+      const plain = { a: 'foo' }
+      const div = document.createElement('div')
+      const span = document.createElement('span')
+
+      expect(mergeDeep({ a: plain }, { a: div }).a).toBe(div)
+      expect(mergeDeep({ a: div }, { a: plain }).a).toBe(plain)
+      expect(mergeDeep({ a: div }, { a: span }).a).toBe(span)
+    })
   })
 
   describe('destructComputed', () => {
@@ -329,6 +338,38 @@ describe('helpers', () => {
       expect(isEmpty(' ')).toBeTruthy()
       expect(isEmpty('sample text')).toBeFalsy()
       expect(isEmpty(12345)).toBeFalsy()
+    })
+  })
+
+  describe('defer', () => {
+    beforeAll(() => {
+      vi.useFakeTimers()
+    })
+
+    it('executes callback immediately if timeout is 0', () => {
+      const mockCallback = vi.fn()
+      defer(0, mockCallback)()
+
+      expect(mockCallback).toHaveBeenCalledWith()
+    })
+
+    it('executes callback after specified timeout', () => {
+      const mockCallback = vi.fn()
+      defer(1000, mockCallback)
+
+      expect(mockCallback).not.toHaveBeenCalled()
+      vi.advanceTimersByTime(1000)
+      expect(mockCallback).toHaveBeenCalledWith()
+    })
+
+    it('provides a function to clear the timeout', () => {
+      const mockCallback = vi.fn()
+      const clear = defer(1000, mockCallback)
+
+      clear()
+      vi.advanceTimersByTime(1000)
+
+      expect(mockCallback).not.toHaveBeenCalled()
     })
   })
 })
