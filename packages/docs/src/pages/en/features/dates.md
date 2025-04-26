@@ -347,7 +347,7 @@ You can also extend and override build-in DateAdapter using class inheritance:
 import { VuetifyDateAdapter } from 'vuetify/date/adapters/vuetify'
 
 export class MyAdapter extends VuetifyDateAdapter {
-  sayHello() {
+  sayHello () {
     return `Hello, current week starts at ${this.startOfWeek(this.date())}`
   }
   override startOfWeek(date: Date, firstDayOfWeek?: string | number): Date {
