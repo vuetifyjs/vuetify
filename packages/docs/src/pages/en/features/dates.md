@@ -350,7 +350,7 @@ export class MyAdapter extends VuetifyDateAdapter {
   sayHello () {
     return `Hello, current week starts at ${this.startOfWeek(this.date())}`
   }
-  override startOfWeek(date: Date, firstDayOfWeek?: string | number): Date {
+  override startOfWeek (date: Date, firstDayOfWeek?: string | number): Date {
     return super.startOfWeek(date, 2) // forcing Tuesday
   }
 }
