@@ -189,7 +189,7 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
               isReadonly,
               isValid,
               reset,
-            }) => ( 
+            }) => (
               <VField
                 ref={ vFieldRef }
                 onMousedown={ onControlMousedown }
