@@ -231,7 +231,7 @@ export const useNested = (props: NestedProps) => {
       }
 
       const pathsToReveal = [...selected.value.keys()].map(getPath)
-        .map(path => path.slice(0, -1))
+        .map(path => path.slice(0, -1).filter(v => !opened.value.has(v)))
         .filter(path => path.length > 0)
         .reduce(unique<unknown[]>, [])
 
