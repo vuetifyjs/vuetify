@@ -147,7 +147,7 @@
 
 <script setup lang="ts">
   // Types
-  import type { Member } from '@/stores/team'
+  import type { Member } from '@/stores/team-members'
   import type { PropType } from 'vue'
 
   const props = defineProps({
