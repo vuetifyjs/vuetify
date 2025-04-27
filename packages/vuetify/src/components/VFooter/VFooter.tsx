@@ -43,7 +43,7 @@ export const VFooter = genericComponent()({
     const layoutItemStyles = ref()
 
     const { themeClasses } = provideTheme(props)
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.color)
     const { borderClasses } = useBorder(props)
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props)
@@ -59,11 +59,11 @@ export const VFooter = genericComponent()({
       const layout = useLayoutItem({
         id: props.name,
         order: computed(() => parseInt(props.order, 10)),
-        position: computed(() => 'bottom'),
+        position: toRef(() => 'bottom'),
         layoutSize: height,
         elementSize: computed(() => props.height === 'auto' ? undefined : height.value),
-        active: computed(() => props.app),
-        absolute: toRef(props, 'absolute'),
+        active: toRef(() => props.app),
+        absolute: toRef(() => props.absolute),
       })
 
       watchEffect(() => {

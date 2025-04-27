@@ -2,7 +2,7 @@
 import { VProgressLinear } from '@/components/VProgressLinear'
 
 // Utilities
-import { computed } from 'vue'
+import { toRef } from 'vue'
 import { getCurrentInstanceName, propsFactory } from '@/util'
 
 // Types
@@ -27,7 +27,7 @@ export function useLoader (
   props: LoaderProps,
   name = getCurrentInstanceName(),
 ) {
-  const loaderClasses = computed(() => ({
+  const loaderClasses = toRef(() => ({
     [`${name}--loading`]: props.loading,
   }))
 
@@ -50,7 +50,7 @@ export function LoaderSlot (
       { slots.default?.({
         color: props.color,
         isActive: props.active,
-      } as LoaderSlotProps) || (
+      } satisfies LoaderSlotProps) || (
         <VProgressLinear
           absolute={ props.absolute }
           active={ props.active }

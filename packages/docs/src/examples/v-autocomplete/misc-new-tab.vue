@@ -37,7 +37,7 @@
           <v-card
             :href="shortcut.href"
             class="pa-4"
-            rel="noopener noreferer"
+            rel="noopener noreferrer"
             target="_blank"
             width="112"
             flat

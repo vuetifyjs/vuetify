@@ -2,11 +2,22 @@
 import { useToggleScope } from '@/composables/toggleScope'
 
 // Utilities
-import { computed, inject, onScopeDispose, provide, reactive, readonly, shallowRef, toRaw, watchEffect } from 'vue'
+import {
+  inject,
+  onScopeDispose,
+  provide,
+  reactive,
+  readonly,
+  shallowRef,
+  toRaw,
+  toRef,
+  toValue,
+  watchEffect,
+} from 'vue'
 import { getCurrentInstance } from '@/util'
 
 // Types
-import type { InjectionKey, Ref } from 'vue'
+import type { InjectionKey, MaybeRefOrGetter, Ref } from 'vue'
 
 const StackSymbol: InjectionKey<StackProvide> = Symbol.for('vuetify:stack')
 
@@ -18,7 +29,7 @@ const globalStack = reactive<[uid: number, zIndex: number][]>([])
 
 export function useStack (
   isActive: Readonly<Ref<boolean>>,
-  zIndex: Readonly<Ref<string | number>>,
+  zIndex: MaybeRefOrGetter<string | number>,
   disableGlobalStack: boolean
 ) {
   const vm = getCurrentInstance('useStack')
@@ -30,10 +41,10 @@ export function useStack (
   })
   provide(StackSymbol, stack)
 
-  const _zIndex = shallowRef(Number(zIndex.value))
+  const _zIndex = shallowRef(Number(toValue(zIndex)))
   useToggleScope(isActive, () => {
     const lastZIndex = globalStack.at(-1)?.[1]
-    _zIndex.value = lastZIndex ? lastZIndex + 10 : Number(zIndex.value)
+    _zIndex.value = lastZIndex ? lastZIndex + 10 : Number(toValue(zIndex))
 
     if (createStackEntry) {
       globalStack.push([vm.uid, _zIndex.value])
@@ -59,11 +70,11 @@ export function useStack (
     })
   }
 
-  const localTop = computed(() => !stack.activeChildren.size)
+  const localTop = toRef(() => !stack.activeChildren.size)
 
   return {
     globalTop: readonly(globalTop),
     localTop,
-    stackStyles: computed(() => ({ zIndex: _zIndex.value })),
+    stackStyles: toRef(() => ({ zIndex: _zIndex.value })),
   }
 }

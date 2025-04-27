@@ -20,6 +20,7 @@
 
 <script setup>
   const props = defineProps({ team: String })
-  const teams = useTeamStore()
+  const teams = useTeamMembersStore()
+
   const members = computed(() => teams.members.filter(member => member.team === props.team))
 </script>
