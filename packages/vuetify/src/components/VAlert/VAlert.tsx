@@ -14,6 +14,7 @@ import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { IconValue } from '@/composables/icons'
+import { makeIconSizeProps, useIconSizes } from '@/composables/iconSizes'
 import { useLocale } from '@/composables/locale'
 import { makeLocationProps, useLocation } from '@/composables/location'
 import { makePositionProps, usePosition } from '@/composables/position'
@@ -60,10 +61,6 @@ export const makeVAlertProps = propsFactory({
     type: [Boolean, String, Function, Object] as PropType<false | IconValue>,
     default: null,
   },
-  iconSize: {
-    type: Number,
-    default: null,
-  },
   modelValue: {
     type: Boolean,
     default: true,
@@ -80,6 +77,7 @@ export const makeVAlertProps = propsFactory({
   ...makeDensityProps(),
   ...makeDimensionProps(),
   ...makeElevationProps(),
+  ...makeIconSizeProps(),
   ...makeLocationProps(),
   ...makePositionProps(),
   ...makeRoundedProps(),
@@ -116,6 +114,7 @@ export const VAlert = genericComponent<VAlertSlots>()({
       return props.icon ?? `$${props.type}`
     })
 
+    const { iconSize } = useIconSizes(props, props.prominent ? 44 : 28)
     const { themeClasses } = provideTheme(props)
     const { colorClasses, colorStyles, variantClasses } = useVariant(() => ({
       color: props.color ?? props.type,
@@ -192,7 +191,7 @@ export const VAlert = genericComponent<VAlertSlots>()({
                   key="prepend-icon"
                   density={ props.density }
                   icon={ icon.value }
-                  size={ props.iconSize ?? (props.prominent ? 44 : 28) }
+                  size={ iconSize }
                 />
               ) : (
                 <VDefaultsProvider
@@ -202,7 +201,7 @@ export const VAlert = genericComponent<VAlertSlots>()({
                     VIcon: {
                       density: props.density,
                       icon: icon.value,
-                      size: props.prominent ? 44 : 28,
+                      size: iconSize,
                     },
                   }}
                   v-slots:default={ slots.prepend }
