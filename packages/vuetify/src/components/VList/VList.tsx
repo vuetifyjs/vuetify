@@ -176,7 +176,7 @@ export const VList = genericComponent<new <
     const color = toRef(() => props.color)
 
     createList({
-      filterable: () => props.filterable,
+      filterable: props.filterable,
     })
 
     provideDefaults({

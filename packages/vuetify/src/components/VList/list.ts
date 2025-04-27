@@ -2,7 +2,7 @@
 import { computed, inject, provide, shallowRef } from 'vue'
 
 // Types
-import type { InjectionKey, MaybeRefOrGetter, Ref, ComputedGetter } from 'vue'
+import type { InjectionKey, MaybeRefOrGetter, Ref } from 'vue'
 
 // Depth
 export const DepthKey: InjectionKey<Ref<number>> = Symbol.for('vuetify:depth')
@@ -19,7 +19,7 @@ export function useDepth (hasPrepend?: Ref<boolean>) {
 
 // List
 export const ListKey: InjectionKey<{
-  filterable: ComputedGetter<boolean>
+  filterable: MaybeRefOrGetter<boolean>
   hasPrepend: Ref<boolean>
   updateHasPrepend: (value: boolean) => void
 }> = Symbol.for('vuetify:list')
@@ -30,7 +30,7 @@ type InjectedListOptions = {
 
 export function createList ({ filterable }: InjectedListOptions = { filterable: false }) {
   const parent = inject(ListKey, {
-    filterable: () => false,
+    filterable: false,
     hasPrepend: shallowRef(false),
     updateHasPrepend: () => null,
   })
