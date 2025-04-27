@@ -104,7 +104,19 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
       'modelValue',
       props.modelValue,
       val => wrapInArray(val),
-      val => (props.multiple || Array.isArray(props.modelValue)) ? val : val[0],
+      val => {
+        const acceptType = inputRef?.value?.accept
+        const newValue = filterFilesByAcceptType(val, acceptType)
+        if (inputRef.value) {
+          const dataTransfer = new DataTransfer()
+          for (const file of newValue) { 
+            dataTransfer.items.add(file)
+          }
+          inputRef.value.files = dataTransfer.files
+          inputRef.value.dispatchEvent(new Event('change', { bubbles: true }))
+        }
+        return !props.multiple && Array.isArray(newValue) ? newValue[0] : newValue
+      }
     )
 
     const isDragging = shallowRef(false)
@@ -127,29 +139,11 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
       e.stopImmediatePropagation()
       isDragging.value = false
 
-      const initialFiles = e.dataTransfer?.files
-      const acceptType = inputRef.value?.accept
-      let files: File[] = []
+      const files = e.dataTransfer?.files ?? []
 
-      if (!initialFiles || initialFiles.length === 0 || !inputRef.value) return
+      if (!files || files.length === 0 || !inputRef.value) return
 
-      if (acceptType) {
-        files = filterFilesByAcceptType(initialFiles, acceptType)
-      }
-
-      const dataTransfer = new DataTransfer()
-
-      for (const file of files) {
-        dataTransfer.items.add(file)
-      }
-      
-      if (!props.multiple) {
-        model.value = [files[0]]
-        return
-      }
-
-      inputRef.value.files = dataTransfer.files
-      inputRef.value.dispatchEvent(new Event('change', { bubbles: true }))
+      model.value = Array.from(files)
     }
 
     function onClick () {
@@ -166,12 +160,10 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
     }
 
     function onFileInputChange (e: Event) {
-      const acceptType = inputRef.value?.accept
       const files = (e.target as HTMLInputElement)?.files
-
       if (!files) return
 
-      model.value = filterFilesByAcceptType(files, acceptType)
+      model.value = Array.from(files)
     }
 
     useRender(() => {
