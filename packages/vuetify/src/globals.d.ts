@@ -28,6 +28,7 @@ declare global {
       isTouch?: boolean
       showTimer?: number
       showTimerCommit?: (() => void) | null
+      keyDownHandler?: ((e: KeyboardEvent) => void) | null
     }
     _observe?: Record<number, {
       init: boolean

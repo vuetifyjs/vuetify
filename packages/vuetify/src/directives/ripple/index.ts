@@ -273,8 +273,8 @@ function focusRippleHide (e: FocusEvent) {
 
 function updateRipple (el: HTMLElement, binding: RippleDirectiveBinding, wasEnabled: boolean) {
   const { value, modifiers } = binding
+
   const enabled = isRippleEnabled(value)
-  const allowedKeys = (typeof value === 'object' ? value.keys : null) ?? [keyCodes.enter, keyCodes.space]
   if (!enabled) {
     ripples.hide(el)
   }
@@ -286,6 +286,9 @@ function updateRipple (el: HTMLElement, binding: RippleDirectiveBinding, wasEnab
   if (isObject(value) && value.class) {
     el._ripple.class = value.class
   }
+
+  const allowedKeys = (typeof value === 'object' ? value.keys : null) ?? [keyCodes.enter, keyCodes.space]
+  el._ripple.keyDownHandler = (e: KeyboardEvent) => keyboardRippleShow(e, allowedKeys)
 
   if (enabled && !wasEnabled) {
     if (modifiers.stop) {
@@ -323,7 +326,9 @@ function removeListeners (el: HTMLElement) {
   el.removeEventListener('touchcancel', rippleHide)
   el.removeEventListener('mouseup', rippleHide)
   el.removeEventListener('mouseleave', rippleHide)
-  el.removeEventListener('keydown', keyboardRippleShow)
+  if (el._ripple?.keyDownHandler) {
+    el.removeEventListener('keydown', el._ripple.keyDownHandler)
+  }
   el.removeEventListener('keyup', keyboardRippleHide)
   el.removeEventListener('dragstart', rippleHide)
   el.removeEventListener('blur', focusRippleHide)
@@ -334,8 +339,8 @@ function mounted (el: HTMLElement, binding: RippleDirectiveBinding) {
 }
 
 function unmounted (el: HTMLElement) {
-  delete el._ripple
   removeListeners(el)
+  delete el._ripple
 }
 
 function updated (el: HTMLElement, binding: RippleDirectiveBinding) {
