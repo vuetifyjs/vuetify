@@ -2,6 +2,7 @@
 import './VDatePickerMonth.sass'
 
 // Components
+import { VBadge } from '@/components/VBadge'
 import { VBtn } from '@/components/VBtn'
 
 // Composables
@@ -11,10 +12,18 @@ import { MaybeTransition } from '@/composables/transition'
 
 // Utilities
 import { computed, ref, shallowRef, watch } from 'vue'
-import { genericComponent, omit, propsFactory, useRender } from '@/util'
+import { genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+
+export type DatePickerEventColorValue = string | string[]
+
+export type DatePickerEventColors = DatePickerEventColorValue |
+Record<string, DatePickerEventColorValue> | ((date: string) => DatePickerEventColorValue)
+
+export type DatePickerEvents = string[] |
+((date: string) => boolean | DatePickerEventColorValue) | Record<string, DatePickerEventColorValue>
 
 export type VDatePickerMonthSlots = {
   day: {
@@ -39,7 +48,14 @@ export const makeVDatePickerMonthProps = propsFactory({
     type: String,
     default: 'picker-reverse-transition',
   },
-
+  events: {
+    type: [Array, Function, Object] as PropType<DatePickerEvents | null>,
+    default: () => null,
+  },
+  eventColor: {
+    type: [Array, Function, Object, String] as PropType<DatePickerEventColors>,
+    default: () => null,
+  },
   ...omit(makeCalendarProps(), ['displayValue']),
 }, 'VDatePickerMonth')
 
@@ -150,7 +166,54 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
         model.value = [value]
       }
     }
+    function getEventColors (date: string): string[] {
+      const { events, eventColor } = props
+      let eventData: boolean | DatePickerEventColorValue
+      let eventColors: string[] = []
 
+      if (Array.isArray(events)) {
+        eventData = events.includes(date)
+      } else if (events instanceof Function) {
+        eventData = events(date) || false
+      } else if (events) {
+        eventData = events[date] || false
+      } else {
+        eventData = false
+      }
+
+      if (!eventData) {
+        return []
+      } else if (eventData !== true) {
+        eventColors = wrapInArray(eventData)
+      } else if (typeof eventColor === 'string') {
+        eventColors = [eventColor]
+      } else if (typeof eventColor === 'function') {
+        eventColors = wrapInArray(eventColor(date))
+      } else if (Array.isArray(eventColor)) {
+        eventColors = eventColor
+      } else if (typeof eventColor === 'object' && eventColor !== null) {
+        eventColors = wrapInArray(eventColor[date])
+      }
+
+      // Fallback to default color if no color is found
+      if (!eventColors.length) {
+        eventColors = ['surface-variant']
+      }
+
+      return eventColors.filter(Boolean)
+    }
+
+    function genEvents (date: string): JSX.Element | null {
+      const eventColors = getEventColors(date)
+
+      if (!eventColors.length) return null
+
+      return (
+        <div class="v-date-picker-month__events">
+          { eventColors.map((color: string) => <VBadge dot color={ color } />) }
+        </div>
+      )
+    }
     useRender(() => (
       <div class="v-date-picker-month">
         { props.showWeek && (
@@ -192,7 +255,6 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
                   disabled: item.isDisabled,
                   icon: true,
                   ripple: false,
-                  text: item.localized,
                   variant: item.isSelected ? 'flat' : item.isToday ? 'outlined' : 'text',
                   onClick: () => onClick(item.date),
                 },
@@ -219,7 +281,12 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
                   data-v-date={ !item.isDisabled ? item.isoDate : undefined }
                 >
                   { (props.showAdjacentMonths || !item.isAdjacent) && (
-                    slots.day?.(slotProps) ?? (<VBtn { ...slotProps.props } />)
+                    slots.day?.(slotProps) ?? (
+                      <VBtn { ...slotProps.props }>
+                        { item.localized }
+                        { genEvents(item.isoDate) }
+                      </VBtn>
+                    )
                   )}
                 </div>
               )
