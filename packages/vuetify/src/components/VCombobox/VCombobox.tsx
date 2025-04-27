@@ -257,7 +257,7 @@ export const VCombobox = genericComponent<new <
       menu.value = !menu.value
     }
     function onListKeydown (e: KeyboardEvent) {
-      if (checkPrintable(e)) {
+      if (checkPrintable(e) || e.key === 'Backspace') {
         vTextFieldRef.value?.focus()
       }
     }
