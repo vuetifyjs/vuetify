@@ -99,7 +99,11 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
       'modelValue',
       props.modelValue,
       val => wrapInArray(val),
-      val => (!props.multiple && Array.isArray(val)) ? val[0] : val,
+      val => {
+        const acceptType = inputRef?.value?.accept
+        const newValue = filterFilesByAcceptType(val, acceptType)
+        return !props.multiple && Array.isArray(newValue) ? newValue[0] : newValue
+      },
     )
     const { isFocused, focus, blur } = useFocus(props)
     const base = computed(() => typeof props.showSize !== 'boolean' ? props.showSize : undefined)
@@ -159,21 +163,19 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
     function onDrop (e: DragEvent) {
       e.preventDefault()
 
-      const acceptType = inputRef.value?.accept
       const files = e.dataTransfer?.files
 
       if (!files) return
 
-      model.value = filterFilesByAcceptType(files, acceptType)
+      model.value = Array.from(files)
     }
 
     function onFileInputChange (e: Event) {
-      const acceptType = inputRef.value?.accept
       const files = (e.target as HTMLInputElement)?.files
 
       if (!files) return
 
-      model.value = filterFilesByAcceptType(files, acceptType)
+      model.value = Array.from(files)
     }
 
     watch(model, newValue => {
