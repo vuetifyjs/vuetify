@@ -108,9 +108,14 @@ export function internalUseDefaults (
       if (prop === 'class' || prop === 'style') {
         return [componentDefaults.value?.[prop], propValue].filter(v => v != null)
       } else if (typeof prop === 'string' && !propIsDefined(vm.vnode, prop)) {
-        return componentDefaults.value?.[prop] !== undefined ? componentDefaults.value?.[prop]
-          : defaults.value?.global?.[prop] !== undefined ? defaults.value?.global?.[prop]
-          : propValue
+        const kebabProp = toKebabCase(prop)
+        const fromComponentDefaults = componentDefaults.value?.[prop] ?? componentDefaults.value?.[kebabProp]
+        const fromGlobalDefaults = defaults.value?.global?.[prop] ?? defaults.value?.global?.[kebabProp]
+        return fromComponentDefaults !== undefined
+          ? fromComponentDefaults
+          : fromGlobalDefaults !== undefined
+            ? fromGlobalDefaults
+            : propValue
       }
       return propValue
     },

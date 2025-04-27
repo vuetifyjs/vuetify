@@ -52,4 +52,24 @@ describe('defaults', () => {
     expect(wrapper.attributes('style')).toContain('background: blue;')
     expect(wrapper.attributes('style')).toContain('caret-color: blue;')
   })
+
+  it('handles default props in camelCase and kebab-case', () => {
+    const vuetify = createVuetify({
+      defaults: {
+        VBtn: {
+          'min-height': '101px',
+          minWidth: '103px',
+        },
+      },
+    })
+
+    const wrapper = mount<any>(VBtn, {
+      global: {
+        plugins: [vuetify],
+      },
+    })
+
+    expect(wrapper.attributes('style')).toContain('min-height: 101px;')
+    expect(wrapper.attributes('style')).toContain('min-width: 103px;')
+  })
 })
