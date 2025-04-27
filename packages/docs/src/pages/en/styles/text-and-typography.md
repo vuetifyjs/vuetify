@@ -48,6 +48,7 @@ Control text size, alignment, wrapping, overflow, transforms and more. By defaul
 | **text-right** | text-align: right; |
 | **text-truncate** | overflow: hidden;<br>text-overflow: ellipsis;<br>white-space: nowrap; |
 | **text-no-wrap** | white-space: nowrap; |
+| **text-pre-wrap** | white-space: pre-wrap; |
 | **text-break** | overflow-wrap: break-word; |
 | **text-decoration-none** | text-decoration: none; |
 | **text-decoration-overline** | text-decoration: overline; |
