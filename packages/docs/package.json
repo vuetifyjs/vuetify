@@ -4,7 +4,7 @@
   "description": "A Vue.js project",
   "private": true,
   "author": "John Leider <john@vuetifyjs.com>",
-  "version": "3.8.1",
+  "version": "3.8.2",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/vuetifyjs/vuetify.git",
@@ -15,8 +15,8 @@
     "build": "vite build",
     "preview": "vite preview",
     "preview-https": "HTTPS=true vite preview",
-    "lint": "vue-tsc --noEmit --pretty && pnpm run lint:md && jest --no-cache",
-    "lint:fix": "pnpm run fix:md && JEST_FIX=true jest --no-cache",
+    "lint": "concurrently 'vue-tsc --noEmit --pretty' 'node --run lint:md' 'jest --no-cache' -n 'tsc,md,eslint' --kill-others-on-fail -gr",
+    "lint:fix": "node --run fix:md && JEST_FIX=true jest --no-cache",
     "lint:md": "markdownlint --config .markdownlintrc src/pages/en",
     "fix:md": "markdownlint --config .markdownlintrc src/pages/en --fix"
   },
@@ -26,7 +26,7 @@
     "@vue/compiler-dom": "^3.5.13",
     "@vuelidate/core": "^2.0.3",
     "@vuelidate/validators": "^2.0.4",
-    "@vuetify/one": "^2.0.0",
+    "@vuetify/one": "^2.1.2",
     "algoliasearch": "^4.24.0",
     "fflate": "^0.8.2",
     "isomorphic-fetch": "^3.0.0",

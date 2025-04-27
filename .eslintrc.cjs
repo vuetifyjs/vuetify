@@ -11,7 +11,7 @@ module.exports = {
   },
   extends: [
     'standard',
-    'plugin:vue/vue3-recommended',
+    'plugin:vue/recommended',
     // 'plugin:vuetify/base',
     'plugin:sonarjs/recommended',
   ],
@@ -94,7 +94,7 @@ module.exports = {
     'vue/require-default-prop': 'off',
     'vue/require-prop-types': 'off',
     'vue/one-component-per-file': 'off',
-    'vue/custom-event-name-casing': ['error', { ignores: ['/^[a-z]+(?:-[a-z]+)*:[a-z]+(?:-[a-z]+)*$/u'] }],
+    'vue/custom-event-name-casing': ['error', 'camelCase', { ignores: ['/^[a-z]+(?:-[a-z]+)*:[a-z]+(?:-[a-z]+)*$/u'] }],
     'vue/multi-word-component-names': 'off',
 
     'vue/attributes-order': ['error', {
@@ -137,6 +137,7 @@ module.exports = {
     },
     {
       files: ['**/*.ts', '**/*.tsx'],
+      parser: '@typescript-eslint/parser',
       rules: {
         // Can't overload function exports with this enabled
         'import/export': 'off',
@@ -250,6 +251,7 @@ module.exports = {
     },
     {
       files: '**/*.json',
+      parser: '@typescript-eslint/parser',
       rules: {
         quotes: ['error', 'double'],
         'comma-dangle': ['error', 'never'],

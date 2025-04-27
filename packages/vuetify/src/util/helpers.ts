@@ -1,5 +1,15 @@
 // Utilities
-import { capitalize, Comment, computed, Fragment, isVNode, reactive, shallowRef, toRefs, unref, watchEffect } from 'vue'
+import {
+  capitalize,
+  Comment,
+  Fragment,
+  isVNode,
+  reactive,
+  shallowRef,
+  toRef,
+  unref,
+  watchEffect,
+} from 'vue'
 import { IN_BROWSER } from '@/util/globals'
 
 // Types
@@ -10,7 +20,7 @@ import type {
   InjectionKey,
   PropType,
   Ref,
-  ToRefs,
+  ToRef,
   VNode,
   VNodeArrayChildren,
   VNodeChild,
@@ -580,20 +590,26 @@ export function getEventCoordinates (e: MouseEvent | TouchEvent) {
 type NotAUnion<T> = [T] extends [infer U] ? _NotAUnion<U, U> : never
 type _NotAUnion<T, U> = U extends any ? [T] extends [U] ? unknown : never : never
 
+type ToReadonlyRefs<T> = { [K in keyof T]: Readonly<ToRef<T[K]>> }
+
 /**
  * Convert a computed ref to a record of refs.
  * The getter function must always return an object with the same keys.
  */
-export function destructComputed<T extends object> (getter: ComputedGetter<T & NotAUnion<T>>): ToRefs<T>
+export function destructComputed<T extends object> (getter: ComputedGetter<T & NotAUnion<T>>): ToReadonlyRefs<T>
 export function destructComputed<T extends object> (getter: ComputedGetter<T>) {
   const refs = reactive({}) as T
-  const base = computed(getter)
   watchEffect(() => {
-    for (const key in base.value) {
-      refs[key] = base.value[key]
+    const base = getter()
+    for (const key in base) {
+      refs[key] = base[key]
     }
   }, { flush: 'sync' })
-  return toRefs(refs)
+  const obj = {} as ToReadonlyRefs<T>
+  for (const key in refs) {
+    obj[key] = toRef(() => refs[key]) as any
+  }
+  return obj
 }
 
 /** Array.includes but value can be any type */

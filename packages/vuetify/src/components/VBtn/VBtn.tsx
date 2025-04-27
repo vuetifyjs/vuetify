@@ -30,7 +30,7 @@ import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant
 import { Ripple } from '@/directives/ripple'
 
 // Utilities
-import { computed, toDisplayString, withDirectives } from 'vue'
+import { computed, toDisplayString, toRef, withDirectives } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -127,7 +127,7 @@ export const VBtn = genericComponent<VBtnSlots>()({
       return group?.isSelected.value
     })
 
-    const color = computed(() => isActive.value ? props.activeColor ?? props.color : props.color)
+    const color = toRef(() => isActive.value ? props.activeColor ?? props.color : props.color)
     const variantProps = computed(() => {
       const showColor = (
         (group?.isSelected.value && (!link.isLink.value || link.isActive?.value)) ||
@@ -141,7 +141,7 @@ export const VBtn = genericComponent<VBtnSlots>()({
     const { colorClasses, colorStyles, variantClasses } = useVariant(variantProps)
 
     const isDisabled = computed(() => group?.disabled.value || props.disabled)
-    const isElevated = computed(() => {
+    const isElevated = toRef(() => {
       return props.variant === 'elevated' && !(props.disabled || props.flat || props.border)
     })
     const valueAttr = computed(() => {

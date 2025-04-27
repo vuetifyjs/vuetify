@@ -35,7 +35,7 @@ export const VSystemBar = genericComponent()({
 
   setup (props, { slots }) {
     const { themeClasses } = provideTheme(props)
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.color)
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props)
     const { ssrBootStyles } = useSsrBoot()
@@ -47,7 +47,7 @@ export const VSystemBar = genericComponent()({
       layoutSize: height,
       elementSize: height,
       active: computed(() => true),
-      absolute: toRef(props, 'absolute'),
+      absolute: toRef(() => props.absolute),
     })
 
     useRender(() => (
