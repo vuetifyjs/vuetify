@@ -132,7 +132,7 @@ jobs:
       - run: pnpm build api
       - run: pnpm build docs
         env:
-          NODE_OPTIONS: --max-old-space-size=5120
+          NODE_OPTIONS: --max-old-space-size=6144
           VITE_COSMIC_2_BUCKET_SLUG: ${{ secrets.COSMIC_2_BUCKET_SLUG }}
           VITE_COSMIC_2_BUCKET_READ_KEY: ${{ secrets.COSMIC_2_BUCKET_READ_KEY }}
           VITE_COSMIC_BUCKET_SLUG: ${{ secrets.COSMIC_BUCKET_SLUG }}
