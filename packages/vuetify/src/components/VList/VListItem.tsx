@@ -215,6 +215,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
 
       if (e.key === 'Enter' || e.key === ' ' && !list?.filterable) {
         e.preventDefault()
+        e.stopPropagation()
         e.target!.dispatchEvent(new MouseEvent('click', e))
       }
     }
