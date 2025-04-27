@@ -306,7 +306,7 @@ function updateRipple (el: HTMLElement, binding: RippleDirectiveBinding, wasEnab
     el.addEventListener('mouseup', rippleHide)
     el.addEventListener('mouseleave', rippleHide)
 
-    el.addEventListener('keydown', (e) => keyboardRippleShow(e, allowedKeys))
+    el.addEventListener('keydown', e => keyboardRippleShow(e, allowedKeys))
     el.addEventListener('keyup', keyboardRippleHide)
 
     el.addEventListener('blur', focusRippleHide)

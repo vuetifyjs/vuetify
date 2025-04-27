@@ -179,7 +179,15 @@ export const VListItem = genericComponent<VListItemSlots>()({
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(roundedProps)
     const lineClasses = toRef(() => props.lines ? `v-list-item--${props.lines}-line` : undefined)
-    const rippleOptions = toRef(() => props.ripple !== undefined && !!props.ripple && list?.filterable ? { keys: [keyCodes.enter] } : props.ripple)
+    const rippleOptions = toRef(() =>
+      (
+        props.ripple !== undefined &&
+        !!props.ripple &&
+        list?.filterable
+      )
+        ? { keys: [keyCodes.enter] }
+        : props.ripple
+    )
 
     const slotProps = computed(() => ({
       isActive: isActive.value,
@@ -213,7 +221,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
 
       if (['INPUT', 'TEXTAREA'].includes(target.tagName)) return
 
-      if (e.key === 'Enter' || e.key === ' ' && !list?.filterable) {
+      if (e.key === 'Enter' || (e.key === ' ' && !list?.filterable)) {
         e.preventDefault()
         e.stopPropagation()
         e.target!.dispatchEvent(new MouseEvent('click', e))
