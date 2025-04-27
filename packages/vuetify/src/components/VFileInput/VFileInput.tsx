@@ -99,7 +99,19 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
       'modelValue',
       props.modelValue,
       val => wrapInArray(val),
-      val => (!props.multiple && Array.isArray(val)) ? val[0] : val,
+      val => {
+        const acceptType = inputRef?.value?.accept
+        const newValue = filterFilesByAcceptType(val, acceptType)
+        if (inputRef.value) {
+          const dataTransfer = new DataTransfer()
+          for (const file of newValue) { 
+            dataTransfer.items.add(file)
+          }
+          inputRef.value.files = dataTransfer.files
+          inputRef.value.dispatchEvent(new Event('change', { bubbles: true }))
+        }
+        return !props.multiple && Array.isArray(newValue) ? newValue[0] : newValue
+      },
     )
     const { isFocused, focus, blur } = useFocus(props)
     const base = computed(() => typeof props.showSize !== 'boolean' ? props.showSize : undefined)
@@ -121,10 +133,10 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
     })
     const vInputRef = ref<VInput>()
     const vFieldRef = ref<VInput>()
-    const inputRef = ref<HTMLInputElement>()
     const isActive = toRef(() => isFocused.value || props.active)
     const isPlainOrUnderlined = computed(() => ['plain', 'underlined'].includes(props.variant))
     const isDragging = shallowRef(false)
+    const inputRef = ref<HTMLInputElement>()
 
     function onFocus () {
       if (inputRef.value !== document.activeElement) {
@@ -169,29 +181,18 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
       e.stopImmediatePropagation()
       isDragging.value = false
 
-      const acceptType = inputRef.value?.accept
       const files = e.dataTransfer?.files
 
-      if (!files || !acceptType || !inputRef.value) return
+      if (!files || files.length === 0 || !inputRef.value) return
 
-      const dataTransfer = new DataTransfer()
-
-      model.value = filterFilesByAcceptType(files, acceptType)
-
-      for (const file of model.value) {
-        dataTransfer.items.add(file)
-      }
-
-      inputRef.value.files = dataTransfer.files
-      inputRef.value.dispatchEvent(new Event('change', { bubbles: true }))
+      model.value = Array.from(files)
     }
     function onFileInputChange (e: Event) {
-      const acceptType = inputRef.value?.accept
       const files = (e.target as HTMLInputElement)?.files
 
       if (!files) return
 
-      model.value = filterFilesByAcceptType(files, acceptType)
+      model.value = Array.from(files)
     }
 
     watch(model, newValue => {
