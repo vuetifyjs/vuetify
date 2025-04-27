@@ -1,6 +1,5 @@
 // Utilities
 import { VuetifyDateAdapter } from '../adapters/vuetify'
-import { parseDateString } from '../date'
 
 // Types
 import type { IUtils } from '@date-io/core/IUtils'
@@ -89,56 +88,5 @@ describe('date.ts', () => {
     const adapter2 = new VuetifyDateAdapter({ locale: 'fr' })
     expect(adapter2.getWeek(new Date('2025-01-05'))).toBe(1) // sunday
     expect(adapter2.getWeek(new Date('2025-01-06'))).toBe(2) // monday
-  })
-
-  describe('parseDateString', () => {
-    it('should parse date with YYYY-MM-DD format', () => {
-      const date = parseDateString('2025-12-21', 'YYYY-MM-DD')
-      expect(date).not.toBeNull()
-      expect(date?.year).toBe(2025)
-      expect(date?.month).toBe(12)
-      expect(date?.day).toBe(21)
-    })
-
-    it('should parse date with DD/MM/YYYY format', () => {
-      const date = parseDateString('21/12/2025', 'DD/MM/YYYY')
-      expect(date).not.toBeNull()
-      expect(date?.year).toBe(2025)
-      expect(date?.month).toBe(12)
-      expect(date?.day).toBe(21)
-    })
-
-    it('should parse date with MM.DD.YYYY format', () => {
-      const date = parseDateString('12.21.2025', 'MM.DD.YYYY')
-      expect(date).not.toBeNull()
-      expect(date?.year).toBe(2025)
-      expect(date?.month).toBe(12)
-      expect(date?.day).toBe(21)
-    })
-
-    it('should return null for invalid date string', () => {
-      expect(parseDateString('2025-13-21', 'YYYY-MM-DD')).toBeNull() // Invalid month
-      expect(parseDateString('2025-12-32', 'YYYY-MM-DD')).toBeNull() // Invalid day
-      expect(parseDateString('2025-12-21', 'YYYY-MM-DD')).not.toBeNull() // Valid date
-    })
-
-    it('should return null for malformed date string', () => {
-      expect(parseDateString('2025-12', 'YYYY-MM-DD')).toBeNull() // Missing day
-      expect(parseDateString('12-21', 'YYYY-MM-DD')).toBeNull() // Missing year
-      expect(parseDateString('2025-12-21', 'YYYY-MM')).toBeNull() // Format doesn't match
-    })
-
-    it('should handle different separators in the same format', () => {
-      const formats = ['YYYY-MM-DD', 'YYYY/MM/DD', 'YYYY.MM.DD']
-      const dateStrings = ['2025-12-21', '2025/12/21', '2025.12.21']
-
-      formats.forEach((format, index) => {
-        const date = parseDateString(dateStrings[index], format)
-        expect(date).not.toBeNull()
-        expect(date?.year).toBe(2025)
-        expect(date?.month).toBe(12)
-        expect(date?.day).toBe(21)
-      })
-    })
   })
 })
