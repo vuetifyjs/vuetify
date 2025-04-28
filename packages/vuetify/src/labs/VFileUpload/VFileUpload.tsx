@@ -99,6 +99,7 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
   setup (props, { attrs, slots }) {
     const { t } = useLocale()
     const { densityClasses } = useDensity(props)
+    const inputRef = ref<HTMLInputElement | null>(null)
     const model = useProxiedModel(
       props,
       'modelValue',
@@ -121,7 +122,6 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
 
     const isDragging = shallowRef(false)
     const vSheetRef = ref<InstanceType<typeof VSheet> | null>(null)
-    const inputRef = ref<HTMLInputElement | null>(null)
 
     function onDragover (e: DragEvent) {
       e.preventDefault()
