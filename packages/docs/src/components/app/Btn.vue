@@ -1,6 +1,7 @@
 <template>
   <v-btn
     :icon="!!icon"
+    :size="smAndUp ? 'default' : 'small'"
     :variant="variant"
     class="text-body-2 text-capitalize px-3 app-btn"
     color="medium-emphasis"
