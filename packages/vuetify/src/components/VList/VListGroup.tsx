@@ -12,7 +12,7 @@ import { makeTagProps } from '@/composables/tag'
 import { MaybeTransition } from '@/composables/transition'
 
 // Utilities
-import { computed } from 'vue'
+import { computed, vShow, withDirectives } from 'vue'
 import { defineComponent, genericComponent, propsFactory, useRender } from '@/util'
 
 export type VListGroupSlots = {
@@ -49,6 +49,7 @@ export const makeVListGroupProps = propsFactory({
   subgroup: Boolean,
   title: String,
   value: null,
+  lazy: Boolean,
 
   ...makeComponentProps(),
   ...makeTagProps(),
@@ -108,15 +109,33 @@ export const VListGroup = genericComponent<VListGroupSlots>()({
         { slots.activator && (
           <VDefaultsProvider defaults={ activatorDefaults.value }>
             <VListGroupActivator>
-              { slots.activator({ props: activatorProps.value, isOpen: isOpen.value }) }
+              { slots.activator({
+                props: activatorProps.value,
+                isOpen: isOpen.value,
+              })}
             </VListGroupActivator>
           </VDefaultsProvider>
         )}
 
-        <MaybeTransition transition={{ component: VExpandTransition }} disabled={ !isBooted.value }>
-          <div class="v-list-group__items" role="group" aria-labelledby={ id.value } v-show={ isOpen.value }>
-            { slots.default?.() }
-          </div>
+        <MaybeTransition
+          transition={{ component: VExpandTransition }}
+          disabled={ !isBooted.value }
+          appear={ props.lazy && isBooted.value }
+        >
+          { () => {
+            if (props.lazy && !isOpen.value) return
+            const items = (
+              <div
+                class="v-list-group__items"
+                role="group"
+                aria-labelledby={ id.value }
+              >
+                { slots.default?.() }
+              </div>
+            )
+            if (props.lazy) return items
+            return withDirectives(items, [[vShow, isOpen.value]])
+          }}
         </MaybeTransition>
       </props.tag>
     ))
