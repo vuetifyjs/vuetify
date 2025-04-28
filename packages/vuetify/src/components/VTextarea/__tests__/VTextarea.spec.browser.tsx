@@ -19,7 +19,7 @@ describe('VTextarea', () => {
       </Application>
     ))
 
-    const el = screen.getByCSS('#input-0')
+    const el = screen.getByCSS('#input-v-0')
 
     expect(el.offsetHeight).toBe(56)
 
@@ -43,7 +43,7 @@ describe('VTextarea', () => {
       </Application>
     ))
 
-    const el = screen.getByCSS('#input-0')
+    const el = screen.getByCSS('#input-v-0')
 
     expect(el.offsetHeight).toBe(56)
 

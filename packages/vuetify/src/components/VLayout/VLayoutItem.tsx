@@ -36,11 +36,11 @@ export const VLayoutItem = genericComponent()({
     const { layoutItemStyles } = useLayoutItem({
       id: props.name,
       order: computed(() => parseInt(props.order, 10)),
-      position: toRef(props, 'position'),
-      elementSize: toRef(props, 'size'),
-      layoutSize: toRef(props, 'size'),
-      active: toRef(props, 'modelValue'),
-      absolute: toRef(props, 'absolute'),
+      position: toRef(() => props.position),
+      elementSize: toRef(() => props.size),
+      layoutSize: toRef(() => props.size),
+      active: toRef(() => props.modelValue),
+      absolute: toRef(() => props.absolute),
     })
 
     return () => (

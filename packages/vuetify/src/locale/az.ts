@@ -104,4 +104,17 @@ export default {
     loadMore: 'Daha çox yüklə',
     empty: 'Daha yoxdur',
   },
+  rules: {
+    required: 'Bu sahə tələb olunur',
+    email: 'Zəhmət olmasa etibarlı bir e-poçt daxil edin',
+    number: 'Bu sahə yalnız rəqəmlərdən ibarət ola bilər',
+    integer: 'Bu sahə yalnız tam ədədlərdən ibarət ola bilər',
+    capital: 'Bu sahə yalnız böyük hərflərdən ibarət ola bilər',
+    maxLength: 'Maksimum {0} simvol daxil etməlisiniz',
+    minLength: 'Minimum {0} simvol daxil etməlisiniz',
+    strictLength: 'Daxil edilən sahənin uzunluğu yanlışdır',
+    exclude: '{0} simvoluna icazə verilmir',
+    notEmpty: 'Zəhmət olmasa ən azı bir dəyər seçin',
+    pattern: 'Yanlış format',
+  },
 }

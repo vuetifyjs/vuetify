@@ -93,6 +93,7 @@ declare module 'vue' {
     DocExplorer: typeof import('./src/components/doc/Explorer.vue')['default']
     DocIconList: typeof import('./src/components/doc/IconList.vue')['default']
     DocIconTable: typeof import('./src/components/doc/IconTable.vue')['default']
+    DocIntroduced: typeof import('./src/components/doc/Introduced.vue')['default']
     DocMadeWithVueAttribution: typeof import('./src/components/doc/MadeWithVueAttribution.vue')['default']
     DocMadeWithVuetifyGallery: typeof import('./src/components/doc/MadeWithVuetifyGallery.vue')['default']
     DocMadeWithVuetifyLink: typeof import('./src/components/doc/MadeWithVuetifyLink.vue')['default']

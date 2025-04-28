@@ -104,4 +104,17 @@ export default {
     loadMore: 'Încarcă mai multe',
     empty: 'Nu mai există',
   },
+  rules: {
+    required: 'Acest câmp este obligatoriu',
+    email: 'Vă rugăm să introduceți o adresă de email validă',
+    number: 'Acest câmp poate conține doar numere',
+    integer: 'Acest câmp poate conține doar valori întregi',
+    capital: 'Acest câmp poate conține doar litere mari',
+    maxLength: 'Trebuie să introduceți maximum {0} caractere',
+    minLength: 'Trebuie să introduceți minimum {0} caractere',
+    strictLength: 'Lungimea câmpului introdus este invalidă',
+    exclude: 'Caracterele {0} nu sunt permise',
+    notEmpty: 'Vă rugăm să alegeți cel puțin o valoare',
+    pattern: 'Format invalid',
+  },
 }

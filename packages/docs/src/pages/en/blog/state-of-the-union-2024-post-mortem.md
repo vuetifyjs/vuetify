@@ -32,7 +32,7 @@ That's where it shifted. Some of the sharpest candidates weren't after a full-ti
 
 On Day 3, everything clicked, and the enthusiasm for what we could accomplish as a team became undeniable. And when I started seeing how well these individuals fit into key areas of the framework—from NUXT, to component development, documentation, scaffolding, and tooling—it just started making sense.
 
-## Meet the Nine New Core Team Members
+## Meet the Eight New Core Team Members
 
 This isn't some random lineup—it's a crew of passionate coders stepping up to shape Vuetify's future. Together, they'll tackle everything from components to docs to ecosystem tools, adding over 50 years of combined Vuetify experience. Here's who they are:
 
@@ -44,7 +44,6 @@ This isn't some random lineup—it's a crew of passionate coders stepping up to 
 - **Andrei Elkin** - Focused on [Nuxt integration](https://github.com/vuetifyjs/vuetify-loader), [Vuetify Create](https://github.com/vuetifyjs/create), and [Vuetify Loader](https://github.com/vuetifyjs/vuetify-loader).
 - **JC Puno** - Focused on [Nuxt integration](https://github.com/vuetifyjs/vuetify-loader) and SSR support.
 - **Abdelouahed Oumoussa** - Focused on [Vuetify Play](https://play.vuetifyjs.com/), [Vuetify Bin](https://bin.vuetifyjs.com/), [Vuetify Awesome](https://github.com/vuetifyjs/awesome), [Issues Generator](https://issues.vuetifyjs.com/), and implementing ecosystem features.
-- **Aaron Groenke** - Focused on Labs components and VFeatureDiscovery.
 
 These Vuetify heavy hitters are joining the existing ranks of core team members, including myself, Kael, and a few others. We're not just adding bodies—we're stacking the team with talent that's ready to dig in and carry this framework forward together.
 
