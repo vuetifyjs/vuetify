@@ -11,7 +11,7 @@
     "directory": "packages/docs"
   },
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --force",
     "build": "vite build",
     "preview": "vite preview",
     "preview-https": "HTTPS=true vite preview",
