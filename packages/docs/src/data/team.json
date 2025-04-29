@@ -187,7 +187,7 @@
     "discord": "spatlani",
     "focus": ["[vuetifyjs/*](https://github.com/vuetifyjs)"],
     "languages": ["English", "Hindi", "Punjabi"],
-    "linkedin": "in/spatlani",
+    "linkedin": "spatlani",
     "github": "spatlani",
     "avatar": "https://avatars.githubusercontent.com/u/11574195",
     "location": "Delhi, India",
@@ -197,6 +197,8 @@
     "name": "Isaias Briones",
     "team": "core",
     "discord": "ibriones",
+    "linkedin": "ibriones",
+    "avatar": "https://avatars.githubusercontent.com/u/47291268",
     "focus": ["[vuetifyjs/*](https://github.com/vuetifyjs)"],
     "languages": ["English", "Filipino"],
     "location": "Edmonton, AB, Canada"

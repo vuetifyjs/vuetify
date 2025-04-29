@@ -23,7 +23,7 @@ import {
   onDeactivated,
   provide,
   ref,
-  shallowRef,
+  shallowRef, toRef,
   useId,
   watch,
 } from 'vue'
@@ -77,7 +77,7 @@ export const VMenu = genericComponent<OverlaySlots>()({
     const { isRtl } = useRtl()
 
     const uid = useId()
-    const id = computed(() => props.id || `v-menu-${uid}`)
+    const id = toRef(() => props.id || `v-menu-${uid}`)
 
     const overlay = ref<VOverlay>()
 

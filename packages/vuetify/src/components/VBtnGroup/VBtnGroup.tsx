@@ -51,12 +51,12 @@ export const VBtnGroup = genericComponent()({
 
     provideDefaults({
       VBtn: {
-        height: props.direction === 'horizontal' ? 'auto' : null,
-        baseColor: toRef(props, 'baseColor'),
-        color: toRef(props, 'color'),
-        density: toRef(props, 'density'),
+        height: toRef(() => props.direction === 'horizontal' ? 'auto' : null),
+        baseColor: toRef(() => props.baseColor),
+        color: toRef(() => props.color),
+        density: toRef(() => props.density),
         flat: true,
-        variant: toRef(props, 'variant'),
+        variant: toRef(() => props.variant),
       },
     })
 

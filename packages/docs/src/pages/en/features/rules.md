@@ -3,7 +3,7 @@ emphasized: true
 meta:
   nav: Validation rules
   title: Validation rules composable
-  description: Vuetify implements a set of validation rules that can be overwritted
+  description: Vuetify implements a set of validation rules that can be overwritten
   keywords: Form validation, vuetify form validation, rules composable, validation rules
 related:
   - /components/forms/
@@ -120,7 +120,7 @@ Default error messages can be field-level redefined.
 
 ### Options
 
-Some RuleBuilders need options to work. For exemple `maxLength` needs a number as first parameter:
+Some RuleBuilders need options to work. For example `maxLength` needs a number as first parameter:
 
 ```html { resource="src/App.vue" }
 <v-form>
@@ -187,7 +187,7 @@ export default createRulesPlugin({
       },
       // Overwrite an existing rule by redefining it
       integer: err => {
-        return v => Number.isInteger(v) || err || 'Field must contain an interger value'
+        return v => Number.isInteger(v) || err || 'Field must contain an integer value'
       }
     },
   },

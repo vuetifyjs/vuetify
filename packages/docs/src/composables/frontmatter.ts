@@ -33,7 +33,7 @@ export function useFrontmatter () {
   watch(router.currentRoute, route => {
     setTimeout(() => {
       frontmatter.value = (route.matched.at(-1)!.instances.default as any)?.frontmatter
-      timeout = 0
+      timeout = 1
     }, timeout)
   }, { immediate: true })
 

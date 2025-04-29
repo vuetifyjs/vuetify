@@ -71,7 +71,7 @@ export const VVirtualScroll = genericComponent<new <T, Renderless extends boolea
       paddingTop,
       paddingBottom,
       computedItems,
-    } = useVirtual(props, toRef(props, 'items'))
+    } = useVirtual(props, toRef(() => props.items))
 
     useToggleScope(() => props.renderless, () => {
       function handleListeners (add = false) {

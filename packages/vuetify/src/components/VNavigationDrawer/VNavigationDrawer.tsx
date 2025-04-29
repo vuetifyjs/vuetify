@@ -109,7 +109,7 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
     const { isRtl } = useRtl()
     const { themeClasses } = provideTheme(props)
     const { borderClasses } = useBorder(props)
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.color)
     const { elevationClasses } = useElevation(props)
     const { displayClasses, mobile } = useDisplay(props)
     const { roundedClasses } = useRounded(props)
@@ -133,7 +133,7 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
     const location = computed(() => {
       return toPhysical(props.location, isRtl.value) as 'left' | 'right' | 'bottom'
     })
-    const isPersistent = computed(() => props.persistent)
+    const isPersistent = toRef(() => props.persistent)
     const isTemporary = computed(() => !props.permanent && (mobile.value || props.temporary))
     const isSticky = computed(() =>
       props.sticky &&
@@ -166,7 +166,7 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
       isActive,
       isTemporary,
       width,
-      touchless: toRef(props, 'touchless'),
+      touchless: toRef(() => props.touchless),
       position: location,
     })
 
@@ -184,7 +184,7 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
       layoutSize,
       elementSize: width,
       active: readonly(isActive),
-      disableTransitions: computed(() => isDragging.value),
+      disableTransitions: toRef(() => isDragging.value),
       absolute: computed(() =>
         // eslint-disable-next-line @typescript-eslint/no-use-before-define
         props.absolute || (isSticky.value && typeof isStuck.value !== 'string')
@@ -193,9 +193,9 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
 
     const { isStuck, stickyStyles } = useSticky({ rootEl, isSticky, layoutItemStyles })
 
-    const scrimColor = useBackgroundColor(computed(() => {
+    const scrimColor = useBackgroundColor(() => {
       return typeof props.scrim === 'string' ? props.scrim : null
-    }))
+    })
     const scrimStyles = computed(() => ({
       ...isDragging.value ? {
         opacity: dragProgress.value * 0.2,
