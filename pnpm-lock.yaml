@@ -18,9 +18,6 @@ patchedDependencies:
   '@testing-library/vue':
     hash: 15ba1e1b9f291286e3951cdf39b2e27f55b6727bc0315792f3e4558c0a3a7db8
     path: patches/@testing-library__vue.patch
-  vue-gtag-next:
-    hash: 3469e25ae2dc6bd97138e6a2b767743de8123979b246ebc2bdbb581c76efbfbf
-    path: patches/vue-gtag-next.patch
 
 importers:
 
@@ -282,9 +279,9 @@ importers:
       vue:
         specifier: ^3.5.13
         version: 3.5.13(typescript@5.5.4)
-      vue-gtag-next:
-        specifier: ^1.14.0
-        version: 1.14.0(patch_hash=3469e25ae2dc6bd97138e6a2b767743de8123979b246ebc2bdbb581c76efbfbf)(vue@3.5.13(typescript@5.5.4))
+      vue-gtag:
+        specifier: ^3.4.0
+        version: 3.4.0(vue-router@4.5.0(vue@3.5.13(typescript@5.5.4)))(vue@3.5.13(typescript@5.5.4))
       vue-i18n:
         specifier: ^11.1.1
         version: 11.1.1(vue@3.5.13(typescript@5.5.4))
@@ -9197,10 +9194,14 @@ packages:
     peerDependencies:
       eslint: ^8.57.0 || ^9.0.0
 
-  vue-gtag-next@1.14.0:
-    resolution: {integrity: sha512-iJl+cOG2GU5NuxqzSSIpt03WVOvZqyKB9TOy7d55KiuvRklcnb2nlqxW5B/a3/sbIt7fla+XEkRyMCcoz0zAHw==}
+  vue-gtag@3.4.0:
+    resolution: {integrity: sha512-i/eAIICqWy2iK+QHxA5zAMzwQTcC/8cUeBwr5wk4CgehcSEooxymgn8QYeMnE+rwQWXYfQ0FB1U8Ur4ITJNjSw==}
     peerDependencies:
-      vue: ^3.0.0-rc.11
+      vue: ^3.5.13
+      vue-router: ^4.5.0
+    peerDependenciesMeta:
+      vue-router:
+        optional: true
 
   vue-i18n@11.1.1:
     resolution: {integrity: sha512-0P6DkKy96R4Wh2sIZJEHw8ivnlD1pnB6Ib/eldoF1SUpQutfKZv6aMqZwICS1gW0rwq24ZSXw7y3jW+PRVYqWA==}
@@ -19531,9 +19532,11 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  vue-gtag-next@1.14.0(patch_hash=3469e25ae2dc6bd97138e6a2b767743de8123979b246ebc2bdbb581c76efbfbf)(vue@3.5.13(typescript@5.5.4)):
+  vue-gtag@3.4.0(vue-router@4.5.0(vue@3.5.13(typescript@5.5.4)))(vue@3.5.13(typescript@5.5.4)):
     dependencies:
       vue: 3.5.13(typescript@5.5.4)
+    optionalDependencies:
+      vue-router: 4.5.0(vue@3.5.13(typescript@5.5.4))
 
   vue-i18n@11.1.1(vue@3.5.13(typescript@5.5.4)):
     dependencies:
