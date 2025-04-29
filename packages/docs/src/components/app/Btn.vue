@@ -30,5 +30,6 @@
     },
   })
 
+  const { smAndUp } = useDisplay()
   const { t } = useI18n()
 </script>
