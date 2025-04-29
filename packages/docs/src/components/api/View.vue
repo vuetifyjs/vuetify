@@ -19,28 +19,28 @@
   })
   const component = shallowRef<any>({})
 
-  function generateToc() {
+  function generateToc () {
     const toc = []
     for (const section of sections) {
       if (section in component.value && Object.keys(component.value[section]).length) {
         toc.push({
           to: `#${section}`,
           text: section.charAt(0).toUpperCase() + section.slice(1),
-          level: 2
+          level: 2,
         })
       }
     }
     return toc
   }
 
-  function updateFrontmatter() {
+  function updateFrontmatter () {
     const matched = router.currentRoute.value.matched
     if (matched.length > 0) {
       const lastMatch = matched[matched.length - 1]
       if (lastMatch.instances.default) {
         (lastMatch.instances.default as any).frontmatter = {
           ...(lastMatch.instances.default as any).frontmatter,
-          toc: generateToc()
+          toc: generateToc(),
         }
       }
     }

@@ -1,5 +1,5 @@
 <template>
-  <section v-if="items?.length" class="mb-4" :id="section">
+  <section v-if="items?.length" :id="section" class="mb-4">
     <AppHeadline :path="`api-headers.${section}`" />
     <TableComponent :items="items" :name="name" />
   </section>
