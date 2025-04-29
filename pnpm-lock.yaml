@@ -75,8 +75,8 @@ importers:
         specifier: ^3.5.13
         version: 3.5.13
       '@vuetify/github-releaser':
-        specifier: ^4.0.1
-        version: 4.0.1(conventional-commits-filter@5.0.0)
+        specifier: ^4.0.2
+        version: 4.0.2(conventional-commits-filter@5.0.0)
       '@vueuse/head':
         specifier: ^1.3.1
         version: 1.3.1(vue@3.5.13(typescript@5.5.4))
@@ -3440,8 +3440,8 @@ packages:
       '@vue/composition-api':
         optional: true
 
-  '@vuetify/github-releaser@4.0.1':
-    resolution: {integrity: sha512-wI9aaIB1k8ox5SQUdn6Bjln8X19v6irVwI7ZM7m8E8y/IY28r7ZGSHGkKdN9KKlxmg+B45Irm590TBKCqtKNPA==}
+  '@vuetify/github-releaser@4.0.2':
+    resolution: {integrity: sha512-JqKT0LihtDnmk5u6/1cfkleqn9EM80pOLpQscdECV7mjhImusVRAo6eaJtWxrjFGYk5Ly7iYPmkMKlvuTySfsw==}
     engines: {node: '>=22.0.0'}
     hasBin: true
 
@@ -12851,15 +12851,18 @@ snapshots:
       vue: 3.5.13(typescript@5.5.4)
       vue-demi: 0.13.11(vue@3.5.13(typescript@5.5.4))
 
-  '@vuetify/github-releaser@4.0.1(conventional-commits-filter@5.0.0)':
+  '@vuetify/github-releaser@4.0.2(conventional-commits-filter@5.0.0)':
     dependencies:
+      '@hutson/parse-repository-url': 5.0.0
       '@octokit/rest': 21.1.1
       conventional-changelog: 6.0.0(conventional-commits-filter@5.0.0)
       dateformat: 5.0.3
       debug: 4.4.0
       gh-got: 10.0.0
       git-semver-tags: 7.0.1
+      hosted-git-info: 7.0.2
       meow: 12.1.1
+      normalize-package-data: 6.0.2
       semver: 7.7.1
       semver-regex: 4.0.5
     transitivePeerDependencies:
