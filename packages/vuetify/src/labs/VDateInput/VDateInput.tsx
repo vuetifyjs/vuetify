@@ -135,8 +135,6 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
 
       if (!menu.value || !isFocused.value) {
         menu.value = true
-
-        return
       }
 
       const target = e.target as HTMLInputElement
