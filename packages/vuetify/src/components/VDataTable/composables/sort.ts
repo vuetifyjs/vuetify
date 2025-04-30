@@ -38,8 +38,8 @@ type SortProps = {
 
 export function createSort (props: SortProps) {
   const sortBy = useProxiedModel(props, 'sortBy')
-  const mustSort = toRef(props, 'mustSort')
-  const multiSort = toRef(props, 'multiSort')
+  const mustSort = toRef(() => props.mustSort)
+  const multiSort = toRef(() => props.multiSort)
 
   return { sortBy, mustSort, multiSort }
 }

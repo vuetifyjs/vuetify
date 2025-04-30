@@ -25,12 +25,12 @@ export default defineWorkspace([
       include: ['**/*.spec.browser.{ts,tsx}'],
       setupFiles: ['../test/setup/browser-setup.ts'],
       bail: process.env.TEST_BAIL ? 1 : undefined,
-      slowTestThreshold: Infinity,
       browser: {
         enabled: true,
         provider: 'webdriverio',
         ui: false,
         headless: !process.env.TEST_BAIL,
+        screenshotDirectory: '../test/__screenshots__',
         commands,
         instances: [{
           browser: 'chrome',

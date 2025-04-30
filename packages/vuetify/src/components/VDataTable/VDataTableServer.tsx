@@ -74,8 +74,8 @@ export const VDataTableServer = genericComponent<new <T extends readonly any[], 
 
     const { columns, headers } = createHeaders(props, {
       groupBy,
-      showSelect: toRef(props, 'showSelect'),
-      showExpand: toRef(props, 'showExpand'),
+      showSelect: toRef(() => props.showSelect),
+      showExpand: toRef(() => props.showExpand),
     })
 
     const { items } = useDataTableItems(props, columns)
@@ -102,7 +102,7 @@ export const VDataTableServer = genericComponent<new <T extends readonly any[], 
       itemsPerPage,
       sortBy,
       groupBy,
-      search: toRef(props, 'search'),
+      search: toRef(() => props.search),
     })
 
     provide('v-data-table', {
@@ -112,10 +112,10 @@ export const VDataTableServer = genericComponent<new <T extends readonly any[], 
 
     provideDefaults({
       VDataTableRows: {
-        hideNoData: toRef(props, 'hideNoData'),
-        noDataText: toRef(props, 'noDataText'),
-        loading: toRef(props, 'loading'),
-        loadingText: toRef(props, 'loadingText'),
+        hideNoData: toRef(() => props.hideNoData),
+        noDataText: toRef(() => props.noDataText),
+        loading: toRef(() => props.loading),
+        loadingText: toRef(() => props.loadingText),
       },
     })
 
