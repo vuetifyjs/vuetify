@@ -9,6 +9,7 @@ import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import Components from 'unplugin-vue-components/vite'
 import { warmup } from 'vite-plugin-warmup'
+import livePreview from 'vite-live-preview'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const resolve = (file: string) => path.resolve(__dirname, file)
@@ -67,6 +68,7 @@ export default defineConfig(({ mode }) => {
       warmup({
         clientFiles: process.env.TEST ? [] : ['./dev/index.html'],
       }),
+      livePreview(),
     ],
     define: {
       __VUETIFY_VERSION__: JSON.stringify(vuetifyPackage.version),
@@ -75,6 +77,7 @@ export default defineConfig(({ mode }) => {
     },
     build: {
       minify: false,
+      sourcemap: 'inline',
     },
     css: {
       preprocessorOptions: {

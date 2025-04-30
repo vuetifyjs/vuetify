@@ -40,8 +40,14 @@ export const makeVDateInputProps = propsFactory({
     type: String as PropType<StrategyProps['location']>,
     default: 'bottom start',
   },
+  updateOn: {
+    type: Array as PropType<('blur' | 'enter')[]>,
+    default: () => ['blur', 'enter'],
+  },
 
-  ...makeDisplayProps(),
+  ...makeDisplayProps({
+    mobile: null,
+  }),
   ...makeFocusProps(),
   ...makeVConfirmEditProps({
     hideActions: true,
@@ -142,6 +148,7 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
 
       return { year, month, day }
     }
+
     function parseUserInput (value: string) {
       if (typeof props.inputFormat === 'function') {
         return props.inputFormat(value)
@@ -151,14 +158,14 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
         const formattedDate = parseDateString(value, props.inputFormat)
 
         if (!formattedDate) {
-          return null
+          return model.value
         }
 
         const { year, month, day } = formattedDate
         return adapter.setDate(adapter.setMonth(adapter.setYear(adapter.date(), year), month - 1), day)
       }
 
-      return adapter.isValid(value) ? adapter.date(value) : null
+      return adapter.isValid(value) ? adapter.date(value) : model.value
     }
 
     const display = computed(() => {
@@ -190,7 +197,12 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
     })
 
     const isInteractive = computed(() => !props.disabled && !props.readonly)
-    const isReadonly = computed(() => !(mobile.value && isEditingInput.value) && props.readonly)
+
+    const isReadonly = computed(() => {
+      if (!props.updateOn.length) return true
+
+      return !(mobile.value && isEditingInput.value) && props.readonly
+    })
 
     watch(menu, val => {
       if (val) return
@@ -204,13 +216,12 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
 
       if (!menu.value || !isFocused.value) {
         menu.value = true
-
         return
       }
 
-      const target = e.target as HTMLInputElement
-
-      model.value = parseUserInput(target.value) || model.value
+      if (props.updateOn.includes('enter')) {
+        onUserInput(e.target as HTMLInputElement)
+      }
     }
 
     function onClick (e: MouseEvent) {
@@ -241,7 +252,11 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
       model.value = null
     }
 
-    function onBlur () {
+    function onBlur (e: FocusEvent) {
+      if (props.updateOn.includes('blur')) {
+        onUserInput(e.target as HTMLInputElement)
+      }
+
       blur()
 
       // When in mobile mode and editing is done (due to keyboard dismissal), close the menu
@@ -249,6 +264,10 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
         menu.value = false
         isEditingInput.value = false
       }
+    }
+
+    function onUserInput ({ value }: HTMLInputElement) {
+      model.value = !value ? null : parseUserInput(value)
     }
 
     useRender(() => {

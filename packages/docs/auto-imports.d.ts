@@ -124,7 +124,7 @@ declare global {
   const useDisplay: typeof import('vuetify')['useDisplay']
   const useFrontmatter: typeof import('./src/composables/frontmatter')['useFrontmatter']
   const useGoTo: typeof import('vuetify')['useGoTo']
-  const useGtag: typeof import('vue-gtag-next')['useGtag']
+  const useGtag: typeof import('./src/composables/gtag')['useGtag']
   const useHttpStore: typeof import('@vuetify/one')['useHttpStore']
   const useI18n: typeof import('vue-i18n')['useI18n']
   const useId: typeof import('vue')['useId']
@@ -306,7 +306,7 @@ declare module 'vue' {
     readonly useDisplay: UnwrapRef<typeof import('vuetify')['useDisplay']>
     readonly useFrontmatter: UnwrapRef<typeof import('./src/composables/frontmatter')['useFrontmatter']>
     readonly useGoTo: UnwrapRef<typeof import('vuetify')['useGoTo']>
-    readonly useGtag: UnwrapRef<typeof import('vue-gtag-next')['useGtag']>
+    readonly useGtag: UnwrapRef<typeof import('./src/composables/gtag')['useGtag']>
     readonly useHttpStore: UnwrapRef<typeof import('@vuetify/one')['useHttpStore']>
     readonly useI18n: UnwrapRef<typeof import('vue-i18n')['useI18n']>
     readonly useId: UnwrapRef<typeof import('vue')['useId']>
