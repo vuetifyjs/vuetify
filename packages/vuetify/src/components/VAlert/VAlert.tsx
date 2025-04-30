@@ -77,7 +77,7 @@ export const makeVAlertProps = propsFactory({
   ...makeDensityProps(),
   ...makeDimensionProps(),
   ...makeElevationProps(),
-  ...makeIconSizeProps({ iconSize: null }),
+  ...makeIconSizeProps(),
   ...makeLocationProps(),
   ...makePositionProps(),
   ...makeRoundedProps(),

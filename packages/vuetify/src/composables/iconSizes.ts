@@ -1,5 +1,5 @@
 // Utilities
-import { computed, toRef } from 'vue'
+import { computed } from 'vue'
 import { propsFactory } from '@/util'
 
 // Types
@@ -8,16 +8,13 @@ import type { VIconBtnSizes } from '@/labs/VIconBtn/VIconBtn'
 
 // Types
 export interface IconSizeProps {
-  iconSize: VIconBtnSizes | number | string | null
+  iconSize?: VIconBtnSizes | number | string
   iconSizes: [VIconBtnSizes, number][]
 }
 
 // Composables
 export const makeIconSizeProps = propsFactory({
-  iconSize: {
-    type: [Number, String] as PropType<VIconBtnSizes | number | string | null>,
-    default: 'default',
-  },
+  iconSize: [Number, String] as PropType<VIconBtnSizes | number | string>,
   iconSizes: {
     type: Array as PropType<[VIconBtnSizes, number][]>,
     default: () => ([
@@ -30,11 +27,13 @@ export const makeIconSizeProps = propsFactory({
   },
 }, 'iconSize')
 
-export function useIconSizes (props: IconSizeProps, fallback: ComputedGetter<VIconBtnSizes | number | string>) {
+export function useIconSizes (props: IconSizeProps, fallback: ComputedGetter<VIconBtnSizes | number | string | undefined>) {
   const iconSize = computed(() => {
     const iconSizeMap = new Map(props.iconSizes)
-    const _iconSize = props.iconSize as VIconBtnSizes ?? toRef(fallback).value ?? 'default'
-    return iconSizeMap.get(_iconSize) ?? _iconSize
+    const _iconSize = props.iconSize as VIconBtnSizes ?? fallback() ?? 'default'
+    return iconSizeMap.has(_iconSize)
+      ? iconSizeMap.get(_iconSize)
+      : _iconSize
   })
 
   return { iconSize }
