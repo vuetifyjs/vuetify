@@ -279,9 +279,6 @@ importers:
       vue:
         specifier: ^3.5.13
         version: 3.5.13(typescript@5.5.4)
-      vue-gtag:
-        specifier: ^3.4.0
-        version: 3.4.0(vue-router@4.5.0(vue@3.5.13(typescript@5.5.4)))(vue@3.5.13(typescript@5.5.4))
       vue-i18n:
         specifier: ^11.1.1
         version: 11.1.1(vue@3.5.13(typescript@5.5.4))
@@ -9193,15 +9190,6 @@ packages:
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     peerDependencies:
       eslint: ^8.57.0 || ^9.0.0
-
-  vue-gtag@3.4.0:
-    resolution: {integrity: sha512-i/eAIICqWy2iK+QHxA5zAMzwQTcC/8cUeBwr5wk4CgehcSEooxymgn8QYeMnE+rwQWXYfQ0FB1U8Ur4ITJNjSw==}
-    peerDependencies:
-      vue: ^3.5.13
-      vue-router: ^4.5.0
-    peerDependenciesMeta:
-      vue-router:
-        optional: true
 
   vue-i18n@11.1.1:
     resolution: {integrity: sha512-0P6DkKy96R4Wh2sIZJEHw8ivnlD1pnB6Ib/eldoF1SUpQutfKZv6aMqZwICS1gW0rwq24ZSXw7y3jW+PRVYqWA==}
@@ -19531,12 +19519,6 @@ snapshots:
       semver: 7.7.1
     transitivePeerDependencies:
       - supports-color
-
-  vue-gtag@3.4.0(vue-router@4.5.0(vue@3.5.13(typescript@5.5.4)))(vue@3.5.13(typescript@5.5.4)):
-    dependencies:
-      vue: 3.5.13(typescript@5.5.4)
-    optionalDependencies:
-      vue-router: 4.5.0(vue@3.5.13(typescript@5.5.4))
 
   vue-i18n@11.1.1(vue@3.5.13(typescript@5.5.4)):
     dependencies:

@@ -7,19 +7,10 @@
     target="_blank"
     text="playground"
     variant="text"
-    @click="onClick"
+    @click="sweClick('app-bar', 'playground', name)"
   />
 </template>
 
 <script setup>
-  const { event } = useGtag()
   const { name } = useRoute()
-
-  function onClick () {
-    event('click', {
-      event_category: 'app-bar',
-      event_label: 'playground',
-      value: name,
-    })
-  }
 </script>
