@@ -58,6 +58,11 @@ describe('VDateInput', () => {
         input: '2024-01-01',
         expected: { year: 2024, month: 0, day: 1 },
       },
+      {
+        format: (value: string) => new Date(2024, 0, 1),
+        input: '2024-01-01',
+        expected: { year: 2024, month: 0, day: 1 },
+      },
     ]
 
     testCases.forEach(({ format, input, expected }) => {
@@ -132,6 +137,23 @@ describe('VDateInput', () => {
 
         expect(wrapper.emitted('update:modelValue')).toBeFalsy()
       })
+    })
+
+    it(`should reset if empty string is inputted`, async () => {
+      const wrapper = mountFunction(
+        <VDateInput
+          modelValue={ new Date() }
+        />
+      )
+
+      const inputElement = wrapper.find('input')
+      await inputElement.trigger('click')
+      await inputElement.trigger('focus')
+      await inputElement.setValue('')
+      await inputElement.trigger('keydown', { key: 'Enter' })
+
+      const date = wrapper.emitted('update:modelValue')![0][0] as Date
+      expect(date).toBeNull()
     })
   })
 
