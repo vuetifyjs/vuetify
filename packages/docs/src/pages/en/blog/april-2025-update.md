@@ -37,7 +37,7 @@ The month of April saw the release of "Andromeda", the latest version of Vuetify
 - [v3.8.2](https://vuetifyjs.com/getting-started/release-notes/?version=v3.8.2)
 - [v3.8.3](https://vuetifyjs.com/getting-started/release-notes/?version=v3.8.3)
 
-## MCP Soon™️{ #mcp}
+## MCP Soon™️{ #mcp }
 
 One of the most exciting developments underway is the creation of [MCP: Model Context Protocol](https://modelcontextprotocol.io/introduction) and our efforts to provide LLMs with the most up to date framework information using it. The **@vuetify/mcp** package represents our attempt to improve how developers interact with Vuetify through AI and LLM-powered tools.
 
@@ -116,6 +116,28 @@ For those anticipating the release of [VTreeview](https://vuetifyjs.com/componen
 - [PR#21167](https://github.com/vuetifyjs/vuetify/pull/21167)
 - [Commit 8d798e3](https://github.com/vuetifyjs/vuetify/commit/8d798e36baf86f04eebf2828be0cffa0dc31053a)
 - [vue-macros#942](https://github.com/vue-macros/vue-macros/pull/942)
+
+## Unvuetify
+
+The motivation behind @unvuetify is simple: existing plugins aren’t keeping up with the evolving capabilities of Vue and Nuxt. Features like lazy hydration, auto-importing, and tree shaking are either missing or cumbersome in older plugins.
+
+This monorepo isn’t a hard replacement — you can still use vite-plugin-vuetify or webpack-plugin-vuetify if they suit your needs. But if you're working with Nuxt 3, Vue 3.5, or want more flexibility and performance, @unvuetify is built for you.
+
+Created [@unvuetify](https://github.com/userquin/unvuetify-monorepo) repository to enable:
+
+- Vue Lazy Hydration support: ready to use Vue Lazy Hydration with Vuetify components and Nuxt 3/4.
+- Extensible: allow prefixing Vuetify components, directives and composables with Vuetify prefix.
+- VSCode directives suggestions.
+- Nuxt 3/4 utilities: drop a simple Nuxt module and it will auto-import all Vuetify components, directives and composables for you.
+- and more...
+
+**Details:**
+
+- [@unvuetify/shared](https://github.com/userquin/unvuetify-monorepo/tree/main/packages/shared): utilities to resolve Vuetify components and directives
+- [@unvuetify/unimport-presets](https://github.com/userquin/unvuetify-monorepo/tree/main/packages/unimport-presets): presets to auto-import Vuetify composables and directives
+- [@unvuetify/unplugin-vue-components-resolvers](https://github.com/userquin/unvuetify-monorepo/tree/main/packages/unplugin-vue-components-resolvers): resolvers to auto-import Vuetify components and directives
+- [@unvuetify/vite-styles-plugin](https://github.com/userquin/unvuetify-monorepo/tree/main/packages/styles-plugin): Vite plugin to load Vuetify sass/scss styles with Nuxt 3 SSR support
+- [@unvuetify/nuxt-utils](https://github.com/userquin/unvuetify-monorepo/tree/main/packages/nuxt-utils): utilities to configure Vuetify composables, directives, components and styles in your Nuxt 3 application
 
 ## DX efforts
 
