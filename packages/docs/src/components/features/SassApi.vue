@@ -42,11 +42,19 @@
   const model = shallowRef([])
 
   const code = computed(() => {
-    const $parsed = model.value.map(variable => {
-      return `  ${variable.title}: ${variable.default}`
-    }).join(',\n')
+    const $parsed = model.value?.reduce((acc, variable) => {
+      const varString = `  ${variable.title}: ${variable.default.replaceAll('\n', '\n  ')}`
+      acc[variable.use].push(varString)
+      return acc
+    }, { vuetify: [], 'vuetify/settings': [] })
+    const useList = []
 
-    return `@use 'vuetify/settings' with (\n${$parsed},\n);`
+    for (const [use, value] of Object.entries($parsed)) {
+      if (value.length) {
+        useList.push(`@use '${use}' with (\n${value.join(',\n')},\n);`)
+      }
+    }
+    return useList.join('\n\n')
   })
 
   async function getVariables (name) {
@@ -76,6 +84,7 @@
             title: variable,
             subtitle: name,
             value: `${variable}-${name}`,
+            use: component.sass[variable]?.use || null,
           })
         }
       }
