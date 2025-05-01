@@ -25,7 +25,7 @@ describe('filter', () => {
       [null, 'foo', -1],
       ['foo', 'bar', -1],
       [1, '1', [[0, 1]]],
-      ['1', 1, [[0, 1]]],
+      ['1', '1', [[0, 1]]],
     ])('should compare %s to %s and return a match result', (text, query, expected) => {
       // @ts-expect-error
       expect(defaultFilter(text, query)).toStrictEqual(expected)

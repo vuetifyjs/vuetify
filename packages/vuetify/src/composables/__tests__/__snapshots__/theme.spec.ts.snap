@@ -131,9 +131,9 @@ exports[`createTheme > should create style element 1`] = `
       --v-theme-surface-bright-overlay-multiplier: 2;
       --v-theme-surface-light: 66,66,66;
       --v-theme-surface-light-overlay-multiplier: 1;
-      --v-theme-surface-variant: 163,163,163;
+      --v-theme-surface-variant: 200,200,200;
       --v-theme-surface-variant-overlay-multiplier: 2;
-      --v-theme-on-surface-variant: 66,66,66;
+      --v-theme-on-surface-variant: 0,0,0;
       --v-theme-primary: 33,150,243;
       --v-theme-primary-overlay-multiplier: 2;
       --v-theme-primary-darken-1: 39,124,193;

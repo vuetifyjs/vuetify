@@ -377,6 +377,8 @@ export default defineConfig(({ command, mode, isSsrBuild }) => {
         'fflate',
         '@cosmicjs/sdk',
       ],
+      // In development mode, prevent pre-bundling of @vuetify libs for HMR linking
+      exclude: process.env.NODE_ENV ==='development' ? ['@vuetify/one'] : [],
     },
 
     ssr: {

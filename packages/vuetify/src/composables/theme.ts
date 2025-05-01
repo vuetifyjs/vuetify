@@ -7,6 +7,7 @@ import {
   provide,
   ref,
   shallowRef,
+  toRef,
   watch,
   watchEffect,
 } from 'vue'
@@ -28,7 +29,7 @@ import {
 } from '@/util'
 
 // Types
-import type { VueHeadClient } from '@unhead/vue'
+import type { VueHeadClient } from '@unhead/vue/client'
 import type { HeadClient } from '@vueuse/head'
 import type { App, DeepReadonly, InjectionKey, Ref } from 'vue'
 
@@ -175,8 +176,8 @@ function genDefaults () {
           surface: '#212121',
           'surface-bright': '#ccbfd6',
           'surface-light': '#424242',
-          'surface-variant': '#a3a3a3',
-          'on-surface-variant': '#424242',
+          'surface-variant': '#c8c8c8',
+          'on-surface-variant': '#000000',
           primary: '#2196F3',
           'primary-darken-1': '#277CC1',
           secondary: '#54B6B2',
@@ -376,7 +377,7 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
     return acc
   })
 
-  const current = computed(() => computedThemes.value[name.value])
+  const current = toRef(() => computedThemes.value[name.value])
 
   const styles = computed(() => {
     const lines: string[] = []
@@ -421,8 +422,8 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
     return lines.map((str, i) => i === 0 ? str : `    ${str}`).join('')
   })
 
-  const themeClasses = computed(() => parsedOptions.isDisabled ? undefined : `${parsedOptions.prefix}theme--${name.value}`)
-  const themeNames = computed(() => Object.keys(computedThemes.value))
+  const themeClasses = toRef(() => parsedOptions.isDisabled ? undefined : `${parsedOptions.prefix}theme--${name.value}`)
+  const themeNames = toRef(() => Object.keys(computedThemes.value))
 
   if (SUPPORTS_MATCH_MEDIA) {
     const media = window.matchMedia('(prefers-color-scheme: dark)')
@@ -464,7 +465,7 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
         }
       } else {
         if (IN_BROWSER) {
-          head.addHeadObjs(computed(getHead))
+          head.addHeadObjs(toRef(getHead))
           watchEffect(() => head.updateDOM())
         } else {
           head.addHeadObjs(getHead())
@@ -544,10 +545,10 @@ export function provideTheme (props: { theme?: string }) {
 
   if (!theme) throw new Error('Could not find Vuetify theme injection')
 
-  const name = computed(() => props.theme ?? theme.name.value)
-  const current = computed(() => theme.themes.value[name.value])
+  const name = toRef(() => props.theme ?? theme.name.value)
+  const current = toRef(() => theme.themes.value[name.value])
 
-  const themeClasses = computed(() => theme.isDisabled ? undefined : `${theme.prefix}theme--${name.value}`)
+  const themeClasses = toRef(() => theme.isDisabled ? undefined : `${theme.prefix}theme--${name.value}`)
 
   const newTheme: ThemeInstance = {
     ...theme,

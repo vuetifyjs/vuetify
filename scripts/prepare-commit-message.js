@@ -1,9 +1,6 @@
 import fs from 'node:fs'
 
-const [
-  messageFile,
-  commitType,
-] = process.env.HUSKY_GIT_PARAMS.split(' ')
+const [messageFile, commitType] = process.argv.slice(2)
 
 if (commitType == null) {
   const currentMessage = fs.readFileSync(messageFile)

@@ -18,6 +18,16 @@ Latest news, updates, and stories about Vuetify.
 
 <br>
 
+## Announcing Vuetify v3.8
+
+🖊️ John Leider • 📅 April 8th, 2025
+
+Vuetify v3.8 is here! Discover the latest features, improvements, and bug fixes in this minor release, including new components and form input enhancements. This release is packed with new features, improvements, and bug fixes, and contains no breaking changes... { .text-medium-emphasis }
+
+<br>
+
+[Read More](/blog/announcing-vuetify-3.8/) { .text-end }
+
 ## Vuetify HeroDevs Partnership
 
 🖊️ Taylor Corbett • 📅 March 28th, 2025

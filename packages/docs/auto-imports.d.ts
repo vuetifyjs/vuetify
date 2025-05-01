@@ -149,6 +149,7 @@ declare global {
   const useSlots: typeof import('vue')['useSlots']
   const useSponsorsStore: typeof import('./src/stores/sponsors')['useSponsorsStore']
   const useSpotStore: typeof import('./src/stores/spot')['useSpotStore']
+  const useTeamMembersStore: typeof import('./src/stores/team-members')['useTeamMembersStore']
   const useTeamStore: typeof import('./src/stores/team')['useTeamStore']
   const useTemplateRef: typeof import('vue')['useTemplateRef']
   const useTheme: typeof import('vuetify')['useTheme']
@@ -182,8 +183,8 @@ declare global {
   export type { Sponsor } from './src/stores/sponsors'
   import('./src/stores/sponsors')
   // @ts-ignore
-  export type { Member, GithubMember } from './src/stores/team'
-  import('./src/stores/team')
+  export type { Member, GithubMember } from './src/stores/team-members'
+  import('./src/stores/team-members')
   // @ts-ignore
   export type { Item } from './src/utils/api'
   import('./src/utils/api')
@@ -330,7 +331,7 @@ declare module 'vue' {
     readonly useSlots: UnwrapRef<typeof import('vue')['useSlots']>
     readonly useSponsorsStore: UnwrapRef<typeof import('./src/stores/sponsors')['useSponsorsStore']>
     readonly useSpotStore: UnwrapRef<typeof import('./src/stores/spot')['useSpotStore']>
-    readonly useTeamStore: UnwrapRef<typeof import('./src/stores/team')['useTeamStore']>
+    readonly useTeamMembersStore: UnwrapRef<typeof import('./src/stores/team-members')['useTeamMembersStore']>
     readonly useTemplateRef: UnwrapRef<typeof import('vue')['useTemplateRef']>
     readonly useTheme: UnwrapRef<typeof import('vuetify')['useTheme']>
     readonly useUserStore: UnwrapRef<typeof import('@vuetify/one')['useUserStore']>

@@ -3,7 +3,8 @@ import type { CustomCommands } from './setup/browser-commands.ts'
 interface CustomMatchers<R = unknown> {
   toHaveBeenTipped: () => R
   toHaveBeenWarned: () => R
-  toBeOnScreen: () => R
+  toBeOnScreen: () => Promise<R>
+  toBeDisplayed: () => Promise<R>
 }
 
 declare module 'vitest' {

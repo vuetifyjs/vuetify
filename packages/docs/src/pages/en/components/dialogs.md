@@ -95,15 +95,15 @@ Modals that do not fit within the available window space will scroll the contain
 
 The `v-dialog` component has 2 slots, **activator** and **default**. The **activator** slot is used to designate an element that will activate the dialog. The **default** slot provides an **isActive** ref which is tied to the current state of the dialog.
 
+#### Default
+
+<ExamplesExample file="v-dialog/slot-default" />
+
 #### Activator
 
 In addition using the **activator** slot, we can instead use the **activator** prop to activate a dialog. By placing the dialog component inside the button, and setting the **activator** prop value to **"parent"** we can designate the parent (button) as the activator.
 
 <ExamplesExample file="v-dialog/prop-activator" />
-
-#### Default
-
-<ExamplesExample file="v-dialog/slot-default" />
 
 ## Examples
 
@@ -138,3 +138,9 @@ Due to limited space, full-screen dialogs may be more appropriate for mobile dev
 This example demonstrates a dialog that is used to invite users to a group.
 
 <ExamplesExample file="v-dialog/misc-invite-dialog" />
+
+### Data Table
+
+The **activator** prop allows you to use just one instance of the `v-dialog` component. For example, a row in a `v-data-table` can trigger the same dialog.
+
+<ExamplesExample file="v-dialog/misc-data-table"/>

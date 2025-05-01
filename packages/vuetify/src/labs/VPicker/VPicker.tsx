@@ -10,7 +10,6 @@ import { makeVSheetProps, VSheet } from '@/components/VSheet/VSheet'
 import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
-import { toRef } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -37,7 +36,7 @@ export const VPicker = genericComponent<VPickerSlots>()({
   props: makeVPickerProps(),
 
   setup (props, { slots }) {
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.color)
     useRender(() => {
       const sheetProps = VSheet.filterProps(props)
       const hasTitle = !!(props.title || slots.title)

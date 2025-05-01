@@ -22,14 +22,17 @@ Configure how content overflows when it becomes out of container bounds.
 | **overflow** | overflow: auto; |
 | **overflow-auto** | overflow: auto; |
 | **overflow-hidden** | overflow: hidden; |
+| **overflow-visible** | overflow: visible; |
 | **overflow-x** | overflow-x: auto; |
 | **overflow-x-auto** | overflow-x: auto; |
 | **overflow-x-hidden** | overflow-x: hidden; |
 | **overflow-x-scroll** | overflow-x: scroll; |
+| **overflow-x-visible** | overflow-x: visible; |
 | **overflow-y** | overflow-y: auto; |
 | **overflow-y-auto** | overflow-y: auto; |
 | **overflow-y-hidden** | overflow-y: hidden; |
 | **overflow-y-scroll** | overflow-y: scroll; { style="max-height: 420px;" fixed-header } |
+| **overflow-y-visible** | overflow-y: visible; |
 
 <PromotedEntry />
 
