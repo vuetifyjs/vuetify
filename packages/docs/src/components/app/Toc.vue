@@ -110,7 +110,7 @@
               :href="spot.spot.href"
               rel="noopener noreferrer sponsored"
               target="_blank"
-              @click="gtagClick('toc', 'promotion', spot.spot.sponsor)"
+              @click="sweClick('toc', 'promotion', spot.spot.sponsor)"
             >
               <v-img :src="spot.spot.image.url" />
             </a>

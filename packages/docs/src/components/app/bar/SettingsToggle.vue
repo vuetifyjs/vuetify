@@ -30,7 +30,7 @@
   const { name } = useRoute()
 
   function onClick () {
-    gtagClick('app-bar', 'settings-toggle', name)
+    sweClick('app-bar', 'settings-toggle', name)
 
     app.settings = !app.settings
   }
