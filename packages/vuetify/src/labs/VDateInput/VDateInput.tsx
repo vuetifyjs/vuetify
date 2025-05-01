@@ -162,7 +162,7 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
         }
 
         const { year, month, day } = formattedDate
-        return adapter.setDate(adapter.setMonth(adapter.setYear(adapter.date(), year), month - 1), day)
+        return adapter.parseISO(`${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`)
       }
 
       return adapter.isValid(value) ? adapter.date(value) : model.value
