@@ -38,7 +38,6 @@
     "swetrix": "^3.6.1",
     "vee-validate": "^4.15.0",
     "vue": "^3.5.13",
-    "vue-gtag": "^3.4.0",
     "vue-i18n": "^11.1.1",
     "vue-instantsearch": "^4.20.6",
     "vue-router": "^4.5.0",
