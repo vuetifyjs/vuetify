@@ -88,6 +88,12 @@ Within your style file, specify the variables you want to override, and that's i
 
 :::
 
+::: warning
+
+If your values contain commas, such as if you are setting `$body-font-family` with multiple fonts, you must surround the value with parentheses, like this: `$body-font-family: ('Roboto', sans-serif)`. Otherwise the commas will be reported as a syntax error.
+
+:::
+
 ## Variable API
 
 There are many SASS/SCSS variables that can be customized across the entire Vuetify framework. You can browse all the variables using the tool below:
