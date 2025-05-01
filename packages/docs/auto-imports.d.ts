@@ -103,6 +103,7 @@ declare global {
   const shallowRef: typeof import('vue')['shallowRef']
   const storeToRefs: typeof import('pinia')['storeToRefs']
   const stripLinks: typeof import('./src/utils/api')['stripLinks']
+  const sweClick: typeof import('./src/utils/analytics')['sweClick']
   const toRaw: typeof import('vue')['toRaw']
   const toRef: typeof import('vue')['toRef']
   const toRefs: typeof import('vue')['toRefs']
@@ -124,7 +125,6 @@ declare global {
   const useDisplay: typeof import('vuetify')['useDisplay']
   const useFrontmatter: typeof import('./src/composables/frontmatter')['useFrontmatter']
   const useGoTo: typeof import('vuetify')['useGoTo']
-  const useGtag: typeof import('vue-gtag-next')['useGtag']
   const useHttpStore: typeof import('@vuetify/one')['useHttpStore']
   const useI18n: typeof import('vue-i18n')['useI18n']
   const useId: typeof import('vue')['useId']
@@ -230,7 +230,6 @@ declare module 'vue' {
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
     readonly getDistance: UnwrapRef<typeof import('./src/utils/helpers')['getDistance']>
     readonly getMatchMedia: UnwrapRef<typeof import('./src/utils/helpers')['getMatchMedia']>
-    readonly gtagClick: UnwrapRef<typeof import('./src/utils/analytics')['gtagClick']>
     readonly h: UnwrapRef<typeof import('vue')['h']>
     readonly inject: UnwrapRef<typeof import('vue')['inject']>
     readonly insertLinks: UnwrapRef<typeof import('./src/utils/api')['insertLinks']>
@@ -285,6 +284,7 @@ declare module 'vue' {
     readonly shallowRef: UnwrapRef<typeof import('vue')['shallowRef']>
     readonly storeToRefs: UnwrapRef<typeof import('pinia')['storeToRefs']>
     readonly stripLinks: UnwrapRef<typeof import('./src/utils/api')['stripLinks']>
+    readonly sweClick: UnwrapRef<typeof import('./src/utils/analytics')['sweClick']>
     readonly toRaw: UnwrapRef<typeof import('vue')['toRaw']>
     readonly toRef: UnwrapRef<typeof import('vue')['toRef']>
     readonly toRefs: UnwrapRef<typeof import('vue')['toRefs']>
@@ -306,7 +306,6 @@ declare module 'vue' {
     readonly useDisplay: UnwrapRef<typeof import('vuetify')['useDisplay']>
     readonly useFrontmatter: UnwrapRef<typeof import('./src/composables/frontmatter')['useFrontmatter']>
     readonly useGoTo: UnwrapRef<typeof import('vuetify')['useGoTo']>
-    readonly useGtag: UnwrapRef<typeof import('vue-gtag-next')['useGtag']>
     readonly useHttpStore: UnwrapRef<typeof import('@vuetify/one')['useHttpStore']>
     readonly useI18n: UnwrapRef<typeof import('vue-i18n')['useI18n']>
     readonly useId: UnwrapRef<typeof import('vue')['useId']>

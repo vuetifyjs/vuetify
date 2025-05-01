@@ -35,7 +35,7 @@ export const makeVTooltipProps = propsFactory({
     origin: 'auto' as const,
     scrim: false,
     scrollStrategy: 'reposition' as const,
-    transition: false,
+    transition: null,
   }), [
     'absolute',
     'persistent',
@@ -77,7 +77,7 @@ export const VTooltip = genericComponent<OverlaySlots>()({
     })
 
     const transition = toRef(() => {
-      if (props.transition) return props.transition
+      if (props.transition != null) return props.transition
       return isActive.value ? 'scale-transition' : 'fade-transition'
     })
 
