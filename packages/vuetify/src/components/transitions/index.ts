@@ -43,3 +43,5 @@ export type VSlideYTransition = InstanceType<typeof VSlideYTransition>
 export type VSlideYReverseTransition = InstanceType<typeof VSlideYReverseTransition>
 export type VExpandTransition = InstanceType<typeof VExpandTransition>
 export type VExpandXTransition = InstanceType<typeof VExpandXTransition>
+
+export { createCssTransition, createJavascriptTransition }
