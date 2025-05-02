@@ -12,7 +12,7 @@ This month is packed full of exciting updates and progress across the Vuetify ec
 
 ---
 
-🖊️ John Leider • 📅 May 1st 2025
+🖊️ John Leider • 📅 May 1st, 2025
 
 <PromotedEntry />
 
@@ -149,7 +149,7 @@ From the release of team subscriptions for Vuetify One, to major rewrites of too
 A major focus has been making Vuetify more accessible to developers at all levels.
 
 - **MCP**: Coding companion that provides contextually accurate, up-to-date, and deeply integrated Vuetify tools, documentation, snippets and much more right when you need it.
-- **Vuetify Create**: Released with significant [improvements](https://github.com/vuetifyjs/create) and planning for 3.0 representing a total rewrite of our project scaffolding tool.
+- **Vuetify Create**: Multiple updates with improvements and planning for 3.0 representing a total rewrite of our project scaffolding tool.
 - **Labs Components**: Added auto-import support by default for labs components.
 - **Internationalization**: Expansion of translations including Spanish additions to the documentation.
 - **Modern ESLint Configuration**: Complete rewrite of our ESLint configuration with a functional approach, being rolled out across all repositories.
@@ -209,7 +209,7 @@ We are also in the process of updating the entire Vuetify Play interface to be m
 
 We are wrapping up the new [Vuetify Issue Generator](https://issues.vuetifyjs.com/), which will replace the current system (still on Vuetify v1.5!).
 
-<video width="100%" height="auto" autoplay loop>
+<video width="100%" height="auto" autoplay loop controls>
   <source src="https://cdn.vuetifyjs.com/docs/images/blog/april-2025-update/vuetify-issues.mp4" type="video/mp4"></source>
 </video>
 
