@@ -2,13 +2,13 @@
   <v-container>
     <v-row justify="center">
       <v-col class="text-center">
-        <v-menu transition="my-transition">
+        <v-menu transition="custom-prop-transition">
           <template v-slot:activator="{ props }">
             <v-btn
               color="primary"
               v-bind="props"
             >
-              My Transition
+              Prop Transition
             </v-btn>
           </template>
 
@@ -29,14 +29,13 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import { createCssTransition } from 'vuetify/components/transitions';
+  import { createCssTransition } from 'vuetify/components/transitions'
 
-const MyTransition = createCssTransition('my-transition')
+  createCssTransition('custom-prop-transition')
 </script>
 
 <style lang="scss">
-.my-transition {
+.custom-prop-transition {
   &-enter-active,
   &-leave-active {
     transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);

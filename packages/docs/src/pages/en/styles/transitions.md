@@ -115,7 +115,7 @@ You can use Vuetify's transition helper function to easily create your own custo
 ```js
 import { createCssTransition } from 'vuetify/components/transitions';
 
-const MyTransition = createCssTransition('my-transition')
+createCssTransition('my-transition')
 ```
 
 The argument passed to the **createCssTransition** function will be the name of the transition that you can hook into your style. This is an example of what `my-transition` looks like:
@@ -137,13 +137,13 @@ The argument passed to the **createCssTransition** function will be the name of 
 
 You can now use this custom transition in a few different ways.
 
-#### As a component
+### As a component
 
 The **createCssTransition** function will return a component that you can use in your template.
 
 <ExamplesExample file="transitions/create-css-transition-component" />
 
-#### As a prop
+### As a prop
 
 Many of Vuetify’s components contain a **transition** prop. You can send the name of your custom transition to the transition prop.
 
