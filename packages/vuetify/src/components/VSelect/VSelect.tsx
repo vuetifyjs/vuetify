@@ -330,7 +330,7 @@ export const VSelect = genericComponent<new <
         const index = displayItems.value.findIndex(
           item => model.value.some(s => (props.valueComparator || deepEqual)(s.value, item.value))
         )
-        IN_BROWSER && props.noAutoScroll && window.requestAnimationFrame(() => {
+        IN_BROWSER && !props.noAutoScroll && window.requestAnimationFrame(() => {
           index >= 0 && vVirtualScrollRef.value?.scrollToIndex(index)
         })
       }
