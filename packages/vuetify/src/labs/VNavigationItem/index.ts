@@ -1,0 +1,1 @@
+export { VNavigationItem } from "./VNavigationItem";
