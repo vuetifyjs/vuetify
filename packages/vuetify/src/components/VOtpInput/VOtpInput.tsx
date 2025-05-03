@@ -30,6 +30,7 @@ export const makeVOtpInputProps = propsFactory({
   autofocus: Boolean,
   divider: String,
   focusAll: Boolean,
+  keepFocus: Boolean,
   label: {
     type: String,
     default: '$vuetify.input.otp',
@@ -172,7 +173,11 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
 
       model.value = clipboardText.split('')
 
-      inputRef.value?.[index].blur()
+      if (!props.keepFocus) {
+        inputRef.value?.[index].blur()
+      } else {
+        inputRef.value?.[clipboardText.length - 1 ?? index].focus()
+      }
     }
 
     function reset () {
