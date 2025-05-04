@@ -94,7 +94,7 @@ export const VDialog = genericComponent<OverlaySlots>()({
 
     function onAfterEnter () {
       emit('afterEnter')
-      if (overlay.value?.contentEl && !overlay.value.contentEl.contains(document.activeElement) && props.retainFocus) {
+      if (overlay.value?.contentEl && !overlay.value.contentEl.contains(document.activeElement) && (props.scrim || props.retainFocus)) {
         overlay.value.contentEl.focus({ preventScroll: true })
       }
     }
