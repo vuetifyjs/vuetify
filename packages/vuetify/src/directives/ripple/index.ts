@@ -283,11 +283,13 @@ function updateRipple (el: HTMLElement, binding: RippleDirectiveBinding, wasEnab
   el._ripple.enabled = enabled
   el._ripple.centered = modifiers.center
   el._ripple.circle = modifiers.circle
-  if (isObject(value) && value.class) {
-    el._ripple.class = value.class
+
+  const bindingValue = isObject(value) ? value : {}
+  if (bindingValue.class) {
+    el._ripple.class = bindingValue.class
   }
 
-  const allowedKeys = (typeof value === 'object' ? value.keys : null) ?? [keyCodes.enter, keyCodes.space]
+  const allowedKeys = bindingValue.keys ?? [keyCodes.enter, keyCodes.space]
   el._ripple.keyDownHandler = (e: KeyboardEvent) => keyboardRippleShow(e, allowedKeys)
 
   if (enabled && !wasEnabled) {
