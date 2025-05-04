@@ -9,6 +9,7 @@ import { makeVFieldProps } from '@/components/VField/VField'
 import { makeVInputProps, VInput } from '@/components/VInput/VInput'
 
 // Composables
+import { useAutocomplete } from '@/composables/autocomplete'
 import { useFocus } from '@/composables/focus'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { useProxiedModel } from '@/composables/proxiedModel'
@@ -27,6 +28,7 @@ import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
 
 export const makeVTextareaProps = propsFactory({
+  autocomplete: String as PropType<'suppress' | string>,
   autoGrow: Boolean,
   autofocus: Boolean,
   counter: [Boolean, Number, String] as PropType<true | number | string>,
@@ -105,6 +107,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
     const vFieldRef = ref<VInput>()
     const controlHeight = shallowRef('')
     const textareaRef = ref<HTMLInputElement>()
+    const autocomplete = useAutocomplete(props)
     const isActive = computed(() => (
       props.persistentPlaceholder ||
       isFocused.value ||
@@ -112,6 +115,10 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
     ))
 
     function onFocus () {
+      if (autocomplete.isSuppressing.value) {
+        autocomplete.update()
+      }
+
       if (textareaRef.value !== document.activeElement) {
         textareaRef.value?.focus()
       }
@@ -284,7 +291,8 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
                         disabled={ isDisabled.value }
                         placeholder={ props.placeholder }
                         rows={ props.rows }
-                        name={ props.name }
+                        name={ autocomplete.fieldName.value }
+                        autocomplete={ autocomplete.fieldAutocomplete.value }
                         onFocus={ onFocus }
                         onBlur={ blur }
                         { ...slotProps }
