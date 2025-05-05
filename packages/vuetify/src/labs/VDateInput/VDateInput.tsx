@@ -14,7 +14,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, ref, shallowRef, watch } from 'vue'
-import { genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
+import { createRange, genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -200,9 +200,29 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
     }
 
     function onUserInput ({ value }: HTMLInputElement) {
-      if (value && !adapter.isValid(value)) return
+      if (!value.trim()) {
+        model.value = emptyModelValue()
+      } else if (!props.multiple) {
+        if (adapter.isValid(value)) {
+          model.value = value
+        }
+      } else {
+        const parts = value.trim().split(/\D+-\D+|[^\d\-/.]+/)
+        if (parts.every(adapter.isValid)) {
+          if (props.multiple === 'range') {
+            model.value = getRange(parts)
+          } else {
+            model.value = parts
+          }
+        }
+      }
+    }
 
-      model.value = !value ? emptyModelValue() : value
+    function getRange (inputDates: string[]) {
+      const [start, stop] = inputDates.map(adapter.date).toSorted((a, b) => adapter.isAfter(a, b) ? 1 : -1)
+      const diff = adapter.getDiff(stop ?? start, start, 'days')
+      return [start, ...createRange(diff, 1).map(i => adapter.addDays(start, i))]
+        .map(d => adapter.format(d, 'keyboardDate'))
     }
 
     useRender(() => {
