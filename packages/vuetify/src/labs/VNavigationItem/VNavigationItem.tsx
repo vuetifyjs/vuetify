@@ -1,3 +1,5 @@
+import "./VNavigationItem.sass";
+
 import {
   VAvatar,
   VDefaultsProvider,
@@ -14,6 +16,7 @@ import { toDisplayString } from "vue";
 export type VNavigationItemSlots = {
   prepend: never;
   append: never;
+  default: never;
   title: never;
   subtitle: never;
 };
@@ -41,6 +44,9 @@ export const makeVNavigationItemProps = propsFactory(
     appendAvatar: String,
     appendIcon: String,
 
+    // rail
+    railWidth: Number,
+
     ...makeBorderProps(),
     ...makeComponentProps(),
     ...makeDensityProps(),
@@ -59,13 +65,17 @@ export const VNavigationItem = genericComponent<VNavigationItemSlots>()({
     const hasTitle = slots.title || props.title != null;
     const hasSubtitle = slots.subtitle || props.subtitle != null;
 
-    // TODO: prepend & append props
-    const hasPrepend = !!slots.prepend;
-    const hasAppend = !!slots.append;
+    // prepend
+    const hasPrependMedia = !!(props.prependAvatar || props.prependIcon);
+    const hasPrepend = !!(hasPrependMedia || slots.prepend);
+
+    // append
+    const hasAppendMedia = !!(props.appendAvatar || props.appendIcon);
+    const hasAppend = !!(hasAppendMedia || slots.append);
 
     useRender(() => {
       return (
-        <Tag>
+        <Tag class={["v-navigation-item"]}>
           {/* prepend */}
           {/*
            * TODO: Be able to detect rail from VNavigationDrawer parent.
@@ -80,7 +90,7 @@ export const VNavigationItem = genericComponent<VNavigationItemSlots>()({
                   )}
 
                   {props.prependAvatar && (
-                    <VAvatar key="prepend-avatar" icon={props.prependAvatar} />
+                    <VAvatar key="prepend-avatar" image={props.prependAvatar} />
                   )}
                 </>
               ) : (
@@ -90,7 +100,6 @@ export const VNavigationItem = genericComponent<VNavigationItemSlots>()({
               )}
             </div>
           )}
-
           {/* default */}
           <div class="v-navigation-item__content">
             {hasTitle && (
@@ -98,14 +107,13 @@ export const VNavigationItem = genericComponent<VNavigationItemSlots>()({
                 {slots.title?.() ?? toDisplayString(props.title)}
               </VListItemTitle>
             )}
-
             {hasSubtitle && (
               <VListItemSubtitle key="subtitle">
                 {slots.subtitle?.() ?? toDisplayString(props.subtitle)}
               </VListItemSubtitle>
             )}
+            {slots.default?.()} {props.railWidth}
           </div>
-
           {/* append */}
           {hasAppend && (
             <div key="append" class="v-navigation-item__append">
@@ -141,3 +149,4 @@ export const VNavigationItem = genericComponent<VNavigationItemSlots>()({
     });
   },
 });
+export type VNavigationItem = InstanceType<typeof VNavigationItem>;

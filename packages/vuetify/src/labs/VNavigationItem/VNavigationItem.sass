@@ -1,0 +1,13 @@
+@use 'sass:list'
+@use 'sass:map'
+@use 'sass:math'
+@use '../../styles/settings'
+@use '../../styles/tools'
+    
+@include tools.layer('components') 
+    .v-navigation-item
+        align-items: center
+        display: grid
+        flex: none
+        grid-template-areas: "prepend content append"
+        grid-template-columns: max-content 1fr auto
