@@ -34,7 +34,7 @@
     "@octokit/core": "^6.1.5",
     "@types/yargs": "^17.0.33",
     "@typescript-eslint/eslint-plugin": "^7.18.0",
-    "@typescript-eslint/parser": "^7.18.0",
+    "@typescript-eslint/parser": "^8.0.0",
     "@unhead/vue": "^2.0.5",
     "@vue/compiler-sfc": "^3.5.13",
     "@vue/language-server": "^2.2.8",
