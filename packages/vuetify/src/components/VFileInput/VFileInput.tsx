@@ -18,6 +18,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { computed, nextTick, ref, toRef, watch } from 'vue'
 import {
   callEvent,
+  filterFilesByAcceptType,
   filterInputAttrs,
   genericComponent,
   humanReadableFileSize,
@@ -93,12 +94,17 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
 
   setup (props, { attrs, emit, slots }) {
     const { t } = useLocale()
+    const inputRef = ref<HTMLInputElement>()
     const model = useProxiedModel(
       props,
       'modelValue',
       props.modelValue,
       val => wrapInArray(val),
-      val => (!props.multiple && Array.isArray(val)) ? val[0] : val,
+      val => {
+        const acceptType = inputRef?.value?.accept
+        const newValue = filterFilesByAcceptType(val, acceptType)
+        return !props.multiple && Array.isArray(newValue) ? newValue[0] : newValue
+      },
     )
     const { isFocused, focus, blur } = useFocus(props)
     const base = computed(() => typeof props.showSize !== 'boolean' ? props.showSize : undefined)
@@ -120,7 +126,6 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
     })
     const vInputRef = ref<VInput>()
     const vFieldRef = ref<VInput>()
-    const inputRef = ref<HTMLInputElement>()
     const isActive = toRef(() => isFocused.value || props.active)
     const isPlainOrUnderlined = computed(() => ['plain', 'underlined'].includes(props.variant))
     function onFocus () {
@@ -158,9 +163,19 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
     function onDrop (e: DragEvent) {
       e.preventDefault()
 
-      if (!e.dataTransfer) return
+      const files = e.dataTransfer?.files
 
-      model.value = [...e.dataTransfer.files ?? []]
+      if (!files) return
+
+      model.value = Array.from(files)
+    }
+
+    function onFileInputChange (e: Event) {
+      const files = (e.target as HTMLInputElement)?.files
+
+      if (!files) return
+
+      model.value = Array.from(files)
     }
 
     watch(model, newValue => {
@@ -245,12 +260,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
 
                           onFocus()
                         }}
-                        onChange={ e => {
-                          if (!e.target) return
-
-                          const target = e.target as HTMLInputElement
-                          model.value = [...target.files ?? []]
-                        }}
+                        onChange={ onFileInputChange }
                         onFocus={ onFocus }
                         onBlur={ blur }
                         { ...slotProps }
