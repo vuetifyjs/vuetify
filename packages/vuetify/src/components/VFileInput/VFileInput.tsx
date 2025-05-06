@@ -158,14 +158,17 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
     function onDrop (e: DragEvent) {
       e.preventDefault()
 
-      if (!e.dataTransfer) return
+      if (!e.dataTransfer || !inputRef.value) return
 
-      model.value = [...e.dataTransfer.files ?? []]
+      const dataTransfer = new DataTransfer()
 
-      // INFO: If we add this to emits property we get an error on the test
-      //  This is still working as expected even if we dont register it on emits
-      // @ts-expect-error
-      emit('change', e)
+      for (const file of e.dataTransfer.files) {
+        dataTransfer.items.add(file)
+      }
+
+      inputRef.value.files = dataTransfer.files
+
+      inputRef.value.dispatchEvent(new Event('change', { bubbles: true }))
     }
 
     watch(model, newValue => {
