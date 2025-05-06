@@ -7,11 +7,26 @@ import {
   VListItemSubtitle,
   VListItemTitle,
 } from "@/components";
-import { makeBorderProps } from "@/composables/border";
+import { makeBorderProps, useBorder } from "@/composables/border";
 import { makeComponentProps } from "@/composables/component";
 import { makeDensityProps } from "@/composables/density";
-import { genericComponent, propsFactory, useRender } from "@/util";
-import { toDisplayString } from "vue";
+import { makeThemeProps, provideTheme } from "@/composables/theme";
+import { computed, toDisplayString } from "vue";
+
+// Directives
+import { Ripple } from "@/directives/ripple";
+
+import {
+  convertToUnit,
+  genericComponent,
+  propsFactory,
+  useRender,
+} from "@/util";
+
+import type { RippleDirectiveBinding } from "@/directives/ripple";
+import type { PropType } from "vue";
+import { genOverlays } from "@/composables/variant";
+import { useNestedItem } from "@/composables/nested/nested";
 
 export type VNavigationItemSlots = {
   prepend: never;
@@ -44,11 +59,19 @@ export const makeVNavigationItemProps = propsFactory(
     appendAvatar: String,
     appendIcon: String,
 
+    ripple: {
+      type: [Boolean, Object] as PropType<RippleDirectiveBinding["value"]>,
+      default: true,
+    },
+
     // rail
     railWidth: Number,
 
+    value: null,
+
     ...makeBorderProps(),
     ...makeComponentProps(),
+    ...makeThemeProps(),
     ...makeDensityProps(),
   },
   "VNavigationItem"
@@ -56,33 +79,73 @@ export const makeVNavigationItemProps = propsFactory(
 
 export const VNavigationItem = genericComponent<VNavigationItemSlots>()({
   name: "VNavigationItem",
+  directives: { Ripple },
   props: makeVNavigationItemProps(),
   setup(props, { slots }) {
-    const Tag = "a";
+    const id = computed(() => props.value);
 
-    // Determine if applicable slots are provided
-    // or attributing props
-    const hasTitle = slots.title || props.title != null;
-    const hasSubtitle = slots.subtitle || props.subtitle != null;
+    // TODO: how to activate w/o a parent list. should we even?
+    const { activate, isActivated, isSelected, root } = useNestedItem(
+      id,
+      false
+    );
 
-    // prepend
-    const hasPrependMedia = !!(props.prependAvatar || props.prependIcon);
-    const hasPrepend = !!(hasPrependMedia || slots.prepend);
+    const { themeClasses } = provideTheme(props);
+    const { borderClasses } = useBorder(props);
 
-    // append
-    const hasAppendMedia = !!(props.appendAvatar || props.appendIcon);
-    const hasAppend = !!(hasAppendMedia || slots.append);
+    const isSelectable = computed(() => props.value != null);
+    const isClickable = computed(() => isSelectable.value);
+    const isActive = computed(() =>
+      root.activatable.value ? isActivated.value : isSelected.value
+    );
+
+    function onClick(e: MouseEvent) {
+      console.log(root.activatable.value);
+      if (root.activatable.value) {
+        activate(!isActivated.value, e);
+      }
+    }
 
     useRender(() => {
+      const Tag = "a";
+
+      // Determine if applicable slots are provided
+      // or attributing props
+      const hasTitle = slots.title || props.title != null;
+      const hasSubtitle = slots.subtitle || props.subtitle != null;
+
+      // prepend
+      const hasPrependMedia = !!(props.prependAvatar || props.prependIcon);
+      const hasPrepend = !!(hasPrependMedia || slots.prepend);
+
+      // append
+      const hasAppendMedia = !!(props.appendAvatar || props.appendIcon);
+      const hasAppend = !!(hasAppendMedia || slots.append);
+
       return (
-        <Tag class={["v-navigation-item"]}>
-          {/* prepend */}
-          {/*
-           * TODO: Be able to detect rail from VNavigationDrawer parent.
-           * If prepend should have the width of railWidth
-           */}
+        <Tag
+          class={[
+            "v-navigation-item",
+            {
+              "v-navigation-item--link": isClickable.value,
+            },
+            themeClasses.value,
+            borderClasses.value,
+            props.class,
+          ]}
+          onClick={onClick}
+          v-ripple={isClickable && props.ripple}
+        >
+          {genOverlays(isClickable.value, "v-navigation-item")}
+
           {hasPrepend && (
-            <div key="prepend" class="v-navigation-item__prepend">
+            <div
+              key="prepend"
+              class="v-navigation-item__prepend"
+              style={{
+                width: convertToUnit(props.railWidth),
+              }}
+            >
               {!slots.prepend ? (
                 <>
                   {props.prependIcon && (
@@ -112,7 +175,7 @@ export const VNavigationItem = genericComponent<VNavigationItemSlots>()({
                 {slots.subtitle?.() ?? toDisplayString(props.subtitle)}
               </VListItemSubtitle>
             )}
-            {slots.default?.()} {props.railWidth}
+            {slots.default?.()} {isActive.value.toString()}
           </div>
           {/* append */}
           {hasAppend && (

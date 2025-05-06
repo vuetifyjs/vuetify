@@ -9,5 +9,37 @@
         align-items: center
         display: grid
         flex: none
+        position: relative
         grid-template-areas: "prepend content append"
         grid-template-columns: max-content 1fr auto
+
+        @include tools.states('.v-navigation-item__overlay')
+
+        &__prepend
+            align-items: center
+            align-self: center
+            justify-content: center
+            display: flex
+            grid-area: prepend
+
+            // TODO: how to properly do this with density
+            padding: 10px 0
+
+        &--link
+            cursor: pointer
+
+        &__overlay
+            background-color: currentColor
+            border-radius: inherit
+            bottom: 0
+            left: 0
+            opacity: 0
+            pointer-events: none
+            position: absolute
+            right: 0
+            top: 0
+            transition: opacity 0.2s ease-in-out
+
+        &__content
+            align-self: center
+            grid-area: content

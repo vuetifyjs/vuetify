@@ -33,24 +33,24 @@
         @include tools.absolute(true)
 
       &:focus-visible::after
-        opacity: calc(.15 * var(--v-theme-overlay-multiplier))
+        // opacity: calc(.15 * var(--v-theme-overlay-multiplier))
 
     &__prepend,
     &__append
       > .v-badge .v-icon,
       > .v-icon
-        opacity: #{$list-item-icon-opacity}
+        // opacity: #{$list-item-icon-opacity}
 
     &--active
       .v-list-item__prepend,
       .v-list-item__append
         > .v-badge .v-icon,
         > .v-icon
-          opacity: #{$list-item-icon-active-opacity}
+          // opacity: #{$list-item-icon-active-opacity}
 
       &:not(.v-list-item--link)
         .v-list-item__overlay
-          opacity: calc(#{map.get(settings.$states, 'activated')} * var(--v-theme-overlay-multiplier))
+          // opacity: calc(#{map.get(settings.$states, 'activated')} * var(--v-theme-overlay-multiplier))
 
     &--rounded
       @include tools.rounded($list-item-rounded-border-radius)
@@ -58,7 +58,7 @@
     &--disabled
       pointer-events: none
       user-select: none
-      opacity: $list-disabled-opacity
+      // opacity: $list-disabled-opacity
 
     &--link
       cursor: pointer
@@ -291,6 +291,7 @@
     right: 0
     top: 0
     transition: opacity 0.2s ease-in-out
+    border: 1px solid red
 
     .v-list-item--active.v-list-item--variant-elevated &
       --v-theme-overlay-multiplier: 0
@@ -332,4 +333,4 @@
 
     &:hover
       .v-list-item__overlay
-        opacity: calc(#{map.get(settings.$states, 'hover')} * var(--v-theme-overlay-multiplier))
+        // opacity: calc(#{map.get(settings.$states, 'hover')} * var(--v-theme-overlay-multiplier))
