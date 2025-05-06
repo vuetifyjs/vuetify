@@ -18,7 +18,7 @@ import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { onMounted, onUnmounted, ref, shallowRef } from 'vue'
+import { ref, shallowRef } from 'vue'
 import { filterInputAttrs, genericComponent, pick, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
@@ -94,10 +94,9 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
 
   emits: {
     'update:modelValue': (files: File[]) => true,
-    change: (e: DragEvent) => true,
   },
 
-  setup (props, { attrs, emit, slots }) {
+  setup (props, { attrs, slots }) {
     const { t } = useLocale()
     const { densityClasses } = useDensity(props)
     const model = useProxiedModel(
@@ -108,57 +107,36 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
       val => (props.multiple || Array.isArray(props.modelValue)) ? val : val[0],
     )
 
-    const dragOver = shallowRef(false)
+    const isDragging = shallowRef(false)
     const vSheetRef = ref<InstanceType<typeof VSheet> | null>(null)
     const inputRef = ref<HTMLInputElement | null>(null)
 
-    onMounted(() => {
-      vSheetRef.value?.$el.addEventListener('dragover', onDragOver)
-      vSheetRef.value?.$el.addEventListener('drop', onDrop)
-    })
-
-    onUnmounted(() => {
-      vSheetRef.value?.$el.removeEventListener('dragover', onDragOver)
-      vSheetRef.value?.$el.removeEventListener('drop', onDrop)
-    })
-
-    function onDragOver (e: DragEvent) {
+    function onDragover (e: DragEvent) {
       e.preventDefault()
       e.stopImmediatePropagation()
-      dragOver.value = true
+      isDragging.value = true
     }
 
-    function onDragLeave (e: DragEvent) {
+    function onDragleave (e: DragEvent) {
       e.preventDefault()
-      dragOver.value = false
+      isDragging.value = false
     }
 
     function onDrop (e: DragEvent) {
       e.preventDefault()
       e.stopImmediatePropagation()
-      dragOver.value = false
+      isDragging.value = false
 
-      const files = Array.from(e.dataTransfer?.files ?? [])
+      if (!e.dataTransfer?.files?.length || !inputRef.value) return
 
-      if (!files.length) return
+      const dataTransfer = new DataTransfer()
 
-      if (!props.multiple) {
-        model.value = [files[0]]
-
-        return
+      for (const file of e.dataTransfer.files) {
+        dataTransfer.items.add(file)
       }
 
-      const array = model.value.slice()
-
-      for (const file of files) {
-        if (!array.some(f => f.name === file.name)) {
-          array.push(file)
-        }
-      }
-
-      model.value = array
-
-      emit('change', e)
+      inputRef.value.files = dataTransfer.files
+      inputRef.value.dispatchEvent(new Event('change', { bubbles: true }))
     }
 
     function onClick () {
@@ -209,7 +187,7 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
               {
                 'v-file-upload--clickable': !hasBrowse,
                 'v-file-upload--disabled': props.disabled,
-                'v-file-upload--dragging': dragOver.value,
+                'v-file-upload--dragging': isDragging.value,
               },
               densityClasses.value,
               props.class,
@@ -217,8 +195,8 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
             style={[
               props.style,
             ]}
-            onDragleave={ onDragLeave }
-            onDragover={ onDragOver }
+            onDragleave={ onDragleave }
+            onDragover={ onDragover }
             onDrop={ onDrop }
             onClick={ !hasBrowse ? onClick : undefined }
             { ...rootAttrs }
@@ -297,7 +275,7 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
             )}
 
             <VOverlay
-              model-value={ dragOver.value }
+              model-value={ isDragging.value }
               contained
               scrim={ props.scrim }
             />
