@@ -1,7 +1,6 @@
 {
   "props": {
     "calculateWidths": "Enables calculation of column widths. `widths` property will be available in select scoped slots.",
-    "checkboxColor": "Set the color of the checkboxes (showSelect must be used).",
     "customFilter": "Function to filter items.",
     "customGroup": "Function used to group items.",
     "customSort": "Function used to sort items.",
