@@ -173,12 +173,12 @@ Then configure Vuetify to use DayJs:
 ```js { resource="src/plugins/vuetify.js" }
 import { createVuetify } from 'vuetify'
 import DayJsAdapter from '@date-io/dayjs'
-import { enUS } from 'date-fns/locale'
+import en from 'dayjs/locale/en'
 
 export default createVuetify({
   date: {
     adapter: DayJsAdapter,
-    locale: { en: enUS },
+    locale: { en },
   },
 })
 ```

@@ -6,7 +6,7 @@ import { computed, inject, onBeforeUnmount, onMounted, onUpdated, provide, react
 import { consoleWarn, deepEqual, findChildrenWithProvide, getCurrentInstance, propsFactory, wrapInArray } from '@/util'
 
 // Types
-import type { ComponentInternalInstance, ComputedRef, ExtractPropTypes, InjectionKey, PropType, Ref, UnwrapRef } from 'vue'
+import type { ComponentInternalInstance, ExtractPropTypes, InjectionKey, PropType, Ref, UnwrapRef } from 'vue'
 import type { EventProp } from '@/util'
 
 export interface GroupItem {
@@ -35,11 +35,11 @@ export interface GroupProvide {
   prev: () => void
   next: () => void
   selectedClass: Ref<string | undefined>
-  items: ComputedRef<{
+  items: Readonly<Ref<{
     id: string
     value: unknown
     disabled: boolean | undefined
-  }[]>
+  }[]>>
   disabled: Ref<boolean | undefined>
   getItemIndex: (value: unknown) => number
 }
@@ -115,7 +115,7 @@ export function useGroupItem (
     throw new Error(`[Vuetify] Could not find useGroup injection with symbol ${injectKey.description}`)
   }
 
-  const value = toRef(props, 'value')
+  const value = toRef(() => props.value)
   const disabled = computed(() => !!(group.disabled.value || props.disabled))
 
   group.register({
@@ -309,12 +309,12 @@ export function useGroup (
     unregister,
     selected,
     select,
-    disabled: toRef(props, 'disabled'),
+    disabled: toRef(() => props.disabled),
     prev: () => step(items.length - 1),
     next: () => step(1),
     isSelected: (id: string) => selected.value.includes(id),
-    selectedClass: computed(() => props.selectedClass),
-    items: computed(() => items),
+    selectedClass: toRef(() => props.selectedClass),
+    items: toRef(() => items),
     getItemIndex: (value: unknown) => getItemIndex(items, value),
   }
 

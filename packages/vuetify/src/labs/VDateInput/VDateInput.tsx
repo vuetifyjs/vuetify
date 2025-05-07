@@ -39,8 +39,14 @@ export const makeVDateInputProps = propsFactory({
     type: String as PropType<StrategyProps['location']>,
     default: 'bottom start',
   },
+  updateOn: {
+    type: Array as PropType<('blur' | 'enter')[]>,
+    default: () => ['blur', 'enter'],
+  },
 
-  ...makeDisplayProps(),
+  ...makeDisplayProps({
+    mobile: null,
+  }),
   ...makeFocusProps(),
   ...makeVConfirmEditProps({
     hideActions: true,
@@ -71,17 +77,20 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
     const adapter = useDate()
     const { mobile } = useDisplay(props)
     const { isFocused, focus, blur } = useFocus(props)
+
+    const emptyModelValue = () => props.multiple ? [] : null
+
     const model = useProxiedModel(
       props,
       'modelValue',
-      props.multiple ? [] : null,
+      emptyModelValue(),
       val => Array.isArray(val) ? val.map(item => adapter.toJsDate(item)) : val ? adapter.toJsDate(val) : val,
       val => Array.isArray(val) ? val.map(item => adapter.date(item)) : val ? adapter.date(val) : val
     )
 
     const menu = shallowRef(false)
     const isEditingInput = shallowRef(false)
-    const vDateInputRef = ref()
+    const vTextFieldRef = ref<VTextField>()
     const disabledActions = ref<typeof VConfirmEdit['props']['disabled']>(['save'])
 
     function format (date: unknown) {
@@ -121,7 +130,12 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
     })
 
     const isInteractive = computed(() => !props.disabled && !props.readonly)
-    const isReadonly = computed(() => !(mobile.value && isEditingInput.value) && props.readonly)
+
+    const isReadonly = computed(() => {
+      if (!props.updateOn.length) return true
+
+      return !(mobile.value && isEditingInput.value) && props.readonly
+    })
 
     watch(menu, val => {
       if (val) return
@@ -135,13 +149,12 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
 
       if (!menu.value || !isFocused.value) {
         menu.value = true
-
         return
       }
 
-      const target = e.target as HTMLInputElement
-
-      model.value = adapter.isValid(target.value) ? target.value : null
+      if (props.updateOn.includes('enter')) {
+        onUserInput(e.target as HTMLInputElement)
+      }
     }
 
     function onClick (e: MouseEvent) {
@@ -166,13 +179,17 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
       menu.value = false
     }
 
-    function onUpdateDisplayModel (value: string) {
+    function onUpdateDisplayModel (value: unknown) {
       if (value != null) return
 
-      model.value = null
+      model.value = emptyModelValue()
     }
 
-    function onBlur () {
+    function onBlur (e: FocusEvent) {
+      if (props.updateOn.includes('blur')) {
+        onUserInput(e.target as HTMLInputElement)
+      }
+
       blur()
 
       // When in mobile mode and editing is done (due to keyboard dismissal), close the menu
@@ -182,6 +199,12 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
       }
     }
 
+    function onUserInput ({ value }: HTMLInputElement) {
+      if (value && !adapter.isValid(value)) return
+
+      model.value = !value ? emptyModelValue() : value
+    }
+
     useRender(() => {
       const confirmEditProps = VConfirmEdit.filterProps(props)
       const datePickerProps = VDatePicker.filterProps(omit(props, ['active', 'location', 'rounded']))
@@ -189,7 +212,7 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
 
       return (
         <VTextField
-          ref={ vDateInputRef }
+          ref={ vTextFieldRef }
           { ...textFieldProps }
           class={ props.class }
           style={ props.style }
@@ -267,7 +290,7 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
       )
     })
 
-    return forwardRefs({}, vDateInputRef)
+    return forwardRefs({}, vTextFieldRef)
   },
 })
 

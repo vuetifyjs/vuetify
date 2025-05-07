@@ -13,6 +13,6 @@
   const { name } = useRoute()
 
   function onClick () {
-    gtagClick('app-bar', 'enterprise', name)
+    sweClick('app-bar', 'enterprise', name)
   }
 </script>

@@ -45,14 +45,16 @@ export default defineConfig(configEnv => {
       clearScreen: !IS_RUN,
       test: {
         watch: false,
+        slowTestThreshold: Infinity,
         setupFiles: ['../test/setup/to-have-been-warned.ts'],
         reporters: process.env.GITHUB_ACTIONS
           ? [['default', { summary: false }], 'github-actions']
           : [IS_RUN ? 'dot' : ['default', { summary: false }]],
         coverage: {
-          provider: 'v8',
-          reporter: ['html'],
+          provider: 'istanbul',
+          reporter: ['html', 'text-summary'],
           clean: true,
+          reportsDirectory: '../coverage',
         },
       },
     })

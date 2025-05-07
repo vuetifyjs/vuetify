@@ -45,11 +45,11 @@ export const VBtnGroup = genericComponent()({
     provideDefaults({
       VBtn: {
         height: 'auto',
-        baseColor: toRef(props, 'baseColor'),
-        color: toRef(props, 'color'),
-        density: toRef(props, 'density'),
+        baseColor: toRef(() => props.baseColor),
+        color: toRef(() => props.color),
+        density: toRef(() => props.density),
         flat: true,
-        variant: toRef(props, 'variant'),
+        variant: toRef(() => props.variant),
       },
     })
 
