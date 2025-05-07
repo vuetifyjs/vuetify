@@ -224,8 +224,6 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
     }
 
     const VDataTableMobileHeaderCell = () => {
-      const headerProps = mergeProps(props.headerProps ?? {} ?? {})
-
       const displayItems = computed<ItemProps['items']>(() => {
         return columns.value.filter(column => column?.sortable && !props.disableSort)
       })
@@ -245,7 +243,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
             ...headerCellClasses.value,
           ]}
           colspan={ headers.value.length + 1 }
-          { ...headerProps }
+          { ...props.headerProps }
         >
           <div class="v-data-table-header__content">
             <VSelect

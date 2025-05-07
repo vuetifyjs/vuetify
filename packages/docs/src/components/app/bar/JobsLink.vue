@@ -9,14 +9,13 @@
       :icon="icon"
       :to="rpath('/resources/jobs-for-vue/')"
       class="jobs-link"
-      @click="onClick"
+      @click="sweClick('app-bar', 'jobs', name)"
     />
   </v-badge>
 </template>
 
 <script setup>
   const { currentRoute } = useRouter()
-  const { event } = useGtag()
   const { name } = useRoute()
   const newJobs = []
 
@@ -25,14 +24,6 @@
       ? 'mdi-briefcase-variant'
       : 'mdi-briefcase-variant-outline'
   })
-
-  function onClick () {
-    event('click', {
-      event_category: 'app-bar',
-      event_label: 'jobs',
-      value: name,
-    })
-  }
 </script>
 
 <style lang="sass">

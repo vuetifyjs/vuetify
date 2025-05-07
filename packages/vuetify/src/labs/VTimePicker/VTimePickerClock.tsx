@@ -148,8 +148,8 @@ export const VTimePickerClock = genericComponent()({
     function getTransform (i: number) {
       const { x, y } = getPosition(i)
       return {
-        left: `${50 + x * 50}%`,
-        top: `${50 + y * 50}%`,
+        left: `${Math.round(50 + x * 50)}%`,
+        top: `${Math.round(50 + y * 50)}%`,
       }
     }
 
