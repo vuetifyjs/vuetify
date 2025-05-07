@@ -3,6 +3,7 @@
     "closeDelay": "Delay (in ms) after which menu closes (when open-on-hover prop is set to true).",
     "debounce": "Duration before tooltip is shown and hidden when hovered.",
     "id": "HTML id attribute of the tooltip overlay. If not set, a globally unique id will be used.",
+    "interactive": "When true, the tooltip will respond to pointer events, allowing you to copy text from it.",
     "internalActivator": "Designates whether to use an internal activator.",
     "openDelay": "Delay (in ms) after which tooltip opens (when `open-on-hover` prop is set to **true**).",
     "openOnClick": "Designates whether the tooltip should open on activator click.",

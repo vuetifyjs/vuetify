@@ -104,4 +104,17 @@ export default {
     loadMore: 'Last flere',
     empty: 'Det var alt',
   },
+  rules: {
+    required: 'Dette feltet er påkrevd',
+    email: 'Vennligst skriv inn en gyldig e-postadresse',
+    number: 'Dette feltet kan kun inneholde tall',
+    integer: 'Dette feltet kan kun inneholde heltall',
+    capital: 'Dette feltet kan kun inneholde store bokstaver',
+    maxLength: 'Du må skrive inn maksimalt {0} tegn',
+    minLength: 'Du må skrive inn minimum {0} tegn',
+    strictLength: 'Lengden på det angitte feltet er ugyldig',
+    exclude: 'Tegnet {0} er ikke tillatt',
+    notEmpty: 'Vennligst velg minst én verdi',
+    pattern: 'Ugyldig format',
+  },
 }

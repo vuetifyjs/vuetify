@@ -41,7 +41,7 @@
 
       <AppBarJobsLink v-if="smAndUp" />
 
-      <AppBarLanguageMenu v-if="smAndUp" />
+      <AppBarLanguageMenu />
 
       <AppBarSettingsToggle />
     </template>
@@ -50,6 +50,8 @@
 
 <script setup>
   const app = useAppStore()
-  const { smAndUp, mdAndUp, lgAndUp, mdAndDown } = useDisplay()
+  const { smAndUp, lgAndUp, mdAndDown, width } = useDisplay()
   const route = useRoute()
+
+  const mdAndUp = computed(() => width.value >= 1044)
 </script>

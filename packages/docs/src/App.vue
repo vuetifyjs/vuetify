@@ -65,10 +65,10 @@
     watch(() => user.theme, val => {
       if (val === 'system') {
         media = getMatchMedia()!
-        media.addListener(onThemeChange)
+        media.addEventListener('change', onThemeChange)
         onThemeChange()
       } else if (media) {
-        media.removeListener(onThemeChange)
+        media.removeEventListener('change', onThemeChange)
       }
     }, { immediate: true })
     function onThemeChange () {

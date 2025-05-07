@@ -81,6 +81,13 @@ jobs:
       - uses: vuetifyjs/setup-action@master
       - run: pnpm run test --project browser
         working-directory: ./packages/vuetify
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: Test screenshots
+          path: packages/vuetify/test/__screenshots__
+          if-no-files-found: ignore
+          overwrite: true
 
   deploy:
     needs: [lint, test-unit, test-e2e, build-vuetify]
@@ -125,7 +132,7 @@ jobs:
       - run: pnpm build api
       - run: pnpm build docs
         env:
-          NODE_OPTIONS: --max-old-space-size=5120
+          NODE_OPTIONS: --max-old-space-size=6144
           VITE_COSMIC_2_BUCKET_SLUG: ${{ secrets.COSMIC_2_BUCKET_SLUG }}
           VITE_COSMIC_2_BUCKET_READ_KEY: ${{ secrets.COSMIC_2_BUCKET_READ_KEY }}
           VITE_COSMIC_BUCKET_SLUG: ${{ secrets.COSMIC_BUCKET_SLUG }}

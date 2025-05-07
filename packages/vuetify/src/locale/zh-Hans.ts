@@ -104,4 +104,17 @@ export default {
     loadMore: '加载更多',
     empty: '没有更多内容',
   },
+  rules: {
+    required: '此字段为必填项',
+    email: '请输入有效的电子邮件地址',
+    number: '此字段只能包含数字',
+    integer: '此字段只能包含整数',
+    capital: '此字段只能包含大写字母',
+    maxLength: '您最多可以输入{0}个字符',
+    minLength: '您必须至少输入{0}个字符',
+    strictLength: '输入字段的长度无效',
+    exclude: '字符{0}是不允许的',
+    notEmpty: '请至少选择一个值',
+    pattern: '格式无效',
+  },
 }

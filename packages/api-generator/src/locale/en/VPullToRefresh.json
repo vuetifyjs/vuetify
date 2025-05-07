@@ -1,0 +1,11 @@
+{
+  "props": {
+    "pullDownThreshold": "The distance the user must pull down to trigger a refresh."
+  },
+  "events": {
+    "load": "Emitted when the user pulls down past the threshold."
+  },
+  "slots": {
+    "pullDownPanel": "Slot to override the display of the progress indicator after a pull down"
+  }
+}

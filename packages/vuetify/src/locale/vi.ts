@@ -104,4 +104,17 @@ export default {
     loadMore: 'Tải thêm',
     empty: 'Không còn dữ liệu',
   },
+  rules: {
+    required: 'Trường này là bắt buộc',
+    email: 'Vui lòng nhập một email hợp lệ',
+    number: 'Trường này chỉ có thể chứa số',
+    integer: 'Trường này chỉ có thể chứa số nguyên',
+    capital: 'Trường này chỉ có thể chứa chữ cái in hoa',
+    maxLength: 'Bạn phải nhập tối đa {0} ký tự',
+    minLength: 'Bạn phải nhập tối thiểu {0} ký tự',
+    strictLength: 'Độ dài của trường đã nhập không hợp lệ',
+    exclude: 'Ký tự {0} không được phép',
+    notEmpty: 'Vui lòng chọn ít nhất một giá trị',
+    pattern: 'Định dạng không hợp lệ',
+  },
 }

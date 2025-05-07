@@ -8,7 +8,7 @@
     "linePosition": "Shift the position of the line. By default the line will evenly split items before/after.",
     "lineThickness": "Thickness of the timeline line.",
     "mirror": "Mirror the before/after ordering of timeline items.",
-    "side": "Display all timeline items on one side of the timeline, either **before** or **after**.",
+    "side": "Display all timeline items on one side of the timeline, either **start** or **end**.",
     "truncateLine": "Truncate timeline directly at the **start** or **end** of the line, or on **both** ends."
   }
 }

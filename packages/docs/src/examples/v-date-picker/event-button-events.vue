@@ -82,19 +82,19 @@
 
     methods: {
       contextMenu (year, event) {
-        this.$set(this.done, 2, true)
+        this.done[2] = true
 
         event.preventDefault()
 
         alert(`You have activated context menu for year ${year}`)
       },
       dblClick (date) {
-        this.$set(this.done, 0, true)
+        this.done[0] = true
 
         alert(`You have just double clicked the following date: ${date}`)
       },
       mouseEnter (month) {
-        this.$set(this.done, 1, true)
+        this.done[1] = true
         this.mouseMonth = month
       },
       mouseLeave () {

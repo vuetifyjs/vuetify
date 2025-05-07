@@ -104,4 +104,17 @@ export default {
     loadMore: 'Laadi rohkem',
     empty: 'Pole rohkem',
   },
+  rules: {
+    required: 'See väli on kohustuslik',
+    email: 'Palun sisesta kehtiv e-posti aadress',
+    number: 'See väli võib sisaldada ainult numbreid',
+    integer: 'See väli võib sisaldada ainult täisarve',
+    capital: 'See väli võib sisaldada ainult suurtähti',
+    maxLength: 'Sisestada tuleb maksimaalselt {0} märki',
+    minLength: 'Sisestada tuleb vähemalt {0} märki',
+    strictLength: 'Sisestatud välja pikkus ei ole kehtiv',
+    exclude: 'Märk {0} ei ole lubatud',
+    notEmpty: 'Palun vali vähemalt üks väärtus',
+    pattern: 'Vale vorming',
+  },
 }

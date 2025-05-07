@@ -50,7 +50,7 @@ export const VColorPickerPreview = defineComponent({
     onUnmounted(() => abortController.abort())
 
     async function openEyeDropper () {
-      if (!SUPPORTS_EYE_DROPPER) return
+      if (!SUPPORTS_EYE_DROPPER || props.disabled) return
 
       const eyeDropper = new window.EyeDropper()
       try {
@@ -73,7 +73,7 @@ export const VColorPickerPreview = defineComponent({
       >
         { SUPPORTS_EYE_DROPPER && (
           <div class="v-color-picker-preview__eye-dropper" key="eyeDropper">
-            <VBtn onClick={ openEyeDropper } icon="$eyeDropper" variant="plain" density="comfortable" />
+            <VBtn density="comfortable" disabled={ props.disabled } icon="$eyeDropper" variant="plain" onClick={ openEyeDropper } />
           </div>
         )}
 

@@ -199,6 +199,56 @@ describe('VAutocomplete', () => {
     }])
   })
 
+  it('should clear input on blur when using multiple', async () => {
+    const items = ref([
+      {
+        text: '21',
+        id: 'item1',
+      },
+      {
+        text: '22',
+        id: 'item2',
+      },
+      {
+        text: '23',
+        id: 'item3',
+      },
+    ])
+
+    const selectedItems = ref([
+      {
+        text: '21',
+        id: 'item1',
+      },
+      {
+        text: '22',
+        id: 'item2',
+      },
+    ])
+
+    const { container } = render(() => (
+      <VAutocomplete
+        v-model={ selectedItems.value }
+        items={ items.value }
+        multiple
+        item-title="text"
+        item-value="text"
+      />
+    ))
+
+    await userEvent.click(container)
+
+    const menu = await screen.findByRole('listbox')
+
+    const activeItems = await findAllByRole(menu, 'option', { selected: true })
+    expect(activeItems).toHaveLength(2)
+
+    expect(document.activeElement).toBe(within(container).getByCSS('input'))
+
+    const input = within(container).getByCSS('input')
+    expect(input).toHaveValue('')
+  })
+
   it('should not be clickable when in readonly', async () => {
     const items = ['Item 1', 'Item 2', 'Item 3', 'Item 4']
 
@@ -408,17 +458,17 @@ describe('VAutocomplete', () => {
     expect(input).toHaveAttribute('placeholder', 'Placeholder')
 
     await rerender({ label: 'Label' })
-    expect(input).not.toBeVisible()
+    await expect.element(input).not.toBeDisplayed()
 
     input.focus()
     await waitAnimationFrame()
     expect(input).toHaveAttribute('placeholder', 'Placeholder')
-    expect(input).toBeVisible()
+    await expect.element(input).toBeDisplayed()
 
     input.blur()
     await rerender({ persistentPlaceholder: true })
     expect(input).toHaveAttribute('placeholder', 'Placeholder')
-    expect(input).toBeVisible()
+    await expect.element(input).toBeDisplayed()
 
     await rerender({ modelValue: 'Foobar' })
     expect(input).not.toHaveAttribute('placeholder')
@@ -583,7 +633,7 @@ describe('VAutocomplete', () => {
     expect(screen.queryByRole('listbox')).toBeNull()
 
     await rerender({ items: ['Foo', 'Bar'] })
-    await expect(screen.findByRole('listbox')).resolves.toBeVisible()
+    await expect(screen.findByRole('listbox')).resolves.toBeDisplayed()
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/19346
@@ -593,7 +643,7 @@ describe('VAutocomplete', () => {
     })
 
     await userEvent.click(element)
-    await expect(screen.findByRole('listbox')).resolves.toBeVisible()
+    await expect(screen.findByRole('listbox')).resolves.toBeDisplayed()
 
     await userEvent.click(screen.getAllByRole('option')[0])
     await rerender({ items: ['Foo', 'Bar', 'test', 'test 2'] })

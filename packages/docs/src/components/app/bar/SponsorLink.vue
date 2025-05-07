@@ -5,19 +5,10 @@
     color="medium-emphasis"
     text="sponsor"
     variant="text"
-    @click="onClick"
+    @click="sweClick('app-bar', 'sponsor', name)"
   />
 </template>
 
 <script setup>
-  const { event } = useGtag()
   const { name } = useRoute()
-
-  function onClick () {
-    event('click', {
-      event_category: 'app-bar',
-      event_label: 'sponsor',
-      value: name,
-    })
-  }
 </script>

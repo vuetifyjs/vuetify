@@ -15,7 +15,7 @@
       </div>
 
       <p class="text-body-2 mb-4">
-        Please head over to your inbox/spam or others folder to find our verificaiton email.
+        Please head over to your inbox/spam or others folder to find our verification email.
       </p>
 
       <v-btn color="orange" variant="text">Go to Login</v-btn>

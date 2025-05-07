@@ -104,4 +104,17 @@ export default {
     loadMore: 'Naloži več',
     empty: 'Konec',
   },
+  rules: {
+    required: 'To polje je obvezno',
+    email: 'Vnesite veljaven e-poštni naslov',
+    number: 'To polje lahko vsebuje samo številke',
+    integer: 'To polje lahko vsebuje samo cela števila',
+    capital: 'To polje lahko vsebuje samo velike črke',
+    maxLength: 'Vnesti morate največ {0} znakov',
+    minLength: 'Vnesti morate najmanj {0} znakov',
+    strictLength: 'Dolžina vnesenega polja ni veljavna',
+    exclude: 'Znak {0} ni dovoljen',
+    notEmpty: 'Izberite vsaj eno vrednost',
+    pattern: 'Neveljaven format',
+  },
 }

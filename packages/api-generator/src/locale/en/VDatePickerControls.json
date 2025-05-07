@@ -1,5 +1,6 @@
 {
   "props": {
+    "controlHeight": "Sets the height of the controls.",
     "modeIcon": "Icon used for the mode button.",
     "nextIcon": "Icon used for the next button.",
     "prevIcon": "Icon used for the previous button.",

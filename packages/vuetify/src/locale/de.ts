@@ -104,4 +104,17 @@ export default {
     loadMore: 'Mehr laden',
     empty: 'Nichts weiteres',
   },
+  rules: {
+    required: 'Dieses Feld ist erforderlich',
+    email: 'Bitte geben Sie eine gültige E-Mail-Adresse ein',
+    number: 'Dieses Feld darf nur Zahlen enthalten',
+    integer: 'Dieses Feld darf nur Ganzzahlen enthalten',
+    capital: 'Dieses Feld darf nur Großbuchstaben enthalten',
+    maxLength: 'Sie dürfen maximal {0} Zeichen eingeben',
+    minLength: 'Sie müssen mindestens {0} Zeichen eingeben',
+    strictLength: 'Die Länge des eingegebenen Feldes ist ungültig',
+    exclude: 'Das Zeichen {0} ist nicht erlaubt',
+    notEmpty: 'Bitte wählen Sie mindestens einen Wert aus',
+    pattern: 'Ungültiges Format',
+  },
 }

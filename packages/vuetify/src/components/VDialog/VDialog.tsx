@@ -17,7 +17,6 @@ import { mergeProps, nextTick, onBeforeUnmount, ref, watch } from 'vue'
 import { focusableChildren, genericComponent, IN_BROWSER, propsFactory, useRender } from '@/util'
 
 // Types
-import type { Component } from 'vue'
 import type { OverlaySlots } from '@/components/VOverlay/VOverlay'
 
 export const makeVDialogProps = propsFactory({
@@ -31,7 +30,7 @@ export const makeVDialogProps = propsFactory({
   ...makeVOverlayProps({
     origin: 'center center' as const,
     scrollStrategy: 'block' as const,
-    transition: { component: VDialogTransition as Component },
+    transition: { component: VDialogTransition },
     zIndex: 2400,
   }),
 }, 'VDialog')
@@ -95,7 +94,11 @@ export const VDialog = genericComponent<OverlaySlots>()({
 
     function onAfterEnter () {
       emit('afterEnter')
-      if (overlay.value?.contentEl && !overlay.value.contentEl.contains(document.activeElement)) {
+      if (
+        (props.scrim || props.retainFocus) &&
+        overlay.value?.contentEl &&
+        !overlay.value.contentEl.contains(document.activeElement)
+      ) {
         overlay.value.contentEl.focus({ preventScroll: true })
       }
     }

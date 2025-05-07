@@ -11,7 +11,7 @@ import path from 'upath'
 const require = createRequire(import.meta.url)
 
 const pkg = JSON.parse(readFileSync('../../package.json', 'utf8'))
-const wdioPkg = JSON.parse(readFileSync(path.resolve(require.resolve('webdriverio'), '../../../package.json'), 'utf8'))
+const wdioPkg = JSON.parse(readFileSync(path.resolve(require.resolve('webdriverio'), '../../package.json'), 'utf8'))
 const CLIENT_INFO = `${pkg.name}/${pkg.version}`
 const ENV_INFO = `${wdioPkg.name}/${wdioPkg.version}`
 
@@ -32,11 +32,11 @@ function scroll (ctx: BrowserCommandContext, x: number, y: number) {
   return ctx.browser.scroll(x, y)
 }
 
-export function isDisplayedInViewport (ctx: BrowserCommandContext, el: any) {
-  return ctx.browser.$(el).isDisplayedInViewport()
+function isDisplayed (ctx: BrowserCommandContext, selector: string, withinViewport = false) {
+  return ctx.browser.$(selector).isDisplayed({ withinViewport })
 }
 
-export async function percySnapshot (ctx: BrowserCommandContext, name: string, options?: PercyOptions) {
+async function percySnapshot (ctx: BrowserCommandContext, name: string, options?: PercyOptions) {
   if (!(await percy.isPercyEnabled())) return
 
   try {
@@ -60,11 +60,15 @@ export async function percySnapshot (ctx: BrowserCommandContext, name: string, o
   }
 }
 
-export async function waitStable (ctx: BrowserCommandContext, el: any) {
-  return ctx.browser.$(el).waitForStable()
+async function waitStable (ctx: BrowserCommandContext, selector: string) {
+  return ctx.browser.$(selector).waitForStable()
 }
 
-export const commands = { drag, scroll, isDisplayedInViewport, percySnapshot, waitStable }
+async function setFocusEmulationEnabled (ctx: BrowserCommandContext) {
+  return ctx.browser.sendCommand('Emulation.setFocusEmulationEnabled', { enabled: true })
+}
+
+export const commands = { drag, scroll, isDisplayed, percySnapshot, waitStable, setFocusEmulationEnabled }
 
 export type CustomCommands = {
   [k in keyof typeof commands]: typeof commands[k] extends (ctx: any, ...args: infer A) => any

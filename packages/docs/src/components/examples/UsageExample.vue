@@ -158,7 +158,6 @@
     modelValue: {
       type: [Array, String],
       default: () => ([]),
-      required: true,
     },
     script: String,
   })

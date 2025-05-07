@@ -20,11 +20,7 @@ The `v-empty-state` component is used to indicate that a list is empty or that n
 
 <PageFeatures />
 
-::: success
-
-This feature was introduced in [v3.6.0](/getting-started/release-notes/?version=v3.6.0)
-
-:::
+<DocIntroduced version="3.6.0" />
 
 ## Usage
 

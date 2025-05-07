@@ -20,9 +20,7 @@ The `v-data-iterator` component is used for displaying arbitrary data, and share
 
 <PageFeatures />
 
-::: success
-This feature was introduced in [v3.4.0 (Blackguard)](/getting-started/release-notes/?version=v3.4.0)
-:::
+<DocIntroduced version="3.4.0" />
 
 ## Usage
 

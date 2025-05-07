@@ -41,9 +41,9 @@ Similar to the [v-window](/components/windows) component, `v-slide-group` lets i
 
 ### Props
 
-#### Active class
+#### Selected class
 
-**active-class** prop allows you to pass a class to customize the active items.
+**selected-class** prop allows you to pass a class to customize the active items.
 
 <ExamplesExample file="v-slide-group/prop-active-class" />
 

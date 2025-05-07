@@ -29,7 +29,6 @@
     width: [Number, String],
   })
 
-  const { event } = useGtag()
   const { name } = useRoute()
   const theme = useTheme()
   const sponsorStore = useSponsorsStore()
@@ -68,10 +67,6 @@
 
     if (!slug) return
 
-    event('click', {
-      event_category: 'vuetify-sponsor',
-      event_label: slug,
-      value: name,
-    })
+    sweClick('sponsor-card', slug, name)
   }
 </script>

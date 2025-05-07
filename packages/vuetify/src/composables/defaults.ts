@@ -85,8 +85,8 @@ export function provideDefaults (
 }
 
 function propIsDefined (vnode: VNode, prop: string) {
-  return typeof vnode.props?.[prop] !== 'undefined' ||
-    typeof vnode.props?.[toKebabCase(prop)] !== 'undefined'
+  return vnode.props && (typeof vnode.props[prop] !== 'undefined' ||
+    typeof vnode.props[toKebabCase(prop)] !== 'undefined')
 }
 
 export function internalUseDefaults (
@@ -103,15 +103,16 @@ export function internalUseDefaults (
 
   const componentDefaults = computed(() => defaults.value?.[props._as ?? name])
   const _props = new Proxy(props, {
-    get (target, prop) {
+    get (target, prop: string) {
       const propValue = Reflect.get(target, prop)
       if (prop === 'class' || prop === 'style') {
         return [componentDefaults.value?.[prop], propValue].filter(v => v != null)
-      } else if (typeof prop === 'string' && !propIsDefined(vm.vnode, prop)) {
-        return componentDefaults.value?.[prop] !== undefined ? componentDefaults.value?.[prop]
-          : defaults.value?.global?.[prop] !== undefined ? defaults.value?.global?.[prop]
-          : propValue
       }
+      if (propIsDefined(vm.vnode, prop)) return propValue
+      const _componentDefault = componentDefaults.value?.[prop]
+      if (_componentDefault !== undefined) return _componentDefault
+      const _globalDefault = defaults.value?.global?.[prop]
+      if (_globalDefault !== undefined) return _globalDefault
       return propValue
     },
   })
@@ -119,7 +120,8 @@ export function internalUseDefaults (
   const _subcomponentDefaults = shallowRef()
   watchEffect(() => {
     if (componentDefaults.value) {
-      const subComponents = Object.entries(componentDefaults.value).filter(([key]) => key.startsWith(key[0].toUpperCase()))
+      const subComponents = Object.entries(componentDefaults.value)
+        .filter(([key]) => key.startsWith(key[0].toUpperCase()))
       _subcomponentDefaults.value = subComponents.length ? Object.fromEntries(subComponents) : undefined
     } else {
       _subcomponentDefaults.value = undefined

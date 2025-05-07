@@ -24,12 +24,21 @@
     .v-field
       cursor: text
 
-    .v-field__input
-      @at-root #{selector.append('.v-text-field--prefixed', &)}
-        --v-field-padding-start: #{$text-field-input-padding-start}
+      &:not(.v-field--reverse)
+        .v-field__input
+          @at-root #{selector.append('.v-text-field--prefixed', &)}
+            --v-field-padding-start: #{$text-field-input-padding-start}
 
-      @at-root #{selector.append('.v-text-field--suffixed', &)}
-        --v-field-padding-end: #{$text-field-input-padding-end}
+          @at-root #{selector.append('.v-text-field--suffixed', &)}
+            --v-field-padding-end: #{$text-field-input-padding-end}
+
+      &.v-field--reverse
+        .v-field__input
+          @at-root #{selector.append('.v-text-field--prefixed', &)}
+            --v-field-padding-end: #{$text-field-input-padding-start}
+
+          @at-root #{selector.append('.v-text-field--suffixed', &)}
+            --v-field-padding-start: #{$text-field-input-padding-end}
 
     .v-input__details
       padding-inline: $text-field-details-padding-inline
@@ -68,9 +77,15 @@
         color: $text-field-disabled-affix-color
 
     &__prefix
-      padding-inline-start: var(--v-field-padding-start)
+      @at-root #{selector.nest('.v-field:not(.v-field--reverse)', &)}
+        padding-inline-start: var(--v-field-padding-start)
+      @at-root #{selector.nest('.v-field.v-field--reverse', &)}
+        padding-inline-end: var(--v-field-padding-end)
 
     &__suffix
-      padding-inline-end: var(--v-field-padding-end)
+      @at-root #{selector.nest('.v-field:not(.v-field--reverse)', &)}
+        padding-inline-end: var(--v-field-padding-end)
+      @at-root #{selector.nest('.v-field.v-field--reverse', &)}
+        padding-inline-start: var(--v-field-padding-start)
 
   /* endregion */

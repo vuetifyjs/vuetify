@@ -20,6 +20,7 @@
     "day": "Fired when a day is clicked."
   },
   "slots": {
-    "year": "Slot for the year."
+    "year": "Slot for the year.",
+    "day": "Slot for a day in the month."
   }
 }

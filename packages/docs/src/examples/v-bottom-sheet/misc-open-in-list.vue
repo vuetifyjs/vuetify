@@ -1,5 +1,5 @@
 <template>
-  <v-bottom-sheet>
+  <v-bottom-sheet v-model="sheet">
     <template v-slot:activator="{ props: activatorProps }">
       <div class="text-center pa-8">
         <v-btn
@@ -26,6 +26,9 @@
 </template>
 
 <script setup>
+  import { shallowRef } from 'vue'
+
+  const sheet = shallowRef(false)
   const tiles = [
     { img: 'keep.png', title: 'Keep' },
     { img: 'inbox.png', title: 'Inbox' },
@@ -38,6 +41,7 @@
 <script>
   export default {
     data: () => ({
+      sheet: false,
       tiles: [
         { img: 'keep.png', title: 'Keep' },
         { img: 'inbox.png', title: 'Inbox' },

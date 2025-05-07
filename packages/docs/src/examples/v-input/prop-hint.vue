@@ -1,17 +1,16 @@
 <template>
-  <v-row>
-    <v-switch
-      v-model="showMessages"
-      label="Show messages"
-    ></v-switch>
-    <v-input
-      :messages="messages"
-      hint="I am hint"
-      persistent-hint
-    >
-      Input
-    </v-input>
-  </v-row>
+  <v-switch
+    v-model="showMessages"
+    label="Show messages"
+    hide-details
+  ></v-switch>
+  <v-input
+    :messages="messages"
+    hint="I am hint"
+    persistent-hint
+  >
+    Input
+  </v-input>
 </template>
 
 <script setup>

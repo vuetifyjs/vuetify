@@ -6,7 +6,7 @@ import { computed, inject, markRaw, provide, ref, shallowRef, toRef, watch } fro
 import { consoleWarn, propsFactory } from '@/util'
 
 // Types
-import type { ComponentInternalInstance, ComputedRef, InjectionKey, PropType, Raw, Ref } from 'vue'
+import type { ComponentInternalInstance, InjectionKey, PropType, Raw, Ref } from 'vue'
 import type { ValidationProps } from './validation'
 import type { EventProp } from '@/util'
 
@@ -21,8 +21,8 @@ export interface FormProvide {
   unregister: (id: number | string) => void
   update: (id: number | string, isValid: boolean | null, errorMessages: string[]) => void
   items: Ref<FormField[]>
-  isDisabled: ComputedRef<boolean>
-  isReadonly: ComputedRef<boolean>
+  isDisabled: Readonly<Ref<boolean>>
+  isReadonly: Readonly<Ref<boolean>>
   isValidating: Ref<boolean>
   isValid: Ref<boolean | null>
   validateOn: Ref<FormProps['validateOn']>
@@ -78,8 +78,8 @@ export const makeFormProps = propsFactory({
 export function createForm (props: FormProps) {
   const model = useProxiedModel(props, 'modelValue')
 
-  const isDisabled = computed(() => props.disabled)
-  const isReadonly = computed(() => props.readonly)
+  const isDisabled = toRef(() => props.disabled)
+  const isReadonly = toRef(() => props.readonly)
   const isValidating = shallowRef(false)
   const items = ref<FormField[]>([])
   const errors = ref<FieldValidationResult[]>([])
@@ -176,7 +176,7 @@ export function createForm (props: FormProps) {
     isValidating,
     isValid: model,
     items,
-    validateOn: toRef(props, 'validateOn'),
+    validateOn: toRef(() => props.validateOn),
   })
 
   return {

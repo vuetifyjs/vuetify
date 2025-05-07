@@ -21,11 +21,7 @@ Handle scrolling within your application by using the **goTo** function.
 
 <PromotedEntry />
 
-::: success
-
-This feature was introduced in [v3.5.0 (Polaris)](/getting-started/release-notes/?version=v3.5.0)
-
-:::
+<DocIntroduced version="3.5.0" />
 
 ## Usage
 

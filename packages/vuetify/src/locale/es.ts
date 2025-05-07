@@ -104,4 +104,17 @@ export default {
     loadMore: 'Cargar más',
     empty: 'No hay más',
   },
+  rules: {
+    required: 'Este campo es obligatorio',
+    email: 'Por favor, introduce un correo electrónico válido',
+    number: 'Este campo solo puede contener números',
+    integer: 'Este campo solo puede contener valores enteros',
+    capital: 'Este campo solo puede contener letras mayúsculas',
+    maxLength: 'Debes introducir un máximo de {0} caracteres',
+    minLength: 'Debes introducir un mínimo de {0} caracteres',
+    strictLength: 'La longitud del campo introducido no es válida',
+    exclude: 'El carácter {0} no está permitido',
+    notEmpty: 'Por favor, elige al menos un valor',
+    pattern: 'Formato inválido',
+  },
 }

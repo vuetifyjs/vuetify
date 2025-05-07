@@ -1,4 +1,4 @@
-export type OpenStrategyFn = (data: {
+type OpenStrategyFunction = (data: {
   id: unknown
   value: boolean
   opened: Set<unknown>
@@ -7,7 +7,7 @@ export type OpenStrategyFn = (data: {
   event?: Event
 }) => Set<unknown>
 
-export type OpenSelectStrategyFn = (data: {
+type OpenSelectStrategyFunction = (data: {
   id: unknown
   value: boolean
   opened: Set<unknown>
@@ -18,8 +18,8 @@ export type OpenSelectStrategyFn = (data: {
 }) => Set<unknown> | null
 
 export type OpenStrategy = {
-  open: OpenStrategyFn
-  select: OpenSelectStrategyFn
+  open: OpenStrategyFunction
+  select: OpenSelectStrategyFunction
 }
 
 export const singleOpenStrategy: OpenStrategy = {

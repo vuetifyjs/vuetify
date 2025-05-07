@@ -15,9 +15,10 @@ import { ref, shallowRef, watch } from 'vue'
 import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
-import type { PropType } from 'vue'
+import type { Prop, PropType } from 'vue'
 
 // Types
+export type TimelineItemSide = 'start' | 'end' | undefined
 export type VTimelineItemSlots = {
   default: never
   icon: never
@@ -36,6 +37,10 @@ export const makeVTimelineItemProps = propsFactory({
   icon: IconValue,
   iconColor: String,
   lineInset: [Number, String],
+  side: {
+    type: String,
+    validator: (v: any) => v == null || ['start', 'end'].includes(v),
+  } as Prop<TimelineItemSide>,
 
   ...makeComponentProps(),
   ...makeDimensionProps(),
@@ -68,6 +73,8 @@ export const VTimelineItem = genericComponent<VTimelineItemSlots>()({
           'v-timeline-item',
           {
             'v-timeline-item--fill-dot': props.fillDot,
+            'v-timeline-item--side-start': props.side === 'start',
+            'v-timeline-item--side-end': props.side === 'end',
           },
           props.class,
         ]}

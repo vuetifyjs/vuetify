@@ -104,4 +104,17 @@ export default {
     loadMore: 'Učitaj još',
     empty: 'Nema više podataka',
   },
+  rules: {
+    required: 'Ovo polje je obavezno',
+    email: 'Unesite važeću e-mail adresu',
+    number: 'Ovo polje može sadržati samo brojeve',
+    integer: 'Ovo polje može sadržati samo cele brojeve',
+    capital: 'Ovo polje može sadržati samo velika slova',
+    maxLength: 'Morate uneti maksimum {0} karaktera',
+    minLength: 'Morate uneti minimum {0} karaktera',
+    strictLength: 'Dužina unetog polja nije važeća',
+    exclude: 'Karakter {0} nije dozvoljen',
+    notEmpty: 'Izaberite bar jednu vrednost',
+    pattern: 'Nevažeći format',
+  },
 }

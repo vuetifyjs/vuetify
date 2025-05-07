@@ -1,0 +1,1 @@
+node scripts/lint-commit-message.js $1

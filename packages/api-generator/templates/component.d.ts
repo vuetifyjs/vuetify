@@ -55,4 +55,15 @@ type ExtractExposed<T> = T extends ComponentOptionsBase<any, infer B, any, any, 
 
 type Pretty<T> = { [K in keyof T]: UnwrapRef<T[K]> }
 
-export type ComponentExposed = Pretty<UnionToIntersection<ExtractExposed<__component__['$options']>>>
+// Filter out HTMLInputElement props from exposed
+type CleanHTMLInputElement<T> = {
+  // If key is in HTMLInputElement
+  [K in keyof T as K extends keyof HTMLInputElement
+    ? // If value is the same type in HTMLInputElement
+      T[K] extends HTMLInputElement[K]
+      ? never
+      : K
+    : K]: T[K];
+};
+
+export type ComponentExposed = Pretty<CleanHTMLInputElement<UnionToIntersection<ExtractExposed<__component__['$options']>>>>

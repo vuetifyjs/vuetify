@@ -13,8 +13,6 @@
             Popular books
           </v-toolbar-title>
 
-          <v-spacer></v-spacer>
-
           <v-btn
             class="me-2"
             prepend-icon="mdi-plus"

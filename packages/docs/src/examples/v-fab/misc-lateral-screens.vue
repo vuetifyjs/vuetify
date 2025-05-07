@@ -10,8 +10,6 @@
 
         <v-app-bar-title>Page title</v-app-bar-title>
 
-        <v-spacer></v-spacer>
-
         <v-btn icon="mdi-magnify"></v-btn>
 
         <v-btn icon="mdi-dots-vertical">

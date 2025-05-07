@@ -104,4 +104,17 @@ export default {
     loadMore: '더 불러오기',
     empty: '더 이상 항목이 없습니다',
   },
+  rules: {
+    required: '이 필드는 필수입니다',
+    email: '유효한 이메일을 입력해주세요',
+    number: '이 필드는 숫자만 포함할 수 있습니다',
+    integer: '이 필드는 정수만 포함할 수 있습니다',
+    capital: '이 필드는 대문자만 포함할 수 있습니다',
+    maxLength: '최대 {0}자를 입력해야 합니다',
+    minLength: '최소 {0}자를 입력해야 합니다',
+    strictLength: '입력한 필드의 길이가 유효하지 않습니다',
+    exclude: '{0} 문자는 허용되지 않습니다',
+    notEmpty: '최소 하나의 값을 선택해주세요',
+    pattern: '형식이 유효하지 않습니다',
+  },
 }

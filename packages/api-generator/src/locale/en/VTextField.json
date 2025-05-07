@@ -7,7 +7,7 @@
     "persistentPlaceholder": "Forces placeholder to always be visible.",
     "placeholder": "Sets the input’s placeholder text.",
     "prefix": "Displays prefix text.",
-    "prependIcon": "Prepends an icon to the outnside the component's input, uses the same syntax as `v-icon`.",
+    "prependIcon": "Prepends an icon to the outside the component's input, uses the same syntax as `v-icon`.",
     "prependInnerIcon": "Prepends an icon inside the component's input, uses the same syntax as `v-icon`.",
     "reverse": "Reverses the input orientation.",
     "role": "The role attribute applied to the input.",

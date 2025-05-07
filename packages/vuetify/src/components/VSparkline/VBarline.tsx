@@ -1,7 +1,7 @@
 // Utilities
-import { computed } from 'vue'
+import { computed, useId } from 'vue'
 import { makeLineProps } from './util/line'
-import { genericComponent, getPropertyFromItem, getUid, propsFactory, useRender } from '@/util'
+import { genericComponent, getPropertyFromItem, propsFactory, useRender } from '@/util'
 
 // Types
 export type VBarlineSlots = {
@@ -42,7 +42,7 @@ export const VBarline = genericComponent<VBarlineSlots>()({
   props: makeVBarlineProps(),
 
   setup (props, { slots }) {
-    const uid = getUid()
+    const uid = useId()
     const id = computed(() => props.id || `barline-${uid}`)
     const autoDrawDuration = computed(() => Number(props.autoDrawDuration) || 500)
 

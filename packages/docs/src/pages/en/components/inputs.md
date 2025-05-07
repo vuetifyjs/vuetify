@@ -84,12 +84,6 @@ You can add custom validation rules to `v-input`, add them as functions returnin
 
 <ExamplesExample file="v-input/prop-rules" />
 
-#### Success
-
-As any validatable Vuetify component, `v-input` can be set to success state using **success** prop, you can add message to it using **success-messages** prop.
-
-<ExamplesExample file="v-input/prop-success" />
-
 ### Events
 
 #### Slot clicks

@@ -11,8 +11,6 @@
         User Profile
       </v-toolbar-title>
 
-      <v-spacer></v-spacer>
-
       <v-btn
         icon
         @click="isEditing = !isEditing"

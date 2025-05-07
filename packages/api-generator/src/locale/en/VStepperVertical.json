@@ -1,0 +1,7 @@
+{
+  "props": {
+    "completeIcon": "Icon to display when step is marked as completed.",
+    "editIcon": "Icon to display when step is editable.",
+    "errorIcon": "Icon to display when step has an error."
+  }
+}

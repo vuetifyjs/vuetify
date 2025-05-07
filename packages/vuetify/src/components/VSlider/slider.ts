@@ -183,7 +183,7 @@ export const useSlider = ({
   getActiveThumb: (e: MouseEvent | TouchEvent) => HTMLElement
 }) => {
   const { isRtl } = useRtl()
-  const isReversed = toRef(props, 'reverse')
+  const isReversed = toRef(() => props.reverse)
   const vertical = computed(() => props.direction === 'vertical')
   const indexFromEnd = computed(() => vertical.value !== isReversed.value)
 
@@ -193,7 +193,7 @@ export const useSlider = ({
   const tickSize = computed(() => parseInt(props.tickSize, 10))
   const trackSize = computed(() => parseInt(props.trackSize, 10))
   const numTicks = computed(() => (max.value - min.value) / step.value)
-  const disabled = toRef(props, 'disabled')
+  const disabled = toRef(() => props.disabled)
 
   const thumbColor = computed(() => props.error || props.disabled ? undefined : props.thumbColor ?? props.color)
   const trackColor = computed(() => props.error || props.disabled ? undefined : props.trackColor ?? props.color)
@@ -311,7 +311,7 @@ export const useSlider = ({
     return clamp(isNaN(percentage) ? 0 : percentage, 0, 100)
   }
 
-  const showTicks = toRef(props, 'showTicks')
+  const showTicks = toRef(() => props.showTicks)
   const parsedTicks = computed<Tick[]>(() => {
     if (!showTicks.value) return []
 
@@ -336,11 +336,11 @@ export const useSlider = ({
 
   const data: SliderProvide = {
     activeThumbRef,
-    color: toRef(props, 'color'),
+    color: toRef(() => props.color),
     decimals,
     disabled,
-    direction: toRef(props, 'direction'),
-    elevation: toRef(props, 'elevation'),
+    direction: toRef(() => props.direction),
+    elevation: toRef(() => props.elevation),
     hasLabels,
     isReversed,
     indexFromEnd,
@@ -353,16 +353,16 @@ export const useSlider = ({
     parsedTicks,
     parseMouseMove,
     position,
-    readonly: toRef(props, 'readonly'),
-    rounded: toRef(props, 'rounded'),
+    readonly: toRef(() => props.readonly),
+    rounded: toRef(() => props.rounded),
     roundValue,
     showTicks,
     startOffset,
     step,
     thumbSize,
     thumbColor,
-    thumbLabel: toRef(props, 'thumbLabel'),
-    ticks: toRef(props, 'ticks'),
+    thumbLabel: toRef(() => props.thumbLabel),
+    ticks: toRef(() => props.ticks),
     tickSize,
     trackColor,
     trackContainerRef,
