@@ -78,8 +78,8 @@ importers:
         specifier: ^4.0.2
         version: 4.0.2(conventional-commits-filter@5.0.0)
       '@vueuse/head':
-        specifier: ^1.3.1
-        version: 1.3.1(vue@3.5.13(typescript@5.8.3))
+        specifier: ^2.0.0
+        version: 2.0.0(vue@3.5.13(typescript@5.8.3))
       concurrently:
         specifier: ^9.1.2
         version: 9.1.2
@@ -630,7 +630,7 @@ importers:
         version: 0.3.2(vite@6.3.5(@types/node@22.15.12)(sass-embedded@1.87.0)(sass@1.87.0)(terser@5.31.3)(tsx@4.19.3)(yaml@2.7.0))
       vite-ssr:
         specifier: ^0.17.2
-        version: 0.17.2(@vitejs/plugin-vue@5.2.1(vite@6.3.5(@types/node@22.15.12)(sass-embedded@1.87.0)(sass@1.87.0)(terser@5.31.3)(tsx@4.19.3)(yaml@2.7.0))(vue@3.5.13(typescript@5.8.3)))(@vueuse/head@1.3.1(vue@3.5.13(typescript@5.8.3)))(encoding@0.1.13)(rollup@4.40.2)(vite@6.3.5(@types/node@22.15.12)(sass-embedded@1.87.0)(sass@1.87.0)(terser@5.31.3)(tsx@4.19.3)(yaml@2.7.0))(vue-router@4.5.0(vue@3.5.13(typescript@5.8.3)))(vue@3.5.13(typescript@5.8.3))
+        version: 0.17.2(@vitejs/plugin-vue@5.2.1(vite@6.3.5(@types/node@22.15.12)(sass-embedded@1.87.0)(sass@1.87.0)(terser@5.31.3)(tsx@4.19.3)(yaml@2.7.0))(vue@3.5.13(typescript@5.8.3)))(@vueuse/head@2.0.0(vue@3.5.13(typescript@5.8.3)))(encoding@0.1.13)(rollup@4.40.2)(vite@6.3.5(@types/node@22.15.12)(sass-embedded@1.87.0)(sass@1.87.0)(terser@5.31.3)(tsx@4.19.3)(yaml@2.7.0))(vue-router@4.5.0(vue@3.5.13(typescript@5.8.3)))(vue@3.5.13(typescript@5.8.3))
       vitest:
         specifier: ^3.1.1
         version: 3.1.1(@types/debug@4.1.12)(@types/node@22.15.12)(@vitest/browser@3.1.1)(@vitest/ui@3.1.1)(happy-dom@8.9.0(encoding@0.1.13))(jsdom@26.1.0)(sass-embedded@1.87.0)(sass@1.87.0)(terser@5.31.3)(tsx@4.19.3)(yaml@2.7.0)
@@ -3317,8 +3317,8 @@ packages:
     resolution: {integrity: sha512-tQo3A63uCq2646IhgYLIFugC8HRVyBssvRidzu+iQLkCWSO8ikz9z6tqDU3NjbAxSXxeAFa5x1Nq7VMDxrQ4Lw==}
     engines: {node: '>=18'}
 
-  '@vueuse/head@1.3.1':
-    resolution: {integrity: sha512-XCcHGfDzkGlHS7KIPJVYN//L7jpfASLsN7MUE19ndHVQLnPIDxqFLDl7IROsY81PKzawVAUe4OYVWcGixseWxA==}
+  '@vueuse/head@2.0.0':
+    resolution: {integrity: sha512-ykdOxTGs95xjD4WXE4na/umxZea2Itl0GWBILas+O4oqS7eXIods38INvk3XkJKjqMdWPcpCyLX/DioLQxU1KA==}
     peerDependencies:
       vue: '>=2.7 || >=3'
 
@@ -12686,7 +12686,7 @@ snapshots:
       lz-string: 1.5.0
       pretty-format: 27.5.1
 
-  '@vueuse/head@1.3.1(vue@3.5.13(typescript@5.8.3))':
+  '@vueuse/head@2.0.0(vue@3.5.13(typescript@5.8.3))':
     dependencies:
       '@unhead/dom': 1.11.20
       '@unhead/schema': 1.11.20
@@ -19097,7 +19097,7 @@ snapshots:
       fast-glob: 3.3.3
       vite: 6.3.5(@types/node@22.15.12)(sass-embedded@1.87.0)(sass@1.87.0)(terser@5.31.3)(tsx@4.19.3)(yaml@2.7.0)
 
-  vite-ssr@0.17.2(@vitejs/plugin-vue@5.2.1(vite@6.3.5(@types/node@22.15.12)(sass-embedded@1.87.0)(sass@1.87.0)(terser@5.31.3)(tsx@4.19.3)(yaml@2.7.0))(vue@3.5.13(typescript@5.8.3)))(@vueuse/head@1.3.1(vue@3.5.13(typescript@5.8.3)))(encoding@0.1.13)(rollup@4.40.2)(vite@6.3.5(@types/node@22.15.12)(sass-embedded@1.87.0)(sass@1.87.0)(terser@5.31.3)(tsx@4.19.3)(yaml@2.7.0))(vue-router@4.5.0(vue@3.5.13(typescript@5.8.3)))(vue@3.5.13(typescript@5.8.3)):
+  vite-ssr@0.17.2(@vitejs/plugin-vue@5.2.1(vite@6.3.5(@types/node@22.15.12)(sass-embedded@1.87.0)(sass@1.87.0)(terser@5.31.3)(tsx@4.19.3)(yaml@2.7.0))(vue@3.5.13(typescript@5.8.3)))(@vueuse/head@2.0.0(vue@3.5.13(typescript@5.8.3)))(encoding@0.1.13)(rollup@4.40.2)(vite@6.3.5(@types/node@22.15.12)(sass-embedded@1.87.0)(sass@1.87.0)(terser@5.31.3)(tsx@4.19.3)(yaml@2.7.0))(vue-router@4.5.0(vue@3.5.13(typescript@5.8.3)))(vue@3.5.13(typescript@5.8.3)):
     dependencies:
       '@rollup/plugin-replace': 3.0.0(rollup@4.40.2)
       '@vue/server-renderer': 3.5.13(vue@3.5.13(typescript@5.8.3))
@@ -19107,7 +19107,7 @@ snapshots:
       vite: 6.3.5(@types/node@22.15.12)(sass-embedded@1.87.0)(sass@1.87.0)(terser@5.31.3)(tsx@4.19.3)(yaml@2.7.0)
     optionalDependencies:
       '@vitejs/plugin-vue': 5.2.1(vite@6.3.5(@types/node@22.15.12)(sass-embedded@1.87.0)(sass@1.87.0)(terser@5.31.3)(tsx@4.19.3)(yaml@2.7.0))(vue@3.5.13(typescript@5.8.3))
-      '@vueuse/head': 1.3.1(vue@3.5.13(typescript@5.8.3))
+      '@vueuse/head': 2.0.0(vue@3.5.13(typescript@5.8.3))
       vue: 3.5.13(typescript@5.8.3)
       vue-router: 4.5.0(vue@3.5.13(typescript@5.8.3))
     transitivePeerDependencies:
