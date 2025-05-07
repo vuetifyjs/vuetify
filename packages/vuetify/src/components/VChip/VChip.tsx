@@ -29,7 +29,7 @@ import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant
 import { Ripple } from '@/directives/ripple'
 
 // Utilities
-import { computed, toDisplayString } from 'vue'
+import { computed, toDisplayString, toRef } from 'vue'
 import { EventProp, genericComponent, propsFactory } from '@/util'
 
 // Types
@@ -56,6 +56,7 @@ export const makeVChipProps = propsFactory({
   activeClass: String,
   appendAvatar: String,
   appendIcon: IconValue,
+  baseColor: String,
   closable: Boolean,
   closeIcon: {
     type: IconValue,
@@ -125,7 +126,6 @@ export const VChip = genericComponent<VChipSlots>()({
   setup (props, { attrs, emit, slots }) {
     const { t } = useLocale()
     const { borderClasses } = useBorder(props)
-    const { colorClasses, colorStyles, variantClasses } = useVariant(props)
     const { densityClasses } = useDensity(props)
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props)
@@ -135,13 +135,13 @@ export const VChip = genericComponent<VChipSlots>()({
     const isActive = useProxiedModel(props, 'modelValue')
     const group = useGroupItem(props, VChipGroupSymbol, false)
     const link = useLink(props, attrs)
-    const isLink = computed(() => props.link !== false && link.isLink.value)
+    const isLink = toRef(() => props.link !== false && link.isLink.value)
     const isClickable = computed(() =>
       !props.disabled &&
       props.link !== false &&
       (!!group || props.link || link.isClickable.value)
     )
-    const closeProps = computed(() => ({
+    const closeProps = toRef(() => ({
       'aria-label': t(props.closeLabel),
       onClick (e: MouseEvent) {
         e.preventDefault()
@@ -152,6 +152,14 @@ export const VChip = genericComponent<VChipSlots>()({
         emit('click:close', e)
       },
     }))
+
+    const { colorClasses, colorStyles, variantClasses } = useVariant(() => {
+      const showColor = !group || group.isSelected.value
+      return ({
+        color: showColor ? props.color ?? props.baseColor : props.baseColor,
+        variant: props.variant,
+      })
+    })
 
     function onClick (e: MouseEvent) {
       emit('click', e)
@@ -177,7 +185,6 @@ export const VChip = genericComponent<VChipSlots>()({
       const hasFilter = !!(slots.filter || props.filter) && group
       const hasPrependMedia = !!(props.prependIcon || props.prependAvatar)
       const hasPrepend = !!(hasPrependMedia || slots.prepend)
-      const hasColor = !group || group.isSelected.value
 
       return isActive.value && (
         <Tag
@@ -193,7 +200,7 @@ export const VChip = genericComponent<VChipSlots>()({
             },
             themeClasses.value,
             borderClasses.value,
-            hasColor ? colorClasses.value : undefined,
+            colorClasses.value,
             densityClasses.value,
             elevationClasses.value,
             roundedClasses.value,
@@ -203,7 +210,7 @@ export const VChip = genericComponent<VChipSlots>()({
             props.class,
           ]}
           style={[
-            hasColor ? colorStyles.value : undefined,
+            colorStyles.value,
             props.style,
           ]}
           disabled={ props.disabled || undefined }

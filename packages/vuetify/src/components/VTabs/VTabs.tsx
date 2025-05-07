@@ -97,17 +97,17 @@ export const VTabs = genericComponent<new <T = TabItem>(
     const model = useProxiedModel(props, 'modelValue')
     const items = computed(() => parseItems(props.items))
     const { densityClasses } = useDensity(props)
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'bgColor'))
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.bgColor)
     const { scopeId } = useScopeId()
 
     provideDefaults({
       VTab: {
-        color: toRef(props, 'color'),
-        direction: toRef(props, 'direction'),
-        stacked: toRef(props, 'stacked'),
-        fixed: toRef(props, 'fixedTabs'),
-        sliderColor: toRef(props, 'sliderColor'),
-        hideSlider: toRef(props, 'hideSlider'),
+        color: toRef(() => props.color),
+        direction: toRef(() => props.direction),
+        stacked: toRef(() => props.stacked),
+        fixed: toRef(() => props.fixedTabs),
+        sliderColor: toRef(() => props.sliderColor),
+        hideSlider: toRef(() => props.hideSlider),
       },
     })
 

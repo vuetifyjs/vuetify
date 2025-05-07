@@ -5,8 +5,6 @@
 
       <v-toolbar-title text="Toolbar"></v-toolbar-title>
 
-      <v-spacer></v-spacer>
-
       <v-btn icon="mdi-export"></v-btn>
     </v-toolbar>
   </v-card>

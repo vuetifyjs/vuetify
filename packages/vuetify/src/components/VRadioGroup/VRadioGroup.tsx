@@ -12,8 +12,8 @@ import { IconValue } from '@/composables/icons'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed } from 'vue'
-import { filterInputAttrs, genericComponent, getUid, omit, propsFactory, useRender } from '@/util'
+import { computed, useId } from 'vue'
+import { filterInputAttrs, genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { VInputSlots } from '@/components/VInput/VInput'
@@ -68,7 +68,7 @@ export const VRadioGroup = genericComponent<new <T>(
   },
 
   setup (props, { attrs, slots }) {
-    const uid = getUid()
+    const uid = useId()
     const id = computed(() => props.id || `radio-group-${uid}`)
     const model = useProxiedModel(props, 'modelValue')
 

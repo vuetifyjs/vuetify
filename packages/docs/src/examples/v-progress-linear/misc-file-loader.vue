@@ -17,8 +17,6 @@
         <v-icon>mdi-plus</v-icon>
       </v-btn>
 
-      <v-spacer></v-spacer>
-
       <v-btn icon>
         <v-icon>mdi-share-variant</v-icon>
       </v-btn>

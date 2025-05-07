@@ -5,7 +5,7 @@ import './VTimePickerClock.sass'
 import { useBackgroundColor, useTextColor } from '@/composables/color'
 
 // Utilities
-import { computed, ref, toRef, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -67,8 +67,8 @@ export const VTimePickerClock = genericComponent()({
     const valueOnMouseDown = ref(null as number | null)
     const valueOnMouseUp = ref(null as number | null)
 
-    const { textColorClasses, textColorStyles } = useTextColor(toRef(props, 'color'))
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
+    const { textColorClasses, textColorStyles } = useTextColor(() => props.color)
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.color)
 
     const count = computed(() => props.max - props.min + 1)
     const roundCount = computed(() => props.double ? (count.value / 2) : count.value)
@@ -148,8 +148,8 @@ export const VTimePickerClock = genericComponent()({
     function getTransform (i: number) {
       const { x, y } = getPosition(i)
       return {
-        left: `${50 + x * 50}%`,
-        top: `${50 + y * 50}%`,
+        left: `${Math.round(50 + x * 50)}%`,
+        top: `${Math.round(50 + y * 50)}%`,
       }
     }
 

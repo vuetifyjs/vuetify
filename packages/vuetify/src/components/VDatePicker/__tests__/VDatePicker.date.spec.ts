@@ -606,7 +606,7 @@ describe.skip('VDatePicker.ts', () => { // eslint-disable-line max-statements
     expect(cb.mock.calls[0][0]).toEqual('2019-01-06')
   })
 
-  it('should emit @input and not emit @change when month is clicked (not reative picker)', async () => {
+  it('should emit @input and not emit @change when month is clicked (not reactive picker)', async () => {
     const wrapper = mountFunction({
       propsData: {
         value: '2013-02-07',

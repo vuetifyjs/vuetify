@@ -34,7 +34,6 @@ Vuetify is a [MIT licensed](http://opensource.org/licenses/MIT) project that is 
 <ul>
   <li>
     <a href="https://github.com/users/johnleider/sponsorship">Become a backer or sponsor on GitHub</a>
-    or <a href="https://www.patreon.com/vuetify">Patreon</a> <small>(supports John and Heather)</small>
   </li>
   <li>
     <a href="https://opencollective.com/vuetify">Become a backer or sponsor on Open Collective</a>
@@ -46,14 +45,11 @@ Vuetify is a [MIT licensed](http://opensource.org/licenses/MIT) project that is 
   <li>
     <a href="https://paypal.me/vuetify">Make a one-time payment with Paypal</a>
   </li>
-  <li>
-    <a href="https://support.vuetifyjs.com/">Book time with the Team</a>
-  </li>
 </ul>
 
-### What's the difference between GitHub Sponsors, Patreon, and OpenCollective?
+### What's the difference between GitHub Sponsors and OpenCollective?
 
-Funds donated through GitHub Sponsors and Patreon directly support [John Leider](https://github.com/sponsors/johnleider) and the ongoing development and maintenance of Vuetify. Funds donated via Open Collective are managed with transparent expenses and will be used for compensating work and expenses for Core team members. Your name/logo will receive proper recognition and exposure by donating on either platform.
+Funds donated through GitHub Sponsors directly support [John Leider](https://github.com/sponsors/johnleider) and the ongoing development and maintenance of Vuetify. Funds donated via Open Collective are managed with transparent expenses and will be used for compensating work and expenses for Core team members. Your name/logo will receive proper recognition and exposure by donating on either platform.
 
 <h3><b>Special Sponsor</b></h3>
 
@@ -325,6 +321,9 @@ For help and support questions, please use our [Discord community](https://commu
 Use our [Issue generator](https://issues.vuetifyjs.com) to report bugs and request new features.
 
 Please make sure to read the [Important Information](https://github.com/vuetifyjs/vuetify/blob/master/.github/CONTRIBUTING.md#important-information) before opening an issue. Issues not confirming to the guidelines may be closed immediately.
+
+2️⃣ Vuetify 2 Support
+Vuetify 2 is now End Of Life (EOL) and is no longer supported, even for security issues. Commercial support for this version is available from our partner, [HeroDevs](https://www.herodevs.com/support/vuetify-nes?utm_source=partnership&utm_medium=partnership&utm_campaign=partnership&utm_id=vuetify2).
 
 ### 📝 Changelog
 

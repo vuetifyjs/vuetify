@@ -148,41 +148,84 @@ describe('createTheme', () => {
     expect(theme.computedThemes.value.light.colors).toHaveProperty('color2-lighten-1')
   })
 
-  // it('should use vue-meta@2.3 functionality', () => {
-  //   const theme = createTheme()
-  //   const set = jest.fn()
-  //   const $meta = () => ({
-  //     addApp: () => ({ set }),
-  //   })
-  //   ;(instance as any).$meta = $meta as any
-  //   theme.init(instance)
-  //   expect(set).toHaveBeenCalled()
-  // })
+  it('should allow for customization of the stylesheet id', () => {
+    const customStylesheetId = 'custom-vuetify-stylesheet-id'
+    const theme = createTheme({
+      stylesheetId: customStylesheetId,
+    })
 
-  // it('should set theme with vue-meta@2', () => {
-  //   const theme = mockTheme()
-  //   const anyInstance = instance as any
-  //   anyInstance.$meta = () => ({
-  //     getOptions: () => ({ keyName: 'metaInfo' }),
-  //   })
-  //   theme.init(anyInstance)
-  //   const metaKeyName = anyInstance.$meta().getOptions().keyName
-  //   expect(typeof anyInstance.$options[metaKeyName]).toBe('function')
-  //   const metaInfo = anyInstance.$options[metaKeyName]()
-  //   expect(metaInfo).toBeTruthy()
-  //   expect(metaInfo.style).toHaveLength(1)
-  //   expect(metaInfo.style[0].cssText).toMatchSnapshot()
-  // })
+    theme.install(app)
 
-  // it('should set theme with vue-meta@1', () => {
-  //   const theme = mockTheme()
-  //   const anyInstance = instance as any
-  //   anyInstance.$meta = () => ({})
-  //   theme.init(anyInstance)
-  //   expect(typeof anyInstance.$options.metaInfo).toBe('function')
-  //   const metaInfo = anyInstance.$options.metaInfo()
-  //   expect(metaInfo).toBeTruthy()
-  //   expect(metaInfo.style).toHaveLength(1)
-  //   expect(metaInfo.style[0].cssText).toMatchSnapshot()
-  // })
+    expect(document.getElementById(customStylesheetId)).toBeDefined()
+  })
+
+  it('should allow for themes to be scoped', () => {
+    const scope = '#my-app'
+    const theme = createTheme({
+      scope,
+    })
+
+    theme.install(app)
+
+    const scopedStyles = document.getElementById('vuetify-theme-stylesheet')!.innerHTML
+    const selectors = scopedStyles.split('\n').filter(line => line.includes('{')).map(line => line.trim())
+    selectors.forEach(selector => {
+      expect(selector.startsWith(`:where(${scope})`)).toBe(true)
+      expect(selector).not.toContain(':root')
+    })
+  })
+
+  it('should properly integrate with unhead when available', async () => {
+    const mockPush = vi.fn().mockReturnValue({ patch: vi.fn() })
+    const mockUpdateHead = vi.fn()
+    const mockUseUnhead = {
+      push: mockPush,
+      updateDOM: mockUpdateHead,
+    }
+
+    // Mock the app context with head
+    app._context = {
+      provides: {
+        usehead: mockUseUnhead,
+      },
+    } as any
+
+    const theme = createTheme()
+    theme.install(app)
+
+    // Verify the head push method was called
+    expect(mockPush).toHaveBeenCalled()
+
+    // The push method should receive a function that returns an object with a style property
+    const headObj = mockPush.mock.calls[0][0]()
+    expect(headObj).toHaveProperty('style')
+    expect(Array.isArray(headObj.style)).toBe(true)
+    expect(headObj.style[0]).toHaveProperty('textContent')
+    expect(headObj.style[0]).toHaveProperty('id', 'vuetify-theme-stylesheet')
+  })
+
+  it('should work with legacy head client methods', async () => {
+    const mockAddHeadObjs = vi.fn()
+    const mockUpdateHead = vi.fn()
+    const mockLegacyHead = {
+      addHeadObjs: mockAddHeadObjs,
+      updateDOM: mockUpdateHead,
+    }
+
+    // Mock the app context with legacy head
+    app._context = {
+      provides: {
+        usehead: mockLegacyHead,
+      },
+    } as any
+
+    const theme = createTheme()
+    theme.install(app)
+
+    // Verify the legacy addHeadObjs method was called
+    expect(mockAddHeadObjs).toHaveBeenCalled()
+
+    // Verify updateDOM is called during reactivity
+    expect(mockUpdateHead).toHaveBeenCalled()
+  })
 })

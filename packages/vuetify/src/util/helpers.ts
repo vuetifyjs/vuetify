@@ -1,5 +1,15 @@
 // Utilities
-import { capitalize, Comment, computed, Fragment, isVNode, reactive, readonly, shallowRef, toRefs, unref, watchEffect } from 'vue'
+import {
+  capitalize,
+  Comment,
+  Fragment,
+  isVNode,
+  reactive,
+  shallowRef,
+  toRef,
+  unref,
+  watchEffect,
+} from 'vue'
 import { IN_BROWSER } from '@/util/globals'
 
 // Types
@@ -10,11 +20,10 @@ import type {
   InjectionKey,
   PropType,
   Ref,
-  ToRefs,
+  ToRef,
   VNode,
   VNodeArrayChildren,
   VNodeChild,
-  WatchOptions,
 } from 'vue'
 
 export function getNestedValue (obj: any, path: (string | number)[], fallback?: any): any {
@@ -219,7 +228,7 @@ export function pick<
   const found: any = {}
 
   for (const key of paths) {
-    if (Object.hasOwn(obj, key)) {
+    if (Object.prototype.hasOwnProperty.call(obj, key)) {
       found[key] = obj[key]
     }
   }
@@ -384,9 +393,9 @@ export function wrapInArray<T> (
     ? IfAny<T, T[], T>
     : NonNullable<T>[] {
   return v == null
-    ? []
+    ? [] as any
     : Array.isArray(v)
-      ? v as any : [v]
+      ? v as any : [v] as any
 }
 
 export function defaultFilter (value: any, search: string | null, item: any) {
@@ -556,6 +565,10 @@ export class CircularBuffer<T = never> {
 
   constructor (public readonly size: number) {}
 
+  get isFull () {
+    return this.#arr.length === this.size
+  }
+
   push (val: T) {
     this.#arr[this.#pointer] = val
     this.#pointer = (this.#pointer + 1) % this.size
@@ -563,6 +576,11 @@ export class CircularBuffer<T = never> {
 
   values (): T[] {
     return this.#arr.slice(this.#pointer).concat(this.#arr.slice(0, this.#pointer))
+  }
+
+  clear () {
+    this.#arr.length = 0
+    this.#pointer = 0
   }
 }
 
@@ -581,20 +599,26 @@ export function getEventCoordinates (e: MouseEvent | TouchEvent) {
 type NotAUnion<T> = [T] extends [infer U] ? _NotAUnion<U, U> : never
 type _NotAUnion<T, U> = U extends any ? [T] extends [U] ? unknown : never : never
 
+type ToReadonlyRefs<T> = { [K in keyof T]: Readonly<ToRef<T[K]>> }
+
 /**
  * Convert a computed ref to a record of refs.
  * The getter function must always return an object with the same keys.
  */
-export function destructComputed<T extends object> (getter: ComputedGetter<T & NotAUnion<T>>): ToRefs<T>
+export function destructComputed<T extends object> (getter: ComputedGetter<T & NotAUnion<T>>): ToReadonlyRefs<T>
 export function destructComputed<T extends object> (getter: ComputedGetter<T>) {
   const refs = reactive({}) as T
-  const base = computed(getter)
   watchEffect(() => {
-    for (const key in base.value) {
-      refs[key] = base.value[key]
+    const base = getter()
+    for (const key in base) {
+      refs[key] = base[key]
     }
   }, { flush: 'sync' })
-  return toRefs(refs)
+  const obj = {} as ToReadonlyRefs<T>
+  for (const key in refs) {
+    obj[key] = toRef(() => refs[key]) as any
+  }
+  return obj
 }
 
 /** Array.includes but value can be any type */
@@ -706,19 +730,6 @@ export function defer (timeout: number, cb: () => void) {
   const timeoutId = window.setTimeout(cb, timeout)
 
   return () => window.clearTimeout(timeoutId)
-}
-
-export function eagerComputed<T> (fn: () => T, options?: WatchOptions): Readonly<Ref<T>> {
-  const result = shallowRef()
-
-  watchEffect(() => {
-    result.value = fn()
-  }, {
-    flush: 'sync',
-    ...options,
-  })
-
-  return readonly(result)
 }
 
 export function isClickInsideElement (event: MouseEvent, targetDiv: HTMLElement) {
