@@ -3,7 +3,7 @@ import { makeFocusProps } from '@/composables/focus'
 import { useForm } from '@/composables/form'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useToggleScope } from '@/composables/toggleScope'
-// import { useRules } from '@/labs/rules'
+import { useRules, ValidationAlias, ValidationRuleParams } from '@/labs/rules'
 
 // Utilities
 import { computed, nextTick, onBeforeMount, onBeforeUnmount, onMounted, ref, shallowRef, unref, useId, watch } from 'vue'
@@ -29,9 +29,6 @@ type ValidateOn =
   | `eager ${ValidateOnValue}`
   | 'lazy'
   | 'eager'
-
-// type ValidationRuleParams = [any, string?]
-// type ValidationAlias = string | [string, ...ValidationRuleParams]
 
 export interface ValidationProps {
   disabled: boolean | null
@@ -71,8 +68,7 @@ export const makeValidationProps = propsFactory({
     default: null,
   },
   rules: {
-    type: Array as PropType<readonly ValidationRule[]>,
-    // type: Array as PropType<readonly (ValidationRule | ValidationAlias)[]>,
+    type: Array as PropType<readonly (ValidationRule | ValidationAlias)[]>,
     default: () => ([]),
   },
   modelValue: null,
@@ -90,7 +86,7 @@ export function useValidation (
   const model = useProxiedModel(props, 'modelValue')
   const validationModel = computed(() => props.validationValue === undefined ? model.value : props.validationValue)
   const form = useForm(props)
-  // const rules = useRules()
+  const rules = useRules()
   const internalErrorMessages = ref<string[]>([])
   const isPristine = shallowRef(true)
   const isDirty = computed(() => !!(
@@ -138,26 +134,26 @@ export function useValidation (
   const vm = getCurrentInstance('validation')
   const uid = computed(() => props.name ?? unref(id))
 
-  // const resolvedRules = computed(() => props.rules.map(rule => {
-  //   let ruleName: string | null = null
-  //   let ruleParams: ValidationRuleParams = [undefined]
-  //   if (Array.isArray(rule)) {
-  //     ruleName = rule[0]
-  //     ruleParams = rule.slice(1) as ValidationRuleParams
-  //   } else if (typeof rule === 'string') {
-  //     ruleName = rule
-  //   }
+  const resolvedRules = computed(() => props.rules.map(rule => {
+    let ruleName: string | null = null
+    let ruleParams: ValidationRuleParams = [undefined]
+    if (Array.isArray(rule)) {
+      ruleName = rule[0]
+      ruleParams = rule.slice(1) as ValidationRuleParams
+    } else if (typeof rule === 'string') {
+      ruleName = rule
+    }
 
-  //   if (ruleName !== null) {
-  //     if (ruleName.startsWith('$')) {
-  //       ruleName = ruleName.slice(1)
-  //     }
+    if (ruleName !== null) {
+      if (ruleName.startsWith('$')) {
+        ruleName = ruleName.slice(1)
+      }
 
-  //     return rules?.[ruleName]?.(...ruleParams)
-  //   } else {
-  //     return rule
-  //   }
-  // }))
+      return rules?.[ruleName]?.(...ruleParams)
+    } else {
+      return rule
+    }
+  }))
 
   onBeforeMount(() => {
     form.register?.({
@@ -224,7 +220,7 @@ export function useValidation (
 
     isValidating.value = true
 
-    for (const rule of props.rules) {
+    for (const rule of resolvedRules.value) {
       if (results.length >= Number(props.maxErrors ?? 1)) {
         break
       }
