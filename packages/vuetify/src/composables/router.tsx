@@ -9,7 +9,7 @@ import {
 import { deepEqual, getCurrentInstance, hasEvent, IN_BROWSER, propsFactory } from '@/util'
 
 // Types
-import type { PropType, Ref, SetupContext } from 'vue'
+import type { ComputedRef, PropType, Ref, SetupContext } from 'vue'
 import type {
   RouterLink as _RouterLink,
   useLink as _useLink,
@@ -44,8 +44,8 @@ export interface LinkListeners {
 }
 
 export interface UseLink extends Omit<Partial<ReturnType<typeof _useLink>>, 'href'|'route'|'navigate'> {
-  isLink: ComputedRef<boolean>
-  isClickable: ComputedRef<boolean>
+  isLink: Readonly<Ref<boolean>>
+  isClickable: Readonly<Ref<boolean>>
   href: Ref<string | undefined>
   linkProps: Record<string, string | undefined>
   route: ComputedRef<RouteLocation & { href: string} | undefined>
