@@ -146,7 +146,7 @@
     "@testing-library/dom": "npm:@vuetify/testing-library-dom@1.0.2",
     "@testing-library/user-event": "^14.6.1",
     "@testing-library/vue": "^8.1.0",
-    "@types/node": "^22.5.4",
+    "@types/node": "22.15.12",
     "@types/resize-observer-browser": "^0.1.11",
     "@vitejs/plugin-vue": "^5.2.1",
     "@vitejs/plugin-vue-jsx": "^4.1.2",

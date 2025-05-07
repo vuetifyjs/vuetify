@@ -393,9 +393,9 @@ export function wrapInArray<T> (
     ? IfAny<T, T[], T>
     : NonNullable<T>[] {
   return v == null
-    ? []
+    ? [] as any
     : Array.isArray(v)
-      ? v as any : [v]
+      ? v as any : [v] as any
 }
 
 export function defaultFilter (value: any, search: string | null, item: any) {

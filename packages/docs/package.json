@@ -87,7 +87,7 @@
     "vite-plugin-pwa": "^1.0.0",
     "vite-plugin-vue-layouts": "^0.11.0",
     "vite-plugin-vuetify": "^2.1.1",
-    "vue-tsc": "^2.0.29"
+    "vue-tsc": "^2.2.10"
   },
   "publishConfig": {
     "access": "public"
