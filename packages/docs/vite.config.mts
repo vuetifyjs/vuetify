@@ -1,6 +1,6 @@
 import path from 'upath'
-import fs from 'fs/promises'
-import { fileURLToPath } from 'url'
+import fs from 'node:fs/promises'
+import { fileURLToPath } from 'node:url'
 
 import { defineConfig, loadEnv } from 'vite'
 import AutoImport from 'unplugin-auto-import/vite'
@@ -108,7 +108,6 @@ export default defineConfig(({ command, mode, isSsrBuild }) => {
             'lodash-es': ['camelCase', 'kebabCase', 'upperFirst'],
             vue: ['camelize', 'mergeProps'],
             vuetify: ['useDate', 'useDisplay', 'useGoTo', 'useRtl', 'useTheme'],
-            'vue-gtag-next': ['useGtag'],
             'vue-i18n': ['useI18n'],
           }
         ],
@@ -377,6 +376,8 @@ export default defineConfig(({ command, mode, isSsrBuild }) => {
         'fflate',
         '@cosmicjs/sdk',
       ],
+      // In development mode, prevent pre-bundling of @vuetify libs for HMR linking
+      exclude: process.env.NODE_ENV ==='development' ? ['@vuetify/one'] : [],
     },
 
     ssr: {

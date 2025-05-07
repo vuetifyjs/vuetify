@@ -104,4 +104,17 @@ export default {
     loadMore: 'Wczytaj więcej',
     empty: 'Brak kolejnych danych',
   },
+  rules: {
+    required: 'To pole jest wymagane',
+    email: 'Proszę podać prawidłowy adres e-mail',
+    number: 'To pole może zawierać tylko cyfry',
+    integer: 'To pole może zawierać tylko liczby całkowite',
+    capital: 'To pole może zawierać tylko wielkie litery',
+    maxLength: 'Musisz wprowadzić maksymalnie {0} znaków',
+    minLength: 'Musisz wprowadzić co najmniej {0} znaków',
+    strictLength: 'Długość wprowadzonego pola jest nieprawidłowa',
+    exclude: 'Znak {0} nie jest dozwolony',
+    notEmpty: 'Proszę wybrać co najmniej jedną wartość',
+    pattern: 'Nieprawidłowy format',
+  },
 }

@@ -152,7 +152,10 @@ export const VDataTableRow = genericComponent<new <T>(
                       <VCheckboxBtn
                         disabled={ !item.selectable }
                         modelValue={ isSelected([item]) }
-                        onClick={ withModifiers(() => toggleSelect(item), ['stop']) }
+                        onClick={ withModifiers(
+                          (event: Event) => toggleSelect(item, props.index, event as PointerEvent),
+                          ['stop']
+                        )}
                       />
                     )
                   }

@@ -104,4 +104,17 @@ export default {
     loadMore: 'Carrega més',
     empty: 'No hi ha més',
   },
+  rules: {
+    required: 'Aquest camp és obligatori',
+    email: 'Si us plau, introdueix un correu electrònic vàlid',
+    number: 'Aquest camp només pot contenir números',
+    integer: 'Aquest camp només pot contenir valors enters',
+    capital: 'Aquest camp només pot contenir lletres majúscules',
+    maxLength: 'Has d’introduir un màxim de {0} caràcters',
+    minLength: 'Has d’introduir un mínim de {0} caràcters',
+    strictLength: 'La longitud del camp introduït no és vàlida',
+    exclude: 'El caràcter {0} no està permès',
+    notEmpty: 'Si us plau, tria almenys un valor',
+    pattern: 'Format no vàlid',
+  },
 }

@@ -18,6 +18,8 @@ export const makeVDialogTransitionProps = propsFactory({
   target: [Object, Array] as PropType<HTMLElement | [x: number, y: number]>,
 }, 'v-dialog-transition')
 
+const saved = new WeakMap<Element, Dimensions>()
+
 export const VDialogTransition = genericComponent()({
   name: 'VDialogTransition',
 
@@ -34,7 +36,9 @@ export const VDialogTransition = genericComponent()({
         await new Promise(resolve => requestAnimationFrame(resolve))
         ;(el as HTMLElement).style.visibility = ''
 
-        const { x, y, sx, sy, speed } = getDimensions(props.target!, el as HTMLElement)
+        const dimensions = getDimensions(props.target!, el as HTMLElement)
+        const { x, y, sx, sy, speed } = dimensions
+        saved.set(el, dimensions)
 
         const animation = animate(el, [
           { transform: `translate(${x}px, ${y}px) scale(${sx}, ${sy})`, opacity: 0 },
@@ -64,7 +68,13 @@ export const VDialogTransition = genericComponent()({
       async onLeave (el: Element, done: () => void) {
         await new Promise(resolve => requestAnimationFrame(resolve))
 
-        const { x, y, sx, sy, speed } = getDimensions(props.target!, el as HTMLElement)
+        let dimensions
+        if (!Array.isArray(props.target) && !props.target!.offsetParent && saved.has(el)) {
+          dimensions = saved.get(el)!
+        } else {
+          dimensions = getDimensions(props.target!, el as HTMLElement)
+        }
+        const { x, y, sx, sy, speed } = dimensions
 
         const animation = animate(el, [
           {},
@@ -111,7 +121,15 @@ function getChildren (el: Element) {
   return els && [...els]
 }
 
-function getDimensions (target: HTMLElement | [x: number, y: number], el: HTMLElement) {
+type Dimensions = {
+  x: number
+  y: number
+  sx: number
+  sy: number
+  speed: number
+}
+
+function getDimensions (target: HTMLElement | [x: number, y: number], el: HTMLElement): Dimensions {
   const targetBox = getTargetBox(target)
   const elBox = nullifyTransforms(el)
   const [originX, originY] = getComputedStyle(el).transformOrigin.split(' ').map(v => parseFloat(v))

@@ -1,5 +1,6 @@
 {
   "props": {
+    "divided": "Adds a divider between the header and controls.",
     "landscape": "Puts the picker into landscape mode.",
     "hideHeader": "Hide the picker header."
   },

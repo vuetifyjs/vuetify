@@ -6,20 +6,11 @@
       color="medium-emphasis"
       text="blog"
       variant="text"
-      @click="onClick"
+      @click="sweClick('app-bar', 'blog', name)"
     />
   </v-badge>
 </template>
 
 <script setup>
-  const { event } = useGtag()
   const { name } = useRoute()
-
-  function onClick () {
-    event('click', {
-      event_category: 'app-bar',
-      event_label: 'blog',
-      value: name,
-    })
-  }
 </script>

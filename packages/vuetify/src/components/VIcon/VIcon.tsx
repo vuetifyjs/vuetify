@@ -10,7 +10,7 @@ import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, useTheme } from '@/composables/theme'
 
 // Utilities
-import { computed, ref, Text, toRef } from 'vue'
+import { shallowRef, Text } from 'vue'
 import { convertToUnit, flattenFragments, genericComponent, propsFactory, useRender } from '@/util'
 
 export const makeVIconProps = propsFactory({
@@ -19,6 +19,7 @@ export const makeVIconProps = propsFactory({
   start: Boolean,
   end: Boolean,
   icon: IconValue,
+  opacity: [String, Number],
 
   ...makeComponentProps(),
   ...makeSizeProps(),
@@ -32,12 +33,12 @@ export const VIcon = genericComponent()({
   props: makeVIconProps(),
 
   setup (props, { attrs, slots }) {
-    const slotIcon = ref<string>()
+    const slotIcon = shallowRef<string>()
 
     const { themeClasses } = useTheme()
-    const { iconData } = useIcon(computed(() => slotIcon.value || props.icon))
+    const { iconData } = useIcon(() => slotIcon.value || props.icon)
     const { sizeClasses } = useSize(props)
-    const { textColorClasses, textColorStyles } = useTextColor(toRef(props, 'color'))
+    const { textColorClasses, textColorStyles } = useTextColor(() => props.color)
 
     useRender(() => {
       const slotValue = slots.default?.()
@@ -67,6 +68,9 @@ export const VIcon = genericComponent()({
             props.class,
           ]}
           style={[
+            {
+              '--v-icon-opacity': props.opacity,
+            },
             !sizeClasses.value ? ({
               fontSize: convertToUnit(props.size),
               height: convertToUnit(props.size),
