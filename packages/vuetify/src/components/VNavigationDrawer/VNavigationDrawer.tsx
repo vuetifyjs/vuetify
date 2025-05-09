@@ -255,6 +255,9 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
       VNavigationItem: {
         railWidth: toRef(() => props.railWidth),
       },
+      VListItem: {
+        prependWidth: toRef(() => props.railWidth),
+      },
     });
 
     useRender(() => {

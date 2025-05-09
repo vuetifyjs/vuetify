@@ -33,6 +33,7 @@ import { Ripple } from "@/directives/ripple";
 // Utilities
 import { computed, onBeforeMount, toDisplayString, toRef, watch } from "vue";
 import {
+  convertToUnit,
   deprecate,
   EventProp,
   genericComponent,
@@ -89,6 +90,7 @@ export const makeVListItemProps = propsFactory(
     nav: Boolean,
     prependAvatar: String,
     prependIcon: IconValue,
+    prependWidth: Number,
     ripple: {
       type: [Boolean, Object] as PropType<RippleDirectiveBinding["value"]>,
       default: true,
@@ -308,7 +310,15 @@ export const VListItem = genericComponent<VListItemSlots>()({
           {genOverlays(isClickable.value || isActive.value, "v-list-item")}
 
           {hasPrepend && (
-            <div key="prepend" class="v-list-item__prepend">
+            <div
+              key="prepend"
+              class="v-list-item__prepend"
+              style={{
+                width: props.prependWidth
+                  ? convertToUnit(props.prependWidth)
+                  : "auto",
+              }}
+            >
               {!slots.prepend ? (
                 <>
                   {props.prependAvatar && (

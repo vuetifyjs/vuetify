@@ -63,10 +63,19 @@
     &--link
       cursor: pointer
 
+    @at-root .v-navigation-drawer--rail
+      .v-list-item__prepend
+        display: flex
+        justify-content: center
+        flex-direction: column
+      .v-list-item--density-default
+        padding-inline:  0 !important
+
     .v-navigation-drawer--rail:not(.v-navigation-drawer--expand-on-hover) &,
     .v-navigation-drawer--rail.v-navigation-drawer--expand-on-hover:not(.v-navigation-drawer--is-hovering) &
       .v-avatar
         --v-avatar-height: 24px
+
 
   .v-list-item__prepend
     align-items: center
