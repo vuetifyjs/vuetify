@@ -1,20 +1,27 @@
 <template>
   <v-card>
     <v-layout>
-      <v-navigation-drawer :rail="rail" :rail-width="90" @click="rail = false">
-        <v-list-item
-          prepend-avatar="https://randomuser.me/api/portraits/women/17.jpg"
-          title="Jane Lee"
-          nav
-        >
-          <template v-slot:append>
-            <v-btn
-              icon="mdi-chevron-left"
-              variant="text"
-              @click.stop="rail = !rail"
-            ></v-btn>
-          </template>
-        </v-list-item>
+      <v-navigation-drawer
+        v-model="drawer"
+        :rail="rail"
+        rail-width="70"
+        permanent
+        @click="rail = false"
+      >
+        <v-list nav>
+          <v-list-item
+            prepend-avatar="https://randomuser.me/api/portraits/women/17.jpg"
+            title="Jane Lee"
+          >
+            <template v-slot:append>
+              <v-btn
+                icon="mdi-chevron-left"
+                variant="text"
+                @click.stop="rail = !rail"
+              ></v-btn>
+            </template>
+          </v-list-item>
+        </v-list>
 
         <v-divider></v-divider>
 
@@ -36,8 +43,7 @@
           ></v-list-item>
         </v-list>
       </v-navigation-drawer>
-      <v-main style="height: 250px">
-      </v-main>
+      <v-main style="height: 250px"></v-main>
     </v-layout>
   </v-card>
 </template>
@@ -45,15 +51,6 @@
 <script setup>
   import { ref } from 'vue'
 
+  const drawer = ref(true)
   const rail = ref(true)
-</script>
-
-<script>
-  export default {
-    data () {
-      return {
-        rail: true,
-      }
-    },
-  }
 </script>
