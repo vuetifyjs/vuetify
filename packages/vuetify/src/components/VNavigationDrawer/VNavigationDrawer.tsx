@@ -208,6 +208,9 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
       VList: {
         bgColor: 'transparent',
       },
+      VListItem: {
+        prependWidth: toRef(() => props.railWidth),
+      },
     })
 
     useRender(() => {
@@ -227,6 +230,7 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
                 'v-navigation-drawer--floating': props.floating,
                 'v-navigation-drawer--is-hovering': isHovering.value,
                 'v-navigation-drawer--rail': props.rail,
+                'v-navigation-drawer--rail-width': props.railWidth !== 56,
                 'v-navigation-drawer--temporary': isTemporary.value,
                 'v-navigation-drawer--persistent': isPersistent.value,
                 'v-navigation-drawer--active': isActive.value,

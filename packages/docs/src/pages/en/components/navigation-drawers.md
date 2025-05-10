@@ -69,12 +69,6 @@ Using the **bottom** prop, we are able to relocate our drawer on mobile devices 
 
 <ExamplesExample file="v-navigation-drawer/prop-bottom-drawer" />
 
-#### Expand on hover
-
-Places the component in **rail** mode and expands once hovered. This **does not** alter the content area of **v-main**. The width can be controlled with the **rail-width** property.
-
-<ExamplesExample file="v-navigation-drawer/prop-expand-on-hover" />
-
 #### Background images
 
 Apply a custom background to your drawer via the **image** prop. If you need to customize it further, you can use the `image` slot and render your own `v-img`.
@@ -86,6 +80,18 @@ Apply a custom background to your drawer via the **image** prop. If you need to 
 When using the **rail** prop, the drawer will shrink (default 56px) and hide everything inside of `v-list` except the first element.
 
 <ExamplesExample file="v-navigation-drawer/prop-mini-variant" />
+
+#### Expand on hover
+
+Places the component in **rail** mode and expands once hovered. This **does not** alter the content area of **v-main**. The width can be controlled with the **rail-width** property.
+
+<ExamplesExample file="v-navigation-drawer/prop-expand-on-hover" />
+
+#### Rail width
+
+The drawer will resize to the value of **rail-width** (or default to `56px` if undefined) and will hide all **v-list** items except the first. This must be used in **rail** mode.
+
+<ExamplesExample file="v-navigation-drawer/prop-rail-width" />
 
 #### Floating
 

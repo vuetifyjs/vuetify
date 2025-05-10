@@ -92,3 +92,35 @@
   .v-navigation-drawer__append
     flex: none
     overflow: hidden
+
+  .v-navigation-drawer--rail:not(.v-navigation-drawer--expand-on-hover),
+  .v-navigation-drawer--rail.v-navigation-drawer--expand-on-hover:not(.v-navigation-drawer--is-hovering)
+    .v-avatar
+      --v-avatar-height: 24px
+
+  // This shouldn't affect v-list-item outside of v-navigation-drawer
+  .v-navigation-drawer--rail-width
+    .v-list-item 
+      padding-inline: 0 !important
+      
+      &__prepend 
+        display: flex
+        justify-content: center
+        flex-direction: column
+        width: 56px 
+      
+
+    .v-list--nav,.v-list
+      .v-list-item--nav, .v-list-item
+        .v-list-item__prepend 
+          transform: translateX(-8px)
+
+
+
+          
+      
+    
+  
+
+
+  
