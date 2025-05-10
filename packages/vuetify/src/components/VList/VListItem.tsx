@@ -183,7 +183,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(roundedProps)
     const lineClasses = toRef(() => props.lines ? `v-list-item--${props.lines}-line` : undefined)
-    const prependWidth = Number(props.prependWidth) !== 56 ? convertToUnit(props.prependWidth) : 'auto'
+    const prependWidth = computed(() => Number(props.prependWidth) !== 56 ? convertToUnit(props.prependWidth) : 'auto')
 
     const slotProps = computed(() => ({
       isActive: isActive.value,
@@ -286,7 +286,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
               key="prepend"
               class="v-list-item__prepend"
               style={{
-                width: prependWidth,
+                width: prependWidth.value,
               }}
             >
               { !slots.prepend ? (

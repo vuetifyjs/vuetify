@@ -7,7 +7,7 @@
         permanent
         @click="rail = false"
       >
-        <v-list>
+        <v-list nav>
           <v-list-item
             prepend-avatar="https://randomuser.me/api/portraits/men/85.jpg"
             title="John Leider"
