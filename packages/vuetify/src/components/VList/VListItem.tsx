@@ -28,7 +28,7 @@ import { Ripple } from '@/directives/ripple'
 
 // Utilities
 import { computed, onBeforeMount, toDisplayString, toRef, watch } from 'vue'
-import { deprecate, EventProp, genericComponent, propsFactory, useRender } from '@/util'
+import { convertToUnit, deprecate, EventProp, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -78,6 +78,10 @@ export const makeVListItemProps = propsFactory({
   nav: Boolean,
   prependAvatar: String,
   prependIcon: IconValue,
+  prependWidth: {
+    type: [String, Number],
+    default: 56,
+  },
   ripple: {
     type: [Boolean, Object] as PropType<RippleDirectiveBinding['value']>,
     default: true,
@@ -179,6 +183,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(roundedProps)
     const lineClasses = toRef(() => props.lines ? `v-list-item--${props.lines}-line` : undefined)
+    const prependWidth = Number(props.prependWidth) !== 56 ? convertToUnit(props.prependWidth) : 'auto'
 
     const slotProps = computed(() => ({
       isActive: isActive.value,
@@ -277,7 +282,13 @@ export const VListItem = genericComponent<VListItemSlots>()({
           { genOverlays(isClickable.value || isActive.value, 'v-list-item') }
 
           { hasPrepend && (
-            <div key="prepend" class="v-list-item__prepend">
+            <div
+              key="prepend"
+              class="v-list-item__prepend"
+              style={{
+                width: prependWidth,
+              }}
+            >
               { !slots.prepend ? (
                 <>
                   { props.prependAvatar && (
