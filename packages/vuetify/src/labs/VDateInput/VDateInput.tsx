@@ -6,6 +6,7 @@ import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextFi
 
 // Composables
 import { useDate } from '@/composables/date'
+import { makeDateFormatProps, useDateFormat } from '@/composables/dateFormat'
 import { makeDisplayProps, useDisplay } from '@/composables/display'
 import { makeFocusProps, useFocus } from '@/composables/focus'
 import { forwardRefs } from '@/composables/forwardRefs'
@@ -35,7 +36,6 @@ export type VDateInputSlots = Omit<VTextFieldSlots, 'default'> & {
 
 export const makeVDateInputProps = propsFactory({
   displayFormat: [Function, String],
-  inputFormat: [Function, String],
   location: {
     type: String as PropType<StrategyProps['location']>,
     default: 'bottom start',
@@ -46,6 +46,7 @@ export const makeVDateInputProps = propsFactory({
     default: () => ['blur', 'enter'],
   },
 
+  ...makeDateFormatProps(),
   ...makeDisplayProps({
     mobile: null,
   }),
@@ -54,7 +55,6 @@ export const makeVDateInputProps = propsFactory({
     hideActions: true,
   }),
   ...makeVTextFieldProps({
-    placeholder: 'mm/dd/yyyy',
     prependIcon: '$calendar',
   }),
   ...omit(makeVDatePickerProps({
@@ -76,8 +76,9 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
   },
 
   setup (props, { emit, slots }) {
-    const { t } = useLocale()
+    const { t, current: currentLocale } = useLocale()
     const adapter = useDate()
+    const { parseDate, formatDate, parserFormat } = useDateFormat(props, currentLocale)
     const { mobile } = useDisplay(props)
     const { isFocused, focus, blur } = useFocus(props)
 
@@ -100,77 +101,10 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
       if (typeof props.displayFormat === 'function') {
         return props.displayFormat(date)
       }
-
-      return adapter.format(date, props.displayFormat ?? 'keyboardDate')
-    }
-
-    function parseDateString (dateString: string, format: string) {
-      function countConsecutiveChars (str: string, startIndex: number): number {
-        const char = str[startIndex]
-        let count = 0
-        while (str[startIndex + count] === char) count++
-        return count
+      if (props.displayFormat) {
+        return adapter.format(date, props.displayFormat ?? 'keyboardDate')
       }
-
-      function parseDateParts (dateString: string, format: string) {
-        const dateParts: Record<string, number> = {}
-        let stringIndex = 0
-        const upperFormat = format.toUpperCase()
-
-        for (let formatIndex = 0; formatIndex < upperFormat.length;) {
-          const formatChar = upperFormat[formatIndex]
-          const charCount = countConsecutiveChars(upperFormat, formatIndex)
-          const dateValue = dateString.slice(stringIndex, stringIndex + charCount)
-
-          if (['Y', 'M', 'D'].includes(formatChar)) {
-            const numValue = parseInt(dateValue)
-            if (isNaN(numValue)) return null
-            dateParts[formatChar] = numValue
-          }
-
-          formatIndex += charCount
-          stringIndex += charCount
-        }
-
-        return dateParts
-      }
-
-      function validateDateParts (dateParts: Record<string, number>) {
-        const { Y: year, M: month, D: day } = dateParts
-        if (!year || !month || !day) return null
-        if (month < 1 || month > 12) return null
-        if (day < 1 || day > 31) return null
-        return { year, month, day }
-      }
-
-      const dateParts = parseDateParts(dateString, format)
-      if (!dateParts) return null
-
-      const validatedParts = validateDateParts(dateParts)
-      if (!validatedParts) return null
-
-      const { year, month, day } = validatedParts
-
-      return { year, month, day }
-    }
-
-    function parseUserInput (value: string) {
-      if (typeof props.inputFormat === 'function') {
-        return props.inputFormat(value)
-      }
-
-      if (typeof props.inputFormat === 'string') {
-        const formattedDate = parseDateString(value, props.inputFormat)
-
-        if (!formattedDate) {
-          return model.value
-        }
-
-        const { year, month, day } = formattedDate
-        return adapter.parseISO(`${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`)
-      }
-
-      return adapter.isValid(value) ? adapter.date(value) : model.value
+      return formatDate(date)
     }
 
     const display = computed(() => {
@@ -271,13 +205,13 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
     }
 
     function onUserInput ({ value }: HTMLInputElement) {
-      model.value = !value ? emptyModelValue() : parseUserInput(value)
+      model.value = !value ? emptyModelValue() : parseDate(value)
     }
 
     useRender(() => {
       const confirmEditProps = VConfirmEdit.filterProps(props)
       const datePickerProps = VDatePicker.filterProps(omit(props, ['active', 'location', 'rounded']))
-      const textFieldProps = VTextField.filterProps(props)
+      const textFieldProps = VTextField.filterProps(omit(props, ['placeholder']))
 
       return (
         <VTextField
@@ -287,6 +221,7 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
           style={ props.style }
           modelValue={ display.value }
           inputmode={ inputmode.value }
+          placeholder={ props.placeholder ?? parserFormat.value }
           readonly={ isReadonly.value }
           onKeydown={ isInteractive.value ? onKeydown : undefined }
           focused={ menu.value || isFocused.value }
