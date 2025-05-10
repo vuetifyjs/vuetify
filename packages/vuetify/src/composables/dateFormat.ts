@@ -73,7 +73,7 @@ export function useDateFormat (props: DateFormatProps, locale: Ref<string>) {
 
   function parseDate (dateString: string) {
     function parseDateParts (text: string): Record<'y' |'m' | 'd', number> {
-      const parts = text.split(currentFormat.value.separator)
+      const parts = text.trim().split(currentFormat.value.separator)
       return {
         y: Number(parts[currentFormat.value.order.indexOf('y')]),
         m: Number(parts[currentFormat.value.order.indexOf('m')]),
@@ -111,6 +111,10 @@ export function useDateFormat (props: DateFormatProps, locale: Ref<string>) {
     return adapter.parseISO(`${year}-${pad(month)}-${pad(day)}`)
   }
 
+  function isValid (text: string) {
+    return !!parseDate(text)
+  }
+
   function formatDate (value: unknown) {
     const parts = adapter.toISO(value).split('-')
     return currentFormat.value.order.split('')
@@ -119,6 +123,7 @@ export function useDateFormat (props: DateFormatProps, locale: Ref<string>) {
   }
 
   return {
+    isValid,
     parseDate,
     formatDate,
     parserFormat: toRef(() => currentFormat.value.format),
