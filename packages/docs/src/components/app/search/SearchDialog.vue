@@ -124,8 +124,18 @@
     'NHT6C0IV19', // docsearch app ID
     'ffa344297924c76b0f4155384aff7ef2' // vuetify API key
   )
-  const searches = shallowRef(JSON.parse(localStorage.getItem('searches') || '[]'))
-  const favorites = shallowRef(JSON.parse(localStorage.getItem('favorites') || '[]'))
+
+  // Ensure to return array from local storage
+  function getLocalStorage (key: string): Record<string, string>[] {
+    const value = JSON.parse(localStorage.getItem(key) || '[]')
+    if (!Array.isArray(value)) {
+      return []
+    }
+    return value
+  }
+
+  const searches = shallowRef(getLocalStorage('searches'))
+  const favorites = shallowRef(getLocalStorage('favorite'))
 
   const locale = 'en'
 
@@ -193,9 +203,25 @@
     deleteItem(favorites, index)
   }
   function selectResult (result: any) {
-    const array = searches.value.slice(0, 6)
-    array.unshift(result)
-    searches.value = array
+    // Check favorites
+    const favorite = favorites.value.find(search => JSON.stringify(search) === JSON.stringify(result))
+
+    if (favorite) {
+      // Deduplication in favorites
+      const filtered = favorites.value.filter(search => JSON.stringify(search) !== JSON.stringify(result))
+      filtered.unshift(result)
+
+      favorites.value = filtered.slice(0, 6)
+
+      // No longer need to proceed in searches
+      return
+    }
+
+    // Deduplication in searches
+    const filtered = searches.value.filter(search => JSON.stringify(search) !== JSON.stringify(result))
+    filtered.unshift(result)
+
+    searches.value = filtered.slice(0, 6)
   }
   function moveResult (from: ShallowRef<any, any>, to: ShallowRef<any, any>, index: number) {
     const source = from.value.slice(0, 6)
