@@ -23,10 +23,11 @@ import { computed, shallowRef, toRef, toRefs } from 'vue'
 import { convertToUnit, genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
+import type { DeepReadonly } from 'vue'
 import type { VDataTableSlotProps } from './VDataTable'
 import type { VDataTableHeadersSlots } from './VDataTableHeaders'
 import type { VDataTableRowsSlots } from './VDataTableRows'
-import type { CellProps, RowProps } from '@/components/VDataTable/types'
+import type { CellProps, DataTableHeader, RowProps } from '@/components/VDataTable/types'
 import type { GenericProps, SelectItemKey, TemplateRef } from '@/util'
 
 type VDataTableVirtualSlotProps<T> = Omit<
@@ -68,6 +69,7 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
     rowProps?: RowProps<ItemType<T>>
     cellProps?: CellProps<ItemType<T>>
     itemSelectable?: SelectItemKey<ItemType<T>>
+    headers?: DeepReadonly<DataTableHeader<ItemType<T>>[]>
     modelValue?: V
     'onUpdate:modelValue'?: (value: V) => void
   },

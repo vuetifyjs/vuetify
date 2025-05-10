@@ -248,7 +248,11 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
 
     if (!data.target.value || !data.contentEl.value) return
 
-    if (Array.isArray(data.target.value) || data.target.value.offsetParent) {
+    if (
+      Array.isArray(data.target.value) ||
+      data.target.value.offsetParent ||
+      data.target.value.getClientRects().length
+    ) {
       targetBox = getTargetBox(data.target.value)
     } // Otherwise target element is hidden, use last known value
 

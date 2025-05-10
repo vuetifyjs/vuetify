@@ -69,10 +69,15 @@ export const VDialogTransition = genericComponent()({
         await new Promise(resolve => requestAnimationFrame(resolve))
 
         let dimensions
-        if (!Array.isArray(props.target) && !props.target!.offsetParent && saved.has(el)) {
-          dimensions = saved.get(el)!
-        } else {
+        if (
+          !saved.has(el) ||
+          Array.isArray(props.target) ||
+          props.target!.offsetParent ||
+          props.target!.getClientRects().length
+        ) {
           dimensions = getDimensions(props.target!, el as HTMLElement)
+        } else {
+          dimensions = saved.get(el)!
         }
         const { x, y, sx, sy, speed } = dimensions
 
