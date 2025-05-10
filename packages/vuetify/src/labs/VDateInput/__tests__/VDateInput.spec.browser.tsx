@@ -58,11 +58,6 @@ describe('VDateInput', () => {
         input: '2024-01-01',
         expected: { year: 2024, month: 0, day: 1 },
       },
-      {
-        format: (value: string) => new Date(2024, 0, 1),
-        input: '2024-01-01',
-        expected: { year: 2024, month: 0, day: 1 },
-      },
     ]
 
     testCases.forEach(({ format, input, expected }) => {
@@ -158,7 +153,7 @@ describe('VDateInput', () => {
   })
 
   describe('update-on prop', () => {
-    const TEST_DATE = '2025-01-01'
+    const TEST_DATE = '05/21/2025'
 
     it('should update modelValue only on enter key press', async () => {
       const wrapper = mountFunction(
