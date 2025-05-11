@@ -57,7 +57,7 @@ export function useDateFormat (props: DateFormatProps, locale: Ref<string>) {
 
   function inferFromLocale () {
     return Intl.DateTimeFormat(locale.value ?? 'en-US', { year: 'numeric', month: '2-digit', day: '2-digit' })
-      .format(new Date(1999, 11, 7))
+      .format(adapter.toJsDate(adapter.parseISO('1999-12-07')))
       .replace(/(07)|(٠٧)|(٢٩)|(۱۶)|(০৭)/, 'dd')
       .replace(/(12)|(١٢)|(٠٨)|(۰۹)|(১২)/, 'mm')
       .replace(/(1999)|(2542)|(١٩٩٩)|(١٤٢٠)|(۱۳۷۸)|(১৯৯৯)/, 'yyyy')
@@ -90,7 +90,7 @@ export function useDateFormat (props: DateFormatProps, locale: Ref<string>) {
     }
 
     function autoFixYear (year: number) {
-      const currentYear = new Date().getFullYear()
+      const currentYear = adapter.getYear(adapter.date())
       if (year > 100 || currentYear % 100 >= 50) {
         return year
       }
