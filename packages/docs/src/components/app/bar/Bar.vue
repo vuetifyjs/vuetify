@@ -19,7 +19,7 @@
     </template>
 
     <template #append>
-      <div class="d-flex ga-1" v-if="mdAndUp">
+      <div v-if="mdAndUp" class="d-flex ga-1">
         <AppBarLearnMenu />
 
         <AppBarSupportMenu />
