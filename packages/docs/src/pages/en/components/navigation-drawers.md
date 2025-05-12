@@ -77,7 +77,7 @@ Apply a custom background to your drawer via the **image** prop. If you need to 
 
 #### Rail variant
 
-When using the **rail** prop, the drawer will shrink (default 56px) and hide everything inside of `v-list` except the first element.
+When using the **rail** prop, the drawer will shrink and hide everything inside of `v-list` except the first element.
 
 <ExamplesExample file="v-navigation-drawer/prop-rail-variant" />
 
@@ -89,7 +89,7 @@ Places the component in **rail** mode and expands once hovered. This **does not*
 
 #### Rail width
 
-The drawer will resize to the value of **rail-width** (or default to `56px` if undefined) and will hide all **v-list** items except the first. This must be used in **rail** mode.
+The drawer will resize to the value of **rail-width** and will hide all **v-list** items except the first. This must be used in **rail** mode.
 
 <ExamplesExample file="v-navigation-drawer/prop-rail-width" />
 

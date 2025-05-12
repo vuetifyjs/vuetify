@@ -7,6 +7,7 @@ import { VListItemTitle } from './VListItemTitle'
 import { VAvatar } from '@/components/VAvatar'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VIcon } from '@/components/VIcon'
+import { VNavigationDrawerSymbol } from '@/components/VNavigationDrawer/VNavigationDrawer'
 
 // Composables
 import { useList } from './list'
@@ -27,7 +28,7 @@ import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant
 import { Ripple } from '@/directives/ripple'
 
 // Utilities
-import { computed, onBeforeMount, toDisplayString, toRef, watch } from 'vue'
+import { computed, inject, onBeforeMount, toDisplayString, toRef, watch } from 'vue'
 import { convertToUnit, deprecate, EventProp, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -78,10 +79,6 @@ export const makeVListItemProps = propsFactory({
   nav: Boolean,
   prependAvatar: String,
   prependIcon: IconValue,
-  prependWidth: {
-    type: [String, Number],
-    default: 56,
-  },
   ripple: {
     type: [Boolean, Object] as PropType<RippleDirectiveBinding['value']>,
     default: true,
@@ -183,7 +180,19 @@ export const VListItem = genericComponent<VListItemSlots>()({
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(roundedProps)
     const lineClasses = toRef(() => props.lines ? `v-list-item--${props.lines}-line` : undefined)
-    const prependWidth = computed(() => Number(props.prependWidth) !== 56 ? convertToUnit(props.prependWidth) : 'auto')
+
+    // Determine if VListItem is within a VNavigationDrawer
+    // prepend width is important for drawer rail mode
+    const navigationDrawer = inject(VNavigationDrawerSymbol, null)
+    const prependWidth = computed(() => {
+      if (navigationDrawer) {
+        const value = Number(navigationDrawer.railWidth.value)
+        return value !== navigationDrawer.defaultRailWidth ? convertToUnit(value) : 'auto'
+      }
+
+      // Default
+      return 'auto'
+    })
 
     const slotProps = computed(() => ({
       isActive: isActive.value,
