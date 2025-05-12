@@ -51,5 +51,5 @@
   const { smAndUp, lgAndUp, mdAndDown, width } = useDisplay()
   const route = useRoute()
 
-  const mdAndUp = computed(() => width.value >= 1044)
+  const mdAndUp = computed(() => width.value >= 1077)
 </script>
