@@ -293,6 +293,7 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
           focused={ menu.value || isFocused.value }
           onFocus={ focus }
           onBlur={ onBlur }
+          validationValue={ model.value }
           onClick:control={ isInteractive.value ? onClick : undefined }
           onClick:prepend={ isInteractive.value ? onClick : undefined }
           onUpdate:modelValue={ onUpdateDisplayModel }
