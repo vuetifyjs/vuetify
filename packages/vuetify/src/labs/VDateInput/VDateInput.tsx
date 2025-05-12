@@ -39,6 +39,7 @@ export const makeVDateInputProps = propsFactory({
     type: String as PropType<StrategyProps['location']>,
     default: 'bottom start',
   },
+  menu: Boolean,
   updateOn: {
     type: Array as PropType<('blur' | 'enter')[]>,
     default: () => ['blur', 'enter'],
@@ -70,6 +71,7 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
     save: (value: string) => true,
     cancel: () => true,
     'update:modelValue': (val: string) => true,
+    'update:menu': (val: boolean) => true,
   },
 
   setup (props, { emit, slots }) {
@@ -88,7 +90,7 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
       val => Array.isArray(val) ? val.map(item => adapter.date(item)) : val ? adapter.date(val) : val
     )
 
-    const menu = shallowRef(false)
+    const menu = useProxiedModel(props, 'menu')
     const isEditingInput = shallowRef(false)
     const vTextFieldRef = ref<VTextField>()
     const disabledActions = ref<typeof VConfirmEdit['props']['disabled']>(['save'])
