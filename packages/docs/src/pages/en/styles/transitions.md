@@ -108,30 +108,43 @@ Using multiple custom transitions, it is easy to bring a simple todo list to lif
 
 <ExamplesExample file="transitions/misc-todo" />
 
-<!--
 ## Create your own
 
-You can use Vuetify's transition helper function to easily create your own custom transitions. This function will return an object that you can import into Vue. Using Vue's [functional component](https://vuejs.org/v2/guide/render-function.html#Functional-Components) option will make sure your transition is as efficient as possible. Simply import the function:
+You can use Vuetify's transition helper function to easily create your own custom transitions.
 
 ```js
-import { createSimpleTransition } from 'vuetify/components/transitions/createTransition'
+import { createCssTransition } from 'vuetify/components/transitions';
 
-const myTransition = createSimpleTransition('my-transition')
-
-Vue.component('my-transition', myTransition)
+createCssTransition('my-transition')
 ```
 
-The **createSimpleTransition** function accepts 1 argument, name. This will be the name that you can hook into with your style. This is an example of what `v-fade-transition` looks like:
+The argument passed to the **createCssTransition** function will be the name of the transition that you can hook into your style. This is an example of what `my-transition` looks like:
 
-```stylus
-.fade-transition
-  &-leave-active
-    position: absolute
+```scss
+.my-transition {
+  &-enter-active,
+  &-leave-active {
+    position: absolute;
+    transition: 1s;
+  }
 
-  &-enter-active, &-leave, &-leave-to
-    transition: $primary-transition
-
-  &-enter, &-leave-to
-    opacity: 0
+  &-enter-from,
+  &-leave-to {
+    opacity: 0;
+  }
+}
 ```
--->
+
+You can now use this custom transition in a few different ways.
+
+### As a component
+
+The **createCssTransition** function will return a component that you can use in your template.
+
+<ExamplesExample file="transitions/create-css-transition-component" />
+
+### As a prop
+
+Many of Vuetify’s components contain a **transition** prop. You can send the name of your custom transition to the transition prop.
+
+<ExamplesExample file="transitions/create-css-transition-prop" />
