@@ -1,0 +1,16 @@
+:80 {
+  file_server
+
+  handle /service-worker.js {
+    header >Cache-Control "public, max-age=0, s-maxage=60, must-revalidate"
+  }
+
+  handle /assets/* {
+    header >Cache-Control "public, immutable, max-age=31536000, stale-if-error=604800"
+  }
+
+  handle {
+    try_files {path} /_fallback.html
+    header >Cache-Control "public, max-age=3600, s-maxage=60"
+  }
+}
