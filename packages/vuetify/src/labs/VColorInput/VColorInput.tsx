@@ -16,20 +16,20 @@ import { computed, shallowRef } from 'vue'
 import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
-import type { DefaultInputSlot, VFieldSlots } from '@/components/VField/VField'
-import type { VInputSlot, VInputSlots } from '@/components/VInput/VInput'
+import type { VTextFieldSlots } from '@/components/VTextField/VTextField'
 
-export type VColorInputSlots = Omit<VInputSlots & VFieldSlots, 'default'> & {
+export type VColorInputActionsSlot = {
+  save: () => void
+  cancel: () => void
+  isPristine: boolean
+}
+
+export type VColorInputSlots = Omit<VTextFieldSlots, 'default'> & {
+  actions: VColorInputActionsSlot
   default: never
-  prepend: VInputSlot
-  'prepend-inner': DefaultInputSlot
-  append: VInputSlot
-  'append-inner': DefaultInputSlot
 }
 
 export const makeVColorInputProps = propsFactory({
-  hideActions: Boolean,
-
   ...makeFocusProps(),
   ...makeVConfirmEditProps(),
   ...makeVTextFieldProps({ prependIcon: '$color' }),
@@ -106,8 +106,8 @@ export const VColorInput = genericComponent<VColorInputSlots>()({
         >
           {{
             ...slots,
-            default: () => {
-              return (
+            default: () => (
+              <>
                 <VMenu
                   v-model={ menu.value }
                   activator="parent"
@@ -121,7 +121,7 @@ export const VColorInput = genericComponent<VColorInputSlots>()({
                     onSave={ onSave }
                   >
                     {{
-                      default: ({ actions, model: proxyModel }) => {
+                      default: ({ actions, model: proxyModel, save, cancel, isPristine }) => {
                         return (
                           <VColorPicker
                             { ...colorPickerProps }
@@ -133,7 +133,7 @@ export const VColorInput = genericComponent<VColorInputSlots>()({
                             onMousedown={ (e: MouseEvent) => e.preventDefault() }
                           >
                             {{
-                              actions: !props.hideActions ? () => actions : undefined,
+                              actions: !props.hideActions ? () => slots.actions?.({ save, cancel, isPristine }) ?? actions() : undefined,
                             }}
                           </VColorPicker>
                         )
@@ -141,8 +141,10 @@ export const VColorInput = genericComponent<VColorInputSlots>()({
                     }}
                   </VConfirmEdit>
                 </VMenu>
-              )
-            },
+
+                { slots.default?.() }
+              </>
+            ),
           }}
         </VTextField>
       )
