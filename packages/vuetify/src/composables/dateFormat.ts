@@ -50,7 +50,7 @@ export const makeDateFormatProps = propsFactory({
     type: String,
     validator: (v: string) => !v || DateFormatSpec.canBeParsed(v),
   },
-}, 'lazy')
+}, 'date-format')
 
 export function useDateFormat (props: DateFormatProps, locale: Ref<string>) {
   const adapter = useDate()
@@ -69,6 +69,7 @@ export function useDateFormat (props: DateFormatProps, locale: Ref<string>) {
       consoleWarn(`Date format inferred from locale [${localeForDateFormat}] is invalid: [${formatFromLocale}]`)
       return 'mm/dd/yyyy'
     }
+
     return formatFromLocale
   }
 
@@ -81,6 +82,7 @@ export function useDateFormat (props: DateFormatProps, locale: Ref<string>) {
   function parseDate (dateString: string) {
     function parseDateParts (text: string): Record<'y' |'m' | 'd', number> {
       const parts = text.trim().split(currentFormat.value.separator)
+
       return {
         y: Number(parts[currentFormat.value.order.indexOf('y')]),
         m: Number(parts[currentFormat.value.order.indexOf('m')]),
@@ -93,6 +95,7 @@ export function useDateFormat (props: DateFormatProps, locale: Ref<string>) {
       if (!year || !month || !day) return null
       if (month < 1 || month > 12) return null
       if (day < 1 || day > 31) return null
+
       return { year: autoFixYear(year), month, day }
     }
 
@@ -103,6 +106,7 @@ export function useDateFormat (props: DateFormatProps, locale: Ref<string>) {
       }
 
       const currentCentury = ~~(currentYear / 100) * 100
+
       return year < 50
         ? currentCentury + year
         : (currentCentury - 100) + year
@@ -110,11 +114,13 @@ export function useDateFormat (props: DateFormatProps, locale: Ref<string>) {
 
     const dateParts = parseDateParts(dateString)
     const validatedParts = validateDateParts(dateParts)
+
     if (!validatedParts) return null
 
     const { year, month, day } = validatedParts
 
     const pad = (v: number) => String(v).padStart(2, '0')
+
     return adapter.parseISO(`${year}-${pad(month)}-${pad(day)}`)
   }
 
@@ -124,6 +130,7 @@ export function useDateFormat (props: DateFormatProps, locale: Ref<string>) {
 
   function formatDate (value: unknown) {
     const parts = adapter.toISO(value).split('-')
+
     return currentFormat.value.order.split('')
       .map(sign => parts['ymd'.indexOf(sign)])
       .join(currentFormat.value.separator)
