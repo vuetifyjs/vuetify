@@ -3,7 +3,7 @@ import { useDate } from '@/composables/date/date'
 
 // Utilities
 import { toRef } from 'vue'
-import { propsFactory } from '@/util'
+import { consoleWarn, propsFactory } from '@/util'
 
 // Types
 import type { Ref } from 'vue'
@@ -56,13 +56,20 @@ export function useDateFormat (props: DateFormatProps, locale: Ref<string>) {
   const adapter = useDate()
 
   function inferFromLocale () {
-    return Intl.DateTimeFormat(locale.value ?? 'en-US', { year: 'numeric', month: '2-digit', day: '2-digit' })
+    const localeForDateFormat = locale.value ?? 'en-US'
+    const formatFromLocale = Intl.DateTimeFormat(localeForDateFormat, { year: 'numeric', month: '2-digit', day: '2-digit' })
       .format(adapter.toJsDate(adapter.parseISO('1999-12-07')))
       .replace(/(07)|(٠٧)|(٢٩)|(۱۶)|(০৭)/, 'dd')
       .replace(/(12)|(١٢)|(٠٨)|(۰۹)|(১২)/, 'mm')
       .replace(/(1999)|(2542)|(١٩٩٩)|(١٤٢٠)|(۱۳۷۸)|(১৯৯৯)/, 'yyyy')
       .replace(/[^ymd\-/.]/g, '')
       .replace(/\.$/, '')
+
+    if (!DateFormatSpec.canBeParsed(formatFromLocale)) {
+      consoleWarn(`Date format inferred from locale [${localeForDateFormat}] is invalid: [${formatFromLocale}]`)
+      return 'mm/dd/yyyy'
+    }
+    return formatFromLocale
   }
 
   const currentFormat = toRef(() => {
