@@ -33,7 +33,7 @@ export default {
     pageText: '{0}-{1} / {2}',
   },
   dateRangeInput: {
-    divider: 'to',
+    divider: '–',
   },
   datePicker: {
     itemsSelected: '{0} kiválasztva',
@@ -60,19 +60,19 @@ export default {
     today: 'Ma',
   },
   input: {
-    clear: 'Clear {0}',
-    prependAction: '{0} prepended action',
-    appendAction: '{0} appended action',
-    otp: 'Please enter OTP character {0}',
+    clear: 'Törlés {0}',
+    prependAction: '{0} előrehozott művelet',
+    appendAction: '{0} hozzáadott művelet',
+    otp: 'Kérjük, adja meg az OTP karaktert: {0}',
   },
   fileInput: {
     counter: '{0} fájl',
     counterSize: '{0} fájl ({1} összesen)',
   },
   fileUpload: {
-    title: 'Drag and drop files here',
-    divider: 'or',
-    browse: 'Browse Files',
+    title: 'Húzza ide a fájlokat',
+    divider: 'vagy',
+    browse: 'Tallózás',
   },
   timePicker: {
     am: 'de',
@@ -96,12 +96,25 @@ export default {
   },
   rating: {
     ariaLabel: {
-      item: 'Rating {0} of {1}',
+      item: 'Értékelés: {0} / {1}',
     },
   },
   loading: 'Betöltés...',
   infiniteScroll: {
-    loadMore: 'Továbbiak',
+    loadMore: 'Továbbiak betöltése',
     empty: 'Nincsen több',
+  },
+  rules: {
+    required: 'Ez a mező kötelező',
+    email: 'Kérlek, adj meg egy érvényes e-mail címet',
+    number: 'Ez a mező csak számokat tartalmazhat',
+    integer: 'Ez a mező csak egész számokat tartalmazhat',
+    capital: 'Ez a mező csak nagybetűket tartalmazhat',
+    maxLength: 'Maximum {0} karaktert adhatsz meg',
+    minLength: 'Minimum {0} karaktert kell megadnod',
+    strictLength: 'A megadott mező hossza érvénytelen',
+    exclude: 'A(z) {0} karakter nem engedélyezett',
+    notEmpty: 'Kérlek, válassz legalább egy értéket',
+    pattern: 'Érvénytelen formátum',
   },
 }

@@ -20,13 +20,9 @@ features:
 
 The `v-stepper` component displays progress through numbered steps.
 
-![Stepper Entry](https://cdn.vuetifyjs.com/docs/images/components/v-stepper/v-stepper-entry.png)
-
 <PageFeatures />
 
-::: success
-This feature was introduced in [v3.4.0 (Blackguard)](/getting-started/release-notes/?version=v3.4.0)
-:::
+<DocIntroduced version="3.4.0" />
 
 ## Usage
 

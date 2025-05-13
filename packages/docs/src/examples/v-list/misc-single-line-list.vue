@@ -8,58 +8,52 @@
 
       <v-toolbar-title>New Chat</v-toolbar-title>
 
-      <v-spacer></v-spacer>
-
       <v-btn icon>
         <v-icon>mdi-magnify</v-icon>
       </v-btn>
     </v-toolbar>
 
-    <v-list subheader>
+    <v-list>
       <v-list-subheader>Recent chat</v-list-subheader>
 
       <v-list-item
         v-for="chat in recent"
         :key="chat.title"
       >
-        <v-list-item-avatar>
-          <v-img
-            :alt="`${chat.title} avatar`"
-            :src="chat.avatar"
-          ></v-img>
-        </v-list-item-avatar>
+        <template v-slot:prepend>
+          <v-avatar>
+            <v-img :src="chat.avatar"></v-img>
+          </v-avatar>
+        </template>
 
-        <v-list-item-header>
-          <v-list-item-title v-text="chat.title"></v-list-item-title>
-        </v-list-item-header>
+        <v-list-item-title>{{ chat.title }}</v-list-item-title>
 
-        <v-list-item-avatar>
-          <v-icon :color="chat.active ? 'deep-purple accent-4' : 'grey'">
-            mdi-message-outline
-          </v-icon>
-        </v-list-item-avatar>
+        <template v-slot:append>
+          <v-avatar>
+            <v-icon :color="chat.active ? 'deep-purple accent-4' : 'grey'">
+              mdi-message-outline
+            </v-icon>
+          </v-avatar>
+        </template>
       </v-list-item>
     </v-list>
 
     <v-divider></v-divider>
 
-    <v-list subheader>
+    <v-list>
       <v-list-subheader>Previous chats</v-list-subheader>
 
       <v-list-item
         v-for="chat in previous"
         :key="chat.title"
       >
-        <v-list-item-avatar>
-          <v-img
-            :alt="`${chat.title} avatar`"
-            :src="chat.avatar"
-          ></v-img>
-        </v-list-item-avatar>
+        <template v-slot:prepend>
+          <v-avatar>
+            <v-img :src="chat.avatar"></v-img>
+          </v-avatar>
+        </template>
 
-        <v-list-item-header>
-          <v-list-item-title v-text="chat.title"></v-list-item-title>
-        </v-list-item-header>
+        <v-list-item-title v-text="chat.title"></v-list-item-title>
       </v-list-item>
     </v-list>
   </v-card>

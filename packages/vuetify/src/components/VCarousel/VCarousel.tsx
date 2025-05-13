@@ -54,7 +54,7 @@ type VCarouselSlots = VWindowSlots & {
   item: {
     props: Record<string, any>
     item: {
-      id: number
+      id: string
       value: unknown
       disabled: boolean | undefined
     }
@@ -94,7 +94,10 @@ export const VCarousel = genericComponent<new <T>(
     function startTimeout () {
       if (!props.cycle || !windowRef.value) return
 
-      slideTimeout = window.setTimeout(windowRef.value.group.next, +props.interval > 0 ? +props.interval : 6000)
+      slideTimeout = window.setTimeout(
+        windowRef.value.group.next,
+        Number(props.interval) > 0 ? Number(props.interval) : 6000
+      )
     }
 
     function restartTimeout () {

@@ -41,9 +41,9 @@ Similar to the [v-window](/components/windows) component, `v-slide-group` lets i
 
 ### Props
 
-#### Active class
+#### Selected class
 
-**active-class** prop allows you to pass a class to customize the active items.
+**selected-class** prop allows you to pass a class to customize the active items.
 
 <ExamplesExample file="v-slide-group/prop-active-class" />
 
@@ -75,6 +75,6 @@ You can select multiple items by setting the **multiple** prop.
 
 #### Pseudo Carousel
 
-Customize the slide group to creatively display information on sheets. Using the selection, we can display auxillary information easily for the user.
+Customize the slide group to creatively display information on sheets. Using the selection, we can display auxiliary information easily for the user.
 
 <ExamplesExample file="v-slide-group/misc-pseudo-carousel" />

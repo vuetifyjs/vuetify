@@ -23,8 +23,6 @@ The simpler of the table components is `v-table`, a basic wrapper component for 
 More advanced tables such as [v-data-table](/components/data-tables/basics/) are available.
 :::
 
-<!-- ![Table Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-table/v-table-entry.png) -->
-
 <PageFeatures />
 
 ## Usage

@@ -1,6 +1,19 @@
 <template>
   <div class="mb-4">
     <page-feature-chip
+      v-if="!isGeneratedPage"
+      :href="contribute"
+      prepend-icon="mdi-language-markdown-outline"
+      rel="noopener noreferrer"
+      target="_blank"
+      text="Edit this page"
+    >
+      <template #prepend>
+        <v-icon color="blue-darken-3" />
+      </template>
+    </page-feature-chip>
+
+    <page-feature-chip
       v-if="one.isSubscriber && user.pins"
       :prepend-icon="`mdi-pin${!pinned ? '-outline' : ''}`"
       text="Pin"
@@ -92,12 +105,23 @@
     return pins.pins.some(p => p.to === route.path)
   })
 
+  const isGeneratedPage = computed(() => {
+    return route.path.includes('/api/')
+  })
+
   const label = computed(() => {
     if (!frontmatter.value?.features?.label) return false
 
     const original = encodeURIComponent(frontmatter.value.features.label)
 
     return `https://github.com/vuetifyjs/vuetify/labels/${original}`
+  })
+
+  const contribute = computed(() => {
+    const branch = getBranch()
+    const link = route.path.split('/').slice(2).filter(v => v).join('/')
+
+    return `https://github.com/vuetifyjs/vuetify/edit/${branch}/packages/docs/src/pages/en/${link}.md`
   })
 
   function onClickPin () {

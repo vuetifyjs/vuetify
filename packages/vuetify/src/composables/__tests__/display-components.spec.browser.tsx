@@ -8,12 +8,11 @@ import { VNavigationDrawer } from '@/components/VNavigationDrawer/VNavigationDra
 import { VSlideGroup } from '@/components/VSlideGroup/VSlideGroup'
 
 // Utilities
-import { render } from '@test'
-import { page } from '@vitest/browser/context'
+import { page, render } from '@test'
 import { ref } from 'vue'
 
 // Types
-import type { DisplayBreakpoint } from '@/composables'
+import type { DisplayBreakpoint } from '@/composables/display'
 
 describe('display-components', () => {
   it('should render items', async () => {

@@ -5,9 +5,7 @@
     :name="name"
     :options="options"
   >
-    <v-bottom-sheet
-      v-bind="props"
-    >
+    <v-bottom-sheet v-bind="props">
       <template v-slot:activator="{ props: activatorProps }">
         <div class="pa-2 text-center">
           <v-btn
@@ -39,8 +37,8 @@
 
   const slots = computed(() => {
     return `
-  <template v-slot:activator="{ props }">
-    <v-btn v-bind="props" text="Click Me"></v-btn>
+  <template v-slot:activator="{ props: activatorProps }">
+    <v-btn v-bind="activatorProps" text="Click Me"></v-btn>
   </template>
 
   <v-card

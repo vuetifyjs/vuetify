@@ -140,13 +140,13 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
       filterFunctions,
     } = createHeaders(props, {
       groupBy,
-      showSelect: toRef(props, 'showSelect'),
-      showExpand: toRef(props, 'showExpand'),
+      showSelect: toRef(() => props.showSelect),
+      showExpand: toRef(() => props.showExpand),
     })
 
     const { items } = useDataTableItems(props, columns)
 
-    const search = toRef(props, 'search')
+    const search = toRef(() => props.search)
     const { filteredItems } = useFilter(props, items, search, {
       transform: item => item.columns,
       customKeyFilter: filterFunctions,
@@ -189,10 +189,10 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
 
     provideDefaults({
       VDataTableRows: {
-        hideNoData: toRef(props, 'hideNoData'),
-        noDataText: toRef(props, 'noDataText'),
-        loading: toRef(props, 'loading'),
-        loadingText: toRef(props, 'loadingText'),
+        hideNoData: toRef(() => props.hideNoData),
+        noDataText: toRef(() => props.noDataText),
+        loading: toRef(() => props.loading),
+        loadingText: toRef(() => props.loadingText),
       },
     })
 
@@ -238,6 +238,7 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
           ]}
           style={ props.style }
           { ...tableProps }
+          fixedHeader={ props.fixedHeader || props.sticky }
         >
           {{
             top: () => slots.top?.(slotProps.value),

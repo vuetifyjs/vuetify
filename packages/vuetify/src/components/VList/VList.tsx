@@ -23,7 +23,16 @@ import { makeVariantProps } from '@/composables/variant'
 
 // Utilities
 import { computed, ref, shallowRef, toRef } from 'vue'
-import { EventProp, focusChild, genericComponent, getPropertyFromItem, omit, propsFactory, useRender } from '@/util'
+import {
+  EventProp,
+  focusChild,
+  genericComponent,
+  getPropertyFromItem,
+  isPrimitive,
+  omit,
+  propsFactory,
+  useRender,
+} from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -33,10 +42,6 @@ import type { GenericProps, SelectItemKey } from '@/util'
 
 export interface InternalListItem<T = any> extends ListItem<T> {
   type?: 'item' | 'subheader' | 'divider'
-}
-
-function isPrimitive (value: unknown): value is string | number | boolean {
-  return typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean'
 }
 
 function transformItem (props: ItemProps & { itemType?: string }, item: any): InternalListItem {
@@ -157,17 +162,17 @@ export const VList = genericComponent<new <
   setup (props, { slots }) {
     const { items } = useListItems(props)
     const { themeClasses } = provideTheme(props)
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'bgColor'))
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.bgColor)
     const { borderClasses } = useBorder(props)
     const { densityClasses } = useDensity(props)
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props)
     const { children, open, parents, select, getPath } = useNested(props)
-    const lineClasses = computed(() => props.lines ? `v-list--${props.lines}-line` : undefined)
-    const activeColor = toRef(props, 'activeColor')
-    const baseColor = toRef(props, 'baseColor')
-    const color = toRef(props, 'color')
+    const lineClasses = toRef(() => props.lines ? `v-list--${props.lines}-line` : undefined)
+    const activeColor = toRef(() => props.activeColor)
+    const baseColor = toRef(() => props.baseColor)
+    const color = toRef(() => props.color)
 
     createList()
 
@@ -176,20 +181,20 @@ export const VList = genericComponent<new <
         activeColor,
         baseColor,
         color,
-        expandIcon: toRef(props, 'expandIcon'),
-        collapseIcon: toRef(props, 'collapseIcon'),
+        expandIcon: toRef(() => props.expandIcon),
+        collapseIcon: toRef(() => props.collapseIcon),
       },
       VListItem: {
-        activeClass: toRef(props, 'activeClass'),
+        activeClass: toRef(() => props.activeClass),
         activeColor,
         baseColor,
         color,
-        density: toRef(props, 'density'),
-        disabled: toRef(props, 'disabled'),
-        lines: toRef(props, 'lines'),
-        nav: toRef(props, 'nav'),
-        slim: toRef(props, 'slim'),
-        variant: toRef(props, 'variant'),
+        density: toRef(() => props.density),
+        disabled: toRef(() => props.disabled),
+        lines: toRef(() => props.lines),
+        nav: toRef(() => props.nav),
+        slim: toRef(() => props.slim),
+        variant: toRef(() => props.variant),
       },
     })
 
@@ -265,7 +270,7 @@ export const VList = genericComponent<new <
             dimensionStyles.value,
             props.style,
           ]}
-          tabindex={ (props.disabled || isFocused.value) ? -1 : 0 }
+          tabindex={ props.disabled ? -1 : 0 }
           role="listbox"
           aria-activedescendant={ undefined }
           onFocusin={ onFocusin }

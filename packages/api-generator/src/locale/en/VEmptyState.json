@@ -5,7 +5,8 @@
     "href": "The URL the action button links to.",
     "justify": "Control the justification of the text.",
     "textWidth": "Sets the width of the text container.",
-    "to": "The URL the action button links to."
+    "to": "The URL the action button links to.",
+    "size": "The size used to control the dimensions of the media element inside the component. Can be specified as a number or a string (e.g., '50%', '100px')."
   },
   "events": {
     "click:action": "Event emitted when the action button is clicked."

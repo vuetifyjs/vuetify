@@ -37,7 +37,7 @@ describe('VIcon', () => {
       ))
 
       const svg = screen.getByText('', { selector: '.foo' })
-      expect(svg).toBeInTheDocument()
+      expect(svg).toBeVisible()
     })
   })
 
@@ -45,7 +45,7 @@ describe('VIcon', () => {
     render(() => <VIcon icon="svg:M7,10L12,15L17,10H7Z" />)
 
     const svg = screen.getByText('', { selector: 'svg' })
-    expect(svg).toBeInTheDocument()
+    expect(svg).toBeVisible()
     const path = svg.querySelector('path')
     expect(path).toHaveAttribute('d', 'M7,10L12,15L17,10H7Z')
   })

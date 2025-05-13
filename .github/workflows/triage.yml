@@ -12,6 +12,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           triageLabel: 'S: triage'
+          staleLabel: 'S: stale'
           sponsorsFile: '.github/sponsors.yml'
           duplicateLabel: 'duplicate'
           triagedLabels: |-
@@ -21,6 +22,7 @@ jobs:
             T: feature
             T: question
             Epic
+            Task
             duplicate
             layer 8 issue
             invalid

@@ -1,27 +1,25 @@
 <template>
   <v-treeview
+    v-model:opened="open"
     :items="items"
-    :opened="initiallyOpen"
+    density="compact"
     item-value="title"
     activatable
     open-on-click
   >
     <template v-slot:prepend="{ item, isOpen }">
-      <v-icon v-if="!item.file">
-        {{ isOpen ? 'mdi-folder-open' : 'mdi-folder' }}
-      </v-icon>
-      <v-icon v-else>
-        {{ files[item.file] }}
-      </v-icon>
+      <v-icon v-if="!item.file" :icon="isOpen ? 'mdi-folder-open' : 'mdi-folder'"></v-icon>
+
+      <v-icon v-else :icon="files[item.file]"></v-icon>
     </template>
   </v-treeview>
 </template>
 
 <script setup>
-  import { ref } from 'vue'
+  import { shallowRef } from 'vue'
 
-  const initiallyOpen = ref(['public'])
-  const files = ref({
+  const open = shallowRef(['public'])
+  const files = shallowRef({
     html: 'mdi-language-html5',
     js: 'mdi-nodejs',
     json: 'mdi-code-json',
@@ -31,7 +29,8 @@
     txt: 'mdi-file-document-outline',
     xls: 'mdi-file-excel',
   })
-  const items = ref([
+
+  const items = [
     {
       title: '.git',
     },
@@ -82,5 +81,5 @@
       title: 'yarn.lock',
       file: 'txt',
     },
-  ])
+  ]
 </script>

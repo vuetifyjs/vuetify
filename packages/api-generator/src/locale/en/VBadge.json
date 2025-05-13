@@ -8,7 +8,8 @@
     "label": "The **aria-label** used for the badge.",
     "max": "Sets the maximum number allowed when using the **content** prop with a `number` like value. If the content number exceeds the maximum value, a `+` suffix is added.",
     "offsetX": "Offset the badge on the x-axis.",
-    "offsetY": "Offset the badge on the y-axis."
+    "offsetY": "Offset the badge on the y-axis.",
+    "modelValue": "Controls whether the component is visible or hidden."
   },
   "slots": {
     "badge": "The slot used for the badge's content."

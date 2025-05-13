@@ -1,6 +1,4 @@
 @use 'sass:map';
 
-$treeview-group-list-indent-size: 16px !default;
-$treeview-group-list-prepend-width: 16px !default;
-$treeview-item-padding-inline-start: 12px !default;
-$treeview-item-prepend-padding-inline-start: 44px !default;
+$treeview-indent-size: 28px !default; // 28px here to match the width of the expand toggle VBtn.
+$treeview-indent-padding: 16px !default;

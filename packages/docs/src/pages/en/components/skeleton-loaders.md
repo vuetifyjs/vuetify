@@ -19,13 +19,9 @@ features:
 
 Skeleton loaders provide a simple way to display loading placeholders in your application.
 
-![Skeleton loader Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-skeleton-loader/v-skeleton-loader-entry.png)
-
 <PageFeatures />
 
-::: success
-This feature was introduced in [v3.4.0 (Blackguard)](/getting-started/release-notes/?version=v3.4.0)
-:::
+<DocIntroduced version="3.4.0" />
 
 ## Usage
 

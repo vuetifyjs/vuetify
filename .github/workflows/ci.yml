@@ -81,6 +81,13 @@ jobs:
       - uses: vuetifyjs/setup-action@master
       - run: pnpm run test --project browser
         working-directory: ./packages/vuetify
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: Test screenshots
+          path: packages/vuetify/test/__screenshots__
+          if-no-files-found: ignore
+          overwrite: true
 
   deploy:
     needs: [lint, test-unit, test-e2e, build-vuetify]
@@ -125,7 +132,7 @@ jobs:
       - run: pnpm build api
       - run: pnpm build docs
         env:
-          NODE_OPTIONS: --max-old-space-size=4096
+          NODE_OPTIONS: --max-old-space-size=6144
           VITE_COSMIC_2_BUCKET_SLUG: ${{ secrets.COSMIC_2_BUCKET_SLUG }}
           VITE_COSMIC_2_BUCKET_READ_KEY: ${{ secrets.COSMIC_2_BUCKET_READ_KEY }}
           VITE_COSMIC_BUCKET_SLUG: ${{ secrets.COSMIC_BUCKET_SLUG }}
@@ -137,6 +144,7 @@ jobs:
           VITE_EMAILJS_TEMPLATE_ID: ${{ secrets.EMAILJS_TEMPLATE_ID }}
           VITE_API_SERVER_URL: ${{ secrets.API_SERVER_URL }}
           VITE_GITHUB_SHA: ${{ github.sha }}
+          VITE_GITHUB_REF: ${{ github.ref_name }}
       - uses: actions/upload-artifact@v4
         with:
           name: docs-dist
@@ -145,8 +153,7 @@ jobs:
   publish-docs:
     needs: [lint, test-unit, build-docs]
     runs-on: ubuntu-24.04
-    environment: Production
-    if: github.event_name == 'push' && github.repository_owner == 'vuetifyjs' && github.ref == 'refs/heads/master'
+    environment: ${{ github.ref_name }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/download-artifact@v4

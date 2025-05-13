@@ -16,11 +16,10 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { Ripple } from '@/directives/ripple'
 
 // Utilities
-import { computed, inject, nextTick, ref, shallowRef } from 'vue'
+import { computed, inject, nextTick, ref, shallowRef, toRef, useId } from 'vue'
 import {
   filterInputAttrs,
   genericComponent,
-  getUid,
   matchesSelector,
   propsFactory,
   useRender,
@@ -113,18 +112,18 @@ export function useSelectionControl (
       }
     },
   })
-  const { textColorClasses, textColorStyles } = useTextColor(computed(() => {
+  const { textColorClasses, textColorStyles } = useTextColor(() => {
     if (props.error || props.disabled) return undefined
 
     return model.value ? props.color : props.baseColor
-  }))
-  const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(computed(() => {
+  })
+  const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => {
     return (
       model.value &&
       !props.error &&
       !props.disabled
     ) ? props.color : props.baseColor
-  }))
+  })
   const icon = computed(() => model.value ? props.trueIcon : props.falseIcon)
 
   return {
@@ -172,12 +171,12 @@ export const VSelectionControl = genericComponent<new <T>(
       backgroundColorStyles,
       trueValue,
     } = useSelectionControl(props)
-    const uid = getUid()
+    const uid = useId()
     const isFocused = shallowRef(false)
     const isFocusVisible = shallowRef(false)
     const input = ref<HTMLInputElement>()
-    const id = computed(() => props.id || `input-${uid}`)
-    const isInteractive = computed(() => !props.disabled && !props.readonly)
+    const id = toRef(() => props.id || `input-${uid}`)
+    const isInteractive = toRef(() => !props.disabled && !props.readonly)
 
     group?.onForceUpdate(() => {
       if (input.value) {

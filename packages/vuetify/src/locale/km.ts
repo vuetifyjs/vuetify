@@ -2,7 +2,7 @@ export default {
   badge: 'ផ្លាក',
   open: 'បើក',
   close: 'បិទ',
-  dismiss: 'Dismiss',
+  dismiss: 'បោះបង់',
   confirmEdit: {
     ok: 'យល់ព្រម',
     cancel: 'បោះបង់',
@@ -57,7 +57,7 @@ export default {
   },
   calendar: {
     moreEvents: '{0} ទៀត',
-    today: 'Today',
+    today: 'ថ្ងៃនេះ',
   },
   input: {
     clear: 'សម្អាត {0}',
@@ -70,14 +70,14 @@ export default {
     counterSize: '{0} ឯកសារ ({1} សរុប)',
   },
   fileUpload: {
-    title: 'Drag and drop files here',
-    divider: 'or',
-    browse: 'Browse Files',
+    title: 'អូសហើយទម្លាក់ឯកសារនៅទីនេះ',
+    divider: 'ឬ',
+    browse: 'រកមើលឯកសារ',
   },
   timePicker: {
     am: 'ព្រឹក',
     pm: 'ល្ងាច',
-    title: 'Select Time',
+    title: 'ជ្រើសរើសម៉ោង',
   },
   pagination: {
     ariaLabel: {
@@ -103,5 +103,18 @@ export default {
   infiniteScroll: {
     loadMore: 'ទាញយកបន្ថែម',
     empty: 'គ្មានទំព័រទៀត',
+  },
+  rules: {
+    required: 'វាលនេះត្រូវបានទាមទារ',
+    email: 'សូមបញ្ចូលអ៊ីមែលត្រឹមត្រូវ',
+    number: 'វាលនេះអាចមានតែលេខប៉ុណ្ណោះ',
+    integer: 'វាលនេះអាចមានតែចំនួនគត់ប៉ុណ្ណោះ',
+    capital: 'វាលនេះអាចមានតែអក្សរធំប៉ុណ្ណោះ',
+    maxLength: 'អ្នកត្រូវបញ្ចូលអតិបរមា {0} តួអក្សរ',
+    minLength: 'អ្នកត្រូវបញ្ចូលយ៉ាងហោចណាស់ {0} តួអក្សរ',
+    strictLength: 'ប្រវែងនៃវាលដែលបានបញ្ចូលមិនត្រឹមត្រូវទេ',
+    exclude: 'តួអក្សរ {0} មិនត្រូវបានអនុញ្ញាតទេ',
+    notEmpty: 'សូមជ្រើសរើសយ៉ាងហោចណាស់តម្លៃមួយ',
+    pattern: 'ទម្រង់មិនត្រឹមត្រូវ',
   },
 }

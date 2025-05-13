@@ -35,7 +35,6 @@
           rows="3"
           variant="outlined"
           auto-grow
-          shaped
         ></v-textarea>
       </v-col>
       <v-col
@@ -48,7 +47,6 @@
           rows="4"
           variant="filled"
           auto-grow
-          shaped
         ></v-textarea>
       </v-col>
     </v-row>

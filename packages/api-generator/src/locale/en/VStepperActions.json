@@ -8,7 +8,7 @@
     "click:prev": "Event emitted when clicking the prev button."
   },
   "slots": {
-    "next": "Slot for customizing the next step functionailty",
+    "next": "Slot for customizing the next step functionality",
     "prev": "Slot for customizing the prev step functionality"
   }
 }

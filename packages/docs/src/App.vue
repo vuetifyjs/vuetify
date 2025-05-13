@@ -65,10 +65,10 @@
     watch(() => user.theme, val => {
       if (val === 'system') {
         media = getMatchMedia()!
-        media.addListener(onThemeChange)
+        media.addEventListener('change', onThemeChange)
         onThemeChange()
       } else if (media) {
-        media.removeListener(onThemeChange)
+        media.removeEventListener('change', onThemeChange)
       }
     }, { immediate: true })
     function onThemeChange () {
@@ -125,8 +125,8 @@
       document.body.append(copy)
 
       ;(copy.querySelectorAll('[data-scroll-x], [data-scroll-y]') as NodeListOf<HTMLElement>).forEach(el => {
-        el.scrollLeft = +el.dataset.scrollX!
-        el.scrollTop = +el.dataset.scrollY!
+        el.scrollLeft = Number(el.dataset.scrollX)
+        el.scrollTop = Number(el.dataset.scrollY)
       })
 
       function onTransitionend (e: TransitionEvent) {

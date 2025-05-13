@@ -38,7 +38,7 @@
         >
           <a
             :href="href"
-            class="v-toc-link d-block transition-swing text-decoration-none"
+            class="v-toc-link d-block text-decoration-none"
             @click.prevent.stop="onClick(to)"
             v-text="text"
           />
@@ -103,14 +103,14 @@
           </v-col>
 
           <v-col
-            v-if="(!user.disableAds || (user.showHouseAds && spot.spot.sponsor === 'Vuetify')) && spot.spot"
+            v-if="spot.spot && (!user.disableAds || (user.showHouseAds && spot.spot.sponsor === 'Vuetify'))"
             cols="12"
           >
             <a
               :href="spot.spot.href"
               rel="noopener noreferrer sponsored"
               target="_blank"
-              @click="gtagClick('toc', 'promotion', spot.spot.sponsor)"
+              @click="sweClick('toc', 'promotion', spot.spot.sponsor)"
             >
               <v-img :src="spot.spot.image.url" />
             </a>
@@ -132,7 +132,7 @@
   const frontmatter = useFrontmatter()
 
   const activeStack = [] as string[]
-  const activeItem = ref('')
+  const activeItem = shallowRef('')
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {

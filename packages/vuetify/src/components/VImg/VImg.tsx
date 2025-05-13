@@ -114,7 +114,7 @@ export const VImg = genericComponent<VImgSlots>()({
   },
 
   setup (props, { emit, slots }) {
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.color)
     const { roundedClasses } = useRounded(props)
     const vm = getCurrentInstance('VImg')
 
@@ -244,7 +244,7 @@ export const VImg = genericComponent<VImgSlots>()({
       poll()
     }
 
-    const containClasses = computed(() => ({
+    const containClasses = toRef(() => ({
       'v-img__img--cover': props.cover,
       'v-img__img--contain': !props.cover,
     }))
@@ -256,10 +256,10 @@ export const VImg = genericComponent<VImgSlots>()({
         <img
           class={['v-img__img', containClasses.value]}
           style={{ objectPosition: props.position }}
+          crossorigin={ props.crossorigin }
           src={ normalisedSrc.value.src }
           srcset={ normalisedSrc.value.srcset }
           alt={ props.alt }
-          crossorigin={ props.crossorigin }
           referrerpolicy={ props.referrerpolicy }
           draggable={ props.draggable }
           sizes={ props.sizes }
@@ -291,9 +291,9 @@ export const VImg = genericComponent<VImgSlots>()({
           <img
             class={['v-img__img', 'v-img__img--preload', containClasses.value]}
             style={{ objectPosition: props.position }}
+            crossorigin={ props.crossorigin }
             src={ normalisedSrc.value.lazySrc }
             alt={ props.alt }
-            crossorigin={ props.crossorigin }
             referrerpolicy={ props.referrerpolicy }
             draggable={ props.draggable }
           />

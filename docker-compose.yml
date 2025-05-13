@@ -1,8 +1,8 @@
 services:
   docs:
-    image: nginx:alpine
+    image: caddy:alpine
     ports:
       - ${PORT:-8095}:80
     volumes:
-      - ./packages/docs/dist:/usr/share/nginx/html
-      - ./packages/docs/build/nginx.conf:/etc/nginx/nginx.conf
+      - ./packages/docs/dist:/srv
+      - ./packages/docs/build/Caddyfile:/etc/caddy/Caddyfile

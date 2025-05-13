@@ -37,8 +37,8 @@
 <script setup>
   const files = import.meta.glob('../../../../api-generator/dist/api/*.json')
 
-  const variables = ref([])
-  const model = ref([])
+  const variables = shallowRef([])
+  const model = shallowRef([])
 
   const code = computed(() => {
     const $parsed = model.value.map(variable => {

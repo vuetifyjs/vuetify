@@ -8,8 +8,6 @@
 
       <v-toolbar-title>My files</v-toolbar-title>
 
-      <v-spacer></v-spacer>
-
       <v-btn icon="mdi-magnify" variant="text"></v-btn>
 
       <v-btn icon="mdi-view-module" variant="text"></v-btn>
