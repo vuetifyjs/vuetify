@@ -29,7 +29,7 @@
 </template>
 
 <script setup>
-  import { createCssTransition } from 'vuetify/components/transitions'
+  import { createCssTransition } from 'vuetify/util/transitions'
 
   createCssTransition('custom-prop-transition')
 </script>

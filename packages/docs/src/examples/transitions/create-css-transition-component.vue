@@ -25,7 +25,7 @@
 
 <script setup>
   import { ref } from 'vue'
-  import { createCssTransition } from 'vuetify/components/transitions'
+  import { createCssTransition } from 'vuetify/util/transitions'
 
   const ComponentTransition = createCssTransition('component-transition')
 

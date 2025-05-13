@@ -113,7 +113,7 @@ Using multiple custom transitions, it is easy to bring a simple todo list to lif
 You can use Vuetify's transition helper function to easily create your own custom transitions.
 
 ```js
-import { createCssTransition } from 'vuetify/components/transitions';
+import { createCssTransition } from 'vuetify/util/transitions';
 
 createCssTransition('my-transition')
 ```
