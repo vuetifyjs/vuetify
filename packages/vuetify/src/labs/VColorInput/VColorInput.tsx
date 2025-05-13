@@ -4,6 +4,7 @@ import './VColorInput.sass'
 // Components
 import { makeVColorPickerProps, VColorPicker } from '@/components/VColorPicker/VColorPicker'
 import { makeVConfirmEditProps, VConfirmEdit } from '@/components/VConfirmEdit/VConfirmEdit'
+import { VIcon } from '@/components/VIcon/VIcon'
 import { VMenu } from '@/components/VMenu/VMenu'
 import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextField'
 
@@ -30,9 +31,15 @@ export type VColorInputSlots = Omit<VTextFieldSlots, 'default'> & {
 }
 
 export const makeVColorInputProps = propsFactory({
+  pip: Boolean,
+  pipIcon: {
+    type: String,
+    default: '$color',
+  },
+
   ...makeFocusProps(),
   ...makeVConfirmEditProps(),
-  ...makeVTextFieldProps({ prependIcon: '$color' }),
+  ...makeVTextFieldProps(),
   ...omit(makeVColorPickerProps(), ['width']),
 }, 'VColorInput')
 
@@ -84,6 +91,8 @@ export const VColorInput = genericComponent<VColorInputSlots>()({
       const colorPickerProps = VColorPicker.filterProps(omit(props, ['active', 'color']))
       const textFieldProps = VTextField.filterProps(omit(props, ['prependInnerIcon']))
 
+      const hasPrepend = !!(slots.prepend || props.pipIcon)
+
       return (
         <VTextField
           { ...textFieldProps }
@@ -106,6 +115,18 @@ export const VColorInput = genericComponent<VColorInputSlots>()({
         >
           {{
             ...slots,
+            prepend: props.pipIcon ? arg => (
+              <>
+               { hasPrepend && (
+                  <VIcon
+                    color={ props.pip ? model.value as string : undefined }
+                    icon={ props.pipIcon }
+                  />
+               )}
+
+                { slots.prepend?.(arg) }
+              </>
+            ) : undefined,
             default: () => (
               <>
                 <VMenu
