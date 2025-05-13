@@ -221,7 +221,6 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
 
       if (!menu.value || !isFocused.value) {
         menu.value = true
-        return
       }
 
       if (props.updateOn.includes('enter')) {

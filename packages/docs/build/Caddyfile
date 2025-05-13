@@ -10,7 +10,7 @@
   }
 
   handle {
-    try_files {path} /_fallback.html
+    try_files {path} {path}/ /_fallback.html
     header >Cache-Control "public, max-age=3600, s-maxage=60"
   }
 }
