@@ -1,5 +1,5 @@
 // Utilities
-import { computed, onMounted, readonly, shallowRef } from 'vue'
+import { onMounted, readonly, shallowRef, toRef } from 'vue'
 
 // Composables
 export function useSsrBoot () {
@@ -11,7 +11,7 @@ export function useSsrBoot () {
     })
   })
 
-  const ssrBootStyles = computed(() => !isBooted.value ? ({
+  const ssrBootStyles = toRef(() => !isBooted.value ? ({
     transition: 'none !important',
   }) : undefined)
 

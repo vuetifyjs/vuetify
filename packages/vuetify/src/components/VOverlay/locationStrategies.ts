@@ -5,9 +5,11 @@ import { useToggleScope } from '@/composables/toggleScope'
 import { computed, nextTick, onScopeDispose, ref, watch } from 'vue'
 import { anchorToPoint, getOffset } from './util/point'
 import {
+  CircularBuffer,
   clamp,
   consoleError,
   convertToUnit,
+  deepEqual,
   destructComputed,
   flipAlign,
   flipCorner,
@@ -198,8 +200,29 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
   })
 
   let observe = false
+  let lastFrame = -1
+  const flipped = new CircularBuffer<{ x: boolean, y: boolean }>(4)
   const observer = new ResizeObserver(() => {
-    if (observe) updateLocation()
+    if (!observe) return
+
+    // Detect consecutive frames
+    requestAnimationFrame(newTime => {
+      if (newTime !== lastFrame) flipped.clear()
+      requestAnimationFrame(newNewTime => {
+        lastFrame = newNewTime
+      })
+    })
+
+    if (flipped.isFull) {
+      const values = flipped.values()
+      if (deepEqual(values.at(-1), values.at(-3))) {
+        // Flipping is causing a container resize loop
+        return
+      }
+    }
+
+    const result = updateLocation()
+    if (result) flipped.push(result.flipped)
   })
 
   watch([data.target, data.contentEl], ([newTarget, newContentEl], [oldTarget, oldContentEl]) => {
@@ -216,6 +239,8 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
     observer.disconnect()
   })
 
+  let targetBox = new Box({ x: 0, y: 0, width: 0, height: 0 })
+
   // eslint-disable-next-line max-statements
   function updateLocation () {
     observe = false
@@ -223,7 +248,14 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
 
     if (!data.target.value || !data.contentEl.value) return
 
-    const targetBox = getTargetBox(data.target.value)
+    if (
+      Array.isArray(data.target.value) ||
+      data.target.value.offsetParent ||
+      data.target.value.getClientRects().length
+    ) {
+      targetBox = getTargetBox(data.target.value)
+    } // Otherwise target element is hidden, use last known value
+
     const contentBox = getIntrinsicSize(data.contentEl.value, data.isRtl.value)
     const scrollParents = getScrollParents(data.contentEl.value)
     const viewportMargin = 12
@@ -398,6 +430,7 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
     return {
       available,
       contentBox,
+      flipped,
     }
   }
 

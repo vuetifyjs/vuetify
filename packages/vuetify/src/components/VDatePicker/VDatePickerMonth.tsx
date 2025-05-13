@@ -11,7 +11,7 @@ import { useDate } from '@/composables/date/date'
 import { MaybeTransition } from '@/composables/transition'
 
 // Utilities
-import { computed, ref, shallowRef, watch } from 'vue'
+import { computed, ref, shallowRef, toRef, watch } from 'vue'
 import { genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
@@ -80,7 +80,7 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
     const rangeStop = shallowRef()
     const isReverse = shallowRef(false)
 
-    const transition = computed(() => {
+    const transition = toRef(() => {
       return !isReverse.value ? props.transition : props.reverseTransition
     })
 
