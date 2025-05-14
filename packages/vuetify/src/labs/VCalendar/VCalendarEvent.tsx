@@ -3,7 +3,7 @@ import { VBadge } from '@/components/VBadge'
 import { VChip } from '@/components/VChip'
 
 // Utilities
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { genericComponent, getPrefixedEventHandlers, propsFactory, useRender } from '@/util'
 
 export const makeVCalendarEventProps = propsFactory({
   allDay: Boolean,
@@ -14,15 +14,22 @@ export const makeVCalendarEventProps = propsFactory({
 export const VCalendarEvent = genericComponent()({
   name: 'VCalendarEvent',
 
+  inheritAttrs: false,
+
   props: makeVCalendarEventProps(),
 
-  setup (props) {
+  setup (props, { attrs, emit, slots }) {
     useRender(() => (
       <VChip
         color={ props.allDay ? 'primary' : undefined }
         density="comfortable"
         label={ props.allDay }
         width="100%"
+        { ...getPrefixedEventHandlers(attrs, ':event', () => ({
+          allDay: props.allDay,
+          day: props.day,
+          event: props.event,
+        }))}
       >
         <VBadge
           inline

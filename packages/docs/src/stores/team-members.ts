@@ -25,7 +25,7 @@ export type GithubMember = {
   login: string
 }
 
-export const useTeamStore = defineStore('team', () => {
+export const useTeamMembersStore = defineStore('team-members', () => {
   const members = ref<Member[]>([])
 
   for (const key in team) {

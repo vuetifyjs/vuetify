@@ -17,25 +17,25 @@ beforeEach(async () => {
 
 expect.extend({
   /** .toBeVisible but using wdio's isDisplayed */
-  async toBeDisplayed (recieved: Element) {
-    const isDisplayed = await commands.isDisplayed(page.elementLocator(recieved).selector)
+  async toBeDisplayed (received: Element) {
+    const isDisplayed = await commands.isDisplayed(page.elementLocator(received).selector)
 
     return {
       pass: isDisplayed,
       message: () => {
-        const element = this.utils.printReceived(recieved.cloneNode(false))
+        const element = this.utils.printReceived(received.cloneNode(false))
         return `Expected element${this.isNot ? ' not' : ''} to be displayed:\n${element}`
       },
     }
   },
   /** .toBeDisplayed, also checking if in viewport */
-  async toBeOnScreen (recieved: Element) {
-    const isDisplayed = await commands.isDisplayed(page.elementLocator(recieved).selector, true)
+  async toBeOnScreen (received: Element) {
+    const isDisplayed = await commands.isDisplayed(page.elementLocator(received).selector, true)
 
     return {
       pass: isDisplayed,
       message: () => {
-        const element = this.utils.printReceived(recieved.cloneNode(false))
+        const element = this.utils.printReceived(received.cloneNode(false))
         return `Expected element${this.isNot ? ' not' : ''} to be displayed on screen:\n${element}`
       },
     }

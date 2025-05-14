@@ -329,6 +329,7 @@ export {
   mdiPlusCircle,
   mdiPlusOutline,
   mdiPost,
+  mdiPostOutline,
   mdiPound,
   mdiPower,
   mdiPuzzle,

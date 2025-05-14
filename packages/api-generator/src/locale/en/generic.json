@@ -25,6 +25,8 @@
     "hideOnLeave": "Hides the leaving element (no exit animation).",
     "group": "Creates a `transition-group` component. You can find more information in the [vue docs](https://vuejs.org/api/built-in-components.html#transitiongroup).",
     "icon": "Apply a specific icon using the [v-icon](/components/icons/) component.",
+    "iconSize": "The specific size of the icon, can use named sizes.",
+    "iconSizes": "An array of tuples that define the icon sizes for each named size.",
     "image": "Apply a specific image using [v-img](/components/images/).",
     "items": "An array of strings or objects used for automatically generating children components.",
     "label": "Sets the text of the [v-label](/api/v-label/) or [v-field-label](/api/v-field-label/) component.",

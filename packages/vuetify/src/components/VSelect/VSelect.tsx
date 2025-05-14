@@ -24,7 +24,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeTransitionProps } from '@/composables/transition'
 
 // Utilities
-import { computed, mergeProps, nextTick, ref, shallowRef, watch } from 'vue'
+import { computed, mergeProps, nextTick, ref, shallowRef, toRef, watch } from 'vue'
 import {
   checkPrintable,
   deepEqual,
@@ -188,7 +188,7 @@ export const VSelect = genericComponent<new <
       },
     })
 
-    const label = computed(() => menu.value ? props.closeText : props.openText)
+    const label = toRef(() => menu.value ? props.closeText : props.openText)
 
     const computedMenuProps = computed(() => {
       return {
@@ -410,6 +410,7 @@ export const VSelect = genericComponent<new <
                       onFocusin={ onFocusin }
                       tabindex="-1"
                       aria-live="polite"
+                      aria-label={ `${props.label}-list` }
                       color={ props.itemColor ?? props.color }
                       { ...listEvents }
                       { ...props.listProps }

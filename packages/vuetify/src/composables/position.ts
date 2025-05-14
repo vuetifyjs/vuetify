@@ -1,5 +1,5 @@
 // Utilities
-import { computed } from 'vue'
+import { toRef } from 'vue'
 import { getCurrentInstanceName, propsFactory } from '@/util'
 
 // Types
@@ -25,7 +25,7 @@ export function usePosition (
   props: PositionProps,
   name = getCurrentInstanceName(),
 ) {
-  const positionClasses = computed(() => {
+  const positionClasses = toRef(() => {
     return props.position ? `${name}--${props.position}` : undefined
   })
 
