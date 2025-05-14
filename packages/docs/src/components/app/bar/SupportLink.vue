@@ -1,13 +1,17 @@
 <template>
   <AppBtn
     :to="rpath('/introduction/sponsors-and-backers/')"
-    color="medium-emphasis"
+    class="ms-1"
+    color="primary"
     text="sponsor"
-    variant="text"
-    @click="sweClick('app-bar', 'sponsor', name)"
+    @click="onClick"
   />
 </template>
 
 <script setup>
   const { name } = useRoute()
+
+  function onClick () {
+    sweClick('app-bar', 'enterprise', name)
+  }
 </script>

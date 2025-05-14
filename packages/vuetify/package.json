@@ -1,7 +1,7 @@
 {
   "name": "vuetify",
   "description": "Vue Material Component Framework",
-  "version": "3.8.4",
+  "version": "3.8.5",
   "author": {
     "name": "John Leider",
     "email": "john@vuetifyjs.com"
@@ -133,7 +133,6 @@
     "@date-io/dayjs": "^3.2.0",
     "@date-io/luxon": "^3.2.0",
     "@date-io/moment": "^3.2.0",
-    "@formatjs/intl": "^2.10.15",
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "@fortawesome/vue-fontawesome": "^3.0.8",
