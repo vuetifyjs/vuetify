@@ -76,10 +76,7 @@ export const makeCalendarProps = propsFactory({
     type: [Number, String],
     default: undefined,
   },
-  weekdayFormat: {
-    type: String as PropType<'long' | 'short' | 'narrow' | undefined>,
-    default: undefined,
-  },
+  weekdayFormat: String as PropType<'long' | 'short' | 'narrow' | undefined>,
 }, 'calendar')
 
 export function useCalendar (props: CalendarProps) {
