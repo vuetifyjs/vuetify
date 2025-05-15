@@ -269,9 +269,8 @@ export const VSelect = genericComponent<new <
         result = findItemBase()
         if (result !== undefined) return result
 
-        // Still nothing, start a new search with just the new letter
+        // Still nothing, try just the new letter
         keyboardLookupPrefix = e.key.toLowerCase()
-        keyboardLookupIndex = -1
         return findItemBase()
       }
       function findItemBase () {
