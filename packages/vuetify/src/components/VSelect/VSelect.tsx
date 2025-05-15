@@ -274,12 +274,9 @@ export const VSelect = genericComponent<new <
         return findItemBase()
       }
       function findItemBase () {
-        for (let i = 0; i < items.length; i++) {
+        for (let i = keyboardLookupIndex + 1; i < items.length; i++) {
           const _item = items[i]
-          if (
-            i > keyboardLookupIndex &&
-            _item.title.toLowerCase().startsWith(keyboardLookupPrefix)
-          ) {
+          if (_item.title.toLowerCase().startsWith(keyboardLookupPrefix)) {
             return [_item, i] as const
           }
         }
