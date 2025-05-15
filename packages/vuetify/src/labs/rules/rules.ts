@@ -115,7 +115,7 @@ export function createRules (options: RulesOptions | undefined, locale: LocaleIn
 export const RulesSymbol: InjectionKey<RulesInstance> = Symbol.for('vuetify:rules')
 
 export function useRules (fn: () => ValidationProps['rules']) {
-  const resolveRules = inject(RulesSymbol)
+  const resolveRules = inject(RulesSymbol, null)
 
   if (!resolveRules) return toRef(fn)
 
