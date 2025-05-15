@@ -1,0 +1,75 @@
+// Variables for VHotKey
+// These can be themed or customized further.
+$v-hot-key-kbd-background-color: rgba(var(--v-border-color), 0.08) !default;
+$v-hot-key-kbd-border-color: rgba(var(--v-border-color), var(--v-border-opacity)) !default;
+$v-hot-key-kbd-color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity)) !default;
+$v-hot-key-kbd-border-radius: 3px !default;
+$v-hot-key-kbd-padding: 2px 6px !default;
+$v-hot-key-kbd-font-size: 0.8em !default;
+$v-hot-key-kbd-font-weight: 500 !default;
+$v-hot-key-kbd-box-shadow: inset 0 -2px 0 rgba(var(--v-border-color), 0.1) !default; // Subtle 3D effect
+
+$v-hot-key-separator-margin: 0 0.35em !default;
+$v-hot-key-separator-color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity)) !default;
+$v-hot-key-separator-font-size: 0.9em !default;
+
+// Base class for the VHotKey component
+.v-hot-key {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--v-font-family, sans-serif); // Use Vuetify's font family if available
+  line-height: 1; // Prevent extra space around kbd elements
+  gap: $v-hot-key-separator-margin; // Use gap for spacing between items if only kbd is direct child
+
+  &__item {
+    display: inline-flex; // Each item (key + optional separator)
+    align-items: center;
+  }
+
+  &__key {
+    display: inline-block;
+    background-color: $v-hot-key-kbd-background-color;
+    border: 1px solid $v-hot-key-kbd-border-color;
+    border-radius: $v-hot-key-kbd-border-radius;
+    box-shadow: $v-hot-key-kbd-box-shadow;
+    color: $v-hot-key-kbd-color;
+    font-size: $v-hot-key-kbd-font-size;
+    font-weight: $v-hot-key-kbd-font-weight;
+    padding: $v-hot-key-kbd-padding;
+    text-transform: none; // Ensure mixed-case display (e.g., 'Ctrl', 'Shift')
+    white-space: nowrap;
+  }
+
+  &__separator {
+    // This will now be inside the span with class v-hot-key__item when used with map
+    // If we go back to direct children: margin: $v-hot-key-separator-margin;
+    color: $v-hot-key-separator-color;
+    font-size: $v-hot-key-separator-font-size;
+    padding-left: $v-hot-key-separator-margin; // Add space after the kbd element before the plus
+  }
+
+  // Density adjustments
+  &.v-density-default {
+    // Default already defined by variables
+  }
+
+  &.v-density-comfortable {
+    .v-hot-key__key {
+      font-size: $v-hot-key-kbd-font-size * 0.95;
+      padding: 1px 5px;
+    }
+    // Separator size might not need to change as much, or could scale with font
+  }
+
+  &.v-density-compact {
+    .v-hot-key__key {
+      font-size: $v-hot-key-kbd-font-size * 0.9;
+      padding: 1px 4px;
+    }
+    gap: $v-hot-key-separator-margin * 0.8;
+    .v-hot-key__separator {
+       padding-left: $v-hot-key-separator-margin * 0.8;
+       font-size: $v-hot-key-separator-font-size * 0.9;
+    }
+  }
+}

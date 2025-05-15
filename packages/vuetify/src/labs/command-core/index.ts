@@ -1,28 +1,39 @@
-export { useCommandCore, destroyCommandCoreInstance, CommandCoreSymbol } from './commandCore';
-// CommandCoreOptions is now in types.ts
-// export type { CommandCoreOptions } from './commandCore';
-export type { CommandCoreOptions } from './types'; // Correct: CommandCoreOptions is defined in types.ts
+// /*! IMPORTANT: This is a labs feature and may change or be removed in any release. */
 
-export { useKeyBindings } from './useKeyBindings';
+// Types and Symbols
+// CommandCoreSymbol is defined in commandCore.ts alongside useCommandCore for providing the instance.
+// Public types are primarily from types.ts.
 export type {
-  UseKeyBindingsOptions,
-  KeyBindingInputBlockerFn,
-  KeyFilter,
-  KeyBindingHandlerOptions,
-  KeyBindingTrigger,
   ActionDefinition,
   ActionContext,
-  ActionsSource,
-  RunInTextInputMatcher,
-  CommandCorePublicAPI // Ensure CommandCorePublicAPI is exported here
+  CommandCoreOptions,
+  CommandCorePublicAPI,
+  KeyBindingTrigger,
+  KeyBindingHandlerOptions,
+  UseKeyBindingsOptions, // This is a KeyBinding related option type, often in types.ts or with useKeyBindings
+  ActionsSource, // Also a core type from types.ts
+  RunInTextInputMatcher // from types.ts
+  // Add any other specific public types from types.ts that clients might need.
 } from './types';
 
-// Platform utils (IS_CLIENT, IS_MAC) are primarily for internal use.
-// export { IS_CLIENT, IS_MAC } from './platform';
+// Main service composable and its symbol for injection
+export { useCommandCore, destroyCommandCoreInstance, CommandCoreSymbol } from './commandCore';
+// The CommandCore class itself might not need to be part of the public API if useCommandCore is the sole entry point.
 
-// Export new useCommandable composable
+// Composables
+// useKeyBindings is directly in command-core, not a subdirectory.
+export { useKeyBindings } from './useKeyBindings';
+// Types for useKeyBindings are usually co-located or in types.ts.
+// UseKeyBindingsOptions is already listed from ./types.
+// KeyBindingDeregisterHandle is not an explicitly exported type. The 'on' method returns () => void.
+// export type { KeyBindingDeregisterHandle } from './useKeyBindings';
+
+// Commandable composable for component integration
 export { useCommandable } from './composables/useCommandable';
-
-// Also export UseCommandableProps from where it's defined if not in types.ts
-// If UseCommandableProps is defined in useCommandable.ts, it needs a separate export line:
 export type { UseCommandableProps } from './composables/useCommandable';
+
+// UI Components
+export * from './components';
+
+// Platform utils (IS_MAC, etc.) are typically internal and not re-exported.
+// Utility functions from utils.ts are also typically internal.
