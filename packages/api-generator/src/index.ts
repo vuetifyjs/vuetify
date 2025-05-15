@@ -7,7 +7,7 @@ import { kebabCase } from './helpers/text'
 import type { ComponentData, DirectiveData } from './types'
 import { generateComposableDataFromTypes, generateDirectiveDataFromTypes } from './types'
 import Piscina from 'piscina'
-import { addDescriptions, addDirectiveDescriptions, addPropData, sortByKey, stringifyProps } from './utils'
+import { addDescriptions, addDirectiveDescriptions, addPropData, sortByKey, reportMissingDescriptions, stringifyProps } from './utils'
 import * as os from 'os'
 import { mkdirp } from 'mkdirp'
 import { createVeturApi } from './vetur'
@@ -134,6 +134,7 @@ const run = async () => {
     }
   }
 
+  reportMissingDescriptions()
   createVeturApi(componentData)
   createWebTypesApi(componentData, directives)
   await fs.mkdir(path.resolve('../vuetify/dist/json'), { recursive: true })

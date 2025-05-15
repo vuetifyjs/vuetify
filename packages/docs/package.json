@@ -4,7 +4,7 @@
   "description": "A Vue.js project",
   "private": true,
   "author": "John Leider <john@vuetifyjs.com>",
-  "version": "3.8.3",
+  "version": "3.8.5",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/vuetifyjs/vuetify.git",
@@ -26,7 +26,7 @@
     "@vue/compiler-dom": "^3.5.13",
     "@vuelidate/core": "^2.0.3",
     "@vuelidate/validators": "^2.0.4",
-    "@vuetify/one": "^2.2.0",
+    "@vuetify/one": "^2.2.3",
     "algoliasearch": "^4.24.0",
     "fflate": "^0.8.2",
     "isomorphic-fetch": "^3.0.0",
@@ -38,7 +38,7 @@
     "swetrix": "^3.6.1",
     "vee-validate": "^4.15.0",
     "vue": "^3.5.13",
-    "vue-i18n": "^11.1.1",
+    "vue-i18n": "^11.1.3",
     "vue-instantsearch": "^4.20.6",
     "vue-router": "^4.5.0",
     "vuetify": "workspace:*"
@@ -62,7 +62,7 @@
     "@vuetify/api-generator": "workspace:*",
     "@yankeeinlondon/builder-api": "^1.4.1",
     "ajv": "^8.17.1",
-    "algoliasearch-helper": "^3.24.3",
+    "algoliasearch-helper": "^3.25.0",
     "async-es": "^3.2.6",
     "date-fns": "^3.6.0",
     "front-matter": "^4.0.2",
@@ -78,16 +78,16 @@
     "markdown-it-link-attributes": "^4.0.1",
     "markdown-it-prism": "^3.0.0",
     "markdownlint-cli": "^0.44.0",
-    "unplugin-auto-import": "19.1.0",
+    "unplugin-auto-import": "19.1.2",
     "unplugin-fonts": "1.3.1",
-    "unplugin-vue-components": "^0.27.4",
-    "vite": "^6.1.0",
+    "unplugin-vue-components": "^0.28.0",
+    "vite": "^6.3.5",
     "vite-plugin-md": "^0.22.5",
     "vite-plugin-pages": "^0.33.0",
     "vite-plugin-pwa": "^1.0.0",
     "vite-plugin-vue-layouts": "^0.11.0",
     "vite-plugin-vuetify": "^2.1.1",
-    "vue-tsc": "^2.0.29"
+    "vue-tsc": "^2.2.10"
   },
   "publishConfig": {
     "access": "public"

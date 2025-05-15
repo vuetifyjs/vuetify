@@ -22,8 +22,9 @@ import { computed, provide, toRef, toRefs } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
+import type { DeepReadonly } from 'vue'
 import type { VDataTableSlotProps, VDataTableSlots } from './VDataTable'
-import type { CellProps, RowProps } from '@/components/VDataTable/types'
+import type { CellProps, DataTableHeader, RowProps } from '@/components/VDataTable/types'
 import type { GenericProps, SelectItemKey } from '@/util'
 
 export const makeVDataTableServerProps = propsFactory({
@@ -46,6 +47,7 @@ export const VDataTableServer = genericComponent<new <T extends readonly any[], 
     rowProps?: RowProps<ItemType<T>>
     cellProps?: CellProps<ItemType<T>>
     itemSelectable?: SelectItemKey<ItemType<T>>
+    headers?: DeepReadonly<DataTableHeader<ItemType<T>>[]>
     modelValue?: V
     'onUpdate:modelValue'?: (value: V) => void
   },

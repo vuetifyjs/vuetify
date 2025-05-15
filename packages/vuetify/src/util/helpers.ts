@@ -393,9 +393,9 @@ export function wrapInArray<T> (
     ? IfAny<T, T[], T>
     : NonNullable<T>[] {
   return v == null
-    ? []
+    ? [] as any
     : Array.isArray(v)
-      ? v as any : [v]
+      ? v as any : [v] as any
 }
 
 export function defaultFilter (value: any, search: string | null, item: any) {
@@ -670,7 +670,7 @@ export function getNextElement (elements: HTMLElement[], location?: 'next' | 'pr
 export function focusChild (el: Element, location?: 'next' | 'prev' | 'first' | 'last' | number) {
   const focusable = focusableChildren(el)
 
-  if (!location) {
+  if (location == null) {
     if (el === document.activeElement || !el.contains(document.activeElement)) {
       focusable[0]?.focus()
     }
