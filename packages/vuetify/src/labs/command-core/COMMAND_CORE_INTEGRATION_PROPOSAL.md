@@ -1,8 +1,8 @@
 # Vue CommandCore - Integration Proposal
 
-**Date:** [Current Date]
-**Author:** Gemini AI (in collaboration with User)
-**Status:** Revised Draft
+**Date:** 5/15/2025
+**Author:** Matthew Ary + Google Gemini 2.5
+**Status:** Proposal
 
 ## 1. Goal
 
@@ -205,7 +205,7 @@ export function useCommandable(props: { command?: string | ActionDefinition }, c
 }
 ```
 
-### 4.4. Revised `VBtn` Integration Sketch using `useCommandable`
+### 4.4. `VBtn` Integration Sketch using `useCommandable`
 
 ```typescript
 // Simplified VBtn.tsx setup
@@ -275,7 +275,7 @@ This sketch prioritizes the command if active. The exact interaction with `link.
 4.  **Naming of the `command` prop:** Is `command` the clearest name? Alternatives: `action`, `commandCoreAction`.
 5.  **Default `CommandCoreOptions`**: What should be the sensible defaults if `options.commandCore` is just `true`?
 
-This revised proposal attempts to align more closely with Vuetify's patterns by introducing a dedicated composable (`useCommandable`) for component-side logic and clarifying the feature flag access. It also expands the list of candidate components.
+This proposal attempts to align more closely with Vuetify's patterns by introducing a dedicated composable (`useCommandable`) for component-side logic and clarifying the feature flag access. It also expands the list of candidate components.
 
 ---
 *This proposal is a draft and subject to refinement based on team feedback and further analysis.*
