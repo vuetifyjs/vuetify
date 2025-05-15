@@ -1,7 +1,9 @@
 # Vue CommandCore - Integration Proposal
 
 **Date:** 5/15/2025
+
 **Author:** Matthew Ary + Google Gemini 2.5
+
 **Status:** Proposal
 
 ## 1. Goal
