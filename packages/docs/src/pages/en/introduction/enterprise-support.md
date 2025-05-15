@@ -28,3 +28,9 @@ Get direct access to the Vuetify team through our private [Discord server](https
 Take your software projects to the next level with the expert consulting services of our trusted partner, [Epicmax](https://www.epicmax.co/?ref=vuetify). With extensive experience in delivering Vuetify-based projects, Epicmax provides specialized guidance to ensure your project is efficient, innovative, and tailored to your unique requirements.
 
 <IntroductionConsultingServices />
+
+<br>
+
+## Extended LTS support from HeroDevs
+
+Still using Vuetify 2 in your application? We've partnered with HeroDevs to provide extended support for Vuetify 2 users who require ongoing maintenance, security updates, and technical assistance. If your organization needs to remain on Vuetify 2 for the foreseeable future, this dedicated support ensures you can continue running your applications with confidence. Learn more about Vuetify 2 extended support options [here](https://v2.vuetifyjs.com/about/eol/).

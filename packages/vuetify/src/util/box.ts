@@ -35,7 +35,7 @@ export function getOverflow (a: Box, b: Box) {
   }
 }
 
-export function getTargetBox (target: HTMLElement | [x: number, y: number]) {
+export function getTargetBox (target: HTMLElement | [x: number, y: number]): Box {
   if (Array.isArray(target)) {
     return new Box({
       x: target[0],

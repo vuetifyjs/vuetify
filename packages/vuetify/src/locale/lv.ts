@@ -104,4 +104,17 @@ export default {
     loadMore: 'Ielādēt vairāk',
     empty: 'Nav vairāk vienumu',
   },
+  rules: {
+    required: 'Šis lauks ir obligāts',
+    email: 'Lūdzu, ievadiet derīgu e-pasta adresi',
+    number: 'Šis lauks var saturēt tikai ciparus',
+    integer: 'Šis lauks var saturēt tikai veselus skaitļus',
+    capital: 'Šis lauks var saturēt tikai lielos burtus',
+    maxLength: 'Jums jāievada maksimāli {0} rakstzīmes',
+    minLength: 'Jums jāievada vismaz {0} rakstzīmes',
+    strictLength: 'Ievadītā lauka garums nav derīgs',
+    exclude: 'Rakstzīme {0} nav atļauta',
+    notEmpty: 'Lūdzu, izvēlieties vismaz vienu vērtību',
+    pattern: 'Nederīgs formāts',
+  },
 }

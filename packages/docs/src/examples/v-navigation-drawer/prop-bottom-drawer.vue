@@ -6,8 +6,6 @@
 
         <v-toolbar-title>My files</v-toolbar-title>
 
-        <v-spacer></v-spacer>
-
         <template v-if="$vuetify.display.mdAndUp">
           <v-btn icon="mdi-magnify" variant="text"></v-btn>
 

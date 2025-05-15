@@ -24,7 +24,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeTransitionProps } from '@/composables/transition'
 
 // Utilities
-import { computed, mergeProps, nextTick, ref, shallowRef, watch } from 'vue'
+import { computed, mergeProps, nextTick, ref, shallowRef, toRef, watch } from 'vue'
 import {
   checkPrintable,
   deepEqual,
@@ -141,17 +141,9 @@ export const VSelect = genericComponent<new <
 
   setup (props, { slots }) {
     const { t } = useLocale()
-    const vTextFieldRef = ref()
+    const vTextFieldRef = ref<VTextField>()
     const vMenuRef = ref<VMenu>()
     const vVirtualScrollRef = ref<VVirtualScroll>()
-    const _menu = useProxiedModel(props, 'menu')
-    const menu = computed({
-      get: () => _menu.value,
-      set: v => {
-        if (_menu.value && !v && vMenuRef.value?.ΨopenChildren.size) return
-        _menu.value = v
-      },
-    })
     const { items, transformIn, transformOut } = useItems(props)
     const model = useProxiedModel(
       props,
@@ -171,7 +163,6 @@ export const VSelect = genericComponent<new <
     const form = useForm(props)
     const selectedValues = computed(() => model.value.map(selection => selection.value))
     const isFocused = shallowRef(false)
-    const label = computed(() => menu.value ? props.closeText : props.openText)
 
     let keyboardLookupPrefix = ''
     let keyboardLookupLastTime: number
@@ -187,6 +178,17 @@ export const VSelect = genericComponent<new <
       (props.hideNoData && !displayItems.value.length) ||
       form.isReadonly.value || form.isDisabled.value
     ))
+    const _menu = useProxiedModel(props, 'menu')
+    const menu = computed({
+      get: () => _menu.value,
+      set: v => {
+        if (_menu.value && !v && vMenuRef.value?.ΨopenChildren.size) return
+        if (v && menuDisabled.value) return
+        _menu.value = v
+      },
+    })
+
+    const label = toRef(() => menu.value ? props.closeText : props.openText)
 
     const computedMenuProps = computed(() => {
       return {
@@ -250,11 +252,13 @@ export const VSelect = genericComponent<new <
 
       const item = items.value.find(item => item.title.toLowerCase().startsWith(keyboardLookupPrefix))
       if (item !== undefined) {
-        model.value = [item]
+        if (!props.multiple) {
+          model.value = [item]
+        }
         const index = displayItems.value.indexOf(item)
-        IN_BROWSER && window.requestAnimationFrame(() => {
-          index >= 0 && vVirtualScrollRef.value?.scrollToIndex(index)
-        })
+        if (~index && IN_BROWSER) {
+          listRef.value?.focus(index)
+        }
       }
     }
 
@@ -408,6 +412,7 @@ export const VSelect = genericComponent<new <
                       onFocusin={ onFocusin }
                       tabindex="-1"
                       aria-live="polite"
+                      aria-label={ `${props.label}-list` }
                       color={ props.itemColor ?? props.color }
                       { ...listEvents }
                       { ...props.listProps }
@@ -418,7 +423,7 @@ export const VSelect = genericComponent<new <
                         <VListItem key="no-data" title={ t(props.noDataText) } />
                       ))}
 
-                      <VVirtualScroll ref={ vVirtualScrollRef } renderless items={ displayItems.value }>
+                      <VVirtualScroll ref={ vVirtualScrollRef } renderless items={ displayItems.value } itemKey="value">
                         { ({ item, index, itemRef }) => {
                           const itemProps = mergeProps(item.props, {
                             ref: itemRef,
@@ -548,6 +553,7 @@ export const VSelect = genericComponent<new <
                 { props.menuIcon ? (
                   <VIcon
                     class="v-select__menu-icon"
+                    color={ vTextFieldRef.value?.fieldIconColor }
                     icon={ props.menuIcon }
                   />
                 ) : undefined }

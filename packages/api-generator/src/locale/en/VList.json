@@ -29,5 +29,12 @@
     "focus": "Slot for the focus.",
     "open": "Slot for the open.",
     "parents": "Slot for the parents."
+  },
+  "exposed": {
+    "children": "The nested list items within the component.",
+    "focus": "Focus the list item.",
+    "getPath": "Get the position of an item within the nested structure.",
+    "open": "Open the list item.",
+    "parents": "The parent list items within the component."
   }
 }
