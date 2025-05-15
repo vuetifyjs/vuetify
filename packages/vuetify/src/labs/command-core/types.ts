@@ -24,7 +24,7 @@ export interface UseKeyBindingsOptions {
 }
 
 /** Type for a key filter when registering a handler */
-export type KeyFilter = string | string[] | ((event: KeyboardEvent) => boolean)
+export type KeyFilter = Set<string> | ((event: KeyboardEvent) => boolean);
 
 /** Options for a specific key binding handler */
 export interface KeyBindingHandlerOptions {
@@ -41,27 +41,29 @@ export interface KeyBindingHandlerOptions {
   /** For sequence triggers, specific timeout for this sequence (overrides global) */
   sequenceTimeout?: number
   /** Ignore repeated events when key is held down (default: false) - primarily for 'keydown' */
-  dedupe?: boolean
-  /** If true, listener will be passive (default: from UseKeyBindingsOptions or false) */
-  passive?: boolean
+  ignoreKeyRepeat?: boolean
   /** If true, this specific binding will ignore the result of `inputBlockerFn` (default: false) */
   ignoreInputBlocker?: boolean;
+  /** If true, listener will be passive (default: from UseKeyBindingsOptions or false) */
+  passive?: boolean
 }
 
-export type KeyBindingTrigger = KeyFilter | string // string for combination like 'ctrl+s' or sequence like 'a-b-c'
+export type KeyBindingTrigger = string | string[] | ((event: KeyboardEvent) => boolean);
 
 // -------------- CommandCore Action Types (derived from scratch/src/types/action.types.ts) --------------
 
 /** Context passed to action handlers and canExecute checks. */
-export interface ActionContext extends Record<string, any> {
+export interface ActionContext {
   /** The trigger for the action (e.g., 'hotkey-combination', 'hotkey-sequence', 'palette', 'component-click'). */
-  trigger?: string
+  trigger?: 'hotkey' | 'palette' | 'programmatic' | 'notification' | 'ai_assistant' | string;
   /** The original DOM event if the action was triggered by one. */
-  event?: Event
+  event?: Event;
+  /** Arbitrary data, e.g., from palette, notification, or programmatic call */
+  data?: any;
 }
 
 /** Defines how a hotkey should behave regarding text input elements. */
-export type RunInTextInputMatcher = boolean | 'only' | string | string[] | ((element: Element) => boolean)
+export type RunInTextInputMatcher = string | string[] | ((element: Element | null) => boolean);
 
 export interface ActionDefinition<T extends ActionContext = ActionContext> {
   /** Unique identifier for the action. */
@@ -73,7 +75,7 @@ export interface ActionDefinition<T extends ActionContext = ActionContext> {
   /** Icon to display next to the action. */
   icon?: string | Ref<string> // Could be a string for icon font class, or a component
   /** Keywords for searching the action in a command palette. */
-  keywords?: string[] | Ref<string[]>
+  keywords?: string | string[]
   /** The function to execute when the action is triggered. */
   handler?: (context: T) => void | Promise<void>
   /**
@@ -84,28 +86,30 @@ export interface ActionDefinition<T extends ActionContext = ActionContext> {
   hotkey?: string | string[]
   /**
    * Determines if the hotkey can be triggered when a text input is focused.
-   * - `true` (default): Hotkey runs everywhere.
-   * - `false`: Hotkey does not run if a text input is focused.
+   * - `true`: Hotkey explicitly configured to run even when inputs are focused (overrides default blocking for non-input hotkeys).
+   * - `false`: Hotkey explicitly configured to NOT run when inputs are focused.
    * - `'only'`: Hotkey only runs if a text input is focused.
-   * - `string | string[]`: Hotkey only runs if focused input's `name` attribute matches.
-   * - `function`: Custom predicate `(element: Element) => boolean`.
+   * - `string | string[]`: Hotkey only runs if focused input's `name` attribute matches (implies input focus).
+   * - `function`: Custom predicate `(element: Element | null) => boolean` (implies input focus if element is an input).
+   * - `undefined` (default): Behavior depends on the nature of the hotkey and default input blocking. For CommandCore, if undefined, it means the hotkey is subject to normal input blocking unless it's a known text editing shortcut.
    */
-  runInTextInput?: RunInTextInputMatcher
+  runInTextInput?: boolean | 'only' | RunInTextInputMatcher;
   /** Optional function to determine if the action can be executed. */
   canExecute?: (context: T) => boolean
   /** If this action represents a group, this function should return its sub-items. */
-  subItems?: (context: T) => ActionDefinition<T>[] | Promise<ActionDefinition<T>[]>
+  subItems?: () => ActionDefinition<T>[] | Promise<ActionDefinition<T>[]>
   /** Custom data associated with the action. */
   meta?: Record<string, any>
   /** Order for sorting, lower numbers come first. */
   order?: number
   /** If true, the action is considered disabled and won't be executable or shown as enabled. */
   disabled?: boolean | Ref<boolean>
+  /** Optional description for the action */
+  description?: string
 }
 
 /** Represents a source of actions for the CommandCore store. */
 export type ActionsSource =
-  | Ref<Readonly<ActionDefinition<any>[]>>
-  | Readonly<ActionDefinition<any>[]>
-  | (() => Readonly<ActionDefinition<any>[]>)
-  | (() => Promise<Readonly<ActionDefinition<any>[]>>);
+  | ActionDefinition[]
+  | Ref<ActionDefinition[]>
+  | (() => ActionDefinition[] | Promise<ActionDefinition[]>);

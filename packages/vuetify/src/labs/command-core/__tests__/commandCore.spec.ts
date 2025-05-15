@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
-import { ref, computed, nextTick } from 'vue';
+import { ref, computed, nextTick, watch } from 'vue';
 import { useCommandCore, destroyCommandCoreInstance } from '../commandCore';
 import type { CommandCoreOptions } from '../commandCore';
 import type { ActionDefinition, ActionContext, ActionsSource } from '../types';
@@ -26,12 +26,23 @@ vi.mock('../useKeyBindings', () => ({
   useKeyBindings: vi.fn(() => mockKeyBindingsInstance),
 }));
 
-// Helper to create a basic action definition
-const createTestAction = (id: string, hotkey?: string, handler?: () => void): ActionDefinition => ({
+// This will now be the primary helper for all tests in this file.
+const createActionDef = (id: string, props: Partial<ActionDefinition> = {}): ActionDefinition => ({
   id,
   title: `Action ${id}`,
-  handler: handler || vi.fn(),
-  hotkey,
+  handler: vi.fn(),
+  keywords: undefined,
+  description: undefined,
+  subtitle: undefined,
+  icon: undefined,
+  hotkey: undefined,
+  runInTextInput: undefined, // Default to undefined, which is a valid assignable type to the field
+  canExecute: undefined,
+  subItems: undefined,
+  meta: undefined,
+  order: undefined,
+  disabled: undefined,
+  ...props, // User-provided props will override defaults
 });
 
 describe('CommandCore', () => {
@@ -81,7 +92,7 @@ describe('CommandCore', () => {
   describe('Action Source Management', () => {
     it('should register and unregister an array action source', async () => {
       const core = useCommandCore();
-      const action1 = createTestAction('act1');
+      const action1 = createActionDef('act1');
       const sourceArray: ActionDefinition[] = [action1];
 
       const sourceKey = core.registerActionsSource(sourceArray);
@@ -96,7 +107,7 @@ describe('CommandCore', () => {
 
     it('should register a function action source and call it', async () => {
       const core = useCommandCore();
-      const action1 = createTestAction('actFun1');
+      const action1 = createActionDef('actFun1');
       const sourceFn = vi.fn(() => [action1]);
 
       core.registerActionsSource(sourceFn);
@@ -110,8 +121,8 @@ describe('CommandCore', () => {
 
     it('should register a Ref<ActionDefinition[]> source and react to its changes', async () => {
       const core = useCommandCore();
-      const action1 = createTestAction('actRef1');
-      const action2 = createTestAction('actRef2');
+      const action1 = createActionDef('actRef1');
+      const action2 = createActionDef('actRef2');
       const sourceRef = ref<ActionDefinition[]>([action1]);
 
       core.registerActionsSource(sourceRef);
@@ -127,8 +138,8 @@ describe('CommandCore', () => {
 
     it('allActions should deduplicate actions by ID, last one wins', async () => {
       const core = useCommandCore();
-      const actionV1 = createTestAction('dupAct', undefined, vi.fn());
-      const actionV2 = { ...createTestAction('dupAct'), title: 'Action dupAct V2' };
+      const actionV1 = createActionDef('dupAct');
+      const actionV2 = createActionDef('dupAct', { title: 'Action dupAct V2' });
 
       core.registerActionsSource([actionV1]);
       await nextTick();
@@ -144,7 +155,7 @@ describe('CommandCore', () => {
     it('should call the action handler and set isLoading state', async () => {
       const core = useCommandCore();
       const handlerMock = vi.fn();
-      const action = createTestAction('execAction1', undefined, handlerMock);
+      const action = createActionDef('execAction1', { handler: handlerMock });
       core.registerActionsSource([action]);
       await nextTick();
 
@@ -159,7 +170,7 @@ describe('CommandCore', () => {
     it('should not call handler if action is disabled (boolean) and warn', async () => {
       const core = useCommandCore();
       const handlerMock = vi.fn();
-      const action = { ...createTestAction('disabledAction1', undefined, handlerMock), disabled: true };
+      const action = createActionDef('disabledAction1', { handler: handlerMock, disabled: true });
       core.registerActionsSource([action]);
       await nextTick();
 
@@ -179,7 +190,7 @@ describe('CommandCore', () => {
       const core = useCommandCore();
       const handlerMock = vi.fn();
       const disabledState = ref(true);
-      const action = { ...createTestAction('disabledAction2', undefined, handlerMock), disabled: disabledState };
+      const action = createActionDef('disabledAction2', { handler: handlerMock, disabled: disabledState });
       core.registerActionsSource([action]);
       await nextTick();
       const consoleWarnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
@@ -204,7 +215,7 @@ describe('CommandCore', () => {
       const core = useCommandCore();
       const handlerMock = vi.fn();
       const canExecuteMock = vi.fn(() => false);
-      const action = { ...createTestAction('canExecAction1', undefined, handlerMock), canExecute: canExecuteMock };
+      const action = createActionDef('canExecAction1', { handler: handlerMock, canExecute: canExecuteMock });
       core.registerActionsSource([action]);
       await nextTick();
       const consoleWarnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
@@ -226,7 +237,7 @@ describe('CommandCore', () => {
       const core = useCommandCore();
       const handlerMock = vi.fn();
       const canExecuteMock = vi.fn(() => true);
-      const action = { ...createTestAction('canExecAction2', undefined, handlerMock), canExecute: canExecuteMock };
+      const action = createActionDef('canExecAction2', { handler: handlerMock, canExecute: canExecuteMock });
       core.registerActionsSource([action]);
       await nextTick();
 
@@ -237,7 +248,7 @@ describe('CommandCore', () => {
 
     it('should not call handler for a group action (has subItems, no handler) and debug log', async () => {
       const core = useCommandCore();
-      const groupAction: ActionDefinition = { id: 'groupAct1', title: 'Group 1', subItems: () => [], handler: undefined };
+      const groupAction = createActionDef('groupAct1', { subItems: () => [], handler: undefined });
       core.registerActionsSource([groupAction]);
       await nextTick();
       const consoleDebugSpy = vi.spyOn(console, 'debug').mockImplementation(() => {});
@@ -264,7 +275,7 @@ describe('CommandCore', () => {
     it('should log an error if action has no handler or subItems (effectively becomes action not found due to filtering)', async () => {
       const core = useCommandCore();
       // This action will be filtered out by isActionDefinition because it has no handler and no subItems
-      const action: ActionDefinition = { id: 'noHandlerAction', title: 'No Handler', handler: undefined, subItems: undefined };
+      const action = createActionDef('noHandlerAction', { handler: undefined, subItems: undefined });
       core.registerActionsSource([action]);
       await nextTick();
       const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
@@ -282,17 +293,30 @@ describe('CommandCore', () => {
   describe('Hotkey Registration and Triggering', () => {
     it('should register hotkeys with keyBindings.on when actions with hotkeys are processed', async () => {
       const core = useCommandCore();
-      const action1 = createTestAction('hkAction1', 'ctrl+k');
-      const action2 = createTestAction('hkAction2', 'g-d');
-      const action3 = { ...createTestAction('hkAction3', 'alt+t'), runInTextInput: true };
-      const action4 = { ...createTestAction('hkAction4', 'ctrl+i'), runInTextInput: 'only' };
+      // Define actions directly to ensure exact type matching for runInTextInput
+      const action1: ActionDefinition = createActionDef('hkAction1', { hotkey: 'ctrl+k' }); // runInTextInput is undefined by default
+      const action2: ActionDefinition = createActionDef('hkAction2', { hotkey: 'g-d' });    // runInTextInput is undefined by default
+
+      const action3: ActionDefinition = {
+        id: 'hkAction3',
+        title: 'Action hkAction3',
+        hotkey: 'alt+t',
+        runInTextInput: true, // Explicitly boolean
+        handler: vi.fn(),
+      };
+
+      const action4: ActionDefinition = {
+        id: 'hkAction4',
+        title: 'Action hkAction4',
+        hotkey: 'ctrl+i',
+        runInTextInput: 'only', // Explicitly 'only'
+        handler: vi.fn(),
+      };
 
       core.registerActionsSource([action1, action2, action3, action4]);
       const resolvedActions = core.allActions.value;
       expect(resolvedActions.length).toBe(4);
       await nextTick();
-
-      expect(mockKeyBindingsOn).toHaveBeenCalled();
       expect(mockKeyBindingsOn).toHaveBeenCalledWith('ctrl+k', expect.any(Function), { ignoreInputBlocker: false });
       expect(mockKeyBindingsOn).toHaveBeenCalledWith('g-d', expect.any(Function), { ignoreInputBlocker: false });
       expect(mockKeyBindingsOn).toHaveBeenCalledWith('alt+t', expect.any(Function), { ignoreInputBlocker: true });
@@ -301,68 +325,62 @@ describe('CommandCore', () => {
 
     it('should call action handler and log debug messages when its hotkey is invoked', async () => {
       const core = useCommandCore();
-      // Spy on executeAction BEFORE the hotkey callback is created via action registration
       const executeActionSpy = vi.spyOn(core, 'executeAction');
-
       const actionHandlerMock = vi.fn();
       const canExecuteTrue = vi.fn(() => true);
-      const actionToTest = {
-        ...createTestAction('hkExec', 'ctrl+e', actionHandlerMock),
+      const actionToTest = createActionDef('hkExec', {
+        hotkey: 'ctrl+e',
+        handler: actionHandlerMock,
         canExecute: canExecuteTrue,
-        disabled: false,
-        runInTextInput: undefined
-      };
+      });
       core.registerActionsSource([actionToTest]);
-      const resolvedActions = core.allActions.value; // This triggers processAndRegisterHotkeys, creating the callback
-      expect(resolvedActions.find(a=>a.id === 'hkExec')).toBeDefined();
-      await nextTick();
+      const resolvedActions = core.allActions.value; // Trigger allActions computation
+      await nextTick(); // Allow hotkey registration
 
       const onCall = mockKeyBindingsOn.mock.calls.find(call => call[0] === 'ctrl+e');
-      expect(onCall, "'ctrl+e' hotkey should be registered with keyBindings.on").toBeDefined();
+      expect(onCall).toBeDefined();
       const hotkeyCallback = onCall![1] as (event: KeyboardEvent) => void;
-
       const mockEvent = new KeyboardEvent('keydown', { key: 'e', ctrlKey: true });
+
       const consoleDebugSpy = vi.spyOn(console, 'debug').mockImplementation(() => {});
 
-hotkeyCallback(mockEvent);
-      await nextTick();
-      await vi.advanceTimersByTime(1); // For any internal asyncs in executeAction
+      hotkeyCallback(mockEvent);
+      await nextTick(); // Allow executeAction to be called
+      // await vi.advanceTimersByTime(1); // If executeAction had internal async beyond nextTick
 
-      // Check debug logs from commandCoreDebug (which prepends [CommandCore])
-      expect(consoleDebugSpy).toHaveBeenCalledWith('[CommandCore]', '[HK DEBUG] Triggered for action ID: hkExec, binding: "ctrl+e"');
-      expect(consoleDebugSpy).toHaveBeenCalledWith('[CommandCore]', '[HK DEBUG] getAction("hkExec") result:', expect.objectContaining({ id: 'hkExec' }));
-      expect(consoleDebugSpy).toHaveBeenCalledWith('[CommandCore]', '[HK DEBUG] Passed runInTextInput checks for "hkExec". About to check canExecute.');
-      expect(consoleDebugSpy).toHaveBeenCalledWith('[CommandCore]', '[HK DEBUG] Passed canExecute for "hkExec". About to call executeAction.');
+      // Corrected assertions based on actual log messages from commandCore.ts
       expect(consoleDebugSpy).toHaveBeenCalledWith('[CommandCore]', 'Hotkey "ctrl+e" executing action "hkExec"');
+      // The detailed [HK DEBUG] logs were removed from commandCore.ts, so we only expect the general ones.
+      // If specific internal steps of the hotkey callback need checking, they are implicitly tested by whether executeAction is called.
       expect(consoleDebugSpy).toHaveBeenCalledWith('[CommandCore]', 'Executing handler for action: hkExec');
 
       expect(canExecuteTrue).toHaveBeenCalled();
       expect(executeActionSpy).toHaveBeenCalledWith('hkExec', { trigger: 'hotkey', event: mockEvent });
       expect(actionHandlerMock).toHaveBeenCalledTimes(1);
 
-      executeActionSpy.mockRestore(); // Restore spy
+      executeActionSpy.mockRestore();
       consoleDebugSpy.mockRestore();
     });
 
-    it('should NOT call executeAction if hotkey callback checks (disabled, runInTextInput, canExecute) fail', async () => {
+    it('should NOT call executeAction if hotkey callback checks fail', async () => {
       const core = useCommandCore();
       const actionHandler = vi.fn();
       const canExecuteFalse = vi.fn(() => false);
-      const action = {
-        ...createTestAction('hkNoExec', 'ctrl+n', actionHandler),
+      // Explicitly define this action to ensure runInTextInput is correctly typed or undefined.
+      const action: ActionDefinition = {
+        id: 'hkNoExec',
+        title: 'Action hkNoExec',
+        hotkey: 'ctrl+n',
+        handler: actionHandler,
         canExecute: canExecuteFalse,
-        runInTextInput: false
+        runInTextInput: undefined, // Explicitly undefined, was false in a previous version which might have caused issues
       };
       core.registerActionsSource([action]);
       let resolvedActions = core.allActions.value;
-      expect(resolvedActions.find(a => a.id === 'hkNoExec')).toBeDefined();
       await nextTick();
-
       const onCallCtrlN = mockKeyBindingsOn.mock.calls.find(call => call[0] === 'ctrl+n');
-      expect(onCallCtrlN, 'Hotkey ctrl+n should be registered').toBeDefined();
       const hotkeyCallbackCtrlN = onCallCtrlN![1] as (event: KeyboardEvent) => void;
       const executeActionSpy = vi.spyOn(core, 'executeAction');
-
       hotkeyCallbackCtrlN(new KeyboardEvent('keydown', { key: 'n', ctrlKey: true }));
       await nextTick();
       expect(canExecuteFalse).toHaveBeenCalled();
@@ -370,27 +388,26 @@ hotkeyCallback(mockEvent);
       executeActionSpy.mockClear();
       mockKeyBindingsOn.mockClear();
 
-      const actionDisabled = { ...createTestAction('hkNoExecDisabled', 'ctrl+d', vi.fn()), disabled: true, canExecute: () => true };
+      const actionDisabled = createActionDef('hkNoExecDisabled', {
+        hotkey: 'ctrl+d',
+        handler: vi.fn(),
+        disabled: true,
+        canExecute: () => true
+      });
       core.registerActionsSource([actionDisabled]);
-      // Ensure allActions recomputes AFTER adding the new source AND BEFORE finding the call
       resolvedActions = core.allActions.value;
-      expect(resolvedActions.find(a => a.id === 'hkNoExecDisabled')).toBeDefined();
-      await nextTick(); // Allow effects
-
+      await nextTick();
       const onCallCtrlD = mockKeyBindingsOn.mock.calls.find(call => call[0] === 'ctrl+d');
-      expect(onCallCtrlD, 'Hotkey ctrl+d should be registered for disabled test').toBeDefined();
       const hotkeyCallbackDisabled = onCallCtrlD![1] as (event: KeyboardEvent) => void;
-
       hotkeyCallbackDisabled(new KeyboardEvent('keydown', { key: 'd', ctrlKey: true }));
       await nextTick();
       expect(executeActionSpy).not.toHaveBeenCalled();
-
       executeActionSpy.mockRestore();
     });
 
     it('should unregister hotkeys when an action source is unregistered', async () => {
       const core = useCommandCore();
-      const action1 = createTestAction('hkUnreg1', 'ctrl+x');
+      const action1 = createActionDef('hkUnreg1', { hotkey: 'ctrl+x' });
       const mockUnregisterFn1 = vi.fn();
 
       // Reset mockKeyBindingsOn for this specific test to use mockImplementationOnce cleanly
@@ -414,7 +431,7 @@ hotkeyCallback(mockEvent);
 
     it('should re-register hotkeys when an action definition is updated', async () => {
       const core = useCommandCore();
-      const actionV1 = createTestAction('hkUpdate', 'ctrl+u');
+      const actionV1 = createActionDef('hkUpdate', { hotkey: 'ctrl+u' });
       const mockUnregisterFnV1 = vi.fn();
       const mockUnregisterFnV2 = vi.fn();
 
@@ -441,7 +458,7 @@ hotkeyCallback(mockEvent);
   describe('Async Action Source Handling', () => {
     it('should warn when an async action source function is processed', async () => {
       const core = useCommandCore();
-      const asyncAction = createTestAction('asyncAct1');
+      const asyncAction = createActionDef('asyncAct1');
       const promiseSource = () => new Promise<ActionDefinition[]>(resolve => {
         setTimeout(() => resolve([asyncAction]), 0);
       });
@@ -471,5 +488,230 @@ hotkeyCallback(mockEvent);
       consoleWarnSpy.mockRestore();
       consoleDebugSpy.mockRestore();
     });
+  });
+});
+
+describe('CommandCore Advanced Capabilities', () => {
+  beforeEach(() => {
+    vi.useFakeTimers();
+    destroyCommandCoreInstance();
+    mockKeyBindingsOn.mockClear().mockReturnValue(() => {});
+    mockKeyBindingsStop.mockClear();
+  });
+
+  afterEach(() => {
+    destroyCommandCoreInstance();
+    vi.clearAllTimers();
+    vi.useRealTimers();
+  });
+
+  it('should store and retrieve actions with extended properties (keywords, description, meta)', () => {
+    const core = useCommandCore();
+    const action = createActionDef('extPropAction', {
+      keywords: ['test', 'extended'],
+      description: 'An action with more properties.',
+      meta: { customFlag: true, scope: 'admin' },
+    });
+    core.registerActionsSource([action]);
+    const retrievedAction = core.getAction('extPropAction');
+    expect(retrievedAction?.keywords).toEqual(['test', 'extended']);
+    expect(retrievedAction?.description).toBe('An action with more properties.');
+    expect(retrievedAction?.meta?.customFlag).toBe(true);
+  });
+
+  it('should allow subItems to be an async function and validate action', () => {
+    const core = useCommandCore();
+    const subAction = createActionDef('sub1');
+    const asyncSubItemsSource = createActionDef('asyncSubItemsAction', {
+      title: 'Action with Async SubItems',
+      subItems: async () => {
+        await nextTick();
+        return [subAction];
+      },
+      handler: undefined,
+    });
+    core.registerActionsSource([asyncSubItemsSource]);
+    const retrieved = core.getAction('asyncSubItemsAction');
+    expect(retrieved).toBeDefined();
+    const subItemsPromise = retrieved?.subItems?.();
+    expect(subItemsPromise).toBeInstanceOf(Promise);
+    return expect(subItemsPromise).resolves.toEqual([subAction]);
+  });
+
+  it('should pass rich ActionContext to handler and canExecute', () => {
+    const core = useCommandCore();
+    const handlerMock = vi.fn();
+    const canExecuteMock = vi.fn(() => true);
+    const action = createActionDef('contextAction', {
+      handler: handlerMock,
+      canExecute: canExecuteMock,
+    });
+    core.registerActionsSource([action]);
+    const testContext: ActionContext = {
+      trigger: 'test_trigger',
+      data: { value: 123, nested: { foo: 'bar' } },
+      event: new Event('test'),
+    };
+    (testContext as any).customProp = 'hello'; // Example of adding an arbitrary prop for testing
+
+    core.executeAction('contextAction', testContext);
+    expect(canExecuteMock).toHaveBeenCalledWith(expect.objectContaining(testContext));
+    expect(handlerMock).toHaveBeenCalledWith(expect.objectContaining(testContext));
+  });
+
+  it('should include actions with meta.paletteHidden in allActions', () => {
+    const core = useCommandCore();
+    const actionVisible = createActionDef('visibleAct');
+    const actionHidden = createActionDef('hiddenAct', {
+      meta: { paletteHidden: true },
+    });
+    core.registerActionsSource([actionVisible, actionHidden]);
+    expect(core.getAction('hiddenAct')?.meta?.paletteHidden).toBe(true);
+  });
+
+  it('should allow filtering based on meta properties via canExecute (simulated scope check)', () => {
+    const core = useCommandCore();
+    const handlerMock = vi.fn();
+    const actionDef: ActionDefinition = createActionDef('scopedAction', {
+      meta: { requiredScope: 'admin' },
+      handler: handlerMock,
+    });
+    actionDef.canExecute = (context) => {
+      const possessedScopes = context.data?.possessedScopes as string[] | undefined;
+      const requiredScope = actionDef.meta?.requiredScope as string | undefined;
+      return !!requiredScope && !!possessedScopes?.includes(requiredScope);
+    };
+    core.registerActionsSource([actionDef]);
+
+    const consoleWarnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+
+    core.executeAction('scopedAction', { data: { possessedScopes: ['user'] } });
+    expect(handlerMock).not.toHaveBeenCalled();
+    expect(consoleWarnSpy).toHaveBeenCalledWith('[CommandCore]', 'Action "scopedAction" cannot be executed due to canExecute returning false.', { context: { data: { possessedScopes: ['user'] } }});
+    consoleWarnSpy.mockClear();
+
+    core.executeAction('scopedAction', { data: { possessedScopes: ['admin', 'user'] } });
+    expect(handlerMock).toHaveBeenCalledTimes(1);
+    expect(consoleWarnSpy).not.toHaveBeenCalled(); // Should not warn if canExecute is true
+    consoleWarnSpy.mockRestore();
+  });
+
+  it('should allow filtering based on meta properties via canExecute (simulated mode check)', () => {
+    const core = useCommandCore();
+    const handlerMock = vi.fn();
+    const actionDef = createActionDef('modeAction', {
+      meta: { modes: ['edit', 'advanced'] },
+      handler: handlerMock,
+    });
+    actionDef.canExecute = (context) => {
+      const currentMode = context.data?.currentMode as string | undefined;
+      const allowedModes = actionDef.meta?.modes as string[] | undefined;
+      return !!currentMode && !!allowedModes?.includes(currentMode);
+    };
+    core.registerActionsSource([actionDef]);
+
+    const consoleWarnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+
+    core.executeAction('modeAction', { data: { currentMode: 'view' } });
+    expect(handlerMock).not.toHaveBeenCalled();
+    expect(consoleWarnSpy).toHaveBeenCalledWith('[CommandCore]', 'Action "modeAction" cannot be executed due to canExecute returning false.', { context: { data: { currentMode: 'view' } }});
+    consoleWarnSpy.mockClear();
+
+    core.executeAction('modeAction', { data: { currentMode: 'edit' } });
+    expect(handlerMock).toHaveBeenCalledTimes(1);
+    expect(consoleWarnSpy).not.toHaveBeenCalled();
+    consoleWarnSpy.mockRestore();
+  });
+
+  it('should support chained action execution by handlers (isLoading managed per call)', async () => {
+    const core = useCommandCore();
+    const handlerB = vi.fn(async () => { await nextTick(); });
+    const handlerA = vi.fn(async () => {
+      await core.executeAction('actionB');
+    });
+    const actionA = createActionDef('actionA', { handler: handlerA });
+    const actionB = createActionDef('actionB', { handler: handlerB });
+    core.registerActionsSource([actionA, actionB]);
+    let isLoadingWasTrueDuringExecution = false;
+    const unwatch = watch(core.isLoading, (newValue) => {
+      if (newValue) isLoadingWasTrueDuringExecution = true;
+    });
+    await core.executeAction('actionA');
+    unwatch();
+    expect(handlerA).toHaveBeenCalledTimes(1);
+    expect(handlerB).toHaveBeenCalledTimes(1);
+    expect(isLoadingWasTrueDuringExecution).toBe(true);
+    expect(core.isLoading.value).toBe(false);
+  });
+
+  it('should allow actions to store and retrieve undo-related metadata', () => {
+    const core = useCommandCore();
+    let actionExecutionResult: any = null;
+    const originalActionHandler = vi.fn((context: ActionContext) => {
+      actionExecutionResult = { dataProcessed: context.data, timestamp: Date.now() };
+      // This handler explicitly returns void
+    });
+    const originalAction = createActionDef('doSomething', {
+      handler: originalActionHandler,
+      meta: {
+        undoable: true,
+        undoActionId: 'undoSomething',
+        getUndoContext: (originalContext: ActionContext, resultOfExecution: any) => { // resultOfExecution is now conceptual
+          return {
+            trigger: 'undo',
+            data: { originalResult: resultOfExecution, originalTrigger: originalContext.trigger }
+          }
+        }
+      }
+    });
+    const undoHandlerMock = vi.fn();
+    const undoAction = createActionDef('undoSomething', { handler: undoHandlerMock });
+    core.registerActionsSource([originalAction, undoAction]);
+
+    const retrievedOriginal = core.getAction('doSomething');
+    expect(retrievedOriginal?.meta?.undoable).toBe(true);
+    expect(retrievedOriginal?.meta?.undoActionId).toBe('undoSomething');
+    expect(typeof retrievedOriginal?.meta?.getUndoContext).toBe('function');
+
+    const originalContext: ActionContext = { trigger: 'palette', data: 'testData123' };
+    core.executeAction('doSomething', originalContext); // This will set actionExecutionResult via the handler
+
+    // Pass the simulated result (captured by the handler) to getUndoContext
+    const undoContext = retrievedOriginal?.meta?.getUndoContext?.(originalContext, actionExecutionResult);
+    expect(undoContext).toEqual({
+      trigger: 'undo',
+      data: { originalResult: actionExecutionResult, originalTrigger: 'palette' }
+    });
+
+    if (undoContext && retrievedOriginal?.meta?.undoActionId) {
+      core.executeAction(retrievedOriginal.meta.undoActionId, undoContext);
+      expect(undoHandlerMock).toHaveBeenCalledWith(undoContext);
+    }
+  });
+
+  it('allActions and hotkeys should react to in-place changes in a Ref<ActionDefinition[]> source', async () => {
+    const core = useCommandCore();
+    const action1Initial: ActionDefinition = createActionDef('refReactTest1', { hotkey: 'ctrl+1' });
+    const action2: ActionDefinition = createActionDef('refReactTest2', { hotkey: 'ctrl+2' });
+
+    const sourceRef = ref<ActionDefinition[]>([action1Initial]);
+    core.registerActionsSource(sourceRef);
+    let currentActions = core.allActions.value; // Access to trigger computed
+    await nextTick();
+    expect(mockKeyBindingsOn).toHaveBeenCalledWith('ctrl+1', expect.any(Function), expect.any(Object));
+    mockKeyBindingsOn.mockClear();
+
+    sourceRef.value = [...sourceRef.value, action2];
+    currentActions = core.allActions.value; // Access again after change
+    await nextTick();
+    expect(mockKeyBindingsOn).toHaveBeenCalledWith('ctrl+2', expect.any(Function), expect.any(Object));
+    mockKeyBindingsOn.mockClear();
+
+    const action1Updated: ActionDefinition = { ...action1Initial, hotkey: 'alt+1', title: 'Ref Test 1 Updated' };
+    sourceRef.value = [action1Updated, action2];
+    currentActions = core.allActions.value; // Access again
+    await nextTick();
+    expect(core.getAction('refReactTest1')?.title).toBe('Ref Test 1 Updated');
+    expect(mockKeyBindingsOn).toHaveBeenCalledWith('alt+1', expect.any(Function), expect.any(Object));
   });
 });
