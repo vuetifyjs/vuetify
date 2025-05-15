@@ -3,7 +3,19 @@ import type { Ref, ComputedRef } from 'vue'
 import type { UseKeyBindingsOptions, KeyBindingInputBlockerFn, KeyFilter, KeyBindingHandlerOptions, KeyBindingTrigger } from './types'
 import { IS_CLIENT, IS_MAC } from './platform'
 
+/**
+ * @file useKeyBindings.ts A dependency-free Vue composable for advanced keyboard shortcut and sequence detection.
+ */
+
 // --- Utility Functions ---
+
+/**
+ * Debounces a function, delaying its execution until after a specified wait time has passed since the last call.
+ * @template T - The type of the function to debounce.
+ * @param {T} fn - The function to debounce.
+ * @param {number} delay - The delay in milliseconds.
+ * @returns {T} The debounced function.
+ */
 function debounce<T extends (...args: any[]) => any>(fn: T, delay: number): T {
   let timeoutId: number | undefined;
   return function(this: ThisParameterType<T>, ...args: Parameters<T>) {
@@ -12,6 +24,14 @@ function debounce<T extends (...args: any[]) => any>(fn: T, delay: number): T {
   } as T;
 }
 
+/**
+ * Throttles a function, ensuring it's executed at most once per specified period.
+ * The last call within a period is queued to execute at the end of the period.
+ * @template T - The type of the function to throttle.
+ * @param {T} fn - The function to throttle.
+ * @param {number} delay - The throttle period in milliseconds.
+ * @returns {T} The throttled function.
+ */
 function throttle<T extends (...args: any[]) => any>(fn: T, delay: number): T {
   let lastCallTime = 0;
   let timeoutId: number | undefined;
@@ -31,6 +51,7 @@ function throttle<T extends (...args: any[]) => any>(fn: T, delay: number): T {
   } as T;
 }
 
+/** Default function to determine if keybindings should be blocked based on the active element. */
 const defaultInputBlockerFn: KeyBindingInputBlockerFn = (element) => {
   if (!element) return 'allow'
   const tagName = element.tagName?.toUpperCase()
@@ -43,6 +64,7 @@ const defaultInputBlockerFn: KeyBindingInputBlockerFn = (element) => {
   return 'allow'
 }
 
+/** Default map for aliasing key names. */
 const defaultAliasMap: Record<string, string> = {
   'command': 'meta',
   'cmd': 'meta',
@@ -61,25 +83,33 @@ const defaultAliasMap: Record<string, string> = {
   'alt': 'alt',
 }
 
+// --- Type Aliases and Interfaces (Internal to useKeyBindings) ---
+
+/** Normalized representation of a key filter after parsing. */
 type NormalizedKeyFilter = Set<string> | ((event: KeyboardEvent) => boolean);
 
+/** Normalized representation of a key combination trigger. */
 interface NormalizedTriggerCombination {
   type: 'combination';
   keys: Set<string>; // Set of normalized keys that must all be pressed
 }
 
+/** Normalized representation of a key sequence trigger. */
 interface NormalizedTriggerSequence {
   type: 'sequence';
   sequence: string[]; // Array of normalized keys in order
 }
 
+/** Normalized representation of a single key trigger (can be a set or predicate). */
 interface NormalizedTriggerKey {
   type: 'key';
   filter: NormalizedKeyFilter; // Either a set of allowed keys or a predicate
 }
 
+/** Union type for all parsed trigger representations. */
 type ParsedTrigger = NormalizedTriggerCombination | NormalizedTriggerSequence | NormalizedTriggerKey;
 
+/** Internal structure to store registered handlers along with their parsed triggers and options. */
 interface RegisteredHandler {
   id: number; // For easier removal
   trigger: KeyBindingTrigger;
@@ -89,8 +119,25 @@ interface RegisteredHandler {
   // unregister: () => void; // Handled by removing from array
 }
 
+/** Counter for generating unique handler IDs. */
 let handlerIdCounter = 0;
 
+/**
+ * A Vue composable for managing keyboard shortcuts, combinations, and sequences.
+ * It provides reactive states for pressed keys and allows registering handlers for various key events.
+ *
+ * @param {UseKeyBindingsOptions} [options={}] - Configuration options for the keybindings manager.
+ * @returns {object} The public API of the `useKeyBindings` composable.
+ * @property {Readonly<Ref<Set<string>>>} pressedKeys - A reactive set of currently pressed (normalized) key names.
+ * @property {Readonly<Ref<string[]>>} currentSequence - A reactive array of keys pressed in sequence.
+ * @property {Record<string, Readonly<Ref<boolean>> | ComputedRef<boolean>>} keys - A proxy for reactive access to individual key states (e.g., `keys.a.value`) and combination states (e.g., `keys['ctrl+s'].value`).
+ * @property {(key: string) => Readonly<Ref<boolean>>} getKeyState - Function to get a reactive boolean ref for a single key's pressed state.
+ * @property {(trigger: KeyBindingTrigger, handler: (event: KeyboardEvent) => void, options?: KeyBindingHandlerOptions) => () => void} on - Registers a key event handler. Returns a function to unregister it.
+ * @property {(combination: string) => ComputedRef<boolean>} isCombinationActive - Returns a computed ref indicating if a specific key combination is active.
+ * @property {() => void} start - Manually starts event listeners if not auto-started (e.g., if `target` was initially undefined).
+ * @property {() => void} stop - Manually stops event listeners and cleans up state.
+ * @property {Readonly<Ref<boolean>>} isListening - Reactive boolean indicating if event listeners are active.
+ */
 export function useKeyBindings(options: UseKeyBindingsOptions = {}) {
   const {
     target = IS_CLIENT ? window : undefined,
@@ -119,6 +166,7 @@ export function useKeyBindings(options: UseKeyBindingsOptions = {}) {
   // --- Event Listeners ---
   const stopFunctions: (() => void)[] = []
 
+  /** Normalizes a key string by converting to lowercase and applying aliases. */
   function normalizeKey(key: string): string {
     const lowerKey = key.toLowerCase();
     // Handle platform specific modifier normalization for 'meta' and 'ctrl'
@@ -128,6 +176,12 @@ export function useKeyBindings(options: UseKeyBindingsOptions = {}) {
     return aliasMap[lowerKey] || lowerKey;
   }
 
+  /**
+   * Central event handler for 'keydown' and 'keyup' events.
+   * Updates internal state (pressedKeys, individualKeyStates, currentSequence)
+   * and iterates through registered handlers to check for matches.
+   * @param {Event} event - The keyboard event.
+   */
   const onKeyEvent = (event: Event) => {
     if (!(event instanceof KeyboardEvent)) return;
 
@@ -170,20 +224,20 @@ export function useKeyBindings(options: UseKeyBindingsOptions = {}) {
 
     // 5. Iterate over `activeHandlers` and trigger matching ones
     for (const handler of activeHandlers.value) {
-      const { parsedTrigger, options, handler: callback } = handler;
+      const { parsedTrigger, options: handlerSpecificOptions, handler: callback } = handler;
       const {
         eventName: handlerEventName = 'keydown',
-        dedupe = false,
+        ignoreKeyRepeat = false,
         ignoreInputBlocker = false,
         preventDefault = false,
         stopPropagation = false,
-      } = options;
+      } = handlerSpecificOptions;
 
       let shouldContinue = false;
       if (eventType !== handlerEventName) shouldContinue = true;
-      if (!shouldContinue && eventType === 'keydown' && dedupe && event.repeat) shouldContinue = true;
+      if (!shouldContinue && eventType === 'keydown' && ignoreKeyRepeat && event.repeat) shouldContinue = true;
 
-      const currentInputBlockResult = inputBlockerFn(activeElement); // Get fresh result for each handler context
+      const currentInputBlockResult = inputBlockerFn(activeElement);
 
       if (!shouldContinue && !ignoreInputBlocker && currentInputBlockResult === 'deny') {
         shouldContinue = true;
@@ -252,6 +306,15 @@ export function useKeyBindings(options: UseKeyBindingsOptions = {}) {
     }
   };
 
+  /**
+   * Parses a `KeyBindingTrigger` into a normalized `ParsedTrigger` object.
+   * Handles single keys, arrays of keys (as a set), predicate functions,
+   * string combinations (e.g., "ctrl+s"), and string sequences (e.g., "g-d-s").
+   * Also applies platform-specific modifier normalization (meta/ctrl) for combinations.
+   * @param {KeyBindingTrigger} trigger - The trigger to parse.
+   * @param {(key: string) => string} normalizeFn - The function used to normalize individual key names.
+   * @returns {ParsedTrigger} The parsed and normalized trigger representation.
+   */
   function parseTrigger(trigger: KeyBindingTrigger, normalizeFn: (key: string) => string): ParsedTrigger {
     if (typeof trigger === 'function') {
       return { type: 'key', filter: trigger };
@@ -275,6 +338,7 @@ export function useKeyBindings(options: UseKeyBindingsOptions = {}) {
         return { type: 'key', filter: new Set([normalizeFn(trigger)]) };
       }
     }
+    console.warn('[useKeyBindings] Unknown trigger type:', trigger);
     return { type: 'key', filter: () => false };
   }
 
@@ -388,7 +452,7 @@ export function useKeyBindings(options: UseKeyBindingsOptions = {}) {
     }
   }
 
-  // Helper for useEventListener since we removed VueUse
+  /** Helper to add and remove event listeners, abstracted for potential non-DOM targets if needed. */
   function useEventListener(
     eventTarget: EventTarget,
     event: string,

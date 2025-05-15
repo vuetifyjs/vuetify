@@ -83,20 +83,21 @@ Based on a review of `packages/vuetify/src/components/`, the following component
 
 ## 4. Component Integration Strategy (Decoupled & Opt-In)
 
-Existing, mature components like `VBtn`, `VListItem`, etc., should not automatically change their behavior or require `CommandCore`. Integration will be opt-in via a new prop and controlled by a feature flag.
+Existing, mature components like `VBtn`, `VListItem`, etc., should not automatically change their behavior or require `CommandCore`. Integration will be opt-in via new props and controlled by a feature flag.
 
-### 4.1. New `command` Prop
-Target components (e.g., `VBtn`, `VListItem`) will receive a new optional prop:
+### 4.1. New Component Props
+Target components (e.g., `VBtn`, `VListItem`) will receive new optional props:
 
 ```typescript
 props: {
   // ... existing props
   command?: string | ActionDefinition;
+  commandData?: any; // Data to be passed into ActionContext.data when the command is executed
 }
 ```
 
-*   `string`: Interpreted as an `actionId` to be executed from the global `CommandCore` instance.
-*   `ActionDefinition`: An inline `ActionDefinition` object. The component would be responsible for registering this action (likely scoped to its lifecycle) and triggering it.
+*   `command: string | ActionDefinition`: Links to the action.
+*   `commandData: any`: Provides specific data for the action's context, crucial for scenarios like context menus or actions on list items. This data will be passed to `ActionContext.data`.
 
 ### 4.2. Feature Flag Mechanism for Component Integration
 
@@ -138,31 +139,34 @@ export interface CommandCoreOptions {
     Components will inject `CommandCoreSymbol` and call `core?.isComponentIntegrationEnabled('ComponentName')`.
 
 ### 4.3. Proposed `useCommandable` Composable
-To encapsulate common logic for components integrating with `CommandCore` via the `command` prop.
+To encapsulate common logic for components integrating with `CommandCore`.
 
 ```typescript
 // Potential structure in '@/labs/command-core/composables/useCommandable.ts'
 import { ref, watch, onUnmounted, computed, type Ref } from 'vue';
-import type { CommandCore, ActionDefinition } from '@/labs/command-core';
+import type { CommandCore, ActionDefinition, ActionContext } from '@/labs/command-core'; // Added ActionContext
 
-export function useCommandable(props: { command?: string | ActionDefinition }, core: CommandCore | null, componentName: string) {
+export function useCommandable(
+  props: { command?: string | ActionDefinition; commandData?: any }, // Added commandData to props type
+  core: CommandCore | null,
+  componentName: string
+) {
   const commandProp = computed(() => props.command);
+  const commandDataProp = computed(() => props.commandData); // Watch commandData for context
   let localActionSourceKey: symbol | null = null;
   const internalActionId = ref<string | undefined>(undefined);
 
   const isIntegrationEnabled = computed(() => core?.isComponentIntegrationEnabled(componentName) ?? false);
 
-  watch(commandProp, (newCommand, oldCommand) => {
+  watch(commandProp, (newCommand) => {
     if (isIntegrationEnabled.value && core) {
-      // Unregister old inline action if it existed
       if (localActionSourceKey) {
         core.unregisterActionsSource(localActionSourceKey);
         localActionSourceKey = null;
         internalActionId.value = undefined;
       }
-      // Register new inline action if it exists
       if (typeof newCommand === 'object' && newCommand?.id) {
-        localActionSourceKey = core.registerActionsSource([newCommand]);
+        localActionSourceKey = core.registerActionsSource([newCommand]); // Assumes newCommand is an array for registerActionsSource
         internalActionId.value = newCommand.id;
       } else if (typeof newCommand === 'string') {
         internalActionId.value = newCommand;
@@ -170,7 +174,9 @@ export function useCommandable(props: { command?: string | ActionDefinition }, c
         internalActionId.value = undefined;
       }
     }
-  }, { immediate: true, deep: typeof props.command === 'object' }); // Deep watch if object initially
+  // Watch deep if commandProp is an object to react to its internal changes if necessary,
+  // though replacing the object is cleaner for prop changes.
+  }, { immediate: true, deep: computed(() => typeof commandProp.value === 'object').value });
 
   onUnmounted(() => {
     if (localActionSourceKey && core) {
@@ -190,7 +196,7 @@ export function useCommandable(props: { command?: string | ActionDefinition }, c
       const eventContext: ActionContext = {
         trigger: `component-${componentName.toLowerCase()}`,
         event: domEvent,
-        // data: { /* component-specific data if needed */ }
+        data: commandDataProp.value, // Use commandData from props
         ...(contextOverrides || {}),
       };
       return core.executeAction(internalActionId.value, eventContext);
@@ -199,10 +205,10 @@ export function useCommandable(props: { command?: string | ActionDefinition }, c
   };
 
   return {
-    isCommandable: isIntegrationEnabled, // to easily check if command logic should run
-    commandAction: action, // the resolved ActionDefinition from core
+    isCommandable: isIntegrationEnabled,
+    commandAction: action,
     executeCommand: execute,
-    effectiveActionId: internalActionId, // ID to use for executeAction
+    effectiveActionId: internalActionId,
   };
 }
 ```
@@ -211,55 +217,36 @@ export function useCommandable(props: { command?: string | ActionDefinition }, c
 
 ```typescript
 // Simplified VBtn.tsx setup
-import { inject, computed } from 'vue';
-import { CommandCoreSymbol } from '@/labs/command-core';
-import { useCommandable } from '@/labs/command-core/composables/useCommandable'; // New composable
-import { useLink } from '@/composables/router';
-import { useGroupItem } from '@/composables/group';
+// Props would include: command?: string | ActionDefinition; commandData?: any;
 
-// props: makeVBtnProps() will include command?: string | ActionDefinition;
-
+// ... imports ...
 const core = inject(CommandCoreSymbol, null);
-const { isCommandable, commandAction, executeCommand, effectiveActionId } = useCommandable(props, core, 'VBtn');
+const { isCommandable, commandAction, executeCommand, effectiveActionId } =
+  useCommandable(props, core, 'VBtn'); // props now includes commandData implicitly
 
-const link = useLink(props, attrs);
-const group = useGroupItem(props, props.symbol, false);
-
-const isDisabled = computed(() => {
-  if (props.disabled) return true;
-  if (group?.disabled.value) return true;
-  if (isCommandable.value && commandAction.value) {
-    // Prefer action's disabled state if command is active
-    if (typeof commandAction.value.disabled === 'boolean') return commandAction.value.disabled;
-    if (commandAction.value.disabled?.value) return commandAction.value.disabled.value;
-    // Evaluating canExecute here is complex; defer to action's internal logic or explicit disabled state.
-  }
-  return false;
-});
+// ... (isDisabled computed remains similar, potentially using commandAction.value.canExecute with a constructed context if feasible)
 
 // onClick method in VBtn
 function onClick (e: MouseEvent) {
   if (isDisabled.value) return;
 
-  // If command is active and an action ID is resolved, CommandCore takes precedence.
   if (isCommandable.value && effectiveActionId.value) {
-    emit('click', e); // Emit original click event first
+    emit('click', e);
     if (e.defaultPrevented) return;
-    executeCommand({ /* any VBtn specific context */ }, e);
+    // executeCommand will now internally use props.commandData
+    executeCommand({ /* any VBtn specific overrides for context */ }, e);
   } else {
-    // Original VBtn click logic (including link.navigate and group.toggle)
-    // This part of original onClick remains:
-    if (link.isLink.value && (e.metaKey || e.ctrlKey || e.shiftKey || (e.button !== 0) || attrs.target === '_blank')) {
-        // Let browser handle link opening in new tab/window
-    } else {
-        link.navigate?.(e);
-    }
-    group?.toggle();
-    emit('click', e); // Ensure click is emitted if not handled by command
+    // Original VBtn click logic (link.navigate, group.toggle)
+    emit('click', e); // Ensure click is still emitted if not a command
+    // ... (original logic for link.navigate and group.toggle)
   }
 }
 ```
-This sketch prioritizes the command if active. The exact interaction with `link.navigate` and `group.toggle` when a command *also* executes needs careful consideration to prevent double actions or unintended side effects. The principle is that if `command` is used and active, its handler dictates the primary outcome.
+**Example Usage with `command-data`:**
+```html
+<v-btn command="deleteUser" :command-data="{ userId: user.id }">Delete {{ user.name }}</v-btn>
+```
+This makes it clear how item-specific data is passed to a generic `deleteUser` action.
 
 ## 5. Benefits
 
@@ -277,7 +264,7 @@ This sketch prioritizes the command if active. The exact interaction with `link.
 4.  **Naming of the `command` prop:** Is `command` the clearest name? Alternatives: `action`, `commandCoreAction`.
 5.  **Default `CommandCoreOptions`**: What should be the sensible defaults if `options.commandCore` is just `true`?
 
-This proposal attempts to align more closely with Vuetify's patterns by introducing a dedicated composable (`useCommandable`) for component-side logic and clarifying the feature flag access. It also expands the list of candidate components.
+This proposal incorporates the `commandData` prop for better contextual action execution, making `CommandCore` more practical for list-based interactions and context menus.
 
 ---
 *This proposal is a draft and subject to refinement based on team feedback and further analysis.*

@@ -1,34 +1,66 @@
 import { ref, computed, shallowRef, onScopeDispose, isRef, readonly, getCurrentInstance } from 'vue';
 import type { Ref, ComputedRef, InjectionKey } from 'vue';
 import { useKeyBindings } from './useKeyBindings';
-import type { ActionDefinition, ActionContext, ActionsSource, RunInTextInputMatcher, KeyBindingHandlerOptions } from './types';
+import type { ActionDefinition, ActionContext, ActionsSource, RunInTextInputMatcher, KeyBindingHandlerOptions, CommandCoreOptions as CommandCoreInstanceOptions } from './types';
 import { IS_CLIENT, IS_MAC } from './platform'; // UPDATED IMPORT
 
+/**
+ * @file commandCore.ts The core logic for managing, registering, and executing actions,
+ * integrating with `useKeyBindings` for hotkey support.
+ */
+
 const commandCoreLogPrefix = '[CommandCore]';
+/** Debug logger for CommandCore. Prepends [CommandCore] to messages. */
 const commandCoreDebug = (...args: any[]) => console.debug(commandCoreLogPrefix, ...args);
+/** Warn logger for CommandCore. Prepends [CommandCore] to messages. */
 const commandCoreWarn = (...args: any[]) => console.warn(commandCoreLogPrefix, ...args);
+/** Error logger for CommandCore. Prepends [CommandCore] to messages. */
 const commandCoreError = (...args: any[]) => console.error(commandCoreLogPrefix, ...args);
 
-export interface CommandCoreOptions {
-  // Future options for CommandCore can be added here
-  // For example, default keybinding options or action processing rules
-}
+// Renamed to avoid conflict with the class name if CommandCoreOptions was also a class/interface name itself.
+// export interface CommandCoreOptions {}
 
+/**
+ * Injection key for providing and injecting the CommandCore instance.
+ * @type {InjectionKey<CommandCore>}
+ */
 export const CommandCoreSymbol: InjectionKey<CommandCore> = Symbol.for('vuetify:command-core');
 
+/**
+ * Manages collections of actions, their hotkeys, and execution state.
+ * It provides a centralized system for defining and triggering commands within an application.
+ */
 class CommandCore {
+  /** Options passed to the CommandCore instance during construction. */
+  private readonly options: CommandCoreInstanceOptions;
+
+  /** Reactive state indicating if any action is currently being executed. */
   public readonly isLoading: Readonly<Ref<boolean>>;
+  /** Internal mutable ref for isLoading state. */
   private _isLoading = ref(false);
 
+  /** Shallow ref map of registered action sources. Key is a unique symbol, value is the ActionsSource. */
   private registeredSources = shallowRef<Map<symbol, ActionsSource>>(new Map());
+  /** Map to store unregister functions for hotkeys associated with an action ID. */
   private actionHotkeysUnregisterMap = new Map<string, (() => void)[]>();
+  /** Instance of the keybindings manager. */
   private keyBindings: ReturnType<typeof useKeyBindings>;
 
+  /**
+   * Computed property that aggregates all valid actions from all registered sources.
+   * It deduplicates actions by ID (last one registered wins) and triggers hotkey processing.
+   * @type {ComputedRef<Readonly<ActionDefinition<any>[]>>}
+   */
   public readonly allActions: ComputedRef<Readonly<ActionDefinition<any>[]>>;
 
-  constructor(options: CommandCoreOptions = {}) {
+  /**
+   * Creates an instance of CommandCore.
+   * @param {CommandCoreInstanceOptions} [options={}] - Configuration options for this CommandCore instance.
+   */
+  constructor(options: CommandCoreInstanceOptions = {}) {
+    this.options = options; // Store options for potential future use (e.g., componentIntegration flags)
     this.isLoading = readonly(this._isLoading);
-    this.keyBindings = useKeyBindings();
+    this.keyBindings = useKeyBindings(); // Initialize keybindings
 
     this.allActions = computed(() => {
       const actions: ActionDefinition<any>[] = [];
@@ -66,11 +98,22 @@ class CommandCore {
     });
   }
 
+  /**
+   * Type guard to check if an entry is a valid ActionDefinition.
+   * An action is valid if it has an ID and either a handler or subItems.
+   * @param {*} entry - The entry to check.
+   * @returns {entry is ActionDefinition<any>} True if the entry is a valid ActionDefinition.
+   */
   private isActionDefinition(entry: any): entry is ActionDefinition<any> {
     return typeof entry === 'object' && entry !== null && typeof entry.id === 'string' &&
            (typeof entry.handler === 'function' || typeof entry.subItems === 'function');
   }
 
+  /**
+   * Processes the current list of actions to register their hotkeys
+   * and unregister hotkeys for actions that are no longer present.
+   * @param {Readonly<ActionDefinition<any>[]>} actionsToKeep - The current list of actions to process hotkeys for.
+   */
   private processAndRegisterHotkeys(actionsToKeep: Readonly<ActionDefinition<any>[]>) {
     const actionIdsToKeep = new Set(actionsToKeep.map(action => action.id));
     this.actionHotkeysUnregisterMap.forEach((unregisterFns, actionId) => {
@@ -141,6 +184,11 @@ class CommandCore {
     }
   }
 
+  /**
+   * Registers a new source of actions with CommandCore.
+   * @param {ActionsSource} source - The source of actions (array, Ref, or function).
+   * @returns {symbol} A unique symbol key for this source, which can be used to unregister it.
+   */
   public registerActionsSource(source: ActionsSource): symbol {
     const key = Symbol('ActionSource');
     const newMap = new Map(this.registeredSources.value);
@@ -150,6 +198,11 @@ class CommandCore {
     return key;
   }
 
+  /**
+   * Unregisters an existing action source using its key.
+   * @param {symbol} key - The symbol key of the source to unregister.
+   * @returns {boolean} True if the source was found and unregistered, false otherwise.
+   */
   public unregisterActionsSource(key: symbol): boolean {
     const newMap = new Map(this.registeredSources.value);
     const deleted = newMap.delete(key);
@@ -162,10 +215,23 @@ class CommandCore {
     return deleted;
   }
 
+  /**
+   * Retrieves a specific action definition by its ID from the current set of all actions.
+   * @param {string} actionId - The ID of the action to retrieve.
+   * @returns {ActionDefinition<any> | undefined} The action definition if found, otherwise undefined.
+   */
   public getAction(actionId: string): ActionDefinition<any> | undefined {
     return this.allActions.value.find(action => action.id === actionId);
   }
 
+  /**
+   * Executes a registered action by its ID.
+   * Checks `disabled` and `canExecute` conditions before running the handler.
+   * Sets the `isLoading` state during handler execution.
+   * @param {string} actionId - The ID of the action to execute.
+   * @param {ActionContext} [invocationContext={}] - The context for this specific action invocation.
+   * @returns {Promise<void>} A promise that resolves when the action handler completes or is skipped.
+   */
   public async executeAction(actionId: string, invocationContext: ActionContext = {}): Promise<void> {
     const action = this.getAction(actionId);
     if (!action) {
@@ -207,6 +273,23 @@ class CommandCore {
     }
   }
 
+  /**
+   * Method to check if component integration is enabled for a specific component.
+   * Relies on `componentIntegration` settings passed in `CommandCoreInstanceOptions`.
+   * @param {string} componentName - The name of the component (e.g., 'VBtn').
+   * @returns {boolean} True if integration is enabled for the component.
+   */
+  public isComponentIntegrationEnabled(componentName: string): boolean {
+    const integrationOpts = this.options.componentIntegration;
+    if (!integrationOpts) return false;
+    if (typeof integrationOpts === 'boolean') return integrationOpts;
+    return !!integrationOpts[componentName]; // Check specific component flag
+  }
+
+  /**
+   * Cleans up the CommandCore instance, stopping keybindings and clearing registered actions/hotkeys.
+   * Called automatically via `onScopeDispose` if `useCommandCore` is used in a setup function.
+   */
   public destroy = () => {
     commandCoreDebug('Destroying CommandCore instance');
     this.keyBindings.stop();
@@ -217,9 +300,17 @@ class CommandCore {
   };
 }
 
+/** Singleton instance of CommandCore. */
 let _commandCoreInstance: CommandCore | null = null;
 
-export function useCommandCore(options?: CommandCoreOptions): CommandCore {
+/**
+ * Composable function to get the singleton instance of CommandCore.
+ * Initializes CommandCore on its first call within a client environment.
+ * Manages automatic cleanup via `onScopeDispose` if used within a Vue component's setup context.
+ * @param {CommandCoreInstanceOptions} [options] - Optional configuration for CommandCore, used only on first initialization.
+ * @returns {CommandCore} The singleton CommandCore instance.
+ */
+export function useCommandCore(options?: CommandCoreInstanceOptions): CommandCore {
   if (!_commandCoreInstance && IS_CLIENT) {
     _commandCoreInstance = new CommandCore(options);
     if (getCurrentInstance()) {
@@ -234,6 +325,10 @@ export function useCommandCore(options?: CommandCoreOptions): CommandCore {
   return _commandCoreInstance!;
 }
 
+/**
+ * Explicitly destroys the current singleton CommandCore instance, if one exists.
+ * This will stop all keybindings and clear all registered actions.
+ */
 export function destroyCommandCoreInstance() {
   if (_commandCoreInstance) {
     _commandCoreInstance.destroy();
@@ -241,8 +336,3 @@ export function destroyCommandCoreInstance() {
   }
 }
 
-// utils.ts (Needs to be created)
-/*
-export const IS_CLIENT = typeof window !== 'undefined';
-export const IS_MAC = IS_CLIENT && navigator.platform.toUpperCase().indexOf('MAC') >= 0;
-*/

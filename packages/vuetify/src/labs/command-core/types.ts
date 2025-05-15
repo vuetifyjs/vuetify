@@ -113,3 +113,17 @@ export type ActionsSource =
   | ActionDefinition[]
   | Ref<ActionDefinition[]>
   | (() => ActionDefinition[] | Promise<ActionDefinition[]>);
+
+/**
+ * Configuration options for initializing a CommandCore instance.
+ */
+export interface CommandCoreOptions {
+  /**
+   * Controls whether Vuetify components (like VBtn, VListItem) integrate their `command` prop.
+   * If `true`, all supported components attempt integration.
+   * If an object, specifies per-component opt-in (e.g., `{ VBtn: true }`).
+   * Defaults to `false` if not specified by the user, meaning no automatic component integration.
+   */
+  componentIntegration?: boolean | Record<string, boolean>;
+  // Add any other future global CommandCore options here
+}

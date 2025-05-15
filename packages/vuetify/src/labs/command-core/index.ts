@@ -1,7 +1,9 @@
 export { useCommandCore, destroyCommandCoreInstance, CommandCoreSymbol } from './commandCore';
-export type { CommandCoreOptions } from './commandCore';
+// CommandCoreOptions is now in types.ts
+// export type { CommandCoreOptions } from './commandCore';
+export type { CommandCoreOptions } from './types'; // CORRECTED: Export from types.ts
 
-export { useKeyBindings } from './useKeyBindings'; // Optional: if direct keybinding access is intended for users
+export { useKeyBindings } from './useKeyBindings';
 export type {
   UseKeyBindingsOptions,
   KeyBindingInputBlockerFn,
@@ -17,5 +19,7 @@ export type {
   RunInTextInputMatcher
 } from './types';
 
-// Export utility constants if they are part of the public API
-// export { IS_CLIENT, IS_MAC } from './utils'; // Probably not needed for external users
+// Export platform utils if they are intended to be part of the public API from this module
+// For now, IS_CLIENT and IS_MAC are primarily internal utils for useKeyBindings and commandCore init.
+// If a user of the CommandCore lab feature needs them, they can be exported.
+// export { IS_CLIENT, IS_MAC } from './platform';

@@ -195,24 +195,29 @@ describe('useKeyBindings', () => {
       expect(handler).toHaveBeenCalledTimes(1);
     });
 
-    it('should respect dedupe option', async () => {
+    it('should respect ignoreKeyRepeat option (formerly dedupe)', async () => {
       const { on } = useKeyBindings({ target });
       const handler = vi.fn();
-      on('a', handler, { dedupe: true });
+      on('a', handler, { ignoreKeyRepeat: true });
 
-      dispatchKeyEvent(target, 'keydown', 'a'); // First event
+      dispatchKeyEvent(target, 'keydown', 'a'); // First event (event.repeat is false)
       await nextTick();
+      expect(handler).toHaveBeenCalledTimes(1); // Should be called for the first non-repeated event
+
       dispatchKeyEvent(target, 'keydown', 'a', { repeat: true }); // Repeated event
       await nextTick();
+      expect(handler).toHaveBeenCalledTimes(1); // Should NOT be called again due to ignoreKeyRepeat: true
+
       dispatchKeyEvent(target, 'keydown', 'a', { repeat: true }); // Another repeated event
       await nextTick();
-      expect(handler).toHaveBeenCalledTimes(1);
+      expect(handler).toHaveBeenCalledTimes(1); // Still should NOT be called again
 
-      dispatchKeyEvent(target, 'keyup', 'a'); // Release
+      // Release the key and press again (new, non-repeated event)
+      dispatchKeyEvent(target, 'keyup', 'a');
       await nextTick();
-      dispatchKeyEvent(target, 'keydown', 'a'); // New press, should trigger
+      dispatchKeyEvent(target, 'keydown', 'a'); // New press (event.repeat is false)
       await nextTick();
-      expect(handler).toHaveBeenCalledTimes(2);
+      expect(handler).toHaveBeenCalledTimes(2); // Should be called for the new non-repeated event
     });
 
     it('should call preventDefault and stopPropagation if specified', async () => {
