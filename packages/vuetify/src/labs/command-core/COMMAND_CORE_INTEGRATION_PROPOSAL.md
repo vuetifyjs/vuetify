@@ -92,7 +92,7 @@ Target components (e.g., `VBtn`, `VListItem`) will receive new optional props:
 props: {
   // ... existing props
   command?: string | ActionDefinition;
-  commandData?: any; // Data to be passed into ActionContext.data when the command is executed
+  commandData?: any;
 }
 ```
 
@@ -144,15 +144,15 @@ To encapsulate common logic for components integrating with `CommandCore`.
 ```typescript
 // Potential structure in '@/labs/command-core/composables/useCommandable.ts'
 import { ref, watch, onUnmounted, computed, type Ref } from 'vue';
-import type { CommandCore, ActionDefinition, ActionContext } from '@/labs/command-core'; // Added ActionContext
+import type { CommandCore, ActionDefinition, ActionContext } from '@/labs/command-core';
 
 export function useCommandable(
-  props: { command?: string | ActionDefinition; commandData?: any }, // Added commandData to props type
+  props: { command?: string | ActionDefinition; commandData?: any },
   core: CommandCore | null,
   componentName: string
 ) {
   const commandProp = computed(() => props.command);
-  const commandDataProp = computed(() => props.commandData); // Watch commandData for context
+  const commandDataProp = computed(() => props.commandData);
   let localActionSourceKey: symbol | null = null;
   const internalActionId = ref<string | undefined>(undefined);
 
@@ -166,7 +166,7 @@ export function useCommandable(
         internalActionId.value = undefined;
       }
       if (typeof newCommand === 'object' && newCommand?.id) {
-        localActionSourceKey = core.registerActionsSource([newCommand]); // Assumes newCommand is an array for registerActionsSource
+        localActionSourceKey = core.registerActionsSource([newCommand as ActionDefinition]);
         internalActionId.value = newCommand.id;
       } else if (typeof newCommand === 'string') {
         internalActionId.value = newCommand;
@@ -174,8 +174,6 @@ export function useCommandable(
         internalActionId.value = undefined;
       }
     }
-  // Watch deep if commandProp is an object to react to its internal changes if necessary,
-  // though replacing the object is cleaner for prop changes.
   }, { immediate: true, deep: computed(() => typeof commandProp.value === 'object').value });
 
   onUnmounted(() => {
@@ -196,7 +194,7 @@ export function useCommandable(
       const eventContext: ActionContext = {
         trigger: `component-${componentName.toLowerCase()}`,
         event: domEvent,
-        data: commandDataProp.value, // Use commandData from props
+        data: commandDataProp.value,
         ...(contextOverrides || {}),
       };
       return core.executeAction(internalActionId.value, eventContext);
@@ -217,14 +215,18 @@ export function useCommandable(
 
 ```typescript
 // Simplified VBtn.tsx setup
-// Props would include: command?: string | ActionDefinition; commandData?: any;
+// Props definition for VBtn would now include:
+// command?: string | ActionDefinition;
+// commandData?: any;
 
-// ... imports ...
+// ... imports (inject, computed, CommandCoreSymbol, useCommandable, useLink, useGroupItem)
+
 const core = inject(CommandCoreSymbol, null);
+// props would be available in setup context
 const { isCommandable, commandAction, executeCommand, effectiveActionId } =
-  useCommandable(props, core, 'VBtn'); // props now includes commandData implicitly
+  useCommandable(props, core, 'VBtn');
 
-// ... (isDisabled computed remains similar, potentially using commandAction.value.canExecute with a constructed context if feasible)
+// ... (link, group, isDisabled computed as before)
 
 // onClick method in VBtn
 function onClick (e: MouseEvent) {
@@ -233,12 +235,12 @@ function onClick (e: MouseEvent) {
   if (isCommandable.value && effectiveActionId.value) {
     emit('click', e);
     if (e.defaultPrevented) return;
-    // executeCommand will now internally use props.commandData
-    executeCommand({ /* any VBtn specific overrides for context */ }, e);
+    // executeCommand will now internally use props.commandData passed to useCommandable
+    executeCommand({ /* any VBtn specific overrides for context.data if needed */ }, e);
   } else {
-    // Original VBtn click logic (link.navigate, group.toggle)
+    // Original VBtn click logic
+    // ... (original logic for link.navigate and group.toggle needs to be preserved here)
     emit('click', e); // Ensure click is still emitted if not a command
-    // ... (original logic for link.navigate and group.toggle)
   }
 }
 ```
@@ -264,7 +266,7 @@ This makes it clear how item-specific data is passed to a generic `deleteUser` a
 4.  **Naming of the `command` prop:** Is `command` the clearest name? Alternatives: `action`, `commandCoreAction`.
 5.  **Default `CommandCoreOptions`**: What should be the sensible defaults if `options.commandCore` is just `true`?
 
-This proposal incorporates the `commandData` prop for better contextual action execution, making `CommandCore` more practical for list-based interactions and context menus.
+This proposal now fully incorporates the `commandData` prop for enhanced contextual action execution.
 
 ---
 *This proposal is a draft and subject to refinement based on team feedback and further analysis.*

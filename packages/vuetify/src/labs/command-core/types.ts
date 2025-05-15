@@ -1,4 +1,4 @@
-import type { Ref } from 'vue'
+import type { Ref, ComputedRef } from 'vue'
 
 // -------------- KeyBinding Types --------------
 
@@ -126,4 +126,27 @@ export interface CommandCoreOptions {
    */
   componentIntegration?: boolean | Record<string, boolean>;
   // Add any other future global CommandCore options here
+}
+
+/**
+ * Defines the public API of the CommandCore service.
+ */
+export interface CommandCorePublicAPI {
+  /** Reactive state indicating if any action is currently being executed. */
+  readonly isLoading: Readonly<Ref<boolean>>;
+  /** Computed property that aggregates all valid actions from all registered sources. */
+  readonly allActions: ComputedRef<Readonly<ActionDefinition<any>[]>>;
+
+  /** Registers a new source of actions. */
+  registerActionsSource(source: ActionsSource): symbol;
+  /** Unregisters an existing action source. */
+  unregisterActionsSource(key: symbol): boolean;
+  /** Retrieves a specific action definition by its ID. */
+  getAction(actionId: string): ActionDefinition<any> | undefined;
+  /** Executes a registered action by its ID. */
+  executeAction(actionId: string, invocationContext?: ActionContext): Promise<void>;
+  /** Checks if component integration is enabled for a specific component name. */
+  isComponentIntegrationEnabled(componentName: string): boolean;
+  /** Cleans up the CommandCore instance. */
+  destroy(): void;
 }

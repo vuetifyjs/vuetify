@@ -1,7 +1,15 @@
 import { ref, computed, shallowRef, onScopeDispose, isRef, readonly, getCurrentInstance } from 'vue';
 import type { Ref, ComputedRef, InjectionKey } from 'vue';
 import { useKeyBindings } from './useKeyBindings';
-import type { ActionDefinition, ActionContext, ActionsSource, RunInTextInputMatcher, KeyBindingHandlerOptions, CommandCoreOptions as CommandCoreInstanceOptions } from './types';
+import type {
+  ActionDefinition,
+  ActionContext,
+  ActionsSource,
+  CommandCoreOptions as CommandCoreInstanceOptions,
+  CommandCorePublicAPI,
+  KeyBindingHandlerOptions,
+  RunInTextInputMatcher
+} from './types';
 import { IS_CLIENT, IS_MAC } from './platform'; // UPDATED IMPORT
 
 /**
@@ -30,7 +38,7 @@ export const CommandCoreSymbol: InjectionKey<CommandCore> = Symbol.for('vuetify:
  * Manages collections of actions, their hotkeys, and execution state.
  * It provides a centralized system for defining and triggering commands within an application.
  */
-class CommandCore {
+class CommandCore implements CommandCorePublicAPI {
   /** Options passed to the CommandCore instance during construction. */
   private readonly options: CommandCoreInstanceOptions;
 
@@ -310,7 +318,7 @@ let _commandCoreInstance: CommandCore | null = null;
  * @param {CommandCoreInstanceOptions} [options] - Optional configuration for CommandCore, used only on first initialization.
  * @returns {CommandCore} The singleton CommandCore instance.
  */
-export function useCommandCore(options?: CommandCoreInstanceOptions): CommandCore {
+export function useCommandCore(options?: CommandCoreInstanceOptions): CommandCorePublicAPI {
   if (!_commandCoreInstance && IS_CLIENT) {
     _commandCoreInstance = new CommandCore(options);
     if (getCurrentInstance()) {
