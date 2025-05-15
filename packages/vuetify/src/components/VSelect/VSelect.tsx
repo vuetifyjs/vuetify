@@ -290,11 +290,10 @@ export const VSelect = genericComponent<new <
       if (!result) return
 
       const [item, index] = result
+      keyboardLookupIndex = index
+      listRef.value?.focus(index)
       if (!props.multiple) {
         model.value = [item]
-      }
-      if (~index) {
-        listRef.value?.focus(index)
       }
     }
 
