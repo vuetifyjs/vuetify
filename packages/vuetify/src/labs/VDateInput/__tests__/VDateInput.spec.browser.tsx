@@ -30,7 +30,7 @@ describe('VDateInput', () => {
     await commands.waitStable('.v-picker')
     expect(screen.getByCSS('.v-picker')).not.toBeVisible()
 
-    const input = screen.getByCSS('input') as HTMLInputElement
+    const input = screen.getByCSS('input')
     await userEvent.type(input, '02/20/2022{Enter}')
 
     expect(model.value).toBeDefined()
@@ -90,7 +90,7 @@ describe('VDateInput', () => {
         await userEvent.keyboard(input)
         await userEvent.keyboard('{Enter}')
 
-        const date = emitted('update:modelValue')![0][0] as Date
+        const date = emitted<Date[]>('update:modelValue')![0][0]
         expect(date.getFullYear()).toBe(expected.year)
         expect(date.getMonth()).toBe(expected.month)
         expect(date.getDate()).toBe(expected.day)
@@ -157,7 +157,7 @@ describe('VDateInput', () => {
       await userEvent.click(element)
       await userEvent.keyboard('{Enter}')
 
-      const date = emitted('update:modelValue')![0][0] as Date
+      const date = emitted<Date[]>('update:modelValue')![0][0]
       expect(date).toBeNull()
     })
   })
@@ -227,7 +227,7 @@ describe('VDateInput', () => {
         />
       )
 
-      const input = getByRole('textbox')
+      const input = getByRole<HTMLInputElement>('textbox')
       expect(input).toHaveAttribute('readonly')
       expect(input.readOnly).toBe(true)
 
