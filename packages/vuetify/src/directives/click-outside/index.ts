@@ -12,6 +12,7 @@ interface ClickOutsideBindingArgs {
 
 interface ClickOutsideDirectiveBinding extends DirectiveBinding {
   value: ((e: MouseEvent) => void) | ClickOutsideBindingArgs
+  modifiers: { mousedown?: boolean }
 }
 
 function defaultConditional () {
@@ -85,11 +86,13 @@ export const ClickOutside = {
   mounted (el: HTMLElement, binding: ClickOutsideDirectiveBinding) {
     const onClick = (e: Event) => directive(e as MouseEvent, el, binding)
     const onMousedown = (e: Event) => {
-      el._clickOutside!.lastMousedownWasOutside = checkEvent(e as MouseEvent, el, binding)
+      // If added mousedown modifier make lastMousedownWasOutside true to pass condition before checkEvent
+      el._clickOutside!.lastMousedownWasOutside = binding.modifiers.mousedown ? true : checkEvent(e as MouseEvent, el, binding)
+      binding.modifiers.mousedown && directive(e as MouseEvent, el, binding)
     }
 
     handleShadow(el, (app: HTMLElement) => {
-      app.addEventListener('click', onClick, true)
+      !binding.modifiers.mousedown && app.addEventListener('click', onClick, true)
       app.addEventListener('mousedown', onMousedown, true)
     })
     if (!el._clickOutside) {
@@ -112,7 +115,7 @@ export const ClickOutside = {
 
       const { onClick, onMousedown } = el._clickOutside[binding.instance!.$.uid]!
 
-      app.removeEventListener('click', onClick, true)
+      !binding.modifiers.mousedown && app.removeEventListener('click', onClick, true)
       app.removeEventListener('mousedown', onMousedown, true)
     })
 
