@@ -4,14 +4,14 @@ module.exports = {
     parser: '@typescript-eslint/parser',
     ecmaVersion: 2020,
     sourceType: 'module',
-    project: './tsconfig.eslint.json',
+    projectService: true,
     tsconfigRootDir: __dirname,
     extraFileExtensions: ['.vue', '.json'],
     suppressDeprecatedPropertyWarnings: true,
   },
   extends: [
     'standard',
-    'plugin:vue/vue3-recommended',
+    'plugin:vue/recommended',
     // 'plugin:vuetify/base',
     'plugin:sonarjs/recommended',
   ],
@@ -22,6 +22,7 @@ module.exports = {
   },
   plugins: [
     '@typescript-eslint',
+    '@stylistic/ts',
     'sonarjs',
     'react',
     'eslint-plugin-local-rules',
@@ -94,7 +95,7 @@ module.exports = {
     'vue/require-default-prop': 'off',
     'vue/require-prop-types': 'off',
     'vue/one-component-per-file': 'off',
-    'vue/custom-event-name-casing': ['error', { ignores: ['/^[a-z]+(?:-[a-z]+)*:[a-z]+(?:-[a-z]+)*$/u'] }],
+    'vue/custom-event-name-casing': ['error', 'camelCase', { ignores: ['/^[a-z]+(?:-[a-z]+)*:[a-z]+(?:-[a-z]+)*$/u'] }],
     'vue/multi-word-component-names': 'off',
 
     'vue/attributes-order': ['error', {
@@ -137,6 +138,7 @@ module.exports = {
     },
     {
       files: ['**/*.ts', '**/*.tsx'],
+      parser: '@typescript-eslint/parser',
       rules: {
         // Can't overload function exports with this enabled
         'import/export': 'off',
@@ -145,13 +147,13 @@ module.exports = {
         'no-undef': 'off',
 
         quotes: 'off',
-        '@typescript-eslint/quotes': ['error', 'single', {
+        '@stylistic/ts/quotes': ['error', 'single', {
           avoidEscape: true,
           allowTemplateLiterals: true,
         }],
 
         indent: 'off',
-        '@typescript-eslint/indent': ['error', 2, {
+        '@stylistic/ts/indent': ['error', 2, {
           ...require('eslint-config-standard').rules.indent[2],
           ignoredNodes: [...require('eslint-config-standard').rules.indent[2].ignoredNodes, 'TSTypeParameterInstantiation'],
           flatTernaryExpressions: true,
@@ -159,7 +161,7 @@ module.exports = {
         }],
 
         'func-call-spacing': 'off',
-        '@typescript-eslint/func-call-spacing': require('eslint-config-standard').rules['func-call-spacing'],
+        '@stylistic/ts/func-call-spacing': require('eslint-config-standard').rules['func-call-spacing'],
 
         // Handled by tsc
         'no-redeclare': 'off',
@@ -173,9 +175,7 @@ module.exports = {
         // Enabled in tsconfig
         'no-unused-vars': 'off',
 
-        '@typescript-eslint/prefer-namespace-keyword': 'error',
-        '@typescript-eslint/adjacent-overload-signatures': 'error',
-        '@typescript-eslint/member-delimiter-style': ['error', {
+        '@stylistic/ts/member-delimiter-style': ['error', {
           multiline: {
             delimiter: 'none',
           },
@@ -183,9 +183,12 @@ module.exports = {
             delimiter: 'comma',
           },
         }],
+        '@stylistic/ts/type-annotation-spacing': 'error',
+
+        '@typescript-eslint/prefer-namespace-keyword': 'error',
+        '@typescript-eslint/adjacent-overload-signatures': 'error',
         // '@typescript-eslint/ban-types': 'error',
         '@typescript-eslint/member-ordering': 'error',
-        '@typescript-eslint/type-annotation-spacing': 'error',
         '@typescript-eslint/no-inferrable-types': 'error',
         '@typescript-eslint/unified-signatures': 'error',
         '@typescript-eslint/no-invalid-this': 'error',
@@ -250,6 +253,8 @@ module.exports = {
     },
     {
       files: '**/*.json',
+      parser: '@typescript-eslint/parser',
+      extends: ['plugin:@typescript-eslint/disable-type-checked'],
       rules: {
         quotes: ['error', 'double'],
         'comma-dangle': ['error', 'never'],

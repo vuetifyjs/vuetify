@@ -114,7 +114,7 @@ export const VImg = genericComponent<VImgSlots>()({
   },
 
   setup (props, { emit, slots }) {
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.color)
     const { roundedClasses } = useRounded(props)
     const vm = getCurrentInstance('VImg')
 
@@ -244,7 +244,7 @@ export const VImg = genericComponent<VImgSlots>()({
       poll()
     }
 
-    const containClasses = computed(() => ({
+    const containClasses = toRef(() => ({
       'v-img__img--cover': props.cover,
       'v-img__img--contain': !props.cover,
     }))

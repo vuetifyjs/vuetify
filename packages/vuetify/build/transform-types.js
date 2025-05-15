@@ -1,6 +1,6 @@
 import fg from 'fast-glob'
 import fs from 'node:fs/promises'
-import { codeTransform } from './rollup.types.config.js'
+import { codeTransform } from './types-code-transform.js'
 import path from 'upath'
 
 const files = fg.sync('lib/**/*.d.ts')

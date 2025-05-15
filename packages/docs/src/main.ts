@@ -10,7 +10,6 @@ import { createHead } from '@unhead/vue/client'
 import { installVuetify } from '@/plugins/vuetify'
 import { installPinia, pinia } from '@/plugins/pinia'
 import { installGlobalComponents } from '@/plugins/global-components'
-import { installGtag } from '@/plugins/gtag'
 import { installOne } from '@/plugins/one'
 import { installI18n } from '@/plugins/i18n'
 import { useAppStore } from '@/stores/app'
@@ -66,6 +65,11 @@ if (IN_BROWSER) {
     enabled: import.meta.env.VITE_GITHUB_SHA,
 
     sampleRate: 1,
+    integrations: integrations => {
+      return integrations.filter(
+        integration => integration.name !== 'BrowserSession',
+      )
+    },
   })
 }
 
@@ -183,7 +187,6 @@ router.onError((err, to) => {
 })
 
 installGlobalComponents(app)
-installGtag(app, router)
 installI18n(app)
 installPwa(router)
 installPinia(app, router)
