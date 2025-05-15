@@ -636,7 +636,7 @@ describe('VAutocomplete', () => {
   it('should not fire @update:focus twice when clicking bottom of input', async () => {
     const onFocus = vi.fn()
     const { element } = render(() => (
-      <VAutocomplete  onUpdate:focused={ onFocus } />
+      <VAutocomplete onUpdate:focused={ onFocus } />
     ))
 
     await userEvent.click(element, { y: 1 })
