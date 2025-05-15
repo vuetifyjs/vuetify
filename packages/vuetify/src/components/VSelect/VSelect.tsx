@@ -255,19 +255,19 @@ export const VSelect = genericComponent<new <
       const items = displayItems.value
       function findItem () {
         let result = findItemBase()
-        if (result !== undefined) return result
+        if (result) return result
 
         if (keyboardLookupPrefix.at(-1) === keyboardLookupPrefix.at(-2)) {
           // No matches but we have a repeated letter, try the next item with that prefix
           keyboardLookupPrefix = keyboardLookupPrefix.slice(0, -1)
           result = findItemBase()
-          if (result !== undefined) return result
+          if (result) return result
         }
 
         // Still nothing, wrap around to the top
         keyboardLookupIndex = -1
         result = findItemBase()
-        if (result !== undefined) return result
+        if (result) return result
 
         // Still nothing, try just the new letter
         keyboardLookupPrefix = e.key.toLowerCase()
@@ -280,22 +280,21 @@ export const VSelect = genericComponent<new <
             i > keyboardLookupIndex &&
             _item.title.toLowerCase().startsWith(keyboardLookupPrefix)
           ) {
-            keyboardLookupIndex = i
-            return _item
+            return [_item, i] as const
           }
         }
         return undefined
       }
 
-      const item = findItem()
-      if (item !== undefined) {
-        if (!props.multiple) {
-          model.value = [item]
-        }
-        const index = displayItems.value.indexOf(item)
-        if (~index && IN_BROWSER) {
-          listRef.value?.focus(index)
-        }
+      const result = findItem()
+      if (!result) return
+
+      const [item, index] = result
+      if (!props.multiple) {
+        model.value = [item]
+      }
+      if (~index) {
+        listRef.value?.focus(index)
       }
     }
 
