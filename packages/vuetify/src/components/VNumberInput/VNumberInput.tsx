@@ -84,7 +84,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       form.isDisabled.value || form.isReadonly.value
     ))
 
-    const isFocused = shallowRef(false)
+    const isFocused = shallowRef(!!props.focused)
 
     function correctPrecision (val: number, precision = props.precision) {
       const fixed = precision == null
