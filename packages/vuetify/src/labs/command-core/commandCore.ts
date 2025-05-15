@@ -29,10 +29,10 @@ const commandCoreError = (...args: any[]) => console.error(commandCoreLogPrefix,
 // export interface CommandCoreOptions {}
 
 /**
- * Injection key for providing and injecting the CommandCore instance.
- * @type {InjectionKey<CommandCore>}
+ * Injection key for providing and injecting the CommandCore instance's public API.
+ * @type {InjectionKey<CommandCorePublicAPI>}
  */
-export const CommandCoreSymbol: InjectionKey<CommandCore> = Symbol.for('vuetify:command-core');
+export const CommandCoreSymbol: InjectionKey<CommandCorePublicAPI> = Symbol.for('vuetify:command-core');
 
 /**
  * Manages collections of actions, their hotkeys, and execution state.

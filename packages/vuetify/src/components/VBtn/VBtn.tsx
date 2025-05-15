@@ -30,12 +30,14 @@ import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant
 import { Ripple } from '@/directives/ripple'
 
 // Utilities
-import { computed, toDisplayString, toRef, withDirectives } from 'vue'
+import { computed, toDisplayString, toRef, withDirectives, inject } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
 import type { RippleDirectiveBinding } from '@/directives/ripple'
+import { type ActionDefinition as CommandCoreActionDefinition, CommandCoreSymbol } from '@/labs/command-core'
+import { useCommandable } from '@/labs/command-core/composables/useCommandable'
 
 export type VBtnSlots = {
   default: never
@@ -75,6 +77,10 @@ export const makeVBtnProps = propsFactory({
     default: undefined,
   },
 
+  // CommandCore Props
+  command: [String, Object] as PropType<string | CommandCoreActionDefinition>,
+  commandData: null,
+
   ...makeBorderProps(),
   ...makeComponentProps(),
   ...makeDensityProps(),
@@ -99,9 +105,10 @@ export const VBtn = genericComponent<VBtnSlots>()({
 
   emits: {
     'group:selected': (val: { value: boolean }) => true,
+    click: (e: MouseEvent) => true,
   },
 
-  setup (props, { attrs, slots }) {
+  setup (props, { attrs, slots, emit }) {
     const { themeClasses } = provideTheme(props)
     const { borderClasses } = useBorder(props)
     const { densityClasses } = useDensity(props)
@@ -114,6 +121,14 @@ export const VBtn = genericComponent<VBtnSlots>()({
     const { sizeClasses, sizeStyles } = useSize(props)
     const group = useGroupItem(props, props.symbol, false)
     const link = useLink(props, attrs)
+
+    // CommandCore integration
+    const commandCore = inject(CommandCoreSymbol, null)
+    const {
+      isCommandable,
+      executeCommand,
+      effectiveActionId,
+    } = useCommandable(props as any, commandCore, 'VBtn')
 
     const isActive = computed(() => {
       if (props.active !== undefined) {
@@ -153,19 +168,30 @@ export const VBtn = genericComponent<VBtnSlots>()({
     })
 
     function onClick (e: MouseEvent) {
-      if (
-        isDisabled.value ||
-        (link.isLink.value && (
-          e.metaKey ||
-          e.ctrlKey ||
-          e.shiftKey ||
-          (e.button !== 0) ||
-          attrs.target === '_blank'
-        ))
-      ) return
+      if (isDisabled.value) {
+        if (link.isLink.value) {
+          e.preventDefault()
+        }
+        return
+      }
 
-      link.navigate?.(e)
-      group?.toggle()
+      emit('click', e)
+
+      if (e.defaultPrevented) return
+
+      if (link.isLink.value && (e.metaKey || e.ctrlKey || e.shiftKey || (e.button !== 0) || attrs.target === '_blank')) {
+        return;
+      }
+
+      if (isCommandable.value && effectiveActionId.value) {
+        executeCommand({ /* VBtn specific context can be added here if needed */ }, e)
+          .catch((err: any) => {
+            console.error(`[Vuetify VBtn] Command execution failed for action "${effectiveActionId.value}":`, err)
+          })
+      } else {
+        link.navigate?.(e)
+        group?.toggle()
+      }
     }
 
     useSelectLink(link, group?.select)

@@ -19,3 +19,10 @@ export type {
 
 // Platform utils (IS_CLIENT, IS_MAC) are primarily for internal use.
 // export { IS_CLIENT, IS_MAC } from './platform';
+
+// Export new useCommandable composable
+export { useCommandable } from './composables/useCommandable';
+
+// Also export UseCommandableProps from where it's defined if not in types.ts
+// If UseCommandableProps is defined in useCommandable.ts, it needs a separate export line:
+export type { UseCommandableProps } from './composables/useCommandable';
