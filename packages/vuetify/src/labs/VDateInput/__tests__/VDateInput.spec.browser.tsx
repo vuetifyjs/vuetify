@@ -26,7 +26,7 @@ describe('VDateInput', () => {
   it('should not fire @update:focus twice when clicking bottom of input', async () => {
     const onFocus = vi.fn()
     const { element } = render(() => (
-      <VDateInput  onUpdate:focused={ onFocus } />
+      <VDateInput onUpdate:focused={ onFocus } />
     ))
 
     await userEvent.click(element, { y: 1 })
