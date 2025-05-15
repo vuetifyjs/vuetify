@@ -55,11 +55,6 @@ export const makeVTreeviewChildrenProps = propsFactory({
   selectedColor: String,
   selectStrategy: [String, Function, Object] as PropType<SelectStrategyProp>,
   index: Number,
-  parentIndex: Number,
-  depth: {
-    type: Number,
-    default: 0,
-  },
   path: {
     type: Array as PropType<Number[]>,
     default: () => [],
@@ -107,7 +102,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
 
       const treeItemProps = {
         index,
-        depth: props.depth,
+        depth: props.path?.length ?? 0,
         isFirst: index === 0,
         isLast: props.items ? props.items.length - 1 === index : false,
         path: [...props.path, index],
