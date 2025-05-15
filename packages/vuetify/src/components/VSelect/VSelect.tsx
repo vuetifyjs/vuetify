@@ -165,6 +165,7 @@ export const VSelect = genericComponent<new <
     const isFocused = shallowRef(false)
 
     let keyboardLookupPrefix = ''
+    let keyboardLookupIndex = -1
     let keyboardLookupLastTime: number
 
     const displayItems = computed(() => {
@@ -246,11 +247,48 @@ export const VSelect = genericComponent<new <
       const now = performance.now()
       if (now - keyboardLookupLastTime > KEYBOARD_LOOKUP_THRESHOLD) {
         keyboardLookupPrefix = ''
+        keyboardLookupIndex = -1
       }
       keyboardLookupPrefix += e.key.toLowerCase()
       keyboardLookupLastTime = now
 
-      const item = items.value.find(item => item.title.toLowerCase().startsWith(keyboardLookupPrefix))
+      const items = displayItems.value
+      function findItem () {
+        let result = findItemBase()
+        if (result !== undefined) return result
+
+        if (keyboardLookupPrefix.at(-1) === keyboardLookupPrefix.at(-2)) {
+          // No matches but we have a repeated letter, try the next item with that prefix
+          keyboardLookupPrefix = keyboardLookupPrefix.slice(0, -1)
+          result = findItemBase()
+          if (result !== undefined) return result
+        }
+
+        // Still nothing, wrap around to the top
+        keyboardLookupIndex = -1
+        result = findItemBase()
+        if (result !== undefined) return result
+
+        // Still nothing, start a new search with just the new letter
+        keyboardLookupPrefix = e.key.toLowerCase()
+        keyboardLookupIndex = -1
+        return findItemBase()
+      }
+      function findItemBase () {
+        for (let i = 0; i < items.length; i++) {
+          const _item = items[i]
+          if (
+            i > keyboardLookupIndex &&
+            _item.title.toLowerCase().startsWith(keyboardLookupPrefix)
+          ) {
+            keyboardLookupIndex = i
+            return _item
+          }
+        }
+        return undefined
+      }
+
+      const item = findItem()
       if (item !== undefined) {
         if (!props.multiple) {
           model.value = [item]
