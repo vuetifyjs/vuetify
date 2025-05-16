@@ -215,7 +215,6 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       // Allow "-" and {decimal separator} only once
       // Allow "-" only at the start
 
-      console.log(sep, `^-?\\d*${sep}?\\d*$`)
       if (!new RegExp(`^-?\\d*${sep}?\\d*$`).test(potentialNewInputVal)) {
         e.preventDefault()
       }
