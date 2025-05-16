@@ -8,9 +8,8 @@ import type {
   CommandCoreOptions as CommandCoreInstanceOptions,
   CommandCorePublicAPI,
   KeyBindingHandlerOptions,
-  RunInTextInputMatcher
 } from './types';
-import { IS_CLIENT, IS_MAC } from './platform'; // UPDATED IMPORT
+import { IS_CLIENT } from './platform'; // UPDATED IMPORT
 
 /**
  * @file commandCore.ts The core logic for managing, registering, and executing actions,

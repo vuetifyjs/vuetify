@@ -1,7 +1,7 @@
-import { ref, computed, nextTick, watch, reactive, createApp, defineComponent } from 'vue';
+import { ref, computed, nextTick, reactive, createApp, defineComponent } from 'vue';
 import { describe, it, expect, beforeEach, afterEach, vi, type Mocked } from 'vitest';
 import { useCommandable, type UseCommandableProps } from '../useCommandable'; // Adjust path if actual is different
-import type { CommandCorePublicAPI, ActionDefinition, ActionContext, ActionsSource } from '../../types';
+import type { CommandCorePublicAPI, ActionDefinition, ActionsSource } from '../../types';
 
 // --- Test Utils ---
 /**

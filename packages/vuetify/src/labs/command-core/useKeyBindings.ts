@@ -1,6 +1,6 @@
 import { ref, readonly, computed, onScopeDispose, toValue, getCurrentInstance } from 'vue'
 import type { Ref, ComputedRef } from 'vue'
-import type { UseKeyBindingsOptions, KeyBindingInputBlockerFn, KeyFilter, KeyBindingHandlerOptions, KeyBindingTrigger } from './types'
+import type { UseKeyBindingsOptions, KeyBindingInputBlockerFn, KeyBindingHandlerOptions, KeyBindingTrigger } from './types'
 import { IS_CLIENT, IS_MAC } from './platform'
 
 /**

@@ -106,6 +106,8 @@ export interface ActionDefinition<T extends ActionContext = ActionContext> {
   disabled?: boolean | Ref<boolean>
   /** Optional description for the action */
   description?: string
+  /** Optional group name for display in UI like command palettes. */
+  group?: string
 }
 
 /** Represents a source of actions for the CommandCore store. */

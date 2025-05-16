@@ -1,5 +1,5 @@
 // Styles
-import './VHotKey.sass'
+import './VHotKey.scss'
 
 // Composables
 import { makeComponentProps } from '@/composables/component'
@@ -8,7 +8,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeDensityProps, useDensity } from '@/composables/density' // For potential dense prop
 
 // Utilities
-import { computed } from 'vue' // Removed defineComponent as genericComponent handles it
+import { computed, toRef } from 'vue' // Added toRef
 import { genericComponent, propsFactory, useRender } from '@/util'
 // import { parseTrigger } from '../../useKeyBindings' // Removed import
 import { IS_MAC } from '../../platform' // To display platform-specific modifiers
@@ -18,8 +18,7 @@ export const makeVHotKeyProps = propsFactory({
     type: String,
     required: true,
   },
-  // Example of an additional prop, can be expanded
-  dense: Boolean,
+  // dense: Boolean, // Removed custom dense prop, rely on density from makeDensityProps
 
   ...makeComponentProps(),
   ...makeTagProps({ tag: 'div' }), // Default tag, can be span or div
@@ -32,7 +31,7 @@ export const VHotKey = genericComponent()({
   props: makeVHotKeyProps(),
   setup(props, { slots }) {
     provideTheme(props)
-    const { densityClasses } = useDensity(props)
+    const { densityClasses } = useDensity(props, 'v-hot-key')
 
     const keysToRender = computed(() => {
       const rawKeys = props.hotkey.split('+').map(k => k.trim().toLowerCase());
@@ -40,7 +39,7 @@ export const VHotKey = genericComponent()({
       // Order for sorting modifiers display
       const modifierDisplayOrder = ['meta', 'ctrl', 'alt', 'shift'];
       // Aliases that should be treated as 'meta' internally for platform checks
-      const metaAliases = ['meta', 'cmd', 'command', 'super', 'win', 'windows'];
+      const metaAliases = ['meta', 'cmd', 'command', 'super', 'win', 'windows', 'cmdorctrl'];
       // Aliases for ctrl
       const ctrlAliases = ['ctrl', 'control'];
       // Aliases for alt
@@ -61,7 +60,13 @@ export const VHotKey = genericComponent()({
 
       // Deduplicate and sort modifiers based on displayOrder
       const uniqueSortedModifiers = [...new Set(modifiers)].sort((a, b) => {
-        return modifierDisplayOrder.indexOf(a) - modifierDisplayOrder.indexOf(b);
+        // Ensure consistent sort order even if one is not in displayOrder (should not happen with current logic)
+        const indexA = modifierDisplayOrder.indexOf(a);
+        const indexB = modifierDisplayOrder.indexOf(b);
+        if (indexA === -1 && indexB === -1) return 0; // both not found, keep order
+        if (indexA === -1) return 1; // a not found, b comes first
+        if (indexB === -1) return -1; // b not found, a comes first
+        return indexA - indexB;
       });
 
       return [...uniqueSortedModifiers, ...mainKeys].map(key => {

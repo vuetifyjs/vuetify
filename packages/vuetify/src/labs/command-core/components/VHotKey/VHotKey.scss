@@ -1,3 +1,5 @@
+@use 'sass:list'; // Import the sass:list module
+
 // Variables for VHotKey
 // These can be themed or customized further.
 $v-hot-key-kbd-background-color: rgba(var(--v-border-color), 0.08) !default;
@@ -19,7 +21,7 @@ $v-hot-key-separator-font-size: 0.9em !default;
   align-items: center;
   font-family: var(--v-font-family, sans-serif); // Use Vuetify's font family if available
   line-height: 1; // Prevent extra space around kbd elements
-  gap: $v-hot-key-separator-margin; // Use gap for spacing between items if only kbd is direct child
+  gap: list.nth($v-hot-key-separator-margin, 2); // Use the horizontal component for gap
 
   &__item {
     display: inline-flex; // Each item (key + optional separator)
@@ -45,7 +47,7 @@ $v-hot-key-separator-font-size: 0.9em !default;
     // If we go back to direct children: margin: $v-hot-key-separator-margin;
     color: $v-hot-key-separator-color;
     font-size: $v-hot-key-separator-font-size;
-    padding-left: $v-hot-key-separator-margin; // Add space after the kbd element before the plus
+    padding-left: list.nth($v-hot-key-separator-margin, 2); // Add space after the kbd element before the plus
   }
 
   // Density adjustments
@@ -66,9 +68,9 @@ $v-hot-key-separator-font-size: 0.9em !default;
       font-size: $v-hot-key-kbd-font-size * 0.9;
       padding: 1px 4px;
     }
-    gap: $v-hot-key-separator-margin * 0.8;
+    gap: list.nth($v-hot-key-separator-margin, 2) * 0.8;
     .v-hot-key__separator {
-       padding-left: $v-hot-key-separator-margin * 0.8;
+       padding-left: list.nth($v-hot-key-separator-margin, 2) * 0.8;
        font-size: $v-hot-key-separator-font-size * 0.9;
     }
   }
