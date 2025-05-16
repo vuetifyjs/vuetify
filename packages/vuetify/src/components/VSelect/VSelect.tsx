@@ -88,6 +88,7 @@ export const makeSelectProps = propsFactory({
   },
   openOnClear: Boolean,
   itemColor: String,
+  noAutoScroll: Boolean,
 
   ...makeItemsProps({ itemChildren: false }),
 }, 'Select')
@@ -254,7 +255,7 @@ export const VSelect = genericComponent<new <
       if (item !== undefined) {
         model.value = [item]
         const index = displayItems.value.indexOf(item)
-        IN_BROWSER && window.requestAnimationFrame(() => {
+        IN_BROWSER && props.hideSelected && window.requestAnimationFrame(() => {
           index >= 0 && vVirtualScrollRef.value?.scrollToIndex(index)
         })
       }
@@ -319,7 +320,7 @@ export const VSelect = genericComponent<new <
         const index = displayItems.value.findIndex(
           item => model.value.some(s => (props.valueComparator || deepEqual)(s.value, item.value))
         )
-        IN_BROWSER && window.requestAnimationFrame(() => {
+        IN_BROWSER && !props.noAutoScroll && window.requestAnimationFrame(() => {
           index >= 0 && vVirtualScrollRef.value?.scrollToIndex(index)
         })
       }
