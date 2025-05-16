@@ -774,7 +774,7 @@ describe('week numbers with time zone', () => {
   beforeEach(() => vi.stubEnv('TZ', 'Europe/Warsaw'))
   afterEach(() => vi.unstubAllEnvs())
 
-  it('should calculate weeks correctly for DST', async () => {
+  it('should calculate weeks correctly near ST/DST transition', async () => {
     render(VDatePicker, {
       props: {
         showWeek: true,
@@ -786,7 +786,7 @@ describe('week numbers with time zone', () => {
     expect($weeks[2].innerHTML).toBe('15')
   })
 
-  it('should calculate weeks correctly for SDT', async () => {
+  it('should calculate weeks correctly near DST/ST transition', async () => {
     render(VDatePicker, {
       props: {
         showWeek: true,
