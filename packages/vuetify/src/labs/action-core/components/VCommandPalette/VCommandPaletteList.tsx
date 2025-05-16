@@ -3,7 +3,7 @@ import { VIcon } from '@/components/VIcon';
 import { VHotKey } from '../VHotKey/VHotKey';
 import { type ActionDefinition, type ActionContext } from '@/labs/action-core';
 import { genericComponent, propsFactory, useRender } from '@/util';
-import { computed, unref, type PropType, type VNode, Fragment } from 'vue';
+import { unref, type PropType, type VNode } from 'vue';
 
 // Helper to distinguish header items from actions
 function isHeaderItem(item: any): item is { isHeader: true; title: string; id: string } {

@@ -5,9 +5,6 @@ import './VCommandPalette.scss'
 // Components (Vuetify)
 import { VDialog } from '@/components/VDialog'
 import { VTextField } from '@/components/VTextField'
-import { VIcon } from '@/components/VIcon'
-import { VBtn } from '@/components/VBtn'
-import { VHotKey } from '../VHotKey/VHotKey'
 import { VProgressLinear } from '@/components/VProgressLinear'
 import { VCommandPaletteList, type VCommandPaletteListItemScope, type VCommandPaletteListNoResultsScope } from './VCommandPaletteList'
 import { VCommandPaletteHeader } from './VCommandPaletteHeader'
@@ -16,16 +13,12 @@ import { VCommandPaletteSearch } from './VCommandPaletteSearch'
 // Composables (Vuetify and ActionCore)
 import { makeComponentProps } from '@/composables/component'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { ActionCoreSymbol, type ActionDefinition, type ActionContext } from '@/labs/action-core'
+import { ActionCoreSymbol, type ActionDefinition } from '@/labs/action-core'
 import { useCommandPaletteCore, type CommandPaletteListRef } from '../../composables/useCommandPaletteCore' // Added type import
 
 // Utilities
-import { ref, inject, nextTick, type VNode } from 'vue'
+import { ref, inject, type VNode } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
-import { isHeaderItem } from '../../utils' // Import from centralized utils
-
-// Import existing scope types
-import type { VCommandPaletteHeaderProps } from './VCommandPaletteHeader'
 
 // Explicit Slot Type Definitions
 interface VCommandPaletteHeaderScopeProps {

@@ -51,6 +51,7 @@ describe('useKeyBindings', () => {
     if (target.parentNode === document.body) {
       document.body.removeChild(target);
     }
+    vi.clearAllMocks(); // Clear all mocks, including spies
     vi.clearAllTimers();
     vi.useRealTimers();
   });
@@ -61,12 +62,21 @@ describe('useKeyBindings', () => {
 
     const { stop, isListening } = useKeyBindings({ target: window });
     expect(isListening.value).toBe(true);
-    expect(addSpy).toHaveBeenCalledTimes(2); // keydown, keyup
+    // Check for specific listeners added by useKeyBindings
+    expect(addSpy).toHaveBeenCalledWith('keydown', expect.any(Function), expect.any(Object));
+    expect(addSpy).toHaveBeenCalledWith('keyup', expect.any(Function), expect.any(Object));
+    // Ensure only these two were added by this instance, filter out unrelated calls if necessary
+    const relevantAddCalls = addSpy.mock.calls.filter(call => call[0] === 'keydown' || call[0] === 'keyup');
+    expect(relevantAddCalls.length).toBe(2);
 
     stop();
     await nextTick();
     expect(isListening.value).toBe(false);
-    expect(removeSpy).toHaveBeenCalledTimes(2);
+    // Check for specific listeners removed by useKeyBindings
+    expect(removeSpy).toHaveBeenCalledWith('keydown', expect.any(Function), expect.any(Object));
+    expect(removeSpy).toHaveBeenCalledWith('keyup', expect.any(Function), expect.any(Object));
+    const relevantRemoveCalls = removeSpy.mock.calls.filter(call => call[0] === 'keydown' || call[0] === 'keyup');
+    expect(relevantRemoveCalls.length).toBe(2);
 
     addSpy.mockRestore();
     removeSpy.mockRestore();
@@ -232,21 +242,13 @@ describe('useKeyBindings', () => {
       };
       on(testKey, handlerWithEventCapture, { preventDefault: true, stopPropagation: true });
 
-      // Dispatch the event. The actual event object processed by useKeyBindings is this one.
       const dispatchedEvent = dispatchKeyEvent(target, 'keydown', testKey);
       await nextTick();
 
       expect(handler).toHaveBeenCalledTimes(1);
-      // The event received by the handler should be the same instance as the one dispatched and processed.
       expect(receivedEventByHandler).toBe(dispatchedEvent);
       expect(dispatchedEvent.defaultPrevented).toBe(true);
-
-      // For stopPropagation, we can spy on the method of the *dispatchedEvent* object itself,
-      // assuming useKeyBindings calls stopPropagation on the event it receives.
-      // This is more direct than relying on side effects.
-      // However, the spy needs to be attached *before* the event is fully processed by the internal listeners if possible,
-      // or we trust the implementation detail that the original event object has its methods called.
-      // Given our current setup, checking defaultPrevented is the most reliable direct assertion.
+      // stopPropagation is harder to assert directly without a more complex DOM setup or another listener
     });
   });
 
@@ -284,7 +286,7 @@ describe('useKeyBindings', () => {
     it('should trigger handler for a sequence', async () => {
       const { on, currentSequence } = useKeyBindings({ target, sequenceTimeoutDuration: 100 });
       const handler = vi.fn();
-      const unregister = on('g-d-s', handler); // Using '-' as sequence delimiter as per parseTrigger
+      const unregister = on('g-d-s', handler);
 
       dispatchKeyEvent(target, 'keydown', 'g');
       await nextTick();
@@ -296,15 +298,14 @@ describe('useKeyBindings', () => {
       dispatchKeyEvent(target, 'keydown', 's');
       await nextTick();
       expect(handler).toHaveBeenCalledTimes(1);
-      expect(currentSequence.value).toEqual([]); // Sequence should clear after successful trigger
+      expect(currentSequence.value).toEqual([]);
 
-      // Test unregister
       unregister();
       dispatchKeyEvent(target, 'keydown', 'g');
       dispatchKeyEvent(target, 'keydown', 'd');
       dispatchKeyEvent(target, 'keydown', 's');
       await nextTick();
-      expect(handler).toHaveBeenCalledTimes(1); // Should not be called again
+      expect(handler).toHaveBeenCalledTimes(1);
     });
 
     it('should not trigger sequence if timeout occurs mid-sequence', async () => {
@@ -314,7 +315,7 @@ describe('useKeyBindings', () => {
 
       dispatchKeyEvent(target, 'keydown', 'g');
       await nextTick();
-      vi.advanceTimersByTime(101); // Timeout
+      vi.advanceTimersByTime(101);
       dispatchKeyEvent(target, 'keydown', 'd');
       await nextTick();
       expect(handler).not.toHaveBeenCalled();
@@ -325,20 +326,21 @@ describe('useKeyBindings', () => {
     const originalPlatform = typeof navigator !== 'undefined' ? navigator.platform : '';
 
     beforeEach(() => {
-      // Ensure navigator.platform can be changed by tests if they choose to (though vi.mock is preferred)
       if (typeof navigator !== 'undefined') {
         Object.defineProperty(global.navigator, 'platform', {
-          value: originalPlatform, // Default to original for safety before each sub-test
+          value: originalPlatform,
           configurable: true,
           writable: true,
         });
       }
+      // Ensure mocks are reset for platform module before each test in this describe block
+      vi.resetModules();
+      vi.doUnmock('../platform');
     });
 
     afterEach(() => {
       vi.resetModules();
-      vi.doUnmock('../platform'); // Unmock after each test in this suite
-      // Restore original navigator.platform if it was changed by a test directly (fallback)
+      vi.doUnmock('../platform');
       if (typeof navigator !== 'undefined') {
         Object.defineProperty(global.navigator, 'platform', {
           value: originalPlatform,
@@ -353,7 +355,6 @@ describe('useKeyBindings', () => {
         const original = await importOriginal() as any;
         return { ...original, IS_CLIENT: true, IS_MAC: false };
       });
-      vi.resetModules();
       const { useKeyBindings: freshUseKeyBindings } = await import('../useKeyBindings');
       const { on, keys } = freshUseKeyBindings({ target });
 
@@ -372,7 +373,6 @@ describe('useKeyBindings', () => {
         const original = await importOriginal() as any;
         return { ...original, IS_CLIENT: true, IS_MAC: false };
       });
-      vi.resetModules();
       const { useKeyBindings: freshUseKeyBindings } = await import('../useKeyBindings');
       const { on, keys } = freshUseKeyBindings({ target });
 
@@ -391,7 +391,6 @@ describe('useKeyBindings', () => {
         const original = await importOriginal() as any;
         return { ...original, IS_CLIENT: true, IS_MAC: true };
       });
-      vi.resetModules();
       const { useKeyBindings: freshUseKeyBindingsMac } = await import('../useKeyBindings');
       const { on, keys } = freshUseKeyBindingsMac({ target });
 
@@ -400,19 +399,23 @@ describe('useKeyBindings', () => {
       on('meta+s', metaHandler);
       on('ctrl+s', ctrlHandler);
 
+      // Test Meta+S on Mac
       dispatchKeyEvent(target, 'keydown', 'Meta');
       dispatchKeyEvent(target, 'keydown', 's');
       await nextTick();
       expect(metaHandler).toHaveBeenCalledTimes(1);
-      expect(ctrlHandler).not.toHaveBeenCalled();
+      expect(ctrlHandler).not.toHaveBeenCalled(); // This was the failing assertion
       expect(keys.meta.value).toBe(true);
       expect(keys.s.value).toBe(true);
       dispatchKeyEvent(target, 'keyup', 'Meta');
       dispatchKeyEvent(target, 'keyup', 's');
       await nextTick();
+
+      // Clear mocks before next set of dispatches
       metaHandler.mockClear();
       ctrlHandler.mockClear();
 
+      // Test Ctrl+S on Mac
       dispatchKeyEvent(target, 'keydown', 'Control');
       dispatchKeyEvent(target, 'keydown', 's');
       await nextTick();
@@ -447,11 +450,9 @@ describe('useKeyBindings', () => {
       const { on } = useKeyBindings({ target });
       const handler = vi.fn();
       on('a', handler);
-
       inputElement.focus();
-      await nextTick(); // Allow DOM to update after focus
+      await nextTick();
       expect(document.activeElement).toBe(inputElement);
-
       dispatchKeyEvent(target, 'keydown', 'a');
       await nextTick();
       expect(handler).not.toHaveBeenCalled();
@@ -461,11 +462,9 @@ describe('useKeyBindings', () => {
       const { on } = useKeyBindings({ target });
       const handler = vi.fn();
       on('a', handler);
-
       textareaElement.focus();
-      await nextTick(); // Allow DOM to update after focus
+      await nextTick();
       expect(document.activeElement).toBe(textareaElement);
-
       dispatchKeyEvent(target, 'keydown', 'a');
       await nextTick();
       expect(handler).not.toHaveBeenCalled();
@@ -475,11 +474,14 @@ describe('useKeyBindings', () => {
       const { on } = useKeyBindings({ target });
       const handler = vi.fn();
       on('a', handler);
-
-      divElement.focus();
-      document.body.focus();
-      expect(document.activeElement).toBe(document.body);
-
+      divElement.focus(); // Focus the div, not a standard input
+      // In JSDOM, if div is not focusable or focus moves, activeElement might revert to body
+      // For robustness, ensure the div IS the active element if it's focusable, or test against body
+      if (document.activeElement !== divElement) {
+        // Fallback: if div didn't take focus, ensure body is what we test against if that's JSDOM's behavior
+        document.body.focus();
+      }
+      expect(document.activeElement === divElement || document.activeElement === document.body).toBe(true);
       dispatchKeyEvent(target, 'keydown', 'a');
       await nextTick();
       expect(handler).toHaveBeenCalledTimes(1);
@@ -489,12 +491,10 @@ describe('useKeyBindings', () => {
       const { on } = useKeyBindings({ target });
       const handler = vi.fn();
       on('a', handler);
-
       if (document.activeElement && (document.activeElement as HTMLElement).blur) {
         (document.activeElement as HTMLElement).blur();
       }
       expect(document.activeElement).toBe(document.body);
-
       dispatchKeyEvent(target, 'keydown', 'a');
       await nextTick();
       expect(handler).toHaveBeenCalledTimes(1);
@@ -504,10 +504,8 @@ describe('useKeyBindings', () => {
       const { on } = useKeyBindings({ target });
       const handler = vi.fn();
       on('a', handler, { ignoreInputBlocker: true });
-
       inputElement.focus();
       expect(document.activeElement).toBe(inputElement);
-
       dispatchKeyEvent(target, 'keydown', 'a');
       await nextTick();
       expect(handler).toHaveBeenCalledTimes(1);
@@ -518,11 +516,9 @@ describe('useKeyBindings', () => {
       const { on } = useKeyBindings({ target, inputBlockerFn: customBlocker });
       const handler = vi.fn();
       on('a', handler);
-
       inputElement.focus();
-      await nextTick(); // Allow DOM to update after focus
+      await nextTick();
       expect(document.activeElement).toBe(inputElement);
-
       dispatchKeyEvent(target, 'keydown', 'a');
       await nextTick();
       expect(handler).not.toHaveBeenCalled();
@@ -536,21 +532,16 @@ describe('useKeyBindings', () => {
       const handler = vi.fn();
       const debounceTime = 100;
       on('a', handler, { debounce: debounceTime });
-
       dispatchKeyEvent(target, 'keydown', 'a');
       dispatchKeyEvent(target, 'keydown', 'a');
       dispatchKeyEvent(target, 'keydown', 'a');
-      await nextTick(); // Allow events to queue if needed
-      expect(handler).not.toHaveBeenCalled(); // Should not be called immediately
-
+      await nextTick();
+      expect(handler).not.toHaveBeenCalled();
       vi.advanceTimersByTime(debounceTime - 1);
-      expect(handler).not.toHaveBeenCalled(); // Still not called
-
+      expect(handler).not.toHaveBeenCalled();
       vi.advanceTimersByTime(1);
-      await nextTick(); // Allow promise microtasks from setTimeout to resolve
-      expect(handler).toHaveBeenCalledTimes(1); // Called once after debounce period
-
-      // Another set of calls
+      await nextTick();
+      expect(handler).toHaveBeenCalledTimes(1);
       dispatchKeyEvent(target, 'keydown', 'a');
       dispatchKeyEvent(target, 'keydown', 'a');
       await nextTick();
@@ -564,41 +555,26 @@ describe('useKeyBindings', () => {
       const handler = vi.fn();
       const throttleTime = 100;
       on('a', handler, { throttle: throttleTime });
-
-      // Call 1: Executes immediately (t=0)
-      dispatchKeyEvent(target, 'keydown', 'a'); // #1
+      dispatchKeyEvent(target, 'keydown', 'a');
       await nextTick();
       expect(handler).toHaveBeenCalledTimes(1);
-
-      // Call 2 (t=10) & Call 3 (t=60): During cooldown of Call 1. Only Call 3 (last one) will be queued.
       dispatchKeyEvent(target, 'keydown', 'a');
       dispatchKeyEvent(target, 'keydown', 'a');
       await nextTick();
-      expect(handler).toHaveBeenCalledTimes(1); // Still 1
-
-      // Advance time for queued Call 3 to fire. Fires at t=0 + 100 = 100.
-      vi.advanceTimersByTime(throttleTime + 1); // Advance to t=101. Queued Call 3 fires.
+      expect(handler).toHaveBeenCalledTimes(1);
+      vi.advanceTimersByTime(throttleTime + 1);
       await nextTick();
-      expect(handler).toHaveBeenCalledTimes(2); // #2 (Queued Call 3 executed)
-                                              // lastCallTime is now ~101 for the throttle logic.
-
-      // Call 4: (dispatched at t=101, immediately after #2 fires)
-      // Logic: now=101, lastCallTime=101. remainingTime = 100 - (101-101) = 100. Queues for t=101+100=201.
+      expect(handler).toHaveBeenCalledTimes(2);
       dispatchKeyEvent(target, 'keydown', 'a');
       await nextTick();
-      expect(handler).toHaveBeenCalledTimes(2); // Still 2, Call 4 is queued.
-
-      // Advance time for queued Call 4 to fire.
-      vi.advanceTimersByTime(throttleTime + 1); // Advance to t=101+101=202. Queued Call 4 fires.
+      expect(handler).toHaveBeenCalledTimes(2);
+      vi.advanceTimersByTime(throttleTime + 1);
       await nextTick();
-      expect(handler).toHaveBeenCalledTimes(3); // #3 (Queued Call 4 executed)
-                                              // lastCallTime is now ~202.
-
-      // Call 5: After all cooldowns, should be immediate again.
-      vi.advanceTimersByTime(throttleTime + 1); // Ensure well past last execution (t=202 + 101 = 303)
+      expect(handler).toHaveBeenCalledTimes(3);
+      vi.advanceTimersByTime(throttleTime + 1);
       dispatchKeyEvent(target, 'keydown', 'a');
       await nextTick();
-      expect(handler).toHaveBeenCalledTimes(4); // #4 (Immediate call)
+      expect(handler).toHaveBeenCalledTimes(4);
     });
 
     it('debounce should take precedence over throttle', async () => {
@@ -607,18 +583,15 @@ describe('useKeyBindings', () => {
       const debounceTime = 100;
       const throttleTime = 50;
       on('a', handler, { debounce: debounceTime, throttle: throttleTime });
-
       dispatchKeyEvent(target, 'keydown', 'a');
       dispatchKeyEvent(target, 'keydown', 'a');
       await nextTick();
-      expect(handler).not.toHaveBeenCalled(); // Debounce is active
-
+      expect(handler).not.toHaveBeenCalled();
       vi.advanceTimersByTime(throttleTime);
-      expect(handler).not.toHaveBeenCalled(); // Still debouncing, throttle hasn't kicked in
-
+      expect(handler).not.toHaveBeenCalled();
       vi.advanceTimersByTime(debounceTime - throttleTime + 1);
       await nextTick();
-      expect(handler).toHaveBeenCalledTimes(1); // Called once due to debounce
+      expect(handler).toHaveBeenCalledTimes(1);
     });
   });
 
@@ -626,36 +599,22 @@ describe('useKeyBindings', () => {
     it('should call stop() when the component scope is disposed', async () => {
       const removeEventListenerSpy = vi.spyOn(window, 'removeEventListener');
       let bindingsInstance: ReturnType<typeof useKeyBindings> | null = null;
-
       const setupFn = () => {
         bindingsInstance = useKeyBindings({ target: window });
       };
-
       const { unmount } = mountTestComponent(setupFn);
-
       expect(bindingsInstance).not.toBeNull();
       expect(bindingsInstance!.isListening.value).toBe(true);
-
       const initialRemoveCallCount = removeEventListenerSpy.mock.calls.length;
-
       unmount();
       await nextTick();
-
       expect(bindingsInstance!.isListening.value).toBe(false);
-      expect(removeEventListenerSpy.mock.calls.length).toBeGreaterThanOrEqual(initialRemoveCallCount + 2);
-
-      let keydownRemoved = false;
-      let keyupRemoved = false;
-      removeEventListenerSpy.mock.calls.forEach(call => {
-        if (call[0] === 'keydown') keydownRemoved = true;
-        if (call[0] === 'keyup') keyupRemoved = true;
-      });
-      expect(keydownRemoved).toBe(true);
-      expect(keyupRemoved).toBe(true);
-
+      // Check that the specific listeners were removed
+      const relevantRemoveCalls = removeEventListenerSpy.mock.calls.slice(initialRemoveCallCount);
+      expect(relevantRemoveCalls.some(call => call[0] === 'keydown')).toBe(true);
+      expect(relevantRemoveCalls.some(call => call[0] === 'keyup')).toBe(true);
+      expect(relevantRemoveCalls.length).toBe(2); // Exactly two relevant calls
       removeEventListenerSpy.mockRestore();
     });
   });
-
-  // TODO: Re-check platform specific meta/ctrl normalization if better mocking for IS_MAC is found
 });

@@ -1,6 +1,6 @@
 import { computed, ref, watch, nextTick, unref, shallowRef, type Ref } from 'vue'
 import { useProxiedModel } from '@/composables/proxiedModel'
-import { type ActionCorePublicAPI, type ActionDefinition, type ActionContext } from '@/labs/action-core'
+import { type ActionCorePublicAPI, type ActionDefinition } from '@/labs/action-core'
 import { useId } from 'vue'
 import type { VTextField } from '@/components/VTextField' // For searchInputRef type
 import { isHeaderItem, defaultGroupPriorities, UNGROUPED_PRIORITY, UNGROUPED_TITLE, isPromise, log } from '../utils'
@@ -179,7 +179,8 @@ export function useCommandPaletteCore(
     try {
       await actionCore.executeAction(action.id, { trigger: 'command-palette' })
       if (props.closeOnExecute) {
-        isActive.value = false // This will use the refined setter logic
+        isActive.value = false
+        emit('update:modelValue', false)
       }
     } catch (err) {
       log('error', 'CommandPaletteCore', `execute action "${action.id}"`, err)
@@ -191,7 +192,7 @@ export function useCommandPaletteCore(
 
     isLoadingSubItems.value = true
     try {
-      const rawSubActions = action.subItems()
+      const rawSubActions = action.subItems({})
       let subActionsResult
 
       if (isPromise(rawSubActions)) {
@@ -335,6 +336,7 @@ export function useCommandPaletteCore(
         await navigateBack()
       } else {
         isActive.value = false
+        emit('update:modelValue', false)
       }
     }
   }

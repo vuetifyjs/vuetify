@@ -3,7 +3,7 @@ import { VIcon } from '@/components/VIcon'
 import { VHotKey } from '../VHotKey/VHotKey' // Assuming VHotKey is in a relative path
 import { type ActionDefinition, type ActionContext } from '@/labs/action-core' // Assuming types are here
 import { genericComponent, propsFactory, useRender } from '@/util'
-import { unref, type PropType, type VNode, type VNodeChild, Fragment } from 'vue'
+import { unref, type PropType, type VNode, type VNodeChild } from 'vue'
 
 // Props for VCommandPaletteItem
 export const makeVCommandPaletteItemProps = propsFactory({

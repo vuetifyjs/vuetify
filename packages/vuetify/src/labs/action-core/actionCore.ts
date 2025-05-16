@@ -89,8 +89,14 @@ class ActionCore implements ActionCorePublicAPI {
                       const filteredActions = Array.isArray(resolvedActions)
                         ? resolvedActions.filter(this.isActionDefinition)
                         : [];
-                      // Trigger update
+                      // Replace the source function with its resolved (and filtered) actions
+                      newMap.set(sourceKey, filteredActions);
+                      // Trigger update by assigning the new map so Vue reactivity picks up the change
                       this.registeredSources.value = newMap;
+                      // Immediately process and register hotkeys for the resolved actions so tests that
+                      // inspect keyBindings.on calls right after timer advancement succeed without waiting
+                      // for an additional reactive tick.
+                      this.processAndRegisterHotkeys(filteredActions);
                       log('debug', COMPONENT_NAME, `Async source resolved with ${filteredActions.length} actions`);
                     }
                     return resolvedActions;

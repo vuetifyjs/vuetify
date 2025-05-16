@@ -79,7 +79,10 @@ export const makeVBtnProps = propsFactory({
 
   // ActionCore Props
   command: [String, Object] as PropType<string | ActionDefinition>,
-  commandData: null,
+  commandData: {
+    type: Object as PropType<Record<string, unknown> | undefined>,
+    default: undefined,
+  },
 
   ...makeBorderProps(),
   ...makeComponentProps(),
@@ -183,15 +186,22 @@ export const VBtn = genericComponent<VBtnSlots>()({
         return;
       }
 
-      if (isCommandable.value && effectiveActionId.value) {
-        executeCommand({ /* VBtn specific context can be added here if needed */ }, e)
-          .catch((err: any) => {
-            console.error(`[Vuetify VBtn] Command execution failed for action "${effectiveActionId.value}":`, err)
+if (isCommandable.value && effectiveActionId.value) {
+        executeCommand({ data: props.commandData }, e)
+          .then(() => {
+            // keep group selection logic identical to the non-command path
+            group?.toggle()
           })
-      } else {
-        link.navigate?.(e)
-        group?.toggle()
-      }
+          .catch(err => {
+            console.error(
+              `[Vuetify VBtn] Command execution failed for action "${effectiveActionId.value}":`,
+              err,
+            )
+          })
+       } else {
+         link.navigate?.(e)
+         group?.toggle()
+       }
     }
 
     useSelectLink(link, group?.select)

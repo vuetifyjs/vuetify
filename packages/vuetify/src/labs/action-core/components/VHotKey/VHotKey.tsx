@@ -9,10 +9,9 @@ import { makeDensityProps, useDensity } from '@/composables/density'
 import { ActionCoreSymbol } from '@/labs/action-core'
 
 // Utilities
-import { computed, inject, ref, watch } from 'vue'
+import { computed, inject, ref, watch, nextTick } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 import { IS_MAC } from '../../platform'
-import type { ActionDefinition } from '../../types'
 
 export const makeVHotKeyProps = propsFactory({
   hotkey: String,
@@ -34,14 +33,28 @@ export const VHotKey = genericComponent()({
 
     const internalHotkeyString = ref<string | undefined>(props.hotkey)
 
-    watch(() => props.actionId, (newActionId) => {
+    watch(() => props.actionId, async (newActionId) => {
       if (newActionId && actionCore) {
-        const action = actionCore.getAction(newActionId)
-        if (action?.hotkey) {
-          internalHotkeyString.value = Array.isArray(action.hotkey) ? action.hotkey[0] : action.hotkey;
-        } else {
-          internalHotkeyString.value = undefined;
+        const tryGetAction = async () => {
+          const action = actionCore.getAction(newActionId)
+          if (action?.hotkey) {
+            internalHotkeyString.value = Array.isArray(action.hotkey) ? action.hotkey[0] : action.hotkey;
+          } else if (action === undefined) {
+            // Action not found yet, wait for next tick and try again
+            await nextTick()
+            const retryAction = actionCore.getAction(newActionId)
+            if (retryAction?.hotkey) {
+              internalHotkeyString.value = Array.isArray(retryAction.hotkey) ? retryAction.hotkey[0] : retryAction.hotkey;
+            } else {
+              // Fallback to explicit prop hotkey if provided
+              internalHotkeyString.value = props.hotkey;
+              console.warn(`[VHotKey] Action with id "${newActionId}" has no hotkey defined. Falling back to explicit hotkey prop if available.`)
+            }
+          } else {
+            internalHotkeyString.value = props.hotkey;
+          }
         }
+        await tryGetAction()
       } else if (!newActionId) {
         internalHotkeyString.value = props.hotkey;
       }
@@ -91,10 +104,17 @@ export const VHotKey = genericComponent()({
         return indexA - indexB;
       });
 
+      const treatCtrlAsMeta = IS_MAC &&
+        uniqueSortedModifiers.includes('ctrl') &&
+        !uniqueSortedModifiers.includes('meta') &&
+        uniqueSortedModifiers.length === 1 &&
+        mainKeys.length === 1 && /^[a-z]$/.test(mainKeys[0]);
+
       return [...uniqueSortedModifiers, ...mainKeys].map(key => {
         if (IS_MAC && key === 'meta') return '⌘';
+        if (IS_MAC && key === 'ctrl' && treatCtrlAsMeta) return '⌘';
         if (!IS_MAC && key === 'meta') return 'Ctrl';
-        if (key === 'ctrl') return 'Ctrl'; // This handles explicit 'ctrl' or normalized 'meta' on non-Mac
+        if (key === 'ctrl') return 'Ctrl'; // Default display for ctrl on all platforms
         if (key === 'alt') return 'Alt';
         if (key === 'shift') return 'Shift';
 

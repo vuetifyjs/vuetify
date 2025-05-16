@@ -96,7 +96,7 @@ export interface ActionDefinition<T extends ActionContext = ActionContext> {
   /** Optional function to determine if the action can be executed. */
   canExecute?: (context: T) => boolean
   /** If this action represents a group, this function should return its sub-items. */
-  subItems?: (context?: T) => ActionDefinition<T>[] | Promise<ActionDefinition<T>[]>
+  subItems?: (context: T) => ActionDefinition<T>[] | Promise<ActionDefinition<T>[]>
   /** Custom data associated with the action. */
   meta?: Record<string, any>
   /** Order for sorting, lower numbers come first. */
