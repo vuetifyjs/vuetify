@@ -351,4 +351,20 @@ describe.skip('VDatePicker.ts', () => {
     expect(wrapper.findAll('.v-date-picker-table--month tbody button.v-date-picker--last-in-range')
       .exists()).toBe(true)
   })
+
+  it('adds data-today attribute to the correct date element', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        value: '2025-02',
+        type: 'month',
+      },
+    })
+    
+    // Find the element that represents today's date
+    const todayElement = wrapper.find('[data-today="true"]')
+
+    // Assertions
+    expect(todayElement.exists()).toBe(true) // It should exist
+    expect(todayElement.attributes('data-today')).toBe('true') // Check attribute value
+  })
 })
