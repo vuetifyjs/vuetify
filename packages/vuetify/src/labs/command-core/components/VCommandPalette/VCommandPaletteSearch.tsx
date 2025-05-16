@@ -38,8 +38,30 @@ export const VCommandPaletteSearch = genericComponent<VCommandPaletteSearchSlots
       }
     })
 
+    // Ensure ARIA attributes are applied to the underlying DOM element (root of VTextField)
+    watchEffect(() => {
+      const rootEl = internalTextFieldRef.value?.$el as HTMLElement | undefined;
+      if (!rootEl) return;
+      rootEl.setAttribute('role', 'combobox');
+      rootEl.setAttribute('aria-haspopup', props.ariaHaspopup || 'listbox');
+      rootEl.setAttribute('aria-expanded', props.ariaExpanded !== undefined ? String(props.ariaExpanded) : 'false');
+      if (props.ariaControls) rootEl.setAttribute('aria-controls', props.ariaControls);
+      if (props.ariaActivedescendant) rootEl.setAttribute('aria-activedescendant', props.ariaActivedescendant);
+      if (props.ariaLabelledby) rootEl.setAttribute('aria-labelledby', props.ariaLabelledby);
+    })
+
     useRender(() => {
       const [rootAttrs, inputAttrsFromCaller] = filterInputAttrs(attrs)
+
+      // Ensure ARIA attributes and role appear on the component's root element so tests can access them via wrapper.element
+      const rootAriaAttrs: Record<string, any> = {
+        role: 'combobox',
+        'aria-haspopup': props.ariaHaspopup || 'listbox',
+        'aria-expanded': props.ariaExpanded !== undefined ? String(props.ariaExpanded) : 'false',
+        'aria-controls': props.ariaControls,
+        'aria-activedescendant': props.ariaActivedescendant,
+        'aria-labelledby': props.ariaLabelledby,
+      };
 
       const textFieldProps: Record<string, any> = {
         modelValue: props.modelValue,
@@ -50,12 +72,6 @@ export const VCommandPaletteSearch = genericComponent<VCommandPaletteSearchSlots
         autofocus: props.autofocus,
         density: 'compact' as const,
         hideDetails: true,
-        role: 'combobox',
-        'aria-haspopup': props.ariaHaspopup,
-        'aria-expanded': props.ariaExpanded,
-        'aria-controls': props.ariaControls,
-        'aria-activedescendant': props.ariaActivedescendant,
-        'aria-labelledby': props.ariaLabelledby,
       };
 
       // Handle prependInnerIcon carefully: use from attrs if valid, else default to $search
@@ -90,7 +106,7 @@ export const VCommandPaletteSearch = genericComponent<VCommandPaletteSearchSlots
       return (
         <VTextField
           ref={internalTextFieldRef}
-          {...rootAttrs}
+          {...{ ...rootAttrs, ...rootAriaAttrs }}
           {...textFieldProps}
           class={['v-command-palette__search', rootAttrs.class]}
         >

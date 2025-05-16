@@ -8,6 +8,11 @@ $v-command-palette-box-shadow: var(--v-shadow-elevation-8, inherit) !default; //
 $v-command-palette-list-padding: 8px 0 !default;
 $v-command-palette-item-selected-background-color: rgba(var(--v-theme-primary), 0.1) !default;
 
+// Custom variables for compact styling
+$v-command-palette-input-padding-y: 6px !default;
+$v-command-palette-dense-list-item-height: 40px !default;
+$v-command-palette-compact-list-item-height: 32px !default;
+
 .v-command-palette-dialog {
   // For VDialog specific overrides if needed, like alignment
   // By default VDialog is centered. A command palette often appears at the top.
@@ -27,6 +32,7 @@ $v-command-palette-item-selected-background-color: rgba(var(--v-theme-primary), 
   }
 }
 
+// Main component container
 .v-command-palette {
   background-color: $v-command-palette-background-color;
   border-radius: $v-command-palette-border-radius;
@@ -36,45 +42,63 @@ $v-command-palette-item-selected-background-color: rgba(var(--v-theme-primary), 
   overflow: hidden; // Ensure contents fit within rounded corners
   max-height: 70vh; // Prevent palette from becoming too tall
 
+  // Search container - leverage Vuetify's classes
   &__search {
     padding: 8px 12px; // Padding around the text field
     border-bottom: 1px solid rgba(var(--v-border-color), var(--v-border-opacity));
 
-    .v-input__control .v-field__input {
-        padding-top: 6px; // Adjust VTextField internal padding if needed for compact look
-        padding-bottom: 6px;
+    // Use component-level modifier instead of deep selector chains
+    &--compact {
+      .v-field {
+        &__input {
+          padding-top: $v-command-palette-input-padding-y;
+          padding-bottom: $v-command-palette-input-padding-y;
+        }
+      }
     }
   }
 
+  // Loader area
+  &__loader {
+    width: 100%;
+  }
+
+  // List container
   &__list {
     padding: $v-command-palette-list-padding;
     flex: 1 1 auto; // Allow list to grow and shrink
     overflow-y: auto; // Make list scrollable if actions exceed max-height
+  }
 
-    .v-list-item {
-      // Specific styling for items in the command palette
-      // For example, to ensure dense/comfortable looks good
-      &--density-default {
-        min-height: 40px; // Adjust as needed
-        .v-list-item-title {
-            font-size: 0.875rem;
-        }
+  // Item style customizations - use BEM pattern
+  &__item {
+    // Define variants at the component level
+    &--selected,
+    &.v-list-item--active {
+      background-color: $v-command-palette-item-selected-background-color;
+      color: rgb(var(--v-theme-primary));
+
+      // Target direct children without deep nesting
+      > .v-list-item__content .v-icon,
+      > .v-list-item__append .v-hot-key .v-hot-key__key {
+        color: inherit;
       }
-      &--density-compact {
-        min-height: 32px;
-         .v-list-item-title {
-            font-size: 0.8125rem;
-        }
+    }
+
+    // Density modifiers at component level
+    &--dense {
+      min-height: $v-command-palette-dense-list-item-height;
+
+      .v-list-item-title {
+        font-size: 0.875rem;
       }
+    }
 
-      &.v-command-palette__item--selected,
-      &.v-list-item--active { // Handle Vuetify's active state if it gets applied
-        background-color: $v-command-palette-item-selected-background-color;
-        color: rgb(var(--v-theme-primary)); // Highlight text color too
+    &--compact {
+      min-height: $v-command-palette-compact-list-item-height;
 
-        .v-icon, .v-hot-key .v-hot-key__key {
-          color: inherit; // Ensure icons and hotkeys inherit selected color
-        }
+      .v-list-item-title {
+        font-size: 0.8125rem;
       }
     }
   }
@@ -84,6 +108,7 @@ $v-command-palette-item-selected-background-color: rgba(var(--v-theme-primary), 
     color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity));
     font-style: italic;
     text-align: center;
+    padding: 12px;
   }
 
   // Optional footer styling if we add one

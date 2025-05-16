@@ -6,21 +6,20 @@ import type { Ref, ComputedRef } from 'vue'
 export type KeyBindingInputBlockerFn = (element: Element | null) => 'allow' | 'deny' | 'named';
 
 export interface UseKeyBindingsOptions {
-  /** Event target for listeners (default: window) */
-  target?: EventTarget | Ref<EventTarget | null | undefined>
-  /** Map for aliasing key names (e.g., { 'command': 'meta' }) */
-  aliasMap?: Record<string, string>
-  /** Timeout in ms for detecting key sequences (default: 1500) */
-  sequenceTimeoutDuration?: number
-  /**
-   * Function to check if keybindings should be blocked based on the active element.
-   * Default allows if not an input/textarea/select or contenteditable.
-   */
-  inputBlockerFn?: KeyBindingInputBlockerFn
-  /** Whether to capture events (default: false) */
-  capture?: boolean
-  /** Initial passive option for event listeners (default: undefined, decided by browser or specific bindings) */
-  passive?: boolean
+  /** Target element or window to attach listeners to. */
+  target?: Window | HTMLElement | EventTarget | Ref<Window | HTMLElement | EventTarget | undefined>;
+  /** Map of key aliases for normalizing key names. */
+  aliasMap?: Record<string, string>;
+  /** Duration in milliseconds to wait before clearing a key sequence. */
+  sequenceTimeoutDuration?: number;
+  /** Function to determine if key events should be blocked based on the active element. */
+  inputBlockerFn?: KeyBindingInputBlockerFn;
+  /** Whether to capture events in the capturing phase. */
+  capture?: boolean;
+  /** Whether events are passive (don't call preventDefault). */
+  passive?: boolean;
+  /** Whether to prefer event.code (layout-independent) over event.key for key identification. */
+  preferEventCode?: boolean;
 }
 
 /** Type for a key filter when registering a handler */

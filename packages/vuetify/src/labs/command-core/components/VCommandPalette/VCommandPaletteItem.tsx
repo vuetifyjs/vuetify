@@ -72,10 +72,14 @@ export const VCommandPaletteItem = genericComponent<VCommandPaletteItemSlots>()(
         <VHotKey hotkey={Array.isArray(props.action.hotkey) ? props.action.hotkey[0] : props.action.hotkey} dense />
       ) : undefined;
 
-      const normalizeSlot = (content: VNodeChild | undefined): VNode[] | null => {
+      // Normalizes different slot return value types into a consistent VNodeChild[] array that Vue render functions accept.
+      // A `VNodeChild` can be a string, number, VNode, or an array of those – this helper makes sure we always deal with an array.
+      const normalizeSlot = (content: VNodeChild | undefined): VNodeChild[] | null => {
         if (content == null) return null;
+        // Already an array – could contain strings, VNodes, or other primitives
         if (Array.isArray(content)) return content.length > 0 ? content : null;
-        return [content as VNode];
+        // Wrap single item in an array so upstream consumers can spread/iterate safely
+        return [content];
       };
 
       // VListItem slots expect functions that return VNodeChild (which can be VNode, VNode[], string, null, undefined)

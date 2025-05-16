@@ -9,23 +9,14 @@ import type {
   CommandCorePublicAPI,
   KeyBindingHandlerOptions,
 } from './types';
-import { IS_CLIENT } from './platform'; // UPDATED IMPORT
+import { IS_CLIENT, log, isPromise } from './utils'; // Import centralized utilities
 
 /**
  * @file commandCore.ts The core logic for managing, registering, and executing actions,
  * integrating with `useKeyBindings` for hotkey support.
  */
 
-const commandCoreLogPrefix = '[CommandCore]';
-/** Debug logger for CommandCore. Prepends [CommandCore] to messages. */
-const commandCoreDebug = (...args: any[]) => console.debug(commandCoreLogPrefix, ...args);
-/** Warn logger for CommandCore. Prepends [CommandCore] to messages. */
-const commandCoreWarn = (...args: any[]) => console.warn(commandCoreLogPrefix, ...args);
-/** Error logger for CommandCore. Prepends [CommandCore] to messages. */
-const commandCoreError = (...args: any[]) => console.error(commandCoreLogPrefix, ...args);
-
-// Renamed to avoid conflict with the class name if CommandCoreOptions was also a class/interface name itself.
-// export interface CommandCoreOptions {}
+const COMPONENT_NAME = 'CommandCore';
 
 /**
  * Injection key for providing and injecting the CommandCore instance's public API.
@@ -53,6 +44,9 @@ class CommandCore implements CommandCorePublicAPI {
   /** Instance of the keybindings manager. */
   private keyBindings: ReturnType<typeof useKeyBindings>;
 
+  /** Map to track pending async source resolutions */
+  private pendingAsyncSources = new Map<symbol, Promise<ActionDefinition<any>[]>>();
+
   /**
    * Computed property that aggregates all valid actions from all registered sources.
    * It deduplicates actions by ID (last one registered wins) and triggers hotkey processing.
@@ -71,32 +65,63 @@ class CommandCore implements CommandCorePublicAPI {
 
     this.allActions = computed(() => {
       const actions: ActionDefinition<any>[] = [];
-      for (const source of this.registeredSources.value.values()) {
+      // Process registered sources
+      for (const [sourceKey, source] of this.registeredSources.value.entries()) {
         let currentActionsFromSource: ActionDefinition<any>[] = [];
         const sourceValue = isRef(source) ? source.value : source;
+
         if (typeof sourceValue === 'function') {
           try {
             const result = (sourceValue as () => ActionDefinition<any>[] | Promise<ActionDefinition<any>[]>)();
-            if (result && typeof (result as Promise<ActionDefinition<any>[]>).then === 'function') {
-              commandCoreWarn('Asynchronous action source functions are not fully supported for immediate availability...');
-              (result as Promise<ActionDefinition<any>[]>).then(resolvedActions => {
-                commandCoreDebug('Async source resolved. Manual source update might be needed.');
-              }).catch(error => {
-                commandCoreError('Error resolving async actions source:', error);
-              });
+
+            if (isPromise<ActionDefinition<any>[]>(result)) {
+              // Handle async source
+              if (!this.pendingAsyncSources.has(sourceKey)) {
+                log('debug', COMPONENT_NAME, 'Processing async action source');
+                const processAsyncResult = async () => {
+                  try {
+                    const resolvedActions = await result;
+                    // Check if this source is still registered
+                    if (this.registeredSources.value.has(sourceKey)) {
+                      // Force update of allActions by creating a new Map for registeredSources
+                      const newMap = new Map(this.registeredSources.value);
+                      // Store the resolved actions if the source is a function
+                      const filteredActions = Array.isArray(resolvedActions)
+                        ? resolvedActions.filter(this.isActionDefinition)
+                        : [];
+                      // Trigger update
+                      this.registeredSources.value = newMap;
+                      log('debug', COMPONENT_NAME, `Async source resolved with ${filteredActions.length} actions`);
+                    }
+                    return resolvedActions;
+                  } catch (error) {
+                    log('error', COMPONENT_NAME, 'resolve async actions source', error);
+                    return [];
+                  } finally {
+                    this.pendingAsyncSources.delete(sourceKey);
+                  }
+                };
+
+                // Store the promise to track its state
+                this.pendingAsyncSources.set(sourceKey, processAsyncResult());
+              }
+              // Don't include any actions from this source until resolved
               currentActionsFromSource = [];
             } else {
+              // Synchronous source
               currentActionsFromSource = Array.isArray(result) ? result.filter(this.isActionDefinition) : [];
             }
           } catch (error) {
-            commandCoreError('Error executing actions source function:', error);
+            log('error', COMPONENT_NAME, 'execute actions source function', error);
             currentActionsFromSource = [];
           }
         } else if (Array.isArray(sourceValue)) {
           currentActionsFromSource = sourceValue.filter(this.isActionDefinition);
         }
+
         actions.push(...currentActionsFromSource);
       }
+
       const actionMap = new Map<string, ActionDefinition<any>>();
       actions.forEach(action => actionMap.set(action.id, action));
       const finalActions = Array.from(actionMap.values());
@@ -125,7 +150,7 @@ class CommandCore implements CommandCorePublicAPI {
     const actionIdsToKeep = new Set(actionsToKeep.map(action => action.id));
     this.actionHotkeysUnregisterMap.forEach((unregisterFns, actionId) => {
       if (!actionIdsToKeep.has(actionId)) {
-        commandCoreDebug(`Unregistering all hotkeys for removed action ID: ${actionId}`);
+        log('debug', COMPONENT_NAME, `Unregistering all hotkeys for removed action ID: ${actionId}`);
         unregisterFns.forEach(fn => fn());
         this.actionHotkeysUnregisterMap.delete(actionId);
       }
@@ -134,7 +159,7 @@ class CommandCore implements CommandCorePublicAPI {
     for (const currentActionDef of actionsToKeep) {
       const existingUnregisterFns = this.actionHotkeysUnregisterMap.get(currentActionDef.id);
       if (existingUnregisterFns) {
-        commandCoreDebug(`Re-registering: Unregistering old hotkeys for action ID: ${currentActionDef.id}`);
+        log('debug', COMPONENT_NAME, `Re-registering: Unregistering old hotkeys for action ID: ${currentActionDef.id}`);
         existingUnregisterFns.forEach(fn => fn());
       }
       this.actionHotkeysUnregisterMap.delete(currentActionDef.id);
@@ -157,7 +182,7 @@ class CommandCore implements CommandCorePublicAPI {
                 if (!action) return;
 
                 if (action.disabled === true || (isRef(action.disabled) && action.disabled.value === true)) {
-                  commandCoreDebug(`Hotkey "${binding}" for disabled action "${action.id}" ignored.`);
+                  log('debug', COMPONENT_NAME, `Hotkey "${binding}" for disabled action "${action.id}" ignored.`);
                   return;
                 }
                 const activeElement = IS_CLIENT ? document.activeElement : null;
@@ -165,20 +190,20 @@ class CommandCore implements CommandCorePublicAPI {
                                               (['INPUT', 'TEXTAREA', 'SELECT'].includes(activeElement.tagName?.toUpperCase()) ||
                                               (activeElement as HTMLElement).isContentEditable);
                 const matcher = action.runInTextInput;
-                if (matcher === 'only') { if (!isGenerallyInputFocused) { commandCoreDebug(`Hotkey "${binding}" for action "${action.id}" (runInTextInput: 'only') ignored; general input not focused.`); return; } }
-                else if (typeof matcher === 'string') { if (!isGenerallyInputFocused || (activeElement as HTMLInputElement)?.name !== matcher) { commandCoreDebug(`Hotkey "${binding}" for action "${action.id}" (runInTextInput: "${matcher}") ignored; input name mismatch or not focused.`); return; } }
-                else if (Array.isArray(matcher)) { if (!isGenerallyInputFocused || !matcher.includes((activeElement as HTMLInputElement)?.name)) { commandCoreDebug(`Hotkey "${binding}" for action "${action.id}" (runInTextInput: [${matcher.join(',')}]) ignored; input name mismatch or not focused.`); return; } }
-                else if (typeof matcher === 'function') { if (!matcher(activeElement as Element)) { commandCoreDebug(`Hotkey "${binding}" for action "${action.id}" (runInTextInput: custom function) ignored; predicate returned false.`); return; } }
+                if (matcher === 'only') { if (!isGenerallyInputFocused) { log('debug', COMPONENT_NAME, `Hotkey "${binding}" for action "${action.id}" (runInTextInput: 'only') ignored; general input not focused.`); return; } }
+                else if (typeof matcher === 'string') { if (!isGenerallyInputFocused || (activeElement as HTMLInputElement)?.name !== matcher) { log('debug', COMPONENT_NAME, `Hotkey "${binding}" for action "${action.id}" (runInTextInput: "${matcher}") ignored; input name mismatch or not focused.`); return; } }
+                else if (Array.isArray(matcher)) { if (!isGenerallyInputFocused || !matcher.includes((activeElement as HTMLInputElement)?.name)) { log('debug', COMPONENT_NAME, `Hotkey "${binding}" for action "${action.id}" (runInTextInput: [${matcher.join(',')}]) ignored; input name mismatch or not focused.`); return; } }
+                else if (typeof matcher === 'function') { if (!matcher(activeElement as Element)) { log('debug', COMPONENT_NAME, `Hotkey "${binding}" for action "${action.id}" (runInTextInput: custom function) ignored; predicate returned false.`); return; } }
                 const context: ActionContext = { trigger: 'hotkey', event };
                 if (action.canExecute) {
                   try {
                     if (!action.canExecute(context)) {
-                      commandCoreDebug(`Hotkey "${binding}" for action "${action.id}" ignored; canExecute returned false.`); return;
+                      log('debug', COMPONENT_NAME, `Hotkey "${binding}" for action "${action.id}" ignored; canExecute returned false.`); return;
                     }
-                  } catch (e) { commandCoreError(`Error in canExecute for action "${action.id}" triggered by hotkey "${binding}"`, e); return; }
+                  } catch (e) { log('error', COMPONENT_NAME, `canExecute for action "${action.id}" triggered by hotkey "${binding}"`, e); return; }
                 }
 
-                commandCoreDebug(`Hotkey "${binding}" executing action "${action.id}"`);
+                log('debug', COMPONENT_NAME, `Hotkey "${binding}" executing action "${action.id}"`);
                 this.executeAction(action.id, context);
               },
               handlerOpts
@@ -201,7 +226,7 @@ class CommandCore implements CommandCorePublicAPI {
     const newMap = new Map(this.registeredSources.value);
     newMap.set(key, source);
     this.registeredSources.value = newMap;
-    commandCoreDebug(`Registered action source:`, key);
+    log('debug', COMPONENT_NAME, `Registered action source: ${key.toString()}`);
     return key;
   }
 
@@ -215,9 +240,10 @@ class CommandCore implements CommandCorePublicAPI {
     const deleted = newMap.delete(key);
     if (deleted) {
       this.registeredSources.value = newMap;
-      commandCoreDebug(`Unregistered action source:`, key);
+      this.pendingAsyncSources.delete(key); // Also clean up any pending async resolution
+      log('debug', COMPONENT_NAME, `Unregistered action source: ${key.toString()}`);
     } else {
-      commandCoreWarn(`Attempted to unregister non-existent action source key:`, key);
+      log('warn', COMPONENT_NAME, `Attempted to unregister non-existent action source key: ${key.toString()}`);
     }
     return deleted;
   }
@@ -242,39 +268,39 @@ class CommandCore implements CommandCorePublicAPI {
   public async executeAction(actionId: string, invocationContext: ActionContext = {}): Promise<void> {
     const action = this.getAction(actionId);
     if (!action) {
-      commandCoreError(`Failed to execute action: Action with id "${actionId}" not found.`);
+      log('error', COMPONENT_NAME, `execute action: Action with id "${actionId}" not found`);
       return;
     }
     if (action.disabled === true || (isRef(action.disabled) && action.disabled.value === true)) {
-      commandCoreWarn(`Action "${actionId}" is disabled.`);
+      log('warn', COMPONENT_NAME, `Action "${actionId}" is disabled`);
       return;
     }
     const executionContext: ActionContext = { ...invocationContext };
     if (action.canExecute) {
       try {
         if (!action.canExecute(executionContext)) {
-          commandCoreWarn(`Action "${actionId}" cannot be executed due to canExecute returning false.`, { context: executionContext });
+          log('warn', COMPONENT_NAME, `Action "${actionId}" cannot be executed due to canExecute returning false`, { context: executionContext });
           return;
         }
       } catch (error: any) {
-        commandCoreError(`Error during canExecute check for action "${actionId}"`, error, { context: executionContext });
+        log('error', COMPONENT_NAME, `canExecute check for action "${actionId}"`, error);
         return;
       }
     }
     if (typeof action.handler !== 'function') {
       if (typeof action.subItems === 'function') {
-        commandCoreDebug(`Action "${actionId}" is a group action, no direct handler called. SubItems might be used by UI.`);
+        log('debug', COMPONENT_NAME, `Action "${actionId}" is a group action, no direct handler called. SubItems might be used by UI.`);
         return;
       }
-      commandCoreError(`Action "${actionId}" has no handler or subItems to execute.`);
+      log('error', COMPONENT_NAME, `Action "${actionId}" has no handler or subItems to execute`);
       return;
     }
     this._isLoading.value = true;
     try {
-      commandCoreDebug(`Executing handler for action: ${action.id}`);
+      log('debug', COMPONENT_NAME, `Executing handler for action: ${action.id}`);
       await action.handler(executionContext);
     } catch (error: any) {
-      commandCoreError(`Error executing action "${actionId}"`, error, { context: executionContext });
+      log('error', COMPONENT_NAME, `execute action "${actionId}"`, error);
     } finally {
       this._isLoading.value = false;
     }
@@ -298,10 +324,11 @@ class CommandCore implements CommandCorePublicAPI {
    * Called automatically via `onScopeDispose` if `useCommandCore` is used in a setup function.
    */
   public destroy = () => {
-    commandCoreDebug('Destroying CommandCore instance');
+    log('debug', COMPONENT_NAME, 'Destroying CommandCore instance');
     this.keyBindings.stop();
     this.actionHotkeysUnregisterMap.forEach(fns => fns.forEach(fn => fn()));
     this.actionHotkeysUnregisterMap.clear();
+    this.pendingAsyncSources.clear();
     const newMap = new Map();
     this.registeredSources.value = newMap;
   };
@@ -326,7 +353,7 @@ export function useCommandCore(options?: CommandCoreInstanceOptions): CommandCor
       });
     }
   } else if (!_commandCoreInstance) {
-    commandCoreWarn('CommandCore accessed in a non-client environment without prior client-side initialization. Features might be limited.');
+    log('warn', COMPONENT_NAME, 'CommandCore accessed in a non-client environment without prior client-side initialization. Features might be limited.');
     _commandCoreInstance = new CommandCore(options);
   }
   return _commandCoreInstance!;
