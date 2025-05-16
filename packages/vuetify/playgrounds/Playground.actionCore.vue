@@ -163,9 +163,13 @@ const stickToBottom = ref(true)
 const scrollToBottom = () => { nextTick(() => { if (logContainerRef.value) { logContainerRef.value.scrollTop = logContainerRef.value.scrollHeight } }) }
 const logAction = (message: string, details?: any) => {
   const fullMessage = details ? `${message} ${JSON.stringify(details)}` : message
-  logMessages.value.unshift(fullMessage)
-  if (logMessages.value.length > 200) logMessages.value.pop()
-  console.log('[ActionCorePlayground]', message, details)
+  logMessages.value.push(fullMessage)
+  // if (logMessages.value.length > 200) logMessages.value.pop()
+  if (details !== undefined) {
+    console.log('[ActionCorePlayground]', message, details)
+  } else {
+    console.log('[ActionCorePlayground]', message)
+  }
   if (stickToBottom.value) scrollToBottom()
 }
 provide('logAction', logAction)
