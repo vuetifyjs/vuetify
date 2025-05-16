@@ -45,6 +45,7 @@ export default defineConfig(({ mode }) => {
     },
     resolve: {
       alias: [
+        { find: /^@playgrounds\/(.*)/, replacement: resolve('./playgrounds/$1') },
         { find: /^vuetify$/, replacement: resolve('./src/framework.ts') },
         { find: /^vuetify\/(.*)/, replacement: resolve('./$1') },
         { find: /^@\/(.*)/, replacement: resolve('./src/$1') },

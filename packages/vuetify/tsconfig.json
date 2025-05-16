@@ -9,6 +9,9 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
+      "@playgrounds/*": ["playgrounds/*"],
+      "vuetify": ["src/framework.ts"],
+      "vuetify/*": ["src/*"],
       "@test": ["test/index.ts"]
     },
     "types": [
