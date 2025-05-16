@@ -302,7 +302,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
     }
 
     useRender(() => {
-      const { modelValue: _, ...textFieldProps } = omit(VTextField.filterProps(props), ['focused'])
+      const { modelValue: _, ...textFieldProps } = VTextField.filterProps(props)
 
       function incrementControlNode () {
         return !slots.increment ? (
@@ -421,6 +421,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       return (
         <VTextField
           ref={ vTextFieldRef }
+          { ...textFieldProps }
           v-model={ inputText.value }
           v-model:focused={ isFocused.value }
           validationValue={ model.value }
@@ -440,7 +441,6 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
             },
             props.class,
           ]}
-          { ...textFieldProps }
           style={ props.style }
           inputmode="decimal"
         >
