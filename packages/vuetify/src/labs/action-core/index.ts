@@ -1,13 +1,13 @@
 // /*! IMPORTANT: This is a labs feature and may change or be removed in any release. */
 
 // Types and Symbols
-// CommandCoreSymbol is defined in commandCore.ts alongside useCommandCore for providing the instance.
+// ActionCoreSymbol is defined in actionCore.ts alongside useActionCore for providing the instance.
 // Public types are primarily from types.ts.
 export type {
   ActionDefinition,
   ActionContext,
-  CommandCoreOptions,
-  CommandCorePublicAPI,
+  ActionCoreOptions,
+  ActionCorePublicAPI,
   KeyBindingTrigger,
   KeyBindingHandlerOptions,
   UseKeyBindingsOptions, // This is a KeyBinding related option type, often in types.ts or with useKeyBindings
@@ -17,11 +17,11 @@ export type {
 } from './types';
 
 // Main service composable and its symbol for injection
-export { useCommandCore, destroyCommandCoreInstance, CommandCoreSymbol } from './commandCore';
-// The CommandCore class itself might not need to be part of the public API if useCommandCore is the sole entry point.
+export { useActionCore, destroyActionCoreInstance, ActionCoreSymbol } from './actionCore';
+// The ActionCore class itself might not need to be part of the public API if useActionCore is the sole entry point.
 
 // Composables
-// useKeyBindings is directly in command-core, not a subdirectory.
+// useKeyBindings is directly in action-core, not a subdirectory.
 export { useKeyBindings } from './useKeyBindings';
 // Types for useKeyBindings are usually co-located or in types.ts.
 // UseKeyBindingsOptions is already listed from ./types.

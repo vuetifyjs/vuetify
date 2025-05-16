@@ -5,7 +5,7 @@ import { generate, gridOn, render, userEvent } from '@test'
 import { ref, markRaw, computed } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import { vi } from 'vitest'
-import { CommandCoreSymbol, type ActionDefinition, type CommandCorePublicAPI, type ActionContext } from '@/labs/command-core'
+import { ActionCoreSymbol, type ActionDefinition, type ActionCorePublicAPI, type ActionContext } from '@/labs/action-core'
 
 // Types
 import type { Variant } from '@/composables/variant'
@@ -246,13 +246,13 @@ describe('VBtn', () => {
   })
 })
 
-// CommandCore Integration Tests
-describe('VBtn Command Integration', () => {
-  let mockCommandCore: CommandCorePublicAPI
+// ActionCore Integration Tests
+describe('VBtn Action Integration', () => {
+  let mockActionCore: ActionCorePublicAPI
   const mockIntegrationStatus = ref(true) // For controlling isComponentIntegrationEnabled
 
-  // Helper to create a mock CommandCore instance
-  const createMockCommandCore = (): CommandCorePublicAPI => ({
+  // Helper to create a mock ActionCore instance
+  const createMockActionCore = (): ActionCorePublicAPI => ({
     isComponentIntegrationEnabled: vi.fn((componentName: string) => componentName === 'VBtn' && mockIntegrationStatus.value),
     executeAction: vi.fn(async (actionId: string, context?: ActionContext) => {}),
     registerActionsSource: vi.fn(() => Symbol('mockSourceKey')),
@@ -263,14 +263,14 @@ describe('VBtn Command Integration', () => {
     destroy: vi.fn(),
   })
 
-  // Helper to render VBtn with mocked CommandCore
-  // Using markRaw for mockCommandCore in provide to prevent Vue from making it reactive if it causes issues.
-  const renderWithCommandCore = (props: InstanceType<typeof VBtn>['$props']) => {
+  // Helper to render VBtn with mocked ActionCore
+  // Using markRaw for mockActionCore in provide to prevent Vue from making it reactive if it causes issues.
+  const renderWithActionCore = (props: InstanceType<typeof VBtn>['$props']) => {
     return render(VBtn, {
       props,
       global: {
         provide: {
-          [CommandCoreSymbol as symbol]: markRaw(mockCommandCore),
+          [ActionCoreSymbol as symbol]: markRaw(mockActionCore),
         },
       },
     })
@@ -278,42 +278,42 @@ describe('VBtn Command Integration', () => {
 
   beforeEach(() => {
     mockIntegrationStatus.value = true // Default to integration enabled for VBtn
-    mockCommandCore = createMockCommandCore()
+    mockActionCore = createMockActionCore()
   })
 
   it('should execute command by string ID when clicked', async () => {
     const testActionId = 'testAction1'
-    mockCommandCore.getAction = vi.fn((id: string) => id === testActionId ? { id: testActionId, title: 'Test Action', handler: vi.fn() } : undefined);
-    const { container } = renderWithCommandCore({ command: testActionId })
+    mockActionCore.getAction = vi.fn((id: string) => id === testActionId ? { id: testActionId, title: 'Test Action', handler: vi.fn() } : undefined);
+    const { container } = renderWithActionCore({ command: testActionId })
     const button = container.querySelector('button')!
 
     await userEvent.click(button)
 
-    expect(mockCommandCore.executeAction).toHaveBeenCalledWith(testActionId, expect.anything())
+    expect(mockActionCore.executeAction).toHaveBeenCalledWith(testActionId, expect.anything())
   })
 
   it('should register and execute inline ActionDefinition when clicked', async () => {
     const inlineActionHandler = vi.fn()
     const inlineAction: ActionDefinition = { id: 'inlineTest', title: 'Inline Action', handler: inlineActionHandler }
-    mockCommandCore.getAction = vi.fn((id: string) => id === inlineAction.id ? inlineAction : undefined)
+    mockActionCore.getAction = vi.fn((id: string) => id === inlineAction.id ? inlineAction : undefined)
 
-    // Spy on the registerActionsSource method of the mockCommandCore instance for this test
-    const registerSpy = vi.spyOn(mockCommandCore, 'registerActionsSource');
+    // Spy on the registerActionsSource method of the mockActionCore instance for this test
+    const registerSpy = vi.spyOn(mockActionCore, 'registerActionsSource');
 
-    const { container, unmount } = renderWithCommandCore({ command: inlineAction })
+    const { container, unmount } = renderWithActionCore({ command: inlineAction })
     const button = container.querySelector('button')!
 
     expect(registerSpy).toHaveBeenCalledWith([inlineAction])
 
     await userEvent.click(button)
-    expect(mockCommandCore.executeAction).toHaveBeenCalledWith(inlineAction.id, expect.anything())
+    expect(mockActionCore.executeAction).toHaveBeenCalledWith(inlineAction.id, expect.anything())
 
     // Test unregistration on unmount
     // Ensure there was a result and get its value
     if (registerSpy.mock.results.length > 0) {
       const registeredSymbol = registerSpy.mock.results[0].value;
       unmount();
-      expect(mockCommandCore.unregisterActionsSource).toHaveBeenCalledWith(registeredSymbol);
+      expect(mockActionCore.unregisterActionsSource).toHaveBeenCalledWith(registeredSymbol);
     } else {
       // Should not happen if registerSpy was called
       throw new Error('registerActionsSource was not called as expected');
@@ -323,13 +323,13 @@ describe('VBtn Command Integration', () => {
   it('should pass commandData to executeAction context', async () => {
     const testActionId = 'dataAction'
     const commandData = { userId: 123, context: 'test' }
-    mockCommandCore.getAction = vi.fn((id: string) => id === testActionId ? { id: testActionId, title: 'Data Action', handler: vi.fn() } : undefined);
+    mockActionCore.getAction = vi.fn((id: string) => id === testActionId ? { id: testActionId, title: 'Data Action', handler: vi.fn() } : undefined);
 
-    const { container } = renderWithCommandCore({ command: testActionId, commandData })
+    const { container } = renderWithActionCore({ command: testActionId, commandData })
     const button = container.querySelector('button')!
     await userEvent.click(button)
 
-    expect(mockCommandCore.executeAction).toHaveBeenCalledWith(
+    expect(mockActionCore.executeAction).toHaveBeenCalledWith(
       testActionId,
       expect.objectContaining({
         data: commandData,
@@ -340,36 +340,36 @@ describe('VBtn Command Integration', () => {
 
   it('should not execute command if componentIntegration for VBtn is false', async () => {
     mockIntegrationStatus.value = false // Disable integration for VBtn
-    // Re-initialize mockCommandCore with the new mockIntegrationStatus effect
-    // This is important if createMockCommandCore captures mockIntegrationStatus.value at creation time.
-    // However, our createMockCommandCore always reads the current ref value, so direct change is fine.
+    // Re-initialize mockActionCore with the new mockIntegrationStatus effect
+    // This is important if createMockActionCore captures mockIntegrationStatus.value at creation time.
+    // However, our createMockActionCore always reads the current ref value, so direct change is fine.
 
     const testActionId = 'noExecAction'
-    const { container } = renderWithCommandCore({ command: testActionId })
+    const { container } = renderWithActionCore({ command: testActionId })
     const button = container.querySelector('button')!
     await userEvent.click(button)
 
-    expect(mockCommandCore.executeAction).not.toHaveBeenCalled()
+    expect(mockActionCore.executeAction).not.toHaveBeenCalled()
   })
 
-  it('should not execute command if CommandCore is not provided', async () => {
-    // Render VBtn without providing CommandCoreSymbol
+  it('should not execute command if ActionCore is not provided', async () => {
+    // Render VBtn without providing ActionCoreSymbol
     const clickSpy = vi.fn()
     const { container } = render(VBtn, {
       props: { command: 'testAction', onClick: clickSpy },
-      // No global provide for CommandCoreSymbol here
+      // No global provide for ActionCoreSymbol here
     })
     const button = container.querySelector('button')!
     await userEvent.click(button)
 
-    // We can't directly check mockCommandCore.executeAction as it wasn't injected.
+    // We can't directly check mockActionCore.executeAction as it wasn't injected.
     // Instead, verify normal button behavior (e.g. click event emitted).
     expect(clickSpy).toHaveBeenCalled()
   })
 
   it('command execution should take precedence over router navigation', async () => {
     const testActionId = 'navAction'
-    mockCommandCore.getAction = vi.fn((id: string) => id === testActionId ? { id: testActionId, title: 'Nav Action', handler: vi.fn() } : undefined);
+    mockActionCore.getAction = vi.fn((id: string) => id === testActionId ? { id: testActionId, title: 'Nav Action', handler: vi.fn() } : undefined);
 
     // Mock router and its navigate function
     const mockNavigate = vi.fn()
@@ -387,7 +387,7 @@ describe('VBtn Command Integration', () => {
       global: {
         plugins: [router],
         provide: {
-          [CommandCoreSymbol as symbol]: markRaw(mockCommandCore),
+          [ActionCoreSymbol as symbol]: markRaw(mockActionCore),
         },
       },
     })
@@ -396,7 +396,7 @@ describe('VBtn Command Integration', () => {
 
     await userEvent.click(button)
 
-    expect(mockCommandCore.executeAction).toHaveBeenCalledWith(testActionId, expect.anything())
+    expect(mockActionCore.executeAction).toHaveBeenCalledWith(testActionId, expect.anything())
     // Check that router did not navigate
     expect(router.currentRoute.value.path).toBe(initialPath)
     // Ideally, also check that link.navigate (from useLink) was not called if easily mockable.

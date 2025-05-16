@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { ref, computed, nextTick, watch } from 'vue';
-import { useCommandCore, destroyCommandCoreInstance } from '../commandCore';
-import type { CommandCoreOptions } from '../commandCore';
+import { useActionCore, destroyActionCoreInstance } from '../actionCore';
+import type { ActionCoreOptions } from '../actionCore';
 import type { ActionDefinition, ActionContext, ActionsSource } from '../types';
 import { useKeyBindings } from '../useKeyBindings';
 
@@ -19,7 +19,7 @@ const mockKeyBindingsInstance = {
   getKeyState: vi.fn(() => ref(false)),
   isCombinationActive: vi.fn(() => computed(() => false)),
   isListening: ref(true),
-  start: vi.fn(), // Though commandCore calls it internally, not directly tested via commandCore
+  start: vi.fn(), // Though actionCore calls it internally, not directly tested via actionCore
 };
 
 vi.mock('../useKeyBindings', () => ({
@@ -45,53 +45,53 @@ const createActionDef = (id: string, props: Partial<ActionDefinition> = {}): Act
   ...props, // User-provided props will override defaults
 });
 
-describe('CommandCore', () => {
+describe('ActionCore', () => {
   beforeEach(() => {
     vi.useFakeTimers();
-    destroyCommandCoreInstance();
+    destroyActionCoreInstance();
     mockKeyBindingsOn.mockClear().mockReturnValue(() => {});
     mockKeyBindingsStop.mockClear();
     mockKeyBindingsInstance.getKeyState.mockClear().mockReturnValue(ref(false));
     mockKeyBindingsInstance.isCombinationActive.mockClear().mockReturnValue(computed(() => false));
     // Ensure any shared mock state for activeElement used by the mocked useKeyBindings is null by default
-    // This is relevant if the mocked useKeyBindings's inputBlockerFn is ever called by commandCore's hotkey logic implicitly
-    // However, commandCore's hotkey callback does its own activeElement check for runInTextInput rules.
+    // This is relevant if the mocked useKeyBindings's inputBlockerFn is ever called by actionCore's hotkey logic implicitly
+    // However, actionCore's hotkey callback does its own activeElement check for runInTextInput rules.
     // For safety, ensure the concept of a focused input isn't bleeding into these tests via the mock.
     // If useKeyBindings mock doesn't use a global mockActiveElementValue, this isn't strictly needed here.
-    // But if it did, this would be a place to control it for commandCore tests.
+    // But if it did, this would be a place to control it for actionCore tests.
   });
 
   afterEach(() => {
-    destroyCommandCoreInstance();
+    destroyActionCoreInstance();
     vi.clearAllTimers();
     vi.useRealTimers();
   });
 
-  it('should initialize a singleton instance via useCommandCore', () => {
-    const core1 = useCommandCore();
-    const core2 = useCommandCore();
+  it('should initialize a singleton instance via useActionCore', () => {
+    const core1 = useActionCore();
+    const core2 = useActionCore();
     expect(core1).toBe(core2);
     expect(core1).toBeDefined();
   });
 
-  it('destroyCommandCoreInstance should call internal destroy and keyBindings.stop', () => {
-    const core = useCommandCore(); // Initialize
+  it('destroyActionCoreInstance should call internal destroy and keyBindings.stop', () => {
+    const core = useActionCore(); // Initialize
     const destroySpy = vi.spyOn(core, 'destroy');
 
-    destroyCommandCoreInstance();
+    destroyActionCoreInstance();
 
     expect(destroySpy).toHaveBeenCalledTimes(1);
     expect(mockKeyBindingsStop).toHaveBeenCalledTimes(1);
 
-    // After destruction, calling useCommandCore again should give a new instance (if designed to re-initialize)
-    // or a defined non-functional one. Our current useCommandCore re-initializes.
-    const newCore = useCommandCore();
+    // After destruction, calling useActionCore again should give a new instance (if designed to re-initialize)
+    // or a defined non-functional one. Our current useActionCore re-initializes.
+    const newCore = useActionCore();
     expect(newCore).not.toBe(core);
   });
 
   describe('Action Source Management', () => {
     it('should register and unregister an array action source', async () => {
-      const core = useCommandCore();
+      const core = useActionCore();
       const action1 = createActionDef('act1');
       const sourceArray: ActionDefinition[] = [action1];
 
@@ -106,7 +106,7 @@ describe('CommandCore', () => {
     });
 
     it('should register a function action source and call it', async () => {
-      const core = useCommandCore();
+      const core = useActionCore();
       const action1 = createActionDef('actFun1');
       const sourceFn = vi.fn(() => [action1]);
 
@@ -120,7 +120,7 @@ describe('CommandCore', () => {
     });
 
     it('should register a Ref<ActionDefinition[]> source and react to its changes', async () => {
-      const core = useCommandCore();
+      const core = useActionCore();
       const action1 = createActionDef('actRef1');
       const action2 = createActionDef('actRef2');
       const sourceRef = ref<ActionDefinition[]>([action1]);
@@ -137,7 +137,7 @@ describe('CommandCore', () => {
     });
 
     it('allActions should deduplicate actions by ID, last one wins', async () => {
-      const core = useCommandCore();
+      const core = useActionCore();
       const actionV1 = createActionDef('dupAct');
       const actionV2 = createActionDef('dupAct', { title: 'Action dupAct V2' });
 
@@ -153,7 +153,7 @@ describe('CommandCore', () => {
 
   describe('executeAction', () => {
     it('should call the action handler and set isLoading state', async () => {
-      const core = useCommandCore();
+      const core = useActionCore();
       const handlerMock = vi.fn();
       const action = createActionDef('execAction1', { handler: handlerMock });
       core.registerActionsSource([action]);
@@ -168,7 +168,7 @@ describe('CommandCore', () => {
     });
 
     it('should not call handler if action is disabled (boolean) and warn', async () => {
-      const core = useCommandCore();
+      const core = useActionCore();
       const handlerMock = vi.fn();
       const action = createActionDef('disabledAction1', { handler: handlerMock, disabled: true });
       core.registerActionsSource([action]);
@@ -179,7 +179,7 @@ describe('CommandCore', () => {
       await core.executeAction('disabledAction1');
       expect(handlerMock).not.toHaveBeenCalled();
       expect(consoleWarnSpy).toHaveBeenCalledWith(
-        '[CommandCore]',
+        '[ActionCore]',
         'Action "disabledAction1" is disabled.'
       );
       expect(core.isLoading.value).toBe(false);
@@ -187,7 +187,7 @@ describe('CommandCore', () => {
     });
 
     it('should not call handler if action is disabled (Ref) and warn', async () => {
-      const core = useCommandCore();
+      const core = useActionCore();
       const handlerMock = vi.fn();
       const disabledState = ref(true);
       const action = createActionDef('disabledAction2', { handler: handlerMock, disabled: disabledState });
@@ -198,7 +198,7 @@ describe('CommandCore', () => {
       await core.executeAction('disabledAction2');
       expect(handlerMock).not.toHaveBeenCalled();
       expect(consoleWarnSpy).toHaveBeenCalledWith(
-        '[CommandCore]',
+        '[ActionCore]',
         'Action "disabledAction2" is disabled.'
       );
       consoleWarnSpy.mockClear(); // Clear for next call within same test
@@ -212,7 +212,7 @@ describe('CommandCore', () => {
     });
 
     it('should not call handler if canExecute returns false and warn', async () => {
-      const core = useCommandCore();
+      const core = useActionCore();
       const handlerMock = vi.fn();
       const canExecuteMock = vi.fn(() => false);
       const action = createActionDef('canExecAction1', { handler: handlerMock, canExecute: canExecuteMock });
@@ -225,7 +225,7 @@ describe('CommandCore', () => {
       expect(handlerMock).not.toHaveBeenCalled();
       expect(canExecuteMock).toHaveBeenCalledWith(context);
       expect(consoleWarnSpy).toHaveBeenCalledWith(
-        '[CommandCore]',
+        '[ActionCore]',
         'Action "canExecAction1" cannot be executed due to canExecute returning false.',
         { context }
       );
@@ -234,7 +234,7 @@ describe('CommandCore', () => {
     });
 
     it('should call handler if canExecute returns true', async () => {
-      const core = useCommandCore();
+      const core = useActionCore();
       const handlerMock = vi.fn();
       const canExecuteMock = vi.fn(() => true);
       const action = createActionDef('canExecAction2', { handler: handlerMock, canExecute: canExecuteMock });
@@ -247,7 +247,7 @@ describe('CommandCore', () => {
     });
 
     it('should not call handler for a group action (has subItems, no handler) and debug log', async () => {
-      const core = useCommandCore();
+      const core = useActionCore();
       const groupAction = createActionDef('groupAct1', { subItems: () => [], handler: undefined });
       core.registerActionsSource([groupAction]);
       await nextTick();
@@ -255,25 +255,25 @@ describe('CommandCore', () => {
 
       await core.executeAction('groupAct1');
       expect(consoleDebugSpy).toHaveBeenCalledWith(
-        '[CommandCore]',
+        '[ActionCore]',
         'Action "groupAct1" is a group action, no direct handler called. SubItems might be used by UI.'
       );
       consoleDebugSpy.mockRestore();
     });
 
     it('should log an error if action not found', async () => {
-      const core = useCommandCore();
+      const core = useActionCore();
       const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
       await core.executeAction('nonExistentAction');
       expect(consoleErrorSpy).toHaveBeenCalledWith(
-        '[CommandCore]',
+        '[ActionCore]',
         'Failed to execute action: Action with id "nonExistentAction" not found.'
       );
       consoleErrorSpy.mockRestore();
     });
 
     it('should log an error if action has no handler or subItems (effectively becomes action not found due to filtering)', async () => {
-      const core = useCommandCore();
+      const core = useActionCore();
       // This action will be filtered out by isActionDefinition because it has no handler and no subItems
       const action = createActionDef('noHandlerAction', { handler: undefined, subItems: undefined });
       core.registerActionsSource([action]);
@@ -283,7 +283,7 @@ describe('CommandCore', () => {
       await core.executeAction('noHandlerAction');
       // Because it's filtered out, it will be reported as "not found"
       expect(consoleErrorSpy).toHaveBeenCalledWith(
-        '[CommandCore]',
+        '[ActionCore]',
         'Failed to execute action: Action with id "noHandlerAction" not found.'
       );
       consoleErrorSpy.mockRestore();
@@ -292,7 +292,7 @@ describe('CommandCore', () => {
 
   describe('Hotkey Registration and Triggering', () => {
     it('should register hotkeys with keyBindings.on when actions with hotkeys are processed', async () => {
-      const core = useCommandCore();
+      const core = useActionCore();
       // Define actions directly to ensure exact type matching for runInTextInput
       const action1: ActionDefinition = createActionDef('hkAction1', { hotkey: 'ctrl+k' }); // runInTextInput is undefined by default
       const action2: ActionDefinition = createActionDef('hkAction2', { hotkey: 'g-d' });    // runInTextInput is undefined by default
@@ -324,7 +324,7 @@ describe('CommandCore', () => {
     });
 
     it('should call action handler and log debug messages when its hotkey is invoked', async () => {
-      const core = useCommandCore();
+      const core = useActionCore();
       const executeActionSpy = vi.spyOn(core, 'executeAction');
       const actionHandlerMock = vi.fn();
       const canExecuteTrue = vi.fn(() => true);
@@ -349,10 +349,10 @@ describe('CommandCore', () => {
       // await vi.advanceTimersByTime(1); // If executeAction had internal async beyond nextTick
 
       // Corrected assertions based on actual log messages from commandCore.ts
-      expect(consoleDebugSpy).toHaveBeenCalledWith('[CommandCore]', 'Hotkey "ctrl+e" executing action "hkExec"');
+      expect(consoleDebugSpy).toHaveBeenCalledWith('[ActionCore]', 'Hotkey "ctrl+e" executing action "hkExec"');
       // The detailed [HK DEBUG] logs were removed from commandCore.ts, so we only expect the general ones.
       // If specific internal steps of the hotkey callback need checking, they are implicitly tested by whether executeAction is called.
-      expect(consoleDebugSpy).toHaveBeenCalledWith('[CommandCore]', 'Executing handler for action: hkExec');
+      expect(consoleDebugSpy).toHaveBeenCalledWith('[ActionCore]', 'Executing handler for action: hkExec');
 
       expect(canExecuteTrue).toHaveBeenCalled();
       expect(executeActionSpy).toHaveBeenCalledWith('hkExec', { trigger: 'hotkey', event: mockEvent });
@@ -363,7 +363,7 @@ describe('CommandCore', () => {
     });
 
     it('should NOT call executeAction if hotkey callback checks fail', async () => {
-      const core = useCommandCore();
+      const core = useActionCore();
       const actionHandler = vi.fn();
       const canExecuteFalse = vi.fn(() => false);
       // Explicitly define this action to ensure runInTextInput is correctly typed or undefined.
@@ -406,7 +406,7 @@ describe('CommandCore', () => {
     });
 
     it('should unregister hotkeys when an action source is unregistered', async () => {
-      const core = useCommandCore();
+      const core = useActionCore();
       const action1 = createActionDef('hkUnreg1', { hotkey: 'ctrl+x' });
       const mockUnregisterFn1 = vi.fn();
 
@@ -423,14 +423,14 @@ describe('CommandCore', () => {
       core.unregisterActionsSource(sourceKey);
       // Ensure allActions re-evaluates, which should call unregister for removed actions' hotkeys
       currentActions = core.allActions.value;
-      expect(currentActions.find(a => a.id === 'hkUnreg1')).toBeUndefined();
+      expect(currentActions.find((a: ActionDefinition) => a.id === 'hkUnreg1')).toBeUndefined();
       await nextTick(); // Allow effects from computed property change
 
       expect(mockUnregisterFn1).toHaveBeenCalledTimes(1);
     });
 
     it('should re-register hotkeys when an action definition is updated', async () => {
-      const core = useCommandCore();
+      const core = useActionCore();
       const actionV1 = createActionDef('hkUpdate', { hotkey: 'ctrl+u' });
       const mockUnregisterFnV1 = vi.fn();
       const mockUnregisterFnV2 = vi.fn();
@@ -457,7 +457,7 @@ describe('CommandCore', () => {
 
   describe('Async Action Source Handling', () => {
     it('should warn when an async action source function is processed', async () => {
-      const core = useCommandCore();
+      const core = useActionCore();
       const asyncAction = createActionDef('asyncAct1');
       const promiseSource = () => new Promise<ActionDefinition[]>(resolve => {
         setTimeout(() => resolve([asyncAction]), 0);
@@ -471,7 +471,7 @@ describe('CommandCore', () => {
       await nextTick();
 
       expect(consoleWarnSpy).toHaveBeenCalledWith(
-        '[CommandCore]',
+        '[ActionCore]',
         expect.stringContaining('Asynchronous action source functions are not fully supported')
       );
       expect(core.getAction('asyncAct1')).toBeUndefined();
@@ -481,32 +481,125 @@ describe('CommandCore', () => {
       await nextTick();
 
       expect(consoleDebugSpy).toHaveBeenCalledWith(
-        '[CommandCore]',
+        '[ActionCore]',
         expect.stringContaining('Async source resolved. Manual source update might be needed.')
       );
 
       consoleWarnSpy.mockRestore();
       consoleDebugSpy.mockRestore();
     });
+
+    it('should process actions from an async function source after it resolves', async () => {
+      const core = useActionCore();
+      const asyncAction = createActionDef('resolvedAsyncAct');
+      const promiseSourceFn = () => new Promise<ActionDefinition[]>(resolve => {
+        setTimeout(() => {
+          resolve([asyncAction]);
+        }, 50);
+      });
+
+      const sourceKey = core.registerActionsSource(promiseSourceFn);
+
+      // Initially, action should not be present
+      expect(core.getAction('resolvedAsyncAct')).toBeUndefined();
+      // And allActions should not contain it yet because the promise is not resolved
+      let initialActions = core.allActions.value;
+      expect(initialActions.find((a: ActionDefinition) => a.id === 'resolvedAsyncAct')).toBeUndefined();
+
+      // Advance timers and wait for Vue's reactivity
+      vi.advanceTimersByTime(100);
+      await nextTick(); // For promise resolution
+      await nextTick(); // For computed property updates in Vue
+
+      // After resolution and reactivity cycle, the action should be available
+      const finalActions = core.allActions.value;
+      expect(finalActions.find((a: ActionDefinition) => a.id === 'resolvedAsyncAct')).toBeDefined();
+      expect(core.getAction('resolvedAsyncAct')).toEqual(asyncAction);
+
+      // Hotkey should also be registered for the resolved action if it has one
+      mockKeyBindingsOn.mockClear();
+      const asyncActionWithHotkey = { ...asyncAction, hotkey: 'ctrl+h' };
+      const promiseSourceFn2 = () => new Promise<ActionDefinition[]>(resolve => {
+        setTimeout(() => resolve([asyncActionWithHotkey]), 10);
+      });
+      core.unregisterActionsSource(sourceKey); // Clean up previous one
+      await nextTick();
+      core.registerActionsSource(promiseSourceFn2);
+      initialActions = core.allActions.value; // Re-evaluate
+
+      vi.advanceTimersByTime(20);
+      await nextTick();
+      await nextTick();
+
+      expect(mockKeyBindingsOn).toHaveBeenCalledWith('ctrl+h', expect.any(Function), expect.any(Object));
+    });
+
+    it('should unregister hotkeys for actions that are filtered out from an async source after resolution', async () => {
+      const core = useActionCore();
+      const actionWithHotkey = createActionDef('asyncFilterOut', { hotkey: 'ctrl+shift+f' });
+      const unregisterMock = vi.fn();
+      mockKeyBindingsOn.mockImplementationOnce(() => unregisterMock);
+
+      // Async source that initially resolves with the action, then with an empty array
+      let resolvePromise: (actions: ActionDefinition[]) => void;
+      const promise = new Promise<ActionDefinition[]>(r => { resolvePromise = r; });
+      const asyncSourceFn = vi.fn(() => promise);
+
+      core.registerActionsSource(asyncSourceFn);
+      let current = core.allActions.value; // initial eval
+
+      // Resolve with the action
+      resolvePromise!([actionWithHotkey]);
+      await nextTick(); await nextTick(); // Wait for promise and vue reactivity
+      current = core.allActions.value; // re-evaluate
+      expect(current.find((a: ActionDefinition) => a.id === 'asyncFilterOut')).toBeDefined();
+      expect(mockKeyBindingsOn).toHaveBeenCalledWith('ctrl+shift+f', expect.any(Function), expect.any(Object));
+
+      // Now, simulate the source changing to resolve to an empty array (action removed)
+      // This requires the source function to be called again. We can trigger this by
+      // replacing the source or by having a reactive dependency that changes.
+      // For simplicity here, we'll assume a scenario where the source is re-evaluated.
+      // A more robust test might involve a Ref<() => Promise> or similar that CommandCore watches.
+      // However, CommandCore re-evaluates function sources if their containing Map (registeredSources) changes.
+      // If we re-register the same function, it might not re-evaluate unless CommandCore's logic for functional sources is more nuanced.
+
+      // Let's simulate the source being updated by unregistering and re-registering a new promise
+      // that resolves to an empty array, effectively removing the action.
+      const sourceKey = core.unregisterActionsSource( (core as any).registeredSources.value.keys().next().value );
+      await nextTick();
+
+      let resolvePromise2: (actions: ActionDefinition[]) => void;
+      const promise2 = new Promise<ActionDefinition[]>(r => { resolvePromise2 = r; });
+      const asyncSourceFn2 = vi.fn(() => promise2);
+      core.registerActionsSource(asyncSourceFn2);
+      current = core.allActions.value; // eval
+
+      resolvePromise2!([]); // Resolve with empty, filtering out the action
+      await nextTick(); await nextTick();
+      current = core.allActions.value; // re-evaluate
+
+      expect(current.find((a: ActionDefinition) => a.id === 'asyncFilterOut')).toBeUndefined();
+      expect(unregisterMock).toHaveBeenCalled(); // Hotkey for 'asyncFilterOut' should have been unregistered.
+    });
   });
 });
 
-describe('CommandCore Advanced Capabilities', () => {
+describe('ActionCore Advanced Capabilities', () => {
   beforeEach(() => {
     vi.useFakeTimers();
-    destroyCommandCoreInstance();
+    destroyActionCoreInstance();
     mockKeyBindingsOn.mockClear().mockReturnValue(() => {});
     mockKeyBindingsStop.mockClear();
   });
 
   afterEach(() => {
-    destroyCommandCoreInstance();
+    destroyActionCoreInstance();
     vi.clearAllTimers();
     vi.useRealTimers();
   });
 
   it('should store and retrieve actions with extended properties (keywords, description, meta)', () => {
-    const core = useCommandCore();
+    const core = useActionCore();
     const action = createActionDef('extPropAction', {
       keywords: ['test', 'extended'],
       description: 'An action with more properties.',
@@ -520,7 +613,7 @@ describe('CommandCore Advanced Capabilities', () => {
   });
 
   it('should allow subItems to be an async function and validate action', () => {
-    const core = useCommandCore();
+    const core = useActionCore();
     const subAction = createActionDef('sub1');
     const asyncSubItemsSource = createActionDef('asyncSubItemsAction', {
       title: 'Action with Async SubItems',
@@ -539,7 +632,7 @@ describe('CommandCore Advanced Capabilities', () => {
   });
 
   it('should pass rich ActionContext to handler and canExecute', () => {
-    const core = useCommandCore();
+    const core = useActionCore();
     const handlerMock = vi.fn();
     const canExecuteMock = vi.fn(() => true);
     const action = createActionDef('contextAction', {
@@ -560,7 +653,7 @@ describe('CommandCore Advanced Capabilities', () => {
   });
 
   it('should include actions with meta.paletteHidden in allActions', () => {
-    const core = useCommandCore();
+    const core = useActionCore();
     const actionVisible = createActionDef('visibleAct');
     const actionHidden = createActionDef('hiddenAct', {
       meta: { paletteHidden: true },
@@ -570,7 +663,7 @@ describe('CommandCore Advanced Capabilities', () => {
   });
 
   it('should allow filtering based on meta properties via canExecute (simulated scope check)', () => {
-    const core = useCommandCore();
+    const core = useActionCore();
     const handlerMock = vi.fn();
     const actionDef: ActionDefinition = createActionDef('scopedAction', {
       meta: { requiredScope: 'admin' },
@@ -587,7 +680,7 @@ describe('CommandCore Advanced Capabilities', () => {
 
     core.executeAction('scopedAction', { data: { possessedScopes: ['user'] } });
     expect(handlerMock).not.toHaveBeenCalled();
-    expect(consoleWarnSpy).toHaveBeenCalledWith('[CommandCore]', 'Action "scopedAction" cannot be executed due to canExecute returning false.', { context: { data: { possessedScopes: ['user'] } }});
+    expect(consoleWarnSpy).toHaveBeenCalledWith('[ActionCore]', 'Action "scopedAction" cannot be executed due to canExecute returning false.', { context: { data: { possessedScopes: ['user'] } }});
     consoleWarnSpy.mockClear();
 
     core.executeAction('scopedAction', { data: { possessedScopes: ['admin', 'user'] } });
@@ -597,7 +690,7 @@ describe('CommandCore Advanced Capabilities', () => {
   });
 
   it('should allow filtering based on meta properties via canExecute (simulated mode check)', () => {
-    const core = useCommandCore();
+    const core = useActionCore();
     const handlerMock = vi.fn();
     const actionDef = createActionDef('modeAction', {
       meta: { modes: ['edit', 'advanced'] },
@@ -614,7 +707,7 @@ describe('CommandCore Advanced Capabilities', () => {
 
     core.executeAction('modeAction', { data: { currentMode: 'view' } });
     expect(handlerMock).not.toHaveBeenCalled();
-    expect(consoleWarnSpy).toHaveBeenCalledWith('[CommandCore]', 'Action "modeAction" cannot be executed due to canExecute returning false.', { context: { data: { currentMode: 'view' } }});
+    expect(consoleWarnSpy).toHaveBeenCalledWith('[ActionCore]', 'Action "modeAction" cannot be executed due to canExecute returning false.', { context: { data: { currentMode: 'view' } }});
     consoleWarnSpy.mockClear();
 
     core.executeAction('modeAction', { data: { currentMode: 'edit' } });
@@ -624,7 +717,7 @@ describe('CommandCore Advanced Capabilities', () => {
   });
 
   it('should support chained action execution by handlers (isLoading managed per call)', async () => {
-    const core = useCommandCore();
+    const core = useActionCore();
     const handlerB = vi.fn(async () => { await nextTick(); });
     const handlerA = vi.fn(async () => {
       await core.executeAction('actionB');
@@ -645,7 +738,7 @@ describe('CommandCore Advanced Capabilities', () => {
   });
 
   it('should allow actions to store and retrieve undo-related metadata', () => {
-    const core = useCommandCore();
+    const core = useActionCore();
     let actionExecutionResult: any = null;
     const originalActionHandler = vi.fn((context: ActionContext) => {
       actionExecutionResult = { dataProcessed: context.data, timestamp: Date.now() };
@@ -690,7 +783,7 @@ describe('CommandCore Advanced Capabilities', () => {
   });
 
   it('allActions and hotkeys should react to in-place changes in a Ref<ActionDefinition[]> source', async () => {
-    const core = useCommandCore();
+    const core = useActionCore();
     const action1Initial: ActionDefinition = createActionDef('refReactTest1', { hotkey: 'ctrl+1' });
     const action2: ActionDefinition = createActionDef('refReactTest2', { hotkey: 'ctrl+2' });
 
@@ -713,5 +806,80 @@ describe('CommandCore Advanced Capabilities', () => {
     await nextTick();
     expect(core.getAction('refReactTest1')?.title).toBe('Ref Test 1 Updated');
     expect(mockKeyBindingsOn).toHaveBeenCalledWith('alt+1', expect.any(Function), expect.any(Object));
+  });
+
+  it('should correctly process actions with runInTextInput as a function', async () => {
+    const core = useActionCore();
+    const mockInputBlocker = vi.fn((el: Element | null) => el?.tagName === 'INPUT');
+    const action = createActionDef('inputFuncTest', {
+      runInTextInput: mockInputBlocker,
+    });
+    core.registerActionsSource([action]);
+    const resolvedActions = core.allActions.value;
+    await nextTick();
+
+    const onCall = mockKeyBindingsOn.mock.calls.find(call => call[0] === 'ctrl+f');
+    const hotkeyCallback = onCall![1] as (event: KeyboardEvent) => void;
+    const executeActionSpy = vi.spyOn(core, 'executeAction');
+
+    // Simulate input focus
+    Object.defineProperty(global.document, 'activeElement', {
+      value: document.createElement('input'),
+      configurable: true,
+    });
+    hotkeyCallback(new KeyboardEvent('keydown', { key: 'f', ctrlKey: true }));
+    await nextTick();
+    expect(mockInputBlocker).toHaveBeenCalledWith(document.activeElement);
+    expect(executeActionSpy).toHaveBeenCalled();
+    executeActionSpy.mockClear();
+
+    // Simulate non-input focus
+    Object.defineProperty(global.document, 'activeElement', {
+      value: document.createElement('div'),
+      configurable: true,
+    });
+    hotkeyCallback(new KeyboardEvent('keydown', { key: 'f', ctrlKey: true }));
+    await nextTick();
+    expect(mockInputBlocker).toHaveBeenCalledWith(document.activeElement);
+    expect(executeActionSpy).not.toHaveBeenCalled();
+
+    Object.defineProperty(global.document, 'activeElement', { value: null, configurable: true }); // Cleanup
+    executeActionSpy.mockRestore();
+  });
+
+  it('should handle action.hotkey as an array of hotkey strings', async () => {
+    const core = useActionCore();
+    const action = createActionDef('multiHotkey', { hotkey: ['ctrl+a', 'cmd+a'] });
+    core.registerActionsSource([action]);
+    const resolved = core.allActions.value;
+    await nextTick();
+
+    expect(mockKeyBindingsOn).toHaveBeenCalledWith('ctrl+a', expect.any(Function), expect.any(Object));
+    expect(mockKeyBindingsOn).toHaveBeenCalledWith('cmd+a', expect.any(Function), expect.any(Object));
+  });
+
+  it('isComponentIntegrationEnabled should work based on ActionCoreOptions', () => {
+    // Test case 1: componentIntegration is undefined
+    let core1 = useActionCore();
+    expect(core1.isComponentIntegrationEnabled('VBtn')).toBe(false);
+    destroyActionCoreInstance();
+
+    // Test case 2: componentIntegration is true (boolean)
+    let core2 = useActionCore({ componentIntegration: true });
+    expect(core2.isComponentIntegrationEnabled('VBtn')).toBe(true);
+    expect(core2.isComponentIntegrationEnabled('VListItem')).toBe(true);
+    destroyActionCoreInstance();
+
+    // Test case 3: componentIntegration is an object
+    let core3 = useActionCore({ componentIntegration: { VBtn: true, VChip: false } });
+    expect(core3.isComponentIntegrationEnabled('VBtn')).toBe(true);
+    expect(core3.isComponentIntegrationEnabled('VChip')).toBe(false);
+    expect(core3.isComponentIntegrationEnabled('VListItem')).toBe(false); // Not specified, so false
+    destroyActionCoreInstance();
+
+    // Test case 4: componentIntegration is false (boolean)
+    let core4 = useActionCore({ componentIntegration: false });
+    expect(core4.isComponentIntegrationEnabled('VBtn')).toBe(false);
+    destroyActionCoreInstance();
   });
 });

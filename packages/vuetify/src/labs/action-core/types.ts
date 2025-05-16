@@ -49,7 +49,7 @@ export interface KeyBindingHandlerOptions {
 
 export type KeyBindingTrigger = string | string[] | ((event: KeyboardEvent) => boolean);
 
-// -------------- CommandCore Action Types (derived from scratch/src/types/action.types.ts) --------------
+// -------------- ActionCore Action Types (derived from scratch/src/types/action.types.ts) --------------
 
 /** Context passed to action handlers and canExecute checks. */
 export interface ActionContext {
@@ -90,7 +90,7 @@ export interface ActionDefinition<T extends ActionContext = ActionContext> {
    * - `'only'`: Hotkey only runs if a text input is focused.
    * - `string | string[]`: Hotkey only runs if focused input's `name` attribute matches (implies input focus).
    * - `function`: Custom predicate `(element: Element | null) => boolean` (implies input focus if element is an input).
-   * - `undefined` (default): Behavior depends on the nature of the hotkey and default input blocking. For CommandCore, if undefined, it means the hotkey is subject to normal input blocking unless it's a known text editing shortcut.
+   * - `undefined` (default): Behavior depends on the nature of the hotkey and default input blocking. For ActionCore, if undefined, it means the hotkey is subject to normal input blocking unless it's a known text editing shortcut.
    */
   runInTextInput?: boolean | 'only' | RunInTextInputMatcher;
   /** Optional function to determine if the action can be executed. */
@@ -109,16 +109,16 @@ export interface ActionDefinition<T extends ActionContext = ActionContext> {
   group?: string
 }
 
-/** Represents a source of actions for the CommandCore store. */
+/** Represents a source of actions for the ActionCore store. */
 export type ActionsSource =
   | ActionDefinition[]
   | Ref<ActionDefinition[]>
   | (() => ActionDefinition[] | Promise<ActionDefinition[]>);
 
 /**
- * Configuration options for initializing a CommandCore instance.
+ * Configuration options for initializing a ActionCore instance.
  */
-export interface CommandCoreOptions {
+export interface ActionCoreOptions {
   /**
    * Controls whether Vuetify components (like VBtn, VListItem) integrate their `command` prop.
    * If `true`, all supported components attempt integration.
@@ -126,13 +126,13 @@ export interface CommandCoreOptions {
    * Defaults to `false` if not specified by the user, meaning no automatic component integration.
    */
   componentIntegration?: boolean | Record<string, boolean>;
-  // Add any other future global CommandCore options here
+  // Add any other future global ActionCore options here
 }
 
 /**
- * Defines the public API of the CommandCore service.
+ * Defines the public API of the ActionCore service.
  */
-export interface CommandCorePublicAPI {
+export interface ActionCorePublicAPI {
   /** Reactive state indicating if any action is currently being executed. */
   readonly isLoading: Readonly<Ref<boolean>>;
   /** Computed property that aggregates all valid actions from all registered sources. */
@@ -148,6 +148,6 @@ export interface CommandCorePublicAPI {
   executeAction(actionId: string, invocationContext?: ActionContext): Promise<void>;
   /** Checks if component integration is enabled for a specific component name. */
   isComponentIntegrationEnabled(componentName: string): boolean;
-  /** Cleans up the CommandCore instance. */
+  /** Cleans up the ActionCore instance. */
   destroy(): void;
 }

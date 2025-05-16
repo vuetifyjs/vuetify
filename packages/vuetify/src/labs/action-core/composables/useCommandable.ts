@@ -1,8 +1,8 @@
 import { ref, watch, onUnmounted, computed, readonly, type WatchStopHandle, getCurrentInstance } from 'vue';
-import type { ActionDefinition, ActionContext, CommandCorePublicAPI } from '../types';
+import type { ActionDefinition, ActionContext, ActionCorePublicAPI } from '../types';
 
 /**
- * @file useCommandable.ts Composable to provide CommandCore integration logic for Vuetify components.
+ * @file useCommandable.ts Composable to provide ActionCore integration logic for Vuetify components.
  */
 
 export interface UseCommandableProps {
@@ -11,22 +11,22 @@ export interface UseCommandableProps {
 }
 
 /**
- * Composable for Vuetify components to integrate with CommandCore.
+ * Composable for Vuetify components to integrate with ActionCore.
  * It handles the `command` and `commandData` props, manages the lifecycle of inline actions,
  * and provides reactive state and an execution function.
  *
  * @param {UseCommandableProps} props - Component props including `command` and `commandData`.
- * @param {CommandCorePublicAPI | null} core - The injected CommandCore service instance (or null if not available).
+ * @param {ActionCorePublicAPI | null} core - The injected ActionCore service instance (or null if not available).
  * @param {string} componentName - The name of the component using this composable (e.g., 'VBtn'), used for context.
  * @returns {object} Reactive properties and functions for command integration.
- * @property {ComputedRef<boolean>} isCommandable - True if CommandCore is available and integration is enabled for this component.
+ * @property {ComputedRef<boolean>} isCommandable - True if ActionCore is available and integration is enabled for this component.
  * @property {ComputedRef<ActionDefinition | undefined>} commandAction - The resolved ActionDefinition if a command is active.
  * @property {(contextOverrides?: Partial<ActionContext>, domEvent?: Event) => Promise<void>} executeCommand - Function to execute the current command.
  * @property {Readonly<Ref<string | undefined>>} effectiveActionId - The ID of the action to be executed.
  */
 export function useCommandable(
   props: UseCommandableProps,
-  core: CommandCorePublicAPI | null,
+  core: ActionCorePublicAPI | null,
   componentName: string
 ) {
   const commandDataProp = computed(() => props.commandData);

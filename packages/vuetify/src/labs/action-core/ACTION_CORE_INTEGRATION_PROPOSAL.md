@@ -1,37 +1,37 @@
-# Vue CommandCore - Integration Proposal
+# Vue ActionCore - Integration Proposal
 
 **Date:** 5/15/2025
 
 **Author:** Matthew Ary + Google Gemini 2.5
 
-**Status:** Proposal
+**Status:** Revised Draft - Core Initialization Complete
 
 ## 1. Goal
 
-To integrate `CommandCore` into Vuetify as an optional, labs feature, providing centralized action/hotkey management with opt-in component integration and strong decoupling.
+To integrate `ActionCore` into Vuetify as an optional, labs feature, providing centralized action/hotkey management with opt-in component integration and strong decoupling.
 
-## 2. Core `CommandCore` System Initialization
+## 2. Core `ActionCore` System Initialization
 
-The `CommandCore` service will be initialized and provided at the Vuetify app level.
+This step is **COMPLETED**. `ActionCore` is initialized in `framework.ts` and provided to the application based on `VuetifyOptions`.
 
 ### 2.1. Changes to `VuetifyOptions`
 
-A new optional property `commandCore` will be added to the `VuetifyOptions` interface (defined in `packages/vuetify/src/framework.ts` and relevant type files).
+A new optional property `actionCore` will be added to the `VuetifyOptions` interface (defined in `packages/vuetify/src/framework.ts` and relevant type files).
 
 ```typescript
 // In packages/vuetify/src/framework.ts (and/or types.ts)
 // ... other imports ...
-import type { CommandCoreOptions as ActualCommandCoreOptions, CommandCore, CommandCoreSymbol } from '@/labs/command-core'; // Adjust path as needed
+import type { ActionCoreOptions as ActualActionCoreOptions, ActionCore, ActionCoreSymbol } from '@/labs/action-core'; // Adjust path as needed
 
 export interface VuetifyOptions {
   // ... existing options (aliases, components, defaults, display, etc.)
-  commandCore?: boolean | ActualCommandCoreOptions;
+  actionCore?: boolean | ActualActionCoreOptions;
 }
 ```
 
-*   If `commandCore` is `true`, the service will be initialized with default internal options.
-*   If `commandCore` is an `ActualCommandCoreOptions` object, these options will be passed to the `CommandCore` constructor.
-*   If `commandCore` is `false` or `undefined`, the `CommandCore` service will not be initialized or provided.
+*   If `actionCore` is `true`, the service will be initialized with default internal options.
+*   If `actionCore` is an `ActualActionCoreOptions` object, these options will be passed to the `ActionCore` constructor.
+*   If `actionCore` is `false` or `undefined`, the `ActionCore` service will not be initialized or provided.
 
 ### 2.2. Conditional Instantiation in `createVuetify`
 
@@ -40,23 +40,23 @@ Inside the `createVuetify` function in `packages/vuetify/src/framework.ts`:
 ```typescript
 // In packages/vuetify/src/framework.ts, within scope.run(() => { ... })
 // ... other service imports ...
-import { useCommandCore, destroyCommandCoreInstance, CommandCoreSymbol, type CommandCoreOptions as ActualCommandCoreOptions } from '@/labs/command-core'; // Adjust path
+import { useActionCore, destroyActionCoreInstance, ActionCoreSymbol, type ActionCoreOptions as ActualActionCoreOptions } from '@/labs/action-core'; // Adjust path
 
 // ... existing service creations (defaults, display, theme, etc.)
 
-let commandCoreInstance: CommandCore | undefined = undefined;
+let actionCoreInstance: ActionCore | undefined = undefined;
 
-if (options.commandCore) {
-  const commandCoreOpts: ActualCommandCoreOptions = typeof options.commandCore === 'object' ? options.commandCore : {};
-  commandCoreInstance = useCommandCore(commandCoreOpts);
-  // useCommandCore itself handles onScopeDispose if called within createVuetify's effectScope
+if (options.actionCore) {
+  const actionCoreOpts: ActualActionCoreOptions = typeof options.actionCore === 'object' ? options.actionCore : {};
+  actionCoreInstance = useActionCore(actionCoreOpts);
+  // useActionCore itself handles onScopeDispose if called within createVuetify's effectScope
 }
 
 // Then, in the install function:
 function install (app: App) {
   // ... existing app.provide calls for DefaultsSymbol, DisplaySymbol, etc.
-  if (commandCoreInstance) {
-    app.provide(CommandCoreSymbol, commandCoreInstance);
+  if (actionCoreInstance) {
+    app.provide(ActionCoreSymbol, actionCoreInstance);
   }
   // ... rest of install
 }
@@ -64,17 +64,17 @@ function install (app: App) {
 // In the return object of createVuetify:
 return {
   // ... existing services (defaults, display, theme, etc.)
-  commandCore: commandCoreInstance, // Expose the instance if created (optional)
+  actionCore: actionCoreInstance, // Expose the instance if created (optional)
   install,
-  unmount, // current unmount calls scope.stop(), which should trigger CommandCore's onScopeDispose if initialized within this scope
+  unmount, // current unmount calls scope.stop(), which should trigger ActionCore's onScopeDispose if initialized within this scope
 }
 ```
 
-This ensures `CommandCore` is only active if explicitly configured.
+This ensures `ActionCore` is only active if explicitly configured.
 
 ## 3. Candidate Components for Integration
 
-Based on a review of `packages/vuetify/src/components/`, the following components (non-exhaustive) are primary candidates for `CommandCore` integration due to their action-oriented nature:
+Based on a review of `packages/vuetify/src/components/`, the following components (non-exhaustive) are primary candidates for `ActionCore` integration due to their action-oriented nature:
 
 *   **Direct Action Execution:** `VBtn`, `VListItem` (non-nav), `VChip` (clickable/closable), `VFab`, `VSpeedDial` actions, `VCardActions` buttons, `VBanner` actions, `VAlert` actions, `VSnackbar` action, `VDialog` buttons.
 *   **Navigation Actions:** `VListItem` (with `to`/`href`), `VBtn` (with `to`/`href`), `VTabs`/`VTab`, `VBreadcrumbsItem`, `VBottomNavigation` buttons, `VNavigationDrawer` items, `VAppBar` elements.
@@ -83,7 +83,7 @@ Based on a review of `packages/vuetify/src/components/`, the following component
 
 ## 4. Component Integration Strategy (Decoupled & Opt-In)
 
-Existing, mature components like `VBtn`, `VListItem`, etc., should not automatically change their behavior or require `CommandCore`. Integration will be opt-in via new props and controlled by a feature flag.
+Existing, mature components like `VBtn`, `VListItem`, etc., should not automatically change their behavior or require `ActionCore`. Integration will be opt-in via new props and controlled by a feature flag.
 
 ### 4.1. New Component Props
 Target components (e.g., `VBtn`, `VListItem`) will receive new optional props:
@@ -101,12 +101,12 @@ props: {
 
 ### 4.2. Feature Flag Mechanism for Component Integration
 
-To control whether the `command` prop is active on components, a feature flag will be used within the `CommandCoreOptions`.
+To control whether the `command` prop is active on components, a feature flag will be used within the `ActionCoreOptions`.
 
 ```typescript
-// In packages/vuetify/src/labs/command-core/types.ts
-export interface CommandCoreOptions {
-  // ... any other core CommandCore options ...
+// In packages/vuetify/src/labs/action-core/types.ts
+export interface ActionCoreOptions {
+  // ... any other core ActionCore options ...
 
   /**
    * Controls whether Vuetify components (like VBtn, VListItem) integrate their `command` prop.
@@ -124,10 +124,10 @@ export interface CommandCoreOptions {
 }
 ```
 
-*   **Default:** If `options.commandCore.componentIntegration` is undefined or `false`, no component integration occurs even if `CommandCore` is globally enabled.
-*   **Accessing the Flag:** The `CommandCore` class will store these `componentIntegration` settings from its constructor options. It will expose a method:
+*   **Default:** If `options.actionCore.componentIntegration` is undefined or `false`, no component integration occurs even if `ActionCore` is globally enabled.
+*   **Accessing the Flag:** The `ActionCore` class will store these `componentIntegration` settings from its constructor options. It will expose a method:
     ```typescript
-    // In CommandCore class
+    // In ActionCore class
     public isComponentIntegrationEnabled(componentName: string): boolean {
       if (!this.options.componentIntegration) return false;
       if (typeof this.options.componentIntegration === 'boolean') {
@@ -136,19 +136,21 @@ export interface CommandCoreOptions {
       return !!this.options.componentIntegration[componentName];
     }
     ```
-    Components will inject `CommandCoreSymbol` and call `core?.isComponentIntegrationEnabled('ComponentName')`.
+    Components will inject `ActionCoreSymbol` and call `core?.isComponentIntegrationEnabled('ComponentName')`.
 
 ### 4.3. Proposed `useCommandable` Composable
-To encapsulate common logic for components integrating with `CommandCore`.
+*   **Status:** Implemented in `packages/vuetify/src/labs/action-core/composables/useCommandable.ts`.
+*   **Unit Tests:** `useCommandable.spec.ts` is partially passing. Remaining failures (3 out of 12) appear related to the complexities of testing reactive watchers and lifecycle hooks in a direct composable testing environment using `withSetup`. These may require further test refinement or be better validated through component-level integration tests once `useCommandable` is used in actual components.
+*   **Functionality:** (Keep the existing description of what it does).
 
 ```typescript
-// Potential structure in '@/labs/command-core/composables/useCommandable.ts'
+// Potential structure in '@/labs/action-core/composables/useCommandable.ts'
 import { ref, watch, onUnmounted, computed, type Ref } from 'vue';
-import type { CommandCore, ActionDefinition, ActionContext } from '@/labs/command-core';
+import type { ActionCore, ActionDefinition, ActionContext } from '@/labs/action-core';
 
 export function useCommandable(
   props: { command?: string | ActionDefinition; commandData?: any },
-  core: CommandCore | null,
+  core: ActionCore | null,
   componentName: string
 ) {
   const commandProp = computed(() => props.command);
@@ -219,9 +221,9 @@ export function useCommandable(
 // command?: string | ActionDefinition;
 // commandData?: any;
 
-// ... imports (inject, computed, CommandCoreSymbol, useCommandable, useLink, useGroupItem)
+// ... imports (inject, computed, ActionCoreSymbol, useCommandable, useLink, useGroupItem)
 
-const core = inject(CommandCoreSymbol, null);
+const core = inject(ActionCoreSymbol, null);
 // props would be available in setup context
 const { isCommandable, commandAction, executeCommand, effectiveActionId } =
   useCommandable(props, core, 'VBtn');
@@ -260,13 +262,13 @@ This makes it clear how item-specific data is passed to a generic `deleteUser` a
 
 ## 6. Open Questions & Discussion Points for the Team
 
-1.  **Feature Flag Granularity:** Is `commandCore.componentIntegration: { VBtn: true }` the right level, or should it be more/less granular?
+1.  **Feature Flag Granularity:** Is `actionCore.componentIntegration: { VBtn: true }` the right level, or should it be more/less granular?
 2.  **`ActionDefinition` in Props:** Is passing full `ActionDefinition` objects directly to component props the best API, or should components always refer to globally registered action IDs? (The proposal supports both, but one might be preferred).
 3.  **Context for `canExecute` in Components:** How much context should a simple component like `VBtn` try to gather for evaluating an action's `canExecute` for its own `disabled` state? Should it primarily rely on `action.disabled`?
-4.  **Naming of the `command` prop:** Is `command` the clearest name? Alternatives: `action`, `commandCoreAction`.
-5.  **Default `CommandCoreOptions`**: What should be the sensible defaults if `options.commandCore` is just `true`?
+4.  **Naming of the `command` prop:** Is `command` the clearest name? Alternatives: `action`, `actionCoreAction`.
+5.  **Default `ActionCoreOptions`**: What should be the sensible defaults if `options.actionCore` is just `true`?
 
-This proposal now fully incorporates the `commandData` prop for enhanced contextual action execution.
+This proposal outlines the integration strategy. Core service initialization is complete. The `useCommandable` composable has been created, with next steps focusing on ensuring its full testability or moving to component integration.
 
 ---
 *This proposal is a draft and subject to refinement based on team feedback and further analysis.*

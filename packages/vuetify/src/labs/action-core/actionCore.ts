@@ -5,32 +5,32 @@ import type {
   ActionDefinition,
   ActionContext,
   ActionsSource,
-  CommandCoreOptions as CommandCoreInstanceOptions,
-  CommandCorePublicAPI,
+  ActionCoreOptions as ActionCoreInstanceOptions,
+  ActionCorePublicAPI,
   KeyBindingHandlerOptions,
 } from './types';
 import { IS_CLIENT, log, isPromise } from './utils'; // Import centralized utilities
 
 /**
- * @file commandCore.ts The core logic for managing, registering, and executing actions,
+ * @file actionCore.ts The core logic for managing, registering, and executing actions,
  * integrating with `useKeyBindings` for hotkey support.
  */
 
-const COMPONENT_NAME = 'CommandCore';
+const COMPONENT_NAME = 'ActionCore';
 
 /**
- * Injection key for providing and injecting the CommandCore instance's public API.
- * @type {InjectionKey<CommandCorePublicAPI>}
+ * Injection key for providing and injecting the ActionCore instance's public API.
+ * @type {InjectionKey<ActionCorePublicAPI>}
  */
-export const CommandCoreSymbol: InjectionKey<CommandCorePublicAPI> = Symbol.for('vuetify:command-core');
+export const ActionCoreSymbol: InjectionKey<ActionCorePublicAPI> = Symbol.for('vuetify:action-core');
 
 /**
  * Manages collections of actions, their hotkeys, and execution state.
  * It provides a centralized system for defining and triggering commands within an application.
  */
-class CommandCore implements CommandCorePublicAPI {
-  /** Options passed to the CommandCore instance during construction. */
-  private readonly options: CommandCoreInstanceOptions;
+class ActionCore implements ActionCorePublicAPI {
+  /** Options passed to the ActionCore instance during construction. */
+  private readonly options: ActionCoreInstanceOptions;
 
   /** Reactive state indicating if any action is currently being executed. */
   public readonly isLoading: Readonly<Ref<boolean>>;
@@ -55,10 +55,10 @@ class CommandCore implements CommandCorePublicAPI {
   public readonly allActions: ComputedRef<Readonly<ActionDefinition<any>[]>>;
 
   /**
-   * Creates an instance of CommandCore.
-   * @param {CommandCoreInstanceOptions} [options={}] - Configuration options for this CommandCore instance.
+   * Creates an instance of ActionCore.
+   * @param {ActionCoreInstanceOptions} [options={}] - Configuration options for this ActionCore instance.
    */
-  constructor(options: CommandCoreInstanceOptions = {}) {
+  constructor(options: ActionCoreInstanceOptions = {}) {
     this.options = options; // Store options for potential future use (e.g., componentIntegration flags)
     this.isLoading = readonly(this._isLoading);
     this.keyBindings = useKeyBindings(); // Initialize keybindings
@@ -217,7 +217,7 @@ class CommandCore implements CommandCorePublicAPI {
   }
 
   /**
-   * Registers a new source of actions with CommandCore.
+   * Registers a new source of actions with ActionCore.
    * @param {ActionsSource} source - The source of actions (array, Ref, or function).
    * @returns {symbol} A unique symbol key for this source, which can be used to unregister it.
    */
@@ -308,7 +308,7 @@ class CommandCore implements CommandCorePublicAPI {
 
   /**
    * Method to check if component integration is enabled for a specific component.
-   * Relies on `componentIntegration` settings passed in `CommandCoreInstanceOptions`.
+   * Relies on `componentIntegration` settings passed in `ActionCoreInstanceOptions`.
    * @param {string} componentName - The name of the component (e.g., 'VBtn').
    * @returns {boolean} True if integration is enabled for the component.
    */
@@ -320,11 +320,11 @@ class CommandCore implements CommandCorePublicAPI {
   }
 
   /**
-   * Cleans up the CommandCore instance, stopping keybindings and clearing registered actions/hotkeys.
-   * Called automatically via `onScopeDispose` if `useCommandCore` is used in a setup function.
+   * Cleans up the ActionCore instance, stopping keybindings and clearing registered actions/hotkeys.
+   * Called automatically via `onScopeDispose` if `useActionCore` is used in a setup function.
    */
   public destroy = () => {
-    log('debug', COMPONENT_NAME, 'Destroying CommandCore instance');
+    log('debug', COMPONENT_NAME, 'Destroying ActionCore instance');
     this.keyBindings.stop();
     this.actionHotkeysUnregisterMap.forEach(fns => fns.forEach(fn => fn()));
     this.actionHotkeysUnregisterMap.clear();
@@ -334,39 +334,39 @@ class CommandCore implements CommandCorePublicAPI {
   };
 }
 
-/** Singleton instance of CommandCore. */
-let _commandCoreInstance: CommandCore | null = null;
+/** Singleton instance of ActionCore. */
+let _actionCoreInstance: ActionCore | null = null;
 
 /**
- * Composable function to get the singleton instance of CommandCore.
- * Initializes CommandCore on its first call within a client environment.
+ * Composable function to get the singleton instance of ActionCore.
+ * Initializes ActionCore on its first call within a client environment.
  * Manages automatic cleanup via `onScopeDispose` if used within a Vue component's setup context.
- * @param {CommandCoreInstanceOptions} [options] - Optional configuration for CommandCore, used only on first initialization.
- * @returns {CommandCore} The singleton CommandCore instance.
+ * @param {ActionCoreInstanceOptions} [options] - Optional configuration for ActionCore, used only on first initialization.
+ * @returns {ActionCore} The singleton ActionCore instance.
  */
-export function useCommandCore(options?: CommandCoreInstanceOptions): CommandCorePublicAPI {
-  if (!_commandCoreInstance && IS_CLIENT) {
-    _commandCoreInstance = new CommandCore(options);
+export function useActionCore(options?: ActionCoreInstanceOptions): ActionCorePublicAPI {
+  if (!_actionCoreInstance && IS_CLIENT) {
+    _actionCoreInstance = new ActionCore(options);
     if (getCurrentInstance()) {
       onScopeDispose(() => {
-        destroyCommandCoreInstance();
+        destroyActionCoreInstance();
       });
     }
-  } else if (!_commandCoreInstance) {
-    log('warn', COMPONENT_NAME, 'CommandCore accessed in a non-client environment without prior client-side initialization. Features might be limited.');
-    _commandCoreInstance = new CommandCore(options);
+  } else if (!_actionCoreInstance) {
+    log('warn', COMPONENT_NAME, 'ActionCore accessed in a non-client environment without prior client-side initialization. Features might be limited.');
+    _actionCoreInstance = new ActionCore(options);
   }
-  return _commandCoreInstance!;
+  return _actionCoreInstance!;
 }
 
 /**
- * Explicitly destroys the current singleton CommandCore instance, if one exists.
+ * Explicitly destroys the current singleton ActionCore instance, if one exists.
  * This will stop all keybindings and clear all registered actions.
  */
-export function destroyCommandCoreInstance() {
-  if (_commandCoreInstance) {
-    _commandCoreInstance.destroy();
-    _commandCoreInstance = null;
+export function destroyActionCoreInstance() {
+  if (_actionCoreInstance) {
+    _actionCoreInstance.destroy();
+    _actionCoreInstance = null;
   }
 }
 

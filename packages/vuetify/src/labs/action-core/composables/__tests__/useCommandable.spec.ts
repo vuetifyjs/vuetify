@@ -1,7 +1,7 @@
 import { ref, computed, nextTick, reactive, createApp, defineComponent } from 'vue';
 import { describe, it, expect, beforeEach, afterEach, vi, type Mocked } from 'vitest';
 import { useCommandable, type UseCommandableProps } from '../useCommandable'; // Adjust path if actual is different
-import type { CommandCorePublicAPI, ActionDefinition, ActionsSource } from '../../types';
+import type { ActionCorePublicAPI, ActionDefinition, ActionsSource } from '../../types';
 
 // --- Test Utils ---
 /**
@@ -23,15 +23,15 @@ function withSetup<T>(composableFn: () => T): [T, import('vue').App] {
   return [result, app];
 }
 
-// Mock the CommandCore service with correct signatures using vi.fn<TFunc>()
-const mockGetAction = vi.fn<CommandCorePublicAPI['getAction']>();
-const mockExecuteAction = vi.fn<CommandCorePublicAPI['executeAction']>();
-const mockRegisterActionsSource = vi.fn<CommandCorePublicAPI['registerActionsSource']>();
-const mockUnregisterActionsSource = vi.fn<CommandCorePublicAPI['unregisterActionsSource']>();
-const mockIsComponentIntegrationEnabled = vi.fn<CommandCorePublicAPI['isComponentIntegrationEnabled']>();
-const mockDestroy = vi.fn<CommandCorePublicAPI['destroy']>();
+// Mock the ActionCore service with correct signatures using vi.fn<TFunc>()
+const mockGetAction = vi.fn<ActionCorePublicAPI['getAction']>();
+const mockExecuteAction = vi.fn<ActionCorePublicAPI['executeAction']>();
+const mockRegisterActionsSource = vi.fn<ActionCorePublicAPI['registerActionsSource']>();
+const mockUnregisterActionsSource = vi.fn<ActionCorePublicAPI['unregisterActionsSource']>();
+const mockIsComponentIntegrationEnabled = vi.fn<ActionCorePublicAPI['isComponentIntegrationEnabled']>();
+const mockDestroy = vi.fn<ActionCorePublicAPI['destroy']>();
 
-const createMockCore = (): Mocked<CommandCorePublicAPI> => ({
+const createMockCore = (): Mocked<ActionCorePublicAPI> => ({
   isLoading: ref(false),
   allActions: computed(() => []), // Use computed for correct type
   getAction: mockGetAction,
@@ -45,7 +45,7 @@ const createMockCore = (): Mocked<CommandCorePublicAPI> => ({
 describe('useCommandable', () => {
   let app: import('vue').App | null = null;
   let props: UseCommandableProps; // Define as reactive object type
-  let mockCore: Mocked<CommandCorePublicAPI> | null;
+  let mockCore: Mocked<ActionCorePublicAPI> | null;
 
   // Reactive ref to control the mock return value for isComponentIntegrationEnabled
   const mockIntegrationStatus = ref(true);
@@ -304,7 +304,7 @@ describe('useCommandable', () => {
       expect(mockUnregisterActionsSource).toHaveBeenCalledWith(symbolKey);
     });
 
-    // Test for deep watch on command object is tricky without knowing what CommandCore does
+    // Test for deep watch on command object is tricky without knowing what ActionCore does
     // with mutated ActionDefinitions. Current composable logic re-registers if object ref changes.
 
     it('should unregister active inline action on component unmount', async () => {
@@ -378,7 +378,7 @@ describe('useCommandable', () => {
 
       // Mutate the object referenced by props.command
       if (typeof props.command === 'object' && props.command !== null) {
-        props.command.title = 'Mutated Title!';
+        (props.command as ActionDefinition).title = 'Mutated Title!'; // Ensure type for mutation
       } else {
         throw new Error("Test setup error: props.command is not an object for mutation.");
       }

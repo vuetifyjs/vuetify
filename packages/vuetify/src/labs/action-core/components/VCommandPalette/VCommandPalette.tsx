@@ -13,10 +13,10 @@ import { VCommandPaletteList, type VCommandPaletteListItemScope, type VCommandPa
 import { VCommandPaletteHeader } from './VCommandPaletteHeader'
 import { VCommandPaletteSearch } from './VCommandPaletteSearch'
 
-// Composables (Vuetify and CommandCore)
+// Composables (Vuetify and ActionCore)
 import { makeComponentProps } from '@/composables/component'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { CommandCoreSymbol, type ActionDefinition, type ActionContext } from '@/labs/command-core'
+import { ActionCoreSymbol, type ActionDefinition, type ActionContext } from '@/labs/action-core'
 import { useCommandPaletteCore, type CommandPaletteListRef } from '../../composables/useCommandPaletteCore' // Added type import
 
 // Utilities
@@ -90,8 +90,8 @@ export const VCommandPalette = genericComponent<{
     // Cast slots to our more specific typed interface
     const typedSlots = slots as VCommandPaletteTypedSlots;
 
-    // Inject commandCore - this is used by useCommandPaletteCore
-    const commandCore = inject(CommandCoreSymbol)
+    // Inject actionCore - this is used by useCommandPaletteCore
+    const actionCore = inject(ActionCoreSymbol)
 
     // Refs for internal components and for the core composable
     const searchComponentRef = ref<InstanceType<typeof VCommandPaletteSearch> | null>(null) // Ref for VCommandPaletteSearch component instance
@@ -101,7 +101,7 @@ export const VCommandPalette = genericComponent<{
     // Use the centralized core composable, passing the ref for the VTextField instance
     const core = useCommandPaletteCore(
       props,
-      commandCore,
+      actionCore,
       emit,
       textFieldInstanceRef, // Pass the VTextField instance ref here
       listRef

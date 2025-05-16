@@ -3,7 +3,7 @@
 import { mount } from '@vue/test-utils'
 import { VCommandPalette } from './VCommandPalette'
 import { VDialog } from '@/components/VDialog'
-import { CommandCoreSymbol, type ActionDefinition, type CommandCorePublicAPI, type ActionContext } from '@/labs/command-core'
+import { ActionCoreSymbol, type ActionDefinition, type ActionCorePublicAPI, type ActionContext } from '@/labs/action-core'
 import { ref, markRaw, nextTick, computed, type Ref, type ComputedRef, type DeepReadonly } from 'vue'
 import { ThemeSymbol, type ThemeInstance } from '@/composables/theme' // InternalThemeDefinition is not exported
 import { DefaultsSymbol, type DefaultsInstance } from '@/composables/defaults'
@@ -22,8 +22,8 @@ interface MockInternalThemeDefinition {
   variables: Record<string, string | number>;
 }
 
-// Helper to create a Vitest mock for CommandCore
-const createMockCommandCore = (actions: ActionDefinition[] = []): CommandCorePublicAPI => {
+// Helper to create a Vitest mock for ActionCore
+const createMockActionCore = (actions: ActionDefinition[] = []): ActionCorePublicAPI => {
   const allActionsRef = ref<Readonly<ActionDefinition<any>[]>>(actions.map(markRaw))
   return {
     isLoading: ref(false),
@@ -206,11 +206,11 @@ const createMockIcons = (): InternalIconOptions => {
 };
 
 describe('VCommandPalette.tsx', () => {
-  let mockCommandCore: CommandCorePublicAPI
+  let mockActionCore: ActionCorePublicAPI
   let wrapper: ReturnType<typeof mountComponent>
 
   const mountComponent = (props: any = {}, actions: ActionDefinition[] = sampleActions, slots?: any) => {
-    mockCommandCore = createMockCommandCore(actions)
+    mockActionCore = createMockActionCore(actions)
     const mockTheme = createMockTheme();
     const mockDefaults = ref<DefaultsInstance>({
       global: {},
@@ -231,7 +231,7 @@ describe('VCommandPalette.tsx', () => {
       slots,
       global: {
         provide: {
-          [CommandCoreSymbol as symbol]: mockCommandCore,
+          [ActionCoreSymbol as symbol]: mockActionCore,
           [ThemeSymbol as symbol]: mockTheme,
           [DefaultsSymbol as symbol]: mockDefaults,
           [LocaleSymbol as symbol]: mockLocale,
@@ -256,7 +256,7 @@ describe('VCommandPalette.tsx', () => {
 
   it('v-model controls visibility', async () => {
     // Specific local mount for this test with VDialog stubbed
-    const localMockCommandCore = createMockCommandCore();
+    const localMockActionCore = createMockActionCore();
     const localMockTheme = createMockTheme();
     const localMockDefaults = ref<DefaultsInstance>({ global: {} });
     const localMockLocale = createMockLocale();
@@ -268,7 +268,7 @@ describe('VCommandPalette.tsx', () => {
       props: { modelValue: false }, // Start with modelValue: false
       global: {
         provide: {
-          [CommandCoreSymbol as symbol]: localMockCommandCore,
+          [ActionCoreSymbol as symbol]: localMockActionCore,
           [ThemeSymbol as symbol]: localMockTheme,
           [DefaultsSymbol as symbol]: localMockDefaults,
           [LocaleSymbol as symbol]: localMockLocale,
@@ -447,7 +447,7 @@ describe('VCommandPalette.tsx', () => {
     openFileElement!.click();
     await nextTick(); // Allow click handler and subsequent effects to process
 
-    expect(mockCommandCore.executeAction).toHaveBeenCalledWith('action1', { trigger: 'command-palette' })
+    expect(mockActionCore.executeAction).toHaveBeenCalledWith('action1', { trigger: 'command-palette' })
     expect(wrapper.emitted('update:modelValue')![0][0]).toBe(false)
   })
 
@@ -466,7 +466,7 @@ describe('VCommandPalette.tsx', () => {
     saveFileElement!.click();
     await nextTick();
 
-    expect(mockCommandCore.executeAction).toHaveBeenCalledWith('action2', { trigger: 'command-palette' })
+    expect(mockActionCore.executeAction).toHaveBeenCalledWith('action2', { trigger: 'command-palette' })
     expect(wrapper.emitted('update:modelValue')).toBeUndefined()
   })
 
@@ -568,7 +568,7 @@ describe('VCommandPalette.tsx', () => {
 
       const viewProfileSubItem = wrapper.findAllComponents(VListItem).find(item => item.text().includes('View Profile'))
       await viewProfileSubItem!.trigger('click')
-      expect(mockCommandCore.executeAction).toHaveBeenCalledWith('action5-1', { trigger: 'command-palette' })
+      expect(mockActionCore.executeAction).toHaveBeenCalledWith('action5-1', { trigger: 'command-palette' })
     })
   })
 
@@ -646,7 +646,7 @@ describe('VCommandPalette.tsx', () => {
 
       searchInputElement!.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
       await nextTick(); // Allow action execution
-      expect(mockCommandCore.executeAction).toHaveBeenCalledWith('action8', { trigger: 'command-palette' });
+      expect(mockActionCore.executeAction).toHaveBeenCalledWith('action8', { trigger: 'command-palette' });
     })
 
     it('Escape key closes the palette (or navigates back if nested)', async () => {
@@ -720,7 +720,7 @@ describe('VCommandPalette.tsx', () => {
 
     it('focus management: search input focused on open', async () => {
       // This test uses its own localWrapper to test initial opening and focus.
-      const localMockCommandCore = createMockCommandCore();
+      const localMockActionCore = createMockActionCore();
       const localMockTheme = createMockTheme();
       const localMockDefaults = ref<DefaultsInstance>({ global: {}, VDialog: { transition: false } });
       const localMockLocale = createMockLocale();
@@ -732,7 +732,7 @@ describe('VCommandPalette.tsx', () => {
         props: { modelValue: false }, // Start with dialog closed
         global: {
           provide: {
-            [CommandCoreSymbol as symbol]: localMockCommandCore,
+            [ActionCoreSymbol as symbol]: localMockActionCore,
             [ThemeSymbol as symbol]: localMockTheme,
             [DefaultsSymbol as symbol]: localMockDefaults,
             [LocaleSymbol as symbol]: localMockLocale,
@@ -950,7 +950,7 @@ describe('VCommandPalette.tsx', () => {
       expect(slotScopeData.isSelected).toBe(true)
       expect(typeof slotScopeData.select).toBe('function')
 
-      const mockExecute = mockCommandCore.executeAction as any;
+      const mockExecute = mockActionCore.executeAction as any;
       mockExecute.mockClear();
       slotScopeData.select() // This calls onActionClick internally
       await nextTick() // Allow onActionClick to process

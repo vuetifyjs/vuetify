@@ -1,6 +1,6 @@
 import { computed, ref, watch, nextTick, unref, shallowRef, type Ref } from 'vue'
 import { useProxiedModel } from '@/composables/proxiedModel'
-import { type CommandCorePublicAPI, type ActionDefinition, type ActionContext } from '@/labs/command-core'
+import { type ActionCorePublicAPI, type ActionDefinition, type ActionContext } from '@/labs/action-core'
 import { useId } from 'vue'
 import type { VTextField } from '@/components/VTextField' // For searchInputRef type
 import { isHeaderItem, defaultGroupPriorities, UNGROUPED_PRIORITY, UNGROUPED_TITLE, isPromise, log } from '../utils'
@@ -32,7 +32,7 @@ export interface CommandPaletteListRef extends HTMLElement {
 
 export function useCommandPaletteCore(
   props: UseCommandPaletteCoreProps,
-  commandCore: CommandCorePublicAPI | null | undefined,
+  actionCore: ActionCorePublicAPI | null | undefined,
   emit: CommandPaletteEmit,
   // Refs to be passed from the component using this composable
   searchInputRef: Ref<InstanceType<typeof VTextField> | null>,
@@ -56,9 +56,9 @@ export function useCommandPaletteCore(
   const isRootLevel = computed(() => actionStack.value.length <= 1)
 
   const initializeStack = () => {
-    if (commandCore && isActive.value) {
+    if (actionCore && isActive.value) {
       actionStack.value = [{
-        actions: commandCore.allActions.value.filter((action: ActionDefinition) => !action.meta?.paletteHidden),
+        actions: actionCore.allActions.value.filter((action: ActionDefinition) => !action.meta?.paletteHidden),
         title: 'Commands',
       }]
       searchText.value = ''
@@ -66,7 +66,7 @@ export function useCommandPaletteCore(
     }
   }
 
-  watch(() => commandCore?.allActions.value, initializeStack, { immediate: true, deep: true })
+  watch(() => actionCore?.allActions.value, initializeStack, { immediate: true, deep: true })
 
   watch(isActive, (val, oldVal) => {
     if (val && !oldVal) { // Became active
@@ -175,9 +175,9 @@ export function useCommandPaletteCore(
   })
 
   async function executeCoreAction(action: ActionDefinition) {
-    if (!commandCore) return
+    if (!actionCore) return
     try {
-      await commandCore.executeAction(action.id, { trigger: 'command-palette' })
+      await actionCore.executeAction(action.id, { trigger: 'command-palette' })
       if (props.closeOnExecute) {
         isActive.value = false // This will use the refined setter logic
       }

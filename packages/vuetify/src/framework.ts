@@ -6,7 +6,7 @@ import { createGoTo, GoToSymbol } from '@/composables/goto'
 import { createIcons, IconSymbol } from '@/composables/icons'
 import { createLocale, LocaleSymbol } from '@/composables/locale'
 import { createTheme, ThemeSymbol } from '@/composables/theme'
-import { useCommandCore, CommandCoreSymbol, type CommandCoreOptions as ActualCommandCoreOptions, type CommandCorePublicAPI } from '@/labs/command-core'
+import { useActionCore, ActionCoreSymbol, type ActionCoreOptions as ActualActionCoreOptions, type ActionCorePublicAPI } from '@/labs/action-core'
 
 // Utilities
 import { effectScope, nextTick, reactive } from 'vue'
@@ -39,7 +39,7 @@ export interface VuetifyOptions {
   icons?: IconOptions
   locale?: LocaleOptions & RtlOptions
   ssr?: SSROptions
-  commandCore?: boolean | ActualCommandCoreOptions
+  actionCore?: boolean | ActualActionCoreOptions
 }
 
 export interface Blueprint extends Omit<VuetifyOptions, 'blueprint'> {}
@@ -63,10 +63,10 @@ export function createVuetify (vuetify: VuetifyOptions = {}) {
     const date = createDate(options.date, locale)
     const goTo = createGoTo(options.goTo, locale)
 
-    let commandCoreInstance: CommandCorePublicAPI | undefined = undefined;
-    if (options.commandCore) {
-      const commandCoreOpts: ActualCommandCoreOptions = typeof options.commandCore === 'object' ? options.commandCore : {};
-      commandCoreInstance = useCommandCore(commandCoreOpts);
+    let actionCoreInstance: ActionCorePublicAPI | undefined = undefined;
+    if (options.actionCore) {
+      const actionCoreOpts: ActualActionCoreOptions = typeof options.actionCore === 'object' ? options.actionCore : {};
+      actionCoreInstance = useActionCore(actionCoreOpts);
     }
 
     function install (app: App) {
@@ -100,8 +100,8 @@ export function createVuetify (vuetify: VuetifyOptions = {}) {
       app.provide(DateOptionsSymbol, date.options)
       app.provide(DateAdapterSymbol, date.instance)
       app.provide(GoToSymbol, goTo)
-      if (commandCoreInstance) {
-        app.provide(CommandCoreSymbol, commandCoreInstance);
+      if (actionCoreInstance) {
+        app.provide(ActionCoreSymbol, actionCoreInstance);
       }
 
       if (IN_BROWSER && options.ssr) {
@@ -152,7 +152,7 @@ export function createVuetify (vuetify: VuetifyOptions = {}) {
       locale,
       date,
       goTo,
-      commandCore: commandCoreInstance,
+      actionCore: actionCoreInstance,
     }
   })!
 }

@@ -36,8 +36,8 @@ import { genericComponent, propsFactory, useRender } from '@/util'
 // Types
 import type { PropType } from 'vue'
 import type { RippleDirectiveBinding } from '@/directives/ripple'
-import { type ActionDefinition as CommandCoreActionDefinition, CommandCoreSymbol } from '@/labs/command-core'
-import { useCommandable } from '@/labs/command-core/composables/useCommandable'
+import { type ActionDefinition, ActionCoreSymbol } from '@/labs/action-core'
+import { useCommandable } from '@/labs/action-core/composables/useCommandable'
 
 export type VBtnSlots = {
   default: never
@@ -77,8 +77,8 @@ export const makeVBtnProps = propsFactory({
     default: undefined,
   },
 
-  // CommandCore Props
-  command: [String, Object] as PropType<string | CommandCoreActionDefinition>,
+  // ActionCore Props
+  command: [String, Object] as PropType<string | ActionDefinition>,
   commandData: null,
 
   ...makeBorderProps(),
@@ -122,13 +122,13 @@ export const VBtn = genericComponent<VBtnSlots>()({
     const group = useGroupItem(props, props.symbol, false)
     const link = useLink(props, attrs)
 
-    // CommandCore integration
-    const commandCore = inject(CommandCoreSymbol, null)
+    // ActionCore integration
+    const actionCore = inject(ActionCoreSymbol, null)
     const {
       isCommandable,
       executeCommand,
       effectiveActionId,
-    } = useCommandable(props as any, commandCore, 'VBtn')
+    } = useCommandable(props as any, actionCore, 'VBtn')
 
     const isActive = computed(() => {
       if (props.active !== undefined) {

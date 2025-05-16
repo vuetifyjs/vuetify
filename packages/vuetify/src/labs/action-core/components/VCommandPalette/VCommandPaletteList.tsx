@@ -1,7 +1,7 @@
 import { VList, VListItem, VListSubheader } from '@/components/VList';
 import { VIcon } from '@/components/VIcon';
 import { VHotKey } from '../VHotKey/VHotKey';
-import { type ActionDefinition, type ActionContext } from '@/labs/command-core';
+import { type ActionDefinition, type ActionContext } from '@/labs/action-core';
 import { genericComponent, propsFactory, useRender } from '@/util';
 import { computed, unref, type PropType, type VNode, Fragment } from 'vue';
 
