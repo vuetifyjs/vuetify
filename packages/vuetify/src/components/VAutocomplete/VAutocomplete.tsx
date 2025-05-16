@@ -64,6 +64,7 @@ export const makeVAutocompleteProps = propsFactory({
   },
   clearOnSelect: Boolean,
   search: String,
+  filteredItemsSort: Function as PropType<(a: ListItem, b: ListItem) => number>,
 
   ...makeFilterProps({ filterKeys: ['title'] }),
   ...makeSelectProps(),
@@ -144,10 +145,14 @@ export const VAutocomplete = genericComponent<new <
     const { filteredItems, getMatches } = useFilter(props, items, () => isPristine.value ? '' : search.value)
 
     const displayItems = computed(() => {
+      let displayItems = filteredItems.value
       if (props.hideSelected) {
-        return filteredItems.value.filter(filteredItem => !model.value.some(s => s.value === filteredItem.value))
+        displayItems = displayItems.filter(filteredItem => !model.value.some(s => s.value === filteredItem.value))
       }
-      return filteredItems.value
+      if (props.filteredItemsSort) {
+        displayItems = displayItems.toSorted(props.filteredItemsSort)
+      }
+      return displayItems
     })
 
     const hasChips = computed(() => !!(props.chips || slots.chip))
