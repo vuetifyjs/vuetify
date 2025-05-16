@@ -9,6 +9,9 @@ import { IS_CLIENT, IS_MAC, log } from './utils'
 
 const COMPONENT_NAME = 'KeyBindings'
 
+// Define modifier keys (used for macOS Cmd keyup workaround)
+const modifierKeys = new Set(['ctrl', 'alt', 'shift', 'meta']);
+
 // --- Utility Functions ---
 
 /**
@@ -232,6 +235,30 @@ export function useKeyBindings(options: UseKeyBindingsOptions = {}) {
       pressedKeys.value.add(eventKey);
     } else {
       pressedKeys.value.delete(eventKey);
+
+      // ---- START macOS Cmd/Meta keyup WORKAROUND ----
+      // See: https://bugzilla.mozilla.org/show_bug.cgi?id=1299553
+      if (IS_MAC && eventKey === 'meta') {
+        // When Meta key is released on macOS, assume other non-modifier keys
+        // that might have been part of a Cmd+Key combo are also "up"
+        // because their keyup events might have been suppressed.
+        const keysToRemove: string[] = [];
+        pressedKeys.value.forEach(pressedKey => {
+          if (!modifierKeys.has(pressedKey)) {
+            keysToRemove.push(pressedKey);
+          }
+        });
+        if (keysToRemove.length > 0) {
+          log('debug', COMPONENT_NAME, 'macOS Meta keyup: Clearing non-modifier keys', keysToRemove);
+          keysToRemove.forEach(key => {
+            pressedKeys.value.delete(key);
+            if (individualKeyStates[key]) {
+              individualKeyStates[key].value = false;
+            }
+          });
+        }
+      }
+      // ---- END macOS Cmd/Meta keyup WORKAROUND ----
     }
 
     // Update individual key state refs

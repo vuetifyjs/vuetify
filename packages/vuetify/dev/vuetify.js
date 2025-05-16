@@ -3,6 +3,7 @@ import '@/styles/main.sass'
 
 import { createVuetify } from '@/framework'
 import * as directives from '@/directives'
+// import { /* useActionCore, ActionCoreSymbol, */ type ActionCoreOptions } from '@/labs/action-core' // Import ActionCore types if needed for options
 
 import date from './vuetify/date'
 import defaults from './vuetify/defaults'
@@ -17,4 +18,5 @@ export default createVuetify({
   icons,
   locale,
   theme: { defaultTheme: 'light' },
+  actionCore: { componentIntegration: true }, // Initialize ActionCore with component integration enabled
 })
