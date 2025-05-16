@@ -7,6 +7,7 @@ import { makeVFieldProps, VField } from '@/components/VField/VField'
 import { makeVInputProps, VInput } from '@/components/VInput/VInput'
 
 // Composables
+import { useAutocomplete } from '@/composables/autocomplete'
 import { useFocus } from '@/composables/focus'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { useProxiedModel } from '@/composables/proxiedModel'
@@ -27,6 +28,7 @@ import type { VInputSlots } from '@/components/VInput/VInput'
 const activeTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', 'month']
 
 export const makeVTextFieldProps = propsFactory({
+  autocomplete: String as PropType<'suppress' | string>,
   autofocus: Boolean,
   counter: [Boolean, Number, String],
   counterValue: [Number, Function] as PropType<number | ((value: any) => number)>,
@@ -101,6 +103,7 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
     const vInputRef = ref<VInput>()
     const vFieldRef = ref<VField>()
     const inputRef = ref<HTMLInputElement>()
+    const autocomplete = useAutocomplete(props)
     const isActive = computed(() => (
       activeTypes.includes(props.type) ||
       props.persistentPlaceholder ||
@@ -108,6 +111,10 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
       props.active
     ))
     function onFocus () {
+      if (autocomplete.isSuppressing.value) {
+        autocomplete.update()
+      }
+
       if (inputRef.value !== document.activeElement) {
         inputRef.value?.focus()
       }
@@ -222,7 +229,8 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
                         autofocus={ props.autofocus }
                         readonly={ isReadonly.value }
                         disabled={ isDisabled.value }
-                        name={ props.name }
+                        name={ autocomplete.fieldName.value }
+                        autocomplete={ autocomplete.fieldAutocomplete.value }
                         placeholder={ props.placeholder }
                         size={ 1 }
                         type={ props.type }
