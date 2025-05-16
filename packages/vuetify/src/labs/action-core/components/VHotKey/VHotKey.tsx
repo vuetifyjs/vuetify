@@ -5,20 +5,18 @@ import './VHotKey.scss'
 import { makeComponentProps } from '@/composables/component'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { makeDensityProps, useDensity } from '@/composables/density' // For potential dense prop
+import { makeDensityProps, useDensity } from '@/composables/density'
+import { ActionCoreSymbol } from '@/labs/action-core'
 
 // Utilities
-import { computed, toRef } from 'vue' // Added toRef
+import { computed, inject, ref, watch } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
-// import { parseTrigger } from '../../useKeyBindings' // Removed import
-import { IS_MAC } from '../../platform' // To display platform-specific modifiers
+import { IS_MAC } from '../../platform'
+import type { ActionDefinition } from '../../types'
 
 export const makeVHotKeyProps = propsFactory({
-  hotkey: {
-    type: String,
-    required: true,
-  },
-  // dense: Boolean, // Removed custom dense prop, rely on density from makeDensityProps
+  hotkey: String,
+  actionId: String,
 
   ...makeComponentProps(),
   ...makeTagProps({ tag: 'div' }), // Default tag, can be span or div
@@ -32,9 +30,34 @@ export const VHotKey = genericComponent()({
   setup(props, { slots }) {
     provideTheme(props)
     const { densityClasses } = useDensity(props, 'v-hot-key')
+    const actionCore = props.actionId ? inject(ActionCoreSymbol, null) : null
+
+    const internalHotkeyString = ref<string | undefined>(props.hotkey)
+
+    watch(() => props.actionId, (newActionId) => {
+      if (newActionId && actionCore) {
+        const action = actionCore.getAction(newActionId)
+        if (action?.hotkey) {
+          internalHotkeyString.value = Array.isArray(action.hotkey) ? action.hotkey[0] : action.hotkey;
+        } else {
+          internalHotkeyString.value = undefined;
+        }
+      } else if (!newActionId) {
+        internalHotkeyString.value = props.hotkey;
+      }
+    }, { immediate: true })
+
+    watch(() => props.hotkey, (newHotkey) => {
+      if (!props.actionId) {
+        internalHotkeyString.value = newHotkey;
+      }
+    })
 
     const keysToRender = computed(() => {
-      const rawKeys = props.hotkey.split('+').map(k => k.trim().toLowerCase());
+      const hotkeyToParse = internalHotkeyString.value;
+      if (!hotkeyToParse) return [];
+
+      const rawKeys = hotkeyToParse.split('+').map(k => k.trim().toLowerCase());
 
       // Order for sorting modifiers display
       const modifierDisplayOrder = ['meta', 'ctrl', 'alt', 'shift'];
@@ -58,7 +81,6 @@ export const VHotKey = genericComponent()({
         else mainKeys.push(key);
       });
 
-      // Deduplicate and sort modifiers based on displayOrder
       const uniqueSortedModifiers = [...new Set(modifiers)].sort((a, b) => {
         // Ensure consistent sort order even if one is not in displayOrder (should not happen with current logic)
         const indexA = modifierDisplayOrder.indexOf(a);
@@ -70,7 +92,6 @@ export const VHotKey = genericComponent()({
       });
 
       return [...uniqueSortedModifiers, ...mainKeys].map(key => {
-        // Display mapping logic from previous attempt remains valid here
         if (IS_MAC && key === 'meta') return '⌘';
         if (!IS_MAC && key === 'meta') return 'Ctrl';
         if (key === 'ctrl') return 'Ctrl'; // This handles explicit 'ctrl' or normalized 'meta' on non-Mac
@@ -102,7 +123,7 @@ export const VHotKey = genericComponent()({
         ]}
         style={props.style}
         role="group" // Indicates a group of related elements
-        aria-label={`Hotkey: ${props.hotkey}`} // Provides an accessible label
+        aria-label={`Hotkey: ${internalHotkeyString.value || 'none'}`} // Provides an accessible label
       >
         {slots.default ? slots.default() : keysToRender.value.map((keyPart, index) => (
           // Using index for key here is acceptable as order won't change for a given hotkey

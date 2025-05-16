@@ -1,13 +1,13 @@
 <template>
   <scenario-card title="Command Palette">
-    <p>Hotkey: Meta+K (Mac) / Ctrl+K (Win/Linux) - or your configured default (e.g., Ctrl+Shift+P).</p>
+    <p>Hotkey: <VHotKey :hotkey="(Array.isArray(openPaletteActionDef.hotkey) ? openPaletteActionDef.hotkey[0] : openPaletteActionDef.hotkey) || ''" />.</p>
     <v-btn command="open-command-palette">Open Palette via VBtn</v-btn>
   </scenario-card>
 </template>
 
 <script setup lang="ts">
 import { onMounted, onUnmounted, inject } from 'vue';
-import { useActionCore, type ActionDefinition } from '../../../src/labs/action-core';
+import { useActionCore, type ActionDefinition, VHotKey } from '../../../src/labs/action-core';
 import ScenarioCard from '../ScenarioCard.vue';
 
 const actionCore = useActionCore();
@@ -16,9 +16,9 @@ const openPaletteProvided: (() => void) | undefined = inject('openPalette');
 
 const openPaletteActionDef: ActionDefinition = {
   id: 'open-command-palette',
-  title: 'Open Command Palette', // Plain string title
+  title: 'Open Command Palette',
   icon: 'mdi-magnify',
-  hotkey: 'meta+k', // Defaulting to meta+k, can be overridden by user setup
+  hotkey: 'meta+k',
   description: 'Opens the main command palette for searching actions.',
   handler: () => {
     if (openPaletteProvided) {
@@ -33,7 +33,7 @@ let sourceKey: symbol | undefined;
 onMounted(() => {
   if (actionCore) {
     sourceKey = actionCore.registerActionsSource([openPaletteActionDef]);
-    if (logAction) logAction(`Registered: ${openPaletteActionDef.title} (from ScenarioCommandPalette)`);
+    if (logAction) logAction(`Registered: ${String(openPaletteActionDef.title)} (from ScenarioCommandPalette)`);
   }
 });
 

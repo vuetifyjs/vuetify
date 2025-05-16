@@ -1,6 +1,6 @@
 <template>
   <scenario-card title="Hotkey Unregistration">
-    <p>Demonstrates registering/unregistering a temporary action (Alt+T).</p>
+    <p>Demonstrates registering/unregistering a temporary action (<VHotKey :hotkey="(Array.isArray(tempActionDef.hotkey) ? tempActionDef.hotkey[0] : tempActionDef.hotkey) || ''" />).</p>
     <v-btn @click="registerTemp" color="success" class="mr-2" :disabled="!!tempSourceKey">Register Temp Action</v-btn>
     <v-btn @click="unregisterTemp" color="error" :disabled="!tempSourceKey">Unregister Temp Action</v-btn>
   </scenario-card>
@@ -9,7 +9,7 @@
 <script setup lang="ts">
 import { ref, onUnmounted, inject } from 'vue'
 import ScenarioCard from '../ScenarioCard.vue'
-import { useActionCore, type ActionDefinition } from '../../../src/labs/action-core'
+import { useActionCore, type ActionDefinition, VHotKey } from '../../../src/labs/action-core'
 
 const actionCore = useActionCore()
 const logAction: ((message: string, details?: any) => void) | undefined = inject('logAction')

@@ -2,13 +2,20 @@
   <scenario-card title="Dynamic Action Registration">
     <v-btn @click="registerDynamic" color="primary" class="mr-2">Register/Add Dynamic Action</v-btn>
     <v-btn @click="unregisterDynamic" color="secondary">Unregister All Dynamic</v-btn>
-    <p v-if="dynamicActionsDisplay.length" class="mt-2">Registered: {{ dynamicActionsDisplay.join(', ') }}</p>
+    <div v-if="dynamicActionsInternal.length" class="mt-2">
+      <p>Registered:</p>
+      <ul>
+        <li v-for="(action, index) in dynamicActionsInternal" :key="action.id">
+          {{ action.title }} <VHotKey :hotkey="(Array.isArray(action.hotkey) ? action.hotkey[0] : action.hotkey) || ''" />
+        </li>
+      </ul>
+    </div>
   </scenario-card>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onUnmounted, inject } from 'vue';
-import { useActionCore, type ActionDefinition } from '../../../src/labs/action-core';
+import { ref, onUnmounted, inject } from 'vue';
+import { useActionCore, type ActionDefinition, VHotKey } from '../../../src/labs/action-core';
 import ScenarioCard from '../ScenarioCard.vue';
 
 const actionCore = useActionCore();
@@ -17,15 +24,13 @@ const logAction: ((message: string, details?: any) => void) | undefined = inject
 const dynamicActionsInternal = ref<ActionDefinition[]>([]);
 let dynamicSourceKey = ref<symbol | null>(null);
 
-const dynamicActionsDisplay = computed(() => dynamicActionsInternal.value.map((a: ActionDefinition) => String(a.title)));
-
 const registerDynamic = () => {
   const newAction: ActionDefinition = {
     id: `dynamic-${Date.now()}`,
     title: `Dynamic Action ${dynamicActionsInternal.value.length + 1}`,
     hotkey: `alt+${dynamicActionsInternal.value.length + 1}`,
     handler: () => {
-      if (logAction) logAction(`Dynamic Action ${dynamicActionsInternal.value.length} Executed!`);
+      if (logAction) logAction(`Dynamic Action ${dynamicActionsInternal.value.findIndex(a => a.id === newAction.id) + 1} Executed!`);
     },
     description: 'A dynamically registered action.'
   };

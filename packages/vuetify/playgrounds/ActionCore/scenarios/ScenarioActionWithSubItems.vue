@@ -1,22 +1,24 @@
 <template>
   <scenario-card title="Action With Sub-Items">
-    <p>Action "Navigation Menu" is in palette. Try executing it, or click the button below.</p>
+    <p>Action "Navigation Menu" is in palette. It will prompt if no param or you can execute it from here.</p>
     <v-btn command="parent-with-subs">Open Nav Menu (via VBtn)</v-btn>
-    <p class="text-caption mt-2">This button uses the 'command' prop to trigger the action. If the action has subItems, ActionCore typically expects UI (like a command palette) to handle displaying them. The mock palette in the playground does this.</p>
+    <p class="text-caption mt-2">The "Go to Settings" sub-item has hotkey <VHotKey :hotkey="settingsActionHotkey" />.</p>
   </scenario-card>
 </template>
 
 <script setup lang="ts">
-import { onMounted, onUnmounted, inject } from 'vue';
-import { useActionCore, type ActionDefinition, type ActionContext } from '../../../src/labs/action-core';
+import { onMounted, onUnmounted, inject, ref } from 'vue';
+import { useActionCore, type ActionDefinition, type ActionContext, VHotKey } from '../../../src/labs/action-core';
 import ScenarioCard from '../ScenarioCard.vue';
 
 const actionCore = useActionCore();
 const logAction: ((message: string, details?: any) => void) | undefined = inject('logAction');
 
+const settingsActionHotkey = ref('alt+s');
+
 const parentActionWithSubs: ActionDefinition = {
   id: 'parent-with-subs',
-  title: 'Navigation Menu', // Plain string
+  title: 'Navigation Menu',
   icon: 'mdi-menu',
   description: 'Access various navigation links.',
   subItems: (ctx: ActionContext) => {
@@ -24,13 +26,13 @@ const parentActionWithSubs: ActionDefinition = {
     return new Promise(resolve => setTimeout(() => {
       resolve([
         { id: 'sub-home', title: 'Go Home', icon: 'mdi-home', handler: () => { if (logAction) logAction('Navigated to Home'); } },
-        { id: 'sub-settings', title: 'Go to Settings', icon: 'mdi-cog', hotkey: 'alt+s', handler: () => { if (logAction) logAction('Navigated to Settings'); } },
+        { id: 'sub-settings', title: 'Go to Settings', icon: 'mdi-cog', hotkey: settingsActionHotkey.value, handler: () => { if (logAction) logAction('Navigated to Settings'); } },
         {
           id: 'sub-profile',
           title: 'User Profile',
           icon: 'mdi-account',
           description: 'View or edit your profile.',
-          subItems: (sCtx: ActionContext) => { // Nested sub-items
+          subItems: (sCtx: ActionContext) => {
             if (logAction) logAction('Fetching subItems for User Profile...', { context: sCtx });
             return [
               { id: 'sub-profile-view', title: 'View Profile', handler: () => { if (logAction) logAction('Viewed Profile'); } },
@@ -39,7 +41,7 @@ const parentActionWithSubs: ActionDefinition = {
           }
         }
       ]);
-    }, 300)); // Simulate async fetch slightly faster for testing
+    }, 300));
   }
 };
 

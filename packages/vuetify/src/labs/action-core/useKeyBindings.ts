@@ -76,6 +76,8 @@ const defaultAliasMap: Record<string, string> = {
   'control': 'ctrl',
   'option': 'alt',
   'escape': 'esc',
+  'cmdorctrl': 'meta',
+  'primary': 'meta',
   // Common aliases for arrow keys
   'up': 'arrowup',
   'down': 'arrowdown',

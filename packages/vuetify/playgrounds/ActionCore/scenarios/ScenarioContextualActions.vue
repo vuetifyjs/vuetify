@@ -8,7 +8,10 @@
       @blur="editorFocused = false"
       id="mock-editor-textarea"
     />
-    <p>Focus editor for "Save Editor Content" (Ctrl+S). Blur for "Global Save" (Ctrl+S).</p>
+    <p>
+      Focus editor for "Save Editor Content" (<VHotKey :hotkey="(Array.isArray(saveEditorAction.hotkey) ? saveEditorAction.hotkey[0] : saveEditorAction.hotkey) || ''" />).
+      Blur for "Global Save" (<VHotKey :hotkey="(Array.isArray(globalSaveAction.hotkey) ? globalSaveAction.hotkey[0] : globalSaveAction.hotkey) || ''" />).
+    </p>
     <v-chip :color="editorFocused ? 'green' : 'grey'" small>
       Editor Focused: {{ editorFocused }}
     </v-chip>
@@ -18,7 +21,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, inject } from 'vue';
-import { useActionCore, type ActionDefinition } from '../../../src/labs/action-core';
+import { useActionCore, type ActionDefinition, VHotKey } from '../../../src/labs/action-core';
 import ScenarioCard from '../ScenarioCard.vue';
 
 const actionCore = useActionCore();
@@ -27,10 +30,12 @@ const logAction: ((message: string, details?: any) => void) | undefined = inject
 const editorFocused = ref(false);
 const editorContent = ref('Some text in the editor...');
 
+const saveHotkey = 'cmdorctrl+s';
+
 const saveEditorAction: ActionDefinition = {
   id: 'save-editor',
   title: 'Save Editor Content',
-  hotkey: 'ctrl+s',
+  hotkey: saveHotkey,
   icon: 'mdi-content-save-edit',
   description: 'Saves when the mock editor below is focused.',
   canExecute: () => editorFocused.value,
@@ -43,7 +48,7 @@ const saveEditorAction: ActionDefinition = {
 const globalSaveAction: ActionDefinition = {
   id: 'global-save',
   title: 'Global Save',
-  hotkey: 'ctrl+s',
+  hotkey: saveHotkey,
   icon: 'mdi-content-save-all',
   description: 'Saves globally if editor is not focused.',
   canExecute: () => !editorFocused.value,

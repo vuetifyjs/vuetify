@@ -1,7 +1,7 @@
 <template>
   <scenario-card title="Programmatic Execution">
-    <p>The "Programmatic Action" can be triggered via code or by using the button below.</p>
-    <v-btn @click="triggerProgrammatic" color="primary">Trigger Programmatically</v-btn>
+    <p>The action "Programmatic Action" is globally registered. Click the button to trigger it via its ID from this component.</p>
+    <v-btn @click="triggerIt" color="deep-purple-accent-2">Trigger "prog-action"</v-btn>
   </scenario-card>
 </template>
 
@@ -13,10 +13,15 @@ import { useActionCore } from '../../../src/labs/action-core'
 const actionCore = useActionCore()
 const logAction: ((message: string, details?: any) => void) | undefined = inject('logAction')
 
-const triggerProgrammatic = () => {
+const triggerIt = () => {
   if (actionCore) {
-    actionCore.executeAction('prog-action', { trigger: 'programmatic-component', data: { source: 'ScenarioProgrammaticExecution' } })
-    if (logAction) logAction('Programmatic action triggered from component')
+    actionCore.executeAction('prog-action', {
+      trigger: 'component-button-programmatic-scenario',
+      data: { from: 'ScenarioProgrammaticExecutionComponent' }
+    })
+    // The handler for 'prog-action' in Playground.actionCore.vue will log the execution.
+  } else {
+    if (logAction) logAction('ActionCore not available in ScenarioProgrammaticExecution')
   }
 }
 </script>

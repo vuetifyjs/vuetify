@@ -5,14 +5,18 @@
       <v-btn value="beginner">Beginner</v-btn>
       <v-btn value="advanced">Advanced</v-btn>
     </v-btn-toggle>
-    <p class="text-caption">Try pressing the hotkey shown in the current profile to observe different behaviors.</p>
+    <p class="text-caption">
+      Current active hotkey:
+      <VHotKey v-if="currentMode === 'beginner' && beginnerSaveAction.hotkey" :hotkey="(Array.isArray(beginnerSaveAction.hotkey) ? beginnerSaveAction.hotkey[0] : beginnerSaveAction.hotkey) || ''" />
+      <VHotKey v-if="currentMode === 'advanced' && advancedSaveAction.hotkey" :hotkey="(Array.isArray(advancedSaveAction.hotkey) ? advancedSaveAction.hotkey[0] : advancedSaveAction.hotkey) || ''" />
+    </p>
   </scenario-card>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, inject, watch } from 'vue'
 import ScenarioCard from '../ScenarioCard.vue'
-import { useActionCore, type ActionDefinition } from '../../../src/labs/action-core'
+import { useActionCore, type ActionDefinition, VHotKey } from '../../../src/labs/action-core'
 
 const actionCore = useActionCore()
 const logAction: ((message: string, details?: any) => void) | undefined = inject('logAction')

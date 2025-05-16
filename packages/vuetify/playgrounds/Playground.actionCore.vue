@@ -34,18 +34,14 @@
           <ScenarioCommandPalette />
           <ScenarioDynamicRegistration />
           <ScenarioActionWithSubItems />
-          <scenario-card title="Action With Params">
-             <p>Action "Open File by Name..." is in palette. It will prompt if no param.</p>
-            <v-btn @click="actionWithParamsIIFE.triggerWithParam" class="mr-2">Execute with Param ('budget.xlsx')</v-btn>
-            <v-btn command="open-file-with-param">Execute from Palette (will prompt)</v-btn>
-          </scenario-card>
+          <ScenarioActionWithParams />
         </v-col>
 
         <!-- Column 2 -->
         <v-col cols="12" md="4">
           <ScenarioContextualActions />
           <scenario-card title="Action Overriding">
-             <p>See "Contextual Actions" above. Both "Save Editor" and "Global Save" use Ctrl+S.
+             <p>See "Contextual Actions" above. Both "Save Editor" and "Global Save" use <VHotKey action-id="save-editor" />.
               Their <code>canExecute</code> or <code>runInTextInput</code> determines which is active.
             </p>
           </scenario-card>
@@ -148,13 +144,14 @@ import ScenarioCommandPalette from '@playgrounds/ActionCore/scenarios/ScenarioCo
 import ScenarioDynamicRegistration from '@playgrounds/ActionCore/scenarios/ScenarioDynamicRegistration.vue'
 import ScenarioContextualActions from '@playgrounds/ActionCore/scenarios/ScenarioContextualActions.vue'
 import ScenarioSequenceHotkey from '@playgrounds/ActionCore/scenarios/ScenarioSequenceHotkey.vue'
-import ScenarioHotkeysInTextInputs from '@playgrounds/ActionCore/scenarios/ScenarioHotkeysInTextInputs.vue'
-import ScenarioProgrammaticExecution from '@playgrounds/ActionCore/scenarios/ScenarioProgrammaticExecution.vue'
+import ScenarioHotkeysInTextInputs from './ActionCore/scenarios/ScenarioHotkeysInTextInputs.vue'
+import ScenarioProgrammaticExecution from './ActionCore/scenarios/ScenarioProgrammaticExecution.vue'
 import ScenarioHotkeyUnregistration from '@playgrounds/ActionCore/scenarios/ScenarioHotkeyUnregistration.vue'
 import ScenarioActionProfiles from '@playgrounds/ActionCore/scenarios/ScenarioActionProfiles.vue'
 import ScenarioUndoRedo from '@playgrounds/ActionCore/scenarios/ScenarioUndoRedo.vue'
 import ScenarioContextMenu from '@playgrounds/ActionCore/scenarios/ScenarioContextMenu.vue'
 import ScenarioActionWithSubItems from '@playgrounds/ActionCore/scenarios/ScenarioActionWithSubItems.vue'
+import ScenarioActionWithParams from './ActionCore/scenarios/ScenarioActionWithParams.vue'
 
 // --- Global Log, ActionCore, Theme, Palette setup (remains the same) ---
 const logMessages = ref<string[]>([])
@@ -163,13 +160,9 @@ const stickToBottom = ref(true)
 const scrollToBottom = () => { nextTick(() => { if (logContainerRef.value) { logContainerRef.value.scrollTop = logContainerRef.value.scrollHeight } }) }
 const logAction = (message: string, details?: any) => {
   const fullMessage = details ? `${message} ${JSON.stringify(details)}` : message
-  logMessages.value.push(fullMessage)
-  // if (logMessages.value.length > 200) logMessages.value.pop()
-  if (details !== undefined) {
-    console.log('[ActionCorePlayground]', message, details)
-  } else {
-    console.log('[ActionCorePlayground]', message)
-  }
+  logMessages.value.unshift(fullMessage)
+  if (logMessages.value.length > 200) logMessages.value.pop()
+  if (details !== undefined) { console.log('[ActionCorePlayground]', message, details) } else { console.log('[ActionCorePlayground]', message) }
   if (stickToBottom.value) scrollToBottom()
 }
 provide('logAction', logAction)
@@ -225,17 +218,7 @@ const handlePaletteKeydown = (event: KeyboardEvent) => { const items = currentPa
 
 // --- Scenario Implementations Setup ---
 
-// Scenario 3: Dynamic Action Registration - LOGIC IS NOW FULLY IN ScenarioDynamicRegistration.vue
-// The 'dynamicRegistration' constant and its IIFE are removed from here.
-
-// Scenario 4: Action With SubItems logic moved to ScenarioActionWithSubItems.vue (deduplicated here)
-
-// Scenario 5: Contextual Actions logic moved to ScenarioContextualActions.vue (deduplicated here)
-
-// Scenario 6: Action Overriding - (Covered by Contextual Actions logic)
-// logAction('ScenarioActionOverriding: Covered by ContextualActions (Ctrl+S behavior).') // Logged by component now
-
-// Scenario 7: Sequence Hotkey (logic will move to component)
+// Scenario 7: Sequence Hotkey - Action globally registered, UI component just displays info.
 const konamiAction: ActionDefinition = {
   id: 'konami', title: 'Konami Code!', hotkey: 'arrowup-arrowup-arrowdown-arrowdown-arrowleft-arrowright-arrowleft-arrowright-b-a',
   description: 'The classic cheat code.',
@@ -248,86 +231,109 @@ let scenario7SourceKey: symbol;
 onMounted(() => {
   if (actionCore) {
     scenario7SourceKey = actionCore.registerActionsSource([konamiAction]);
-    if (logAction) logAction(`Registered: ${konamiAction.title} (from main playground setup)`);
+    if (logAction) logAction(`Registered: ${konamiAction.title} (from main playground setup for SequenceHotkey)`);
   }
 })
 onUnmounted(() => {
   if (actionCore && scenario7SourceKey) actionCore.unregisterActionsSource(scenario7SourceKey);
 })
 
-// Scenario 8: Hotkeys In Text Inputs (logic will move to component)
-const hotkeysInTextInputs = (() => {
-  const inputVal = ref('Type here and press Enter')
-  const inputFocused = ref(false)
-  const inputAction: ActionDefinition = {
-    id: 'text-input-action', title: 'Submit Input Field', hotkey: 'enter',
-    description: 'Submits the content of the special input field below.',
-    runInTextInput: (el) => el === document.getElementById('special-text-input'),
-    handler: () => {
-      logAction('Input field submitted (Enter while focused):', inputVal.value)
-      inputVal.value = 'Submitted!'
-    }
+// Scenario 8: Hotkeys In Text Inputs - Action globally registered, UI component provides the input.
+const hotkeysInTextInputs_inputVal = ref('Type here and press Enter');
+const inputAction: ActionDefinition = {
+  id: 'text-input-action', title: 'Submit Input Field', hotkey: 'enter',
+  description: 'Submits the content of the special input field below.',
+  runInTextInput: (el) => el === document.getElementById('special-text-input'),
+  handler: () => {
+    logAction('Input field submitted (Enter while focused):', hotkeysInTextInputs_inputVal.value);
+    hotkeysInTextInputs_inputVal.value = 'Submitted!';
   }
-  let sourceKey: symbol;
-  onMounted(() => {
-    if (actionCore) {
-      sourceKey = actionCore.registerActionsSource([inputAction]);
-      if (logAction) logAction(`Registered: ${inputAction.title} (from main playground setup)`);
-    }
-  })
-  onUnmounted(() => {
-    if (actionCore && sourceKey) actionCore.unregisterActionsSource(sourceKey);
-  })
-  return { inputVal, inputFocused }
-})()
-
-// Scenario 9: Action With Params (logic will move to component)
-const actionWithParamsIIFE = (() => {
-  const openFileAction: ActionDefinition = {
-    id: 'open-file-with-param', title: 'Open File by Name...', icon: 'mdi-file-find',
-    description: 'Opens a file. Can be passed a name or will prompt.',
-    handler: (ctx?: ActionContext) => {
-      const fileName = ctx?.data?.fileName || prompt('Enter filename to open (try "example.doc"):');
-      if (fileName) logAction('Opening file (from param/prompt):', fileName)
-      else logAction('File open cancelled or no name provided.')
-    }
+}
+let scenario8SourceKey: symbol;
+onMounted(() => {
+  if (actionCore) {
+    scenario8SourceKey = actionCore.registerActionsSource([inputAction]);
+    if (logAction) logAction(`Registered: ${inputAction.title} (from main playground setup for HotkeysInTextInputs)`);
   }
-  let sourceKey: symbol;
-  onMounted(() => {
-    if (actionCore) {
-      sourceKey = actionCore.registerActionsSource([openFileAction]);
-      if (logAction) logAction(`Registered: ${String(openFileAction.title)} (from main playground IIFE - ActionWithParams)`);
-    }
-  })
-  onUnmounted(() => {
-    if (actionCore && sourceKey) actionCore.unregisterActionsSource(sourceKey);
-  })
-  const triggerWithParam = () => actionCore.executeAction('open-file-with-param', { data: { fileName: 'budget.xlsx' }})
-  return { triggerWithParam }
-})()
+})
+onUnmounted(() => {
+  if (actionCore && scenario8SourceKey) actionCore.unregisterActionsSource(scenario8SourceKey);
+})
 
-// Scenario 10: Programmatic Execution (logic will move to component)
-const programmaticExecution = (() => {
-  const programmaticAction: ActionDefinition = {
-    id: 'prog-action', title: 'Programmatic Action', icon: 'mdi-play-circle-outline',
-    description: 'An action meant to be called by code.',
-    handler: (ctx) => logAction('Programmatic Action Triggered', { context: ctx })
+// Scenario 10: Programmatic Execution - Action globally registered, UI component provides trigger.
+const programmaticActionDef: ActionDefinition = { // Renamed to avoid conflict with component name
+  id: 'prog-action', title: 'Programmatic Action', icon: 'mdi-play-circle-outline',
+  description: 'An action meant to be called by code.',
+  handler: (ctx) => {
+    if (logAction) logAction('Programmatic Action Triggered (GLOBAL HANDLER)', { context: ctx });
   }
-  let sourceKey: symbol;
-  onMounted(() => {
-    if (actionCore) {
-      sourceKey = actionCore.registerActionsSource([programmaticAction]);
-      if (logAction) logAction(`Registered: ${programmaticAction.title} (from main playground setup)`);
-    }
-  })
-  onUnmounted(() => {
-    if (actionCore && sourceKey) actionCore.unregisterActionsSource(sourceKey);
-  })
-  const triggerProgrammatic = () => actionCore.executeAction('prog-action', { trigger: 'programmatic-button-click', data: { source: 'PlaygroundUI' } })
-  return { triggerProgrammatic }
-})()
+}
+let scenario10SourceKey: symbol;
+onMounted(() => {
+  if (actionCore) {
+    scenario10SourceKey = actionCore.registerActionsSource([programmaticActionDef]);
+    if (logAction) logAction(`Registered: ${programmaticActionDef.title} (from main playground setup for ProgrammaticExecution)`);
+  }
+})
+onUnmounted(() => {
+  if (actionCore && scenario10SourceKey) actionCore.unregisterActionsSource(scenario10SourceKey);
+})
 
-// Scenario 11-14 logic moved to dedicated components (see ActionCore/scenarios folder)
+// Scenario 13: Undo Redo - Actions globally registered, UI component provides triggers.
+const doSomethingAction: ActionDefinition = {
+  id: 'do-something-undoable', title: 'Perform Undoable Action', icon: 'mdi-target-variant',
+  description: 'Performs an action that can be "undone".',
+  meta: { undoActionId: 'undo-the-something' },
+  handler: (ctx?: ActionContext) => {
+    // In a real app, this would modify some state that the undo action can revert.
+    // For POC, we just log and simulate a state change for the canExecute of undo.
+    const data = { item: `Item ${Date.now()}`, previousState: Math.random() > 0.5 ? 'State A' : 'State B' };
+    if (logAction) logAction('Performed undoable action:', data);
+    // This part would normally be managed by the ScenarioUndoRedo component for its own UI:
+    // lastActionData.value = data;
+  }
+}
+const undoSomethingAction: ActionDefinition = {
+  id: 'undo-the-something', title: 'Undo Last Action', hotkey: 'ctrl+z', icon: 'mdi-undo-variant',
+  description: 'Undoes the last "Perform Undoable Action".',
+  // canExecute: () => !!lastActionData.value, // This state would be managed by the component
+  handler: () => {
+    if (logAction) logAction('Undoing action. (Simulated)');
+    // lastActionData.value = null;
+  }
+}
+let scenario13SourceKey: symbol;
+onMounted(() => {
+  if (actionCore) {
+    scenario13SourceKey = actionCore.registerActionsSource([doSomethingAction, undoSomethingAction]);
+    if (logAction) logAction('Registered: Undo/Redo Actions (globally for ScenarioUndoRedo component)');
+  }
+})
+onUnmounted(() => {
+  if (actionCore && scenario13SourceKey) actionCore.unregisterActionsSource(scenario13SourceKey);
+})
+
+// Scenario 14: Context Menu - Actions globally registered, UI component provides triggers.
+const editItemAction: ActionDefinition = {
+  id: 'ctx-edit-item', title: 'Edit Item', icon: 'mdi-pencil',
+  description: 'Edit the selected item (contextual).',
+  handler: (ctx) => { if (logAction) logAction('Context Menu: Edit Item triggered for', ctx.data); }
+}
+const deleteItemAction: ActionDefinition = {
+  id: 'ctx-delete-item', title: 'Delete Item', icon: 'mdi-delete',
+  description: 'Delete the selected item (contextual).',
+  handler: (ctx) => { if (logAction) logAction('Context Menu: Delete Item triggered for', ctx.data); }
+}
+let scenario14SourceKey: symbol;
+onMounted(() => {
+  if (actionCore) {
+    scenario14SourceKey = actionCore.registerActionsSource([editItemAction, deleteItemAction]);
+    if (logAction) logAction('Registered: Context Menu Actions (globally for ScenarioContextMenu component)');
+  }
+})
+onUnmounted(() => {
+  if (actionCore && scenario14SourceKey) actionCore.unregisterActionsSource(scenario14SourceKey);
+})
 
 </script>
 

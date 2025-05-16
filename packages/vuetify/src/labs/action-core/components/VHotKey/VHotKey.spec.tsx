@@ -3,7 +3,9 @@ import { VHotKey } from './VHotKey' // Adjust path if necessary
 
 // Utilities
 import { render } from '@test' // Corrected import path for Vuetify's test utils
-import { describe, it, expect, vi } from 'vitest'
+import { describe, it, expect, vi, beforeEach } from 'vitest'
+import { ActionCoreSymbol, type ActionDefinition, type ActionCorePublicAPI } from '@/labs/action-core' // Import ActionCore types and symbol
+import { ref, computed, markRaw, nextTick } from 'vue' // For mocking ActionCore
 
 // Mock platform
 vi.mock('../../platform', () => ({
@@ -11,12 +13,33 @@ vi.mock('../../platform', () => ({
   IS_CLIENT: true,
 }))
 
-const getDisplayedKeys = (container: HTMLElement) => {
+const getDisplayedKeys = (container: HTMLElement | null) => {
+  if (!container) return [];
   const kbdElements = container.querySelectorAll('.v-hot-key__key')
   return Array.from(kbdElements).map(el => el.textContent)
 }
 
+// Helper to create a mock ActionCore instance
+const mockGetAction = vi.fn();
+const createMockActionCore = (): ActionCorePublicAPI => ({
+  isLoading: ref(false),
+  allActions: computed(() => []),
+  registerActionsSource: vi.fn(),
+  unregisterActionsSource: vi.fn(),
+  getAction: mockGetAction,
+  executeAction: vi.fn(),
+  isComponentIntegrationEnabled: vi.fn(() => true),
+  destroy: vi.fn(),
+});
+
+let mockActionCoreInstance: ActionCorePublicAPI;
+
 describe('VHotKey', () => {
+  beforeEach(() => {
+    mockActionCoreInstance = createMockActionCore();
+    mockGetAction.mockReset(); // Reset for each test
+  });
+
   it('should render correctly with a simple hotkey', () => {
     const { container } = render(VHotKey, { props: { hotkey: 'ctrl+k' } })
     const hotKeyEl = container.firstChild as HTMLElement
@@ -68,6 +91,46 @@ describe('VHotKey', () => {
       const { container } = render(VHotKey, { props: { hotkey: 'cmd+o' } })
       expect(getDisplayedKeys(container.firstChild as HTMLElement)).toEqual(['Ctrl', 'O'])
     })
+  })
+
+  describe('Platform Specific Rendering (with hotkey prop)', () => {
+    it('should render explicit ctrl as Ctrl on Mac (when not a common command key)', async () => {
+      const platformMock = await import('../../platform');
+      ;(platformMock.IS_MAC as any) = true;
+      const { container } = render(VHotKey, { props: { hotkey: 'ctrl+1' } });
+      expect(getDisplayedKeys(container.firstChild as HTMLElement)).toEqual(['Ctrl', '1']);
+      ;(platformMock.IS_MAC as any) = false;
+    });
+
+    it('should render explicit ctrl as ⌘ on Mac for common single-letter command keys', async () => {
+      const platformMock = await import('../../platform');
+      ;(platformMock.IS_MAC as any) = true;
+      const commonCommands = ['ctrl+s', 'ctrl+c', 'ctrl+v', 'ctrl+x', 'ctrl+z', 'ctrl+a', 'ctrl+f', 'ctrl+p', 'ctrl+o', 'ctrl+n', 'ctrl+w', 'ctrl+q', 'ctrl+k', 'ctrl+t'];
+      for (const hotkey of commonCommands) {
+        const mainKey = hotkey.split('+')[1].toUpperCase();
+        const { container, unmount } = render(VHotKey, { props: { hotkey } });
+        expect(getDisplayedKeys(container.firstChild as HTMLElement), `Test for ${hotkey}`).toEqual(['⌘', mainKey]);
+        unmount(); // Clean up between renders in loop
+      }
+      ;(platformMock.IS_MAC as any) = false;
+    });
+
+    it('should NOT render ctrl as ⌘ on Mac if other modifiers are present', async () => {
+      const platformMock = await import('../../platform');
+      ;(platformMock.IS_MAC as any) = true;
+      const { container } = render(VHotKey, { props: { hotkey: 'ctrl+shift+s' } });
+      expect(getDisplayedKeys(container.firstChild as HTMLElement)).toEqual(['Ctrl', 'Shift', 'S']);
+      ;(platformMock.IS_MAC as any) = false;
+    });
+
+    it('should NOT render ctrl as ⌘ on Mac if meta is also present', async () => {
+      const platformMock = await import('../../platform');
+      ;(platformMock.IS_MAC as any) = true;
+      const { container } = render(VHotKey, { props: { hotkey: 'meta+ctrl+s' } });
+      // Order will be Meta, Ctrl, S
+      expect(getDisplayedKeys(container.firstChild as HTMLElement)).toEqual(['⌘', 'Ctrl', 'S']);
+      ;(platformMock.IS_MAC as any) = false;
+    });
   })
 
   it('should render modifiers in correct order', () => {
@@ -129,4 +192,123 @@ describe('VHotKey', () => {
       expect(sep.getAttribute('aria-hidden')).toBe('true');
     });
   })
+
+  describe('actionId prop integration', () => {
+    it('should display hotkey from actionId if action is found and has hotkey string', async () => {
+      const actionDef: ActionDefinition = { id: 'testAction', title: 'Test', hotkey: 'alt+t' };
+      mockGetAction.mockReturnValue(actionDef);
+
+      const { container } = render(VHotKey, {
+        props: { actionId: 'testAction' },
+        global: { provide: { [ActionCoreSymbol as symbol]: mockActionCoreInstance } }
+      });
+      await nextTick(); // for watcher to trigger
+      expect(getDisplayedKeys(container.firstChild as HTMLElement)).toEqual(['Alt', 'T']);
+      expect((container.firstChild as HTMLElement).getAttribute('aria-label')).toBe('Hotkey: alt+t');
+    });
+
+    it('should display first hotkey if action.hotkey is an array', async () => {
+      const actionDef: ActionDefinition = { id: 'testActionArray', title: 'Test Array', hotkey: ['ctrl+1', 'alt+1'] };
+      mockGetAction.mockReturnValue(actionDef);
+
+      const { container } = render(VHotKey, {
+        props: { actionId: 'testActionArray' },
+        global: { provide: { [ActionCoreSymbol as symbol]: mockActionCoreInstance } }
+      });
+      await nextTick();
+      expect(getDisplayedKeys(container.firstChild as HTMLElement)).toEqual(['Ctrl', '1']);
+      expect((container.firstChild as HTMLElement).getAttribute('aria-label')).toBe('Hotkey: ctrl+1');
+    });
+
+    it('should render nothing if action is found but has no hotkey', async () => {
+      const actionDef: ActionDefinition = { id: 'noHotkeyAction', title: 'No Hotkey' }; // No hotkey property
+      mockGetAction.mockReturnValue(actionDef);
+
+      const { container } = render(VHotKey, {
+        props: { actionId: 'noHotkeyAction' },
+        global: { provide: { [ActionCoreSymbol as symbol]: mockActionCoreInstance } }
+      });
+      await nextTick();
+      expect(getDisplayedKeys(container.firstChild as HTMLElement)).toEqual([]);
+      expect((container.firstChild as HTMLElement).getAttribute('aria-label')).toBe('Hotkey: none');
+    });
+
+    it('should render nothing if actionId is not found', async () => {
+      mockGetAction.mockReturnValue(undefined); // Action not found
+
+      const { container } = render(VHotKey, {
+        props: { actionId: 'notFoundAction' },
+        global: { provide: { [ActionCoreSymbol as symbol]: mockActionCoreInstance } }
+      });
+      await nextTick();
+      expect(getDisplayedKeys(container.firstChild as HTMLElement)).toEqual([]);
+      expect((container.firstChild as HTMLElement).getAttribute('aria-label')).toBe('Hotkey: none');
+    });
+
+    it('direct hotkey prop should take precedence over actionId if both provided', async () => {
+      const actionDef: ActionDefinition = { id: 'testAction', title: 'Test', hotkey: 'alt+t' };
+      mockGetAction.mockReturnValue(actionDef);
+
+      const { container } = render(VHotKey, {
+        props: { actionId: 'testAction', hotkey: 'ctrl+p' }, // direct hotkey is different
+        global: { provide: { [ActionCoreSymbol as symbol]: mockActionCoreInstance } }
+      });
+      await nextTick();
+      // Current VHotKey logic: watch for actionId runs immediately, then watch for props.hotkey.
+      // If actionId provides a hotkey, internalHotkeyString is set. The watch for props.hotkey
+      // only updates internalHotkeyString if !props.actionId. So actionId effectively wins IF IT HAS A HOTKEY.
+      // If actionId leads to no hotkey, THEN props.hotkey would be used.
+      // Let's test the case where actionId provides a hotkey.
+      expect(getDisplayedKeys(container.firstChild as HTMLElement)).toEqual(['Alt', 'T']);
+      expect((container.firstChild as HTMLElement).getAttribute('aria-label')).toBe('Hotkey: alt+t');
+
+      // Test when actionId yields no hotkey, direct hotkey should be used
+      const actionNoHotkey: ActionDefinition = { id: 'noHotkeyAction2', title: 'No Hotkey 2' };
+      mockGetAction.mockReturnValueOnce(actionNoHotkey);
+      const { container: container2 } = render(VHotKey, {
+        props: { actionId: 'noHotkeyAction2', hotkey: 'shift+x' },
+        global: { provide: { [ActionCoreSymbol as symbol]: mockActionCoreInstance } }
+      });
+      await nextTick();
+      expect(getDisplayedKeys(container2.firstChild as HTMLElement)).toEqual(['Shift', 'X']);
+      expect((container2.firstChild as HTMLElement).getAttribute('aria-label')).toBe('Hotkey: shift+x');
+    });
+
+    it('should update display if actionId prop changes', async () => {
+      const action1: ActionDefinition = { id: 'act1', title: 'Action 1', hotkey: 'ctrl+1' };
+      const action2: ActionDefinition = { id: 'act2', title: 'Action 2', hotkey: 'ctrl+2' };
+      mockGetAction.mockImplementation(id => {
+        if (id === 'act1') return action1;
+        if (id === 'act2') return action2;
+        return undefined;
+      });
+
+      const { container, rerender } = render(VHotKey, {
+        props: { actionId: 'act1' },
+        global: { provide: { [ActionCoreSymbol as symbol]: mockActionCoreInstance } }
+      });
+      await nextTick();
+      expect(getDisplayedKeys(container.firstChild as HTMLElement)).toEqual(['Ctrl', '1']);
+
+      await rerender({ actionId: 'act2' });
+      await nextTick();
+      expect(getDisplayedKeys(container.firstChild as HTMLElement)).toEqual(['Ctrl', '2']);
+    });
+
+    it('should display inferred ⌘ for ctrl+s via actionId on Mac', async () => {
+      const platformMock = await import('../../platform');
+      ;(platformMock.IS_MAC as any) = true;
+      const actionDef: ActionDefinition = { id: 'testActionCtrlS', title: 'Test Ctrl S', hotkey: 'ctrl+s' };
+      mockGetAction.mockReturnValue(actionDef);
+
+      const { container } = render(VHotKey, {
+        props: { actionId: 'testActionCtrlS' },
+        global: { provide: { [ActionCoreSymbol as symbol]: mockActionCoreInstance } }
+      });
+      await nextTick();
+      expect(getDisplayedKeys(container.firstChild as HTMLElement)).toEqual(['⌘', 'S']);
+      expect((container.firstChild as HTMLElement).getAttribute('aria-label')).toBe('Hotkey: ctrl+s'); // aria-label should reflect original
+      ;(platformMock.IS_MAC as any) = false;
+    });
+  });
 })
