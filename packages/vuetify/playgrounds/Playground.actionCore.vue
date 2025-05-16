@@ -151,7 +151,7 @@ import ScenarioActionProfiles from '@playgrounds/ActionCore/scenarios/ScenarioAc
 import ScenarioUndoRedo from '@playgrounds/ActionCore/scenarios/ScenarioUndoRedo.vue'
 import ScenarioContextMenu from '@playgrounds/ActionCore/scenarios/ScenarioContextMenu.vue'
 import ScenarioActionWithSubItems from '@playgrounds/ActionCore/scenarios/ScenarioActionWithSubItems.vue'
-import ScenarioActionWithParams from './ActionCore/scenarios/ScenarioActionWithParams.vue'
+import ScenarioActionWithParams from '@playgrounds/ActionCore/scenarios/ScenarioActionWithParams.vue'
 
 // --- Global Log, ActionCore, Theme, Palette setup (remains the same) ---
 const logMessages = ref<string[]>([])

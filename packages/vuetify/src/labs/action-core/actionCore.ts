@@ -370,3 +370,6 @@ export function destroyActionCoreInstance() {
   }
 }
 
+// Re-export types for convenience when importing from this module
+export type { ActionCoreOptions } from './types';
+

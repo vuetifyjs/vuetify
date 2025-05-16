@@ -174,13 +174,13 @@ describe('ActionCore', () => {
       core.registerActionsSource([action]);
       await nextTick();
 
-      const consoleWarnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {}); // Mock impl to suppress actual console output if needed by global spy
+      const consoleWarnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
 
       await core.executeAction('disabledAction1');
       expect(handlerMock).not.toHaveBeenCalled();
       expect(consoleWarnSpy).toHaveBeenCalledWith(
-        '[ActionCore]',
-        'Action "disabledAction1" is disabled.'
+        '[ActionCore] Action "disabledAction1" is disabled.',
+        undefined
       );
       expect(core.isLoading.value).toBe(false);
       consoleWarnSpy.mockRestore();
@@ -198,8 +198,8 @@ describe('ActionCore', () => {
       await core.executeAction('disabledAction2');
       expect(handlerMock).not.toHaveBeenCalled();
       expect(consoleWarnSpy).toHaveBeenCalledWith(
-        '[ActionCore]',
-        'Action "disabledAction2" is disabled.'
+        '[ActionCore] Action "disabledAction2" is disabled.',
+        undefined
       );
       consoleWarnSpy.mockClear(); // Clear for next call within same test
 
@@ -225,8 +225,7 @@ describe('ActionCore', () => {
       expect(handlerMock).not.toHaveBeenCalled();
       expect(canExecuteMock).toHaveBeenCalledWith(context);
       expect(consoleWarnSpy).toHaveBeenCalledWith(
-        '[ActionCore]',
-        'Action "canExecAction1" cannot be executed due to canExecute returning false.',
+        '[ActionCore] Action "canExecAction1" cannot be executed due to canExecute returning false.',
         { context }
       );
       expect(core.isLoading.value).toBe(false);
@@ -255,8 +254,8 @@ describe('ActionCore', () => {
 
       await core.executeAction('groupAct1');
       expect(consoleDebugSpy).toHaveBeenCalledWith(
-        '[ActionCore]',
-        'Action "groupAct1" is a group action, no direct handler called. SubItems might be used by UI.'
+        '[ActionCore] Action "groupAct1" is a group action, no direct handler called. SubItems might be used by UI.',
+        undefined
       );
       consoleDebugSpy.mockRestore();
     });
@@ -266,8 +265,8 @@ describe('ActionCore', () => {
       const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
       await core.executeAction('nonExistentAction');
       expect(consoleErrorSpy).toHaveBeenCalledWith(
-        '[ActionCore]',
-        'Failed to execute action: Action with id "nonExistentAction" not found.'
+        '[ActionCore] Failed at execute action: Action with id "nonExistentAction" not found',
+        undefined
       );
       consoleErrorSpy.mockRestore();
     });
@@ -283,8 +282,8 @@ describe('ActionCore', () => {
       await core.executeAction('noHandlerAction');
       // Because it's filtered out, it will be reported as "not found"
       expect(consoleErrorSpy).toHaveBeenCalledWith(
-        '[ActionCore]',
-        'Failed to execute action: Action with id "noHandlerAction" not found.'
+        '[ActionCore] Failed at execute action: Action with id "noHandlerAction" not found',
+        undefined
       );
       consoleErrorSpy.mockRestore();
     });
@@ -349,10 +348,10 @@ describe('ActionCore', () => {
       // await vi.advanceTimersByTime(1); // If executeAction had internal async beyond nextTick
 
       // Corrected assertions based on actual log messages from commandCore.ts
-      expect(consoleDebugSpy).toHaveBeenCalledWith('[ActionCore]', 'Hotkey "ctrl+e" executing action "hkExec"');
+      expect(consoleDebugSpy).toHaveBeenCalledWith('[ActionCore] Hotkey "ctrl+e" executing action "hkExec"', undefined);
       // The detailed [HK DEBUG] logs were removed from commandCore.ts, so we only expect the general ones.
       // If specific internal steps of the hotkey callback need checking, they are implicitly tested by whether executeAction is called.
-      expect(consoleDebugSpy).toHaveBeenCalledWith('[ActionCore]', 'Executing handler for action: hkExec');
+      expect(consoleDebugSpy).toHaveBeenCalledWith('[ActionCore] Executing handler for action: hkExec', undefined);
 
       expect(canExecuteTrue).toHaveBeenCalled();
       expect(executeActionSpy).toHaveBeenCalledWith('hkExec', { trigger: 'hotkey', event: mockEvent });
@@ -471,8 +470,8 @@ describe('ActionCore', () => {
       await nextTick();
 
       expect(consoleWarnSpy).toHaveBeenCalledWith(
-        '[ActionCore]',
-        expect.stringContaining('Asynchronous action source functions are not fully supported')
+        '[ActionCore] Processing async action source',
+        undefined
       );
       expect(core.getAction('asyncAct1')).toBeUndefined();
 
@@ -481,8 +480,8 @@ describe('ActionCore', () => {
       await nextTick();
 
       expect(consoleDebugSpy).toHaveBeenCalledWith(
-        '[ActionCore]',
-        expect.stringContaining('Async source resolved. Manual source update might be needed.')
+        '[ActionCore] Async source resolved. Manual source update might be needed.',
+        undefined
       );
 
       consoleWarnSpy.mockRestore();
@@ -680,7 +679,10 @@ describe('ActionCore Advanced Capabilities', () => {
 
     core.executeAction('scopedAction', { data: { possessedScopes: ['user'] } });
     expect(handlerMock).not.toHaveBeenCalled();
-    expect(consoleWarnSpy).toHaveBeenCalledWith('[ActionCore]', 'Action "scopedAction" cannot be executed due to canExecute returning false.', { context: { data: { possessedScopes: ['user'] } }});
+    expect(consoleWarnSpy).toHaveBeenCalledWith(
+      '[ActionCore] Action "scopedAction" cannot be executed due to canExecute returning false.',
+      { context: { data: { possessedScopes: ['user'] } } }
+    );
     consoleWarnSpy.mockClear();
 
     core.executeAction('scopedAction', { data: { possessedScopes: ['admin', 'user'] } });
@@ -707,7 +709,10 @@ describe('ActionCore Advanced Capabilities', () => {
 
     core.executeAction('modeAction', { data: { currentMode: 'view' } });
     expect(handlerMock).not.toHaveBeenCalled();
-    expect(consoleWarnSpy).toHaveBeenCalledWith('[ActionCore]', 'Action "modeAction" cannot be executed due to canExecute returning false.', { context: { data: { currentMode: 'view' } }});
+    expect(consoleWarnSpy).toHaveBeenCalledWith(
+      '[ActionCore] Action "modeAction" cannot be executed due to canExecute returning false.',
+      { context: { data: { currentMode: 'view' } } }
+    );
     consoleWarnSpy.mockClear();
 
     core.executeAction('modeAction', { data: { currentMode: 'edit' } });
