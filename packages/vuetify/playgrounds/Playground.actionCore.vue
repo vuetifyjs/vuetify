@@ -4,7 +4,7 @@
       <v-row>
         <v-col cols="12">
           <h1>ActionCore Playground</h1>
-          <p>Use Ctrl+Shift+P (or Meta+K on Mac if changed) to open the mock Command Palette. Check console and log below for action feedback.</p>
+          <p>Use <VHotKey action-id="open-command-palette" /> to open the mock Command Palette. Check console and log below for action feedback.</p>
         </v-col>
       </v-row>
 
