@@ -281,6 +281,7 @@ export {
   mdiMonitorSmall,
   mdiMusicNote,
   mdiNature,
+  mdiNewBox,
   mdiNewspaperVariantOutline,
   mdiNodejs,
   mdiNumeric,
