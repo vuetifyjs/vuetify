@@ -8,11 +8,15 @@ Action Profiling allows a single `ActionDefinition` to have multiple behavior va
 
 Imagine your application has:
 
-*   **Beginner Mode:** Simplifies UI, uses more verbose titles, and might offer safer default hotkeys.
-*   **Advanced Mode:** Exposes more powerful actions, uses terse titles, and enables more complex hotkeys.
+*   **Beginner Mode vs. Advanced Mode:** Simplifies UI, uses more verbose titles, and offers different hotkey sets based on user expertise.
 *   **Debug Mode:** Shows internal diagnostic actions or actions with modified behavior for testing.
+*   **Internationalization (i18n) & Localization (l10n):**
+    *   Action `title`s, `subtitle`s, and `description`s change based on the selected application language.
+    *   Hotkeys might be adjusted to be more ergonomic or conventional for specific language keyboard layouts (e.g., a key easily accessible on a QWERTY layout might be awkward on an AZERTY layout for a common shortcut).
+*   **Keyboard Layout Adaptations:** Beyond just language, specific hotkeys could be altered for substantially different physical keyboard layouts (e.g., Dvorak vs. QWERTY) if a user indicates such a preference, ensuring common actions remain accessible.
+*   **Platform-Specific Nuances (Beyond Default Handling):** While ActionCore handles common `meta` vs. `ctrl` normalization, profiles could be used for more granular platform-specific hotkey overrides if needed for edge cases not covered by default normalization.
 
-Instead of registering entirely different sets of actions for each mode, Action Profiling allows you to define a single base action and then specify overrides for each profile.
+Instead of registering entirely different sets of actions for each mode or localization, Action Profiling allows you to define a single base action and then specify overrides for each relevant profile.
 
 ## Defining Profile Overrides
 
