@@ -48,6 +48,7 @@
           </scenario-card>
           <ScenarioSequenceHotkey />
           <ScenarioHotkeysInTextInputs />
+          <ScenarioActiveHotkeys />
         </v-col>
 
         <!-- Column 3 -->
@@ -154,6 +155,7 @@ import ScenarioContextMenu from '@playgrounds/ActionCore/scenarios/ScenarioConte
 import ScenarioActionWithSubItems from '@playgrounds/ActionCore/scenarios/ScenarioActionWithSubItems.vue'
 import ScenarioActionWithParams from '@playgrounds/ActionCore/scenarios/ScenarioActionWithParams.vue'
 import ScenarioAIDiscovery from '@playgrounds/ActionCore/scenarios/ScenarioAIDiscovery.vue'
+import ScenarioActiveHotkeys from '@playgrounds/ActionCore/scenarios/ScenarioActiveHotkeys.vue'
 
 // --- Global Log, ActionCore, Theme, Palette setup (remains the same) ---
 const logMessages = ref<string[]>([])
