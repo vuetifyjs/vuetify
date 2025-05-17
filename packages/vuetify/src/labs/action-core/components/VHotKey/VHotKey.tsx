@@ -35,38 +35,37 @@ export const VHotKey = genericComponent()({
     const { densityClasses } = useDensity(props, 'v-hot-key')
     const actionCore = props.actionId ? inject(ActionCoreSymbol, null) : null
 
-    const internalHotkeyString = ref<string | undefined>(props.hotkey)
-
-    watch(() => props.actionId, async (newActionId) => {
-      if (newActionId && actionCore) {
-        const tryGetAction = async () => {
-          const action = actionCore.getAction(newActionId)
-          if (action?.hotkey) {
-            internalHotkeyString.value = Array.isArray(action.hotkey) ? action.hotkey[0] : action.hotkey;
-          } else if (action === undefined) {
-            await nextTick()
-            const retryAction = actionCore.getAction(newActionId)
-            if (retryAction?.hotkey) {
-              internalHotkeyString.value = Array.isArray(retryAction.hotkey) ? retryAction.hotkey[0] : retryAction.hotkey;
-            } else {
-              internalHotkeyString.value = props.hotkey;
-              console.warn(`[VHotKey] Action with id "${newActionId}" has no hotkey defined. Falling back to explicit hotkey prop if available.`)
-            }
-          } else {
-            internalHotkeyString.value = props.hotkey;
-          }
+    const internalHotkeyString = computed<string | undefined>(() => {
+      if (props.actionId && actionCore) {
+        // Ensure reactivity to allActions by accessing it here
+        // The actual getAction will use the current value of allActions
+        // No need to directly use actionCore.allActions.value in this line if getAction is inherently reactive to it,
+        // but its presence in the computed scope helps Vue track dependency if actionCore itself or its methods are not fully reactive through injection.
+        // However, getAction itself accesses actionCore.allActions.value, so this should be reactive.
+        const action = actionCore.getAction(props.actionId);
+        if (action?.hotkey) {
+          return Array.isArray(action.hotkey) ? action.hotkey[0] : action.hotkey;
+        } else if (action === undefined) {
+          // Action not found yet, could be async. To prevent immediate fallback to props.hotkey if actionId is valid,
+          // we might need a more sophisticated loading state or rely on nextTick approach previously used in watch.
+          // For now, if action is undefined, and actionId was given, we assume it might appear.
+          // If props.hotkey is also provided, it acts as an explicit override or initial value.
+          // If action is found but no hotkey, then props.hotkey can be a fallback.
+          // This logic prioritizes actionId if action is found.
+          // If action not found, and props.hotkey exists, use props.hotkey.
+          // console.warn(`[VHotKey] Action with id "${props.actionId}" not found. Falling back to explicit hotkey prop if available.`);
+          return props.hotkey; // Fallback if action not (yet) found
+        } else if (action && !action.hotkey) {
+          // Action found but no hotkey, fallback to props.hotkey
+          // console.warn(`[VHotKey] Action with id "${props.actionId}" has no hotkey defined. Falling back to explicit hotkey prop if available.`);
+          return props.hotkey;
         }
-        await tryGetAction()
-      } else if (!newActionId) {
-        internalHotkeyString.value = props.hotkey;
       }
-    }, { immediate: true })
+      return props.hotkey; // Default to props.hotkey if no actionId or actionCore
+    });
 
-    watch(() => props.hotkey, (newHotkey) => {
-      if (!props.actionId) {
-        internalHotkeyString.value = newHotkey;
-      }
-    })
+    // Original watch logic removed as internalHotkeyString is now computed.
+    // The computed property will handle changes to props.actionId, props.hotkey, and actionCore.allActions implicitly.
 
     const keysToRender = computed(() => {
       const hotkeyToParse = internalHotkeyString.value;

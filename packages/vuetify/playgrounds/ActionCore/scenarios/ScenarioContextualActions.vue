@@ -9,8 +9,8 @@
       id="mock-editor-textarea"
     />
     <p>
-      Focus editor for "Save Editor Content" (<VHotKey :hotkey="(Array.isArray(saveEditorAction.hotkey) ? saveEditorAction.hotkey[0] : saveEditorAction.hotkey) || ''" />).
-      Blur for "Global Save" (<VHotKey :hotkey="(Array.isArray(globalSaveAction.hotkey) ? globalSaveAction.hotkey[0] : globalSaveAction.hotkey) || ''" />).
+      Focus editor for "Save Editor Content" (<VHotKey action-id="save-editor" />).
+      Blur for "Global Save" (<VHotKey action-id="global-save" />).
     </p>
     <v-chip :color="editorFocused ? 'green' : 'grey'" small>
       Editor Focused: {{ editorFocused }}

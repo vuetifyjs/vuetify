@@ -92,6 +92,32 @@ export interface DiscoverableActionInfo {
 }
 // --- AI Integration Related Types --- END ---
 
+// --- Action Profiling Types --- START ---
+export interface ActionProfileOverride<T extends ActionContext = ActionContext> {
+  title?: string | Ref<string>;
+  subtitle?: string | Ref<string>;
+  icon?: string | Ref<string>;
+  keywords?: string | string[];
+  handler?: (context: T) => void | Promise<void>;
+  hotkey?: string | string[];
+  hotkeyOptions?: {
+    preventDefault?: boolean;
+    stopPropagation?: boolean;
+    ignoreKeyRepeat?: boolean;
+  };
+  runInTextInput?: boolean | 'only' | RunInTextInputMatcher;
+  canExecute?: (context: T) => boolean;
+  subItems?: (context: T) => ActionDefinition<T>[] | Promise<ActionDefinition<T>[]>;
+  meta?: Record<string, any>;
+  order?: number;
+  disabled?: boolean | Ref<boolean>;
+  description?: string;
+  group?: string;
+  parametersSchema?: Record<string, any>; // Allow profiles to override schema if needed
+  ai?: AIActionMetadata; // Allow profiles to override AI metadata
+}
+// --- Action Profiling Types --- END ---
+
 export interface ActionDefinition<T extends ActionContext = ActionContext> {
   /** Unique identifier for the action. */
   id: string
@@ -149,6 +175,9 @@ export interface ActionDefinition<T extends ActionContext = ActionContext> {
   // AI Related Fields
   parametersSchema?: Record<string, any>; // JSON Schema describing expected ActionContext.data structure
   ai?: AIActionMetadata; // Metadata for AI interaction
+
+  // Profiling
+  profiles?: Record<string, ActionProfileOverride<T>>;
 }
 
 /** Represents a source of actions for the ActionCore store. */
@@ -179,6 +208,8 @@ export interface ActionCorePublicAPI {
   readonly isLoading: Readonly<Ref<boolean>>;
   /** Computed property that aggregates all valid actions from all registered sources. */
   readonly allActions: ComputedRef<Readonly<ActionDefinition<any>[]>>;
+  /** The currently active profile name, if any. */
+  readonly activeProfile: Readonly<Ref<string | null>>;
 
   /** Registers a new source of actions. */
   registerActionsSource(source: ActionsSource): symbol;
@@ -195,6 +226,9 @@ export interface ActionCorePublicAPI {
 
   // New method for AI discovery
   getDiscoverableActions(aiContext: { allowedScopes?: string[] }): DiscoverableActionInfo[];
+
+  // New methods/properties for Profiling
+  setActiveProfile(profileName: string | null): void;
 }
 
 // -------------- Symbol for Sub-Items UI Handler --------------

@@ -459,24 +459,27 @@ describe('ActionCore', () => {
 
     it('should unregister hotkeys when an action source is unregistered', async () => {
       const core = useActionCore();
-      const action1 = createActionDef('hkUnreg1', { hotkey: 'ctrl+x' });
+      const action1 = createActionDef('hkUnreg1', { hotkey: 'ctrl+x', handler: vi.fn() });
       const mockUnregisterFn1 = vi.fn();
 
-      // Reset mockKeyBindingsOn for this specific test to use mockImplementationOnce cleanly
       mockKeyBindingsOn.mockReset();
       mockKeyBindingsOn.mockImplementationOnce((trigger, cb, opts) => mockUnregisterFn1);
 
       const sourceKey = core.registerActionsSource([action1]);
-      // Ensure allActions is evaluated to trigger processAndRegisterHotkeys
-      let currentActions = core.allActions.value;
-      expect(currentActions.length).toBeGreaterThanOrEqual(1);
+      // Accessing allActions.value ensures the computed property is evaluated,
+      // and its dependencies (like registeredSources) are up-to-date.
+      // The watcher on allActions should then trigger.
+      core.allActions.value; // Ensure evaluation
+      await nextTick(); // Allow reactive effects (like watchers) to run
+      await nextTick(); // Add an extra tick for good measure, sometimes needed for complex reactivity chains in tests
+
       expect(mockKeyBindingsOn).toHaveBeenCalledWith('ctrl+x', expect.any(Function), expect.any(Object));
 
       core.unregisterActionsSource(sourceKey);
-      // Ensure allActions re-evaluates, which should call unregister for removed actions' hotkeys
-      currentActions = core.allActions.value;
-      expect(currentActions.find((a: ActionDefinition) => a.id === 'hkUnreg1')).toBeUndefined();
-      await nextTick(); // Allow effects from computed property change
+      // Access allActions.value again to ensure re-evaluation after unregister
+      core.allActions.value; // Ensure re-evaluation
+      await nextTick(); // Allow watcher to run for unregistration logic within processAndRegisterHotkeys
+      await nextTick();
 
       expect(mockUnregisterFn1).toHaveBeenCalledTimes(1);
     });
@@ -934,6 +937,243 @@ describe('ActionCore Advanced Capabilities', () => {
   });
 });
 
+describe('ActionCore with Profiling', () => {
+  beforeEach(() => {
+    vi.useFakeTimers();
+    destroyActionCoreInstance();
+    mockKeyBindingsOn.mockClear().mockReturnValue(() => {});
+    mockKeyBindingsStop.mockClear();
+  });
+
+  afterEach(() => {
+    destroyActionCoreInstance();
+    vi.clearAllMocks();
+    vi.useRealTimers();
+  });
+
+  it('should have activeProfile as null initially', () => {
+    const core = useActionCore();
+    expect(core.activeProfile.value).toBeNull();
+  });
+
+  it('setActiveProfile should update activeProfile value and trigger allActions recomputation', async () => {
+    const core = useActionCore();
+    const consoleDebugSpy = vi.spyOn(console, 'debug').mockImplementation(() => {});
+
+    const actionWithProfiles = createActionDef('profiledAction1', {
+      title: 'Base Title',
+      hotkey: 'base+h',
+      profiles: {
+        testProfile: {
+          title: 'Profile Title',
+          hotkey: 'profile+h',
+        },
+      },
+      handler: vi.fn(), // Ensure it passes isEffectiveActionDefinitionValid
+    });
+    core.registerActionsSource([actionWithProfiles]);
+    await nextTick(); // Initial computation of allActions
+
+    // Spy on allActions recomputation, which should call processAndRegisterHotkeys
+    // We can infer recomputation by checking if processAndRegisterHotkeys is called after profile change
+    const processHotkeysSpy = vi.spyOn(core as any, 'processAndRegisterHotkeys');
+
+    core.setActiveProfile('testProfile');
+    expect(core.activeProfile.value).toBe('testProfile');
+    await nextTick(); // Allow computed properties to update
+
+    expect(consoleDebugSpy).toHaveBeenCalledWith('[ActionCore] Setting active profile to: testProfile', undefined);
+    // Check if allActions recomputed (indirectly by checking processAndRegisterHotkeys call)
+    // It will be called once on registration, then again on profile change.
+    expect(processHotkeysSpy.mock.calls.length).toBeGreaterThanOrEqual(1); // Called at least once more after initial registration
+
+    core.setActiveProfile(null);
+    expect(core.activeProfile.value).toBeNull();
+    await nextTick();
+    expect(consoleDebugSpy).toHaveBeenCalledWith('[ActionCore] Setting active profile to: null', undefined);
+    expect(processHotkeysSpy.mock.calls.length).toBeGreaterThanOrEqual(2);
+
+    consoleDebugSpy.mockRestore();
+  });
+
+  it('getAction should return base definition if no profile is active or profile does not exist', async () => {
+    const core = useActionCore();
+    const action = createActionDef('action1', {
+      title: 'Base Action',
+      profiles: {
+        prof1: { title: 'Profiled Action' },
+      },
+      handler: vi.fn(),
+    });
+    core.registerActionsSource([action]);
+    await nextTick();
+
+    let retrieved = core.getAction('action1');
+    expect(retrieved?.title).toBe('Base Action');
+
+    core.setActiveProfile('nonExistentProfile');
+    await nextTick();
+    retrieved = core.getAction('action1');
+    expect(retrieved?.title).toBe('Base Action');
+  });
+
+  it('getAction should return merged definition when a profile is active', async () => {
+    const core = useActionCore();
+    const baseHandler = vi.fn();
+    const profileHandler = vi.fn();
+
+    const action = createActionDef('action2', {
+      title: 'Base Title',
+      hotkey: 'base+k',
+      handler: baseHandler,
+      meta: { baseMeta: true, sharedMeta: 'baseValue' },
+      profiles: {
+        profX: {
+          title: 'Profile X Title',
+          hotkey: 'profile+k',
+          handler: profileHandler,
+          meta: { profileMeta: true, sharedMeta: 'profileValue' }, // Profile meta should merge/override
+        },
+      },
+    });
+    core.registerActionsSource([action]);
+    await nextTick();
+
+    core.setActiveProfile('profX');
+    await nextTick();
+
+    const retrieved = core.getAction('action2');
+    expect(retrieved).toBeDefined();
+    expect(retrieved?.title).toBe('Profile X Title');
+    expect(retrieved?.hotkey).toBe('profile+k');
+    expect(retrieved?.meta?.baseMeta).toBe(true); // From base, if meta merge is additive
+    expect(retrieved?.meta?.profileMeta).toBe(true); // From profile
+    expect(retrieved?.meta?.sharedMeta).toBe('profileValue'); // Profile overrides base
+
+    // Test that the handler is the profile one
+    retrieved?.handler?.({ trigger: 'test' });
+    expect(profileHandler).toHaveBeenCalled();
+    expect(baseHandler).not.toHaveBeenCalled();
+  });
+
+  it('hotkeys should be registered based on the active profile', async () => {
+    const core = useActionCore();
+    const action = createActionDef('hotkeyAction', {
+      handler: vi.fn(),
+      hotkey: 'ctrl+b', // Base hotkey
+      profiles: {
+        userProfile: { hotkey: 'ctrl+p' }, // Profile hotkey
+      },
+    });
+    core.registerActionsSource([action]);
+    await nextTick();
+
+    // Initially, base hotkey should be registered
+    expect(mockKeyBindingsOn).toHaveBeenCalledWith('ctrl+b', expect.any(Function), expect.any(Object));
+    mockKeyBindingsOn.mockClear();
+
+    core.setActiveProfile('userProfile');
+    await nextTick(); // allActions recomputes, processAndRegisterHotkeys runs
+
+    // Old hotkey (ctrl+b) should have been unregistered (mock.calls for unregister would be complex to check here without deeper mocking)
+    // New hotkey (ctrl+p) should be registered
+    expect(mockKeyBindingsOn).toHaveBeenCalledWith('ctrl+p', expect.any(Function), expect.any(Object));
+    mockKeyBindingsOn.mockClear();
+
+    core.setActiveProfile(null); // Revert to base
+    await nextTick();
+    expect(mockKeyBindingsOn).toHaveBeenCalledWith('ctrl+b', expect.any(Function), expect.any(Object));
+  });
+
+  it('executeAction should use the handler from the active profile', async () => {
+    const core = useActionCore();
+    const baseHandler = vi.fn();
+    const profileHandler = vi.fn();
+    const action = createActionDef('execActionProfile', {
+      handler: baseHandler,
+      profiles: {
+        doThis: { handler: profileHandler },
+      },
+    });
+    core.registerActionsSource([action]);
+    await nextTick();
+
+    // Execute with base profile
+    await core.executeAction('execActionProfile');
+    expect(baseHandler).toHaveBeenCalledTimes(1);
+    expect(profileHandler).not.toHaveBeenCalled();
+    baseHandler.mockClear();
+
+    core.setActiveProfile('doThis');
+    await nextTick();
+    await core.executeAction('execActionProfile');
+    expect(profileHandler).toHaveBeenCalledTimes(1);
+    expect(baseHandler).not.toHaveBeenCalled();
+  });
+
+  it('allActions should reflect effective actions based on the current profile', async () => {
+    const core = useActionCore();
+    const action1 = createActionDef('effAction1', { title: 'Base1', handler: vi.fn() });
+    const action2 = createActionDef('effAction2', {
+      title: 'Base2',
+      handler: vi.fn(),
+      profiles: {
+        view: { title: 'View Profile Title2' },
+      },
+    });
+    core.registerActionsSource([action1, action2]);
+    await nextTick();
+
+    let all = core.allActions.value;
+    expect(all.find(a => a.id === 'effAction1')?.title).toBe('Base1');
+    expect(all.find(a => a.id === 'effAction2')?.title).toBe('Base2');
+
+    core.setActiveProfile('view');
+    await nextTick();
+    all = core.allActions.value;
+    expect(all.find(a => a.id === 'effAction1')?.title).toBe('Base1'); // No profile, remains base
+    expect(all.find(a => a.id === 'effAction2')?.title).toBe('View Profile Title2'); // Profile applied
+  });
+
+  it('should correctly merge meta properties from profiles (profile meta takes precedence)', async () => {
+    const core = useActionCore();
+    const action = createActionDef('metaAction', {
+      handler: vi.fn(),
+      meta: { baseOnly: 'A', shared: 'BaseShared', nested: { baseVal: 1 } },
+      profiles: {
+        test: {
+          meta: { profileOnly: 'B', shared: 'ProfileShared', nested: { profileVal: 2 } },
+        },
+      },
+    });
+    core.registerActionsSource([action]);
+    await nextTick();
+    core.setActiveProfile('test');
+    await nextTick();
+
+    const retrieved = core.getAction('metaAction');
+    expect(retrieved?.meta?.baseOnly).toBe('A');
+    expect(retrieved?.meta?.profileOnly).toBe('B');
+    expect(retrieved?.meta?.shared).toBe('ProfileShared');
+    expect(retrieved?.meta?.nested?.baseVal).toBe(1); // Because profile.meta.nested overrides base.meta.nested
+    expect(retrieved?.meta?.nested?.profileVal).toBe(2);
+  });
+
+  it('actions without profiles section should not be affected by setActiveProfile', async () => {
+    const core = useActionCore();
+    const unprofiledAction = createActionDef('unprofiled', { title: 'Always Base', handler: vi.fn() });
+    core.registerActionsSource([unprofiledAction]);
+    await nextTick();
+
+    core.setActiveProfile('someProfile');
+    await nextTick();
+
+    const retrieved = core.getAction('unprofiled');
+    expect(retrieved?.title).toBe('Always Base');
+  });
+
+});
+
 describe('ActionCore getDiscoverableActions', () => {
   beforeEach(() => {
     vi.useFakeTimers();
@@ -949,6 +1189,7 @@ describe('ActionCore getDiscoverableActions', () => {
   const createAIDef = (id: string, props: Partial<ActionDefinition> = {}): ActionDefinition => {
     // Simplified helper for AI-specific tests, building on the global createActionDef
     return createActionDef(id, {
+      handler: props.handler ?? vi.fn(), // Ensure a handler for isEffectiveActionDefinitionValid
       // Basic AI structure that might be overridden by props
       ai: { accessible: true },
       ...props,

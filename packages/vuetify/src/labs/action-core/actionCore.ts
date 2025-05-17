@@ -1,4 +1,4 @@
-import { ref, computed, shallowRef, onScopeDispose, isRef, readonly, getCurrentInstance } from 'vue';
+import { ref, computed, shallowRef, onScopeDispose, isRef, readonly, getCurrentInstance, watch } from 'vue';
 import type { Ref, ComputedRef, InjectionKey } from 'vue';
 import { useKeyBindings } from './useKeyBindings';
 import type {
@@ -47,9 +47,15 @@ class ActionCore implements ActionCorePublicAPI {
   /** Map to track pending async source resolutions */
   private pendingAsyncSources = new Map<symbol, Promise<ActionDefinition<any>[]>>();
 
+  /** Internal mutable ref for the active profile name. */
+  private _activeProfile = ref<string | null>(null);
+  /** Public readonly ref for the active profile name. */
+  public readonly activeProfile: Readonly<Ref<string | null>>;
+
   /**
    * Computed property that aggregates all valid actions from all registered sources.
    * It deduplicates actions by ID (last one registered wins) and triggers hotkey processing.
+   * These actions are the "effective" actions, potentially merged with profile overrides.
    * @type {ComputedRef<Readonly<ActionDefinition<any>[]>>}
    */
   public readonly allActions: ComputedRef<Readonly<ActionDefinition<any>[]>>;
@@ -59,13 +65,17 @@ class ActionCore implements ActionCorePublicAPI {
    * @param {ActionCoreInstanceOptions} [options={}] - Configuration options for this ActionCore instance.
    */
   constructor(options: ActionCoreInstanceOptions = {}) {
-    this.options = options; // Store options for potential future use (e.g., componentIntegration flags)
+    this.options = options;
     this.isLoading = readonly(this._isLoading);
-    this.keyBindings = useKeyBindings({ capture: true }); // MODIFICATION: Initialize with capture: true
+    this._activeProfile = ref<string | null>(null);
+    this.activeProfile = readonly(this._activeProfile);
+    this.keyBindings = useKeyBindings({ capture: true });
 
     this.allActions = computed(() => {
-      const actions: ActionDefinition<any>[] = [];
-      // Process registered sources
+      const currentProfileName = this._activeProfile.value;
+      log('debug', COMPONENT_NAME, `Computing allActions. Active profile: ${currentProfileName}`);
+
+      const baseActions: ActionDefinition<any>[] = [];
       for (const [sourceKey, source] of this.registeredSources.value.entries()) {
         let currentActionsFromSource: ActionDefinition<any>[] = [];
         const sourceValue = isRef(source) ? source.value : source;
@@ -73,31 +83,20 @@ class ActionCore implements ActionCorePublicAPI {
         if (typeof sourceValue === 'function') {
           try {
             const result = (sourceValue as () => ActionDefinition<any>[] | Promise<ActionDefinition<any>[]>)();
-
             if (isPromise<ActionDefinition<any>[]>(result)) {
-              // Handle async source
               if (!this.pendingAsyncSources.has(sourceKey)) {
                 log('debug', COMPONENT_NAME, 'Processing async action source');
                 const processAsyncResult = async () => {
                   try {
                     const resolvedActions = await result;
-                    // Check if this source is still registered
                     if (this.registeredSources.value.has(sourceKey)) {
-                      // Force update of allActions by creating a new Map for registeredSources
                       const newMap = new Map(this.registeredSources.value);
-                      // Store the resolved actions if the source is a function
                       const filteredActions = Array.isArray(resolvedActions)
-                        ? resolvedActions.filter(this.isActionDefinition)
+                        ? resolvedActions.filter(action => this.isBaseActionDefinitionValid(action))
                         : [];
-                      // Replace the source function with its resolved (and filtered) actions
                       newMap.set(sourceKey, filteredActions);
-                      // Trigger update by assigning the new map so Vue reactivity picks up the change
                       this.registeredSources.value = newMap;
-                      // Immediately process and register hotkeys for the resolved actions so tests that
-                      // inspect keyBindings.on calls right after timer advancement succeed without waiting
-                      // for an additional reactive tick.
-                      this.processAndRegisterHotkeys(filteredActions);
-                      log('debug', COMPONENT_NAME, `Async source resolved with ${filteredActions.length} actions`);
+                      log('debug', COMPONENT_NAME, `Async source resolved with ${filteredActions.length} base actions`);
                     }
                     return resolvedActions;
                   } catch (error) {
@@ -107,44 +106,94 @@ class ActionCore implements ActionCorePublicAPI {
                     this.pendingAsyncSources.delete(sourceKey);
                   }
                 };
-
-                // Store the promise to track its state
                 this.pendingAsyncSources.set(sourceKey, processAsyncResult());
               }
-              // Don't include any actions from this source until resolved
               currentActionsFromSource = [];
             } else {
-              // Synchronous source
-              currentActionsFromSource = Array.isArray(result) ? result.filter(this.isActionDefinition) : [];
+              currentActionsFromSource = Array.isArray(result) ? result.filter(action => this.isBaseActionDefinitionValid(action)) : [];
             }
           } catch (error) {
             log('error', COMPONENT_NAME, 'execute actions source function', error);
             currentActionsFromSource = [];
           }
         } else if (Array.isArray(sourceValue)) {
-          currentActionsFromSource = sourceValue.filter(this.isActionDefinition);
+          currentActionsFromSource = sourceValue.filter(action => this.isBaseActionDefinitionValid(action));
         }
-
-        actions.push(...currentActionsFromSource);
+        baseActions.push(...currentActionsFromSource);
       }
 
-      const actionMap = new Map<string, ActionDefinition<any>>();
-      actions.forEach(action => actionMap.set(action.id, action));
-      const finalActions = Array.from(actionMap.values());
-      this.processAndRegisterHotkeys(finalActions);
-      return Object.freeze(finalActions);
+      const baseActionMap = new Map<string, ActionDefinition<any>>();
+      baseActions.forEach(action => baseActionMap.set(action.id, action));
+
+      const effectiveActions: ActionDefinition<any>[] = [];
+      for (const baseAction of baseActionMap.values()) {
+        const effectiveAction = this.getEffectiveActionDefinition(baseAction, currentProfileName);
+        if (this.isEffectiveActionDefinitionValid(effectiveAction)) {
+          effectiveActions.push(effectiveAction);
+        }
+      }
+      return Object.freeze(effectiveActions);
     });
+
+    // Watch allActions to trigger hotkey processing as a side effect
+    watch(this.allActions, (newActions, oldActions) => {
+      log('debug', COMPONENT_NAME, 'allActions changed, queueing hotkey reprocessing.');
+      // Vue's watch with deep:true might trigger even if the objects are structurally similar.
+      // A more robust check might involve comparing action IDs and their hotkey definitions if performance becomes an issue.
+      this.processAndRegisterHotkeys(newActions);
+    }, { deep: true, immediate: true }); // immediate: true ensures it runs for the initial set of actions
   }
 
   /**
-   * Type guard to check if an entry is a valid ActionDefinition.
-   * An action is valid if it has an ID and either a handler or subItems.
-   * @param {*} entry - The entry to check.
-   * @returns {entry is ActionDefinition<any>} True if the entry is a valid ActionDefinition.
+   * Validates a base ActionDefinition (before profile merging).
+   * It must have an ID.
+   * The presence of handler or subItems is checked on the *effective* action.
    */
-  private isActionDefinition(entry: any): entry is ActionDefinition<any> {
-    return typeof entry === 'object' && entry !== null && typeof entry.id === 'string' &&
-           (typeof entry.handler === 'function' || typeof entry.subItems === 'function');
+  private isBaseActionDefinitionValid(entry: any): entry is ActionDefinition<any> {
+    return typeof entry === 'object' && entry !== null && typeof entry.id === 'string';
+  }
+
+  /**
+   * Validates an effective ActionDefinition (after profile merging).
+   * An action is valid if it has an ID and either a handler or subItems.
+   */
+  private isEffectiveActionDefinitionValid(entry: ActionDefinition<any>): boolean {
+    return typeof entry.handler === 'function' || typeof entry.subItems === 'function';
+  }
+
+  /**
+   * Applies profile overrides to a base action definition.
+   * @param baseAction The base action definition.
+   * @param profileName The name of the active profile, or null.
+   * @returns The effective action definition.
+   */
+  private getEffectiveActionDefinition(baseAction: ActionDefinition<any>, profileName: string | null): ActionDefinition<any> {
+    if (profileName && baseAction.profiles && baseAction.profiles[profileName]) {
+      const profileOverrides = baseAction.profiles[profileName];
+
+      let mergedMeta = { ...(baseAction.meta || {}) }; // Start with base meta
+      if (profileOverrides.meta) {
+        // Deep merge logic specifically for meta and its nested properties if needed
+        // For now, simple override for top-level keys in profileOverrides.meta
+        // and a specific deep merge for a common pattern like 'nested' object.
+        mergedMeta = { ...mergedMeta, ...profileOverrides.meta };
+        if (baseAction.meta?.nested && typeof baseAction.meta.nested === 'object' &&
+            profileOverrides.meta.nested && typeof profileOverrides.meta.nested === 'object' &&
+            !Array.isArray(baseAction.meta.nested) && !Array.isArray(profileOverrides.meta.nested)) {
+          mergedMeta.nested = { ...baseAction.meta.nested, ...profileOverrides.meta.nested };
+        }
+      }
+
+      const effectiveAction = {
+        ...baseAction,
+        ...profileOverrides, // Profile overrides base properties
+        id: baseAction.id,
+        profiles: baseAction.profiles,
+        meta: mergedMeta, // Use the more deeply merged meta
+      };
+      return effectiveAction;
+    }
+    return baseAction; // Return base action if no active profile or no matching override
   }
 
   /**
@@ -355,7 +404,7 @@ class ActionCore implements ActionCorePublicAPI {
 
   public getDiscoverableActions(aiContext: { allowedScopes?: string[] }): import('./types').DiscoverableActionInfo[] {
     const discoverableActions: import('./types').DiscoverableActionInfo[] = [];
-    const allCurrentActions = this.allActions.value; // Access the computed value
+    const allCurrentActions = this.allActions.value;
 
     for (const action of allCurrentActions) {
       // 1. Filter by presence of `action.ai`
@@ -449,7 +498,24 @@ class ActionCore implements ActionCorePublicAPI {
     this.pendingAsyncSources.clear();
     const newMap = new Map();
     this.registeredSources.value = newMap;
+    this._activeProfile.value = null;
   };
+
+  /**
+   * Sets the active profile for actions.
+   * Setting to null clears the active profile, reverting actions to their base definitions.
+   * @param {string | null} profileName - The name of the profile to activate, or null.
+   */
+  public setActiveProfile(profileName: string | null): void {
+    if (this._activeProfile.value !== profileName) {
+      log('debug', COMPONENT_NAME, `Setting active profile to: ${profileName}`);
+      this._activeProfile.value = profileName;
+      // The change to _activeProfile will trigger re-computation of allActions,
+      // which in turn will call processAndRegisterHotkeys.
+    } else {
+      log('debug', COMPONENT_NAME, `Profile already set to: ${profileName}, no change.`);
+    }
+  }
 }
 
 /** Singleton instance of ActionCore. */
