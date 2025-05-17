@@ -19,31 +19,29 @@
     </template>
 
     <template #append>
-      <template v-if="mdAndUp">
-        <AppBarBlogLink />
-
+      <div v-if="mdAndUp" class="d-flex ga-1">
         <AppBarLearnMenu />
 
         <AppBarSupportMenu />
 
         <AppBarEcosystemMenu />
 
-        <AppBarTeamLink v-if="lgAndUp" />
-
         <AppBarPlaygroundLink v-if="lgAndUp" />
 
-        <AppBarEnterpriseLink />
-      </template>
+        <AppBarSponsorLink />
+      </div>
 
-      <AppVerticalDivider v-if="smAndUp" class="ms-3 me-2" />
+      <AppVerticalDivider v-if="smAndUp" />
 
-      <AppBarStoreLink v-if="smAndUp" />
+      <div class="d-flex ga-1">
+        <AppBarStoreLink v-if="smAndUp" />
 
-      <AppBarJobsLink v-if="smAndUp" />
+        <AppBarGitHubLink v-if="smAndUp" />
 
-      <AppBarLanguageMenu />
+        <AppBarLanguageMenu />
 
-      <AppBarSettingsToggle />
+        <AppBarSettingsToggle />
+      </div>
     </template>
   </VoAppBar>
 </template>
@@ -53,5 +51,5 @@
   const { smAndUp, lgAndUp, mdAndDown, width } = useDisplay()
   const route = useRoute()
 
-  const mdAndUp = computed(() => width.value >= 1044)
+  const mdAndUp = computed(() => width.value >= 1077)
 </script>
