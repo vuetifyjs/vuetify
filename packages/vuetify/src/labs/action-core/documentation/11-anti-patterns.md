@@ -4,6 +4,37 @@ While ActionCore is designed to be robust and flexible, like any powerful system
 
 This section draws from internal development notes and real-world considerations.
 
+## When **Not** to Use ActionCore (Or Use It More Lightly)
+
+ActionCore excels at managing actions that benefit from centralization, shareability (hotkeys, palette, multiple UI triggers), or require complex contextual availability. However, forcing *every* conceivable user interaction through ActionCore can be an anti-pattern.
+
+*   **Anti-Pattern:** Using ActionCore for highly localized, simple UI component interactions that have no need for global discoverability, hotkeys, command palette presence, or complex `canExecute` logic managed outside the component.
+*   **Examples of Potentially Inappropriate Use:**
+    *   **Internal Component State Toggles:** A purely visual toggle within a self-contained component (e.g., expanding/collapsing a panel section that has no other trigger or global relevance) is often better handled by local component state (`ref` or `reactive`) and a simple `@click` handler.
+    *   **Basic Form Input Validation Feedback:** While a form *submission* might be an action, individual input field validation messages or simple CSS class changes on blur/focus are typically handled by form libraries (like VeeValidate) or direct component logic.
+    *   **Purely Decorative Animations/Transitions:** Interactions that only trigger a visual effect without changing application state or business logic usually don't need the overhead of an ActionDefinition.
+    *   **Hyper-Specific, One-Off Event Handling:** If a component has a unique, deeply nested interactive element that only ever responds to a click in that one place and has no broader implications, a direct `@click` handler might be simpler than defining a dedicated ActionCore action.
+
+*   **Impact of Overuse:**
+    *   **Unnecessary Boilerplate:** Defining `ActionDefinition` objects for trivial, localized interactions adds unnecessary code.
+    *   **Bloated `allActions` List:** Pollutes the global action space with actions that have no business being there, potentially impacting command palette search performance and making it harder to find genuinely global/important actions.
+    *   **Increased Complexity:** Can make simple component logic harder to follow if developers have to trace interactions through ActionCore unnecessarily.
+    *   **Reduced Component Encapsulation:** Forcing purely internal component behaviors into a global system can break encapsulation.
+
+*   **Recommendation: Exercise Discernment**
+    *   **Ask "Why ActionCore for this?":**
+        *   Does this action need a global hotkey?
+        *   Should it appear in a command palette?
+        *   Will it be triggered from multiple, disparate parts of the UI or programmatically in a way that benefits from a central ID?
+        *   Does its `canExecute` logic depend on global state or context that ActionCore helps manage?
+        *   Is it part of a user "command" or a significant application operation?
+        *   Would Action Profiling be beneficial for this interaction?
+    *   If the answers to most of these are "no," a simpler, more localized approach is likely better.
+    *   **Component-Level Actions (Light Use):** If an action is primarily tied to one component but you want *some* benefits of ActionCore (like `useCommandable` for `disabled` state reactivity from a simple `canExecute`), consider passing an inline `ActionDefinition` to the `command` prop. This keeps the definition localized to the component's use without necessarily making it a globally intrusive action if it's not registered via a global source.
+    *   **Prefer Standard Vue Patterns for Local Interactions:** For simple click handlers, local state changes, or basic event modifications within a component's scope, continue to use standard Vue `@click`, `ref`, `computed`, and methods.
+
+ActionCore is a tool for managing "commands" and significant "actions" in a unified way. It's not intended to replace all basic event handling. A craftsman knows when to use a specialized tool and when a simpler one will suffice.
+
 ## 1. Overly Granular or Chatty Action Sources
 
 *   **Anti-Pattern:** Defining too many small, frequently changing `ActionsSource` instances, especially if they are reactive `Ref<ActionDefinition[]>` that update very often or async functions that re-resolve frequently with only minor changes.

@@ -84,11 +84,11 @@ export interface ActionDefinition<T extends ActionContext = ActionContext> {
     *   **Example (Simple Sync):**
         ```typescript
         handler: () => {
-          console.log('Action executed!');
-          // Update application state, call a service, etc.
+          console.log('Action executed: About dialog opened.');
+          // appState.isAboutDialogVisible = true;
         }
         ```
-    *   **Example (Async with Context):**
+    *   **Example (Async with Context & Simulated Work):**
         ```typescript
         async handler: (ctx: ActionContext) => {
           const itemId = ctx.data?.itemId;
@@ -96,25 +96,70 @@ export interface ActionDefinition<T extends ActionContext = ActionContext> {
             console.warn('No item ID provided to delete action');
             return;
           }
-          // const success = await apiService.deleteItem(itemId);
-          // if (success) store.removeItem(itemId);
-          console.log(`Item ${itemId} delete attempt made. Trigger: ${ctx.trigger}`);
+
+          console.log(`Attempting to delete item ${itemId}. Trigger: ${ctx.trigger}`);
+          // ActionCore sets its global isLoading around executeAction.
+          // However, if a handler has multiple internal async steps,
+          // you might manage a more granular loading state specific to this action.
+
+          try {
+            // Simulate an API call
+            await new Promise(resolve => setTimeout(resolve, 1500));
+            // const success = await apiService.deleteItem(itemId);
+            // if (success) {
+            //   store.removeItemFromList(itemId);
+            //   notificationsService.showSuccess('Item deleted successfully!');
+            // } else {
+            //   notificationsService.showError('Failed to delete item.');
+            // }
+            console.log(`Item ${itemId} deletion process completed.`);
+          } catch (error) {
+            console.error(`Error during deletion of item ${itemId}:`, error);
+            // notificationsService.showError('An unexpected error occurred.');
+          }
         }
         ```
-    *   **Note:** An action doesn't strictly need a handler if it primarily serves to expose `subItems` (see [Sub-Items & Nested Commands](./07-sub-items-and-nesting.md)).
+    *   **Note:** An action doesn't strictly need a `handler` if its primary purpose is to expose `subItems` for UIs like command palettes (see [Sub-Items & Nested Commands](./07-sub-items-and-nesting.md)).
 
 *   **`canExecute?: (context: ActionContext) => boolean`**
-    *   A **synchronous** predicate function that determines if the action is currently allowed to execute. It receives the `ActionContext` that *would be* passed to the handler.
-    *   If `canExecute` returns `false`, ActionCore will prevent the `handler` from being called. This is crucial for context-sensitive actions.
-    *   UI elements bound to this action should ideally use this (or the `disabled` property) to reflect the action's availability (e.g., disabling a button).
-    *   **Example:**
-        ```typescript
-        canExecute: (ctx: ActionContext) => {
-          // Only allow saving if the document has unsaved changes and the user is logged in.
-          return document.hasUnsavedChanges && authStore.isLoggedIn;
-        }
-        ```
-    *   **Important:** This function must be synchronous. For asynchronous conditions, manage the `disabled` state reactively.
+    *   A **synchronous** predicate function that determines if the action is currently allowed to execute. It's a gatekeeper just before the `handler` is called.
+    *   It receives the `ActionContext` that *would be* passed to the handler, allowing the decision to be context-sensitive.
+    *   If `canExecute` returns `false`, ActionCore will prevent the `handler` from being called. The `executeAction` promise will still resolve, but the action's core logic won't run.
+    *   **When is `canExecute` evaluated?**
+        *   **By ActionCore:** Just before attempting to run the `handler` when `actionCore.executeAction()` is called (either directly, via a hotkey, or component integration).
+        *   **By UI Components (Potentially):** UI elements (like buttons or list items bound to actions) *may* also call `canExecute` (or observe a state derived from it) to dynamically update their visual state (e.g., appearing enabled/disabled). This is a common pattern for providing immediate feedback to the user.
+    *   **Use Cases for `canExecute`:**
+        *   **Context-Dependent Conditions:** When an action's executability depends on data available only at the moment of invocation (e.g., data passed in `ActionContext.data`, or the state of `document.activeElement` if `ctx.event` refers to a keyboard event).
+            ```typescript
+            // Example: Action to apply formatting only if a text input is focused and has selected text
+            canExecute: (ctx: ActionContext) => {
+              const activeEl = document.activeElement as HTMLInputElement | HTMLTextAreaElement;
+              return (
+                activeEl &&
+                typeof activeEl.selectionStart === 'number' &&
+                activeEl.selectionStart !== activeEl.selectionEnd
+              );
+            }
+            ```
+        *   **Dynamic Role/Permission Checks (Simple Cases):** If a role/permission check is simple, synchronous, and can be determined from readily available state (e.g., a global store that's already populated).
+            ```typescript
+            canExecute: (ctx: ActionContext) => {
+              // return userStore.hasPermission('editSettings');
+              return true; // Simplified for example
+            }
+            ```
+            For more complex or asynchronous permission models, relying on the `disabled: Ref<boolean>` property (which can be updated from anywhere) might be more appropriate.
+        *   **Preventing Execution Based on Invocation Data:** Checking if `ctx.data` contains required parameters before proceeding to a handler that depends on them.
+            ```typescript
+            canExecute: (ctx: ActionContext) => {
+              return !!ctx.data?.targetFileId;
+            }
+            ```
+    *   **`canExecute` vs. `disabled` Property:**
+        *   Use `canExecute` for conditions that are best checked *at the moment of execution*, often using data from the `ActionContext`.
+        *   Use the `disabled: Ref<boolean>` property for conditions that are based on broader, reactive application state that might change at any time, independent of a specific action invocation (e.g., `isSystemBusy`, `isUserLoggedIn`). ActionCore automatically respects the `.value` of this `Ref`.
+        *   Both are checked; if an action `disabled` ref is true OR `canExecute()` returns false, the action won't run.
+    *   **Important:** `canExecute` **must be synchronous**. For conditions requiring asynchronous checks, update the `disabled: Ref<boolean>` property of the action when the async check completes.
 
 *   **`disabled?: boolean | Ref<boolean>`**
     *   A reactive way to disable an action. If `true` (or a `Ref<boolean>` whose `.value` is `true`), the action cannot be executed, and UIs should reflect this disabled state.
