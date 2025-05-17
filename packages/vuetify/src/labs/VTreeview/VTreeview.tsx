@@ -32,7 +32,7 @@ export const makeVTreeviewProps = propsFactory({
   search: String,
 
   ...makeFilterProps({ filterKeys: ['title'] }),
-  ...makeVTreeviewChildrenProps(),
+  ...omit(makeVTreeviewChildrenProps(), ['index', 'path']),
   ...omit(makeVListProps({
     collapseIcon: '$treeviewCollapse',
     expandIcon: '$treeviewExpand',
