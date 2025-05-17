@@ -1,5 +1,5 @@
 // Directives
-import Intersect from '../'
+import vIntersect from '../'
 
 // Utilities
 import { scroll, waitIdle } from '@test'
@@ -10,7 +10,7 @@ describe('v-intersect', () => {
     const callback = vi.fn()
 
     render({
-      directives: { Intersect },
+      directives: { vIntersect },
       setup () {
         return () => <div v-intersect={ callback } style="height: 10px" />
       },
@@ -26,7 +26,7 @@ describe('v-intersect', () => {
     const callback = vi.fn()
 
     render({
-      directives: { Intersect },
+      directives: { vIntersect },
       setup () {
         return () => <div v-intersect={[callback, null, ['quiet']]} style="height: 10px" />
       },
@@ -42,7 +42,7 @@ describe('v-intersect', () => {
       const callback = vi.fn()
 
       render({
-        directives: { Intersect },
+        directives: { vIntersect },
         setup () {
           return () => (
             <>

@@ -12,7 +12,7 @@ import { useElevation } from '@/composables/elevation'
 import { useRtl } from '@/composables/locale'
 
 // Directives
-import Ripple from '@/directives/ripple'
+import vRipple from '@/directives/ripple'
 
 // Utilities
 import { computed, inject } from 'vue'
@@ -56,7 +56,7 @@ export const makeVSliderThumbProps = propsFactory({
 export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
   name: 'VSliderThumb',
 
-  directives: { Ripple },
+  directives: { vRipple },
 
   props: makeVSliderThumbProps(),
 
