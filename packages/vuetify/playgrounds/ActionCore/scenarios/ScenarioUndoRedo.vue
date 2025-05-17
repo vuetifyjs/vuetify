@@ -35,7 +35,7 @@ const doSomethingAction: ActionDefinition = {
 const undoSomethingAction: ActionDefinition = {
   id: 'undo-the-something',
   title: 'Undo Last Action',
-  hotkey: 'ctrl+z',
+  hotkey: 'cmdorctrl+z',
   icon: 'mdi-undo-variant',
   description: 'Undoes the last "Perform Undoable Action".',
   hotkeyOptions: { preventDefault: true },

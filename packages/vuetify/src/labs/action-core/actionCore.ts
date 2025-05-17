@@ -182,11 +182,19 @@ class ActionCore implements ActionCorePublicAPI {
             };
 
             const runInTextInputMatcher = currentActionDef.runInTextInput;
-            if (runInTextInputMatcher === true) {
-              handlerOpts.ignoreInputBlocker = true;
-            } else {
-              handlerOpts.ignoreInputBlocker = false;
+            let ignoreBlocker = false;
+
+            if (runInTextInputMatcher === true || runInTextInputMatcher === 'only') {
+              ignoreBlocker = true;
+            } else if (
+              typeof runInTextInputMatcher === 'function' ||
+              typeof runInTextInputMatcher === 'string' ||
+              Array.isArray(runInTextInputMatcher)
+            ) {
+              ignoreBlocker = true;
             }
+            // If runInTextInputMatcher is false or undefined, ignoreBlocker remains false.
+            handlerOpts.ignoreInputBlocker = ignoreBlocker;
 
             const unregisterFn = this.keyBindings.on(
               binding,

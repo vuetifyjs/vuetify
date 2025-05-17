@@ -290,15 +290,14 @@ describe('ActionCore', () => {
   describe('Hotkey Registration and Triggering', () => {
     it('should register hotkeys with keyBindings.on when actions with hotkeys are processed', async () => {
       const core = useActionCore();
-      // Define actions directly to ensure exact type matching for runInTextInput
-      const action1: ActionDefinition = createActionDef('hkAction1', { hotkey: 'ctrl+k' }); // runInTextInput is undefined by default
-      const action2: ActionDefinition = createActionDef('hkAction2', { hotkey: 'g-d' });    // runInTextInput is undefined by default
+      const action1: ActionDefinition = createActionDef('hkAction1', { hotkey: 'ctrl+k' }); // runInTextInput is undefined
+      const action2: ActionDefinition = createActionDef('hkAction2', { hotkey: 'g-d', runInTextInput: false });
 
       const action3: ActionDefinition = {
         id: 'hkAction3',
         title: 'Action hkAction3',
         hotkey: 'alt+t',
-        runInTextInput: true, // Explicitly boolean
+        runInTextInput: true, // Explicitly boolean true
         handler: vi.fn(),
       };
 
@@ -310,14 +309,33 @@ describe('ActionCore', () => {
         handler: vi.fn(),
       };
 
-      core.registerActionsSource([action1, action2, action3, action4]);
+      const action5: ActionDefinition = createActionDef('hkAction5', {
+        hotkey: 'ctrl+j',
+        runInTextInput: () => document.activeElement?.id === 'some-id',
+      });
+
+      const action6: ActionDefinition = createActionDef('hkAction6', {
+        hotkey: 'ctrl+l',
+        runInTextInput: 'myInputName',
+      });
+
+      const action7: ActionDefinition = createActionDef('hkAction7', {
+        hotkey: 'ctrl+m',
+        runInTextInput: ['inputA', 'inputB'],
+      });
+
+      core.registerActionsSource([action1, action2, action3, action4, action5, action6, action7]);
       const resolvedActions = core.allActions.value;
-      expect(resolvedActions.length).toBe(4);
+      expect(resolvedActions.length).toBe(7); // Updated expected length
       await nextTick();
-      expect(mockKeyBindingsOn).toHaveBeenCalledWith('ctrl+k', expect.any(Function), { ignoreInputBlocker: false });
-      expect(mockKeyBindingsOn).toHaveBeenCalledWith('g-d', expect.any(Function), { ignoreInputBlocker: false });
-      expect(mockKeyBindingsOn).toHaveBeenCalledWith('alt+t', expect.any(Function), { ignoreInputBlocker: true });
-      expect(mockKeyBindingsOn).toHaveBeenCalledWith('ctrl+i', expect.any(Function), { ignoreInputBlocker: false });
+
+      expect(mockKeyBindingsOn).toHaveBeenCalledWith('ctrl+k', expect.any(Function), { ignoreInputBlocker: false }); // undefined runInTextInput
+      expect(mockKeyBindingsOn).toHaveBeenCalledWith('g-d', expect.any(Function), { ignoreInputBlocker: false });    // false runInTextInput
+      expect(mockKeyBindingsOn).toHaveBeenCalledWith('alt+t', expect.any(Function), { ignoreInputBlocker: true });  // true runInTextInput
+      expect(mockKeyBindingsOn).toHaveBeenCalledWith('ctrl+i', expect.any(Function), { ignoreInputBlocker: true }); // 'only' runInTextInput
+      expect(mockKeyBindingsOn).toHaveBeenCalledWith('ctrl+j', expect.any(Function), { ignoreInputBlocker: true }); // function runInTextInput
+      expect(mockKeyBindingsOn).toHaveBeenCalledWith('ctrl+l', expect.any(Function), { ignoreInputBlocker: true }); // string runInTextInput
+      expect(mockKeyBindingsOn).toHaveBeenCalledWith('ctrl+m', expect.any(Function), { ignoreInputBlocker: true }); // array runInTextInput
     });
 
     it('should pass hotkeyOptions from ActionDefinition to keyBindings.on', async () => {

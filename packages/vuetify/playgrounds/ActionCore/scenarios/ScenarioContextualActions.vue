@@ -31,11 +31,17 @@ const editorFocused = ref(false);
 const editorContent = ref('Some text in the editor...');
 
 const saveHotkey = 'cmdorctrl+s';
+const saveHotkeyOptions = {
+  preventDefault: true,
+  stopPropagation: true,
+  ignoreKeyRepeat: true,
+};
 
 const saveEditorAction: ActionDefinition = {
   id: 'save-editor',
   title: 'Save Editor Content',
   hotkey: saveHotkey,
+  hotkeyOptions: saveHotkeyOptions,
   icon: 'mdi-content-save-edit',
   description: 'Saves when the mock editor below is focused.',
   canExecute: () => editorFocused.value,
@@ -49,6 +55,7 @@ const globalSaveAction: ActionDefinition = {
   id: 'global-save',
   title: 'Global Save',
   hotkey: saveHotkey,
+  hotkeyOptions: saveHotkeyOptions,
   icon: 'mdi-content-save-all',
   description: 'Saves globally if editor is not focused.',
   canExecute: () => !editorFocused.value,
