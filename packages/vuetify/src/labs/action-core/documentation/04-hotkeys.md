@@ -155,7 +155,7 @@ By default, ActionCore (via `useKeyBindings`) blocks most hotkeys when a text in
     runInTextInput: (el) => el?.classList.contains('custom-editor-field') ?? false
     ```
 
-**Craftsmanship in Hotkeys:**
+**Best Practices for Hotkeys:**
 
 *   **Consistency:** Adhere to platform conventions and application-wide patterns.
 *   **Discoverability:** Ensure users can find out what hotkeys are available (e.g., through tooltips, help menus, or a component like Vuetify's `<VHotKey>`).

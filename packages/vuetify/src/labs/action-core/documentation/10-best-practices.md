@@ -1,6 +1,6 @@
 # 10. Best Practices for Quality Actions
 
-ActionCore provides a powerful foundation for managing application interactions. To truly harness its potential and build software that reflects craftsmanship, consider these best practices when designing and implementing your actions.
+ActionCore provides a powerful foundation for managing application interactions. To truly harness its potential and build software that reflects quality craftsmanship, consider these best practices when designing and implementing your actions.
 
 These guidelines aim to help you create actions that are not only functional but also clear, maintainable, robust, and user-friendly.
 
@@ -86,7 +86,7 @@ These guidelines aim to help you create actions that are not only functional but
 *   **Consistency:** Actions that perform similar functions should have consistent naming, icons, and behavior patterns.
 *   **Avoid Overly Nested `subItems`:** While nesting is supported, deep hierarchies can be confusing. Aim for 1-2 levels of nesting in most UIs.
 
-## 9. AI Integration - Craft with Care
+## 9. AI Integration - Use with Care
 
 *Refer to the [AI Integration](./08-ai-integration.md) guide for comprehensive details.*
 *   **Schema First (`parametersSchema`):** Meticulously define the expected data for AI-invocable actions.

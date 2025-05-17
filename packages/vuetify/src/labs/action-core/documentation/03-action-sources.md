@@ -135,7 +135,7 @@ ActionCore provides methods to manage the lifecycle of your action sources:
     *   All hotkeys defined by actions from this source are automatically unregistered.
     *   Returns `true` if a source was found and removed, `false` otherwise.
 
-## Lifecycle Management: A Craftsman's Approach
+## Lifecycle Management
 
 Properly managing the lifecycle of your action sources is vital for a well-behaved and performant application. Leaking action sources (registering them but never unregistering when they are no longer needed) can lead to:
 

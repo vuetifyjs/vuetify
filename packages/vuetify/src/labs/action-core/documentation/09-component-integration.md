@@ -121,7 +121,7 @@ When a component like `VBtn` has a `command` prop and integration is enabled:
 2.  **`disabled` State:** The component's visual disabled state will often react to the `disabled` property or `canExecute` status of the resolved ActionCore action. If the action is disabled, the component should appear disabled.
 3.  **`ActionContext`:** The `trigger` in the `ActionContext` will usually be a string identifying the component, like `'component-vbtn'` or `'component-vlistitem'`. The `commandData` prop is passed directly into `ActionContext.data`.
 
-## Crafting Commandable UIs
+## Creating Commandable UIs
 
 *   **Clarity is Key:** When a UI element is tied to an ActionCore command, ensure its text, icon, and tooltips (using `action.title`, `action.icon`, `action.description`) clearly reflect the action being performed.
 *   **Contextual Data (`commandData`):** Use `commandData` effectively to make generic actions (e.g., "delete-item") operate on specific data instances without needing a unique action definition for every item.

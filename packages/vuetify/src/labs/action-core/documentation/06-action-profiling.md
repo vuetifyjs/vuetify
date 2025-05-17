@@ -151,7 +151,7 @@ When `actionCore.setActiveProfile()` is called:
 *   **Dynamic UI and Behavior:** Hotkeys, titles, and even action handlers can change on-the-fly in response to profile changes, providing a tailored user experience.
 *   **Improved Maintainability:** Easier to understand and manage action variations compared to complex conditional logic within action handlers or component templates.
 
-Action Profiling is a powerful tool for crafting adaptable and user-centric applications. By thoughtfully designing your base actions and their profile overrides, you can significantly enhance the sophistication and usability of your ActionCore-powered features.
+Action Profiling is a powerful tool for creating adaptable and user-centric applications. By thoughtfully designing your base actions and their profile overrides, you can significantly enhance the sophistication and usability of your ActionCore-powered features.
 
 ---
 

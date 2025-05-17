@@ -124,7 +124,7 @@ export interface DiscoverableActionInfo {
         *   If `action.ai.scope` is undefined: The action is included if `ai.accessible` allows it (considered globally accessible to AI within its accessibility flag, provided the AI client doesn't *only* ask for specific scopes).
 3.  Maps the filtered `ActionDefinition`s to `DiscoverableActionInfo`, selecting only the necessary and safe fields.
 
-## Security & Execution Flow: A Craftsman's Duty
+## Security & Execution Flow
 
 While ActionCore provides tools for AI discovery and invocation, **security remains paramount and is ultimately the developer's responsibility within the action handler.**
 
@@ -140,7 +140,7 @@ While ActionCore provides tools for AI discovery and invocation, **security rema
 
 **In essence: AI discovery scopes limit awareness; action handlers ensure safety.**
 
-## Crafting AI-Ready Actions
+## Creating AI-Ready Actions
 
 *   **Be Explicit:** Clearly define `parametersSchema` for all actions intended for AI.
 *   **Write Helpful `usageHint`s:** Think from the AI's perspective. What does it need to know to use this action effectively and avoid mistakes?

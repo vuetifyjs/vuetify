@@ -69,7 +69,7 @@ export interface ActionContext {
         *   `'notification'`: Triggered by interacting with an in-app notification.
         *   `'ai_assistant'`: Triggered by an AI system.
     *   You can use custom string values for `trigger` if needed.
-    *   **Craftsmanship Tip:** Handlers can use `trigger` to adapt their behavior. For instance, an action might perform a slightly different logging or UI feedback operation if triggered by AI versus a direct user hotkey.
+    *   **Pro Tip:** Handlers can use `trigger` to adapt their behavior. For instance, an action might perform a slightly different logging or UI feedback operation if triggered by AI versus a direct user hotkey.
 
 *   **`event?: Event`**
     *   If the action was triggered by a DOM event (e.g., a key press for a hotkey, a click event for a button), this property will hold the original `Event` object. This can be useful for accessing event details like `event.target`, coordinates, or specific key event properties if not already handled by ActionCore's hotkey system.

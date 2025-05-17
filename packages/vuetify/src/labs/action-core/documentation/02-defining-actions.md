@@ -199,7 +199,7 @@ These properties enable more sophisticated scenarios and are detailed in their r
     *   A general-purpose object to attach any custom data or flags to your action that aren't covered by standard properties. This is useful for plugin authors or for application-specific logic that needs to be associated with an action.
     *   **Example:** `meta: { requiresAdmin: true, auditEventName: 'document_created' }`
 
-## Crafting Your Definitions
+## Constructing Your Definitions
 
 When defining actions, strive for:
 
