@@ -1,86 +1,175 @@
 <template>
-  <scenario-card title="Context Menu Actions">
-    <p>Select an item and choose an action:</p>
-    <v-list density="compact">
-      <v-list-item v-for="item in items" :key="item.id">
-        <v-list-item-title>{{ item.name }}</v-list-item-title>
-        <template #append>
-          <v-btn
-            icon="mdi-dots-vertical"
-            @click="showContextMenu(item)"
-            density="compact"
-            aria-label="Open context menu"
-            aria-haspopup="true"
-          ></v-btn>
+  <scenario-card title="Context Menu Actions (Right-Click Simulation)">
+    <p>Right-click on an item below to open a simulated context menu.</p>
+    <v-list density="compact" class="zebra-list">
+      <v-list-item
+        v-for="(item, index) in items"
+        :key="item.id"
+        @contextmenu.prevent="handleRightClick(item, $event)"
+        style="cursor: context-menu; user-select: none; border-bottom: 1px solid #eee;"
+        class="pa-2 list-item-hoverable"
+        :class="{ 'zebra-stripe': index % 2 === 0 }"
+      >
+        <template #prepend>
+          <v-icon :icon="item.icon || 'mdi-file-document-outline'" class="mr-3"></v-icon>
         </template>
+        <v-list-item-title>{{ item.name }}</v-list-item-title>
       </v-list-item>
     </v-list>
+
+    <v-menu
+      ref="vMenuRef"
+      v-if="isContextMenuOpen && contextMenuItem"
+      :model-value="isContextMenuOpen"
+      @update:modelValue="(val) => { if (!val) closeContextMenu(); }"
+      absolute
+      :style="{ top: `${contextMenuPosition.y}px`, left: `${contextMenuPosition.x}px` }"
+      :scrim="false"
+      content-class="elevation-2 v-context-menu-content"
+      min-width="200"
+      max-width="280"
+      offset="0 0"
+      @click:outside="closeContextMenu"
+      :close-on-content-click="false"
+      :persistent="false"
+    >
+      <v-list density="compact" nav>
+        <v-list-subheader v-if="contextMenuItem">Actions for: {{ contextMenuItem.name }}</v-list-subheader>
+        <v-divider v-if="contextMenuItem"></v-divider>
+        <v-list-item @click="executeEditContextAction" :disabled="!contextMenuItem" value="edit">
+          <template #prepend><v-icon :icon="String(editItemAction.icon || 'mdi-pencil')" size="small" class="mr-3"></v-icon></template>
+          <v-list-item-title>{{ String(editItemAction.title) }}</v-list-item-title>
+        </v-list-item>
+        <v-list-item @click="executeDeleteContextAction" :disabled="!contextMenuItem" value="delete">
+          <template #prepend><v-icon :icon="String(deleteItemAction.icon || 'mdi-delete')" size="small" class="mr-3"></v-icon></template>
+          <v-list-item-title>{{ String(deleteItemAction.title) }}</v-list-item-title>
+        </v-list-item>
+      </v-list>
+    </v-menu>
+
   </scenario-card>
 </template>
 
 <script setup lang="ts">
-import { ref, inject, onMounted, onUnmounted } from 'vue'
-import ScenarioCard from '../ScenarioCard.vue'
-import { type ActionDefinition, ActionCoreSymbol } from '@/labs/action-core'
+import { ref, inject, onMounted, onUnmounted, nextTick, watch } from 'vue';
+import ScenarioCard from '../ScenarioCard.vue';
+import { ActionCoreSymbol, type ActionDefinition, type ActionContext } from '@/labs/action-core';
 
-const actionCore = inject(ActionCoreSymbol)
-type LogActionFn = (message: string, details?: any) => void
-const logAction = inject<LogActionFn>('logAction')
+const actionCore = inject(ActionCoreSymbol);
+const logAction = inject<(message: string, details?: any) => void>('logAction');
 
-// --- Logic moved from Playground.actionCore.vue ---
+const items = ref([
+  { id: 1, name: 'Alpha Document', icon: 'mdi-file-document-outline' },
+  { id: 2, name: 'Beta Spreadsheet', icon: 'mdi-google-spreadsheet' },
+  { id: 3, name: 'Gamma Presentation', icon: 'mdi-file-powerpoint-outline' },
+  { id: 4, name: 'Delta Report', icon: 'mdi-file-chart-outline' },
+]);
+
+interface Item { id: number; name: string; icon?: string; [key: string]: any; }
+
+const vMenuRef = ref<any>(null);
+const isContextMenuOpen = ref(false);
+const contextMenuItem = ref<Item | null>(null);
+const contextMenuPosition = ref({ x: 0, y: 0 });
+
+watch(isContextMenuOpen, (newValue) => {
+  // Optional: console.log(`isContextMenuOpen watcher: ${newValue}. Item: ${contextMenuItem.value?.name}`);
+});
+
 const editItemAction: ActionDefinition = {
   id: 'ctx-edit-item',
   title: 'Edit Item',
   icon: 'mdi-pencil',
-  description: 'Edit the selected item (contextual).',
-  handler: (ctx) => { if (logAction) logAction('Context Menu: Edit Item triggered for', ctx?.data); }
-}
-
+  handler: (ctx?: ActionContext) => {
+    if (logAction) logAction('[ContextMenuScenario] Edit Item action triggered for', ctx?.data);
+  }
+};
 const deleteItemAction: ActionDefinition = {
   id: 'ctx-delete-item',
   title: 'Delete Item',
   icon: 'mdi-delete',
-  description: 'Delete the selected item (contextual).',
-  handler: (ctx) => { if (logAction) logAction('Context Menu: Delete Item triggered for', ctx?.data); }
-}
+  handler: (ctx?: ActionContext) => {
+    if (logAction) logAction('[ContextMenuScenario] Delete Item action triggered for', ctx?.data);
+  }
+};
 
 let scenario14SourceKey: symbol | undefined;
-
 onMounted(() => {
   if (actionCore) {
     scenario14SourceKey = actionCore.registerActionsSource([editItemAction, deleteItemAction]);
-    if (logAction) logAction('Registered: Context Menu Actions (from ScenarioContextMenu component)');
   }
-})
-
+  window.addEventListener('keydown', handleGlobalKeyDownForMenu);
+});
 onUnmounted(() => {
-  if (actionCore && scenario14SourceKey) {
-    actionCore.unregisterActionsSource(scenario14SourceKey);
-    if (logAction) logAction('Unregistered: Context Menu Actions (from ScenarioContextMenu component)');
+  if (actionCore && scenario14SourceKey) actionCore.unregisterActionsSource(scenario14SourceKey);
+  window.removeEventListener('keydown', handleGlobalKeyDownForMenu);
+});
+
+const closeContextMenu = () => {
+  if (isContextMenuOpen.value) {
+    isContextMenuOpen.value = false;
   }
-})
-// --- End of moved logic ---
+  contextMenuItem.value = null;
+};
 
-const items = ref([
-  { id: 1, name: 'Alpha Document' },
-  { id: 2, name: 'Beta Spreadsheet' },
-])
+const handleGlobalKeyDownForMenu = (event: KeyboardEvent) => {
+  if (event.key === 'Escape' && isContextMenuOpen.value) {
+    closeContextMenu();
+  }
+};
 
-interface Item {
-  id: number
-  name: string
-  [key: string]: any // For any additional properties
-}
+const handleRightClick = async (item: Item, event: MouseEvent) => {
+  event.preventDefault();
+  if (isContextMenuOpen.value) {
+    isContextMenuOpen.value = false;
+    contextMenuItem.value = null;
+    await nextTick();
+  }
+  contextMenuItem.value = item;
+  let clickPosX = event.clientX + window.scrollX;
+  let clickPosY = event.clientY + window.scrollY;
+  contextMenuPosition.value = { x: clickPosX, y: clickPosY };
+  isContextMenuOpen.value = true;
+  await nextTick();
+  let finalX = clickPosX;
+  let finalY = clickPosY;
+  const menuContentElement = document.querySelector('.v-context-menu-content') as HTMLElement | null;
+  if (menuContentElement) {
+    const menuRect = menuContentElement.getBoundingClientRect();
+    const menuHeight = menuRect.height;
+    const menuWidth = menuRect.width;
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+    const margin = 10;
+    if (event.clientX + menuWidth > viewportWidth - margin) {
+      finalX = clickPosX - menuWidth;
+      if (finalX < window.scrollX + margin) finalX = window.scrollX + margin;
+    }
+    if (event.clientY + menuHeight > viewportHeight - margin) {
+      finalY = clickPosY - menuHeight;
+      if (finalY < window.scrollY + margin) finalY = window.scrollY + margin;
+    }
+    contextMenuPosition.value = { x: finalX, y: finalY };
+  } else {
+    contextMenuPosition.value = { x: clickPosX, y: clickPosY };
+  }
+  if (!isContextMenuOpen.value) isContextMenuOpen.value = true;
+};
 
-const showContextMenu = (item: Item) => {
-   if (logAction) logAction(`Simulated context menu for: ${item.name}. You would typically show a VMenu here with actions like Edit and Delete.`)
-   // For this playground, we'll just log and offer a way to trigger them if they were in a menu.
-   // For example, if a user clicked "Edit" in a real context menu:
-   // actionCore.executeAction('ctx-edit-item', { trigger: 'context-menu', data: item })
-   // Or for "Delete":
-   // actionCore.executeAction('ctx-delete-item', { trigger: 'context-menu', data: item })
+const executeEditContextAction = () => {
+  if (!contextMenuItem.value || !actionCore) return;
+  actionCore.executeAction(editItemAction.id, { data: contextMenuItem.value, trigger: 'context-menu-ui' });
+  closeContextMenu();
+};
 
-   // The buttons in the template could be modified to execute these directly if desired for quick demo,
-   // or a more complex VMenu could be built that uses actionCore.getAvailableActions(context) for example.
-}
+const executeDeleteContextAction = () => {
+  if (!contextMenuItem.value || !actionCore) return;
+  actionCore.executeAction(deleteItemAction.id, { data: contextMenuItem.value, trigger: 'context-menu-ui' });
+  closeContextMenu();
+};
+
 </script>
+<style scoped>
+.list-item-hoverable:hover { background-color: rgba(0,0,0,0.05); }
+.zebra-list .v-list-item.zebra-stripe { background-color: rgba(0,0,0,0.02); }
+</style>
