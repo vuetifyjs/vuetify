@@ -9,9 +9,11 @@ This guide provides comprehensive instructions on how to define hotkeys for acti
     *   [Key Combinations (Modifiers)](#key-combinations-modifiers)
     *   [Key Sequences](#key-sequences)
 2.  [Key Names and Aliases](#key-names-and-aliases)
+    *   [Common Modifiers: `meta`, `ctrl`, `alt`, `shift`](#common-modifiers-meta-ctrl-alt-shift)
 3.  [Platform-Specific Behavior (macOS vs. Other)](#platform-specific-behavior-macos-vs-other)
     *   [The `meta` Key (Cmd/Super/Win)](#the-meta-key-cmdsuperwin)
     *   [The `ctrl` Key](#the-ctrl-key)
+    *   [The `alt` Key (Option on macOS)](#the-alt-key-option-on-macos)
     *   [Recommendations](#recommendations)
 4.  [Multiple Hotkeys for One Action](#multiple-hotkeys-for-one-action)
 5.  [Advanced Hotkey Options (`hotkeyOptions`)](#advanced-hotkey-options-hotkeyoptions)
@@ -20,7 +22,13 @@ This guide provides comprehensive instructions on how to define hotkeys for acti
     *   [`ignoreKeyRepeat`](#ignorekeyrepeat)
 6.  [Hotkeys in Text Inputs (`runInTextInput`)](#hotkeys-in-text-inputs-runintextinput)
 7.  [Displaying Hotkeys with `VHotKey`](#displaying-hotkeys-with-vhotkey)
+    *   [Automatic Platform-Aware Display](#automatic-platform-aware-display)
+    *   [The `displayMode` Prop](#the-displaymode-prop)
+    *   [Accessibility Considerations](#accessibility-considerations)
 8.  [Best Practices](#best-practices)
+9.  [How Hotkeys are Processed by ActionCore](#how-hotkeys-are-processed-by-actioncore)
+10. [Dynamic Hotkeys with Action Profiling](#dynamic-hotkeys-with-action-profiling)
+11. [Hotkey Conflicts](#hotkey-conflicts)
 
 ## 1. Basic Hotkey Syntax
 
@@ -81,11 +89,12 @@ There's a default timeout for completing a sequence (around 1500ms).
 ## 2. Key Names and Aliases
 
 Key names are generally based on `KeyboardEvent.key` values, normalized to lowercase.
+However, `useKeyBindings` (the underlying engine for ActionCore hotkeys) now defaults to using `event.code` (`preferEventCode: true`) for more layout-independent bindings. The extensive `defaultAliasMap` within `useKeyBindings.ts` translates common `event.code` values (e.g., `KeyA`, `Digit1`, `AltLeft`) back to simpler, expected key names (e.g., `a`, `1`, `alt`). This means you can usually define hotkeys using the simple key names.
 
 Common aliases are provided for convenience:
 *   `cmd`, `command`, `super`, `win`: Aliased to `meta`
 *   `control`: Aliased to `ctrl`
-*   `option`: Aliased to `alt`
+*   `option`: Aliased to `alt` (very important for Mac compatibility, as Macs have an Option key)
 *   `escape`: Aliased to `esc`
 *   `up`: Aliased to `arrowup`
 *   `down`: Aliased to `arrowdown`
@@ -97,6 +106,10 @@ Special purpose aliases (use with care, see platform behavior):
 *   `primary`: Aliased to `meta`. Similar normalization behavior as `cmdorctrl`.
 
 For a comprehensive list, refer to the `defaultAliasMap` in `useKeyBindings.ts`.
+
+### Common Modifiers: `meta`, `ctrl`, `alt`, `shift`
+
+These are the primary modifier keys. Their interpretation and display can be platform-specific, as detailed below.
 
 ## 3. Platform-Specific Behavior (macOS vs. Other)
 
@@ -120,12 +133,23 @@ ActionCore aims to provide intuitive behavior across platforms, especially regar
         *   macOS: Triggers with `Control+Z`.
         *   Windows/Linux: Triggers with `Ctrl+Z`.
 
-**Important Note:** `useKeyBindings` does *not* automatically convert a specified `ctrl` key to `meta` on macOS. If your hotkey string is `'ctrl+c'`, it will listen for the literal Control key on Mac, not Command.
+**Important Note:** `useKeyBindings` does *not* automatically convert a specified `ctrl` key to `meta` on macOS. If your hotkey string is `'ctrl+c'`, it will listen for the literal Control key on Mac, not Command. This is by design to allow distinguishing between `Cmd+C` and `Ctrl+C` on macOS if needed.
+
+### The `alt` Key (Option on macOS)
+
+*   Mac keyboards have an `Option` key, while Windows/Linux keyboards have an `Alt` key.
+*   `useKeyBindings.ts` includes an alias: `option` is treated as `alt`.
+*   Therefore, if you define a hotkey using `alt`, it will work correctly on all platforms:
+    *   `hotkey: 'alt+s'`
+        *   **On macOS:** Users press `Option+S`.
+        *   **On Windows/Linux:** Users press `Alt+S`.
+*   The `VHotKey` component will display this appropriately (e.g., `⌥S` on Mac, `Alt+S` elsewhere by default).
 
 ### Recommendations
 
 *   For common actions like Save, Copy, Paste, Undo, prefer using `meta` in your hotkey definition (e.g., `meta+s`, `meta+c`). This provides the most natural experience (`Cmd+S` on Mac, `Ctrl+S` on Windows/Linux).
 *   If you need a hotkey that explicitly uses the Control key on macOS (distinct from Cmd), define it using `ctrl` (e.g., `ctrl+alt+del`).
+*   For actions involving the `Alt` or `Option` key, consistently use `alt` in your `ActionDefinition` (e.g., `alt+o`). `useKeyBindings` handles the `option` alias automatically for Mac users, and `VHotKey` will render the correct symbol/text.
 
 ## 4. Multiple Hotkeys for One Action
 
@@ -224,21 +248,46 @@ const globalSaveAction: ActionDefinition = {
 ## 7. Displaying Hotkeys with `VHotKey`
 
 The `<VHotKey>` component is designed to display hotkeys to the user.
-*   It attempts to show the platform-correct representation (e.g., `⌘` on Mac for `meta`).
-*   It uses the `actionId` prop to look up the action and its hotkey from ActionCore.
-*   Alternatively, an explicit `hotkey` string can be passed.
+
+### Automatic Platform-Aware Display
+*   It attempts to show the platform-correct representation:
+    *   `meta` key: `⌘` on macOS, `Ctrl` on other platforms.
+    *   `alt` key: `⌥` on macOS (as Mac keyboards have `Option`), `Alt` on other platforms.
+    *   `ctrl` key: `Ctrl` on all platforms (or `⌃` if a more compact symbol is preferred for Mac in future updates, but currently `Ctrl`).
+    *   Other keys like `Shift`, `Enter`, arrow keys are displayed with common symbols (e.g., `↑`) or text.
+*   It uses the `actionId` prop to look up the action and its hotkey from ActionCore. If an action has multiple hotkeys defined in an array, `VHotKey` typically displays the first one.
+*   Alternatively, an explicit `hotkey` string can be passed directly to the component.
+
+### The `displayMode` Prop
+
+`VHotKey` accepts a `displayMode` prop to customize how keys are rendered:
+*   **Type:** `'symbol' | 'text'`
+*   **Default:** `'symbol'`
+
+*   `displayMode: 'symbol'` (Default):
+    *   Displays common symbols for modifier and special keys (e.g., `⌘`, `⌥`, `Ctrl`, `Shift`, `↑`, `Esc`).
+    *   Example: `meta+alt+s` on Mac would display as `⌘⌥S`.
+*   `displayMode: 'text'`:
+    *   Displays the full text names for modifier keys.
+    *   Example: `meta+alt+s` on Mac would display as `Command+Option+S`.
+    *   Example: `meta+s` on Windows would display as `Control+S`.
 
 ```vue
 <template>
   <VBtn>
-    Save
-    <VHotKey action-id="file-save" /> <!-- Displays based on 'file-save' action's hotkey -->
+    Save Editor
+    <!-- Default symbol display -->
+    <VHotKey action-id="save-editor-action" />
   </VBtn>
 
-  <span>Or press <VHotKey hotkey="alt+o" /></span>
+  <span>Open Menu: <VHotKey hotkey="alt+o" display-mode="text" /></span>
 </template>
 ```
-`VHotKey` aims to display the key combination that will actually trigger the action on the user's current platform, taking into account the normalization rules used by `useKeyBindings`.
+
+### Accessibility Considerations
+*   The root element of `VHotKey` has `role="group"` and an `aria-label` describing the full hotkey string (e.g., "Hotkey: Command+S").
+*   When `displayMode` is `'symbol'` and a symbolic representation is used (e.g., `⌘`, `⌥`, `↑`), individual `<kbd>` elements within `VHotKey` are given an `aria-label` with the full text name of that key part (e.g., `<kbd aria-label="Command">⌘</kbd>`). This ensures screen readers announce the key names clearly even when symbols are visually displayed.
+*   When `displayMode` is `'text'`, the displayed text is self-descriptive, so additional `aria-label` attributes on individual key parts are generally not needed.
 
 ## 8. Best Practices
 
@@ -248,4 +297,37 @@ The `<VHotKey>` component is designed to display hotkeys to the user.
 *   **Test Across Platforms:** If your application targets multiple operating systems, test your hotkey behavior on each, especially those involving `meta` or `ctrl`.
 *   **Provide Feedback:** Ensure users know what hotkeys are available, perhaps through tooltips, menus, or a dedicated help section incorporating `<VHotKey>`.
 *   **Accessibility:** Clearly communicate hotkeys. Ensure that all functionality accessible via hotkeys is also accessible via other means (e.g., mouse clicks).
-```
+
+## 9. How Hotkeys are Processed by ActionCore
+
+When you register actions with `ActionCore`:
+1.  The `allActions` computed property aggregates all action definitions.
+2.  Whenever `allActions` changes (e.g., due to registration, unregistration, or active profile change), a process is triggered to update hotkey bindings.
+3.  For each action in `allActions` that has a `hotkey` property:
+    *   Any existing hotkey bindings for that action's ID are first unregistered.
+    *   New bindings are registered with the `useKeyBindings` service using the `hotkey` string and `hotkeyOptions` from the (effective) `ActionDefinition`.
+    *   `ActionCore` determines whether the hotkey should be blocked in text inputs based on the `runInTextInput` property and passes an appropriate `ignoreInputBlocker` option to `useKeyBindings`.
+4.  When a registered hotkey is triggered by `useKeyBindings`:
+    *   The callback provided by `ActionCore` is invoked.
+    *   This callback re-fetches the action by its ID (to get the latest state).
+    *   It checks the action's `disabled` status and `canExecute(context)` method (if defined).
+    *   It evaluates `runInTextInput` rules against the currently focused element.
+    *   If all checks pass, `actionCore.executeAction(actionId, { trigger: 'hotkey', event })` is called.
+
+## 10. Dynamic Hotkeys with Action Profiling
+
+ActionCore now supports a native profiling system. If an `ActionDefinition` includes a `profiles` object, its `hotkey` (and other properties like `title` or `handler`) can be overridden when a specific profile is activated using `actionCore.setActiveProfile('profileName')`.
+
+When the active profile changes:
+1.  `ActionCore` re-evaluates the effective definitions for all actions.
+2.  The `hotkey` property from the active profile (or the base definition if no profile applies) is used.
+3.  The `processAndRegisterHotkeys` logic automatically unregisters the old hotkey (if it changed) and registers the new one.
+
+This means that a single action ID can have different hotkeys active depending on the current global profile, and `VHotKey` components using `action-id` will reflect these changes automatically.
+
+## 11. Hotkey Conflicts
+
+Hotkey conflicts can occur when multiple actions have the same hotkey. To avoid conflicts, ensure that:
+1.  Actions with the same hotkey are distinct in their functionality.
+2.  Hotkeys are unique across the application.
+3.  Conflicts are resolved through profiling or by explicitly defining different hotkeys for similar actions.

@@ -5,7 +5,7 @@ import { generate, gridOn, render, userEvent } from '@test'
 import { ref, markRaw, computed } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import { vi } from 'vitest'
-import { ActionCoreSymbol, type ActionDefinition, type ActionCorePublicAPI, type ActionContext } from '@/labs/action-core'
+import { ActionCoreSymbol, type ActionDefinition, type ActionCorePublicAPI, type ActionContext } from '@/labs/VActionCore'
 
 // Types
 import type { Variant } from '@/composables/variant'

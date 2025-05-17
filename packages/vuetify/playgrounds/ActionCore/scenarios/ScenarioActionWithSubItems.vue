@@ -8,7 +8,7 @@
 
 <script setup lang="ts">
 import { onMounted, onUnmounted, inject, ref } from 'vue';
-import { useActionCore, type ActionDefinition, type ActionContext, VHotKey } from '../../../src/labs/action-core';
+import { useActionCore, type ActionDefinition, type ActionContext, VHotKey } from '../../../src/labs/VActionCore';
 import ScenarioCard from '../ScenarioCard.vue';
 
 const actionCore = useActionCore();

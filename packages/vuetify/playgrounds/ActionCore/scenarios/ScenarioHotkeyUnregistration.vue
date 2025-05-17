@@ -9,7 +9,7 @@
 <script setup lang="ts">
 import { ref, onUnmounted, inject } from 'vue'
 import ScenarioCard from '../ScenarioCard.vue'
-import { useActionCore, type ActionDefinition, VHotKey } from '../../../src/labs/action-core'
+import { useActionCore, type ActionDefinition, VHotKey } from '../../../src/labs/VActionCore'
 
 const actionCore = useActionCore()
 const logAction: ((message: string, details?: any) => void) | undefined = inject('logAction')

@@ -1,7 +1,7 @@
 import { VCommandPalette } from './VCommandPalette'
 import { render, screen, userEvent } from '@test'
 import { within } from '@testing-library/vue'; // Correct import for within
-import { ActionCoreSymbol, type ActionDefinition, type ActionCorePublicAPI } from '@/labs/action-core'
+import { ActionCoreSymbol, type ActionDefinition, type ActionCorePublicAPI } from '@/labs/VActionCore'
 import { computed, ref, markRaw, nextTick, h, type Ref } from 'vue'
 import { createVuetify } from 'vuetify'
 import type { IconAliases, IconSet } from 'vuetify'

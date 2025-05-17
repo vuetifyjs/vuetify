@@ -7,7 +7,7 @@
 
 <script setup lang="ts">
 import { onMounted, onUnmounted, inject } from 'vue';
-import { useActionCore, type ActionDefinition, VHotKey } from '../../../src/labs/action-core';
+import { useActionCore, type ActionDefinition, VHotKey } from '../../../src/labs/VActionCore';
 import ScenarioCard from '../ScenarioCard.vue';
 
 const actionCore = useActionCore();

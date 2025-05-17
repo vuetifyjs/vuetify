@@ -43,8 +43,8 @@
 import { ref, onMounted, onUnmounted, inject } from 'vue';
 import type { Ref } from 'vue';
 import ScenarioCard from '@playgrounds/ActionCore/ScenarioCard.vue';
-import { ActionCoreSymbol } from '../../../src/labs/action-core';
-import type { ActionCorePublicAPI, ActionDefinition, ActionContext, DiscoverableActionInfo } from '../../../src/labs/action-core/types';
+import { ActionCoreSymbol } from '../../../src/labs/VActionCore';
+import type { ActionCorePublicAPI, ActionDefinition, ActionContext, DiscoverableActionInfo } from '../../../src/labs/VActionCore/types';
 
 // Inject ActionCore and logAction
 const actionCore = inject<ActionCorePublicAPI | undefined>(ActionCoreSymbol, undefined);

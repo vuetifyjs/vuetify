@@ -1,6 +1,6 @@
 import { computed, ref, watch, nextTick, unref, shallowRef, type Ref } from 'vue'
 import { useProxiedModel } from '@/composables/proxiedModel'
-import { type ActionCorePublicAPI, type ActionDefinition } from '@/labs/action-core'
+import { type ActionCorePublicAPI, type ActionDefinition } from '@/labs/VActionCore'
 import { useId } from 'vue'
 import type { VTextField } from '@/components/VTextField' // For searchInputRef type
 import { isHeaderItem, defaultGroupPriorities, UNGROUPED_PRIORITY, UNGROUPED_TITLE, isPromise, log } from '../utils'

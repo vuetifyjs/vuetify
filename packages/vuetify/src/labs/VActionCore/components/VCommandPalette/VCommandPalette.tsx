@@ -13,7 +13,7 @@ import { VCommandPaletteSearch } from './VCommandPaletteSearch'
 // Composables (Vuetify and ActionCore)
 import { makeComponentProps } from '@/composables/component'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { ActionCoreSymbol, type ActionDefinition } from '@/labs/action-core'
+import { ActionCoreSymbol, type ActionDefinition } from '@/labs/VActionCore'
 import { useCommandPaletteCore, type CommandPaletteListRef } from '../../composables/useCommandPaletteCore' // Added type import
 
 // Utilities

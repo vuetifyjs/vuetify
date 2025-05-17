@@ -36,8 +36,8 @@ import { genericComponent, propsFactory, useRender } from '@/util'
 // Types
 import type { PropType } from 'vue'
 import type { RippleDirectiveBinding } from '@/directives/ripple'
-import { type ActionDefinition, ActionCoreSymbol } from '@/labs/action-core'
-import { useCommandable } from '@/labs/action-core/composables/useCommandable'
+import { type ActionDefinition, ActionCoreSymbol } from '@/labs/VActionCore'
+import { useCommandable } from '@/labs/VActionCore/composables/useCommandable'
 
 export type VBtnSlots = {
   default: never

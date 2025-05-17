@@ -12,7 +12,7 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, inject } from 'vue'
 import { useTheme } from 'vuetify'
-import { type ActionDefinition, useActionCore, VHotKey } from '../../../src/labs/action-core'
+import { type ActionDefinition, useActionCore, VHotKey } from '../../../src/labs/VActionCore'
 import ScenarioCard from '../ScenarioCard.vue' // Path relative to this new component
 
 const actionCore = useActionCore()

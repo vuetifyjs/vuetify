@@ -2,7 +2,7 @@
 
 import { mount } from '@vue/test-utils'
 import { VCommandPalette } from './VCommandPalette'
-import { ActionCoreSymbol, type ActionDefinition, type ActionCorePublicAPI} from '@/labs/action-core'
+import { ActionCoreSymbol, type ActionDefinition, type ActionCorePublicAPI} from '@/labs/VActionCore'
 import { ref, markRaw, nextTick, computed, type Ref, type DeepReadonly } from 'vue'
 import { ThemeSymbol, type ThemeInstance } from '@/composables/theme' // InternalThemeDefinition is not exported
 import { DefaultsSymbol, type DefaultsInstance } from '@/composables/defaults'

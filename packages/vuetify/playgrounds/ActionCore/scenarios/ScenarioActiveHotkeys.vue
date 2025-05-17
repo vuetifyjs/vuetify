@@ -43,9 +43,9 @@
 
 <script setup lang="ts">
 import { computed, inject, type Ref } from 'vue'
-import { ActionCoreSymbol, type ActionDefinition, type ActionCorePublicAPI } from '@/labs/action-core'
+import { ActionCoreSymbol, type ActionDefinition, type ActionCorePublicAPI } from '@/labs/VActionCore'
 import ScenarioCard from '../ScenarioCard.vue'
-import { VHotKey } from '@/labs/action-core/components/VHotKey/VHotKey'
+import { VHotKey } from '@/labs/VActionCore/components/VHotKey/VHotKey'
 
 const actionCore = inject(ActionCoreSymbol) as ActionCorePublicAPI | null
 

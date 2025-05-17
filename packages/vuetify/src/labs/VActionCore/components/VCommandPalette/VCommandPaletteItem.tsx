@@ -1,7 +1,7 @@
 import { VListItem } from '@/components/VList'
 import { VIcon } from '@/components/VIcon'
 import { VHotKey } from '../VHotKey/VHotKey' // Assuming VHotKey is in a relative path
-import { type ActionDefinition, type ActionContext } from '@/labs/action-core' // Assuming types are here
+import { type ActionDefinition, type ActionContext } from '@/labs/VActionCore' // Assuming types are here
 import { genericComponent, propsFactory, useRender } from '@/util'
 import { unref, type PropType, type VNode, type VNodeChild } from 'vue'
 

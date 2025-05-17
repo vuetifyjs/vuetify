@@ -138,8 +138,8 @@ import {
   type ActionDefinition,
   type ActionContext,
   ShowSubItemsUISymbol,
-} from '@/labs/action-core'
-import { VHotKey } from '@/labs/action-core/components/VHotKey/VHotKey'
+} from '@/labs/VActionCore'
+import { VHotKey } from '@/labs/VActionCore/components/VHotKey/VHotKey'
 import ScenarioCard from '@playgrounds/ActionCore/ScenarioCard.vue'
 import ScenarioBasicGlobalActions from '@playgrounds/ActionCore/scenarios/ScenarioBasicGlobalActions.vue'
 import ScenarioCommandPalette from '@playgrounds/ActionCore/scenarios/ScenarioCommandPalette.vue'

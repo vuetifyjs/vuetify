@@ -4,7 +4,7 @@
 // Utilities
 import { render } from '@test'
 import { describe, it, expect, vi, beforeEach } from 'vitest'
-import { ActionCoreSymbol, type ActionDefinition, type ActionCorePublicAPI } from '@/labs/action-core'
+import { ActionCoreSymbol, type ActionDefinition, type ActionCorePublicAPI } from '@/labs/VActionCore'
 import { ref, computed, nextTick } from 'vue'
 
 // Default mock for platform. Individual describe blocks can override IS_MAC.

@@ -6,7 +6,7 @@ import { createGoTo, GoToSymbol } from '@/composables/goto'
 import { createIcons, IconSymbol } from '@/composables/icons'
 import { createLocale, LocaleSymbol } from '@/composables/locale'
 import { createTheme, ThemeSymbol } from '@/composables/theme'
-import { useActionCore, ActionCoreSymbol, type ActionCoreOptions as ActualActionCoreOptions, type ActionCorePublicAPI } from '@/labs/action-core'
+import { useActionCore, ActionCoreSymbol, type ActionCoreOptions as ActualActionCoreOptions, type ActionCorePublicAPI } from '@/labs/VActionCore'
 
 // Utilities
 import { effectScope, nextTick, reactive } from 'vue'
