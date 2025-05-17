@@ -186,22 +186,23 @@ export const VBtn = genericComponent<VBtnSlots>()({
         return;
       }
 
-if (isCommandable.value && effectiveActionId.value) {
+      if (isCommandable.value && effectiveActionId.value) {
+        // Toggle optimistically first
+        group?.toggle()
+
         executeCommand({ data: props.commandData }, e)
-          .then(() => {
-            // keep group selection logic identical to the non-command path
-            group?.toggle()
-          })
           .catch(err => {
+            // Revert the toggle if command fails
+            group?.toggle()
             console.error(
               `[Vuetify VBtn] Command execution failed for action "${effectiveActionId.value}":`,
               err,
             )
           })
-       } else {
-         link.navigate?.(e)
-         group?.toggle()
-       }
+      } else {
+        link.navigate?.(e)
+        group?.toggle()
+      }
     }
 
     useSelectLink(link, group?.select)

@@ -22,7 +22,7 @@ const actionCore = useActionCore()
 const logAction: ((message: string, details?: any) => void) | undefined = inject('logAction')
 
 const currentMode = ref<'beginner' | 'advanced'>('beginner')
-let activeProfileKey: symbol | null = null
+let activeProfileKey: symbol | undefined
 
 const beginnerSaveAction: ActionDefinition = {
   id: 'beginner-save',

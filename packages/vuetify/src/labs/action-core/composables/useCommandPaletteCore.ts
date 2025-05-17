@@ -335,8 +335,7 @@ export function useCommandPaletteCore(
       if (!isRootLevel.value) {
         await navigateBack()
       } else {
-        isActive.value = false
-        emit('update:modelValue', false)
+        isActive.value = false // Let useProxiedModel handle the emit
       }
     }
   }

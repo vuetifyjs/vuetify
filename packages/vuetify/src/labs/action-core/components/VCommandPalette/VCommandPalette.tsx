@@ -131,9 +131,9 @@ export const VCommandPalette = genericComponent<{
               title: core.currentLevelTitle.value
             });
 
-            // If header slot returned a raw HTML string, render via innerHTML so markup is parsed
+            // If header slot returned a raw HTML string, render via v-html so markup is parsed
             if (typeof headerContent === 'string') {
-              return <div innerHTML={headerContent} /> as VNode;
+              return <div v-html={headerContent} /> as VNode;
             }
 
             return headerContent as unknown as VNode;

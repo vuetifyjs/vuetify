@@ -86,29 +86,39 @@ export const VCommandPaletteList = genericComponent<{
       scope: any,
       fallbackFn: () => VNode | VNode[]
     ): VNode | VNode[] => {
+      if (process.env.NODE_ENV === 'test') {
+        // eslint-disable-next-line no-console
+        console.debug('[VCommandPaletteList] renderSlotWithFallback invoked', { slotProvided: !!slotFn, scope });
+      }
       if (!slotFn) return fallbackFn();
 
       try {
-        const slotContent = slotFn(scope);
+        const slotResult = slotFn(scope);
 
-        if (slotContent == null) return fallbackFn();
+        if (slotResult == null) return fallbackFn();
 
-        // If the slot returns an HTML string, render it using innerHTML so the markup is parsed.
-        if (typeof slotContent === 'string') {
-          if (slotContent.trim().startsWith('<')) {
-            return <span innerHTML={slotContent} /> as VNode;
+        // If the slot returns an HTML string, wrap it in a VNode that uses v-html for rendering.
+        // This is a common pattern for allowing slots to return raw HTML strings.
+        if (typeof slotResult === 'string') {
+          if (slotResult.trim().length === 0) return fallbackFn(); // Empty string, use fallback
+          // For test debugging, let's see what we're trying to render
+          if (process.env.NODE_ENV === 'test') {
+            // eslint-disable-next-line no-console
+            console.debug('[VCommandPaletteList] Rendering string slot content:', slotResult.slice(0, 100));
           }
-          // Otherwise treat as plain text node
-          return slotContent as unknown as VNode;
+          // Ensure the string is actual HTML markup before using v-html
+          return slotResult.trim().startsWith('<')
+            ? <div v-html={slotResult} /> // Using <div> as a generic wrapper for string HTML
+            : <>{slotResult}</>; // Treat as text node if not starting with '<'
         }
 
-        // Array of nodes
-        if (Array.isArray(slotContent)) {
-          return slotContent.length ? slotContent : fallbackFn();
+        // If it's an array, ensure it's not empty.
+        if (Array.isArray(slotResult)) {
+          return slotResult.length > 0 ? slotResult : fallbackFn();
         }
 
-        // Single VNode
-        return slotContent;
+        // Otherwise, assume it's a single VNode or a component that will render.
+        return slotResult;
       } catch (err) {
         console.error('[VCommandPaletteList] Error rendering slot:', err);
         return fallbackFn();
