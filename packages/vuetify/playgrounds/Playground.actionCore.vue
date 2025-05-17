@@ -35,6 +35,7 @@
           <ScenarioDynamicRegistration />
           <ScenarioActionWithSubItems />
           <ScenarioActionWithParams />
+          <ScenarioAIDiscovery />
         </v-col>
 
         <!-- Column 2 -->
@@ -152,6 +153,7 @@ import ScenarioUndoRedo from '@playgrounds/ActionCore/scenarios/ScenarioUndoRedo
 import ScenarioContextMenu from '@playgrounds/ActionCore/scenarios/ScenarioContextMenu.vue'
 import ScenarioActionWithSubItems from '@playgrounds/ActionCore/scenarios/ScenarioActionWithSubItems.vue'
 import ScenarioActionWithParams from '@playgrounds/ActionCore/scenarios/ScenarioActionWithParams.vue'
+import ScenarioAIDiscovery from '@playgrounds/ActionCore/scenarios/ScenarioAIDiscovery.vue'
 
 // --- Global Log, ActionCore, Theme, Palette setup (remains the same) ---
 const logMessages = ref<string[]>([])

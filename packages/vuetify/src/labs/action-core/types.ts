@@ -65,6 +65,33 @@ export interface ActionContext {
 /** Defines how a hotkey should behave regarding text input elements. */
 export type RunInTextInputMatcher = string | string[] | ((element: Element | null) => boolean);
 
+// --- AI Integration Related Types --- START ---
+export interface AIActionExample {
+  description?: string;
+  request?: Record<string, any>;
+  responsePreview?: string;
+}
+
+export interface AIActionMetadata {
+  accessible?: boolean;
+  scope?: string | string[];
+  usageHint?: string;
+  examples?: AIActionExample[];
+}
+
+export interface DiscoverableActionInfo {
+  id: string;
+  title: string;
+  description?: string;
+  parametersSchema?: Record<string, any>; // JSON Schema for parameters expected in ActionContext.data
+  ai?: {
+    scope?: string | string[];
+    usageHint?: string;
+    examples?: AIActionExample[];
+  };
+}
+// --- AI Integration Related Types --- END ---
+
 export interface ActionDefinition<T extends ActionContext = ActionContext> {
   /** Unique identifier for the action. */
   id: string
@@ -118,6 +145,10 @@ export interface ActionDefinition<T extends ActionContext = ActionContext> {
   description?: string
   /** Optional group name for display in UI like command palettes. */
   group?: string
+
+  // AI Related Fields
+  parametersSchema?: Record<string, any>; // JSON Schema describing expected ActionContext.data structure
+  ai?: AIActionMetadata; // Metadata for AI interaction
 }
 
 /** Represents a source of actions for the ActionCore store. */
@@ -161,6 +192,9 @@ export interface ActionCorePublicAPI {
   isComponentIntegrationEnabled(componentName: string): boolean;
   /** Cleans up the ActionCore instance. */
   destroy(): void;
+
+  // New method for AI discovery
+  getDiscoverableActions(aiContext: { allowedScopes?: string[] }): DiscoverableActionInfo[];
 }
 
 // -------------- Symbol for Sub-Items UI Handler --------------

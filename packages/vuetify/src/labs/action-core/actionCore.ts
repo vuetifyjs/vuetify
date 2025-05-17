@@ -353,6 +353,77 @@ class ActionCore implements ActionCorePublicAPI {
     }
   }
 
+  public getDiscoverableActions(aiContext: { allowedScopes?: string[] }): import('./types').DiscoverableActionInfo[] {
+    const discoverableActions: import('./types').DiscoverableActionInfo[] = [];
+    const allCurrentActions = this.allActions.value; // Access the computed value
+
+    for (const action of allCurrentActions) {
+      // 1. Filter by presence of `action.ai`
+      if (!action.ai) {
+        continue;
+      }
+
+      // 2. Filter by `action.ai.accessible`
+      // Defaults to true if `ai` block exists and `accessible` is undefined.
+      // Excluded if `ai.accessible` is explicitly `false`.
+      if (action.ai.accessible === false) {
+        continue;
+      }
+
+      // 3. Filter by scope matching
+      const actionScopes = action.ai.scope ? (Array.isArray(action.ai.scope) ? action.ai.scope : [action.ai.scope]) : [];
+      const providedAllowedScopes = aiContext?.allowedScopes || [];
+
+      if (actionScopes.length > 0) { // Action has specific scope(s) defined
+        if (providedAllowedScopes.length === 0) {
+          // AI has no scopes, but action requires specific scopes, so exclude.
+          continue;
+        }
+        const hasMatchingScope = actionScopes.some(scope => providedAllowedScopes.includes(scope));
+        if (!hasMatchingScope) {
+          // No intersection between action's required scopes and AI's allowed scopes.
+          continue;
+        }
+      }
+      // If action.ai.scope is undefined or empty, it's considered globally accessible to AI
+      // (if ai.accessible allows it), regardless of providedAllowedScopes (unless an org policy dictates otherwise for empty allowedScopes).
+      // The current logic correctly includes it if actionScopes is empty.
+
+      // Map to DiscoverableActionInfo
+      const discoverableAction: import('./types').DiscoverableActionInfo = {
+        id: action.id,
+        title: typeof action.title === 'string' ? action.title : action.title.value,
+      };
+
+      if (action.description) {
+        discoverableAction.description = action.description;
+      }
+      if (action.parametersSchema) {
+        discoverableAction.parametersSchema = action.parametersSchema;
+      }
+
+      // Include relevant AI metadata
+      const aiMetadata: Partial<import('./types').AIActionMetadata> = {};
+      if (action.ai.scope) {
+        aiMetadata.scope = action.ai.scope;
+      }
+      if (action.ai.usageHint) {
+        aiMetadata.usageHint = action.ai.usageHint;
+      }
+      if (action.ai.examples) {
+        aiMetadata.examples = action.ai.examples;
+      }
+
+      if (Object.keys(aiMetadata).length > 0) {
+        discoverableAction.ai = aiMetadata as import('./types').AIActionMetadata;
+      }
+
+      discoverableActions.push(discoverableAction);
+    }
+
+    return discoverableActions;
+  }
+
   /**
    * Method to check if component integration is enabled for a specific component.
    * Relies on `componentIntegration` settings passed in `ActionCoreInstanceOptions`.

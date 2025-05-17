@@ -933,3 +933,239 @@ describe('ActionCore Advanced Capabilities', () => {
     destroyActionCoreInstance();
   });
 });
+
+describe('ActionCore getDiscoverableActions', () => {
+  beforeEach(() => {
+    vi.useFakeTimers();
+    destroyActionCoreInstance(); // Resets ActionCore and its internal state
+  });
+
+  afterEach(() => {
+    destroyActionCoreInstance();
+    vi.clearAllMocks();
+    vi.useRealTimers();
+  });
+
+  const createAIDef = (id: string, props: Partial<ActionDefinition> = {}): ActionDefinition => {
+    // Simplified helper for AI-specific tests, building on the global createActionDef
+    return createActionDef(id, {
+      // Basic AI structure that might be overridden by props
+      ai: { accessible: true },
+      ...props,
+    });
+  };
+
+  it('should return an empty array if no actions are registered', () => {
+    const core = useActionCore();
+    const result = core.getDiscoverableActions({ allowedScopes: ['anyScope'] });
+    expect(result).toEqual([]);
+  });
+
+  it('should return an empty array if actions exist but none have the "ai" metadata block', async () => {
+    const core = useActionCore();
+    core.registerActionsSource([
+      createActionDef('action1'), // No 'ai' block
+      createActionDef('action2'), // No 'ai' block
+    ]);
+    await nextTick();
+    const result = core.getDiscoverableActions({ allowedScopes: ['anyScope'] });
+    expect(result).toEqual([]);
+  });
+
+  it('should exclude actions where "ai.accessible" is explicitly false', async () => {
+    const core = useActionCore();
+    core.registerActionsSource([
+      createAIDef('aiAction1', { ai: { accessible: false, scope: 's1' } }),
+      createAIDef('aiAction2', { ai: { accessible: true, scope: 's1' } }),
+    ]);
+    await nextTick();
+    const result = core.getDiscoverableActions({ allowedScopes: ['s1'] });
+    expect(result.length).toBe(1);
+    expect(result[0].id).toBe('aiAction2');
+  });
+
+  it('should include action with "ai" block (accessible implicitly true) and no ai.scope, when AI has no allowedScopes', async () => {
+    const core = useActionCore();
+    const action = createAIDef('globalAIAction', { ai: { /* accessible is true by default */ } });
+    core.registerActionsSource([action]);
+    await nextTick();
+    const result = core.getDiscoverableActions({}); // No allowedScopes
+    expect(result.length).toBe(1);
+    expect(result[0].id).toBe('globalAIAction');
+  });
+
+  it('should include action with "ai" block (accessible true), no ai.scope, when AI provides some allowedScopes', async () => {
+    const core = useActionCore();
+    const action = createAIDef('globalAIAction2', { ai: { accessible: true } }); // No scope defined on action
+    core.registerActionsSource([action]);
+    await nextTick();
+    const result = core.getDiscoverableActions({ allowedScopes: ['files', 'calendar'] });
+    expect(result.length).toBe(1);
+    expect(result[0].id).toBe('globalAIAction2');
+  });
+
+  it('should include action if action.ai.scope (string) matches one of AI allowedScopes', async () => {
+    const core = useActionCore();
+    const action = createAIDef('scopedAIAction1', { ai: { scope: 'files' } });
+    core.registerActionsSource([action]);
+    await nextTick();
+    const result = core.getDiscoverableActions({ allowedScopes: ['files', 'calendar'] });
+    expect(result.length).toBe(1);
+    expect(result[0].id).toBe('scopedAIAction1');
+  });
+
+  it('should include action if action.ai.scope (array) has at least one match with AI allowedScopes', async () => {
+    const core = useActionCore();
+    const action = createAIDef('scopedAIAction2', { ai: { scope: ['user', 'settings'] } });
+    core.registerActionsSource([action]);
+    await nextTick();
+    const result = core.getDiscoverableActions({ allowedScopes: ['settings', 'general'] });
+    expect(result.length).toBe(1);
+    expect(result[0].id).toBe('scopedAIAction2');
+  });
+
+  it('should exclude action if action.ai.scope does not match any AI allowedScopes', async () => {
+    const core = useActionCore();
+    const action = createAIDef('scopedAIAction3', { ai: { scope: 'admin' } });
+    core.registerActionsSource([action]);
+    await nextTick();
+    const result = core.getDiscoverableActions({ allowedScopes: ['user', 'guest'] });
+    expect(result.length).toBe(0);
+  });
+
+  it('should exclude action if action.ai.scope is defined but AI allowedScopes is empty array', async () => {
+    const core = useActionCore();
+    const action = createAIDef('scopedAIAction4', { ai: { scope: 'profile' } });
+    core.registerActionsSource([action]);
+    await nextTick();
+    const result = core.getDiscoverableActions({ allowedScopes: [] });
+    expect(result.length).toBe(0);
+  });
+
+  it('should exclude action if action.ai.scope is defined but AI allowedScopes is undefined (treated as empty for scoped actions)', async () => {
+    const core = useActionCore();
+    const action = createAIDef('scopedAIAction5', { ai: { scope: 'notifications' } });
+    core.registerActionsSource([action]);
+    await nextTick();
+    const result = core.getDiscoverableActions({}); // allowedScopes is undefined
+    expect(result.length).toBe(0);
+  });
+
+
+  it('should correctly structure DiscoverableActionInfo, excluding sensitive fields', async () => {
+    const core = useActionCore();
+    const actionDef = createAIDef('structTest', {
+      title: 'Test Structure',
+      description: 'A test description.',
+      parametersSchema: { type: 'object', properties: { test: { type: 'string' } } },
+      ai: {
+        accessible: true,
+        scope: 'testScope',
+        usageHint: 'Use for testing.',
+        examples: [{ description: 'Example 1' }],
+      },
+      handler: vi.fn(),
+      subItems: () => [],
+      canExecute: () => true,
+      hotkey: 'ctrl+t',
+      meta: { someMeta: 'value' },
+    });
+    core.registerActionsSource([actionDef]);
+    await nextTick();
+    const result = core.getDiscoverableActions({ allowedScopes: ['testScope'] });
+    expect(result.length).toBe(1);
+    const discovered = result[0];
+
+    expect(discovered.id).toBe('structTest');
+    expect(discovered.title).toBe('Test Structure'); // title is string, not ref here due to createAIDef
+    expect(discovered.description).toBe('A test description.');
+    expect(discovered.parametersSchema).toEqual({ type: 'object', properties: { test: { type: 'string' } } });
+    expect(discovered.ai).toBeDefined();
+    expect(discovered.ai?.scope).toBe('testScope');
+    expect(discovered.ai?.usageHint).toBe('Use for testing.');
+    expect(discovered.ai?.examples).toEqual([{ description: 'Example 1' }]);
+
+    // Ensure sensitive/unnecessary fields are NOT present
+    expect(discovered).not.toHaveProperty('handler');
+    expect(discovered).not.toHaveProperty('subItems');
+    expect(discovered).not.toHaveProperty('canExecute');
+    expect(discovered).not.toHaveProperty('hotkey');
+    expect(discovered).not.toHaveProperty('hotkeyOptions');
+    expect(discovered).not.toHaveProperty('runInTextInput');
+    expect(discovered).not.toHaveProperty('meta'); // General meta should be excluded
+    expect(discovered).not.toHaveProperty('disabled');
+    expect(discovered).not.toHaveProperty('order');
+  });
+
+  it('should handle action.title as a Ref<string> correctly', async () => {
+    const core = useActionCore();
+    const titleRef = ref('Dynamic Title');
+    const actionWithRefTitle = createAIDef('refTitleAction', {
+      title: titleRef,
+      ai: { scope: 'general' }
+    });
+    core.registerActionsSource([actionWithRefTitle]);
+    await nextTick();
+
+    const result = core.getDiscoverableActions({ allowedScopes: ['general'] });
+    expect(result.length).toBe(1);
+    expect(result[0].title).toBe('Dynamic Title');
+
+    // Update title and re-check
+    titleRef.value = 'Updated Dynamic Title';
+    await nextTick(); // Allow computed allActions to update
+    const resultUpdated = core.getDiscoverableActions({ allowedScopes: ['general'] });
+    expect(resultUpdated.length).toBe(1);
+    expect(resultUpdated[0].title).toBe('Updated Dynamic Title');
+  });
+
+  it('should only include ai.scope, ai.usageHint, and ai.examples in the ai property of DiscoverableActionInfo', async () => {
+    const core = useActionCore();
+    const actionDef = createAIDef('aiPropFilterTest', {
+      ai: {
+        accessible: true, // This controls inclusion, not part of the output ai block
+        scope: 'filteredScope',
+        usageHint: 'Filtered hint.',
+        examples: [{ description: 'Filtered example' }],
+        // @ts-expect-error - Adding an extra property to AIActionMetadata for testing purposes
+        extraAiProp: 'shouldBeExcluded',
+      },
+    });
+    core.registerActionsSource([actionDef]);
+    await nextTick();
+    const result = core.getDiscoverableActions({ allowedScopes: ['filteredScope'] });
+    expect(result.length).toBe(1);
+    const discoveredAi = result[0].ai;
+
+    expect(discoveredAi).toBeDefined();
+    expect(discoveredAi?.scope).toBe('filteredScope');
+    expect(discoveredAi?.usageHint).toBe('Filtered hint.');
+    expect(discoveredAi?.examples).toEqual([{ description: 'Filtered example' }]);
+    expect(discoveredAi).not.toHaveProperty('accessible');
+    expect(discoveredAi).not.toHaveProperty('extraAiProp');
+  });
+
+   it('should include action if action.ai.scope is undefined (global) and AI allowedScopes is also undefined', async () => {
+    const core = useActionCore();
+    const action = createAIDef('globalToGlobal', { ai: { /* no scope, accessible true by default */ } });
+    core.registerActionsSource([action]);
+    await nextTick();
+    const result = core.getDiscoverableActions({}); // AI has no specific allowed scopes
+    expect(result.length).toBe(1);
+    expect(result[0].id).toBe('globalToGlobal');
+  });
+
+  it('should include action if action.ai.scope is undefined (global) and AI allowedScopes is an empty array', async () => {
+    const core = useActionCore();
+    // Action without specific scope requirements (globally accessible to AI if accessible:true)
+    const action = createAIDef('globalToEmptyArrayScopes', { ai: { accessible: true } });
+    core.registerActionsSource([action]);
+    await nextTick();
+
+    // AI client explicitly states it has no scopes currently allowed.
+    // An action not requiring any specific scope should still be discoverable.
+    const result = core.getDiscoverableActions({ allowedScopes: [] });
+    expect(result.length).toBe(1);
+    expect(result[0].id).toBe('globalToEmptyArrayScopes');
+  });
+});
