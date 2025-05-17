@@ -2,6 +2,7 @@ import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { ref, computed, nextTick, watch } from 'vue';
 import { useActionCore, destroyActionCoreInstance } from '../actionCore';
 import type { ActionDefinition, ActionContext } from '../types';
+import * as KeyBindingsModule from '../useKeyBindings'; // Import the module itself
 
 // Mock useKeyBindings
 // We need to be able to assert that its methods (like on, stop) are called,
@@ -70,6 +71,14 @@ describe('ActionCore', () => {
     const core2 = useActionCore();
     expect(core1).toBe(core2);
     expect(core1).toBeDefined();
+  });
+
+  it('should initialize useKeyBindings with capture: true', () => {
+    // Use the imported module name for the mock
+    const mockUseKeyBindingsFactory = vi.mocked(KeyBindingsModule.useKeyBindings);
+    useActionCore(); // This will trigger the ActionCore constructor, which calls useKeyBindings
+    expect(mockUseKeyBindingsFactory).toHaveBeenCalledTimes(1);
+    expect(mockUseKeyBindingsFactory).toHaveBeenCalledWith({ capture: true });
   });
 
   it('destroyActionCoreInstance should call internal destroy and keyBindings.stop', () => {
@@ -385,13 +394,17 @@ describe('ActionCore', () => {
 
       hotkeyCallback(mockEvent);
       await nextTick(); // Allow executeAction to be called
-      // await vi.advanceTimersByTime(1); // If executeAction had internal async beyond nextTick
 
-      // Corrected assertions based on actual log messages from actionCore.ts
-      expect(consoleDebugSpy).toHaveBeenCalledWith('[ActionCore] Hotkey "ctrl+e" executing action "hkExec"', undefined);
-      // The detailed [HK DEBUG] logs were removed from actionCore.ts, so we only expect the general ones.
-      // If specific internal steps of the hotkey callback need checking, they are implicitly tested by whether executeAction is called.
-      expect(consoleDebugSpy).toHaveBeenCalledWith('[ActionCore] Executing handler for action: hkExec', undefined);
+      // The primary debug log now comes from within executeAction itself.
+      // We also added more detailed logs in the hotkey callback which could be asserted if needed.
+      expect(consoleDebugSpy).toHaveBeenCalledWith(
+        `[ActionCore] Executing handler for action: ${actionToTest.id}`,
+        undefined
+      );
+      // Optionally, verify the sequence if the other debug logs are consistently on:
+      // expect(consoleDebugSpy).toHaveBeenNthCalledWith(1, `[ActionCore DEBUG] Hotkey callback invoked for action ID: '${actionToTest.id}', binding: '${actionToTest.hotkey}'`);
+      // expect(consoleDebugSpy).toHaveBeenNthCalledWith(2, `[ActionCore DEBUG] Hotkey callback PRE-executeAction for: '${actionToTest.id}'`);
+      // expect(consoleDebugSpy).toHaveBeenNthCalledWith(3, `[ActionCore] Executing handler for action: ${actionToTest.id}`, undefined);
 
       expect(canExecuteTrue).toHaveBeenCalled();
       expect(executeActionSpy).toHaveBeenCalledWith('hkExec', { trigger: 'hotkey', event: mockEvent });

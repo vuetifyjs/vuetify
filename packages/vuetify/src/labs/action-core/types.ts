@@ -1,4 +1,5 @@
 import type { Ref, ComputedRef } from 'vue'
+import type { InjectionKey } from 'vue'
 
 // -------------- KeyBinding Types --------------
 
@@ -161,3 +162,12 @@ export interface ActionCorePublicAPI {
   /** Cleans up the ActionCore instance. */
   destroy(): void;
 }
+
+// -------------- Symbol for Sub-Items UI Handler --------------
+
+/**
+ * Injection key for a global function that can display the sub-items of an action.
+ * This is typically used by components like VBtn when their 'command' prop points to an action
+ * that primarily defines subItems rather than a direct handler.
+ */
+export const ShowSubItemsUISymbol: InjectionKey<(action: ActionDefinition<any>) => void> = Symbol.for('vuetify:show-sub-items-ui');

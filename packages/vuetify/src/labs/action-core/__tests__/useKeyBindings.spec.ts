@@ -468,6 +468,42 @@ describe('useKeyBindings', () => {
     });
   });
 
+  describe('preferEventCode Behavior', () => {
+    it('should trigger alt+s with preferEventCode when Option+S is pressed (Mac behavior: key="ß", code="KeyS")', async () => {
+      // This test assumes preferEventCode=true is the default for useKeyBindings
+      // or is explicitly passed if we want to test non-default.
+      // Since we changed the default to true, this test will use that.
+      const { on, pressedKeys } = useKeyBindings({ target });
+      const handler = vi.fn();
+      const hotkeyString = 'alt+s';
+      on(hotkeyString, handler, { preventDefault: true });
+
+      // Simulate Option keydown
+      let event = dispatchKeyEvent(target, 'keydown', 'Alt', { code: 'AltLeft', altKey: true });
+      await nextTick();
+      expect(pressedKeys.value.has('alt')).toBe(true);
+
+      // Simulate S keydown (while Option is held)
+      // This mimics macOS behavior where event.key is 'ß' but event.code is 'KeyS'
+      event = dispatchKeyEvent(target, 'keydown', 'ß', { code: 'KeyS', altKey: true });
+      await nextTick();
+
+      expect(pressedKeys.value.has('s')).toBe(true); // 'KeyS' should be aliased to 's'
+      expect(handler).toHaveBeenCalledTimes(1);
+      expect(event.defaultPrevented).toBe(true);
+
+      // Simulate S keyup
+      dispatchKeyEvent(target, 'keyup', 'ß', { code: 'KeyS', altKey: true });
+      await nextTick();
+      expect(pressedKeys.value.has('s')).toBe(false);
+
+      // Simulate Option keyup
+      dispatchKeyEvent(target, 'keyup', 'Alt', { code: 'AltLeft', altKey: false });
+      await nextTick();
+      expect(pressedKeys.value.has('alt')).toBe(false);
+    });
+  });
+
   describe('Input Blocking', () => {
     let inputElement: HTMLInputElement;
     let textareaElement: HTMLTextAreaElement;

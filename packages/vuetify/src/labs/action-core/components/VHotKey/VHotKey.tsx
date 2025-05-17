@@ -16,9 +16,13 @@ import { IS_MAC } from '../../platform'
 export const makeVHotKeyProps = propsFactory({
   hotkey: String,
   actionId: String,
+  displayMode: {
+    type: String as () => 'symbol' | 'text',
+    default: 'symbol' as const,
+  },
 
   ...makeComponentProps(),
-  ...makeTagProps({ tag: 'div' }), // Default tag, can be span or div
+  ...makeTagProps({ tag: 'div' }),
   ...makeThemeProps(),
   ...makeDensityProps(),
 }, 'VHotKey')
@@ -40,13 +44,11 @@ export const VHotKey = genericComponent()({
           if (action?.hotkey) {
             internalHotkeyString.value = Array.isArray(action.hotkey) ? action.hotkey[0] : action.hotkey;
           } else if (action === undefined) {
-            // Action not found yet, wait for next tick and try again
             await nextTick()
             const retryAction = actionCore.getAction(newActionId)
             if (retryAction?.hotkey) {
               internalHotkeyString.value = Array.isArray(retryAction.hotkey) ? retryAction.hotkey[0] : retryAction.hotkey;
             } else {
-              // Fallback to explicit prop hotkey if provided
               internalHotkeyString.value = props.hotkey;
               console.warn(`[VHotKey] Action with id "${newActionId}" has no hotkey defined. Falling back to explicit hotkey prop if available.`)
             }
@@ -105,25 +107,63 @@ export const VHotKey = genericComponent()({
       });
 
       return [...uniqueSortedModifiers, ...mainKeys].map(key => {
-        if (IS_MAC && key === 'meta') return '⌘';
-        if (!IS_MAC && key === 'meta') return 'Ctrl';
-        if (key === 'ctrl') return 'Ctrl';
-        if (key === 'alt') return 'Alt';
-        if (key === 'shift') return 'Shift';
+        let text = key;
+        let label = key;
 
-        if (key === 'arrowup') return '↑';
-        if (key === 'arrowdown') return '↓';
-        if (key === 'arrowleft') return '←';
-        if (key === 'arrowright') return '→';
-        if (key === 'enter') return 'Enter';
-        if (key === 'escape') return 'Esc';
-        if (key === 'backspace') return 'Backspace';
-        if (key === 'delete') return 'Del';
-        if (key === 'tab') return 'Tab';
-        if (key === 'space') return 'Space';
-        if (/^f[1-9][0-2]?$/.test(key)) return key.toUpperCase();
-
-        return key.length === 1 ? key.toUpperCase() : key;
+        if (key === 'meta') {
+          if (IS_MAC) {
+            text = props.displayMode === 'symbol' ? '⌘' : 'Command';
+            label = 'Command';
+          } else {
+            text = props.displayMode === 'symbol' ? 'Ctrl' : 'Control';
+            label = 'Control';
+          }
+        } else if (key === 'ctrl') {
+          text = props.displayMode === 'symbol' ? 'Ctrl' : 'Control';
+          label = 'Control';
+        } else if (key === 'alt') {
+          if (IS_MAC) {
+            text = props.displayMode === 'symbol' ? '⌥' : 'Option';
+            label = 'Option';
+          } else {
+            text = 'Alt'; // No common symbol, 'Alt' is fine for text too
+            label = 'Alt';
+          }
+        } else if (key === 'shift') {
+          text = 'Shift'; // No common symbol, 'Shift' is fine for text too
+          label = 'Shift';
+        } else if (key === 'arrowup') {
+          text = props.displayMode === 'symbol' ? '↑' : 'Up Arrow';
+          label = 'Up Arrow';
+        } else if (key === 'arrowdown') {
+          text = props.displayMode === 'symbol' ? '↓' : 'Down Arrow';
+          label = 'Down Arrow';
+        } else if (key === 'arrowleft') {
+          text = props.displayMode === 'symbol' ? '←' : 'Left Arrow';
+          label = 'Left Arrow';
+        } else if (key === 'arrowright') {
+          text = props.displayMode === 'symbol' ? '→' : 'Right Arrow';
+          label = 'Right Arrow';
+        } else if (key === 'enter') {
+          text = 'Enter'; label = 'Enter';
+        } else if (key === 'escape') {
+          text = 'Esc'; label = 'Escape';
+        } else if (key === 'backspace') {
+          text = 'Backspace'; label = 'Backspace';
+        } else if (key === 'delete') {
+          text = 'Del'; label = 'Delete';
+        } else if (key === 'tab') {
+          text = 'Tab'; label = 'Tab';
+        } else if (key === 'space') {
+          text = 'Space'; label = 'Space';
+        } else if (/^f[1-9][0-2]?$/.test(key)) {
+          text = key.toUpperCase();
+          label = key.toUpperCase();
+        } else {
+          text = key.length === 1 ? key.toUpperCase() : key;
+          label = key.length === 1 ? key.toUpperCase() : key;
+        }
+        return { text, label };
       });
     })
 
@@ -135,13 +175,18 @@ export const VHotKey = genericComponent()({
           props.class,
         ]}
         style={props.style}
-        role="group" // Indicates a group of related elements
-        aria-label={`Hotkey: ${internalHotkeyString.value || 'none'}`} // Provides an accessible label
+        role="group"
+        aria-label={`Hotkey: ${internalHotkeyString.value || 'none'}`}
       >
         {slots.default ? slots.default() : keysToRender.value.map((keyPart, index) => (
           // Using index for key here is acceptable as order won't change for a given hotkey
           <span key={index} class="v-hot-key__item">
-            <kbd class="v-hot-key__key">{keyPart}</kbd>
+            <kbd
+              class="v-hot-key__key"
+              aria-label={props.displayMode === 'symbol' && keyPart.text !== keyPart.label ? keyPart.label : undefined}
+            >
+              {keyPart.text}
+            </kbd>
             {index < keysToRender.value.length - 1 && (
               <span class="v-hot-key__separator" aria-hidden="true">+</span>
             )}

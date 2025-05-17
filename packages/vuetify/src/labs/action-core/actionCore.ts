@@ -61,7 +61,7 @@ class ActionCore implements ActionCorePublicAPI {
   constructor(options: ActionCoreInstanceOptions = {}) {
     this.options = options; // Store options for potential future use (e.g., componentIntegration flags)
     this.isLoading = readonly(this._isLoading);
-    this.keyBindings = useKeyBindings(); // Initialize keybindings
+    this.keyBindings = useKeyBindings({ capture: true }); // MODIFICATION: Initialize with capture: true
 
     this.allActions = computed(() => {
       const actions: ActionDefinition<any>[] = [];
@@ -153,6 +153,10 @@ class ActionCore implements ActionCorePublicAPI {
    * @param {Readonly<ActionDefinition<any>[]>} actionsToKeep - The current list of actions to process hotkeys for.
    */
   private processAndRegisterHotkeys(actionsToKeep: Readonly<ActionDefinition<any>[]>) {
+    // ---- ACTION CORE DEBUG LOG ----
+    // console.log('[ActionCore INFO] processAndRegisterHotkeys called with actions:', actionsToKeep.map(a => a.id));
+    // ---- END DEBUG LOG ----
+
     const actionIdsToKeep = new Set(actionsToKeep.map(action => action.id));
     this.actionHotkeysUnregisterMap.forEach((unregisterFns, actionId) => {
       if (!actionIdsToKeep.has(actionId)) {
@@ -183,7 +187,6 @@ class ActionCore implements ActionCorePublicAPI {
 
             const runInTextInputMatcher = currentActionDef.runInTextInput;
             let ignoreBlocker = false;
-
             if (runInTextInputMatcher === true || runInTextInputMatcher === 'only') {
               ignoreBlocker = true;
             } else if (
@@ -193,28 +196,50 @@ class ActionCore implements ActionCorePublicAPI {
             ) {
               ignoreBlocker = true;
             }
-            // If runInTextInputMatcher is false or undefined, ignoreBlocker remains false.
             handlerOpts.ignoreInputBlocker = ignoreBlocker;
+
+            // ---- ACTION CORE DEBUG LOG ----
+            // console.log(`[ActionCore INFO] Attempting to register binding: '${binding}' for action '${currentActionDef.id}'`, { hotkeyDef: currentActionDef.hotkey, finalOptions: handlerOpts });
+            // ---- END DEBUG LOG ----
 
             const unregisterFn = this.keyBindings.on(
               binding,
               (event: KeyboardEvent) => {
+                // ---- ACTION CORE HOTKEY CALLBACK DEBUG ----
+                // console.log(`[ActionCore DEBUG] Hotkey callback invoked for action ID: '${currentActionDef.id}', binding: '${binding}'`);
+                // ---- END DEBUG ----
+
                 const action = this.getAction(currentActionDef.id);
-                if (!action) return;
+                if (!action) {
+                  console.warn(`[ActionCore WARN] Hotkey callback: Action '${currentActionDef.id}' not found at execution time.`);
+                  return;
+                }
 
                 if (action.disabled === true || (isRef(action.disabled) && action.disabled.value === true)) {
                   log('debug', COMPONENT_NAME, `Hotkey "${binding}" for disabled action "${action.id}" ignored.`);
                   return;
                 }
+
                 const activeElement = IS_CLIENT ? document.activeElement : null;
                 const isGenerallyInputFocused = activeElement &&
-                                              (['INPUT', 'TEXTAREA', 'SELECT'].includes(activeElement.tagName?.toUpperCase()) ||
+                                              ([
+                                                'INPUT', 'TEXTAREA', 'SELECT',
+                                              ].includes(activeElement.tagName?.toUpperCase()) ||
                                               (activeElement as HTMLElement).isContentEditable);
+
                 const matcher = action.runInTextInput;
+                // This block handles runInTextInput checks
                 if (matcher === 'only') { if (!isGenerallyInputFocused) { log('debug', COMPONENT_NAME, `Hotkey "${binding}" for action "${action.id}" (runInTextInput: 'only') ignored; general input not focused.`); return; } }
                 else if (typeof matcher === 'string') { if (!isGenerallyInputFocused || (activeElement as HTMLInputElement)?.name !== matcher) { log('debug', COMPONENT_NAME, `Hotkey "${binding}" for action "${action.id}" (runInTextInput: "${matcher}") ignored; input name mismatch or not focused.`); return; } }
                 else if (Array.isArray(matcher)) { if (!isGenerallyInputFocused || !matcher.includes((activeElement as HTMLInputElement)?.name)) { log('debug', COMPONENT_NAME, `Hotkey "${binding}" for action "${action.id}" (runInTextInput: [${matcher.join(',')}]) ignored; input name mismatch or not focused.`); return; } }
-                else if (typeof matcher === 'function') { if (!matcher(activeElement as Element)) { log('debug', COMPONENT_NAME, `Hotkey "${binding}" for action "${action.id}" (runInTextInput: custom function) ignored; predicate returned false.`); return; } }
+                else if (typeof matcher === 'function') {
+                  if (!matcher(activeElement as Element)) {
+                    log('debug', COMPONENT_NAME, `Hotkey "${binding}" for action "${action.id}" (runInTextInput: custom function) ignored; predicate returned false.`); return;
+                  }
+                }
+                // If matcher is boolean `true`, no specific input check is needed here because ignoreInputBlocker was set true for useKeyBindings.
+                // If matcher is boolean `false` or `undefined`, and ignoreInputBlocker was false, useKeyBindings' default blocker would have handled it.
+
                 const context: ActionContext = { trigger: 'hotkey', event };
                 if (action.canExecute) {
                   try {
@@ -224,8 +249,9 @@ class ActionCore implements ActionCorePublicAPI {
                   } catch (e) { log('error', COMPONENT_NAME, `canExecute for action "${action.id}" triggered by hotkey "${binding}"`, e); return; }
                 }
 
-                log('debug', COMPONENT_NAME, `Hotkey "${binding}" executing action "${action.id}"`);
+                // console.log(`[ActionCore DEBUG] Hotkey callback PRE-executeAction for: '${action.id}'`);
                 this.executeAction(action.id, context);
+                // console.log(`[ActionCore DEBUG] Hotkey callback POST-executeAction for: '${action.id}'`);
               },
               handlerOpts
             );

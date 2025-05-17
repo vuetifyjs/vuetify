@@ -1,5 +1,6 @@
-import { ref, watch, onUnmounted, computed, readonly, type WatchStopHandle, getCurrentInstance } from 'vue';
+import { ref, watch, onUnmounted, computed, readonly, type WatchStopHandle, getCurrentInstance, inject } from 'vue';
 import type { ActionDefinition, ActionContext, ActionCorePublicAPI } from '../types';
+import { ShowSubItemsUISymbol } from '../types';
 
 /**
  * @file useCommandable.ts Composable to provide ActionCore integration logic for Vuetify components.
@@ -30,6 +31,7 @@ export function useCommandable(
   componentName: string
 ) {
   const commandDataProp = computed(() => props.commandData);
+  const showSubItemsUI = inject(ShowSubItemsUISymbol, null);
 
   let localActionSourceKey: symbol | null = null;
   const internalActionId = ref<string | undefined>(undefined);
@@ -108,8 +110,20 @@ export function useCommandable(
     return undefined;
   });
 
-  const execute = (contextOverrides?: Partial<ActionContext>, domEvent?: Event): Promise<void> => {
+  const execute = async (contextOverrides?: Partial<ActionContext>, domEvent?: Event): Promise<void> => {
     if (isIntegrationEnabled.value && core && internalActionId.value) {
+      const currentAction = action.value;
+
+      if (currentAction && typeof currentAction.subItems === 'function' && !currentAction.handler) {
+        if (showSubItemsUI) {
+          showSubItemsUI(currentAction);
+          return Promise.resolve();
+        } else {
+          console.warn(`[useCommandable] Action "${currentAction.id}" has subItems but no handler, and no ShowSubItemsUI handler is provided.`);
+          return Promise.resolve();
+        }
+      }
+
       const eventContext: ActionContext = {
         trigger: `component-${componentName.toLowerCase()}`,
         event: domEvent,

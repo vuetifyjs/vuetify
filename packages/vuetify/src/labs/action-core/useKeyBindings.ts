@@ -70,26 +70,63 @@ const defaultInputBlockerFn: KeyBindingInputBlockerFn = (element) => {
   return 'allow'
 }
 
-/** Default map for aliasing key names. */
+/** Default map for aliasing key names. Extended for event.code values. */
 const defaultAliasMap: Record<string, string> = {
+  // Standard event.key aliases
   'command': 'meta',
   'cmd': 'meta',
   'control': 'ctrl',
-  'option': 'alt',
+  'option': 'alt', // Crucial for Mac Option key
   'escape': 'esc',
   'cmdorctrl': 'meta',
   'primary': 'meta',
-  // Common aliases for arrow keys
   'up': 'arrowup',
   'down': 'arrowdown',
   'left': 'arrowleft',
   'right': 'arrowright',
-  // Modifier keys themselves if needed directly
+
+  // Modifier key self-aliases (ensure they are normalized correctly)
   'meta': 'meta',
   'ctrl': 'ctrl',
-  'shift': 'shift',
   'alt': 'alt',
-}
+  'shift': 'shift',
+
+  // Aliases for common event.code values to simpler forms
+  // Letters
+  'keya': 'a', 'keyb': 'b', 'keyc': 'c', 'keyd': 'd', 'keye': 'e',
+  'keyf': 'f', 'keyg': 'g', 'keyh': 'h', 'keyi': 'i', 'keyj': 'j',
+  'keyk': 'k', 'keyl': 'l', 'keym': 'm', 'keyn': 'n', 'keyo': 'o',
+  'keyp': 'p', 'keyq': 'q', 'keyr': 'r', 'keys': 's', 'keyt': 't',
+  'keyu': 'u', 'keyv': 'v', 'keyw': 'w', 'keyx': 'x', 'keyy': 'y',
+  'keyz': 'z',
+  // Numbers (above letters)
+  'digit0': '0', 'digit1': '1', 'digit2': '2', 'digit3': '3', 'digit4': '4',
+  'digit5': '5', 'digit6': '6', 'digit7': '7', 'digit8': '8', 'digit9': '9',
+  // Numpad numbers
+  'numpad0': '0', 'numpad1': '1', 'numpad2': '2', 'numpad3': '3', 'numpad4': '4',
+  'numpad5': '5', 'numpad6': '6', 'numpad7': '7', 'numpad8': '8', 'numpad9': '9',
+  // Symbols & Special Characters (add more as needed, these are common examples)
+  'enter': 'enter', 'numpadenter': 'enter',
+  'space': 'space',
+  'tab': 'tab',
+  'backspace': 'backspace',
+  'delete': 'delete',
+  'minus': '-', 'numpadsubtract': '-',
+  'equal': '=',
+  'bracketleft': '[', 'bracketright': ']',
+  'semicolon': ';', 'quote': "'",
+  'comma': ',', 'period': '.', 'slash': '/',
+  'backslash': '\\',
+  'backquote': '`',
+  // Modifier event.code to generic modifier names
+  'altleft': 'alt', 'altright': 'alt',
+  'controlleft': 'ctrl', 'controlright': 'ctrl',
+  'shiftleft': 'shift', 'shiftright': 'shift',
+  'metaleft': 'meta', 'metaright': 'meta',
+  // Arrow codes already have good key aliases (up, down, etc.)
+  // but if using event.code directly, they would be 'arrowup', 'arrowdown', etc.
+  // No specific code aliases needed if event.key aliases are robust.
+};
 
 // --- Type Aliases and Interfaces (Internal to useKeyBindings) ---
 
@@ -153,8 +190,7 @@ export function useKeyBindings(options: UseKeyBindingsOptions = {}) {
     inputBlockerFn = defaultInputBlockerFn,
     capture = false,
     passive: defaultPassive,
-    // Add option to prefer event.code over event.key for layout-independent bindings
-    preferEventCode = false
+    preferEventCode = true,
   } = options
 
   const aliasMap = { ...defaultAliasMap, ...userAliasMap }
@@ -194,14 +230,13 @@ export function useKeyBindings(options: UseKeyBindingsOptions = {}) {
 
   /**
    * Gets the key value from the keyboard event based on configuration preferences.
-   * Can use either event.key (default) or event.code (layout-independent) based on preferEventCode option.
    */
   function getKeyValueFromEvent(event: KeyboardEvent): string {
     if (preferEventCode && event.code) {
+      // Always use toLowerCase for consistency with event.key normalization
       return event.code.toLowerCase();
     }
-
-    return event.key;
+    return event.key; // This will also be lowercased by normalizeKey
   }
 
   /**
@@ -276,9 +311,13 @@ export function useKeyBindings(options: UseKeyBindingsOptions = {}) {
   /**
    * Updates the sequence state, adding the key and resetting the timer.
    */
-  function updateSequenceState(eventKey: string) {
-    if (sequenceTimer.value) clearTimeout(sequenceTimer.value);
-    currentSequence.value.push(eventKey);
+function updateSequenceState(eventKey: string) {
+  const MAX_SEQUENCE = 100       // or derive from longest registered sequence
+   if (sequenceTimer.value) clearTimeout(sequenceTimer.value)
+   currentSequence.value.push(eventKey)
+  if (currentSequence.value.length > MAX_SEQUENCE) {
+    currentSequence.value.shift() // keep tail within bound
+  }
     sequenceTimer.value = window.setTimeout(() => {
       currentSequence.value = [];
     }, sequenceTimeoutDuration);
@@ -296,7 +335,6 @@ export function useKeyBindings(options: UseKeyBindingsOptions = {}) {
     for (const handler of activeHandlers.value) {
       const { parsedTrigger, options: handlerOptions, handler: callback } = handler;
 
-      // Skip if event type doesn't match or other checks fail
       if (shouldSkipHandler(event, eventType, handlerOptions, activeElement)) {
         continue;
       }

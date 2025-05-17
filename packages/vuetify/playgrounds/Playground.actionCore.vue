@@ -128,13 +128,14 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted, provide, nextTick, watch } from 'vue'
+import { ref, computed, provide, nextTick, watch } from 'vue'
 import { useTheme } from 'vuetify'
 import {
   useActionCore,
   ActionCoreSymbol,
   type ActionDefinition,
   type ActionContext,
+  ShowSubItemsUISymbol,
 } from '@/labs/action-core'
 import { VHotKey } from '@/labs/action-core/components/VHotKey/VHotKey'
 import ScenarioCard from '@playgrounds/ActionCore/ScenarioCard.vue'
@@ -209,6 +210,7 @@ const openPalette = (parentActionDef?: ActionDefinition) => {
   }
 }
 provide('openPalette', openPalette);
+provide(ShowSubItemsUISymbol, openPalette);
 const focusPaletteSearch = async () => { await nextTick(); paletteSearchInputRef.value?.focus(); }
 const navigatePaletteBack = () => { if (paletteActionStack.value.length > 1) { paletteActionStack.value.pop(); paletteSearch.value = ''; paletteSelectedIndex.value = currentPaletteActions.value.findIndex(item => !item.isHeader); focusPaletteSearch(); } else isPaletteOpen.value = false; }
 const executePaletteAction = async (action: ActionDefinition | any) => { if (!action || action.isHeader) return; logAction(`Palette: Executing "${action.title}"`, { id: action.id }); if (action.subItems) openPalette(action); else { try { await actionCore.executeAction(action.id, { trigger: 'palette' }); if (!action.meta?.keepPaletteOpen && paletteActionStack.value.length <= 1) isPaletteOpen.value = false; else if (!action.meta?.keepPaletteOpen && paletteActionStack.value.length > 1) navigatePaletteBack(); } catch (e) { logAction(`Error executing action "${action.id}"`, e) } } }

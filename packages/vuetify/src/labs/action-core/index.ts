@@ -12,9 +12,13 @@ export type {
   KeyBindingHandlerOptions,
   UseKeyBindingsOptions, // This is a KeyBinding related option type, often in types.ts or with useKeyBindings
   ActionsSource, // Also a core type from types.ts
-  RunInTextInputMatcher // from types.ts
-  // Add any other specific public types from types.ts that clients might need.
+  RunInTextInputMatcher, // from types.ts
+  // ShowSubItemsUISymbol is an InjectionKey (a symbol), so it's a value, not just a type.
+  // It will be exported as a value below. Its type can be inferred or imported if needed.
 } from './types';
+
+// Export ShowSubItemsUISymbol as a value
+export { ShowSubItemsUISymbol } from './types';
 
 // Main service composable and its symbol for injection
 export { useActionCore, destroyActionCoreInstance, ActionCoreSymbol } from './actionCore';

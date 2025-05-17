@@ -16,6 +16,20 @@ const logAction: ((message: string, details?: any) => void) | undefined = inject
 
 const settingsActionHotkey = ref('alt+s');
 
+// Define settingsAction separately to register its hotkey globally
+const settingsAction: ActionDefinition = {
+  id: 'sub-settings', // Keep original ID for consistency if palette refers to it
+  title: 'Go to Settings',
+  icon: 'mdi-cog',
+  hotkey: settingsActionHotkey.value,
+  runInTextInput: true,
+  hotkeyOptions: { preventDefault: true },
+  handler: () => {
+    console.log('--- SETTINGS ACTION HANDLER CALLED (SCENARIO) ---');
+    if (logAction) logAction('Navigated to Settings (via global hotkey or direct execution)');
+  }
+};
+
 const parentActionWithSubs: ActionDefinition = {
   id: 'parent-with-subs',
   title: 'Navigation Menu',
@@ -26,7 +40,10 @@ const parentActionWithSubs: ActionDefinition = {
     return new Promise(resolve => setTimeout(() => {
       resolve([
         { id: 'sub-home', title: 'Go Home', icon: 'mdi-home', handler: () => { if (logAction) logAction('Navigated to Home'); } },
-        { id: 'sub-settings', title: 'Go to Settings', icon: 'mdi-cog', hotkey: settingsActionHotkey.value, handler: () => { if (logAction) logAction('Navigated to Settings'); } },
+        // Reference the standalone settingsAction definition here for the subItems list
+        // Or, if preferred, redefine it here but without the hotkey if the global one should be sole source of truth for hotkey
+        // For simplicity and ensuring hotkey is tied to the globally registered one:
+        settingsAction, // Include the globally registered action in the sub-items list
         {
           id: 'sub-profile',
           title: 'User Profile',
@@ -48,8 +65,9 @@ const parentActionWithSubs: ActionDefinition = {
 let sourceKey: symbol | undefined;
 onMounted(() => {
   if (actionCore) {
-    sourceKey = actionCore.registerActionsSource([parentActionWithSubs]);
-    if (logAction) logAction(`Registered: ${String(parentActionWithSubs.title)} (from ScenarioActionWithSubItems)`);
+    // Register both the parent and the specific sub-item that has a global hotkey
+    sourceKey = actionCore.registerActionsSource([parentActionWithSubs, settingsAction]);
+    if (logAction) logAction(`Registered: ${String(parentActionWithSubs.title)} and ${settingsAction.title} (from ScenarioActionWithSubItems)`);
   }
 });
 
