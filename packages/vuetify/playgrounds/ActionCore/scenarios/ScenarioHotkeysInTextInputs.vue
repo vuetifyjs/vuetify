@@ -17,16 +17,52 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watchEffect, inject } from 'vue'
+import { ref, watchEffect, inject, onMounted, onUnmounted } from 'vue'
+import type { ActionDefinition } from '@/labs/action-core'
+import { useActionCore, ActionCoreSymbol } from '@/labs/action-core'
 import ScenarioCard from '../ScenarioCard.vue'
 
-// Although the action is already registered in the playground root, we keep a mirrored
-// reactive state here for the UI (does not affect registration).
+// Existing refs for UI display
 const inputVal = ref('Type here and press Enter')
 const inputFocused = ref(false)
 
-// Provide local logging via the global injectable.
-const logAction: ((message: string, details?: any) => void) | undefined = inject('logAction')
+const logAction = inject<(message: string, details?: any) => void>('logAction')
+const actionCore = inject(ActionCoreSymbol)
+
+// --- Logic moved from Playground.actionCore.vue ---
+const hotkeysInTextInputs_inputVal = ref('Type here and press Enter'); // This will be controlled by the action
+
+const inputAction: ActionDefinition = {
+  id: 'text-input-action',
+  title: 'Submit Input Field',
+  hotkey: 'enter',
+  description: 'Submits the content of the special input field below.',
+  runInTextInput: (el) => el === document.getElementById('special-text-input'),
+  hotkeyOptions: { preventDefault: true },
+  handler: () => {
+    if (logAction) logAction('Input field submitted (Enter while focused): ', hotkeysInTextInputs_inputVal.value);
+    // Update the UI input field as well
+    inputVal.value = 'Submitted: ' + hotkeysInTextInputs_inputVal.value;
+    hotkeysInTextInputs_inputVal.value = 'Submitted!'; // Update the action-specific ref
+  }
+}
+
+let scenario8SourceKey: symbol | undefined;
+
+onMounted(() => {
+  if (actionCore) {
+    scenario8SourceKey = actionCore.registerActionsSource([inputAction]);
+    if (logAction) logAction(`Registered: ${inputAction.title} (from ScenarioHotkeysInTextInputs component)`);
+  }
+})
+
+onUnmounted(() => {
+  if (actionCore && scenario8SourceKey) {
+    actionCore.unregisterActionsSource(scenario8SourceKey);
+    if (logAction) logAction(`Unregistered: ${inputAction.title} (from ScenarioHotkeysInTextInputs component)`);
+  }
+})
+// --- End of moved logic ---
 
 // Sync with global log when local value changes for visibility.
 watchEffect(() => {

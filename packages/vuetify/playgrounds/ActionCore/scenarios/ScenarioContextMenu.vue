@@ -19,13 +19,47 @@
 </template>
 
 <script setup lang="ts">
-import { ref, inject } from 'vue'
+import { ref, inject, onMounted, onUnmounted } from 'vue'
 import ScenarioCard from '../ScenarioCard.vue'
-import { useActionCore } from '../../../src/labs/action-core'
+import { type ActionDefinition, ActionCoreSymbol } from '@/labs/action-core'
 
-const actionCore = useActionCore()
+const actionCore = inject(ActionCoreSymbol)
 type LogActionFn = (message: string, details?: any) => void
 const logAction = inject<LogActionFn>('logAction')
+
+// --- Logic moved from Playground.actionCore.vue ---
+const editItemAction: ActionDefinition = {
+  id: 'ctx-edit-item',
+  title: 'Edit Item',
+  icon: 'mdi-pencil',
+  description: 'Edit the selected item (contextual).',
+  handler: (ctx) => { if (logAction) logAction('Context Menu: Edit Item triggered for', ctx?.data); }
+}
+
+const deleteItemAction: ActionDefinition = {
+  id: 'ctx-delete-item',
+  title: 'Delete Item',
+  icon: 'mdi-delete',
+  description: 'Delete the selected item (contextual).',
+  handler: (ctx) => { if (logAction) logAction('Context Menu: Delete Item triggered for', ctx?.data); }
+}
+
+let scenario14SourceKey: symbol | undefined;
+
+onMounted(() => {
+  if (actionCore) {
+    scenario14SourceKey = actionCore.registerActionsSource([editItemAction, deleteItemAction]);
+    if (logAction) logAction('Registered: Context Menu Actions (from ScenarioContextMenu component)');
+  }
+})
+
+onUnmounted(() => {
+  if (actionCore && scenario14SourceKey) {
+    actionCore.unregisterActionsSource(scenario14SourceKey);
+    if (logAction) logAction('Unregistered: Context Menu Actions (from ScenarioContextMenu component)');
+  }
+})
+// --- End of moved logic ---
 
 const items = ref([
   { id: 1, name: 'Alpha Document' },
@@ -39,13 +73,14 @@ interface Item {
 }
 
 const showContextMenu = (item: Item) => {
-   if (logAction) logAction(`Simulated context menu for: ${item.name}`)
-   // In a real app we would open a VMenu or similar; here we just provide quick triggers
-  try {
-    actionCore.executeAction('ctx-edit-item', { trigger: 'context-menu-sim', data: item })
-  } catch (error) {
-    console.error('Failed to execute context menu action:', error)
-    if (logAction) logAction(`Error executing action for: ${item.name}`, error)
-  }
+   if (logAction) logAction(`Simulated context menu for: ${item.name}. You would typically show a VMenu here with actions like Edit and Delete.`)
+   // For this playground, we'll just log and offer a way to trigger them if they were in a menu.
+   // For example, if a user clicked "Edit" in a real context menu:
+   // actionCore.executeAction('ctx-edit-item', { trigger: 'context-menu', data: item })
+   // Or for "Delete":
+   // actionCore.executeAction('ctx-delete-item', { trigger: 'context-menu', data: item })
+
+   // The buttons in the template could be modified to execute these directly if desired for quick demo,
+   // or a more complex VMenu could be built that uses actionCore.getAvailableActions(context) for example.
 }
 </script>

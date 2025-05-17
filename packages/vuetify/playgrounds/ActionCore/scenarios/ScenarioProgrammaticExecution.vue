@@ -7,11 +7,37 @@
 
 <script setup lang="ts">
 import ScenarioCard from '../ScenarioCard.vue'
-import { inject } from 'vue'
-import { useActionCore } from '../../../src/labs/action-core'
+import { inject, onMounted, onUnmounted } from 'vue'
+import { useActionCore, type ActionDefinition, ActionCoreSymbol } from '@/labs/action-core'
 
-const actionCore = useActionCore()
-const logAction: ((message: string, details?: any) => void) | undefined = inject('logAction')
+const actionCore = inject(ActionCoreSymbol)
+const logAction = inject<(message: string, details?: any) => void>('logAction')
+
+const programmaticActionDef: ActionDefinition = {
+  id: 'prog-action',
+  title: 'Programmatic Action',
+  icon: 'mdi-play-circle-outline',
+  description: 'An action meant to be called by code.',
+  handler: (ctx) => {
+    if (logAction) logAction('Programmatic Action Triggered (PROGRAMMATIC SCENARIO HANDLER)', { context: ctx });
+  }
+}
+
+let scenario10SourceKey: symbol | undefined;
+
+onMounted(() => {
+  if (actionCore) {
+    scenario10SourceKey = actionCore.registerActionsSource([programmaticActionDef]);
+    if (logAction) logAction(`Registered: ${programmaticActionDef.title} (from ScenarioProgrammaticExecution component)`);
+  }
+})
+
+onUnmounted(() => {
+  if (actionCore && scenario10SourceKey) {
+    actionCore.unregisterActionsSource(scenario10SourceKey);
+    if (logAction) logAction(`Unregistered: ${programmaticActionDef.title} (from ScenarioProgrammaticExecution component)`);
+  }
+})
 
 const triggerIt = () => {
   if (actionCore) {

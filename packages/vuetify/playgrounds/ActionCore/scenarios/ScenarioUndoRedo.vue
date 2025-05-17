@@ -38,6 +38,7 @@ const undoSomethingAction: ActionDefinition = {
   hotkey: 'ctrl+z',
   icon: 'mdi-undo-variant',
   description: 'Undoes the last "Perform Undoable Action".',
+  hotkeyOptions: { preventDefault: true },
   canExecute: () => canUndo.value, // ActionCore will respect this
   handler: () => {
     if (logAction) logAction('Undoing action. Previous data was:', lastActionData.value)

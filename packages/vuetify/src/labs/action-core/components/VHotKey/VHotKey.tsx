@@ -104,17 +104,10 @@ export const VHotKey = genericComponent()({
         return indexA - indexB;
       });
 
-      const treatCtrlAsMeta = IS_MAC &&
-        uniqueSortedModifiers.includes('ctrl') &&
-        !uniqueSortedModifiers.includes('meta') &&
-        uniqueSortedModifiers.length === 1 &&
-        mainKeys.length === 1 && /^[a-z]$/.test(mainKeys[0]);
-
       return [...uniqueSortedModifiers, ...mainKeys].map(key => {
         if (IS_MAC && key === 'meta') return '⌘';
-        if (IS_MAC && key === 'ctrl' && treatCtrlAsMeta) return '⌘';
         if (!IS_MAC && key === 'meta') return 'Ctrl';
-        if (key === 'ctrl') return 'Ctrl'; // Default display for ctrl on all platforms
+        if (key === 'ctrl') return 'Ctrl';
         if (key === 'alt') return 'Alt';
         if (key === 'shift') return 'Shift';
 

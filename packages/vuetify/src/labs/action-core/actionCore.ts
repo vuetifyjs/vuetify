@@ -176,10 +176,17 @@ class ActionCore implements ActionCorePublicAPI {
         for (const hotkeyString of hotkeyStrings) {
           const individualBindings = hotkeyString.split(',').map(s => s.trim()).filter(s => s);
           for (const binding of individualBindings) {
-            const handlerOpts: KeyBindingHandlerOptions = {};
+            const baseHotkeyOptions = currentActionDef.hotkeyOptions || {};
+            const handlerOpts: KeyBindingHandlerOptions = {
+              ...baseHotkeyOptions,
+            };
+
             const runInTextInputMatcher = currentActionDef.runInTextInput;
-            if (runInTextInputMatcher === true) handlerOpts.ignoreInputBlocker = true;
-            else handlerOpts.ignoreInputBlocker = false;
+            if (runInTextInputMatcher === true) {
+              handlerOpts.ignoreInputBlocker = true;
+            } else {
+              handlerOpts.ignoreInputBlocker = false;
+            }
 
             const unregisterFn = this.keyBindings.on(
               binding,

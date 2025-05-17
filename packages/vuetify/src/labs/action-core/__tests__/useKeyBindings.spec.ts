@@ -249,6 +249,48 @@ describe('useKeyBindings', () => {
       expect(receivedEventByHandler).toBe(dispatchedEvent);
       expect(dispatchedEvent.defaultPrevented).toBe(true);
       // stopPropagation is harder to assert directly without a more complex DOM setup or another listener
+      // For this test, focusing on defaultPrevented is sufficient for preventDefault.
+    });
+
+    it('should NOT call preventDefault if preventDefault option is false', async () => {
+      const { on } = useKeyBindings({ target });
+      const handler = vi.fn();
+      const testKey = 'x';
+
+      let receivedEventByHandler: KeyboardEvent | null = null;
+      const handlerWithEventCapture = (e: KeyboardEvent) => {
+        receivedEventByHandler = e;
+        handler(e);
+      };
+      on(testKey, handlerWithEventCapture, { preventDefault: false });
+
+      const dispatchedEvent = dispatchKeyEvent(target, 'keydown', testKey);
+      await nextTick();
+
+      expect(handler).toHaveBeenCalledTimes(1);
+      expect(receivedEventByHandler).toBe(dispatchedEvent);
+      expect(dispatchedEvent.defaultPrevented).toBe(false);
+    });
+
+    it('should NOT call preventDefault if preventDefault option is undefined', async () => {
+      const { on } = useKeyBindings({ target });
+      const handler = vi.fn();
+      const testKey = 'c';
+
+      let receivedEventByHandler: KeyboardEvent | null = null;
+      const handlerWithEventCapture = (e: KeyboardEvent) => {
+        receivedEventByHandler = e;
+        handler(e);
+      };
+      // Pass an empty options object or one without preventDefault
+      on(testKey, handlerWithEventCapture, {});
+
+      const dispatchedEvent = dispatchKeyEvent(target, 'keydown', testKey);
+      await nextTick();
+
+      expect(handler).toHaveBeenCalledTimes(1);
+      expect(receivedEventByHandler).toBe(dispatchedEvent);
+      expect(dispatchedEvent.defaultPrevented).toBe(false);
     });
   });
 

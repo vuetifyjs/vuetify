@@ -84,6 +84,16 @@ export interface ActionDefinition<T extends ActionContext = ActionContext> {
    */
   hotkey?: string | string[]
   /**
+   * Options for the hotkey binding, like preventDefault.
+   * These would be passed to useKeyBindings.
+   */
+  hotkeyOptions?: {
+    preventDefault?: boolean;
+    stopPropagation?: boolean;
+    ignoreKeyRepeat?: boolean;
+    // Note: 'passive' could also be added if needed.
+  };
+  /**
    * Determines if the hotkey can be triggered when a text input is focused.
    * - `true`: Hotkey explicitly configured to run even when inputs are focused (overrides default blocking for non-input hotkeys).
    * - `false`: Hotkey explicitly configured to NOT run when inputs are focused.

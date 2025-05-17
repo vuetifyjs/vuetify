@@ -320,6 +320,30 @@ describe('ActionCore', () => {
       expect(mockKeyBindingsOn).toHaveBeenCalledWith('ctrl+i', expect.any(Function), { ignoreInputBlocker: false });
     });
 
+    it('should pass hotkeyOptions from ActionDefinition to keyBindings.on', async () => {
+      const core = useActionCore();
+      const actionWithHotkeyOptions: ActionDefinition = createActionDef('hkWithOptions', {
+        hotkey: 'ctrl+shift+p',
+        hotkeyOptions: { preventDefault: true, stopPropagation: true, ignoreKeyRepeat: false },
+      });
+
+      core.registerActionsSource([actionWithHotkeyOptions]);
+      const resolved = core.allActions.value; // Trigger allActions computation
+      expect(resolved.length).toBe(1);
+      await nextTick(); // Allow hotkey registration
+
+      expect(mockKeyBindingsOn).toHaveBeenCalledWith(
+        'ctrl+shift+p',
+        expect.any(Function),
+        expect.objectContaining({
+          preventDefault: true,
+          stopPropagation: true,
+          ignoreKeyRepeat: false,
+          ignoreInputBlocker: false, // This is set by ActionCore based on runInTextInput (default undefined -> false)
+        })
+      );
+    });
+
     it('should call action handler and log debug messages when its hotkey is invoked', async () => {
       const core = useActionCore();
       const executeActionSpy = vi.spyOn(core, 'executeAction');
@@ -613,7 +637,7 @@ describe('ActionCore Advanced Capabilities', () => {
     core.registerActionsSource([asyncSubItemsSource]);
     const retrieved = core.getAction('asyncSubItemsAction');
     expect(retrieved).toBeDefined();
-    const subItemsPromise = retrieved?.subItems?.(); // Call without context
+    const subItemsPromise = retrieved?.subItems?.({}); // Pass empty context
     expect(subItemsPromise).toBeInstanceOf(Promise);
     return expect(subItemsPromise).resolves.toEqual([subAction]);
   });

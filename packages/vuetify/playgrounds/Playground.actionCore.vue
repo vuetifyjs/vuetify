@@ -135,7 +135,6 @@ import {
   ActionCoreSymbol,
   type ActionDefinition,
   type ActionContext,
-  type ActionsSource,
 } from '@/labs/action-core'
 import { VHotKey } from '@/labs/action-core/components/VHotKey/VHotKey'
 import ScenarioCard from '@playgrounds/ActionCore/ScenarioCard.vue'
@@ -219,121 +218,19 @@ const handlePaletteKeydown = (event: KeyboardEvent) => { const items = currentPa
 // --- Scenario Implementations Setup ---
 
 // Scenario 7: Sequence Hotkey - Action globally registered, UI component just displays info.
-const konamiAction: ActionDefinition = {
-  id: 'konami', title: 'Konami Code!', hotkey: 'arrowup-arrowup-arrowdown-arrowdown-arrowleft-arrowright-arrowleft-arrowright-b-a',
-  description: 'The classic cheat code.',
-  handler: () => {
-    logAction('KONAMI CODE ACTIVATED! +30 Lives!')
-    alert('Konami Code Activated!')
-  }
-}
-let scenario7SourceKey: symbol;
-onMounted(() => {
-  if (actionCore) {
-    scenario7SourceKey = actionCore.registerActionsSource([konamiAction]);
-    if (logAction) logAction(`Registered: ${konamiAction.title} (from main playground setup for SequenceHotkey)`);
-  }
-})
-onUnmounted(() => {
-  if (actionCore && scenario7SourceKey) actionCore.unregisterActionsSource(scenario7SourceKey);
-})
+// MOVED TO: ScenarioSequenceHotkey.vue
 
 // Scenario 8: Hotkeys In Text Inputs - Action globally registered, UI component provides the input.
-const hotkeysInTextInputs_inputVal = ref('Type here and press Enter');
-const inputAction: ActionDefinition = {
-  id: 'text-input-action', title: 'Submit Input Field', hotkey: 'enter',
-  description: 'Submits the content of the special input field below.',
-  runInTextInput: (el) => el === document.getElementById('special-text-input'),
-  handler: () => {
-    logAction('Input field submitted (Enter while focused):', hotkeysInTextInputs_inputVal.value);
-    hotkeysInTextInputs_inputVal.value = 'Submitted!';
-  }
-}
-let scenario8SourceKey: symbol;
-onMounted(() => {
-  if (actionCore) {
-    scenario8SourceKey = actionCore.registerActionsSource([inputAction]);
-    if (logAction) logAction(`Registered: ${inputAction.title} (from main playground setup for HotkeysInTextInputs)`);
-  }
-})
-onUnmounted(() => {
-  if (actionCore && scenario8SourceKey) actionCore.unregisterActionsSource(scenario8SourceKey);
-})
+// MOVED TO: ScenarioHotkeysInTextInputs.vue
 
 // Scenario 10: Programmatic Execution - Action globally registered, UI component provides trigger.
-const programmaticActionDef: ActionDefinition = { // Renamed to avoid conflict with component name
-  id: 'prog-action', title: 'Programmatic Action', icon: 'mdi-play-circle-outline',
-  description: 'An action meant to be called by code.',
-  handler: (ctx) => {
-    if (logAction) logAction('Programmatic Action Triggered (GLOBAL HANDLER)', { context: ctx });
-  }
-}
-let scenario10SourceKey: symbol;
-onMounted(() => {
-  if (actionCore) {
-    scenario10SourceKey = actionCore.registerActionsSource([programmaticActionDef]);
-    if (logAction) logAction(`Registered: ${programmaticActionDef.title} (from main playground setup for ProgrammaticExecution)`);
-  }
-})
-onUnmounted(() => {
-  if (actionCore && scenario10SourceKey) actionCore.unregisterActionsSource(scenario10SourceKey);
-})
+// MOVED TO: ScenarioProgrammaticExecution.vue
 
 // Scenario 13: Undo Redo - Actions globally registered, UI component provides triggers.
-const doSomethingAction: ActionDefinition = {
-  id: 'do-something-undoable', title: 'Perform Undoable Action', icon: 'mdi-target-variant',
-  description: 'Performs an action that can be "undone".',
-  meta: { undoActionId: 'undo-the-something' },
-  handler: (ctx?: ActionContext) => {
-    // In a real app, this would modify some state that the undo action can revert.
-    // For POC, we just log and simulate a state change for the canExecute of undo.
-    const data = { item: `Item ${Date.now()}`, previousState: Math.random() > 0.5 ? 'State A' : 'State B' };
-    if (logAction) logAction('Performed undoable action:', data);
-    // This part would normally be managed by the ScenarioUndoRedo component for its own UI:
-    // lastActionData.value = data;
-  }
-}
-const undoSomethingAction: ActionDefinition = {
-  id: 'undo-the-something', title: 'Undo Last Action', hotkey: 'ctrl+z', icon: 'mdi-undo-variant',
-  description: 'Undoes the last "Perform Undoable Action".',
-  // canExecute: () => !!lastActionData.value, // This state would be managed by the component
-  handler: () => {
-    if (logAction) logAction('Undoing action. (Simulated)');
-    // lastActionData.value = null;
-  }
-}
-let scenario13SourceKey: symbol;
-onMounted(() => {
-  if (actionCore) {
-    scenario13SourceKey = actionCore.registerActionsSource([doSomethingAction, undoSomethingAction]);
-    if (logAction) logAction('Registered: Undo/Redo Actions (globally for ScenarioUndoRedo component)');
-  }
-})
-onUnmounted(() => {
-  if (actionCore && scenario13SourceKey) actionCore.unregisterActionsSource(scenario13SourceKey);
-})
+// MOVED TO: ScenarioUndoRedo.vue
 
 // Scenario 14: Context Menu - Actions globally registered, UI component provides triggers.
-const editItemAction: ActionDefinition = {
-  id: 'ctx-edit-item', title: 'Edit Item', icon: 'mdi-pencil',
-  description: 'Edit the selected item (contextual).',
-  handler: (ctx) => { if (logAction) logAction('Context Menu: Edit Item triggered for', ctx.data); }
-}
-const deleteItemAction: ActionDefinition = {
-  id: 'ctx-delete-item', title: 'Delete Item', icon: 'mdi-delete',
-  description: 'Delete the selected item (contextual).',
-  handler: (ctx) => { if (logAction) logAction('Context Menu: Delete Item triggered for', ctx.data); }
-}
-let scenario14SourceKey: symbol;
-onMounted(() => {
-  if (actionCore) {
-    scenario14SourceKey = actionCore.registerActionsSource([editItemAction, deleteItemAction]);
-    if (logAction) logAction('Registered: Context Menu Actions (globally for ScenarioContextMenu component)');
-  }
-})
-onUnmounted(() => {
-  if (actionCore && scenario14SourceKey) actionCore.unregisterActionsSource(scenario14SourceKey);
-})
+// MOVED TO: ScenarioContextMenu.vue
 
 </script>
 
