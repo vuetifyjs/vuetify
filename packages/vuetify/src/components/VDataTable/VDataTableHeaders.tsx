@@ -247,7 +247,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
           { ...props.headerProps }
         >
           <div class="v-data-table-header__content">
-            { slots['mobile.header']?.(slotProps.value) ||
+            { slots['mobile.header']?.(slotProps.value) ??
               (displayItems.value.length > 0 && (
               <VSelect
                 chips
