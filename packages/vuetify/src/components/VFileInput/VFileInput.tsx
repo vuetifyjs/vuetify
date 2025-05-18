@@ -105,7 +105,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
         const newValue = filterFilesByAcceptType(val, acceptType)
         if (inputRef.value) {
           const dataTransfer = new DataTransfer()
-          for (const file of newValue) { 
+          for (const file of newValue) {
             dataTransfer.items.add(file)
           }
           inputRef.value.files = dataTransfer.files
