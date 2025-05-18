@@ -94,6 +94,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
 
   setup (props, { attrs, emit, slots }) {
     const { t } = useLocale()
+    const inputRef = ref<HTMLInputElement>()
     const model = useProxiedModel(
       props,
       'modelValue',
@@ -136,7 +137,6 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
     const isActive = toRef(() => isFocused.value || props.active)
     const isPlainOrUnderlined = computed(() => ['plain', 'underlined'].includes(props.variant))
     const isDragging = shallowRef(false)
-    const inputRef = ref<HTMLInputElement>()
 
     function onFocus () {
       if (inputRef.value !== document.activeElement) {
