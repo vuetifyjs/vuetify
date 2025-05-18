@@ -167,12 +167,13 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
       e.stopPropagation()
 
       const clipboardText = e?.clipboardData?.getData('Text').slice(0, length.value) ?? ''
+      const finalIndex = clipboardText.length - 1 === -1 ? index : clipboardText.length - 1
 
       if (isValidNumber(clipboardText)) return
 
       model.value = clipboardText.split('')
 
-      inputRef.value?.[clipboardText.length - 1 ?? index].focus()
+      inputRef.value?.[finalIndex].focus()
     }
 
     function reset () {
