@@ -50,9 +50,9 @@
       <v-pie
         :formats="{ tooltipSubtitle: '[value]%' }"
         :hover-scale=".1"
+        :inner-cut="60"
         :items="items"
         :legend="{ position: 'left' }"
-        :width="30"
         hide-slice
       >
         <template v-slot:center-content>

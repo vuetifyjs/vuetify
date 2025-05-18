@@ -19,7 +19,7 @@ The `v-pie` component is design to display either pie or a donut chart with inte
 
 ::: warning
 
-This feature requires [v3.8.0](/getting-started/release-notes/?version=v3.8.0)
+This feature requires [v3.9.0](/getting-started/release-notes/?version=v3.9.0)
 
 :::
 
