@@ -159,7 +159,11 @@ export const useSteps = (props: SliderProps) => {
 
     const clamped = clamp(value, min.value, max.value)
     const offset = min.value % step.value
-    const newValue = Math.round((clamped - offset) / step.value) * step.value + offset
+    let newValue = Math.round((clamped - offset) / step.value) * step.value + offset
+
+    if (newValue + step.value > max.value && clamped > newValue) {
+      newValue = max.value
+    }
 
     return parseFloat(Math.min(newValue, max.value).toFixed(decimals.value))
   }
