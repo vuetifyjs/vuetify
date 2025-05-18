@@ -4,6 +4,15 @@ export interface PieItem {
   value: number
   title: string
   pattern?: string
+  raw?: Record<string, any>
+}
+
+export interface PieSegmentProps {
+  value: number
+  gap: number
+  innerCut: number
+  rounded: number
+  zoom?: number
 }
 
 export type TextTemplate<T = any> = string | ((v: PieItem) => string)

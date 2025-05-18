@@ -19,10 +19,10 @@
     <v-sheet class="pa-6" elevation="6" rounded="xl">
       <v-pie
         :formats="{ tooltipSubtitle: (s) => `${formatNumber(s.value)} respondents (${(100 * s.value / total).toFixed(1)}%)` }"
+        :inner-cut="85"
         :items="items"
         :legend="legendConfig"
         :size="300"
-        :width="25"
         hide-slice
       >
         <template v-slot:legend-text="{ item }">

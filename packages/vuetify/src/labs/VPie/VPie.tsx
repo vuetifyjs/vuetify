@@ -22,7 +22,11 @@ import type { PieItem, TextTemplate } from './types'
 
 export type VPieSlots = {
   'center-content': { total: number }
-  legend: { isActive: (item: PieItem) => boolean, toggle: (item: PieItem) => void }
+  legend: {
+    isActive: (item: PieItem) => boolean
+    toggle: (item: PieItem) => void
+    items: PieItem[]
+  }
   'legend-text': { item: PieItem }
   title: never
   tooltip: { item: PieItem }
@@ -31,15 +35,27 @@ export type VPieSlots = {
 export const makeVPieProps = propsFactory({
   title: String,
   items: {
-    type: Array as PropType<PieItem[]>,
+    type: Array as PropType<Record<string, any> | { color?: string, pattern?: string }[]>,
     default: () => [],
+  },
+  itemKey: {
+    type: String,
+    default: 'key',
+  },
+  itemValue: {
+    type: String,
+    default: 'value',
+  },
+  itemTitle: {
+    type: String,
+    default: 'title',
   },
   size: {
     type: Number,
     default: 250,
   },
   rotate: Number,
-  width: Number,
+  innerCut: Number,
   hoverScale: Number,
   gaugeCut: {
     type: Number,
@@ -66,7 +82,7 @@ export const makeVPieProps = propsFactory({
   ...makeDensityProps(),
   ...pick(makeVPieSegmentProps(), [
     'speed',
-    'padAngle',
+    'gap',
     'rounded',
     'hideSlice',
   ]),
@@ -96,16 +112,32 @@ export const VPie = genericComponent<VPieSlots>()({
         : formatTextTemplate(legendConfig.value.textFormat, item)
     })
 
+    const arcs = computed<PieItem[]>(() => {
+      // hidden items get (value: 0) to trigger disappearing animation
+      return props.items
+        .filter(Boolean)
+        .map((item: any) => {
+          return {
+            key: item[props.itemKey],
+            color: item.color,
+            value: item[props.itemValue],
+            title: String(item[props.itemTitle]),
+            pattern: item.pattern,
+            raw: item,
+          } as PieItem
+        })
+    })
+
     const visibleItemsKeys = ref<PieItem['key'][]>([])
 
-    watch(() => props.items.length, () => {
+    watch(() => arcs.value.length, () => {
       // reset when number of items changes
-      visibleItemsKeys.value = props.items.map(item => item.key)
+      visibleItemsKeys.value = arcs.value.map(a => a.key)
     }, { immediate: true })
 
     const visibleItems = computed(() => {
       // hidden items get (value: 0) to trigger disappearing animation
-      return props.items.map(item => {
+      return arcs.value.map(item => {
         return visibleItemsKeys.value.includes(item.key)
           ? item
           : { ...item, value: 0 }
@@ -163,7 +195,7 @@ export const VPie = genericComponent<VPieSlots>()({
     return () => {
       const itemProps = VPieSegment.filterProps(pick(props, [
         'speed',
-        'padAngle',
+        'gap',
         'rounded',
         'hideSlice',
       ]))
@@ -193,7 +225,7 @@ export const VPie = genericComponent<VPieSlots>()({
               viewBox="0 0 100 100"
               onMousemove={ onMousemove }
             >
-              { props.items.map((item, index) => (
+              { arcs.value.map((item, index) => (
                 <VPieSegment
                   { ...itemProps }
                   key={ item.key }
@@ -201,7 +233,7 @@ export const VPie = genericComponent<VPieSlots>()({
                   value={ isActive(item) ? arcSize(item.value) : 0 }
                   rotate={ arcOffset(index) }
                   pattern={ item.pattern }
-                  width={ props.width ?? 100 }
+                  innerCut={ props.innerCut }
                   zoom={ clamp(props.hoverScale ?? 0.05, 0, 0.25) }
                   onMouseenter={ () => onMouseenter(item) }
                   onMouseleave={ () => onMouseleave() }
@@ -224,14 +256,14 @@ export const VPie = genericComponent<VPieSlots>()({
 
           { legendConfig.value.visible && (
             <div class="v-pie__legend" key="legend">
-              { slots.legend?.({ isActive, toggle }) ?? (
+              { slots.legend?.({ isActive, toggle, items: arcs.value }) ?? (
                 <VChipGroup
                   column
                   multiple
                   model-value={ visibleItemsKeys.value }
                   direction={ legendDirection.value }
                 >
-                  { props.items.map(item => (
+                  { arcs.value.map(item => (
                     <VChip
                       key={ item.key }
                       density={ props.density }

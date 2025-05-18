@@ -30,10 +30,10 @@
 
         <template v-if="model !== 'default'">
           <v-slider
-            v-model="width"
-            label="Width"
-            max="70"
-            min="5"
+            v-model="innerCut"
+            label="Inner cut"
+            max="99"
+            min="0"
           ></v-slider>
 
           <v-slider
@@ -50,7 +50,7 @@
             label="Show inner slice"
           ></v-checkbox>
 
-          <v-chip-group v-model="padAngle">
+          <v-chip-group v-model="gap">
             <v-chip :value="4" text="spaced" filter></v-chip>
             <v-chip :value="0" text="tight" filter></v-chip>
           </v-chip-group>
@@ -79,10 +79,10 @@
   const innerSliceVisible = ref(false)
   const size = ref(250)
 
-  const width = ref(30)
+  const innerCut = ref(85)
   const rotate = ref()
   const rounded = ref(0)
-  const padAngle = ref(0)
+  const gap = ref(0)
   const gaugeCut = ref(120)
   const props = computed(() => {
     return {
@@ -91,10 +91,10 @@
       hideSlice: model.value === 'gauge' || (model.value === 'donut' ? !innerSliceVisible.value : undefined),
       rotate: rotate.value || undefined,
       rounded: rounded.value || undefined,
-      padAngle: padAngle.value || undefined,
+      gap: gap.value || undefined,
       gaugeCut: model.value === 'gauge' ? gaugeCut.value : undefined,
       size: size.value !== 250 ? size.value : undefined,
-      width: model.value !== 'default' ? width.value : undefined,
+      innerCut: model.value !== 'default' ? innerCut.value : undefined,
     }
   })
 
