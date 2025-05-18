@@ -247,9 +247,8 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
           { ...props.headerProps }
         >
           <div class="v-data-table-header__content">
-            { slots['mobile.header']
-              ? slots['mobile.header']?.(slotProps.value)
-              : displayItems.value.length > 0 && (
+            { slots['mobile.header']?.(slotProps.value) ||
+              (displayItems.value.length > 0 && (
               <VSelect
                 chips
                 class="v-data-table__td-sort-select"
@@ -287,7 +286,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
                   ),
                 }}
               </VSelect>
-            )}
+            ))}
           </div>
         </VDataTableColumn>
       )
