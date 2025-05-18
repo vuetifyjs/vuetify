@@ -100,7 +100,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
       'modelValue',
       props.modelValue,
       val => wrapInArray(val),
-      val => {
+      (val, event) => {
         const acceptType = inputRef?.value?.accept
         const newValue = filterFilesByAcceptType(val, acceptType)
         if (inputRef.value) {
@@ -109,7 +109,10 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
             dataTransfer.items.add(file)
           }
           inputRef.value.files = dataTransfer.files
-          inputRef.value.dispatchEvent(new Event('change', { bubbles: true }))
+          const eventType = event?.type
+          if (eventType && (eventType === 'change' || eventType === 'input')) {
+            inputRef.value.dispatchEvent(new Event(eventType, { bubbles: true }))
+          }
         }
         return !props.multiple && Array.isArray(newValue) ? newValue[0] : newValue
       },
