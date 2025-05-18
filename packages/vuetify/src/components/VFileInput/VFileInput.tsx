@@ -94,7 +94,6 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
 
   setup (props, { attrs, emit, slots }) {
     const { t } = useLocale()
-    const inputRef = ref<HTMLInputElement>()
     const model = useProxiedModel(
       props,
       'modelValue',
