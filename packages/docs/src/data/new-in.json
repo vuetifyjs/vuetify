@@ -123,6 +123,11 @@
       "end": "3.2.0"
     }
   },
+  "VSlideGroup": {
+    "props": {
+      "contentClass": "3.9.0"
+    }
+  },
   "VSnackbar": {
     "props": {
       "timer": "3.4.0",
