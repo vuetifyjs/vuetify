@@ -2,11 +2,11 @@
   <div class="d-flex justify-center py-3">
     <v-pie
       :formats="{ tooltipSubtitle: '[value]%' }"
+      :gap="4"
       :inner-cut="85"
       :items="items"
       :legend="{ textFormat: '[title] ([value]%)' }"
       hover-scale="0"
-      pad-angle="4"
       size="300"
       hide-slice
     ></v-pie>
