@@ -15,8 +15,8 @@ const actionCore = useActionCore()
 const logAction: ((message: string, details?: any) => void) | undefined = inject('logAction')
 
 // Local state for this scenario's undo capability
-const lastActionData = ref<any>(null)
-const canUndo = computed(() => !!lastActionData.value)
+const undoStack = ref<any[]>([])
+const canUndo = computed(() => undoStack.value.length > 0)
 
 // Define actions here to access their hotkey in the template
 const doSomethingAction: ActionDefinition = {
@@ -28,7 +28,7 @@ const doSomethingAction: ActionDefinition = {
   handler: (ctx?: ActionContext) => {
     const data = { item: `Item ${Date.now()}`, previousState: Math.random() > 0.5 ? 'State A' : 'State B' }
     if (logAction) logAction('Performed undoable action:', data)
-    lastActionData.value = data // This component manages its own undo state for the POC
+    undoStack.value.push(data) // Push onto the stack
   }
 }
 
@@ -41,8 +41,12 @@ const undoSomethingAction: ActionDefinition = {
   hotkeyOptions: { preventDefault: true },
   canExecute: () => canUndo.value, // ActionCore will respect this
   handler: () => {
-    if (logAction) logAction('Undoing action. Previous data was:', lastActionData.value)
-    lastActionData.value = null
+    if (canUndo.value) {
+      const lastAction = undoStack.value.pop() // Pop from the stack
+      if (logAction) logAction('Undoing action. Previous data was:', lastAction)
+    } else {
+      if (logAction) logAction('Nothing to undo.')
+    }
   }
 }
 

@@ -46,7 +46,7 @@ This is the simplest form. You provide a direct array of `ActionDefinition` obje
     ];
 
     // When registering with ActionCore:
-    // actionCore.registerActionsSource(globalActions);
+    actionCore.registerActionsSource(globalActions);
     ```
 
 ### 2. Reactive Array: `Ref<ActionDefinition[]>`

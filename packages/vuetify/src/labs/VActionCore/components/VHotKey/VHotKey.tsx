@@ -71,18 +71,20 @@ export const VHotKey = genericComponent()({
       const hotkeyToParse = internalHotkeyString.value;
       if (!hotkeyToParse) return [];
 
+      // Use a regex to better split while preserving sequences like '-'
+      // This simple split by '+' assumes modifiers are always joined by '+'
+      // and sequences are not mixed with combinations in a single hotkey string segment handled by VHotKey.
+      // VHotKey is designed for single combination display primarily.
       const rawKeys = hotkeyToParse.split('+').map(k => k.trim().toLowerCase());
 
-      // Order for sorting modifiers display
       const modifierDisplayOrder = ['meta', 'ctrl', 'alt', 'shift'];
-      // Aliases that should be treated as 'meta' internally for platform checks
-      const metaAliases = ['meta', 'cmd', 'command', 'super', 'win', 'windows', 'cmdorctrl'];
-      // Aliases for ctrl
+      const metaAliases = ['meta', 'cmd', 'command', 'super', 'win', 'windows', 'cmdorctrl', 'primary'];
       const ctrlAliases = ['ctrl', 'control'];
-      // Aliases for alt
       const altAliases = ['alt', 'option'];
-      // Aliases for shift
       const shiftAliases = ['shift'];
+
+      // Updated list to include 'k' and other common letters for this heuristic
+      const commonMacCtrlAsMetaKeys = ['a', 'c', 'f', 'k', 'n', 'o', 'p', 'q', 's', 't', 'v', 'w', 'x', 'z'];
 
       const modifiers: string[] = [];
       const mainKeys: string[] = [];
@@ -96,16 +98,39 @@ export const VHotKey = genericComponent()({
       });
 
       const uniqueSortedModifiers = [...new Set(modifiers)].sort((a, b) => {
-        // Ensure consistent sort order even if one is not in displayOrder (should not happen with current logic)
         const indexA = modifierDisplayOrder.indexOf(a);
         const indexB = modifierDisplayOrder.indexOf(b);
-        if (indexA === -1 && indexB === -1) return 0; // both not found, keep order
-        if (indexA === -1) return 1; // a not found, b comes first
-        if (indexB === -1) return -1; // b not found, a comes first
+        if (indexA === -1 && indexB === -1) return 0;
+        if (indexA === -1) return 1;
+        if (indexB === -1) return -1;
         return indexA - indexB;
       });
 
-      return [...uniqueSortedModifiers, ...mainKeys].map(key => {
+      let displayModifiers = [...uniqueSortedModifiers];
+      const hasCtrl = uniqueSortedModifiers.includes('ctrl');
+      const hasMeta = uniqueSortedModifiers.includes('meta');
+      const hasAlt = uniqueSortedModifiers.includes('alt');
+
+      // Corrected Heuristic: On Mac, if 'ctrl' is the *only* modifier present
+      // (and 'meta' is not already there from an alias), and it's a common command key,
+      // then display 'ctrl' as 'meta' (⌘).
+      const canConsiderCtrlAsMeta = hasCtrl && !hasMeta && !hasAlt && uniqueSortedModifiers.length === 1;
+
+      if (IS_MAC && canConsiderCtrlAsMeta && mainKeys.length === 1 && commonMacCtrlAsMetaKeys.includes(mainKeys[0])) {
+        displayModifiers = uniqueSortedModifiers.map(m => m === 'ctrl' ? 'meta' : m);
+        // Re-sort is important if 'meta' was introduced and its order might change relative to (now non-existent) others.
+        // However, since canConsiderCtrlAsMeta implies uniqueSortedModifiers was just ['ctrl'], displayModifiers will become ['meta']. Sort is trivial but harmless.
+        displayModifiers.sort((a,b) => modifierDisplayOrder.indexOf(a) - modifierDisplayOrder.indexOf(b));
+      }
+
+      // Filter out duplicate 'meta' if 'ctrl' was converted but 'meta' was already present (e.g. from 'cmdorctrl')
+      // This check might be redundant if the canConsiderCtrlAsMeta already ensures !hasMeta from uniqueSortedModifiers.
+      if (displayModifiers.filter(m => m === 'meta').length > 1) {
+        const firstMetaIndex = displayModifiers.indexOf('meta');
+        displayModifiers = displayModifiers.filter((m, index) => m !== 'meta' || index === firstMetaIndex);
+      }
+
+      return [...new Set(displayModifiers), ...mainKeys].map(key => {
         let text = key;
         let label = key;
 
@@ -125,11 +150,11 @@ export const VHotKey = genericComponent()({
             text = props.displayMode === 'symbol' ? '⌥' : 'Option';
             label = 'Option';
           } else {
-            text = 'Alt'; // No common symbol, 'Alt' is fine for text too
+            text = 'Alt';
             label = 'Alt';
           }
         } else if (key === 'shift') {
-          text = 'Shift'; // No common symbol, 'Shift' is fine for text too
+          text = 'Shift';
           label = 'Shift';
         } else if (key === 'arrowup') {
           text = props.displayMode === 'symbol' ? '↑' : 'Up Arrow';

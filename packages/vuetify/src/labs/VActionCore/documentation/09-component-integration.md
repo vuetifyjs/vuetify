@@ -1,134 +1,415 @@
-# 9. Component Integration: Connecting Actions to Your UI
+# 9. Integrating Actions with Your UI (Application-Level Focus)
 
-While ActionCore provides a powerful centralized system for defining and managing actions, its true value is realized when these actions are seamlessly connected to your Vuetify UI components. ActionCore offers an opt-in integration mechanism for components like `VBtn`, `VListItem`, etc., allowing them to directly execute actions.
+This chapter outlines the recommended strategies for connecting ActionCore actions to your Vuetify UI components. The emphasis is on **application-level integration**, where your application logic or custom components bridge ActionCore functionalities with UI elements.
 
-This chapter explores how to use the `command` and `commandData` props to link UI elements to ActionCore actions, and the underlying mechanisms that enable this.
+**Note on Previous Approaches:** Direct, deep integration of ActionCore into core Vuetify components via a `command` prop (and the associated `useCommandable` composable for this purpose) is **deprecated and no longer the primary recommended strategy**. While `useCommandable` might still be used for building custom commandable components, the patterns below describe the standard way to connect actions to your UI.
 
-## The `command` Prop: Declarative Action Binding
+## Core Principles of Application-Level Integration
 
-Supported Vuetify components (initially `VBtn`, with others to follow) can be enhanced with a `command` prop. This prop allows you to declaratively link the component to an ActionCore action.
+### 1. Access ActionCore
+Ensure `ActionCore` is initialized (e.g., via `app.use(createVuetify({ actionCore: { /* options */ } }))`) and provided in your application. You can then access the ActionCore instance in your Vue components or composables using `useActionCore()`:
 
 ```typescript
-// Props available on integrated components (e.g., VBtn)
-interface CommandableProps {
-  command?: string | ActionDefinition; // The action to execute
-  commandData?: any; // Contextual data for the action
+// In your component's setup or a composable
+import { useActionCore } from '@/labs/VActionCore'; // Ensure path is correct
+
+const actionCore = useActionCore();
+
+if (!actionCore) {
+  // Handle cases where ActionCore might not be available, if necessary
+  console.warn('ActionCore instance not found. UI interactions may not be fully functional.');
 }
 ```
 
-*   **`command?: string | ActionDefinition`**
-    *   **`string` (Action ID):** You can pass the unique `id` of a globally registered action. When the component is interacted with (e.g., clicked), it will attempt to execute the action with this ID.
-        ```vue
-        <template>
-          <VBtn command="file.save">Save File</VBtn>
-          <VBtn command="theme.toggle">Toggle Theme</VBtn>
-        </template>
-        ```
-    *   **`ActionDefinition` (Inline Object):** For actions that are highly specific to a single component instance or don't warrant global registration, you can pass an entire `ActionDefinition` object directly to the `command` prop. ActionCore (via the `useCommandable` composable) will temporarily register this inline action for the lifecycle of the component and execute it.
-        ```vue
-        <template>
-          <VBtn :command="{
-            id: 'local.component.action',
-            title: 'Perform Local Task',
-            handler: () => console.log('Local task executed!')
-          }">
-            Do It Locally
-          </VBtn>
-        </template>
-        ```
-        **Note:** Inline actions are auto-generated an internal ID if one isn't provided, but it's good practice to provide a descriptive one.
+### 2. Trigger Actions from Component Events
+In your component's template or `<script setup>`, call `actionCore.executeAction()` in response to user interactions, such as button clicks or list item selections. Provide a relevant `ActionContext`.
 
-*   **`commandData?: any`**
-    *   This prop allows you to pass specific contextual data to the action when it's executed by the component. This data will be available in the `ActionContext.data` property within the action's `handler` and `canExecute` functions.
-    *   This is particularly useful for actions that operate on specific items, like in a list or a context menu.
-    ```vue
-    <template>
-      <div v-for="item in items" :key="item.id">
-        <span>{{ item.name }}</span>
-        <VBtn
-          command="item.delete"
-          :command-data="{ itemId: item.id, itemName: item.name }"
-          icon="mdi-delete"
-        />
-      </div>
-    </template>
+```vue
+<template>
+  <v-btn @click="triggerSave">Save Document</v-btn>
+</template>
 
-    // ActionDefinition for 'item.delete'
-    // {
-    //   id: 'item.delete',
-    //   title: 'Delete Item',
-    //   handler: (ctx) => {
-    //     console.log('Deleting item:', ctx.data.itemId, ctx.data.itemName);
-    //     // Call API to delete ctx.data.itemId
-    //   }
-    // }
-    ```
+<script setup lang="ts">
+import { useActionCore } from '@/labs/VActionCore';
 
-## Enabling Component Integration (`ActionCoreOptions`)
+const actionCore = useActionCore();
 
-Component integration with ActionCore is **opt-in** by default. To enable it, you need to configure `ActionCoreOptions` when initializing Vuetify.
+const triggerSave = async () => {
+  if (!actionCore) return;
+  try {
+    // Provide a descriptive trigger and any relevant data
+    await actionCore.executeAction('file.save', {
+      trigger: 'ui-button-click',
+      data: { sourceComponent: 'MyEditorToolbar' }
+    });
+    // Handle success (e.g., show notification)
+  } catch (error) {
+    // Handle error (e.g., show error message)
+    console.error("Failed to execute 'file.save':", error);
+  }
+};
+</script>
+```
 
-```typescript
-// In your Vuetify plugin setup (e.g., main.ts or plugins/vuetify.ts)
-import { createVuetify } from 'vuetify';
-import { useActionCore, ActionCoreSymbol } from '@/labs/action-core'; // Ensure path is correct
-// ... other imports
+### 3. Reflect Action State in UI (Dynamically)
+To make your UI components (buttons, menu items, etc.) dynamically reflect an action's state (e.g., its title, icon, or disabled status), you can retrieve the `ActionDefinition` using `actionCore.getAction(actionId)` and bind to its properties.
 
-const vuetify = createVuetify({
-  // ... other Vuetify options
-  actionCore: {
-    // Option 1: Enable for all supported components
-    componentIntegration: true,
+Since `actionCore.allActions` (which `getAction` uses) is reactive, you can use `computed` or `watchEffect` to keep your local reference to the action definition up-to-date.
 
-    // Option 2: Enable per-component
-    // componentIntegration: {
-    //   VBtn: true,
-    //   VListItem: true,
-    //   // VSwitch: false, // Explicitly disable for VSwitch if needed
-    // }
+```vue
+<template>
+  <v-btn
+    :disabled="isActionDisabled"
+    @click="handleActionExecution"
+  >
+    <v-icon v-if="actionDef?.icon" :start="!!actionDef.title">{{ actionDef.icon }}</v-icon>
+    {{ actionDef?.title || 'Default Action Title' }}
+  </v-btn>
+</template>
+
+<script setup lang="ts">
+import { ref, computed, watchEffect, isRef } from 'vue';
+import { useActionCore, type ActionDefinition } from '@/labs/VActionCore';
+
+const props = defineProps<{ actionId: string }>();
+const actionCore = useActionCore();
+const actionDef = ref<ActionDefinition | undefined>();
+
+watchEffect(() => {
+  if (actionCore) {
+    actionDef.value = actionCore.getAction(props.actionId);
   }
 });
 
-// If not using createVuetify to provide, ensure you provide it if ActionCore is managed separately.
-// const actionCoreInstance = useActionCore(vuetify.framework.options.actionCore ?? {});
-// app.provide(ActionCoreSymbol, actionCoreInstance);
+const isActionDisabled = computed(() => {
+  if (!actionDef.value) return true;
+  if (isRef(actionDef.value.disabled)) return actionDef.value.disabled.value;
+  if (typeof actionDef.value.disabled === 'boolean') return actionDef.value.disabled;
+  if (actionDef.value.canExecute) {
+    // Note: canExecute might need a context. For a generic UI binding,
+    // you might not have a rich context. Assume a basic one or make it conditional.
+    return !actionDef.value.canExecute({ trigger: 'ui-check' });
+  }
+  return false;
+});
+
+const handleActionExecution = async () => {
+  if (actionCore && actionDef.value && !isActionDisabled.value) {
+    await actionCore.executeAction(actionDef.value.id, { trigger: `ui-element-${props.actionId}` });
+  }
+};
+</script>
 ```
+**Key points for dynamic state:**
+*   `actionCore.getAction(actionId)` provides the *effective* action definition, including any active profile overrides.
+*   Properties like `title`, `icon`, and `disabled` on an `ActionDefinition` can themselves be `Ref`s. Your template or computed properties should account for this (e.g., accessing `.value` or using `isRef`).
 
-*   If `actionCore.componentIntegration` is `undefined` or `false` (the default if `actionCore` options are not provided or `componentIntegration` is omitted), the `command` prop on components will have no effect.
-*   `true`: Enables integration for all components that support the `command` prop.
-*   `Record<string, boolean>`: Allows fine-grained control, enabling or disabling integration for specific component names (e.g., `VBtn: true`).
+## Detailed Integration Patterns
 
-ActionCore provides a method `isComponentIntegrationEnabled(componentName: string)` that components use internally to check if they should activate their `command` prop logic.
+Here are specific recommended patterns for common UI integration scenarios:
 
-## `useCommandable` Composable: The Engine Behind Integration
+### 1. Navigation Actions
 
-The `command` prop functionality within components is powered by the `useCommandable` composable. This composable is used internally by Vuetify components and generally doesn't need to be called directly by application developers unless building custom commandable components.
+For actions that trigger client-side navigation (e.g., using Vue Router), the goal is to maintain a single source of truth for routes, ensure accessibility (proper `<a>` tags with `href`), and integrate seamlessly with ActionCore.
 
-Its responsibilities include:
+**Recommended Pattern: Centralized Navigation Definitions**
 
-*   Injecting the `ActionCore` service.
-*   Checking if integration is enabled for the host component.
-*   Watching the `command` and `commandData` props for changes.
-*   If `props.command` is an `ActionDefinition` object, it registers this definition with `ActionCore` and unregisters it when the component unmounts or the prop changes.
-*   Providing the resolved `ActionDefinition` (whether globally registered or inline) to the component.
-*   Exposing an `executeCommand` function that the component calls on interaction (e.g., `onClick`). This function prepares an `ActionContext` (including `trigger: 'component-VBtn'` and `data: props.commandData`) and calls `actionCore.executeAction()`.
+1.  **Define Navigation Items Centrally:** Create an array or object with your navigation link definitions. Each definition should hold information for both `vue-router` (`<router-link>`) and `ActionCore`.
 
-## Behavior and Precedence
+    ```typescript
+    // src/config/navigation.ts (example)
+    import type { RouteLocationRaw } from 'vue-router';
 
-When a component like `VBtn` has a `command` prop and integration is enabled:
+    export interface AppNavLink {
+      id: string; // Unique ID for ActionCore
+      text: string; // Link text and ActionCore title
+      to: RouteLocationRaw; // For <router-link> & ActionCore handler
+      icon?: string;
+      keywords?: string[];
+    }
 
-1.  **Action Execution Takes Precedence:** If a valid `command` (either an ID of an existing action or an inline definition) is provided, its execution typically takes precedence over other default behaviors of the component (e.g., `href` navigation or `useGroupItem` toggling), though the component will still emit its standard events like `@click`.
-2.  **`disabled` State:** The component's visual disabled state will often react to the `disabled` property or `canExecute` status of the resolved ActionCore action. If the action is disabled, the component should appear disabled.
-3.  **`ActionContext`:** The `trigger` in the `ActionContext` will usually be a string identifying the component, like `'component-vbtn'` or `'component-vlistitem'`. The `commandData` prop is passed directly into `ActionContext.data`.
+    export const mainNavigationLinks: AppNavLink[] = [
+      { id: 'nav-home', text: 'Home', to: '/', icon: 'mdi-home', keywords: ['dashboard'] },
+      { id: 'nav-profile', text: 'Profile', to: '/profile', icon: 'mdi-account' },
+    ];
+    ```
 
-## Creating Commandable UIs
+2.  **Generate UI Elements:** Use these definitions to render your navigation UI (e.g., in a sidebar or menu), letting `vue-router` handle navigation.
 
-*   **Clarity is Key:** When a UI element is tied to an ActionCore command, ensure its text, icon, and tooltips (using `action.title`, `action.icon`, `action.description`) clearly reflect the action being performed.
-*   **Contextual Data (`commandData`):** Use `commandData` effectively to make generic actions (e.g., "delete-item") operate on specific data instances without needing a unique action definition for every item.
-*   **Fallback Behavior:** Be mindful that if `componentIntegration` is not enabled or if an invalid `command` ID is provided, the component will revert to its standard, non-ActionCore behavior.
-*   **Progressive Enhancement:** ActionCore's component integration is designed as a progressive enhancement. Your application can function without it, and you can opt-in where it provides the most value.
+    ```vue
+    <!-- MySidebar.vue -->
+    <template>
+      <v-list>
+        <v-list-item
+          v-for="link in mainNavigationLinks"
+          :key="link.id"
+          :to="link.to"
+          :prepend-icon="link.icon"
+          :title="link.text"
+          link
+        />
+      </v-list>
+    </template>
+    <script setup lang="ts">
+    import { mainNavigationLinks } from '@/config/navigation';
+    </script>
+    ```
 
-By integrating ActionCore directly into your UI components, you create a highly consistent, maintainable, and powerful user interface where interactions are driven by a central, well-defined command system.
+3.  **Register Actions with ActionCore:** Convert your navigation definitions into `ActionDefinition` objects. The action's `handler` will use the router to navigate.
+
+    ```typescript
+    // src/services/actionCoreSetup.ts (or similar)
+    import { useActionCore, type ActionDefinition } from '@/labs/VActionCore';
+    import { mainNavigationLinks } from '@/config/navigation';
+    import router from '@/router'; // Your Vue Router instance
+
+    export function registerNavigationActions() {
+      const actionCore = useActionCore();
+      if (!actionCore) return;
+
+      const navigationActions: ActionDefinition[] = mainNavigationLinks.map(link => ({
+        id: link.id,
+        title: link.text,
+        icon: link.icon,
+        keywords: link.keywords,
+        handler: async () => {
+          try {
+            await router.push(link.to);
+          } catch (error) {
+            console.error(`ActionCore: Navigation failed for "${link.id}":`, error);
+          }
+        },
+        meta: { actionType: 'navigation', route: link.to }
+      }));
+      actionCore.registerActionsSource({ id: 'main-nav', name: 'Main Navigation', actions: navigationActions });
+    }
+    // Call registerNavigationActions() during app setup.
+    ```
+
+**Benefits:** DRY (route defined once), accessible (uses `<router-link>`), maintainable, and robust.
+
+### 2. Binding Actions to UI Elements (e.g., Buttons)
+
+For actions triggered by buttons or other interactive elements, make the same logic invokable via UI click and ActionCore (command palette, hotkey).
+
+**Recommended Pattern: Shared Function Logic**
+
+1.  **Define Core Logic in a Reusable Function:**
+
+    ```typescript
+    // src/composables/useMyFeatureActions.ts
+    export async function performSaveOperation(context?: { triggerSource: string }) {
+      console.log('Saving data...', context);
+      await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate async
+      console.log('Data saved!');
+    }
+    ```
+
+2.  **Call Function from UI Event Handler:**
+
+    ```vue
+    <!-- MyEditor.vue -->
+    <template> <v-btn @click="handleSaveClick">Save Document</v-btn> </template>
+    <script setup lang="ts">
+    import { performSaveOperation } from '@/composables/useMyFeatureActions';
+    async function handleSaveClick() {
+      await performSaveOperation({ triggerSource: 'ui-button' });
+    }
+    </script>
+    ```
+
+3.  **Register ActionCore Action Calling the Same Function:**
+
+    ```typescript
+    // src/services/actionCoreSetup.ts
+    import { useActionCore, type ActionDefinition } from '@/labs/VActionCore';
+    import { performSaveOperation } from '@/composables/useMyFeatureActions';
+    export function registerEditorActions() {
+      const actionCore = useActionCore();
+      if (!actionCore) return;
+      const actions: ActionDefinition[] = [{
+        id: 'editor-save',
+        title: 'Save Document',
+        icon: 'mdi-content-save',
+        hotkey: 'meta+s',
+        handler: async (ctx) => {
+          await performSaveOperation({ triggerSource: `actioncore-${ctx.trigger}` });
+        },
+      }];
+      actionCore.registerActionsSource({ id: 'editor', name: 'Editor Actions', actions });
+    }
+    ```
+
+**Alternative: UI Triggers `actionCore.executeAction()`**
+The button click handler could directly call `actionCore.executeAction('editor-save')`. This is viable if `ActionCore` adds significant value to *every* execution (e.g., complex `canExecute` or hooks). For most cases, the shared function is more straightforward.
+
+### 3. Contextual Actions for List Items
+
+For actions on individual items in a list (e.g., Edit, Delete).
+
+**Recommended Pattern: Generic Actions with Context via `executeAction`**
+
+1.  **Define Generic Action Handlers:**
+
+    ```typescript
+    // src/composables/useItemActions.ts
+    interface Item { id: string; name: string; }
+    export async function editItem(itemId: string) { console.log(`Editing item ${itemId}`); }
+    export async function deleteItem(item: Item) { console.log(`Deleting item ${item.name}`); }
+    ```
+
+2.  **UI Invokes ActionCore with Specific Item Data:**
+
+    ```vue
+    <!-- MyItemList.vue -->
+    <template>
+      <v-list-item v-for="item in items" :key="item.id" :title="item.name">
+        <template #append>
+          <v-btn icon="mdi-pencil" @click="triggerEdit(item.id)" size="small" />
+          <v-btn icon="mdi-delete" @click="triggerDelete(item)" size="small" />
+        </template>
+      </v-list-item>
+    </template>
+    <script setup lang="ts">
+    import { useActionCore } from '@/labs/VActionCore';
+    interface Item { id: string; name: string; }
+    const items: Item[] = [{ id: '1', name: 'One' }, { id: '2', name: 'Two' }];
+    const actionCore = useActionCore();
+
+    const triggerEdit = (itemId: string) => {
+      if (!actionCore) return;
+      actionCore.executeAction('item-edit', { data: { itemId }, trigger: 'ui-list-edit' });
+    };
+    const triggerDelete = (item: Item) => {
+      if (!actionCore) return;
+      actionCore.executeAction('item-delete', { data: { item }, trigger: 'ui-list-delete' });
+    };
+    </script>
+    ```
+
+3.  **Register Generic Actions; Handlers Use `ActionContext.data`:**
+
+    ```typescript
+    // src/services/actionCoreSetup.ts
+    import { useActionCore, type ActionDefinition, type ActionContext } from '@/labs/VActionCore';
+    import { editItem, deleteItem } from '@/composables/useItemActions';
+    // Assume Item type is available
+    // interface Item { id: string; name: string; }
+
+    export function registerItemActions() {
+      const actionCore = useActionCore();
+      if (!actionCore) return;
+      const actions: ActionDefinition[] = [
+        {
+          id: 'item-edit', title: 'Edit Item',
+          handler: async (ctx: ActionContext) => {
+            const itemId = ctx.data?.itemId;
+            if (itemId) await editItem(itemId); else console.warn('No itemId for edit');
+          },
+          // canExecute: ctx => !!ctx.data?.itemId // If needed
+        },
+        {
+          id: 'item-delete', title: 'Delete Item',
+          handler: async (ctx: ActionContext) => {
+            const item = ctx.data?.item; // as Item;
+            if (item) await deleteItem(item); else console.warn('No item for delete');
+          },
+          // canExecute: ctx => !!ctx.data?.item
+        }
+      ];
+      actionCore.registerActionsSource({ id: 'list-item-actions', name: 'List Item Actions', actions });
+    }
+    ```
+This pattern keeps action definitions general; context is supplied at invocation time.
+
+### 4. Batch Actions for Selected Items
+
+For operations on multiple selected items.
+
+**Recommended Pattern: Action Operates on a Shared Selection State**
+
+1.  **Maintain Selection State:** Use a reactive store (e.g., Pinia) or a local `ref` to track selected item IDs.
+
+    ```typescript
+    // MySelectableList.vue
+    const selectedItemIds = ref<string[]>([]);
+    // ... logic to update selectedItemIds from UI ...
+    ```
+
+2.  **UI Triggers Action on Selection:** Button click handler reads selection state.
+
+    ```vue
+    <!-- MySelectableList.vue -->
+    <template>
+      <v-btn :disabled="!selectedItemIds.length" @click="handleDeleteSelected">
+        Delete Selected ({{ selectedItemIds.length }})
+      </v-btn>
+      <!-- ... list with checkboxes bound to selectedItemIds ... -->
+    </template>
+    <script setup lang="ts">
+    import { ref } from 'vue';
+    import { useActionCore } from '@/labs/VActionCore';
+    // Assume selectedItemIds is managed here or imported from a composable/store
+    const selectedItemIds = ref<string[]>([]);
+    const actionCore = useActionCore();
+
+    async function handleDeleteSelected() {
+      if (!actionCore || !selectedItemIds.value.length) return;
+      // Pass the array of IDs directly, or the selection ref if the action needs to be reactive to it.
+      await actionCore.executeAction('batch-delete', {
+        data: { itemIds: [...selectedItemIds.value] }, // Pass a snapshot
+        trigger: 'ui-batch-delete'
+      });
+      // Optionally clear selection: selectedItemIds.value = [];
+    }
+    </script>
+    ```
+
+3.  **ActionCore Action Reads Selection State (from `ActionContext.data`):**
+
+    ```typescript
+    // src/services/actionCoreSetup.ts
+    import { useActionCore, type ActionDefinition, type ActionContext } from '@/labs/VActionCore';
+    // Assume performBatchDelete(itemIds: string[]) is defined
+    async function performBatchDelete(itemIds: string[]) {
+      console.log('Batch deleting item IDs:', itemIds);
+      // Actual deletion logic
+    }
+
+    export function registerBatchActions() {
+      const actionCore = useActionCore();
+      if (!actionCore) return;
+      const actions: ActionDefinition[] = [{
+        id: 'batch-delete',
+        title: 'Delete Selected Items',
+        // title: () => `Delete ${/* get access to selection length somehow or pass it */} Items`,
+        handler: async (ctx: ActionContext) => {
+          const itemIds = ctx.data?.itemIds as string[];
+          if (!itemIds || itemIds.length === 0) {
+            console.warn('ActionCore: No items provided for batch delete.'); return;
+          }
+          await performBatchDelete(itemIds);
+        },
+        canExecute: (ctx: ActionContext) => { // Check if data with itemIds exists
+          const itemIds = ctx.data?.itemIds as string[];
+          return !!itemIds && itemIds.length > 0;
+        },
+        // To make it reactive to selection from palette, canExecute would need access to the live selection ref.
+        // This is simpler if invoked from UI with data, more complex for palette.
+      }];
+      actionCore.registerActionsSource({ id: 'batch-actions', name: 'Batch Operations', actions });
+    }
+    ```
+    If `canExecute` for a command palette needs to be truly reactive to the live selection state (not just data passed at invocation), that selection state must be accessible to the `ActionDefinition` (e.g., via a store/global ref).
+
+## General Considerations for UI Integration
+
+*   **Error Handling & User Feedback:** Implement robust error handling in action handlers. Provide feedback to the user whether an action is triggered via UI or `ActionCore`.
+*   **Asynchronous Operations:** Clearly indicate loading states (e.g., using `actionCore.isLoading` or custom states) for actions that take time.
+*   **`VHotKey` for Display:** The `<VHotKey action-id="your-action-id" />` component remains useful for displaying the hotkey associated with an action, and it will react to changes from profiles.
+*   **Keep it Simple:** Start with straightforward patterns. Not every UI interaction needs to be a global `ActionCore` action. Use ActionCore where it adds clear value (discoverability, hotkeys, centralized command logic).
+
+By following these application-level integration patterns, you can effectively connect your UI to ActionCore, creating a responsive, maintainable, and powerful user experience.
 
 ---
 

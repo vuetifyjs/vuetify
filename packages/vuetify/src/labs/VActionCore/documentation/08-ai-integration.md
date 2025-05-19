@@ -1,106 +1,133 @@
-# 8. AI Integration: Empowering Intelligent Assistants
+# 8. AI Integration: Empowering Intelligent Assistants (Experimental)
 
-ActionCore is designed not only for direct user interaction but also to serve as a robust backend for intelligent assistants, such as AI-powered chatbots or voice command systems. By providing clear metadata and parameter definitions, you can make your application's capabilities discoverable and safely invocable by AI.
+**Status: Experimental**
 
-This empowers AI to understand what actions are available, what data they need, and how to request their execution, opening up new avenues for sophisticated user interaction.
+> The AI integration features within ActionCore are currently experimental and **not recommended for production use**. They are subject to change, and their stability is not guaranteed.
 
-## Key Components for AI Integration
+ActionCore is designed with future AI-driven interaction in mind. This document outlines how to prepare your actions for potential AI consumption and how such integration might work, **if enabled**.
 
-Two main additions to `ActionDefinition` facilitate AI integration:
+## Enabling AI Features (Feature Flag)
 
-1.  **`parametersSchema?: Record<string, any>` (JSON Schema)**
-2.  **`ai?: AIActionMetadata`**
-
-### 1. `parametersSchema`: Defining Expected Data
-
-*   **Purpose:** To describe the expected structure and types of the `data` object that an action's `handler` expects in its `ActionContext` when invoked by an AI.
-*   **Type:** An object conforming to the [JSON Schema](https://json-schema.org/) specification.
-*   **Importance:** This schema is crucial for an AI to understand what parameters it needs to extract from a user's natural language request and how to format them for the action.
-
-*   **Example:** For an action like `"email.send"`:
-    ```typescript
-    parametersSchema: {
-      type: 'object',
-      properties: {
-        recipient: {
-          type: 'string',
-          format: 'email',
-          description: 'The email address of the primary recipient.'
-        },
-        subject: {
-          type: 'string',
-          description: 'The subject line of the email.'
-        },
-        body: {
-          type: 'string',
-          description: 'The main content of the email.'
-        },
-        priority: {
-          type: 'integer',
-          enum: [1, 2, 3], // 1=High, 2=Normal, 3=Low
-          description: 'Optional priority for the email.'
-        }
-      },
-      required: ['recipient', 'subject', 'body']
-    }
-    ```
-    From this, an AI can understand that `recipient`, `subject`, and `body` are mandatory strings, and `recipient` should be a valid email format.
-
-### 2. `ai?: AIActionMetadata`: Guiding AI Interaction
-
-*   **Purpose:** To provide metadata specifically for AI interaction. If this block is absent, the action is generally considered not accessible or relevant to AI by default (unless `getDiscoverableActions` has a different fallback).
-*   **Interface `AIActionMetadata`:**
-    ```typescript
-    interface AIActionMetadata {
-      accessible?: boolean; // Default: true if 'ai' block exists & this is undefined
-      scope?: string | string[]; // Scopes required/associated with this action
-      usageHint?: string; // Detailed hint for AI on when/how to use
-      examples?: Array<{ // Example invocations
-        description?: string; // e.g., "Schedule a meeting for tomorrow at 2 PM"
-        request?: Record<string, any>; // e.g., { "invitee": "Jane", "dateTime": "..." }
-        responsePreview?: string; // e.g., "Meeting scheduled with Jane Doe."
-      }>;
-    }
-    ```
-
-    *   **`accessible?: boolean`**: Explicitly controls if the AI can discover/use this action. If the `ai` block exists but `accessible` is `undefined`, it defaults to `true`. Set to `false` to hide from AI even if other AI metadata is present.
-    *   **`scope?: string | string[]`**: Defines one or more "scopes" or capabilities associated with this action. An AI client will typically query for actions matching its own `allowedScopes`. This is a primary filtering mechanism.
-        *   **Example:** `scope: 'calendar.write'` or `scope: ['files.read', 'files.search']`.
-    *   **`usageHint?: string`**: A natural language hint for the AI, more detailed than the action's general `description`. It can explain nuances, prerequisites, or effects specific to AI invocation. Markdown is allowed.
-        *   **Example:** `"Use to schedule new appointments. Ensure dateTime is in ISO 8601 format. Will send notifications to attendees by default."`
-    *   **`examples?: Array<{...}>`**: Provides concrete examples of how the action might be invoked by an AI, including a natural language `description` of the user's intent, the structured `request` data (which should conform to `parametersSchema`), and an optional `responsePreview`.
-        *   **Example:**
-            ```typescript
-            examples: [{
-              description: "Email Bob about the project update for tomorrow's meeting",
-              request: {
-                recipient: "bob@example.com",
-                subject: "Project Update for Tomorrow's Meeting",
-                body: "Hi Bob, quick reminder about the project update..."
-              }
-            }]
-            ```
-
-**Note on Action Profiles:** Both `parametersSchema` and the entire `ai` metadata block can be overridden by an active action profile if defined in `ActionDefinition.profiles[profileName].parametersSchema` or `.ai` respectively.
-
-## Discovering Actions: `actionCore.getDiscoverableActions()`
-
-ActionCore provides a dedicated method for AI clients to query for actions they are permitted to use:
+To use any AI-related capabilities of ActionCore, you **must** explicitly enable them via the `ai` option in `ActionCoreOptions` during initialization:
 
 ```typescript
-// From ActionCorePublicAPI interface
-export interface ActionCorePublicAPI {
-  // ... other methods
-  getDiscoverableActions(aiContext: { allowedScopes?: string[] }): DiscoverableActionInfo[];
+import { useActionCore } from '@/labs/VActionCore'; // Adjust path as needed
+
+// When initializing ActionCore (e.g., in a Vuetify plugin or global setup)
+const actionCore = useActionCore({
+  // Option 1: Simple boolean
+  ai: true,
+
+  // Option 2: Object with enabled flag (allows for future AI-specific sub-configurations)
+  // ai: { enabled: true },
+
+  // ... other ActionCore options
+});
+```
+
+If the `ai` option is not provided, is set to `false`, or if `ai.enabled` is `false`, all AI-specific functionalities within ActionCore (such as `getDiscoverableActions`) will be disabled and typically return empty results or perform no AI-specific operations.
+
+## Core Concepts for AI Discoverability
+
+When AI features are enabled, ActionCore can expose certain actions to an AI system, allowing the AI to understand what actions are available and potentially trigger them based on user intent.
+
+### 1. `ActionDefinition.ai` Metadata Block
+
+To make an action potentially discoverable by an AI, you add an `ai` metadata block to its `ActionDefinition`:
+
+```typescript
+// From types.ts (illustrative)
+interface AIActionExample {
+  description?: string; // e.g., "Schedule a meeting for tomorrow at 2 PM with Jane"
+  request?: Record<string, any>; // e.g., { "invitee": "Jane", "dateTime": "YYYY-MM-DDTHH:mm:ss" }
+  responsePreview?: string; // e.g., "Meeting scheduled with Jane Doe."
 }
 
-// Structure of returned information
-export interface DiscoverableActionInfo {
+interface AIActionMetadata {
+  accessible?: boolean;      // Default: true if 'ai' block exists and this is undefined.
+  scope?: string | string[]; // e.g., 'user', 'admin', 'document-editing'. For filtering.
+  usageHint?: string;        // Brief phrase for AI to understand when this action is relevant (e.g., "saves the current work").
+  examples?: AIActionExample[]; // Structured examples for AI understanding.
+}
+
+interface ActionDefinition {
+  // ... other properties: id, title, handler, etc.
+  ai?: AIActionMetadata;
+  parametersSchema?: Record<string, any>; // JSON Schema for handler parameters
+}
+```
+
+*   **`accessible?: boolean`**: Explicitly controls if the AI can discover/use this action. If the `ai` block exists but `accessible` is `undefined`, it defaults to `true`. Set to `false` to hide from AI even if other AI metadata is present.
+*   **`scope?: string | string[]`**: Defines one or more "scopes" or capabilities associated with this action (e.g., `'calendar.write'`, `['files.read', 'files.search']`). An AI client can query for actions matching its own `allowedScopes`.
+*   **`usageHint?: string`**: A natural language hint for the AI, more detailed than the action's general `description`. It can explain nuances, prerequisites, or effects specific to AI invocation (e.g., `"Use to schedule new appointments. Ensure dateTime is in ISO 8601 format."`).
+*   **`examples?: AIActionExample[]`**: Provides concrete, structured examples of how the action might be invoked. This helps the AI map user intent to specific actions and understand parameter structures.
+    *   **Example:**
+        ```typescript
+        examples: [{
+          description: "Email Bob about the project update for tomorrow's meeting",
+          request: {
+            recipient: "bob@example.com",
+            subject: "Project Update for Tomorrow's Meeting",
+            body: "Hi Bob, quick reminder about the project update..."
+          }
+        }]
+        ```
+
+### 2. `ActionDefinition.parametersSchema`
+
+If an action's `handler` expects specific input data (via `ActionContext.data`), you define its structure using a JSON Schema object in the `parametersSchema` property. This allows an AI to understand what data is needed, validate it, and potentially gather it from the user before execution.
+
+```typescript
+// Example: parametersSchema for an action that creates a calendar event
+parametersSchema: {
+  type: 'object',
+  properties: {
+    eventName: { type: 'string', description: 'The name or title of the event' },
+    date: { type: 'string', format: 'date', description: 'The date of the event' },
+    time: { type: 'string', format: 'time', description: 'The time the event starts' },
+    attendees: { type: 'array', items: { type: 'string', format: 'email' }, description: 'List of attendee email addresses' }
+  },
+  required: ['eventName', 'date']
+}
+```
+
+### 3. Discovering Actions: `actionCore.getDiscoverableActions()`
+
+When AI features are enabled, this method is the primary way for an AI system to query ActionCore for available commands.
+
+```typescript
+// Method signature from ActionCorePublicAPI
+// getDiscoverableActions(aiContext: { allowedScopes?: string[] }): DiscoverableActionInfo[];
+
+// AI orchestrator calls this (assuming AI features are enabled in ActionCore options)
+const discoverableActions = actionCore.getDiscoverableActions({
+  // Optionally filter by scope, if the AI knows the current context
+  // allowedScopes: ['document-editing', 'user.profile']
+});
+```
+
+**Logic of `getDiscoverableActions()`:**
+
+1.  **Checks AI Feature Flag:** If AI features are not enabled in `ActionCoreOptions`, returns an empty array.
+2.  **Iterates Effective Actions:** Considers all registered actions, with any active profile overrides applied.
+3.  **Filters based on AI Metadata:**
+    *   Action must have an `ai` metadata block defined.
+    *   `action.ai.accessible` must not be explicitly `false`.
+    *   **Scope Matching:** If `action.ai.scope` is defined, there must be at least one common scope between the action's declared scopes and the `aiContext.allowedScopes` provided by the AI. If `action.ai.scope` is undefined, it's considered globally accessible (subject to `ai.accessible`). If `aiContext.allowedScopes` is empty or undefined, only actions without a specific scope (or globally accessible ones) might be returned, depending on interpretation.
+4.  **Maps to `DiscoverableActionInfo`:** Filtered actions are mapped to the `DiscoverableActionInfo` format.
+
+### 4. `DiscoverableActionInfo` Structure
+
+This is a sanitized and simplified version of `ActionDefinition`, designed for AI consumption. It excludes sensitive or irrelevant information like `handler` functions, `hotkey` details, or `subItems` functions.
+
+```typescript
+// From types.ts (illustrative)
+interface DiscoverableActionInfo {
   id: string;
-  title: string;
-  description?: string;
+  title: string; // Resolved title (if Ref)
+  description?: string; // Resolved description (if Ref)
   parametersSchema?: Record<string, any>;
-  ai?: {
+  ai?: { // Subset of AIActionMetadata relevant for discovery
     scope?: string | string[];
     usageHint?: string;
     examples?: AIActionExample[];
@@ -108,49 +135,28 @@ export interface DiscoverableActionInfo {
 }
 ```
 
-*   **`aiContext.allowedScopes?: string[]`**: An array of scope strings that the AI is currently operating under. This is matched against `action.ai.scope`.
-*   **Return Value:** An array of `DiscoverableActionInfo` objects. This is a **sanitized version** of `ActionDefinition`, containing only fields relevant and safe for AI consumption. Crucially, it **excludes** properties like `handler`, `subItems` functions, `canExecute` functions, `hotkey`, `hotkeyOptions`, and most general `meta` properties (unless explicitly part of the `ai` block like `usageHint`, `examples`).
+## Security and Authorization
 
-**Logic of `getDiscoverableActions()`:**
+*   **Discovery vs. Execution:** The `ai` metadata (like `scope` and `accessible`) and `getDiscoverableActions` primarily control what an AI *knows about* and can *attempt to call*. They are **not** a substitute for robust security checks within each action's `handler` or `canExecute` function.
+*   **Handler-Level Validation (CRITICAL):** Action handlers **must always** perform their own validation of `ActionContext.data` and conduct thorough authorization checks before executing any sensitive operations, especially if the `context.trigger` indicates an AI source.
+*   Never trust that data coming from an AI (even if it used `parametersSchema`) is inherently safe.
 
-1.  Iterates through all registered (and effective, considering profiles) actions.
-2.  Filters actions based on:
-    *   Presence of an `ai` metadata block (`action.ai` must be defined).
-    *   `action.ai.accessible` must not be explicitly `false`.
-    *   **Scope Matching:**
-        *   If `action.ai.scope` is defined:
-            *   If `aiContext.allowedScopes` is empty or undefined, the action is excluded (AI needs explicit scope permission for scoped actions).
-            *   Otherwise, there must be at least one common scope between `action.ai.scope` (normalized to an array) and `aiContext.allowedScopes`.
-        *   If `action.ai.scope` is undefined: The action is included if `ai.accessible` allows it (considered globally accessible to AI within its accessibility flag, provided the AI client doesn't *only* ask for specific scopes).
-3.  Maps the filtered `ActionDefinition`s to `DiscoverableActionInfo`, selecting only the necessary and safe fields.
-
-## Security & Execution Flow
-
-While ActionCore provides tools for AI discovery and invocation, **security remains paramount and is ultimately the developer's responsibility within the action handler.**
-
-*   **Discovery vs. Execution:** `getDiscoverableActions()` and its scope mechanism control what an AI *knows about* and can *attempt to call*. They are **not** a substitute for robust security checks within the action's `handler`.
-*   **`ActionCore.executeAction(actionId, context)`:** This remains the sole entry point for all action executions, including those triggered by AI.
-    *   The AI client, after discovery, will formulate the `actionId` and the `context.data` payload (based on `parametersSchema`).
-    *   The `context.trigger` should be set to a specific value like `'ai_assistant'` by the AI client.
-*   **`canExecute` Still Applies:** The action's `canExecute(context)` method (if defined) will **still be checked by ActionCore** before running the handler. This provides an important layer of UI-state-based or fine-grained permission control that operates independently of AI discovery scopes.
-*   **Handler-Level Validation & Authorization (CRITICAL):**
-    *   Action handlers for any sensitive operations **must always** perform their own validation of `context.data` and conduct thorough authorization checks.
-    *   If `context.trigger === 'ai_assistant'`, handlers might apply even stricter validation or require additional confirmation steps, depending on the action's nature.
-    *   Never trust that data coming from an AI (even if it used `parametersSchema`) is inherently safe or that the AI's intent is always perfectly aligned with user expectations or security policies.
-
-**In essence: AI discovery scopes limit awareness; action handlers ensure safety.**
-
-## Creating AI-Ready Actions
+## Best Practices for AI-Ready Actions
 
 *   **Be Explicit:** Clearly define `parametersSchema` for all actions intended for AI.
-*   **Write Helpful `usageHint`s:** Think from the AI's perspective. What does it need to know to use this action effectively and avoid mistakes?
-*   **Provide Good `examples`:** Concrete examples are invaluable for AI to understand parameter structure and typical use cases.
+*   **Write Helpful `usageHint`s:** Think from the AI's perspective. What does it need to know to use this action effectively?
+*   **Provide Good `examples`:** Structured `AIActionExample` objects are invaluable for AI to understand parameters and typical use cases.
 *   **Scope Appropriately:** Use `ai.scope` to create logical capability groups. Don't grant overly broad scopes.
-*   **Iterate and Test:** Simulate AI interactions (as seen in `ScenarioAIDiscovery.vue`) to verify that `getDiscoverableActions` returns what you expect and that your schemas and hints are effective.
-*   **Prioritize Security in Handlers:** This cannot be overstated. All action handlers, especially those accessible to AI, must be robustly secured.
+*   **Prioritize Security in Handlers:** This cannot be overstated. All action handlers must be robustly secured.
 
-By thoughtfully integrating these AI-specific features, you can extend the power and reach of your ActionCore-managed functionalities, enabling novel and intelligent ways for users to interact with your application.
+## Future Possibilities (Conceptual)
+
+*   AI automatically prompting users for missing parameters based on `parametersSchema`.
+*   AI chaining multiple actions together to fulfill complex user requests.
+*   Natural language invocation of actions through a central AI interface.
+
+By structuring your actions with these AI considerations (and enabling the feature flag when ready to experiment), you make them more robust and prepare your application for more advanced interaction models.
 
 ---
 
-Next: [**Component Integration**](./09-component-integration.md)
+Next: [**Component Integration (Revised)**](./09-component-integration.md)

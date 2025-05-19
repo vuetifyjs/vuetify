@@ -5,7 +5,7 @@
       <VHotKey :hotkey="(Array.isArray(themeAction.hotkey) ? themeAction.hotkey[0] : themeAction.hotkey) || ''" />.
       Current theme: {{ currentThemeName }}
     </p>
-    <v-btn command="toggle-theme">Toggle Theme via VBtn</v-btn>
+    <v-btn @click="() => actionCore.executeAction('toggle-theme')">Toggle Theme via VBtn</v-btn>
   </scenario-card>
 </template>
 
@@ -25,8 +25,9 @@ const themeAction: ActionDefinition = {
   id: 'toggle-theme',
   title: 'Toggle Theme',
   icon: 'mdi-theme-light-dark',
-  hotkey: 'cmdorctrl+shift+t',
+  hotkey: 'alt+shift+t',
   description: 'Toggles between light and dark themes.',
+  hotkeyOptions: { preventDefault: true },
   handler: () => {
     theme.global.name.value = theme.global.current.value.dark ? 'light' : 'dark'
     if (logAction) logAction(`Theme toggled to: ${theme.global.name.value}`)

@@ -113,11 +113,17 @@ const actionWithOptions: ActionDefinition = {
 ```
 
 *   **`preventDefault?: boolean`** (Default: `false`)
-    *   If `true`, `event.preventDefault()` is called when the hotkey triggers. Essential for overriding default browser actions (e.g., `Ctrl+S` opening the browser's save dialog if you have a custom save action).
-    *   Note: Some browser-level shortcuts (e.g., `Cmd+T` for new tab) may not be preventable.
+    *   If `true`, `event.preventDefault()` is called when the hotkey triggers. This is essential for overriding default browser actions (e.g., `Ctrl+S` opening the browser's save dialog if you have a custom save action, or `Cmd+K` focusing the browser's search bar).
+    *   **Recommendation**: Set to `true` for most hotkeys that might conflict with standard browser behavior or when you want to ensure the action is the sole result of the hotkey.
+    *   Note: Some browser-level shortcuts (e.g., `Cmd+T` for a new tab on macOS) may not be preventable by web applications.
 
 *   **`stopPropagation?: boolean`** (Default: `false`)
-    *   If `true`, `event.stopPropagation()` is called. Useful to prevent the event from bubbling up or being caught by other listeners, especially in complex DOM structures or nested components.
+    *   If `true`, `event.stopPropagation()` is called when the hotkey triggers. This prevents the event from bubbling up to parent DOM elements or being processed by other event listeners attached to the same element (especially those registered in later phases or by different parts of the system).
+    *   **Use with Caution**: While useful for isolating event handling in complex DOM structures or nested components, `stopPropagation: true` should be used sparingly.
+    *   **Potential Issues**:
+        *   It can interfere with other parts of your application or third-party libraries that might rely on listening to the same events.
+        *   **Crucially, when multiple ActionCore actions share the same hotkey and rely on contextual evaluation (via `canExecute` or `runInTextInput`) to determine the active handler, `stopPropagation: true` on one of those actions can prevent ActionCore from correctly evaluating other candidate actions for the same hotkey.** This was observed where a `Cmd+S` hotkey shared by two actions failed to trigger the appropriate contextual action when `stopPropagation: true` was enabled.
+    *   **Recommendation**: Only set `stopPropagation: true` if you have a specific, well-understood reason to prevent the event from reaching other listeners and have tested its impact, especially if the hotkey is shared or involves complex contextual logic. In many cases, `preventDefault: true` is sufficient for managing hotkey behavior. If unsure, start with `stopPropagation: false`.
 
 *   **`ignoreKeyRepeat?: boolean`** (Default: `false`)
     *   If `true`, the hotkey handler only triggers for the initial `keydown` event and ignores subsequent `keydown` events while the key is held down (`event.repeat === true`). Set this to `true` for most actions to prevent them from firing multiple times if a user holds down a key combination.
@@ -166,5 +172,42 @@ By default, ActionCore (via `useKeyBindings`) blocks most hotkeys when a text in
 By mastering these hotkey definition features, you can create a highly efficient and intuitive keyboard interface for your ActionCore-powered application.
 
 ---
+
+## Debugging ActionCore
+
+### Verbose Logging
+
+ActionCore includes an optional verbose logging feature to help diagnose issues, particularly with hotkey registration and execution flow. When enabled, detailed logs are output to the browser console.
+
+**Enabling Verbose Logging:**
+
+To enable verbose logging, pass the `verboseLogging: true` option when initializing `ActionCore` via `useActionCore()`:
+
+```typescript
+// Example: typically in your main application setup or a specific playground
+import { useActionCore } from '@/labs/VActionCore';
+import type { ActionCoreOptions } from '@/labs/VActionCore/types';
+
+const actionCoreOptions: ActionCoreOptions = {
+  // ... other options ...
+  verboseLogging: true,
+};
+
+const actionCore = useActionCore(actionCoreOptions);
+```
+
+**What it Logs:**
+
+When enabled, verbose logging provides insights into:
+*   Hotkey registration attempts for each action and binding.
+*   The options being used for each hotkey binding.
+*   When a hotkey is triggered.
+*   The evaluation steps for `runInTextInput` conditions, showing the active element and the outcome.
+*   The evaluation of `action.disabled` status.
+*   The evaluation of `canExecute()` conditions and their results.
+*   Confirmation before an action handler is executed.
+*   Warnings for conditions that block hotkey execution (e.g., action not found, `canExecute` returning false, etc.).
+
+This detailed output can be invaluable for understanding why a specific hotkey might not be behaving as expected.
 
 Next: [**Executing Actions & Context**](./05-action-execution.md)

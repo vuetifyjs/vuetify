@@ -38,8 +38,8 @@ const isMockEditorActive = () => typeof document !== 'undefined' && document.act
 const profileManagedActions: ActionDefinition[] = [
   {
     id: 'save-editor',
-    title: 'Default Editor Save', // Base title
-    hotkey: 'alt+s',          // Base hotkey
+    title: 'Default Editor Save',
+    hotkey: 'alt+s',
     meta: { base: true, from: 'ScenarioActionProfiles' },
     description: 'Default editor save. Active when editor is focused.',
     canExecute: (ctx: ActionContext) => isMockEditorActive(),
@@ -51,6 +51,7 @@ const profileManagedActions: ActionDefinition[] = [
       beginner: {
         title: 'Simple Save (Editor)',
         hotkey: 'ctrl+s',
+        hotkeyOptions: { preventDefault: true },
         meta: { mode: 'beginner' },
         description: 'Saves editor content (Beginner Mode). Active when editor is focused.',
         handler: (ctx: ActionContext) => {
@@ -60,6 +61,7 @@ const profileManagedActions: ActionDefinition[] = [
       advanced: {
         title: 'Advanced Save + Commit (Editor)',
         hotkey: 'ctrl+shift+s',
+        hotkeyOptions: { preventDefault: true },
         meta: { mode: 'advanced' },
         description: 'Saves and commits editor content (Advanced Mode). Active when editor is focused.',
         handler: (ctx: ActionContext) => {
@@ -70,8 +72,8 @@ const profileManagedActions: ActionDefinition[] = [
   },
   {
     id: 'global-save',
-    title: 'Default Global Save', // Base title
-    hotkey: 'alt+g',          // Base hotkey
+    title: 'Default Global Save',
+    hotkey: 'alt+g',
     meta: { base: true, from: 'ScenarioActionProfiles' },
     description: 'Default global save. Active when editor is NOT focused.',
     canExecute: (ctx: ActionContext) => !isMockEditorActive(),
@@ -81,7 +83,8 @@ const profileManagedActions: ActionDefinition[] = [
     profiles: {
       beginner: {
         title: 'Global Simple Save',
-        hotkey: 'ctrl+s', // Same hotkey as editor save in beginner, context (`canExecute`) differentiates
+        hotkey: 'ctrl+s',
+        hotkeyOptions: { preventDefault: true },
         meta: { mode: 'beginner' },
         description: 'Global save action (Beginner Mode). Active when editor is NOT focused.',
         handler: (ctx: ActionContext) => {
@@ -90,7 +93,8 @@ const profileManagedActions: ActionDefinition[] = [
       },
       advanced: {
         title: 'Global Advanced Save + Commit',
-        hotkey: 'ctrl+shift+s', // Same hotkey as editor save in advanced
+        hotkey: 'ctrl+shift+s',
+        hotkeyOptions: { preventDefault: true },
         meta: { mode: 'advanced' },
         description: 'Global advanced save (Advanced Mode). Active when editor is NOT focused.',
         handler: (ctx: ActionContext) => {

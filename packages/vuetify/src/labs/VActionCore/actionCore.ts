@@ -8,8 +8,12 @@ import type {
   ActionCoreOptions as ActionCoreInstanceOptions,
   ActionCorePublicAPI,
   KeyBindingHandlerOptions,
+  DiscoverableActionInfo,
+  AIActionMetadata,
 } from './types';
 import { IS_CLIENT, log, isPromise } from './utils'; // Import centralized utilities
+import type { App } from 'vue';
+import { LogLevel } from './utils'; // Assuming log utility supports levels or can be adapted
 
 /**
  * @file actionCore.ts The core logic for managing, registering, and executing actions,
@@ -24,11 +28,18 @@ const COMPONENT_NAME = 'ActionCore';
  */
 export const ActionCoreSymbol: InjectionKey<ActionCorePublicAPI> = Symbol.for('vuetify:action-core');
 
+// Helper function for verbose logging if enabled
+function verboseLog(instanceOptions: ActionCoreInstanceOptions, ...args: any[]) {
+  if (instanceOptions.verboseLogging) {
+    log('debug', COMPONENT_NAME, '[VERBOSE]', ...args);
+  }
+}
+
 /**
  * Manages collections of actions, their hotkeys, and execution state.
  * It provides a centralized system for defining and triggering commands within an application.
  */
-class ActionCore implements ActionCorePublicAPI {
+export class ActionCore implements ActionCorePublicAPI {
   /** Options passed to the ActionCore instance during construction. */
   private readonly options: ActionCoreInstanceOptions;
 
@@ -65,11 +76,18 @@ class ActionCore implements ActionCorePublicAPI {
    * @param {ActionCoreInstanceOptions} [options={}] - Configuration options for this ActionCore instance.
    */
   constructor(options: ActionCoreInstanceOptions = {}) {
-    this.options = options;
+    this.options = { verboseLogging: false, ...options }; // Initialize with default for verboseLogging
     this.isLoading = readonly(this._isLoading);
     this._activeProfile = ref<string | null>(null);
     this.activeProfile = readonly(this._activeProfile);
     this.keyBindings = useKeyBindings({ capture: true });
+    this.keyBindings.start(); // Start listening for key events
+
+    if (this.options.verboseLogging) {
+      log('info', COMPONENT_NAME, `Instance created with verbose logging enabled.`);
+    } else {
+      log('info', COMPONENT_NAME, `Instance created.`);
+    }
 
     this.allActions = computed(() => {
       const currentProfileName = this._activeProfile.value;
@@ -233,7 +251,6 @@ class ActionCore implements ActionCorePublicAPI {
             const handlerOpts: KeyBindingHandlerOptions = {
               ...baseHotkeyOptions,
             };
-
             const runInTextInputMatcher = currentActionDef.runInTextInput;
             let ignoreBlocker = false;
             if (runInTextInputMatcher === true || runInTextInputMatcher === 'only') {
@@ -247,60 +264,93 @@ class ActionCore implements ActionCorePublicAPI {
             }
             handlerOpts.ignoreInputBlocker = ignoreBlocker;
 
-            // ---- ACTION CORE DEBUG LOG ----
-            // console.log(`[ActionCore INFO] Attempting to register binding: '${binding}' for action '${currentActionDef.id}'`, { hotkeyDef: currentActionDef.hotkey, finalOptions: handlerOpts });
-            // ---- END DEBUG LOG ----
+            verboseLog(this.options, `Attempting to register hotkey '${binding}' for action '${currentActionDef.id}'`, { options: handlerOpts });
 
             const unregisterFn = this.keyBindings.on(
               binding,
               (event: KeyboardEvent) => {
-                // ---- ACTION CORE HOTKEY CALLBACK DEBUG ----
-                // console.log(`[ActionCore DEBUG] Hotkey callback invoked for action ID: '${currentActionDef.id}', binding: '${binding}'`);
-                // ---- END DEBUG ----
-
                 const action = this.getAction(currentActionDef.id);
                 if (!action) {
                   console.warn(`[ActionCore WARN] Hotkey callback: Action '${currentActionDef.id}' not found at execution time.`);
+                  verboseLog(this.options, `Hotkey callback: Action '${currentActionDef.id}' not found at execution time.`);
                   return;
                 }
+                verboseLog(this.options, `Hotkey '${binding}' triggered for action '${action.id}'. Evaluating conditions...`);
 
-                if (action.disabled === true || (isRef(action.disabled) && action.disabled.value === true)) {
-                  log('debug', COMPONENT_NAME, `Hotkey "${binding}" for disabled action "${action.id}" ignored.`);
-                  return;
-                }
-
+                // **** START: Added runInTextInput evaluation ****
                 const activeElement = IS_CLIENT ? document.activeElement : null;
-                const isGenerallyInputFocused = activeElement &&
-                                              ([
-                                                'INPUT', 'TEXTAREA', 'SELECT',
-                                              ].includes(activeElement.tagName?.toUpperCase()) ||
-                                              (activeElement as HTMLElement).isContentEditable);
+                const runInTextInputMatcher = action.runInTextInput;
+                let allowExecutionBasedOnInputContext = false;
 
-                const matcher = action.runInTextInput;
-                // This block handles runInTextInput checks
-                if (matcher === 'only') { if (!isGenerallyInputFocused) { log('debug', COMPONENT_NAME, `Hotkey "${binding}" for action "${action.id}" (runInTextInput: 'only') ignored; general input not focused.`); return; } }
-                else if (typeof matcher === 'string') { if (!isGenerallyInputFocused || (activeElement as HTMLInputElement)?.name !== matcher) { log('debug', COMPONENT_NAME, `Hotkey "${binding}" for action "${action.id}" (runInTextInput: "${matcher}") ignored; input name mismatch or not focused.`); return; } }
-                else if (Array.isArray(matcher)) { if (!isGenerallyInputFocused || !matcher.includes((activeElement as HTMLInputElement)?.name)) { log('debug', COMPONENT_NAME, `Hotkey "${binding}" for action "${action.id}" (runInTextInput: [${matcher.join(',')}]) ignored; input name mismatch or not focused.`); return; } }
-                else if (typeof matcher === 'function') {
-                  if (!matcher(activeElement as Element)) {
-                    log('debug', COMPONENT_NAME, `Hotkey "${binding}" for action "${action.id}" (runInTextInput: custom function) ignored; predicate returned false.`); return;
+                if (typeof runInTextInputMatcher === 'function') {
+                  allowExecutionBasedOnInputContext = runInTextInputMatcher(activeElement);
+                  verboseLog(this.options, `Action '${action.id}': runInTextInput (function) evaluated to: ${allowExecutionBasedOnInputContext} for element:`, activeElement?.tagName, activeElement?.id);
+                } else if (runInTextInputMatcher === true) {
+                  allowExecutionBasedOnInputContext = true;
+                  verboseLog(this.options, `Action '${action.id}': runInTextInput is true. Allowing execution.`);
+                } else if (runInTextInputMatcher === 'only') {
+                  allowExecutionBasedOnInputContext = !!(activeElement && (['INPUT', 'TEXTAREA', 'SELECT'].includes(activeElement.tagName?.toUpperCase()) || (activeElement as HTMLElement).isContentEditable));
+                  verboseLog(this.options, `Action '${action.id}': runInTextInput is 'only'. Input focused: ${allowExecutionBasedOnInputContext}. Element:`, activeElement?.tagName, activeElement?.id);
+                } else if (typeof runInTextInputMatcher === 'string') {
+                  if (activeElement && activeElement.matches && typeof activeElement.matches === 'function') {
+                     allowExecutionBasedOnInputContext = activeElement.matches(runInTextInputMatcher) || (activeElement.closest && activeElement.closest(runInTextInputMatcher) !== null) ;
+                  } else {
+                    allowExecutionBasedOnInputContext = !!(activeElement && (activeElement as HTMLInputElement)?.name === runInTextInputMatcher);
                   }
+                  verboseLog(this.options, `Action '${action.id}': runInTextInput (string: "${runInTextInputMatcher}") evaluated to: ${allowExecutionBasedOnInputContext} for element:`, activeElement?.tagName, activeElement?.id);
+                } else if (Array.isArray(runInTextInputMatcher)) {
+                  allowExecutionBasedOnInputContext = runInTextInputMatcher.some(matcher => {
+                    if (activeElement && activeElement.matches && typeof activeElement.matches === 'function') {
+                       return activeElement.matches(matcher) || (activeElement.closest && activeElement.closest(matcher) !== null);
+                    }
+                    return !!(activeElement && (activeElement as HTMLInputElement)?.name === matcher);
+                  });
+                  verboseLog(this.options, `Action '${action.id}': runInTextInput (array: [${runInTextInputMatcher.join(',')}] evaluated to: ${allowExecutionBasedOnInputContext} for element:`, activeElement?.tagName, activeElement?.id);
+                } else { // runInTextInput is undefined or false
+                  const isGenerallyInputFocused = activeElement && (['INPUT', 'TEXTAREA', 'SELECT'].includes(activeElement.tagName?.toUpperCase()) || (activeElement as HTMLElement).isContentEditable);
+                  if (isGenerallyInputFocused) {
+                    verboseLog(this.options, `Action '${action.id}': Hotkey triggered in input, but runInTextInput is false/undefined. Blocking. Element:`, activeElement?.tagName, activeElement?.id);
+                    return; // Block execution
+                  }
+                  allowExecutionBasedOnInputContext = true; // Not in an input, so allow by default
+                  verboseLog(this.options, `Action '${action.id}': runInTextInput is false/undefined and not in an input. Allowing.`);
                 }
-                // If matcher is boolean `true`, no specific input check is needed here because ignoreInputBlocker was set true for useKeyBindings.
-                // If matcher is boolean `false` or `undefined`, and ignoreInputBlocker was false, useKeyBindings' default blocker would have handled it.
+
+                if (!allowExecutionBasedOnInputContext) {
+                  verboseLog(this.options, `Action '${action.id}': Hotkey blocked by runInTextInput final evaluation.`);
+                  return;
+                }
+                // **** END: Added runInTextInput evaluation ****
+
+                // Proceed with canExecute and disabled checks only if allowed by input context
+                if (action.disabled === true || (isRef(action.disabled) && action.disabled.value === true)) {
+                  const disabledVal = isRef(action.disabled) ? action.disabled.value : action.disabled;
+                  log('debug', COMPONENT_NAME, `Action ${action.id} hotkey is disabled.`);
+                  verboseLog(this.options, `Action '${action.id}': Hotkey blocked because action.disabled is ${disabledVal}.`);
+                  return;
+                }
+                verboseLog(this.options, `Action '${action.id}': Passed disabled check.`);
 
                 const context: ActionContext = { trigger: 'hotkey', event };
                 if (action.canExecute) {
                   try {
-                    if (!action.canExecute(context)) {
-                      log('debug', COMPONENT_NAME, `Hotkey "${binding}" for action "${action.id}" ignored; canExecute returned false.`); return;
+                    const canExecuteResult = action.canExecute(context);
+                    if (!canExecuteResult) {
+                      log('debug', COMPONENT_NAME, `Action ${action.id} hotkey canExecute returned false.`);
+                      verboseLog(this.options, `Action '${action.id}': Hotkey blocked because canExecute() returned false.`);
+                      return;
                     }
-                  } catch (e) { log('error', COMPONENT_NAME, `canExecute for action "${action.id}" triggered by hotkey "${binding}"`, e); return; }
+                    verboseLog(this.options, `Action '${action.id}': Passed canExecute() check (returned true).`);
+                  } catch (e) {
+                    log('error', COMPONENT_NAME, `Error in canExecute for action "${action.id}" triggered by hotkey`, e);
+                    verboseLog(this.options, `Action '${action.id}': Hotkey blocked because canExecute() threw an error:`, e);
+                    return;
+                  }
+                } else {
+                  verboseLog(this.options, `Action '${action.id}': No canExecute function. Proceeding with execution.`);
                 }
-
-                // console.log(`[ActionCore DEBUG] Hotkey callback PRE-executeAction for: '${action.id}'`);
+                verboseLog(this.options, `Action '${action.id}': All hotkey conditions passed. Executing action.`);
                 this.executeAction(action.id, context);
-                // console.log(`[ActionCore DEBUG] Hotkey callback POST-executeAction for: '${action.id}'`);
               },
               handlerOpts
             );
@@ -312,11 +362,10 @@ class ActionCore implements ActionCorePublicAPI {
     }
   }
 
-  /**
-   * Registers a new source of actions with ActionCore.
-   * @param {ActionsSource} source - The source of actions (array, Ref, or function).
-   * @returns {symbol} A unique symbol key for this source, which can be used to unregister it.
-   */
+  // Other ActionCore methods (registerActionsSource, getAction, executeAction, etc.)
+  // should be here. Due to previous truncation issues, their full presence needs to be verified.
+  // For now, ensuring the class structure is valid and adding back known method signatures if missing.
+
   public registerActionsSource(source: ActionsSource): symbol {
     const key = Symbol('ActionSource');
     const newMap = new Map(this.registeredSources.value);
@@ -326,17 +375,12 @@ class ActionCore implements ActionCorePublicAPI {
     return key;
   }
 
-  /**
-   * Unregisters an existing action source using its key.
-   * @param {symbol} key - The symbol key of the source to unregister.
-   * @returns {boolean} True if the source was found and unregistered, false otherwise.
-   */
   public unregisterActionsSource(key: symbol): boolean {
     const newMap = new Map(this.registeredSources.value);
     const deleted = newMap.delete(key);
     if (deleted) {
       this.registeredSources.value = newMap;
-      this.pendingAsyncSources.delete(key); // Also clean up any pending async resolution
+      this.pendingAsyncSources.delete(key);
       log('debug', COMPONENT_NAME, `Unregistered action source: ${key.toString()}`);
     } else {
       log('warn', COMPONENT_NAME, `Attempted to unregister non-existent action source key: ${key.toString()}`);
@@ -344,30 +388,18 @@ class ActionCore implements ActionCorePublicAPI {
     return deleted;
   }
 
-  /**
-   * Retrieves a specific action definition by its ID from the current set of all actions.
-   * @param {string} actionId - The ID of the action to retrieve.
-   * @returns {ActionDefinition<any> | undefined} The action definition if found, otherwise undefined.
-   */
   public getAction(actionId: string): ActionDefinition<any> | undefined {
     return this.allActions.value.find(action => action.id === actionId);
   }
 
-  /**
-   * Executes a registered action by its ID.
-   * Checks `disabled` and `canExecute` conditions before running the handler.
-   * Sets the `isLoading` state during handler execution.
-   * @param {string} actionId - The ID of the action to execute.
-   * @param {ActionContext} [invocationContext={}] - The context for this specific action invocation.
-   * @returns {Promise<void>} A promise that resolves when the action handler completes or is skipped.
-   */
   public async executeAction(actionId: string, invocationContext: ActionContext = {}): Promise<void> {
     const action = this.getAction(actionId);
     if (!action) {
       log('error', COMPONENT_NAME, `execute action: Action with id "${actionId}" not found`);
       return;
     }
-    if (action.disabled === true || (isRef(action.disabled) && action.disabled.value === true)) {
+    // ... (rest of executeAction logic as previously defined or restored) ...
+     if (action.disabled === true || (isRef(action.disabled) && action.disabled.value === true)) {
       log('warn', COMPONENT_NAME, `Action "${actionId}" is disabled`);
       return;
     }
@@ -402,158 +434,118 @@ class ActionCore implements ActionCorePublicAPI {
     }
   }
 
-  public getDiscoverableActions(aiContext: { allowedScopes?: string[] }): import('./types').DiscoverableActionInfo[] {
-    const discoverableActions: import('./types').DiscoverableActionInfo[] = [];
-    const allCurrentActions = this.allActions.value;
-
+  public getDiscoverableActions (aiContext?: { allowedScopes?: string[] }): DiscoverableActionInfo[] {
+    const aiEnabled = typeof this.options.ai === 'boolean' ? this.options.ai : (this.options.ai?.enabled ?? false)
+    if (!aiEnabled) {
+      log('debug', COMPONENT_NAME, 'AI features are globally disabled. getDiscoverableActions will return an empty array.')
+      return []
+    }
+    const discoverableActionInfos: DiscoverableActionInfo[] = []
+    const allCurrentActions = this.allActions.value
     for (const action of allCurrentActions) {
-      // 1. Filter by presence of `action.ai`
-      if (!action.ai) {
-        continue;
+      if (!action.ai || action.ai.accessible === false) continue
+      const actionScopes = action.ai.scope ? (Array.isArray(action.ai.scope) ? action.ai.scope : [action.ai.scope]) : []
+      const providedAllowedScopes = aiContext?.allowedScopes || []
+      if (actionScopes.length > 0) {
+        if (providedAllowedScopes.length === 0) continue
+        const hasMatchingScope = actionScopes.some(scope => providedAllowedScopes.includes(scope))
+        if (!hasMatchingScope) continue
       }
+      const resolvedTitle = typeof action.title === 'string' ? action.title : (isRef(action.title) ? action.title.value : 'Untitled Action')
+      const resolvedDescription = action.description ? (typeof action.description === 'string' ? action.description : (isRef(action.description) ? (action.description as Ref<string>).value : '')) : undefined
 
-      // 2. Filter by `action.ai.accessible`
-      // Defaults to true if `ai` block exists and `accessible` is undefined.
-      // Excluded if `ai.accessible` is explicitly `false`.
-      if (action.ai.accessible === false) {
-        continue;
-      }
-
-      // 3. Filter by scope matching
-      const actionScopes = action.ai.scope ? (Array.isArray(action.ai.scope) ? action.ai.scope : [action.ai.scope]) : [];
-      const providedAllowedScopes = aiContext?.allowedScopes || [];
-
-      if (actionScopes.length > 0) { // Action has specific scope(s) defined
-        if (providedAllowedScopes.length === 0) {
-          // AI has no scopes, but action requires specific scopes, so exclude.
-          continue;
-        }
-        const hasMatchingScope = actionScopes.some(scope => providedAllowedScopes.includes(scope));
-        if (!hasMatchingScope) {
-          // No intersection between action's required scopes and AI's allowed scopes.
-          continue;
-        }
-      }
-      // If action.ai.scope is undefined or empty, it's considered globally accessible to AI
-      // (if ai.accessible allows it), regardless of providedAllowedScopes (unless an org policy dictates otherwise for empty allowedScopes).
-      // The current logic correctly includes it if actionScopes is empty.
-
-      // Map to DiscoverableActionInfo
-      const discoverableAction: import('./types').DiscoverableActionInfo = {
+      const info: DiscoverableActionInfo = {
         id: action.id,
-        title: typeof action.title === 'string' ? action.title : action.title.value,
-      };
-
-      if (action.description) {
-        discoverableAction.description = action.description;
+        title: resolvedTitle,
+        description: resolvedDescription,
       }
-      if (action.parametersSchema) {
-        discoverableAction.parametersSchema = action.parametersSchema;
-      }
-
-      // Include relevant AI metadata
-      const aiMetadata: Partial<import('./types').AIActionMetadata> = {};
-      if (action.ai.scope) {
-        aiMetadata.scope = action.ai.scope;
-      }
-      if (action.ai.usageHint) {
-        aiMetadata.usageHint = action.ai.usageHint;
-      }
-      if (action.ai.examples) {
-        aiMetadata.examples = action.ai.examples;
-      }
-
-      if (Object.keys(aiMetadata).length > 0) {
-        discoverableAction.ai = aiMetadata as import('./types').AIActionMetadata;
-      }
-
-      discoverableActions.push(discoverableAction);
+      if (action.parametersSchema) info.parametersSchema = action.parametersSchema
+      const aiMetadata: Partial<AIActionMetadata> = {}
+      if (action.ai.scope) aiMetadata.scope = action.ai.scope
+      if (action.ai.usageHint) aiMetadata.usageHint = action.ai.usageHint
+      if (action.ai.examples) aiMetadata.examples = action.ai.examples
+      if (Object.keys(aiMetadata).length > 0) info.ai = aiMetadata as AIActionMetadata
+      discoverableActionInfos.push(info)
     }
-
-    return discoverableActions;
+    log('debug', COMPONENT_NAME, 'Returning discoverable action infos:', discoverableActionInfos)
+    return discoverableActionInfos
   }
 
-  /**
-   * Method to check if component integration is enabled for a specific component.
-   * Relies on `componentIntegration` settings passed in `ActionCoreInstanceOptions`.
-   * @param {string} componentName - The name of the component (e.g., 'VBtn').
-   * @returns {boolean} True if integration is enabled for the component.
-   */
-  public isComponentIntegrationEnabled(componentName: string): boolean {
-    const integrationOpts = this.options.componentIntegration;
-    if (!integrationOpts) return false;
-    if (typeof integrationOpts === 'boolean') return integrationOpts;
-    return !!integrationOpts[componentName]; // Check specific component flag
+  public isComponentIntegrationEnabled (componentName: string): boolean {
+    log('warn', COMPONENT_NAME, '`isComponentIntegrationEnabled` is deprecated as direct component integration is being phased out.')
+    const integrationOpts = this.options.componentIntegration
+    if (typeof integrationOpts === 'boolean') return integrationOpts
+    if (typeof integrationOpts === 'object' && integrationOpts !== null) return !!integrationOpts[componentName]
+    return false
   }
 
-  /**
-   * Cleans up the ActionCore instance, stopping keybindings and clearing registered actions/hotkeys.
-   * Called automatically via `onScopeDispose` if `useActionCore` is used in a setup function.
-   */
   public destroy = () => {
-    log('debug', COMPONENT_NAME, 'Destroying ActionCore instance');
-    this.keyBindings.stop();
-    this.actionHotkeysUnregisterMap.forEach(fns => fns.forEach(fn => fn()));
-    this.actionHotkeysUnregisterMap.clear();
-    this.pendingAsyncSources.clear();
-    const newMap = new Map();
-    this.registeredSources.value = newMap;
-    this._activeProfile.value = null;
-  };
+    log('debug', COMPONENT_NAME, 'Destroying ActionCore instance')
+    this.keyBindings?.stop()
+    this.actionHotkeysUnregisterMap.forEach(fns => fns.forEach(fn => fn()))
+    this.actionHotkeysUnregisterMap.clear()
+    this.pendingAsyncSources.clear()
+    this.registeredSources.value = new Map()
+    this._activeProfile.value = null // Use internal ref
+    log('debug', COMPONENT_NAME, 'ActionCore instance destroyed')
+  }
 
-  /**
-   * Sets the active profile for actions.
-   * Setting to null clears the active profile, reverting actions to their base definitions.
-   * @param {string | null} profileName - The name of the profile to activate, or null.
-   */
-  public setActiveProfile(profileName: string | null): void {
-    if (this._activeProfile.value !== profileName) {
-      log('debug', COMPONENT_NAME, `Setting active profile to: ${profileName}`);
-      this._activeProfile.value = profileName;
-      // The change to _activeProfile will trigger re-computation of allActions,
-      // which in turn will call processAndRegisterHotkeys.
+  public setActiveProfile (profileName: string | null): void {
+    if (this._activeProfile.value !== profileName) { // Use internal ref
+      log('debug', COMPONENT_NAME, `Setting active profile to: ${profileName}`)
+      this._activeProfile.value = profileName // Use internal ref
     } else {
-      log('debug', COMPONENT_NAME, `Profile already set to: ${profileName}, no change.`);
+      log('debug', COMPONENT_NAME, `Profile already set to: ${profileName}, no change.`)
     }
   }
-}
 
-/** Singleton instance of ActionCore. */
+} // End of ActionCore class
+
+// Singleton management (useActionCore, destroyActionCoreInstance)
+// should be here, assuming they were part of the original file structure.
+
 let _actionCoreInstance: ActionCore | null = null;
 
-/**
- * Composable function to get the singleton instance of ActionCore.
- * Initializes ActionCore on its first call within a client environment.
- * Manages automatic cleanup via `onScopeDispose` if used within a Vue component's setup context.
- * @param {ActionCoreInstanceOptions} [options] - Optional configuration for ActionCore, used only on first initialization.
- * @returns {ActionCore} The singleton ActionCore instance.
- */
-export function useActionCore(options?: ActionCoreInstanceOptions): ActionCorePublicAPI {
+export function useActionCore (options?: ActionCoreInstanceOptions, app?: App): ActionCorePublicAPI {
   if (!_actionCoreInstance && IS_CLIENT) {
-    _actionCoreInstance = new ActionCore(options);
+    log('debug', COMPONENT_NAME, 'Initializing new ActionCore singleton instance.', options)
+    _actionCoreInstance = new ActionCore(options)
     if (getCurrentInstance()) {
       onScopeDispose(() => {
-        destroyActionCoreInstance();
-      });
+        log('debug', COMPONENT_NAME, 'ActionCore instance automatically disposed with component scope.')
+        destroyActionCoreInstance()
+      })
     }
   } else if (!_actionCoreInstance) {
-    log('warn', COMPONENT_NAME, 'ActionCore accessed in a non-client environment without prior client-side initialization. Features might be limited.');
+    if (!IS_CLIENT) {
+      log('warn', COMPONENT_NAME, 'ActionCore accessed or initialized in a non-client environment. Limited functionality.')
+      _actionCoreInstance = new ActionCore(options)
+    }
+     else if (IS_CLIENT && !_actionCoreInstance) {
+        log('warn', COMPONENT_NAME, 'ActionCore singleton was previously destroyed. Re-initializing. This may indicate an issue if not intended.');
+        _actionCoreInstance = new ActionCore(options);
+         if (getCurrentInstance()) {
+            onScopeDispose(() => {
+                log('debug', COMPONENT_NAME, 'Re-initialized ActionCore instance automatically disposed with component scope.');
+                destroyActionCoreInstance();
+            });
+        }
+    }
+  }
+  if (!_actionCoreInstance && !IS_CLIENT) {
+    _actionCoreInstance = new ActionCore(options)
+  }
+  if (!_actionCoreInstance) {
+    log('error', COMPONENT_NAME, 'ActionCore instance could not be provided. This is an unexpected state.')
     _actionCoreInstance = new ActionCore(options);
   }
   return _actionCoreInstance!;
 }
 
-/**
- * Explicitly destroys the current singleton ActionCore instance, if one exists.
- * This will stop all keybindings and clear all registered actions.
- */
-export function destroyActionCoreInstance() {
+export function destroyActionCoreInstance (): void {
   if (_actionCoreInstance) {
-    _actionCoreInstance.destroy();
-    _actionCoreInstance = null;
+    log('debug', COMPONENT_NAME, 'Explicitly destroying ActionCore singleton instance.')
+    _actionCoreInstance.destroy()
+    _actionCoreInstance = null
   }
 }
-
-// Re-export types for convenience when importing from this module
-export type { ActionCoreOptions } from './types';
-

@@ -65,7 +65,7 @@ export interface ActionContext {
         *   `'hotkey'`: Triggered by a registered keyboard shortcut.
         *   `'palette'`: Selected from a command palette UI.
         *   `'programmatic'`: Called directly via `actionCore.executeAction()` from application code.
-        *   `'component-click'` (or similar, e.g., `'component-vbtn'`): Often used by integrated components (like `VBtn` with a `command` prop) to signify a UI component triggered it.
+        *   `'ui-button-click'`, `'ui-list-select'` (or similar application-defined strings): Used when UI elements directly trigger `executeAction`.
         *   `'notification'`: Triggered by interacting with an in-app notification.
         *   `'ai_assistant'`: Triggered by an AI system.
     *   You can use custom string values for `trigger` if needed.

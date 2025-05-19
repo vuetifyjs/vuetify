@@ -9,7 +9,7 @@
       class="mb-2"
       density="compact"
     />
-    <p>Action "Submit Input Field" (hotkey: Enter) is configured with <code>runInTextInput: (el) => el === document.getElementById('special-text-input')</code>. It should only trigger if <em>this specific</em> field is focused.</p>
+    <p>Action "Submit Input Field" (hotkey: Enter) is configured with <code>runInTextInput: (el) => { if (!(el instanceof HTMLElement)) return false; const vTextFieldRoot = document.getElementById('special-text-input'); return vTextFieldRoot?.contains(el) || false; }</code>. It should only trigger if <em>this specific</em> field is focused.</p>
     <v-chip :color="inputFocused ? 'green' : 'grey'" size="small" class="mt-1">
       Input Focused: {{ inputFocused }}
     </v-chip>
@@ -27,23 +27,26 @@ const inputVal = ref('Type here and press Enter')
 const inputFocused = ref(false)
 
 const logAction = inject<(message: string, details?: any) => void>('logAction')
-const actionCore = inject(ActionCoreSymbol)
+const actionCore = useActionCore()
 
 // --- Logic moved from Playground.actionCore.vue ---
-const hotkeysInTextInputs_inputVal = ref('Type here and press Enter'); // This will be controlled by the action
+const hotkeysInTextInputs_inputVal = ref('Type here and press Enter');
 
 const inputAction: ActionDefinition = {
   id: 'text-input-action',
   title: 'Submit Input Field',
   hotkey: 'enter',
   description: 'Submits the content of the special input field below.',
-  runInTextInput: (el) => el === document.getElementById('special-text-input'),
+  runInTextInput: (el) => {
+    if (!(el instanceof HTMLElement)) return false;
+    const vTextFieldRoot = document.getElementById('special-text-input');
+    return vTextFieldRoot?.contains(el) || false;
+  },
   hotkeyOptions: { preventDefault: true },
   handler: () => {
     if (logAction) logAction('Input field submitted (Enter while focused): ', hotkeysInTextInputs_inputVal.value);
-    // Update the UI input field as well
     inputVal.value = 'Submitted: ' + hotkeysInTextInputs_inputVal.value;
-    hotkeysInTextInputs_inputVal.value = 'Submitted!'; // Update the action-specific ref
+    hotkeysInTextInputs_inputVal.value = 'Submitted!';
   }
 }
 
@@ -53,6 +56,8 @@ onMounted(() => {
   if (actionCore) {
     scenario8SourceKey = actionCore.registerActionsSource([inputAction]);
     if (logAction) logAction(`Registered: ${inputAction.title} (from ScenarioHotkeysInTextInputs component)`);
+  } else {
+    if (logAction) logAction('Error: ActionCore not available in ScenarioHotkeysInTextInputs', { severity: 'error' });
   }
 })
 

@@ -1,18 +1,20 @@
 <template>
   <scenario-card title="Action With Sub-Items">
     <p>Action "Navigation Menu" is in palette. It will prompt if no param or you can execute it from here.</p>
-    <v-btn command="parent-with-subs">Open Nav Menu (via VBtn)</v-btn>
+    <v-btn @click="handleOpenNavMenu">Open Nav Menu (via VBtn)</v-btn>
     <p class="text-caption mt-2">The "Go to Settings" sub-item has hotkey <VHotKey :hotkey="settingsActionHotkey" />.</p>
   </scenario-card>
 </template>
 
 <script setup lang="ts">
 import { onMounted, onUnmounted, inject, ref } from 'vue';
-import { useActionCore, type ActionDefinition, type ActionContext, VHotKey } from '../../../src/labs/VActionCore';
+import { useActionCore, type ActionDefinition, type ActionContext, VHotKey, ShowSubItemsUISymbol } from '@/labs/VActionCore';
 import ScenarioCard from '../ScenarioCard.vue';
 
 const actionCore = useActionCore();
 const logAction: ((message: string, details?: any) => void) | undefined = inject('logAction');
+// Inject the function to open the command palette for sub-items
+const openPaletteDirectly: ((actionDef: ActionDefinition) => void) | undefined = inject(ShowSubItemsUISymbol);
 
 const settingsActionHotkey = ref('alt+s');
 
@@ -35,6 +37,7 @@ const parentActionWithSubs: ActionDefinition = {
   title: 'Navigation Menu',
   icon: 'mdi-menu',
   description: 'Access various navigation links.',
+  // No direct handler; subItems are meant to be shown in a UI like the command palette
   subItems: (ctx: ActionContext) => {
     if (logAction) logAction('Fetching subItems for Navigation Menu...', { context: ctx });
     return new Promise(resolve => setTimeout(() => {
@@ -59,6 +62,19 @@ const parentActionWithSubs: ActionDefinition = {
         }
       ]);
     }, 300));
+  }
+};
+
+const handleOpenNavMenu = () => {
+  if (openPaletteDirectly) {
+    // The `parentActionWithSubs` ActionDefinition is defined in this component's scope.
+    // It has subItems that the command palette (openPaletteDirectly) knows how to display.
+    openPaletteDirectly(parentActionWithSubs);
+  } else {
+    logAction?.('Error: UI function to show sub-items (openPaletteDirectly) not injected. Cannot open nav menu UI.');
+    // As a fallback, one could try actionCore.executeAction, but it won't open the palette UI by itself
+    // for an action that only has subItems and no handler.
+    // actionCore.executeAction('parent-with-subs');
   }
 };
 

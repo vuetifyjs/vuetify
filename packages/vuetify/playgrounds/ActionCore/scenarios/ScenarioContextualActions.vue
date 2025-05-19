@@ -15,7 +15,7 @@
     <v-chip :color="editorFocused ? 'green' : 'grey'" small>
       Editor Focused: {{ editorFocused }}
     </v-chip>
-    <v-btn command="save-editor" :disabled="!editorFocused" class="ml-2">Save Editor (if focused)</v-btn>
+    <v-btn @click="() => actionCore.executeAction('save-editor')" :disabled="!editorFocused" class="ml-2">Save Editor (if focused)</v-btn>
   </scenario-card>
 </template>
 
@@ -33,7 +33,7 @@ const editorContent = ref('Some text in the editor...');
 const saveHotkey = 'cmdorctrl+s';
 const saveHotkeyOptions = {
   preventDefault: true,
-  stopPropagation: true,
+  // stopPropagation: true,
   ignoreKeyRepeat: true,
 };
 

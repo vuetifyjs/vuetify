@@ -92,6 +92,12 @@ export interface DiscoverableActionInfo {
 }
 // --- AI Integration Related Types --- END ---
 
+// New interface for AI options object
+export interface ActionCoreAIOptions {
+  enabled?: boolean;
+  // other AI specific configs can be added here
+}
+
 // --- Action Profiling Types --- START ---
 export interface ActionProfileOverride<T extends ActionContext = ActionContext> {
   title?: string | Ref<string>;
@@ -186,17 +192,34 @@ export type ActionsSource =
   | Ref<ActionDefinition[]>
   | (() => ActionDefinition[] | Promise<ActionDefinition[]>);
 
-/**
- * Configuration options for initializing a ActionCore instance.
- */
+/** Configuration options for ActionCore. */
 export interface ActionCoreOptions {
   /**
-   * Controls whether Vuetify components (like VBtn, VListItem) integrate their `command` prop.
-   * If `true`, all supported components attempt integration.
-   * If an object, specifies per-component opt-in (e.g., `{ VBtn: true }`).
-   * Defaults to `false` if not specified by the user, meaning no automatic component integration.
+   * Optional initial set of action sources to register upon ActionCore initialization.
    */
-  componentIntegration?: boolean | Record<string, boolean>;
+  sources?: ActionsSource[]
+  /**
+   * Global settings for component integration. For example, `{ VBtn: true, VListItem: false }`.
+   * If a component name is not listed, its integration defaults to `false`.
+   * Setting this to `true` enables integration for all supported components by default.
+   * Setting this to `false` disables integration for all components unless explicitly enabled.
+   * @deprecated Direct component integration is being phased out.
+   */
+  componentIntegration?: boolean | Record<string, boolean>
+
+  /**
+   * Configuration for AI-related features.
+   * Set to `true` or an ActionCoreAIOptions object (e.g. `{ enabled: true }`) to enable AI functionalities.
+   * Defaults to `false` (disabled).
+   * @experimental AI features are experimental and not recommended for production use.
+   */
+  ai?: boolean | ActionCoreAIOptions; // Changed to use ActionCoreAIOptions
+
+  /**
+   * An optional parent PActionCore instance for hierarchical action management.
+   */
+  parent?: ActionCorePublicAPI
+
   // Add any other future global ActionCore options here
 }
 
@@ -239,3 +262,20 @@ export interface ActionCorePublicAPI {
  * that primarily defines subItems rather than a direct handler.
  */
 export const ShowSubItemsUISymbol: InjectionKey<(action: ActionDefinition<any>) => void> = Symbol.for('vuetify:show-sub-items-ui');
+
+export type ActionCoreInstanceOptions = {
+  /** Options related to AI features and discoverability for actions. */
+  ai?: {
+    enabled?: boolean;
+    // Potentially other AI related options in the future
+  };
+  /**
+   * Enable verbose logging for debugging ActionCore's internal operations,
+   * especially hotkey processing and action execution flow.
+   * Defaults to false.
+   */
+  verboseLogging?: boolean;
+  // Add other future global options for ActionCore here
+};
+
+/** Represents the publicly available API of an ActionCore instance. */

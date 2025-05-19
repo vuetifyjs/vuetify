@@ -30,7 +30,6 @@ ActionCore excels at managing actions that benefit from centralization, shareabi
         *   Is it part of a user "command" or a significant application operation?
         *   Would Action Profiling be beneficial for this interaction?
     *   If the answers to most of these are "no," a simpler, more localized approach is likely better.
-    *   **Component-Level Actions (Light Use):** If an action is primarily tied to one component but you want *some* benefits of ActionCore (like `useCommandable` for `disabled` state reactivity from a simple `canExecute`), consider passing an inline `ActionDefinition` to the `command` prop. This keeps the definition localized to the component's use without necessarily making it a globally intrusive action if it's not registered via a global source.
     *   **Prefer Standard Vue Patterns for Local Interactions:** For simple click handlers, local state changes, or basic event modifications within a component's scope, continue to use standard Vue `@click`, `ref`, `computed`, and methods.
 
 ActionCore is a tool for managing "commands" and significant "actions" in a unified way. It's not intended to replace all basic event handling. A craftsman knows when to use a specialized tool and when a simpler one will suffice.
@@ -123,7 +122,7 @@ ActionCore is a tool for managing "commands" and significant "actions" in a unif
 
 *   **Anti-Pattern:** Dynamically registering `ActionsSource` instances (e.g., in component `setup` or `onMounted`) without ensuring they are reliably unregistered (e.g., in `onUnmounted`).
 *   **Impact:** Accumulation of stale actions, potential hotkey conflicts, performance degradation, memory leaks.
-*   **Recommendation:** Always pair `registerActionsSource` with `unregisterActionsSource` using the returned `symbol` key, especially for component-scoped or module-scoped actions. `useCommandable` handles this for inline action definitions passed via props.
+*   **Recommendation:** Always pair `registerActionsSource` with `unregisterActionsSource` using the returned `symbol` key, especially for component-scoped or module-scoped actions.
 
 By being mindful of these anti-patterns, you can build more robust, maintainable, and user-friendly applications with ActionCore, truly reflecting the principles of software craftsmanship.
 

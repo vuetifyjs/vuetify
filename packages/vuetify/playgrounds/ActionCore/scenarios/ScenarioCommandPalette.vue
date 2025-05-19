@@ -1,13 +1,13 @@
 <template>
   <scenario-card title="Command Palette">
     <p>Hotkey: <VHotKey :hotkey="(Array.isArray(openPaletteActionDef.hotkey) ? openPaletteActionDef.hotkey[0] : openPaletteActionDef.hotkey) || ''" />.</p>
-    <v-btn command="open-command-palette">Open Palette via VBtn</v-btn>
+    <v-btn @click="() => actionCore.executeAction('open-command-palette')">Open Palette via VBtn</v-btn>
   </scenario-card>
 </template>
 
 <script setup lang="ts">
 import { onMounted, onUnmounted, inject } from 'vue';
-import { useActionCore, type ActionDefinition, VHotKey } from '../../../src/labs/VActionCore';
+import { useActionCore, type ActionDefinition, VHotKey } from '@/labs/VActionCore';
 import ScenarioCard from '../ScenarioCard.vue';
 
 const actionCore = useActionCore();
@@ -19,6 +19,7 @@ const openPaletteActionDef: ActionDefinition = {
   title: 'Open Command Palette',
   icon: 'mdi-magnify',
   hotkey: 'meta+k',
+  hotkeyOptions: { preventDefault: true },
   description: 'Opens the main command palette for searching actions.',
   handler: () => {
     if (openPaletteProvided) {

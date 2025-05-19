@@ -36,7 +36,7 @@ This documentation is structured to guide you from foundational concepts to adva
 8.  [**AI Integration**](./08-ai-integration.md)
     *   Making your actions discoverable and invocable by AI assistants, including parameter definitions (`parametersSchema`) and AI-specific metadata.
 9.  [**Component Integration**](./09-component-integration.md)
-    *   Connecting ActionCore to Vuetify components like `VBtn` using the `command` prop, and passing contextual data with `commandData`.
+    *   Recommended application-level strategies for connecting ActionCore to your UI. Covers triggering actions, reflecting action state, and detailed patterns for navigation, buttons, list items, and batch operations.
 10. [**Best Practices for Quality Actions**](./10-best-practices.md)
     *   Principles and tips for designing robust, user-friendly, and maintainable actions.
 11. [**Common Anti-Patterns**](./11-anti-patterns.md)

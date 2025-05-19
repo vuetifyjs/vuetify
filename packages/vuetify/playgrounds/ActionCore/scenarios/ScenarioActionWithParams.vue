@@ -2,7 +2,7 @@
   <scenario-card title="Action With Params">
     <p>Action "Open File by Name..." is in palette. It will prompt if no param.</p>
     <v-btn @click="triggerWithParamInternal" color="info" class="mr-2">Execute with Param ('budget.xlsx')</v-btn>
-    <v-btn command="open-file-with-param">Execute from Palette (will prompt)</v-btn>
+    <v-btn @click="() => actionCore.executeAction('open-file-with-param')">Execute from Palette (will prompt)</v-btn>
   </scenario-card>
 </template>
 

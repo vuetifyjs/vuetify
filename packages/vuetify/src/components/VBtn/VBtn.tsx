@@ -30,14 +30,12 @@ import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant
 import { Ripple } from '@/directives/ripple'
 
 // Utilities
-import { computed, toDisplayString, toRef, withDirectives, inject } from 'vue'
+import { computed, toDisplayString, toRef, withDirectives } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
 import type { RippleDirectiveBinding } from '@/directives/ripple'
-import { type ActionDefinition, ActionCoreSymbol } from '@/labs/VActionCore'
-import { useCommandable } from '@/labs/VActionCore/composables/useCommandable'
 
 export type VBtnSlots = {
   default: never
@@ -74,13 +72,6 @@ export const makeVBtnProps = propsFactory({
 
   text: {
     type: [String, Number, Boolean],
-    default: undefined,
-  },
-
-  // ActionCore Props
-  command: [String, Object] as PropType<string | ActionDefinition>,
-  commandData: {
-    type: Object as PropType<Record<string, unknown> | undefined>,
     default: undefined,
   },
 
@@ -124,14 +115,6 @@ export const VBtn = genericComponent<VBtnSlots>()({
     const { sizeClasses, sizeStyles } = useSize(props)
     const group = useGroupItem(props, props.symbol, false)
     const link = useLink(props, attrs)
-
-    // ActionCore integration
-    const actionCore = inject(ActionCoreSymbol, null)
-    const {
-      isCommandable,
-      executeCommand,
-      effectiveActionId,
-    } = useCommandable(props as any, actionCore, 'VBtn')
 
     const isActive = computed(() => {
       if (props.active !== undefined) {
@@ -186,23 +169,8 @@ export const VBtn = genericComponent<VBtnSlots>()({
         return;
       }
 
-      if (isCommandable.value && effectiveActionId.value) {
-        // Toggle optimistically first
-        group?.toggle()
-
-        executeCommand({ data: props.commandData }, e)
-          .catch(err => {
-            // Revert the toggle if command fails
-            group?.toggle()
-            console.error(
-              `[Vuetify VBtn] Command execution failed for action "${effectiveActionId.value}":`,
-              err,
-            )
-          })
-      } else {
-        link.navigate?.(e)
-        group?.toggle()
-      }
+      link.navigate?.(e)
+      group?.toggle()
     }
 
     useSelectLink(link, group?.select)

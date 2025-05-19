@@ -18,5 +18,7 @@ export default createVuetify({
   icons,
   locale,
   theme: { defaultTheme: 'light' },
-  actionCore: { componentIntegration: true }, // Initialize ActionCore with component integration enabled
+  actionCore: {
+    ai: { enabled: true } // Enable AI features for the dev environment
+  },
 })

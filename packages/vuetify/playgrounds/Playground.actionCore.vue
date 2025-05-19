@@ -130,15 +130,15 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, provide, nextTick, watch } from 'vue'
+import { ref, computed, provide, nextTick, watch, onMounted, onUnmounted } from 'vue'
 import { useTheme } from 'vuetify'
 import {
   useActionCore,
   ActionCoreSymbol,
   type ActionDefinition,
   type ActionContext,
-  ShowSubItemsUISymbol,
 } from '@/labs/VActionCore'
+import { type ActionCoreOptions, ShowSubItemsUISymbol } from '@/labs/VActionCore/types'
 import { VHotKey } from '@/labs/VActionCore/components/VHotKey/VHotKey'
 import ScenarioCard from '@playgrounds/ActionCore/ScenarioCard.vue'
 import ScenarioBasicGlobalActions from '@playgrounds/ActionCore/scenarios/ScenarioBasicGlobalActions.vue'
@@ -174,8 +174,49 @@ const clearLog = () => { logMessages.value = []; stickToBottom.value = true; scr
 const handleLogScroll = () => { if (logContainerRef.value) { const { scrollTop, scrollHeight, clientHeight } = logContainerRef.value; if (scrollHeight - scrollTop <= clientHeight + 5) stickToBottom.value = true; else stickToBottom.value = false; } }
 const scrollToBottomAndStick = () => { stickToBottom.value = true; scrollToBottom(); }
 watch(logMessages, () => { if (stickToBottom.value) scrollToBottom() }, { deep: true })
-const actionCore = useActionCore()
+
+// Initialize ActionCore with AI features enabled for the playground
+const actionCoreOptionsObj: ActionCoreOptions = {
+  ai: { enabled: true },
+  verboseLogging: true,
+  // Potentially other playground-specific options if needed later
+};
+const actionCore = useActionCore(actionCoreOptionsObj);
+
 provide(ActionCoreSymbol, actionCore)
+
+// **** START: Basic KeyDown Listener for Debugging ****
+const basicKeyDownListener = (e: KeyboardEvent) => {
+  console.log('[Playground Basic Listener] KeyDown:', {
+    key: e.key,
+    code: e.code,
+    metaKey: e.metaKey,
+    ctrlKey: e.ctrlKey,
+    shiftKey: e.shiftKey,
+    altKey: e.altKey,
+    defaultPrevented: e.defaultPrevented,
+  });
+
+  if (e.metaKey && e.key.toLowerCase() === 's') {
+    console.log('[Playground Basic Listener] Detected Cmd+S.');
+  }
+  if (e.metaKey && e.shiftKey && e.key.toLowerCase() === 't') {
+    console.log('[Playground Basic Listener] Detected Cmd+Shift+T.');
+  }
+};
+
+onMounted(() => {
+  // window.addEventListener('keydown', basicKeyDownListener, { capture: true }); // Commented out
+  // logAction('[Playground] Basic global keydown listener added.'); // Commented out
+  // Note: Existing onMounted logic from scenarios will also run.
+});
+
+onUnmounted(() => {
+  // window.removeEventListener('keydown', basicKeyDownListener, { capture: true }); // Commented out
+  // logAction('[Playground] Basic global keydown listener removed.'); // Commented out
+});
+// **** END: Basic KeyDown Listener for Debugging ****
+
 const theme = useTheme()
 const currentThemeName = computed(() => theme.global.name.value)
 const isPaletteOpen = ref(false)

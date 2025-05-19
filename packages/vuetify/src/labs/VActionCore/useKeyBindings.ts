@@ -287,7 +287,6 @@ export function useKeyBindings(options: UseKeyBindingsOptions = {}) {
           }
         });
         if (keysToRemove.length > 0) {
-          log('debug', COMPONENT_NAME, 'macOS Meta keyup: Clearing non-modifier keys', keysToRemove);
           keysToRemove.forEach(key => {
             pressedKeys.value.delete(key);
             if (individualKeyStates[key]) {
@@ -311,13 +310,13 @@ export function useKeyBindings(options: UseKeyBindingsOptions = {}) {
   /**
    * Updates the sequence state, adding the key and resetting the timer.
    */
-function updateSequenceState(eventKey: string) {
-  const MAX_SEQUENCE = 100       // or derive from longest registered sequence
-   if (sequenceTimer.value) clearTimeout(sequenceTimer.value)
-   currentSequence.value.push(eventKey)
-  if (currentSequence.value.length > MAX_SEQUENCE) {
-    currentSequence.value.shift() // keep tail within bound
-  }
+  function updateSequenceState(eventKey: string) {
+    const MAX_SEQUENCE = 100;
+    if (sequenceTimer.value) clearTimeout(sequenceTimer.value);
+    currentSequence.value.push(eventKey);
+    if (currentSequence.value.length > MAX_SEQUENCE) {
+      currentSequence.value.shift();
+    }
     sequenceTimer.value = window.setTimeout(() => {
       currentSequence.value = [];
     }, sequenceTimeoutDuration);
@@ -445,42 +444,40 @@ function updateSequenceState(eventKey: string) {
     }
 
     if (Array.isArray(trigger)) {
-      return { type: 'key', filter: new Set(trigger.map(normalizeFn)) };
+      const normalizedSet = new Set(trigger.map(normalizeFn));
+      return { type: 'key', filter: normalizedSet };
     }
 
     if (typeof trigger === 'string') {
       if (trigger.includes('+') || trigger.includes('_')) {
-        // Handle key combinations (ctrl+s, meta_shift_p)
         let keys = trigger.split(/[+_]/).map(k => k.trim());
         keys = keys.map(k => aliasMap[k.toLowerCase()] || k.toLowerCase());
-
-        // Apply platform-specific normalization
         if (!IS_MAC && keys.includes('meta')) {
           keys = keys.map(k => k === 'meta' ? 'ctrl' : k);
         }
-
+        const normalizedCombination = new Set(keys.map(normalizeFn));
         return {
           type: 'combination',
-          keys: new Set(keys.map(normalizeFn))
+          keys: normalizedCombination
         };
       }
 
       if (trigger.includes('-') && trigger.length > 1) {
-        // Handle key sequences (g-i-t)
+        const seqArray = trigger.split('-').map(k => normalizeFn(k.trim()));
         return {
           type: 'sequence',
-          sequence: trigger.split('-').map(k => normalizeFn(k.trim()))
+          sequence: seqArray
         };
       }
 
-      // Single key
+      const normalizedSingleKey = new Set([normalizeFn(trigger)]);
       return {
         type: 'key',
-        filter: new Set([normalizeFn(trigger)])
+        filter: normalizedSingleKey
       };
     }
 
-    log('warn', COMPONENT_NAME, `Unknown trigger type: ${typeof trigger}`);
+    log('warn', COMPONENT_NAME, 'Unknown trigger type', { triggerType: typeof trigger });
     return { type: 'key', filter: () => false };
   }
 
