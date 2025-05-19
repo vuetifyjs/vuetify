@@ -16,10 +16,10 @@
       </v-card-title>
       <v-pie
         :formats="{ tooltipSubtitle: '[value]%' }"
+        :gap="2"
         :inner-cut="70"
         :items="items"
         :legend="{ position: 'right' }"
-        :pad-angle="2"
         :rounded="2"
         :size="300"
         class="pa-3 mt-3"

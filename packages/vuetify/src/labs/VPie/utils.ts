@@ -16,7 +16,7 @@ export function formatTextTemplate (template: string, item?: PieItem) {
 }
 
 export function usePieArc (props: PieSegmentProps, isHovering: Ref<boolean>) {
-  const hoverZoomRatio = computed(() => Math.max(0, Math.min(0.5, props.zoom ?? 0)))
+  const hoverZoomRatio = computed(() => clamp(props.zoom ?? 0, 0, 0.25))
   const normalizedValue = computed(() => clamp(props.value - 100 * props.gap / 360, 0.01, 99.99))
   const normalizedInnerCut = computed(() => clamp(props.innerCut, props.rounded > 0 ? 20 : 0, 100))
 

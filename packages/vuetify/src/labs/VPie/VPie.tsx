@@ -152,7 +152,7 @@ export const VPie = genericComponent<VPieSlots>()({
     function arcOffset (index: number) {
       return visibleItems.value
         .slice(0, index)
-        .reduce((acc, s) => acc + (s.value / total.value) * (360 - props.gaugeCut), 0)
+        .reduce((acc, s) => acc + (total.value > 0 ? s.value / total.value : 0) * (360 - props.gaugeCut), 0)
     }
 
     function arcSize (v: number) { return v / total.value * (100 - props.gaugeCut / 3.6) }
