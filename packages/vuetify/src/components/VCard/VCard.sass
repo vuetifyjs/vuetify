@@ -4,7 +4,8 @@
 
 @include tools.layer('components')
   .v-card
-    display: block
+    display: flex
+    flex-direction: column
     overflow: hidden
     overflow-wrap: $card-overflow-wrap
     position: relative
@@ -157,6 +158,7 @@
     font-size: $card-text-font-size
     font-weight: $card-text-font-weight
     letter-spacing: $card-text-letter-spacing
+    min-height: 0px
     opacity: $card-text-opacity
     padding: $card-text-padding
     text-transform: $card-text-text-transform
