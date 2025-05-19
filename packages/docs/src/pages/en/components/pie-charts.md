@@ -72,6 +72,12 @@ Charts are more like drawings then regular HTML elements and their size needs to
 
 <ExamplesExample file="v-pie/prop-size" />
 
+#### Palette
+
+Colors can be conveniently passed to a dedicated `palette` prop.
+
+<ExamplesExample file="v-pie/prop-palette" />
+
 #### Legend position
 
 The legend can be moved to any side or hidden entirely. With little effort you can also control legend's and tooltip's text.

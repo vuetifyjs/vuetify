@@ -38,6 +38,10 @@ export const makeVPieProps = propsFactory({
     type: Array as PropType<Record<string, any> | { color?: string, pattern?: string }[]>,
     default: () => [],
   },
+  palette: {
+    type: Array as PropType<({ color?: string, pattern?: string } | string)[]>,
+    default: () => [],
+  },
   itemKey: {
     type: String,
     default: 'key',
@@ -157,6 +161,18 @@ export const VPie = genericComponent<VPieSlots>()({
 
     function arcSize (v: number) { return v / total.value * (100 - props.gaugeCut / 3.6) }
 
+    function colorFromPalette (index: number) {
+      if (props.palette.length === 0) return undefined
+      const paletteItem = props.palette[index % props.palette.length]
+      return typeof paletteItem === 'object' ? paletteItem.color : paletteItem
+    }
+
+    function patternFromPalette (index: number) {
+      if (props.palette.length === 0) return undefined
+      const paletteItem = props.palette[index % props.palette.length]
+      return typeof paletteItem === 'object' ? paletteItem.pattern : undefined
+    }
+
     function isActive (item: PieItem) {
       return visibleItemsKeys.value.includes(item.key)
     }
@@ -229,10 +245,10 @@ export const VPie = genericComponent<VPieSlots>()({
                 <VPieSegment
                   { ...itemProps }
                   key={ item.key }
-                  color={ item.color }
+                  color={ item.color ?? colorFromPalette(index) }
                   value={ isActive(item) ? arcSize(item.value) : 0 }
                   rotate={ arcOffset(index) }
-                  pattern={ item.pattern }
+                  pattern={ item.pattern ?? patternFromPalette(index) }
                   innerCut={ props.innerCut }
                   zoom={ clamp(props.hoverScale ?? 0.05, 0, 0.25) }
                   onMouseenter={ () => onMouseenter(item) }
