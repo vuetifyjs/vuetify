@@ -2,8 +2,8 @@
 
 import { mount } from '@vue/test-utils'
 import { VCommandPalette } from './VCommandPalette'
-import { ActionCoreSymbol, type ActionDefinition, type ActionCorePublicAPI, createAppActionCore, type ActionContext } from '@/labs/VActionCore'
-import { ref, markRaw, nextTick, computed, type Ref, type DeepReadonly, defineComponent, h, shallowRef } from 'vue'
+import { ActionCoreSymbol, type ActionDefinition, type ActionCorePublicAPI, type ActionContext } from '@/labs/VActionCore'
+import { ref, markRaw, nextTick, computed, type Ref, type DeepReadonly, defineComponent, h } from 'vue'
 import { ThemeSymbol, type ThemeInstance } from '@/composables/theme'
 import { DefaultsSymbol, type DefaultsInstance } from '@/composables/defaults'
 import { LocaleSymbol, type LocaleInstance, type RtlInstance } from '@/composables/locale'
@@ -12,7 +12,6 @@ import { IconSymbol, type InternalIconOptions, type IconAliases, type IconSet, V
 import { VTextField } from '@/components/VTextField'
 import { VListItem, VList } from '@/components/VList' // Added VList
 import { VProgressLinear } from '@/components/VProgressLinear' // Added VProgressLinear
-import { VCommandPaletteHeader } from './VCommandPaletteHeader' // Added VCommandPaletteHeader
 import { VCommandPaletteSearch } from './VCommandPaletteSearch'
 import { commandPaletteNavigationActions } from '../../utils/commandPaletteNavigationActions'
 

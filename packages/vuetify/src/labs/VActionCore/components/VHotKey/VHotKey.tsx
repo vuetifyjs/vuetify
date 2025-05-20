@@ -64,9 +64,7 @@ export const VHotKey = genericComponent()({
       return props.hotkey; // Default to props.hotkey if no actionId or actionCore
     });
 
-    // Original watch logic removed as internalHotkeyString is now computed.
     // The computed property will handle changes to props.actionId, props.hotkey, and actionCore.allActions implicitly.
-
     const keysToRender = computed(() => {
       const hotkeyToParse = internalHotkeyString.value;
       if (!hotkeyToParse) return [];
@@ -211,9 +209,6 @@ export const VHotKey = genericComponent()({
             >
               {keyPart.text}
             </kbd>
-            {index < keysToRender.value.length - 1 && (
-              <span class="v-hot-key__separator" aria-hidden="true">+</span>
-            )}
           </span>
         ))}
       </props.tag>

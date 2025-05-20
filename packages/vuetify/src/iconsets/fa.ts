@@ -44,6 +44,8 @@ const aliases: IconAliases = {
   treeviewCollapse: 'fas fa-caret-down',
   treeviewExpand: 'fas fa-caret-right',
   eyeDropper: 'fas fa-eye-dropper',
+  search: 'fas fa-search',
+  arrowLeft: 'fas fa-arrow-left',
 }
 
 const fa: IconSet = {

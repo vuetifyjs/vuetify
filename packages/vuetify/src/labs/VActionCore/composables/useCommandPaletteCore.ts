@@ -45,9 +45,6 @@ export function useCommandPaletteCore(
   // Reactive flag whether the palette is visible (controlled by v-model)
   const isActive: Ref<boolean> = useProxiedModel(props, 'modelValue');
 
-  // Flag to detect if we're in a test environment – currently unused but kept for future debug logs
-  const isTestEnvironment = typeof window !== 'undefined' && window.navigator?.userAgent?.includes('Node.js') || false;
-
   const searchText = ref('')
   const selectedIndex = ref(0)
   const listId = useId() // Used for ARIA linking
@@ -56,14 +53,13 @@ export function useCommandPaletteCore(
 
   const currentLevel = computed<PaletteLevel | undefined>(() => actionStack.value[actionStack.value.length - 1])
   const currentParentAction = computed(() => currentLevel.value?.parentAction)
-  const currentLevelTitle = computed(() => unref(currentParentAction.value?.title) || currentLevel.value?.title || 'Commands')
+  const currentLevelTitle = computed(() => unref(currentParentAction.value?.title) || currentLevel.value?.title || undefined )
   const isRootLevel = computed(() => actionStack.value.length <= 1)
 
   const initializeStack = () => {
     if (actionCore && isActive.value) {
       actionStack.value = [{
         actions: actionCore.allActions.value.filter((action: ActionDefinition) => !action.meta?.paletteHidden),
-        title: 'Commands',
       }]
       searchText.value = ''
       selectedIndex.value = 0 // Reset index when stack re-initializes

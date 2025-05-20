@@ -49,6 +49,8 @@ const aliases: IconAliases = {
   eyeDropper: 'mdi-eyedropper',
   upload: 'mdi-cloud-upload',
   color: 'mdi-palette',
+  search: 'mdi-magnify',
+  arrowLeft: 'mdi-arrow-left',
 }
 
 const mdi: IconSet = {

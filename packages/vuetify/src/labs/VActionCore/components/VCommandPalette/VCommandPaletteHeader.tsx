@@ -54,9 +54,11 @@ export const VCommandPaletteHeader = genericComponent<{
               aria-label="Go back"
             />
           )}
-          <span class="v-command-palette__title" id={titleId}>
-            { props.title ?? 'Commands' }
-          </span>
+          { props.title && (
+            <span class="v-command-palette__title" id={titleId}>
+              { props.title }
+            </span>
+          )}
           { appendSlotRender?.(props) }
         </div>
       ) as VNode

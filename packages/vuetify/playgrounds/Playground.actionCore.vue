@@ -60,76 +60,18 @@
         </v-col>
       </v-row>
 
-      <!-- Mock Command Palette Dialog -->
-      <v-dialog v-model="isPaletteOpen" max-width="700px" scrollable eager>
-        <v-card>
-          <v-card-title class="d-flex align-center pa-2">
-            <v-btn v-if="paletteParentAction || paletteActionStack.length > 1" icon="mdi-arrow-left" @click="navigatePaletteBack" density="compact" flat class="mr-2"/>
-            <span v-if="paletteParentAction">{{ paletteParentAction.title }}</span>
-            <span v-else-if="paletteActionStack.length > 1 && paletteActionStack[paletteActionStack.length-1]?.title">{{paletteActionStack[paletteActionStack.length-1]?.title}}</span>
-            <span v-else>Command Palette</span>
-          </v-card-title>
-          <v-divider />
-          <v-card-text class="pa-2">
-            <v-text-field
-              v-model="paletteSearch"
-              label="Search actions"
-              autofocus
-              clearable
-              hide-details
-              density="compact"
-              class="mb-2"
-              @keydown="handlePaletteKeydown"
-              ref="paletteSearchInputRef"
-            />
-            <div style="max-height: 400px; overflow-y: auto;">
-              <div v-if="paletteLoadingSubItems" class="text-center pa-4">
-                <v-progress-circular indeterminate size="32" color="primary"/>
-                <p class="mt-2 text-caption">Loading sub-items...</p>
-              </div>
-              <v-list v-else-if="currentPaletteActions.length" density="compact" nav>
-                <template v-for="(item, index) in currentPaletteActions" :key="item.isHeader ? `header-${item.id}-${index}` : `${item.id}-${index}`">
-                  <v-list-subheader v-if="item.isHeader" class="text-primary font-weight-bold">{{ item.title }}</v-list-subheader>
-                  <v-list-item
-                    v-else
-                    :title="item.title"
-                    :subtitle="item.description"
-                    :disabled="item.disabled || (typeof item.canExecute === 'function' && !item.canExecute({ trigger: 'palette' }))"
-                    :active="paletteSelectedIndex === index && !item.isHeader"
-                    @click="executePaletteAction(item)"
-                    :id="`palette-item-${index}`"
-                    lines="two"
-                    density="comfortable"
-                  >
-                    <template #prepend v-if="item.icon">
-                      <v-icon :icon="item.icon" class="mr-3" />
-                    </template>
-                    <template #append v-if="item.hotkey">
-                      <VHotKey :hotkey="item.hotkey" />
-                    </template>
-                     <v-tooltip v-if="item.description" activator="parent" location="bottom start" open-delay="300">
-                      {{ item.description }}
-                    </v-tooltip>
-                  </v-list-item>
-                </template>
-              </v-list>
-              <v-list-item v-else title="No actions found for your query." class="text-disabled text-center"/>
-            </div>
-          </v-card-text>
-           <v-divider />
-          <v-card-actions class="pa-1">
-            <v-spacer />
-            <v-btn @click="isPaletteOpen = false" density="compact" variant="text">Close</v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
+      <VCommandPalette
+        v-model="isPaletteOpen"
+        variant="linear-dark"
+        close-on-execute
+      />
 
     </v-container>
   </v-app>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, provide, nextTick, watch, onMounted, onUnmounted } from 'vue'
+import { ref, computed, provide, nextTick, watch } from 'vue'
 import { useTheme } from 'vuetify'
 import {
   useActionCore,
@@ -182,47 +124,14 @@ const actionCore = useActionCore(actionCoreOptionsObj);
 
 provide(ActionCoreSymbol, actionCore)
 
-// **** START: Basic KeyDown Listener for Debugging ****
-const basicKeyDownListener = (e: KeyboardEvent) => {
-  console.log('[Playground Basic Listener] KeyDown:', {
-    key: e.key,
-    code: e.code,
-    metaKey: e.metaKey,
-    ctrlKey: e.ctrlKey,
-    shiftKey: e.shiftKey,
-    altKey: e.altKey,
-    defaultPrevented: e.defaultPrevented,
-  });
-
-  if (e.metaKey && e.key.toLowerCase() === 's') {
-    console.log('[Playground Basic Listener] Detected Cmd+S.');
-  }
-  if (e.metaKey && e.shiftKey && e.key.toLowerCase() === 't') {
-    console.log('[Playground Basic Listener] Detected Cmd+Shift+T.');
-  }
-};
-
-onMounted(() => {
-  // window.addEventListener('keydown', basicKeyDownListener, { capture: true }); // Commented out
-  // logAction('[Playground] Basic global keydown listener added.'); // Commented out
-  // Note: Existing onMounted logic from scenarios will also run.
-});
-
-onUnmounted(() => {
-  // window.removeEventListener('keydown', basicKeyDownListener, { capture: true }); // Commented out
-  // logAction('[Playground] Basic global keydown listener removed.'); // Commented out
-});
-// **** END: Basic KeyDown Listener for Debugging ****
-
 const theme = useTheme()
 const currentThemeName = computed(() => theme.global.name.value)
-const isPaletteOpen = ref(false)
+const isPaletteOpen = ref(true)
 const paletteSearch = ref('')
 const paletteSelectedIndex = ref(-1)
 const paletteActionStack = ref<any[]>([])
 const paletteLoadingSubItems = ref(false)
 const paletteSearchInputRef = ref<any>(null)
-const paletteParentAction = computed(() => paletteActionStack.value.length > 1 ? paletteActionStack.value[paletteActionStack.value.length - 1]?.parentAction : null)
 const rawPaletteActions = computed(() => !actionCore ? [] : (paletteActionStack.value[paletteActionStack.value.length - 1]?.actions || actionCore.allActions.value.filter((act: ActionDefinition) => !act.meta?.paletteHidden) || []))
 const currentPaletteActions = computed(() => {
   let actions = rawPaletteActions.value
@@ -241,7 +150,7 @@ const openPalette = (parentActionDef?: ActionDefinition) => {
   logAction('Command Palette Opened', parentActionDef ? { parent: parentActionDef.id } : {})
   paletteSearch.value = ''
   paletteSelectedIndex.value = -1
-  const newStackLevel = { parentAction: parentActionDef, actions: parentActionDef?.subItems ? [] : actionCore.allActions.value.filter((act: ActionDefinition) => !act.meta?.paletteHidden), title: parentActionDef ? String(parentActionDef.title) : 'Commands' };
+  const newStackLevel = { parentAction: parentActionDef, actions: parentActionDef?.subItems ? [] : actionCore.allActions.value.filter((act: ActionDefinition) => !act.meta?.paletteHidden), title: parentActionDef ? String(parentActionDef.title) : undefined };
   if (parentActionDef && parentActionDef.subItems) {
     paletteLoadingSubItems.value = true; isPaletteOpen.value = true;
     const context: ActionContext = { trigger: 'palette' };
@@ -254,10 +163,10 @@ const openPalette = (parentActionDef?: ActionDefinition) => {
 provide('openPalette', openPalette);
 provide(ShowSubItemsUISymbol, openPalette);
 const focusPaletteSearch = async () => { await nextTick(); paletteSearchInputRef.value?.focus(); }
-const navigatePaletteBack = () => { if (paletteActionStack.value.length > 1) { paletteActionStack.value.pop(); paletteSearch.value = ''; paletteSelectedIndex.value = currentPaletteActions.value.findIndex(item => !item.isHeader); focusPaletteSearch(); } else isPaletteOpen.value = false; }
-const executePaletteAction = async (action: ActionDefinition | any) => { if (!action || action.isHeader) return; logAction(`Palette: Executing "${action.title}"`, { id: action.id }); if (action.subItems) openPalette(action); else { try { await actionCore.executeAction(action.id, { trigger: 'palette' }); if (!action.meta?.keepPaletteOpen && paletteActionStack.value.length <= 1) isPaletteOpen.value = false; else if (!action.meta?.keepPaletteOpen && paletteActionStack.value.length > 1) navigatePaletteBack(); } catch (e) { logAction(`Error executing action "${action.id}"`, e) } } }
-const scrollToSelectedItem = async () => { await nextTick(); const selectedItemElement = document.getElementById(`palette-item-${paletteSelectedIndex.value}`); selectedItemElement?.scrollIntoView({ block: 'nearest' }); };
-const handlePaletteKeydown = (event: KeyboardEvent) => { const items = currentPaletteActions.value; const selectableItems = items.filter(item => !item.isHeader); if (!selectableItems.length && event.key !== 'Escape') return; let currentGlobalIndex = paletteSelectedIndex.value; let currentSelectableItemIndex = selectableItems.indexOf(items[currentGlobalIndex]); switch (event.key) { case 'ArrowDown': event.preventDefault(); if (selectableItems.length > 0) { currentSelectableItemIndex = (currentSelectableItemIndex + 1) % selectableItems.length; paletteSelectedIndex.value = items.indexOf(selectableItems[currentSelectableItemIndex]); scrollToSelectedItem(); } break; case 'ArrowUp': event.preventDefault(); if (selectableItems.length > 0) { currentSelectableItemIndex = (currentSelectableItemIndex - 1 + selectableItems.length) % selectableItems.length; paletteSelectedIndex.value = items.indexOf(selectableItems[currentSelectableItemIndex]); scrollToSelectedItem(); } break; case 'Enter': event.preventDefault(); if (paletteSelectedIndex.value >=0 && items[paletteSelectedIndex.value] && !items[paletteSelectedIndex.value].isHeader) executePaletteAction(items[paletteSelectedIndex.value]); break; case 'Escape': event.preventDefault(); navigatePaletteBack(); break; } }
+
+
+
+
 
 // --- Scenario Implementations Setup ---
 
@@ -275,6 +184,20 @@ const handlePaletteKeydown = (event: KeyboardEvent) => { const items = currentPa
 
 // Scenario 14: Context Menu - Actions globally registered, UI component provides triggers.
 // MOVED TO: ScenarioContextMenu.vue
+
+// Expose for template (No longer needed as VCommandPalette handles these)
+// const { executeAction, getAction } = actionCore
+
+const testItemsWithTooltips: ActionDefinition[] = [
+  { id: 'debug-action-1', title: 'Action with Tooltip', description: 'This is a tooltip for action 1!', icon: 'mdi-information', hotkey: 'ctrl+i' },
+  { id: 'debug-action-2', title: 'Another Action', description: 'Tooltip for another action.', icon: 'mdi-star' },
+  { id: 'debug-action-no-tip', title: 'No Tooltip Action', icon: 'mdi-check' },
+];
+// Registering actions directly. If a source key were needed for unregistration,
+// it would typically be returned by this call or passed in an options object.
+actionCore.registerActionsSource(testItemsWithTooltips);
+
+// --- End Command Palette ---
 
 </script>
 

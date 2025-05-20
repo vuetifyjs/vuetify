@@ -431,14 +431,6 @@ export class ActionCore implements ActionCorePublicAPI {
     }
   }
 
-  public isComponentIntegrationEnabled (componentName: string): boolean {
-    log('warn', COMPONENT_NAME, '`isComponentIntegrationEnabled` is deprecated as direct component integration is being phased out.')
-    const integrationOpts = this.options.componentIntegration
-    if (typeof integrationOpts === 'boolean') return integrationOpts
-    if (typeof integrationOpts === 'object' && integrationOpts !== null) return !!integrationOpts[componentName]
-    return false
-  }
-
   public destroy = () => {
     log('debug', COMPONENT_NAME, 'Destroying ActionCore instance')
     this.keyBindings?.stop()

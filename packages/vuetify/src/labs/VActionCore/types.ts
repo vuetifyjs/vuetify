@@ -198,14 +198,6 @@ export interface ActionCoreOptions {
    * Optional initial set of action sources to register upon ActionCore initialization.
    */
   sources?: ActionsSource[]
-  /**
-   * Global settings for component integration. For example, `{ VBtn: true, VListItem: false }`.
-   * If a component name is not listed, its integration defaults to `false`.
-   * Setting this to `true` enables integration for all supported components by default.
-   * Setting this to `false` disables integration for all components unless explicitly enabled.
-   * @deprecated Direct component integration is being phased out.
-   */
-  componentIntegration?: boolean | Record<string, boolean>
 
   /**
    * An optional parent PActionCore instance for hierarchical action management.
@@ -235,8 +227,6 @@ export interface ActionCorePublicAPI {
   getAction(actionId: string): ActionDefinition<any> | undefined;
   /** Executes a registered action by its ID. */
   executeAction(actionId: string, invocationContext?: ActionContext): Promise<void>;
-  /** Checks if component integration is enabled for a specific component name. */
-  isComponentIntegrationEnabled(componentName: string): boolean;
   /** Cleans up the ActionCore instance. */
   destroy(): void;
 

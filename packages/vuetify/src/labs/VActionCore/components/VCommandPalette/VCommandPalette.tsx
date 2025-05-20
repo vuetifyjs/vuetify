@@ -92,6 +92,7 @@ interface VCommandPaletteTypedSlots {
   loader?: LoaderSlotFunc;
   footer?: FooterSlotFunc;
   'empty-state'?: EmptyStateSlotFunc; // When no actions are available at all
+  [key: string]: unknown;
 }
 
 // --- END: Slot Type Definitions ---
@@ -101,7 +102,7 @@ export const makeVCommandPaletteProps = propsFactory({
   modelValue: Boolean,
   placeholder: {
     type: String,
-    default: 'Search commands...',
+    default: 'Type a command or search...',
   },
   closeOnExecute: {
     type: Boolean,
@@ -113,8 +114,7 @@ export const makeVCommandPaletteProps = propsFactory({
   },
   // Title for the palette, used in header if not overridden by slot or parent action
   title: {
-    type: String,
-    default: 'Command Palette',
+      type: String,
   },
   ...makeComponentProps(),
   ...makeThemeProps(),
@@ -181,6 +181,7 @@ export const VCommandPalette = genericComponent<VCommandPaletteTypedSlots>()({
             typedSlots['empty-state']({ core })
           ) : (
             <>
+              <div class="v-command-palette__top">
               {/* Header Slot */}
               {typedSlots.header ? typedSlots.header({
                 parentAction: core.currentParentAction.value,
@@ -190,7 +191,7 @@ export const VCommandPalette = genericComponent<VCommandPaletteTypedSlots>()({
                 <VCommandPaletteHeader
                   title={core.currentLevelTitle.value || props.title}
                   isRootLevel={core.isRootLevel.value}
-                  listId={core.listId.value} // core.listId is a Ref now
+                  listId={core.listId} // core.listId is a Ref now
                   onNavigateBack={core.navigateBack}
                 />
               )}
@@ -201,12 +202,12 @@ export const VCommandPalette = genericComponent<VCommandPaletteTypedSlots>()({
                 placeholder: props.placeholder,
                 inputRef: textFieldInstanceRef,
                 searchComponentRef: searchComponentRef,
-                listId: core.listId.value,
+                listId: core.listId,
                 activeDescendantId: core.activeDescendantId.value,
                 ariaHasPopup: 'listbox',
                 ariaExpanded: (core.isActive.value && core.groupedAndSortedActions.value.length > 0) ? 'true' : 'false',
-                ariaControls: core.listId.value,
-                ariaLabelledby: `${core.listId.value}-title` // Assuming header provides this ID
+                ariaControls: core.listId,
+                ariaLabelledby: `${core.listId}-title` // Assuming header provides this ID
               }) : (
                 <VCommandPaletteSearch
                   ref={searchComponentRef}
@@ -218,11 +219,12 @@ export const VCommandPalette = genericComponent<VCommandPaletteTypedSlots>()({
                   role="combobox"
                   aria-haspopup="listbox"
                   aria-expanded={(core.isActive.value && core.groupedAndSortedActions.value.length > 0) ? 'true' : 'false'}
-                  aria-controls={core.listId.value}
+                  aria-controls={core.listId}
                   aria-activedescendant={core.activeDescendantId.value}
                   // aria-labelledby could be an ID from the header, or a general label for search
                 />
               )}
+            </div>
 
               {/* Loader Slot */}
               {typedSlots.loader ? typedSlots.loader({
@@ -237,7 +239,7 @@ export const VCommandPalette = genericComponent<VCommandPaletteTypedSlots>()({
               {!core.isLoadingSubItems.value && (typedSlots.listWrapper ? typedSlots.listWrapper({
                   actions: core.groupedAndSortedActions.value,
                   selectedIndex: core.selectedIndex,
-                  listId: core.listId.value,
+                  listId: core.listId,
                   listRef: listRef,
                   searchText: core.searchText,
                   handleItemActivated: core.handleItemActivated,
@@ -249,10 +251,10 @@ export const VCommandPalette = genericComponent<VCommandPaletteTypedSlots>()({
                     ref={listRef}
                     actions={core.groupedAndSortedActions.value}
                     selectedIndex={core.selectedIndex.value}
-                    listId={core.listId.value}
+                    listId={core.listId}
                     searchText={core.searchText.value}
                     onActionClick={core.handleItemActivated}
-                    onItemNavigate={core.handleItemActivated} // May not be needed if VActionCore handles all nav
+                    onItemNavigate={core.handleItemActivated}
                     v-slots={{
                       item: typedSlots.item,
                       'no-results': typedSlots['no-results'],

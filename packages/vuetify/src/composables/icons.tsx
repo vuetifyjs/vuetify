@@ -52,6 +52,8 @@ export interface IconAliases {
   plus: IconValue
   minus: IconValue
   calendar: IconValue
+  search: IconValue
+  arrowLeft: IconValue
 }
 
 export interface IconProps {

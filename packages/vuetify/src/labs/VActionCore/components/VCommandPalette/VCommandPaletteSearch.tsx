@@ -72,6 +72,8 @@ export const VCommandPaletteSearch = genericComponent<VCommandPaletteSearchSlots
         autofocus: props.autofocus,
         density: 'compact' as const,
         hideDetails: true,
+        variant: 'solo',
+        flat: true,
       };
 
       // Handle prependInnerIcon carefully: use from attrs if valid, else default to $search

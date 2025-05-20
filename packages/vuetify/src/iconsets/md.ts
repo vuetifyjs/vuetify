@@ -47,6 +47,8 @@ const aliases: IconAliases = {
   treeviewCollapse: 'arrow_drop_down',
   treeviewExpand: 'arrow_right',
   eyeDropper: 'colorize',
+  search: 'magnify',
+  arrowLeft: 'arrow_back',
 }
 
 const md: IconSet = {

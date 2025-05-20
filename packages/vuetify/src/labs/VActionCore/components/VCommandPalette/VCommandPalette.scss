@@ -3,7 +3,7 @@
 // Variables (can be themed)
 $v-command-palette-search-height: 48px !default;
 $v-command-palette-background-color: rgb(var(--v-theme-surface)) !default;
-$v-command-palette-border-radius: 4px !default; // Match VDialog or common overlay radius
+$v-command-palette-border-radius: 8px !default; // Match VDialog or common overlay radius
 $v-command-palette-box-shadow: var(--v-shadow-elevation-8, inherit) !default; // Use Vuetify elevation shadow
 $v-command-palette-list-padding: 8px 0 !default;
 $v-command-palette-item-selected-background-color: rgba(var(--v-theme-primary), 0.1) !default;
@@ -12,25 +12,6 @@ $v-command-palette-item-selected-background-color: rgba(var(--v-theme-primary), 
 $v-command-palette-input-padding-y: 6px !default;
 $v-command-palette-dense-list-item-height: 40px !default;
 $v-command-palette-compact-list-item-height: 32px !default;
-
-.v-command-palette-dialog {
-  // For VDialog specific overrides if needed, like alignment
-  // By default VDialog is centered. A command palette often appears at the top.
-  // This requires VDialog to support alignment props or for us to use VOverlay directly.
-  // For now, let's assume VDialog can be styled or we switch to VOverlay later if needed.
-  // To align VDialog to top:
-  &.v-dialog {
-    align-items: flex-start;
-    // Or use margin-top to push it down a bit from the very top
-    margin-top: 10vh; // Example: 10% from top
-  }
-
-  // Styling the content within the VDialog to not have default VCard-like padding
-  .v-overlay__content {
-    // Override VDialog's default card-like structure if it imposes one
-    // This might not be needed if VDialog content is bare.
-  }
-}
 
 // Main component container
 .v-command-palette {
@@ -42,11 +23,29 @@ $v-command-palette-compact-list-item-height: 32px !default;
   overflow: hidden; // Ensure contents fit within rounded corners
   max-height: 70vh; // Prevent palette from becoming too tall
 
+  &__top {
+    padding: .875rem;
+    border-bottom: 1px solid rgba(var(--v-border-color), var(--v-border-opacity));
+  }
+
+  &__header {
+    .v-btn {
+      margin-right: .875rem;
+      .v-icon {
+        opacity: var(--v-medium-emphasis-opacity);
+      }
+    }
+    .v-command-palette__title {
+      border: 1px solid rgba(var(--v-border-color), var(--v-border-opacity));
+      border-radius: 4px;
+      padding: 4px 8px;
+      font-size: .825rem;
+    }
+  }
+
   // Search container - leverage Vuetify's classes
   &__search {
-    padding: 8px 12px; // Padding around the text field
-    border-bottom: 1px solid rgba(var(--v-border-color), var(--v-border-opacity));
-
+    margin-left: -.875rem;
     // Use component-level modifier instead of deep selector chains
     &--compact {
       .v-field {
@@ -110,13 +109,4 @@ $v-command-palette-compact-list-item-height: 32px !default;
     text-align: center;
     padding: 12px;
   }
-
-  // Optional footer styling if we add one
-  // &__footer {
-  //   padding: 8px 12px;
-  //   font-size: 0.75rem;
-  //   color: rgba(var(--v-theme-on-surface), var(--v-disabled-opacity));
-  //   text-align: center;
-  //   border-top: 1px solid rgba(var(--v-border-color), var(--v-border-opacity));
-  // }
 }
