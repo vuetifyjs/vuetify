@@ -26,8 +26,8 @@
         </template>
       </AppTextField>
 
-      <v-card-text :class="['px-4 py-0 d-flex flex-wrap justify-center', searchString ? 'align-start' : 'align-center']">
-        <template v-if="(searches.length || favorites.length) && !searchString">
+      <v-card-text :class="['px-4 py-0 d-flex flex-wrap justify-center', searchTerm ? 'align-start' : 'align-center']">
+        <template v-if="(searches.length || favorites.length) && !searchTerm">
           <AppSearchSearchGroup
             :results="searches"
             :title="t('search.recent')"
@@ -56,7 +56,7 @@
           </AppSearchSearchGroup>
         </template>
 
-        <template v-else-if="!searchString">
+        <template v-else-if="!searchTerm">
           <div class="text-center">
             <v-icon
               class="mb-6 mx-auto text-disabled"
@@ -120,7 +120,7 @@
   const searchString = defineModel('search', { type: String, default: '' })
 
   // Algolia doesn't tokenize hyphens by default. Sanitize search string.
-  const searchTerm = computed(() => searchString.value.replace(/-/g, ' '))
+  const searchTerm = computed(() => searchString.value.replace(/-/g, ' ').trim())
 
   const list = ref<InstanceType<typeof SearchResults>>()
   const searchClient = algoliasearch(
