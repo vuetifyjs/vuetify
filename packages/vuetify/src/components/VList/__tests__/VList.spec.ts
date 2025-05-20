@@ -26,11 +26,12 @@ describe('VList', () => {
     { selectable: false, activatable: true, expected: 'listbox' },
     { selectable: true, activatable: true, expected: 'listbox' },
     { selectable: false, activatable: false, expected: 'list' },
-  ])('should have role="$expected" when selectable is $selectable and activatable is $activatable', ({ selectable, activatable, expected }) => {
-    const wrapper = mountFunction({
-      props: { selectable, activatable },
-    })
+  ])('should have role="$expected" when selectable is $selectable and activatable is $activatable',
+    ({ selectable, activatable, expected }) => {
+      const wrapper = mountFunction({
+        props: { selectable, activatable },
+      })
 
-    expect(wrapper.attributes('role')).toBe(expected)
-  })
+      expect(wrapper.attributes('role')).toBe(expected)
+    })
 })
