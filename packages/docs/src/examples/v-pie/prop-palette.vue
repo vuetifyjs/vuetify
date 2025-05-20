@@ -2,7 +2,6 @@
   <div class="d-flex justify-center py-6">
     <div class="h-0">
       <svg height="0" version="1.1" width="0" xmlns="http://www.w3.org/2000/svg">
-        <!-- source: https://pattern.monster -->
         <defs>
           <pattern
             id="pattern-0"
@@ -33,7 +32,11 @@
             class="ma-2 elevation-2"
             rounded="lg"
             size="24"
-          ></v-avatar>
+          >
+            <svg v-if="c.pattern" height="24" width="24">
+              <rect :fill="c.pattern" height="24" width="24" />
+            </svg>
+          </v-avatar>
         </v-list-item>
       </v-list>
     </div>
