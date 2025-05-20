@@ -4,6 +4,7 @@
     :code="code"
     :name="name"
     :options="options"
+    :script="script"
   >
     <div class="d-flex justify-center">
       <v-pie v-bind="{ ...props, items }"></v-pie>
@@ -50,12 +51,12 @@
             label="Show inner slice"
           ></v-checkbox>
 
-          <v-chip-group v-model="gap">
+          <v-chip-group v-model="gap" mandatory>
             <v-chip :value="4" text="spaced" filter></v-chip>
             <v-chip :value="0" text="tight" filter></v-chip>
           </v-chip-group>
 
-          <v-chip-group v-model="rounded">
+          <v-chip-group v-model="rounded" mandatory>
             <v-chip :value="4" text="rounded" filter></v-chip>
             <v-chip :value="0" text="straight" filter></v-chip>
           </v-chip-group>
@@ -71,9 +72,9 @@
   const model = ref('default')
   const options = ['donut', 'gauge']
   const items = [
-    { key: 1, title: 'Yes', value: 45, color: '#048BA8' },
-    { key: 2, title: 'No', value: 40, color: '#99C24D' },
-    { key: 3, title: 'Maybe', value: 15, color: '#F18F01' },
+    { key: 1, title: 'Yes', value: 45 },
+    { key: 2, title: 'No', value: 40 },
+    { key: 3, title: 'Maybe', value: 15 },
   ]
   const showLegend = ref(true)
   const innerSliceVisible = ref(false)
@@ -87,24 +88,32 @@
   const props = computed(() => {
     return {
       title: { default: 'Basic pie', donut: 'Do you like donuts?' }[model.value],
-      legend: showLegend.value || undefined,
-      hideSlice: model.value === 'gauge' || (model.value === 'donut' ? !innerSliceVisible.value : undefined),
+      gap: (model.value !== 'default' && gap.value) || undefined,
+      'gauge-cut': (model.value === 'gauge' && gaugeCut.value) || undefined,
+      'inner-cut': model.value !== 'default' ? innerCut.value : undefined,
+      legend: { visible: showLegend.value },
+      palette: ['#048BA8', '#99C24D', '#F18F01'],
       rotate: rotate.value || undefined,
-      rounded: model.value !== 'default' ? rounded.value : undefined,
-      gap: model.value !== 'default' ? gap.value : undefined,
-      gaugeCut: model.value === 'gauge' ? gaugeCut.value : undefined,
+      rounded: (model.value !== 'default' && rounded.value) || undefined,
       size: size.value !== 250 ? size.value : undefined,
-      innerCut: model.value !== 'default' ? innerCut.value : undefined,
+      'hide-slice': model.value === 'gauge' || (model.value === 'donut' && !innerSliceVisible.value) || undefined,
     }
   })
 
-  const itemsCode = computed(() => {
-    return items
-      .map(x => `  <v-pie-item key="${x.key}" title="${x.title}" :value="${x.value}" color="${x.color}" />`)
-      .join('\n')
+  const script = computed(() => {
+    function itemToString({ key, title, value }) {
+      return `    { key: ${key}, title: "${title}", value: ${value} },`
+    }
+
+    return `<script setup>
+  const items = [
+${items.map(itemToString).join('\n')}
+  ]
+<` + '/script>'
   })
 
   const code = computed(() => {
-    return `<${name}${propsToString(props.value)}>\n  <!-- future syntax -->\n${itemsCode.value}\n</v-pie>`
+    return `<${name} ${propsToString(props.value)}  :items="items"
+/>`
   })
 </script>

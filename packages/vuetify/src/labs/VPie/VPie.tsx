@@ -120,13 +120,13 @@ export const VPie = genericComponent<VPieSlots>()({
       // hidden items get (value: 0) to trigger disappearing animation
       return props.items
         .filter(Boolean)
-        .map((item: any) => {
+        .map((item: any, index: number) => {
           return {
             key: item[props.itemKey],
-            color: item.color,
+            color: item.color ?? colorFromPalette(index),
             value: item[props.itemValue],
             title: String(item[props.itemTitle]),
-            pattern: item.pattern,
+            pattern: item.pattern ?? patternFromPalette(index),
             raw: item,
           } as PieItem
         })
@@ -245,10 +245,10 @@ export const VPie = genericComponent<VPieSlots>()({
                 <VPieSegment
                   { ...itemProps }
                   key={ item.key }
-                  color={ item.color ?? colorFromPalette(index) }
+                  color={ item.color }
                   value={ isActive(item) ? arcSize(item.value) : 0 }
                   rotate={ arcOffset(index) }
-                  pattern={ item.pattern ?? patternFromPalette(index) }
+                  pattern={ item.pattern }
                   innerCut={ props.innerCut }
                   zoom={ clamp(props.hoverScale ?? 0.05, 0, 0.25) }
                   onMouseenter={ () => onMouseenter(item) }
