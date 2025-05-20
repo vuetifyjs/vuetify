@@ -21,7 +21,7 @@ import type { PropType } from 'vue'
 import type { PieItem, TextTemplate } from './types'
 
 export type VPieSlots = {
-  'center-content': { total: number }
+  center: { total: number }
   legend: {
     isActive: (item: PieItem) => boolean
     toggle: (item: PieItem) => void
@@ -60,7 +60,10 @@ export const makeVPieProps = propsFactory({
   },
   rotate: Number,
   innerCut: Number,
-  hoverScale: Number,
+  hoverScale: {
+    Number,
+    default: 0.05,
+  },
   gaugeCut: {
     type: Number,
     default: 0,
@@ -69,14 +72,14 @@ export const makeVPieProps = propsFactory({
     type: [Boolean, Object] as PropType<boolean | {
       visible?: boolean
       position?: 'left' | 'top' | 'right' | 'bottom'
-      textFormat?: TextTemplate<PieItem>
+      textFormat?: TextTemplate
     }>,
     default: false,
   },
   formats: {
     type: Object as PropType<{
-      tooltipTitle?: TextTemplate<PieItem>
-      tooltipSubtitle?: TextTemplate<PieItem>
+      tooltipTitle?: TextTemplate
+      tooltipSubtitle?: TextTemplate
     }>,
     default: () => ({
       tooltipTitle: '[title]',
@@ -250,7 +253,7 @@ export const VPie = genericComponent<VPieSlots>()({
                   rotate={ arcOffset(index) }
                   pattern={ item.pattern }
                   innerCut={ props.innerCut }
-                  zoom={ clamp(props.hoverScale ?? 0.05, 0, 0.25) }
+                  hoverScale={ clamp(props.hoverScale, 0, 0.25) }
                   onMouseenter={ () => onMouseenter(item) }
                   onMouseleave={ () => onMouseleave() }
                 />
@@ -265,7 +268,7 @@ export const VPie = genericComponent<VPieSlots>()({
               }}
             >
               <div style="pointer-events: auto">
-                { slots['center-content']?.({ total: total.value }) }
+                { slots.center?.({ total: total.value }) }
               </div>
             </div>
           </div>
