@@ -1,8 +1,13 @@
-import { defineComponent, computed, h } from 'vue'
-import { useDisplay } from 'vuetify'
-import {typographyStyles} from './typography'
+// Utilities
+import { computed, h } from 'vue'
+import { useDisplay, useTheme } from 'vuetify'
+import { defineComponent } from '@/util'
+
+// Types
 import type { PropType } from 'vue'
-import { useTheme } from 'vuetify'
+
+// Internal
+import { typographyStyles } from './typography'
 
 type Variant = keyof typeof typographyStyles
 type Breakpoint = 'sm' | 'md' | 'lg' | 'xl'
@@ -29,12 +34,12 @@ export const VTypography = defineComponent({
     },
     color: {
       type: String,
-      default : undefined
-    }
+      default: undefined,
+    },
   },
-  setup(props, { slots }) {
+  setup (props, { slots }) {
     const display = useDisplay()
-    const theme  =useTheme()
+    const theme = useTheme()
     const currentStyle = computed(() => {
       const isMobile = display[`${props.mobileBreakpoint}AndDown`]?.value
       const variant = isMobile && props.mobile ? props.mobile : props.text
@@ -56,7 +61,6 @@ export const VTypography = defineComponent({
 
       }
     })
-
 
     return () =>
       h(
