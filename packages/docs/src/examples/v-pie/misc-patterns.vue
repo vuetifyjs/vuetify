@@ -55,7 +55,7 @@
         :legend="{ position: 'left' }"
         hide-slice
       >
-        <template v-slot:center-content>
+        <template v-slot:center>
           <div class="text-center">
             <v-icon class="opacity-60" icon="mdi-leaf" size="44"></v-icon>
           </div>

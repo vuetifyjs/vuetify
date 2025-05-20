@@ -25,7 +25,7 @@
         class="pa-3 mt-3"
         hide-slice
       >
-        <template v-slot:center-content>
+        <template v-slot:center>
           <div class="text-center">
             <div class="text-h3">130</div>
             <div class="opacity-70 mt-1 mb-n1">Total</div>

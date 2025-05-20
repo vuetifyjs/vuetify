@@ -20,7 +20,7 @@ export const makeVPieSegmentProps = propsFactory({
     type: Number,
     default: 0,
   },
-  zoom: Number,
+  hoverScale: Number,
   gap: {
     type: Number,
     default: 0,

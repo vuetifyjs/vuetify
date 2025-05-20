@@ -8,11 +8,11 @@ export interface PieItem {
 }
 
 export interface PieSegmentProps {
-  value: number
   gap: number
+  hoverScale?: number
   innerCut: number
   rounded: number
-  zoom?: number
+  value: number
 }
 
-export type TextTemplate<T = any> = string | ((v: PieItem) => string)
+export type TextTemplate = string | ((v: PieItem) => string)
