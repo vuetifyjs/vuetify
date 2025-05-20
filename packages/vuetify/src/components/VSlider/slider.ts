@@ -161,7 +161,7 @@ export const useSteps = (props: SliderProps) => {
     const offset = min.value % step.value
     let newValue = Math.round((clamped - offset) / step.value) * step.value + offset
 
-    if (newValue + step.value > max.value && clamped > newValue) {
+    if (clamped > newValue && newValue + step.value > max.value) {
       newValue = max.value
     }
 
