@@ -1,1 +1,1 @@
-export {VTypography} from './VTypography'
+export { VTypography } from './VTypography'

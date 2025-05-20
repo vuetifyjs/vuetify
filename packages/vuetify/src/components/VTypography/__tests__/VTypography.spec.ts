@@ -1,5 +1,5 @@
+// Utilities
 import { mount } from '@vue/test-utils'
-import { describe, expect, it } from 'vitest'
 import { createVuetify } from '../../../framework'
 import { VTypography } from '../VTypography'
 
@@ -9,14 +9,14 @@ describe('VTypography', () => {
   it('renders properly', () => {
     const wrapper = mount(VTypography, {
       global: {
-        plugins: [vuetify]
+        plugins: [vuetify],
       },
       props: {
-        text: 'headline-large'
+        text: 'headline-large',
       },
       slots: {
-        default: 'Test Text'
-      }
+        default: 'Test Text',
+      },
     })
 
     expect(wrapper.text()).toBe('Test Text')
@@ -25,11 +25,11 @@ describe('VTypography', () => {
   it('applies correct typography styles', () => {
     const wrapper = mount(VTypography, {
       global: {
-        plugins: [vuetify]
+        plugins: [vuetify],
       },
       props: {
-        text: 'headline-large'
-      }
+        text: 'headline-large',
+      },
     })
 
     expect(wrapper.attributes('style')).toBeDefined()
@@ -38,12 +38,12 @@ describe('VTypography', () => {
   it('handles mobile breakpoint', () => {
     const wrapper = mount(VTypography, {
       global: {
-        plugins: [vuetify]
+        plugins: [vuetify],
       },
       props: {
         text: 'headline-large',
-        mobile: "display-large"
-      }
+        mobile: 'display-large',
+      },
     })
 
     expect(wrapper.attributes('style')).toBeDefined()
@@ -52,12 +52,12 @@ describe('VTypography', () => {
   it('applies custom color', () => {
     const wrapper = mount(VTypography, {
       global: {
-        plugins: [vuetify]
+        plugins: [vuetify],
       },
       props: {
         text: 'headline-large',
-        color: 'primary'
-      }
+        color: 'primary',
+      },
     })
 
     expect(wrapper.attributes('style')).toBeDefined()

@@ -1,4 +1,3 @@
-
 export const typographyStyles = {
   'display-large': {
     fontSize: '57px',
