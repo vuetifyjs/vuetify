@@ -150,6 +150,7 @@
     align-self: center
     grid-area: content
     overflow: hidden
+    min-width: $list-item-content-min-width
 
   .v-list-item-action
     align-self: center
@@ -321,6 +322,7 @@
 
   .v-list-group__items
     --indent-padding: calc(var(--parent-padding) + var(--list-indent-size))
+    min-width: min-content
 
   .v-list-group__items .v-list-item
     padding-inline-start: calc(#{$base-padding} + var(--indent-padding)) !important
