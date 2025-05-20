@@ -23,11 +23,11 @@ export const makeVPieTooltipProps = propsFactory({
     default: null,
   },
   titleFormat: {
-    type: [String, Function] as PropType<TextTemplate<PieItem>>,
+    type: [String, Function] as PropType<TextTemplate>,
     default: '[title]',
   },
   subtitleFormat: {
-    type: [String, Function] as PropType<TextTemplate<PieItem>>,
+    type: [String, Function] as PropType<TextTemplate>,
     default: '[value]',
   },
   ...pick(makeVTooltipProps(), [
