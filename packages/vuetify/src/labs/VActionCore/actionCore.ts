@@ -8,12 +8,9 @@ import type {
   ActionCoreOptions as ActionCoreInstanceOptions,
   ActionCorePublicAPI,
   KeyBindingHandlerOptions,
-  DiscoverableActionInfo,
-  AIActionMetadata,
 } from './types';
 import { IS_CLIENT, log, isPromise } from './utils'; // Import centralized utilities
 import type { App } from 'vue';
-import { LogLevel } from './utils'; // Assuming log utility supports levels or can be adapted
 
 /**
  * @file actionCore.ts The core logic for managing, registering, and executing actions,
@@ -432,43 +429,6 @@ export class ActionCore implements ActionCorePublicAPI {
     } finally {
       this._isLoading.value = false;
     }
-  }
-
-  public getDiscoverableActions (aiContext?: { allowedScopes?: string[] }): DiscoverableActionInfo[] {
-    const aiEnabled = typeof this.options.ai === 'boolean' ? this.options.ai : (this.options.ai?.enabled ?? false)
-    if (!aiEnabled) {
-      log('debug', COMPONENT_NAME, 'AI features are globally disabled. getDiscoverableActions will return an empty array.')
-      return []
-    }
-    const discoverableActionInfos: DiscoverableActionInfo[] = []
-    const allCurrentActions = this.allActions.value
-    for (const action of allCurrentActions) {
-      if (!action.ai || action.ai.accessible === false) continue
-      const actionScopes = action.ai.scope ? (Array.isArray(action.ai.scope) ? action.ai.scope : [action.ai.scope]) : []
-      const providedAllowedScopes = aiContext?.allowedScopes || []
-      if (actionScopes.length > 0) {
-        if (providedAllowedScopes.length === 0) continue
-        const hasMatchingScope = actionScopes.some(scope => providedAllowedScopes.includes(scope))
-        if (!hasMatchingScope) continue
-      }
-      const resolvedTitle = typeof action.title === 'string' ? action.title : (isRef(action.title) ? action.title.value : 'Untitled Action')
-      const resolvedDescription = action.description ? (typeof action.description === 'string' ? action.description : (isRef(action.description) ? (action.description as Ref<string>).value : '')) : undefined
-
-      const info: DiscoverableActionInfo = {
-        id: action.id,
-        title: resolvedTitle,
-        description: resolvedDescription,
-      }
-      if (action.parametersSchema) info.parametersSchema = action.parametersSchema
-      const aiMetadata: Partial<AIActionMetadata> = {}
-      if (action.ai.scope) aiMetadata.scope = action.ai.scope
-      if (action.ai.usageHint) aiMetadata.usageHint = action.ai.usageHint
-      if (action.ai.examples) aiMetadata.examples = action.ai.examples
-      if (Object.keys(aiMetadata).length > 0) info.ai = aiMetadata as AIActionMetadata
-      discoverableActionInfos.push(info)
-    }
-    log('debug', COMPONENT_NAME, 'Returning discoverable action infos:', discoverableActionInfos)
-    return discoverableActionInfos
   }
 
   public isComponentIntegrationEnabled (componentName: string): boolean {

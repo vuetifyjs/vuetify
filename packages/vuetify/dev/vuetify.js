@@ -19,6 +19,6 @@ export default createVuetify({
   locale,
   theme: { defaultTheme: 'light' },
   actionCore: {
-    ai: { enabled: true } // Enable AI features for the dev environment
+    verboseLogging: true,
   },
 })

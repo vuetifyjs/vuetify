@@ -2,8 +2,6 @@
 
 This chapter outlines the recommended strategies for connecting ActionCore actions to your Vuetify UI components. The emphasis is on **application-level integration**, where your application logic or custom components bridge ActionCore functionalities with UI elements.
 
-**Note on Previous Approaches:** Earlier patterns involving direct, deep integration of ActionCore into core Vuetify components via a `command` prop (and an associated `useCommandable` composable specifically for that `command` prop) are **no longer the primary recommended strategy**. While `useCommandable` might exist or be used for building highly specialized custom commandable components, the patterns below describe the standard and preferred way to connect actions to your UI, promoting clearer data flow and easier maintenance.
-
 ## Core Principles of Application-Level Integration
 
 ### 1. Access ActionCore

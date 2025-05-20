@@ -35,7 +35,6 @@
           <ScenarioDynamicRegistration />
           <ScenarioActionWithSubItems />
           <ScenarioActionWithParams />
-          <ScenarioAIDiscovery />
         </v-col>
 
         <!-- Column 2 -->
@@ -154,7 +153,6 @@ import ScenarioUndoRedo from '@playgrounds/ActionCore/scenarios/ScenarioUndoRedo
 import ScenarioContextMenu from '@playgrounds/ActionCore/scenarios/ScenarioContextMenu.vue'
 import ScenarioActionWithSubItems from '@playgrounds/ActionCore/scenarios/ScenarioActionWithSubItems.vue'
 import ScenarioActionWithParams from '@playgrounds/ActionCore/scenarios/ScenarioActionWithParams.vue'
-import ScenarioAIDiscovery from '@playgrounds/ActionCore/scenarios/ScenarioAIDiscovery.vue'
 import ScenarioActiveHotkeys from '@playgrounds/ActionCore/scenarios/ScenarioActiveHotkeys.vue'
 
 // --- Global Log, ActionCore, Theme, Palette setup (remains the same) ---
@@ -177,7 +175,6 @@ watch(logMessages, () => { if (stickToBottom.value) scrollToBottom() }, { deep: 
 
 // Initialize ActionCore with AI features enabled for the playground
 const actionCoreOptionsObj: ActionCoreOptions = {
-  ai: { enabled: true },
   verboseLogging: true,
   // Potentially other playground-specific options if needed later
 };

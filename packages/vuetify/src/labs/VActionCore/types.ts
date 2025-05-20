@@ -208,19 +208,12 @@ export interface ActionCoreOptions {
   componentIntegration?: boolean | Record<string, boolean>
 
   /**
-   * Configuration for AI-related features.
-   * Set to `true` or an ActionCoreAIOptions object (e.g. `{ enabled: true }`) to enable AI functionalities.
-   * Defaults to `false` (disabled).
-   * @experimental AI features are experimental and not recommended for production use.
-   */
-  ai?: boolean | ActionCoreAIOptions; // Changed to use ActionCoreAIOptions
-
-  /**
    * An optional parent PActionCore instance for hierarchical action management.
    */
   parent?: ActionCorePublicAPI
 
   // Add any other future global ActionCore options here
+  verboseLogging?: boolean;
 }
 
 /**
@@ -246,9 +239,6 @@ export interface ActionCorePublicAPI {
   isComponentIntegrationEnabled(componentName: string): boolean;
   /** Cleans up the ActionCore instance. */
   destroy(): void;
-
-  // New method for AI discovery
-  getDiscoverableActions(aiContext: { allowedScopes?: string[] }): DiscoverableActionInfo[];
 
   // New methods/properties for Profiling
   setActiveProfile(profileName: string | null): void;

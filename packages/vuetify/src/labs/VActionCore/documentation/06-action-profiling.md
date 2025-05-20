@@ -146,7 +146,7 @@ When `actionCore.setActiveProfile()` is called:
     *   If no matching profile override exists for that action, or if no profile is active (`null`), the action's base definition is used as the effective action.
 3.  **Hotkeys are automatically updated:** ActionCore detects changes in the `hotkey` property of the effective actions and re-registers them with the underlying `useKeyBindings` system. This means hotkeys can dynamically change when the profile changes.
 4.  **`actionCore.getAction(actionId)` will always return the *effective* action definition** (base, or base merged with the active profile's overrides).
-5.  UI elements (like `<VHotKey>` or components using `useCommandable`) that react to `actionCore.allActions` or specific actions retrieved via `getAction()` will dynamically update to reflect the changes in title, icon, disabled state, etc.
+5.  UI elements (like `<VHotKey>`) that react to `actionCore.allActions` or specific actions retrieved via `getAction()` will dynamically update to reflect the changes in title, icon, disabled state, etc.
 
 ## Benefits of Action Profiling
 

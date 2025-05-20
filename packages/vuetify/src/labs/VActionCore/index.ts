@@ -33,11 +33,6 @@ export { log } from './utils'
 // Export all components from the components directory
 export * from './components'
 
-// Deprecated commandable composable & props (kept for now if any labs playgrounds still use them directly)
-export { useCommandable } from './composables/useCommandable'
-export type { UseCommandableProps } from './composables/useCommandable'
-export { makeActionCoreProps, VActionCorePropsKeys } from './composables/actionCoreProps'
-
 // Other utils - utils.ts does not export COMPONENT_NAME
 // export { COMPONENT_NAME } from './utils' // Removed
 
