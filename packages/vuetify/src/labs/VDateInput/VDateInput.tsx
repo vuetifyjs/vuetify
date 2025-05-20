@@ -94,7 +94,7 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
 
     const menu = useProxiedModel(props, 'menu')
     const isEditingInput = shallowRef(false)
-    const isFocused = shallowRef(!!props.focused)
+    const isFocused = shallowRef(props.focused)
     const vTextFieldRef = ref<VTextField>()
     const disabledActions = ref<typeof VConfirmEdit['props']['disabled']>(['save'])
 

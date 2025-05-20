@@ -55,7 +55,7 @@ export const VColorInput = genericComponent<VColorInputSlots>()({
   setup (props, { slots }) {
     const model = useProxiedModel(props, 'modelValue')
     const menu = shallowRef(false)
-    const isFocused = shallowRef(!!props.focused)
+    const isFocused = shallowRef(props.focused)
 
     const isInteractive = computed(() => !props.disabled && !props.readonly)
 
