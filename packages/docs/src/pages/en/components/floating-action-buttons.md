@@ -21,11 +21,7 @@ The `v-fab` component can be used as a floating action button. This provides an 
 
 <PageFeatures />
 
-::: success
-
-This feature was introduced in [v3.6.0](/getting-started/release-notes/?version=v3.6.0)
-
-:::
+<DocIntroduced version="3.6.0" />
 
 ## Usage
 

@@ -43,7 +43,7 @@
         </v-slide-group-item>
       </v-slide-group>
 
-      <v-tooltip :disabled="xs" location="top" open-delay="500">
+      <v-tooltip :disabled="$vuetify.display.xs" location="top" open-delay="500">
         <template #activator="{ props: activatorProps }">
           <v-btn
             :href="playgroundLink"
@@ -59,7 +59,7 @@
         <span>{{ t('edit-in-playground') }}</span>
       </v-tooltip>
 
-      <v-tooltip :disabled="xs" location="top" open-delay="500">
+      <v-tooltip :disabled="$vuetify.display.xs" location="top" open-delay="500">
         <template #activator="{ props: activatorProps }">
           <v-btn
             :icon="copied ? 'mdi-check' : 'mdi-clipboard-multiple-outline'"
@@ -75,7 +75,7 @@
         <span>{{ t('copy-example-source') }}</span>
       </v-tooltip>
 
-      <v-tooltip :disabled="xs" location="top" open-delay="500">
+      <v-tooltip :disabled="$vuetify.display.xs" location="top" open-delay="500">
         <template #activator="{ props: activatorProps }">
           <v-btn
             :icon="!show ? 'mdi-code-tags' : 'mdi-chevron-up'"
@@ -114,7 +114,9 @@
         touchless
       >
         <v-list>
-          <div class="px-4 usage-example pt-2">
+          <v-list-subheader :title="t('configuration')" />
+
+          <div class="px-4 usage-example">
             <v-defaults-provider
               :defaults="{
                 global: {
@@ -156,7 +158,6 @@
     modelValue: {
       type: [Array, String],
       default: () => ([]),
-      required: true,
     },
     script: String,
   })

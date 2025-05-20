@@ -20,9 +20,9 @@ export const VToolbarItems = genericComponent()({
   setup (props, { slots }) {
     provideDefaults({
       VBtn: {
-        color: toRef(props, 'color'),
+        color: toRef(() => props.color),
         height: 'inherit',
-        variant: toRef(props, 'variant'),
+        variant: toRef(() => props.variant),
       },
     })
 

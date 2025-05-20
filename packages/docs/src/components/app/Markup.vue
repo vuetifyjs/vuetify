@@ -105,10 +105,10 @@
   const user = useUserStore()
   const theme = useTheme()
   const { t } = useI18n()
-  const clicked = ref(false)
+  const clicked = shallowRef(false)
   const root = ref<ComponentPublicInstance>()
 
-  const highlighted = ref('')
+  const highlighted = shallowRef('')
   watchEffect(async () => {
     highlighted.value = props.code && props.language && Prism.highlight(await props.code, Prism.languages[props.language], props.language)
   })

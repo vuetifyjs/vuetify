@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   title: Dates
   description: Vuetify has first party date support that can easily be swapped for another date library
@@ -22,9 +21,7 @@ Easily hook up date libraries that are used for components such as Date Picker a
 
 <PromotedEntry />
 
-::: success
-This feature was introduced in [v3.4.0 (Blackguard)](/getting-started/release-notes/?version=v3.4.0)
-:::
+<DocIntroduced version="3.4.0" />
 
 ## Usage
 
@@ -176,12 +173,12 @@ Then configure Vuetify to use DayJs:
 ```js { resource="src/plugins/vuetify.js" }
 import { createVuetify } from 'vuetify'
 import DayJsAdapter from '@date-io/dayjs'
-import { enUS } from 'date-fns/locale'
+import en from 'dayjs/locale/en'
 
 export default createVuetify({
   date: {
     adapter: DayJsAdapter,
-    locale: { en: enUS },
+    locale: { en },
   },
 })
 ```

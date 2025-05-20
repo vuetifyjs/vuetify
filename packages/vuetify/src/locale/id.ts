@@ -104,4 +104,17 @@ export default {
     loadMore: 'Muat lebih banyak',
     empty: 'Tidak ada lagi',
   },
+  rules: {
+    required: 'Kolom ini wajib diisi',
+    email: 'Masukkan alamat email yang valid',
+    number: 'Kolom ini hanya boleh berisi angka',
+    integer: 'Kolom ini hanya boleh berisi bilangan bulat',
+    capital: 'Kolom ini hanya boleh berisi huruf kapital',
+    maxLength: 'Anda harus memasukkan maksimum {0} karakter',
+    minLength: 'Anda harus memasukkan minimum {0} karakter',
+    strictLength: 'Panjang kolom yang dimasukkan tidak valid',
+    exclude: 'Karakter {0} tidak diperbolehkan',
+    notEmpty: 'Pilih setidaknya satu nilai',
+    pattern: 'Format tidak valid',
+  },
 }

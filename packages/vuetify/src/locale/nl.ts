@@ -104,4 +104,17 @@ export default {
     loadMore: 'Meer laden',
     empty: 'Geen meer items',
   },
+  rules: {
+    required: 'Dit veld is verplicht',
+    email: 'Voer een geldig e-mailadres in',
+    number: 'Dit veld mag alleen nummers bevatten',
+    integer: 'Dit veld mag alleen gehele getallen bevatten',
+    capital: 'Dit veld mag alleen hoofdletters bevatten',
+    maxLength: 'Je mag maximaal {0} tekens invoeren',
+    minLength: 'Je moet minimaal {0} tekens invoeren',
+    strictLength: 'De lengte van het ingevoerde veld is ongeldig',
+    exclude: 'Het teken {0} is niet toegestaan',
+    notEmpty: 'Kies ten minste één waarde',
+    pattern: 'Ongeldig formaat',
+  },
 }
