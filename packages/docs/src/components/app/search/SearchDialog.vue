@@ -119,8 +119,8 @@
   const model = defineModel<boolean>()
   const searchString = defineModel('search', { type: String, default: '' })
 
-  // Algolia doesn't tokenize hyphens by default. Sanitize search string.
-  const searchTerm = computed(() => searchString.value.replace(/-/g, ' ').trim())
+  // trim and replace starting instance of -someText to prevent broad queries
+  const searchTerm = computed(() => searchString.value.replace(/^-\S+\s*/, '').trim())
 
   const list = ref<InstanceType<typeof SearchResults>>()
   const searchClient = algoliasearch(
