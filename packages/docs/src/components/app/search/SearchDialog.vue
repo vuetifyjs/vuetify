@@ -82,7 +82,7 @@
           <ais-configure
             :facetFilters="[`lang:${locale}`]"
             :hitsPerPage="50"
-            :query="searchString"
+            :query="searchTerm"
           />
 
           <ais-hits v-slot="{ items }">
@@ -118,6 +118,9 @@
 
   const model = defineModel<boolean>()
   const searchString = defineModel('search', { type: String, default: '' })
+
+  // Algolia doesn't tokenize hyphens by default. Sanitize search string.
+  const searchTerm = computed(() => searchString.value.replace(/-/g, ' '))
 
   const list = ref<InstanceType<typeof SearchResults>>()
   const searchClient = algoliasearch(
