@@ -42,6 +42,10 @@ export const makeVCommandPaletteListProps = propsFactory({
     required: true,
   },
   searchText: String,
+  density: {
+    type: String as PropType<'default' | 'comfortable' | 'compact' | null>,
+    default: 'default',
+  },
 }, 'VCommandPaletteList');
 
 // Use the defined scope types in genericComponent
@@ -134,7 +138,7 @@ export const VCommandPaletteList = genericComponent<{
           role="listbox"
           aria-labelledby={`${props.listId}-title`}
           class="v-command-palette__list"
-          lines="one"
+          density={props.density}
         >
           {props.actions.length === 0 ? (
             renderSlotWithFallback(
@@ -187,8 +191,12 @@ export const VCommandPaletteList = genericComponent<{
                       subtitle={unref(action.subtitle) ?? undefined}
                       active={isSelected}
                       onClick={select}
-                      class={{ 'v-command-palette__item--selected': isSelected }}
+                      class={{
+                        'v-command-palette__item--selected': isSelected,
+                        [`v-command-palette__item--${props.density}`]: !!props.density && props.density !== 'default',
+                      }}
                       value={action.id}
+                      nav
                     >
                       {{
                         prepend: () => action.icon ? <VIcon icon={unref(action.icon)} /> : undefined,

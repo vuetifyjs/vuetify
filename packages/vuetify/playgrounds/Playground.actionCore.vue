@@ -63,6 +63,7 @@
       <VCommandPalette
         v-model="isPaletteOpen"
         variant="linear-dark"
+        density="compact"
         close-on-execute
       />
 

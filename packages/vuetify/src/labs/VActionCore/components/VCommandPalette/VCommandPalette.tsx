@@ -12,6 +12,7 @@ import { VCommandPaletteSearch } from './VCommandPaletteSearch'
 
 // Composables (Vuetify and ActionCore)
 import { makeComponentProps } from '@/composables/component'
+import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { ActionCoreSymbol, type ActionDefinition, type ActionCorePublicAPI } from '@/labs/VActionCore'
 import { useCommandPaletteCore, type CommandPaletteListRef, type UseCommandPaletteCoreProps } from '../../composables/useCommandPaletteCore'
@@ -53,6 +54,7 @@ interface VCommandPaletteListWrapperScopeProps {
   isLoading: Ref<boolean>;
   itemSlot?: (scope: VCommandPaletteListItemScope) => VNode[];
   noResultsSlot?: (scope: VCommandPaletteListNoResultsScope) => VNode[];
+  density?: 'default' | 'comfortable' | 'compact' | null;
 }
 
 interface VCommandPaletteItemScopeProps extends VCommandPaletteListItemScope {}
@@ -116,6 +118,7 @@ export const makeVCommandPaletteProps = propsFactory({
   title: {
       type: String,
   },
+  ...makeDensityProps(),
   ...makeComponentProps(),
   ...makeThemeProps(),
 }, 'VCommandPalette')
@@ -130,6 +133,8 @@ export const VCommandPalette = genericComponent<VCommandPaletteTypedSlots>()({
   setup(props, { emit, slots }) {
     provideTheme(props)
     const typedSlots = slots as VCommandPaletteTypedSlots;
+
+    const { densityClasses } = useDensity(props, 'v-command-palette')
 
     const actionCore = inject(ActionCoreSymbol)
     if (!actionCore) {
@@ -163,7 +168,7 @@ export const VCommandPalette = genericComponent<VCommandPaletteTypedSlots>()({
         v-model={core.isActive.value}
         width={props.width}
         scrollable
-        class="v-command-palette-dialog"
+        class={['v-command-palette-dialog', densityClasses.value]}
         contentClass="v-command-palette-dialog__content" // Used by isCommandPaletteFocused
         scrim="#000000" // Consider making scrim configurable or themeable
         // Consider adding persistent prop if desired for some use cases
@@ -246,6 +251,7 @@ export const VCommandPalette = genericComponent<VCommandPaletteTypedSlots>()({
                   isLoading: core.isLoadingSubItems,
                   itemSlot: typedSlots.item,
                   noResultsSlot: typedSlots['no-results'],
+                  density: props.density,
                 }) : (
                   <VCommandPaletteList
                     ref={listRef}
@@ -253,6 +259,7 @@ export const VCommandPalette = genericComponent<VCommandPaletteTypedSlots>()({
                     selectedIndex={core.selectedIndex.value}
                     listId={core.listId}
                     searchText={core.searchText.value}
+                    density={props.density}
                     onActionClick={core.handleItemActivated}
                     onItemNavigate={core.handleItemActivated}
                     v-slots={{

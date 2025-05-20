@@ -24,7 +24,7 @@ $v-command-palette-compact-list-item-height: 32px !default;
   max-height: 70vh; // Prevent palette from becoming too tall
 
   &__top {
-    padding: .875rem;
+    padding: .5rem .875rem;
     border-bottom: 1px solid rgba(var(--v-border-color), var(--v-border-opacity));
   }
 
@@ -64,9 +64,12 @@ $v-command-palette-compact-list-item-height: 32px !default;
 
   // List container
   &__list {
-    padding: $v-command-palette-list-padding;
+    &.v-list {
+      padding: 0;
+    }
     flex: 1 1 auto; // Allow list to grow and shrink
     overflow-y: auto; // Make list scrollable if actions exceed max-height
+    margin: .5rem;
   }
 
   // Item style customizations - use BEM pattern
