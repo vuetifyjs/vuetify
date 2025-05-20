@@ -49,8 +49,8 @@ export interface ActionProfileOverride<T extends ActionContext = ActionContext> 
   disabled?: boolean | Ref<boolean>;
   description?: string;
   group?: string;
-  parametersSchema?: Record<string, any>; // Profile can override AI schema
-  ai?: AIActionMetadata; // Profile can override AI metadata
+  parametersSchema?: Record<string, any>; // Profile can override schema for programmatic use
+  ai?: AIActionMetadata; // Profile can override AI metadata (experimental, custom setup)
 }
 ```
 

@@ -86,12 +86,13 @@ These guidelines aim to help you create actions that are not only functional but
 *   **Consistency:** Actions that perform similar functions should have consistent naming, icons, and behavior patterns.
 *   **Avoid Overly Nested `subItems`:** While nesting is supported, deep hierarchies can be confusing. Aim for 1-2 levels of nesting in most UIs.
 
-## 9. AI Integration - Use with Care
+## 9. AI Integration - Handle with Care if Customizing
 
-*Refer to the [AI Integration](./08-ai-integration.md) guide for comprehensive details.*
-*   **Schema First (`parametersSchema`):** Meticulously define the expected data for AI-invocable actions.
-*   **Clear Guidance (`ai.usageHint`, `ai.examples`):** Help the AI understand when and how to use the action correctly.
-*   **Security in Handlers:** **Critically important.** Always validate and authorize data received from AI in your action handlers. AI discovery scopes are for visibility, not security.
+*Refer to the [AI Integration (Future Possibility)](./08-ai-integration.md) guide for comprehensive details.*
+*   If you choose to implement custom AI integration:
+    *   **Schema First (`parametersSchema`):** Meticulously define the expected data for AI-invocable actions if you build such a system.
+    *   **Clear Guidance (Custom AI Metadata):** If you define custom AI metadata, ensure it helps the AI understand when and how to use the action correctly.
+    *   **Security in Handlers:** **Critically important.** Always validate and authorize data received from any AI system in your action handlers. AI discovery scopes are for visibility, not security.
 
 By adhering to these best practices, you can leverage ActionCore to build applications that are not only powerful and feature-rich but also a testament to software craftsmanship – delighting users and being a pleasure to maintain and extend.
 

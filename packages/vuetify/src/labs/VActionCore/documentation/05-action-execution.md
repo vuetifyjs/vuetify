@@ -67,9 +67,9 @@ export interface ActionContext {
         *   `'programmatic'`: Called directly via `actionCore.executeAction()` from application code.
         *   `'ui-button-click'`, `'ui-list-select'` (or similar application-defined strings): Used when UI elements directly trigger `executeAction`.
         *   `'notification'`: Triggered by interacting with an in-app notification.
-        *   `'ai_assistant'`: Triggered by an AI system.
+        *   `'ai_assistant'`: Could be used if integrating with an AI system (experimental, requires custom setup).
     *   You can use custom string values for `trigger` if needed.
-    *   **Pro Tip:** Handlers can use `trigger` to adapt their behavior. For instance, an action might perform a slightly different logging or UI feedback operation if triggered by AI versus a direct user hotkey.
+    *   **Pro Tip:** Handlers can use `trigger` to adapt their behavior. For instance, an action might perform a slightly different logging or UI feedback operation if programmatically triggered versus a direct user hotkey.
 
 *   **`event?: Event`**
     *   If the action was triggered by a DOM event (e.g., a key press for a hotkey, a click event for a button), this property will hold the original `Event` object. This can be useful for accessing event details like `event.target`, coordinates, or specific key event properties if not already handled by ActionCore's hotkey system.
@@ -93,7 +93,7 @@ export interface ActionContext {
             }
             ```
         *   A command palette might use `data` to pass along the search query that led to the action if the action needs it.
-        *   An AI assistant would use `data` to pass the structured parameters derived from natural language, matching the action's `parametersSchema`.
+        *   If an AI assistant integration were active, it might use `data` to pass structured parameters derived from natural language (potentially guided by a `parametersSchema` on the action).
 
 ## Patterns for Programmatic Execution
 

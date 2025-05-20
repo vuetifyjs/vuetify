@@ -100,11 +100,11 @@ ActionCore is a tool for managing "commands" and significant "actions" in a unif
 *   **Problem:** Verbose, error-prone, less efficient. Requires manual management of source keys and definitions.
 *   **Recommendation:** **Use the native Action Profiling feature.** Define actions once with a `profiles` object. Use `actionCore.setActiveProfile('profileName')` to switch behavior globally. This is cleaner, centralized, and leverages built-in reactivity.
 
-## 12. Missing or Poorly Defined AI Metadata
+## 12. Missing or Poorly Defined AI Metadata (for Custom AI Setups)
 
-*   **Anti-Pattern:** Actions intended for AI interaction are defined without a `parametersSchema` or with an incomplete/misleading `ai` metadata block (`usageHint`, `examples`, `scope`, `accessible`).
-*   **Impact:** AI assistant cannot reliably discover, understand parameters of, or determine the appropriate context for using the action. May lead to failed or incorrect AI-driven operations.
-*   **Recommendation:** For AI-callable actions, meticulously define `parametersSchema`. Provide clear `ai.usageHint` and `ai.examples`. Assign appropriate `ai.scope`(s). Critically, ensure action handlers perform robust validation and authorization, especially if `context.trigger === 'ai_assistant'`. AI discovery is for visibility, not a replacement for handler security.
+*   **Anti-Pattern:** If implementing a custom AI integration, actions intended for that AI interaction are defined without a `parametersSchema` or with incomplete/misleading custom AI metadata (e.g., `usageHint`, `examples`, `scope`, `accessible` properties if you choose to use similar structures).
+*   **Impact:** A custom AI assistant cannot reliably discover, understand parameters of, or determine the appropriate context for using the action. May lead to failed or incorrect AI-driven operations.
+*   **Recommendation:** For actions intended for a custom AI system, meticulously define `parametersSchema`. Provide clear usage hints and examples within your custom metadata structure. Assign appropriate scopes. Critically, ensure action handlers perform robust validation and authorization, especially if `context.trigger` indicates an AI source. Discovery mechanisms are for visibility, not a replacement for handler security.
 
 ## 13. Synchronous Handlers for Potentially Long-Running Operations
 

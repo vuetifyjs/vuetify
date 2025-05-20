@@ -133,7 +133,7 @@ ActionCore itself does not dictate how `subItems` are displayed. It merely provi
 3.  Handling the `Promise` if the function is asynchronous (e.g., showing a loading indicator).
 4.  Rendering the returned `ActionDefinition[]` as the next level of choices.
 
-To facilitate this, particularly for generic components like `VBtn` that might be linked to a group action via the `command` prop, ActionCore can leverage an injection symbol: `ShowSubItemsUISymbol`. A command palette or a similar UI orchestrator can `provide` a function under this symbol. When a component (or `useCommandable`) detects it's trying to "execute" an action that primarily has `subItems`, it can inject this symbol and call the provided function, passing the parent action. This allows the central UI orchestrator to take over and display the sub-items appropriately.
+To facilitate this, particularly for generic components that might be linked to a group action (e.g. via a custom setup, not a direct `command` prop which is deprecated for this use), ActionCore can leverage an injection symbol: `ShowSubItemsUISymbol`. A command palette or a similar UI orchestrator can `provide` a function under this symbol. When a component (or custom logic interacting with actions) detects it's trying to "execute" an action that primarily has `subItems`, it can inject this symbol and call the provided function, passing the parent action. This allows the central UI orchestrator to take over and display the sub-items appropriately.
 
 **Example (Conceptual - Command Palette Providing the Handler):**
 ```typescript

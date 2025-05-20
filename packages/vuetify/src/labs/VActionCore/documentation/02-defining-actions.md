@@ -191,7 +191,8 @@ These properties enable more sophisticated scenarios and are detailed in their r
 
 *   **`subItems?: (context: T) => ActionDefinition<T>[] | Promise<ActionDefinition<T>[]>`**: For actions that act as containers for other actions. See [Sub-Items & Nested Commands](./07-sub-items-and-nesting.md).
 *   **`profiles?: Record<string, ActionProfileOverride<T>>`**: For defining variations of an action based on a global profile. See [Action Profiling](./06-action-profiling.md).
-*   **`parametersSchema?: Record<string, any>`** and **`ai?: AIActionMetadata`**: For integrating with AI systems. See [AI Integration](./08-ai-integration.md).
+*   **`parametersSchema?: Record<string, any>`**: Can be used by developers to define expected parameters for an action's handler, often useful if building systems that programmatically provide data to actions. (Previously associated with experimental AI integration, but can serve general programmatic use).
+*   **`ai?: AIActionMetadata`**: Related to experimental AI features, not enabled by default. See [AI Integration (Future Possibility)](./08-ai-integration.md).
 
 ### Custom Data
 

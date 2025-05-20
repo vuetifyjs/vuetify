@@ -33,9 +33,9 @@ This documentation is structured to guide you from foundational concepts to adva
     *   Leveraging ActionCore's profiling feature to create different behavior modes (e.g., beginner/advanced) by overriding action properties like hotkeys, titles, or handlers.
 7.  [**Sub-Items & Nested Commands**](./07-sub-items-and-nesting.md)
     *   Creating actions that act as groups or menus, exposing `subItems` for UIs like command palettes or nested menus.
-8.  [**AI Integration**](./08-ai-integration.md)
-    *   Making your actions discoverable and invocable by AI assistants, including parameter definitions (`parametersSchema`) and AI-specific metadata.
-9.  [**Component Integration**](./09-component-integration.md)
+8.  [**AI Integration (Future Possibility)**](./08-ai-integration.md)
+    *   Information on how actions *could* be structured for AI systems, noting this is not enabled by default.
+9.  [**Component Integration (Application-Level Focus)**](./09-component-integration.md)
     *   Recommended application-level strategies for connecting ActionCore to your UI. Covers triggering actions, reflecting action state, and detailed patterns for navigation, buttons, list items, and batch operations.
 10. [**Best Practices for Quality Actions**](./10-best-practices.md)
     *   Principles and tips for designing robust, user-friendly, and maintainable actions.

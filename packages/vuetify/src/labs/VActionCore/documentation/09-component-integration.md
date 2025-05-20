@@ -2,7 +2,7 @@
 
 This chapter outlines the recommended strategies for connecting ActionCore actions to your Vuetify UI components. The emphasis is on **application-level integration**, where your application logic or custom components bridge ActionCore functionalities with UI elements.
 
-**Note on Previous Approaches:** Direct, deep integration of ActionCore into core Vuetify components via a `command` prop (and the associated `useCommandable` composable for this purpose) is **deprecated and no longer the primary recommended strategy**. While `useCommandable` might still be used for building custom commandable components, the patterns below describe the standard way to connect actions to your UI.
+**Note on Previous Approaches:** Earlier patterns involving direct, deep integration of ActionCore into core Vuetify components via a `command` prop (and an associated `useCommandable` composable specifically for that `command` prop) are **no longer the primary recommended strategy**. While `useCommandable` might exist or be used for building highly specialized custom commandable components, the patterns below describe the standard and preferred way to connect actions to your UI, promoting clearer data flow and easier maintenance.
 
 ## Core Principles of Application-Level Integration
 
@@ -181,7 +181,7 @@ For actions that trigger client-side navigation (e.g., using Vue Router), the go
         },
         meta: { actionType: 'navigation', route: link.to }
       }));
-      actionCore.registerActionsSource({ id: 'main-nav', name: 'Main Navigation', actions: navigationActions });
+      actionCore.registerActionsSource(navigationActions); // Simplified registration for example
     }
     // Call registerNavigationActions() during app setup.
     ```
@@ -236,12 +236,12 @@ For actions triggered by buttons or other interactive elements, make the same lo
           await performSaveOperation({ triggerSource: `actioncore-${ctx.trigger}` });
         },
       }];
-      actionCore.registerActionsSource({ id: 'editor', name: 'Editor Actions', actions });
+      actionCore.registerActionsSource(actions); // Simplified registration
     }
     ```
 
 **Alternative: UI Triggers `actionCore.executeAction()`**
-The button click handler could directly call `actionCore.executeAction('editor-save')`. This is viable if `ActionCore` adds significant value to *every* execution (e.g., complex `canExecute` or hooks). For most cases, the shared function is more straightforward.
+The button click handler could directly call `actionCore.executeAction('editor-save')`. This is viable if `ActionCore` adds significant value to *every* execution (e.g., complex `canExecute` or hooks being consistently applied). For most cases, the shared function is more straightforward and testable in isolation.
 
 ### 3. Contextual Actions for List Items
 
@@ -317,7 +317,7 @@ For actions on individual items in a list (e.g., Edit, Delete).
           // canExecute: ctx => !!ctx.data?.item
         }
       ];
-      actionCore.registerActionsSource({ id: 'list-item-actions', name: 'List Item Actions', actions });
+      actionCore.registerActionsSource(actions); // Simplified registration
     }
     ```
 This pattern keeps action definitions general; context is supplied at invocation time.
@@ -326,7 +326,7 @@ This pattern keeps action definitions general; context is supplied at invocation
 
 For operations on multiple selected items.
 
-**Recommended Pattern: Action Operates on a Shared Selection State**
+**Recommended Pattern: Action Operates on a Shared Selection State (or receives data)**
 
 1.  **Maintain Selection State:** Use a reactive store (e.g., Pinia) or a local `ref` to track selected item IDs.
 
@@ -336,7 +336,7 @@ For operations on multiple selected items.
     // ... logic to update selectedItemIds from UI ...
     ```
 
-2.  **UI Triggers Action on Selection:** Button click handler reads selection state.
+2.  **UI Triggers Action on Selection:** Button click handler reads selection state and passes it as data.
 
     ```vue
     <!-- MySelectableList.vue -->
@@ -355,7 +355,7 @@ For operations on multiple selected items.
 
     async function handleDeleteSelected() {
       if (!actionCore || !selectedItemIds.value.length) return;
-      // Pass the array of IDs directly, or the selection ref if the action needs to be reactive to it.
+      // Pass the array of IDs directly.
       await actionCore.executeAction('batch-delete', {
         data: { itemIds: [...selectedItemIds.value] }, // Pass a snapshot
         trigger: 'ui-batch-delete'
@@ -382,7 +382,6 @@ For operations on multiple selected items.
       const actions: ActionDefinition[] = [{
         id: 'batch-delete',
         title: 'Delete Selected Items',
-        // title: () => `Delete ${/* get access to selection length somehow or pass it */} Items`,
         handler: async (ctx: ActionContext) => {
           const itemIds = ctx.data?.itemIds as string[];
           if (!itemIds || itemIds.length === 0) {
@@ -394,20 +393,22 @@ For operations on multiple selected items.
           const itemIds = ctx.data?.itemIds as string[];
           return !!itemIds && itemIds.length > 0;
         },
-        // To make it reactive to selection from palette, canExecute would need access to the live selection ref.
-        // This is simpler if invoked from UI with data, more complex for palette.
+        // Note: For a command palette to enable/disable this action based on *live* selection,
+        // the `canExecute` or `disabled` property of the ActionDefinition would need
+        // reactive access to that selection state (e.g., via a Pinia store getter).
+        // If invoked only from UI with data, the above `canExecute` is sufficient for that call.
       }];
-      actionCore.registerActionsSource({ id: 'batch-actions', name: 'Batch Operations', actions });
+      actionCore.registerActionsSource(actions); // Simplified registration
     }
     ```
-    If `canExecute` for a command palette needs to be truly reactive to the live selection state (not just data passed at invocation), that selection state must be accessible to the `ActionDefinition` (e.g., via a store/global ref).
+    If `canExecute` for a command palette needs to be truly reactive to the live selection state (not just data passed at invocation), that selection state must be accessible to the `ActionDefinition` (e.g., via a store/global ref) and its `disabled` or `canExecute` properties made reactive to it.
 
 ## General Considerations for UI Integration
 
 *   **Error Handling & User Feedback:** Implement robust error handling in action handlers. Provide feedback to the user whether an action is triggered via UI or `ActionCore`.
 *   **Asynchronous Operations:** Clearly indicate loading states (e.g., using `actionCore.isLoading` or custom states) for actions that take time.
 *   **`VHotKey` for Display:** The `<VHotKey action-id="your-action-id" />` component remains useful for displaying the hotkey associated with an action, and it will react to changes from profiles.
-*   **Keep it Simple:** Start with straightforward patterns. Not every UI interaction needs to be a global `ActionCore` action. Use ActionCore where it adds clear value (discoverability, hotkeys, centralized command logic).
+*   **Keep it Simple:** Start with straightforward patterns. Not every UI interaction needs to be a global `ActionCore` action. Use ActionCore where it adds clear value (discoverability, hotkeys, centralized command logic, undo/redo, profiles).
 
 By following these application-level integration patterns, you can effectively connect your UI to ActionCore, creating a responsive, maintainable, and powerful user experience.
 
