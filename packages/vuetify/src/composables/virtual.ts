@@ -218,8 +218,12 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
       const bufferOverflow = Math.max(topOverflow, bottomOverflow)
 
       if (bufferOverflow > BUFFER_PX) {
-        first.value = start
-        last.value = end
+        if (direction === UP && start < first.value) {
+          first.value = start
+        }
+        if (direction === DOWN && end > last.value) {
+          last.value = end
+        }
       } else {
         // Only update the side that's reached its limit if there's still buffer left
         if (start <= 0) first.value = start
