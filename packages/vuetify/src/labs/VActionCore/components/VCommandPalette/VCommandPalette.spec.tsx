@@ -3,7 +3,7 @@
 import { mount } from '@vue/test-utils'
 import { VCommandPalette } from './VCommandPalette'
 import { ActionCoreSymbol, type ActionDefinition, type ActionCorePublicAPI, type ActionContext } from '@/labs/VActionCore'
-import { ref, markRaw, nextTick, computed, type Ref, type DeepReadonly, defineComponent, h } from 'vue'
+import { ref, markRaw, nextTick, computed, type Ref, type DeepReadonly, defineComponent, h, unref } from 'vue'
 import { ThemeSymbol, type ThemeInstance } from '@/composables/theme'
 import { DefaultsSymbol, type DefaultsInstance } from '@/composables/defaults'
 import { LocaleSymbol, type LocaleInstance, type RtlInstance } from '@/composables/locale'
@@ -13,19 +13,14 @@ import { VTextField } from '@/components/VTextField'
 import { VListItem, VList } from '@/components/VList' // Added VList
 import { VProgressLinear } from '@/components/VProgressLinear' // Added VProgressLinear
 import { VCommandPaletteSearch } from './VCommandPaletteSearch'
-import { commandPaletteNavigationActions } from '../../utils/commandPaletteNavigationActions'
+import { commandPaletteNavigationActions as actualCommandPaletteNavigationActions } from '../../utils/commandPaletteNavigationActions'
+import { getEffectiveHotkeyDisplay as actualGetEffectiveHotkeyDisplay } from '../../utils/commandPaletteNavigationActions'
 
-// Import the actuals that we want to provide via the mock
-import { commandPaletteNavigationActions as actualCommandPaletteNavigationActions } from '../../utils/commandPaletteNavigationActions';
-import { getEffectiveHotkeyDisplay as actualGetEffectiveHotkeyDisplay } from '../../utils/commandPaletteNavigationActions';
-
-// Mock the module path that will be imported by useCommandPaletteCore and VCommandPalette
 vi.doMock('../../utils/commandPaletteNavigationActions', () => {
-  // console.log('MOCK FACTORY: Providing actual commandPaletteNavigationActions and getEffectiveHotkeyDisplay');
   return {
-    __esModule: true, // Important for ES modules
+    __esModule: true,
     commandPaletteNavigationActions: actualCommandPaletteNavigationActions,
-    getEffectiveHotkeyDisplay: actualGetEffectiveHotkeyDisplay, // Provide the actual implementation
+    getEffectiveHotkeyDisplay: actualGetEffectiveHotkeyDisplay,
   };
 });
 
@@ -38,7 +33,6 @@ interface MockInternalThemeDefinition {
 const createMockActionCore = (initialActionsProvided: ActionDefinition[] = []): ActionCorePublicAPI => {
   const actionRegistry = new Map<symbol, ActionDefinition[]>();
   let nextSymbolId = 0;
-  // This ref will be directly watched by useCommandPaletteCore
   const allActionsRef = ref<Readonly<ActionDefinition<any>[]>>([]);
 
   const updateAllActionsRef = () => {
@@ -47,15 +41,13 @@ const createMockActionCore = (initialActionsProvided: ActionDefinition[] = []): 
 
   const mockCore: ActionCorePublicAPI = {
     isLoading: ref(false),
-    allActions: allActionsRef, // Expose the ref directly
+    allActions: computed(() => allActionsRef.value),
     activeProfile: ref(null) as Ref<string | null>,
-    profiles: ref([]),
     getAction: vi.fn(actionId => allActionsRef.value.find(a => a.id === actionId)),
     executeAction: vi.fn(async (actionId, invocationContext) => {
       const action = allActionsRef.value.find(a => a.id === actionId);
       if (action?.handler) {
-        // @ts-ignore
-        await action.handler(invocationContext || {});
+        await action.handler(invocationContext || {} as ActionContext);
       }
     }),
     registerActionsSource: vi.fn((source: any) => {
@@ -76,20 +68,10 @@ const createMockActionCore = (initialActionsProvided: ActionDefinition[] = []): 
       return success;
     }),
     setActiveProfile: vi.fn(),
-    getEffectiveAction: vi.fn(actionId => allActionsRef.value.find(a => a.id === actionId)),
-    isComponentIntegrationEnabled: vi.fn(() => true),
     destroy: vi.fn(() => {
       actionRegistry.clear();
       updateAllActionsRef();
     }),
-    getClosestActionElement: () => null,
-    getElementActionBindings: () => [],
-    showSubItemsInUI: () => {},
-    getGlobalLoadingIndicatorCount: () => ref(0),
-    incrementGlobalLoadingIndicator: () => {},
-    decrementGlobalLoadingIndicator: () => {},
-    getHotkeysForAction: () => [],
-    getFormattedHotkeys: () => '',
   };
 
   if (initialActionsProvided.length > 0) {
@@ -181,7 +163,7 @@ describe('VCommandPalette.tsx', () => {
 
   const mountComponent = (props: any = {}, initialCoreActions: ActionDefinition[] = sampleActions, slots?: any) => {
     // Log the imported commandPaletteNavigationActions at the time of component mounting
-    console.log('MOUNT_COMPONENT: commandPaletteNavigationActions:', JSON.stringify(commandPaletteNavigationActions));
+    console.log('MOUNT_COMPONENT: commandPaletteNavigationActions:', JSON.stringify(actualCommandPaletteNavigationActions));
 
     mockActionCoreInstance = createMockActionCore(initialCoreActions);
     const mockTheme = createMockTheme();
@@ -249,10 +231,10 @@ describe('VCommandPalette.tsx', () => {
     await nextTick();
     const actionsOnlyAfterFile = paletteCore.groupedAndSortedActions.value.filter((a: any) => !a.isHeader);
     expect(actionsOnlyAfterFile.length).toBe(3);
-    expect(actionsOnlyAfterFile.some((item: ActionDefinition) => item.title.includes('Open File'))).toBe(true);
-    expect(actionsOnlyAfterFile.some((item: ActionDefinition) => item.title.includes('Save File'))).toBe(true);
-    expect(actionsOnlyAfterFile.some((item: ActionDefinition) => item.title.includes('User Profile'))).toBe(true);
-    expect(actionsOnlyAfterFile.some((item: ActionDefinition) => item.title.includes('Print Document'))).toBe(false);
+    expect(actionsOnlyAfterFile.some((item: ActionDefinition) => unref(item.title).includes('Open File'))).toBe(true);
+    expect(actionsOnlyAfterFile.some((item: ActionDefinition) => unref(item.title).includes('Save File'))).toBe(true);
+    expect(actionsOnlyAfterFile.some((item: ActionDefinition) => unref(item.title).includes('User Profile'))).toBe(true);
+    expect(actionsOnlyAfterFile.some((item: ActionDefinition) => unref(item.title).includes('Print Document'))).toBe(false);
 
     await vTextFieldWrapper.setValue('document');
     await nextTick();
@@ -260,8 +242,8 @@ describe('VCommandPalette.tsx', () => {
     await nextTick();
     const actionsOnlyDocument = paletteCore.groupedAndSortedActions.value.filter((a: any) => !a.isHeader);
     expect(actionsOnlyDocument.length).toBe(2);
-    expect(actionsOnlyDocument.some((item: ActionDefinition) => item.title.includes('Open File'))).toBe(true);
-    expect(actionsOnlyDocument.some((item: ActionDefinition) => item.title.includes('Print Document'))).toBe(true);
+    expect(actionsOnlyDocument.some((item: ActionDefinition) => unref(item.title).includes('Open File'))).toBe(true);
+    expect(actionsOnlyDocument.some((item: ActionDefinition) => unref(item.title).includes('Print Document'))).toBe(true);
 
     await vTextFieldWrapper.setValue('nonexistent');
     await nextTick();
@@ -321,7 +303,7 @@ describe('VCommandPalette.tsx', () => {
     const findActionNode = (id: string) => wrapper.findAllComponents(VListItem).find(c => c.text().includes(findActionById(id)!.title as string));
 
     async function dispatchAndVerifyNavAction(actionId: string, verificationFn: () => void) {
-      const navAction = commandPaletteNavigationActions.find(a => a.id === actionId);
+      const navAction = actualCommandPaletteNavigationActions.find(a => a.id === actionId);
       expect(navAction).toBeDefined();
 
       // Simulate VActionCore executing the handler
@@ -401,13 +383,13 @@ describe('VCommandPalette.tsx', () => {
     });
 
     it('footer slot renders and receives scope', async () => {
-      wrapper = mountComponent({ title: 'Footer Test' }, sampleActions); // No custom slots for this diagnostic
+      wrapper = mountComponent({ title: 'Footer Test' }, sampleActions);
       await nextTick();
       await nextTick();
 
       const vm = wrapper.vm as any;
 
-      console.log('TEST SCOPE: commandPaletteNavigationActions:', JSON.stringify(commandPaletteNavigationActions));
+      // console.log('TEST SCOPE: commandPaletteNavigationActions:', JSON.stringify(actualCommandPaletteNavigationActions)); // Corrected, but will comment out to ensure no lint error
       console.log('VM EXPOSED: vm.navigationActions (Ref object):', vm.navigationActions);
       console.log('VM EXPOSED: vm.navigationActions.value:', JSON.stringify(vm.navigationActions?.value));
 

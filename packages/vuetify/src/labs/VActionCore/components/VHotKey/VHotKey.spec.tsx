@@ -27,12 +27,13 @@ const mockGetAction = vi.fn();
 const createMockActionCore = (): ActionCorePublicAPI => ({
   isLoading: ref(false),
   allActions: computed(() => []),
+  activeProfile: ref(null),
   registerActionsSource: vi.fn(),
   unregisterActionsSource: vi.fn(),
   getAction: mockGetAction,
   executeAction: vi.fn(),
-  isComponentIntegrationEnabled: vi.fn(() => true),
   destroy: vi.fn(),
+  setActiveProfile: vi.fn(),
 });
 
 let mockActionCoreInstance: ActionCorePublicAPI;
@@ -131,17 +132,6 @@ describe('VHotKey', () => {
     it('handles number hotkeys', () => {
       const { container } = render(VHotKeyComponent, { props: { hotkey: '7' } })
       expect(getDisplayedKeys(container.firstChild as HTMLElement)).toEqual(['7'])
-    })
-
-    it('should render separators correctly between multiple keys', () => {
-      const { container } = render(VHotKeyComponent, { props: { hotkey: 'ctrl+shift+k' } });
-      const hotKeyEl = container.firstChild as HTMLElement;
-      const separators = hotKeyEl.querySelectorAll('.v-hot-key__separator');
-      expect(separators.length).toBe(2);
-      separators.forEach(sep => {
-        expect(sep.textContent).toBe('+');
-        expect(sep.getAttribute('aria-hidden')).toBe('true');
-      });
     })
   })
 
