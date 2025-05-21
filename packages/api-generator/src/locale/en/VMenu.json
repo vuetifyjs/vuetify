@@ -6,6 +6,7 @@
     "closeOnContentClick": "Designates if menu should close when its content is clicked.",
     "closeDelay": "Milliseconds to wait before closing component. Only works with the **open-on-hover** prop.",
     "disableKeys": "Removes all keyboard interaction.",
+    "forceInitialFocus": "Redirects first `focusin` event (for the whole page) to the inner focusable child element.",
     "internalActivator": "Detaches the menu content inside of the component as opposed to the document.",
     "minWidth": "Sets the minimum width for the component. Use `auto` to use the activator width.",
     "offsetX": "Offset the menu on the x-axis. Works in conjunction with direction left/right.",
