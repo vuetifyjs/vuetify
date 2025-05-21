@@ -75,6 +75,9 @@
     } else if (name.startsWith('use')) {
       prependIcon = '$vuetify'
       subtitle = 'Composable'
+    } else if (name.startsWith('global')) {
+      prependIcon = '$vuetify'
+      subtitle = 'Global SASS'
     } else {
       return acc
     }

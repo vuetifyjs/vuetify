@@ -247,8 +247,8 @@ importers:
         specifier: ^2.0.4
         version: 2.0.4(vue@3.5.13(typescript@5.8.3))
       '@vuetify/one':
-        specifier: ^2.2.0
-        version: 2.2.0(@mdi/js@7.4.47(patch_hash=3c2a78b1509745df3a3100e3e59075dd87718e67632cc14dc64dd9ac34098f9f))(lodash-es@4.17.21)(vue@3.5.13(typescript@5.8.3))(vuetify@packages+vuetify)
+        specifier: ^2.2.4
+        version: 2.2.4(@mdi/js@7.4.47(patch_hash=3c2a78b1509745df3a3100e3e59075dd87718e67632cc14dc64dd9ac34098f9f))(@vue/compiler-sfc@3.5.13)(lodash-es@4.17.21)(vite@6.3.5(@types/node@22.15.12)(sass-embedded@1.87.0)(sass@1.87.0)(terser@5.31.3)(tsx@4.19.3)(yaml@2.7.0))(vue-router@4.5.0(vue@3.5.13(typescript@5.8.3)))(vue@3.5.13(typescript@5.8.3))(vuetify@packages+vuetify)
       algoliasearch:
         specifier: ^4.24.0
         version: 4.24.0
@@ -3261,8 +3261,8 @@ packages:
       vue: ^3.0.0
       vuetify: ^3.0.0
 
-  '@vuetify/one@2.2.0':
-    resolution: {integrity: sha512-IeCP2j1RI/jf4ktm5uXm7YpY5ULoeK7k7HoVRF+Jha/APtzP0OI5Ctr2vVovVLJuhhgqZf/YwLGdrtdDEk6diA==}
+  '@vuetify/one@2.2.4':
+    resolution: {integrity: sha512-dapdKGrsba095L0B4DEfYsizyf4xz4BN94BHk+hlYFfSDKgkIFs+xovt+b/Xi/wCZXuK8lPWWjPvW9HdBTyQYw==}
     peerDependencies:
       '@mdi/js': 7.4.47
       lodash-es: ^4.17.21
@@ -8765,6 +8765,13 @@ packages:
       '@vite-pwa/assets-generator':
         optional: true
 
+  vite-plugin-vue-layouts-next@0.1.1:
+    resolution: {integrity: sha512-tUhHalU00HX6GjXPmfbuombXimda3df5ymgRaxjNu9q467SmM39uOeNGUhQEYDv10BtSmYrol88lTI50jStikw==}
+    peerDependencies:
+      vite: ^4.0.0 || ^5.0.0 || ^6.0.0
+      vue: ^3.2.4
+      vue-router: ^4.0.11
+
   vite-plugin-vue-layouts@0.11.0:
     resolution: {integrity: sha512-uh6NW7lt+aOXujK4eHfiNbeo55K9OTuB7fnv+5RVc4OBn/cZull6ThXdYH03JzKanUfgt6QZ37NbbtJ0og59qw==}
     peerDependencies:
@@ -12560,12 +12567,21 @@ snapshots:
       vue: 3.5.13(typescript@5.8.3)
       vuetify: link:packages/vuetify
 
-  '@vuetify/one@2.2.0(@mdi/js@7.4.47(patch_hash=3c2a78b1509745df3a3100e3e59075dd87718e67632cc14dc64dd9ac34098f9f))(lodash-es@4.17.21)(vue@3.5.13(typescript@5.8.3))(vuetify@packages+vuetify)':
+  '@vuetify/one@2.2.4(@mdi/js@7.4.47(patch_hash=3c2a78b1509745df3a3100e3e59075dd87718e67632cc14dc64dd9ac34098f9f))(@vue/compiler-sfc@3.5.13)(lodash-es@4.17.21)(vite@6.3.5(@types/node@22.15.12)(sass-embedded@1.87.0)(sass@1.87.0)(terser@5.31.3)(tsx@4.19.3)(yaml@2.7.0))(vue-router@4.5.0(vue@3.5.13(typescript@5.8.3)))(vue@3.5.13(typescript@5.8.3))(vuetify@packages+vuetify)':
     dependencies:
       '@mdi/js': 7.4.47(patch_hash=3c2a78b1509745df3a3100e3e59075dd87718e67632cc14dc64dd9ac34098f9f)
       lodash-es: 4.17.21
+      vite-plugin-pages: 0.33.0(@vue/compiler-sfc@3.5.13)(vite@6.3.5(@types/node@22.15.12)(sass-embedded@1.87.0)(sass@1.87.0)(terser@5.31.3)(tsx@4.19.3)(yaml@2.7.0))(vue-router@4.5.0(vue@3.5.13(typescript@5.8.3)))
+      vite-plugin-vue-layouts-next: 0.1.1(vite@6.3.5(@types/node@22.15.12)(sass-embedded@1.87.0)(sass@1.87.0)(terser@5.31.3)(tsx@4.19.3)(yaml@2.7.0))(vue-router@4.5.0(vue@3.5.13(typescript@5.8.3)))(vue@3.5.13(typescript@5.8.3))
       vue: 3.5.13(typescript@5.8.3)
       vuetify: link:packages/vuetify
+    transitivePeerDependencies:
+      - '@solidjs/router'
+      - '@vue/compiler-sfc'
+      - react-router
+      - supports-color
+      - vite
+      - vue-router
 
   '@vuetify/testing-library-dom@1.0.2':
     dependencies:
@@ -18954,6 +18970,16 @@ snapshots:
       workbox-window: 7.3.0
     transitivePeerDependencies:
       - '@types/babel__core'
+      - supports-color
+
+  vite-plugin-vue-layouts-next@0.1.1(vite@6.3.5(@types/node@22.15.12)(sass-embedded@1.87.0)(sass@1.87.0)(terser@5.31.3)(tsx@4.19.3)(yaml@2.7.0))(vue-router@4.5.0(vue@3.5.13(typescript@5.8.3)))(vue@3.5.13(typescript@5.8.3)):
+    dependencies:
+      debug: 4.4.0
+      fast-glob: 3.3.3
+      vite: 6.3.5(@types/node@22.15.12)(sass-embedded@1.87.0)(sass@1.87.0)(terser@5.31.3)(tsx@4.19.3)(yaml@2.7.0)
+      vue: 3.5.13(typescript@5.8.3)
+      vue-router: 4.5.0(vue@3.5.13(typescript@5.8.3))
+    transitivePeerDependencies:
       - supports-color
 
   vite-plugin-vue-layouts@0.11.0(vite@6.3.5(@types/node@22.15.12)(sass-embedded@1.87.0)(sass@1.87.0)(terser@5.31.3)(tsx@4.19.3)(yaml@2.7.0))(vue-router@4.5.0(vue@3.5.13(typescript@5.8.3)))(vue@3.5.13(typescript@5.8.3)):

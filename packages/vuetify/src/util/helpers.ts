@@ -670,7 +670,7 @@ export function getNextElement (elements: HTMLElement[], location?: 'next' | 'pr
 export function focusChild (el: Element, location?: 'next' | 'prev' | 'first' | 'last' | number) {
   const focusable = focusableChildren(el)
 
-  if (!location) {
+  if (location == null) {
     if (el === document.activeElement || !el.contains(document.activeElement)) {
       focusable[0]?.focus()
     }

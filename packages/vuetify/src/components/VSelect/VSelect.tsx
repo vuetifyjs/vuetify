@@ -255,11 +255,13 @@ export const VSelect = genericComponent<new <
 
       const item = items.value.find(item => item.title.toLowerCase().startsWith(keyboardLookupPrefix))
       if (item !== undefined) {
-        model.value = [item]
+        if (!props.multiple) {
+          model.value = [item]
+        }
         const index = displayItems.value.indexOf(item)
-        IN_BROWSER && window.requestAnimationFrame(() => {
-          index >= 0 && vVirtualScrollRef.value?.scrollToIndex(index)
-        })
+        if (~index && IN_BROWSER) {
+          listRef.value?.focus(index)
+        }
       }
     }
 
