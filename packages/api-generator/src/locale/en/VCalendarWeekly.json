@@ -13,6 +13,7 @@
     "showMonthOnFirst": "Whether the name of the month should be displayed on the first day of the month.",
     "showWeek": "Whether week numbers should be displayed when using the `month` view.",
     "start": "The starting date on the calendar (inclusive) in the format of `YYYY-MM-DD`. This may be ignored depending on the `type` of the calendar.",
+    "weekdayFormat": "Formats day of the week string that appears in the header to specified locale.",
     "weekdays": "Specifies which days of the week to display. To display Monday through Friday only, a value of `[1, 2, 3, 4, 5]` can be used. To display a week starting on Monday a value of `[1, 2, 3, 4, 5, 6, 0]` can be used."
   }
 }
