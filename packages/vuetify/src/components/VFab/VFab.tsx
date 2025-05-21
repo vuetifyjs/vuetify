@@ -6,6 +6,7 @@ import { makeVBtnProps, VBtn } from '@/components/VBtn/VBtn'
 
 // Composables
 import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
+import { makeLocationProps } from '@/composables/location'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useResizeObserver } from '@/composables/resizeObserver'
 import { useToggleScope } from '@/composables/toggleScope'
@@ -16,20 +17,14 @@ import { computed, ref, shallowRef, toRef, watchEffect } from 'vue'
 import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
-import type { ComputedRef, PropType } from 'vue'
+import type { ComputedRef } from 'vue'
 import type { Position } from '@/composables/layout'
-
-const locations = ['start', 'end', 'left', 'right', 'top', 'bottom'] as const
 
 export const makeVFabProps = propsFactory({
   app: Boolean,
   appear: Boolean,
   extended: Boolean,
   layout: Boolean,
-  location: {
-    type: String as PropType<typeof locations[number]>,
-    default: 'bottom end',
-  },
   offset: Boolean,
   modelValue: {
     type: Boolean,
@@ -38,6 +33,7 @@ export const makeVFabProps = propsFactory({
 
   ...omit(makeVBtnProps({ active: true }), ['location']),
   ...makeLayoutItemProps(),
+  ...makeLocationProps(),
   ...makeTransitionProps({ transition: 'fab-transition' }),
 }, 'VFab')
 
@@ -65,13 +61,13 @@ export const VFab = genericComponent()({
     const position = computed(() => {
       if (!hasPosition.value) return false
 
-      return props.location.split(' ').shift()
+      return props.location?.split(' ').shift() ?? 'bottom'
     }) as ComputedRef<Position>
 
     const orientation = computed(() => {
       if (!hasPosition.value) return false
 
-      return props.location.split(' ')[1] ?? 'end'
+      return props.location?.split(' ')[1] ?? 'end'
     })
 
     useToggleScope(() => props.app, () => {
@@ -111,12 +107,13 @@ export const VFab = genericComponent()({
             props.class,
           ]}
           style={[
-            props.app ? {
-              ...layoutItemStyles.value,
-            } : {
-              height: 'inherit',
-              width: undefined,
-            },
+            props.app
+              ? { ...layoutItemStyles.value }
+              : {
+                height: props.absolute
+                  ? '100%'
+                  : 'inherit',
+              },
             props.style,
           ]}
         >

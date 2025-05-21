@@ -139,7 +139,7 @@
               return sortOrder === 'desc' ? bValue - aValue : aValue - bValue
             })
           }
-          const paginated = items.slice(start, end)
+          const paginated = items.slice(start, end === -1 ? undefined : end)
           resolve({ items: paginated, total: items.length })
         }, 500)
       })

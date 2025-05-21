@@ -18,7 +18,7 @@ import { createSort, provideSort } from './composables/sort'
 import { provideDefaults } from '@/composables/defaults'
 
 // Utilities
-import { computed, provide, toRef } from 'vue'
+import { computed, provide, toRef, toRefs } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -69,6 +69,7 @@ export const VDataTableServer = genericComponent<new <T extends readonly any[], 
     const { groupBy } = createGroupBy(props)
     const { sortBy, multiSort, mustSort } = createSort(props)
     const { page, itemsPerPage } = createPagination(props)
+    const { disableSort } = toRefs(props)
     const itemsLength = computed(() => parseInt(props.itemsLength, 10))
 
     const { columns, headers } = createHeaders(props, {
@@ -81,7 +82,7 @@ export const VDataTableServer = genericComponent<new <T extends readonly any[], 
 
     const { toggleSort } = provideSort({ sortBy, multiSort, mustSort, page })
 
-    const { opened, isGroupOpen, toggleGroup, extractRows } = provideGroupBy({ groupBy, sortBy })
+    const { opened, isGroupOpen, toggleGroup, extractRows } = provideGroupBy({ groupBy, sortBy, disableSort })
 
     const { pageCount, setItemsPerPage } = providePagination({ page, itemsPerPage, itemsLength })
 
@@ -159,37 +160,41 @@ export const VDataTableServer = genericComponent<new <T extends readonly any[], 
           ]}
           style={ props.style }
           { ...tableProps }
+          fixedHeader={ props.fixedHeader || props.sticky }
         >
           {{
             top: () => slots.top?.(slotProps.value),
             default: () => slots.default ? slots.default(slotProps.value) : (
               <>
                 { slots.colgroup?.(slotProps.value) }
-                <thead class="v-data-table__thead" role="rowgroup">
-                  <VDataTableHeaders
-                    { ...dataTableHeadersProps }
-                    sticky={ props.fixedHeader }
-                    v-slots={ slots }
-                  />
-                </thead>
-                { slots.thead?.(slotProps.value) }
-                <tbody class="v-data-table__tbody" role="rowgroup">
-                  { slots['body.prepend']?.(slotProps.value) }
-                  { slots.body ? slots.body(slotProps.value) : (
-                    <VDataTableRows
-                      { ...attrs }
-                      { ...dataTableRowsProps }
-                      items={ flatItems.value }
+                { !props.hideDefaultHeader && (
+                  <thead key="thead" class="v-data-table__thead" role="rowgroup">
+                    <VDataTableHeaders
+                      { ...dataTableHeadersProps }
                       v-slots={ slots }
                     />
-                  )}
-                  { slots['body.append']?.(slotProps.value) }
-                </tbody>
+                  </thead>
+                )}
+                { slots.thead?.(slotProps.value) }
+                { !props.hideDefaultBody && (
+                  <tbody class="v-data-table__tbody" role="rowgroup">
+                    { slots['body.prepend']?.(slotProps.value) }
+                    { slots.body ? slots.body(slotProps.value) : (
+                      <VDataTableRows
+                        { ...attrs }
+                        { ...dataTableRowsProps }
+                        items={ flatItems.value }
+                        v-slots={ slots }
+                      />
+                    )}
+                    { slots['body.append']?.(slotProps.value) }
+                  </tbody>
+                )}
                 { slots.tbody?.(slotProps.value) }
                 { slots.tfoot?.(slotProps.value) }
               </>
             ),
-            bottom: () => slots.bottom ? slots.bottom(slotProps.value) : (
+            bottom: () => slots.bottom ? slots.bottom(slotProps.value) : !props.hideDefaultFooter && (
               <>
                 <VDivider />
 

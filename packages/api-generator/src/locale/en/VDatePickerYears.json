@@ -1,0 +1,10 @@
+{
+  "props": {
+    "max": "Sets the maximum date of the month.",
+    "min": "Sets the minimum date of the month.",
+    "year": "Sets the year."
+  },
+  "slots": {
+    "year": "Slot for the year."
+  }
+}

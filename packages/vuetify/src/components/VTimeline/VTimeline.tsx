@@ -11,7 +11,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
 import { computed, toRef } from 'vue'
-import { convertToUnit, genericComponent, only, propsFactory, useRender } from '@/util'
+import { convertToUnit, genericComponent, pick, propsFactory, useRender } from '@/util'
 
 // Types
 import type { Prop } from 'vue'
@@ -52,7 +52,7 @@ export const makeVTimelineProps = propsFactory({
     validator: (v: any) => ['start', 'end', 'both'].includes(v),
   } as Prop<TimelineTruncateLine>,
 
-  ...only(makeVTimelineItemProps({
+  ...pick(makeVTimelineItemProps({
     lineInset: 0,
   }), ['dotColor', 'fillDot', 'hideOpposite', 'iconColor', 'lineInset', 'size']),
   ...makeComponentProps(),

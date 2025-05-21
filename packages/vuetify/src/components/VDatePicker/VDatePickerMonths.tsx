@@ -13,6 +13,8 @@ import { computed, watchEffect } from 'vue'
 import { convertToUnit, createRange, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
+import type { PropType } from 'vue'
+
 export type VDatePickerMonthsSlots = {
   month: {
     month: {
@@ -29,7 +31,10 @@ export type VDatePickerMonthsSlots = {
 export const makeVDatePickerMonthsProps = propsFactory({
   color: String,
   height: [String, Number],
+  min: null as any as PropType<unknown>,
+  max: null as any as PropType<unknown>,
   modelValue: Number,
+  year: Number,
 }, 'VDatePickerMonths')
 
 export const VDatePickerMonths = genericComponent<VDatePickerMonthsSlots>()({
@@ -47,12 +52,20 @@ export const VDatePickerMonths = genericComponent<VDatePickerMonthsSlots>()({
 
     const months = computed(() => {
       let date = adapter.startOfYear(adapter.date())
-
+      if (props.year) {
+        date = adapter.setYear(date, props.year)
+      }
       return createRange(12).map(i => {
         const text = adapter.format(date, 'monthShort')
+        const isDisabled =
+          !!(
+            (props.min && adapter.isAfter(adapter.startOfMonth(adapter.date(props.min)), date)) ||
+            (props.max && adapter.isAfter(date, adapter.startOfMonth(adapter.date(props.max))))
+          )
         date = adapter.getNextMonth(date)
 
         return {
+          isDisabled,
           text,
           value: i,
         }
@@ -75,6 +88,7 @@ export const VDatePickerMonths = genericComponent<VDatePickerMonthsSlots>()({
             const btnProps = {
               active: model.value === i,
               color: model.value === i ? props.color : undefined,
+              disabled: month.isDisabled,
               rounded: true,
               text: month.text,
               variant: model.value === month.value ? 'flat' : 'text',

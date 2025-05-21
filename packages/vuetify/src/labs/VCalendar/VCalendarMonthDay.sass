@@ -17,7 +17,6 @@
     border-inline-end: $calendar-line-width solid $calendar-line-color
 
   .v-calendar-weekly__day
-    flex: 1
     width: 0
     overflow: hidden
     user-select: none
@@ -47,7 +46,9 @@
 
     .v-btn
       font-size: $calendar-weekly-day-label-font-size
-      text-transform: none !important
+
+      @include tools.layer('overrides')
+        text-transform: none
 
       &.v-calendar-weekly__day-label__today
         background: rgba(var(--v-theme-surface-variant), var(--v-medium-emphasis-opacity))

@@ -7,7 +7,7 @@ export interface DateAdapter<T = unknown> {
 
   startOfDay (date: T): T
   endOfDay (date: T): T
-  startOfWeek (date: T): T
+  startOfWeek (date: T, firstDayOfWeek?: number | string): T
   endOfWeek (date: T): T
   startOfMonth (date: T): T
   endOfMonth (date: T): T
@@ -35,8 +35,8 @@ export interface DateAdapter<T = unknown> {
   getYear (date: T): number
   setYear (date: T, year: number): T
   getDiff (date: T, comparing: T | string, unit?: string): number
-  getWeekArray (date: T): T[][]
-  getWeekdays (): string[]
+  getWeekArray (date: T, firstDayOfWeek?: number | string): T[][]
+  getWeekdays (firstDayOfWeek?: number | string): string[]
   getMonth (date: T): number
   setMonth (date: T, month: number): T
   getDate (date: T): number

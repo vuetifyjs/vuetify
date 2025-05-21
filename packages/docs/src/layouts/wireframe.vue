@@ -13,6 +13,6 @@
 
 <script setup>
   const route = useRoute()
-  const { page } = route.meta
-  const href = `https://github.com/vuetifyjs/vuetify/blob/master/packages/docs/src/examples/wireframes/${page}.vue`
+  const paths = route.path.split('/').filter(p => p.length > 0)
+  const href = `https://github.com/vuetifyjs/vuetify/blob/master/packages/docs/src/examples/wireframes/${paths.at(-1)}.vue`
 </script>

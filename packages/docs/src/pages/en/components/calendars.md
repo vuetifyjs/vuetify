@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   nav: Calendars
   title: Calendar component
@@ -27,7 +26,7 @@ This feature requires [v3.4.9](/getting-started/release-notes/?version=v3.4.9)
 
 ## Installation
 
-Labs components require a manual import and installation of the component.
+Labs components require manual import and registration with the Vuetify instance.
 
 ```js { resource="src/plugins/vuetify.js" }
 import { VCalendar } from 'vuetify/labs/VCalendar'

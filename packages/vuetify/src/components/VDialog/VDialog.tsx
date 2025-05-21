@@ -13,7 +13,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { useScopeId } from '@/composables/scopeId'
 
 // Utilities
-import { mergeProps, nextTick, ref, watch } from 'vue'
+import { mergeProps, nextTick, onBeforeUnmount, ref, watch } from 'vue'
 import { focusableChildren, genericComponent, IN_BROWSER, propsFactory, useRender } from '@/util'
 
 // Types
@@ -43,6 +43,7 @@ export const VDialog = genericComponent<OverlaySlots>()({
 
   emits: {
     'update:modelValue': (value: boolean) => true,
+    afterEnter: () => true,
     afterLeave: () => true,
   },
 
@@ -80,6 +81,10 @@ export const VDialog = genericComponent<OverlaySlots>()({
       }
     }
 
+    onBeforeUnmount(() => {
+      document.removeEventListener('focusin', onFocusin)
+    })
+
     if (IN_BROWSER) {
       watch(() => isActive.value && props.retainFocus, val => {
         val
@@ -89,6 +94,7 @@ export const VDialog = genericComponent<OverlaySlots>()({
     }
 
     function onAfterEnter () {
+      emit('afterEnter')
       if (overlay.value?.contentEl && !overlay.value.contentEl.contains(document.activeElement)) {
         overlay.value.contentEl.focus({ preventScroll: true })
       }
@@ -109,7 +115,6 @@ export const VDialog = genericComponent<OverlaySlots>()({
       const overlayProps = VOverlay.filterProps(props)
       const activatorProps = mergeProps({
         'aria-haspopup': 'dialog',
-        'aria-expanded': String(isActive.value),
       }, props.activatorProps)
       const contentProps = mergeProps({
         tabindex: -1,
@@ -132,6 +137,10 @@ export const VDialog = genericComponent<OverlaySlots>()({
           aria-modal="true"
           activatorProps={ activatorProps }
           contentProps={ contentProps }
+          height={ !props.fullscreen ? props.height : undefined }
+          width={ !props.fullscreen ? props.width : undefined }
+          maxHeight={ !props.fullscreen ? props.maxHeight : undefined }
+          maxWidth={ !props.fullscreen ? props.maxWidth : undefined }
           role="dialog"
           onAfterEnter={ onAfterEnter }
           onAfterLeave={ onAfterLeave }

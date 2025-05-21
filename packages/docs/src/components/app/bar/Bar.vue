@@ -2,6 +2,7 @@
   <VoAppBar
     id="app-bar"
     border="b"
+    class="px-md-3"
     logo="vuetify"
     flat
   >
@@ -19,6 +20,8 @@
 
     <template #append>
       <template v-if="mdAndUp">
+        <AppBarBlogLink />
+
         <AppBarLearnMenu />
 
         <AppBarSupportMenu />

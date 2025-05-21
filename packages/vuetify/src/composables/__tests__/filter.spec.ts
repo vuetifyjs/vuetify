@@ -3,7 +3,6 @@ import { defaultFilter, filterItems, useFilter } from '../filter'
 import { transformItem, transformItems } from '../list-items'
 
 // Utilities
-import { describe, expect, it } from '@jest/globals'
 import { nextTick, ref } from 'vue'
 import { deepEqual } from '@/util'
 
@@ -21,15 +20,15 @@ describe('filter', () => {
     it.each([
       [null, null, -1],
       ['foo', null, -1],
-      ['foo', 'foo', 0],
-      ['foo', 'f', 0],
+      ['foo', 'foo', [[0, 3]]],
+      ['foo', 'f', [[0, 1]]],
       [null, 'foo', -1],
       ['foo', 'bar', -1],
-      [1, '1', 0],
-      ['1', 1, 0],
+      [1, '1', [[0, 1]]],
+      ['1', 1, [[0, 1]]],
     ])('should compare %s to %s and return a match result', (text, query, expected) => {
       // @ts-expect-error
-      expect(defaultFilter(text, query)).toBe(expected)
+      expect(defaultFilter(text, query)).toStrictEqual(expected)
     })
   })
 
@@ -114,6 +113,60 @@ describe('filter', () => {
         customKeyFilter,
         filterMode: 'every',
       })).toHaveLength(1)
+    })
+
+    it('should filter by mode using customKeyFilter without query', () => {
+      const customKeyFilter = {
+        title: (s: string) => s.length < 5,
+        value: (s: string) => s === '1',
+      }
+      const items = [
+        {
+          title: 'foo',
+          subtitle: 'bar',
+          value: '1',
+        },
+        {
+          title: 'fizz',
+          subtitle: 'buzz',
+          value: '1',
+        },
+        {
+          title: 'foobar',
+          subtitle: 'fizzbuzz',
+          value: '2',
+        },
+        {
+          title: 'buzz',
+          subtitle: 'buzz',
+          value: '2',
+        },
+      ] as any
+      const filterKeys = ['title', 'value']
+
+      expect(filterItems(items, '', {
+        filterKeys,
+        customKeyFilter,
+        filterMode: 'some',
+      })).toHaveLength(3)
+
+      expect(filterItems(items, '', {
+        filterKeys,
+        customKeyFilter,
+        filterMode: 'union',
+      })).toHaveLength(2)
+
+      expect(filterItems(items, '', {
+        filterKeys,
+        customKeyFilter,
+        filterMode: 'intersection',
+      })).toHaveLength(0)
+
+      expect(filterItems(items, '', {
+        filterKeys,
+        customKeyFilter,
+        filterMode: 'every',
+      })).toHaveLength(2)
     })
   })
 

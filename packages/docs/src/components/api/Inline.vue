@@ -29,7 +29,6 @@
         <ApiSection
           :name="name"
           :section="section"
-          show-headline
         />
       </template>
     </div>
@@ -48,8 +47,8 @@
   const route = useRoute()
   const { t, locale } = useI18n()
   const user = useUserStore()
-  const name = ref()
-  const sections = ['props', 'slots', 'events', 'functions']
+  const name = shallowRef()
+  const sections = ['props', 'slots', 'events', 'exposed'] as const
 
   const components = computed(() => {
     if (props.components) return props.components.split(/, ?/)

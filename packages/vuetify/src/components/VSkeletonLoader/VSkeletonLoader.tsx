@@ -143,6 +143,11 @@ export const VSkeletonLoader = genericComponent()({
 
     useRender(() => {
       const isLoading = !slots.default || props.loading
+      const loadingProps = (props.boilerplate || !isLoading) ? {} : {
+        ariaLive: 'polite',
+        ariaLabel: t(props.loadingText),
+        role: 'alert',
+      }
 
       return (
         <div
@@ -159,10 +164,7 @@ export const VSkeletonLoader = genericComponent()({
             backgroundColorStyles.value,
             isLoading ? dimensionStyles.value : {},
           ]}
-          aria-busy={ !props.boilerplate ? isLoading : undefined }
-          aria-live={ !props.boilerplate ? 'polite' : undefined }
-          aria-label={ !props.boilerplate ? t(props.loadingText) : undefined }
-          role={ !props.boilerplate ? 'alert' : undefined }
+          { ...loadingProps }
         >
           { isLoading ? items.value : slots.default?.() }
         </div>

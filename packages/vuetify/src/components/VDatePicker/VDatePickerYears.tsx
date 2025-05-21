@@ -9,8 +9,8 @@ import { useDate } from '@/composables/date'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, nextTick, onMounted, ref, watchEffect } from 'vue'
-import { convertToUnit, createRange, genericComponent, propsFactory, useRender } from '@/util'
+import { computed, nextTick, onMounted, watchEffect } from 'vue'
+import { convertToUnit, createRange, genericComponent, propsFactory, templateRef, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -87,10 +87,11 @@ export const VDatePickerYears = genericComponent<VDatePickerYearsSlots>()({
       model.value = model.value ?? adapter.getYear(adapter.date())
     })
 
-    const yearRef = ref<VBtn>()
+    const yearRef = templateRef()
+
     onMounted(async () => {
       await nextTick()
-      yearRef.value?.$el.scrollIntoView({ block: 'center' })
+      yearRef.el?.scrollIntoView({ block: 'center' })
     })
 
     useRender(() => (

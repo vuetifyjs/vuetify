@@ -5,9 +5,12 @@ import './VDatePickerControls.sass'
 import { VBtn } from '@/components/VBtn'
 import { VSpacer } from '@/components/VGrid'
 
+// Composables
+import { IconValue } from '@/composables/icons'
+
 // Utilities
 import { computed } from 'vue'
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -17,20 +20,21 @@ export const makeVDatePickerControlsProps = propsFactory({
     type: [String, Array] as PropType<string | string[]>,
     default: undefined,
   },
+  controlHeight: [Number, String],
   disabled: {
-    type: [Boolean, String, Array] as PropType<boolean | string | string[]>,
-    default: false,
+    type: [Boolean, String, Array] as PropType<boolean | string | string[] | null>,
+    default: null,
   },
   nextIcon: {
-    type: [String],
+    type: IconValue,
     default: '$next',
   },
   prevIcon: {
-    type: [String],
+    type: IconValue,
     default: '$prev',
   },
   modeIcon: {
-    type: [String],
+    type: IconValue,
     default: '$subgroup',
   },
   text: String,
@@ -98,19 +102,23 @@ export const VDatePickerControls = genericComponent()({
           class={[
             'v-date-picker-controls',
           ]}
+          style={{
+            '--v-date-picker-controls-height': convertToUnit(props.controlHeight),
+          }}
         >
           <VBtn
             class="v-date-picker-controls__month-btn"
+            data-testid="month-btn"
             disabled={ disableMonth.value }
             text={ props.text }
             variant="text"
             rounded
             onClick={ onClickMonth }
-          ></VBtn>
+          />
 
           <VBtn
-            key="mode-btn"
             class="v-date-picker-controls__mode-btn"
+            data-testid="year-btn"
             disabled={ disableYear.value }
             density="comfortable"
             icon={ props.modeIcon }
@@ -118,22 +126,23 @@ export const VDatePickerControls = genericComponent()({
             onClick={ onClickYear }
           />
 
-          <VSpacer key="mode-spacer" />
+          <VSpacer />
 
-          <div
-            key="month-buttons"
-            class="v-date-picker-controls__month"
-          >
+          <div class="v-date-picker-controls__month">
             <VBtn
+              data-testid="prev-month"
               disabled={ disablePrev.value }
+              density="comfortable"
               icon={ props.prevIcon }
               variant="text"
               onClick={ onClickPrev }
             />
 
             <VBtn
+              data-testid="next-month"
               disabled={ disableNext.value }
               icon={ props.nextIcon }
+              density="comfortable"
               variant="text"
               onClick={ onClickNext }
             />

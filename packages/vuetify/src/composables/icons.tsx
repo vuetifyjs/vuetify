@@ -6,7 +6,8 @@ import { computed, inject, unref } from 'vue'
 import { consoleWarn, defineComponent, genericComponent, mergeDeep, propsFactory } from '@/util'
 
 // Types
-import type { InjectionKey, JSXComponent, PropType, Ref } from 'vue'
+import type { InjectionKey, PropType, Ref } from 'vue'
+import type { JSXComponent } from '@/util'
 
 export type IconValue =
   | string
@@ -54,7 +55,7 @@ export interface IconAliases {
 }
 
 export interface IconProps {
-  tag: string
+  tag: string | JSXComponent
   icon?: IconValue
   disabled?: Boolean
 }
@@ -65,18 +66,20 @@ export interface IconSet {
   component: IconComponent
 }
 
-export type IconOptions = {
-  defaultSet?: string
-  aliases?: Partial<IconAliases>
-  sets?: Record<string, IconSet>
+export type InternalIconOptions = {
+  defaultSet: string
+  aliases: Partial<IconAliases>
+  sets: Record<string, IconSet>
 }
+
+export type IconOptions = Partial<InternalIconOptions>
 
 type IconInstance = {
   component: IconComponent
   icon?: IconValue
 }
 
-export const IconSymbol: InjectionKey<Required<IconOptions>> = Symbol.for('vuetify:icons')
+export const IconSymbol: InjectionKey<InternalIconOptions> = Symbol.for('vuetify:icons')
 
 export const makeIconProps = propsFactory({
   icon: {
@@ -84,7 +87,7 @@ export const makeIconProps = propsFactory({
   },
   // Could not remove this and use makeTagProps, types complained because it is not required
   tag: {
-    type: String,
+    type: [String, Object, Function] as PropType<string | JSXComponent>,
     required: true,
   },
 }, 'icon')
@@ -204,7 +207,7 @@ export function createIcons (options?: IconOptions) {
       ],
       /* eslint-enable max-len */
     },
-  }, options)
+  }, options) as InternalIconOptions
 }
 
 export const useIcon = (props: Ref<IconValue | undefined>) => {

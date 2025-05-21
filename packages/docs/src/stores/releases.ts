@@ -3,7 +3,7 @@ import type { components as octokitComponents } from '@octokit/openapi-types'
 
 export type Release = octokitComponents['schemas']['release']
 
-export type State = {
+type State = {
   releases: Release[]
   isLoading: boolean
   page: number

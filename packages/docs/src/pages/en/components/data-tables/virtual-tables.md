@@ -16,6 +16,14 @@ The v-data-table-virtual component relies on all data being available locally. B
 
 <PromotedEntry />
 
+## API
+
+| Component | Description |
+| - | - |
+| [v-data-table-virtual](/api/v-data-table-virtual/) | Primary Component |
+
+<ApiInline hide-links />
+
 ## Examples
 
 ### Basic example

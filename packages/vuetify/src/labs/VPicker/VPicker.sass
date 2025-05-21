@@ -4,13 +4,12 @@
 
 @include tools.layer('components')
   .v-picker.v-sheet
-    @include tools.elevation($picker-elevation)
-    @include tools.rounded($picker-border-radius)
-
     display: grid
     grid-auto-rows: min-content
     grid-template-areas: "title" "header" "body"
     overflow: hidden
+    @include tools.elevation($picker-elevation)
+    @include tools.rounded($picker-border-radius)
 
     &.v-picker--with-actions
       grid-template-areas: "title" "header" "body" "actions"
@@ -35,6 +34,12 @@
 
       &:not(:last-child)
         margin-inline-end: 8px
+
+  .v-picker--divided
+    .v-picker__header
+      border-bottom-color: $picker-border-color
+      border-bottom-style: $picker-border-style
+      border-bottom-width: $picker-border-thin-width
 
   .v-picker--landscape
     grid-template-areas: "title" "header body" "header body"

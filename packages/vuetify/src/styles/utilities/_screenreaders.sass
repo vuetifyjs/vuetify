@@ -1,8 +1,9 @@
 // Source: https://github.com/twbs/bootstrap/blob/master/scss/mixins/_screen-reader.scss
+@use 'sass:list'
 @use '../settings'
 @use '../tools'
 
-@if (settings.$utilities != false and length(settings.$utilities) > 0)
+@if (settings.$utilities != false and list.length(settings.$utilities) > 0)
   @include tools.layer('utilities')
     .d-sr-only,
     .d-sr-only-focusable:not(:focus)

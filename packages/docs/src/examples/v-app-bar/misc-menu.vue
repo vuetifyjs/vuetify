@@ -2,13 +2,10 @@
   <v-layout>
     <v-app-bar
       color="#6A76AB"
+      scroll-behavior="shrink fade-image"
       scroll-target="#scrolling-techniques-4"
       src="https://picsum.photos/1920/1080?random"
       absolute
-      dark
-      fade-img-on-scroll
-      prominent
-      shrink-on-scroll
     >
       <template v-slot:image>
         <v-img gradient="to top right, rgba(100,115,201,.7), rgba(25,32,72,.7)"></v-img>
@@ -17,8 +14,6 @@
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
       <v-toolbar-title>Title</v-toolbar-title>
-
-      <v-spacer></v-spacer>
 
       <v-btn icon>
         <v-icon>mdi-magnify</v-icon>

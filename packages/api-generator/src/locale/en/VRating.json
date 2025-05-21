@@ -10,7 +10,8 @@
     "halfIncrements": "Allows the selection of half increments.",
     "hover": "Provides visual feedback when hovering over icons.",
     "length": "The amount of items to show.",
-    "readonly": "Removes all hover effects and pointer events."
+    "readonly": "Removes all hover effects and pointer events.",
+    "itemAriaLabel": "The **aria-label** used for each item."
   },
   "slots": {
     "item": "The slot for each item.",

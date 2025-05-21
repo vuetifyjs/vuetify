@@ -1,4 +1,4 @@
-import { execSync } from 'child_process'
+import { execSync } from 'node:child_process'
 import stringifyObject from 'stringify-object'
 import prettier from 'prettier'
 import * as typescriptParser from 'prettier/plugins/typescript'
@@ -108,7 +108,7 @@ async function loadLocale (componentName: string, locale: string): Promise<Recor
   }
   try {
     const data = await import(`../src/locale/${cacheKey}.json`, {
-      assert: { type: 'json' },
+      with: { type: 'json' },
     })
     localeCache.set(cacheKey, data.default)
     return data.default

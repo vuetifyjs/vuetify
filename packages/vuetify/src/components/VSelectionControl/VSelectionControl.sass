@@ -18,15 +18,11 @@
       white-space: normal
       word-break: break-word
       height: 100%
+      opacity: 1
 
     &--disabled
       opacity: var(--v-disabled-opacity)
       pointer-events: none
-
-    &--error,
-    &--disabled
-      .v-label
-        opacity: 1
 
     &--error:not(.v-selection-control--disabled)
       .v-label
@@ -74,11 +70,11 @@
       opacity: 0
 
     &::before
-      @include tools.absolute(true)
       border-radius: 100%
       background-color: currentColor
       opacity: 0
       pointer-events: none
+      @include tools.absolute(true)
 
     &:hover::before
       opacity: calc(#{map.get(settings.$states, 'hover')} * var(--v-theme-overlay-multiplier))

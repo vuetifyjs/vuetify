@@ -16,7 +16,7 @@ const LANG_PREFIX = '$vuetify.'
 
 const replace = (str: string, params: unknown[]) => {
   return str.replace(/\{(\d+)\}/g, (match: string, index: string) => {
-    return String(params[+index])
+    return String(params[Number(index)])
   })
 }
 

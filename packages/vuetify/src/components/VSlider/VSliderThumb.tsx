@@ -48,6 +48,7 @@ export const makeVSliderThumbProps = propsFactory({
     type: [Boolean, Object] as PropType<RippleDirectiveBinding['value']>,
     default: true,
   },
+  name: String,
 
   ...makeComponentProps(),
 }, 'VSliderThumb')
@@ -152,6 +153,7 @@ export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
           ]}
           role="slider"
           tabindex={ disabled.value ? -1 : 0 }
+          aria-label={ props.name }
           aria-valuemin={ props.min }
           aria-valuemax={ props.max }
           aria-valuenow={ props.modelValue }

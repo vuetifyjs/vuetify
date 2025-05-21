@@ -16,5 +16,6 @@
 </template>
 
 <script setup>
-  const related = useRoute().meta.related
+  const frontmatter = useFrontmatter()
+  const related = computed(() => frontmatter.value?.related)
 </script>

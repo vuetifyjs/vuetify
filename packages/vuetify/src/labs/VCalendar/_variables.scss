@@ -1,3 +1,6 @@
+$calendar-color: rgba(var(--v-theme-on-background), var(--v-high-emphasis-opacity)) !default;
+$calendar-background: rgb(var(--v-theme-background)) !default;
+
 $calendar-line-width: thin !default;
 $calendar-line-color: #e0e0e0 !default;
 
@@ -45,3 +48,8 @@ $calendar-event-border-width: 1px !default;
 $calendar-event-font-size: 12px !default;
 $calendar-event-line-height: 20px !default;
 $calendar-event-right-empty: 10px !default;
+
+$calendar-theme: (
+  $calendar-background,
+  $calendar-color
+) !default;

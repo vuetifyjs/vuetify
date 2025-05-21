@@ -80,7 +80,7 @@ export const VColorPickerCanvas = defineComponent({
     })
 
     const { resizeRef } = useResizeObserver(entries => {
-      if (!resizeRef.value?.offsetParent) return
+      if (!resizeRef.el?.offsetParent) return
 
       const { width, height } = entries[0].contentRect
 

@@ -9,7 +9,7 @@
 
     .v-infinite-scroll-intersect
       height: 100%
-      width: 1px
+      width: var(--v-infinite-margin-size, 1px)
 
   .v-infinite-scroll--vertical
     display: flex
@@ -19,6 +19,15 @@
     .v-infinite-scroll-intersect
       height: 1px
       width: 100%
+
+  .v-infinite-scroll-intersect
+    pointer-events: none
+    margin-top: var(--v-infinite-margin)
+    margin-bottom: calc(var(--v-infinite-margin) * -1)
+    &:nth-child(2) // TODO: "1 of &" would be more stable if structure changes
+      --v-infinite-margin: var(--v-infinite-margin-size, 1px)
+    &:nth-last-child(2)
+      --v-infinite-margin: calc(var(--v-infinite-margin-size, 1px) * -1)
 
   .v-infinite-scroll__side
     align-items: center

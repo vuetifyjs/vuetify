@@ -16,11 +16,10 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { Ripple } from '@/directives/ripple'
 
 // Utilities
-import { computed, inject, nextTick, ref, shallowRef } from 'vue'
+import { computed, inject, nextTick, ref, shallowRef, useId } from 'vue'
 import {
   filterInputAttrs,
   genericComponent,
-  getUid,
   matchesSelector,
   propsFactory,
   useRender,
@@ -172,7 +171,7 @@ export const VSelectionControl = genericComponent<new <T>(
       backgroundColorStyles,
       trueValue,
     } = useSelectionControl(props)
-    const uid = getUid()
+    const uid = useId()
     const isFocused = shallowRef(false)
     const isFocusVisible = shallowRef(false)
     const input = ref<HTMLInputElement>()
@@ -204,7 +203,16 @@ export const VSelectionControl = genericComponent<new <T>(
     }
 
     function onInput (e: Event) {
-      if (!isInteractive.value) return
+      if (!isInteractive.value) {
+        if (input.value) {
+          // model value is not updated when input is not interactive
+          // but the internal checked state of the input is still updated,
+          // so here it's value is restored
+          input.value.checked = model.value
+        }
+
+        return
+      }
 
       if (props.readonly && group) {
         nextTick(() => group.forceUpdate())

@@ -364,7 +364,7 @@ These components are used to display data and information in a variety of ways.
 
 </ComponentsListItem>
 
-<ComponentsListItem name="Sparkline component" src="sparkline">
+<ComponentsListItem name="Sparkline component" src="sparklines">
 
   The sparkline component creates beautiful and expressive simple graphs for displaying numerical data
 

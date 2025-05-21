@@ -2,7 +2,7 @@ export default {
   badge: 'Značka',
   open: 'Odpri',
   close: 'Zapri',
-  dismiss: 'Dismiss',
+  dismiss: 'Opusti',
   confirmEdit: {
     ok: 'V redu',
     cancel: 'Prekliči',
@@ -69,6 +69,11 @@ export default {
     counter: '{0} datotek',
     counterSize: '{0} datotek (skupno {1})',
   },
+  fileUpload: {
+    title: 'Povlecite in spustite datoteke tukaj',
+    divider: 'ali',
+    browse: 'Prebrskaj datoteke',
+  },
   timePicker: {
     am: 'AM',
     pm: 'PM',
@@ -98,5 +103,18 @@ export default {
   infiniteScroll: {
     loadMore: 'Naloži več',
     empty: 'Konec',
+  },
+  rules: {
+    required: 'To polje je obvezno',
+    email: 'Vnesite veljaven e-poštni naslov',
+    number: 'To polje lahko vsebuje samo številke',
+    integer: 'To polje lahko vsebuje samo cela števila',
+    capital: 'To polje lahko vsebuje samo velike črke',
+    maxLength: 'Vnesti morate največ {0} znakov',
+    minLength: 'Vnesti morate najmanj {0} znakov',
+    strictLength: 'Dolžina vnesenega polja ni veljavna',
+    exclude: 'Znak {0} ni dovoljen',
+    notEmpty: 'Izberite vsaj eno vrednost',
+    pattern: 'Neveljaven format',
   },
 }

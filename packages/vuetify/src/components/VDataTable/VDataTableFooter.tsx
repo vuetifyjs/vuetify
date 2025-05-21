@@ -7,6 +7,7 @@ import { VSelect } from '@/components/VSelect'
 
 // Composables
 import { usePagination } from './composables/paginate'
+import { IconValue } from '@/composables/icons'
 import { useLocale } from '@/composables/locale'
 
 // Utilities
@@ -18,19 +19,19 @@ import type { PropType } from 'vue'
 
 export const makeVDataTableFooterProps = propsFactory({
   prevIcon: {
-    type: String,
+    type: IconValue,
     default: '$prev',
   },
   nextIcon: {
-    type: String,
+    type: IconValue,
     default: '$next',
   },
   firstIcon: {
-    type: String,
+    type: IconValue,
     default: '$first',
   },
   lastIcon: {
-    type: String,
+    type: IconValue,
     default: '$last',
   },
   itemsPerPageText: {
@@ -146,3 +147,5 @@ export const VDataTableFooter = genericComponent<{ prepend: never }>()({
     return {}
   },
 })
+
+export type VDataTableFooter = InstanceType<typeof VDataTableFooter>

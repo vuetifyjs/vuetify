@@ -1,8 +1,10 @@
 @use 'sass:map'
 @use '../settings'
 
-@mixin elevation($z, $important: false)
-  box-shadow: map.get(settings.$shadow-key-umbra, $z), map.get(settings.$shadow-key-penumbra, $z), map.get(settings.$shadow-key-ambient, $z) if($important, !important, null)
+@mixin elevation($z)
+  &
+    box-shadow: map.get(settings.$shadow-key-umbra, $z), map.get(settings.$shadow-key-penumbra, $z), map.get(settings.$shadow-key-ambient, $z)
 
 @mixin elevationTransition($duration: 280ms, $easing: cubic-bezier(0.4, 0, 0.2, 1))
-  transition: box-shadow $duration $easing
+  &
+    transition: box-shadow $duration $easing

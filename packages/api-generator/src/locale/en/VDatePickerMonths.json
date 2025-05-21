@@ -1,0 +1,10 @@
+{
+  "props": {
+    "min": "Sets the minimum selectable date. Months before this date will be disabled.",
+    "max": "Sets the maximum selectable date. Months after this date will be disabled.",
+    "year": "Sets the year for the given months."
+  },
+  "slots": {
+    "month": "Slot for the month."
+  }
+}

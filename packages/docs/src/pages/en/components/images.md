@@ -59,6 +59,12 @@ If the provided aspect ratio doesn't match that of the actual image, the default
 
 <ExamplesExample file="v-img/prop-max-height" />
 
+#### Gradient
+
+The `gradient` prop can be used to apply a simple gradient overlay to the image. More complex gradients should be written as a class on the content slot instead.
+
+<ExamplesExample file="v-img/prop-gradient" />
+
 ### Slots
 
 #### Placeholder
