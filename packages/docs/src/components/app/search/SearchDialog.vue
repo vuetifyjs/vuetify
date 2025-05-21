@@ -95,9 +95,15 @@
         </ais-instant-search>
       </v-card-text>
 
-      <v-divider class="my-4" />
+      <v-divider class="mt-4" />
 
-      <AisPoweredBy class="ms-auto me-4 mb-2" />
+      <div class="d-flex mx-4 my-2 align-center">
+        <AppLink class="text-caption" href="https://www.algolia.com/doc/api-reference/api-parameters/advancedSyntax/#how-to-use">
+          Advanced search
+        </AppLink>
+        <v-spacer />
+        <AisPoweredBy class="pt-2" />
+      </div>
     </v-card>
   </v-dialog>
 </template>
