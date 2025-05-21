@@ -41,6 +41,7 @@
     "type": "Determines the type of the picker - `date` for date picker, `month` for month picker.",
     "value": "Date picker model (ISO 8601 format, YYYY-mm-dd or YYYY-mm).",
     "viewMode": "Determines which picker in the date or month picker is being displayed. Allowed values: `'month'`, `'months'`, `'year'`.",
+    "weekdayFormat": "Allows you to customize the format of the weekday string that appears in the body of the calendar. Called with date (ISO 8601 **date** string) arguments.",
     "width": "Width of the picker.",
     "yearFormat": "Allows you to customize the format of the year string that appears in the header of the calendar. Called with date (ISO 8601 **date** string) arguments.",
     "yearIcon": "Sets the icon in the year selection button."

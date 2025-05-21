@@ -222,7 +222,7 @@ export const useSlider = ({
     const clickOffset = getPosition(e, position)
 
     // It is possible for left to be NaN, force to number
-    let clickPos = Math.min(Math.max((clickOffset - trackStart - startOffset.value) / trackLength, 0), 1) || 0
+    let clickPos = clamp((clickOffset - trackStart - startOffset.value) / trackLength) || 0
 
     if (vertical ? indexFromEnd.value : indexFromEnd.value !== isRtl.value) clickPos = 1 - clickPos
 
