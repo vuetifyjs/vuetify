@@ -1,6 +1,6 @@
 # 1. Getting Started with VCommandPalette
 
-This guide will walk you through the initial setup of `VCommandPalette` in your Vuetify application. By the end, you'll have a working command palette with a few basic actions.
+This guide will walk you through the initial setup of `VCommandPalette` in your Vuetify application. By the end, you'll have a working command palette with a few basic actions, including opening the palette itself with a hotkey.
 
 ## Prerequisites
 
@@ -40,7 +40,7 @@ The `VCommandPalette` component is straightforward to add. You typically control
 ```vue
 <template>
   <div>
-    <v-btn @click="isPaletteOpen = true">Open Command Palette</v-btn>
+    <v-btn @click="isPaletteOpen = true">Open Command Palette (Click)</v-btn>
     <VCommandPalette v-model="isPaletteOpen" />
   </div>
 </template>
@@ -53,6 +53,9 @@ import { VCommandPalette } from 'vuetify/labs/VActionCore'; // Or specific path
 import { VBtn } from 'vuetify/components';
 
 const isPaletteOpen = ref(false);
+
+// The action to open the palette via hotkey will be defined and registered
+// within this component later in the "Putting It All Together" section.
 </script>
 ```
 
@@ -63,16 +66,17 @@ Actions are the commands that will appear in your palette. They are defined as J
 1.  **Define Your Actions:**
     Create an array of `ActionDefinition` objects. Each action needs at least an `id` and a `title`. The `handler` function contains the logic to execute when the action is selected.
 
+    For general application actions, you might define them in a separate file:
     ```typescript
-    // src/actions/globalActions.ts (example file)
-    import type { ActionDefinition } from 'vuetify/labs/VActionCore'; // Adjust path as needed
+    // src/actions/appSpecificActions.ts (example file)
+    import type { ActionDefinition } from 'vuetify/labs/VActionCore'; // Adjust path
 
-    export const myGlobalActions: ActionDefinition[] = [
+    export const appSpecificActions: ActionDefinition[] = [
       {
         id: 'app.greet',
         title: 'Say Hello',
         icon: 'mdi-hand-wave', // Optional: MDI icon
-        handler: ()_ => {
+        handler: () => {
           alert('Hello from VCommandPalette!');
         }
       },
@@ -81,66 +85,49 @@ Actions are the commands that will appear in your palette. They are defined as J
         title: 'Show Information',
         subtitle: 'Displays a piece of information', // Optional
         keywords: ['info', 'details'], // Optional: for searching
-        handler: ()_ => {
+        handler: () => {
           console.log('VCommandPalette is a powerful tool!');
-          // You could open a dialog, navigate, etc.
         }
       }
     ];
     ```
+    **Note:** Actions that directly control component-specific state (like an action to open *this specific* command palette instance) are best defined within the component itself, as shown in the "Putting It All Together" section below.
 
 2.  **Register Actions with ActionCore:**
     You need to access the `ActionCore` instance (usually via `useActionCore()`) and register your actions. This is often done in a main setup file (`main.ts` or a plugin) or a relevant composable/component.
 
     ```typescript
-    // In a component's setup, or a composable, or your main.ts/app.vue
-    import { onMounted } from 'vue';
+    // Example: Registering appSpecificActions in App.vue setup or a similar central place
+    import { onMounted, onUnmounted } from 'vue';
     import { useActionCore } from 'vuetify/labs/VActionCore'; // Adjust path
-    import { myGlobalActions } from '@/actions/globalActions'; // Adjust path
+    import { appSpecificActions } from '@/actions/appSpecificActions'; // Adjust path
 
-    // Example: Registering in App.vue setup
-    // export default {
-    //   setup() {
-    //     const actionCore = useActionCore();
-    //
-    //     onMounted(() => {
-    //       if (actionCore) {
-    //         actionCore.registerActionsSource(myGlobalActions);
-    //       }
-    //     });
-    //   }
-    // }
-
-    // Or in a composable:
-    // export function useAppActions() {
-    //   const actionCore = useActionCore();
-    //   let sourceKey: symbol | null = null;
-    //
-    //   onMounted(() => {
-    //     if (actionCore) {
-    //       sourceKey = actionCore.registerActionsSource(myGlobalActions);
-    //     }
-    //   });
-    //
-    //   onUnmounted(() => {
-    //     if (actionCore && sourceKey) {
-    //       actionCore.unregisterActionsSource(sourceKey);
-    //     }
-    //   });
-    // }
+    const actionCore = useActionCore();
+    let appActionsSourceKey: symbol | null = null;
+    onMounted(() => {
+      if (actionCore) {
+        appActionsSourceKey = actionCore.registerActionsSource(appSpecificActions);
+      }
+    });
+    onUnmounted(() => {
+      if (actionCore && appActionsSourceKey) {
+        actionCore.unregisterActionsSource(appActionsSourceKey);
+      }
+    });
     ```
-    **Important:** If you register actions within a component's lifecycle (like `onMounted`), remember to unregister them in `onUnmounted` to prevent memory leaks and duplicate actions if the component is created multiple times. `registerActionsSource` returns a `symbol` key used for unregistration. For truly global actions that live as long as the app, you might register them once when your app initializes.
+    **Important:** If you register actions within a component's lifecycle (like `onMounted`), remember to unregister them in `onUnmounted` to prevent memory leaks. For truly global actions that live as long as the app, you might register them once when your app initializes.
 
 ## Putting It All Together
 
-Here's a more complete example for an `App.vue` or a view component:
+Here's a more complete example for an `App.vue` or a view component. Notice how the `palette.open` action is defined *within this component* because its handler needs to modify the local `isPaletteOpen` ref.
 
 ```vue
 <template>
   <v-app>
     <v-main>
       <v-container>
-        <v-btn @click="isPaletteOpen = true">Open Palette</v-btn>
+        <p>Press Cmd/Ctrl+Shift+P to open the palette, or click the button.</p>
+        <v-btn @click="isPaletteOpen = true">Open Palette (Click)</v-btn>
         <VCommandPalette v-model="isPaletteOpen" />
       </v-container>
     </v-main>
@@ -154,45 +141,70 @@ import { VCommandPalette, useActionCore, type ActionDefinition } from 'vuetify/l
 
 const isPaletteOpen = ref(false);
 const actionCore = useActionCore();
-let actionsSourceKey: symbol | null = null;
+let combinedActionsSourceKey: symbol | null = null;
 
-const appActions: ActionDefinition[] = [
+// Define actions that are closely tied to this component's state or are primary for it.
+const componentSpecificActions: ActionDefinition[] = [
   {
-    id: 'app.greet',
-    title: 'Say Hello',
-    icon: 'mdi-hand-wave',
+    id: 'palette.open', // Unique ID for the open palette action
+    title: 'Open Command Palette', // Display title (though it won't show in palette)
+    // Common hotkey: Cmd+Shift+P on Mac, Ctrl+Shift+P on Windows/Linux
+    // 'meta' handles this platform difference automatically.
+    hotkey: 'meta+shift+p',
     handler: () => {
-      alert('Hello from the Command Palette!');
+      isPaletteOpen.value = true; // Directly controls the local ref
+    },
+    // This action is for opening the palette, so it shouldn't appear IN the palette list.
+    meta: {
+      paletteHidden: true
     }
   },
   {
-    id: 'app.logTime',
-    title: 'Log Current Time',
-    icon: 'mdi-clock-outline',
-    keywords: ['date', 'timestamp'],
+    id: 'app.greetComponent', // Ensure ID is unique from any global actions
+    title: 'Say Hello (Component)',
+    icon: 'mdi-hand-wave-outline',
     handler: () => {
-      console.log('Current time:', new Date().toLocaleTimeString());
+      alert('Hello from the App.vue component via Command Palette!');
+    }
+  },
+  {
+    id: 'app.logTimeComponent', // Ensure ID is unique
+    title: 'Log Current Time (Component)',
+    icon: 'mdi-clock-fast',
+    keywords: ['date', 'timestamp', 'local'],
+    handler: () => {
+      console.log('Component generated time:', new Date().toLocaleTimeString());
     }
   }
 ];
 
+// Imagine you also have globally defined actions from another file
+// import { appSpecificActions } from '@/actions/appSpecificActions';
+
 onMounted(() => {
   if (actionCore) {
-    actionsSourceKey = actionCore.registerActionsSource(appActions);
+    // You can register multiple sources, or combine actions into one array for a single source.
+    // For simplicity here, we'll register the component-specific ones.
+    // If you had global actions (like appSpecificActions), you might register them here too,
+    // or in a more central part of your app.
+    // const allAppActions = [...componentSpecificActions, ...appSpecificActions];
+    // combinedActionsSourceKey = actionCore.registerActionsSource(allAppActions);
+
+    combinedActionsSourceKey = actionCore.registerActionsSource(componentSpecificActions);
   }
 });
 
 onUnmounted(() => {
-  if (actionCore && actionsSourceKey) {
-    actionCore.unregisterActionsSource(actionsSourceKey);
+  if (actionCore && combinedActionsSourceKey) {
+    actionCore.unregisterActionsSource(combinedActionsSourceKey);
   }
 });
 </script>
 ```
 
-Now, when you run your application and click the "Open Palette" button, `VCommandPalette` will appear, and you should be able to search for and execute "Say Hello" and "Log Current Time".
+Now, when you run your application, you can press `Cmd+Shift+P` (on macOS) or `Ctrl+Shift+P` (on Windows/Linux) to open the command palette. The button will also work. Inside the palette, you should be able to search for and execute actions like "Say Hello (Component)" and "Log Current Time (Component)", but not the "Open Command Palette" action itself.
 
-This is just the beginning! The next sections will show you how to define more complex actions, add hotkeys, and customize the palette's behavior.
+This demonstrates a more robust way to handle actions tied to component state while still allowing for globally registered actions.
 
 ---
 Next: [**Defining Actions for the Command Palette**](./02-actions-for-command-palette.md)
