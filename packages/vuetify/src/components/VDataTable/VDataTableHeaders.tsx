@@ -163,6 +163,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
           onClick={ column.sortable ? () => toggleSort(column) : undefined }
           fixed={ column.fixed }
           nowrap={ column.nowrap }
+          hidden={ column.hidden }
           lastFixed={ column.lastFixed }
           noPadding={ noPadding }
           { ...headerProps }
