@@ -35,7 +35,7 @@ A **load** event will be emitted when the component needs to load more content. 
 
 |Status|Description|
 |------|-----------|
-|`'ok'`|Content was added succesfully|
+|`'ok'`|Content was added successfully|
 |`'error'`|Something went wrong when adding content. This will display the `error` slot|
 |`'empty'`|There is no more content to fetch. This will display the `empty` slot|
 |`'loading'`|Content is currently loading. This will display a message that the content is loading. This status is only set internally by the component and should not be used with the **done** function|

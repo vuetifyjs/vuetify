@@ -6,7 +6,6 @@
     ],
     "funding": [
       "[GitHub Sponsors](https://github.com/sponsors/johnleider)",
-      "[Patreon](https://patreon.com/vuetify)",
       "[Paypal](https://paypal.me/vuetify)"
     ],
     "languages": [
@@ -187,7 +186,7 @@
     "discord": "spatlani",
     "focus": ["[vuetifyjs/*](https://github.com/vuetifyjs)"],
     "languages": ["English", "Hindi", "Punjabi"],
-    "linkedin": "in/spatlani",
+    "linkedin": "spatlani",
     "github": "spatlani",
     "avatar": "https://avatars.githubusercontent.com/u/11574195",
     "location": "Delhi, India",
@@ -197,6 +196,8 @@
     "name": "Isaias Briones",
     "team": "core",
     "discord": "ibriones",
+    "linkedin": "ibriones",
+    "avatar": "https://avatars.githubusercontent.com/u/47291268",
     "focus": ["[vuetifyjs/*](https://github.com/vuetifyjs)"],
     "languages": ["English", "Filipino"],
     "location": "Edmonton, AB, Canada"
@@ -226,18 +227,6 @@
     "joined": "March 2025",
     "location": "Kathmandu, Nepal",
     "avatar": "https://avatars.githubusercontent.com/u/17315781"
-  },
-  "Arslan038": {
-    "name": "Muhammad Arslan Ahmed",
-    "team": "core",
-    "discord": "dev_arslan",
-    "linkedin": "arslan-ahmed-dev",
-    "focus": [],
-    "languages": [
-      "English"
-    ],
-    "location": "Malta",
-    "joined": "March 2025"
   },
   "AndreyYolkin": {
     "name": "Andrei Elkin",

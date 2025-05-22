@@ -17,7 +17,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
 
 // Utilities
-import { toDisplayString, toRef } from 'vue'
+import { toDisplayString } from 'vue'
 import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -110,7 +110,7 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props)
 
-    const { colorClasses, colorStyles, variantClasses } = useVariant(toRef(() => ({
+    const { colorClasses, colorStyles, variantClasses } = useVariant(() => ({
       color: (() => {
         if (props.disabled) return undefined
         if (!isActive.value) return props.color
@@ -125,7 +125,7 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
         if (isActive.value) return props.activeVariant ?? props.variant
         return props.baseVariant ?? props.variant
       })(),
-    })))
+    }))
 
     const btnSizeMap = new Map(props.sizes)
     const iconSizeMap = new Map(props.iconSizes)

@@ -4,7 +4,7 @@ module.exports = {
     parser: '@typescript-eslint/parser',
     ecmaVersion: 2020,
     sourceType: 'module',
-    project: './tsconfig.eslint.json',
+    projectService: true,
     tsconfigRootDir: __dirname,
     extraFileExtensions: ['.vue', '.json'],
     suppressDeprecatedPropertyWarnings: true,
@@ -22,6 +22,7 @@ module.exports = {
   },
   plugins: [
     '@typescript-eslint',
+    '@stylistic/ts',
     'sonarjs',
     'react',
     'eslint-plugin-local-rules',
@@ -146,13 +147,13 @@ module.exports = {
         'no-undef': 'off',
 
         quotes: 'off',
-        '@typescript-eslint/quotes': ['error', 'single', {
+        '@stylistic/ts/quotes': ['error', 'single', {
           avoidEscape: true,
           allowTemplateLiterals: true,
         }],
 
         indent: 'off',
-        '@typescript-eslint/indent': ['error', 2, {
+        '@stylistic/ts/indent': ['error', 2, {
           ...require('eslint-config-standard').rules.indent[2],
           ignoredNodes: [...require('eslint-config-standard').rules.indent[2].ignoredNodes, 'TSTypeParameterInstantiation'],
           flatTernaryExpressions: true,
@@ -160,7 +161,7 @@ module.exports = {
         }],
 
         'func-call-spacing': 'off',
-        '@typescript-eslint/func-call-spacing': require('eslint-config-standard').rules['func-call-spacing'],
+        '@stylistic/ts/func-call-spacing': require('eslint-config-standard').rules['func-call-spacing'],
 
         // Handled by tsc
         'no-redeclare': 'off',
@@ -174,9 +175,7 @@ module.exports = {
         // Enabled in tsconfig
         'no-unused-vars': 'off',
 
-        '@typescript-eslint/prefer-namespace-keyword': 'error',
-        '@typescript-eslint/adjacent-overload-signatures': 'error',
-        '@typescript-eslint/member-delimiter-style': ['error', {
+        '@stylistic/ts/member-delimiter-style': ['error', {
           multiline: {
             delimiter: 'none',
           },
@@ -184,9 +183,12 @@ module.exports = {
             delimiter: 'comma',
           },
         }],
+        '@stylistic/ts/type-annotation-spacing': 'error',
+
+        '@typescript-eslint/prefer-namespace-keyword': 'error',
+        '@typescript-eslint/adjacent-overload-signatures': 'error',
         // '@typescript-eslint/ban-types': 'error',
         '@typescript-eslint/member-ordering': 'error',
-        '@typescript-eslint/type-annotation-spacing': 'error',
         '@typescript-eslint/no-inferrable-types': 'error',
         '@typescript-eslint/unified-signatures': 'error',
         '@typescript-eslint/no-invalid-this': 'error',
@@ -252,6 +254,7 @@ module.exports = {
     {
       files: '**/*.json',
       parser: '@typescript-eslint/parser',
+      extends: ['plugin:@typescript-eslint/disable-type-checked'],
       rules: {
         quotes: ['error', 'double'],
         'comma-dangle': ['error', 'never'],

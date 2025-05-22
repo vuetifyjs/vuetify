@@ -24,7 +24,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeTransitionProps } from '@/composables/transition'
 
 // Utilities
-import { computed, mergeProps, nextTick, ref, shallowRef, watch } from 'vue'
+import { computed, mergeProps, nextTick, ref, shallowRef, toRef, watch } from 'vue'
 import {
   checkPrintable,
   deepEqual,
@@ -165,6 +165,7 @@ export const VSelect = genericComponent<new <
     const isFocused = shallowRef(false)
 
     let keyboardLookupPrefix = ''
+    let keyboardLookupIndex = -1
     let keyboardLookupLastTime: number
 
     const displayItems = computed(() => {
@@ -188,7 +189,7 @@ export const VSelect = genericComponent<new <
       },
     })
 
-    const label = computed(() => menu.value ? props.closeText : props.openText)
+    const label = toRef(() => menu.value ? props.closeText : props.openText)
 
     const computedMenuProps = computed(() => {
       return {
@@ -246,17 +247,50 @@ export const VSelect = genericComponent<new <
       const now = performance.now()
       if (now - keyboardLookupLastTime > KEYBOARD_LOOKUP_THRESHOLD) {
         keyboardLookupPrefix = ''
+        keyboardLookupIndex = -1
       }
       keyboardLookupPrefix += e.key.toLowerCase()
       keyboardLookupLastTime = now
 
-      const item = items.value.find(item => item.title.toLowerCase().startsWith(keyboardLookupPrefix))
-      if (item !== undefined) {
+      const items = displayItems.value
+      function findItem () {
+        let result = findItemBase()
+        if (result) return result
+
+        if (keyboardLookupPrefix.at(-1) === keyboardLookupPrefix.at(-2)) {
+          // No matches but we have a repeated letter, try the next item with that prefix
+          keyboardLookupPrefix = keyboardLookupPrefix.slice(0, -1)
+          result = findItemBase()
+          if (result) return result
+        }
+
+        // Still nothing, wrap around to the top
+        keyboardLookupIndex = -1
+        result = findItemBase()
+        if (result) return result
+
+        // Still nothing, try just the new letter
+        keyboardLookupPrefix = e.key.toLowerCase()
+        return findItemBase()
+      }
+      function findItemBase () {
+        for (let i = keyboardLookupIndex + 1; i < items.length; i++) {
+          const _item = items[i]
+          if (_item.title.toLowerCase().startsWith(keyboardLookupPrefix)) {
+            return [_item, i] as const
+          }
+        }
+        return undefined
+      }
+
+      const result = findItem()
+      if (!result) return
+
+      const [item, index] = result
+      keyboardLookupIndex = index
+      listRef.value?.focus(index)
+      if (!props.multiple) {
         model.value = [item]
-        const index = displayItems.value.indexOf(item)
-        IN_BROWSER && window.requestAnimationFrame(() => {
-          index >= 0 && vVirtualScrollRef.value?.scrollToIndex(index)
-        })
       }
     }
 
@@ -410,6 +444,7 @@ export const VSelect = genericComponent<new <
                       onFocusin={ onFocusin }
                       tabindex="-1"
                       aria-live="polite"
+                      aria-label={ `${props.label}-list` }
                       color={ props.itemColor ?? props.color }
                       { ...listEvents }
                       { ...props.listProps }
