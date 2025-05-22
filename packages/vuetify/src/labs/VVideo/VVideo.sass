@@ -1,0 +1,124 @@
+@use '../../styles/settings'
+@use '../../styles/tools'
+@use './variables' as *
+
+@include tools.layer('components')
+  .v-video
+    display: flex
+    flex-direction: column
+    align-items: center
+    position: relative
+
+    &__video
+      position: absolute
+      width: 100%
+      height: 100%
+      object-fit: cover
+      z-index: 0
+      border: thin solid rgba(var(--v-theme-on-surface), var(--v-border-opacity))
+
+      & ~ *
+        z-index: 1
+
+    &__content
+      position: relative
+      cursor: pointer
+      border-radius: inherit
+
+      > .v-overlay
+        &, > *
+          pointer-events: none
+
+    &:has(.v-video__controls:not(.v-video__controls--variant-floating))
+      .v-overlay__content
+        padding-bottom: 45px // controls size
+
+    &__center-icon.v-icon-btn
+      border: 5px solid currentColor
+      opacity: .6
+      transform: scale(.9)
+      transition: all .2s ease-in-out
+
+    &__content:hover &__center-icon
+      transform: scale(1)
+      opacity: 1
+
+    &__volume-menu .v-slider.v-input--vertical > .v-input__control
+      min-height: 50px
+
+    &__track
+      position: relative
+      z-index: 1
+      margin-inline: 14px
+      width: 100%
+
+      > .v-input__control
+        min-height: 4px !important
+
+    &__time
+      font-size: 0.875rem
+      line-height: 1
+      letter-spacing: 0.02em
+
+    &__controls
+      width: 100%
+      padding: 8px
+      display: flex
+      align-items: center
+      gap: 12px
+      min-height: 44px
+      backdrop-filter: blur(5px)
+      background: rgba(var(--v-theme-surface), .6)
+      border-top: thin solid rgba(var(--v-theme-surface-variant), .2)
+
+      border-bottom-left-radius: inherit
+      border-bottom-right-radius: inherit
+      position: absolute
+      bottom: 0
+
+      opacity: 0
+      transition: opacity .6s ease-in-out
+
+      .v-video__track
+        width: auto
+
+      &--variant-tube
+        .v-video__track
+          position: absolute
+          top: -4px
+          left: 0
+          right: 0
+          margin-inline: 4px !important
+
+          .v-slider-track
+            height: 4px !important
+
+      &--variant-split
+        padding-inline: 20px
+
+      &--variant-floating
+        position: relative
+        margin-block-start: 12px
+        padding-inline: 12px
+        backdrop-filter: none
+        border-top: none
+        border-radius: inherit
+        opacity: 1
+
+    &:not(.v-video--playing),
+    &:hover
+      .v-video__controls
+        opacity: 1
+
+    &--variant-background
+      pointer-events: none
+
+    &--rounded
+      border-radius: $video-rounded-border-radius
+
+
+  .poster-fade-out
+    &-leave-active
+      transition: opacity 1s linear 0.3s
+    &-leave-to
+      opacity: 0
