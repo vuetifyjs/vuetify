@@ -6,17 +6,20 @@ import { VAvatar } from '@/components/VAvatar'
 import { VCheckboxBtn } from '@/components/VCheckbox'
 import { VChip } from '@/components/VChip'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
+import { VDialog } from '@/components/VDialog'
 import { VDivider } from '@/components/VDivider'
 import { VIcon } from '@/components/VIcon'
 import { VList, VListItem, VListSubheader } from '@/components/VList'
 import { VMenu } from '@/components/VMenu'
 import { makeSelectProps } from '@/components/VSelect/VSelect'
+import { VSheet } from '@/components/VSheet'
 import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextField'
 import { VVirtualScroll } from '@/components/VVirtualScroll'
 
 // Composables
 import { useScrolling } from '../VSelect/useScrolling'
 import { useTextColor } from '@/composables/color'
+import { makeDisplayProps, useDisplay } from '@/composables/display'
 import { highlightResult, makeFilterProps, useFilter } from '@/composables/filter'
 import { useForm } from '@/composables/form'
 import { forwardRefs } from '@/composables/forwardRefs'
@@ -73,6 +76,7 @@ export const makeVAutocompleteProps = propsFactory({
     role: 'combobox',
   }), ['validationValue', 'dirty', 'appendInnerIcon']),
   ...makeTransitionProps({ transition: false }),
+  ...makeDisplayProps({ mobile: null }),
 }, 'VAutocomplete')
 
 type ItemType<T> = T extends readonly (infer U)[] ? U : never
@@ -145,6 +149,7 @@ export const VAutocomplete = genericComponent<new <
     })
     const form = useForm(props)
     const { filteredItems, getMatches } = useFilter(props, items, () => isPristine.value ? '' : search.value)
+    const { mobile } = useDisplay(props)
 
     const displayItems = computed(() => {
       if (props.hideSelected) {
@@ -175,8 +180,15 @@ export const VAutocomplete = genericComponent<new <
     const menu = computed({
       get: () => _menu.value,
       set: v => {
-        if (_menu.value && !v && vMenuRef.value?.ΨopenChildren.size) return
         if (v && menuDisabled.value) return
+        if (
+          !v &&
+          _menu.value &&
+          vMenuRef.value &&
+          ('ΨopenChildren' in vMenuRef.value) &&
+          vMenuRef.value.ΨopenChildren.size
+        ) return
+
         _menu.value = v
       },
     })
@@ -373,7 +385,7 @@ export const VAutocomplete = genericComponent<new <
         nextTick(() => isSelecting.value = false)
       } else {
         if (!props.multiple && search.value == null) model.value = []
-        menu.value = false
+        if (!mobile.value) menu.value = false
         if (props.multiple || hasSelectionSlot.value) search.value = ''
         selectionIndex.value = -1
       }
@@ -416,6 +428,8 @@ export const VAutocomplete = genericComponent<new <
       const isDirty = model.value.length > 0
       const textFieldProps = VTextField.filterProps(props)
 
+      const MenuComponent = mobile.value ? VDialog : VMenu
+
       return (
         <VTextField
           ref={ vTextFieldRef }
@@ -449,7 +463,7 @@ export const VAutocomplete = genericComponent<new <
             ...slots,
             default: () => (
               <>
-                <VMenu
+                <MenuComponent
                   ref={ vMenuRef }
                   v-model={ menu.value }
                   activator="parent"
@@ -464,90 +478,106 @@ export const VAutocomplete = genericComponent<new <
                   onAfterLeave={ onAfterLeave }
                   { ...props.menuProps }
                 >
-                  { hasList && (
-                    <VList
-                      ref={ listRef }
-                      selected={ selectedValues.value }
-                      selectStrategy={ props.multiple ? 'independent' : 'single-independent' }
-                      onMousedown={ (e: MouseEvent) => e.preventDefault() }
-                      onKeydown={ onListKeydown }
-                      onFocusin={ onFocusin }
-                      onFocusout={ onFocusout }
-                      tabindex="-1"
-                      aria-live="polite"
-                      color={ props.itemColor ?? props.color }
-                      { ...listEvents }
-                      { ...props.listProps }
-                    >
-                      { slots['prepend-item']?.() }
+                  <VSheet>
+                    { mobile.value && (
+                      <VTextField
+                        ref={ vTextFieldRef }
+                        key="mobile-input"
+                        v-model={ search.value }
+                        onUpdate:modelValue={ onUpdateModelValue }
+                        v-model:focused={ isFocused.value }
+                        validationValue={ model.externalValue }
+                        counterValue={ counterValue.value }
+                        dirty={ isDirty }
+                        onChange={ onChange }
+                        style={{ position: 'sticky', top: 0, zIndex: 1 }}
+                      ></VTextField>
+                    )}
+                    { hasList && (
+                      <VList
+                        ref={ listRef }
+                        selected={ selectedValues.value }
+                        selectStrategy={ props.multiple ? 'independent' : 'single-independent' }
+                        onMousedown={ (e: MouseEvent) => e.preventDefault() }
+                        onKeydown={ onListKeydown }
+                        onFocusin={ onFocusin }
+                        onFocusout={ onFocusout }
+                        tabindex="-1"
+                        aria-live="polite"
+                        color={ props.itemColor ?? props.color }
+                        { ...listEvents }
+                        { ...props.listProps }
+                      >
+                        { slots['prepend-item']?.() }
 
-                      { !displayItems.value.length && !props.hideNoData && (slots['no-data']?.() ?? (
-                        <VListItem key="no-data" title={ t(props.noDataText) } />
-                      ))}
+                        { !displayItems.value.length && !props.hideNoData && (slots['no-data']?.() ?? (
+                          <VListItem key="no-data" title={ t(props.noDataText) } />
+                        ))}
 
-                      <VVirtualScroll ref={ vVirtualScrollRef } renderless items={ displayItems.value } itemKey="value">
-                        { ({ item, index, itemRef }) => {
-                          const itemProps = mergeProps(item.props, {
-                            ref: itemRef,
-                            key: item.value,
-                            active: (highlightFirst.value && index === 0) ? true : undefined,
-                            onClick: () => select(item, null),
-                          })
+                        <VVirtualScroll ref={ vVirtualScrollRef } renderless items={ displayItems.value } itemKey="value">
+                          { ({ item, index, itemRef }) => {
+                            const itemProps = mergeProps(item.props, {
+                              ref: itemRef,
+                              key: item.value,
+                              active: (highlightFirst.value && index === 0) ? true : undefined,
+                              onClick: () => select(item, null),
+                            })
 
-                          if (item.raw.type === 'divider') {
-                            return slots.divider?.({ props: item.raw, index }) ?? (
-                              <VDivider { ...item.props } key={ `divider-${index}` } />
+                            if (item.raw.type === 'divider') {
+                              return slots.divider?.({ props: item.raw, index }) ?? (
+                                <VDivider { ...item.props } key={ `divider-${index}` } />
+                              )
+                            }
+
+                            if (item.raw.type === 'subheader') {
+                              return slots.subheader?.({ props: item.raw, index }) ?? (
+                                <VListSubheader { ...item.props } key={ `subheader-${index}` } />
+                              )
+                            }
+
+                            return slots.item?.({
+                              item,
+                              index,
+                              props: itemProps,
+                            }) ?? (
+                              <VListItem { ...itemProps } role="option">
+                              {{
+                                prepend: ({ isSelected }) => (
+                                  <>
+                                    { props.multiple && !props.hideSelected ? (
+                                      <VCheckboxBtn
+                                        key={ item.value }
+                                        modelValue={ isSelected }
+                                        ripple={ false }
+                                        tabindex="-1"
+                                      />
+                                    ) : undefined }
+
+                                    { item.props.prependAvatar && (
+                                      <VAvatar image={ item.props.prependAvatar } />
+                                    )}
+
+                                    { item.props.prependIcon && (
+                                      <VIcon icon={ item.props.prependIcon } />
+                                    )}
+                                  </>
+                                ),
+                                title: () => {
+                                  return isPristine.value
+                                    ? item.title
+                                    : highlightResult('v-autocomplete', item.title, getMatches(item)?.title)
+                                },
+                              }}
+                            </VListItem>
                             )
-                          }
+                          }}
+                        </VVirtualScroll>
 
-                          if (item.raw.type === 'subheader') {
-                            return slots.subheader?.({ props: item.raw, index }) ?? (
-                              <VListSubheader { ...item.props } key={ `subheader-${index}` } />
-                            )
-                          }
-
-                          return slots.item?.({
-                            item,
-                            index,
-                            props: itemProps,
-                          }) ?? (
-                            <VListItem { ...itemProps } role="option">
-                            {{
-                              prepend: ({ isSelected }) => (
-                                <>
-                                  { props.multiple && !props.hideSelected ? (
-                                    <VCheckboxBtn
-                                      key={ item.value }
-                                      modelValue={ isSelected }
-                                      ripple={ false }
-                                      tabindex="-1"
-                                    />
-                                  ) : undefined }
-
-                                  { item.props.prependAvatar && (
-                                    <VAvatar image={ item.props.prependAvatar } />
-                                  )}
-
-                                  { item.props.prependIcon && (
-                                    <VIcon icon={ item.props.prependIcon } />
-                                  )}
-                                </>
-                              ),
-                              title: () => {
-                                return isPristine.value
-                                  ? item.title
-                                  : highlightResult('v-autocomplete', item.title, getMatches(item)?.title)
-                              },
-                            }}
-                          </VListItem>
-                          )
-                        }}
-                      </VVirtualScroll>
-
-                      { slots['append-item']?.() }
-                    </VList>
-                  )}
-                </VMenu>
+                        { slots['append-item']?.() }
+                      </VList>
+                    )}
+                  </VSheet>
+                </MenuComponent>
 
                 { model.value.map((item, index) => {
                   function onChipClose (e: Event) {
