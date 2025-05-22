@@ -1,0 +1,15 @@
+{
+  "props": {
+    "src": "Media file URL",
+    "type": "Media file type (optional)",
+    "image": "Apply a specific image as cover before the video is loaded.",
+    "autoplay": "Starts loading the media file without waiting for user to click. Playback begins once enough data is loaded.",
+    "muted": "Hides volume control and disables the playback sound.",
+    "eager": "Silently loades the media file without waiting for user to click.",
+    "hideOverlay": "Hide center play icon.",
+    "noFullscreen": "Disable fullscreen and hide the default fullscreen button.",
+    "startAt": "Moves progress to the specified time (in seconds) once the media file is loaded.",
+    "controlsTransition": "The reveal transition applied to the VVideoControls component once the media file is loaded.",
+    "controlsVariant": "Variant passed to the VVideoControls component."
+  }
+}

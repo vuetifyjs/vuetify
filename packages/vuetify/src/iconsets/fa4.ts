@@ -60,6 +60,14 @@ const aliases: IconAliases = {
   arrowleft: 'fa-arrow-left',
   arrowright: 'fa-arrow-right',
   backspace: 'fa-undo',
+  play: 'fa-play',
+  pause: 'fa-pause',
+  fullscreen: 'fa-fullscreen',
+  fullscreenExit: 'fa-compress',
+  volumeHigh: 'fa-volume-high',
+  volumeMedium: 'fa-volume-low',
+  volumeLow: 'fa-volume-off',
+  volumeOff: 'fa-volume-off',
 }
 
 const fa: IconSet = {
