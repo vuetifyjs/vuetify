@@ -1,7 +1,13 @@
+// Components
 import { VTextField } from '@/components/VTextField'
+
+// Utilities
+import { ref, watchEffect } from 'vue'
+import { filterInputAttrs, genericComponent, propsFactory, useRender } from '@/util'
+
+// Types
+import type { PropType, Ref, VNode } from 'vue'
 import type { VTextFieldSlots } from '@/components/VTextField/VTextField'
-import { genericComponent, propsFactory, useRender, filterInputAttrs } from '@/util'
-import { type PropType, type Ref, type VNode, ref, watchEffect } from 'vue'
 
 // Define props for VCommandPaletteSearch
 export const makeVCommandPaletteSearchProps = propsFactory({
@@ -40,14 +46,14 @@ export const VCommandPaletteSearch = genericComponent<VCommandPaletteSearchSlots
 
     // Ensure ARIA attributes are applied to the underlying DOM element (root of VTextField)
     watchEffect(() => {
-      const rootEl = internalTextFieldRef.value?.$el as HTMLElement | undefined;
-      if (!rootEl) return;
-      rootEl.setAttribute('role', 'combobox');
-      rootEl.setAttribute('aria-haspopup', props.ariaHaspopup || 'listbox');
-      rootEl.setAttribute('aria-expanded', props.ariaExpanded !== undefined ? String(props.ariaExpanded) : 'false');
-      if (props.ariaControls) rootEl.setAttribute('aria-controls', props.ariaControls);
-      if (props.ariaActivedescendant) rootEl.setAttribute('aria-activedescendant', props.ariaActivedescendant);
-      if (props.ariaLabelledby) rootEl.setAttribute('aria-labelledby', props.ariaLabelledby);
+      const rootEl = internalTextFieldRef.value?.$el as HTMLElement | undefined
+      if (!rootEl) return
+      rootEl.setAttribute('role', 'combobox')
+      rootEl.setAttribute('aria-haspopup', props.ariaHaspopup || 'listbox')
+      rootEl.setAttribute('aria-expanded', props.ariaExpanded !== undefined ? String(props.ariaExpanded) : 'false')
+      if (props.ariaControls) rootEl.setAttribute('aria-controls', props.ariaControls)
+      if (props.ariaActivedescendant) rootEl.setAttribute('aria-activedescendant', props.ariaActivedescendant)
+      if (props.ariaLabelledby) rootEl.setAttribute('aria-labelledby', props.ariaLabelledby)
     })
 
     useRender(() => {
@@ -61,7 +67,7 @@ export const VCommandPaletteSearch = genericComponent<VCommandPaletteSearchSlots
         'aria-controls': props.ariaControls,
         'aria-activedescendant': props.ariaActivedescendant,
         'aria-labelledby': props.ariaLabelledby,
-      };
+      }
 
       const textFieldProps: Record<string, any> = {
         modelValue: props.modelValue,
@@ -74,42 +80,42 @@ export const VCommandPaletteSearch = genericComponent<VCommandPaletteSearchSlots
         hideDetails: true,
         variant: 'solo',
         flat: true,
-      };
+      }
 
       // Handle prependInnerIcon carefully: use from attrs if valid, else default to $search
       // VTextField itself has a default, so we only set it if explicitly passed via attrs or if we want to enforce our own default.
       // The plan implies VCommandPaletteSearch should have a search icon.
       if (typeof inputAttrsFromCaller.prependInnerIcon === 'string' && inputAttrsFromCaller.prependInnerIcon) {
-        textFieldProps.prependInnerIcon = inputAttrsFromCaller.prependInnerIcon;
+        textFieldProps.prependInnerIcon = inputAttrsFromCaller.prependInnerIcon
       } else if (inputAttrsFromCaller.prependInnerIcon === null || inputAttrsFromCaller.prependInnerIcon === undefined) {
         // If specifically passed as null/undefined via attrs, respect that (don't default)
         // However, if it's not present in attrs at all, then apply default.
         if (!Object.prototype.hasOwnProperty.call(inputAttrsFromCaller, 'prependInnerIcon')) {
-          textFieldProps.prependInnerIcon = '$search';
+          textFieldProps.prependInnerIcon = '$search'
         } else {
-          textFieldProps.prependInnerIcon = inputAttrsFromCaller.prependInnerIcon; // Will be null or undefined
+          textFieldProps.prependInnerIcon = inputAttrsFromCaller.prependInnerIcon // Will be null or undefined
         }
       } else if (Object.keys(inputAttrsFromCaller).includes('prependInnerIcon')) {
         // If it's some other truthy non-string value from attrs (e.g. a VNode), pass it.
         // This case might be rare for prependInnerIcon via HTML attrs but good to cover.
-        textFieldProps.prependInnerIcon = inputAttrsFromCaller.prependInnerIcon;
+        textFieldProps.prependInnerIcon = inputAttrsFromCaller.prependInnerIcon
       } else {
         // Default if not in attrs at all
-        textFieldProps.prependInnerIcon = '$search';
+        textFieldProps.prependInnerIcon = '$search'
       }
 
       // Spread other valid input attributes from caller
       for (const key in inputAttrsFromCaller) {
         if (key !== 'prependInnerIcon' && Object.prototype.hasOwnProperty.call(inputAttrsFromCaller, key)) {
-          textFieldProps[key] = inputAttrsFromCaller[key];
+          textFieldProps[key] = inputAttrsFromCaller[key]
         }
       }
 
       return (
         <VTextField
-          ref={internalTextFieldRef}
-          {...{ ...rootAttrs, ...rootAriaAttrs }}
-          {...textFieldProps}
+          ref={ internalTextFieldRef }
+          { ...{ ...rootAttrs, ...rootAriaAttrs } }
+          { ...textFieldProps }
           class={['v-command-palette__search', rootAttrs.class]}
         >
           {{

@@ -1,6 +1,12 @@
+// Components
 import { VBtn } from '@/components/VBtn'
+
+// Utilities
+import { Fragment } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
-import { Fragment, type VNode, type VNodeChild } from 'vue'
+
+// Types
+import type { VNode, VNodeChild } from 'vue'
 
 export interface VCommandPaletteHeaderProps {
   title?: string
@@ -30,17 +36,17 @@ export const VCommandPaletteHeader = genericComponent<{
     const navigateBack = () => emit('navigateBack')
 
     useRender(() => {
-      const defaultSlotRender = slots.default as ((props: VCommandPaletteHeaderProps & { navigateBack: () => void }) => VNodeChild) | undefined;
-      const prependSlotRender = slots.prepend as ((props: VCommandPaletteHeaderProps) => VNodeChild) | undefined;
-      const appendSlotRender = slots.append as ((props: VCommandPaletteHeaderProps) => VNodeChild) | undefined;
+      const defaultSlotRender = slots.default as ((props: VCommandPaletteHeaderProps & { navigateBack: () => void }) => VNodeChild) | undefined
+      const prependSlotRender = slots.prepend as ((props: VCommandPaletteHeaderProps) => VNodeChild) | undefined
+      const appendSlotRender = slots.append as ((props: VCommandPaletteHeaderProps) => VNodeChild) | undefined
 
       if (defaultSlotRender) {
-        const slotResult = defaultSlotRender({ ...props, navigateBack });
-        if (slotResult == null) return <Fragment />;
-        return (Array.isArray(slotResult) ? <>{slotResult}</> : slotResult) as VNode;
+        const slotResult = defaultSlotRender({ ...props, navigateBack })
+        if (slotResult == null) return <Fragment />
+        return (Array.isArray(slotResult) ? <>{ slotResult }</> : slotResult) as VNode
       }
 
-      const titleId = props.listId ? `${props.listId}-title` : 'v-command-palette-title';
+      const titleId = props.listId ? `${props.listId}-title` : 'v-command-palette-title'
 
       return (
         <div class="v-command-palette__header">
@@ -48,14 +54,14 @@ export const VCommandPaletteHeader = genericComponent<{
           { !props.isRootLevel && (
             <VBtn
               icon="$arrowLeft"
-              onClick={navigateBack}
+              onClick={ navigateBack }
               density="compact"
               variant="text"
               aria-label="Go back"
             />
           )}
           { props.title && (
-            <span class="v-command-palette__title" id={titleId}>
+            <span class="v-command-palette__title" id={ titleId }>
               { props.title }
             </span>
           )}

@@ -4,7 +4,6 @@ import { VBtn } from '../VBtn'
 import { generate, gridOn, render, userEvent } from '@test'
 import { ref } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
-import { vi } from 'vitest'
 
 // Types
 import type { Variant } from '@/composables/variant'

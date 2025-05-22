@@ -1,4 +1,5 @@
-import type { Ref, ComputedRef } from 'vue'
+// Types
+import type { ComputedRef, Ref } from 'vue'
 import type { InjectionKey } from 'vue'
 
 // -------------- KeyBinding Types --------------
@@ -8,19 +9,19 @@ export type KeyBindingInputBlockerFn = (element: Element | null) => 'allow' | 'd
 
 export interface UseKeyBindingsOptions {
   /** Target element or window to attach listeners to. */
-  target?: Window | HTMLElement | EventTarget | Ref<Window | HTMLElement | EventTarget | undefined>;
+  target?: Window | HTMLElement | EventTarget | Ref<Window | HTMLElement | EventTarget | undefined>
   /** Map of key aliases for normalizing key names. */
-  aliasMap?: Record<string, string>;
+  aliasMap?: Record<string, string>
   /** Duration in milliseconds to wait before clearing a key sequence. */
-  sequenceTimeoutDuration?: number;
+  sequenceTimeoutDuration?: number
   /** Function to determine if key events should be blocked based on the active element. */
-  inputBlockerFn?: KeyBindingInputBlockerFn;
+  inputBlockerFn?: KeyBindingInputBlockerFn
   /** Whether to capture events in the capturing phase. */
-  capture?: boolean;
+  capture?: boolean
   /** Whether events are passive (don't call preventDefault). */
-  passive?: boolean;
+  passive?: boolean
   /** Whether to prefer event.code (layout-independent) over event.key for key identification. */
-  preferEventCode?: boolean;
+  preferEventCode?: boolean
 }
 
 /** Type for a key filter when registering a handler */
@@ -43,7 +44,7 @@ export interface KeyBindingHandlerOptions {
   /** Ignore repeated events when key is held down (default: false) - primarily for 'keydown' */
   ignoreKeyRepeat?: boolean
   /** If true, this specific binding will ignore the result of `inputBlockerFn` (default: false) */
-  ignoreInputBlocker?: boolean;
+  ignoreInputBlocker?: boolean
   /** If true, listener will be passive (default: from UseKeyBindingsOptions or false) */
   passive?: boolean
 }
@@ -55,11 +56,11 @@ export type KeyBindingTrigger = string | string[] | ((event: KeyboardEvent) => b
 /** Context passed to action handlers and canExecute checks. */
 export interface ActionContext {
   /** The trigger for the action (e.g., 'hotkey-combination', 'hotkey-sequence', 'palette', 'component-click'). */
-  trigger?: 'hotkey' | 'palette' | 'programmatic' | 'notification' | 'ai_assistant' | string;
+  trigger?: 'hotkey' | 'palette' | 'programmatic' | 'notification' | 'ai_assistant' | string
   /** The original DOM event if the action was triggered by one. */
-  event?: Event;
+  event?: Event
   /** Arbitrary data, e.g., from palette, notification, or programmatic call */
-  data?: any;
+  data?: any
 }
 
 /** Defines how a hotkey should behave regarding text input elements. */
@@ -67,60 +68,60 @@ export type RunInTextInputMatcher = string | string[] | ((element: Element | nul
 
 // --- AI Integration Related Types --- START ---
 export interface AIActionExample {
-  description?: string;
-  request?: Record<string, any>;
-  responsePreview?: string;
+  description?: string
+  request?: Record<string, any>
+  responsePreview?: string
 }
 
 export interface AIActionMetadata {
-  accessible?: boolean;
-  scope?: string | string[];
-  usageHint?: string;
-  examples?: AIActionExample[];
+  accessible?: boolean
+  scope?: string | string[]
+  usageHint?: string
+  examples?: AIActionExample[]
 }
 
 export interface DiscoverableActionInfo {
-  id: string;
-  title: string;
-  description?: string;
-  parametersSchema?: Record<string, any>; // JSON Schema for parameters expected in ActionContext.data
+  id: string
+  title: string
+  description?: string
+  parametersSchema?: Record<string, any> // JSON Schema for parameters expected in ActionContext.data
   ai?: {
-    scope?: string | string[];
-    usageHint?: string;
-    examples?: AIActionExample[];
-  };
+    scope?: string | string[]
+    usageHint?: string
+    examples?: AIActionExample[]
+  }
 }
 // --- AI Integration Related Types --- END ---
 
 // New interface for AI options object
 export interface ActionCoreAIOptions {
-  enabled?: boolean;
+  enabled?: boolean
   // other AI specific configs can be added here
 }
 
 // --- Action Profiling Types --- START ---
 export interface ActionProfileOverride<T extends ActionContext = ActionContext> {
-  title?: string | Ref<string>;
-  subtitle?: string | Ref<string>;
-  icon?: string | Ref<string>;
-  keywords?: string | string[];
-  handler?: (context: T) => void | Promise<void>;
-  hotkey?: string | string[];
+  title?: string | Ref<string>
+  subtitle?: string | Ref<string>
+  icon?: string | Ref<string>
+  keywords?: string | string[]
+  handler?: (context: T) => void | Promise<void>
+  hotkey?: string | string[]
   hotkeyOptions?: {
-    preventDefault?: boolean;
-    stopPropagation?: boolean;
-    ignoreKeyRepeat?: boolean;
-  };
-  runInTextInput?: boolean | 'only' | RunInTextInputMatcher;
-  canExecute?: (context: T) => boolean;
-  subItems?: (context: T) => ActionDefinition<T>[] | Promise<ActionDefinition<T>[]>;
-  meta?: Record<string, any>;
-  order?: number;
-  disabled?: boolean | Ref<boolean>;
-  description?: string;
-  group?: string;
-  parametersSchema?: Record<string, any>; // Allow profiles to override schema if needed
-  ai?: AIActionMetadata; // Allow profiles to override AI metadata
+    preventDefault?: boolean
+    stopPropagation?: boolean
+    ignoreKeyRepeat?: boolean
+  }
+  runInTextInput?: boolean | 'only' | RunInTextInputMatcher
+  canExecute?: (context: T) => boolean
+  subItems?: (context: T) => ActionDefinition<T>[] | Promise<ActionDefinition<T>[]>
+  meta?: Record<string, any>
+  order?: number
+  disabled?: boolean | Ref<boolean>
+  description?: string
+  group?: string
+  parametersSchema?: Record<string, any> // Allow profiles to override schema if needed
+  ai?: AIActionMetadata // Allow profiles to override AI metadata
 }
 // --- Action Profiling Types --- END ---
 
@@ -148,11 +149,11 @@ export interface ActionDefinition<T extends ActionContext = ActionContext> {
    * These would be passed to useKeyBindings.
    */
   hotkeyOptions?: {
-    preventDefault?: boolean;
-    stopPropagation?: boolean;
-    ignoreKeyRepeat?: boolean;
+    preventDefault?: boolean
+    stopPropagation?: boolean
+    ignoreKeyRepeat?: boolean
     // Note: 'passive' could also be added if needed.
-  };
+  }
   /**
    * Determines if the hotkey can be triggered when a text input is focused.
    * - `true`: Hotkey explicitly configured to run even when inputs are focused (overrides default blocking for non-input hotkeys).
@@ -162,7 +163,7 @@ export interface ActionDefinition<T extends ActionContext = ActionContext> {
    * - `function`: Custom predicate `(element: Element | null) => boolean` (implies input focus if element is an input).
    * - `undefined` (default): Behavior depends on the nature of the hotkey and default input blocking. For ActionCore, if undefined, it means the hotkey is subject to normal input blocking unless it's a known text editing shortcut.
    */
-  runInTextInput?: boolean | 'only' | RunInTextInputMatcher;
+  runInTextInput?: boolean | 'only' | RunInTextInputMatcher
   /** Optional function to determine if the action can be executed. */
   canExecute?: (context: T) => boolean
   /** If this action represents a group, this function should return its sub-items. */
@@ -179,11 +180,11 @@ export interface ActionDefinition<T extends ActionContext = ActionContext> {
   group?: string
 
   // AI Related Fields
-  parametersSchema?: Record<string, any>; // JSON Schema describing expected ActionContext.data structure
-  ai?: AIActionMetadata; // Metadata for AI interaction
+  parametersSchema?: Record<string, any> // JSON Schema describing expected ActionContext.data structure
+  ai?: AIActionMetadata // Metadata for AI interaction
 
   // Profiling
-  profiles?: Record<string, ActionProfileOverride<T>>;
+  profiles?: Record<string, ActionProfileOverride<T>>
 }
 
 /** Represents a source of actions for the ActionCore store. */
@@ -205,7 +206,7 @@ export interface ActionCoreOptions {
   parent?: ActionCorePublicAPI
 
   // Add any other future global ActionCore options here
-  verboseLogging?: boolean;
+  verboseLogging?: boolean
 }
 
 /**
@@ -213,25 +214,25 @@ export interface ActionCoreOptions {
  */
 export interface ActionCorePublicAPI {
   /** Reactive state indicating if any action is currently being executed. */
-  readonly isLoading: Readonly<Ref<boolean>>;
+  readonly isLoading: Readonly<Ref<boolean>>
   /** Computed property that aggregates all valid actions from all registered sources. */
-  readonly allActions: ComputedRef<Readonly<ActionDefinition<any>[]>>;
+  readonly allActions: ComputedRef<Readonly<ActionDefinition<any>[]>>
   /** The currently active profile name, if any. */
-  readonly activeProfile: Readonly<Ref<string | null>>;
+  readonly activeProfile: Readonly<Ref<string | null>>
 
   /** Registers a new source of actions. */
-  registerActionsSource(source: ActionsSource): symbol;
+  registerActionsSource(source: ActionsSource): symbol
   /** Unregisters an existing action source. */
-  unregisterActionsSource(key: symbol): boolean;
+  unregisterActionsSource(key: symbol): boolean
   /** Retrieves a specific action definition by its ID. */
-  getAction(actionId: string): ActionDefinition<any> | undefined;
+  getAction(actionId: string): ActionDefinition<any> | undefined
   /** Executes a registered action by its ID. */
-  executeAction(actionId: string, invocationContext?: ActionContext): Promise<void>;
+  executeAction(actionId: string, invocationContext?: ActionContext): Promise<void>
   /** Cleans up the ActionCore instance. */
-  destroy(): void;
+  destroy(): void
 
   // New methods/properties for Profiling
-  setActiveProfile(profileName: string | null): void;
+  setActiveProfile(profileName: string | null): void
 }
 
 // -------------- Symbol for Sub-Items UI Handler --------------
@@ -241,20 +242,20 @@ export interface ActionCorePublicAPI {
  * This is typically used by components like VBtn when their 'command' prop points to an action
  * that primarily defines subItems rather than a direct handler.
  */
-export const ShowSubItemsUISymbol: InjectionKey<(action: ActionDefinition<any>) => void> = Symbol.for('vuetify:show-sub-items-ui');
+export const ShowSubItemsUISymbol: InjectionKey<(action: ActionDefinition<any>) => void> = Symbol.for('vuetify:show-sub-items-ui')
 
 export type ActionCoreInstanceOptions = {
   /** Options related to AI features and discoverability for actions. */
   ai?: {
-    enabled?: boolean;
+    enabled?: boolean
     // Potentially other AI related options in the future
-  };
+  }
   /**
    * Enable verbose logging for debugging ActionCore's internal operations,
    * especially hotkey processing and action execution flow.
    * Defaults to false.
    */
-  verboseLogging?: boolean;
+  verboseLogging?: boolean
   // Add other future global options for ActionCore here
 };
 

@@ -1,8 +1,11 @@
-import { ref, readonly, computed, onScopeDispose, toValue, getCurrentInstance } from 'vue'
-import type { Ref, ComputedRef } from 'vue'
-import type { UseKeyBindingsOptions, KeyBindingInputBlockerFn, KeyBindingHandlerOptions, KeyBindingTrigger } from './types'
-import { log } from './utils'
+// Utilities
+import { computed, getCurrentInstance, onScopeDispose, readonly, ref, toValue } from 'vue'
+
+// Types
+import type { ComputedRef, Ref } from 'vue'
 import { IS_CLIENT, IS_MAC } from './platform'
+import type { KeyBindingHandlerOptions, KeyBindingInputBlockerFn, KeyBindingTrigger, UseKeyBindingsOptions } from './types'
+import { log } from './utils'
 
 /**
  * @file useKeyBindings.ts A dependency-free Vue composable for advanced keyboard shortcut and sequence detection.
@@ -11,7 +14,7 @@ import { IS_CLIENT, IS_MAC } from './platform'
 const COMPONENT_NAME = 'KeyBindings'
 
 // Define modifier keys (used for macOS Cmd keyup workaround)
-const modifierKeys = new Set(['ctrl', 'alt', 'shift', 'meta']);
+const modifierKeys = new Set(['ctrl', 'alt', 'shift', 'meta'])
 
 // --- Utility Functions ---
 
@@ -23,11 +26,11 @@ const modifierKeys = new Set(['ctrl', 'alt', 'shift', 'meta']);
  * @returns {T} The debounced function.
  */
 function debounce<T extends (...args: any[]) => any>(fn: T, delay: number): T {
-  let timeoutId: number | undefined;
-  return function(this: ThisParameterType<T>, ...args: Parameters<T>) {
-    clearTimeout(timeoutId);
-    timeoutId = window.setTimeout(() => fn.apply(this, args), delay);
-  } as T;
+  let timeoutId: number | undefined
+  return function (this: ThisParameterType<T>, ...args: Parameters<T>) {
+    clearTimeout(timeoutId)
+    timeoutId = window.setTimeout(() => fn.apply(this, args), delay)
+  } as T
 }
 
 /**
@@ -39,26 +42,26 @@ function debounce<T extends (...args: any[]) => any>(fn: T, delay: number): T {
  * @returns {T} The throttled function.
  */
 function throttle<T extends (...args: any[]) => any>(fn: T, delay: number): T {
-  let lastCallTime = 0;
-  let timeoutId: number | undefined;
-  return function(this: ThisParameterType<T>, ...args: Parameters<T>) {
-    const now = Date.now();
-    const remainingTime = delay - (now - lastCallTime);
-    clearTimeout(timeoutId);
+  let lastCallTime = 0
+  let timeoutId: number | undefined
+  return function (this: ThisParameterType<T>, ...args: Parameters<T>) {
+    const now = Date.now()
+    const remainingTime = delay - (now - lastCallTime)
+    clearTimeout(timeoutId)
     if (remainingTime <= 0) {
-      lastCallTime = now;
-      fn.apply(this, args);
+      lastCallTime = now
+      fn.apply(this, args)
     } else {
       timeoutId = window.setTimeout(() => {
-        lastCallTime = Date.now();
-        fn.apply(this, args);
-      }, remainingTime);
+        lastCallTime = Date.now()
+        fn.apply(this, args)
+      }, remainingTime)
     }
-  } as T;
+  } as T
 }
 
 /** Default function to determine if keybindings should be blocked based on the active element. */
-const defaultInputBlockerFn: KeyBindingInputBlockerFn = (element) => {
+const defaultInputBlockerFn: KeyBindingInputBlockerFn = element => {
   if (!element) return 'allow'
   const tagName = element.tagName?.toUpperCase()
   const contentEditable = (element as HTMLElement).isContentEditable
@@ -73,60 +76,106 @@ const defaultInputBlockerFn: KeyBindingInputBlockerFn = (element) => {
 /** Default map for aliasing key names. Extended for event.code values. */
 const defaultAliasMap: Record<string, string> = {
   // Standard event.key aliases
-  'command': 'meta',
-  'cmd': 'meta',
-  'control': 'ctrl',
-  'option': 'alt', // Crucial for Mac Option key
-  'escape': 'esc',
-  'cmdorctrl': 'meta',
-  'primary': 'meta',
-  'up': 'arrowup',
-  'down': 'arrowdown',
-  'left': 'arrowleft',
-  'right': 'arrowright',
+  command: 'meta',
+  cmd: 'meta',
+  control: 'ctrl',
+  option: 'alt', // Crucial for Mac Option key
+  escape: 'esc',
+  cmdorctrl: 'meta',
+  primary: 'meta',
+  up: 'arrowup',
+  down: 'arrowdown',
+  left: 'arrowleft',
+  right: 'arrowright',
 
   // Modifier key self-aliases (ensure they are normalized correctly)
-  'meta': 'meta',
-  'ctrl': 'ctrl',
-  'alt': 'alt',
-  'shift': 'shift',
+  meta: 'meta',
+  ctrl: 'ctrl',
+  alt: 'alt',
+  shift: 'shift',
 
   // Aliases for common event.code values to simpler forms
   // Letters
-  'keya': 'a', 'keyb': 'b', 'keyc': 'c', 'keyd': 'd', 'keye': 'e',
-  'keyf': 'f', 'keyg': 'g', 'keyh': 'h', 'keyi': 'i', 'keyj': 'j',
-  'keyk': 'k', 'keyl': 'l', 'keym': 'm', 'keyn': 'n', 'keyo': 'o',
-  'keyp': 'p', 'keyq': 'q', 'keyr': 'r', 'keys': 's', 'keyt': 't',
-  'keyu': 'u', 'keyv': 'v', 'keyw': 'w', 'keyx': 'x', 'keyy': 'y',
-  'keyz': 'z',
+  keya: 'a',
+  keyb: 'b',
+  keyc: 'c',
+  keyd: 'd',
+  keye: 'e',
+  keyf: 'f',
+  keyg: 'g',
+  keyh: 'h',
+  keyi: 'i',
+  keyj: 'j',
+  keyk: 'k',
+  keyl: 'l',
+  keym: 'm',
+  keyn: 'n',
+  keyo: 'o',
+  keyp: 'p',
+  keyq: 'q',
+  keyr: 'r',
+  keys: 's',
+  keyt: 't',
+  keyu: 'u',
+  keyv: 'v',
+  keyw: 'w',
+  keyx: 'x',
+  keyy: 'y',
+  keyz: 'z',
   // Numbers (above letters)
-  'digit0': '0', 'digit1': '1', 'digit2': '2', 'digit3': '3', 'digit4': '4',
-  'digit5': '5', 'digit6': '6', 'digit7': '7', 'digit8': '8', 'digit9': '9',
+  digit0: '0',
+  digit1: '1',
+  digit2: '2',
+  digit3: '3',
+  digit4: '4',
+  digit5: '5',
+  digit6: '6',
+  digit7: '7',
+  digit8: '8',
+  digit9: '9',
   // Numpad numbers
-  'numpad0': '0', 'numpad1': '1', 'numpad2': '2', 'numpad3': '3', 'numpad4': '4',
-  'numpad5': '5', 'numpad6': '6', 'numpad7': '7', 'numpad8': '8', 'numpad9': '9',
+  numpad0: '0',
+  numpad1: '1',
+  numpad2: '2',
+  numpad3: '3',
+  numpad4: '4',
+  numpad5: '5',
+  numpad6: '6',
+  numpad7: '7',
+  numpad8: '8',
+  numpad9: '9',
   // Symbols & Special Characters (add more as needed, these are common examples)
-  'enter': 'enter', 'numpadenter': 'enter',
-  'space': 'space',
-  'tab': 'tab',
-  'backspace': 'backspace',
-  'delete': 'delete',
-  'minus': '-', 'numpadsubtract': '-',
-  'equal': '=',
-  'bracketleft': '[', 'bracketright': ']',
-  'semicolon': ';', 'quote': "'",
-  'comma': ',', 'period': '.', 'slash': '/',
-  'backslash': '\\',
-  'backquote': '`',
+  enter: 'enter',
+  numpadenter: 'enter',
+  space: 'space',
+  tab: 'tab',
+  backspace: 'backspace',
+  delete: 'delete',
+  minus: '-',
+  numpadsubtract: '-',
+  equal: '=',
+  bracketleft: '[',
+  bracketright: ']',
+  semicolon: ';',
+  quote: "'",
+  comma: ',',
+  period: '.',
+  slash: '/',
+  backslash: '\\',
+  backquote: '`',
   // Modifier event.code to generic modifier names
-  'altleft': 'alt', 'altright': 'alt',
-  'controlleft': 'ctrl', 'controlright': 'ctrl',
-  'shiftleft': 'shift', 'shiftright': 'shift',
-  'metaleft': 'meta', 'metaright': 'meta',
+  altleft: 'alt',
+  altright: 'alt',
+  controlleft: 'ctrl',
+  controlright: 'ctrl',
+  shiftleft: 'shift',
+  shiftright: 'shift',
+  metaleft: 'meta',
+  metaright: 'meta',
   // Arrow codes already have good key aliases (up, down, etc.)
   // but if using event.code directly, they would be 'arrowup', 'arrowdown', etc.
   // No specific code aliases needed if event.key aliases are robust.
-};
+}
 
 // --- Type Aliases and Interfaces (Internal to useKeyBindings) ---
 
@@ -135,20 +184,20 @@ type NormalizedKeyFilter = Set<string> | ((event: KeyboardEvent) => boolean);
 
 /** Normalized representation of a key combination trigger. */
 interface NormalizedTriggerCombination {
-  type: 'combination';
-  keys: Set<string>; // Set of normalized keys that must all be pressed
+  type: 'combination'
+  keys: Set<string> // Set of normalized keys that must all be pressed
 }
 
 /** Normalized representation of a key sequence trigger. */
 interface NormalizedTriggerSequence {
-  type: 'sequence';
-  sequence: string[]; // Array of normalized keys in order
+  type: 'sequence'
+  sequence: string[] // Array of normalized keys in order
 }
 
 /** Normalized representation of a single key trigger (can be a set or predicate). */
 interface NormalizedTriggerKey {
-  type: 'key';
-  filter: NormalizedKeyFilter; // Either a set of allowed keys or a predicate
+  type: 'key'
+  filter: NormalizedKeyFilter // Either a set of allowed keys or a predicate
 }
 
 /** Union type for all parsed trigger representations. */
@@ -156,15 +205,15 @@ type ParsedTrigger = NormalizedTriggerCombination | NormalizedTriggerSequence | 
 
 /** Internal structure to store registered handlers along with their parsed triggers and options. */
 interface RegisteredHandler {
-  id: number; // For easier removal
-  trigger: KeyBindingTrigger;
-  handler: (event: KeyboardEvent) => void;
-  options: KeyBindingHandlerOptions;
-  parsedTrigger: ParsedTrigger;
+  id: number // For easier removal
+  trigger: KeyBindingTrigger
+  handler: (event: KeyboardEvent) => void
+  options: KeyBindingHandlerOptions
+  parsedTrigger: ParsedTrigger
 }
 
 /** Counter for generating unique handler IDs. */
-let handlerIdCounter = 0;
+let handlerIdCounter = 0
 
 /**
  * A Vue composable for managing keyboard shortcuts, combinations, and sequences.
@@ -182,7 +231,7 @@ let handlerIdCounter = 0;
  * @property {() => void} stop - Manually stops event listeners and cleans up state.
  * @property {Readonly<Ref<boolean>>} isListening - Reactive boolean indicating if event listeners are active.
  */
-export function useKeyBindings(options: UseKeyBindingsOptions = {}) {
+export function useKeyBindings (options: UseKeyBindingsOptions = {}) {
   const {
     target = IS_CLIENT ? window : undefined,
     aliasMap: userAliasMap = {},
@@ -215,28 +264,28 @@ export function useKeyBindings(options: UseKeyBindingsOptions = {}) {
    * Normalizes a key string by converting to lowercase and applying aliases.
    * Handles platform-specific modifier normalization (meta/ctrl).
    */
-  function normalizeKey(key: string): string {
-    const lowerKey = key.toLowerCase();
+  function normalizeKey (key: string): string {
+    const lowerKey = key.toLowerCase()
     // Handle platform specific modifier normalization
-    const aliased = aliasMap[lowerKey] || lowerKey;
+    const aliased = aliasMap[lowerKey] || lowerKey
 
     // Platform-specific normalization - adapt meta/ctrl based on platform
     if (!IS_MAC && aliased === 'meta') {
-      return 'ctrl';
+      return 'ctrl'
     }
 
-    return aliased;
+    return aliased
   }
 
   /**
    * Gets the key value from the keyboard event based on configuration preferences.
    */
-  function getKeyValueFromEvent(event: KeyboardEvent): string {
+  function getKeyValueFromEvent (event: KeyboardEvent): string {
     if (preferEventCode && event.code) {
       // Always use toLowerCase for consistency with event.key normalization
-      return event.code.toLowerCase();
+      return event.code.toLowerCase()
     }
-    return event.key; // This will also be lowercased by normalizeKey
+    return event.key // This will also be lowercased by normalizeKey
   }
 
   /**
@@ -244,35 +293,35 @@ export function useKeyBindings(options: UseKeyBindingsOptions = {}) {
    * This complex function is broken into focused sections for clarity.
    */
   const onKeyEvent = (event: Event) => {
-    if (!(event instanceof KeyboardEvent)) return;
+    if (!(event instanceof KeyboardEvent)) return
 
-    const eventKey = normalizeKey(getKeyValueFromEvent(event));
-    const eventType = event.type as 'keydown' | 'keyup';
+    const eventKey = normalizeKey(getKeyValueFromEvent(event))
+    const eventType = event.type as 'keydown' | 'keyup'
 
     // 1. Update pressed keys state
-    updatePressedKeysState(eventKey, eventType);
+    updatePressedKeysState(eventKey, eventType)
 
     // 2. Update sequence state for keydown events
     if (eventType === 'keydown') {
-      updateSequenceState(eventKey);
+      updateSequenceState(eventKey)
     }
 
     // 3. Determine input blocking state for current event
-    const activeElement = IS_CLIENT ? document.activeElement : null;
+    const activeElement = IS_CLIENT ? document.activeElement : null
 
     // 4. Process handlers that match this event
-    processMatchingHandlers(event, eventKey, eventType, activeElement);
-  };
+    processMatchingHandlers(event, eventKey, eventType, activeElement)
+  }
 
   /**
    * Updates the pressed keys state based on the event type.
    */
-  function updatePressedKeysState(eventKey: string, eventType: 'keydown' | 'keyup') {
+  function updatePressedKeysState (eventKey: string, eventType: 'keydown' | 'keyup') {
     // Update the set of pressed keys
     if (eventType === 'keydown') {
-      pressedKeys.value.add(eventKey);
+      pressedKeys.value.add(eventKey)
     } else {
-      pressedKeys.value.delete(eventKey);
+      pressedKeys.value.delete(eventKey)
 
       // ---- START macOS Cmd/Meta keyup WORKAROUND ----
       // See: https://bugzilla.mozilla.org/show_bug.cgi?id=1299553
@@ -280,82 +329,82 @@ export function useKeyBindings(options: UseKeyBindingsOptions = {}) {
         // When Meta key is released on macOS, assume other non-modifier keys
         // that might have been part of a Cmd+Key combo are also "up"
         // because their keyup events might have been suppressed.
-        const keysToRemove: string[] = [];
+        const keysToRemove: string[] = []
         pressedKeys.value.forEach(pressedKey => {
           if (!modifierKeys.has(pressedKey)) {
-            keysToRemove.push(pressedKey);
+            keysToRemove.push(pressedKey)
           }
-        });
+        })
         if (keysToRemove.length > 0) {
           keysToRemove.forEach(key => {
-            pressedKeys.value.delete(key);
+            pressedKeys.value.delete(key)
             if (individualKeyStates[key]) {
-              individualKeyStates[key].value = false;
+              individualKeyStates[key].value = false
             }
-          });
+          })
         }
       }
       // ---- END macOS Cmd/Meta keyup WORKAROUND ----
     }
 
     // Update individual key state refs
-    let targetRef = individualKeyStates[eventKey];
+    let targetRef = individualKeyStates[eventKey]
     if (!targetRef) {
-      targetRef = ref(false);
-      individualKeyStates[eventKey] = targetRef;
+      targetRef = ref(false)
+      individualKeyStates[eventKey] = targetRef
     }
-    targetRef.value = (eventType === 'keydown');
+    targetRef.value = (eventType === 'keydown')
   }
 
   /**
    * Updates the sequence state, adding the key and resetting the timer.
    */
-  function updateSequenceState(eventKey: string) {
-    const MAX_SEQUENCE = 100;
-    if (sequenceTimer.value) clearTimeout(sequenceTimer.value);
-    currentSequence.value.push(eventKey);
+  function updateSequenceState (eventKey: string) {
+    const MAX_SEQUENCE = 100
+    if (sequenceTimer.value) clearTimeout(sequenceTimer.value)
+    currentSequence.value.push(eventKey)
     if (currentSequence.value.length > MAX_SEQUENCE) {
-      currentSequence.value.shift();
+      currentSequence.value.shift()
     }
     sequenceTimer.value = window.setTimeout(() => {
-      currentSequence.value = [];
-    }, sequenceTimeoutDuration);
+      currentSequence.value = []
+    }, sequenceTimeoutDuration)
   }
 
   /**
    * Processes handlers that may match the current event.
    */
-  function processMatchingHandlers(
+  function processMatchingHandlers (
     event: KeyboardEvent,
     eventKey: string,
     eventType: 'keydown' | 'keyup',
     activeElement: Element | null
   ) {
     for (const handler of activeHandlers.value) {
-      const { parsedTrigger, options: handlerOptions, handler: callback } = handler;
+      const { parsedTrigger, options: handlerOptions, handler: callback } = handler
 
       if (shouldSkipHandler(event, eventType, handlerOptions, activeElement)) {
-        continue;
+        continue
       }
 
       // Check if trigger matches the current event state
-      const matched = doesTriggerMatch(parsedTrigger, eventKey, eventType);
+      const matched = doesTriggerMatch(parsedTrigger, eventKey, eventType)
 
       if (matched) {
         // Apply handler options
         if (handlerOptions.preventDefault) {
-          event.preventDefault();
+          event.preventDefault()
         }
         if (handlerOptions.stopPropagation) {
-          event.stopPropagation();
+          event.stopPropagation()
         }
 
         // Execute the handler
-        callback(event);
+        callback(event)
 
         // Clear sequence if it was matched
         if (parsedTrigger.type === 'sequence') {
-          clearSequence();
+          clearSequence()
         }
       }
     }
@@ -364,7 +413,7 @@ export function useKeyBindings(options: UseKeyBindingsOptions = {}) {
   /**
    * Determines if a handler should be skipped based on event conditions.
    */
-  function shouldSkipHandler(
+  function shouldSkipHandler (
     event: KeyboardEvent,
     eventType: 'keydown' | 'keyup',
     handlerOptions: KeyBindingHandlerOptions,
@@ -374,26 +423,26 @@ export function useKeyBindings(options: UseKeyBindingsOptions = {}) {
       eventName: handlerEventName = 'keydown',
       ignoreKeyRepeat = false,
       ignoreInputBlocker = false,
-    } = handlerOptions;
+    } = handlerOptions
 
     // Skip if event type doesn't match
-    if (eventType !== handlerEventName) return true;
+    if (eventType !== handlerEventName) return true
 
     // Skip if ignoring key repeat and this is a repeated key
-    if (eventType === 'keydown' && ignoreKeyRepeat && event.repeat) return true;
+    if (eventType === 'keydown' && ignoreKeyRepeat && event.repeat) return true
 
     // Skip if input blocker applies and not ignoring it
     if (!ignoreInputBlocker && inputBlockerFn(activeElement) === 'deny') {
-      return true;
+      return true
     }
 
-    return false;
+    return false
   }
 
   /**
    * Checks if a trigger matches the current event/state.
    */
-  function doesTriggerMatch(
+  function doesTriggerMatch (
     parsedTrigger: ParsedTrigger,
     eventKey: string,
     eventType: 'keydown' | 'keyup'
@@ -402,83 +451,83 @@ export function useKeyBindings(options: UseKeyBindingsOptions = {}) {
       // Direct key match with function or set
       return typeof parsedTrigger.filter === 'function'
         ? parsedTrigger.filter(event as KeyboardEvent)
-        : parsedTrigger.filter.has(eventKey);
+        : parsedTrigger.filter.has(eventKey)
     }
 
     if (parsedTrigger.type === 'combination' && eventType === 'keydown') {
       // For combinations, check that all keys are pressed and this event is one of them
       if (parsedTrigger.keys.has(eventKey)) {
-        return Array.from(parsedTrigger.keys).every(k => pressedKeys.value.has(k));
+        return Array.from(parsedTrigger.keys).every(k => pressedKeys.value.has(k))
       }
     }
 
     if (parsedTrigger.type === 'sequence' && eventType === 'keydown') {
       // For sequences, check if current sequence matches the pattern
-      const seq = parsedTrigger.sequence;
+      const seq = parsedTrigger.sequence
       if (currentSequence.value.length >= seq.length) {
-        const lastPartOfSequence = currentSequence.value.slice(-seq.length);
-        return lastPartOfSequence.every((k, i) => k === seq[i]);
+        const lastPartOfSequence = currentSequence.value.slice(-seq.length)
+        return lastPartOfSequence.every((k, i) => k === seq[i])
       }
     }
 
-    return false;
+    return false
   }
 
   /**
    * Clears the current sequence state and any active timer.
    */
-  function clearSequence() {
-    currentSequence.value = [];
+  function clearSequence () {
+    currentSequence.value = []
     if (sequenceTimer.value) {
-      clearTimeout(sequenceTimer.value);
-      sequenceTimer.value = null;
+      clearTimeout(sequenceTimer.value)
+      sequenceTimer.value = null
     }
   }
 
   /**
    * Parses a KeyBindingTrigger into a normalized ParsedTrigger.
    */
-  function parseTrigger(trigger: KeyBindingTrigger, normalizeFn: (key: string) => string): ParsedTrigger {
+  function parseTrigger (trigger: KeyBindingTrigger, normalizeFn: (key: string) => string): ParsedTrigger {
     if (typeof trigger === 'function') {
-      return { type: 'key', filter: trigger };
+      return { type: 'key', filter: trigger }
     }
 
     if (Array.isArray(trigger)) {
-      const normalizedSet = new Set(trigger.map(normalizeFn));
-      return { type: 'key', filter: normalizedSet };
+      const normalizedSet = new Set(trigger.map(normalizeFn))
+      return { type: 'key', filter: normalizedSet }
     }
 
     if (typeof trigger === 'string') {
       if (trigger.includes('+') || trigger.includes('_')) {
-        let keys = trigger.split(/[+_]/).map(k => k.trim());
-        keys = keys.map(k => aliasMap[k.toLowerCase()] || k.toLowerCase());
+        let keys = trigger.split(/[+_]/).map(k => k.trim())
+        keys = keys.map(k => aliasMap[k.toLowerCase()] || k.toLowerCase())
         if (!IS_MAC && keys.includes('meta')) {
-          keys = keys.map(k => k === 'meta' ? 'ctrl' : k);
+          keys = keys.map(k => k === 'meta' ? 'ctrl' : k)
         }
-        const normalizedCombination = new Set(keys.map(normalizeFn));
+        const normalizedCombination = new Set(keys.map(normalizeFn))
         return {
           type: 'combination',
-          keys: normalizedCombination
-        };
+          keys: normalizedCombination,
+        }
       }
 
       if (trigger.includes('-') && trigger.length > 1) {
-        const seqArray = trigger.split('-').map(k => normalizeFn(k.trim()));
+        const seqArray = trigger.split('-').map(k => normalizeFn(k.trim()))
         return {
           type: 'sequence',
-          sequence: seqArray
-        };
+          sequence: seqArray,
+        }
       }
 
-      const normalizedSingleKey = new Set([normalizeFn(trigger)]);
+      const normalizedSingleKey = new Set([normalizeFn(trigger)])
       return {
         type: 'key',
-        filter: normalizedSingleKey
-      };
+        filter: normalizedSingleKey,
+      }
     }
 
-    log('warn', COMPONENT_NAME, 'Unknown trigger type', { triggerType: typeof trigger });
-    return { type: 'key', filter: () => false };
+    log('warn', COMPONENT_NAME, 'Unknown trigger type', { triggerType: typeof trigger })
+    return { type: 'key', filter: () => false }
   }
 
   /**
@@ -489,15 +538,15 @@ export function useKeyBindings(options: UseKeyBindingsOptions = {}) {
     originalHandler: (event: KeyboardEvent) => void,
     handlerOptions: KeyBindingHandlerOptions = {}
   ): (() => void) => {
-    const id = handlerIdCounter++;
-    const parsedTrigger = parseTrigger(trigger, normalizeKey);
+    const id = handlerIdCounter++
+    const parsedTrigger = parseTrigger(trigger, normalizeKey)
 
     // Apply debounce or throttle if specified
-    let finalHandler = originalHandler;
+    let finalHandler = originalHandler
     if (handlerOptions.debounce && handlerOptions.debounce > 0) {
-      finalHandler = debounce(originalHandler, handlerOptions.debounce);
+      finalHandler = debounce(originalHandler, handlerOptions.debounce)
     } else if (handlerOptions.throttle && handlerOptions.throttle > 0) {
-      finalHandler = throttle(originalHandler, handlerOptions.throttle);
+      finalHandler = throttle(originalHandler, handlerOptions.throttle)
     }
 
     const registeredHandler: RegisteredHandler = {
@@ -506,66 +555,65 @@ export function useKeyBindings(options: UseKeyBindingsOptions = {}) {
       handler: finalHandler,
       options: { ...handlerOptions },
       parsedTrigger,
-    };
+    }
 
-    activeHandlers.value.push(registeredHandler);
+    activeHandlers.value.push(registeredHandler)
 
-    const unregister = () => {
-      activeHandlers.value = activeHandlers.value.filter(h => h.id !== id);
-    };
-    return unregister;
+    return () => {
+      activeHandlers.value = activeHandlers.value.filter(h => h.id !== id)
+    }
   }
 
   /**
    * Gets or creates a reactive ref for a specific key's state.
    */
   const getKeyStateRef = (key: string): Ref<boolean> => {
-    const normalized = normalizeKey(key);
-    let targetRef = individualKeyStates[normalized];
+    const normalized = normalizeKey(key)
+    let targetRef = individualKeyStates[normalized]
     if (!targetRef) {
-      targetRef = ref(false);
-      individualKeyStates[normalized] = targetRef;
+      targetRef = ref(false)
+      individualKeyStates[normalized] = targetRef
     }
-    return targetRef;
-  };
+    return targetRef
+  }
 
   /**
    * Proxy to access key states reactively.
    */
   const keysProxy = new Proxy({} as Record<string, Ref<boolean> | ComputedRef<boolean>>, {
-    get(_, name: string) {
-      const normalizedName = normalizeKey(name as string);
+    get (_, name: string) {
+      const normalizedName = normalizeKey(name as string)
 
       // Handle combinations (ctrl+s, meta_a)
       if ((name as string).includes('+') || (name as string).includes('_')) {
         if (!combinationComputedRefs[normalizedName]) {
-          const parsed = parseTrigger(name as string, normalizeKey);
+          const parsed = parseTrigger(name as string, normalizeKey)
           if (parsed.type === 'combination') {
             combinationComputedRefs[normalizedName] = computed(() =>
               parsed.keys.size > 0 && Array.from(parsed.keys).every(k => getKeyStateRef(k).value)
-            );
+            )
           } else {
-            combinationComputedRefs[normalizedName] = computed(() => false);
+            combinationComputedRefs[normalizedName] = computed(() => false)
           }
         }
-        return combinationComputedRefs[normalizedName];
+        return combinationComputedRefs[normalizedName]
       }
 
       // Simple key
-      return readonly(getKeyStateRef(normalizedName));
-    }
-  });
+      return readonly(getKeyStateRef(normalizedName))
+    },
+  })
 
   /**
    * Returns a computed ref indicating if a key combination is currently active.
    */
   const isCombinationActive = (combination: string): ComputedRef<boolean> => {
-    const access = keysProxy[combination];
+    const access = keysProxy[combination]
     if (access && 'value' in access && typeof access.value === 'boolean') {
-        return access as ComputedRef<boolean>;
+      return access as ComputedRef<boolean>
     }
-    return computed(() => false);
-  };
+    return computed(() => false)
+  }
 
   /**
    * Starts the key event listeners.
@@ -593,16 +641,16 @@ export function useKeyBindings(options: UseKeyBindingsOptions = {}) {
     stopFunctions.length = 0
     pressedKeys.value.clear()
     currentSequence.value = []
-    if(sequenceTimer.value) clearTimeout(sequenceTimer.value)
+    if (sequenceTimer.value) clearTimeout(sequenceTimer.value)
 
     // Clear all state objects
     Object.keys(individualKeyStates).forEach(key => {
-      individualKeyStates[key].value = false;
-      delete individualKeyStates[key];
-    });
+      individualKeyStates[key].value = false
+      delete individualKeyStates[key]
+    })
     Object.keys(combinationComputedRefs).forEach(key => {
-      delete combinationComputedRefs[key];
-    });
+      delete combinationComputedRefs[key]
+    })
     internalIsListening.value = false
   }
 
@@ -615,7 +663,7 @@ export function useKeyBindings(options: UseKeyBindingsOptions = {}) {
   }
 
   /** Helper to add and remove event listeners. */
-  function useEventListener(
+  function useEventListener (
     eventTarget: EventTarget,
     event: string,
     listener: EventListener,

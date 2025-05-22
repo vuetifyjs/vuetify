@@ -166,7 +166,7 @@ export const VBtn = genericComponent<VBtnSlots>()({
       if (e.defaultPrevented) return
 
       if (link.isLink.value && (e.metaKey || e.ctrlKey || e.shiftKey || (e.button !== 0) || attrs.target === '_blank')) {
-        return;
+        return
       }
 
       link.navigate?.(e)

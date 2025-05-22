@@ -6,7 +6,7 @@ import { createGoTo, GoToSymbol } from '@/composables/goto'
 import { createIcons, IconSymbol } from '@/composables/icons'
 import { createLocale, LocaleSymbol } from '@/composables/locale'
 import { createTheme, ThemeSymbol } from '@/composables/theme'
-import { useActionCore, ActionCoreSymbol, type ActionCoreOptions as ActualActionCoreOptions, type ActionCorePublicAPI } from '@/labs/VActionCore'
+import { ActionCoreSymbol, useActionCore } from '@/labs/VActionCore'
 
 // Utilities
 import { effectScope, nextTick, reactive } from 'vue'
@@ -21,6 +21,7 @@ import type { GoToOptions } from '@/composables/goto'
 import type { IconOptions } from '@/composables/icons'
 import type { LocaleOptions, RtlOptions } from '@/composables/locale'
 import type { ThemeOptions } from '@/composables/theme'
+import type { ActionCorePublicAPI, ActionCoreOptions as ActualActionCoreOptions } from '@/labs/VActionCore'
 
 // Exports
 export * from './composables'
@@ -63,10 +64,10 @@ export function createVuetify (vuetify: VuetifyOptions = {}) {
     const date = createDate(options.date, locale)
     const goTo = createGoTo(options.goTo, locale)
 
-    let actionCoreInstance: ActionCorePublicAPI | undefined = undefined;
+    let actionCoreInstance: ActionCorePublicAPI | undefined
     if (options.actionCore) {
-      const actionCoreOpts: ActualActionCoreOptions = typeof options.actionCore === 'object' ? options.actionCore : {};
-      actionCoreInstance = useActionCore(actionCoreOpts);
+      const actionCoreOpts: ActualActionCoreOptions = typeof options.actionCore === 'object' ? options.actionCore : {}
+      actionCoreInstance = useActionCore(actionCoreOpts)
     }
 
     function install (app: App) {
@@ -101,7 +102,7 @@ export function createVuetify (vuetify: VuetifyOptions = {}) {
       app.provide(DateAdapterSymbol, date.instance)
       app.provide(GoToSymbol, goTo)
       if (actionCoreInstance) {
-        app.provide(ActionCoreSymbol, actionCoreInstance);
+        app.provide(ActionCoreSymbol, actionCoreInstance)
       }
 
       if (IN_BROWSER && options.ssr) {

@@ -1,15 +1,16 @@
-import type { ActionDefinition, ActionContext } from '../types';
+// Types
+import type { ActionContext, ActionDefinition } from '../types'
 
 // Helper function to determine if the command palette (or its search input) is the active context
 // This will be used in the `runInTextInput` predicate for most navigation actions.
 // It ensures that these hotkeys are only active when the command palette dialog is open
 // and an element within it (like the search input) is focused.
 const isCommandPaletteFocused = (activeElement: Element | null): boolean => {
-  if (!activeElement) return false;
+  if (!activeElement) return false
   // Check if the active element is the search input or within the dialog
-  const paletteDialog = activeElement.closest('.v-command-palette-dialog__content');
-  return !!paletteDialog;
-};
+  const paletteDialog = activeElement.closest('.v-command-palette-dialog__content')
+  return !!paletteDialog
+}
 
 export const commandPaletteNavigationActions: ActionDefinition[] = [
   {
@@ -89,15 +90,15 @@ export const commandPaletteNavigationActions: ActionDefinition[] = [
   //   },
   //   // Handler will call focusSearchInput()
   // }
-];
+]
 
 // Function to get the effective hotkey for an action, considering profiles
 // This could be a utility if needed elsewhere, or used directly where action definitions are displayed.
-export function getEffectiveHotkeyDisplay(action: ActionDefinition, actionCore?: ActionCorePublicAPI | null): string | undefined {
+export function getEffectiveHotkeyDisplay (action: ActionDefinition, actionCore?: ActionCorePublicAPI | null): string | undefined {
   if (!actionCore || !actionCore.activeProfile.value) {
-    return Array.isArray(action.hotkey) ? action.hotkey.join(', ') : action.hotkey;
+    return Array.isArray(action.hotkey) ? action.hotkey.join(', ') : action.hotkey
   }
-  const profileOverride = action.profiles?.[actionCore.activeProfile.value];
-  const effectiveHotkey = profileOverride?.hotkey ?? action.hotkey;
-  return Array.isArray(effectiveHotkey) ? effectiveHotkey.join(', ') : effectiveHotkey;
+  const profileOverride = action.profiles?.[actionCore.activeProfile.value]
+  const effectiveHotkey = profileOverride?.hotkey ?? action.hotkey
+  return Array.isArray(effectiveHotkey) ? effectiveHotkey.join(', ') : effectiveHotkey
 }

@@ -2,76 +2,83 @@
 // Styles
 import './VCommandPalette.scss'
 
-// Components (Vuetify)
-import { VDialog } from '@/components/VDialog'
-import { VTextField } from '@/components/VTextField'
-import { VProgressLinear } from '@/components/VProgressLinear'
-import { VCommandPaletteList, type VCommandPaletteListItemScope, type VCommandPaletteListNoResultsScope } from './VCommandPaletteList'
+// Components
 import { VCommandPaletteHeader } from './VCommandPaletteHeader'
+import { VCommandPaletteList } from './VCommandPaletteList'
 import { VCommandPaletteSearch } from './VCommandPaletteSearch'
+import { VDialog } from '@/components/VDialog'
+import { VProgressLinear } from '@/components/VProgressLinear'
 
-// Composables (Vuetify and ActionCore)
+// Composables
+import { useCommandPaletteCore } from '../../composables/useCommandPaletteCore'
+import { getEffectiveHotkeyDisplay } from '../../utils/commandPaletteNavigationActions'
 import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { ActionCoreSymbol, type ActionDefinition, type ActionCorePublicAPI } from '@/labs/VActionCore'
-import { useCommandPaletteCore, type CommandPaletteListRef, type UseCommandPaletteCoreProps } from '../../composables/useCommandPaletteCore'
-import { getEffectiveHotkeyDisplay, type commandPaletteNavigationActions } from '../../utils/commandPaletteNavigationActions' // For displaying hotkeys
+import { ActionCoreSymbol } from '@/labs/VActionCore'
 
 // Utilities
-import { ref, inject, type VNode, type Ref, computed } from 'vue'
+import { computed, inject, ref } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
+
+// Types
+import type { Ref, VNode } from 'vue'
+import type { VCommandPaletteListItemScope, VCommandPaletteListNoResultsScope } from './VCommandPaletteList'
+import type { CommandPaletteListRef, UseCommandPaletteCoreProps } from '../../composables/useCommandPaletteCore'
+import type { commandPaletteNavigationActions } from '../../utils/commandPaletteNavigationActions' // For displaying hotkeys
+import type { VTextField } from '@/components/VTextField'
+import type { ActionCorePublicAPI, ActionDefinition } from '@/labs/VActionCore'
 
 // --- START: Slot Type Definitions ---
 
 interface VCommandPaletteHeaderScopeProps {
-  parentAction?: ActionDefinition<any>;
-  navigateBack: () => void;
-  title?: string;
+  parentAction?: ActionDefinition<any>
+  navigateBack: () => void
+  title?: string
 }
 
 interface VCommandPaletteSearchControlsScopeProps {
-  searchText: Ref<string>;
-  placeholder?: string;
-  inputRef: Ref<InstanceType<typeof VTextField> | null>; // Ref for the VTextField instance itself
-  searchComponentRef: Ref<InstanceType<typeof VCommandPaletteSearch> | null>; // Ref for VCommandPaletteSearch component if default is used
-  listId: string;
-  activeDescendantId?: string;
+  searchText: Ref<string>
+  placeholder?: string
+  inputRef: Ref<InstanceType<typeof VTextField> | null> // Ref for the VTextField instance itself
+  searchComponentRef: Ref<InstanceType<typeof VCommandPaletteSearch> | null> // Ref for VCommandPaletteSearch component if default is used
+  listId: string
+  activeDescendantId?: string
   // Props for aria attributes on the input
-  ariaHasPopup: 'listbox' | undefined;
-  ariaExpanded: 'true' | 'false';
-  ariaControls: string;
-  ariaLabelledby?: string; // If a title is associated with the search input
+  ariaHasPopup: 'listbox' | undefined
+  ariaExpanded: 'true' | 'false'
+  ariaControls: string
+  ariaLabelledby?: string // If a title is associated with the search input
 }
 
 interface VCommandPaletteListWrapperScopeProps {
-  actions: readonly (ActionDefinition | { isHeader: true, title: string, id: string })[];
-  selectedIndex: Ref<number>;
-  listId: string;
-  listRef: Ref<CommandPaletteListRef | null>;
-  searchText: Ref<string>;
-  handleItemActivated: (action: ActionDefinition) => Promise<void>;
-  isLoading: Ref<boolean>;
-  itemSlot?: (scope: VCommandPaletteListItemScope) => VNode[];
-  noResultsSlot?: (scope: VCommandPaletteListNoResultsScope) => VNode[];
-  density?: 'default' | 'comfortable' | 'compact' | null;
+  actions: readonly (ActionDefinition | { isHeader: true, title: string, id: string })[]
+  selectedIndex: Ref<number>
+  listId: string
+  listRef: Ref<CommandPaletteListRef | null>
+  searchText: Ref<string>
+  handleItemActivated: (action: ActionDefinition) => Promise<void>
+  isLoading: Ref<boolean>
+  itemSlot?: (scope: VCommandPaletteListItemScope) => VNode[]
+  noResultsSlot?: (scope: VCommandPaletteListNoResultsScope) => VNode[]
+  density?: 'default' | 'comfortable' | 'compact' | null
 }
 
 interface VCommandPaletteItemScopeProps extends VCommandPaletteListItemScope {}
 interface VCommandPaletteNoResultsScopeProps extends VCommandPaletteListNoResultsScope {}
 
 interface VCommandPaletteLoaderScopeProps {
-  isLoading: Ref<boolean>;
+  isLoading: Ref<boolean>
 }
 
 interface VCommandPaletteFooterScopeProps {
-  navigationActions: typeof commandPaletteNavigationActions; // The array of navigation action definitions
-  actionCoreInstance?: ActionCorePublicAPI | null; // To resolve effective hotkeys
-  core: ReturnType<typeof useCommandPaletteCore>; // Full core access if needed
+  navigationActions: typeof commandPaletteNavigationActions // The array of navigation action definitions
+  actionCoreInstance?: ActionCorePublicAPI | null // To resolve effective hotkeys
+  core: ReturnType<typeof useCommandPaletteCore> // Full core access if needed
 }
 
 interface VCommandPaletteEmptyStateScopeProps {
-  core: ReturnType<typeof useCommandPaletteCore>;
+  core: ReturnType<typeof useCommandPaletteCore>
 }
 
 type HeaderSlotFunc = (scope: VCommandPaletteHeaderScopeProps) => VNode[];
@@ -83,22 +90,20 @@ type LoaderSlotFunc = (scope: VCommandPaletteLoaderScopeProps) => VNode[];
 type FooterSlotFunc = (scope: VCommandPaletteFooterScopeProps) => VNode[];
 type EmptyStateSlotFunc = (scope: VCommandPaletteEmptyStateScopeProps) => VNode[];
 
-
 // Combined Typed Slots for VCommandPalette
 interface VCommandPaletteTypedSlots {
-  header?: HeaderSlotFunc;
-  searchControls?: SearchControlsSlotFunc;
-  listWrapper?: ListWrapperSlotFunc;
-  item?: ItemSlotFunc; // Item slot is passed down to VCommandPaletteList or custom list
-  'no-results'?: NoResultsSlotFunc; // No-results slot is passed down
-  loader?: LoaderSlotFunc;
-  footer?: FooterSlotFunc;
-  'empty-state'?: EmptyStateSlotFunc; // When no actions are available at all
-  [key: string]: unknown;
+  header?: HeaderSlotFunc
+  searchControls?: SearchControlsSlotFunc
+  listWrapper?: ListWrapperSlotFunc
+  item?: ItemSlotFunc // Item slot is passed down to VCommandPaletteList or custom list
+  'no-results'?: NoResultsSlotFunc // No-results slot is passed down
+  loader?: LoaderSlotFunc
+  footer?: FooterSlotFunc
+  'empty-state'?: EmptyStateSlotFunc // When no actions are available at all
+  [key: string]: unknown
 }
 
 // --- END: Slot Type Definitions ---
-
 
 export const makeVCommandPaletteProps = propsFactory({
   modelValue: Boolean,
@@ -116,7 +121,7 @@ export const makeVCommandPaletteProps = propsFactory({
   },
   // Title for the palette, used in header if not overridden by slot or parent action
   title: {
-      type: String,
+    type: String,
   },
   ...makeDensityProps(),
   ...makeComponentProps(),
@@ -130,16 +135,16 @@ export const VCommandPalette = genericComponent<VCommandPaletteTypedSlots>()({
     'update:modelValue': (val: boolean) => true,
     'update:list': () => true, // Emitted by core for tests
   },
-  setup(props, { emit, slots }) {
+  setup (props, { emit, slots }) {
     provideTheme(props)
-    const typedSlots = slots as VCommandPaletteTypedSlots;
+    const typedSlots = slots as VCommandPaletteTypedSlots
 
     const { densityClasses } = useDensity(props, 'v-command-palette')
 
     const actionCore = inject(ActionCoreSymbol)
     if (!actionCore) {
       // eslint-disable-next-line no-console
-      console.warn('[Vuetify VCommandPalette] VActionCore instance not found. Keybindings and action loading will not work.');
+      console.warn('[Vuetify VCommandPalette] VActionCore instance not found. Keybindings and action loading will not work.')
     }
 
     const searchComponentRef = ref<InstanceType<typeof VCommandPaletteSearch> | null>(null)
@@ -160,13 +165,13 @@ export const VCommandPalette = genericComponent<VCommandPaletteTypedSlots>()({
              !core.isLoadingSubItems.value &&
              core.isRootLevel.value &&
              actionCore && // ensure actionCore is available
-             actionCore.allActions.value.filter((action: ActionDefinition) => !action.meta?.paletteHidden).length === 0;
-    });
+             actionCore.allActions.value.filter((action: ActionDefinition) => !action.meta?.paletteHidden).length === 0
+    })
 
     useRender(() => (
       <VDialog
-        v-model={core.isActive.value}
-        width={props.width}
+        v-model={ core.isActive.value }
+        width={ props.width }
         scrollable
         class={['v-command-palette-dialog', densityClasses.value]}
         contentClass="v-command-palette-dialog__content" // Used by isCommandPaletteFocused
@@ -178,61 +183,61 @@ export const VCommandPalette = genericComponent<VCommandPaletteTypedSlots>()({
           role="dialog" // Role is on the div inside VDialog
           aria-modal="true"
           // aria-labelledby could point to a title in the header slot or a default title
-          aria-label={props.title} // Default label, can be enhanced by header
+          aria-label={ props.title } // Default label, can be enhanced by header
           // onKeydown={core.handleKeydown} // Removed: VActionCore handles keydown globally
         >
-          {/* Empty State Slot */}
-          {typedSlots['empty-state'] && isEmptyState.value ? (
+          { /* Empty State Slot */ }
+          { typedSlots['empty-state'] && isEmptyState.value ? (
             typedSlots['empty-state']({ core })
           ) : (
             <>
               <div class="v-command-palette__top">
-              {/* Header Slot */}
-              {typedSlots.header ? typedSlots.header({
+              { /* Header Slot */ }
+              { typedSlots.header ? typedSlots.header({
                 parentAction: core.currentParentAction.value,
                 navigateBack: core.navigateBack,
                 title: core.currentLevelTitle.value || props.title,
               }) : (
                 <VCommandPaletteHeader
-                  title={core.currentLevelTitle.value || props.title}
-                  isRootLevel={core.isRootLevel.value}
-                  listId={core.listId} // core.listId is a Ref now
-                  onNavigateBack={core.navigateBack}
+                  title={ core.currentLevelTitle.value || props.title }
+                  isRootLevel={ core.isRootLevel.value }
+                  listId={ core.listId } // core.listId is a Ref now
+                  onNavigateBack={ core.navigateBack }
                 />
               )}
 
-              {/* Search Controls Slot */}
-              {typedSlots.searchControls ? typedSlots.searchControls({
+              { /* Search Controls Slot */ }
+              { typedSlots.searchControls ? typedSlots.searchControls({
                 searchText: core.searchText,
                 placeholder: props.placeholder,
                 inputRef: textFieldInstanceRef,
-                searchComponentRef: searchComponentRef,
+                searchComponentRef,
                 listId: core.listId,
                 activeDescendantId: core.activeDescendantId.value,
                 ariaHasPopup: 'listbox',
                 ariaExpanded: (core.isActive.value && core.groupedAndSortedActions.value.length > 0) ? 'true' : 'false',
                 ariaControls: core.listId,
-                ariaLabelledby: `${core.listId}-title` // Assuming header provides this ID
+                ariaLabelledby: `${core.listId}-title`, // Assuming header provides this ID
               }) : (
                 <VCommandPaletteSearch
-                  ref={searchComponentRef}
-                  inputRef={textFieldInstanceRef}
-                  modelValue={core.searchText.value}
-                  placeholder={props.placeholder}
+                  ref={ searchComponentRef }
+                  inputRef={ textFieldInstanceRef }
+                  modelValue={ core.searchText.value }
+                  placeholder={ props.placeholder }
                   autofocus
-                  onUpdate:modelValue={(val: string) => core.searchText.value = val}
+                  onUpdate:modelValue={ (val: string) => core.searchText.value = val }
                   role="combobox"
                   aria-haspopup="listbox"
-                  aria-expanded={(core.isActive.value && core.groupedAndSortedActions.value.length > 0) ? 'true' : 'false'}
-                  aria-controls={core.listId}
-                  aria-activedescendant={core.activeDescendantId.value}
+                  aria-expanded={ (core.isActive.value && core.groupedAndSortedActions.value.length > 0) ? 'true' : 'false' }
+                  aria-controls={ core.listId }
+                  aria-activedescendant={ core.activeDescendantId.value }
                   // aria-labelledby could be an ID from the header, or a general label for search
                 />
               )}
             </div>
 
-              {/* Loader Slot */}
-              {typedSlots.loader ? typedSlots.loader({
+              { /* Loader Slot */ }
+              { typedSlots.loader ? typedSlots.loader({
                 isLoading: core.isLoadingSubItems,
               }) : core.isLoadingSubItems.value && (
                 <div class="v-command-palette__loader">
@@ -240,40 +245,40 @@ export const VCommandPalette = genericComponent<VCommandPaletteTypedSlots>()({
                 </div>
               )}
 
-              {/* List Wrapper Slot */}
-              {!core.isLoadingSubItems.value && (typedSlots.listWrapper ? typedSlots.listWrapper({
-                  actions: core.groupedAndSortedActions.value,
-                  selectedIndex: core.selectedIndex,
-                  listId: core.listId,
-                  listRef: listRef,
-                  searchText: core.searchText,
-                  handleItemActivated: core.handleItemActivated,
-                  isLoading: core.isLoadingSubItems,
-                  itemSlot: typedSlots.item,
-                  noResultsSlot: typedSlots['no-results'],
-                  density: props.density,
-                }) : (
+              { /* List Wrapper Slot */ }
+              { !core.isLoadingSubItems.value && (typedSlots.listWrapper ? typedSlots.listWrapper({
+                actions: core.groupedAndSortedActions.value,
+                selectedIndex: core.selectedIndex,
+                listId: core.listId,
+                listRef,
+                searchText: core.searchText,
+                handleItemActivated: core.handleItemActivated,
+                isLoading: core.isLoadingSubItems,
+                itemSlot: typedSlots.item,
+                noResultsSlot: typedSlots['no-results'],
+                density: props.density,
+              }) : (
                   <VCommandPaletteList
-                    ref={listRef}
-                    actions={core.groupedAndSortedActions.value}
-                    selectedIndex={core.selectedIndex.value}
-                    listId={core.listId}
-                    searchText={core.searchText.value}
-                    density={props.density}
-                    onActionClick={core.handleItemActivated}
-                    onItemNavigate={core.handleItemActivated}
+                    ref={ listRef }
+                    actions={ core.groupedAndSortedActions.value }
+                    selectedIndex={ core.selectedIndex.value }
+                    listId={ core.listId }
+                    searchText={ core.searchText.value }
+                    density={ props.density }
+                    onActionClick={ core.handleItemActivated }
+                    onItemNavigate={ core.handleItemActivated }
                     v-slots={{
                       item: typedSlots.item,
                       'no-results': typedSlots['no-results'],
                     } as any} // Keep as any for now due to existing TODO about slot types
                   />
-                )
+              )
               )}
 
-              {/* Footer Slot */}
-              {typedSlots.footer && (
+              { /* Footer Slot */ }
+              { typedSlots.footer && (
                 <div class="v-command-palette__footer">
-                  {typedSlots.footer({
+                  { typedSlots.footer({
                     navigationActions: core.navigationActions,
                     actionCoreInstance: core.actionCoreInstance,
                     core,
@@ -292,16 +297,16 @@ export const VCommandPalette = genericComponent<VCommandPaletteTypedSlots>()({
       core,
       // Expose a method to get current effective keybindings for display
       getEffectiveHotkey: (actionId: string) => {
-        const action = core.navigationActions.find(a => a.id === actionId) || actionCore?.getAction(actionId);
+        const action = core.navigationActions.find(a => a.id === actionId) || actionCore?.getAction(actionId)
         if (action && actionCore) {
-          return getEffectiveHotkeyDisplay(action, actionCore);
+          return getEffectiveHotkeyDisplay(action, actionCore)
         }
-        return undefined;
+        return undefined
       },
       // Expose navigation actions for direct use if needed by parent or for building custom UI for keybindings
       navigationActions: core.navigationActions,
     }
-  }
+  },
 })
 
 export type VCommandPalette = InstanceType<typeof VCommandPalette>

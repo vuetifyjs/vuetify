@@ -1,16 +1,18 @@
 /**
  * @vitest-environment jsdom
  */
-import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
-import { ref, nextTick, onScopeDispose, defineComponent, createApp } from 'vue';
-import { useKeyBindings } from '../useKeyBindings';
-import type { KeyBindingHandlerOptions } from '../types';
+// Utilities
+import { createApp, defineComponent, nextTick, onScopeDispose, ref } from 'vue'
+import { useKeyBindings } from '../useKeyBindings'
+
+// Types
+import type { KeyBindingHandlerOptions } from '../types'
 
 // Helper to dispatch keyboard events
-function dispatchKeyEvent(target: EventTarget, type: 'keydown' | 'keyup', key: string, options: KeyboardEventInit = {}) {
-  const event = new KeyboardEvent(type, { key, bubbles: true, cancelable: true, ...options });
-  target.dispatchEvent(event);
-  return event;
+function dispatchKeyEvent (target: EventTarget, type: 'keydown' | 'keyup', key: string, options: KeyboardEventInit = {}) {
+  const event = new KeyboardEvent(type, { key, bubbles: true, cancelable: true, ...options })
+  target.dispatchEvent(event)
+  return event
 }
 
 // Component to test onScopeDispose
@@ -18,354 +20,354 @@ const TestComponent = defineComponent({
   props: {
     setupFn: Function,
   },
-  setup(props) {
-    props.setupFn?.();
-    return () => null; // Renderless component
+  setup (props) {
+    props.setupFn?.()
+    return () => null // Renderless component
   },
-});
+})
 
-function mountTestComponent(setupFn: () => void) {
-  const el = document.createElement('div');
-  document.body.appendChild(el);
-  const app = createApp(TestComponent, { setupFn });
-  app.mount(el);
+function mountTestComponent (setupFn: () => void) {
+  const el = document.createElement('div')
+  document.body.appendChild(el)
+  const app = createApp(TestComponent, { setupFn })
+  app.mount(el)
   return {
     unmount: () => {
-      app.unmount();
-      el.remove();
+      app.unmount()
+      el.remove()
     },
     app,
-  };
+  }
 }
 
 describe('useKeyBindings', () => {
-  let target: HTMLElement;
+  let target: HTMLElement
 
   beforeEach(() => {
-    target = document.createElement('div');
-    document.body.appendChild(target);
-    vi.useFakeTimers();
-  });
+    target = document.createElement('div')
+    document.body.appendChild(target)
+    vi.useFakeTimers()
+  })
 
   afterEach(() => {
     if (target.parentNode === document.body) {
-      document.body.removeChild(target);
+      document.body.removeChild(target)
     }
-    vi.clearAllMocks(); // Clear all mocks, including spies
-    vi.clearAllTimers();
-    vi.useRealTimers();
-  });
+    vi.clearAllMocks() // Clear all mocks, including spies
+    vi.clearAllTimers()
+    vi.useRealTimers()
+  })
 
   it('should initialize and stop correctly', async () => {
-    const addSpy = vi.spyOn(window, 'addEventListener');
-    const removeSpy = vi.spyOn(window, 'removeEventListener');
+    const addSpy = vi.spyOn(window, 'addEventListener')
+    const removeSpy = vi.spyOn(window, 'removeEventListener')
 
-    const { stop, isListening } = useKeyBindings({ target: window });
-    expect(isListening.value).toBe(true);
+    const { stop, isListening } = useKeyBindings({ target: window })
+    expect(isListening.value).toBe(true)
     // Check for specific listeners added by useKeyBindings
-    expect(addSpy).toHaveBeenCalledWith('keydown', expect.any(Function), expect.any(Object));
-    expect(addSpy).toHaveBeenCalledWith('keyup', expect.any(Function), expect.any(Object));
+    expect(addSpy).toHaveBeenCalledWith('keydown', expect.any(Function), expect.any(Object))
+    expect(addSpy).toHaveBeenCalledWith('keyup', expect.any(Function), expect.any(Object))
     // Ensure only these two were added by this instance, filter out unrelated calls if necessary
-    const relevantAddCalls = addSpy.mock.calls.filter(call => call[0] === 'keydown' || call[0] === 'keyup');
-    expect(relevantAddCalls.length).toBe(2);
+    const relevantAddCalls = addSpy.mock.calls.filter(call => call[0] === 'keydown' || call[0] === 'keyup')
+    expect(relevantAddCalls).toHaveLength(2)
 
-    stop();
-    await nextTick();
-    expect(isListening.value).toBe(false);
+    stop()
+    await nextTick()
+    expect(isListening.value).toBe(false)
     // Check for specific listeners removed by useKeyBindings
-    expect(removeSpy).toHaveBeenCalledWith('keydown', expect.any(Function), expect.any(Object));
-    expect(removeSpy).toHaveBeenCalledWith('keyup', expect.any(Function), expect.any(Object));
-    const relevantRemoveCalls = removeSpy.mock.calls.filter(call => call[0] === 'keydown' || call[0] === 'keyup');
-    expect(relevantRemoveCalls.length).toBe(2);
+    expect(removeSpy).toHaveBeenCalledWith('keydown', expect.any(Function), expect.any(Object))
+    expect(removeSpy).toHaveBeenCalledWith('keyup', expect.any(Function), expect.any(Object))
+    const relevantRemoveCalls = removeSpy.mock.calls.filter(call => call[0] === 'keydown' || call[0] === 'keyup')
+    expect(relevantRemoveCalls).toHaveLength(2)
 
-    addSpy.mockRestore();
-    removeSpy.mockRestore();
-  });
+    addSpy.mockRestore()
+    removeSpy.mockRestore()
+  })
 
   it('should correctly reflect individual pressed keys via keys proxy', async () => {
-    const { keys } = useKeyBindings({ target });
+    const { keys } = useKeyBindings({ target })
 
-    expect(keys.a.value).toBe(false);
-    dispatchKeyEvent(target, 'keydown', 'a');
-    await nextTick();
-    expect(keys.a.value).toBe(true);
+    expect(keys.a.value).toBe(false)
+    dispatchKeyEvent(target, 'keydown', 'a')
+    await nextTick()
+    expect(keys.a.value).toBe(true)
 
-    dispatchKeyEvent(target, 'keyup', 'a');
-    await nextTick();
-    expect(keys.a.value).toBe(false);
-  });
+    dispatchKeyEvent(target, 'keyup', 'a')
+    await nextTick()
+    expect(keys.a.value).toBe(false)
+  })
 
   it('should handle key aliases with keys proxy', async () => {
-    const { keys } = useKeyBindings({ target });
+    const { keys } = useKeyBindings({ target })
 
-    expect(keys.escape.value).toBe(false);
-    dispatchKeyEvent(target, 'keydown', 'Escape');
-    await nextTick();
-    expect(keys.escape.value).toBe(true);
-    expect(keys.esc.value).toBe(true); // aliased
+    expect(keys.escape.value).toBe(false)
+    dispatchKeyEvent(target, 'keydown', 'Escape')
+    await nextTick()
+    expect(keys.escape.value).toBe(true)
+    expect(keys.esc.value).toBe(true) // aliased
 
-    dispatchKeyEvent(target, 'keyup', 'Escape');
-    await nextTick();
-    expect(keys.escape.value).toBe(false);
-    expect(keys.esc.value).toBe(false);
-  });
+    dispatchKeyEvent(target, 'keyup', 'Escape')
+    await nextTick()
+    expect(keys.escape.value).toBe(false)
+    expect(keys.esc.value).toBe(false)
+  })
 
   it('should reflect pressedKeys set correctly', async () => {
-    const { pressedKeys } = useKeyBindings({ target });
-    expect(pressedKeys.value.size).toBe(0);
+    const { pressedKeys } = useKeyBindings({ target })
+    expect(pressedKeys.value.size).toBe(0)
 
-    dispatchKeyEvent(target, 'keydown', 'a');
-    dispatchKeyEvent(target, 'keydown', 'Shift');
-    await nextTick();
-    expect(pressedKeys.value.has('a')).toBe(true);
-    expect(pressedKeys.value.has('shift')).toBe(true);
-    expect(pressedKeys.value.size).toBe(2);
+    dispatchKeyEvent(target, 'keydown', 'a')
+    dispatchKeyEvent(target, 'keydown', 'Shift')
+    await nextTick()
+    expect(pressedKeys.value.has('a')).toBe(true)
+    expect(pressedKeys.value.has('shift')).toBe(true)
+    expect(pressedKeys.value.size).toBe(2)
 
-    dispatchKeyEvent(target, 'keyup', 'a');
-    await nextTick();
-    expect(pressedKeys.value.has('a')).toBe(false);
-    expect(pressedKeys.value.has('shift')).toBe(true);
-    expect(pressedKeys.value.size).toBe(1);
-  });
+    dispatchKeyEvent(target, 'keyup', 'a')
+    await nextTick()
+    expect(pressedKeys.value.has('a')).toBe(false)
+    expect(pressedKeys.value.has('shift')).toBe(true)
+    expect(pressedKeys.value.size).toBe(1)
+  })
 
   it('should detect combinations via keys proxy', async () => {
-    const { keys } = useKeyBindings({ target });
+    const { keys } = useKeyBindings({ target })
 
-    expect(keys['ctrl+s'].value).toBe(false);
+    expect(keys['ctrl+s'].value).toBe(false)
 
-    dispatchKeyEvent(target, 'keydown', 'Control');
-    await nextTick();
-    expect(keys.ctrl.value).toBe(true);
-    expect(keys['ctrl+s'].value).toBe(false);
+    dispatchKeyEvent(target, 'keydown', 'Control')
+    await nextTick()
+    expect(keys.ctrl.value).toBe(true)
+    expect(keys['ctrl+s'].value).toBe(false)
 
-    dispatchKeyEvent(target, 'keydown', 's');
-    await nextTick();
-    expect(keys.s.value).toBe(true);
-    expect(keys['ctrl+s'].value).toBe(true);
+    dispatchKeyEvent(target, 'keydown', 's')
+    await nextTick()
+    expect(keys.s.value).toBe(true)
+    expect(keys['ctrl+s'].value).toBe(true)
 
-    dispatchKeyEvent(target, 'keyup', 'Control');
-    await nextTick();
-    expect(keys.ctrl.value).toBe(false);
-    expect(keys['ctrl+s'].value).toBe(false);
+    dispatchKeyEvent(target, 'keyup', 'Control')
+    await nextTick()
+    expect(keys.ctrl.value).toBe(false)
+    expect(keys['ctrl+s'].value).toBe(false)
 
-    dispatchKeyEvent(target, 'keyup', 's');
-    await nextTick();
-    expect(keys.s.value).toBe(false);
-    expect(keys['ctrl+s'].value).toBe(false);
-  });
+    dispatchKeyEvent(target, 'keyup', 's')
+    await nextTick()
+    expect(keys.s.value).toBe(false)
+    expect(keys['ctrl+s'].value).toBe(false)
+  })
 
   describe('on() method', () => {
     it('should trigger handler for a single key', async () => {
-      const { on } = useKeyBindings({ target });
-      const handler = vi.fn();
-      const unregister = on('a', handler);
+      const { on } = useKeyBindings({ target })
+      const handler = vi.fn()
+      const unregister = on('a', handler)
 
-      dispatchKeyEvent(target, 'keydown', 'a');
-      await nextTick();
-      expect(handler).toHaveBeenCalledTimes(1);
+      dispatchKeyEvent(target, 'keydown', 'a')
+      await nextTick()
+      expect(handler).toHaveBeenCalledTimes(1)
 
-      dispatchKeyEvent(target, 'keydown', 'b');
-      await nextTick();
-      expect(handler).toHaveBeenCalledTimes(1); // Not called for 'b'
+      dispatchKeyEvent(target, 'keydown', 'b')
+      await nextTick()
+      expect(handler).toHaveBeenCalledTimes(1) // Not called for 'b'
 
-      unregister();
-      dispatchKeyEvent(target, 'keydown', 'a');
-      await nextTick();
-      expect(handler).toHaveBeenCalledTimes(1); // Not called after unregister
-    });
+      unregister()
+      dispatchKeyEvent(target, 'keydown', 'a')
+      await nextTick()
+      expect(handler).toHaveBeenCalledTimes(1) // Not called after unregister
+    })
 
     it('should trigger handler for a key combination', async () => {
-      const { on } = useKeyBindings({ target });
-      const handler = vi.fn();
-      const unregister = on('ctrl+a', handler);
+      const { on } = useKeyBindings({ target })
+      const handler = vi.fn()
+      const unregister = on('ctrl+a', handler)
 
-      dispatchKeyEvent(target, 'keydown', 'Control');
-      dispatchKeyEvent(target, 'keydown', 'a');
-      await nextTick();
-      expect(handler).toHaveBeenCalledTimes(1);
+      dispatchKeyEvent(target, 'keydown', 'Control')
+      dispatchKeyEvent(target, 'keydown', 'a')
+      await nextTick()
+      expect(handler).toHaveBeenCalledTimes(1)
 
-      unregister();
-      dispatchKeyEvent(target, 'keydown', 'Control');
-      dispatchKeyEvent(target, 'keydown', 'a');
-      await nextTick();
-      expect(handler).toHaveBeenCalledTimes(1); // Not called after unregister
-    });
+      unregister()
+      dispatchKeyEvent(target, 'keydown', 'Control')
+      dispatchKeyEvent(target, 'keydown', 'a')
+      await nextTick()
+      expect(handler).toHaveBeenCalledTimes(1) // Not called after unregister
+    })
 
     it('should respect eventName option (keyup)', async () => {
-      const { on } = useKeyBindings({ target });
-      const handler = vi.fn();
-      on('a', handler, { eventName: 'keyup' });
+      const { on } = useKeyBindings({ target })
+      const handler = vi.fn()
+      on('a', handler, { eventName: 'keyup' })
 
-      dispatchKeyEvent(target, 'keydown', 'a');
-      await nextTick();
-      expect(handler).not.toHaveBeenCalled();
+      dispatchKeyEvent(target, 'keydown', 'a')
+      await nextTick()
+      expect(handler).not.toHaveBeenCalled()
 
-      dispatchKeyEvent(target, 'keyup', 'a');
-      await nextTick();
-      expect(handler).toHaveBeenCalledTimes(1);
-    });
+      dispatchKeyEvent(target, 'keyup', 'a')
+      await nextTick()
+      expect(handler).toHaveBeenCalledTimes(1)
+    })
 
     it('should respect ignoreKeyRepeat option (formerly dedupe)', async () => {
-      const { on } = useKeyBindings({ target });
-      const handler = vi.fn();
-      on('a', handler, { ignoreKeyRepeat: true });
+      const { on } = useKeyBindings({ target })
+      const handler = vi.fn()
+      on('a', handler, { ignoreKeyRepeat: true })
 
-      dispatchKeyEvent(target, 'keydown', 'a'); // First event (event.repeat is false)
-      await nextTick();
-      expect(handler).toHaveBeenCalledTimes(1); // Should be called for the first non-repeated event
+      dispatchKeyEvent(target, 'keydown', 'a') // First event (event.repeat is false)
+      await nextTick()
+      expect(handler).toHaveBeenCalledTimes(1) // Should be called for the first non-repeated event
 
-      dispatchKeyEvent(target, 'keydown', 'a', { repeat: true }); // Repeated event
-      await nextTick();
-      expect(handler).toHaveBeenCalledTimes(1); // Should NOT be called again due to ignoreKeyRepeat: true
+      dispatchKeyEvent(target, 'keydown', 'a', { repeat: true }) // Repeated event
+      await nextTick()
+      expect(handler).toHaveBeenCalledTimes(1) // Should NOT be called again due to ignoreKeyRepeat: true
 
-      dispatchKeyEvent(target, 'keydown', 'a', { repeat: true }); // Another repeated event
-      await nextTick();
-      expect(handler).toHaveBeenCalledTimes(1); // Still should NOT be called again
+      dispatchKeyEvent(target, 'keydown', 'a', { repeat: true }) // Another repeated event
+      await nextTick()
+      expect(handler).toHaveBeenCalledTimes(1) // Still should NOT be called again
 
       // Release the key and press again (new, non-repeated event)
-      dispatchKeyEvent(target, 'keyup', 'a');
-      await nextTick();
-      dispatchKeyEvent(target, 'keydown', 'a'); // New press (event.repeat is false)
-      await nextTick();
-      expect(handler).toHaveBeenCalledTimes(2); // Should be called for the new non-repeated event
-    });
+      dispatchKeyEvent(target, 'keyup', 'a')
+      await nextTick()
+      dispatchKeyEvent(target, 'keydown', 'a') // New press (event.repeat is false)
+      await nextTick()
+      expect(handler).toHaveBeenCalledTimes(2) // Should be called for the new non-repeated event
+    })
 
     it('should call preventDefault and stopPropagation if specified', async () => {
-      const { on } = useKeyBindings({ target });
-      const handler = vi.fn();
-      const testKey = 'z';
+      const { on } = useKeyBindings({ target })
+      const handler = vi.fn()
+      const testKey = 'z'
 
-      let receivedEventByHandler: KeyboardEvent | null = null;
+      let receivedEventByHandler: KeyboardEvent | null = null
       const handlerWithEventCapture = (e: KeyboardEvent) => {
-        receivedEventByHandler = e;
-        handler(e);
-      };
-      on(testKey, handlerWithEventCapture, { preventDefault: true, stopPropagation: true });
+        receivedEventByHandler = e
+        handler(e)
+      }
+      on(testKey, handlerWithEventCapture, { preventDefault: true, stopPropagation: true })
 
-      const dispatchedEvent = dispatchKeyEvent(target, 'keydown', testKey);
-      await nextTick();
+      const dispatchedEvent = dispatchKeyEvent(target, 'keydown', testKey)
+      await nextTick()
 
-      expect(handler).toHaveBeenCalledTimes(1);
-      expect(receivedEventByHandler).toBe(dispatchedEvent);
-      expect(dispatchedEvent.defaultPrevented).toBe(true);
+      expect(handler).toHaveBeenCalledTimes(1)
+      expect(receivedEventByHandler).toBe(dispatchedEvent)
+      expect(dispatchedEvent.defaultPrevented).toBe(true)
       // stopPropagation is harder to assert directly without a more complex DOM setup or another listener
       // For this test, focusing on defaultPrevented is sufficient for preventDefault.
-    });
+    })
 
     it('should NOT call preventDefault if preventDefault option is false', async () => {
-      const { on } = useKeyBindings({ target });
-      const handler = vi.fn();
-      const testKey = 'x';
+      const { on } = useKeyBindings({ target })
+      const handler = vi.fn()
+      const testKey = 'x'
 
-      let receivedEventByHandler: KeyboardEvent | null = null;
+      let receivedEventByHandler: KeyboardEvent | null = null
       const handlerWithEventCapture = (e: KeyboardEvent) => {
-        receivedEventByHandler = e;
-        handler(e);
-      };
-      on(testKey, handlerWithEventCapture, { preventDefault: false });
+        receivedEventByHandler = e
+        handler(e)
+      }
+      on(testKey, handlerWithEventCapture, { preventDefault: false })
 
-      const dispatchedEvent = dispatchKeyEvent(target, 'keydown', testKey);
-      await nextTick();
+      const dispatchedEvent = dispatchKeyEvent(target, 'keydown', testKey)
+      await nextTick()
 
-      expect(handler).toHaveBeenCalledTimes(1);
-      expect(receivedEventByHandler).toBe(dispatchedEvent);
-      expect(dispatchedEvent.defaultPrevented).toBe(false);
-    });
+      expect(handler).toHaveBeenCalledTimes(1)
+      expect(receivedEventByHandler).toBe(dispatchedEvent)
+      expect(dispatchedEvent.defaultPrevented).toBe(false)
+    })
 
     it('should NOT call preventDefault if preventDefault option is undefined', async () => {
-      const { on } = useKeyBindings({ target });
-      const handler = vi.fn();
-      const testKey = 'c';
+      const { on } = useKeyBindings({ target })
+      const handler = vi.fn()
+      const testKey = 'c'
 
-      let receivedEventByHandler: KeyboardEvent | null = null;
+      let receivedEventByHandler: KeyboardEvent | null = null
       const handlerWithEventCapture = (e: KeyboardEvent) => {
-        receivedEventByHandler = e;
-        handler(e);
-      };
+        receivedEventByHandler = e
+        handler(e)
+      }
       // Pass an empty options object or one without preventDefault
-      on(testKey, handlerWithEventCapture, {});
+      on(testKey, handlerWithEventCapture, {})
 
-      const dispatchedEvent = dispatchKeyEvent(target, 'keydown', testKey);
-      await nextTick();
+      const dispatchedEvent = dispatchKeyEvent(target, 'keydown', testKey)
+      await nextTick()
 
-      expect(handler).toHaveBeenCalledTimes(1);
-      expect(receivedEventByHandler).toBe(dispatchedEvent);
-      expect(dispatchedEvent.defaultPrevented).toBe(false);
-    });
-  });
+      expect(handler).toHaveBeenCalledTimes(1)
+      expect(receivedEventByHandler).toBe(dispatchedEvent)
+      expect(dispatchedEvent.defaultPrevented).toBe(false)
+    })
+  })
 
   describe('Sequences', () => {
     it('should update currentSequence correctly', async () => {
-      const { currentSequence } = useKeyBindings({ target, sequenceTimeoutDuration: 100 });
-      expect(currentSequence.value).toEqual([]);
+      const { currentSequence } = useKeyBindings({ target, sequenceTimeoutDuration: 100 })
+      expect(currentSequence.value).toEqual([])
 
-      dispatchKeyEvent(target, 'keydown', 'g');
-      await nextTick();
-      expect(currentSequence.value).toEqual(['g']);
+      dispatchKeyEvent(target, 'keydown', 'g')
+      await nextTick()
+      expect(currentSequence.value).toEqual(['g'])
 
-      dispatchKeyEvent(target, 'keydown', 'd');
-      await nextTick();
-      expect(currentSequence.value).toEqual(['g', 'd']);
-    });
+      dispatchKeyEvent(target, 'keydown', 'd')
+      await nextTick()
+      expect(currentSequence.value).toEqual(['g', 'd'])
+    })
 
     it('should clear currentSequence after timeout', async () => {
-      const { currentSequence } = useKeyBindings({ target, sequenceTimeoutDuration: 100 });
+      const { currentSequence } = useKeyBindings({ target, sequenceTimeoutDuration: 100 })
 
-      dispatchKeyEvent(target, 'keydown', 'g');
-      await nextTick();
-      expect(currentSequence.value).toEqual(['g']);
+      dispatchKeyEvent(target, 'keydown', 'g')
+      await nextTick()
+      expect(currentSequence.value).toEqual(['g'])
 
-      vi.advanceTimersByTime(50);
-      dispatchKeyEvent(target, 'keydown', 'd');
-      await nextTick();
-      expect(currentSequence.value).toEqual(['g', 'd']); // Sequence continues
+      vi.advanceTimersByTime(50)
+      dispatchKeyEvent(target, 'keydown', 'd')
+      await nextTick()
+      expect(currentSequence.value).toEqual(['g', 'd']) // Sequence continues
 
-      vi.advanceTimersByTime(101); // Exceed timeout
-      await nextTick();
-      expect(currentSequence.value).toEqual([]); // Sequence cleared
-    });
+      vi.advanceTimersByTime(101) // Exceed timeout
+      await nextTick()
+      expect(currentSequence.value).toEqual([]) // Sequence cleared
+    })
 
     it('should trigger handler for a sequence', async () => {
-      const { on, currentSequence } = useKeyBindings({ target, sequenceTimeoutDuration: 100 });
-      const handler = vi.fn();
-      const unregister = on('g-d-s', handler);
+      const { on, currentSequence } = useKeyBindings({ target, sequenceTimeoutDuration: 100 })
+      const handler = vi.fn()
+      const unregister = on('g-d-s', handler)
 
-      dispatchKeyEvent(target, 'keydown', 'g');
-      await nextTick();
-      dispatchKeyEvent(target, 'keydown', 'd');
-      await nextTick();
-      expect(handler).not.toHaveBeenCalled();
-      expect(currentSequence.value).toEqual(['g', 'd']);
+      dispatchKeyEvent(target, 'keydown', 'g')
+      await nextTick()
+      dispatchKeyEvent(target, 'keydown', 'd')
+      await nextTick()
+      expect(handler).not.toHaveBeenCalled()
+      expect(currentSequence.value).toEqual(['g', 'd'])
 
-      dispatchKeyEvent(target, 'keydown', 's');
-      await nextTick();
-      expect(handler).toHaveBeenCalledTimes(1);
-      expect(currentSequence.value).toEqual([]);
+      dispatchKeyEvent(target, 'keydown', 's')
+      await nextTick()
+      expect(handler).toHaveBeenCalledTimes(1)
+      expect(currentSequence.value).toEqual([])
 
-      unregister();
-      dispatchKeyEvent(target, 'keydown', 'g');
-      dispatchKeyEvent(target, 'keydown', 'd');
-      dispatchKeyEvent(target, 'keydown', 's');
-      await nextTick();
-      expect(handler).toHaveBeenCalledTimes(1);
-    });
+      unregister()
+      dispatchKeyEvent(target, 'keydown', 'g')
+      dispatchKeyEvent(target, 'keydown', 'd')
+      dispatchKeyEvent(target, 'keydown', 's')
+      await nextTick()
+      expect(handler).toHaveBeenCalledTimes(1)
+    })
 
     it('should not trigger sequence if timeout occurs mid-sequence', async () => {
-      const { on } = useKeyBindings({ target, sequenceTimeoutDuration: 100 });
-      const handler = vi.fn();
-      on('g-d', handler);
+      const { on } = useKeyBindings({ target, sequenceTimeoutDuration: 100 })
+      const handler = vi.fn()
+      on('g-d', handler)
 
-      dispatchKeyEvent(target, 'keydown', 'g');
-      await nextTick();
-      vi.advanceTimersByTime(101);
-      dispatchKeyEvent(target, 'keydown', 'd');
-      await nextTick();
-      expect(handler).not.toHaveBeenCalled();
-    });
-  });
+      dispatchKeyEvent(target, 'keydown', 'g')
+      await nextTick()
+      vi.advanceTimersByTime(101)
+      dispatchKeyEvent(target, 'keydown', 'd')
+      await nextTick()
+      expect(handler).not.toHaveBeenCalled()
+    })
+  })
 
   describe('Platform Modifier Normalization (Meta/Ctrl)', () => {
-    const originalPlatform = typeof navigator !== 'undefined' ? navigator.platform : '';
+    const originalPlatform = typeof navigator !== 'undefined' ? navigator.platform : ''
 
     beforeEach(() => {
       if (typeof navigator !== 'undefined') {
@@ -373,326 +375,326 @@ describe('useKeyBindings', () => {
           value: originalPlatform,
           configurable: true,
           writable: true,
-        });
+        })
       }
       // Ensure mocks are reset for platform module before each test in this describe block
-      vi.resetModules();
-      vi.doUnmock('../platform');
-    });
+      vi.resetModules()
+      vi.doUnmock('../platform')
+    })
 
     afterEach(() => {
-      vi.resetModules();
-      vi.doUnmock('../platform');
+      vi.resetModules()
+      vi.doUnmock('../platform')
       if (typeof navigator !== 'undefined') {
         Object.defineProperty(global.navigator, 'platform', {
           value: originalPlatform,
           configurable: true,
           writable: true,
-        });
+        })
       }
-    });
+    })
 
     it('should treat "meta+s" as "ctrl+s" in combinations on non-Mac', async () => {
-      vi.doMock('../platform', async (importOriginal) => {
-        const original = await importOriginal() as any;
-        return { ...original, IS_CLIENT: true, IS_MAC: false };
-      });
-      const { useKeyBindings: freshUseKeyBindings } = await import('../useKeyBindings');
-      const { on, keys } = freshUseKeyBindings({ target });
+      vi.doMock('../platform', async importOriginal => {
+        const original = await importOriginal() as any
+        return { ...original, IS_CLIENT: true, IS_MAC: false }
+      })
+      const { useKeyBindings: freshUseKeyBindings } = await import('../useKeyBindings')
+      const { on, keys } = freshUseKeyBindings({ target })
 
-      const metaHandler = vi.fn();
-      on('meta+s', metaHandler);
-      dispatchKeyEvent(target, 'keydown', 'Control');
-      dispatchKeyEvent(target, 'keydown', 's');
-      await nextTick();
-      expect(metaHandler).toHaveBeenCalledTimes(1);
-      expect(keys.ctrl.value).toBe(true);
-      expect(keys.s.value).toBe(true);
-    });
+      const metaHandler = vi.fn()
+      on('meta+s', metaHandler)
+      dispatchKeyEvent(target, 'keydown', 'Control')
+      dispatchKeyEvent(target, 'keydown', 's')
+      await nextTick()
+      expect(metaHandler).toHaveBeenCalledTimes(1)
+      expect(keys.ctrl.value).toBe(true)
+      expect(keys.s.value).toBe(true)
+    })
 
     it('should treat "command+s" (aliased to meta+s) as "ctrl+s" on non-Mac', async () => {
-      vi.doMock('../platform', async (importOriginal) => {
-        const original = await importOriginal() as any;
-        return { ...original, IS_CLIENT: true, IS_MAC: false };
-      });
-      const { useKeyBindings: freshUseKeyBindings } = await import('../useKeyBindings');
-      const { on, keys } = freshUseKeyBindings({ target });
+      vi.doMock('../platform', async importOriginal => {
+        const original = await importOriginal() as any
+        return { ...original, IS_CLIENT: true, IS_MAC: false }
+      })
+      const { useKeyBindings: freshUseKeyBindings } = await import('../useKeyBindings')
+      const { on, keys } = freshUseKeyBindings({ target })
 
-      const commandHandler = vi.fn();
-      on('command+s', commandHandler);
-      dispatchKeyEvent(target, 'keydown', 'Control');
-      dispatchKeyEvent(target, 'keydown', 's');
-      await nextTick();
-      expect(commandHandler).toHaveBeenCalledTimes(1);
-      expect(keys.ctrl.value).toBe(true);
-      expect(keys.s.value).toBe(true);
-    });
+      const commandHandler = vi.fn()
+      on('command+s', commandHandler)
+      dispatchKeyEvent(target, 'keydown', 'Control')
+      dispatchKeyEvent(target, 'keydown', 's')
+      await nextTick()
+      expect(commandHandler).toHaveBeenCalledTimes(1)
+      expect(keys.ctrl.value).toBe(true)
+      expect(keys.s.value).toBe(true)
+    })
 
     it('should treat "meta+s" as "meta+s" (not "ctrl+s") on Mac', async () => {
-      vi.doMock('../platform', async (importOriginal) => {
-        const original = await importOriginal() as any;
-        return { ...original, IS_CLIENT: true, IS_MAC: true };
-      });
-      const { useKeyBindings: freshUseKeyBindingsMac } = await import('../useKeyBindings');
-      const { on, keys } = freshUseKeyBindingsMac({ target });
+      vi.doMock('../platform', async importOriginal => {
+        const original = await importOriginal() as any
+        return { ...original, IS_CLIENT: true, IS_MAC: true }
+      })
+      const { useKeyBindings: freshUseKeyBindingsMac } = await import('../useKeyBindings')
+      const { on, keys } = freshUseKeyBindingsMac({ target })
 
-      const metaHandler = vi.fn();
-      const ctrlHandler = vi.fn();
-      on('meta+s', metaHandler);
-      on('ctrl+s', ctrlHandler);
+      const metaHandler = vi.fn()
+      const ctrlHandler = vi.fn()
+      on('meta+s', metaHandler)
+      on('ctrl+s', ctrlHandler)
 
       // Test Meta+S on Mac
-      dispatchKeyEvent(target, 'keydown', 'Meta');
-      dispatchKeyEvent(target, 'keydown', 's');
-      await nextTick();
-      expect(metaHandler).toHaveBeenCalledTimes(1);
-      expect(ctrlHandler).not.toHaveBeenCalled(); // This was the failing assertion
-      expect(keys.meta.value).toBe(true);
-      expect(keys.s.value).toBe(true);
-      dispatchKeyEvent(target, 'keyup', 'Meta');
-      dispatchKeyEvent(target, 'keyup', 's');
-      await nextTick();
+      dispatchKeyEvent(target, 'keydown', 'Meta')
+      dispatchKeyEvent(target, 'keydown', 's')
+      await nextTick()
+      expect(metaHandler).toHaveBeenCalledTimes(1)
+      expect(ctrlHandler).not.toHaveBeenCalled() // This was the failing assertion
+      expect(keys.meta.value).toBe(true)
+      expect(keys.s.value).toBe(true)
+      dispatchKeyEvent(target, 'keyup', 'Meta')
+      dispatchKeyEvent(target, 'keyup', 's')
+      await nextTick()
 
       // Clear mocks before next set of dispatches
-      metaHandler.mockClear();
-      ctrlHandler.mockClear();
+      metaHandler.mockClear()
+      ctrlHandler.mockClear()
 
       // Test Ctrl+S on Mac
-      dispatchKeyEvent(target, 'keydown', 'Control');
-      dispatchKeyEvent(target, 'keydown', 's');
-      await nextTick();
-      expect(metaHandler).not.toHaveBeenCalled();
-      expect(ctrlHandler).toHaveBeenCalledTimes(1);
-      expect(keys.ctrl.value).toBe(true);
-      expect(keys.s.value).toBe(true);
-    });
-  });
+      dispatchKeyEvent(target, 'keydown', 'Control')
+      dispatchKeyEvent(target, 'keydown', 's')
+      await nextTick()
+      expect(metaHandler).not.toHaveBeenCalled()
+      expect(ctrlHandler).toHaveBeenCalledTimes(1)
+      expect(keys.ctrl.value).toBe(true)
+      expect(keys.s.value).toBe(true)
+    })
+  })
 
   describe('preferEventCode Behavior', () => {
     it('should trigger alt+s with preferEventCode when Option+S is pressed (Mac behavior: key="ß", code="KeyS")', async () => {
       // This test assumes preferEventCode=true is the default for useKeyBindings
       // or is explicitly passed if we want to test non-default.
       // Since we changed the default to true, this test will use that.
-      const { on, pressedKeys } = useKeyBindings({ target });
-      const handler = vi.fn();
-      const hotkeyString = 'alt+s';
-      on(hotkeyString, handler, { preventDefault: true });
+      const { on, pressedKeys } = useKeyBindings({ target })
+      const handler = vi.fn()
+      const hotkeyString = 'alt+s'
+      on(hotkeyString, handler, { preventDefault: true })
 
       // Simulate Option keydown
-      let event = dispatchKeyEvent(target, 'keydown', 'Alt', { code: 'AltLeft', altKey: true });
-      await nextTick();
-      expect(pressedKeys.value.has('alt')).toBe(true);
+      let event = dispatchKeyEvent(target, 'keydown', 'Alt', { code: 'AltLeft', altKey: true })
+      await nextTick()
+      expect(pressedKeys.value.has('alt')).toBe(true)
 
       // Simulate S keydown (while Option is held)
       // This mimics macOS behavior where event.key is 'ß' but event.code is 'KeyS'
-      event = dispatchKeyEvent(target, 'keydown', 'ß', { code: 'KeyS', altKey: true });
-      await nextTick();
+      event = dispatchKeyEvent(target, 'keydown', 'ß', { code: 'KeyS', altKey: true })
+      await nextTick()
 
-      expect(pressedKeys.value.has('s')).toBe(true); // 'KeyS' should be aliased to 's'
-      expect(handler).toHaveBeenCalledTimes(1);
-      expect(event.defaultPrevented).toBe(true);
+      expect(pressedKeys.value.has('s')).toBe(true) // 'KeyS' should be aliased to 's'
+      expect(handler).toHaveBeenCalledTimes(1)
+      expect(event.defaultPrevented).toBe(true)
 
       // Simulate S keyup
-      dispatchKeyEvent(target, 'keyup', 'ß', { code: 'KeyS', altKey: true });
-      await nextTick();
-      expect(pressedKeys.value.has('s')).toBe(false);
+      dispatchKeyEvent(target, 'keyup', 'ß', { code: 'KeyS', altKey: true })
+      await nextTick()
+      expect(pressedKeys.value.has('s')).toBe(false)
 
       // Simulate Option keyup
-      dispatchKeyEvent(target, 'keyup', 'Alt', { code: 'AltLeft', altKey: false });
-      await nextTick();
-      expect(pressedKeys.value.has('alt')).toBe(false);
-    });
-  });
+      dispatchKeyEvent(target, 'keyup', 'Alt', { code: 'AltLeft', altKey: false })
+      await nextTick()
+      expect(pressedKeys.value.has('alt')).toBe(false)
+    })
+  })
 
   describe('Input Blocking', () => {
-    let inputElement: HTMLInputElement;
-    let textareaElement: HTMLTextAreaElement;
-    let divElement: HTMLDivElement;
+    let inputElement: HTMLInputElement
+    let textareaElement: HTMLTextAreaElement
+    let divElement: HTMLDivElement
 
     beforeEach(() => {
-      inputElement = document.createElement('input');
-      textareaElement = document.createElement('textarea');
-      divElement = document.createElement('div');
-      document.body.appendChild(inputElement);
-      document.body.appendChild(textareaElement);
-      document.body.appendChild(divElement);
-    });
+      inputElement = document.createElement('input')
+      textareaElement = document.createElement('textarea')
+      divElement = document.createElement('div')
+      document.body.appendChild(inputElement)
+      document.body.appendChild(textareaElement)
+      document.body.appendChild(divElement)
+    })
 
     afterEach(() => {
-      inputElement.remove();
-      textareaElement.remove();
-      divElement.remove();
-    });
+      inputElement.remove()
+      textareaElement.remove()
+      divElement.remove()
+    })
 
     it('should block handler by default when an input is focused', async () => {
-      const { on } = useKeyBindings({ target });
-      const handler = vi.fn();
-      on('a', handler);
-      inputElement.focus();
-      await nextTick();
-      expect(document.activeElement).toBe(inputElement);
-      dispatchKeyEvent(target, 'keydown', 'a');
-      await nextTick();
-      expect(handler).not.toHaveBeenCalled();
-    });
+      const { on } = useKeyBindings({ target })
+      const handler = vi.fn()
+      on('a', handler)
+      inputElement.focus()
+      await nextTick()
+      expect(document.activeElement).toBe(inputElement)
+      dispatchKeyEvent(target, 'keydown', 'a')
+      await nextTick()
+      expect(handler).not.toHaveBeenCalled()
+    })
 
     it('should block handler by default when a textarea is focused', async () => {
-      const { on } = useKeyBindings({ target });
-      const handler = vi.fn();
-      on('a', handler);
-      textareaElement.focus();
-      await nextTick();
-      expect(document.activeElement).toBe(textareaElement);
-      dispatchKeyEvent(target, 'keydown', 'a');
-      await nextTick();
-      expect(handler).not.toHaveBeenCalled();
-    });
+      const { on } = useKeyBindings({ target })
+      const handler = vi.fn()
+      on('a', handler)
+      textareaElement.focus()
+      await nextTick()
+      expect(document.activeElement).toBe(textareaElement)
+      dispatchKeyEvent(target, 'keydown', 'a')
+      await nextTick()
+      expect(handler).not.toHaveBeenCalled()
+    })
 
     it('should NOT block handler by default when a non-input element is focused', async () => {
-      const { on } = useKeyBindings({ target });
-      const handler = vi.fn();
-      on('a', handler);
-      divElement.focus(); // Focus the div, not a standard input
+      const { on } = useKeyBindings({ target })
+      const handler = vi.fn()
+      on('a', handler)
+      divElement.focus() // Focus the div, not a standard input
       // In JSDOM, if div is not focusable or focus moves, activeElement might revert to body
       // For robustness, ensure the div IS the active element if it's focusable, or test against body
       if (document.activeElement !== divElement) {
         // Fallback: if div didn't take focus, ensure body is what we test against if that's JSDOM's behavior
-        document.body.focus();
+        document.body.focus()
       }
-      expect(document.activeElement === divElement || document.activeElement === document.body).toBe(true);
-      dispatchKeyEvent(target, 'keydown', 'a');
-      await nextTick();
-      expect(handler).toHaveBeenCalledTimes(1);
-    });
+      expect(document.activeElement === divElement || document.activeElement === document.body).toBe(true)
+      dispatchKeyEvent(target, 'keydown', 'a')
+      await nextTick()
+      expect(handler).toHaveBeenCalledTimes(1)
+    })
 
     it('should NOT block handler by default when no element is focused (activeElement is body in JSDOM)', async () => {
-      const { on } = useKeyBindings({ target });
-      const handler = vi.fn();
-      on('a', handler);
+      const { on } = useKeyBindings({ target })
+      const handler = vi.fn()
+      on('a', handler)
       if (document.activeElement && (document.activeElement as HTMLElement).blur) {
-        (document.activeElement as HTMLElement).blur();
+        (document.activeElement as HTMLElement).blur()
       }
-      expect(document.activeElement).toBe(document.body);
-      dispatchKeyEvent(target, 'keydown', 'a');
-      await nextTick();
-      expect(handler).toHaveBeenCalledTimes(1);
-    });
+      expect(document.activeElement).toBe(document.body)
+      dispatchKeyEvent(target, 'keydown', 'a')
+      await nextTick()
+      expect(handler).toHaveBeenCalledTimes(1)
+    })
 
     it('should allow handler when ignoreInputBlocker is true, even if input is focused', async () => {
-      const { on } = useKeyBindings({ target });
-      const handler = vi.fn();
-      on('a', handler, { ignoreInputBlocker: true });
-      inputElement.focus();
-      expect(document.activeElement).toBe(inputElement);
-      dispatchKeyEvent(target, 'keydown', 'a');
-      await nextTick();
-      expect(handler).toHaveBeenCalledTimes(1);
-    });
+      const { on } = useKeyBindings({ target })
+      const handler = vi.fn()
+      on('a', handler, { ignoreInputBlocker: true })
+      inputElement.focus()
+      expect(document.activeElement).toBe(inputElement)
+      dispatchKeyEvent(target, 'keydown', 'a')
+      await nextTick()
+      expect(handler).toHaveBeenCalledTimes(1)
+    })
 
     it('should respect a custom inputBlockerFn returning "deny" from options', async () => {
-      const customBlocker = vi.fn((el: Element | null) => (el === inputElement ? 'deny' : 'allow') as 'allow' | 'deny' | 'named');
-      const { on } = useKeyBindings({ target, inputBlockerFn: customBlocker });
-      const handler = vi.fn();
-      on('a', handler);
-      inputElement.focus();
-      await nextTick();
-      expect(document.activeElement).toBe(inputElement);
-      dispatchKeyEvent(target, 'keydown', 'a');
-      await nextTick();
-      expect(handler).not.toHaveBeenCalled();
-      expect(customBlocker).toHaveBeenCalledWith(inputElement);
-    });
-  });
+      const customBlocker = vi.fn((el: Element | null) => (el === inputElement ? 'deny' : 'allow') as 'allow' | 'deny' | 'named')
+      const { on } = useKeyBindings({ target, inputBlockerFn: customBlocker })
+      const handler = vi.fn()
+      on('a', handler)
+      inputElement.focus()
+      await nextTick()
+      expect(document.activeElement).toBe(inputElement)
+      dispatchKeyEvent(target, 'keydown', 'a')
+      await nextTick()
+      expect(handler).not.toHaveBeenCalled()
+      expect(customBlocker).toHaveBeenCalledWith(inputElement)
+    })
+  })
 
   describe('Debounce and Throttle', () => {
     it('should debounce handler calls', async () => {
-      const { on } = useKeyBindings({ target });
-      const handler = vi.fn();
-      const debounceTime = 100;
-      on('a', handler, { debounce: debounceTime });
-      dispatchKeyEvent(target, 'keydown', 'a');
-      dispatchKeyEvent(target, 'keydown', 'a');
-      dispatchKeyEvent(target, 'keydown', 'a');
-      await nextTick();
-      expect(handler).not.toHaveBeenCalled();
-      vi.advanceTimersByTime(debounceTime - 1);
-      expect(handler).not.toHaveBeenCalled();
-      vi.advanceTimersByTime(1);
-      await nextTick();
-      expect(handler).toHaveBeenCalledTimes(1);
-      dispatchKeyEvent(target, 'keydown', 'a');
-      dispatchKeyEvent(target, 'keydown', 'a');
-      await nextTick();
-      vi.advanceTimersByTime(debounceTime);
-      await nextTick();
-      expect(handler).toHaveBeenCalledTimes(2);
-    });
+      const { on } = useKeyBindings({ target })
+      const handler = vi.fn()
+      const debounceTime = 100
+      on('a', handler, { debounce: debounceTime })
+      dispatchKeyEvent(target, 'keydown', 'a')
+      dispatchKeyEvent(target, 'keydown', 'a')
+      dispatchKeyEvent(target, 'keydown', 'a')
+      await nextTick()
+      expect(handler).not.toHaveBeenCalled()
+      vi.advanceTimersByTime(debounceTime - 1)
+      expect(handler).not.toHaveBeenCalled()
+      vi.advanceTimersByTime(1)
+      await nextTick()
+      expect(handler).toHaveBeenCalledTimes(1)
+      dispatchKeyEvent(target, 'keydown', 'a')
+      dispatchKeyEvent(target, 'keydown', 'a')
+      await nextTick()
+      vi.advanceTimersByTime(debounceTime)
+      await nextTick()
+      expect(handler).toHaveBeenCalledTimes(2)
+    })
 
     it('should throttle handler calls for distinct execution windows', async () => {
-      const { on } = useKeyBindings({ target });
-      const handler = vi.fn();
-      const throttleTime = 100;
-      on('a', handler, { throttle: throttleTime });
-      dispatchKeyEvent(target, 'keydown', 'a');
-      await nextTick();
-      expect(handler).toHaveBeenCalledTimes(1);
-      dispatchKeyEvent(target, 'keydown', 'a');
-      dispatchKeyEvent(target, 'keydown', 'a');
-      await nextTick();
-      expect(handler).toHaveBeenCalledTimes(1);
-      vi.advanceTimersByTime(throttleTime + 1);
-      await nextTick();
-      expect(handler).toHaveBeenCalledTimes(2);
-      dispatchKeyEvent(target, 'keydown', 'a');
-      await nextTick();
-      expect(handler).toHaveBeenCalledTimes(2);
-      vi.advanceTimersByTime(throttleTime + 1);
-      await nextTick();
-      expect(handler).toHaveBeenCalledTimes(3);
-      vi.advanceTimersByTime(throttleTime + 1);
-      dispatchKeyEvent(target, 'keydown', 'a');
-      await nextTick();
-      expect(handler).toHaveBeenCalledTimes(4);
-    });
+      const { on } = useKeyBindings({ target })
+      const handler = vi.fn()
+      const throttleTime = 100
+      on('a', handler, { throttle: throttleTime })
+      dispatchKeyEvent(target, 'keydown', 'a')
+      await nextTick()
+      expect(handler).toHaveBeenCalledTimes(1)
+      dispatchKeyEvent(target, 'keydown', 'a')
+      dispatchKeyEvent(target, 'keydown', 'a')
+      await nextTick()
+      expect(handler).toHaveBeenCalledTimes(1)
+      vi.advanceTimersByTime(throttleTime + 1)
+      await nextTick()
+      expect(handler).toHaveBeenCalledTimes(2)
+      dispatchKeyEvent(target, 'keydown', 'a')
+      await nextTick()
+      expect(handler).toHaveBeenCalledTimes(2)
+      vi.advanceTimersByTime(throttleTime + 1)
+      await nextTick()
+      expect(handler).toHaveBeenCalledTimes(3)
+      vi.advanceTimersByTime(throttleTime + 1)
+      dispatchKeyEvent(target, 'keydown', 'a')
+      await nextTick()
+      expect(handler).toHaveBeenCalledTimes(4)
+    })
 
     it('debounce should take precedence over throttle', async () => {
-      const { on } = useKeyBindings({ target });
-      const handler = vi.fn();
-      const debounceTime = 100;
-      const throttleTime = 50;
-      on('a', handler, { debounce: debounceTime, throttle: throttleTime });
-      dispatchKeyEvent(target, 'keydown', 'a');
-      dispatchKeyEvent(target, 'keydown', 'a');
-      await nextTick();
-      expect(handler).not.toHaveBeenCalled();
-      vi.advanceTimersByTime(throttleTime);
-      expect(handler).not.toHaveBeenCalled();
-      vi.advanceTimersByTime(debounceTime - throttleTime + 1);
-      await nextTick();
-      expect(handler).toHaveBeenCalledTimes(1);
-    });
-  });
+      const { on } = useKeyBindings({ target })
+      const handler = vi.fn()
+      const debounceTime = 100
+      const throttleTime = 50
+      on('a', handler, { debounce: debounceTime, throttle: throttleTime })
+      dispatchKeyEvent(target, 'keydown', 'a')
+      dispatchKeyEvent(target, 'keydown', 'a')
+      await nextTick()
+      expect(handler).not.toHaveBeenCalled()
+      vi.advanceTimersByTime(throttleTime)
+      expect(handler).not.toHaveBeenCalled()
+      vi.advanceTimersByTime(debounceTime - throttleTime + 1)
+      await nextTick()
+      expect(handler).toHaveBeenCalledTimes(1)
+    })
+  })
 
   describe('onScopeDispose behavior', () => {
     it('should call stop() when the component scope is disposed', async () => {
-      const removeEventListenerSpy = vi.spyOn(window, 'removeEventListener');
-      let bindingsInstance: ReturnType<typeof useKeyBindings> | null = null;
+      const removeEventListenerSpy = vi.spyOn(window, 'removeEventListener')
+      let bindingsInstance: ReturnType<typeof useKeyBindings> | null = null
       const setupFn = () => {
-        bindingsInstance = useKeyBindings({ target: window });
-      };
-      const { unmount } = mountTestComponent(setupFn);
-      expect(bindingsInstance).not.toBeNull();
-      expect(bindingsInstance!.isListening.value).toBe(true);
-      const initialRemoveCallCount = removeEventListenerSpy.mock.calls.length;
-      unmount();
-      await nextTick();
-      expect(bindingsInstance!.isListening.value).toBe(false);
+        bindingsInstance = useKeyBindings({ target: window })
+      }
+      const { unmount } = mountTestComponent(setupFn)
+      expect(bindingsInstance).not.toBeNull()
+      expect(bindingsInstance!.isListening.value).toBe(true)
+      const initialRemoveCallCount = removeEventListenerSpy.mock.calls.length
+      unmount()
+      await nextTick()
+      expect(bindingsInstance!.isListening.value).toBe(false)
       // Check that the specific listeners were removed
-      const relevantRemoveCalls = removeEventListenerSpy.mock.calls.slice(initialRemoveCallCount);
-      expect(relevantRemoveCalls.some(call => call[0] === 'keydown')).toBe(true);
-      expect(relevantRemoveCalls.some(call => call[0] === 'keyup')).toBe(true);
-      expect(relevantRemoveCalls.length).toBe(2); // Exactly two relevant calls
-      removeEventListenerSpy.mockRestore();
-    });
-  });
-});
+      const relevantRemoveCalls = removeEventListenerSpy.mock.calls.slice(initialRemoveCallCount)
+      expect(relevantRemoveCalls.some(call => call[0] === 'keydown')).toBe(true)
+      expect(relevantRemoveCalls.some(call => call[0] === 'keyup')).toBe(true)
+      expect(relevantRemoveCalls).toHaveLength(2) // Exactly two relevant calls
+      removeEventListenerSpy.mockRestore()
+    })
+  })
+})

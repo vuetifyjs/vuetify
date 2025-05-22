@@ -1,10 +1,16 @@
-import { computed, ref, watch, nextTick, unref, shallowRef, type Ref, onMounted, onUnmounted } from 'vue'
+// Composables
 import { useProxiedModel } from '@/composables/proxiedModel'
-import { type ActionCorePublicAPI, type ActionDefinition, type ActionContext } from '@/labs/VActionCore'
+
+// Utilities
+import { computed, nextTick, onMounted, onUnmounted, ref, shallowRef, unref, watch } from 'vue'
 import { useId } from 'vue'
+
+// Types
+import type { Ref } from 'vue'
+import { defaultGroupPriorities, isHeaderItem, isPromise, log, UNGROUPED_PRIORITY, UNGROUPED_TITLE } from '../utils'
+import { commandPaletteNavigationActions as baseNavigationActions } from '../utils/commandPaletteNavigationActions'
 import type { VTextField } from '@/components/VTextField' // For searchInputRef type
-import { isHeaderItem, defaultGroupPriorities, UNGROUPED_PRIORITY, UNGROUPED_TITLE, isPromise, log } from '../utils'
-import { commandPaletteNavigationActions as baseNavigationActions } from '../utils/commandPaletteNavigationActions';
+import type { ActionContext, ActionCorePublicAPI, ActionDefinition } from '@/labs/VActionCore'
 
 // Types from VCommandPalette.tsx
 export interface PaletteLevel { // Exporting PaletteLevel
@@ -32,9 +38,9 @@ export interface CommandPaletteListRef extends HTMLElement {
 }
 
 // Store for action source keys to unregister them later
-let paletteNavigationActionsSourceKey: symbol | null = null;
+let paletteNavigationActionsSourceKey: symbol | null = null
 
-export function useCommandPaletteCore(
+export function useCommandPaletteCore (
   props: UseCommandPaletteCoreProps,
   actionCore: ActionCorePublicAPI | null | undefined,
   emit: CommandPaletteEmit,
@@ -43,7 +49,7 @@ export function useCommandPaletteCore(
   listRef: Ref<CommandPaletteListRef | null>
 ) {
   // Reactive flag whether the palette is visible (controlled by v-model)
-  const isActive: Ref<boolean> = useProxiedModel(props, 'modelValue');
+  const isActive: Ref<boolean> = useProxiedModel(props, 'modelValue')
 
   const searchText = ref('')
   const selectedIndex = ref(0)
@@ -53,7 +59,7 @@ export function useCommandPaletteCore(
 
   const currentLevel = computed<PaletteLevel | undefined>(() => actionStack.value[actionStack.value.length - 1])
   const currentParentAction = computed(() => currentLevel.value?.parentAction)
-  const currentLevelTitle = computed(() => unref(currentParentAction.value?.title) || currentLevel.value?.title || undefined )
+  const currentLevelTitle = computed(() => unref(currentParentAction.value?.title) || currentLevel.value?.title || undefined)
   const isRootLevel = computed(() => actionStack.value.length <= 1)
 
   const initializeStack = () => {
@@ -70,22 +76,22 @@ export function useCommandPaletteCore(
     // Re-initialize stack if actionCore actions change AND palette is active
     // This avoids re-initializing (and losing current sub-item navigation) if actions change while palette is closed.
     if (isActive.value) {
-      initializeStack();
+      initializeStack()
     }
-  }, { deep: true }); // Removed immediate: true, initializeStack is called in isActive watcher
+  }, { deep: true }) // Removed immediate: true, initializeStack is called in isActive watcher
 
   const focusSearchInput = () => {
     nextTick(() => {
       try {
         if (searchInputRef.value && typeof searchInputRef.value.focus === 'function') {
-          searchInputRef.value.focus();
+          searchInputRef.value.focus()
         } else {
           log('debug', 'CommandPaletteCore', 'search input not available or focus is not a function')
         }
       } catch (err) {
         log('debug', 'CommandPaletteCore', 'focus error', err)
       }
-    });
+    })
   }
 
   watch(isActive, (val, oldVal) => {
@@ -141,7 +147,7 @@ export function useCommandPaletteCore(
       return a.localeCompare(b)
     })
 
-    const result: ({ isHeader: true; title: string; id: string } | ActionDefinition)[] = []
+    const result: ({ isHeader: true, title: string, id: string } | ActionDefinition)[] = []
     sortedGroupNames.forEach(groupName => {
       result.push({ isHeader: true, title: groupName, id: `group-header-${groupName}` })
       groups[groupName].sort((a, b) => {
@@ -173,7 +179,7 @@ export function useCommandPaletteCore(
     emit('update:list')
   }, { deep: true, immediate: true })
 
-  const getItemHtmlId = (itemInput: ActionDefinition | { isHeader: true; title: string; id: string }, index: number): string => {
+  const getItemHtmlId = (itemInput: ActionDefinition | { isHeader: true, title: string, id: string }, index: number): string => {
     if (isHeaderItem(itemInput)) {
       return `${listId}-${itemInput.id}-${index}` // Headers now have own ID
     }
@@ -196,7 +202,7 @@ export function useCommandPaletteCore(
     return undefined
   })
 
-  async function executeCoreAction(action: ActionDefinition) {
+  async function executeCoreAction (action: ActionDefinition) {
     if (!actionCore) return
     try {
       await actionCore.executeAction(action.id, { trigger: 'command-palette' })
@@ -209,7 +215,7 @@ export function useCommandPaletteCore(
     }
   }
 
-  async function navigateToSubItems(action: ActionDefinition) {
+  async function navigateToSubItems (action: ActionDefinition) {
     if (!action.subItems || typeof action.subItems !== 'function') return
 
     isLoadingSubItems.value = true
@@ -241,7 +247,7 @@ export function useCommandPaletteCore(
     }
   }
 
-  async function handleItemActivated(action: ActionDefinition) {
+  async function handleItemActivated (action: ActionDefinition) {
     if (action.subItems && typeof action.subItems === 'function') {
       await navigateToSubItems(action)
     } else {
@@ -249,7 +255,7 @@ export function useCommandPaletteCore(
     }
   }
 
-  async function navigateBack() {
+  async function navigateBack () {
     if (!isRootLevel.value) {
       actionStack.value = actionStack.value.slice(0, -1)
       searchText.value = ''
@@ -259,7 +265,7 @@ export function useCommandPaletteCore(
     }
   }
 
-  async function scrollToSelected() {
+  async function scrollToSelected () {
     await nextTick()
     const currentItem = groupedAndSortedActions.value[selectedIndex.value]
     if (currentItem && !isHeaderItem(currentItem)) {
@@ -274,99 +280,99 @@ export function useCommandPaletteCore(
   // --- Start: VActionCore Navigation Integration ---
   const navigationActionHandlers = {
     navigateDown: async () => {
-      const items = groupedAndSortedActions.value;
-      if (!items || items.length === 0) return;
-      let newIndex = selectedIndex.value;
+      const items = groupedAndSortedActions.value
+      if (!items || items.length === 0) return
+      let newIndex = selectedIndex.value
       do {
-        newIndex = (newIndex + 1);
-        if (newIndex >= items.length) newIndex = 0;
-      } while (items.length > 1 && isHeaderItem(items[newIndex]) && newIndex !== selectedIndex.value);
-      selectedIndex.value = newIndex;
-      await scrollToSelected();
+        newIndex = (newIndex + 1)
+        if (newIndex >= items.length) newIndex = 0
+      } while (items.length > 1 && isHeaderItem(items[newIndex]) && newIndex !== selectedIndex.value)
+      selectedIndex.value = newIndex
+      await scrollToSelected()
     },
     navigateUp: async () => {
-      const items = groupedAndSortedActions.value;
-      if (!items || items.length === 0) return;
-      let newIndex = selectedIndex.value;
+      const items = groupedAndSortedActions.value
+      if (!items || items.length === 0) return
+      let newIndex = selectedIndex.value
       do {
-        newIndex = (newIndex - 1 + items.length);
-        newIndex %= items.length;
-      } while (items.length > 1 && isHeaderItem(items[newIndex]) && newIndex !== selectedIndex.value);
-      selectedIndex.value = newIndex;
-      await scrollToSelected();
+        newIndex = (newIndex - 1 + items.length)
+        newIndex %= items.length
+      } while (items.length > 1 && isHeaderItem(items[newIndex]) && newIndex !== selectedIndex.value)
+      selectedIndex.value = newIndex
+      await scrollToSelected()
     },
     navigatePageDown: async () => {
-      const items = groupedAndSortedActions.value;
-      if (!items || items.length === 0) return;
-      let newIndex = selectedIndex.value;
-      const BATCH_SIZE = 5;
+      const items = groupedAndSortedActions.value
+      if (!items || items.length === 0) return
+      let newIndex = selectedIndex.value
+      const BATCH_SIZE = 5
       for (let i = 0; i < BATCH_SIZE; i++) {
-        let tempIndex = newIndex;
+        let tempIndex = newIndex
         do {
-          tempIndex = (tempIndex + 1);
-          if (tempIndex >= items.length) tempIndex = items.length - 1;
-        } while (items.length > 1 && isHeaderItem(items[tempIndex]) && tempIndex !== newIndex && tempIndex < items.length - 1);
-        if (tempIndex === newIndex && i > 0) break; // Avoid infinite loop if all remaining are headers
-        newIndex = tempIndex;
-        if (newIndex >= items.length - 1) break;
+          tempIndex = (tempIndex + 1)
+          if (tempIndex >= items.length) tempIndex = items.length - 1
+        } while (items.length > 1 && isHeaderItem(items[tempIndex]) && tempIndex !== newIndex && tempIndex < items.length - 1)
+        if (tempIndex === newIndex && i > 0) break // Avoid infinite loop if all remaining are headers
+        newIndex = tempIndex
+        if (newIndex >= items.length - 1) break
       }
-      selectedIndex.value = newIndex;
-      await scrollToSelected();
+      selectedIndex.value = newIndex
+      await scrollToSelected()
     },
     navigatePageUp: async () => {
-      const items = groupedAndSortedActions.value;
-      if (!items || items.length === 0) return;
-      let newIndex = selectedIndex.value;
-      const BATCH_SIZE = 5;
+      const items = groupedAndSortedActions.value
+      if (!items || items.length === 0) return
+      let newIndex = selectedIndex.value
+      const BATCH_SIZE = 5
       for (let i = 0; i < BATCH_SIZE; i++) {
-        let tempIndex = newIndex;
+        let tempIndex = newIndex
         do {
-          tempIndex = (tempIndex - 1 + items.length);
-          tempIndex %= items.length;
-        } while (items.length > 1 && isHeaderItem(items[tempIndex]) && tempIndex !== newIndex && tempIndex > 0);
-        if (tempIndex === newIndex && i > 0) break; // Avoid infinite loop if all remaining are headers
-        newIndex = tempIndex;
-        if (newIndex <= 0) break;
+          tempIndex = (tempIndex - 1 + items.length)
+          tempIndex %= items.length
+        } while (items.length > 1 && isHeaderItem(items[tempIndex]) && tempIndex !== newIndex && tempIndex > 0)
+        if (tempIndex === newIndex && i > 0) break // Avoid infinite loop if all remaining are headers
+        newIndex = tempIndex
+        if (newIndex <= 0) break
       }
-      selectedIndex.value = newIndex;
-      await scrollToSelected();
+      selectedIndex.value = newIndex
+      await scrollToSelected()
     },
     navigateToStart: async () => {
-      const items = groupedAndSortedActions.value;
-      if (!items || items.length === 0) return;
-      let newIndex = 0;
+      const items = groupedAndSortedActions.value
+      if (!items || items.length === 0) return
+      let newIndex = 0
       while (items.length > 1 && isHeaderItem(items[newIndex]) && newIndex < items.length - 1) {
-        newIndex++;
+        newIndex++
       }
-      selectedIndex.value = newIndex;
-      await scrollToSelected();
+      selectedIndex.value = newIndex
+      await scrollToSelected()
     },
     navigateToEnd: async () => {
-      const items = groupedAndSortedActions.value;
-      if (!items || items.length === 0) return;
-      let newIndex = items.length - 1;
+      const items = groupedAndSortedActions.value
+      if (!items || items.length === 0) return
+      let newIndex = items.length - 1
       while (items.length > 1 && isHeaderItem(items[newIndex]) && newIndex > 0) {
-        newIndex--;
+        newIndex--
       }
-      selectedIndex.value = newIndex;
-      await scrollToSelected();
+      selectedIndex.value = newIndex
+      await scrollToSelected()
     },
     selectItem: async () => {
-      const items = groupedAndSortedActions.value;
-      if (!items || items.length === 0) return;
-      const currentItem = items[selectedIndex.value];
+      const items = groupedAndSortedActions.value
+      if (!items || items.length === 0) return
+      const currentItem = items[selectedIndex.value]
       if (currentItem && !isHeaderItem(currentItem)) {
-        await handleItemActivated(currentItem as ActionDefinition);
+        await handleItemActivated(currentItem as ActionDefinition)
       }
     },
     navigateBackOrClose: async () => {
       if (!isRootLevel.value) {
-        await navigateBack();
+        await navigateBack()
       } else {
-        isActive.value = false;
+        isActive.value = false
       }
     },
-  };
+  }
 
   const configuredPaletteNavigationActions = baseNavigationActions.map(action => ({
     ...action,
@@ -379,61 +385,61 @@ export function useCommandPaletteCore(
     // Attach the correct handler based on action ID
     handler: (ctx: ActionContext) => {
       switch (action.id) {
-        case 'commandPalette.navigateDown': return navigationActionHandlers.navigateDown();
-        case 'commandPalette.navigateUp': return navigationActionHandlers.navigateUp();
-        case 'commandPalette.navigatePageDown': return navigationActionHandlers.navigatePageDown();
-        case 'commandPalette.navigatePageUp': return navigationActionHandlers.navigatePageUp();
-        case 'commandPalette.navigateToStart': return navigationActionHandlers.navigateToStart();
-        case 'commandPalette.navigateToEnd': return navigationActionHandlers.navigateToEnd();
-        case 'commandPalette.selectItem': return navigationActionHandlers.selectItem();
-        case 'commandPalette.navigateBackOrClose': return navigationActionHandlers.navigateBackOrClose();
+        case 'commandPalette.navigateDown': return navigationActionHandlers.navigateDown()
+        case 'commandPalette.navigateUp': return navigationActionHandlers.navigateUp()
+        case 'commandPalette.navigatePageDown': return navigationActionHandlers.navigatePageDown()
+        case 'commandPalette.navigatePageUp': return navigationActionHandlers.navigatePageUp()
+        case 'commandPalette.navigateToStart': return navigationActionHandlers.navigateToStart()
+        case 'commandPalette.navigateToEnd': return navigationActionHandlers.navigateToEnd()
+        case 'commandPalette.selectItem': return navigationActionHandlers.selectItem()
+        case 'commandPalette.navigateBackOrClose': return navigationActionHandlers.navigateBackOrClose()
         default:
-          log('warn', 'CommandPaletteCore', `Unknown navigation action ID: ${action.id}`);
-          return Promise.resolve();
+          log('warn', 'CommandPaletteCore', `Unknown navigation action ID: ${action.id}`)
+          return Promise.resolve()
       }
     },
     // Override canExecute to ensure actions only run when palette is active
     // The runInTextInput in commandPaletteNavigationActions.ts already scopes to palette focus,
     // but this adds an explicit check for isActive, which is good practice.
     canExecute: (ctx: ActionContext) => {
-        // If palette not active, or no items and trying to navigate (except Escape)
-        if (!isActive.value || (groupedAndSortedActions.value.length === 0 && action.id !== 'commandPalette.navigateBackOrClose')) {
-            return false;
-        }
-        return true;
-    }
-  }));
+      // If palette not active, or no items and trying to navigate (except Escape)
+      if (!isActive.value || (groupedAndSortedActions.value.length === 0 && action.id !== 'commandPalette.navigateBackOrClose')) {
+        return false
+      }
+      return true
+    },
+  }))
 
-  function registerNavigationActions() {
+  function registerNavigationActions () {
     if (actionCore && !paletteNavigationActionsSourceKey) {
       // Filter out any actions that might not have a handler (though all should for navigation)
-      const actionsToRegister = configuredPaletteNavigationActions.filter(action => typeof action.handler === 'function');
+      const actionsToRegister = configuredPaletteNavigationActions.filter(action => typeof action.handler === 'function')
       if (actionsToRegister.length > 0) {
-        paletteNavigationActionsSourceKey = actionCore.registerActionsSource(actionsToRegister);
-        log('debug', 'CommandPaletteCore', 'Navigation actions registered with ActionCore');
+        paletteNavigationActionsSourceKey = actionCore.registerActionsSource(actionsToRegister)
+        log('debug', 'CommandPaletteCore', 'Navigation actions registered with ActionCore')
       }
     }
   }
 
-  function unregisterNavigationActions() {
+  function unregisterNavigationActions () {
     if (actionCore && paletteNavigationActionsSourceKey) {
-      actionCore.unregisterActionsSource(paletteNavigationActionsSourceKey);
-      paletteNavigationActionsSourceKey = null;
-      log('debug', 'CommandPaletteCore', 'Navigation actions unregistered from ActionCore');
+      actionCore.unregisterActionsSource(paletteNavigationActionsSourceKey)
+      paletteNavigationActionsSourceKey = null
+      log('debug', 'CommandPaletteCore', 'Navigation actions unregistered from ActionCore')
     }
   }
 
   // Initial registration if active on mount (e.g. modelValue initially true)
   onMounted(() => {
     if (isActive.value) {
-      registerNavigationActions();
+      registerNavigationActions()
     }
-  });
+  })
 
   // Ensure cleanup on unmount
   onUnmounted(() => {
-    unregisterNavigationActions();
-  });
+    unregisterNavigationActions()
+  })
   // --- End: VActionCore Navigation Integration ---
 
   return {
@@ -454,10 +460,10 @@ export function useCommandPaletteCore(
 
     // Methods
     handleItemActivated, // For VCommandPaletteList to call on item click
-    navigateBack,        // For VCommandPaletteHeader to call
-    getItemHtmlId,       // For VCommandPaletteList to use for item IDs
-    focusSearchInput,    // To be called by orchestrator on open
-    scrollToSelected,    // Potentially for orchestrator if list doesn't expose it directly
+    navigateBack, // For VCommandPaletteHeader to call
+    getItemHtmlId, // For VCommandPaletteList to use for item IDs
+    focusSearchInput, // To be called by orchestrator on open
+    scrollToSelected, // Potentially for orchestrator if list doesn't expose it directly
 
     // Exposed for displaying keybindings
     navigationActions: configuredPaletteNavigationActions, // Expose the configured actions

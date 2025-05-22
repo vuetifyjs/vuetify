@@ -24,7 +24,7 @@ export type {
   ActionProfileOverride,
   AIActionMetadata,
   AIActionExample,
-  DiscoverableActionInfo
+  DiscoverableActionInfo,
 } from './types'
 
 // Export the generic log function from utils.ts
@@ -35,4 +35,3 @@ export * from './components'
 
 // Other utils - utils.ts does not export COMPONENT_NAME
 // export { COMPONENT_NAME } from './utils' // Removed
-
