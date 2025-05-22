@@ -109,20 +109,17 @@ export const VHotKey = genericComponent()({
       const hasMeta = uniqueSortedModifiers.includes('meta')
       const hasAlt = uniqueSortedModifiers.includes('alt')
 
-      // Corrected Heuristic: On Mac, if 'ctrl' is the *only* modifier present
-      // (and 'meta' is not already there from an alias), and it's a common command key,
-      // then display 'ctrl' as 'meta' (⌘).
-      const canConsiderCtrlAsMeta = hasCtrl && !hasMeta && !hasAlt && uniqueSortedModifiers.length === 1
-
-      if (IS_MAC && canConsiderCtrlAsMeta && mainKeys.length === 1 && commonMacCtrlAsMetaKeys.includes(mainKeys[0])) {
-        displayModifiers = uniqueSortedModifiers.map(m => m === 'ctrl' ? 'meta' : m)
-        // Re-sort is important if 'meta' was introduced and its order might change relative to (now non-existent) others.
-        // However, since canConsiderCtrlAsMeta implies uniqueSortedModifiers was just ['ctrl'], displayModifiers will become ['meta']. Sort is trivial but harmless.
-        displayModifiers.sort((a, b) => modifierDisplayOrder.indexOf(a) - modifierDisplayOrder.indexOf(b))
+      // Heuristic for converting 'ctrl' to 'meta' (⌘) on Mac for common shortcuts, *only* in symbol mode.
+      if (props.displayMode === 'symbol') {
+        const canConsiderCtrlAsMetaForSymbol = IS_MAC && hasCtrl && !hasMeta && !hasAlt && uniqueSortedModifiers.length === 1
+        if (canConsiderCtrlAsMetaForSymbol && mainKeys.length === 1 && commonMacCtrlAsMetaKeys.includes(mainKeys[0])) {
+          displayModifiers = uniqueSortedModifiers.map(m => m === 'ctrl' ? 'meta' : m)
+          // Re-sort if 'meta' was introduced.
+          displayModifiers.sort((a, b) => modifierDisplayOrder.indexOf(a) - modifierDisplayOrder.indexOf(b))
+        }
       }
 
       // Filter out duplicate 'meta' if 'ctrl' was converted but 'meta' was already present (e.g. from 'cmdorctrl')
-      // This check might be redundant if the canConsiderCtrlAsMeta already ensures !hasMeta from uniqueSortedModifiers.
       if (displayModifiers.filter(m => m === 'meta').length > 1) {
         const firstMetaIndex = displayModifiers.indexOf('meta')
         displayModifiers = displayModifiers.filter((m, index) => m !== 'meta' || index === firstMetaIndex)
@@ -133,24 +130,14 @@ export const VHotKey = genericComponent()({
         let label = key
 
         if (key === 'meta') {
-          if (IS_MAC) {
-            text = props.displayMode === 'symbol' ? '⌘' : 'Command'
-            label = 'Command'
-          } else {
-            text = props.displayMode === 'symbol' ? 'Ctrl' : 'Control'
-            label = 'Control'
-          }
+          text = props.displayMode === 'symbol' ? (IS_MAC ? '⌘' : 'Ctrl') : 'Command' // Text mode: always Command
+          label = 'Command' // Text label is always Command for meta key
         } else if (key === 'ctrl') {
-          text = props.displayMode === 'symbol' ? 'Ctrl' : 'Control'
-          label = 'Control'
+          text = props.displayMode === 'symbol' ? (IS_MAC ? '⌃' : 'Ctrl') : 'Ctrl' // Text mode: always Ctrl
+          label = 'Ctrl' // Text label for ctrl
         } else if (key === 'alt') {
-          if (IS_MAC) {
-            text = props.displayMode === 'symbol' ? '⌥' : 'Option'
-            label = 'Option'
-          } else {
-            text = 'Alt'
-            label = 'Alt'
-          }
+          text = props.displayMode === 'symbol' ? (IS_MAC ? '⌥' : 'Alt') : (IS_MAC ? 'Option' : 'Alt') // Text mode: Option on Mac, Alt otherwise
+          label = IS_MAC ? 'Option' : 'Alt' // Label matches text mode
         } else if (key === 'shift') {
           text = 'Shift'
           label = 'Shift'

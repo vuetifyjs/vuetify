@@ -161,9 +161,9 @@ describe('VHotKey', () => {
       expect(getDisplayedKeys(container.firstChild as HTMLElement)).toEqual(['⌘', 'O'])
     })
 
-    it('should render explicit ctrl as Ctrl on Mac (when not a common command key)', () => {
+    it('should render explicit ctrl as ⌃ on Mac (when not a common command key)', () => {
       const { container } = render(VHotKeyMac, { props: { hotkey: 'ctrl+1' } })
-      expect(getDisplayedKeys(container.firstChild as HTMLElement)).toEqual(['Ctrl', '1'])
+      expect(getDisplayedKeys(container.firstChild as HTMLElement)).toEqual(['⌃', '1'])
     })
 
     it('should render explicit ctrl as ⌘ on Mac for common single-letter command keys', () => {

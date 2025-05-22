@@ -18,7 +18,7 @@ const openPaletteActionDef: ActionDefinition = {
   id: 'open-command-palette',
   title: 'Open Command Palette',
   icon: 'mdi-magnify',
-  hotkey: 'meta+k',
+  hotkey: 'cmd+k',
   hotkeyOptions: { preventDefault: true },
   description: 'Opens the main command palette for searching actions.',
   handler: () => {

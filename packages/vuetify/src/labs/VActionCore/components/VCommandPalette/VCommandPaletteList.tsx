@@ -26,6 +26,7 @@ export interface VCommandPaletteListItemScope {
   isSelected: boolean
   select: () => void
   isUsingActionCore: boolean // Pass this down to the slot
+  getItemHtmlId: (item: ActionDefinition<ActionContext> | VCommandPaletteCustomItem | { isHeader: true, title: string, id: string }, index: number) => string
 }
 
 export interface VCommandPaletteListNoResultsScope {
@@ -60,6 +61,10 @@ export const makeVCommandPaletteListProps = propsFactory({
   isUsingActionCore: {
     type: Boolean,
     default: true, // Default to true for backward compatibility if not provided
+  },
+  hotkeyDisplayMode: {
+    type: String as PropType<'symbol' | 'text'>,
+    default: 'symbol' as const,
   },
 }, 'VCommandPaletteList')
 
@@ -163,6 +168,7 @@ export const VCommandPaletteList = genericComponent<{
                   isSelected,
                   select,
                   isUsingActionCore: props.isUsingActionCore,
+                  getItemHtmlId,
                 }
 
                 return renderSlotWithFallback(
@@ -190,15 +196,13 @@ export const VCommandPaletteList = genericComponent<{
                         append: () => {
                           let hotkeyDisplayContent: string | undefined = undefined
                           if (props.isUsingActionCore) {
-                            // For ActionDefinition, VHotKey uses action.id and actionCore instance implicitly (or action.hotkey)
-                            const ad = item as ActionDefinition // Type assertion
+                            const ad = item as ActionDefinition
                             const displayHotkey = Array.isArray(ad.hotkey) ? ad.hotkey[0] : ad.hotkey
-                            return displayHotkey ? <VHotKey hotkey={ displayHotkey } dense /> : null
+                            return displayHotkey ? <>&nbsp;<VHotKey hotkey={ displayHotkey } dense displayMode={ props.hotkeyDisplayMode } /></> : null
                           } else {
-                            // For VCommandPaletteCustomItem, use hotkeyDisplay
-                            const ci = item as VCommandPaletteCustomItem // Type assertion
+                            const ci = item as VCommandPaletteCustomItem
                             hotkeyDisplayContent = Array.isArray(ci.hotkeyDisplay) ? ci.hotkeyDisplay[0] : ci.hotkeyDisplay
-                            return hotkeyDisplayContent ? <kbd class="v-command-palette__hotkey-display">{ hotkeyDisplayContent }</kbd> : null
+                            return hotkeyDisplayContent ? <>&nbsp;<kbd class="v-command-palette__hotkey-display">{ hotkeyDisplayContent }</kbd></> : null
                           }
                         },
                       }}

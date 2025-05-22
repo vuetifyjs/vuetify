@@ -77,6 +77,14 @@ interface VCommandPaletteSearchControlsScopeProps {
   ariaLabelledby?: string
 }
 
+interface VCommandPaletteBreadcrumbsScope {
+  currentLevelTitle?: string
+  parentAction?: ActionDefinition<any> | VCommandPaletteCustomItem
+  isRootLevel: boolean
+  navigateBack: () => void
+  // You can add more properties from 'core' if needed by the slot
+}
+
 interface VCommandPaletteListWrapperScopeProps {
   // Items can now be ActionDefinition or VCommandPaletteCustomItem
   actions: readonly (ActionDefinition | VCommandPaletteCustomItem | { isHeader: true, title: string, id: string })[]
@@ -91,6 +99,8 @@ interface VCommandPaletteListWrapperScopeProps {
   itemSlot?: (scope: VCommandPaletteListItemScope) => VNode[]
   noResultsSlot?: (scope: VCommandPaletteListNoResultsScope) => VNode[]
   density?: 'default' | 'comfortable' | 'compact' | null
+  breadcrumbs: VCommandPaletteBreadcrumbsScope // New breadcrumbs slot
+  hotkeyDisplayMode: string
 }
 
 // VCommandPaletteListItemScope needs to be adjusted in VCommandPaletteList.tsx
@@ -121,6 +131,7 @@ type VCommandPaletteSlots = {
   loader: VCommandPaletteLoaderScopeProps
   footer: VCommandPaletteFooterScopeProps
   'empty-state': VCommandPaletteEmptyStateScopeProps
+  breadcrumbs: VCommandPaletteBreadcrumbsScope // New breadcrumbs slot
 }
 
 // --- END: Slot Type Definitions ---
@@ -143,6 +154,22 @@ export const makeVCommandPaletteProps = propsFactory({
     type: String,
   },
   /**
+   * Controls how breadcrumbs or contextual information about the current level are displayed.
+   * - `'header'`: (Default) Shows the parent action's title in the header.
+   * - `'placeholder'`: Updates the search input's placeholder with the parent action's title.
+   * - `'custom'`: Enables the `breadcrumbs` slot for custom rendering.
+   * - `'none'`: Hides breadcrumbs/contextual title.
+   */
+  breadcrumbMode: {
+    type: String as PropType<'header' | 'placeholder' | 'custom' | 'none'>,
+    default: 'header',
+  },
+  /**
+   * Enables navigation to the previous level using the Backspace key when the search input is empty
+   * or an item is focused.
+   */
+  enableBackspaceNavigation: Boolean,
+  /**
    * An array of custom items to display. If provided, ActionCore will not be used for item sourcing.
    * Internal keyboard navigation will be used.
    */
@@ -158,6 +185,12 @@ export const makeVCommandPaletteProps = propsFactory({
   /** Keybinding for navigating back or closing in agnostic mode. @default 'Escape' */
   keymapNavigateBackOrClose: { type: String, default: 'Escape' },
   // Consider adding PageUp, PageDown, Home, End keymaps if full parity is desired.
+
+  /** Determines how hotkeys are displayed in the list. \'symbol\' (default) or \'text\'. */
+  hotkeyDisplayMode: {
+    type: String as PropType<'symbol' | 'text'>,
+    default: 'symbol' as const,
+  },
 
   ...makeDensityProps(),
   ...makeComponentProps(),
@@ -215,6 +248,7 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
         class={['v-command-palette-dialog', densityClasses.value]}
         contentClass="v-command-palette-dialog__content"
         scrim="#000000"
+        afterLeave={ core.cleanUpPostClose }
       >
         <div
           class="v-command-palette"
@@ -228,22 +262,32 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
           ) : (
             <>
               <div class="v-command-palette__top">
-              { slots.header ? slots.header({
-                parentAction: core.currentParentAction.value, // This can be ActionDefinition or VCommandPaletteCustomItem
+              { slots.header && props.breadcrumbMode === 'header' ? slots.header({
+                parentAction: core.currentParentAction.value,
                 navigateBack: core.navigateBack,
-                title: core.currentLevelTitle.value || props.title,
-              }) : (
+                title: core.isRootLevel.value ? props.title : (core.currentLevelTitle.value || props.title),
+              }) : props.breadcrumbMode === 'header' ? (
                 <VCommandPaletteHeader
-                  title={ core.currentLevelTitle.value || props.title }
+                  title={ core.isRootLevel.value ? props.title : (core.currentLevelTitle.value || props.title) }
                   isRootLevel={ core.isRootLevel.value }
-                  listId={ core.listId.value } // listId is a ref
+                  listId={ core.listId.value }
                   onNavigateBack={ core.navigateBack }
                 />
+              ) : null }
+
+              { /* Breadcrumbs slot - rendered if mode is 'custom' */ }
+              { slots.breadcrumbs && props.breadcrumbMode === 'custom' && (
+                slots.breadcrumbs({
+                  currentLevelTitle: core.currentLevelTitle.value,
+                  parentAction: core.currentParentAction.value,
+                  isRootLevel: core.isRootLevel.value,
+                  navigateBack: core.navigateBack,
+                })
               )}
 
               { slots.searchControls ? slots.searchControls({
                 searchText: core.searchText,
-                placeholder: props.placeholder,
+                placeholder: props.breadcrumbMode === 'placeholder' && !core.isRootLevel.value ? core.currentLevelTitle.value : props.placeholder,
                 inputRef: textFieldInstanceRef,
                 searchComponentRef,
                 listId: core.listId.value,
@@ -255,17 +299,17 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
               }) : (
                 <VCommandPaletteSearch
                   ref={ searchComponentRef }
-                  inputRef={ textFieldInstanceRef } // Pass the ref for VTextField instance
+                  inputRef={ textFieldInstanceRef }
                   modelValue={ core.searchText.value }
-                  placeholder={ props.placeholder }
+                  placeholder={ props.breadcrumbMode === 'placeholder' && !core.isRootLevel.value ? core.currentLevelTitle.value : props.placeholder }
                   autofocus
                   onUpdate:modelValue={ (val: string) => core.searchText.value = val }
-                  // ARIA attributes are now primarily managed by VCommandPaletteSearch itself,
-                  // but VCommandPaletteSearch needs the listId and activeDescendantId
-                  listId={ core.listId.value }
-                  activeDescendantId={ core.activeDescendantId.value }
-                  // Pass the titleId for labelling, assuming VCommandPaletteHeader creates it
-                  labelledby={ `${core.listId.value}-title` }
+                  // Proper ARIA attributes
+                  ariaControls={ core.listId.value }
+                  ariaActivedescendant={ core.activeDescendantId.value }
+                  ariaLabelledby={ `${core.listId.value}-title` }
+                  ariaHaspopup="listbox"
+                  ariaExpanded={ (core.isActive.value && core.groupedAndSortedActions.value.length > 0) ? 'true' : 'false' }
                 />
               )}
             </div>
@@ -289,6 +333,13 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
                 itemSlot: slots.item,
                 noResultsSlot: slots['no-results'],
                 density: props.density,
+                breadcrumbs: {
+                  currentLevelTitle: core.currentLevelTitle.value,
+                  parentAction: core.currentParentAction.value,
+                  isRootLevel: core.isRootLevel.value,
+                  navigateBack: core.navigateBack,
+                },
+                hotkeyDisplayMode: props.hotkeyDisplayMode,
               }) : (
                   <VCommandPaletteList
                     ref={ listRef }
@@ -298,6 +349,7 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
                     listId={ core.listId.value }
                     searchText={ core.searchText.value }
                     density={ props.density }
+                    hotkeyDisplayMode={ props.hotkeyDisplayMode }
                     onActionClick={ core.handleItemActivated } // handleItemActivated needs to handle both types
                     onItemNavigate={ core.handleItemActivated } // Assuming subItems are handled similarly for both
                     isUsingActionCore={ core.isUsingActionCore.value } // Pass this to VCommandPaletteList
@@ -331,20 +383,18 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
     // Expose methods. Note: getEffectiveHotkey is ActionCore specific.
     // Need to decide what to expose if not using ActionCore.
     const getEffectiveHotkey = (actionId: string) => {
-      if (core.isUsingActionCore.value && actionCore) {
-        // Ensure actionCore is not null before calling getAction
-        const action = core.navigationActions.value.find(a => a.id === actionId) || actionCore.getAction(actionId)
-        if (action && actionCore) { // Double check actionCore for safety
-          return getEffectiveHotkeyDisplay(action as ActionDefinition, actionCore)
-        }
+      const action = core.navigationActions.value.find(a => a.id === actionId);
+      if (!action) return undefined;
+
+      // If ActionCore is being used and the action has a 'hotkey' property (characteristic of ActionDefinition)
+      if (core.isUsingActionCore.value && actionCore && 'hotkey' in action) {
+        return getEffectiveHotkeyDisplay(action as ActionDefinition, actionCore);
+      } else if ('hotkeyDisplay' in action && action.hotkeyDisplay) {
+        // If it's an agnostic/custom navigation action with a hotkeyDisplay property
+        const display = action.hotkeyDisplay;
+        return Array.isArray(display) ? display[0] : display;
       }
-      // For custom items, hotkey display is on the item itself (hotkeyDisplay)
-      // This function might return undefined or the static hotkeyDisplay if not using ActionCore.
-      const customItem = core.navigationActions.value.find(a => a.id === actionId)
-      if (customItem && customItem.hotkeyDisplay) {
-        return Array.isArray(customItem.hotkeyDisplay) ? customItem.hotkeyDisplay[0] : customItem.hotkeyDisplay
-      }
-      return undefined
+      return undefined;
     }
 
     return {
