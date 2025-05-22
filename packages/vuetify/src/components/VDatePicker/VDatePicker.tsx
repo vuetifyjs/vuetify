@@ -194,6 +194,20 @@ export const VDatePicker = genericComponent<new <
       return targets
     })
 
+    function allowedYears (year: number) {
+      if (!Array.isArray(props.allowedDates) || !props.allowedDates.length) return true
+      return props.allowedDates.map(date => adapter.getYear(adapter.date(date))).includes(year)
+    }
+
+    function allowedMonths (month: number) {
+      if (!Array.isArray(props.allowedDates) || !props.allowedDates.length) return true
+      if (!allowedYears(year.value)) return false
+
+      return props.allowedDates
+        .filter(date => adapter.getYear(adapter.date(date)) === year.value)
+        .map(date => adapter.getMonth(adapter.date(date))).includes(month)
+    }
+
     // function onClickAppend () {
     //   inputMode.value = inputMode.value === 'calendar' ? 'keyboard' : 'calendar'
     // }
@@ -340,19 +354,21 @@ export const VDatePicker = genericComponent<new <
                       key="date-picker-months"
                       { ...datePickerMonthsProps }
                       v-model={ month.value }
-                      onUpdate:modelValue={ onUpdateMonth }
                       min={ minDate.value }
                       max={ maxDate.value }
                       year={ year.value }
+                      allowed-months={ allowedMonths }
+                      onUpdate:modelValue={ onUpdateMonth }
                     />
                   ) : viewMode.value === 'year' ? (
                     <VDatePickerYears
                       key="date-picker-years"
                       { ...datePickerYearsProps }
                       v-model={ year.value }
-                      onUpdate:modelValue={ onUpdateYear }
                       min={ minDate.value }
                       max={ maxDate.value }
+                      allowed-years={ allowedYears }
+                      onUpdate:modelValue={ onUpdateYear }
                     />
                   ) : (
                     <VDatePickerMonth
