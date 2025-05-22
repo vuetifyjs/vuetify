@@ -1,5 +1,5 @@
 // Utilities
-import { computed, nextTick, ref, watch } from 'vue'
+import { nextTick, ref, watch } from 'vue'
 
 // Types
 import type { Ref } from 'vue'

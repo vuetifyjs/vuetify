@@ -2,11 +2,8 @@
  * @vitest-environment jsdom
  */
 // Utilities
-import { createApp, defineComponent, nextTick, onScopeDispose, ref } from 'vue'
+import { createApp, defineComponent, nextTick } from 'vue'
 import { useKeyBindings } from '../useKeyBindings'
-
-// Types
-import type { KeyBindingHandlerOptions } from '../types'
 
 // Helper to dispatch keyboard events
 function dispatchKeyEvent (target: EventTarget, type: 'keydown' | 'keyup', key: string, options: KeyboardEventInit = {}) {

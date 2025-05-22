@@ -1,6 +1,5 @@
 // Types
-import type { ComputedRef, Ref } from 'vue'
-import type { InjectionKey } from 'vue'
+import type { ComputedRef, InjectionKey, Ref } from 'vue'
 
 // -------------- KeyBinding Types --------------
 

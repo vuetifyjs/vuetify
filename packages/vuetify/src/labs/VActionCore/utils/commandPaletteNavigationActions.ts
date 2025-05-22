@@ -1,5 +1,5 @@
 // Types
-import type { ActionContext, ActionDefinition } from '../types'
+import type { ActionCorePublicAPI, ActionDefinition } from '../types'
 
 // Helper function to determine if the command palette (or its search input) is the active context
 // This will be used in the `runInTextInput` predicate for most navigation actions.

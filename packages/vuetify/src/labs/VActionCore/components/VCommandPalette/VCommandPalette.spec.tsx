@@ -17,7 +17,10 @@ import { mount } from '@vue/test-utils'
 import { computed, defineComponent, h, markRaw, nextTick, ref, unref } from 'vue'
 import { VCommandPalette } from './VCommandPalette'
 import { VCommandPaletteSearch } from './VCommandPaletteSearch'
-import { commandPaletteNavigationActions as actualCommandPaletteNavigationActions, getEffectiveHotkeyDisplay as actualGetEffectiveHotkeyDisplay } from '../../utils/commandPaletteNavigationActions'
+import {
+  commandPaletteNavigationActions as actualCommandPaletteNavigationActions,
+  getEffectiveHotkeyDisplay as actualGetEffectiveHotkeyDisplay,
+} from '../../utils/commandPaletteNavigationActions'
 import { ActionCoreSymbol } from '@/labs/VActionCore'
 
 // Types

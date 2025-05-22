@@ -1,11 +1,11 @@
 // Utilities
 import { computed, getCurrentInstance, onScopeDispose, readonly, ref, toValue } from 'vue'
+import { IS_CLIENT, IS_MAC } from './platform'
+import { log } from './utils'
 
 // Types
 import type { ComputedRef, Ref } from 'vue'
-import { IS_CLIENT, IS_MAC } from './platform'
 import type { KeyBindingHandlerOptions, KeyBindingInputBlockerFn, KeyBindingTrigger, UseKeyBindingsOptions } from './types'
-import { log } from './utils'
 
 /**
  * @file useKeyBindings.ts A dependency-free Vue composable for advanced keyboard shortcut and sequence detection.

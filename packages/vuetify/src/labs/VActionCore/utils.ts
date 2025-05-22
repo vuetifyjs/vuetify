@@ -49,6 +49,7 @@ export function log (
 ) {
   const prefix = `[${component}]`
 
+  // eslint-disable no-console
   switch (level) {
     case 'debug':
       console.debug(`${prefix} ${message}`, details)

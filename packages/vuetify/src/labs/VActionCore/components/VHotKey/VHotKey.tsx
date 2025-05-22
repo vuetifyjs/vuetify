@@ -9,7 +9,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { ActionCoreSymbol } from '@/labs/VActionCore'
 
 // Utilities
-import { computed, inject, nextTick, ref, watch } from 'vue'
+import { computed, inject } from 'vue'
 import { IS_MAC } from '../../platform'
 import { genericComponent, propsFactory, useRender } from '@/util'
 

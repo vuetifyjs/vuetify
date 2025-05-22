@@ -3,7 +3,7 @@ import { VCommandPalette } from './VCommandPalette'
 // Utilities
 import { render, screen, userEvent } from '@test'
 import { waitFor } from '@testing-library/vue'
-import { computed, defineComponent, h, markRaw, nextTick, provide, ref, shallowRef } from 'vue'
+import { computed, defineComponent, h, markRaw, nextTick, ref } from 'vue'
 import { isPromise } from '../../utils'
 import { ActionCore, ActionCoreSymbol } from '@/labs/VActionCore'
 
