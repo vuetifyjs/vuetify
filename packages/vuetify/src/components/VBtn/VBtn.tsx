@@ -99,7 +99,7 @@ export const VBtn = genericComponent<VBtnSlots>()({
 
   emits: {
     'group:selected': (val: { value: boolean }) => true,
-    click: (e: MouseEvent) => true,
+    click: (e: PointerEvent) => true,
   },
 
   setup (props, { attrs, slots, emit }) {
@@ -153,7 +153,7 @@ export const VBtn = genericComponent<VBtnSlots>()({
         : props.value
     })
 
-    function onClick (e: MouseEvent) {
+    function onClick (e: PointerEvent) {
       if (isDisabled.value) {
         if (link.isLink.value) {
           e.preventDefault()
