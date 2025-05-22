@@ -1,17 +1,17 @@
 <template>
   <AppBtn
     :active="model"
-    :block="one.mobileBreakpoint"
-    :class="{'justify-start px-5': one.mobileBreakpoint, 'ms-2': !one.mobileBreakpoint}"
+    :block="isMobile"
+    :class="{'justify-start px-5': isMobile, 'ms-2': !isMobile}"
     :loading="loading ? 'primary' : undefined"
-    :variant="one.mobileBreakpoint ? 'tonal' : undefined"
+    :variant="isMobile ? 'tonal' : undefined"
     prepend-icon="mdi-magnify"
     @click="shouldLoad = true"
   >
-    <span :class="one.mobileBreakpoint && 'me-n1'">
+    <span :class="isMobile && 'me-n1'">
       <span> {{ t('search.label') }} </span>
 
-      <span v-if="!one.mobileBreakpoint" class="py-1 px-2 ms-2 border rounded text-disabled text-caption">
+      <span v-if="!isMobile" class="py-1 px-2 ms-2 border rounded text-disabled text-caption">
         <span>
           {{ t(`search.key-hint${user.slashSearch ? '-slash' : platform.mac ? '-mac' : ''}`) }}
         </span>
@@ -42,6 +42,8 @@
   const loading = shallowRef(false)
   const model = shallowRef(false)
   const searchString = shallowRef('')
+
+  const isMobile = computed(() => one.mobileBreakpoint.value)
 
   watch(shouldLoad, () => {
     loading.value = true

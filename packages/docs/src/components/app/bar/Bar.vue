@@ -24,7 +24,7 @@
 
       <AppBarSponsorLink />
 
-      <AppVerticalDivider v-if="!one.mobileBreakpoint" />
+      <AppVerticalDivider v-if="!one.mobileBreakpoint.value" />
       <v-divider v-else class="mt-4 mb-2" />
 
       <AppBarStoreLink />
@@ -44,4 +44,6 @@
   const one = useOneStore()
 
   const { mdAndDown } = useDisplay()
+
+  one.syncMobileBreakpoint(mdAndDown)
 </script>

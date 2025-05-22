@@ -1,6 +1,6 @@
 <template>
   <v-badge
-    :class="{'vertical-middle': one.mobileBreakpoint}"
+    :class="{'vertical-middle': one.mobileBreakpoint.value}"
     :model-value="newJobs.length > 0"
     color="#ED561B"
     location="top end"
