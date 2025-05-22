@@ -18,7 +18,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, ref, shallowRef, toRef, watch } from 'vue'
-import { genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
+import { createRange, genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { VPickerSlots } from '@/labs/VPicker/VPicker'
@@ -195,17 +195,41 @@ export const VDatePicker = genericComponent<new <
     })
 
     function allowedYears (year: number) {
-      if (!Array.isArray(props.allowedDates) || !props.allowedDates.length) return true
-      return props.allowedDates.map(date => adapter.getYear(adapter.date(date))).includes(year)
+      if (typeof props.allowedDates === 'function') {
+        const isAllowedDate = props.allowedDates
+        const start = adapter.parseISO(`${year}-01-01`)
+        const yearSize = adapter.getDiff(adapter.endOfYear(start), start, 'days')
+
+        return createRange(yearSize)
+          .some(count => isAllowedDate(adapter.addDays(start, count)))
+      }
+
+      if (Array.isArray(props.allowedDates) && props.allowedDates.length) {
+        return props.allowedDates.map(date => adapter.getYear(adapter.date(date))).includes(year)
+      }
+
+      return true
     }
 
     function allowedMonths (month: number) {
-      if (!Array.isArray(props.allowedDates) || !props.allowedDates.length) return true
-      if (!allowedYears(year.value)) return false
+      if (typeof props.allowedDates === 'function') {
+        const isAllowedDate = props.allowedDates
+        const start = adapter.parseISO(`${year.value}-${month}-01`)
+        const monthSize = adapter.getDiff(adapter.endOfMonth(start), start, 'days')
 
-      return props.allowedDates
-        .filter(date => adapter.getYear(adapter.date(date)) === year.value)
-        .map(date => adapter.getMonth(adapter.date(date))).includes(month)
+        return createRange(monthSize)
+          .some(count => isAllowedDate(adapter.addDays(start, count)))
+      }
+
+      if (Array.isArray(props.allowedDates) && props.allowedDates.length) {
+        if (!allowedYears(year.value)) return false
+
+        return props.allowedDates
+          .filter(date => adapter.getYear(adapter.date(date)) === year.value)
+          .map(date => adapter.getMonth(adapter.date(date))).includes(month)
+      }
+
+      return true
     }
 
     // function onClickAppend () {
