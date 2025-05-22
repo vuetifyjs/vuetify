@@ -99,7 +99,15 @@ export function useSelectionControl (
 
       let newVal = currentValue
 
-      if (isMultiple.value) {
+      if (props.type === 'radio') {
+        // For radios, only set the model when val is true
+        if (val) {
+          newVal = currentValue
+        } else {
+          // Don't clear the model on false for radios (ignore)
+          return
+        }
+      } else if (isMultiple.value) {
         newVal = val
           ? [...wrapInArray(modelValue.value), currentValue]
           : wrapInArray(modelValue.value).filter((item: any) => !props.valueComparator(item, trueValue.value))
