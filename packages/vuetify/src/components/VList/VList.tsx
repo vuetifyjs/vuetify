@@ -173,6 +173,7 @@ export const VList = genericComponent<new <
     const activeColor = toRef(() => props.activeColor)
     const baseColor = toRef(() => props.baseColor)
     const color = toRef(() => props.color)
+    const isSelectable = toRef(() => (props.selectable || props.activatable))
 
     createList()
 
@@ -271,7 +272,7 @@ export const VList = genericComponent<new <
             props.style,
           ]}
           tabindex={ props.disabled ? -1 : 0 }
-          role="listbox"
+          role={ isSelectable.value ? 'listbox' : 'list' }
           aria-activedescendant={ undefined }
           onFocusin={ onFocusin }
           onFocusout={ onFocusout }
