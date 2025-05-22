@@ -56,9 +56,9 @@ export const makeVCommandPaletteListProps = propsFactory({
 
 // Use the defined scope types in genericComponent
 export const VCommandPaletteList = genericComponent<{
-  item?: (scope: VCommandPaletteListItemScope) => VNode[]
-  'no-results'?: (scope: VCommandPaletteListNoResultsScope) => VNode[]
-  subheader?: (scope: VCommandPaletteListSubheaderScope) => VNode[]
+  item: VCommandPaletteListItemScope
+  'no-results': VCommandPaletteListNoResultsScope
+  subheader: VCommandPaletteListSubheaderScope
 }>()({
   name: 'VCommandPaletteList',
   props: makeVCommandPaletteListProps(),
@@ -67,12 +67,6 @@ export const VCommandPaletteList = genericComponent<{
     itemNavigate: (action: ActionDefinition<ActionContext>) => true,
   },
   setup (props, { slots, emit }) {
-    const typedSlots = slots as {
-      item?: (scope: VCommandPaletteListItemScope) => VNode[]
-      'no-results'?: (scope: VCommandPaletteListNoResultsScope) => VNode[]
-      subheader?: (scope: VCommandPaletteListSubheaderScope) => VNode[]
-    }
-
     const getItemHtmlId = (itemInput: ActionDefinition<ActionContext> | { isHeader: true, title: string, id: string }, index: number) => {
       const item = itemInput
       if (isHeaderItem(item)) {
@@ -148,7 +142,7 @@ export const VCommandPaletteList = genericComponent<{
         >
           { props.actions.length === 0 ? (
             renderSlotWithFallback(
-              typedSlots['no-results'],
+              slots['no-results'],
               scopeNoResults,
               () => (
                 <VListItem
@@ -165,7 +159,7 @@ export const VCommandPaletteList = genericComponent<{
               { props.actions.map((item, index) => {
                 if (isHeaderItem(item)) {
                   return renderSlotWithFallback(
-                    typedSlots.subheader,
+                    slots.subheader,
                     { title: item.title, id: item.id },
                     () => <VListSubheader key={ item.id } class="v-command-palette__subheader">{ item.title }</VListSubheader>
                   )
@@ -185,7 +179,7 @@ export const VCommandPaletteList = genericComponent<{
                 }
 
                 return renderSlotWithFallback(
-                  typedSlots.item,
+                  slots.item,
                   scopeItem,
                   () => (
                     <VListItem

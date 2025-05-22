@@ -6,7 +6,7 @@ import { ref, watchEffect } from 'vue'
 import { filterInputAttrs, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
-import type { PropType, Ref, VNode } from 'vue'
+import type { PropType, Ref } from 'vue'
 import type { VTextFieldSlots } from '@/components/VTextField/VTextField'
 
 // Define props for VCommandPaletteSearch
@@ -119,11 +119,11 @@ export const VCommandPaletteSearch = genericComponent<VCommandPaletteSearchSlots
           class={['v-command-palette__search', rootAttrs.class]}
         >
           {{
-            ...(slots['prepend-inner'] && { 'prepend-inner': slots['prepend-inner'] as any }),
-            ...(slots['append-inner'] && { 'append-inner': slots['append-inner'] as any }),
+            'prepend-inner': slots['prepend-inner'],
+            'append-inner': slots['append-inner'],
           }}
         </VTextField>
-      ) as VNode
+      )
     })
 
     // Expose a focus method if needed by parent, which VTextField instance will have

@@ -81,26 +81,19 @@ interface VCommandPaletteEmptyStateScopeProps {
   core: ReturnType<typeof useCommandPaletteCore>
 }
 
-type HeaderSlotFunc = (scope: VCommandPaletteHeaderScopeProps) => VNode[];
-type SearchControlsSlotFunc = (scope: VCommandPaletteSearchControlsScopeProps) => VNode[];
-type ListWrapperSlotFunc = (scope: VCommandPaletteListWrapperScopeProps) => VNode[];
-type ItemSlotFunc = (scope: VCommandPaletteItemScopeProps) => VNode[];
-type NoResultsSlotFunc = (scope: VCommandPaletteNoResultsScopeProps) => VNode[];
-type LoaderSlotFunc = (scope: VCommandPaletteLoaderScopeProps) => VNode[];
-type FooterSlotFunc = (scope: VCommandPaletteFooterScopeProps) => VNode[];
-type EmptyStateSlotFunc = (scope: VCommandPaletteEmptyStateScopeProps) => VNode[];
-
 // Combined Typed Slots for VCommandPalette
-interface VCommandPaletteTypedSlots {
-  header?: HeaderSlotFunc
-  searchControls?: SearchControlsSlotFunc
-  listWrapper?: ListWrapperSlotFunc
-  item?: ItemSlotFunc // Item slot is passed down to VCommandPaletteList or custom list
-  'no-results'?: NoResultsSlotFunc // No-results slot is passed down
-  loader?: LoaderSlotFunc
-  footer?: FooterSlotFunc
-  'empty-state'?: EmptyStateSlotFunc // When no actions are available at all
-  [key: string]: unknown
+type VCommandPaletteSlots = {
+  header: VCommandPaletteHeaderScopeProps
+  searchControls: VCommandPaletteSearchControlsScopeProps
+  listWrapper: VCommandPaletteListWrapperScopeProps
+  // Item slot is passed down to VCommandPaletteList or custom list
+  item: VCommandPaletteItemScopeProps
+  // No-results slot is passed down
+  'no-results': VCommandPaletteNoResultsScopeProps
+  loader: VCommandPaletteLoaderScopeProps
+  footer: VCommandPaletteFooterScopeProps
+  // When no actions are available at all
+  'empty-state': VCommandPaletteEmptyStateScopeProps
 }
 
 // --- END: Slot Type Definitions ---
@@ -128,7 +121,7 @@ export const makeVCommandPaletteProps = propsFactory({
   ...makeThemeProps(),
 }, 'VCommandPalette')
 
-export const VCommandPalette = genericComponent<VCommandPaletteTypedSlots>()({
+export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
   name: 'VCommandPalette',
   props: makeVCommandPaletteProps(),
   emits: {
@@ -137,8 +130,6 @@ export const VCommandPalette = genericComponent<VCommandPaletteTypedSlots>()({
   },
   setup (props, { emit, slots }) {
     provideTheme(props)
-    const typedSlots = slots as VCommandPaletteTypedSlots
-
     const { densityClasses } = useDensity(props, 'v-command-palette')
 
     const actionCore = inject(ActionCoreSymbol)
@@ -187,13 +178,13 @@ export const VCommandPalette = genericComponent<VCommandPaletteTypedSlots>()({
           // onKeydown={core.handleKeydown} // Removed: VActionCore handles keydown globally
         >
           { /* Empty State Slot */ }
-          { typedSlots['empty-state'] && isEmptyState.value ? (
-            typedSlots['empty-state']({ core })
+          { slots['empty-state'] && isEmptyState.value ? (
+            slots['empty-state']({ core })
           ) : (
             <>
               <div class="v-command-palette__top">
               { /* Header Slot */ }
-              { typedSlots.header ? typedSlots.header({
+              { slots.header ? slots.header({
                 parentAction: core.currentParentAction.value,
                 navigateBack: core.navigateBack,
                 title: core.currentLevelTitle.value || props.title,
@@ -207,7 +198,7 @@ export const VCommandPalette = genericComponent<VCommandPaletteTypedSlots>()({
               )}
 
               { /* Search Controls Slot */ }
-              { typedSlots.searchControls ? typedSlots.searchControls({
+              { slots.searchControls ? slots.searchControls({
                 searchText: core.searchText,
                 placeholder: props.placeholder,
                 inputRef: textFieldInstanceRef,
@@ -237,7 +228,7 @@ export const VCommandPalette = genericComponent<VCommandPaletteTypedSlots>()({
             </div>
 
               { /* Loader Slot */ }
-              { typedSlots.loader ? typedSlots.loader({
+              { slots.loader ? slots.loader({
                 isLoading: core.isLoadingSubItems,
               }) : core.isLoadingSubItems.value && (
                 <div class="v-command-palette__loader">
@@ -246,7 +237,7 @@ export const VCommandPalette = genericComponent<VCommandPaletteTypedSlots>()({
               )}
 
               { /* List Wrapper Slot */ }
-              { !core.isLoadingSubItems.value && (typedSlots.listWrapper ? typedSlots.listWrapper({
+              { !core.isLoadingSubItems.value && (slots.listWrapper ? slots.listWrapper({
                 actions: core.groupedAndSortedActions.value,
                 selectedIndex: core.selectedIndex,
                 listId: core.listId,
@@ -254,8 +245,8 @@ export const VCommandPalette = genericComponent<VCommandPaletteTypedSlots>()({
                 searchText: core.searchText,
                 handleItemActivated: core.handleItemActivated,
                 isLoading: core.isLoadingSubItems,
-                itemSlot: typedSlots.item,
-                noResultsSlot: typedSlots['no-results'],
+                itemSlot: slots.item,
+                noResultsSlot: slots['no-results'],
                 density: props.density,
               }) : (
                   <VCommandPaletteList
@@ -267,18 +258,19 @@ export const VCommandPalette = genericComponent<VCommandPaletteTypedSlots>()({
                     density={ props.density }
                     onActionClick={ core.handleItemActivated }
                     onItemNavigate={ core.handleItemActivated }
-                    v-slots={{
-                      item: typedSlots.item,
-                      'no-results': typedSlots['no-results'],
-                    } as any} // Keep as any for now due to existing TODO about slot types
-                  />
+                  >
+                    {{
+                      item: slots.item,
+                      'no-results': slots['no-results'],
+                    }}
+                  </VCommandPaletteList>
               )
               )}
 
               { /* Footer Slot */ }
-              { typedSlots.footer && (
+              { slots.footer && (
                 <div class="v-command-palette__footer">
-                  { typedSlots.footer({
+                  { slots.footer({
                     navigationActions: core.navigationActions,
                     actionCoreInstance: core.actionCoreInstance,
                     core,
