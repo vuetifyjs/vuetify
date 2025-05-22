@@ -61,9 +61,9 @@ export const VCommandPaletteHeader = genericComponent<{
             />
           )}
           { props.title && (
-            <span class="v-command-palette__title" id={ titleId }>
+            <div class="v-command-palette__title" id={ titleId }>
               { props.title }
-            </span>
+            </div>
           )}
           { appendSlotRender?.(props) }
         </div>

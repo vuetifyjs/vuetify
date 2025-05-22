@@ -18,21 +18,48 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { ActionCoreSymbol } from '@/labs/VActionCore'
 
 // Utilities
-import { computed, inject, ref } from 'vue'
+import { computed, inject, ref, shallowRef } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
+import type { PropType } from 'vue'
 
 // Types
 import type { Ref, VNode } from 'vue'
 import type { VCommandPaletteListItemScope, VCommandPaletteListNoResultsScope } from './VCommandPaletteList'
 import type { CommandPaletteListRef, UseCommandPaletteCoreProps } from '../../composables/useCommandPaletteCore'
-import type { commandPaletteNavigationActions } from '../../utils/commandPaletteNavigationActions' // For displaying hotkeys
+import type { commandPaletteNavigationActions as NavigationActionsType } from '../../utils/commandPaletteNavigationActions' // For displaying hotkeys
 import type { VTextField } from '@/components/VTextField'
-import type { ActionCorePublicAPI, ActionDefinition } from '@/labs/VActionCore'
+import type { ActionCorePublicAPI, ActionDefinition, ActionContext } from '@/labs/VActionCore'
+
+// --- START: New Type Definitions for Agnostic Mode ---
+
+export interface VCommandPaletteCustomItem {
+  id: string | number
+  title: string | Ref<string>
+  subtitle?: string | Ref<string>
+  icon?: string | Ref<string>
+  keywords?: string | string[]
+  disabled?: boolean | Ref<boolean>
+  handler?: (item: VCommandPaletteCustomItem) => void | Promise<void>
+  onSelect?: (item: VCommandPaletteCustomItem) => void | Promise<void> // Alternative to handler
+  subItems?: (context?: ActionContext) => VCommandPaletteCustomItem[] | Promise<VCommandPaletteCustomItem[]> // Context might be less rich
+  hotkeyDisplay?: string | string[]
+  group?: string
+  order?: number
+  [key: string]: any; // Allow arbitrary data
+}
+
+export type VCommandPaletteSearchFunction = (
+  items: readonly (ActionDefinition | VCommandPaletteCustomItem)[],
+  searchText: string,
+  sourceType: 'actionCore' | 'customItems' // To let searchFn know the type of items
+) => readonly (ActionDefinition | VCommandPaletteCustomItem)[];
+
+// --- END: New Type Definitions ---
 
 // --- START: Slot Type Definitions ---
 
 interface VCommandPaletteHeaderScopeProps {
-  parentAction?: ActionDefinition<any>
+  parentAction?: ActionDefinition<any> | VCommandPaletteCustomItem // Updated type
   navigateBack: () => void
   title?: string
 }
@@ -40,59 +67,59 @@ interface VCommandPaletteHeaderScopeProps {
 interface VCommandPaletteSearchControlsScopeProps {
   searchText: Ref<string>
   placeholder?: string
-  inputRef: Ref<InstanceType<typeof VTextField> | null> // Ref for the VTextField instance itself
-  searchComponentRef: Ref<InstanceType<typeof VCommandPaletteSearch> | null> // Ref for VCommandPaletteSearch component if default is used
+  inputRef: Ref<InstanceType<typeof VTextField> | null>
+  searchComponentRef: Ref<InstanceType<typeof VCommandPaletteSearch> | null>
   listId: string
   activeDescendantId?: string
-  // Props for aria attributes on the input
   ariaHasPopup: 'listbox' | undefined
   ariaExpanded: 'true' | 'false'
   ariaControls: string
-  ariaLabelledby?: string // If a title is associated with the search input
+  ariaLabelledby?: string
 }
 
 interface VCommandPaletteListWrapperScopeProps {
-  actions: readonly (ActionDefinition | { isHeader: true, title: string, id: string })[]
+  // Items can now be ActionDefinition or VCommandPaletteCustomItem
+  actions: readonly (ActionDefinition | VCommandPaletteCustomItem | { isHeader: true, title: string, id: string })[]
   selectedIndex: Ref<number>
   listId: string
   listRef: Ref<CommandPaletteListRef | null>
   searchText: Ref<string>
-  handleItemActivated: (action: ActionDefinition) => Promise<void>
+  // handleItemActivated signature might need to be more generic if item type changes
+  handleItemActivated: (action: ActionDefinition | VCommandPaletteCustomItem) => Promise<void>
   isLoading: Ref<boolean>
+  // itemSlot scope needs to handle both ActionDefinition and VCommandPaletteCustomItem
   itemSlot?: (scope: VCommandPaletteListItemScope) => VNode[]
   noResultsSlot?: (scope: VCommandPaletteListNoResultsScope) => VNode[]
   density?: 'default' | 'comfortable' | 'compact' | null
 }
 
-interface VCommandPaletteItemScopeProps extends VCommandPaletteListItemScope {}
-interface VCommandPaletteNoResultsScopeProps extends VCommandPaletteListNoResultsScope {}
+// VCommandPaletteListItemScope needs to be adjusted in VCommandPaletteList.tsx
+// to accommodate VCommandPaletteCustomItem if we pass it directly.
+// For now, assuming VCommandPaletteList might internally adapt or its scope type becomes a union.
 
 interface VCommandPaletteLoaderScopeProps {
   isLoading: Ref<boolean>
 }
 
 interface VCommandPaletteFooterScopeProps {
-  navigationActions: typeof commandPaletteNavigationActions // The array of navigation action definitions
-  actionCoreInstance?: ActionCorePublicAPI | null // To resolve effective hotkeys
-  core: ReturnType<typeof useCommandPaletteCore> // Full core access if needed
+  // navigationActions will be different if not using ActionCore
+  navigationActions: Readonly<Partial<ActionDefinition | VCommandPaletteCustomItem>[]>
+  actionCoreInstance?: ActionCorePublicAPI | null
+  core: ReturnType<typeof useCommandPaletteCore>
 }
 
 interface VCommandPaletteEmptyStateScopeProps {
   core: ReturnType<typeof useCommandPaletteCore>
 }
 
-// Combined Typed Slots for VCommandPalette
 type VCommandPaletteSlots = {
   header: VCommandPaletteHeaderScopeProps
   searchControls: VCommandPaletteSearchControlsScopeProps
   listWrapper: VCommandPaletteListWrapperScopeProps
-  // Item slot is passed down to VCommandPaletteList or custom list
-  item: VCommandPaletteItemScopeProps
-  // No-results slot is passed down
-  'no-results': VCommandPaletteNoResultsScopeProps
+  item: VCommandPaletteListItemScope // This scope is defined in VCommandPaletteList
+  'no-results': VCommandPaletteListNoResultsScope // This scope is defined in VCommandPaletteList
   loader: VCommandPaletteLoaderScopeProps
   footer: VCommandPaletteFooterScopeProps
-  // When no actions are available at all
   'empty-state': VCommandPaletteEmptyStateScopeProps
 }
 
@@ -112,10 +139,26 @@ export const makeVCommandPaletteProps = propsFactory({
     type: [String, Number],
     default: 600,
   },
-  // Title for the palette, used in header if not overridden by slot or parent action
   title: {
     type: String,
   },
+  /**
+   * An array of custom items to display. If provided, ActionCore will not be used for item sourcing.
+   * Internal keyboard navigation will be used.
+   */
+  items: Array as PropType<VCommandPaletteCustomItem[]>,
+  /** Custom search function. */
+  searchFunction: Function as PropType<VCommandPaletteSearchFunction>,
+  /** Keybinding for navigating down in agnostic mode. @default 'ArrowDown' */
+  keymapNavigateDown: { type: String, default: 'ArrowDown' },
+  /** Keybinding for navigating up in agnostic mode. @default 'ArrowUp' */
+  keymapNavigateUp: { type: String, default: 'ArrowUp' },
+  /** Keybinding for selecting an item in agnostic mode. @default 'Enter' */
+  keymapSelectItem: { type: String, default: 'Enter' },
+  /** Keybinding for navigating back or closing in agnostic mode. @default 'Escape' */
+  keymapNavigateBackOrClose: { type: String, default: 'Escape' },
+  // Consider adding PageUp, PageDown, Home, End keymaps if full parity is desired.
+
   ...makeDensityProps(),
   ...makeComponentProps(),
   ...makeThemeProps(),
@@ -126,37 +169,42 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
   props: makeVCommandPaletteProps(),
   emits: {
     'update:modelValue': (val: boolean) => true,
-    'update:list': () => true, // Emitted by core for tests
+    'update:list': () => true,
+    // New event for agnostic mode when an item is selected/activated
+    'item-activated': (item: VCommandPaletteCustomItem) => true,
   },
   setup (props, { emit, slots }) {
     provideTheme(props)
     const { densityClasses } = useDensity(props, 'v-command-palette')
 
-    const actionCore = inject(ActionCoreSymbol)
-    if (!actionCore) {
+    const actionCore = inject(ActionCoreSymbol, null) // Inject can return null
+    if (!actionCore && !props.items) {
       // eslint-disable-next-line no-console
-      console.warn('[Vuetify VCommandPalette] VActionCore instance not found. Keybindings and action loading will not work.')
+      console.warn(`[Vuetify VCommandPalette] VActionCore instance not found and no custom 'items' prop provided. Palette may not function correctly.`)
     }
 
     const searchComponentRef = ref<InstanceType<typeof VCommandPaletteSearch> | null>(null)
     const textFieldInstanceRef = ref<InstanceType<typeof VTextField> | null>(null)
+    // listRef type is CommandPaletteListRef, which includes scrollToItem.
+    // VCommandPaletteList.tsx will need to ensure it exposes this method correctly.
     const listRef = ref<CommandPaletteListRef | null>(null)
 
     const core = useCommandPaletteCore(
-      props as UseCommandPaletteCoreProps, // Pass all relevant props
-      actionCore,
+      props as UseCommandPaletteCoreProps, // This will now include items, searchFunction, keymaps
+      actionCore, // Pass ActionCore instance, can be null
       emit,
       textFieldInstanceRef,
       listRef
     )
 
-    // Computed for empty state: true if palette is active, not loading, and has no initial actions at root.
     const isEmptyState = computed(() => {
       return core.isActive.value &&
              !core.isLoadingSubItems.value &&
              core.isRootLevel.value &&
-             actionCore && // ensure actionCore is available
-             actionCore.allActions.value.filter((action: ActionDefinition) => !action.meta?.paletteHidden).length === 0
+             (core.isUsingActionCore.value // Check if core is using ActionCore
+               ? (actionCore?.allActions.value.filter((action: ActionDefinition) => !action.meta?.paletteHidden).length === 0)
+               : (core.currentRootItems.value.length === 0) // Check custom items if not using ActionCore
+             )
     })
 
     useRender(() => (
@@ -165,69 +213,63 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
         width={ props.width }
         scrollable
         class={['v-command-palette-dialog', densityClasses.value]}
-        contentClass="v-command-palette-dialog__content" // Used by isCommandPaletteFocused
-        scrim="#000000" // Consider making scrim configurable or themeable
-        // Consider adding persistent prop if desired for some use cases
+        contentClass="v-command-palette-dialog__content"
+        scrim="#000000"
       >
         <div
           class="v-command-palette"
-          role="dialog" // Role is on the div inside VDialog
+          role="dialog"
           aria-modal="true"
-          // aria-labelledby could point to a title in the header slot or a default title
-          aria-label={ props.title } // Default label, can be enhanced by header
-          // onKeydown={core.handleKeydown} // Removed: VActionCore handles keydown globally
+          aria-label={ props.title || core.currentLevelTitle.value }
+          // onKeydown is now handled internally by useCommandPaletteCore if not using ActionCore for navigation
         >
-          { /* Empty State Slot */ }
           { slots['empty-state'] && isEmptyState.value ? (
             slots['empty-state']({ core })
           ) : (
             <>
               <div class="v-command-palette__top">
-              { /* Header Slot */ }
               { slots.header ? slots.header({
-                parentAction: core.currentParentAction.value,
+                parentAction: core.currentParentAction.value, // This can be ActionDefinition or VCommandPaletteCustomItem
                 navigateBack: core.navigateBack,
                 title: core.currentLevelTitle.value || props.title,
               }) : (
                 <VCommandPaletteHeader
                   title={ core.currentLevelTitle.value || props.title }
                   isRootLevel={ core.isRootLevel.value }
-                  listId={ core.listId } // core.listId is a Ref now
+                  listId={ core.listId.value } // listId is a ref
                   onNavigateBack={ core.navigateBack }
                 />
               )}
 
-              { /* Search Controls Slot */ }
               { slots.searchControls ? slots.searchControls({
                 searchText: core.searchText,
                 placeholder: props.placeholder,
                 inputRef: textFieldInstanceRef,
                 searchComponentRef,
-                listId: core.listId,
+                listId: core.listId.value,
                 activeDescendantId: core.activeDescendantId.value,
                 ariaHasPopup: 'listbox',
                 ariaExpanded: (core.isActive.value && core.groupedAndSortedActions.value.length > 0) ? 'true' : 'false',
-                ariaControls: core.listId,
-                ariaLabelledby: `${core.listId}-title`, // Assuming header provides this ID
+                ariaControls: core.listId.value,
+                ariaLabelledby: `${core.listId.value}-title`,
               }) : (
                 <VCommandPaletteSearch
                   ref={ searchComponentRef }
-                  inputRef={ textFieldInstanceRef }
+                  inputRef={ textFieldInstanceRef } // Pass the ref for VTextField instance
                   modelValue={ core.searchText.value }
                   placeholder={ props.placeholder }
                   autofocus
                   onUpdate:modelValue={ (val: string) => core.searchText.value = val }
-                  role="combobox"
-                  aria-haspopup="listbox"
-                  aria-expanded={ (core.isActive.value && core.groupedAndSortedActions.value.length > 0) ? 'true' : 'false' }
-                  aria-controls={ core.listId }
-                  aria-activedescendant={ core.activeDescendantId.value }
-                  // aria-labelledby could be an ID from the header, or a general label for search
+                  // ARIA attributes are now primarily managed by VCommandPaletteSearch itself,
+                  // but VCommandPaletteSearch needs the listId and activeDescendantId
+                  listId={ core.listId.value }
+                  activeDescendantId={ core.activeDescendantId.value }
+                  // Pass the titleId for labelling, assuming VCommandPaletteHeader creates it
+                  labelledby={ `${core.listId.value}-title` }
                 />
               )}
             </div>
 
-              { /* Loader Slot */ }
               { slots.loader ? slots.loader({
                 isLoading: core.isLoadingSubItems,
               }) : core.isLoadingSubItems.value && (
@@ -236,14 +278,13 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
                 </div>
               )}
 
-              { /* List Wrapper Slot */ }
               { !core.isLoadingSubItems.value && (slots.listWrapper ? slots.listWrapper({
-                actions: core.groupedAndSortedActions.value,
+                actions: core.groupedAndSortedActions.value, // This will be (ActionDefinition | VCommandPaletteCustomItem | HeaderItem)[]
                 selectedIndex: core.selectedIndex,
-                listId: core.listId,
-                listRef,
+                listId: core.listId.value,
+                listRef, // Pass the ref for VCommandPaletteList instance
                 searchText: core.searchText,
-                handleItemActivated: core.handleItemActivated,
+                handleItemActivated: core.handleItemActivated, // Signature needs to accept both types
                 isLoading: core.isLoadingSubItems,
                 itemSlot: slots.item,
                 noResultsSlot: slots['no-results'],
@@ -251,13 +292,17 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
               }) : (
                   <VCommandPaletteList
                     ref={ listRef }
+                    // VCommandPaletteList props.actions will need to accept the union type
                     actions={ core.groupedAndSortedActions.value }
                     selectedIndex={ core.selectedIndex.value }
-                    listId={ core.listId }
+                    listId={ core.listId.value }
                     searchText={ core.searchText.value }
                     density={ props.density }
-                    onActionClick={ core.handleItemActivated }
-                    onItemNavigate={ core.handleItemActivated }
+                    onActionClick={ core.handleItemActivated } // handleItemActivated needs to handle both types
+                    onItemNavigate={ core.handleItemActivated } // Assuming subItems are handled similarly for both
+                    isUsingActionCore={ core.isUsingActionCore.value } // Pass this to VCommandPaletteList
+                    // VCommandPaletteList will need to know if it should expect ActionDefinition or VCommandPaletteCustomItem
+                    // to correctly access properties like hotkeyDisplay or use action-id with VHotKey.
                   >
                     {{
                       item: slots.item,
@@ -267,12 +312,12 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
               )
               )}
 
-              { /* Footer Slot */ }
               { slots.footer && (
                 <div class="v-command-palette__footer">
                   { slots.footer({
-                    navigationActions: core.navigationActions,
-                    actionCoreInstance: core.actionCoreInstance,
+                    // core.navigationActions will be different if not using ActionCore
+                    navigationActions: core.navigationActions.value,
+                    actionCoreInstance: core.actionCoreInstance, // This might be null
                     core,
                   })}
                 </div>
@@ -283,19 +328,30 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
       </VDialog>
     ))
 
+    // Expose methods. Note: getEffectiveHotkey is ActionCore specific.
+    // Need to decide what to expose if not using ActionCore.
+    const getEffectiveHotkey = (actionId: string) => {
+      if (core.isUsingActionCore.value && actionCore) {
+        // Ensure actionCore is not null before calling getAction
+        const action = core.navigationActions.value.find(a => a.id === actionId) || actionCore.getAction(actionId)
+        if (action && actionCore) { // Double check actionCore for safety
+          return getEffectiveHotkeyDisplay(action as ActionDefinition, actionCore)
+        }
+      }
+      // For custom items, hotkey display is on the item itself (hotkeyDisplay)
+      // This function might return undefined or the static hotkeyDisplay if not using ActionCore.
+      const customItem = core.navigationActions.value.find(a => a.id === actionId)
+      if (customItem && customItem.hotkeyDisplay) {
+        return Array.isArray(customItem.hotkeyDisplay) ? customItem.hotkeyDisplay[0] : customItem.hotkeyDisplay
+      }
+      return undefined
+    }
+
     return {
       focus: core.focusSearchInput,
-      // Expose core for testing or advanced usage if absolutely necessary
-      core,
-      // Expose a method to get current effective keybindings for display
-      getEffectiveHotkey: (actionId: string) => {
-        const action = core.navigationActions.find(a => a.id === actionId) || actionCore?.getAction(actionId)
-        if (action && actionCore) {
-          return getEffectiveHotkeyDisplay(action, actionCore)
-        }
-        return undefined
-      },
-      // Expose navigation actions for direct use if needed by parent or for building custom UI for keybindings
+      core, // Exposing core is useful for advanced slots and testing
+      getEffectiveHotkey,
+      // Expose navigation actions for footer slot etc. This will be reactive.
       navigationActions: core.navigationActions,
     }
   },

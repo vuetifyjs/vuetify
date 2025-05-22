@@ -10,19 +10,22 @@ import { genericComponent, propsFactory, useRender } from '@/util'
 // Types
 import type { PropType, VNode } from 'vue'
 import type { ActionContext, ActionDefinition } from '@/labs/VActionCore'
+import type { VCommandPaletteCustomItem } from './VCommandPalette' // Import the custom item type
 
-// Helper to distinguish header items from actions
+// Helper to distinguish header items from actions/custom items
 function isHeaderItem (item: any): item is { isHeader: true, title: string, id: string } {
   return item && typeof item === 'object' && 'isHeader' in item && item.isHeader === true
 }
 
 // Define scope types explicitly for clarity and reuse
 export interface VCommandPaletteListItemScope {
-  action: ActionDefinition<ActionContext>
+  // The item can be an ActionDefinition or a VCommandPaletteCustomItem
+  item: ActionDefinition<ActionContext> | VCommandPaletteCustomItem
   index: number
   itemHtmlId: string
   isSelected: boolean
   select: () => void
+  isUsingActionCore: boolean // Pass this down to the slot
 }
 
 export interface VCommandPaletteListNoResultsScope {
@@ -36,7 +39,8 @@ export interface VCommandPaletteListSubheaderScope {
 
 export const makeVCommandPaletteListProps = propsFactory({
   actions: {
-    type: Array as PropType<Readonly<({ isHeader: true, title: string, id: string } | ActionDefinition<ActionContext>)[]>>,
+    // Update prop type to accept ActionDefinition, VCommandPaletteCustomItem, or HeaderItem
+    type: Array as PropType<Readonly<({ isHeader: true, title: string, id: string } | ActionDefinition<ActionContext> | VCommandPaletteCustomItem)[]>>,
     default: () => [],
   },
   selectedIndex: {
@@ -52,9 +56,13 @@ export const makeVCommandPaletteListProps = propsFactory({
     type: String as PropType<'default' | 'comfortable' | 'compact' | null>,
     default: 'default',
   },
+  // New prop to determine how to handle items
+  isUsingActionCore: {
+    type: Boolean,
+    default: true, // Default to true for backward compatibility if not provided
+  },
 }, 'VCommandPaletteList')
 
-// Use the defined scope types in genericComponent
 export const VCommandPaletteList = genericComponent<{
   item: VCommandPaletteListItemScope
   'no-results': VCommandPaletteListNoResultsScope
@@ -63,65 +71,43 @@ export const VCommandPaletteList = genericComponent<{
   name: 'VCommandPaletteList',
   props: makeVCommandPaletteListProps(),
   emits: {
-    actionClick: (action: ActionDefinition<ActionContext>) => true,
-    itemNavigate: (action: ActionDefinition<ActionContext>) => true,
+    actionClick: (action: ActionDefinition<ActionContext> | VCommandPaletteCustomItem) => true,
+    itemNavigate: (action: ActionDefinition<ActionContext> | VCommandPaletteCustomItem) => true,
   },
   setup (props, { slots, emit }) {
-    const getItemHtmlId = (itemInput: ActionDefinition<ActionContext> | { isHeader: true, title: string, id: string }, index: number) => {
-      const item = itemInput
+    const getItemHtmlId = (itemInput: ActionDefinition<ActionContext> | VCommandPaletteCustomItem | { isHeader: true, title: string, id: string }, index: number) => {
+      const item = itemInput as any // Use 'any' for simplicity here, properties are checked below
       if (isHeaderItem(item)) {
         return `${props.listId}-header-${item.id}-${index}`
       }
-      const action = item as ActionDefinition<ActionContext>
-      return `${props.listId}-item-${action.id}-${index}`
+      // item.id should exist on both ActionDefinition and VCommandPaletteCustomItem
+      return `${props.listId}-item-${item.id}-${index}`
     }
 
-    const handleActionClick = (action: ActionDefinition<ActionContext>) => {
-      if (action.subItems && typeof action.subItems === 'function') {
-        emit('itemNavigate', action)
+    const handleActionClick = (item: ActionDefinition<ActionContext> | VCommandPaletteCustomItem) => {
+      // Check for subItems, which can exist on both types
+      if (item.subItems && typeof item.subItems === 'function') {
+        emit('itemNavigate', item)
       } else {
-        emit('actionClick', action)
+        emit('actionClick', item)
       }
     }
 
-    // Helper function to safely render slots with proper fallbacks
     const renderSlotWithFallback = (
       slotFn: ((scope: any) => VNode[] | VNode | string | undefined) | undefined,
       scope: any,
       fallbackFn: () => VNode | VNode[]
     ): VNode | VNode[] => {
-      if (process.env.NODE_ENV === 'test') {
-        // eslint-disable-next-line no-console
-        console.debug('[VCommandPaletteList] renderSlotWithFallback invoked', { slotProvided: !!slotFn, scope })
-      }
       if (!slotFn) return fallbackFn()
-
       try {
         const slotResult = slotFn(scope)
-
         if (slotResult == null) return fallbackFn()
-
-        // If the slot returns an HTML string, wrap it in a VNode that uses v-html for rendering.
-        // This is a common pattern for allowing slots to return raw HTML strings.
         if (typeof slotResult === 'string') {
-          if (slotResult.trim().length === 0) return fallbackFn() // Empty string, use fallback
-          // For test debugging, let's see what we're trying to render
-          if (process.env.NODE_ENV === 'test') {
-            // eslint-disable-next-line no-console
-            console.debug('[VCommandPaletteList] Rendering string slot content:', slotResult.slice(0, 100))
-          }
-          // Ensure the string is actual HTML markup before using v-html
-          return slotResult.trim().startsWith('<')
-            ? <div v-html={ slotResult } /> // Using <div> as a generic wrapper for string HTML
-            : <>{ slotResult }</> // Treat as text node if not starting with '<'
+          return slotResult.trim().length > 0 ? (slotResult.trim().startsWith('<') ? <div v-html={ slotResult } /> : <>{ slotResult }</>) : fallbackFn()
         }
-
-        // If it's an array, ensure it's not empty.
         if (Array.isArray(slotResult)) {
           return slotResult.length > 0 ? slotResult : fallbackFn()
         }
-
-        // Otherwise, assume it's a single VNode or a component that will render.
         return slotResult
       } catch (err) {
         console.error('[VCommandPaletteList] Error rendering slot:', err)
@@ -156,26 +142,27 @@ export const VCommandPaletteList = genericComponent<{
             )
           ) : (
             <>
-              { props.actions.map((item, index) => {
-                if (isHeaderItem(item)) {
+              { props.actions.map((itemOrHeader, index) => {
+                if (isHeaderItem(itemOrHeader)) {
                   return renderSlotWithFallback(
                     slots.subheader,
-                    { title: item.title, id: item.id },
-                    () => <VListSubheader key={ item.id } class="v-command-palette__subheader">{ item.title }</VListSubheader>
+                    { title: itemOrHeader.title, id: itemOrHeader.id },
+                    () => <VListSubheader key={ itemOrHeader.id } class="v-command-palette__subheader">{ itemOrHeader.title }</VListSubheader>
                   )
                 }
 
-                const action = item as ActionDefinition<ActionContext>
-                const itemHtmlId = getItemHtmlId(action, index)
+                const item = itemOrHeader as ActionDefinition<ActionContext> | VCommandPaletteCustomItem
+                const itemHtmlId = getItemHtmlId(item, index)
                 const isSelected = index === props.selectedIndex
 
-                const select = () => handleActionClick(action)
+                const select = () => handleActionClick(item)
                 const scopeItem: VCommandPaletteListItemScope = {
-                  action,
+                  item,
                   index,
                   itemHtmlId,
                   isSelected,
                   select,
+                  isUsingActionCore: props.isUsingActionCore,
                 }
 
                 return renderSlotWithFallback(
@@ -183,26 +170,36 @@ export const VCommandPaletteList = genericComponent<{
                   scopeItem,
                   () => (
                     <VListItem
-                      key={ action.id }
+                      key={ item.id } // Assuming item.id is unique and suitable as key
                       id={ itemHtmlId }
                       role="option"
                       aria-selected={ isSelected }
-                      title={ unref(action.title) }
-                      subtitle={ unref(action.subtitle) ?? undefined }
+                      title={ unref(item.title) }
+                      subtitle={ unref((item as any).subtitle) ?? undefined }
                       active={ isSelected }
                       onClick={ select }
                       class={{
                         'v-command-palette__item--selected': isSelected,
                         [`v-command-palette__item--${props.density}`]: !!props.density && props.density !== 'default',
                       }}
-                      value={ action.id }
+                      value={ item.id } // value prop for VList's selection model if used
                       nav
                     >
                       {{
-                        prepend: () => action.icon ? <VIcon icon={ unref(action.icon) } /> : undefined,
+                        prepend: () => item.icon ? <VIcon icon={ unref(item.icon) } /> : undefined,
                         append: () => {
-                          const displayHotkey = Array.isArray(action.hotkey) ? action.hotkey[0] : action.hotkey
-                          return displayHotkey ? <VHotKey hotkey={ displayHotkey } dense /> : null
+                          let hotkeyDisplayContent: string | undefined = undefined
+                          if (props.isUsingActionCore) {
+                            // For ActionDefinition, VHotKey uses action.id and actionCore instance implicitly (or action.hotkey)
+                            const ad = item as ActionDefinition // Type assertion
+                            const displayHotkey = Array.isArray(ad.hotkey) ? ad.hotkey[0] : ad.hotkey
+                            return displayHotkey ? <VHotKey hotkey={ displayHotkey } dense /> : null
+                          } else {
+                            // For VCommandPaletteCustomItem, use hotkeyDisplay
+                            const ci = item as VCommandPaletteCustomItem // Type assertion
+                            hotkeyDisplayContent = Array.isArray(ci.hotkeyDisplay) ? ci.hotkeyDisplay[0] : ci.hotkeyDisplay
+                            return hotkeyDisplayContent ? <kbd class="v-command-palette__hotkey-display">{ hotkeyDisplayContent }</kbd> : null
+                          }
                         },
                       }}
                     </VListItem>
@@ -217,11 +214,9 @@ export const VCommandPaletteList = genericComponent<{
 
     const scrollToItem = (index: number) => {
       if (index < 0 || index >= props.actions.length) return
-
       try {
         const item = props.actions[index]
         if (!item) return
-
         const element = document.getElementById(getItemHtmlId(item, index))
         if (element && typeof element.scrollIntoView === 'function') {
           element.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
@@ -238,3 +233,20 @@ export const VCommandPaletteList = genericComponent<{
 })
 
 export type VCommandPaletteList = InstanceType<typeof VCommandPaletteList>;
+
+// Add a simple style for the kbd tag if not already globally styled
+// This would typically go in a .scss file associated with VCommandPalette or VHotKey
+const kbdStyle = document.createElement('style');
+kbdStyle.innerHTML = `
+  .v-command-palette__hotkey-display {
+    font-size: 0.75em;
+    padding: 0.1em 0.4em;
+    border-radius: 3px;
+    border: 1px solid #ccc; /* Adjust color as per theme */
+    background-color: #f7f7f7; /* Adjust color as per theme */
+    color: #333; /* Adjust color as per theme */
+    margin-left: 8px;
+    white-space: nowrap;
+  }
+`;
+document.head.appendChild(kbdStyle);

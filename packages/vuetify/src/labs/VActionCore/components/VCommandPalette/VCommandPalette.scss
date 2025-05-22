@@ -36,6 +36,8 @@ $v-command-palette-compact-list-item-height: 32px !default;
       }
     }
     .v-command-palette__title {
+      display: inline-block;
+      align-items: center;
       border: 1px solid rgba(var(--v-border-color), var(--v-border-opacity));
       border-radius: 4px;
       padding: 4px 8px;

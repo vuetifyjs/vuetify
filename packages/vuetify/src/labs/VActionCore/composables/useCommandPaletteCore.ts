@@ -2,21 +2,23 @@
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, nextTick, onMounted, onUnmounted, ref, shallowRef, unref, watch } from 'vue'
+import { computed, nextTick, ref, shallowRef, unref, watch, onScopeDispose } from 'vue'
 import { useId } from 'vue'
 
 // Types
 import type { Ref } from 'vue'
-import { defaultGroupPriorities, isHeaderItem, isPromise, log, UNGROUPED_PRIORITY, UNGROUPED_TITLE } from '../utils'
+import { log } from '../utils'
 import { commandPaletteNavigationActions as baseNavigationActions } from '../utils/commandPaletteNavigationActions'
 import type { VTextField } from '@/components/VTextField' // For searchInputRef type
 import type { ActionContext, ActionCorePublicAPI, ActionDefinition } from '@/labs/VActionCore'
+import { VCommandPaletteCustomItem, VCommandPaletteSearchFunction } from '../components/VCommandPalette/VCommandPalette' // Import new types
 
 // Types from VCommandPalette.tsx
-export interface PaletteLevel { // Exporting PaletteLevel
-  parentAction?: ActionDefinition
-  actions: readonly ActionDefinition[]
-  title?: string
+export interface PaletteLevel<T extends ActionDefinition | VCommandPaletteCustomItem = ActionDefinition | VCommandPaletteCustomItem> {
+  id: string | number
+  title?: string | Ref<string>
+  actions: Readonly<T[]> // Ensure T[] is readonly
+  parentAction?: T
 }
 
 export interface UseCommandPaletteCoreProps {
@@ -24,21 +26,27 @@ export interface UseCommandPaletteCoreProps {
   'onUpdate:modelValue': ((value: boolean) => void) | undefined
   closeOnExecute?: boolean
   // placeholder?: string // Placeholder is a direct prop for the search input component
+  // --- New Agnostic Mode Props ---
+  items?: VCommandPaletteCustomItem[]
+  searchFunction?: VCommandPaletteSearchFunction
+  keymapNavigateDown?: string
+  keymapNavigateUp?: string
+  keymapSelectItem?: string
+  keymapNavigateBackOrClose?: string
+  // --- End New Agnostic Mode Props ---
 }
 
 // Define the structure of what the hosting component's setup function will emit
 type CommandPaletteEmit = {
   (e: 'update:modelValue', value: boolean): void
   (e: 'update:list'): void // For tests
+  (e: 'item-activated', item: VCommandPaletteCustomItem): void // For agnostic mode
 }
 
 // Define the type for the list component ref, assuming it will have a scrollToItem method
 export interface CommandPaletteListRef extends HTMLElement {
   scrollToItem: (index: number) => void
 }
-
-// Store for action source keys to unregister them later
-let paletteNavigationActionsSourceKey: symbol | null = null
 
 export function useCommandPaletteCore (
   props: UseCommandPaletteCoreProps,
@@ -53,316 +61,223 @@ export function useCommandPaletteCore (
 
   const searchText = ref('')
   const selectedIndex = ref(0)
-  const listId = useId() // Used for ARIA linking
+  const listId = ref(useId()) // Changed to ref(useId())
   const isLoadingSubItems = ref(false)
-  const actionStack = shallowRef<PaletteLevel[]>([])
+  const actionStack = shallowRef<PaletteLevel<ActionDefinition | VCommandPaletteCustomItem>[]>([])
 
-  const currentLevel = computed<PaletteLevel | undefined>(() => actionStack.value[actionStack.value.length - 1])
-  const currentParentAction = computed(() => currentLevel.value?.parentAction)
-  const currentLevelTitle = computed(() => unref(currentParentAction.value?.title) || currentLevel.value?.title || undefined)
+  // --- Agnostic Mode ---
+  const isUsingActionCore = computed(() => !!actionCore && !props.items)
+  const currentRootItems = computed(() => {
+    if (isUsingActionCore.value || !props.items) return []
+    return props.items
+  })
+
+  // --- Computeds for UI ---
+  const currentLevel = computed<PaletteLevel<ActionDefinition | VCommandPaletteCustomItem>>(() => {
+    return actionStack.value[actionStack.value.length - 1] || { id: 'root', title: 'Root', actions: [] }
+  })
+
+  const currentLevelTitle = computed(() => unref(currentLevel.value.title))
   const isRootLevel = computed(() => actionStack.value.length <= 1)
+  const currentParentAction = computed(() => currentLevel.value.parentAction)
 
-  const initializeStack = () => {
-    if (actionCore && isActive.value) {
-      actionStack.value = [{
-        actions: actionCore.allActions.value.filter((action: ActionDefinition) => !action.meta?.paletteHidden),
-      }]
-      searchText.value = ''
-      selectedIndex.value = 0 // Reset index when stack re-initializes
-    }
-  }
-
-  watch(() => actionCore?.allActions.value, () => {
-    // Re-initialize stack if actionCore actions change AND palette is active
-    // This avoids re-initializing (and losing current sub-item navigation) if actions change while palette is closed.
-    if (isActive.value) {
-      initializeStack()
-    }
-  }, { deep: true }) // Removed immediate: true, initializeStack is called in isActive watcher
-
-  const focusSearchInput = () => {
-    nextTick(() => {
-      try {
-        if (searchInputRef.value && typeof searchInputRef.value.focus === 'function') {
-          searchInputRef.value.focus()
-        } else {
-          log('debug', 'CommandPaletteCore', 'search input not available or focus is not a function')
-        }
-      } catch (err) {
-        log('debug', 'CommandPaletteCore', 'focus error', err)
+  // Initialize the action stack (e.g., on mount or when palette opens)
+  const initializeStack = async () => {
+    isLoadingSubItems.value = true
+    try {
+      let rootActions: Readonly<(ActionDefinition | VCommandPaletteCustomItem)[]> = []
+      if (isUsingActionCore.value && actionCore) {
+        // Filter out actions marked as paletteHidden for the root level
+        rootActions = actionCore.allActions.value.filter(action => !action.meta?.paletteHidden)
+      } else if (props.items) {
+        rootActions = props.items
       }
-    })
+      actionStack.value = [{ id: 'root', title: 'All Commands', actions: rootActions }]
+    } catch (error) {
+      console.error('[VCommandPaletteCore] Failed to initialize action stack:', error)
+      actionStack.value = [{ id: 'root', title: 'Error Loading', actions: [] }]
+    } finally {
+      isLoadingSubItems.value = false
+      selectedIndex.value = 0 // Reset selection
+    }
   }
 
-  watch(isActive, (val, oldVal) => {
-    if (val && !oldVal) { // Became active
-      initializeStack()
-      focusSearchInput()
-      registerNavigationActions() // Register actions when palette becomes active
-    } else if (!val && oldVal) { // Became inactive
-      searchText.value = '' // Clear search on close
-      unregisterNavigationActions() // Unregister actions when palette becomes inactive
-    }
+  // Actions to be filtered and displayed (current level's actions)
+  const actionsForCurrentLevel = computed(() => {
+    return currentLevel.value.actions || []
   })
 
+  // Filtered actions based on search text
   const filteredActions = computed(() => {
-    const actionsToFilter = currentLevel.value?.actions ?? []
-    const query = searchText.value.toLowerCase().trim()
-    if (!query) return actionsToFilter
+    const source = actionsForCurrentLevel.value
+    const search = searchText.value.trim().toLowerCase()
 
-    return actionsToFilter.filter(action => {
-      const titleValue = unref(action.title)
-      const titleMatch = titleValue.toLowerCase().includes(query)
-      let keywordMatch = false
-      if (action.keywords) {
-        if (typeof action.keywords === 'string') {
-          keywordMatch = action.keywords.toLowerCase().includes(query)
-        } else {
-          keywordMatch = action.keywords.some(k => k.toLowerCase().includes(query))
-        }
-      }
-      return titleMatch || keywordMatch
+    if (props.searchFunction) {
+      return props.searchFunction(source, searchText.value, isUsingActionCore.value ? 'actionCore' : 'customItems')
+    }
+
+    if (!search) return source
+
+    return source.filter((itemOrAction: ActionDefinition | VCommandPaletteCustomItem) => {
+      const item = itemOrAction as any // Allow access to common properties
+      const title = unref(item.title)?.toLowerCase() || ''
+      const subtitle = unref((item as any).subtitle)?.toLowerCase() // Subtitle might not exist on ActionDefinition directly
+      const keywords = Array.isArray(item.keywords)
+        ? item.keywords.join(' ').toLowerCase()
+        : typeof item.keywords === 'string' ? item.keywords.toLowerCase() : ''
+
+      return title.includes(search) ||
+             (subtitle && subtitle.includes(search)) ||
+             (keywords && keywords.includes(search))
     })
   })
 
+  // Group and sort actions
   const groupedAndSortedActions = computed(() => {
-    const groups: Record<string, ActionDefinition[]> = {}
-    const ungrouped: ActionDefinition[] = []
-    const validActions = filteredActions.value.filter(action => action && typeof action === 'object' && 'id' in action && !isHeaderItem(action))
+    const items = filteredActions.value
+    const grouped: Record<string, (ActionDefinition | VCommandPaletteCustomItem)[]> = {}
+    const ungrouped: (ActionDefinition | VCommandPaletteCustomItem)[] = []
 
-    validActions.forEach(actionDef => {
-      const groupName = actionDef.group
-      if (groupName) {
-        if (!groups[groupName]) groups[groupName] = []
-        groups[groupName].push(actionDef)
+    for (const item of items) {
+      if (item.group) {
+        if (!grouped[item.group]) grouped[item.group] = []
+        grouped[item.group].push(item)
       } else {
-        ungrouped.push(actionDef)
+        ungrouped.push(item)
       }
-    })
-
-    const sortedGroupNames = Object.keys(groups).sort((a, b) => {
-      const priorityA = defaultGroupPriorities[a] ?? UNGROUPED_PRIORITY
-      const priorityB = defaultGroupPriorities[b] ?? UNGROUPED_PRIORITY
-      if (priorityA !== priorityB) return priorityA - priorityB
-      return a.localeCompare(b)
-    })
-
-    const result: ({ isHeader: true, title: string, id: string } | ActionDefinition)[] = []
-    sortedGroupNames.forEach(groupName => {
-      result.push({ isHeader: true, title: groupName, id: `group-header-${groupName}` })
-      groups[groupName].sort((a, b) => {
-        const orderA = a.order ?? Infinity
-        const orderB = b.order ?? Infinity
-        if (orderA !== orderB) return orderA - orderB
-        return unref(a.title).localeCompare(unref(b.title))
-      }).forEach(action => result.push(action))
-    })
-
-    if (ungrouped.length > 0) {
-      if (Object.keys(groups).length > 0) {
-        result.push({ isHeader: true, title: UNGROUPED_TITLE, id: `group-header-${UNGROUPED_TITLE}` })
-      }
-      ungrouped.sort((a, b) => {
-        const orderA = a.order ?? Infinity
-        const orderB = b.order ?? Infinity
-        if (orderA !== orderB) return orderA - orderB
-        return unref(a.title).localeCompare(unref(b.title))
-      }).forEach(action => result.push(action))
     }
+
+    const result: (ActionDefinition | VCommandPaletteCustomItem | { isHeader: true, title: string, id: string })[] = []
+    // const groupOrder = actionCore?.groupOrder?.value // Removed groupOrder for now
+    const sortedGroupNames = Object.keys(grouped).sort((a, b) => a.localeCompare(b)) // Fallback sorting
+
+    for (const groupName of sortedGroupNames) {
+      result.push({ isHeader: true, title: groupName, id: `header-${groupName}` })
+      // Sort items within the group by their order prop, then title
+      const sortedGroupItems = grouped[groupName].sort((a, b) => {
+        const orderA = a.order ?? Infinity
+        const orderB = b.order ?? Infinity
+        if (orderA !== orderB) return orderA - orderB
+        return (unref(a.title) ?? '').localeCompare(unref(b.title) ?? '')
+      })
+      result.push(...sortedGroupItems)
+    }
+
+    // Add ungrouped items, sorted by their order prop, then title
+    const sortedUngroupedItems = ungrouped.sort((a, b) => {
+      const orderA = a.order ?? Infinity
+      const orderB = b.order ?? Infinity
+      if (orderA !== orderB) return orderA - orderB
+      return (unref(a.title) ?? '').localeCompare(unref(b.title) ?? '')
+    })
+    result.push(...sortedUngroupedItems)
+
     return result
   })
 
-  watch(groupedAndSortedActions, async () => {
-    const firstActionIndex = groupedAndSortedActions.value.findIndex(item => item && !isHeaderItem(item))
-    selectedIndex.value = firstActionIndex >= 0 ? firstActionIndex : 0
-    await nextTick()
-    emit('update:list')
-  }, { deep: true, immediate: true })
-
-  const getItemHtmlId = (itemInput: ActionDefinition | { isHeader: true, title: string, id: string }, index: number): string => {
-    if (isHeaderItem(itemInput)) {
-      return `${listId}-${itemInput.id}-${index}` // Headers now have own ID
-    }
-    const action = itemInput as ActionDefinition
-    return `${listId}-item-${action.id}-${index}`
-  }
-
+  // Active descendant for ARIA
   const activeDescendantId = computed(() => {
-    if (
-      isActive.value &&
-      groupedAndSortedActions.value.length > 0 &&
-      selectedIndex.value >= 0 &&
-      selectedIndex.value < groupedAndSortedActions.value.length
-    ) {
-      const item = groupedAndSortedActions.value[selectedIndex.value]
-      if (item && !isHeaderItem(item)) {
-        return getItemHtmlId(item, selectedIndex.value)
-      }
+    if (selectedIndex.value < 0 || selectedIndex.value >= groupedAndSortedActions.value.length) {
+      return undefined
     }
-    return undefined
+    const item = groupedAndSortedActions.value[selectedIndex.value]
+    return item ? getItemHtmlId(item, selectedIndex.value) : undefined
   })
 
-  async function executeCoreAction (action: ActionDefinition) {
-    if (!actionCore) return
-    try {
-      await actionCore.executeAction(action.id, { trigger: 'command-palette' })
-      if (props.closeOnExecute) {
-        isActive.value = false
-        // emit('update:modelValue', false) // isActive is proxied, so this is handled
-      }
-    } catch (err) {
-      log('error', 'CommandPaletteCore', `execute action "${action.id}"`, err)
-    }
-  }
-
-  async function navigateToSubItems (action: ActionDefinition) {
-    if (!action.subItems || typeof action.subItems !== 'function') return
+  // --- Item Activation & Navigation ---
+  const navigateToSubItems = async (parentItem: ActionDefinition | VCommandPaletteCustomItem) => {
+    if (!parentItem.subItems || typeof parentItem.subItems !== 'function') return
 
     isLoadingSubItems.value = true
     try {
-      const rawSubActions = action.subItems({ trigger: 'command-palette-navigation', data: { parentActionId: action.id } } as ActionContext)
-      let subActionsResult
+      const context = isUsingActionCore.value && actionCore
+        ? (actionCore as any).getContext(parentItem.id as string) || {}
+        : {}
 
-      if (isPromise(rawSubActions)) {
-        subActionsResult = await rawSubActions
-      } else {
-        subActionsResult = rawSubActions
-      }
+      const subItemsResult = await parentItem.subItems(context)
+      const subItemsArray = Array.isArray(subItemsResult) ? subItemsResult : []
 
-      const subActions = (Array.isArray(subActionsResult) ? subActionsResult : []).filter((subAct: ActionDefinition) => !subAct.meta?.paletteHidden)
-
-      actionStack.value = [...actionStack.value, {
-        parentAction: action,
-        actions: subActions,
-        title: unref(action.title), // Carry title for the level
-      }]
-      searchText.value = ''
+      actionStack.value = [
+        ...actionStack.value,
+        {
+          id: parentItem.id,
+          title: unref(parentItem.title),
+          actions: subItemsArray as Readonly<(ActionDefinition | VCommandPaletteCustomItem)[]>, // Ensure type match
+          parentAction: parentItem,
+        },
+      ]
+      searchText.value = '' // Clear search for new level
       selectedIndex.value = 0
-      await nextTick()
-      focusSearchInput() // Use the helper function for consistent focus handling
-    } catch (err) {
-      log('error', 'CommandPaletteCore', `load subItems for "${action.id}"`, err)
+    } catch (error) {
+      console.error(`[VCommandPaletteCore] Error loading subItems for ${parentItem.id}:`, error)
+      // Optionally, push an error state level or revert to parent
     } finally {
       isLoadingSubItems.value = false
+      emit('update:list') // Notify that the list has changed
     }
   }
 
-  async function handleItemActivated (action: ActionDefinition) {
-    if (action.subItems && typeof action.subItems === 'function') {
-      await navigateToSubItems(action)
-    } else {
-      await executeCoreAction(action)
-    }
-  }
-
-  async function navigateBack () {
-    if (!isRootLevel.value) {
+  const navigateBack = async () => {
+    if (actionStack.value.length > 1) {
       actionStack.value = actionStack.value.slice(0, -1)
       searchText.value = ''
       selectedIndex.value = 0
-      await nextTick()
-      focusSearchInput() // Use the helper function for consistent focus handling
+      await nextTick() // Ensure UI updates before focusing or scrolling
+      focusSearchInput()
+      emit('update:list')
+    } else {
+      // At root level, close the palette
+      isActive.value = false
     }
   }
 
-  async function scrollToSelected () {
-    await nextTick()
-    const currentItem = groupedAndSortedActions.value[selectedIndex.value]
-    if (currentItem && !isHeaderItem(currentItem)) {
-      if (listRef.value && typeof listRef.value.scrollToItem === 'function') {
-        listRef.value.scrollToItem(selectedIndex.value)
-      } else {
-        log('debug', 'CommandPaletteCore', 'listRef or scrollToItem not available')
+  const handleItemActivated = async (itemOrAction: ActionDefinition | VCommandPaletteCustomItem) => {
+    const item = itemOrAction // Alias for clarity
+
+    if (item.disabled === true || (typeof item.disabled === 'object' && item.disabled?.value === true)) {
+      return // Do nothing if disabled
+    }
+
+    if (item.subItems && typeof item.subItems === 'function') {
+      await navigateToSubItems(item)
+    } else {
+      // Execute action or handler
+      if (isUsingActionCore.value && actionCore && 'id' in item && typeof item.id === 'string' && !props.items) { // Check !props.items for ActionDef
+        await actionCore.executeAction(item.id, { trigger: 'command-palette', actionId: item.id } as ActionContext)
+      } else if ('handler' in item && typeof item.handler === 'function') {
+        // It's a VCommandPaletteCustomItem with a handler
+        await item.handler(item as VCommandPaletteCustomItem)
+      } else if ('onSelect' in item && typeof item.onSelect === 'function') {
+         // It's a VCommandPaletteCustomItem with onSelect
+        await item.onSelect(item as VCommandPaletteCustomItem)
+      } else if (!isUsingActionCore.value) {
+        // Agnostic mode, no handler/onSelect, emit event
+        emit('item-activated', item as VCommandPaletteCustomItem)
+      }
+
+      if (props.closeOnExecute) {
+        isActive.value = false
       }
     }
   }
 
-  // --- Start: VActionCore Navigation Integration ---
+  // --- Keyboard Navigation Handlers (Agnostic and ActionCore modes) ---
   const navigationActionHandlers = {
-    navigateDown: async () => {
-      const items = groupedAndSortedActions.value
-      if (!items || items.length === 0) return
-      let newIndex = selectedIndex.value
-      do {
-        newIndex = (newIndex + 1)
-        if (newIndex >= items.length) newIndex = 0
-      } while (items.length > 1 && isHeaderItem(items[newIndex]) && newIndex !== selectedIndex.value)
-      selectedIndex.value = newIndex
-      await scrollToSelected()
+    navigateDown: () => {
+      if (groupedAndSortedActions.value.length === 0) return
+      selectedIndex.value = (selectedIndex.value + 1) % groupedAndSortedActions.value.length
+      scrollToSelected()
     },
-    navigateUp: async () => {
-      const items = groupedAndSortedActions.value
-      if (!items || items.length === 0) return
-      let newIndex = selectedIndex.value
-      do {
-        newIndex = (newIndex - 1 + items.length)
-        newIndex %= items.length
-      } while (items.length > 1 && isHeaderItem(items[newIndex]) && newIndex !== selectedIndex.value)
-      selectedIndex.value = newIndex
-      await scrollToSelected()
-    },
-    navigatePageDown: async () => {
-      const items = groupedAndSortedActions.value
-      if (!items || items.length === 0) return
-      let newIndex = selectedIndex.value
-      const BATCH_SIZE = 5
-      for (let i = 0; i < BATCH_SIZE; i++) {
-        let tempIndex = newIndex
-        do {
-          tempIndex = (tempIndex + 1)
-          if (tempIndex >= items.length) tempIndex = items.length - 1
-        } while (items.length > 1 && isHeaderItem(items[tempIndex]) && tempIndex !== newIndex && tempIndex < items.length - 1)
-        if (tempIndex === newIndex && i > 0) break // Avoid infinite loop if all remaining are headers
-        newIndex = tempIndex
-        if (newIndex >= items.length - 1) break
-      }
-      selectedIndex.value = newIndex
-      await scrollToSelected()
-    },
-    navigatePageUp: async () => {
-      const items = groupedAndSortedActions.value
-      if (!items || items.length === 0) return
-      let newIndex = selectedIndex.value
-      const BATCH_SIZE = 5
-      for (let i = 0; i < BATCH_SIZE; i++) {
-        let tempIndex = newIndex
-        do {
-          tempIndex = (tempIndex - 1 + items.length)
-          tempIndex %= items.length
-        } while (items.length > 1 && isHeaderItem(items[tempIndex]) && tempIndex !== newIndex && tempIndex > 0)
-        if (tempIndex === newIndex && i > 0) break // Avoid infinite loop if all remaining are headers
-        newIndex = tempIndex
-        if (newIndex <= 0) break
-      }
-      selectedIndex.value = newIndex
-      await scrollToSelected()
-    },
-    navigateToStart: async () => {
-      const items = groupedAndSortedActions.value
-      if (!items || items.length === 0) return
-      let newIndex = 0
-      while (items.length > 1 && isHeaderItem(items[newIndex]) && newIndex < items.length - 1) {
-        newIndex++
-      }
-      selectedIndex.value = newIndex
-      await scrollToSelected()
-    },
-    navigateToEnd: async () => {
-      const items = groupedAndSortedActions.value
-      if (!items || items.length === 0) return
-      let newIndex = items.length - 1
-      while (items.length > 1 && isHeaderItem(items[newIndex]) && newIndex > 0) {
-        newIndex--
-      }
-      selectedIndex.value = newIndex
-      await scrollToSelected()
+    navigateUp: () => {
+      if (groupedAndSortedActions.value.length === 0) return
+      selectedIndex.value = (selectedIndex.value - 1 + groupedAndSortedActions.value.length) % groupedAndSortedActions.value.length
+      scrollToSelected()
     },
     selectItem: async () => {
-      const items = groupedAndSortedActions.value
-      if (!items || items.length === 0) return
-      const currentItem = items[selectedIndex.value]
-      if (currentItem && !isHeaderItem(currentItem)) {
-        await handleItemActivated(currentItem as ActionDefinition)
+      if (selectedIndex.value < 0 || selectedIndex.value >= groupedAndSortedActions.value.length) return
+      const item = groupedAndSortedActions.value[selectedIndex.value]
+      if (item && !('isHeader' in item)) { // Make sure it's not a header
+        await handleItemActivated(item as ActionDefinition | VCommandPaletteCustomItem)
       }
     },
     navigateBackOrClose: async () => {
@@ -372,76 +287,154 @@ export function useCommandPaletteCore (
         isActive.value = false
       }
     },
+    // Placeholder for other potential actions like PageUp, PageDown, GoToFirst, GoToLast
   }
 
-  const configuredPaletteNavigationActions = baseNavigationActions.map(action => ({
-    ...action,
-    // Ensure these navigation actions do not appear as selectable items in the palette itself
-    // and do not count towards the "has actions" logic. They are purely keyboard triggers.
-    meta: {
-      ...(action as any).meta,
-      paletteHidden: true,
-    },
-    // Attach the correct handler based on action ID
-    handler: (ctx: ActionContext) => {
-      switch (action.id) {
-        case 'commandPalette.navigateDown': return navigationActionHandlers.navigateDown()
-        case 'commandPalette.navigateUp': return navigationActionHandlers.navigateUp()
-        case 'commandPalette.navigatePageDown': return navigationActionHandlers.navigatePageDown()
-        case 'commandPalette.navigatePageUp': return navigationActionHandlers.navigatePageUp()
-        case 'commandPalette.navigateToStart': return navigationActionHandlers.navigateToStart()
-        case 'commandPalette.navigateToEnd': return navigationActionHandlers.navigateToEnd()
-        case 'commandPalette.selectItem': return navigationActionHandlers.selectItem()
-        case 'commandPalette.navigateBackOrClose': return navigationActionHandlers.navigateBackOrClose()
-        default:
-          log('warn', 'CommandPaletteCore', `Unknown navigation action ID: ${action.id}`)
-          return Promise.resolve()
-      }
-    },
-    // Override canExecute to ensure actions only run when palette is active
-    // The runInTextInput in commandPaletteNavigationActions.ts already scopes to palette focus,
-    // but this adds an explicit check for isActive, which is good practice.
-    canExecute: (ctx: ActionContext) => {
-      // If palette not active, or no items and trying to navigate (except Escape)
-      if (!isActive.value || (groupedAndSortedActions.value.length === 0 && action.id !== 'commandPalette.navigateBackOrClose')) {
-        return false
-      }
-      return true
-    },
-  }))
-
-  function registerNavigationActions () {
-    if (actionCore && !paletteNavigationActionsSourceKey) {
-      // Filter out any actions that might not have a handler (though all should for navigation)
-      const actionsToRegister = configuredPaletteNavigationActions.filter(action => typeof action.handler === 'function')
-      if (actionsToRegister.length > 0) {
-        paletteNavigationActionsSourceKey = actionCore.registerActionsSource(actionsToRegister)
-        log('debug', 'CommandPaletteCore', 'Navigation actions registered with ActionCore')
-      }
-    }
-  }
-
-  function unregisterNavigationActions () {
-    if (actionCore && paletteNavigationActionsSourceKey) {
-      actionCore.unregisterActionsSource(paletteNavigationActionsSourceKey)
-      paletteNavigationActionsSourceKey = null
-      log('debug', 'CommandPaletteCore', 'Navigation actions unregistered from ActionCore')
-    }
-  }
-
-  // Initial registration if active on mount (e.g. modelValue initially true)
-  onMounted(() => {
-    if (isActive.value) {
-      registerNavigationActions()
+  // --- Palette Navigation Actions Configuration (for ActionCore or Footer Display) ---
+  const configuredPaletteNavigationActions = computed(() => {
+    if (isUsingActionCore.value && actionCore) {
+      // Use ActionCore's built-in palette navigation actions
+      // These will be registered globally by ActionCore if keybindings are provided
+      return baseNavigationActions.map(navAction => ({
+        ...navAction,
+        // Override handler to use our local navigation logic
+        handler: async (ctx: ActionContext) => {
+          if (navAction.id === 'palette.down') navigationActionHandlers.navigateDown()
+          else if (navAction.id === 'palette.up') navigationActionHandlers.navigateUp()
+          else if (navAction.id === 'palette.select') await navigationActionHandlers.selectItem()
+          else if (navAction.id === 'palette.back') await navigationActionHandlers.navigateBackOrClose()
+          // Potentially other default navigation actions if added
+        },
+        // Ensure canExecute respects palette's active state
+        canExecute: (ctx: ActionContext) => isActive.value && (navAction.canExecute ? navAction.canExecute(ctx) : true),
+      }))
+    } else {
+      // Provide static definitions for display in agnostic mode (e.g., in footer)
+      // These are not registered as global hotkeys by default in this mode.
+      return [
+        { id: 'internal.down', title: 'Navigate Down', hotkeyDisplay: props.keymapNavigateDown, handler: navigationActionHandlers.navigateDown, order: 1 },
+        { id: 'internal.up', title: 'Navigate Up', hotkeyDisplay: props.keymapNavigateUp, handler: navigationActionHandlers.navigateUp, order: 2 },
+        { id: 'internal.select', title: 'Select Item', hotkeyDisplay: props.keymapSelectItem, handler: navigationActionHandlers.selectItem, order: 3 },
+        { id: 'internal.back', title: 'Back/Close', hotkeyDisplay: props.keymapNavigateBackOrClose, handler: navigationActionHandlers.navigateBackOrClose, order: 4 },
+      ]
     }
   })
 
-  // Ensure cleanup on unmount
-  onUnmounted(() => {
-    unregisterNavigationActions()
-  })
-  // --- End: VActionCore Navigation Integration ---
+  // --- Global Keydown Listener for Agnostic Mode Navigation ---
+  const handleAgnosticKeyDown = (event: KeyboardEvent) => {
+    if (!isActive.value || isUsingActionCore.value) return // Only run if active and not using ActionCore for nav
 
+    // Prevent default for navigation keys if they are handled and palette is focused
+    // This requires careful consideration of where focus is (input vs list)
+    // For now, basic matching:
+    let handled = false
+    if (event.key === props.keymapNavigateDown) {
+      navigationActionHandlers.navigateDown()
+      handled = true
+    } else if (event.key === props.keymapNavigateUp) {
+      navigationActionHandlers.navigateUp()
+      handled = true
+    } else if (event.key === props.keymapSelectItem) {
+      navigationActionHandlers.selectItem() // is async, but keydown handler is sync
+      handled = true
+    } else if (event.key === props.keymapNavigateBackOrClose) {
+      navigationActionHandlers.navigateBackOrClose() // is async
+      handled = true
+    }
+
+    if (handled) {
+      // Only preventDefault if the input itself shouldn't handle it (e.g. ArrowUp/Down in text)
+      // This is tricky. runInTextInputMatches is from ActionCore, we need a simpler check or assume
+      // that if the palette is open, these keys are for the palette.
+      // A more robust solution would check if event.target is the search input.
+      const targetIsSearchInput = searchInputRef.value && searchInputRef.value.$el.contains(event.target as Node)
+      const shouldRunInTextInput = targetIsSearchInput && ['ArrowUp', 'ArrowDown', 'Enter'].includes(event.key)
+
+      if(!shouldRunInTextInput) { // Basic check, improve if needed
+         event.preventDefault()
+         event.stopPropagation()
+      }
+    }
+  }
+
+  // --- Effects ---
+  // Watch for external changes to modelValue (v-model)
+  watch(() => props.modelValue, (newValue) => {
+    isActive.value = newValue
+  })
+
+  // When palette visibility changes
+  watch(isActive, async (newVal, oldVal) => {
+    emit('update:modelValue', newVal) // Emit back to parent for v-model
+    if (newVal) {
+      await initializeStack() // Re-initialize or load root actions
+      await nextTick() // Ensure DOM is updated
+      focusSearchInput()
+      // Register keydown listener for agnostic mode if palette becomes active
+      if (!isUsingActionCore.value) {
+        document.addEventListener('keydown', handleAgnosticKeyDown, true) // Use capture phase
+      }
+    } else {
+      // Reset state when closing
+      searchText.value = ''
+      selectedIndex.value = 0
+      actionStack.value = [] // Clear stack fully
+      // Remove keydown listener when palette closes
+      if (!isUsingActionCore.value) {
+        document.removeEventListener('keydown', handleAgnosticKeyDown, true)
+      }
+    }
+  })
+
+  // Watch for changes in ActionCore's actions if using it and palette is active
+  watch(() => actionCore?.allActions.value, (newActions, oldActions) => {
+    if (isActive.value && isUsingActionCore.value && newActions !== oldActions) {
+      log('debug', 'CommandPaletteCore', 'ActionCore actions changed, re-initializing stack.');
+      // Only re-initialize if at the root level to avoid disrupting sub-item navigation
+      if (isRootLevel.value) {
+        initializeStack()
+      }
+    }
+  }, { deep: true }) // deep watch might be intensive if allActions is large and changes frequently
+
+  // Reset selection when search text changes or list of actions changes
+  watch([searchText, actionsForCurrentLevel], () => {
+    selectedIndex.value = 0
+    // Do not auto-scroll here as it can be jarring while typing. Scroll on explicit navigation.
+    emit('update:list')
+  })
+
+  // --- Utility Functions ---
+  const focusSearchInput = () => {
+    nextTick(() => {
+      searchInputRef.value?.focus()
+    })
+  }
+
+  const getItemHtmlId = (itemInput: ActionDefinition | VCommandPaletteCustomItem | { isHeader: true, title: string, id: string }, index: number): string => {
+    const item = itemInput as any // Allow access to common properties
+    if (item.isHeader) {
+      return `${unref(listId)}-header-${item.id}-${index}`
+    }
+    // Use item.id which should be present on both ActionDefinition and VCommandPaletteCustomItem
+    return `${unref(listId)}-item-${item.id}-${index}`
+  }
+
+  const scrollToSelected = async () => {
+    await nextTick() // Ensure DOM has rendered with new selection
+    if (listRef.value && selectedIndex.value >= 0) {
+      listRef.value.scrollToItem(selectedIndex.value)
+    }
+  }
+
+  // Cleanup global listener on scope dispose
+  onScopeDispose(() => {
+    if (!isUsingActionCore.value) {
+      document.removeEventListener('keydown', handleAgnosticKeyDown, true)
+    }
+  })
+
+  // --- Exposed API ---
   return {
     // Reactive State
     isActive,
@@ -449,24 +442,28 @@ export function useCommandPaletteCore (
     selectedIndex,
     listId,
     isLoadingSubItems,
-    actionStack, // Could be useful for breadcrumbs if exposed
+    actionStack, // For advanced slot usage or debugging
 
     // Computed Properties
     currentLevelTitle,
     isRootLevel,
-    currentParentAction, // For header slot
+    currentParentAction,
     groupedAndSortedActions,
     activeDescendantId,
 
     // Methods
-    handleItemActivated, // For VCommandPaletteList to call on item click
-    navigateBack, // For VCommandPaletteHeader to call
-    getItemHtmlId, // For VCommandPaletteList to use for item IDs
-    focusSearchInput, // To be called by orchestrator on open
-    scrollToSelected, // Potentially for orchestrator if list doesn't expose it directly
+    handleItemActivated, // Generalized
+    navigateBack,
+    getItemHtmlId,
+    focusSearchInput,
+    scrollToSelected, // For direct manipulation if needed
 
-    // Exposed for displaying keybindings
-    navigationActions: configuredPaletteNavigationActions, // Expose the configured actions
-    actionCoreInstance: actionCore, // Expose ActionCore instance for getting effective hotkeys
+    // Agnostic mode related
+    isUsingActionCore,
+    currentRootItems, // Expose for empty state checks etc.
+
+    // Navigation actions (reactive, depends on mode)
+    navigationActions: configuredPaletteNavigationActions,
+    actionCoreInstance: actionCore, // Expose the instance if available
   }
 }
