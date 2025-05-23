@@ -9,9 +9,14 @@ import type { DirectiveBinding } from 'vue'
 
 const stopSymbol = Symbol('rippleStop')
 
-type VuetifyRippleEvent = (MouseEvent | TouchEvent | KeyboardEvent) & { [stopSymbol]?: boolean }
+type VuetifyRippleEvent = (MouseEvent | TouchEvent | KeyboardEvent | PointerEvent) & { [stopSymbol]?: boolean }
 
 const DELAY_RIPPLE = 80
+
+const isPointerEventSupported = (function(){
+  const el = document.createElement('div')
+  return 'onpointerdown' in el
+})()
 
 function transform (el: HTMLElement, value: string) {
   el.style.transform = value
@@ -285,19 +290,29 @@ function updateRipple (el: HTMLElement, binding: RippleDirectiveBinding, wasEnab
 
   if (enabled && !wasEnabled) {
     if (modifiers.stop) {
-      el.addEventListener('touchstart', rippleStop, { passive: true })
-      el.addEventListener('mousedown', rippleStop)
+      if (isPointerEventSupported) {
+        el.addEventListener('pointerdown', rippleStop)
+      } else {
+        el.addEventListener('touchstart', rippleStop, { passive: true })
+        el.addEventListener('mousedown', rippleStop)
+      }
       return
     }
 
-    el.addEventListener('touchstart', rippleShow, { passive: true })
-    el.addEventListener('touchend', rippleHide, { passive: true })
-    el.addEventListener('touchmove', rippleCancelShow, { passive: true })
-    el.addEventListener('touchcancel', rippleHide)
+    if (isPointerEventSupported) {
+      el.addEventListener('pointerdown', rippleShow)
+      el.addEventListener('pointerup', rippleHide)
+      el.addEventListener('pointerleave', rippleHide)
+    } else {
+      el.addEventListener('touchstart', rippleShow, { passive: true })
+      el.addEventListener('touchend', rippleHide, { passive: true })
+      el.addEventListener('touchmove', rippleCancelShow, { passive: true })
+      el.addEventListener('touchcancel', rippleHide)
 
-    el.addEventListener('mousedown', rippleShow)
-    el.addEventListener('mouseup', rippleHide)
-    el.addEventListener('mouseleave', rippleHide)
+      el.addEventListener('mousedown', rippleShow)
+      el.addEventListener('mouseup', rippleHide)
+      el.addEventListener('mouseleave', rippleHide)
+    }
 
     el.addEventListener('keydown', keyboardRippleShow)
     el.addEventListener('keyup', keyboardRippleHide)
