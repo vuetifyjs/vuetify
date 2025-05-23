@@ -208,9 +208,10 @@ export const VDatePicker = genericComponent<new <
       }
 
       if (Array.isArray(props.allowedDates) && props.allowedDates.length) {
-        return props.allowedDates
-          .map(date => adapter.getYear(adapter.date(date)))
-          .includes(year)
+        for (const date of props.allowedDates) {
+          if (adapter.getYear(adapter.date(date)) === year) return true
+        }
+        return false
       }
 
       return true
@@ -225,10 +226,13 @@ export const VDatePicker = genericComponent<new <
       }
 
       if (Array.isArray(props.allowedDates) && props.allowedDates.length) {
-        return props.allowedDates
-          .filter(date => adapter.getYear(adapter.date(date)) === year.value)
-          .map(date => adapter.getMonth(adapter.date(date)))
-          .includes(month)
+        for (const date of props.allowedDates) {
+          if (
+            adapter.getYear(adapter.date(date)) === year.value &&
+            adapter.getMonth(adapter.date(date)) === month
+          ) return true
+        }
+        return false
       }
 
       return true
