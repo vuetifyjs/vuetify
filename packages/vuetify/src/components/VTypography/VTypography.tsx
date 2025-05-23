@@ -1,7 +1,16 @@
+// Styles
+import './VTypography.sass'
+
+// Composables
+import { makeComponentProps } from '@/composables/component'
+import { useTextColor } from '@/composables/color'
+import { makeTagProps } from '@/composables/tag'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
+
 // Utilities
-import { computed, h } from 'vue'
-import { useDisplay, useTheme } from 'vuetify'
-import { defineComponent } from '@/util'
+import { computed } from 'vue'
+import { useDisplay } from 'vuetify'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -13,62 +22,73 @@ type Variant = keyof typeof typographyStyles
 type Breakpoint = 'sm' | 'md' | 'lg' | 'xl'
 
 export { typographyStyles } from './typography'
-export const VTypography = defineComponent({
-  name: 'VTypography',
-  props: {
-    tag: {
-      type: String,
-      default: 'span',
-    },
-    text: {
-      type: String as PropType<Variant>,
-      required: true,
-    },
-    mobile: {
-      type: String as PropType<Variant>,
-      default: undefined,
-    },
-    mobileBreakpoint: {
-      type: String as PropType<Breakpoint>,
-      default: 'sm',
-    },
-    color: {
-      type: String,
-      default: undefined,
-    },
+
+export const makeVTypographyProps = propsFactory({
+  text: {
+    type: String as PropType<Variant>,
+    default: 'body-medium',
   },
+  mobile: {
+    type: String as PropType<Variant>,
+    default: undefined,
+  },
+  mobileBreakpoint: {
+    type: String as PropType<Breakpoint>,
+    default: 'sm',
+  },
+  color: String,
+
+  ...makeComponentProps(),
+  ...makeTagProps(),
+  ...makeThemeProps(),
+}, 'VTypography')
+
+export const VTypography = genericComponent()({
+  name: 'VTypography',
+
+  props: makeVTypographyProps(),
+
   setup (props, { slots }) {
+    const { themeClasses } = provideTheme(props)
+    const { textColorClasses, textColorStyles } = useTextColor(() => props.color)
     const display = useDisplay()
-    const theme = useTheme()
+
     const currentStyle = computed(() => {
       const isMobile = display[`${props.mobileBreakpoint}AndDown`]?.value
       const variant = isMobile && props.mobile ? props.mobile : props.text
       const baseStyle = typographyStyles[variant] ?? {}
 
-      const resolvedColor = props.color
-        ? theme.current.value.colors[props.color] || props.color
-        : undefined
-
       return {
         ...baseStyle,
-        color: resolvedColor,
         overflow: 'hidden',
         textOverflow: 'ellipsis',
         wordBreak: 'break-word',
         overflowWrap: 'break-word',
         maxWidth: '100%',
         width: '100%',
-
       }
     })
 
-    return () =>
-      h(
-        props.tag,
-        {
-          style: currentStyle.value,
-        },
-        slots.default?.()
-      )
+    useRender(() => (
+      <props.tag
+        class={[
+          'v-typography',
+          themeClasses.value,
+          textColorClasses.value,
+          props.class,
+        ]}
+        style={[
+          currentStyle.value,
+          textColorStyles.value,
+          props.style,
+        ]}
+        v-slots={ slots }
+      />
+    ))
+
+    return {}
   },
 })
+
+export type VTypography = InstanceType<typeof VTypography>
+
