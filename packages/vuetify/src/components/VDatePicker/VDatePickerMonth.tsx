@@ -175,7 +175,7 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
             key={ daysInMonth.value[0].date?.toString() }
             class="v-date-picker-month__days"
           >
-            { !props.hideWeekdays && adapter.getWeekdays(props.firstDayOfWeek, props.weekdayFormat).map(weekDay => (
+            { !props.hideWeekdays && adapter.getWeekdays(props.firstDayOfWeek).map(weekDay => (
               <div
                 class={[
                   'v-date-picker-month__day',

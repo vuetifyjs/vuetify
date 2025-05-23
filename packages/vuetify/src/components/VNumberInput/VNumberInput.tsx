@@ -145,6 +145,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
 
     const incrementSlotProps = {
       props: {
+        style: { touchAction: 'none' },
         onClick: onControlClick,
         onPointerup: onControlMouseup,
         onPointerdown: onUpControlMousedown,
@@ -152,6 +153,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
     }
     const decrementSlotProps = {
       props: {
+        style: { touchAction: 'none' },
         onClick: onControlClick,
         onPointerup: onControlMouseup,
         onPointerdown: onDownControlMousedown,
@@ -309,17 +311,18 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       function incrementControlNode () {
         return !slots.increment ? (
           <VBtn
+            aria-hidden="true"
+            data-testid="increment"
             disabled={ !canIncrease.value }
             flat
-            key="increment-btn"
             height={ controlNodeDefaultHeight.value }
-            data-testid="increment"
-            aria-hidden="true"
             icon={ incrementIcon.value }
+            key="increment-btn"
             onClick={ onControlClick }
-            onPointerup={ onControlMouseup }
             onPointerdown={ onUpControlMousedown }
+            onPointerup={ onControlMouseup }
             size={ controlNodeSize.value }
+            style="touch-action: none"
             tabindex="-1"
           />
         ) : (
@@ -343,18 +346,19 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       function decrementControlNode () {
         return !slots.decrement ? (
           <VBtn
+            aria-hidden="true"
+            data-testid="decrement"
             disabled={ !canDecrease.value }
             flat
-            key="decrement-btn"
             height={ controlNodeDefaultHeight.value }
-            data-testid="decrement"
-            aria-hidden="true"
             icon={ decrementIcon.value }
-            size={ controlNodeSize.value }
-            tabindex="-1"
+            key="decrement-btn"
             onClick={ onControlClick }
-            onPointerup={ onControlMouseup }
             onPointerdown={ onDownControlMousedown }
+            onPointerup={ onControlMouseup }
+            size={ controlNodeSize.value }
+            style="touch-action: none"
+            tabindex="-1"
           />
         ) : (
           <VDefaultsProvider

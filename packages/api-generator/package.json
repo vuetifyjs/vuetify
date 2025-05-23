@@ -1,13 +1,13 @@
 {
   "name": "@vuetify/api-generator",
   "type": "module",
-  "version": "3.8.5",
+  "version": "3.8.6",
   "private": true,
   "description": "",
   "scripts": {
     "build": "node --import tsx src/index.ts",
     "lint": "eslint --ext .ts,.json src -f codeframe --max-warnings 0",
-    "lint:fix": "node --run lint -- --fix"
+    "lint:fix": "pnpm lint --fix"
   },
   "author": "",
   "license": "ISC",
