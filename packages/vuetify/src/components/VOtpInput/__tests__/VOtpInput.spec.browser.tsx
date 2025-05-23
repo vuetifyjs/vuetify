@@ -1,7 +1,7 @@
 import { VOtpInput } from '../VOtpInput'
 
 // Utilities
-import { generate, render, userEvent } from '@test'
+import { generate, render, screen, userEvent } from '@test'
 import { ref } from 'vue'
 
 const stories = {
@@ -18,8 +18,8 @@ const stories = {
 
 describe('VOtpInput', () => {
   it('enters value and moves to next input', async () => {
-    const { container } = render(() => (<VOtpInput />))
-    const inputs = container.querySelectorAll('.v-otp-input input')
+    render(() => (<VOtpInput />))
+    const inputs = screen.getAllByCSS('.v-otp-input input')
 
     await userEvent.click(inputs[0])
     await userEvent.keyboard('1')
@@ -42,8 +42,8 @@ describe('VOtpInput', () => {
   })
 
   it('enters value and moves to next input when focused index is not next', async () => {
-    const { container } = render(() => (<VOtpInput />))
-    const inputs = container.querySelectorAll('.v-otp-input input')
+    render(() => (<VOtpInput />))
+    const inputs = screen.getAllByCSS('.v-otp-input input')
 
     await userEvent.click(inputs[0])
     await userEvent.keyboard('1')
@@ -55,8 +55,8 @@ describe('VOtpInput', () => {
   })
 
   it('removes value and stays on current input when using delete', async () => {
-    const { container } = render(() => (<VOtpInput />))
-    const inputs = container.querySelectorAll('.v-otp-input input')
+    render(() => (<VOtpInput />))
+    const inputs = screen.getAllByCSS('.v-otp-input input')
 
     await userEvent.click(inputs[0])
     await userEvent.keyboard('1234')
@@ -72,8 +72,8 @@ describe('VOtpInput', () => {
   })
 
   it('removes value and goes back when using backspace', async () => {
-    const { container } = render(() => (<VOtpInput />))
-    const inputs = container.querySelectorAll('.v-otp-input input')
+    render(() => (<VOtpInput />))
+    const inputs = screen.getAllByCSS('.v-otp-input input')
 
     await userEvent.click(inputs[0])
     await userEvent.keyboard('1234')
@@ -90,8 +90,8 @@ describe('VOtpInput', () => {
 
   it('emits finish event when all inputs are filled', async () => {
     const onFinish = vi.fn()
-    const { container } = render(() => (<VOtpInput onFinish={ onFinish } />))
-    const inputs = container.querySelectorAll('.v-otp-input input')
+    render(() => (<VOtpInput onFinish={ onFinish } />))
+    const inputs = screen.getAllByCSS('.v-otp-input input')
 
     await userEvent.click(inputs[0])
     await userEvent.keyboard('123456')
@@ -100,21 +100,21 @@ describe('VOtpInput', () => {
   })
 
   it('respects custom length prop', async () => {
-    const { container } = render(() => (<VOtpInput length={ 4 } />))
-    const inputs = container.querySelectorAll('.v-otp-input input:not([type="hidden"])')
+    render(() => (<VOtpInput length={ 4 } />))
+    const inputs = screen.getAllByCSS('.v-otp-input input:not([type="hidden"])')
 
     expect(inputs).toHaveLength(4)
   })
 
   it('handles model value updates', async () => {
     const modelValue = ref('')
-    const { container } = render(() => (
+    render(() => (
       <VOtpInput
         modelValue={ modelValue.value }
         onUpdate:modelValue={ val => { modelValue.value = val } }
       />
     ))
-    const inputs = container.querySelectorAll('.v-otp-input input')
+    const inputs = screen.getAllByCSS('.v-otp-input input')
 
     await userEvent.click(inputs[0])
     await userEvent.keyboard('123')
