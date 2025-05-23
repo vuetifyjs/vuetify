@@ -103,7 +103,8 @@
       "edgedriver",
       "esbuild",
       "geckodriver",
-      "nx"
+      "nx",
+      "vue-demi"
     ]
   }
 }
