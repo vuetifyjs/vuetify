@@ -18,7 +18,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, ref, shallowRef, toRef, watch } from 'vue'
-import { createRange, genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
+import { genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { VPickerSlots } from '@/labs/VPicker/VPicker'
@@ -197,8 +197,11 @@ export const VDatePicker = genericComponent<new <
     function isAllowedInRange (start: unknown, end: unknown) {
       const allowedDates = props.allowedDates
       if (typeof allowedDates !== 'function') return true
-      return createRange(adapter.getDiff(end, start, 'days'))
-        .some(count => allowedDates(adapter.addDays(start, count)))
+      const days = adapter.getDiff(end, start, 'days')
+      for (let i = 0; i < days; i++) {
+        if (allowedDates(adapter.addDays(start, i))) return true
+      }
+      return false
     }
 
     function allowedYears (year: number) {
