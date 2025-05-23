@@ -194,39 +194,41 @@ export const VDatePicker = genericComponent<new <
       return targets
     })
 
+    function isAllowedInRange (start: unknown, end: unknown) {
+      const allowedDates = props.allowedDates
+      if (typeof allowedDates !== 'function') return true
+      return createRange(adapter.getDiff(end, start, 'days'))
+        .some(count => allowedDates(adapter.addDays(start, count)))
+    }
+
     function allowedYears (year: number) {
       if (typeof props.allowedDates === 'function') {
-        const isAllowedDate = props.allowedDates
-        const start = adapter.parseISO(`${year}-01-01`)
-        const yearSize = adapter.getDiff(adapter.endOfYear(start), start, 'days')
-
-        return createRange(yearSize)
-          .some(count => isAllowedDate(adapter.addDays(start, count)))
+        const startOfYear = adapter.parseISO(`${year}-01-01`)
+        return isAllowedInRange(startOfYear, adapter.endOfYear(startOfYear))
       }
 
       if (Array.isArray(props.allowedDates) && props.allowedDates.length) {
-        return props.allowedDates.map(date => adapter.getYear(adapter.date(date))).includes(year)
+        return props.allowedDates
+          .map(date => adapter.getYear(adapter.date(date)))
+          .includes(year)
       }
 
       return true
     }
 
     function allowedMonths (month: number) {
-      if (typeof props.allowedDates === 'function') {
-        const isAllowedDate = props.allowedDates
-        const start = adapter.parseISO(`${year.value}-${month}-01`)
-        const monthSize = adapter.getDiff(adapter.endOfMonth(start), start, 'days')
+      if (!allowedYears(year.value)) return false
 
-        return createRange(monthSize)
-          .some(count => isAllowedDate(adapter.addDays(start, count)))
+      if (typeof props.allowedDates === 'function') {
+        const startOfMonth = adapter.parseISO(`${year.value}-${month}-01`)
+        return isAllowedInRange(startOfMonth, adapter.endOfMonth(startOfMonth))
       }
 
       if (Array.isArray(props.allowedDates) && props.allowedDates.length) {
-        if (!allowedYears(year.value)) return false
-
         return props.allowedDates
           .filter(date => adapter.getYear(adapter.date(date)) === year.value)
-          .map(date => adapter.getMonth(adapter.date(date))).includes(month)
+          .map(date => adapter.getMonth(adapter.date(date)))
+          .includes(month)
       }
 
       return true
