@@ -5,9 +5,8 @@ import { VMenu } from '@/components/VMenu/VMenu'
 import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextField'
 
 // Composables
-import { useDate } from '@/composables/date'
+import { createDateRange, useDate } from '@/composables/date/date'
 import { makeDateFormatProps, useDateFormat } from '@/composables/dateFormat'
-import { useDateRange } from '@/composables/dateRange'
 import { makeDisplayProps, useDisplay } from '@/composables/display'
 import { makeFocusProps, useFocus } from '@/composables/focus'
 import { forwardRefs } from '@/composables/forwardRefs'
@@ -79,7 +78,6 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
   setup (props, { emit, slots }) {
     const { t, current: currentLocale } = useLocale()
     const adapter = useDate()
-    const { createRange } = useDateRange()
     const { isValid, parseDate, formatDate, parserFormat } = useDateFormat(props, currentLocale)
     const { mobile } = useDisplay(props)
     const { isFocused, focus, blur } = useFocus(props)
@@ -218,7 +216,7 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
         if (parts.every(isValid)) {
           if (props.multiple === 'range') {
             const [start, stop] = parts.map(parseDate).toSorted((a, b) => adapter.isAfter(a, b) ? 1 : -1)
-            model.value = createRange(start, stop)
+            model.value = createDateRange({ start, stop, adapter })
           } else {
             model.value = parts.map(parseDate)
           }
