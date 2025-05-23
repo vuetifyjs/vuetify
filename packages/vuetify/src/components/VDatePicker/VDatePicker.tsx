@@ -220,7 +220,7 @@ export const VDatePicker = genericComponent<new <
       if (!allowedYears(year.value)) return false
 
       if (typeof props.allowedDates === 'function') {
-        const startOfMonth = adapter.parseISO(`${year.value}-${month}-01`)
+        const startOfMonth = adapter.parseISO(`${year.value}-${month + 1}-01`)
         return isAllowedInRange(startOfMonth, adapter.endOfMonth(startOfMonth))
       }
 
