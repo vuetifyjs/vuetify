@@ -70,6 +70,8 @@ export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
     if (!slider) throw new Error('[Vuetify] v-slider-thumb must be used inside v-slider or v-range-slider')
 
     const {
+      min,
+      max,
       thumbColor,
       step,
       disabled,
@@ -103,7 +105,7 @@ export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
       e.preventDefault()
 
       const _step = step.value || 0.1
-      const steps = (props.max - props.min) / _step
+      const steps = (max.value - min.value) / _step
       if ([left, right, down, up].includes(e.key)) {
         const increase = vertical.value
           ? [isRtl.value ? left : right, isReversed.value ? down : up]
@@ -111,11 +113,15 @@ export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
         const direction = increase.includes(e.key) ? 1 : -1
         const multiplier = e.shiftKey ? 2 : (e.ctrlKey ? 1 : 0)
 
-        value = value + (direction * _step * multipliers.value[multiplier])
+        if (direction === -1 && value === max.value && !multiplier && !Number.isInteger(steps)) {
+          value = value - (steps % 1) * _step
+        } else {
+          value = value + (direction * _step * multipliers.value[multiplier])
+        }
       } else if (e.key === home) {
-        value = props.min
+        value = min.value
       } else if (e.key === end) {
-        value = props.max
+        value = max.value
       } else {
         const direction = e.key === pagedown ? 1 : -1
         value = value - (direction * _step * (steps > 100 ? steps / 10 : 10))
@@ -154,8 +160,8 @@ export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
           role="slider"
           tabindex={ disabled.value ? -1 : 0 }
           aria-label={ props.name }
-          aria-valuemin={ props.min }
-          aria-valuemax={ props.max }
+          aria-valuemin={ min.value }
+          aria-valuemax={ max.value }
           aria-valuenow={ props.modelValue }
           aria-readonly={ !!readonly.value }
           aria-orientation={ direction.value }
