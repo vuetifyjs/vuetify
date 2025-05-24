@@ -8,6 +8,7 @@ import { makeVToolbarProps, VToolbar } from '@/components/VToolbar/VToolbar'
 import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeScrollProps, useScroll } from '@/composables/scroll'
+import { makePositionProps, usePosition } from '@/composables/position'
 import { useSsrBoot } from '@/composables/ssrBoot'
 import { useToggleScope } from '@/composables/toggleScope'
 
@@ -16,7 +17,7 @@ import { computed, ref, shallowRef, toRef, watchEffect } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
-import type { PropType } from 'vue'
+import type { PropType, ComputedRef } from 'vue'
 import type { VToolbarSlots } from '@/components/VToolbar/VToolbar'
 
 export const makeVAppBarProps = propsFactory({
@@ -24,11 +25,6 @@ export const makeVAppBarProps = propsFactory({
   modelValue: {
     type: Boolean,
     default: true,
-  },
-  location: {
-    type: String as PropType<'top' | 'bottom'>,
-    default: 'top',
-    validator: (value: any) => ['top', 'bottom'].includes(value),
   },
 
   ...makeVToolbarProps(),
@@ -53,6 +49,11 @@ export const VAppBar = genericComponent<VToolbarSlots>()({
   setup (props, { slots }) {
     const vToolbarRef = ref<VToolbar>()
     const isActive = useProxiedModel(props, 'modelValue')
+
+    const position = computed(() => {
+      return props.location?.split(' ').shift() ?? 'bottom'
+    }) as ComputedRef<Position>
+
     const scrollBehavior = computed(() => {
       const behavior = new Set(props.scrollBehavior?.split(' ') ?? [])
       return {
@@ -132,11 +133,12 @@ export const VAppBar = genericComponent<VToolbarSlots>()({
       })
     })
 
+
     const { ssrBootStyles } = useSsrBoot()
     const { layoutItemStyles } = useLayoutItem({
       id: props.name,
       order: computed(() => parseInt(props.order, 10)),
-      position: toRef(() => props.location),
+      position,
       layoutSize: height,
       elementSize: shallowRef(undefined),
       active: isActive,
@@ -152,7 +154,7 @@ export const VAppBar = genericComponent<VToolbarSlots>()({
           class={[
             'v-app-bar',
             {
-              'v-app-bar--bottom': props.location === 'bottom',
+              'v-app-bar--bottom': position ? 0 : undefined,
             },
             props.class,
           ]}
