@@ -56,6 +56,52 @@ export const VCommandPaletteSearch = genericComponent<VCommandPaletteSearchSlots
       if (props.ariaLabelledby) rootEl.setAttribute('aria-labelledby', props.ariaLabelledby)
     })
 
+    // Handle keydown events to prevent default behavior for certain key combinations
+    const handleKeydown = (event: KeyboardEvent) => {
+      // Allow standard text editing shortcuts to work normally
+      const isStandardEditingShortcut = (
+        // Allow common editing shortcuts
+        (event.metaKey || event.ctrlKey) && (
+          event.key === 'v' || // Paste
+          event.key === 'c' || // Copy
+          event.key === 'x' || // Cut
+          event.key === 'a' || // Select all
+          event.key === 'z' || // Undo
+          event.key === 'y'    // Redo
+        )
+      )
+
+      if (isStandardEditingShortcut) {
+        // Let these pass through to the input
+        emit('keydown', event)
+        return
+      }
+
+      // Prevent option/alt key combinations from inserting special characters
+      if (event.altKey) {
+        // Prevent the default behavior (inserting special character)
+        event.preventDefault()
+      }
+
+      // For other modifier combinations (e.g., Shift+key, Ctrl+key), let ActionCore's
+      // hotkey handler determine what to do, but prevent default for non-character keys
+      if ((event.ctrlKey || event.metaKey) &&
+          event.key.length > 1 &&
+          event.key !== 'Backspace' &&
+          event.key !== 'Delete' &&
+          event.key !== 'ArrowLeft' &&
+          event.key !== 'ArrowRight' &&
+          event.key !== 'ArrowUp' &&
+          event.key !== 'ArrowDown' &&
+          event.key !== 'Home' &&
+          event.key !== 'End') {
+        event.preventDefault()
+      }
+
+      // Always emit the keydown event for other handlers
+      emit('keydown', event)
+    }
+
     useRender(() => {
       const [rootAttrs, inputAttrsFromCaller] = filterInputAttrs(attrs)
 
@@ -72,7 +118,7 @@ export const VCommandPaletteSearch = genericComponent<VCommandPaletteSearchSlots
       const textFieldProps: Record<string, any> = {
         modelValue: props.modelValue,
         'onUpdate:modelValue': (value: string) => emit('update:modelValue', value),
-        onKeydown: (event: KeyboardEvent) => emit('keydown', event),
+        onKeydown: handleKeydown,
         placeholder: props.placeholder,
         loading: props.loading,
         autofocus: props.autofocus,

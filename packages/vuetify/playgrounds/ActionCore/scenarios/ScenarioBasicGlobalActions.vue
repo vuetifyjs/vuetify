@@ -12,7 +12,7 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, inject } from 'vue'
 import { useTheme } from 'vuetify'
-import { type ActionDefinition, useActionCore, VHotKey } from '../../../src/labs/VActionCore'
+import { type ActionDefinition, useActionCore, VHotKey } from '@/labs/VActionCore/archive'
 import ScenarioCard from '../ScenarioCard.vue' // Path relative to this new component
 
 const actionCore = useActionCore()
@@ -25,7 +25,7 @@ const themeAction: ActionDefinition = {
   id: 'toggle-theme',
   title: 'Toggle Theme',
   icon: 'mdi-theme-light-dark',
-  hotkey: 'alt+shift+t',
+  hotkey: 'alt_shift_t',
   description: 'Toggles between light and dark themes.',
   hotkeyOptions: { preventDefault: true },
   handler: () => {

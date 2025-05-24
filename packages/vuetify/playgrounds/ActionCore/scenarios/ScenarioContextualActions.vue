@@ -21,7 +21,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, inject } from 'vue';
-import { useActionCore, type ActionDefinition, VHotKey } from '../../../src/labs/VActionCore';
+import { useActionCore, type ActionDefinition, VHotKey } from '@/labs/VActionCore/archive';
 import ScenarioCard from '../ScenarioCard.vue';
 
 const actionCore = useActionCore();
@@ -30,7 +30,7 @@ const logAction: ((message: string, details?: any) => void) | undefined = inject
 const editorFocused = ref(false);
 const editorContent = ref('Some text in the editor...');
 
-const saveHotkey = 'cmdorctrl+s';
+const saveHotkey = 'meta_s';
 const saveHotkeyOptions = {
   preventDefault: true,
   // stopPropagation: true,

@@ -8,7 +8,7 @@
 
 <script setup lang="ts">
 import { onMounted, onUnmounted, inject, ref } from 'vue';
-import { useActionCore, type ActionDefinition, type ActionContext, VHotKey, ShowSubItemsUISymbol } from '@/labs/VActionCore';
+import { useActionCore, type ActionDefinition, type ActionContext, VHotKey, ShowSubItemsUISymbol } from '@/labs/VActionCore/archive';
 import ScenarioCard from '../ScenarioCard.vue';
 
 const actionCore = useActionCore();
@@ -16,7 +16,7 @@ const logAction: ((message: string, details?: any) => void) | undefined = inject
 // Inject the function to open the command palette for sub-items
 const openPaletteDirectly: ((actionDef: ActionDefinition) => void) | undefined = inject(ShowSubItemsUISymbol);
 
-const settingsActionHotkey = ref('alt+s');
+const settingsActionHotkey = ref('alt_s');
 
 // Define settingsAction separately to register its hotkey globally
 const settingsAction: ActionDefinition = {

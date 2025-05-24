@@ -177,7 +177,7 @@ export const backgroundSyncAction: ActionDefinition = [
   {
     id: 'system.backgroundSync',
     title: 'Perform Background Sync', // Title still good for debugging
-    hotkey: 'ctrl+alt+shift+s', // Has a hotkey
+    hotkey: 'ctrl_alt_shift_s', // Has a hotkey
     handler: () => { console.log('Background sync started...'); },
     meta: {
       paletteHidden: true // This action will not show up in VCommandPalette

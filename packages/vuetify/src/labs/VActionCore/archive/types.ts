@@ -1,5 +1,6 @@
 // Types
-import type { ComputedRef, InjectionKey, Ref } from 'vue'
+import type { ComputedRef, InjectionKey, Ref, MaybeRef } from 'vue'
+import type { KeyBindingConfig, KeyBindingOptions } from './useKeyBindings'
 
 // -------------- KeyBinding Types --------------
 
@@ -255,6 +256,7 @@ export type ActionCoreInstanceOptions = {
    * Defaults to false.
    */
   verboseLogging?: boolean
+  // useKeyBindingsOverride?: (config: MaybeRef<KeyBindingConfig>, options?: KeyBindingOptions) => () => void; // Removed
   // Add other future global options for ActionCore here
 };
 

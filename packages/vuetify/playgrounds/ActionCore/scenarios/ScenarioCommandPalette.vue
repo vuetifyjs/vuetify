@@ -7,7 +7,7 @@
 
 <script setup lang="ts">
 import { onMounted, onUnmounted, inject } from 'vue';
-import { useActionCore, type ActionDefinition, VHotKey } from '@/labs/VActionCore';
+import { useActionCore, type ActionDefinition, VHotKey } from '@/labs/VActionCore/archive';
 import ScenarioCard from '../ScenarioCard.vue';
 
 const actionCore = useActionCore();
@@ -18,7 +18,7 @@ const openPaletteActionDef: ActionDefinition = {
   id: 'open-command-palette',
   title: 'Open Command Palette',
   icon: 'mdi-magnify',
-  hotkey: 'cmd+k',
+  hotkey: 'meta_k',
   hotkeyOptions: { preventDefault: true },
   description: 'Opens the main command palette for searching actions.',
   handler: () => {

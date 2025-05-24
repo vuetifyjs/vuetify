@@ -1,6 +1,6 @@
 # 4. Mastering Hotkeys
 
-Keyboard hotkeys are a hallmark of productive and accessible applications. ActionCore provides a sophisticated, yet easy-to-use system for defining hotkeys associated with your actions. This guide delves into the nuances of hotkey definition, platform considerations, and advanced configurations to help you craft an intuitive keyboard-driven experience.
+Keyboard hotkeys are a hallmark of productive and accessible applications. ActionCore provides a sophisticated, yet easy-to-use system for defining hotkeys associated with your actions, built upon the simplified `useKeyBindings` composable. This guide delves into the nuances of hotkey definition, platform considerations, and advanced configurations to help you craft an intuitive keyboard-driven experience.
 
 This guide is based on the more detailed `HOTKEY_GUIDE.md` within the ActionCore source, focusing on the most critical aspects for developers integrating actions.
 
@@ -16,7 +16,7 @@ export interface ActionDefinition {
   hotkeyOptions?: {
     preventDefault?: boolean;
     stopPropagation?: boolean;
-    ignoreKeyRepeat?: boolean;
+    // ignoreKeyRepeat?: boolean; // Note: ignoreKeyRepeat is not directly passed to the simplified useKeyBindings
   };
   runInTextInput?: boolean | 'only' | RunInTextInputMatcher; // Detailed further below
 }
@@ -30,21 +30,20 @@ export interface ActionDefinition {
     hotkey: 'escape'
     ```
 
-*   **Key Combinations (Modifiers):** Combine modifier keys (`Ctrl`, `Alt`, `Shift`, `Meta/Cmd`) with other keys using `+`.
+*   **Key Combinations (Modifiers):** Combine modifier keys (`Ctrl`, `Alt`, `Shift`, `Meta/Cmd`) with other keys using `_` or `+`.
     ```typescript
-    hotkey: 'ctrl+s'       // Control + S
+    hotkey: 'ctrl_s'       // Control + S (or ctrl+s)
     hotkey: 'meta+shift+z' // Command/Windows Key + Shift + Z
-    hotkey: 'alt+o'         // Alt + O (Option + O on macOS)
+    hotkey: 'alt_o'         // Alt + O (Option + O on macOS)
     ```
-    The order of modifiers (e.g., `ctrl+shift+s` vs. `shift+ctrl+s`) does not matter.
+    The order of modifiers (e.g., `ctrl_shift_s` vs. `shift_ctrl_s`) does not matter.
 
-*   **Key Sequences:** For actions triggered by a sequence of key presses (e.g., press 'g' then 'i' to go to inbox), separate keys with a `-` or a space. Spaces are preferred for readability when modifiers are not involved in the sequence parts.
+*   **Key Sequences:** For actions triggered by a sequence of key presses (e.g., press 'g' then 'i' to go to inbox), separate keys with a `-`.
     ```typescript
     hotkey: 'g-i'          // Press g, then i
-    hotkey: 'g i'          // Press g, then i (alternative, often clearer)
-    hotkey: 'ctrl+k-ctrl+x' // Press Ctrl+K, then Ctrl+X
+    hotkey: 'ctrl_k-ctrl_x' // Press Ctrl+K, then Ctrl+X
     ```
-    ActionCore has a default timeout (around 1500ms) for completing a sequence.
+    `useKeyBindings` has a default timeout (around 800ms) for completing a sequence.
 
 ### Multiple Hotkeys for One Action
 
@@ -54,44 +53,42 @@ You can assign multiple hotkeys to a single action by providing an array of stri
 const openSettingsAction: ActionDefinition = {
   id: 'settings.open',
   title: 'Open Settings',
-  hotkey: ['ctrl+,', 'meta+,', 'f10'], // CtrlOrCmd + Comma, or F10
+  hotkey: ['ctrl_,', 'meta_,', 'f10'], // Ctrl/Cmd + Comma, or F10
   handler: () => { /* ... */ }
 };
 ```
-This is useful for providing common platform-specific alternatives (like `Ctrl+,` on Windows/Linux and `Cmd+,` on macOS for settings) or simply multiple ways to trigger the same command.
+This is useful for providing common platform-specific alternatives (like `Ctrl_,` on Windows/Linux and `Cmd_,` on macOS for settings) or simply multiple ways to trigger the same command.
 
 ## Key Names and Aliases
 
-Key names generally follow `KeyboardEvent.key` values, normalized to lowercase. ActionCore's underlying `useKeyBindings` system primarily uses `event.code` for layout-independent bindings and includes an extensive alias map (`defaultAliasMap` in `useKeyBindings.ts`) to translate common `event.code` values back to simpler, expected key names.
+Key names generally follow `KeyboardEvent.key` values, normalized to lowercase. `useKeyBindings` handles minimal internal aliasing (e.g., `esc` for `escape`, `cmd` for `meta`).
 
 **Commonly Used Modifiers & Aliases:**
 
-*   `meta`: Represents the Command key (⌘) on macOS and the Windows/Super key on other platforms. **Crucially, in combinations, `meta` is often normalized to `ctrl` on non-macOS systems for common patterns like `meta+s` becoming `Ctrl+S` on Windows/Linux.**
-*   `ctrl`: Represents the Control key on all platforms.
-*   `alt`: Represents the Alt key (Option key `⌥` on macOS).
-*   `shift`: Represents the Shift key.
-*   `cmd`, `command`, `super`, `win`: Aliased to `meta`.
-*   `control`: Aliased to `ctrl`.
-*   `option`: Aliased to `alt` (important for Mac `Option` key users).
-*   `escape`: Aliased to `esc`.
-*   `arrowup`, `arrowdown`, `arrowleft`, `arrowright`: For arrow keys (can also use `up`, `down`, `left`, `right` as aliases).
+*   `meta`: Represents Command (⌘) on macOS and Windows/Super key on others. Normalized to `ctrl` on non-Mac for combinations by `useKeyBindings` if `ctrl` isn't also specified.
+*   `ctrl`: Control key.
+*   `alt`: Alt key (Option `⌥` on macOS).
+*   `shift`: Shift key.
+*   `cmd`, `command`: Aliased to `meta` during parsing by `useKeyBindings`.
+*   `control`: Aliased to `ctrl` by `useKeyBindings`.
+*   `option`: Aliased to `alt` by `useKeyBindings`.
 
 ## Platform-Specific Behavior: `meta` vs. `ctrl`
 
 Understanding how `meta` and `ctrl` are handled is vital for cross-platform consistency:
 
-*   **Using `meta` (e.g., `hotkey: 'meta+c'`)**: This is the **recommended approach for common operating system level shortcuts** like copy, paste, save.
-    *   **On macOS:** Interpreted as `Command+C` (⌘C).
-    *   **On Windows/Linux:** ActionCore (via `useKeyBindings`) normalizes `meta` to `ctrl` in combinations, so it's interpreted as `Ctrl+C`.
+*   **Using `meta` (e.g., `hotkey: 'meta_s'`)**: Recommended for common OS-level shortcuts.
+    *   **On macOS:** Interpreted as `Command_S`.
+    *   **On Windows/Linux:** `useKeyBindings` (used by ActionCore) normalizes `meta` to `ctrl` in combinations, effectively making it `Ctrl_S`.
     *   This provides the most natural user experience for these standard shortcuts.
 
-*   **Using `ctrl` (e.g., `hotkey: 'ctrl+b'`)**: This explicitly targets the Control key.
-    *   **On macOS:** Interpreted as `Control+B` (⌃B) – distinct from `Command+B`.
-    *   **On Windows/Linux:** Interpreted as `Ctrl+B`.
+*   **Using `ctrl` (e.g., `hotkey: 'ctrl_b'`)**: Explicitly targets the Control key.
+    *   **On macOS:** Interpreted as `Control_B` (⌃B) – distinct from `Command_B`.
+    *   **On Windows/Linux:** Interpreted as `Ctrl_B`.
     *   Use this when you specifically need the Control key on macOS, perhaps for shortcuts that don't have a direct Command key equivalent or to offer an alternative binding.
 
 **In summary for platform conventions:**
-*   For "Save", "Copy", "Paste", "Undo", "Redo": Use `meta+s`, `meta+c`, `meta+v`, `meta+z`, `meta+shift+z`.
+*   For "Save", "Copy", "Paste", "Undo", "Redo": Use `meta_s`, `meta_c`, `meta_v`, `meta_z`, `meta_shift_z`.
 *   For other shortcuts, decide if you need the Mac Command key behavior (use `meta`) or the literal Control key behavior on all platforms (use `ctrl`).
 
 ## Advanced Hotkey Options (`hotkeyOptions`)
@@ -102,31 +99,30 @@ The `hotkeyOptions` object in `ActionDefinition` allows fine-tuning for each hot
 const actionWithOptions: ActionDefinition = {
   id: 'editor.submitComment',
   title: 'Submit Comment',
-  hotkey: 'ctrl+enter',
+  hotkey: 'ctrl_enter',
   hotkeyOptions: {
     preventDefault: true,
     stopPropagation: false,
-    ignoreKeyRepeat: true,
+    // ignoreKeyRepeat: true, // This is no longer a direct option for useKeyBindings
   },
   handler: () => { /* ... */ }
 };
 ```
 
 *   **`preventDefault?: boolean`** (Default: `false`)
-    *   If `true`, `event.preventDefault()` is called when the hotkey triggers. This is essential for overriding default browser actions (e.g., `Ctrl+S` opening the browser's save dialog if you have a custom save action, or `Cmd+K` focusing the browser's search bar).
+    *   If `true`, `event.preventDefault()` is called when the hotkey triggers. This is essential for overriding default browser actions (e.g., `Ctrl_S` opening the browser's save dialog if you have a custom save action, or `Cmd_K` focusing the browser's search bar).
     *   **Recommendation**: Set to `true` for most hotkeys that might conflict with standard browser behavior or when you want to ensure the action is the sole result of the hotkey.
-    *   Note: Some browser-level shortcuts (e.g., `Cmd+T` for a new tab on macOS) may not be preventable by web applications.
+    *   Note: Some browser-level shortcuts (e.g., `Cmd_T` for a new tab on macOS) may not be preventable by web applications.
 
 *   **`stopPropagation?: boolean`** (Default: `false`)
     *   If `true`, `event.stopPropagation()` is called when the hotkey triggers. This prevents the event from bubbling up to parent DOM elements or being processed by other event listeners attached to the same element (especially those registered in later phases or by different parts of the system).
     *   **Use with Caution**: While useful for isolating event handling in complex DOM structures or nested components, `stopPropagation: true` should be used sparingly.
     *   **Potential Issues**:
         *   It can interfere with other parts of your application or third-party libraries that might rely on listening to the same events.
-        *   **Crucially, when multiple ActionCore actions share the same hotkey and rely on contextual evaluation (via `canExecute` or `runInTextInput`) to determine the active handler, `stopPropagation: true` on one of those actions can prevent ActionCore from correctly evaluating other candidate actions for the same hotkey.** This was observed where a `Cmd+S` hotkey shared by two actions failed to trigger the appropriate contextual action when `stopPropagation: true` was enabled.
+        *   **Crucially, when multiple ActionCore actions share the same hotkey and rely on contextual evaluation (via `canExecute` or `runInTextInput`) to determine the active handler, `stopPropagation: true` on one of those actions can prevent ActionCore from correctly evaluating other candidate actions for the same hotkey.** This was observed where a `Cmd_S` hotkey shared by two actions failed to trigger the appropriate contextual action when `stopPropagation: true` was enabled.
     *   **Recommendation**: Only set `stopPropagation: true` if you have a specific, well-understood reason to prevent the event from reaching other listeners and have tested its impact, especially if the hotkey is shared or involves complex contextual logic. In many cases, `preventDefault: true` is sufficient for managing hotkey behavior. If unsure, start with `stopPropagation: false`.
 
-*   **`ignoreKeyRepeat?: boolean`** (Default: `false`)
-    *   If `true`, the hotkey handler only triggers for the initial `keydown` event and ignores subsequent `keydown` events while the key is held down (`event.repeat === true`). Set this to `true` for most actions to prevent them from firing multiple times if a user holds down a key combination.
+**Note on `ignoreKeyRepeat`**: The simplified `useKeyBindings` does not directly accept an `ignoreKeyRepeat` option per shortcut. If you need to prevent an action from firing multiple times on key repeat, this logic would need to be implemented within the action's `handler` by checking `event.repeat`.
 
 ## Hotkeys in Text Inputs (`runInTextInput`)
 
@@ -135,14 +131,14 @@ By default, ActionCore (via `useKeyBindings`) blocks most hotkeys when a text in
 *   **Type:** `boolean | 'only' | string | string[] | ((element: Element | null) => boolean)`
 *   **Default (if `runInTextInput` is `undefined`):** Hotkey is generally blocked in inputs.
 
-*   **`true`**: The hotkey **will run** even if an input is focused. Ideal for text-editing shortcuts (e.g., `Ctrl+B` for bolding text within an editor).
+*   **`true`**: The hotkey **will run** even if an input is focused. Ideal for text-editing shortcuts (e.g., `Ctrl_B` for bolding text within an editor).
     ```typescript
-    hotkey: 'ctrl+b', runInTextInput: true
+    hotkey: 'ctrl_b', runInTextInput: true
     ```
 
 *   **`false`**: The hotkey will **not run** if any input is focused. This explicitly enforces the blocking behavior.
 
-*   **`'only'`**: The hotkey will **only run if a text input element is focused**. Useful for actions that are exclusively for text editing contexts (e.g., an `Enter` key action to submit a form field that should not trigger globally).
+*   **`'only'`:** The hotkey will **only run if a text input element is focused**. Useful for actions that are exclusively for text editing contexts (e.g., an `Enter` key action to submit a form field that should not trigger globally).
     ```typescript
     hotkey: 'enter', runInTextInput: 'only'
     ```
@@ -157,7 +153,7 @@ By default, ActionCore (via `useKeyBindings`) blocks most hotkeys when a text in
 
 *   **`((element: Element | null) => boolean)` (Predicate function):** The most flexible option. The hotkey runs if the function returns `true`. The function receives the `document.activeElement`.
     ```typescript
-    hotkey: 'ctrl+shift+e',
+    hotkey: 'ctrl_shift_e',
     runInTextInput: (el) => el?.classList.contains('custom-editor-field') ?? false
     ```
 

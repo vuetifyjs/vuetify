@@ -34,13 +34,13 @@ This is the simplest form. You provide a direct array of `ActionDefinition` obje
       {
         id: 'palette.open',
         title: 'Open Command Palette',
-        hotkey: 'ctrl+shift+p',
+        hotkey: 'ctrl_shift_p',
         handler: (ctx) => { /* logic to open palette */ },
       },
       {
         id: 'theme.toggle',
         title: 'Toggle Dark Mode',
-        hotkey: 'ctrl+alt+t',
+        hotkey: 'ctrl_alt_t',
         handler: () => { /* logic to toggle theme */ },
       },
     ];

@@ -38,6 +38,7 @@ VCommandPalette is a keyboard-driven command interface component that provides u
   - The component SHALL accept a `useActionCore` prop of type Boolean to explicitly control ActionCore usage.
   - The component SHALL accept a `resultOrdering` prop for configuring how results are prioritized and grouped.
   - The component SHALL accept a `searchConfiguration` prop for customizing search behavior and algorithms.
+  - The component SHALL accept a `searchEngine` prop of type Object for providing custom search implementation to replace default search behavior.
 
 - **Styling and Theming**
   - The component SHALL accept standard Vue `class` and `style` props.
@@ -100,17 +101,51 @@ VCommandPalette is a keyboard-driven command interface component that provides u
 
 ### Search and Filtering
 
-- **Fuzzy Search**
-  - The component SHALL implement fuzzy search functionality across action titles and descriptions.
-  - Search SHALL be case-insensitive and support partial matching.
-  - The component SHALL highlight matching portions of action titles in search results.
+- **Search Orchestration**
+  - The component SHALL orchestrate search across multiple sources including ActionCore actions and external search providers.
+  - The component SHALL use ActionCore's search utilities to query registered actions by title, description, and keywords.
+  - The component SHALL merge results from ActionCore and external search providers into a unified interface.
+  - Search SHALL be case-insensitive and support partial matching across all sources.
+  - The component SHALL highlight matching portions of action titles and keywords in search results.
   - Search SHALL be performed in real-time as the user types.
+
+- **Custom Search Engine Support**
+  - The component SHALL support custom search engine implementations through the `searchEngine` prop for complete control over search behavior.
+  - Custom search engines SHALL receive the search query, available actions, and application context.
+  - Custom search engines SHALL return ordered and filtered results according to their own algorithms.
+  - When a custom search engine is provided, it SHALL replace the default search orchestration entirely.
+  - The search engine interface SHALL be designed for easy integration with external search libraries like Fuse.js.
+
+- **Default Search Implementation**
+  - The component SHALL provide a default search implementation that efficiently searches ActionCore actions and orchestrates external providers.
+  - The default implementation SHALL use ActionCore's search utilities for action filtering.
+  - The default implementation SHALL support keyword matching for synonyms, aliases, and alternative terms.
+  - The default implementation SHALL be suitable for typical use cases without additional configuration.
 
 - **Search Input Handling**
   - The component SHALL provide a search input field that supports keyboard navigation.
   - The search input SHALL maintain focus when navigating through action items.
   - The component SHALL support clearing search input and resetting to full action list.
   - Search input SHALL integrate with input context rules from useKeyBindings.
+
+### Group Management Integration
+
+- **Group Display and Organization**
+  - The component SHALL display actions organized by their assigned groups using group definitions from ActionCore.
+  - Groups SHALL be displayed with appropriate visual separators, titles (when provided), and icons as defined in group definitions.
+  - Groups SHALL support HR separator tags before and/or after the group content based on `separatorStart` and `separatorEnd` properties.
+  - Groups SHALL be ordered according to their priority values with lower numbers appearing first.
+  - Actions within groups SHALL be ordered according to their priority values with lower numbers appearing first.
+  - Ungrouped actions SHALL be displayed with appropriate default ordering relative to grouped actions.
+
+- **Group Rendering**
+  - The component SHALL render group headers with titles (when provided), icons, and separators as specified in group definitions.
+  - The component SHALL render HR separator tags before group content when `separatorStart` is true.
+  - The component SHALL render HR separator tags after group content when `separatorEnd` is true.
+  - The component SHALL support customization of group display through slots and styling.
+  - Group headers SHALL be visually distinct from action items.
+  - The component SHALL handle groups without titles gracefully by rendering only separators and icons when specified.
+  - The component SHALL handle empty groups gracefully by not rendering empty group headers.
 
 ### Navigation and Selection
 
@@ -185,11 +220,13 @@ VCommandPalette is a keyboard-driven command interface component that provides u
   - The component SHALL provide aria-activedescendant for currently selected items.
   - The component SHALL link search input with action list using appropriate ARIA attributes.
   - The component SHALL support screen reader navigation patterns.
+  - Group headers SHALL have appropriate ARIA roles and labels for screen reader navigation.
 
 - **Keyboard Accessibility**
   - All component functionality SHALL be accessible via keyboard navigation.
   - The component SHALL follow standard accessibility patterns for combobox/listbox interactions.
   - Focus management SHALL be handled appropriately throughout component lifecycle.
+  - Keyboard navigation SHALL work seamlessly across group boundaries.
 
 ### Performance Requirements
 
@@ -332,15 +369,18 @@ VCommandPalette is a keyboard-driven command interface component that provides u
 
 ### Advanced Search Capabilities
 
-- **Multi-Provider Search**
-  - The component SHALL support querying different data types (users, issues, teams, projects, etc.) through specialized providers.
-  - The component SHALL handle different search result formats and presentation needs.
+- **Multi-Source Search Orchestration**
+  - The component SHALL coordinate search across ActionCore actions and external search providers simultaneously.
+  - The component SHALL support querying different data types (users, issues, teams, projects, etc.) through specialized search providers.
+  - The component SHALL handle different search result formats and merge them into a unified presentation.
   - The component SHALL support provider-specific search configuration and customization.
+  - Search providers SHALL be registered with ActionCore but orchestrated by VCommandPalette.
 
 - **Search Algorithm Flexibility**
-  - The component SHALL allow developers to provide custom search functions (fuzzy search, exact match, etc.).
-  - Developers SHALL have control over search ordering, relevance scoring, and result filtering.
-  - The component SHALL support both built-in search capabilities and completely custom search implementations.
+  - The component SHALL allow complete replacement of search logic through the `searchEngine` prop.
+  - Custom search engines SHALL have full control over search ordering, relevance scoring, and result filtering.
+  - The component SHALL support both built-in search orchestration and completely custom search implementations.
+  - Developers SHALL be able to integrate external search libraries (Fuse.js, Lunr.js, etc.) through custom search engines.
   - Search configuration SHALL be designed for ease of use while supporting highly customized requirements.
 
 ### Alternative Action Management Systems

@@ -57,7 +57,7 @@ Combine modifier keys (like `Ctrl`, `Alt`, `Shift`, `Meta/Cmd`) with other keys 
 const saveAction: ActionDefinition = {
   id: 'file-save',
   title: 'Save File',
-  hotkey: 'ctrl+s', // On non-Mac, Meta+S will also trigger this if Meta is normalized to Ctrl
+  hotkey: 'ctrl_s', // On non-Mac, Meta+S will also trigger this if Meta is normalized to Ctrl
   handler: () => { /* ... */ }
 };
 
@@ -65,7 +65,7 @@ const saveAction: ActionDefinition = {
 const complexAction: ActionDefinition = {
   id: 'editor-complex-format',
   title: 'Complex Format',
-  hotkey: 'ctrl+alt+shift+f',
+  hotkey: 'ctrl_alt_shift_f',
   handler: () => { /* ... */ }
 };
 ```
@@ -92,18 +92,15 @@ Key names are generally based on `KeyboardEvent.key` values, normalized to lower
 However, `useKeyBindings` (the underlying engine for ActionCore hotkeys) now defaults to using `event.code` (`preferEventCode: true`) for more layout-independent bindings. The extensive `defaultAliasMap` within `useKeyBindings.ts` translates common `event.code` values (e.g., `KeyA`, `Digit1`, `AltLeft`) back to simpler, expected key names (e.g., `a`, `1`, `alt`). This means you can usually define hotkeys using the simple key names.
 
 Common aliases are provided for convenience:
-*   `cmd`, `command`, `super`, `win`: Aliased to `meta`
-*   `control`: Aliased to `ctrl`
-*   `option`: Aliased to `alt` (very important for Mac compatibility, as Macs have an Option key)
+*   `meta`: Represents ⌘ Command on macOS and Ctrl on other platforms
+*   `ctrl`: Represents Ctrl on all platforms
+*   `shift`: Used for alphabetic keys when Shift is required
+*   `alt`: Represents Option on macOS and Alt on other platforms
 *   `escape`: Aliased to `esc`
 *   `up`: Aliased to `arrowup`
 *   `down`: Aliased to `arrowdown`
 *   `left`: Aliased to `arrowleft`
 *   `right`: Aliased to `arrowright`
-
-Special purpose aliases (use with care, see platform behavior):
-*   `cmdorctrl`: Aliased to `meta`. On non-Mac systems, this `meta` will be further normalized to `ctrl` in combinations.
-*   `primary`: Aliased to `meta`. Similar normalization behavior as `cmdorctrl`.
 
 For a comprehensive list, refer to the `defaultAliasMap` in `useKeyBindings.ts`.
 
@@ -117,21 +114,21 @@ ActionCore aims to provide intuitive behavior across platforms, especially regar
 
 ### The `meta` Key (Cmd/Super/Win)
 
-*   When you specify `meta` (or its aliases like `cmd`, `command`) in a hotkey string for a **combination**:
+*   When you specify `meta` in a hotkey string for a **combination**:
     *   **On macOS:** It maps to the Command (⌘) key.
     *   **On Windows/Linux:** It is automatically normalized to the `ctrl` key.
-    *   Example: `hotkey: 'meta+s'`
-        *   macOS: Triggers with `Cmd+S`.
-        *   Windows/Linux: Triggers with `Ctrl+S`.
+    *   Example: `hotkey: 'meta_s'`
+        *   macOS: Triggers with `meta_s`.
+        *   Windows/Linux: Triggers with `ctrl_s`.
 
 ### The `ctrl` Key
 
 *   When you specify `ctrl` in a hotkey string:
     *   **On macOS:** It maps to the actual Control (⌃) key.
     *   **On Windows/Linux:** It maps to the Control key.
-    *   Example: `hotkey: 'ctrl+z'`
-        *   macOS: Triggers with `Control+Z`.
-        *   Windows/Linux: Triggers with `Ctrl+Z`.
+    *   Example: `hotkey: 'ctrl_z'`
+        *   macOS: Triggers with `ctrl_z`.
+        *   Windows/Linux: Triggers with `ctrl_z`.
 
 **Important Note:** `useKeyBindings` does *not* automatically convert a specified `ctrl` key to `meta` on macOS. If your hotkey string is `'ctrl+c'`, it will listen for the literal Control key on Mac, not Command. This is by design to allow distinguishing between `Cmd+C` and `Ctrl+C` on macOS if needed.
 
@@ -140,9 +137,9 @@ ActionCore aims to provide intuitive behavior across platforms, especially regar
 *   Mac keyboards have an `Option` key, while Windows/Linux keyboards have an `Alt` key.
 *   `useKeyBindings.ts` includes an alias: `option` is treated as `alt`.
 *   Therefore, if you define a hotkey using `alt`, it will work correctly on all platforms:
-    *   `hotkey: 'alt+s'`
-        *   **On macOS:** Users press `Option+S`.
-        *   **On Windows/Linux:** Users press `Alt+S`.
+    *   `hotkey: 'alt_s'`
+        *   **On macOS:** Users press `Option_s`.
+        *   **On Windows/Linux:** Users press `Alt_s`.
 *   The `VHotKey` component will display this appropriately (e.g., `⌥S` on Mac, `Alt+S` elsewhere by default).
 
 ### Recommendations
@@ -160,7 +157,7 @@ You can assign multiple hotkeys to a single action in two ways:
     const anAction: ActionDefinition = {
       id: 'action-multi',
       title: 'Action with Multiple Hotkeys',
-      hotkey: 'ctrl+a, alt+shift+x', // Hotkey 1: Ctrl+A, Hotkey 2: Alt+Shift+X
+      hotkey: 'ctrl_a, alt_shift_x', // Hotkey 1: Ctrl+A, Hotkey 2: Alt+Shift+X
       handler: () => { /* ... */ }
     };
     ```
@@ -170,7 +167,7 @@ You can assign multiple hotkeys to a single action in two ways:
     const anotherAction: ActionDefinition = {
       id: 'action-multi-array',
       title: 'Another Multi-Hotkey Action',
-      hotkey: ['meta+b', 'ctrl+shift+alt+y', 'f10'], // Hotkey 1, Hotkey 2, Hotkey 3
+      hotkey: ['meta_b', 'ctrl_shift_alt_y', 'f10'], // Hotkey 1, Hotkey 2, Hotkey 3
       handler: () => { /* ... */ }
     };
     ```
@@ -184,7 +181,7 @@ The `hotkeyOptions` property in `ActionDefinition` allows fine-tuning of how an 
 const actionWithOptions: ActionDefinition = {
   id: 'action-opts',
   title: 'Action with Hotkey Options',
-  hotkey: 'ctrl+enter',
+  hotkey: 'ctrl_enter',
   hotkeyOptions: {
     preventDefault: true,
     stopPropagation: false,
@@ -238,7 +235,7 @@ const submitCommentAction: ActionDefinition = {
 const globalSaveAction: ActionDefinition = {
   id: 'global-save',
   title: 'Global Save',
-  hotkey: 'meta+s',
+  hotkey: 'meta_s',
   runInTextInput: true, // Allows Cmd/Ctrl+S even if in an input
   hotkeyOptions: { preventDefault: true },
   handler: () => { /* ... */ }

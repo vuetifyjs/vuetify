@@ -18,8 +18,8 @@
 
 <script setup lang="ts">
 import { ref, watchEffect, inject, onMounted, onUnmounted } from 'vue'
-import type { ActionDefinition } from '@/labs/VActionCore'
-import { useActionCore, ActionCoreSymbol } from '@/labs/VActionCore'
+import type { ActionDefinition } from '@/labs/VActionCore/archive'
+import { useActionCore, ActionCoreSymbol } from '@/labs/VActionCore/archive'
 import ScenarioCard from '../ScenarioCard.vue'
 
 // Existing refs for UI display

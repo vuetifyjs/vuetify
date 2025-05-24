@@ -23,7 +23,7 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, inject } from 'vue'
 import ScenarioCard from '../ScenarioCard.vue'
-import { useActionCore, type ActionDefinition, type ActionContext, VHotKey } from '../../../src/labs/VActionCore'
+import { useActionCore, type ActionDefinition, type ActionContext, VHotKey } from '@/labs/VActionCore/archive'
 
 const actionCore = useActionCore()
 const logAction: ((message: string, details?: any) => void) | undefined = inject('logAction')
@@ -39,33 +39,33 @@ const profileManagedActions: ActionDefinition[] = [
   {
     id: 'save-editor',
     title: 'Default Editor Save',
-    hotkey: 'alt+s',
+    hotkey: 'alt_s',
     meta: { base: true, from: 'ScenarioActionProfiles' },
     description: 'Default editor save. Active when editor is focused.',
     canExecute: (ctx: ActionContext) => isMockEditorActive(),
     runInTextInput: () => isMockEditorActive(),
     handler: (ctx: ActionContext) => {
-      if (logAction) logAction('Default Editor Save executed', { hotkey: 'alt+s', data: ctx.data })
+      if (logAction) logAction('Default Editor Save executed', { hotkey: 'alt_s', data: ctx.data })
     },
     profiles: {
       beginner: {
         title: 'Simple Save (Editor)',
-        hotkey: 'cmdorctrl+s',
+        hotkey: 'meta_s',
         hotkeyOptions: { preventDefault: true },
         meta: { mode: 'beginner' },
         description: 'Saves editor content (Beginner Mode). Active when editor is focused.',
         handler: (ctx: ActionContext) => {
-          if (logAction) logAction('Beginner Save (Ctrl+S) for editor done', ctx.data)
+          if (logAction) logAction('Beginner Save (Ctrl_S) for editor done', ctx.data)
         },
       },
       advanced: {
         title: 'Advanced Save + Commit (Editor)',
-        hotkey: 'cmdorctrl+shift+s',
+        hotkey: 'meta_shift_s',
         hotkeyOptions: { preventDefault: true },
         meta: { mode: 'advanced' },
         description: 'Saves and commits editor content (Advanced Mode). Active when editor is focused.',
         handler: (ctx: ActionContext) => {
-          if (logAction) logAction('Advanced Save and Commit (Ctrl+Shift+S) for editor done', ctx.data)
+          if (logAction) logAction('Advanced Save and Commit (Ctrl_Shift_S) for editor done', ctx.data)
         },
       },
     },
@@ -73,32 +73,32 @@ const profileManagedActions: ActionDefinition[] = [
   {
     id: 'global-save',
     title: 'Default Global Save',
-    hotkey: 'alt+g',
+    hotkey: 'alt_g',
     meta: { base: true, from: 'ScenarioActionProfiles' },
     description: 'Default global save. Active when editor is NOT focused.',
     canExecute: (ctx: ActionContext) => !isMockEditorActive(),
     handler: (ctx: ActionContext) => {
-      if (logAction) logAction('Default Global Save executed', { hotkey: 'alt+g', data: ctx.data })
+      if (logAction) logAction('Default Global Save executed', { hotkey: 'alt_g', data: ctx.data })
     },
     profiles: {
       beginner: {
         title: 'Global Simple Save',
-        hotkey: 'meta+s',
+        hotkey: 'meta_s',
         hotkeyOptions: { preventDefault: true },
         meta: { mode: 'beginner' },
         description: 'Global save action (Beginner Mode). Active when editor is NOT focused.',
         handler: (ctx: ActionContext) => {
-          if (logAction) logAction('Global Simple Save (Ctrl+S) executed', ctx.data)
+          if (logAction) logAction('Global Simple Save (Ctrl_S) executed', ctx.data)
         },
       },
       advanced: {
         title: 'Global Advanced Save + Commit',
-        hotkey: 'meta+shift+s',
+        hotkey: 'meta_shift_s',
         hotkeyOptions: { preventDefault: true },
         meta: { mode: 'advanced' },
         description: 'Global advanced save (Advanced Mode). Active when editor is NOT focused.',
         handler: (ctx: ActionContext) => {
-          if (logAction) logAction('Global Advanced Save + Commit (Ctrl+Shift+S) executed', ctx.data)
+          if (logAction) logAction('Global Advanced Save + Commit (Ctrl_Shift_S) executed', ctx.data)
         },
       },
     },

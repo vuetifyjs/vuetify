@@ -66,21 +66,21 @@ const saveAction: ActionDefinition = {
   id: 'document.save',
   title: 'Save', // Base title
   icon: 'mdi-content-save',
-  hotkey: 'meta+s', // Base hotkey
+  hotkey: 'meta_s', // Base hotkey
   handler: (ctx: ActionContext) => console.log('Document saved (Standard Mode)', ctx.data),
   meta: { baseFeature: true, commonSetting: 'A' },
   profiles: {
     beginner: {
       title: 'Save Your Work',
       description: 'Click here to save all your changes to the document.',
-      // No hotkey override, so 'meta+s' from base is used.
+      // No hotkey override, so 'meta_s' from base is used.
       // No handler override, so base handler is used.
       meta: { beginnerHint: 'Make sure to save often!', commonSetting: 'B_Beginner' },
     },
     advanced: {
       title: 'Save & Commit',
       icon: 'mdi-content-save-all',
-      hotkey: 'meta+shift+s', // Advanced users get a different hotkey
+      hotkey: 'meta_shift_s', // Advanced users get a different hotkey
       handler: async (ctx: ActionContext) => {
         console.log('Document saved and committed (Advanced Mode)', ctx.data);
         // await gitService.commitChanges();

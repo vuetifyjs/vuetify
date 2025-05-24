@@ -12,7 +12,8 @@ actionCore (working title) is a collection of composables that provides a way to
   - The system SHALL provide a method to register actions with unique identifiers.
   - Each action SHALL have a required `id` property that uniquely identifies it within the system.
   - Each action SHALL have a required `title` property for display purposes.
-  - Actions MAY have optional properties including `description`, `icon`, `category`, `hotkey`, `disabled`, and `visible`.
+  - Actions MAY have optional properties including `description`, `icon`, `group`, `hotkey`, `disabled`, `visible`, `keywords`, and `priority`.
+  - Actions SHALL support a `keywords` property of type string array for enhanced search capabilities including synonyms, aliases, and alternative terms.
   - When an action with a `hotkey` property is registered, the system SHALL automatically register the hotkey binding in the binding index.
   - The system SHALL reject registration of actions with duplicate IDs and emit a warning.
   - The system SHALL allow re-registration of an action with the same ID, replacing the previous definition and updating any associated hotkey bindings.
@@ -27,6 +28,47 @@ actionCore (working title) is a collection of composables that provides a way to
   - The system SHALL support automatic unregistration of actions originating from a Vue Component when the component is unmounted.
   - The system SHALL provide lifecycle hooks that allow actions to be registered and unregistered reactively based on application state.
   - The system SHALL provide a method to register and unregister actions outside of a Vue Component and their lifecycle hooks.
+
+### Group Management System
+
+- **Group Registration**
+  - The system SHALL provide methods to register and unregister group definitions.
+  - Each group SHALL have a required `id` property that uniquely identifies it within the system.
+  - Each group SHALL have an optional `title` property for display purposes.
+  - Groups SHALL have optional properties including `priority`, `icon`, `separatorStart`, and `separatorEnd`.
+  - The `separatorStart` and `separatorEnd` properties SHALL control whether HR separator tags are rendered before and/or after the group.
+  - The system SHALL provide methods to register single groups and arrays of groups.
+  - The system SHALL provide a method to retrieve all registered groups.
+
+- **Action Group Assignment**
+  - Actions SHALL reference groups using the `group` property that corresponds to a registered group ID.
+  - Actions MAY be registered without a group assignment (ungrouped actions).
+  - The system SHALL validate that action group references correspond to registered groups and emit warnings for invalid references.
+  - The system SHALL allow actions to be assigned to groups that are registered after the action registration.
+
+- **Group Ordering and Display**
+  - Groups SHALL be ordered by their `priority` property, with lower numbers appearing first.
+  - Actions within groups SHALL be ordered by their `priority` property, with lower numbers appearing first.
+  - Ungrouped actions SHALL have a default priority for ordering relative to grouped actions.
+  - The system SHALL provide utilities for UI components to retrieve ordered groups and actions for display.
+
+### Action Middleware System
+
+- **Middleware Registration**
+  - The system SHALL provide methods to register and unregister action middleware.
+  - Each middleware SHALL have a required `name` property that uniquely identifies it within the system.
+  - Middleware SHALL support optional `beforeExecute`, `afterExecute`, and `onError` hooks.
+  - The system SHALL execute middleware in registration order for before hooks and reverse order for after hooks.
+
+- **Middleware Execution**
+  - The `beforeExecute` hook SHALL receive the action definition and execution context and MAY return a modified context or false to prevent execution.
+  - The `afterExecute` hook SHALL receive the action definition, execution context, and execution result for post-execution processing.
+  - The `onError` hook SHALL receive the action definition, execution context, and error for error handling and logging.
+  - Middleware execution SHALL NOT prevent other middleware from running unless explicitly designed to do so.
+
+- **Middleware Use Cases**
+  - Middleware SHALL enable developers to implement analytics tracking, logging, permission checks, and execution monitoring.
+  - Middleware SHALL provide hooks for custom behavior injection without modifying action definitions.
 
 ### Action Execution and Context
 
@@ -46,6 +88,12 @@ actionCore (working title) is a collection of composables that provides a way to
   - The context object SHALL include information about how the action was triggered (keyboard, UI click, programmatic, etc.).
   - Action handlers SHALL be able to return results or throw errors that can be handled by the calling system.
   - The system SHALL support both synchronous and asynchronous action handlers.
+
+- **Usage Tracking and Analytics**
+  - The system SHALL provide hooks for developers to track action execution, timing, and usage patterns.
+  - The system SHALL support optional callback functions for action execution events including start, completion, and error states.
+  - Usage tracking SHALL be opt-in and configurable by developers to implement their own analytics and learning systems.
+  - The system SHALL provide execution duration information to tracking callbacks.
 
 ### Hotkey Management
 
@@ -72,6 +120,37 @@ actionCore (working title) is a collection of composables that provides a way to
   - The system SHALL detect and handle conflicting hotkey bindings.
   - When conflicts are detected, the system SHALL emit warnings and allow the most recently registered action to take precedence.
   - The system SHALL provide methods to query for conflicting hotkeys.
+
+### Search Enhancement
+
+- **Action Search Utilities**
+  - The system SHALL provide utilities to search and filter actions within its own registry.
+  - The system SHALL support searching action titles, descriptions, and keywords.
+  - Search utilities SHALL enable matching of synonyms, aliases, and alternative terms through the keywords property.
+  - The system SHALL provide efficient search methods that can be used by UI components like VCommandPalette.
+  - Search utilities SHALL support context-aware filtering based on action visibility and enabled state.
+
+- **Swappable Search Algorithm**
+  - The system SHALL support custom search algorithm implementations for searching its own action registry.
+  - Custom search algorithms SHALL receive the search query, action list, and application context.
+  - Custom search algorithms SHALL return filtered and ordered action results according to their own logic.
+  - The system SHALL provide a default search algorithm that efficiently handles title, description, and keyword matching.
+  - Custom search algorithms SHALL be configurable during ActionCore initialization through ActionCoreOptions.
+  - The system SHALL use the configured search algorithm for all internal action searching operations.
+
+- **Search Algorithm Interface**
+  - Custom search algorithms SHALL implement the ActionSearchAlgorithm interface.
+  - The interface SHALL define a search method that receives: query string, action array, and application context.
+  - The search method SHALL return an array of filtered and ordered ActionDefinition objects.
+  - Custom algorithms SHALL handle empty queries, null contexts, and edge cases gracefully.
+  - The system SHALL provide TypeScript interfaces for strong typing of custom search implementations.
+
+- **Search Provider Integration**
+  - The system SHALL support pluggable search providers that can query external data sources.
+  - Search providers SHALL be able to return results that integrate seamlessly with action results in UI components.
+  - The system SHALL support search provider registration and lifecycle management.
+  - Search providers SHALL support context-aware result ordering and filtering.
+  - The system SHALL act as a registry for search providers but SHALL NOT orchestrate search execution across providers.
 
 ### Context Awareness
 
@@ -174,6 +253,14 @@ actionCore (working title) is a collection of composables that provides a way to
   - The system SHALL provide a clear initialization method that sets up the global action store.
   - The system SHALL be designed to work with Vue 3's provide/inject pattern for dependency injection.
   - Initialization SHALL be required before any action registration or hotkey binding can occur.
+  - The system SHALL accept ActionCoreOptions during initialization to configure system behavior.
+
+- **ActionCoreOptions Interface**
+  - The system SHALL accept a `searchAlgorithm` option that allows custom search algorithm implementations for searching actions within ActionCore's registry.
+  - The system SHALL accept configuration options for useKeyBindings integration including `sequenceTimeout`, `listenerOptions`, `detectCollisions`, and `debug`.
+  - The system SHALL accept a `defaultBindingContext` option to specify the initial binding context.
+  - The system SHALL accept `actionDefaults` to provide default properties for all registered actions.
+  - All options SHALL be optional with sensible defaults provided by the system.
 
 - **Error Handling**
   - The system SHALL emit appropriate warnings when components attempt to use action IDs without proper initialization.

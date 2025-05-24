@@ -8,7 +8,7 @@
 <script setup lang="ts">
 import ScenarioCard from '../ScenarioCard.vue'
 import { inject, onMounted, onUnmounted } from 'vue'
-import { useActionCore, type ActionDefinition, ActionCoreSymbol } from '@/labs/VActionCore'
+import { type ActionDefinition, ActionCoreSymbol } from '@/labs/VActionCore/archive'
 
 const actionCore = inject(ActionCoreSymbol)
 const logAction = inject<(message: string, details?: any) => void>('logAction')

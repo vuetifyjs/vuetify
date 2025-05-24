@@ -53,7 +53,7 @@
 <script setup lang="ts">
 import { ref, inject, onMounted, onUnmounted, nextTick, watch } from 'vue';
 import ScenarioCard from '../ScenarioCard.vue';
-import { ActionCoreSymbol, type ActionDefinition, type ActionContext } from '@/labs/VActionCore';
+import { ActionCoreSymbol, type ActionDefinition, type ActionContext } from '@/labs/VActionCore/archive';
 
 const actionCore = inject(ActionCoreSymbol);
 const logAction = inject<(message: string, details?: any) => void>('logAction');

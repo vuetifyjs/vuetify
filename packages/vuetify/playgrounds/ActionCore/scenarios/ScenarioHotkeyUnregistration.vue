@@ -9,18 +9,18 @@
 <script setup lang="ts">
 import { ref, onUnmounted, inject } from 'vue'
 import ScenarioCard from '../ScenarioCard.vue'
-import { useActionCore, type ActionDefinition, VHotKey } from '../../../src/labs/VActionCore'
+import { useActionCore, type ActionDefinition, VHotKey } from '@/labs/VActionCore/archive'
 
 const actionCore = useActionCore()
 const logAction: ((message: string, details?: any) => void) | undefined = inject('logAction')
 
 const tempActionDef: ActionDefinition = {
   id: 'temp-action',
-  title: 'Temporary Action (Alt+T)',
-  hotkey: 'alt+t',
+  title: 'Temporary Action (Alt_T)',
+  hotkey: 'alt_t',
   description: 'This action can be registered and unregistered dynamically.',
   handler: () => {
-    if (logAction) logAction('Temporary Action (Alt+T) Executed!')
+    if (logAction) logAction('Temporary Action (Alt_T) Executed!')
   },
 }
 
@@ -29,14 +29,14 @@ const tempSourceKey = ref<symbol | null>(null)
 const registerTemp = () => {
   if (!tempSourceKey.value && actionCore) {
     tempSourceKey.value = actionCore.registerActionsSource([tempActionDef])
-    if (logAction) logAction('Temporary action registered (Alt+T active)')
+    if (logAction) logAction('Temporary action registered (Alt_T active)')
   }
 }
 
 const unregisterTemp = () => {
   if (tempSourceKey.value && actionCore) {
     actionCore.unregisterActionsSource(tempSourceKey.value)
-    if (logAction) logAction('Temporary action unregistered (Alt+T inactive)')
+    if (logAction) logAction('Temporary action unregistered (Alt_T inactive)')
     tempSourceKey.value = null
   }
 }

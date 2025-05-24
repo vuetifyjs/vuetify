@@ -38,30 +38,32 @@ export function isPromise<T> (value: any): value is Promise<T> {
  * Helper logging function with consistent format
  * @param level Log level (debug, info, warn, error)
  * @param component Component name
- * @param message Message string
- * @param details Additional details
+ * @param ...args Multiple arguments
  */
 export function log (
   level: 'debug' | 'info' | 'warn' | 'error',
   component: string,
-  message: string,
-  details?: any
+  ...args: any[]
 ) {
-  const prefix = `[${component}]`
+  const prefix = `[Vuetify ${component}]`
 
   // eslint-disable no-console
   switch (level) {
     case 'debug':
-      console.debug(`${prefix} ${message}`, details)
+      console.debug(prefix, ...args)
       break
     case 'info':
-      console.info(`${prefix} ${message}`, details)
+      console.info(prefix, ...args)
       break
     case 'warn':
-      console.warn(`${prefix} ${message}`, details)
+      console.warn(prefix, ...args)
       break
     case 'error':
-      console.error(`${prefix} Failed at ${message}`, details)
+      if (typeof args[0] === 'string') {
+        console.error(`${prefix} Failed at ${args[0]}`, ...args.slice(1))
+      } else {
+        console.error(prefix, ...args)
+      }
       break
   }
 }

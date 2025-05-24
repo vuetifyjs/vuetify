@@ -15,7 +15,7 @@
 
 <script setup lang="ts">
 import { ref, onUnmounted, inject } from 'vue';
-import { useActionCore, type ActionDefinition, VHotKey } from '../../../src/labs/VActionCore';
+import { useActionCore, type ActionDefinition, VHotKey } from '@/labs/VActionCore/archive';
 import ScenarioCard from '../ScenarioCard.vue';
 
 const actionCore = useActionCore();
@@ -28,7 +28,7 @@ const registerDynamic = () => {
   const newAction: ActionDefinition = {
     id: `dynamic-${Date.now()}`,
     title: `Dynamic Action ${dynamicActionsInternal.value.length + 1}`,
-    hotkey: `alt+${dynamicActionsInternal.value.length + 1}`,
+    hotkey: `alt_${dynamicActionsInternal.value.length + 1}`,
     handler: () => {
       if (logAction) logAction(`Dynamic Action ${dynamicActionsInternal.value.findIndex(a => a.id === newAction.id) + 1} Executed!`);
     },

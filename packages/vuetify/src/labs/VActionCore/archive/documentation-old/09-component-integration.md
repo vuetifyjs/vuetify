@@ -229,7 +229,7 @@ For actions triggered by buttons or other interactive elements, make the same lo
         id: 'editor-save',
         title: 'Save Document',
         icon: 'mdi-content-save',
-        hotkey: 'meta+s',
+        hotkey: 'meta_s',
         handler: async (ctx) => {
           await performSaveOperation({ triggerSource: `actioncore-${ctx.trigger}` });
         },

@@ -10,6 +10,7 @@ import { log } from '../utils'
 import type { VTextField } from '@/components/VTextField'
 import type { ActionCorePublicAPI, ActionDefinition, ActionContext } from '../types'
 import type { VCommandPaletteCustomItem, VCommandPaletteSearchFunction } from '../components/VCommandPalette/VCommandPalette'
+import { commandPaletteNavigationActions } from '../utils/commandPaletteNavigationActions'
 
 const COMPONENT_NAME_CORE = 'VCommandPaletteCore'
 
@@ -294,9 +295,7 @@ export function useCommandPaletteCore (
     })
 
     for (const groupName of sortedGroupNames) {
-      if (groupName) { // Add a header only for named groups
-        result.push({ isHeader: true, title: groupName, id: `header-${groupName}` })
-      }
+      // Headers are omitted from the final array to simplify keyboard navigation index math
       // Sort items within each group: first by `order` property, then by title.
       const sortedGroupItems = grouped[groupName].sort((a, b) => {
         const orderA = a.order ?? Infinity
@@ -373,15 +372,15 @@ export function useCommandPaletteCore (
   const navigateBack = async () => {
     log('debug', COMPONENT_NAME_CORE, '[navigateBack] Called. Current actionStack (before pop):', JSON.parse(JSON.stringify(actionStack.value)));
     if (!isRootLevel.value) {
-      actionStack.value = actionStack.value.slice(0, -1); // Create new array to trigger reactivity
+      actionStack.value = actionStack.value.slice(0, -1);
       log('debug', COMPONENT_NAME_CORE, '[navigateBack] New actionStack (after pop):', JSON.parse(JSON.stringify(actionStack.value)));
       internalSearchText.value = ''
       selectedIndex.value = -1
-      await nextTick()       // Wait for DOM updates
+      await nextTick() // Wait for DOM updates
       focusSearchInput()   // Re-focus search input
       emit('update:list')
     } else {
-      isActive.value = false // Close palette if at root
+      isActive.value = false
     }
   }
 
@@ -400,7 +399,7 @@ export function useCommandPaletteCore (
     } else {
       // Execute action or handler
       if (isUsingActionCore.value && actionCore && 'id' in item && typeof item.id === 'string') {
-        await actionCore.executeAction(item.id, { trigger: 'command-palette', actionId: item.id } as ActionContext)
+        await actionCore.executeAction(item.id, { trigger: 'command-palette' } as ActionContext)
       } else if ('handler' in item && typeof item.handler === 'function') {
         await item.handler(item as VCommandPaletteCustomItem)
       } else if ('onSelect' in item && typeof item.onSelect === 'function') {
@@ -557,42 +556,135 @@ export function useCommandPaletteCore (
 
   // --- Palette Navigation Action Definitions (for ActionCore registration or Footer display) ---
 
-  /** Base definitions for standard palette navigation operations (up, down, select, back/close). */
-  const baseNavActions = [
-    { id: 'palette.down', title: 'Navigate Down', defaultHotkey: 'ArrowDown', handler: () => navigateList(1) },
-    { id: 'palette.up', title: 'Navigate Up', defaultHotkey: 'ArrowUp', handler: () => navigateList(-1) },
-    { id: 'palette.select', title: 'Select Item', defaultHotkey: 'Enter', handler: async () => {
-      if (selectedIndex.value >= 0 && groupedAndSortedActions.value[selectedIndex.value]) {
-        const item = groupedAndSortedActions.value[selectedIndex.value];
-        if (!isHeaderItem(item)) await handleItemActivated(item as ActionDefinition | VCommandPaletteCustomItem);
-      }
-    }},
-    { id: 'palette.back', title: 'Back/Close', defaultHotkey: 'Escape', handler: navigateBack },
-  ];
+  // Helper to clone a plain object (simple shallow clone is enough here)
+  const shallowClone = <T extends Record<string, any>>(obj: T): T => ({ ...obj }) as T
 
-  /**
-   * Computed array of navigation action definitions.
-   * These are adapted for either ActionCore registration (with hotkeys) or for display purposes
-   * in agnostic mode (using `hotkeyDisplay` from `props.keymap*`).
-   */
+  /** Map commandPaletteNavigationActions util list to runtime actions with attached handlers */
+  const createNavigationActions = (): ActionDefinition<any>[] => {
+    return commandPaletteNavigationActions.map(action => {
+      const cloned = shallowClone(action)
+      switch (action.id) {
+        case 'commandPalette.navigateDown':
+          cloned.handler = () => navigateList(1)
+          break
+        case 'commandPalette.navigateUp':
+          cloned.handler = () => navigateList(-1)
+          break
+        case 'commandPalette.navigatePageDown':
+          cloned.handler = () => {
+            // Jump down by ~5 items or to the end if fewer remain
+            const pageSize = 5
+            let attempts = 0
+            const maxAttempts = pageSize
+            let currentIndex = selectedIndex.value
+
+            // If no selection, select first item
+            if (currentIndex < 0) {
+              navigateList(1)
+              return
+            }
+
+            // Try to move down by pageSize items
+            do {
+              navigateList(1)
+              attempts++
+              // Break if we've moved by pageSize or reached the end
+              if (selectedIndex.value === currentIndex || attempts >= maxAttempts) break
+              currentIndex = selectedIndex.value
+            } while (attempts < maxAttempts)
+          }
+          break
+        case 'commandPalette.navigatePageUp':
+          cloned.handler = () => {
+            // Jump up by ~5 items or to the start if fewer remain
+            const pageSize = 5
+            let attempts = 0
+            const maxAttempts = pageSize
+            let currentIndex = selectedIndex.value
+
+            // If no selection, do nothing
+            if (currentIndex < 0) return
+
+            // Try to move up by pageSize items
+            do {
+              navigateList(-1)
+              attempts++
+              // Break if we've moved by pageSize or reached the start
+              if (selectedIndex.value === currentIndex || attempts >= maxAttempts) break
+              currentIndex = selectedIndex.value
+            } while (attempts < maxAttempts)
+          }
+          break
+        case 'commandPalette.navigateToStart':
+          cloned.handler = () => {
+            // Reset selection first
+            selectedIndex.value = -1
+            // Then navigate to first item
+            navigateList(1)
+          }
+          break
+        case 'commandPalette.navigateToEnd':
+          cloned.handler = () => {
+            const actions = groupedAndSortedActions.value
+            if (actions.length === 0) return
+
+            // Find the last non-header item
+            for (let i = actions.length - 1; i >= 0; i--) {
+              if (!isHeaderItem(actions[i])) {
+                selectedIndex.value = i
+                scrollToSelected()
+                break
+              }
+            }
+          }
+          break
+        case 'commandPalette.selectItem':
+          cloned.handler = async () => {
+            if (selectedIndex.value >= 0 && groupedAndSortedActions.value[selectedIndex.value]) {
+              const item = groupedAndSortedActions.value[selectedIndex.value]
+              if (!isHeaderItem(item)) await handleItemActivated(item as ActionDefinition | VCommandPaletteCustomItem)
+            }
+          }
+          break
+        case 'commandPalette.navigateBackOrClose':
+          cloned.handler = navigateBack
+          break
+      }
+      // Ensure navigation actions do not appear in the palette list by default
+      cloned.meta = { ...(cloned.meta || {}), paletteHidden: true }
+      return cloned
+    })
+  }
+
+  // Store navigation actions; regenerate only once (handlers close over current scope)
+  const navActions = createNavigationActions()
+
+  // If the palette starts active (e.g. modelValue true on mount) and using ActionCore, register immediately
+  if (isUsingActionCore.value && actionCore && props.modelValue) {
+    internalNavSourceKey = actionCore.registerActionsSource(navActions)
+  }
+
+  /** Computed array exposed to component for footer display */
   const navigationActions = computed(() => {
-    return baseNavActions.map(navDef => {
-      let hotkeyDisplay: string | undefined = navDef.defaultHotkey;
-      if (!isUsingActionCore.value) { // Determine display hotkey for agnostic mode
-        if (navDef.id === 'palette.down') hotkeyDisplay = props.keymapNavigateDown;
-        else if (navDef.id === 'palette.up') hotkeyDisplay = props.keymapNavigateUp;
-        else if (navDef.id === 'palette.select') hotkeyDisplay = props.keymapSelectItem;
-        else if (navDef.id === 'palette.back') hotkeyDisplay = props.keymapNavigateBackOrClose;
+    if (isUsingActionCore.value) {
+      return navActions
+    }
+
+    // In agnostic mode convert to objects with hotkeyDisplay using props keymaps
+    return navActions.map(action => {
+      const displayMap: Record<string, string> = {
+        'commandPalette.navigateDown': props.keymapNavigateDown,
+        'commandPalette.navigateUp': props.keymapNavigateUp,
+        'commandPalette.selectItem': props.keymapSelectItem,
+        'commandPalette.navigateBackOrClose': props.keymapNavigateBackOrClose,
       }
       return {
-        id: navDef.id,
-        title: navDef.title,
-        handler: navDef.handler, // The actual function to call
-        hotkey: isUsingActionCore.value ? navDef.defaultHotkey : undefined, // Hotkey for ActionCore registration
-        hotkeyDisplay, // Text to display for the hotkey (e.g., in a footer)
-      } as Partial<ActionDefinition & VCommandPaletteCustomItem>; // Cast for flexible use in slots
-    });
-  });
+        ...action,
+        hotkey: undefined,
+        hotkeyDisplay: displayMap[action.id] || undefined,
+      }
+    })
+  })
 
   // --- Watchers and Lifecycle Hooks ---
 
@@ -601,66 +693,44 @@ export function useCommandPaletteCore (
    * When opening: initializes the action stack, focuses search, and sets up keyboard listeners.
    * When closing: tears down listeners and resets state.
    */
-  watch(isActive, async (newVal) => {
-    if (newVal) {
-      // Palette is opening
-      await initializeStack()
-      await nextTick() // Ensure DOM is updated before focusing
-      focusSearchInput()
+  watch(isActive, async (newValue, oldValue) => {
+    if (newValue && !oldValue) { // Palette opened
+      await initializeStack();
 
+      // Register navigation actions with ActionCore if available
       if (isUsingActionCore.value && actionCore) {
-        // Register internal navigation actions with ActionCore
-        const navActionDefs: ActionDefinition[] = navigationActions.value.map(na => ({
-          id: na.id as string,
-          title: na.title as string,
-          hotkey: na.hotkey as string,
-          handler: na.handler as (ctx: ActionContext) => Promise<void> | void,
-          canExecute: (): boolean => Boolean(isActive.value), // Ensure it returns a boolean
-          meta: { paletteHidden: true, internal: true }, // Mark as internal, hidden from palette list
-          runInTextInput: true, // Allow these crucial nav hotkeys even if search input is focused
-        }))
-        internalNavSourceKey = actionCore.registerActionsSource(navActionDefs) // Store key for unregistration
-        log('debug', COMPONENT_NAME_CORE, 'Registered internal navigation actions with ActionCore. Key:', internalNavSourceKey)
-      }
-      // Add global keydown listener if backspace navigation is enabled OR if in full agnostic mode (for its nav keys)
-      if (props.enableBackspaceNavigation || !isUsingActionCore.value) {
-         document.addEventListener('keydown', handleKeydown, true) // Use capture phase
-         log('debug', COMPONENT_NAME_CORE, 'Global keydown listener ADDED for Backspace/AgnosticNav.')
-      }
-    } else {
-      // Palette is closing
-      if (isUsingActionCore.value && actionCore && internalNavSourceKey) {
-        const success = actionCore.unregisterActionsSource(internalNavSourceKey);
-        log('debug', COMPONENT_NAME_CORE, `Unregistered internal navigation actions from ActionCore. Key: ${internalNavSourceKey.toString()}, Success: ${success}`);
-        if (success) {
-          internalNavSourceKey = null; // Only nullify if unregistration was successful (or if we always want to nullify)
-        } else {
-          log('warn', COMPONENT_NAME_CORE, `unregisterActionsSource returned false for key: ${internalNavSourceKey.toString()}. Nullifying key anyway.`);
-          internalNavSourceKey = null; // Still nullify to prevent repeated attempts with a stale/invalid key
+        if (internalNavSourceKey !== null) {
+          // Unregister previous just in case
+          actionCore.unregisterActionsSource(internalNavSourceKey)
+          internalNavSourceKey = null
         }
+        internalNavSourceKey = actionCore.registerActionsSource(navActions)
       }
-      if (props.enableBackspaceNavigation || !isUsingActionCore.value) {
-        document.removeEventListener('keydown', handleKeydown, true)
-        log('debug', COMPONENT_NAME_CORE, 'Global keydown listener REMOVED for Backspace/AgnosticNav.')
-      }
-      // Reset internal state is now deferred to afterLeave in VDialog
-      // resetInternalState()
-      WANTS_TO_CLOSE.value = true // Signal intent to close, VDialog will call cleanUpPostClose
-    }
-  }, { immediate: true }) // `immediate: true` ensures setup if initially active
 
-  /**
-   * Cleanup function to be called after the VDialog has finished its closing animation.
-   * This ensures data isn't cleared while the dialog is still visible and animating out.
-   */
-  const cleanUpPostClose = () => {
-    if (WANTS_TO_CLOSE.value) { // Only cleanup if closure was intended by our logic
-      resetInternalState()
-      // Any other cleanup that must happen strictly after dialog is gone
-      log('debug', COMPONENT_NAME_CORE, 'Cleanup operations performed after dialog close animation.')
-      WANTS_TO_CLOSE.value = false // Reset flag
+      await nextTick();
+      focusSearchInput();
+    } else if (!newValue && oldValue) { // Palette closed
+      WANTS_TO_CLOSE.value = true; // Defer reset until after animation (handled by VDialog)
+
+      // Unregister navigation actions
+      if (isUsingActionCore.value && actionCore && internalNavSourceKey !== null) {
+        actionCore.unregisterActionsSource(internalNavSourceKey)
+        internalNavSourceKey = null
+      }
     }
-  }
+  });
+
+  // Watch for changes in the root items (e.g., from ActionCore or props.items)
+  // This ensures the palette updates if the underlying action sources change.
+  watch(currentRootItems, async (newRootItems, oldRootItems) => {
+    // Only re-initialize if we are at the root or the stack is empty (e.g. initial setup)
+    // And if items actually changed (shallow compare of array reference is fine here)
+    // The immediate: true will handle the very first population.
+    if ((isRootLevel.value || actionStack.value.length === 0)) {
+      log('debug', COMPONENT_NAME_CORE, 'Root items may have changed, re-initializing stack.');
+      await initializeStack();
+    }
+  }, { immediate: true, deep: false }); // Ensure immediate: true is set
 
   /**
    * If using ActionCore, this watcher re-initializes the palette's root items if ActionCore's
@@ -755,6 +825,14 @@ export function useCommandPaletteCore (
     const el = inputElement.value
     if (el) el.removeEventListener('click', handleSearchInputClick)
   })
+
+  /** Performs cleanup after VDialog afterLeave animation ends */
+  const cleanUpPostClose = () => {
+    if (WANTS_TO_CLOSE.value) {
+      resetInternalState()
+      WANTS_TO_CLOSE.value = false
+    }
+  }
 
   // --- Exposed API of the Composable ---
   return {

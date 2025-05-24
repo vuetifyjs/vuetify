@@ -79,9 +79,9 @@ import {
   ActionCoreSymbol,
   type ActionDefinition,
   type ActionContext,
-} from '@/labs/VActionCore'
-import { type ActionCoreOptions, ShowSubItemsUISymbol } from '@/labs/VActionCore/types'
-import { VHotKey } from '@/labs/VActionCore/components/VHotKey/VHotKey'
+} from '@/labs/VActionCore/archive'
+import { type ActionCoreOptions, ShowSubItemsUISymbol } from '@/labs/VActionCore/archive/types'
+import { VHotKey } from '@/labs/VActionCore/archive/components/VHotKey/VHotKey'
 import ScenarioCard from '@playgrounds/ActionCore/ScenarioCard.vue'
 import ScenarioBasicGlobalActions from '@playgrounds/ActionCore/scenarios/ScenarioBasicGlobalActions.vue'
 import ScenarioCommandPalette from '@playgrounds/ActionCore/scenarios/ScenarioCommandPalette.vue'
@@ -190,9 +190,9 @@ const focusPaletteSearch = async () => { await nextTick(); paletteSearchInputRef
 // const { executeAction, getAction } = actionCore
 
 const testItemsWithTooltips: ActionDefinition[] = [
-  { id: 'debug-action-1', title: 'Action with Tooltip', description: 'This is a tooltip for action 1!', icon: 'mdi-information', hotkey: 'ctrl+i' },
-  { id: 'debug-action-2', title: 'Another Action', description: 'Tooltip for another action.', icon: 'mdi-star' },
-  { id: 'debug-action-no-tip', title: 'No Tooltip Action', icon: 'mdi-check' },
+  { id: 'debug-action-1', title: 'Action with Tooltip', description: 'This is a tooltip for action 1!', icon: 'mdi-information', hotkey: 'ctrl+i', handler: () => { logAction('Debug Action 1 (Tooltip) triggered');} },
+  { id: 'debug-action-2', title: 'Another Action', description: 'Tooltip for another action.', icon: 'mdi-star', handler: () => { logAction('Debug Action 2 (Tooltip) triggered'); } },
+  { id: 'debug-action-no-tip', title: 'No Tooltip Action', icon: 'mdi-check', handler: () => { logAction('Debug Action No Tooltip triggered'); } },
 ];
 // Registering actions directly. If a source key were needed for unregistration,
 // it would typically be returned by this call or passed in an options object.

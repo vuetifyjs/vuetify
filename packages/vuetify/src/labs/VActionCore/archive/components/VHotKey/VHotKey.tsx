@@ -73,10 +73,10 @@ export const VHotKey = genericComponent()({
       // This simple split by '+' assumes modifiers are always joined by '+'
       // and sequences are not mixed with combinations in a single hotkey string segment handled by VHotKey.
       // VHotKey is designed for single combination display primarily.
-      const rawKeys = hotkeyToParse.split('+').map(k => k.trim().toLowerCase())
+      const rawKeys = hotkeyToParse.split(/[_+]/).map(k => k.trim().toLowerCase())
 
       const modifierDisplayOrder = ['meta', 'ctrl', 'alt', 'shift']
-      const metaAliases = ['meta', 'cmd', 'command', 'super', 'win', 'windows', 'cmdorctrl', 'primary']
+      const metaAliases = ['meta']
       const ctrlAliases = ['ctrl', 'control']
       const altAliases = ['alt', 'option']
       const shiftAliases = ['shift']

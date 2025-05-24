@@ -28,6 +28,13 @@ useKeyBindings is a composable that provides a way to manage key bindings for ac
   - The composable SHALL provide a standardized set of key names that map to browser `KeyboardEvent` properties.
   - The composable SHALL normalize function keys, arrow keys, and special keys to consistent formats.
 
+- **Internationalization and RTL Support**
+  - The composable SHALL support right-to-left (RTL) languages and keyboard layouts.
+  - The composable SHALL handle keyboard layout differences for international users.
+  - The composable SHALL provide options for locale-specific key mappings and display formatting.
+  - Key display formatting SHALL respect the user's locale and text direction.
+  - The composable SHALL integrate with Vuetify's locale and RTL systems.
+
 ### Event Handling and Execution
 
 - **Key Event Processing**
@@ -163,6 +170,7 @@ useKeyBindings is a composable that provides a way to manage key bindings for ac
   - The composable SHALL respect browser accessibility features.
   - The composable SHALL not interfere with screen reader keyboard navigation.
   - The composable SHALL provide options to disable bindings for accessibility compliance.
+  - The composable SHALL support right-to-left text direction and layout for accessibility.
 
 ### Testing and Validation
 

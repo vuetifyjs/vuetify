@@ -21,7 +21,12 @@ export interface ActionDefinition<T extends ActionContext = ActionContext> {
   description?: string; // Detailed description for UI tooltips/cheatsheets
   handler?: (context: T) => void | Promise<void>; // Function to execute (can be async)
   hotkey?: string | string[]; // Hotkey combinations/sequences
-  hotkeyOptions?: { /* ... */ }; // Fine-tune hotkey behavior
+  hotkeyOptions?: {
+    preventDefault?: boolean;
+    stopPropagation?: boolean;
+    // Note: ignoreKeyRepeat is not a direct option for the underlying useKeyBindings composable.
+    // If needed, this logic should be handled within the action's handler by checking event.repeat.
+  }; // Fine-tune hotkey behavior
   runInTextInput?: boolean | 'only' | RunInTextInputMatcher; // Hotkey behavior in inputs
   canExecute?: (context: T) => boolean; // Synchronous predicate for executability
   disabled?: boolean | Ref<boolean>; // Reactive disabled state
@@ -181,9 +186,9 @@ export interface ActionDefinition<T extends ActionContext = ActionContext> {
 
 These properties are covered in detail in the [Mastering Hotkeys](./04-hotkeys.md) chapter.
 
-*   **`hotkey?: string | string[]`**: Defines the keyboard shortcut(s).
-*   **`hotkeyOptions?: { /* ... */ }`**: Advanced options like `preventDefault`.
-*   **`runInTextInput?: boolean | 'only' | RunInTextInputMatcher`**: Controls hotkey activation in text input fields.
+*   **`hotkey?: string | string[]`**: Defines the keyboard shortcut(s). Uses `_` or `+` for combinations, `-` for sequences.
+*   **`hotkeyOptions?: { preventDefault?: boolean; stopPropagation?: boolean; }`**: Options passed to the underlying keybinding system. `ignoreKeyRepeat` is not directly supported by the simplified `useKeyBindings`; this logic should be in the handler if needed.
+*   **`runInTextInput?: boolean | 'only' | RunInTextInputMatcher`**: Controls hotkey activation in text input fields. `ActionCore` translates this to `useKeyBindings`' simpler `usingInput` option, handling complex rules internally.
 
 ### Advanced Features
 

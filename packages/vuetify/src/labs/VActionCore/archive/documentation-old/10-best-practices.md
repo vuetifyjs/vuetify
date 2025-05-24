@@ -61,11 +61,11 @@ These guidelines aim to help you create actions that are not only functional but
 ## 5. Thoughtful Hotkey Design
 
 *Refer to the [Mastering Hotkeys](./04-hotkeys.md) guide for comprehensive details.*
-*   **Follow Platform Conventions:** Use `meta+s` for save, `meta+c` for copy, etc., to provide a familiar experience.
+*   **Follow Platform Conventions:** Use `meta_s` (or `meta+s`) for save, `meta_c` for copy, etc., to provide a familiar experience.
 *   **Prioritize User Workflows:** Assign memorable and ergonomic hotkeys to frequently used actions.
 *   **Avoid Conflicts:** Test hotkeys to ensure they don't clash with browser, OS, or other application shortcuts.
-*   **`runInTextInput` with Care:** Be deliberate about which hotkeys should function within text inputs. Use specific matchers (input name, predicate function) for fine-grained control.
-*   **`ignoreKeyRepeat: true` for Most Actions:** Prevent actions from firing repeatedly when keys are held down, unless the action is explicitly designed for repeated invocation (e.g., incrementing a value).
+*   **`runInTextInput` with Care:** Be deliberate about which hotkeys should function within text inputs. ActionCore translates `runInTextInput` to the `useKeyBindings` composable's `usingInput` option; complex `runInTextInput` rules (function, array, 'only') are handled by ActionCore before calling the action handler.
+*   **`ignoreKeyRepeat` in Handler:** The simplified `useKeyBindings` does not have a per-shortcut `ignoreKeyRepeat` option. If needed, check `event.repeat` within your action handler.
 *   **`preventDefault: true` Judiciously:** Only use it when necessary to stop default browser behavior that conflicts with your action.
 
 ## 6. Lifecycle Management of Action Sources

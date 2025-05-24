@@ -105,12 +105,12 @@ Action Profiling allows a single `ActionDefinition` to have multiple variations 
 const myProfileAction: ActionDefinition = {
   id: 'app.doSomethingComplex',
   title: 'Do Something',
-  hotkey: 'ctrl+x',
+  hotkey: 'ctrl_x',
   handler: () => { console.log('Standard way'); },
   profiles: {
     advancedUser: {
       title: 'Do Something (Advanced)',
-      hotkey: 'ctrl+shift+x', // Different hotkey for advanced users
+      hotkey: 'ctrl_shift_x', // Different hotkey for advanced users
       handler: () => { console.log('Advanced way with more options!'); }
     }
   }
@@ -132,7 +132,7 @@ When a profile is active, `ActionCore` automatically uses the overridden propert
 
 `ActionCore` has more advanced capabilities, including:
 
-*   **Fine-tuned hotkey options:** Control `preventDefault`, `stopPropagation`, `ignoreKeyRepeat`.
+*   **Fine-tuned hotkey options:** Control `preventDefault`, `stopPropagation` (via `ActionDefinition.hotkeyOptions`).
 *   **`canExecute` and `disabled`:** For sophisticated conditional logic.
 *   **`meta` property:** For attaching custom data to actions.
 *   **Internal loading state:** `actionCore.isLoading` (a `Ref<boolean>`) indicates if any action handler is currently executing (useful for global loading indicators).

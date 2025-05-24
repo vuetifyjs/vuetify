@@ -81,7 +81,7 @@ export const commandPaletteNavigationActions: ActionDefinition[] = [
   // {
   //   id: 'commandPalette.focusSearch',
   //   title: 'Focus Search',
-  //   hotkey: 'ctrl+l', // Example, could be something else
+  //   hotkey: 'ctrl_l', // Example, could be something else
   //   hotkeyOptions: { preventDefault: true },
   //   runInTextInput: (el) => { // Only if palette is open but search is not focused
   //     const paletteDialog = el?.closest('.v-command-palette-dialog__content');

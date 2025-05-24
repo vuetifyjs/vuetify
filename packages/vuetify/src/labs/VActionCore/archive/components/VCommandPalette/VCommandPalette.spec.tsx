@@ -98,7 +98,7 @@ const createMockActionCore = (initialActionsProvided: ActionDefinition[] = []): 
 
 const sampleActions: ActionDefinition[] = [
   { id: 'action1', title: 'Open File', keywords: 'load, document', group: 'File', order: 1 },
-  { id: 'action2', title: 'Save File', hotkey: 'ctrl+s', group: 'File', order: 2 },
+  { id: 'action2', title: 'Save File', hotkey: 'ctrl_s', group: 'File', order: 2 },
   { id: 'action3', title: 'Copy Text', group: 'Edit' },
   { id: 'action4', title: 'Paste Text', group: 'Edit' },
   {
@@ -106,7 +106,7 @@ const sampleActions: ActionDefinition[] = [
     title: 'User Profile',
     subItems: () => Promise.resolve<ActionDefinition[]>([
       { id: 'action5-1', title: 'View Profile' },
-      { id: 'action5-2', title: 'Edit Settings', hotkey: 'ctrl+,' },
+      { id: 'action5-2', title: 'Edit Settings', hotkey: 'ctrl_,' },
     ]),
   },
   { id: 'action6', title: 'Logout', meta: { paletteHidden: true } },
