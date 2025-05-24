@@ -20,8 +20,7 @@ declare global {
       centered?: boolean
       class?: string
       circle?: boolean
-      touched?: boolean
-      isTouch?: boolean
+      activing: string[]
       showTimer?: number
       showTimerCommit?: (() => void) | null
     }
