@@ -118,13 +118,18 @@ describe('VNavigationDrawer', () => {
 
   it.todo('should show temporary drawer')
 
-  it('should allow custom widths', () => {
+  it('should allow custom widths', async() => {
     const { container } = render(
       <VLayout>
         <VNavigationDrawer width={ 300 } permanent />
       </VLayout>
     )
-    expect(container.querySelector('.v-navigation-drawer')).toHaveStyle({ width: '300px' })
+    const navDrawer = container.querySelector('.v-navigation-drawer')
+    if (!navDrawer) throw new Error('Elements not found')
+
+    await vi.waitFor(() => {
+      expect(getComputedStyle(navDrawer).width).toBe('300px')
+    }, { timeout: 15000 })
   })
 
   it('should position drawer on the opposite side', () => {
