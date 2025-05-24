@@ -118,17 +118,23 @@
         > .v-video-control__pill
           backdrop-filter: blur(5px)
           background: rgba(var(--v-theme-surface), var(--v-background-opacity))
-          border-radius: 21px
+          border-radius: 20px
           min-height: 42px
-          padding: 0 12px
+          padding: 0 10px
           gap: 12px
 
           &:empty
             display: none
 
+          &:has(> *:only-child)
+            width: 42px
+            padding-inline: 0
+            justify-content: center
+
         > .v-video__action-play
-          min-height: 52px
-          border-radius: 26px
+          min-height: 50px
+          border-radius: 25px
+          width: 52px !important
 
         > .v-video__time
           padding: 0 16px
@@ -154,7 +160,7 @@
         border-bottom-left-radius: inherit
         border-bottom-right-radius: inherit
 
-      &:not(.v-video-controls--floating):not(.v-video-controls--variant-mini)
+      &:not(.v-video-controls--floating):not(.v-video-controls--pills)
         border-top: thin solid rgba(var(--v-theme-surface-variant), .2)
 
       &--floating

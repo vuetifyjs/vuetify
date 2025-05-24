@@ -163,42 +163,60 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
           <VDefaultsProvider defaults={ actionIconsDefaults }>
             { slots.default?.(slotProps) ?? (
               <>
-                { !props.hidePlay && (
-                  <div class={[pillClasses, 'v-video__action-play']}>
-                    <VIconBtn
-                      icon={ isPlaying.value ? 'mdi-pause' : 'mdi-play' }
-                      onClick={ () => isPlaying.value = !isPlaying.value }
-                    />
-                  </div>
-                )}
-                <div class={ pillClasses }>
-                  { slots.prepend?.(slotProps) }
-                </div>
-                { props.splitTime
-                  ? <span class={[pillClasses, 'v-video__time']}>{ progressText.value.elapsed }</span>
-                  : props.variant !== 'default'
-                    ? <span class={[pillClasses, 'v-video__time']}>{ progressText.value.elapsed } / { progressText.value.total }</span>
-                    : ''
-                }
                 { props.variant !== 'mini' && (
-                  <VSlider
-                    modelValue={ props.progress }
-                    hideDetails
-                    thumbSize={ props.variant === 'tube' ? 8 : 12 }
-                    color={ props.trackColor ?? props.color }
-                    trackColor={ props.variant === 'tube' ? 'white' : undefined }
-                    class="v-video__track"
-                    onUpdate:modelValue={ skipTo }
-                  />
+                  <>
+                    { !props.hidePlay && (
+                      <div class={[pillClasses, 'v-video__action-play']}>
+                        <VIconBtn
+                          icon={ isPlaying.value ? 'mdi-pause' : 'mdi-play' }
+                          onClick={ () => isPlaying.value = !isPlaying.value }
+                        />
+                      </div>
+                    )}
+                    <div class={ pillClasses }>
+                      { slots.prepend?.(slotProps) }
+                    </div>
+                    { props.splitTime
+                      ? <span class={[pillClasses, 'v-video__time']}>{ progressText.value.elapsed }</span>
+                      : props.variant !== 'default'
+                        ? <span class={[pillClasses, 'v-video__time']}>{ progressText.value.elapsed } / { progressText.value.total }</span>
+                        : ''
+                    }
+                    <VSlider
+                      modelValue={ props.progress }
+                      hideDetails
+                      thumbSize={ props.variant === 'tube' ? 8 : 12 }
+                      color={ props.trackColor ?? props.color }
+                      trackColor={ props.variant === 'tube' ? 'white' : undefined }
+                      class="v-video__track"
+                      onUpdate:modelValue={ skipTo }
+                    />
+                    { props.variant === 'tube' && <VSpacer /> }
+                    { props.splitTime
+                      ? <span class={[pillClasses, 'v-video__time']}>{ progressText.value.remaining }</span>
+                      : ''
+                    }
+                  </>
                 )}
-                { props.variant === 'tube' && <VSpacer /> }
-                { props.splitTime
-                  ? <span class={[pillClasses, 'v-video__time']}>{ progressText.value.remaining }</span>
-                  : ''
-                }
-                { !props.hideVolume && (
+                { props.variant === 'mini' && (
+                  <>
+                    <VSpacer />
+                    <div class={ pillClasses }>
+                      { slots.prepend?.(slotProps) }
+                    </div>
+                    { !props.hidePlay && (
+                      <div class={[pillClasses, 'v-video__action-play']}>
+                        <VIconBtn
+                          icon={ isPlaying.value ? 'mdi-pause' : 'mdi-play' }
+                          onClick={ () => isPlaying.value = !isPlaying.value }
+                        />
+                      </div>
+                    )}
+                  </>
+                )}
                   <div class={ pillClasses }>
-                    <VIconBtn icon="mdi-volume-high">
+                  { !props.hideVolume && (
+                    <VIconBtn key="volume-control" icon="mdi-volume-high">
                       <VIcon />
                       <VMenu
                         offset="8"
@@ -225,9 +243,11 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
                         </VSheet>
                       </VMenu>
                     </VIconBtn>
-                    { slots.append?.(slotProps) }
-                  </div>
-                )}
+                  )}
+                  { slots.append?.(slotProps) }
+                </div>
+
+                { props.variant === 'mini' && (<VSpacer />) }
               </>
             )}
           </VDefaultsProvider>
