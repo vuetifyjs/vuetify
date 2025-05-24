@@ -120,7 +120,8 @@ const ripples = {
   hide (el: HTMLElement | null) {
     if (!el?._ripple?.enabled) return
 
-    const animation = el.querySelector<HTMLElement>('.v-ripple__animation:not([data-is-hiding])')
+    const nodes = el.querySelectorAll<HTMLElement>('.v-ripple__animation:not([data-is-hiding])')
+    const animation = nodes[nodes.length - 1]
     if (!animation) return
 
     animation.dataset.isHiding = 'true'
