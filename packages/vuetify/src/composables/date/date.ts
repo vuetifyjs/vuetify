@@ -116,3 +116,27 @@ export function useDate (): DateInstance {
 
   return createInstance(options, locale)
 }
+
+export function createDateRange ({
+  start,
+  stop,
+  adapter,
+}: {
+  start: unknown
+  stop?: unknown
+  adapter: DateAdapter<any>
+}) {
+  const diff = adapter.getDiff(stop ?? start, start, 'days')
+  const datesInRange = [start]
+
+  for (let i = 1; i < diff; i++) {
+    const nextDate = adapter.addDays(start, i)
+    datesInRange.push(nextDate)
+  }
+
+  if (stop) {
+    datesInRange.push(adapter.endOfDay(stop))
+  }
+
+  return datesInRange
+}
