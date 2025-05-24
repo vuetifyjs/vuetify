@@ -343,3 +343,67 @@ const issueSearchProvider: SearchProvider = {
   }
 };
 ```
+
+### Vuetify Service Integration
+
+ActionCore follows Vuetify's established patterns for services and plugins:
+
+#### Service Pattern
+```typescript
+// ActionCore service symbol and interfaces
+export const ActionCoreSymbol: InjectionKey<ActionCoreInstance> = Symbol.for('vuetify:action-core')
+
+export function createActionCore(options?: ActionCoreOptions): ActionCoreInstance & { install: (app: App) => void } {
+  // ActionCore implementation following Vuetify's service pattern
+  return {
+    // ... core functionality
+    install(app: App) {
+      app.provide(ActionCoreSymbol, instance)
+    }
+  }
+}
+
+export function useActionCore(): ActionCoreInstance {
+  const actionCore = inject(ActionCoreSymbol)
+  if (!actionCore) throw new Error('[ActionCore] Could not find ActionCore injection')
+  return actionCore
+}
+```
+
+#### Component Integration
+```typescript
+// VCommandPalette props factory following Vuetify patterns
+export const makeVCommandPaletteProps = propsFactory({
+  ...makeComponentProps(),
+  ...makeThemeProps(),
+  ...makeDensityProps(),
+  ...makeTransitionProps(),
+  ...makeFilterProps(),
+  ...makeVirtualProps(),
+
+  // Component-specific props
+  modelValue: Boolean,
+  placeholder: String,
+  title: String,
+  // ... other props
+}, 'VCommandPalette')
+
+// VHotKey props factory
+export const makeVHotKeyProps = propsFactory({
+  ...makeComponentProps(),
+  ...makeThemeProps(),
+  ...makeDensityProps(),
+
+  hotkey: String,
+  actionId: String,
+  displayMode: String,
+  // ... other props
+}, 'VHotKey')
+```
+
+#### Component Implementation Strategy
+Components will be built using underlying Vuetify components:
+- **VCommandPalette**: Uses VDialog + VCard + VTextField + VList/VListItem
+- **VHotKey**: Uses VChip or custom styled span
+- Visual props (elevation, rounded, etc.) passed through to child components
+- Focus on functionality rather than reimplementing styling

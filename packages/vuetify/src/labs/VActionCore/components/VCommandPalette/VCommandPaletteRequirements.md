@@ -19,6 +19,14 @@ VCommandPalette is a keyboard-driven command interface component that provides u
   - The component SHALL accept a `width` prop of type String or Number with default value 600.
   - The component SHALL accept a `closeOnExecute` prop of type Boolean with default value true.
 
+- **Essential Vuetify Integration Props**
+  - The component SHALL use `makeComponentProps()` to accept standard `class` and `style` props.
+  - The component SHALL use `makeThemeProps()` to accept a `theme` prop for Vuetify theme integration.
+  - The component SHALL use `makeDensityProps()` to accept a `density` prop ('default', 'comfortable', 'compact').
+  - The component SHALL use `makeTransitionProps()` to accept a `transition` prop for show/hide animations.
+  - The component SHALL use `makeFilterProps()` to accept search filtering configuration props.
+  - The component SHALL use `makeVirtualProps()` to accept virtual scrolling props for performance with large action lists.
+
 - **Standalone Action Management Props**
   - The component SHALL accept an `actions` prop of type Array for providing actions when ActionCore is not used.
   - The component SHALL accept a `searchProviders` prop of type Array for providing search providers when ActionCore is not used.
@@ -35,6 +43,29 @@ VCommandPalette is a keyboard-driven command interface component that provides u
   - The component SHALL accept standard Vue `class` and `style` props.
   - The component SHALL accept a `theme` prop of type String for Vuetify theme integration.
   - The component SHALL follow Vuetify design system conventions and patterns.
+
+### Vuetify Integration Requirements
+
+- **Essential Composable Integration**
+  - The component SHALL use `useProxiedModel()` for proper v-model binding with the `modelValue` prop.
+  - The component SHALL use `useDefaults()` to integrate with Vuetify's defaults system for configurable component defaults.
+  - The component SHALL use `useLocale()` for internationalization of all displayed text (placeholder, title, no-results messages).
+  - The component SHALL use `useSsrBoot()` for proper SSR compatibility and transition handling.
+  - The component SHALL use `useStack()` for z-index management when displayed as a modal overlay.
+  - The component SHALL use `useFilter()` for real-time search functionality across actions and search provider results.
+  - The component SHALL use `useVirtual()` when action lists exceed performance thresholds (1000+ items).
+
+- **Component Architecture**
+  - The component SHALL be built using underlying Vuetify components (VDialog, VCard, VTextField, VList) rather than implementing visual styling directly.
+  - Visual styling props (elevation, rounded, borders) SHALL be passed through to underlying Vuetify components.
+  - The component SHALL follow Vuetify's prop naming conventions and component patterns.
+  - The component SHALL generate reactive CSS classes following Vuetify naming conventions (`v-command-palette--modifier-value`).
+
+- **Theme and Styling Integration**
+  - The component SHALL integrate with Vuetify's theme system using `provideTheme()` when theme prop is provided.
+  - The component SHALL generate theme-aware classes using Vuetify's theme composables.
+  - The component SHALL support Vuetify's density variants through passed-through props to child components.
+  - The component SHALL respect Vuetify's RTL support through locale integration.
 
 ### ActionCore Integration
 

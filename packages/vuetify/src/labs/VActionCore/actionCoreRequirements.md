@@ -110,6 +110,14 @@ actionCore (working title) is a collection of composables that provides a way to
   - The system SHALL provide methods to retrieve complete hotkey binding data for all actions for hotkey map display.
   - The system SHALL provide utilities to export action and hotkey data in formats suitable for debugging tools and documentation.
 
+- **Vuetify Service Integration**
+  - The system SHALL follow Vuetify's service pattern using injection/provide with a Symbol-based injection key.
+  - The system SHALL integrate with Vuetify's installation and initialization patterns.
+  - The system SHALL support Vuetify plugin installation through `app.use()`.
+  - The system SHALL integrate with Vuetify's defaults system for action default properties.
+  - The system SHALL provide proper TypeScript interfaces for all public APIs.
+  - The system SHALL follow Vuetify's error handling and warning patterns (development vs production).
+
 - **Component Action Registration**
   - The system SHALL provide methods for components to register temporary actions.
   - Component actions SHALL be automatically unregistered when components are destroyed or unmounted.

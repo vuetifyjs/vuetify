@@ -13,6 +13,18 @@
   -   It SHALL have a `sequenceSeparator` prop which accepts a string or false. The string SHALL be a word or character that delineates keys that are not pressed simultaneously but in-order. The default value SHALL be 'then'. The default value SHALL be localized. If the value is false or an empty string, the component SHALL not display a sequence separator.
   -   It SHALL have a `combinationSeparator` prop which accepts a string or false. The string SHALL be a word or character that delineates keys that are pressed simultaneously. The default value SHALL an empty string. The default value SHALL be localized. If the value is false or an empty string, the component SHALL not display a combination separator.
 
+- **Essential Vuetify Integration Props**
+  -   The component SHALL use `makeComponentProps()` to accept standard `class` and `style` props.
+  -   The component SHALL use `makeThemeProps()` to accept a `theme` prop for Vuetify theme integration.
+  -   The component SHALL use `makeDensityProps()` to accept a `density` prop ('default', 'comfortable', 'compact').
+
+- **Vuetify Composable Integration**
+  -   The component SHALL use `useDefaults()` to integrate with Vuetify's defaults system for configurable component defaults.
+  -   The component SHALL use `useLocale()` for internationalization of separator text and default values.
+  -   The component SHALL use `provideTheme()` when theme prop is provided.
+  -   The component SHALL generate reactive CSS classes following Vuetify naming conventions (`v-hotkey--modifier-value`).
+  -   The component SHALL respect Vuetify's RTL support through locale integration.
+
 - **Slots**
   -   None
 
