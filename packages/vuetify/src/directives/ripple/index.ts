@@ -170,7 +170,7 @@ function rippleShow (e: VuetifyRippleEvent) {
   // Display only when the ripple is activated for the first time.
   if (element._ripple.activing.length === 0) {
     window.clearTimeout(element._ripple.showTimer)
-    if (e instanceof PointerEvent) {
+    if (e instanceof PointerEvent && e.pointerType !== 'mouse') {
       element._ripple.showTimerCommit = () => {
         ripples.show(e, element, value)
       }
