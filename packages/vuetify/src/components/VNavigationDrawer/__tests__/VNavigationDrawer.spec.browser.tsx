@@ -111,7 +111,7 @@ describe('VNavigationDrawer', () => {
       </VLayout>
     )
     expect(container.querySelector('.v-navigation-drawer')).toHaveClass('v-navigation-drawer--active')
-    // // After viewport change
+    // After viewport change
     // expect(container.querySelector('.v-navigation-drawer')).toHaveClass('v-navigation-drawer--active')
     expect(container.querySelector('.v-navigation-drawer')).not.toHaveClass('v-navigation-drawer--temporary')
   })
