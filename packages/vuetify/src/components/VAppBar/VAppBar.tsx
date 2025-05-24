@@ -51,7 +51,7 @@ export const VAppBar = genericComponent<VToolbarSlots>()({
     const isActive = useProxiedModel(props, 'modelValue')
 
     const position = computed(() => {
-      return props.location?.split(' ').shift() ?? 'bottom'
+      return props.location?.split(' ').includes('bottom') ? 'bottom' :'top'
     }) as ComputedRef<Position>
 
     const scrollBehavior = computed(() => {
