@@ -212,7 +212,7 @@ export function useCalendar (props: CalendarProps) {
 
     const date = adapter.date(value)
 
-    if (props.min && adapter.isAfter(adapter.date(props.min), date)) return true
+    if (props.min && adapter.isBefore(adapter.endOfDay(date), adapter.date(props.min))) return true
     if (props.max && adapter.isAfter(date, adapter.date(props.max))) return true
 
     if (Array.isArray(props.allowedDates) && props.allowedDates.length > 0) {
