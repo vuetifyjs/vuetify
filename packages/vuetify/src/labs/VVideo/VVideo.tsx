@@ -20,16 +20,17 @@ import { MaybeTransition } from '@/composables/transition'
 
 // Utilities
 import { onBeforeUnmount, onMounted, ref, watch } from 'vue'
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import type { VVideoControlsAppendSlot, VVideoControlsDefaultSlot } from './VVideoControls'
+import type { VVideoControlsActionsSlot } from './VVideoControls'
 import type { LoaderSlotProps } from '@/composables/loader'
 
 export type VVideoSlots = {
-  controls: VVideoControlsDefaultSlot
-  append: VVideoControlsAppendSlot
+  controls: VVideoControlsActionsSlot
+  prepend: VVideoControlsActionsSlot
+  append: VVideoControlsActionsSlot
   loader: LoaderSlotProps
   sources: never
 }
@@ -49,11 +50,19 @@ export const makeVVideoProps = propsFactory({
     default: 'player',
     validator: (v: any) => allowedVariants.includes(v),
   },
-  ...makeDimensionProps({ width: 400, height: 225 }),
+  controlsTransition: {
+    String,
+    default: 'fade-transition',
+  },
+  controlsVariant: {
+    type: String as PropType<VVideoControlsVariant>,
+    default: 'default',
+  },
+  ...makeDimensionProps({ width: 480, height: 270 }),
   ...makeElevationProps({ elevation: 4 }),
   ...makeRoundedProps(),
   ...makeThemeProps(),
-  ...makeVVideoControlsProps(),
+  ...omit(makeVVideoControlsProps(), ['variant']),
 }, 'VVideo')
 
 export const VVideo = genericComponent<VVideoSlots>()({
@@ -163,18 +172,15 @@ export const VVideo = genericComponent<VVideoSlots>()({
     useRender(() => {
       const showControls = !isLoading.value &&
         props.variant === 'player' &&
-        props.controlVariant !== 'hidden'
+        props.controlsVariant !== 'hidden'
 
       const posterTransition = props.variant === 'background'
         ? 'poster-fade-out'
         : 'fade-transition'
 
-      const controlsTransition = props.controlVariant === 'floating'
-        ? 'slide-y-transition'
-        : 'slide-y-reverse-transition'
-
       const controlsProps = {
-        ...VVideoControls.filterProps(props),
+        ...VVideoControls.filterProps(omit(props, ['variant'])),
+        variant: props.controlsVariant,
         playing: isPlaying.value,
         progress: progress.value,
         duration: duration.value,
@@ -206,7 +212,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
               elevationClasses.value,
             ]}
             style={[
-              dimensionStyles.value,
+              props.variant === 'background' ? [] : dimensionStyles.value,
             ]}
           >
             <video
@@ -275,7 +281,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
               </VImg>
             </VOverlay>
           </div>
-          <MaybeTransition key="actions" name={ controlsTransition }>
+          <MaybeTransition key="actions" name={ props.controlsTransition }>
             { showControls && (
               <VVideoControls
                 { ...controlsProps }
@@ -283,6 +289,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
               >
                 {{
                   default: slots.controls,
+                  prepend: slots.prepend,
                   append: slots.append,
                 }}
               </VVideoControls>

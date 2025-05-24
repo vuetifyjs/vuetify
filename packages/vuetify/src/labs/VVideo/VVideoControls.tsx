@@ -14,13 +14,13 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 import { formatTime, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType, Ref } from 'vue'
 
-export type VVideoControlsDefaultSlot = {
+export type VVideoControlsActionsSlot = {
   play: () => void
   pause: () => void
   skipTo: (v: number) => void
@@ -28,18 +28,14 @@ export type VVideoControlsDefaultSlot = {
   toggleFullscreen: () => void
 }
 
-export type VVideoControlsAppendSlot = {
-  // ? sources: Array<{ quality }>
-  toggleFullscreen: () => void
-}
-
 export type VVideoControlsSlots = {
-  default: VVideoControlsDefaultSlot
-  append: VVideoControlsAppendSlot
+  default: VVideoControlsActionsSlot
+  prepend: VVideoControlsActionsSlot
+  append: VVideoControlsActionsSlot
 }
 
-const allowedControlVariants = ['hidden', 'default', 'split', 'tube', 'floating'] as const
-type ControlVariant = typeof allowedControlVariants[number]
+const allowedVariants = ['hidden', 'default', 'tube', 'mini'] as const
+export type VVideoControlsVariant = typeof allowedVariants[number]
 
 export const makeVVideoControlsProps = propsFactory({
   color: String,
@@ -49,6 +45,14 @@ export const makeVVideoControlsProps = propsFactory({
   playing: Boolean,
   hidePlay: Boolean,
   hideVolume: Boolean,
+  floating: Boolean,
+  splitTime: Boolean,
+  pills: Boolean,
+  detached: Boolean,
+  miniPosition: {
+    type: String as PropType<'left' | 'center' | 'right'>,
+    default: 'center',
+  },
   progress: {
     type: Number,
     default: 0,
@@ -61,10 +65,10 @@ export const makeVVideoControlsProps = propsFactory({
     type: Number,
     default: 0,
   },
-  controlVariant: {
-    type: String as PropType<ControlVariant>,
+  variant: {
+    type: String as PropType<VVideoControlsVariant>,
     default: 'default',
-    validator: (v: any) => allowedControlVariants.includes(v),
+    validator: (v: any) => allowedVariants.includes(v),
   },
   ...makeElevationProps({ elevation: 4 }),
   ...makeThemeProps(),
@@ -88,7 +92,7 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
     const { elevationClasses } = useElevation(props)
 
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => {
-      const fallbackBackground = props.controlVariant === 'floating' ? 'surface' : undefined
+      const fallbackBackground = props.detached ? 'surface' : undefined
       return props.backgroundColor ?? fallbackBackground
     })
 
@@ -122,15 +126,34 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
     }
 
     useRender(() => {
-      const actionIconsDefaults = { VIconBtn: { size: 28, iconSize: 20, variant: 'text' } }
+      const actionIconsDefaults = {
+        VIconBtn: {
+          size: 28,
+          iconSize: props.pills ? 24 : 20,
+          variant: 'text',
+          color: props.color,
+        },
+      }
+
+      const pillClasses = [
+        'v-video-control__pill',
+        props.pills ? elevationClasses.value : [],
+      ]
+
+      const slotProps = { play, pause, skipTo, volume, toggleFullscreen }
 
       return (
         <div
           class={[
-            'v-video__controls',
-            `v-video__controls--variant-${props.controlVariant}`,
+            'v-video-controls',
+            `v-video-controls--variant-${props.variant}`,
+            { 'v-video-controls--pills': props.pills },
+            { 'v-video-controls--detached': props.detached },
+            { 'v-video-controls--floating': props.floating },
+            { 'v-video-controls--split-time': props.splitTime },
+            { [`v-video-controls--mini-${props.miniPosition}`]: props.variant === 'mini' },
             backgroundColorClasses.value,
-            elevationClasses.value,
+            props.detached && !props.pills ? elevationClasses.value : [],
             themeClasses.value,
           ]}
           style={[
@@ -138,65 +161,73 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
           ]}
         >
           <VDefaultsProvider defaults={ actionIconsDefaults }>
-            { slots.default?.({ play, pause, skipTo, volume, toggleFullscreen }) ?? (
+            { slots.default?.(slotProps) ?? (
               <>
                 { !props.hidePlay && (
-                  <VIconBtn
-                    icon={ isPlaying.value ? 'mdi-pause' : 'mdi-play' }
-                    color={ props.color }
-                    onClick={ () => isPlaying.value = !isPlaying.value }
-                  />
+                  <div class={[pillClasses, 'v-video__action-play']}>
+                    <VIconBtn
+                      icon={ isPlaying.value ? 'mdi-pause' : 'mdi-play' }
+                      onClick={ () => isPlaying.value = !isPlaying.value }
+                    />
+                  </div>
                 )}
-                { props.controlVariant === 'split'
-                  ? <span class="v-video__time">{ progressText.value.elapsed }</span>
-                  : props.controlVariant !== 'default'
-                    ? <span class="v-video__time">{ progressText.value.elapsed } / { progressText.value.total }</span>
+                <div class={ pillClasses }>
+                  { slots.prepend?.(slotProps) }
+                </div>
+                { props.splitTime
+                  ? <span class={[pillClasses, 'v-video__time']}>{ progressText.value.elapsed }</span>
+                  : props.variant !== 'default'
+                    ? <span class={[pillClasses, 'v-video__time']}>{ progressText.value.elapsed } / { progressText.value.total }</span>
                     : ''
                 }
-                <VSlider
-                  modelValue={ props.progress }
-                  hideDetails
-                  thumbSize={ props.controlVariant === 'tube' ? 8 : 12 }
-                  color={ props.trackColor ?? props.color }
-                  trackColor={ props.controlVariant === 'tube' ? 'white' : undefined }
-                  class="v-video__track"
-                  onUpdate:modelValue={ skipTo }
-                />
-                { props.controlVariant === 'tube' && <VSpacer /> }
-                { props.controlVariant === 'split'
-                  ? <span class="v-video__time">{ progressText.value.remaining }</span>
+                { props.variant !== 'mini' && (
+                  <VSlider
+                    modelValue={ props.progress }
+                    hideDetails
+                    thumbSize={ props.variant === 'tube' ? 8 : 12 }
+                    color={ props.trackColor ?? props.color }
+                    trackColor={ props.variant === 'tube' ? 'white' : undefined }
+                    class="v-video__track"
+                    onUpdate:modelValue={ skipTo }
+                  />
+                )}
+                { props.variant === 'tube' && <VSpacer /> }
+                { props.splitTime
+                  ? <span class={[pillClasses, 'v-video__time']}>{ progressText.value.remaining }</span>
                   : ''
                 }
                 { !props.hideVolume && (
-                  <VIconBtn icon="mdi-volume-high" color={ props.color }>
-                    <VIcon />
-                    <VMenu
-                      offset="8"
-                      activator="parent"
-                      location="top center"
-                      contentClass="v-video__volume-menu"
-                      close-on-content-click={ false }
-                    >
-                      <VSheet
-                        class="pa-2 overflow-hidden"
-                        height="124"
-                        color="surface-variant"
+                  <div class={ pillClasses }>
+                    <VIconBtn icon="mdi-volume-high">
+                      <VIcon />
+                      <VMenu
+                        offset="8"
+                        activator="parent"
+                        location="top center"
+                        contentClass="v-video__volume-menu"
+                        close-on-content-click={ false }
                       >
-                        <VSlider
-                          direction="vertical"
-                          hide-details
-                          color={ props.color ?? 'surface' }
-                          style="height: 100px"
-                          class="my-1"
-                          thumb-size="10"
-                          modelValue={ volume.value }
-                          onUpdate:modelValue={ v => volume.value = v }
-                        />
-                      </VSheet>
-                    </VMenu>
-                  </VIconBtn>
+                        <VSheet
+                          class="pa-2 overflow-hidden"
+                          height="124"
+                          color="surface-variant"
+                        >
+                          <VSlider
+                            direction="vertical"
+                            hide-details
+                            color={ props.color ?? 'surface' }
+                            style="height: 100px"
+                            class="my-1"
+                            thumb-size="10"
+                            modelValue={ volume.value }
+                            onUpdate:modelValue={ v => volume.value = v }
+                          />
+                        </VSheet>
+                      </VMenu>
+                    </VIconBtn>
+                    { slots.append?.(slotProps) }
+                  </div>
                 )}
-                { slots.append?.({ toggleFullscreen }) }
               </>
             )}
           </VDefaultsProvider>
