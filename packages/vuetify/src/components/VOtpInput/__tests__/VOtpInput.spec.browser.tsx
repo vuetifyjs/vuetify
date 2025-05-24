@@ -122,6 +122,53 @@ describe('VOtpInput', () => {
     expect(modelValue.value).toBe('123')
   })
 
+  it('handles paste event', async () => {
+    render(() => (<VOtpInput />))
+    const inputs = screen.getAllByCSS('.v-otp-input input')
+    await userEvent.click(inputs[0])
+    await navigator.clipboard.writeText('123456')
+    await userEvent.paste()
+
+    expect(inputs[0]).toHaveValue('1')
+    expect(inputs[1]).toHaveValue('2')
+    expect(inputs[2]).toHaveValue('3')
+    expect(inputs[3]).toHaveValue('4')
+    expect(inputs[4]).toHaveValue('5')
+    expect(inputs[5]).toHaveValue('6')
+    expect(inputs[5]).toHaveFocus()
+  })
+
+  it('trim paste event content', async () => {
+    render(() => (<VOtpInput />))
+    const inputs = screen.getAllByCSS('.v-otp-input input')
+    await userEvent.click(inputs[0])
+    await navigator.clipboard.writeText('  123456     ')
+    await userEvent.paste()
+
+    expect(inputs[0]).toHaveValue('1')
+    expect(inputs[1]).toHaveValue('2')
+    expect(inputs[2]).toHaveValue('3')
+    expect(inputs[3]).toHaveValue('4')
+    expect(inputs[4]).toHaveValue('5')
+    expect(inputs[5]).toHaveValue('6')
+    expect(inputs[5]).toHaveFocus()
+  })
+
+  it('handles mobile OTP autofill', async () => {
+    render(() => (<VOtpInput />))
+    const inputs = screen.getAllByCSS('.v-otp-input input')
+
+    await userEvent.fill(inputs[0], '123456')
+
+    expect(inputs[0]).toHaveValue('1')
+    expect(inputs[1]).toHaveValue('2')
+    expect(inputs[2]).toHaveValue('3')
+    expect(inputs[3]).toHaveValue('4')
+    expect(inputs[4]).toHaveValue('5')
+    expect(inputs[5]).toHaveValue('6')
+    expect(inputs[5]).toHaveFocus()
+  })
+
   describe('Showcase', () => {
     generate({ stories })
   })
