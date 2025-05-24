@@ -226,8 +226,6 @@ function rippleHide (e: Event) {
 
 function rippleLeave (e: PointerEvent) {
   if (e.pointerType === 'touch') return
-  console.log('leave');
-
   rippleHide(e)
 }
 
