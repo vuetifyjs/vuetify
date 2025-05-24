@@ -56,6 +56,12 @@ VCommandPalette is a keyboard-driven command interface component that provides u
   - The component SHALL use `useFilter()` for real-time search functionality across actions and search provider results.
   - The component SHALL use `useVirtual()` when action lists exceed performance thresholds (1000+ items).
 
+- **Server-Side Rendering (SSR) Support**
+  - The component SHALL be compatible with server-side rendering environments.
+  - The component SHALL handle hydration gracefully without layout shifts or functionality loss.
+  - The component SHALL NOT rely on browser-specific APIs during initial render.
+  - SSR compatibility SHALL be maintained through Vuetify's `useSsrBoot()` composable integration.
+
 - **Component Architecture**
   - The component SHALL be built using underlying Vuetify components (VDialog, VCard, VTextField, VList) rather than implementing visual styling directly.
   - Visual styling props (elevation, rounded, borders) SHALL be passed through to underlying Vuetify components.
@@ -69,6 +75,24 @@ VCommandPalette is a keyboard-driven command interface component that provides u
   - The component SHALL respect Vuetify's RTL support through locale integration.
 
 ### ActionCore Integration
+
+- **Required ActionCore Interface Contract**
+  - ActionCore SHALL provide an `ActionDefinition` interface that includes the following properties:
+    - `id: string` - Unique identifier for the action
+    - `title: string` - Display title for the action
+    - `description?: string` - Optional description for the action
+    - `hotkey?: string` - Optional hotkey binding for the action
+    - `group?: string` - Optional group identifier for organizing actions
+    - `enabled?: boolean` - Whether the action is currently enabled (defaults to true)
+    - `isNavigationAction?: boolean` - Whether this is a navigation action that should be excluded from command palette display
+    - `priority?: number` - Optional priority for ordering within groups (lower numbers appear first)
+    - `keywords?: string[]` - Optional array of search keywords for enhanced discoverability
+    - `icon?: string` - Optional icon identifier for the action
+  - ActionCore SHALL provide a `getVisibleActions()` method that returns an array of `ActionDefinition` objects
+  - ActionCore SHALL provide a `getApplicationContext()` method that returns the current application context object
+  - ActionCore SHALL provide an `executeAction(actionId: string, context?: any)` method for executing actions
+  - ActionCore SHALL provide a `getEffectiveHotkey(actionId: string)` method that returns the current hotkey for an action
+  - ActionCore SHALL provide a `getActiveSearchProviders()` method that returns currently registered search providers
 
 - **Optional ActionCore Integration**
   - The component SHALL integrate with VActionCore when available to retrieve registered actions.
@@ -102,12 +126,10 @@ VCommandPalette is a keyboard-driven command interface component that provides u
 ### Search and Filtering
 
 - **Search Orchestration**
-  - The component SHALL orchestrate search across multiple sources including ActionCore actions and external search providers.
-  - The component SHALL use ActionCore's search utilities to query registered actions by title, description, and keywords.
-  - The component SHALL merge results from ActionCore and external search providers into a unified interface.
-  - Search SHALL be case-insensitive and support partial matching across all sources.
-  - The component SHALL highlight matching portions of action titles and keywords in search results.
-  - Search SHALL be performed in real-time as the user types.
+  - The component SHALL act as a search orchestrator that coordinates queries across multiple providers.
+  - The component SHALL handle search provider errors gracefully without disrupting other providers.
+  - The component SHALL support configurable timeouts for search provider responses.
+  - The component SHALL provide loading indicators for individual search providers when appropriate.
 
 - **Custom Search Engine Support**
   - The component SHALL support custom search engine implementations through the `searchEngine` prop for complete control over search behavior.
@@ -133,15 +155,15 @@ VCommandPalette is a keyboard-driven command interface component that provides u
 - **Group Display and Organization**
   - The component SHALL display actions organized by their assigned groups using group definitions from ActionCore.
   - Groups SHALL be displayed with appropriate visual separators, titles (when provided), and icons as defined in group definitions.
-  - Groups SHALL support HR separator tags before and/or after the group content based on `separatorStart` and `separatorEnd` properties.
+  - Groups SHALL support horizontal rule (HR) separator dividers before and/or after the group content based on `separatorStart` and `separatorEnd` properties.
   - Groups SHALL be ordered according to their priority values with lower numbers appearing first.
   - Actions within groups SHALL be ordered according to their priority values with lower numbers appearing first.
   - Ungrouped actions SHALL be displayed with appropriate default ordering relative to grouped actions.
 
 - **Group Rendering**
   - The component SHALL render group headers with titles (when provided), icons, and separators as specified in group definitions.
-  - The component SHALL render HR separator tags before group content when `separatorStart` is true.
-  - The component SHALL render HR separator tags after group content when `separatorEnd` is true.
+  - The component SHALL render horizontal rule (HR) separator dividers before group content when `separatorStart` is true.
+  - The component SHALL render horizontal rule (HR) separator dividers after group content when `separatorEnd` is true.
   - The component SHALL support customization of group display through slots and styling.
   - Group headers SHALL be visually distinct from action items.
   - The component SHALL handle groups without titles gracefully by rendering only separators and icons when specified.
@@ -235,6 +257,13 @@ VCommandPalette is a keyboard-driven command interface component that provides u
   - The component SHALL implement appropriate debouncing for search input.
   - Action list rendering SHALL be optimized to handle large datasets efficiently.
 
+- **Virtual Scrolling Requirements**
+  - The component SHALL automatically enable virtual scrolling when the total number of displayable items exceeds 1000 items.
+  - Virtual scrolling SHALL be implemented using Vuetify's `useVirtual()` composable for consistency.
+  - The 1000-item threshold SHALL be configurable through virtual scrolling props from `makeVirtualProps()`.
+  - Virtual scrolling SHALL maintain keyboard navigation functionality across all virtualized items.
+  - Selection state SHALL be preserved correctly when items are virtualized.
+
 - **Memory Management**
   - The component SHALL properly clean up event listeners and reactive state on unmount.
   - The component SHALL avoid memory leaks with large action datasets.
@@ -290,9 +319,8 @@ VCommandPalette is a keyboard-driven command interface component that provides u
 
 - **Context-Aware Search Orchestration**
   - The component SHALL support dynamic ordering of search provider results based on current application context.
-  - Search provider priority SHALL be configurable and responsive to context changes.
+  - Search provider priority SHALL be configurable based on application state.
   - The component SHALL allow applications to control which search providers and result types appear prominently based on current context.
-  - Result ordering SHALL update reactively when application context changes.
 
 - **Search Provider Interface**
   - The component SHALL define a standardized interface for search providers to implement.
@@ -303,8 +331,6 @@ VCommandPalette is a keyboard-driven command interface component that provides u
 
 - **Search Orchestration**
   - The component SHALL act as a search orchestrator that coordinates queries across multiple providers.
-  - When ActionCore is used, the component SHALL subscribe to ActionCore context updates and re-query search providers when context changes significantly.
-  - When ActionCore is not used, the component SHALL watch for changes to the `applicationContext` prop and re-query search providers accordingly.
   - The component SHALL handle search provider errors gracefully without disrupting other providers.
   - The component SHALL support configurable timeouts for search provider responses.
   - The component SHALL provide loading indicators for individual search providers when appropriate.
@@ -331,16 +357,10 @@ VCommandPalette is a keyboard-driven command interface component that provides u
   - The component SHALL receive application context from ActionCore when ActionCore is used.
   - The component SHALL receive application context from the action management system when ActionCore is not used.
   - Context data SHALL be passed to search providers to enable contextual search results.
-  - The component SHALL support reactive context updates that trigger search provider re-queries.
 
 - **Context Source**
   - When ActionCore is used, the component SHALL use ActionCore as the sole source of application context.
   - When ActionCore is not used, the component SHALL accept application context through the `applicationContext` prop to enable context-aware search providers and action execution.
-  - The component SHALL pass context to search providers regardless of the action management system used.
-
-- **Context Scope**
-  - Context SHALL include information about current application state, selected items, active views, and user permissions.
-  - Context passing SHALL be efficient and avoid unnecessary data serialization or copying.
   - The component SHALL pass context to search providers regardless of the action management system used.
 
 ### Result Management and Ordering

@@ -23,6 +23,10 @@ import { VList } from '@/components/VList'
 import { VListItem } from '@/components/VList'
 import { VProgressCircular } from '@/components/VProgressCircular'
 import { VDivider } from '@/components/VDivider'
+import { VIcon } from '@/components/VIcon'
+
+// ActionCore Components
+import { VHotKey } from '@/labs/VActionCore/VHotKey'
 
 // Composables
 import { makeComponentProps } from '@/composables/component'
@@ -48,7 +52,23 @@ import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import type { ActionDefinition, SearchProvider, ApplicationContext, SearchResultItem } from '../types'
+import type { ActionDefinition, SearchProvider, ApplicationContext, SearchResultItem, SearchEngine } from '../types'
+
+// ActionCore ActionDefinition Interface Requirements
+// The ActionDefinition interface must include these properties for VCommandPalette compatibility:
+interface ActionDefinition {
+  id: string                        // Unique identifier for the action
+  title: string                     // Display title for the action
+  description?: string              // Optional description for the action
+  hotkey?: string                   // Optional hotkey binding for the action
+  group?: string                    // Optional group identifier for organizing actions
+  enabled?: boolean                 // Whether the action is currently enabled (defaults to true)
+  isNavigationAction?: boolean      // Whether this is a navigation action that should be excluded from command palette display
+  priority?: number                 // Optional priority for ordering within groups (lower numbers appear first)
+  keywords?: string[]               // Optional array of search keywords for enhanced discoverability
+  icon?: string                     // Optional icon identifier for the action
+  groupIcon?: string                // Optional icon for the group this action belongs to
+}
 
 // Local interfaces
 interface ResultOrderingConfig {
@@ -61,6 +81,10 @@ interface SearchConfiguration {
   timeout?: number
 }
 
+interface SearchEngine {
+  search(query: string, actions: ActionDefinition[], providers: SearchProvider[], context: ApplicationContext): Promise<ProcessedItem[]>
+}
+
 interface ProcessedItem {
   type: 'action' | 'search-result'
   action?: ActionDefinition
@@ -70,6 +94,7 @@ interface ProcessedItem {
   hotkey?: string
   group?: string
   searchableText: string
+  groupIcon?: string
 }
 
 export const makeVCommandPaletteProps = propsFactory({
@@ -130,6 +155,10 @@ export const makeVCommandPaletteProps = propsFactory({
     type: Object as PropType<SearchConfiguration>,
     default: () => ({}),
   },
+  searchEngine: {
+    type: Object as PropType<SearchEngine>,
+    default: undefined,
+  },
 
   ...makeComponentProps(),
   ...makeThemeProps(),
@@ -179,22 +208,6 @@ export const VCommandPalette = genericComponent()({
       isAvailable: isActionCoreAvailable
     } = useActionCoreIntegration(toRef(props, 'useActionCore'))
 
-    // Search orchestration
-    const {
-      searchResults,
-      isSearching,
-      searchProviders: activeSearchProviders,
-      executeSearch,
-      clearSearch
-    } = useSearchOrchestration({
-      searchProviders: toRef(props, 'searchProviders'),
-      applicationContext: computed(() =>
-        isActionCoreAvailable.value ? actionCoreContext.value : props.applicationContext
-      ),
-      useActionCore: toRef(props, 'useActionCore'),
-      searchConfiguration: toRef(props, 'searchConfiguration')
-    })
-
     // Combine actions from different sources
     const allActions = computed(() => {
       const actions: ActionDefinition[] = []
@@ -212,6 +225,25 @@ export const VCommandPalette = genericComponent()({
       return actions
     })
 
+    // Search orchestration
+    const {
+      searchResults,
+      isSearching,
+      searchProviders: activeSearchProviders,
+      executeSearch,
+      clearSearch
+    } = useSearchOrchestration({
+      searchProviders: toRef(props, 'searchProviders'),
+      applicationContext: computed(() =>
+        isActionCoreAvailable.value ? actionCoreContext.value : props.applicationContext
+      ),
+      useActionCore: toRef(props, 'useActionCore'),
+      searchConfiguration: toRef(props, 'searchConfiguration'),
+      searchEngine: toRef(props, 'searchEngine'),
+      resultOrdering: toRef(props, 'resultOrdering'),
+      allActions: allActions
+    })
+
     // Process and filter items
     const { filteredItems } = useFilter(props, computed(() => {
       const actionItems = allActions.value.map(action => ({
@@ -221,7 +253,8 @@ export const VCommandPalette = genericComponent()({
         description: action.description,
         hotkey: action.hotkey,
         group: action.group,
-        searchableText: `${action.title} ${action.description || ''}`.toLowerCase()
+        searchableText: `${action.title} ${action.description || ''}`.toLowerCase(),
+        groupIcon: action.groupIcon
       }))
 
       const searchItems = searchResults.value.map(result => ({
@@ -230,7 +263,8 @@ export const VCommandPalette = genericComponent()({
         title: result.title,
         description: result.description,
         group: result.group,
-        searchableText: `${result.title} ${result.description || ''}`.toLowerCase()
+        searchableText: `${result.title} ${result.description || ''}`.toLowerCase(),
+        groupIcon: result.groupIcon
       }))
 
       return [...actionItems, ...searchItems]
@@ -374,6 +408,28 @@ export const VCommandPalette = genericComponent()({
       ...stackStyles.value
     }))
 
+    // ARIA attributes for accessibility
+    const dialogId = `command-palette-${Math.random().toString(36).slice(2)}`
+    const listboxId = `${dialogId}-listbox`
+    const searchId = `${dialogId}-search`
+
+    const selectedItemId = computed(() => {
+      const selectedItem = filteredItems.value[selectedIndex.value]
+      return selectedItem ? `${dialogId}-item-${selectedIndex.value}` : undefined
+    })
+
+    const resultCount = computed(() => filteredItems.value.length)
+    const resultAnnouncement = computed(() => {
+      if (searchQuery.value.trim()) {
+        return resultCount.value === 1
+          ? t('$vuetify.commandPalette.oneResult')
+          : t('$vuetify.commandPalette.resultCount', { count: resultCount.value })
+      }
+      return resultCount.value === 0
+        ? t('$vuetify.commandPalette.noActionsAvailable')
+        : t('$vuetify.commandPalette.actionsAvailable', { count: resultCount.value })
+    })
+
     useRender(() => (
       <VDialog
         modelValue={isVisible.value}
@@ -390,14 +446,29 @@ export const VCommandPalette = genericComponent()({
         persistent
         noClickAnimation
         scrollStrategy="block"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={`${dialogId}-title`}
       >
         <VCard>
           {/* Header */}
           {slots.header?.() ?? (
-            <VCardTitle class="v-command-palette__header">
+            <VCardTitle
+              id={`${dialogId}-title`}
+              class="v-command-palette__header"
+            >
               {props.title}
             </VCardTitle>
           )}
+
+          {/* Live region for screen reader announcements */}
+          <div
+            aria-live="polite"
+            aria-atomic="true"
+            class="sr-only"
+          >
+            {resultAnnouncement.value}
+          </div>
 
           {/* Search Controls */}
           {slots.searchControls?.({
@@ -409,6 +480,7 @@ export const VCommandPalette = genericComponent()({
             <div class="v-command-palette__search">
               <VTextField
                 ref={searchInput}
+                id={searchId}
                 modelValue={searchQuery.value}
                 onUpdate:modelValue={(value: string) => searchQuery.value = value}
                 placeholder={t(props.placeholder)}
@@ -418,6 +490,11 @@ export const VCommandPalette = genericComponent()({
                 clearable
                 hideDetails
                 class="v-command-palette__search-input"
+                role="combobox"
+                aria-expanded={filteredItems.value.length > 0}
+                aria-controls={listboxId}
+                aria-activedescendant={selectedItemId.value}
+                aria-autocomplete="list"
                 onKeydown={(e: KeyboardEvent) => {
                   // Let useKeyBindings handle navigation
                   navigationBindings.handleKeydown(e)
@@ -451,13 +528,30 @@ export const VCommandPalette = genericComponent()({
                     )
                   )}
 
-                  <VList {...markerProps}>
+                  <VList {...markerProps} id={listboxId} role="listbox" aria-label={t('$vuetify.commandPalette.searchResults')}>
                     {filteredItems.value.map((item, index) => (
                       <div key={`${item.type}-${index}`} {...itemProps[index]}>
                         {item.group && index === 0 ||
                          (index > 0 && filteredItems.value[index - 1].group !== item.group) ? (
-                          <VDivider class="v-command-palette__group-divider">
-                            {item.group}
+                          <VDivider
+                            class="v-command-palette__group-divider"
+                            role="separator"
+                            aria-label={t('$vuetify.commandPalette.groupSeparator', { group: item.group })}
+                          >
+                            {/* Group icon if available */}
+                            {item.groupIcon && (
+                              <VIcon
+                                icon={item.groupIcon}
+                                size="small"
+                                class="v-command-palette__group-icon"
+                              />
+                            )}
+                            {/* Group title */}
+                            {item.group && (
+                              <span class="v-command-palette__group-title">
+                                {item.group}
+                              </span>
+                            )}
                           </VDivider>
                         ) : null}
 
@@ -468,6 +562,7 @@ export const VCommandPalette = genericComponent()({
                           onExecute: executeSelectedItem
                         }) ?? (
                           <VListItem
+                            id={`${dialogId}-item-${index}`}
                             class={[
                               'v-command-palette__item',
                               {
@@ -478,13 +573,19 @@ export const VCommandPalette = genericComponent()({
                             ]}
                             onClick={executeSelectedItem}
                             onMouseenter={() => selectedIndex.value = index}
+                            role="option"
+                            aria-selected={index === selectedIndex.value}
+                            aria-describedby={item.description ? `${dialogId}-item-${index}-desc` : undefined}
                           >
                             <div class="v-command-palette__item-content">
                               <div class="v-command-palette__item-title">
                                 {highlightMatch(item.title, searchQuery.value)}
                               </div>
                               {item.description && (
-                                <div class="v-command-palette__item-description">
+                                <div
+                                  id={`${dialogId}-item-${index}-desc`}
+                                  class="v-command-palette__item-description"
+                                >
                                   {highlightMatch(item.description, searchQuery.value)}
                                 </div>
                               )}
@@ -535,46 +636,6 @@ export const VCommandPalette = genericComponent()({
 })
 
 export type VCommandPalette = InstanceType<typeof VCommandPalette>
-
-## Accessibility Implementation Notes
-
-### ARIA Implementation Plan
-
-The VCommandPalette component requires comprehensive ARIA attributes for full accessibility:
-
-1. **Dialog Container**:
-   - `role="dialog"`
-   - `aria-labelledby` pointing to title element
-   - `aria-modal="true"`
-
-2. **Search Input**:
-   - `role="combobox"`
-   - `aria-expanded` based on results visibility
-   - `aria-controls` pointing to results list ID
-   - `aria-activedescendant` pointing to currently selected item ID
-
-3. **Results List**:
-   - `role="listbox"`
-   - `aria-label="Search results"`
-   - Unique `id` for aria-controls reference
-
-4. **Individual Items**:
-   - `role="option"`
-   - `aria-selected` for currently highlighted item
-   - Unique `id` for aria-activedescendant reference
-   - `aria-describedby` for additional context (description, hotkey)
-
-5. **Live Regions**:
-   - `aria-live="polite"` for search result count announcements
-   - Status messages for "No results found", loading states
-
-6. **Keyboard Navigation**:
-   - All navigation handled via useKeyBindings integration
-   - Focus remains on search input while arrow keys navigate list
-   - Screen reader announcements for selection changes
-
-These ARIA attributes will be implemented during component development to ensure full screen reader compatibility.
-```
 
 ## ActionCore Integration
 
@@ -672,6 +733,19 @@ export function useSearchOrchestration({
     isSearching.value = true
 
     try {
+      // Use custom search engine if provided
+      if (searchEngine.value) {
+        const customResults = await searchEngine.value.search(
+          query,
+          allActions.value,
+          activeSearchProviders.value,
+          applicationContext.value
+        )
+        searchResults.value = customResults.filter(item => item.type === 'search-result').map(item => item.result!)
+        return
+      }
+
+      // Default search orchestration
       const searchPromises = activeSearchProviders.value.map(async provider => {
         try {
           const results = await provider.search(query, applicationContext.value)
@@ -710,8 +784,8 @@ export function useSearchOrchestration({
     results: SearchResultItem[],
     config: SearchConfiguration
   ): SearchResultItem[] {
-    // Apply resultOrdering configuration (passed via searchConfiguration)
-    const ordering = props.resultOrdering
+    // Apply resultOrdering configuration
+    const ordering = resultOrdering.value
 
     return results.sort((a, b) => {
       // Custom ordering function from resultOrdering prop takes highest precedence
@@ -742,32 +816,14 @@ export function useSearchOrchestration({
     })
   }
 
-  // Re-search when context changes significantly
-  watch(applicationContext, (newContext, oldContext) => {
-    if (activeQuery.value && hasSignificantContextChange(newContext, oldContext)) {
-      executeSearch(activeQuery.value)
-    }
-  }, { deep: true })
-
   return {
     searchResults: computed(() => searchResults.value),
     isSearching: computed(() => isSearching.value),
     searchProviders: activeSearchProviders,
     executeSearch,
-    clearSearch
+    clearSearch,
+    allActionsFromSearchOrchestration
   }
-}
-
-function hasSignificantContextChange(
-  newContext: ApplicationContext,
-  oldContext: ApplicationContext
-): boolean {
-  // Define what constitutes a significant context change
-  return (
-    newContext.currentView !== oldContext.currentView ||
-    newContext.selectedItems !== oldContext.selectedItems ||
-    newContext.userPermissions !== oldContext.userPermissions
-  )
 }
 ```
 
@@ -1067,6 +1123,19 @@ export class UserSearchProvider implements SearchProvider {
   justify-content: center;
   align-items: center;
   padding: 20px;
+}
+
+// Screen reader only content
+.v-command-palette .sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 // Density variants
