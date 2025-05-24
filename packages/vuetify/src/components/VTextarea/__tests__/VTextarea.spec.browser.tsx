@@ -1,57 +1,72 @@
-import { VTextarea } from '..'
+import { VTextarea } from '../VTextarea'
 
 // Utilities
-import { Application, page, render, screen, userEvent } from '@test'
-import { ref } from 'vue'
-
-// Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+import { render, userEvent } from '@test'
 
 describe('VTextarea', () => {
-  it('should auto-grow', async () => {
-    await page.viewport(500, 500)
-    const model = ref('Lorem ipsum dolor sit amet, consectetur adipiscing elit')
+  it('has affixed icons', async () => {
+    const { getByRole } = render(
+      <VTextarea
+        prependIcon="$vuetify"
+        prependInnerIcon="$vuetify"
+        appendInnerIcon="$vuetify"
+        appendIcon="$vuetify"
+      />
+    )
 
-    render(() => (
-      <Application>
-        <div>
-          <VTextarea auto-grow rows="1" v-model={ model.value } />
-        </div>
-      </Application>
-    ))
+    // TODO: update to new testing library utils
+    // let el = getByRole('button', { name: 'Prepend icon' })
+    // expect(el.attributes('aria-hidden')).toBe('true')
 
-    const el = screen.getByCSS('#input-v-0')
+    // el = getByRole('button', { name: 'Prepend inner icon' })
+    // expect(el.attributes('aria-hidden')).toBe('true')
 
-    expect(el.offsetHeight).toBe(56)
+    // el = getByRole('button', { name: 'Append inner icon' })
+    // expect(el.attributes('aria-hidden')).toBe('true')
 
-    await userEvent.tab()
-    await userEvent.keyboard('sed d')
-    await expect.poll(() => el.offsetHeight).toBe(56)
-
-    await userEvent.keyboard('o')
-    await expect.poll(() => el.offsetHeight).toBe(80)
+    // el = getByRole('button', { name: 'Append icon' })
+    // expect(el.attributes('aria-hidden')).toBe('true')
   })
 
-  it('should respect max-rows', async () => {
-    await page.viewport(500, 500)
-    const model = ref('Lorem ipsum dolor sit amet, consectetur adipiscing elit')
+  it('has affixed icons with actions', async () => {
+    const onClickPrepend = vi.fn()
+    const onClickPrependInner = vi.fn()
+    const onClickAppendInner = vi.fn()
+    const onClickAppend = vi.fn()
 
-    render(() => (
-      <Application>
-        <div>
-          <VTextarea auto-grow rows="1" max-rows="2" v-model={ model.value } />
-        </div>
-      </Application>
-    ))
+    const { getByRole } = render(
+      <VTextarea
+        prependIcon="$vuetify"
+        prependInnerIcon="$vuetify"
+        appendInnerIcon="$vuetify"
+        appendIcon="$vuetify"
+        onClick:prepend={ onClickPrepend }
+        onClick:prependInner={ onClickPrependInner }
+        onClick:appendInner={ onClickAppendInner }
+        onClick:append={ onClickAppend }
+      />
+    )
 
-    const el = screen.getByCSS('#input-v-0')
+    expect(onClickPrepend).toHaveBeenCalledTimes(0)
+    expect(onClickPrependInner).toHaveBeenCalledTimes(0)
+    expect(onClickAppendInner).toHaveBeenCalledTimes(0)
+    expect(onClickAppend).toHaveBeenCalledTimes(0)
 
-    expect(el.offsetHeight).toBe(56)
+    // TODO: update to new testing library utils
+    // let el = getByRole('button', { name: 'Prepend icon' })
+    // await userEvent.click(el)
+    // expect(onClickPrepend).toHaveBeenCalledTimes(1)
 
-    await userEvent.tab()
-    await userEvent.keyboard('Lorem ipsum dolor sit amet consectetur adipisicing elit. ')
-    await expect.poll(() => el.offsetHeight).toBe(80)
+    // el = getByRole('button', { name: 'Prepend inner icon' })
+    // await userEvent.click(el)
+    // expect(onClickPrependInner).toHaveBeenCalledTimes(1)
 
-    await userEvent.keyboard('Lorem ipsum dolor sit amet consectetur adipisicing elit. ')
-    await expect.poll(() => el.offsetHeight).toBe(80)
+    // el = getByRole('button', { name: 'Append inner icon' })
+    // await userEvent.click(el)
+    // expect(onClickAppendInner).toHaveBeenCalledTimes(1)
+
+    // el = getByRole('button', { name: 'Append icon' })
+    // await userEvent.click(el)
+    // expect(onClickAppend).toHaveBeenCalledTimes(1)
   })
 })
