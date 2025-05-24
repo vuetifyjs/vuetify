@@ -1,68 +1,35 @@
 <template>
-  <div class="d-flex justify-space-around">
-    <v-menu
-      transition="scale-transition"
-    >
+  <div class="d-flex justify-space-around flex-wrap ga-1">
+    <v-menu transition="scale-transition">
       <template v-slot:activator="{ props }">
-        <v-btn
-          color="primary"
-          v-bind="props"
-        >
-          Scale Transition
-        </v-btn>
+        <v-btn color="primary" v-bind="props"> Scale Transition </v-btn>
       </template>
 
       <v-list>
-        <v-list-item
-          v-for="(item, i) in items"
-          :key="i"
-          :value="i"
-        >
+        <v-list-item v-for="(item, i) in items" :key="i" :value="i">
           <v-list-item-title>{{ item.title }}</v-list-item-title>
         </v-list-item>
       </v-list>
     </v-menu>
 
-    <v-menu
-      transition="slide-x-transition"
-    >
+    <v-menu transition="slide-x-transition">
       <template v-slot:activator="{ props }">
-        <v-btn
-          color="primary"
-          v-bind="props"
-        >
-          Slide X Transition
-        </v-btn>
+        <v-btn color="primary" v-bind="props"> Slide X Transition </v-btn>
       </template>
 
       <v-list>
-        <v-list-item
-          v-for="(item, i) in items"
-          :key="i"
-          :value="i"
-        >
+        <v-list-item v-for="(item, i) in items" :key="i" :value="i">
           <v-list-item-title>{{ item.title }}</v-list-item-title>
         </v-list-item>
       </v-list>
     </v-menu>
 
-    <v-menu
-      transition="slide-y-transition"
-    >
+    <v-menu transition="slide-y-transition">
       <template v-slot:activator="{ props }">
-        <v-btn
-          color="primary"
-          v-bind="props"
-        >
-          Slide Y Transition
-        </v-btn>
+        <v-btn color="primary" v-bind="props"> Slide Y Transition </v-btn>
       </template>
       <v-list>
-        <v-list-item
-          v-for="(item, i) in items"
-          :key="i"
-          :value="i"
-        >
+        <v-list-item v-for="(item, i) in items" :key="i" :value="i">
           <v-list-item-title>{{ item.title }}</v-list-item-title>
         </v-list-item>
       </v-list>
