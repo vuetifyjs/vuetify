@@ -8,14 +8,17 @@
     flex-direction: column
     align-items: center
     position: relative
+    --v-video-outline-width: thin
+    --v-video-controls-height: 44px
 
     &__video
+      --v-outline-opacity: .12
       position: absolute
       width: 100%
       height: 100%
       object-fit: cover
       z-index: 0
-      border: thin solid rgba(var(--v-theme-on-surface), var(--v-border-opacity))
+      outline: var(--v-video-outline-width) solid rgba(var(--v-theme-on-surface), var(--v-outline-opacity))
 
       & ~ *
         z-index: 1
@@ -29,9 +32,9 @@
         &, > *
           pointer-events: none
 
-    &:has(.v-video__controls:not(.v-video__controls--variant-floating))
+    &:has(.v-video-controls:not(.v-video-controls--detached))
       .v-overlay__content
-        padding-bottom: 45px // controls size
+        padding-bottom: var(--v-video-controls-height) // controls size
 
     &__center-icon.v-icon-btn
       border: 5px solid currentColor
@@ -60,43 +63,111 @@
       line-height: 1
       letter-spacing: 0.02em
 
-    &__controls
+    &--variant-background
+      outline: none
+      position: absolute
+      pointer-events: none
       width: 100%
+      height: 100%
+
+      > .v-video__content
+        width: 100%
+        height: 100%
+
+    &-controls
+      --v-background-opacity: .8
+      flex: 1 0 100%
+      align-self: stretch
       padding: 8px
       display: flex
       align-items: center
+      position: relative
       gap: 12px
-      min-height: 44px
+      min-height: var(--v-video-controls-height)
       backdrop-filter: blur(5px)
-      background: rgba(var(--v-theme-surface), .6)
-      border-top: thin solid rgba(var(--v-theme-surface-variant), .2)
-
-      border-bottom-left-radius: inherit
-      border-bottom-right-radius: inherit
-      position: absolute
-      bottom: 0
+      background-color: rgba(var(--v-theme-surface), var(--v-background-opacity))
 
       opacity: 0
-      transition: opacity .6s ease-in-out
+
+      &, &--pills > .v-video-control__pill
+        transition: .6s ease-in-out
+        transition-property: opacity, background-color
+
+      &:hover
+        --v-background-opacity: 1
 
       .v-video__track
         width: auto
 
+      .v-video-control__pill
+        display: flex
+        align-items: center
+        gap: 8px
+
+      &--pills
+        --v-background-opacity: 1
+        --v-video-controls-height: 64px
+        backdrop-filter: none
+
+        &:not(:empty)
+          background: transparent !important
+
+        > .v-slider.v-video__track
+          margin-inline: 12px !important
+
+        > .v-video-control__pill
+          backdrop-filter: blur(5px)
+          background: rgba(var(--v-theme-surface), var(--v-background-opacity))
+          border-radius: 21px
+          min-height: 42px
+          padding: 0 12px
+          gap: 12px
+
+          &:empty
+            display: none
+
+        > .v-video__action-play
+          min-height: 52px
+          border-radius: 26px
+
+        > .v-video__time
+          padding: 0 16px
+
       &--variant-tube
-        .v-video__track
+        .v-slider.v-video__track
           position: absolute
           top: -4px
           left: 0
           right: 0
-          margin-inline: 4px !important
+          margin-inline: 4px
 
           .v-slider-track
             height: 4px !important
 
-      &--variant-split
+      &--split-time
         padding-inline: 20px
 
-      &--variant-floating
+      &:not(.v-video-controls--detached)
+        margin-top: calc(-1 * var(--v-video-controls-height) - 1px)
+
+      &:not(.v-video-controls--floating)
+        border-bottom-left-radius: inherit
+        border-bottom-right-radius: inherit
+
+      &:not(.v-video-controls--floating):not(.v-video-controls--variant-mini)
+        border-top: thin solid rgba(var(--v-theme-surface-variant), .2)
+
+      &--floating
+        --v-background-opacity: 1
+        border-radius: inherit
+        margin-inline: 12px
+        width: calc(100% - 24px)
+
+      &--floating:not(.v-video-controls--detached)
+        margin-top: calc(-1 * var(--v-video-controls-height) - 12px)
+
+      &--detached
+        --v-background-opacity: 1
         position: relative
         margin-block-start: 12px
         padding-inline: 12px
@@ -107,11 +178,8 @@
 
     &:not(.v-video--playing),
     &:hover
-      .v-video__controls
+      .v-video-controls
         opacity: 1
-
-    &--variant-background
-      pointer-events: none
 
     &--rounded
       border-radius: $video-rounded-border-radius
