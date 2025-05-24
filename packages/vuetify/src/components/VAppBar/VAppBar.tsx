@@ -8,7 +8,6 @@ import { makeVToolbarProps, VToolbar } from '@/components/VToolbar/VToolbar'
 import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeScrollProps, useScroll } from '@/composables/scroll'
-import { makePositionProps, usePosition } from '@/composables/position'
 import { useSsrBoot } from '@/composables/ssrBoot'
 import { useToggleScope } from '@/composables/toggleScope'
 
@@ -19,6 +18,7 @@ import { genericComponent, propsFactory, useRender } from '@/util'
 // Types
 import type { PropType, ComputedRef } from 'vue'
 import type { VToolbarSlots } from '@/components/VToolbar/VToolbar'
+import type { Position } from '@/composables/layout'
 
 export const makeVAppBarProps = propsFactory({
   scrollBehavior: String as PropType<'hide' | 'fully-hide' | 'inverted' | 'collapse' | 'elevate' | 'fade-image' | (string & {})>,
