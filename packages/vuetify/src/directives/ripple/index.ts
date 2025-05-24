@@ -250,13 +250,13 @@ function rippleCancel (e: PointerEvent) {
 }
 
 function keyboardRippleShow (e: KeyboardEvent) {
-  if (e.key===' ' || e.key === keyValues.enter) {
+  if (e.key === keyValues.space || e.key === keyValues.enter) {
     rippleShow(e)
   }
 }
 
 function keyboardRippleHide (e: KeyboardEvent) {
-  if (e.key === ' ' || e.key === keyValues.enter) {
+  if (e.key === keyValues.space || e.key === keyValues.enter) {
     rippleHide(e)
   }
 }

@@ -187,12 +187,12 @@ export const keyCodes = Object.freeze({
   shift: 16,
 })
 
-export const keyValues: Record<string, string> = Object.freeze({
+export const keyValues = Object.freeze({
   enter: 'Enter',
   tab: 'Tab',
   delete: 'Delete',
   esc: 'Escape',
-  space: 'Space',
+  space: ' ', // Space is ' ', see https://developer.mozilla.org/en-US/docs/Web/API/UI_Events/Keyboard_event_key_values#whitespace_keys
   up: 'ArrowUp',
   down: 'ArrowDown',
   left: 'ArrowLeft',
