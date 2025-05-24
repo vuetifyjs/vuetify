@@ -232,8 +232,14 @@ function rippleLeave (e: PointerEvent) {
 function rippleMove (e: PointerEvent) {
   // During touch screen, any movement typically cancels the operation.
   if (e.pointerType !== 'touch') return
-
-  rippleHide(e)
+  const element = e.currentTarget as HTMLElement | null
+  if (!element) return
+  const offset = element.getBoundingClientRect()
+  const localX = e.clientX - offset.left
+  const localY = e.clientY - offset.top
+  if (localX < 0 || localX > offset.width || localY < 0 || localY > offset.height){
+    rippleHide(e)
+  }
 }
 
 function rippleCancel (e: PointerEvent) {
