@@ -12,7 +12,7 @@ import { forwardRefs } from '@/composables/forwardRefs'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Directives
-import Intersect from '@/directives/intersect'
+import vIntersect from '@/directives/intersect'
 
 // Utilities
 import { cloneVNode, computed, nextTick, ref } from 'vue'
@@ -54,7 +54,7 @@ export type VTextFieldSlots = Omit<VInputSlots & VFieldSlots, 'default'> & {
 export const VTextField = genericComponent<VTextFieldSlots>()({
   name: 'VTextField',
 
-  directives: { Intersect },
+  directives: { vIntersect },
 
   inheritAttrs: false,
 

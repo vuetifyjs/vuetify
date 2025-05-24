@@ -21,7 +21,7 @@ import { useToggleScope } from '@/composables/toggleScope'
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 
 // Directives
-import { ClickOutside } from '@/directives/click-outside'
+import vClickOutside from '@/directives/click-outside'
 
 // Utilities
 import {
@@ -115,7 +115,7 @@ export const makeVOverlayProps = propsFactory({
 export const VOverlay = genericComponent<OverlaySlots>()({
   name: 'VOverlay',
 
-  directives: { ClickOutside },
+  directives: { vClickOutside },
 
   inheritAttrs: false,
 
