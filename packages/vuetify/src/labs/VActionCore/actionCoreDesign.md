@@ -1,409 +1,460 @@
 # ActionCore Design Document
 
-## This document captures the implementation design for ActionCore, separate from the requirements specification.
+## This document captures the implementation design for ActionCore, a centralized system for managing actions, hotkeys, search providers, and application context within a Vuetify application.
 
-### Architecture Overview
+## 1. Core Architecture
 
-ActionCore maintains two primary indexes to manage actions and key bindings:
+ActionCore is designed as a reactive global store and service, enabling components and other systems to register, manage, and execute actions, as well as leverage a unified search and command execution interface.
 
-1. **Action Index**: Maps action IDs to ActionDefinition objects
-2. **Binding Index**: Maps hotkey strings to action IDs using a bucket strategy
+### 1.1. Key Principles
+- **Centralized Management**: A single source of truth for actions and their states.
+- **Reactivity**: Changes in actions, bindings, or context automatically propagate.
+- **Extensibility**: Pluggable search providers and customizable action definitions.
+- **Decoupling**: ActionCore can operate independently, but seamlessly integrates with components like `VCommandPalette` and `VHotKey`.
+- **Vuetify Integration**: Follows Vuetify's composable and service patterns.
 
-### ActionDefinition Interface
+### 1.2. Main Components
+ActionCore's architecture revolves around several key internal components:
 
+1.  **Action Registry**: Manages the lifecycle of `ActionDefinition` objects.
+2.  **Binding Manager**: Integrates with `useKeyBindings` to manage hotkey assignments and detect collisions.
+3.  **Context Manager**: Holds and updates the global `ApplicationContext`.
+4.  **Search Orchestrator**: Manages `SearchProvider` registration and coordinates search queries (primarily leveraged by `VCommandPalette`).
+
+### 1.3. Dual Index System for Actions and Bindings
+
+ActionCore maintains two primary indexes:
+
+1.  **Action Index (Action Registry)**
+    *   **Structure**: `Map<actionId: string, Reactive<ActionDefinition>>`
+    *   **Purpose**: Provides O(1) lookup for action details by ID. Stores reactive `ActionDefinition` objects to allow dynamic updates to properties like `title`, `disabled`, `visible`, etc.
+    *   **Updates**: Modified when actions are registered, unregistered, or their definitions are updated.
+
+2.  **Binding Index (Managed by Binding Manager)**
+    *   **Structure**: `Map<hotkeyString: string, actionId: string[]>` (LIFO bucket strategy)
+    *   **Purpose**: Maps a normalized hotkey string (e.g., "ctrl+s") to an array of `actionId`s. The last action registered for a given hotkey is considered the active one (LIFO).
+    *   **Integration**: The Binding Manager uses an instance of `useKeyBindings` internally to listen for and process key events based on this index.
+    *   **Collision Resolution**: When a hotkey is triggered, the Binding Manager consults this index. If multiple `actionId`s are present, the LIFO rule applies. ActionCore emits warnings for collisions.
+
+### 1.4. Core Data Structures
+
+#### 1.4.1. ActionDefinition Interface
 ```typescript
 interface ActionDefinition {
-  id: string;                    // Unique identifier (required)
-  title: string;                 // Display title (required)
-  description?: string;          // Optional description
-  icon?: string;                 // Optional icon identifier
-  category?: string;             // Optional category for grouping
-  hotkey?: string;               // Optional hotkey binding
-  disabled?: boolean;            // Optional disabled state
-  visible?: boolean;             // Optional visibility state
-  handler?: (context: ActionContext) => void | Promise<void>; // Handler function receives full context
-  runInTextInput?: boolean | ((element: HTMLElement) => boolean); // Input context control
-  preventDefault?: boolean;      // Prevent default browser behavior
-  stopPropagation?: boolean;     // Stop event propagation
-  subItems?: ActionDefinition[] | (() => Promise<ActionDefinition[]>); // Nested actions
-}
+  id: string; // Unique identifier (required)
+  title: string; // Display title (required)
+  description?: string; // Optional description for display
+  icon?: string; // Optional icon identifier (e.g., mdi icon string)
+  category?: string; // Optional category for grouping in UIs like VCommandPalette
+  priority?: number; // Optional priority for display ordering within category
 
-interface ActionContext {
-  trigger: 'keyboard' | 'ui' | 'programmatic' | 'search-result';
-  event?: KeyboardEvent | MouseEvent;
-  data?: any; // Additional context data
-  searchResult?: SearchResult; // Available when triggered from search results
+  hotkey?: string; // Optional default hotkey binding string (e.g., "Ctrl+S")
+                 // This is registered with the Binding Manager.
+
+  disabled?: boolean | ((context: ActionContext) => boolean); // Optional disabled state or function
+  visible?: boolean | ((context: ActionContext) => boolean);  // Optional visibility state or function
+                 // Note: Functions receive full ActionContext including current ApplicationContext
+
+  isNavigationAction?: boolean; // Optional flag to identify navigation-only actions
+                               // Used by VCommandPalette to filter actions from ActionCore results
+
+  // Handler function, receives full context. Can be sync or async.
+  handler?: (context: ActionContext) => void | Promise<void>;
+
+  // Input context control for hotkeys (via useKeyBindings options)
+  runInTextInput?: boolean | ((element: HTMLElement) => boolean);
+
+  // Event modification options for hotkeys (via useKeyBindings options)
+  preventDefault?: boolean;
+  stopPropagation?: boolean;
+
+  // Nested actions or dynamic sub-item fetching for VCommandPalette
+  subItems?: ActionDefinition[] | (() => Promise<ActionDefinition[]>);
+
+  // Custom data for application-specific needs
+  meta?: Record<string, any>;
+
+  // Source component ID for lifecycle management
+  componentId?: string;
 }
 ```
 
-### Dual Index System
-
-#### Action Index
-- Simple Map: `actionId -> ActionDefinition`
-- Provides O(1) lookup for action details
-- Updated when actions are registered/unregistered
-
-#### Binding Index (LIFO Bucket Strategy)
-- Map: `hotkeyString -> actionId[]` (array acts as bucket)
-- Last actionId added to bucket (LIFO) is the active binding
-- Enables collision detection and resolution
-- Example: `"Ctrl+s" -> ["save-file", "save-document"]` (save-document is active)
-
-### Component Integration APIs
-
-#### Query API
+#### 1.4.2. ActionContext Interface
+Passed to action handlers, providing details about the execution trigger.
 ```typescript
-interface ActionCorePublicAPI {
-  getAction(actionId: string): ActionDefinition | undefined;
-  getEffectiveHotkey(actionId: string): string | undefined;
-  getAllActions(): readonly ActionDefinition[];
-  getVisibleActions(): readonly ActionDefinition[];
+interface ActionContext {
+  trigger: 'keyboard' | 'ui' | 'programmatic' | 'search-result'; // How the action was invoked
+  event?: KeyboardEvent | MouseEvent; // Original browser event, if applicable
+  data?: any; // Additional arbitrary data passed during execution
 
-  // Debugging and hotkey map support
-  getAllActionsWithHotkeys(): readonly (ActionDefinition & { effectiveHotkey?: string })[];
-  getHotkeyMap(): Record<string, ActionDefinition>; // hotkey -> action mapping
-  getActionRegistry(): { actions: ActionDefinition[]; bindings: Record<string, string[]> }; // Complete registry state
-  exportHotkeyData(): { actions: any[]; bindings: any[] }; // Export for documentation/debugging
+  // Available when triggered via VCommandPalette from a search result
+  searchResult?: SearchResult;
 
-  // Programmatic execution
-  executeAction(actionId: string, context?: Partial<ActionContext>): Promise<void>;
-
-  // Component action registration (general purpose)
-  registerComponentActions(componentId: string, actions: ActionDefinition[]): void;
-  unregisterComponentActions(componentId: string): void;
+  // Current application context at the time of execution
+  applicationContext: Readonly<ApplicationContext>;
 }
 ```
 
-#### useKeyBindings Integration
-- ActionCore uses useKeyBindings composable to manage its own hotkey bindings
-- ActionCore maintains binding index and detects collisions through its useKeyBindings instance
-- Binding context changes are applied through ActionCore's useKeyBindings configuration
+#### 1.4.3. ApplicationContext Interface
+Represents the global state of the application relevant to actions and search.
+```typescript
+interface ApplicationContext {
+  view?: string; // Identifier for the current application view/page/route
+  selectedItems?: any[]; // Array of currently selected items/entities
+  currentUser?: { id: string, name: string, permissions: string[] }; // User information
+  entityContext?: { [entityType: string]: any }; // Context of a specific entity (e.g., current project, open document)
+  custom?: { [key: string]: any }; // Application-specific custom data
+}
+```
 
-### Binding Context System (Rework)
+## 2. Binding Management (`BindingManager`)
 
-**Previous Term**: "Profiles" (acknowledged as poor terminology)
-**Current Term**: "Binding Contexts"
+The `BindingManager` is responsible for all hotkey-related functionality within ActionCore.
 
-#### Use Cases
-1. User-customizable hotkey bindings
-2. Keyboard layout adaptation (internationalization)
-3. Context-dependent binding sets
-4. Accessibility compliance modes
+### 2.1. `useKeyBindings` Integration
+-   The `BindingManager` instantiates and manages its own instance of `useKeyBindings`.
+-   It transforms ActionCore's `Binding Index` (`hotkeyString -> actionId[]`) into a configuration object suitable for `useKeyBindings`.
+    -   When a hotkey is pressed that matches an entry in `useKeyBindings`, the handler provided to `useKeyBindings` will look up the LIFO `actionId` from ActionCore's `Binding Index` and attempt to execute it.
+-   **Global Target**: By default, `useKeyBindings` is configured to listen on `document` to capture global hotkeys.
+-   **Options Forwarding**: `runInTextInput`, `preventDefault`, `stopPropagation` from `ActionDefinition` are passed as options to the respective bindings in `useKeyBindings`.
+-   **Configuration**: Options like `sequenceTimeout`, `listenerOptions`, `detectCollisions`, and `debug` can be configured via `ActionCoreOptions` and are passed to the internal `useKeyBindings` instance.
 
-#### Design Approach
-- ActionCore maintains base action definitions
-- Binding contexts overlay modifications (hotkey overrides, disabled states)
-- Components receive computed final state
-- No context awareness needed in components or useKeyBindings
+### 2.2. Hotkey Registration and Unregistration
+-   When an action with a `hotkey` property is registered with ActionCore, the `BindingManager` updates its internal `Binding Index` and subsequently updates the configuration passed to `useKeyBindings`.
+-   If multiple actions are registered for the same hotkey, they are added to the LIFO bucket for that hotkey string. The `useKeyBindings` instance will only have one handler for that hotkey string, which then defers to ActionCore's LIFO logic to pick the actual action to execute.
+-   When an action is unregistered, or its hotkey changes, the `BindingManager` updates its state and the `useKeyBindings` configuration.
 
-### Navigation Action Management
+### 2.3. Collision Detection
+-   `useKeyBindings` provides utilities for detecting basic collisions (identical hotkey patterns).
+-   ActionCore's `BindingManager` uses these utilities and its own `Binding Index` to report collisions, including which `actionId`s are involved.
+-   **LIFO Resolution**: ActionCore enforces a LIFO (Last In, First Out) strategy for resolving hotkey collisions. The most recently registered action for a given hotkey takes precedence. Warnings are emitted for detected collisions.
+-   **Sequence Conflicts**: The `BindingManager` also leverages `useKeyBindings` utilities to detect and warn about overlapping key sequences (e.g., "g-g" vs "g-g-g").
 
-Components may register temporary actions that are automatically cleaned up when the component unmounts. These actions follow the same registration and execution patterns as regular actions.
+### 2.4. Binding Context System (User Customization)
 
-### Collision Detection Algorithm
+ActionCore supports user-defined "Binding Contexts" that allow overriding default action properties, primarily hotkeys.
 
-1. **Registration Phase**:
-   - Check if hotkey already exists in binding index
-   - If exists, add actionId to bucket (LIFO)
-   - Emit warning about collision
+#### 2.4.1. Design Approach:
+-   ActionCore maintains the base `ActionDefinition` (including the default `hotkey`).
+-   A `BindingContext` is a named set of overrides. An override specifies an `actionId` and the new `hotkey` string.
+    ```typescript
+    interface BindingContextOverride {
+      actionId: string;
+      newHotkey: string | null; // null to unbind
+    }
+    interface BindingContextDefinition {
+      name: string;
+      overrides: BindingContextOverride[];
+    }
+    ```
+-   ActionCore can have multiple `BindingContextDefinition`s registered.
+-   An "active" `BindingContext` can be set globally.
+-   When a `BindingContext` is active, the `BindingManager` computes the "effective hotkeys":
+    1.  Start with default hotkeys from `ActionDefinition`.
+    2.  Apply overrides from the active `BindingContext`.
+    3.  This effective hotkey map is then used to configure `useKeyBindings`.
+-   Changes to the active `BindingContext` trigger a re-evaluation of effective hotkeys and update `useKeyBindings`.
 
-2. **Resolution Phase**:
-   - Always use last actionId in bucket (most recent registration)
-   - Provide utilities to query collision status
+#### 2.4.2. Use Cases:
+1.  **User-Customizable Hotkeys**: Users can define their own `BindingContext`.
+2.  **Keyboard Layout Adaptation**: A `BindingContext` can remap hotkeys for Dvorak, AZERTY, etc. (though `useKeyBindings`'s `keyMappings` option is the primary mechanism for physical layout adaptation).
+3.  **Mode-Specific Bindings**: Different modes of an application (e.g., "editing mode", "navigation mode") can activate different `BindingContexts`.
+4.  **Accessibility Presets**: A context for simplified hotkeys or compatibility with screen readers.
+5.  **Temporary Scoped Bindings**: For temporary hotkey bindings with defined scope (e.g., modal dialogs), a temporary `BindingContext` can be programmatically created, activated, and then deactivated/removed when the scope ends. This provides the scoped cleanup mechanism required for temporary bindings.
 
-3. **Binding Context Application**:
-   - Apply binding context changes to effective bindings
-   - Re-evaluate collisions with new hotkey assignments
+## 3. Action Lifecycle and Registration
 
-### Performance Considerations
+### 3.1. Registration API
+-   `actionCore.registerAction(definition: ActionDefinition): void`
+-   `actionCore.registerActions(definitions: ActionDefinition[]): void`
+    -   If an `actionId` already exists, the new definition replaces the old one (re-registration). Associated hotkeys are updated by first unregistering the old hotkey (if any), then registering the new hotkey (if provided).
+    -   If `definition.hotkey` is provided, it's automatically registered with the `BindingManager`.
 
-- **Search Debouncing**: Configurable delays for search queries
-- **Result Caching**: Cache search results with context-aware invalidation
-- **Lazy Loading**: Support pagination for large result sets
-- **Memory Management**: Cleanup of search subscriptions and cached results
+### 3.2. Unregistration API
+-   `actionCore.unregisterAction(actionId: string): void`
+-   `actionCore.unregisterActions(actionIds: string[]): void`
+    -   Removes the action and any associated hotkey bindings.
 
-### Error Handling Strategy
+### 3.3. Component-Based Lifecycle (`registerComponentActions`)
+-   `actionCore.registerComponentActions(componentId: string, actions: ActionDefinition[]): void`
+-   `actionCore.unregisterComponentActions(componentId: string): void`
+    -   This allows actions to be tied to a component's lifecycle. `componentId` is a unique string identifying the owning component.
+    -   Actions registered this way are internally tagged with the `componentId`.
+    -   When `unregisterComponentActions(componentId)` is called (typically in `onBeforeUnmount`), all actions associated with that `componentId` are unregistered.
+    -   This is useful for contextual actions that should only be available when a specific component is mounted.
 
-- **Provider Isolation**: Search provider errors don't affect other providers or ActionCore
-- **Graceful Degradation**: System continues to work if some providers fail
-- **Timeout Handling**: Configurable timeouts prevent hanging searches
-- **Action Error Handling**: Action execution errors are handled by individual action handlers
+### 3.4. Sequential Hotkey Assignment (`assignSequentialHotkeys`)
+-   `actionCore.assignSequentialHotkeys(actions: ActionDefinition[], basePattern: string, count: number): void`
+    -   Utility function for programmatically assigning sequential hotkeys (e.g., Alt+1 through Alt+9).
+    -   Takes a base pattern like "Alt+{n}" where {n} is replaced with the sequence number.
+    -   Updates the provided actions with the generated hotkey strings and registers/updates them.
+    -   Useful for dynamic menus, toolbar items, or numbered options.
 
-### Search Provider System
+## 4. Action Execution
 
-#### Search Provider Interface
+### 4.1. Programmatic Execution
+-   `actionCore.executeAction(actionId: string, context?: Partial<ActionContext>): Promise<void>`
+    -   Allows triggering an action by its ID.
+    -   The provided `context` is merged with the current global `ApplicationContext` and passed to the handler.
+    -   Checks `disabled` and `visible` states before execution.
+
+### 4.2. Execution Flow
+1.  Trigger (hotkey, UI click, programmatic call).
+2.  ActionCore retrieves the `ActionDefinition` for the given `actionId`.
+3.  **Visibility/Enabled Check**:
+    -   Evaluates `action.visible` (if a function, call with current `ApplicationContext`). If not visible, stop.
+    -   Evaluates `action.disabled` (if a function, call with current `ApplicationContext`). If disabled, stop.
+4.  Construct `ActionContext`:
+    -   `trigger`: based on invocation method.
+    -   `event`: original browser event (if any).
+    -   `applicationContext`: a readonly snapshot of the current global `ApplicationContext`.
+    -   `data`, `searchResult`: as provided.
+5.  Invoke `action.handler(fullContext)`.
+6.  Handle `Promise` if handler is async.
+7.  Catch and log errors from handlers. For programmatic execution via `executeAction()`, errors are logged and then re-thrown (wrapped in an ActionCoreError) so the caller can handle them. For hotkey-triggered execution, errors are only logged to prevent system crashes.
+
+## 5. Application Context Management (`ContextManager`)
+
+### 5.1. State Management
+-   ActionCore maintains a single, global, reactive `ApplicationContext` object.
+-   `actionCore.getContext(): Readonly<ApplicationContext>`
+-   `actionCore.updateContext(updates: Partial<ApplicationContext>): void`
+    -   Merges partial updates into the global context.
+    -   This triggers reactivity for any consumers of the context (e.g., `visible`/`disabled` functions, search providers).
+
+### 5.2. Context Update Strategies
+-   Consumers (like `VCommandPalette` or dynamic action properties) can react to context changes.
+-   `VCommandPalette` will re-query search providers when relevant parts of the `ApplicationContext` change (e.g., `view`, `selectedItems`). This can be debounced.
+
+## 6. Search Provider System (Primarily for `VCommandPalette`)
+
+ActionCore acts as a registry and source of context for search providers that `VCommandPalette` will use. While `VCommandPalette` handles the primary orchestration, ActionCore provides utility functions to assist with ordering and grouping when requested.
+
+### 6.1. SearchProvider Interface
 ```typescript
 interface SearchProvider {
   id: string; // Unique provider identifier
-  search(query: string, context: ApplicationContext): Promise<SearchResult[]>;
-  getActions?(result: SearchResult, context: ApplicationContext): ActionDefinition[];
-  priority?: number | ((context: ApplicationContext) => number); // Static or context-dependent priority
-  timeout?: number; // Query timeout in ms
-  groups?: SearchProviderGroup[]; // Available result groups
-  componentId?: string; // Optional component ID for lifecycle management
+
+  // Performs the search. Receives query string and current application context.
+  search(query: string, context: Readonly<ApplicationContext>): Promise<SearchResult[]>;
+
+  // Optional: Generates dynamic ActionDefinitions based on a search result.
+  // Useful for actions like "Open User Profile" for a user search result.
+  getActions?(result: SearchResult, context: Readonly<ApplicationContext>): ActionDefinition[];
+
+  // Static or context-dependent priority for ordering results from multiple providers.
+  priority?: number | ((context: Readonly<ApplicationContext>) => number);
+
+  timeout?: number; // Optional query timeout in ms for this provider.
+
+  // Defines groups this provider can categorize its results into.
+  groups?: SearchProviderGroupDefinition[];
+
+  // For lifecycle management when registered by a component.
+  componentId?: string;
 }
 
-interface SearchProviderGroup {
-  id: string;
-  title: string;
-  priority?: number;
+interface SearchProviderGroupDefinition {
+  id: string;         // Unique ID for this group within the provider
+  title: string;      // Display title for the group
+  priority?: number;   // Priority for ordering this group among others
   icon?: string;
-  separator?: boolean;
+  separator?: boolean; // Render a separator before this group
 }
 
 interface SearchResult {
-  id: string;
-  title: string;
-  description?: string;
-  icon?: string;
-  category?: string;
-  type: string; // user, issue, team, project, etc.
-  data: any; // Provider-specific data
-  actions?: string[]; // ActionIDs that can be executed with this result as context
-  priority?: number;
-  group?: string; // Group ID for organizing results
-}
+  id: string;        // Unique ID for this result item
+  title: string;     // Main display text
+  description?: string; // Additional descriptive text
+  icon?: string;      // Icon to display
+  category?: string;  // Category (can be used for grouping if provider doesn't use explicit groups)
+  type: string;      // e.g., 'user', 'issue', 'file', 'action-core-action'
+  data: any;         // Provider-specific raw data for this result
 
-interface ApplicationContext {
-  view?: string; // Current view/page
-  selectedItems?: any[];
-  currentUser?: any;
-  permissions?: string[];
-  entityContext?: { [key: string]: any }; // Current issue, project, etc.
-  custom?: { [key: string]: any }; // Application-specific context
+  // Optional: ActionIDs from ActionCore that can be executed with this result.
+  // VCommandPalette will use these to show executable actions.
+  // These actions will receive this SearchResult in their ActionContext.
+  actionIds?: string[];
+
+  // Optional: Inline ActionDefinitions specific to this search result.
+  // These are not registered globally in ActionCore but can be executed directly.
+  // Useful for highly contextual, one-off actions.
+  inlineActions?: ActionDefinition[];
+
+  priority?: number;  // Fine-grained priority for this specific result.
+  groupId?: string;   // ID of the SearchProviderGroupDefinition this result belongs to.
 }
 ```
 
-#### Search Orchestration
-- ActionCore maintains registry of search providers and provides them to VCommandPalette
-- VCommandPalette coordinates parallel execution of provider queries with timeout handling
-- Result merging with configurable priority and grouping rules
-- Error isolation - failed providers don't break other results
+### 6.2. Search Provider Registration
+-   `actionCore.registerSearchProvider(provider: SearchProvider): void`
+-   `actionCore.unregisterSearchProvider(providerId: string): void`
+-   `actionCore.unregisterSearchProvidersByComponent(componentId: string): void` (for lifecycle)
+-   `actionCore.getActiveSearchProviders(): readonly SearchProvider[]`
+    -   `VCommandPalette` uses this to get the list of providers to query.
 
-#### Component-Based Provider Management
+### 6.3. `useContextualSearch` Composable (Helper for Components)
+This helper composable simplifies registering/unregistering search providers tied to a component's lifecycle.
 ```typescript
-// Component registration pattern
-const useContextualSearch = (componentId: string, providers: SearchProvider[]) => {
-  onMounted(() => {
-    providers.forEach(provider => {
-      actionCore.registerSearchProvider({
-        ...provider,
-        componentId: componentId
-      });
-    });
-  });
-
-  onUnmounted(() => {
-    actionCore.unregisterSearchProvidersByComponent(componentId);
-  });
-};
-
-// Usage in components
-export default defineComponent({
-  setup() {
-    useContextualSearch('issue-detail-page', [
-      {
-        id: 'issue-comments',
-        search: (query, context) => searchIssueComments(query, context.currentIssue),
-        priority: (context) => context.view === 'issue-detail' ? 10 : 1,
-        groups: [{ id: 'comments', title: 'Comments', priority: 1 }]
-      }
-    ]);
-  }
-});
+// Example usage in a component:
+// import { useContextualSearch, actionCore } from '@/actionCore'; // Assuming actionCore is injectable
+//
+// export default defineComponent({
+//   setup() {
+//     const currentIssueId = ref('issue-123');
+//
+//     useContextualSearch('issue-detail-page-search', [
+//       {
+//         id: 'issue-comments-provider',
+//         search: async (query, context) => {
+//           // Use context.entityContext?.issue?.id or currentIssueId.value
+//           const issueId = context.entityContext?.activeIssueId ?? currentIssueId.value;
+//           return searchCommentsInIssue(issueId, query);
+//         },
+//         priority: 10,
+//       }
+//     ]);
+//
+//     // ...
+//   }
+// });
 ```
+- `useContextualSearch` internally calls `actionCore.registerSearchProvider` on mount (with `componentId`) and `actionCore.unregisterSearchProvidersByComponent` on unmount.
 
-#### Context-Aware Result Ordering
+## 7. Dynamic Action Generation from Search Results
+
+As seen in `SearchResult.actionIds` and `SearchResult.inlineActions`:
+-   `actionIds`: `VCommandPalette` can look up these actions in ActionCore. When executed, the `SearchResult` data is passed in `ActionContext.searchResult`.
+-   `inlineActions`: These are `ActionDefinition` objects directly provided by the search result. `VCommandPalette` can execute them directly. They are not registered in ActionCore's global registry. This is useful for actions that are highly specific to a single search result and don't need to be global.
+
+## 8. Result Merging, Grouping, and Ordering (Concern of `VCommandPalette`)
+
+While ActionCore provides actions and enables search providers, the responsibility of:
+1.  Querying all search providers (and ActionCore actions if configured).
+2.  Merging results.
+3.  Applying sorting based on `priority` (provider, group, result).
+4.  Grouping results (by `category` from ActionDefinition, or `groupId` from SearchResult referring to `SearchProviderGroupDefinition`).
+... primarily lies with `VCommandPalette`. `VCommandPalette` will use the `resultOrdering` prop for this.
+
+ActionCore's role is to provide the necessary data (`priority`, `category`, `groups` from providers) to enable `VCommandPalette` to do this effectively.
+
+## 9. Public API (`ActionCoreInstance`)
+
 ```typescript
-// Dynamic priority calculation based on context
-interface PriorityCalculator {
-  calculateProviderPriority(provider: SearchProvider, context: ApplicationContext): number;
-  calculateResultPriority(result: SearchResult, context: ApplicationContext): number;
-  mergeResults(providerResults: Map<SearchProvider, SearchResult[]>, context: ApplicationContext): SearchResult[];
-}
+interface ActionCoreInstance {
+  // Action Management
+  registerAction(definition: ActionDefinition): void;
+  registerActions(definitions: ActionDefinition[]): void;
+  unregisterAction(actionId: string): void;
+  unregisterActions(actionIds: string[]): void;
+  getAction(actionId: string): Readonly<ActionDefinition> | undefined;
+  getAllActions(): readonly Readonly<ActionDefinition>[]; // All registered, regardless of visibility/disabled
+  getVisibleActions(context?: Readonly<ApplicationContext>): readonly Readonly<ActionDefinition>[]; // Filtered by visible state
 
-// Example context-aware ordering
-const orderResults = (results: SearchResult[], context: ApplicationContext) => {
-  const priorityMap = {
-    'issue-detail': { issues: 10, comments: 9, users: 8, teams: 7 },
-    'team-view': { teams: 10, users: 9, issues: 8, comments: 7 },
-    'user-profile': { users: 10, issues: 9, teams: 8, comments: 7 }
-  };
+  // Component Lifecycle Action Management
+  registerComponentActions(componentId: string, actions: ActionDefinition[]): void;
+  unregisterComponentActions(componentId: string): void;
 
-  const contextPriorities = priorityMap[context.view] || {};
+  // Sequential Hotkey Assignment
+  assignSequentialHotkeys(actions: ActionDefinition[], basePattern: string, count: number): void;
 
-  return results.sort((a, b) => {
-    const aPriority = contextPriorities[a.type] || 5;
-    const bPriority = contextPriorities[b.type] || 5;
-    return bPriority - aPriority;
-  });
-};
-```
+  // Action Execution
+  executeAction(actionId: string, context?: Partial<ActionContext>): Promise<void>;
 
-### Context Management System
+  // Hotkey & Binding Management
+  getEffectiveHotkey(actionId: string, activeContextName?: string): string | undefined; // Considers active BindingContext, falls back to globally set active context if activeContextName not provided
+  getHotkeyCollisions(): CollisionReport[]; // From useKeyBindings, adapted with actionIds
 
-#### Context State Management
-```typescript
-interface ContextManager {
-  current: Ref<ApplicationContext>;
+  // Binding Contexts
+  registerBindingContext(contextDef: BindingContextDefinition): void;
+  unregisterBindingContext(contextName: string): void; // For temporary contexts
+  setActiveBindingContext(contextName: string | null): void;
+  getActiveBindingContextName(): string | null;
+  getAllBindingContexts(): readonly Readonly<BindingContextDefinition>[];
+
+  // Application Context
+  getContext(): Readonly<ApplicationContext>;
   updateContext(updates: Partial<ApplicationContext>): void;
-  subscribeToUpdates(callback: (context: ApplicationContext) => void): () => void;
-  mergeContexts(base: ApplicationContext, override: Partial<ApplicationContext>): ApplicationContext;
-}
-```
+  subscribeToContextUpdates(callback: (context: Readonly<ApplicationContext>) => void): () => void; // Returns unsubscribe function
 
-#### Context Update Strategies
-- **Immediate**: Context changes trigger immediate search provider updates
-- **Debounced**: Context changes are debounced to avoid excessive queries
-- **Manual**: Applications control when context updates trigger searches
-
-### Result Integration and Ordering
-
-#### Result Merging Strategy
-1. **Provider Priority**: Each provider has configurable priority
-2. **Result Priority**: Individual results can override provider priority
-3. **Type Grouping**: Results grouped by type (actions, users, issues, etc.)
-4. **Custom Sorting**: Developers can provide custom sort functions
-
-#### Ordering Configuration
-```typescript
-interface ResultOrdering {
-  groupBy?: 'type' | 'provider' | 'category' | ((result: SearchResult | ActionDefinition) => string);
-  sortBy?: 'priority' | 'relevance' | 'alphabetical' | ((a: any, b: any) => number);
-  actionPriority?: 'first' | 'last' | 'mixed';
-  customGroups?: { [groupKey: string]: { title: string; priority: number } };
-}
-```
-
-### Component Integration Points
-
-#### VCommandPalette Integration
-- VCommandPalette can request application context from ActionCore
-- VCommandPalette can execute actions through ActionCore
-- VCommandPalette can get search providers from ActionCore when integrated, or manage them independently via props
-- Handles dynamic action execution through ActionCore
-
-#### Search Provider Registration
-```typescript
-// In ActionCore
-interface ActionCorePublicAPI {
-  // ... existing methods ...
-
-  // Context management
-  getContext(): ApplicationContext;
-  updateContext(updates: Partial<ApplicationContext>): void;
-
-  // Search provider integration
+  // Search Providers (for VCommandPalette)
   registerSearchProvider(provider: SearchProvider): void;
   unregisterSearchProvider(providerId: string): void;
   unregisterSearchProvidersByComponent(componentId: string): void;
-  getActiveSearchProviders(): readonly SearchProvider[];
+  getActiveSearchProviders(): readonly Readonly<SearchProvider>[];
 
-  // External action execution
-  executeActionWithContext(actionId: string, context: Partial<ActionContext>): Promise<void>;
+  // Search Provider Utilities (helper functions for VCommandPalette)
+  getOrderedSearchProviders(context?: Readonly<ApplicationContext>): readonly Readonly<SearchProvider>[]; // Returns providers sorted by priority/context
+  getSearchProviderGroups(providerId: string): readonly SearchProviderGroupDefinition[]; // Returns groups for a specific provider
+
+  // Debugging & Data Export
+  exportRegistryState(): { actions: ActionDefinition[], bindings: Record<string, string[]>, bindingContexts: BindingContextDefinition[] }; // Primarily for development/debugging
+
+  // Vuetify Plugin Install
+  install: (app: App) => void;
 }
 ```
 
-#### Dynamic Action Generation
+## 10. Vuetify Integration
+
+### 10.1. Service Pattern
+-   **Symbol**: `ActionCoreSymbol: InjectionKey<ActionCoreInstance>`
+-   **Creation**: `createActionCore(options?: ActionCoreOptions): ActionCoreInstance & { install: (app: App) => void }`
+-   **Injection**: `useActionCore(): ActionCoreInstance`
+-   **Plugin**: `app.use(createActionCore(config))` registers the service.
+
+#### 10.1.1. ActionCoreOptions Interface
 ```typescript
-// Search result specifies actionIds that can be executed
-{
-  id: "user-john-doe",
-  title: "John Doe",
-  type: "user",
-  data: { userId: "123", email: "john@example.com" },
-  actions: ["assign-issue", "view-user-issues", "navigate-to-user"]
-}
+interface ActionCoreOptions {
+  // useKeyBindings configuration options
+  sequenceTimeout?: number;
+  listenerOptions?: AddEventListenerOptions;
+  detectCollisions?: boolean;
+  debug?: boolean;
 
-// ActionCore validates actionIds exist and executes with context
-actionCore.executeAction("assign-issue", {
-  trigger: "search-result",
-  searchResult: result,
-  targetUser: result.data
-});
-```
+  // Default binding context
+  defaultBindingContext?: string;
 
-#### Search Provider Grouping Integration
-```typescript
-// Search providers can define groups that integrate with ActionCore groups
-const issueSearchProvider: SearchProvider = {
-  id: 'issue-search',
-  groups: [
-    { id: 'current-sprint', title: 'Current Sprint', priority: 10 },
-    { id: 'backlog', title: 'Backlog', priority: 5 },
-    { id: 'archived', title: 'Archived', separator: true, priority: 1 }
-  ],
-  search: async (query, context) => {
-    const results = await searchIssues(query);
-    return results.map(issue => ({
-      ...issue,
-      group: issue.sprint === context.currentSprint ? 'current-sprint' :
-             issue.status === 'archived' ? 'archived' : 'backlog'
-    }));
-  }
-};
-```
-
-### Vuetify Service Integration
-
-ActionCore follows Vuetify's established patterns for services and plugins:
-
-#### Service Pattern
-```typescript
-// ActionCore service symbol and interfaces
-export const ActionCoreSymbol: InjectionKey<ActionCoreInstance> = Symbol.for('vuetify:action-core')
-
-export function createActionCore(options?: ActionCoreOptions): ActionCoreInstance & { install: (app: App) => void } {
-  // ActionCore implementation following Vuetify's service pattern
-  return {
-    // ... core functionality
-    install(app: App) {
-      app.provide(ActionCoreSymbol, instance)
-    }
-  }
-}
-
-export function useActionCore(): ActionCoreInstance {
-  const actionCore = inject(ActionCoreSymbol)
-  if (!actionCore) throw new Error('[ActionCore] Could not find ActionCore injection')
-  return actionCore
+  // Global action defaults
+  actionDefaults?: Partial<ActionDefinition>;
 }
 ```
 
-#### Component Integration
-```typescript
-// VCommandPalette props factory following Vuetify patterns
-export const makeVCommandPaletteProps = propsFactory({
-  ...makeComponentProps(),
-  ...makeThemeProps(),
-  ...makeDensityProps(),
-  ...makeTransitionProps(),
-  ...makeFilterProps(),
-  ...makeVirtualProps(),
+### 10.2. Defaults System
+-   ActionCore can be configured with global defaults via Vuetify's defaults system (e.g., default `runInTextInput` for all actions).
+    ```typescript
+    // vuetify.js
+    createVuetify({
+      defaults: {
+        ActionCore: { // Global defaults for ActionCore itself (e.g., default binding context name)
+          defaultBindingContext: 'user-custom',
+        },
+        ActionDefinition: { // Defaults for all registered actions
+          preventDefault: true,
+          runInTextInput: false,
+        }
+      }
+    })
+    ```
+-   When actions are registered, they merge with these global `ActionDefinition` defaults using the strategy: Vuetify defaults < ActionCore options actionDefaults < specific action definition properties (specific properties take precedence).
 
-  // Component-specific props
-  modelValue: Boolean,
-  placeholder: String,
-  title: String,
-  // ... other props
-}, 'VCommandPalette')
+## 11. Error Handling
+-   **Action Handler Errors**: Caught by ActionCore during `executeAction`. Logged with context (actionId, trigger). For programmatic execution, errors are re-thrown; for hotkey execution, only logged to prevent crashes.
+-   **Search Provider Errors**: `VCommandPalette` (as the search orchestrator) should handle errors from individual providers (e.g., timeouts, network errors) gracefully, potentially showing partial results or error messages per provider.
+-   **Configuration Errors**: Specific, actionable warnings including:
+    -   "ActionID 'foo' already exists when registering action 'bar'. Previous action will be replaced."
+    -   "ActionID 'xyz' not found when trying to execute."
+    -   "Hotkey collision for 'Ctrl+S' between Action 'saveFile' and Action 'submitForm'. Last registered action takes precedence."
+    -   "Invalid hotkey pattern 'Ctrl++' for action 'invalid-action'."
+    -   "BindingContext 'custom-context' references unknown actionId 'missing-action'."
+-   **Development vs. Production**: Warnings follow Vuetify conventions - detailed in development, suppressed or minimal in production.
 
-// VHotKey props factory
-export const makeVHotKeyProps = propsFactory({
-  ...makeComponentProps(),
-  ...makeThemeProps(),
-  ...makeDensityProps(),
+## 12. Performance Considerations
+-   **Reactive Updates**: Fine-grained reactivity for action properties, context changes.
+-   **Debouncing**: Context updates triggering search re-queries in `VCommandPalette` should be debounced.
+-   **Caching**:
+    -   `useKeyBindings` handles parsed hotkey pattern caching.
+    -   `VCommandPalette` might implement caching for search results based on query and context, if necessary.
+-   **Large Datasets**: `VCommandPalette` relies on `useVirtual` for displaying large lists of actions/results. Search providers are responsible for their own performance when querying large data sources.
 
-  hotkey: String,
-  actionId: String,
-  displayMode: String,
-  // ... other props
-}, 'VHotKey')
-```
-
-#### Component Implementation Strategy
-Components will be built using underlying Vuetify components:
-- **VCommandPalette**: Uses VDialog + VCard + VTextField + VList/VListItem
-- **VHotKey**: Uses VChip or custom styled span
-- Visual props (elevation, rounded, etc.) passed through to child components
-- Focus on functionality rather than reimplementing styling
+This design provides a comprehensive framework for ActionCore. Next steps would involve detailing specific algorithms for areas like effective hotkey computation with binding contexts and the interaction logic within `VCommandPalette`'s search orchestration.
