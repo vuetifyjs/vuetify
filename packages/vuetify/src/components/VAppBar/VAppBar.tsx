@@ -16,7 +16,7 @@ import { computed, ref, shallowRef, toRef, watchEffect } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
-import type { PropType, ComputedRef } from 'vue'
+import type { ComputedRef, PropType } from 'vue'
 import type { VToolbarSlots } from '@/components/VToolbar/VToolbar'
 import type { Position } from '@/composables/layout'
 
@@ -132,7 +132,6 @@ export const VAppBar = genericComponent<VToolbarSlots>()({
         }
       })
     })
-
 
     const { ssrBootStyles } = useSsrBoot()
     const { layoutItemStyles } = useLayoutItem({
