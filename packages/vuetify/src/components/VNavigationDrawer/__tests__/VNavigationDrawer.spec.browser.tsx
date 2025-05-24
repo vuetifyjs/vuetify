@@ -6,6 +6,7 @@ import { VMain } from '@/components/VMain'
 
 // Utilities
 import { render, userEvent } from '@test'
+import { fireEvent } from '@testing-library/vue'
 import { nextTick, ref } from 'vue'
 
 describe('VNavigationDrawer', () => {
@@ -69,31 +70,33 @@ describe('VNavigationDrawer', () => {
 
     const { container } = render(() => (
       <VLayout>
-        <VNavigationDrawer expandOnHover v-model:rail={ rail.value } />
+        <VNavigationDrawer expandOnHover v-model:rail={ rail.value} />
         <VMain />
       </VLayout>
     ))
 
     const navDrawer = container.querySelector('.v-navigation-drawer')
-    // const mainContent = container.querySelector('.v-main')
+    const mainContent = container.querySelector('.v-main')
 
-    expect(navDrawer).toHaveStyle({ width: '56px' })
-    // TODO: Check how padding is applied and assert accordingly
-    // expect(mainContent).toHaveStyle({ paddingLeft: '56px' })
+    if (!navDrawer || !mainContent) throw new Error('Elements not found')
 
-    await userEvent.hover(navDrawer!)
-    await new Promise(resolve => setTimeout(resolve, 300))
-    vi.runAllTimers()
-    await nextTick()
-    expect(navDrawer).toHaveStyle({ width: '256px' })
-    // expect(mainContent).toHaveStyle({ paddingLeft: '256px' })
+    await vi.waitFor(() => fireEvent.mouseEnter(navDrawer))
+    await vi.waitFor(() => {
+      expect(getComputedStyle(navDrawer).width).toBe('56px')
+      expect(getComputedStyle(mainContent).getPropertyValue('--v-layout-left')).toBe('56px')
+    }, { timeout: 15000 })
 
-    await userEvent.unhover(navDrawer!)
-    await new Promise(resolve => setTimeout(resolve, 300))
-    vi.runAllTimers()
-    await nextTick()
-    expect(navDrawer).toHaveStyle({ width: '56px' })
-    // expect(mainContent).toHaveStyle({ paddingLeft: '56px' })
+    await vi.waitFor(() => fireEvent.mouseEnter(navDrawer))
+    await vi.waitFor(() => {
+      expect(getComputedStyle(navDrawer).width).toBe('256px')
+      expect(getComputedStyle(mainContent).getPropertyValue('--v-layout-left')).toBe('256px')
+    }, { timeout: 15000 })
+
+    await vi.waitFor(() => fireEvent.mouseLeave(navDrawer))
+    await vi.waitFor(() => {
+      expect(getComputedStyle(navDrawer).width).toBe('56px')
+      expect(getComputedStyle(mainContent).getPropertyValue('--v-layout-left')).toBe('56px')
+    }, { timeout: 15000 })
   })
 
   it.todo('should hide drawer if window resizes below mobile breakpoint')
