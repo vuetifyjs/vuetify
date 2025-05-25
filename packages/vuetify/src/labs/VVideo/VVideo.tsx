@@ -169,6 +169,22 @@ export const VVideo = genericComponent<VVideoSlots>()({
       }
     }
 
+    function onDoubleClick (e: Event) {
+      e.preventDefault()
+      toggleFullscreen()
+    }
+
+    let lastTap = 0
+    function onTouchend (e: Event) {
+      const now = performance.now()
+      if ((now - lastTap) < 500) {
+        e.preventDefault()
+        toggleFullscreen()
+      } else {
+        lastTap = now
+      }
+    }
+
     useRender(() => {
       const showControls = !isLoading.value &&
         props.variant === 'player' &&
@@ -229,6 +245,8 @@ export const VVideo = genericComponent<VVideoSlots>()({
               // onWaiting={ showDataLoading }
               // onPlaying={ hideDataLoading } // ? onAbort, onSuspended, onStalled
               onClick={ () => isPlaying.value = !isPlaying.value }
+              onDblclick={ onDoubleClick }
+              onTouchend={ onTouchend }
             >
               { slots.sources?.() ?? <source src={ props.src } type={ props.type } /> }
             </video>
