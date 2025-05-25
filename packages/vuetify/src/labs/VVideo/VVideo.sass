@@ -23,6 +23,9 @@
       & ~ *
         z-index: 1
 
+    // video::-webkit-media-controls-enclosure
+    //   display: none
+
     &__content
       position: relative
       cursor: pointer
@@ -87,6 +90,7 @@
       backdrop-filter: blur(5px)
       background-color: rgba(var(--v-theme-surface), var(--v-background-opacity))
 
+      z-index: 2147483648
       opacity: 0
 
       &, &--pills > .v-video-control__pill
@@ -108,6 +112,10 @@
         --v-background-opacity: 1
         --v-video-controls-height: 64px
         backdrop-filter: none
+        pointer-events: none
+
+        > *
+          pointer-events: auto
 
         &:not(:empty)
           background: transparent !important

@@ -25,6 +25,8 @@ export type VVideoControlsActionsSlot = {
   pause: () => void
   skipTo: (v: number) => void
   volume: Ref<number>
+  isPlaying: boolean
+  progress: number
   toggleFullscreen: () => void
 }
 
@@ -49,10 +51,6 @@ export const makeVVideoControlsProps = propsFactory({
   splitTime: Boolean,
   pills: Boolean,
   detached: Boolean,
-  miniPosition: {
-    type: String as PropType<'left' | 'center' | 'right'>,
-    default: 'center',
-  },
   progress: {
     type: Number,
     default: 0,
@@ -135,12 +133,25 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
         },
       }
 
+      const volumeIcon = volume.value > 66 ? 'mdi-volume-high'
+        : volume.value > 33 ? 'mdi-volume-medium'
+        : volume.value > 0 ? 'mdi-volume-low'
+        : 'mdi-volume-off'
+
       const pillClasses = [
         'v-video-control__pill',
         props.pills ? elevationClasses.value : [],
       ]
 
-      const slotProps = { play, pause, skipTo, volume, toggleFullscreen }
+      const slotProps = {
+        play,
+        pause,
+        isPlaying: isPlaying.value,
+        progress: progress.value,
+        skipTo,
+        volume,
+        toggleFullscreen,
+      }
 
       return (
         <div
@@ -151,7 +162,6 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
             { 'v-video-controls--detached': props.detached },
             { 'v-video-controls--floating': props.floating },
             { 'v-video-controls--split-time': props.splitTime },
-            { [`v-video-controls--mini-${props.miniPosition}`]: props.variant === 'mini' },
             backgroundColorClasses.value,
             props.detached && !props.pills ? elevationClasses.value : [],
             themeClasses.value,
@@ -216,7 +226,7 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
                 )}
                   <div class={ pillClasses }>
                   { !props.hideVolume && (
-                    <VIconBtn key="volume-control" icon="mdi-volume-high">
+                    <VIconBtn key="volume-control" icon={ volumeIcon }>
                       <VIcon />
                       <VMenu
                         offset="8"
