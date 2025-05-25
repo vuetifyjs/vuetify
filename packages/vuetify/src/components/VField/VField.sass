@@ -493,7 +493,7 @@
     .v-field__overlay
       background-color: currentColor
       opacity: $field-overlay-filled-opacity
-      transition: opacity $field-subtle-transition-timing
+      transition: none
 
     @media (hover: hover)
       &:hover .v-field__overlay
@@ -516,6 +516,12 @@
     &.v-field--focused .v-field__overlay
       background-color: $field-overlay-focused-background-color
       opacity: 1
+
+  .v-field--variant-solo-filled.v-field--focused .v-field__overlay,
+  .v-field--variant-solo.v-field--focused .v-field__overlay,
+  .v-field--variant-solo-filled:hover .v-field__overlay,
+  .v-field--variant-solo:hover .v-field__overlay
+    transition: opacity $field-subtle-transition-timing
 
   /* endregion */
   /* region MODIFIERS */
