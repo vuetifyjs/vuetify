@@ -6,7 +6,7 @@ import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { ActionCoreSymbol } from '@/labs/VActionCore'
+import { ActionCoreSymbol } from '@/labs/VActionCore/archive'
 
 // Utilities
 import { computed, inject } from 'vue'
