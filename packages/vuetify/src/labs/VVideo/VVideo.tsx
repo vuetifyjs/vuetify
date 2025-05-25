@@ -19,12 +19,12 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { MaybeTransition } from '@/composables/transition'
 
 // Utilities
-import { onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { onBeforeUnmount, onMounted, ref, shallowRef, watch } from 'vue'
 import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import type { VVideoControlsActionsSlot } from './VVideoControls'
+import type { VVideoControlsActionsSlot, VVideoControlsVariant } from './VVideoControls'
 import type { LoaderSlotProps } from '@/composables/loader'
 
 export type VVideoSlots = {
@@ -45,11 +45,14 @@ export const makeVVideoProps = propsFactory({
   src: String,
   type: String, // e.g. video/mp4
   image: String,
+  hideOverlay: Boolean,
+  startAt: Number,
   variant: {
     type: String as PropType<Variant>,
     default: 'player',
     validator: (v: any) => allowedVariants.includes(v),
   },
+  controlsList: String,
   controlsTransition: {
     String,
     default: 'fade-transition',
@@ -88,8 +91,9 @@ export const VVideo = genericComponent<VVideoSlots>()({
     const progress = useProxiedModel(props, 'progress')
     const volume = useProxiedModel(props, 'volume')
 
-    const isLoading = ref(true)
-    const duration = ref(0)
+    const isLoading = shallowRef(true)
+    const duration = shallowRef(0)
+    const lastVolume = shallowRef(0)
 
     function onTimeupdate () {
       const { currentTime, duration } = videoRef.value!
@@ -99,6 +103,9 @@ export const VVideo = genericComponent<VVideoSlots>()({
     function onVideoLoaded () {
       isLoading.value = false
       duration.value = videoRef.value!.duration
+      if (props.startAt) {
+        videoRef.value!.currentTime = props.startAt
+      }
     }
 
     function onKeydown (e: KeyboardEvent) {
@@ -123,6 +130,19 @@ export const VVideo = genericComponent<VVideoSlots>()({
           // TODO: show volume change indicator
           break
         }
+        case 'm': {
+          if (volume.value) {
+            lastVolume.value = volume.value
+            volume.value = 0
+          } else {
+            volume.value = lastVolume.value
+          }
+          break
+        }
+        case 'f': {
+          toggleFullscreen()
+          break
+        }
       }
     }
 
@@ -138,10 +158,11 @@ export const VVideo = genericComponent<VVideoSlots>()({
 
     watch(isPlaying, v => {
       if (!videoRef.value) return
-      if (v && videoRef.value.paused) {
+      if (v) {
         videoRef.value.play()
+        focusSlider()
       }
-      if (!v && !videoRef.value.paused) {
+      if (!v) {
         videoRef.value.pause()
       }
     })
@@ -161,12 +182,35 @@ export const VVideo = genericComponent<VVideoSlots>()({
       videoRef.value?.removeEventListener('timeupdate', onTimeupdate)
     })
 
+    function focusSlider () {
+      const container = videoRef.value?.closest('.v-video') as HTMLElement
+      const innerSlider = container.querySelector('[role="slider"]') as HTMLElement
+      innerSlider?.focus()
+    }
+
+    function fullscreenExitShortcut (e: KeyboardEvent) {
+      if (['ESC', 'f'].includes(e.key)) {
+        toggleFullscreen()
+        document.body.removeEventListener('keydown', fullscreenExitShortcut)
+      }
+    }
+
     function toggleFullscreen () {
+      if ((props.controlsList ?? '').includes('nofullscreen') || !document.fullscreenEnabled) {
+        return
+      }
       if (document.fullscreenElement) {
         document.exitFullscreen()
+        focusSlider()
       } else {
         videoRef.value?.requestFullscreen()
+        document.body.addEventListener('keydown', fullscreenExitShortcut)
       }
+    }
+
+    function onVideoClick (e: Event) {
+      e.preventDefault()
+      isPlaying.value = !isPlaying.value
     }
 
     function onDoubleClick (e: Event) {
@@ -195,7 +239,8 @@ export const VVideo = genericComponent<VVideoSlots>()({
         : 'fade-transition'
 
       const controlsProps = {
-        ...VVideoControls.filterProps(omit(props, ['variant'])),
+        ...VVideoControls.filterProps(omit(props, ['variant', 'hideVolume'])),
+        hideVolume: props.hideVolume || attrs.muted !== false,
         variant: props.controlsVariant,
         playing: isPlaying.value,
         progress: progress.value,
@@ -237,6 +282,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
                 roundedClasses.value,
               ]}
               { ...attrs }
+              controlslist={ props.controlsList }
               playsinline
               ref={ videoRef }
               onLoadeddata={ onVideoLoaded }
@@ -244,13 +290,13 @@ export const VVideo = genericComponent<VVideoSlots>()({
               onPause={ () => isPlaying.value = false }
               // onWaiting={ showDataLoading }
               // onPlaying={ hideDataLoading } // ? onAbort, onSuspended, onStalled
-              onClick={ () => isPlaying.value = !isPlaying.value }
+              onClick={ onVideoClick }
               onDblclick={ onDoubleClick }
               onTouchend={ onTouchend }
             >
               { slots.sources?.() ?? <source src={ props.src } type={ props.type } /> }
             </video>
-            { props.variant === 'player' && (
+            { props.variant === 'player' && !props.hideOverlay && (
               <VOverlay
                 key="pause-overlay"
                 modelValue={ !isLoading.value }
@@ -316,6 +362,8 @@ export const VVideo = genericComponent<VVideoSlots>()({
         </div>
       )
     })
+
+    return { video: videoRef }
   },
 })
 
