@@ -28,7 +28,7 @@ import type { VCommandPaletteListItemScope, VCommandPaletteListNoResultsScope } 
 import type { CommandPaletteListRef, UseCommandPaletteCoreProps } from '../../composables/useCommandPaletteCore'
 import type { commandPaletteNavigationActions as NavigationActionsType } from '../../utils/commandPaletteNavigationActions' // For displaying hotkeys
 import type { VTextField } from '@/components/VTextField'
-import type { ActionCorePublicAPI, ActionDefinition, ActionContext } from '@/labs/VActionCore'
+import type { ActionCorePublicAPI, ActionDefinition, ActionContext } from '@/labs/VActionCore/archive'
 
 // --- START: New Type Definitions for Agnostic Mode ---
 
