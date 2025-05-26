@@ -13,6 +13,7 @@ import { VIconBtn } from '@/labs/VIconBtn/VIconBtn'
 // Composables
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
+import { forwardRefs } from '@/composables/forwardRefs'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
@@ -74,18 +75,21 @@ export const VVideo = genericComponent<VVideoSlots>()({
   props: makeVVideoProps(),
 
   emits: {
+    loaded: (element: HTMLVideoElement) => true,
     'update:playing': (val: boolean) => true,
     'update:progress': (val: number) => true,
     'update:volume': (val: number) => true,
   },
 
-  setup (props, { attrs, slots }) {
+  setup (props, { attrs, emit, slots }) {
     const { themeClasses } = provideTheme(props)
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props)
 
+    const containerRef = ref<HTMLDivElement>()
     const videoRef = ref<HTMLVideoElement>()
+    const controlsRef = ref<VVideoControls>()
 
     const isPlaying = useProxiedModel(props, 'playing')
     const progress = useProxiedModel(props, 'progress')
@@ -93,7 +97,6 @@ export const VVideo = genericComponent<VVideoSlots>()({
 
     const isLoading = shallowRef(true)
     const duration = shallowRef(0)
-    const lastVolume = shallowRef(0)
 
     function onTimeupdate () {
       const { currentTime, duration } = videoRef.value!
@@ -106,6 +109,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
       if (props.startAt) {
         videoRef.value!.currentTime = props.startAt
       }
+      emit('loaded', videoRef.value!)
     }
 
     function onKeydown (e: KeyboardEvent) {
@@ -131,12 +135,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
           break
         }
         case 'm': {
-          if (volume.value) {
-            lastVolume.value = volume.value
-            volume.value = 0
-          } else {
-            volume.value = lastVolume.value
-          }
+          controlsRef.value?.toggleMuted()
           break
         }
         case 'f': {
@@ -203,7 +202,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
         document.exitFullscreen()
         focusSlider()
       } else {
-        videoRef.value?.requestFullscreen()
+        containerRef.value?.requestFullscreen()
         document.body.addEventListener('keydown', fullscreenExitShortcut)
       }
     }
@@ -258,6 +257,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
 
       return (
         <div
+          ref={ containerRef }
           class={[
             'v-video',
             `v-video--variant-${props.variant}`,
@@ -331,7 +331,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
               contentClass="w-100 h-100"
               transition={ posterTransition }
             >
-              <VImg class="media-cover" cover src={ props.image }>
+              <VImg cover src={ props.image }>
                 <div class="d-flex align-center justify-center fill-height">
                   { isLoading.value && (
                     <VProgressCircular
@@ -348,6 +348,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
           <MaybeTransition key="actions" name={ props.controlsTransition }>
             { showControls && (
               <VVideoControls
+                ref={ controlsRef }
                 { ...controlsProps }
                 { ...controlsEventHandlers }
               >
@@ -363,7 +364,10 @@ export const VVideo = genericComponent<VVideoSlots>()({
       )
     })
 
-    return { video: videoRef }
+    return forwardRefs({
+      skipTo,
+      toggleFullscreen,
+    }, controlsRef)
   },
 })
 
