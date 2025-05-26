@@ -1,5 +1,6 @@
 {
   "props": {
+    "autocomplete": "Helps influence browser's suggestions. Special value **suppress** manipulates fields `name` attribute while **off** relies on browser's good will to stop suggesting values. Any other value is passed to the native `autocomplete` on the underlying input element.",
     "autofocus": "Enables autofocus.",
     "clearIcon": "Applied when using **clearable** and the input is dirty.",
     "counterValue": "Function returns the counter display text.",
