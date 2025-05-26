@@ -16,7 +16,7 @@ import Ripple from '@/directives/ripple'
 
 // Utilities
 import { computed, inject } from 'vue'
-import { convertToUnit, genericComponent, keyValues, propsFactory, useRender } from '@/util'
+import { convertToUnit, genericComponent, includes, keyValues, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -98,17 +98,17 @@ export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
     })
 
     function parseKeydown (e: KeyboardEvent, value: number) {
-      if (!relevantKeys.includes(e.key)) return
+      if (!includes(relevantKeys, e.key)) return
 
       e.preventDefault()
 
       const _step = step.value || 0.1
       const steps = (props.max - props.min) / _step
-      if ([left, right, down, up].includes(e.key)) {
+      if (includes([left, right, down, up], e.key)) {
         const increase = vertical.value
           ? [isRtl.value ? left : right, isReversed.value ? down : up]
           : indexFromEnd.value !== isRtl.value ? [left, up] : [right, up]
-        const direction = increase.includes(e.key) ? 1 : -1
+        const direction = includes(increase, e.key) ? 1 : -1
         const multiplier = e.shiftKey ? 2 : (e.ctrlKey ? 1 : 0)
 
         value = value + (direction * _step * multipliers.value[multiplier])
