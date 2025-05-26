@@ -260,14 +260,9 @@ export const VSelect = genericComponent<new <
           model.value = [item]
         }
         const index = displayItems.value.indexOf(item)
-
         if (~index && IN_BROWSER) {
           listRef.value?.focus(index)
         }
-
-        IN_BROWSER && props.hideSelected && window.requestAnimationFrame(() => {
-          index >= 0 && vVirtualScrollRef.value?.scrollToIndex(index)
-        })
       }
     }
 
