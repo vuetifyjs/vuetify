@@ -115,7 +115,8 @@
   },
   "VSelect": {
     "props": {
-      "listProps": "3.5.0"
+      "listProps": "3.5.0",
+      "noAutoScroll": "3.9.0"
     }
   },
   "VSlider": {
