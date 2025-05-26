@@ -7,7 +7,7 @@ settings:
 overrides:
   '@testing-library/dom': npm:@vuetify/testing-library-dom@1.0.2
   '@types/node': 22.15.12
-  '@vue/babel-plugin-jsx': npm:@vuetify/babel-plugin-jsx@1.5.0
+  '@vue/babel-plugin-jsx': npm:@vuetify/babel-plugin-jsx@1.5.1
   tough-cookie: 5.1.2
 
 pnpmfileChecksum: sha256-grQ7keQLE6IY6tCi9f26NtYQ2j+RuK1OR3hPnrfzUSE=
@@ -516,8 +516,8 @@ importers:
         specifier: ^2.4.6
         version: 2.4.6
       '@vuetify/babel-plugin-jsx':
-        specifier: ^1.5.0
-        version: 1.5.0(@babel/core@7.26.10)
+        specifier: ^1.5.1
+        version: 1.5.1(@babel/core@7.26.10)
       acorn-walk:
         specifier: ^8.3.4
         version: 8.3.4
@@ -3235,19 +3235,19 @@ packages:
       '@vue/composition-api':
         optional: true
 
-  '@vuetify/babel-helper-vue-transform-on@1.5.0':
-    resolution: {integrity: sha512-uAq3r21dFUKIJoEqau03SbaJ9nnVLmOvEnVX/kZMwj2KC16IbkIbob4D0UndU6eA/y8rFxoZBAA9ZjhKXE6JHw==}
+  '@vuetify/babel-helper-vue-transform-on@1.5.1':
+    resolution: {integrity: sha512-lcWnK3GVgMf+68SUuFB4oWXJGkL80QlM3nCx6UpHWNzg8z8kG4agSdrQwSy6eM2n6jTFysVTkwa0gaVlwXUYmw==}
 
-  '@vuetify/babel-plugin-jsx@1.5.0':
-    resolution: {integrity: sha512-91vHB1rC9qr78XU0uPysbFPijjnWJApLnMeGjPJWwGPvIinFj/4vOR3BFpC80AwFYzErDgjokXkyaaVcSkpJiA==}
+  '@vuetify/babel-plugin-jsx@1.5.1':
+    resolution: {integrity: sha512-Ihj3oTtmYjNthbqrt3Rcz1g7PmPHBTFyis8D9B0hL3D6HB8VIfXb0xjpJAmJbEziMnEHKVYLcRUDQ76a+PpUeg==}
     peerDependencies:
       '@babel/core': ^7.0.0-0
     peerDependenciesMeta:
       '@babel/core':
         optional: true
 
-  '@vuetify/babel-plugin-resolve-type@1.5.0':
-    resolution: {integrity: sha512-rS5fk1L5QT5EZtudLtOkH+5/3y5JAHAnvgsnGou/r+c4vVBYLceT9UPTSpfu6OQ6qDScJmTaFTH7aWcHwAxYIw==}
+  '@vuetify/babel-plugin-resolve-type@1.5.1':
+    resolution: {integrity: sha512-hBNaydwm+8pIkFC+xE1anxITkzTCRm/NGu6geKuMYHcscOcyBCBfOKqB5eDvI+2i22KkOjH4G3EQp+54yXI8Yg==}
     peerDependencies:
       '@babel/core': ^7.0.0-0
 
@@ -12197,7 +12197,7 @@ snapshots:
     dependencies:
       '@babel/core': 7.26.10
       '@babel/plugin-transform-typescript': 7.27.0(@babel/core@7.26.10)
-      '@vue/babel-plugin-jsx': '@vuetify/babel-plugin-jsx@1.5.0(@babel/core@7.26.10)'
+      '@vue/babel-plugin-jsx': '@vuetify/babel-plugin-jsx@1.5.1(@babel/core@7.26.10)'
       vite: 6.3.5(@types/node@22.15.12)(sass-embedded@1.87.0)(sass@1.87.0)(terser@5.31.3)(tsx@4.19.3)(yaml@2.7.0)
       vue: 3.5.13(typescript@5.8.3)
     transitivePeerDependencies:
@@ -12515,9 +12515,9 @@ snapshots:
       vue: 3.5.13(typescript@5.8.3)
       vue-demi: 0.13.11(vue@3.5.13(typescript@5.8.3))
 
-  '@vuetify/babel-helper-vue-transform-on@1.5.0': {}
+  '@vuetify/babel-helper-vue-transform-on@1.5.1': {}
 
-  '@vuetify/babel-plugin-jsx@1.5.0(@babel/core@7.26.10)':
+  '@vuetify/babel-plugin-jsx@1.5.1(@babel/core@7.26.10)':
     dependencies:
       '@babel/helper-module-imports': 7.25.9
       '@babel/helper-plugin-utils': 7.26.5
@@ -12526,14 +12526,14 @@ snapshots:
       '@babel/traverse': 7.27.0
       '@babel/types': 7.27.0
       '@vue/shared': 3.5.13
-      '@vuetify/babel-helper-vue-transform-on': 1.5.0
-      '@vuetify/babel-plugin-resolve-type': 1.5.0(@babel/core@7.26.10)
+      '@vuetify/babel-helper-vue-transform-on': 1.5.1
+      '@vuetify/babel-plugin-resolve-type': 1.5.1(@babel/core@7.26.10)
     optionalDependencies:
       '@babel/core': 7.26.10
     transitivePeerDependencies:
       - supports-color
 
-  '@vuetify/babel-plugin-resolve-type@1.5.0(@babel/core@7.26.10)':
+  '@vuetify/babel-plugin-resolve-type@1.5.1(@babel/core@7.26.10)':
     dependencies:
       '@babel/code-frame': 7.26.2
       '@babel/core': 7.26.10
