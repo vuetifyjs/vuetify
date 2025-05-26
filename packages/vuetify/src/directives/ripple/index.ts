@@ -150,7 +150,7 @@ function isRippleEnabled (value: any): value is true {
   return typeof value === 'undefined' || !!value
 }
 
-function getActivingKey (e: VuetifyRippleEvent): string{
+function getActivingKey (e: VuetifyRippleEvent): string {
   return e instanceof PointerEvent ? `pointer-${e.pointerId}` : `keyboard-${e.key}`
 }
 
@@ -158,7 +158,7 @@ function rippleShow (e: VuetifyRippleEvent) {
   const value: RippleOptions = {}
   const element = e.currentTarget as HTMLElement | undefined
 
-  if (!element?._ripple|| e[stopSymbol]) return
+  if (!element?._ripple || e[stopSymbol]) return
 
   // Don't allow the event to trigger ripples on any other elements
   e[stopSymbol] = true
@@ -212,11 +212,11 @@ function rippleHide (e: Event) {
   }
 
   if (e instanceof FocusEvent) {
-    element._ripple.activing = [];
+    element._ripple.activing = []
   } else if (e instanceof PointerEvent || e instanceof KeyboardEvent) {
     const activingKey = getActivingKey(e)
     if (element._ripple.activing.includes(activingKey)) {
-      element._ripple.activing.splice(element._ripple.activing.indexOf(activingKey), 1);
+      element._ripple.activing.splice(element._ripple.activing.indexOf(activingKey), 1)
     }
   }
 
@@ -238,7 +238,7 @@ function rippleMove (e: PointerEvent) {
   const offset = element.getBoundingClientRect()
   const localX = e.clientX - offset.left
   const localY = e.clientY - offset.top
-  if (localX < 0 || localX > offset.width || localY < 0 || localY > offset.height){
+  if (localX < 0 || localX > offset.width || localY < 0 || localY > offset.height) {
     rippleHide(e)
   }
 }
