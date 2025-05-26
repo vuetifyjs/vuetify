@@ -1,99 +1,69 @@
 // Components
 import { VNavigationDrawer } from '..'
 import { VLayout } from '@/components/VLayout'
-import { VLocaleProvider } from '@/components/VLocaleProvider'
 import { VMain } from '@/components/VMain'
 
 // Utilities
-import { render, userEvent } from '@test'
+import { page, render, screen, userEvent } from '@test'
 import { nextTick, ref } from 'vue'
 
 describe('VNavigationDrawer', () => {
-  beforeEach(() => {
-    vi.useFakeTimers()
-  })
-
-  afterEach(() => {
-    vi.runOnlyPendingTimers()
-    vi.useRealTimers()
-  })
-
-  // TODO: Handle viewport changes if necessary for these tests
-  // beforeEach(() => {
-  //   cy.viewport(1280, 768)
-  // })
-
   it('should open when changed to permanent on mobile', async () => {
-    // TODO: Viewport dependent test - cy.viewport(400, 800)
-    const { container, rerender } = render(
-      <VLayout>
-        <VNavigationDrawer permanent={ false } />
-      </VLayout>
-    )
+    await page.viewport(400, 800)
 
-    expect(container.querySelector('.v-navigation-drawer')).toHaveClass('v-navigation-drawer--temporary')
-
-    await rerender(
+    const permanent = ref(false)
+    render(() => (
       <VLayout>
-        <VNavigationDrawer permanent />
+        <VNavigationDrawer permanent={ permanent.value } />
       </VLayout>
-    )
-    expect(container.querySelector('.v-navigation-drawer')).not.toHaveClass('v-navigation-drawer--temporary')
+    ))
+    const drawer = screen.getByCSS('.v-navigation-drawer')
+
+    await expect.element(drawer).toHaveClass('v-navigation-drawer--temporary')
+
+    permanent.value = true
+    await expect.element(drawer).not.toHaveClass('v-navigation-drawer--temporary')
   })
 
   it('should change width when using rail, expandOnHover, and hovering', async () => {
-    const { container } = render(
+    render(
       <VLayout>
         <VNavigationDrawer rail expandOnHover />
       </VLayout>
     )
+    const drawer = screen.getByCSS('.v-navigation-drawer')
 
-    const navDrawer = container.querySelector('.v-navigation-drawer')
-    expect(navDrawer).toHaveStyle({ width: '56px' })
+    await expect.element(drawer).toHaveStyle({ width: '56px' })
 
-    await userEvent.hover(navDrawer!)
-    await new Promise(resolve => setTimeout(resolve, 300)) // Wait for transition (duration can be adjusted)
-    vi.runAllTimers()
-    await nextTick()
-    expect(navDrawer).toHaveStyle({ width: '256px' })
+    await userEvent.hover(drawer)
+    await expect.element(drawer).toHaveStyle({ width: '256px' })
 
-    await userEvent.unhover(navDrawer!)
-    await new Promise(resolve => setTimeout(resolve, 300))
-    vi.runAllTimers()
-    await nextTick()
-    expect(navDrawer).toHaveStyle({ width: '56px' })
+    await userEvent.unhover(drawer)
+    await expect.element(drawer).toHaveStyle({ width: '56px' })
   })
 
   it('should change width when using bound and unbound rail and expandOnHover', async () => {
     const rail = ref(true)
-
-    const { container } = render(() => (
+    render(() => (
       <VLayout>
         <VNavigationDrawer expandOnHover v-model:rail={ rail.value } />
         <VMain />
       </VLayout>
     ))
 
-    const navDrawer = container.querySelector('.v-navigation-drawer')
-    // const mainContent = container.querySelector('.v-main')
+    const drawer = screen.getByCSS('.v-navigation-drawer')
+    const main = screen.getByCSS('.v-main')
 
-    expect(navDrawer).toHaveStyle({ width: '56px' })
-    // TODO: Check how padding is applied and assert accordingly
-    // expect(mainContent).toHaveStyle({ paddingLeft: '56px' })
+    await expect.element(drawer).toHaveStyle({ width: '56px' })
+    await expect.element(main).toHaveStyle({ paddingLeft: '56px' })
 
-    await userEvent.hover(navDrawer!)
-    await new Promise(resolve => setTimeout(resolve, 300))
-    vi.runAllTimers()
-    await nextTick()
-    expect(navDrawer).toHaveStyle({ width: '256px' })
-    // expect(mainContent).toHaveStyle({ paddingLeft: '256px' })
+    await userEvent.hover(drawer)
+    await expect.element(drawer).toHaveStyle({ width: '256px' })
+    await expect.element(main).toHaveStyle({ paddingLeft: '256px' })
 
-    await userEvent.unhover(navDrawer!)
-    await new Promise(resolve => setTimeout(resolve, 300))
-    vi.runAllTimers()
-    await nextTick()
-    expect(navDrawer).toHaveStyle({ width: '56px' })
-    // expect(mainContent).toHaveStyle({ paddingLeft: '56px' })
+    await userEvent.unhover(drawer)
+    await expect.element(drawer).toHaveStyle({ width: '56px' })
+    await expect.element(main).toHaveStyle({ paddingLeft: '56px' })
   })
 
   it.todo('should hide drawer if window resizes below mobile breakpoint')
@@ -101,47 +71,47 @@ describe('VNavigationDrawer', () => {
   it.todo('should not hide drawer if window resizes below mobile breakpoint and disable-resize-watcher is used')
 
   it('should always show drawer if using permanent', async () => {
-    // TODO: Viewport dependent test - cy.viewport(400, 800)
-    const { container } = render(
+    render(
       <VLayout>
         <VNavigationDrawer permanent />
       </VLayout>
     )
-    expect(container.querySelector('.v-navigation-drawer')).toHaveClass('v-navigation-drawer--active')
-    // // After viewport change
-    // expect(container.querySelector('.v-navigation-drawer')).toHaveClass('v-navigation-drawer--active')
-    expect(container.querySelector('.v-navigation-drawer')).not.toHaveClass('v-navigation-drawer--temporary')
+    const drawer = screen.getByCSS('.v-navigation-drawer')
+
+    await expect.element(drawer).toHaveClass('v-navigation-drawer--active')
+    await page.viewport(400, 800)
+    await nextTick()
+    await expect.element(drawer).toHaveClass('v-navigation-drawer--active')
+    await expect.element(drawer).not.toHaveClass('v-navigation-drawer--temporary')
   })
 
   it.todo('should show temporary drawer')
 
-  it('should allow custom widths', () => {
-    const { container } = render(
+  it('should allow custom widths', async () => {
+    render(
       <VLayout>
         <VNavigationDrawer width={ 300 } permanent />
       </VLayout>
     )
-    expect(container.querySelector('.v-navigation-drawer')).toHaveStyle({ width: '300px' })
+    await expect.element(screen.getByCSS('.v-navigation-drawer')).toHaveStyle({ width: '300px' })
   })
 
-  it('should position drawer on the opposite side', () => {
-    const { container } = render(
+  it('should position drawer on the opposite side', async () => {
+    render(
       <VLayout>
         <VNavigationDrawer location="end" permanent />
       </VLayout>
     )
-    // In JSDOM, offset properties like 'right' might not be directly available or always 0.
-    // We might need to check classes or other attributes that indicate position.
-    expect(container.querySelector('.v-navigation-drawer')).toHaveClass('v-navigation-drawer--right')
+    await expect.element(screen.getByCSS('.v-navigation-drawer')).toHaveStyle({ right: '0px' })
   })
 
-  it('should position drawer on the bottom', () => {
-    const { container } = render(
+  it('should position drawer on the bottom', async () => {
+    render(
       <VLayout>
         <VNavigationDrawer location="bottom" permanent />
       </VLayout>
     )
-    expect(container.querySelector('.v-navigation-drawer')).toHaveClass('v-navigation-drawer--bottom')
+    await expect.element(screen.getByCSS('.v-navigation-drawer')).toHaveStyle({ bottom: '0px' })
   })
 
   it.todo('should position drawer scrim correctly')
