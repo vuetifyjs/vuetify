@@ -150,13 +150,16 @@
       &--variant-tube
         .v-slider.v-video__track
           position: absolute
-          top: -4px
+          top: -8px
           left: 0
           right: 0
           margin-inline: 4px
 
           .v-slider-track
-            height: 4px !important
+            height: calc(var(--v-slider-track-size) + 10px)
+
+          .v-slider-track__fill
+            height: var(--v-slider-track-size)
 
       &--split-time
         padding-inline: 20px
