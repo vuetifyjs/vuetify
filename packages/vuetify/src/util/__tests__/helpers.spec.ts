@@ -6,6 +6,7 @@ import {
   deepEqual,
   defer,
   destructComputed,
+  extractNumber,
   getNestedValue,
   getObjectValueByPath,
   getPropertyFromItem,
@@ -370,6 +371,20 @@ describe('helpers', () => {
       vi.advanceTimersByTime(1000)
 
       expect(mockCallback).not.toHaveBeenCalled()
+    })
+  })
+
+  describe('extractNumber', () => {
+    it('should parse valid number out of text', () => {
+      expect(extractNumber(' 2,142,400.50 ', 2)).toBe('2142400.50')
+      expect(extractNumber(' 100 %', 1)).toBe('100')
+      expect(extractNumber(' .4099 ', 2)).toBe('.40')
+      expect(extractNumber('v: 15.00 ', 0)).toBe('15')
+      expect(extractNumber('$ 2,132.00', 2)).toBe('2132.00')
+      expect(extractNumber('$ 32.00', 2)).toBe('32.00')
+      expect(extractNumber(' -6.67 USD', 2)).toBe('-6.67')
+      expect(extractNumber('($9,000.00)', 2)).toBe('9000.00')
+      expect(extractNumber(' 23 567.20 ', 2)).toBe('23567.20')
     })
   })
 })

@@ -204,4 +204,31 @@ describe('VNumberInput', () => {
       expect(model.value).toBe(0)
     })
   })
+
+  describe('accepts digits from pasted text', () => {
+    it.each([
+      { precision: 0, text: '-00123', expected: -123 },
+      { precision: 2, text: '.250', expected: 0.25 },
+      { precision: 3, text: '000.321', expected: 0.321 },
+      { precision: 0, text: '100.99', expected: 100 },
+      { precision: 1, text: '200.99', expected: 200.9 },
+      { precision: 2, text: ' 1,250.32\n', expected: 1250.32 },
+      { precision: 0, text: '1\'024.00 meters', expected: 1024 },
+      { precision: 0, text: '- 1123.', expected: -1123 },
+    ])('should parse numbers correctly', async ({ precision, text, expected }) => {
+      const model = ref(null)
+      const { element } = render(() => (
+        <VNumberInput
+          v-model={ model.value }
+          precision={ precision }
+        />
+      ))
+      const input = element.querySelector('input') as HTMLInputElement
+      input.focus()
+      navigator.clipboard.writeText(text)
+      await userEvent.paste()
+      input.blur()
+      expect(model.value).toBe(expected)
+    })
+  })
 })
