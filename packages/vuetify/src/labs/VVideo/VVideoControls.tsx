@@ -14,7 +14,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
-import { computed } from 'vue'
+import { computed, shallowRef } from 'vue'
 import { formatTime, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -25,8 +25,10 @@ export type VVideoControlsActionsSlot = {
   pause: () => void
   skipTo: (v: number) => void
   volume: Ref<number>
+  volumeIcon: string
   isPlaying: boolean
   progress: number
+  toggleMuted: () => void
   toggleFullscreen: () => void
 }
 
@@ -97,6 +99,7 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
     const isPlaying = useProxiedModel(props, 'playing')
     const progress = useProxiedModel(props, 'progress')
     const volume = useProxiedModel(props, 'volume')
+    const lastVolume = shallowRef(0)
 
     const progressText = computed(() => {
       const secondsElapsed = Math.round(props.progress / 100 * props.duration)
@@ -119,23 +122,35 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
       progress.value = v
     }
 
+    function toggleMuted () {
+      if (volume.value) {
+        lastVolume.value = volume.value
+        volume.value = 0
+      } else {
+        volume.value = lastVolume.value
+      }
+    }
+
     function toggleFullscreen () {
       emit('click:fullscreen')
     }
 
     useRender(() => {
-      const actionIconsDefaults = {
+      const innerDefaults = {
         VIconBtn: {
           size: 28,
           iconSize: props.pills ? 24 : 20,
           variant: 'text',
           color: props.color,
         },
+        VSlider: {
+          thumbSize: 10,
+        },
       }
 
-      const volumeIcon = volume.value > 66 ? 'mdi-volume-high'
-        : volume.value > 33 ? 'mdi-volume-medium'
-        : volume.value > 0 ? 'mdi-volume-low'
+      const volumeIcon = volume.value > 70 ? 'mdi-volume-high'
+        : volume.value > 40 ? 'mdi-volume-medium'
+        : volume.value > 10 ? 'mdi-volume-low'
         : 'mdi-volume-off'
 
       const pillClasses = [
@@ -150,6 +165,8 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
         progress: progress.value,
         skipTo,
         volume,
+        volumeIcon,
+        toggleMuted,
         toggleFullscreen,
       }
 
@@ -170,7 +187,7 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
             backgroundColorStyles.value,
           ]}
         >
-          <VDefaultsProvider defaults={ actionIconsDefaults }>
+          <VDefaultsProvider defaults={ innerDefaults }>
             { slots.default?.(slotProps) ?? (
               <>
                 { props.variant !== 'mini' && (
@@ -246,7 +263,6 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
                             color={ props.color ?? 'surface' }
                             style="height: 100px"
                             class="my-1"
-                            thumb-size="10"
                             modelValue={ volume.value }
                             onUpdate:modelValue={ v => volume.value = v }
                           />
@@ -264,6 +280,10 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
         </div>
       )
     })
+
+    return {
+      toggleMuted,
+    }
   },
 })
 
