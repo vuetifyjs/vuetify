@@ -75,6 +75,7 @@ export const VSlider = genericComponent<VSliderSlots>()({
       position,
       hasLabels,
       readonly,
+      noKeyboard,
     } = useSlider({
       props,
       steps,
@@ -159,6 +160,7 @@ export const VSlider = genericComponent<VSliderSlots>()({
                   ref={ thumbContainerRef }
                   aria-describedby={ messagesId.value }
                   focused={ isFocused.value }
+                  noKeyboard={ noKeyboard.value }
                   min={ min.value }
                   max={ max.value }
                   modelValue={ model.value }

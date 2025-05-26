@@ -21,7 +21,7 @@ import { MaybeTransition } from '@/composables/transition'
 
 // Utilities
 import { onBeforeUnmount, onMounted, ref, shallowRef, watch } from 'vue'
-import { genericComponent, omit, propsFactory, useRender } from '@/util'
+import { createRange, genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -113,32 +113,46 @@ export const VVideo = genericComponent<VVideoSlots>()({
     }
 
     function onKeydown (e: KeyboardEvent) {
-      if (!videoRef.value) return
-      if (e.shiftKey || e.ctrlKey) return
-      switch (e.key) {
-        case 'ArrowRight': {
-          videoRef.value.currentTime = Math.min(videoRef.value.currentTime + 5, duration.value)
+      if (!videoRef.value || e.ctrlKey) return
+      e.preventDefault()
+      switch (true) {
+        case e.key === ' ': {
+          if (!['A', 'BUTTON'].includes((e.target as Element)?.tagName)) {
+            isPlaying.value = !isPlaying.value
+          }
           break
         }
-        case 'ArrowLeft': {
-          videoRef.value.currentTime = Math.max(videoRef.value.currentTime - 5, 0)
+        case e.key === 'ArrowRight': {
+          const step = 10 * (e.shiftKey ? 6 : 1)
+          videoRef.value.currentTime = Math.min(videoRef.value.currentTime + step, duration.value)
+          // TODO: show skip indicator
           break
         }
-        case 'ArrowUp': {
+        case e.key === 'ArrowLeft': {
+          const step = 10 * (e.shiftKey ? 6 : 1)
+          videoRef.value.currentTime = Math.max(videoRef.value.currentTime - step, 0)
+          // TODO: show skip indicator
+          break
+        }
+        case createRange(10).map(String).includes(e.key): {
+          skipTo(Number(e.key) * 10)
+          break
+        }
+        case e.key === 'ArrowUp': {
           volume.value = Math.min(volume.value + 10, 100)
           // TODO: show volume change indicator
           break
         }
-        case 'ArrowDown': {
+        case e.key === 'ArrowDown': {
           volume.value = Math.max(volume.value - 10, 0)
           // TODO: show volume change indicator
           break
         }
-        case 'm': {
+        case e.key === 'm': {
           controlsRef.value?.toggleMuted()
           break
         }
-        case 'f': {
+        case e.key === 'f': {
           toggleFullscreen()
           break
         }
@@ -239,7 +253,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
 
       const controlsProps = {
         ...VVideoControls.filterProps(omit(props, ['variant', 'hideVolume'])),
-        hideVolume: props.hideVolume || attrs.muted !== false,
+        hideVolume: props.hideVolume || (attrs.muted !== false && attrs.muted !== undefined),
         variant: props.controlsVariant,
         playing: isPlaying.value,
         progress: progress.value,
@@ -253,6 +267,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
         'onUpdate:playing': (v: boolean) => isPlaying.value = v,
         'onUpdate:progress': (v: number) => skipTo(v),
         'onUpdate:volume': (v: number) => volume.value = v,
+        onClick: (e: Event) => e.stopPropagation(),
       }
 
       return (

@@ -144,7 +144,8 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
           color: props.color,
         },
         VSlider: {
-          thumbSize: 10,
+          thumbSize: props.variant === 'tube' ? 10 : 16,
+          hideDetails: true,
         },
       }
 
@@ -211,8 +212,7 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
                     }
                     <VSlider
                       modelValue={ props.progress }
-                      hideDetails
-                      thumbSize={ props.variant === 'tube' ? 8 : 12 }
+                      noKeyboard
                       color={ props.trackColor ?? props.color }
                       trackColor={ props.variant === 'tube' ? 'white' : undefined }
                       class="v-video__track"
@@ -241,7 +241,7 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
                     )}
                   </>
                 )}
-                  <div class={ pillClasses }>
+                <div class={ pillClasses }>
                   { !props.hideVolume && (
                     <VIconBtn key="volume-control" icon={ volumeIcon }>
                       <VIcon />
