@@ -20,7 +20,7 @@ declare global {
       centered?: boolean
       class?: string
       circle?: boolean
-      activing: string[]
+      active: Set<string>
       showTimer?: number
       showTimerCommit?: (() => void) | null
     }

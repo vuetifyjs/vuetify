@@ -192,7 +192,7 @@ export const keyValues = Object.freeze({
   tab: 'Tab',
   delete: 'Delete',
   esc: 'Escape',
-  space: ' ', // Space is ' ', see https://developer.mozilla.org/en-US/docs/Web/API/UI_Events/Keyboard_event_key_values#whitespace_keys
+  space: ' ',
   up: 'ArrowUp',
   down: 'ArrowDown',
   left: 'ArrowLeft',

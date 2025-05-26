@@ -150,7 +150,7 @@ function isRippleEnabled (value: any): value is true {
   return typeof value === 'undefined' || !!value
 }
 
-function getActivingKey (e: VuetifyRippleEvent): string {
+function getActiveKey (e: VuetifyRippleEvent): string {
   return e instanceof PointerEvent ? `pointer-${e.pointerId}` : `keyboard-${e.key}`
 }
 
@@ -169,7 +169,7 @@ function rippleShow (e: VuetifyRippleEvent) {
   }
 
   // Display only when the ripple is activated for the first time.
-  if (element._ripple.activing.length === 0) {
+  if (element._ripple.active.size === 0) {
     window.clearTimeout(element._ripple.showTimer)
     if (e instanceof PointerEvent && e.pointerType !== 'mouse') {
       element._ripple.showTimerCommit = () => {
@@ -188,10 +188,8 @@ function rippleShow (e: VuetifyRippleEvent) {
       ripples.show(e, element, value)
     }
   }
-  const activingKey = getActivingKey(e)
-  if (!element._ripple.activing.includes(activingKey)) {
-    element._ripple.activing.push(activingKey)
-  }
+  const activeKey = getActiveKey(e)
+  element._ripple.active.add(activeKey)
 }
 
 function rippleStop (e: VuetifyRippleEvent) {
@@ -212,15 +210,13 @@ function rippleHide (e: Event) {
   }
 
   if (e instanceof FocusEvent) {
-    element._ripple.activing = []
+    element._ripple.active = new Set()
   } else if (e instanceof PointerEvent || e instanceof KeyboardEvent) {
-    const activingKey = getActivingKey(e)
-    if (element._ripple.activing.includes(activingKey)) {
-      element._ripple.activing.splice(element._ripple.activing.indexOf(activingKey), 1)
-    }
+    const activeKey = getActiveKey(e)
+    element._ripple.active.delete(activeKey)
   }
 
-  if (element._ripple.activing.length === 0) {
+  if (element._ripple.active.size === 0) {
     ripples.hide(element)
   }
 }
@@ -273,7 +269,7 @@ function updateRipple (el: HTMLElement, binding: RippleDirectiveBinding, wasEnab
     ripples.hide(el)
   }
 
-  el._ripple = el._ripple ?? { activing: [] }
+  el._ripple = el._ripple ?? { active: new Set() }
   el._ripple.enabled = enabled
   el._ripple.centered = modifiers.center
   el._ripple.circle = modifiers.circle
