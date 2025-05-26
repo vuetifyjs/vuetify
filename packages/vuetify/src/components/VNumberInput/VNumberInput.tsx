@@ -16,7 +16,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, nextTick, onMounted, ref, shallowRef, toRef, watch, watchEffect } from 'vue'
-import { clamp, genericComponent, omit, propsFactory, useRender } from '@/util'
+import { clamp, extractNumber, genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -191,18 +191,22 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
 
     function onBeforeinput (e: InputEvent) {
       if (!e.data) return
-      const existingTxt = (e.target as HTMLInputElement)?.value
-      const selectionStart = (e.target as HTMLInputElement)?.selectionStart
-      const selectionEnd = (e.target as HTMLInputElement)?.selectionEnd
+      const inputElement = e.target as HTMLInputElement
+      const { value: existingTxt, selectionStart, selectionEnd } = inputElement ?? {}
+
       const potentialNewInputVal =
         existingTxt
           ? existingTxt.slice(0, selectionStart as number | undefined) + e.data + existingTxt.slice(selectionEnd as number | undefined)
           : e.data
+
+      const potentialNewNumber = extractNumber(potentialNewInputVal, props.precision)
+
       // Only numbers, "-", "." are allowed
       // AND "-", "." are allowed only once
       // AND "-" is only allowed at the start
       if (!/^-?(\d+(\.\d*)?|(\.\d+)|\d*|\.)$/.test(potentialNewInputVal)) {
         e.preventDefault()
+        inputElement!.value = potentialNewNumber
       }
 
       if (props.precision == null) return
@@ -210,10 +214,12 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       // Ignore decimal digits above precision limit
       if (potentialNewInputVal.split('.')[1]?.length > props.precision) {
         e.preventDefault()
+        inputElement!.value = potentialNewNumber
       }
       // Ignore decimal separator when precision = 0
       if (props.precision === 0 && potentialNewInputVal.includes('.')) {
         e.preventDefault()
+        inputElement!.value = potentialNewNumber
       }
     }
 
