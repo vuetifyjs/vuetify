@@ -1,6 +1,7 @@
 {
   "props": {
     "controlVariant": "The color of the control. It defaults to the value of `variant` prop.",
+    "decimalSeparator": "Expects single character to be used as decimal separator. Defaults to `.` (dot)",
     "hideInput": "Hide the input field.",
     "inset": "Applies an indentation to the dividers used in the stepper buttons.",
     "max": "Specifies the maximum allowable value for the input.",
