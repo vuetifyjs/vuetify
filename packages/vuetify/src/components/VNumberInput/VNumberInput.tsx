@@ -16,7 +16,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, nextTick, onMounted, ref, shallowRef, toRef, watch, watchEffect } from 'vue'
-import { clamp, genericComponent, omit, propsFactory, useRender } from '@/util'
+import { clamp, extractNumber, genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -163,6 +163,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
 
     const incrementSlotProps = {
       props: {
+        style: { touchAction: 'none' },
         onClick: onControlClick,
         onPointerup: onControlMouseup,
         onPointerdown: onUpControlMousedown,
@@ -170,6 +171,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
     }
     const decrementSlotProps = {
       props: {
+        style: { touchAction: 'none' },
         onClick: onControlClick,
         onPointerup: onControlMouseup,
         onPointerdown: onDownControlMousedown,
@@ -208,18 +210,22 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
 
     function onBeforeinput (e: InputEvent) {
       if (!e.data) return
-      const existingTxt = (e.target as HTMLInputElement)?.value
-      const selectionStart = (e.target as HTMLInputElement)?.selectionStart
-      const selectionEnd = (e.target as HTMLInputElement)?.selectionEnd
+      const inputElement = e.target as HTMLInputElement
+      const { value: existingTxt, selectionStart, selectionEnd } = inputElement ?? {}
+
       const potentialNewInputVal =
         existingTxt
           ? existingTxt.slice(0, selectionStart as number | undefined) + e.data + existingTxt.slice(selectionEnd as number | undefined)
           : e.data
+
+      const potentialNewNumber = extractNumber(potentialNewInputVal, props.precision)
+
       // Only numbers, "-", "." are allowed
       // AND "-", "." are allowed only once
       // AND "-" is only allowed at the start
       if (!/^-?(\d+(\.\d*)?|(\.\d+)|\d*|\.)$/.test(potentialNewInputVal)) {
         e.preventDefault()
+        inputElement!.value = potentialNewNumber
       }
 
       if (props.precision == null) return
@@ -227,10 +233,12 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       // Ignore decimal digits above precision limit
       if (potentialNewInputVal.split('.')[1]?.length > props.precision) {
         e.preventDefault()
+        inputElement!.value = potentialNewNumber
       }
       // Ignore decimal separator when precision = 0
       if (props.precision === 0 && potentialNewInputVal.includes('.')) {
         e.preventDefault()
+        inputElement!.value = potentialNewNumber
       }
     }
 
@@ -326,17 +334,18 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       function incrementControlNode () {
         return !slots.increment ? (
           <VBtn
+            aria-hidden="true"
+            data-testid="increment"
             disabled={ !canIncrease.value }
             flat
-            key="increment-btn"
             height={ controlNodeDefaultHeight.value }
-            data-testid="increment"
-            aria-hidden="true"
             icon={ incrementIcon.value }
+            key="increment-btn"
             onClick={ onControlClick }
-            onPointerup={ onControlMouseup }
             onPointerdown={ onUpControlMousedown }
+            onPointerup={ onControlMouseup }
             size={ controlNodeSize.value }
+            style="touch-action: none"
             tabindex="-1"
           />
         ) : (
@@ -360,18 +369,19 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       function decrementControlNode () {
         return !slots.decrement ? (
           <VBtn
+            aria-hidden="true"
+            data-testid="decrement"
             disabled={ !canDecrease.value }
             flat
-            key="decrement-btn"
             height={ controlNodeDefaultHeight.value }
-            data-testid="decrement"
-            aria-hidden="true"
             icon={ decrementIcon.value }
-            size={ controlNodeSize.value }
-            tabindex="-1"
+            key="decrement-btn"
             onClick={ onControlClick }
-            onPointerup={ onControlMouseup }
             onPointerdown={ onDownControlMousedown }
+            onPointerup={ onControlMouseup }
+            size={ controlNodeSize.value }
+            style="touch-action: none"
+            tabindex="-1"
           />
         ) : (
           <VDefaultsProvider

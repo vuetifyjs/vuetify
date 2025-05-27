@@ -40,6 +40,10 @@ const componentsInfo: Record<string, { from: string }> = {
 type Truthy<T> = Exclude<T, null | undefined | 0 | '' | false>;
 const BooleanFilter = <T>(x: T): x is Truthy<T> => Boolean(x)
 
+function clamp (v: number, min: number, max: number) {
+  return Math.max(min, Math.floor(Math.min(max, v)))
+}
+
 const run = async () => {
   const argv = await yar.argv
 
@@ -49,7 +53,9 @@ const run = async () => {
   const pool = new Piscina({
     filename: path.resolve('./src/worker.ts'),
     niceIncrement: 10,
-    maxThreads: inspector.url() ? 1 : Math.max(1, Math.floor(Math.min(os.cpus().length / 2, os.freemem() / (1.1 * 1024 ** 3)))),
+    maxThreads: inspector.url()
+      ? 1
+      : clamp(os.freemem() / (1.1 * 1024 ** 3), 1, os.cpus().length / 2),
   })
 
   const template = await fs.readFile('./templates/component.d.ts', 'utf-8')

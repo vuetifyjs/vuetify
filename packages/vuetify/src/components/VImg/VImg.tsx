@@ -11,7 +11,7 @@ import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 
 // Directives
-import intersect from '@/directives/intersect'
+import vIntersect from '@/directives/intersect'
 
 // Utilities
 import {
@@ -103,7 +103,7 @@ export const makeVImgProps = propsFactory({
 export const VImg = genericComponent<VImgSlots>()({
   name: 'VImg',
 
-  directives: { intersect },
+  directives: { vIntersect },
 
   props: makeVImgProps(),
 
