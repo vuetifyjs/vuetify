@@ -7,6 +7,7 @@ import { VAvatar } from '@/components/VAvatar'
 import { VCheckboxBtn } from '@/components/VCheckbox'
 import { VChip } from '@/components/VChip'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
+import { VDialog } from '@/components/VDialog'
 import { VDivider } from '@/components/VDivider'
 import { VIcon } from '@/components/VIcon'
 import { VList, VListItem, VListSubheader } from '@/components/VList'
@@ -16,6 +17,7 @@ import { VVirtualScroll } from '@/components/VVirtualScroll'
 
 // Composables
 import { useScrolling } from './useScrolling'
+import { makeDisplayProps, useDisplay } from '@/composables/display'
 import { useForm } from '@/composables/form'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { IconValue } from '@/composables/icons'
@@ -101,6 +103,7 @@ export const makeVSelectProps = propsFactory({
     role: 'combobox',
   }), ['validationValue', 'dirty', 'appendInnerIcon']),
   ...makeTransitionProps({ transition: { component: VDialogTransition as Component } }),
+  ...makeDisplayProps({ mobile: null }),
 }, 'VSelect')
 
 type ItemType<T> = T extends readonly (infer U)[] ? U : never
@@ -146,7 +149,7 @@ export const VSelect = genericComponent<new <
   setup (props, { slots }) {
     const { t } = useLocale()
     const vTextFieldRef = ref<VTextField>()
-    const vMenuRef = ref<VMenu>()
+    const vMenuRef = ref<VMenu | VDialog>()
     const vVirtualScrollRef = ref<VVirtualScroll>()
     const { items, transformIn, transformOut } = useItems(props)
     const model = useProxiedModel(
@@ -165,6 +168,7 @@ export const VSelect = genericComponent<new <
         : model.value.length
     })
     const form = useForm(props)
+    const { mobile } = useDisplay(props)
     const selectedValues = computed(() => model.value.map(selection => selection.value))
     const isFocused = shallowRef(false)
 
@@ -187,8 +191,15 @@ export const VSelect = genericComponent<new <
     const menu = computed({
       get: () => _menu.value,
       set: v => {
-        if (_menu.value && !v && vMenuRef.value?.ΨopenChildren.size) return
         if (v && menuDisabled.value) return
+        if (
+          !v &&
+          _menu.value &&
+          vMenuRef.value &&
+          ('ΨopenChildren' in vMenuRef.value) &&
+          vMenuRef.value.ΨopenChildren.size
+        ) return
+
         _menu.value = v
       },
     })
@@ -200,7 +211,7 @@ export const VSelect = genericComponent<new <
         ...props.menuProps,
         activatorProps: {
           ...(props.menuProps?.activatorProps || {}),
-          'aria-haspopup': 'listbox', // Set aria-haspopup to 'listbox'
+          'aria-haspopup': 'listbox',
         },
       }
     })
@@ -323,7 +334,7 @@ export const VSelect = genericComponent<new <
       }
     }
     function onBlur (e: FocusEvent) {
-      if (!listRef.value?.$el.contains(e.relatedTarget as HTMLElement)) {
+      if (!vMenuRef.value?.contentEl?.contains(e.relatedTarget as HTMLElement)) {
         menu.value = false
       }
     }
@@ -388,6 +399,8 @@ export const VSelect = genericComponent<new <
         !props.persistentPlaceholder
       ) ? undefined : props.placeholder
 
+      const MenuComponent = mobile.value ? VDialog : VMenu
+
       return (
         <VTextField
           ref={ vTextFieldRef }
@@ -423,7 +436,7 @@ export const VSelect = genericComponent<new <
             ...slots,
             default: () => (
               <>
-                <VMenu
+                <MenuComponent
                   ref={ vMenuRef }
                   v-model={ menu.value }
                   activator="parent"
@@ -515,7 +528,7 @@ export const VSelect = genericComponent<new <
                       { slots['append-item']?.() }
                     </VList>
                   )}
-                </VMenu>
+                </MenuComponent>
 
                 { model.value.map((item, index) => {
                   function onChipClose (e: Event) {
