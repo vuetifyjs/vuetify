@@ -779,32 +779,24 @@ export function isPrimitive (value: unknown): value is Primitive {
   return typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean' || typeof value === 'bigint'
 }
 
-export function escapeForRegex (sign: string) {
-  return '\\^$*+?.()|{}[]'.includes(sign)
-    ? `\\${sign}`
-    : sign
-}
-
-export function extractNumber (text: string, decimalDigitsLimit: number | null, decimalSeparator: string) {
-  const onlyValidCharacters = new RegExp(`[\\d\\-${escapeForRegex(decimalSeparator)}]`)
+export function extractNumber (text: string, decimalDigitsLimit: number | null) {
   const cleanText = text.split('')
-    .filter(x => onlyValidCharacters.test(x))
+    .filter(x => /[\d\-.]/.test(x))
     .filter((x, i, all) => (i === 0 && /[-]/.test(x)) || // sign allowed at the start
-        (x === decimalSeparator && i === all.indexOf(x)) || // decimal separator allowed only once
+        (x === '.' && i === all.indexOf('.')) || // decimal separator allowed only once
         /\d/.test(x))
     .join('')
 
   if (decimalDigitsLimit === 0) {
-    return cleanText.split(decimalSeparator)[0]
+    return cleanText.split('.')[0]
   }
 
-  const decimalPart = new RegExp(`${escapeForRegex(decimalSeparator)}\\d`)
-  if (decimalDigitsLimit !== null && decimalPart.test(cleanText)) {
-    const parts = cleanText.split(decimalSeparator)
+  if (decimalDigitsLimit !== null && /\.\d/.test(cleanText)) {
+    const parts = cleanText.split('.')
     return [
       parts[0],
       parts[1].substring(0, decimalDigitsLimit),
-    ].join(decimalSeparator)
+    ].join('.')
   }
 
   return cleanText
