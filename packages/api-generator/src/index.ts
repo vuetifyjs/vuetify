@@ -4,7 +4,7 @@ import { components } from 'vuetify/dist/vuetify-labs.js'
 import importMap from 'vuetify/dist/json/importMap.json' with { type: 'json' }
 import importMapLabs from 'vuetify/dist/json/importMap-labs.json' with { type: 'json' }
 import { kebabCase } from './helpers/text'
-import type { ComponentData, DirectiveData } from './types'
+import type { ComponentData, ComposableData, DirectiveData } from './types'
 import { generateComposableDataFromTypes, generateDirectiveDataFromTypes } from './types'
 import Piscina from 'piscina'
 import { addDescriptions, addDirectiveDescriptions, addPropData, reportMissingDescriptions, sortByKey, stringifyProps } from './utils'
@@ -107,8 +107,9 @@ const run = async () => {
   await fs.writeFile(path.resolve(outPath, `globals.json`), JSON.stringify(globalSass, null, 2))
 
   // Composables
+  let composables: ComposableData[] = []
   if (!argv.skipComposables) {
-    const composables = await Promise.all((await generateComposableDataFromTypes()).map(async composable => {
+    composables = await Promise.all((await generateComposableDataFromTypes()).map(async composable => {
       console.log(blue, composable.displayName, reset)
       await addDescriptions(composable.fileName, composable, locales)
       return composable
@@ -142,7 +143,7 @@ const run = async () => {
 
   reportMissingDescriptions()
   createVeturApi(componentData)
-  createWebTypesApi(componentData, directives)
+  createWebTypesApi(componentData, directives, composables)
   await fs.mkdir(path.resolve('../vuetify/dist/json'), { recursive: true })
   await fs.copyFile(path.resolve('./dist/tags.json'), path.resolve('../vuetify/dist/json/tags.json'))
   await fs.copyFile(path.resolve('./dist/attributes.json'), path.resolve('../vuetify/dist/json/attributes.json'))

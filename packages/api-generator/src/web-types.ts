@@ -1,9 +1,13 @@
 import fs from 'node:fs'
 import { capitalize } from './helpers/text'
-import type { ComponentData, DirectiveData } from './types'
+import type { ComponentData, ComposableData, DirectiveData } from './types'
 import pkg from '../package.json' with { type: 'json' }
 
-export const createWebTypesApi = (componentData: ComponentData[], directiveData: DirectiveData[]) => {
+export const createWebTypesApi = (
+  componentData: ComponentData[],
+  directiveData: DirectiveData[],
+  composableData: ComposableData[] = []
+) => {
   const getDocUrl = (cmp: string, heading?: string) =>
     `https://vuetifyjs.com/api/${cmp}` + (heading ? `#${heading}` : '')
 
@@ -117,8 +121,34 @@ export const createWebTypesApi = (componentData: ComponentData[], directiveData:
     }
   }
 
+  const createComposable = (composable: ComposableData) => {
+    const createComposableProperty = ([name, prop]: [string, any]) => {
+      return {
+        name,
+        description: prop.description?.en || '',
+        type: prop.formatted,
+        'doc-url': getDocUrl(composable.pathName, name),
+      }
+    }
+
+    return {
+      name: composable.displayName,
+      description: '',
+      'doc-url': getDocUrl(composable.pathName),
+      source: {
+        module: './src/composables/index.ts',
+        symbol: composable.displayName,
+      },
+      'return-type': {
+        kind: 'object',
+        properties: Object.entries(composable.exposed ?? {}).map(createComposableProperty),
+      },
+    }
+  }
+
   const tags = componentData.map(createTag)
   const attributes = directiveData.map(createAttribute)
+  const composables = composableData.map(createComposable)
 
   const webTypes = {
     $schema: 'http://json.schemastore.org/web-types',
@@ -131,6 +161,11 @@ export const createWebTypesApi = (componentData: ComponentData[], directiveData:
         'description-markup': 'markdown',
         tags,
         attributes,
+      },
+      js: {
+        'types-syntax': 'typescript',
+        'description-markup': 'markdown',
+        'global-functions': composables,
       },
     },
   }
