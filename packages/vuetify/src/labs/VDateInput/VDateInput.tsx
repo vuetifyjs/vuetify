@@ -5,7 +5,7 @@ import { VMenu } from '@/components/VMenu/VMenu'
 import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextField'
 
 // Composables
-import { createDateRange, useDate } from '@/composables/date/date'
+import { useDate } from '@/composables/date'
 import { makeDateFormatProps, useDateFormat } from '@/composables/dateFormat'
 import { makeDisplayProps, useDisplay } from '@/composables/display'
 import { makeFocusProps, useFocus } from '@/composables/focus'
@@ -216,7 +216,7 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
         if (parts.every(isValid)) {
           if (props.multiple === 'range') {
             const [start, stop] = parts.map(parseDate).toSorted((a, b) => adapter.isAfter(a, b) ? 1 : -1)
-            model.value = createDateRange({ start, stop, adapter })
+            model.value = adapter.createDateRange(start, stop)
           } else {
             model.value = parts.map(parseDate)
           }

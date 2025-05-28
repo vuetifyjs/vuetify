@@ -6,7 +6,7 @@ import { VBtn } from '@/components/VBtn'
 
 // Composables
 import { makeCalendarProps, useCalendar } from '@/composables/calendar'
-import { createDateRange, useDate } from '@/composables/date/date'
+import { useDate } from '@/composables/date/date'
 import { MaybeTransition } from '@/composables/transition'
 
 // Utilities
@@ -111,7 +111,7 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
           rangeStop.value = adapter.endOfDay(_value)
         }
 
-        model.value = createDateRange({ start: rangeStart.value, stop: rangeStop.value, adapter })
+        model.value = adapter.createDateRange(rangeStart.value, rangeStop.value)
       } else {
         rangeStart.value = value
         rangeStop.value = undefined
