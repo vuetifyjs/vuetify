@@ -1,0 +1,9 @@
+@use '../../styles/settings';
+
+// Defaults
+$video-padding: 0px !default;
+$video-rounded-border-radius: settings.$border-radius-root !default;
+$video-controls-floating-margin: 12px !default;
+$video-density: ('default': 0, 'comfortable': -1, 'compact': -2) !default;
+$video-controls-height: 58px !default;
+$video-controls-gap: 16px !default;
