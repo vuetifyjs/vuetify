@@ -1,6 +1,6 @@
 <template>
   <v-container class="bg-surface-variant">
-    <v-row>
+    <v-row density="compact">
       <v-col cols="12">
         <v-sheet class="pa-2">
           v-col-12
