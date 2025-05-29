@@ -5,7 +5,6 @@
     >
       <v-row
         align="start"
-
         style="height: 150px;"
       >
         <v-col

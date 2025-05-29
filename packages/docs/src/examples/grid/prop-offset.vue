@@ -1,9 +1,6 @@
 <template>
   <v-container class="bg-surface-variant">
-    <v-row
-      class="mb-6"
-
-    >
+    <v-row class="mb-6">
       <v-col cols="4">
         <v-sheet class="pa-2">
           v-col-4
@@ -18,10 +15,7 @@
         </v-sheet>
       </v-col>
     </v-row>
-    <v-row
-      class="mb-6"
-
-    >
+    <v-row class="mb-6">
       <v-col
         cols="3"
         offset="3"
