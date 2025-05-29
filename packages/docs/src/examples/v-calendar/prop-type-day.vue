@@ -2,7 +2,10 @@
   <v-row>
     <v-col>
       <v-sheet>
-        <v-calendar color="primary"></v-calendar>
+        <v-calendar
+          color="primary"
+          view-mode="day"
+        ></v-calendar>
       </v-sheet>
     </v-col>
   </v-row>

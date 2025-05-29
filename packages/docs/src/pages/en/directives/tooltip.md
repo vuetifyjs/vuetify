@@ -19,13 +19,13 @@ The `v-tooltip` directive is a shorthand way of adding tooltips to elements in y
 
 <PageFeatures />
 
-<PromotedEntry />
-
 ## Usage
 
 The `v-tooltip` directive makes it easy to add a tooltip to any element in your application. It is a wrapper around the `v-tooltip` component.
 
 <ExamplesUsage name="v-tooltip-directive" />
+
+<PromotedEntry />
 
 ## API
 

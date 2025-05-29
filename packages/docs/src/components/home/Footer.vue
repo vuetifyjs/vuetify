@@ -11,7 +11,6 @@
             :src="`https://cdn.vuetifyjs.com/docs/images/logos/vuetify-logo-${theme.current.value.dark ? 'dark' : 'light'}-slim.svg`"
             class="mx-auto"
             height="64"
-            contain
           />
         </v-col>
 

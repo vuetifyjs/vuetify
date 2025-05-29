@@ -1,4 +1,0 @@
-.git/**/*
-node_modules/**/*
-/tmp/**/*
-.github/workflows/**/*

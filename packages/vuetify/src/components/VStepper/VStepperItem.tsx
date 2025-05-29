@@ -11,7 +11,7 @@ import { IconValue } from '@/composables/icons'
 import { genOverlays } from '@/composables/variant'
 
 // Directives
-import { Ripple } from '@/directives/ripple'
+import vRipple from '@/directives/ripple'
 
 // Utilities
 import { computed } from 'vue'
@@ -24,20 +24,20 @@ import type { RippleDirectiveBinding } from '@/directives/ripple'
 
 export type StepperItem = string | Record<string, any>
 
-export type StepperItemSlot = {
+export type StepperItemSlot<T = any> = {
   canEdit: boolean
   hasError: boolean
   hasCompleted: boolean
   title?: string | number
   subtitle?: string | number
-  step: any
+  step: T
 }
 
-export type VStepperItemSlots = {
-  default: StepperItemSlot
-  icon: StepperItemSlot
-  title: StepperItemSlot
-  subtitle: StepperItemSlot
+export type VStepperItemSlots<T = any> = {
+  default: StepperItemSlot<T>
+  icon: StepperItemSlot<T>
+  title: StepperItemSlot<T>
+  subtitle: StepperItemSlot<T>
 }
 
 export type ValidationRule = () => string | boolean
@@ -80,7 +80,7 @@ export const makeVStepperItemProps = propsFactory({
 export const VStepperItem = genericComponent<VStepperItemSlots>()({
   name: 'VStepperItem',
 
-  directives: { Ripple },
+  directives: { vRipple },
 
   props: makeVStepperItemProps(),
 

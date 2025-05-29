@@ -7,17 +7,12 @@
     variant="solo"
     chips
     clearable
+    closable-chips
     multiple
   >
-    <template v-slot:selection="{ attrs, item, select, selected }">
-      <v-chip
-        v-bind="attrs"
-        :model-value="selected"
-        closable
-        @click="select"
-        @click:close="remove(item)"
-      >
-        <strong>{{ item }}</strong>&nbsp;
+    <template v-slot:chip="{ props, item }">
+      <v-chip v-bind="props">
+        <strong>{{ item.raw }}</strong>&nbsp;
         <span>(interest)</span>
       </v-chip>
     </template>
@@ -30,10 +25,6 @@
   const items = ['Streaming', 'Eating']
 
   const chips = ref(['Programming', 'Playing video games', 'Watching movies', 'Sleeping'])
-
-  function remove (item) {
-    chips.value.splice(chips.value.indexOf(item), 1)
-  }
 </script>
 
 <script>
@@ -43,12 +34,6 @@
         chips: ['Programming', 'Playing video games', 'Watching movies', 'Sleeping'],
         items: ['Streaming', 'Eating'],
       }
-    },
-
-    methods: {
-      remove (item) {
-        this.chips.splice(this.chips.indexOf(item), 1)
-      },
     },
   }
 </script>

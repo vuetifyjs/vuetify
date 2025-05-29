@@ -1,9 +1,12 @@
 import { VBtn } from '../VBtn'
 
 // Utilities
-import { generate, gridOn, render } from '@test'
-import { userEvent } from '@vitest/browser/context'
+import { generate, gridOn, render, screen, userEvent } from '@test'
+import { ref } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
+
+// Types
+import type { Variant } from '@/composables/variant'
 
 // TODO: generate these from types
 const colors = ['success', 'info', 'warning', 'error', 'invalid']
@@ -48,7 +51,7 @@ const stories = {
 describe('VBtn', () => {
   describe('color', () => {
     it('supports default color props', async () => {
-      const { container } = render(() => (
+      render(() => (
         <>
           { colors.map(color => (
             <VBtn color={ color } class="text-capitalize">
@@ -58,7 +61,7 @@ describe('VBtn', () => {
         </>
       ))
 
-      const buttons = container.querySelectorAll('button')
+      const buttons = screen.getAllByCSS('button')
       expect(buttons).toHaveLength(colors.length)
       buttons.forEach((button, idx) => {
         expect(button).toHaveTextContent(colors[idx])
@@ -68,16 +71,16 @@ describe('VBtn', () => {
 
   describe('tag', () => {
     it('renders the proper tag instead of a button', async () => {
-      const { container } = render(<VBtn tag="custom-tag">Click me</VBtn>)
-      const customTag = container.querySelector('custom-tag')
+      render(<VBtn tag="custom-tag">Click me</VBtn>)
+      const customTag = screen.getByCSS('custom-tag')
       expect(customTag).toHaveTextContent('Click me')
     })
   })
 
   describe('elevation', () => {
     it('should have the correct elevation', async () => {
-      const { container } = render(<VBtn elevation={ 24 } />)
-      const button = container.querySelector('button')
+      render(<VBtn elevation={ 24 } />)
+      const button = screen.getByCSS('button')
       expect(button).toHaveClass('elevation-24')
     })
   })
@@ -86,21 +89,21 @@ describe('VBtn', () => {
     it('emits native click events', async () => {
       const click = vi.fn()
 
-      const { container, rerender } = render(() => (
+      const { rerender } = render(() => (
         <VBtn onClick={ click }>Click me</VBtn>
       ))
 
-      await userEvent.click(container.querySelector('button')!)
+      await userEvent.click(screen.getByCSS('button'))
       expect(click).toHaveBeenCalledTimes(1)
 
       await rerender({ to: '#my-anchor' })
 
-      await userEvent.click(container.querySelector('button')!)
+      await userEvent.click(screen.getByCSS('button'))
       expect(click).toHaveBeenCalledTimes(2)
     })
 
     // Pending test, is "toggle" even going to be emitted anymore?
-    it.skip('emits toggle when used within a button group', () => {
+    it.todo('emits toggle when used within a button group', () => {
       // const register = jest.fn()
       // const unregister = jest.fn()
       // const toggle = jest.fn()
@@ -118,7 +121,7 @@ describe('VBtn', () => {
 
   // These tests were copied over from the previous Jest tests,
   // but they are breaking because the features have not been implemented
-  describe.skip('activeClass', () => {
+  describe.todo('activeClass', () => {
     it('should use custom active-class', async () => {
       const { wrapper } = render(<VBtn active activeClass="my-active-class">Active Class</VBtn>)
       expect(wrapper.element).toHaveClass('my-active-class')
@@ -126,10 +129,10 @@ describe('VBtn', () => {
   })
 
   describe('href', () => {
-    it.skip('should render an <a> tag when using href prop', async () => {
+    it.todo('should render an <a> tag when using href prop', async () => {
       const anchor = { href: '#anchor', hash: 'anchor' }
-      const { container } = render(<VBtn href={ anchor.href }>Click me</VBtn>)
-      const link = container.querySelector('a')!
+      render(<VBtn href={ anchor.href }>Click me</VBtn>)
+      const link = screen.getByCSS('a')
 
       await userEvent.click(link)
       expect(link).toHaveTextContent('Click me')
@@ -202,36 +205,37 @@ describe('VBtn', () => {
 
   describe('Reactivity', () => {
     it('disabled', async () => {
+      const disabled = ref(true)
       const { wrapper } = render(() => (
-        <VBtn color="success" disabled></VBtn>
+        <VBtn color="success" disabled={ disabled.value }></VBtn>
       ))
       expect(wrapper.element).toHaveClass('v-btn--disabled')
 
-      await wrapper.setProps({ disabled: false })
-      expect.poll(() => wrapper.element as HTMLElement).not.toHaveClass('v-btn--disabled')
+      disabled.value = false
+      await expect.element(wrapper.element).not.toHaveClass('v-btn--disabled')
     })
 
-    it.skip('activeClass', async () => {
-      const { container, wrapper } = render(() => (
+    it.todo('activeClass', async () => {
+      const { rerender } = render(() => (
         <VBtn activeClass="my-active-class">Active Class</VBtn>
       ))
 
-      await wrapper.setProps({ activeClass: 'different-class' })
+      await rerender({ activeClass: 'different-class' })
 
-      const activeClassElement = container.querySelector('.different-class')
-      expect(activeClassElement).not.toBeInTheDocument()
+      const activeClassElement = screen.queryByCSS('.different-class')
+      expect(activeClassElement).not.toBeVisible()
     })
 
-    it('plain', async () => {
+    it('variant', async () => {
+      const variant = ref<Variant>('plain')
       const { wrapper } = render(() => (
-        <VBtn variant="plain">Plain</VBtn>
+        <VBtn variant={ variant.value }>Plain</VBtn>
       ))
 
       expect(wrapper.element).toHaveClass('v-btn--variant-plain')
 
-      await wrapper.setProps({ variant: 'default' })
-
-      expect.poll(() => wrapper.element as HTMLElement).not.toHaveClass('v-btn--variant-plain')
+      variant.value = 'elevated'
+      await expect.element(wrapper.element).not.toHaveClass('v-btn--variant-plain')
     })
   })
 

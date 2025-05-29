@@ -11,8 +11,6 @@
 
       <v-toolbar-title>Photo Info</v-toolbar-title>
 
-      <v-spacer></v-spacer>
-
       <v-btn
         icon="mdi-magnify"
         @click="searchField.focus()"

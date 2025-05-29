@@ -15,7 +15,7 @@ Vuetify 3 is a next generation framework that takes advantage of the latest web 
 
 <PageFeatures />
 
-<VoPromotionsCardVuetify />
+<PromotedEntry />
 
 ## Browsers
 

@@ -8,7 +8,7 @@ import { aliases } from '../src/iconsets/mdi-svg'
 import type { RenderOptions, RenderResult } from '@testing-library/vue'
 import type { VuetifyOptions } from '../src/framework'
 
-export { userEvent } from '@vitest/browser/context'
+export { userEvent, page, commands } from '@vitest/browser/context'
 export { screen } from '@testing-library/vue'
 export * from './templates'
 

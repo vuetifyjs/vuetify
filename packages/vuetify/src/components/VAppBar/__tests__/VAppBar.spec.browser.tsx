@@ -16,10 +16,10 @@ describe('VAppBar', () => {
       </VLayout>
     ))
 
-    expect.element(screen.getByCSS('.v-app-bar')).toHaveStyle({ height: '64px' })
+    await expect.element(screen.getByCSS('.v-app-bar')).toHaveStyle({ height: '64px' })
 
     height.value = 128
-    expect.element(screen.getByCSS('.v-app-bar')).toHaveStyle({ height: '128px' })
+    await expect.element(screen.getByCSS('.v-app-bar')).toHaveStyle({ height: '128px' })
   })
 
   it('supports density', async () => {
@@ -30,21 +30,21 @@ describe('VAppBar', () => {
       </VLayout>
     ))
 
-    expect.element(screen.getByCSS('.v-app-bar')).toHaveStyle({ height: '64px' })
+    await expect.element(screen.getByCSS('.v-app-bar')).toHaveStyle({ height: '64px' })
 
     density.value = 'prominent'
-    expect.element(screen.getByCSS('.v-app-bar')).toHaveStyle({ height: '128px' })
+    await expect.element(screen.getByCSS('.v-app-bar')).toHaveStyle({ height: '128px' })
 
     density.value = 'comfortable'
-    expect.element(screen.getByCSS('.v-app-bar')).toHaveStyle({ height: '56px' })
+    await expect.element(screen.getByCSS('.v-app-bar')).toHaveStyle({ height: '56px' })
 
     density.value = 'compact'
-    expect.element(screen.getByCSS('.v-app-bar')).toHaveStyle({ height: '48px' })
+    await expect.element(screen.getByCSS('.v-app-bar')).toHaveStyle({ height: '48px' })
   })
 
   describe('scroll behavior', () => {
     it('hides on scroll', async () => {
-      const scrollBehavior = ref()
+      const scrollBehavior = ref('hide')
       render(() => (
         <VLayout>
           <VAppBar scrollBehavior={ scrollBehavior.value } />
@@ -52,14 +52,28 @@ describe('VAppBar', () => {
         </VLayout>
       ))
 
-      expect.element(screen.getByCSS('.v-app-bar')).toBeVisible()
+      await expect.element(screen.getByCSS('.v-app-bar')).toBeOnScreen()
 
       await scroll({ top: 500 })
+      await expect.element(screen.getByCSS('.v-app-bar')).not.toBeOnScreen()
+
       await scroll({ top: 250 })
-      expect.element(screen.getByCSS('.v-app-bar')).toBeVisible()
+      await expect.element(screen.getByCSS('.v-app-bar')).toBeOnScreen()
 
       await scroll({ top: 0 })
-      expect.element(screen.getByCSS('.v-app-bar')).toBeVisible()
+      await expect.element(screen.getByCSS('.v-app-bar')).toBeOnScreen()
+
+      scrollBehavior.value = 'hide inverted'
+      await expect.element(screen.getByCSS('.v-app-bar')).not.toBeOnScreen()
+
+      await scroll({ top: 500 })
+      await expect.element(screen.getByCSS('.v-app-bar')).toBeOnScreen()
+
+      await scroll({ top: 250 })
+      await expect.element(screen.getByCSS('.v-app-bar')).not.toBeOnScreen()
+
+      await scroll({ top: 0 })
+      await expect.element(screen.getByCSS('.v-app-bar')).not.toBeOnScreen()
     })
 
     it('should hide correctly when scroll to the bottom', async () => {
@@ -74,10 +88,10 @@ describe('VAppBar', () => {
         </VLayout>
       ))
 
-      expect.element(screen.getByCSS('.v-app-bar')).toBeVisible()
+      await expect.element(screen.getByCSS('.v-app-bar')).toBeOnScreen()
 
       await scroll({ top: 1000 })
-      expect.element(screen.getByCSS('.v-app-bar')).not.toBeVisible()
+      await expect.element(screen.getByCSS('.v-app-bar')).not.toBeOnScreen()
     })
 
     it('collapses', async () => {
@@ -88,11 +102,11 @@ describe('VAppBar', () => {
         </VLayout>
       ))
 
-      expect.element(screen.getByCSS('.v-app-bar')).toBeVisible()
+      await expect.element(screen.getByCSS('.v-app-bar')).toBeOnScreen()
 
       await scroll({ top: 500 })
       await scroll({ top: 0 })
-      expect.element(screen.getByCSS('.v-app-bar')).not.toHaveClass('v-toolbar--collapse')
+      await expect.element(screen.getByCSS('.v-app-bar')).not.toHaveClass('v-toolbar--collapse')
     })
   })
 })

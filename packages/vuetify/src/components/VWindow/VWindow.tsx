@@ -12,10 +12,10 @@ import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Directives
-import { Touch } from '@/directives/touch'
+import vTouch from '@/directives/touch'
 
 // Utilities
-import { computed, provide, ref, shallowRef, watch } from 'vue'
+import { computed, provide, ref, shallowRef, toRef, watch } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -100,9 +100,7 @@ export const VWindow = genericComponent<new <T>(
 ) => GenericProps<typeof props, typeof slots>>()({
   name: 'VWindow',
 
-  directives: {
-    Touch,
-  },
+  directives: { vTouch },
 
   props: makeVWindowProps(),
 
@@ -157,8 +155,8 @@ export const VWindow = genericComponent<new <T>(
       rootRef,
     })
 
-    const canMoveBack = computed(() => props.continuous || activeIndex.value !== 0)
-    const canMoveForward = computed(() => props.continuous || activeIndex.value !== group.items.value.length - 1)
+    const canMoveBack = toRef(() => props.continuous || activeIndex.value !== 0)
+    const canMoveForward = toRef(() => props.continuous || activeIndex.value !== group.items.value.length - 1)
 
     function prev () {
       canMoveBack.value && group.prev()

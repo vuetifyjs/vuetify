@@ -17,7 +17,7 @@
             color="grey-darken-2"
             size="small"
             variant="text"
-            fab
+            icon
             @click="prev"
           >
             <v-icon size="small">
@@ -28,7 +28,7 @@
             color="grey-darken-2"
             size="small"
             variant="text"
-            fab
+            icon
             @click="next"
           >
             <v-icon size="small">
@@ -38,14 +38,12 @@
           <v-toolbar-title v-if="calendar">
             {{ calendar.title }}
           </v-toolbar-title>
-          <v-spacer></v-spacer>
           <v-menu location="bottom end">
-            <template v-slot:activator="{ on, attrs }">
+            <template v-slot:activator="{ props }">
               <v-btn
                 color="grey-darken-2"
                 variant="outlined"
-                v-bind="attrs"
-                v-on="on"
+                v-bind="props"
               >
                 <span>{{ typeToLabel[type] }}</span>
                 <v-icon end>
@@ -87,7 +85,7 @@
           v-model="selectedOpen"
           :activator="selectedElement"
           :close-on-content-click="false"
-          offset-x
+          location="end"
         >
           <v-card
             color="grey-lighten-4"
@@ -102,7 +100,6 @@
                 <v-icon>mdi-pencil</v-icon>
               </v-btn>
               <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
-              <v-spacer></v-spacer>
               <v-btn icon>
                 <v-icon>mdi-heart</v-icon>
               </v-btn>

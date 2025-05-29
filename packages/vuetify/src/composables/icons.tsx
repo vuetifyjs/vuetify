@@ -2,15 +2,12 @@
 import { aliases, mdi } from '@/iconsets/mdi'
 
 // Utilities
-import { computed, inject, unref } from 'vue'
+import { computed, inject, toValue } from 'vue'
 import { consoleWarn, defineComponent, genericComponent, mergeDeep, propsFactory } from '@/util'
 
 // Types
-import type { ComponentPublicInstance, FunctionalComponent, InjectionKey, PropType, Ref } from 'vue'
-
-export type JSXComponent<Props = any> =
-  | { new (): ComponentPublicInstance<Props> }
-  | FunctionalComponent<Props>
+import type { InjectionKey, MaybeRefOrGetter, PropType } from 'vue'
+import type { JSXComponent } from '@/util'
 
 export type IconValue =
   | string
@@ -58,7 +55,7 @@ export interface IconAliases {
 }
 
 export interface IconProps {
-  tag: string
+  tag: string | JSXComponent
   icon?: IconValue
   disabled?: Boolean
 }
@@ -90,7 +87,7 @@ export const makeIconProps = propsFactory({
   },
   // Could not remove this and use makeTagProps, types complained because it is not required
   tag: {
-    type: String,
+    type: [String, Object, Function] as PropType<string | JSXComponent>,
     required: true,
   },
 }, 'icon')
@@ -213,13 +210,13 @@ export function createIcons (options?: IconOptions) {
   }, options) as InternalIconOptions
 }
 
-export const useIcon = (props: Ref<IconValue | undefined>) => {
+export const useIcon = (props: MaybeRefOrGetter<IconValue | undefined>) => {
   const icons = inject(IconSymbol)
 
   if (!icons) throw new Error('Missing Vuetify Icons provide!')
 
   const iconData = computed<IconInstance>(() => {
-    const iconAlias = unref(props)
+    const iconAlias = toValue(props)
 
     if (!iconAlias) return { component: VComponentIcon }
 

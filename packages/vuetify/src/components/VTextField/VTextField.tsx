@@ -3,7 +3,7 @@ import './VTextField.sass'
 
 // Components
 import { VCounter } from '@/components/VCounter/VCounter'
-import { filterFieldProps, makeVFieldProps, VField } from '@/components/VField/VField'
+import { makeVFieldProps, VField } from '@/components/VField/VField'
 import { makeVInputProps, VInput } from '@/components/VInput/VInput'
 
 // Composables
@@ -12,7 +12,7 @@ import { forwardRefs } from '@/composables/forwardRefs'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Directives
-import Intersect from '@/directives/intersect'
+import vIntersect from '@/directives/intersect'
 
 // Utilities
 import { cloneVNode, computed, nextTick, ref } from 'vue'
@@ -54,7 +54,7 @@ export type VTextFieldSlots = Omit<VInputSlots & VFieldSlots, 'default'> & {
 export const VTextField = genericComponent<VTextFieldSlots>()({
   name: 'VTextField',
 
-  directives: { Intersect },
+  directives: { vIntersect },
 
   inheritAttrs: false,
 
@@ -127,13 +127,14 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
 
       emit('click:control', e)
     }
-    function onClear (e: MouseEvent) {
+    function onClear (e: MouseEvent, reset: () => void) {
       e.stopPropagation()
 
       onFocus()
 
       nextTick(() => {
         model.value = null
+        reset()
 
         callEvent(props['onClick:clear'], e)
       })
@@ -158,7 +159,7 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
       const hasDetails = !!(hasCounter || slots.details)
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
       const { modelValue: _, ...inputProps } = VInput.filterProps(props)
-      const fieldProps = filterFieldProps(props)
+      const fieldProps = VField.filterProps(props)
 
       return (
         <VInput
@@ -187,12 +188,13 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
               isDirty,
               isReadonly,
               isValid,
+              reset,
             }) => (
               <VField
                 ref={ vFieldRef }
                 onMousedown={ onControlMousedown }
                 onClick={ onControlClick }
-                onClick:clear={ onClear }
+                onClick:clear={ (e: MouseEvent) => onClear(e, reset) }
                 onClick:prependInner={ props['onClick:prependInner'] }
                 onClick:appendInner={ props['onClick:appendInner'] }
                 role={ props.role }

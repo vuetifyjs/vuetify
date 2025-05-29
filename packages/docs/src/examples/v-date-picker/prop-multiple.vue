@@ -20,9 +20,8 @@
         :close-on-content-click="false"
         min-width="auto"
         transition="scale-transition"
-        offset-y
       >
-        <template v-slot:activator="{ on, attrs }">
+        <template v-slot:activator="{ props }">
           <v-combobox
             v-model="dates"
             label="Multiple picker in menu"
@@ -30,8 +29,7 @@
             chips
             multiple
             readonly
-            v-bind="attrs"
-            v-on="on"
+            v-bind="props"
           ></v-combobox>
         </template>
         <v-date-picker

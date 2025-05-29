@@ -7,9 +7,7 @@
 </template>
 
 <script setup>
-  import { ref } from 'vue'
-
-  const items = ref([
+  const items = [
     {
       id: 1,
       title: 'Applications :',
@@ -80,7 +78,7 @@
         { id: 25, title: 'Conference introduction : avi' },
       ],
     },
-  ])
+  ]
 </script>
 
 <script>

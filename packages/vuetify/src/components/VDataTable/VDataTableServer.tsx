@@ -22,8 +22,9 @@ import { computed, provide, toRef, toRefs } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
+import type { DeepReadonly } from 'vue'
 import type { VDataTableSlotProps, VDataTableSlots } from './VDataTable'
-import type { CellProps, RowProps } from '@/components/VDataTable/types'
+import type { CellProps, DataTableHeader, RowProps } from '@/components/VDataTable/types'
 import type { GenericProps, SelectItemKey } from '@/util'
 
 export const makeVDataTableServerProps = propsFactory({
@@ -46,6 +47,7 @@ export const VDataTableServer = genericComponent<new <T extends readonly any[], 
     rowProps?: RowProps<ItemType<T>>
     cellProps?: CellProps<ItemType<T>>
     itemSelectable?: SelectItemKey<ItemType<T>>
+    headers?: DeepReadonly<DataTableHeader<ItemType<T>>[]>
     modelValue?: V
     'onUpdate:modelValue'?: (value: V) => void
   },
@@ -74,8 +76,8 @@ export const VDataTableServer = genericComponent<new <T extends readonly any[], 
 
     const { columns, headers } = createHeaders(props, {
       groupBy,
-      showSelect: toRef(props, 'showSelect'),
-      showExpand: toRef(props, 'showExpand'),
+      showSelect: toRef(() => props.showSelect),
+      showExpand: toRef(() => props.showExpand),
     })
 
     const { items } = useDataTableItems(props, columns)
@@ -102,7 +104,7 @@ export const VDataTableServer = genericComponent<new <T extends readonly any[], 
       itemsPerPage,
       sortBy,
       groupBy,
-      search: toRef(props, 'search'),
+      search: toRef(() => props.search),
     })
 
     provide('v-data-table', {
@@ -112,10 +114,10 @@ export const VDataTableServer = genericComponent<new <T extends readonly any[], 
 
     provideDefaults({
       VDataTableRows: {
-        hideNoData: toRef(props, 'hideNoData'),
-        noDataText: toRef(props, 'noDataText'),
-        loading: toRef(props, 'loading'),
-        loadingText: toRef(props, 'loadingText'),
+        hideNoData: toRef(() => props.hideNoData),
+        noDataText: toRef(() => props.noDataText),
+        loading: toRef(() => props.loading),
+        loadingText: toRef(() => props.loadingText),
       },
     })
 
@@ -160,6 +162,7 @@ export const VDataTableServer = genericComponent<new <T extends readonly any[], 
           ]}
           style={ props.style }
           { ...tableProps }
+          fixedHeader={ props.fixedHeader || props.sticky }
         >
           {{
             top: () => slots.top?.(slotProps.value),
@@ -170,7 +173,6 @@ export const VDataTableServer = genericComponent<new <T extends readonly any[], 
                   <thead key="thead" class="v-data-table__thead" role="rowgroup">
                     <VDataTableHeaders
                       { ...dataTableHeadersProps }
-                      sticky={ props.fixedHeader }
                       v-slots={ slots }
                     />
                   </thead>

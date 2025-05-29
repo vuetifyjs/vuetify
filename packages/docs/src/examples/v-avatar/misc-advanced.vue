@@ -33,7 +33,7 @@
           </v-col>
 
           <v-col
-            class="hidden-xs-only text-left ms-2"
+            class="hidden-xs text-left ms-2"
             md="3"
             sm="5"
           >
@@ -55,8 +55,8 @@
               v-if="message.new"
               :color="`${message.color}-lighten-1`"
               class="ms-0 me-2"
+              size="small"
               label
-              small
             >
               {{ message.new }} new
             </v-chip>
@@ -103,7 +103,7 @@
       new: 2,
       total: 4,
       title: 'Shop your way',
-      exceprt: 'New deals available, Join Today',
+      excerpt: 'New deals available, Join Today',
     },
   ]
   const lorem = 'Lorem ipsum dolor sit amet, at aliquam vivendum vel, everti delicatissimi cu eos. Dico iuvaret debitis mel an, et cum zril menandri. Eum in consul legimus accusam. Ea dico abhorreant duo, quo illum minimum incorrupte no, nostro voluptaria sea eu. Suas eligendi ius at, at nemore equidem est. Sed in error hendrerit, in consul constituam cum.'
@@ -134,7 +134,7 @@
           new: 2,
           total: 4,
           title: 'Shop your way',
-          exceprt: 'New deals available, Join Today',
+          excerpt: 'New deals available, Join Today',
         },
       ],
       lorem: 'Lorem ipsum dolor sit amet, at aliquam vivendum vel, everti delicatissimi cu eos. Dico iuvaret debitis mel an, et cum zril menandri. Eum in consul legimus accusam. Ea dico abhorreant duo, quo illum minimum incorrupte no, nostro voluptaria sea eu. Suas eligendi ius at, at nemore equidem est. Sed in error hendrerit, in consul constituam cum.',

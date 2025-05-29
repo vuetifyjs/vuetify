@@ -19,8 +19,6 @@ features:
 
 The `v-chip-group` supercharges the `v-chip` component by providing groupable functionality. It is used for creating groups of selections using chips.
 
-<!-- ![chip-groups Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-chip-groups/v-chip-groups-entry.png) -->
-
 <PageFeatures />
 
 ## Usage

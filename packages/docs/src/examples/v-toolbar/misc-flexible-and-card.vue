@@ -1,42 +1,43 @@
 <template>
-  <v-card flat>
+  <v-card rounded="lg" border flat>
     <v-toolbar
       color="primary"
-      dark
       extended
       flat
     >
-      <v-app-bar-nav-icon></v-app-bar-nav-icon>
+      <template v-slot:prepend>
+        <v-btn icon="mdi-menu"></v-btn>
+      </template>
     </v-toolbar>
 
     <v-card
-      class="mx-auto"
-      max-width="700"
-      style="margin-top: -64px;"
+      class="mx-auto mt-n16 mb-4"
+      elevation="4"
+      height="200"
+      max-width="600"
     >
-      <v-toolbar flat>
-        <v-toolbar-title class="text-grey">
-          Title
-        </v-toolbar-title>
+      <v-toolbar>
+        <v-toolbar-title text="Title"></v-toolbar-title>
 
-        <v-spacer></v-spacer>
+        <template v-slot:append>
+          <div class="d-flex ga-1">
+            <v-btn icon="mdi-magnify">
+            </v-btn>
 
-        <v-btn icon>
-          <v-icon>mdi-magnify</v-icon>
-        </v-btn>
+            <v-btn icon="mdi-apps">
+            </v-btn>
 
-        <v-btn icon>
-          <v-icon>mdi-apps</v-icon>
-        </v-btn>
-
-        <v-btn icon>
-          <v-icon>mdi-dots-vertical</v-icon>
-        </v-btn>
+            <v-btn icon="mdi-dots-vertical">
+            </v-btn>
+          </div>
+        </template>
       </v-toolbar>
 
       <v-divider></v-divider>
-
-      <v-card-text style="height: 200px;"></v-card-text>
     </v-card>
+
+    <v-footer class="justify-center text-caption" color="surface-variant">
+      {{ new Date().getFullYear() }} — <strong>Vuetify, LLC</strong>
+    </v-footer>
   </v-card>
 </template>

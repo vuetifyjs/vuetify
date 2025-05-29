@@ -14,8 +14,8 @@ import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, nextTick, ref, watch } from 'vue'
-import { filterInputAttrs, focusChild, genericComponent, only, propsFactory, useRender } from '@/util'
+import { computed, nextTick, ref, toRef, watch } from 'vue'
+import { filterInputAttrs, focusChild, genericComponent, pick, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -50,7 +50,7 @@ export const makeVOtpInputProps = propsFactory({
 
   ...makeDimensionProps(),
   ...makeFocusProps(),
-  ...only(makeVFieldProps({
+  ...pick(makeVFieldProps({
     variant: 'outlined' as const,
   }), [
     'baseColor',
@@ -197,12 +197,12 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
 
     provideDefaults({
       VField: {
-        color: computed(() => props.color),
-        bgColor: computed(() => props.color),
-        baseColor: computed(() => props.baseColor),
-        disabled: computed(() => props.disabled),
-        error: computed(() => props.error),
-        variant: computed(() => props.variant),
+        color: toRef(() => props.color),
+        bgColor: toRef(() => props.color),
+        baseColor: toRef(() => props.baseColor),
+        disabled: toRef(() => props.disabled),
+        error: toRef(() => props.error),
+        variant: toRef(() => props.variant),
       },
     }, { scoped: true })
 
@@ -268,7 +268,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
                           disabled={ props.disabled }
                           inputmode={ props.type === 'number' ? 'numeric' : 'text' }
                           min={ props.type === 'number' ? 0 : undefined }
-                          maxlength="1"
+                          maxlength={ i === 0 ? length.value : '1' }
                           placeholder={ props.placeholder }
                           type={ props.type === 'number' ? 'text' : props.type }
                           value={ model.value[i] }

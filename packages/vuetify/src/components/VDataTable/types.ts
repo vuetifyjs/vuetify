@@ -16,8 +16,8 @@ export type DataTableHeader<T = Record<string, any>> = {
   align?: 'start' | 'end' | 'center'
 
   width?: number | string
-  minWidth?: string
-  maxWidth?: string
+  minWidth?: number | string
+  maxWidth?: number | string
   nowrap?: boolean
 
   headerProps?: Record<string, any>
@@ -27,8 +27,6 @@ export type DataTableHeader<T = Record<string, any>> = {
   sort?: DataTableCompareFunction
   sortRaw?: DataTableCompareFunction
   filter?: FilterFunction
-
-  mobile?: boolean
 
   children?: DataTableHeader<T>[]
 }
@@ -84,14 +82,17 @@ export type ItemKeySlot<T> = ItemSlotBase<T> & {
   column: InternalDataTableHeader
 }
 
-export type RowProps<T> =
-  | Record<string, any>
-  | ((data: Pick<ItemKeySlot<T>, 'index' | 'item' | 'internalItem'>) => Record<string, any>)
+export type RowProps<T> = Record<string, any> | RowPropsFunction<T>
+export type RowPropsFunction<T> = (
+  data: Pick<ItemKeySlot<T>, 'index' | 'item' | 'internalItem'>
+) => Record<string, any>
 
-export type CellProps<T> =
-  | Record<string, any>
-  | ((data: Pick<ItemKeySlot<T>, 'index' | 'item' | 'internalItem' | 'value' | 'column'>) => Record<string, any>)
+export type CellProps<T> = Record<string, any> | CellPropsFunction<T>
+export type CellPropsFunction<T> = (
+  data: Pick<ItemKeySlot<T>, 'index' | 'item' | 'internalItem' | 'value' | 'column'>
+) => Record<string, any>
 
-export type HeaderCellProps =
-  | Record<string, any>
-  | ((data: Pick<ItemKeySlot<any>, 'index' | 'item' | 'internalItem' | 'value'>) => Record<string, any>)
+export type HeaderCellProps = Record<string, any> | HeaderCellPropsFunction
+export type HeaderCellPropsFunction = (
+  data: Pick<ItemKeySlot<any>, 'index' | 'item' | 'internalItem' | 'value'>
+) => Record<string, any>

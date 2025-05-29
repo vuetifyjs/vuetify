@@ -12,10 +12,7 @@
       <v-toolbar-title>Settings</v-toolbar-title>
     </v-toolbar>
 
-    <v-list
-      lines="two"
-      subheader
-    >
+    <v-list lines="two">
       <v-list-subheader>General</v-list-subheader>
 
       <v-list-item>
@@ -31,81 +28,72 @@
 
     <v-divider></v-divider>
 
-    <v-list
-      lines="two"
-      flat
-      subheader
-    >
+    <v-list v-model="settings" lines="two" select-strategy="leaf">
       <v-list-subheader>Hangout notifications</v-list-subheader>
 
-      <v-list-item-group
-        v-model="settings"
-        multiple
-      >
-        <v-list-item>
-          <template v-slot:default="{ active, }">
-            <v-list-item-action>
-              <v-checkbox
-                :model-value="active"
-                color="primary"
-              ></v-checkbox>
-            </v-list-item-action>
+      <v-list-item>
+        <template v-slot:default="{ active, }">
+          <v-list-item-action>
+            <v-checkbox
+              :model-value="active"
+              color="primary"
+            ></v-checkbox>
+          </v-list-item-action>
 
-            <v-list-item-header>
-              <v-list-item-title>Notifications</v-list-item-title>
-              <v-list-item-subtitle>Allow notifications</v-list-item-subtitle>
-            </v-list-item-header>
-          </template>
-        </v-list-item>
+          <v-list-item-header>
+            <v-list-item-title>Notifications</v-list-item-title>
+            <v-list-item-subtitle>Allow notifications</v-list-item-subtitle>
+          </v-list-item-header>
+        </template>
+      </v-list-item>
 
-        <v-list-item>
-          <template v-slot:default="{ active }">
-            <v-list-item-action>
-              <v-checkbox
-                :model-value="active"
-                color="primary"
-              ></v-checkbox>
-            </v-list-item-action>
+      <v-list-item>
+        <template v-slot:default="{ active }">
+          <v-list-item-action>
+            <v-checkbox
+              :model-value="active"
+              color="primary"
+            ></v-checkbox>
+          </v-list-item-action>
 
-            <v-list-item-header>
-              <v-list-item-title>Sound</v-list-item-title>
-              <v-list-item-subtitle>Hangouts message</v-list-item-subtitle>
-            </v-list-item-header>
-          </template>
-        </v-list-item>
+          <v-list-item-header>
+            <v-list-item-title>Sound</v-list-item-title>
+            <v-list-item-subtitle>Hangouts message</v-list-item-subtitle>
+          </v-list-item-header>
+        </template>
+      </v-list-item>
 
-        <v-list-item>
-          <template v-slot:default="{ active }">
-            <v-list-item-action>
-              <v-checkbox
-                :model-value="active"
-                color="primary"
-              ></v-checkbox>
-            </v-list-item-action>
+      <v-list-item>
+        <template v-slot:default="{ active }">
+          <v-list-item-action>
+            <v-checkbox
+              :model-value="active"
+              color="primary"
+            ></v-checkbox>
+          </v-list-item-action>
 
-            <v-list-item-header>
-              <v-list-item-title>Video sounds</v-list-item-title>
-              <v-list-item-subtitle>Hangouts video call</v-list-item-subtitle>
-            </v-list-item-header>
-          </template>
-        </v-list-item>
+          <v-list-item-header>
+            <v-list-item-title>Video sounds</v-list-item-title>
+            <v-list-item-subtitle>Hangouts video call</v-list-item-subtitle>
+          </v-list-item-header>
+        </template>
+      </v-list-item>
 
-        <v-list-item>
-          <template v-slot:default="{ active }">
-            <v-list-item-action>
-              <v-checkbox
-                :model-value="active"
-                color="primary"
-              ></v-checkbox>
-            </v-list-item-action>
+      <v-list-item>
+        <template v-slot:default="{ active }">
+          <v-list-item-action>
+            <v-checkbox
+              :model-value="active"
+              color="primary"
+            ></v-checkbox>
+          </v-list-item-action>
 
-            <v-list-item-header>
-              <v-list-item-title>Invites</v-list-item-title>
-              <v-list-item-subtitle>Notify when receiving invites</v-list-item-subtitle>
-            </v-list-item-header>
-          </template>
-        </v-list-item>
-      </v-list-item-group>
+          <v-list-item-header>
+            <v-list-item-title>Invites</v-list-item-title>
+            <v-list-item-subtitle>Notify when receiving invites</v-list-item-subtitle>
+          </v-list-item-header>
+        </template>
+      </v-list-item>
     </v-list>
   </v-card>
 </template>

@@ -59,8 +59,8 @@ export type VDataTableHeadersSlots = {
 
 export const makeVDataTableHeadersProps = propsFactory({
   color: String,
-  sticky: Boolean,
   disableSort: Boolean,
+  fixedHeader: Boolean,
   multiSort: Boolean,
   sortAscIcon: {
     type: IconValue,
@@ -73,6 +73,9 @@ export const makeVDataTableHeadersProps = propsFactory({
   headerProps: {
     type: Object as PropType<Record<string, any>>,
   },
+
+  /** @deprecated */
+  sticky: Boolean,
 
   ...makeDisplayProps(),
   ...makeLoaderProps(),
@@ -91,12 +94,12 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
     const { loaderClasses } = useLoader(props)
 
     function getFixedStyles (column: InternalDataTableHeader, y: number): CSSProperties | undefined {
-      if (!props.sticky && !column.fixed) return undefined
+      if (!(props.sticky || props.fixedHeader) && !column.fixed) return undefined
 
       return {
         position: 'sticky',
         left: column.fixed ? convertToUnit(column.fixedOffset) : undefined,
-        top: props.sticky ? `calc(var(--v-table-header-height) * ${y})` : undefined,
+        top: (props.sticky || props.fixedHeader) ? `calc(var(--v-table-header-height) * ${y})` : undefined,
       }
     }
 
@@ -108,7 +111,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
       return item.order === 'asc' ? props.sortAscIcon : props.sortDescIcon
     }
 
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(props, 'color')
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.color)
 
     const { displayClasses, mobile } = useDisplay(props)
 
@@ -127,7 +130,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
     const headerCellClasses = computed(() => ([
       'v-data-table__th',
       {
-        'v-data-table__th--sticky': props.sticky,
+        'v-data-table__th--sticky': (props.sticky || props.fixedHeader),
       },
       displayClasses.value,
       loaderClasses.value,
@@ -221,8 +224,6 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
     }
 
     const VDataTableMobileHeaderCell = () => {
-      const headerProps = mergeProps(props.headerProps ?? {} ?? {})
-
       const displayItems = computed<ItemProps['items']>(() => {
         return columns.value.filter(column => column?.sortable && !props.disableSort)
       })
@@ -242,7 +243,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
             ...headerCellClasses.value,
           ]}
           colspan={ headers.value.length + 1 }
-          { ...headerProps }
+          { ...props.headerProps }
         >
           <div class="v-data-table-header__content">
             <VSelect

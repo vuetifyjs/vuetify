@@ -13,11 +13,11 @@ import { makeVPickerProps, VPicker } from '@/labs/VPicker/VPicker'
 
 // Composables
 import { useDate } from '@/composables/date'
-import { useLocale } from '@/composables/locale'
+import { useLocale, useRtl } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, ref, shallowRef, watch } from 'vue'
+import { computed, ref, shallowRef, toRef, watch } from 'vue'
 import { genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
@@ -58,6 +58,7 @@ export const makeVDatePickerProps = propsFactory({
     type: String,
     default: '$vuetify.datePicker.header',
   },
+  headerColor: String,
 
   ...makeVDatePickerControlsProps(),
   ...makeVDatePickerMonthProps({
@@ -99,22 +100,44 @@ export const VDatePicker = genericComponent<new <
   setup (props, { emit, slots }) {
     const adapter = useDate()
     const { t } = useLocale()
+    const { rtlClasses } = useRtl()
 
     const model = useProxiedModel(
       props,
       'modelValue',
       undefined,
-      v => wrapInArray(v),
+      v => wrapInArray(v).map(i => adapter.date(i)),
       v => props.multiple ? v : v[0],
     )
 
     const viewMode = useProxiedModel(props, 'viewMode')
     // const inputMode = useProxiedModel(props, 'inputMode')
-    const internal = computed(() => {
-      const value = adapter.date(model.value?.[0])
 
-      return value && adapter.isValid(value) ? value : adapter.date()
+    const minDate = computed(() => {
+      const date = adapter.date(props.min)
+
+      return props.min && adapter.isValid(date) ? date : null
     })
+    const maxDate = computed(() => {
+      const date = adapter.date(props.max)
+
+      return props.max && adapter.isValid(date) ? date : null
+    })
+
+    const internal = computed(() => {
+      const today = adapter.date()
+      let value = today
+      if (model.value?.[0]) {
+        value = adapter.date(model.value[0])
+      } else if (minDate.value && adapter.isBefore(today, minDate.value)) {
+        value = minDate.value
+      } else if (maxDate.value && adapter.isAfter(today, maxDate.value)) {
+        value = maxDate.value
+      }
+
+      return value && adapter.isValid(value) ? value : today
+    })
+    const headerColor = toRef(() => props.headerColor ?? props.color)
 
     const month = ref(Number(props.month ?? adapter.getMonth(adapter.startOfMonth(internal.value))))
     const year = ref(Number(props.year ?? adapter.getYear(adapter.startOfYear(adapter.setMonth(internal.value, month.value)))))
@@ -138,18 +161,9 @@ export const VDatePicker = genericComponent<new <
 
       return adapter.format(date, 'monthAndYear')
     })
-    // const headerIcon = computed(() => props.inputMode === 'calendar' ? props.keyboardIcon : props.calendarIcon)
-    const headerTransition = computed(() => `date-picker-header${isReversing.value ? '-reverse' : ''}-transition`)
-    const minDate = computed(() => {
-      const date = adapter.date(props.min)
+    // const headerIcon = toRef(() => props.inputMode === 'calendar' ? props.keyboardIcon : props.calendarIcon)
+    const headerTransition = toRef(() => `date-picker-header${isReversing.value ? '-reverse' : ''}-transition`)
 
-      return props.min && adapter.isValid(date) ? date : null
-    })
-    const maxDate = computed(() => {
-      const date = adapter.date(props.max)
-
-      return props.max && adapter.isValid(date) ? date : null
-    })
     const disabled = computed(() => {
       if (props.disabled) return true
 
@@ -160,8 +174,9 @@ export const VDatePicker = genericComponent<new <
       } else {
         let _date = adapter.date()
 
-        _date = adapter.setYear(_date, year.value)
+        _date = adapter.startOfMonth(_date)
         _date = adapter.setMonth(_date, month.value)
+        _date = adapter.setYear(_date, year.value)
 
         if (minDate.value) {
           const date = adapter.addDays(adapter.startOfMonth(_date), -1)
@@ -178,6 +193,51 @@ export const VDatePicker = genericComponent<new <
 
       return targets
     })
+
+    function isAllowedInRange (start: unknown, end: unknown) {
+      const allowedDates = props.allowedDates
+      if (typeof allowedDates !== 'function') return true
+      const days = adapter.getDiff(end, start, 'days')
+      for (let i = 0; i < days; i++) {
+        if (allowedDates(adapter.addDays(start, i))) return true
+      }
+      return false
+    }
+
+    function allowedYears (year: number) {
+      if (typeof props.allowedDates === 'function') {
+        const startOfYear = adapter.parseISO(`${year}-01-01`)
+        return isAllowedInRange(startOfYear, adapter.endOfYear(startOfYear))
+      }
+
+      if (Array.isArray(props.allowedDates) && props.allowedDates.length) {
+        for (const date of props.allowedDates) {
+          if (adapter.getYear(adapter.date(date)) === year) return true
+        }
+        return false
+      }
+
+      return true
+    }
+
+    function allowedMonths (month: number) {
+      if (typeof props.allowedDates === 'function') {
+        const startOfMonth = adapter.parseISO(`${year.value}-${month + 1}-01`)
+        return isAllowedInRange(startOfMonth, adapter.endOfMonth(startOfMonth))
+      }
+
+      if (Array.isArray(props.allowedDates) && props.allowedDates.length) {
+        for (const date of props.allowedDates) {
+          if (
+            adapter.getYear(adapter.date(date)) === year.value &&
+            adapter.getMonth(adapter.date(date)) === month
+          ) return true
+        }
+        return false
+      }
+
+      return true
+    }
 
     // function onClickAppend () {
     //   inputMode.value = inputMode.value === 'calendar' ? 'keyboard' : 'calendar'
@@ -262,6 +322,7 @@ export const VDatePicker = genericComponent<new <
       const datePickerYearsProps = omit(VDatePickerYears.filterProps(props), ['modelValue'])
 
       const headerProps = {
+        color: headerColor.value,
         header: header.value,
         transition: headerTransition.value,
       }
@@ -269,12 +330,14 @@ export const VDatePicker = genericComponent<new <
       return (
         <VPicker
           { ...pickerProps }
+          color={ headerColor.value }
           class={[
             'v-date-picker',
             `v-date-picker--${viewMode.value}`,
             {
               'v-date-picker--show-week': props.showWeek,
             },
+            rtlClasses.value,
             props.class,
           ]}
           style={ props.style }
@@ -322,19 +385,21 @@ export const VDatePicker = genericComponent<new <
                       key="date-picker-months"
                       { ...datePickerMonthsProps }
                       v-model={ month.value }
-                      onUpdate:modelValue={ onUpdateMonth }
                       min={ minDate.value }
                       max={ maxDate.value }
                       year={ year.value }
+                      allowedMonths={ allowedMonths }
+                      onUpdate:modelValue={ onUpdateMonth }
                     />
                   ) : viewMode.value === 'year' ? (
                     <VDatePickerYears
                       key="date-picker-years"
                       { ...datePickerYearsProps }
                       v-model={ year.value }
-                      onUpdate:modelValue={ onUpdateYear }
                       min={ minDate.value }
                       max={ maxDate.value }
+                      allowedYears={ allowedYears }
+                      onUpdate:modelValue={ onUpdateYear }
                     />
                   ) : (
                     <VDatePickerMonth

@@ -2,7 +2,7 @@
 import { VTreeview } from '../VTreeview'
 
 // Utilities
-import { render, screen, userEvent } from '@test'
+import { render, screen, userEvent, waitAnimationFrame, waitIdle } from '@test'
 import { nextTick, reactive, ref, shallowRef } from 'vue'
 
 const items = [
@@ -304,9 +304,9 @@ describe.each([
         ))
 
         await userEvent.click(screen.getByText(/Vuetify/).parentElement!.previousElementSibling!)
-        expect.element(screen.getByText(/Core/)).toBeVisible()
+        await expect.element(screen.getByText(/Core/)).toBeVisible()
         await userEvent.click(screen.getByText(/Vuetify/).parentElement!.previousElementSibling!)
-        expect.element(screen.getByText(/Core/)).not.toBeVisible()
+        await expect.element(screen.getByText(/Core/)).not.toBeVisible()
       })
 
       it('open-all should work', async () => {
@@ -342,6 +342,7 @@ describe.each([
           expect.objectContaining({ id: 1 }),
         ])
 
+        await waitAnimationFrame()
         await userEvent.click(screen.getByText(/Core/).parentElement!.previousElementSibling!)
         expect(opened.value).toEqual([
           expect.objectContaining({ id: 1 }),
@@ -688,20 +689,25 @@ describe.each([
       </VTreeview>
     ))
 
-    await userEvent.click(screen.getByText(/Vuetify Human Resources/))
     const itemsPrepend = screen.getAllByCSS('.v-treeview-item .v-list-item__prepend .prepend-is-open')
+
+    await userEvent.click(screen.getByText(/Vuetify Human Resources/))
+    await waitIdle()
     expect(itemsPrepend[0]).toHaveTextContent(/^true$/)
     expect(itemsPrepend[1]).toHaveTextContent(/^false$/)
 
     await userEvent.click(screen.getByText(/Core team/))
+    await waitIdle()
     expect(itemsPrepend[0]).toHaveTextContent(/^true$/)
     expect(itemsPrepend[1]).toHaveTextContent(/^true$/)
 
     await userEvent.click(screen.getByText(/Core team/))
+    await waitIdle()
     expect(itemsPrepend[0]).toHaveTextContent(/^true$/)
     expect(itemsPrepend[1]).toHaveTextContent(/^false$/)
 
     await userEvent.click(screen.getByText(/Vuetify Human Resources/))
+    await waitIdle()
     expect(itemsPrepend[0]).toHaveTextContent(/^false$/)
     expect(itemsPrepend[1]).toHaveTextContent(/^false$/)
   })

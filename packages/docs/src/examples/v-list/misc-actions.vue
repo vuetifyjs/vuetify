@@ -3,7 +3,6 @@
     <v-toolbar color="purple">
       <v-btn icon="mdi-menu"></v-btn>
       <v-toolbar-title>Settings</v-toolbar-title>
-      <v-spacer></v-spacer>
       <v-btn icon="mdi-magnify"></v-btn>
     </v-toolbar>
 
@@ -32,9 +31,9 @@
         :title="item.title"
         :value="item.value"
       >
-        <template v-slot:prepend="{ isSelected }">
+        <template v-slot:prepend="{ isSelected, select }">
           <v-list-item-action start>
-            <v-checkbox-btn :model-value="isSelected"></v-checkbox-btn>
+            <v-checkbox-btn :model-value="isSelected" @update:model-value="select"></v-checkbox-btn>
           </v-list-item-action>
         </template>
       </v-list-item>

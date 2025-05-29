@@ -3,10 +3,7 @@
     class="mx-auto"
     max-width="344"
   >
-    <v-toolbar
-      color="deep-purple-accent-4"
-      prominent
-    >
+    <v-toolbar color="deep-purple-accent-4">
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
       <v-toolbar-title>My Files</v-toolbar-title>
@@ -15,12 +12,10 @@
         color="white"
         location="bottom left"
         absolute
-        fab
+        icon
       >
         <v-icon>mdi-plus</v-icon>
       </v-btn>
-
-      <v-spacer></v-spacer>
 
       <v-btn icon>
         <v-icon>mdi-share-variant</v-icon>

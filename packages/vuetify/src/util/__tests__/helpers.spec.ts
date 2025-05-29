@@ -6,6 +6,7 @@ import {
   deepEqual,
   defer,
   destructComputed,
+  extractNumber,
   getNestedValue,
   getObjectValueByPath,
   getPropertyFromItem,
@@ -190,7 +191,7 @@ describe('helpers', () => {
     expect(getPropertyFromItem(obj, 'c.0')).toBe(2)
     expect(getPropertyFromItem(obj, 'c.2.d')).toBe('d')
     expect(getPropertyFromItem(obj, 'c.2.d.x', 'fallback')).toBe('fallback')
-    expect(getPropertyFromItem(obj, o => +o.a.b + +o.c[0])).toBe(3)
+    expect(getPropertyFromItem(obj, o => Number(o.a.b) + Number(o.c[0]))).toBe(3)
     expect(getPropertyFromItem(obj, ['c', 2, 'd'])).toBe('d')
     expect(getPropertyFromItem(obj, 'x.y')).toBe('comp')
     expect(getPropertyFromItem(obj, ['x', 'y'])).toBe('nested')
@@ -350,7 +351,7 @@ describe('helpers', () => {
       const mockCallback = vi.fn()
       defer(0, mockCallback)()
 
-      expect(mockCallback).toHaveBeenCalled()
+      expect(mockCallback).toHaveBeenCalledWith()
     })
 
     it('executes callback after specified timeout', () => {
@@ -359,7 +360,7 @@ describe('helpers', () => {
 
       expect(mockCallback).not.toHaveBeenCalled()
       vi.advanceTimersByTime(1000)
-      expect(mockCallback).toHaveBeenCalled()
+      expect(mockCallback).toHaveBeenCalledWith()
     })
 
     it('provides a function to clear the timeout', () => {
@@ -370,6 +371,20 @@ describe('helpers', () => {
       vi.advanceTimersByTime(1000)
 
       expect(mockCallback).not.toHaveBeenCalled()
+    })
+  })
+
+  describe('extractNumber', () => {
+    it('should parse valid number out of text', () => {
+      expect(extractNumber(' 2,142,400.50 ', 2)).toBe('2142400.50')
+      expect(extractNumber(' 100 %', 1)).toBe('100')
+      expect(extractNumber(' .4099 ', 2)).toBe('.40')
+      expect(extractNumber('v: 15.00 ', 0)).toBe('15')
+      expect(extractNumber('$ 2,132.00', 2)).toBe('2132.00')
+      expect(extractNumber('$ 32.00', 2)).toBe('32.00')
+      expect(extractNumber(' -6.67 USD', 2)).toBe('-6.67')
+      expect(extractNumber('($9,000.00)', 2)).toBe('9000.00')
+      expect(extractNumber(' 23 567.20 ', 2)).toBe('23567.20')
     })
   })
 })
