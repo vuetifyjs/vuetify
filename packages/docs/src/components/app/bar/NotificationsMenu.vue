@@ -125,7 +125,6 @@
   }
 
   const { t } = useI18n()
-  const { event } = useGtag()
   const { bucket } = useCosmic()
   const { mobile } = useDisplay()
   const date = useDate()
@@ -161,11 +160,7 @@
   function onClick (notification: Notification) {
     toggle(notification)
     menu.value = false
-    event('click', {
-      event_category: 'vuetify-notification',
-      event_label: notification.slug,
-      value: notification.metadata.action,
-    })
+    sweClick('notification', notification.slug, notification.metadata.action)
   }
   function toggle ({ slug }: Notification) {
     user.notifications.read = user.notifications.read.includes(slug)

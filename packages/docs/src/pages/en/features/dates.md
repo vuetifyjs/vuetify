@@ -338,3 +338,35 @@ export interface DateAdapter<TDate> {
   getNextMonth (date: TDate): TDate
 }
 ```
+
+## Inheritance
+
+You can also extend and override build-in DateAdapter using class inheritance:
+
+```ts
+import { VuetifyDateAdapter } from 'vuetify/date/adapters/vuetify'
+
+export class MyAdapter extends VuetifyDateAdapter {
+  sayHello () {
+    return `Hello, current week starts at ${this.startOfWeek(this.date())}`
+  }
+  override startOfWeek (date: Date, firstDayOfWeek?: string | number): Date {
+    return super.startOfWeek(date, 2) // forcing Tuesday
+  }
+}
+```
+
+```ts { resource="src/plugins/vuetify.js" }
+export default createVuetify({
+  date: {
+    adapter: MyAdapter,
+  },
+  ...
+})
+
+declare module 'vuetify' {
+  namespace DateModule {
+    interface Adapter extends MyAdapter {}
+  }
+}
+```

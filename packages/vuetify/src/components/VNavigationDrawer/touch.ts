@@ -4,6 +4,7 @@ import { useVelocity } from '@/composables/touch'
 
 // Utilities
 import { computed, onBeforeUnmount, onMounted, onScopeDispose, shallowRef, watchEffect } from 'vue'
+import { clamp } from '@/util'
 
 // Types
 import type { Ref } from 'vue'
@@ -62,7 +63,7 @@ export function useTouch ({
       : position.value === 'bottom' ? (document.documentElement.clientHeight - pos - offset.value) / width.value
       : oops()
     )
-    return limit ? Math.max(0, Math.min(1, progress)) : progress
+    return limit ? clamp(progress) : progress
   }
 
   function onTouchstart (e: TouchEvent) {

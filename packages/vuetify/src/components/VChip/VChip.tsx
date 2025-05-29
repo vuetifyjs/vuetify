@@ -26,7 +26,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
 
 // Directives
-import { Ripple } from '@/directives/ripple'
+import vRipple from '@/directives/ripple'
 
 // Utilities
 import { computed, toDisplayString, toRef } from 'vue'
@@ -112,7 +112,7 @@ export const makeVChipProps = propsFactory({
 export const VChip = genericComponent<VChipSlots>()({
   name: 'VChip',
 
-  directives: { Ripple },
+  directives: { vRipple },
 
   props: makeVChipProps(),
 

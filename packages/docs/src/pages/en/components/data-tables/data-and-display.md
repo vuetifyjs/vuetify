@@ -8,11 +8,17 @@ related:
   - /components/data-tables/basics/
   - /components/paginations/
   - /components/tables/
+features:
+  github: /components/VDataTable/
+  label: 'C: VDataTable'
+  report: true
 ---
 
 # Data and Display
 
 Data table filtering is a key feature that allows users to quickly find the data they are looking for.
+
+<PageFeatures />
 
 <PromotedEntry />
 

@@ -27,6 +27,42 @@
   </a>
 </p>
 
+### 🖥️ Documentation
+
+To check out the documentation, visit [vuetifyjs.com](https://vuetifyjs.com).
+
+![Crowdin Uploads](https://github.com/vuetifyjs/vuetify/workflows/Crowdin%20Uploads/badge.svg?branch=master)
+
+### ⚡ Quick Start
+
+Getting started with Vuetify is easy. To create a new project, choose your package manager and run one of the following commands:
+
+Using [pnpm](https://pnpm.io/)
+
+```bash
+pnpm create vuetify
+```
+
+Using [yarn](https://yarnpkg.com/)
+
+```bash
+yarn create vuetify
+```
+
+Using [npm](https://npmjs.com/)
+
+```bash
+npm create vuetify@latest
+```
+
+Using [bun](https://bun.sh/)
+
+```bash
+bun create vuetify
+```
+
+For more information on how to get started, such as using Nuxt or Laravel, check out the official [Installation guide](https://vuetifyjs.com/getting-started/installation/).
+
 ### 💖 Supporting Vuetify
 
 Vuetify is a [MIT licensed](http://opensource.org/licenses/MIT) project that is developed and maintained by the [Core Team](https://vuetifyjs.com/about/meet-the-team/). Sponsor Vuetify and receive some **awesome perks** and support Open Source Software at the same time! 🎉
@@ -34,7 +70,6 @@ Vuetify is a [MIT licensed](http://opensource.org/licenses/MIT) project that is 
 <ul>
   <li>
     <a href="https://github.com/users/johnleider/sponsorship">Become a backer or sponsor on GitHub</a>
-    or <a href="https://www.patreon.com/vuetify">Patreon</a> <small>(supports John and Heather)</small>
   </li>
   <li>
     <a href="https://opencollective.com/vuetify">Become a backer or sponsor on Open Collective</a>
@@ -46,14 +81,11 @@ Vuetify is a [MIT licensed](http://opensource.org/licenses/MIT) project that is 
   <li>
     <a href="https://paypal.me/vuetify">Make a one-time payment with Paypal</a>
   </li>
-  <li>
-    <a href="https://support.vuetifyjs.com/">Book time with the Team</a>
-  </li>
 </ul>
 
-### What's the difference between GitHub Sponsors, Patreon, and OpenCollective?
+### What's the difference between GitHub Sponsors and OpenCollective?
 
-Funds donated through GitHub Sponsors and Patreon directly support [John Leider](https://github.com/sponsors/johnleider) and the ongoing development and maintenance of Vuetify. Funds donated via Open Collective are managed with transparent expenses and will be used for compensating work and expenses for Core team members. Your name/logo will receive proper recognition and exposure by donating on either platform.
+Funds donated through GitHub Sponsors directly support [John Leider](https://github.com/sponsors/johnleider) and the ongoing development and maintenance of Vuetify. Funds donated via Open Collective are managed with transparent expenses and will be used for compensating work and expenses for Core team members. Your name/logo will receive proper recognition and exposure by donating on either platform.
 
 <h3><b>Special Sponsor</b></h3>
 
@@ -104,11 +136,6 @@ Funds donated through GitHub Sponsors and Patreon directly support [John Leider]
         </a>
       </td>
       <td>
-        <a href="https://careers.lmax.com/?utm_source=vuetify&utm_medium=github-link&utm_campaign=lmax-careers">
-          <img height="30px" src="https://cdn.vuetifyjs.com/images/backers/lmax-exchange.png">
-        </a>
-      </td>
-      <td>
         <a href="http://vuemastery.com/?ref=vuetify-github">
           <img height="30px" src="https://cdn.vuetifyjs.com/images/backers/vuemastery.svg">
         </a>
@@ -118,60 +145,32 @@ Funds donated through GitHub Sponsors and Patreon directly support [John Leider]
           <img height="30px" src="https://cdn.cosmicjs.com/861b0ce0-50e4-11ef-b1ea-f56c65dfade9-views-4-you-light.png">
         </a>
       </td>
-    </tr>
-    <tr></tr>
-    <tr>
-      <td>
-        <a href="https://www.mediamister.com/">
-          <img height="30px" src="https://cdn.cosmicjs.com/750cbe80-8d34-11ef-b5a0-93db72e2be98-logo-1.svg">
-        </a>
-      </td>
-      <td style="text-align: center;">
-        <a href="https://www.slotozilla.com/">
-          <img height="30px" src="https://cdn.cosmicjs.com/21525470-ab03-11ef-bee4-3bb1d3c55332-256-2.png">
-        </a>
-      </td>
       <td>
         <a href="https://word.tips/">
           <img height="30px" src="https://cdn.cosmicjs.com/5b16bd20-afab-11ef-bee4-3bb1d3c55332-wordtips-light.svg">
         </a>
       </td>
+    </tr>
+    <tr></tr>
+    <tr>
+      <td>
+        <a href="https://www.vso.org.uk/">
+          <img height="30px" src="https://cdn.cosmicjs.com/64287760-e7c2-11ef-b333-e101bec29f3d-horizontal_logo.svg">
+        </a>
+      </td>
+      </td>
+      <td style="text-align: center;">
+        <a href="https://haircenterofturkey.com/">
+          <img height="30px" src="https://cdn.cosmicjs.com/ba1af160-1a27-11f0-a229-dfe84053cfeb-hcof-logo-light-1.png">
+        </a>
+      </td>
+      <td></td>
       <td></td>
     </tr>
   </tbody>
 </table>
 
-<br>
-
-### ⚡ Quick Start
-
-Getting started with Vuetify is easy. To create a new project, choose your package manager and run one of the following commands:
-
-Using [pnpm](https://pnpm.io/)
-
-```bash
-pnpm create vuetify
-```
-
-Using [yarn](https://yarnpkg.com/)
-
-```bash
-yarn create vuetify
-```
-
-Using [npm](https://npmjs.com/)
-
-```bash
-npm create vuetify@latest
-```
-
-Using [bun](https://bun.sh/)
-
-```bash
-bun create vuetify
-```
-
-For more information on how to get started, such as using Nuxt or Laravel, check out the official [Installation guide](https://vuetifyjs.com/getting-started/installation/).
+---
 
 ### 🚀 Introduction
 
@@ -181,7 +180,7 @@ Vuetify is a no design skills required UI Library with beautifully handcrafted V
 - **Responsive Layout:** The default configuration of Vuetify components is responsive, allowing your application to adapt to different screen sizes.
 - **Theme System:** A powerful color system that makes it easy to style your application with a consistent color palette.
 - **Vite Support:** _Smaller_ bundle sizes with **automatic** tree-shaking
-- **18 months** Long-term support for [Major releases](https://vuetifyjs.com/introduction/long-term-support/)
+- **6 months** Long-term support for [Major releases](https://vuetifyjs.com/introduction/long-term-support/)
 - **Internationalization:** 42+ supported languages
 
 #### Browser Support
@@ -202,6 +201,78 @@ Vuetify supports all **modern browsers**, including Safari 13+ (using [polyfills
   <tbody>
     <tr>
       <td>
+        <a href="https://github.com/vuetifyjs/awesome/">
+          🕶️&nbsp;Vuetify&nbsp;Awesome
+        </a>
+      </td>
+      <td>Awesome stuff built with Vuetify.</td>
+    </tr>
+    <tr>
+      <td>
+        <a href="https://bin.vuetifyjs.com/">
+          🗑️&nbsp;Vuetify&nbsp;Bin
+        </a>
+      </td>
+      <td>A pastebin for saving code snippets.</td>
+    </tr>
+    <tr>
+      <td>
+        <a href="https://bin.vuetifyjs.com/">
+          🫧&nbsp;Vuetify&nbsp;Create
+        </a>
+      </td>
+      <td>Scaffolding tools for creating new Vuetify projects.</td>
+    </tr>
+    <tr>
+      <td>
+        <a href="https://community.vuetifyjs.com/">
+          💭&nbsp;Vuetify&nbsp;Discord
+        </a>
+      </td>
+      <td>Our massive and inclusive Discord server where you can ask questions, share feedback, and connect with other Vuetify developers.</td>
+    </tr>
+    <tr>
+      <td>
+        <a href="https://github.com/vuetifyjs/eslint-config-vuetify">
+          🧹&nbsp;Vuetify&nbsp;ESLint
+        </a>
+      </td>
+      <td>An opinionated [ESLint config](https://github.com/vuetifyjs/eslint-config-vuetify) for styling and an [ESLint plugin](https://github.com/vuetifyjs/eslint-plugin-vuetify) for upgrading Vuetify version.</td>
+    </tr>
+    <tr>
+      <td>
+        <a href="https://issues.vuetifyjs.com/">
+          🐛&nbsp;Vuetify&nbsp;Issues
+        </a>
+      </td>
+      <td>A web application for reporting bugs and issues with Vuetify, Documentation, or one of our other packages.</td>
+    </tr>
+    <tr>
+      <td>
+        <a href="https://github.com/vuetifyjs/vuetify-loader">
+          📦&nbsp;Vuetify&nbsp;Loader
+        </a>
+      </td>
+      <td>A monorepo of compiler plugins for autoloading Vuetify components and configuring styles.</td>
+    </tr>
+    <tr>
+      <td>
+        <a href="https://github.com/vuetifyjs/mcp/">
+          🧠&nbsp;Vuetify&nbsp;MCP
+        </a>
+      </td>
+      <td>A Model Context Protocol server for developing with Vuetify and Agents.</td>
+    </tr>
+    <tr>
+      <td>
+        <a href="https://play.vuetifyjs.com/">
+          🎮&nbsp;Vuetify&nbsp;Playground
+        </a>
+      </td>
+      <td>A Vuetify 3 playground built using <a href="https://github.com/vuejs/repl">vuejs/repl</a> where you can play with our components.</td>
+    </tr>
+    <tr>
+      <td>
         <a href="https://snips.vuetifyjs.com">
           ✂️&nbsp;Vuetify&nbsp;Snips
         </a>
@@ -210,111 +281,14 @@ Vuetify supports all **modern browsers**, including Safari 13+ (using [polyfills
     </tr>
     <tr>
       <td>
-        <a href="https://support.vuetifyjs.com/?ref=github">
-          💫&nbsp;Enterprise&nbsp;Support
-        </a>
-      </td>
-      <td>Let the experts at Vuetify help you get the most out of your application with a customized support plan from the the team behind the framework</td>
-    </tr>
-    <tr>
-      <td>
-        <a href="https://community.vuetifyjs.com/?ref=github">
-          💭&nbsp;Discord&nbsp;Community
-        </a>
-      </td>
-      <td>Our massive and inclusive Discord server where you can ask questions, share feedback, and connect with other Vuetify developers</td>
-    </tr>
-    <tr>
-      <td>
-        <a href="https://play.vuetifyjs.com/?ref=github">
-          🎮&nbsp;Vuetify&nbsp;Play
-        </a>
-      </td>
-      <td>A Vuetify 3 playground built using <a href="https://github.com/vuejs/repl">vuejs/repl</a> where you can play with our components</td>
-    </tr>
-    <tr>
-      <td>
-        <a href="https://issues.vuetifyjs.com/?ref=github">
-          🐛&nbsp;Vuetify&nbsp;Issues
-        </a>
-      </td>
-      <td>A web application for reporting bugs and issues with Vuetify, Documentation, or one of our other packages</td>
-    </tr>
-    <tr>
-      <td>
-        <a href="https://store.vuetifyjs.com/?ref=github">
+        <a href="https://store.vuetifyjs.com/">
           🛒&nbsp;Vuetify&nbsp;Store
         </a>
       </td>
-      <td>The official Vuetify Store where you can download free digital products, purchase pre-made themes, and more</td>
+      <td>The official Vuetify Store where you can download free digital products, purchase pre-made themes, and more.</td>
     </tr>
   </tbody>
 </table>
-
-#### Packages
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Version</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        <a href="https://github.com/vuetifyjs/create-vuetify">
-          🛠️ create-vuetify
-        </a>
-      </td>
-      <td>
-        <a href="https://www.npmjs.com/package/vue-cli-plugin-vuetify">
-          <img src="https://img.shields.io/npm/v/create-vuetify.svg" alt="Version">
-        </a>
-      </td>
-      <td>
-        Quickly spin up applications with a simple command.
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <a href="https://github.com/vuetifyjs/vuetify-loader/tree/master">
-          📦 vuetify-loader
-        </a>
-      </td>
-      <td>
-        <a href="https://www.npmjs.com/package/vuetify-loader">
-          <img src="https://img.shields.io/npm/v/vuetify-loader.svg" alt="Version">
-        </a>
-      </td>
-      <td>
-        Compiler plugins for autoloading Vuetify components
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <a href="https://github.com/vuetifyjs/eslint-plugin-vuetify">
-          📄 eslint-plugin-vuetify
-        </a>
-      </td>
-      <td>
-        <a href="https://www.npmjs.com/package/eslint-plugin-vuetify">
-          <img src="https://img.shields.io/npm/v/eslint-plugin-vuetify.svg" alt="Version">
-        </a>
-      </td>
-      <td>
-       An opinionated eslint-plugin for Vuetify
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-### 🖥️ Documentation
-
-To check out the docs, visit [vuetifyjs.com](https://vuetifyjs.com).
-
-![Crowdin Uploads](https://github.com/vuetifyjs/vuetify/workflows/Crowdin%20Uploads/badge.svg?branch=master)
 
 ### 🙋‍♂️ Questions
 
@@ -350,7 +324,7 @@ Vuetify is available under the [MIT](http://opensource.org/licenses/MIT) softwar
 
 Copyright (c) 2016-present Vuetify, LLC
 
-----
+---
 
 This project exists thanks to all the people who contribute 😍!
 

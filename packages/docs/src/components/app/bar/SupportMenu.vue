@@ -1,6 +1,5 @@
 <template>
   <AppBtn
-    class="ms-1"
     color="medium-emphasis"
   >
     {{ title }}

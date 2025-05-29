@@ -241,6 +241,7 @@
   "notifications": "Notifications",
   "not-found": "Not Found",
   "open-github-release": "Open GitHub release",
+  "open-in-vuetify-bin": "Open in Vuetify Bin",
   "open-issues": "Open issues",
   "options": "Options",
   "overlays": "Overlays",
@@ -289,7 +290,8 @@
     "key-hint-slash": "Press /",
     "results": "Your search results will appear here",
     "no-results": "No results found",
-    "recent": "Recent"
+    "recent": "Recent",
+    "favorite": "Favorite"
   },
   "search-api": "Search API",
   "search-jobs": "Search Jobs",

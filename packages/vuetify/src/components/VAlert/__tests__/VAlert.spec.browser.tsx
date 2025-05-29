@@ -1,7 +1,7 @@
 import { VAlert } from '..'
 
 // Utilities
-import { generate, render } from '@test'
+import { generate, render, screen } from '@test'
 
 const defaultColors = ['success', 'info', 'warning', 'error', 'invalid']
 
@@ -20,7 +20,7 @@ const stories = {
 describe('VAlert', () => {
   describe('color', () => {
     it('supports default color props', async () => {
-      const { container } = render(() => (
+      render(() => (
         <>
           { defaultColors.map((color, idx) => (
             <VAlert color={ color } text={ idx.toString() }>
@@ -30,7 +30,7 @@ describe('VAlert', () => {
         </>
       ))
 
-      const alerts = container.querySelectorAll('.v-alert')
+      const alerts = await screen.findAllByCSS('.v-alert')
       expect(alerts).toHaveLength(defaultColors.length)
 
       Array.from(alerts).forEach((alert, idx) => {

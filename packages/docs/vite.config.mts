@@ -108,7 +108,6 @@ export default defineConfig(({ command, mode, isSsrBuild }) => {
             'lodash-es': ['camelCase', 'kebabCase', 'upperFirst'],
             vue: ['camelize', 'mergeProps'],
             vuetify: ['useDate', 'useDisplay', 'useGoTo', 'useRtl', 'useTheme'],
-            'vue-gtag-next': ['useGtag'],
             'vue-i18n': ['useI18n'],
           }
         ],

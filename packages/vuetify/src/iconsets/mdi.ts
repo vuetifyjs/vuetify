@@ -48,6 +48,7 @@ const aliases: IconAliases = {
   treeviewExpand: 'mdi-menu-right',
   eyeDropper: 'mdi-eyedropper',
   upload: 'mdi-cloud-upload',
+  color: 'mdi-palette',
 }
 
 const mdi: IconSet = {

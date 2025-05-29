@@ -8,7 +8,7 @@ import { VNavigationDrawer } from '@/components/VNavigationDrawer/VNavigationDra
 import { VSlideGroup } from '@/components/VSlideGroup/VSlideGroup'
 
 // Utilities
-import { page, render } from '@test'
+import { page, render, screen } from '@test'
 import { ref } from 'vue'
 
 // Types
@@ -19,7 +19,7 @@ describe('display-components', () => {
     await page.viewport(960, 800)
 
     const mobileBreakpoint = ref<number | DisplayBreakpoint>('lg')
-    const { container } = render(() => (
+    render(() => (
       <VLayout>
         <VNavigationDrawer mobileBreakpoint={ mobileBreakpoint.value } />
         <VMain>
@@ -31,9 +31,9 @@ describe('display-components', () => {
       </VLayout>
     ))
 
-    const navigationDrawer = container.querySelector('.v-navigation-drawer')
-    const banner = container.querySelector('.v-banner')
-    const slideGroup = container.querySelector('.v-slide-group')
+    const navigationDrawer = screen.getByCSS('.v-navigation-drawer')
+    const banner = screen.getByCSS('.v-banner')
+    const slideGroup = screen.getByCSS('.v-slide-group')
 
     expect(navigationDrawer).toHaveClass('v-navigation-drawer--mobile')
     expect(banner).toHaveClass('v-banner--mobile')
