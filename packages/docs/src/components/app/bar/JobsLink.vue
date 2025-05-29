@@ -1,5 +1,6 @@
 <template>
   <v-badge
+    :class="{'vertical-middle': one.mobileBreakpoint.value}"
     :model-value="newJobs.length > 0"
     color="#ED561B"
     location="top end"
@@ -17,6 +18,7 @@
 <script setup>
   const { currentRoute } = useRouter()
   const { name } = useRoute()
+  const one = useOneStore()
   const newJobs = []
 
   const icon = computed(() => {
@@ -29,4 +31,7 @@
 <style lang="sass">
   .jobs-link .v-btn:not(:hover)::before
     display: none
+
+  .vertical-middle
+    vertical-align: middle
 </style>

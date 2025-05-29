@@ -1,23 +1,18 @@
 <template>
   <AppBtn
     :active="model"
-    :icon="xs ? 'mdi-magnify' : undefined"
+    :block="isMobile"
+    :class="{'justify-start px-5': isMobile, 'ms-2': !isMobile}"
     :loading="loading ? 'primary' : undefined"
-    :prepend-icon="smAndUp ? 'mdi-magnify' : undefined"
+    :variant="isMobile ? 'tonal' : undefined"
+    prepend-icon="mdi-magnify"
     @click="shouldLoad = true"
   >
-    <span :class="mdAndUp && 'me-n1'">
-      <span v-if="smAndUp">
-        {{ t('search.label') }}
-      </span>
+    <span :class="isMobile && 'me-n1'">
+      <span> {{ t('search.label') }} </span>
 
-      <span
-        :class="[
-          smAndDown ? 'border-opacity-0' : 'py-1 px-2 ms-2',
-          'border rounded text-disabled text-caption'
-        ]"
-      >
-        <span v-if="mdAndUp">
+      <span v-if="!isMobile" class="py-1 px-2 ms-2 border rounded text-disabled text-caption">
+        <span>
           {{ t(`search.key-hint${user.slashSearch ? '-slash' : platform.mac ? '-mac' : ''}`) }}
         </span>
       </span>
@@ -38,14 +33,17 @@
   const SearchDialog = defineAsyncComponent(() => import('@/components/app/search/SearchDialog.vue'))
 
   const { t } = useI18n()
-  const { smAndUp, smAndDown, mdAndUp, xs, platform } = useDisplay()
+  const { platform } = useDisplay()
   const { query } = useRoute()
   const user = useUserStore()
+  const one = useOneStore()
 
   const shouldLoad = shallowRef(false)
   const loading = shallowRef(false)
   const model = shallowRef(false)
   const searchString = shallowRef('')
+
+  const isMobile = computed(() => one.mobileBreakpoint.value)
 
   watch(shouldLoad, () => {
     loading.value = true
