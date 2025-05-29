@@ -1,3 +1,4 @@
+import { StringDateAdapter } from '@/composables/date/adapters/string'
 // import DateFnsAdapter from '@date-io/date-fns'
 // import { enAU, enUS, ja, sv } from 'date-fns/locale'
 
@@ -9,6 +10,7 @@
 
 export default {
   // adapter: DateFnsAdapter,
+  adapter: StringDateAdapter,
   formats: {
     // dayOfMonth: date => date.getDate(),
   },
