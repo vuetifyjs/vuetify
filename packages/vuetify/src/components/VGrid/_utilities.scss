@@ -1,0 +1,73 @@
+$v-row-utils: (
+  "justify-content": (
+    responsive: true,
+    property: justify-content,
+    class: v-row--justify,
+    values: (start: flex-start,
+      end: flex-end,
+      center: center,
+      space-between: space-between,
+      space-around: space-around,
+      space-evenly: space-evenly,
+    )),
+  "align-items": (
+    responsive: true,
+    property: align-items,
+    class: v-row--align,
+    values: (start: flex-start,
+      end: flex-end,
+      center: center,
+      baseline: baseline,
+      stretch: stretch,
+    )),
+  "align-content": (
+    responsive: true,
+    property: v-row--align-content,
+    values: (start: flex-start,
+      end: flex-end,
+      center: center,
+      space-between: space-between,
+      space-around: space-around,
+      space-evenly: space-evenly,
+      stretch: stretch,
+    )
+  )
+);
+
+$v-col-utils: (
+  "align-self": (
+    responsive: true,
+    property: align-self,
+    class: v-col--align-self,
+    values: (
+      auto: auto,
+      start: flex-start,
+      end: flex-end,
+      center: center,
+      baseline: baseline,
+      stretch: stretch,
+    )
+  ),
+  "order": (
+    responsive: true,
+    property: order,
+    class: v-col--order,
+    values: (
+      first: -1,
+      0: 0,
+      1: 1,
+      2: 2,
+      3: 3,
+      4: 4,
+      5: 5,
+      6: 6,
+      7: 7,
+      8: 8,
+      9: 9,
+      10: 10,
+      11: 11,
+      12: 12,
+      last: 13,
+    ),
+  ),
+)
