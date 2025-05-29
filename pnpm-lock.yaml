@@ -7,6 +7,7 @@ settings:
 overrides:
   '@testing-library/dom': npm:@vuetify/testing-library-dom@1.0.2
   '@types/node': 22.15.12
+  '@vue/babel-plugin-jsx': npm:@vuetify/babel-plugin-jsx@1.5.1
   tough-cookie: 5.1.2
 
 pnpmfileChecksum: sha256-grQ7keQLE6IY6tCi9f26NtYQ2j+RuK1OR3hPnrfzUSE=
@@ -247,8 +248,8 @@ importers:
         specifier: ^2.0.4
         version: 2.0.4(vue@3.5.13(typescript@5.8.3))
       '@vuetify/one':
-        specifier: ^2.2.1
-        version: 2.2.1(@mdi/js@7.4.47(patch_hash=3c2a78b1509745df3a3100e3e59075dd87718e67632cc14dc64dd9ac34098f9f))(@vue/compiler-sfc@3.5.13)(lodash-es@4.17.21)(vite@6.3.5(@types/node@22.15.12)(sass-embedded@1.87.0)(sass@1.87.0)(terser@5.31.3)(tsx@4.19.3)(yaml@2.7.0))(vue-router@4.5.0(vue@3.5.13(typescript@5.8.3)))(vue@3.5.13(typescript@5.8.3))(vuetify@packages+vuetify)
+        specifier: ^2.2.4
+        version: 2.2.4(@mdi/js@7.4.47(patch_hash=3c2a78b1509745df3a3100e3e59075dd87718e67632cc14dc64dd9ac34098f9f))(@vue/compiler-sfc@3.5.13)(lodash-es@4.17.21)(vite@6.3.5(@types/node@22.15.12)(sass-embedded@1.87.0)(sass@1.87.0)(terser@5.31.3)(tsx@4.19.3)(yaml@2.7.0))(vue-router@4.5.0(vue@3.5.13(typescript@5.8.3)))(vue@3.5.13(typescript@5.8.3))(vuetify@packages+vuetify)
       algoliasearch:
         specifier: ^4.24.0
         version: 4.24.0
@@ -505,9 +506,6 @@ importers:
       '@vitest/ui':
         specifier: ^3.1.1
         version: 3.1.1(vitest@3.1.1)
-      '@vue/babel-plugin-jsx':
-        specifier: ^1.4.0
-        version: 1.4.0(@babel/core@7.26.10)
       '@vue/reactivity':
         specifier: ^3.5.13
         version: 3.5.13
@@ -517,6 +515,9 @@ importers:
       '@vue/test-utils':
         specifier: ^2.4.6
         version: 2.4.6
+      '@vuetify/babel-plugin-jsx':
+        specifier: ^1.5.1
+        version: 1.5.1(@babel/core@7.26.10)
       acorn-walk:
         specifier: ^8.3.4
         version: 8.3.4
@@ -3143,22 +3144,6 @@ packages:
   '@vscode/l10n@0.0.18':
     resolution: {integrity: sha512-KYSIHVmslkaCDyw013pphY+d7x1qV8IZupYfeIfzNA+nsaWHbn5uPuQRvdRFsa9zFzGeudPuoGoZ1Op4jrJXIQ==}
 
-  '@vue/babel-helper-vue-transform-on@1.4.0':
-    resolution: {integrity: sha512-mCokbouEQ/ocRce/FpKCRItGo+013tHg7tixg3DUNS+6bmIchPt66012kBMm476vyEIJPafrvOf4E5OYj3shSw==}
-
-  '@vue/babel-plugin-jsx@1.4.0':
-    resolution: {integrity: sha512-9zAHmwgMWlaN6qRKdrg1uKsBKHvnUU+Py+MOCTuYZBoZsopa90Di10QRjB+YPnVss0BZbG/H5XFwJY1fTxJWhA==}
-    peerDependencies:
-      '@babel/core': ^7.0.0-0
-    peerDependenciesMeta:
-      '@babel/core':
-        optional: true
-
-  '@vue/babel-plugin-resolve-type@1.4.0':
-    resolution: {integrity: sha512-4xqDRRbQQEWHQyjlYSgZsWj44KfiF6D+ktCuXyZ8EnVDYV3pztmXJDf1HveAjUAXxAnR8daCQT51RneWWxtTyQ==}
-    peerDependencies:
-      '@babel/core': ^7.0.0-0
-
   '@vue/compiler-core@3.5.13':
     resolution: {integrity: sha512-oOdAkwqUfW1WqpwSYJce06wvt6HljgY3fGeM9NcVA1HaYOij3mZG9Rkysn0OHuyUAGMbEbARIpsG+LPVlBJ5/Q==}
 
@@ -3250,6 +3235,22 @@ packages:
       '@vue/composition-api':
         optional: true
 
+  '@vuetify/babel-helper-vue-transform-on@1.5.1':
+    resolution: {integrity: sha512-lcWnK3GVgMf+68SUuFB4oWXJGkL80QlM3nCx6UpHWNzg8z8kG4agSdrQwSy6eM2n6jTFysVTkwa0gaVlwXUYmw==}
+
+  '@vuetify/babel-plugin-jsx@1.5.1':
+    resolution: {integrity: sha512-Ihj3oTtmYjNthbqrt3Rcz1g7PmPHBTFyis8D9B0hL3D6HB8VIfXb0xjpJAmJbEziMnEHKVYLcRUDQ76a+PpUeg==}
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+    peerDependenciesMeta:
+      '@babel/core':
+        optional: true
+
+  '@vuetify/babel-plugin-resolve-type@1.5.1':
+    resolution: {integrity: sha512-hBNaydwm+8pIkFC+xE1anxITkzTCRm/NGu6geKuMYHcscOcyBCBfOKqB5eDvI+2i22KkOjH4G3EQp+54yXI8Yg==}
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+
   '@vuetify/github-releaser@4.0.2':
     resolution: {integrity: sha512-JqKT0LihtDnmk5u6/1cfkleqn9EM80pOLpQscdECV7mjhImusVRAo6eaJtWxrjFGYk5Ly7iYPmkMKlvuTySfsw==}
     engines: {node: '>=22.0.0'}
@@ -3261,8 +3262,8 @@ packages:
       vue: ^3.0.0
       vuetify: ^3.0.0
 
-  '@vuetify/one@2.2.1':
-    resolution: {integrity: sha512-ilVC8y+m+L8GIGK2vnjWKkSU5xtjkbnogyzr/hKKsEU8yr2D1q9qexB6GQpJ+sAbYqPSyNO0SYLu9K+B4MVotg==}
+  '@vuetify/one@2.2.4':
+    resolution: {integrity: sha512-dapdKGrsba095L0B4DEfYsizyf4xz4BN94BHk+hlYFfSDKgkIFs+xovt+b/Xi/wCZXuK8lPWWjPvW9HdBTyQYw==}
     peerDependencies:
       '@mdi/js': 7.4.47
       lodash-es: ^4.17.21
@@ -12196,7 +12197,7 @@ snapshots:
     dependencies:
       '@babel/core': 7.26.10
       '@babel/plugin-transform-typescript': 7.27.0(@babel/core@7.26.10)
-      '@vue/babel-plugin-jsx': 1.4.0(@babel/core@7.26.10)
+      '@vue/babel-plugin-jsx': '@vuetify/babel-plugin-jsx@1.5.1(@babel/core@7.26.10)'
       vite: 6.3.5(@types/node@22.15.12)(sass-embedded@1.87.0)(sass@1.87.0)(terser@5.31.3)(tsx@4.19.3)(yaml@2.7.0)
       vue: 3.5.13(typescript@5.8.3)
     transitivePeerDependencies:
@@ -12346,35 +12347,6 @@ snapshots:
       vscode-uri: 2.1.2
 
   '@vscode/l10n@0.0.18': {}
-
-  '@vue/babel-helper-vue-transform-on@1.4.0': {}
-
-  '@vue/babel-plugin-jsx@1.4.0(@babel/core@7.26.10)':
-    dependencies:
-      '@babel/helper-module-imports': 7.25.9
-      '@babel/helper-plugin-utils': 7.26.5
-      '@babel/plugin-syntax-jsx': 7.25.9(@babel/core@7.26.10)
-      '@babel/template': 7.27.0
-      '@babel/traverse': 7.27.0
-      '@babel/types': 7.27.0
-      '@vue/babel-helper-vue-transform-on': 1.4.0
-      '@vue/babel-plugin-resolve-type': 1.4.0(@babel/core@7.26.10)
-      '@vue/shared': 3.5.13
-    optionalDependencies:
-      '@babel/core': 7.26.10
-    transitivePeerDependencies:
-      - supports-color
-
-  '@vue/babel-plugin-resolve-type@1.4.0(@babel/core@7.26.10)':
-    dependencies:
-      '@babel/code-frame': 7.26.2
-      '@babel/core': 7.26.10
-      '@babel/helper-module-imports': 7.25.9
-      '@babel/helper-plugin-utils': 7.26.5
-      '@babel/parser': 7.27.0
-      '@vue/compiler-sfc': 3.5.13
-    transitivePeerDependencies:
-      - supports-color
 
   '@vue/compiler-core@3.5.13':
     dependencies:
@@ -12543,6 +12515,35 @@ snapshots:
       vue: 3.5.13(typescript@5.8.3)
       vue-demi: 0.13.11(vue@3.5.13(typescript@5.8.3))
 
+  '@vuetify/babel-helper-vue-transform-on@1.5.1': {}
+
+  '@vuetify/babel-plugin-jsx@1.5.1(@babel/core@7.26.10)':
+    dependencies:
+      '@babel/helper-module-imports': 7.25.9
+      '@babel/helper-plugin-utils': 7.26.5
+      '@babel/plugin-syntax-jsx': 7.25.9(@babel/core@7.26.10)
+      '@babel/template': 7.27.0
+      '@babel/traverse': 7.27.0
+      '@babel/types': 7.27.0
+      '@vue/shared': 3.5.13
+      '@vuetify/babel-helper-vue-transform-on': 1.5.1
+      '@vuetify/babel-plugin-resolve-type': 1.5.1(@babel/core@7.26.10)
+    optionalDependencies:
+      '@babel/core': 7.26.10
+    transitivePeerDependencies:
+      - supports-color
+
+  '@vuetify/babel-plugin-resolve-type@1.5.1(@babel/core@7.26.10)':
+    dependencies:
+      '@babel/code-frame': 7.26.2
+      '@babel/core': 7.26.10
+      '@babel/helper-module-imports': 7.25.9
+      '@babel/helper-plugin-utils': 7.26.5
+      '@babel/parser': 7.27.0
+      '@vue/compiler-sfc': 3.5.13
+    transitivePeerDependencies:
+      - supports-color
+
   '@vuetify/github-releaser@4.0.2(conventional-commits-filter@5.0.0)':
     dependencies:
       '@hutson/parse-repository-url': 5.0.0
@@ -12567,7 +12568,7 @@ snapshots:
       vue: 3.5.13(typescript@5.8.3)
       vuetify: link:packages/vuetify
 
-  '@vuetify/one@2.2.1(@mdi/js@7.4.47(patch_hash=3c2a78b1509745df3a3100e3e59075dd87718e67632cc14dc64dd9ac34098f9f))(@vue/compiler-sfc@3.5.13)(lodash-es@4.17.21)(vite@6.3.5(@types/node@22.15.12)(sass-embedded@1.87.0)(sass@1.87.0)(terser@5.31.3)(tsx@4.19.3)(yaml@2.7.0))(vue-router@4.5.0(vue@3.5.13(typescript@5.8.3)))(vue@3.5.13(typescript@5.8.3))(vuetify@packages+vuetify)':
+  '@vuetify/one@2.2.4(@mdi/js@7.4.47(patch_hash=3c2a78b1509745df3a3100e3e59075dd87718e67632cc14dc64dd9ac34098f9f))(@vue/compiler-sfc@3.5.13)(lodash-es@4.17.21)(vite@6.3.5(@types/node@22.15.12)(sass-embedded@1.87.0)(sass@1.87.0)(terser@5.31.3)(tsx@4.19.3)(yaml@2.7.0))(vue-router@4.5.0(vue@3.5.13(typescript@5.8.3)))(vue@3.5.13(typescript@5.8.3))(vuetify@packages+vuetify)':
     dependencies:
       '@mdi/js': 7.4.47(patch_hash=3c2a78b1509745df3a3100e3e59075dd87718e67632cc14dc64dd9ac34098f9f)
       lodash-es: 4.17.21
