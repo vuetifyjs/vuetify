@@ -1,8 +1,12 @@
+// Composables
+import { createLocale } from '@/composables/locale'
+
 // Utilities
 import { VuetifyDateAdapter } from '../adapters/vuetify'
 
 // Types
 import type { IUtils } from '@date-io/core/IUtils'
+import { createDate } from '../date'
 import type { DateAdapter } from '../DateAdapter'
 
 function expectAssignable<T, T2 extends T = T> (value: T2): void {}
@@ -88,5 +92,60 @@ describe('date.ts', () => {
     const adapter2 = new VuetifyDateAdapter({ locale: 'fr' })
     expect(adapter2.getWeek(new Date('2025-01-05'))).toBe(1) // sunday
     expect(adapter2.getWeek(new Date('2025-01-06'))).toBe(2) // monday
+  })
+
+  describe('createDateRange', () => {
+    const { instance: vuetifyDate } = createDate(undefined, createLocale())
+
+    it('should create a single date array when only start date is provided', () => {
+      const start = new Date('2024-01-01')
+      const result = vuetifyDate.createDateRange(start)
+
+      expect(result).toHaveLength(1)
+      expect(result[0]).toEqual(start)
+    })
+
+    it('should handle same start and stop date', () => {
+      const date = new Date('2024-01-01')
+      const result = vuetifyDate.createDateRange(date, date)
+
+      expect(result[0]).toEqual(date)
+      expect(result[1]).toEqual(vuetifyDate.endOfDay(date))
+    })
+
+    it('should create a range of dates between start and stop', () => {
+      const start = new Date('2024-01-01')
+      const stop = new Date('2024-01-03')
+      const result = vuetifyDate.createDateRange(start, stop)
+
+      expect(result).toHaveLength(3)
+      expect(result[0]).toEqual(start)
+      expect(result[1]).toEqual(new Date('2024-01-02'))
+      expect(result[2]).toEqual(vuetifyDate.endOfDay(stop))
+    })
+
+    it('should handle dates in different months', () => {
+      const start = new Date('2024-01-30')
+      const stop = new Date('2024-02-02')
+      const result = vuetifyDate.createDateRange(start, stop)
+
+      expect(result).toHaveLength(4)
+      expect(result[0]).toEqual(start)
+      expect(result[1]).toEqual(new Date('2024-01-31'))
+      expect(result[2]).toEqual(new Date('2024-02-01'))
+      expect(result[3]).toEqual(vuetifyDate.endOfDay(stop))
+    })
+
+    it('should handle dates in different years', () => {
+      const start = new Date('2024-12-30')
+      const stop = new Date('2025-01-02')
+      const result = vuetifyDate.createDateRange(start, stop)
+
+      expect(result).toHaveLength(4)
+      expect(result[0]).toEqual(start)
+      expect(result[1]).toEqual(new Date('2024-12-31'))
+      expect(result[2]).toEqual(new Date('2025-01-01'))
+      expect(result[3]).toEqual(vuetifyDate.endOfDay(stop))
+    })
   })
 })
