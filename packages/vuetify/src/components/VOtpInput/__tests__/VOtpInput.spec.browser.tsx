@@ -111,7 +111,7 @@ describe('VOtpInput', () => {
     render(() => (
       <VOtpInput
         modelValue={ modelValue.value }
-        onUpdate:modelValue={ val => { modelValue.value = val } }
+        onUpdate:modelValue={ (val: string) => { modelValue.value = val } }
       />
     ))
     const inputs = screen.getAllByCSS('.v-otp-input input')
