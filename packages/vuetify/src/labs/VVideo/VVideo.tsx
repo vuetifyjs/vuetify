@@ -11,6 +11,7 @@ import { VProgressCircular } from '@/components/VProgressCircular/VProgressCircu
 import { VIconBtn } from '@/labs/VIconBtn/VIconBtn'
 
 // Composables
+import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { forwardRefs } from '@/composables/forwardRefs'
@@ -62,6 +63,7 @@ export const makeVVideoProps = propsFactory({
     type: String as PropType<VVideoControlsVariant>,
     default: 'default',
   },
+  ...makeDensityProps(),
   ...makeDimensionProps({ width: 480, height: 270 }),
   ...makeElevationProps({ elevation: 4 }),
   ...makeRoundedProps(),
@@ -83,6 +85,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
 
   setup (props, { attrs, emit, slots }) {
     const { themeClasses } = provideTheme(props)
+    const { densityClasses } = useDensity(props)
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props)
@@ -114,10 +117,10 @@ export const VVideo = genericComponent<VVideoSlots>()({
 
     function onKeydown (e: KeyboardEvent) {
       if (!videoRef.value || e.ctrlKey) return
-      e.preventDefault()
       switch (true) {
         case e.key === ' ': {
           if (!['A', 'BUTTON'].includes((e.target as Element)?.tagName)) {
+            e.preventDefault()
             isPlaying.value = !isPlaying.value
           }
           break
@@ -254,6 +257,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
       const controlsProps = {
         ...VVideoControls.filterProps(omit(props, ['variant', 'hideVolume'])),
         hideVolume: props.hideVolume || (attrs.muted !== false && attrs.muted !== undefined),
+        density: props.density,
         variant: props.controlsVariant,
         playing: isPlaying.value,
         progress: progress.value,
@@ -278,6 +282,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
             `v-video--variant-${props.variant}`,
             { 'v-video--playing': isPlaying.value },
             themeClasses.value,
+            densityClasses.value,
             roundedClasses.value,
           ]}
           onKeydown={ onKeydown }
@@ -318,7 +323,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
                 opacity="0"
                 contained
                 persistent
-                contentClass="d-flex flex-column align-center justify-end w-100 h-100"
+                contentClass="v-video__overlay-fill"
               >
                 <VSpacer />
                 <MaybeTransition name="fade-transition">
@@ -343,11 +348,11 @@ export const VVideo = genericComponent<VVideoSlots>()({
               modelValue={ isLoading.value }
               contained
               persistent
-              contentClass="w-100 h-100"
+              contentClass="v-video__overlay-fill"
               transition={ posterTransition }
             >
               <VImg cover src={ props.image }>
-                <div class="d-flex align-center justify-center fill-height">
+                <div class="v-video__overlay-fill">
                   { isLoading.value && (
                     <VProgressCircular
                       indeterminate
