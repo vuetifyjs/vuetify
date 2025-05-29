@@ -44,6 +44,7 @@ VCommandPalette is a keyboard-driven command interface component that provides u
   - The component SHALL accept standard Vue `class` and `style` props.
   - The component SHALL accept a `theme` prop of type String for Vuetify theme integration.
   - The component SHALL follow Vuetify design system conventions and patterns.
+  - The component SHALL maintain a stable position in the DOM when displayed as a modal overlay. Typing in the search input and filtering results should not cause the component to change position from the top of the viewport.
 
 ### Vuetify Integration Requirements
 
