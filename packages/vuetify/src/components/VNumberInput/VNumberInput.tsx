@@ -16,7 +16,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, nextTick, onMounted, ref, shallowRef, toRef, watch, watchEffect } from 'vue'
-import { clamp, extractNumber, genericComponent, omit, propsFactory, useRender } from '@/util'
+import { clamp, escapeForRegex, extractNumber, genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -64,6 +64,10 @@ const makeVNumberInputProps = propsFactory({
     type: Number as PropType<number | null>,
     default: null,
   },
+  decimalSeparator: {
+    type: String,
+    validator: (v: any) => !v || v.length === 1,
+  },
 
   ...omit(makeVTextFieldProps(), ['modelValue', 'validationValue']),
 }, 'VNumberInput')
@@ -90,27 +94,31 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
 
     const { isFocused, focus, blur } = useFocus(props)
 
-    function correctPrecision (val: number, precision = props.precision) {
-      if (precision == null) {
-        return String(val)
-      }
+    const decimalSeparator = computed(() => props.decimalSeparator?.[0] || '.')
 
-      let fixed = val.toFixed(precision)
+    function correctPrecision (val: number, precision = props.precision, trim = true) {
+      const fixed = precision == null
+        ? String(val)
+        : val.toFixed(precision)
 
-      if (isFocused.value) {
+      if (isFocused.value && trim) {
         return Number(fixed).toString() // trim zeros
+          .replace('.', decimalSeparator.value)
       }
 
-      if ((props.minFractionDigits ?? precision) < precision) {
-        const trimLimit = precision - props.minFractionDigits!
-        const [baseDigits, fractionDigits] = fixed.split('.')
-        fixed = [
-          baseDigits,
-          fractionDigits.replace(new RegExp(`0{1,${trimLimit}}$`), ''),
-        ].filter(Boolean).join('.')
+      if (props.minFractionDigits === null || (precision !== null && precision < props.minFractionDigits)) {
+        return fixed.replace('.', decimalSeparator.value)
       }
 
-      return fixed
+      let [baseDigits, fractionDigits] = fixed.split('.')
+
+      fractionDigits = (fractionDigits ?? '').padEnd(props.minFractionDigits, '0')
+        .replace(new RegExp(`(?<=\\d{${props.minFractionDigits}})0`, 'g'), '')
+
+      return [
+        baseDigits,
+        fractionDigits,
+      ].filter(Boolean).join(decimalSeparator.value)
     }
 
     const model = useProxiedModel(props, 'modelValue', null,
@@ -136,8 +144,11 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
         if (val === null || val === '') {
           model.value = null
           _inputText.value = null
-        } else if (!isNaN(Number(val)) && Number(val) <= props.max && Number(val) >= props.min) {
-          model.value = Number(val)
+          return
+        }
+        const parsedValue = Number(val.replace(decimalSeparator.value, '.'))
+        if (!isNaN(parsedValue) && parsedValue <= props.max && parsedValue >= props.min) {
+          model.value = parsedValue
           _inputText.value = val
         }
       },
@@ -218,12 +229,13 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
           ? existingTxt.slice(0, selectionStart as number | undefined) + e.data + existingTxt.slice(selectionEnd as number | undefined)
           : e.data
 
-      const potentialNewNumber = extractNumber(potentialNewInputVal, props.precision)
+      const potentialNewNumber = extractNumber(potentialNewInputVal, props.precision, decimalSeparator.value)
 
-      // Only numbers, "-", "." are allowed
-      // AND "-", "." are allowed only once
-      // AND "-" is only allowed at the start
-      if (!/^-?(\d+(\.\d*)?|(\.\d+)|\d*|\.)$/.test(potentialNewInputVal)) {
+      // Allow only numbers, "-" and {decimal separator}
+      // Allow "-" and {decimal separator} only once
+      // Allow "-" only at the start
+
+      if (!new RegExp(`^-?\\d*${escapeForRegex(decimalSeparator.value)}?\\d*$`).test(potentialNewInputVal)) {
         e.preventDefault()
         inputElement!.value = potentialNewNumber
       }
@@ -231,12 +243,12 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       if (props.precision == null) return
 
       // Ignore decimal digits above precision limit
-      if (potentialNewInputVal.split('.')[1]?.length > props.precision) {
+      if (potentialNewInputVal.split(decimalSeparator.value)[1]?.length > props.precision) {
         e.preventDefault()
         inputElement!.value = potentialNewNumber
       }
       // Ignore decimal separator when precision = 0
-      if (props.precision === 0 && potentialNewInputVal.includes('.')) {
+      if (props.precision === 0 && potentialNewInputVal.includes(decimalSeparator.value)) {
         e.preventDefault()
         inputElement!.value = potentialNewNumber
       }
@@ -293,8 +305,9 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       if (controlsDisabled.value) return
       if (!vTextFieldRef.value) return
       const actualText = vTextFieldRef.value.value
-      if (actualText && !isNaN(Number(actualText))) {
-        inputText.value = correctPrecision(clamp(Number(actualText), props.min, props.max))
+      const parsedValue = Number(actualText.replace(decimalSeparator.value, '.'))
+      if (actualText && !isNaN(parsedValue)) {
+        inputText.value = correctPrecision(clamp(parsedValue, props.min, props.max))
       } else {
         inputText.value = null
       }
@@ -302,11 +315,9 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
 
     function formatInputValue () {
       if (controlsDisabled.value) return
-      if (model.value === null || isNaN(model.value)) {
-        inputText.value = null
-        return
-      }
-      inputText.value = correctPrecision(model.value)
+      inputText.value = model.value !== null && !isNaN(model.value)
+        ? correctPrecision(model.value, props.precision, false)
+        : null
     }
 
     function trimDecimalZeros () {
@@ -316,6 +327,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
         return
       }
       inputText.value = model.value.toString()
+        .replace('.', decimalSeparator.value)
     }
 
     function onFocus () {

@@ -203,6 +203,34 @@ describe('VNumberInput', () => {
       await expect.element(screen.getByCSS('input')).toHaveValue('0.00')
       expect(model.value).toBe(0)
     })
+
+    it('shows custom decimal separator when incrementing', async () => {
+      const model = ref(0)
+      render(() => (
+        <VNumberInput
+          step={ 0.07 }
+          precision={ 2 }
+          decimalSeparator=","
+          v-model={ model.value }
+        />
+      ))
+
+      await userEvent.click(screen.getByTestId('increment'))
+      await expect.element(screen.getByCSS('input')).toHaveValue('0,07')
+      expect(model.value).toBe(0.07)
+
+      await userEvent.click(screen.getByTestId('increment'))
+      await expect.element(screen.getByCSS('input')).toHaveValue('0,14')
+      expect(model.value).toBe(0.14)
+
+      await userEvent.click(screen.getByTestId('decrement'))
+      await expect.element(screen.getByCSS('input')).toHaveValue('0,07')
+      expect(model.value).toBe(0.07)
+
+      await userEvent.click(screen.getByTestId('decrement'))
+      await expect.element(screen.getByCSS('input')).toHaveValue('0,00')
+      expect(model.value).toBe(0)
+    })
   })
 
   describe('accepts digits from pasted text', () => {
@@ -229,6 +257,57 @@ describe('VNumberInput', () => {
       await userEvent.paste()
       input.blur()
       expect(model.value).toBe(expected)
+    })
+
+    it.each([
+      { sep: ',', precision: 0, text: '-00123', expected: -123 },
+      { sep: ',', precision: 2, text: ',250', expected: 0.25 },
+      { sep: ',', precision: 3, text: '000,321', expected: 0.321 },
+      { sep: ',', precision: 0, text: '100,99', expected: 100 },
+      { sep: ',', precision: 1, text: '200,99', expected: 200.9 },
+      { sep: ',', precision: 2, text: ' 1,250.32\n', expected: 1.25 },
+      { sep: ',', precision: 0, text: '1\'024.00 meters', expected: 102400 },
+      { sep: ',', precision: 0, text: '- 1123.', expected: -1123 },
+      { sep: ',', precision: 0, text: '- 32,', expected: -32 },
+    ])('should parse numbers with custom separator', async ({ sep, precision, text, expected }) => {
+      const model = ref(null)
+      const { element } = render(() => (
+        <VNumberInput
+          v-model={ model.value }
+          decimalSeparator={ sep }
+          precision={ precision }
+        />
+      ))
+      const input = element.querySelector('input') as HTMLInputElement
+      input.focus()
+      navigator.clipboard.writeText(text)
+      await userEvent.paste()
+      input.blur()
+      expect(model.value).toBe(expected)
+    })
+  })
+
+  describe('fraction digits control', () => {
+    it.each([
+      { precision: 2, minFractionDigits: null, typing: '.312', expected: '0.31' },
+      { precision: 2, minFractionDigits: null, typing: '12.', expected: '12.00' },
+      { precision: 0, minFractionDigits: 0, typing: '42', expected: '42' },
+      { precision: 0, minFractionDigits: 1, typing: '-1.321', expected: '-1321' }, // dot is ignored while typing
+      { precision: 0, minFractionDigits: 1, typing: '2', expected: '2' },
+      { precision: 0, minFractionDigits: 3, typing: '31.9', expected: '319' }, // dot is ignored while typing
+      { precision: 5, minFractionDigits: 3, typing: '-92.21', expected: '-92.210' },
+      { precision: 5, minFractionDigits: 3, typing: '-92.2132', expected: '-92.2132' },
+      { precision: 5, minFractionDigits: 3, typing: '-92.21325555', expected: '-92.21325' },
+      { precision: null, minFractionDigits: 0, typing: '8', expected: '8' },
+      { precision: null, minFractionDigits: 1, typing: '8', expected: '8.0' },
+      { precision: null, minFractionDigits: 2, typing: '-1.5', expected: '-1.50' },
+      { precision: null, minFractionDigits: 2, typing: '-1.521', expected: '-1.521' },
+    ])('applies flexible limit on fraction digits', async ({ precision, minFractionDigits, typing, expected }) => {
+      const { element } = render(() => <VNumberInput precision={ precision } minFractionDigits={ minFractionDigits } />)
+      await userEvent.click(element)
+      await userEvent.keyboard(typing)
+      await userEvent.click(document.body)
+      expect(screen.getByCSS('input')).toHaveValue(expected)
     })
   })
 })
