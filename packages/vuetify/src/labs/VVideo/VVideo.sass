@@ -9,7 +9,11 @@
     align-items: center
     position: relative
     --v-video-outline-width: thin
-    --v-video-controls-height: 44px
+    --v-video-controls-height: #{$video-controls-height}
+
+    @at-root
+      @include tools.density('v-video', $video-density) using ($modifier)
+        --v-video-controls-height: #{$video-controls-height + $modifier * 2}
 
     &__video
       --v-outline-opacity: .12
@@ -35,6 +39,12 @@
         &, > *
           pointer-events: none
 
+    &__overlay-fill
+      display: flex
+      place-items: center
+      width: 100%
+      height: 100%
+
     &:has(.v-video-controls:not(.v-video-controls--detached))
       .v-overlay__content
         padding-bottom: var(--v-video-controls-height) // controls size
@@ -49,8 +59,18 @@
       transform: scale(1)
       opacity: 1
 
-    &__volume-menu .v-slider.v-input--vertical > .v-input__control
-      min-height: 50px
+    &__volume-menu
+      background: rgb(var(--v-theme-surface-variant))
+      color: rgb(var(--v-theme-on-surface-variant))
+      border-radius: inherit
+      padding: 8px
+      overflow: hidden
+
+      .v-slider.v-input--vertical
+        margin-block: 4px
+
+        > .v-input__control
+          min-height: 50px
 
     &__track
       position: relative
@@ -79,19 +99,23 @@
 
     &-controls
       --v-background-opacity: .8
+      --v-video-controls-gap: #{$video-controls-gap}
       flex: 1 0 100%
       align-self: stretch
       padding: 8px
       display: flex
       align-items: center
       position: relative
-      gap: 12px
+      gap: var(--v-video-controls-gap)
       min-height: var(--v-video-controls-height)
       backdrop-filter: blur(5px)
       background-color: rgba(var(--v-theme-surface), var(--v-background-opacity))
       width: 100%
-
       opacity: 0
+
+      @at-root
+        @include tools.density('v-video-controls', $video-density) using ($modifier)
+          --v-video-controls-gap: #{$video-controls-gap + $modifier}
 
       &, &--pills > .v-video-control__pill
         transition: .6s ease-in-out
@@ -106,7 +130,7 @@
       .v-video-control__pill
         display: flex
         align-items: center
-        gap: 8px
+        gap: calc(var(--v-video-controls-gap) - 4px)
 
       &--pills
         --v-background-opacity: 1
@@ -129,7 +153,7 @@
           border-radius: 20px
           min-height: 42px
           padding: 0 10px
-          gap: 12px
+          gap: var(--v-video-controls-gap)
 
           &:empty
             display: none
@@ -163,9 +187,10 @@
 
       &--split-time
         padding-inline: 20px
+        gap: calc(var(--v-video-controls-gap) + 4px)
 
       &:not(.v-video-controls--detached)
-        margin-top: calc(-1 * var(--v-video-controls-height) - 1px)
+        margin-top: calc(-1 * var(--v-video-controls-height))
 
       &:not(.v-video-controls--floating)
         border-bottom-left-radius: inherit

@@ -9,6 +9,7 @@ import { VIconBtn } from '@/labs/VIconBtn/VIconBtn'
 
 // Composables
 import { useBackgroundColor } from '@/composables/color'
+import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
@@ -70,6 +71,7 @@ export const makeVVideoControlsProps = propsFactory({
     default: 'default',
     validator: (v: any) => allowedVariants.includes(v),
   },
+  ...makeDensityProps(),
   ...makeElevationProps({ elevation: 4 }),
   ...makeThemeProps(),
 }, 'VVideoControls')
@@ -89,6 +91,7 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
 
   setup (props, { emit, slots }) {
     const { themeClasses } = provideTheme(props)
+    const { densityClasses } = useDensity(props)
     const { elevationClasses } = useElevation(props)
 
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => {
@@ -138,8 +141,12 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
     useRender(() => {
       const innerDefaults = {
         VIconBtn: {
-          size: 28,
-          iconSize: props.pills ? 24 : 20,
+          size: props.density === 'compact' ? 24
+          : props.density === 'comfortable' ? 28
+          : 32,
+          iconSize: props.density === 'compact' ? 20
+          : props.density === 'comfortable' ? 24
+          : 26,
           variant: 'text',
           color: props.color,
         },
@@ -182,6 +189,7 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
             { 'v-video-controls--split-time': props.splitTime },
             backgroundColorClasses.value,
             props.detached && !props.pills ? elevationClasses.value : [],
+            densityClasses.value,
             themeClasses.value,
           ]}
           style={[
@@ -198,12 +206,15 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
                         <VIconBtn
                           icon={ isPlaying.value ? 'mdi-pause' : 'mdi-play' }
                           onClick={ () => isPlaying.value = !isPlaying.value }
+                          v-ripple
                         />
                       </div>
                     )}
-                    <div class={ pillClasses }>
-                      { slots.prepend?.(slotProps) }
-                    </div>
+                    { slots.prepend && (
+                      <div class={ pillClasses }>
+                        { slots.prepend(slotProps) }
+                      </div>
+                    )}
                     { props.splitTime
                       ? <span class={[pillClasses, 'v-video__time']}>{ progressText.value.elapsed }</span>
                       : props.variant !== 'default'
@@ -228,50 +239,49 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
                 { props.variant === 'mini' && (
                   <>
                     <VSpacer />
-                    <div class={ pillClasses }>
-                      { slots.prepend?.(slotProps) }
-                    </div>
+                    { slots.prepend && (
+                      <div class={ pillClasses }>
+                        { slots.prepend(slotProps) }
+                      </div>
+                    )}
                     { !props.hidePlay && (
                       <div class={[pillClasses, 'v-video__action-play']}>
                         <VIconBtn
                           icon={ isPlaying.value ? 'mdi-pause' : 'mdi-play' }
                           onClick={ () => isPlaying.value = !isPlaying.value }
+                          v-ripple
                         />
                       </div>
                     )}
                   </>
                 )}
-                <div class={ pillClasses }>
-                  { !props.hideVolume && (
-                    <VIconBtn key="volume-control" icon={ volumeIcon }>
-                      <VIcon />
-                      <VMenu
-                        offset="8"
-                        activator="parent"
-                        location="top center"
-                        contentClass="v-video__volume-menu"
-                        close-on-content-click={ false }
-                      >
-                        <VSheet
-                          class="pa-2 overflow-hidden"
-                          height="124"
-                          color="surface-variant"
+                { (!props.hideVolume || slots.append) && (
+                  <div class={ pillClasses }>
+                    { !props.hideVolume && (
+                      <VIconBtn key="volume-control" icon={ volumeIcon } v-ripple>
+                        <VIcon />
+                        <VMenu
+                          offset="8"
+                          activator="parent"
+                          location="top center"
+                          close-on-content-click={ false }
                         >
-                          <VSlider
-                            direction="vertical"
-                            hide-details
-                            color={ props.color ?? 'surface' }
-                            style="height: 100px"
-                            class="my-1"
-                            modelValue={ volume.value }
-                            onUpdate:modelValue={ v => volume.value = v }
-                          />
-                        </VSheet>
-                      </VMenu>
-                    </VIconBtn>
-                  )}
-                  { slots.append?.(slotProps) }
-                </div>
+                          <div class="v-video__volume-menu">
+                            <VSlider
+                              direction="vertical"
+                              hide-details
+                              color={ props.color ?? 'surface' }
+                              style="height: 100px"
+                              modelValue={ volume.value }
+                              onUpdate:modelValue={ v => volume.value = v }
+                            />
+                          </div>
+                        </VMenu>
+                      </VIconBtn>
+                    )}
+                    { slots.append?.(slotProps) }
+                  </div>
+                )}
 
                 { props.variant === 'mini' && (<VSpacer />) }
               </>
