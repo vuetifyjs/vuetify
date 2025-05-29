@@ -392,7 +392,7 @@ describe('VAutocomplete', () => {
         { code: 'de-DE', name: 'German' },
       ]
 
-      const { container } = render(() => (
+      render(() => (
         <VAutocomplete
           label="Language"
           items={ items }
@@ -402,7 +402,7 @@ describe('VAutocomplete', () => {
         />
       ))
 
-      expect(container.querySelector('.v-field')).not.toHaveClass('v-field--dirty')
+      expect(screen.getByCSS('.v-field')).not.toHaveClass('v-field--dirty')
     })
   })
 

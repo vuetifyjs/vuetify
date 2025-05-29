@@ -12,7 +12,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
 import { ref, toRef, watchEffect } from 'vue'
-import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
+import { clamp, convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -62,7 +62,7 @@ export const VProgressCircular = genericComponent<VProgressCircularSlots>()({
     const { intersectionRef, isIntersecting } = useIntersectionObserver()
     const { resizeRef, contentRect } = useResizeObserver()
 
-    const normalizedValue = toRef(() => Math.max(0, Math.min(100, parseFloat(props.modelValue))))
+    const normalizedValue = toRef(() => clamp(parseFloat(props.modelValue), 0, 100))
     const width = toRef(() => Number(props.width))
     const size = toRef(() => {
       // Get size from element if size prop value is small, large etc

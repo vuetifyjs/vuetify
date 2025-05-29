@@ -165,6 +165,7 @@ export const VSelect = genericComponent<new <
     const isFocused = shallowRef(false)
 
     let keyboardLookupPrefix = ''
+    let keyboardLookupIndex = -1
     let keyboardLookupLastTime: number
 
     const displayItems = computed(() => {
@@ -246,19 +247,50 @@ export const VSelect = genericComponent<new <
       const now = performance.now()
       if (now - keyboardLookupLastTime > KEYBOARD_LOOKUP_THRESHOLD) {
         keyboardLookupPrefix = ''
+        keyboardLookupIndex = -1
       }
       keyboardLookupPrefix += e.key.toLowerCase()
       keyboardLookupLastTime = now
 
-      const item = items.value.find(item => item.title.toLowerCase().startsWith(keyboardLookupPrefix))
-      if (item !== undefined) {
-        if (!props.multiple) {
-          model.value = [item]
+      const items = displayItems.value
+      function findItem () {
+        let result = findItemBase()
+        if (result) return result
+
+        if (keyboardLookupPrefix.at(-1) === keyboardLookupPrefix.at(-2)) {
+          // No matches but we have a repeated letter, try the next item with that prefix
+          keyboardLookupPrefix = keyboardLookupPrefix.slice(0, -1)
+          result = findItemBase()
+          if (result) return result
         }
-        const index = displayItems.value.indexOf(item)
-        if (~index && IN_BROWSER) {
-          listRef.value?.focus(index)
+
+        // Still nothing, wrap around to the top
+        keyboardLookupIndex = -1
+        result = findItemBase()
+        if (result) return result
+
+        // Still nothing, try just the new letter
+        keyboardLookupPrefix = e.key.toLowerCase()
+        return findItemBase()
+      }
+      function findItemBase () {
+        for (let i = keyboardLookupIndex + 1; i < items.length; i++) {
+          const _item = items[i]
+          if (_item.title.toLowerCase().startsWith(keyboardLookupPrefix)) {
+            return [_item, i] as const
+          }
         }
+        return undefined
+      }
+
+      const result = findItem()
+      if (!result) return
+
+      const [item, index] = result
+      keyboardLookupIndex = index
+      listRef.value?.focus(index)
+      if (!props.multiple) {
+        model.value = [item]
       }
     }
 
