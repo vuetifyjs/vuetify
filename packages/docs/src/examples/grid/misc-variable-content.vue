@@ -2,7 +2,7 @@
   <v-container class="bg-grey-lighten-5">
     <v-row
       class="mb-6"
-      density="compact"
+
       justify="center"
     >
       <v-col lg="2">
@@ -33,7 +33,7 @@
         </v-card>
       </v-col>
     </v-row>
-    <v-row density="compact">
+    <v-row>
       <v-col>
         <v-card
           class="pa-2"
