@@ -1,21 +1,21 @@
-// Styles
+
 import './VTypography.sass'
 
-// Composables
+
 import { makeComponentProps } from '@/composables/component'
 import { useTextColor } from '@/composables/color'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 
-// Utilities
+
 import { computed } from 'vue'
-import { useDisplay } from 'vuetify'
+import { useDisplay } from '@/composables/display'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
-// Types
+
 import type { PropType } from 'vue'
 
-// Internal
+
 import { typographyStyles } from './typography'
 
 type Variant = keyof typeof typographyStyles
@@ -24,11 +24,11 @@ type Breakpoint = 'sm' | 'md' | 'lg' | 'xl'
 export { typographyStyles } from './typography'
 
 export const makeVTypographyProps = propsFactory({
-  text: {
+  variant: {
     type: String as PropType<Variant>,
     default: 'body-medium',
   },
-  mobile: {
+  mobileVariant: {
     type: String as PropType<Variant>,
     default: undefined,
   },
@@ -55,8 +55,8 @@ export const VTypography = genericComponent()({
 
     const currentStyle = computed(() => {
       const isMobile = display[`${props.mobileBreakpoint}AndDown`]?.value
-      const variant = isMobile && props.mobile ? props.mobile : props.text
-      const baseStyle = typographyStyles[variant] ?? {}
+      const activeVariant = isMobile && props.mobileVariant ? props.mobileVariant : props.variant
+      const baseStyle = typographyStyles[activeVariant] ?? {}
 
       return {
         ...baseStyle,
@@ -91,4 +91,3 @@ export const VTypography = genericComponent()({
 })
 
 export type VTypography = InstanceType<typeof VTypography>
-
