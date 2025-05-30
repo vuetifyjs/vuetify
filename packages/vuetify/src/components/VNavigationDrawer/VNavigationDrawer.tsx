@@ -52,6 +52,7 @@ export const makeVNavigationDrawerProps = propsFactory({
   disableRouteWatcher: Boolean,
   expandOnHover: Boolean,
   floating: Boolean,
+  forceExpand: Boolean,
   modelValue: {
     type: Boolean as PropType<boolean | null>,
     default: null,
@@ -119,10 +120,12 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
     const { scopeId } = useScopeId()
 
     const rootEl = ref<HTMLElement>()
-    const isHovering = shallowRef(false)
+    const isHovering = shallowRef<Boolean>(props.forceExpand)
 
     const { runOpenDelay, runCloseDelay } = useDelay(props, value => {
-      isHovering.value = value
+      if (!props.forceExpand) {
+        isHovering.value = value
+      }
     })
 
     const width = computed(() => {
@@ -142,6 +145,9 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
     )
 
     useToggleScope(() => props.expandOnHover && props.rail != null, () => {
+      watch(() => props.forceExpand, () => {
+        isHovering.value = props.forceExpand
+      })
       watch(isHovering, val => emit('update:rail', !val))
     })
 

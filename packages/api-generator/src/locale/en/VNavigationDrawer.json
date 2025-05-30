@@ -6,6 +6,7 @@
     "disableRouteWatcher": "Disables opening of navigation drawer when route changes.",
     "expandOnHover": "Collapses the drawer to a **rail-variant** until hovering with the mouse.",
     "floating": "A floating drawer has no visible container (no border-right).",
+    "forceExpand": "Forces the drawer to remain expanded even when the user is not hovering. Only applies when **expand-on-hover** is enabled.",
     "height": "Sets the height of the navigation drawer.",
     "image": "Apply a specific background image to the component.",
     "miniVariantWidth": "Designates the width assigned when the `mini` prop is turned on.",
