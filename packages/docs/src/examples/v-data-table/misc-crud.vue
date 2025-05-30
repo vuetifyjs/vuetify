@@ -123,7 +123,7 @@
 
   function add () {
     isEditing.value = false
-    record.value = {...DEFAULT_RECORD}
+    record.value = { ...DEFAULT_RECORD }
     dialog.value = true
   }
 
@@ -163,7 +163,7 @@
 
   function reset () {
     dialog.value = false
-    record.value = {...DEFAULT_RECORD}
+    record.value = { ...DEFAULT_RECORD }
     books.value = [
       { id: 1, title: 'To Kill a Mockingbird', author: 'Harper Lee', genre: 'Fiction', year: 1960, pages: 281 },
       { id: 2, title: '1984', author: 'George Orwell', genre: 'Dystopian', year: 1949, pages: 328 },
