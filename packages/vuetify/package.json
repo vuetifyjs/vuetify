@@ -1,7 +1,7 @@
 {
   "name": "vuetify",
   "description": "Vue Material Component Framework",
-  "version": "3.8.5",
+  "version": "3.8.7",
   "author": {
     "name": "John Leider",
     "email": "john@vuetifyjs.com"
@@ -106,15 +106,15 @@
     "node": "^12.20 || >=14.13"
   },
   "scripts": {
-    "watch": "node --run build:lib -- --watch",
+    "watch": "pnpm build:lib --watch",
     "dev": "NODE_ENV=development vite",
     "dev:ssr": "NODE_ENV=development VITE_SSR=true vite-ssr",
     "dev:prod": "vite build -w",
     "dev:typecheck": "vue-tsc --noEmit --skipLibCheck --project ./tsconfig.dev.json",
-    "build": "rimraf lib dist && node --run build:lib && concurrently \"node --run build:dist\" \"node --run build:types:lib\" -n \"dist,types\" --kill-others-on-fail -gr && node --run build:types:bundle",
+    "build": "rimraf lib dist && pnpm build:lib && concurrently \"pnpm build:dist\" \"pnpm build:types:lib\" -n \"dist,types\" --kill-others-on-fail -gr && pnpm build:types:bundle",
     "build:dist": "rollup --config build/rollup.config.js",
     "build:lib": "NODE_ENV=lib babel src --out-dir lib --source-maps --extensions \".ts\",\".tsx\",\".snap\" --copy-files --no-copy-ignored --out-file-extension .js",
-    "build:types": "node --run build:types:lib && node --run build:types:bundle",
+    "build:types": "pnpm build:types:lib && pnpm build:types:bundle",
     "build:types:lib": "tspc --pretty --emitDeclarationOnly -p tsconfig.dist.json && node build/transform-types.js",
     "build:types:bundle": "rollup --config build/rollup.types.config.js",
     "tsc": "tsc",
@@ -122,7 +122,7 @@
     "test:unit": "vitest --project unit",
     "test:browser": "vitest --project browser",
     "test:open": "TEST_BAIL=1 vitest --project browser -w",
-    "test:coverage": "node --run test -- --coverage",
+    "test:coverage": "pnpm test --coverage",
     "test:percy": "percy exec -- vitest --project browser",
     "test:all": "concurrently -gr 'vitest --project unit' 'vitest --project browser --shard=1/5' 'vitest --project browser --shard=2/5' 'vitest --project browser --shard=3/5' 'vitest --project browser --shard=4/5' 'vitest --project browser --shard=5/5'",
     "lint": "concurrently -n \"tsc,eslint\" --kill-others-on-fail \"tsc -p tsconfig.checks.json --noEmit --pretty\" \"eslint src -f codeframe --max-warnings 0\"",
@@ -154,10 +154,10 @@
     "@vitest/browser": "^3.1.1",
     "@vitest/coverage-istanbul": "^3.1.1",
     "@vitest/ui": "^3.1.1",
-    "@vue/babel-plugin-jsx": "^1.4.0",
     "@vue/reactivity": "^3.5.13",
     "@vue/shared": "^3.5.13",
     "@vue/test-utils": "^2.4.6",
+    "@vuetify/babel-plugin-jsx": "^1.5.1",
     "acorn-walk": "^8.3.4",
     "autoprefixer": "^10.4.21",
     "babel-plugin-add-import-extension": "1.5.1",
