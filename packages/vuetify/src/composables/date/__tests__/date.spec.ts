@@ -1,4 +1,5 @@
 // Composables
+import { createDate } from '../date'
 import { createLocale } from '@/composables/locale'
 
 // Utilities
@@ -6,7 +7,6 @@ import { VuetifyDateAdapter } from '../adapters/vuetify'
 
 // Types
 import type { IUtils } from '@date-io/core/IUtils'
-import { createDate } from '../date'
 import type { DateAdapter } from '../DateAdapter'
 
 function expectAssignable<T, T2 extends T = T> (value: T2): void {}
