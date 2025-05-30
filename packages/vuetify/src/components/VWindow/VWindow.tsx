@@ -12,7 +12,7 @@ import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Directives
-import { Touch } from '@/directives/touch'
+import vTouch from '@/directives/touch'
 
 // Utilities
 import { computed, provide, ref, shallowRef, toRef, watch } from 'vue'
@@ -100,9 +100,7 @@ export const VWindow = genericComponent<new <T>(
 ) => GenericProps<typeof props, typeof slots>>()({
   name: 'VWindow',
 
-  directives: {
-    Touch,
-  },
+  directives: { vTouch },
 
   props: makeVWindowProps(),
 
