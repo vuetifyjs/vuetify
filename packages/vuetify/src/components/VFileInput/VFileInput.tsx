@@ -125,7 +125,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
     const isActive = toRef(() => isFocused.value || props.active)
     const isPlainOrUnderlined = computed(() => ['plain', 'underlined'].includes(props.variant))
     const isDragging = shallowRef(false)
-    const { handleDrop } = useFileDrop()
+    const { handleDrop, hasFilesOrFolders } = useFileDrop()
 
     function onFocus () {
       if (inputRef.value !== document.activeElement) {
@@ -170,7 +170,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
       e.stopImmediatePropagation()
       isDragging.value = false
 
-      if (!inputRef.value) return
+      if (!inputRef.value || !hasFilesOrFolders(e)) return
 
       const dataTransfer = new DataTransfer()
       for (const file of await handleDrop(e)) {

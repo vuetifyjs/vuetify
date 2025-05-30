@@ -2,6 +2,15 @@
 type FileSelection = { file: File, path: string }
 
 export function useFileDrop () {
+  function hasFilesOrFolders (e: DragEvent): boolean {
+    const entries = [...e.dataTransfer?.items ?? []]
+      .filter(x => x.kind === 'file')
+      .map(x => x.webkitGetAsEntry())
+      .filter(Boolean)
+
+    return entries.length > 0 || [...e.dataTransfer?.files ?? []].length > 0
+  }
+
   async function handleDrop (e: DragEvent) {
     const result: File[] = []
 
@@ -22,7 +31,10 @@ export function useFileDrop () {
     return result
   }
 
-  return { handleDrop }
+  return {
+    handleDrop,
+    hasFilesOrFolders,
+  }
 }
 
 function traverseFileTree (item: FileSystemEntry, path = ''): Promise<FileSelection[]> {
