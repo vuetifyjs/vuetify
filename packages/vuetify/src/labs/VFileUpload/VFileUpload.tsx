@@ -19,7 +19,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { ref, shallowRef } from 'vue'
-import { filterInputAttrs, genericComponent, pick, propsFactory, useRender, wrapInArray } from '@/util'
+import { filterFilesByAcceptType, filterInputAttrs, genericComponent, pick, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { PropType, VNode } from 'vue'
@@ -99,17 +99,29 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
   setup (props, { attrs, slots }) {
     const { t } = useLocale()
     const { densityClasses } = useDensity(props)
+    const inputRef = ref<HTMLInputElement | null>(null)
     const model = useProxiedModel(
       props,
       'modelValue',
       props.modelValue,
       val => wrapInArray(val),
-      val => (props.multiple || Array.isArray(props.modelValue)) ? val : val[0],
+      val => {
+        const acceptType = inputRef?.value?.accept
+        const newValue = filterFilesByAcceptType(val, acceptType)
+        if (inputRef.value) {
+          const dataTransfer = new DataTransfer()
+          for (const file of newValue) {
+            dataTransfer.items.add(file)
+          }
+          inputRef.value.files = dataTransfer.files
+          inputRef.value.dispatchEvent(new Event('change', { bubbles: true }))
+        }
+        return !props.multiple && Array.isArray(newValue) ? newValue[0] : newValue
+      }
     )
 
     const isDragging = shallowRef(false)
     const vSheetRef = ref<InstanceType<typeof VSheet> | null>(null)
-    const inputRef = ref<HTMLInputElement | null>(null)
 
     function onDragover (e: DragEvent) {
       e.preventDefault()
@@ -127,16 +139,11 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
       e.stopImmediatePropagation()
       isDragging.value = false
 
-      if (!e.dataTransfer?.files?.length || !inputRef.value) return
+      const files = e.dataTransfer?.files ?? []
 
-      const dataTransfer = new DataTransfer()
+      if (!files || files.length === 0 || !inputRef.value) return
 
-      for (const file of e.dataTransfer.files) {
-        dataTransfer.items.add(file)
-      }
-
-      inputRef.value.files = dataTransfer.files
-      inputRef.value.dispatchEvent(new Event('change', { bubbles: true }))
+      model.value = Array.from(files)
     }
 
     function onClick () {
@@ -150,6 +157,13 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
       if (newValue.length > 0 || !inputRef.value) return
 
       inputRef.value.value = ''
+    }
+
+    function onFileInputChange (e: Event) {
+      const files = (e.target as HTMLInputElement)?.files
+      if (!files) return
+
+      model.value = Array.from(files)
     }
 
     useRender(() => {
@@ -167,12 +181,7 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
           disabled={ props.disabled }
           multiple={ props.multiple }
           name={ props.name }
-          onChange={ e => {
-            if (!e.target) return
-
-            const target = e.target as HTMLInputElement
-            model.value = [...target.files ?? []]
-          }}
+          onChange={ onFileInputChange }
           { ...inputAttrs }
         />
       )
