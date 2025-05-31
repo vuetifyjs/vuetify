@@ -3,25 +3,19 @@ import { VDateInput } from '../VDateInput'
 
 // Utilities
 import { commands, render, screen, userEvent } from '@test'
-import { mount } from '@vue/test-utils'
 import { ref } from 'vue'
-import { createVuetify } from '@/framework'
 
 describe('VDateInput', () => {
-  const vuetify = createVuetify()
+  it('should not fire @update:focus twice when clicking bottom of input', async () => {
+    const onFocus = vi.fn()
+    const { element } = render(() => (
+      <VDateInput onUpdate:focused={ onFocus } />
+    ))
 
-  afterEach(() => {
-    vi.clearAllMocks()
+    await userEvent.click(element, { y: 1 })
+
+    expect(onFocus).toHaveBeenCalledTimes(1)
   })
-
-  function mountFunction (component: any, options = {}) {
-    return mount(component, {
-      global: {
-        plugins: [vuetify],
-      },
-      ...options,
-    })
-  }
 
   it('accepts keyboard input even if the picker is hidden', async () => {
     const model = ref<Date | null>(null)
@@ -36,7 +30,7 @@ describe('VDateInput', () => {
     await commands.waitStable('.v-picker')
     expect(screen.getByCSS('.v-picker')).not.toBeVisible()
 
-    const input = screen.getByCSS('input') as HTMLInputElement
+    const input = screen.getByCSS('input')
     await userEvent.type(input, '02/20/2022{Enter}')
 
     expect(model.value).toBeDefined()
@@ -85,20 +79,18 @@ describe('VDateInput', () => {
 
     testCases.forEach(({ format, input, expected }) => {
       it(`should select date with ${format} format`, async () => {
-        const wrapper = mountFunction(
+        const { element, emitted } = render(
           <VDateInput
             inputFormat={ format }
             modelValue={ null }
           />
         )
 
-        const inputElement = wrapper.find('input')
-        await inputElement.trigger('click')
-        await inputElement.trigger('focus')
-        await inputElement.setValue(input)
-        await inputElement.trigger('keydown', { key: 'Enter' })
+        await userEvent.click(element)
+        await userEvent.keyboard(input)
+        await userEvent.keyboard('{Enter}')
 
-        const date = wrapper.emitted('update:modelValue')![0][0] as Date
+        const date = emitted<Date[]>('update:modelValue')![0][0]
         expect(date.getFullYear()).toBe(expected.year)
         expect(date.getMonth()).toBe(expected.month)
         expect(date.getDate()).toBe(expected.day)
@@ -140,37 +132,32 @@ describe('VDateInput', () => {
 
     invalidTestCases.forEach(({ format, input, description }) => {
       it(`should handle ${description}`, async () => {
-        const wrapper = mountFunction(
-          <VDateInput
-            inputFormat={ format }
-            modelValue={ null }
-          />
-        )
+        const { element, emitted } = render(<VDateInput
+          inputFormat={ format }
+          modelValue={ null }
+        />)
 
-        const inputElement = wrapper.find('input')
-        await inputElement.trigger('click')
-        await inputElement.trigger('focus')
-        await inputElement.setValue(input)
-        await inputElement.trigger('keydown', { key: 'Enter' })
+        await userEvent.click(element)
+        await userEvent.keyboard(input)
+        await userEvent.keyboard('{Enter}')
 
-        expect(wrapper.emitted('update:modelValue')).toBeFalsy()
+        expect(emitted('update:modelValue')).toBeFalsy()
       })
     })
 
     it(`should reset if empty string is inputted`, async () => {
-      const wrapper = mountFunction(
+      const { element, emitted, getByRole } = render(
         <VDateInput
           modelValue={ new Date() }
         />
       )
 
-      const inputElement = wrapper.find('input')
-      await inputElement.trigger('click')
-      await inputElement.trigger('focus')
-      await inputElement.setValue('')
-      await inputElement.trigger('keydown', { key: 'Enter' })
+      const input = getByRole('textbox')
+      await userEvent.clear(input)
+      await userEvent.click(element)
+      await userEvent.keyboard('{Enter}')
 
-      const date = wrapper.emitted('update:modelValue')![0][0] as Date
+      const date = emitted<Date[]>('update:modelValue')![0][0]
       expect(date).toBeNull()
     })
   })
@@ -179,85 +166,77 @@ describe('VDateInput', () => {
     const TEST_DATE = '05/21/2025'
 
     it('should update modelValue only on enter key press', async () => {
-      const wrapper = mountFunction(
+      const { element, emitted } = render(
         <VDateInput
           updateOn={['enter']}
           modelValue={ null }
         />
       )
-      const input = wrapper.find('input')
 
-      await input.trigger('click')
-      await input.trigger('focus')
-      await input.setValue(TEST_DATE)
+      await userEvent.click(element)
+      await userEvent.keyboard(TEST_DATE)
 
-      await input.trigger('keydown', { key: 'Enter' })
-      expect(wrapper.emitted('update:modelValue')).toBeTruthy()
+      await userEvent.keyboard('{Enter}')
+      expect(emitted('update:modelValue')).toBeTruthy()
 
-      await input.trigger('blur')
-      expect(wrapper.emitted('update:modelValue')).toHaveLength(1)
+      await userEvent.tab()
+      expect(emitted('update:modelValue')).toHaveLength(1)
     })
 
     it('should update modelValue only on blur event', async () => {
-      const wrapper = mountFunction(
+      const { element, emitted } = render(
         <VDateInput
           updateOn={['blur']}
           modelValue={ null }
         />
       )
-      const input = wrapper.find('input')
 
-      await input.trigger('click')
-      await input.trigger('focus')
-      await input.setValue(TEST_DATE)
+      await userEvent.click(element)
+      await userEvent.keyboard(TEST_DATE)
 
-      await input.trigger('keydown', { key: 'Enter' })
-      expect(wrapper.emitted('update:modelValue')).toBeFalsy()
+      await userEvent.keyboard('{Enter}')
+      expect(emitted('update:modelValue')).toBeFalsy()
 
-      await input.trigger('blur')
-      expect(wrapper.emitted('update:modelValue')).toBeTruthy()
+      await userEvent.tab()
+      expect(emitted('update:modelValue')).toBeTruthy()
     })
 
     it('should update modelValue on both enter key press and blur event', async () => {
-      const wrapper = mountFunction(
+      const { element, emitted } = render(
         <VDateInput
           updateOn={['enter', 'blur']}
           modelValue={ null }
         />
       )
-      const input = wrapper.find('input')
 
-      await input.trigger('click')
-      await input.trigger('focus')
-      await input.setValue(TEST_DATE)
+      await userEvent.click(element)
+      await userEvent.keyboard(TEST_DATE)
 
-      await input.trigger('keydown', { key: 'Enter' })
-      expect(wrapper.emitted('update:modelValue')).toBeTruthy()
+      await userEvent.keyboard('{Enter}')
+      expect(emitted('update:modelValue')).toBeTruthy()
 
-      await input.trigger('blur')
-      expect(wrapper.emitted('update:modelValue')).toHaveLength(2)
+      await userEvent.tab()
+      expect(emitted('update:modelValue')).toHaveLength(2)
     })
 
     it('should make the input readonly and prevent value updates', async () => {
-      const wrapper = mountFunction(
+      const { element, emitted, getByRole } = render(
         <VDateInput
           updateOn={[]}
           modelValue={ null }
         />
       )
-      const input = wrapper.find('input')
 
-      expect(input.attributes('readonly')).toBeDefined()
-      expect(input.element.readOnly).toBe(true)
+      const input = getByRole<HTMLInputElement>('textbox')
+      expect(input).toHaveAttribute('readonly')
+      expect(input.readOnly).toBe(true)
 
-      await input.trigger('click')
-      await input.trigger('focus')
+      await userEvent.click(element)
+      await userEvent.keyboard(TEST_DATE)
+      await userEvent.keyboard('{Enter}')
+      await userEvent.tab()
 
-      await input.setValue(TEST_DATE)
-      await input.trigger('keydown', { key: 'Enter' })
-      await input.trigger('blur')
-
-      expect(wrapper.emitted('update:modelValue')).toBeFalsy()
+      expect(emitted('update:modelValue')).toBeFalsy()
     })
   })
 
