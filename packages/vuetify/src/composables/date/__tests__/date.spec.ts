@@ -146,3 +146,22 @@ describe('date.ts', () => {
     })
   })
 })
+
+describe('week numbers with time zone', () => {
+  beforeAll(() => vi.stubEnv('TZ', 'America/Los_Angeles'))
+  afterAll(() => vi.unstubAllEnvs())
+
+  it('should calculate weeks correctly near ST/DST transition', () => {
+    const adapter = new VuetifyDateAdapter({ locale: 'en-US' })
+    expect(adapter.getWeek(adapter.parseISO('2025-03-15'))).toBe(11)
+    expect(adapter.getWeek(adapter.parseISO('2025-03-16'))).toBe(12)
+    expect(adapter.getWeek(adapter.parseISO('2025-03-17'))).toBe(12)
+  })
+
+  it('should calculate weeks correctly near DST/ST transition', () => {
+    const adapter = new VuetifyDateAdapter({ locale: 'en-US' })
+    expect(adapter.getWeek(adapter.parseISO('2025-11-01'))).toBe(44)
+    expect(adapter.getWeek(adapter.parseISO('2025-11-02'))).toBe(45)
+    expect(adapter.getWeek(adapter.parseISO('2025-11-03'))).toBe(45)
+  })
+})
