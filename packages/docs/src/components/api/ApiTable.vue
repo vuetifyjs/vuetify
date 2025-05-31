@@ -18,27 +18,23 @@
 
       <tbody>
         <template v-for="item in filtered" :key="item.name">
-          <slot
-            name="row"
-            v-bind="{
-              props: {
-                style: 'background: rgba(0,0,0,.1)'
-              },
-              item,
-            }"
-          />
+          <v-hover>
+            <template #default="{ isHovering, props: hoverProps }">
+              <slot
+                name="row"
+                v-bind="{
+                  props: {
+                    ...hoverProps,
+                    style: isHovering && 'background: rgba(0,0,0,0.1)'
+                  },
+                  item
+                }"
+              />
+            </template>
+          </v-hover>
 
           <tr v-if="item.description || (user.dev && item.source)">
-            <td class="text-mono pt-4" colspan="3">
-              <template v-if="item.description">
-                <AppMarkdown
-                  v-if="localeStore.locale !== 'eo-UY'"
-                  :content="item.description"
-                  class="mb-0"
-                />
-                <span v-else>{{ item.description }}</span>
-              </template>
-
+            <td v-if="user.dev && item.source" class="text-mono pt-4" colspan="4">
               <p v-if="user.dev && item.source">
                 <strong>source: {{ item.source }}</strong>
                 <template v-if="user.dev && item.descriptionSource && item.source !== item.descriptionSource">
@@ -48,6 +44,7 @@
               </p>
             </td>
           </tr>
+
         </template>
 
         <tr v-if="!filtered.length">
@@ -77,7 +74,6 @@
 
   const { t } = useI18n()
   const appStore = useAppStore()
-  const localeStore = useLocaleStore()
   const user = useUserStore()
 
   const filtered = computed(() => {
@@ -93,3 +89,11 @@
     })
   })
 </script>
+
+<style scoped lang="sass">
+.api-table
+  :deep(.v-markdown p)
+    margin-bottom: 0
+  :deep(.v-markdown a)
+    display: inline-block
+</style>
