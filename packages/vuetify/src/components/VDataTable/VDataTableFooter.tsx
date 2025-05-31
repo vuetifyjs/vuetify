@@ -106,7 +106,7 @@ export const VDataTableFooter = genericComponent<{ prepend: never }>()({
           { slots.prepend?.() }
 
           <div class="v-data-table-footer__items-per-page">
-            <span>{ t(props.itemsPerPageText) }</span>
+            <span aria-label={ t(props.itemsPerPageText) }>{ t(props.itemsPerPageText) }</span>
 
             <VSelect
               items={ itemsPerPageOptions.value }
