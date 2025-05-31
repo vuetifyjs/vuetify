@@ -144,6 +144,15 @@ describe('date.ts', () => {
       expect(result[2]).toEqual(new Date('2025-01-01'))
       expect(result[3]).toEqual(adapter.endOfDay(stop))
     })
+
+    it('should not miss any days near ST/DST transition', () => {
+      // values passed to createDateRange on VDateInput blur when TZ=Europe/Warsaw
+      const start = new Date('2025-03-28T23:00:00.000Z')
+      const stop = new Date('2025-03-30T22:00:00.000Z')
+      const result = createDateRange(adapter, start, stop)
+
+      expect(result).toHaveLength(3)
+    })
   })
 })
 
