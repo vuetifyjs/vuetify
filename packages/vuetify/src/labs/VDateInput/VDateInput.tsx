@@ -15,7 +15,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, ref, shallowRef, watch } from 'vue'
-import { createRange, genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
+import { genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -215,19 +215,13 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
         const parts = value.trim().split(/\D+-\D+|[^\d\-/.]+/)
         if (parts.every(isValid)) {
           if (props.multiple === 'range') {
-            model.value = getRange(parts)
+            const [start, stop] = parts.map(parseDate).toSorted((a, b) => adapter.isAfter(a, b) ? 1 : -1)
+            model.value = adapter.createDateRange(start, stop)
           } else {
             model.value = parts.map(parseDate)
           }
         }
       }
-    }
-
-    function getRange (inputDates: string[]) {
-      const [start, stop] = inputDates.map(parseDate).toSorted((a, b) => adapter.isAfter(a, b) ? 1 : -1)
-      const diff = adapter.getDiff(stop ?? start, start, 'days')
-      return [start, ...createRange(diff, 1)
-        .map(i => adapter.addDays(start, i))]
     }
 
     useRender(() => {
