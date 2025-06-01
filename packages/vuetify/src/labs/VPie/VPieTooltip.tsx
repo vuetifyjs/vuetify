@@ -2,12 +2,12 @@
 import { VScrollYReverseTransition } from '@/components/transitions'
 import { VAvatar } from '@/components/VAvatar'
 import { VListItem } from '@/components/VList/VListItem'
-import { makeVTooltipProps, VTooltip } from '@/components/VTooltip/VTooltip'
+import { VTooltip } from '@/components/VTooltip/VTooltip'
 
 // Utilities
-import { computed } from 'vue'
+import { computed, onBeforeUnmount, onMounted, shallowRef } from 'vue'
 import { formatTextTemplate } from './utils'
-import { genericComponent, pick, propsFactory } from '@/util'
+import { genericComponent, getCurrentInstance, propsFactory } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -18,6 +18,7 @@ export type VPieTooltipSlots = {
 }
 
 export const makeVPieTooltipProps = propsFactory({
+  modelValue: Boolean,
   item: {
     type: Object as PropType<PieItem | null>,
     default: null,
@@ -30,10 +31,6 @@ export const makeVPieTooltipProps = propsFactory({
     type: [String, Function] as PropType<TextTemplate>,
     default: '[value]',
   },
-  ...pick(makeVTooltipProps(), [
-    'modelValue',
-    'target',
-  ]),
 }, 'VPieTooltip')
 
 export const VPieTooltip = genericComponent<VPieTooltipSlots>()({
@@ -42,6 +39,25 @@ export const VPieTooltip = genericComponent<VPieTooltipSlots>()({
   props: makeVPieTooltipProps(),
 
   setup (props, { slots }) {
+    const target = shallowRef<[x: number, y: number]>([0, 0])
+    const vm = getCurrentInstance('VPieTooltip')
+
+    let frame = -1
+    function onMouseMove ({ clientX, clientY }: MouseEvent) {
+      cancelAnimationFrame(frame)
+      frame = requestAnimationFrame(() => {
+        target.value = [clientX, clientY]
+      })
+    }
+
+    onMounted(() => {
+      vm.proxy!.$el.parentNode.addEventListener('mousemove', onMouseMove)
+    })
+
+    onBeforeUnmount(() => {
+      vm.proxy!.$el.parentNode.removeEventListener('mousemove', onMouseMove)
+    })
+
     const tooltipTitleFormatFunction = computed(() => (segment: PieItem) => {
       return typeof props.titleFormat === 'function'
         ? props.titleFormat(segment)
@@ -59,7 +75,7 @@ export const VPieTooltip = genericComponent<VPieTooltipSlots>()({
         absolute={ false }
         offset={ 16 }
         model-value={ props.modelValue }
-        target={ props.target }
+        target={ target.value }
         content-class="v-pie__tooltip-content"
       >
         { !!props.item && (

@@ -190,13 +190,8 @@ export const VPie = genericComponent<VPieSlots>()({
 
     const tooltipProps = reactive({
       modelValue: false,
-      target: [0, 0] satisfies [x: number, y: number],
       item: null as PieItem | null,
     })
-
-    function onMousemove ({ clientX, clientY }: MouseEvent) {
-      tooltipProps.target = [clientX, clientY]
-    }
 
     let mouseLeaveTimeout = null! as ReturnType<typeof setTimeout>
 
@@ -242,7 +237,6 @@ export const VPie = genericComponent<VPieSlots>()({
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 100 100"
-              onMousemove={ onMousemove }
             >
               { arcs.value.map((item, index) => (
                 <VPieSegment
