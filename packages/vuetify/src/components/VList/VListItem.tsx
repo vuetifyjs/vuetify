@@ -24,11 +24,11 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
 
 // Directives
-import { Ripple } from '@/directives/ripple'
+import vRipple from '@/directives/ripple'
 
 // Utilities
-import { computed, onBeforeMount, toDisplayString, watch } from 'vue'
-import { deprecate, EventProp, genericComponent, propsFactory, useRender } from '@/util'
+import { computed, onBeforeMount, toDisplayString, toRef, watch } from 'vue'
+import { deprecate, EventProp, genericComponent, keyCodes, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -111,7 +111,7 @@ export const makeVListItemProps = propsFactory({
 export const VListItem = genericComponent<VListItemSlots>()({
   name: 'VListItem',
 
-  directives: { Ripple },
+  directives: { vRipple },
 
   props: makeVListItemProps(),
 
@@ -140,7 +140,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
       props.active !== false &&
       (props.active || link.isActive?.value || (root.activatable.value ? isActivated.value : isSelected.value))
     )
-    const isLink = computed(() => props.link !== false && link.isLink.value)
+    const isLink = toRef(() => props.link !== false && link.isLink.value)
     const isSelectable = computed(() => (!!list && (root.selectable.value || root.activatable.value || props.value != null)))
     const isClickable = computed(() =>
       !props.disabled &&
@@ -148,9 +148,9 @@ export const VListItem = genericComponent<VListItemSlots>()({
       (props.link || link.isClickable.value || isSelectable.value)
     )
 
-    const roundedProps = computed(() => props.rounded || props.nav)
-    const color = computed(() => props.color ?? props.activeColor)
-    const variantProps = computed(() => ({
+    const roundedProps = toRef(() => props.rounded || props.nav)
+    const color = toRef(() => props.color ?? props.activeColor)
+    const variantProps = toRef(() => ({
       color: isActive.value ? color.value ?? props.baseColor : props.baseColor,
       variant: props.variant,
     }))
@@ -178,7 +178,16 @@ export const VListItem = genericComponent<VListItemSlots>()({
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(roundedProps)
-    const lineClasses = computed(() => props.lines ? `v-list-item--${props.lines}-line` : undefined)
+    const lineClasses = toRef(() => props.lines ? `v-list-item--${props.lines}-line` : undefined)
+    const rippleOptions = toRef(() =>
+      (
+        props.ripple !== undefined &&
+        !!props.ripple &&
+        list?.filterable
+      )
+        ? { keys: [keyCodes.enter] }
+        : props.ripple
+    )
 
     const slotProps = computed(() => ({
       isActive: isActive.value,
@@ -212,8 +221,9 @@ export const VListItem = genericComponent<VListItemSlots>()({
 
       if (['INPUT', 'TEXTAREA'].includes(target.tagName)) return
 
-      if (e.key === 'Enter' || e.key === ' ') {
+      if (e.key === 'Enter' || (e.key === ' ' && !list?.filterable)) {
         e.preventDefault()
+        e.stopPropagation()
         e.target!.dispatchEvent(new MouseEvent('click', e))
       }
     }
@@ -271,7 +281,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
           }
           onClick={ onClick }
           onKeydown={ isClickable.value && !isLink.value && onKeyDown }
-          v-ripple={ isClickable.value && props.ripple }
+          v-ripple={ isClickable.value && rippleOptions.value }
           { ...link.linkProps }
         >
           { genOverlays(isClickable.value || isActive.value, 'v-list-item') }

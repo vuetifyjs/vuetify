@@ -135,13 +135,13 @@ export const VField = genericComponent<new <T>(
     const { roundedClasses } = useRounded(props)
     const { rtlClasses } = useRtl()
 
-    const isActive = computed(() => props.dirty || props.active)
-    const hasLabel = computed(() => !!(props.label || slots.label))
-    const hasFloatingLabel = computed(() => !props.singleLine && hasLabel.value)
+    const isActive = toRef(() => props.dirty || props.active)
+    const hasLabel = toRef(() => !!(props.label || slots.label))
+    const hasFloatingLabel = toRef(() => !props.singleLine && hasLabel.value)
 
     const uid = useId()
     const id = computed(() => props.id || `input-${uid}`)
-    const messagesId = computed(() => `${id.value}-messages`)
+    const messagesId = toRef(() => `${id.value}-messages`)
 
     const labelRef = ref<VFieldLabel>()
     const floatingLabelRef = ref<VFieldLabel>()
@@ -153,12 +153,12 @@ export const VField = genericComponent<new <T>(
         : props.baseColor
     })
     const iconColor = computed(() => {
-      if (!props.iconColor) return undefined
+      if (!props.iconColor || (props.glow && !isFocused.value)) return undefined
 
       return props.iconColor === true ? color.value : props.iconColor
     })
 
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'bgColor'))
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.bgColor)
     const { textColorClasses, textColorStyles } = useTextColor(color)
 
     watch(isActive, val => {
@@ -353,6 +353,7 @@ export const VField = genericComponent<new <T>(
                       onFocus: focus,
                       onBlur: blur,
                       onClick: props['onClick:clear'],
+                      tabindex: -1,
                     },
                   })
                   : (
@@ -360,6 +361,7 @@ export const VField = genericComponent<new <T>(
                       name="clear"
                       onFocus={ focus }
                       onBlur={ blur }
+                      tabindex={ -1 }
                     />
                   )}
                 </VDefaultsProvider>
@@ -416,6 +418,7 @@ export const VField = genericComponent<new <T>(
 
     return {
       controlRef,
+      fieldIconColor: iconColor,
     }
   },
 })

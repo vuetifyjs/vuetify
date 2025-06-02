@@ -14,7 +14,7 @@ import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, nextTick, ref, watch } from 'vue'
+import { computed, nextTick, ref, toRef, watch } from 'vue'
 import { filterInputAttrs, focusChild, genericComponent, pick, propsFactory, useRender } from '@/util'
 
 // Types
@@ -167,12 +167,13 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
       e.stopPropagation()
 
       const clipboardText = e?.clipboardData?.getData('Text').slice(0, length.value) ?? ''
+      const finalIndex = clipboardText.length - 1 === -1 ? index : clipboardText.length - 1
 
       if (isValidNumber(clipboardText)) return
 
       model.value = clipboardText.split('')
 
-      inputRef.value?.[index].blur()
+      inputRef.value?.[finalIndex].focus()
     }
 
     function reset () {
@@ -197,12 +198,12 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
 
     provideDefaults({
       VField: {
-        color: computed(() => props.color),
-        bgColor: computed(() => props.color),
-        baseColor: computed(() => props.baseColor),
-        disabled: computed(() => props.disabled),
-        error: computed(() => props.error),
-        variant: computed(() => props.variant),
+        color: toRef(() => props.color),
+        bgColor: toRef(() => props.color),
+        baseColor: toRef(() => props.baseColor),
+        disabled: toRef(() => props.disabled),
+        error: toRef(() => props.error),
+        variant: toRef(() => props.variant),
       },
     }, { scoped: true })
 

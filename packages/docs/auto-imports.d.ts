@@ -19,6 +19,7 @@ declare global {
   const camelCase: typeof import('lodash-es')['camelCase']
   const camelize: typeof import('vue')['camelize']
   const cleanCache: typeof import('./src/utils/pwa')['cleanCache']
+  const compressAndEncode: typeof import('./src/composables/bin')['compressAndEncode']
   const computed: typeof import('vue')['computed']
   const configureMarkdown: typeof import('./src/utils/markdown-it')['configureMarkdown']
   const copyElementContent: typeof import('./src/utils/helpers')['copyElementContent']
@@ -28,6 +29,7 @@ declare global {
   const createOne: typeof import('@vuetify/one')['createOne']
   const createPinia: typeof import('pinia')['createPinia']
   const customRef: typeof import('vue')['customRef']
+  const decodeAndDecompress: typeof import('./src/composables/bin')['decodeAndDecompress']
   const defineAsyncComponent: typeof import('vue')['defineAsyncComponent']
   const defineComponent: typeof import('vue')['defineComponent']
   const defineStore: typeof import('pinia')['defineStore']
@@ -103,6 +105,7 @@ declare global {
   const shallowRef: typeof import('vue')['shallowRef']
   const storeToRefs: typeof import('pinia')['storeToRefs']
   const stripLinks: typeof import('./src/utils/api')['stripLinks']
+  const sweClick: typeof import('./src/utils/analytics')['sweClick']
   const toRaw: typeof import('vue')['toRaw']
   const toRef: typeof import('vue')['toRef']
   const toRefs: typeof import('vue')['toRefs']
@@ -116,6 +119,7 @@ declare global {
   const useAppStore: typeof import('./src/stores/app')['useAppStore']
   const useAttrs: typeof import('vue')['useAttrs']
   const useAuthStore: typeof import('@vuetify/one')['useAuthStore']
+  const useBin: typeof import('./src/composables/bin')['useBin']
   const useCommitsStore: typeof import('./src/stores/commits')['useCommitsStore']
   const useCosmic: typeof import('./src/composables/cosmic')['useCosmic']
   const useCssModule: typeof import('vue')['useCssModule']
@@ -124,7 +128,6 @@ declare global {
   const useDisplay: typeof import('vuetify')['useDisplay']
   const useFrontmatter: typeof import('./src/composables/frontmatter')['useFrontmatter']
   const useGoTo: typeof import('vuetify')['useGoTo']
-  const useGtag: typeof import('vue-gtag-next')['useGtag']
   const useHttpStore: typeof import('@vuetify/one')['useHttpStore']
   const useI18n: typeof import('vue-i18n')['useI18n']
   const useId: typeof import('vue')['useId']
@@ -149,6 +152,7 @@ declare global {
   const useSlots: typeof import('vue')['useSlots']
   const useSponsorsStore: typeof import('./src/stores/sponsors')['useSponsorsStore']
   const useSpotStore: typeof import('./src/stores/spot')['useSpotStore']
+  const useTeamMembersStore: typeof import('./src/stores/team-members')['useTeamMembersStore']
   const useTeamStore: typeof import('./src/stores/team')['useTeamStore']
   const useTemplateRef: typeof import('vue')['useTemplateRef']
   const useTheme: typeof import('vuetify')['useTheme']
@@ -182,8 +186,8 @@ declare global {
   export type { Sponsor } from './src/stores/sponsors'
   import('./src/stores/sponsors')
   // @ts-ignore
-  export type { Member, GithubMember } from './src/stores/team'
-  import('./src/stores/team')
+  export type { Member, GithubMember } from './src/stores/team-members'
+  import('./src/stores/team-members')
   // @ts-ignore
   export type { Item } from './src/utils/api'
   import('./src/utils/api')
@@ -205,6 +209,7 @@ declare module 'vue' {
     readonly camelCase: UnwrapRef<typeof import('lodash-es')['camelCase']>
     readonly camelize: UnwrapRef<typeof import('vue')['camelize']>
     readonly cleanCache: UnwrapRef<typeof import('./src/utils/pwa')['cleanCache']>
+    readonly compressAndEncode: UnwrapRef<typeof import('./src/composables/bin')['compressAndEncode']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
     readonly configureMarkdown: UnwrapRef<typeof import('./src/utils/markdown-it')['configureMarkdown']>
     readonly copyElementContent: UnwrapRef<typeof import('./src/utils/helpers')['copyElementContent']>
@@ -213,6 +218,7 @@ declare module 'vue' {
     readonly createOne: UnwrapRef<typeof import('@vuetify/one')['createOne']>
     readonly createPinia: UnwrapRef<typeof import('pinia')['createPinia']>
     readonly customRef: UnwrapRef<typeof import('vue')['customRef']>
+    readonly decodeAndDecompress: UnwrapRef<typeof import('./src/composables/bin')['decodeAndDecompress']>
     readonly defineAsyncComponent: UnwrapRef<typeof import('vue')['defineAsyncComponent']>
     readonly defineComponent: UnwrapRef<typeof import('vue')['defineComponent']>
     readonly defineStore: UnwrapRef<typeof import('pinia')['defineStore']>
@@ -229,7 +235,6 @@ declare module 'vue' {
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
     readonly getDistance: UnwrapRef<typeof import('./src/utils/helpers')['getDistance']>
     readonly getMatchMedia: UnwrapRef<typeof import('./src/utils/helpers')['getMatchMedia']>
-    readonly gtagClick: UnwrapRef<typeof import('./src/utils/analytics')['gtagClick']>
     readonly h: UnwrapRef<typeof import('vue')['h']>
     readonly inject: UnwrapRef<typeof import('vue')['inject']>
     readonly insertLinks: UnwrapRef<typeof import('./src/utils/api')['insertLinks']>
@@ -284,6 +289,7 @@ declare module 'vue' {
     readonly shallowRef: UnwrapRef<typeof import('vue')['shallowRef']>
     readonly storeToRefs: UnwrapRef<typeof import('pinia')['storeToRefs']>
     readonly stripLinks: UnwrapRef<typeof import('./src/utils/api')['stripLinks']>
+    readonly sweClick: UnwrapRef<typeof import('./src/utils/analytics')['sweClick']>
     readonly toRaw: UnwrapRef<typeof import('vue')['toRaw']>
     readonly toRef: UnwrapRef<typeof import('vue')['toRef']>
     readonly toRefs: UnwrapRef<typeof import('vue')['toRefs']>
@@ -297,6 +303,7 @@ declare module 'vue' {
     readonly useAppStore: UnwrapRef<typeof import('./src/stores/app')['useAppStore']>
     readonly useAttrs: UnwrapRef<typeof import('vue')['useAttrs']>
     readonly useAuthStore: UnwrapRef<typeof import('@vuetify/one')['useAuthStore']>
+    readonly useBin: UnwrapRef<typeof import('./src/composables/bin')['useBin']>
     readonly useCommitsStore: UnwrapRef<typeof import('./src/stores/commits')['useCommitsStore']>
     readonly useCosmic: UnwrapRef<typeof import('./src/composables/cosmic')['useCosmic']>
     readonly useCssModule: UnwrapRef<typeof import('vue')['useCssModule']>
@@ -305,7 +312,6 @@ declare module 'vue' {
     readonly useDisplay: UnwrapRef<typeof import('vuetify')['useDisplay']>
     readonly useFrontmatter: UnwrapRef<typeof import('./src/composables/frontmatter')['useFrontmatter']>
     readonly useGoTo: UnwrapRef<typeof import('vuetify')['useGoTo']>
-    readonly useGtag: UnwrapRef<typeof import('vue-gtag-next')['useGtag']>
     readonly useHttpStore: UnwrapRef<typeof import('@vuetify/one')['useHttpStore']>
     readonly useI18n: UnwrapRef<typeof import('vue-i18n')['useI18n']>
     readonly useId: UnwrapRef<typeof import('vue')['useId']>
@@ -330,7 +336,7 @@ declare module 'vue' {
     readonly useSlots: UnwrapRef<typeof import('vue')['useSlots']>
     readonly useSponsorsStore: UnwrapRef<typeof import('./src/stores/sponsors')['useSponsorsStore']>
     readonly useSpotStore: UnwrapRef<typeof import('./src/stores/spot')['useSpotStore']>
-    readonly useTeamStore: UnwrapRef<typeof import('./src/stores/team')['useTeamStore']>
+    readonly useTeamMembersStore: UnwrapRef<typeof import('./src/stores/team-members')['useTeamMembersStore']>
     readonly useTemplateRef: UnwrapRef<typeof import('vue')['useTemplateRef']>
     readonly useTheme: UnwrapRef<typeof import('vuetify')['useTheme']>
     readonly useUserStore: UnwrapRef<typeof import('@vuetify/one')['useUserStore']>

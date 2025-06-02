@@ -70,11 +70,11 @@ export const VChipGroup = genericComponent<new <T>(
 
     provideDefaults({
       VChip: {
-        baseColor: toRef(props, 'baseColor'),
-        color: toRef(props, 'color'),
-        disabled: toRef(props, 'disabled'),
-        filter: toRef(props, 'filter'),
-        variant: toRef(props, 'variant'),
+        baseColor: toRef(() => props.baseColor),
+        color: toRef(() => props.color),
+        disabled: toRef(() => props.disabled),
+        filter: toRef(() => props.filter),
+        variant: toRef(() => props.variant),
       },
     })
 

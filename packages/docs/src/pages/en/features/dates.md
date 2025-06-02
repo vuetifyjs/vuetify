@@ -173,12 +173,12 @@ Then configure Vuetify to use DayJs:
 ```js { resource="src/plugins/vuetify.js" }
 import { createVuetify } from 'vuetify'
 import DayJsAdapter from '@date-io/dayjs'
-import { enUS } from 'date-fns/locale'
+import en from 'dayjs/locale/en'
 
 export default createVuetify({
   date: {
     adapter: DayJsAdapter,
-    locale: { en: enUS },
+    locale: { en },
   },
 })
 ```
@@ -336,5 +336,37 @@ export interface DateAdapter<TDate> {
   getMonth (date: TDate): number
   setMonth (date: TDate, month: number): TDate
   getNextMonth (date: TDate): TDate
+}
+```
+
+## Inheritance
+
+You can also extend and override build-in DateAdapter using class inheritance:
+
+```ts
+import { VuetifyDateAdapter } from 'vuetify/date/adapters/vuetify'
+
+export class MyAdapter extends VuetifyDateAdapter {
+  sayHello () {
+    return `Hello, current week starts at ${this.startOfWeek(this.date())}`
+  }
+  override startOfWeek (date: Date, firstDayOfWeek?: string | number): Date {
+    return super.startOfWeek(date, 2) // forcing Tuesday
+  }
+}
+```
+
+```ts { resource="src/plugins/vuetify.js" }
+export default createVuetify({
+  date: {
+    adapter: MyAdapter,
+  },
+  ...
+})
+
+declare module 'vuetify' {
+  namespace DateModule {
+    interface Adapter extends MyAdapter {}
+  }
 }
 ```
