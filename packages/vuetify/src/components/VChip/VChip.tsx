@@ -143,7 +143,7 @@ export const VChip = genericComponent<VChipSlots>()({
     )
     const closeProps = toRef(() => ({
       'aria-label': t(props.closeLabel),
-      'disabled': props.disabled,
+      disabled: props.disabled,
       onClick (e: MouseEvent) {
         e.preventDefault()
         e.stopPropagation()
