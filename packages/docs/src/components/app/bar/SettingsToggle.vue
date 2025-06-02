@@ -25,6 +25,7 @@
 
 <script setup>
   const app = useAppStore()
+  const one = useOneStore()
   const pwa = usePwaStore()
   const { name } = useRoute()
 
@@ -32,5 +33,6 @@
     sweClick('app-bar', 'settings-toggle', name)
 
     app.settings = !app.settings
+    one.mobileMenu = false
   }
 </script>
