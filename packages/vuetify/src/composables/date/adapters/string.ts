@@ -112,6 +112,10 @@ export class StringDateAdapter implements DateAdapter<string> {
     return this.base.getMonth(this.base.date(date)!)
   }
 
+  getWeek (date: string, firstDayOfWeek?: number | string, firstWeekMinSize?: number): number {
+    return this.base.getWeek(this.base.date(date)!, firstDayOfWeek, firstWeekMinSize)
+  }
+
   getNextMonth (date: string): string {
     return this.base.toISO(
       this.base.getNextMonth(this.base.date(date)!)
@@ -135,8 +139,8 @@ export class StringDateAdapter implements DateAdapter<string> {
     })
   }
 
-  getWeekdays (firstDayOfWeek?: number | string): string[] {
-    return this.base.getWeekdays(firstDayOfWeek)
+  getWeekdays (firstDayOfWeek?: number | string, weekdayFormat?: 'long' | 'short' | 'narrow'): string[] {
+    return this.base.getWeekdays(firstDayOfWeek, weekdayFormat)
   }
 
   getYear (date: string): number {
