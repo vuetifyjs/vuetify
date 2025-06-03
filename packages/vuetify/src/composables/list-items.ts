@@ -1,6 +1,6 @@
 // Utilities
 import { computed, shallowRef, watchEffect } from 'vue'
-import { deepEqual, getPropertyFromItem, isPrimitive, omit, pick, propsFactory } from '@/util'
+import { deepEqual, getCamelCaseProps, getPropertyFromItem, isPrimitive, omit, pick, propsFactory } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -68,7 +68,7 @@ export function transformItem (props: Omit<ItemProps, 'items'>, item: any): List
   const _props = {
     title,
     value,
-    ...itemProps,
+    ...getCamelCaseProps(itemProps || {}),
   }
 
   return {

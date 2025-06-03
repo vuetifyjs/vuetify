@@ -7,6 +7,7 @@ import {
   defer,
   destructComputed,
   extractNumber,
+  getCamelCaseProps,
   getNestedValue,
   getObjectValueByPath,
   getPropertyFromItem,
@@ -385,6 +386,24 @@ describe('helpers', () => {
       expect(extractNumber(' -6.67 USD', 2)).toBe('-6.67')
       expect(extractNumber('($9,000.00)', 2)).toBe('9000.00')
       expect(extractNumber(' 23 567.20 ', 2)).toBe('23567.20')
+    })
+  })
+
+  describe('getCamelCaseProps', () => {
+    it('should convert kebab-case props to camelCase', () => {
+      const props = {
+        'background-color': 'red',
+        fontSize: '16px',
+        'border-radius': '4px',
+      }
+
+      const result = getCamelCaseProps(props)
+
+      expect(result).toEqual({
+        backgroundColor: 'red',
+        fontSize: '16px',
+        borderRadius: '4px',
+      })
     })
   })
 })
