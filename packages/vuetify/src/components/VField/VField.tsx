@@ -359,6 +359,7 @@ export const VField = genericComponent<new <T>(
                       onFocus: focus,
                       onBlur: blur,
                       onClick: props['onClick:clear'],
+                      tabindex: -1,
                     },
                   })
                   : (
@@ -366,6 +367,7 @@ export const VField = genericComponent<new <T>(
                       name="clear"
                       onFocus={ focus }
                       onBlur={ blur }
+                      tabindex={ -1 }
                     />
                   )}
                 </VDefaultsProvider>

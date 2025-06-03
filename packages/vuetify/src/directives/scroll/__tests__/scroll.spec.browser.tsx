@@ -1,5 +1,5 @@
 // Directives
-import Scroll from '../'
+import vScroll from '../'
 
 // Utilities
 import { render, scroll } from '@test'
@@ -9,7 +9,7 @@ describe('v-scroll', () => {
   function setup (selector = '') {
     const callback = vi.fn()
     const result = render(defineComponent({
-      directives: { Scroll },
+      directives: { vScroll },
       setup () {
         return () => (
           <div data-testid="root" style="overflow: auto; height: 500px; margin-block: 500px">
