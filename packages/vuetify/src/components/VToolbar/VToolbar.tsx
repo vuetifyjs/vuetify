@@ -14,6 +14,7 @@ import { makeComponentProps } from '@/composables/component'
 import { provideDefaults } from '@/composables/defaults'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { useRtl } from '@/composables/locale'
+import { makeLocationProps, useLocation } from '@/composables/location'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
@@ -58,6 +59,7 @@ export const makeVToolbarProps = propsFactory({
   ...makeBorderProps(),
   ...makeComponentProps(),
   ...makeElevationProps(),
+  ...makeLocationProps(),
   ...makeRoundedProps(),
   ...makeTagProps({ tag: 'header' }),
   ...makeThemeProps(),
@@ -81,6 +83,7 @@ export const VToolbar = genericComponent<VToolbarSlots>()({
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.color)
     const { borderClasses } = useBorder(props)
     const { elevationClasses } = useElevation(props)
+    const { locationStyles } = useLocation(props)
     const { roundedClasses } = useRounded(props)
     const { themeClasses } = provideTheme(props)
     const { rtlClasses } = useRtl()
@@ -136,6 +139,7 @@ export const VToolbar = genericComponent<VToolbarSlots>()({
           ]}
           style={[
             backgroundColorStyles.value,
+            locationStyles.value,
             props.style,
           ]}
         >
