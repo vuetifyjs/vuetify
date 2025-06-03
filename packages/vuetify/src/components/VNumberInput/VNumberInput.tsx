@@ -12,6 +12,7 @@ import { useHold } from './hold'
 import { useFocus } from '@/composables/focus'
 import { useForm } from '@/composables/form'
 import { forwardRefs } from '@/composables/forwardRefs'
+import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
@@ -94,7 +95,8 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
 
     const { isFocused, focus, blur } = useFocus(props)
 
-    const decimalSeparator = computed(() => props.decimalSeparator?.[0] || '.')
+    const { decimalSeparator: decimalSeparatorFromLocale } = useLocale()
+    const decimalSeparator = computed(() => props.decimalSeparator?.[0] || decimalSeparatorFromLocale.value)
 
     function correctPrecision (val: number, precision = props.precision, trim = true) {
       const fixed = precision == null
