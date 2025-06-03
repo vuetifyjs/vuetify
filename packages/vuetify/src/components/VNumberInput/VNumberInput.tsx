@@ -11,6 +11,7 @@ import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextFi
 import { useHold } from './hold'
 import { useForm } from '@/composables/form'
 import { forwardRefs } from '@/composables/forwardRefs'
+import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
@@ -94,7 +95,8 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
 
     const isFocused = shallowRef(props.focused)
 
-    const decimalSeparator = computed(() => props.decimalSeparator?.[0] || '.')
+    const { decimalSeparator: decimalSeparatorFromLocale } = useLocale()
+    const decimalSeparator = computed(() => props.decimalSeparator?.[0] || decimalSeparatorFromLocale.value)
 
     function correctPrecision (val: number, precision = props.precision, trim = true) {
       const fixed = precision == null
