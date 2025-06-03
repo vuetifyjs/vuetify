@@ -1,9 +1,10 @@
+/* eslint-disable complexity */
+
 // Components
 import { VDefaultsProvider } from '@/components/VDefaultsProvider/VDefaultsProvider'
 import { VSpacer } from '@/components/VGrid/VSpacer'
 import { VIcon } from '@/components/VIcon/VIcon'
 import { VMenu } from '@/components/VMenu/VMenu'
-import { VSheet } from '@/components/VSheet/VSheet'
 import { VSlider } from '@/components/VSlider/VSlider'
 import { VIconBtn } from '@/labs/VIconBtn/VIconBtn'
 
@@ -139,11 +140,15 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
     }
 
     useRender(() => {
+      const sizes = props.pills
+        ? [42, 36, 30]
+        : [32, 28, 24]
+
       const innerDefaults = {
         VIconBtn: {
-          size: props.density === 'compact' ? 24
-          : props.density === 'comfortable' ? 28
-          : 32,
+          size: props.density === 'compact' ? sizes[2]
+          : props.density === 'comfortable' ? sizes[1]
+          : sizes[0],
           iconSize: props.density === 'compact' ? 20
           : props.density === 'comfortable' ? 24
           : 26,
@@ -155,6 +160,9 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
           hideDetails: true,
         },
       }
+
+      const regularBtnSize = innerDefaults.VIconBtn.size
+      const playBtnSize = props.pills ? (regularBtnSize + 8) : regularBtnSize
 
       const volumeIcon = volume.value > 70 ? 'mdi-volume-high'
         : volume.value > 40 ? 'mdi-volume-medium'
@@ -194,6 +202,7 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
           ]}
           style={[
             backgroundColorStyles.value,
+            { '--v-video-controls-pill-height': `${regularBtnSize}px` },
           ]}
         >
           <VDefaultsProvider defaults={ innerDefaults }>
@@ -205,6 +214,7 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
                       <div class={[pillClasses, 'v-video__action-play']}>
                         <VIconBtn
                           icon={ isPlaying.value ? 'mdi-pause' : 'mdi-play' }
+                          size={ playBtnSize }
                           onClick={ () => isPlaying.value = !isPlaying.value }
                           v-ripple
                         />
@@ -248,6 +258,7 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
                       <div class={[pillClasses, 'v-video__action-play']}>
                         <VIconBtn
                           icon={ isPlaying.value ? 'mdi-pause' : 'mdi-play' }
+                          size={ playBtnSize }
                           onClick={ () => isPlaying.value = !isPlaying.value }
                           v-ripple
                         />
