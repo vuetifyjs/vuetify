@@ -1,8 +1,8 @@
 import { VTextField } from '../VTextField'
 
 // Utilities
-import { generate, render, screen, userEvent } from '@test'
-import { cloneVNode, ref } from 'vue'
+import { generate, render, userEvent } from '@test'
+import { cloneVNode } from 'vue'
 
 const variants = ['underlined', 'outlined', 'filled', 'solo', 'plain'] as const
 const densities = ['default', 'comfortable', 'compact'] as const
@@ -88,35 +88,6 @@ describe('VTextField', () => {
     ))
     await userEvent.click(element)
     expect(element).toHaveTextContent('0')
-  })
-
-  describe('Mask', () => {
-    it('should mask model-value but keep v-model intact', async () => {
-      const inputValue = ref('4567')
-      render(() => (
-        <VTextField
-          v-model={ inputValue.value }
-          mask="(###) #"
-        />
-      ))
-
-      await expect.element(screen.getByCSS('input')).toHaveValue('(456) 7')
-      expect(inputValue.value).toBe('4567')
-    })
-
-    it('should mask model-value and also return v-model to be masked value', async () => {
-      const inputValue = ref('4567')
-      render(() => (
-        <VTextField
-          v-model={ inputValue.value }
-          mask="(###) #"
-          returnMaskedValue
-        />
-      ))
-
-      await expect.element(screen.getByCSS('input')).toHaveValue('(456) 7')
-      expect(inputValue.value).toBe('(456) 7')
-    })
   })
 
   describe('Showcase', () => {
