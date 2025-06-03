@@ -6,8 +6,9 @@ import { VAvatar } from '@/components/VAvatar'
 import { VCheckboxBtn } from '@/components/VCheckbox'
 import { VChip } from '@/components/VChip'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
+import { VDivider } from '@/components/VDivider'
 import { VIcon } from '@/components/VIcon'
-import { VList, VListItem } from '@/components/VList'
+import { VList, VListItem, VListSubheader } from '@/components/VList'
 import { VMenu } from '@/components/VMenu'
 import { makeSelectProps } from '@/components/VSelect/VSelect'
 import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextField'
@@ -97,6 +98,8 @@ export const VAutocomplete = genericComponent<new <
     item: { item: ListItem<Item>, index: number, props: Record<string, unknown> }
     chip: { item: ListItem<Item>, index: number, props: Record<string, unknown> }
     selection: { item: ListItem<Item>, index: number }
+    subheader: { props: Record<string, unknown>, index: number }
+    divider: { props: Record<string, unknown>, index: number }
     'prepend-item': never
     'append-item': never
     'no-data': never
@@ -115,25 +118,15 @@ export const VAutocomplete = genericComponent<new <
 
   setup (props, { slots }) {
     const { t } = useLocale()
-    const vTextFieldRef = ref()
+    const vTextFieldRef = ref<VTextField>()
     const isFocused = shallowRef(false)
     const isPristine = shallowRef(true)
     const listHasFocus = shallowRef(false)
     const vMenuRef = ref<VMenu>()
     const vVirtualScrollRef = ref<VVirtualScroll>()
-    const _menu = useProxiedModel(props, 'menu')
-    const menu = computed({
-      get: () => _menu.value,
-      set: v => {
-        if (_menu.value && !v && vMenuRef.value?.ΨopenChildren.size) return
-        _menu.value = v
-      },
-    })
     const selectionIndex = shallowRef(-1)
-    const color = computed(() => vTextFieldRef.value?.color)
-    const label = computed(() => menu.value ? props.closeText : props.openText)
     const { items, transformIn, transformOut } = useItems(props)
-    const { textColorClasses, textColorStyles } = useTextColor(color)
+    const { textColorClasses, textColorStyles } = useTextColor(() => vTextFieldRef.value?.color)
     const search = useProxiedModel(props, 'search', '')
     const model = useProxiedModel(
       props,
@@ -178,6 +171,17 @@ export const VAutocomplete = genericComponent<new <
       (props.hideNoData && !displayItems.value.length) ||
       form.isReadonly.value || form.isDisabled.value
     ))
+    const _menu = useProxiedModel(props, 'menu')
+    const menu = computed({
+      get: () => _menu.value,
+      set: v => {
+        if (_menu.value && !v && vMenuRef.value?.ΨopenChildren.size) return
+        if (v && menuDisabled.value) return
+        _menu.value = v
+      },
+    })
+
+    const label = computed(() => menu.value ? props.closeText : props.openText)
 
     const listRef = ref<VList>()
     const listEvents = useScrolling(listRef, vTextFieldRef)
@@ -203,14 +207,14 @@ export const VAutocomplete = genericComponent<new <
       menu.value = !menu.value
     }
     function onListKeydown (e: KeyboardEvent) {
-      if (e.key !== ' ' && checkPrintable(e)) {
+      if (checkPrintable(e) || e.key === 'Backspace') {
         vTextFieldRef.value?.focus()
       }
     }
     function onKeydown (e: KeyboardEvent) {
       if (form.isReadonly.value) return
 
-      const selectionStart = vTextFieldRef.value.selectionStart
+      const selectionStart = vTextFieldRef.value?.selectionStart
       const length = model.value.length
 
       if (['Enter', 'ArrowDown', 'ArrowUp'].includes(e.key)) {
@@ -261,7 +265,7 @@ export const VAutocomplete = genericComponent<new <
       if (!props.multiple) return
 
       if (e.key === 'ArrowLeft') {
-        if (selectionIndex.value < 0 && selectionStart > 0) return
+        if (selectionIndex.value < 0 && selectionStart && selectionStart > 0) return
 
         const prev = selectionIndex.value > -1
           ? selectionIndex.value - 1
@@ -270,8 +274,9 @@ export const VAutocomplete = genericComponent<new <
         if (model.value[prev]) {
           selectionIndex.value = prev
         } else {
+          const searchLength = search.value?.length ?? null
           selectionIndex.value = -1
-          vTextFieldRef.value.setSelectionRange(search.value?.length, search.value?.length)
+          vTextFieldRef.value?.setSelectionRange(searchLength, searchLength)
         }
       } else if (e.key === 'ArrowRight') {
         if (selectionIndex.value < 0) return
@@ -282,7 +287,7 @@ export const VAutocomplete = genericComponent<new <
           selectionIndex.value = next
         } else {
           selectionIndex.value = -1
-          vTextFieldRef.value.setSelectionRange(0, 0)
+          vTextFieldRef.value?.setSelectionRange(0, 0)
         }
       } else if (~selectionIndex.value && checkPrintable(e)) {
         selectionIndex.value = -1
@@ -369,7 +374,7 @@ export const VAutocomplete = genericComponent<new <
       } else {
         if (!props.multiple && search.value == null) model.value = []
         menu.value = false
-        if (!model.value.some(({ title }) => title === search.value)) search.value = ''
+        if (props.multiple || hasSelectionSlot.value) search.value = ''
         selectionIndex.value = -1
       }
     })
@@ -462,6 +467,7 @@ export const VAutocomplete = genericComponent<new <
                   { hasList && (
                     <VList
                       ref={ listRef }
+                      filterable
                       selected={ selectedValues.value }
                       selectStrategy={ props.multiple ? 'independent' : 'single-independent' }
                       onMousedown={ (e: MouseEvent) => e.preventDefault() }
@@ -488,6 +494,18 @@ export const VAutocomplete = genericComponent<new <
                             active: (highlightFirst.value && index === 0) ? true : undefined,
                             onClick: () => select(item, null),
                           })
+
+                          if (item.raw.type === 'divider') {
+                            return slots.divider?.({ props: item.raw, index }) ?? (
+                              <VDivider { ...item.props } key={ `divider-${index}` } />
+                            )
+                          }
+
+                          if (item.raw.type === 'subheader') {
+                            return slots.subheader?.({ props: item.raw, index }) ?? (
+                              <VListSubheader { ...item.props } key={ `subheader-${index}` } />
+                            )
+                          }
 
                           return slots.item?.({
                             item,
@@ -626,6 +644,7 @@ export const VAutocomplete = genericComponent<new <
                 { props.menuIcon ? (
                   <VIcon
                     class="v-autocomplete__menu-icon"
+                    color={ vTextFieldRef.value?.fieldIconColor }
                     icon={ props.menuIcon }
                     onMousedown={ onMousedownMenuIcon }
                     onClick={ noop }

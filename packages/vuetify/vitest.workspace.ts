@@ -1,6 +1,6 @@
 import { defineWorkspace } from 'vitest/config'
 import { commands } from './test/setup/browser-commands'
-import { fileURLToPath } from 'url'
+import { fileURLToPath } from 'node:url'
 
 export default defineWorkspace([
   {
@@ -25,12 +25,12 @@ export default defineWorkspace([
       include: ['**/*.spec.browser.{ts,tsx}'],
       setupFiles: ['../test/setup/browser-setup.ts'],
       bail: process.env.TEST_BAIL ? 1 : undefined,
-      slowTestThreshold: Infinity,
       browser: {
         enabled: true,
         provider: 'webdriverio',
         ui: false,
         headless: !process.env.TEST_BAIL,
+        screenshotDirectory: '../test/__screenshots__',
         commands,
         instances: [{
           browser: 'chrome',

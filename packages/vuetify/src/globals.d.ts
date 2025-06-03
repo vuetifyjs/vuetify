@@ -6,10 +6,6 @@ import type { ComputedOptions, Events, MethodOptions, VNode } from 'vue'
 import type { TouchStoredHandlers } from './directives/touch'
 
 declare global {
-  interface HTMLCollection {
-    [Symbol.iterator] (): IterableIterator<Element>
-  }
-
   interface Element {
     _clickOutside?: Record<number, {
       onClick: EventListener
@@ -28,6 +24,7 @@ declare global {
       isTouch?: boolean
       showTimer?: number
       showTimerCommit?: (() => void) | null
+      keyDownHandler?: ((e: KeyboardEvent) => void) | null
     }
     _observe?: Record<number, {
       init: boolean

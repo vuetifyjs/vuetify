@@ -104,4 +104,17 @@ export default {
     loadMore: 'Daha fazla yükle',
     empty: 'Daha fazla içerik yok',
   },
+  rules: {
+    required: 'Bu alan zorunludur',
+    email: 'Lütfen geçerli bir e-posta adresi girin',
+    number: 'Bu alan sadece sayılar içerebilir',
+    integer: 'Bu alan sadece tam sayılar içerebilir',
+    capital: 'Bu alan sadece büyük harfler içerebilir',
+    maxLength: 'En fazla {0} karakter girmelisiniz',
+    minLength: 'En az {0} karakter girmelisiniz',
+    strictLength: 'Girilen alanın uzunluğu geçersiz',
+    exclude: '{0} karakteri izin verilmez',
+    notEmpty: 'Lütfen en az bir değer seçin',
+    pattern: 'Geçersiz biçim',
+  },
 }

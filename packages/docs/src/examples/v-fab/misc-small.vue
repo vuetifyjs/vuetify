@@ -9,8 +9,6 @@
 
       <v-toolbar-title>My files</v-toolbar-title>
 
-      <v-spacer></v-spacer>
-
       <v-btn color="grey-darken-4" icon="mdi-magnify"></v-btn>
 
       <v-btn color="grey-darken-4" icon="mdi-view-module"></v-btn>

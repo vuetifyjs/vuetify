@@ -7,5 +7,8 @@
   },
   "slots": {
     "default": "Default slot to render a single item."
+  },
+  "exposed": {
+    "calculateVisibleItems": "Trigger updating the currently rendered items based on scroll position."
   }
 }

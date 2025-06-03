@@ -20,13 +20,14 @@ import { makeVirtualProps, useVirtual } from '@/composables/virtual'
 
 // Utilities
 import { computed, shallowRef, toRef, toRefs } from 'vue'
-import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
+import { convertToUnit, genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
+import type { DeepReadonly } from 'vue'
 import type { VDataTableSlotProps } from './VDataTable'
 import type { VDataTableHeadersSlots } from './VDataTableHeaders'
 import type { VDataTableRowsSlots } from './VDataTableRows'
-import type { CellProps, RowProps } from '@/components/VDataTable/types'
+import type { CellProps, DataTableHeader, RowProps } from '@/components/VDataTable/types'
 import type { GenericProps, SelectItemKey, TemplateRef } from '@/util'
 
 type VDataTableVirtualSlotProps<T> = Omit<
@@ -53,7 +54,7 @@ export type VDataTableVirtualSlots<T> = VDataTableRowsSlots<T> & VDataTableHeade
 }
 
 export const makeVDataTableVirtualProps = propsFactory({
-  ...makeDataTableProps(),
+  ...omit(makeDataTableProps(), ['hideDefaultFooter']),
   ...makeDataTableGroupProps(),
   ...makeVirtualProps(),
   ...makeFilterProps(),
@@ -68,6 +69,7 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
     rowProps?: RowProps<ItemType<T>>
     cellProps?: CellProps<ItemType<T>>
     itemSelectable?: SelectItemKey<ItemType<T>>
+    headers?: DeepReadonly<DataTableHeader<ItemType<T>>[]>
     modelValue?: V
     'onUpdate:modelValue'?: (value: V) => void
   },
@@ -98,12 +100,12 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
       sortRawFunctions,
     } = createHeaders(props, {
       groupBy,
-      showSelect: toRef(props, 'showSelect'),
-      showExpand: toRef(props, 'showExpand'),
+      showSelect: toRef(() => props.showSelect),
+      showExpand: toRef(() => props.showExpand),
     })
     const { items } = useDataTableItems(props, columns)
 
-    const search = toRef(props, 'search')
+    const search = toRef(() => props.search)
     const { filteredItems } = useFilter(props, items, search, {
       transform: item => item.columns,
       customKeyFilter: filterFunctions,
@@ -151,10 +153,10 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
 
     provideDefaults({
       VDataTableRows: {
-        hideNoData: toRef(props, 'hideNoData'),
-        noDataText: toRef(props, 'noDataText'),
-        loading: toRef(props, 'loading'),
-        loadingText: toRef(props, 'loadingText'),
+        hideNoData: toRef(() => props.hideNoData),
+        noDataText: toRef(() => props.noDataText),
+        loading: toRef(() => props.loading),
+        loadingText: toRef(() => props.loadingText),
       },
     })
 

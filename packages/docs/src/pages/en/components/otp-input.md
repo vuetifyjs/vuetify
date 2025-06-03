@@ -19,9 +19,7 @@ The OTP input is used for MFA procedure of authenticating users by a one-time pa
 
 <PageFeatures />
 
-::: success
-This feature was introduced in [v3.4.0 (Blackguard)](/introduction/roadmap/#v3-4-blackguard)
-:::
+<DocIntroduced version="3.4.0" />
 
 ## Usage
 

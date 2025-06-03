@@ -66,6 +66,12 @@ The `custom-filter` prop can be used to filter each individual item with custom 
 
 <ExamplesExample file="v-autocomplete/prop-filter" />
 
+#### Subheaders and dividers
+
+The `items` prop recognizes special type of `divider` and `subheader`. Those items will be excluded when using filter and can be further customized with dedicated slots.
+
+<ExamplesExample file="v-autocomplete/prop-items" />
+
 ::: tip
 
 The **v-autocomplete** component updates the search model on focus/blur events. Focus sets search to the current model (if available), and blur clears it.
@@ -100,9 +106,7 @@ Using a combination of `v-autocomplete` slots and transitions, you can create a 
 
 #### New tab
 
-::: success
-This feature was introduced in [v3.3.0 (Icarus)](/getting-started/release-notes/?version=v3.3.0)
-:::
+<DocIntroduced version="3.3.0" />
 
 The **auto-select-first** property highlights the first result when searching, allowing you to press <v-kbd>tab</v-kbd> or <v-kbd>enter</v-kbd> to quickly select it.
 

@@ -163,6 +163,7 @@
   "faq": "FAQs",
   "feature-guides": "Feature guides",
   "features": "Features",
+  "feature-introduced-in": "This feature was introduced in {0}",
   "feedback": "Feedback",
   "figma-design": "Figma Design",
   "file-a-bug-report": "File a bug report",
@@ -240,6 +241,7 @@
   "notifications": "Notifications",
   "not-found": "Not Found",
   "open-github-release": "Open GitHub release",
+  "open-in-vuetify-bin": "Open in Vuetify Bin",
   "open-issues": "Open issues",
   "options": "Options",
   "overlays": "Overlays",
@@ -288,7 +290,8 @@
     "key-hint-slash": "Press /",
     "results": "Your search results will appear here",
     "no-results": "No results found",
-    "recent": "Recent"
+    "recent": "Recent",
+    "favorite": "Favorite"
   },
   "search-api": "Search API",
   "search-jobs": "Search Jobs",

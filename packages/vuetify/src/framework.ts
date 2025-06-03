@@ -20,8 +20,10 @@ import type { GoToOptions } from '@/composables/goto'
 import type { IconOptions } from '@/composables/icons'
 import type { LocaleOptions, RtlOptions } from '@/composables/locale'
 import type { ThemeOptions } from '@/composables/theme'
+
+// Exports
 export * from './composables'
-export type { DateOptions, DateInstance, DateModule } from '@/composables/date'
+export * from './types'
 
 export interface VuetifyOptions {
   aliases?: Record<string, any>

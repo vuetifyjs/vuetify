@@ -1,16 +1,8 @@
 <template>
-  <div v-if="items?.length" class="mb-4">
-    <!-- <div class="d-flex mb-2">
-      <AppTextField
-        clearable
-        icon="$mdiMagnify"
-        label="Filter"
-        @input="filter = $event"
-      />
-    </div> -->
+  <section v-if="items?.length" :id="section" class="mb-4">
     <AppHeadline :path="`api-headers.${section}`" />
     <TableComponent :items="items" :name="name" />
-  </div>
+  </section>
 </template>
 
 <script setup lang="ts">

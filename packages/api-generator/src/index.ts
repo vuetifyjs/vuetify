@@ -1,13 +1,13 @@
-import fs from 'fs/promises'
+import fs from 'node:fs/promises'
 import path from 'upath'
 import { components } from 'vuetify/dist/vuetify-labs.js'
 import importMap from 'vuetify/dist/json/importMap.json' with { type: 'json' }
 import importMapLabs from 'vuetify/dist/json/importMap-labs.json' with { type: 'json' }
 import { kebabCase } from './helpers/text'
-import type { BaseData, ComponentData, DirectiveData } from './types'
+import type { ComponentData, DirectiveData } from './types'
 import { generateComposableDataFromTypes, generateDirectiveDataFromTypes } from './types'
 import Piscina from 'piscina'
-import { addDescriptions, addDirectiveDescriptions, addPropData, stringifyProps } from './utils'
+import { addDescriptions, addDirectiveDescriptions, addPropData, reportMissingDescriptions, sortByKey, stringifyProps } from './utils'
 import * as os from 'os'
 import { mkdirp } from 'mkdirp'
 import { createVeturApi } from './vetur'
@@ -15,7 +15,7 @@ import { rimraf } from 'rimraf'
 import { createWebTypesApi } from './web-types'
 import inspector from 'inspector'
 import yargs from 'yargs'
-import { parseSassVariables } from './helpers/sass'
+import { parseGlobalSassVariables, parseSassVariables } from './helpers/sass'
 
 const yar = yargs(process.argv.slice(2))
   .option('components', {
@@ -40,6 +40,10 @@ const componentsInfo: Record<string, { from: string }> = {
 type Truthy<T> = Exclude<T, null | undefined | 0 | '' | false>;
 const BooleanFilter = <T>(x: T): x is Truthy<T> => Boolean(x)
 
+function clamp (v: number, min: number, max: number) {
+  return Math.max(min, Math.floor(Math.min(max, v)))
+}
+
 const run = async () => {
   const argv = await yar.argv
 
@@ -49,7 +53,9 @@ const run = async () => {
   const pool = new Piscina({
     filename: path.resolve('./src/worker.ts'),
     niceIncrement: 10,
-    maxThreads: inspector.url() ? 1 : Math.max(1, Math.floor(Math.min(os.cpus().length / 2, os.freemem() / (1.1 * 1024 ** 3)))),
+    maxThreads: inspector.url()
+      ? 1
+      : clamp(os.freemem() / (1.1 * 1024 ** 3), 1, os.cpus().length / 2),
   })
 
   const template = await fs.readFile('./templates/component.d.ts', 'utf-8')
@@ -76,7 +82,7 @@ const run = async () => {
       const componentProps = stringifyProps(componentInstance.props)
       const sources = addPropData(componentName, data, componentProps)
       await addDescriptions(componentName, data, locales, sources)
-      const sass = parseSassVariables(componentName)
+      const sass = sortByKey(parseSassVariables(componentName))
 
       const component = {
         displayName: componentName,
@@ -90,6 +96,15 @@ const run = async () => {
       return component
     })
   )).filter(BooleanFilter)
+
+  // globalSass
+  const globalSass = {
+    fileName: 'globals',
+    displayName: 'globals',
+    pathName: 'globals',
+    sass: sortByKey(parseGlobalSassVariables()),
+  }
+  await fs.writeFile(path.resolve(outPath, `globals.json`), JSON.stringify(globalSass, null, 2))
 
   // Composables
   if (!argv.skipComposables) {
@@ -125,6 +140,7 @@ const run = async () => {
     }
   }
 
+  reportMissingDescriptions()
   createVeturApi(componentData)
   createWebTypesApi(componentData, directives)
   await fs.mkdir(path.resolve('../vuetify/dist/json'), { recursive: true })
