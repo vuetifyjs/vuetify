@@ -370,3 +370,19 @@ declare module 'vuetify' {
   }
 }
 ```
+
+## String adapter
+
+<DocIntroduced version="3.9.0" />
+
+Date objects can be inconvenient to work with, especially if you're just passing the value straight to a fetch request. Vuetify also exports a StringDateAdapter that will cause date components to emit strings instead.
+
+```ts { resource="src/plugins/vuetify.js" }
+import { StringDateAdapter } from 'vuetify/date/adapters/string'
+
+export default createVuetify({
+  date: {
+    adapter: StringDateAdapter,
+  },
+})
+```
