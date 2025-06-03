@@ -65,6 +65,11 @@ if (IN_BROWSER) {
     enabled: import.meta.env.VITE_GITHUB_SHA,
 
     sampleRate: 1,
+    integrations: integrations => {
+      return integrations.filter(
+        integration => integration.name !== 'BrowserSession',
+      )
+    },
   })
 }
 

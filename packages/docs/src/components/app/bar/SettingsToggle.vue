@@ -2,7 +2,6 @@
   <v-progress-circular
     v-if="pwa.availableOffline && pwa.isUpdating"
     :model-value="pwa.progress / pwa.progressTotal * 100"
-    class="me-n2"
     color="primary"
     size="42"
     width="1"

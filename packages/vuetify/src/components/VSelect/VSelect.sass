@@ -3,9 +3,12 @@
 @use '../../styles/settings'
 @use '../../styles/tools'
 @use './variables' as *
+@use './mixins' as *
 
 @include tools.layer('components')
   .v-select
+    @include select-compact-chip-label
+
     .v-field
       .v-text-field__prefix,
       .v-text-field__suffix,

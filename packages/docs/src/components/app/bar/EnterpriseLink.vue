@@ -1,7 +1,6 @@
 <template>
   <AppBtn
     :to="rpath('/introduction/enterprise-support/')"
-    class="ms-1"
     color="primary"
     text="support"
     variant="outlined"

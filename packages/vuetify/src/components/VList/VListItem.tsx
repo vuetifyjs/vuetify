@@ -24,7 +24,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
 
 // Directives
-import { Ripple } from '@/directives/ripple'
+import vRipple from '@/directives/ripple'
 
 // Utilities
 import { computed, onBeforeMount, toDisplayString, toRef, watch } from 'vue'
@@ -111,7 +111,7 @@ export const makeVListItemProps = propsFactory({
 export const VListItem = genericComponent<VListItemSlots>()({
   name: 'VListItem',
 
-  directives: { Ripple },
+  directives: { vRipple },
 
   props: makeVListItemProps(),
 

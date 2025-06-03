@@ -27,7 +27,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
 
 // Directives
-import { Ripple } from '@/directives/ripple'
+import vRipple from '@/directives/ripple'
 
 // Utilities
 import { computed, toDisplayString, toRef, withDirectives } from 'vue'
@@ -300,7 +300,7 @@ export const VBtn = genericComponent<VBtnSlots>()({
           )}
         </Tag>,
         [[
-          Ripple,
+          vRipple,
           !isDisabled.value && props.ripple,
           '',
           { center: !!props.icon },

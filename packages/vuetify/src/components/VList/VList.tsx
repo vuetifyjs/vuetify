@@ -239,7 +239,7 @@ export const VList = genericComponent<new <
       isFocused.value = true
     }
 
-    function focus (location?: 'next' | 'prev' | 'first' | 'last') {
+    function focus (location?: 'next' | 'prev' | 'first' | 'last' | number) {
       if (contentRef.value) {
         return focusChild(contentRef.value, location)
       }

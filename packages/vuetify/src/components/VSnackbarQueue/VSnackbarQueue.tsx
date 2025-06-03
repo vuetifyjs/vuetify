@@ -25,22 +25,25 @@ export type VSnackbarQueueSlots<T extends string | SnackbarMessage> = {
   }
 }
 
-export type SnackbarMessage = string | Omit<
-  VSnackbar['$props'],
-  | 'modelValue'
-  | 'onUpdate:modelValue'
-  | 'activator'
-  | 'activatorProps'
-  | 'closeDelay'
-  | 'openDelay'
-  | 'openOnClick'
-  | 'openOnFocus'
-  | 'openOnHover'
-  | '$children'
-  | 'v-slots'
-  | `v-slot:${string}`
-  | keyof VNodeProps
->
+export type SnackbarMessage =
+  | string
+  | (Omit<
+    VSnackbar['$props'],
+    | 'modelValue'
+    | 'onUpdate:modelValue'
+    | 'activator'
+    | 'activatorProps'
+    | 'closeDelay'
+    | 'openDelay'
+    | 'openOnClick'
+    | 'openOnFocus'
+    | 'openOnHover'
+    | 'style'
+    | '$children'
+    | 'v-slots'
+    | `v-slot:${string}`
+    | keyof VNodeProps
+  > & { style?: any })
 
 export const makeVSnackbarQueueProps = propsFactory({
   // TODO: Port this to Snackbar on dev

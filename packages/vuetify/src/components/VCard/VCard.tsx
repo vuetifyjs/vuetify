@@ -27,7 +27,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
 
 // Directives
-import { Ripple } from '@/directives/ripple'
+import vRipple from '@/directives/ripple'
 
 // Utilities
 import { genericComponent, propsFactory, useRender } from '@/util'
@@ -95,7 +95,7 @@ export type VCardSlots = VCardItemSlots & {
 export const VCard = genericComponent<VCardSlots>()({
   name: 'VCard',
 
-  directives: { Ripple },
+  directives: { vRipple },
 
   props: makeVCardProps(),
 

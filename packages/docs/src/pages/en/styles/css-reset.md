@@ -25,7 +25,7 @@ ress is a modern CSS reset that applies a solid base for stylesheets. It is buil
   The Vuetify style reset is applied globally and affects default elements such as `button` and `input`. This also includes anything located outside of the [v-app](/components/application) component.
 :::
 
-It can be disabled with [sass variables](/styles/sass-variables/#sass-variables) by setting `$reset: false`, but you may have to manually reset some styles for components to display correctly.
+It can be disabled with [sass variables](/features/sass-variables/#sass-variables) by setting `$reset: false`, but you may have to manually reset some styles for components to display correctly.
 
 ## Reset Features
 

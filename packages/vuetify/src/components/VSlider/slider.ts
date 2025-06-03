@@ -159,7 +159,11 @@ export const useSteps = (props: SliderProps) => {
 
     const clamped = clamp(value, min.value, max.value)
     const offset = min.value % step.value
-    const newValue = Math.round((clamped - offset) / step.value) * step.value + offset
+    let newValue = Math.round((clamped - offset) / step.value) * step.value + offset
+
+    if (clamped > newValue && newValue + step.value > max.value) {
+      newValue = max.value
+    }
 
     return parseFloat(Math.min(newValue, max.value).toFixed(decimals.value))
   }
@@ -222,7 +226,7 @@ export const useSlider = ({
     const clickOffset = getPosition(e, position)
 
     // It is possible for left to be NaN, force to number
-    let clickPos = Math.min(Math.max((clickOffset - trackStart - startOffset.value) / trackLength, 0), 1) || 0
+    let clickPos = clamp((clickOffset - trackStart - startOffset.value) / trackLength) || 0
 
     if (vertical ? indexFromEnd.value : indexFromEnd.value !== isRtl.value) clickPos = 1 - clickPos
 

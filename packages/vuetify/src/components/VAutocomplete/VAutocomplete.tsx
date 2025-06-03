@@ -403,12 +403,6 @@ export const VAutocomplete = genericComponent<new <
       }
     })
 
-    watch(model, value => {
-      if (!props.multiple && !hasSelectionSlot.value) {
-        search.value = value[0]?.title ?? ''
-      }
-    })
-
     useRender(() => {
       const hasList = !!(
         (!props.hideNoData || displayItems.value.length) ||
