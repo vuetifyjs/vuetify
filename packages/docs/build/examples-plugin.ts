@@ -1,7 +1,7 @@
 import type { Plugin } from 'vite'
-import path from 'path'
-import fs from 'fs/promises'
-import { fileURLToPath } from 'url'
+import path from 'node:path'
+import fs from 'node:fs/promises'
+import { fileURLToPath } from 'node:url'
 
 const ID = '@vuetify-examples'
 

@@ -5,7 +5,7 @@ import '../VTextField/VTextField.sass'
 // Components
 import { VCounter } from '@/components/VCounter/VCounter'
 import { VField } from '@/components/VField'
-import { filterFieldProps, makeVFieldProps } from '@/components/VField/VField'
+import { makeVFieldProps } from '@/components/VField/VField'
 import { makeVInputProps, VInput } from '@/components/VInput/VInput'
 
 // Composables
@@ -14,7 +14,7 @@ import { forwardRefs } from '@/composables/forwardRefs'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Directives
-import Intersect from '@/directives/intersect'
+import vIntersect from '@/directives/intersect'
 
 // Utilities
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, shallowRef, watch, watchEffect } from 'vue'
@@ -59,7 +59,7 @@ type VTextareaSlots = Omit<VInputSlots & VFieldSlots, 'default'> & {
 export const VTextarea = genericComponent<VTextareaSlots>()({
   name: 'VTextarea',
 
-  directives: { Intersect },
+  directives: { vIntersect },
 
   inheritAttrs: false,
 
@@ -206,7 +206,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
       const hasDetails = !!(hasCounter || slots.details)
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
       const { modelValue: _, ...inputProps } = VInput.filterProps(props)
-      const fieldProps = filterFieldProps(props)
+      const fieldProps = VField.filterProps(props)
 
       return (
         <VInput

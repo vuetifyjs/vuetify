@@ -1,5 +1,5 @@
 // Utilities
-import { computed, inject, provide, ref } from 'vue'
+import { computed, inject, provide, ref, toRef } from 'vue'
 import { createVuetifyAdapter } from '@/locale/adapters/vuetify'
 
 // Types
@@ -134,7 +134,7 @@ export function createRtl (i18n: LocaleInstance, options?: RtlOptions): RtlInsta
   return {
     isRtl,
     rtl,
-    rtlClasses: computed(() => `v-locale--is-${isRtl.value ? 'rtl' : 'ltr'}`),
+    rtlClasses: toRef(() => `v-locale--is-${isRtl.value ? 'rtl' : 'ltr'}`),
   }
 }
 
@@ -144,7 +144,7 @@ export function provideRtl (locale: LocaleInstance, rtl: RtlInstance['rtl'], pro
   return {
     isRtl,
     rtl,
-    rtlClasses: computed(() => `v-locale--is-${isRtl.value ? 'rtl' : 'ltr'}`),
+    rtlClasses: toRef(() => `v-locale--is-${isRtl.value ? 'rtl' : 'ltr'}`),
   }
 }
 

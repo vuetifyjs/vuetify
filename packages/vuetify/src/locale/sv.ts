@@ -104,4 +104,17 @@ export default {
     loadMore: 'Ladda fler',
     empty: 'Inga fler',
   },
+  rules: {
+    required: 'Detta fält är obligatoriskt',
+    email: 'Ange en giltig e-postadress',
+    number: 'Detta fält kan bara innehålla siffror',
+    integer: 'Detta fält kan bara innehålla heltal',
+    capital: 'Detta fält kan bara innehålla stora bokstäver',
+    maxLength: 'Du måste ange högst {0} tecken',
+    minLength: 'Du måste ange minst {0} tecken',
+    strictLength: 'Längden på det angivna fältet är ogiltig',
+    exclude: 'Tecknet {0} är inte tillåtet',
+    notEmpty: 'Välj minst ett värde',
+    pattern: 'Ogiltigt format',
+  },
 }

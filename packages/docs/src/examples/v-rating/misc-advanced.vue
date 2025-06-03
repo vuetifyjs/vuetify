@@ -65,37 +65,19 @@
         </template>
 
         <v-card>
-          <v-card-title>
+          <v-card-title class="d-flex">
             <span class="text-h6 font-weight-bold">Share</span>
             <v-spacer></v-spacer>
 
-            <v-btn
-              class="mx-0"
-              icon
-              @click="dialog = false"
-            >
+            <v-btn class="mx-0" icon @click="dialog = false">
               <v-icon>mdi-close-circle-outline</v-icon>
             </v-btn>
           </v-card-title>
 
           <v-list>
-            <v-list-item title="Facebook">
-              <template v-slot:prepend>
-                <v-icon color="indigo" icon="mdi-facebook"></v-icon>
-              </template>
-            </v-list-item>
-
-            <v-list-item title="Twitter">
-              <template v-slot:prepend>
-                <v-icon color="cyan" icon="mdi-twitter"></v-icon>
-              </template>
-            </v-list-item>
-
-            <v-list-item title="Email">
-              <template v-slot:prepend>
-                <v-icon icon="mdi-email"></v-icon>
-              </template>
-            </v-list-item>
+            <v-list-item prepend-icon="mdi-facebook" title="Facebook"></v-list-item>
+            <v-list-item prepend-icon="mdi-twitter" title="Twitter"></v-list-item>
+            <v-list-item prepend-icon="mdi-email" title="Email"></v-list-item>
           </v-list>
 
           <v-text-field

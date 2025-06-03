@@ -3,6 +3,7 @@ import { makeFocusProps } from '@/composables/focus'
 import { useForm } from '@/composables/form'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useToggleScope } from '@/composables/toggleScope'
+import { useRules } from '@/labs/rules'
 
 // Utilities
 import { computed, nextTick, onBeforeMount, onBeforeUnmount, onMounted, ref, shallowRef, unref, useId, watch } from 'vue'
@@ -10,6 +11,7 @@ import { getCurrentInstance, getCurrentInstanceName, propsFactory, wrapInArray }
 
 // Types
 import type { PropType } from 'vue'
+import type { ValidationAlias } from '@/labs/rules'
 import type { EventProp, MaybeRef } from '@/util'
 
 export type ValidationResult = string | boolean
@@ -38,7 +40,7 @@ export interface ValidationProps {
   name: string | undefined
   label: string | undefined
   readonly: boolean | null
-  rules: readonly ValidationRule[]
+  rules: readonly (ValidationRule | ValidationAlias)[]
   modelValue: any
   'onUpdate:modelValue': EventProp | undefined
   validateOn?: ValidateOn
@@ -66,7 +68,7 @@ export const makeValidationProps = propsFactory({
     default: null,
   },
   rules: {
-    type: Array as PropType<readonly ValidationRule[]>,
+    type: Array as PropType<readonly (ValidationRule | ValidationAlias)[]>,
     default: () => ([]),
   },
   modelValue: null,
@@ -84,6 +86,7 @@ export function useValidation (
   const model = useProxiedModel(props, 'modelValue')
   const validationModel = computed(() => props.validationValue === undefined ? model.value : props.validationValue)
   const form = useForm(props)
+  const rules = useRules(() => props.rules)
   const internalErrorMessages = ref<string[]>([])
   const isPristine = shallowRef(true)
   const isDirty = computed(() => !!(
@@ -196,7 +199,7 @@ export function useValidation (
 
     isValidating.value = true
 
-    for (const rule of props.rules) {
+    for (const rule of rules.value) {
       if (results.length >= Number(props.maxErrors ?? 1)) {
         break
       }

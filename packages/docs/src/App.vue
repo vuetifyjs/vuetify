@@ -21,8 +21,16 @@
   const path = computed(() => route.path.replace(`/${locale.value}/`, ''))
 
   const meta = computed(() => {
+    let title = route.meta.title
+
+    // API pages
+    if (route.meta.title === 'API') {
+      const name = route.params.name as string
+      title = `${name.charAt(0).toUpperCase()}${camelize(name.slice(1))} API`
+    }
+
     return genAppMetaInfo({
-      title: `${route.meta.title}${path.value === '' ? '' : ' — Vuetify'}`,
+      title: `${title}${path.value === '' ? '' : ' — Vuetify'}`,
       description: frontmatter.value?.meta.description,
       keywords: frontmatter.value?.meta.keywords,
       assets: frontmatter.value?.assets,
@@ -65,10 +73,10 @@
     watch(() => user.theme, val => {
       if (val === 'system') {
         media = getMatchMedia()!
-        media.addListener(onThemeChange)
+        media.addEventListener('change', onThemeChange)
         onThemeChange()
       } else if (media) {
-        media.removeListener(onThemeChange)
+        media.removeEventListener('change', onThemeChange)
       }
     }, { immediate: true })
     function onThemeChange () {

@@ -25,6 +25,7 @@ type NavItem = {
   inactiveIcon?: string
   activeIcon?: string
   items?: NavItem[]
+  emphasized?: boolean
 }
 
 export const useAppStore = defineStore('app', {

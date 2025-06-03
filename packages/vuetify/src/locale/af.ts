@@ -104,4 +104,17 @@ export default {
     loadMore: 'Laai meer',
     empty: 'Geen meer nie',
   },
+  rules: {
+    required: 'Hierdie veld is verpligtend',
+    email: 'Voer asseblief \'n geldige e-posadres in',
+    number: 'Hierdie veld kan slegs syfers bevat',
+    integer: 'Hierdie veld kan slegs heelgetalle bevat',
+    capital: 'Hierdie veld kan slegs hoofletters bevat',
+    maxLength: 'Jy moet \'n maksimum van {0} karakters invoer',
+    minLength: 'Jy moet \'n minimum van {0} karakters invoer',
+    strictLength: 'Die lengte van die ingevoerde veld is ongeldig',
+    exclude: 'Die {0} karakter is nie toegelaat nie',
+    notEmpty: 'Kies asseblief ten minste een waarde',
+    pattern: 'Ongeldige formaat',
+  },
 }
