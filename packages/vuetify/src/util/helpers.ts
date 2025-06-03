@@ -801,3 +801,9 @@ export function extractNumber (text: string, decimalDigitsLimit: number | null) 
 
   return cleanText
 }
+
+export function getCamelCaseProps (props: Record<string, any>) {
+  return Object.fromEntries(
+    Object.entries(props).map(([key, value]) => [key.replace(/-([a-z])/g, (_, char) => char.toUpperCase()), value])
+  )
+}
