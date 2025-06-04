@@ -475,6 +475,7 @@ export const VAutocomplete = genericComponent<new <
                       onFocusin={ onFocusin }
                       onFocusout={ onFocusout }
                       tabindex="-1"
+                      selectable
                       aria-live="polite"
                       color={ props.itemColor ?? props.color }
                       { ...listEvents }
