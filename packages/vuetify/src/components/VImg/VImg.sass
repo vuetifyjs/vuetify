@@ -15,6 +15,17 @@
       width: 100%
       z-index: -1
 
+    &.v-img--fit-content
+      display: inline-block
+      flex: 0 1 auto
+
+      .v-img__img
+        position: relative
+        width: auto
+
+      .v-responsive__sizer
+        padding-bottom: 0 !important
+
     &--booting .v-responsive__sizer
       transition: none
 
