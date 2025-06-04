@@ -41,7 +41,7 @@
     "@vue/language-server": "^2.2.8",
     "@vue/runtime-core": "^3.5.13",
     "@vue/runtime-dom": "^3.5.13",
-    "@vuetify/github-releaser": "^4.0.2",
+    "@vuetify/github-releaser": "^4.0.3",
     "@vueuse/head": "^1.3.1",
     "concurrently": "^9.1.2",
     "conventional-changelog-cli": "^5.0.0",
@@ -89,7 +89,7 @@
     "overrides": {
       "@testing-library/dom": "npm:@vuetify/testing-library-dom@1.0.2",
       "@types/node": "22.15.12",
-      "@vue/babel-plugin-jsx": "npm:@vuetify/babel-plugin-jsx@1.5.1",
+      "@vue/babel-plugin-jsx": "npm:@vuetify/babel-plugin-jsx@1.5.2",
       "tough-cookie": "5.1.2"
     },
     "peerDependencyRules": {
