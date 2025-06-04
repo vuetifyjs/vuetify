@@ -1,0 +1,11 @@
+@use '../../styles/tools';
+
+@include tools.layer('components') {
+  .v-command-palette {
+    &__dialog.v-dialog {
+      align-items: start;
+      // Good enough for now. A user may want to be able to control this.
+      padding-top: calc(0.05px + 13vh);
+    }
+  }
+}
