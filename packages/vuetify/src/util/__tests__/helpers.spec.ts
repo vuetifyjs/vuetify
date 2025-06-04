@@ -2,12 +2,12 @@
 import { isProxy, isRef, ref } from 'vue'
 import {
   arrayDiff,
+  camelizeProps,
   convertToUnit,
   deepEqual,
   defer,
   destructComputed,
   extractNumber,
-  getCamelCaseProps,
   getNestedValue,
   getObjectValueByPath,
   getPropertyFromItem,
@@ -389,7 +389,7 @@ describe('helpers', () => {
     })
   })
 
-  describe('getCamelCaseProps', () => {
+  describe('camelizeProps', () => {
     it('should convert kebab-case props to camelCase', () => {
       const props = {
         'background-color': 'red',
@@ -397,7 +397,7 @@ describe('helpers', () => {
         'border-radius': '4px',
       }
 
-      const result = getCamelCaseProps(props)
+      const result = camelizeProps(props)
 
       expect(result).toEqual({
         backgroundColor: 'red',

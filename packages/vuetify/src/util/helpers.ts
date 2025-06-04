@@ -1,5 +1,6 @@
 // Utilities
 import {
+  camelize,
   capitalize,
   Comment,
   Fragment,
@@ -802,8 +803,12 @@ export function extractNumber (text: string, decimalDigitsLimit: number | null) 
   return cleanText
 }
 
-export function getCamelCaseProps (props: Record<string, any>) {
-  return Object.fromEntries(
-    Object.entries(props).map(([key, value]) => [key.replace(/-([a-z])/g, (_, char) => char.toUpperCase()), value])
-  )
+export function camelizeProps (props: Record<string, unknown> | null | undefined) {
+  if (!props) return
+
+  const out: Record<string, unknown> = {}
+  for (const prop in props) {
+    out[camelize(prop)] = props[prop]
+  }
+  return out
 }
