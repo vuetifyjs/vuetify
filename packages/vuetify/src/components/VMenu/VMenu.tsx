@@ -238,11 +238,11 @@ export const VMenu = genericComponent<OverlaySlots>()({
         >
           {{
             activator: slots.activator,
-            default: (...args) => (
+            default: (...args) => [
               <VDefaultsProvider root="VMenu">
                 { slots.default?.(...args) }
-              </VDefaultsProvider>
-            ),
+              </VDefaultsProvider>,
+            ],
           }}
         </VOverlay>
       )

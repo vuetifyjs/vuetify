@@ -224,7 +224,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
               isDirty,
               isReadonly,
               isValid,
-            }) => (
+            }) => [
               <VField
                 ref={ vFieldRef }
                 prepend-icon={ props.prependIcon }
@@ -247,7 +247,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
                   ...slots,
                   default: ({
                     props: { class: fieldClass, ...slotProps },
-                  }) => (
+                  }) => [
                     <>
                       <input
                         ref={ inputRef }
@@ -293,12 +293,12 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
                           : fileNames.value.join(', ')
                         )}
                       </div>
-                    </>
-                  ),
+                    </>,
+                  ],
                 }}
-              </VField>
-            ),
-            details: hasDetails ? slotProps => (
+              </VField>,
+            ],
+            details: hasDetails ? slotProps => [
               <>
                 { slots.details?.(slotProps) }
 
@@ -314,8 +314,8 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
                     />
                   </>
                 )}
-              </>
-            ) : undefined,
+              </>,
+            ] : undefined,
           }}
         </VInput>
       )

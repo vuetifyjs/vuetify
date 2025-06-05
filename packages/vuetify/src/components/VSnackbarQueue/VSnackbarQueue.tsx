@@ -137,7 +137,7 @@ export const VSnackbarQueue = genericComponent<new <T extends readonly SnackbarM
                 >
                   {{
                     text: slots.text ? () => slots.text?.({ item: current.value! }) : undefined,
-                    actions: hasActions ? () => (
+                    actions: hasActions ? () => [
                       <>
                         { !slots.actions ? (
                           <VBtn
@@ -156,8 +156,8 @@ export const VSnackbarQueue = genericComponent<new <T extends readonly SnackbarM
                             })}
                           </VDefaultsProvider>
                         )}
-                      </>
-                    ) : undefined,
+                      </>,
+                    ] : undefined,
                   }}
                 </VSnackbar>
               )

@@ -88,7 +88,7 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
           {{
             ...slots,
             prepend: hasPrepend ? slotProps => {
-              return (
+              return [
                 <>
                   <VListItemAction start={ false }>
                     { props.toggleIcon ? (
@@ -101,13 +101,13 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
                         >
                           {{
                             loader () {
-                              return (
+                              return [
                                 <VProgressCircular
                                   indeterminate="disable-shrink"
                                   size="20"
                                   width="2"
-                                />
-                              )
+                                />,
+                              ]
                             },
                           }}
                         </VBtn>
@@ -117,8 +117,8 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
                   </VListItemAction>
 
                   { slots.prepend?.(slotProps) }
-                </>
-              )
+                </>,
+              ]
             } : undefined,
           }}
         </VListItem>

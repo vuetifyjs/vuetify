@@ -421,7 +421,7 @@ export const VSelect = genericComponent<new <
         >
           {{
             ...slots,
-            default: () => (
+            default: () => [
               <>
                 <VMenu
                   ref={ vMenuRef }
@@ -468,25 +468,25 @@ export const VSelect = genericComponent<new <
                           })
 
                           if (item.raw.type === 'divider') {
-                            return slots.divider?.({ props: item.raw, index }) ?? (
-                              <VDivider { ...item.props } key={ `divider-${index}` } />
-                            )
+                            return slots.divider?.({ props: item.raw, index }) ?? [
+                              <VDivider { ...item.props } key={ `divider-${index}` } />,
+                            ]
                           }
 
                           if (item.raw.type === 'subheader') {
-                            return slots.subheader?.({ props: item.raw, index }) ?? (
-                              <VListSubheader { ...item.props } key={ `subheader-${index}` } />
-                            )
+                            return slots.subheader?.({ props: item.raw, index }) ?? [
+                              <VListSubheader { ...item.props } key={ `subheader-${index}` } />,
+                            ]
                           }
 
                           return slots.item?.({
                             item,
                             index,
                             props: itemProps,
-                          }) ?? (
+                          }) ?? [
                             <VListItem { ...itemProps } role="option">
                               {{
-                                prepend: ({ isSelected }) => (
+                                prepend: ({ isSelected }) => [
                                   <>
                                     { props.multiple && !props.hideSelected ? (
                                       <VCheckboxBtn
@@ -504,11 +504,11 @@ export const VSelect = genericComponent<new <
                                     { item.props.prependIcon && (
                                       <VIcon icon={ item.props.prependIcon } />
                                     )}
-                                  </>
-                                ),
+                                  </>,
+                                ],
                               }}
-                            </VListItem>
-                          )
+                            </VListItem>,
+                          ]
                         }}
                       </VVirtualScroll>
 
@@ -593,9 +593,9 @@ export const VSelect = genericComponent<new <
                     </div>
                   )
                 })}
-              </>
-            ),
-            'append-inner': (...args) => (
+              </>,
+            ],
+            'append-inner': (...args) => [
               <>
                 { slots['append-inner']?.(...args) }
                 { props.menuIcon ? (
@@ -605,8 +605,8 @@ export const VSelect = genericComponent<new <
                     icon={ props.menuIcon }
                   />
                 ) : undefined }
-              </>
-            ),
+              </>,
+            ],
           }}
         </VTextField>
       )

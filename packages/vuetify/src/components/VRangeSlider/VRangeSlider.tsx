@@ -150,7 +150,7 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
         >
           {{
             ...slots,
-            prepend: hasPrepend ? slotProps => (
+            prepend: hasPrepend ? slotProps => [
               <>
                 { slots.label?.(slotProps) ?? (
                   props.label
@@ -163,9 +163,9 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
                 )}
 
                 { slots.prepend?.(slotProps) }
-              </>
-            ) : undefined,
-            default: ({ id, messagesId }) => (
+              </>,
+            ] : undefined,
+            default: ({ id, messagesId }) => [
               <div
                 class="v-slider__container"
                 onMousedown={ !readonly.value ? onSliderMousedown : undefined }
@@ -268,8 +268,8 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
                 >
                   {{ 'thumb-label': slots['thumb-label'] }}
                 </VSliderThumb>
-              </div>
-            ),
+              </div>,
+            ],
           }}
         </VInput>
       )

@@ -239,7 +239,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
               isDirty,
               isReadonly,
               isValid,
-            }) => (
+            }) => [
               <VField
                 ref={ vFieldRef }
                 style={{
@@ -263,7 +263,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
                   ...slots,
                   default: ({
                     props: { class: fieldClass, ...slotProps },
-                  }) => (
+                  }) => [
                     <>
                       { props.prefix && (
                         <span class="v-text-field__prefix">
@@ -310,12 +310,12 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
                           { props.suffix }
                         </span>
                       )}
-                    </>
-                  ),
+                    </>,
+                  ],
                 }}
-              </VField>
-            ),
-            details: hasDetails ? slotProps => (
+              </VField>,
+            ],
+            details: hasDetails ? slotProps => [
               <>
                 { slots.details?.(slotProps) }
 
@@ -332,8 +332,8 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
                     />
                   </>
                 )}
-              </>
-            ) : undefined,
+              </>,
+            ] : undefined,
           }}
         </VInput>
       )

@@ -342,20 +342,20 @@ export const VDatePicker = genericComponent<new <
           ]}
           style={ props.style }
           v-slots={{
-            title: () => slots.title?.() ?? (
+            title: () => slots.title?.() ?? [
               <div class="v-date-picker__title">
                 { t(props.title) }
-              </div>
-            ),
-            header: () => slots.header ? (
+              </div>,
+            ],
+            header: () => slots.header ? [
               <VDefaultsProvider
                 defaults={{
                   VDatePickerHeader: { ...headerProps },
                 }}
               >
                 { slots.header?.(headerProps) }
-              </VDefaultsProvider>
-            ) : (
+              </VDefaultsProvider>,
+            ] : [
               <VDatePickerHeader
                 key="header"
                 { ...datePickerHeaderProps }
@@ -365,9 +365,9 @@ export const VDatePicker = genericComponent<new <
                   ...slots,
                   default: undefined,
                 }}
-              />
-            ),
-            default: () => (
+              />,
+            ],
+            default: () => [
               <>
                 <VDatePickerControls
                   { ...datePickerControlsProps }
@@ -415,8 +415,8 @@ export const VDatePicker = genericComponent<new <
                     />
                   )}
                 </VFadeTransition>
-              </>
-            ),
+              </>,
+            ],
             actions: slots.actions,
           }}
         />

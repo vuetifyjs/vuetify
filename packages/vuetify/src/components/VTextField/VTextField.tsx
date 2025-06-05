@@ -189,7 +189,7 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
               isReadonly,
               isValid,
               reset,
-            }) => (
+            }) => [
               <VField
                 ref={ vFieldRef }
                 onMousedown={ onControlMousedown }
@@ -233,7 +233,7 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
                       />
                     )
 
-                    return (
+                    return [
                       <>
                         { props.prefix && (
                           <span class="v-text-field__prefix">
@@ -260,13 +260,13 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
                             </span>
                           </span>
                         )}
-                      </>
-                    )
+                      </>,
+                    ]
                   },
                 }}
-              </VField>
-            ),
-            details: hasDetails ? slotProps => (
+              </VField>,
+            ],
+            details: hasDetails ? slotProps => [
               <>
                 { slots.details?.(slotProps) }
 
@@ -283,8 +283,8 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
                     />
                   </>
                 )}
-              </>
-            ) : undefined,
+              </>,
+            ] : undefined,
           }}
         </VInput>
       )

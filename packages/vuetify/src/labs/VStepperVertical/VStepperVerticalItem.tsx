@@ -140,7 +140,7 @@ export const VStepperVerticalItem = genericComponent<VStepperVerticalItemSlots>(
           value={ step.value }
         >
           {{
-            title: () => (
+            title: () => [
               <>
                 <VAvatar
                   key="stepper-avatar"
@@ -165,9 +165,9 @@ export const VStepperVerticalItem = genericComponent<VStepperVerticalItemSlots>(
                     { slots.subtitle?.(slotProps.value) ?? props.subtitle }
                   </div>
                 </div>
-              </>
-            ),
-            text: () => (
+              </>,
+            ],
+            text: () => [
               <>
                 { slots.default?.(slotProps.value) ?? props.text }
 
@@ -192,8 +192,8 @@ export const VStepperVerticalItem = genericComponent<VStepperVerticalItemSlots>(
                     )}
                   </VDefaultsProvider>
                 )}
-              </>
-            ),
+              </>,
+            ],
           }}
         </VExpansionPanel>
       )

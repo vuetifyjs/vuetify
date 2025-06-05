@@ -151,11 +151,11 @@ export const VDialog = genericComponent<OverlaySlots>()({
         >
           {{
             activator: slots.activator,
-            default: (...args) => (
+            default: (...args) => [
               <VDefaultsProvider root="VDialog">
                 { slots.default?.(...args) }
-              </VDefaultsProvider>
-            ),
+              </VDefaultsProvider>,
+            ],
           }}
         </VOverlay>
       )

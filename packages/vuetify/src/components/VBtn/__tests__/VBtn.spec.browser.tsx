@@ -26,9 +26,9 @@ const stories = {
   'Large, plain button w/ error': <VBtn color="error" variant="plain" size="large">Whoops</VBtn>,
   Loading: (
     <div style={{ display: 'flex', gap: '1.2rem' }}>
-      <VBtn>{{ loader: () => <span>Loading...</span>, default: () => 'Default Content' }}</VBtn>
-      <VBtn loading>{{ loader: () => <span>Loading...</span>, default: () => 'Default Content' }}</VBtn>
-      <VBtn loading>{{ loader: () => <span>Loading...</span> }}</VBtn>
+      <VBtn>{{ loader: () => [<span>Loading...</span>], default: () => ['Default Content'] }}</VBtn>
+      <VBtn loading>{{ loader: () => [<span>Loading...</span>], default: () => ['Default Content'] }}</VBtn>
+      <VBtn loading>{{ loader: () => [<span>Loading...</span>] }}</VBtn>
       <VBtn loading>Default Content</VBtn>
     </div>
   ),

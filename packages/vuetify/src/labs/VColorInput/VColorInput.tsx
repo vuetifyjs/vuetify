@@ -115,7 +115,7 @@ export const VColorInput = genericComponent<VColorInputSlots>()({
         >
           {{
             ...slots,
-            prepend: props.pipIcon ? arg => (
+            prepend: props.pipIcon ? arg => [
               <>
                { hasPrepend && (
                   <VIcon
@@ -125,9 +125,9 @@ export const VColorInput = genericComponent<VColorInputSlots>()({
                )}
 
                 { slots.prepend?.(arg) }
-              </>
-            ) : undefined,
-            default: () => (
+              </>,
+            ] : undefined,
+            default: () => [
               <>
                 <VMenu
                   v-model={ menu.value }
@@ -143,7 +143,7 @@ export const VColorInput = genericComponent<VColorInputSlots>()({
                   >
                     {{
                       default: ({ actions, model: proxyModel, save, cancel, isPristine }) => {
-                        return (
+                        return [
                           <VColorPicker
                             { ...colorPickerProps }
                             modelValue={ proxyModel.value }
@@ -154,18 +154,20 @@ export const VColorInput = genericComponent<VColorInputSlots>()({
                             onMousedown={ (e: MouseEvent) => e.preventDefault() }
                           >
                             {{
-                              actions: !props.hideActions ? () => slots.actions?.({ save, cancel, isPristine }) ?? actions() : undefined,
+                              actions: !props.hideActions
+                                ? () => slots.actions?.({ save, cancel, isPristine }) ?? actions()
+                                : undefined,
                             }}
-                          </VColorPicker>
-                        )
+                          </VColorPicker>,
+                        ]
                       },
                     }}
                   </VConfirmEdit>
                 </VMenu>
 
                 { slots.default?.() }
-              </>
-            ),
+              </>,
+            ],
           }}
         </VTextField>
       )
