@@ -117,4 +117,12 @@ export default {
     notEmpty: 'Please choose at least one value',
     pattern: 'Invalid format',
   },
+  commandPalette: {
+    instructions: {
+      select: 'to select',
+      navigate: 'to navigate',
+      goBack: 'to go back',
+      close: 'to close',
+    },
+  },
 }

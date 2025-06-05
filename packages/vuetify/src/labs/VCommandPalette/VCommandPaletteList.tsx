@@ -2,17 +2,25 @@
 import './VCommandPalette.scss'
 
 // Components
+import { VActionHotkey } from './VActionHotkey'
 import { VList, VListItem } from '@/components/VList'
-import { InternalListItem, makeVListProps } from '@/components/VList/VList'
-import { genericComponent, omit, propsFactory } from '@/util'
+import { makeVListProps } from '@/components/VList/VList'
 
 // Composables
-import { useRender } from '@/util/useRender'
-import { PropType } from 'vue'
+import { useLocale } from '@/composables/locale' // For default no-data text
 
+// Utilities
+import { genericComponent, omit, propsFactory, useRender } from '@/util'
+
+// Types
+import type { PropType } from 'vue'
+import type { InternalListItem } from '@/components/VList/VList'
 
 export const makeVCommandPaletteListProps = propsFactory({
-  ...omit(makeVListProps(), [
+  ...omit(makeVListProps({
+    density: 'compact' as const,
+    nav: true,
+  }), [
     'items',
     'itemChildren',
     'itemType',
@@ -23,28 +31,71 @@ export const makeVCommandPaletteListProps = propsFactory({
     type: Array as PropType<InternalListItem[]>,
     default: () => ([] as InternalListItem[]),
   },
+  selectedIndex: {
+    type: Number,
+    default: -1,
+  },
 }, 'VCommandPaletteList')
 
-export type VCommandPaletteListSlots = {
+// Scope for the item slot, should match what VCommandPalette provides
+export type VCommandPaletteListItemSlotScope = {
+  item: any
+  props: Record<string, any>
+}
 
+export type VCommandPaletteListSlots = {
+  item: VCommandPaletteListItemSlotScope
+  'no-data': never // Use 'never' for slots with no scope
 }
 
 export const VCommandPaletteList = genericComponent<VCommandPaletteListSlots>()({
   name: 'VCommandPaletteList',
   props: makeVCommandPaletteListProps(),
-  setup(props) {
+  emits: {
+    'click:item': (item: InternalListItem, event: MouseEvent | KeyboardEvent) => true,
+  },
+  setup (props, { emit, slots }) {
+    const { t } = useLocale()
+    const vListProps = VList.filterProps(omit(props, ['items', 'selectedIndex']))
 
-    const vListProps = VList.filterProps(omit(props, ['items']))
-
+    function handleExecute (item: InternalListItem) {
+      emit('click:item', item, new KeyboardEvent('keydown'))
+    }
 
     useRender(() => (
-      <VList {...vListProps}>
-        {props.items.map((item) => {
-          return (
-            <VListItem item={item} />
+      <VList { ...vListProps }>
+        { props.items.length > 0
+          ? (
+            props.items.map((item, index) => {
+              const slotProps = { item: item.raw, props: { ...item.props, active: props.selectedIndex === index } }
+              const itemSlot = slots.item
+
+              const itemContent = itemSlot
+                ? itemSlot(slotProps)
+                : (
+                  <VListItem
+                    { ...item.props }
+                    active={ props.selectedIndex === index }
+                    onClick={ (e: MouseEvent | KeyboardEvent) => emit('click:item', item, e) }
+                  >
+                    { item.props.title }
+                  </VListItem>
+                )
+
+              return (
+                <>
+                  <VActionHotkey item={ item } onExecute={ handleExecute } />
+                  { itemContent }
+                </>
+              )
+            })
           )
-        })}
+          : (
+            slots['no-data']?.() ??
+              <VListItem key="no-data-fallback" title={ t('$vuetify.noDataText') } />
+          )
+        }
       </VList>
     ))
-  }
+  },
 })

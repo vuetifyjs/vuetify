@@ -7,5 +7,8 @@
       // Good enough for now. A user may want to be able to control this.
       padding-top: calc(0.05px + 13vh);
     }
+    &__list.v-list {
+      padding: 8px;
+    }
   }
 }
