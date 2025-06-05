@@ -23,6 +23,7 @@ declare global {
       touched?: boolean
       isTouch?: boolean
       showTimer?: number
+      noEnter?: boolean
       showTimerCommit?: (() => void) | null
     }
     _observe?: Record<number, {

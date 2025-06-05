@@ -22,6 +22,7 @@ interface RippleOptions {
   class?: string
   center?: boolean
   circle?: boolean
+  noTriggerOnEnter?: boolean
 }
 
 export interface RippleDirectiveBinding extends Omit<DirectiveBinding, 'modifiers' | 'value'> {
@@ -30,6 +31,7 @@ export interface RippleDirectiveBinding extends Omit<DirectiveBinding, 'modifier
     center?: boolean
     circle?: boolean
     stop?: boolean
+    noTriggerOnEnter?: boolean
   }
 }
 
@@ -250,7 +252,9 @@ function rippleCancelShow (e: MouseEvent | TouchEvent) {
 let keyboardRipple = false
 
 function keyboardRippleShow (e: KeyboardEvent) {
-  if (!keyboardRipple && (e.keyCode === keyCodes.enter || e.keyCode === keyCodes.space)) {
+  const el = e.currentTarget as HTMLElement
+  const noTriggerOnEnter = el._ripple?.noEnter
+  if (!keyboardRipple && (((e.keyCode === keyCodes.enter) && !noTriggerOnEnter) || e.keyCode === keyCodes.space)) {
     keyboardRipple = true
     rippleShow(e)
   }
@@ -279,6 +283,8 @@ function updateRipple (el: HTMLElement, binding: RippleDirectiveBinding, wasEnab
   el._ripple.enabled = enabled
   el._ripple.centered = modifiers.center
   el._ripple.circle = modifiers.circle
+  el._ripple.noEnter = modifiers.noTriggerOnEnter
+
   if (isObject(value) && value.class) {
     el._ripple.class = value.class
   }
