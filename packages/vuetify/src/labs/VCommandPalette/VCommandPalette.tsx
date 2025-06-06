@@ -178,6 +178,11 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
         currentRawActions.value = item.raw.children
         search.value = ''
       } else {
+        // Execute the handler if it exists
+        if (item.raw?.handler && typeof item.raw.handler === 'function') {
+          item.raw.handler(event, item.raw.value)
+        }
+
         emit('click:item', item.raw, event)
         if (props.closeOnExecute) {
           isActive.value = false
