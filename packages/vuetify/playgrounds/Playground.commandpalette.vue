@@ -2,8 +2,10 @@
   import { VBtn } from '@/components/VBtn'
   import { VCommandPalette } from '../src/labs/VCommandPalette'
   import { ref } from 'vue'
+  import { useTheme } from '@/composables'
 
   const model = ref(true)
+  const theme = useTheme()
 
   const items = [
     // Regular parent item (no divider)
@@ -121,13 +123,13 @@
               title: 'Dark Theme',
               prependIcon: 'mdi-weather-night',
               value: 'theme:dark',
-              handler: (e: any, v: any) => console.log({ e, v }),
+              handler: (e: any, v: any) => theme.global.name.value = 'dark',
             },
             {
               title: 'Light Theme',
               prependIcon: 'mdi-weather-sunny',
               value: 'theme:light',
-              handler: (e: any, v: any) => console.log({ e, v }),
+              handler: (e: any, v: any) => theme.global.name.value = 'light',
             },
           ],
         },

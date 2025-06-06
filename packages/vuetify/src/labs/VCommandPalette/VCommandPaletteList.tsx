@@ -17,7 +17,6 @@ import { genericComponent, omit, propsFactory, useRender } from '@/util'
 import type { MaybeRef, PropType } from 'vue'
 import type { RouteLocationRaw } from 'vue-router'
 import { VHotkey } from './VHotkey'
-import type { makeVListGroupProps } from '@/components/VList/VListGroup'
 import type { makeVListItemProps } from '@/components/VList/VListItem'
 
 // Common properties that all items must have
