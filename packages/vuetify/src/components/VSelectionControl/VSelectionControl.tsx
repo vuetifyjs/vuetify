@@ -13,7 +13,7 @@ import { useDensity } from '@/composables/density'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Directives
-import { Ripple } from '@/directives/ripple'
+import vRipple from '@/directives/ripple'
 
 // Utilities
 import { computed, inject, nextTick, ref, shallowRef, toRef, useId } from 'vue'
@@ -149,7 +149,7 @@ export const VSelectionControl = genericComponent<new <T>(
 ) => GenericProps<typeof props, typeof slots>>()({
   name: 'VSelectionControl',
 
-  directives: { Ripple },
+  directives: { vRipple },
 
   inheritAttrs: false,
 

@@ -19,6 +19,7 @@ declare global {
   const camelCase: typeof import('lodash-es')['camelCase']
   const camelize: typeof import('vue')['camelize']
   const cleanCache: typeof import('./src/utils/pwa')['cleanCache']
+  const compressAndEncode: typeof import('./src/composables/bin')['compressAndEncode']
   const computed: typeof import('vue')['computed']
   const configureMarkdown: typeof import('./src/utils/markdown-it')['configureMarkdown']
   const copyElementContent: typeof import('./src/utils/helpers')['copyElementContent']
@@ -28,6 +29,7 @@ declare global {
   const createOne: typeof import('@vuetify/one')['createOne']
   const createPinia: typeof import('pinia')['createPinia']
   const customRef: typeof import('vue')['customRef']
+  const decodeAndDecompress: typeof import('./src/composables/bin')['decodeAndDecompress']
   const defineAsyncComponent: typeof import('vue')['defineAsyncComponent']
   const defineComponent: typeof import('vue')['defineComponent']
   const defineStore: typeof import('pinia')['defineStore']
@@ -117,6 +119,7 @@ declare global {
   const useAppStore: typeof import('./src/stores/app')['useAppStore']
   const useAttrs: typeof import('vue')['useAttrs']
   const useAuthStore: typeof import('@vuetify/one')['useAuthStore']
+  const useBin: typeof import('./src/composables/bin')['useBin']
   const useCommitsStore: typeof import('./src/stores/commits')['useCommitsStore']
   const useCosmic: typeof import('./src/composables/cosmic')['useCosmic']
   const useCssModule: typeof import('vue')['useCssModule']
@@ -206,6 +209,7 @@ declare module 'vue' {
     readonly camelCase: UnwrapRef<typeof import('lodash-es')['camelCase']>
     readonly camelize: UnwrapRef<typeof import('vue')['camelize']>
     readonly cleanCache: UnwrapRef<typeof import('./src/utils/pwa')['cleanCache']>
+    readonly compressAndEncode: UnwrapRef<typeof import('./src/composables/bin')['compressAndEncode']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
     readonly configureMarkdown: UnwrapRef<typeof import('./src/utils/markdown-it')['configureMarkdown']>
     readonly copyElementContent: UnwrapRef<typeof import('./src/utils/helpers')['copyElementContent']>
@@ -214,6 +218,7 @@ declare module 'vue' {
     readonly createOne: UnwrapRef<typeof import('@vuetify/one')['createOne']>
     readonly createPinia: UnwrapRef<typeof import('pinia')['createPinia']>
     readonly customRef: UnwrapRef<typeof import('vue')['customRef']>
+    readonly decodeAndDecompress: UnwrapRef<typeof import('./src/composables/bin')['decodeAndDecompress']>
     readonly defineAsyncComponent: UnwrapRef<typeof import('vue')['defineAsyncComponent']>
     readonly defineComponent: UnwrapRef<typeof import('vue')['defineComponent']>
     readonly defineStore: UnwrapRef<typeof import('pinia')['defineStore']>
@@ -298,6 +303,7 @@ declare module 'vue' {
     readonly useAppStore: UnwrapRef<typeof import('./src/stores/app')['useAppStore']>
     readonly useAttrs: UnwrapRef<typeof import('vue')['useAttrs']>
     readonly useAuthStore: UnwrapRef<typeof import('@vuetify/one')['useAuthStore']>
+    readonly useBin: UnwrapRef<typeof import('./src/composables/bin')['useBin']>
     readonly useCommitsStore: UnwrapRef<typeof import('./src/stores/commits')['useCommitsStore']>
     readonly useCosmic: UnwrapRef<typeof import('./src/composables/cosmic')['useCosmic']>
     readonly useCssModule: UnwrapRef<typeof import('vue')['useCssModule']>

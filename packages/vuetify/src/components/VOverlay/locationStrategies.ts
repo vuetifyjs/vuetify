@@ -22,7 +22,7 @@ import {
   parseAnchor,
   propsFactory,
 } from '@/util'
-import { Box, getOverflow, getTargetBox } from '@/util/box'
+import { Box, getElementBox, getOverflow, getTargetBox } from '@/util/box'
 
 // Types
 import type { PropType, Ref } from 'vue'
@@ -86,10 +86,14 @@ export function useLocationStrategies (
       watch(() => props.locationStrategy, reset)
       onScopeDispose(() => {
         window.removeEventListener('resize', onResize)
+        visualViewport?.removeEventListener('resize', onVisualResize)
+        visualViewport?.removeEventListener('scroll', onVisualScroll)
         updateLocation.value = undefined
       })
 
       window.addEventListener('resize', onResize, { passive: true })
+      visualViewport?.addEventListener('resize', onVisualResize, { passive: true })
+      visualViewport?.addEventListener('scroll', onVisualScroll, { passive: true })
 
       if (typeof props.locationStrategy === 'function') {
         updateLocation.value = props.locationStrategy(data, props, contentStyles)?.updateLocation
@@ -100,6 +104,14 @@ export function useLocationStrategies (
   }
 
   function onResize (e: Event) {
+    updateLocation.value?.(e)
+  }
+
+  function onVisualResize (e: Event) {
+    updateLocation.value?.(e)
+  }
+
+  function onVisualScroll (e: Event) {
     updateLocation.value?.(e)
   }
 
@@ -248,7 +260,11 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
 
     if (!data.target.value || !data.contentEl.value) return
 
-    if (Array.isArray(data.target.value) || data.target.value.offsetParent) {
+    if (
+      Array.isArray(data.target.value) ||
+      data.target.value.offsetParent ||
+      data.target.value.getClientRects().length
+    ) {
       targetBox = getTargetBox(data.target.value)
     } // Otherwise target element is hidden, use last known value
 
@@ -265,13 +281,7 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
     }
 
     const viewport = scrollParents.reduce<Box>((box: Box | undefined, el) => {
-      const rect = el.getBoundingClientRect()
-      const scrollBox = new Box({
-        x: el === document.documentElement ? 0 : rect.x,
-        y: el === document.documentElement ? 0 : rect.y,
-        width: el.clientWidth,
-        height: el.clientHeight,
-      })
+      const scrollBox = getElementBox(el)
 
       if (box) {
         return new Box({

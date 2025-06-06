@@ -17,6 +17,7 @@ export const IconValue = [String, Function, Object, Array] as PropType<IconValue
 
 export interface IconAliases {
   [name: string]: IconValue
+  collapse: IconValue
   complete: IconValue
   cancel: IconValue
   close: IconValue
@@ -52,6 +53,11 @@ export interface IconAliases {
   plus: IconValue
   minus: IconValue
   calendar: IconValue
+  treeviewCollapse: IconValue
+  treeviewExpand: IconValue
+  eyeDropper: IconValue
+  upload: IconValue
+  color: IconValue
 }
 
 export interface IconProps {
