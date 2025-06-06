@@ -12,12 +12,12 @@ import { VChipGroup } from '@/components/VChipGroup'
 import { makeDensityProps } from '@/composables/density'
 
 // Utilities
-import { computed, reactive, ref, watch } from 'vue'
+import { computed, ref, shallowRef, watch } from 'vue'
 import { formatTextTemplate } from './utils'
 import { clamp, genericComponent, pick, propsFactory } from '@/util'
 
 // Types
-import type { PropType } from 'vue'
+import type { PropType, TransitionProps } from 'vue'
 import type { PieItem, TextTemplate } from './types'
 
 export type VPieSlots = {
@@ -70,21 +70,18 @@ export const makeVPieProps = propsFactory({
   },
   legend: {
     type: [Boolean, Object] as PropType<boolean | {
-      visible?: boolean
       position?: 'left' | 'top' | 'right' | 'bottom'
       textFormat?: TextTemplate
     }>,
     default: false,
   },
-  formats: {
-    type: Object as PropType<{
-      tooltipTitle?: TextTemplate
-      tooltipSubtitle?: TextTemplate
+  tooltip: {
+    type: [Boolean, Object] as PropType<boolean | {
+      titleFormat?: TextTemplate
+      subtitleFormat?: TextTemplate
+      transition?: string | boolean | TransitionProps
     }>,
-    default: () => ({
-      tooltipTitle: '[title]',
-      tooltipSubtitle: '[value]',
-    }),
+    default: true,
   },
   ...makeDensityProps(),
   ...pick(makeVPieSegmentProps(), [
@@ -102,7 +99,7 @@ export const VPie = genericComponent<VPieSlots>()({
 
   setup (props, { slots }) {
     const legendConfig = computed(() => ({
-      visible: !!props.legend && (props.legend as any)?.visible !== false,
+      visible: !!props.legend,
       position: 'bottom',
       textFormat: '[title]',
       ...(typeof props.legend === 'object' ? props.legend : {}),
@@ -188,22 +185,27 @@ export const VPie = genericComponent<VPieSlots>()({
       }
     }
 
-    const tooltipProps = reactive({
-      modelValue: false,
-      item: null as PieItem | null,
-    })
+    const tooltipItem = shallowRef<PieItem | null>(null)
+    const tooltipVisible = shallowRef(false)
 
     let mouseLeaveTimeout = null! as ReturnType<typeof setTimeout>
 
     function onMouseenter (item: PieItem) {
+      if (!props.tooltip) return
+
       clearTimeout(mouseLeaveTimeout)
-      tooltipProps.modelValue = true
-      tooltipProps.item = item
+      tooltipVisible.value = true
+      tooltipItem.value = item
     }
 
     function onMouseleave () {
+      if (!props.tooltip) return
+
       clearTimeout(mouseLeaveTimeout)
-      mouseLeaveTimeout = setTimeout(() => tooltipProps.modelValue = false, 100)
+      mouseLeaveTimeout = setTimeout(() => {
+        tooltipVisible.value = false
+        tooltipItem.value = null
+      }, 100)
     }
 
     return () => {
@@ -213,6 +215,19 @@ export const VPie = genericComponent<VPieSlots>()({
         'rounded',
         'hideSlice',
       ]))
+
+      const defaultTooltipTransition = {
+        name: 'fade-transition',
+        duration: 150,
+      }
+
+      const tooltipProps = {
+        item: tooltipItem.value,
+        modelValue: tooltipVisible.value,
+        titleFormat: typeof props.tooltip === 'object' ? props.tooltip.titleFormat : '[title]',
+        subtitleFormat: typeof props.tooltip === 'object' ? props.tooltip.subtitleFormat : '[value]',
+        transition: typeof props.tooltip === 'object' ? props.tooltip.transition : defaultTooltipTransition,
+      }
 
       return (
         <div
@@ -310,12 +325,12 @@ export const VPie = genericComponent<VPieSlots>()({
               )}
             </div>
           )}
-          <VPieTooltip
-            { ...tooltipProps }
-            title-format={ props.formats.tooltipTitle }
-            subtitle-format={ props.formats.tooltipSubtitle }
-            v-slots:default={ slots.tooltip }
-          />
+          { !!props.tooltip && (
+            <VPieTooltip
+              { ...tooltipProps }
+              v-slots:default={ slots.tooltip }
+            />
+          )}
         </div>
       )
     }

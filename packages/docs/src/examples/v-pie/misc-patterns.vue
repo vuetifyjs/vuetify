@@ -48,11 +48,11 @@
     </div>
     <div class="d-flex mt-6 justify-center">
       <v-pie
-        :formats="{ tooltipSubtitle: '[value]%' }"
         :hover-scale=".1"
         :inner-cut="60"
         :items="items"
         :legend="{ position: 'left' }"
+        :tooltip="{ subtitleFormat: '[value]%' }"
         hide-slice
       >
         <template v-slot:center>
