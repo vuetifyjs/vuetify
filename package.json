@@ -106,8 +106,5 @@
       "geckodriver",
       "nx"
     ]
-  },
-  "dependencies": {
-    "@vuetify/vuetify-root": "link:"
   }
 }
