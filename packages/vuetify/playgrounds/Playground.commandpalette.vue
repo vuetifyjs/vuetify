@@ -6,6 +6,7 @@
   const model = ref(true)
 
   const items = [
+    // Regular parent item (no divider)
     {
       title: 'New',
       value: 'new',
@@ -16,36 +17,39 @@
           prependIcon: 'mdi-folder-plus-outline',
           subtitle: 'Create a new project',
           value: 'new:project',
-          handler: (e, v) => console.log({e, v}),
+          handler: (e: any, v: any) => console.log({ e, v }),
           hotkey: 'ctrl+alt+n',
         },
         {
           title: 'File',
           prependIcon: 'mdi-file-plus-outline',
           subtitle: 'Create a new file',
-          handler: (e, v) => console.log({e, v}),
+          handler: (e: any, v: any) => console.log({ e, v }),
           value: 'new:file',
         },
         {
           title: 'User',
           prependIcon: 'mdi-account-plus-outline',
           subtitle: 'Create a new user',
-          handler: (e, v) => console.log({e, v}),
+          handler: (e: any, v: any) => console.log({ e, v }),
           value: 'new:user',
         },
       ],
     },
+
+    // Group with start divider
     {
-      title: 'Git',
-      value: 'git',
-      prependIcon: 'mdi-git',
+      type: 'group',
+      id: 'git-group',
+      title: 'Git Actions',
+      divider: 'end',
       children: [
         {
           title: 'Commit',
           prependIcon: 'mdi-source-commit',
           subtitle: 'Commit changes',
           value: 'git:commit',
-          handler: (e, v) => console.log({e, v}),
+          handler: (e: any, v: any) => console.log({ e, v }),
           hotkey: 'ctrl+k',
         },
         {
@@ -53,24 +57,26 @@
           prependIcon: 'mdi-source-pull',
           subtitle: 'Push changes',
           value: 'git:push',
-          handler: (e, v) => console.log({e, v}),
+          handler: (e: any, v: any) => console.log({ e, v }),
           hotkey: 'ctrl+shift+k',
         },
         {
           title: 'Fetch',
           prependIcon: 'mdi-source-branch',
           subtitle: 'Fetch changes',
-          handler: (e, v) => console.log({e, v}),
+          handler: (e: any, v: any) => console.log({ e, v }),
           value: 'git:fetch',
         },
       ],
     },
+
+    // Regular items
     {
       title: 'File: Save',
       prependIcon: 'mdi-content-save',
       subtitle: 'Save the current file',
       value: 'file:save',
-      handler: (e, v) => console.log({e, v}),
+      handler: (e: any, v: any) => console.log({ e, v }),
       hotkey: 'ctrl+s',
     },
     {
@@ -78,29 +84,35 @@
       prependIcon: 'mdi-content-save-outline',
       subtitle: 'Save the current file as...',
       value: 'file:saveAs',
-      handler: (e, v) => console.log({e, v}),
+      handler: (e: any, v: any) => console.log({ e, v }),
       hotkey: 'ctrl+shift+s',
     },
+
+    // Group with both start and end dividers
     {
-      title: 'Preferences',
-      value: 'preferences',
-      prependIcon: 'mdi-cog',
+      type: 'group',
+      id: 'settings-group',
+      title: 'Settings & Preferences',
+      divider: 'both',
       children: [
         {
           title: 'Settings',
           prependIcon: 'mdi-cog-outline',
           subtitle: 'Open settings',
-          handler: (e, v) => console.log({e, v}),
+          handler: (e: any, v: any) => console.log({ e, v }),
           value: 'pref:settings',
         },
         {
           title: 'Keyboard Shortcuts',
           prependIcon: 'mdi-keyboard-settings-outline',
           subtitle: 'Configure keyboard shortcuts',
-          handler: (e, v) => console.log({e, v}),
+          handler: (e: any, v: any) => console.log({ e, v }),
           value: 'pref:keys',
         },
+        // Nested parent within group
         {
+          type: 'parent',
+          id: 'theme-parent',
           title: 'Theme',
           prependIcon: 'mdi-palette-outline',
           value: 'pref:theme',
@@ -109,32 +121,60 @@
               title: 'Dark Theme',
               prependIcon: 'mdi-weather-night',
               value: 'theme:dark',
-              handler: (e, v) => console.log({e, v}),
+              handler: (e: any, v: any) => console.log({ e, v }),
             },
             {
               title: 'Light Theme',
               prependIcon: 'mdi-weather-sunny',
               value: 'theme:light',
-              handler: (e, v) => console.log({e, v}),
+              handler: (e: any, v: any) => console.log({ e, v }),
             },
           ],
         },
       ],
     },
+
+    // Regular items
     {
       title: 'Find',
       prependIcon: 'mdi-magnify',
       subtitle: 'Find in the current file',
       value: 'find',
-      handler: (e, v) => console.log({e, v}),
+      handler: (e: any, v: any) => console.log({ e, v }),
       hotkey: 'ctrl-f',
     },
+
+    // Group with end divider
     {
-      title: 'Find in Files',
-      prependIcon: 'mdi-file-find-outline',
-      subtitle: 'Find in the entire workspace',
-      value: 'find:files',
-      handler: (e, v) => console.log({e, v}),
+      type: 'group',
+      id: 'search-group',
+      title: 'Search Tools',
+      divider: 'end',
+      children: [
+        {
+          title: 'Find in Files',
+          prependIcon: 'mdi-file-find-outline',
+          subtitle: 'Find in the entire workspace',
+          value: 'find:files',
+          handler: (e: any, v: any) => console.log({ e, v }),
+        },
+        {
+          title: 'Replace in Files',
+          prependIcon: 'mdi-find-replace',
+          subtitle: 'Replace text across files',
+          value: 'replace:files',
+          handler: (e: any, v: any) => console.log({ e, v }),
+        },
+      ],
+    },
+
+    // Final regular item
+    {
+      title: 'About',
+      prependIcon: 'mdi-information',
+      subtitle: 'About this application',
+      value: 'about',
+      handler: (e: any, v: any) => console.log({ e, v }),
     },
   ]
 

@@ -2,13 +2,15 @@
 import './VCommandPalette.scss'
 
 // Components
-import { VList, VListItem } from '@/components/VList'
+import { VDivider } from '@/components/VDivider'
+import { VList, VListItem, VListSubheader } from '@/components/VList'
 import { makeVListProps } from '@/components/VList/VList'
 
 // Composables
 import { useLocale } from '@/composables/locale' // For default no-data text
 
 // Utilities
+import { computed, nextTick, ref, watch } from 'vue'
 import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
@@ -78,13 +80,8 @@ export interface VCommandPaletteParentDefinition extends BaseItemProps, VListDis
   href?: never
 }
 
-type VListGroupDisplayProps = Partial<Pick<ReturnType<typeof makeVListGroupProps>,
-| 'appendIcon'
-| 'prependIcon'
->>
-
 // Group item that can contain both items and parents
-export interface VCommandPaletteGroupDefinition extends BaseItemProps, VListGroupDisplayProps {
+export interface VCommandPaletteGroupDefinition extends BaseItemProps {
   type: 'group'
   divider?: 'start' | 'end' | 'none' | 'both' // Default is none
   children: Array<VCommandPaletteItemDefinition | VCommandPaletteParentDefinition>
@@ -225,14 +222,15 @@ export const VCommandPaletteList = genericComponent<VCommandPaletteListSlots>()(
   },
   setup (props, { emit, slots }) {
     const { t } = useLocale()
+    const vListRef = ref<typeof VList>()
     const vListProps = VList.filterProps(omit(props, ['items', 'selectedIndex']))
 
     // Adapter function to convert VuetifyListItem to VListItem props
-    function getVListItemProps (item: any, index: number) {
+    function getVListItemProps (item: any, index: number, isSelectable = true) {
       const baseProps = {
         title: item.title,
-        active: props.selectedIndex === index,
-        onClick: (e: MouseEvent | KeyboardEvent) => emit('click:item', item, e),
+        active: isSelectable && props.selectedIndex === index,
+        onClick: isSelectable ? (e: MouseEvent | KeyboardEvent) => emit('click:item', item, e) : undefined,
       }
 
       // Extract properties from item.props (VuetifyListItem structure)
@@ -264,31 +262,153 @@ export const VCommandPaletteList = genericComponent<VCommandPaletteListSlots>()(
       return { ...baseProps, ...optionalProps }
     }
 
-    useRender(() => (
-      <VList { ...vListProps }>
-        { slots['prepend-item']?.() }
-        { props.items.length > 0
-          ? (
-            props.items.map((item, index) => {
-              const listItemProps = getVListItemProps(item, index)
+    // Create a flat list of renderable items for proper keyboard navigation
+    const flattenedItems = computed(() => {
+      const result: Array<{ type: 'divider' | 'group' | 'item', originalIndex?: number, item?: any, key: string }> = []
 
-              const slotProps = {
-                item,
-                props: listItemProps,
-              }
-              const itemSlot = slots.item
+      props.items.forEach((item: any, index) => {
+        if (item.raw && isGroupDefinition(item.raw)) {
+          const groupItem = item.raw as VCommandPaletteGroupDefinition
+          const showStartDivider = groupItem.divider === 'start' || groupItem.divider === 'both'
+          const showEndDivider = groupItem.divider === 'end' || groupItem.divider === 'both'
 
-              return itemSlot
-                ? itemSlot(slotProps)
-                : (
-                  <VListItem { ...listItemProps }>
-                    {{
-                      append: item.props?.hotkey ? () => <VHotkey keys={ item.props.hotkey } /> : undefined,
-                    }}
-                  </VListItem>
-                )
+          if (showStartDivider) {
+            result.push({ type: 'divider', key: `${index}-start-divider`, item: 'start' })
+          }
+
+          result.push({ type: 'group', originalIndex: index, item, key: `${index}-group` })
+
+          if (showEndDivider) {
+            result.push({ type: 'divider', key: `${index}-end-divider`, item: 'end' })
+          }
+
+          groupItem.children.forEach((child: any, childIndex: number) => {
+            const transformedChild = {
+              title: child.title,
+              value: child.value,
+              props: {
+                title: child.title,
+                subtitle: child.subtitle,
+                prependIcon: child.prependIcon,
+                appendIcon: child.appendIcon,
+                prependAvatar: child.prependAvatar,
+                appendAvatar: child.appendAvatar,
+                to: child.to,
+                href: child.href,
+                hotkey: (child as any).hotkey,
+              },
+              raw: child,
+            }
+            result.push({ type: 'item', item: transformedChild, key: `${index}-${childIndex}` })
+          })
+        } else if (item.raw && isParentDefinition(item.raw)) {
+          result.push({ type: 'group', originalIndex: index, item, key: `${index}-header` })
+
+          item.raw.children.forEach((child: any, childIndex: number) => {
+            const transformedChild = {
+              title: child.title,
+              value: child.value,
+              props: {
+                title: child.title,
+                subtitle: child.subtitle,
+                prependIcon: child.prependIcon,
+                appendIcon: child.appendIcon,
+                prependAvatar: child.prependAvatar,
+                appendAvatar: child.appendAvatar,
+                to: child.to,
+                href: child.href,
+                hotkey: (child as any).hotkey,
+              },
+              raw: child,
+            }
+            result.push({ type: 'item', item: transformedChild, key: `${index}-${childIndex}` })
+          })
+        } else {
+          result.push({ type: 'item', originalIndex: index, item, key: `${index}` })
+        }
+      })
+
+      return result
+    })
+
+    // Create a mapping from original selectedIndex to flattened index
+    const actualSelectedIndex = computed(() => {
+      if (props.selectedIndex === -1) return -1
+
+      let selectableItemCount = 0
+      for (let i = 0; i < flattenedItems.value.length; i++) {
+        const flatItem = flattenedItems.value[i]
+        if (flatItem.type === 'item') {
+          if (selectableItemCount === props.selectedIndex) {
+            return i
+          }
+          selectableItemCount++
+        }
+      }
+      return -1
+    })
+
+    // Watch for selection changes and scroll to keep selected item in view
+    watch([actualSelectedIndex, flattenedItems], async () => {
+      if (actualSelectedIndex.value >= 0 && vListRef.value) {
+        await nextTick()
+        const listElement = vListRef.value.$el
+        if (listElement) {
+          const selectedElement = listElement.querySelector('.v-list-item--active')
+          if (selectedElement) {
+            selectedElement.scrollIntoView({
+              block: 'nearest',
+              behavior: 'smooth'
             })
-          )
+          }
+        }
+      }
+    }, { flush: 'post' })
+
+    useRender(() => (
+      <VList ref={ vListRef } { ...vListProps } class="v-command-palette__list">
+        { slots['prepend-item']?.() }
+        { flattenedItems.value.length > 0
+          ? flattenedItems.value.map((flatItem, flatIndex) => {
+            if (flatItem.type === 'divider') {
+              return (
+              <VDivider
+                key={ flatItem.key }
+                class={[flatItem.item === 'start' ? 'v-command-palette__list-divider-start' : 'v-command-palette__list-divider-end']}
+              />
+              )
+            }
+
+            if (flatItem.type === 'group') {
+              const groupProps = getVListItemProps(flatItem.item!, flatItem.originalIndex!, false)
+              const slotProps = { item: flatItem.item, props: groupProps }
+
+              return slots.item
+                ? slots.item(slotProps)
+                : <VListSubheader key={ flatItem.key } { ...groupProps } class="v-command-palette__list-group" />
+            }
+
+            if (flatItem.type === 'item') {
+              const isActive = flatIndex === actualSelectedIndex.value
+              const itemProps = {
+                ...getVListItemProps(flatItem.item!, flatItem.originalIndex ?? 0, true),
+                active: isActive,
+              }
+              const slotProps = { item: flatItem.item, props: itemProps }
+
+              return slots.item
+                ? slots.item(slotProps)
+                : (
+                    <VListItem key={ flatItem.key } { ...itemProps } class="v-command-palette__list-group">
+                      {{
+                        append: flatItem.item?.props?.hotkey ? () => <VHotkey keys={ flatItem.item.props.hotkey } /> : undefined,
+                      }}
+                    </VListItem>
+                )
+            }
+
+            return null
+          })
           : (
             slots['no-data']?.() ??
               <VListItem key="no-data-fallback" title={ t('$vuetify.noDataText') } />

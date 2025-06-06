@@ -21,8 +21,20 @@ type DisplayMode = 'icon' | 'symbol' | 'text'
 type KeyDisplay = [Exclude<DisplayMode, 'icon'>, string] | [Extract<DisplayMode, 'icon'>, IconValue]
 type KeyMap = Record<string, (mode: DisplayMode, isMac: boolean) => KeyDisplay>
 
+function cmdAndMeta (mode: DisplayMode, isMac: boolean): KeyDisplay {
+  switch (mode) {
+    case 'symbol':
+      if (isMac) return ['symbol', '⌘']
+    case 'icon':
+      // eslint-disable-next-line max-len
+      if (isMac) return ['icon', ['M6 2a4 4 0 0 1 4 4v2h4V6a4 4 0 0 1 4-4a4 4 0 0 1 4 4a4 4 0 0 1-4 4h-2v4h2a4 4 0 0 1 4 4a4 4 0 0 1-4 4a4 4 0 0 1-4-4v-2h-4v2a4 4 0 0 1-4 4a4 4 0 0 1-4-4a4 4 0 0 1 4-4h2v-4H6a4 4 0 0 1-4-4a4 4 0 0 1 4-4m10 16a2 2 0 0 0 2 2a2 2 0 0 0 2-2a2 2 0 0 0-2-2h-2zm-2-8h-4v4h4zm-8 6a2 2 0 0 0-2 2a2 2 0 0 0 2 2a2 2 0 0 0 2-2v-2zM8 6a2 2 0 0 0-2-2a2 2 0 0 0-2 2a2 2 0 0 0 2 2h2zm10 2a2 2 0 0 0 2-2a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2z']]
+    default:
+      return ['text', isMac ? 'Command' : 'Ctrl']
+  }
+}
+
 const keyMap = {
-  ctrl: (mode, isMac) => {
+  ctrl (mode, isMac) {
     switch (mode) {
       case 'symbol':
         if (isMac) return ['symbol', '⌃']
@@ -32,18 +44,9 @@ const keyMap = {
         return ['text', 'Ctrl']
     }
   },
-  meta: (mode, isMac) => {
-    switch (mode) {
-      case 'symbol':
-        if (isMac) return ['symbol', '⌘']
-      case 'icon':
-        // eslint-disable-next-line max-len
-        if (isMac) return ['icon', ['M6 2a4 4 0 0 1 4 4v2h4V6a4 4 0 0 1 4-4a4 4 0 0 1 4 4a4 4 0 0 1-4 4h-2v4h2a4 4 0 0 1 4 4a4 4 0 0 1-4 4a4 4 0 0 1-4-4v-2h-4v2a4 4 0 0 1-4 4a4 4 0 0 1-4-4a4 4 0 0 1 4-4h2v-4H6a4 4 0 0 1-4-4a4 4 0 0 1 4-4m10 16a2 2 0 0 0 2 2a2 2 0 0 0 2-2a2 2 0 0 0-2-2h-2zm-2-8h-4v4h4zm-8 6a2 2 0 0 0-2 2a2 2 0 0 0 2 2a2 2 0 0 0 2-2v-2zM8 6a2 2 0 0 0-2-2a2 2 0 0 0-2 2a2 2 0 0 0 2 2h2zm10 2a2 2 0 0 0 2-2a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2z']]
-      default:
-        return ['text', isMac ? 'Command' : 'Ctrl']
-    }
-  },
-  shift: (mode, isMac) => {
+  meta: cmdAndMeta,
+  cmd: cmdAndMeta,
+  shift (mode) {
     switch (mode) {
       case 'symbol':
         return ['symbol', '⇧']
@@ -53,7 +56,7 @@ const keyMap = {
         return ['text', 'Shift']
     }
   },
-  alt: (mode, isMac) => {
+  alt (mode, isMac) {
     switch (mode) {
       case 'symbol':
         if (isMac) return ['symbol', '⌥']
@@ -63,7 +66,7 @@ const keyMap = {
         return ['text', isMac ? 'Option' : 'Alt']
     }
   },
-  enter: mode => {
+  enter (mode) {
     switch (mode) {
       case 'symbol':
         return ['symbol', '↵']
@@ -73,7 +76,7 @@ const keyMap = {
         return ['text', 'Enter']
     }
   },
-  arrowup: mode => {
+  arrowup (mode) {
     switch (mode) {
       case 'symbol':
         return ['symbol', '↑']
@@ -83,7 +86,7 @@ const keyMap = {
         return ['text', 'Up Arrow']
     }
   },
-  arrowdown: mode => {
+  arrowdown (mode) {
     switch (mode) {
       case 'symbol':
         return ['symbol', '↓']
@@ -93,7 +96,7 @@ const keyMap = {
         return ['text', 'Down Arrow']
     }
   },
-  arrowleft: mode => {
+  arrowleft (mode) {
     switch (mode) {
       case 'symbol':
         return ['symbol', '←']
@@ -103,7 +106,7 @@ const keyMap = {
         return ['text', 'Left Arrow']
     }
   },
-  arrowright: mode => {
+  arrowright (mode) {
     switch (mode) {
       case 'symbol':
         return ['symbol', '→']
@@ -113,7 +116,7 @@ const keyMap = {
         return ['text', 'Right Arrow']
     }
   },
-  backspace: mode => {
+  backspace (mode) {
     switch (mode) {
       case 'symbol':
         return ['symbol', '⌫']
@@ -124,7 +127,7 @@ const keyMap = {
         return ['text', 'Backspace']
     }
   },
-  escape: () => {
+  escape () {
     return ['text', 'Esc']
   },
 } as const satisfies KeyMap
@@ -273,7 +276,7 @@ export const VHotkey = genericComponent()({
               ) : (
                   <>
                     { /* Individual key display */ }
-                    <kbd key={ keyIndex } class={['v-hotkey__key', key[0] === 'icon' && 'v-hotkey__key-icon']}>
+                    <kbd key={ keyIndex } class={['v-hotkey__key', key[0] === 'icon' ? 'v-hotkey__key-icon' : `v-hotkey__key-${key[0]}`]}>
                       {
                         key[0] === 'icon' ? <VIcon icon={ key[1] } /> : key[1]
                       }

@@ -126,9 +126,30 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
     const processedCurrentActions = computed(() => transformItems(itemTransformationProps.value, currentRawActions.value))
     const { filteredItems: filteredActions } = useFilter(props, processedCurrentActions, search)
 
+    // Count only selectable items (exclude groups/parents/dividers)
+    const selectableItemsCount = computed(() => {
+      let count = 0
+
+      filteredActions.value.forEach(item => {
+        // Check if this is a group or parent that will be flattened
+        if (item.raw?.type === 'group') {
+          count += item.raw.children.length
+        } else if (item.raw?.type === 'parent') {
+          count += item.raw.children.length
+        } else {
+          // Regular item
+          count += 1
+        }
+      })
+
+      return count
+    })
+
     watch(filteredActions, () => {
       selectedIndex.value = -1
     })
+
+    // Reset state when dialog closes is handled in onAfterLeave
 
     // --- Hotkey Registration ---
     useHotkey(toRef(props, 'hotkey'), e => {
@@ -136,26 +157,87 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
     })
     useHotkey('arrowup', e => {
       if (!isActive.value) return
-      selectedIndex.value = selectedIndex.value > 0 ? selectedIndex.value - 1 : filteredActions.value.length - 1
+      const maxIndex = selectableItemsCount.value - 1
+      if (maxIndex >= 0) {
+        selectedIndex.value = selectedIndex.value > 0 ? selectedIndex.value - 1 : maxIndex
+      }
     }, { inputs: true })
     useHotkey('arrowdown', e => {
       if (!isActive.value) return
-      selectedIndex.value = selectedIndex.value < filteredActions.value.length - 1 ? selectedIndex.value + 1 : 0
+      const maxIndex = selectableItemsCount.value - 1
+      if (maxIndex >= 0) {
+        selectedIndex.value = selectedIndex.value < maxIndex ? selectedIndex.value + 1 : 0
+      }
     }, { inputs: true })
     useHotkey('enter', e => {
       if (!isActive.value) return
-      if (selectedIndex.value >= 0 && filteredActions.value[selectedIndex.value]) {
-        onItemClickFromList(filteredActions.value[selectedIndex.value], e)
+      // Find the actual item at the selected index by counting selectable items
+      if (selectedIndex.value >= 0) {
+        let selectableCount = 0
+        for (const item of filteredActions.value) {
+          if (item.raw?.type === 'group') {
+            if (selectableCount + item.raw.children.length > selectedIndex.value) {
+              const childIndex = selectedIndex.value - selectableCount
+              const child = item.raw.children[childIndex]
+              const transformedChild = {
+                title: child.title,
+                value: child.value,
+                props: {
+                  title: child.title,
+                  subtitle: child.subtitle,
+                  prependIcon: child.prependIcon,
+                  appendIcon: child.appendIcon,
+                  prependAvatar: child.prependAvatar,
+                  appendAvatar: child.appendAvatar,
+                  to: child.to,
+                  href: child.href,
+                  hotkey: child.hotkey,
+                },
+                raw: child,
+              }
+              onItemClickFromList(transformedChild, e)
+              return
+            }
+            selectableCount += item.raw.children.length
+          } else if (item.raw?.type === 'parent') {
+            if (selectableCount + item.raw.children.length > selectedIndex.value) {
+              const childIndex = selectedIndex.value - selectableCount
+              const child = item.raw.children[childIndex]
+              const transformedChild = {
+                title: child.title,
+                value: child.value,
+                props: {
+                  title: child.title,
+                  subtitle: child.subtitle,
+                  prependIcon: child.prependIcon,
+                  appendIcon: child.appendIcon,
+                  prependAvatar: child.prependAvatar,
+                  appendAvatar: child.appendAvatar,
+                  to: child.to,
+                  href: child.href,
+                  hotkey: child.hotkey,
+                },
+                raw: child,
+              }
+              onItemClickFromList(transformedChild, e)
+              return
+            }
+            selectableCount += item.raw.children.length
+          } else {
+            if (selectableCount === selectedIndex.value) {
+              onItemClickFromList(item, e)
+              return
+            }
+            selectableCount += 1
+          }
+        }
       }
     }, { inputs: true })
     useHotkey('escape', e => {
       if (!isActive.value) return
-      if (navigationStack.value.length > 0) {
-        currentRawActions.value = navigationStack.value.pop()!
-        search.value = ''
-      } else {
-        isActive.value = false
-      }
+      // Always close the dialog on ESC - don't navigate back through stack
+      // The state clearing in onAfterLeave will reset navigation properly
+      isActive.value = false
     }, { inputs: true })
     useHotkey('backspace', e => {
       if (!isActive.value || search.value) return
@@ -169,6 +251,14 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
       emit('afterEnter')
     }
     function onAfterLeave () {
+      // Wait for the dialog transition to fully complete before clearing state
+      // Dialog transition duration is 125ms for leave (from dialog-transition.scss)
+      setTimeout(() => {
+        selectedIndex.value = -1
+        search.value = ''
+        navigationStack.value = []
+        currentRawActions.value = props.items ?? []
+      }, 150) // Add a small buffer to the 125ms transition duration
       emit('afterLeave')
     }
 
