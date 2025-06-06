@@ -1,8 +1,10 @@
 // Components
-import { VScrollYReverseTransition } from '@/components/transitions'
 import { VAvatar } from '@/components/VAvatar'
 import { VListItem } from '@/components/VList/VListItem'
 import { VTooltip } from '@/components/VTooltip/VTooltip'
+
+// Composables
+import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 
 // Utilities
 import { computed, onBeforeUnmount, onMounted, shallowRef } from 'vue'
@@ -31,6 +33,7 @@ export const makeVPieTooltipProps = propsFactory({
     type: [String, Function] as PropType<TextTemplate>,
     default: '[value]',
   },
+  ...makeTransitionProps(),
 }, 'VPieTooltip')
 
 export const VPieTooltip = genericComponent<VPieTooltipSlots>()({
@@ -80,7 +83,7 @@ export const VPieTooltip = genericComponent<VPieTooltipSlots>()({
       >
         { !!props.item && (
           slots.default?.({ segment: props.item }) ?? (
-            <VScrollYReverseTransition duration={ 150 } mode="out-in">
+            <MaybeTransition transition={ props.transition } mode="out-in">
               <VListItem
                 key={ props.item.key }
                 class="px-0"
@@ -104,7 +107,7 @@ export const VPieTooltip = genericComponent<VPieTooltipSlots>()({
                   ),
                 }}
               />
-            </VScrollYReverseTransition>
+            </MaybeTransition>
           )
         )}
       </VTooltip>

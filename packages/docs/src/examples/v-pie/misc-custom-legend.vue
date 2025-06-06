@@ -15,13 +15,13 @@
         ></v-select>
       </v-card-title>
       <v-pie
-        :formats="{ tooltipSubtitle: '[value]%' }"
         :gap="2"
         :inner-cut="70"
         :items="items"
         :legend="{ position: 'right' }"
         :rounded="2"
         :size="300"
+        :tooltip="{ subtitleFormat: '[value]%' }"
         class="pa-3 mt-3"
         hide-slice
       >
