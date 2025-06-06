@@ -13,8 +13,175 @@ import { useLocale } from '@/composables/locale' // For default no-data text
 import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
-import type { PropType } from 'vue'
-import type { InternalListItem } from '@/components/VList/VList'
+import type { MaybeRef, PropType } from 'vue'
+import type { RouteLocationRaw } from 'vue-router'
+import type { makeVListGroupProps } from '@/components/VList/VListGroup'
+import type { makeVListItemProps } from '@/components/VList/VListItem'
+
+// Common properties that all items must have
+interface BaseItemProps {
+  id: string
+  title: string
+  visible?: MaybeRef<boolean>
+}
+
+// Make all Vuetify list item properties optional
+type VListDisplayTypes = Partial<Pick<ReturnType<typeof makeVListItemProps>,
+| 'appendAvatar'
+| 'appendIcon'
+| 'prependAvatar'
+| 'prependIcon'
+| 'subtitle'
+>>
+
+// Get the actual prop value types, not the prop definitions
+type VListNavigableTypes = {
+  to?: RouteLocationRaw
+  href?: string
+}
+
+// Base for all items - type is optional and defaults to 'item'
+type VCommandPaletteItemBase<TValue = unknown> = BaseItemProps & VListDisplayTypes & {
+  type?: 'item'
+}
+
+// Action item - discriminated by presence of handler/value
+export interface VCommandPaletteActionItem<TValue = unknown> extends VCommandPaletteItemBase<TValue> {
+  handler?: (params?: TValue) => void
+  value?: TValue
+  // Explicitly exclude navigation properties
+  to?: never
+  href?: never
+  children?: never
+}
+
+// Link item - discriminated by presence of to/href
+export interface VCommandPaletteLinkItem extends VCommandPaletteItemBase, VListNavigableTypes {
+  // Explicitly exclude action properties
+  handler?: never
+  value?: never
+  children?: never
+}
+
+// Union of action and link items - both have type 'item' but discriminated by properties
+export type VCommandPaletteItemDefinition<TValue = unknown> =
+  | VCommandPaletteActionItem<TValue>
+  | VCommandPaletteLinkItem
+
+// Parent item that contains children
+export interface VCommandPaletteParentDefinition extends BaseItemProps, VListDisplayTypes {
+  type: 'parent'
+  children: VCommandPaletteItemDefinition[]
+  handler?: never // Ensure this is not a leaf item
+  value?: never
+  to?: never
+  href?: never
+}
+
+type VListGroupDisplayProps = Partial<Pick<ReturnType<typeof makeVListGroupProps>,
+| 'appendIcon'
+| 'prependIcon'
+>>
+
+// Group item that can contain both items and parents
+export interface VCommandPaletteGroupDefinition extends BaseItemProps, VListGroupDisplayProps {
+  type: 'group'
+  divider?: 'start' | 'end' | 'none' | 'both' // Default is none
+  children: Array<VCommandPaletteItemDefinition | VCommandPaletteParentDefinition>
+  handler?: never
+  value?: never
+  to?: never
+  href?: never
+  keywords?: never
+  hotkey?: never
+}
+
+// Type guard functions using property-based discrimination
+export function isItemDefinition (item: VCommandPaletteItem): item is VCommandPaletteItemDefinition {
+  return item.type === 'item' || item.type === undefined
+}
+
+export function isActionItem (item: VCommandPaletteItem): item is VCommandPaletteActionItem {
+  return (item.type === 'item' || item.type === undefined) &&
+         ('handler' in item || 'value' in item) &&
+         !('to' in item) && !('href' in item)
+}
+
+export function isLinkItem (item: VCommandPaletteItem): item is VCommandPaletteLinkItem {
+  return (item.type === 'item' || item.type === undefined) &&
+         ('to' in item || 'href' in item) &&
+         !('handler' in item) && !('value' in item)
+}
+
+export function isParentDefinition (item: VCommandPaletteItem): item is VCommandPaletteParentDefinition {
+  return item.type === 'parent'
+}
+
+export function isGroupDefinition (item: VCommandPaletteItem): item is VCommandPaletteGroupDefinition {
+  return item.type === 'group'
+}
+
+export type VCommandPaletteItem = VCommandPaletteItemDefinition | VCommandPaletteParentDefinition | VCommandPaletteGroupDefinition
+
+// Example usage demonstrating property-based discriminated union:
+const testItems: VCommandPaletteItem[] = [
+  {
+    // type: 'item', // ✅ Optional - defaults to 'item'
+    id: 'item1',
+    title: 'Action Item',
+    handler: () => { /* Action executed */ },
+    // to: '/somewhere', // ❌ TypeScript error: Types of property 'to' are incompatible
+    // href: 'https://example.com', // ❌ TypeScript error: Types of property 'href' are incompatible
+  },
+  {
+    type: 'item', // ✅ Explicitly set to 'item'
+    id: 'item2',
+    title: 'Link Item',
+    href: 'https://example.com',
+    // handler: () => {}, // ❌ TypeScript error: Types of property 'handler' are incompatible
+    // value: 'something', // ❌ TypeScript error: Types of property 'value' are incompatible
+  },
+  {
+    type: 'parent',
+    id: 'parent1',
+    title: 'Parent 1',
+    children: [
+      {
+        // type defaults to 'item' for child items too
+        id: 'child1',
+        title: 'Child Action',
+        handler: () => { /* Child executed */ },
+      },
+    ],
+  },
+  {
+    type: 'group',
+    id: 'group1',
+    title: 'Group 1',
+    divider: 'start',
+    children: [
+      {
+        type: 'item', // ✅ Defaults to 'item'
+        id: 'groupItem1',
+        title: 'Group Item 1',
+        handler: () => { /* Group item executed */ },
+      },
+      {
+        type: 'parent',
+        id: 'parent1',
+        title: 'Parent 1',
+        children: [
+          {
+            // type defaults to 'item' for child items too
+            id: 'child1',
+            title: 'Child Action',
+            handler: () => { /* Child executed */ },
+          },
+        ],
+      },
+    ],
+  },
+]
 
 export const makeVCommandPaletteListProps = propsFactory({
   ...omit(makeVListProps({
@@ -28,8 +195,8 @@ export const makeVCommandPaletteListProps = propsFactory({
     'itemProps',
   ]),
   items: {
-    type: Array as PropType<InternalListItem[]>,
-    default: () => ([] as InternalListItem[]),
+    type: Array as PropType<Array<VCommandPaletteItem>>,
+    default: () => ([] as Array<VCommandPaletteItem>),
   },
   selectedIndex: {
     type: Number,
@@ -39,7 +206,7 @@ export const makeVCommandPaletteListProps = propsFactory({
 
 // Scope for the item slot, should match what VCommandPalette provides
 export type VCommandPaletteListItemSlotScope = {
-  item: any
+  item: VCommandPaletteItem
   props: Record<string, any>
 }
 
@@ -54,14 +221,50 @@ export const VCommandPaletteList = genericComponent<VCommandPaletteListSlots>()(
   name: 'VCommandPaletteList',
   props: makeVCommandPaletteListProps(),
   emits: {
-    'click:item': (item: InternalListItem, event: MouseEvent | KeyboardEvent) => true,
+    'click:item': (item: VCommandPaletteItem, event: MouseEvent | KeyboardEvent) => true,
   },
   setup (props, { emit, slots }) {
     const { t } = useLocale()
     const vListProps = VList.filterProps(omit(props, ['items', 'selectedIndex']))
 
-    function handleExecute (item: InternalListItem) {
+    function handleExecute (item: VCommandPaletteItem) {
       emit('click:item', item, new KeyboardEvent('keydown'))
+    }
+
+    // Adapter function to convert our item to VListItem props
+    function getVListItemProps (item: VCommandPaletteItem, index: number) {
+      const baseProps = {
+        title: item.title,
+        active: props.selectedIndex === index,
+        onClick: (e: MouseEvent | KeyboardEvent) => emit('click:item', item, e),
+      }
+
+      // Only add properties that exist and have compatible types
+      const optionalProps: Record<string, any> = {}
+
+      if ('subtitle' in item && item.subtitle !== undefined) {
+        optionalProps.subtitle = item.subtitle
+      }
+      if ('appendAvatar' in item && item.appendAvatar !== undefined) {
+        optionalProps.appendAvatar = item.appendAvatar
+      }
+      if ('appendIcon' in item && item.appendIcon !== undefined) {
+        optionalProps.appendIcon = item.appendIcon
+      }
+      if ('prependAvatar' in item && item.prependAvatar !== undefined) {
+        optionalProps.prependAvatar = item.prependAvatar
+      }
+      if ('prependIcon' in item && item.prependIcon !== undefined) {
+        optionalProps.prependIcon = item.prependIcon
+      }
+      if (isItemDefinition(item) && item.to !== undefined) {
+        optionalProps.to = item.to
+      }
+      if (isItemDefinition(item) && item.href !== undefined) {
+        optionalProps.href = item.href
+      }
+
+      return { ...baseProps, ...optionalProps }
     }
 
     useRender(() => (
@@ -70,27 +273,24 @@ export const VCommandPaletteList = genericComponent<VCommandPaletteListSlots>()(
         { props.items.length > 0
           ? (
             props.items.map((item, index) => {
+              const listItemProps = getVListItemProps(item, index)
               const slotProps = {
-                item: item.raw,
-                props: {
-                  ...item.props,
-                  active: props.selectedIndex === index,
-                  onClick: (e: MouseEvent | KeyboardEvent) => emit('click:item', item, e),
-                },
+                item,
+                props: listItemProps,
               }
               const itemSlot = slots.item
 
               const itemContent = itemSlot
                 ? itemSlot(slotProps)
                 : (
-                  <VListItem { ...slotProps.props }>
-                    { item.props.title }
+                  <VListItem { ...listItemProps }>
+                    { item.title }
                   </VListItem>
                 )
 
               return (
                 <>
-                  <VActionHotkey item={ item } onExecute={ handleExecute } />
+                  { /* <VActionHotkey item={ item } onExecute={ handleExecute } /> */ }
                   { itemContent }
                 </>
               )
