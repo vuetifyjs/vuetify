@@ -6,6 +6,7 @@ import { commands, page } from '@vitest/browser/context'
 
 beforeAll(async () => {
   await commands.setFocusEmulationEnabled()
+  await commands.setReduceMotionEnabled()
 })
 
 beforeEach(async () => {

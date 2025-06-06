@@ -46,6 +46,7 @@ function genDefaults () {
       easeInQuint: (t: number) => t ** 5,
       easeOutQuint: (t: number) => 1 + --t ** 5,
       easeInOutQuint: (t: number) => t < 0.5 ? 16 * t ** 5 : 1 + 16 * --t ** 5,
+      instant: (t: number) => 1,
     },
   }
 }
@@ -94,7 +95,9 @@ export async function scrollTo (
   const container = options.container === 'parent' && target instanceof HTMLElement
     ? target.parentElement!
     : getContainer(options.container)
-  const ease = typeof options.easing === 'function' ? options.easing : options.patterns[options.easing]
+  const ease = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? options.patterns.instant
+    : typeof options.easing === 'function' ? options.easing
+    : options.patterns[options.easing]
 
   if (!ease) throw new TypeError(`Easing function "${options.easing}" not found.`)
 
