@@ -85,7 +85,7 @@ export const makeVPieProps = propsFactory({
   },
   ...makeDensityProps(),
   ...pick(makeVPieSegmentProps(), [
-    'speed',
+    'animation',
     'gap',
     'rounded',
     'hideSlice',
@@ -210,7 +210,7 @@ export const VPie = genericComponent<VPieSlots>()({
 
     return () => {
       const itemProps = VPieSegment.filterProps(pick(props, [
-        'speed',
+        'animation',
         'gap',
         'rounded',
         'hideSlice',

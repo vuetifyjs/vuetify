@@ -101,7 +101,7 @@
   })
 
   const script = computed(() => {
-    function itemToString({ key, title, value }) {
+    function itemToString ({ key, title, value }) {
       return `    { key: ${key}, title: "${title}", value: ${value} },`
     }
 
