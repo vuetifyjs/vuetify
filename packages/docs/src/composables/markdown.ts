@@ -6,7 +6,6 @@ export function useMarkdown () {
 
   // TODO: This isn't working
   async function copyPageAsMarkdown () {
-
     if (!isClipboardSupported) {
       console.error('Native Clipboard API is not supported.')
       return
