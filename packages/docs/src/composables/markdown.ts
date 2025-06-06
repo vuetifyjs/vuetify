@@ -15,7 +15,7 @@ export function useMarkdown () {
     markdownContent += `Source: ${window.location.origin}${route.path}\\n\\n`
 
     try {
-      const mdPath = `/src/pages${route.path.replace(/\/$/,'')}.md`
+      const mdPath = `/src/pages${route.path.replace(/\/$/, '')}.md`
       const response = await fetch(mdPath)
       if (response.ok) {
         const rawMd = await response.text()
