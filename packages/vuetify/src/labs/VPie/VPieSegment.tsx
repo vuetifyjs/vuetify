@@ -29,9 +29,12 @@ export const makeVPieSegmentProps = propsFactory({
     type: Number,
     default: 0,
   },
-  speed: {
-    type: String as PropType<'fast' | 'slow' | 'default'>,
-    default: 'default',
+  animation: {
+    type: [Boolean, Object] as PropType<boolean | {
+      duration?: number
+      easing?: keyof typeof easingPatterns
+    }>,
+    default: true,
   },
   pattern: String,
   hideSlice: Boolean,
@@ -45,10 +48,21 @@ export const VPieSegment = genericComponent()({
   setup (props) {
     const isHovering = ref(false)
 
-    const transitionConfig = {
-      duration: { fast: 250, slow: 700, default: 500 }[props.speed],
-      transition: easingPatterns.easeInOutCubic,
-    }
+    const transitionConfig = computed(() => {
+      const defaultEasing = 'easeInOutCubic'
+      const defaultDuration = 400
+
+      const easingName = props.animation === true
+        ? defaultEasing
+        : typeof props.animation === 'object'
+          ? props.animation.easing ?? defaultEasing
+          : 'linear'
+
+      return {
+        duration: typeof props.animation === 'object' ? props.animation.duration : (props.animation ? defaultDuration : 0),
+        transition: easingPatterns[easingName],
+      }
+    })
 
     const {
       hoverZoomRatio,

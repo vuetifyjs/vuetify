@@ -11,7 +11,7 @@ export const acceleratedEasing = 'cubic-bezier(0.4, 0, 1, 1)' // Leaving
 
 export type EasingFunction = (n: number) => number
 
-export const easingPatterns: Record<string, EasingFunction> = {
+export const easingPatterns = {
   linear: (t: number) => t,
   easeInQuad: (t: number) => t ** 2,
   easeOutQuad: (t: number) => t * (2 - t),
@@ -25,7 +25,7 @@ export const easingPatterns: Record<string, EasingFunction> = {
   easeInQuint: (t: number) => t ** 5,
   easeOutQuint: (t: number) => 1 + --t ** 5,
   easeInOutQuint: (t: number) => t < 0.5 ? 16 * t ** 5 : 1 + 16 * --t ** 5,
-}
+} as const
 
 export type EasingOptions = {
   duration?: number
@@ -37,11 +37,10 @@ type InternalEasingOptions = {
   transition: EasingFunction
 }
 
-export function useTransition (source: MaybeRefOrGetter<number>, options: EasingOptions) {
-  const definedOptions: InternalEasingOptions = {
+export function useTransition (source: MaybeRefOrGetter<number>, options: MaybeRefOrGetter<EasingOptions>) {
+  const defaultTransition: InternalEasingOptions = {
     duration: 300,
     transition: easingPatterns.easeInOutCubic,
-    ...options,
   }
 
   const raf: ReturnType<typeof requestAnimationFrame> = null!
@@ -49,7 +48,8 @@ export function useTransition (source: MaybeRefOrGetter<number>, options: Easing
 
   watch(() => toValue(source), async to => {
     cancelAnimationFrame(raf)
-    await executeTransition(outputRef, outputRef.value, to, definedOptions)
+    const easing = { ...defaultTransition, ...toValue(options) }
+    await executeTransition(outputRef, outputRef.value, to, easing)
   })
 
   return computed(() => outputRef.value)

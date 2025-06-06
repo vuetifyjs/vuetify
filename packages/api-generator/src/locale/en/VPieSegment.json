@@ -1,9 +1,9 @@
 {
   "props": {
-    "animation": "Controls speed and easing of the expand/collapse and hover effect.",
+    "animation": "Controls duration and easing of the expand/collapse and hover effect. Defaults to `easeInOutCubic` over 400ms.",
     "color": "Sets segment color to be passed straight to CSS style attribute.",
     "gap": "Reduces segment size by a specified angle. Recommended to in range (0-10).",
-    "hideSlice": "Makes inner slice invisible instead of translucent.",
+    "hideSlice": "Makes inner slice invisible instead of semi-transparent.",
     "innerCut": "Sets inner slice size in percent (0-100).",
     "pattern": "Decal pattern to put on top of the outer slice.",
     "rotate": "Sets segment offset angle.",
