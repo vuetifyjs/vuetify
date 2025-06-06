@@ -41,6 +41,12 @@ Tooltips can wrap any element.
 
 ### Props
 
+#### Interactive
+
+The **interactive** prop prevents the tooltip from closing during mouse interactions. For example, if the tooltip contains text that users might want to click or copy.
+
+<ExamplesExample file="v-tooltip/prop-interactive" />
+
 #### Location
 
 Use the **location** prop to specify on which side of the element the tooltip should show. Read more about **location** [here](/components/overlays/#location).
