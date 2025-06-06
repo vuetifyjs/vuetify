@@ -15,6 +15,7 @@ import { genericComponent, omit, propsFactory, useRender } from '@/util'
 // Types
 import type { MaybeRef, PropType } from 'vue'
 import type { RouteLocationRaw } from 'vue-router'
+import { VHotkey } from './VHotkey'
 import type { makeVListGroupProps } from '@/components/VList/VListGroup'
 import type { makeVListItemProps } from '@/components/VList/VListItem'
 
@@ -231,37 +232,38 @@ export const VCommandPaletteList = genericComponent<VCommandPaletteListSlots>()(
       emit('click:item', item, new KeyboardEvent('keydown'))
     }
 
-    // Adapter function to convert our item to VListItem props
-    function getVListItemProps (item: VCommandPaletteItem, index: number) {
+    // Adapter function to convert VuetifyListItem to VListItem props
+    function getVListItemProps (item: any, index: number) {
       const baseProps = {
         title: item.title,
         active: props.selectedIndex === index,
         onClick: (e: MouseEvent | KeyboardEvent) => emit('click:item', item, e),
       }
 
-      // Only add properties that exist and have compatible types
+      // Extract properties from item.props (VuetifyListItem structure)
+      const itemProps = item.props || {}
       const optionalProps: Record<string, any> = {}
 
-      if ('subtitle' in item && item.subtitle !== undefined) {
-        optionalProps.subtitle = item.subtitle
+      if (itemProps.subtitle !== undefined) {
+        optionalProps.subtitle = itemProps.subtitle
       }
-      if ('appendAvatar' in item && item.appendAvatar !== undefined) {
-        optionalProps.appendAvatar = item.appendAvatar
+      if (itemProps.appendAvatar !== undefined) {
+        optionalProps.appendAvatar = itemProps.appendAvatar
       }
-      if ('appendIcon' in item && item.appendIcon !== undefined) {
-        optionalProps.appendIcon = item.appendIcon
+      if (itemProps.appendIcon !== undefined) {
+        optionalProps.appendIcon = itemProps.appendIcon
       }
-      if ('prependAvatar' in item && item.prependAvatar !== undefined) {
-        optionalProps.prependAvatar = item.prependAvatar
+      if (itemProps.prependAvatar !== undefined) {
+        optionalProps.prependAvatar = itemProps.prependAvatar
       }
-      if ('prependIcon' in item && item.prependIcon !== undefined) {
-        optionalProps.prependIcon = item.prependIcon
+      if (itemProps.prependIcon !== undefined) {
+        optionalProps.prependIcon = itemProps.prependIcon
       }
-      if (isItemDefinition(item) && item.to !== undefined) {
-        optionalProps.to = item.to
+      if (itemProps.to !== undefined) {
+        optionalProps.to = itemProps.to
       }
-      if (isItemDefinition(item) && item.href !== undefined) {
-        optionalProps.href = item.href
+      if (itemProps.href !== undefined) {
+        optionalProps.href = itemProps.href
       }
 
       return { ...baseProps, ...optionalProps }
@@ -272,8 +274,9 @@ export const VCommandPaletteList = genericComponent<VCommandPaletteListSlots>()(
         { slots['prepend-item']?.() }
         { props.items.length > 0
           ? (
-            props.items.map((item, index) => {
+                        props.items.map((item, index) => {
               const listItemProps = getVListItemProps(item, index)
+
               const slotProps = {
                 item,
                 props: listItemProps,
@@ -284,16 +287,13 @@ export const VCommandPaletteList = genericComponent<VCommandPaletteListSlots>()(
                 ? itemSlot(slotProps)
                 : (
                   <VListItem { ...listItemProps }>
-                    { item.title }
+                    {{
+                      append: item.props?.hotkey ? () => <VHotkey keys={ item.props.hotkey } /> : undefined,
+                    }}
                   </VListItem>
                 )
 
-              return (
-                <>
-                  { /* <VActionHotkey item={ item } onExecute={ handleExecute } /> */ }
-                  { itemContent }
-                </>
-              )
+              return itemContent
             })
           )
           : (

@@ -1,8 +1,6 @@
 <script setup lang="ts">
   import { VBtn } from '@/components/VBtn'
-  import { VListItem } from '@/components/VList'
   import { VCommandPalette } from '../src/labs/VCommandPalette'
-  import { VHotkey } from '../src/labs/VCommandPalette/VHotkey'
   import { ref } from 'vue'
 
   const model = ref(true)
@@ -116,7 +114,7 @@
       prependIcon: 'mdi-magnify',
       subtitle: 'Find in the current file',
       value: 'find',
-      hotkey: 'ctrl+f',
+      hotkey: 'ctrl-f',
     },
     {
       title: 'Find in Files',
@@ -142,15 +140,7 @@
     :items="items"
     hotkey="cmd+k"
     @click:item="onItemClick"
-  >
-    <template #item="{ item, props }">
-      <VListItem v-bind="props" :subtitle="item.subtitle" :title="item.title">
-        <template #append>
-          <VHotkey v-if="item.hotkey" :keys="item.hotkey" />
-        </template>
-      </VListItem>
-    </template>
-  </VCommandPalette>
+  />
 </template>
 
 <style scoped lang="scss"></style>

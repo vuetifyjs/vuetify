@@ -5,20 +5,36 @@
     display: inline-flex;
     align-items: center;
     gap: 4px;
-    font-family: monospace;
 
     &__key {
       background: rgba(var(--v-theme-on-surface), 0.1);
       border: thin solid rgba(var(--v-theme-on-surface), 0.2);
       border-radius: 4px;
-      padding: 2px 6px;
-      font-size: 0.8em;
+      padding: 4px;
+      font-size: 0.75rem;
       line-height: 1;
+      min-width: 20px;
       white-space: nowrap;
+      text-align: center;
+    }
+
+    &__key-icon {
+      .v-icon {
+        max-width: 0.75rem;
+        max-height: 0.75rem;
+        min-width: unset;
+      }
     }
 
     &__divider {
       opacity: 0.5;
+      font-size: 0.75rem;
+    }
+
+    &__combination {
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
     }
   }
 }

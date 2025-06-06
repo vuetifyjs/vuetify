@@ -124,5 +124,8 @@ export default {
       goBack: 'to go back',
       close: 'to close',
     },
+    hotkey: {
+      then: 'then',
+    },
   },
 }
