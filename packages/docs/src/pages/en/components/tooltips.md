@@ -77,6 +77,6 @@ Tooltip visibility can be programmatically changed using `v-model`.
 
 #### Tooltip at cursor
 
-Tooltip can appear where the cursor is by using setting the **target** prop to `cursor`. This is currently only available with **open-on-click**.
+Tooltip can appear where the cursor is by setting the **target** prop to `cursor`. This is currently only available with **open-on-click**.
 
 <ExamplesExample file="v-tooltip/misc-at-cursor" />

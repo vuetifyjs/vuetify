@@ -1,5 +1,5 @@
 <template>
-  <div class="text-center d-flex align-center justify-space-around">
+  <div class="text-center">
     <v-tooltip :open-on-hover="false" open-on-click>
       <template v-slot:activator="{ props }">
         <v-btn v-bind="props">Click me</v-btn>

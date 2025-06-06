@@ -1,9 +1,9 @@
 <template>
-  <div class="d-flex justify-center" @mouseout="cursor = false">
-    <v-tooltip v-model="cursor" :open-on-hover="false" target="cursor" open-on-click>
-      <template v-slot:activator="{ props }">
+  <div class="d-flex justify-center" @mouseout="tooltipVisible = false">
+    <v-tooltip v-model="tooltipVisible" :open-on-hover="false" target="cursor" open-on-click>
+      <template v-slot:activator="{ props: activatorProps }">
         <v-card
-          v-bind="props"
+          v-bind="activatorProps"
           height="300"
           image="https://picsum.photos/600/300"
           width="600"
@@ -14,9 +14,16 @@
   </div>
 </template>
 
-  <script setup>
+<script setup>
   import { ref } from 'vue'
 
-  const cursor = ref(false)
+  const tooltipVisible = ref(false)
+</script>
 
+<script>
+  export default {
+    data: () => ({
+      tooltipVisible: false,
+    }),
+  }
 </script>
