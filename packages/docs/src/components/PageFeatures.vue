@@ -24,17 +24,22 @@
       </template>
     </page-feature-chip>
 
-    <page-feature-chip
-      v-if="isClipboardSupported"
-      :disabled="!one.isSubscriber"
-      :text="copied ? t('copied') : t('copy-as-markdown')"
-      prepend-icon="mdi-language-markdown-outline"
-      @click="copyPageAsMarkdown"
-    >
-      <template #prepend>
-        <v-icon :color="copied ? 'success' : 'grey'" />
+    <VTooltip location="top" text="Subscribe to Vuetify One to access">
+      <template #activator="{ props }">
+        <page-feature-chip
+          v-if="isClipboardSupported"
+          :disabled="!one.isSubscriber"
+          :text="copied ? t('copied') : t('copy-as-markdown')"
+          prepend-icon="mdi-language-markdown-outline"
+          v-bind="props"
+          @click="copyPageAsMarkdown"
+        >
+          <template #prepend>
+            <v-icon :color="copied ? 'success' : 'grey'" />
+          </template>
+        </page-feature-chip>
       </template>
-    </page-feature-chip>
+    </VTooltip>
 
     <page-feature-chip
       v-if="frontmatter?.features?.figma"
