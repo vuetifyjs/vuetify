@@ -12,7 +12,7 @@ import { makeVDialogProps } from '@/components/VDialog/VDialog'
 import { VDivider } from '@/components/VDivider'
 
 // Composables
-import { useHotkey } from './useHotkey'
+import { useHotkey } from '../../composables/useHotkey'
 import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeFilterProps, useFilter } from '@/composables/filter'

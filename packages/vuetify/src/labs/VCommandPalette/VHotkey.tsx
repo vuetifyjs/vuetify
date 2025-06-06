@@ -267,7 +267,7 @@ export const VHotkey = genericComponent()({
                     { AND_DELINEATOR.isEqual(key) && <span key={ keyIndex } class="v-hotkey__divider">+</span> }
                     {
                       THEN_DELINEATOR.isEqual(key) &&
-                      <span key={ keyIndex } class="v-hotkey__divider">{ t('$vuetify.commandPalette.hotkey.then') }</span>
+                      <span key={ keyIndex } class="v-hotkey__divider">{ t('$vuetify.command.then') }</span>
                     }
                   </>
               ) : (

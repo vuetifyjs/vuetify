@@ -1,5 +1,5 @@
 // Composables
-import { useHotkey } from './useHotkey'
+import { useHotkey } from '../../composables/useHotkey'
 
 // Utilities
 import { genericComponent, propsFactory } from '@/util'

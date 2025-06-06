@@ -16,18 +16,21 @@
           prependIcon: 'mdi-folder-plus-outline',
           subtitle: 'Create a new project',
           value: 'new:project',
+          handler: (e, v) => console.log(e, v),
           hotkey: 'ctrl+alt+n',
         },
         {
           title: 'File',
           prependIcon: 'mdi-file-plus-outline',
           subtitle: 'Create a new file',
+          handler: (e, v) => console.log(e, v),
           value: 'new:file',
         },
         {
           title: 'User',
           prependIcon: 'mdi-account-plus-outline',
           subtitle: 'Create a new user',
+          handler: (e, v) => console.log(e, v),
           value: 'new:user',
         },
       ],
@@ -42,6 +45,7 @@
           prependIcon: 'mdi-source-commit',
           subtitle: 'Commit changes',
           value: 'git:commit',
+          handler: (e, v) => console.log(e, v),
           hotkey: 'ctrl+k',
         },
         {
@@ -49,12 +53,14 @@
           prependIcon: 'mdi-source-pull',
           subtitle: 'Push changes',
           value: 'git:push',
+          handler: (e, v) => console.log(e, v),
           hotkey: 'ctrl+shift+k',
         },
         {
           title: 'Fetch',
           prependIcon: 'mdi-source-branch',
           subtitle: 'Fetch changes',
+          handler: (e, v) => console.log(e, v),
           value: 'git:fetch',
         },
       ],
@@ -64,6 +70,7 @@
       prependIcon: 'mdi-content-save',
       subtitle: 'Save the current file',
       value: 'file:save',
+      handler: (e, v) => console.log(e, v),
       hotkey: 'ctrl+s',
     },
     {
@@ -71,6 +78,7 @@
       prependIcon: 'mdi-content-save-outline',
       subtitle: 'Save the current file as...',
       value: 'file:saveAs',
+      handler: (e, v) => console.log(e, v),
       hotkey: 'ctrl+shift+s',
     },
     {
@@ -82,12 +90,14 @@
           title: 'Settings',
           prependIcon: 'mdi-cog-outline',
           subtitle: 'Open settings',
+          handler: (e, v) => console.log(e, v),
           value: 'pref:settings',
         },
         {
           title: 'Keyboard Shortcuts',
           prependIcon: 'mdi-keyboard-settings-outline',
           subtitle: 'Configure keyboard shortcuts',
+          handler: (e, v) => console.log(e, v),
           value: 'pref:keys',
         },
         {
@@ -99,11 +109,13 @@
               title: 'Dark Theme',
               prependIcon: 'mdi-weather-night',
               value: 'theme:dark',
+              handler: (e, v) => console.log(e, v),
             },
             {
               title: 'Light Theme',
               prependIcon: 'mdi-weather-sunny',
               value: 'theme:light',
+              handler: (e, v) => console.log(e, v),
             },
           ],
         },
@@ -114,6 +126,7 @@
       prependIcon: 'mdi-magnify',
       subtitle: 'Find in the current file',
       value: 'find',
+      handler: (e, v) => console.log(e, v),
       hotkey: 'ctrl-f',
     },
     {
@@ -121,6 +134,7 @@
       prependIcon: 'mdi-file-find-outline',
       subtitle: 'Find in the entire workspace',
       value: 'find:files',
+      handler: (e, v) => console.log(e, v),
     },
   ]
 

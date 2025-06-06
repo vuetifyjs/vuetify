@@ -2,7 +2,6 @@
 import './VCommandPalette.scss'
 
 // Components
-import { VActionHotkey } from './VActionHotkey'
 import { VList, VListItem } from '@/components/VList'
 import { makeVListProps } from '@/components/VList/VList'
 
@@ -228,10 +227,6 @@ export const VCommandPaletteList = genericComponent<VCommandPaletteListSlots>()(
     const { t } = useLocale()
     const vListProps = VList.filterProps(omit(props, ['items', 'selectedIndex']))
 
-    function handleExecute (item: VCommandPaletteItem) {
-      emit('click:item', item, new KeyboardEvent('keydown'))
-    }
-
     // Adapter function to convert VuetifyListItem to VListItem props
     function getVListItemProps (item: any, index: number) {
       const baseProps = {
@@ -274,7 +269,7 @@ export const VCommandPaletteList = genericComponent<VCommandPaletteListSlots>()(
         { slots['prepend-item']?.() }
         { props.items.length > 0
           ? (
-                        props.items.map((item, index) => {
+            props.items.map((item, index) => {
               const listItemProps = getVListItemProps(item, index)
 
               const slotProps = {
@@ -283,7 +278,7 @@ export const VCommandPaletteList = genericComponent<VCommandPaletteListSlots>()(
               }
               const itemSlot = slots.item
 
-              const itemContent = itemSlot
+              return itemSlot
                 ? itemSlot(slotProps)
                 : (
                   <VListItem { ...listItemProps }>
@@ -292,8 +287,6 @@ export const VCommandPaletteList = genericComponent<VCommandPaletteListSlots>()(
                     }}
                   </VListItem>
                 )
-
-              return itemContent
             })
           )
           : (

@@ -27,24 +27,24 @@ export const VCommandPaletteInstructions = genericComponent()({
         { props.hasItems && (
           <div key="select-instruction" class="d-flex align-center">
             <VHotkey keys="enter" />
-            <span class="ms-2">{ t('$vuetify.commandPalette.instructions.select') }</span>
+            <span class="ms-2">{ t('$vuetify.command.select') }</span>
           </div>
         )}
         { props.hasItems && (
           <div key="navigate-instruction" class="d-flex align-center">
             <VHotkey keys="arrowup arrowdown" />
-            <span class="ms-2">{ t('$vuetify.commandPalette.instructions.navigate') }</span>
+            <span class="ms-2">{ t('$vuetify.command.navigate') }</span>
           </div>
         )}
         { props.hasParent && (
           <div key="back-instruction" class="d-flex align-center">
             <VHotkey keys="backspace" />
-            <span class="ms-2">{ t('$vuetify.commandPalette.instructions.goBack') }</span>
+            <span class="ms-2">{ t('$vuetify.command.goBack') }</span>
           </div>
         )}
         <div class="d-flex align-center">
           <VHotkey keys="escape" />
-          <span class="ms-2">{ t('$vuetify.commandPalette.instructions.close') }</span>
+          <span class="ms-2">{ t('$vuetify.command.close') }</span>
         </div>
       </div>
     ))
