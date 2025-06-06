@@ -145,18 +145,18 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
 
     const incrementSlotProps = {
       props: {
-        style: { touchAction: 'none' },
         onClick: onControlClick,
         onPointerup: onControlMouseup,
         onPointerdown: onUpControlMousedown,
+        onPointercancel: onControlPointerCancel,
       },
     }
     const decrementSlotProps = {
       props: {
-        style: { touchAction: 'none' },
         onClick: onControlClick,
         onPointerup: onControlMouseup,
         onPointerdown: onDownControlMousedown,
+        onPointercancel: onControlPointerCancel,
       },
     }
 
@@ -270,6 +270,12 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       holdStart('down')
     }
 
+    function onControlPointerCancel (e: PointerEvent) {
+      const el = e.currentTarget as HTMLElement
+      el?.releasePointerCapture(e.pointerId)
+      holdStop()
+    }
+
     function clampModel () {
       if (controlsDisabled.value) return
       if (!vTextFieldRef.value) return
@@ -327,8 +333,8 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
             onClick={ onControlClick }
             onPointerdown={ onUpControlMousedown }
             onPointerup={ onControlMouseup }
+            onPointercancel={ onControlPointerCancel }
             size={ controlNodeSize.value }
-            style="touch-action: none"
             tabindex="-1"
           />
         ) : (
@@ -362,8 +368,8 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
             onClick={ onControlClick }
             onPointerdown={ onDownControlMousedown }
             onPointerup={ onControlMouseup }
+            onPointercancel={ onControlPointerCancel }
             size={ controlNodeSize.value }
-            style="touch-action: none"
             tabindex="-1"
           />
         ) : (

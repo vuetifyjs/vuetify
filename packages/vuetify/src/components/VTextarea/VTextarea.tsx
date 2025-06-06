@@ -14,7 +14,7 @@ import { forwardRefs } from '@/composables/forwardRefs'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Directives
-import Intersect from '@/directives/intersect'
+import vIntersect from '@/directives/intersect'
 
 // Utilities
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, shallowRef, watch, watchEffect } from 'vue'
@@ -59,7 +59,7 @@ type VTextareaSlots = Omit<VInputSlots & VFieldSlots, 'default'> & {
 export const VTextarea = genericComponent<VTextareaSlots>()({
   name: 'VTextarea',
 
-  directives: { Intersect },
+  directives: { vIntersect },
 
   inheritAttrs: false,
 

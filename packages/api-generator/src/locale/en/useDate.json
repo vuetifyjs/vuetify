@@ -5,6 +5,7 @@
     "addMonths": "Adds the specified number of months to the date.",
     "addHours": "Adds the specified number of hours to the date.",
     "addMinutes": "Adds the specified number of minutes to the date.",
+    "createDateRange": "Returns an array of dates between two dates.",
     "date": "Takes any value and returns a date object.",
     "endOfDay": "Returns the last second of the day.",
     "endOfMonth": "Returns the last day of the month.",

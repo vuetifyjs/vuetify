@@ -34,8 +34,9 @@
               v-if="isHovering"
               :key="icon"
               :icon="icon"
-              class="text-disabled me-3 mt-1 app-markup-btn position-absolute right-0 top-0"
+              class="text-disabled me-3 mt-2 app-markup-btn position-absolute right-0 top-0"
               density="comfortable"
+              size="small"
               v-bind="activatorProps"
               variant="text"
               @click="copy"
@@ -44,6 +45,26 @@
         </template>
 
         <span>{{ t('copy-source') }}</span>
+      </v-tooltip>
+
+      <v-tooltip location="start">
+        <template #activator="{ props: activatorProps }">
+          <v-fade-transition>
+            <v-btn
+              v-if="isHovering"
+              :key="icon"
+              class="text-disabled me-12 mt-2 app-markup-btn position-absolute right-0 top-0"
+              density="comfortable"
+              icon="$vuetify-bin"
+              size="small"
+              v-bind="activatorProps"
+              variant="text"
+              @click="bin"
+            />
+          </v-fade-transition>
+        </template>
+
+        <span>{{ t('open-in-vuetify-bin') }}</span>
       </v-tooltip>
 
       <div class="pa-4 pe-12">
@@ -115,6 +136,17 @@
 
   const className = computed(() => `language-${props.language}`)
   const icon = computed(() => clicked.value ? 'mdi-check' : 'mdi-clipboard-text-outline')
+
+  async function bin () {
+    const el = root.value?.$el.querySelector('code')
+    const code = props.code || el?.innerText || ''
+    const language = props.language || 'markdown'
+    const title = props.resource
+
+    const compressed = useBin(code, language, title)
+
+    window.open(compressed, '_blank')
+  }
 
   async function copy () {
     const el = root.value?.$el.querySelector('code')

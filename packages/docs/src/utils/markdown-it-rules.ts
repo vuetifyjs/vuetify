@@ -9,8 +9,9 @@ function addCodeRules (md: MarkdownIt) {
   md.renderer.rules.fence = function (tokens, idx, options, env, self) {
     const handler = fence || self.renderToken
     const token = tokens[idx]
+    const lang = extractLang(token.info || '')
 
-    return `<AppMarkup resource="${token?.attrs?.[0][1] ?? ''}" class="mb-4">${handler(tokens, idx, options, env, self)}</AppMarkup>`
+    return `<AppMarkup resource="${token?.attrs?.[0][1] ?? ''}" language="${lang}" class="mb-4">${handler(tokens, idx, options, env, self)}</AppMarkup>`
   }
   md.renderer.rules.code_inline = function (tokens, idx) {
     const token = tokens[idx]
