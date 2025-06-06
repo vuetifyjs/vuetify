@@ -192,10 +192,9 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
                 key="content-defaults"
                 disabled={ !icon }
                 defaults={{ VIcon: { ...iconProps } }}
-                v-slots={{
-                  default: () => slots.default?.() ?? toDisplayString(props.text),
-                }}
-              />
+              >
+                { slots.default?.() ?? [toDisplayString(props.text)] }
+              </VDefaultsProvider>
             )}
           </div>
 

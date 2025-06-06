@@ -75,7 +75,7 @@ export const VCheckbox = genericComponent<new <T>(
               isDisabled,
               isReadonly,
               isValid,
-            }) => (
+            }) => [
               <VCheckboxBtn
                 { ...checkboxProps }
                 id={ id.value }
@@ -88,8 +88,8 @@ export const VCheckbox = genericComponent<new <T>(
                 onFocus={ focus }
                 onBlur={ blur }
                 v-slots={ slots }
-              />
-            ),
+              />,
+            ],
           }}
         </VInput>
       )
