@@ -46,6 +46,8 @@ export type VCommandPaletteListItemSlotScope = {
 export type VCommandPaletteListSlots = {
   item: VCommandPaletteListItemSlotScope
   'no-data': never // Use 'never' for slots with no scope
+  'prepend-item': never
+  'append-item': never
 }
 
 export const VCommandPaletteList = genericComponent<VCommandPaletteListSlots>()({
@@ -64,20 +66,24 @@ export const VCommandPaletteList = genericComponent<VCommandPaletteListSlots>()(
 
     useRender(() => (
       <VList { ...vListProps }>
+        { slots['prepend-item']?.() }
         { props.items.length > 0
           ? (
             props.items.map((item, index) => {
-              const slotProps = { item: item.raw, props: { ...item.props, active: props.selectedIndex === index } }
+              const slotProps = {
+                item: item.raw,
+                props: {
+                  ...item.props,
+                  active: props.selectedIndex === index,
+                  onClick: (e: MouseEvent | KeyboardEvent) => emit('click:item', item, e),
+                },
+              }
               const itemSlot = slots.item
 
               const itemContent = itemSlot
                 ? itemSlot(slotProps)
                 : (
-                  <VListItem
-                    { ...item.props }
-                    active={ props.selectedIndex === index }
-                    onClick={ (e: MouseEvent | KeyboardEvent) => emit('click:item', item, e) }
-                  >
+                  <VListItem { ...slotProps.props }>
                     { item.props.title }
                   </VListItem>
                 )
@@ -95,6 +101,7 @@ export const VCommandPaletteList = genericComponent<VCommandPaletteListSlots>()(
               <VListItem key="no-data-fallback" title={ t('$vuetify.noDataText') } />
           )
         }
+        { slots['append-item']?.() }
       </VList>
     ))
   },

@@ -27,7 +27,7 @@ import { computed, ref, toRef, watch } from 'vue'
 import { EventProp, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
-import type { VCommandPaletteListSlots } from './VCommandPaletteList'
+import type { Ref } from 'vue'
 import type { ListItem as VuetifyListItem } from '@/composables/list-items'
 
 // VCommandPalette's own slot scope/type definitions
@@ -36,10 +36,27 @@ export type VCommandPaletteItemRenderScope = {
   props: Record<string, any>
 }
 
-export type VCommandPaletteFinalSlots = {
-  search: (scope: { modelValue: string }) => JSX.Element
-  item: (scope: VCommandPaletteItemRenderScope) => JSX.Element
-  'no-data': () => JSX.Element
+export type VCommandPaletteSlots = {
+  search: { modelValue: string }
+  item: VCommandPaletteItemRenderScope
+  'no-data': never
+  header: VCommandPaletteHeaderSlotScope
+  footer: VCommandPaletteFooterSlotScope
+  'prepend-item': never
+  'append-item': never
+}
+
+export type VCommandPaletteHeaderSlotScope = {
+  search: Ref<string>
+  navigationStack: Ref<any[][]>
+  title?: string
+}
+
+export type VCommandPaletteFooterSlotScope = {
+  hasItems: boolean
+  hasParent: boolean
+  hasSelection: boolean
+  navigationStack: Ref<any[][]>
 }
 
 export const makeVCommandPaletteProps = propsFactory({
@@ -71,7 +88,7 @@ export const makeVCommandPaletteProps = propsFactory({
   afterLeave: EventProp<[]>(),
 }, 'VCommandPalette')
 
-export const VCommandPalette = genericComponent<VCommandPaletteListSlots>()({
+export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
   name: 'VCommandPalette',
   props: makeVCommandPaletteProps(),
   emits: {
@@ -82,7 +99,6 @@ export const VCommandPalette = genericComponent<VCommandPaletteListSlots>()({
   },
   setup (props, { emit, slots }) {
     const isActive = useProxiedModel(props, 'modelValue')
-    const dialogProps = VDialog.filterProps(props)
     const { t } = useLocale()
     const { themeClasses } = provideTheme(props)
     const { densityClasses } = useDensity(props)
@@ -116,29 +132,24 @@ export const VCommandPalette = genericComponent<VCommandPaletteListSlots>()({
 
     // --- Hotkey Registration ---
     useHotkey(toRef(props, 'hotkey'), e => {
-      e.preventDefault()
       isActive.value = !isActive.value
     })
     useHotkey('arrowup', e => {
       if (!isActive.value) return
-      e.preventDefault()
       selectedIndex.value = selectedIndex.value > 0 ? selectedIndex.value - 1 : filteredActions.value.length - 1
     }, { inputs: true })
     useHotkey('arrowdown', e => {
       if (!isActive.value) return
-      e.preventDefault()
       selectedIndex.value = selectedIndex.value < filteredActions.value.length - 1 ? selectedIndex.value + 1 : 0
     }, { inputs: true })
     useHotkey('enter', e => {
       if (!isActive.value) return
-      e.preventDefault()
       if (selectedIndex.value >= 0 && filteredActions.value[selectedIndex.value]) {
         onItemClickFromList(filteredActions.value[selectedIndex.value], e)
       }
     }, { inputs: true })
     useHotkey('escape', e => {
       if (!isActive.value) return
-      e.preventDefault()
       if (navigationStack.value.length > 0) {
         currentRawActions.value = navigationStack.value.pop()!
         search.value = ''
@@ -152,7 +163,7 @@ export const VCommandPalette = genericComponent<VCommandPaletteListSlots>()({
       if (navigationStack.value.length > 0) {
         currentRawActions.value = navigationStack.value.pop()!
       }
-    }, { inputs: true })
+    }, { inputs: true, preventDefault: false })
 
     function onAfterEnter () {
       emit('afterEnter')
@@ -178,9 +189,29 @@ export const VCommandPalette = genericComponent<VCommandPaletteListSlots>()({
       return isActive.value ? filteredActions.value : []
     })
 
+    const headerSlotScope = computed<VCommandPaletteHeaderSlotScope>(() => ({
+      search,
+      navigationStack,
+      title: props.title,
+    }))
+
+    const footerSlotScope = computed<VCommandPaletteFooterSlotScope>(() => ({
+      hasItems: !!filteredActions.value.length,
+      hasParent: !!navigationStack.value.length,
+      hasSelection: selectedIndex.value > -1,
+      navigationStack,
+    }))
+
     useRender(() => {
+      const dialogProps = VDialog.filterProps(props)
+
       return (
         <VDialog
+          { ...dialogProps }
+          modelValue={ isActive.value }
+          onUpdate:modelValue={ (v: boolean) => isActive.value = v }
+          onAfterEnter={ onAfterEnter }
+          onAfterLeave={ onAfterLeave }
           class={[
             'v-command-palette',
             'v-command-palette__dialog',
@@ -189,40 +220,52 @@ export const VCommandPalette = genericComponent<VCommandPaletteListSlots>()({
             props.class,
           ]}
           style={ props.style }
-          { ...dialogProps }
-          modelValue={ isActive.value }
-          onUpdate:modelValue={ (v: boolean) => isActive.value = v }
-          onAfterEnter={ onAfterEnter }
-          onAfterLeave={ onAfterLeave }
           transition={ props.transition }
-        >
-          <VCard>
-            { actionHotkeys.value.map(item => <VActionHotkey key={ item.value } item={ item } onExecute={ onItemClickFromList } />) }
+          v-slots={{
+            default: () => (
+              <VCard>
+                { actionHotkeys.value.map(item => <VActionHotkey key={ item.value } item={ item } onExecute={ onItemClickFromList } />) }
 
-            { props.title && (
-              <div key="command-palette-title" class="v-command-palette__title pa-4">
-                { t(props.title) }
-              </div>
-            )}
-            <VCommandPaletteSearch
-              v-model={ search.value }
-              placeholder={ props.placeholder }
-            />
-            <VDivider />
-            <VCommandPaletteList
-              items={ filteredActions.value }
-              selectedIndex={ selectedIndex.value }
-              onClick:item={ onItemClickFromList }
-            >
-              {{ ...slots }}
-            </VCommandPaletteList>
-            <VCommandPaletteInstructions
-              hasItems={ !!filteredActions.value.length }
-              hasParent={ !!navigationStack.value.length }
-              hasSelection={ selectedIndex.value > -1 }
-            />
-          </VCard>
-        </VDialog>
+                { slots.header ? slots.header(headerSlotScope.value) : (
+                  <>
+                    { props.title && (
+                      <div key="command-palette-title" class="v-command-palette__title pa-4">
+                        { t(props.title) }
+                      </div>
+                    )}
+                    <VCommandPaletteSearch
+                      v-model={ search.value }
+                      placeholder={ props.placeholder }
+                    />
+                  </>
+                )}
+
+                <VDivider />
+
+                <VCommandPaletteList
+                  items={ filteredActions.value }
+                  selectedIndex={ selectedIndex.value }
+                  onClick:item={ onItemClickFromList }
+                >
+                  {{
+                    item: slots.item,
+                    'no-data': slots['no-data'],
+                    'prepend-item': slots['prepend-item'],
+                    'append-item': slots['append-item'],
+                  }}
+                </VCommandPaletteList>
+
+                { slots.footer ? slots.footer(footerSlotScope.value) : (
+                  <VCommandPaletteInstructions
+                    hasItems={ footerSlotScope.value.hasItems }
+                    hasParent={ footerSlotScope.value.hasParent }
+                    hasSelection={ footerSlotScope.value.hasSelection }
+                  />
+                )}
+              </VCard>
+            ),
+          }}
+        />
       )
     })
   },

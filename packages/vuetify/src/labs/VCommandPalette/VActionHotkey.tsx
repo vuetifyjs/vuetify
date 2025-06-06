@@ -2,7 +2,7 @@
 import { useHotkey } from './useHotkey'
 
 // Utilities
-import { propsFactory, genericComponent } from '@/util'
+import { genericComponent, propsFactory } from '@/util'
 
 // Types
 import type { PropType } from 'vue'

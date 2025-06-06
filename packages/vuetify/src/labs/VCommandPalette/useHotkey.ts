@@ -8,18 +8,21 @@ import type { MaybeRef } from '@/util'
 interface HotkeyOptions {
   event?: 'keydown' | 'keyup'
   inputs?: boolean
+  preventDefault?: boolean
   sequenceTimeout?: number
 }
 
 export function useHotkey (
   keys: MaybeRef<string | undefined>,
   callback: (e: KeyboardEvent) => void,
-  options: HotkeyOptions = {
-    event: 'keydown',
-    inputs: false,
-    sequenceTimeout: 1000,
-  }
+  options: HotkeyOptions = {}
 ) {
+  const {
+    event = 'keydown',
+    inputs = false,
+    preventDefault = true,
+    sequenceTimeout = 1000,
+  } = options
   const vm = getCurrentInstance('useHotkey')
   const isMac = typeof navigator !== 'undefined' && /macintosh/i.test(navigator.userAgent)
   const timer = shallowRef<ReturnType<typeof setTimeout>>()
@@ -31,7 +34,7 @@ export function useHotkey (
     const currentGroup = keyGroups.value[groupIndex.value]
     if (!currentGroup) return
 
-    if (!options.inputs) {
+    if (!inputs) {
       const activeElement = document.activeElement as HTMLElement
       if (activeElement && (
         activeElement.tagName === 'INPUT' ||
@@ -41,8 +44,7 @@ export function useHotkey (
     }
 
     if (matchesKeyGroup(e, currentGroup)) {
-      e.preventDefault()
-
+      if (preventDefault) e.preventDefault()
       if (isSequence.value) {
         if (timer.value) window.clearTimeout(timer.value)
         groupIndex.value++
@@ -53,7 +55,7 @@ export function useHotkey (
         } else {
           timer.value = setTimeout(() => {
             groupIndex.value = 0
-          }, options.sequenceTimeout)
+          }, sequenceTimeout)
         }
       } else {
         callback(e)
@@ -65,7 +67,7 @@ export function useHotkey (
   }
 
   const cleanup = () => {
-    window.removeEventListener(options.event ?? 'keydown', handler)
+    window.removeEventListener(event, handler)
     if (timer.value) window.clearTimeout(timer.value)
   }
 
@@ -74,7 +76,7 @@ export function useHotkey (
     if (unrefKeys) {
       isSequence.value = unrefKeys.includes('-')
       keyGroups.value = isSequence.value ? unrefKeys.toLowerCase().split('-') : [unrefKeys.toLowerCase()]
-      window.addEventListener(options.event ?? 'keydown', handler)
+      window.addEventListener(event, handler)
     } else {
       cleanup()
     }

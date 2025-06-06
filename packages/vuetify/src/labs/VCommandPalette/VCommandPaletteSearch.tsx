@@ -49,6 +49,7 @@ export const VCommandPaletteSearch = genericComponent<VCommandPaletteSearchSlots
               variant="solo"
               flat
               clearable={ props.clearable }
+              autofocus
             />
           )}
         </>
