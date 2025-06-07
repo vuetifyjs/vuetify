@@ -1,0 +1,4 @@
+@use '../../styles/settings';
+
+$pie-legend-avatar-border: thin solid rgba(var(--v-theme-on-surface), .2);
+$pie-tooltip-avatar-border: thin solid rgba(var(--v-theme-on-surface-variant), .2);
