@@ -14,12 +14,12 @@ import { VCommandPaletteSearch } from '@/labs/VCommandPalette/VCommandPaletteSea
 import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeFilterProps, useFilter } from '@/composables/filter'
+import { useHotkey } from '@/composables/hotkey'
 import { makeItemsProps, transformItems } from '@/composables/list-items'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeTransitionProps } from '@/composables/transition'
-import { useHotkey } from '@/composables/useHotkey'
 
 // Utilities
 import { computed, ref, shallowRef, toRef, watch } from 'vue'

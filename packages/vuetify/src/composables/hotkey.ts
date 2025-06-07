@@ -62,8 +62,13 @@ export function useHotkey (
     sequenceTimeout = 1000,
   } = options
 
-  // Get Vue instance for cleanup on unmount
-  const vm = getCurrentInstance('useHotkey')
+  // Get Vue instance for cleanup on unmount (optional)
+  let vm: any = null
+  try {
+    vm = getCurrentInstance('useHotkey')
+  } catch {
+    // Not in a Vue setup context - manual cleanup will be required
+  }
 
   // Detect if we're on macOS for platform-specific key handling
   const isMac = typeof navigator !== 'undefined' && /macintosh/i.test(navigator.userAgent)
@@ -95,7 +100,8 @@ export function useHotkey (
       if (activeElement && (
         activeElement.tagName === 'INPUT' ||
         activeElement.tagName === 'TEXTAREA' ||
-        activeElement.isContentEditable
+        activeElement.isContentEditable ||
+        activeElement.contentEditable === 'true'
       )) return
     }
 
@@ -144,6 +150,10 @@ export function useHotkey (
 
   // Watch for changes to the keys and update event listeners accordingly
   watchEffect(() => {
+    // First cleanup any existing listeners
+    window.removeEventListener(event, handler)
+    if (timer.value) window.clearTimeout(timer.value)
+
     const unrefKeys = toValue(keys)
     if (unrefKeys) {
       // Determine if this is a key sequence (contains '-' separator)
@@ -152,11 +162,11 @@ export function useHotkey (
       // Parse keys into groups (split by '-' for sequences, single group for combinations)
       keyGroups.value = isSequence.value ? unrefKeys.toLowerCase().split('-') : [unrefKeys.toLowerCase()]
 
+      // Reset sequence state
+      groupIndex.value = 0
+
       // Register the event listener
       window.addEventListener(event, handler)
-    } else {
-      // No keys specified - cleanup existing listeners
-      cleanup()
     }
   })
 
@@ -203,10 +213,18 @@ export function useHotkey (
    */
   function getExpectedModifiers (modifiers: ReturnType<typeof parseKeyGroup>['modifiers']) {
     // On Mac, handle special cases for cmd/ctrl mapping
-    // eslint-disable-next-line sonarjs/no-collapsible-if
     if (isMac) {
       // 'cmd+s' -> use metaKey (cmd key on Mac)
       if (modifiers.cmd) {
+        return {
+          ctrl: false,
+          meta: true,
+          shift: modifiers.shift,
+          alt: modifiers.alt,
+        }
+      }
+      // 'ctrl+s' on Mac -> use metaKey (cmd key on Mac)
+      if (modifiers.ctrl) {
         return {
           ctrl: false,
           meta: true,
@@ -247,7 +265,7 @@ export function useHotkey (
       e.metaKey === expected.meta &&
       e.shiftKey === expected.shift &&
       e.altKey === expected.alt &&
-      e.key.toLowerCase() === actualKey
+      e.key.toLowerCase() === actualKey?.toLowerCase()
     )
   }
 
