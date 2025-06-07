@@ -29,6 +29,7 @@ import { EventProp, genericComponent, propsFactory, useRender } from '@/util'
 // Types
 import type { Ref } from 'vue'
 import type { ListItem as VuetifyListItem } from '@/composables/list-items'
+import { isGroupDefinition } from './VCommandPaletteList'
 
 // VCommandPalette's own slot scope/type definitions
 export type VCommandPaletteItemRenderScope = {
@@ -123,8 +124,40 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
       valueComparator: props.valueComparator,
     }))
 
-    const processedCurrentActions = computed(() => transformItems(itemTransformationProps.value, currentRawActions.value))
-    const { filteredItems: filteredActions } = useFilter(props, processedCurrentActions, search)
+    const filteredActions = computed(() => {
+      if (!search.value) {
+        return transformItems(itemTransformationProps.value, currentRawActions.value)
+      }
+
+      const searchLower = search.value.toLowerCase()
+
+      const filterItem = (item: any) => {
+        const title = item.title?.toLowerCase() ?? ''
+        const subtitle = item.subtitle?.toLowerCase() ?? ''
+
+        return title.includes(searchLower) || subtitle.includes(searchLower)
+      }
+
+      const results: any[] = []
+
+      for (const item of currentRawActions.value) {
+        if (isGroupDefinition(item)) {
+          const groupTitleMatches = filterItem(item)
+          const matchingChildren = item.children.filter(filterItem)
+
+          if (groupTitleMatches || matchingChildren.length > 0) {
+            results.push({
+              ...item,
+              children: groupTitleMatches ? item.children : matchingChildren,
+            })
+          }
+        } else if (filterItem(item)) {
+          results.push(item)
+        }
+      }
+
+      return transformItems(itemTransformationProps.value, results)
+    })
 
     // Count only selectable items (exclude groups/parents/dividers)
     const selectableItemsCount = computed(() => {
@@ -175,51 +208,14 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
       if (selectedIndex.value >= 0) {
         let selectableCount = 0
         for (const item of filteredActions.value) {
-          if (item.raw?.type === 'group') {
+          if (item.raw?.type === 'group' || item.raw?.type === 'parent') {
             if (selectableCount + item.raw.children.length > selectedIndex.value) {
               const childIndex = selectedIndex.value - selectableCount
               const child = item.raw.children[childIndex]
-              const transformedChild = {
-                title: child.title,
-                value: child.value,
-                props: {
-                  title: child.title,
-                  subtitle: child.subtitle,
-                  prependIcon: child.prependIcon,
-                  appendIcon: child.appendIcon,
-                  prependAvatar: child.prependAvatar,
-                  appendAvatar: child.appendAvatar,
-                  to: child.to,
-                  href: child.href,
-                  hotkey: child.hotkey,
-                },
-                raw: child,
+              const [transformedChild] = transformItems(itemTransformationProps.value, [child])
+              if (transformedChild) {
+                onItemClickFromList(transformedChild, e)
               }
-              onItemClickFromList(transformedChild, e)
-              return
-            }
-            selectableCount += item.raw.children.length
-          } else if (item.raw?.type === 'parent') {
-            if (selectableCount + item.raw.children.length > selectedIndex.value) {
-              const childIndex = selectedIndex.value - selectableCount
-              const child = item.raw.children[childIndex]
-              const transformedChild = {
-                title: child.title,
-                value: child.value,
-                props: {
-                  title: child.title,
-                  subtitle: child.subtitle,
-                  prependIcon: child.prependIcon,
-                  appendIcon: child.appendIcon,
-                  prependAvatar: child.prependAvatar,
-                  appendAvatar: child.appendAvatar,
-                  to: child.to,
-                  href: child.href,
-                  hotkey: child.hotkey,
-                },
-                raw: child,
-              }
-              onItemClickFromList(transformedChild, e)
               return
             }
             selectableCount += item.raw.children.length

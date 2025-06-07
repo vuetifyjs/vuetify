@@ -300,29 +300,9 @@ export const VCommandPaletteList = genericComponent<VCommandPaletteListSlots>()(
             }
             result.push({ type: 'item', item: transformedChild, key: `${index}-${childIndex}` })
           })
-        } else if (item.raw && isParentDefinition(item.raw)) {
-          result.push({ type: 'group', originalIndex: index, item, key: `${index}-header` })
-
-          item.raw.children.forEach((child: any, childIndex: number) => {
-            const transformedChild = {
-              title: child.title,
-              value: child.value,
-              props: {
-                title: child.title,
-                subtitle: child.subtitle,
-                prependIcon: child.prependIcon,
-                appendIcon: child.appendIcon,
-                prependAvatar: child.prependAvatar,
-                appendAvatar: child.appendAvatar,
-                to: child.to,
-                href: child.href,
-                hotkey: (child as any).hotkey,
-              },
-              raw: child,
-            }
-            result.push({ type: 'item', item: transformedChild, key: `${index}-${childIndex}` })
-          })
         } else {
+          // Parent items and regular items - show as clickable items (no children exposed)
+          // Parents will be drilled down into when clicked
           result.push({ type: 'item', originalIndex: index, item, key: `${index}` })
         }
       })
@@ -357,7 +337,7 @@ export const VCommandPaletteList = genericComponent<VCommandPaletteListSlots>()(
           if (selectedElement) {
             selectedElement.scrollIntoView({
               block: 'nearest',
-              behavior: 'smooth'
+              behavior: 'smooth',
             })
           }
         }
