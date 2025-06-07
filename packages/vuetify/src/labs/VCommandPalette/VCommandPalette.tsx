@@ -4,7 +4,7 @@ import './VCommandPalette.scss'
 // Components
 import { VActionHotkey } from './VActionHotkey'
 import { VCommandPaletteInstructions } from './VCommandPaletteInstructions'
-import { VCommandPaletteList } from './VCommandPaletteList'
+import { isGroupDefinition, VCommandPaletteList } from './VCommandPaletteList'
 import { VCommandPaletteSearch } from './VCommandPaletteSearch'
 import { VCard } from '@/components/VCard'
 import { VDialog } from '@/components/VDialog'
@@ -29,7 +29,6 @@ import { EventProp, genericComponent, propsFactory, useRender } from '@/util'
 // Types
 import type { Ref } from 'vue'
 import type { ListItem as VuetifyListItem } from '@/composables/list-items'
-import { isGroupDefinition } from './VCommandPaletteList'
 
 // VCommandPalette's own slot scope/type definitions
 export type VCommandPaletteItemRenderScope = {
@@ -45,6 +44,8 @@ export type VCommandPaletteSlots = {
   footer: VCommandPaletteFooterSlotScope
   'prepend-item': never
   'append-item': never
+  prepend: never
+  append: never
 }
 
 export type VCommandPaletteHeaderSlotScope = {
@@ -104,17 +105,27 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
     const { themeClasses } = provideTheme(props)
     const { densityClasses } = useDensity(props)
 
+    // --- Core State ---
+
+    /** The currently selected item's index. -1 means no selection. */
     const selectedIndex = ref(-1)
+    /** A stack to keep track of navigation history when drilling down into parent items. */
     const navigationStack = ref<any[][]>([])
+    /** The current search query string. */
     const search = ref('')
+    /** The raw items currently being displayed, changes on drill-down/pop. */
     const currentRawActions = ref<any[]>(props.items ?? [])
 
+    /** When the top-level items prop changes, reset the component's state. */
     watch(() => props.items, newItems => {
       currentRawActions.value = newItems ?? []
       navigationStack.value = []
       search.value = ''
     }, { deep: true })
 
+    // --- Item Processing ---
+
+    /** Props used by `transformItems` to convert raw item objects into a standard format. */
     const itemTransformationProps = computed(() => ({
       itemTitle: props.itemTitle,
       itemValue: props.itemValue,
@@ -124,6 +135,14 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
       valueComparator: props.valueComparator,
     }))
 
+    /**
+     * A custom filter implementation that replaces the generic `useFilter`.
+     * This is necessary to handle the nested structure of groups.
+     *
+     * - If a group's title matches, the group and all its children are included.
+     * - If a child's title/subtitle matches, the group is included with only the matching children.
+     * - Regular items and parents are filtered based on their own title/subtitle.
+     */
     const filteredActions = computed(() => {
       if (!search.value) {
         return transformItems(itemTransformationProps.value, currentRawActions.value)
@@ -159,15 +178,18 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
       return transformItems(itemTransformationProps.value, results)
     })
 
-    // Count only selectable items (exclude groups/parents/dividers)
+    /**
+     * Calculates the total number of selectable items.
+     * This is crucial for keyboard navigation (arrow keys) because it needs to know the bounds
+     * of the list, skipping over non-selectable items like group headers.
+     * It counts the children of groups/parents because they are rendered as a flat list.
+     */
     const selectableItemsCount = computed(() => {
       let count = 0
 
       filteredActions.value.forEach(item => {
         // Check if this is a group or parent that will be flattened
-        if (item.raw?.type === 'group') {
-          count += item.raw.children.length
-        } else if (item.raw?.type === 'parent') {
+        if (item.raw?.type === 'group' || item.raw?.type === 'parent') {
           count += item.raw.children.length
         } else {
           // Regular item
@@ -178,6 +200,7 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
       return count
     })
 
+    /** When the filter changes (e.g., user types), reset the selection. */
     watch(filteredActions, () => {
       selectedIndex.value = -1
     })
@@ -185,9 +208,13 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
     // Reset state when dialog closes is handled in onAfterLeave
 
     // --- Hotkey Registration ---
+
+    /** Toggles the dialog's visibility. */
     useHotkey(toRef(props, 'hotkey'), e => {
       isActive.value = !isActive.value
     })
+
+    /** Moves selection up, wrapping around to the bottom. */
     useHotkey('arrowup', e => {
       if (!isActive.value) return
       const maxIndex = selectableItemsCount.value - 1
@@ -195,6 +222,8 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
         selectedIndex.value = selectedIndex.value > 0 ? selectedIndex.value - 1 : maxIndex
       }
     }, { inputs: true })
+
+    /** Moves selection down, wrapping around to the top. */
     useHotkey('arrowdown', e => {
       if (!isActive.value) return
       const maxIndex = selectableItemsCount.value - 1
@@ -202,6 +231,11 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
         selectedIndex.value = selectedIndex.value < maxIndex ? selectedIndex.value + 1 : 0
       }
     }, { inputs: true })
+
+    /**
+     * Executes the selected item's action or navigates into it.
+     * It has to recalculate the item's position in the flattened list to find the correct one.
+     */
     useHotkey('enter', e => {
       if (!isActive.value) return
       // Find the actual item at the selected index by counting selectable items
@@ -229,12 +263,16 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
         }
       }
     }, { inputs: true })
+
+    /** Closes the dialog. The navigation stack is cleared in `onAfterLeave`. */
     useHotkey('escape', e => {
       if (!isActive.value) return
       // Always close the dialog on ESC - don't navigate back through stack
       // The state clearing in onAfterLeave will reset navigation properly
       isActive.value = false
     }, { inputs: true })
+
+    /** Navigates back up the stack if not currently searching. */
     useHotkey('backspace', e => {
       if (!isActive.value || search.value) return
       e.preventDefault()
@@ -243,9 +281,17 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
       }
     }, { inputs: true, preventDefault: false })
 
+    // --- Event Handlers ---
+
     function onAfterEnter () {
       emit('afterEnter')
     }
+
+    /**
+     * Resets the component's state after the leave transition has finished.
+     * A timeout is used to ensure the state isn't cleared while the dialog is still visible,
+     * which would cause a jarring visual flash.
+     */
     function onAfterLeave () {
       // Wait for the dialog transition to fully complete before clearing state
       // Dialog transition duration is 125ms for leave (from dialog-transition.scss)
@@ -258,6 +304,12 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
       emit('afterLeave')
     }
 
+    /**
+     * Handles item clicks from the list.
+     * - If the item has children (i.e., it's a parent), it drills down, pushing the current
+     *   view onto the navigation stack and making the children the new `currentRawActions`.
+     * - If it's a leaf item, it executes the handler and closes the dialog.
+     */
     function onItemClickFromList (item: VuetifyListItem, event: MouseEvent | KeyboardEvent) {
       if (item.raw?.children && item.raw.children.length > 0) {
         navigationStack.value.push(currentRawActions.value)
@@ -276,6 +328,10 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
       }
     }
 
+    /**
+     * A list of all actions that have a hotkey assigned.
+     * This is passed to VActionHotkey components for registration.
+     */
     const actionHotkeys = computed(() => {
       return isActive.value ? filteredActions.value : []
     })
@@ -315,6 +371,11 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
           v-slots={{
             default: () => (
               <VCard>
+               { slots.prepend && (
+              <div class="v-command-palette__prepend">
+                { slots.prepend?.() }
+              </div>
+               )}
                 { actionHotkeys.value.map(item => <VActionHotkey key={ item.value } item={ item } onExecute={ onItemClickFromList } />) }
 
                 { slots.header ? slots.header(headerSlotScope.value) : (
@@ -353,6 +414,11 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
                     hasSelection={ footerSlotScope.value.hasSelection }
                   />
                 )}
+                            { slots.append && (
+              <div class="v-command-palette__append">
+                { slots.append?.() }
+              </div>
+                            )}
               </VCard>
             ),
           }}

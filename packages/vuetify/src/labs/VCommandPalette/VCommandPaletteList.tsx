@@ -18,15 +18,16 @@ import type { MaybeRef, PropType } from 'vue'
 import type { RouteLocationRaw } from 'vue-router'
 import { VHotkey } from './VHotkey'
 import type { makeVListItemProps } from '@/components/VList/VListItem'
+import type { ListItem as VuetifyListItem } from '@/composables/list-items'
 
-// Common properties that all items must have
+/** Common properties that all items must have. */
 interface BaseItemProps {
   id: string
   title: string
   visible?: MaybeRef<boolean>
 }
 
-// Make all Vuetify list item properties optional
+/** A subset of VListItem props used for display purposes. */
 type VListDisplayTypes = Partial<Pick<ReturnType<typeof makeVListItemProps>,
 | 'appendAvatar'
 | 'appendIcon'
@@ -35,55 +36,57 @@ type VListDisplayTypes = Partial<Pick<ReturnType<typeof makeVListItemProps>,
 | 'subtitle'
 >>
 
-// Get the actual prop value types, not the prop definitions
+/** Standard navigation properties. */
 type VListNavigableTypes = {
   to?: RouteLocationRaw
   href?: string
 }
 
-// Base for all items - type is optional and defaults to 'item'
+/** The base for all command palette items. Defaults to `type: 'item'`. */
 type VCommandPaletteItemBase<TValue = unknown> = BaseItemProps & VListDisplayTypes & {
   type?: 'item'
 }
 
-// Action item - discriminated by presence of handler/value
+/** An item that performs an action when triggered. */
 export interface VCommandPaletteActionItem<TValue = unknown> extends VCommandPaletteItemBase<TValue> {
   handler?: (params?: TValue) => void
   value?: TValue
-  // Explicitly exclude navigation properties
+  // Explicitly exclude navigation and children properties
   to?: never
   href?: never
   children?: never
 }
 
-// Link item - discriminated by presence of to/href
+/** An item that navigates to a URL when triggered. */
 export interface VCommandPaletteLinkItem extends VCommandPaletteItemBase, VListNavigableTypes {
-  // Explicitly exclude action properties
+  // Explicitly exclude action and children properties
   handler?: never
   value?: never
   children?: never
 }
 
-// Union of action and link items - both have type 'item' but discriminated by properties
+/** A union of all possible leaf-node item types. */
 export type VCommandPaletteItemDefinition<TValue = unknown> =
   | VCommandPaletteActionItem<TValue>
   | VCommandPaletteLinkItem
 
-// Parent item that contains children
+/** An item that contains other items and allows drilling down into them. */
 export interface VCommandPaletteParentDefinition extends BaseItemProps, VListDisplayTypes {
   type: 'parent'
   children: VCommandPaletteItemDefinition[]
-  handler?: never // Ensure this is not a leaf item
+  // Explicitly exclude properties that would make it a leaf item
+  handler?: never
   value?: never
   to?: never
   href?: never
 }
 
-// Group item that can contain both items and parents
+/** An item that visually groups other items under a non-clickable header. */
 export interface VCommandPaletteGroupDefinition extends BaseItemProps {
   type: 'group'
   divider?: 'start' | 'end' | 'none' | 'both' // Default is none
   children: Array<VCommandPaletteItemDefinition | VCommandPaletteParentDefinition>
+  // Explicitly exclude properties that would make it a leaf or parent item
   handler?: never
   value?: never
   to?: never
@@ -92,31 +95,38 @@ export interface VCommandPaletteGroupDefinition extends BaseItemProps {
   hotkey?: never
 }
 
-// Type guard functions using property-based discrimination
+// --- Type Guards ---
+
+/** Checks if an item is a leaf-node item (action or link). */
 export function isItemDefinition (item: VCommandPaletteItem): item is VCommandPaletteItemDefinition {
   return item.type === 'item' || item.type === undefined
 }
 
+/** Checks if an item is an action item. */
 export function isActionItem (item: VCommandPaletteItem): item is VCommandPaletteActionItem {
   return (item.type === 'item' || item.type === undefined) &&
          ('handler' in item || 'value' in item) &&
          !('to' in item) && !('href' in item)
 }
 
+/** Checks if an item is a link item. */
 export function isLinkItem (item: VCommandPaletteItem): item is VCommandPaletteLinkItem {
   return (item.type === 'item' || item.type === undefined) &&
          ('to' in item || 'href' in item) &&
          !('handler' in item) && !('value' in item)
 }
 
+/** Checks if an item is a parent item. */
 export function isParentDefinition (item: VCommandPaletteItem): item is VCommandPaletteParentDefinition {
   return item.type === 'parent'
 }
 
+/** Checks if an item is a group item. */
 export function isGroupDefinition (item: VCommandPaletteItem): item is VCommandPaletteGroupDefinition {
   return item.type === 'group'
 }
 
+/** A union of all possible item types in the command palette. */
 export type VCommandPaletteItem = VCommandPaletteItemDefinition | VCommandPaletteParentDefinition | VCommandPaletteGroupDefinition
 
 // Example usage demonstrating property-based discriminated union:
@@ -190,9 +200,13 @@ export const makeVCommandPaletteListProps = propsFactory({
     'itemValue',
     'itemProps',
   ]),
+  /**
+   * The list of items to display. This is expected to be an array of `VuetifyListItem`
+   * objects, which are produced by the `transformItems` function in the parent component.
+   */
   items: {
-    type: Array as PropType<Array<VCommandPaletteItem>>,
-    default: () => ([] as Array<VCommandPaletteItem>),
+    type: Array as PropType<Array<VuetifyListItem>>,
+    default: () => ([] as Array<VuetifyListItem>),
   },
   selectedIndex: {
     type: Number,
@@ -217,14 +231,17 @@ export const VCommandPaletteList = genericComponent<VCommandPaletteListSlots>()(
   name: 'VCommandPaletteList',
   props: makeVCommandPaletteListProps(),
   emits: {
-    'click:item': (item: VCommandPaletteItem, event: MouseEvent | KeyboardEvent) => true,
+    'click:item': (item: VuetifyListItem, event: MouseEvent | KeyboardEvent) => true,
   },
   setup (props, { emit, slots }) {
     const { t } = useLocale()
     const vListRef = ref<typeof VList>()
     const vListProps = VList.filterProps(omit(props, ['items', 'selectedIndex']))
 
-    // Adapter function to convert VuetifyListItem to VListItem props
+    /**
+     * An adapter function that extracts the necessary props from a `VuetifyListItem`
+     * to pass to a `VListItem` component. It also attaches the click handler.
+     */
     function getVListItemProps (item: any, index: number, isSelectable = true) {
       const baseProps = {
         title: item.title,
@@ -261,7 +278,17 @@ export const VCommandPaletteList = genericComponent<VCommandPaletteListSlots>()(
       return { ...baseProps, ...optionalProps }
     }
 
-    // Create a flat list of renderable items for proper keyboard navigation
+    /**
+     * This computed property is the core of the list's rendering logic. It takes the
+     * `items` prop (which is a flat list of `VuetifyListItem`s) and transforms it into
+     * a structure that can be rendered correctly, including group headers and dividers.
+     *
+     * Why flatten?
+     * - VList expects a flat array to render.
+     * - Groups need to be displayed with their children directly beneath them.
+     * - This structure makes it possible to map a simple `selectedIndex` to a complex
+     *   visual layout for keyboard navigation.
+     */
     const flattenedItems = computed(() => {
       const result: Array<{ type: 'divider' | 'group' | 'item', originalIndex?: number, item?: any, key: string }> = []
 
@@ -310,7 +337,11 @@ export const VCommandPaletteList = genericComponent<VCommandPaletteListSlots>()(
       return result
     })
 
-    // Create a mapping from original selectedIndex to flattened index
+    /**
+     * Maps the `selectedIndex` (which only counts selectable items) to the actual index
+     * within the `flattenedItems` array (which includes non-selectable headers and dividers).
+     * This is essential for correctly applying the '--active' class for styling.
+     */
     const actualSelectedIndex = computed(() => {
       if (props.selectedIndex === -1) return -1
 
@@ -327,7 +358,11 @@ export const VCommandPaletteList = genericComponent<VCommandPaletteListSlots>()(
       return -1
     })
 
-    // Watch for selection changes and scroll to keep selected item in view
+    /**
+     * Watches for changes in the selected index and scrolls the active item into view.
+     * This ensures that as the user navigates with the keyboard, the selected item is
+     * always visible.
+     */
     watch([actualSelectedIndex, flattenedItems], async () => {
       if (actualSelectedIndex.value >= 0 && vListRef.value) {
         await nextTick()

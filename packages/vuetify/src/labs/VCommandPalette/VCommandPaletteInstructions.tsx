@@ -1,11 +1,12 @@
 // Styles
-import './VCommandPaletteInstructions.scss'
+import './VCommandPalette.scss'
 
 // Components
 import { VHotkey } from './VHotkey'
 
 // Composables
 import { useLocale } from '@/composables/locale'
+import { provideTheme } from '@/composables/theme'
 
 // Utilities
 import { genericComponent, propsFactory, useRender } from '@/util'
@@ -22,8 +23,14 @@ export const VCommandPaletteInstructions = genericComponent()({
   setup (props) {
     const { t } = useLocale()
 
+    const { themeClasses } = provideTheme(props)
+
     useRender(() => (
-      <div class="v-command-palette-instructions">
+      <div class={[
+        'v-command-palette-instructions',
+        themeClasses.value,
+      ]}
+      >
         { props.hasItems && (
           <div key="select-instruction" class="d-flex align-center">
             <VHotkey keys="enter" />

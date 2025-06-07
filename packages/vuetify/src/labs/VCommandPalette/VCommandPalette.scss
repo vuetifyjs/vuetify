@@ -17,4 +17,12 @@
     //   }
     // }
   }
+  .v-command-palette-instructions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 8px 12px;
+    font-size: 0.8rem;
+    border-top: thin solid rgba(var(--v-border-color), var(--v-border-opacity));
+  }
 }
