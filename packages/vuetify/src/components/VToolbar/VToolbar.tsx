@@ -60,6 +60,15 @@ export const makeVToolbarProps = propsFactory({
   ...makeThemeProps(),
 }, 'VToolbar')
 
+export function calculateHeight (height: number | string, density: Density, forExtensionHeight: boolean) {
+  return parseInt((
+    Number(height) +
+    (density === 'prominent' ? Number(height) : 0) -
+    (density === 'comfortable' ? forExtensionHeight ? 4 : 8 : 0) -
+    (density === 'compact' ? forExtensionHeight ? 8 : 16 : 0)
+  ), 10)
+}
+
 export type VToolbarSlots = {
   default: never
   image: never
@@ -83,19 +92,13 @@ export const VToolbar = genericComponent<VToolbarSlots>()({
     const { rtlClasses } = useRtl()
 
     const isExtended = shallowRef(!!(props.extended || slots.extension?.()))
-    const contentHeight = computed(() => parseInt((
-      Number(props.height) +
-      (props.density === 'prominent' ? Number(props.height) : 0) -
-      (props.density === 'comfortable' ? 8 : 0) -
-      (props.density === 'compact' ? 16 : 0)
-    ), 10))
+    const contentHeight = computed(() => calculateHeight(
+      props.height,
+      props.density,
+      false,
+    ))
     const extensionHeight = computed(() => isExtended.value
-      ? parseInt((
-        Number(props.extensionHeight) +
-        (props.density === 'prominent' ? Number(props.extensionHeight) : 0) -
-        (props.density === 'comfortable' ? 4 : 0) -
-        (props.density === 'compact' ? 8 : 0)
-      ), 10)
+      ? calculateHeight(props.extensionHeight, props.density, true)
       : 0
     )
 
