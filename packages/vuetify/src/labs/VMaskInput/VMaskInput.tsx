@@ -7,7 +7,7 @@ import { makeMaskProps, useMask } from '@/composables/mask'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, onMounted, ref } from 'vue'
+import { computed, onBeforeMount, ref } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -60,7 +60,7 @@ export const VMaskInput = genericComponent<VMaskInputSlots>()({
       },
     )
 
-    onMounted(() => {
+    onBeforeMount(() => {
       if (props.returnMaskedValue) {
         emit('update:modelValue', model.value)
       }
