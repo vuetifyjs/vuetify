@@ -70,7 +70,7 @@ export type VCommandPaletteSlots = {
   'no-data': never
   header: VCommandPaletteHeaderSlotScope
   footer: VCommandPaletteFooterSlotScope
-  'prepend-item': never
+  'prepend-list': never
   'append-item': never
   prepend: VCommandPaletteGenericSlotScope
   append: VCommandPaletteGenericSlotScope
@@ -282,9 +282,17 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
       return count
     })
 
-    /** When the filter changes (e.g., user types), reset the selection. */
+    /** When the filter changes (e.g., user types), auto-select the first item if available. */
     watch(filteredActions, () => {
-      selectedIndex.value = -1
+      // Auto-select first item if there are selectable items, otherwise reset to -1
+      selectedIndex.value = selectableItemsCount.value > 0 ? 0 : -1
+    })
+
+    /** When the dialog opens, auto-select the first item if available. */
+    watch(isActive, (newValue) => {
+      if (newValue && selectableItemsCount.value > 0) {
+        selectedIndex.value = 0
+      }
     })
 
     // Reset state when dialog closes is handled in onAfterLeave
@@ -360,6 +368,7 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
       e.preventDefault()
       if (navigationStack.value.length > 0) {
         currentRawActions.value = navigationStack.value.pop()!
+        // The selectedIndex will be auto-updated by the filteredActions watcher
       }
     }, { inputs: true, preventDefault: false })
 
@@ -398,6 +407,7 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
         navigationStack.value.push(currentRawActions.value)
         currentRawActions.value = item.raw.children
         search.value = ''
+        // The selectedIndex will be auto-updated by the filteredActions watcher
       } else {
         // Execute the handler if it exists
         if (item.raw?.handler && typeof item.raw.handler === 'function') {
@@ -477,7 +487,6 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
                 )}
 
                 <VDivider />
-
                 <VCommandPaletteList
                   items={ filteredActions.value }
                   selectedIndex={ selectedIndex.value }
@@ -486,8 +495,8 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
                   {{
                     item: slots.item,
                     'no-data': slots['no-data'],
-                    'prepend-item': slots['prepend-item'],
-                    'append-item': slots['append-item'],
+                    'prepend-list': slots['prepend-list'],
+                    'append-list': slots['append-item'],
                   }}
                 </VCommandPaletteList>
 

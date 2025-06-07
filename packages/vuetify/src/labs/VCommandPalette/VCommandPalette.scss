@@ -18,11 +18,14 @@
       padding: 8px;
     }
 
-    // &__list-divider {
-    //   &-start, &-end {
-    //     margin: 0 -8px;
-    //   }
-    // }
+    &__list-divider {
+      // &-start, &-end {
+      //   margin: 0 -8px;
+      // }
+      &-end {
+        margin-bottom: 4px;
+      }
+    }
   }
   .v-command-palette-instructions {
     display: flex;

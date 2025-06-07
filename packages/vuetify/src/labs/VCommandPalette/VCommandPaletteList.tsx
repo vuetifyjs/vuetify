@@ -223,8 +223,8 @@ export type VCommandPaletteListItemSlotScope = {
 export type VCommandPaletteListSlots = {
   item: VCommandPaletteListItemSlotScope
   'no-data': never // Use 'never' for slots with no scope
-  'prepend-item': never
-  'append-item': never
+  'prepend-list': never
+  'append-list': never
 }
 
 export const VCommandPaletteList = genericComponent<VCommandPaletteListSlots>()({
@@ -384,7 +384,7 @@ export const VCommandPaletteList = genericComponent<VCommandPaletteListSlots>()(
 
     useRender(() => (
       <VList ref={ vListRef } { ...vListProps } class="v-command-palette__list">
-        { slots['prepend-item']?.() }
+        { slots['prepend-list']?.() }
         { flattenedItems.value.length > 0
           ? flattenedItems.value.map((flatItem, flatIndex) => {
             if (flatItem.type === 'divider') {
@@ -431,7 +431,7 @@ export const VCommandPaletteList = genericComponent<VCommandPaletteListSlots>()(
               <VListItem key="no-data-fallback" title={ t('$vuetify.noDataText') } />
           )
         }
-        { slots['append-item']?.() }
+        { slots['append-list']?.() }
       </VList>
     ))
   },
