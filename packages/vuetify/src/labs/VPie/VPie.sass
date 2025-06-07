@@ -29,6 +29,8 @@
     &__content
       grid-area: content
       position: relative
+      width: var(--v-pie-size)
+      height: var(--v-pie-size)
 
       .v-overlay
         .v-overlay__scrim,
@@ -43,13 +45,22 @@
       justify-content: center
       pointer-events: none
 
+      > div
+        pointer-events: auto
+
     &__legend
       grid-area: legend
       align-self: center
       padding-block: 12px
 
+      .v-avatar
+        border: $pie-legend-avatar-border
+
       .v-chip__content
         width: 100%
+
+      .v-chip:not(.v-chip--selected)
+        opacity: .4
 
       &__text
         font-size: 0.8125rem
@@ -65,18 +76,23 @@
     .v-chip.v-chip--density-default .v-avatar--start
       margin-inline-start: -4px
 
-  .v-pie-segment
-    pointer-events: none
-    position: absolute
-    inset: 0
+    &-segment
+      pointer-events: none
+      position: absolute
+      inset: 0
 
-    .v-pie-segment__overlay
-      pointer-events: auto
-      opacity: 0
+      .v-pie-segment__overlay
+        pointer-events: auto
+        opacity: 0
 
-.v-pie__tooltip-content
-  .v-list-item-subtitle
-    opacity: 1
+    &__tooltip-content
+      .v-list-item
+        padding-inline: 0
+        min-width: 100px
+        zoom: 0.88
 
-  .v-avatar.border-thin
-    border-color: rgba(var(--v-theme-on-surface-variant), .4) !important
+      .v-list-item-subtitle
+        opacity: 1
+
+      .v-avatar
+        border: $pie-tooltip-avatar-border

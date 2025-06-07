@@ -23,6 +23,7 @@
         :size="300"
         :tooltip="{ subtitleFormat: '[value]%' }"
         class="pa-3 mt-3"
+        animation
         hide-slice
       >
         <template v-slot:center>

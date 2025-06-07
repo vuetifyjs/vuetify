@@ -12,7 +12,9 @@
 
     <template v-slot:configuration>
       <div class="d-flex flex-column ga-2">
-        <v-checkbox v-model="showLegend" label="Show legend"></v-checkbox>
+        <v-checkbox v-model="animation" label="Animate on interaction" hide-details></v-checkbox>
+        <v-checkbox v-model="legend" label="Show legend" hide-details></v-checkbox>
+        <v-checkbox v-model="tooltip" label="Show tooltip" hide-details></v-checkbox>
 
         <v-slider
           v-if="model !== 'gauge'"
@@ -47,8 +49,8 @@
 
           <v-checkbox
             v-if="model !== 'gauge'"
-            v-model="innerSliceVisible"
-            label="Show inner slice"
+            v-model="hideSlice"
+            label="Hide inner slice"
           ></v-checkbox>
 
           <v-chip-group v-model="gap" mandatory>
@@ -76,8 +78,10 @@
     { key: 2, title: 'No', value: 40 },
     { key: 3, title: 'Maybe', value: 15 },
   ]
-  const showLegend = ref(true)
-  const innerSliceVisible = ref(false)
+  const animation = ref(false)
+  const legend = ref(false)
+  const tooltip = ref(false)
+  const hideSlice = ref(false)
   const size = ref(250)
 
   const innerCut = ref(85)
@@ -90,13 +94,15 @@
       title: { default: 'Basic pie', donut: 'Do you like donuts?' }[model.value],
       gap: (model.value !== 'default' && gap.value) || undefined,
       'gauge-cut': (model.value === 'gauge' && gaugeCut.value) || undefined,
+      'hide-slice': model.value === 'gauge' || (model.value === 'donut' && hideSlice.value) || undefined,
       'inner-cut': model.value !== 'default' ? innerCut.value : undefined,
-      legend: { visible: showLegend.value },
+      animation: animation.value || undefined,
+      legend: legend.value || undefined,
       palette: ['#048BA8', '#99C24D', '#F18F01'],
       rotate: rotate.value || undefined,
       rounded: (model.value !== 'default' && rounded.value) || undefined,
       size: size.value !== 250 ? size.value : undefined,
-      'hide-slice': model.value === 'gauge' || (model.value === 'donut' && !innerSliceVisible.value) || undefined,
+      tooltip: tooltip.value || undefined,
     }
   })
 

@@ -8,6 +8,7 @@
       :tooltip="{ subtitleFormat: '[value]%' }"
       hover-scale="0"
       size="300"
+      animation
       hide-slice
     ></v-pie>
   </div>
