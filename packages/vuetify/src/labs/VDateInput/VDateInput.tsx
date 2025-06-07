@@ -6,6 +6,7 @@ import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextFi
 
 // Composables
 import { useDate } from '@/composables/date'
+import { createDateRange } from '@/composables/date/date'
 import { makeDateFormatProps, useDateFormat } from '@/composables/dateFormat'
 import { makeDisplayProps, useDisplay } from '@/composables/display'
 import { makeFocusProps } from '@/composables/focus'
@@ -215,7 +216,7 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
         if (parts.every(isValid)) {
           if (props.multiple === 'range') {
             const [start, stop] = parts.map(parseDate).toSorted((a, b) => adapter.isAfter(a, b) ? 1 : -1)
-            model.value = adapter.createDateRange(start, stop)
+            model.value = createDateRange(adapter, start, stop)
           } else {
             model.value = parts.map(parseDate)
           }
