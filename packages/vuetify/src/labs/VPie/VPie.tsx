@@ -14,7 +14,7 @@ import { makeDensityProps } from '@/composables/density'
 // Utilities
 import { computed, ref, shallowRef, watch } from 'vue'
 import { formatTextTemplate } from './utils'
-import { clamp, genericComponent, pick, propsFactory } from '@/util'
+import { clamp, convertToUnit, genericComponent, pick, propsFactory } from '@/util'
 
 // Types
 import type { PropType, TransitionProps } from 'vue'
@@ -60,10 +60,6 @@ export const makeVPieProps = propsFactory({
   },
   rotate: Number,
   innerCut: Number,
-  hoverScale: {
-    Number,
-    default: 0.05,
-  },
   gaugeCut: {
     type: Number,
     default: 0,
@@ -80,14 +76,16 @@ export const makeVPieProps = propsFactory({
       titleFormat?: TextTemplate
       subtitleFormat?: TextTemplate
       transition?: string | boolean | TransitionProps
+      offset?: number
     }>,
-    default: true,
+    default: false,
   },
   ...makeDensityProps(),
   ...pick(makeVPieSegmentProps(), [
     'animation',
     'gap',
     'rounded',
+    'hoverScale',
     'hideSlice',
   ]),
 }, 'VPie')
@@ -150,7 +148,7 @@ export const VPie = genericComponent<VPieSlots>()({
 
     const total = computed(() => visibleItems.value.reduce((sum, item) => sum + item.value, 0))
 
-    const gaugeOffset = computed(() => `${props.size * 0.4 * (Math.min(180, props.gaugeCut ?? 0)) / 180}px`)
+    const gaugeOffset = computed(() => 0.4 * (Math.min(180, props.gaugeCut ?? 0)) / 180)
     const rotateDeg = computed(() => `${props.gaugeCut ? (180 + props.gaugeCut / 2) : (props.rotate ?? 0)}deg`)
 
     function arcOffset (index: number) {
@@ -204,7 +202,11 @@ export const VPie = genericComponent<VPieSlots>()({
       clearTimeout(mouseLeaveTimeout)
       mouseLeaveTimeout = setTimeout(() => {
         tooltipVisible.value = false
-        tooltipItem.value = null
+
+        // intentionally reusing timeout here
+        mouseLeaveTimeout = setTimeout(() => {
+          tooltipItem.value = null
+        }, 500)
       }, 100)
     }
 
@@ -227,6 +229,7 @@ export const VPie = genericComponent<VPieSlots>()({
         titleFormat: typeof props.tooltip === 'object' ? props.tooltip.titleFormat : '[title]',
         subtitleFormat: typeof props.tooltip === 'object' ? props.tooltip.subtitleFormat : '[value]',
         transition: typeof props.tooltip === 'object' ? props.tooltip.transition : defaultTooltipTransition,
+        offset: typeof props.tooltip === 'object' ? props.tooltip.offset : 16,
       }
 
       return (
@@ -236,7 +239,7 @@ export const VPie = genericComponent<VPieSlots>()({
             `v-pie--legend-${legendMode.value}`,
           ]}
           style={{
-            '--v-pie-size': `${props.size}px`,
+            '--v-pie-size': convertToUnit(props.size),
           }}
         >
           { slots.title?.() ?? (props.title && (<div class="v-pie__title">{ props.title }</div>)) }
@@ -244,9 +247,7 @@ export const VPie = genericComponent<VPieSlots>()({
             class="v-pie__content"
             style={{
               transform: `rotate(${rotateDeg.value})`,
-              marginBottom: `calc(-1 * ${gaugeOffset.value})`,
-              height: `${props.size}px`,
-              width: `${props.size}px`,
+              marginBottom: `calc(-1 * ${convertToUnit(props.size)} * ${gaugeOffset.value})`,
             }}
           >
             <svg
@@ -276,7 +277,7 @@ export const VPie = genericComponent<VPieSlots>()({
                 marginTop: `-${40 * props.gaugeCut / 360}%`,
               }}
             >
-              <div style="pointer-events: auto">
+              <div>
                 { slots.center?.({ total: total.value }) }
               </div>
             </div>
@@ -288,21 +289,18 @@ export const VPie = genericComponent<VPieSlots>()({
                 <VChipGroup
                   column
                   multiple
-                  model-value={ visibleItemsKeys.value }
+                  v-model={ visibleItemsKeys.value }
                   direction={ legendDirection.value }
                 >
                   { arcs.value.map(item => (
                     <VChip
-                      key={ item.key }
+                      value={ item.key }
                       density={ props.density }
-                      class={{ 'opacity-40': !isActive(item) }}
-                      onClick={ () => toggle(item) }
                       v-slots={{
                         prepend: () => (
                           <VAvatar
                             class="v-pie__legend__circle"
                             color={ item.color }
-                            border="thin opacity-25"
                             size={ legendCircleSize.value }
                             start
                           >

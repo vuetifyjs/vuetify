@@ -13,14 +13,17 @@ export const makeVPieSegmentProps = propsFactory({
   },
   value: {
     type: Number,
-    required: true,
+    default: 0,
   },
   color: String,
   innerCut: {
     type: Number,
     default: 0,
   },
-  hoverScale: Number,
+  hoverScale: {
+    type: Number,
+    default: 0.05,
+  },
   gap: {
     type: Number,
     default: 0,
@@ -34,7 +37,7 @@ export const makeVPieSegmentProps = propsFactory({
       duration?: number
       easing?: keyof typeof easingPatterns
     }>,
-    default: true,
+    default: false,
   },
   pattern: String,
   hideSlice: Boolean,

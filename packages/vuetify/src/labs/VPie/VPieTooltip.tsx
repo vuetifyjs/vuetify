@@ -1,7 +1,7 @@
 // Components
 import { VAvatar } from '@/components/VAvatar'
 import { VListItem } from '@/components/VList/VListItem'
-import { VTooltip } from '@/components/VTooltip/VTooltip'
+import { makeVTooltipProps, VTooltip } from '@/components/VTooltip/VTooltip'
 
 // Composables
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
@@ -9,7 +9,7 @@ import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 // Utilities
 import { computed, onBeforeUnmount, onMounted, shallowRef } from 'vue'
 import { formatTextTemplate } from './utils'
-import { genericComponent, getCurrentInstance, propsFactory } from '@/util'
+import { genericComponent, getCurrentInstance, pick, propsFactory } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -34,6 +34,7 @@ export const makeVPieTooltipProps = propsFactory({
     default: '[value]',
   },
   ...makeTransitionProps(),
+  ...pick(makeVTooltipProps(), ['offset']),
 }, 'VPieTooltip')
 
 export const VPieTooltip = genericComponent<VPieTooltipSlots>()({
@@ -75,8 +76,7 @@ export const VPieTooltip = genericComponent<VPieTooltipSlots>()({
 
     return () => (
       <VTooltip
-        absolute={ false }
-        offset={ 16 }
+        offset={ props.offset }
         model-value={ props.modelValue }
         target={ target.value }
         content-class="v-pie__tooltip-content"
@@ -86,9 +86,7 @@ export const VPieTooltip = genericComponent<VPieTooltipSlots>()({
             <MaybeTransition transition={ props.transition } mode="out-in">
               <VListItem
                 key={ props.item.key }
-                class="px-0"
                 density="compact"
-                style="zoom: 0.88"
                 title={ tooltipTitleFormatFunction.value(props.item) }
                 subtitle={ tooltipSubtitleFormatFunction.value(props.item) }
                 v-slots={{
@@ -96,11 +94,10 @@ export const VPieTooltip = genericComponent<VPieTooltipSlots>()({
                     <VAvatar
                       color={ props.item!.color }
                       size="28"
-                      border="thin opacity-25"
                     >
                       { !!props.item!.pattern && (
                         <svg height="40" width="40">
-                          <circle r="40" fill={ props.item!.pattern } />
+                          <rect width="40" height="40" fill={ props.item!.pattern } />
                         </svg>
                       )}
                     </VAvatar>

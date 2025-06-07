@@ -8,7 +8,7 @@
     "palette": "Defines colors and patterns to be applied based on the data items order. Data items can also define their colors.",
     "rotate": "Rotates the chart segments clockwise.",
     "size": "Sets the height and width of the chart (excluding title and legend).",
-    "tooltip": "Controls tooltip visibility, transition and formats of title and subtitle."
+    "tooltip": "Controls tooltip visibility, transition, offset from the cursor and formats of title and subtitle."
   },
   "slots": {
     "center": "Slot used to put custom content in the center of the chart",

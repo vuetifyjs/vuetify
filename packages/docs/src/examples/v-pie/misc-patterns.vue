@@ -53,6 +53,7 @@
         :items="items"
         :legend="{ position: 'left' }"
         :tooltip="{ subtitleFormat: '[value]%' }"
+        animation
         hide-slice
       >
         <template v-slot:center>

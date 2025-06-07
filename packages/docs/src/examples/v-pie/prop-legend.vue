@@ -23,6 +23,7 @@
         :legend="legendConfig"
         :size="300"
         :tooltip="{ subtitleFormat: (s) => `${formatNumber(s.value)} respondents (${(100 * s.value / total).toFixed(1)}%)` }"
+        animation
         hide-slice
       >
         <template v-slot:legend-text="{ item }">

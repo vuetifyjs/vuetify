@@ -22,6 +22,7 @@
         :palette="palettes[currentPalette]"
         hover-scale="0"
         hide-slice
+        tooltip
       ></v-pie>
       <v-list v-model:selected="currentPalette" class="ml-12 py-0 bg-transparent" mandatory selectable>
         <v-list-item v-for="(palette, pi) in palettes" :key="pi" :value="pi" border="t b">
