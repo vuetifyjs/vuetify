@@ -117,13 +117,16 @@ export const makeVCommandPaletteProps = propsFactory({
 
 export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
   name: 'VCommandPalette',
+
   props: makeVCommandPaletteProps(),
+
   emits: {
     afterEnter: () => true,
     afterLeave: () => true,
     'update:modelValue': (value: boolean) => true,
     'click:item': (item: any, event: MouseEvent | KeyboardEvent) => true,
   },
+
   setup (props, { emit, slots }) {
     const isActive = useProxiedModel(props, 'modelValue')
     const { t } = useLocale()

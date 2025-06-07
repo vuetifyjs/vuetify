@@ -229,10 +229,13 @@ export type VCommandPaletteListSlots = {
 
 export const VCommandPaletteList = genericComponent<VCommandPaletteListSlots>()({
   name: 'VCommandPaletteList',
+
   props: makeVCommandPaletteListProps(),
+
   emits: {
     'click:item': (item: VuetifyListItem, event: MouseEvent | KeyboardEvent) => true,
   },
+
   setup (props, { emit, slots }) {
     const { t } = useLocale()
     const vListRef = ref<typeof VList>()

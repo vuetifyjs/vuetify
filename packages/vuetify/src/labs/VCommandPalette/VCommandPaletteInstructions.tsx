@@ -19,7 +19,9 @@ export const makeVCommandPaletteInstructionsProps = propsFactory({
 
 export const VCommandPaletteInstructions = genericComponent()({
   name: 'VCommandPaletteInstructions',
+
   props: makeVCommandPaletteInstructionsProps(),
+
   setup (props) {
     const { t } = useLocale()
 

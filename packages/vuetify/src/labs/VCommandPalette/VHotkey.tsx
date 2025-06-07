@@ -181,7 +181,9 @@ function applyDisplayModeToKey (keyMap: KeyMap, mode: DisplayMode, key: string, 
 
 export const VHotkey = genericComponent()({
   name: 'VHotkey',
+
   props: makeVHotkeyProps(),
+
   setup (props) {
     const { t } = useLocale()
 

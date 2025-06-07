@@ -29,10 +29,13 @@ export type VCommandPaletteSearchSlots = {
 
 export const VCommandPaletteSearch = genericComponent<VCommandPaletteSearchSlots>()({
   name: 'VCommandPaletteSearch',
+
   props: makeVCommandPaletteSearchProps(),
+
   emits: {
     'update:modelValue': (value: string) => true,
   },
+
   setup (props, { slots }) {
     const { t } = useLocale()
     const search = useProxiedModel(props, 'modelValue')
