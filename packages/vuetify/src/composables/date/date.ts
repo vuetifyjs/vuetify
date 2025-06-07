@@ -13,8 +13,11 @@ import type { LocaleInstance } from '@/composables/locale'
 // Adapters
 import { VuetifyDateAdapter } from './adapters/vuetify'
 
-export interface DateInstance extends DateModule.InternalAdapter {
+export interface BaseDateInstance extends DateModule.InternalAdapter {
   locale?: any
+}
+
+export interface DateInstance extends BaseDateInstance {
   createDateRange: (start: unknown, stop?: unknown) => unknown[]
 }
 
@@ -26,7 +29,7 @@ export namespace DateModule {
 }
 
 export type InternalDateOptions = {
-  adapter: (new (options: { locale: any, formats?: any }) => DateInstance) | DateInstance
+  adapter: (new (options: { locale: any, formats?: any }) => BaseDateInstance) | BaseDateInstance
   formats?: Record<string, any>
   locale: Record<string, any>
 }
@@ -90,7 +93,7 @@ export function createDate (options: DateOptions | undefined, locale: LocaleInst
   }
 }
 
-function createInstance (options: InternalDateOptions, locale: LocaleInstance) {
+function createInstance (options: InternalDateOptions, locale: LocaleInstance): DateInstance {
   const instance = reactive(
     typeof options.adapter === 'function'
       // eslint-disable-next-line new-cap
