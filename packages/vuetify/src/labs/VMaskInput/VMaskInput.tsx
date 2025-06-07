@@ -29,7 +29,7 @@ export const VMaskInput = genericComponent<VMaskInputSlots>()({
     'update:modelValue': (val: string) => true,
   },
 
-  setup (props, { slots, attrs, emit }) {
+  setup (props, { slots, emit }) {
     const vTextFieldRef = ref<VTextField>()
 
     const { maskText, updateRange, unmaskText } = useMask(props, vTextFieldRef)
@@ -72,7 +72,6 @@ export const VMaskInput = genericComponent<VMaskInputSlots>()({
       return (
         <VTextField
           { ...textFieldProps }
-          { ...attrs }
           v-model={ model.value }
           ref={ vTextFieldRef }
         >
