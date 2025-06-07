@@ -3,7 +3,7 @@
     <page-feature-chip
       v-if="!isGeneratedPage"
       :href="contribute"
-      prepend-icon="mdi-language-markdown-outline"
+      prepend-icon="mdi-pencil-outline"
       rel="noopener noreferrer"
       target="_blank"
       text="Edit this page"
@@ -21,6 +21,18 @@
     >
       <template #prepend>
         <v-icon :color="pinned ? 'primary' : undefined" />
+      </template>
+    </page-feature-chip>
+
+    <page-feature-chip
+      v-if="isClipboardSupported"
+      :disabled="!one.isSubscriber"
+      :text="copied ? t('copied') : t('copy-as-markdown')"
+      prepend-icon="mdi-language-markdown-outline"
+      @click="copyPageAsMarkdown"
+    >
+      <template #prepend>
+        <v-icon :color="copied ? 'success' : 'grey'" />
       </template>
     </page-feature-chip>
 
@@ -98,6 +110,7 @@
   const user = useUserStore()
   const { t } = useI18n()
   const frontmatter = useFrontmatter()
+  const { copyPageAsMarkdown, copied, isClipboardSupported } = useMarkdown()
 
   const branch = getBranch()
 
