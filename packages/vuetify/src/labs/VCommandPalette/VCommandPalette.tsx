@@ -22,15 +22,17 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeTransitionProps } from '@/composables/transition'
 
 // Utilities
-import { computed, ref, shallowRef, toRef, watch } from 'vue'
+import { computed, readonly, ref, shallowRef, toRef, watch } from 'vue'
 import { EventProp, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType, Ref } from 'vue'
 import type { InternalListItem } from '@/components/VList/VList'
+import type { FilterFunction } from '@/composables/filter'
 import type { ListItem as VuetifyListItem } from '@/composables/list-items'
 
 const HotkeyActivator = genericComponent()({
+  name: 'VHotkeyActivator',
   props: {
     item: {
       type: Object as PropType<InternalListItem>,
@@ -58,6 +60,10 @@ export type VCommandPaletteItemRenderScope = {
   props: Record<string, any>
 }
 
+export type VCommandPaletteGenericSlotScope = {
+  search: Readonly<Ref<string>>
+}
+
 export type VCommandPaletteSlots = {
   search: { modelValue: string }
   item: VCommandPaletteItemRenderScope
@@ -66,8 +72,8 @@ export type VCommandPaletteSlots = {
   footer: VCommandPaletteFooterSlotScope
   'prepend-item': never
   'append-item': never
-  prepend: never
-  append: never
+  prepend: VCommandPaletteGenericSlotScope
+  append: VCommandPaletteGenericSlotScope
 }
 
 export type VCommandPaletteHeaderSlotScope = {
@@ -164,47 +170,94 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
     }))
 
     /**
-     * A custom filter implementation that replaces the generic `useFilter`.
-     * This is necessary to handle the nested structure of groups.
-     *
-     * - If a group's title matches, the group and all its children are included.
-     * - If a child's title/subtitle matches, the group is included with only the matching children.
-     * - Regular items and parents are filtered based on their own title/subtitle.
+     * Custom filter function for command palette items that handles group/parent hierarchies.
+     * This allows us to leverage the useFilter composable while maintaining special group logic.
      */
-    const filteredActions = computed(() => {
-      if (!search.value) {
-        return transformItems(itemTransformationProps.value, currentRawActions.value)
-      }
+    const commandPaletteFilter: FilterFunction = (value, query, item) => {
+      if (!query) return true
 
-      const searchLower = search.value.toLowerCase()
+      const searchLower = query.toLowerCase()
 
-      // TODO: Don't use ANY types
-      function filterItem (item: any) {
-        const title = item.title?.toLowerCase() ?? ''
-        const subtitle = item.subtitle?.toLowerCase() ?? ''
-
+      // Helper function to check if a single item matches
+      function itemMatches (rawItem: any): boolean {
+        const title = rawItem.title?.toLowerCase() ?? ''
+        const subtitle = rawItem.subtitle?.toLowerCase() ?? ''
         return title.includes(searchLower) || subtitle.includes(searchLower)
       }
 
-      const results: any[] = []
+      // Get the raw item from the InternalItem structure
+      const rawItem = item?.raw
+      if (!rawItem) return false
 
-      for (const item of currentRawActions.value) {
-        if (isGroupDefinition(item)) {
-          const groupTitleMatches = filterItem(item)
-          const matchingChildren = item.children.filter(filterItem)
-
-          if (groupTitleMatches || matchingChildren.length > 0) {
-            results.push({
-              ...item,
-              children: groupTitleMatches ? item.children : matchingChildren,
-            })
-          }
-        } else if (filterItem(item)) {
-          results.push(item)
-        }
+      if (isGroupDefinition(rawItem)) {
+        // For groups: match if group title matches OR any child matches
+        const groupMatches = itemMatches(rawItem)
+        const hasMatchingChildren = rawItem.children.some(itemMatches)
+        return groupMatches || hasMatchingChildren
+      } else {
+        // For regular items and parents: match based on title/subtitle
+        return itemMatches(rawItem)
       }
+    }
 
-      return transformItems(itemTransformationProps.value, results)
+    /**
+     * Transform function to handle group filtering logic.
+     * When a group matches, we need to decide which children to include.
+     */
+    const transformFilteredItems = (items: any[]) => {
+      if (!search.value) return items
+
+      const searchLower = search.value.toLowerCase()
+
+      return items.map(item => {
+        const rawItem = item.raw
+        if (isGroupDefinition(rawItem)) {
+          // Helper function to check if a single item matches
+          const itemMatches = (testItem: any): boolean => {
+            const title = testItem.title?.toLowerCase() ?? ''
+            const subtitle = testItem.subtitle?.toLowerCase() ?? ''
+            return title.includes(searchLower) || subtitle.includes(searchLower)
+          }
+
+          const groupMatches = itemMatches(rawItem)
+
+          // If group title matches, include all children
+          // If group title doesn't match, include only matching children
+          const filteredChildren = groupMatches
+            ? rawItem.children
+            : rawItem.children.filter(itemMatches)
+
+          return {
+            ...item,
+            raw: {
+              ...rawItem,
+              children: filteredChildren,
+            },
+          }
+        }
+        return item
+      })
+    }
+
+    // Use the composable filter with our custom logic
+    const transformedItems = computed(() => (
+      transformItems(itemTransformationProps.value, currentRawActions.value)
+    ))
+
+    const { filteredItems } = useFilter(
+      {
+        customFilter: commandPaletteFilter,
+        filterKeys: ['title', 'subtitle'],
+        filterMode: 'some',
+        noFilter: false,
+      },
+      transformedItems,
+      () => search.value,
+    )
+
+    // Apply the group-specific transformation after filtering
+    const filteredActions = computed(() => {
+      return transformFilteredItems(filteredItems.value)
     })
 
     /**
@@ -403,7 +456,7 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
               <VSheet rounded class={['v-command-palette__sheet']}>
                { slots.prepend && (
               <div class="v-command-palette__prepend">
-                { slots.prepend?.() }
+                { slots.prepend?.({ search: readonly(search) }) }
               </div>
                )}
                 { actionHotkeys.value.map(item => <HotkeyActivator key={ item.value } item={ item } onExecute={ onItemClickFromList } />) }
@@ -447,7 +500,7 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
                 )}
                             { slots.append && (
               <div class="v-command-palette__append">
-                { slots.append?.() }
+                { slots.append?.({ search: readonly(search) }) }
               </div>
                             )}
               </VSheet>
