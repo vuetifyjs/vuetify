@@ -56,7 +56,7 @@ For additional details about css-pre-processors, please refer to the official vi
 
 ## Usage
 
-There are many SASS variables such as **font size**, **font family**, and **line height** that can be configured globally. An extensive list of configurable global SASS variables can be found [here](/api/globals/). To start, Follow the plugin setup guide from [treeshaking](/features/treeshaking/) then add `styles.configFile` to the plugin options:
+There are many SASS variables such as **font size**, **font family**, and **line height** that can be configured globally. An extensive list of configurable global SASS variables can be found [here](/api/globals/). To start, follow the plugin setup guide from [treeshaking](/features/treeshaking/) then add `styles.configFile` to the plugin options:
 
 ```js { resource="vite.config.js" }
 vuetify({
