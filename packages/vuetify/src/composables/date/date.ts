@@ -15,7 +15,6 @@ import { VuetifyDateAdapter } from './adapters/vuetify'
 
 export interface DateInstance extends DateModule.InternalAdapter {
   locale?: any
-  createDateRange: (start: unknown, stop?: unknown) => unknown[]
 }
 
 /** Supports module augmentation to specify date adapter types */
@@ -90,6 +89,22 @@ export function createDate (options: DateOptions | undefined, locale: LocaleInst
   }
 }
 
+export function createDateRange (adapter: DateInstance, start: unknown, stop?: unknown) {
+  const diff = adapter.getDiff(stop ?? start, start, 'days')
+  const datesInRange = [start]
+
+  for (let i = 1; i < diff; i++) {
+    const nextDate = adapter.addDays(start, i)
+    datesInRange.push(nextDate)
+  }
+
+  if (stop) {
+    datesInRange.push(adapter.endOfDay(stop))
+  }
+
+  return datesInRange
+}
+
 function createInstance (options: InternalDateOptions, locale: LocaleInstance) {
   const instance = reactive(
     typeof options.adapter === 'function'
@@ -105,23 +120,7 @@ function createInstance (options: InternalDateOptions, locale: LocaleInstance) {
     instance.locale = options.locale[value] ?? value ?? instance.locale
   })
 
-  return Object.assign(instance, {
-    createDateRange (start: unknown, stop?: unknown) {
-      const diff = instance.getDiff(stop ?? start, start, 'days')
-      const datesInRange = [start]
-
-      for (let i = 1; i < diff; i++) {
-        const nextDate = instance.addDays(start, i)
-        datesInRange.push(nextDate)
-      }
-
-      if (stop) {
-        datesInRange.push(instance.endOfDay(stop))
-      }
-
-      return datesInRange
-    },
-  })
+  return instance
 }
 
 export function useDate (): DateInstance {

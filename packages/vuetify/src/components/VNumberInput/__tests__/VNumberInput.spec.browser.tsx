@@ -206,6 +206,17 @@ describe('VNumberInput', () => {
     })
   })
 
+  it('should not fire @update:focus twice when clicking bottom of input', async () => {
+    const onFocus = vi.fn()
+    const { element } = render(() => (
+      <VNumberInput onUpdate:focused={ onFocus } />
+    ))
+
+    await userEvent.click(element, { y: 1 })
+
+    expect(onFocus).toHaveBeenCalledTimes(1)
+  })
+
   describe('accepts digits from pasted text', () => {
     it.each([
       { precision: 0, text: '-00123', expected: -123 },
