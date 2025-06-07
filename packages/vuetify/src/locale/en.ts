@@ -123,5 +123,6 @@ export default {
     goBack: 'to go back',
     close: 'to close',
     then: 'then',
+    placeholder: 'Type a command or search...',
   },
 }

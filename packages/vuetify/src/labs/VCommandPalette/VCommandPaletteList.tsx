@@ -1,5 +1,5 @@
 // Styles
-import './VCommandPalette.scss'
+import '@/labs/VCommandPalette/VCommandPalette.scss'
 
 // Components
 import { VDivider } from '@/components/VDivider'
@@ -16,9 +16,9 @@ import { genericComponent, omit, propsFactory, useRender } from '@/util'
 // Types
 import type { MaybeRef, PropType } from 'vue'
 import type { RouteLocationRaw } from 'vue-router'
-import { VHotkey } from './VHotkey'
 import type { makeVListItemProps } from '@/components/VList/VListItem'
 import type { ListItem as VuetifyListItem } from '@/composables/list-items'
+import { VHotkey } from '@/labs/VCommandPalette/VHotkey'
 
 /** Common properties that all items must have. */
 interface BaseItemProps {
@@ -190,6 +190,18 @@ const testItems: VCommandPaletteItem[] = [
 ]
 
 export const makeVCommandPaletteListProps = propsFactory({
+  /**
+   * The list of items to display. This is expected to be an array of `VuetifyListItem`
+   * objects, which are produced by the `transformItems` function in the parent component.
+  */
+  items: {
+    type: Array as PropType<Array<VuetifyListItem>>,
+    default: () => ([] as Array<VuetifyListItem>),
+  },
+  selectedIndex: {
+    type: Number,
+    default: -1,
+  },
   ...omit(makeVListProps({
     density: 'compact' as const,
     nav: true,
@@ -200,18 +212,6 @@ export const makeVCommandPaletteListProps = propsFactory({
     'itemValue',
     'itemProps',
   ]),
-  /**
-   * The list of items to display. This is expected to be an array of `VuetifyListItem`
-   * objects, which are produced by the `transformItems` function in the parent component.
-   */
-  items: {
-    type: Array as PropType<Array<VuetifyListItem>>,
-    default: () => ([] as Array<VuetifyListItem>),
-  },
-  selectedIndex: {
-    type: Number,
-    default: -1,
-  },
 }, 'VCommandPaletteList')
 
 // Scope for the item slot, should match what VCommandPalette provides
@@ -433,3 +433,5 @@ export const VCommandPaletteList = genericComponent<VCommandPaletteListSlots>()(
     ))
   },
 })
+
+export type VCommandPaletteList = InstanceType<typeof VCommandPaletteList>

@@ -2,6 +2,7 @@
 import { VTextField } from '@/components/VTextField'
 
 // Composables
+import { useLocale } from '@/composables'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
@@ -14,11 +15,9 @@ export const makeVCommandPaletteSearchProps = propsFactory({
   modelValue: String,
   placeholder: {
     type: String,
-    default: 'Type a command or search...',
   },
   clearable: {
     type: Boolean,
-    default: true,
   },
 }, 'VCommandPaletteSearch')
 
@@ -35,7 +34,9 @@ export const VCommandPaletteSearch = genericComponent<VCommandPaletteSearchSlots
     'update:modelValue': (value: string) => true,
   },
   setup (props, { slots }) {
+    const { t } = useLocale()
     const search = useProxiedModel(props, 'modelValue')
+
     useRender(() => {
       return (
         <>
@@ -44,7 +45,7 @@ export const VCommandPaletteSearch = genericComponent<VCommandPaletteSearchSlots
           }) ?? (
             <VTextField
               v-model={ search.value }
-              placeholder={ props.placeholder }
+              placeholder={ props.placeholder ?? t('$vuetify.command.placeholder') }
               hideDetails
               variant="solo"
               flat
@@ -57,3 +58,5 @@ export const VCommandPaletteSearch = genericComponent<VCommandPaletteSearchSlots
     })
   },
 })
+
+export type VCommandPaletteSearch = InstanceType<typeof VCommandPaletteSearch>

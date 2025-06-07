@@ -2,6 +2,13 @@
 
 @include tools.layer('components') {
   .v-command-palette {
+    &__sheet.v-sheet {
+      display: flex;
+      flex-direction: column;
+      flex: 1 1 auto;
+      overflow: hidden
+    }
+
     &__dialog.v-dialog {
       align-items: start;
       // Good enough for now. A user may want to be able to control this.

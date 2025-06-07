@@ -1,8 +1,8 @@
 // Styles
-import './VCommandPalette.scss'
+import '@/labs/VCommandPalette/VCommandPalette.scss'
 
 // Components
-import { VHotkey } from './VHotkey'
+import { VHotkey } from '@/labs/VCommandPalette/VHotkey'
 
 // Composables
 import { useLocale } from '@/composables/locale'
@@ -57,3 +57,5 @@ export const VCommandPaletteInstructions = genericComponent()({
     ))
   },
 })
+
+export type VCommandPaletteInstructions = InstanceType<typeof VCommandPaletteInstructions>

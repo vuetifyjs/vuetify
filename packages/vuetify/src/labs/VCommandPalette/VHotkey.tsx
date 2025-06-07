@@ -293,3 +293,5 @@ export const VHotkey = genericComponent()({
     ))
   },
 })
+
+export type VHotkey = InstanceType<typeof VHotkey>

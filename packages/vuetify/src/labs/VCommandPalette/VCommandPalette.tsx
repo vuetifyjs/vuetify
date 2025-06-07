@@ -1,18 +1,16 @@
 // Styles
-import './VCommandPalette.scss'
+import '@/labs/VCommandPalette/VCommandPalette.scss'
 
 // Components
-import { VActionHotkey } from './VActionHotkey'
-import { VCommandPaletteInstructions } from './VCommandPaletteInstructions'
-import { isGroupDefinition, VCommandPaletteList } from './VCommandPaletteList'
-import { VCommandPaletteSearch } from './VCommandPaletteSearch'
-import { VCard } from '@/components/VCard'
 import { VDialog } from '@/components/VDialog'
 import { makeVDialogProps } from '@/components/VDialog/VDialog'
 import { VDivider } from '@/components/VDivider'
+import { VSheet } from '@/components/VSheet'
+import { VCommandPaletteInstructions } from '@/labs/VCommandPalette/VCommandPaletteInstructions'
+import { isGroupDefinition, VCommandPaletteList } from '@/labs/VCommandPalette/VCommandPaletteList'
+import { VCommandPaletteSearch } from '@/labs/VCommandPalette/VCommandPaletteSearch'
 
 // Composables
-import { useHotkey } from '../../composables/useHotkey'
 import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeFilterProps, useFilter } from '@/composables/filter'
@@ -21,14 +19,38 @@ import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeTransitionProps } from '@/composables/transition'
+import { useHotkey } from '@/composables/useHotkey'
 
 // Utilities
-import { computed, ref, toRef, watch } from 'vue'
+import { computed, ref, shallowRef, toRef, watch } from 'vue'
 import { EventProp, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
-import type { Ref } from 'vue'
+import type { PropType, Ref } from 'vue'
+import type { InternalListItem } from '@/components/VList/VList'
 import type { ListItem as VuetifyListItem } from '@/composables/list-items'
+
+const HotkeyActivator = genericComponent()({
+  props: {
+    item: {
+      type: Object as PropType<InternalListItem>,
+      required: true,
+    },
+    onExecute: {
+      type: Function as PropType<(item: InternalListItem, e: KeyboardEvent) => void>,
+      required: true,
+    },
+  },
+  setup (props) {
+    if (props.item.raw?.hotkey) {
+      useHotkey(props.item.raw.hotkey, e => {
+        props.onExecute(props.item, e)
+      }, { inputs: true })
+    }
+
+    return () => null // This is a renderless component
+  },
+})
 
 // VCommandPalette's own slot scope/type definitions
 export type VCommandPaletteItemRenderScope = {
@@ -62,19 +84,6 @@ export type VCommandPaletteFooterSlotScope = {
 }
 
 export const makeVCommandPaletteProps = propsFactory({
-  ...makeComponentProps(),
-  ...makeDensityProps(),
-  ...makeFilterProps({ filterKeys: ['title'] }),
-  ...makeItemsProps({ itemTitle: 'title' }),
-  ...makeTransitionProps({ transition: 'dialog-transition' }),
-  ...makeThemeProps(),
-  ...makeVDialogProps({
-    maxHeight: 450,
-    maxWidth: 720,
-    absolute: true,
-    scrollable: true,
-  }),
-  modelValue: Boolean,
   hotkey: String,
   title: {
     type: String,
@@ -88,6 +97,22 @@ export const makeVCommandPaletteProps = propsFactory({
   },
   afterEnter: EventProp<[]>(),
   afterLeave: EventProp<[]>(),
+  clearableSearch: {
+    type: Boolean,
+    default: true,
+  },
+  ...makeComponentProps(),
+  ...makeDensityProps(),
+  ...makeFilterProps({ filterKeys: ['title'] }),
+  ...makeItemsProps({ itemTitle: 'title' }),
+  ...makeTransitionProps({ transition: 'dialog-transition' }),
+  ...makeThemeProps(),
+  ...makeVDialogProps({
+    maxHeight: 450,
+    maxWidth: 720,
+    absolute: true,
+    scrollable: true,
+  }),
 }, 'VCommandPalette')
 
 export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
@@ -108,11 +133,11 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
     // --- Core State ---
 
     /** The currently selected item's index. -1 means no selection. */
-    const selectedIndex = ref(-1)
+    const selectedIndex = shallowRef(-1)
     /** A stack to keep track of navigation history when drilling down into parent items. */
     const navigationStack = ref<any[][]>([])
     /** The current search query string. */
-    const search = ref('')
+    const search = shallowRef('')
     /** The raw items currently being displayed, changes on drill-down/pop. */
     const currentRawActions = ref<any[]>(props.items ?? [])
 
@@ -150,7 +175,8 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
 
       const searchLower = search.value.toLowerCase()
 
-      const filterItem = (item: any) => {
+      // TODO: Don't use ANY types
+      function filterItem (item: any) {
         const title = item.title?.toLowerCase() ?? ''
         const subtitle = item.subtitle?.toLowerCase() ?? ''
 
@@ -300,6 +326,7 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
         search.value = ''
         navigationStack.value = []
         currentRawActions.value = props.items ?? []
+        // TODO: Shouldn't onAfterLeave make it so I don't have to do this?
       }, 150) // Add a small buffer to the 125ms transition duration
       emit('afterLeave')
     }
@@ -370,13 +397,13 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
           transition={ props.transition }
           v-slots={{
             default: () => (
-              <VCard>
+              <VSheet rounded class={['v-command-palette__sheet']}>
                { slots.prepend && (
               <div class="v-command-palette__prepend">
                 { slots.prepend?.() }
               </div>
                )}
-                { actionHotkeys.value.map(item => <VActionHotkey key={ item.value } item={ item } onExecute={ onItemClickFromList } />) }
+                { actionHotkeys.value.map(item => <HotkeyActivator key={ item.value } item={ item } onExecute={ onItemClickFromList } />) }
 
                 { slots.header ? slots.header(headerSlotScope.value) : (
                   <>
@@ -388,6 +415,7 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
                     <VCommandPaletteSearch
                       v-model={ search.value }
                       placeholder={ props.placeholder }
+                      clearable={ props.clearableSearch }
                     />
                   </>
                 )}
@@ -419,7 +447,7 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
                 { slots.append?.() }
               </div>
                             )}
-              </VCard>
+              </VSheet>
             ),
           }}
         />
@@ -427,3 +455,5 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
     })
   },
 })
+
+export type VCommandPalette = InstanceType<typeof VCommandPalette>
