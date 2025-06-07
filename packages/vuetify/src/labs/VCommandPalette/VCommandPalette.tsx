@@ -309,15 +309,22 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
       if (!isActive.value) return
       const maxIndex = selectableItemsCount.value - 1
       if (maxIndex >= 0) {
+        // Move the selection up by one, or wrap around to the bottom if at the start
         selectedIndex.value = selectedIndex.value > 0 ? selectedIndex.value - 1 : maxIndex
       }
     }, { inputs: true })
 
     /** Moves selection down, wrapping around to the top. */
     useHotkey('arrowdown', e => {
+      // If the dialog is not active, do nothing
       if (!isActive.value) return
+
+      // Calculate the maximum index for selectable items
       const maxIndex = selectableItemsCount.value - 1
+
+      // If there are selectable items, update the selectedIndex
       if (maxIndex >= 0) {
+        // Move the selection down by one, or wrap around to the top if at the end
         selectedIndex.value = selectedIndex.value < maxIndex ? selectedIndex.value + 1 : 0
       }
     }, { inputs: true })

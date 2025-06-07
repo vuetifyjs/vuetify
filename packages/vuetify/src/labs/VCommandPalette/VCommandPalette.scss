@@ -16,6 +16,10 @@
     }
     &__list.v-list {
       padding: 8px;
+
+      .v-list-item__overlay {
+        transition: none;
+      }
     }
 
     &__list-divider {

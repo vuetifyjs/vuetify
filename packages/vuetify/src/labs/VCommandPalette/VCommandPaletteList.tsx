@@ -375,7 +375,7 @@ export const VCommandPaletteList = genericComponent<VCommandPaletteListSlots>()(
           if (selectedElement) {
             selectedElement.scrollIntoView({
               block: 'nearest',
-              behavior: 'smooth',
+              behavior: 'instant',
             })
           }
         }
