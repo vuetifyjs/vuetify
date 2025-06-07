@@ -184,10 +184,6 @@
     // eslint-disable-next-line no-console
     console.log('Executed:', item)
   }
-
-  function toggleTheme () {
-    theme.global.name.value = theme.global.current.value.dark ? 'light' : 'dark'
-  }
 </script>
 
 <template>
@@ -200,11 +196,7 @@
     :items="items"
     hotkey="cmd+k"
     @click:item="onItemClick"
-  >
-    <template #append>
-      <VBtn text="toggle theme" @click="toggleTheme" />
-    </template>
-  </VCommandPalette>
+  />
 </template>
 
 <style scoped lang="scss"></style>
