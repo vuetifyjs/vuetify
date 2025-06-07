@@ -107,7 +107,11 @@ function createInstance (options: InternalDateOptions, locale: LocaleInstance) {
 
   return Object.assign(instance, {
     createDateRange (start: unknown, stop?: unknown) {
-      const diff = instance.getDiff(stop ?? start, start, 'days')
+      const diff = instance.getDiff(
+        instance.endOfDay(stop ?? start),
+        instance.startOfDay(start),
+        'days'
+      )
       const datesInRange = [start]
 
       for (let i = 1; i < diff; i++) {
