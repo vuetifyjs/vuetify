@@ -10,7 +10,7 @@ import { useLocale } from '@/composables/locale'
 
 // Utilities
 import { computed } from 'vue'
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { genericComponent, mergeDeep, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -243,11 +243,18 @@ export const VHotkey = genericComponent()({
           modifiers.ctrl = false
         }
 
+        // Merge the keyMap with the default. Allows the user to selectively overwrite specific key behaviors
+        // We will recommend that this property be set at the component default level and not on a per-instance basis
+        // TODO: This can be more efficient. Most of the time this will merge IDENTICAL objects needlessly.
+        // TODO: (continued) So we could make it so the default for props.keyMap is an empty object,
+        // TODO: (continued) but how might that affect doc generation? @MajesticPotatoe do you know? I want good DX!
+        const _keyMap = mergeDeep(keyMap, props.keyMap)
+
         // Transform each key part into its display representation
         return parts.map(key => {
           // return symbols
           if (isDelineator(key)) return key
-          return applyDisplayModeToKey(props.keyMap, props.displayMode, key, isMac)
+          return applyDisplayModeToKey(_keyMap, props.displayMode, key, isMac)
         })
       })
     })

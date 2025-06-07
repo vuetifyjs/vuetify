@@ -478,6 +478,25 @@ export function humanReadableFileSize (bytes: number, base: 1000 | 1024 = 1000):
   return `${bytes.toFixed(1)} ${prefix[unit]}B`
 }
 
+/**
+ * Deeply merges two objects, `source` and `target`, into a new object.
+ * If both `source` and `target` have a property that is a plain object,
+ * those properties are recursively merged. If both properties are arrays
+ * and an `arrayFn` is provided, the function is used to merge the arrays.
+ * If a property exists in both `source` and `target` but is not a plain object or array,
+ * the value from `target` will overwrite the value from `source`.
+ *
+ * @param source - The source object to merge from.
+ * @param target - The target object to merge into.
+ * @param arrayFn - Optional function to merge arrays.
+ * @returns A new object with merged properties from `source` and `target`.
+ *
+ * @example
+ * const obj1 = { a: 1, b: { c: 2 }, f: 5 };
+ * const obj2 = { b: { d: 3 }, e: 4, f: 6 };
+ * const result = mergeDeep(obj1, obj2);
+ * // result is { a: 1, b: { c: 2, d: 3 }, e: 4, f: 6 }
+ */
 export function mergeDeep (
   source: Record<string, any> = {},
   target: Record<string, any> = {},
