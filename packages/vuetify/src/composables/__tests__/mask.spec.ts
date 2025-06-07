@@ -34,6 +34,13 @@ describe('mask', () => {
   })
 
   it.each([
+    [{ mask: '(#) (#)', modelValue: ' 5   6 ' }, '(5) (6)'],
+  ])('should trim spaces', (props, expected) => {
+    const { maskText } = useMask(props as MaskProps, ref(undefined))
+    expect(maskText(props.modelValue)).toEqual(expected)
+  })
+
+  it.each([
     [{ mask: '(#', modelValue: '(5' }, '5'],
     [{ mask: '####', modelValue: '1111' }, '1111'],
     [{ mask: '(###)#', modelValue: '(123)4' }, '1234'],

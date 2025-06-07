@@ -107,9 +107,11 @@ export function useMask (props: MaskProps, inputRef: Ref<HTMLInputElement | unde
   }
 
   function maskText (text: string | null | undefined): string {
-    if (text == null) return ''
+    const trimmedText = text?.trim().replace(/\s+/g, ' ')
 
-    if (!mask.value.length || !text.length) return text
+    if (trimmedText == null) return ''
+
+    if (!mask.value.length || !trimmedText.length) return trimmedText
 
     let textIndex = 0
     let maskIndex = 0
@@ -117,7 +119,7 @@ export function useMask (props: MaskProps, inputRef: Ref<HTMLInputElement | unde
 
     while (maskIndex < mask.value.length) {
       const mchar = mask.value[maskIndex]
-      const tchar = text[textIndex]
+      const tchar = trimmedText[textIndex]
 
       // Escaped character in mask, the next mask character is inserted
       if (mchar === '\\') {
