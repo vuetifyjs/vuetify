@@ -76,20 +76,34 @@ Vuetify includes several pre-configured masks for common use cases:
 | time | ##:## | 23:59 |
 | time-with-seconds | ##:##:## | 23:59:59 |
 
-#### Example
+### Examples
 
-You can use the built-in masks by simply referencing their name. This is an example of a **credit-card** mask.
+#### Using Built in Masks
 
-<ExamplesExample file="v-mask-input/card" />
+You can use the built-in masks by simply referencing their name. This is an example of a **phone** mask.
 
-#### Custom Masks
+<ExamplesExample file="v-mask-input/phone" />
+
+#### Using Custom Masks
 
 You can create custom masks using the available tokens. This will create a mask that accepts 3 letters followed by 3 numbers (e.g., "ABC-123").
 
 <ExamplesExample file="v-mask-input/custom-mask" />
 
-#### Custom Tokens
+#### Using Custom Tokens
 
 You can also define custom tokens for more specific input requirements:
 
 <ExamplesExample file="v-mask-input/custom-token" />
+
+#### IP Address
+
+This example shows how to create a mask for IP addresses with validation:
+
+<ExamplesExample file="v-mask-input/ip-address" />
+
+#### Credit Card Form
+
+A complete credit card form example with validation:
+
+<ExamplesExample file="v-mask-input/credit-card-form" />

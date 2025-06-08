@@ -2,9 +2,8 @@
   <div>
     <v-mask-input
       v-model="model"
-      label="Credit Card"
-      mask="credit-card"
-      placeholder="#### - #### - #### - ####"
+      mask="phone"
+      placeholder="(###) ### - ####"
     ></v-mask-input>
   </div>
 </template>
