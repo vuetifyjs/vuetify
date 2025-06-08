@@ -15,6 +15,7 @@ import { VuetifyDateAdapter } from './adapters/vuetify'
 
 export interface DateInstance extends DateModule.InternalAdapter {
   locale?: any
+  createDateRange: (start: unknown, stop?: unknown) => unknown[]
 }
 
 /** Supports module augmentation to specify date adapter types */
@@ -104,7 +105,23 @@ function createInstance (options: InternalDateOptions, locale: LocaleInstance) {
     instance.locale = options.locale[value] ?? value ?? instance.locale
   })
 
-  return instance
+  return Object.assign(instance, {
+    createDateRange (start: unknown, stop?: unknown) {
+      const diff = instance.getDiff(stop ?? start, start, 'days')
+      const datesInRange = [start]
+
+      for (let i = 1; i < diff; i++) {
+        const nextDate = instance.addDays(start, i)
+        datesInRange.push(nextDate)
+      }
+
+      if (stop) {
+        datesInRange.push(instance.endOfDay(stop))
+      }
+
+      return datesInRange
+    },
+  })
 }
 
 export function useDate (): DateInstance {

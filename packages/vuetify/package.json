@@ -1,7 +1,7 @@
 {
   "name": "vuetify",
   "description": "Vue Material Component Framework",
-  "version": "3.8.6",
+  "version": "3.8.8",
   "author": {
     "name": "John Leider",
     "email": "john@vuetifyjs.com"
@@ -154,10 +154,10 @@
     "@vitest/browser": "^3.1.1",
     "@vitest/coverage-istanbul": "^3.1.1",
     "@vitest/ui": "^3.1.1",
-    "@vue/babel-plugin-jsx": "^1.4.0",
     "@vue/reactivity": "^3.5.13",
     "@vue/shared": "^3.5.13",
     "@vue/test-utils": "^2.4.6",
+    "@vuetify/babel-plugin-jsx": "^1.5.2",
     "acorn-walk": "^8.3.4",
     "autoprefixer": "^10.4.21",
     "babel-plugin-add-import-extension": "1.5.1",

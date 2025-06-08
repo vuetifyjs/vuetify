@@ -1,5 +1,6 @@
 // Utilities
 import {
+  camelize,
   capitalize,
   Comment,
   Fragment,
@@ -777,4 +778,37 @@ export function checkPrintable (e: KeyboardEvent) {
 export type Primitive = string | number | boolean | symbol | bigint
 export function isPrimitive (value: unknown): value is Primitive {
   return typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean' || typeof value === 'bigint'
+}
+
+export function extractNumber (text: string, decimalDigitsLimit: number | null) {
+  const cleanText = text.split('')
+    .filter(x => /[\d\-.]/.test(x))
+    .filter((x, i, all) => (i === 0 && /[-]/.test(x)) || // sign allowed at the start
+        (x === '.' && i === all.indexOf('.')) || // decimal separator allowed only once
+        /\d/.test(x))
+    .join('')
+
+  if (decimalDigitsLimit === 0) {
+    return cleanText.split('.')[0]
+  }
+
+  if (decimalDigitsLimit !== null && /\.\d/.test(cleanText)) {
+    const parts = cleanText.split('.')
+    return [
+      parts[0],
+      parts[1].substring(0, decimalDigitsLimit),
+    ].join('.')
+  }
+
+  return cleanText
+}
+
+export function camelizeProps (props: Record<string, unknown> | null | undefined) {
+  if (!props) return
+
+  const out: Record<string, unknown> = {}
+  for (const prop in props) {
+    out[camelize(prop)] = props[prop]
+  }
+  return out
 }
