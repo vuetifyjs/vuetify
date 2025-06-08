@@ -51,7 +51,7 @@ export const makeVBadgeProps = propsFactory({
   ...makeTagProps(),
   ...makeThemeProps(),
   ...makeTransitionProps({ transition: 'scale-rotate-transition' }),
-  ...(makeDimensionProps() as Omit<ReturnType<typeof makeDimensionProps>, 'maxHeight' | 'maxWidth' | 'minHeight' | 'minWidth'>),
+  ...makeDimensionProps(),
 }, 'VBadge')
 
 export const VBadge = genericComponent<VBadgeSlots>()({
@@ -80,10 +80,7 @@ export const VBadge = genericComponent<VBadgeSlots>()({
       )
     })
 
-    const { dimensionStyles } = useDimension({
-      height: props.height,
-      width: props.width,
-    })
+    const { dimensionStyles } = useDimension(props)
 
     useRender(() => {
       const value = Number(props.content)
