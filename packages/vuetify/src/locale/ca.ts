@@ -20,6 +20,8 @@ export default {
       activateNone: 'Premi per treure la ordenació.',
       activateDescending: 'Premi per ordenar descendent.',
       activateAscending: 'Premi per ordenar ascendent.',
+      selectAll: 'Select all',
+      selectRow: 'Select row {0}',
     },
     sortBy: 'Ordenat per',
   },

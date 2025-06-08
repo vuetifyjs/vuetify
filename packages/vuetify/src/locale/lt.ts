@@ -20,6 +20,8 @@ export default {
       activateNone: 'Suaktyvinkite, jei norite rikiavimą pašalinti.',
       activateDescending: 'Suaktyvinkite, jei norite rikiuoti mažėjimo tvarka.',
       activateAscending: 'Suaktyvinkite, jei norite rikiuoti didėjimo tvarka.',
+      selectAll: 'Select all',
+      selectRow: 'Select row {0}',
     },
     sortBy: 'Rikiuoti pagal',
   },

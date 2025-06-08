@@ -20,6 +20,8 @@ export default {
       activateNone: 'Активувати, щоб видалити сортування.',
       activateDescending: 'Активувати, щоб відсортувати за спаданням.',
       activateAscending: 'Активувати, щоб відсортувати за зростанням.',
+      selectAll: 'Select all',
+      selectRow: 'Select row {0}',
     },
     sortBy: 'Відсортувати за',
   },

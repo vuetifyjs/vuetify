@@ -20,6 +20,8 @@ export default {
       activateNone: 'Rendezés törlése.',
       activateDescending: 'Aktiváld a csökkenő rendezésért.',
       activateAscending: 'Aktiváld a növekvő rendezésért.',
+      selectAll: 'Select all',
+      selectRow: 'Select row {0}',
     },
     sortBy: 'Rendezés',
   },

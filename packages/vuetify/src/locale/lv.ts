@@ -20,6 +20,8 @@ export default {
       activateNone: 'Aktivizēt, lai noņemtu kārtošanu.',
       activateDescending: 'Aktivizēt, lai sakārtotu dilstošā secībā.',
       activateAscending: 'Aktivizēt, lai sakārtotu augošā secībā.',
+      selectAll: 'Select all',
+      selectRow: 'Select row {0}',
     },
     sortBy: 'Kārtot pēc',
   },

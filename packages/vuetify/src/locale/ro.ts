@@ -20,6 +20,8 @@ export default {
       activateNone: 'Activați pentru a elimina sortarea.',
       activateDescending: 'Activați pentru a sorta descendent.',
       activateAscending: 'Activați pentru a sorta ascendent.',
+      selectAll: 'Select all',
+      selectRow: 'Select row {0}',
     },
     sortBy: 'Sortați după',
   },

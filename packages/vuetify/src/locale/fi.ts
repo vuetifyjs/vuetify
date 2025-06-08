@@ -20,6 +20,8 @@ export default {
       activateNone: 'Aktivoi lajittelun poistamiseksi.',
       activateDescending: 'Aktivoi laskevien laskevien lajittelemiseksi.',
       activateAscending: 'Aktivoi lajitella nouseva.',
+      selectAll: 'Select all',
+      selectRow: 'Select row {0}',
     },
     sortBy: 'Järjestä',
   },

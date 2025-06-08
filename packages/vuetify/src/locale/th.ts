@@ -20,6 +20,8 @@ export default {
       activateNone: 'กดเพื่อปิดการเรียงลำดับ',
       activateDescending: 'กดเพื่อเรียงจากมากไปน้อย',
       activateAscending: 'กดเพื่อเรียงจากน้อยไปมาก',
+      selectAll: 'Select all',
+      selectRow: 'Select row {0}',
     },
     sortBy: 'เรียงตาม',
   },

@@ -20,6 +20,8 @@ export default {
       activateNone: 'Kích hoạt để bỏ sắp xếp.',
       activateDescending: 'Kích hoạt để sắp xếp giảm dần.',
       activateAscending: 'Kích hoạt để sắp xếp tăng dần.',
+      selectAll: 'Select all',
+      selectRow: 'Select row {0}',
     },
     sortBy: 'Sắp xếp',
   },

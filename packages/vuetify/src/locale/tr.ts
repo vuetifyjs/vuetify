@@ -20,6 +20,8 @@ export default {
       activateNone: 'Sıralamayı kaldırmak için etkinleştir.',
       activateDescending: 'Z den A ya sıralamak için etkinleştir.',
       activateAscending: 'A dan Z ye sıralamak için etkinleştir.',
+      selectAll: 'Select all',
+      selectRow: 'Select row {0}',
     },
     sortBy: 'Sırala',
   },

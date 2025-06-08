@@ -20,6 +20,8 @@ export default {
       activateNone: 'Aktivirajte za odstranitev razvrščanja.',
       activateDescending: 'Aktivirajte za padajoče razvrščanje.',
       activateAscending: 'Aktivirajte za naraščajoče razvrščanje.',
+      selectAll: 'Select all',
+      selectRow: 'Select row {0}',
     },
     sortBy: 'Razvrsti po',
   },

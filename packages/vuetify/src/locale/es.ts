@@ -20,6 +20,8 @@ export default {
       activateNone: 'Pulse para quitar orden.',
       activateDescending: 'Pulse para ordenar de forma descendente.',
       activateAscending: 'Pulse para ordenar de forma ascendente.',
+      selectAll: 'Select all',
+      selectRow: 'Select row {0}',
     },
     sortBy: 'Ordenado por',
   },

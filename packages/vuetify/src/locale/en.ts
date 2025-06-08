@@ -20,6 +20,8 @@ export default {
       activateNone: 'Activate to remove sorting.',
       activateDescending: 'Activate to sort descending.',
       activateAscending: 'Activate to sort ascending.',
+      selectAll: 'Select all',
+      selectRow: 'Select row {0}',
     },
     sortBy: 'Sort by',
   },

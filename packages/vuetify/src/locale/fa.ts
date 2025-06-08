@@ -20,6 +20,8 @@ export default {
       activateNone: 'غیرفعال‌سازی مرتب‌سازی',
       activateDescending: 'غیرفعال‌سازی مرتب‌سازی نزولی',
       activateAscending: 'غیرفعال‌سازی مرتب‌سازی صعودی',
+      selectAll: 'Select all',
+      selectRow: 'Select row {0}',
     },
     sortBy: 'مرتب‌سازی براساس',
   },

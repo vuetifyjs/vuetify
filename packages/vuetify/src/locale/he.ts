@@ -20,6 +20,8 @@ export default {
       activateNone: 'הפעל להסרת המיון.',
       activateDescending: 'הפעל למיון יורד.',
       activateAscending: 'הפעל למיון עולה.',
+      selectAll: 'Select all',
+      selectRow: 'Select row {0}',
     },
     sortBy: 'סדר לפי',
   },

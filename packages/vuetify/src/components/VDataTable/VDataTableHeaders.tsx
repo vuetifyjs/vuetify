@@ -115,6 +115,19 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
       return item.order === 'asc' ? props.sortAscIcon : props.sortDescIcon
     }
 
+    function getSortedAriaLabel (column: InternalDataTableHeader) {
+      if (!isSorted(column)) {
+        return t('$vuetify.dataTable.ariaLabel.sortNone')
+      }
+      const item = sortBy.value.find(item => item.key === column.key)
+
+      if (!item) {
+        return t('$vuetify.dataTable.ariaLabel.sortAscending')
+      }
+
+      return item.order === 'asc' ? t('$vuetify.dataTable.ariaLabel.sortAscending') : t('$vuetify.dataTable.ariaLabel.sortDescending')
+    }
+
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.color)
 
     const { displayClasses, mobile } = useDisplay(props)
@@ -194,6 +207,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
                     modelValue={ allSelected.value }
                     indeterminate={ someSelected.value && !allSelected.value }
                     onUpdate:modelValue={ selectAll }
+                    aria-label={ t('$vuetify.dataTable.ariaLabel.selectAll') }
                   />
                 ))
               }
@@ -206,6 +220,8 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
                       key="icon"
                       class="v-data-table-header__sort-icon"
                       icon={ getSortIcon(column) }
+                      aria-label={ getSortedAriaLabel(column) }
+
                     />
                   )}
                   { props.multiSort && isSorted(column) && (
@@ -262,7 +278,6 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
               variant="underlined"
               onClick:clear={ () => sortBy.value = [] }
               appendIcon={ appendIcon.value }
-              onClick:append={ () => selectAll(!allSelected.value) }
             >
               {{
                 ...slots,

@@ -20,6 +20,8 @@ export default {
       activateNone: 'Aktivera för att ta bort sortering.',
       activateDescending: 'Aktivera för att sortera fallande.',
       activateAscending: 'Aktivera för att sortera stigande.',
+      selectAll: 'Select all',
+      selectRow: 'Select row {0}',
     },
     sortBy: 'Sortera efter',
   },

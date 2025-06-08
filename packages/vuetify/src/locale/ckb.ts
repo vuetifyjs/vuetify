@@ -20,6 +20,8 @@ export default {
       activateNone: 'چالاککردن بۆ لابردنی ڕیزکردن.',
       activateDescending: 'چالاککردن بۆ ڕیزکردنی سەربەرەوخوار.',
       activateAscending: 'چالاککردن بۆ ڕیزکردنی سەر بەرەو ژوور.',
+      selectAll: 'Select all',
+      selectRow: 'Select row {0}',
     },
     sortBy: 'ڕیزکردن بەپێی',
   },

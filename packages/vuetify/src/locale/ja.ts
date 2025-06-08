@@ -20,6 +20,8 @@ export default {
       activateNone: 'ソートを削除するには有効にしてください。',
       activateDescending: '降順の並び替えのためには有効にしてください。',
       activateAscending: '昇順のソートのためには有効にしてください。',
+      selectAll: 'Select all',
+      selectRow: 'Select row {0}',
     },
     sortBy: 'ソート方式',
   },

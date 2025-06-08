@@ -20,6 +20,8 @@ export default {
       activateNone: '點擊以移除排序方式。',
       activateDescending: '點擊以降序排列。',
       activateAscending: '點擊以移除排序方式。',
+      selectAll: 'Select all',
+      selectRow: 'Select row {0}',
     },
     sortBy: '排序方式',
   },

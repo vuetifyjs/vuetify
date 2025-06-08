@@ -20,6 +20,8 @@ export default {
       activateNone: 'Activer pour supprimer le tri.',
       activateDescending: 'Activer pour trier par ordre décroissant.',
       activateAscending: 'Activer pour trier par ordre croissant.',
+      selectAll: 'Select all',
+      selectRow: 'Select row {0}',
     },
     sortBy: 'Trier par',
   },

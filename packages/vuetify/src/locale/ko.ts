@@ -20,6 +20,8 @@ export default {
       activateNone: '정렬을 취소하려면 활성화하세요.',
       activateDescending: '내림차순 정렬을 위해 활성화하세요.',
       activateAscending: '오름차순 정렬을 위해 활성화하세요.',
+      selectAll: 'Select all',
+      selectRow: 'Select row {0}',
     },
     sortBy: '정렬 기준',
   },

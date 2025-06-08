@@ -20,6 +20,8 @@ export default {
       activateNone: 'Активирай за премахване на подредбата.',
       activateDescending: 'Активирай за подредба в намаляващ ред.',
       activateAscending: 'Активирай за подредба в нарастващ ред.',
+      selectAll: 'Select all',
+      selectRow: 'Select row {0}',
     },
     sortBy: 'Сортирай по',
   },

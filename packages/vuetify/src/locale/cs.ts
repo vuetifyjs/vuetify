@@ -20,6 +20,8 @@ export default {
       activateNone: 'Aktivováním vypnete řazení.',
       activateDescending: 'Aktivováním se bude řadit sestupně.',
       activateAscending: 'Aktivováním se bude řadit vzestupně.',
+      selectAll: 'Select all',
+      selectRow: 'Select row {0}',
     },
     sortBy: 'Řadit dle',
   },

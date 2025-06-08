@@ -20,6 +20,8 @@ export default {
       activateNone: 'Кликни да уклониш сортирање.',
       activateDescending: 'Кликни да сортираш опадајуће.',
       activateAscending: 'Кликни да сортираш растуће.',
+      selectAll: 'Select all',
+      selectRow: 'Select row {0}',
     },
     sortBy: 'Сортирај по',
   },

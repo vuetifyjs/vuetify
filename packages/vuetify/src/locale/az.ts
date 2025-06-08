@@ -20,6 +20,8 @@ export default {
       activateNone: 'Sıralamanı yığışdır.',
       activateDescending: 'Azalan sıra ilə düz.',
       activateAscending: 'Artan sıra ilə düz.',
+      selectAll: 'Select all',
+      selectRow: 'Select row {0}',
     },
     sortBy: 'Sırala',
   },

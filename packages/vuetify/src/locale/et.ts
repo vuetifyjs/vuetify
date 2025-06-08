@@ -20,6 +20,8 @@ export default {
       activateNone: 'Vajuta uuesti sorteerimise eemaldamiseks.',
       activateDescending: 'Vajuta uuesti, et sorteerida kahanevalt.',
       activateAscending: 'Vajuta kasvavalt sorteerimiseks.',
+      selectAll: 'Select all',
+      selectRow: 'Select row {0}',
     },
     sortBy: 'Sorteerimise alus',
   },

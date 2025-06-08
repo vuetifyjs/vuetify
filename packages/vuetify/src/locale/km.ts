@@ -20,6 +20,8 @@ export default {
       activateNone: 'ចុចដើម្បីដកតំណទំហំ។',
       activateDescending: 'ចុចដើម្បីតំណទំហំចុះរួម។',
       activateAscending: 'ចុចដើម្បីតំណទំហំឡើងរួម។',
+      selectAll: 'Select all',
+      selectRow: 'Select row {0}',
     },
     sortBy: 'តម្រៀបតាម',
   },

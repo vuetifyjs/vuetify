@@ -20,6 +20,8 @@ export default {
       activateNone: 'Ενεργοποιήστε για να καταργήσετε την ταξινόμηση.',
       activateDescending: 'Ενεργοποιήστε για φθίνουσα ταξινόμηση.',
       activateAscending: 'Ενεργοποιήστε για αύξουσα ταξινόμηση.',
+      selectAll: 'Select all',
+      selectRow: 'Select row {0}',
     },
     sortBy: 'Ταξινόμηση κατά',
   },

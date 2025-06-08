@@ -20,6 +20,8 @@ export default {
       activateNone: `Attiva per rimuovere l'ordinamento.`,
       activateDescending: 'Attiva per ordinare in ordine decrescente.',
       activateAscending: 'Attiva per ordinare in ordine crescente.',
+      selectAll: 'Select all',
+      selectRow: 'Select row {0}',
     },
     sortBy: 'Ordina per',
   },

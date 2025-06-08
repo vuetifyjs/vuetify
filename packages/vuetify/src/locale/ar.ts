@@ -20,6 +20,8 @@ export default {
       activateNone: 'نشط لإزالة الترتيب.',
       activateDescending: 'نشط للترتيب تنازلياً.',
       activateAscending: 'نشط للترتيب تصاعدياً.',
+      selectAll: 'Select all',
+      selectRow: 'Select row {0}',
     },
     sortBy: 'رتب حسب',
   },

@@ -20,6 +20,8 @@ export default {
       activateNone: 'Активируйте, чтобы убрать сортировку.',
       activateDescending: 'Активируйте для упорядочивания убыванию.',
       activateAscending: 'Активируйте для упорядочивания по возрастанию.',
+      selectAll: 'Select all',
+      selectRow: 'Select row {0}',
     },
     sortBy: 'Сортировать по',
   },

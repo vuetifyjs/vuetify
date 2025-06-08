@@ -20,6 +20,8 @@ export default {
       activateNone: 'Aktifkan untuk menghapus penyortiran.',
       activateDescending: 'Aktifkan untuk mengurutkan kebawah.',
       activateAscending: 'Aktifkan untuk mengurutkan keatas.',
+      selectAll: 'Select all',
+      selectRow: 'Select row {0}',
     },
     sortBy: 'Urutkan berdasar',
   },
