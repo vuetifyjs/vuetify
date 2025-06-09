@@ -143,6 +143,12 @@ export const VAutocomplete = genericComponent<new <
     const form = useForm(props)
     const { filteredItems, getMatches } = useFilter(props, items, () => isPristine.value ? '' : search.value)
 
+    const iconColor = computed(() => {
+      if (props.glow && !isFocused.value) return undefined
+
+      return props.glow === true ? props.color : vTextFieldRef.value?.fieldIconColor
+    })
+
     const displayItems = computed(() => {
       if (props.hideSelected) {
         return filteredItems.value.filter(filteredItem => !model.value.some(s => s.value === filteredItem.value))
@@ -628,7 +634,7 @@ export const VAutocomplete = genericComponent<new <
                 { props.menuIcon ? (
                   <VIcon
                     class="v-autocomplete__menu-icon"
-                    color={ vTextFieldRef.value?.fieldIconColor }
+                    color={ iconColor.value }
                     icon={ props.menuIcon }
                     onMousedown={ onMousedownMenuIcon }
                     onClick={ noop }

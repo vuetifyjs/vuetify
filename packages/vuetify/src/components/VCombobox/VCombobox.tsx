@@ -187,6 +187,11 @@ export const VCombobox = genericComponent<new <
       }
       return filteredItems.value
     })
+    const iconColor = computed(() => {
+      if (props.glow && !isFocused.value) return undefined
+
+      return props.glow === true ? props.color : vTextFieldRef.value?.fieldIconColor
+    })
 
     const menuDisabled = computed(() => (
       (props.hideNoData && !displayItems.value.length) ||
@@ -673,7 +678,7 @@ export const VCombobox = genericComponent<new <
                 { (!props.hideNoData || props.items.length) && props.menuIcon ? (
                   <VIcon
                     class="v-combobox__menu-icon"
-                    color={ vTextFieldRef.value?.fieldIconColor }
+                    color={ iconColor.value }
                     icon={ props.menuIcon }
                     onMousedown={ onMousedownMenuIcon }
                     onClick={ noop }
