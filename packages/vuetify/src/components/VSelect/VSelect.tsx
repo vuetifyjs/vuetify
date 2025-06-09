@@ -189,12 +189,6 @@ export const VSelect = genericComponent<new <
       },
     })
 
-    const iconColor = computed(() => {
-      if (props.glow && !isFocused.value) return undefined
-
-      return props.glow === true ? props.color : vTextFieldRef.value?.fieldIconColor
-    })
-
     const label = toRef(() => menu.value ? props.closeText : props.openText)
 
     const computedMenuProps = computed(() => {
@@ -591,7 +585,7 @@ export const VSelect = genericComponent<new <
                 { props.menuIcon ? (
                   <VIcon
                     class="v-select__menu-icon"
-                    color={ iconColor.value }
+                    color={ vTextFieldRef.value?.fieldIconColor }
                     icon={ props.menuIcon }
                   />
                 ) : undefined }
