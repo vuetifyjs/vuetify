@@ -5,7 +5,7 @@ import './VTimePickerClock.sass'
 import { useBackgroundColor, useTextColor } from '@/composables/color'
 
 // Utilities
-import { computed, ref, watch } from 'vue'
+import { computed, ref, shallowRef, watch } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -66,7 +66,7 @@ export const VTimePickerClock = genericComponent()({
     const isDragging = ref(false)
     const valueOnMouseDown = ref(null as number | null)
     const valueOnMouseUp = ref(null as number | null)
-    const wheelTimeout = shallowRef(-1)
+    const wheelTimeout = shallowRef<NodeJS.Timeout>()
 
     const { textColorClasses, textColorStyles } = useTextColor(() => props.color)
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.color)
