@@ -109,7 +109,7 @@ export const VTooltip = genericComponent<OverlaySlots>()({
           persistent
           role="tooltip"
           activatorProps={ activatorProps.value }
-          aria-label={ props.text}
+          aria-label={ props.text }
           _disableGlobalStack
           { ...scopeId }
         >
