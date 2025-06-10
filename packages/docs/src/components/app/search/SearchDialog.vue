@@ -137,11 +137,11 @@
     if (!Array.isArray(value)) {
       return []
     }
-    return value
+    return value.filter(Boolean)
   }
 
   const searches = shallowRef(getLocalStorage('searches'))
-  const favorites = shallowRef(getLocalStorage('favorite'))
+  const favorites = shallowRef(getLocalStorage('favorites'))
 
   const locale = 'en'
 
@@ -235,7 +235,9 @@
     source.splice(index, 1)
 
     const target = to.value.slice(0, 6)
-    target.unshift(item)
+    if (item) {
+      target.unshift(item)
+    }
 
     from.value = source
     to.value = target

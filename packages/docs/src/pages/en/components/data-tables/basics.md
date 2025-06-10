@@ -214,6 +214,14 @@ The `loading` slot allows you to customize your table's display state when fetch
 
 <ExamplesExample file="v-data-table/slot-loading" />
 
+### Misc
+
+#### Select All
+
+The example below shows how to use the `@keydown` event to quickly select all rows in the data table using the `Ctrl+A` or `Cmd+A` keyboard shortcut. To begin using the shortcut, click anywhere inside the table first.
+
+<ExamplesExample file="v-data-table/misc-select-all" />
+
 ## Examples
 
 The following are a collection of examples that demonstrate more advanced and real world use of the `v-data-table` component.

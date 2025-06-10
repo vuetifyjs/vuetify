@@ -2,6 +2,7 @@
 import { isProxy, isRef, ref } from 'vue'
 import {
   arrayDiff,
+  camelizeProps,
   convertToUnit,
   deepEqual,
   defer,
@@ -385,6 +386,24 @@ describe('helpers', () => {
       expect(extractNumber(' -6.67 USD', 2)).toBe('-6.67')
       expect(extractNumber('($9,000.00)', 2)).toBe('9000.00')
       expect(extractNumber(' 23 567.20 ', 2)).toBe('23567.20')
+    })
+  })
+
+  describe('camelizeProps', () => {
+    it('should convert kebab-case props to camelCase', () => {
+      const props = {
+        'background-color': 'red',
+        fontSize: '16px',
+        'border-radius': '4px',
+      }
+
+      const result = camelizeProps(props)
+
+      expect(result).toEqual({
+        backgroundColor: 'red',
+        fontSize: '16px',
+        borderRadius: '4px',
+      })
     })
   })
 })

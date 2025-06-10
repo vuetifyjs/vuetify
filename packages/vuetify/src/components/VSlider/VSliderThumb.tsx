@@ -193,6 +193,7 @@ export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
               <div
                 class={[
                   'v-slider-thumb__label',
+                  textColorClasses.value,
                 ]}
               >
                 <div>

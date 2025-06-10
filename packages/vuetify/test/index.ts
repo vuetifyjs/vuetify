@@ -74,3 +74,10 @@ export function render<C> (
 
   return _render(component, mountOptions)
 }
+
+export function unfill (o: Record<string, any>) {
+  return Object.keys(o).reduce((result, key) => {
+    result[key] = typeof o[key] === 'object' ? unfill(o[key]) : typeof o[key]
+    return result
+  }, {} as Record<string, any>)
+}
