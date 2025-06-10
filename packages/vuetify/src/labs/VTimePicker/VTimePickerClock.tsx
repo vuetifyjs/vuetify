@@ -66,6 +66,7 @@ export const VTimePickerClock = genericComponent()({
     const isDragging = ref(false)
     const valueOnMouseDown = ref(null as number | null)
     const valueOnMouseUp = ref(null as number | null)
+    const wheelTimeout = ref<NodeJS.Timeout | undefined>(undefined)
 
     const { textColorClasses, textColorStyles } = useTextColor(() => props.color)
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.color)
@@ -115,6 +116,8 @@ export const VTimePickerClock = genericComponent()({
       if (value !== props.displayedValue) {
         update(value)
       }
+      clearTimeout(wheelTimeout.value)
+      wheelTimeout.value = setTimeout(() => emit('change', value), 1000)
     }
 
     function isInner (value: number) {
