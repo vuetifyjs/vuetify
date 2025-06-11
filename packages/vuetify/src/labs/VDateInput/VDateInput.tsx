@@ -6,9 +6,10 @@ import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextFi
 
 // Composables
 import { useDate } from '@/composables/date'
+import { createDateRange } from '@/composables/date/date'
 import { makeDateFormatProps, useDateFormat } from '@/composables/dateFormat'
 import { makeDisplayProps, useDisplay } from '@/composables/display'
-import { makeFocusProps, useFocus } from '@/composables/focus'
+import { makeFocusProps } from '@/composables/focus'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
@@ -71,6 +72,7 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
   emits: {
     save: (value: string) => true,
     cancel: () => true,
+    'update:focused': (val: boolean) => true,
     'update:modelValue': (val: string) => true,
     'update:menu': (val: boolean) => true,
   },
@@ -80,7 +82,6 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
     const adapter = useDate()
     const { isValid, parseDate, formatDate, parserFormat } = useDateFormat(props, currentLocale)
     const { mobile } = useDisplay(props)
-    const { isFocused, focus, blur } = useFocus(props)
 
     const emptyModelValue = () => props.multiple ? [] : null
 
@@ -94,6 +95,7 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
 
     const menu = useProxiedModel(props, 'menu')
     const isEditingInput = shallowRef(false)
+    const isFocused = shallowRef(props.focused)
     const vTextFieldRef = ref<VTextField>()
     const disabledActions = ref<typeof VConfirmEdit['props']['disabled']>(['save'])
 
@@ -195,8 +197,6 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
         onUserInput(e.target as HTMLInputElement)
       }
 
-      blur()
-
       // When in mobile mode and editing is done (due to keyboard dismissal), close the menu
       if (mobile.value && isEditingInput.value && !isFocused.value) {
         menu.value = false
@@ -216,7 +216,7 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
         if (parts.every(isValid)) {
           if (props.multiple === 'range') {
             const [start, stop] = parts.map(parseDate).toSorted((a, b) => adapter.isAfter(a, b) ? 1 : -1)
-            model.value = adapter.createDateRange(start, stop)
+            model.value = createDateRange(adapter, start, stop)
           } else {
             model.value = parts.map(parseDate)
           }
@@ -241,12 +241,12 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
           readonly={ isReadonly.value }
           onKeydown={ isInteractive.value ? onKeydown : undefined }
           focused={ menu.value || isFocused.value }
-          onFocus={ focus }
           onBlur={ onBlur }
           validationValue={ model.value }
           onClick:control={ isInteractive.value ? onClick : undefined }
           onClick:prepend={ isInteractive.value ? onClick : undefined }
           onUpdate:modelValue={ onUpdateDisplayModel }
+          onUpdate:focused={ event => isFocused.value = event }
         >
           {{
             ...slots,

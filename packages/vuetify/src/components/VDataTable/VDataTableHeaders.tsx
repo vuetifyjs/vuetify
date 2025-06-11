@@ -104,7 +104,11 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
         top: (props.sticky || props.fixedHeader) ? `calc(var(--v-table-header-height) * ${y})` : undefined,
       }
     }
-
+    function handleEnterKeyPress (event: KeyboardEvent, column: InternalDataTableHeader) {
+      if (event.key === 'Enter' && !props.disableSort) {
+        toggleSort(column)
+      }
+    }
     function getSortIcon (column: InternalDataTableHeader) {
       const item = sortBy.value.find(item => item.key === column.key)
 
@@ -168,6 +172,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
           lastFixed={ column.lastFixed }
           noPadding={ noPadding }
           { ...headerProps }
+          onKeydown={ (event: KeyboardEvent) => column.sortable && handleEnterKeyPress(event, column) }
         >
           {{
             default: () => {
