@@ -1,3 +1,30 @@
+/**
+ * VCommandPalette Component
+ *
+ * A comprehensive command palette implementation that provides keyboard-driven navigation
+ * for applications. This component combines search functionality, hierarchical navigation,
+ * keyboard shortcuts, and accessibility features into a unified interface.
+ *
+ * Key Features:
+ * - Fuzzy search with keyword support
+ * - Hierarchical navigation (groups, parents, children)
+ * - Keyboard navigation with arrow keys, enter, escape, backspace
+ * - Individual item hotkeys that work globally when palette is open
+ * - Full accessibility compliance (ARIA, screen reader support)
+ * - Customizable layouts via slots and custom components
+ * - Focus restoration for proper accessibility
+ * - Transition support following Vuetify conventions
+ *
+ * Architecture:
+ * - VCommandPalette: Main container and dialog management
+ * - VCommandPaletteContent: Core logic and state management
+ * - VCommandPaletteList: Default list rendering with complex item flattening
+ * - VCommandPaletteSearch: Search input with accessibility
+ * - VCommandPaletteInstructions: Contextual keyboard shortcuts
+ * - useCommandPaletteNavigation: Keyboard navigation logic
+ * - useCommandPaletteContext: Custom layout support
+ */
+
 // Styles
 import '@/labs/VCommandPalette/VCommandPalette.scss'
 
@@ -37,6 +64,9 @@ type FilterFunction = (value: string, query: string, item?: InternalItem) => boo
 /**
  * Shared function to check if an item matches a search query.
  * Compares the lowercased title, subtitle, and keywords against the search term.
+ *
+ * This function is used by both the main filter and the group children filter
+ * to ensure consistent matching behavior across all item types.
  */
 function itemMatches (testItem: any, searchLower: string): boolean {
   if (!testItem) return false
@@ -63,18 +93,42 @@ function itemMatches (testItem: any, searchLower: string): boolean {
   return false
 }
 
+/**
+ * Props factory for VCommandPaletteContent
+ * Defines the internal content component's configuration options
+ */
 const makeVCommandPaletteContentProps = propsFactory({
+  // Whether to close the palette when an item is executed
   closeOnExecute: {
     type: Boolean,
     default: true,
   },
+  // Title displayed at the top of the palette
   title: String,
+  // Placeholder text for the search input
   placeholder: String,
+  // Whether the search input should have a clear button
   clearableSearch: Boolean,
+  // Include standard item transformation props
   ...makeItemsProps({ itemTitle: 'title' }),
+  // Include filter props with support for title, subtitle, and keywords
   ...makeFilterProps({ filterKeys: ['title', 'subtitle', 'keywords'] }),
 }, 'VCommandPaletteContent')
 
+/**
+ * VCommandPaletteContent Component
+ *
+ * The core logic component that handles:
+ * - Search functionality and filtering
+ * - Navigation state management
+ * - Item transformation and rendering
+ * - Keyboard event handling
+ * - Hierarchical navigation (drilling into parents/groups)
+ *
+ * This component is separated from the main VCommandPalette to allow
+ * for cleaner separation of concerns between dialog management and
+ * command palette functionality.
+ */
 const VCommandPaletteContent = genericComponent<VCommandPaletteSlots>()({
   name: 'VCommandPaletteContent',
   props: makeVCommandPaletteContentProps(),
@@ -84,10 +138,12 @@ const VCommandPaletteContent = genericComponent<VCommandPaletteSlots>()({
   },
   setup (props, { emit, slots }) {
     const { t } = useLocale()
+
+    // Navigation state management
     interface NavigationFrame { items: any[], selected: number }
-    const navigationStack = ref<NavigationFrame[]>([])
-    const search = shallowRef('')
-    const currentItems = ref<any[]>([])
+    const navigationStack = ref<NavigationFrame[]>([]) // History of navigation levels
+    const search = shallowRef('') // Current search query
+    const currentItems = ref<any[]>([]) // Current level items (before filtering)
 
     // Initialize currentItems with props.items
     watch(() => props.items, newItems => {
@@ -96,10 +152,12 @@ const VCommandPaletteContent = genericComponent<VCommandPaletteSlots>()({
       }
     }, { immediate: true })
 
+    // Computed property for current raw actions (before transformation)
     const currentRawActions = computed(() => {
       return currentItems.value || []
     })
 
+    // Item transformation configuration
     const itemTransformationProps = computed(() => ({
       itemTitle: props.itemTitle,
       itemValue: props.itemValue,
@@ -109,49 +167,72 @@ const VCommandPaletteContent = genericComponent<VCommandPaletteSlots>()({
       valueComparator: props.valueComparator,
     }))
 
+    /**
+     * Custom filter function for command palette items
+     * Handles complex filtering logic for different item types:
+     * - Groups: Match if group title matches OR any child matches
+     * - Parents: Match if parent title matches OR any child matches
+     * - Regular items: Match based on title, subtitle, and keywords
+     */
     const commandPaletteFilter: FilterFunction = (value: string, query: string, item?: InternalItem) => {
       if (!query || !query.trim()) return true
       if (!item?.raw) return false
 
       const searchLower = query.trim().toLowerCase()
       const rawItem = item.raw
+
       if (isGroupDefinition(rawItem)) {
+        // For groups, check if group itself matches or any child matches
         const groupMatches = itemMatches(rawItem, searchLower)
         const children = rawItem.children || []
         const hasMatchingChildren = children.some((child: any) => itemMatches(child, searchLower))
         return groupMatches || hasMatchingChildren
       } else if (isParentDefinition(rawItem)) {
+        // For parents, check if parent itself matches or any child matches
         const parentMatches = itemMatches(rawItem, searchLower)
         const children = rawItem.children || []
         const hasMatchingChildren = children.some((child: any) => itemMatches(child, searchLower))
         return parentMatches || hasMatchingChildren
       } else {
+        // For regular items, use standard matching
         return itemMatches(rawItem, searchLower)
       }
     }
 
+    /**
+     * Transforms filtered items to show only matching children within groups
+     * When searching, groups should only show children that match the search,
+     * not all children. This provides a more focused search experience.
+     */
     const transformFilteredItems = (items: any[]) => {
       if (!search.value || !search.value.trim()) return items
       const searchLower = search.value.trim().toLowerCase()
+
       return items.map(item => {
         const rawItem = item.raw
         if (!rawItem) return item
+
         if (isGroupDefinition(rawItem)) {
           const groupMatches = itemMatches(rawItem, searchLower)
           const children = rawItem.children || []
+
+          // If group title matches, show all children; otherwise, show only matching children
           const filteredChildren = groupMatches
             ? children
             : children.filter((child: any) => itemMatches(child, searchLower))
+
           return { ...item, raw: { ...rawItem, children: filteredChildren } }
         }
         return item
       })
     }
 
+    // Transform raw items into VuetifyListItem format
     const transformedItems = computed(() => (
       transformItems(itemTransformationProps.value, currentRawActions.value)
     ))
 
+    // Apply filtering to transformed items
     const { filteredItems } = useFilter(
       {
         customFilter: (value: string, query: string, item?: InternalItem) => {
@@ -169,6 +250,7 @@ const VCommandPaletteContent = genericComponent<VCommandPaletteSlots>()({
       () => search.value || '',
     )
 
+    // Final filtered actions with group children filtering applied
     const filteredActions = computed(() => {
       return transformFilteredItems(filteredItems.value)
     })
@@ -176,6 +258,13 @@ const VCommandPaletteContent = genericComponent<VCommandPaletteSlots>()({
     // Forward declare selectedIndex to avoid hoisting issues
     let selectedIndex: Ref<number>
 
+    /**
+     * Handles item clicks from the list component
+     * Manages navigation logic for different item types:
+     * - Items with children: Navigate into the children
+     * - Items with handlers: Execute the handler
+     * - Items with navigation: Let the browser/router handle it
+     */
     async function onItemClickFromList (item: VuetifyListItem, event: MouseEvent | KeyboardEvent) {
       if (!item || !item.raw) return
 
@@ -213,6 +302,9 @@ const VCommandPaletteContent = genericComponent<VCommandPaletteSlots>()({
       }
     }
 
+    /**
+     * Handles close events from child components
+     */
     function onClose () {
       emit('close')
     }
@@ -240,12 +332,14 @@ const VCommandPaletteContent = genericComponent<VCommandPaletteSlots>()({
       navigationMode: ref('list'),
     })
 
+    // Computed slot scope for default slot (custom layouts)
     const defaultSlotScope = computed<VCommandPaletteDefaultSlotScope>(() => ({
       items: filteredActions.value,
       rootProps: context.rootProps.value,
       getItemProps: context.getItemProps,
     }))
 
+    // Reset navigation state when items change
     watch(() => props.items, () => {
       navigationStack.value = []
       search.value = ''
@@ -291,6 +385,7 @@ const VCommandPaletteContent = genericComponent<VCommandPaletteSlots>()({
       processItems(allItems)
     })
 
+    // Computed slot scopes for header and footer
     const headerSlotScope = computed<VCommandPaletteHeaderSlotScope>(() => ({
       search,
       navigationStack,
@@ -321,8 +416,8 @@ const VCommandPaletteContent = genericComponent<VCommandPaletteSlots>()({
                   v-model={ search.value }
                   placeholder={ props.placeholder }
                   clearable={ props.clearableSearch }
-                                  aria-label="Search commands"
-                aria-describedby="command-palette-instructions"
+                  aria-label="Search commands"
+                  aria-describedby="command-palette-instructions"
                 />
               </>
             )}
@@ -389,7 +484,7 @@ const VCommandPaletteContent = genericComponent<VCommandPaletteSlots>()({
   },
 })
 
-// VCommandPalette's own slot scope/type definitions
+// VCommandPalette's slot scope and type definitions
 export type VCommandPaletteItemRenderScope = {
   item: any
   props: Record<string, any>
@@ -431,30 +526,42 @@ export type VCommandPaletteFooterSlotScope = {
   navigationStack: Ref<any[]>
 }
 
+/**
+ * Props factory for the main VCommandPalette component
+ * Combines props from multiple concerns: dialog, theming, filtering, etc.
+ */
 export const makeVCommandPaletteProps = propsFactory({
+  // Global hotkey to open/close the palette (e.g., "ctrl+k")
   hotkey: String,
+  // Title displayed at the top of the palette
   title: {
     type: String,
   },
+  // Placeholder text for the search input
   placeholder: {
     type: String,
   },
+  // Whether to close the palette when an item is executed
   closeOnExecute: {
     type: Boolean,
     default: true,
   },
+  // Event callbacks for dialog lifecycle
   afterEnter: EventProp<[]>(),
   afterLeave: EventProp<[]>(),
+  // Whether the search input should have a clear button
   clearableSearch: {
     type: Boolean,
     default: true,
   },
+  // Standard Vuetify component props
   ...makeComponentProps(),
   ...makeDensityProps(),
   ...makeFilterProps({ filterKeys: ['title', 'subtitle', 'keywords'] }),
   ...makeItemsProps({ itemTitle: 'title' }),
   ...makeTransitionProps({ transition: 'dialog-transition' }),
   ...makeThemeProps(),
+  // Dialog-specific props with command palette defaults
   ...makeVDialogProps({
     maxHeight: 450,
     maxWidth: 720,
@@ -463,6 +570,14 @@ export const makeVCommandPaletteProps = propsFactory({
   }),
 }, 'VCommandPalette')
 
+/**
+ * VCommandPalette Component
+ *
+ * The main command palette component that provides a keyboard-driven interface
+ * for application commands. This component manages the dialog state, focus
+ * restoration, and global hotkey registration while delegating the core
+ * functionality to VCommandPaletteContent.
+ */
 export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
   name: 'VCommandPalette',
 
@@ -476,6 +591,7 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
   },
 
   setup (props, { emit, slots }) {
+    // Dialog state management
     const isActive = useProxiedModel(props, 'modelValue')
     const { themeClasses } = provideTheme(props)
     const { densityClasses } = useDensity(props)
@@ -486,10 +602,12 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
     // Focus restoration for accessibility compliance (WCAG 2.1 Level A)
     const previouslyFocusedElement = shallowRef<HTMLElement | null>(null)
 
+    // Register global hotkey for opening/closing the palette
     useHotkey(toRef(props, 'hotkey'), () => {
       isActive.value = !isActive.value
     })
 
+    // Register escape key to close the palette (respects persistent prop)
     useHotkey('escape', () => {
       if (isActive.value && !props.persistent) {
         isActive.value = false
@@ -515,25 +633,38 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
     // This ensures hotkeys are only active when the dialog is open and automatically
     // cleaned up when the dialog closes (component unmounts)
 
+    /**
+     * Handles close events from the content component
+     */
     function onClose () {
       isActive.value = false
     }
 
+    /**
+     * Handles item click events and forwards them to parent
+     */
     function onClickItem (item: any, event: MouseEvent | KeyboardEvent) {
       emit('click:item', item, event)
     }
 
+    /**
+     * Handles dialog enter transition completion
+     */
     function onAfterEnter () {
       emit('afterEnter')
     }
 
+    /**
+     * Handles dialog leave transition completion
+     */
     function onAfterLeave () {
       emit('afterLeave')
     }
 
     useRender(() => {
+      // Extract dialog-specific props
       const dialogProps = VDialog.filterProps(props)
-      // Make contentProps reactive by computing it inside useRender
+      // Extract content-specific props
       const contentProps = VCommandPaletteContent.filterProps(props)
 
       // Pass transition prop directly to VDialog (follows VOverlay/VDialog conventions)

@@ -1,3 +1,18 @@
+/**
+ * VHotkey Component
+ *
+ * Purpose: Renders keyboard shortcuts in a visually consistent and accessible way.
+ * This component handles the complex logic of displaying keyboard combinations
+ * across different platforms (Mac vs PC) and display modes (icons, symbols, text).
+ *
+ * Why it exists:
+ * - Provides consistent visual representation of keyboard shortcuts
+ * - Handles platform-specific key differences (Cmd vs Ctrl, Option vs Alt)
+ * - Supports multiple display modes for different design needs
+ * - Encapsulates complex key parsing and rendering logic
+ * - Used throughout the command palette for instruction display
+ */
+
 /* eslint-disable no-fallthrough */
 // Styles
 import './VHotkey.scss'
@@ -16,66 +31,90 @@ import { genericComponent, mergeDeep, propsFactory, useRender } from '@/util'
 import type { PropType } from 'vue'
 import type { IconValue } from '@/composables/icons'
 
+// Display mode types for different visual representations
 type DisplayMode = 'icon' | 'symbol' | 'text'
 
+// Key display tuple: [mode, content] where content is string or IconValue
 type KeyDisplay = [Exclude<DisplayMode, 'icon'>, string] | [Extract<DisplayMode, 'icon'>, IconValue]
+
+// Key mapping function type
 type KeyMap = Record<string, (mode: DisplayMode, isMac: boolean) => KeyDisplay>
 
+/**
+ * Helper function for Cmd/Meta key display across platforms
+ * Handles the complex logic of showing Command key on Mac vs Ctrl on PC
+ */
 function cmdAndMeta (mode: DisplayMode, isMac: boolean): KeyDisplay {
   switch (mode) {
     case 'symbol':
-      if (isMac) return ['symbol', '⌘']
+      if (isMac) return ['symbol', '⌘'] // Mac Command symbol
     case 'icon':
-      // eslint-disable-next-line max-len
-      if (isMac) return ['icon', ['M6 2a4 4 0 0 1 4 4v2h4V6a4 4 0 0 1 4-4a4 4 0 0 1 4 4a4 4 0 0 1-4 4h-2v4h2a4 4 0 0 1 4 4a4 4 0 0 1-4 4a4 4 0 0 1-4-4v-2h-4v2a4 4 0 0 1-4 4a4 4 0 0 1-4-4a4 4 0 0 1 4-4h2v-4H6a4 4 0 0 1-4-4a4 4 0 0 1 4-4m10 16a2 2 0 0 0 2 2a2 2 0 0 0 2-2a2 2 0 0 0-2-2h-2zm-2-8h-4v4h4zm-8 6a2 2 0 0 0-2 2a2 2 0 0 0 2 2a2 2 0 0 0 2-2v-2zM8 6a2 2 0 0 0-2-2a2 2 0 0 0-2 2a2 2 0 0 0 2 2h2zm10 2a2 2 0 0 0 2-2a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2z']]
+      // Command key icon (Mac-specific design)
+      if (isMac) {
+        return ['icon', [
+          // eslint-disable-next-line max-len
+          'M6 2a4 4 0 0 1 4 4v2h4V6a4 4 0 0 1 4-4a4 4 0 0 1 4 4a4 4 0 0 1-4 4h-2v4h2a4 4 0 0 1 4 4a4 4 0 0 1-4 4a4 4 0 0 1-4-4v-2h-4v2a4 4 0 0 1-4 4a4 4 0 0 1-4-4a4 4 0 0 1 4-4h2v-4H6a4 4 0 0 1-4-4a4 4 0 0 1 4-4m10 16a2 2 0 0 0 2 2a2 2 0 0 0 2-2a2 2 0 0 0-2-2h-2zm-2-8h-4v4h4zm-8 6a2 2 0 0 0-2 2a2 2 0 0 0 2 2a2 2 0 0 0 2-2v-2zM8 6a2 2 0 0 0-2-2a2 2 0 0 0-2 6a2 2 0 0 0 2 2h2zm10 2a2 2 0 0 0 2-2a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2z',
+        ]]
+      }
     default:
+      // Text fallback
       return ['text', isMac ? 'Command' : 'Ctrl']
   }
 }
 
+/**
+ * Comprehensive key mapping for different modifier and special keys
+ * Each key function returns the appropriate display based on mode and platform
+ */
 const keyMap = {
+  // Control key (different symbol on Mac)
   ctrl (mode, isMac) {
     switch (mode) {
       case 'symbol':
-        if (isMac) return ['symbol', '⌃']
+        if (isMac) return ['symbol', '⌃'] // Mac Control symbol
       case 'icon':
         if (isMac) return ['icon', ['m19.78 11.78l-1.42 1.41L12 6.83l-6.36 6.36l-1.42-1.41L12 4z']]
       default:
         return ['text', 'Ctrl']
     }
   },
+  // Meta and Cmd both use the same logic
   meta: cmdAndMeta,
   cmd: cmdAndMeta,
+  // Shift key
   shift (mode) {
     switch (mode) {
       case 'symbol':
-        return ['symbol', '⇧']
+        return ['symbol', '⇧'] // Shift symbol
       case 'icon':
         return ['icon', ['M15 18v-6h2.17L12 6.83L6.83 12H9v6zM12 4l10 10h-5v6H7v-6H2z']]
       default:
         return ['text', 'Shift']
     }
   },
+  // Alt/Option key (different names on Mac vs PC)
   alt (mode, isMac) {
     switch (mode) {
       case 'symbol':
-        if (isMac) return ['symbol', '⌥']
+        if (isMac) return ['symbol', '⌥'] // Mac Option symbol
       case 'icon':
         return ['icon', ['M3 4h6.11l7.04 14H21v2h-6.12L7.84 6H3zm11 0h7v2h-7z']]
       default:
         return ['text', isMac ? 'Option' : 'Alt']
     }
   },
+  // Enter/Return key
   enter (mode) {
     switch (mode) {
       case 'symbol':
-        return ['symbol', '↵']
+        return ['symbol', '↵'] // Return symbol
       case 'icon':
         return ['icon', ['M19 7v4H5.83l3.58-3.59L8 6l-6 6l6 6l1.41-1.42L5.83 13H21V7z']]
       default:
         return ['text', 'Enter']
     }
   },
+  // Arrow keys
   arrowup (mode) {
     switch (mode) {
       case 'symbol':
@@ -116,17 +155,20 @@ const keyMap = {
         return ['text', 'Right Arrow']
     }
   },
+  // Backspace key
   backspace (mode) {
     switch (mode) {
       case 'symbol':
-        return ['symbol', '⌫']
+        return ['symbol', '⌫'] // Backspace symbol
       case 'icon':
+        // Complex backspace icon path
         // eslint-disable-next-line max-len
         return ['icon', ['M19 15.59L17.59 17L14 13.41L10.41 17L9 15.59L12.59 12L9 8.41L10.41 7L14 10.59L17.59 7L19 8.41L15.41 12zM22 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H7c-.69 0-1.23-.36-1.59-.89L0 12l5.41-8.12C5.77 3.35 6.31 3 7 3zm0 2H7l-4.72 7L7 19h15z']]
       default:
         return ['text', 'Backspace']
     }
   },
+  // Escape key (simple text only)
   escape () {
     return ['text', 'Esc']
   },
@@ -134,21 +176,26 @@ const keyMap = {
 
 /**
  * Props factory for VHotkey component
- * @param keys - String representing keyboard shortcuts (e.g., "ctrl+k", "meta+shift+p")
- * @param displayMode - How to display keys: 'symbol' uses special characters (⌘, ⌃), 'text' uses words
  */
 export const makeVHotkeyProps = propsFactory({
+  // String representing keyboard shortcuts (e.g., "ctrl+k", "meta+shift+p")
   keys: String,
+  // How to display keys: 'symbol' uses special characters (⌘, ⌃), 'icon' uses SVG icons, 'text' uses words
   displayMode: {
     type: String as PropType<DisplayMode>,
     default: 'icon',
   },
+  // Custom key mapping (allows overriding default key representations)
   keyMap: {
     type: Object as PropType<KeyMap>,
     default: keyMap,
   },
 }, 'VHotkey')
 
+/**
+ * Delineator class for handling key combination separators
+ * Distinguishes between 'and' (+) and 'then' (-) relationships
+ */
 class Delineator {
   val
   constructor (delineator: string) {
@@ -161,6 +208,7 @@ class Delineator {
   }
 }
 
+// Type guards for parsing logic
 function isDelineator (value: any): value is Delineator {
   return value instanceof Delineator
 }
@@ -168,17 +216,30 @@ function isString (value: any): value is string {
   return typeof value === 'string'
 }
 
+/**
+ * Applies the appropriate display mode to a key based on the key map
+ * Handles platform-specific differences and fallbacks
+ */
 function applyDisplayModeToKey (keyMap: KeyMap, mode: DisplayMode, key: string, isMac: boolean): KeyDisplay {
-  // normalize keys
+  // Normalize keys to lowercase for consistent lookup
   const lowerKey = key.toLowerCase()
 
+  // Check if we have a specific mapping for this key
   if (lowerKey in keyMap) {
     return keyMap[lowerKey](mode, isMac)
   }
 
+  // Fallback to uppercase text for unknown keys
   return ['text', key.toUpperCase()]
 }
 
+/**
+ * VHotkey Component
+ *
+ * Renders keyboard shortcuts with proper styling and platform awareness.
+ * Handles complex parsing of key combination strings and renders them
+ * appropriately based on the display mode and platform.
+ */
 export const VHotkey = genericComponent()({
   name: 'VHotkey',
 
@@ -190,8 +251,9 @@ export const VHotkey = genericComponent()({
     // Detect if user is on Mac for platform-specific key handling
     const isMac = typeof navigator !== 'undefined' && /macintosh/i.test(navigator.userAgent)
 
-    const AND_DELINEATOR = new Delineator('and')
-    const THEN_DELINEATOR = new Delineator('then')
+    // Delineator instances for key combination parsing
+    const AND_DELINEATOR = new Delineator('and') // For + separators
+    const THEN_DELINEATOR = new Delineator('then') // For - separators
 
     /**
      * Main computed property that parses the keys string and converts it into
@@ -210,12 +272,14 @@ export const VHotkey = genericComponent()({
           .split(/_|\+/)
           .reduce<Array<string | Delineator>>((acu, cv, index) => {
             if (index !== 0) {
+              // Add AND delineator between keys joined by + or _
               return [...acu, AND_DELINEATOR, cv]
             }
             return [...acu, cv]
           }, [])
           .flatMap(val => {
             if (isString(val)) {
+              // Handle - separators (THEN delineators)
               return val.split('-').reduce<Array<string | Delineator>>((acu, cv, index) => {
                 if (index !== 0) {
                   return [...acu, THEN_DELINEATOR, cv]
@@ -226,6 +290,7 @@ export const VHotkey = genericComponent()({
             return [val]
           })
 
+        // Extract just the key strings for modifier detection
         const keys = parts.filter(val => isString(val))
 
         // Parse modifier keys from the parts array
@@ -252,8 +317,9 @@ export const VHotkey = genericComponent()({
 
         // Transform each key part into its display representation
         return parts.map(key => {
-          // return symbols
+          // Return delineator objects as-is for separator rendering
           if (isDelineator(key)) return key
+          // Apply the key mapping to get the display representation
           return applyDisplayModeToKey(_keyMap, props.displayMode, key, isMac)
         })
       })
@@ -276,7 +342,9 @@ export const VHotkey = genericComponent()({
               <>
               { isDelineator(key) ? (
                   <>
+                    { /* Render + separator for AND delineators */ }
                     { AND_DELINEATOR.isEqual(key) && <span key={ keyIndex } class="v-hotkey__divider">+</span> }
+                    { /* Render "then" text for THEN delineators */ }
                     {
                       THEN_DELINEATOR.isEqual(key) &&
                       <span key={ keyIndex } class="v-hotkey__divider">{ t('$vuetify.command.then') }</span>
@@ -286,6 +354,7 @@ export const VHotkey = genericComponent()({
                   <>
                     { /* Individual key display */ }
                     <kbd key={ keyIndex } class={['v-hotkey__key', key[0] === 'icon' ? 'v-hotkey__key-icon' : `v-hotkey__key-${key[0]}`]}>
+                      { /* Render icon or text based on the key display type */ }
                       {
                         key[0] === 'icon' ? <VIcon icon={ key[1] } /> : key[1]
                       }
