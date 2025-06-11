@@ -277,6 +277,10 @@
         "subfolder": "components"
       },
       {
+        "title": "mask-inputs",
+        "subfolder": "components"
+      },
+      {
         "title": "treeview",
         "subfolder": "components"
       },
