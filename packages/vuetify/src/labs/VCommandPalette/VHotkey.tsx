@@ -172,6 +172,24 @@ const keyMap = {
   escape () {
     return ['text', 'Esc']
   },
+  // Minus/Hyphen key
+  '-' (mode, isMac) {
+    switch (mode) {
+      case 'symbol':
+        return ['symbol', '−'] // Minus symbol (different from hyphen)
+      case 'icon':
+        return ['icon', ['M19 13H5v-2h14z']] // Simple minus icon
+      default:
+        return ['text', '-']
+    }
+  },
+  // Alternative names for minus key
+  minus (mode, isMac) {
+    return this['-'](mode, isMac)
+  },
+  hyphen (mode, isMac) {
+    return this['-'](mode, isMac)
+  },
 } as const satisfies KeyMap
 
 /**
@@ -279,13 +297,38 @@ export const VHotkey = genericComponent()({
           }, [])
           .flatMap(val => {
             if (isString(val)) {
-              // Handle - separators (THEN delineators)
-              return val.split('-').reduce<Array<string | Delineator>>((acu, cv, index) => {
-                if (index !== 0) {
-                  return [...acu, THEN_DELINEATOR, cv]
+              // Handle - separators (THEN delineators) with improved parsing
+              // Only treat - as separator when it's between alphanumeric tokens
+              // This prevents "shift+-" from being split incorrectly
+              const dashSeparatedParts: Array<string | Delineator> = []
+              let currentPart = ''
+
+              for (let i = 0; i < val.length; i++) {
+                const char = val[i]
+                const prevChar = val[i - 1]
+                const nextChar = val[i + 1]
+
+                if (char === '-' &&
+                    prevChar && /[a-zA-Z0-9]/.test(prevChar) &&
+                    nextChar && /[a-zA-Z0-9]/.test(nextChar)) {
+                  // This is a separator dash between alphanumeric tokens
+                  if (currentPart) {
+                    dashSeparatedParts.push(currentPart)
+                    currentPart = ''
+                  }
+                  dashSeparatedParts.push(THEN_DELINEATOR)
+                } else {
+                  // This is part of a key name (including literal - key)
+                  currentPart += char
                 }
-                return [...acu, cv]
-              }, [])
+              }
+
+              // Add the final part if it exists
+              if (currentPart) {
+                dashSeparatedParts.push(currentPart)
+              }
+
+              return dashSeparatedParts
             }
             return [val]
           })

@@ -367,11 +367,6 @@ export const VCommandPaletteList = genericComponent<VCommandPaletteListSlots>()(
           // Add the group header (non-selectable)
           result.push({ type: 'group', originalIndex: index, item, key: `${index}-group` })
 
-          // Add end divider if requested
-          if (showEndDivider) {
-            result.push({ type: 'divider', key: `${index}-end-divider`, item: 'end' })
-          }
-
           // Add all group children as selectable items
           groupItem.children.forEach((child: any, childIndex: number) => {
             // Transform raw child into VuetifyListItem format
@@ -393,6 +388,11 @@ export const VCommandPaletteList = genericComponent<VCommandPaletteListSlots>()(
             }
             result.push({ type: 'item', item: transformedChild, key: `${index}-${childIndex}` })
           })
+
+          // Add end divider if requested (after all children have been added)
+          if (showEndDivider) {
+            result.push({ type: 'divider', key: `${index}-end-divider`, item: 'end' })
+          }
         } else {
           // Parent items and regular items - show as clickable items (no children exposed)
           // Parents will be drilled down into when clicked
@@ -460,7 +460,7 @@ export const VCommandPaletteList = genericComponent<VCommandPaletteListSlots>()(
           if (selectedElement) {
             selectedElement.scrollIntoView({
               block: 'nearest', // Only scroll if necessary
-              behavior: 'instant', // No smooth scrolling for keyboard navigation
+              behavior: 'auto', // No smooth scrolling for keyboard navigation
             })
           }
         }
