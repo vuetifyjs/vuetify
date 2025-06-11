@@ -65,13 +65,13 @@ interface BaseItemProps {
  * A subset of VListItem props used for visual display.
  * These props control the appearance of items in the list.
  */
-type VListDisplayTypes = Partial<Pick<ReturnType<typeof makeVListItemProps>,
-| 'appendAvatar'
-| 'appendIcon'
-| 'prependAvatar'
-| 'prependIcon'
-| 'subtitle'
->>
+type VListDisplayTypes = {
+  appendAvatar?: string
+  appendIcon?: string
+  prependAvatar?: string
+  prependIcon?: string
+  subtitle?: string | number | boolean
+}
 
 /**
  * Standard navigation properties for items that can navigate.

@@ -1,5 +1,5 @@
 // Components
-import { VCommandPalette, VCommandPaletteItem, VCommandPaletteItems } from '../VCommandPalette'
+import { VCommandPalette, VCommandPaletteItemComponent as VCommandPaletteItem, VCommandPaletteItems } from '../VCommandPalette'
 
 // Utilities
 import { render, screen, userEvent } from '@test'

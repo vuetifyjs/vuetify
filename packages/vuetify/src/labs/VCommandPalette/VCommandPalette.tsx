@@ -34,7 +34,7 @@ import { makeVDialogProps } from '@/components/VDialog/VDialog'
 import { VDivider } from '@/components/VDivider'
 import { VSheet } from '@/components/VSheet'
 import { VCommandPaletteInstructions } from '@/labs/VCommandPalette/VCommandPaletteInstructions'
-import { isGroupDefinition, isParentDefinition, VCommandPaletteList } from '@/labs/VCommandPalette/VCommandPaletteList'
+import { isGroupDefinition, isParentDefinition, isItemDefinition, VCommandPaletteList } from '@/labs/VCommandPalette/VCommandPaletteList'
 import { VCommandPaletteSearch } from '@/labs/VCommandPalette/VCommandPaletteSearch'
 
 // Composables
@@ -55,7 +55,8 @@ import { computed, inject, nextTick, provide, readonly, ref, shallowRef, toRef, 
 import { consoleError, EventProp, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
-import type { Ref } from 'vue'
+import type { PropType, Ref } from 'vue'
+import type { VCommandPaletteItem } from './VCommandPaletteList'
 import type { InternalItem } from '@/composables/filter'
 import type { ListItem as VuetifyListItem } from '@/composables/list-items'
 
@@ -111,6 +112,11 @@ const makeVCommandPaletteContentProps = propsFactory({
   clearableSearch: Boolean,
   // Include standard item transformation props
   ...makeItemsProps({ itemTitle: 'title' }),
+  // Items array with proper typing for command palette items
+  items: {
+    type: Array as PropType<VCommandPaletteItem[]>,
+    default: () => [],
+  },
   // Include filter props with support for title, subtitle, and keywords
   ...makeFilterProps({ filterKeys: ['title', 'subtitle', 'keywords'] }),
 }, 'VCommandPaletteContent')
@@ -157,15 +163,7 @@ const VCommandPaletteContent = genericComponent<VCommandPaletteSlots>()({
       return currentItems.value || []
     })
 
-    // Item transformation configuration
-    const itemTransformationProps = computed(() => ({
-      itemTitle: props.itemTitle,
-      itemValue: props.itemValue,
-      itemChildren: props.itemChildren,
-      itemProps: props.itemProps,
-      returnObject: props.returnObject,
-      valueComparator: props.valueComparator,
-    }))
+    // Items are now used directly without transformation since they're already VCommandPaletteItem[]
 
     /**
      * Custom filter function for command palette items
@@ -226,6 +224,16 @@ const VCommandPaletteContent = genericComponent<VCommandPaletteSlots>()({
         return item
       })
     }
+
+    // Item transformation configuration
+    const itemTransformationProps = computed(() => ({
+      itemTitle: props.itemTitle,
+      itemValue: props.itemValue,
+      itemChildren: props.itemChildren,
+      itemProps: props.itemProps,
+      returnObject: props.returnObject,
+      valueComparator: props.valueComparator,
+    }))
 
     // Transform raw items into VuetifyListItem format
     const transformedItems = computed(() => (
@@ -365,19 +373,15 @@ const VCommandPaletteContent = genericComponent<VCommandPaletteSlots>()({
     // Use watchEffect to automatically handle cleanup and re-registration
     watchEffect(() => {
       const allItems = props.items ?? []
-      const processItems = (items: any[]) => {
-        items.forEach(item => {
-          if (item.hotkey && item.handler) {
+      const processItems = (items: VCommandPaletteItem[]) => {
+        items.forEach((item, index) => {
+          if ('hotkey' in item && item.hotkey && 'handler' in item && item.handler) {
             useHotkey(item.hotkey, e => {
-              // Transform the raw item to a VuetifyListItem and use onItemClickFromList
-              // This ensures the same logic (including closeOnExecute) is applied
               const [transformedItem] = transformItems(itemTransformationProps.value, [item])
-              if (transformedItem) {
-                onItemClickFromList(transformedItem, e)
-              }
+              if (transformedItem) onItemClickFromList(transformedItem, e)
             }, { inputs: true })
           }
-          if (item.children && Array.isArray(item.children)) {
+          if ('children' in item && item.children && Array.isArray(item.children)) {
             processItems(item.children)
           }
         })
@@ -531,7 +535,7 @@ export type VCommandPaletteFooterSlotScope = {
  * Combines props from multiple concerns: dialog, theming, filtering, etc.
  */
 export const makeVCommandPaletteProps = propsFactory({
-  // Global hotkey to open/close the palette (e.g., "ctrl+k")
+  // Global hotkey to open/close the palette (e.g., "ctrl+k") - optional
   hotkey: String,
   // Title displayed at the top of the palette
   title: {
@@ -554,11 +558,17 @@ export const makeVCommandPaletteProps = propsFactory({
     type: Boolean,
     default: true,
   },
+  // Include standard item transformation props
+  ...makeItemsProps({ itemTitle: 'title' }),
+  // Items array with proper typing for command palette items
+  items: {
+    type: Array as PropType<VCommandPaletteItem[]>,
+    default: () => [],
+  },
   // Standard Vuetify component props
   ...makeComponentProps(),
   ...makeDensityProps(),
   ...makeFilterProps({ filterKeys: ['title', 'subtitle', 'keywords'] }),
-  ...makeItemsProps({ itemTitle: 'title' }),
   ...makeTransitionProps({ transition: 'dialog-transition' }),
   ...makeThemeProps(),
   // Dialog-specific props with command palette defaults
@@ -602,7 +612,8 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
     // Focus restoration for accessibility compliance (WCAG 2.1 Level A)
     const previouslyFocusedElement = shallowRef<HTMLElement | null>(null)
 
-    // Register global hotkey for opening/closing the palette
+    // Register global hotkey for opening/closing the palette (only if provided)
+    // useHotkey automatically handles undefined values by not registering any listeners
     useHotkey(toRef(props, 'hotkey'), () => {
       isActive.value = !isActive.value
     })
@@ -707,13 +718,13 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
 export type VCommandPalette = InstanceType<typeof VCommandPalette>
 
 // Export helper components for custom layouts
-export { VCommandPaletteItem } from './VCommandPaletteItem'
+export { VCommandPaletteItem as VCommandPaletteItemComponent } from './VCommandPaletteItem'
 export { VCommandPaletteItems } from './VCommandPaletteItems'
 export { useCommandPaletteContext } from './composables/useCommandPaletteContext'
 
 // Export types for proper typing of items prop
 export type {
-  VCommandPaletteItem as VCommandPaletteItemType,
+  VCommandPaletteItem,
   VCommandPaletteActionItem,
   VCommandPaletteLinkItem,
   VCommandPaletteItemDefinition,
