@@ -52,7 +52,7 @@
           subtitle: 'Commit changes',
           value: 'git:commit',
           handler: (e: any, v: any) => console.log({ e, v }),
-          hotkey: 'ctrl+k',
+          hotkey: 'meta+r',
         },
         {
           title: 'Push',
@@ -60,7 +60,7 @@
           subtitle: 'Push changes',
           value: 'git:push',
           handler: (e: any, v: any) => console.log({ e, v }),
-          hotkey: 'ctrl+shift+k',
+          hotkey: 'meta+shift+k',
         },
         {
           title: 'Fetch',
@@ -79,7 +79,7 @@
       subtitle: 'Save the current file',
       value: 'file:save',
       handler: (e: any, v: any) => console.log({ e, v }),
-      hotkey: 'ctrl+s',
+      hotkey: 'meta+s',
     },
     {
       title: 'File: Save As...',
@@ -87,7 +87,7 @@
       subtitle: 'Save the current file as...',
       value: 'file:saveAs',
       handler: (e: any, v: any) => console.log({ e, v }),
-      hotkey: 'ctrl+shift+s',
+      hotkey: 'meta+shift+s',
     },
 
     // Group with both start and end dividers
@@ -143,7 +143,7 @@
       subtitle: 'Find in the current file',
       value: 'find',
       handler: (e: any, v: any) => console.log({ e, v }),
-      hotkey: 'ctrl-f',
+      hotkey: 'meta-f',
     },
 
     // Group with end divider

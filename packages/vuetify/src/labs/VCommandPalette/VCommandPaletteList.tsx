@@ -234,6 +234,8 @@ export const VCommandPaletteList = genericComponent<VCommandPaletteListSlots>()(
 
   emits: {
     'click:item': (item: VuetifyListItem, event: MouseEvent | KeyboardEvent) => true,
+    /** Emitted when the user hovers a selectable item. Payload is the selectable index */
+    hover: (selectableIndex: number) => true,
   },
 
   setup (props, { emit, slots }) {
@@ -362,6 +364,15 @@ export const VCommandPaletteList = genericComponent<VCommandPaletteListSlots>()(
     })
 
     /**
+     * Generates the aria-activedescendant ID for the currently selected item.
+     * This is used for accessibility to announce the selected item to screen readers.
+     */
+    const activeDescendantId = computed(() => {
+      if (actualSelectedIndex.value === -1) return undefined
+      return `command-palette-item-${actualSelectedIndex.value}`
+    })
+
+    /**
      * Watches for changes in the selected index and scrolls the active item into view.
      * This ensures that as the user navigates with the keyboard, the selected item is
      * always visible.
@@ -383,49 +394,75 @@ export const VCommandPaletteList = genericComponent<VCommandPaletteListSlots>()(
     }, { flush: 'post' })
 
     useRender(() => (
-      <VList ref={ vListRef } { ...vListProps } class="v-command-palette__list">
+      <VList
+        ref={ vListRef }
+        { ...vListProps }
+        class="v-command-palette__list"
+        role="listbox"
+        tabindex="0"
+        aria-activedescendant={ activeDescendantId.value }
+      >
         { slots['prepend-list']?.() }
         { flattenedItems.value.length > 0
-          ? flattenedItems.value.map((flatItem, flatIndex) => {
-            if (flatItem.type === 'divider') {
-              return (
-              <VDivider
-                key={ flatItem.key }
-                class={[flatItem.item === 'start' ? 'v-command-palette__list-divider-start' : 'v-command-palette__list-divider-end']}
-              />
-              )
-            }
-
-            if (flatItem.type === 'group') {
-              const groupProps = getVListItemProps(flatItem.item!, flatItem.originalIndex!, false)
-              const slotProps = { item: flatItem.item, props: groupProps }
-
-              return slots.item
-                ? slots.item(slotProps)
-                : <VListSubheader key={ flatItem.key } { ...groupProps } class="v-command-palette__list-group" />
-            }
-
-            if (flatItem.type === 'item') {
-              const isActive = flatIndex === actualSelectedIndex.value
-              const itemProps = {
-                ...getVListItemProps(flatItem.item!, flatItem.originalIndex ?? 0, true),
-                active: isActive,
+          ? (() => {
+            let selectableCounter = -1
+            return flattenedItems.value.map((flatItem, flatIndex) => {
+              if (flatItem.type === 'item') {
+                selectableCounter++
               }
-              const slotProps = { item: flatItem.item, props: itemProps }
 
-              return slots.item
-                ? slots.item(slotProps)
-                : (
-                    <VListItem key={ flatItem.key } { ...itemProps } class="v-command-palette__list-group">
-                      {{
-                        append: flatItem.item?.props?.hotkey ? () => <VHotkey keys={ flatItem.item.props.hotkey } /> : undefined,
-                      }}
-                    </VListItem>
+              // We create a local copy so it can be referenced in events
+              const currentSelectableIndex = selectableCounter
+
+              // Existing logic below (slightly adjusted to add onMouseenter)
+              if (flatItem.type === 'divider') {
+                return (
+                <VDivider
+                  key={ flatItem.key }
+                  class={[flatItem.item === 'start' ? 'v-command-palette__list-divider-start' : 'v-command-palette__list-divider-end']}
+                />
                 )
-            }
+              }
 
-            return null
-          })
+              if (flatItem.type === 'group') {
+                const groupProps = getVListItemProps(flatItem.item!, flatItem.originalIndex!, false)
+                const slotProps = { item: flatItem.item, props: groupProps }
+
+                return slots.item
+                  ? slots.item(slotProps)
+                  : <VListSubheader key={ flatItem.key } { ...groupProps } class="v-command-palette__list-group" role="presentation" />
+              }
+
+              if (flatItem.type === 'item') {
+                const isActive = flatIndex === actualSelectedIndex.value
+                const itemId = `command-palette-item-${flatIndex}`
+                const itemProps = {
+                  ...getVListItemProps(flatItem.item!, flatItem.originalIndex ?? 0, true),
+                  active: isActive,
+                  id: itemId,
+                  role: 'option',
+                }
+                const slotProps = { item: flatItem.item, props: itemProps }
+
+                const defaultNode = (
+                  <VListItem
+                    key={ flatItem.key }
+                    { ...itemProps }
+                    class="v-command-palette__list-group"
+                    onMouseenter={ () => emit('hover', currentSelectableIndex) }
+                  >
+                    {{
+                      append: flatItem.item?.props?.hotkey ? () => <VHotkey keys={ flatItem.item.props.hotkey } /> : undefined,
+                    }}
+                  </VListItem>
+                )
+
+                return slots.item ? slots.item(slotProps) : defaultNode
+              }
+
+              return null
+            })
+          })()
           : (
             slots['no-data']?.() ??
               <VListItem key="no-data-fallback" title={ t('$vuetify.noDataText') } />

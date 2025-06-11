@@ -7,7 +7,7 @@ import { makeVDialogProps } from '@/components/VDialog/VDialog'
 import { VDivider } from '@/components/VDivider'
 import { VSheet } from '@/components/VSheet'
 import { VCommandPaletteInstructions } from '@/labs/VCommandPalette/VCommandPaletteInstructions'
-import { isGroupDefinition, VCommandPaletteList } from '@/labs/VCommandPalette/VCommandPaletteList'
+import { isGroupDefinition, isParentDefinition, VCommandPaletteList } from '@/labs/VCommandPalette/VCommandPaletteList'
 import { VCommandPaletteSearch } from '@/labs/VCommandPalette/VCommandPaletteSearch'
 
 // Composables
@@ -22,7 +22,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeTransitionProps } from '@/composables/transition'
 
 // Utilities
-import { computed, readonly, ref, shallowRef, toRef, watch } from 'vue'
+import { computed, readonly, ref, shallowRef, toRef, watch, watchEffect } from 'vue'
 import { EventProp, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -78,7 +78,7 @@ export type VCommandPaletteSlots = {
 
 export type VCommandPaletteHeaderSlotScope = {
   search: Ref<string>
-  navigationStack: Ref<any[][]>
+  navigationStack: Ref<any[]>
   title?: string
 }
 
@@ -86,7 +86,7 @@ export type VCommandPaletteFooterSlotScope = {
   hasItems: boolean
   hasParent: boolean
   hasSelection: boolean
-  navigationStack: Ref<any[][]>
+  navigationStack: Ref<any[]>
 }
 
 export const makeVCommandPaletteProps = propsFactory({
@@ -143,8 +143,13 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
 
     /** The currently selected item's index. -1 means no selection. */
     const selectedIndex = shallowRef(-1)
-    /** A stack to keep track of navigation history when drilling down into parent items. */
-    const navigationStack = ref<any[][]>([])
+    /**
+     * A stack that tracks navigation history when drilling into parent items.
+     * We persist both the item list _and_ the previously selected index so that
+     * we can restore the correct visual selection when the user navigates back.
+     */
+    interface NavigationFrame { items: any[], selected: number }
+    const navigationStack = ref<NavigationFrame[]>([])
     /** The current search query string. */
     const search = shallowRef('')
     /** The raw items currently being displayed, changes on drill-down/pop. */
@@ -174,12 +179,13 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
      * This allows us to leverage the useFilter composable while maintaining special group logic.
      */
     const commandPaletteFilter: FilterFunction = (value, query, item) => {
-      if (!query) return true
+      if (!query || !query.trim()) return true
 
-      const searchLower = query.toLowerCase()
+      const searchLower = query.trim().toLowerCase()
 
       // Helper function to check if a single item matches
       function itemMatches (rawItem: any): boolean {
+        if (!rawItem) return false
         const title = rawItem.title?.toLowerCase() ?? ''
         const subtitle = rawItem.subtitle?.toLowerCase() ?? ''
         return title.includes(searchLower) || subtitle.includes(searchLower)
@@ -194,8 +200,13 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
         const groupMatches = itemMatches(rawItem)
         const hasMatchingChildren = rawItem.children.some(itemMatches)
         return groupMatches || hasMatchingChildren
+      } else if (isParentDefinition(rawItem)) {
+        // For parent items: match if parent title matches OR any child matches
+        const parentMatches = itemMatches(rawItem)
+        const hasMatchingChildren = rawItem.children.some(itemMatches)
+        return parentMatches || hasMatchingChildren
       } else {
-        // For regular items and parents: match based on title/subtitle
+        // For regular items: match based on title/subtitle
         return itemMatches(rawItem)
       }
     }
@@ -205,20 +216,23 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
      * When a group matches, we need to decide which children to include.
      */
     const transformFilteredItems = (items: any[]) => {
-      if (!search.value) return items
+      if (!search.value || !search.value.trim()) return items
 
-      const searchLower = search.value.toLowerCase()
+      const searchLower = search.value.trim().toLowerCase()
 
       return items.map(item => {
         const rawItem = item.raw
-        if (isGroupDefinition(rawItem)) {
-          // Helper function to check if a single item matches
-          const itemMatches = (testItem: any): boolean => {
-            const title = testItem.title?.toLowerCase() ?? ''
-            const subtitle = testItem.subtitle?.toLowerCase() ?? ''
-            return title.includes(searchLower) || subtitle.includes(searchLower)
-          }
+        if (!rawItem) return item
 
+        // Helper function to check if a single item matches
+        const itemMatches = (testItem: any): boolean => {
+          if (!testItem) return false
+          const title = testItem.title?.toLowerCase() ?? ''
+          const subtitle = testItem.subtitle?.toLowerCase() ?? ''
+          return title.includes(searchLower) || subtitle.includes(searchLower)
+        }
+
+        if (isGroupDefinition(rawItem)) {
           const groupMatches = itemMatches(rawItem)
 
           // If group title matches, include all children
@@ -261,20 +275,22 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
     })
 
     /**
-     * Calculates the total number of selectable items.
-     * This is crucial for keyboard navigation (arrow keys) because it needs to know the bounds
-     * of the list, skipping over non-selectable items like group headers.
-     * It counts the children of groups/parents because they are rendered as a flat list.
+     * Returns the number of keyboard-selectable rows rendered in the list.
+     *  • Regular items        → +1
+     *  • Parent (with children) → +1 for its header + children.length
+     *  • Group                → children.length   (header is NOT selectable)
      */
     const selectableItemsCount = computed(() => {
       let count = 0
 
       filteredActions.value.forEach(item => {
-        // Check if this is a group or parent that will be flattened
-        if (item.raw?.type === 'group' || item.raw?.type === 'parent') {
+        if (item.raw?.type === 'parent') {
+          // Parent header itself + each child
+          count += 1 + item.raw.children.length
+        } else if (item.raw?.type === 'group') {
+          // Only the children of the group are selectable, not the header
           count += item.raw.children.length
         } else {
-          // Regular item
           count += 1
         }
       })
@@ -282,15 +298,28 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
       return count
     })
 
-    /** When the filter changes (e.g., user types), auto-select the first item if available. */
+    /**
+     * Whenever the list of rendered items changes (due to filtering or drilling),
+     * ensure there is a valid selection. We only auto-select when there is **no**
+     * current selection or when the existing selection is out of range.
+     */
     watch(filteredActions, () => {
-      // Auto-select first item if there are selectable items, otherwise reset to -1
-      selectedIndex.value = selectableItemsCount.value > 0 ? 0 : -1
+      const maxIndex = selectableItemsCount.value - 1
+      if (selectedIndex.value > maxIndex) {
+        selectedIndex.value = maxIndex
+      }
     })
 
-    /** When the dialog opens, auto-select the first item if available. */
-    watch(isActive, (newValue) => {
+    /** When the dialog opens, immediately select the first available item. */
+    watch(isActive, newValue => {
       if (newValue && selectableItemsCount.value > 0) {
+        selectedIndex.value = 0
+      }
+    })
+
+    /** Additional watcher to ensure auto-selection happens when items are available */
+    watch([selectableItemsCount, isActive], ([count, active]) => {
+      if (active && count > 0 && selectedIndex.value === -1) {
         selectedIndex.value = 0
       }
     })
@@ -316,13 +345,9 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
 
     /** Moves selection down, wrapping around to the top. */
     useHotkey('arrowdown', e => {
-      // If the dialog is not active, do nothing
       if (!isActive.value) return
-
       // Calculate the maximum index for selectable items
       const maxIndex = selectableItemsCount.value - 1
-
-      // If there are selectable items, update the selectedIndex
       if (maxIndex >= 0) {
         // Move the selection down by one, or wrap around to the top if at the end
         selectedIndex.value = selectedIndex.value < maxIndex ? selectedIndex.value + 1 : 0
@@ -335,28 +360,58 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
      */
     useHotkey('enter', e => {
       if (!isActive.value) return
-      // Find the actual item at the selected index by counting selectable items
-      if (selectedIndex.value >= 0) {
-        let selectableCount = 0
-        for (const item of filteredActions.value) {
-          if (item.raw?.type === 'group' || item.raw?.type === 'parent') {
-            if (selectableCount + item.raw.children.length > selectedIndex.value) {
-              const childIndex = selectedIndex.value - selectableCount
-              const child = item.raw.children[childIndex]
-              const [transformedChild] = transformItems(itemTransformationProps.value, [child])
-              if (transformedChild) {
-                onItemClickFromList(transformedChild, e)
-              }
-              return
-            }
-            selectableCount += item.raw.children.length
-          } else {
-            if (selectableCount === selectedIndex.value) {
-              onItemClickFromList(item, e)
-              return
-            }
-            selectableCount += 1
+
+      if (selectedIndex.value < 0) {
+        // Auto-select the first selectable row on initial Enter press
+        if (selectableItemsCount.value === 0) return
+        selectedIndex.value = 0
+      }
+
+      let selectableCount = 0
+
+      for (const item of filteredActions.value) {
+        const raw = item.raw
+
+        if (raw?.type === 'parent') {
+          // First selectable row is the parent header itself
+          if (selectableCount === selectedIndex.value) {
+            // Drill into the parent
+            onItemClickFromList(item, e)
+            return
           }
+
+          const childrenStart = selectableCount + 1
+          const childrenEnd = childrenStart + raw.children.length - 1
+
+          if (selectedIndex.value >= childrenStart && selectedIndex.value <= childrenEnd) {
+            const childIndex = selectedIndex.value - childrenStart
+            const child = raw.children[childIndex]
+            const [transformedChild] = transformItems(itemTransformationProps.value, [child])
+            if (transformedChild) {
+              onItemClickFromList(transformedChild, e)
+            }
+            return
+          }
+
+          selectableCount += 1 + raw.children.length
+        } else if (raw?.type === 'group') {
+          // Group header is not selectable; only its children are
+          if (selectableCount + raw.children.length > selectedIndex.value) {
+            const childIndex = selectedIndex.value - selectableCount
+            const child = raw.children[childIndex]
+            const [transformedChild] = transformItems(itemTransformationProps.value, [child])
+            if (transformedChild) {
+              onItemClickFromList(transformedChild, e)
+            }
+            return
+          }
+          selectableCount += raw.children.length
+        } else {
+          if (selectableCount === selectedIndex.value) {
+            onItemClickFromList(item, e)
+            return
+          }
+          selectableCount += 1
         }
       }
     }, { inputs: true })
@@ -364,19 +419,32 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
     /** Closes the dialog. The navigation stack is cleared in `onAfterLeave`. */
     useHotkey('escape', e => {
       if (!isActive.value) return
-      // Always close the dialog on ESC - don't navigate back through stack
-      // The state clearing in onAfterLeave will reset navigation properly
-      isActive.value = false
+      // Only close the dialog on ESC if not persistent
+      if (!props.persistent) {
+        // Always close the dialog on ESC - don't navigate back through stack
+        // The state clearing in onAfterLeave will reset navigation properly
+        isActive.value = false
+      }
     }, { inputs: true })
 
     /** Navigates back up the stack if not currently searching. */
+    async function doBackspace () {
+      if (navigationStack.value.length > 0) {
+        const previous = navigationStack.value.pop()!
+        currentRawActions.value = previous.items
+        // Temporarily clear selection until list updates
+        selectedIndex.value = -1
+        // Restore the previously selected row on the next tick so that
+        // the DOM reflects the new list before we apply the index.
+        selectedIndex.value = previous.selected
+        // The selectedIndex will also be validated by the filteredActions watcher
+      }
+    }
+
     useHotkey('backspace', e => {
       if (!isActive.value || search.value) return
       e.preventDefault()
-      if (navigationStack.value.length > 0) {
-        currentRawActions.value = navigationStack.value.pop()!
-        // The selectedIndex will be auto-updated by the filteredActions watcher
-      }
+      doBackspace()
     }, { inputs: true, preventDefault: false })
 
     // --- Event Handlers ---
@@ -404,20 +472,84 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
     }
 
     /**
+     * A list of all actions that have a hotkey assigned.
+     * This should include ALL items with hotkeys, not just currently visible ones,
+     * so that global hotkeys work even when the palette is closed or when items are filtered.
+     */
+    const actionHotkeys = computed(() => {
+      const collectHotkeys = (items: any[]): VuetifyListItem[] => {
+        const result: VuetifyListItem[] = []
+
+        items.forEach(item => {
+          // Transform the item to get the proper VuetifyListItem structure
+          const [transformedItem] = transformItems(itemTransformationProps.value, [item])
+          if (transformedItem && transformedItem.raw?.hotkey) {
+            result.push(transformedItem)
+          }
+
+          // Recursively collect hotkeys from children
+          if (item.children && Array.isArray(item.children)) {
+            result.push(...collectHotkeys(item.children))
+          }
+        })
+
+        return result
+      }
+
+      return collectHotkeys(props.items ?? [])
+    })
+
+    // --- Global item-specific hotkeys ---
+    const hotkeyDisposers: Array<() => void> = []
+
+    watchEffect(() => {
+      // Cleanup previous registrations
+      while (hotkeyDisposers.length) {
+        const dispose = hotkeyDisposers.pop()!
+        if (typeof dispose === 'function') dispose()
+      }
+
+      actionHotkeys.value.forEach(item => {
+        const hotkey = item.raw?.hotkey as string | undefined
+        if (hotkey) {
+          const disposer = useHotkey(hotkey, e => {
+            onItemClickFromList(item, e)
+          }, { inputs: true })
+          hotkeyDisposers.push(disposer)
+        }
+      })
+    })
+
+    /**
      * Handles item clicks from the list.
      * - If the item has children (i.e., it's a parent), it drills down, pushing the current
      *   view onto the navigation stack and making the children the new `currentRawActions`.
      * - If it's a leaf item, it executes the handler and closes the dialog.
      */
-    function onItemClickFromList (item: VuetifyListItem, event: MouseEvent | KeyboardEvent) {
-      if (item.raw?.children && item.raw.children.length > 0) {
-        navigationStack.value.push(currentRawActions.value)
+    async function onItemClickFromList (item: VuetifyListItem, event: MouseEvent | KeyboardEvent) {
+      // If the event is from a mouse click, the dialog must be active.
+      // This prevents click events from registering after the dialog has been closed.
+      // Global hotkeys (KeyboardEvent) can still be executed when the dialog is inactive.
+      if (event instanceof MouseEvent && !isActive.value) return
+
+      // Add safety check for item and item.raw
+      if (!item || !item.raw) return
+
+      if (item.raw.children && Array.isArray(item.raw.children) && item.raw.children.length > 0) {
+        // Save the current view and selection before drilling in
+        navigationStack.value.push({ items: currentRawActions.value, selected: selectedIndex.value })
         currentRawActions.value = item.raw.children
         search.value = ''
-        // The selectedIndex will be auto-updated by the filteredActions watcher
+        // Immediately clear selection so list renders without out-of-range index
+        selectedIndex.value = -1
+        // After DOM updates, default to the first item if available
+        if (selectableItemsCount.value > 0) {
+          selectedIndex.value = 0
+        }
+        // The selectedIndex will also be validated by the filteredActions watcher
       } else {
         // Execute the handler if it exists
-        if (item.raw?.handler && typeof item.raw.handler === 'function') {
+        if (item.raw.handler && typeof item.raw.handler === 'function') {
           item.raw.handler(event, item.raw.value)
         }
 
@@ -427,14 +559,6 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
         }
       }
     }
-
-    /**
-     * A list of all actions that have a hotkey assigned.
-     * This is passed to VActionHotkey components for registration.
-     */
-    const actionHotkeys = computed(() => {
-      return isActive.value ? filteredActions.value : []
-    })
 
     const headerSlotScope = computed<VCommandPaletteHeaderSlotScope>(() => ({
       search,
@@ -476,7 +600,7 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
                 { slots.prepend?.({ search: readonly(search) }) }
               </div>
                )}
-                { actionHotkeys.value.map(item => <HotkeyActivator key={ item.value } item={ item } onExecute={ onItemClickFromList } />) }
+                { /* Hotkey activators are now registered via a composable in setup */ }
 
                 { slots.header ? slots.header(headerSlotScope.value) : (
                   <>
@@ -498,6 +622,7 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
                   items={ filteredActions.value }
                   selectedIndex={ selectedIndex.value }
                   onClick:item={ onItemClickFromList }
+                  onHover={ (idx: number) => { selectedIndex.value = idx } }
                 >
                   {{
                     item: slots.item,

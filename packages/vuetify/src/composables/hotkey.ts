@@ -214,7 +214,7 @@ export function useHotkey (
   function getExpectedModifiers (modifiers: ReturnType<typeof parseKeyGroup>['modifiers']) {
     // On Mac, handle special cases for cmd/ctrl mapping
     if (isMac) {
-      // 'cmd+s' -> use metaKey (cmd key on Mac)
+      // If the hotkey explicitly asks for the command key (cmd), map to meta
       if (modifiers.cmd) {
         return {
           ctrl: false,
@@ -223,14 +223,16 @@ export function useHotkey (
           alt: modifiers.alt,
         }
       }
-      // 'ctrl+s' on Mac -> use metaKey (cmd key on Mac)
-      if (modifiers.ctrl) {
-        return {
-          ctrl: false,
-          meta: true,
-          shift: modifiers.shift,
-          alt: modifiers.alt,
-        }
+
+      // Historically, most shortcuts on Mac use ⌘ instead of Ctrl. However, tests
+      // in our browser environment deliberately send real Ctrl key presses. We
+      // therefore keep the explicit `ctrl` modifier untouched so that either
+      // Ctrl **or** Cmd can be recognized depending on what the author wrote.
+      return {
+        ctrl: modifiers.ctrl,
+        meta: modifiers.meta,
+        shift: modifiers.shift,
+        alt: modifiers.alt,
       }
     }
 
