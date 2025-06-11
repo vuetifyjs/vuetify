@@ -22,9 +22,10 @@ import { VHotkey } from '@/labs/VCommandPalette/VHotkey'
 
 /** Common properties that all items must have. */
 interface BaseItemProps {
-  id: string
+  id?: string
   title: string
   visible?: MaybeRef<boolean>
+  keywords?: string[]
 }
 
 /** A subset of VListItem props used for display purposes. */
@@ -92,7 +93,6 @@ export interface VCommandPaletteGroupDefinition extends BaseItemProps {
   value?: never
   to?: never
   href?: never
-  keywords?: never
   hotkey?: never
 }
 

@@ -24,7 +24,7 @@ import { provideCommandPaletteContext } from '@/labs/VCommandPalette/composables
 import { useCommandPaletteNavigation } from '@/labs/VCommandPalette/composables/useCommandPaletteNavigation'
 
 // Utilities
-import { computed, nextTick, readonly, ref, shallowRef, toRef, watch, watchEffect } from 'vue'
+import { computed, inject, nextTick, provide, readonly, ref, shallowRef, toRef, watch, watchEffect } from 'vue'
 import { consoleError, EventProp, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -36,16 +36,31 @@ type FilterFunction = (value: string, query: string, item?: InternalItem) => boo
 
 /**
  * Shared function to check if an item matches a search query.
- * Compares the lowercased title and subtitle against the search term.
+ * Compares the lowercased title, subtitle, and keywords against the search term.
  */
 function itemMatches (testItem: any, searchLower: string): boolean {
   if (!testItem) return false
   const title = testItem.title ? String(testItem.title).toLowerCase() : ''
   const subtitle = testItem.subtitle ? String(testItem.subtitle).toLowerCase() : ''
+
   // Ensure we have strings before calling includes
   if (typeof title !== 'string' || typeof subtitle !== 'string') return false
   if (typeof searchLower !== 'string') return false
-  return title.includes(searchLower) || subtitle.includes(searchLower)
+
+  // Check title and subtitle
+  if (title.includes(searchLower) || subtitle.includes(searchLower)) {
+    return true
+  }
+
+  // Check keywords if they exist
+  if (testItem.keywords && Array.isArray(testItem.keywords)) {
+    return testItem.keywords.some((keyword: string) => {
+      const keywordLower = String(keyword).toLowerCase()
+      return keywordLower.includes(searchLower)
+    })
+  }
+
+  return false
 }
 
 const makeVCommandPaletteContentProps = propsFactory({
@@ -57,7 +72,7 @@ const makeVCommandPaletteContentProps = propsFactory({
   placeholder: String,
   clearableSearch: Boolean,
   ...makeItemsProps({ itemTitle: 'title' }),
-  ...makeFilterProps({ filterKeys: ['title'] }),
+  ...makeFilterProps({ filterKeys: ['title', 'subtitle', 'keywords'] }),
 }, 'VCommandPaletteContent')
 
 const VCommandPaletteContent = genericComponent<VCommandPaletteSlots>()({
@@ -103,12 +118,12 @@ const VCommandPaletteContent = genericComponent<VCommandPaletteSlots>()({
       if (isGroupDefinition(rawItem)) {
         const groupMatches = itemMatches(rawItem, searchLower)
         const children = rawItem.children || []
-        const hasMatchingChildren = children.some(child => itemMatches(child, searchLower))
+        const hasMatchingChildren = children.some((child: any) => itemMatches(child, searchLower))
         return groupMatches || hasMatchingChildren
       } else if (isParentDefinition(rawItem)) {
         const parentMatches = itemMatches(rawItem, searchLower)
         const children = rawItem.children || []
-        const hasMatchingChildren = children.some(child => itemMatches(child, searchLower))
+        const hasMatchingChildren = children.some((child: any) => itemMatches(child, searchLower))
         return parentMatches || hasMatchingChildren
       } else {
         return itemMatches(rawItem, searchLower)
@@ -126,7 +141,7 @@ const VCommandPaletteContent = genericComponent<VCommandPaletteSlots>()({
           const children = rawItem.children || []
           const filteredChildren = groupMatches
             ? children
-            : children.filter(child => itemMatches(child, searchLower))
+            : children.filter((child: any) => itemMatches(child, searchLower))
           return { ...item, raw: { ...rawItem, children: filteredChildren } }
         }
         return item
@@ -146,7 +161,7 @@ const VCommandPaletteContent = genericComponent<VCommandPaletteSlots>()({
           if (!item) return false
           return commandPaletteFilter(value, query, item)
         },
-        filterKeys: ['title', 'subtitle'],
+        filterKeys: ['title', 'subtitle', 'keywords'],
         filterMode: 'some',
         noFilter: false,
       },
@@ -237,6 +252,19 @@ const VCommandPaletteContent = genericComponent<VCommandPaletteSlots>()({
       selectedIndex.value = -1
       // Reset to root level when items change
       currentItems.value = props.items || []
+    })
+
+    // Reset state when the parent dialog closes
+    // This is passed from the parent VCommandPalette component
+    const parentIsActive = inject<Ref<boolean>>('commandPaletteIsActive', ref(true))
+    watch(parentIsActive, (newValue, oldValue) => {
+      if (!newValue && oldValue) {
+        // Dialog is closing - reset state for next open
+        navigationStack.value = []
+        search.value = ''
+        selectedIndex.value = -1
+        currentItems.value = props.items || []
+      }
     })
 
     // Register item-specific hotkeys when the palette is open
@@ -423,7 +451,7 @@ export const makeVCommandPaletteProps = propsFactory({
   },
   ...makeComponentProps(),
   ...makeDensityProps(),
-  ...makeFilterProps({ filterKeys: ['title'] }),
+  ...makeFilterProps({ filterKeys: ['title', 'subtitle', 'keywords'] }),
   ...makeItemsProps({ itemTitle: 'title' }),
   ...makeTransitionProps({ transition: 'dialog-transition' }),
   ...makeThemeProps(),
@@ -451,6 +479,9 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
     const isActive = useProxiedModel(props, 'modelValue')
     const { themeClasses } = provideTheme(props)
     const { densityClasses } = useDensity(props)
+
+    // Provide isActive state to child components for state reset
+    provide('commandPaletteIsActive', isActive)
 
     // Focus restoration for accessibility compliance (WCAG 2.1 Level A)
     const previouslyFocusedElement = shallowRef<HTMLElement | null>(null)
@@ -527,14 +558,12 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
           v-slots={{
             default: () => (
               <VSheet rounded class="v-command-palette__sheet">
-                { isActive.value && (
-                  <VCommandPaletteContent
-                    { ...contentProps }
-                    onClose={ onClose }
-                    onClick:item={ onClickItem }
-                    v-slots={ slots }
-                  />
-                )}
+                <VCommandPaletteContent
+                  { ...contentProps }
+                  onClose={ onClose }
+                  onClick:item={ onClickItem }
+                  v-slots={ slots }
+                />
               </VSheet>
             ),
           }}
@@ -550,3 +579,13 @@ export type VCommandPalette = InstanceType<typeof VCommandPalette>
 export { VCommandPaletteItem } from './VCommandPaletteItem'
 export { VCommandPaletteItems } from './VCommandPaletteItems'
 export { useCommandPaletteContext } from './composables/useCommandPaletteContext'
+
+// Export types for proper typing of items prop
+export type {
+  VCommandPaletteItem as VCommandPaletteItemType,
+  VCommandPaletteActionItem,
+  VCommandPaletteLinkItem,
+  VCommandPaletteItemDefinition,
+  VCommandPaletteParentDefinition,
+  VCommandPaletteGroupDefinition,
+} from './VCommandPaletteList'
