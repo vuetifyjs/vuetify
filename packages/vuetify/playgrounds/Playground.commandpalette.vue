@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { VBtn } from '@/components/VBtn'
-  import { VCommandPalette } from '../src/labs/VCommandPalette'
+  import { VCommandPalette } from '@/labs/VCommandPalette'
   import { ref } from 'vue'
   import { useTheme } from '@/composables'
 
@@ -124,12 +124,14 @@
               prependIcon: 'mdi-weather-night',
               value: 'theme:dark',
               handler: (e: any, v: any) => theme.global.name.value = 'dark',
+              hotkey: 'meta+d',
             },
             {
               title: 'Light Theme',
               prependIcon: 'mdi-weather-sunny',
               value: 'theme:light',
               handler: (e: any, v: any) => theme.global.name.value = 'light',
+              hotkey: 'meta+l',
             },
           ],
         },

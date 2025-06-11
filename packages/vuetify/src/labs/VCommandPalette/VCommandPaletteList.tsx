@@ -45,6 +45,7 @@ type VListNavigableTypes = {
 /** The base for all command palette items. Defaults to `type: 'item'`. */
 type VCommandPaletteItemBase<TValue = unknown> = BaseItemProps & VListDisplayTypes & {
   type?: 'item'
+  hotkey?: string
 }
 
 /** An item that performs an action when triggered. */
@@ -128,66 +129,6 @@ export function isGroupDefinition (item: VCommandPaletteItem): item is VCommandP
 
 /** A union of all possible item types in the command palette. */
 export type VCommandPaletteItem = VCommandPaletteItemDefinition | VCommandPaletteParentDefinition | VCommandPaletteGroupDefinition
-
-// Example usage demonstrating property-based discriminated union:
-const testItems: VCommandPaletteItem[] = [
-  {
-    // type: 'item', // ✅ Optional - defaults to 'item'
-    id: 'item1',
-    title: 'Action Item',
-    handler: () => { /* Action executed */ },
-    // to: '/somewhere', // ❌ TypeScript error: Types of property 'to' are incompatible
-    // href: 'https://example.com', // ❌ TypeScript error: Types of property 'href' are incompatible
-  },
-  {
-    type: 'item', // ✅ Explicitly set to 'item'
-    id: 'item2',
-    title: 'Link Item',
-    href: 'https://example.com',
-    // handler: () => {}, // ❌ TypeScript error: Types of property 'handler' are incompatible
-    // value: 'something', // ❌ TypeScript error: Types of property 'value' are incompatible
-  },
-  {
-    type: 'parent',
-    id: 'parent1',
-    title: 'Parent 1',
-    children: [
-      {
-        // type defaults to 'item' for child items too
-        id: 'child1',
-        title: 'Child Action',
-        handler: () => { /* Child executed */ },
-      },
-    ],
-  },
-  {
-    type: 'group',
-    id: 'group1',
-    title: 'Group 1',
-    divider: 'start',
-    children: [
-      {
-        type: 'item', // ✅ Defaults to 'item'
-        id: 'groupItem1',
-        title: 'Group Item 1',
-        handler: () => { /* Group item executed */ },
-      },
-      {
-        type: 'parent',
-        id: 'parent1',
-        title: 'Parent 1',
-        children: [
-          {
-            // type defaults to 'item' for child items too
-            id: 'child1',
-            title: 'Child Action',
-            handler: () => { /* Child executed */ },
-          },
-        ],
-      },
-    ],
-  },
-]
 
 export const makeVCommandPaletteListProps = propsFactory({
   /**
@@ -325,7 +266,7 @@ export const VCommandPaletteList = genericComponent<VCommandPaletteListSlots>()(
                 appendAvatar: child.appendAvatar,
                 to: child.to,
                 href: child.href,
-                hotkey: (child as any).hotkey,
+                hotkey: child.hotkey,
               },
               raw: child,
             }
@@ -363,12 +304,14 @@ export const VCommandPaletteList = genericComponent<VCommandPaletteListSlots>()(
     })
 
     /**
-     * Generates the aria-activedescendant ID for the currently selected item.
-     * This is used for accessibility to announce the selected item to screen readers.
+     * Calculate the correct activeDescendantId based on the selectedIndex from the composable.
+     * This maps the logical selectedIndex (counting only selectable items) to the actual DOM element ID.
      */
     const activeDescendantId = computed(() => {
-      if (actualSelectedIndex.value === -1) return undefined
-      return `command-palette-item-${actualSelectedIndex.value}`
+      if (props.selectedIndex === -1) return undefined
+
+      // Use the selectedIndex directly since we're now using sequential IDs for selectable items
+      return `command-palette-item-${props.selectedIndex}`
     })
 
     /**
@@ -392,6 +335,11 @@ export const VCommandPaletteList = genericComponent<VCommandPaletteListSlots>()(
       }
     }, { flush: 'post' })
 
+    // Count selectable items for ARIA label
+    const selectableItemsCount = computed(() => {
+      return flattenedItems.value.filter(item => item.type === 'item').length
+    })
+
     useRender(() => (
       <VList
         ref={ vListRef }
@@ -400,6 +348,8 @@ export const VCommandPaletteList = genericComponent<VCommandPaletteListSlots>()(
         role="listbox"
         tabindex="0"
         aria-activedescendant={ activeDescendantId.value }
+        aria-label={ `${selectableItemsCount.value} ${selectableItemsCount.value === 1 ? 'option' : 'options'} available` }
+        aria-multiselectable="false"
       >
         { slots['prepend-list']?.() }
         { flattenedItems.value.length > 0
@@ -434,12 +384,20 @@ export const VCommandPaletteList = genericComponent<VCommandPaletteListSlots>()(
 
               if (flatItem.type === 'item') {
                 const isActive = flatIndex === actualSelectedIndex.value
-                const itemId = `command-palette-item-${flatIndex}`
+                const itemId = `command-palette-item-${currentSelectableIndex}`
+                const item = flatItem.item!
+
+                // Enhanced ARIA attributes for better accessibility
                 const itemProps = {
-                  ...getVListItemProps(flatItem.item!, currentSelectableIndex, true),
+                  ...getVListItemProps(item, currentSelectableIndex, true),
                   active: isActive,
                   id: itemId,
                   role: 'option',
+                  'aria-selected': isActive,
+                  'aria-describedby': item.props?.subtitle ? `${itemId}-description` : undefined,
+                  'aria-label': item.props?.hotkey
+                    ? `${item.title}. ${item.props.subtitle || ''}. Hotkey: ${item.props.hotkey}`
+                    : `${item.title}. ${item.props.subtitle || ''}`,
                 }
                 const slotProps = { item: flatItem.item, props: itemProps }
 

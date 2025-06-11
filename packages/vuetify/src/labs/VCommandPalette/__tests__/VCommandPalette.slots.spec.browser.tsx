@@ -107,13 +107,13 @@ describe('VCommandPalette', () => {
           items={ basicItems }
           v-slots={{
             'prepend-list': () => <div data-testid="custom-prepend-list">Before List</div>,
-            'append-item': () => <div data-testid="custom-append-item">After List</div>,
+            'append-list': () => <div data-testid="custom-append-list">After List</div>,
           }}
         />
       ))
 
       await expect(screen.findByTestId('custom-prepend-list')).resolves.toBeVisible()
-      await expect(screen.findByTestId('custom-append-item')).resolves.toBeVisible()
+      await expect(screen.findByTestId('custom-append-list')).resolves.toBeVisible()
     })
 
     it('should maintain keyboard navigation with custom item slot', async () => {

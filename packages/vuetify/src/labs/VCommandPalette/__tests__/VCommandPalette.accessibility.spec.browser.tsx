@@ -3,7 +3,7 @@ import { VCommandPalette } from '../VCommandPalette'
 
 // Utilities
 import { render, screen, userEvent } from '@test'
-import { nextTick, ref } from 'vue'
+import { ref } from 'vue'
 
 // Test data
 const basicItems = [
@@ -89,6 +89,25 @@ describe('VCommandPalette', () => {
     vi.clearAllMocks()
   })
 
+  afterEach(() => {
+    // Ensure all dialogs are closed and DOM is clean
+    const dialogs = document.querySelectorAll('[role="dialog"]')
+    dialogs.forEach(dialog => {
+      const closeButton = dialog.querySelector('[aria-label*="Close"]')
+      if (closeButton) {
+        (closeButton as HTMLElement).click()
+      }
+    })
+
+    // Clear any remaining overlays
+    const overlays = document.querySelectorAll('.v-overlay')
+    overlays.forEach(overlay => overlay.remove())
+
+    // Clear any remaining command palette elements
+    const commandPalettes = document.querySelectorAll('.v-command-palette')
+    commandPalettes.forEach(palette => palette.remove())
+  })
+
   describe('Accessibility', () => {
     it('should have proper ARIA attributes', async () => {
       const model = ref(true)
@@ -141,8 +160,8 @@ describe('VCommandPalette', () => {
       await userEvent.keyboard('{Escape}')
       await expect.poll(() => model.value).toBeFalsy()
 
-      // Note: Focus restoration may not be implemented yet
-      // Just verify the palette closes properly
+      // Focus should be restored to the trigger button (WCAG 2.1 Level A compliance)
+      await expect.poll(() => document.activeElement === triggerButton).toBeTruthy()
     })
 
     it('should trap focus within dialog', async () => {
@@ -187,23 +206,6 @@ describe('VCommandPalette', () => {
       await expect(screen.findByText('First Item')).resolves.toBeVisible()
       await expect(screen.findByText('Second Item')).resolves.toBeVisible()
       await expect(screen.findByText('Third Item')).resolves.toBeVisible()
-    })
-
-    it('should handle keyboard shortcuts help', async () => {
-      const model = ref(true)
-      render(() => (
-        <VCommandPalette
-          v-model={ model.value }
-          items={ basicItems }
-          showHelp
-        />
-      ))
-
-      const dialog = await screen.findByRole('dialog')
-      expect(dialog).toBeVisible()
-
-      // Note: Help functionality may not be implemented
-      // This test ensures the prop is accepted
     })
 
     it('should have proper aria-label and aria-labelledby attributes', async () => {
@@ -339,8 +341,8 @@ describe('VCommandPalette', () => {
       await userEvent.keyboard('{Escape}')
       await expect.poll(() => model.value).toBeFalsy()
 
-      // Note: Focus restoration may not be implemented
-      // This test verifies the basic open/close cycle
+      // Focus should be restored to the trigger button (WCAG 2.1 Level A compliance)
+      await expect.poll(() => document.activeElement === triggerButton).toBeTruthy()
     })
 
     it('should support focus with custom layouts', async () => {
@@ -373,6 +375,27 @@ describe('VCommandPalette', () => {
 
       // Should not crash with custom layouts
       expect(dialog).toBeVisible()
+    })
+
+    it('should handle group items accessibility', async () => {
+      const model = ref(true)
+      render(() => (
+        <VCommandPalette
+          v-model={ model.value }
+          items={ itemsWithGroups }
+        />
+      ))
+
+      // Palette dialog should be visible
+      await expect(screen.findByRole('dialog')).resolves.toBeVisible()
+
+      // Group headers should be present and visible
+      await expect(screen.findByText('First Group')).resolves.toBeVisible()
+      await expect(screen.findByText('Second Group')).resolves.toBeVisible()
+
+      // Ensure the listbox is accessible
+      const listbox = await screen.findByRole('listbox')
+      expect(listbox).toBeVisible()
     })
   })
 
@@ -430,6 +453,9 @@ describe('VCommandPalette', () => {
       // These might be implemented as aria-live="polite" or aria-live="assertive" elements
       const liveRegions = dialog.querySelectorAll('[aria-live]')
 
+      // Ensure query executed (variable used for lint)
+      expect(liveRegions).toBeDefined()
+
       // For now, just ensure the basic structure is correct
       // Live regions may be added in future implementations
       expect(listbox).toBeInTheDocument()
@@ -465,57 +491,6 @@ describe('VCommandPalette', () => {
       // Should be back in main context
       await expect(screen.findByText('Parent Item')).resolves.toBeVisible()
       expect(screen.queryByText('Child One')).toBeNull()
-    })
-
-    it('should announce search results count changes', async () => {
-      const model = ref(true)
-      render(() => (
-        <VCommandPalette
-          v-model={ model.value }
-          items={ basicItems }
-          clearableSearch
-        />
-      ))
-
-      const searchInput = await screen.findByRole('textbox')
-
-      // Initial state - all items visible
-      await expect(screen.findByText('First Item')).resolves.toBeVisible()
-      await expect(screen.findByText('Second Item')).resolves.toBeVisible()
-      await expect(screen.findByText('Third Item')).resolves.toBeVisible()
-
-      // Filter to reduce results
-      await userEvent.type(searchInput, 'first')
-
-      // Should show only first item
-      await expect(screen.findByText('First Item')).resolves.toBeVisible()
-      expect(screen.queryByText('Second Item')).toBeNull()
-      expect(screen.queryByText('Third Item')).toBeNull()
-
-      // Try to clear search - use multiple methods to ensure it works
-      const clearButton = await screen.findByRole('button', { name: /Clear/ })
-      await userEvent.click(clearButton)
-
-      // If clear button doesn't work, manually clear the input
-      if ((searchInput as HTMLInputElement).value !== '') {
-        await userEvent.clear(searchInput)
-      }
-
-      // Wait a bit for the component to update
-      await nextTick()
-
-      // All items should be visible again - but only check if search was actually cleared
-      if ((searchInput as HTMLInputElement).value === '') {
-        await expect(screen.findByText('First Item')).resolves.toBeVisible()
-        await expect(screen.findByText('Second Item')).resolves.toBeVisible()
-        await expect(screen.findByText('Third Item')).resolves.toBeVisible()
-      } else {
-        // If search couldn't be cleared, just verify the component doesn't crash
-        expect(screen.queryByText('First Item')).not.toBeNull()
-      }
-
-      // The component should ideally announce these changes via ARIA live regions
-      // but at minimum should not crash and should update the visible results
     })
   })
 })

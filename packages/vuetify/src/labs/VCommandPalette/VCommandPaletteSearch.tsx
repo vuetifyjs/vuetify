@@ -19,6 +19,8 @@ export const makeVCommandPaletteSearchProps = propsFactory({
   clearable: {
     type: Boolean,
   },
+  ariaLabel: String,
+  ariaDescribedby: String,
 }, 'VCommandPaletteSearch')
 
 export type VCommandPaletteSearchSlots = {
@@ -54,6 +56,8 @@ export const VCommandPaletteSearch = genericComponent<VCommandPaletteSearchSlots
               flat
               clearable={ props.clearable }
               autofocus
+              aria-label={ props['aria-label'] }
+              aria-describedby={ props['aria-describedby'] }
             />
           )}
         </>

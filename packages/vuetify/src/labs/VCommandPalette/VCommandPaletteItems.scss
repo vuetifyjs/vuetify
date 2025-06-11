@@ -1,0 +1,17 @@
+@use '../../styles/tools';
+
+@include tools.layer('components') {
+  .v-command-palette-items {
+    &--list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    &--grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 8px;
+      padding: 8px;
+    }
+  }
+}

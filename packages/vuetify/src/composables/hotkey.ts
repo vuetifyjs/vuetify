@@ -1,5 +1,5 @@
 // Utilities
-import { onBeforeUnmount, shallowRef, toValue, watchEffect } from 'vue'
+import { onBeforeUnmount, shallowRef, toValue, watch } from 'vue'
 import { getCurrentInstance } from '@/util/getCurrentInstance'
 
 // Types
@@ -54,6 +54,11 @@ export function useHotkey (
   callback: (e: KeyboardEvent) => void,
   options: HotkeyOptions = {}
 ) {
+  // Short-circuit return if window is not available (SSR environment)
+  if (typeof window === 'undefined') {
+    return () => {} // Return no-op cleanup function
+  }
+
   // Extract options with defaults
   const {
     event = 'keydown',
@@ -71,10 +76,10 @@ export function useHotkey (
   }
 
   // Detect if we're on macOS for platform-specific key handling
-  const isMac = typeof navigator !== 'undefined' && /macintosh/i.test(navigator.userAgent)
+  const isMac = typeof navigator !== 'undefined' && navigator.userAgent && /macintosh/i.test(navigator.userAgent)
 
   // Timer for handling key sequence timeouts
-  const timer = shallowRef<ReturnType<typeof setTimeout>>()
+  const timer = shallowRef<number | undefined>()
 
   // Array of key groups for sequences (e.g., ['ctrl+k', 'p'] for 'ctrl+k-p')
   const keyGroups = shallowRef<string[]>([])
@@ -95,7 +100,7 @@ export function useHotkey (
     if (!currentGroup) return
 
     // Skip hotkey processing when focused on input elements (unless inputs option is true)
-    if (!inputs) {
+    if (!inputs && typeof document !== 'undefined') {
       const activeElement = document.activeElement as HTMLElement
       if (activeElement && (
         activeElement.tagName === 'INPUT' ||
@@ -113,7 +118,7 @@ export function useHotkey (
       // Handle key sequences vs single key combinations
       if (isSequence.value) {
         // Clear any existing timeout from previous key in sequence
-        if (timer.value) window.clearTimeout(timer.value)
+        if (timer.value && typeof window !== 'undefined') window.clearTimeout(timer.value)
 
         // Move to next key in sequence
         groupIndex.value++
@@ -125,9 +130,11 @@ export function useHotkey (
           groupIndex.value = 0
         } else {
           // Sequence not complete - set timeout to reset if next key isn't pressed
-          timer.value = setTimeout(() => {
-            groupIndex.value = 0
-          }, sequenceTimeout)
+          if (typeof window !== 'undefined') {
+            timer.value = window.setTimeout(() => {
+              groupIndex.value = 0
+            }, sequenceTimeout)
+          }
         }
       } else {
         // Single key combination - trigger immediately
@@ -136,7 +143,7 @@ export function useHotkey (
     } else if (isSequence.value) {
       // Key didn't match and we're in a sequence - reset sequence state
       groupIndex.value = 0
-      if (timer.value) window.clearTimeout(timer.value)
+      if (timer.value && typeof window !== 'undefined') window.clearTimeout(timer.value)
     }
   }
 
@@ -144,17 +151,21 @@ export function useHotkey (
    * Cleanup function to remove event listeners and clear timers
    */
   const cleanup = () => {
-    window.removeEventListener(event, handler)
-    if (timer.value) window.clearTimeout(timer.value)
+    if (typeof window !== 'undefined') {
+      window.removeEventListener(event, handler)
+      if (timer.value) window.clearTimeout(timer.value)
+    }
   }
 
   // Watch for changes to the keys and update event listeners accordingly
-  watchEffect(() => {
+  // Using watch instead of watchEffect for better performance - only re-runs when keys actually change
+  watch(() => toValue(keys), (unrefKeys, oldKeys) => {
     // First cleanup any existing listeners
-    window.removeEventListener(event, handler)
-    if (timer.value) window.clearTimeout(timer.value)
+    if (typeof window !== 'undefined') {
+      window.removeEventListener(event, handler)
+      if (timer.value) window.clearTimeout(timer.value)
+    }
 
-    const unrefKeys = toValue(keys)
     if (unrefKeys) {
       // Determine if this is a key sequence (contains '-' separator)
       isSequence.value = unrefKeys.includes('-')
@@ -166,9 +177,11 @@ export function useHotkey (
       groupIndex.value = 0
 
       // Register the event listener
-      window.addEventListener(event, handler)
+      if (typeof window !== 'undefined') {
+        window.addEventListener(event, handler)
+      }
     }
-  })
+  }, { immediate: true })
 
   // Automatically cleanup when the Vue component unmounts
   if (vm) {

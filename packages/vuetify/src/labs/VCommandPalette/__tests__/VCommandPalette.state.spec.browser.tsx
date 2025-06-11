@@ -2,7 +2,7 @@
 import { VCommandPalette } from '../VCommandPalette'
 
 // Utilities
-import { render, screen, userEvent, wait } from '@test'
+import { render, screen, userEvent } from '@test'
 import { nextTick, ref } from 'vue'
 
 // Test data
@@ -60,6 +60,8 @@ describe('VCommandPalette', () => {
 
   describe('State Management & Edge Cases', () => {
     it('should reset state when dialog closes', async () => {
+      vi.useFakeTimers()
+
       const model = ref(true)
       render(() => (
         <VCommandPalette
@@ -76,7 +78,7 @@ describe('VCommandPalette', () => {
       // Close dialog
       model.value = false
       await nextTick()
-      await wait(200) // Wait for state reset timeout
+      vi.runAllTimers() // Simulate the state reset timeout instantly
 
       // Reopen dialog
       model.value = true
@@ -84,12 +86,14 @@ describe('VCommandPalette', () => {
 
       // Search should be cleared and first item should be auto-selected
       const newSearchInput = await screen.findByRole('textbox')
-      await expect.element(newSearchInput).toHaveValue('')
+      expect(newSearchInput).toHaveValue('')
 
       // First item should be auto-selected on reopen
       const firstItem = await screen.findByText('First Item')
       const firstListItem = firstItem.closest('.v-list-item')
       await expect.poll(() => firstListItem?.classList.contains('v-list-item--active')).toBeTruthy()
+
+      vi.useRealTimers()
     })
 
     it('should reset view when items prop changes externally', async () => {

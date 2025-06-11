@@ -6,7 +6,7 @@ import { VHotkey } from '@/labs/VCommandPalette/VHotkey'
 
 // Composables
 import { useLocale } from '@/composables/locale'
-import { provideTheme } from '@/composables/theme'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
 import { genericComponent, propsFactory, useRender } from '@/util'
@@ -14,7 +14,8 @@ import { genericComponent, propsFactory, useRender } from '@/util'
 export const makeVCommandPaletteInstructionsProps = propsFactory({
   hasItems: Boolean,
   hasParent: Boolean,
-  hasSelection: Boolean,
+  id: String,
+  ...makeThemeProps(),
 }, 'VCommandPaletteInstructions')
 
 export const VCommandPaletteInstructions = genericComponent()({
@@ -28,10 +29,14 @@ export const VCommandPaletteInstructions = genericComponent()({
     const { themeClasses } = provideTheme(props)
 
     useRender(() => (
-      <div class={[
-        'v-command-palette-instructions',
-        themeClasses.value,
-      ]}
+      <div
+        id={ props.id }
+        class={[
+          'v-command-palette-instructions',
+          themeClasses.value,
+        ]}
+        role="region"
+        aria-label="Keyboard shortcuts"
       >
         { props.hasItems && (
           <div key="select-instruction" class="d-flex align-center">

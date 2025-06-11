@@ -86,7 +86,7 @@ describe('VCommandPalette', () => {
         <VCommandPalette
           v-model={ model.value }
           items={ items }
-          onClick:item={ (item: any) => onClickItem(item) }
+          { ...{ 'onClick:item': (item: any) => onClickItem(item) } }
         />
       ))
 
@@ -220,23 +220,23 @@ describe('VCommandPalette', () => {
       // Execute the item-specific hotkey while palette is open
       await userEvent.keyboard('{Control>}s{/Control}')
 
-      // Should execute the handler (might be called twice due to global + content registration)
-      expect(handler).toHaveBeenCalledTimes(2)
+      // Should execute the handler
+      expect(handler).toHaveBeenCalledTimes(1)
 
       // Palette should close after execution (closeOnExecute defaults to true)
       await expect.poll(() => model.value).toBeFalsy()
       await expect.poll(() => screen.queryByRole('dialog')).toBeNull()
     })
 
-    it('should execute global item hotkeys even when palette is closed', async () => {
-      const model = ref(false) // Palette is closed
+    it('should not execute item hotkeys when palette is closed (legacy test)', async () => {
+      const model = ref(false) // Start with palette closed
       const handler = vi.fn()
       const items = [
         {
           id: 'save',
           title: 'Save File',
           handler,
-          hotkey: 'ctrl+s',
+          hotkey: 'ctrl+shift+s',
         },
       ]
 
@@ -247,13 +247,34 @@ describe('VCommandPalette', () => {
         />
       ))
 
-      // Palette should be closed
+      // Palette should be closed initially
       expect(screen.queryByRole('dialog')).toBeNull()
 
       // Execute the item-specific hotkey while palette is closed
-      await userEvent.keyboard('{Control>}s{/Control}')
+      await userEvent.keyboard('{Control>}{Shift>}s{/Shift}{/Control}')
 
-      // Should still execute the handler
+      // Handler should NOT be called when palette is closed
+      expect(handler).not.toHaveBeenCalled()
+
+      // Now open the palette
+      model.value = true
+      await screen.findByRole('dialog')
+      await expect(screen.findByText('Save File')).resolves.toBeVisible()
+
+      // Execute the same hotkey while palette is open
+      await userEvent.keyboard('{Control>}{Shift>}s{/Shift}{/Control}')
+
+      // Handler should be called when palette is open
+      expect(handler).toHaveBeenCalledTimes(1)
+
+      // Close the palette again
+      model.value = false
+      await expect.poll(() => screen.queryByRole('dialog')).toBeNull()
+
+      // Execute the hotkey again while closed
+      await userEvent.keyboard('{Control>}{Shift>}s{/Shift}{/Control}')
+
+      // Handler should still only have been called once (not called when closed)
       expect(handler).toHaveBeenCalledTimes(1)
     })
 
@@ -278,28 +299,23 @@ describe('VCommandPalette', () => {
       const dialog = await screen.findByRole('dialog')
       await expect(screen.findByText('Save File')).resolves.toBeVisible()
 
-      // Look for VHotkey component or hotkey display
+      // VHotkey component should be present for items with hotkeys
       const hotkeyElement = dialog.querySelector('.v-hotkey')
-      if (hotkeyElement) {
-        // If hotkey display is implemented, check for the hotkey structure
-        // VHotkey renders icons by default, so check for the presence of key elements
-        const keyElements = hotkeyElement.querySelectorAll('.v-hotkey__key')
-        expect(keyElements.length).toBeGreaterThan(0)
+      expect(hotkeyElement).toBeInTheDocument()
 
-        // Check for the presence of ctrl and s keys (in any form - icon, symbol, or text)
-        const hasCtrlKey = Array.from(keyElements).some(el =>
-          el.textContent?.toLowerCase().includes('ctrl') ||
-          el.classList.contains('v-hotkey__key-icon') // ctrl might be an icon
-        )
-        const hasSKey = Array.from(keyElements).some(el =>
-          el.textContent?.toLowerCase().includes('s')
-        )
+      // VHotkey should render key elements
+      const keyElements = hotkeyElement!.querySelectorAll('.v-hotkey__key')
+      expect(keyElements.length).toBeGreaterThan(0)
 
-        expect(hasCtrlKey || hasSKey).toBeTruthy() // At least one key should be present
-      } else {
-        // If not implemented yet, just ensure the component renders without error
-        expect(dialog).toBeVisible()
-      }
+      // Should contain the hotkey information (ctrl+s)
+      // VHotkey renders keys as separate elements, so we check for their presence
+      const keyTexts = Array.from(keyElements).map(el => el.textContent?.toLowerCase() || '')
+      const hasCtrlKey = keyTexts.some(text => text.includes('ctrl')) ||
+                        Array.from(keyElements).some(el => el.classList.contains('v-hotkey__key-icon'))
+      const hasSKey = keyTexts.some(text => text.includes('s'))
+
+      // At least one of the keys should be present (implementation may vary)
+      expect(hasCtrlKey || hasSKey).toBeTruthy()
     })
 
     it('should handle conflicting hotkeys gracefully', async () => {
@@ -334,8 +350,57 @@ describe('VCommandPalette', () => {
       await expect(screen.findByText('First Action')).resolves.toBeVisible()
       await expect(screen.findByText('Second Action')).resolves.toBeVisible()
 
-      // Note: The behavior for conflicting hotkeys depends on implementation
-      // This test ensures the component doesn't crash with conflicting hotkeys
+      // Execute the conflicting hotkey
+      await userEvent.keyboard('{Control>}s{/Control}')
+
+      // At least one handler should be called (implementation-dependent behavior)
+      // Using robust assertion that doesn't depend on exact call count
+      const totalCalls = handler1.mock.calls.length + handler2.mock.calls.length
+      expect(totalCalls).toBeGreaterThanOrEqual(1)
+
+      // Ensure the component doesn't crash with conflicting hotkeys
+      expect(screen.queryByRole('dialog')).toBeInTheDocument()
+    })
+
+    it('should handle uppercase keys in hotkey display', async () => {
+      const model = ref(true)
+      const itemsWithUppercaseKeys = [
+        {
+          id: 'item1',
+          title: 'Uppercase Test',
+          hotkey: 'CTRL+S', // Uppercase keys
+          handler: vi.fn(),
+        },
+        {
+          id: 'item2',
+          title: 'Mixed Case Test',
+          hotkey: 'Ctrl+Shift+A', // Mixed case
+          handler: vi.fn(),
+        },
+      ]
+
+      render(() => (
+        <VCommandPalette
+          v-model={ model.value }
+          items={ itemsWithUppercaseKeys }
+        />
+      ))
+
+      const dialog = await screen.findByRole('dialog')
+
+      // Both items should render without issues
+      await expect(screen.findByText('Uppercase Test')).resolves.toBeVisible()
+      await expect(screen.findByText('Mixed Case Test')).resolves.toBeVisible()
+
+      // VHotkey components should be present and render correctly
+      const hotkeyElements = dialog.querySelectorAll('.v-hotkey')
+      expect(hotkeyElements.length).toBeGreaterThanOrEqual(2)
+
+      // Each hotkey should have key elements (verifying they don't crash on uppercase)
+      hotkeyElements.forEach(hotkeyElement => {
+        const keyElements = hotkeyElement.querySelectorAll('.v-hotkey__key')
+        expect(keyElements.length).toBeGreaterThan(0)
+      })
     })
   })
 })

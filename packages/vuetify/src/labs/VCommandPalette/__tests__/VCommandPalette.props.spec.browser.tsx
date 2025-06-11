@@ -29,6 +29,7 @@ describe('VCommandPalette', () => {
           v-model={ model.value }
           items={ basicItems }
           density="compact"
+          transition={ false }
         />
       ))
 
@@ -43,6 +44,7 @@ describe('VCommandPalette', () => {
           v-model={ model.value }
           items={ basicItems }
           class="custom-palette-class"
+          transition={ false }
         />
       ))
 
@@ -58,6 +60,7 @@ describe('VCommandPalette', () => {
           items={ basicItems }
           maxHeight={ 300 }
           maxWidth={ 500 }
+          transition={ false }
         />
       ))
 
@@ -69,28 +72,61 @@ describe('VCommandPalette', () => {
     it('should open and close with global hotkey', async () => {
       const model = ref(false)
       render(() => (
-        <VCommandPalette hotkey="ctrl+k" v-model={ model.value } items={ basicItems } />
+        <VCommandPalette
+          hotkey="ctrl+k"
+          v-model={ model.value }
+          items={ basicItems }
+          transition={ false }
+        />
       ))
 
       // Palette should be closed initially
       expect(screen.queryByRole('dialog')).toBeNull()
-
-      // The global hotkey functionality may not be fully working in tests
-      // Just ensure the component accepts the hotkey prop without crashing
       expect(model.value).toBeFalsy()
+
+      // Simulate the global hotkey (ctrl+k) to open the palette
+      await userEvent.keyboard('{Control>}k{/Control}')
+
+      // Palette should now be open
+      await expect.poll(() => model.value).toBeTruthy()
+      await expect(screen.findByRole('dialog')).resolves.toBeVisible()
+
+      // Simulate Escape key to close the palette
+      await userEvent.keyboard('{Escape}')
+
+      // Palette should be closed again
+      await expect.poll(() => model.value).toBeFalsy()
+      await expect.poll(() => screen.queryByRole('dialog')).toBeNull()
     })
 
     it('should handle multiple hotkey formats', async () => {
       const model = ref(false)
       render(() => (
-        <VCommandPalette hotkey="cmd+shift+p" v-model={ model.value } items={ basicItems } />
+        <VCommandPalette
+          hotkey="ctrl+shift+k"
+          v-model={ model.value }
+          items={ basicItems }
+          transition={ false }
+        />
       ))
 
+      // Palette should be closed initially
       expect(screen.queryByRole('dialog')).toBeNull()
-
-      // Test that the hotkey prop is accepted without errors
-      // Note: Actual hotkey functionality may not be fully implemented
       expect(model.value).toBeFalsy()
+
+      // Simulate the global hotkey (ctrl+shift+k) to open the palette
+      await userEvent.keyboard('{Control>}{Shift>}k{/Shift}{/Control}')
+
+      // Palette should now be open
+      await expect.poll(() => model.value).toBeTruthy()
+      await expect(screen.findByRole('dialog')).resolves.toBeVisible()
+
+      // Verify the palette can be closed with Escape
+      await userEvent.keyboard('{Escape}')
+
+      // Palette should be closed again
+      await expect.poll(() => model.value).toBeFalsy()
+      await expect.poll(() => screen.queryByRole('dialog')).toBeNull()
     })
 
     it('should handle disabled state', async () => {
@@ -100,6 +136,7 @@ describe('VCommandPalette', () => {
           v-model={ model.value }
           items={ basicItems }
           disabled
+          transition={ false }
         />
       ))
 
@@ -119,6 +156,7 @@ describe('VCommandPalette', () => {
           v-model={ model.value }
           items={ basicItems }
           loading
+          transition={ false }
         />
       ))
 
@@ -137,6 +175,7 @@ describe('VCommandPalette', () => {
           v-model={ model.value }
           items={ basicItems }
           persistent
+          transition={ false }
         />
       ))
 
@@ -149,6 +188,24 @@ describe('VCommandPalette', () => {
       // Dialog should remain open when persistent is true
       expect(model.value).toBeTruthy()
       expect(dialog).toBeVisible()
+    })
+
+    it('should support transition prop for disabling transitions', async () => {
+      const model = ref(true)
+      render(() => (
+        <VCommandPalette
+          v-model={ model.value }
+          items={ basicItems }
+          transition={ false }
+        />
+      ))
+
+      const dialog = await screen.findByRole('dialog')
+      expect(dialog).toBeVisible()
+
+      // When transition is false, transitions should be disabled
+      // This follows the same pattern as VDialog and VOverlay
+      expect(dialog).toBeInTheDocument()
     })
   })
 })

@@ -5,6 +5,16 @@ import { useHotkey } from '../hotkey'
 import { ref } from 'vue'
 
 describe('hotkey.ts', () => {
+  // Save original navigator to restore after each test
+  const originalNavigator = window.navigator
+
+  afterEach(() => {
+    Object.defineProperty(window, 'navigator', {
+      value: originalNavigator,
+      writable: true,
+    })
+  })
+
   it.each([
     ['ctrl+a', { ctrlKey: true, key: 'a' }],
     ['ctrl_a', { ctrlKey: true, key: 'a' }],
@@ -165,7 +175,7 @@ describe('hotkey.ts', () => {
     cleanup()
   })
 
-  it('should map ctrl to meta key on Mac platform', () => {
+  it('should handle ctrl key on Mac platform', () => {
     const callback = vi.fn()
 
     Object.defineProperty(window, 'navigator', {
@@ -178,9 +188,9 @@ describe('hotkey.ts', () => {
 
     const cleanup = useHotkey('ctrl+s', callback)
 
-    // On Mac, ctrl+s should actually respond to meta+s (cmd+s)
+    // On Mac, ctrl+s should respond to actual ctrl key press
     const event = new KeyboardEvent('keydown', {
-      metaKey: true,
+      ctrlKey: true,
       key: 's',
     })
 
@@ -592,24 +602,26 @@ describe('hotkey.ts', () => {
       writable: true,
     })
 
-    const callback = vi.fn()
-    const cleanup = useHotkey('ctrl+s', callback)
+    try {
+      const callback = vi.fn()
+      const cleanup = useHotkey('ctrl+s', callback)
 
-    const event = new KeyboardEvent('keydown', {
-      ctrlKey: true,
-      key: 's',
-    })
+      const event = new KeyboardEvent('keydown', {
+        ctrlKey: true,
+        key: 's',
+      })
 
-    window.dispatchEvent(event)
+      window.dispatchEvent(event)
 
-    expect(callback).toHaveBeenCalledTimes(1)
+      expect(callback).toHaveBeenCalledTimes(1)
 
-    cleanup()
-
-    // Restore navigator
-    Object.defineProperty(window, 'navigator', {
-      value: originalNavigator,
-      writable: true,
-    })
+      cleanup()
+    } finally {
+      // Restore navigator regardless of test outcome
+      Object.defineProperty(window, 'navigator', {
+        value: originalNavigator,
+        writable: true,
+      })
+    }
   })
 })

@@ -172,7 +172,7 @@ function applyDisplayModeToKey (keyMap: KeyMap, mode: DisplayMode, key: string, 
   // normalize keys
   const lowerKey = key.toLowerCase()
 
-  if (key in keyMap) {
+  if (lowerKey in keyMap) {
     return keyMap[lowerKey](mode, isMac)
   }
 

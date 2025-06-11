@@ -3,7 +3,8 @@ import { VCommandPalette } from '../VCommandPalette'
 
 // Utilities
 import { render, screen, userEvent } from '@test'
-import { ref, nextTick } from 'vue'
+import { cleanup } from '@testing-library/vue'
+import { ref } from 'vue'
 
 // Test data
 const basicItems = [
@@ -78,6 +79,12 @@ const itemsWithGroups = [
 
 describe('VCommandPalette', () => {
   beforeEach(() => {
+    vi.clearAllMocks()
+  })
+
+  afterEach(() => {
+    cleanup()
+    vi.useRealTimers()
     vi.clearAllMocks()
   })
 
@@ -474,6 +481,70 @@ describe('VCommandPalette', () => {
       await expect.poll(() =>
         parentListItem?.classList.contains('v-list-item--active')
       ).toBeTruthy()
+    })
+
+    it('should wrap to last item when pressing up arrow from first item with many items', async () => {
+      // Create a smaller test case to reduce complexity and timing issues
+      const testItems = Array.from({ length: 5 }, (_, i) => ({
+        id: `test-item-${i + 1}`,
+        title: `Test Item ${i + 1}`,
+        value: `test-item-${i + 1}`,
+        handler: vi.fn(),
+      }))
+
+      const model = ref(true)
+      render(() => (
+        <VCommandPalette
+          v-model={ model.value }
+          items={ testItems }
+        />
+      ))
+
+      const dialog = await screen.findByRole('dialog')
+      const listbox = await screen.findByRole('listbox')
+
+      // Wait for component initialization and first item selection
+      await expect.poll(() => screen.queryByText('Test Item 1')).toBeTruthy()
+      await expect.poll(() => screen.queryByText('Test Item 5')).toBeTruthy()
+
+      // Wait for first item to be auto-selected
+      await expect.poll(() => {
+        const activeDescendant = listbox.getAttribute('aria-activedescendant')
+        if (!activeDescendant) return false
+        const activeElement = dialog.querySelector(`#${activeDescendant}`)
+        return activeElement && activeElement.textContent?.includes('Test Item 1')
+      }, {
+        timeout: 2000,
+        interval: 50,
+      }).toBeTruthy()
+
+      // Get the initial active descendant
+      const initialActiveDescendant = listbox.getAttribute('aria-activedescendant')
+      expect(initialActiveDescendant).toBeTruthy()
+
+      // Simulate ArrowUp key press using direct DOM event dispatch
+      const searchInput = await screen.findByRole('textbox')
+      const keyEvent = new KeyboardEvent('keydown', {
+        key: 'ArrowUp',
+        code: 'ArrowUp',
+        bubbles: true,
+        cancelable: true,
+      })
+      searchInput.dispatchEvent(keyEvent)
+
+      // Wait for navigation to complete
+      await expect.poll(() => {
+        const currentActiveDescendant = listbox.getAttribute('aria-activedescendant')
+        if (!currentActiveDescendant || currentActiveDescendant === initialActiveDescendant) {
+          return false
+        }
+
+        const activeElement = dialog.querySelector(`#${currentActiveDescendant}`)
+        return activeElement && activeElement.textContent?.includes('Test Item 5')
+      }, {
+        timeout: 2000,
+        interval: 50,
+      }).toBeTruthy()
     })
   })
 })
