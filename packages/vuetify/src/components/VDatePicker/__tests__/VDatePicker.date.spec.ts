@@ -1,7 +1,11 @@
 // @ts-nocheck
 /* eslint-disable */
 
+// Components
+import { VDatePicker } from '../VDatePicker'
+
 // import { touch } from '@/../test'
+import { render, screen } from '@test'
 import {
   mount,
   MountOptions,
@@ -763,5 +767,34 @@ describe.skip('VDatePicker.ts', () => { // eslint-disable-line max-statements
 
     expect(lastWeekEl.text()).toBe('09')
     expect(lastDayEl.text()).toBe('7')
+  })
+})
+
+describe('week numbers with time zone', () => {
+  beforeEach(() => vi.stubEnv('TZ', 'Europe/Warsaw'))
+  afterEach(() => vi.unstubAllEnvs())
+
+  it('should calculate weeks correctly near ST/DST transition', async () => {
+    render(VDatePicker, {
+      props: {
+        showWeek: true,
+        modelValue: new Date(2025,3,1),
+      },
+    })
+    const $weeks = await screen.findAllByCSS('.v-date-picker-month__weeks > div')
+    expect($weeks[1].innerHTML).toBe('14')
+    expect($weeks[2].innerHTML).toBe('15')
+  })
+
+  it('should calculate weeks correctly near DST/ST transition', async () => {
+    render(VDatePicker, {
+      props: {
+        showWeek: true,
+        modelValue: new Date(2025,10,1),
+      },
+    })
+    const $weeks = await screen.findAllByCSS('.v-date-picker-month__weeks > div')
+    expect($weeks[1].innerHTML).toBe('44')
+    expect($weeks[2].innerHTML).toBe('45')
   })
 })

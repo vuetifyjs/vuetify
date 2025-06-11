@@ -9,7 +9,6 @@ import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextFi
 
 // Composables
 import { useHold } from './hold'
-import { useFocus } from '@/composables/focus'
 import { useForm } from '@/composables/form'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { useProxiedModel } from '@/composables/proxiedModel'
@@ -76,6 +75,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
   },
 
   emits: {
+    'update:focused': (val: boolean) => true,
     'update:modelValue': (val: number) => true,
   },
 
@@ -88,7 +88,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       form.isDisabled.value || form.isReadonly.value
     ))
 
-    const { isFocused, focus, blur } = useFocus(props)
+    const isFocused = shallowRef(props.focused)
 
     function correctPrecision (val: number, precision = props.precision) {
       if (precision == null) {
@@ -325,12 +325,10 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
     }
 
     function onFocus () {
-      focus()
       trimDecimalZeros()
     }
 
     function onBlur () {
-      blur()
       clampModel()
     }
 
@@ -456,7 +454,9 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       return (
         <VTextField
           ref={ vTextFieldRef }
+          { ...textFieldProps }
           v-model={ inputText.value }
+          v-model:focused={ isFocused.value }
           validationValue={ model.value }
           onBeforeinput={ onBeforeinput }
           onFocus={ onFocus }
@@ -474,7 +474,6 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
             },
             props.class,
           ]}
-          { ...textFieldProps }
           style={ props.style }
           inputmode="decimal"
         >

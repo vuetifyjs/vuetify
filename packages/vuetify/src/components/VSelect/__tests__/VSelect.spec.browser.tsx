@@ -679,6 +679,17 @@ describe('VSelect', () => {
       await expect.poll(() => screen.getAllByText('Bar')).toHaveLength(2)
       expect(getAllByRole(menu, 'option', { selected: true })).toHaveLength(2)
     })
+
+    it('should not fire @update:focus twice when clicking bottom of input', async () => {
+      const onFocus = vi.fn()
+      const { element } = render(() => (
+        <VSelect onUpdate:focused={ onFocus } />
+      ))
+
+      await userEvent.click(element, { y: 1 })
+
+      expect(onFocus).toHaveBeenCalledTimes(1)
+    })
   })
 
   describe('Showcase', () => {
