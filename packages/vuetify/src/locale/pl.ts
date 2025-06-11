@@ -117,4 +117,12 @@ export default {
     notEmpty: 'Proszę wybrać co najmniej jedną wartość',
     pattern: 'Nieprawidłowy format',
   },
+  command: {
+    select: 'aby wybrać',
+    navigate: 'aby nawigować',
+    goBack: 'aby wrócić',
+    close: 'aby zamknąć',
+    then: 'następnie',
+    placeholder: 'Wpisz polecenie lub szukaj...',
+  },
 }

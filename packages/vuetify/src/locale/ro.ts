@@ -117,4 +117,12 @@ export default {
     notEmpty: 'Vă rugăm să alegeți cel puțin o valoare',
     pattern: 'Format invalid',
   },
+  command: {
+    select: 'pentru a selecta',
+    navigate: 'pentru a naviga',
+    goBack: 'pentru a merge înapoi',
+    close: 'pentru a închide',
+    then: 'apoi',
+    placeholder: 'Tastați o comandă sau căutați...',
+  },
 }

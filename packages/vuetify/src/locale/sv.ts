@@ -117,4 +117,12 @@ export default {
     notEmpty: 'Välj minst ett värde',
     pattern: 'Ogiltigt format',
   },
+  command: {
+    select: 'för att välja',
+    navigate: 'för att navigera',
+    goBack: 'för att gå tillbaka',
+    close: 'för att stänga',
+    then: 'sedan',
+    placeholder: 'Skriv ett kommando eller sök...',
+  },
 }

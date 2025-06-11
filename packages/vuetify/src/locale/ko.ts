@@ -117,4 +117,12 @@ export default {
     notEmpty: '최소 하나의 값을 선택해주세요',
     pattern: '형식이 유효하지 않습니다',
   },
+  command: {
+    select: '선택',
+    navigate: '탐색',
+    goBack: '뒤로 가기',
+    close: '닫기',
+    then: '그 다음',
+    placeholder: '명령어를 입력하거나 검색...',
+  },
 }

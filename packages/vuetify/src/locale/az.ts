@@ -117,4 +117,12 @@ export default {
     notEmpty: 'Zəhmət olmasa ən azı bir dəyər seçin',
     pattern: 'Yanlış format',
   },
+  command: {
+    select: 'seçmək üçün',
+    navigate: 'naviqasiya etmək üçün',
+    goBack: 'geri qayıtmaq üçün',
+    close: 'bağlamaq üçün',
+    then: 'sonra',
+    placeholder: 'Əmr yazın və ya axtarın...',
+  },
 }

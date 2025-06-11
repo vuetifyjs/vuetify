@@ -117,4 +117,12 @@ export default {
     notEmpty: 'Izaberite bar jednu vrednost',
     pattern: 'Nevažeći format',
   },
+  command: {
+    select: 'za izbor',
+    navigate: 'za navigaciju',
+    goBack: 'za povratak',
+    close: 'za zatvaranje',
+    then: 'zatim',
+    placeholder: 'Ukucajte komandu ili pretražite...',
+  },
 }

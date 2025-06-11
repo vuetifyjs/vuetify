@@ -117,4 +117,12 @@ export default {
     notEmpty: 'Valitse ainakin yksi arvo',
     pattern: 'Virheellinen muoto',
   },
+  command: {
+    select: 'valitaksesi',
+    navigate: 'navigoidaksesi',
+    goBack: 'palataksesi',
+    close: 'sulkeaksesi',
+    then: 'sitten',
+    placeholder: 'Kirjoita komento tai hae...',
+  },
 }

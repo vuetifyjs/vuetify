@@ -117,4 +117,12 @@ export default {
     notEmpty: 'Vui lòng chọn ít nhất một giá trị',
     pattern: 'Định dạng không hợp lệ',
   },
+  command: {
+    select: 'để chọn',
+    navigate: 'để điều hướng',
+    goBack: 'để quay lại',
+    close: 'để đóng',
+    then: 'sau đó',
+    placeholder: 'Nhập lệnh hoặc tìm kiếm...',
+  },
 }

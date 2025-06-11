@@ -117,4 +117,12 @@ export default {
     notEmpty: 'Vennligst velg minst én verdi',
     pattern: 'Ugyldig format',
   },
+  command: {
+    select: 'for å velge',
+    navigate: 'for å navigere',
+    goBack: 'for å gå tilbake',
+    close: 'for å lukke',
+    then: 'deretter',
+    placeholder: 'Skriv en kommando eller søk...',
+  },
 }

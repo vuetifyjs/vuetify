@@ -117,4 +117,12 @@ export default {
     notEmpty: 'يرجى اختيار قيمة واحدة على الأقل',
     pattern: 'تنسيق غير صالح',
   },
+  command: {
+    select: 'للاختيار',
+    navigate: 'للتنقل',
+    goBack: 'للعودة',
+    close: 'للإغلاق',
+    then: 'ثم',
+    placeholder: 'اكتب أمراً أو ابحث...',
+  },
 }

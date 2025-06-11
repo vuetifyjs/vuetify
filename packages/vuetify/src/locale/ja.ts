@@ -117,4 +117,12 @@ export default {
     notEmpty: '少なくとも1つの値を選んでください',
     pattern: '無効な形式です',
   },
+  command: {
+    select: '選択',
+    navigate: 'ナビゲート',
+    goBack: '戻る',
+    close: '閉じる',
+    then: '次に',
+    placeholder: 'コマンドを入力または検索...',
+  },
 }
