@@ -68,16 +68,16 @@ export const VCalendarMonthDay = genericComponent<VCalendarMonthDaySlots>()({
               { slots.dayBody?.({ day: props.day, events: props.events }) ?? (
                 <div>
                   <div class="v-calendar-weekly__day-alldayevents-container">
-                    { props.events?.filter(event => event.allDay).map(event => slots.dayEvent
-                      ? slots.dayEvent({ day: props.day, allDay: true, event })
+                    { props.events?.filter(event => event.allDay).map(event => slots['day-event']
+                      ? slots['day-event']({ day: props.day, allDay: true, event })
                       : (
                         <VCalendarEvent day={ props.day } event={ event } allDay { ...attrs } />
                       ))}
                   </div>
 
                   <div class="v-calendar-weekly__day-events-container">
-                    { props.events?.filter(event => !event.allDay).map(event => slots.dayEvent
-                      ? slots.dayEvent({ day: props.day, event, allDay: false })
+                    { props.events?.filter(event => !event.allDay).map(event => slots['day-event']
+                      ? slots['day-event']({ day: props.day, event, allDay: false })
                       : (
                         <VCalendarEvent day={ props.day } event={ event } { ...attrs } />
                       ))}
