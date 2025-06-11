@@ -46,7 +46,6 @@ import { genericComponent, omit, propsFactory, useRender } from '@/util'
 // Types
 import type { MaybeRef, PropType } from 'vue'
 import type { RouteLocationRaw } from 'vue-router'
-import type { makeVListItemProps } from '@/components/VList/VListItem'
 import type { ListItem as VuetifyListItem } from '@/composables/list-items'
 import { VHotkey } from '@/labs/VCommandPalette/VHotkey'
 

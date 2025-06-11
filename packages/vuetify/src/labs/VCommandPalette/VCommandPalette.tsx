@@ -34,7 +34,7 @@ import { makeVDialogProps } from '@/components/VDialog/VDialog'
 import { VDivider } from '@/components/VDivider'
 import { VSheet } from '@/components/VSheet'
 import { VCommandPaletteInstructions } from '@/labs/VCommandPalette/VCommandPaletteInstructions'
-import { isGroupDefinition, isParentDefinition, isItemDefinition, VCommandPaletteList } from '@/labs/VCommandPalette/VCommandPaletteList'
+import { isGroupDefinition, isParentDefinition, VCommandPaletteList } from '@/labs/VCommandPalette/VCommandPaletteList'
 import { VCommandPaletteSearch } from '@/labs/VCommandPalette/VCommandPaletteSearch'
 
 // Composables
