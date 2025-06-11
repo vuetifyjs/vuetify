@@ -70,6 +70,7 @@ describe('VCommandPalette', () => {
 
       const searchInput = await screen.findByRole('textbox')
       await userEvent.type(searchInput, 'test search')
+      // Initial first item is already selected
       await userEvent.keyboard('{ArrowDown}')
 
       // Close dialog
@@ -81,7 +82,7 @@ describe('VCommandPalette', () => {
       model.value = true
       await nextTick()
 
-      // Search should be cleared and no item selected initially
+      // Search should be cleared and first item should be auto-selected
       const newSearchInput = await screen.findByRole('textbox')
       await expect.element(newSearchInput).toHaveValue('')
 
@@ -296,7 +297,7 @@ describe('VCommandPalette', () => {
       await screen.findByRole('dialog')
 
       // Navigate to second item
-      await userEvent.keyboard('{ArrowDown}{ArrowDown}')
+      await userEvent.keyboard('{ArrowDown}')
       const secondItem = await screen.findByText('Second Item')
       const secondListItem = secondItem.closest('.v-list-item')
       await expect.poll(() =>
@@ -310,8 +311,15 @@ describe('VCommandPalette', () => {
       ]
       await nextTick()
 
-      // Selection should be reset to -1 (no selection) when items change
+      // Selection should be reset and first item auto-selected when items change
       // This is the expected behavior based on the component implementation
+      const newFirstItem = await screen.findByText('New First Item')
+      const newFirstListItem = newFirstItem.closest('.v-list-item')
+      await expect.poll(() =>
+        newFirstListItem?.classList.contains('v-list-item--active')
+      ).toBeTruthy()
+
+      // Old selection should be cleared
       await expect.poll(() =>
         !secondListItem?.classList.contains('v-list-item--active')
       ).toBeTruthy()

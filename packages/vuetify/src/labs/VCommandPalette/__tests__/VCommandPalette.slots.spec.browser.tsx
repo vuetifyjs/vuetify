@@ -138,10 +138,7 @@ describe('VCommandPalette', () => {
       await expect(screen.findByTestId('custom-item1')).resolves.toBeVisible()
       await expect(screen.findByText('Custom: First Item')).resolves.toBeVisible()
 
-      // Test basic keyboard navigation
-      await userEvent.keyboard('{ArrowDown}')
-
-      // Just verify that navigation doesn't break with custom slots
+      // First item is selected by default
       const handler = basicItems[0].handler
       await userEvent.keyboard('{Enter}')
       expect(handler).toHaveBeenCalledTimes(1)

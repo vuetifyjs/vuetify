@@ -250,7 +250,6 @@ export const VCommandPaletteList = genericComponent<VCommandPaletteListSlots>()(
     function getVListItemProps (item: any, index: number, isSelectable = true) {
       const baseProps = {
         title: item.title,
-        active: isSelectable && props.selectedIndex === index,
         onClick: isSelectable ? (e: MouseEvent | KeyboardEvent) => emit('click:item', item, e) : undefined,
       }
 
@@ -437,7 +436,7 @@ export const VCommandPaletteList = genericComponent<VCommandPaletteListSlots>()(
                 const isActive = flatIndex === actualSelectedIndex.value
                 const itemId = `command-palette-item-${flatIndex}`
                 const itemProps = {
-                  ...getVListItemProps(flatItem.item!, flatItem.originalIndex ?? 0, true),
+                  ...getVListItemProps(flatItem.item!, currentSelectableIndex, true),
                   active: isActive,
                   id: itemId,
                   role: 'option',

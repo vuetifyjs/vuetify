@@ -263,9 +263,7 @@ describe('VCommandPalette', () => {
 
       await screen.findByRole('dialog')
 
-      // Navigate to first item
-      await userEvent.keyboard('{ArrowDown}')
-
+      // First item should be auto-selected on open
       const firstItem = await screen.findByText('First Item')
       const firstListItem = firstItem.closest('.v-list-item')
 
@@ -391,9 +389,7 @@ describe('VCommandPalette', () => {
       const dialog = await screen.findByRole('dialog')
       const listbox = await screen.findByRole('listbox')
 
-      // Navigate to first item
-      await userEvent.keyboard('{ArrowDown}')
-
+      // First item should be auto-selected on open
       const firstItem = await screen.findByText('First Item')
       const firstListItem = firstItem.closest('.v-list-item')
 
