@@ -6,7 +6,7 @@ import { useBackgroundColor, useTextColor } from '@/composables/color'
 
 // Utilities
 import { computed, ref, watch } from 'vue'
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { debounce, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -66,7 +66,7 @@ export const VTimePickerClock = genericComponent()({
     const isDragging = ref(false)
     const valueOnMouseDown = ref(null as number | null)
     const valueOnMouseUp = ref(null as number | null)
-    let wheelTimeout: ReturnType<typeof setTimeout>
+    const debounceWheel = debounce((value: number) => emit('change', value), 750)
 
     const { textColorClasses, textColorStyles } = useTextColor(() => props.color)
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.color)
@@ -116,8 +116,8 @@ export const VTimePickerClock = genericComponent()({
       if (value !== props.displayedValue) {
         update(value)
       }
-      clearTimeout(wheelTimeout)
-      wheelTimeout = setTimeout(() => emit('change', value), 1000)
+
+      debounceWheel(value)
     }
 
     function isInner (value: number) {
