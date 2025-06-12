@@ -66,7 +66,7 @@ export const VTimePickerClock = genericComponent()({
     const isDragging = ref(false)
     const valueOnMouseDown = ref(null as number | null)
     const valueOnMouseUp = ref(null as number | null)
-    const debounceWheel = debounce((value: number) => emit('change', value), 750)
+    const emitChangeDebounced = debounce((value: number) => emit('change', value), 750)
 
     const { textColorClasses, textColorStyles } = useTextColor(() => props.color)
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.color)
@@ -117,7 +117,7 @@ export const VTimePickerClock = genericComponent()({
         update(value)
       }
 
-      debounceWheel(value)
+      emitChangeDebounced(value)
     }
 
     function isInner (value: number) {
