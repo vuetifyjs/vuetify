@@ -1,3 +1,5 @@
+// hotkey.spec.ts
+
 // Composables
 import { useHotkey } from '../hotkey'
 
@@ -5,14 +7,9 @@ import { useHotkey } from '../hotkey'
 import { ref } from 'vue'
 
 describe('hotkey.ts', () => {
-  // Save original navigator to restore after each test
   const originalNavigator = window.navigator
-
   afterEach(() => {
-    Object.defineProperty(window, 'navigator', {
-      value: originalNavigator,
-      writable: true,
-    })
+    Object.defineProperty(window, 'navigator', { value: originalNavigator, writable: true })
   })
 
   it.each([
@@ -30,678 +27,231 @@ describe('hotkey.ts', () => {
     ['enter', { key: 'enter' }],
     [' ', { key: ' ' }],
     ['ctrl+shift+alt+meta+x', { ctrlKey: true, shiftKey: true, altKey: true, metaKey: true, key: 'x' }],
-  ])('should invoke callback when %s is pressed', (keys: string, eventProps: any) => {
-    const callback = vi.fn()
-    const cleanup = useHotkey(keys, callback)
+  ])('fires on %s', (combo, props) => {
+    const cb = vi.fn()
+    const stop = useHotkey(combo, cb)
 
-    const event = new KeyboardEvent('keydown', {
-      ctrlKey: eventProps.ctrlKey || false,
-      shiftKey: eventProps.shiftKey || false,
-      altKey: eventProps.altKey || false,
-      metaKey: eventProps.metaKey || false,
-      key: eventProps.key,
-    })
+    window.dispatchEvent(new KeyboardEvent('keydown', { ...{ ctrlKey: false, shiftKey: false, altKey: false, metaKey: false }, ...props }))
 
-    window.dispatchEvent(event)
+    expect(cb).toHaveBeenCalledTimes(1)
 
-    expect(callback).toHaveBeenCalledTimes(1)
-
-    cleanup()
+    stop()
   })
 
-  it('should invoke callback for key sequence', () => {
-    const callback = vi.fn()
-    const cleanup = useHotkey('g-g', callback)
+  describe.each([
+    ['complete', 0, ['g', 'g'], 1],
+    ['incomplete', 0, ['g'], 0],
+    ['timeout', 1100, ['g', 'g'], 0],
+  ])('%s g‑g', (_, gap, seq, expected) => {
+    it('callback count matches', async () => {
+      vi.useFakeTimers()
+      const cb = vi.fn()
+      const stop = useHotkey('g-g', cb)
 
-    const event1 = new KeyboardEvent('keydown', { key: 'g' })
-    const event2 = new KeyboardEvent('keydown', { key: 'g' })
+      window.dispatchEvent(new KeyboardEvent('keydown', { key: seq[0] }))
+      vi.advanceTimersByTime(gap)
+      // eslint-disable-next-line vitest/no-conditional-in-test
+      if (seq[1]) window.dispatchEvent(new KeyboardEvent('keydown', { key: seq[1] }))
+      expect(cb).toHaveBeenCalledTimes(expected)
 
-    window.dispatchEvent(event1)
-    window.dispatchEvent(event2)
+      stop()
 
-    expect(callback).toHaveBeenCalledTimes(1)
-
-    cleanup()
+      vi.useRealTimers()
+    })
   })
 
-  it('should NOT invoke callback for incomplete key sequence', () => {
-    const callback = vi.fn()
-    const cleanup = useHotkey('g-g', callback)
+  it.each([
+    ['extra modifiers', 'ctrl+a', { ctrlKey: true, shiftKey: true, key: 'a' }],
+    ['modifiers only', 'ctrl+shift+b', { ctrlKey: true, shiftKey: true, key: 'Control' }],
+  ])('%s ignored', (_, combo, evtProps) => {
+    const cb = vi.fn()
+    const stop = useHotkey(combo, cb)
 
-    const event1 = new KeyboardEvent('keydown', { key: 'g' })
+    window.dispatchEvent(new KeyboardEvent('keydown', evtProps))
 
-    window.dispatchEvent(event1)
+    expect(cb).not.toHaveBeenCalled()
 
-    expect(callback).not.toHaveBeenCalled()
-
-    cleanup()
+    stop()
   })
 
-  it('should reset sequence after timeout', async () => {
-    const callback = vi.fn()
-    const cleanup = useHotkey('g-g', callback)
+  describe.each([
+    [false, 'input', () => document.createElement('input')],
+    [false, 'contentEditable', () => Object.assign(document.createElement('div'), { contentEditable: 'true', tabIndex: 0 })],
+    [true, 'input allowed', () => document.createElement('input')],
+  ])('inputs=%s (%s)', (flag, _label, factory) => {
+    it('honours inputs flag', () => {
+      const cb = vi.fn()
+      const stop = useHotkey('ctrl+a', cb, { inputs: flag })
+      const el = factory(); document.body.appendChild(el); el.focus()
 
-    const event1 = new KeyboardEvent('keydown', { key: 'g' })
-    const event2 = new KeyboardEvent('keydown', { key: 'g' })
+      window.dispatchEvent(new KeyboardEvent('keydown', { ctrlKey: true, key: 'a' }))
 
-    window.dispatchEvent(event1)
+      expect(cb).toHaveBeenCalledTimes(flag ? 1 : 0)
 
-    await new Promise(resolve => setTimeout(resolve, 1100))
-
-    window.dispatchEvent(event2)
-
-    expect(callback).not.toHaveBeenCalled()
-
-    cleanup()
+      stop(); document.body.removeChild(el)
+    })
   })
 
-  it('should NOT invoke callback when extra modifiers are pressed', () => {
-    const callback = vi.fn()
-    const cleanup = useHotkey('ctrl+a', callback)
+  it.each([[true, true], [false, false]])('preventDefault=%s', (setting, shouldCall) => {
+    const cb = vi.fn()
+    const stop = useHotkey('ctrl+a', cb, { preventDefault: setting })
+    const evt = new KeyboardEvent('keydown', { ctrlKey: true, key: 'a' })
+    const spy = vi.spyOn(evt, 'preventDefault')
 
-    const event = new KeyboardEvent('keydown', {
-      ctrlKey: true,
-      shiftKey: true,
-      key: 'a',
-    })
+    window.dispatchEvent(evt)
 
-    window.dispatchEvent(event)
+    expect(cb).toHaveBeenCalledTimes(1)
 
-    expect(callback).not.toHaveBeenCalled()
+    expect(spy).toHaveBeenCalledTimes(shouldCall ? 1 : 0)
 
-    cleanup()
+    stop()
   })
 
-  it('should NOT invoke callback when pressing only modifiers without the main key', () => {
-    const callback = vi.fn()
-    const cleanup = useHotkey('ctrl+shift+b', callback)
+  it.each([
+    ['Mac ctrl', 'ctrl+s', { ctrlKey: true, key: 's' }, 'Macintosh'],
+    ['Mac cmd', 'cmd+s', { metaKey: true, key: 's' }, 'Macintosh'],
+  ])('%s', (_, combo, evtProps, ua) => {
+    const cb = vi.fn()
+    Object.defineProperty(window, 'navigator', { value: { userAgent: `Mozilla/5.0 (${ua})` }, writable: true })
+    const stop = useHotkey(combo, cb)
 
-    const event = new KeyboardEvent('keydown', {
-      ctrlKey: true,
-      shiftKey: true,
-      key: 'Control',
-    })
+    window.dispatchEvent(new KeyboardEvent('keydown', evtProps))
 
-    window.dispatchEvent(event)
+    expect(cb).toHaveBeenCalledTimes(1)
 
-    expect(callback).not.toHaveBeenCalled()
-
-    cleanup()
+    stop()
   })
 
-  it('should respect options.inputs setting', () => {
-    const callback = vi.fn()
+  it('reactive ref & disabled', async () => {
+    const cb = vi.fn()
+    const keyRef = ref<string>('ctrl+a')
+    const stop = useHotkey(keyRef, cb)
 
-    const cleanup1 = useHotkey('ctrl+a', callback, { inputs: false })
+    window.dispatchEvent(new KeyboardEvent('keydown', { ctrlKey: true, key: 'a' }))
+    expect(cb).toHaveBeenCalledTimes(1)
 
-    const input = document.createElement('input')
-    document.body.appendChild(input)
-    input.focus()
+    keyRef.value = 'ctrl+b'; await new Promise(resolve => setTimeout(resolve, 10))
+    window.dispatchEvent(new KeyboardEvent('keydown', { ctrlKey: true, key: 'a' }))
+    expect(cb).toHaveBeenCalledTimes(1)
 
-    const event1 = new KeyboardEvent('keydown', {
-      ctrlKey: true,
-      key: 'a',
-    })
+    window.dispatchEvent(new KeyboardEvent('keydown', { ctrlKey: true, key: 'b' }))
+    expect(cb).toHaveBeenCalledTimes(2)
 
-    window.dispatchEvent(event1)
-    expect(callback).not.toHaveBeenCalled()
+    keyRef.value = undefined as any; await new Promise(resolve => setTimeout(resolve, 10))
+    window.dispatchEvent(new KeyboardEvent('keydown', { ctrlKey: true, key: 'b' }))
+    expect(cb).toHaveBeenCalledTimes(2)
 
-    cleanup1()
-
-    const cleanup2 = useHotkey('ctrl+a', callback, { inputs: true })
-
-    window.dispatchEvent(event1)
-    expect(callback).toHaveBeenCalledTimes(1)
-
-    cleanup2()
-    document.body.removeChild(input)
+    stop()
   })
 
-  it('should respect options.sequenceTimeout setting', async () => {
-    const callback = vi.fn()
-    const cleanup = useHotkey('g-g', callback, { sequenceTimeout: 500 })
+  it.each([
+    ['case insensitive', 'CTRL+A', { ctrlKey: true, key: 'A' }, 1],
+    ['missing key', 'ctrl+', { ctrlKey: true, key: 'a' }, 0],
+  ])('%s', (_, combo, evtProps, exp) => {
+    const cb = vi.fn()
+    const stop = useHotkey(combo as any, cb)
 
-    const event1 = new KeyboardEvent('keydown', { key: 'g' })
-    const event2 = new KeyboardEvent('keydown', { key: 'g' })
+    window.dispatchEvent(new KeyboardEvent('keydown', evtProps))
 
-    window.dispatchEvent(event1)
+    expect(cb).toHaveBeenCalledTimes(exp)
 
-    await new Promise(resolve => setTimeout(resolve, 600))
-
-    window.dispatchEvent(event2)
-
-    expect(callback).not.toHaveBeenCalled()
-
-    cleanup()
+    stop()
   })
 
-  it('should handle ctrl key on Mac platform', () => {
-    const callback = vi.fn()
+  it('long ctrl+k-p-s sequence', () => {
+    const cb = vi.fn()
+    const stop = useHotkey('ctrl+k-p-s', cb)
 
-    Object.defineProperty(window, 'navigator', {
-      value: {
-        // eslint-disable-next-line max-len
-        userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
-      },
-      writable: true,
-    })
+    window.dispatchEvent(new KeyboardEvent('keydown', { ctrlKey: true, key: 'k' }))
+    window.dispatchEvent(new KeyboardEvent('keydown', { key: 'p' }))
+    window.dispatchEvent(new KeyboardEvent('keydown', { key: 's' }))
 
-    const cleanup = useHotkey('ctrl+s', callback)
+    expect(cb).toHaveBeenCalledTimes(1)
 
-    // On Mac, ctrl+s should respond to actual ctrl key press
-    const event = new KeyboardEvent('keydown', {
-      ctrlKey: true,
-      key: 's',
-    })
-
-    window.dispatchEvent(event)
-
-    expect(callback).toHaveBeenCalledTimes(1)
-
-    cleanup()
+    stop()
   })
 
-  it('should respect options.event setting', () => {
-    // Reset navigator to non-Mac for this test
-    Object.defineProperty(window, 'navigator', {
-      value: {
-        userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
-      },
-      writable: true,
-    })
+  it('multiple g-g completions', () => {
+    const cb = vi.fn()
+    const stop = useHotkey('g-g', cb)
+    for (let i = 0; i < 2; i++) {
+      window.dispatchEvent(new KeyboardEvent('keydown', { key: 'g' }))
+      window.dispatchEvent(new KeyboardEvent('keydown', { key: 'g' }))
+    }
 
-    const callback = vi.fn()
+    expect(cb).toHaveBeenCalledTimes(2)
 
-    // Test with keydown (default)
-    const cleanup1 = useHotkey('ctrl+a', callback, { event: 'keydown' })
-
-    const keydownEvent = new KeyboardEvent('keydown', {
-      ctrlKey: true,
-      key: 'a',
-    })
-
-    const keyupEvent = new KeyboardEvent('keyup', {
-      ctrlKey: true,
-      key: 'a',
-    })
-
-    // Should respond to keydown
-    window.dispatchEvent(keydownEvent)
-    expect(callback).toHaveBeenCalledTimes(1)
-
-    // Should NOT respond to keyup
-    window.dispatchEvent(keyupEvent)
-    expect(callback).toHaveBeenCalledTimes(1) // Still 1, not 2
-
-    cleanup1()
-
-    // Test with keyup
-    const cleanup2 = useHotkey('ctrl+a', callback, { event: 'keyup' })
-
-    // Reset callback
-    callback.mockClear()
-
-    // Should NOT respond to keydown
-    window.dispatchEvent(keydownEvent)
-    expect(callback).not.toHaveBeenCalled()
-
-    // Should respond to keyup
-    window.dispatchEvent(keyupEvent)
-    expect(callback).toHaveBeenCalledTimes(1)
-
-    cleanup2()
+    stop()
   })
 
-  it('should handle static hotkey strings', () => {
-    const callback = vi.fn()
-
-    // Test with a static string
-    const cleanup = useHotkey('ctrl+a', callback)
-
-    // Test the hotkey
-    const event = new KeyboardEvent('keydown', {
-      ctrlKey: true,
-      key: 'a',
-    })
-    window.dispatchEvent(event)
-    expect(callback).toHaveBeenCalledTimes(1)
-
-    cleanup()
-  })
-
-  it('should handle reactive keys (ref)', async () => {
-    // Reset navigator to ensure consistent behavior
-    Object.defineProperty(window, 'navigator', {
-      value: {
-        userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
-      },
-      writable: true,
-    })
-
-    const callback = vi.fn()
-    const hotkeyRef = ref<string>('ctrl+a')
-
-    // Use a reactive ref
-    const cleanup = useHotkey(hotkeyRef, callback)
-
-    // Test initial hotkey
-    let event = new KeyboardEvent('keydown', {
-      ctrlKey: true,
-      key: 'a',
-    })
-    window.dispatchEvent(event)
-    expect(callback).toHaveBeenCalledTimes(1)
-
-    // Change the reactive key
-    hotkeyRef.value = 'ctrl+b'
-
-    // Wait for reactive update to be processed
-    await new Promise(resolve => setTimeout(resolve, 10))
-
-    // Should not respond to old hotkey
-    event = new KeyboardEvent('keydown', {
-      ctrlKey: true,
-      key: 'a',
-    })
-    window.dispatchEvent(event)
-    expect(callback).toHaveBeenCalledTimes(1) // Still 1
-
-    // Should respond to new hotkey
-    event = new KeyboardEvent('keydown', {
-      ctrlKey: true,
-      key: 'b',
-    })
-    window.dispatchEvent(event)
-    expect(callback).toHaveBeenCalledTimes(2)
-
-    // Change to undefined (disable hotkey)
-    hotkeyRef.value = undefined as any
-
-    // Wait for reactive update to be processed
-    await new Promise(resolve => setTimeout(resolve, 10))
-
-    // Should not respond to any hotkey when disabled
-    event = new KeyboardEvent('keydown', {
-      ctrlKey: true,
-      key: 'b',
-    })
-    window.dispatchEvent(event)
-    expect(callback).toHaveBeenCalledTimes(2) // Still 2
-
-    cleanup()
-  })
-
-  it('should handle undefined keys (disabled hotkey)', () => {
-    const callback = vi.fn()
-    const cleanup = useHotkey(undefined, callback)
-
-    const event = new KeyboardEvent('keydown', {
-      ctrlKey: true,
-      key: 'a',
-    })
-    window.dispatchEvent(event)
-
-    expect(callback).not.toHaveBeenCalled()
-
-    cleanup()
-  })
-
-  it('should respect options.preventDefault setting', () => {
-    // Reset navigator to ensure consistent behavior
-    Object.defineProperty(window, 'navigator', {
-      value: {
-        userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
-      },
-      writable: true,
-    })
-
-    const callback = vi.fn()
-
-    // Test with preventDefault: true (default)
-    const cleanup1 = useHotkey('ctrl+a', callback, { preventDefault: true })
-
-    const event1 = new KeyboardEvent('keydown', {
-      ctrlKey: true,
-      key: 'a',
-    })
-
-    // Mock preventDefault to track if it was called
-    const preventDefaultSpy = vi.spyOn(event1, 'preventDefault')
-
-    window.dispatchEvent(event1)
-    expect(callback).toHaveBeenCalledTimes(1)
-    expect(preventDefaultSpy).toHaveBeenCalled()
-
-    cleanup1()
-
-    // Test with preventDefault: false
-    const cleanup2 = useHotkey('ctrl+a', callback, { preventDefault: false })
-
-    const event2 = new KeyboardEvent('keydown', {
-      ctrlKey: true,
-      key: 'a',
-    })
-
-    const preventDefaultSpy2 = vi.spyOn(event2, 'preventDefault')
-    callback.mockClear()
-
-    window.dispatchEvent(event2)
-    expect(callback).toHaveBeenCalledTimes(1)
-    expect(preventDefaultSpy2).not.toHaveBeenCalled()
-
-    cleanup2()
-  })
-
-  it('should handle textarea and contenteditable elements with inputs option', () => {
-    // Reset navigator to ensure consistent behavior
-    Object.defineProperty(window, 'navigator', {
-      value: {
-        userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
-      },
-      writable: true,
-    })
-
-    const callback = vi.fn()
-
-    // Test with textarea
-    const cleanup1 = useHotkey('ctrl+a', callback, { inputs: false })
-
-    const textarea = document.createElement('textarea')
-    document.body.appendChild(textarea)
-    textarea.focus()
-
-    const event1 = new KeyboardEvent('keydown', {
-      ctrlKey: true,
-      key: 'a',
-    })
-
-    window.dispatchEvent(event1)
-    expect(callback).not.toHaveBeenCalled()
-
-    cleanup1()
-    document.body.removeChild(textarea)
-
-    // Test with contenteditable
-    const cleanup2 = useHotkey('ctrl+a', callback, { inputs: false })
-
-    const div = document.createElement('div')
-    div.contentEditable = 'true'
-    div.tabIndex = 0 // Make it focusable
-    document.body.appendChild(div)
-    div.focus()
-
-    // Verify the element is actually focused and contentEditable
-    expect(document.activeElement).toBe(div)
-    expect(div.contentEditable).toBe('true')
-
-    window.dispatchEvent(event1)
-    expect(callback).not.toHaveBeenCalled()
-
-    cleanup2()
-    document.body.removeChild(div)
-
-    // Test that it works when inputs: true
-    const cleanup3 = useHotkey('ctrl+a', callback, { inputs: true })
-
-    const input = document.createElement('input')
-    document.body.appendChild(input)
-    input.focus()
-
-    window.dispatchEvent(event1)
-    expect(callback).toHaveBeenCalledTimes(1)
-
-    cleanup3()
-    document.body.removeChild(input)
-  })
-
-  it('should handle cmd+key on Mac platform', () => {
-    const callback = vi.fn()
-
-    Object.defineProperty(window, 'navigator', {
-      value: {
-        // eslint-disable-next-line max-len
-        userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
-      },
-      writable: true,
-    })
-
-    const cleanup = useHotkey('cmd+s', callback)
-
-    // On Mac, cmd+s should respond to metaKey
-    const event = new KeyboardEvent('keydown', {
-      metaKey: true,
-      key: 's',
-    })
-
-    window.dispatchEvent(event)
-
-    expect(callback).toHaveBeenCalledTimes(1)
-
-    cleanup()
-  })
-
-  it('should handle longer key sequences', () => {
-    // Reset navigator to ensure consistent behavior
-    Object.defineProperty(window, 'navigator', {
-      value: {
-        userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
-      },
-      writable: true,
-    })
-
-    const callback = vi.fn()
-    const cleanup = useHotkey('ctrl+k-p-s', callback)
-
-    const event1 = new KeyboardEvent('keydown', { ctrlKey: true, key: 'k' })
-    const event2 = new KeyboardEvent('keydown', { key: 'p' })
-    const event3 = new KeyboardEvent('keydown', { key: 's' })
-
-    // Incomplete sequence
-    window.dispatchEvent(event1)
-    window.dispatchEvent(event2)
-    expect(callback).not.toHaveBeenCalled()
-
-    // Complete sequence
-    window.dispatchEvent(event3)
-    expect(callback).toHaveBeenCalledTimes(1)
-
-    cleanup()
-  })
-
-  it('should reset sequence on wrong key in middle', () => {
-    const callback = vi.fn()
-    const cleanup = useHotkey('a-b-c', callback)
-
-    const eventA = new KeyboardEvent('keydown', { key: 'a' })
-    const eventB = new KeyboardEvent('keydown', { key: 'b' })
-    const eventC = new KeyboardEvent('keydown', { key: 'c' })
-    const eventX = new KeyboardEvent('keydown', { key: 'x' })
-
-    // Start sequence correctly
-    window.dispatchEvent(eventA)
-    window.dispatchEvent(eventB)
-
-    // Wrong key should reset sequence
-    window.dispatchEvent(eventX)
-
-    // Now complete sequence from beginning
-    window.dispatchEvent(eventA)
-    window.dispatchEvent(eventB)
-    window.dispatchEvent(eventC)
-
-    expect(callback).toHaveBeenCalledTimes(1)
-
-    cleanup()
-  })
-
-  it('should handle case insensitive keys', () => {
-    // Reset navigator to ensure consistent behavior
-    Object.defineProperty(window, 'navigator', {
-      value: {
-        userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
-      },
-      writable: true,
-    })
-
-    const callback = vi.fn()
-    const cleanup = useHotkey('CTRL+A', callback)
-
-    const event = new KeyboardEvent('keydown', {
-      ctrlKey: true,
-      key: 'A', // Uppercase in event
-    })
-
-    window.dispatchEvent(event)
-
-    expect(callback).toHaveBeenCalledTimes(1)
-
-    cleanup()
-  })
-
-  it('should handle missing actual key in hotkey definition', () => {
-    const callback = vi.fn()
-    const cleanup = useHotkey('ctrl+', callback) // Missing actual key
-
-    const event = new KeyboardEvent('keydown', {
-      ctrlKey: true,
-      key: 'a',
-    })
-
-    window.dispatchEvent(event)
-
-    // Should not trigger since actual key is undefined
-    expect(callback).not.toHaveBeenCalled()
-
-    cleanup()
-  })
-
-  it('should handle multiple sequence resets and completions', () => {
-    const callback = vi.fn()
-    const cleanup = useHotkey('g-g', callback)
-
-    const eventG = new KeyboardEvent('keydown', { key: 'g' })
-
-    // Complete sequence once
-    window.dispatchEvent(eventG)
-    window.dispatchEvent(eventG)
-    expect(callback).toHaveBeenCalledTimes(1)
-
-    // Complete sequence again
-    window.dispatchEvent(eventG)
-    window.dispatchEvent(eventG)
-    expect(callback).toHaveBeenCalledTimes(2)
-
-    cleanup()
-  })
-
-  it('should not interfere with browser when navigator is undefined', () => {
-    // Mock navigator as undefined
-    const originalNavigator = window.navigator
-    Object.defineProperty(window, 'navigator', {
-      value: undefined,
-      writable: true,
-    })
-
+  it('handles undefined navigator gracefully', () => {
+    const orig = window.navigator
+    Object.defineProperty(window, 'navigator', { value: undefined, writable: true })
     try {
-      const callback = vi.fn()
-      const cleanup = useHotkey('ctrl+s', callback)
+      const cb = vi.fn()
+      const stop = useHotkey('ctrl+s', cb)
 
-      const event = new KeyboardEvent('keydown', {
-        ctrlKey: true,
-        key: 's',
-      })
+      window.dispatchEvent(new KeyboardEvent('keydown', { ctrlKey: true, key: 's' }))
 
-      window.dispatchEvent(event)
+      expect(cb).toHaveBeenCalledTimes(1)
 
-      expect(callback).toHaveBeenCalledTimes(1)
-
-      cleanup()
+      stop()
     } finally {
-      // Restore navigator regardless of test outcome
-      Object.defineProperty(window, 'navigator', {
-        value: originalNavigator,
-        writable: true,
-      })
+      Object.defineProperty(window, 'navigator', { value: orig, writable: true })
     }
   })
 
-  it('should handle edge cases for hotkey combos like alt--, alt++, alt+-, alt-+', () => {
-    const combos = [
-      { combo: 'alt--', key: '-', desc: 'alt-- (should trigger on alt + "-")' },
-      { combo: 'alt++', key: '+', desc: 'alt++ (should trigger on alt + "+")' },
-      { combo: 'alt+-', key: '-', desc: 'alt+- (should trigger on alt + "-")' },
-      { combo: 'alt-+', key: '+', desc: 'alt-+ (should trigger on alt + "+")' },
-    ]
+  describe('alt ± combos', () => {
+    it.each([
+      ['alt--', '-'],
+      ['alt++', '+'],
+      ['alt+-', '-'],
+      ['alt-+', '+'],
+    ])('%s triggers', (combo, key) => {
+      const cb = vi.fn()
+      const stop = useHotkey(combo, cb)
 
-    for (const { combo, key, desc } of combos) {
-      const callback = vi.fn()
-      const cleanup = useHotkey(combo, callback)
+      window.dispatchEvent(new KeyboardEvent('keydown', { altKey: true, key }))
 
-      // Should trigger on correct key
-      const event = new KeyboardEvent('keydown', {
-        altKey: true,
-        key,
-      })
-      window.dispatchEvent(event)
-      expect(callback).toHaveBeenCalledTimes(1)
+      expect(cb).toHaveBeenCalledTimes(1)
 
-      // Should NOT trigger on wrong key
-      const wrongKey = key === '-' ? '+' : '-'
-      const wrongEvent = new KeyboardEvent('keydown', {
-        altKey: true,
-        key: wrongKey,
-      })
-      window.dispatchEvent(wrongEvent)
-      expect(callback).toHaveBeenCalledTimes(1)
+      const wrong = key === '-' ? '+' : '-'
+      window.dispatchEvent(new KeyboardEvent('keydown', { altKey: true, key: wrong }))
 
-      // Should NOT trigger without alt
-      const noAltEvent = new KeyboardEvent('keydown', {
-        key,
-      })
-      window.dispatchEvent(noAltEvent)
-      expect(callback).toHaveBeenCalledTimes(1)
+      expect(cb).toHaveBeenCalledTimes(1)
 
-      cleanup()
-    }
+      window.dispatchEvent(new KeyboardEvent('keydown', { key }))
+
+      expect(cb).toHaveBeenCalledTimes(1)
+      stop()
+    })
   })
 
-  it('should handle edge cases for hotkey combos with _ character like alt__, alt_+, alt_-, alt+_', () => {
-    const combos = [
-      { combo: 'alt__', key: '_', desc: 'alt__ (should trigger on alt + "_")' },
-      { combo: 'alt_+', key: '+', desc: 'alt_+ (should trigger on alt + "+")' },
-      { combo: 'alt_-', key: '-', desc: 'alt_- (should trigger on alt + "-")' },
-      { combo: 'alt+_', key: '_', desc: 'alt+_ (should trigger on alt + "_")' },
-    ]
+  describe('alt _ combos', () => {
+    it.each([
+      ['alt__', '_'],
+      ['alt_+', '+'],
+      ['alt_-', '-'],
+      ['alt+_', '_'],
+    ])('%s triggers', (combo, key) => {
+      const cb = vi.fn()
+      const stop = useHotkey(combo, cb)
 
-    for (const { combo, key, desc } of combos) {
-      const callback = vi.fn()
-      const cleanup = useHotkey(combo, callback)
+      window.dispatchEvent(new KeyboardEvent('keydown', { altKey: true, key }))
 
-      // Should trigger on correct key
-      const event = new KeyboardEvent('keydown', {
-        altKey: true,
-        key,
-      })
-      window.dispatchEvent(event)
-      expect(callback).toHaveBeenCalledTimes(1)
+      expect(cb).toHaveBeenCalledTimes(1)
 
-      // Should NOT trigger on wrong key
-      const wrongKey = key === '_' ? '+' : '_'
-      const wrongEvent = new KeyboardEvent('keydown', {
-        altKey: true,
-        key: wrongKey,
-      })
-      window.dispatchEvent(wrongEvent)
-      expect(callback).toHaveBeenCalledTimes(1)
+      const wrong = key === '_' ? '+' : '_'
 
-      // Should NOT trigger without alt
-      const noAltEvent = new KeyboardEvent('keydown', {
-        key,
-      })
-      window.dispatchEvent(noAltEvent)
-      expect(callback).toHaveBeenCalledTimes(1)
+      window.dispatchEvent(new KeyboardEvent('keydown', { altKey: true, key: wrong }))
 
-      cleanup()
-    }
+      expect(cb).toHaveBeenCalledTimes(1)
+
+      window.dispatchEvent(new KeyboardEvent('keydown', { key }))
+
+      expect(cb).toHaveBeenCalledTimes(1)
+
+      stop()
+    })
   })
 })
