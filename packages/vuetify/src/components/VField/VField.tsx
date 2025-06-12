@@ -221,7 +221,7 @@ export const VField = genericComponent<new <T>(
       const isOutlined = props.variant === 'outlined'
       const hasPrepend = !!(slots['prepend-inner'] || props.prependInnerIcon)
       const hasClear = !!(props.clearable || slots.clear) && !props.disabled
-      const hasAppend = !!(slots['append-inner'] || props.appendInnerIcon || hasClear)
+      const hasAppend = !!(slots['append-inner'] || props.appendInnerIcon)
       const label = () => (
         slots.label
           ? slots.label({

@@ -224,21 +224,26 @@
 
   .v-field__clearable
     cursor: pointer
+    max-width: 0
     opacity: 0
     overflow: hidden
-    margin-inline: $field-clearable-margin
+    interpolate-size: allow-keywords
     transition: $field-transition-timing
-    transition-property: opacity, transform, width
+    transition-property: opacity, transform, max-width, margin
+    display: flex
+    justify-content: end
+    transform: translateX(calc(-0.5 * var(--v-field-padding-end) - #{$field-clearable-margin}))
 
+    .v-field:hover &,
     .v-field--focused &,
     .v-field--persistent-clear &
+      transform: translateX(calc(-0.5 * var(--v-field-padding-end)))
+      margin-inline: $field-clearable-margin
+      max-width: max-content
       opacity: 1
 
-    @media (hover: hover)
-      .v-field:hover &
-        opacity: 1
-
     @media (hover: none)
+      max-width: max-content
       opacity: 1
 
   /* endregion */
