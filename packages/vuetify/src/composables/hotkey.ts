@@ -92,12 +92,35 @@ export function useHotkey (
     clearTimer()
   }
 
+  function splitKeySequence (str: string) {
+    const groups: string[] = []
+    let current = ''
+    for (let i = 0; i < str.length; i++) {
+      const char = str[i]
+      if (char === '-') {
+        const next = str[i + 1]
+        // Treat '-' as a sequence delimiter only if the next character exists
+        // and is NOT one of '-', '+', or '_' (these indicate the '-' belongs to the key itself)
+        if (next && !['-', '+', '_'].includes(next)) {
+          groups.push(current)
+          current = ''
+          continue
+        }
+      }
+      current += char
+    }
+    groups.push(current)
+
+    return groups
+  }
+
   watch(() => toValue(keys), function (unrefKeys) {
     cleanup()
 
     if (unrefKeys) {
-      isSequence.value = unrefKeys.includes('-')
-      keyGroups.value = isSequence.value ? unrefKeys.toLowerCase().split('-') : [unrefKeys.toLowerCase()]
+      const groups = splitKeySequence(unrefKeys.toLowerCase())
+      isSequence.value = groups.length > 1
+      keyGroups.value = groups
       resetSequence()
       window.addEventListener(event, handler)
     }
@@ -111,11 +134,29 @@ export function useHotkey (
   }
 
   function parseKeyGroup (group: string) {
-    const parts = group.split(/[+_]/)
-    const modifiers = Object.fromEntries(
-      ['ctrl', 'shift', 'alt', 'meta', 'cmd'].map(key => [key, parts.includes(key)])
-    ) as Record<string, boolean>
-    const actualKey = parts.find(part => !['ctrl', 'shift', 'alt', 'meta', 'cmd'].includes(part))
+    const MODIFIERS = ['ctrl', 'shift', 'alt', 'meta', 'cmd']
+
+    // Split on +, -, or _ but keep empty strings which indicate consecutive separators (e.g. alt--)
+    const parts = group.toLowerCase().split(/[+_-]/)
+
+    const modifiers = Object.fromEntries(MODIFIERS.map(m => [m, false])) as Record<string, boolean>
+    let actualKey: string | undefined
+
+    for (const part of parts) {
+      if (!part) continue // Skip empty tokens
+      if (MODIFIERS.includes(part)) {
+        modifiers[part] = true
+      } else {
+        actualKey = part
+      }
+    }
+
+    // Fallback for cases where actualKey is a literal '+' or '-' (e.g. alt--, alt++ , alt+-, alt-+)
+    if (!actualKey) {
+      const lastChar = group.slice(-1)
+      if (lastChar === '+' || lastChar === '-') actualKey = lastChar
+    }
+
     return { modifiers, actualKey }
   }
 

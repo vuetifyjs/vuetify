@@ -624,4 +624,44 @@ describe('hotkey.ts', () => {
       })
     }
   })
+
+  it('should handle edge cases for hotkey combos like alt--, alt++, alt+-, alt-+', () => {
+    const combos = [
+      { combo: 'alt--', key: '-', desc: 'alt-- (should trigger on alt + "-")' },
+      { combo: 'alt++', key: '+', desc: 'alt++ (should trigger on alt + "+")' },
+      { combo: 'alt+-', key: '-', desc: 'alt+- (should trigger on alt + "-")' },
+      { combo: 'alt-+', key: '+', desc: 'alt-+ (should trigger on alt + "+")' },
+    ]
+
+    for (const { combo, key, desc } of combos) {
+      const callback = vi.fn()
+      const cleanup = useHotkey(combo, callback)
+
+      // Should trigger on correct key
+      const event = new KeyboardEvent('keydown', {
+        altKey: true,
+        key,
+      })
+      window.dispatchEvent(event)
+      expect(callback).toHaveBeenCalledTimes(1)
+
+      // Should NOT trigger on wrong key
+      const wrongKey = key === '-' ? '+' : '-'
+      const wrongEvent = new KeyboardEvent('keydown', {
+        altKey: true,
+        key: wrongKey,
+      })
+      window.dispatchEvent(wrongEvent)
+      expect(callback).toHaveBeenCalledTimes(1)
+
+      // Should NOT trigger without alt
+      const noAltEvent = new KeyboardEvent('keydown', {
+        key,
+      })
+      window.dispatchEvent(noAltEvent)
+      expect(callback).toHaveBeenCalledTimes(1)
+
+      cleanup()
+    }
+  })
 })
