@@ -226,6 +226,8 @@ export function useHotkey (
    */
   function getExpectedModifiers (modifiers: ReturnType<typeof parseKeyGroup>['modifiers']) {
     // On Mac, handle special cases for cmd/ctrl mapping
+    // Leaving uncollapsed in case this block is refactored
+    // eslint-disable-next-line sonarjs/no-collapsible-if
     if (isMac) {
       // If the hotkey explicitly asks for the command key (cmd), map to meta
       if (modifiers.cmd) {
@@ -241,12 +243,6 @@ export function useHotkey (
       // in our browser environment deliberately send real Ctrl key presses. We
       // therefore keep the explicit `ctrl` modifier untouched so that either
       // Ctrl **or** Cmd can be recognized depending on what the author wrote.
-      return {
-        ctrl: modifiers.ctrl,
-        meta: modifiers.meta,
-        shift: modifiers.shift,
-        alt: modifiers.alt,
-      }
     }
 
     // Default case: use modifiers as specified
