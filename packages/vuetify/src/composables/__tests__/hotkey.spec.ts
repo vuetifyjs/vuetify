@@ -664,4 +664,44 @@ describe('hotkey.ts', () => {
       cleanup()
     }
   })
+
+  it('should handle edge cases for hotkey combos with _ character like alt__, alt_+, alt_-, alt+_', () => {
+    const combos = [
+      { combo: 'alt__', key: '_', desc: 'alt__ (should trigger on alt + "_")' },
+      { combo: 'alt_+', key: '+', desc: 'alt_+ (should trigger on alt + "+")' },
+      { combo: 'alt_-', key: '-', desc: 'alt_- (should trigger on alt + "-")' },
+      { combo: 'alt+_', key: '_', desc: 'alt+_ (should trigger on alt + "_")' },
+    ]
+
+    for (const { combo, key, desc } of combos) {
+      const callback = vi.fn()
+      const cleanup = useHotkey(combo, callback)
+
+      // Should trigger on correct key
+      const event = new KeyboardEvent('keydown', {
+        altKey: true,
+        key,
+      })
+      window.dispatchEvent(event)
+      expect(callback).toHaveBeenCalledTimes(1)
+
+      // Should NOT trigger on wrong key
+      const wrongKey = key === '_' ? '+' : '_'
+      const wrongEvent = new KeyboardEvent('keydown', {
+        altKey: true,
+        key: wrongKey,
+      })
+      window.dispatchEvent(wrongEvent)
+      expect(callback).toHaveBeenCalledTimes(1)
+
+      // Should NOT trigger without alt
+      const noAltEvent = new KeyboardEvent('keydown', {
+        key,
+      })
+      window.dispatchEvent(noAltEvent)
+      expect(callback).toHaveBeenCalledTimes(1)
+
+      cleanup()
+    }
+  })
 })

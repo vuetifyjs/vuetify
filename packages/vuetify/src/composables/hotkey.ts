@@ -154,7 +154,7 @@ export function useHotkey (
     // Fallback for cases where actualKey is a literal '+' or '-' (e.g. alt--, alt++ , alt+-, alt-+)
     if (!actualKey) {
       const lastChar = group.slice(-1)
-      if (lastChar === '+' || lastChar === '-') actualKey = lastChar
+      if (['+', '-', '_'].includes(lastChar)) actualKey = lastChar
     }
 
     return { modifiers, actualKey }
