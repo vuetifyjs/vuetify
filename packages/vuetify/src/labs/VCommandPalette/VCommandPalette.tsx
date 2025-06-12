@@ -202,7 +202,7 @@ const VCommandPaletteContent = genericComponent<VCommandPaletteSlots>()({
      * When searching, groups should only show children that match the search,
      * not all children. This provides a more focused search experience.
      */
-    const transformFilteredItems = (items: any[]) => {
+    function transformFilteredItems (items: any[]): any[] {
       if (!search.value || !search.value.trim()) return items
       const searchLower = search.value.trim().toLowerCase()
 
@@ -373,7 +373,7 @@ const VCommandPaletteContent = genericComponent<VCommandPaletteSlots>()({
     // Use watchEffect to automatically handle cleanup and re-registration
     watchEffect(() => {
       const allItems = props.items ?? []
-      const processItems = (items: VCommandPaletteItem[]) => {
+      function processItems (items: VCommandPaletteItem[]): void {
         items.forEach((item, index) => {
           if ('hotkey' in item && item.hotkey && 'handler' in item && item.handler) {
             useHotkey(item.hotkey, e => {
