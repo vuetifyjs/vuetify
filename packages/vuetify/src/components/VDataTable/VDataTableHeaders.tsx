@@ -153,6 +153,16 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
       loaderClasses.value,
     ]))
 
+    function getSelectedAreaLabel (){
+      if (allSelected.value) {
+        return t('$vuetify.dataTable.ariaLabel.allRowsSelected')
+      }
+      if (someSelected.value) {
+        return t('$vuetify.dataTable.ariaLabel.someRowsSelected')
+      }
+      return t('$vuetify.dataTable.ariaLabel.selectAll')
+    }
+
     const VDataTableHeaderCell = ({ column, x, y }: { column: InternalDataTableHeader, x: number, y: number }) => {
       const noPadding = column.key === 'data-table-select' || column.key === 'data-table-expand'
       const headerProps = mergeProps(props.headerProps ?? {}, column.headerProps ?? {})
@@ -207,7 +217,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
                     modelValue={ allSelected.value }
                     indeterminate={ someSelected.value && !allSelected.value }
                     onUpdate:modelValue={ selectAll }
-                    aria-label={ t('$vuetify.dataTable.ariaLabel.selectAll') }
+                    aria-label={ getSelectedAreaLabel() }
                   />
                 ))
               }

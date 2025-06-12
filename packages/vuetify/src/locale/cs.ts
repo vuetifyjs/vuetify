@@ -22,7 +22,10 @@ export default {
       activateAscending: 'Aktivováním se bude řadit vzestupně.',
       selectAll: 'Select all',
       selectRow: 'Select row {0}',
-    },
+      rowSelected: 'Row {0} is selected',
+      allRowsSelected: 'All rows are selected',
+      someRowsSelected: 'Some rows are selected',
+   },
     sortBy: 'Řadit dle',
   },
   dataFooter: {
