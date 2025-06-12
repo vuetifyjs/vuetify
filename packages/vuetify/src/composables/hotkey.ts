@@ -1,65 +1,25 @@
 // Utilities
 import { onBeforeUnmount, shallowRef, toValue, watch } from 'vue'
+import { IN_BROWSER } from '@/util'
 import { getCurrentInstance } from '@/util/getCurrentInstance'
 
 // Types
 import type { MaybeRef } from '@/util'
 
-/**
- * Configuration options for the useHotkey composable
- */
 interface HotkeyOptions {
-  /** Which keyboard event to listen to. Defaults to 'keydown' */
   event?: 'keydown' | 'keyup'
-  /** Whether to trigger hotkeys when focused on input elements. Defaults to false */
   inputs?: boolean
-  /** Whether to prevent the default browser behavior when hotkey is triggered. Defaults to true */
   preventDefault?: boolean
-  /** Timeout in milliseconds for key sequences (e.g., 'ctrl+k-p'). Defaults to 1000ms */
   sequenceTimeout?: number
 }
 
-/**
- * A Vue composable for handling keyboard shortcuts and hotkeys.
- *
- * Supports:
- * - Single key combinations (e.g., 'ctrl+s', 'alt+f4')
- * - Key sequences (e.g., 'ctrl+k-p' means press ctrl+k, then p)
- * - Platform-specific modifiers (cmd on Mac becomes meta key)
- * - Input element filtering (can ignore hotkeys when typing in inputs)
- *
- * @param keys - Reactive string describing the hotkey(s). Can be undefined to disable.
- * @param callback - Function to call when the hotkey is triggered
- * @param options - Additional configuration options
- * @returns Cleanup function to manually remove event listeners
- *
- * @example
- * ```ts
- * // Simple hotkey
- * useHotkey('ctrl+s', () => console.log('Save!'))
- *
- * // Key sequence
- * useHotkey('ctrl+k-p', () => console.log('Command palette!'))
- *
- * // With options
- * useHotkey('enter', handleSubmit, { inputs: true, preventDefault: false })
- *
- * // Reactive hotkey
- * const hotkey = ref('ctrl+s')
- * useHotkey(hotkey, handleSave)
- * ```
- */
 export function useHotkey (
   keys: MaybeRef<string | undefined>,
   callback: (e: KeyboardEvent) => void,
   options: HotkeyOptions = {}
 ) {
-  // Short-circuit return if window is not available (SSR environment)
-  if (typeof window === 'undefined') {
-    return () => {} // Return no-op cleanup function
-  }
+  if (!IN_BROWSER) return function () {}
 
-  // Extract options with defaults
   const {
     event = 'keydown',
     inputs = false,
@@ -67,215 +27,106 @@ export function useHotkey (
     sequenceTimeout = 1000,
   } = options
 
-  // Get Vue instance for cleanup on unmount (optional)
-  let vm: any = null
-  try {
-    vm = getCurrentInstance('useHotkey')
-  } catch {
-    // Not in a Vue setup context - manual cleanup will be required
-  }
-
-  // Detect if we're on macOS for platform-specific key handling
-  const isMac = typeof navigator !== 'undefined' && navigator.userAgent && /macintosh/i.test(navigator.userAgent)
-
-  // Timer for handling key sequence timeouts
-  const timer = shallowRef<number | undefined>()
-
-  // Array of key groups for sequences (e.g., ['ctrl+k', 'p'] for 'ctrl+k-p')
+  const isMac = navigator?.userAgent?.includes('Macintosh')
+  const timer = shallowRef<ReturnType<typeof setTimeout> | undefined>()
   const keyGroups = shallowRef<string[]>([])
-
-  // Whether the current hotkey is a sequence or single combination
   const isSequence = shallowRef(false)
-
-  // Current position in the key sequence (0-based index)
   const groupIndex = shallowRef(0)
 
-  /**
-   * Main keyboard event handler that processes key presses and determines
-   * if they match the configured hotkey pattern.
-   */
-  const handler = (e: KeyboardEvent) => {
-    // Get the current key group we're expecting (for sequences)
-    const currentGroup = keyGroups.value[groupIndex.value]
-    if (!currentGroup) return
+  function clearTimer () {
+    if (!timer.value) return
 
-    // Skip hotkey processing when focused on input elements (unless inputs option is true)
-    if (!inputs && typeof document !== 'undefined') {
-      const activeElement = document.activeElement as HTMLElement
-      if (activeElement && (
-        activeElement.tagName === 'INPUT' ||
-        activeElement.tagName === 'TEXTAREA' ||
-        activeElement.isContentEditable ||
-        activeElement.contentEditable === 'true'
-      )) return
-    }
-
-    // Check if the current key press matches the expected key group
-    if (matchesKeyGroup(e, currentGroup)) {
-      // Prevent default browser behavior if requested
-      if (preventDefault) e.preventDefault()
-
-      // Handle key sequences vs single key combinations
-      if (isSequence.value) {
-        // Clear any existing timeout from previous key in sequence
-        if (timer.value && typeof window !== 'undefined') window.clearTimeout(timer.value)
-
-        // Move to next key in sequence
-        groupIndex.value++
-
-        // Check if we've completed the entire sequence
-        if (groupIndex.value === keyGroups.value.length) {
-          // Sequence complete - trigger callback and reset
-          callback(e)
-          groupIndex.value = 0
-        } else {
-          // Sequence not complete - set timeout to reset if next key isn't pressed
-          if (typeof window !== 'undefined') {
-            timer.value = window.setTimeout(() => {
-              groupIndex.value = 0
-            }, sequenceTimeout)
-          }
-        }
-      } else {
-        // Single key combination - trigger immediately
-        callback(e)
-      }
-    } else if (isSequence.value) {
-      // Key didn't match and we're in a sequence - reset sequence state
-      groupIndex.value = 0
-      if (timer.value && typeof window !== 'undefined') window.clearTimeout(timer.value)
-    }
+    clearTimeout(timer.value)
+    timer.value = undefined
   }
 
-  /**
-   * Cleanup function to remove event listeners and clear timers
-   */
-  const cleanup = () => {
-    if (typeof window !== 'undefined') {
-      window.removeEventListener(event, handler)
-      if (timer.value) window.clearTimeout(timer.value)
-    }
+  function isInputFocused () {
+    if (inputs) return false
+
+    const activeElement = document.activeElement as HTMLElement
+
+    return activeElement && (
+      activeElement.tagName === 'INPUT' ||
+      activeElement.tagName === 'TEXTAREA' ||
+      activeElement.isContentEditable ||
+      activeElement.contentEditable === 'true'
+    )
   }
 
-  // Watch for changes to the keys and update event listeners accordingly
-  // Using watch instead of watchEffect for better performance - only re-runs when keys actually change
-  watch(() => toValue(keys), (unrefKeys, oldKeys) => {
-    // First cleanup any existing listeners
-    if (typeof window !== 'undefined') {
-      window.removeEventListener(event, handler)
-      if (timer.value) window.clearTimeout(timer.value)
+  function resetSequence () {
+    groupIndex.value = 0
+    clearTimer()
+  }
+
+  function handler (e: KeyboardEvent) {
+    const group = keyGroups.value[groupIndex.value]
+
+    if (!group || isInputFocused()) return
+
+    if (!matchesKeyGroup(e, group)) {
+      if (isSequence.value) resetSequence()
+      return
     }
+
+    if (preventDefault) e.preventDefault()
+
+    if (!isSequence.value) {
+      callback(e)
+      return
+    }
+
+    clearTimer()
+    groupIndex.value++
+
+    if (groupIndex.value === keyGroups.value.length) {
+      callback(e)
+      resetSequence()
+      return
+    }
+
+    timer.value = setTimeout(resetSequence, sequenceTimeout)
+  }
+
+  function cleanup () {
+    window.removeEventListener(event, handler)
+    clearTimer()
+  }
+
+  watch(() => toValue(keys), function (unrefKeys) {
+    cleanup()
 
     if (unrefKeys) {
-      // Determine if this is a key sequence (contains '-' separator)
       isSequence.value = unrefKeys.includes('-')
-
-      // Parse keys into groups (split by '-' for sequences, single group for combinations)
       keyGroups.value = isSequence.value ? unrefKeys.toLowerCase().split('-') : [unrefKeys.toLowerCase()]
-
-      // Reset sequence state
-      groupIndex.value = 0
-
-      // Register the event listener
-      if (typeof window !== 'undefined') {
-        window.addEventListener(event, handler)
-      }
+      resetSequence()
+      window.addEventListener(event, handler)
     }
   }, { immediate: true })
 
-  // Automatically cleanup when the Vue component unmounts
-  if (vm) {
+  try {
+    getCurrentInstance('useHotkey')
     onBeforeUnmount(cleanup)
+  } catch {
+    // Not in Vue setup context
   }
 
-  /**
-   * Parses a key group string (e.g., 'ctrl+s') into its constituent parts.
-   *
-   * @param group - Key group string like 'ctrl+s', 'alt+shift+f4', etc.
-   * @returns Object containing modifier flags and the actual key
-   *
-   * @example
-   * parseKeyGroup('ctrl+s') // { modifiers: { ctrl: true, ... }, actualKey: 's' }
-   * parseKeyGroup('alt+shift+f4') // { modifiers: { alt: true, shift: true, ... }, actualKey: 'f4' }
-   */
   function parseKeyGroup (group: string) {
-    // Split on + or _ to get individual parts
     const parts = group.split(/[+_]/)
-
-    // Check which modifiers are present
-    const modifiers = {
-      ctrl: parts.includes('ctrl'),
-      shift: parts.includes('shift'),
-      alt: parts.includes('alt'),
-      meta: parts.includes('meta'),
-      cmd: parts.includes('cmd'),
-    }
-
-    // Find the actual key (non-modifier part)
+    const modifiers = Object.fromEntries(
+      ['ctrl', 'shift', 'alt', 'meta', 'cmd'].map(key => [key, parts.includes(key)])
+    ) as Record<string, boolean>
     const actualKey = parts.find(part => !['ctrl', 'shift', 'alt', 'meta', 'cmd'].includes(part))
-
     return { modifiers, actualKey }
   }
 
-  /**
-   * Determines the expected modifier key states based on platform and parsed modifiers.
-   * Handles the complexity of Mac vs PC key mapping in one place.
-   *
-   * @param modifiers - Parsed modifier flags from the key group
-   * @returns Expected modifier states for comparison with KeyboardEvent
-   */
-  function getExpectedModifiers (modifiers: ReturnType<typeof parseKeyGroup>['modifiers']) {
-    // On Mac, handle special cases for cmd/ctrl mapping
-    // Leaving uncollapsed in case this block is refactored
-    // eslint-disable-next-line sonarjs/no-collapsible-if
-    if (isMac) {
-      // If the hotkey explicitly asks for the command key (cmd), map to meta
-      if (modifiers.cmd) {
-        return {
-          ctrl: false,
-          meta: true,
-          shift: modifiers.shift,
-          alt: modifiers.alt,
-        }
-      }
-
-      // Historically, most shortcuts on Mac use ⌘ instead of Ctrl. However, tests
-      // in our browser environment deliberately send real Ctrl key presses. We
-      // therefore keep the explicit `ctrl` modifier untouched so that either
-      // Ctrl **or** Cmd can be recognized depending on what the author wrote.
-    }
-
-    // Default case: use modifiers as specified
-    // This handles PC, or Mac with explicit meta usage
-    return {
-      ctrl: modifiers.ctrl,
-      meta: modifiers.meta,
-      shift: modifiers.shift,
-      alt: modifiers.alt,
-    }
-  }
-
-  /**
-   * Checks if a keyboard event matches a specific key group pattern.
-   *
-   * @param e - The keyboard event to check
-   * @param group - The key group string to match against (e.g., 'ctrl+s', 'cmd+k')
-   * @returns True if the event matches the key group
-   *
-   * @example
-   * matchesKeyGroup(event, 'ctrl+s') // true if ctrl+s was pressed (or cmd+s on Mac)
-   * matchesKeyGroup(event, 'cmd+s') // true if cmd+s on Mac or ctrl+s on PC
-   */
   function matchesKeyGroup (e: KeyboardEvent, group: string) {
     const { modifiers, actualKey } = parseKeyGroup(group)
-    const expected = getExpectedModifiers(modifiers)
 
-    // Simple comparison: all modifiers and the key must match
     return (
-      e.ctrlKey === expected.ctrl &&
-      e.metaKey === expected.meta &&
-      e.shiftKey === expected.shift &&
-      e.altKey === expected.alt &&
+      e.ctrlKey === (isMac && modifiers.cmd ? false : modifiers.ctrl) &&
+      e.metaKey === (isMac && modifiers.cmd ? true : modifiers.meta) &&
+      e.shiftKey === modifiers.shift &&
+      e.altKey === modifiers.alt &&
       e.key.toLowerCase() === actualKey?.toLowerCase()
     )
   }
