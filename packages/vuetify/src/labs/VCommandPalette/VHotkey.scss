@@ -6,7 +6,7 @@
     align-items: center;
     gap: 4px;
 
-    &__key {
+    &__key.v-kbd {
       background: rgba(var(--v-theme-on-surface), 0.1);
       border: thin solid rgba(var(--v-theme-on-surface), 0.2);
       border-radius: 4px;
