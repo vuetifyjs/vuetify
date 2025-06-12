@@ -1,5 +1,6 @@
 // Utilities
 import {
+  camelize,
   capitalize,
   Comment,
   Fragment,
@@ -819,4 +820,12 @@ export function extractNumber (text: string, decimalDigitsLimit: number | null) 
   }
 
   return cleanText
+}
+
+export function camelizeProps<T extends Record<string, unknown>> (props: T | null): T {
+  const out = {} as T
+  for (const prop in props) {
+    out[camelize(prop) as keyof T] = props[prop]
+  }
+  return out
 }

@@ -1,7 +1,7 @@
 {
   "name": "vuetify",
   "description": "Vue Material Component Framework",
-  "version": "3.8.7",
+  "version": "3.8.9",
   "author": {
     "name": "John Leider",
     "email": "john@vuetifyjs.com"
@@ -76,6 +76,8 @@
     "./labs/components": "./lib/labs/components.js",
     "./labs/*": "./lib/labs/*/index.js",
     "./util/colors": "./lib/util/colors.js",
+    "./date/adapters/*": "./lib/composables/date/adapters/*.js",
+    "./util/transitions": "./lib/components/transitions/createTransition.js",
     "./dist/vuetify.js": {
       "types": "./dist/vuetify.d.ts",
       "import": "./dist/vuetify.esm.js",
@@ -155,7 +157,7 @@
     "@vue/reactivity": "^3.5.13",
     "@vue/shared": "^3.5.13",
     "@vue/test-utils": "^2.4.6",
-    "@vuetify/babel-plugin-jsx": "^1.5.1",
+    "@vuetify/babel-plugin-jsx": "^1.5.2",
     "acorn-walk": "^8.3.4",
     "autoprefixer": "^10.4.21",
     "babel-plugin-add-import-extension": "1.5.1",
