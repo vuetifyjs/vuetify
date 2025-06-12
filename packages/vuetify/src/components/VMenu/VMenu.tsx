@@ -48,10 +48,7 @@ export const makeVMenuProps = propsFactory({
   // disableKeys: Boolean,
   id: String,
   submenu: Boolean,
-  forceInitialFocus: {
-    type: Boolean,
-    default: true,
-  },
+  disableInitialFocus: Boolean,
 
   ...omit(makeVOverlayProps({
     closeDelay: 250,
@@ -137,7 +134,7 @@ export const VMenu = genericComponent<OverlaySlots>()({
     watch(isActive, val => {
       if (val) {
         parent?.register()
-        if (IN_BROWSER && props.forceInitialFocus) {
+        if (IN_BROWSER && !props.disableInitialFocus) {
           document.addEventListener('focusin', onFocusIn, { once: true })
         }
       } else {
