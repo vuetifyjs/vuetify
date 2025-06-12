@@ -3,7 +3,7 @@ import { computed, inject, provide, ref, toRef } from 'vue'
 import { createVuetifyAdapter } from '@/locale/adapters/vuetify'
 
 // Types
-import type { InjectionKey, Ref } from 'vue'
+import type { InjectionKey, Ref, ShallowRef } from 'vue'
 
 export interface LocaleMessages {
   [key: string]: LocaleMessages | string
@@ -19,7 +19,7 @@ export interface LocaleOptions {
 
 export interface LocaleInstance {
   name: string
-  decimalSeparator: Ref<string>
+  decimalSeparator: ShallowRef<string>
   messages: Ref<LocaleMessages>
   current: Ref<string>
   fallback: Ref<string>
