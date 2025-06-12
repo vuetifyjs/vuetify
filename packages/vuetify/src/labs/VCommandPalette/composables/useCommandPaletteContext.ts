@@ -19,7 +19,7 @@
  */
 
 // Utilities
-import { computed, inject, provide, ref, shallowRef } from 'vue'
+import { computed, inject, provide, shallowRef } from 'vue'
 
 // Types
 import type { ComputedRef, InjectionKey, Ref } from 'vue'
@@ -70,7 +70,7 @@ export function provideCommandPaletteContext (options: {
     selectedIndex,
     activeDescendantId,
     onKeydown,
-    navigationMode = ref('list'), // Default to list mode
+    navigationMode = shallowRef('list'), // Default to list mode
   } = options
 
   // Track registered items for custom layouts

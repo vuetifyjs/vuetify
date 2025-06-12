@@ -337,7 +337,7 @@ const VCommandPaletteContent = genericComponent<VCommandPaletteSlots>()({
       items: filteredActions,
       selectedIndex,
       activeDescendantId,
-      navigationMode: ref('list'),
+      navigationMode: shallowRef('list'),
     })
 
     // Computed slot scope for default slot (custom layouts)

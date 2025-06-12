@@ -22,7 +22,7 @@ import { useHotkey } from '@/composables/hotkey'
 import { transformItems } from '@/composables/list-items'
 
 // Utilities
-import { computed, ref, watch } from 'vue'
+import { computed, shallowRef, watch } from 'vue'
 
 // Types
 import type { ComputedRef, Ref } from 'vue'
@@ -58,7 +58,7 @@ export function useCommandPaletteNavigation (options: UseCommandPaletteNavigatio
   } = options
 
   // Current selected index (-1 means no selection)
-  const selectedIndex = ref(-1)
+  const selectedIndex = shallowRef(-1)
 
   /**
    * Calculates the total number of selectable items in the current view.
