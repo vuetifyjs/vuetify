@@ -11,11 +11,11 @@ export function useMarkdown () {
       return
     }
 
-    let markdownContent = `# ${frontmatter.value?.title || 'Page Title'}\\n\\n`
+    let markdownContent = `# ${frontmatter.value?.meta.title || 'Page Title'}\\n\\n`
     markdownContent += `Source: ${window.location.origin}${route.path}\\n\\n`
 
     try {
-      const mdPath = `/src/pages${route.path}.md`
+      const mdPath = `/src/pages${route.path.replace(/\/$/, '')}.md`
       const response = await fetch(mdPath)
       if (response.ok) {
         const rawMd = await response.text()
