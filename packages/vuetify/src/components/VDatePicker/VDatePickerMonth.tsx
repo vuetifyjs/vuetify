@@ -159,7 +159,7 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
     function getEventColors (date: string): string[] {
       const { events, eventColor } = props
       let eventData: boolean | DatePickerEventColorValue
-      let eventColors: string[] = []
+      let eventColors: (boolean | string)[] = []
 
       if (Array.isArray(events)) {
         eventData = events.includes(date)
