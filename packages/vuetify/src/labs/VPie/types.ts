@@ -8,10 +8,10 @@ export interface PieItem {
 }
 
 export interface PieSegmentProps {
-  gap: number
-  hoverScale?: number
-  innerCut: number
-  rounded: number
+  gap?: number | string
+  hoverScale?: number | string
+  innerCut?: number | string
+  rounded?: number | string
   value: number
 }
 

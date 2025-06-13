@@ -14,15 +14,16 @@
           single-line
         ></v-select>
       </v-card-title>
+
       <v-pie
-        :gap="2"
-        :inner-cut="70"
         :items="items"
         :legend="{ position: 'right' }"
-        :rounded="2"
-        :size="300"
         :tooltip="{ subtitleFormat: '[value]%' }"
         class="pa-3 mt-3"
+        gap="2"
+        inner-cut="70"
+        rounded="2"
+        size="300"
         animation
         hide-slice
       >
@@ -32,6 +33,7 @@
             <div class="opacity-70 mt-1 mb-n1">Total</div>
           </div>
         </template>
+
         <template v-slot:legend="{ toggle, isActive }">
           <v-list class="py-0 bg-transparent" density="compact" width="300">
             <v-list-item

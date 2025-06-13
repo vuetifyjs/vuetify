@@ -1,5 +1,5 @@
 // Utilities
-import { computed, ref, toValue, watch } from 'vue'
+import { computed, shallowRef, toValue, watch } from 'vue'
 import { clamp } from './helpers'
 
 // Types
@@ -44,7 +44,7 @@ export function useTransition (source: MaybeRefOrGetter<number>, options: MaybeR
   }
 
   const raf: ReturnType<typeof requestAnimationFrame> = null!
-  const outputRef = ref(toValue(source))
+  const outputRef = shallowRef(toValue(source))
 
   watch(() => toValue(source), async to => {
     cancelAnimationFrame(raf)

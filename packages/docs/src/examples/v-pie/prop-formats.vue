@@ -1,12 +1,12 @@
 <template>
   <div class="d-flex justify-center py-3">
     <v-pie
-      :gap="4"
-      :inner-cut="85"
       :items="items"
       :legend="{ textFormat: '[title] ([value]%)' }"
       :tooltip="{ subtitleFormat: '[value]%' }"
+      gap="4"
       hover-scale="0"
+      inner-cut="85"
       size="300"
       animation
       hide-slice

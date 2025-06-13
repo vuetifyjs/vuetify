@@ -1,5 +1,5 @@
 // Utilities
-import { computed, toValue } from 'vue'
+import { computed, toRef, toValue } from 'vue'
 import { clamp } from '@/util'
 import { roundedArc } from '@/util/svg-arc-corners'
 
@@ -16,13 +16,13 @@ export function formatTextTemplate (template: string, item?: PieItem) {
 }
 
 export function usePieArc (props: PieSegmentProps, isHovering: Ref<boolean>) {
-  const hoverZoomRatio = computed(() => clamp(props.hoverScale ?? 0, 0, 0.25))
-  const normalizedValue = computed(() => clamp(props.value - 100 * props.gap / 360, 0.01, 99.99))
-  const normalizedInnerCut = computed(() => clamp(props.innerCut, props.rounded > 0 ? 20 : 0, 100))
+  const hoverZoomRatio = toRef(() => clamp(Number(props.hoverScale ?? 0), 0, 0.25))
+  const normalizedValue = toRef(() => clamp(props.value - 100 * Number(props.gap ?? 0) / 360, 0.01, 99.99))
+  const normalizedInnerCut = toRef(() => clamp(Number(props.innerCut ?? 0), Number(props.rounded ?? 0) > 0 ? 20 : 0, 100))
 
   const radians = computed(() => (360 * (-normalizedValue.value / 100) + 90) * (Math.PI / 180))
-  const x = computed(() => 50 + 50 * Math.cos(radians.value))
-  const y = computed(() => 50 - 50 * Math.sin(radians.value))
+  const x = toRef(() => 50 + 50 * Math.cos(radians.value))
+  const y = toRef(() => 50 - 50 * Math.sin(radians.value))
 
   const arcWidth = computed(() => (50 - normalizedInnerCut.value / 2) * (isHovering.value ? 1 : (1 - hoverZoomRatio.value)))
   const sliceRadius = computed(() => normalizedInnerCut.value / 4 * (isHovering.value ? 1 : (1 - hoverZoomRatio.value)))

@@ -7,7 +7,7 @@ import { makeVTooltipProps, VTooltip } from '@/components/VTooltip/VTooltip'
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 
 // Utilities
-import { computed, onBeforeUnmount, onMounted, shallowRef } from 'vue'
+import { onBeforeUnmount, onMounted, shallowRef, toRef } from 'vue'
 import { formatTextTemplate } from './utils'
 import { genericComponent, getCurrentInstance, pick, propsFactory } from '@/util'
 
@@ -62,13 +62,13 @@ export const VPieTooltip = genericComponent<VPieTooltipSlots>()({
       vm.proxy!.$el.parentNode.removeEventListener('mousemove', onMouseMove)
     })
 
-    const tooltipTitleFormatFunction = computed(() => (segment: PieItem) => {
+    const tooltipTitleFormatFunction = toRef(() => (segment: PieItem) => {
       return typeof props.titleFormat === 'function'
         ? props.titleFormat(segment)
         : formatTextTemplate(props.titleFormat, segment)
     })
 
-    const tooltipSubtitleFormatFunction = computed(() => (segment: PieItem) => {
+    const tooltipSubtitleFormatFunction = toRef(() => (segment: PieItem) => {
       return typeof props.subtitleFormat === 'function'
         ? props.subtitleFormat(segment)
         : formatTextTemplate(props.subtitleFormat, segment)

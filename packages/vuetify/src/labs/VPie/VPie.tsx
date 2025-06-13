@@ -13,9 +13,9 @@ import { useColor } from '@/composables/color'
 import { makeDensityProps } from '@/composables/density'
 
 // Utilities
-import { computed, ref, shallowRef, watch } from 'vue'
+import { computed, shallowRef, toRef, watch } from 'vue'
 import { formatTextTemplate } from './utils'
-import { clamp, convertToUnit, genericComponent, pick, propsFactory } from '@/util'
+import { convertToUnit, genericComponent, pick, propsFactory } from '@/util'
 
 // Types
 import type { PropType, TransitionProps } from 'vue'
@@ -57,15 +57,12 @@ export const makeVPieProps = propsFactory({
     default: 'title',
   },
   size: {
-    type: Number,
+    type: [Number, String],
     default: 250,
   },
-  rotate: Number,
-  innerCut: Number,
-  gaugeCut: {
-    type: Number,
-    default: 0,
-  },
+  rotate: [Number, String],
+  innerCut: [Number, String],
+  gaugeCut: [Number, String],
   legend: {
     type: [Boolean, Object] as PropType<boolean | {
       position?: 'left' | 'top' | 'right' | 'bottom'
@@ -82,6 +79,7 @@ export const makeVPieProps = propsFactory({
     }>,
     default: false,
   },
+
   ...makeDensityProps(),
   ...pick(makeVPieSegmentProps(), [
     'animation',
@@ -106,15 +104,15 @@ export const VPie = genericComponent<VPieSlots>()({
     }))
 
     const { colorClasses, colorStyles } = useColor(() => ({ background: props.bgColor }))
-    const textColorClasses = computed(() => colorClasses.value.filter(v => v.startsWith('text-')))
-    const textColorStyles = computed(() => pick(colorStyles.value, ['color', 'caretColor']))
+    const textColorClasses = toRef(() => colorClasses.value.filter(v => v.startsWith('text-')))
+    const textColorStyles = toRef(() => pick(colorStyles.value, ['color', 'caretColor']))
 
-    const legendCircleSize = computed(() => ({ default: 20, comfortable: 18, compact: 16 }[props.density ?? 'default']))
-    const legendDirection = computed(() => ['left', 'right'].includes(legendConfig.value.position) ? 'vertical' : 'horizontal')
+    const legendCircleSize = toRef(() => ({ default: 20, comfortable: 18, compact: 16 }[props.density ?? 'default']))
+    const legendDirection = toRef(() => ['left', 'right'].includes(legendConfig.value.position) ? 'vertical' : 'horizontal')
 
-    const legendMode = computed<string>(() => !legendConfig.value.visible ? 'hidden' : legendConfig.value.position)
+    const legendMode = toRef(() => !legendConfig.value.visible ? 'hidden' : legendConfig.value.position)
 
-    const legendTextFormatFunction = computed(() => (item: PieItem) => {
+    const legendTextFormatFunction = toRef(() => (item: PieItem) => {
       return typeof legendConfig.value.textFormat === 'function'
         ? legendConfig.value.textFormat(item)
         : formatTextTemplate(legendConfig.value.textFormat, item)
@@ -136,7 +134,7 @@ export const VPie = genericComponent<VPieSlots>()({
         })
     })
 
-    const visibleItemsKeys = ref<PieItem['key'][]>([])
+    const visibleItemsKeys = shallowRef<PieItem['key'][]>([])
 
     watch(() => arcs.value.length, () => {
       // reset when number of items changes
@@ -146,7 +144,7 @@ export const VPie = genericComponent<VPieSlots>()({
     const visibleItems = computed(() => {
       // hidden items get (value: 0) to trigger disappearing animation
       return arcs.value.map(item => {
-        return visibleItemsKeys.value.includes(item.key)
+        return isActive(item)
           ? item
           : { ...item, value: 0 }
       })
@@ -154,16 +152,17 @@ export const VPie = genericComponent<VPieSlots>()({
 
     const total = computed(() => visibleItems.value.reduce((sum, item) => sum + item.value, 0))
 
-    const gaugeOffset = computed(() => 0.4 * (Math.min(180, props.gaugeCut ?? 0)) / 180)
-    const rotateDeg = computed(() => `${props.gaugeCut ? (180 + props.gaugeCut / 2) : (props.rotate ?? 0)}deg`)
+    const gaugeCut = toRef(() => Number(props.gaugeCut ?? 0))
+    const gaugeOffset = computed(() => 0.4 * (Math.min(180, gaugeCut.value)) / 180)
+    const rotateDeg = computed(() => `${gaugeCut.value ? (180 + gaugeCut.value / 2) : (props.rotate ?? 0)}deg`)
 
     function arcOffset (index: number) {
       return visibleItems.value
         .slice(0, index)
-        .reduce((acc, s) => acc + (total.value > 0 ? s.value / total.value : 0) * (360 - props.gaugeCut), 0)
+        .reduce((acc, s) => acc + (total.value > 0 ? s.value / total.value : 0) * (360 - gaugeCut.value), 0)
     }
 
-    function arcSize (v: number) { return v / total.value * (100 - props.gaugeCut / 3.6) }
+    function arcSize (v: number) { return v / total.value * (100 - gaugeCut.value / 3.6) }
 
     function colorFromPalette (index: number) {
       if (props.palette.length === 0) return undefined
@@ -182,10 +181,10 @@ export const VPie = genericComponent<VPieSlots>()({
     }
 
     function toggle (item: PieItem) {
-      if (visibleItemsKeys.value.includes(item.key)) {
+      if (isActive(item)) {
         visibleItemsKeys.value = visibleItemsKeys.value.filter(x => x !== item.key)
       } else {
-        visibleItemsKeys.value.push(item.key)
+        visibleItemsKeys.value = [...visibleItemsKeys.value, item.key]
       }
     }
 
@@ -280,7 +279,7 @@ export const VPie = genericComponent<VPieSlots>()({
                   rotate={ arcOffset(index) }
                   pattern={ item.pattern }
                   innerCut={ props.innerCut }
-                  hoverScale={ clamp(props.hoverScale, 0, 0.25) }
+                  hoverScale={ props.hoverScale }
                   onMouseenter={ () => onMouseenter(item) }
                   onMouseleave={ () => onMouseleave() }
                 />
@@ -291,7 +290,7 @@ export const VPie = genericComponent<VPieSlots>()({
               class="v-pie__center-content"
               style={{
                 transform: `rotate(-${rotateDeg.value})`,
-                marginTop: `-${40 * props.gaugeCut / 360}%`,
+                marginTop: `-${40 * gaugeCut.value / 360}%`,
               }}
             >
               <div>

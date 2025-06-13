@@ -1,5 +1,5 @@
 // Utilities
-import { computed, ref } from 'vue'
+import { computed, shallowRef } from 'vue'
 import { useOuterSlicePath, usePieArc } from './utils'
 import { easingPatterns, genericComponent, propsFactory, useTransition } from '@/util'
 
@@ -7,31 +7,19 @@ import { easingPatterns, genericComponent, propsFactory, useTransition } from '@
 import type { PropType } from 'vue'
 
 export const makeVPieSegmentProps = propsFactory({
-  rotate: {
-    type: Number,
-    default: 0,
-  },
+  rotate: [Number, String],
   value: {
     type: Number,
     default: 0,
   },
   color: String,
-  innerCut: {
-    type: Number,
-    default: 0,
-  },
+  innerCut: [Number, String],
   hoverScale: {
-    type: Number,
+    type: [Number, String],
     default: 0.05,
   },
-  gap: {
-    type: Number,
-    default: 0,
-  },
-  rounded: {
-    type: Number,
-    default: 0,
-  },
+  gap: [Number, String],
+  rounded: [Number, String],
   animation: {
     type: [Boolean, Object] as PropType<boolean | {
       duration?: number
@@ -49,7 +37,7 @@ export const VPieSegment = genericComponent()({
   props: makeVPieSegmentProps(),
 
   setup (props) {
-    const isHovering = ref(false)
+    const isHovering = shallowRef(false)
 
     const transitionConfig = computed(() => {
       const defaultEasing = 'easeInOutCubic'
@@ -77,7 +65,7 @@ export const VPieSegment = genericComponent()({
       sliceRadius,
     } = usePieArc(props, isHovering)
 
-    const currentAngle = useTransition(() => (props.rotate + props.gap / 2), transitionConfig)
+    const currentAngle = useTransition(() => (Number(props.rotate ?? 0) + Number(props.gap ?? 0) / 2), transitionConfig)
     const currentSliceRadius = useTransition(() => sliceRadius.value, transitionConfig)
 
     const arcRadius = computed(() => 50 * (isHovering.value ? 1 : (1 - hoverZoomRatio.value)))
@@ -90,7 +78,7 @@ export const VPieSegment = genericComponent()({
       radius: currentArcRadius,
       size: currentArcSize,
       width: currentArcWidth,
-      rounded: () => props.rounded,
+      rounded: () => Number(props.rounded ?? 0),
     })
 
     const circumference = (radius: number) => 2 * Math.PI * radius
