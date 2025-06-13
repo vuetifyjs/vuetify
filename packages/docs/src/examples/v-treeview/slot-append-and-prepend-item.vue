@@ -16,7 +16,7 @@
   </v-treeview>
 </template>
 
-<script setup lang="ts">
+<script setup>
   import { ref, shallowRef } from 'vue'
 
   const activated = ref([])
@@ -44,39 +44,37 @@
   }
   const items = shallowRef([...root.children])
 
-  type TreeNode = { id: number, children?: TreeNode[] }
-
-  function findParent (id: number, items: TreeNode[] = [root]): TreeNode {
+  function findParent (id, items = [root]) {
     if (items.length === 0) return null
     return items.find(item => item.children?.some(c => c.id === id)) ??
-      findParent(id, items.flatMap(item => item.children ?? []))!
+      findParent(id, items.flatMap(item => item.children ?? []))
   }
 
-  function findItemBefore (item: TreeNode) {
-    return findParent(item.id).children!
+  function findItemBefore (item) {
+    return findParent(item.id).children
       .find((_, i, all) => all[i + 1]?.id === item.id)
   }
 
-  function findItemAfter (item: TreeNode) {
-    return findParent(item.id).children!
+  function findItemAfter (item) {
+    return findParent(item.id).children
       .find((_, i, all) => all[i - 1]?.id === item.id)
   }
 
-  function detach (item: TreeNode) {
+  function detach (item) {
     const parent = findParent(item.id)
-    parent.children!.splice(parent.children.indexOf(item), 1)
+    parent.children.splice(parent.children.indexOf(item), 1)
     if (parent.children.length === 0) parent.children = undefined
   }
 
-  function injectNextTo (item: TreeNode, target: TreeNode, after = true) {
+  function injectNextTo (item, target, after = true) {
     if (!target || target === root) return
     detach(item)
     const targetParent = findParent(target.id)
-    targetParent.children!.splice(targetParent.children.indexOf(target) + (after ? 1 : 0), 0, item)
+    targetParent.children.splice(targetParent.children.indexOf(target) + (after ? 1 : 0), 0, item)
     activated.value = [item.id]
   }
 
-  function appendTo (item: TreeNode, target: TreeNode) {
+  function appendTo (item, target) {
     if (!target) return
     detach(item)
     target.children ??= []
@@ -84,7 +82,7 @@
     activated.value = [item.id]
   }
 
-  function move (item: TreeNode, direction: 'left' | 'up' | 'down' | 'right') {
+  function move (item, direction) {
     switch (direction) {
       case 'left':
         injectNextTo(item, findParent(item.id))
