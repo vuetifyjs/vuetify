@@ -1,384 +1,189 @@
 <template>
-  <v-treeview :items="items" item-key="name" activatable>
-    <template v-slot:prepend="{ index, depth, path }">
-      <v-btn
-        icon="mdi-information-outline"
-        variant="text"
-        v-tooltip:end="`Index: ${index} | Depth:${depth} | Path: ${path}`"
-      ></v-btn>
-    </template>
-    <template v-slot:append="{ path, isFirst, isLast, item }">
-      <v-btn-group divided>
-        <v-btn :disabled="isFirst" icon="mdi-arrow-up" @click.stop="moveUp(path)"></v-btn>
-        <v-btn :disabled="isLast" icon="mdi-arrow-down" @click.stop="moveDown(path)"></v-btn>
-        <v-btn icon="mdi-cursor-pointer" @click.stop="showDialog(item, path)"></v-btn>
-      </v-btn-group>
+  <v-treeview
+    v-model:activated="activated"
+    :items="items"
+    item-key="id"
+    item-value="id"
+    activatable
+    open-all
+  >
+    <template v-slot:append="{ item, depth, isFirst, isLast }">
+      <v-icon-btn :disabled="!depth" icon="mdi-arrow-left" @click.stop="move(item, 'left')"></v-icon-btn>
+      <v-icon-btn :disabled="isFirst" icon="mdi-arrow-up" @click.stop="move(item, 'up')"></v-icon-btn>
+      <v-icon-btn :disabled="isLast" icon="mdi-arrow-down" @click.stop="move(item, 'down')"></v-icon-btn>
+      <v-icon-btn :disabled="isFirst" icon="mdi-arrow-right" @click.stop="move(item, 'right')"></v-icon-btn>
     </template>
   </v-treeview>
-  <v-dialog v-model="show" width="50%">
-    <v-card>
-      <v-card-title>Move item</v-card-title>
-      <v-card-text>
-        <v-row>
-          <v-col cols="12">
-            <h3>Move</h3>
-            {{ from?.title }}
-            {{ selected }}
-          </v-col>
-          <v-col cols="12">
-
-            <v-btn text="Move To ROOT" @click.stop="moveTo([])"></v-btn>
-
-            <v-treeview :items="items" item-title="title" item-value="id" open-all>
-              <template v-slot:append="{ path }">
-                <v-btn text="Move here" @click.stop="moveTo(path)"></v-btn>
-              </template>
-            </v-treeview>
-          </v-col>
-        </v-row>
-      </v-card-text>
-
-    </v-card>
-  </v-dialog>
 </template>
 
-<script setup>
-  import { ref } from 'vue'
+<script setup lang="ts">
+  import { ref, shallowRef } from 'vue'
 
-  const items = ref([
-    {
-      id: 1,
-      title: 'Applications :',
-      children: [
-        { id: 2, title: 'Calendar : app' },
-        { id: 3, title: 'Chrome : app' },
-        { id: 4, title: 'Webstorm : app' },
-      ],
-    },
-    {
-      id: 5,
-      title: 'Documents :',
-      children: [
-        {
-          id: 6,
-          title: 'vuetify :',
-          children: [
-            {
-              id: 7,
-              title: 'src :',
-              children: [
-                { id: 8, title: 'index : ts' },
-                { id: 9, title: 'bootstrap : ts' },
-              ],
-            },
-          ],
-        },
-        {
-          id: 10,
-          title: 'material2 :',
-          children: [
-            {
-              id: 11,
-              title: 'src :',
-              children: [
-                { id: 12, title: 'v-btn : ts' },
-                { id: 13, title: 'v-card : ts' },
-                { id: 14, title: 'v-window : ts' },
-              ],
-            },
-          ],
-        },
-      ],
-    },
-    {
-      id: 15,
-      title: 'Downloads :',
-      children: [
-        { id: 16, title: 'October : pdf' },
-        { id: 17, title: 'November : pdf' },
-        { id: 18, title: 'Tutorial : html' },
-      ],
-    },
-    {
-      id: 19,
-      title: 'Videos :',
-      children: [
-        {
-          id: 20,
-          title: 'Tutorials :',
-          children: [
-            { id: 21, title: 'Basic layouts : mp4' },
-            { id: 22, title: 'Advanced techniques : mp4' },
-            { id: 23, title: 'All about app : dir' },
-          ],
-        },
-        { id: 24, title: 'Intro : mov' },
-        { id: 25, title: 'Conference introduction : avi' },
-      ],
-    },
-  ])
-
-  const from = ref()
-  const fromPath = ref()
-  const toPath = ref()
-  const show = ref(false)
-  const selected = ref()
-
-  function moveUp (paths) {
-    if (paths.length === 0) return
-    if (paths.length === 1) {
-      const index = paths.pop()
-      const temp = items.value[index]
-      items.value.splice(index, 1)
-      items.value.splice(index - 1, 0, temp)
-    }
-
-    if (paths.length > 1) {
-      const index = paths.pop()
-      const parent = paths.reduce((acc, path) => Array.isArray(acc) ? acc[path] : acc.children[path], items.value)
-      const temp = parent.children[index]
-      if (!parent.children) {
-        parent.children = []
-      }
-      parent.children.splice(index, 1)
-      parent.children.splice(index - 1, 0, temp)
-    }
+  const activated = ref([])
+  const root = {
+    id: 0,
+    children: [
+      {
+        id: 1,
+        title: 'Office Tools',
+        children: [
+          { id: 2, title: 'Calendar' },
+          { id: 3, title: 'Notepad' },
+        ],
+      },
+      {
+        id: 4,
+        title: 'Dev Tools',
+        children: [
+          { id: 5, title: 'VS Code' },
+          { id: 6, title: 'Figma' },
+          { id: 7, title: 'Webstorm' },
+        ],
+      },
+    ],
   }
-  function moveDown (paths) {
-    if (paths.length === 0) return
-    if (paths.length === 1) {
-      const index = paths.pop()
-      const temp = items.value[index]
-      items.value.splice(index, 1)
-      items.value.splice(index + 1, 0, temp)
-    }
-    if (paths.length > 1) {
-      const index = paths.pop()
-      const parent = paths.reduce((acc, path) => Array.isArray(acc) ? acc[path] : acc.children[path], items.value)
-      const temp = parent.children[index]
-      parent.children.splice(index, 1)
-      parent.children.splice(index + 1, 0, temp)
-    }
+  const items = shallowRef([...root.children])
+
+  type TreeNode = { id: number, children?: TreeNode[] }
+
+  function findParent (id: number, items: TreeNode[] = [root]): TreeNode {
+    if (items.length === 0) return null
+    return items.find(item => item.children?.some(c => c.id === id)) ??
+      findParent(id, items.flatMap(item => item.children ?? []))!
   }
 
-  function makeChild (fromPath, toPath, item) {
-    if (fromPath.length === 0) return
-    if (fromPath.length === 1) {
-      const index = fromPath.pop()
-      items.value.splice(index, 1)
-    }
-
-    if (fromPath.length > 1) {
-      const index = fromPath.pop()
-      const parent = fromPath.reduce((acc, path) => Array.isArray(acc) ? acc[path] : acc.children[path], items.value)
-      if (!parent.children) {
-        parent.children = []
-      }
-      parent.children.splice(index, 1)
-    }
-
-    if (toPath.length === 0) {
-      items.value.push(item)
-    }
-    if (toPath.length === 1) {
-      const index = toPath.pop()
-      items.value[index].children.push(item)
-    }
-
-    if (toPath.length > 1) {
-      const parent = toPath.reduce((acc, path) => Array.isArray(acc) ? acc[path] : acc.children[path], items.value)
-      if (!parent.children) {
-        parent.children = []
-      }
-      parent.children.push(item)
-    }
+  function findItemBefore (item: TreeNode) {
+    return findParent(item.id).children!
+      .find((_, i, all) => all[i + 1]?.id === item.id)
   }
 
-  function showDialog (item, path) {
-    show.value = true
-    from.value = item
-    fromPath.value = path
-    toPath.value = null
+  function findItemAfter (item: TreeNode) {
+    return findParent(item.id).children!
+      .find((_, i, all) => all[i - 1]?.id === item.id)
   }
 
-  function reset () {
-    show.value = false
-    from.value = null
-    fromPath.value = null
-    toPath.value = null
+  function detach (item: TreeNode) {
+    const parent = findParent(item.id)
+    parent.children!.splice(parent.children.indexOf(item), 1)
+    if (parent.children.length === 0) parent.children = undefined
   }
 
-  function moveTo (toPath) {
-    makeChild(fromPath.value, toPath, from.value)
-    reset()
+  function injectNextTo (item: TreeNode, target: TreeNode, after = true) {
+    if (!target || target === root) return
+    detach(item)
+    const targetParent = findParent(target.id)
+    targetParent.children!.splice(targetParent.children.indexOf(target) + (after ? 1 : 0), 0, item)
+    activated.value = [item.id]
+  }
+
+  function appendTo (item: TreeNode, target: TreeNode) {
+    if (!target) return
+    detach(item)
+    target.children ??= []
+    target.children.push(item)
+    activated.value = [item.id]
+  }
+
+  function move (item: TreeNode, direction: 'left' | 'up' | 'down' | 'right') {
+    switch (direction) {
+      case 'left':
+        injectNextTo(item, findParent(item.id))
+        break
+      case 'up':
+        injectNextTo(item, findItemBefore(item), false)
+        break
+      case 'right':
+        appendTo(item, findItemBefore(item))
+        break
+      case 'down':
+        injectNextTo(item, findItemAfter(item))
+        break
+    }
+    items.value = [...root.children]
   }
 </script>
 
 <script>
   export default {
     data: () => ({
-      items: [
-        {
-          id: 1,
-          title: 'Applications :',
-          children: [
-            { id: 2, title: 'Calendar : app' },
-            { id: 3, title: 'Chrome : app' },
-            { id: 4, title: 'Webstorm : app' },
-          ],
-        },
-        {
-          id: 5,
-          title: 'Documents :',
-          children: [
-            {
-              id: 6,
-              title: 'vuetify :',
-              children: [
-                {
-                  id: 7,
-                  title: 'src :',
-                  children: [
-                    { id: 8, title: 'index : ts' },
-                    { id: 9, title: 'bootstrap : ts' },
-                  ],
-                },
-              ],
-            },
-            {
-              id: 10,
-              title: 'material2 :',
-              children: [
-                {
-                  id: 11,
-                  title: 'src :',
-                  children: [
-                    { id: 12, title: 'v-btn : ts' },
-                    { id: 13, title: 'v-card : ts' },
-                    { id: 14, title: 'v-window : ts' },
-                  ],
-                },
-              ],
-            },
-          ],
-        },
-        {
-          id: 15,
-          title: 'Downloads :',
-          children: [
-            { id: 16, title: 'October : pdf' },
-            { id: 17, title: 'November : pdf' },
-            { id: 18, title: 'Tutorial : html' },
-          ],
-        },
-        {
-          id: 19,
-          title: 'Videos :',
-          children: [
-            {
-              id: 20,
-              title: 'Tutorials :',
-              children: [
-                { id: 21, title: 'Basic layouts : mp4' },
-                { id: 22, title: 'Advanced techniques : mp4' },
-                { id: 23, title: 'All about app : dir' },
-              ],
-            },
-            { id: 24, title: 'Intro : mov' },
-            { id: 25, title: 'Conference introduction : avi' },
-          ],
-        },
-      ],
-      from: undefined,
-      fromPath: undefined,
-      toPath: undefined,
-      show: false,
-      selected: undefined,
+      activated: [],
+      root: {
+        id: 0,
+        children: [
+          {
+            id: 1,
+            title: 'Office Tools',
+            children: [
+              { id: 2, title: 'Calendar' },
+              { id: 3, title: 'Notepad' },
+            ],
+          },
+          {
+            id: 4,
+            title: 'Dev Tools',
+            children: [
+              { id: 5, title: 'VS Code' },
+              { id: 6, title: 'Figma' },
+              { id: 7, title: 'Webstorm' },
+            ],
+          },
+        ],
+      },
+      items: [],
     }),
+    mounted () {
+      this.items = [...this.root.children]
+    },
     methods: {
-      moveUp (paths) {
-        if (paths.length === 0) return
-        if (paths.length === 1) {
-          const index = paths.pop()
-          const temp = items.value[index]
-          items.value.splice(index, 1)
-          items.value.splice(index - 1, 0, temp)
-        }
-
-        if (paths.length > 1) {
-          const index = paths.pop()
-          const parent = paths.reduce((acc, path) => Array.isArray(acc) ? acc[path] : acc.children[path], items.value)
-          const temp = parent.children[index]
-          if (!parent.children) {
-            parent.children = []
-          }
-          parent.children.splice(index, 1)
-          parent.children.splice(index - 1, 0, temp)
-        }
+      findParent (id, items) {
+        items ??= [this.root]
+        if (items.length === 0) return null
+        return items.find(item => item.children?.some(c => c.id === id)) ??
+          this.findParent(id, items.flatMap(item => item.children ?? []))
       },
-      moveDown (paths) {
-        if (paths.length === 0) return
-        if (paths.length === 1) {
-          const index = paths.pop()
-          const temp = items.value[index]
-          items.value.splice(index, 1)
-          items.value.splice(index + 1, 0, temp)
-        }
-        if (paths.length > 1) {
-          const index = paths.pop()
-          const parent = paths.reduce((acc, path) => Array.isArray(acc) ? acc[path] : acc.children[path], items.value)
-          const temp = parent.children[index]
-          parent.children.splice(index, 1)
-          parent.children.splice(index + 1, 0, temp)
-        }
+      findItemBefore (item) {
+        return this.findParent(item.id).children
+          .find((_, i, all) => all[i + 1]?.id === item.id)
       },
-      makeChild (fromPath, toPath, item) {
-        if (fromPath.length === 0) return
-        if (fromPath.length === 1) {
-          const index = fromPath.pop()
-          items.value.splice(index, 1)
-        }
-
-        if (fromPath.length > 1) {
-          const index = fromPath.pop()
-          const parent = fromPath.reduce((acc, path) => Array.isArray(acc) ? acc[path] : acc.children[path], items.value)
-          if (!parent.children) {
-            parent.children = []
-          }
-          parent.children.splice(index, 1)
-        }
-
-        if (toPath.length === 0) {
-          items.value.push(item)
-        }
-        if (toPath.length === 1) {
-          const index = toPath.pop()
-          items.value[index].children.push(item)
-        }
-
-        if (toPath.length > 1) {
-          const parent = toPath.reduce((acc, path) => Array.isArray(acc) ? acc[path] : acc.children[path], items.value)
-          if (!parent.children) {
-            parent.children = []
-          }
-          parent.children.push(item)
-        }
+      findItemAfter (item) {
+        return this.findParent(item.id).children
+          .find((_, i, all) => all[i - 1]?.id === item.id)
       },
-      showDialog (item, path) {
-        show.value = true
-        from.value = item
-        fromPath.value = path
-        toPath.value = null
+      detach (item) {
+        const parent = this.findParent(item.id)
+        parent.children.splice(parent.children.indexOf(item), 1)
+        if (parent.children.length === 0) parent.children = undefined
       },
-      reset () {
-        show.value = false
-        from.value = null
-        fromPath.value = null
-        toPath.value = null
+      injectNextTo (item, target, after = true) {
+        if (!target || target === this.root) return
+        this.detach(item)
+        const targetParent = this.findParent(target.id)
+        targetParent.children.splice(targetParent.children.indexOf(target) + (after ? 1 : 0), 0, item)
+        this.activated = [item.id]
       },
-      moveTo (toPath) {
-        makeChild(fromPath.value, toPath, from.value)
-        reset()
+      appendTo (item, target) {
+        if (!target) return
+        this.detach(item)
+        target.children ??= []
+        target.children.push(item)
+        this.activated = [item.id]
+      },
+      move (item, direction) {
+        switch (direction) {
+          case 'left':
+            this.injectNextTo(item, this.findParent(item.id))
+            break
+          case 'up':
+            this.injectNextTo(item, this.findItemBefore(item), false)
+            break
+          case 'right':
+            this.appendTo(item, this.findItemBefore(item))
+            break
+          case 'down':
+            this.injectNextTo(item, this.findItemAfter(item))
+            break
+        }
+        this.items = [...this.root.children]
       },
     },
   }

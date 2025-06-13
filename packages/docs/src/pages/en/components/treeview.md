@@ -151,7 +151,7 @@ Using the the **prepend** slot we are able to create an intuitive file explorer.
 
 <ExamplesExample file="v-treeview/slot-append-and-label" />
 
-Both **append**, and **prepend** slots get additional information about the item (like `depth`, `path`, `isFirst`, `isLast` and the `index` within the children list).
+Both **append**, and **prepend** slots get additional information about the item: `depth`, `path` (from indexes), `isFirst`, `isLast` and the `index` within the children list.
 
 <ExamplesExample file="v-treeview/slot-append-and-prepend-item" />
 
