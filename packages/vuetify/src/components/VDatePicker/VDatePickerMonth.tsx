@@ -17,13 +17,13 @@ import { genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/
 // Types
 import type { PropType } from 'vue'
 
-export type DatePickerEventColorValue = string | string[]
+export type DatePickerEventColorValue = boolean | string | string[]
 
 export type DatePickerEventColors = DatePickerEventColorValue |
 Record<string, DatePickerEventColorValue> | ((date: string) => DatePickerEventColorValue)
 
 export type DatePickerEvents = string[] |
-((date: string) => boolean | DatePickerEventColorValue) | Record<string, DatePickerEventColorValue>
+((date: string) => DatePickerEventColorValue) | Record<string, DatePickerEventColorValue>
 
 export type VDatePickerMonthSlots = {
   day: {
@@ -186,11 +186,11 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
       }
 
       // Fallback to default color if no color is found
-      if (!eventColors.length) {
-        eventColors = ['surface-variant']
-      }
-
-      return eventColors.filter(Boolean)
+      return !eventColors.length
+        ? ['surface-variant']
+        : eventColors
+          .filter(Boolean)
+          .map((color: string | boolean) => typeof color === 'string' ? color : 'surface-variant')
     }
 
     function genEvents (date: string): JSX.Element | null {
