@@ -74,7 +74,7 @@ export const VSpeedDial = genericComponent<OverlaySlots>()({
         >
           {{
             ...slots,
-            default: slotProps => (
+            default: slotProps => [
               <VDefaultsProvider
                 defaults={{
                   VBtn: {
@@ -89,8 +89,8 @@ export const VSpeedDial = genericComponent<OverlaySlots>()({
                 >
                   { slots.default?.(slotProps) }
                 </MaybeTransition>
-              </VDefaultsProvider>
-            ),
+              </VDefaultsProvider>,
+            ],
           }}
         </VMenu>
       )

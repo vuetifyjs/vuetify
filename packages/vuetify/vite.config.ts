@@ -52,7 +52,7 @@ export default defineConfig(({ mode }) => {
     },
     plugins: [
       vue(),
-      vueJsx({ optimize: false, enableObjectSlots: false }),
+      vueJsx({ optimize: true, enableObjectSlots: false }),
       viteSSR(),
       Components({
         dts: !process.env.TEST,

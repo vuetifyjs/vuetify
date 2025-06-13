@@ -250,7 +250,7 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
         >
           {{
             ...slots,
-            default: () => (
+            default: () => [
               <>
                 <VMenu
                   v-model={ menu.value }
@@ -286,7 +286,7 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
                           disabledActions.value = []
                         }
 
-                        return (
+                        return [
                           <VDatePicker
                             { ...datePickerProps }
                             modelValue={ props.hideActions ? model.value : proxyModel.value }
@@ -296,16 +296,16 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
                             {{
                               actions: !props.hideActions ? () => slots.actions?.({ save, cancel, isPristine }) ?? actions() : undefined,
                             }}
-                          </VDatePicker>
-                        )
+                          </VDatePicker>,
+                        ]
                       },
                     }}
                   </VConfirmEdit>
                 </VMenu>
 
                 { slots.default?.() }
-              </>
-            ),
+              </>,
+            ],
           }}
         </VTextField>
       )

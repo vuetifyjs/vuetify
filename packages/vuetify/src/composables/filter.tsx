@@ -216,7 +216,7 @@ export function useFilter <T extends InternalItem> (
 }
 
 export function highlightResult (name: string, text: string, matches: FilterMatchArrayMultiple | undefined) {
-  if (matches == null || !matches.length) return text
+  if (matches == null || !matches.length) return [text]
 
   return matches.map((match, i) => {
     const start = i === 0 ? 0 : matches[i - 1][1]

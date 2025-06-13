@@ -32,6 +32,7 @@ import type {
   ObjectEmitsOptions,
   SlotsType,
   VNode,
+  VNodeArrayChildren,
   VNodeChild,
   VNodeProps,
 } from 'vue'
@@ -151,8 +152,9 @@ export type SlotsToProps<
   [K in keyof T as `v-slot:${K & string}`]?: T[K] | false
 }
 
+type SlotChildren = VNodeArrayChildren | null | undefined
 type RawSlots = Record<string, unknown>
-type Slot<T> = [T] extends [never] ? () => VNodeChild : (arg: T) => VNodeChild
+type Slot<T> = [T] extends [never] ? () => SlotChildren : (arg: T) => SlotChildren
 type VueSlot<T> = [T] extends [never] ? () => VNode[] : (arg: T) => VNode[]
 type MakeInternalSlots<T extends RawSlots> = {
   [K in keyof T]: Slot<T[K]>
