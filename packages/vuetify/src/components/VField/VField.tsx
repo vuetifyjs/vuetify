@@ -278,7 +278,14 @@ export const VField = genericComponent<new <T>(
           />
 
           { hasPrepend && (
-            <div key="prepend" class="v-field__prepend-inner">
+            <div
+              key="prepend"
+              class="v-field__prepend-inner"
+              onMousedown={ (e: MouseEvent) => {
+                e.preventDefault()
+                e.stopPropagation()
+              }}
+            >
               { props.prependInnerIcon && (
                 <InputIcon
                   key="prepend-icon"
@@ -370,7 +377,14 @@ export const VField = genericComponent<new <T>(
           )}
 
           { hasAppend && (
-            <div key="append" class="v-field__append-inner">
+            <div
+              key="append"
+              class="v-field__append-inner"
+              onMousedown={ (e: MouseEvent) => {
+                e.preventDefault()
+                e.stopPropagation()
+              }}
+            >
               { slots['append-inner']?.(slotProps.value) }
 
               { props.appendInnerIcon && (
