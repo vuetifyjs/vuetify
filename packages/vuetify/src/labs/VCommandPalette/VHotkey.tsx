@@ -52,10 +52,7 @@ function cmdAndMeta (mode: DisplayMode, isMac: boolean): KeyDisplay {
     case 'icon':
       // Command key icon (Mac-specific design)
       if (isMac) {
-        return ['icon', [
-          // eslint-disable-next-line max-len
-          'M6 2a4 4 0 0 1 4 4v2h4V6a4 4 0 0 1 4-4a4 4 0 0 1 4 4a4 4 0 0 1-4 4h-2v4h2a4 4 0 0 1 4 4a4 4 0 0 1-4 4a4 4 0 0 1-4-4v-2h-4v2a4 4 0 0 1-4 4a4 4 0 0 1-4-4a4 4 0 0 1 4-4h2v-4H6a4 4 0 0 1-4-4a4 4 0 0 1 4-4m10 16a2 2 0 0 0 2 2a2 2 0 0 0 2-2a2 2 0 0 0-2-2h-2zm-2-8h-4v4h4zm-8 6a2 2 0 0 0-2 2a2 2 0 0 0 2 2a2 2 0 0 0 2-2v-2zM8 6a2 2 0 0 0-2-2a2 2 0 0 0-2 2a2 2 0 0 0 2 2h2zm10 2a2 2 0 0 0 2-2a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2z',
-        ]]
+        return ['icon', '$command']
       }
     default:
       // Text fallback
@@ -74,7 +71,7 @@ const keyMap = {
       case 'symbol':
         if (isMac) return ['symbol', '⌃'] // Mac Control symbol
       case 'icon':
-        if (isMac) return ['icon', ['m19.78 11.78l-1.42 1.41L12 6.83l-6.36 6.36l-1.42-1.41L12 4z']]
+        if (isMac) return ['icon', '$ctrl']
       default:
         return ['text', 'Ctrl']
     }
@@ -83,12 +80,12 @@ const keyMap = {
   meta: cmdAndMeta,
   cmd: cmdAndMeta,
   // Shift key
-  shift (mode) {
+  shift (mode, isMac) {
     switch (mode) {
       case 'symbol':
-        return ['symbol', '⇧'] // Shift symbol
+        if (isMac) return ['symbol', '⇧'] // Shift symbol
       case 'icon':
-        return ['icon', ['M15 18v-6h2.17L12 6.83L6.83 12H9v6zM12 4l10 10h-5v6H7v-6H2z']]
+        if (isMac) return ['icon', '$shift']
       default:
         return ['text', 'Shift']
     }
@@ -99,7 +96,7 @@ const keyMap = {
       case 'symbol':
         if (isMac) return ['symbol', '⌥'] // Mac Option symbol
       case 'icon':
-        return ['icon', ['M3 4h6.11l7.04 14H21v2h-6.12L7.84 6H3zm11 0h7v2h-7z']]
+        if (isMac) return ['icon', '$alt']
       default:
         return ['text', isMac ? 'Option' : 'Alt']
     }
@@ -110,7 +107,7 @@ const keyMap = {
       case 'symbol':
         return ['symbol', '↵'] // Return symbol
       case 'icon':
-        return ['icon', ['M19 7v4H5.83l3.58-3.59L8 6l-6 6l6 6l1.41-1.42L5.83 13H21V7z']]
+        return ['icon', '$enter']
       default:
         return ['text', 'Enter']
     }
@@ -121,7 +118,7 @@ const keyMap = {
       case 'symbol':
         return ['symbol', '↑']
       case 'icon':
-        return ['icon', ['M13 20h-2V8l-5.5 5.5l-1.42-1.42L12 4.16l7.92 7.92l-1.42 1.42L13 8z']]
+        return ['icon', '$arrowup']
       default:
         return ['text', 'Up Arrow']
     }
@@ -131,7 +128,7 @@ const keyMap = {
       case 'symbol':
         return ['symbol', '↓']
       case 'icon':
-        return ['icon', ['M11 4h2v12l5.5-5.5l1.42 1.42L12 19.84l-7.92-7.92L5.5 10.5L11 16z']]
+        return ['icon', '$arrowdown']
       default:
         return ['text', 'Down Arrow']
     }
@@ -141,7 +138,7 @@ const keyMap = {
       case 'symbol':
         return ['symbol', '←']
       case 'icon':
-        return ['icon', ['M20 11v2H8l5.5 5.5l-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5L8 11z']]
+        return ['icon', '$arrowleft']
       default:
         return ['text', 'Left Arrow']
     }
@@ -151,7 +148,7 @@ const keyMap = {
       case 'symbol':
         return ['symbol', '→']
       case 'icon':
-        return ['icon', ['M4 11v2h12l-5.5 5.5l1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5L16 11z']]
+        return ['icon', '$arrowright']
       default:
         return ['text', 'Right Arrow']
     }
@@ -162,9 +159,7 @@ const keyMap = {
       case 'symbol':
         return ['symbol', '⌫'] // Backspace symbol
       case 'icon':
-        // Complex backspace icon path
-        // eslint-disable-next-line max-len
-        return ['icon', ['M19 15.59L17.59 17L14 13.41L10.41 17L9 15.59L12.59 12L9 8.41L10.41 7L14 10.59L17.59 7L19 8.41L15.41 12zM22 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H7c-.69 0-1.23-.36-1.59-.89L0 12l5.41-8.12C5.77 3.35 6.31 3 7 3zm0 2H7l-4.72 7L7 19h15z']]
+        return ['icon', '$backspace']
       default:
         return ['text', 'Backspace']
     }
@@ -179,7 +174,7 @@ const keyMap = {
       case 'symbol':
         return ['symbol', '−'] // Minus symbol (different from hyphen)
       case 'icon':
-        return ['icon', ['M19 13H5v-2h14z']] // Simple minus icon
+        return ['icon', '$minus']
       default:
         return ['text', '-']
     }
