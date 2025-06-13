@@ -20,7 +20,7 @@ export default {
       activateNone: 'Ενεργοποιήστε για να καταργήσετε την ταξινόμηση.',
       activateDescending: 'Ενεργοποιήστε για φθίνουσα ταξινόμηση.',
       activateAscending: 'Ενεργοποιήστε για αύξουσα ταξινόμηση.',
-      noRowSelected: Δεν έχει επιλεγεί καμία σειρά.',
+      noRowSelected: 'Δεν έχει επιλεγεί καμία σειρά.',
       rowNotSelected: 'Η σειρά {0} δεν είναι επιλεγμένη.',
       rowSelected: 'Η σειρά {0} έχει επιλεγεί.',
       allRowsSelected: 'Όλες οι σειρές έχουν επιλεγεί.',
