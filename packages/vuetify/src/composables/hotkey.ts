@@ -1,5 +1,5 @@
 // Utilities
-import { onBeforeUnmount, shallowRef, toValue, watch } from 'vue'
+import { onBeforeUnmount, toValue, watch } from 'vue'
 import { IN_BROWSER } from '@/util'
 import { getCurrentInstance } from '@/util/getCurrentInstance'
 
@@ -28,16 +28,16 @@ export function useHotkey (
   } = options
 
   const isMac = navigator?.userAgent?.includes('Macintosh')
-  const timer = shallowRef<ReturnType<typeof setTimeout> | undefined>()
-  const keyGroups = shallowRef<string[]>([])
-  const isSequence = shallowRef(false)
-  const groupIndex = shallowRef(0)
+  let timeout = 0
+  let keyGroups: string[]
+  let isSequence = false
+  let groupIndex = 0
 
   function clearTimer () {
-    if (!timer.value) return
+    if (!timeout) return
 
-    clearTimeout(timer.value)
-    timer.value = undefined
+    clearTimeout(timeout)
+    timeout = 0
   }
 
   function isInputFocused () {
@@ -54,37 +54,37 @@ export function useHotkey (
   }
 
   function resetSequence () {
-    groupIndex.value = 0
+    groupIndex = 0
     clearTimer()
   }
 
   function handler (e: KeyboardEvent) {
-    const group = keyGroups.value[groupIndex.value]
+    const group = keyGroups[groupIndex]
 
     if (!group || isInputFocused()) return
 
     if (!matchesKeyGroup(e, group)) {
-      if (isSequence.value) resetSequence()
+      if (isSequence) resetSequence()
       return
     }
 
     if (preventDefault) e.preventDefault()
 
-    if (!isSequence.value) {
+    if (!isSequence) {
       callback(e)
       return
     }
 
     clearTimer()
-    groupIndex.value++
+    groupIndex++
 
-    if (groupIndex.value === keyGroups.value.length) {
+    if (groupIndex === keyGroups.length) {
       callback(e)
       resetSequence()
       return
     }
 
-    timer.value = setTimeout(resetSequence, sequenceTimeout)
+    timeout = window.setTimeout(resetSequence, sequenceTimeout)
   }
 
   function cleanup () {
@@ -119,8 +119,8 @@ export function useHotkey (
 
     if (unrefKeys) {
       const groups = splitKeySequence(unrefKeys.toLowerCase())
-      isSequence.value = groups.length > 1
-      keyGroups.value = groups
+      isSequence = groups.length > 1
+      keyGroups = groups
       resetSequence()
       window.addEventListener(event, handler)
     }
