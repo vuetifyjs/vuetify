@@ -20,7 +20,7 @@ export default {
       activateNone: 'Premi per treure la ordenació.',
       activateDescending: 'Premi per ordenar descendent.',
       activateAscending: 'Premi per ordenar ascendent.',
-      noRowSelected: 'No s'ha seleccionat cap fila',
+      noRowSelected: 'No s\'ha seleccionat cap fila',
       rowNotSelected: 'La fila {0} està seleccionada.',
       rowSelected: 'Fila {0} seleccionada',
       allRowsSelected: 'Totes les files estan seleccionades.',
