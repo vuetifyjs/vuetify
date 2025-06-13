@@ -46,7 +46,7 @@ export function roundedArc (center: Point, radius: number, startAngle: number, e
   const iStart = pointOnArc(center, innerR2, startAngle)
   const iEnd = pointOnArc(center, innerR2, endAngle)
 
-  const iSection = 360 * (rounding / (2 * Math.PI * innerR))
+  const iSection = innerR ? 360 * (rounding / (2 * Math.PI * innerR)) : 0
   const oSection = 360 * (rounding / (2 * Math.PI * radius))
 
   // arcs endpoints
