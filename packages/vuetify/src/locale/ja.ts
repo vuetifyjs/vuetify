@@ -21,7 +21,7 @@ export default {
       activateDescending: '降順の並び替えのためには有効にしてください。',
       activateAscending: '昇順のソートのためには有効にしてください。',
       noRowSelected: '行が選択されていません。',
-      rowNotSelected: 行 {0} が選択されていません。',
+      rowNotSelected: '行 {0} が選択されていません。',
       rowSelected: '行 {0} が選択されています。',
       allRowsSelected: 'すべての行が選択されています',
       someRowsSelected: 'いくつかの行が選択されています',
