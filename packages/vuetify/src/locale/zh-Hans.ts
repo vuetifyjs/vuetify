@@ -22,7 +22,7 @@ export default {
       activateAscending: '点击以升序排列。',
       noRowSelected: '未选择任何行。',
       rowNotSelected: '第 {0} 行未被选中。',
-      rowSelected: 第 {0} 行被选中。',
+      rowSelected: '第 {0} 行被选中。',
       allRowsSelected: '所有行均被选中。',
       someRowsSelected: '一些行已被选中。',
     },
