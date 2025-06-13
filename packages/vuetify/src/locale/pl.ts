@@ -46,6 +46,8 @@ export default {
     input: {
       placeholder: 'Wprowadź datę',
     },
+    weekSelected: 'Tydzień {0}, {1}',
+    weekTitle: 'Wybór tygodnia',
   },
   noDataText: 'Brak danych',
   carousel: {
