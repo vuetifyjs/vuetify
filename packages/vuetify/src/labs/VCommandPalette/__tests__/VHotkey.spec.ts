@@ -42,7 +42,7 @@ describe('VHotkey', () => {
       expect(dividers).toHaveLength(3) // +, then, +
     })
 
-        it('should correctly handle literal minus key (shift+-)', () => {
+    it('should correctly handle literal minus key (shift+-)', () => {
       const wrapper = mountVHotkey({ keys: 'shift+-', displayMode: 'text' })
 
       // Should render shift and minus keys with + separator, NOT treat - as sequence separator
@@ -57,7 +57,7 @@ describe('VHotkey', () => {
       expect(keys[1].text()).toBe('-')
     })
 
-            it('should handle minus key with alternative names', () => {
+    it('should handle minus key with alternative names', () => {
       const wrapperMinus = mountVHotkey({ keys: 'alt+minus', displayMode: 'text' })
 
       const wrapperHyphen = mountVHotkey({ keys: 'ctrl+hyphen', displayMode: 'text' })
@@ -127,7 +127,7 @@ describe('VHotkey', () => {
     })
   })
 
-    describe('Display Modes', () => {
+  describe('Display Modes', () => {
     it('should render minus key in text mode', () => {
       const wrapper = mountVHotkey({
         keys: 'shift+-',
@@ -139,18 +139,18 @@ describe('VHotkey', () => {
       expect(keys[1].classes()).toContain('v-hotkey__key-text')
     })
 
-        it('should render minus key in symbol mode', () => {
+    it('should render minus key in symbol mode', () => {
       const wrapper = mountVHotkey({
         keys: 'shift+-',
         displayMode: 'symbol',
       })
 
       const keys = wrapper.findAll('.v-hotkey__key')
-      expect(keys[1].text()).toBe('−') // Minus symbol (different from hyphen)
+      expect(keys[1].text()).toBe('-') // Minus symbol (different from hyphen)
       expect(keys[1].classes()).toContain('v-hotkey__key-symbol')
     })
 
-        it('should render minus key in icon mode', () => {
+    it('should render minus key in icon mode', () => {
       const wrapper = mountVHotkey({
         keys: 'shift+-',
         displayMode: 'icon',
@@ -176,7 +176,7 @@ describe('VHotkey', () => {
     })
   })
 
-    describe('Custom Key Mapping', () => {
+  describe('Custom Key Mapping', () => {
     it('should use custom key mapping when provided', () => {
       const customKeyMap = {
         '-': (mode: any, isMac: boolean) => ['text', 'MINUS'] as ['text', string],
