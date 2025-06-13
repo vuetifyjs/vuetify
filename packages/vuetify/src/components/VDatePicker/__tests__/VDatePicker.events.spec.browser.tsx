@@ -1,8 +1,5 @@
-// @ts-nocheck
-/* eslint-disable */
-
-import { render, screen } from '@test'
-import { ref } from 'vue'
+// Utilities
+import { render } from '@test'
 import { VDatePicker } from '../VDatePicker'
 
 describe('VDatePicker events', () => {
@@ -10,7 +7,9 @@ describe('VDatePicker events', () => {
     render(() => (
       <VDatePicker
         type="month"
-        events={['2025-04-09']}
+        month={ 3 }
+        year={ 2022 }
+        events={['2022-04-09']}
         eventColor="red"
       />
     ))
@@ -22,7 +21,9 @@ describe('VDatePicker events', () => {
   it('renders event markers when events is a function', async () => {
     render(() => (
       <VDatePicker
-        events={(date: string) => date === '2025-04-09'}
+        month={ 3 }
+        year={ 2022 }
+        events={ (date: string) => date === '2022-04-09' }
         eventColor="red"
       />
     ))
@@ -35,8 +36,10 @@ describe('VDatePicker events', () => {
   it('renders event markers with colors defined by an object', async () => {
     render(() => (
       <VDatePicker
-        events={['2025-04-09', '2025-04-20']}
-        eventColor={{ '2025-04-09': 'red', '2025-04-20': 'blue lighten-1' }}
+        month={ 3 }
+        year={ 2022 }
+        events={['2022-04-09', '2022-04-20']}
+        eventColor={{ '2022-04-09': 'red', '2022-04-20': 'blue lighten-1' }}
       />
     ))
 
@@ -47,8 +50,10 @@ describe('VDatePicker events', () => {
   it('renders event markers with colors defined by a function', async () => {
     render(() => (
       <VDatePicker
-        events={['2025-04-09', '2025-04-20']}
-        eventColor={(date: string) => ({ '2025-04-09': 'red' }[date])}
+        month={ 3 }
+        year={ 2022 }
+        events={['2022-04-09', '2022-04-20']}
+        eventColor={ (date: string) => ({ '2022-04-09': 'red' }[date]) }
       />
     ))
 
@@ -60,15 +65,17 @@ describe('VDatePicker events', () => {
     render(() => (
       <VDatePicker
         type="month"
-        events={{ '2025-04-09': true }}
-        eventColor={null}
+        month={ 3 }
+        year={ 2022 }
+        events={{ '2022-04-09': true }}
+        eventColor={ null }
       />
     ))
-  
+
     const eventElements = document.querySelectorAll('.v-badge')
     expect(eventElements.length).toBeGreaterThan(0)
-  
-    const hasSurfaceVariant = Array.from(eventElements).some(el => 
+
+    const hasSurfaceVariant = Array.from(eventElements).some(el =>
       el.querySelector('.v-badge__badge')?.classList.contains('bg-surface-variant')
     )
     expect(hasSurfaceVariant).toBe(true)
