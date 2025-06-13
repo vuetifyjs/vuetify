@@ -38,7 +38,6 @@ export default defineWorkspace([
             browserVersion: '136',
             'goog:chromeOptions': {
               // @ts-expect-error
-              args: ['--start-maximized', process.env.TEST_BAIL && '--auto-open-devtools-for-tabs'].filter(v => !!v),
               args: [
                 '--start-maximized',
                 process.env.TEST_BAIL && '--auto-open-devtools-for-tabs',
