@@ -53,7 +53,7 @@ describe('VDatePicker events', () => {
         month={ 3 }
         year={ 2022 }
         events={['2022-04-09', '2022-04-20']}
-        eventColor={ (date: string) => ({ '2022-04-09': 'red' }[date]) }
+        eventColor={ (date: string) => ({ '2022-04-09': 'red' }[date] || false) }
       />
     ))
 
@@ -61,14 +61,13 @@ describe('VDatePicker events', () => {
     expect(eventElements.length).toBeGreaterThan(0)
   })
 
-  it('uses default color when eventColor is null', async () => {
+  it('uses default color when eventColor is not set', async () => {
     render(() => (
       <VDatePicker
         type="month"
         month={ 3 }
         year={ 2022 }
         events={{ '2022-04-09': true }}
-        eventColor={ null }
       />
     ))
 
