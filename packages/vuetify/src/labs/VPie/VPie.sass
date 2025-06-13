@@ -37,6 +37,13 @@
         .v-overlay__content
           pointer-events: none !important
 
+    &__content-underlay
+      border-radius: 50%
+      position: absolute
+      inset: $pie-underlay-inset
+      pointer-events: none
+      z-index: -1
+
     &__center-content
       position: absolute
       inset: 0

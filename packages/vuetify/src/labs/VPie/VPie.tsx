@@ -9,6 +9,7 @@ import { VChip } from '@/components/VChip'
 import { VChipGroup } from '@/components/VChipGroup'
 
 // Composables
+import { useColor } from '@/composables/color'
 import { makeDensityProps } from '@/composables/density'
 
 // Utilities
@@ -34,6 +35,7 @@ export type VPieSlots = {
 
 export const makeVPieProps = propsFactory({
   title: String,
+  bgColor: String,
   items: {
     type: Array as PropType<Record<string, any> | { color?: string, pattern?: string }[]>,
     default: () => [],
@@ -102,6 +104,10 @@ export const VPie = genericComponent<VPieSlots>()({
       textFormat: '[title]',
       ...(typeof props.legend === 'object' ? props.legend : {}),
     }))
+
+    const { colorClasses, colorStyles } = useColor(() => ({ background: props.bgColor }))
+    const textColorClasses = computed(() => colorClasses.value.filter(v => v.startsWith('text-')))
+    const textColorStyles = computed(() => pick(colorStyles.value, ['color', 'caretColor']))
 
     const legendCircleSize = computed(() => ({ default: 20, comfortable: 18, compact: 16 }[props.density ?? 'default']))
     const legendDirection = computed(() => ['left', 'right'].includes(legendConfig.value.position) ? 'vertical' : 'horizontal')
@@ -244,12 +250,23 @@ export const VPie = genericComponent<VPieSlots>()({
         >
           { slots.title?.() ?? (props.title && (<div class="v-pie__title">{ props.title }</div>)) }
           <div
-            class="v-pie__content"
+            class={[
+              'v-pie__content',
+              ...textColorClasses.value,
+            ]}
             style={{
               transform: `rotate(${rotateDeg.value})`,
               marginBottom: `calc(-1 * ${convertToUnit(props.size)} * ${gaugeOffset.value})`,
+              ...textColorStyles.value,
             }}
           >
+            <div
+              class={[
+                'v-pie__content-underlay',
+                colorClasses.value,
+              ]}
+              style={ colorStyles.value }
+            />
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 100 100"
