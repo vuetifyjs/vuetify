@@ -172,7 +172,7 @@ const keyMap = {
   '-' (mode, isMac) {
     switch (mode) {
       case 'symbol':
-        return ['symbol', '−'] // Minus symbol (different from hyphen)
+        return ['symbol', '-'] // Minus symbol (different from hyphen)
       case 'icon':
         return ['icon', '$minus']
       default:
