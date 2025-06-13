@@ -65,9 +65,9 @@ export const VDataTableRow = genericComponent<new <T>(
     const { toggleSort, sortBy, isSorted } = useSort()
     const { columns } = useHeaders()
 
-    function getSelectedAreaLabel (item: any){
-      const identifier = isSelected([item]) ?  '$vuetify.dataTable.ariaLabel.rowSelected' : '$vuetify.dataTable.ariaLabel.selectRow';
-      return  t(identifier, props.index ? props.index + 1 : 1)
+    function getSelectedAreaLabel (item: any) {
+      const identifier = isSelected([item]) ? '$vuetify.dataTable.ariaLabel.rowSelected' : '$vuetify.dataTable.ariaLabel.rowNotSelected'
+      return t(identifier, props.index ? props.index + 1 : 1)
     }
 
     useRender(() => (
@@ -163,7 +163,7 @@ export const VDataTableRow = genericComponent<new <T>(
                           (event: Event) => toggleSelect(item, props.index, event as PointerEvent),
                           ['stop']
                         )}
-                        aria-label={ getSelectedAreaLabel(item)}
+                        aria-label={ getSelectedAreaLabel(item) }
                       />
                     )
                   }

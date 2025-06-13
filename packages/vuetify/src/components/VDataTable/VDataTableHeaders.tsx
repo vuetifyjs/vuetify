@@ -153,14 +153,14 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
       loaderClasses.value,
     ]))
 
-    function getSelectedAreaLabel (){
+    function getSelectedAreaLabel () {
       if (allSelected.value) {
         return t('$vuetify.dataTable.ariaLabel.allRowsSelected')
       }
       if (someSelected.value) {
         return t('$vuetify.dataTable.ariaLabel.someRowsSelected')
       }
-      return t('$vuetify.dataTable.ariaLabel.selectAll')
+      return t('$vuetify.dataTable.ariaLabel.noRowSelected')
     }
 
     const VDataTableHeaderCell = ({ column, x, y }: { column: InternalDataTableHeader, x: number, y: number }) => {
