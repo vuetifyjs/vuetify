@@ -166,13 +166,14 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
       e.preventDefault()
       e.stopPropagation()
 
-      const clipboardText = e?.clipboardData?.getData('Text').slice(0, length.value) ?? ''
+      const clipboardText = e?.clipboardData?.getData('Text').trim().slice(0, length.value) ?? ''
+      const finalIndex = clipboardText.length - 1 === -1 ? index : clipboardText.length - 1
 
       if (isValidNumber(clipboardText)) return
 
       model.value = clipboardText.split('')
 
-      inputRef.value?.[index].blur()
+      inputRef.value?.[finalIndex].focus()
     }
 
     function reset () {
@@ -207,7 +208,10 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
     }, { scoped: true })
 
     watch(model, val => {
-      if (val.length === length.value) emit('finish', val.join(''))
+      if (val.length === length.value) {
+        focusIndex.value = length.value - 1
+        emit('finish', val.join(''))
+      }
     }, { deep: true })
 
     watch(focusIndex, val => {

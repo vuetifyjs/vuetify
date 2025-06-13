@@ -1,5 +1,6 @@
 // Utilities
 import {
+  camelize,
   capitalize,
   Comment,
   Fragment,
@@ -670,7 +671,7 @@ export function getNextElement (elements: HTMLElement[], location?: 'next' | 'pr
 export function focusChild (el: Element, location?: 'next' | 'prev' | 'first' | 'last' | number) {
   const focusable = focusableChildren(el)
 
-  if (!location) {
+  if (location == null) {
     if (el === document.activeElement || !el.contains(document.activeElement)) {
       focusable[0]?.focus()
     }
@@ -777,4 +778,43 @@ export function checkPrintable (e: KeyboardEvent) {
 export type Primitive = string | number | boolean | symbol | bigint
 export function isPrimitive (value: unknown): value is Primitive {
   return typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean' || typeof value === 'bigint'
+}
+
+export function escapeForRegex (sign: string) {
+  return '\\^$*+?.()|{}[]'.includes(sign)
+    ? `\\${sign}`
+    : sign
+}
+
+export function extractNumber (text: string, decimalDigitsLimit: number | null, decimalSeparator: string) {
+  const onlyValidCharacters = new RegExp(`[\\d\\-${escapeForRegex(decimalSeparator)}]`)
+  const cleanText = text.split('')
+    .filter(x => onlyValidCharacters.test(x))
+    .filter((x, i, all) => (i === 0 && /[-]/.test(x)) || // sign allowed at the start
+        (x === decimalSeparator && i === all.indexOf(x)) || // decimal separator allowed only once
+        /\d/.test(x))
+    .join('')
+
+  if (decimalDigitsLimit === 0) {
+    return cleanText.split(decimalSeparator)[0]
+  }
+
+  const decimalPart = new RegExp(`${escapeForRegex(decimalSeparator)}\\d`)
+  if (decimalDigitsLimit !== null && decimalPart.test(cleanText)) {
+    const parts = cleanText.split(decimalSeparator)
+    return [
+      parts[0],
+      parts[1].substring(0, decimalDigitsLimit),
+    ].join(decimalSeparator)
+  }
+
+  return cleanText
+}
+
+export function camelizeProps<T extends Record<string, unknown>> (props: T | null): T {
+  const out = {} as T
+  for (const prop in props) {
+    out[camelize(prop) as keyof T] = props[prop]
+  }
+  return out
 }

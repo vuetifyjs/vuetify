@@ -6,8 +6,10 @@ import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextFi
 
 // Composables
 import { useDate } from '@/composables/date'
+import { createDateRange } from '@/composables/date/date'
+import { makeDateFormatProps, useDateFormat } from '@/composables/dateFormat'
 import { makeDisplayProps, useDisplay } from '@/composables/display'
-import { makeFocusProps, useFocus } from '@/composables/focus'
+import { makeFocusProps } from '@/composables/focus'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
@@ -39,11 +41,13 @@ export const makeVDateInputProps = propsFactory({
     type: String as PropType<StrategyProps['location']>,
     default: 'bottom start',
   },
+  menu: Boolean,
   updateOn: {
     type: Array as PropType<('blur' | 'enter')[]>,
     default: () => ['blur', 'enter'],
   },
 
+  ...makeDateFormatProps(),
   ...makeDisplayProps({
     mobile: null,
   }),
@@ -52,7 +56,6 @@ export const makeVDateInputProps = propsFactory({
     hideActions: true,
   }),
   ...makeVTextFieldProps({
-    placeholder: 'mm/dd/yyyy',
     prependIcon: '$calendar',
   }),
   ...omit(makeVDatePickerProps({
@@ -69,14 +72,16 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
   emits: {
     save: (value: string) => true,
     cancel: () => true,
+    'update:focused': (val: boolean) => true,
     'update:modelValue': (val: string) => true,
+    'update:menu': (val: boolean) => true,
   },
 
   setup (props, { emit, slots }) {
-    const { t } = useLocale()
+    const { t, current: currentLocale } = useLocale()
     const adapter = useDate()
+    const { isValid, parseDate, formatDate, parserFormat } = useDateFormat(props, currentLocale)
     const { mobile } = useDisplay(props)
-    const { isFocused, focus, blur } = useFocus(props)
 
     const emptyModelValue = () => props.multiple ? [] : null
 
@@ -88,8 +93,9 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
       val => Array.isArray(val) ? val.map(item => adapter.date(item)) : val ? adapter.date(val) : val
     )
 
-    const menu = shallowRef(false)
+    const menu = useProxiedModel(props, 'menu')
     const isEditingInput = shallowRef(false)
+    const isFocused = shallowRef(props.focused)
     const vTextFieldRef = ref<VTextField>()
     const disabledActions = ref<typeof VConfirmEdit['props']['disabled']>(['save'])
 
@@ -97,8 +103,10 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
       if (typeof props.displayFormat === 'function') {
         return props.displayFormat(date)
       }
-
-      return adapter.format(date, props.displayFormat ?? 'keyboardDate')
+      if (props.displayFormat) {
+        return adapter.format(date, props.displayFormat ?? 'keyboardDate')
+      }
+      return formatDate(date)
     }
 
     const display = computed(() => {
@@ -149,7 +157,6 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
 
       if (!menu.value || !isFocused.value) {
         menu.value = true
-        return
       }
 
       if (props.updateOn.includes('enter')) {
@@ -190,8 +197,6 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
         onUserInput(e.target as HTMLInputElement)
       }
 
-      blur()
-
       // When in mobile mode and editing is done (due to keyboard dismissal), close the menu
       if (mobile.value && isEditingInput.value && !isFocused.value) {
         menu.value = false
@@ -200,15 +205,29 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
     }
 
     function onUserInput ({ value }: HTMLInputElement) {
-      if (value && !adapter.isValid(value)) return
-
-      model.value = !value ? emptyModelValue() : value
+      if (!value.trim()) {
+        model.value = emptyModelValue()
+      } else if (!props.multiple) {
+        if (isValid(value)) {
+          model.value = parseDate(value)
+        }
+      } else {
+        const parts = value.trim().split(/\D+-\D+|[^\d\-/.]+/)
+        if (parts.every(isValid)) {
+          if (props.multiple === 'range') {
+            const [start, stop] = parts.map(parseDate).toSorted((a, b) => adapter.isAfter(a, b) ? 1 : -1)
+            model.value = createDateRange(adapter, start, stop)
+          } else {
+            model.value = parts.map(parseDate)
+          }
+        }
+      }
     }
 
     useRender(() => {
       const confirmEditProps = VConfirmEdit.filterProps(props)
       const datePickerProps = VDatePicker.filterProps(omit(props, ['active', 'location', 'rounded']))
-      const textFieldProps = VTextField.filterProps(props)
+      const textFieldProps = VTextField.filterProps(omit(props, ['placeholder']))
 
       return (
         <VTextField
@@ -218,14 +237,16 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
           style={ props.style }
           modelValue={ display.value }
           inputmode={ inputmode.value }
+          placeholder={ props.placeholder ?? parserFormat.value }
           readonly={ isReadonly.value }
           onKeydown={ isInteractive.value ? onKeydown : undefined }
           focused={ menu.value || isFocused.value }
-          onFocus={ focus }
           onBlur={ onBlur }
+          validationValue={ model.value }
           onClick:control={ isInteractive.value ? onClick : undefined }
           onClick:prepend={ isInteractive.value ? onClick : undefined }
           onUpdate:modelValue={ onUpdateDisplayModel }
+          onUpdate:focused={ event => isFocused.value = event }
         >
           {{
             ...slots,

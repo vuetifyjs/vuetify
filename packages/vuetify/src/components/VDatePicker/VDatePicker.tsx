@@ -18,19 +18,25 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, ref, shallowRef, toRef, watch } from 'vue'
-import { genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
+import { genericComponent, omit, pick, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
+import type { VDatePickerMonthSlots } from './VDatePickerMonth'
+import type { VDatePickerMonthsSlots } from './VDatePickerMonths'
+import type { VDatePickerYearsSlots } from './VDatePickerYears'
 import type { VPickerSlots } from '@/labs/VPicker/VPicker'
 import type { GenericProps } from '@/util'
 
 // Types
-export type VDatePickerSlots = Omit<VPickerSlots, 'header'> & {
-  header: {
-    header: string
-    transition: string
+export type VDatePickerSlots = Omit<VPickerSlots, 'header' | 'default'> &
+  VDatePickerYearsSlots &
+  VDatePickerMonthsSlots &
+  VDatePickerMonthSlots & {
+    header: {
+      header: string
+      transition: string
+    }
   }
-}
 
 export const makeVDatePickerProps = propsFactory({
   // TODO: implement in v3.5
@@ -194,6 +200,51 @@ export const VDatePicker = genericComponent<new <
       return targets
     })
 
+    function isAllowedInRange (start: unknown, end: unknown) {
+      const allowedDates = props.allowedDates
+      if (typeof allowedDates !== 'function') return true
+      const days = adapter.getDiff(end, start, 'days')
+      for (let i = 0; i < days; i++) {
+        if (allowedDates(adapter.addDays(start, i))) return true
+      }
+      return false
+    }
+
+    function allowedYears (year: number) {
+      if (typeof props.allowedDates === 'function') {
+        const startOfYear = adapter.parseISO(`${year}-01-01`)
+        return isAllowedInRange(startOfYear, adapter.endOfYear(startOfYear))
+      }
+
+      if (Array.isArray(props.allowedDates) && props.allowedDates.length) {
+        for (const date of props.allowedDates) {
+          if (adapter.getYear(adapter.date(date)) === year) return true
+        }
+        return false
+      }
+
+      return true
+    }
+
+    function allowedMonths (month: number) {
+      if (typeof props.allowedDates === 'function') {
+        const startOfMonth = adapter.parseISO(`${year.value}-${month + 1}-01`)
+        return isAllowedInRange(startOfMonth, adapter.endOfMonth(startOfMonth))
+      }
+
+      if (Array.isArray(props.allowedDates) && props.allowedDates.length) {
+        for (const date of props.allowedDates) {
+          if (
+            adapter.getYear(adapter.date(date)) === year.value &&
+            adapter.getMonth(adapter.date(date)) === month
+          ) return true
+        }
+        return false
+      }
+
+      return true
+    }
+
     // function onClickAppend () {
     //   inputMode.value = inputMode.value === 'calendar' ? 'keyboard' : 'calendar'
     // }
@@ -340,20 +391,26 @@ export const VDatePicker = genericComponent<new <
                       key="date-picker-months"
                       { ...datePickerMonthsProps }
                       v-model={ month.value }
-                      onUpdate:modelValue={ onUpdateMonth }
                       min={ minDate.value }
                       max={ maxDate.value }
                       year={ year.value }
-                    />
+                      allowedMonths={ allowedMonths }
+                      onUpdate:modelValue={ onUpdateMonth }
+                    >
+                      {{ ...pick(slots, ['month']) }}
+                    </VDatePickerMonths>
                   ) : viewMode.value === 'year' ? (
                     <VDatePickerYears
                       key="date-picker-years"
                       { ...datePickerYearsProps }
                       v-model={ year.value }
-                      onUpdate:modelValue={ onUpdateYear }
                       min={ minDate.value }
                       max={ maxDate.value }
-                    />
+                      allowedYears={ allowedYears }
+                      onUpdate:modelValue={ onUpdateYear }
+                    >
+                      {{ ...pick(slots, ['year']) }}
+                    </VDatePickerYears>
                   ) : (
                     <VDatePickerMonth
                       key="date-picker-month"
@@ -365,7 +422,9 @@ export const VDatePicker = genericComponent<new <
                       onUpdate:year={ onUpdateYear }
                       min={ minDate.value }
                       max={ maxDate.value }
-                    />
+                    >
+                      {{ ...pick(slots, ['day']) }}
+                    </VDatePickerMonth>
                   )}
                 </VFadeTransition>
               </>

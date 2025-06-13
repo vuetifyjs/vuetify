@@ -7,7 +7,7 @@ import { VBtn } from '@/components/VBtn'
 
 // Composables
 import { makeCalendarProps, useCalendar } from '@/composables/calendar'
-import { useDate } from '@/composables/date/date'
+import { createDateRange, useDate } from '@/composables/date/date'
 import { MaybeTransition } from '@/composables/transition'
 
 // Utilities
@@ -127,17 +127,7 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
           rangeStop.value = adapter.endOfDay(_value)
         }
 
-        const diff = adapter.getDiff(rangeStop.value, rangeStart.value, 'days')
-        const datesInRange = [rangeStart.value]
-
-        for (let i = 1; i < diff; i++) {
-          const nextDate = adapter.addDays(rangeStart.value, i)
-          datesInRange.push(nextDate)
-        }
-
-        datesInRange.push(rangeStop.value)
-
-        model.value = datesInRange
+        model.value = createDateRange(adapter, rangeStart.value, rangeStop.value)
       } else {
         rangeStart.value = value
         rangeStop.value = undefined
@@ -238,7 +228,7 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
             key={ daysInMonth.value[0].date?.toString() }
             class="v-date-picker-month__days"
           >
-            { !props.hideWeekdays && adapter.getWeekdays(props.firstDayOfWeek).map(weekDay => (
+            { !props.hideWeekdays && adapter.getWeekdays(props.firstDayOfWeek, props.weekdayFormat).map(weekDay => (
               <div
                 class={[
                   'v-date-picker-month__day',

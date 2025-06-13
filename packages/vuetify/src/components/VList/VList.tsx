@@ -92,6 +92,7 @@ export const makeVListProps = propsFactory({
   activeClass: String,
   bgColor: String,
   disabled: Boolean,
+  filterable: Boolean,
   expandIcon: IconValue,
   collapseIcon: IconValue,
   lines: {
@@ -174,7 +175,9 @@ export const VList = genericComponent<new <
     const baseColor = toRef(() => props.baseColor)
     const color = toRef(() => props.color)
 
-    createList()
+    createList({
+      filterable: props.filterable,
+    })
 
     provideDefaults({
       VListGroup: {
@@ -239,7 +242,7 @@ export const VList = genericComponent<new <
       isFocused.value = true
     }
 
-    function focus (location?: 'next' | 'prev' | 'first' | 'last') {
+    function focus (location?: 'next' | 'prev' | 'first' | 'last' | number) {
       if (contentRef.value) {
         return focusChild(contentRef.value, location)
       }

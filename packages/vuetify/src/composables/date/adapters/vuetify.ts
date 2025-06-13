@@ -142,13 +142,13 @@ function date (value?: any): Date | null {
 
 const sundayJanuarySecond2000 = new Date(2000, 0, 2)
 
-function getWeekdays (locale: string, firstDayOfWeek?: number) {
+function getWeekdays (locale: string, firstDayOfWeek?: number, weekdayFormat?: 'long' | 'short' | 'narrow') {
   const daysFromSunday = firstDayOfWeek ?? weekInfo(locale)?.firstDay ?? 0
 
   return createRange(7).map(i => {
     const weekday = new Date(sundayJanuarySecond2000)
     weekday.setDate(sundayJanuarySecond2000.getDate() + daysFromSunday + i)
-    return new Intl.DateTimeFormat(locale, { weekday: 'narrow' }).format(weekday)
+    return new Intl.DateTimeFormat(locale, { weekday: weekdayFormat ?? 'narrow' }).format(weekday)
   })
 }
 
@@ -330,7 +330,7 @@ function getWeek (date: Date, locale: string, firstDayOfWeek?: number, firstWeek
     ? addDays(yearStart, size - 7)
     : addDays(yearStart, size)
 
-  return 1 + getDiff(date, d1w1, 'weeks')
+  return 1 + getDiff(endOfDay(date), startOfDay(d1w1), 'weeks')
 }
 
 function getDate (date: Date) {
@@ -597,9 +597,9 @@ export class VuetifyDateAdapter implements DateAdapter<Date> {
     return getDiff(date, comparing, unit)
   }
 
-  getWeekdays (firstDayOfWeek?: number | string) {
+  getWeekdays (firstDayOfWeek?: number | string, weekdayFormat?: 'long' | 'short' | 'narrow') {
     const firstDay = firstDayOfWeek !== undefined ? Number(firstDayOfWeek) : undefined
-    return getWeekdays(this.locale, firstDay)
+    return getWeekdays(this.locale, firstDay, weekdayFormat)
   }
 
   getYear (date: Date) {

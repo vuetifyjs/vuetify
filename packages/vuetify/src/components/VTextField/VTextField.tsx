@@ -12,7 +12,7 @@ import { forwardRefs } from '@/composables/forwardRefs'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Directives
-import Intersect from '@/directives/intersect'
+import vIntersect from '@/directives/intersect'
 
 // Utilities
 import { cloneVNode, computed, nextTick, ref } from 'vue'
@@ -54,7 +54,7 @@ export type VTextFieldSlots = Omit<VInputSlots & VFieldSlots, 'default'> & {
 export const VTextField = genericComponent<VTextFieldSlots>()({
   name: 'VTextField',
 
-  directives: { Intersect },
+  directives: { vIntersect },
 
   inheritAttrs: false,
 
@@ -108,11 +108,13 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
       props.active
     ))
     function onFocus () {
-      if (inputRef.value !== document.activeElement) {
-        inputRef.value?.focus()
-      }
-
       if (!isFocused.value) focus()
+
+      nextTick(() => {
+        if (inputRef.value !== document.activeElement) {
+          inputRef.value?.focus()
+        }
+      })
     }
     function onControlMousedown (e: MouseEvent) {
       emit('mousedown:control', e)
@@ -123,8 +125,6 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
       e.preventDefault()
     }
     function onControlClick (e: MouseEvent) {
-      onFocus()
-
       emit('click:control', e)
     }
     function onClear (e: MouseEvent, reset: () => void) {

@@ -102,6 +102,10 @@ export function filterItems (
 
     if ((query || customFiltersLength > 0) && !options?.noFilter) {
       if (typeof item === 'object') {
+        if (['divider', 'subheader'].includes(item.raw?.type)) {
+          continue
+        }
+
         const filterKeys = keys || Object.keys(transformed)
 
         for (const key of filterKeys) {

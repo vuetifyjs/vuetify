@@ -89,6 +89,26 @@ export function createDate (options: DateOptions | undefined, locale: LocaleInst
   }
 }
 
+export function createDateRange (adapter: DateInstance, start: unknown, stop?: unknown) {
+  const diff = adapter.getDiff(
+    adapter.endOfDay(stop ?? start),
+    adapter.startOfDay(start),
+    'days'
+  )
+  const datesInRange = [start]
+
+  for (let i = 1; i < diff; i++) {
+    const nextDate = adapter.addDays(start, i)
+    datesInRange.push(nextDate)
+  }
+
+  if (stop) {
+    datesInRange.push(adapter.endOfDay(stop))
+  }
+
+  return datesInRange
+}
+
 function createInstance (options: InternalDateOptions, locale: LocaleInstance) {
   const instance = reactive(
     typeof options.adapter === 'function'

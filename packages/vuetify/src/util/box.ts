@@ -47,3 +47,31 @@ export function getTargetBox (target: HTMLElement | [x: number, y: number]): Box
     return target.getBoundingClientRect()
   }
 }
+
+export function getElementBox (el: HTMLElement) {
+  if (el === document.documentElement) {
+    if (!visualViewport) {
+      return new Box({
+        x: 0,
+        y: 0,
+        width: document.documentElement.clientWidth,
+        height: document.documentElement.clientHeight,
+      })
+    } else {
+      return new Box({
+        x: visualViewport.scale > 1 ? 0 : visualViewport.offsetLeft,
+        y: visualViewport.scale > 1 ? 0 : visualViewport.offsetTop,
+        width: visualViewport.width * visualViewport.scale,
+        height: visualViewport.height * visualViewport.scale,
+      })
+    }
+  } else {
+    const rect = el.getBoundingClientRect()
+    return new Box({
+      x: rect.x,
+      y: rect.y,
+      width: el.clientWidth,
+      height: el.clientHeight,
+    })
+  }
+}

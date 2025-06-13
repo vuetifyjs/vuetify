@@ -249,6 +249,10 @@
         "subfolder": "components"
       },
       {
+        "title": "color-inputs",
+        "subfolder": "components"
+      },
+      {
         "title": "date-inputs",
         "subfolder": "components"
       },
@@ -270,6 +274,10 @@
       },
       {
         "title": "time-pickers",
+        "subfolder": "components"
+      },
+      {
+        "title": "mask-inputs",
         "subfolder": "components"
       },
       {
