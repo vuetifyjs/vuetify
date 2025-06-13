@@ -39,10 +39,10 @@ describe('VCol', () => {
     expect(wrapper.html()).toBe('<div class="offset-sm-5 offset-md-4 offset-lg-3 offset-xl-2 v-col offset-6"></div>')
   })
 
-  it('should apply ".order-*" classes with "order-{bp}-{#}" props', async () => {
+  it('should apply ".v-col--order-*" classes with "order-{bp}-{#}" props', async () => {
     const wrapper = mountFunction(`<VCol order="6" order-sm="5" order-md="4" order-lg="3" order-xl="2" />`)
 
-    expect(wrapper.html()).toBe('<div class="order-sm-5 order-md-4 order-lg-3 order-xl-2 v-col order-6"></div>')
+    expect(wrapper.html()).toBe('<div class="order-sm-5 order-md-4 order-lg-3 order-xl-2 v-col v-col--order-6"></div>')
   })
 
   it(`should apply boolean breakpoint classes for 'sm', 'md', 'lg', 'xl' prop`, async () => {
@@ -57,9 +57,9 @@ describe('VCol', () => {
     expect(wrapper.html()).toBe('<div class="v-col-sm v-col-md v-col-lg v-col-xl v-col"></div>')
   })
 
-  it('should apply ".align-self-*" class with "align-self" prop', async () => {
+  it('should apply ".v-col--align-self-*" class with "align-self" prop', async () => {
     const wrapper = mountFunction(`<VCol align-self="center" />`)
 
-    expect(wrapper.html()).toBe('<div class="v-col align-self-center"></div>')
+    expect(wrapper.html()).toBe('<div class="v-col v-col--align-self-center"></div>')
   })
 })
