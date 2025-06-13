@@ -1,9 +1,8 @@
-// hotkey.spec.ts
-
 // Composables
 import { useHotkey } from '../hotkey'
 
 // Utilities
+import { wait } from '@test'
 import { ref } from 'vue'
 
 describe('hotkey.ts', () => {
@@ -130,14 +129,16 @@ describe('hotkey.ts', () => {
     window.dispatchEvent(new KeyboardEvent('keydown', { ctrlKey: true, key: 'a' }))
     expect(cb).toHaveBeenCalledTimes(1)
 
-    keyRef.value = 'ctrl+b'; await new Promise(resolve => setTimeout(resolve, 10))
+    keyRef.value = 'ctrl+b'
+    await wait(10)
     window.dispatchEvent(new KeyboardEvent('keydown', { ctrlKey: true, key: 'a' }))
     expect(cb).toHaveBeenCalledTimes(1)
 
     window.dispatchEvent(new KeyboardEvent('keydown', { ctrlKey: true, key: 'b' }))
     expect(cb).toHaveBeenCalledTimes(2)
 
-    keyRef.value = undefined as any; await new Promise(resolve => setTimeout(resolve, 10))
+    keyRef.value = undefined as any
+    await wait(10)
     window.dispatchEvent(new KeyboardEvent('keydown', { ctrlKey: true, key: 'b' }))
     expect(cb).toHaveBeenCalledTimes(2)
 
