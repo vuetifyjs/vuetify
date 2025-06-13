@@ -117,4 +117,12 @@ export default {
     notEmpty: 'لطفاً حداقل یک مقدار انتخاب کنید',
     pattern: 'فرمت نامعتبر',
   },
+  command: {
+    select: 'برای انتخاب',
+    navigate: 'برای پیمایش',
+    goBack: 'برای بازگشت',
+    close: 'برای بستن',
+    then: 'سپس',
+    placeholder: 'دستوری تایپ کنید یا جستجو کنید...',
+  },
 }

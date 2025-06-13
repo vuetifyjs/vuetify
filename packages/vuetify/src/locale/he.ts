@@ -117,4 +117,12 @@ export default {
     notEmpty: 'נא לבחור לפחות ערך אחד',
     pattern: 'פורמט לא תקף',
   },
+  command: {
+    select: 'לבחירה',
+    navigate: 'לניווט',
+    goBack: 'לחזרה',
+    close: 'לסגירה',
+    then: 'אז',
+    placeholder: 'הקלד פקודה או חפש...',
+  },
 }

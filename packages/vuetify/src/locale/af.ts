@@ -117,4 +117,12 @@ export default {
     notEmpty: 'Kies asseblief ten minste een waarde',
     pattern: 'Ongeldige formaat',
   },
+  command: {
+    select: 'om te kies',
+    navigate: 'om te navigeer',
+    goBack: 'om terug te gaan',
+    close: 'om toe te maak',
+    then: 'dan',
+    placeholder: 'Tik \'n bevel of soek...',
+  },
 }

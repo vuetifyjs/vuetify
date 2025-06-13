@@ -117,4 +117,12 @@ export default {
     notEmpty: '请至少选择一个值',
     pattern: '格式无效',
   },
+  command: {
+    select: '选择',
+    navigate: '导航',
+    goBack: '返回',
+    close: '关闭',
+    then: '然后',
+    placeholder: '输入命令或搜索...',
+  },
 }

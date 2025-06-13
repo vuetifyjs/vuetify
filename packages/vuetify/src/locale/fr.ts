@@ -113,8 +113,16 @@ export default {
     maxLength: 'Vous devez entrer un maximum de {0} caractères',
     minLength: 'Vous devez entrer un minimum de {0} caractères',
     strictLength: 'La longueur du champ entré est invalide',
-    exclude: 'Le caractère {0} n’est pas autorisé',
+    exclude: 'Le caractère {0} n\'est pas autorisé',
     notEmpty: 'Veuillez choisir au moins une valeur',
     pattern: 'Format invalide',
+  },
+  command: {
+    select: 'pour sélectionner',
+    navigate: 'pour naviguer',
+    goBack: 'pour revenir',
+    close: 'pour fermer',
+    then: 'puis',
+    placeholder: 'Tapez une commande ou recherchez...',
   },
 }

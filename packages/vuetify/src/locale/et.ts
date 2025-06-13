@@ -117,4 +117,12 @@ export default {
     notEmpty: 'Palun vali vähemalt üks väärtus',
     pattern: 'Vale vorming',
   },
+  command: {
+    select: 'valimiseks',
+    navigate: 'navigeerimiseks',
+    goBack: 'tagasi minekuks',
+    close: 'sulgemiseks',
+    then: 'siis',
+    placeholder: 'Sisesta käsk või otsi...',
+  },
 }

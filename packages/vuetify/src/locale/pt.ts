@@ -117,4 +117,12 @@ export default {
     notEmpty: 'Por favor, escolha pelo menos um valor',
     pattern: 'Formato inválido',
   },
+  command: {
+    select: 'para selecionar',
+    navigate: 'para navegar',
+    goBack: 'para voltar',
+    close: 'para fechar',
+    then: 'então',
+    placeholder: 'Digite um comando ou pesquise...',
+  },
 }
