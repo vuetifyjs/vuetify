@@ -1,5 +1,4 @@
 // Components
-import { VAvatar } from '@/components/VAvatar'
 import { VListItem } from '@/components/VList/VListItem'
 import { makeVTooltipProps, VTooltip } from '@/components/VTooltip/VTooltip'
 
@@ -16,7 +15,8 @@ import type { PropType } from 'vue'
 import type { PieItem, TextTemplate } from './types'
 
 export type VPieTooltipSlots = {
-  default: { segment: PieItem }
+  default: { item: PieItem }
+  prepend: { item: PieItem }
 }
 
 export const makeVPieTooltipProps = propsFactory({
@@ -82,7 +82,7 @@ export const VPieTooltip = genericComponent<VPieTooltipSlots>()({
         content-class="v-pie__tooltip-content"
       >
         { !!props.item && (
-          slots.default?.({ segment: props.item }) ?? (
+          slots.default?.({ item: props.item }) ?? (
             <MaybeTransition transition={ props.transition } mode="out-in">
               <VListItem
                 key={ props.item.key }
@@ -90,18 +90,9 @@ export const VPieTooltip = genericComponent<VPieTooltipSlots>()({
                 title={ tooltipTitleFormatFunction.value(props.item) }
                 subtitle={ tooltipSubtitleFormatFunction.value(props.item) }
                 v-slots={{
-                  prepend: () => (
-                    <VAvatar
-                      color={ props.item!.color }
-                      size="28"
-                    >
-                      { !!props.item!.pattern && (
-                        <svg height="40" width="40">
-                          <rect width="40" height="40" fill={ props.item!.pattern } />
-                        </svg>
-                      )}
-                    </VAvatar>
-                  ),
+                  prepend: slots.prepend
+                    ? () => slots.prepend!({ item: props.item! })
+                    : undefined,
                 }}
               />
             </MaybeTransition>

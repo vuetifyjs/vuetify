@@ -7,6 +7,7 @@ import { VPieTooltip } from './VPieTooltip'
 import { VAvatar } from '@/components/VAvatar'
 import { VChip } from '@/components/VChip'
 import { VChipGroup } from '@/components/VChipGroup'
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 
 // Composables
 import { useColor } from '@/composables/color'
@@ -107,7 +108,7 @@ export const VPie = genericComponent<VPieSlots>()({
     const textColorClasses = toRef(() => colorClasses.value.filter(v => v.startsWith('text-')))
     const textColorStyles = toRef(() => pick(colorStyles.value, ['color', 'caretColor']))
 
-    const legendCircleSize = toRef(() => ({ default: 20, comfortable: 18, compact: 16 }[props.density ?? 'default']))
+    const legendAvatarSize = toRef(() => ({ default: 20, comfortable: 18, compact: 16 }[props.density ?? 'default']))
     const legendDirection = toRef(() => ['left', 'right'].includes(legendConfig.value.position) ? 'vertical' : 'horizontal')
 
     const legendMode = toRef(() => !legendConfig.value.visible ? 'hidden' : legendConfig.value.position)
@@ -237,6 +238,34 @@ export const VPie = genericComponent<VPieSlots>()({
         offset: typeof props.tooltip === 'object' ? props.tooltip.offset : 16,
       }
 
+      const legendDefaults = {
+        VChipGroup: {
+          direction: legendDirection.value,
+        },
+        VChip: {
+          density: props.density,
+        },
+        VAvatar: {
+          size: legendAvatarSize.value,
+        },
+      }
+
+      const tooltipDefaults = {
+        VAvatar: {
+          size: 28,
+        },
+      }
+
+      const avatarSlot = ({ item }: { item: PieItem }) => (
+        <VAvatar color={ item.color } start>
+          { item.pattern && (
+            <svg height="40" width="40">
+              <rect width="40" height="40" fill={ item.pattern } />
+            </svg>
+          )}
+        </VAvatar>
+      )
+
       return (
         <div
           class={[
@@ -300,50 +329,42 @@ export const VPie = genericComponent<VPieSlots>()({
           </div>
 
           { legendConfig.value.visible && (
-            <div class="v-pie__legend" key="legend">
-              { slots.legend?.({ isActive, toggle, items: arcs.value }) ?? (
-                <VChipGroup
-                  column
-                  multiple
-                  v-model={ visibleItemsKeys.value }
-                  direction={ legendDirection.value }
-                >
-                  { arcs.value.map(item => (
-                    <VChip
-                      value={ item.key }
-                      density={ props.density }
-                      v-slots={{
-                        prepend: () => (
-                          <VAvatar
-                            class="v-pie__legend__circle"
-                            color={ item.color }
-                            size={ legendCircleSize.value }
-                            start
-                          >
-                            { item.pattern && (
-                              <svg height="40" width="40">
-                                <rect width="40" height="40" fill={ item.pattern } />
-                              </svg>
-                            )}
-                          </VAvatar>
-                        ),
-                        default: () => (
-                          <div class="v-pie__legend__text">
-                            { slots['legend-text']?.({ item }) ?? legendTextFormatFunction.value(item) }
-                          </div>
-                        ),
-                      }}
-                    />
-                  ))}
-                </VChipGroup>
-              )}
-            </div>
+            <VDefaultsProvider key="legend" defaults={ legendDefaults }>
+              <div class="v-pie__legend">
+                { slots.legend?.({ isActive, toggle, items: arcs.value }) ?? (
+                  <VChipGroup
+                    column
+                    multiple
+                    v-model={ visibleItemsKeys.value }
+                  >
+                    { arcs.value.map(item => (
+                      <VChip
+                        value={ item.key }
+                        v-slots={{
+                          prepend: () => avatarSlot({ item }),
+                          default: () => (
+                            <div class="v-pie__legend__text">
+                              { slots['legend-text']?.({ item }) ?? legendTextFormatFunction.value(item) }
+                            </div>
+                          ),
+                        }}
+                      />
+                    ))}
+                  </VChipGroup>
+                )}
+              </div>
+            </VDefaultsProvider>
           )}
           { !!props.tooltip && (
-            <VPieTooltip
-              { ...tooltipProps }
-              v-slots:default={ slots.tooltip }
-            />
+            <VDefaultsProvider defaults={ tooltipDefaults }>
+              <VPieTooltip
+                { ...tooltipProps }
+                v-slots={{
+                  default: slots.tooltip,
+                  prepend: avatarSlot,
+                }}
+              />
+            </VDefaultsProvider>
           )}
         </div>
       )
