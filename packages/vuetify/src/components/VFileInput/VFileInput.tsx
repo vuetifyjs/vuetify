@@ -19,6 +19,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { computed, nextTick, ref, shallowRef, toRef, watch } from 'vue'
 import {
   callEvent,
+  filterFilesByAcceptType,
   filterInputAttrs,
   genericComponent,
   humanReadableFileSize,
@@ -94,12 +95,29 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
 
   setup (props, { attrs, emit, slots }) {
     const { t } = useLocale()
+    const inputRef = ref<HTMLInputElement>()
     const model = useProxiedModel(
       props,
       'modelValue',
       props.modelValue,
       val => wrapInArray(val),
-      val => (!props.multiple && Array.isArray(val)) ? val[0] : val,
+      (val, event) => {
+        const acceptType = inputRef?.value?.accept
+        const newValue = filterFilesByAcceptType(val, acceptType)
+        if (inputRef.value) {
+          const dataTransfer = new DataTransfer()
+          // TODO: From the update of J-Sek this should be for (const file of await handleDrop(e))
+          for (const file of newValue) {
+            dataTransfer.items.add(file)
+          }
+          inputRef.value.files = dataTransfer.files
+          const eventType = event?.type
+          if (eventType && (eventType === 'change' || eventType === 'input')) {
+            inputRef.value.dispatchEvent(new Event(eventType, { bubbles: true }))
+          }
+        }
+        return !props.multiple && Array.isArray(newValue) ? newValue[0] : newValue
+      },
     )
     const { isFocused, focus, blur } = useFocus(props)
     const base = computed(() => typeof props.showSize !== 'boolean' ? props.showSize : undefined)
@@ -121,7 +139,6 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
     })
     const vInputRef = ref<VInput>()
     const vFieldRef = ref<VInput>()
-    const inputRef = ref<HTMLInputElement>()
     const isActive = toRef(() => isFocused.value || props.active)
     const isPlainOrUnderlined = computed(() => ['plain', 'underlined'].includes(props.variant))
     const isDragging = shallowRef(false)
@@ -170,15 +187,17 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
       e.stopImmediatePropagation()
       isDragging.value = false
 
-      if (!inputRef.value || !hasFilesOrFolders(e)) return
+      const files = e.dataTransfer?.files
+      if (!files || files.length === 0 || !inputRef.value || !hasFilesOrFolders(e)) return
 
-      const dataTransfer = new DataTransfer()
-      for (const file of await handleDrop(e)) {
-        dataTransfer.items.add(file)
-      }
+      model.value = Array.from(files)
+    }
+    function onFileInputChange (e: Event) {
+      const files = (e.target as HTMLInputElement)?.files
 
-      inputRef.value.files = dataTransfer.files
-      inputRef.value.dispatchEvent(new Event('change', { bubbles: true }))
+      if (!files) return
+
+      model.value = Array.from(files)
     }
 
     watch(model, newValue => {
@@ -264,13 +283,8 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
 
                           onFocus()
                         }}
-                        onChange={ e => {
-                          if (!e.target) return
-
-                          const target = e.target as HTMLInputElement
-                          model.value = [...target.files ?? []]
-                        }}
                         onDragleave={ onDragleave }
+                        onChange={ onFileInputChange }
                         onFocus={ onFocus }
                         onBlur={ blur }
                         { ...slotProps }

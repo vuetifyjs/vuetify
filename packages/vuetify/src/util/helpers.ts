@@ -811,6 +811,12 @@ export function camelizeProps<T extends Record<string, unknown>> (props: T | nul
   return out
 }
 
+export function filterFilesByAcceptType (files: null | FileList | File[], acceptType?: string): File[] {
+  if (!files) return []
+  if (!acceptType) return Array.from(files)
+  return Array.from(files).filter(file => file.type === acceptType)
+}
+
 export function onlyDefinedProps (props: Record<string, any>) {
   const booleanAttributes = ['checked', 'disabled']
   return Object.fromEntries(Object.entries(props)
