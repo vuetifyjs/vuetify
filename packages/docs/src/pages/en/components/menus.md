@@ -49,35 +49,23 @@ The third one is to supply a CSS selector string to **activator** prop. This all
 
 ### Props
 
-<!-- #### Absolute
+#### Absolute positioning
 
-Menus can also be placed absolutely on top of the activator element using the **absolute** prop. Try clicking anywhere on the image.
+Setting the **target** prop to `'cursor'` opens the menu at the click location within the activator.
 
-<ExamplesExample file="v-menu/prop-absolute" />
-
-#### Absolute without activator
-
-Menus can also be used without an activator by using **absolute** together with the props **position-x** and **position-y**. Try right-clicking anywhere on the image.
-
-<ExamplesExample file="v-menu/prop-absolute-without-activator" /> -->
-
-<!-- #### Close on click
-
-Menu can be closed when lost focus.
-
-<ExamplesExample file="v-menu/prop-close-on-click" />
+<ExamplesExample file="v-menu/prop-absolute-positioning" />
 
 #### Close on content click
 
-You can configure whether `v-menu` should be closed when its content is clicked.
+The **close-on-content-click** prop controls whether the menu should close when its content is clicked. By default, it is set to `true`. In this example, it is set to `false` allowing multiple interactions within the menu without it closing automatically.
 
-<ExamplesExample file="v-menu/prop-close-on-content-click" /> -->
+<ExamplesExample file="v-menu/prop-close-on-content-click" />
 
-<!-- #### Disabled
+#### Persistent
 
-You can disable the menu. Disabled menus can't be opened.
+The **persistent** prop prevents the menu from closing when clicking outside of it. This the inverse of **close-on-content-click**.
 
-<ExamplesExample file="v-menu/prop-disabled" /> -->
+<ExamplesExample file="v-menu/prop-persistent" />
 
 #### Location
 
@@ -104,7 +92,7 @@ Menus with other menus inside them will not close until their children are close
 With the new `v-slot` syntax, nested activators such as those seen with a `v-menu` and `v-tooltip` attached to the same activator button, need a particular setup in order to function correctly.
 
 ::: info
-  This same syntax is used for other nested activators such as `v-dialog` with `v-tooltip`
+This same syntax is used for other nested activators such as `v-dialog` with `v-tooltip`
 :::
 
 <ExamplesExample file="v-menu/slot-activator-and-tooltip" />
@@ -128,3 +116,9 @@ A menu can be configured to be static when opened, allowing it to function as a 
 Menus can be placed within almost any component.
 
 <ExamplesExample file="v-menu/misc-use-in-components" />
+
+#### Navigation Menu
+
+This example demonstrates how a single instance of `v-menu` can be used to display a submenu for multiple nav pages. This is made possible by the **activator** prop, which enables dynamic changes to the activator element.
+
+<ExamplesExample file="v-menu/misc-nav-menu" />
