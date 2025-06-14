@@ -51,6 +51,8 @@ export const makeVVideoControlsProps = propsFactory({
   playing: Boolean,
   hidePlay: Boolean,
   hideVolume: Boolean,
+  hideFullscreen: Boolean,
+  fullscreen: Boolean,
   floating: Boolean,
   splitTime: Boolean,
   pills: Boolean,
@@ -291,6 +293,12 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
                       </VIconBtn>
                     )}
                     { slots.append?.(slotProps) }
+                    { !props.hideFullscreen && (
+                      <VIconBtn
+                        icon={ props.fullscreen ? 'mdi-fullscreen-exit' : 'mdi-fullscreen' }
+                        onClick={ () => toggleFullscreen() }
+                      />
+                    )}
                   </div>
                 )}
 

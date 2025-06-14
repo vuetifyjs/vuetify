@@ -28,7 +28,7 @@ type SliderProvide = {
   min: Ref<number>
   max: Ref<number>
   mousePressed: Ref<boolean>
-  noKeyboard: Ref<number>
+  noKeyboard: Ref<boolean>
   numTicks: Ref<number>
   onSliderMousedown: (e: MouseEvent) => void
   onSliderTouchstart: (e: TouchEvent) => void
