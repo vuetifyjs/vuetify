@@ -13,6 +13,7 @@ import { makeVSheetProps, VSheet } from '@/components/VSheet/VSheet'
 // Composables
 import { makeDelayProps } from '@/composables/delay'
 import { makeDensityProps, useDensity } from '@/composables/density'
+import { makeFileAcceptProps, useFileAccept } from '@/composables/fileAccept'
 import { useFileDrop } from '@/composables/fileDrop'
 import { IconValue } from '@/composables/icons'
 import { useLocale } from '@/composables/locale'
@@ -78,6 +79,7 @@ export const makeVFileUploadProps = propsFactory({
   showSize: Boolean,
   name: String,
 
+  ...makeFileAcceptProps(),
   ...makeDelayProps(),
   ...makeDensityProps(),
   ...pick(makeVDividerProps({
@@ -95,11 +97,13 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
 
   emits: {
     'update:modelValue': (files: File[]) => true,
+    rejected: (files: File[]) => true,
   },
 
-  setup (props, { attrs, slots }) {
+  setup (props, { attrs, emit, slots }) {
     const { t } = useLocale()
     const { densityClasses } = useDensity(props)
+    const { filterAccepted } = useFileAccept(props)
     const model = useProxiedModel(
       props,
       'modelValue',
@@ -131,13 +135,39 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
 
       if (!inputRef.value) return
 
+      const allDroppedFiles = await handleDrop(e)
+      selectAccepted(allDroppedFiles)
+    }
+
+    function onFileSelection (e: Event) {
+      if (!e.target || (e as any).repack) return // prevent loop
+
+      if (!props.accept) {
+        const target = e.target as HTMLInputElement
+        model.value = [...target.files ?? []]
+      } else {
+        selectAccepted([...(e as any).target.files])
+      }
+    }
+
+    function selectAccepted (files: File[]) {
       const dataTransfer = new DataTransfer()
-      for (const file of await handleDrop(e)) {
+      const { accepted, rejected } = filterAccepted(files)
+
+      if (rejected.length) {
+        emit('rejected', rejected)
+      }
+
+      for (const file of accepted) {
         dataTransfer.items.add(file)
       }
 
-      inputRef.value.files = dataTransfer.files
-      inputRef.value.dispatchEvent(new Event('change', { bubbles: true }))
+      inputRef.value!.files = dataTransfer.files
+      model.value = [...dataTransfer.files]
+
+      const event = new Event('change', { bubbles: true }) as any
+      event.repack = true
+      inputRef.value!.dispatchEvent(event)
     }
 
     function onClick () {
@@ -161,19 +191,18 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
       const dividerProps = VDivider.filterProps(props)
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
 
+      const expectsDirectory = attrs.webkitdirectory !== undefined && attrs.webkitdirectory !== false
+      const inputAccept = expectsDirectory ? undefined : props.accept
+
       const inputNode = (
         <input
           ref={ inputRef }
           type="file"
+          accept={ inputAccept }
           disabled={ props.disabled }
           multiple={ props.multiple }
           name={ props.name }
-          onChange={ e => {
-            if (!e.target) return
-
-            const target = e.target as HTMLInputElement
-            model.value = [...target.files ?? []]
-          }}
+          onChange={ onFileSelection }
           { ...inputAttrs }
         />
       )

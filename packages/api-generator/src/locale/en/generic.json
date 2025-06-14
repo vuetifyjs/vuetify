@@ -1,5 +1,6 @@
 {
   "props": {
+    "accept": "One or more [unique file type specifiers](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#Unique_file_type_specifiers) describing file types to allow.",
     "active": "Controls the **active** state of the item. This is typically used to highlight the component.",
     "activeClass": "The class applied to the component when it is in an active state.",
     "activeColor": "The applied color when the component is in an active state.",
