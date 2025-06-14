@@ -9,6 +9,7 @@ import { makeVFieldProps } from '@/components/VField/VField'
 import { makeVInputProps, VInput } from '@/components/VInput/VInput'
 
 // Composables
+import { useFileDrop } from '@/composables/fileDrop'
 import { useFocus } from '@/composables/focus'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { useLocale } from '@/composables/locale'
@@ -105,6 +106,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
         const newValue = filterFilesByAcceptType(val, acceptType)
         if (inputRef.value) {
           const dataTransfer = new DataTransfer()
+          // TODO: From the update of J-Sek this should be for (const file of await handleDrop(e))
           for (const file of newValue) {
             dataTransfer.items.add(file)
           }
@@ -140,6 +142,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
     const isActive = toRef(() => isFocused.value || props.active)
     const isPlainOrUnderlined = computed(() => ['plain', 'underlined'].includes(props.variant))
     const isDragging = shallowRef(false)
+    const { handleDrop, hasFilesOrFolders } = useFileDrop()
 
     function onFocus () {
       if (inputRef.value !== document.activeElement) {
@@ -179,14 +182,13 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
       e.preventDefault()
       isDragging.value = false
     }
-    function onDrop (e: DragEvent) {
+    async function onDrop (e: DragEvent) {
       e.preventDefault()
       e.stopImmediatePropagation()
       isDragging.value = false
 
       const files = e.dataTransfer?.files
-
-      if (!files || files.length === 0 || !inputRef.value) return
+      if (!files || files.length === 0 || !inputRef.value || !hasFilesOrFolders(e)) return
 
       model.value = Array.from(files)
     }

@@ -330,7 +330,7 @@ function getWeek (date: Date, locale: string, firstDayOfWeek?: number, firstWeek
     ? addDays(yearStart, size - 7)
     : addDays(yearStart, size)
 
-  return 1 + getDiff(date, d1w1, 'weeks')
+  return 1 + getDiff(endOfDay(date), startOfDay(d1w1), 'weeks')
 }
 
 function getDate (date: Date) {

@@ -21,7 +21,7 @@ export function useProxiedModel<
   prop: Prop,
   defaultValue?: Props[Prop],
   transformIn: (value?: Props[Prop]) => Inner = (v: any) => v,
-  transformOut: (value: Inner, event?: Event) => Props[Prop] = (v: any) => v,
+  transformOut: (value: Inner, event?: Event) => Props[Prop] | Promise<Props[Prop]> = (v: any) => v,
 ) {
   const vm = getCurrentInstance('useProxiedModel')
   const internal = ref(props[prop] !== undefined ? props[prop] : defaultValue) as Ref<Props[Prop]>
@@ -52,8 +52,9 @@ export function useProxiedModel<
       const externalValue = props[prop]
       return transformIn(isControlled.value ? externalValue : internal.value)
     },
-    set (internalValue, event?: Event) {
-      const newValue = transformOut(internalValue, event)
+    async set (internalValue, event?: Event) {
+      const transformed = transformOut(internalValue, event)
+      const newValue = await Promise.resolve(transformed)
       const value = toRaw(isControlled.value ? props[prop] : internal.value)
       if (value === newValue || transformIn(value) === internalValue) {
         return

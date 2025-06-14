@@ -13,6 +13,7 @@ import { makeVSheetProps, VSheet } from '@/components/VSheet/VSheet'
 // Composables
 import { makeDelayProps } from '@/composables/delay'
 import { makeDensityProps, useDensity } from '@/composables/density'
+import { useFileDrop } from '@/composables/fileDrop'
 import { IconValue } from '@/composables/icons'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
@@ -98,6 +99,7 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
 
   setup (props, { attrs, slots }) {
     const { t } = useLocale()
+    const { handleDrop, hasFilesOrFolders } = useFileDrop()
     const { densityClasses } = useDensity(props)
     const inputRef = ref<HTMLInputElement | null>(null)
     const model = useProxiedModel(
@@ -105,11 +107,12 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
       'modelValue',
       props.modelValue,
       val => wrapInArray(val),
-      val => {
+      async (val, e) => {
         const acceptType = inputRef?.value?.accept
         const newValue = filterFilesByAcceptType(val, acceptType)
         if (inputRef.value) {
           const dataTransfer = new DataTransfer()
+          // TODO: From the update of J-Sek this should be for (const file of await handleDrop(e))?
           for (const file of newValue) {
             dataTransfer.items.add(file)
           }
@@ -134,14 +137,13 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
       isDragging.value = false
     }
 
-    function onDrop (e: DragEvent) {
+    async function onDrop (e: DragEvent) {
       e.preventDefault()
       e.stopImmediatePropagation()
       isDragging.value = false
 
       const files = e.dataTransfer?.files ?? []
-
-      if (!files || files.length === 0 || !inputRef.value) return
+      if (!files || files.length === 0 || !inputRef.value || !hasFilesOrFolders(e)) return
 
       model.value = Array.from(files)
     }
