@@ -179,7 +179,9 @@ export const VSlider = genericComponent<VSliderSlots>()({
       )
     })
 
-    return {}
+    return {
+      focus: () => thumbContainerRef.value?.$el.focus(),
+    }
   },
 })
 
