@@ -29,6 +29,9 @@
     vertical-align: $button-vertical-align
     flex-shrink: 0
 
+    .v-locale--is-rtl &
+      text-indent: -1 * $button-text-letter-spacing
+
     @at-root
       @include button-sizes()
       @include button-density('height', $button-density)
