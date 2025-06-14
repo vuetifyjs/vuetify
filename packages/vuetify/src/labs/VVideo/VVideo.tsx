@@ -4,7 +4,6 @@ import './VVideo.sass'
 // Components
 import { makeVVideoControlsProps, VVideoControls } from './VVideoControls'
 import { VSpacer } from '@/components/VGrid/VSpacer'
-import { VIcon } from '@/components/VIcon/VIcon'
 import { VImg } from '@/components/VImg/VImg'
 import { VOverlay } from '@/components/VOverlay/VOverlay'
 import { VProgressCircular } from '@/components/VProgressCircular/VProgressCircular'
@@ -21,8 +20,8 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { MaybeTransition } from '@/composables/transition'
 
 // Utilities
-import { onBeforeUnmount, onMounted, ref, shallowRef, watch } from 'vue'
-import { createRange, genericComponent, omit, propsFactory, useRender } from '@/util'
+import { onBeforeUnmount, onMounted, ref, shallowRef, toRef, watch } from 'vue'
+import { createRange, genericComponent, omit, pick, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -48,13 +47,13 @@ export const makeVVideoProps = propsFactory({
   type: String, // e.g. video/mp4
   image: String,
   hideOverlay: Boolean,
+  noFullscreen: Boolean,
   startAt: Number,
   variant: {
     type: String as PropType<Variant>,
     default: 'player',
     validator: (v: any) => allowedVariants.includes(v),
   },
-  controlsList: String,
   controlsTransition: {
     String,
     default: 'fade-transition',
@@ -68,11 +67,16 @@ export const makeVVideoProps = propsFactory({
   ...makeElevationProps({ elevation: 4 }),
   ...makeRoundedProps(),
   ...makeThemeProps(),
-  ...omit(makeVVideoControlsProps(), ['variant']),
+  ...omit(makeVVideoControlsProps(), [
+    'fullscreen',
+    'variant',
+  ]),
 }, 'VVideo')
 
 export const VVideo = genericComponent<VVideoSlots>()({
   name: 'VVideo',
+
+  inheritAttrs: false,
 
   props: makeVVideoProps(),
 
@@ -100,6 +104,8 @@ export const VVideo = genericComponent<VVideoSlots>()({
 
     const isLoading = shallowRef(true)
     const duration = shallowRef(0)
+
+    const fullscreenEnabled = toRef(() => !props.noFullscreen && !String(attrs.controlsList ?? '').includes('nofullscreen'))
 
     function onTimeupdate () {
       const { currentTime, duration } = videoRef.value!
@@ -211,16 +217,19 @@ export const VVideo = genericComponent<VVideoSlots>()({
       }
     }
 
+    const isFullscreen = shallowRef(false)
     function toggleFullscreen () {
-      if ((props.controlsList ?? '').includes('nofullscreen') || !document.fullscreenEnabled) {
+      if (!fullscreenEnabled.value || !document.fullscreenEnabled) {
         return
       }
       if (document.fullscreenElement) {
         document.exitFullscreen()
         focusSlider()
+        isFullscreen.value = false
       } else {
         containerRef.value?.requestFullscreen()
         document.body.addEventListener('keydown', fullscreenExitShortcut)
+        isFullscreen.value = true
       }
     }
 
@@ -256,7 +265,9 @@ export const VVideo = genericComponent<VVideoSlots>()({
 
       const controlsProps = {
         ...VVideoControls.filterProps(omit(props, ['variant', 'hideVolume'])),
+        fullscreen: isFullscreen.value,
         hideVolume: props.hideVolume || (attrs.muted !== false && attrs.muted !== undefined),
+        hideFullscreen: props.hideFullscreen || !fullscreenEnabled.value,
         density: props.density,
         variant: props.controlsVariant,
         playing: isPlaying.value,
@@ -274,6 +285,11 @@ export const VVideo = genericComponent<VVideoSlots>()({
         onClick: (e: Event) => e.stopPropagation(),
       }
 
+      const controlslist = [
+        attrs.controlslist,
+        props.noFullscreen ? 'nofullscreen' : '',
+      ].filter(Boolean).join(' ')
+
       return (
         <div
           ref={ containerRef }
@@ -284,6 +300,9 @@ export const VVideo = genericComponent<VVideoSlots>()({
             themeClasses.value,
             densityClasses.value,
             roundedClasses.value,
+          ]}
+          style={[
+            props.variant === 'background' ? [] : pick(dimensionStyles.value, ['width', 'min-width', 'max-width']),
           ]}
           onKeydown={ onKeydown }
         >
@@ -301,8 +320,8 @@ export const VVideo = genericComponent<VVideoSlots>()({
                 'v-video__video',
                 roundedClasses.value,
               ]}
-              { ...attrs }
-              controlslist={ props.controlsList }
+              { ...omit(attrs, ['controlslist']) }
+              controlslist={ controlslist }
               playsinline
               ref={ videoRef }
               onLoadeddata={ onVideoLoaded }
@@ -335,9 +354,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
                       variant="outlined"
                       icon-size="50"
                       class="v-video__center-icon"
-                    >
-                      <VIcon style="transform: translateX(-2%)" />
-                    </VIconBtn>
+                    />
                   )}
                 </MaybeTransition>
                 <VSpacer />
@@ -384,10 +401,13 @@ export const VVideo = genericComponent<VVideoSlots>()({
       )
     })
 
-    return forwardRefs({
-      skipTo,
-      toggleFullscreen,
-    }, controlsRef)
+    return {
+      video: videoRef,
+      ...forwardRefs({
+        skipTo,
+        toggleFullscreen,
+      }, controlsRef),
+    }
   },
 })
 

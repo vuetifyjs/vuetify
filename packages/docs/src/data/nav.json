@@ -285,6 +285,10 @@
         "subfolder": "components"
       },
       {
+        "title": "video",
+        "subfolder": "components"
+      },
+      {
         "title": "rules",
         "subfolder": "features"
       }
