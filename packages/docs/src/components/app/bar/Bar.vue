@@ -1,55 +1,49 @@
 <template>
-  <VoAppBar
-    id="app-bar"
-    border="b"
-    class="px-md-3"
-    logo="vuetify"
-    flat
-  >
-    <template #prepend>
-      <div class="px-1" />
-
+  <VoAppBar id="app-bar" border="b" class="px-md-3" logo="vuetify" flat>
+    <template #prepend-fixed>
       <AppBtn
         v-if="route.meta.layout !== 'home' && mdAndDown"
+        class="ms-2"
         icon="mdi-menu"
         @click="app.drawer = !app.drawer"
       />
+    </template>
 
+    <template #prepend>
       <AppSearchSearch />
     </template>
 
     <template #append>
-      <div v-if="mdAndUp" class="d-flex ga-1">
-        <AppBarLearnMenu />
+      <AppBarLearnMenu />
 
-        <AppBarSupportMenu />
+      <AppBarSupportMenu />
 
-        <AppBarEcosystemMenu />
+      <AppBarEcosystemMenu />
 
-        <AppBarPlaygroundLink v-if="lgAndUp" />
+      <AppBarPlaygroundLink />
 
-        <AppBarSponsorLink />
-      </div>
+      <AppBarSponsorLink />
 
-      <AppVerticalDivider v-if="smAndUp" />
+      <AppVerticalDivider v-if="!one.mobileBreakpoint.value" />
+      <v-divider v-else class="mt-4 mb-2" />
 
-      <div class="d-flex ga-1">
-        <AppBarStoreLink v-if="smAndUp" />
+      <AppBarStoreLink />
 
-        <AppBarGitHubLink v-if="smAndUp" />
+      <AppBarGitHubLink />
 
-        <AppBarLanguageMenu />
+      <AppBarLanguageMenu />
 
-        <AppBarSettingsToggle />
-      </div>
+      <AppBarSettingsToggle />
     </template>
   </VoAppBar>
 </template>
 
 <script setup>
   const app = useAppStore()
-  const { smAndUp, lgAndUp, mdAndDown, width } = useDisplay()
   const route = useRoute()
+  const one = useOneStore()
 
-  const mdAndUp = computed(() => width.value >= 1077)
+  const { mdAndDown } = useDisplay()
+
+  one.syncMobileBreakpoint(mdAndDown)
 </script>
