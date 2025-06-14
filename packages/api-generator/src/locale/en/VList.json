@@ -1,5 +1,6 @@
 {
   "props": {
+    "activeColor": "Deprecated, use `color` instead.",
     "itemType": "Designates the key on the supplied items that is used for determining the nodes type.",
     "activatable": "Designates whether the list items are activatable.",
     "disabled": "Puts all children inputs into a disabled state.",
