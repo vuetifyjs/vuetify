@@ -35,9 +35,11 @@
       position: relative
       cursor: pointer
       border-radius: inherit
+      z-index: 0
+      @include tools.elevation($video-elevation)
 
     &:not(.v-video--idle)
-      .v-overlay
+      .v-video__content .v-overlay
         &, > *
           pointer-events: none
 
@@ -47,13 +49,15 @@
       justify-content: center
       width: 100%
       height: 100%
+      border-radius: inherit
 
       > .v-img
         position: absolute
+        border-radius: inherit
         inset: 0
 
-    &:has(.v-video-controls:not(.v-video-controls--detached))
-      .v-overlay__content
+    &:has(.v-video-controls):not(.v-video-controls--detached)
+      .v-video__content .v-overlay__content
         padding-bottom: var(--v-video-controls-height) // controls size
 
     &__center-icon.v-icon-btn
@@ -71,20 +75,32 @@
       align-items: center
 
     &-volume__menu
-      background: rgb(var(--v-theme-surface-variant))
-      color: rgb(var(--v-theme-on-surface-variant))
-      border-radius: inherit
+      background: rgb(var(--v-theme-surface))
+      color: rgb(var(--v-theme-on-surface))
       overflow: hidden
+      display: flex
+      align-items: center
+      justify-content: center
+
+      @include tools.border($video-volume-menu-border...)
+      @include tools.elevation($video-volume-menu-elevation)
+      @include tools.rounded($video-volume-menu-border-radius)
+
+      &:has(.v-input--horizontal)
+        height: $video-volume-horizontal-menu-height
+
+      &:has(.v-input--vertical)
+        width: $video-volume-vertical-menu-width
 
       .v-slider.v-input--horizontal
         margin-inline: 16px
-        height: 40px
-        width: 100px
+        width: $video-volume-horizontal-menu-width
+        height: $video-volume-horizontal-menu-height
 
       .v-slider.v-input--vertical
         margin-block: 16px
-        height: 100px
-        width: 40px
+        height: $video-volume-vertical-menu-height
+        width: $video-volume-vertical-menu-width
 
         > .v-input__control
           min-height: 50px
@@ -138,6 +154,7 @@
       &, &--pills > .v-video-control__pill
         transition: .6s ease-in-out
         transition-property: opacity, background-color
+        @include tools.elevation($video-elevation)
 
       &:hover
         --v-background-opacity: 1
@@ -152,7 +169,7 @@
 
       &--pills
         --v-background-opacity: 1
-        --v-video-controls-height: calc(var(--v-video-controls-pill-height) + 20px)
+        --v-video-controls-height: calc(var(--v-video-controls-pill-height) + 24px)
         backdrop-filter: none
         pointer-events: none
 
@@ -172,6 +189,7 @@
           min-height: var(--v-video-controls-pill-height)
           min-width: var(--v-video-controls-pill-height)
           padding: 0 6px
+          z-index: 1
 
           > .v-icon-btn
             border-radius: inherit
@@ -234,6 +252,9 @@
         border-top: none
         border-radius: inherit
         opacity: 1
+
+        &:not(.v-video-controls--pills)
+          @include tools.elevation($video-elevation)
 
     &:not(.v-video--playing),
     &:hover

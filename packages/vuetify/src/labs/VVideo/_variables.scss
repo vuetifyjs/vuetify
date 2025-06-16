@@ -1,6 +1,7 @@
 @use '../../styles/settings';
 
 // Defaults
+$video-elevation: 4 !default;
 $video-padding: 0px !default;
 $video-rounded-border-radius: settings.$border-radius-root !default;
 $video-controls-floating-margin: 12px !default;
@@ -9,3 +10,20 @@ $video-controls-height: 58px !default;
 $video-controls-gap: 16px !default;
 $video-controls-pill-gap: 8px !default;
 $video-controls-pill-border-radius: 99px !default;
+$video-volume-menu-elevation: 2 !default;
+$video-volume-menu-border-radius: settings.$border-radius-root !default;
+$video-volume-horizontal-menu-width: 100px !default;
+$video-volume-horizontal-menu-height: 40px !default;
+$video-volume-vertical-menu-width: 40px !default;
+$video-volume-vertical-menu-height: 100px !default;
+
+$video-volume-menu-border-color: rgba(var(--v-border-color), var(--v-border-opacity)) !default;
+$video-volume-menu-border-style: solid !default;
+$video-volume-menu-border-width: thin !default;
+$video-volume-menu-border-thin-width: thin !default;
+$video-volume-menu-border: (
+  $video-volume-menu-border-color,
+  $video-volume-menu-border-style,
+  $video-volume-menu-border-width,
+  $video-volume-menu-border-thin-width
+) !default;

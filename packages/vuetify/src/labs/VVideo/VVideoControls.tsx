@@ -72,7 +72,7 @@ export const makeVVideoControlsProps = propsFactory({
   volumeProps: Object as PropType<Pick<VVideoVolume['$props'], 'direction' | 'inline' | 'sliderProps' | 'menuProps'>>,
 
   ...makeDensityProps(),
-  ...makeElevationProps({ elevation: 4 }),
+  ...makeElevationProps(),
   ...makeThemeProps(),
 }, 'VVideoControls')
 
@@ -263,7 +263,7 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
                     { !props.hideVolume && (
                       <VVideoVolume
                         key="volume-control"
-                        sliderProps={{ color: props.color || 'surface' }}
+                        sliderProps={{ color: props.color }}
                         modelValue={ volume.value }
                         onUpdate:modelValue={ v => volume.value = v }
                         { ...props.volumeProps }

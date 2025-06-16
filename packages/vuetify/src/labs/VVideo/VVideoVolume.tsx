@@ -9,7 +9,7 @@ import { makeComponentProps } from '@/composables/component'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { toRef } from 'vue'
+import { ref, toRef } from 'vue'
 import { EventProp, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -49,6 +49,8 @@ export const VVideoVolume = genericComponent()({
       : volume.value > 10 ? '$volumeLow'
       : '$volumeOff')
 
+    const containerRef = ref<HTMLElement>()
+
     useRender(() => {
       const sliderDefaults = {
         hideDetails: true,
@@ -64,6 +66,7 @@ export const VVideoVolume = genericComponent()({
             props.class,
           ]}
           style={ props.style }
+          ref={ containerRef }
         >
             <VIconBtn
               icon={ volumeIcon.value }
@@ -75,6 +78,7 @@ export const VVideoVolume = genericComponent()({
                 <VMenu
                   offset="8"
                   activator="parent"
+                  attach={ containerRef.value }
                   location={ props.menuProps?.location ?? 'top center' }
                   close-on-content-click={ false }
                 >
