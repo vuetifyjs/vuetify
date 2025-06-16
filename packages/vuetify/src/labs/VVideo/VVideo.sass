@@ -56,8 +56,8 @@
         border-radius: inherit
         inset: 0
 
-    &:has(.v-video-controls):not(.v-video-controls--detached)
-      .v-video__content .v-overlay__content
+    &:has(.v-video-controls:not(.v-video-controls--detached))
+      .v-video__content .v-video__overlay-fill
         padding-bottom: var(--v-video-controls-height) // controls size
 
     &__center-icon.v-icon-btn
