@@ -1,6 +1,9 @@
 @use '../../styles/settings';
 
 // Defaults
+$video-player-width: 480px !default;
+$video-player-height: 270px !default;
+
 $video-elevation: 4 !default;
 $video-padding: 0px !default;
 $video-rounded-border-radius: settings.$border-radius-root !default;

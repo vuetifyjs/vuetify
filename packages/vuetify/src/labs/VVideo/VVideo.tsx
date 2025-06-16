@@ -69,7 +69,7 @@ export const makeVVideoProps = propsFactory({
 
   ...makeComponentProps(),
   ...makeDensityProps(),
-  ...makeDimensionProps({ width: 480, height: 270 }),
+  ...makeDimensionProps(),
   ...makeThemeProps(),
   ...omit(makeVVideoControlsProps(), [
     'fullscreen',
