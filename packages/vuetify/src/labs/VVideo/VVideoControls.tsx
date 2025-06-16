@@ -1,10 +1,9 @@
 /* eslint-disable complexity */
 
 // Components
+import { VVideoVolume } from './VVideoVolume'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider/VDefaultsProvider'
 import { VSpacer } from '@/components/VGrid/VSpacer'
-import { VIcon } from '@/components/VIcon/VIcon'
-import { VMenu } from '@/components/VMenu/VMenu'
 import { VSlider } from '@/components/VSlider/VSlider'
 import { VIconBtn } from '@/labs/VIconBtn/VIconBtn'
 
@@ -27,7 +26,6 @@ export type VVideoControlsActionsSlot = {
   pause: () => void
   skipTo: (v: number) => void
   volume: Ref<number>
-  volumeIcon: string
   isPlaying: boolean
   progress: number
   toggleMuted: () => void
@@ -74,6 +72,8 @@ export const makeVVideoControlsProps = propsFactory({
     default: 'default',
     validator: (v: any) => allowedVariants.includes(v),
   },
+  volumeProps: Object as PropType<Pick<VVideoVolume['$props'], 'direction' | 'inline' | 'sliderProps' | 'menuProps'>>,
+
   ...makeDensityProps(),
   ...makeElevationProps({ elevation: 4 }),
   ...makeThemeProps(),
@@ -166,11 +166,6 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
       const regularBtnSize = innerDefaults.VIconBtn.size
       const playBtnSize = props.pills ? (regularBtnSize + 8) : regularBtnSize
 
-      const volumeIcon = volume.value > 70 ? 'mdi-volume-high'
-        : volume.value > 40 ? 'mdi-volume-medium'
-        : volume.value > 10 ? 'mdi-volume-low'
-        : 'mdi-volume-off'
-
       const pillClasses = [
         'v-video-control__pill',
         props.pills ? elevationClasses.value : [],
@@ -183,7 +178,6 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
         progress: progress.value,
         skipTo,
         volume,
-        volumeIcon,
         toggleMuted,
         toggleFullscreen,
       }
@@ -271,26 +265,13 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
                 { (!props.hideVolume || slots.append) && (
                   <div class={ pillClasses }>
                     { !props.hideVolume && (
-                      <VIconBtn key="volume-control" icon={ volumeIcon } v-ripple>
-                        <VIcon />
-                        <VMenu
-                          offset="8"
-                          activator="parent"
-                          location="top center"
-                          close-on-content-click={ false }
-                        >
-                          <div class="v-video__volume-menu">
-                            <VSlider
-                              direction="vertical"
-                              hide-details
-                              color={ props.color ?? 'surface' }
-                              style="height: 100px"
-                              modelValue={ volume.value }
-                              onUpdate:modelValue={ v => volume.value = v }
-                            />
-                          </div>
-                        </VMenu>
-                      </VIconBtn>
+                      <VVideoVolume
+                        key="volume-control"
+                        sliderProps={{ color: props.color || 'surface' }}
+                        modelValue={ volume.value }
+                        onUpdate:modelValue={ v => volume.value = v }
+                        { ...props.volumeProps }
+                      />
                     )}
                     { slots.append?.(slotProps) }
                     { !props.hideFullscreen && (

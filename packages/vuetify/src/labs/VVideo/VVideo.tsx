@@ -126,6 +126,9 @@ export const VVideo = genericComponent<VVideoSlots>()({
 
     function onKeydown (e: KeyboardEvent) {
       if (!videoRef.value || e.ctrlKey) return
+      if (e.key.startsWith('Arrow')) {
+        e.preventDefault()
+      }
       switch (true) {
         case e.key === ' ': {
           if (!['A', 'BUTTON'].includes((e.target as Element)?.tagName)) {

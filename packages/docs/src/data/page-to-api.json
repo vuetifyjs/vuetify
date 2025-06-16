@@ -159,7 +159,7 @@
     "VTreeviewChildren",
     "VTreeviewGroup"
   ],
-  "components/video": ["VVideo", "VVideoControls"],
+  "components/videos": ["VVideo", "VVideoControls", "VVideoVolume"],
   "components/virtual-scroller": ["VVirtualScroll"],
   "components/windows": ["VWindow", "VWindowItem"],
   "directives/click-outside": ["v-click-outside"],

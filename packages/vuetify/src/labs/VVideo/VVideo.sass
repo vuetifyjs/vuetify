@@ -59,15 +59,25 @@
       transform: scale(1)
       opacity: 1
 
-    &__volume-menu
+    &-volume--inline
+      display: flex
+      align-items: center
+
+    &-volume__menu
       background: rgb(var(--v-theme-surface-variant))
       color: rgb(var(--v-theme-on-surface-variant))
       border-radius: inherit
-      padding: 8px
       overflow: hidden
 
+      .v-slider.v-input--horizontal
+        margin-inline: 16px
+        height: 40px
+        width: 100px
+
       .v-slider.v-input--vertical
-        margin-block: 4px
+        margin-block: 16px
+        height: 100px
+        width: 40px
 
         > .v-input__control
           min-height: 50px
