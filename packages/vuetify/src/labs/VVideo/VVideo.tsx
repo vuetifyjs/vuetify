@@ -3,6 +3,7 @@ import './VVideo.sass'
 
 // Components
 import { makeVVideoControlsProps, VVideoControls } from './VVideoControls'
+import { VFadeTransition } from '@/components/transitions'
 import { VSpacer } from '@/components/VGrid/VSpacer'
 import { VImg } from '@/components/VImg/VImg'
 import { VOverlay } from '@/components/VOverlay/VOverlay'
@@ -10,10 +11,11 @@ import { VProgressCircular } from '@/components/VProgressCircular/VProgressCircu
 import { VIconBtn } from '@/labs/VIconBtn/VIconBtn'
 
 // Composables
+import { useDisplay } from '@/composables'
 import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
-import { makeElevationProps, useElevation } from '@/composables/elevation'
+import { useElevation } from '@/composables/elevation'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useRounded } from '@/composables/rounded'
@@ -25,7 +27,7 @@ import { nextTick, onBeforeUnmount, onMounted, ref, shallowRef, toRef, watch } f
 import { createRange, genericComponent, omit, pick, propsFactory, useRender } from '@/util'
 
 // Types
-import type { PropType } from 'vue'
+import type { Component, PropType, TransitionProps } from 'vue'
 import type { VVideoControlsActionsSlot, VVideoControlsVariant } from './VVideoControls'
 import type { LoaderSlotProps } from '@/composables/loader'
 
@@ -56,8 +58,8 @@ export const makeVVideoProps = propsFactory({
     validator: (v: any) => allowedVariants.includes(v),
   },
   controlsTransition: {
-    String,
-    default: 'fade-transition',
+    type: [Boolean, String, Object] as PropType<null | string | boolean | TransitionProps & { component?: any }>,
+    component: VFadeTransition as Component,
   },
   controlsVariant: {
     type: String as PropType<VVideoControlsVariant>,
@@ -68,7 +70,6 @@ export const makeVVideoProps = propsFactory({
   ...makeComponentProps(),
   ...makeDensityProps(),
   ...makeDimensionProps({ width: 480, height: 270 }),
-  ...makeElevationProps({ elevation: 4 }),
   ...makeThemeProps(),
   ...omit(makeVVideoControlsProps(), [
     'fullscreen',
@@ -95,6 +96,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
     const { densityClasses } = useDensity(props)
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
+    const { ssr } = useDisplay()
 
     const roundedForContainer = toRef(() => Array.isArray(props.rounded) ? props.rounded[0] : props.rounded)
     const roundedForControls = toRef(() => Array.isArray(props.rounded) ? props.rounded.at(-1) : props.rounded ?? false)
@@ -109,6 +111,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
     const progress = useProxiedModel(props, 'progress')
     const volume = useProxiedModel(props, 'volume', 0, (v?: number | string) => Number(v ?? 0))
 
+    const fullscreen = shallowRef(false)
     const waiting = shallowRef(false)
     const triggered = shallowRef(false)
     const state = shallowRef<'idle' | 'loading' | 'loaded' | 'error'>(props.autoplay ? 'loading' : 'idle')
@@ -227,7 +230,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
     watch(triggered, () => onTriggered(), { once: true })
 
     onMounted(() => {
-      if (props.autoplay) {
+      if (props.autoplay && !ssr) {
         triggered.value = true
       }
     })
@@ -249,20 +252,29 @@ export const VVideo = genericComponent<VVideoSlots>()({
       }
     }
 
-    const fullscreen = shallowRef(false)
-    function toggleFullscreen () {
+    async function toggleFullscreen () {
       if (!fullscreenEnabled.value || !document.fullscreenEnabled) {
         return
       }
       if (document.fullscreenElement) {
         document.exitFullscreen()
-        focusSlider()
-        fullscreen.value = false
+        onFullscreenExit()
       } else {
-        containerRef.value?.requestFullscreen()
+        await containerRef.value?.requestFullscreen()
         document.body.addEventListener('keydown', fullscreenExitShortcut)
+        document.addEventListener('fullscreenchange', onFullscreenExit)
         fullscreen.value = true
       }
+    }
+
+    function onFullscreenExit () {
+      // event fires with a delay after requestFullscreen(), ignore first run
+      if (document.fullscreenElement) return
+
+      focusSlider()
+      fullscreen.value = false
+      document.body.removeEventListener('keydown', fullscreenExitShortcut)
+      document.removeEventListener('fullscreenchange', onFullscreenExit)
     }
 
     function onVideoClick (e: Event) {
@@ -430,10 +442,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
                     ...roundedContainerClasses.value,
                   ]}
                 >
-                  { state.value === 'loading'
-                    ? loadingIndicator
-                    : overlayPlayIcon
-                  }
+                  { overlayPlayIcon }
                 </div>
               </VImg>
             </VOverlay>
@@ -446,7 +455,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
               { loadingIndicator }
             </VOverlay>
           </div>
-          <MaybeTransition key="actions" name={ props.controlsTransition }>
+          <MaybeTransition key="actions" transition={ props.controlsTransition }>
             { showControls && (
               <VVideoControls
                 ref={ controlsRef }

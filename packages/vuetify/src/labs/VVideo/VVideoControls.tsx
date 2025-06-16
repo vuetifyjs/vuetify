@@ -29,6 +29,7 @@ export type VVideoControlsActionsSlot = {
   playing: boolean
   progress: number
   toggleMuted: () => void
+  fullscreen: boolean
   toggleFullscreen: () => void
 }
 
@@ -177,6 +178,7 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
         skipTo,
         volume,
         toggleMuted,
+        fullscreen: props.fullscreen,
         toggleFullscreen,
       }
 
@@ -273,7 +275,7 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
                     { !props.hideFullscreen && (
                       <VIconBtn
                         icon={ props.fullscreen ? '$fullscreenExit' : '$fullscreen' }
-                        onClick={ () => toggleFullscreen() }
+                        onClick={ toggleFullscreen }
                       />
                     )}
                   </div>
