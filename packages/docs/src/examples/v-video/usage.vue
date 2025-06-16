@@ -3,7 +3,7 @@
     v-model="model"
     :code="code"
     :name="name"
-    :options="variants"
+    :options="controlsVariants"
   >
     <div>
       <v-video class="mx-auto" v-bind="props"></v-video>
@@ -21,7 +21,7 @@
 
 <script setup>
   const name = 'v-video'
-  const variants = ['tube', 'mini', 'hidden']
+  const controlsVariants = ['tube', 'mini', 'hidden']
 
   const model = shallowRef('default')
   const hidePlay = shallowRef(false)
@@ -46,7 +46,7 @@
       elevation: elevation.value || undefined,
       'hide-play': (!isHidden.value && hidePlay.value) || undefined,
       'hide-volume': (!isHidden.value && hideVolume.value) || undefined,
-      variant: variants.includes(model.value) ? model.value : undefined,
+      'controls-variant': controlsVariants.includes(model.value) ? model.value : undefined,
       image: 'https://jsek.work/vt-sunflowers.jpg',
       src: 'https://jsek.work/vt-sunflowers.mp4',
     }

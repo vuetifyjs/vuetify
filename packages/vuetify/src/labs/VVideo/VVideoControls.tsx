@@ -26,7 +26,7 @@ export type VVideoControlsActionsSlot = {
   pause: () => void
   skipTo: (v: number) => void
   volume: Ref<number>
-  isPlaying: boolean
+  playing: boolean
   progress: number
   toggleMuted: () => void
   toggleFullscreen: () => void
@@ -63,10 +63,7 @@ export const makeVVideoControlsProps = propsFactory({
     type: Number,
     default: 0,
   },
-  volume: {
-    type: Number,
-    default: 0,
-  },
+  volume: [Number, String],
   variant: {
     type: String as PropType<VVideoControlsVariant>,
     default: 'default',
@@ -102,12 +99,12 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
       return props.backgroundColor ?? fallbackBackground
     })
 
-    const isPlaying = useProxiedModel(props, 'playing')
+    const playing = useProxiedModel(props, 'playing')
     const progress = useProxiedModel(props, 'progress')
-    const volume = useProxiedModel(props, 'volume')
+    const volume = useProxiedModel(props, 'volume', 0, (v?: number | string) => Number(v ?? 0))
     const lastVolume = shallowRef(0)
 
-    const progressText = computed(() => {
+    const currentTime = computed(() => {
       const secondsElapsed = Math.round(props.progress / 100 * props.duration)
       return {
         elapsed: formatTime(secondsElapsed),
@@ -117,11 +114,11 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
     })
 
     function play () {
-      isPlaying.value = true
+      playing.value = true
     }
 
     function pause () {
-      isPlaying.value = false
+      playing.value = false
     }
 
     function skipTo (v: number) {
@@ -174,8 +171,9 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
       const slotProps = {
         play,
         pause,
-        isPlaying: isPlaying.value,
+        playing: playing.value,
         progress: progress.value,
+        currentTime: currentTime.value,
         skipTo,
         volume,
         toggleMuted,
@@ -209,9 +207,9 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
                     { !props.hidePlay && (
                       <div class={[pillClasses, 'v-video__action-play']}>
                         <VIconBtn
-                          icon={ isPlaying.value ? '$pause' : '$play' }
+                          icon={ playing.value ? '$pause' : '$play' }
                           size={ playBtnSize }
-                          onClick={ () => isPlaying.value = !isPlaying.value }
+                          onClick={ () => playing.value = !playing.value }
                         />
                       </div>
                     )}
@@ -221,9 +219,9 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
                       </div>
                     )}
                     { props.splitTime
-                      ? <span class={[pillClasses, 'v-video__time']}>{ progressText.value.elapsed }</span>
+                      ? <span class={[pillClasses, 'v-video__time']}>{ currentTime.value.elapsed }</span>
                       : props.variant !== 'default'
-                        ? <span class={[pillClasses, 'v-video__time']}>{ progressText.value.elapsed } / { progressText.value.total }</span>
+                        ? <span class={[pillClasses, 'v-video__time']}>{ currentTime.value.elapsed } / { currentTime.value.total }</span>
                         : ''
                     }
                     <VSlider
@@ -236,7 +234,7 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
                     />
                     { props.variant === 'tube' && <VSpacer /> }
                     { props.splitTime
-                      ? <span class={[pillClasses, 'v-video__time']}>{ progressText.value.remaining }</span>
+                      ? <span class={[pillClasses, 'v-video__time']}>{ currentTime.value.remaining }</span>
                       : ''
                     }
                   </>
@@ -252,9 +250,9 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
                     { !props.hidePlay && (
                       <div class={[pillClasses, 'v-video__action-play']}>
                         <VIconBtn
-                          icon={ isPlaying.value ? '$pause' : '$play' }
+                          icon={ playing.value ? '$pause' : '$play' }
                           size={ playBtnSize }
-                          onClick={ () => isPlaying.value = !isPlaying.value }
+                          onClick={ () => playing.value = !playing.value }
                         />
                       </div>
                     )}

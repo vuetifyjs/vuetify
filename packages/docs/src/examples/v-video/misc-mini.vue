@@ -37,7 +37,7 @@
       no-fullscreen
       pills
     >
-      <template v-slot:controls="{ play, pause, isPlaying, progress }">
+      <template v-slot:controls="{ play, pause, playing, progress }">
         <div class="ml-auto" style="display: grid">
           <v-progress-circular
             :model-value="progress"
@@ -47,12 +47,12 @@
             width="3"
           ></v-progress-circular>
           <v-icon-btn
-            :icon="isPlaying ? 'mdi-pause' : 'mdi-play'"
+            :icon="playing ? 'mdi-pause' : 'mdi-play'"
             color="primary"
             size="large"
             style="grid-area: 1/1"
             variant="flat"
-            @click="() => isPlaying ? pause() : play()"
+            @click="() => playing ? pause() : play()"
           ></v-icon-btn>
         </div>
       </template>

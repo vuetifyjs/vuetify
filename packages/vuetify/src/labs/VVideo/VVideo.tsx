@@ -49,7 +49,7 @@ export const makeVVideoProps = propsFactory({
   image: String,
   hideOverlay: Boolean,
   noFullscreen: Boolean,
-  startAt: Number,
+  startAt: [Number, String],
   variant: {
     type: String as PropType<Variant>,
     default: 'player',
@@ -105,10 +105,11 @@ export const VVideo = genericComponent<VVideoSlots>()({
     const videoRef = ref<HTMLVideoElement>()
     const controlsRef = ref<VVideoControls>()
 
-    const isPlaying = useProxiedModel(props, 'playing')
+    const playing = useProxiedModel(props, 'playing')
     const progress = useProxiedModel(props, 'progress')
-    const volume = useProxiedModel(props, 'volume')
+    const volume = useProxiedModel(props, 'volume', 0, (v?: number | string) => Number(v ?? 0))
 
+    const waiting = shallowRef(false)
     const triggered = shallowRef(false)
     const state = shallowRef<'idle' | 'loading' | 'loaded' | 'error'>(props.autoplay ? 'loading' : 'idle')
     const duration = shallowRef(0)
@@ -133,13 +134,17 @@ export const VVideo = genericComponent<VVideoSlots>()({
     function onVideoLoaded () {
       state.value = 'loaded'
       duration.value = videoRef.value!.duration
-      if (props.startAt && props.startAt <= duration.value) {
-        videoRef.value!.currentTime = props.startAt
-        progress.value = duration.value === 0 ? 0 : 100 * props.startAt / duration.value
+
+      const startTime = Number(props.startAt ?? 0)
+      if (startTime && startTime <= duration.value) {
+        videoRef.value!.currentTime = startTime
+        progress.value = duration.value === 0 ? 0 : 100 * startTime / duration.value
       }
+
       if (triggered.value) {
-        isPlaying.value = true
+        playing.value = true
       }
+
       emit('loaded', videoRef.value!)
     }
 
@@ -152,7 +157,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
         case e.key === ' ': {
           if (!['A', 'BUTTON'].includes((e.target as Element)?.tagName)) {
             e.preventDefault()
-            isPlaying.value = !isPlaying.value
+            playing.value = !playing.value
           }
           break
         }
@@ -203,7 +208,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
       progress.value = 0
     })
 
-    watch(isPlaying, v => {
+    watch(playing, v => {
       if (!videoRef.value) return
       if (v) {
         videoRef.value.play()
@@ -244,7 +249,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
       }
     }
 
-    const isFullscreen = shallowRef(false)
+    const fullscreen = shallowRef(false)
     function toggleFullscreen () {
       if (!fullscreenEnabled.value || !document.fullscreenEnabled) {
         return
@@ -252,17 +257,17 @@ export const VVideo = genericComponent<VVideoSlots>()({
       if (document.fullscreenElement) {
         document.exitFullscreen()
         focusSlider()
-        isFullscreen.value = false
+        fullscreen.value = false
       } else {
         containerRef.value?.requestFullscreen()
         document.body.addEventListener('keydown', fullscreenExitShortcut)
-        isFullscreen.value = true
+        fullscreen.value = true
       }
     }
 
     function onVideoClick (e: Event) {
       e.preventDefault()
-      isPlaying.value = !isPlaying.value
+      playing.value = !playing.value
     }
 
     function onDoubleClick (e: Event) {
@@ -290,15 +295,21 @@ export const VVideo = genericComponent<VVideoSlots>()({
         ? 'poster-fade-out'
         : 'fade-transition'
 
+      const overlayProps = {
+        contained: true,
+        persistent: true,
+        contentClass: 'v-video__overlay-fill',
+      }
+
       const controlsProps = {
         ...VVideoControls.filterProps(omit(props, ['variant', 'rounded', 'hideVolume'])),
         rounded: Array.isArray(props.rounded) ? props.rounded.at(-1) : props.rounded,
-        fullscreen: isFullscreen.value,
+        fullscreen: fullscreen.value,
         hideVolume: props.hideVolume || props.muted,
         hideFullscreen: props.hideFullscreen || !fullscreenEnabled.value,
         density: props.density,
         variant: props.controlsVariant,
-        playing: isPlaying.value,
+        playing: playing.value,
         progress: progress.value,
         duration: duration.value,
         volume: volume.value,
@@ -307,7 +318,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
       const controlsEventHandlers = {
         onSkip: (v: number) => skipTo(v),
         'onClick:fullscreen': () => toggleFullscreen(),
-        'onUpdate:playing': (v: boolean) => isPlaying.value = v,
+        'onUpdate:playing': (v: boolean) => playing.value = v,
         'onUpdate:progress': (v: number) => skipTo(v),
         'onUpdate:volume': (v: number) => volume.value = v,
         onClick: (e: Event) => e.stopPropagation(),
@@ -317,6 +328,15 @@ export const VVideo = genericComponent<VVideoSlots>()({
         attrs.controlslist,
         props.noFullscreen ? 'nofullscreen' : '',
       ].filter(Boolean).join(' ')
+
+      const loadingIndicator = (
+        <VProgressCircular
+          indeterminate
+          color={ props.color }
+          width="3"
+          size={ Math.min(100, Number(props.height) / 2 || 50) }
+        />
+      )
 
       const overlayPlayIcon = (
         <VIconBtn
@@ -336,7 +356,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
             'v-video',
             `v-video--variant-${props.variant}`,
             `v-video--${state.value}`,
-            { 'v-video--playing': isPlaying.value },
+            { 'v-video--playing': playing.value },
             themeClasses.value,
             densityClasses.value,
             roundedContainerClasses.value,
@@ -372,10 +392,10 @@ export const VVideo = genericComponent<VVideoSlots>()({
                 playsinline
                 ref={ videoRef }
                 onLoadeddata={ onVideoLoaded }
-                onPlay={ () => isPlaying.value = true }
-                onPause={ () => isPlaying.value = false }
-                // onWaiting={ showDataLoading }
-                // onPlaying={ hideDataLoading } // ? onAbort, onSuspended, onStalled
+                onPlay={ () => playing.value = true }
+                onPause={ () => playing.value = false }
+                onWaiting={ () => waiting.value = true }
+                onPlaying={ () => waiting.value = false }
                 onClick={ onVideoClick }
                 onDblclick={ onDoubleClick }
                 onTouchend={ onTouchend }
@@ -388,13 +408,11 @@ export const VVideo = genericComponent<VVideoSlots>()({
                 key="pause-overlay"
                 modelValue={ state.value === 'loaded' }
                 opacity="0"
-                contained
-                persistent
-                contentClass="v-video__overlay-fill"
+                { ...overlayProps }
               >
                 <VSpacer />
                 <MaybeTransition name="fade-transition">
-                  { !isPlaying.value && overlayPlayIcon }
+                  { !playing.value && overlayPlayIcon }
                 </MaybeTransition>
                 <VSpacer />
               </VOverlay>
@@ -402,10 +420,8 @@ export const VVideo = genericComponent<VVideoSlots>()({
             <VOverlay
               key="poster-overlay"
               modelValue={ state.value !== 'loaded' }
-              contained
-              persistent
-              contentClass="v-video__overlay-fill"
               transition={ posterTransition }
+              { ...overlayProps }
             >
               <VImg cover src={ props.image }>
                 <div
@@ -415,18 +431,19 @@ export const VVideo = genericComponent<VVideoSlots>()({
                   ]}
                 >
                   { state.value === 'loading'
-                    ? (
-                      <VProgressCircular
-                        indeterminate
-                        color={ props.color }
-                        width="3"
-                        size={ Math.min(140, Number(props.height) / 2 || 80) }
-                      />
-                    )
+                    ? loadingIndicator
                     : overlayPlayIcon
                   }
                 </div>
               </VImg>
+            </VOverlay>
+            <VOverlay
+              key="loading-overlay"
+              modelValue={ state.value === 'loading' || waiting.value }
+              opacity=".1"
+              { ...overlayProps }
+            >
+              { loadingIndicator }
             </VOverlay>
           </div>
           <MaybeTransition key="actions" name={ props.controlsTransition }>

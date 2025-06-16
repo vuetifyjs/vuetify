@@ -105,11 +105,13 @@ Border radius for the video and controls can be controled separately if you pass
 
 The `v-video` component has several slots that allow you to customize the appearance and behavior of its items.
 
+<!--
 #### Sources
 
 Using the the **sources** slot you can make it possible to select different playback quality.
 
-<!-- <ExamplesExample file="v-video/slot-sources" /> -->
+<ExamplesExample file="v-video/slot-sources" />
+-->
 
 #### Append and prepend
 
@@ -145,8 +147,10 @@ You can override bottom panel to have achieve minimalistic design.
 
 <ExamplesExample file="v-video/misc-mini" />
 
+<!--
 ### Progress tracker
 
 Tap into exposed `video` element to achieve more control and precisely track the progress.
 
-<!-- <ExamplesExample file="v-video/misc-progress-tracker" /> -->
+<ExamplesExample file="v-video/misc-progress-tracker" />
+-->
