@@ -51,12 +51,13 @@ A basic example of the video component.
 | - | - |
 | [v-video](/api/v-video/) | Primary Component |
 | [v-video-controls](/api/v-video-controls/) | Sub-component used to display a video player controls |
+| [v-video-video](/api/v-video-video/) | Sub-component used to display a volume control |
 
 <ApiInline hide-links />
 
 ::: warning
 
-This component is only useful if you self-host videos or when you can reliably obtain direct video file URL and it is permitted by the host terms of service to use custom players.
+This component is only useful if you self-host videos or when you can reliably obtain direct media file URL and it is permitted by the host terms of service to use custom players.
 
 :::
 
@@ -74,43 +75,31 @@ The `v-video` component has several props that allow you to customize its appear
 
 You can display a cover image before the video is loaded.
 
-<!-- <ExamplesExample file="v-video/prop-image" /> -->
+<ExamplesExample file="v-video/prop-image" />
 
 #### Start at
 
 Video can automatically skip to certain timestamp upon load. It can be useful to let the user continue where he stopped last time.
 
-<!-- <ExamplesExample file="v-video/prop-start-at" /> -->
+<ExamplesExample file="v-video/prop-start-at" />
 
 #### Color
 
 You can control the icon color and background color of the active video node.
 
-<!-- <ExamplesExample file="v-video/prop-color" /> -->
+<ExamplesExample file="v-video/prop-color" />
 
 #### Density
 
 Three density modes provide more compact controls with decreased heights of the icon sizes.
 
-<!-- <ExamplesExample file="v-video/prop-density" /> -->
-
-#### Controls transition
-
-The controls do not appear until the video is loaded. The initial transition can be defined, afterwards it relies on CSS opacity transition to hide controls while playing.
-
-<!-- <ExamplesExample file="v-video/prop-controls-transition" /> --> -->
+<ExamplesExample file="v-video/prop-density" />
 
 #### Rounded
 
 Border radius for the video and controls can be controled separately if you pass an array to the `rounded` prop.
 
-<!-- <ExamplesExample file="v-video/prop-rounded" /> -->
-
-#### Disable fullscreen
-
-Fullscreen will be disabled by using dedicated `no-fullscreen` prop or including `nofullscreen` in `controlsList` attribute.
-
-<!-- <ExamplesExample file="v-video/prop-rounded" /> -->
+<ExamplesExample file="v-video/prop-rounded" />
 
 ### Slots
 
@@ -126,13 +115,13 @@ Using the the **sources** slot you can make it possible to select different play
 
 `v-video` has `append` and `prepend` slots. You can place custom controls in them.
 
-<!-- <ExamplesExample file="v-video/slot-append-and-prepend" /> -->
+<ExamplesExample file="v-video/slot-append-and-prepend" />
 
 #### Controls
 
 Whenever provided customizability is not enough, the `controls` slot lets you drop all the built-in controls and easily define your own set of actions.
 
-<!-- <ExamplesExample file="v-video/slot-controls" /> -->
+<ExamplesExample file="v-video/slot-controls" />
 
 ## Examples
 
@@ -142,19 +131,19 @@ The following are a collection of examples that demonstrate more advanced and re
 
 Props like `floating`, `detached` and `split-time` can help you seamlesly integrate the video within card layout.
 
-<!-- <ExamplesExample file="v-video/misc-in-card" /> -->
+<ExamplesExample file="v-video/misc-in-card" />
 
 ### YouTube clone
 
 Easily recreate the most familiar interface to avoid distractions and let your users focus on the content.
 
-<!-- <ExamplesExample file="v-video/misc-tube" /> -->
+<ExamplesExample file="v-video/misc-tube" />
 
-### Spotify clone
+### Minimalistic players
 
-You can override bottom panel to reshuffle the controls.
+You can override bottom panel to have achieve minimalistic design.
 
-<!-- <ExamplesExample file="v-video/misc-spotify" /> -->
+<ExamplesExample file="v-video/misc-mini" />
 
 ### Progress tracker
 

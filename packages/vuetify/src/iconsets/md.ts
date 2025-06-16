@@ -49,6 +49,14 @@ const aliases: IconAliases = {
   eyeDropper: 'colorize',
   upload: 'cloud_upload',
   color: 'palette',
+  play: 'play',
+  pause: 'pause',
+  fullscreen: 'fullscreen',
+  fullscreenExit: 'fullscreen_exit',
+  volumeHigh: 'volume_high',
+  volumeMedium: 'volume_medium',
+  volumeLow: 'volume_low',
+  volumeOff: 'volume_variant_off',
 }
 
 const md: IconSet = {

@@ -209,10 +209,9 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
                     { !props.hidePlay && (
                       <div class={[pillClasses, 'v-video__action-play']}>
                         <VIconBtn
-                          icon={ isPlaying.value ? 'mdi-pause' : 'mdi-play' }
+                          icon={ isPlaying.value ? '$pause' : '$play' }
                           size={ playBtnSize }
                           onClick={ () => isPlaying.value = !isPlaying.value }
-                          v-ripple
                         />
                       </div>
                     )}
@@ -253,16 +252,15 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
                     { !props.hidePlay && (
                       <div class={[pillClasses, 'v-video__action-play']}>
                         <VIconBtn
-                          icon={ isPlaying.value ? 'mdi-pause' : 'mdi-play' }
+                          icon={ isPlaying.value ? '$pause' : '$play' }
                           size={ playBtnSize }
                           onClick={ () => isPlaying.value = !isPlaying.value }
-                          v-ripple
                         />
                       </div>
                     )}
                   </>
                 )}
-                { (!props.hideVolume || slots.append) && (
+                { (!props.hideVolume || !props.hideFullscreen || slots.append) && (
                   <div class={ pillClasses }>
                     { !props.hideVolume && (
                       <VVideoVolume
@@ -276,7 +274,7 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
                     { slots.append?.(slotProps) }
                     { !props.hideFullscreen && (
                       <VIconBtn
-                        icon={ props.fullscreen ? 'mdi-fullscreen-exit' : 'mdi-fullscreen' }
+                        icon={ props.fullscreen ? '$fullscreenExit' : '$fullscreen' }
                         onClick={ () => toggleFullscreen() }
                       />
                     )}

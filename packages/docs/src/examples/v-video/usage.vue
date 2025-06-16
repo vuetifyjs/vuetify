@@ -6,7 +6,7 @@
     :options="variants"
   >
     <div>
-      <v-video v-bind="props"></v-video>
+      <v-video class="mx-auto" v-bind="props"></v-video>
     </div>
 
     <template v-slot:configuration>

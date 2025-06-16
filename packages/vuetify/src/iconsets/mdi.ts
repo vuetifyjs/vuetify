@@ -49,6 +49,14 @@ const aliases: IconAliases = {
   eyeDropper: 'mdi-eyedropper',
   upload: 'mdi-cloud-upload',
   color: 'mdi-palette',
+  play: 'mdi-play',
+  pause: 'mdi-pause',
+  fullscreen: 'mdi-fullscreen',
+  fullscreenExit: 'mdi-fullscreen-exit',
+  volumeHigh: 'mdi-volume-high',
+  volumeMedium: 'mdi-volume-medium',
+  volumeLow: 'mdi-volume-low',
+  volumeOff: 'mdi-volume-variant-off',
 }
 
 const mdi: IconSet = {

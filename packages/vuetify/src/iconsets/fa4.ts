@@ -49,6 +49,14 @@ const aliases: IconAliases = {
   eyeDropper: 'fa-eye-dropper',
   upload: 'fa-cloud-upload',
   color: 'fa-paint-brush',
+  play: 'fa-play',
+  pause: 'fa-pause',
+  fullscreen: 'fa-fullscreen',
+  fullscreenExit: 'fa-compress',
+  volumeHigh: 'fa-volume-high',
+  volumeMedium: 'fa-volume-low',
+  volumeLow: 'fa-volume-off',
+  volumeOff: 'fa-volume-off',
 }
 
 const fa: IconSet = {

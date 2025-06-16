@@ -44,10 +44,10 @@ export const VVideoVolume = genericComponent()({
   setup (props, { attrs }) {
     const volume = useProxiedModel(props, 'modelValue')
 
-    const volumeIcon = toRef(() => volume.value > 70 ? 'mdi-volume-high'
-      : volume.value > 40 ? 'mdi-volume-medium'
-      : volume.value > 10 ? 'mdi-volume-low'
-      : 'mdi-volume-off')
+    const volumeIcon = toRef(() => volume.value > 70 ? '$volumeHigh'
+      : volume.value > 40 ? '$volumeMedium'
+      : volume.value > 10 ? '$volumeLow'
+      : '$volumeOff')
 
     useRender(() => {
       const sliderDefaults = {
