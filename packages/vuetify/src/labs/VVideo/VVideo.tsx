@@ -114,6 +114,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
     const fullscreen = shallowRef(false)
     const waiting = shallowRef(false)
     const triggered = shallowRef(false)
+    const startAfterLoad = shallowRef(false)
     const state = shallowRef<'idle' | 'loading' | 'loaded' | 'error'>(props.autoplay ? 'loading' : 'idle')
     const duration = shallowRef(0)
 
@@ -144,11 +145,18 @@ export const VVideo = genericComponent<VVideoSlots>()({
         progress.value = duration.value === 0 ? 0 : 100 * startTime / duration.value
       }
 
-      if (triggered.value) {
-        playing.value = true
+      if (startAfterLoad.value) {
+        setTimeout(() => playing.value = true, 100)
       }
 
       emit('loaded', videoRef.value!)
+    }
+
+    function onClick () {
+      if (state.value !== 'loaded') {
+        triggered.value = true
+        startAfterLoad.value = !startAfterLoad.value
+      }
     }
 
     function onKeydown (e: KeyboardEvent) {
@@ -232,6 +240,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
     onMounted(() => {
       if (props.autoplay && !ssr) {
         triggered.value = true
+        startAfterLoad.value = true
       }
     })
 
@@ -279,7 +288,9 @@ export const VVideo = genericComponent<VVideoSlots>()({
 
     function onVideoClick (e: Event) {
       e.preventDefault()
-      playing.value = !playing.value
+      if (state.value === 'loaded') {
+        playing.value = !playing.value
+      }
     }
 
     function onDoubleClick (e: Event) {
@@ -379,7 +390,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
             props.style,
           ]}
           onKeydown={ onKeydown }
-          onClick={ () => triggered.value = true }
+          onClick={ onClick }
         >
           <div
             class={[
