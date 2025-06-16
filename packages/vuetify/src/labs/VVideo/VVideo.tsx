@@ -10,6 +10,7 @@ import { VProgressCircular } from '@/components/VProgressCircular/VProgressCircu
 import { VIconBtn } from '@/labs/VIconBtn/VIconBtn'
 
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
@@ -62,6 +63,8 @@ export const makeVVideoProps = propsFactory({
     type: String as PropType<VVideoControlsVariant>,
     default: 'default',
   },
+
+  ...makeComponentProps(),
   ...makeDensityProps(),
   ...makeDimensionProps({ width: 480, height: 270 }),
   ...makeElevationProps({ elevation: 4 }),
@@ -300,9 +303,11 @@ export const VVideo = genericComponent<VVideoSlots>()({
             themeClasses.value,
             densityClasses.value,
             roundedClasses.value,
+            props.class,
           ]}
           style={[
             props.variant === 'background' ? [] : pick(dimensionStyles.value, ['width', 'min-width', 'max-width']),
+            props.style,
           ]}
           onKeydown={ onKeydown }
         >
@@ -320,7 +325,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
                 'v-video__video',
                 roundedClasses.value,
               ]}
-              { ...omit(attrs, ['controlslist']) }
+              { ...omit(attrs, ['controlslist', 'class', 'style']) }
               controlslist={ controlslist }
               playsinline
               ref={ videoRef }
