@@ -10,11 +10,12 @@ import { VProgressCircular } from '@/components/VProgressCircular/VProgressCircu
 import { provideDefaults } from '@/composables/defaults'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeFocusProps, useFocus } from '@/composables/focus'
+import { useIntersectionObserver } from '@/composables/intersectionObserver'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, nextTick, ref, toRef, watch } from 'vue'
+import { computed, effectScope, nextTick, ref, toRef, watch, watchEffect } from 'vue'
 import { filterInputAttrs, focusChild, genericComponent, pick, propsFactory, useRender } from '@/util'
 
 // Types
@@ -96,6 +97,19 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
     const contentRef = ref<HTMLElement>()
     const inputRef = ref<HTMLInputElement[]>([])
     const current = computed(() => inputRef.value[focusIndex.value])
+
+    const intersectScope = effectScope()
+    intersectScope.run(() => {
+      const { intersectionRef, isIntersecting } = useIntersectionObserver()
+      watch(isIntersecting, v => {
+        if (!v) return
+        intersectionRef.value?.focus()
+        intersectScope.stop()
+      })
+      watchEffect(() => {
+        intersectionRef.value = inputRef.value[0]
+      })
+    })
 
     function onInput () {
       // The maxlength attribute doesn't work for the number type input, so the text type is used.

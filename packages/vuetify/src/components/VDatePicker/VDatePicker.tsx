@@ -17,7 +17,7 @@ import { useLocale, useRtl } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, ref, shallowRef, toRef, watch } from 'vue'
+import { computed, shallowRef, toRef, watch } from 'vue'
 import { genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
@@ -139,8 +139,17 @@ export const VDatePicker = genericComponent<new <
     })
     const headerColor = toRef(() => props.headerColor ?? props.color)
 
-    const month = ref(Number(props.month ?? adapter.getMonth(adapter.startOfMonth(internal.value))))
-    const year = ref(Number(props.year ?? adapter.getYear(adapter.startOfYear(adapter.setMonth(internal.value, month.value)))))
+    const _month = useProxiedModel(props, 'month')
+    const month = computed({
+      get: () => Number(_month.value ?? adapter.getMonth(adapter.startOfMonth(internal.value))),
+      set: v => _month.value = v,
+    })
+
+    const _year = useProxiedModel(props, 'year')
+    const year = computed({
+      get: () => Number(_year.value ?? adapter.getYear(adapter.startOfYear(adapter.setMonth(internal.value, month.value)))),
+      set: v => _year.value = v,
+    })
 
     const isReversing = shallowRef(false)
     const header = computed(() => {
@@ -249,9 +258,9 @@ export const VDatePicker = genericComponent<new <
       } else {
         year.value++
         month.value = 0
-        onUpdateYear(year.value)
+        onUpdateYear()
       }
-      onUpdateMonth(month.value)
+      onUpdateMonth()
     }
 
     function onClickPrev () {
@@ -260,9 +269,9 @@ export const VDatePicker = genericComponent<new <
       } else {
         year.value--
         month.value = 11
-        onUpdateYear(year.value)
+        onUpdateYear()
       }
-      onUpdateMonth(month.value)
+      onUpdateMonth()
     }
 
     function onClickDate () {
@@ -277,16 +286,12 @@ export const VDatePicker = genericComponent<new <
       viewMode.value = viewMode.value === 'year' ? 'month' : 'year'
     }
 
-    function onUpdateMonth (value: number) {
+    function onUpdateMonth () {
       if (viewMode.value === 'months') onClickMonth()
-
-      emit('update:month', value)
     }
 
-    function onUpdateYear (value: number) {
+    function onUpdateYear () {
       if (viewMode.value === 'year') onClickYear()
-
-      emit('update:year', value)
     }
 
     watch(model, (val, oldVal) => {
@@ -302,12 +307,12 @@ export const VDatePicker = genericComponent<new <
 
       if (newMonth !== month.value) {
         month.value = newMonth
-        onUpdateMonth(month.value)
+        onUpdateMonth()
       }
 
       if (newYear !== year.value) {
         year.value = newYear
-        onUpdateYear(year.value)
+        onUpdateYear()
       }
 
       isReversing.value = adapter.isBefore(before, after)

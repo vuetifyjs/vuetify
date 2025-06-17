@@ -58,7 +58,8 @@
             > th.v-data-table__th--fixed
               position: sticky
 
-            > th.v-data-table__th--sortable:hover
+            > th.v-data-table__th--sortable:hover,
+            > th.v-data-table__th--sortable:focus
                 cursor: pointer
                 color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity))
 
@@ -66,7 +67,8 @@
                 .v-data-table-header__sort-icon
                   opacity: 0
 
-                &:hover
+                &:hover,
+                &:focus
                   .v-data-table-header__sort-icon
                     opacity: 0.5
 
