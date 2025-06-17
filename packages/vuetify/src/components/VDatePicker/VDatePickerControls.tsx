@@ -18,6 +18,21 @@ import type { PropType } from 'vue'
 
 type ControlVariant = 'docked' | 'modal'
 
+export type VDatePickerControlsDefaultSlotProps = {
+  monthText?: string
+  yearText?: string
+  openMonths: () => void
+  openYears: () => void
+  prevMonth: () => void
+  nextMonth: () => void
+  prevYear: () => void
+  nextYear: () => void
+}
+
+type VDatePickerControlsSlots = {
+  default: VDatePickerControlsDefaultSlotProps
+}
+
 export const makeVDatePickerControlsProps = propsFactory({
   active: {
     type: [String, Array] as PropType<string | string[]>,
@@ -54,7 +69,7 @@ export const makeVDatePickerControlsProps = propsFactory({
   },
 }, 'VDatePickerControls')
 
-export const VDatePickerControls = genericComponent()({
+export const VDatePickerControls = genericComponent<VDatePickerControlsSlots>()({
   name: 'VDatePickerControls',
 
   props: makeVDatePickerControlsProps(),
@@ -216,6 +231,17 @@ export const VDatePickerControls = genericComponent()({
         </>
       )
 
+      const slotProps = {
+        monthText: props.monthText,
+        yearText: props.yearText,
+        openMonths: onClickMonth,
+        openYears: onClickYear,
+        prevMonth: onClickPrevMonth,
+        nextMonth: onClickNextMonth,
+        prevYear: onClickPrevYear,
+        nextYear: onClickNextYear,
+      }
+
       const modalControls = (
         <>
           { props.noMonthPicker ? monthYearBtn : monthYearSplit }
@@ -258,7 +284,7 @@ export const VDatePickerControls = genericComponent()({
               '--v-date-picker-controls-height': convertToUnit(props.controlHeight),
             }}
           >
-            { slots.default?.() ?? (
+            { slots.default?.(slotProps) ?? (
               <>
                 { props.controlVariant === 'modal' && modalControls }
                 { props.controlVariant === 'docked' && dockedControls }

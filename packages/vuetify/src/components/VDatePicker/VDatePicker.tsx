@@ -21,6 +21,7 @@ import { computed, shallowRef, toRef, watch } from 'vue'
 import { genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
+import type { VDatePickerControlsDefaultSlotProps } from './VDatePickerControls'
 import type { VDatePickerHeaderSlots } from './VDatePickerHeader'
 import type { VDatePickerMonthSlots } from './VDatePickerMonth'
 import type { VDatePickerMonthsSlots } from './VDatePickerMonths'
@@ -40,6 +41,7 @@ export type VDatePickerSlots =
       header: string
       transition: string
     }
+    controls: VDatePickerControlsDefaultSlotProps
   }
 
 export const makeVDatePickerProps = propsFactory({
@@ -403,6 +405,7 @@ export const VDatePicker = genericComponent<new <
                   onClick:prevYear={ onClickPrevYear }
                   onClick:month={ onClickMonth }
                   onClick:year={ onClickYear }
+                  v-slots={{ default: slots.controls }}
                 />
 
                 <VFadeTransition hideOnLeave>
