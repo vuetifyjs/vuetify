@@ -41,6 +41,16 @@
         .v-window__right
           transform: translateX(0)
 
+    &--vertical-arrows
+      .v-window__controls
+        flex-direction: column
+        justify-content: center
+        gap: $window-controls-vertical-gap
+        .v-window__left,
+        .v-window__right
+          .v-icon
+            transform: rotate(90deg)
+
 @include tools.layer('transitions')
   .v-window
     &-x-transition,
@@ -84,3 +94,4 @@
 
       &-leave-to
         transform: translateY(100%)
+window__controls

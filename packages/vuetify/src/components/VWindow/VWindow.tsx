@@ -65,6 +65,7 @@ export const makeVWindowProps = propsFactory({
     type: [Boolean, String],
     validator: (v: any) => typeof v === 'boolean' || v === 'hover',
   },
+  verticalArrows: [Boolean, String] as PropType<boolean | 'left' | 'right'>,
   touch: {
     type: [Object, Boolean] as PropType<boolean | TouchHandlers>,
     default: undefined,
@@ -228,6 +229,7 @@ export const VWindow = genericComponent<new <T>(
           'v-window',
           {
             'v-window--show-arrows-on-hover': props.showArrows === 'hover',
+            'v-window--vertical-arrows': props.verticalArrows,
           },
           themeClasses.value,
           props.class,
@@ -244,7 +246,16 @@ export const VWindow = genericComponent<new <T>(
           { slots.default?.({ group }) }
 
           { props.showArrows !== false && (
-            <div class="v-window__controls">
+            <div
+              class="v-window__controls"
+              style={{
+                alignItems: props.verticalArrows === 'right'
+                  ? 'end'
+                  : props.verticalArrows
+                    ? 'start'
+                    : 'center',
+              }}
+            >
               { arrows.value }
             </div>
           )}
