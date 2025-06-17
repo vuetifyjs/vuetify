@@ -88,6 +88,14 @@ Specify allowed dates using objects or functions. When using objects, accepts a 
 
 <ExamplesExample file="v-date-picker/prop-allowed-dates" />
 
+### Slots
+
+#### Controls
+
+Replace main controls to adapt behavior and/or visual appearance beyond CSS styling.
+
+<ExamplesExample file="v-date-picker/slots-controls" />
+
 ### Internationalization
 
 Vuetify components can localize date formats by utilizing the [i18n](/features/internationalization) feature. This determines the appropriate locale for date display. When the default date adapter is in use, localization is managed automatically.
