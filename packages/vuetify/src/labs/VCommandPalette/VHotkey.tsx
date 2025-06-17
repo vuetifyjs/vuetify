@@ -42,150 +42,99 @@ type KeyDisplay = [Exclude<DisplayMode, 'icon'>, string] | [Extract<DisplayMode,
 type KeyMap = Record<string, (mode: DisplayMode, isMac: boolean) => KeyDisplay>
 
 /**
- * Helper function for Cmd/Meta key display across platforms
- * Handles the complex logic of showing Command key on Mac vs Ctrl on PC
+ * Configuration type for key display across different modes
  */
-function cmdAndMeta (mode: DisplayMode, isMac: boolean): KeyDisplay {
-  switch (mode) {
-    case 'symbol':
-      if (isMac) return ['symbol', '⌘'] // Mac Command symbol
-    case 'icon':
-      // Command key icon (Mac-specific design)
-      if (isMac) {
-        return ['icon', '$command']
-      }
-    default:
-      // Text fallback
-      return ['text', isMac ? 'Command' : 'Ctrl']
+type KeyConfig = {
+  symbol?: string
+  icon?: string
+  text: string
+}
+
+/**
+ * Platform-specific key configuration
+ */
+type PlatformKeyConfig = {
+  mac?: KeyConfig
+  default: KeyConfig
+}
+
+/**
+ * Creates a key function from declarative configuration
+ * This approach separates platform logic from display mode logic
+ */
+function createKey (config: PlatformKeyConfig) {
+  return (mode: DisplayMode, isMac: boolean): KeyDisplay => {
+    const keyConfig = (isMac && config.mac) ? config.mac : config.default
+    const value = keyConfig[mode] ?? keyConfig.text
+    return mode === 'icon' ? ['icon', value as IconValue] : [mode as Exclude<DisplayMode, 'icon'>, value]
   }
 }
 
 /**
- * Comprehensive key mapping for different modifier and special keys
- * Each key function returns the appropriate display based on mode and platform
+ * Comprehensive key mapping using declarative configuration
+ * Each key is defined by its platform-specific display options
  */
 const keyMap = {
   // Control key (different symbol on Mac)
-  ctrl (mode, isMac) {
-    switch (mode) {
-      case 'symbol':
-        if (isMac) return ['symbol', '⌃'] // Mac Control symbol
-      case 'icon':
-        if (isMac) return ['icon', '$ctrl']
-      default:
-        return ['text', 'Ctrl']
-    }
-  },
-  // Meta and Cmd both use the same logic
-  meta: cmdAndMeta,
-  cmd: cmdAndMeta,
+  ctrl: createKey({
+    mac: { symbol: '⌃', icon: '$ctrl', text: '$vuetify.hotkey.ctrl' }, // Mac Control symbol
+    default: { text: 'Ctrl', icon: '$ctrl' },
+  }),
+  // Meta and Cmd both map to Command on Mac, Ctrl on PC
+  meta: createKey({
+    mac: { symbol: '⌘', icon: '$command', text: '$vuetify.hotkey.command' }, // Mac Command symbol
+    default: { text: 'Ctrl', icon: '$ctrl' },
+  }),
+  cmd: createKey({
+    mac: { symbol: '⌘', icon: '$command', text: '$vuetify.hotkey.command' }, // Mac Command symbol
+    default: { text: 'Ctrl', icon: '$ctrl' },
+  }),
   // Shift key
-  shift (mode, isMac) {
-    switch (mode) {
-      case 'symbol':
-        if (isMac) return ['symbol', '⇧'] // Shift symbol
-      case 'icon':
-        if (isMac) return ['icon', '$shift']
-      default:
-        return ['text', 'Shift']
-    }
-  },
+  shift: createKey({
+    mac: { symbol: '⇧', icon: '$shift', text: '$vuetify.hotkey.shift' }, // Shift symbol
+    default: { text: 'Shift', icon: '$shift' },
+  }),
   // Alt/Option key (different names on Mac vs PC)
-  alt (mode, isMac) {
-    switch (mode) {
-      case 'symbol':
-        if (isMac) return ['symbol', '⌥'] // Mac Option symbol
-      case 'icon':
-        if (isMac) return ['icon', '$alt']
-      default:
-        return ['text', isMac ? 'Option' : 'Alt']
-    }
-  },
-  // Enter/Return key
-  enter (mode) {
-    switch (mode) {
-      case 'symbol':
-        return ['symbol', '↵'] // Return symbol
-      case 'icon':
-        return ['icon', '$enter']
-      default:
-        return ['text', 'Enter']
-    }
-  },
-  // Arrow keys
-  arrowup (mode) {
-    switch (mode) {
-      case 'symbol':
-        return ['symbol', '↑']
-      case 'icon':
-        return ['icon', '$arrowup']
-      default:
-        return ['text', 'Up Arrow']
-    }
-  },
-  arrowdown (mode) {
-    switch (mode) {
-      case 'symbol':
-        return ['symbol', '↓']
-      case 'icon':
-        return ['icon', '$arrowdown']
-      default:
-        return ['text', 'Down Arrow']
-    }
-  },
-  arrowleft (mode) {
-    switch (mode) {
-      case 'symbol':
-        return ['symbol', '←']
-      case 'icon':
-        return ['icon', '$arrowleft']
-      default:
-        return ['text', 'Left Arrow']
-    }
-  },
-  arrowright (mode) {
-    switch (mode) {
-      case 'symbol':
-        return ['symbol', '→']
-      case 'icon':
-        return ['icon', '$arrowright']
-      default:
-        return ['text', 'Right Arrow']
-    }
-  },
-  // Backspace key
-  backspace (mode) {
-    switch (mode) {
-      case 'symbol':
-        return ['symbol', '⌫'] // Backspace symbol
-      case 'icon':
-        return ['icon', '$backspace']
-      default:
-        return ['text', 'Backspace']
-    }
-  },
-  // Escape key (simple text only)
-  escape () {
-    return ['text', 'Esc']
-  },
-  // Minus/Hyphen key
-  '-' (mode, isMac) {
-    switch (mode) {
-      case 'symbol':
-        return ['symbol', '-'] // Minus symbol (different from hyphen)
-      case 'icon':
-        return ['icon', '$minus']
-      default:
-        return ['text', '-']
-    }
-  },
+  alt: createKey({
+    mac: { symbol: '⌥', icon: '$alt', text: '$vuetify.hotkey.option' }, // Mac Option symbol
+    default: { text: 'Alt', icon: '$alt' },
+  }),
+  // Enter/Return key (same across platforms)
+  enter: createKey({
+    default: { symbol: '↵', icon: '$enter', text: '$vuetify.hotkey.enter' }, // Return symbol
+  }),
+  // Arrow keys (same across platforms)
+  arrowup: createKey({
+    default: { symbol: '↑', icon: '$arrowup', text: '$vuetify.hotkey.upArrow' },
+  }),
+  arrowdown: createKey({
+    default: { symbol: '↓', icon: '$arrowdown', text: '$vuetify.hotkey.downArrow' },
+  }),
+  arrowleft: createKey({
+    default: { symbol: '←', icon: '$arrowleft', text: '$vuetify.hotkey.leftArrow' },
+  }),
+  arrowright: createKey({
+    default: { symbol: '→', icon: '$arrowright', text: '$vuetify.hotkey.rightArrow' },
+  }),
+  // Backspace key (same across platforms)
+  backspace: createKey({
+    default: { symbol: '⌫', icon: '$backspace', text: '$vuetify.hotkey.backspace' }, // Backspace symbol
+  }),
+  // Escape key (text only, same across platforms)
+  escape: createKey({
+    default: { text: '$vuetify.hotkey.escape' },
+  }),
+  // Minus/Hyphen key (same across platforms)
+  '-': createKey({
+    default: { symbol: '-', icon: '$minus', text: '-' },
+  }),
   // Alternative names for minus key
-  minus (mode, isMac) {
-    return this['-'](mode, isMac)
-  },
-  hyphen (mode, isMac) {
-    return this['-'](mode, isMac)
-  },
+  minus: createKey({
+    default: { symbol: '-', icon: '$minus', text: '-' },
+  }),
+  hyphen: createKey({
+    default: { symbol: '-', icon: '$minus', text: '-' },
+  }),
 } as const satisfies KeyMap
 
 /**
@@ -364,6 +313,10 @@ export const VHotkey = genericComponent()({
       })
     })
 
+    function translateKey (key: string) {
+      return key.startsWith('$vuetify.') ? t(key) : key
+    }
+
     /**
      * Render function that creates the visual representation of the keyboard shortcuts
      * Structure:
@@ -386,7 +339,7 @@ export const VHotkey = genericComponent()({
                     { /* Render "then" text for THEN delineators */ }
                     {
                       THEN_DELINEATOR.isEqual(key) &&
-                      <span key={ keyIndex } class="v-hotkey__divider">{ t('$vuetify.command.then') }</span>
+                      <span key={ keyIndex } class="v-hotkey__divider">{ t('$vuetify.hotkey.then') }</span>
                     }
                   </>
               ) : (
@@ -395,7 +348,7 @@ export const VHotkey = genericComponent()({
                     <VKbd key={ keyIndex } class={['v-hotkey__key', key[0] === 'icon' ? 'v-hotkey__key-icon' : `v-hotkey__key-${key[0]}`]}>
                       { /* Render icon or text based on the key display type */ }
                       {
-                        key[0] === 'icon' ? <VIcon icon={ key[1] } /> : key[1]
+                        key[0] === 'icon' ? <VIcon icon={ key[1] } /> : translateKey(key[1])
                       }
                     </VKbd>
                   </>
