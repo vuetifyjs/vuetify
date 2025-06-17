@@ -2,8 +2,8 @@ export function useMarkdown () {
   const one = useOneStore()
   const route = useRoute()
   const frontmatter = useFrontmatter()
-  const copied = ref(false) // Manually manage copied state
-  const isClipboardSupported = !!navigator.clipboard // Check for native clipboard support
+  const copied = shallowRef(false)
+  const isClipboardSupported = !!navigator.clipboard
 
   async function copyPageAsMarkdown () {
     if (!isClipboardSupported) {
