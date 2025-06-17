@@ -3,6 +3,7 @@ import './VDatePickerControls.sass'
 
 // Components
 import { VBtn } from '@/components/VBtn'
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VSpacer } from '@/components/VGrid'
 
 // Composables
@@ -15,12 +16,19 @@ import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util
 // Types
 import type { PropType } from 'vue'
 
+type ControlVariant = 'docked' | 'modal'
+
 export const makeVDatePickerControlsProps = propsFactory({
   active: {
     type: [String, Array] as PropType<string | string[]>,
     default: undefined,
   },
   controlHeight: [Number, String],
+  controlVariant: {
+    type: String as PropType<ControlVariant>,
+    default: 'modal',
+  },
+  noMonthPicker: Boolean,
   disabled: {
     type: [Boolean, String, Array] as PropType<boolean | string | string[] | null>,
     default: null,
@@ -38,6 +46,8 @@ export const makeVDatePickerControlsProps = propsFactory({
     default: '$subgroup',
   },
   text: String,
+  monthText: String,
+  yearText: String,
   viewMode: {
     type: String as PropType<'month' | 'months' | 'year'>,
     default: 'month',
@@ -54,10 +64,11 @@ export const VDatePickerControls = genericComponent()({
     'click:month': () => true,
     'click:prev': () => true,
     'click:next': () => true,
-    'click:text': () => true,
+    'click:prev-year': () => true,
+    'click:next-year': () => true,
   },
 
-  setup (props, { emit }) {
+  setup (props, { emit, slots }) {
     const disableMonth = computed(() => {
       return Array.isArray(props.disabled)
         ? props.disabled.includes('text')
@@ -79,12 +90,20 @@ export const VDatePickerControls = genericComponent()({
         : !!props.disabled
     })
 
-    function onClickPrev () {
+    function onClickPrevMonth () {
       emit('click:prev')
     }
 
-    function onClickNext () {
+    function onClickNextMonth () {
       emit('click:next')
+    }
+
+    function onClickPrevYear () {
+      emit('click:prev-year')
+    }
+
+    function onClickNextYear () {
+      emit('click:next-year')
     }
 
     function onClickYear () {
@@ -96,58 +115,157 @@ export const VDatePickerControls = genericComponent()({
     }
 
     useRender(() => {
-      // TODO: add slot support and scope defaults
-      return (
-        <div
-          class={[
-            'v-date-picker-controls',
-          ]}
-          style={{
-            '--v-date-picker-controls-height': convertToUnit(props.controlHeight),
-          }}
-        >
+      const innerDefaults = {
+        VBtn: {
+          density: 'comfortable',
+          variant: 'text',
+        },
+      }
+
+      const prevMonth = (
+        <VBtn
+          data-testid="prev-month"
+          disabled={ disablePrev.value }
+          icon={ props.prevIcon }
+          onClick={ onClickPrevMonth }
+        />
+      )
+
+      const nextMonth = (
+        <VBtn
+          data-testid="next-month"
+          disabled={ disableNext.value }
+          icon={ props.nextIcon }
+          onClick={ onClickNextMonth }
+        />
+      )
+
+      const prevYear = (
+        <VBtn
+          data-testid="prev-year"
+          disabled={ disablePrev.value }
+          icon={ props.prevIcon }
+          onClick={ onClickPrevYear }
+        />
+      )
+
+      const nextYear = (
+        <VBtn
+          data-testid="next-year"
+          disabled={ disableNext.value }
+          icon={ props.nextIcon }
+          onClick={ onClickNextYear }
+        />
+      )
+
+      const onlyMonthBtn = (
+        <VBtn
+          class="v-date-picker-controls__only-month-btn"
+          data-testid="year-btn"
+          density="default"
+          disabled={ disableMonth.value }
+          text={ props.monthText }
+          appendIcon={ props.modeIcon }
+          onClick={ onClickMonth }
+        />
+      )
+
+      const onlyYearBtn = (
+        <VBtn
+          class="v-date-picker-controls__only-year-btn"
+          data-testid="year-btn"
+          density="default"
+          disabled={ disableYear.value }
+          text={ props.yearText }
+          appendIcon={ props.modeIcon }
+          onClick={ onClickYear }
+        />
+      )
+
+      const monthYearBtn = (
+        <VBtn
+          class="v-date-picker-controls__year-btn"
+          data-testid="year-btn"
+          density="default"
+          disabled={ disableYear.value }
+          text={ props.text }
+          appendIcon={ props.modeIcon }
+          rounded
+          onClick={ onClickYear }
+        />
+      )
+
+      const monthYearSplit = (
+        <>
           <VBtn
             class="v-date-picker-controls__month-btn"
             data-testid="month-btn"
+            height="36"
             disabled={ disableMonth.value }
             text={ props.text }
-            variant="text"
             rounded
             onClick={ onClickMonth }
           />
-
           <VBtn
             class="v-date-picker-controls__mode-btn"
             data-testid="year-btn"
             disabled={ disableYear.value }
-            density="comfortable"
             icon={ props.modeIcon }
-            variant="text"
             onClick={ onClickYear }
           />
+        </>
+      )
+
+      const modalControls = (
+        <>
+          { props.noMonthPicker ? monthYearBtn : monthYearSplit }
 
           <VSpacer />
 
           <div class="v-date-picker-controls__month">
-            <VBtn
-              data-testid="prev-month"
-              disabled={ disablePrev.value }
-              density="comfortable"
-              icon={ props.prevIcon }
-              variant="text"
-              onClick={ onClickPrev }
-            />
-
-            <VBtn
-              data-testid="next-month"
-              disabled={ disableNext.value }
-              icon={ props.nextIcon }
-              density="comfortable"
-              variant="text"
-              onClick={ onClickNext }
-            />
+            { prevMonth }
+            { nextMonth }
           </div>
-        </div>
+        </>
+      )
+
+      const dockedControls = (
+        <>
+          <div class="v-date-picker-controls__month">
+            { prevMonth }
+            { onlyMonthBtn }
+            { nextMonth }
+          </div>
+
+          <VSpacer />
+
+          <div class="v-date-picker-controls__year">
+            { prevYear }
+            { onlyYearBtn }
+            { nextYear }
+          </div>
+        </>
+      )
+
+      return (
+        <VDefaultsProvider defaults={ innerDefaults }>
+          <div
+            class={[
+              'v-date-picker-controls',
+              `v-date-picker-controls--variant-${props.controlVariant}`,
+            ]}
+            style={{
+              '--v-date-picker-controls-height': convertToUnit(props.controlHeight),
+            }}
+          >
+            { slots.default?.() ?? (
+              <>
+                { props.controlVariant === 'modal' && modalControls }
+                { props.controlVariant === 'docked' && dockedControls }
+              </>
+            )}
+          </div>
+        </VDefaultsProvider>
       )
     })
 

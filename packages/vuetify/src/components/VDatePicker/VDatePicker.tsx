@@ -171,15 +171,12 @@ export const VDatePicker = genericComponent<new <
         ? adapter.format(adapter.date(model.value[0]), 'normalDateWithWeekday')
         : t(props.header)
     })
-    const text = computed(() => {
-      let date = adapter.date()
 
-      date = adapter.setDate(date, 1)
-      date = adapter.setMonth(date, month.value)
-      date = adapter.setYear(date, year.value)
+    const date = toRef(() => adapter.parseISO(`${year.value}-${month.value + 1}-01`))
+    const monthYearText = toRef(() => adapter.format(date.value, 'monthAndYear'))
+    const monthText = toRef(() => adapter.format(date.value, 'monthShort'))
+    const yearText = toRef(() => adapter.format(date.value, 'year'))
 
-      return adapter.format(date, 'monthAndYear')
-    })
     // const headerIcon = toRef(() => props.inputMode === 'calendar' ? props.keyboardIcon : props.calendarIcon)
     const headerTransition = toRef(() => `date-picker-header${isReversing.value ? '-reverse' : ''}-transition`)
 
@@ -262,7 +259,7 @@ export const VDatePicker = genericComponent<new <
     //   inputMode.value = inputMode.value === 'calendar' ? 'keyboard' : 'calendar'
     // }
 
-    function onClickNext () {
+    function onClickNextMonth () {
       if (month.value < 11) {
         month.value++
       } else {
@@ -273,7 +270,7 @@ export const VDatePicker = genericComponent<new <
       onUpdateMonth()
     }
 
-    function onClickPrev () {
+    function onClickPrevMonth () {
       if (month.value > 0) {
         month.value--
       } else {
@@ -282,6 +279,16 @@ export const VDatePicker = genericComponent<new <
         onUpdateYear()
       }
       onUpdateMonth()
+    }
+
+    function onClickNextYear () {
+      year.value++
+      onUpdateYear()
+    }
+
+    function onClickPrevYear () {
+      year.value--
+      onUpdateYear()
     }
 
     function onClickDate () {
@@ -387,9 +394,13 @@ export const VDatePicker = genericComponent<new <
                 <VDatePickerControls
                   { ...datePickerControlsProps }
                   disabled={ disabled.value }
-                  text={ text.value }
-                  onClick:next={ onClickNext }
-                  onClick:prev={ onClickPrev }
+                  text={ monthYearText.value }
+                  monthText={ monthText.value }
+                  yearText={ yearText.value }
+                  onClick:next={ onClickNextMonth }
+                  onClick:prev={ onClickPrevMonth }
+                  onClick:nextYear={ onClickNextYear }
+                  onClick:prevYear={ onClickPrevYear }
                   onClick:month={ onClickMonth }
                   onClick:year={ onClickYear }
                 />
