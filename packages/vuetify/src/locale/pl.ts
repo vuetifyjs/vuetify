@@ -46,9 +46,12 @@ export default {
     input: {
       placeholder: 'Wprowadź datę',
     },
-    ariaLabel: {
+    ariaLabel: {,
+      previousYear: 'Poprzedni rok',
       previousMonth: 'Poprzedni miesiąc',
+      nextYear: 'Następny rok',
       nextMonth: 'Następny miesiąc',
+      selectMonth: 'Wybierz miesiąc',
       selectYear: 'Wybierz rok',
       selectDate: '{0}',
       currentDate: 'Dzisiaj, {0}',

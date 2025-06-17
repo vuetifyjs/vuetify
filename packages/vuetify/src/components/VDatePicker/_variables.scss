@@ -1,6 +1,10 @@
 $date-picker-width: 328px !default;
 $date-picker-show-week-width: 368px !default;
+
 $date-picker-controls-height: var(--v-date-picker-controls-height, 56px) !default;
+$date-picker-controls-padding: 4px 12px !default;
+$date-picker-controls-docked-toggle-btn-padding: 12px 8px !default;
+$date-picker-controls-docked-toggle-append-margin-inline: 4px -4px !default;
 
 $date-picker-header-height: 70px !default;
 
