@@ -223,9 +223,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
       if (!videoRef.value) return
       if (v) {
         videoRef.value.play()
-        focusSlider()
-      }
-      if (!v) {
+      } else {
         videoRef.value.pause()
       }
     })
@@ -250,7 +248,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
 
     function focusSlider () {
       const container = videoRef.value?.closest('.v-video') as HTMLElement
-      const innerSlider = container.querySelector('[role="slider"]') as HTMLElement
+      const innerSlider = container?.querySelector('[role="slider"]') as HTMLElement
       innerSlider?.focus()
     }
 
@@ -290,6 +288,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
       e.preventDefault()
       if (state.value === 'loaded') {
         playing.value = !playing.value
+        focusSlider()
       }
     }
 
