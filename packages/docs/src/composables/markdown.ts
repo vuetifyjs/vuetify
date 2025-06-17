@@ -1,13 +1,18 @@
 export function useMarkdown () {
+  const one = useOneStore()
   const route = useRoute()
   const frontmatter = useFrontmatter()
   const copied = ref(false) // Manually manage copied state
   const isClipboardSupported = !!navigator.clipboard // Check for native clipboard support
 
-  // TODO: This isn't working
   async function copyPageAsMarkdown () {
     if (!isClipboardSupported) {
       console.error('Native Clipboard API is not supported.')
+      return
+    }
+
+    if (!one.isSubscriber) {
+      console.error('You must be a subscriber to use this feature.')
       return
     }
 
@@ -32,10 +37,9 @@ export function useMarkdown () {
     try {
       await navigator.clipboard.writeText(markdownContent)
       copied.value = true
-      setTimeout(() => { copied.value = false }, 2000) // Reset copied state after 2 seconds
+      setTimeout(() => (copied.value = false), 2000)
     } catch (err) {
       console.error('Failed to copy text: ', err)
-      // You might want to inform the user that copying failed
     }
   }
 

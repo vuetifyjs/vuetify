@@ -24,23 +24,6 @@
       </template>
     </page-feature-chip>
 
-    <VTooltip location="top" text="Subscribe to Vuetify One to access">
-      <template #activator="{ props }">
-        <page-feature-chip
-          v-if="isClipboardSupported"
-          :disabled="!one.isSubscriber"
-          :text="copied ? t('copied') : t('copy-as-markdown')"
-          prepend-icon="mdi-language-markdown-outline"
-          v-bind="props"
-          @click="copyPageAsMarkdown"
-        >
-          <template #prepend>
-            <v-icon :color="copied ? 'success' : 'grey'" />
-          </template>
-        </page-feature-chip>
-      </template>
-    </VTooltip>
-
     <page-feature-chip
       v-if="frontmatter?.features?.figma"
       :text="t('figma-design')"
@@ -105,6 +88,26 @@
         <v-icon color="surface-variant" />
       </template>
     </page-feature-chip>
+
+    <div
+      v-if="isClipboardSupported"
+      class="d-inline-block"
+      v-tooltip:top="{
+        disabled: one.isSubscriber,
+        text: 'Subscribe to Vuetify One for access',
+      }"
+    >
+      <page-feature-chip
+        :disabled="!one.isSubscriber"
+        :text="copied ? t('copied') : t('copy-as-markdown')"
+        prepend-icon="mdi-language-markdown-outline"
+        @click="copyPageAsMarkdown"
+      >
+        <template #prepend>
+          <v-icon :color="copied ? 'success' : 'surface-variant'" />
+        </template>
+      </page-feature-chip>
+    </div>
   </div>
 </template>
 
