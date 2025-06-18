@@ -19,7 +19,7 @@
 
         <v-overlay
           :scrim="false"
-          content-class="w-100 h-100 d-flex flex-column align-center justify-space-between click-through py-3"
+          content-class="w-100 h-100 d-flex flex-column align-center justify-space-between pointer-pass-through py-3"
           contained
           model-value
           no-click-animation
@@ -123,13 +123,3 @@
     },
   }
 </script>
-
-<style>
-.click-through {
-  pointer-events: none;
-}
-
-.click-through > * {
-  pointer-events: auto;
-}
-</style>
