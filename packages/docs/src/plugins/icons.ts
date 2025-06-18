@@ -317,6 +317,7 @@ export {
   mdiPaperclip,
   mdiPause,
   mdiPencil,
+  mdiPencilOutline,
   mdiPhone,
   mdiPhoneInTalk,
   mdiPhoneHangupOutline,
