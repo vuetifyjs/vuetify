@@ -78,6 +78,9 @@ export default {
     am: 'Səhər',
     pm: 'Axşam',
     title: 'Vaxtı seçin',
+    hour: 'Hour',
+    minute: 'Minute',
+    second: 'Second',
   },
   pagination: {
     ariaLabel: {

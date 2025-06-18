@@ -78,6 +78,9 @@ export default {
     am: '上午',
     pm: '下午',
     title: '選擇時間',
+    hour: 'Hour',
+    minute: 'Minute',
+    second: 'Second',
   },
   pagination: {
     ariaLabel: {
