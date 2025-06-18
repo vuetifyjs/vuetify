@@ -58,6 +58,16 @@ You can use `density` prop to adjust vertical spacing within the component.
 
 <ExamplesExample file="v-combobox/prop-density" />
 
+#### Placeholder
+
+Use the **placeholder** prop to give users additional context about the expected values in the combobox. The placeholder will only appear when no items are selected.
+
+::: info
+  Use the **persistent-placeholder** prop to force the **placeholder** to be visible, even when the input is not focused.
+:::
+
+<ExamplesExample file="v-combobox/prop-placeholder" />
+
 #### Multiple combobox
 
 Previously known as **tags** - user is allowed to enter more than one value.
