@@ -19,6 +19,8 @@ import type { PropType } from 'vue'
 type ControlVariant = 'docked' | 'modal'
 
 export type VDatePickerControlsDefaultSlotProps = {
+  viewMode: 'month' | 'months' | 'year'
+  monthYearText?: string
   monthText?: string
   yearText?: string
   openMonths: () => void
@@ -94,14 +96,24 @@ export const VDatePickerControls = genericComponent<VDatePickerControlsSlots>()(
         ? props.disabled.includes('mode')
         : !!props.disabled
     })
-    const disablePrev = computed(() => {
+    const disablePrevMonth = computed(() => {
       return Array.isArray(props.disabled)
-        ? props.disabled.includes('prev')
+        ? props.disabled.includes('prev-month')
         : !!props.disabled
     })
-    const disableNext = computed(() => {
+    const disableNextMonth = computed(() => {
       return Array.isArray(props.disabled)
-        ? props.disabled.includes('next')
+        ? props.disabled.includes('next-month')
+        : !!props.disabled
+    })
+    const disablePrevYear = computed(() => {
+      return Array.isArray(props.disabled)
+        ? props.disabled.includes('prev-year')
+        : !!props.disabled
+    })
+    const disableNextYear = computed(() => {
+      return Array.isArray(props.disabled)
+        ? props.disabled.includes('next-year')
         : !!props.disabled
     })
 
@@ -140,7 +152,7 @@ export const VDatePickerControls = genericComponent<VDatePickerControlsSlots>()(
       const prevMonth = (
         <VBtn
           data-testid="prev-month"
-          disabled={ disablePrev.value }
+          disabled={ disablePrevMonth.value }
           icon={ props.prevIcon }
           onClick={ onClickPrevMonth }
         />
@@ -149,7 +161,7 @@ export const VDatePickerControls = genericComponent<VDatePickerControlsSlots>()(
       const nextMonth = (
         <VBtn
           data-testid="next-month"
-          disabled={ disableNext.value }
+          disabled={ disableNextMonth.value }
           icon={ props.nextIcon }
           onClick={ onClickNextMonth }
         />
@@ -158,7 +170,7 @@ export const VDatePickerControls = genericComponent<VDatePickerControlsSlots>()(
       const prevYear = (
         <VBtn
           data-testid="prev-year"
-          disabled={ disablePrev.value }
+          disabled={ disablePrevYear.value }
           icon={ props.prevIcon }
           onClick={ onClickPrevYear }
         />
@@ -167,7 +179,7 @@ export const VDatePickerControls = genericComponent<VDatePickerControlsSlots>()(
       const nextYear = (
         <VBtn
           data-testid="next-year"
-          disabled={ disableNext.value }
+          disabled={ disableNextYear.value }
           icon={ props.nextIcon }
           onClick={ onClickNextYear }
         />
@@ -232,6 +244,9 @@ export const VDatePickerControls = genericComponent<VDatePickerControlsSlots>()(
       )
 
       const slotProps = {
+        viewMode: props.viewMode,
+        disabled: props.disabled,
+        monthYearText: props.text,
         monthText: props.monthText,
         yearText: props.yearText,
         openMonths: onClickMonth,
