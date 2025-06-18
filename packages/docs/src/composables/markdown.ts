@@ -1,3 +1,5 @@
+import octokit from '@/plugins/octokit'
+
 export function useMarkdown () {
   const one = useOneStore()
   const route = useRoute()
@@ -20,22 +22,28 @@ export function useMarkdown () {
     markdownContent += `Source: ${window.location.origin}${route.path}\\n\\n`
 
     try {
-      const mdPath = `/src/pages${route.path.replace(/\/$/, '')}.md`
-      const response = await fetch(mdPath)
-      if (response.ok) {
-        const rawMd = await response.text()
+      const path = `packages/docs/src/pages${route.path.replace(/\/$/, '')}.md`
+
+      const response = await octokit.request('GET /repos/{owner}/{repo}/contents/{path}', {
+        owner: 'vuetifyjs',
+        repo: 'vuetify',
+        path,
+      })
+
+      if (response.data && 'content' in response.data) {
+        const rawMd = atob(response.data.content)
         const contentWithoutFrontmatter = rawMd.replace(/---[\\s\\S]*?---/, '').trim()
         markdownContent += contentWithoutFrontmatter
       } else {
         markdownContent += 'Could not fetch page content.'
       }
     } catch (error) {
-      console.error('Error fetching page content:', error)
+      console.error('Error fetching page content from GitHub:', error)
       markdownContent += 'Error fetching page content.'
     }
 
     try {
-      await navigator.clipboard.writeText(markdownContent)
+      navigator.clipboard.writeText(markdownContent)
       copied.value = true
       setTimeout(() => (copied.value = false), 2000)
     } catch (err) {
