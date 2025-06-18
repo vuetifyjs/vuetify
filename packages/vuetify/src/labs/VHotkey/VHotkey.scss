@@ -7,14 +7,6 @@
     gap: 4px;
 
     &__key.v-kbd {
-      background: rgba(var(--v-theme-on-surface), 0.1);
-      border: thin solid rgba(var(--v-theme-on-surface), 0.2);
-      border-radius: 4px;
-      padding: 4px;
-      font-size: 0.75rem;
-      line-height: 1;
-      min-width: 20px;
-      white-space: nowrap;
       text-align: center;
     }
 

@@ -6,9 +6,11 @@
     background: rgb(var(--v-theme-kbd))
     color: rgb(var(--v-theme-on-kbd))
     border-radius: $kbd-border-radius
+    border: thin solid rgba(var(--v-theme-on-surface), 0.12)
     display: $kbd-display
     font-size: $kbd-font-size
     font-weight: $kbd-font-weight
     padding: $kbd-padding
-
-    @include tools.elevation($kbd-elevation)
+    min-width: $kbd-min-width
+    white-space: nowrap
+    line-height: $kbd-line-height

@@ -31,6 +31,7 @@ import { genericComponent, mergeDeep, propsFactory, useRender } from '@/util'
 // Types
 import type { PropType } from 'vue'
 import type { IconValue } from '@/composables/icons'
+import { h } from 'vue'
 
 // Display mode types for different visual representations
 type DisplayMode = 'icon' | 'symbol' | 'text'
@@ -66,6 +67,17 @@ function createKey (config: PlatformKeyConfig) {
   return (mode: DisplayMode, isMac: boolean): KeyDisplay => {
     const keyConfig = (isMac && config.mac) ? config.mac : config.default
     const value = keyConfig[mode] ?? keyConfig.text
+
+    // If we requested icon mode but no icon is available, fallback to text mode
+    if (mode === 'icon' && !keyConfig.icon) {
+      return ['text', value]
+    }
+
+    // If we requested symbol mode but no symbol is available, fallback to text mode
+    if (mode === 'symbol' && !keyConfig.symbol) {
+      return ['text', value]
+    }
+
     return mode === 'icon' ? ['icon', value as IconValue] : [mode as Exclude<DisplayMode, 'icon'>, value]
   }
 }

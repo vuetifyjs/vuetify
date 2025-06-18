@@ -124,6 +124,7 @@ export default {
     shift: 'Shift',
     alt: 'Alt',
     enter: 'Enter',
+    escape: 'Escape',
     upArrow: 'Up Arrow',
     downArrow: 'Down Arrow',
     leftArrow: 'Left Arrow',

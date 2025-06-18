@@ -248,4 +248,77 @@ describe('VHotkey', () => {
       expect(wrapper.findAll('.v-hotkey__key')).toHaveLength(0)
     })
   })
+
+  describe('Text-only Key Configuration', () => {
+    it('should render text value when only text is provided in key config (text mode)', () => {
+      const wrapper = mountVHotkey({
+        keys: 'escape',
+        displayMode: 'text',
+      })
+
+      const keys = wrapper.findAll('.v-hotkey__key')
+      expect(keys).toHaveLength(1)
+      expect(keys[0].text()).toBe('Escape') // Should show localized text
+      expect(keys[0].classes()).toContain('v-hotkey__key-text')
+    })
+
+    it('should fallback to text when only text is provided in key config (symbol mode)', () => {
+      const wrapper = mountVHotkey({
+        keys: 'escape',
+        displayMode: 'symbol',
+      })
+
+      const keys = wrapper.findAll('.v-hotkey__key')
+      expect(keys).toHaveLength(1)
+      // Should fallback to text when symbol is not available
+      expect(keys[0].text()).toBe('Escape')
+      expect(keys[0].classes()).toContain('v-hotkey__key-text') // Should use text CSS class when fallback occurs
+    })
+
+    it('should fallback to text when only text is provided in key config (icon mode)', () => {
+      const wrapper = mountVHotkey({
+        keys: 'escape',
+        displayMode: 'icon',
+      })
+
+      const keys = wrapper.findAll('.v-hotkey__key')
+      expect(keys).toHaveLength(1)
+      // Should fallback to text when icon is not available
+      expect(keys[0].text()).toBe('Escape')
+      expect(keys[0].classes()).toContain('v-hotkey__key-text') // Should use text CSS class when fallback occurs
+    })
+
+    it('should handle custom key with only text config in all display modes', () => {
+      const customKeyMap = {
+        customkey: (mode: any, isMac: boolean) => ['text', 'CUSTOM'] as ['text', string],
+      }
+
+      // Test text mode
+      const wrapperText = mountVHotkey({
+        keys: 'customkey',
+        displayMode: 'text',
+        keyMap: customKeyMap,
+      })
+      expect(wrapperText.findAll('.v-hotkey__key')[0].text()).toBe('CUSTOM')
+      expect(wrapperText.findAll('.v-hotkey__key')[0].classes()).toContain('v-hotkey__key-text')
+
+      // Test symbol mode - should fallback to text since custom key only provides text
+      const wrapperSymbol = mountVHotkey({
+        keys: 'customkey',
+        displayMode: 'symbol',
+        keyMap: customKeyMap,
+      })
+      expect(wrapperSymbol.findAll('.v-hotkey__key')[0].text()).toBe('CUSTOM')
+      expect(wrapperSymbol.findAll('.v-hotkey__key')[0].classes()).toContain('v-hotkey__key-text')
+
+      // Test icon mode - should fallback to text since custom key only provides text
+      const wrapperIcon = mountVHotkey({
+        keys: 'customkey',
+        displayMode: 'icon',
+        keyMap: customKeyMap,
+      })
+      expect(wrapperIcon.findAll('.v-hotkey__key')[0].text()).toBe('CUSTOM')
+      expect(wrapperIcon.findAll('.v-hotkey__key')[0].classes()).toContain('v-hotkey__key-text')
+    })
+  })
 })

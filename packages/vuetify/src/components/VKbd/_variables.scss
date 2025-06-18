@@ -1,7 +1,9 @@
 // VKbd
-$kbd-border-radius: 3px !default;
+$kbd-border-radius: 4px !default;
 $kbd-display: inline !default;
-$kbd-elevation: 2 !default;
-$kbd-font-size: 85% !default;
+$kbd-elevation: 1 !default;
+$kbd-font-size: 0.75rem !default;
 $kbd-font-weight: normal !default;
-$kbd-padding: .2em .4rem !default;
+$kbd-padding: 4px !default;
+$kbd-min-width: 20px !default;
+$kbd-line-height: 1 !default;
