@@ -1,6 +1,7 @@
 <template>
   <v-treeview
     :items="items"
+    item-value="id"
     fluid
   ></v-treeview>
 </template>

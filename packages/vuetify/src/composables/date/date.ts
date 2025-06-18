@@ -90,7 +90,11 @@ export function createDate (options: DateOptions | undefined, locale: LocaleInst
 }
 
 export function createDateRange (adapter: DateInstance, start: unknown, stop?: unknown) {
-  const diff = adapter.getDiff(stop ?? start, start, 'days')
+  const diff = adapter.getDiff(
+    adapter.endOfDay(stop ?? start),
+    adapter.startOfDay(start),
+    'days'
+  )
   const datesInRange = [start]
 
   for (let i = 1; i < diff; i++) {
