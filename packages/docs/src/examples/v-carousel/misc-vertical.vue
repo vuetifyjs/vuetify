@@ -16,6 +16,7 @@
           :src="item.src"
           cover
         ></v-carousel-item>
+
         <v-overlay
           :scrim="false"
           content-class="w-100 h-100 d-flex flex-column align-center justify-space-between click-through py-3"
@@ -37,7 +38,12 @@
               ></v-list-item>
             </v-sheet>
           </v-scroll-x-transition>
-          <v-chip color="#eee" size="small" variant="flat">{{ currentIndex + 1 }} / {{ items.length }}</v-chip>
+          <v-chip
+            :text="`{{ currentIndex + 1 }} / ${items.length }`"
+            color="#eee"
+            size="small"
+            variant="flat"
+          ></v-chip>
         </v-overlay>
       </v-carousel>
     </v-sheet>
@@ -118,11 +124,12 @@
   }
 </script>
 
-<style scoped>
+<style>
 .click-through {
   pointer-events: none;
-  > * {
-    pointer-events: auto;
-  }
+}
+
+.click-through > * {
+  pointer-events: auto;
 }
 </style>
