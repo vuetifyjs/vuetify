@@ -193,6 +193,7 @@ export const VDatePickerControls = genericComponent<VDatePickerControlsSlots>()(
           disabled={ disableMonth.value }
           text={ props.monthText }
           appendIcon={ props.modeIcon }
+          rounded
           onClick={ onClickMonth }
         />
       )
@@ -205,6 +206,7 @@ export const VDatePickerControls = genericComponent<VDatePickerControlsSlots>()(
           disabled={ disableYear.value }
           text={ props.yearText }
           appendIcon={ props.modeIcon }
+          rounded
           onClick={ onClickYear }
         />
       )
