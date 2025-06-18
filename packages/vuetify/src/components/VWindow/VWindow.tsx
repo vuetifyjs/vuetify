@@ -229,7 +229,7 @@ export const VWindow = genericComponent<new <T>(
           'v-window',
           {
             'v-window--show-arrows-on-hover': props.showArrows === 'hover',
-            'v-window--vertical-arrows': props.verticalArrows,
+            'v-window--vertical-arrows': !!props.verticalArrows,
           },
           themeClasses.value,
           props.class,
@@ -247,14 +247,11 @@ export const VWindow = genericComponent<new <T>(
 
           { props.showArrows !== false && (
             <div
-              class="v-window__controls"
-              style={{
-                alignItems: props.verticalArrows === 'right'
-                  ? 'end'
-                  : props.verticalArrows
-                    ? 'start'
-                    : 'center',
-              }}
+              class={[
+                'v-window__controls',
+                { 'v-window__controls--left': props.verticalArrows === 'left' || props.verticalArrows === true },
+                { 'v-window__controls--right': props.verticalArrows === 'right' },
+              ]}
             >
               { arrows.value }
             </div>

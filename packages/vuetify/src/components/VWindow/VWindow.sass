@@ -46,6 +46,13 @@
         flex-direction: column
         justify-content: center
         gap: $window-controls-vertical-gap
+
+        &--left
+          align-items: start
+
+        &--right
+          align-items: end
+
         .v-window__left,
         .v-window__right
           .v-icon
@@ -94,4 +101,3 @@
 
       &-leave-to
         transform: translateY(100%)
-window__controls

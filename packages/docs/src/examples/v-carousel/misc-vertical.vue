@@ -39,7 +39,7 @@
             </v-sheet>
           </v-scroll-x-transition>
           <v-chip
-            :text="`{{ currentIndex + 1 }} / ${items.length }`"
+            :text="`${ currentIndex + 1 } / ${items.length }`"
             color="#eee"
             size="small"
             variant="flat"
