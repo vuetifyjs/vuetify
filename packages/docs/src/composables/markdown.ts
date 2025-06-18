@@ -7,6 +7,8 @@ export function useMarkdown () {
   const copied = shallowRef(false)
   const isClipboardSupported = !!navigator.clipboard
 
+  const branch = getBranch()
+
   async function copyPageAsMarkdown () {
     if (!isClipboardSupported) {
       console.error('Native Clipboard API is not supported.')
@@ -28,6 +30,7 @@ export function useMarkdown () {
         owner: 'vuetifyjs',
         repo: 'vuetify',
         path,
+        ref: branch,
       })
 
       if (response.data && 'content' in response.data) {
