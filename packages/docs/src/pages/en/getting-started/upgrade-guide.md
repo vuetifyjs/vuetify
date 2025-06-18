@@ -273,6 +273,7 @@ app.use(vuetify)
 ### v-tabs
 
 - `v-tab-item` has been removed, use `v-window-item`
+- `optional` has been replaced with `:mandatory="false"`
 
 ### v-img
 

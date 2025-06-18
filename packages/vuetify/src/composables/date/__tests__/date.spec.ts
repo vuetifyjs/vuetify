@@ -1,5 +1,6 @@
 // Utilities
 import { VuetifyDateAdapter } from '../adapters/vuetify'
+import { createDateRange } from '../date'
 
 // Types
 import type { IUtils } from '@date-io/core/IUtils'
@@ -88,5 +89,88 @@ describe('date.ts', () => {
     const adapter2 = new VuetifyDateAdapter({ locale: 'fr' })
     expect(adapter2.getWeek(new Date('2025-01-05'))).toBe(1) // sunday
     expect(adapter2.getWeek(new Date('2025-01-06'))).toBe(2) // monday
+  })
+
+  describe('createDateRange', () => {
+    const adapter = new VuetifyDateAdapter({ locale: 'en-US' })
+
+    it('should create a single date array when only start date is provided', () => {
+      const start = new Date('2024-01-01')
+      const result = createDateRange(adapter, start)
+
+      expect(result).toHaveLength(1)
+      expect(result[0]).toEqual(start)
+    })
+
+    it('should handle same start and stop date', () => {
+      const date = new Date('2024-01-01')
+      const result = createDateRange(adapter, date, date)
+
+      expect(result[0]).toEqual(date)
+      expect(result[1]).toEqual(adapter.endOfDay(date))
+    })
+
+    it('should create a range of dates between start and stop', () => {
+      const start = new Date('2024-01-01')
+      const stop = new Date('2024-01-03')
+      const result = createDateRange(adapter, start, stop)
+
+      expect(result).toHaveLength(3)
+      expect(result[0]).toEqual(start)
+      expect(result[1]).toEqual(new Date('2024-01-02'))
+      expect(result[2]).toEqual(adapter.endOfDay(stop))
+    })
+
+    it('should handle dates in different months', () => {
+      const start = new Date('2024-01-30')
+      const stop = new Date('2024-02-02')
+      const result = createDateRange(adapter, start, stop)
+
+      expect(result).toHaveLength(4)
+      expect(result[0]).toEqual(start)
+      expect(result[1]).toEqual(new Date('2024-01-31'))
+      expect(result[2]).toEqual(new Date('2024-02-01'))
+      expect(result[3]).toEqual(adapter.endOfDay(stop))
+    })
+
+    it('should handle dates in different years', () => {
+      const start = new Date('2024-12-30')
+      const stop = new Date('2025-01-02')
+      const result = createDateRange(adapter, start, stop)
+
+      expect(result).toHaveLength(4)
+      expect(result[0]).toEqual(start)
+      expect(result[1]).toEqual(new Date('2024-12-31'))
+      expect(result[2]).toEqual(new Date('2025-01-01'))
+      expect(result[3]).toEqual(adapter.endOfDay(stop))
+    })
+
+    it('should not miss any days near ST/DST transition', () => {
+      // values passed to createDateRange on VDateInput blur when TZ=Europe/Warsaw
+      const start = new Date('2025-03-28T23:00:00.000Z')
+      const stop = new Date('2025-03-30T22:00:00.000Z')
+      const result = createDateRange(adapter, start, stop)
+
+      expect(result).toHaveLength(3)
+    })
+  })
+})
+
+describe('week numbers with time zone', () => {
+  beforeAll(() => vi.stubEnv('TZ', 'America/Los_Angeles'))
+  afterAll(() => vi.unstubAllEnvs())
+
+  it('should calculate weeks correctly near ST/DST transition', () => {
+    const adapter = new VuetifyDateAdapter({ locale: 'en-US' })
+    expect(adapter.getWeek(adapter.parseISO('2025-03-15'))).toBe(11)
+    expect(adapter.getWeek(adapter.parseISO('2025-03-16'))).toBe(12)
+    expect(adapter.getWeek(adapter.parseISO('2025-03-17'))).toBe(12)
+  })
+
+  it('should calculate weeks correctly near DST/ST transition', () => {
+    const adapter = new VuetifyDateAdapter({ locale: 'en-US' })
+    expect(adapter.getWeek(adapter.parseISO('2025-11-01'))).toBe(44)
+    expect(adapter.getWeek(adapter.parseISO('2025-11-02'))).toBe(45)
+    expect(adapter.getWeek(adapter.parseISO('2025-11-03'))).toBe(45)
   })
 })

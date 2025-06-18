@@ -82,7 +82,7 @@
           <ais-configure
             :facetFilters="[`lang:${locale}`]"
             :hitsPerPage="50"
-            :query="searchTerm"
+            :query="searchString"
           />
 
           <ais-hits v-slot="{ items }">
@@ -95,9 +95,15 @@
         </ais-instant-search>
       </v-card-text>
 
-      <v-divider class="my-4" />
+      <v-divider class="mt-4" />
 
-      <AisPoweredBy class="ms-auto me-4 mb-2" />
+      <div class="d-flex mx-4 my-2 align-center">
+        <AppLink class="text-caption" href="https://www.algolia.com/doc/api-reference/api-parameters/advancedSyntax/#how-to-use">
+          Advanced search
+        </AppLink>
+        <v-spacer />
+        <AisPoweredBy class="pt-2" />
+      </div>
     </v-card>
   </v-dialog>
 </template>
@@ -119,9 +125,6 @@
   const model = defineModel<boolean>()
   const searchString = defineModel('search', { type: String, default: '' })
 
-  // Algolia doesn't tokenize hyphens by default. Sanitize search string.
-  const searchTerm = computed(() => searchString.value.replace(/-/g, ' '))
-
   const list = ref<InstanceType<typeof SearchResults>>()
   const searchClient = algoliasearch(
     'NHT6C0IV19', // docsearch app ID
@@ -134,11 +137,11 @@
     if (!Array.isArray(value)) {
       return []
     }
-    return value
+    return value.filter(Boolean)
   }
 
   const searches = shallowRef(getLocalStorage('searches'))
-  const favorites = shallowRef(getLocalStorage('favorite'))
+  const favorites = shallowRef(getLocalStorage('favorites'))
 
   const locale = 'en'
 
@@ -232,7 +235,9 @@
     source.splice(index, 1)
 
     const target = to.value.slice(0, 6)
-    target.unshift(item)
+    if (item) {
+      target.unshift(item)
+    }
 
     from.value = source
     to.value = target

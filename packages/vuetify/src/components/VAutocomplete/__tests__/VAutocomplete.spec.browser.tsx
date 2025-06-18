@@ -392,7 +392,7 @@ describe('VAutocomplete', () => {
         { code: 'de-DE', name: 'German' },
       ]
 
-      const { container } = render(() => (
+      render(() => (
         <VAutocomplete
           label="Language"
           items={ items }
@@ -402,7 +402,7 @@ describe('VAutocomplete', () => {
         />
       ))
 
-      expect(container.querySelector('.v-field')).not.toHaveClass('v-field--dirty')
+      expect(screen.getByCSS('.v-field')).not.toHaveClass('v-field--dirty')
     })
   })
 
@@ -681,6 +681,17 @@ describe('VAutocomplete', () => {
     await userEvent.keyboard('Item 1')
     await userEvent.click(await screen.findByRole('option'))
     await expect.poll(() => selectedItem.value).toBe('Item 1')
+  })
+
+  it('should not fire @update:focus twice when clicking bottom of input', async () => {
+    const onFocus = vi.fn()
+    const { element } = render(() => (
+      <VAutocomplete onUpdate:focused={ onFocus } />
+    ))
+
+    await userEvent.click(element, { y: 1 })
+
+    expect(onFocus).toHaveBeenCalledTimes(1)
   })
 
   describe('Showcase', () => {
