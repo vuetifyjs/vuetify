@@ -281,6 +281,10 @@
         "subfolder": "components"
       },
       {
+        "title": "hotkeys",
+        "subfolder": "components"
+      },
+      {
         "title": "rules",
         "subfolder": "features"
       }
