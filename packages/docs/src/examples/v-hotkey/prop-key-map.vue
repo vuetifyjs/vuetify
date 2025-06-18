@@ -69,42 +69,44 @@
 </template>
 
 <script setup>
+  /**
+   * Creates a key function from declarative configuration
+   * This approach separates platform logic from display mode logic
+   */
+  function createKey (config) {
+    return (mode, isMac) => {
+      const keyConfig = (isMac && config.mac) ? config.mac : config.default
+      const value = keyConfig[mode] ?? keyConfig.text
 
-  // Custom key mapping example
+      // If we requested icon mode but no icon is available, fallback to text mode
+      if (mode === 'icon' && !keyConfig.icon) {
+        return ['text', value]
+      }
+
+      // If we requested symbol mode but no symbol is available, fallback to text mode
+      if (mode === 'symbol' && !keyConfig.symbol) {
+        return ['text', value]
+      }
+
+      return mode === 'icon' ? ['icon', value] : [mode, value]
+    }
+  }
+
+  // Custom key mapping example using the new declarative configuration
   const customKeyMap = {
-    ctrl: (mode, isMac) => {
-      const keyConfig = {
-        symbol: '⌃',
-        icon: '$ctrl',
-        text: 'Control',
-      }
-      const value = keyConfig[mode] ?? keyConfig.text
-      return mode === 'icon' ? ['icon', value] : [mode, value]
-    },
-    alt: (mode, isMac) => {
-      const keyConfig = isMac
-        ? { symbol: '⌥', icon: '$alt', text: 'Option' }
-        : { symbol: '⎇', icon: '$alt', text: 'Alt' }
-      const value = keyConfig[mode] ?? keyConfig.text
-      return mode === 'icon' ? ['icon', value] : [mode, value]
-    },
-    shift: (mode, isMac) => {
-      const keyConfig = {
-        symbol: '⇧',
-        icon: '$shift',
-        text: 'Shift',
-      }
-      const value = keyConfig[mode] ?? keyConfig.text
-      return mode === 'icon' ? ['icon', value] : [mode, value]
-    },
-    enter: (mode, isMac) => {
-      const keyConfig = {
-        symbol: '⏎',
-        icon: '$enter',
-        text: 'Return',
-      }
-      const value = keyConfig[mode] ?? keyConfig.text
-      return mode === 'icon' ? ['icon', value] : [mode, value]
-    },
+    ctrl: createKey({
+      mac: { symbol: '⌃', icon: '$ctrl', text: 'Control' },
+      default: { symbol: '⌃', icon: '$ctrl', text: 'Control' },
+    }),
+    alt: createKey({
+      mac: { symbol: '⌥', icon: '$alt', text: 'Option' },
+      default: { symbol: '⎇', icon: '$alt', text: 'Alt' },
+    }),
+    shift: createKey({
+      default: { symbol: '⇧', icon: '$shift', text: 'Shift' },
+    }),
+    enter: createKey({
+      default: { symbol: '⏎', icon: '$enter', text: 'Return' },
+    }),
   }
 </script>

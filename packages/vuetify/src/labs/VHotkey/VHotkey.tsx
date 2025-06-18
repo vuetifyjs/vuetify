@@ -31,7 +31,6 @@ import { genericComponent, mergeDeep, propsFactory, useRender } from '@/util'
 // Types
 import type { PropType } from 'vue'
 import type { IconValue } from '@/composables/icons'
-import { h } from 'vue'
 
 // Display mode types for different visual representations
 type DisplayMode = 'icon' | 'symbol' | 'text'
