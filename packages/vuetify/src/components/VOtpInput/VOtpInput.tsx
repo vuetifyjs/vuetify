@@ -10,11 +10,12 @@ import { VProgressCircular } from '@/components/VProgressCircular/VProgressCircu
 import { provideDefaults } from '@/composables/defaults'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeFocusProps, useFocus } from '@/composables/focus'
+import { useIntersectionObserver } from '@/composables/intersectionObserver'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, nextTick, ref, toRef, watch } from 'vue'
+import { computed, effectScope, nextTick, ref, toRef, watch, watchEffect } from 'vue'
 import { filterInputAttrs, focusChild, genericComponent, pick, propsFactory, useRender } from '@/util'
 
 // Types
@@ -97,6 +98,19 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
     const inputRef = ref<HTMLInputElement[]>([])
     const current = computed(() => inputRef.value[focusIndex.value])
 
+    const intersectScope = effectScope()
+    intersectScope.run(() => {
+      const { intersectionRef, isIntersecting } = useIntersectionObserver()
+      watch(isIntersecting, v => {
+        if (!v) return
+        intersectionRef.value?.focus()
+        intersectScope.stop()
+      })
+      watchEffect(() => {
+        intersectionRef.value = inputRef.value[0]
+      })
+    })
+
     function onInput () {
       // The maxlength attribute doesn't work for the number type input, so the text type is used.
       // The following logic simulates the behavior of a number input.
@@ -166,7 +180,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
       e.preventDefault()
       e.stopPropagation()
 
-      const clipboardText = e?.clipboardData?.getData('Text').slice(0, length.value) ?? ''
+      const clipboardText = e?.clipboardData?.getData('Text').trim().slice(0, length.value) ?? ''
       const finalIndex = clipboardText.length - 1 === -1 ? index : clipboardText.length - 1
 
       if (isValidNumber(clipboardText)) return
@@ -208,7 +222,10 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
     }, { scoped: true })
 
     watch(model, val => {
-      if (val.length === length.value) emit('finish', val.join(''))
+      if (val.length === length.value) {
+        focusIndex.value = length.value - 1
+        emit('finish', val.join(''))
+      }
     }, { deep: true })
 
     watch(focusIndex, val => {

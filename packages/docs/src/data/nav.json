@@ -168,6 +168,7 @@
       "sparklines",
       "infinite-scroller",
       "tables",
+      "treeview",
       "virtual-scroller",
       { "divider": true },
       { "subheader": "grids" },
@@ -277,7 +278,7 @@
         "subfolder": "components"
       },
       {
-        "title": "treeview",
+        "title": "mask-inputs",
         "subfolder": "components"
       },
       {
