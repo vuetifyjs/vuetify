@@ -1,6 +1,5 @@
 {
   "props": {
-    "accept": "One or more [unique file type specifiers](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#Unique_file_type_specifiers) describing file types to allow.",
     "active": "Controls the **active** state of the item. This is typically used to highlight the component.",
     "activeClass": "The class applied to the component when it is in an active state.",
     "activeColor": "The applied color when the component is in an active state.",
@@ -51,6 +50,7 @@
     "size": "Sets the height and width of the component.",
     "subtitle": "Specify a subtitle text for the component.",
     "start": "Applies margin at the end of the component.",
+    "strictAccept": "Make the input accept only files matched by one or more [unique file type specifiers](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#Unique_file_type_specifiers). Applies to drag & drop and selecting folders.",
     "symbol": "The [Symbol](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol) used to hook into group functionality for components like [v-btn-toggle](/components/btn-toggle) and [v-bottom-navigation](/components/bottom-navigations/).",
     "tag": "Specify a custom tag used on the root element.",
     "text": "Specify content text for the component.",

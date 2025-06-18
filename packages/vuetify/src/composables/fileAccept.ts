@@ -3,7 +3,7 @@ import { computed } from 'vue'
 import { propsFactory } from '@/util'
 
 export interface FileAcceptProps {
-  accept?: string
+  strictAccept?: string
 }
 
 export type FileAcceptFilterResult = {
@@ -13,11 +13,11 @@ export type FileAcceptFilterResult = {
 
 // Composables
 export const makeFileAcceptProps = propsFactory({
-  accept: String,
+  strictAccept: String,
 }, 'file-accept')
 
 export function useFileAccept (props: FileAcceptProps) {
-  const fileFilter = computed(() => props.accept ? createFilter(props.accept) : null)
+  const fileFilter = computed(() => props.strictAccept ? createFilter(props.strictAccept) : null)
 
   function filterAccepted (files: File[]): FileAcceptFilterResult {
     if (fileFilter.value) {

@@ -183,7 +183,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
     function onFileSelection (e: Event) {
       if (!e.target || (e as any).repack) return // prevent loop
 
-      if (!props.accept) {
+      if (!props.strictAccept) {
         const target = e.target as HTMLInputElement
         model.value = [...target.files ?? []]
       } else {
@@ -227,7 +227,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
       const fieldProps = VField.filterProps(props)
 
       const expectsDirectory = attrs.webkitdirectory !== undefined && attrs.webkitdirectory !== false
-      const inputAccept = expectsDirectory ? undefined : props.accept
+      const inputAccept = expectsDirectory ? undefined : (props.strictAccept ?? String(attrs.accept))
 
       return (
         <VInput
