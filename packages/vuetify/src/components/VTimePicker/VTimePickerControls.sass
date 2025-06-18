@@ -1,4 +1,6 @@
+@use 'sass:map'
 @use '../../styles/tools'
+@use '../../styles/settings'
 @use './variables' as *
 
 @include tools.layer('components')
@@ -7,10 +9,8 @@
     align-items: center
     justify-content: center
     font-size: .875rem
-    padding-top: 4px
-    padding-bottom: 4px
     margin-inline: $time-picker-padding
-    margin-bottom: 18px
+    margin-bottom: 12px
 
     &__text
       padding-bottom: 12px
@@ -20,34 +20,78 @@
       white-space: nowrap
       direction: ltr
       justify-content: center
+      align-items: start
 
-      &__btn.v-btn--density-default.v-btn
-        width: $time-picker-controls-btn-width
-        height: $time-picker-controls-btn-height
-        font-size: $time-picker-controls-btn-font
+  .v-time-picker-controls__time__btn.v-btn--density-default.v-btn
+    width: $time-picker-controls-btn-width
+    height: $time-picker-controls-btn-height
+    font-size: $time-picker-controls-btn-font
 
-        &__active
-          background: rgb(var(--v-theme-primary))
-        &.v-time-picker-controls__time--with-ampm__btn
-          width: $time-picker-controls-ampm-btn-width
-          height: $time-picker-controls-ampm-btn-height
-        &.v-time-picker-controls__time--with-seconds__btn
-          // overridden
-          width: $time-picker-controls-seconds-btn-width
-          height: $time-picker-controls-seconds-btn-height
-          font-size: $time-picker-controls-seconds-btn-font
-      &__separator
-        font-size: $time-picker-controls-btn-font
-        height: $time-picker-controls-btn-height
-        width: $time-picker-controls-separator-width
-        text-align: center
-      &__separator.v-time-picker-controls--with-seconds__time__separator
-        height: $time-picker-controls-seconds-btn-height
-        font-size: $time-picker-controls-btn-font
+  .v-time-picker-controls__time__separator
+    font-size: $time-picker-controls-btn-font
+    line-height: $time-picker-controls-separator-line-height
+    height: $time-picker-controls-btn-height
+    width: $time-picker-controls-separator-width
+    text-align: center
+
+    .v-time-picker--variant-input &
+      line-height: $time-picker-controls-input-separator-line-height
+
+    .v-time-picker-controls__time--with-seconds &
+      height: $time-picker-controls-seconds-btn-height
+      font-size: $time-picker-controls-btn-font
+
+  .v-time-picker-controls__time__field
+    height: $time-picker-controls-field-height
+    width: $time-picker-controls-field-width
+
+    .v-field
+      width: $time-picker-controls-field-width
+      font-size: $time-picker-controls-field-font
+      background-color: $time-picker-controls-field-background
+      color: inherit
+      transition: color .25s settings.$standard-easing
+
+      > .v-field__overlay
+        opacity: $time-picker-controls-field-overlay-opacity
+
+    &--active .v-field > .v-field__overlay
+      opacity: calc((#{$time-picker-controls-field-overlay-opacity} + #{map.get(settings.$states, 'focus')}) * var(--v-theme-overlay-multiplier))
+
+    .v-time-picker--variant-input &
+      height: $time-picker-controls-input-field-height
+      width: $time-picker-controls-input-field-width
+
+      .v-field
+        width: $time-picker-controls-input-field-width
+        font-size: $time-picker-controls-input-field-font
+
+    .v-time-picker-controls__time--with-seconds &
+      width: $time-picker-controls-seconds-field-width
+
+      .v-time-picker--variant-input &
+        width: $time-picker-controls-input-seconds-field-width
+
+      .v-field
+        font-size: $time-picker-controls-seconds-field-font
+
+    .v-field__input
+      padding: 0
+      font-weight: 500
+      text-align: center
+      line-height: 1
+      align-self: center
+
+      &:focus::placeholder
+        opacity: 0
+
+  .v-time-picker-controls__field-label
+    font-size: $time-picker-field-label-font-size
+    letter-spacing: $time-picker-field-label-letter-spacing
+    padding-top: 6px
 
   .v-time-picker-controls__ampm
     margin-left: 12px
-    align-self: flex-end
     display: flex
     flex-direction: column
     font-size: $time-picker-ampm-title-font-size
@@ -74,6 +118,9 @@
         border-top: none
       &__active
         background: rgb(var(--v-theme-primary))
+
+      .v-time-picker--variant-input &
+        height: $time-picker-controls-input-ampm-height
 
   .v-picker__title--landscape
     .v-time-picker-controls
