@@ -117,4 +117,18 @@ export default {
     notEmpty: 'Please choose at least one value',
     pattern: 'Invalid format',
   },
+  hotkey: {
+    then: 'then',
+    ctrl: 'Ctrl',
+    command: 'Command',
+    shift: 'Shift',
+    alt: 'Alt',
+    enter: 'Enter',
+    upArrow: 'Up Arrow',
+    downArrow: 'Down Arrow',
+    leftArrow: 'Left Arrow',
+    rightArrow: 'Right Arrow',
+    backspace: 'Backspace',
+    option: 'Option',
+  },
 }

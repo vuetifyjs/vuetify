@@ -1,0 +1,10 @@
+{
+  "props": {
+    "keys": "String representing keyboard shortcuts to display. Supports multiple formats:\n- **Single keys:** `\"k\"`, `\"enter\"`, `\"escape\"`\n- **Key combinations:** `\"ctrl+k\"`, `\"meta+shift+p\"`, `\"alt+arrowup\"`\n- **Sequential actions:** `\"ctrl+k-then-p\"` (use dash for 'then' relationships)\n- **Multiple shortcuts:** `\"ctrl+k meta+p\"` (space-separated for alternative shortcuts)\n\nSupports platform-aware key names like `meta` (becomes Cmd on Mac, Ctrl on PC) and `alt` (becomes Option on Mac).",
+    "displayMode": "Controls how keyboard keys are visually represented. Affects the entire component's appearance:\n- **icon:** Uses SVG icons for keys (default) - compact and modern\n- **symbol:** Uses Unicode symbols (⌘, ⌃, ⇧, ⌥) - traditional Mac-style appearance\n- **text:** Uses full text labels (Command, Control, Shift, Alt) - most accessible and descriptive",
+    "keyMap": "Custom key mapping object that allows overriding default key representations. Each key in the map should be a function that takes `(mode: DisplayMode, isMac: boolean)` and returns a display configuration. This enables:\n- **Custom key definitions:** Add support for application-specific keys\n- **Localization:** Override text representations for different languages\n- **Brand customization:** Change how modifier keys appear\n- **Platform tweaks:** Fine-tune platform-specific behaviors\n\nRecommended to set at the application level via component defaults rather than per-instance for consistency."
+  },
+  "slots": {
+    "default": "The default Vue slot. Not supported."
+  }
+}
