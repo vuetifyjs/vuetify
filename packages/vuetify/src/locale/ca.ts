@@ -12,8 +12,8 @@ export default {
     loadingText: 'Carregant...',
   },
   selectionControl: {
-    checked: 'Checked',
-    unchecked: 'Not Checked',
+    checked: 'Marcat',
+    unchecked: 'No marcat',
   },
   dataTable: {
     itemsPerPageText: 'Files per pàgina:',

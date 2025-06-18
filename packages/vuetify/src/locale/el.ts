@@ -12,8 +12,8 @@ export default {
     loadingText: 'Loading item...',
   },
   selectionControl: {
-    checked: 'Checked',
-    unchecked: 'Not Checked',
+    checked: 'Επιλεγμένο',
+    unchecked: 'Μη επιλεγμένο',
   },
   dataTable: {
     itemsPerPageText: 'Γραμμές ανά σελίδα:',

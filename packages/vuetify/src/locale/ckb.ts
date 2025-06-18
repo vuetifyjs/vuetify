@@ -12,8 +12,8 @@ export default {
     loadingText: 'بارکردنی ئایتمەکان...',
   },
   selectionControl: {
-    checked: 'Checked',
-    unchecked: 'Not Checked',
+    checked: 'دیاریکراوە',
+    unchecked: 'دیارینەکراوە',
   },
   dataTable: {
     itemsPerPageText: 'ڕیزەکان بۆ هەر پەڕەیەک:',

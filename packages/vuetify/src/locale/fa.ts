@@ -12,8 +12,8 @@ export default {
     loadingText: 'در حال بارگذاری...',
   },
   selectionControl: {
-    checked: 'Checked',
-    unchecked: 'Not Checked',
+    checked: 'انتخاب شده',
+    unchecked: 'انتخاب نشده',
   },
   dataTable: {
     itemsPerPageText: 'ردیف در صفحه:',
