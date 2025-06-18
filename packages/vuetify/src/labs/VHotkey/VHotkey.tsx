@@ -242,16 +242,21 @@ export const VHotkey = genericComponent()({
           }, [])
           .flatMap(val => {
             if (isString(val)) {
+              // First, handle explicit "-then-" pattern
+              // Replace "-then-" with a special marker that we'll convert to THEN_DELINEATOR
+              const THEN_MARKER = '\u0001THEN\u0001' // Use control characters as unlikely markers
+              const processedVal = val.replace(/-then-/gi, THEN_MARKER)
+
               // Handle - separators (THEN delineators) with improved parsing
               // Only treat - as separator when it's between alphanumeric tokens
               // This prevents "shift+-" from being split incorrectly
               const dashSeparatedParts: Array<string | Delineator> = []
               let currentPart = ''
 
-              for (let i = 0; i < val.length; i++) {
-                const char = val[i]
-                const prevChar = val[i - 1]
-                const nextChar = val[i + 1]
+              for (let i = 0; i < processedVal.length; i++) {
+                const char = processedVal[i]
+                const prevChar = processedVal[i - 1]
+                const nextChar = processedVal[i + 1]
 
                 if (char === '-' &&
                     prevChar && /[a-zA-Z0-9]/.test(prevChar) &&
@@ -273,7 +278,27 @@ export const VHotkey = genericComponent()({
                 dashSeparatedParts.push(currentPart)
               }
 
-              return dashSeparatedParts
+              // Now process the THEN_MARKER tokens
+              return dashSeparatedParts.flatMap(part => {
+                if (isString(part) && part.includes(THEN_MARKER)) {
+                  // Split by THEN_MARKER and insert THEN_DELINEATOR between parts
+                  const parts = part.split(THEN_MARKER)
+                  const result: Array<string | Delineator> = []
+
+                  for (let i = 0; i < parts.length; i++) {
+                    if (parts[i]) { // Only add non-empty parts
+                      result.push(parts[i])
+                    }
+                    // Add THEN_DELINEATOR between parts (but not after the last part)
+                    if (i < parts.length - 1) {
+                      result.push(THEN_DELINEATOR)
+                    }
+                  }
+
+                  return result
+                }
+                return [part]
+              })
             }
             return [val]
           })
