@@ -9,9 +9,7 @@
     justify-content: space-between
     font-size: .875rem
     height: $date-picker-controls-height
-    padding-top: 4px
-    padding-bottom: 4px
-    padding-inline: 12px
+    padding: $date-picker-controls-padding
 
     .v-btn
       text-transform: none
@@ -20,12 +18,10 @@
       letter-spacing: initial
 
       > .v-btn__append > .v-icon
+        // matching VBtn for icon rotation
         transition-property: transform
         transition-duration: 0.28s
         transition-timing-function: settings.$standard-easing
-
-    .v-icon
-      font-size: 1.5em
 
     .v-date-picker--months &
       .v-date-picker-controls__only-month-btn
@@ -56,11 +52,13 @@
 
     & &__only-month-btn,
     & &__only-year-btn
-      padding-inline: 12px 8px
+      padding-inline: $date-picker-controls-docked-toggle-btn-padding
+
+      // just lower than default
       min-width: 40px
 
       > .v-btn__append
-        margin-inline: 4px -4px
+        margin-inline: $date-picker-controls-docked-toggle-append-margin-inline
 
   .v-date-picker__title
     display: inline-block
