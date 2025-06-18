@@ -20,25 +20,7 @@ The `v-treeview` component is useful for displaying large amounts of nested data
 
 <PageFeatures />
 
-::: warning
-
-This feature requires [v3.5.9](/getting-started/release-notes/?version=v3.5.9)
-
-:::
-
-## Installation
-
-Labs components require manual import and registration with the Vuetify instance.
-
-```js { resource="src/plugins/vuetify.js" }
-import { VTreeview } from 'vuetify/labs/VTreeview'
-
-export default createVuetify({
-  components: {
-    VTreeview,
-  },
-})
-```
+<DocIntroduced version="3.9.0" />
 
 ## Usage
 
@@ -59,7 +41,7 @@ A basic example of the treeview component.
 
 <ApiInline hide-links />
 
-::: error
+::: info
 
 There is a [bug](https://github.com/vuejs/babel-plugin-jsx/issues/712) related to how [babel-plugin-jsx](https://github.com/vuejs/babel-plugin-jsx) renders templates that degrades VTreeview performance. We are tracking the issue [here](https://github.com/vuetifyjs/vuetify/issues/19919).
 
