@@ -11,11 +11,9 @@ export default {
     noResultsText: 'មិនមានទិន្នន័យដែលត្រូវគ្នាទេ',
     loadingText: 'កំពុងដំណើរការ...',
   },
-  select: {
-    ariaLabel: {
-      checked: 'Checked',
-      unchecked: 'Not Checked',
-    },
+  selectionControl: {
+    checked: 'បានជ្រើស',
+    unchecked: 'មិនបានជ្រើស',
   },
   dataTable: {
     itemsPerPageText: 'ជ្រើសរើសពត៌មានក្នុងមួយទំព័រ:',

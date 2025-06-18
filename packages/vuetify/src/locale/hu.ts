@@ -11,11 +11,9 @@ export default {
     noResultsText: 'Nincs egyező találat',
     loadingText: 'Betöltés...',
   },
-  select: {
-    ariaLabel: {
-      checked: 'Checked',
-      unchecked: 'Not Checked',
-    },
+  selectionControl: {
+    checked: 'Kiválasztva',
+    unchecked: 'Nincs kiválasztva',
   },
   dataTable: {
     itemsPerPageText: 'Elem oldalanként:',

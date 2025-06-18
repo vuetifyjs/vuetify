@@ -11,11 +11,9 @@ export default {
     noResultsText: 'Ni iskanega zapisa',
     loadingText: 'Nalaganje ...',
   },
-  select: {
-    ariaLabel: {
-      checked: 'Checked',
-      unchecked: 'Not Checked',
-    },
+  selectionControl: {
+    checked: 'Izbrano',
+    unchecked: 'Ni izbrano',
   },
   dataTable: {
     itemsPerPageText: 'Vrstic na stran:',

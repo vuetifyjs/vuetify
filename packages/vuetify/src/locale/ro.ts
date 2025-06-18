@@ -11,11 +11,9 @@ export default {
     noResultsText: 'Nu s-au găsit înregistrări corespunzătoare',
     loadingText: 'Se încarcă articolele...',
   },
-  select: {
-    ariaLabel: {
-      checked: 'Checked',
-      unchecked: 'Not Checked',
-    },
+  selectionControl: {
+    checked: 'Selectat',
+    unchecked: 'Neselectat',
   },
   dataTable: {
     itemsPerPageText: 'Rânduri pe pagină:',

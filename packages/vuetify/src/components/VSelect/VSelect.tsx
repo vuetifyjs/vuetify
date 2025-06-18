@@ -441,8 +441,8 @@ export const VSelect = genericComponent<new <
                                         ripple={ false }
                                         tabindex="-1"
                                         aria-label={ isSelected
-                                          ? t('$vuetify.select.ariaLabel.checked')
-                                          : t('$vuetify.select.ariaLabel.unchecked')
+                                          ? t('$vuetify.selectionControl.checked')
+                                          : t('$vuetify.selectionControl.unchecked')
                                         }
                                       />
                                     ) : undefined }

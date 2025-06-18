@@ -11,11 +11,9 @@ export default {
     noResultsText: 'Vastavaid kirjeid ei leitud',
     loadingText: 'Andmeid laaditakse...',
   },
-  select: {
-    ariaLabel: {
-      checked: 'Checked',
-      unchecked: 'Not Checked',
-    },
+  selectionControl: {
+    checked: 'Valitud',
+    unchecked: 'Pole valitud',
   },
   dataTable: {
     itemsPerPageText: 'Ridu leheküljel:',

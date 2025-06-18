@@ -11,11 +11,9 @@ export default {
     noResultsText: 'لم يتم إيجاد نتائج',
     loadingText: 'يتم جلب العناصر...',
   },
-  select: {
-    ariaLabel: {
-      checked: 'Checked',
-      unchecked: 'Not Checked',
-    },
+  selectionControl: {
+    checked: 'محدد',
+    unchecked: 'غير محدد',
   },
   dataTable: {
     itemsPerPageText: 'عدد الصفوف لكل صفحة:',

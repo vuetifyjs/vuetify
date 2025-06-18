@@ -11,11 +11,9 @@ export default {
     noResultsText: 'Δε βρέθηκαν αποτελέσματα',
     loadingText: 'Loading item...',
   },
-  select: {
-    ariaLabel: {
-      checked: 'Checked',
-      unchecked: 'Not Checked',
-    },
+  selectionControl: {
+    checked: 'Checked',
+    unchecked: 'Not Checked',
   },
   dataTable: {
     itemsPerPageText: 'Γραμμές ανά σελίδα:',

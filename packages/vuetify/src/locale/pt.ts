@@ -11,11 +11,9 @@ export default {
     noResultsText: 'Nenhum dado encontrado',
     loadingText: 'Carregando itens...',
   },
-  select: {
-    ariaLabel: {
-      checked: 'Checked',
-      unchecked: 'Not Checked',
-    },
+  selectionControl: {
+    checked: 'Selecionado',
+    unchecked: 'Não selecionado',
   },
   dataTable: {
     itemsPerPageText: 'Linhas por página:',

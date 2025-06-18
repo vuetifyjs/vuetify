@@ -11,11 +11,9 @@ export default {
     noResultsText: 'نتیجه‌ای یافت نشد',
     loadingText: 'در حال بارگذاری...',
   },
-  select: {
-    ariaLabel: {
-      checked: 'Checked',
-      unchecked: 'Not Checked',
-    },
+  selectionControl: {
+    checked: 'Checked',
+    unchecked: 'Not Checked',
   },
   dataTable: {
     itemsPerPageText: 'ردیف در صفحه:',

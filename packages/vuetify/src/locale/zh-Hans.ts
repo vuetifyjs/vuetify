@@ -11,11 +11,9 @@ export default {
     noResultsText: '没有符合条件的结果',
     loadingText: '加载中……',
   },
-  select: {
-    ariaLabel: {
-      checked: 'Checked',
-      unchecked: 'Not Checked',
-    },
+  selectionControl: {
+    checked: '已选中',
+    unchecked: '未选中',
   },
   dataTable: {
     itemsPerPageText: '每页数目：',

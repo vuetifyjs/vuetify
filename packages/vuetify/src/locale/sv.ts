@@ -11,11 +11,9 @@ export default {
     noResultsText: 'Hittade inga poster',
     loadingText: 'Laddar data...',
   },
-  select: {
-    ariaLabel: {
-      checked: 'Checked',
-      unchecked: 'Not Checked',
-    },
+  selectionControl: {
+    checked: 'Markerad',
+    unchecked: 'Inte markerad',
   },
   dataTable: {
     itemsPerPageText: 'Rader per sida:',
