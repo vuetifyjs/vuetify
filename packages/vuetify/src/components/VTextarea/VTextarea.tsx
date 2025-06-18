@@ -5,16 +5,17 @@ import '../VTextField/VTextField.sass'
 // Components
 import { VCounter } from '@/components/VCounter/VCounter'
 import { VField } from '@/components/VField'
-import { filterFieldProps, makeVFieldProps } from '@/components/VField/VField'
+import { makeVFieldProps } from '@/components/VField/VField'
 import { makeVInputProps, VInput } from '@/components/VInput/VInput'
 
 // Composables
+import { useAutofocus } from '@/composables/autofocus'
 import { useFocus } from '@/composables/focus'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Directives
-import Intersect from '@/directives/intersect'
+import vIntersect from '@/directives/intersect'
 
 // Utilities
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, shallowRef, watch, watchEffect } from 'vue'
@@ -59,7 +60,7 @@ type VTextareaSlots = Omit<VInputSlots & VFieldSlots, 'default'> & {
 export const VTextarea = genericComponent<VTextareaSlots>()({
   name: 'VTextarea',
 
-  directives: { Intersect },
+  directives: { vIntersect },
 
   inheritAttrs: false,
 
@@ -75,6 +76,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
   setup (props, { attrs, emit, slots }) {
     const model = useProxiedModel(props, 'modelValue')
     const { isFocused, focus, blur } = useFocus(props)
+    const { onIntersect } = useAutofocus(props)
     const counterValue = computed(() => {
       return typeof props.counterValue === 'function'
         ? props.counterValue(model.value)
@@ -91,15 +93,6 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
 
       return props.counter
     })
-
-    function onIntersect (
-      isIntersecting: boolean,
-      entries: IntersectionObserverEntry[]
-    ) {
-      if (!props.autofocus || !isIntersecting) return
-
-      (entries[0].target as HTMLInputElement)?.focus?.()
-    }
 
     const vInputRef = ref<VInput>()
     const vFieldRef = ref<VInput>()
@@ -150,10 +143,10 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
     }
 
     const sizerRef = ref<HTMLTextAreaElement>()
-    const rows = ref(+props.rows)
+    const rows = ref(Number(props.rows))
     const isPlainOrUnderlined = computed(() => ['plain', 'underlined'].includes(props.variant))
     watchEffect(() => {
-      if (!props.autoGrow) rows.value = +props.rows
+      if (!props.autoGrow) rows.value = Number(props.rows)
     })
     function calculateInputHeight () {
       if (!props.autoGrow) return
@@ -206,7 +199,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
       const hasDetails = !!(hasCounter || slots.details)
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
       const { modelValue: _, ...inputProps } = VInput.filterProps(props)
-      const fieldProps = filterFieldProps(props)
+      const fieldProps = VField.filterProps(props)
 
       return (
         <VInput

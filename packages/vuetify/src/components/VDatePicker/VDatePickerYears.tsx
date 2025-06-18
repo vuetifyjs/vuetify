@@ -40,6 +40,7 @@ export const makeVDatePickerYearsProps = propsFactory({
   min: null as any as PropType<unknown>,
   max: null as any as PropType<unknown>,
   modelValue: Number,
+  allowedYears: [Array, Function] as PropType<number[] | ((date: number) => boolean)>,
 }, 'VDatePickerYears')
 
 export const VDatePickerYears = genericComponent<VDatePickerYearsSlots>()({
@@ -79,6 +80,7 @@ export const VDatePickerYears = genericComponent<VDatePickerYearsSlots>()({
         return {
           text,
           value: i,
+          isDisabled: !isYearAllowed(i),
         }
       })
     })
@@ -91,8 +93,20 @@ export const VDatePickerYears = genericComponent<VDatePickerYearsSlots>()({
 
     onMounted(async () => {
       await nextTick()
-      yearRef.el?.scrollIntoView({ block: 'center' })
+      yearRef.el?.focus()
     })
+
+    function isYearAllowed (year: number) {
+      if (Array.isArray(props.allowedYears) && props.allowedYears.length) {
+        return props.allowedYears.includes(year)
+      }
+
+      if (typeof props.allowedYears === 'function') {
+        return props.allowedYears(year)
+      }
+
+      return true
+    }
 
     useRender(() => (
       <div
@@ -109,6 +123,7 @@ export const VDatePickerYears = genericComponent<VDatePickerYearsSlots>()({
               color: model.value === year.value ? props.color : undefined,
               rounded: true,
               text: year.text,
+              disabled: year.isDisabled,
               variant: model.value === year.value ? 'flat' : 'text',
               onClick: () => {
                 if (model.value === year.value) {

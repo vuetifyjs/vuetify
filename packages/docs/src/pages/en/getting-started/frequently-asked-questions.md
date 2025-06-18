@@ -15,7 +15,7 @@ Stuck on a particular problem? Check some of these common gotchas before creatin
 
 <PageFeatures />
 
-<VoPromotionsCardHighlight slug="vuetify-discord-subscriber-help" />
+<VoPromotionsCardHighlight class="mb-4" slug="vuetify-discord-subscriber-help" />
 
 ## Questions
 
@@ -31,7 +31,7 @@ The following responses are a collection of common questions asked by the Vuetif
 
   * Join our [Discord Community](https://community.vuetifyjs.com/) - (Free/Paid)
   * Ask a question on [GitHub Discussions](https://discussions.vuetifyjs.com/) - (Free)
-  * Get [Direct Support](/introduction/enterprise-support/) from Vuetify - (Paid)
+  * Get [Chat Support](/introduction/enterprise-support/) from Vuetify - (Paid)
 
 * **What is the difference between Vuetify and Vue?** { #what-is-the-difference-between-vuetify-and-vue }
 
@@ -40,6 +40,10 @@ The following responses are a collection of common questions asked by the Vuetif
 * **What versions of Vue.js are compatible with Vuetify?** { #what-versions-of-vuejs-are-compatible-with-vuetify }
 
   Vuetify is compatible with Vue.js 3.0.0 and above.
+
+* **Is Vuetify 2 still supported?** { #is-vuetify-2-still-supported }
+
+  Vuetify 2 reached End of Life (EOL) on [January 25th, 2025](/introduction/long-term-support/). For security and commercial support, see our partner, [HeroDevs](https://www.herodevs.com/support/vuetify-nes?utm_source=partnership&utm_medium=partnership&utm_campaign=partnership&utm_id=vuetify2).
 
 * **Can I use Vuetify with other CSS frameworks?** { #can-i-use-vuetify-with-other-css-frameworks }
 
@@ -100,9 +104,5 @@ The following responses are a collection of common questions asked by the Vuetif
 * **Is Vuetify 3 compatible with `@vue/compat`?**
 
   Not directly, you have to set `configureCompat({ MODE: 3 })` globally and `MODE: 2` in each of your components that you want to run in compatibility mode. There will still be some incorrect warnings that can be ignored with the `-ATTR_FALSE_VALUE` filter in devtools.
-
-* **Why don't elements exist in the DOM yet in `onMounted()`?** ([#19736](https://github.com/vuetifyjs/vuetify/issues/19736))
-
-  Some vuetify components are asynchronous, so there is no guarantee that their children will be mounted immediately. Either wait for the target element itself to be mounted with `v-on:vue:mounted` or use `onMounted` in a separate component that only has plain elements between the `<template>` and your target element.
 
 <PromotedPromoted type="theme" />

@@ -21,12 +21,14 @@ export const useCommitsStore = defineStore('commits', {
       this.isLoading = true
 
       try {
-        this.commits = await fetch(`${url}/github/commits`, {
+        const res = await fetch(`${url}/github/commits`, {
           method: 'GET',
           credentials: 'include',
-        }).then(res => res.json())
+        }).then(async res => res.json())
+
+        this.commits = res
       } catch (err: any) {
-        console.error(err)
+        console.warn(`Failed to fetch commits: ${err.message}`)
       }
 
       this.isLoading = false
@@ -35,7 +37,7 @@ export const useCommitsStore = defineStore('commits', {
 
   getters: {
     latest (state) {
-      return state.commits[0]
+      return state.commits?.[0]
     },
   },
 })

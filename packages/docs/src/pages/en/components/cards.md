@@ -22,13 +22,13 @@ features:
 
 <PageFeatures />
 
-<VoPromotionsCardVuetify slug="vuetify-snips" />
-
 ## Usage
 
 The `v-card` component is a stylish way to wrap different types of content; such as tables, images, or user actions.
 
 <ExamplesUsage name="v-card" />
+
+<VoPromotionsCardVuetify slug="vuetify-snips" class="mb-4" />
 
 ## API
 
@@ -104,7 +104,7 @@ The **variant** prop gives you easy access to several different card styles. Ava
 
 <ExamplesExample file="v-card/prop-variant" />
 
-<VoPromotionsCardVuetify />
+<VoPromotionsCardVuetify class="mb-4" />
 
 #### Color
 
@@ -188,7 +188,7 @@ With a simple conditional, you can easily add supplementary text that is hidden 
 
 <ExamplesExample file="v-card/misc-custom-actions" />
 
-<VoPromotionsCardVuetify />
+<VoPromotionsCardVuetify class="mb-4" />
 
 ### Grids
 

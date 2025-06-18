@@ -149,7 +149,7 @@ type SliderData = {
 export const useSteps = (props: SliderProps) => {
   const min = computed(() => parseFloat(props.min))
   const max = computed(() => parseFloat(props.max))
-  const step = computed(() => +props.step > 0 ? parseFloat(props.step) : 0)
+  const step = computed(() => Number(props.step) > 0 ? parseFloat(props.step) : 0)
   const decimals = computed(() => Math.max(getDecimals(step.value), getDecimals(min.value)))
 
   function roundValue (value: string | number) {
@@ -159,7 +159,11 @@ export const useSteps = (props: SliderProps) => {
 
     const clamped = clamp(value, min.value, max.value)
     const offset = min.value % step.value
-    const newValue = Math.round((clamped - offset) / step.value) * step.value + offset
+    let newValue = Math.round((clamped - offset) / step.value) * step.value + offset
+
+    if (clamped > newValue && newValue + step.value > max.value) {
+      newValue = max.value
+    }
 
     return parseFloat(Math.min(newValue, max.value).toFixed(decimals.value))
   }
@@ -183,7 +187,7 @@ export const useSlider = ({
   getActiveThumb: (e: MouseEvent | TouchEvent) => HTMLElement
 }) => {
   const { isRtl } = useRtl()
-  const isReversed = toRef(props, 'reverse')
+  const isReversed = toRef(() => props.reverse)
   const vertical = computed(() => props.direction === 'vertical')
   const indexFromEnd = computed(() => vertical.value !== isReversed.value)
 
@@ -193,7 +197,7 @@ export const useSlider = ({
   const tickSize = computed(() => parseInt(props.tickSize, 10))
   const trackSize = computed(() => parseInt(props.trackSize, 10))
   const numTicks = computed(() => (max.value - min.value) / step.value)
-  const disabled = toRef(props, 'disabled')
+  const disabled = toRef(() => props.disabled)
 
   const thumbColor = computed(() => props.error || props.disabled ? undefined : props.thumbColor ?? props.color)
   const trackColor = computed(() => props.error || props.disabled ? undefined : props.trackColor ?? props.color)
@@ -222,7 +226,7 @@ export const useSlider = ({
     const clickOffset = getPosition(e, position)
 
     // It is possible for left to be NaN, force to number
-    let clickPos = Math.min(Math.max((clickOffset - trackStart - startOffset.value) / trackLength, 0), 1) || 0
+    let clickPos = clamp((clickOffset - trackStart - startOffset.value) / trackLength) || 0
 
     if (vertical ? indexFromEnd.value : indexFromEnd.value !== isRtl.value) clickPos = 1 - clickPos
 
@@ -296,6 +300,8 @@ export const useSlider = ({
   }
 
   function onSliderMousedown (e: MouseEvent) {
+    if (e.button !== 0) return
+
     e.preventDefault()
 
     handleStart(e)
@@ -309,7 +315,7 @@ export const useSlider = ({
     return clamp(isNaN(percentage) ? 0 : percentage, 0, 100)
   }
 
-  const showTicks = toRef(props, 'showTicks')
+  const showTicks = toRef(() => props.showTicks)
   const parsedTicks = computed<Tick[]>(() => {
     if (!showTicks.value) return []
 
@@ -334,11 +340,11 @@ export const useSlider = ({
 
   const data: SliderProvide = {
     activeThumbRef,
-    color: toRef(props, 'color'),
+    color: toRef(() => props.color),
     decimals,
     disabled,
-    direction: toRef(props, 'direction'),
-    elevation: toRef(props, 'elevation'),
+    direction: toRef(() => props.direction),
+    elevation: toRef(() => props.elevation),
     hasLabels,
     isReversed,
     indexFromEnd,
@@ -351,16 +357,16 @@ export const useSlider = ({
     parsedTicks,
     parseMouseMove,
     position,
-    readonly: toRef(props, 'readonly'),
-    rounded: toRef(props, 'rounded'),
+    readonly: toRef(() => props.readonly),
+    rounded: toRef(() => props.rounded),
     roundValue,
     showTicks,
     startOffset,
     step,
     thumbSize,
     thumbColor,
-    thumbLabel: toRef(props, 'thumbLabel'),
-    ticks: toRef(props, 'ticks'),
+    thumbLabel: toRef(() => props.thumbLabel),
+    ticks: toRef(() => props.ticks),
     tickSize,
     trackColor,
     trackContainerRef,

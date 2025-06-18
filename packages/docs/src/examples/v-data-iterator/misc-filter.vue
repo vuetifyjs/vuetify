@@ -146,7 +146,7 @@
     {
       img: 'https://cdn.vuetifyjs.com/docs/images/graphics/games/8.png',
       title: '1920s Mystery Detective Chronicles',
-      subtitle: 'Solve crimes and uncover secrets in the glamourous 1920s era.',
+      subtitle: 'Solve crimes and uncover secrets in the glamorous 1920s era.',
       advanced: false,
       duration: '9 minutes',
     },
@@ -210,7 +210,7 @@
         {
           img: 'https://cdn.vuetifyjs.com/docs/images/graphics/games/8.png',
           title: '1920s Mystery Detective Chronicles',
-          subtitle: 'Solve crimes and uncover secrets in the glamourous 1920s era.',
+          subtitle: 'Solve crimes and uncover secrets in the glamorous 1920s era.',
           advanced: false,
           duration: '9 minutes',
         },

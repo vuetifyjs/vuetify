@@ -10,11 +10,12 @@ import { VProgressCircular } from '@/components/VProgressCircular/VProgressCircu
 import { provideDefaults } from '@/composables/defaults'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeFocusProps, useFocus } from '@/composables/focus'
+import { useIntersectionObserver } from '@/composables/intersectionObserver'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, nextTick, ref, watch } from 'vue'
+import { computed, effectScope, nextTick, ref, toRef, watch, watchEffect } from 'vue'
 import { filterInputAttrs, focusChild, genericComponent, pick, propsFactory, useRender } from '@/util'
 
 // Types
@@ -97,6 +98,19 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
     const inputRef = ref<HTMLInputElement[]>([])
     const current = computed(() => inputRef.value[focusIndex.value])
 
+    const intersectScope = effectScope()
+    intersectScope.run(() => {
+      const { intersectionRef, isIntersecting } = useIntersectionObserver()
+      watch(isIntersecting, v => {
+        if (!v) return
+        intersectionRef.value?.focus()
+        intersectScope.stop()
+      })
+      watchEffect(() => {
+        intersectionRef.value = inputRef.value[0]
+      })
+    })
+
     function onInput () {
       // The maxlength attribute doesn't work for the number type input, so the text type is used.
       // The following logic simulates the behavior of a number input.
@@ -166,7 +180,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
       e.preventDefault()
       e.stopPropagation()
 
-      const clipboardText = e?.clipboardData?.getData('Text').slice(0, length.value) ?? ''
+      const clipboardText = e?.clipboardData?.getData('Text').trim().slice(0, length.value) ?? ''
 
       if (isValidNumber(clipboardText)) return
 
@@ -197,17 +211,20 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
 
     provideDefaults({
       VField: {
-        color: computed(() => props.color),
-        bgColor: computed(() => props.color),
-        baseColor: computed(() => props.baseColor),
-        disabled: computed(() => props.disabled),
-        error: computed(() => props.error),
-        variant: computed(() => props.variant),
+        color: toRef(() => props.color),
+        bgColor: toRef(() => props.color),
+        baseColor: toRef(() => props.baseColor),
+        disabled: toRef(() => props.disabled),
+        error: toRef(() => props.error),
+        variant: toRef(() => props.variant),
       },
     }, { scoped: true })
 
     watch(model, val => {
-      if (val.length === length.value) emit('finish', val.join(''))
+      if (val.length === length.value) {
+        focusIndex.value = length.value - 1
+        emit('finish', val.join(''))
+      }
     }, { deep: true })
 
     watch(focusIndex, val => {
@@ -268,7 +285,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
                           disabled={ props.disabled }
                           inputmode={ props.type === 'number' ? 'numeric' : 'text' }
                           min={ props.type === 'number' ? 0 : undefined }
-                          maxlength="1"
+                          maxlength={ i === 0 ? length.value : '1' }
                           placeholder={ props.placeholder }
                           type={ props.type === 'number' ? 'text' : props.type }
                           value={ model.value[i] }

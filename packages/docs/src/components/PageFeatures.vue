@@ -1,6 +1,19 @@
 <template>
   <div class="mb-4">
     <page-feature-chip
+      v-if="!isGeneratedPage"
+      :href="contribute"
+      prepend-icon="mdi-pencil-outline"
+      rel="noopener noreferrer"
+      target="_blank"
+      text="Edit this page"
+    >
+      <template #prepend>
+        <v-icon color="blue-darken-3" />
+      </template>
+    </page-feature-chip>
+
+    <page-feature-chip
       v-if="one.isSubscriber && user.pins"
       :prepend-icon="`mdi-pin${!pinned ? '-outline' : ''}`"
       text="Pin"
@@ -75,6 +88,26 @@
         <v-icon color="surface-variant" />
       </template>
     </page-feature-chip>
+
+    <div
+      v-if="isClipboardSupported"
+      class="d-inline-block"
+      v-tooltip:top="{
+        disabled: one.isSubscriber,
+        text: 'Subscribe to Vuetify One for access',
+      }"
+    >
+      <page-feature-chip
+        :disabled="!one.isSubscriber"
+        :text="copied ? t('copied') : t('copy-as-markdown')"
+        prepend-icon="mdi-language-markdown-outline"
+        @click="copyPageAsMarkdown"
+      >
+        <template #prepend>
+          <v-icon :color="copied ? 'success' : 'surface-variant'" />
+        </template>
+      </page-feature-chip>
+    </div>
   </div>
 </template>
 
@@ -85,11 +118,16 @@
   const user = useUserStore()
   const { t } = useI18n()
   const frontmatter = useFrontmatter()
+  const { copyPageAsMarkdown, copied, isClipboardSupported } = useMarkdown()
 
   const branch = getBranch()
 
   const pinned = computed(() => {
     return pins.pins.some(p => p.to === route.path)
+  })
+
+  const isGeneratedPage = computed(() => {
+    return route.path.includes('/api/')
   })
 
   const label = computed(() => {
@@ -98,6 +136,13 @@
     const original = encodeURIComponent(frontmatter.value.features.label)
 
     return `https://github.com/vuetifyjs/vuetify/labels/${original}`
+  })
+
+  const contribute = computed(() => {
+    const branch = getBranch()
+    const link = route.path.split('/').slice(2).filter(v => v).join('/')
+
+    return `https://github.com/vuetifyjs/vuetify/edit/${branch}/packages/docs/src/pages/en/${link}.md`
   })
 
   function onClickPin () {

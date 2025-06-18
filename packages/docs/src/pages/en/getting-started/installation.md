@@ -20,7 +20,7 @@ Get started with Vuetify, the world’s most popular Vue.js framework for buildi
 
 <PageFeatures />
 
-<VoPromotionsCardHighlight slug="vuemastery-getting-started" />
+<VoPromotionsCardHighlight class="mb-4" slug="vuemastery-getting-started" />
 
 ## Installation
 
@@ -82,7 +82,7 @@ cd vuetify-project
 pnpm dev
 ```
 
-<VoPromotionsCardVuetify slug="vuetify-one" />
+<PromotedEntry />
 
 ## Using Nuxt 3
 
@@ -226,34 +226,38 @@ Alternatively, you can use the [vuetify-nuxt-module](https://github.com/vuetifyj
 
 Check the [documentation](https://nuxt.vuetifyjs.com/) for more information on how to use it.
 
-## Using Laravel Mix
+## Using Laravel
 
-```js
+The `createApp()` setup may differ, especially if your Laravel application uses [inertiajs](https://inertiajs.com/client-side-setup). As long as you chain with`.use()`, Vuetify should be properly registered and available.
+
+```js  { data-resource=resources/js/app.ts }
 import { createApp } from 'vue'
 
 // Vuetify
 import '@mdi/font/css/materialdesignicons.css'
 import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
-import * as components from 'vuetify/components'
-import * as directives from 'vuetify/directives'
 
-// Components
-import App from './App.vue'
+const app = createApp()
 
-const vuetify = createVuetify({
-  components,
-  directives
+// Register Vuetify as plugin
+const vuetify = createVuetify()
+app.use(vuetify).mount("#app")
+```
+
+```js { data-resource=vite-config.ts }
+import vuetify from 'vite-plugin-vuetify'
+// ... other imports
+
+export default defineConfig({
+  plugins: [
+    // ... other plugins
+    vuetify({ autoImport: true }),
+  ],
 })
-
-createApp(App).use(vuetify).mount('#app')
 ```
 
-To import the fonts you need to add to webpack.mix.js:
-
-```js
-mix.copy('node_modules/@mdi/font/fonts/', 'dist/fonts/')
-```
+If font is defined at `resources/views/app.blade.php`, Vuetify's font settings will not take effect.
 
 ## Using CDN
 
