@@ -22,7 +22,7 @@ The `v-hotkey` component renders keyboard shortcuts in a visually consistent and
 
 ## Usage
 
-Hotkeys display keyboard shortcuts with proper styling and platform awareness. The component automatically handles platform differences like showing ⌘ on Mac and Ctrl on PC.
+Hotkeys display keyboard shortcuts with proper styling and platform awareness. The component automatically handles platform differences like showing <v-kbd>⌘</v-kbd> on Mac and <v-kbd>Ctrl</v-kbd> on PC.
 
 <ExamplesUsage name="v-hotkey" />
 
@@ -61,6 +61,10 @@ The component automatically detects the user's platform and adjusts key represen
 <ExamplesExample file="v-hotkey/prop-platform-aware" />
 
 #### Custom key mapping
+
+<Alert type="info" variant="tonal">
+It is recommended to set the <b>key-map</b> prop at the application level via global component defaults rather than per-instance for consistency.
+</Alert>
 
 Use the **key-map** prop to customize how specific keys are displayed:
 
