@@ -9,11 +9,9 @@ import { VBtn } from '@/components/VBtn'
 import { render, screen } from '@test'
 import { commands, userEvent } from '@vitest/browser/context'
 import { ref } from 'vue'
-// Types
-import type { Ref } from 'vue'
 
 describe('VListGroup', () => {
-  it('supports header slot', () => {
+  it('supports activator slot', () => {
     render(() => (
       <VList>
         <VListGroup>
@@ -80,9 +78,9 @@ describe('VListGroup', () => {
 
   // https://github.com/vuetifyjs/vuetify/issues/20354
   it('should support programmatically expand group via open model', async () => {
-    const opened: Ref<string[]> = ref([])
+    const opened = ref<string[]>([])
 
-    const { container } = render(() => (
+    render(() => (
       <>
         <VBtn onClick={ () => { opened.value.push('Users') } }>Click me</VBtn>
         <VList v-model:opened={ opened.value }>
@@ -101,14 +99,15 @@ describe('VListGroup', () => {
       </>
     ))
 
-    await userEvent.click(container.querySelector('button')!)
+    await userEvent.click(screen.getByText(/click me/i))
+    await commands.waitStable('.v-list')
     expect(opened.value).toStrictEqual(['Users'])
     expect(screen.getByCSS('.v-list-group__items')).toBeVisible()
   })
 
   it('should correctly set v-model:opened when return-object is applied', async () => {
-    const opened: Ref = ref([])
-    const items: Ref = ref([
+    const opened = ref<{}[]>([])
+    const items = [
       {
         title: 'Item #1',
         newValue: 1,
@@ -127,12 +126,12 @@ describe('VListGroup', () => {
         title: 'Item #3',
         newValue: 3,
       },
-    ])
+    ]
     render(() => (
       <VList
         v-model:opened={ opened.value }
         itemValue="newValue"
-        items={ items.value }
+        items={ items }
         returnObject
       >
       </VList>
