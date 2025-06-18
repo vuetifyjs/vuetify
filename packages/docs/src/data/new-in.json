@@ -307,6 +307,11 @@
       "period": "3.10.0"
     }
   },
+  "VTimePicker": {
+    "props": {
+      "variant": "3.10.0"
+    }
+  },
   "VTreeview": {
     "props": {
       "hideActions": "3.9.0",

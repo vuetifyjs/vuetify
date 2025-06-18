@@ -30,6 +30,8 @@ const range60 = createRange(60)
 
 export type VTimePickerSlots = Omit<VPickerSlots, 'header'>
 
+type Variant = 'dial' | 'input'
+
 export const makeVTimePickerProps = propsFactory({
   allowedHours: [Function, Array] as PropType<AllowFunction | number[]>,
   allowedMinutes: [Function, Array] as PropType<AllowFunction | number[]>,
@@ -54,6 +56,10 @@ export const makeVTimePickerProps = propsFactory({
   readonly: Boolean,
   scrollable: Boolean,
   useSeconds: Boolean,
+  variant: {
+    type: String as PropType<Variant>,
+    default: 'dial',
+  },
   ...omit(makeVPickerProps({ title: '$vuetify.timePicker.title' }), ['landscape']),
 }, 'VTimePicker')
 
@@ -297,7 +303,7 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
     }
 
     useRender(() => {
-      const pickerProps = VPicker.filterProps(props)
+      const pickerProps = omit(VPicker.filterProps(props), ['hideHeader'])
       const timePickerControlsProps = VTimePickerControls.filterProps(props)
       const timePickerClockProps = VTimePickerClock.filterProps(omit(props, ['format', 'modelValue', 'min', 'max']))
 
@@ -307,8 +313,10 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
           color={ undefined }
           class={[
             'v-time-picker',
+            `v-time-picker--variant-${props.variant}`,
             props.class,
           ]}
+          hideHeader={ props.hideHeader && props.variant !== 'input' }
           style={ props.style }
           v-slots={{
             title: () => slots.title?.() ?? (
@@ -325,7 +333,10 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
                 period={ period.value }
                 second={ inputSecond.value as number }
                 viewMode={ viewMode.value }
+                onUpdate:hour={ (val: number) => inputHour.value = val }
+                onUpdate:minute={ (val: number) => inputMinute.value = val }
                 onUpdate:period={ (val: Period) => setPeriod(val) }
+                onUpdate:second={ (val: number) => inputSecond.value = val }
                 onUpdate:viewMode={ (value: VTimePickerViewMode) => (viewMode.value = value) }
                 ref={ controlsRef }
               />
