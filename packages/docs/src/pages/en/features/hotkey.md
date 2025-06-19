@@ -96,6 +96,7 @@ useHotkey('ctrl+s', handleSave, { event: 'keyup' })
 ```
 
 **When to use:**
+
 - `keydown`: For actions that should trigger immediately when pressed (most common)
 - `keyup`: For actions that should wait until the key is released, useful for preventing repeated triggers
 
@@ -112,6 +113,7 @@ useHotkey('ctrl+s', handleSave, { inputs: true })
 ```
 
 **Best practices:**
+
 - Keep `inputs: false` (default) for global shortcuts like save/copy/paste
 - Use `inputs: true` for application-specific shortcuts that should work everywhere
 - Consider using different key combinations for input-specific actions
@@ -129,6 +131,7 @@ useHotkey('f5', handleRefresh, { preventDefault: false })
 ```
 
 **When to disable:**
+
 - When you want to enhance rather than replace browser behavior
 - For accessibility keys that should maintain their original function
 - When testing or debugging hotkey interactions
@@ -188,6 +191,7 @@ const cleanup = useHotkey('ctrl+s', () => {
 // Later, manually cleanup
 cleanup()
 ```
+
 ## Avoiding key binding conflicts
 
 Prevent conflicts by avoiding reserved shortcuts and organizing hotkeys systematically:
