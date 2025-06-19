@@ -127,7 +127,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
 
     async function onTriggered () {
       await nextTick()
-      if (!videoRef.value) return // TODO: error ?
+      if (!videoRef.value) return
       videoRef.value.addEventListener('timeupdate', onTimeupdate)
       videoRef.value.volume = volume.value / 100
       if (state.value !== 'loaded') {

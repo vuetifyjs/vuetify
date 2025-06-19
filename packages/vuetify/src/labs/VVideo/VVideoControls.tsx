@@ -46,7 +46,6 @@ export const makeVVideoControlsProps = propsFactory({
   color: String,
   backgroundColor: String,
   trackColor: String,
-  // disabled: Boolean,
   playing: Boolean,
   hidePlay: Boolean,
   hideVolume: Boolean,

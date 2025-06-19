@@ -61,13 +61,14 @@
         padding-bottom: var(--v-video-controls-height) // controls size
 
     &__center-icon.v-icon-btn
-      border: 5px solid currentColor
-      opacity: .6
-      transform: scale(.9)
-      transition: all .2s ease-in-out
+      border: $video-center-icon-border
+      opacity: $video-center-icon-opacity
+      transition-property: transform, opacity
+      transition-duration: 0.28s
+      transition-timing-function: settings.$standard-easing
 
     &__content:hover &__center-icon
-      transform: scale(1)
+      transform: $video-center-icon-hover-transform
       opacity: 1
 
     &-volume--inline
@@ -93,31 +94,30 @@
         width: $video-volume-vertical-menu-width
 
       .v-slider.v-input--horizontal
-        margin-inline: 16px
+        margin: $video-volume-horizontal-margin
         width: $video-volume-horizontal-menu-width
         height: $video-volume-horizontal-menu-height
 
       .v-slider.v-input--vertical
-        margin-block: 16px
+        margin: $video-volume-vertical-margin
         height: $video-volume-vertical-menu-height
         width: $video-volume-vertical-menu-width
 
         > .v-input__control
+          // just smaller than 300px default
           min-height: 50px
 
     &__track
       position: relative
       z-index: 1
-      margin-inline: 14px
-      width: 100%
 
-      > .v-input__control
-        min-height: 4px !important
+      &.v-slider.v-input--horizontal > .v-input__control
+        min-height: 4px
 
     &__time
-      font-size: 0.875rem
-      line-height: 1
-      letter-spacing: 0.02em
+      font-size: $video-time-font-size
+      line-height: $video-time-line-height
+      letter-spacing: $video-time-letter-spacing
 
     &--variant-player
       width: $video-player-width
@@ -138,19 +138,22 @@
         height: 100%
 
     &-controls
-      --v-background-opacity: .8
+      --v-background-opacity: #{$video-controls-default-background-opacity}
       --v-video-controls-gap: #{$video-controls-gap}
+
+      // override by density logic
       --v-video-controls-pill-height: 42px
+
       flex: 1 0 100%
       align-self: stretch
-      padding: 8px
+      padding: $video-controls-padding
       display: flex
       align-items: center
       position: relative
       gap: var(--v-video-controls-gap)
       min-height: var(--v-video-controls-height)
-      backdrop-filter: blur(5px)
-      background-color: rgba(var(--v-theme-surface), var(--v-background-opacity))
+      backdrop-filter: $video-controls-default-backdrop-filter
+      background-color: rgba($video-controls-default-background-color, var(--v-background-opacity))
       width: 100%
       opacity: 0
 
@@ -172,7 +175,7 @@
       .v-video-control__pill
         display: flex
         align-items: center
-        gap: 8px
+        gap: $video-controls-pill-gap
 
       &--pills
         --v-background-opacity: 1
@@ -184,18 +187,15 @@
           pointer-events: auto
 
         &:not(:empty)
-          background: transparent !important
-
-        > .v-slider.v-video__track
-          margin-inline: 12px !important
+          background: transparent
 
         > .v-video-control__pill
-          backdrop-filter: blur(5px)
-          background: rgba(var(--v-theme-surface), var(--v-background-opacity))
+          backdrop-filter: $video-controls-pill-backdrop-filter
+          background: rgba($video-controls-default-background-color, var(--v-background-opacity))
           border-radius: var(--v-video-controls-pill-border-radius)
           min-height: var(--v-video-controls-pill-height)
           min-width: var(--v-video-controls-pill-height)
-          padding: 0 6px
+          padding: $video-controls-pill-padding
           z-index: 1
 
           > .v-icon-btn
@@ -210,25 +210,23 @@
             border-radius: var(--v-video-controls-pill-border-radius)
 
         > .v-video__time
-          padding: 0 16px
+          padding: $video-time-pill-padding
 
       &--variant-tube
         .v-slider.v-video__track
           position: absolute
-          top: -8px
+          top: $video-tube-track-top
           left: 0
           right: 0
-          margin-inline: 4px
 
           .v-slider-track
-            height: calc(var(--v-slider-track-size) + 10px)
+            height: calc(var(--v-slider-track-size) + #{$video-tube-track-hover-offset})
 
           .v-slider-track__fill
             height: var(--v-slider-track-size)
 
       &--split-time
-        padding-inline: 20px
-        gap: calc(var(--v-video-controls-gap) + 4px)
+        padding-inline: $video-controls-split-time-padding-inline
 
       &:not(.v-video-controls--detached)
         margin-top: calc(-1 * var(--v-video-controls-height))
@@ -243,8 +241,8 @@
       &--floating
         --v-background-opacity: 1
         border-radius: inherit
-        margin-inline: 12px
-        width: calc(100% - 24px)
+        margin-inline: $video-controls-floating-margin
+        width: calc(100% - 2 * #{$video-controls-floating-margin})
 
       &--floating:not(.v-video-controls--detached)
         margin-top: calc(-1 * var(--v-video-controls-height) - $video-controls-floating-margin)
@@ -253,8 +251,8 @@
       &--detached
         --v-background-opacity: 1
         position: relative
-        margin-block-start: 12px
-        padding-inline: 12px
+        margin-block-start: $video-controls-detached-offset
+        padding-inline: $video-controls-detached-padding-inline
         backdrop-filter: none
         border-top: none
         border-radius: inherit
