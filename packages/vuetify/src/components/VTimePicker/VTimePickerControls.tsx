@@ -18,8 +18,6 @@ type Period = 'am' | 'pm'
 
 export const makeVTimePickerControlsProps = propsFactory({
   ampm: Boolean,
-  ampmInTitle: Boolean,
-  ampmReadonly: Boolean,
   color: String,
   disabled: Boolean,
   hour: Number,
@@ -94,74 +92,64 @@ export const VTimePickerControls = genericComponent()({
               onClick={ () => emit('update:viewMode', 'minute') }
             />
 
-            {
-              props.useSeconds && (
-                <span
-                  class={[
-                    'v-time-picker-controls__time__separator',
-                    { 'v-time-picker-controls--with-seconds__time__separator': props.useSeconds },
-                  ]}
-                  key="secondsDivider"
-                >:</span>
-              )
-            }
+            { props.useSeconds && (
+              <span
+                class={[
+                  'v-time-picker-controls__time__separator',
+                  { 'v-time-picker-controls--with-seconds__time__separator': props.useSeconds },
+                ]}
+                key="secondsDivider"
+              >:</span>
+            )}
 
-            {
-              props.useSeconds && (
+            { props.useSeconds && (
+              <VBtn
+                key="secondsVal"
+                active={ props.viewMode === 'second' }
+                color={ props.viewMode === 'second' ? props.color : undefined }
+                variant="tonal"
+                onClick={ () => emit('update:viewMode', 'second') }
+                class={{
+                  'v-time-picker-controls__time__btn': true,
+                  'v-time-picker-controls__time__btn__active': props.viewMode === 'second',
+                  'v-time-picker-controls__time--with-seconds__btn': props.useSeconds,
+                }}
+                disabled={ props.disabled }
+                text={ props.second == null ? '--' : pad(props.second) }
+              />
+            )}
+
+            { props.ampm && (
+              <div class="v-time-picker-controls__ampm">
                 <VBtn
-                  key="secondsVal"
-                  active={ props.viewMode === 'second' }
-                  color={ props.viewMode === 'second' ? props.color : undefined }
-                  variant="tonal"
-                  onClick={ () => emit('update:viewMode', 'second') }
+                  active={ props.period === 'am' }
+                  color={ props.period === 'am' ? props.color : undefined }
                   class={{
-                    'v-time-picker-controls__time__btn': true,
-                    'v-time-picker-controls__time__btn__active': props.viewMode === 'second',
-                    'v-time-picker-controls__time--with-seconds__btn': props.useSeconds,
+                    'v-time-picker-controls__ampm__am': true,
+                    'v-time-picker-controls__ampm__btn': true,
+                    'v-time-picker-controls__ampm__btn__active': props.period === 'am',
                   }}
                   disabled={ props.disabled }
-                  text={ props.second == null ? '--' : pad(props.second) }
+                  text={ t('$vuetify.timePicker.am') }
+                  variant={ props.disabled && props.period === 'am' ? 'elevated' : 'tonal' }
+                  onClick={ () => props.period !== 'am' ? emit('update:period', 'am') : null }
                 />
-              )
-            }
 
-            {
-              props.ampm && props.ampmInTitle && (
-                <div
-                  class={['v-time-picker-controls__ampm', {
-                    'v-time-picker-controls__ampm--readonly': props.ampmReadonly,
-                  }]}
-                >
-                  <VBtn
-                    active={ props.period === 'am' }
-                    color={ props.period === 'am' ? props.color : undefined }
-                    class={{
-                      'v-time-picker-controls__ampm__am': true,
-                      'v-time-picker-controls__ampm__btn': true,
-                      'v-time-picker-controls__ampm__btn__active': props.period === 'am',
-                    }}
-                    disabled={ props.disabled }
-                    text={ t('$vuetify.timePicker.am') }
-                    variant={ props.disabled && props.period === 'am' ? 'elevated' : 'tonal' }
-                    onClick={ () => props.period !== 'am' ? emit('update:period', 'am') : null }
-                  />
-
-                  <VBtn
-                    active={ props.period === 'pm' }
-                    color={ props.period === 'pm' ? props.color : undefined }
-                    class={{
-                      'v-time-picker-controls__ampm__pm': true,
-                      'v-time-picker-controls__ampm__btn': true,
-                      'v-time-picker-controls__ampm__btn__active': props.period === 'pm',
-                    }}
-                    disabled={ props.disabled }
-                    text={ t('$vuetify.timePicker.pm') }
-                    variant={ props.disabled && props.period === 'pm' ? 'elevated' : 'tonal' }
-                    onClick={ () => props.period !== 'pm' ? emit('update:period', 'pm') : null }
-                  />
-                </div>
-              )
-            }
+                <VBtn
+                  active={ props.period === 'pm' }
+                  color={ props.period === 'pm' ? props.color : undefined }
+                  class={{
+                    'v-time-picker-controls__ampm__pm': true,
+                    'v-time-picker-controls__ampm__btn': true,
+                    'v-time-picker-controls__ampm__btn__active': props.period === 'pm',
+                  }}
+                  disabled={ props.disabled }
+                  text={ t('$vuetify.timePicker.pm') }
+                  variant={ props.disabled && props.period === 'pm' ? 'elevated' : 'tonal' }
+                  onClick={ () => props.period !== 'pm' ? emit('update:period', 'pm') : null }
+                />
+              </div>
+            )}
           </div>
         </div>
       )

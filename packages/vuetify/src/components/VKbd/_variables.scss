@@ -6,4 +6,13 @@ $kbd-font-size: 0.75rem !default;
 $kbd-font-weight: normal !default;
 $kbd-padding: 4px !default;
 $kbd-min-width: 20px !default;
-$kbd-line-height: 1 !default;
+$kbd-border-color: rgba(var(--v-border-color), var(--v-border-opacity)) !default;
+$kbd-border-style: solid !default;
+$kbd-border-width: thin !default;
+$kbd-border-thin-width: thin !default;
+$kbd-border: (
+  $kbd-border-color,
+  $kbd-border-style,
+  $kbd-border-width,
+  $kbd-border-thin-width
+) !default;

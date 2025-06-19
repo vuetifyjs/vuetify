@@ -63,7 +63,7 @@ export interface IconAliases {
 export interface IconProps {
   tag: string | JSXComponent
   icon?: IconValue
-  disabled?: Boolean
+  disabled?: boolean
 }
 
 type IconComponent = JSXComponent<IconProps>

@@ -133,6 +133,7 @@ export {
   mdiCrosshairsGps,
   mdiCrown,
   mdiCupcake,
+  mdiCursorPointer,
   mdiDatabaseSearchOutline,
   mdiDelete,
   mdiDeleteOutline,

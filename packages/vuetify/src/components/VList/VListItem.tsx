@@ -28,13 +28,18 @@ import vRipple from '@/directives/ripple'
 
 // Utilities
 import { computed, onBeforeMount, toDisplayString, toRef, watch } from 'vue'
-import { deprecate, EventProp, genericComponent, propsFactory, useRender } from '@/util'
+import { deprecate, EventProp, genericComponent, keyCodes, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
 import type { RippleDirectiveBinding } from '@/directives/ripple'
 
 export type ListItemSlot = {
+  index?: number
+  depth?: number
+  path?: number[]
+  isFirst?: boolean
+  isLast?: boolean
   isActive: boolean
   isOpen: boolean
   isSelected: boolean
@@ -179,6 +184,15 @@ export const VListItem = genericComponent<VListItemSlots>()({
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(roundedProps)
     const lineClasses = toRef(() => props.lines ? `v-list-item--${props.lines}-line` : undefined)
+    const rippleOptions = toRef(() =>
+      (
+        props.ripple !== undefined &&
+        !!props.ripple &&
+        list?.filterable
+      )
+        ? { keys: [keyCodes.enter] }
+        : props.ripple
+    )
 
     const slotProps = computed(() => ({
       isActive: isActive.value,
@@ -212,8 +226,9 @@ export const VListItem = genericComponent<VListItemSlots>()({
 
       if (['INPUT', 'TEXTAREA'].includes(target.tagName)) return
 
-      if (e.key === 'Enter' || e.key === ' ') {
+      if (e.key === 'Enter' || (e.key === ' ' && !list?.filterable)) {
         e.preventDefault()
+        e.stopPropagation()
         e.target!.dispatchEvent(new MouseEvent('click', e))
       }
     }
@@ -271,7 +286,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
           }
           onClick={ onClick }
           onKeydown={ isClickable.value && !isLink.value && onKeyDown }
-          v-ripple={ isClickable.value && props.ripple }
+          v-ripple={ isClickable.value && rippleOptions.value }
           { ...link.linkProps }
         >
           { genOverlays(isClickable.value || isActive.value, 'v-list-item') }

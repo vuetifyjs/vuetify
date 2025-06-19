@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   nav: Upgrade guide
   title: Upgrade guide

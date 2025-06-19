@@ -10,6 +10,7 @@ import { VSliderTrack } from '@/components/VSlider/VSliderTrack'
 
 // Composables
 import { makeFocusProps, useFocus } from '@/composables/focus'
+import { forwardRefs } from '@/composables/forwardRefs'
 import { useRtl } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
@@ -275,7 +276,7 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
       )
     })
 
-    return {}
+    return forwardRefs({}, inputRef)
   },
 })
 
