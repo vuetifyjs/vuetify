@@ -182,7 +182,7 @@ export const VSlider = genericComponent<VSliderSlots>()({
       )
     })
 
-    return forwardRefs(inputRef)
+    return forwardRefs({}, inputRef)
   },
 })
 

@@ -276,7 +276,7 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
       )
     })
 
-    return forwardRefs(inputRef)
+    return forwardRefs({}, inputRef)
   },
 })
 

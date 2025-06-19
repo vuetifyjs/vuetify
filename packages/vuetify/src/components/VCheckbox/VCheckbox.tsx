@@ -98,7 +98,7 @@ export const VCheckbox = genericComponent<new <T>(
       )
     })
 
-    return forwardRefs(inputRef)
+    return forwardRefs({}, inputRef)
   },
 })
 

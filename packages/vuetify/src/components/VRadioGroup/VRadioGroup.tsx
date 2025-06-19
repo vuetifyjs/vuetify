@@ -136,7 +136,7 @@ export const VRadioGroup = genericComponent<new <T>(
       )
     })
 
-    return forwardRefs(inputRef)
+    return forwardRefs({}, inputRef)
   },
 })
 
