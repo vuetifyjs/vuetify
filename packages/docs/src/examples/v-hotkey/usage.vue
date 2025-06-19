@@ -15,10 +15,10 @@
       <v-select
         v-model="keyExample"
         :items="keyExamples"
-        label="Key combination"
         item-title="label"
         item-value="value"
-      />
+        label="Key combination"
+      ></v-select>
     </template>
   </ExamplesUsageExample>
 </template>

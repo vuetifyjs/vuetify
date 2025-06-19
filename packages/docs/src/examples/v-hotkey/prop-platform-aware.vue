@@ -1,12 +1,11 @@
 <template>
   <div>
     <v-alert
+      class="mb-4"
       type="info"
       variant="tonal"
-      class="mb-4"
     >
       <div class="d-flex align-center">
-        <v-icon class="me-2">mdi-information</v-icon>
         <div>
           <strong>Platform Detection:</strong> Currently detected as {{ isMac ? 'Mac' : 'PC' }}
         </div>
@@ -22,15 +21,15 @@
             <div class="d-flex flex-column ga-3">
               <div class="d-flex align-center justify-space-between">
                 <span>meta+k:</span>
-                <v-hotkey keys="meta+k" />
+                <v-hotkey keys="meta+k"></v-hotkey>
               </div>
               <div class="d-flex align-center justify-space-between">
                 <span>alt+shift+f:</span>
-                <v-hotkey keys="alt+shift+f" />
+                <v-hotkey keys="alt+shift+f"></v-hotkey>
               </div>
               <div class="d-flex align-center justify-space-between">
                 <span>meta+alt+shift+k:</span>
-                <v-hotkey keys="meta+alt+shift+k" />
+                <v-hotkey keys="meta+alt+shift+k"></v-hotkey>
               </div>
             </div>
           </v-card-text>
@@ -45,15 +44,15 @@
             <div class="d-flex flex-column ga-3">
               <div class="d-flex align-center justify-space-between">
                 <span>ctrl+c:</span>
-                <v-hotkey keys="ctrl+c" />
+                <v-hotkey keys="ctrl+c"></v-hotkey>
               </div>
               <div class="d-flex align-center justify-space-between">
                 <span>cmd+v:</span>
-                <v-hotkey keys="cmd+v" />
+                <v-hotkey keys="cmd+v"></v-hotkey>
               </div>
               <div class="d-flex align-center justify-space-between">
                 <span>ctrl+x meta+c:</span>
-                <v-hotkey keys="ctrl+x meta+c" />
+                <v-hotkey keys="ctrl+x meta+c"></v-hotkey>
               </div>
             </div>
           </v-card-text>
@@ -85,22 +84,22 @@
               <tbody>
                 <tr>
                   <td><code>meta+k</code></td>
-                  <td><v-hotkey keys="meta+k" :display-mode="displayMode" /></td>
+                  <td><v-hotkey :display-mode="displayMode" keys="meta+k"></v-hotkey></td>
                   <td>{{ isMac ? 'Command on Mac' : 'Ctrl on PC' }}</td>
                 </tr>
                 <tr>
                   <td><code>alt+f</code></td>
-                  <td><v-hotkey keys="alt+f" :display-mode="displayMode" /></td>
+                  <td><v-hotkey :display-mode="displayMode" keys="alt+f"></v-hotkey></td>
                   <td>{{ isMac ? 'Option on Mac' : 'Alt on PC' }}</td>
                 </tr>
                 <tr>
                   <td><code>ctrl+shift+p</code></td>
-                  <td><v-hotkey keys="ctrl+shift+p" :display-mode="displayMode" /></td>
+                  <td><v-hotkey :display-mode="displayMode" keys="ctrl+shift+p"></v-hotkey></td>
                   <td>Always Ctrl (explicit)</td>
                 </tr>
                 <tr>
                   <td><code>cmd+shift+p</code></td>
-                  <td><v-hotkey keys="cmd+shift+p" :display-mode="displayMode" /></td>
+                  <td><v-hotkey :display-mode="displayMode" keys="cmd+shift+p"></v-hotkey></td>
                   <td>{{ isMac ? 'Command on Mac' : 'Ctrl on PC' }}</td>
                 </tr>
               </tbody>
@@ -113,7 +112,7 @@
 </template>
 
 <script setup>
-  import { ref, computed } from 'vue'
+  import { computed, ref } from 'vue'
 
   const displayMode = ref('icon')
 

@@ -9,19 +9,19 @@
             <div class="d-flex flex-column ga-3">
               <div class="d-flex align-center justify-space-between">
                 <span>Ctrl + K:</span>
-                <v-hotkey keys="ctrl+k" display-mode="icon" />
+                <v-hotkey display-mode="icon" keys="ctrl+k"></v-hotkey>
               </div>
               <div class="d-flex align-center justify-space-between">
                 <span>Meta + Shift + P:</span>
-                <v-hotkey keys="meta+shift+p" display-mode="icon" />
+                <v-hotkey display-mode="icon" keys="meta+shift+p"></v-hotkey>
               </div>
               <div class="d-flex align-center justify-space-between">
                 <span>Alt + Arrow:</span>
-                <v-hotkey keys="alt+arrowup" display-mode="icon" />
+                <v-hotkey display-mode="icon" keys="alt+arrowup"></v-hotkey>
               </div>
               <div class="d-flex align-center justify-space-between">
                 <span>Enter:</span>
-                <v-hotkey keys="enter" display-mode="icon" />
+                <v-hotkey display-mode="icon" keys="enter"></v-hotkey>
               </div>
             </div>
           </v-card-text>
@@ -36,19 +36,19 @@
             <div class="d-flex flex-column ga-3">
               <div class="d-flex align-center justify-space-between">
                 <span>Ctrl + K:</span>
-                <v-hotkey keys="ctrl+k" display-mode="symbol" />
+                <v-hotkey display-mode="symbol" keys="ctrl+k"></v-hotkey>
               </div>
               <div class="d-flex align-center justify-space-between">
                 <span>Meta + Shift + P:</span>
-                <v-hotkey keys="meta+shift+p" display-mode="symbol" />
+                <v-hotkey display-mode="symbol" keys="meta+shift+p"></v-hotkey>
               </div>
               <div class="d-flex align-center justify-space-between">
                 <span>Alt + Arrow:</span>
-                <v-hotkey keys="alt+arrowup" display-mode="symbol" />
+                <v-hotkey display-mode="symbol" keys="alt+arrowup"></v-hotkey>
               </div>
               <div class="d-flex align-center justify-space-between">
                 <span>Enter:</span>
-                <v-hotkey keys="enter" display-mode="symbol" />
+                <v-hotkey display-mode="symbol" keys="enter"></v-hotkey>
               </div>
             </div>
           </v-card-text>
@@ -63,19 +63,19 @@
             <div class="d-flex flex-column ga-3">
               <div class="d-flex align-center justify-space-between">
                 <span>Ctrl + K:</span>
-                <v-hotkey keys="ctrl+k" display-mode="text" />
+                <v-hotkey display-mode="text" keys="ctrl+k"></v-hotkey>
               </div>
               <div class="d-flex align-center justify-space-between">
                 <span>Meta + Shift + P:</span>
-                <v-hotkey keys="meta+shift+p" display-mode="text" />
+                <v-hotkey display-mode="text" keys="meta+shift+p"></v-hotkey>
               </div>
               <div class="d-flex align-center justify-space-between">
                 <span>Alt + Arrow:</span>
-                <v-hotkey keys="alt+arrowup" display-mode="text" />
+                <v-hotkey display-mode="text" keys="alt+arrowup"></v-hotkey>
               </div>
               <div class="d-flex align-center justify-space-between">
                 <span>Enter:</span>
-                <v-hotkey keys="enter" display-mode="text" />
+                <v-hotkey display-mode="text" keys="enter"></v-hotkey>
               </div>
             </div>
           </v-card-text>
@@ -97,10 +97,10 @@
             </div>
 
             <div class="d-flex flex-wrap ga-4 align-center">
-              <v-hotkey keys="ctrl+shift+k" :display-mode="displayMode" />
-              <v-hotkey keys="meta+alt+p" :display-mode="displayMode" />
-              <v-hotkey keys="shift+enter" :display-mode="displayMode" />
-              <v-hotkey keys="ctrl+k-then-p" :display-mode="displayMode" />
+              <v-hotkey :display-mode="displayMode" keys="ctrl+shift+k"></v-hotkey>
+              <v-hotkey :display-mode="displayMode" keys="meta+alt+p"></v-hotkey>
+              <v-hotkey :display-mode="displayMode" keys="shift+enter"></v-hotkey>
+              <v-hotkey :display-mode="displayMode" keys="ctrl+k-then-p"></v-hotkey>
             </div>
           </v-card-text>
         </v-card>
