@@ -34,7 +34,6 @@ export const makeVTimePickerProps = propsFactory({
   allowedHours: [Function, Array] as PropType<AllowFunction | number[]>,
   allowedMinutes: [Function, Array] as PropType<AllowFunction | number[]>,
   allowedSeconds: [Function, Array] as PropType<AllowFunction | number[]>,
-  ampmInTitle: Boolean,
   disabled: Boolean,
   format: {
     type: String as PropType<'ampm' | '24hr'>,
@@ -313,8 +312,7 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
             header: () => (
               <VTimePickerControls
                 { ...timePickerControlsProps }
-                ampm={ isAmPm.value || props.ampmInTitle }
-                ampmReadonly={ isAmPm.value && !props.ampmInTitle }
+                ampm={ isAmPm.value }
                 hour={ inputHour.value as number }
                 minute={ inputMinute.value as number }
                 period={ period.value }
