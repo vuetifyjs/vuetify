@@ -213,7 +213,6 @@ useHotkey('alt+1', handleAction)
 ### Best practices
 
 - **Use modifier combinations**: Prefer `Ctrl+Shift+Key` for custom actions
-- **Namespace by feature**: Group related shortcuts (e.g., `ctrl+k` for search)
 - **Test cross-platform**: Verify shortcuts work on Windows, macOS, and Linux
 - **Document shortcuts**: Maintain a list of all application hotkeys
 
