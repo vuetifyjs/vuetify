@@ -97,7 +97,7 @@ The hotkey string supports various modifiers and special keys:
 
 ## Manual cleanup
 
-The composable automatically cleans up when used within Vue components. For manual cleanup outside of components, store the returned cleanup function:
+The composable automatically manages cleanup during the Vue component's unmount lifecycle event. If you need to perform manual cleanup, you can save the cleanup function returned by the composable. Executing this function will remove the hotkey listener.
 
 ```js
 const cleanup = useHotkey('ctrl+s', () => {
