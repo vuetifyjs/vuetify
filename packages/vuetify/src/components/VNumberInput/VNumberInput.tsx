@@ -249,6 +249,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
     function onControlMouseup (e: PointerEvent) {
       const el = e.currentTarget as HTMLElement
       el?.releasePointerCapture(e.pointerId)
+      e.preventDefault()
       holdStop()
     }
 
