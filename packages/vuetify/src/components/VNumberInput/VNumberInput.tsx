@@ -148,7 +148,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
         onClick: onControlClick,
         onPointerup: onControlMouseup,
         onPointerdown: onUpControlMousedown,
-        onPointercancel: onControlPointerCancel,
+        onPointercancel: onControlMouseup,
       },
     }
     const decrementSlotProps = {
@@ -156,7 +156,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
         onClick: onControlClick,
         onPointerup: onControlMouseup,
         onPointerdown: onDownControlMousedown,
-        onPointercancel: onControlPointerCancel,
+        onPointercancel: onControlMouseup,
       },
     }
 
@@ -249,8 +249,6 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
     function onControlMouseup (e: PointerEvent) {
       const el = e.currentTarget as HTMLElement
       el?.releasePointerCapture(e.pointerId)
-      e.preventDefault()
-      e.stopPropagation()
       holdStop()
     }
 
@@ -268,12 +266,6 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       e.preventDefault()
       e.stopPropagation()
       holdStart('down')
-    }
-
-    function onControlPointerCancel (e: PointerEvent) {
-      const el = e.currentTarget as HTMLElement
-      el?.releasePointerCapture(e.pointerId)
-      holdStop()
     }
 
     function clampModel () {
@@ -331,7 +323,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
             onClick={ onControlClick }
             onPointerdown={ onUpControlMousedown }
             onPointerup={ onControlMouseup }
-            onPointercancel={ onControlPointerCancel }
+            onPointercancel={ onControlMouseup }
             size={ controlNodeSize.value }
             tabindex="-1"
           />
@@ -366,7 +358,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
             onClick={ onControlClick }
             onPointerdown={ onDownControlMousedown }
             onPointerup={ onControlMouseup }
-            onPointercancel={ onControlPointerCancel }
+            onPointercancel={ onControlMouseup }
             size={ controlNodeSize.value }
             tabindex="-1"
           />
