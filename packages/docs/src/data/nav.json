@@ -222,7 +222,9 @@
     "title": "api",
     "inactiveIcon": "mdi-flask-empty-outline",
     "activeIcon": "mdi-flask-outline",
-    "items": []
+    "items": [
+      "hotkey"
+    ]
   },
   {
     "title": "directives",
