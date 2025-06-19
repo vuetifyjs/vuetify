@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   title: Hotkey composable
   description: Handle keyboard shortcuts within your application using the useHotkey composable
