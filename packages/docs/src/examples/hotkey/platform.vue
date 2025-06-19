@@ -3,7 +3,6 @@
     <v-row>
       <v-col cols="12">
         <v-card>
-          <v-card-title>Platform Awareness</v-card-title>
           <v-card-text>
             <v-alert class="mb-4" color="info" variant="tonal">
               <v-alert-title>Current Platform: {{ platformName }}</v-alert-title>

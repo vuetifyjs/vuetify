@@ -3,7 +3,6 @@
     <v-row>
       <v-col cols="12">
         <v-card>
-          <v-card-title>Key Sequences</v-card-title>
           <v-card-text>
             <p class="text-body-2 mb-4">
               Key sequences require pressing keys in order within the timeout period.

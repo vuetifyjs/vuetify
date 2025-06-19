@@ -3,7 +3,6 @@
     <v-row>
       <v-col cols="12">
         <v-card>
-          <v-card-title>Reactive Hotkeys</v-card-title>
           <v-card-text>
             <p class="text-body-2 mb-4">
               Hotkey combinations can be reactive, allowing you to change them dynamically.

@@ -2,8 +2,7 @@
   <v-container>
     <v-row>
       <v-col cols="12">
-        <h3 class="text-h6 mb-4">useHotkey Composable Demo</h3>
-        <p class="text-body-2 mb-6">
+        <p class="text-body-2">
           Try the keyboard shortcuts listed below. The activity log will show when hotkeys are triggered.
         </p>
       </v-col>
