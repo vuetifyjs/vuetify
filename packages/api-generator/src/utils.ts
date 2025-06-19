@@ -274,6 +274,7 @@ export async function prettifyType (name: string, item: Definition) {
       semi: false,
       singleQuote: true,
       trailingComma: 'all',
+      printWidth: 40,
     })
   } catch (err: any) {
     console.error('\x1b[31m', `${name}:`, err.message, '\x1b[0m')
