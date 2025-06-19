@@ -70,12 +70,7 @@ function createKey (config: PlatformKeyConfig) {
   }
 }
 
-/**
- * Comprehensive key mapping using declarative configuration
- * Each key is defined by its platform-specific display options
- */
 const keyMap = {
-  // Control key (different symbol on Mac)
   ctrl: createKey({
     mac: { symbol: '⌃', icon: '$ctrl', text: '$vuetify.hotkey.ctrl' }, // Mac Control symbol
     default: { text: 'Ctrl', icon: '$ctrl' },
@@ -89,21 +84,17 @@ const keyMap = {
     mac: { symbol: '⌘', icon: '$command', text: '$vuetify.hotkey.command' }, // Mac Command symbol
     default: { text: 'Ctrl', icon: '$ctrl' },
   }),
-  // Shift key
   shift: createKey({
     mac: { symbol: '⇧', icon: '$shift', text: '$vuetify.hotkey.shift' }, // Shift symbol
     default: { text: 'Shift', icon: '$shift' },
   }),
-  // Alt/Option key (different names on Mac vs PC)
   alt: createKey({
     mac: { symbol: '⌥', icon: '$alt', text: '$vuetify.hotkey.option' }, // Mac Option symbol
     default: { text: 'Alt', icon: '$alt' },
   }),
-  // Enter/Return key (same across platforms)
   enter: createKey({
     default: { symbol: '↵', icon: '$enter', text: '$vuetify.hotkey.enter' }, // Return symbol
   }),
-  // Arrow keys (same across platforms)
   arrowup: createKey({
     default: { symbol: '↑', icon: '$arrowup', text: '$vuetify.hotkey.upArrow' },
   }),
@@ -116,15 +107,12 @@ const keyMap = {
   arrowright: createKey({
     default: { symbol: '→', icon: '$arrowright', text: '$vuetify.hotkey.rightArrow' },
   }),
-  // Backspace key (same across platforms)
   backspace: createKey({
     default: { symbol: '⌫', icon: '$backspace', text: '$vuetify.hotkey.backspace' }, // Backspace symbol
   }),
-  // Escape key (text only, same across platforms)
   escape: createKey({
     default: { text: '$vuetify.hotkey.escape' },
   }),
-  // Minus/Hyphen key (same across platforms)
   '-': createKey({
     default: { symbol: '-', icon: '$minus', text: '-' },
   }),
@@ -145,7 +133,6 @@ export const makeVHotkeyProps = propsFactory({
     type: String as PropType<DisplayMode>,
     default: 'icon',
   },
-  // Custom key mapping (allows overriding default key representations)
   keyMap: {
     type: Object as PropType<KeyMap>,
     default: keyMap,
