@@ -351,7 +351,7 @@ describe('VHotkey', () => {
       })
     })
 
-                it('should handle empty state gracefully', () => {
+    it('should handle empty state gracefully', () => {
       const wrapper = mountVHotkey({ keys: '' })
       const container = wrapper.find('.v-hotkey')
 
@@ -362,7 +362,7 @@ describe('VHotkey', () => {
       expect(container.attributes('aria-label')).toBe('')
     })
 
-        it('should generate readable text for complex shortcuts', () => {
+    it('should generate readable text for complex shortcuts', () => {
       const wrapper = mountVHotkey({ keys: 'ctrl+shift+k-then-p' })
       const container = wrapper.find('.v-hotkey')
       const ariaLabel = container.attributes('aria-label')
