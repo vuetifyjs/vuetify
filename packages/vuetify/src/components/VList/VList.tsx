@@ -47,7 +47,7 @@ export interface InternalListItem<T = any> extends ListItem<T> {
 function transformItem (props: ItemProps & { itemType?: string }, item: any): InternalListItem {
   const type = getPropertyFromItem(item, props.itemType, 'item')
   const title = isPrimitive(item) ? item : getPropertyFromItem(item, props.itemTitle)
-  const value = getPropertyFromItem(item, props.itemValue, undefined)
+  const value = isPrimitive(item) ? item : getPropertyFromItem(item, props.itemValue, undefined)
   const children = getPropertyFromItem(item, props.itemChildren)
   const itemProps = props.itemProps === true
     ? omit(item, ['children'])
