@@ -52,9 +52,6 @@
               thumb-label
               @update:model-value="updateTimeout"
             >
-              <template #thumb-label="{ modelValue }">
-                {{ modelValue }}ms
-              </template>
             </v-slider>
 
             <v-divider class="my-4"></v-divider>
@@ -130,7 +127,6 @@
 
   const updateTimeout = () => {
     setupSequences()
-    addMessage(`⚙️ Timeout updated to ${sequenceTimeout.value}ms`)
   }
 
   // Initialize sequences
