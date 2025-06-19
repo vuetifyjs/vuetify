@@ -37,7 +37,7 @@ type DeepPartial<T> = T extends object ? { [P in keyof T]?: DeepPartial<T[P]> } 
 
 export type ThemeOptions = false | {
   cspNonce?: string
-  defaultTheme?: 'light' | 'dark' | 'system' | string
+  defaultTheme?: 'light' | 'dark' | 'system' | string & {}
   variations?: false | VariationsOptions
   themes?: Record<string, ThemeDefinition>
   stylesheetId?: string
@@ -49,7 +49,7 @@ export type ThemeDefinition = DeepPartial<InternalThemeDefinition>
 interface InternalThemeOptions {
   cspNonce?: string
   isDisabled: boolean
-  defaultTheme: 'light' | 'dark' | 'system' | string
+  defaultTheme: 'light' | 'dark' | 'system' | string & {}
   prefix: string
   variations: false | VariationsOptions
   themes: Record<string, InternalThemeDefinition>
