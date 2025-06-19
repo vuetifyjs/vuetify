@@ -21,6 +21,10 @@ The `v-hotkey` component renders keyboard shortcuts in a visually consistent and
 
 <PageFeatures />
 
+::: warning
+This feature requires [v3.9.0](/getting-started/release-notes/?version=v3.9.0)
+:::
+
 ## Usage
 
 Hotkeys display keyboard shortcuts with proper styling and platform awareness. The component automatically handles platform differences like showing <v-kbd>⌘</v-kbd> on Mac and <v-kbd>Ctrl</v-kbd> on PC.
@@ -38,6 +42,10 @@ Hotkeys display keyboard shortcuts with proper styling and platform awareness. T
 ## Guide
 
 The `v-hotkey` component is designed to display keyboard shortcuts consistently across your application. It's commonly used in command palettes, help documentation, tooltips, and anywhere you need to show keyboard shortcuts to users.
+
+::: info
+The `v-hotkey` component serves solely as a visual tool for displaying keyboard shortcuts. It does not generate or manage keyboard shortcuts itself. To implement functional keyboard shortcuts, utilize the [useHotkey](/features/hotkey/) composable.
+:::
 
 ### Props
 
@@ -63,9 +71,9 @@ The component automatically detects the user's platform and adjusts key represen
 
 #### Custom key mapping
 
-<Alert type="info" variant="tonal">
+::: info
 It is recommended to set the <b>key-map</b> prop at the application level via global component defaults rather than per-instance for consistency.
-</Alert>
+:::
 
 Use the **key-map** prop to customize how specific keys are displayed:
 

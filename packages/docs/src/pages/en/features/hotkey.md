@@ -20,6 +20,10 @@ Handle keyboard shortcuts within your application using the **useHotkey** compos
 
 <PageFeatures />
 
+::: warning
+This feature requires [v3.9.0](/getting-started/release-notes/?version=v3.9.0)
+:::
+
 <PromotedEntry />
 
 ## Usage
