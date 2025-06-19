@@ -78,7 +78,6 @@
   },
   {
     "title": "concepts",
-    "emphasized": true,
     "inactiveIcon": "mdi-puzzle-outline",
     "activeIcon": "mdi-puzzle",
     "items": [
