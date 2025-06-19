@@ -131,5 +131,7 @@ export default {
     leftArrow: 'Pfeil nach links',
     rightArrow: 'Pfeil nach rechts',
     backspace: 'Rücktaste',
+    plus: 'plus',
+    shortcut: 'Tastenkürzel: {0}',
   },
 }

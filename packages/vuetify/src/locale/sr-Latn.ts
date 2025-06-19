@@ -131,5 +131,7 @@ export default {
     leftArrow: 'Strelica levo',
     rightArrow: 'Strelica desno',
     backspace: 'Backspace',
+    plus: 'plus',
+    shortcut: 'Prečica na tastaturi: {0}',
   },
 }

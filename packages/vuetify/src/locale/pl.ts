@@ -131,5 +131,7 @@ export default {
     leftArrow: 'Strzałka w lewo',
     rightArrow: 'Strzałka w prawo',
     backspace: 'Backspace',
+    plus: 'plus',
+    shortcut: 'Skrót klawiszowy: {0}',
   },
 }

@@ -131,5 +131,7 @@ export default {
     leftArrow: 'Mũi tên trái',
     rightArrow: 'Mũi tên phải',
     backspace: 'Backspace',
+    plus: 'cộng',
+    shortcut: 'Phím tắt: {0}',
   },
 }

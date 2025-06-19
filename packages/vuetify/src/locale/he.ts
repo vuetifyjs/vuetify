@@ -131,5 +131,7 @@ export default {
     leftArrow: 'חץ שמאלה',
     rightArrow: 'חץ ימינה',
     backspace: 'Backspace',
+    plus: 'פלוס',
+    shortcut: 'קיצור דרך במקלדת: {0}',
   },
 }

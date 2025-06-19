@@ -321,4 +321,58 @@ describe('VHotkey', () => {
       expect(wrapperIcon.findAll('.v-hotkey__key')[0].classes()).toContain('v-hotkey__key-text')
     })
   })
+
+  describe('Accessibility', () => {
+    it('should have proper ARIA attributes for screen readers', () => {
+      const wrapper = mountVHotkey({ keys: 'ctrl+k' })
+      const container = wrapper.find('.v-hotkey')
+
+      // Should have role="img" for semantic meaning
+      expect(container.attributes('role')).toBe('img')
+
+      // Should have aria-label with readable description
+      expect(container.attributes('aria-label')).toBeTruthy()
+      expect(container.attributes('aria-label')).toContain('Keyboard shortcut')
+    })
+
+    it('should hide visual elements from screen readers', () => {
+      const wrapper = mountVHotkey({ keys: 'ctrl+k' })
+
+      // Individual keys should be hidden from screen readers
+      const keys = wrapper.findAll('.v-hotkey__key')
+      keys.forEach(key => {
+        expect(key.attributes('aria-hidden')).toBe('true')
+      })
+
+      // Dividers should be hidden from screen readers
+      const dividers = wrapper.findAll('.v-hotkey__divider')
+      dividers.forEach(divider => {
+        expect(divider.attributes('aria-hidden')).toBe('true')
+      })
+    })
+
+                it('should handle empty state gracefully', () => {
+      const wrapper = mountVHotkey({ keys: '' })
+      const container = wrapper.find('.v-hotkey')
+
+      // Should not have aria-describedby for empty state
+      expect(container.attributes('aria-describedby')).toBeUndefined()
+
+      // Should have an empty aria-label for empty state
+      expect(container.attributes('aria-label')).toBe('')
+    })
+
+        it('should generate readable text for complex shortcuts', () => {
+      const wrapper = mountVHotkey({ keys: 'ctrl+shift+k-then-p' })
+      const container = wrapper.find('.v-hotkey')
+      const ariaLabel = container.attributes('aria-label')
+
+      // Should contain readable text representation
+      expect(ariaLabel).toContain('Keyboard shortcut')
+      // The locale keys start with $, so we check for those patterns
+      expect(ariaLabel).toContain('CTRL')
+      expect(ariaLabel).toContain('SHIFT')
+      expect(ariaLabel).toContain('then')
+    })
+  })
 })

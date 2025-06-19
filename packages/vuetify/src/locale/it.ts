@@ -131,5 +131,7 @@ export default {
     leftArrow: 'Freccia sinistra',
     rightArrow: 'Freccia destra',
     backspace: 'Canc',
+    plus: 'più',
+    shortcut: 'Scorciatoia da tastiera: {0}',
   },
 }

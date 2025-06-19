@@ -131,5 +131,7 @@ export default {
     leftArrow: 'Săgeată stânga',
     rightArrow: 'Săgeată dreapta',
     backspace: 'Backspace',
+    plus: 'plus',
+    shortcut: 'Comandă rapidă tastatură: {0}',
   },
 }

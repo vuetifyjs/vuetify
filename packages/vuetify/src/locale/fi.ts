@@ -131,5 +131,7 @@ export default {
     leftArrow: 'Nuoli vasemmalle',
     rightArrow: 'Nuoli oikealle',
     backspace: 'Askelpalautin',
+    plus: 'plus',
+    shortcut: 'Näppäinyhdistelmä: {0}',
   },
 }

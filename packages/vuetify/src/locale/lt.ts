@@ -131,5 +131,7 @@ export default {
     leftArrow: 'Rodyklė kairėn',
     rightArrow: 'Rodyklė dešinėn',
     backspace: 'Backspace',
+    plus: 'plius',
+    shortcut: 'Klaviatūros trumpinys: {0}',
   },
 }

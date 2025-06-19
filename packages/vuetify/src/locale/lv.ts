@@ -131,5 +131,7 @@ export default {
     leftArrow: 'Kreisā bulta',
     rightArrow: 'Labā bulta',
     backspace: 'Atpakaļatkāpe',
+    plus: 'plus',
+    shortcut: 'Tastatūras saīsne: {0}',
   },
 }

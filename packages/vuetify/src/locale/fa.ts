@@ -131,5 +131,7 @@ export default {
     leftArrow: 'پیکان چپ',
     rightArrow: 'پیکان راست',
     backspace: 'Backspace',
+    plus: 'بعلاوه',
+    shortcut: 'میانبر صفحه کلید: {0}',
   },
 }

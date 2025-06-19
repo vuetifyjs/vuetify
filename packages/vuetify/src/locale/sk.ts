@@ -131,5 +131,7 @@ export default {
     leftArrow: 'Šípka vľavo',
     rightArrow: 'Šípka vpravo',
     backspace: 'Backspace',
+    plus: 'plus',
+    shortcut: 'Klávesová skratka: {0}',
   },
 }

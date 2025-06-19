@@ -131,5 +131,7 @@ export default {
     leftArrow: 'Sol Ok',
     rightArrow: 'Sağ Ok',
     backspace: 'Geri Al',
+    plus: 'artı',
+    shortcut: 'Klavye kısayolu: {0}',
   },
 }

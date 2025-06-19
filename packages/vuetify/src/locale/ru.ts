@@ -131,5 +131,7 @@ export default {
     leftArrow: 'Стрелка влево',
     rightArrow: 'Стрелка вправо',
     backspace: 'Backspace',
+    plus: 'плюс',
+    shortcut: 'Сочетание клавиш: {0}',
   },
 }

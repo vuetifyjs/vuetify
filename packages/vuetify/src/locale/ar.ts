@@ -131,5 +131,7 @@ export default {
     leftArrow: 'السهم الأيسر',
     rightArrow: 'السهم الأيمن',
     backspace: 'مسافة للخلف',
+    plus: 'زائد',
+    shortcut: 'اختصار لوحة المفاتيح: {0}',
   },
 }

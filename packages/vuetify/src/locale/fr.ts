@@ -131,5 +131,7 @@ export default {
     leftArrow: 'Flèche gauche',
     rightArrow: 'Flèche droite',
     backspace: 'Retour',
+    plus: 'plus',
+    shortcut: 'Raccourci clavier : {0}',
   },
 }

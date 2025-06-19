@@ -131,5 +131,7 @@ export default {
     leftArrow: 'تیری چەپ',
     rightArrow: 'تیری ڕاست',
     backspace: 'Backspace',
+    plus: 'زیادکردن',
+    shortcut: 'کورتەبڕی تەختەکلیل: {0}',
   },
 }

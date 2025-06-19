@@ -349,6 +349,40 @@ export const VHotkey = genericComponent()({
       })
     })
 
+    /**
+     * Computed property that generates an accessible label for screen readers
+     * This creates a human-readable description of the keyboard shortcut
+     */
+    const accessibleLabel = computed(() => {
+      if (!props.keys) return ''
+
+      // Convert the parsed key combinations into readable text
+      const readableShortcuts = keyCombinations.value.map(combination => {
+        const readableParts: string[] = []
+
+        for (const key of combination) {
+          if (isDelineator(key)) {
+            if (AND_DELINEATOR.isEqual(key)) {
+              readableParts.push(t('$vuetify.hotkey.plus'))
+            } else if (THEN_DELINEATOR.isEqual(key)) {
+              readableParts.push(t('$vuetify.hotkey.then'))
+            }
+          } else {
+            // Always use text representation for screen readers
+            const textKey = key[0] === 'icon' || key[0] === 'symbol'
+              ? applyDisplayModeToKey(mergeDeep(keyMap, props.keyMap), 'text', String(key[1]), isMac)[1]
+              : key[1]
+            readableParts.push(translateKey(textKey as string))
+          }
+        }
+
+        return readableParts.join(' ')
+      })
+
+      const shortcutText = readableShortcuts.join(', ')
+      return t('$vuetify.hotkey.shortcut', shortcutText)
+    })
+
     function translateKey (key: string) {
       return key.startsWith('$vuetify.') ? t(key) : key
     }
@@ -356,43 +390,73 @@ export const VHotkey = genericComponent()({
     /**
      * Render function that creates the visual representation of the keyboard shortcuts
      * Structure:
-     * - Container div with v-hotkey class
+     * - Container div with v-hotkey class and accessibility attributes
      * - Each key combination gets a span with v-hotkey__combination class
      * - Each individual key gets wrapped in a <kbd> element with v-hotkey__key class
      * - Keys within a combination are separated by '+' dividers
      * - Multiple combinations are separated by spaces
      */
     useRender(() => (
-      <div class="v-hotkey">
+      <div
+        class="v-hotkey"
+        role="img"
+        aria-label={ accessibleLabel.value }
+      >
         { keyCombinations.value.map((combination, comboIndex) => (
           <span class="v-hotkey__combination" key={ comboIndex }>
             { combination.map((key, keyIndex) => (
               <>
-              { isDelineator(key) ? (
+                { isDelineator(key) ? (
                   <>
                     { /* Render + separator for AND delineators */ }
-                    { AND_DELINEATOR.isEqual(key) && <span key={ keyIndex } class="v-hotkey__divider">+</span> }
+                    { AND_DELINEATOR.isEqual(key) && (
+                      <span
+                        key={ keyIndex }
+                        class="v-hotkey__divider"
+                        aria-hidden="true"
+                      >
+                        +
+                      </span>
+                    )}
                     { /* Render "then" text for THEN delineators */ }
                     {
-                      THEN_DELINEATOR.isEqual(key) &&
-                      <span key={ keyIndex } class="v-hotkey__divider">{ t('$vuetify.hotkey.then') }</span>
-                    }
+                      THEN_DELINEATOR.isEqual(key) && (
+                      <span
+                        key={ keyIndex }
+                        class="v-hotkey__divider"
+                        aria-hidden="true"
+                      >
+                        { t('$vuetify.hotkey.then') }
+                      </span>
+                      )}
                   </>
-              ) : (
+                ) : (
                   <>
                     { /* Individual key display */ }
-                    <VKbd key={ keyIndex } class={['v-hotkey__key', key[0] === 'icon' ? 'v-hotkey__key-icon' : `v-hotkey__key-${key[0]}`]}>
+                    <VKbd
+                      key={ keyIndex }
+                      class={[
+                        'v-hotkey__key',
+                        key[0] === 'icon' ? 'v-hotkey__key-icon' : `v-hotkey__key-${key[0]}`,
+                      ]}
+                      aria-hidden="true"
+                    >
                       { /* Render icon or text based on the key display type */ }
                       {
-                        key[0] === 'icon' ? <VIcon icon={ key[1] } /> : translateKey(key[1])
+                        key[0] === 'icon' ? (
+                          <VIcon
+                            icon={ key[1] }
+                            aria-hidden="true"
+                          />
+                        ) : translateKey(key[1])
                       }
                     </VKbd>
                   </>
-              )}
+                )}
               </>
             ))}
             { /* Add space between different key combinations, but not after the last combination */ }
-            { comboIndex < keyCombinations.value.length - 1 && <span>&nbsp;</span> }
+            { comboIndex < keyCombinations.value.length - 1 && <span aria-hidden="true">&nbsp;</span> }
           </span>
         ))}
       </div>

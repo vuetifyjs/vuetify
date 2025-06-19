@@ -131,5 +131,7 @@ export default {
     rightArrow: 'Right Arrow',
     backspace: 'Backspace',
     option: 'Option',
+    plus: 'plus',
+    shortcut: 'Keyboard shortcut: {0}',
   },
 }
