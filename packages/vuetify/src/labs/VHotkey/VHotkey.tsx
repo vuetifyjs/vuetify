@@ -13,7 +13,6 @@
  * - Used throughout the command palette for instruction display
  */
 
-/* eslint-disable no-fallthrough */
 // Styles
 import './VHotkey.scss'
 
@@ -41,27 +40,17 @@ type KeyDisplay = [Exclude<DisplayMode, 'icon'>, string] | [Extract<DisplayMode,
 // Key mapping function type
 type KeyMap = Record<string, (mode: DisplayMode, isMac: boolean) => KeyDisplay>
 
-/**
- * Configuration type for key display across different modes
- */
 type KeyConfig = {
   symbol?: string
   icon?: string
   text: string
 }
 
-/**
- * Platform-specific key configuration
- */
 type PlatformKeyConfig = {
   mac?: KeyConfig
   default: KeyConfig
 }
 
-/**
- * Creates a key function from declarative configuration
- * This approach separates platform logic from display mode logic
- */
 function createKey (config: PlatformKeyConfig) {
   return (mode: DisplayMode, isMac: boolean): KeyDisplay => {
     const keyConfig = (isMac && config.mac) ? config.mac : config.default
@@ -148,9 +137,6 @@ const keyMap = {
   }),
 } as const satisfies KeyMap
 
-/**
- * Props factory for VHotkey component
- */
 export const makeVHotkeyProps = propsFactory({
   // String representing keyboard shortcuts (e.g., "ctrl+k", "meta+shift+p")
   keys: String,
@@ -166,10 +152,6 @@ export const makeVHotkeyProps = propsFactory({
   },
 }, 'VHotkey')
 
-/**
- * Delineator class for handling key combination separators
- * Distinguishes between 'and' (+) and 'then' (-) relationships
- */
 class Delineator {
   val
   constructor (delineator: string) {
@@ -182,7 +164,6 @@ class Delineator {
   }
 }
 
-// Type guards for parsing logic
 function isDelineator (value: any): value is Delineator {
   return value instanceof Delineator
 }
@@ -190,10 +171,6 @@ function isString (value: any): value is string {
   return typeof value === 'string'
 }
 
-/**
- * Applies the appropriate display mode to a key based on the key map
- * Handles platform-specific differences and fallbacks
- */
 function applyDisplayModeToKey (keyMap: KeyMap, mode: DisplayMode, key: string, isMac: boolean): KeyDisplay {
   // Normalize keys to lowercase for consistent lookup
   const lowerKey = key.toLowerCase()
@@ -207,13 +184,6 @@ function applyDisplayModeToKey (keyMap: KeyMap, mode: DisplayMode, key: string, 
   return ['text', key.toUpperCase()]
 }
 
-/**
- * VHotkey Component
- *
- * Renders keyboard shortcuts with proper styling and platform awareness.
- * Handles complex parsing of key combination strings and renders them
- * appropriately based on the display mode and platform.
- */
 export const VHotkey = genericComponent()({
   name: 'VHotkey',
 
@@ -222,18 +192,11 @@ export const VHotkey = genericComponent()({
   setup (props) {
     const { t } = useLocale()
 
-    // Detect if user is on Mac for platform-specific key handling
     const isMac = typeof navigator !== 'undefined' && /macintosh/i.test(navigator.userAgent)
 
-    // Delineator instances for key combination parsing
     const AND_DELINEATOR = new Delineator('and') // For + separators
     const THEN_DELINEATOR = new Delineator('then') // For - separators
 
-    /**
-     * Main computed property that parses the keys string and converts it into
-     * a structured format for rendering. Handles multiple key combinations
-     * separated by spaces (e.g., "ctrl+k meta+p" becomes two separate combinations)
-     */
     const keyCombinations = computed(() => {
       if (!props.keys) return []
 
@@ -349,10 +312,6 @@ export const VHotkey = genericComponent()({
       })
     })
 
-    /**
-     * Computed property that generates an accessible label for screen readers
-     * This creates a human-readable description of the keyboard shortcut
-     */
     const accessibleLabel = computed(() => {
       if (!props.keys) return ''
 
@@ -387,15 +346,6 @@ export const VHotkey = genericComponent()({
       return key.startsWith('$vuetify.') ? t(key) : key
     }
 
-    /**
-     * Render function that creates the visual representation of the keyboard shortcuts
-     * Structure:
-     * - Container div with v-hotkey class and accessibility attributes
-     * - Each key combination gets a span with v-hotkey__combination class
-     * - Each individual key gets wrapped in a <kbd> element with v-hotkey__key class
-     * - Keys within a combination are separated by '+' dividers
-     * - Multiple combinations are separated by spaces
-     */
     useRender(() => (
       <div
         class="v-hotkey"
@@ -404,58 +354,55 @@ export const VHotkey = genericComponent()({
       >
         { keyCombinations.value.map((combination, comboIndex) => (
           <span class="v-hotkey__combination" key={ comboIndex }>
-            { combination.map((key, keyIndex) => (
-              <>
-                { isDelineator(key) ? (
-                  <>
-                    { /* Render + separator for AND delineators */ }
-                    { AND_DELINEATOR.isEqual(key) && (
-                      <span
-                        key={ keyIndex }
-                        class="v-hotkey__divider"
-                        aria-hidden="true"
-                      >
-                        +
-                      </span>
-                    )}
-                    { /* Render "then" text for THEN delineators */ }
-                    {
-                      THEN_DELINEATOR.isEqual(key) && (
-                      <span
-                        key={ keyIndex }
-                        class="v-hotkey__divider"
-                        aria-hidden="true"
-                      >
-                        { t('$vuetify.hotkey.then') }
-                      </span>
-                      )}
-                  </>
-                ) : (
-                  <>
-                    { /* Individual key display */ }
-                    <VKbd
+            { combination.map((key, keyIndex) => {
+              return isDelineator(key) ? (
+                <>
+                  { /* Render + separator for AND delineators */ }
+                  { AND_DELINEATOR.isEqual(key) && (
+                    <span
                       key={ keyIndex }
-                      class={[
-                        'v-hotkey__key',
-                        key[0] === 'icon' ? 'v-hotkey__key-icon' : `v-hotkey__key-${key[0]}`,
-                      ]}
+                      class="v-hotkey__divider"
                       aria-hidden="true"
                     >
-                      { /* Render icon or text based on the key display type */ }
-                      {
-                        key[0] === 'icon' ? (
-                          <VIcon
-                            icon={ key[1] }
-                            aria-hidden="true"
-                          />
-                        ) : translateKey(key[1])
-                      }
-                    </VKbd>
-                  </>
-                )}
-              </>
-            ))}
-            { /* Add space between different key combinations, but not after the last combination */ }
+                      +
+                    </span>
+                  )}
+                  { /* Render "then" text for THEN delineators */ }
+                  {
+                    THEN_DELINEATOR.isEqual(key) && (
+                    <span
+                      key={ keyIndex }
+                      class="v-hotkey__divider"
+                      aria-hidden="true"
+                    >
+                      { t('$vuetify.hotkey.then') }
+                    </span>
+                    )}
+                </>
+              ) : (
+                <>
+                  { /* Individual key display */ }
+                  <VKbd
+                    key={ keyIndex }
+                    class={[
+                      'v-hotkey__key',
+                      key[0] === 'icon' ? 'v-hotkey__key-icon' : `v-hotkey__key-${key[0]}`,
+                    ]}
+                    aria-hidden="true"
+                  >
+                    { /* Render icon or text based on the key display type */ }
+                    {
+                      key[0] === 'icon' ? (
+                        <VIcon
+                          icon={ key[1] }
+                          aria-hidden="true"
+                        />
+                      ) : translateKey(key[1])
+                    }
+                  </VKbd>
+                </>
+              )
+            })}
             { comboIndex < keyCombinations.value.length - 1 && <span aria-hidden="true">&nbsp;</span> }
           </span>
         ))}
