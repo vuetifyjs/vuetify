@@ -1,7 +1,7 @@
 ---
 emphasized: true
 meta:
-  title: Hotkey composable
+  title: useHotkey composable
   description: Handle keyboard shortcuts within your application using the useHotkey composable
   keywords: hotkeys, keyboard shortcuts, composable, useHotkey, key bindings
 related:
@@ -14,7 +14,7 @@ features:
   report: true
 ---
 
-# Hotkey composable
+# useHotkey composable
 
 Handle keyboard shortcuts within your application using the **useHotkey** composable. This composable provides a simple and powerful way to register keyboard shortcuts that work across different platforms and input contexts.
 
@@ -70,6 +70,84 @@ Customize hotkey behavior with options for event type, input handling, and more:
 
 <ExamplesExample file="hotkey/options" />
 
+## Configuration options
+
+The `useHotkey` composable accepts an optional third parameter of type `HotkeyOptions` to customize its behavior:
+
+```typescript
+interface HotkeyOptions {
+  event?: 'keydown' | 'keyup'
+  inputs?: boolean
+  preventDefault?: boolean
+  sequenceTimeout?: number
+}
+```
+
+### Event type
+
+Control which keyboard event triggers the hotkey:
+
+```js
+// Trigger on key press (default)
+useHotkey('ctrl+s', handleSave, { event: 'keydown' })
+
+// Trigger on key release
+useHotkey('ctrl+s', handleSave, { event: 'keyup' })
+```
+
+**When to use:**
+- `keydown`: For actions that should trigger immediately when pressed (most common)
+- `keyup`: For actions that should wait until the key is released, useful for preventing repeated triggers
+
+### Input handling
+
+By default, hotkeys are disabled when input elements are focused to prevent conflicts with typing:
+
+```js
+// Default: hotkeys disabled in input fields
+useHotkey('ctrl+s', handleSave)
+
+// Allow hotkeys even when inputs are focused
+useHotkey('ctrl+s', handleSave, { inputs: true })
+```
+
+**Best practices:**
+- Keep `inputs: false` (default) for global shortcuts like save/copy/paste
+- Use `inputs: true` for application-specific shortcuts that should work everywhere
+- Consider using different key combinations for input-specific actions
+
+### Prevent default behavior
+
+Control whether the browser's default behavior for the key combination is prevented:
+
+```js
+// Prevent browser default (recommended for most cases)
+useHotkey('ctrl+s', handleSave, { preventDefault: true })
+
+// Allow browser default behavior
+useHotkey('f5', handleRefresh, { preventDefault: false })
+```
+
+**When to disable:**
+- When you want to enhance rather than replace browser behavior
+- For accessibility keys that should maintain their original function
+- When testing or debugging hotkey interactions
+
+### Sequence timeout
+
+For key sequences, control how long users have between keystrokes:
+
+```js
+// Default: 1 second between sequence steps
+useHotkey('ctrl+k-p', openPalette)
+
+// Faster timeout for expert users
+useHotkey('ctrl+k-p', openPalette, { sequenceTimeout: 500 })
+
+// Longer timeout for accessibility
+useHotkey('ctrl+k-p', openPalette, { sequenceTimeout: 2000 })
+```
+
 ## Key combination syntax
 
 The hotkey string supports various modifiers and special keys:
@@ -96,6 +174,8 @@ The hotkey string supports various modifiers and special keys:
 - Keys are case-insensitive: `Ctrl+S` equals `ctrl+s`
 - Spaces are ignored: `ctrl + s` equals `ctrl+s`
 
+Check out [all possible keycodes](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/code/code_values).
+
 ## Manual cleanup
 
 The composable automatically manages cleanup during the Vue component's unmount lifecycle event. If you need to perform manual cleanup, you can save the cleanup function returned by the composable. Executing this function will remove the hotkey listener.
@@ -108,3 +188,32 @@ const cleanup = useHotkey('ctrl+s', () => {
 // Later, manually cleanup
 cleanup()
 ```
+## Avoiding key binding conflicts
+
+Prevent conflicts by avoiding reserved shortcuts and organizing hotkeys systematically:
+
+### Common conflicts to avoid
+
+```js
+// ❌ Browser shortcuts
+useHotkey('f5', handleAction)        // Refresh
+useHotkey('ctrl+t', handleAction)    // New tab
+useHotkey('ctrl+w', handleAction)    // Close tab
+
+// ❌ OS shortcuts
+useHotkey('alt+tab', handleAction)   // Window switching
+useHotkey('meta', handleAction)      // Start menu (Windows)
+
+// ✅ Safe alternatives
+useHotkey('ctrl+shift+r', handleAction)
+useHotkey('ctrl+k-t', handleAction)
+useHotkey('alt+1', handleAction)
+```
+
+### Best practices
+
+- **Use modifier combinations**: Prefer `Ctrl+Shift+Key` for custom actions
+- **Namespace by feature**: Group related shortcuts (e.g., `ctrl+k-*` for search)
+- **Test cross-platform**: Verify shortcuts work on Windows, macOS, and Linux
+- **Document shortcuts**: Maintain a list of all application hotkeys
+
