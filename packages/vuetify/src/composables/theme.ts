@@ -506,17 +506,15 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
 
   const globalName = new Proxy(name, {
     get (target, prop) {
-      return target[prop as keyof typeof target]
+      return Reflect.get(target, prop)
     },
     set (target, prop, val) {
       if (prop === 'value') {
         deprecate(`theme.global.name.value = ${val}`, `theme.change('${val}')`)
       }
-      // @ts-expect-error
-      target[prop] = val
-      return true
+      return Reflect.set(target, prop, val)
     },
-  }) as typeof name
+  })
 
   return {
     install,
