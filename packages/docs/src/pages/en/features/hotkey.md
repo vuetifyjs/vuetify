@@ -215,4 +215,3 @@ useHotkey('alt+1', handleAction)
 - **Use modifier combinations**: Prefer `Ctrl+Shift+Key` for custom actions
 - **Test cross-platform**: Verify shortcuts work on Windows, macOS, and Linux
 - **Document shortcuts**: Maintain a list of all application hotkeys
-
