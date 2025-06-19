@@ -232,8 +232,6 @@ export const VInput = genericComponent<new <T>(
             <div
               id={ messagesId.value }
               class="v-input__details"
-              role="alert"
-              aria-live="polite"
             >
               <VMessages
                 active={ hasMessages }
