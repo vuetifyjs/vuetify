@@ -51,7 +51,11 @@
               step="100"
               thumb-label
               @update:model-value="updateTimeout"
-            ></v-slider>
+            >
+              <template #thumb-label="{ modelValue }">
+                {{ modelValue }}ms
+              </template>
+            </v-slider>
 
             <v-divider class="my-4"></v-divider>
 
