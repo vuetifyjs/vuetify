@@ -425,7 +425,6 @@ export const VCombobox = genericComponent<new <
       if (val || val === oldVal) return
 
       selectionIndex.value = -1
-      menu.value = false
 
       if (search.value) {
         if (props.multiple) {
