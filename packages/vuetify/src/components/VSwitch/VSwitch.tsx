@@ -11,6 +11,7 @@ import { makeVSelectionControlProps, VSelectionControl } from '@/components/VSel
 
 // Composables
 import { useFocus } from '@/composables/focus'
+import { forwardRefs } from '@/composables/forwardRefs'
 import { LoaderSlot, useLoader } from '@/composables/loader'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
@@ -79,6 +80,7 @@ export const VSwitch = genericComponent<new <T>(
     const { loaderClasses } = useLoader(props)
     const { isFocused, focus, blur } = useFocus(props)
     const control = ref<VSelectionControl>()
+    const inputRef = ref<VInput>()
     const isForcedColorsModeActive = IN_BROWSER && window.matchMedia('(forced-colors: active)').matches
 
     const loaderColor = toRef(() => {
@@ -108,6 +110,7 @@ export const VSwitch = genericComponent<new <T>(
 
       return (
         <VInput
+          ref={ inputRef }
           class={[
             'v-switch',
             { 'v-switch--flat': props.flat },
@@ -243,7 +246,7 @@ export const VSwitch = genericComponent<new <T>(
       )
     })
 
-    return {}
+    return forwardRefs(inputRef)
   },
 })
 
