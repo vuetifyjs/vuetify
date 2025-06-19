@@ -34,7 +34,7 @@
     { label: 'Basic shortcut (Ctrl+K)', value: 'ctrl+k' },
     { label: 'Multiple keys (Ctrl+Shift+P)', value: 'ctrl+shift+p' },
     { label: 'Meta key (Meta+S)', value: 'meta+s' },
-    { label: 'Sequential (Ctrl+K then P)', value: 'ctrl+k then p' },
+    { label: 'Sequential (Ctrl+K-P)', value: 'ctrl+k-p' },
     { label: 'Arrow key (Alt+Up)', value: 'alt+up' },
     { label: 'Function key (F1)', value: 'f1' },
     { label: 'Special key (Enter)', value: 'enter' },
