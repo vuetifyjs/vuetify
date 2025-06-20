@@ -31,6 +31,8 @@ Hotkeys display keyboard shortcuts with proper styling and platform awareness. T
 
 <ExamplesUsage name="v-hotkey" />
 
+<PromotedEntry />
+
 ## API
 
 | Component | Description |
@@ -49,7 +51,7 @@ The `v-hotkey` component serves solely as a visual tool for displaying keyboard 
 
 ### Props
 
-The component provides several props to customize how keyboard shortcuts are displayed and parsed.
+The component provides several props to customize how keyboard shortcuts are displayed and parsed. This component is designed to work seamlessly across different platforms, automatically adjusting key representations based on the user's operating system.
 
 #### Keys
 
@@ -72,9 +74,35 @@ The component automatically detects the user's platform and adjusts key represen
 #### Custom key mapping
 
 ::: info
-It is recommended to set the <b>key-map</b> prop at the application level via global component defaults rather than per-instance for consistency.
+It is recommended to set the **key-map** prop at the application level via global component defaults rather than per-instance for consistency.
 :::
 
 Use the **key-map** prop to customize how specific keys are displayed:
 
 <ExamplesExample file="v-hotkey/prop-key-map" />
+
+## Accessibility
+
+The `v-hotkey` component is designed with accessibility in mind. It uses semantic HTML elements and ARIA attributes to ensure that screen readers can interpret the displayed keyboard shortcuts correctly.
+
+### ARIA attributes
+
+The component uses the `aria-label` attribute to provide a clear description of the keyboard shortcut. This is automatically generated based off of current keys.
+
+```html
+<v-hotkey keys="ctrl+s" />
+```
+
+will generate the following HTML:
+
+```html
+<span class="v-hotkey" aria-label="Keyboard shortcut: $CTRL + S">
+  <span class="v-hotkey__combination">
+    <kbd class="..." aria-hidden="true">...</kbd>
+
+    <span class="v-hotkey__divider__text">+</span>
+
+    <kbd class="..." aria-hidden="true">S</kbd>
+  </span>
+</span>
+```

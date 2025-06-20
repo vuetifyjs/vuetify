@@ -1,99 +1,99 @@
 <template>
-  <div>
-    <v-row>
+  <v-container class="pa-0" fluid>
+    <v-row dense>
       <v-col cols="12" md="6">
-        <v-card>
-          <v-card-title>Single Keys</v-card-title>
-          <v-card-text>
+        <v-card height="200" title="Single Keys">
+          <template v-slot:text>
             <div class="d-flex flex-column ga-2">
               <div class="d-flex align-center justify-space-between">
-                <span>Letter key:</span>
+                Letter key:
                 <v-hotkey keys="k"></v-hotkey>
               </div>
+
               <div class="d-flex align-center justify-space-between">
-                <span>Enter key:</span>
+                Enter key:
                 <v-hotkey keys="enter"></v-hotkey>
               </div>
+
               <div class="d-flex align-center justify-space-between">
-                <span>Escape key:</span>
+                Escape key:
                 <v-hotkey keys="escape"></v-hotkey>
               </div>
+
               <div class="d-flex align-center justify-space-between">
-                <span>Arrow key:</span>
+                Arrow key:
                 <v-hotkey keys="arrowup"></v-hotkey>
               </div>
             </div>
-          </v-card-text>
+          </template>
         </v-card>
       </v-col>
 
       <v-col cols="12" md="6">
-        <v-card>
-          <v-card-title>Key Combinations</v-card-title>
-          <v-card-text>
+        <v-card height="200" title="Key Combinations">
+          <template v-slot:text>
             <div class="d-flex flex-column ga-2">
               <div class="d-flex align-center justify-space-between">
-                <span>Ctrl + K:</span>
+                Ctrl + K:
                 <v-hotkey keys="ctrl+k"></v-hotkey>
               </div>
+
               <div class="d-flex align-center justify-space-between">
-                <span>Meta + Shift + P:</span>
+                Meta + Shift + P:
                 <v-hotkey keys="meta+shift+p"></v-hotkey>
               </div>
+
               <div class="d-flex align-center justify-space-between">
-                <span>Alt + Arrow:</span>
+                Alt + Arrow:
                 <v-hotkey keys="alt+arrowup"></v-hotkey>
               </div>
+
               <div class="d-flex align-center justify-space-between">
-                <span>Ctrl + Shift + Enter:</span>
+                Ctrl + Shift + Enter:
                 <v-hotkey keys="ctrl+shift+enter"></v-hotkey>
               </div>
             </div>
-          </v-card-text>
+          </template>
         </v-card>
       </v-col>
     </v-row>
 
-    <v-row class="mt-4">
+    <v-row dense>
       <v-col cols="12" md="6">
-        <v-card>
-          <v-card-title>Sequential Actions</v-card-title>
-          <v-card-text>
+        <v-card height="132" title="Sequential Actions">
+          <template v-slot:text>
             <div class="d-flex flex-column ga-2">
               <div class="d-flex align-center justify-space-between">
-                <span>Ctrl+K then P:</span>
+                Ctrl+K then P:
                 <v-hotkey keys="ctrl+k-then-p"></v-hotkey>
               </div>
+
               <div class="d-flex align-center justify-space-between">
-                <span>Ctrl+X then Ctrl+C:</span>
+                Ctrl+X then Ctrl+C:
                 <v-hotkey keys="ctrl+x-then-ctrl+c"></v-hotkey>
               </div>
             </div>
-          </v-card-text>
+          </template>
         </v-card>
       </v-col>
 
       <v-col cols="12" md="6">
-        <v-card>
-          <v-card-title>Multiple Shortcuts</v-card-title>
-          <v-card-text>
+        <v-card height="132" title="Multiple Options">
+          <template v-slot:text>
             <div class="d-flex flex-column ga-2">
               <div class="d-flex align-center justify-space-between">
-                <span>Ctrl+K or Meta+P:</span>
+                Ctrl+K or Meta+P:
                 <v-hotkey keys="ctrl+k meta+p"></v-hotkey>
               </div>
+
               <div class="d-flex align-center justify-space-between">
-                <span>Multiple options:</span>
+                Multiple options:
                 <v-hotkey keys="ctrl+s meta+s ctrl+shift+s"></v-hotkey>
               </div>
             </div>
-          </v-card-text>
+          </template>
         </v-card>
       </v-col>
     </v-row>
-  </div>
+  </v-container>
 </template>
-
-<script setup>
-  //
-</script>

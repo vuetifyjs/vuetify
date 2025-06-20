@@ -1,72 +1,71 @@
 <template>
-  <div>
+  <v-container class="pa-0" fluid>
     <v-alert
-      class="mb-4"
+      class="mb-2"
       type="info"
       variant="tonal"
     >
       <div class="d-flex align-center">
         <div>
-          <strong>Platform Detection:</strong> Currently detected as {{ isMac ? 'Mac' : 'PC' }}
+          <strong>Platform Detection:</strong> Currently detected as {{ display.platform.isMac ? 'Mac' : 'PC' }}
         </div>
       </div>
     </v-alert>
 
-    <v-row>
+    <v-row dense>
       <v-col cols="12" md="6">
-        <v-card>
-          <v-card-title>Cross-Platform Keys</v-card-title>
-          <v-card-subtitle>These keys automatically adapt to your platform</v-card-subtitle>
-          <v-card-text>
-            <div class="d-flex flex-column ga-3">
+        <v-card subtitle="These keys automatically adapt to your platform" title="Cross-Platform Keys">
+          <template v-slot:text>
+            <div class="d-flex flex-column ga-2">
               <div class="d-flex align-center justify-space-between">
-                <span>meta+k:</span>
+                meta+k:
                 <v-hotkey keys="meta+k"></v-hotkey>
               </div>
+
               <div class="d-flex align-center justify-space-between">
-                <span>alt+shift+f:</span>
+                alt+shift+f:
                 <v-hotkey keys="alt+shift+f"></v-hotkey>
               </div>
+
               <div class="d-flex align-center justify-space-between">
-                <span>meta+alt+shift+k:</span>
+                meta+alt+shift+k:
                 <v-hotkey keys="meta+alt+shift+k"></v-hotkey>
               </div>
             </div>
-          </v-card-text>
+          </template>
         </v-card>
       </v-col>
 
       <v-col cols="12" md="6">
-        <v-card>
-          <v-card-title>Platform-Specific Keys</v-card-title>
-          <v-card-subtitle>Explicit platform targeting</v-card-subtitle>
-          <v-card-text>
-            <div class="d-flex flex-column ga-3">
+        <v-card subtitle="Explicit platform targeting" title="Platform-Specific Keys">
+          <template v-slot:text>
+            <div class="d-flex flex-column ga-2">
               <div class="d-flex align-center justify-space-between">
-                <span>ctrl+c:</span>
+                ctrl+c:
                 <v-hotkey keys="ctrl+c"></v-hotkey>
               </div>
+
               <div class="d-flex align-center justify-space-between">
-                <span>cmd+v:</span>
+                cmd+v:
                 <v-hotkey keys="cmd+v"></v-hotkey>
               </div>
+
               <div class="d-flex align-center justify-space-between">
-                <span>ctrl+x meta+c:</span>
+                ctrl+x meta+c:
                 <v-hotkey keys="ctrl+x meta+c"></v-hotkey>
               </div>
             </div>
-          </v-card-text>
+          </template>
         </v-card>
       </v-col>
     </v-row>
 
-    <v-row class="mt-4">
+    <v-row dense>
       <v-col cols="12">
-        <v-card>
-          <v-card-title>Display Mode Comparison</v-card-title>
-          <v-card-text>
-            <div class="mb-4">
-              <v-btn-toggle v-model="displayMode" mandatory>
+        <v-card title="Display Mode Comparison">
+          <template v-slot:text>
+            <div class="mb-2">
+              <v-btn-toggle v-model="displayMode" density="compact" border divided mandatory>
                 <v-btn value="icon">Icon</v-btn>
                 <v-btn value="symbol">Symbol</v-btn>
                 <v-btn value="text">Text</v-btn>
@@ -81,16 +80,17 @@
                   <th>Platform Behavior</th>
                 </tr>
               </thead>
+
               <tbody>
                 <tr>
                   <td><code>meta+k</code></td>
                   <td><v-hotkey :display-mode="displayMode" keys="meta+k"></v-hotkey></td>
-                  <td>{{ isMac ? 'Command on Mac' : 'Ctrl on PC' }}</td>
+                  <td>{{ display.platform.isMac ? 'Command on Mac' : 'Ctrl on PC' }}</td>
                 </tr>
                 <tr>
                   <td><code>alt+f</code></td>
                   <td><v-hotkey :display-mode="displayMode" keys="alt+f"></v-hotkey></td>
-                  <td>{{ isMac ? 'Option on Mac' : 'Alt on PC' }}</td>
+                  <td>{{ display.platform.isMac ? 'Option on Mac' : 'Alt on PC' }}</td>
                 </tr>
                 <tr>
                   <td><code>ctrl+shift+p</code></td>
@@ -100,24 +100,37 @@
                 <tr>
                   <td><code>cmd+shift+p</code></td>
                   <td><v-hotkey :display-mode="displayMode" keys="cmd+shift+p"></v-hotkey></td>
-                  <td>{{ isMac ? 'Command on Mac' : 'Ctrl on PC' }}</td>
+                  <td>{{ display.platform.isMac ? 'Command on Mac' : 'Ctrl on PC' }}</td>
                 </tr>
               </tbody>
             </v-table>
-          </v-card-text>
+          </template>
         </v-card>
       </v-col>
     </v-row>
-  </div>
+  </v-container>
 </template>
 
 <script setup>
-  import { computed, ref } from 'vue'
+  import { ref } from 'vue'
+  import { useDisplay } from 'vuetify'
 
   const displayMode = ref('icon')
+  const display = useDisplay()
+</script>
 
-  // Detect if user is on Mac (same logic as in VHotkey component)
-  const isMac = computed(() => {
-    return typeof navigator !== 'undefined' && /macintosh/i.test(navigator.userAgent)
-  })
+<script>
+  export default {
+    data () {
+      return {
+        displayMode: 'icon',
+      }
+    },
+
+    computed: {
+      display () {
+        return this.$vuetify.display
+      },
+    },
+  }
 </script>
