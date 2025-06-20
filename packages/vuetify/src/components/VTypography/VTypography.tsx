@@ -26,6 +26,10 @@ export const makeVTypographyProps = propsFactory({
     type: String as PropType<Breakpoint>,
     default: 'sm',
   },
+  customVariant: {
+    type: Object as PropType<Partial<CSSStyleDeclaration>>,
+    default: undefined,
+  },
   color: String,
 
   ...makeComponentProps(),
@@ -57,6 +61,7 @@ export const VTypography = genericComponent()({
         overflowWrap: 'break-word',
         maxWidth: '100%',
         width: '100%',
+         ...props.customVariant
       }
     })
 
