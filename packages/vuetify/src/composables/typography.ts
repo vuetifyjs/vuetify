@@ -1,8 +1,8 @@
 // composables/typography.ts
-import { inject, provide, ref } from 'vue'
+import { inject, ref } from 'vue'
 import type { App, InjectionKey, Ref } from 'vue'
 import { mergeDeep } from '@/util'
-// Définitions typographiques par défaut
+
 export const defaultTypography = {
   'display-large': {
     fontSize: '57px',
