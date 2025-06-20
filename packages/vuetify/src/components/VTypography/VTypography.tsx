@@ -1,35 +1,25 @@
-
 import './VTypography.sass'
 
-
-import { makeComponentProps } from '@/composables/component'
-import { useTextColor } from '@/composables/color'
-import { makeTagProps } from '@/composables/tag'
-import { makeThemeProps, provideTheme } from '@/composables/theme'
-
-
 import { computed } from 'vue'
-import { useDisplay } from '@/composables/display'
-import { genericComponent, propsFactory, useRender } from '@/util'
-
-
 import type { PropType } from 'vue'
 
+import { useTextColor } from '@/composables/color'
+import { makeComponentProps } from '@/composables/component'
+import { useDisplay } from '@/composables/display'
+import { makeTagProps } from '@/composables/tag'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
+import { genericComponent, propsFactory, useRender } from '@/util'
+import { useTypography, type TypographyVariant } from '@/composables/typography'
 
-import { typographyStyles } from './typography'
-
-type Variant = keyof typeof typographyStyles
 type Breakpoint = 'sm' | 'md' | 'lg' | 'xl'
-
-export { typographyStyles } from './typography'
 
 export const makeVTypographyProps = propsFactory({
   variant: {
-    type: String as PropType<Variant>,
+    type: String as PropType<TypographyVariant>,
     default: 'body-medium',
   },
   mobileVariant: {
-    type: String as PropType<Variant>,
+    type: String as PropType<TypographyVariant>,
     default: undefined,
   },
   mobileBreakpoint: {
@@ -52,11 +42,12 @@ export const VTypography = genericComponent()({
     const { themeClasses } = provideTheme(props)
     const { textColorClasses, textColorStyles } = useTextColor(() => props.color)
     const display = useDisplay()
+    const typography = useTypography()
 
     const currentStyle = computed(() => {
       const isMobile = display[`${props.mobileBreakpoint}AndDown`]?.value
-      const activeVariant = isMobile && props.mobileVariant ? props.mobileVariant : props.variant
-      const baseStyle = typographyStyles[activeVariant] ?? {}
+      const activeVariant = (isMobile && props.mobileVariant) ? props.mobileVariant : props.variant
+      const baseStyle = typography.getStyle(activeVariant)
 
       return {
         ...baseStyle,
