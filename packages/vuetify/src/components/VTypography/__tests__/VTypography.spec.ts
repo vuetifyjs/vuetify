@@ -121,4 +121,39 @@ describe('VTypography', () => {
 
     expect(wrapper.classes()).toContain('v-theme--dark')
   })
+
+  it('applies customVariant styles', () => {
+    const wrapper = mount(VTypography, {
+      global: { plugins: [vuetify] },
+      props: {
+        customVariant: { fontSize: '32px', fontWeight: '700' },
+      },
+      slots: {
+        default: 'Custom style',
+      },
+    })
+
+    const style = wrapper.attributes('style')
+    expect(style).toContain('font-size: 32px')
+    expect(style).toContain('font-weight: 700')
+  })
+
+  it('prioritizes customVariant over text', () => {
+    const wrapper = mount(VTypography, {
+      global: { plugins: [vuetify] },
+      props: {
+        text: 'headline-large',
+        customVariant: { fontSize: '42px', fontWeight: '900' },
+      },
+      slots: {
+        default: 'Priority Test',
+      },
+    })
+
+    const style = wrapper.attributes('style')
+    expect(style).toContain('font-size: 42px')
+    expect(style).toContain('font-weight: 900')
+  })
+
+
 })
