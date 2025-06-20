@@ -28,10 +28,10 @@
   const name = 'v-hotkey'
   const model = ref('default')
   const options = [...displayModes]
-  const keyExample = ref('ctrl+k')
+  const keyExample = ref('cmd+k')
 
   const keyExamples = [
-    { label: 'Basic shortcut (Ctrl+K)', value: 'ctrl+k' },
+    { label: 'Basic shortcut (Cmd+K)', value: 'cmd+k' },
     { label: 'Multiple keys (Ctrl+Shift+P)', value: 'ctrl+shift+p' },
     { label: 'Meta key (Meta+S)', value: 'meta+s' },
     { label: 'Sequential (Ctrl+K-P)', value: 'ctrl+k-p' },
