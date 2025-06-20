@@ -276,7 +276,9 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
       )
     })
 
-    return forwardRefs({}, inputRef)
+    return forwardRefs({
+      focus: () => startThumbRef.value?.$el.focus(),
+    }, inputRef)
   },
 })
 

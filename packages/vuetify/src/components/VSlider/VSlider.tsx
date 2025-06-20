@@ -182,7 +182,9 @@ export const VSlider = genericComponent<VSliderSlots>()({
       )
     })
 
-    return forwardRefs({}, inputRef)
+    return forwardRefs({
+      focus: () => thumbContainerRef.value?.$el.focus(),
+    }, inputRef)
   },
 })
 
