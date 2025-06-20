@@ -4,7 +4,7 @@ import { createTypography } from '../typography'
 import { VTypography } from '@/components/VTypography/VTypography'
 
 describe('VTypography', () => {
-  const typography = createTypography({
+  const typographyInstance = createTypography({
     'custom-variant': {
       fontSize: '99px',
       lineHeight: '100px',
@@ -17,7 +17,7 @@ describe('VTypography', () => {
     blueprint: {
       defaults: {},
     },
-    typography,
+    typography: typographyInstance.styles.value,
   })
 
   it('should inject and use the default typography style', () => {
