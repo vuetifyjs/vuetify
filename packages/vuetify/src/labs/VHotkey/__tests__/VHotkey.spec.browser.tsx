@@ -3,7 +3,7 @@ import { VHotkey } from '../VHotkey'
 
 // Utilities
 import { render, screen } from '@test'
-import { ref, defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
 
 describe('VHotkey.tsx', () => {
   describe('Key Parsing', () => {
@@ -811,6 +811,191 @@ describe('VHotkey.tsx', () => {
       })
     })
 
+    it('should accept custom class and style props', () => {
+      render(() => (
+        <VHotkey
+          keys="ctrl+k"
+          class="custom-class another-class"
+          style={{ backgroundColor: 'red', fontSize: '16px' }}
+        />
+      ))
+
+      const hotkeyElement = screen.getByCSS('.v-hotkey')
+
+      // Check custom classes are applied
+      expect(hotkeyElement).toHaveClass('v-hotkey')
+      expect(hotkeyElement).toHaveClass('custom-class')
+      expect(hotkeyElement).toHaveClass('another-class')
+
+      // Check custom styles are applied
+      expect(hotkeyElement).toHaveStyle({ backgroundColor: 'red' })
+      expect(hotkeyElement).toHaveStyle({ fontSize: '16px' })
+    })
+
+    it('should apply theme classes correctly', () => {
+      render(() => (
+        <VHotkey
+          keys="ctrl+k"
+          theme="dark"
+        />
+      ))
+
+      const hotkeyElement = screen.getByCSS('.v-hotkey')
+
+      // Check theme classes are applied
+      expect(hotkeyElement).toHaveClass('v-hotkey')
+      expect(hotkeyElement).toHaveClass('v-theme--dark')
+    })
+
+    it('should include RTL composable integration', () => {
+      // Test that RTL composable is integrated (classes may be empty in LTR mode)
+      render(() => (
+        <VHotkey keys="ctrl+k" />
+      ))
+
+      const hotkeyElement = screen.getByCSS('.v-hotkey')
+
+      // Check that element exists and RTL composable doesn't break rendering
+      expect(hotkeyElement).toHaveClass('v-hotkey')
+      expect(hotkeyElement).toBeInTheDocument()
+    })
+
+    it('should apply border classes correctly', () => {
+      render(() => (
+        <VHotkey
+          keys="ctrl+k"
+          border="md"
+        />
+      ))
+
+      const hotkeyElement = screen.getByCSS('.v-hotkey')
+      const kbdElements = screen.getAllByCSS('.v-hotkey__key')
+
+      // Check main element exists
+      expect(hotkeyElement).toHaveClass('v-hotkey')
+
+      // Check border classes are applied to individual keys
+      expect(kbdElements.length).toBeGreaterThan(0)
+      kbdElements.forEach(kbd => {
+        expect(kbd).toHaveClass('border-md')
+      })
+    })
+
+    it('should apply rounded classes correctly', () => {
+      render(() => (
+        <VHotkey
+          keys="ctrl+k"
+          rounded="lg"
+        />
+      ))
+
+      const hotkeyElement = screen.getByCSS('.v-hotkey')
+      const kbdElements = screen.getAllByCSS('.v-hotkey__key')
+
+      // Check main element exists
+      expect(hotkeyElement).toHaveClass('v-hotkey')
+
+      // Check rounded classes are applied to individual keys
+      expect(kbdElements.length).toBeGreaterThan(0)
+      kbdElements.forEach(kbd => {
+        expect(kbd).toHaveClass('rounded-lg')
+      })
+    })
+
+    it('should apply color classes correctly', () => {
+      render(() => (
+        <VHotkey
+          keys="ctrl+k"
+          color="primary"
+        />
+      ))
+
+      const hotkeyElement = screen.getByCSS('.v-hotkey')
+      const kbdElements = screen.getAllByCSS('.v-hotkey__key')
+
+      // Check main element exists and has variant class but no background color
+      expect(hotkeyElement).toHaveClass('v-hotkey')
+      expect(hotkeyElement).toHaveClass('v-hotkey--variant-elevated')
+      expect(hotkeyElement).not.toHaveClass('bg-primary')
+
+      // Check color classes are applied to individual keys
+      expect(kbdElements.length).toBeGreaterThan(0)
+      kbdElements.forEach(kbd => {
+        expect(kbd).toHaveClass('bg-primary')
+      })
+    })
+
+    it('should apply elevation classes correctly', () => {
+      render(() => (
+        <VHotkey
+          keys="ctrl+k"
+          elevation="4"
+        />
+      ))
+
+      const hotkeyElement = screen.getByCSS('.v-hotkey')
+      const kbdElements = screen.getAllByCSS('.v-hotkey__key')
+
+      // Check main element exists
+      expect(hotkeyElement).toHaveClass('v-hotkey')
+
+      // Check elevation classes are applied to individual keys
+      expect(kbdElements.length).toBeGreaterThan(0)
+      kbdElements.forEach(kbd => {
+        expect(kbd).toHaveClass('elevation-4')
+      })
+    })
+
+    it('should apply disabled classes correctly', () => {
+      render(() => (
+        <VHotkey
+          keys="ctrl+k"
+          disabled
+        />
+      ))
+
+      const hotkeyElement = screen.getByCSS('.v-hotkey')
+
+      // Check disabled classes are applied
+      expect(hotkeyElement).toHaveClass('v-hotkey')
+      expect(hotkeyElement).toHaveClass('v-hotkey--disabled')
+    })
+
+    it('should combine all composable classes together', () => {
+      render(() => (
+        <VHotkey
+          keys="ctrl+k"
+          class="custom-class"
+          theme="dark"
+          border="sm"
+          rounded="md"
+          elevation="2"
+          color="primary"
+          disabled
+        />
+      ))
+
+      const hotkeyElement = screen.getByCSS('.v-hotkey')
+      const kbdElements = screen.getAllByCSS('.v-hotkey__key')
+
+      // Check all classes are applied together on main element (no background color)
+      expect(hotkeyElement).toHaveClass('v-hotkey')
+      expect(hotkeyElement).toHaveClass('custom-class')
+      expect(hotkeyElement).toHaveClass('v-theme--dark')
+      expect(hotkeyElement).toHaveClass('v-hotkey--variant-elevated')
+      expect(hotkeyElement).toHaveClass('v-hotkey--disabled')
+      expect(hotkeyElement).not.toHaveClass('bg-primary')
+
+      // Check border, rounded, elevation, and color classes are applied to individual keys
+      expect(kbdElements.length).toBeGreaterThan(0)
+      kbdElements.forEach(kbd => {
+        expect(kbd).toHaveClass('border-sm')
+        expect(kbd).toHaveClass('rounded-md')
+        expect(kbd).toHaveClass('elevation-2')
+        expect(kbd).toHaveClass('bg-primary')
+      })
+    })
+
     it('should react to overridePlatform prop changes', async () => {
       // Start on a Windows machine
       Object.defineProperty(window.navigator, 'userAgent', {
@@ -824,7 +1009,7 @@ describe('VHotkey.tsx', () => {
           return { overridePlatform }
         },
         render () {
-          return <VHotkey keys="cmd+k" overridePlatform={this.overridePlatform} />
+          return <VHotkey keys="cmd+k" overridePlatform={ this.overridePlatform } />
         },
       })
 
@@ -879,7 +1064,7 @@ describe('VHotkey.tsx', () => {
           return { displayMode, overridePlatform }
         },
         render () {
-          return <VHotkey keys="cmd+k" displayMode={this.displayMode} overridePlatform={this.overridePlatform} />
+          return <VHotkey keys="cmd+k" displayMode={ this.displayMode } overridePlatform={ this.overridePlatform } />
         },
       })
 
@@ -925,7 +1110,7 @@ describe('VHotkey.tsx', () => {
           return { displayMode, overridePlatform }
         },
         render () {
-          return <VHotkey keys="cmd+k" displayMode={this.displayMode} overridePlatform={this.overridePlatform} />
+          return <VHotkey keys="cmd+k" displayMode={ this.displayMode } overridePlatform={ this.overridePlatform } />
         },
       })
 
@@ -933,7 +1118,7 @@ describe('VHotkey.tsx', () => {
 
       // Initially PC + icon should show Ctrl text
       let textKeys = screen.getAllByCSS('.v-hotkey__key-text')
-      let ctrlText = textKeys.find(key => key.textContent?.includes('Ctrl'))
+      const ctrlText = textKeys.find(key => key.textContent?.includes('Ctrl'))
       expect(ctrlText).toBeDefined()
       expect(screen.queryAllByCSS('.v-hotkey__key-icon')).toHaveLength(0)
 

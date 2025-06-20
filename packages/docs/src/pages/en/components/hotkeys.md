@@ -22,7 +22,7 @@ The `v-hotkey` component renders keyboard shortcuts in a visually consistent and
 <PageFeatures />
 
 ::: warning
-This feature requires [v3.9.0](/getting-started/release-notes/?version=v3.9.0)
+This feature requires [v3.10.0](/getting-started/release-notes/?version=v3.10.0)
 :::
 
 ## Usage

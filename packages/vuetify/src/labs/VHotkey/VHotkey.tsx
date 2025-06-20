@@ -21,7 +21,13 @@ import { VIcon } from '@/components/VIcon'
 import { VKbd } from '@/components/VKbd'
 
 // Composables
-import { useLocale } from '@/composables/locale'
+import { makeBorderProps, useBorder } from '@/composables/border'
+import { makeComponentProps } from '@/composables/component'
+import { makeElevationProps, useElevation } from '@/composables/elevation'
+import { useLocale, useRtl } from '@/composables/locale'
+import { makeRoundedProps, useRounded } from '@/composables/rounded'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
+import { makeVariantProps, useVariant } from '@/composables/variant'
 
 // Utilities
 import { computed } from 'vue'
@@ -152,6 +158,15 @@ export const makeVHotkeyProps = propsFactory({
     type: String as PropType<'mac' | string>,
     default: undefined,
   },
+  // Disabled state
+  disabled: Boolean,
+
+  ...makeComponentProps(),
+  ...makeThemeProps(),
+  ...makeBorderProps(),
+  ...makeRoundedProps(),
+  ...makeElevationProps(),
+  ...makeVariantProps(),
 }, 'VHotkey')
 
 class Delineator {
@@ -200,6 +215,12 @@ export const VHotkey = genericComponent()({
 
   setup (props) {
     const { t } = useLocale()
+    const { themeClasses } = provideTheme(props)
+    const { rtlClasses } = useRtl()
+    const { borderClasses } = useBorder(props)
+    const { roundedClasses } = useRounded(props)
+    const { elevationClasses } = useElevation(props)
+    const { colorClasses, colorStyles, variantClasses } = useVariant(props)
 
     const isMac = computed(() =>
       props.overridePlatform !== undefined
@@ -364,7 +385,17 @@ export const VHotkey = genericComponent()({
 
     useRender(() => (
       <div
-        class="v-hotkey"
+        class={[
+          'v-hotkey',
+          {
+            'v-hotkey--disabled': props.disabled,
+          },
+          themeClasses.value,
+          rtlClasses.value,
+          variantClasses.value,
+          props.class,
+        ]}
+        style={ props.style }
         role="img"
         aria-label={ accessibleLabel.value }
       >
@@ -403,6 +434,13 @@ export const VHotkey = genericComponent()({
                     class={[
                       'v-hotkey__key',
                       key[0] === 'icon' ? 'v-hotkey__key-icon' : `v-hotkey__key-${key[0]}`,
+                      borderClasses.value,
+                      roundedClasses.value,
+                      elevationClasses.value,
+                      colorClasses.value,
+                    ]}
+                    style={[
+                      colorStyles.value,
                     ]}
                     aria-hidden="true"
                   >

@@ -3,26 +3,42 @@
 
 @include tools.layer('components') {
   .v-hotkey {
-    align-items: center;
+    max-height: 1lh;
     display: inline-flex;
     gap: $hotkey-gap;
-    vertical-align: middle;
 
     &__key-icon {
+      align-self: stretch;
       .v-icon {
-        max-width: $hotkey-icon-max-width;
-        min-width: unset;
+        width: min-content;
+        min-width: fit-content;
+        max-height: $hotkey-icon-max-height;
+        .v-icon__svg {
+          height: 100%;
+          // Safari fix
+          width: unset;
+        }
       }
     }
+
+    &__key-symbol.v-kbd,
+    &__key-text.v-kbd {
+      align-self: baseline;
+    }
+
 
     &__divider {
       opacity: $hotkey-divider-opacity;
       font-size: $hotkey-divider-font-size;
+      line-height: 1.3em;
+      /* Baseline-align dividers so they sit naturally with text */
+      align-self: baseline;
     }
 
     &__combination {
-      align-items: center;
-      display: inline-flex;
+      height: inherit;
+      align-self: baseline;
+      display: flex;
       gap: $hotkey-combination-gap;
     }
   }
