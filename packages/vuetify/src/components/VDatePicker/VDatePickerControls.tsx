@@ -20,9 +20,10 @@ type ControlVariant = 'docked' | 'modal'
 
 export type VDatePickerControlsDefaultSlotProps = {
   viewMode: 'month' | 'months' | 'year'
-  monthYearText?: string
-  monthText?: string
-  yearText?: string
+  monthYearText: string
+  monthText: string
+  yearText: string
+  disabled: string[]
   openMonths: () => void
   openYears: () => void
   prevMonth: () => void
@@ -245,12 +246,12 @@ export const VDatePickerControls = genericComponent<VDatePickerControlsSlots>()(
         </>
       )
 
-      const slotProps = {
+      const slotProps: VDatePickerControlsDefaultSlotProps = {
         viewMode: props.viewMode,
-        disabled: props.disabled,
-        monthYearText: props.text,
-        monthText: props.monthText,
-        yearText: props.yearText,
+        disabled: Array.isArray(props.disabled) ? props.disabled : [],
+        monthYearText: props.text ?? '',
+        monthText: props.monthText ?? '',
+        yearText: props.yearText ?? '',
         openMonths: onClickMonth,
         openYears: onClickYear,
         prevMonth: onClickPrevMonth,
