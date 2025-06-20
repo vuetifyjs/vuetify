@@ -40,24 +40,34 @@ export const VDialogTransition = genericComponent()({
         const { x, y, sx, sy, speed } = dimensions
         saved.set(el, dimensions)
 
-        const animation = animate(el, [
-          { transform: `translate(${x}px, ${y}px) scale(${sx}, ${sy})`, opacity: 0 },
-          {},
-        ], {
-          duration: 225 * speed,
-          easing: deceleratedEasing,
-        })
-        getChildren(el)?.forEach(el => {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
           animate(el, [
             { opacity: 0 },
-            { opacity: 0, offset: 0.33 },
             {},
           ], {
-            duration: 225 * 2 * speed,
-            easing: standardEasing,
+            duration: 125 * speed,
+            easing: deceleratedEasing,
+          }).finished.then(() => done())
+        } else {
+          const animation = animate(el, [
+            { transform: `translate(${x}px, ${y}px) scale(${sx}, ${sy})`, opacity: 0 },
+            {},
+          ], {
+            duration: 225 * speed,
+            easing: deceleratedEasing,
           })
-        })
-        animation.finished.then(() => done())
+          getChildren(el)?.forEach(el => {
+            animate(el, [
+              { opacity: 0 },
+              { opacity: 0, offset: 0.33 },
+              {},
+            ], {
+              duration: 225 * 2 * speed,
+              easing: standardEasing,
+            })
+          })
+          animation.finished.then(() => done())
+        }
       },
       onAfterEnter (el: Element) {
         (el as HTMLElement).style.removeProperty('pointer-events')
@@ -81,24 +91,34 @@ export const VDialogTransition = genericComponent()({
         }
         const { x, y, sx, sy, speed } = dimensions
 
-        const animation = animate(el, [
-          {},
-          { transform: `translate(${x}px, ${y}px) scale(${sx}, ${sy})`, opacity: 0 },
-        ], {
-          duration: 125 * speed,
-          easing: acceleratedEasing,
-        })
-        animation.finished.then(() => done())
-        getChildren(el)?.forEach(el => {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
           animate(el, [
             {},
-            { opacity: 0, offset: 0.2 },
             { opacity: 0 },
           ], {
-            duration: 125 * 2 * speed,
-            easing: standardEasing,
+            duration: 85 * speed,
+            easing: acceleratedEasing,
+          }).finished.then(() => done())
+        } else {
+          const animation = animate(el, [
+            {},
+            { transform: `translate(${x}px, ${y}px) scale(${sx}, ${sy})`, opacity: 0 },
+          ], {
+            duration: 125 * speed,
+            easing: acceleratedEasing,
           })
-        })
+          animation.finished.then(() => done())
+          getChildren(el)?.forEach(el => {
+            animate(el, [
+              {},
+              { opacity: 0, offset: 0.2 },
+              { opacity: 0 },
+            ], {
+              duration: 125 * 2 * speed,
+              easing: standardEasing,
+            })
+          })
+        }
       },
       onAfterLeave (el: Element) {
         (el as HTMLElement).style.removeProperty('pointer-events')
