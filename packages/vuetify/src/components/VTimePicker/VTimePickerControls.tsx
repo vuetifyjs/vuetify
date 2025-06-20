@@ -3,11 +3,10 @@ import './VTimePickerControls.sass'
 
 // Components
 import { pad } from './util'
+import { VTimePickerField } from './VTimePickerField'
 import { VBtn } from '@/components/VBtn'
-import { VTextField } from '@/components/VTextField'
 
 // Composables
-import { useTextColor } from '@/composables/color'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
@@ -49,7 +48,6 @@ export const VTimePickerControls = genericComponent()({
 
   setup (props, { emit, slots }) {
     const { t } = useLocale()
-    const { textColorClasses, textColorStyles } = useTextColor(() => props.color)
 
     function extractNumber (v: string): number | null {
       const digits = v.replaceAll(/\D/g, '')
@@ -105,17 +103,7 @@ export const VTimePickerControls = genericComponent()({
       transformMinutesOrSeconds.out,
     )
 
-    function clearOnRemoval (e: KeyboardEvent) {
-      e.preventDefault()
-      const target = e.target as HTMLInputElement
-      target.value = ''
-    }
-
     function onHourFieldKeydown (e: KeyboardEvent) {
-      if (['Backspace', 'Delete'].includes(e.key)) {
-        hour.value = null
-        return clearOnRemoval(e)
-      }
       if (!['ArrowUp', 'ArrowDown'].includes(e.key)) return
       e.preventDefault()
       e.stopPropagation()
@@ -126,10 +114,6 @@ export const VTimePickerControls = genericComponent()({
     }
 
     function onMinuteFieldKeydown (e: KeyboardEvent) {
-      if (['Backspace', 'Delete'].includes(e.key)) {
-        minute.value = null
-        return clearOnRemoval(e)
-      }
       if (!['ArrowUp', 'ArrowDown'].includes(e.key)) return
       e.preventDefault()
       e.stopPropagation()
@@ -138,10 +122,6 @@ export const VTimePickerControls = genericComponent()({
     }
 
     function onSecondFieldKeydown (e: KeyboardEvent) {
-      if (['Backspace', 'Delete'].includes(e.key)) {
-        second.value = null
-        return clearOnRemoval(e)
-      }
       if (!['ArrowUp', 'ArrowDown'].includes(e.key)) return
       e.preventDefault()
       e.stopPropagation()
@@ -205,9 +185,9 @@ export const VTimePickerControls = genericComponent()({
       }
     }
 
-    const hourInputRef = ref<VTextField>()
-    const minuteInputRef = ref<VTextField>()
-    const secondInputRef = ref<VTextField>()
+    const hourInputRef = ref<VTimePickerField>()
+    const minuteInputRef = ref<VTimePickerField>()
+    const secondInputRef = ref<VTimePickerField>()
 
     watch(() => props.viewMode, (_, old) => {
       switch (old) {
@@ -245,87 +225,52 @@ export const VTimePickerControls = genericComponent()({
               'v-time-picker-controls__time--with-seconds': props.useSeconds,
             }}
           >
-            <div>
-              <VTextField
-                ref={ hourInputRef }
-                autocomplete="off"
-                class={[
-                  'v-time-picker-controls__time__field',
-                  { 'v-time-picker-controls__time__field--active': props.viewMode === 'hour' },
-                  props.viewMode === 'hour' ? textColorClasses.value : [],
-                ]}
-                style={ props.viewMode === 'hour' ? textColorStyles.value : [] }
-                disabled={ props.disabled }
-                variant="solo-filled"
-                placeholder="--"
-                inputmode="numeric"
-                hideDetails
-                flat
-                modelValue={ hour.value }
-                onUpdate:modelValue={ v => hour.value = v }
-                onKeydown={ onHourFieldKeydown }
-                onBeforeinput={ hourInputFilter }
-                onFocus={ () => emit('update:viewMode', 'hour') }
-              />
-              <div class="v-time-picker-controls__field-label">{ t('$vuetify.timePicker.hour') }</div>
-            </div>
+            <VTimePickerField
+              ref={ hourInputRef }
+              active={ props.viewMode === 'hour' }
+              color={ props.color }
+              disabled={ props.disabled }
+              label={ t('$vuetify.timePicker.hour') }
+              modelValue={ hour.value }
+              onUpdate:modelValue={ v => hour.value = v }
+              onKeydown={ onHourFieldKeydown }
+              onBeforeinput={ hourInputFilter }
+              onFocus={ () => emit('update:viewMode', 'hour') }
+            />
 
             <span class="v-time-picker-controls__time__separator">:</span>
 
-            <div>
-              <VTextField
-                ref={ minuteInputRef }
-                autocomplete="off"
-                class={[
-                  'v-time-picker-controls__time__field',
-                  { 'v-time-picker-controls__time__field--active': props.viewMode === 'minute' },
-                  props.viewMode === 'minute' ? textColorClasses.value : [],
-                ]}
-                style={ props.viewMode === 'minute' ? textColorStyles.value : [] }
-                disabled={ props.disabled }
-                variant="solo-filled"
-                placeholder="--"
-                inputmode="numeric"
-                hideDetails
-                flat
-                modelValue={ minute.value }
-                onUpdate:modelValue={ v => minute.value = v }
-                onKeydown={ onMinuteFieldKeydown }
-                onBeforeinput={ minuteInputFilter }
-                onFocus={ () => emit('update:viewMode', 'minute') }
-              />
-              <div class="v-time-picker-controls__field-label">{ t('$vuetify.timePicker.minute') }</div>
-            </div>
+            <VTimePickerField
+              ref={ minuteInputRef }
+              active={ props.viewMode === 'minute' }
+              color={ props.color }
+              disabled={ props.disabled }
+              label={ t('$vuetify.timePicker.minute') }
+              modelValue={ minute.value }
+              onUpdate:modelValue={ v => minute.value = v }
+              onKeydown={ onMinuteFieldKeydown }
+              onBeforeinput={ minuteInputFilter }
+              onFocus={ () => emit('update:viewMode', 'minute') }
+            />
 
             { props.useSeconds && (
               <span key="secondsDivider" class="v-time-picker-controls__time__separator">:</span>
             )}
 
             { props.useSeconds && (
-              <div key="secondsVal">
-                <VTextField
-                  ref={ secondInputRef }
-                  autocomplete="off"
-                  class={[
-                    'v-time-picker-controls__time__field',
-                    { 'v-time-picker-controls__time__field--active': props.viewMode === 'second' },
-                    props.viewMode === 'second' ? textColorClasses.value : [],
-                  ]}
-                  style={ props.viewMode === 'second' ? textColorStyles.value : [] }
-                  disabled={ props.disabled }
-                  variant="solo-filled"
-                  placeholder="--"
-                  inputmode="numeric"
-                  hideDetails
-                  flat
-                  modelValue={ second.value }
-                  onUpdate:modelValue={ v => second.value = v }
-                  onKeydown={ onSecondFieldKeydown }
-                  onBeforeinput={ secondInputFilter }
-                  onFocus={ () => emit('update:viewMode', 'second') }
-                />
-                <div class="v-time-picker-controls__field-label">{ t('$vuetify.timePicker.second') }</div>
-              </div>
+              <VTimePickerField
+                key="secondsVal"
+                ref={ secondInputRef }
+                active={ props.viewMode === 'second' }
+                color={ props.color }
+                disabled={ props.disabled }
+                label={ t('$vuetify.timePicker.second') }
+                modelValue={ second.value }
+                onUpdate:modelValue={ v => second.value = v }
+                onKeydown={ onSecondFieldKeydown }
+                onBeforeinput={ secondInputFilter }
+                onFocus={ () => emit('update:viewMode', 'second') }
+              />
             )}
 
             { props.ampm && (
