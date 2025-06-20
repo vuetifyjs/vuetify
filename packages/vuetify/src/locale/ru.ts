@@ -46,6 +46,8 @@ export default {
     input: {
       placeholder: 'Введите дату',
     },
+    weekSelected: 'Week {0}, {1}',
+    weekTitle: 'Select week',
   },
   noDataText: 'Отсутствуют данные',
   carousel: {
