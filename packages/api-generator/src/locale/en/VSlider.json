@@ -13,6 +13,6 @@
     "start": "Slider value emitted at start of slider movement."
   },
   "exposed": {
-    "focus": "Focus the component."
+    "focus": "Focus the slider handle."
   }
 }
