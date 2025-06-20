@@ -52,21 +52,32 @@ type PlatformKeyConfig = {
 }
 
 function createKey (config: PlatformKeyConfig) {
-  return (mode: DisplayMode, isMac: boolean): KeyDisplay => {
-    const keyConfig = (isMac && config.mac) ? config.mac : config.default
-    const value = keyConfig[mode] ?? keyConfig.text
+  return (requestedMode: DisplayMode, isMac: boolean): KeyDisplay => {
+    const keyCfg = (isMac && config.mac) ? config.mac : config.default
 
-    // If we requested icon mode but no icon is available, fallback to text mode
-    if (mode === 'icon' && !keyConfig.icon) {
-      return ['text', value]
+    // 1. Resolve the safest display mode for the current platform
+    const mode: DisplayMode = (() => {
+      // Non-Mac platforms rarely use icons – prefer text
+      if (requestedMode === 'icon' && !isMac) return 'text'
+
+      // If the requested mode lacks an asset, fall back to text
+      if (requestedMode === 'icon' && !keyCfg.icon) return 'text'
+      if (requestedMode === 'symbol' && !keyCfg.symbol) return 'text'
+
+      return requestedMode
+    })()
+
+    // 2. Pick value for the chosen mode, defaulting to text representation
+    let value: string | IconValue = keyCfg[mode] ?? keyCfg.text
+
+    // 3. Guard against icon tokens leaking into text mode (e.g. "$ctrl")
+    if (mode === 'text' && typeof value === 'string' && value.startsWith('$') && !value.startsWith('$vuetify.')) {
+      value = value.slice(1).toUpperCase() // "$ctrl" → "CTRL"
     }
 
-    // If we requested symbol mode but no symbol is available, fallback to text mode
-    if (mode === 'symbol' && !keyConfig.symbol) {
-      return ['text', value]
-    }
-
-    return mode === 'icon' ? ['icon', value as IconValue] : [mode as Exclude<DisplayMode, 'icon'>, value]
+    return mode === 'icon'
+      ? ['icon', value as IconValue]
+      : [mode as Exclude<DisplayMode, 'icon'>, value as string]
   }
 }
 
@@ -137,6 +148,10 @@ export const makeVHotkeyProps = propsFactory({
     type: Object as PropType<KeyMap>,
     default: keyMap,
   },
+  overridePlatform: {
+    type: String as PropType<'mac' | string>,
+    default: undefined,
+  },
 }, 'VHotkey')
 
 class Delineator {
@@ -164,7 +179,14 @@ function applyDisplayModeToKey (keyMap: KeyMap, mode: DisplayMode, key: string, 
 
   // Check if we have a specific mapping for this key
   if (lowerKey in keyMap) {
-    return keyMap[lowerKey](mode, isMac)
+    const result = keyMap[lowerKey](mode, isMac)
+
+    // If we get an icon token in text mode, convert it to readable text
+    if (result[0] === 'text' && typeof result[1] === 'string' && result[1].startsWith('$') && !result[1].startsWith('$vuetify.')) {
+      return ['text', result[1].replace('$', '').toUpperCase()]
+    }
+
+    return result
   }
 
   // Fallback to uppercase text for unknown keys
@@ -179,7 +201,14 @@ export const VHotkey = genericComponent()({
   setup (props) {
     const { t } = useLocale()
 
-    const isMac = typeof navigator !== 'undefined' && /macintosh/i.test(navigator.userAgent)
+    const isMac = computed(() =>
+      props.overridePlatform !== undefined
+        ? props.overridePlatform === 'mac'
+        : (typeof navigator !== 'undefined' && /macintosh/i.test(navigator.userAgent))
+    )
+
+    // The requested display mode remains unchanged; createKey handles platform-specific fallbacks
+    const effectiveDisplayMode = computed<DisplayMode>(() => props.displayMode)
 
     const AND_DELINEATOR = new Delineator('and') // For + separators
     const THEN_DELINEATOR = new Delineator('then') // For - separators
@@ -277,7 +306,7 @@ export const VHotkey = genericComponent()({
 
         // Mac-specific logic: Convert ctrl to meta (cmd key) on Mac
         // unless meta is already explicitly specified
-        if (isMac && modifiers.ctrl && !modifiers.meta) {
+        if (isMac.value && modifiers.ctrl && !modifiers.meta) {
           modifiers.meta = true
           modifiers.ctrl = false
         }
@@ -294,7 +323,7 @@ export const VHotkey = genericComponent()({
           // Return delineator objects as-is for separator rendering
           if (isDelineator(key)) return key
           // Apply the key mapping to get the display representation
-          return applyDisplayModeToKey(_keyMap, props.displayMode, key, isMac)
+          return applyDisplayModeToKey(_keyMap, effectiveDisplayMode.value, key, isMac.value)
         })
       })
     })
@@ -316,7 +345,7 @@ export const VHotkey = genericComponent()({
           } else {
             // Always use text representation for screen readers
             const textKey = key[0] === 'icon' || key[0] === 'symbol'
-              ? applyDisplayModeToKey(mergeDeep(keyMap, props.keyMap), 'text', String(key[1]), isMac)[1]
+              ? applyDisplayModeToKey(mergeDeep(keyMap, props.keyMap), 'text', String(key[1]), isMac.value)[1]
               : key[1]
             readableParts.push(translateKey(textKey as string))
           }

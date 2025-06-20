@@ -95,5 +95,70 @@
         </v-card>
       </v-col>
     </v-row>
+
+    <v-row dense>
+      <v-col cols="12">
+        <v-card title="Platform-Aware Key Combinations">
+          <template v-slot:text>
+            <div class="mb-4 text-center">
+              <v-btn-toggle v-model="platform" density="compact" border divided mandatory>
+                <v-btn value="pc">PC Platform</v-btn>
+                <v-btn value="mac">Mac Platform</v-btn>
+              </v-btn-toggle>
+            </div>
+
+            <div class="d-flex flex-wrap ga-4 align-center justify-center">
+              <div class="text-center">
+                <div class="text-caption mb-1">meta+shift+p</div>
+                <v-hotkey
+                  :override-platform="platform"
+                  keys="meta+shift+p"
+                ></v-hotkey>
+              </div>
+
+              <div class="text-center">
+                <div class="text-caption mb-1">ctrl+k meta+p</div>
+                <v-hotkey
+                  :override-platform="platform"
+                  keys="ctrl+k meta+p"
+                ></v-hotkey>
+              </div>
+
+              <div class="text-center">
+                <div class="text-caption mb-1">alt+arrowup</div>
+                <v-hotkey
+                  :override-platform="platform"
+                  keys="alt+arrowup"
+                ></v-hotkey>
+              </div>
+
+              <div class="text-center">
+                <div class="text-caption mb-1">ctrl+k-then-meta+p</div>
+                <v-hotkey
+                  :override-platform="platform"
+                  keys="ctrl+k-then-meta+p"
+                ></v-hotkey>
+              </div>
+            </div>
+          </template>
+        </v-card>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const platform = ref('mac')
+</script>
+
+<script>
+  export default {
+    data () {
+      return {
+        platform: 'mac',
+      }
+    },
+  }
+</script>

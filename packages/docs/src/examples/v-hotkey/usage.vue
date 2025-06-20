@@ -15,9 +15,20 @@
       <v-select
         v-model="keyExample"
         :items="keyExamples"
+        class="mb-4"
         item-title="label"
         item-value="value"
         label="Key combination"
+      ></v-select>
+
+      <v-select
+        v-model="platformOverride"
+        :items="platformOptions"
+        hint="Choose how keyboard shortcuts are displayed"
+        item-title="label"
+        item-value="value"
+        label="Platform behavior"
+        persistent-hint
       ></v-select>
     </template>
   </ExamplesUsageExample>
@@ -29,23 +40,37 @@
   const model = ref('default')
   const options = [...displayModes]
   const keyExample = ref('cmd+k')
+  const platformOverride = ref('mac')
 
   const keyExamples = [
     { label: 'Basic shortcut (Cmd+K)', value: 'cmd+k' },
     { label: 'Multiple keys (Ctrl+Shift+P)', value: 'ctrl+shift+p' },
     { label: 'Meta key (Meta+S)', value: 'meta+s' },
     { label: 'Sequential (Ctrl+K-P)', value: 'ctrl+k-p' },
-    { label: 'Arrow key (Alt+Up)', value: 'alt+up' },
+    { label: 'Arrow key (Alt+Up)', value: 'alt+arrowup' },
     { label: 'Function key (F1)', value: 'f1' },
     { label: 'Special key (Enter)', value: 'enter' },
     { label: 'Multiple options (Ctrl+S or Meta+S)', value: 'ctrl+s meta+s' },
   ]
 
+  const platformOptions = [
+    { label: 'Mac', value: 'mac' },
+    { label: 'PC', value: 'pc' },
+    { label: 'Auto', value: 'auto' },
+  ]
+
   const props = computed(() => {
-    return {
+    const baseProps = {
       keys: keyExample.value,
       'display-mode': displayModes.includes(model.value) ? model.value : undefined,
     }
+
+    // Convert 'auto' string to undefined for the component prop
+    if (platformOverride.value !== 'auto') {
+      baseProps['override-platform'] = platformOverride.value
+    }
+
+    return baseProps
   })
 
   const keys = computed(() => keyExample.value)

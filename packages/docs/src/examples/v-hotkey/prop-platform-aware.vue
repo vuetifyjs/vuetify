@@ -62,14 +62,22 @@
 
     <v-row dense>
       <v-col cols="12">
-        <v-card title="Display Mode Comparison">
+        <v-card title="Display Mode & Platform Comparison">
           <template v-slot:text>
-            <div class="mb-2">
-              <v-btn-toggle v-model="displayMode" density="compact" border divided mandatory>
-                <v-btn value="icon">Icon</v-btn>
-                <v-btn value="symbol">Symbol</v-btn>
-                <v-btn value="text">Text</v-btn>
-              </v-btn-toggle>
+            <div class="mb-4 text-center">
+              <div class="mb-2">
+                <v-btn-toggle v-model="displayMode" density="compact" border divided mandatory>
+                  <v-btn value="icon">Icon</v-btn>
+                  <v-btn value="symbol">Symbol</v-btn>
+                  <v-btn value="text">Text</v-btn>
+                </v-btn-toggle>
+              </div>
+              <div>
+                <v-btn-toggle v-model="platform" density="compact" border divided mandatory>
+                  <v-btn value="pc">PC Platform</v-btn>
+                  <v-btn value="mac">Mac Platform</v-btn>
+                </v-btn-toggle>
+              </div>
             </div>
 
             <v-table>
@@ -84,23 +92,47 @@
               <tbody>
                 <tr>
                   <td><code>meta+k</code></td>
-                  <td><v-hotkey :display-mode="displayMode" keys="meta+k"></v-hotkey></td>
-                  <td>{{ display.platform.isMac ? 'Command on Mac' : 'Ctrl on PC' }}</td>
+                  <td>
+                    <v-hotkey
+                      :display-mode="displayMode"
+                      :override-platform="platform"
+                      keys="meta+k"
+                    ></v-hotkey>
+                  </td>
+                  <td>{{ effectivePlatform === 'mac' ? 'Command on Mac' : 'Ctrl on PC' }}</td>
                 </tr>
                 <tr>
                   <td><code>alt+f</code></td>
-                  <td><v-hotkey :display-mode="displayMode" keys="alt+f"></v-hotkey></td>
-                  <td>{{ display.platform.isMac ? 'Option on Mac' : 'Alt on PC' }}</td>
+                  <td>
+                    <v-hotkey
+                      :display-mode="displayMode"
+                      :override-platform="platform"
+                      keys="alt+f"
+                    ></v-hotkey>
+                  </td>
+                  <td>{{ effectivePlatform === 'mac' ? 'Option on Mac' : 'Alt on PC' }}</td>
                 </tr>
                 <tr>
                   <td><code>ctrl+shift+p</code></td>
-                  <td><v-hotkey :display-mode="displayMode" keys="ctrl+shift+p"></v-hotkey></td>
+                  <td>
+                    <v-hotkey
+                      :display-mode="displayMode"
+                      :override-platform="platform"
+                      keys="ctrl+shift+p"
+                    ></v-hotkey>
+                  </td>
                   <td>Always Ctrl (explicit)</td>
                 </tr>
                 <tr>
                   <td><code>cmd+shift+p</code></td>
-                  <td><v-hotkey :display-mode="displayMode" keys="cmd+shift+p"></v-hotkey></td>
-                  <td>{{ display.platform.isMac ? 'Command on Mac' : 'Ctrl on PC' }}</td>
+                  <td>
+                    <v-hotkey
+                      :display-mode="displayMode"
+                      :override-platform="platform"
+                      keys="cmd+shift+p"
+                    ></v-hotkey>
+                  </td>
+                  <td>{{ effectivePlatform === 'mac' ? 'Command on Mac' : 'Ctrl on PC' }}</td>
                 </tr>
               </tbody>
             </v-table>
@@ -112,11 +144,16 @@
 </template>
 
 <script setup>
-  import { ref } from 'vue'
+  import { computed, ref } from 'vue'
   import { useDisplay } from 'vuetify'
 
   const displayMode = ref('icon')
+  const platform = ref('mac')
   const display = useDisplay()
+
+  const effectivePlatform = computed(() => {
+    return platform.value
+  })
 </script>
 
 <script>
@@ -124,12 +161,17 @@
     data () {
       return {
         displayMode: 'icon',
+        platform: 'mac',
       }
     },
 
     computed: {
       display () {
         return this.$vuetify.display
+      },
+
+      effectivePlatform () {
+        return this.platform
       },
     },
   }

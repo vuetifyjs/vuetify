@@ -101,19 +101,43 @@
       <v-col cols="12">
         <v-card title="Interactive Comparison">
           <template v-slot:text>
-            <div class="mb-8 text-center">
-              <v-btn-toggle v-model="displayMode" density="compact" border divided mandatory>
-                <v-btn value="icon">Icon</v-btn>
-                <v-btn value="symbol">Symbol</v-btn>
-                <v-btn value="text">Text</v-btn>
-              </v-btn-toggle>
+            <div class="mb-4 text-center">
+              <div class="mb-2">
+                <v-btn-toggle v-model="displayMode" density="compact" border divided mandatory>
+                  <v-btn value="icon">Icon</v-btn>
+                  <v-btn value="symbol">Symbol</v-btn>
+                  <v-btn value="text">Text</v-btn>
+                </v-btn-toggle>
+              </div>
+              <div>
+                <v-btn-toggle v-model="platform" density="compact" border divided mandatory>
+                  <v-btn value="pc">PC Platform</v-btn>
+                  <v-btn value="mac">Mac Platform</v-btn>
+                </v-btn-toggle>
+              </div>
             </div>
 
             <div class="d-flex flex-wrap ga-4 align-center justify-center">
-              <v-hotkey :display-mode="displayMode" keys="ctrl+shift+k"></v-hotkey>
-              <v-hotkey :display-mode="displayMode" keys="meta+alt+p"></v-hotkey>
-              <v-hotkey :display-mode="displayMode" keys="shift+enter"></v-hotkey>
-              <v-hotkey :display-mode="displayMode" keys="ctrl+k-then-p"></v-hotkey>
+              <v-hotkey
+                :display-mode="displayMode"
+                :override-platform="platform"
+                keys="ctrl+shift+k"
+              ></v-hotkey>
+              <v-hotkey
+                :display-mode="displayMode"
+                :override-platform="platform"
+                keys="meta+alt+p"
+              ></v-hotkey>
+              <v-hotkey
+                :display-mode="displayMode"
+                :override-platform="platform"
+                keys="shift+enter"
+              ></v-hotkey>
+              <v-hotkey
+                :display-mode="displayMode"
+                :override-platform="platform"
+                keys="ctrl+k-then-p"
+              ></v-hotkey>
             </div>
           </template>
         </v-card>
@@ -126,6 +150,7 @@
   import { ref } from 'vue'
 
   const displayMode = ref('icon')
+  const platform = ref('mac')
 </script>
 
 <script>
@@ -133,6 +158,7 @@
     data () {
       return {
         displayMode: 'icon',
+        platform: 'mac',
       }
     },
   }
