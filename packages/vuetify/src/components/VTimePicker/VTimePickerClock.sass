@@ -15,15 +15,16 @@
       color: rgb(var(--v-theme-on-surface-variant))
 
   .v-time-picker-clock
-    margin: 0 auto
+    margin: $time-picker-padding
+    margin-top: 18px
     background: rgb(var(--v-theme-surface-light))
     border-radius: 50%
     position: relative
     transition: none
     user-select: none
-    height: 256px
-    width: 256px
-    flex: 1 0 auto
+    max-width: 256px
+    aspect-ratio: 1
+    flex: 100%
 
     &__container
       display: flex
