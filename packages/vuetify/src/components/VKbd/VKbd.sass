@@ -3,13 +3,16 @@
 
 @include tools.layer('components')
   .v-kbd
+    align-items: center
+    align-self: stretch
     background: rgb(var(--v-theme-kbd))
     color: rgb(var(--v-theme-on-kbd))
     display: $kbd-display
     font-size: $kbd-font-size
     font-weight: $kbd-font-weight
-    padding: $kbd-padding
+    justify-content: center
     min-width: $kbd-min-width
+    padding: $kbd-padding
 
     @include tools.border($kbd-border...)
     @include tools.elevation($kbd-elevation)
