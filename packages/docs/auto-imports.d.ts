@@ -135,6 +135,7 @@ declare global {
   const useLink: typeof import('vue-router')['useLink']
   const useLocaleStore: typeof import('./src/stores/locale')['useLocaleStore']
   const useMadeWithVuetifyStore: typeof import('./src/stores/made-with-vuetify')['useMadeWithVuetifyStore']
+  const useMarkdown: typeof import('./src/composables/markdown')['useMarkdown']
   const useModel: typeof import('vue')['useModel']
   const useOneStore: typeof import('@vuetify/one')['useOneStore']
   const usePinsStore: typeof import('./src/stores/pins')['usePinsStore']
@@ -319,6 +320,7 @@ declare module 'vue' {
     readonly useLink: UnwrapRef<typeof import('vue-router')['useLink']>
     readonly useLocaleStore: UnwrapRef<typeof import('./src/stores/locale')['useLocaleStore']>
     readonly useMadeWithVuetifyStore: UnwrapRef<typeof import('./src/stores/made-with-vuetify')['useMadeWithVuetifyStore']>
+    readonly useMarkdown: UnwrapRef<typeof import('./src/composables/markdown')['useMarkdown']>
     readonly useModel: UnwrapRef<typeof import('vue')['useModel']>
     readonly useOneStore: UnwrapRef<typeof import('@vuetify/one')['useOneStore']>
     readonly usePinsStore: UnwrapRef<typeof import('./src/stores/pins')['usePinsStore']>

@@ -207,6 +207,7 @@ module.exports = {
         '@typescript-eslint/prefer-string-starts-ends-with': 'error',
         '@typescript-eslint/prefer-ts-expect-error': 'warn',
         '@typescript-eslint/restrict-plus-operands': 'error',
+        '@typescript-eslint/no-wrapper-object-types': 'error',
       },
     },
     {

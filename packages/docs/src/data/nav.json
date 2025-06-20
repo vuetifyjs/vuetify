@@ -78,7 +78,6 @@
   },
   {
     "title": "concepts",
-    "emphasized": true,
     "inactiveIcon": "mdi-puzzle-outline",
     "activeIcon": "mdi-puzzle",
     "items": [
@@ -168,6 +167,7 @@
       "sparklines",
       "infinite-scroller",
       "tables",
+      "treeview",
       "virtual-scroller",
       { "divider": true },
       { "subheader": "grids" },
@@ -206,6 +206,7 @@
       { "subheader": "pickers" },
       "color-pickers",
       "date-pickers",
+      "time-pickers",
       { "divider": true },
       { "subheader": "providers" },
       "defaults-providers",
@@ -273,15 +274,7 @@
         "subfolder": "components"
       },
       {
-        "title": "time-pickers",
-        "subfolder": "components"
-      },
-      {
         "title": "mask-inputs",
-        "subfolder": "components"
-      },
-      {
-        "title": "treeview",
         "subfolder": "components"
       },
       {
