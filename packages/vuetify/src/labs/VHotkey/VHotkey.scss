@@ -1,33 +1,29 @@
 @use '../../styles/tools';
+@use './variables' as *;
 
 @include tools.layer('components') {
   .v-hotkey {
-    display: inline-flex;
     align-items: center;
-    gap: 4px;
-
-    &__key.v-kbd {
-      text-align: center;
-    }
+    display: inline-flex;
+    gap: $hotkey-gap;
+    vertical-align: middle;
 
     &__key-icon {
-      padding: 4px 2px;
       .v-icon {
-        max-width: 0.75rem;
-        max-height: 0.75rem;
+        max-width: $hotkey-icon-max-width;
         min-width: unset;
       }
     }
 
     &__divider {
-      opacity: 0.5;
-      font-size: 0.75rem;
+      opacity: $hotkey-divider-opacity;
+      font-size: $hotkey-divider-font-size;
     }
 
     &__combination {
-      display: inline-flex;
       align-items: center;
-      gap: 2px;
+      display: inline-flex;
+      gap: $hotkey-combination-gap;
     }
   }
 
