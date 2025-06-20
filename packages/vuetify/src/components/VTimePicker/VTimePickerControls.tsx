@@ -7,6 +7,7 @@ import { VBtn } from '@/components/VBtn'
 import { VTextField } from '@/components/VTextField'
 
 // Composables
+import { useTextColor } from '@/composables/color'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
@@ -48,6 +49,7 @@ export const VTimePickerControls = genericComponent()({
 
   setup (props, { emit, slots }) {
     const { t } = useLocale()
+    const { textColorClasses, textColorStyles } = useTextColor(() => props.color)
 
     function extractNumber (v: string): number | null {
       const digits = v.replaceAll(/\D/g, '')
@@ -250,8 +252,9 @@ export const VTimePickerControls = genericComponent()({
                 class={[
                   'v-time-picker-controls__time__field',
                   { 'v-time-picker-controls__time__field--active': props.viewMode === 'hour' },
+                  props.viewMode === 'hour' ? textColorClasses.value : [],
                 ]}
-                color={ props.viewMode === 'hour' ? props.color : undefined }
+                style={ props.viewMode === 'hour' ? textColorStyles.value : [] }
                 disabled={ props.disabled }
                 variant="solo-filled"
                 placeholder="--"
@@ -276,8 +279,9 @@ export const VTimePickerControls = genericComponent()({
                 class={[
                   'v-time-picker-controls__time__field',
                   { 'v-time-picker-controls__time__field--active': props.viewMode === 'minute' },
+                  props.viewMode === 'minute' ? textColorClasses.value : [],
                 ]}
-                color={ props.viewMode === 'minute' ? props.color : undefined }
+                style={ props.viewMode === 'minute' ? textColorStyles.value : [] }
                 disabled={ props.disabled }
                 variant="solo-filled"
                 placeholder="--"
@@ -305,8 +309,9 @@ export const VTimePickerControls = genericComponent()({
                   class={[
                     'v-time-picker-controls__time__field',
                     { 'v-time-picker-controls__time__field--active': props.viewMode === 'second' },
+                    props.viewMode === 'second' ? textColorClasses.value : [],
                   ]}
-                  color={ props.viewMode === 'second' ? props.color : undefined }
+                  style={ props.viewMode === 'second' ? textColorStyles.value : [] }
                   disabled={ props.disabled }
                   variant="solo-filled"
                   placeholder="--"
