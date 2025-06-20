@@ -67,30 +67,125 @@
         </v-card>
       </v-col>
     </v-row>
+
+    <v-row dense>
+      <v-col cols="12">
+        <v-card title="Platform Comparison with Custom Mapping">
+          <template v-slot:text>
+            <div class="mb-4 text-center">
+              <v-btn-toggle v-model="platform" density="compact" border divided mandatory>
+                <v-btn value="pc">PC Platform</v-btn>
+                <v-btn value="mac">Mac Platform</v-btn>
+              </v-btn-toggle>
+            </div>
+
+            <v-table>
+              <thead>
+                <tr>
+                  <th>Key</th>
+                  <th>Default Mapping</th>
+                  <th>Custom Mapping</th>
+                  <th>Difference</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td><code>ctrl+s</code></td>
+                  <td>
+                    <v-hotkey
+                      :override-platform="platform"
+                      keys="ctrl+s"
+                    ></v-hotkey>
+                  </td>
+                  <td>
+                    <v-hotkey
+                      :key-map="customKeyMap"
+                      :override-platform="platform"
+                      keys="ctrl+s"
+                    ></v-hotkey>
+                  </td>
+                  <td>Uses "Control" instead of "Ctrl"</td>
+                </tr>
+                <tr>
+                  <td><code>alt+f</code></td>
+                  <td>
+                    <v-hotkey
+                      :override-platform="platform"
+                      keys="alt+f"
+                    ></v-hotkey>
+                  </td>
+                  <td>
+                    <v-hotkey
+                      :key-map="customKeyMap"
+                      :override-platform="platform"
+                      keys="alt+f"
+                    ></v-hotkey>
+                  </td>
+                  <td>Different symbols: ⎇ vs ⌥/Alt</td>
+                </tr>
+                <tr>
+                  <td><code>enter</code></td>
+                  <td>
+                    <v-hotkey
+                      :override-platform="platform"
+                      keys="enter"
+                    ></v-hotkey>
+                  </td>
+                  <td>
+                    <v-hotkey
+                      :key-map="customKeyMap"
+                      :override-platform="platform"
+                      keys="enter"
+                    ></v-hotkey>
+                  </td>
+                  <td>Uses "Return" and ⏎ symbol</td>
+                </tr>
+              </tbody>
+            </v-table>
+          </template>
+        </v-card>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
 <script setup>
+  import { ref } from 'vue'
+
+  const platform = ref('mac')
+
   function createKey (config) {
-    return (mode, isMac) => {
-      const keyConfig = (isMac && config.mac) ? config.mac : config.default
-      const value = keyConfig[mode] ?? keyConfig.text
+    return (requestedMode, isMac) => {
+      const keyCfg = (isMac && config.mac) ? config.mac : config.default
 
-          // If we requested icon mode but no icon is available, fallback to text mode
-      if (mode === 'icon' && !keyConfig.icon) {
-        return ['text', value]
+      // 1. Resolve the safest display mode for the current platform
+      const mode = (() => {
+        // Non-Mac platforms rarely use icons – prefer text
+        if (requestedMode === 'icon' && !isMac) return 'text'
+
+        // If the requested mode lacks an asset, fall back to text
+        if (requestedMode === 'icon' && !keyCfg.icon) return 'text'
+        if (requestedMode === 'symbol' && !keyCfg.symbol) return 'text'
+
+        return requestedMode
+      })()
+
+      // 2. Pick value for the chosen mode, defaulting to text representation
+      let value = keyCfg[mode] ?? keyCfg.text
+
+      // 3. Guard against icon tokens leaking into text mode (e.g. "$ctrl")
+      if (mode === 'text' && typeof value === 'string' && value.startsWith('$') && !value.startsWith('$vuetify.')) {
+        value = value.slice(1).toUpperCase() // "$ctrl" → "CTRL"
       }
 
-      // If we requested symbol mode but no symbol is available, fallback to text mode
-      if (mode === 'symbol' && !keyConfig.symbol) {
-        return ['text', value]
-      }
-
-      return mode === 'icon' ? ['icon', value] : [mode, value]
+      return mode === 'icon'
+        ? ['icon', value]
+        : [mode, value]
     }
   }
 
-          // Custom key mapping example using the new declarative configuration
+  // Custom key mapping example using the optimized createKey function
   const customKeyMap = {
     ctrl: createKey({
       mac: { symbol: '⌃', icon: '$ctrl', text: 'Control' },
@@ -113,27 +208,39 @@
   export default {
     data () {
       return {
+        platform: 'mac',
         customKeyMap: this.createCustomKeyMap(),
       }
     },
 
     methods: {
       createKey (config) {
-        return (mode, isMac) => {
-          const keyConfig = (isMac && config.mac) ? config.mac : config.default
-          const value = keyConfig[mode] ?? keyConfig.text
+        return (requestedMode, isMac) => {
+          const keyCfg = (isMac && config.mac) ? config.mac : config.default
 
-          // If we requested icon mode but no icon is available, fallback to text mode
-          if (mode === 'icon' && !keyConfig.icon) {
-            return ['text', value]
+          // 1. Resolve the safest display mode for the current platform
+          const mode = (() => {
+            // Non-Mac platforms rarely use icons – prefer text
+            if (requestedMode === 'icon' && !isMac) return 'text'
+
+            // If the requested mode lacks an asset, fall back to text
+            if (requestedMode === 'icon' && !keyCfg.icon) return 'text'
+            if (requestedMode === 'symbol' && !keyCfg.symbol) return 'text'
+
+            return requestedMode
+          })()
+
+          // 2. Pick value for the chosen mode, defaulting to text representation
+          let value = keyCfg[mode] ?? keyCfg.text
+
+          // 3. Guard against icon tokens leaking into text mode (e.g. "$ctrl")
+          if (mode === 'text' && typeof value === 'string' && value.startsWith('$') && !value.startsWith('$vuetify.')) {
+            value = value.slice(1).toUpperCase() // "$ctrl" → "CTRL"
           }
 
-          // If we requested symbol mode but no symbol is available, fallback to text mode
-          if (mode === 'symbol' && !keyConfig.symbol) {
-            return ['text', value]
-          }
-
-          return mode === 'icon' ? ['icon', value] : [mode, value]
+          return mode === 'icon'
+            ? ['icon', value]
+            : [mode, value]
         }
       },
 
