@@ -18,9 +18,10 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, shallowRef, toRef, watch } from 'vue'
-import { genericComponent, omit, pick, propsFactory, useRender, wrapInArray } from '@/util'
+import { genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
+import type { VDatePickerHeaderSlots } from './VDatePickerHeader'
 import type { VDatePickerMonthSlots } from './VDatePickerMonth'
 import type { VDatePickerMonthsSlots } from './VDatePickerMonths'
 import type { VDatePickerYearsSlots } from './VDatePickerYears'
@@ -28,10 +29,13 @@ import type { VPickerSlots } from '@/labs/VPicker/VPicker'
 import type { GenericProps } from '@/util'
 
 // Types
-export type VDatePickerSlots = Omit<VPickerSlots, 'header' | 'default'> &
-  VDatePickerYearsSlots &
-  VDatePickerMonthsSlots &
-  VDatePickerMonthSlots & {
+export type VDatePickerSlots =
+  & Omit<VPickerSlots, 'header' | 'default'>
+  & Omit<VDatePickerHeaderSlots, 'default'>
+  & VDatePickerYearsSlots
+  & VDatePickerMonthsSlots
+  & VDatePickerMonthSlots
+  & {
     header: {
       header: string
       transition: string
@@ -373,8 +377,8 @@ export const VDatePicker = genericComponent<new <
                 { ...headerProps }
                 onClick={ viewMode.value !== 'month' ? onClickDate : undefined }
                 v-slots={{
-                  ...slots,
-                  default: undefined,
+                  prepend: slots.prepend,
+                  append: slots.append,
                 }}
               />
             ),
@@ -402,7 +406,7 @@ export const VDatePicker = genericComponent<new <
                       allowedMonths={ allowedMonths }
                       onUpdate:modelValue={ onUpdateMonth }
                     >
-                      {{ ...pick(slots, ['month']) }}
+                      {{ month: slots.month }}
                     </VDatePickerMonths>
                   ) : viewMode.value === 'year' ? (
                     <VDatePickerYears
@@ -414,7 +418,7 @@ export const VDatePicker = genericComponent<new <
                       allowedYears={ allowedYears }
                       onUpdate:modelValue={ onUpdateYear }
                     >
-                      {{ ...pick(slots, ['year']) }}
+                      {{ year: slots.year }}
                     </VDatePickerYears>
                   ) : (
                     <VDatePickerMonth
@@ -428,7 +432,7 @@ export const VDatePicker = genericComponent<new <
                       min={ minDate.value }
                       max={ maxDate.value }
                     >
-                      {{ ...pick(slots, ['day']) }}
+                      {{ day: slots.day }}
                     </VDatePickerMonth>
                   )}
                 </VFadeTransition>

@@ -88,3 +88,11 @@ You can show a linear progress bar with the **progress** prop. It will indicate 
 You can control carousel with **v-model**.
 
 <ExamplesExample file="v-carousel/prop-model" />
+
+### Misc
+
+#### Vertical with overlay content
+
+Carousel can be augmented with additional content simply by placing VOverlay next to it.
+
+<ExamplesExample file="v-carousel/misc-vertical" />

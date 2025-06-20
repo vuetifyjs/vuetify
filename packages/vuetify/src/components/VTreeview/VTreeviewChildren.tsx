@@ -56,7 +56,7 @@ export const makeVTreeviewChildrenProps = propsFactory({
   selectStrategy: [String, Function, Object] as PropType<SelectStrategyProp>,
   index: Number,
   path: {
-    type: Array as PropType<Number[]>,
+    type: Array as PropType<number[]>,
     default: () => [],
   },
   ...makeDensityProps(),

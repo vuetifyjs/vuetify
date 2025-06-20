@@ -35,9 +35,9 @@ import type { PropType } from 'vue'
 import type { RippleDirectiveBinding } from '@/directives/ripple'
 
 export type ListItemSlot = {
-  index?: Number
-  depth?: Number
-  path?: Number[]
+  index?: number
+  depth?: number
+  path?: number[]
   isFirst?: boolean
   isLast?: boolean
   isActive: boolean

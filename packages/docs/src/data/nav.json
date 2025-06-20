@@ -78,7 +78,6 @@
   },
   {
     "title": "concepts",
-    "emphasized": true,
     "inactiveIcon": "mdi-puzzle-outline",
     "activeIcon": "mdi-puzzle",
     "items": [
@@ -207,6 +206,7 @@
       { "subheader": "pickers" },
       "color-pickers",
       "date-pickers",
+      "time-pickers",
       { "divider": true },
       { "subheader": "providers" },
       "defaults-providers",
@@ -271,10 +271,6 @@
       },
       {
         "title": "vertical-steppers",
-        "subfolder": "components"
-      },
-      {
-        "title": "time-pickers",
         "subfolder": "components"
       },
       {

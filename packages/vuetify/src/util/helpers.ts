@@ -824,3 +824,5 @@ export function onlyDefinedProps (props: Record<string, any>) {
   return Object.fromEntries(Object.entries(props)
     .filter(([key, v]) => booleanAttributes.includes(key) ? !!v : v !== undefined))
 }
+
+export type NonEmptyArray<T> = [T, ...T[]]
