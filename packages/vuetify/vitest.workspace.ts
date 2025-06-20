@@ -39,8 +39,7 @@ export default defineWorkspace([
             'goog:chromeOptions': {
               // @ts-expect-error
               args: [
-                '--start-maximized',
-                process.env.TEST_BAIL && '--auto-open-devtools-for-tabs',
+                '--start-maximized', process.env.TEST_BAIL && '--auto-open-devtools-for-tabs',
                 // I have no idea why this is needed, it throws "WebDriverError: session
                 // not created: probably user data directory is already in use" without it
                 process.env.CI && '--no-sandbox',
