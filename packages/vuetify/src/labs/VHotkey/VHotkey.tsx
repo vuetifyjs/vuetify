@@ -81,7 +81,7 @@ function createKey (config: PlatformKeyConfig) {
   }
 }
 
-const keyMap = {
+const keyMap: KeyMap = {
   ctrl: createKey({
     mac: { symbol: '⌃', icon: '$ctrl', text: '$vuetify.hotkey.ctrl' }, // Mac Control symbol
     default: { text: 'Ctrl', icon: '$ctrl' },
@@ -134,7 +134,7 @@ const keyMap = {
   hyphen: createKey({
     default: { symbol: '-', icon: '$minus', text: '-' },
   }),
-} as const satisfies KeyMap
+}
 
 export const makeVHotkeyProps = propsFactory({
   // String representing keyboard shortcuts (e.g., "ctrl+k", "meta+shift+p")
