@@ -96,13 +96,13 @@ The component uses the `aria-label` attribute to provide a clear description of 
 will generate the following HTML:
 
 ```html
-<span class="v-hotkey" aria-label="Keyboard shortcut: $CTRL + S">
+<div class="v-hotkey" role="img" aria-label="Keyboard shortcut: Ctrl plus S">
   <span class="v-hotkey__combination">
     <kbd class="..." aria-hidden="true">...</kbd>
 
-    <span class="v-hotkey__divider__text">+</span>
+    <span class="v-hotkey__divider" aria-hidden="true">+</span>
 
     <kbd class="..." aria-hidden="true">S</kbd>
   </span>
-</span>
+</div>
 ```
