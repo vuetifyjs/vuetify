@@ -234,6 +234,7 @@ export {
   mdiInformation,
   mdiInformationOutline,
   mdiInstagram,
+  mdiKeyboardOutline,
   mdiLabel,
   mdiLanguageHtml5,
   mdiLanguageMarkdown,
