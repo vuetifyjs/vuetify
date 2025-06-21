@@ -1,190 +1,108 @@
 <template>
-  <v-container>
-    <v-row>
-      <v-col cols="12">
-        <p class="text-body-2">
-          Try the keyboard shortcuts listed below. The activity log will show when hotkeys are triggered.
-        </p>
-      </v-col>
-    </v-row>
+  <ExamplesUsageExample
+    v-model="model"
+    :code="code"
+    :name="name"
+    :options="options"
+    :script="script"
+  >
+    <v-card class="my-n9" title="Activity log" border flat>
+      <v-divider></v-divider>
+      <template v-slot:text>
+        <v-text-field v-model="keys" label="Hotkey command" variant="outlined"></v-text-field>
 
-    <!-- Activity Log -->
-    <v-row>
-      <v-col cols="12">
-        <v-card class="mb-6">
-          <v-card-title>Activity Log</v-card-title>
-          <v-card-text>
-            <div class="activity-log border rounded" style="height: 150px; overflow-y: auto;">
-              <div v-if="activityLog.length === 0" class="text-grey text-center pa-4">
-                No hotkey activity yet. Try pressing some keyboard shortcuts!
-              </div>
-              <div
-                v-for="log in activityLog"
-                :key="log.id"
-                class="log-entry mb-1 pa-2 border rounded"
-              >
-                <span class="text-caption text-grey">{{ log.timestamp }}</span>
-                <span class="ml-2">{{ log.message }}</span>
-              </div>
-            </div>
-            <v-btn class="mt-2" size="small" @click="clearLog">Clear Log</v-btn>
-          </v-card-text>
-        </v-card>
-      </v-col>
-    </v-row>
+        <v-sheet
+          class="pa-2 d-flex flex-column ga-2 overflow-y-auto"
+          color="surface-light"
+          height="212"
+          rounded
+        >
+          <v-empty-state v-if="!logs.length" icon="mdi-calendar" text="No Events"></v-empty-state>
+          <div
+            v-for="(log, i) in logs.slice().reverse()"
+            :key="i"
+            class="log-entry pa-2 border rounded"
+          >
+            <span class="text-caption text-grey">{{ log.timestamp }}</span>
+            <span class="ml-2">{{ log.message }}</span>
+          </div>
+        </v-sheet>
+      </template>
 
-    <!-- Available Hotkeys -->
-    <v-row>
-      <v-col cols="12" md="6">
-        <v-card>
-          <v-card-title>Available Hotkeys</v-card-title>
-          <v-card-text>
-            <v-table density="compact">
-              <thead>
-                <tr>
-                  <th>Hotkey</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><v-hotkey keys="cmd+s"></v-hotkey></td>
-                  <td>Save Action</td>
-                </tr>
-                <tr>
-                  <td><v-hotkey keys="cmd+z"></v-hotkey></td>
-                  <td>Undo Action</td>
-                </tr>
-                <tr>
-                  <td><v-hotkey keys="cmd+k-p"></v-hotkey></td>
-                  <td>Command Palette (sequence)</td>
-                </tr>
-                <tr>
-                  <td><v-hotkey keys="escape"></v-hotkey></td>
-                  <td>Cancel Action</td>
-                </tr>
-              </tbody>
-            </v-table>
-          </v-card-text>
-        </v-card>
-      </v-col>
+      <template v-slot:actions>
+        <span class="ps-2">Current hotkey:</span> <v-hotkey :display-mode="model" :keys></v-hotkey>
 
-      <v-col cols="12" md="6">
-        <v-card>
-          <v-card-title>Test Input Field</v-card-title>
-          <v-card-text>
-            <v-text-field
-              v-model="testInput"
-              hint="Hotkeys are disabled while typing (default behavior)"
-              label="Type here"
-              persistent-hint
-            ></v-text-field>
-            <v-switch
-              v-model="allowInInputs"
-              class="mt-3"
-              label="Allow hotkeys in input fields"
-              @change="updateHotkeys"
-            ></v-switch>
-          </v-card-text>
-        </v-card>
-      </v-col>
-    </v-row>
-  </v-container>
+        <v-spacer></v-spacer>
+
+        <v-btn size="small" text="Clear" @click="logs = []"></v-btn>
+      </template>
+    </v-card>
+
+    <template v-slot:configuration>
+      <v-checkbox v-model="allowInputs" label="Allow inputs"></v-checkbox>
+      <v-slider v-model="sequenceTimeout" label="Timeout"></v-slider>
+    </template>
+  </ExamplesUsageExample>
 </template>
 
 <script setup>
-  import { onBeforeUnmount, ref } from 'vue'
+  // Utilities
   import { useHotkey } from 'vuetify'
 
-  // Reactive data
-  const activityLog = ref([])
-  const testInput = ref('')
-  const allowInInputs = ref(false)
+  const name = 'hotkey'
+  const model = ref('default')
+  const options = ['text', 'symbol']
+  const logs = ref([])
+  const keys = shallowRef('ctrl+b')
+  const binding = shallowRef(false)
+  const allowInputs = shallowRef(false)
+  const sequenceTimeout = shallowRef(0)
 
-  // Cleanup functions for dynamic hotkeys
-  const hotkeyCleanups = ref([])
+  const and = computed(() => sequenceTimeout.value && allowInputs.value ? '\n  ' : '')
 
-  // Utility function to add log entries
-  const addLog = message => {
-    const timestamp = new Date().toLocaleTimeString()
-    activityLog.value.push({
-      message,
-      timestamp,
-      id: Date.now() + Math.random(),
-    })
-
-    // Keep only last 20 entries
-    if (activityLog.value.length > 20) {
-      activityLog.value = activityLog.value.slice(-20)
-    }
-  }
-
-  const clearLog = () => {
-    activityLog.value = []
-  }
-
-  // Setup hotkeys with current options
-  const setupHotkeys = () => {
-    // Clear existing hotkeys
-    hotkeyCleanups.value.forEach(cleanup => cleanup())
-    hotkeyCleanups.value = []
-
-    const options = {
-      inputs: allowInInputs.value,
-      preventDefault: true,
-    }
-
-    // Basic hotkeys
-    hotkeyCleanups.value.push(
-      useHotkey('cmd+s', () => {
-        addLog('💾 Save action triggered!')
-      }, options)
-    )
-
-    hotkeyCleanups.value.push(
-      useHotkey('cmd+z', () => {
-        addLog('↶ Undo action triggered!')
-      }, options)
-    )
-
-    // Key sequence
-    hotkeyCleanups.value.push(
-      useHotkey('cmd+k-p', () => {
-        addLog('🎨 Command Palette opened! (Cmd+K then P)')
-      }, { ...options, sequenceTimeout: 1000 })
-    )
-
-    // Special key
-    hotkeyCleanups.value.push(
-      useHotkey('escape', () => {
-        addLog('🚫 Cancel action triggered!')
-      }, options)
-    )
-  }
-
-  // Update hotkeys when options change
-  const updateHotkeys = () => {
-    setupHotkeys()
-    addLog(`⚙️ Hotkey options updated (inputs: ${allowInInputs.value})`)
-  }
-
-  // Initialize hotkeys
-  setupHotkeys()
-
-  // Cleanup on unmount
-  onBeforeUnmount(() => {
-    hotkeyCleanups.value.forEach(cleanup => cleanup())
+  const args = computed(() => {
+    return sequenceTimeout.value || allowInputs.value ? `, {
+  ${sequenceTimeout.value > 0 ? `sequenceTimeout: ${sequenceTimeout.value},` : ''}${allowInputs.value ? `${and.value}inputs: true,` : ''}
+}` : ''
   })
+
+  const code = `<template>
+  <div>Hello world</div>
+</template>`
+
+  const script = computed(() => {
+    return `<script setup>
+  import { useHotkey } from 'vuetify'
+
+  function onHotkey () {}
+
+  const unwatch = useHotkey('${keys.value}', onHotkey${args.value})
+<\\/script>`.replace('\\/', '/')
+  })
+
+  let unwatch = useHotkey(keys.value, onHotkey)
+  let timeout = null
+
+  watch(keys, val => {
+    binding.value = true
+    clearTimeout(timeout)
+    timeout = setTimeout(() => {
+      unwatch?.()
+
+      unwatch = useHotkey(val, onHotkey)
+
+      binding.value = false
+      logs.value.push({
+        message: `⚙️ Hotkey updated`,
+        timestamp: new Date().toLocaleTimeString(),
+      })
+    }, 500)
+  })
+
+  function onHotkey () {
+    logs.value.push({
+      message: `⌨️ Hotkey pressed`,
+      timestamp: new Date().toLocaleTimeString(),
+    })
+  }
 </script>
-
-<style scoped>
-.activity-log {
-  font-family: 'Roboto Mono', monospace;
-  background-color: rgba(143, 143, 143, 0.04);
-  padding: 8px;
-}
-
-.log-entry {
-  font-size: 0.875rem;
-}
-</style>

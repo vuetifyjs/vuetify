@@ -1,7 +1,8 @@
 ---
 emphasized: true
 meta:
-  title: useHotkey composable
+  nav: Hotkeys
+  title: Hotkeys
   description: Handle keyboard shortcuts within your application using the useHotkey composable
   keywords: hotkeys, keyboard shortcuts, composable, useHotkey, key bindings
 related:
@@ -10,27 +11,41 @@ related:
   - /features/global-configuration/
 features:
   github: /composables/hotkey.ts
-  label: 'E: useHotkey'
+  label: 'E: hotkey'
   report: true
 ---
 
-# useHotkey composable
+# Hotkeys
 
-Handle keyboard shortcuts within your application using the **useHotkey** composable. This composable provides a simple and powerful way to register keyboard shortcuts that work across different platforms and input contexts.
+Provides a simple and powerful way to register keyboard shortcuts that work across different platforms and input contexts.
 
 <PageFeatures />
+
+<PromotedEntry />
 
 ::: warning
 This feature requires [v3.10.0](/getting-started/release-notes/?version=v3.10.0)
 :::
 
-<PromotedEntry />
+## Quick start
+
+To get started, import the `useHotkey` composable:
+
+```html { resource="path/to/Component.vue"}
+<script setup>
+  import { useHotkey } from 'vuetify'
+
+  useHotkey('ctrl+s', () => {
+    console.log('Save action')
+  })
+</script>
+```
 
 ## Usage
 
-The **useHotkey** composable takes a key combination string and a callback function. It automatically handles platform differences, key sequences, and provides options for customizing behavior.
+The **hotkey** composable takes a key combination string and a callback function. It automatically handles platform differences, key sequences, and provides options for customizing behavior.
 
-<ExamplesExample file="hotkey/usage" />
+<ExamplesUsage name="hotkey" />
 
 ## API
 

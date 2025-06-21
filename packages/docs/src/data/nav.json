@@ -40,13 +40,13 @@
       "dates",
       "display-and-platform",
       "global-configuration",
+      "hotkey",
       "icon-fonts",
       "internationalization",
       "scrolling",
       "sass-variables",
       "theme",
-      "treeshaking",
-      "hotkey"
+      "treeshaking"
     ]
   },
   {
