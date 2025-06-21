@@ -1,4 +1,4 @@
 // Styles
-import './VKbd.sass'
+import './VKbd.scss'
 
 export { VKbd } from './VKbd'

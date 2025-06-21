@@ -230,7 +230,6 @@ export const useIcon = (props: MaybeRefOrGetter<IconValue | undefined>) => {
 
     if (typeof icon === 'string') {
       icon = icon.trim()
-
       if (icon.startsWith('$')) {
         icon = icons.aliases?.[icon.slice(1)]
       }

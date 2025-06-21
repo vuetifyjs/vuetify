@@ -1,0 +1,108 @@
+---
+emphasized: true
+meta:
+  nav: Hotkeys
+  title: Hotkey component
+  description: The hotkey component displays keyboard shortcuts in a visually consistent and platform-aware manner.
+  keywords: hotkeys, keyboard shortcuts, vuetify hotkey component, vue hotkey component
+related:
+  - /components/buttons/
+  - /components/icons/
+  - /components/toolbars/
+features:
+  github: /labs/VHotkey/
+  label: 'C: VHotkey'
+  report: true
+---
+
+# Hotkeys
+
+The `v-hotkey` component renders keyboard shortcuts in a visually consistent and accessible way. It handles complex key combination parsing, platform-specific differences (Mac vs PC), and provides multiple display modes for different design needs.
+
+<PageFeatures />
+
+::: warning
+This feature requires [v3.10.0](/getting-started/release-notes/?version=v3.10.0)
+:::
+
+## Usage
+
+Hotkeys display keyboard shortcuts with proper styling and platform awareness. The component automatically handles platform differences like showing <v-kbd>⌘</v-kbd> on Mac and <v-kbd>Ctrl</v-kbd> on PC.
+
+<ExamplesUsage name="v-hotkey" />
+
+<PromotedEntry />
+
+## API
+
+| Component | Description |
+| - | - |
+| [v-hotkey](/api/v-hotkey/) | Primary Component |
+
+<ApiInline hide-links />
+
+## Guide
+
+The `v-hotkey` component is designed to display keyboard shortcuts consistently across your application. It's commonly used in command palettes, help documentation, tooltips, and anywhere you need to show keyboard shortcuts to users.
+
+::: info
+The `v-hotkey` component serves solely as a visual tool for displaying keyboard shortcuts. It does not generate or manage keyboard shortcuts itself. To implement functional keyboard shortcuts, utilize the [useHotkey](/features/hotkey/) composable.
+:::
+
+### Props
+
+The component provides several props to customize how keyboard shortcuts are displayed and parsed. This component is designed to work seamlessly across different platforms, automatically adjusting key representations based on the user's operating system.
+
+#### Keys
+
+The **keys** prop accepts a string representing keyboard shortcuts in various formats:
+
+<ExamplesExample file="v-hotkey/prop-keys" />
+
+#### Display modes
+
+The **display-mode** prop controls how keys are visually represented. Choose from **icon** (default), **symbol**, or **text** modes:
+
+<ExamplesExample file="v-hotkey/prop-display-mode" />
+
+#### Platform awareness
+
+The component automatically detects the user's platform and adjusts key representations accordingly:
+
+<ExamplesExample file="v-hotkey/prop-platform-aware" />
+
+#### Custom key mapping
+
+::: info
+It is recommended to set the **key-map** prop at the application level via global component defaults rather than per-instance for consistency.
+:::
+
+Use the **key-map** prop to customize how specific keys are displayed:
+
+<ExamplesExample file="v-hotkey/prop-key-map" />
+
+## Accessibility
+
+The `v-hotkey` component is designed with accessibility in mind. It uses semantic HTML elements and ARIA attributes to ensure that screen readers can interpret the displayed keyboard shortcuts correctly.
+
+### ARIA attributes
+
+The component uses the `aria-label` attribute to provide a clear description of the keyboard shortcut. This is automatically generated based off of current keys.
+
+```html
+<v-hotkey keys="ctrl+s" />
+```
+
+will generate the following HTML:
+
+```html
+<div class="v-hotkey" role="img" aria-label="Keyboard shortcut: Ctrl plus S">
+  <span class="v-hotkey__combination">
+    <kbd class="..." aria-hidden="true">...</kbd>
+
+    <span class="v-hotkey__divider" aria-hidden="true">+</span>
+
+    <kbd class="..." aria-hidden="true">S</kbd>
+  </span>
+</div>
+```

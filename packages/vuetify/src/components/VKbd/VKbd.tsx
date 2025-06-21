@@ -1,5 +1,5 @@
 // Styles
-import './VKbd.sass'
+import './VKbd.scss'
 
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'

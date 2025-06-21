@@ -1,0 +1,44 @@
+@use '../../styles/tools';
+@use './variables' as *;
+
+@include tools.layer('components') {
+ .v-hotkey {
+    align-items: center;
+    display: inline-flex;
+    gap: $hotkey-gap;
+    vertical-align: middle;
+
+    &__key-icon {
+      .v-icon {
+        max-width: $hotkey-icon-max-width;
+        min-width: unset;
+      }
+    }
+
+    &__divider {
+      align-items: center;
+      display: inline-flex;
+      opacity: $hotkey-divider-opacity;
+      font-size: $hotkey-divider-font-size;
+    }
+
+    &__combination {
+      align-self: baseline;
+      display: flex;
+      gap: $hotkey-combination-gap;
+    }
+  }
+
+  // Screen reader only content
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+}
