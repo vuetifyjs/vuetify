@@ -14,6 +14,7 @@ export function useHold ({ toggleUpDown }: { toggleUpDown: (increment: boolean) 
     holdStop()
     tick(value)
     window.addEventListener('pointerup', holdStop)
+    document.addEventListener('blur', holdStop)
     timeout = window.setTimeout(() => {
       interval = window.setInterval(() => tick(value), HOLD_REPEAT)
     }, HOLD_DELAY)
@@ -23,6 +24,7 @@ export function useHold ({ toggleUpDown }: { toggleUpDown: (increment: boolean) 
     window.clearTimeout(timeout)
     window.clearInterval(interval)
     window.removeEventListener('pointerup', holdStop)
+    document.removeEventListener('blur', holdStop)
   }
 
   function tick (value: 'up' | 'down') {
