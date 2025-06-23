@@ -176,8 +176,8 @@ The hotkey string supports various modifiers and special keys:
 
 ### Modifiers
 
+- <v-kbd>cmd</v-kbd> - Command key (Mac) / Control key (PC) - **recommended over <v-kbd>ctrl</v-kbd> for cross-platform**
 - <v-kbd>ctrl</v-kbd> - Control key (all platforms)
-- <v-kbd>cmd</v-kbd> - Command key (Mac) / Control key (PC) - recommended for cross-platform
 - <v-kbd>meta</v-kbd> - Meta key (Command key on Mac, Windows key on PC)
 - <v-kbd>alt</v-kbd> - Alt key (all platforms)
 - <v-kbd>shift</v-kbd> - Shift key (all platforms)
@@ -228,13 +228,13 @@ useHotkey('alt+tab', handleAction)   // Window switching
 useHotkey('meta', handleAction)      // Start menu (Windows)
 
 // ✅ Safe alternatives
-useHotkey('ctrl+shift+r', handleAction)
-useHotkey('ctrl+k-t', handleAction)
+useHotkey('cmd+shift+r', handleAction)
+useHotkey('cmd+k-t', handleAction)
 useHotkey('alt+1', handleAction)
 ```
 
 ### Best practices
 
+- **Test cross-platform**: _Verify shortcuts work_ on Windows, macOS, and Linux!
 - **Use modifier combinations**: Prefer `Ctrl+Shift+Key` for custom actions
-- **Test cross-platform**: Verify shortcuts work on Windows, macOS, and Linux
-- **Document shortcuts**: Maintain a list of all application hotkeys
+- **Document your shortcuts**: Maintain a list of all application hotkeys

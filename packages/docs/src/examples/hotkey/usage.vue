@@ -30,7 +30,7 @@
       </template>
 
       <template v-slot:actions>
-        <span class="ps-2">Current hotkey:</span> <v-hotkey :display-mode="model" :keys></v-hotkey>
+        <span class="ps-2">Current hotkey:</span> <v-hotkey :display-mode="displayMode" :keys></v-hotkey>
 
         <v-spacer></v-spacer>
 
@@ -51,12 +51,16 @@
 
   const name = 'hotkey'
   const model = ref('default')
-  const options = ['text', 'symbol']
+  const options = ['text', 'symbol', 'icon']
   const logs = ref([])
-  const keys = shallowRef('ctrl+b')
+  const keys = shallowRef('cmd+b')
   const binding = shallowRef(false)
   const allowInputs = shallowRef(false)
   const sequenceTimeout = shallowRef(0)
+
+  const displayMode = computed(() => {
+    return model.value === 'default' ? undefined : model.value
+  })
 
   const and = computed(() => sequenceTimeout.value && allowInputs.value ? '\n  ' : '')
 
