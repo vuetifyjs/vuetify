@@ -387,6 +387,26 @@ describe('VHotkey.tsx', () => {
       })
     })
 
+    it('should apply contained variant inline styling correctly', () => {
+      render(() => <VHotkey keys="ctrl+k" variant="contained" inline />)
+
+      const wrapper = screen.getByCSS('.v-hotkey__contained-wrapper')
+      expect(wrapper).toBeInTheDocument()
+
+      // Should have both contained and inline classes on the main element
+      const hotkey = screen.getByCSS('.v-hotkey')
+      expect(hotkey).toHaveClass('v-hotkey--contained')
+      expect(hotkey).toHaveClass('v-hotkey--inline')
+
+      // Should have nested kbd elements for contained variant
+      const nestedKbds = screen.getAllByCSS('.v-hotkey__key--nested')
+      expect(nestedKbds.length).toBeGreaterThan(0)
+
+      // Should have combinations
+      const combinations = screen.getAllByCSS('.v-hotkey__combination')
+      expect(combinations.length).toBeGreaterThan(0)
+    })
+
     it('should apply contained variant with color correctly', () => {
       render(() => <VHotkey keys="ctrl+k" variant="contained" color="primary" />)
 

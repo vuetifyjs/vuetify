@@ -8,7 +8,7 @@ $hotkey-divider-font-size: 0.75em !default;
 $hotkey-combination-gap: 2px !default;
 $hotkey-font-size: 0.75rem !default;
 $hotkey-line-height: 1.5 !default;
-$hotkey-padding: .2rem !default;
+$hotkey-padding: 0.2rem !default;
 $hotkey-min-width: 1.5em !default;
 $hotkey-disabled-opacity: 0.26 !default;
 
@@ -20,7 +20,7 @@ $hotkey-inline-min-width: vkdb.$kbd-min-width !default;
 $hotkey-inline-icon-max-height: calc(1ex + 2px) !default;
 $hotkey-inline-divider-font-size: 0.875em !default;
 
-$hotkey-contained-padding: 0.2em 4px !default;
+$hotkey-contained-padding: 0.2rem 4px !default;
 
 // Variant variables
 $hotkey-background: rgb(var(--v-theme-surface)) !default;

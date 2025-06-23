@@ -439,6 +439,55 @@ export const VHotkey = genericComponent()({
       return translateKey(textKey)
     }
 
+    // Simplified key rendering function to reduce duplication
+    function renderKey (key: Key, keyIndex: number, isContained: boolean) {
+      const KeyComponent = isContained ? 'kbd' : VKbd
+      const keyClasses = [
+        'v-hotkey__key',
+        `v-hotkey__key-${key[0]}`,
+        ...(isContained ? ['v-hotkey__key--nested'] : [
+          borderClasses.value,
+          roundedClasses.value,
+          elevationClasses.value,
+          colorClasses.value,
+        ]),
+      ]
+
+      return (
+        <KeyComponent
+          key={ keyIndex }
+          class={ keyClasses }
+          style={ isContained ? undefined : colorStyles.value }
+          aria-hidden="true"
+          title={ getKeyTooltip(key) }
+        >
+          {
+            key[0] === 'icon' ? (
+              <VIcon
+                icon={ key[1] }
+                aria-hidden="true"
+              />
+            ) : translateKey(key[1])
+          }
+        </KeyComponent>
+      )
+    }
+
+    // Simplified divider rendering function
+    function renderDivider (key: Delineator, keyIndex: number) {
+      return (
+        <span
+          key={ keyIndex }
+          class="v-hotkey__divider"
+          aria-hidden="true"
+        >
+          {
+            AND_DELINEATOR.isEqual(key) ? '+' : t('$vuetify.hotkey.then')
+          }
+        </span>
+      )
+    }
+
     useRender(() => (
       <div
         class={[
@@ -458,7 +507,7 @@ export const VHotkey = genericComponent()({
         aria-label={ accessibleLabel.value }
       >
         { isContainedVariant.value ? (
-          // Contained variant: Wrap everything in a single VKbd with nested kbd elements
+          // Contained variant: Single VKbd wrapper with nested content
           <VKbd
             class={[
               'v-hotkey__contained-wrapper',
@@ -467,64 +516,16 @@ export const VHotkey = genericComponent()({
               elevationClasses.value,
               colorClasses.value,
             ]}
-            style={[
-              colorStyles.value,
-            ]}
+            style={ colorStyles.value }
             aria-hidden="true"
           >
             { keyCombinations.value.map((combination, comboIndex) => (
               <span class="v-hotkey__combination" key={ comboIndex }>
-                { combination.map((key, keyIndex) => {
-                  return isDelineator(key) ? (
-                    <>
-                      { /* Render + separator for AND delineators */ }
-                      { AND_DELINEATOR.isEqual(key) && (
-                        <span
-                          key={ keyIndex }
-                          class="v-hotkey__divider"
-                          aria-hidden="true"
-                        >
-                          +
-                        </span>
-                      )}
-                      { /* Render "then" text for THEN delineators */ }
-                      {
-                        THEN_DELINEATOR.isEqual(key) && (
-                        <span
-                          key={ keyIndex }
-                          class="v-hotkey__divider"
-                          aria-hidden="true"
-                        >
-                          { t('$vuetify.hotkey.then') }
-                        </span>
-                        )}
-                    </>
-                  ) : (
-                    <>
-                      { /* Individual key display - nested kbd elements without visual styling */ }
-                      <kbd
-                        key={ keyIndex }
-                        class={[
-                          'v-hotkey__key',
-                          `v-hotkey__key-${key[0]}`,
-                          'v-hotkey__key--nested',
-                        ]}
-                        aria-hidden="true"
-                        title={ getKeyTooltip(key) }
-                      >
-                        { /* Render icon or text based on the key display type */ }
-                        {
-                          key[0] === 'icon' ? (
-                            <VIcon
-                              icon={ key[1] }
-                              aria-hidden="true"
-                            />
-                          ) : translateKey(key[1])
-                        }
-                      </kbd>
-                    </>
-                  )
-                })}
+                { combination.map((key, keyIndex) =>
+                  isDelineator(key)
+                    ? renderDivider(key, keyIndex)
+                    : renderKey(key, keyIndex, true)
+                )}
                 { comboIndex < keyCombinations.value.length - 1 && <span aria-hidden="true">&nbsp;</span> }
               </span>
             ))}
@@ -533,63 +534,11 @@ export const VHotkey = genericComponent()({
           // Standard variants: Individual VKbd elements
           keyCombinations.value.map((combination, comboIndex) => (
             <span class="v-hotkey__combination" key={ comboIndex }>
-              { combination.map((key, keyIndex) => {
-                return isDelineator(key) ? (
-                  <>
-                    { /* Render + separator for AND delineators */ }
-                    { AND_DELINEATOR.isEqual(key) && (
-                      <span
-                        key={ keyIndex }
-                        class="v-hotkey__divider"
-                        aria-hidden="true"
-                      >
-                        +
-                      </span>
-                    )}
-                    { /* Render "then" text for THEN delineators */ }
-                    {
-                      THEN_DELINEATOR.isEqual(key) && (
-                      <span
-                        key={ keyIndex }
-                        class="v-hotkey__divider"
-                        aria-hidden="true"
-                      >
-                        { t('$vuetify.hotkey.then') }
-                      </span>
-                      )}
-                  </>
-                ) : (
-                  <>
-                    { /* Individual key display */ }
-                    <VKbd
-                      key={ keyIndex }
-                      class={[
-                        'v-hotkey__key',
-                        `v-hotkey__key-${key[0]}`,
-                        borderClasses.value,
-                        roundedClasses.value,
-                        elevationClasses.value,
-                        colorClasses.value,
-                      ]}
-                      style={[
-                        colorStyles.value,
-                      ]}
-                      aria-hidden="true"
-                      title={ getKeyTooltip(key) }
-                    >
-                      { /* Render icon or text based on the key display type */ }
-                      {
-                        key[0] === 'icon' ? (
-                          <VIcon
-                            icon={ key[1] }
-                            aria-hidden="true"
-                          />
-                        ) : translateKey(key[1])
-                      }
-                    </VKbd>
-                  </>
-                )
-              })}
+              { combination.map((key, keyIndex) =>
+                isDelineator(key)
+                  ? renderDivider(key, keyIndex)
+                  : renderKey(key, keyIndex, false)
+              )}
               { comboIndex < keyCombinations.value.length - 1 && <span aria-hidden="true">&nbsp;</span> }
             </span>
           ))
