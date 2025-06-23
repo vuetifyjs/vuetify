@@ -13,9 +13,9 @@ import type { PropType } from 'vue'
 import type { CalendarDay } from '@/composables/calendar'
 
 export type VCalendarMonthDaySlots = {
-  dayBody: { day?: CalendarDay, events?: Array<any> }
+  'day-body': { day?: CalendarDay, events?: Array<any> }
   'day-event': { day?: CalendarDay, allDay: boolean, event: Record<string, unknown> }
-  dayTitle: { title?: number | string }
+  'day-title': { title?: number | string }
 }
 
 export const makeVCalendarMonthDayProps = propsFactory({
@@ -47,7 +47,7 @@ export const VCalendarMonthDay = genericComponent<VCalendarMonthDaySlots>()({
         >
           { !props.day?.isHidden ? (
             <div key="title" class="v-calendar-weekly__day-label">
-              { slots.dayTitle?.({ title: props.title }) ?? (
+              { slots['day-title']?.({ title: props.title }) ?? (
                 <VBtn
                   class={ props.day?.isToday ? 'v-calendar-weekly__day-label__today' : undefined }
                   color={ props.color }
@@ -65,7 +65,7 @@ export const VCalendarMonthDay = genericComponent<VCalendarMonthDaySlots>()({
 
           { !props.day?.isHidden ? (
             <div key="content" class="v-calendar-weekly__day-content" >
-              { slots.dayBody?.({ day: props.day, events: props.events }) ?? (
+              { slots['day-body']?.({ day: props.day, events: props.events }) ?? (
                 <div>
                   <div class="v-calendar-weekly__day-alldayevents-container">
                     { props.events?.filter(event => event.allDay).map(event => slots['day-event']
