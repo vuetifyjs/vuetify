@@ -81,6 +81,14 @@ Use the **key-map** prop to customize how specific keys are displayed:
 
 <ExamplesExample file="v-hotkey/prop-key-map" />
 
+#### Inline display
+
+The **inline** prop optimizes the component for integration within text content, documentation, and flowing paragraphs. This mode applies specialized styling for seamless text flow and improved readability:
+
+<ExamplesExample file="v-hotkey/prop-inline" />
+
+**Layout considerations:** When using multiple inline hotkeys within the same paragraph, consider increasing the `line-height` of the containing text to provide adequate vertical spacing. This prevents visual overlap when hotkey components wrap to new lines, ensuring clean separation and improved readability.
+
 ## Accessibility
 
 The `v-hotkey` component is designed with accessibility in mind. It uses semantic HTML elements and ARIA attributes to ensure that screen readers can interpret the displayed keyboard shortcuts correctly.

@@ -1,12 +1,14 @@
 @use '../../styles/tools';
 @use './variables' as *;
 
+
 @include tools.layer('components') {
  .v-hotkey {
     align-items: center;
     display: inline-flex;
     gap: $hotkey-gap;
     vertical-align: middle;
+    line-height: $hotkey-line-height;
 
     &__key-icon {
       .v-icon {
@@ -26,6 +28,66 @@
       align-self: baseline;
       display: flex;
       gap: $hotkey-combination-gap;
+    }
+
+    &__key.v-kbd {
+      min-height: unset;
+      font-size: $hotkey-font-size;
+      line-height: $hotkey-line-height;
+      padding: $hotkey-padding;
+      min-width: $hotkey-min-width;
+    }
+
+    &__key-symbol.v-kbd {
+      line-height: normal;
+      font-size: 1em;
+    }
+
+    &--inline {
+      align-items: baseline;
+      max-height: 1lh;
+      vertical-align: baseline;
+      font-size: $hotkey-inline-font-size;
+      line-height: $hotkey-inline-line-height;
+
+      .v-hotkey {
+        &__key-symbol.v-kbd,
+        &__key-text.v-kbd {
+          align-self: baseline;
+        }
+        &__combination {
+          height: inherit;
+          align-self: baseline;
+          display: flex;
+        }
+
+        &__key.v-kbd {
+          font-size: $hotkey-inline-font-size;
+          line-height: $hotkey-inline-line-height;
+          padding: $hotkey-inline-padding;
+          min-width: $hotkey-inline-min-width;
+        }
+
+        &__key-icon {
+          align-self: stretch;
+          &.v-kbd {
+            padding: {
+              top: 0;
+              bottom: 0;
+            }
+          }
+          .v-icon {
+            width: min-content;
+            min-width: fit-content;
+            max-height: $hotkey-inline-icon-max-height;
+            .v-icon__svg {
+              height: 100%;
+              // Safari fix
+              width: unset;
+            }
+          }
+        }
+      }
     }
   }
 

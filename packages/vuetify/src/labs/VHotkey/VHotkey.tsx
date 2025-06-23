@@ -43,6 +43,9 @@ type DisplayMode = 'icon' | 'symbol' | 'text'
 // Key display tuple: [mode, content] where content is string or IconValue
 type KeyDisplay = [Exclude<DisplayMode, 'icon'>, string] | [Extract<DisplayMode, 'icon'>, IconValue]
 
+// Key tuple: [mode, content] where content is string or IconValue
+type Key = [Exclude<DisplayMode, 'icon'>, string, string] | [Extract<DisplayMode, 'icon'>, IconValue, string]
+
 // Key mapping function type
 type KeyMap = Record<string, (mode: DisplayMode, isMac: boolean) => KeyDisplay>
 
@@ -158,6 +161,7 @@ export const makeVHotkeyProps = propsFactory({
     type: String as PropType<'mac' | string>,
     default: undefined,
   },
+  inline: Boolean,
   // Disabled state
   disabled: Boolean,
 
@@ -188,7 +192,21 @@ function isString (value: any): value is string {
   return typeof value === 'string'
 }
 
-function applyDisplayModeToKey (keyMap: KeyMap, mode: DisplayMode, key: string, isMac: boolean): KeyDisplay {
+function getKeyText (keyMap: KeyMap, key: string, isMac: boolean): string {
+  // Normalize keys to lowercase for consistent lookup
+  const lowerKey = key.toLowerCase()
+
+  // Check if we have a specific mapping for this key
+  if (lowerKey in keyMap) {
+    const result = keyMap[lowerKey]('text', isMac)
+    return typeof result[1] === 'string' ? result[1] : String(result[1])
+  }
+
+  // Fallback to uppercase text for unknown keys
+  return key.toUpperCase()
+}
+
+function applyDisplayModeToKey (keyMap: KeyMap, mode: DisplayMode, key: string, isMac: boolean): Key {
   // Normalize keys to lowercase for consistent lookup
   const lowerKey = key.toLowerCase()
 
@@ -198,14 +216,14 @@ function applyDisplayModeToKey (keyMap: KeyMap, mode: DisplayMode, key: string, 
 
     // If we get an icon token in text mode, convert it to readable text
     if (result[0] === 'text' && typeof result[1] === 'string' && result[1].startsWith('$') && !result[1].startsWith('$vuetify.')) {
-      return ['text', result[1].replace('$', '').toUpperCase()]
+      return ['text', result[1].replace('$', '').toUpperCase(), key]
     }
 
-    return result
+    return [...result, key]
   }
 
   // Fallback to uppercase text for unknown keys
-  return ['text', key.toUpperCase()]
+  return ['text', key.toUpperCase(), key]
 }
 
 export const VHotkey = genericComponent()({
@@ -233,6 +251,15 @@ export const VHotkey = genericComponent()({
 
     const AND_DELINEATOR = new Delineator('and') // For + separators
     const THEN_DELINEATOR = new Delineator('then') // For - separators
+
+    const _keyMap = computed(() => {
+      // Merge the keyMap with the default. Allows the user to selectively overwrite specific key behaviors
+      // We will recommend that this property be set at the component default level and not on a per-instance basis
+      // TODO: This can be more efficient. Most of the time this will merge IDENTICAL objects needlessly.
+      // TODO: (continued) So we could make it so the default for props.keyMap is an empty object,
+      // TODO: (continued) but how might that affect doc generation? @MajesticPotatoe do you know? I want good DX!
+      return mergeDeep(keyMap, props.keyMap)
+    })
 
     const keyCombinations = computed(() => {
       if (!props.keys) return []
@@ -332,19 +359,12 @@ export const VHotkey = genericComponent()({
           modifiers.ctrl = false
         }
 
-        // Merge the keyMap with the default. Allows the user to selectively overwrite specific key behaviors
-        // We will recommend that this property be set at the component default level and not on a per-instance basis
-        // TODO: This can be more efficient. Most of the time this will merge IDENTICAL objects needlessly.
-        // TODO: (continued) So we could make it so the default for props.keyMap is an empty object,
-        // TODO: (continued) but how might that affect doc generation? @MajesticPotatoe do you know? I want good DX!
-        const _keyMap = mergeDeep(keyMap, props.keyMap)
-
         // Transform each key part into its display representation
         return parts.map(key => {
           // Return delineator objects as-is for separator rendering
           if (isDelineator(key)) return key
           // Apply the key mapping to get the display representation
-          return applyDisplayModeToKey(_keyMap, effectiveDisplayMode.value, key, isMac.value)
+          return applyDisplayModeToKey(_keyMap.value, effectiveDisplayMode.value, key, isMac.value)
         })
       })
     })
@@ -383,12 +403,22 @@ export const VHotkey = genericComponent()({
       return key.startsWith('$vuetify.') ? t(key) : key
     }
 
+    function getKeyTooltip (key: Key): string | undefined {
+      // Only provide tooltips for icon and symbol modes where visual clarity might be needed
+      if (key[0] === 'text') return undefined
+
+      // Get the text representation for tooltip
+      const textKey = getKeyText(_keyMap.value, String(key[2]), isMac.value)
+      return translateKey(textKey)
+    }
+
     useRender(() => (
       <div
         class={[
           'v-hotkey',
           {
             'v-hotkey--disabled': props.disabled,
+            'v-hotkey--inline': props.inline,
           },
           themeClasses.value,
           rtlClasses.value,
@@ -433,7 +463,7 @@ export const VHotkey = genericComponent()({
                     key={ keyIndex }
                     class={[
                       'v-hotkey__key',
-                      key[0] === 'icon' ? 'v-hotkey__key-icon' : `v-hotkey__key-${key[0]}`,
+                      `v-hotkey__key-${key[0]}`,
                       borderClasses.value,
                       roundedClasses.value,
                       elevationClasses.value,
@@ -443,6 +473,7 @@ export const VHotkey = genericComponent()({
                       colorStyles.value,
                     ]}
                     aria-hidden="true"
+                    title={ getKeyTooltip(key) }
                   >
                     { /* Render icon or text based on the key display type */ }
                     {
