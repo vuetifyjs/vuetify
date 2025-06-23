@@ -10,13 +10,10 @@
     --v-date-picker-month-day-diff: 4px
 
   .v-date-picker-month__weeks
-    display: grid
-    grid-template-rows: min-content min-content min-content min-content min-content min-content min-content
+    display: flex
+    flex-direction: column
     column-gap: $date-picker-month-column-gap
     font-size: $date-picker-month-font-size
-
-    + .v-date-picker-month__days
-      grid-row-gap: 0
 
   .v-date-picker-month__weekday
     font-size: $date-picker-month-font-size
@@ -25,8 +22,6 @@
     display: grid
     grid-template-columns: repeat(var(--v-date-picker-days-in-week), min-content)
     column-gap: $date-picker-month-column-gap
-    flex: 1 1
-    justify-content: center
 
   .v-date-picker-month__day
     align-items: center
