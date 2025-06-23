@@ -23,10 +23,10 @@
 
   .v-date-picker-month__days
     display: grid
-    grid-template-columns: min-content min-content min-content min-content min-content min-content min-content
+    grid-template-columns: repeat(var(--v-date-picker-days-in-week), min-content)
     column-gap: $date-picker-month-column-gap
     flex: 1 1
-    justify-content: space-around
+    justify-content: center
 
   .v-date-picker-month__day
     align-items: center

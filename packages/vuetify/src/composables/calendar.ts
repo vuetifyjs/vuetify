@@ -125,6 +125,12 @@ export function useCalendar (props: CalendarProps) {
     return props.weekdays.map(day => (day + firstDayOfWeek) % 7)
   })
 
+  const weekdayLabels = computed(() => {
+    const labels = adapter.getWeekdays(props.firstDayOfWeek)
+
+    return weekDays.value.map(day => labels[day])
+  })
+
   const weeksInMonth = computed(() => {
     const weeks = adapter.getWeekArray(month.value, props.firstDayOfWeek)
 
@@ -233,6 +239,7 @@ export function useCalendar (props: CalendarProps) {
     model,
     weeksInMonth,
     weekDays,
+    weekdayLabels,
     weekNumbers,
   }
 }
