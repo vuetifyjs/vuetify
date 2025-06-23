@@ -41,8 +41,8 @@ import type { Variant } from '@/composables/variant'
 // Display mode types for different visual representations
 type DisplayMode = 'icon' | 'symbol' | 'text'
 
-// Extended variant type that includes our custom 'combined' variant
-type HotkeyVariant = 'elevated' | 'flat' | 'tonal' | 'outlined' | 'text' | 'plain' | 'combined'
+// Extended variant type that includes our custom 'contained' variant
+type HotkeyVariant = 'elevated' | 'flat' | 'tonal' | 'outlined' | 'text' | 'plain' | 'contained'
 
 // Key display tuple: [mode, content] where content is string or IconValue
 type KeyDisplay = [Exclude<DisplayMode, 'icon'>, string] | [Extract<DisplayMode, 'icon'>, IconValue]
@@ -149,12 +149,12 @@ const keyMap: KeyMap = {
   }),
 }
 
-// Create custom variant props that extend the base variant props with our 'combined' option
+// Create custom variant props that extend the base variant props with our 'contained' option
 const makeVHotkeyVariantProps = propsFactory({
   variant: {
     type: String as PropType<HotkeyVariant>,
     default: 'elevated' as const,
-    validator: (v: any) => ['elevated', 'flat', 'tonal', 'outlined', 'text', 'plain', 'combined'].includes(v),
+    validator: (v: any) => ['elevated', 'flat', 'tonal', 'outlined', 'text', 'plain', 'contained'].includes(v),
   },
 }, 'VHotkeyVariant')
 
@@ -255,13 +255,13 @@ export const VHotkey = genericComponent()({
     const { roundedClasses } = useRounded(props)
     const { elevationClasses } = useElevation(props)
 
-    // Handle variant logic - use standard variant composable for non-combined variants
-    const isCombinedVariant = computed(() => props.variant === 'combined')
+    // Handle variant logic - use standard variant composable for non-contained variants
+    const isContainedVariant = computed(() => props.variant === 'contained')
 
-    // For combined variant, we'll use 'elevated' as the base variant for the wrapper
+    // For contained variant, we'll use 'elevated' as the base variant for the wrapper
     const effectiveVariantProps = computed(() => ({
       ...props,
-      variant: isCombinedVariant.value ? 'elevated' as Variant : props.variant as Variant,
+      variant: isContainedVariant.value ? 'elevated' as Variant : props.variant as Variant,
     }))
 
     const { colorClasses, colorStyles, variantClasses } = useVariant(effectiveVariantProps)
@@ -446,7 +446,7 @@ export const VHotkey = genericComponent()({
           {
             'v-hotkey--disabled': props.disabled,
             'v-hotkey--inline': props.inline,
-            'v-hotkey--combined': isCombinedVariant.value,
+            'v-hotkey--contained': isContainedVariant.value,
           },
           themeClasses.value,
           rtlClasses.value,
@@ -457,11 +457,11 @@ export const VHotkey = genericComponent()({
         role="img"
         aria-label={ accessibleLabel.value }
       >
-        { isCombinedVariant.value ? (
-          // Combined variant: Wrap everything in a single VKbd with nested kbd elements
+        { isContainedVariant.value ? (
+          // Contained variant: Wrap everything in a single VKbd with nested kbd elements
           <VKbd
             class={[
-              'v-hotkey__combined-wrapper',
+              'v-hotkey__contained-wrapper',
               borderClasses.value,
               roundedClasses.value,
               elevationClasses.value,

@@ -66,18 +66,22 @@
     &--variant-outlined {
       .v-hotkey__key.v-kbd {
         @include tools.elevation(0);
-        background: none;
+        & {
+          background: none;
+        }
       }
     }
 
-        &--variant-text {
+    &--variant-text {
       .v-hotkey__key.v-kbd {
-        background: transparent !important;
-        border: none !important;
         @include tools.elevation(0);
-        padding-left: 0;
-        padding-right: 0;
-        min-width: auto; // Remove min-width for natural text flow
+        & {
+          background: transparent !important;
+          border: none !important;
+          padding-left: 0;
+          padding-right: 0;
+          min-width: auto; // Remove min-width for natural text flow
+        }
       }
 
       .v-hotkey__combination {
@@ -143,14 +147,14 @@
       }
     }
 
-    // Combined variant styles - following MDN pattern with nested kbd elements
-    &--combined {
-      .v-hotkey__combined-wrapper {
+    // Contained variant styles - following MDN pattern with nested kbd elements
+    &--contained {
+      .v-hotkey__contained-wrapper {
         // The outer kbd wrapper gets all the visual styling
         display: inline-flex;
         align-items: center;
         gap: $hotkey-combination-gap;
-        padding: $hotkey-padding;
+        padding: $hotkey-contained-padding;
         background: unset;
 
         // Nested kbd elements have minimal styling - just content
@@ -175,7 +179,7 @@
         }
 
         .v-hotkey__divider {
-          // Dividers within combined variant
+          // Dividers within contained variant
           opacity: $hotkey-divider-opacity;
           font-size: inherit;
         }
@@ -187,9 +191,9 @@
         }
       }
 
-      // Inline combined variant
+      // Inline contained variant
       &.v-hotkey--inline {
-        .v-hotkey__combined-wrapper {
+        .v-hotkey__contained-wrapper {
           font-size: $hotkey-inline-font-size;
           line-height: $hotkey-inline-line-height;
           padding: $hotkey-inline-padding;
@@ -210,8 +214,8 @@
         }
       }
 
-      // Combined variant has its own default styling (elevated-like)
-      .v-hotkey__combined-wrapper {
+      // Contained variant has its own default styling (elevated-like)
+      .v-hotkey__contained-wrapper {
         box-shadow: unset;
       }
     }

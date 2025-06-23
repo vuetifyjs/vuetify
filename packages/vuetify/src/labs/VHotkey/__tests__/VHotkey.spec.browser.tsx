@@ -202,22 +202,22 @@ describe('VHotkey.tsx', () => {
         const keys = screen.getAllByCSS('.v-hotkey__key')
         expect(keys).toHaveLength(2)
 
-        // Should not have combined wrapper
-        expect(screen.queryByCSS('.v-hotkey__combined-wrapper')).not.toBeInTheDocument()
-        expect(screen.queryByCSS('.v-hotkey--combined')).not.toBeInTheDocument()
+        // Should not have contained wrapper
+        expect(screen.queryByCSS('.v-hotkey__contained-wrapper')).not.toBeInTheDocument()
+        expect(screen.queryByCSS('.v-hotkey--contained')).not.toBeInTheDocument()
 
         unmount()
       }
     })
 
-    it('should render combined variant with nested kbd structure', () => {
-      render(() => <VHotkey keys="ctrl+k" variant="combined" />)
+    it('should render contained variant with nested kbd structure', () => {
+      render(() => <VHotkey keys="ctrl+k" variant="contained" />)
 
-      // Should have combined modifier class
-      expect(screen.getByCSS('.v-hotkey--combined')).toBeInTheDocument()
+      // Should have contained modifier class
+      expect(screen.getByCSS('.v-hotkey--contained')).toBeInTheDocument()
 
-      // Should have the combined wrapper VKbd
-      expect(screen.getByCSS('.v-hotkey__combined-wrapper')).toBeInTheDocument()
+      // Should have the contained wrapper VKbd
+      expect(screen.getByCSS('.v-hotkey__contained-wrapper')).toBeInTheDocument()
 
       // Should have nested kbd elements (not VKbd components)
       const nestedKbds = screen.getAllByCSS('.v-hotkey__key--nested')
@@ -232,11 +232,11 @@ describe('VHotkey.tsx', () => {
       expect(screen.getByCSS('.v-hotkey__divider')).toHaveTextContent('+')
     })
 
-    it('should render combined variant with key sequences', () => {
-      render(() => <VHotkey keys="ctrl+k-p" variant="combined" />)
+    it('should render contained variant with key sequences', () => {
+      render(() => <VHotkey keys="ctrl+k-p" variant="contained" />)
 
-      // Should have combined wrapper
-      expect(screen.getByCSS('.v-hotkey__combined-wrapper')).toBeInTheDocument()
+      // Should have contained wrapper
+      expect(screen.getByCSS('.v-hotkey__contained-wrapper')).toBeInTheDocument()
 
       // Should have nested kbd elements for all keys
       const nestedKbds = screen.getAllByCSS('.v-hotkey__key--nested')
@@ -247,11 +247,11 @@ describe('VHotkey.tsx', () => {
       expect(dividers).toHaveLength(2) // +, then
     })
 
-    it('should render combined variant with different display modes', () => {
+    it('should render contained variant with different display modes', () => {
       // Test text mode first (always works)
-      const { unmount: unmountText } = render(() => <VHotkey keys="ctrl+k" variant="combined" displayMode="text" />)
+      const { unmount: unmountText } = render(() => <VHotkey keys="ctrl+k" variant="contained" displayMode="text" />)
 
-      expect(screen.getByCSS('.v-hotkey__combined-wrapper')).toBeInTheDocument()
+      expect(screen.getByCSS('.v-hotkey__contained-wrapper')).toBeInTheDocument()
       let nestedKbds = screen.getAllByCSS('.v-hotkey__key--nested')
       expect(nestedKbds).toHaveLength(2)
       nestedKbds.forEach(kbd => {
@@ -260,9 +260,9 @@ describe('VHotkey.tsx', () => {
       unmountText()
 
       // Test symbol mode with keys that have symbols
-      const { unmount: unmountSymbol } = render(() => <VHotkey keys="cmd+shift" variant="combined" displayMode="symbol" />)
+      const { unmount: unmountSymbol } = render(() => <VHotkey keys="cmd+shift" variant="contained" displayMode="symbol" />)
 
-      expect(screen.getByCSS('.v-hotkey__combined-wrapper')).toBeInTheDocument()
+      expect(screen.getByCSS('.v-hotkey__contained-wrapper')).toBeInTheDocument()
       nestedKbds = screen.getAllByCSS('.v-hotkey__key--nested')
       expect(nestedKbds).toHaveLength(2)
       // Both cmd and shift should have symbols available
@@ -273,10 +273,10 @@ describe('VHotkey.tsx', () => {
 
       // Test icon mode with keys that have icons
       const { unmount: unmountIcon } = render(() => (
-        <VHotkey keys="cmd+shift" variant="combined" displayMode="icon" overridePlatform="mac" />
+        <VHotkey keys="cmd+shift" variant="contained" displayMode="icon" overridePlatform="mac" />
       ))
 
-      expect(screen.getByCSS('.v-hotkey__combined-wrapper')).toBeInTheDocument()
+      expect(screen.getByCSS('.v-hotkey__contained-wrapper')).toBeInTheDocument()
       nestedKbds = screen.getAllByCSS('.v-hotkey__key--nested')
       expect(nestedKbds).toHaveLength(2)
       // On Mac, cmd and shift should have icons available
@@ -286,16 +286,152 @@ describe('VHotkey.tsx', () => {
       unmountIcon()
     })
 
-    it('should render combined variant inline correctly', () => {
-      render(() => <VHotkey keys="ctrl+k" variant="combined" inline />)
+    it('should render contained variant inline correctly', () => {
+      render(() => <VHotkey keys="ctrl+k" variant="contained" inline />)
 
-      // Should have both combined and inline classes
+      // Should have both contained and inline classes
       const hotkey = screen.getByCSS('.v-hotkey')
-      expect(hotkey).toHaveClass('v-hotkey--combined')
+      expect(hotkey).toHaveClass('v-hotkey--contained')
       expect(hotkey).toHaveClass('v-hotkey--inline')
 
-      // Should still have combined wrapper
-      expect(screen.getByCSS('.v-hotkey__combined-wrapper')).toBeInTheDocument()
+      // Should still have contained wrapper
+      expect(screen.getByCSS('.v-hotkey__contained-wrapper')).toBeInTheDocument()
+    })
+
+    it('should apply variant-specific styling to individual VKbd elements', () => {
+      // Test elevated variant has variant class
+      const { unmount: unmountElevated } = render(() => <VHotkey keys="ctrl+k" variant="elevated" />)
+      const hotkeyWrapper = screen.getByCSS('.v-hotkey')
+      expect(hotkeyWrapper).toHaveClass('v-hotkey--variant-elevated')
+      unmountElevated()
+
+      // Test flat variant has variant class
+      const { unmount: unmountFlat } = render(() => <VHotkey keys="ctrl+k" variant="flat" />)
+      const flatWrapper = screen.getByCSS('.v-hotkey')
+      expect(flatWrapper).toHaveClass('v-hotkey--variant-flat')
+      unmountFlat()
+
+      // Test outlined variant has variant class
+      const { unmount: unmountOutlined } = render(() => <VHotkey keys="ctrl+k" variant="outlined" />)
+      const outlinedWrapper = screen.getByCSS('.v-hotkey')
+      expect(outlinedWrapper).toHaveClass('v-hotkey--variant-outlined')
+      unmountOutlined()
+    })
+
+    it('should apply text variant styling correctly', () => {
+      render(() => <VHotkey keys="ctrl+k" variant="text" />)
+
+      const hotkeyWrapper = screen.getByCSS('.v-hotkey')
+      expect(hotkeyWrapper).toHaveClass('v-hotkey--variant-text')
+
+      const kbdElements = screen.getAllByCSS('.v-hotkey__key.v-kbd')
+      expect(kbdElements.length).toBeGreaterThan(0)
+
+      kbdElements.forEach(kbd => {
+        // Text variant should have transparent background and no border
+        expect(kbd).toHaveStyle({ background: 'transparent' })
+        expect(kbd).toHaveStyle({ border: 'none' })
+        // Text variant should have no horizontal padding and auto min-width
+        expect(kbd).toHaveStyle({ paddingLeft: '0px' })
+        expect(kbd).toHaveStyle({ paddingRight: '0px' })
+        expect(kbd).toHaveStyle({ minWidth: 'auto' })
+      })
+
+      // Text variant should have reduced gap between keys
+      const combinations = screen.getAllByCSS('.v-hotkey__combination')
+      expect(combinations.length).toBeGreaterThan(0)
+      combinations.forEach(combo => {
+        expect(combo).toHaveStyle({ gap: '1px' })
+      })
+    })
+
+    it('should apply tonal variant styling correctly', () => {
+      render(() => <VHotkey keys="ctrl+k" variant="tonal" />)
+
+      const hotkeyWrapper = screen.getByCSS('.v-hotkey')
+      expect(hotkeyWrapper).toHaveClass('v-hotkey--variant-tonal')
+
+      const kbdElements = screen.getAllByCSS('.v-hotkey__key.v-kbd')
+      expect(kbdElements.length).toBeGreaterThan(0)
+
+      kbdElements.forEach(kbd => {
+        // Tonal variant should have no border and no elevation
+        expect(kbd).toHaveStyle({ border: 'unset' })
+        expect(kbd).toHaveStyle({ boxShadow: 'unset' })
+      })
+    })
+
+    it('should apply contained variant wrapper styling correctly', () => {
+      render(() => <VHotkey keys="ctrl+k" variant="contained" />)
+
+      const wrapper = screen.getByCSS('.v-hotkey__contained-wrapper')
+      expect(wrapper).toBeInTheDocument()
+
+      // Contained wrapper should have proper styling - VKbd uses flex by default
+      expect(wrapper).toHaveStyle({ display: 'flex' })
+      expect(wrapper).toHaveStyle({ alignItems: 'center' })
+      expect(wrapper).toHaveStyle({ gap: '2px' }) // combination gap
+      expect(wrapper).toHaveStyle({ background: 'unset' })
+
+      // Nested kbd elements should have minimal styling
+      const nestedKbds = screen.getAllByCSS('.v-hotkey__key--nested')
+      expect(nestedKbds.length).toBeGreaterThan(0)
+
+      nestedKbds.forEach(kbd => {
+        expect(kbd).toHaveStyle({ background: 'none' })
+        expect(kbd).toHaveStyle({ border: 'none' })
+        expect(kbd).toHaveStyle({ padding: '0px' })
+        expect(kbd).toHaveStyle({ margin: '0px' })
+        expect(kbd).toHaveStyle({ minWidth: 'auto' })
+        expect(kbd).toHaveStyle({ minHeight: 'auto' })
+      })
+    })
+
+    it('should apply contained variant with color correctly', () => {
+      render(() => <VHotkey keys="ctrl+k" variant="contained" color="primary" />)
+
+      const wrapper = screen.getByCSS('.v-hotkey__contained-wrapper')
+      expect(wrapper).toHaveClass('bg-primary')
+
+      // Nested elements should inherit color, not have their own background
+      const nestedKbds = screen.getAllByCSS('.v-hotkey__key--nested')
+      nestedKbds.forEach(kbd => {
+        expect(kbd).not.toHaveClass('bg-primary')
+        expect(kbd).toHaveStyle({ background: 'none' })
+      })
+    })
+
+    it('should not allow contained variant with other variants', () => {
+      // This is more of a design constraint - contained should be mutually exclusive
+      // We test that when contained is used, it creates the wrapper structure
+      render(() => <VHotkey keys="ctrl+k" variant="contained" />)
+
+      expect(screen.getByCSS('.v-hotkey--contained')).toBeInTheDocument()
+      expect(screen.getByCSS('.v-hotkey__contained-wrapper')).toBeInTheDocument()
+
+      // Should not have individual VKbd elements with variant styling
+      const individualKbds = screen.queryAllByCSS('.v-hotkey__key.v-kbd')
+      expect(individualKbds).toHaveLength(0)
+    })
+
+    it('should accept all valid variant values', () => {
+      const validVariants = ['elevated', 'flat', 'tonal', 'outlined', 'text', 'plain', 'contained'] as const
+
+      for (const variant of validVariants) {
+        const { unmount } = render(() => <VHotkey keys="ctrl+k" variant={ variant } />)
+
+        const hotkeyWrapper = screen.getByCSS('.v-hotkey')
+
+        if (variant === 'contained') {
+          // Contained variant uses a special class structure
+          expect(hotkeyWrapper).toHaveClass('v-hotkey--contained')
+        } else {
+          // Standard variants use the variant class pattern
+          expect(hotkeyWrapper).toHaveClass(`v-hotkey--variant-${variant}`)
+        }
+
+        unmount()
+      }
     })
   })
 
@@ -1471,6 +1607,52 @@ describe('VHotkey.tsx', () => {
       const hasCtrl = textKeys.some(key => key.textContent?.includes('Ctrl'))
       const hasCommand = textKeys.some(key => key.textContent?.includes('Command'))
       expect(hasCtrl || hasCommand).toBe(true)
+    })
+  })
+
+  describe('Disabled State', () => {
+    it('should apply disabled styling when disabled prop is true', () => {
+      render(() => <VHotkey keys="ctrl+k" disabled />)
+
+      const hotkeyWrapper = screen.getByCSS('.v-hotkey')
+      expect(hotkeyWrapper).toHaveClass('v-hotkey--disabled')
+    })
+
+    it('should not apply disabled styling when disabled prop is false', () => {
+      render(() => <VHotkey keys="ctrl+k" disabled={ false } />)
+
+      const hotkeyWrapper = screen.getByCSS('.v-hotkey')
+      expect(hotkeyWrapper).not.toHaveClass('v-hotkey--disabled')
+    })
+
+    it('should work with disabled state in contained variant', () => {
+      render(() => <VHotkey keys="ctrl+k" variant="contained" disabled />)
+
+      const hotkeyWrapper = screen.getByCSS('.v-hotkey')
+      expect(hotkeyWrapper).toHaveClass('v-hotkey--disabled')
+      expect(hotkeyWrapper).toHaveClass('v-hotkey--contained')
+    })
+  })
+
+  describe('Variant Validation', () => {
+    it('should accept all valid variant values', () => {
+      const validVariants = ['elevated', 'flat', 'tonal', 'outlined', 'text', 'plain', 'contained'] as const
+
+      for (const variant of validVariants) {
+        const { unmount } = render(() => <VHotkey keys="ctrl+k" variant={ variant } />)
+
+        const hotkeyWrapper = screen.getByCSS('.v-hotkey')
+
+        if (variant === 'contained') {
+          // Contained variant uses a special class structure
+          expect(hotkeyWrapper).toHaveClass('v-hotkey--contained')
+        } else {
+          // Standard variants use the variant class pattern
+          expect(hotkeyWrapper).toHaveClass(`v-hotkey--variant-${variant}`)
+        }
+
+        unmount()
+      }
     })
   })
 })

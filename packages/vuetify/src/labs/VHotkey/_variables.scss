@@ -20,6 +20,8 @@ $hotkey-inline-min-width: vkdb.$kbd-min-width !default;
 $hotkey-inline-icon-max-height: calc(1ex + 2px) !default;
 $hotkey-inline-divider-font-size: 0.875em !default;
 
+$hotkey-contained-padding: 0.2em 4px !default;
+
 // Variant variables
 $hotkey-background: rgb(var(--v-theme-surface)) !default;
 $hotkey-color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity)) !default;
