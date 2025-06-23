@@ -70,11 +70,18 @@
       }
     }
 
-    &--variant-text {
+        &--variant-text {
       .v-hotkey__key.v-kbd {
         background: transparent !important;
         border: none !important;
         @include tools.elevation(0);
+        padding-left: 0;
+        padding-right: 0;
+        min-width: auto; // Remove min-width for natural text flow
+      }
+
+      .v-hotkey__combination {
+        gap: 1px; // Reduce gap between keys for text-only display
       }
     }
 
