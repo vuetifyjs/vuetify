@@ -274,6 +274,7 @@ export function useGroup (
     } else {
       const isSelected = selected.value.includes(id)
       if (props.mandatory && isSelected) return
+      if (!isSelected && !value) return
 
       selected.value = (value ?? !isSelected) ? [id] : []
     }
