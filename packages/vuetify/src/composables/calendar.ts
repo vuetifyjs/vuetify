@@ -122,8 +122,7 @@ export function useCalendar (props: CalendarProps) {
 
   const weekDays = computed(() => {
     const firstDayOfWeek = adapter.toJsDate(adapter.startOfWeek(adapter.date(), props.firstDayOfWeek)).getDay()
-    // Always generate all days, regardless of props.weekdays
-    return [0, 1, 2, 3, 4, 5, 6].map(day => (day + firstDayOfWeek) % 7)
+    return props.weekdays.map(day => (day + firstDayOfWeek) % 7)
   })
 
   const weeksInMonth = computed(() => {
@@ -223,7 +222,7 @@ export function useCalendar (props: CalendarProps) {
       return !props.allowedDates(date)
     }
 
-    return !props.weekdays.includes(adapter.toJsDate(date).getDay())
+    return false
   }
 
   return {
