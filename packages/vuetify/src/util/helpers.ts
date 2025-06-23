@@ -810,3 +810,9 @@ export function camelizeProps<T extends Record<string, unknown>> (props: T | nul
   }
   return out
 }
+
+export function onlyDefinedProps (props: Record<string, any>) {
+  const booleanAttributes = ['checked', 'disabled']
+  return Object.fromEntries(Object.entries(props)
+    .filter(([key, v]) => booleanAttributes.includes(key) ? !!v : v !== undefined))
+}
