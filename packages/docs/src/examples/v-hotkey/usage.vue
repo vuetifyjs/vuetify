@@ -30,6 +30,14 @@
         label="Platform behavior"
         persistent-hint
       ></v-select>
+
+      <v-select
+        v-model="variant"
+        :items="variants"
+        item-title="label"
+        item-value="value"
+        label="Variant"
+      ></v-select>
     </template>
   </ExamplesUsageExample>
 </template>
@@ -41,6 +49,7 @@
   const options = [...displayModes]
   const keyExample = ref('cmd+k')
   const platformOverride = ref('mac')
+  const variant = ref('elevated')
 
   const keyExamples = [
     { label: 'Basic shortcut (Cmd+K)', value: 'cmd+k' },
@@ -59,10 +68,21 @@
     { label: 'Auto', value: 'auto' },
   ]
 
+  const variants = [
+    { label: 'Elevated', value: 'elevated' },
+    { label: 'Plain', value: 'plain' },
+    { label: 'Combined', value: 'combined' },
+    { label: 'Flat', value: 'flat' },
+    { label: 'Tonal', value: 'tonal' },
+    { label: 'Outlined', value: 'outlined' },
+    { label: 'Text', value: 'text' },
+  ]
+
   const props = computed(() => {
     const baseProps = {
       keys: keyExample.value,
       'display-mode': displayModes.includes(model.value) ? model.value : undefined,
+      variant: variant.value,
     }
 
     // Convert 'auto' string to undefined for the component prop

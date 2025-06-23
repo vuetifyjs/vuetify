@@ -27,7 +27,7 @@ import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { useLocale, useRtl } from '@/composables/locale'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { makeVariantProps, useVariant } from '@/composables/variant'
+import { useVariant } from '@/composables/variant'
 
 // Utilities
 import { computed } from 'vue'
@@ -36,9 +36,13 @@ import { genericComponent, mergeDeep, propsFactory, useRender } from '@/util'
 // Types
 import type { PropType } from 'vue'
 import type { IconValue } from '@/composables/icons'
+import type { Variant } from '@/composables/variant'
 
 // Display mode types for different visual representations
 type DisplayMode = 'icon' | 'symbol' | 'text'
+
+// Extended variant type that includes our custom 'combined' variant
+type HotkeyVariant = 'elevated' | 'flat' | 'tonal' | 'outlined' | 'text' | 'plain' | 'combined'
 
 // Key display tuple: [mode, content] where content is string or IconValue
 type KeyDisplay = [Exclude<DisplayMode, 'icon'>, string] | [Extract<DisplayMode, 'icon'>, IconValue]
@@ -145,6 +149,15 @@ const keyMap: KeyMap = {
   }),
 }
 
+// Create custom variant props that extend the base variant props with our 'combined' option
+const makeVHotkeyVariantProps = propsFactory({
+  variant: {
+    type: String as PropType<HotkeyVariant>,
+    default: 'elevated' as const,
+    validator: (v: any) => ['elevated', 'flat', 'tonal', 'outlined', 'text', 'plain', 'combined'].includes(v),
+  },
+}, 'VHotkeyVariant')
+
 export const makeVHotkeyProps = propsFactory({
   // String representing keyboard shortcuts (e.g., "ctrl+k", "meta+shift+p")
   keys: String,
@@ -170,7 +183,10 @@ export const makeVHotkeyProps = propsFactory({
   ...makeBorderProps(),
   ...makeRoundedProps(),
   ...makeElevationProps(),
-  ...makeVariantProps(),
+  // Use our custom variant props instead of the base ones
+  ...makeVHotkeyVariantProps(),
+  // Still include color from the base variant props
+  color: String,
 }, 'VHotkey')
 
 class Delineator {
@@ -238,7 +254,17 @@ export const VHotkey = genericComponent()({
     const { borderClasses } = useBorder(props)
     const { roundedClasses } = useRounded(props)
     const { elevationClasses } = useElevation(props)
-    const { colorClasses, colorStyles, variantClasses } = useVariant(props)
+
+    // Handle variant logic - use standard variant composable for non-combined variants
+    const isCombinedVariant = computed(() => props.variant === 'combined')
+
+    // For combined variant, we'll use 'elevated' as the base variant for the wrapper
+    const effectiveVariantProps = computed(() => ({
+      ...props,
+      variant: isCombinedVariant.value ? 'elevated' as Variant : props.variant as Variant,
+    }))
+
+    const { colorClasses, colorStyles, variantClasses } = useVariant(effectiveVariantProps)
 
     const isMac = computed(() =>
       props.overridePlatform !== undefined
@@ -405,7 +431,8 @@ export const VHotkey = genericComponent()({
 
     function getKeyTooltip (key: Key): string | undefined {
       // Only provide tooltips for icon and symbol modes where visual clarity might be needed
-      if (key[0] === 'text') return undefined
+      // Check the requested display mode, not the actual rendered mode (which may fall back to text)
+      if (effectiveDisplayMode.value === 'text') return undefined
 
       // Get the text representation for tooltip
       const textKey = getKeyText(_keyMap.value, String(key[2]), isMac.value)
@@ -419,6 +446,7 @@ export const VHotkey = genericComponent()({
           {
             'v-hotkey--disabled': props.disabled,
             'v-hotkey--inline': props.inline,
+            'v-hotkey--combined': isCombinedVariant.value,
           },
           themeClasses.value,
           rtlClasses.value,
@@ -429,68 +457,143 @@ export const VHotkey = genericComponent()({
         role="img"
         aria-label={ accessibleLabel.value }
       >
-        { keyCombinations.value.map((combination, comboIndex) => (
-          <span class="v-hotkey__combination" key={ comboIndex }>
-            { combination.map((key, keyIndex) => {
-              return isDelineator(key) ? (
-                <>
-                  { /* Render + separator for AND delineators */ }
-                  { AND_DELINEATOR.isEqual(key) && (
-                    <span
-                      key={ keyIndex }
-                      class="v-hotkey__divider"
-                      aria-hidden="true"
-                    >
-                      +
-                    </span>
-                  )}
-                  { /* Render "then" text for THEN delineators */ }
-                  {
-                    THEN_DELINEATOR.isEqual(key) && (
-                    <span
-                      key={ keyIndex }
-                      class="v-hotkey__divider"
-                      aria-hidden="true"
-                    >
-                      { t('$vuetify.hotkey.then') }
-                    </span>
-                    )}
-                </>
-              ) : (
-                <>
-                  { /* Individual key display */ }
-                  <VKbd
-                    key={ keyIndex }
-                    class={[
-                      'v-hotkey__key',
-                      `v-hotkey__key-${key[0]}`,
-                      borderClasses.value,
-                      roundedClasses.value,
-                      elevationClasses.value,
-                      colorClasses.value,
-                    ]}
-                    style={[
-                      colorStyles.value,
-                    ]}
-                    aria-hidden="true"
-                    title={ getKeyTooltip(key) }
-                  >
-                    { /* Render icon or text based on the key display type */ }
-                    {
-                      key[0] === 'icon' ? (
-                        <VIcon
-                          icon={ key[1] }
+        { isCombinedVariant.value ? (
+          // Combined variant: Wrap everything in a single VKbd with nested kbd elements
+          <VKbd
+            class={[
+              'v-hotkey__combined-wrapper',
+              borderClasses.value,
+              roundedClasses.value,
+              elevationClasses.value,
+              colorClasses.value,
+            ]}
+            style={[
+              colorStyles.value,
+            ]}
+            aria-hidden="true"
+          >
+            { keyCombinations.value.map((combination, comboIndex) => (
+              <span class="v-hotkey__combination" key={ comboIndex }>
+                { combination.map((key, keyIndex) => {
+                  return isDelineator(key) ? (
+                    <>
+                      { /* Render + separator for AND delineators */ }
+                      { AND_DELINEATOR.isEqual(key) && (
+                        <span
+                          key={ keyIndex }
+                          class="v-hotkey__divider"
                           aria-hidden="true"
-                        />
-                      ) : translateKey(key[1])
-                    }
-                  </VKbd>
-                </>
-              )
-            })}
-            { comboIndex < keyCombinations.value.length - 1 && <span aria-hidden="true">&nbsp;</span> }
-          </span>
-        ))}
+                        >
+                          +
+                        </span>
+                      )}
+                      { /* Render "then" text for THEN delineators */ }
+                      {
+                        THEN_DELINEATOR.isEqual(key) && (
+                        <span
+                          key={ keyIndex }
+                          class="v-hotkey__divider"
+                          aria-hidden="true"
+                        >
+                          { t('$vuetify.hotkey.then') }
+                        </span>
+                        )}
+                    </>
+                  ) : (
+                    <>
+                      { /* Individual key display - nested kbd elements without visual styling */ }
+                      <kbd
+                        key={ keyIndex }
+                        class={[
+                          'v-hotkey__key',
+                          `v-hotkey__key-${key[0]}`,
+                          'v-hotkey__key--nested',
+                        ]}
+                        aria-hidden="true"
+                        title={ getKeyTooltip(key) }
+                      >
+                        { /* Render icon or text based on the key display type */ }
+                        {
+                          key[0] === 'icon' ? (
+                            <VIcon
+                              icon={ key[1] }
+                              aria-hidden="true"
+                            />
+                          ) : translateKey(key[1])
+                        }
+                      </kbd>
+                    </>
+                  )
+                })}
+                { comboIndex < keyCombinations.value.length - 1 && <span aria-hidden="true">&nbsp;</span> }
+              </span>
+            ))}
+          </VKbd>
+        ) : (
+          // Standard variants: Individual VKbd elements
+          keyCombinations.value.map((combination, comboIndex) => (
+            <span class="v-hotkey__combination" key={ comboIndex }>
+              { combination.map((key, keyIndex) => {
+                return isDelineator(key) ? (
+                  <>
+                    { /* Render + separator for AND delineators */ }
+                    { AND_DELINEATOR.isEqual(key) && (
+                      <span
+                        key={ keyIndex }
+                        class="v-hotkey__divider"
+                        aria-hidden="true"
+                      >
+                        +
+                      </span>
+                    )}
+                    { /* Render "then" text for THEN delineators */ }
+                    {
+                      THEN_DELINEATOR.isEqual(key) && (
+                      <span
+                        key={ keyIndex }
+                        class="v-hotkey__divider"
+                        aria-hidden="true"
+                      >
+                        { t('$vuetify.hotkey.then') }
+                      </span>
+                      )}
+                  </>
+                ) : (
+                  <>
+                    { /* Individual key display */ }
+                    <VKbd
+                      key={ keyIndex }
+                      class={[
+                        'v-hotkey__key',
+                        `v-hotkey__key-${key[0]}`,
+                        borderClasses.value,
+                        roundedClasses.value,
+                        elevationClasses.value,
+                        colorClasses.value,
+                      ]}
+                      style={[
+                        colorStyles.value,
+                      ]}
+                      aria-hidden="true"
+                      title={ getKeyTooltip(key) }
+                    >
+                      { /* Render icon or text based on the key display type */ }
+                      {
+                        key[0] === 'icon' ? (
+                          <VIcon
+                            icon={ key[1] }
+                            aria-hidden="true"
+                          />
+                        ) : translateKey(key[1])
+                      }
+                    </VKbd>
+                  </>
+                )
+              })}
+              { comboIndex < keyCombinations.value.length - 1 && <span aria-hidden="true">&nbsp;</span> }
+            </span>
+          ))
+        )}
       </div>
     ))
   },

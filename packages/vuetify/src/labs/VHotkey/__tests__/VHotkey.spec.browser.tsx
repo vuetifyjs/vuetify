@@ -191,6 +191,114 @@ describe('VHotkey.tsx', () => {
     })
   })
 
+  describe('Variants', () => {
+    it('should render standard variants correctly', () => {
+      const variants = ['elevated', 'flat', 'tonal', 'outlined', 'text', 'plain'] as const
+
+      for (const variant of variants) {
+        const { unmount } = render(() => <VHotkey keys="ctrl+k" variant={ variant } />)
+
+        // Should render individual VKbd elements for standard variants
+        const keys = screen.getAllByCSS('.v-hotkey__key')
+        expect(keys).toHaveLength(2)
+
+        // Should not have combined wrapper
+        expect(screen.queryByCSS('.v-hotkey__combined-wrapper')).not.toBeInTheDocument()
+        expect(screen.queryByCSS('.v-hotkey--combined')).not.toBeInTheDocument()
+
+        unmount()
+      }
+    })
+
+    it('should render combined variant with nested kbd structure', () => {
+      render(() => <VHotkey keys="ctrl+k" variant="combined" />)
+
+      // Should have combined modifier class
+      expect(screen.getByCSS('.v-hotkey--combined')).toBeInTheDocument()
+
+      // Should have the combined wrapper VKbd
+      expect(screen.getByCSS('.v-hotkey__combined-wrapper')).toBeInTheDocument()
+
+      // Should have nested kbd elements (not VKbd components)
+      const nestedKbds = screen.getAllByCSS('.v-hotkey__key--nested')
+      expect(nestedKbds).toHaveLength(2)
+
+      // Nested elements should be actual kbd tags
+      nestedKbds.forEach(kbd => {
+        expect(kbd.tagName.toLowerCase()).toBe('kbd')
+      })
+
+      // Should still have divider
+      expect(screen.getByCSS('.v-hotkey__divider')).toHaveTextContent('+')
+    })
+
+    it('should render combined variant with key sequences', () => {
+      render(() => <VHotkey keys="ctrl+k-p" variant="combined" />)
+
+      // Should have combined wrapper
+      expect(screen.getByCSS('.v-hotkey__combined-wrapper')).toBeInTheDocument()
+
+      // Should have nested kbd elements for all keys
+      const nestedKbds = screen.getAllByCSS('.v-hotkey__key--nested')
+      expect(nestedKbds).toHaveLength(3) // ctrl, k, p
+
+      // Should have both + and then dividers
+      const dividers = screen.getAllByCSS('.v-hotkey__divider')
+      expect(dividers).toHaveLength(2) // +, then
+    })
+
+    it('should render combined variant with different display modes', () => {
+      // Test text mode first (always works)
+      const { unmount: unmountText } = render(() => <VHotkey keys="ctrl+k" variant="combined" displayMode="text" />)
+
+      expect(screen.getByCSS('.v-hotkey__combined-wrapper')).toBeInTheDocument()
+      let nestedKbds = screen.getAllByCSS('.v-hotkey__key--nested')
+      expect(nestedKbds).toHaveLength(2)
+      nestedKbds.forEach(kbd => {
+        expect(kbd).toHaveClass('v-hotkey__key-text')
+      })
+      unmountText()
+
+      // Test symbol mode with keys that have symbols
+      const { unmount: unmountSymbol } = render(() => <VHotkey keys="cmd+shift" variant="combined" displayMode="symbol" />)
+
+      expect(screen.getByCSS('.v-hotkey__combined-wrapper')).toBeInTheDocument()
+      nestedKbds = screen.getAllByCSS('.v-hotkey__key--nested')
+      expect(nestedKbds).toHaveLength(2)
+      // Both cmd and shift should have symbols available
+      nestedKbds.forEach(kbd => {
+        expect(kbd).toHaveClass('v-hotkey__key-symbol')
+      })
+      unmountSymbol()
+
+      // Test icon mode with keys that have icons
+      const { unmount: unmountIcon } = render(() => (
+        <VHotkey keys="cmd+shift" variant="combined" displayMode="icon" overridePlatform="mac" />
+      ))
+
+      expect(screen.getByCSS('.v-hotkey__combined-wrapper')).toBeInTheDocument()
+      nestedKbds = screen.getAllByCSS('.v-hotkey__key--nested')
+      expect(nestedKbds).toHaveLength(2)
+      // On Mac, cmd and shift should have icons available
+      nestedKbds.forEach(kbd => {
+        expect(kbd).toHaveClass('v-hotkey__key-icon')
+      })
+      unmountIcon()
+    })
+
+    it('should render combined variant inline correctly', () => {
+      render(() => <VHotkey keys="ctrl+k" variant="combined" inline />)
+
+      // Should have both combined and inline classes
+      const hotkey = screen.getByCSS('.v-hotkey')
+      expect(hotkey).toHaveClass('v-hotkey--combined')
+      expect(hotkey).toHaveClass('v-hotkey--inline')
+
+      // Should still have combined wrapper
+      expect(screen.getByCSS('.v-hotkey__combined-wrapper')).toBeInTheDocument()
+    })
+  })
+
   describe('Multiple Key Combinations', () => {
     it('should handle multiple space-separated combinations', () => {
       render(() => <VHotkey keys="ctrl+k meta+p" />)
@@ -337,6 +445,227 @@ describe('VHotkey.tsx', () => {
       expect(ariaLabel).toMatch(/CTRL/i)
       expect(ariaLabel).toMatch(/SHIFT/i)
       expect(ariaLabel).toMatch(/then/i)
+    })
+
+    it('should provide title tooltips for icon mode', () => {
+      const originalUserAgent = navigator.userAgent
+
+      try {
+        // Test on Mac for better icon/symbol support
+        Object.defineProperty(window.navigator, 'userAgent', {
+          value: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)',
+          configurable: true,
+        })
+
+        // Test icon mode - should have title tooltips
+        render(() => <VHotkey keys="cmd+shift+k" displayMode="icon" overridePlatform="mac" />)
+
+        const keys = screen.getAllByCSS('.v-hotkey__key')
+        expect(keys).toHaveLength(3) // cmd, shift, k
+
+        // Icon mode keys should have title attributes with text representations
+        keys.forEach(key => {
+          expect(key).toHaveAttribute('title')
+          const title = key.getAttribute('title')
+          expect(title).toBeTruthy()
+          expect(title?.length).toBeGreaterThan(0)
+        })
+
+        // Check specific expected titles for known keys
+        const iconKeys = keys.filter(key => key.querySelector('.v-icon'))
+        const textKeys = keys.filter(key => !key.querySelector('.v-icon'))
+
+        // Should have at least 2 icon keys (cmd and shift)
+        expect(iconKeys.length).toBeGreaterThanOrEqual(2)
+
+        // Check that icon keys have appropriate titles
+        const titles = iconKeys.map(key => key.getAttribute('title'))
+        expect(titles.some(title => title && /Command|Cmd/i.test(title))).toBe(true)
+        expect(titles.some(title => title && /Shift/i.test(title))).toBe(true)
+
+        // Check text keys (like 'k') have simple uppercase titles
+        textKeys.forEach(key => {
+          const title = key.getAttribute('title')
+          expect(title).toBeTruthy()
+          expect(title?.length).toBeGreaterThan(0)
+        })
+      } finally {
+        // Restore original userAgent
+        Object.defineProperty(window.navigator, 'userAgent', {
+          value: originalUserAgent,
+          configurable: true,
+        })
+      }
+    })
+
+    it('should provide title tooltips for symbol mode', () => {
+      const originalUserAgent = navigator.userAgent
+
+      try {
+        // Test on Mac for better symbol support
+        Object.defineProperty(window.navigator, 'userAgent', {
+          value: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)',
+          configurable: true,
+        })
+
+        // Test symbol mode - should have title tooltips
+        render(() => <VHotkey keys="cmd+shift+k" displayMode="symbol" overridePlatform="mac" />)
+
+        const keys = screen.getAllByCSS('.v-hotkey__key')
+        expect(keys).toHaveLength(3)
+
+        // Symbol mode keys should have title attributes
+        keys.forEach(key => {
+          expect(key).toHaveAttribute('title')
+          const title = key.getAttribute('title')
+          expect(title).toBeTruthy()
+          expect(title?.length).toBeGreaterThan(0)
+        })
+      } finally {
+        // Restore original userAgent
+        Object.defineProperty(window.navigator, 'userAgent', {
+          value: originalUserAgent,
+          configurable: true,
+        })
+      }
+    })
+
+    it('should handle title tooltips for keys with localization fallback', () => {
+      const originalUserAgent = navigator.userAgent
+
+      try {
+        // Test on Mac for better support
+        Object.defineProperty(window.navigator, 'userAgent', {
+          value: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)',
+          configurable: true,
+        })
+
+        // Test with keys that have localization vs keys that don't
+        render(() => <VHotkey keys="escape+f1" displayMode="icon" overridePlatform="mac" />)
+
+        const keys = screen.getAllByCSS('.v-hotkey__key')
+        expect(keys).toHaveLength(2) // escape, f1
+
+        // Both keys should have title attributes
+        keys.forEach(key => {
+          expect(key).toHaveAttribute('title')
+          const title = key.getAttribute('title')
+          expect(title).toBeTruthy()
+          expect(title?.length).toBeGreaterThan(0)
+        })
+
+        // Check that we have the expected titles
+        const titles = keys.map(key => key.getAttribute('title')).filter(Boolean)
+        expect(titles).toHaveLength(2) // Should have titles for both keys
+
+        // Should have one title containing 'escape' (case insensitive)
+        expect(titles.some(title => title && title.toLowerCase().includes('escape'))).toBe(true)
+
+        // Should have one title that is exactly 'F1'
+        expect(titles.some(title => title === 'F1')).toBe(true)
+      } finally {
+        // Restore original userAgent
+        Object.defineProperty(window.navigator, 'userAgent', {
+          value: originalUserAgent,
+          configurable: true,
+        })
+      }
+    })
+
+    it('should handle title tooltips for custom keyMap entries in icon mode', () => {
+      const customKeyMap = {
+        customkey: (mode: any, isMac: boolean) => {
+          if (mode === 'icon') return ['text', 'Custom Key'] as ['text', string] // Falls back to text
+          if (mode === 'symbol') return ['symbol', '★'] as ['symbol', string]
+          return ['text', 'Custom Key'] as ['text', string]
+        },
+      }
+
+      // Test icon mode with custom key (falls back to text but should still have tooltip)
+      render(() => (
+        <VHotkey keys="customkey" displayMode="icon" keyMap={ customKeyMap } />
+      ))
+
+      const keys = screen.getAllByCSS('.v-hotkey__key')
+      expect(keys).toHaveLength(1)
+
+      // Should have title with text representation
+      expect(keys[0]).toHaveAttribute('title')
+      expect(keys[0].getAttribute('title')).toBe('Custom Key')
+    })
+
+    it('should handle title tooltips for custom keyMap entries in symbol mode', () => {
+      const customKeyMap = {
+        customkey: (mode: any, isMac: boolean) => {
+          if (mode === 'icon') return ['text', 'Custom Key'] as ['text', string]
+          if (mode === 'symbol') return ['symbol', '★'] as ['symbol', string]
+          return ['text', 'Custom Key'] as ['text', string]
+        },
+      }
+
+      // Test symbol mode with custom key
+      render(() => (
+        <VHotkey keys="customkey" displayMode="symbol" keyMap={ customKeyMap } />
+      ))
+
+      const keys = screen.getAllByCSS('.v-hotkey__key')
+      expect(keys).toHaveLength(1)
+
+      // Should have title with text representation
+      expect(keys[0]).toHaveAttribute('title')
+      expect(keys[0].getAttribute('title')).toBe('Custom Key')
+    })
+
+    it('should handle title tooltips for custom keyMap entries in text mode', () => {
+      const customKeyMap = {
+        customkey: (mode: any, isMac: boolean) => {
+          if (mode === 'icon') return ['text', 'Custom Key'] as ['text', string]
+          if (mode === 'symbol') return ['symbol', '★'] as ['symbol', string]
+          return ['text', 'Custom Key'] as ['text', string]
+        },
+      }
+
+      // Test text mode with custom key
+      render(() => (
+        <VHotkey keys="customkey" displayMode="text" keyMap={ customKeyMap } />
+      ))
+
+      const keys = screen.getAllByCSS('.v-hotkey__key')
+      expect(keys).toHaveLength(1)
+
+      // Should NOT have title in text mode
+      const title = keys[0].getAttribute('title')
+      expect(title).toBeFalsy()
+    })
+
+    it('should NOT provide title tooltips in text mode (simple test)', () => {
+      const originalUserAgent = navigator.userAgent
+
+      try {
+        // Test on Mac
+        Object.defineProperty(window.navigator, 'userAgent', {
+          value: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)',
+          configurable: true,
+        })
+
+        // Test text mode directly - should NOT have title tooltips
+        render(() => <VHotkey keys="cmd+shift+k" displayMode="text" overridePlatform="mac" />)
+
+        const keys = screen.getAllByCSS('.v-hotkey__key')
+        expect(keys).toHaveLength(3)
+
+        // Text mode keys should NOT have title attributes
+        keys.forEach((key, index) => {
+          const title = key.getAttribute('title')
+          expect(title).toBeFalsy() // Should be null, undefined, or empty string
+        })
+      } finally {
+        // Restore original userAgent
+        Object.defineProperty(window.navigator, 'userAgent', {
+          value: originalUserAgent,
+          configurable: true,
+        })
+      }
     })
   })
 
@@ -517,8 +846,8 @@ describe('VHotkey.tsx', () => {
 
         // Should not show "Ctrl" text
         const textKeys = screen.queryAllByCSS('.v-hotkey__key-text')
-        const ctrlText = textKeys.find(key => key.textContent?.includes('Ctrl'))
-        expect(ctrlText).toBeUndefined()
+        const hasCtrlText = textKeys.some(key => key.textContent?.includes('Ctrl'))
+        expect(hasCtrlText).toBe(false)
       })
 
       it('should show Ctrl text on non-Mac', () => {
@@ -535,8 +864,8 @@ describe('VHotkey.tsx', () => {
 
         // Should show "Ctrl" text
         const textKeys = screen.getAllByCSS('.v-hotkey__key-text')
-        const ctrlText = textKeys.find(key => key.textContent?.includes('Ctrl'))
-        expect(ctrlText).toBeDefined()
+        const hasCtrlText = textKeys.some(key => key.textContent?.includes('Ctrl'))
+        expect(hasCtrlText).toBe(true)
       })
     })
 
@@ -568,8 +897,8 @@ describe('VHotkey.tsx', () => {
 
         // Should show "Ctrl" text
         const textKeys = screen.getAllByCSS('.v-hotkey__key-text')
-        const ctrlText = textKeys.find(key => key.textContent?.includes('Ctrl'))
-        expect(ctrlText).toBeDefined()
+        const hasCtrlText = textKeys.some(key => key.textContent?.includes('Ctrl'))
+        expect(hasCtrlText).toBe(true)
       })
     })
 
@@ -601,8 +930,8 @@ describe('VHotkey.tsx', () => {
 
         // Should not show "Ctrl" text
         const textKeys = screen.queryAllByCSS('.v-hotkey__key-text')
-        const ctrlText = textKeys.find(key => key.textContent?.includes('Ctrl'))
-        expect(ctrlText).toBeUndefined()
+        const hasCtrlText = textKeys.some(key => key.textContent?.includes('Ctrl'))
+        expect(hasCtrlText).toBe(false)
       })
     })
 
@@ -649,8 +978,8 @@ describe('VHotkey.tsx', () => {
 
         // Should show "Ctrl" text
         const textKeys = screen.getAllByCSS('.v-hotkey__key-text')
-        const ctrlText = textKeys.find(key => key.textContent?.includes('Ctrl'))
-        expect(ctrlText).toBeDefined()
+        const hasCtrlText = textKeys.some(key => key.textContent?.includes('Ctrl'))
+        expect(hasCtrlText).toBe(true)
       })
 
       it('should show Ctrl text on non-Mac', () => {
@@ -667,8 +996,8 @@ describe('VHotkey.tsx', () => {
 
         // Should show "Ctrl" text
         const textKeys = screen.getAllByCSS('.v-hotkey__key-text')
-        const ctrlText = textKeys.find(key => key.textContent?.includes('Ctrl'))
-        expect(ctrlText).toBeDefined()
+        const hasCtrlText = textKeys.some(key => key.textContent?.includes('Ctrl'))
+        expect(hasCtrlText).toBe(true)
       })
     })
 
@@ -686,8 +1015,8 @@ describe('VHotkey.tsx', () => {
         expect(symbolKeys.length).toBeGreaterThan(0)
 
         // Should contain the command symbol ⌘
-        const commandSymbol = symbolKeys.find(key => key.textContent?.includes('⌘'))
-        expect(commandSymbol).toBeDefined()
+        const hasCommandSymbol = symbolKeys.some(key => key.textContent?.includes('⌘'))
+        expect(hasCommandSymbol).toBe(true)
       })
 
       it('should show command symbol on non-Mac (forced Mac behavior)', () => {
@@ -703,8 +1032,8 @@ describe('VHotkey.tsx', () => {
         expect(symbolKeys.length).toBeGreaterThan(0)
 
         // Should contain the command symbol ⌘
-        const commandSymbol = symbolKeys.find(key => key.textContent?.includes('⌘'))
-        expect(commandSymbol).toBeDefined()
+        const hasCommandSymbol = symbolKeys.some(key => key.textContent?.includes('⌘'))
+        expect(hasCommandSymbol).toBe(true)
       })
     })
 
@@ -719,8 +1048,8 @@ describe('VHotkey.tsx', () => {
 
         // Should show "Ctrl" text
         const textKeys = screen.getAllByCSS('.v-hotkey__key-text')
-        const ctrlText = textKeys.find(key => key.textContent?.includes('Ctrl'))
-        expect(ctrlText).toBeDefined()
+        const hasCtrlText = textKeys.some(key => key.textContent?.includes('Ctrl'))
+        expect(hasCtrlText).toBe(true)
       })
 
       it('should show Ctrl text on non-Mac', () => {
@@ -733,8 +1062,8 @@ describe('VHotkey.tsx', () => {
 
         // Should show "Ctrl" text
         const textKeys = screen.getAllByCSS('.v-hotkey__key-text')
-        const ctrlText = textKeys.find(key => key.textContent?.includes('Ctrl'))
-        expect(ctrlText).toBeDefined()
+        const hasCtrlText = textKeys.some(key => key.textContent?.includes('Ctrl'))
+        expect(hasCtrlText).toBe(true)
       })
     })
   })
@@ -1017,8 +1346,8 @@ describe('VHotkey.tsx', () => {
 
       // Initially should show Ctrl (Windows auto-detection)
       let textKeys = screen.getAllByCSS('.v-hotkey__key-text')
-      let ctrlText = textKeys.find(key => key.textContent?.includes('Ctrl'))
-      expect(ctrlText).toBeDefined()
+      let hasCtrlText = textKeys.some(key => key.textContent?.includes('Ctrl'))
+      expect(hasCtrlText).toBe(true)
       expect(screen.queryAllByCSS('.v-hotkey__key-icon')).toHaveLength(0)
 
       // Change to mac override
@@ -1028,8 +1357,8 @@ describe('VHotkey.tsx', () => {
       const iconKeys = screen.getAllByCSS('.v-hotkey__key-icon')
       expect(iconKeys.length).toBeGreaterThan(0)
       textKeys = screen.queryAllByCSS('.v-hotkey__key-text')
-      ctrlText = textKeys.find(key => key.textContent?.includes('Ctrl'))
-      expect(ctrlText).toBeUndefined()
+      hasCtrlText = textKeys.some(key => key.textContent?.includes('Ctrl'))
+      expect(hasCtrlText).toBe(false)
 
       // Change to pc override
       await wrapper.rerender({ overridePlatform: 'pc' })
@@ -1037,8 +1366,8 @@ describe('VHotkey.tsx', () => {
       // Should go back to Ctrl text (forced PC behavior)
       expect(screen.queryAllByCSS('.v-hotkey__key-icon')).toHaveLength(0)
       textKeys = screen.getAllByCSS('.v-hotkey__key-text')
-      ctrlText = textKeys.find(key => key.textContent?.includes('Ctrl'))
-      expect(ctrlText).toBeDefined()
+      hasCtrlText = textKeys.some(key => key.textContent?.includes('Ctrl'))
+      expect(hasCtrlText).toBe(true)
 
       // Change back to undefined (auto-detection)
       await wrapper.rerender({ overridePlatform: undefined })
@@ -1046,8 +1375,8 @@ describe('VHotkey.tsx', () => {
       // Should show Ctrl again (Windows auto-detection)
       expect(screen.queryAllByCSS('.v-hotkey__key-icon')).toHaveLength(0)
       textKeys = screen.getAllByCSS('.v-hotkey__key-text')
-      ctrlText = textKeys.find(key => key.textContent?.includes('Ctrl'))
-      expect(ctrlText).toBeDefined()
+      hasCtrlText = textKeys.some(key => key.textContent?.includes('Ctrl'))
+      expect(hasCtrlText).toBe(true)
     })
 
     it('should react to displayMode prop changes while maintaining platform behavior', async () => {
@@ -1080,8 +1409,8 @@ describe('VHotkey.tsx', () => {
       // Should show command symbol
       const symbolKeys = screen.getAllByCSS('.v-hotkey__key-symbol')
       expect(symbolKeys.length).toBeGreaterThan(0)
-      const commandSymbol = symbolKeys.find(key => key.textContent?.includes('⌘'))
-      expect(commandSymbol).toBeDefined()
+      const hasCommandSymbol = symbolKeys.some(key => key.textContent?.includes('⌘'))
+      expect(hasCommandSymbol).toBe(true)
 
       // Change platform to PC while keeping symbol mode
       await wrapper.rerender({ displayMode: 'symbol', overridePlatform: 'pc' })
@@ -1089,8 +1418,8 @@ describe('VHotkey.tsx', () => {
       // Should show Ctrl text (PC doesn't have command symbols)
       expect(screen.queryAllByCSS('.v-hotkey__key-symbol')).toHaveLength(0)
       const textKeys = screen.getAllByCSS('.v-hotkey__key-text')
-      const ctrlText = textKeys.find(key => key.textContent?.includes('Ctrl'))
-      expect(ctrlText).toBeDefined()
+      const hasCtrlText = textKeys.some(key => key.textContent?.includes('Ctrl'))
+      expect(hasCtrlText).toBe(true)
 
       // Change back to icon mode while on PC
       await wrapper.rerender({ displayMode: 'icon', overridePlatform: 'pc' })
@@ -1098,8 +1427,8 @@ describe('VHotkey.tsx', () => {
       // Should still show Ctrl text (PC doesn't use icons for modifiers)
       expect(screen.queryAllByCSS('.v-hotkey__key-icon')).toHaveLength(0)
       const textKeys2 = screen.getAllByCSS('.v-hotkey__key-text')
-      const ctrlText2 = textKeys2.find(key => key.textContent?.includes('Ctrl'))
-      expect(ctrlText2).toBeDefined()
+      const hasCtrlText2 = textKeys2.some(key => key.textContent?.includes('Ctrl'))
+      expect(hasCtrlText2).toBe(true)
     })
 
     it('should react to both overridePlatform and displayMode changes simultaneously', async () => {
@@ -1118,8 +1447,8 @@ describe('VHotkey.tsx', () => {
 
       // Initially PC + icon should show Ctrl text
       let textKeys = screen.getAllByCSS('.v-hotkey__key-text')
-      const ctrlText = textKeys.find(key => key.textContent?.includes('Ctrl'))
-      expect(ctrlText).toBeDefined()
+      const hasCtrlText = textKeys.some(key => key.textContent?.includes('Ctrl'))
+      expect(hasCtrlText).toBe(true)
       expect(screen.queryAllByCSS('.v-hotkey__key-icon')).toHaveLength(0)
 
       // Change both to Mac + symbol simultaneously
@@ -1128,8 +1457,8 @@ describe('VHotkey.tsx', () => {
       // Should show command symbol
       const symbolKeys = screen.getAllByCSS('.v-hotkey__key-symbol')
       expect(symbolKeys.length).toBeGreaterThan(0)
-      const commandSymbol = symbolKeys.find(key => key.textContent?.includes('⌘'))
-      expect(commandSymbol).toBeDefined()
+      const hasCommandSymbol = symbolKeys.some(key => key.textContent?.includes('⌘'))
+      expect(hasCommandSymbol).toBe(true)
 
       // Change both to undefined platform + text mode
       await wrapper.rerender({ displayMode: 'text', overridePlatform: undefined })
