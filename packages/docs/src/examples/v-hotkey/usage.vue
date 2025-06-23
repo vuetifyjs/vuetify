@@ -71,7 +71,7 @@
   const variants = [
     { label: 'Elevated', value: 'elevated' },
     { label: 'Plain', value: 'plain' },
-    { label: 'Combined', value: 'combined' },
+    { label: 'Contained', value: 'contained' },
     { label: 'Flat', value: 'flat' },
     { label: 'Tonal', value: 'tonal' },
     { label: 'Outlined', value: 'outlined' },
