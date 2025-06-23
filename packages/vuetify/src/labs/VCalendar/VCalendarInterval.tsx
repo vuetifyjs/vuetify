@@ -147,7 +147,7 @@ export const VCalendarInterval = genericComponent<VCalendarIntervalSlots>()({
                         >
                           {{
                             ...(slots['interval-event'] ? {
-                              intervalEvent: ({ height, margin, eventClass, event, interval }) => (
+                              'interval-event': ({ height, margin, eventClass, event, interval }) => (
                                 slots['interval-event']?.({ height, margin, eventClass, event, interval })
                               ),
                             } : {}),
@@ -183,7 +183,7 @@ export const VCalendarInterval = genericComponent<VCalendarIntervalSlots>()({
                     >
                       {{
                         ...(slots['interval-event'] ? {
-                          intervalEvent: ({ height, margin, eventClass, event, interval }) => (
+                          'interval-event': ({ height, margin, eventClass, event, interval }) => (
                             slots['interval-event']?.({ height, margin, eventClass, event, interval })
                           ),
                         } : {}),
