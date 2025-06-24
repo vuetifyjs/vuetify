@@ -53,6 +53,7 @@ const aliases: IconAliases = {
   ctrl: 'keyboard_control_key',
   shift: 'shift',
   alt: 'keyboard_option_key',
+  space: 'keyboard_space',
   enter: 'keyboard_return',
   arrowup: 'keyboard_arrow_up',
   arrowdown: 'keyboard_arrow_down',

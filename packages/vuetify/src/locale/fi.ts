@@ -131,6 +131,7 @@ export default {
     leftArrow: 'Nuoli vasemmalle',
     rightArrow: 'Nuoli oikealle',
     backspace: 'Askelpalautin',
+    space: 'Välilyönti',
     plus: 'plus',
     shortcut: 'Näppäinyhdistelmä: {0}',
   },

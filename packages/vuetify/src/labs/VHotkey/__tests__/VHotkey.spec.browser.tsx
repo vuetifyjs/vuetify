@@ -472,10 +472,15 @@ describe('VHotkey.tsx', () => {
   describe('Custom Key Mapping', () => {
     it('should use custom key mapping when provided', () => {
       const customKeyMap = {
-        '-': (mode: any, isMac: boolean) => ['text', 'MINUS'] as ['text', string],
+        shift: {
+          default: { text: 'Shift', icon: '$shift' },
+        },
+        '-': {
+          default: { text: 'MINUS' },
+        },
       }
 
-      render(() => <VHotkey keys="shift+-" keyMap={ customKeyMap } />)
+      render(() => <VHotkey keys="shift+-" keyMap={ customKeyMap } overridePlatform="windows" />)
 
       const keys = screen.getAllByCSS('.v-hotkey__key')
       expect(keys[1]).toHaveTextContent('MINUS')
@@ -530,7 +535,9 @@ describe('VHotkey.tsx', () => {
 
     it('should handle custom key with only text config in all display modes', () => {
       const customKeyMap = {
-        customkey: (mode: any, isMac: boolean) => ['text', 'CUSTOM'] as ['text', string],
+        customkey: {
+          default: { text: 'CUSTOM' },
+        },
       }
 
       // Test all modes in sequence using rerender to avoid interference
@@ -730,10 +737,8 @@ describe('VHotkey.tsx', () => {
 
     it('should handle title tooltips for custom keyMap entries in icon mode', () => {
       const customKeyMap = {
-        customkey: (mode: any, isMac: boolean) => {
-          if (mode === 'icon') return ['text', 'Custom Key'] as ['text', string] // Falls back to text
-          if (mode === 'symbol') return ['symbol', '★'] as ['symbol', string]
-          return ['text', 'Custom Key'] as ['text', string]
+        customkey: {
+          default: { text: 'Custom Key', symbol: '★' },
         },
       }
 
@@ -752,10 +757,8 @@ describe('VHotkey.tsx', () => {
 
     it('should handle title tooltips for custom keyMap entries in symbol mode', () => {
       const customKeyMap = {
-        customkey: (mode: any, isMac: boolean) => {
-          if (mode === 'icon') return ['text', 'Custom Key'] as ['text', string]
-          if (mode === 'symbol') return ['symbol', '★'] as ['symbol', string]
-          return ['text', 'Custom Key'] as ['text', string]
+        customkey: {
+          default: { text: 'Custom Key', symbol: '★' },
         },
       }
 
@@ -774,10 +777,8 @@ describe('VHotkey.tsx', () => {
 
     it('should handle title tooltips for custom keyMap entries in text mode', () => {
       const customKeyMap = {
-        customkey: (mode: any, isMac: boolean) => {
-          if (mode === 'icon') return ['text', 'Custom Key'] as ['text', string]
-          if (mode === 'symbol') return ['symbol', '★'] as ['symbol', string]
-          return ['text', 'Custom Key'] as ['text', string]
+        customkey: {
+          default: { text: 'Custom Key', symbol: '★' },
         },
       }
 
@@ -896,11 +897,8 @@ describe('VHotkey.tsx', () => {
 
       // Create a keyMap that has an incomplete text configuration (simulating the docs bug)
       const problematicKeyMap = {
-        ctrl: (mode: any, isMac: boolean) => {
-          // This simulates a keyMap where text mode accidentally returns an icon token
-          if (mode === 'text') return ['text', '$ctrl'] as ['text', string] // Bug: icon token in text mode
-          if (mode === 'icon') return ['icon', '$ctrl'] as ['icon', any]
-          return ['text', '$ctrl'] as ['text', string]
+        ctrl: {
+          default: { text: '$ctrl', icon: '$ctrl' }, // Bug: icon token in text field
         },
       }
 
@@ -923,9 +921,8 @@ describe('VHotkey.tsx', () => {
 
       // Create a keyMap that uses proper localization keys
       const localizationKeyMap = {
-        ctrl: (mode: any, isMac: boolean) => {
-          if (mode === 'text') return ['text', '$vuetify.hotkey.ctrl'] as ['text', string] // Valid localization key
-          return ['text', '$vuetify.hotkey.ctrl'] as ['text', string]
+        ctrl: {
+          default: { text: '$vuetify.hotkey.ctrl' }, // Valid localization key
         },
       }
 

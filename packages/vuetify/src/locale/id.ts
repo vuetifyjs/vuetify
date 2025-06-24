@@ -131,6 +131,7 @@ export default {
     leftArrow: 'Panah Kiri',
     rightArrow: 'Panah Kanan',
     backspace: 'Hapus',
+    space: 'Spasi',
     plus: 'plus',
     shortcut: 'Pintasan keyboard: {0}',
   },

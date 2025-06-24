@@ -131,6 +131,7 @@ export default {
     leftArrow: 'Left Arrow',
     rightArrow: 'Right Arrow',
     backspace: 'Backspace',
+    space: 'Spasie',
     plus: 'plus',
     shortcut: 'Sleutelbordkortpad: {0}',
   },

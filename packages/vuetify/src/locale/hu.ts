@@ -131,6 +131,7 @@ export default {
     leftArrow: 'Bal nyíl',
     rightArrow: 'Jobb nyíl',
     backspace: 'Backspace',
+    space: 'Szóköz',
     plus: 'plusz',
     shortcut: 'Billentyűparancs: {0}',
   },

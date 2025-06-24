@@ -131,6 +131,7 @@ export default {
     leftArrow: '左箭头',
     rightArrow: '右箭头',
     backspace: '退格',
+    space: '空格',
     plus: '加',
     shortcut: '键盘快捷键：{0}',
   },

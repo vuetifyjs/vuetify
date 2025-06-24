@@ -51,6 +51,7 @@ const aliases: IconAliases = {
   color: 'mdi-palette',
   command: 'mdi-apple-keyboard-command',
   ctrl: 'mdi-apple-keyboard-control',
+  space: 'mdi-keyboard-space',
   shift: 'mdi-apple-keyboard-shift',
   alt: 'mdi-apple-keyboard-option',
   enter: 'mdi-keyboard-return',

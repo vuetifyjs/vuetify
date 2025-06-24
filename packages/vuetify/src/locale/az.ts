@@ -131,6 +131,7 @@ export default {
     leftArrow: 'Sol Ox',
     rightArrow: 'Sağ Ox',
     backspace: 'Geri Sil',
+    space: 'Boşluq',
     plus: 'plus',
     shortcut: 'Klaviatura qısayolu: {0}',
   },

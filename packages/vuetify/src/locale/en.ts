@@ -121,6 +121,7 @@ export default {
     then: 'then',
     ctrl: 'Ctrl',
     command: 'Command',
+    space: 'Space',
     shift: 'Shift',
     alt: 'Alt',
     enter: 'Enter',

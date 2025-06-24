@@ -131,6 +131,7 @@ export default {
     leftArrow: 'Αριστερό βέλος',
     rightArrow: 'Δεξί βέλος',
     backspace: 'Backspace',
+    space: 'Διάστημα',
     plus: 'συν',
     shortcut: 'Συντόμευση πληκτρολογίου: {0}',
   },

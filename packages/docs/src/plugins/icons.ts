@@ -240,6 +240,7 @@ export {
   mdiInformationOutline,
   mdiInstagram,
   mdiKeyboardReturn,
+  mdiKeyboardSpace,
   mdiLabel,
   mdiLanguageHtml5,
   mdiLanguageMarkdown,

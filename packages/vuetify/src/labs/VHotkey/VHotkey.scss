@@ -188,22 +188,26 @@
     }
 
     &--variant-flat &__key.v-kbd {
-      @include tools.elevation(0);
+      box-shadow: none;
     }
 
     &--variant-outlined &__key.v-kbd {
       @include tools.elevation(0);
-      background: none;
+      & {
+        background: none;
+      }
     }
 
     &--variant-text {
       .v-hotkey__key.v-kbd {
         @include tools.elevation(0);
-        background: transparent !important;
-        border: none !important;
-        padding-left: 0;
-        padding-right: 0;
-        min-width: auto;
+        & {
+          background: transparent !important;
+          border: none !important;
+          padding-left: 0;
+          padding-right: 0;
+          min-width: auto;
+        }
       }
 
       .v-hotkey__combination {

@@ -11,6 +11,20 @@
  * - Supports multiple display modes for different design needs
  * - Encapsulates complex key parsing and rendering logic
  * - Used throughout the command palette for instruction display
+ *
+ * Key Mapping Structure:
+ * The keyMap uses a simple object structure where each key has:
+ * - `default`: Required configuration for all platforms
+ * - `mac`: Optional Mac-specific overrides
+ * Each config can specify `symbol`, `icon`, and `text` representations.
+ *
+ * Example:
+ * ```
+ * ctrl: {
+ *   mac: { symbol: '⌃', icon: '$ctrl', text: 'Control' },
+ *   default: { text: 'Ctrl', icon: '$ctrl' }
+ * }
+ * ```
  */
 
 // Styles
@@ -50,9 +64,6 @@ type KeyDisplay = [Exclude<DisplayMode, 'icon'>, string] | [Extract<DisplayMode,
 // Key tuple: [mode, content] where content is string or IconValue
 type Key = [Exclude<DisplayMode, 'icon'>, string, string] | [Extract<DisplayMode, 'icon'>, IconValue, string]
 
-// Key mapping function type
-type KeyMap = Record<string, (mode: DisplayMode, isMac: boolean) => KeyDisplay>
-
 type KeyConfig = {
   symbol?: string
   icon?: string
@@ -64,89 +75,94 @@ type PlatformKeyConfig = {
   default: KeyConfig
 }
 
-function createKey (config: PlatformKeyConfig) {
-  return (requestedMode: DisplayMode, isMac: boolean): KeyDisplay => {
-    const keyCfg = (isMac && config.mac) ? config.mac : config.default
+// Simplified key mapping - just data, no functions!
+type KeyMapConfig = Record<string, PlatformKeyConfig>
 
-    // 1. Resolve the safest display mode for the current platform
-    const mode: DisplayMode = (() => {
-      // Non-Mac platforms rarely use icons – prefer text
-      if (requestedMode === 'icon' && !isMac) return 'text'
+function processKey (config: PlatformKeyConfig, requestedMode: DisplayMode, isMac: boolean): KeyDisplay {
+  const keyCfg = (isMac && config.mac) ? config.mac : config.default
 
-      // If the requested mode lacks an asset, fall back to text
-      if (requestedMode === 'icon' && !keyCfg.icon) return 'text'
-      if (requestedMode === 'symbol' && !keyCfg.symbol) return 'text'
+  // 1. Resolve the safest display mode for the current platform
+  const mode: DisplayMode = (() => {
+    // Non-Mac platforms rarely use icons – prefer text
+    if (requestedMode === 'icon' && !isMac) return 'text'
 
-      return requestedMode
-    })()
+    // If the requested mode lacks an asset, fall back to text
+    if (requestedMode === 'icon' && !keyCfg.icon) return 'text'
+    if (requestedMode === 'symbol' && !keyCfg.symbol) return 'text'
 
-    // 2. Pick value for the chosen mode, defaulting to text representation
-    let value: string | IconValue = keyCfg[mode] ?? keyCfg.text
+    return requestedMode
+  })()
 
-    // 3. Guard against icon tokens leaking into text mode (e.g. "$ctrl")
-    if (mode === 'text' && typeof value === 'string' && value.startsWith('$') && !value.startsWith('$vuetify.')) {
-      value = value.slice(1).toUpperCase() // "$ctrl" → "CTRL"
-    }
+  // 2. Pick value for the chosen mode, defaulting to text representation
+  let value: string | IconValue = keyCfg[mode] ?? keyCfg.text
 
-    return mode === 'icon'
-      ? ['icon', value as IconValue]
-      : [mode as Exclude<DisplayMode, 'icon'>, value as string]
+  // 3. Guard against icon tokens leaking into text mode (e.g. "$ctrl")
+  if (mode === 'text' && typeof value === 'string' && value.startsWith('$') && !value.startsWith('$vuetify.')) {
+    value = value.slice(1).toUpperCase() // "$ctrl" → "CTRL"
   }
+
+  return mode === 'icon'
+    ? ['icon', value as IconValue]
+    : [mode as Exclude<DisplayMode, 'icon'>, value as string]
 }
 
-const keyMap: KeyMap = {
-  ctrl: createKey({
+export const hotkeyMap: KeyMapConfig = {
+  ctrl: {
     mac: { symbol: '⌃', icon: '$ctrl', text: '$vuetify.hotkey.ctrl' }, // Mac Control symbol
     default: { text: 'Ctrl', icon: '$ctrl' },
-  }),
+  },
   // Meta and Cmd both map to Command on Mac, Ctrl on PC
-  meta: createKey({
+  meta: {
     mac: { symbol: '⌘', icon: '$command', text: '$vuetify.hotkey.command' }, // Mac Command symbol
     default: { text: 'Ctrl', icon: '$ctrl' },
-  }),
-  cmd: createKey({
+  },
+  cmd: {
     mac: { symbol: '⌘', icon: '$command', text: '$vuetify.hotkey.command' }, // Mac Command symbol
     default: { text: 'Ctrl', icon: '$ctrl' },
-  }),
-  shift: createKey({
+  },
+  shift: {
     mac: { symbol: '⇧', icon: '$shift', text: '$vuetify.hotkey.shift' }, // Shift symbol
     default: { text: 'Shift', icon: '$shift' },
-  }),
-  alt: createKey({
+  },
+  alt: {
     mac: { symbol: '⌥', icon: '$alt', text: '$vuetify.hotkey.option' }, // Mac Option symbol
     default: { text: 'Alt', icon: '$alt' },
-  }),
-  enter: createKey({
+  },
+  enter: {
     default: { symbol: '↵', icon: '$enter', text: '$vuetify.hotkey.enter' }, // Return symbol
-  }),
-  arrowup: createKey({
+  },
+  arrowup: {
     default: { symbol: '↑', icon: '$arrowup', text: '$vuetify.hotkey.upArrow' },
-  }),
-  arrowdown: createKey({
+  },
+  arrowdown: {
     default: { symbol: '↓', icon: '$arrowdown', text: '$vuetify.hotkey.downArrow' },
-  }),
-  arrowleft: createKey({
+  },
+  arrowleft: {
     default: { symbol: '←', icon: '$arrowleft', text: '$vuetify.hotkey.leftArrow' },
-  }),
-  arrowright: createKey({
+  },
+  arrowright: {
     default: { symbol: '→', icon: '$arrowright', text: '$vuetify.hotkey.rightArrow' },
-  }),
-  backspace: createKey({
+  },
+  backspace: {
     default: { symbol: '⌫', icon: '$backspace', text: '$vuetify.hotkey.backspace' }, // Backspace symbol
-  }),
-  escape: createKey({
+  },
+  escape: {
     default: { text: '$vuetify.hotkey.escape' },
-  }),
-  '-': createKey({
+  },
+  space: {
+    mac: { symbol: '␣', icon: '$space', text: '$vuetify.hotkey.space' },
+    default: { text: '$vuetify.hotkey.space' },
+  },
+  '-': {
     default: { symbol: '-', icon: '$minus', text: '-' },
-  }),
+  },
   // Alternative names for minus key
-  minus: createKey({
+  minus: {
     default: { symbol: '-', icon: '$minus', text: '-' },
-  }),
-  hyphen: createKey({
+  },
+  hyphen: {
     default: { symbol: '-', icon: '$minus', text: '-' },
-  }),
+  },
 }
 
 // Create custom variant props that extend the base variant props with our 'contained' option
@@ -166,9 +182,10 @@ export const makeVHotkeyProps = propsFactory({
     type: String as PropType<DisplayMode>,
     default: 'icon',
   },
+  // Custom key mapping configuration. Users can import and modify the exported hotkeyMap as needed
   keyMap: {
-    type: Object as PropType<KeyMap>,
-    default: keyMap,
+    type: Object as PropType<KeyMapConfig>,
+    default: () => hotkeyMap,
   },
   overridePlatform: {
     type: String as PropType<'mac' | string>,
@@ -208,13 +225,13 @@ function isString (value: any): value is string {
   return typeof value === 'string'
 }
 
-function getKeyText (keyMap: KeyMap, key: string, isMac: boolean): string {
+function getKeyText (keyMap: KeyMapConfig, key: string, isMac: boolean): string {
   // Normalize keys to lowercase for consistent lookup
   const lowerKey = key.toLowerCase()
 
   // Check if we have a specific mapping for this key
   if (lowerKey in keyMap) {
-    const result = keyMap[lowerKey]('text', isMac)
+    const result = processKey(keyMap[lowerKey], 'text', isMac)
     return typeof result[1] === 'string' ? result[1] : String(result[1])
   }
 
@@ -222,13 +239,13 @@ function getKeyText (keyMap: KeyMap, key: string, isMac: boolean): string {
   return key.toUpperCase()
 }
 
-function applyDisplayModeToKey (keyMap: KeyMap, mode: DisplayMode, key: string, isMac: boolean): Key {
+function applyDisplayModeToKey (keyMap: KeyMapConfig, mode: DisplayMode, key: string, isMac: boolean): Key {
   // Normalize keys to lowercase for consistent lookup
   const lowerKey = key.toLowerCase()
 
   // Check if we have a specific mapping for this key
   if (lowerKey in keyMap) {
-    const result = keyMap[lowerKey](mode, isMac)
+    const result = processKey(keyMap[lowerKey], mode, isMac)
 
     // If we get an icon token in text mode, convert it to readable text
     if (result[0] === 'text' && typeof result[1] === 'string' && result[1].startsWith('$') && !result[1].startsWith('$vuetify.')) {
@@ -272,20 +289,14 @@ export const VHotkey = genericComponent()({
         : (typeof navigator !== 'undefined' && /macintosh/i.test(navigator.userAgent))
     )
 
-    // The requested display mode remains unchanged; createKey handles platform-specific fallbacks
+    // The requested display mode remains unchanged; processKey handles platform-specific fallbacks
     const effectiveDisplayMode = computed<DisplayMode>(() => props.displayMode)
 
     const AND_DELINEATOR = new Delineator('and') // For + separators
     const THEN_DELINEATOR = new Delineator('then') // For - separators
 
-    const _keyMap = computed(() => {
-      // Merge the keyMap with the default. Allows the user to selectively overwrite specific key behaviors
-      // We will recommend that this property be set at the component default level and not on a per-instance basis
-      // TODO: This can be more efficient. Most of the time this will merge IDENTICAL objects needlessly.
-      // TODO: (continued) So we could make it so the default for props.keyMap is an empty object,
-      // TODO: (continued) but how might that affect doc generation? @MajesticPotatoe do you know? I want good DX!
-      return mergeDeep(keyMap, props.keyMap)
-    })
+    // Use the provided keyMap directly (user can start with exported hotkeyMap and modify as needed)
+    const effectiveKeyMap = computed(() => props.keyMap)
 
     const keyCombinations = computed(() => {
       if (!props.keys) return []
@@ -390,7 +401,7 @@ export const VHotkey = genericComponent()({
           // Return delineator objects as-is for separator rendering
           if (isDelineator(key)) return key
           // Apply the key mapping to get the display representation
-          return applyDisplayModeToKey(_keyMap.value, effectiveDisplayMode.value, key, isMac.value)
+          return applyDisplayModeToKey(effectiveKeyMap.value, effectiveDisplayMode.value, key, isMac.value)
         })
       })
     })
@@ -412,7 +423,7 @@ export const VHotkey = genericComponent()({
           } else {
             // Always use text representation for screen readers
             const textKey = key[0] === 'icon' || key[0] === 'symbol'
-              ? applyDisplayModeToKey(mergeDeep(keyMap, props.keyMap), 'text', String(key[1]), isMac.value)[1]
+              ? applyDisplayModeToKey(mergeDeep(hotkeyMap, props.keyMap), 'text', String(key[1]), isMac.value)[1]
               : key[1]
             readableParts.push(translateKey(textKey as string))
           }
@@ -435,7 +446,7 @@ export const VHotkey = genericComponent()({
       if (effectiveDisplayMode.value === 'text') return undefined
 
       // Get the text representation for tooltip
-      const textKey = getKeyText(_keyMap.value, String(key[2]), isMac.value)
+      const textKey = getKeyText(effectiveKeyMap.value, String(key[2]), isMac.value)
       return translateKey(textKey)
     }
 
@@ -549,3 +560,6 @@ export const VHotkey = genericComponent()({
 })
 
 export type VHotkey = InstanceType<typeof VHotkey>
+
+// Export types for users to create custom key mappings
+export type { KeyConfig, PlatformKeyConfig, KeyMapConfig, DisplayMode }

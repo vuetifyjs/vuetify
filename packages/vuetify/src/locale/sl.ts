@@ -131,6 +131,7 @@ export default {
     leftArrow: 'Puščica levo',
     rightArrow: 'Puščica desno',
     backspace: 'Backspace',
+    space: 'Presledek',
     plus: 'plus',
     shortcut: 'Tipkovnična bližnjica: {0}',
   },
