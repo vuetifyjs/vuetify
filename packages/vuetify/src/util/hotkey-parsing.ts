@@ -11,210 +11,158 @@ const KEY_ALIASES: Record<string, string> = {
   option: 'alt',
   windows: 'meta',
   plus: '+',
-  minus: 'minus',
+  minus: '-',
   underscore: '_',
 }
 
 /**
- * Parses tokens from a combination string.
+ * Splits a single combination string into individual key parts.
+ *
+ * A combination is a set of keys that must be pressed simultaneously.
+ * e.g. `ctrl+k`, `shift--`, `alt++`
  */
-function parseTokens (combination: string): string[] {
-  const tokens: string[] = []
+export function splitKeyCombination (combination: string, isInternal = false): string[] {
+  if (!combination) {
+    if (!isInternal) consoleWarn('Invalid hotkey combination: empty string provided')
+    return []
+  }
+
+  // --- VALIDATION ---
+  const hasInvalidStructure = (
+    // Starts with a separator (and is not a single literal key)
+    (combination.length > 1 && (combination.startsWith('+') || combination.startsWith('_'))) ||
+    // Ends with a separator that is not part of a doubled literal
+    (combination.length > 1 && (combination.endsWith('+') || combination.endsWith('_')) && combination.at(-2) !== combination.at(-1)) ||
+    // Standalone doubled separators
+    combination === '++' || combination === '--' || combination === '__'
+  )
+
+  if (hasInvalidStructure) {
+    if (!isInternal) consoleWarn(`Invalid hotkey combination: "${combination}" has invalid structure`)
+    return []
+  }
+
+  const keys: string[] = []
   let buffer = ''
+
+  const flushBuffer = () => {
+    if (buffer) {
+      keys.push(KEY_ALIASES[buffer.toLowerCase()] || buffer.toLowerCase())
+      buffer = ''
+    }
+  }
 
   for (let i = 0; i < combination.length; i++) {
     const char = combination[i]
     const nextChar = combination[i + 1]
 
-    if (char === '+' || char === '_') {
-      // Check for literal separator (++ or __)
+    if (char === '+' || char === '_' || char === '-') {
       if (char === nextChar) {
-        // Push current buffer if exists
-        if (buffer) {
-          tokens.push(buffer)
-          buffer = ''
-        }
-        // Add the literal separator
-        tokens.push(char)
-        i++ // Skip the next character since we processed it
+        flushBuffer()
+        keys.push(char)
+        i++
+      } else if (char === '+' || char === '_') {
+        flushBuffer()
       } else {
-        // Regular separator
-        if (!buffer) return [] // Invalid: separator without preceding token
-        tokens.push(buffer)
-        buffer = ''
+        buffer += char
       }
     } else {
       buffer += char
     }
   }
+  flushBuffer()
 
-  if (buffer) {
-    tokens.push(buffer)
-  }
-
-  return tokens
-}
-
-/**
- * Validates the structure of a combination string.
- */
-function validateCombinationStructure (combination: string): boolean {
-  // Handle specific invalid patterns
-  if (combination === '--') return false // Double dash alone is invalid
-
-  // Check for invalid start patterns
-  if ((combination.startsWith('+') || combination.startsWith('_')) &&
-      combination !== '+' && combination !== '_') {
-    return false
-  }
-
-  // Allow combinations that end with literal separators (like ctrl++ or shift__)
-  return !((combination.endsWith('+') || combination.endsWith('_')) &&
-           combination !== '+' && combination !== '_' &&
-           !combination.endsWith('++') && !combination.endsWith('__'))
-}
-
-/**
- * Validates specific invalid patterns in combination and result.
- */
-function validateSpecificPatterns (combination: string, result: string[]): boolean {
-  // Final validation for specific invalid patterns
-  if (combination === 'alt+-k' || combination === 'ctrl+--' || combination === 'shift+__') return false
-
-  // Reject impossible patterns
-  if (result.includes('+++') || result.includes('___')) return false
-
-  return !(combination.includes('ctrl---') || combination.includes('shift++++') || combination.includes('alt____'))
-}
-
-/**
- * Splits a single combination string into individual key parts.
- */
-export function splitKeyCombination (combination: string): string[] {
-  if (!combination) {
-    consoleWarn(`Invalid hotkey combination: empty string provided`)
+  // Combinations like `ctrl-b` are not valid, `-` is a sequence separator.
+  // `-` is only a valid key if it's on its own.
+  const hasInvalidMinus = keys.some(key => key.length > 1 && key.includes('-') && key !== '--')
+  if (hasInvalidMinus) {
+    if (!isInternal) consoleWarn(`Invalid hotkey combination: "${combination}" has invalid structure`)
     return []
   }
 
-  // Handle special single-character cases first
-  if (combination === '+' || combination === '-' || combination === '_') {
-    return [combination]
+  if (keys.length === 0 && combination) {
+    return [KEY_ALIASES[combination.toLowerCase()] || combination.toLowerCase()]
   }
 
-  // Validate structure
-  if (!validateCombinationStructure(combination)) {
-    consoleWarn(`Invalid hotkey combination: "${combination}" has invalid structure`)
-    return []
-  }
-
-  // Parse tokens
-  const tokens = parseTokens(combination)
-
-  // Structural validation
-  if (tokens.length === 0) {
-    consoleWarn(`Invalid hotkey combination: "${combination}" could not be parsed`)
-    return []
-  }
-
-  // Apply aliases and normalize case
-  const result = tokens.map(token => KEY_ALIASES[token.toLowerCase()] || token.toLowerCase())
-
-  // Special case: triple dash is valid literal minus
-  if (combination === '---') return ['-']
-
-  // Validate specific patterns
-  if (!validateSpecificPatterns(combination, result)) {
-    consoleWarn(`Invalid hotkey combination: "${combination}" contains invalid patterns`)
-    return []
-  }
-
-  return result
+  return keys
 }
 
 /**
  * Splits a hotkey string into its constituent combination groups.
+ *
+ * A sequence is a series of combinations that must be pressed in order.
+ * e.g. `a-b`, `ctrl+k-p`
  */
 export function splitKeySequence (str: string): string[] {
   if (!str) {
-    consoleWarn(`Invalid hotkey sequence: empty string provided`)
+    consoleWarn('Invalid hotkey sequence: empty string provided')
     return []
   }
 
-  // Handle specific invalid cases
-  if (str === '--') {
-    consoleWarn(`Invalid hotkey sequence: "${str}" is not a valid sequence`)
-    return [] // Double dash alone is invalid
+  // A sequence is invalid if it starts or ends with a separator,
+  // unless it is part of a combination (e.g., `shift+-`).
+  const hasInvalidStart = str.startsWith('-') && !['---', '--+'].includes(str)
+  const hasInvalidEnd = str.endsWith('-') && !str.endsWith('+-') && !str.endsWith('_-') && str !== '-' && str !== '---'
+
+  if (hasInvalidStart || hasInvalidEnd) {
+    consoleWarn(`Invalid hotkey sequence: "${str}" contains invalid combinations`)
+    return []
   }
 
-  // Special case for triple dash - it's a valid literal minus, don't split
-  if (str === '---') return ['---']
+  const result: string[] = []
+  let buffer = ''
+  let i = 0
 
-  const sequences: string[] = []
-  let start = 0
+  while (i < str.length) {
+    const char = str[i]
 
-  for (let i = 0; i < str.length; i++) {
-    if (str[i] === '-') {
-      const left = str.slice(start, i)
-      const right = str.slice(i + 1)
-
-      // Check if this dash is part of a literal separator pattern
-      const isLiteralPattern = (
-        // Check if the current position is part of consecutive dashes
-        (i > 0 && str[i - 1] === '-') ||
-        // Check if the next character is also a dash (making this a double dash)
-        (i + 1 < str.length && str[i + 1] === '-')
-      )
-
-      // Special handling for patterns like meta+--k
-      // If left ends with + and next char is -, this dash should NOT be treated as a sequence separator
-      const isLiteralSeparatorAtEnd = (
-        (left.endsWith('+') || left.endsWith('_')) &&
-        i + 1 < str.length && str[i + 1] === '-'
-      )
-
-      // For patterns like meta+--k, we want to split at the second dash
-      // Check if this is the second dash in a double dash after a separator
-      const isPotentialSplitPoint = (
-        i > 0 && str[i - 1] === '-' &&
-        (left.slice(0, -1).endsWith('+') || left.slice(0, -1).endsWith('_'))
-      )
-
-      // Only split if both sides would be valid combinations AND
-      // this dash is not part of a literal separator pattern OR if this is a valid split point
-      if (
-        left &&
-        right &&
-        (( !isLiteralPattern && !isLiteralSeparatorAtEnd ) || isPotentialSplitPoint) &&
-        splitKeyCombination(left).length > 0 &&
-        splitKeyCombination(right).length > 0
-      ) {
-        sequences.push(left)
-        start = i + 1
+    if (char === '-') {
+      // Check if this hyphen is part of a combination (preceded by + or _)
+      if (i > 0 && (str[i - 1] === '+' || str[i - 1] === '_')) {
+        buffer += char
+        i++
+      } else {
+        // This is a sequence separator
+        if (buffer) {
+          result.push(buffer)
+          buffer = ''
+        } else {
+          // Empty buffer means we have a literal '-' key
+          result.push('-')
+        }
+        i++
       }
-      // Otherwise, the dash is part of the current combination
+    } else {
+      buffer += char
+      i++
     }
   }
 
-  // Add the final chunk
-  const final = str.slice(start)
-  if (final) {
-    sequences.push(final)
+  // Add final buffer if it exists
+  if (buffer) {
+    result.push(buffer)
   }
 
-  // Additional validation for specific invalid patterns
-  if (str.endsWith('---') && str !== '---') {
-    consoleWarn(`Invalid hotkey sequence: "${str}" has invalid trailing pattern`)
-    return [] // Invalid trailing triple dash
-  }
-  if (str.includes('++-') || str.includes('__-')) {
-    consoleWarn(`Invalid hotkey sequence: "${str}" contains invalid separator patterns`)
-    return [] // Invalid patterns with trailing dash after literals
+  // Collapse runs of '-' so that every second '-' is removed
+  const collapsed: string[] = []
+  let minusCount = 0
+  for (const part of result) {
+    if (part === '-') {
+      if (minusCount % 2 === 0) collapsed.push('-')
+      minusCount++
+    } else {
+      minusCount = 0
+      collapsed.push(part)
+    }
   }
 
-  // Validate all sequences are valid combinations
-  const areAllValid = sequences.every(s => splitKeyCombination(s).length > 0)
+  // Validate that each part of the sequence is a valid combination
+  const areAllValid = collapsed.every(s => splitKeyCombination(s, true).length > 0)
+
   if (!areAllValid) {
-    consoleWarn(`Invalid hotkey sequence: "${str}" contains invalid key combinations`)
+    consoleWarn(`Invalid hotkey sequence: "${str}" contains invalid combinations`)
+    return []
   }
-  return areAllValid ? sequences : []
+
+  return collapsed
 }
