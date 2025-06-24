@@ -273,7 +273,7 @@ describe('VHotkey.tsx', () => {
 
       // Test icon mode with keys that have icons
       const { unmount: unmountIcon } = render(() => (
-        <VHotkey keys="cmd+shift" variant="contained" displayMode="icon" overridePlatform="mac" />
+        <VHotkey keys="cmd+shift" variant="contained" displayMode="icon" platform="mac" />
       ))
 
       expect(screen.getByCSS('.v-hotkey__contained-wrapper')).toBeInTheDocument()
@@ -476,7 +476,7 @@ describe('VHotkey.tsx', () => {
         },
       }
 
-      render(() => <VHotkey keys="shift+-" keyMap={ customKeyMap } overridePlatform="windows" />)
+      render(() => <VHotkey keys="shift+-" keyMap={ customKeyMap } platform="pc" />)
 
       const keys = screen.getAllByCSS('.v-hotkey__key')
       expect(keys[1]).toHaveTextContent('MINUS')
@@ -617,7 +617,7 @@ describe('VHotkey.tsx', () => {
         })
 
         // Test icon mode - should have title tooltips
-        render(() => <VHotkey keys="cmd+shift+k" displayMode="icon" overridePlatform="mac" />)
+        render(() => <VHotkey keys="cmd+shift+k" displayMode="icon" platform="mac" />)
 
         const keys = screen.getAllByCSS('.v-hotkey__key')
         expect(keys).toHaveLength(3) // cmd, shift, k
@@ -668,7 +668,7 @@ describe('VHotkey.tsx', () => {
         })
 
         // Test symbol mode - should have title tooltips
-        render(() => <VHotkey keys="cmd+shift+k" displayMode="symbol" overridePlatform="mac" />)
+        render(() => <VHotkey keys="cmd+shift+k" displayMode="symbol" platform="mac" />)
 
         const keys = screen.getAllByCSS('.v-hotkey__key')
         expect(keys).toHaveLength(3)
@@ -700,7 +700,7 @@ describe('VHotkey.tsx', () => {
         })
 
         // Test with keys that have localization vs keys that don't
-        render(() => <VHotkey keys="escape+f1" displayMode="icon" overridePlatform="mac" />)
+        render(() => <VHotkey keys="escape+f1" displayMode="icon" platform="mac" />)
 
         const keys = screen.getAllByCSS('.v-hotkey__key')
         expect(keys).toHaveLength(2) // escape, f1
@@ -802,7 +802,7 @@ describe('VHotkey.tsx', () => {
         })
 
         // Test text mode directly - should NOT have title tooltips
-        render(() => <VHotkey keys="cmd+shift+k" displayMode="text" overridePlatform="mac" />)
+        render(() => <VHotkey keys="cmd+shift+k" displayMode="text" platform="mac" />)
 
         const keys = screen.getAllByCSS('.v-hotkey__key')
         expect(keys).toHaveLength(3)
@@ -931,45 +931,40 @@ describe('VHotkey.tsx', () => {
       expect(textKeys[0]).toHaveTextContent('Ctrl') // Should be translated by the locale system
     })
 
-    it('should force mac rendering when overridePlatform="mac" is set on non-Mac platform', () => {
+    it('should force mac rendering when platform="mac" is set on non-Mac platform', () => {
       Object.defineProperty(window.navigator, 'userAgent', {
         value: 'Windows NT 10.0',
         configurable: true,
       })
 
-      render(() => <VHotkey keys="cmd+k" overridePlatform="mac" />)
+      render(() => <VHotkey keys="cmd+k" platform="mac" />)
 
       // Expect icons present due to forced mac
       const iconKeys = screen.queryAllByCSS('.v-hotkey__key-icon')
       expect(iconKeys.length).toBeGreaterThan(0)
     })
 
-    it('should force non-Mac rendering when overridePlatform is any string other than "mac"', () => {
+    it('should force non-Mac rendering when platform="pc" is set on Mac platform', () => {
       Object.defineProperty(window.navigator, 'userAgent', {
         value: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)', // Mac user agent
         configurable: true,
       })
 
-      // Test various non-'mac' strings
-      const nonMacValues = ['pc', 'windows', 'linux', 'android', 'chrome', 'whatever']
+      const { unmount } = render(() => <VHotkey keys="cmd+k" platform="pc" />)
 
-      for (const platform of nonMacValues) {
-        const { unmount } = render(() => <VHotkey keys="cmd+k" overridePlatform={ platform } />)
+      // Should not render icons (Mac behavior) despite being on Mac
+      const iconKeys = screen.queryAllByCSS('.v-hotkey__key-icon')
+      expect(iconKeys).toHaveLength(0)
 
-        // Should not render icons (Mac behavior) despite being on Mac
-        const iconKeys = screen.queryAllByCSS('.v-hotkey__key-icon')
-        expect(iconKeys).toHaveLength(0)
+      // Should render text instead (non-Mac behavior)
+      const textKeys = screen.queryAllByCSS('.v-hotkey__key-text')
+      expect(textKeys.length).toBeGreaterThan(0)
 
-        // Should render text instead (non-Mac behavior)
-        const textKeys = screen.queryAllByCSS('.v-hotkey__key-text')
-        expect(textKeys.length).toBeGreaterThan(0)
-
-        unmount()
-      }
+      unmount()
     })
   })
 
-  describe('Platform Override Behavior with cmd+k', () => {
+  describe('Platform Behavior with cmd+k', () => {
     const originalUserAgent = navigator.userAgent
 
     afterEach(() => {
@@ -980,7 +975,7 @@ describe('VHotkey.tsx', () => {
       })
     })
 
-    describe('overridePlatform undefined, displayMode undefined (defaults to icon)', () => {
+    describe('platform auto, displayMode undefined (defaults to icon)', () => {
       it('should show command icon on Mac', () => {
         Object.defineProperty(window.navigator, 'userAgent', {
           value: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)',
@@ -1018,7 +1013,7 @@ describe('VHotkey.tsx', () => {
       })
     })
 
-    describe('overridePlatform undefined, displayMode icon', () => {
+    describe('platform auto, displayMode icon', () => {
       it('should show command icon on Mac', () => {
         Object.defineProperty(window.navigator, 'userAgent', {
           value: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)',
@@ -1051,14 +1046,14 @@ describe('VHotkey.tsx', () => {
       })
     })
 
-    describe('overridePlatform mac, displayMode undefined (defaults to icon)', () => {
+    describe('platform mac, displayMode undefined (defaults to icon)', () => {
       it('should show command icon on Mac', () => {
         Object.defineProperty(window.navigator, 'userAgent', {
           value: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)',
           configurable: true,
         })
 
-        render(() => <VHotkey keys="cmd+k" overridePlatform="mac" />)
+        render(() => <VHotkey keys="cmd+k" platform="mac" />)
 
         // Should have command icon
         const iconKeys = screen.getAllByCSS('.v-hotkey__key-icon')
@@ -1071,7 +1066,7 @@ describe('VHotkey.tsx', () => {
           configurable: true,
         })
 
-        render(() => <VHotkey keys="cmd+k" overridePlatform="mac" />)
+        render(() => <VHotkey keys="cmd+k" platform="mac" />)
 
         // Should have command icon (forced Mac behavior)
         const iconKeys = screen.getAllByCSS('.v-hotkey__key-icon')
@@ -1084,14 +1079,14 @@ describe('VHotkey.tsx', () => {
       })
     })
 
-    describe('overridePlatform mac, displayMode icon', () => {
+    describe('platform mac, displayMode icon', () => {
       it('should show command icon on Mac', () => {
         Object.defineProperty(window.navigator, 'userAgent', {
           value: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)',
           configurable: true,
         })
 
-        render(() => <VHotkey keys="cmd+k" overridePlatform="mac" displayMode="icon" />)
+        render(() => <VHotkey keys="cmd+k" platform="mac" displayMode="icon" />)
 
         // Should have command icon
         const iconKeys = screen.getAllByCSS('.v-hotkey__key-icon')
@@ -1104,7 +1099,7 @@ describe('VHotkey.tsx', () => {
           configurable: true,
         })
 
-        render(() => <VHotkey keys="cmd+k" overridePlatform="mac" displayMode="icon" />)
+        render(() => <VHotkey keys="cmd+k" platform="mac" displayMode="icon" />)
 
         // Should have command icon (forced Mac behavior)
         const iconKeys = screen.getAllByCSS('.v-hotkey__key-icon')
@@ -1112,14 +1107,14 @@ describe('VHotkey.tsx', () => {
       })
     })
 
-    describe('overridePlatform non-mac string, displayMode undefined (defaults to icon)', () => {
+    describe('platform pc, displayMode undefined (defaults to icon)', () => {
       it('should show Ctrl text on Mac (forced non-Mac behavior)', () => {
         Object.defineProperty(window.navigator, 'userAgent', {
           value: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)',
           configurable: true,
         })
 
-        render(() => <VHotkey keys="cmd+k" overridePlatform="pc" />)
+        render(() => <VHotkey keys="cmd+k" platform="pc" />)
 
         // Should not have icons (forced non-Mac behavior)
         const iconKeys = screen.queryAllByCSS('.v-hotkey__key-icon')
@@ -1137,7 +1132,7 @@ describe('VHotkey.tsx', () => {
           configurable: true,
         })
 
-        render(() => <VHotkey keys="cmd+k" overridePlatform="pc" />)
+        render(() => <VHotkey keys="cmd+k" platform="pc" />)
 
         // Should not have icons
         const iconKeys = screen.queryAllByCSS('.v-hotkey__key-icon')
@@ -1150,14 +1145,14 @@ describe('VHotkey.tsx', () => {
       })
     })
 
-    describe('overridePlatform mac, displayMode symbol', () => {
+    describe('platform mac, displayMode symbol', () => {
       it('should show command symbol on Mac', () => {
         Object.defineProperty(window.navigator, 'userAgent', {
           value: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)',
           configurable: true,
         })
 
-        render(() => <VHotkey keys="cmd+k" overridePlatform="mac" displayMode="symbol" />)
+        render(() => <VHotkey keys="cmd+k" platform="mac" displayMode="symbol" />)
 
         // Should have command symbol
         const symbolKeys = screen.getAllByCSS('.v-hotkey__key-symbol')
@@ -1174,7 +1169,7 @@ describe('VHotkey.tsx', () => {
           configurable: true,
         })
 
-        render(() => <VHotkey keys="cmd+k" overridePlatform="mac" displayMode="symbol" />)
+        render(() => <VHotkey keys="cmd+k" platform="mac" displayMode="symbol" />)
 
         // Should have command symbol (forced Mac behavior)
         const symbolKeys = screen.getAllByCSS('.v-hotkey__key-symbol')
@@ -1186,14 +1181,14 @@ describe('VHotkey.tsx', () => {
       })
     })
 
-    describe('overridePlatform non-mac string, displayMode text', () => {
+    describe('platform pc, displayMode text', () => {
       it('should show Ctrl text on Mac (forced non-Mac behavior)', () => {
         Object.defineProperty(window.navigator, 'userAgent', {
           value: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)',
           configurable: true,
         })
 
-        render(() => <VHotkey keys="cmd+k" overridePlatform="pc" displayMode="text" />)
+        render(() => <VHotkey keys="cmd+k" platform="pc" displayMode="text" />)
 
         // Should show "Ctrl" text
         const textKeys = screen.getAllByCSS('.v-hotkey__key-text')
@@ -1207,7 +1202,7 @@ describe('VHotkey.tsx', () => {
           configurable: true,
         })
 
-        render(() => <VHotkey keys="cmd+k" overridePlatform="pc" displayMode="text" />)
+        render(() => <VHotkey keys="cmd+k" platform="pc" displayMode="text" />)
 
         // Should show "Ctrl" text
         const textKeys = screen.getAllByCSS('.v-hotkey__key-text')
@@ -1474,7 +1469,7 @@ describe('VHotkey.tsx', () => {
       })
     })
 
-    it('should react to overridePlatform prop changes', async () => {
+    it('should react to platform prop changes', async () => {
       // Start on a Windows machine
       Object.defineProperty(window.navigator, 'userAgent', {
         value: 'Windows NT 10.0',
@@ -1483,11 +1478,11 @@ describe('VHotkey.tsx', () => {
 
       const TestWrapper = defineComponent({
         setup () {
-          const overridePlatform = ref<string | undefined>(undefined)
-          return { overridePlatform }
+          const platform = ref<'auto' | 'pc' | 'mac'>('auto')
+          return { platform }
         },
         render () {
-          return <VHotkey keys="cmd+k" overridePlatform={ this.overridePlatform } />
+          return <VHotkey keys="cmd+k" platform={ this.platform } />
         },
       })
 
@@ -1499,8 +1494,8 @@ describe('VHotkey.tsx', () => {
       expect(hasCtrlText).toBe(true)
       expect(screen.queryAllByCSS('.v-hotkey__key-icon')).toHaveLength(0)
 
-      // Change to mac override
-      await wrapper.rerender({ overridePlatform: 'mac' })
+      // Change to mac
+      await wrapper.rerender({ platform: 'mac' })
 
       // Should now show command icon (forced Mac behavior)
       const iconKeys = screen.getAllByCSS('.v-hotkey__key-icon')
@@ -1509,8 +1504,8 @@ describe('VHotkey.tsx', () => {
       hasCtrlText = textKeys.some(key => key.textContent?.includes('Ctrl'))
       expect(hasCtrlText).toBe(false)
 
-      // Change to pc override
-      await wrapper.rerender({ overridePlatform: 'pc' })
+      // Change to pc
+      await wrapper.rerender({ platform: 'pc' })
 
       // Should go back to Ctrl text (forced PC behavior)
       expect(screen.queryAllByCSS('.v-hotkey__key-icon')).toHaveLength(0)
@@ -1518,8 +1513,8 @@ describe('VHotkey.tsx', () => {
       hasCtrlText = textKeys.some(key => key.textContent?.includes('Ctrl'))
       expect(hasCtrlText).toBe(true)
 
-      // Change back to undefined (auto-detection)
-      await wrapper.rerender({ overridePlatform: undefined })
+      // Change back to auto (auto-detection)
+      await wrapper.rerender({ platform: 'auto' })
 
       // Should show Ctrl again (Windows auto-detection)
       expect(screen.queryAllByCSS('.v-hotkey__key-icon')).toHaveLength(0)
@@ -1538,11 +1533,11 @@ describe('VHotkey.tsx', () => {
       const TestWrapper = defineComponent({
         setup () {
           const displayMode = ref<'icon' | 'symbol' | 'text'>('icon')
-          const overridePlatform = ref<string>('mac')
-          return { displayMode, overridePlatform }
+          const platform = ref<'auto' | 'pc' | 'mac'>('mac')
+          return { displayMode, platform }
         },
         render () {
-          return <VHotkey keys="cmd+k" displayMode={ this.displayMode } overridePlatform={ this.overridePlatform } />
+          return <VHotkey keys="cmd+k" displayMode={ this.displayMode } platform={ this.platform } />
         },
       })
 
@@ -1553,7 +1548,7 @@ describe('VHotkey.tsx', () => {
       expect(iconKeys.length).toBeGreaterThan(0)
 
       // Change to symbol mode
-      await wrapper.rerender({ displayMode: 'symbol', overridePlatform: 'mac' })
+      await wrapper.rerender({ displayMode: 'symbol', platform: 'mac' })
 
       // Should show command symbol
       const symbolKeys = screen.getAllByCSS('.v-hotkey__key-symbol')
@@ -1562,7 +1557,7 @@ describe('VHotkey.tsx', () => {
       expect(hasCommandSymbol).toBe(true)
 
       // Change platform to PC while keeping symbol mode
-      await wrapper.rerender({ displayMode: 'symbol', overridePlatform: 'pc' })
+      await wrapper.rerender({ displayMode: 'symbol', platform: 'pc' })
 
       // Should show Ctrl text (PC doesn't have command symbols)
       expect(screen.queryAllByCSS('.v-hotkey__key-symbol')).toHaveLength(0)
@@ -1571,7 +1566,7 @@ describe('VHotkey.tsx', () => {
       expect(hasCtrlText).toBe(true)
 
       // Change back to icon mode while on PC
-      await wrapper.rerender({ displayMode: 'icon', overridePlatform: 'pc' })
+      await wrapper.rerender({ displayMode: 'icon', platform: 'pc' })
 
       // Should still show Ctrl text (PC doesn't use icons for modifiers)
       expect(screen.queryAllByCSS('.v-hotkey__key-icon')).toHaveLength(0)
@@ -1580,15 +1575,15 @@ describe('VHotkey.tsx', () => {
       expect(hasCtrlText2).toBe(true)
     })
 
-    it('should react to both overridePlatform and displayMode changes simultaneously', async () => {
+    it('should react to both platform and displayMode changes simultaneously', async () => {
       const TestWrapper = defineComponent({
         setup () {
           const displayMode = ref<'icon' | 'symbol' | 'text'>('icon')
-          const overridePlatform = ref<string | undefined>('pc')
-          return { displayMode, overridePlatform }
+          const platform = ref<'auto' | 'pc' | 'mac'>('pc')
+          return { displayMode, platform }
         },
         render () {
-          return <VHotkey keys="cmd+k" displayMode={ this.displayMode } overridePlatform={ this.overridePlatform } />
+          return <VHotkey keys="cmd+k" displayMode={ this.displayMode } platform={ this.platform } />
         },
       })
 
@@ -1601,7 +1596,7 @@ describe('VHotkey.tsx', () => {
       expect(screen.queryAllByCSS('.v-hotkey__key-icon')).toHaveLength(0)
 
       // Change both to Mac + symbol simultaneously
-      await wrapper.rerender({ displayMode: 'symbol', overridePlatform: 'mac' })
+      await wrapper.rerender({ displayMode: 'symbol', platform: 'mac' })
 
       // Should show command symbol
       const symbolKeys = screen.getAllByCSS('.v-hotkey__key-symbol')
@@ -1609,8 +1604,8 @@ describe('VHotkey.tsx', () => {
       const hasCommandSymbol = symbolKeys.some(key => key.textContent?.includes('⌘'))
       expect(hasCommandSymbol).toBe(true)
 
-      // Change both to undefined platform + text mode
-      await wrapper.rerender({ displayMode: 'text', overridePlatform: undefined })
+      // Change both to auto platform + text mode
+      await wrapper.rerender({ displayMode: 'text', platform: 'auto' })
 
       // Should auto-detect platform and show appropriate text
       // (This will depend on the test environment's navigator.userAgent)

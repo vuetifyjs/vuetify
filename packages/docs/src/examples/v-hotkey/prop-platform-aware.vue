@@ -95,7 +95,7 @@
                   <td>
                     <v-hotkey
                       :display-mode="displayMode"
-                      :override-platform="platform"
+                      :platform="platform"
                       keys="meta+k"
                     ></v-hotkey>
                   </td>
@@ -106,7 +106,7 @@
                   <td>
                     <v-hotkey
                       :display-mode="displayMode"
-                      :override-platform="platform"
+                      :platform="platform"
                       keys="alt+f"
                     ></v-hotkey>
                   </td>
@@ -117,7 +117,7 @@
                   <td>
                     <v-hotkey
                       :display-mode="displayMode"
-                      :override-platform="platform"
+                      :platform="platform"
                       keys="ctrl+shift+p"
                     ></v-hotkey>
                   </td>
@@ -128,7 +128,7 @@
                   <td>
                     <v-hotkey
                       :display-mode="displayMode"
-                      :override-platform="platform"
+                      :platform="platform"
                       keys="cmd+shift+p"
                     ></v-hotkey>
                   </td>

@@ -85,10 +85,8 @@
       variant: variant.value,
     }
 
-    // Convert 'auto' string to undefined for the component prop
-    if (platformOverride.value !== 'auto') {
-      baseProps['override-platform'] = platformOverride.value
-    }
+    // Set platform prop directly - 'auto' is now the default value
+    baseProps.platform = platformOverride.value
 
     return baseProps
   })

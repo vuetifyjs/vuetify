@@ -111,7 +111,7 @@
               <div class="text-center">
                 <div class="text-caption mb-1">meta+shift+p</div>
                 <v-hotkey
-                  :override-platform="platform"
+                  :platform="platform"
                   keys="meta+shift+p"
                 ></v-hotkey>
               </div>
@@ -119,7 +119,7 @@
               <div class="text-center">
                 <div class="text-caption mb-1">ctrl+k meta+p</div>
                 <v-hotkey
-                  :override-platform="platform"
+                  :platform="platform"
                   keys="ctrl+k meta+p"
                 ></v-hotkey>
               </div>
@@ -127,7 +127,7 @@
               <div class="text-center">
                 <div class="text-caption mb-1">alt+arrowup</div>
                 <v-hotkey
-                  :override-platform="platform"
+                  :platform="platform"
                   keys="alt+arrowup"
                 ></v-hotkey>
               </div>
@@ -135,7 +135,7 @@
               <div class="text-center">
                 <div class="text-caption mb-1">ctrl+k-then-meta+p</div>
                 <v-hotkey
-                  :override-platform="platform"
+                  :platform="platform"
                   keys="ctrl+k-then-meta+p"
                 ></v-hotkey>
               </div>

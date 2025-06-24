@@ -187,9 +187,9 @@ export const makeVHotkeyProps = propsFactory({
     type: Object as PropType<KeyMapConfig>,
     default: () => hotkeyMap,
   },
-  overridePlatform: {
-    type: String as PropType<'mac' | string>,
-    default: undefined,
+  platform: {
+    type: String as PropType<'auto' | 'pc' | 'mac'>,
+    default: 'auto',
   },
   inline: Boolean,
   // Disabled state
@@ -284,9 +284,9 @@ export const VHotkey = genericComponent()({
     const { colorClasses, colorStyles, variantClasses } = useVariant(effectiveVariantProps)
 
     const isMac = computed(() =>
-      props.overridePlatform !== undefined
-        ? props.overridePlatform === 'mac'
-        : (typeof navigator !== 'undefined' && /macintosh/i.test(navigator.userAgent))
+      props.platform === 'auto'
+        ? (typeof navigator !== 'undefined' && /macintosh/i.test(navigator.userAgent))
+        : props.platform === 'mac'
     )
 
     // The requested display mode remains unchanged; processKey handles platform-specific fallbacks

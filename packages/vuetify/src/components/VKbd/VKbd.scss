@@ -17,8 +17,7 @@
     min-width: $kbd-min-width;
     padding: $kbd-padding;
     vertical-align: baseline;
-    margin-left: $kbd-margin-x;
-    margin-right: $kbd-margin-x;
+    margin-inline: $kbd-margin-inline;
 
     @include tools.border($kbd-border...);
     @include tools.elevation($kbd-elevation);

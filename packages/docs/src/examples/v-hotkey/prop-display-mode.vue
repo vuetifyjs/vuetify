@@ -120,22 +120,22 @@
             <div class="d-flex flex-wrap ga-4 align-center justify-center">
               <v-hotkey
                 :display-mode="displayMode"
-                :override-platform="platform"
+                :platform="platform"
                 keys="ctrl+shift+k"
               ></v-hotkey>
               <v-hotkey
                 :display-mode="displayMode"
-                :override-platform="platform"
+                :platform="platform"
                 keys="meta+alt+p"
               ></v-hotkey>
               <v-hotkey
                 :display-mode="displayMode"
-                :override-platform="platform"
+                :platform="platform"
                 keys="shift+enter"
               ></v-hotkey>
               <v-hotkey
                 :display-mode="displayMode"
-                :override-platform="platform"
+                :platform="platform"
                 keys="ctrl+k-then-p"
               ></v-hotkey>
             </div>

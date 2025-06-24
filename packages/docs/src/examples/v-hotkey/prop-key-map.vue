@@ -94,14 +94,14 @@
                   <td><code>ctrl+s</code></td>
                   <td>
                     <v-hotkey
-                      :override-platform="platform"
+                      :platform="platform"
                       keys="ctrl+s"
                     ></v-hotkey>
                   </td>
                   <td>
                     <v-hotkey
                       :key-map="customKeyMap"
-                      :override-platform="platform"
+                      :platform="platform"
                       keys="ctrl+s"
                     ></v-hotkey>
                   </td>
@@ -111,14 +111,14 @@
                   <td><code>alt+f</code></td>
                   <td>
                     <v-hotkey
-                      :override-platform="platform"
+                      :platform="platform"
                       keys="alt+f"
                     ></v-hotkey>
                   </td>
                   <td>
                     <v-hotkey
                       :key-map="customKeyMap"
-                      :override-platform="platform"
+                      :platform="platform"
                       keys="alt+f"
                     ></v-hotkey>
                   </td>
@@ -128,14 +128,14 @@
                   <td><code>enter</code></td>
                   <td>
                     <v-hotkey
-                      :override-platform="platform"
+                      :platform="platform"
                       keys="enter"
                     ></v-hotkey>
                   </td>
                   <td>
                     <v-hotkey
                       :key-map="customKeyMap"
-                      :override-platform="platform"
+                      :platform="platform"
                       keys="enter"
                     ></v-hotkey>
                   </td>
@@ -189,15 +189,15 @@
     // Include common keys that we're not customizing
     shift: {
       mac: { symbol: '⇧', icon: '$shift', text: '$vuetify.hotkey.shift' },
-      default: { text: 'Shift', icon: '$shift' },
+      default: { text: 'Shift' },
     },
     meta: {
       mac: { symbol: '⌘', icon: '$command', text: '$vuetify.hotkey.command' },
-      default: { text: 'Ctrl', icon: '$ctrl' },
+      default: { text: 'Ctrl' },
     },
     cmd: {
       mac: { symbol: '⌘', icon: '$command', text: '$vuetify.hotkey.command' },
-      default: { text: 'Ctrl', icon: '$ctrl' },
+      default: { text: 'Ctrl' },
     },
 
     // Custom key overrides
