@@ -93,15 +93,18 @@
     for (const v of val) {
       if (typeof v === 'string') {
         changed = true
-        const item = {
-          title: v,
-          color: colors[nonce],
+        const existingItem = items.value.find(x => x.title === v)
+        if (existingItem) {
+          newValue.push(existingItem)
+        } else {
+          const newIitem = {
+            title: v,
+            color: colors[nonce],
+          }
+          newValue.push(newIitem)
+          items.value.push(newIitem)
+          nonce = (nonce + 1) % colors.length
         }
-
-        newValue.push(item)
-        items.value.push(item)
-
-        nonce = (nonce + 1) % colors.length
       } else {
         newValue.push(v)
       }
@@ -171,15 +174,18 @@
         for (const v of val) {
           if (typeof v === 'string') {
             changed = true
-            const item = {
-              title: v,
-              color: this.colors[this.nonce],
+            const existingItem = this.items.find(x => x.title === v)
+            if (existingItem) {
+              newValue.push(existingItem)
+            } else {
+              const newIitem = {
+                title: v,
+                color: this.colors[this.nonce],
+              }
+              newValue.push(newIitem)
+              this.items.push(newIitem)
+              this.nonce = (this.nonce + 1) % this.colors.length
             }
-
-            newValue.push(item)
-            this.items.push(item)
-
-            this.nonce = (this.nonce + 1) % this.colors.length
           } else {
             newValue.push(v)
           }
