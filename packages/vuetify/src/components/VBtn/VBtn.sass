@@ -1,5 +1,6 @@
 @use 'sass:math'
 @use 'sass:map'
+@use 'sass:meta'
 @use '../../styles/settings'
 @use '../../styles/tools'
 @use './mixins' as *
@@ -30,7 +31,8 @@
     flex-shrink: 0
 
     .v-locale--is-rtl &
-      text-indent: -1 * $button-text-letter-spacing
+      @if meta.type-of($button-text-letter-spacing) == 'number'
+        text-indent: -1 * $button-text-letter-spacing
 
     @at-root
       @include button-sizes()
