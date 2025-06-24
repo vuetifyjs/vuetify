@@ -255,7 +255,7 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
                                   )
                                 )}
                               </VVirtualScrollItem>
-                              { isExpanded(itemSlotProps.internalItem) && (
+                              { props.showExpand && (
                                 <VVirtualScrollItem
                                   key={ `expanded-${itemSlotProps.internalItem.index}` }
                                   renderless
