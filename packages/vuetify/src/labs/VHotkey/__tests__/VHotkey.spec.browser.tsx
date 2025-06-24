@@ -97,24 +97,10 @@ describe('VHotkey.tsx', () => {
       expect(dividers).toHaveLength(4)
     })
 
-    it('should handle edge case with trailing minus', () => {
-      render(() => <VHotkey keys="ctrl+k-" />)
 
-      // Should parse as: ctrl+k then (empty), which should be handled gracefully
-      const keys = screen.getAllByCSS('.v-hotkey__key')
-      expect(keys.length).toBeGreaterThanOrEqual(2)
-    })
-
-    it('should handle edge case with leading minus', () => {
-      render(() => <VHotkey keys="-ctrl+k" />)
-
-      // Should parse as: (empty) then ctrl+k, which should be handled gracefully
-      const keys = screen.getAllByCSS('.v-hotkey__key')
-      expect(keys.length).toBeGreaterThanOrEqual(2)
-    })
 
     it('should handle "then" keyword in key combinations correctly', () => {
-      render(() => <VHotkey keys="meta+k-then-z" displayMode="text" />)
+      render(() => <VHotkey keys="meta+k-z" displayMode="text" />)
 
       // Should parse as: meta+k then z (NOT meta+k then THEN then z)
       const keys = screen.getAllByCSS('.v-hotkey__key')
@@ -134,9 +120,9 @@ describe('VHotkey.tsx', () => {
       expect(keys[2]).toHaveTextContent('Z')
     })
 
-    it('should handle various "then" keyword patterns correctly', () => {
+    it('should handle various sequence patterns correctly', () => {
       // Test the exact pattern from the user's screenshot issue
-      render(() => <VHotkey keys="k-then-z" displayMode="text" />)
+      render(() => <VHotkey keys="k-z" displayMode="text" />)
 
       const keys1 = screen.getAllByCSS('.v-hotkey__key')
       expect(keys1).toHaveLength(2) // k, z (NOT k, then, z)
@@ -148,9 +134,9 @@ describe('VHotkey.tsx', () => {
       expect(dividers1[0]).toHaveTextContent(/then/i)
     })
 
-    it('should handle case-insensitive "then" keyword patterns', () => {
+    it('should handle case-insensitive sequence patterns', () => {
       // Test case-insensitive matching
-      render(() => <VHotkey keys="a-THEN-b" displayMode="text" />)
+      render(() => <VHotkey keys="a-b" displayMode="text" />)
 
       const keys = screen.getAllByCSS('.v-hotkey__key')
       const dividers = screen.getAllByCSS('.v-hotkey__divider')
@@ -594,7 +580,7 @@ describe('VHotkey.tsx', () => {
     })
 
     it('should generate readable text for complex shortcuts', () => {
-      render(() => <VHotkey keys="ctrl+shift+k-then-p" />)
+      render(() => <VHotkey keys="ctrl+shift+k-p" />)
       const container = screen.getByCSS('.v-hotkey')
       const ariaLabel = container.getAttribute('aria-label')
 
@@ -1659,4 +1645,74 @@ describe('VHotkey.tsx', () => {
       }
     })
   })
+
+  describe('Component Rendering with Special Keys', () => {
+    it('should render literal symbol keys correctly', () => {
+      render(() => <VHotkey keys="ctrl+-" displayMode="text" />)
+
+      const keys = screen.getAllByCSS('.v-hotkey__key')
+      expect(keys).toHaveLength(2) // ctrl and -
+
+      const dividers = screen.getAllByCSS('.v-hotkey__divider')
+      expect(dividers).toHaveLength(1) // Only the + separator
+      expect(dividers[0]).toHaveTextContent('+')
+
+      // The second key should be the minus key
+      expect(keys[1]).toHaveTextContent('-')
+    })
+
+    it('should render complex combinations with literal symbols', () => {
+      render(() => <VHotkey keys="ctrl+shift+-" displayMode="text" />)
+
+      const keys = screen.getAllByCSS('.v-hotkey__key')
+      expect(keys).toHaveLength(3) // ctrl, shift, and -
+
+      const dividers = screen.getAllByCSS('.v-hotkey__divider')
+      expect(dividers).toHaveLength(2) // Two + separators
+      dividers.forEach(divider => {
+        expect(divider).toHaveTextContent('+')
+      })
+
+      expect(keys[0]).toHaveTextContent('Ctrl')
+      expect(keys[1]).toHaveTextContent('Shift')
+      expect(keys[2]).toHaveTextContent('-')
+    })
+
+    it('should render sequence with literal symbols', () => {
+      render(() => <VHotkey keys="ctrl+a-shift+-" displayMode="text" />)
+
+      const keys = screen.getAllByCSS('.v-hotkey__key')
+      expect(keys).toHaveLength(4) // ctrl, a, shift, -
+
+      const dividers = screen.getAllByCSS('.v-hotkey__divider')
+      expect(dividers).toHaveLength(3) // +, then, +
+
+      expect(dividers[0]).toHaveTextContent('+')
+      expect(dividers[1]).toHaveTextContent(/then/i)
+      expect(dividers[2]).toHaveTextContent('+')
+
+      expect(keys[0]).toHaveTextContent('Ctrl')
+      expect(keys[1]).toHaveTextContent('A')
+      expect(keys[2]).toHaveTextContent('Shift')
+      expect(keys[3]).toHaveTextContent('-')
+    })
+
+    it('should render literal plus key correctly', () => {
+      render(() => <VHotkey keys="meta++" displayMode="text" />)
+
+      const keys = screen.getAllByCSS('.v-hotkey__key')
+      expect(keys).toHaveLength(2) // meta and +
+
+      const dividers = screen.getAllByCSS('.v-hotkey__divider')
+      expect(dividers).toHaveLength(1) // Only one separator
+      expect(dividers[0]).toHaveTextContent('+')
+
+      // Keys should be meta/ctrl (platform dependent) and +
+      const firstKeyText = keys[0].textContent?.toUpperCase()
+      expect(['META', 'CTRL', 'CMD', 'COMMAND']).toContain(firstKeyText)
+      expect(keys[1]).toHaveTextContent('+')
+    })
+  })
+
+
 })

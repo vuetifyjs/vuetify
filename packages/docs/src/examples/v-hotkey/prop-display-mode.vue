@@ -136,7 +136,7 @@
               <v-hotkey
                 :display-mode="displayMode"
                 :platform="platform"
-                keys="ctrl+k-then-p"
+                keys="ctrl+k-p"
               ></v-hotkey>
             </div>
           </template>

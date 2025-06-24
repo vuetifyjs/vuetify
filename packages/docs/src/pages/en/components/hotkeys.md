@@ -126,12 +126,12 @@ will generate the following HTML:
 ```
 
 ::: info
-The HTML structure varies depending on the **variant** prop. The contained variant uses nested `<kbd>` elements within a single wrapper, while standard variants use individual `VKbd` components.
+The HTML structure varies by variant. Standard variants use individual `VKbd` components, while the `contained` variant uses nested `<kbd>` elements within a single wrapper.
 :::
 
-### Key features
+Key accessibility features:
 
-- **Semantic role**: Uses `role="img"` to indicate it represents a visual element
-- **Screen reader support**: Provides complete, localized descriptions via `aria-label`
-- **Hidden visual elements**: Individual keys and dividers use `aria-hidden="true"` to prevent redundant announcements
+- **Screen reader support**: Uses `role="img"` with descriptive `aria-label`
+- **Visual elements hidden**: Individual keys and separators use `aria-hidden="true"`
+- **Sequence notation**: Dash separators display as "then" for screen readers (e.g., `ctrl+k-p` becomes "Ctrl plus K then P")
 - **Tooltips**: Icon and symbol modes include `title` attributes for enhanced usability

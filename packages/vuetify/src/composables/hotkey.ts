@@ -2,6 +2,7 @@
 import { onBeforeUnmount, toValue, watch } from 'vue'
 import { IN_BROWSER } from '@/util'
 import { getCurrentInstance } from '@/util/getCurrentInstance'
+import { splitKeyCombination, splitKeySequence } from '@/util/hotkey-parsing'
 
 // Types
 import type { MaybeRef } from '@/util'
@@ -92,32 +93,11 @@ export function useHotkey (
     clearTimer()
   }
 
-  function splitKeySequence (str: string) {
-    const groups: string[] = []
-    let current = ''
-    for (let i = 0; i < str.length; i++) {
-      const char = str[i]
-      if (char === '-') {
-        const next = str[i + 1]
-        // Treat '-' as a sequence delimiter only if the next character exists
-        // and is NOT one of '-', '+', or '_' (these indicate the '-' belongs to the key itself)
-        if (next && !['-', '+', '_'].includes(next)) {
-          groups.push(current)
-          current = ''
-          continue
-        }
-      }
-      current += char
-    }
-    groups.push(current)
-
-    return groups
-  }
-
   watch(() => toValue(keys), function (unrefKeys) {
     cleanup()
 
     if (unrefKeys) {
+      // Use the shared sequence splitting logic
       const groups = splitKeySequence(unrefKeys.toLowerCase())
       isSequence = groups.length > 1
       keyGroups = groups
@@ -136,25 +116,23 @@ export function useHotkey (
   function parseKeyGroup (group: string) {
     const MODIFIERS = ['ctrl', 'shift', 'alt', 'meta', 'cmd']
 
-    // Split on +, -, or _ but keep empty strings which indicate consecutive separators (e.g. alt--)
-    const parts = group.toLowerCase().split(/[+_-]/)
+    // Use the shared combination splitting logic
+    const parts = splitKeyCombination(group.toLowerCase())
+
+    // If the combination is invalid, return empty result
+    if (parts.length === 0) {
+      return { modifiers: Object.fromEntries(MODIFIERS.map(m => [m, false])), actualKey: undefined }
+    }
 
     const modifiers = Object.fromEntries(MODIFIERS.map(m => [m, false])) as Record<string, boolean>
     let actualKey: string | undefined
 
     for (const part of parts) {
-      if (!part) continue // Skip empty tokens
       if (MODIFIERS.includes(part)) {
         modifiers[part] = true
       } else {
         actualKey = part
       }
-    }
-
-    // Fallback for cases where actualKey is a literal '+' or '-' (e.g. alt--, alt++ , alt+-, alt-+)
-    if (!actualKey) {
-      const lastChar = group.slice(-1)
-      if (['+', '-', '_'].includes(lastChar)) actualKey = lastChar
     }
 
     return { modifiers, actualKey }

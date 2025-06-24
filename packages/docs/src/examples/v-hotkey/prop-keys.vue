@@ -65,12 +65,12 @@
             <div class="d-flex flex-column ga-2">
               <div class="d-flex align-center justify-space-between">
                 Ctrl+K then P:
-                <v-hotkey keys="ctrl+k-then-p"></v-hotkey>
+                <v-hotkey keys="ctrl+k-p"></v-hotkey>
               </div>
 
               <div class="d-flex align-center justify-space-between">
                 Ctrl+X then Ctrl+C:
-                <v-hotkey keys="ctrl+x-then-ctrl+c"></v-hotkey>
+                <v-hotkey keys="ctrl+x-ctrl+c"></v-hotkey>
               </div>
             </div>
           </template>
@@ -133,10 +133,10 @@
               </div>
 
               <div class="text-center">
-                <div class="text-caption mb-1">ctrl+k-then-meta+p</div>
+                <div class="text-caption mb-1">ctrl+k-meta+p</div>
                 <v-hotkey
                   :platform="platform"
-                  keys="ctrl+k-then-meta+p"
+                  keys="ctrl+k-meta+p"
                 ></v-hotkey>
               </div>
             </div>

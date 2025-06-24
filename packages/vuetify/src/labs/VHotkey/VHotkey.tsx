@@ -46,6 +46,7 @@ import { useVariant } from '@/composables/variant'
 // Utilities
 import { computed } from 'vue'
 import { genericComponent, mergeDeep, propsFactory, useRender } from '@/util'
+import { splitKeyCombination, splitKeySequence } from '@/util/hotkey-parsing'
 
 // Types
 import type { PropType } from 'vue'
@@ -304,104 +305,36 @@ export const VHotkey = genericComponent()({
       // Split by spaces to handle multiple key combinations
       // Example: "ctrl+k meta+p" -> ["ctrl+k", "meta+p"]
       return props.keys.split(' ').map(combination => {
-        // Split each combination by + or _ to get individual key parts
-        // Example: "ctrl+k" -> ["ctrl", "k"]
-        const parts = combination
-          .split(/_|\+/)
-          .reduce<Array<string | Delineator>>((acu, cv, index) => {
+        // Use the shared sequence splitting logic
+        const sequenceGroups = splitKeySequence(combination)
+
+        // Process each sequence group
+        return sequenceGroups.flatMap((group, groupIndex) => {
+          // Use the shared key combination splitting logic
+          const keyParts = splitKeyCombination(group)
+
+          const parts = keyParts.reduce<Array<string | Delineator>>((acc, part, index) => {
             if (index !== 0) {
-              // Add AND delineator between keys joined by + or _
-              return [...acu, AND_DELINEATOR, cv]
+              // Add AND delineator between keys
+              return [...acc, AND_DELINEATOR, part]
             }
-            return [...acu, cv]
+            return [...acc, part]
           }, [])
-          .flatMap(val => {
-            if (isString(val)) {
-              // First, handle explicit "-then-" pattern
-              // Replace "-then-" with a special marker that we'll convert to THEN_DELINEATOR
-              const THEN_MARKER = '\u0001THEN\u0001' // Use control characters as unlikely markers
-              const processedVal = val.replace(/-then-/gi, THEN_MARKER)
 
-              // Handle - separators (THEN delineators) with improved parsing
-              // Only treat - as separator when it's between alphanumeric tokens
-              // This prevents "shift+-" from being split incorrectly
-              const dashSeparatedParts: Array<string | Delineator> = []
-              let currentPart = ''
-
-              for (let i = 0; i < processedVal.length; i++) {
-                const char = processedVal[i]
-                const prevChar = processedVal[i - 1]
-                const nextChar = processedVal[i + 1]
-
-                if (char === '-' &&
-                    prevChar && /[a-zA-Z0-9]/.test(prevChar) &&
-                    nextChar && /[a-zA-Z0-9]/.test(nextChar)) {
-                  // This is a separator dash between alphanumeric tokens
-                  if (currentPart) {
-                    dashSeparatedParts.push(currentPart)
-                    currentPart = ''
-                  }
-                  dashSeparatedParts.push(THEN_DELINEATOR)
-                } else {
-                  // This is part of a key name (including literal - key)
-                  currentPart += char
-                }
-              }
-
-              // Add the final part if it exists
-              if (currentPart) {
-                dashSeparatedParts.push(currentPart)
-              }
-
-              // Now process the THEN_MARKER tokens
-              return dashSeparatedParts.flatMap(part => {
-                if (isString(part) && part.includes(THEN_MARKER)) {
-                  // Split by THEN_MARKER and insert THEN_DELINEATOR between parts
-                  const parts = part.split(THEN_MARKER)
-                  const result: Array<string | Delineator> = []
-
-                  for (let i = 0; i < parts.length; i++) {
-                    if (parts[i]) { // Only add non-empty parts
-                      result.push(parts[i])
-                    }
-                    // Add THEN_DELINEATOR between parts (but not after the last part)
-                    if (i < parts.length - 1) {
-                      result.push(THEN_DELINEATOR)
-                    }
-                  }
-
-                  return result
-                }
-                return [part]
-              })
+          // Add THEN delineator between sequence groups
+          const result = parts.map(key => {
+            if (isString(key)) {
+              return applyDisplayModeToKey(effectiveKeyMap.value, effectiveDisplayMode.value, key, isMac.value)
             }
-            return [val]
+            return key
           })
 
-        // Extract just the key strings for modifier detection
-        const keys = parts.filter(val => isString(val))
+          // Add sequence separator if not the last group
+          if (groupIndex < sequenceGroups.length - 1) {
+            result.push(THEN_DELINEATOR)
+          }
 
-        // Parse modifier keys from the parts array
-        const modifiers = {
-          meta: keys.some(p => ['meta', 'cmd'].includes(p.toLowerCase())),
-          ctrl: keys.some(p => p.toLowerCase() === 'ctrl'),
-          alt: keys.some(p => p.toLowerCase() === 'alt'),
-          shift: keys.some(p => p.toLowerCase() === 'shift'),
-        }
-
-        // Mac-specific logic: Convert ctrl to meta (cmd key) on Mac
-        // unless meta is already explicitly specified
-        if (isMac.value && modifiers.ctrl && !modifiers.meta) {
-          modifiers.meta = true
-          modifiers.ctrl = false
-        }
-
-        // Transform each key part into its display representation
-        return parts.map(key => {
-          // Return delineator objects as-is for separator rendering
-          if (isDelineator(key)) return key
-          // Apply the key mapping to get the display representation
-          return applyDisplayModeToKey(effectiveKeyMap.value, effectiveDisplayMode.value, key, isMac.value)
+          return result
         })
       })
     })

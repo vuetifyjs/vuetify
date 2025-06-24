@@ -191,6 +191,7 @@ The hotkey string supports various modifiers and special keys:
 
 ### Syntax rules
 
+- Parsing is performed left to right, so `ctrl+s-a` will produce "`ctrl+s` and then `a`"
 - Use `+` to combine modifiers with keys: `ctrl+s`
 - Use `-` to create sequences: `ctrl+k-p` (press Ctrl+K, then P)
 - Keys are case-insensitive: `Ctrl+S` equals `ctrl+s`

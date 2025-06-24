@@ -28,12 +28,20 @@ export function splitKeyCombination (combination: string, isInternal = false): s
   }
 
   // --- VALIDATION ---
+  const startsWithPlusOrUnderscore = combination.startsWith('+') || combination.startsWith('_')
+
+  const hasInvalidLeadingSeparator = (
+    // Starts with a single '+' or '_' followed by a non-separator character (e.g. '+a', '_a')
+    startsWithPlusOrUnderscore &&
+    !(combination.startsWith('++') || combination.startsWith('__'))
+  )
+
   const hasInvalidStructure = (
-    // Starts with a separator (and is not a single literal key)
-    (combination.length > 1 && (combination.startsWith('+') || combination.startsWith('_'))) ||
+    // Invalid leading separator patterns
+    (combination.length > 1 && hasInvalidLeadingSeparator) ||
     // Ends with a separator that is not part of a doubled literal
     (combination.length > 1 && (combination.endsWith('+') || combination.endsWith('_')) && combination.at(-2) !== combination.at(-1)) ||
-    // Standalone doubled separators
+    // Stand-alone doubled separators (dangling)
     combination === '++' || combination === '--' || combination === '__'
   )
 
@@ -117,12 +125,20 @@ export function splitKeySequence (str: string): string[] {
     const char = str[i]
 
     if (char === '-') {
-      // Check if this hyphen is part of a combination (preceded by + or _)
-      if (i > 0 && (str[i - 1] === '+' || str[i - 1] === '_')) {
+      // Determine if this hyphen is part of the current combination
+      const prevChar = str[i - 1]
+      const prevPrevChar = i > 1 ? str[i - 2] : undefined
+
+      const precededBySinglePlusOrUnderscore = (
+        (prevChar === '+' || prevChar === '_') && prevPrevChar !== '+'
+      )
+
+      if (precededBySinglePlusOrUnderscore) {
+        // Treat as part of the combination (e.g., 'ctrl+-')
         buffer += char
         i++
       } else {
-        // This is a sequence separator
+        // Treat as sequence separator
         if (buffer) {
           result.push(buffer)
           buffer = ''

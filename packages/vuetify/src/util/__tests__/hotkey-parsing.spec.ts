@@ -77,6 +77,11 @@ describe('hotkey-parsing.ts', () => {
       expect(splitKeyCombination('__')).toEqual([])
       expect('[Vue warn]: Vuetify: Invalid hotkey combination: "__" has invalid structure').toHaveBeenTipped()
     })
+
+    // Combinations starting with doubled literal separators
+    it('should handle combinations that start with doubled + literal', () => {
+      expect(splitKeyCombination('++k')).toEqual(['+', 'k'])
+    })
   })
 
   describe('splitKeySequence', () => {
@@ -140,6 +145,18 @@ describe('hotkey-parsing.ts', () => {
     it('should return empty array for invalid parts', () => {
       expect(splitKeySequence('a-ctrl+-b')).toEqual([])
       expect('[Vue warn]: Vuetify: Invalid hotkey sequence: "a-ctrl+-b" contains invalid combinations').toHaveBeenTipped()
+    })
+
+    // Sequences with combinations that start with doubled literal
+    it('should correctly parse cmd+shift-++k sequence', () => {
+      expect(splitKeySequence('cmd+shift-++k')).toEqual(['cmd+shift', '++k'])
+    })
+
+    it('should correctly parse cmd+shift++-k sequence', () => {
+      expect(splitKeySequence('cmd+shift++-k')).toEqual(['cmd+shift++', 'k'])
+
+      const parts = splitKeyCombination('cmd+shift++')
+      expect(parts).toEqual(['cmd', 'shift', '+'])
     })
   })
 

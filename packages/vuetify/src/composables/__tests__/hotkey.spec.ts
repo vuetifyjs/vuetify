@@ -26,6 +26,8 @@ describe('hotkey.ts', () => {
     ['enter', { key: 'enter' }],
     [' ', { key: ' ' }],
     ['ctrl+shift+alt+meta+x', { ctrlKey: true, shiftKey: true, altKey: true, metaKey: true, key: 'x' }],
+    ['ctrl++', { ctrlKey: true, key: '+' }],
+    ['alt+-', { altKey: true, key: '-' }],
   ])('fires on %s', (combo, props) => {
     const cb = vi.fn()
     const stop = useHotkey(combo, cb)
@@ -41,7 +43,7 @@ describe('hotkey.ts', () => {
     ['complete', 0, ['g', 'g'], 1],
     ['incomplete', 0, ['g'], 0],
     ['timeout', 1100, ['g', 'g'], 0],
-  ])('%s g‑g', (_, gap, seq, expected) => {
+  ])('%s g‑g sequence', (_, gap, seq, expected) => {
     it('callback count matches', async () => {
       vi.useFakeTimers()
       const cb = vi.fn()
@@ -109,7 +111,7 @@ describe('hotkey.ts', () => {
   it.each([
     ['Mac ctrl', 'ctrl+s', { ctrlKey: true, key: 's' }, 'Macintosh'],
     ['Mac cmd', 'cmd+s', { metaKey: true, key: 's' }, 'Macintosh'],
-  ])('%s', (_, combo, evtProps, ua) => {
+  ])('%s platform handling', (_, combo, evtProps, ua) => {
     const cb = vi.fn()
     Object.defineProperty(window, 'navigator', { value: { userAgent: `Mozilla/5.0 (${ua})` }, writable: true })
     const stop = useHotkey(combo, cb)
@@ -145,21 +147,18 @@ describe('hotkey.ts', () => {
     stop()
   })
 
-  it.each([
-    ['case insensitive', 'CTRL+A', { ctrlKey: true, key: 'A' }, 1],
-    ['missing key', 'ctrl+', { ctrlKey: true, key: 'a' }, 0],
-  ])('%s', (_, combo, evtProps, exp) => {
+  it('case insensitive matching', () => {
     const cb = vi.fn()
-    const stop = useHotkey(combo as any, cb)
+    const stop = useHotkey('CTRL+A', cb)
 
-    window.dispatchEvent(new KeyboardEvent('keydown', evtProps))
+    window.dispatchEvent(new KeyboardEvent('keydown', { ctrlKey: true, key: 'A' }))
 
-    expect(cb).toHaveBeenCalledTimes(exp)
+    expect(cb).toHaveBeenCalledTimes(1)
 
     stop()
   })
 
-  it('long ctrl+k-p-s sequence', () => {
+  it('long sequence ctrl+k-p-s', () => {
     const cb = vi.fn()
     const stop = useHotkey('ctrl+k-p-s', cb)
 
@@ -202,57 +201,96 @@ describe('hotkey.ts', () => {
     }
   })
 
-  describe('alt ± combos', () => {
-    it.each([
-      ['alt--', '-'],
-      ['alt++', '+'],
-      ['alt+-', '-'],
-      ['alt-+', '+'],
-    ])('%s triggers', (combo, key) => {
-      const cb = vi.fn()
-      const stop = useHotkey(combo, cb)
+  it('handles sequence with literal symbols', () => {
+    const cb = vi.fn()
+    const stop = useHotkey('ctrl+a-shift+-', cb)
 
-      window.dispatchEvent(new KeyboardEvent('keydown', { altKey: true, key }))
+    // First part of sequence
+    window.dispatchEvent(new KeyboardEvent('keydown', { ctrlKey: true, key: 'a' }))
+    expect(cb).toHaveBeenCalledTimes(0) // Should not trigger yet
 
-      expect(cb).toHaveBeenCalledTimes(1)
+    // Second part of sequence
+    window.dispatchEvent(new KeyboardEvent('keydown', { shiftKey: true, key: '-' }))
+    expect(cb).toHaveBeenCalledTimes(1) // Should trigger after complete sequence
 
-      const wrong = key === '-' ? '+' : '-'
-      window.dispatchEvent(new KeyboardEvent('keydown', { altKey: true, key: wrong }))
-
-      expect(cb).toHaveBeenCalledTimes(1)
-
-      window.dispatchEvent(new KeyboardEvent('keydown', { key }))
-
-      expect(cb).toHaveBeenCalledTimes(1)
-      stop()
-    })
+    stop()
   })
 
-  describe('alt _ combos', () => {
-    it.each([
-      ['alt__', '_'],
-      ['alt_+', '+'],
-      ['alt_-', '-'],
-      ['alt+_', '_'],
-    ])('%s triggers', (combo, key) => {
-      const cb = vi.fn()
-      const stop = useHotkey(combo, cb)
+  it('handles sequence timeout correctly', () => {
+    vi.useFakeTimers()
+    const cb = vi.fn()
+    const stop = useHotkey('a-b', cb, { sequenceTimeout: 500 })
 
-      window.dispatchEvent(new KeyboardEvent('keydown', { altKey: true, key }))
+    // Start sequence
+    window.dispatchEvent(new KeyboardEvent('keydown', { key: 'a' }))
+    expect(cb).toHaveBeenCalledTimes(0)
 
-      expect(cb).toHaveBeenCalledTimes(1)
+    // Wait past timeout
+    vi.advanceTimersByTime(600)
 
-      const wrong = key === '_' ? '+' : '_'
+    // Try to complete sequence - should not work
+    window.dispatchEvent(new KeyboardEvent('keydown', { key: 'b' }))
+    expect(cb).toHaveBeenCalledTimes(0)
 
-      window.dispatchEvent(new KeyboardEvent('keydown', { altKey: true, key: wrong }))
+    // Start fresh sequence
+    window.dispatchEvent(new KeyboardEvent('keydown', { key: 'a' }))
+    window.dispatchEvent(new KeyboardEvent('keydown', { key: 'b' }))
+    expect(cb).toHaveBeenCalledTimes(1)
 
-      expect(cb).toHaveBeenCalledTimes(1)
+    stop()
+    vi.useRealTimers()
+  })
 
-      window.dispatchEvent(new KeyboardEvent('keydown', { key }))
+  it('handles custom event type', () => {
+    const cb = vi.fn()
+    const stop = useHotkey('ctrl+a', cb, { event: 'keyup' })
 
-      expect(cb).toHaveBeenCalledTimes(1)
+    // Should not trigger on keydown
+    window.dispatchEvent(new KeyboardEvent('keydown', { ctrlKey: true, key: 'a' }))
+    expect(cb).toHaveBeenCalledTimes(0)
 
-      stop()
-    })
+    // Should trigger on keyup
+    window.dispatchEvent(new KeyboardEvent('keyup', { ctrlKey: true, key: 'a' }))
+    expect(cb).toHaveBeenCalledTimes(1)
+
+    stop()
+  })
+
+  it('cleans up event listeners on stop', () => {
+    const cb = vi.fn()
+    const stop = useHotkey('ctrl+a', cb)
+
+    // Should work initially
+    window.dispatchEvent(new KeyboardEvent('keydown', { ctrlKey: true, key: 'a' }))
+    expect(cb).toHaveBeenCalledTimes(1)
+
+    // Stop the hotkey
+    stop()
+
+    // Should not work after stop
+    window.dispatchEvent(new KeyboardEvent('keydown', { ctrlKey: true, key: 'a' }))
+    expect(cb).toHaveBeenCalledTimes(1)
+  })
+
+  it('resets sequence on non-matching key', () => {
+    const cb = vi.fn()
+    const stop = useHotkey('a-b-c', cb)
+
+    // Start sequence
+    window.dispatchEvent(new KeyboardEvent('keydown', { key: 'a' }))
+    window.dispatchEvent(new KeyboardEvent('keydown', { key: 'b' }))
+    expect(cb).toHaveBeenCalledTimes(0)
+
+    // Press wrong key - should reset sequence
+    window.dispatchEvent(new KeyboardEvent('keydown', { key: 'x' }))
+    expect(cb).toHaveBeenCalledTimes(0)
+
+    // Now complete sequence from beginning
+    window.dispatchEvent(new KeyboardEvent('keydown', { key: 'a' }))
+    window.dispatchEvent(new KeyboardEvent('keydown', { key: 'b' }))
+    window.dispatchEvent(new KeyboardEvent('keydown', { key: 'c' }))
+    expect(cb).toHaveBeenCalledTimes(1)
+
+    stop()
   })
 })
