@@ -8,6 +8,7 @@ import { makeVListItemProps, VListItem } from '@/components/VList/VListItem'
 import { VProgressCircular } from '@/components/VProgressCircular'
 
 // Composables
+import { forwardRefs } from '@/composables/forwardRefs'
 import { IconValue } from '@/composables/icons'
 
 // Utilities
@@ -124,7 +125,7 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
       )
     })
 
-    return {}
+    return forwardRefs({}, vListItemRef)
   },
 })
 
