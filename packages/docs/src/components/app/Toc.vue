@@ -7,7 +7,6 @@
     location="right"
     width="256"
     floating
-    sticky
   >
     <template #prepend>
       <AppHeadline

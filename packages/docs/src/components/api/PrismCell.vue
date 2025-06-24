@@ -38,3 +38,8 @@
     return insertLinks(highlighted, stripped)
   }
 </script>
+
+<style scoped lang="sass">
+pre
+  font-size: 13px
+</style>
