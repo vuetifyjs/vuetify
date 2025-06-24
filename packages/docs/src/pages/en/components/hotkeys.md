@@ -107,7 +107,7 @@ The `v-hotkey` component is designed with accessibility in mind. It uses semanti
 
 ### ARIA attributes
 
-The component uses the `aria-label` attribute to provide a clear description of the keyboard shortcut. This is automatically generated based off of current keys.
+The component uses the `aria-label` attribute to provide a clear description of the keyboard shortcut. This is automatically generated based on the current keys.
 
 ```html
 <v-hotkey keys="ctrl+s" />
@@ -118,11 +118,20 @@ will generate the following HTML:
 ```html
 <div class="v-hotkey" role="img" aria-label="Keyboard shortcut: Ctrl plus S">
   <span class="v-hotkey__combination">
-    <kbd class="..." aria-hidden="true">...</kbd>
-
+    <div class="v-kbd v-hotkey__key" aria-hidden="true">Ctrl</div>
     <span class="v-hotkey__divider" aria-hidden="true">+</span>
-
-    <kbd class="..." aria-hidden="true">S</kbd>
+    <div class="v-kbd v-hotkey__key" aria-hidden="true">S</div>
   </span>
 </div>
 ```
+
+::: info
+The HTML structure varies depending on the **variant** prop. The contained variant uses nested `<kbd>` elements within a single wrapper, while standard variants use individual `VKbd` components.
+:::
+
+### Key features
+
+- **Semantic role**: Uses `role="img"` to indicate it represents a visual element
+- **Screen reader support**: Provides complete, localized descriptions via `aria-label`
+- **Hidden visual elements**: Individual keys and dividers use `aria-hidden="true"` to prevent redundant announcements
+- **Tooltips**: Icon and symbol modes include `title` attributes for enhanced usability
