@@ -8,7 +8,7 @@ import { makeDensityProps } from '@/composables/density'
 import { IconValue } from '@/composables/icons'
 
 // Utilities
-import { computed, reactive, toRaw, withModifiers } from 'vue'
+import { computed, reactive, toRaw } from 'vue'
 import { genericComponent, propsFactory } from '@/util'
 
 // Types
@@ -92,7 +92,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
 
     function selectItem (select: (value: boolean) => void, isSelected: boolean) {
       if (props.selectable) {
-        select(!isSelected)
+        select(isSelected)
       }
     }
 
@@ -124,7 +124,8 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
                   indeterminateIcon={ props.indeterminateIcon }
                   falseIcon={ props.falseIcon }
                   trueIcon={ props.trueIcon }
-                  onClick={ withModifiers(() => selectItem(slotProps.select, slotProps.isSelected), ['stop']) }
+                  onUpdate:modelValue={ v => selectItem(slotProps.select, v) }
+                  onClick={ (e: PointerEvent) => e.stopPropagation() }
                   onKeydown={ (e: KeyboardEvent) => {
                     if (!['Enter', 'Space'].includes(e.key)) return
                     e.stopPropagation()
