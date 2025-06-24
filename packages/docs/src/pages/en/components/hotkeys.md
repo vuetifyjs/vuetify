@@ -77,7 +77,19 @@ The component automatically detects the user's platform and adjusts key represen
 It is recommended to set the **key-map** prop at the application level via global component defaults rather than per-instance for consistency.
 :::
 
-Use the **key-map** prop to customize how specific keys are displayed:
+Use the **key-map** prop to customize how specific keys are displayed. You can import and modify the exported `hotkeyMap` to create custom configurations:
+
+```typescript
+import { hotkeyMap } from 'vuetify/labs/VHotkey'
+
+const customKeyMap = {
+  ...hotkeyMap,
+  ctrl: {
+    default: { text: 'Control', icon: '$ctrl' },
+    mac: { symbol: '⌃', icon: '$ctrl', text: 'Control' }
+  }
+}
+```
 
 <ExamplesExample file="v-hotkey/prop-key-map" />
 

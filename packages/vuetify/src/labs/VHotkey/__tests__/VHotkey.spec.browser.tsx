@@ -442,13 +442,9 @@ describe('VHotkey.tsx', () => {
 
         const hotkeyWrapper = screen.getByCSS('.v-hotkey')
 
-        if (variant === 'contained') {
-          // Contained variant uses a special class structure
-          expect(hotkeyWrapper).toHaveClass('v-hotkey--contained')
-        } else {
-          // Standard variants use the variant class pattern
-          expect(hotkeyWrapper).toHaveClass(`v-hotkey--variant-${variant}`)
-        }
+        // Check for contained variant or standard variant class
+        const expectedClass = variant === 'contained' ? 'v-hotkey--contained' : `v-hotkey--variant-${variant}`
+        expect(hotkeyWrapper).toHaveClass(expectedClass)
 
         unmount()
       }
@@ -1660,13 +1656,9 @@ describe('VHotkey.tsx', () => {
 
         const hotkeyWrapper = screen.getByCSS('.v-hotkey')
 
-        if (variant === 'contained') {
-          // Contained variant uses a special class structure
-          expect(hotkeyWrapper).toHaveClass('v-hotkey--contained')
-        } else {
-          // Standard variants use the variant class pattern
-          expect(hotkeyWrapper).toHaveClass(`v-hotkey--variant-${variant}`)
-        }
+        // Check for contained variant or standard variant class
+        const expectedClass = variant === 'contained' ? 'v-hotkey--contained' : `v-hotkey--variant-${variant}`
+        expect(hotkeyWrapper).toHaveClass(expectedClass)
 
         unmount()
       }

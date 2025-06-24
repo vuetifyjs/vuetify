@@ -109,24 +109,24 @@ function processKey (config: PlatformKeyConfig, requestedMode: DisplayMode, isMa
 export const hotkeyMap: KeyMapConfig = {
   ctrl: {
     mac: { symbol: '⌃', icon: '$ctrl', text: '$vuetify.hotkey.ctrl' }, // Mac Control symbol
-    default: { text: 'Ctrl', icon: '$ctrl' },
+    default: { text: 'Ctrl' },
   },
   // Meta and Cmd both map to Command on Mac, Ctrl on PC
   meta: {
     mac: { symbol: '⌘', icon: '$command', text: '$vuetify.hotkey.command' }, // Mac Command symbol
-    default: { text: 'Ctrl', icon: '$ctrl' },
+    default: { text: 'Ctrl' },
   },
   cmd: {
     mac: { symbol: '⌘', icon: '$command', text: '$vuetify.hotkey.command' }, // Mac Command symbol
-    default: { text: 'Ctrl', icon: '$ctrl' },
+    default: { text: 'Ctrl' },
   },
   shift: {
     mac: { symbol: '⇧', icon: '$shift', text: '$vuetify.hotkey.shift' }, // Shift symbol
-    default: { text: 'Shift', icon: '$shift' },
+    default: { text: 'Shift' },
   },
   alt: {
     mac: { symbol: '⌥', icon: '$alt', text: '$vuetify.hotkey.option' }, // Mac Option symbol
-    default: { text: 'Alt', icon: '$alt' },
+    default: { text: 'Alt' },
   },
   enter: {
     default: { symbol: '↵', icon: '$enter', text: '$vuetify.hotkey.enter' }, // Return symbol

@@ -147,6 +147,34 @@
         </v-card>
       </v-col>
     </v-row>
+
+    <v-row dense>
+      <v-col cols="12">
+        <v-card title="Code Example">
+          <template v-slot:text>
+            <v-code>
+              // Import the default hotkeyMap and extend it
+              import { hotkeyMap } from 'vuetify/labs/VHotkey'
+
+              const customKeyMap = {
+              ...hotkeyMap,
+              ctrl: {
+              mac: { symbol: '⌃', icon: '$ctrl', text: 'Control' },
+              default: { symbol: '⌃', icon: '$ctrl', text: 'Control' },
+              },
+              alt: {
+              mac: { symbol: '⌥', icon: '$alt', text: 'Option' },
+              default: { symbol: '⎇', icon: '$alt', text: 'Alt' },
+              },
+              enter: {
+              default: { symbol: '⏎', icon: '$enter', text: 'Return' },
+              },
+              }
+            </v-code>
+          </template>
+        </v-card>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
@@ -155,113 +183,67 @@
 
   const platform = ref('mac')
 
-  function createKey (config) {
-    return (requestedMode, isMac) => {
-      const keyCfg = (isMac && config.mac) ? config.mac : config.default
-
-      // 1. Resolve the safest display mode for the current platform
-      const mode = (() => {
-        // Non-Mac platforms rarely use icons – prefer text
-        if (requestedMode === 'icon' && !isMac) return 'text'
-
-        // If the requested mode lacks an asset, fall back to text
-        if (requestedMode === 'icon' && !keyCfg.icon) return 'text'
-        if (requestedMode === 'symbol' && !keyCfg.symbol) return 'text'
-
-        return requestedMode
-      })()
-
-      // 2. Pick value for the chosen mode, defaulting to text representation
-      let value = keyCfg[mode] ?? keyCfg.text
-
-      // 3. Guard against icon tokens leaking into text mode (e.g. "$ctrl")
-      if (mode === 'text' && typeof value === 'string' && value.startsWith('$') && !value.startsWith('$vuetify.')) {
-        value = value.slice(1).toUpperCase() // "$ctrl" → "CTRL"
-      }
-
-      return mode === 'icon'
-        ? ['icon', value]
-        : [mode, value]
-    }
-  }
-
-  // Custom key mapping example using the optimized createKey function
+  // Custom key mapping using the new simplified object structure
+  // Import and extend the default hotkeyMap in real applications
   const customKeyMap = {
-    ctrl: createKey({
-      mac: { symbol: '⌃', icon: '$ctrl', text: 'Control' },
-      default: { symbol: '⌃', icon: '$ctrl', text: 'Control' },
-    }),
-    alt: createKey({
-      mac: { symbol: '⌥', icon: '$alt', text: 'Option' },
-      default: { symbol: '⎇', icon: '$alt', text: 'Alt' },
-    }),
-    shift: createKey({
-      default: { symbol: '⇧', icon: '$shift', text: 'Shift' },
-    }),
-    enter: createKey({
-      default: { symbol: '⏎', icon: '$enter', text: 'Return' },
-    }),
-  }
-</script>
-
-<script>
-  export default {
-    data () {
-      return {
-        platform: 'mac',
-        customKeyMap: this.createCustomKeyMap(),
-      }
+    // Include common keys that we're not customizing
+    shift: {
+      mac: { symbol: '⇧', icon: '$shift', text: '$vuetify.hotkey.shift' },
+      default: { text: 'Shift', icon: '$shift' },
+    },
+    meta: {
+      mac: { symbol: '⌘', icon: '$command', text: '$vuetify.hotkey.command' },
+      default: { text: 'Ctrl', icon: '$ctrl' },
+    },
+    cmd: {
+      mac: { symbol: '⌘', icon: '$command', text: '$vuetify.hotkey.command' },
+      default: { text: 'Ctrl', icon: '$ctrl' },
     },
 
-    methods: {
-      createKey (config) {
-        return (requestedMode, isMac) => {
-          const keyCfg = (isMac && config.mac) ? config.mac : config.default
+    // Custom key overrides
+    ctrl: {
+      mac: { symbol: '⌃', icon: '$ctrl', text: 'Control' },
+      default: { symbol: '⌃', icon: '$ctrl', text: 'Control' },
+    },
+    alt: {
+      mac: { symbol: '⌥', icon: '$alt', text: 'Option' },
+      default: { symbol: '⎇', icon: '$alt', text: 'Alt' },
+    },
+    enter: {
+      default: { symbol: '⏎', icon: '$enter', text: 'Return' },
+    },
 
-          // 1. Resolve the safest display mode for the current platform
-          const mode = (() => {
-            // Non-Mac platforms rarely use icons – prefer text
-            if (requestedMode === 'icon' && !isMac) return 'text'
-
-            // If the requested mode lacks an asset, fall back to text
-            if (requestedMode === 'icon' && !keyCfg.icon) return 'text'
-            if (requestedMode === 'symbol' && !keyCfg.symbol) return 'text'
-
-            return requestedMode
-          })()
-
-          // 2. Pick value for the chosen mode, defaulting to text representation
-          let value = keyCfg[mode] ?? keyCfg.text
-
-          // 3. Guard against icon tokens leaking into text mode (e.g. "$ctrl")
-          if (mode === 'text' && typeof value === 'string' && value.startsWith('$') && !value.startsWith('$vuetify.')) {
-            value = value.slice(1).toUpperCase() // "$ctrl" → "CTRL"
-          }
-
-          return mode === 'icon'
-            ? ['icon', value]
-            : [mode, value]
-        }
-      },
-
-      createCustomKeyMap () {
-        return {
-          ctrl: this.createKey({
-            mac: { symbol: '⌃', icon: '$ctrl', text: 'Control' },
-            default: { symbol: '⌃', icon: '$ctrl', text: 'Control' },
-          }),
-          alt: this.createKey({
-            mac: { symbol: '⌥', icon: '$alt', text: 'Option' },
-            default: { symbol: '⎇', icon: '$alt', text: 'Alt' },
-          }),
-          shift: this.createKey({
-            default: { symbol: '⇧', icon: '$shift', text: 'Shift' },
-          }),
-          enter: this.createKey({
-            default: { symbol: '⏎', icon: '$enter', text: 'Return' },
-          }),
-        }
-      },
+    // Include other keys for completeness
+    arrowup: {
+      default: { symbol: '↑', icon: '$arrowup', text: '$vuetify.hotkey.upArrow' },
+    },
+    arrowdown: {
+      default: { symbol: '↓', icon: '$arrowdown', text: '$vuetify.hotkey.downArrow' },
+    },
+    arrowleft: {
+      default: { symbol: '←', icon: '$arrowleft', text: '$vuetify.hotkey.leftArrow' },
+    },
+    arrowright: {
+      default: { symbol: '→', icon: '$arrowright', text: '$vuetify.hotkey.rightArrow' },
+    },
+    backspace: {
+      default: { symbol: '⌫', icon: '$backspace', text: '$vuetify.hotkey.backspace' },
+    },
+    escape: {
+      default: { text: '$vuetify.hotkey.escape' },
+    },
+    space: {
+      mac: { symbol: '␣', icon: '$space', text: '$vuetify.hotkey.space' },
+      default: { text: '$vuetify.hotkey.space' },
+    },
+    '-': {
+      default: { symbol: '-', icon: '$minus', text: '-' },
+    },
+    minus: {
+      default: { symbol: '-', icon: '$minus', text: '-' },
+    },
+    hyphen: {
+      default: { symbol: '-', icon: '$minus', text: '-' },
     },
   }
 </script>
