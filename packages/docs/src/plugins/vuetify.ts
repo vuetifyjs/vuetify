@@ -25,6 +25,9 @@ import type { IconProps } from 'vuetify'
 
 export function installVuetify (app: App) {
   const vuetify = createVuetify({
+    display: {
+      mobileBreakpoint: 'lg',
+    },
     components: {
       VSnackbarQueue,
     },

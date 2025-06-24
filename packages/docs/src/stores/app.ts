@@ -37,6 +37,7 @@ export const useAppStore = defineStore('app', {
     items: Array.from(data),
     pages: getPages(data as NavItem[]),
     settings: false,
+    mobileMenu: false,
     categories: {
       api: {
         icon: 'mdi-flask-outline',
