@@ -19,7 +19,7 @@ import { makeFilterProps, useFilter } from '@/composables/filter'
 import { makeVirtualProps, useVirtual } from '@/composables/virtual'
 
 // Utilities
-import { computed, shallowRef, toRef, toRefs } from 'vue'
+import { computed, Fragment, shallowRef, toRef, toRefs } from 'vue'
 import { convertToUnit, genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
@@ -237,7 +237,7 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
                         {{
                           ...slots,
                           item: itemSlotProps => (
-                            <>
+                            <Fragment>
                               <VVirtualScrollItem
                                 key={ itemSlotProps.internalItem.index }
                                 renderless
@@ -268,7 +268,7 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
                                   )}
                                 </VVirtualScrollItem>
                               )}
-                            </>
+                            </Fragment>
                           ),
                         }}
                       </VDataTableRows>
