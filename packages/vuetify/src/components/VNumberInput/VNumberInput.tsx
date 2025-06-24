@@ -9,7 +9,6 @@ import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextFi
 
 // Composables
 import { useHold } from './hold'
-import { useFocus } from '@/composables/focus'
 import { useForm } from '@/composables/form'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { useProxiedModel } from '@/composables/proxiedModel'
@@ -72,6 +71,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
   },
 
   emits: {
+    'update:focused': (val: boolean) => true,
     'update:modelValue': (val: number) => true,
   },
 
@@ -84,7 +84,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       form.isDisabled.value || form.isReadonly.value
     ))
 
-    const { isFocused, focus, blur } = useFocus(props)
+    const isFocused = shallowRef(props.focused)
 
     function correctPrecision (val: number, precision = props.precision) {
       const fixed = precision == null
@@ -148,7 +148,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
         onClick: onControlClick,
         onPointerup: onControlMouseup,
         onPointerdown: onUpControlMousedown,
-        onPointercancel: onControlPointerCancel,
+        onPointercancel: onControlMouseup,
       },
     }
     const decrementSlotProps = {
@@ -156,7 +156,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
         onClick: onControlClick,
         onPointerup: onControlMouseup,
         onPointerdown: onDownControlMousedown,
-        onPointercancel: onControlPointerCancel,
+        onPointercancel: onControlMouseup,
       },
     }
 
@@ -250,7 +250,6 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       const el = e.currentTarget as HTMLElement
       el?.releasePointerCapture(e.pointerId)
       e.preventDefault()
-      e.stopPropagation()
       holdStop()
     }
 
@@ -268,12 +267,6 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       e.preventDefault()
       e.stopPropagation()
       holdStart('down')
-    }
-
-    function onControlPointerCancel (e: PointerEvent) {
-      const el = e.currentTarget as HTMLElement
-      el?.releasePointerCapture(e.pointerId)
-      holdStop()
     }
 
     function clampModel () {
@@ -308,12 +301,10 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
     }
 
     function onFocus () {
-      focus()
       trimDecimalZeros()
     }
 
     function onBlur () {
-      blur()
       clampModel()
     }
 
@@ -333,7 +324,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
             onClick={ onControlClick }
             onPointerdown={ onUpControlMousedown }
             onPointerup={ onControlMouseup }
-            onPointercancel={ onControlPointerCancel }
+            onPointercancel={ onControlMouseup }
             size={ controlNodeSize.value }
             tabindex="-1"
           />
@@ -368,7 +359,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
             onClick={ onControlClick }
             onPointerdown={ onDownControlMousedown }
             onPointerup={ onControlMouseup }
-            onPointercancel={ onControlPointerCancel }
+            onPointercancel={ onControlMouseup }
             size={ controlNodeSize.value }
             tabindex="-1"
           />
@@ -439,7 +430,9 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       return (
         <VTextField
           ref={ vTextFieldRef }
+          { ...textFieldProps }
           v-model={ inputText.value }
+          v-model:focused={ isFocused.value }
           validationValue={ model.value }
           onBeforeinput={ onBeforeinput }
           onFocus={ onFocus }
@@ -457,7 +450,6 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
             },
             props.class,
           ]}
-          { ...textFieldProps }
           style={ props.style }
           inputmode="decimal"
         >

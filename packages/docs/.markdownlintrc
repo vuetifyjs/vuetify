@@ -10,5 +10,6 @@
   "no-emphasis-as-heading": false,
   "no-bare-urls": false,
   "emphasis-style": false,
-  "link-fragments": false
+  "link-fragments": false,
+  "descriptive-link-text": false
 }

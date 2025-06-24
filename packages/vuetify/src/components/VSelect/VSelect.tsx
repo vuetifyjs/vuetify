@@ -26,6 +26,7 @@ import { makeTransitionProps } from '@/composables/transition'
 // Utilities
 import { computed, mergeProps, nextTick, ref, shallowRef, toRef, watch } from 'vue'
 import {
+  camelizeProps,
   checkPrintable,
   deepEqual,
   ensureValidVNode,
@@ -457,6 +458,8 @@ export const VSelect = genericComponent<new <
 
                       <VVirtualScroll ref={ vVirtualScrollRef } renderless items={ displayItems.value } itemKey="value">
                         { ({ item, index, itemRef }) => {
+                          const camelizedProps = camelizeProps(item.props)
+
                           const itemProps = mergeProps(item.props, {
                             ref: itemRef,
                             key: item.value,
@@ -481,12 +484,12 @@ export const VSelect = genericComponent<new <
                                       />
                                     ) : undefined }
 
-                                    { item.props.prependAvatar && (
-                                      <VAvatar image={ item.props.prependAvatar } />
+                                    { camelizedProps.prependAvatar && (
+                                      <VAvatar image={ camelizedProps.prependAvatar } />
                                     )}
 
-                                    { item.props.prependIcon && (
-                                      <VIcon icon={ item.props.prependIcon } />
+                                    { camelizedProps.prependIcon && (
+                                      <VIcon icon={ camelizedProps.prependIcon } />
                                     )}
                                   </>
                                 ),

@@ -13,6 +13,7 @@ import { makeVSheetProps, VSheet } from '@/components/VSheet/VSheet'
 // Composables
 import { makeDelayProps } from '@/composables/delay'
 import { makeDensityProps, useDensity } from '@/composables/density'
+import { useFileDrop } from '@/composables/fileDrop'
 import { IconValue } from '@/composables/icons'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
@@ -110,6 +111,7 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
     const isDragging = shallowRef(false)
     const vSheetRef = ref<InstanceType<typeof VSheet> | null>(null)
     const inputRef = ref<HTMLInputElement | null>(null)
+    const { handleDrop } = useFileDrop()
 
     function onDragover (e: DragEvent) {
       e.preventDefault()
@@ -122,16 +124,15 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
       isDragging.value = false
     }
 
-    function onDrop (e: DragEvent) {
+    async function onDrop (e: DragEvent) {
       e.preventDefault()
       e.stopImmediatePropagation()
       isDragging.value = false
 
-      if (!e.dataTransfer?.files?.length || !inputRef.value) return
+      if (!inputRef.value) return
 
       const dataTransfer = new DataTransfer()
-
-      for (const file of e.dataTransfer.files) {
+      for (const file of await handleDrop(e)) {
         dataTransfer.items.add(file)
       }
 

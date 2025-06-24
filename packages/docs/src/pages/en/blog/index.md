@@ -18,6 +18,16 @@ Latest news, updates, and stories about Vuetify.
 
 <br>
 
+## May 2025 Update
+
+🖊️ John Leider • 📅 June 6th, 2025
+
+This month brings exciting advancements across the Vuetify ecosystem, with major strides in AI integration, component refinements, and developer experience. Discover the official release of @vuetify/mcp (Model Context Protocol), substantial improvements to VDateInput and VNumberInput components, and the introduction of the new VColorInput Labs component... { .text-medium-emphasis }
+
+[Read More](/blog/may-2025-update/) { .text-end }
+
+---
+
 ## April 2025 Update
 
 🖊️ John Leider • 📅 May 1st, 2025

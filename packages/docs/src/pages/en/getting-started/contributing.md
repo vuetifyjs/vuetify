@@ -135,6 +135,15 @@ All api descriptions are managed via the api-generator package. This package mus
 - Put keys in alphabetical order.
 - Descriptions utilize a hierarchy of `generic.json` < `Source.json` < `Component.json` to reduce duplication. Source can be viewed using the **Developer Mode** in docs settings.
 
+#### Adding API Documentation
+
+When creating a new component (or composable, though this is typically done by the Vuetify team), you need to add a corresponding JSON file named `ComponentName.json` in `packages/api-generator/src/locale/en/`. This file should contain descriptions for props, slots, events, and exposed methods. After adding or updating JSON files, run `pnpm build api` to regenerate the dist language files. Keep in mind:
+
+- Changes to Vuetify require a rebuild before building the API
+- The API must be built before running the documentation server
+
+Enabling **developer mode** in the documentation settings will allow you to see the source of truth on API description pages.
+
 ### Submitting Changes / Pull Requests
 
 First you should create a fork of the vuetify repository to push your changes to. Information on forking repositories can be found in the [GitHub documentation](https://help.github.com/en/github/getting-started-with-github/fork-a-repo).

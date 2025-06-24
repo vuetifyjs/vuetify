@@ -3,7 +3,7 @@
     <page-feature-chip
       v-if="!isGeneratedPage"
       :href="contribute"
-      prepend-icon="mdi-language-markdown-outline"
+      prepend-icon="mdi-pencil-outline"
       rel="noopener noreferrer"
       target="_blank"
       text="Edit this page"
@@ -88,6 +88,26 @@
         <v-icon color="surface-variant" />
       </template>
     </page-feature-chip>
+
+    <div
+      v-if="isClipboardSupported && !isGeneratedPage"
+      class="d-inline-block"
+      v-tooltip:top="{
+        disabled: one.isSubscriber,
+        text: 'Subscribe to Vuetify One for access',
+      }"
+    >
+      <page-feature-chip
+        :disabled="!one.isSubscriber"
+        :text="copied ? t('copied') : t('copy-as-markdown')"
+        prepend-icon="mdi-language-markdown-outline"
+        @click="copyPageAsMarkdown"
+      >
+        <template #prepend>
+          <v-icon :color="copied ? 'success' : 'surface-variant'" />
+        </template>
+      </page-feature-chip>
+    </div>
   </div>
 </template>
 
@@ -98,6 +118,7 @@
   const user = useUserStore()
   const { t } = useI18n()
   const frontmatter = useFrontmatter()
+  const { copyPageAsMarkdown, copied, isClipboardSupported } = useMarkdown()
 
   const branch = getBranch()
 

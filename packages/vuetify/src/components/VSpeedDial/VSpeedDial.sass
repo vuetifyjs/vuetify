@@ -22,6 +22,8 @@
         flex-direction: column-reverse
 
     > *
-      @for $i from 1 through 10
+      &:nth-child(1)
+        transition-delay: 0.001s
+      @for $i from 2 through 10
         &:nth-child(#{$i})
           transition-delay: 0.05s * ($i - 1)

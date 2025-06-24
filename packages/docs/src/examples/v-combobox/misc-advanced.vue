@@ -72,7 +72,7 @@
 </template>
 
 <script setup>
-  import { onMounted, ref, watch } from 'vue'
+  import { ref, watch } from 'vue'
 
   const colors = ['green', 'purple', 'indigo', 'cyan', 'teal', 'orange']
   const editingItem = ref(null)
@@ -81,31 +81,34 @@
     { title: 'Foo', color: 'blue' },
     { title: 'Bar', color: 'red' },
   ])
-  const nonce = ref(1)
-  const model = ref([])
+  const model = ref([
+    { title: 'Foo', color: 'blue' },
+  ])
   const search = ref(null)
 
-  onMounted(() => {
-    model.value.push(items.value[1])
-  })
-
-  watch(model, (val, prev) => {
-    if (val.length === prev.length) return
-
-    model.value = val.map(v => {
+  let nonce = 1
+  watch(model, val => {
+    const newValue = []
+    let changed = false
+    for (const v of val) {
       if (typeof v === 'string') {
-        v = {
+        changed = true
+        const item = {
           title: v,
-          color: colors[nonce.value - 1],
+          color: colors[nonce],
         }
 
-        items.value.push(v)
+        newValue.push(item)
+        items.value.push(item)
 
-        nonce.value++
+        nonce = (nonce + 1) % colors.length
+      } else {
+        newValue.push(v)
       }
-
-      return v
-    })
+    }
+    if (changed) {
+      model.value = newValue
+    }
   })
 
   function edit (item) {
@@ -155,33 +158,36 @@
         },
       ],
       nonce: 1,
-      model: [],
+      model: [
+        { title: 'Foo', color: 'blue' },
+      ],
       search: null,
     }),
 
     watch: {
-      model (val, prev) {
-        if (val.length === prev.length) return
-
-        this.model = val.map(v => {
+      model (val) {
+        const newValue = []
+        let changed = false
+        for (const v of val) {
           if (typeof v === 'string') {
-            v = {
+            changed = true
+            const item = {
               title: v,
-              color: this.colors[this.nonce - 1],
+              color: this.colors[this.nonce],
             }
 
-            this.items.push(v)
+            newValue.push(item)
+            this.items.push(item)
 
-            this.nonce++
+            this.nonce = (this.nonce + 1) % this.colors.length
+          } else {
+            newValue.push(v)
           }
-
-          return v
-        })
+        }
+        if (changed) {
+          this.model = newValue
+        }
       },
-    },
-
-    mounted () {
-      this.model = [this.items[1]]
     },
 
     methods: {

@@ -7,6 +7,7 @@ import { makeVFieldProps, VField } from '@/components/VField/VField'
 import { makeVInputProps, VInput } from '@/components/VInput/VInput'
 
 // Composables
+import { useAutofocus } from '@/composables/autofocus'
 import { useFocus } from '@/composables/focus'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { useProxiedModel } from '@/composables/proxiedModel'
@@ -70,6 +71,7 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
   setup (props, { attrs, emit, slots }) {
     const model = useProxiedModel(props, 'modelValue')
     const { isFocused, focus, blur } = useFocus(props)
+    const { onIntersect } = useAutofocus(props)
     const counterValue = computed(() => {
       return typeof props.counterValue === 'function' ? props.counterValue(model.value)
         : typeof props.counterValue === 'number' ? props.counterValue
@@ -89,15 +91,6 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
 
     const isPlainOrUnderlined = computed(() => ['plain', 'underlined'].includes(props.variant))
 
-    function onIntersect (
-      isIntersecting: boolean,
-      entries: IntersectionObserverEntry[]
-    ) {
-      if (!props.autofocus || !isIntersecting) return
-
-      (entries[0].target as HTMLInputElement)?.focus?.()
-    }
-
     const vInputRef = ref<VInput>()
     const vFieldRef = ref<VField>()
     const inputRef = ref<HTMLInputElement>()
@@ -108,11 +101,13 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
       props.active
     ))
     function onFocus () {
-      if (inputRef.value !== document.activeElement) {
-        inputRef.value?.focus()
-      }
-
       if (!isFocused.value) focus()
+
+      nextTick(() => {
+        if (inputRef.value !== document.activeElement) {
+          inputRef.value?.focus()
+        }
+      })
     }
     function onControlMousedown (e: MouseEvent) {
       emit('mousedown:control', e)
@@ -123,8 +118,6 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
       e.preventDefault()
     }
     function onControlClick (e: MouseEvent) {
-      onFocus()
-
       emit('click:control', e)
     }
     function onClear (e: MouseEvent, reset: () => void) {
