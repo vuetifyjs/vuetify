@@ -263,7 +263,6 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
                                 >
                                   { ({ itemRef }) => (
                                     <template ref={ itemRef }>
-       
                                     </template>
                                   )}
                                 </VVirtualScrollItem>
