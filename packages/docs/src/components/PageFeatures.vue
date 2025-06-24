@@ -90,7 +90,7 @@
     </page-feature-chip>
 
     <div
-      v-if="isClipboardSupported"
+      v-if="isClipboardSupported && !isGeneratedPage"
       class="d-inline-block"
       v-tooltip:top="{
         disabled: one.isSubscriber,
