@@ -5,51 +5,69 @@
     class="px-md-3"
     logo="vuetify"
     flat
+    responsive
+    v-model:mobile-menu="app.mobileMenu"
   >
-    <template #prepend>
-      <div class="px-1" />
-
+    <template #menu-activator="activatorProps">
       <AppBtn
-        v-if="route.meta.layout !== 'home' && mdAndDown"
-        icon="mdi-menu"
-        @click="app.drawer = !app.drawer"
+        v-bind="activatorProps"
+        icon="mdi-dots-vertical"
       />
+    </template>
 
+    <template #prepend>
       <AppSearchSearch />
     </template>
 
+    <template  #prepend-fixed>
+        <AppBtn
+          v-if="route.meta.layout !== 'home'"
+          icon="mdi-menu"
+          class="ms-2"
+          @click="app.drawer = !app.drawer"
+      />
+    </template>
+
     <template #append>
-      <div v-if="mdAndUp" class="d-flex ga-1">
+      <div class="d-flex ga-1 flex-wrap">
         <AppBarLearnMenu />
 
         <AppBarSupportMenu />
 
         <AppBarEcosystemMenu />
 
-        <AppBarPlaygroundLink v-if="lgAndUp" />
+        <AppBarPlaygroundLink />
 
         <AppBarSponsorLink />
       </div>
+      
+      <AppVerticalDivider v-if="!mobile"/>
 
-      <AppVerticalDivider v-if="smAndUp" />
+      <div class="d-flex ga-1" :class="{ 'mt-4': mobile }">
+        <AppBarStoreLink />
 
-      <div class="d-flex ga-1">
-        <AppBarStoreLink v-if="smAndUp" />
+        <AppBarGitHubLink />
 
-        <AppBarGitHubLink v-if="smAndUp" />
+        <template v-if="!mobile || xs">
+          <AppBarLanguageMenu />
 
-        <AppBarLanguageMenu />
-
-        <AppBarSettingsToggle />
+          <AppBarSettingsToggle />
+        </template>
       </div>
+
     </template>
+
+    <template v-if="mobile && !xs" #append-fixed>
+        <AppBarLanguageMenu />
+        <AppBarSettingsToggle />
+    </template>
+
   </VoAppBar>
 </template>
 
 <script setup>
   const app = useAppStore()
-  const { smAndUp, lgAndUp, mdAndDown, width } = useDisplay()
   const route = useRoute()
 
-  const mdAndUp = computed(() => width.value >= 1077)
+  const { mobile, xs } = useDisplay()
 </script>

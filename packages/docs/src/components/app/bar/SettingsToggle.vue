@@ -17,7 +17,6 @@
     v-else
     id="settings-toggle"
     :icon="app.settings ? 'mdi-cog' : 'mdi-cog-outline'"
-    class="me-n2"
     color="medium-emphasis"
     @click="onClick"
   />
@@ -32,5 +31,6 @@
     sweClick('app-bar', 'settings-toggle', name)
 
     app.settings = !app.settings
+    app.mobileMenu = false
   }
 </script>

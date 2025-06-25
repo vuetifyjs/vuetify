@@ -1,25 +1,19 @@
 <template>
   <AppBtn
     :active="model"
-    :icon="xs ? 'mdi-magnify' : undefined"
     :loading="loading ? 'primary' : undefined"
-    :prepend-icon="smAndUp ? 'mdi-magnify' : undefined"
+    prepend-icon="mdi-magnify"
+    :block="mobile"
+    :variant="mobile ? 'tonal' : undefined"
+    :class="{'ms-2': !mobile}"
+    size="default"
     @click="shouldLoad = true"
   >
-    <span :class="mdAndUp && 'me-n1'">
-      <span v-if="smAndUp">
-        {{ t('search.label') }}
-      </span>
+    <span class="me-n1">
+      <span> {{ t('search.label') }} </span>
 
-      <span
-        :class="[
-          smAndDown ? 'border-opacity-0' : 'py-1 px-2 ms-2',
-          'border rounded text-disabled text-caption'
-        ]"
-      >
-        <span v-if="mdAndUp">
+      <span v-if="!mobile" class="py-1 px-2 ms-2 border rounded text-disabled text-caption">
           {{ t(`search.key-hint${user.slashSearch ? '-slash' : platform.mac ? '-mac' : ''}`) }}
-        </span>
       </span>
     </span>
 
@@ -38,7 +32,7 @@
   const SearchDialog = defineAsyncComponent(() => import('@/components/app/search/SearchDialog.vue'))
 
   const { t } = useI18n()
-  const { smAndUp, smAndDown, mdAndUp, xs, platform } = useDisplay()
+  const { platform, mobile } = useDisplay()
   const { query } = useRoute()
   const user = useUserStore()
 

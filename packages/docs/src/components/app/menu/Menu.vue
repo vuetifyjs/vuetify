@@ -3,7 +3,8 @@
     close-delay="100"
     location="bottom end"
     open-delay="60"
-    open-on-hover
+    :open-on-hover="!mobile"
+    :open-on-click="mobile"
   >
     <template #activator="{ props }">
       <slot name="activator" v-bind="{ props }" />
@@ -12,7 +13,7 @@
     <AppSheet>
       <slot v-if="$slots.default" />
 
-      <AppListList v-else :items="items" nav />
+      <AppListList v-else :items="items" nav :max-height="mobile ? 400 : undefined" />
     </AppSheet>
   </v-menu>
 </template>
@@ -28,4 +29,6 @@
       default: () => ([]),
     },
   })
+
+  const { mobile } = useDisplay()
 </script>
