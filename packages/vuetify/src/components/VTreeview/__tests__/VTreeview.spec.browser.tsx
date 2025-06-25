@@ -59,7 +59,7 @@ const items = [
 ]
 
 describe.each([
-  // ['plain', items], // TODO: broken
+  ['plain', items],
   ['reactive', reactive(items)],
 ])('VTreeview with %s items', (_, items) => {
   describe('activate', () => {

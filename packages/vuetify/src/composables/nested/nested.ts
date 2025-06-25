@@ -129,10 +129,16 @@ export const makeNestedProps = propsFactory({
 
 export const useNested = (props: NestedProps) => {
   let isUnmounted = false
-  const children = ref(new Map<unknown, unknown[]>())
-  const parents = ref(new Map<unknown, unknown>())
+  const children = shallowRef(new Map<unknown, unknown[]>())
+  const parents = shallowRef(new Map<unknown, unknown>())
 
-  const opened = useProxiedModel(props, 'opened', props.opened, v => new Set(v), v => [...v.values()])
+  const opened = useProxiedModel(
+    props,
+    'opened',
+    props.opened,
+    v => new Set(toRaw(v)),
+    v => [...toRaw(v).values()],
+  )
 
   const activeStrategy = computed(() => {
     if (typeof props.activeStrategy === 'object') return props.activeStrategy
@@ -194,7 +200,7 @@ export const useNested = (props: NestedProps) => {
 
   function getPath (id: unknown) {
     const path: unknown[] = []
-    let parent: unknown = id
+    let parent: unknown = toRaw(id)
 
     while (parent != null) {
       path.unshift(parent)
@@ -344,7 +350,7 @@ export const useNestedItem = (id: MaybeRefOrGetter<unknown>, isGroup: boolean) =
   const parent = inject(VNestedSymbol, emptyNested)
 
   const uidSymbol = Symbol('nested item')
-  const computedId = computed(() => toValue(id) ?? uidSymbol)
+  const computedId = computed(() => toRaw(toValue(id)) ?? uidSymbol)
 
   const item = {
     ...parent,
