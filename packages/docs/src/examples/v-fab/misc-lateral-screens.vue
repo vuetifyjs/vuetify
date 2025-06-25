@@ -10,8 +10,6 @@
 
         <v-app-bar-title>Page title</v-app-bar-title>
 
-        <v-spacer></v-spacer>
-
         <v-btn icon="mdi-magnify"></v-btn>
 
         <v-btn icon="mdi-dots-vertical">
@@ -22,14 +20,13 @@
           <v-tabs
             v-model="tabs"
             align-tabs="title"
+            slider-color="pink"
           >
             <v-tab text="Item One" value="one"></v-tab>
 
             <v-tab text="Item Two" value="two"></v-tab>
 
             <v-tab text="Item Three" value="three"></v-tab>
-
-            <v-tabs-slider color="pink"></v-tabs-slider>
           </v-tabs>
         </template>
       </v-app-bar>

@@ -1,4 +1,5 @@
 /* eslint-disable camelcase */
+import { track } from 'swetrix'
 
 export function gtagClick (
   event_category: string,
@@ -8,4 +9,12 @@ export function gtagClick (
   const { event } = useGtag()
 
   event('click', { event_category, event_label, value })
+  track({
+    ev: 'click',
+    meta: {
+      category: event_category,
+      label: event_label,
+      value,
+    },
+  })
 }

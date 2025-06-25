@@ -7,30 +7,28 @@
     nav
   >
     <template #item="{ props: itemProps }">
-      <v-hover>
-        <template #default="{ props: activatorProps, isHovering }">
-          <v-list-item
-            :title="itemProps.title"
-            :to="itemProps.to"
-            class="mb-1"
-            v-bind="activatorProps"
-            @click.prevent="onClickPin(itemProps.to)"
-          >
-            <template #append>
-              <v-icon
-                v-if="isHovering"
-                class="me-1"
-                icon="mdi-pin-off"
-                size="16"
-                @click.prevent.stop="onClickPinRemove({
-                  title: itemProps.title,
-                  to: itemProps.to,
-                  category: '',
-                })"
-              />
-            </template>
-          </v-list-item>
-        </template>
+      <v-hover v-slot="{ props: activatorProps, isHovering }">
+        <v-list-item
+          :title="itemProps.title"
+          :to="itemProps.to"
+          class="mb-1"
+          v-bind="activatorProps"
+          @click.prevent="onClickPin(itemProps.to)"
+        >
+          <template #append>
+            <v-icon
+              v-if="isHovering"
+              class="me-1"
+              icon="mdi-pin-off"
+              size="16"
+              @click.prevent.stop="onClickPinRemove({
+                title: itemProps.title,
+                to: itemProps.to,
+                category: '',
+              })"
+            />
+          </template>
+        </v-list-item>
       </v-hover>
     </template>
   </AppListList>

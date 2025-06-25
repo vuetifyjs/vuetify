@@ -256,10 +256,10 @@ export const VImg = genericComponent<VImgSlots>()({
         <img
           class={['v-img__img', containClasses.value]}
           style={{ objectPosition: props.position }}
+          crossorigin={ props.crossorigin }
           src={ normalisedSrc.value.src }
           srcset={ normalisedSrc.value.srcset }
           alt={ props.alt }
-          crossorigin={ props.crossorigin }
           referrerpolicy={ props.referrerpolicy }
           draggable={ props.draggable }
           sizes={ props.sizes }
@@ -291,9 +291,9 @@ export const VImg = genericComponent<VImgSlots>()({
           <img
             class={['v-img__img', 'v-img__img--preload', containClasses.value]}
             style={{ objectPosition: props.position }}
+            crossorigin={ props.crossorigin }
             src={ normalisedSrc.value.lazySrc }
             alt={ props.alt }
-            crossorigin={ props.crossorigin }
             referrerpolicy={ props.referrerpolicy }
             draggable={ props.draggable }
           />

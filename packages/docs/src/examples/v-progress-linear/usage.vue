@@ -12,7 +12,7 @@
     <template v-slot:configuration>
       <v-select
         v-model="color"
-        :items="['primary', 'blue-lighten-3', 'error', 'dark-blue']"
+        :items="['primary', 'blue-lighten-3', 'error', 'blue-darken-3']"
         label="Color"
         clearable
       ></v-select>

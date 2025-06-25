@@ -336,35 +336,35 @@ function format (
       options = { second: 'numeric' }
       break
     case 'fullTime':
-      options = { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true }
+      options = { hour: 'numeric', minute: 'numeric' }
       break
     case 'fullTime12h':
-      options = { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true }
+      options = { hour: 'numeric', minute: 'numeric', hour12: true }
       break
     case 'fullTime24h':
-      options = { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: false }
+      options = { hour: 'numeric', minute: 'numeric', hour12: false }
       break
     case 'fullDateTime':
-      options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true }
+      options = { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric' }
       break
     case 'fullDateTime12h':
-      options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true }
+      options = { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true }
       break
     case 'fullDateTime24h':
-      options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: false }
+      options = { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12: false }
       break
     case 'keyboardDate':
       options = { year: 'numeric', month: '2-digit', day: '2-digit' }
       break
     case 'keyboardDateTime':
-      options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: false }
-      break
+      options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: 'numeric', minute: 'numeric' }
+      return new Intl.DateTimeFormat(locale, options).format(newDate).replace(/, /g, ' ')
     case 'keyboardDateTime12h':
-      options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true }
-      break
+      options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: 'numeric', minute: 'numeric', hour12: true }
+      return new Intl.DateTimeFormat(locale, options).format(newDate).replace(/, /g, ' ')
     case 'keyboardDateTime24h':
-      options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: false }
-      break
+      options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: 'numeric', minute: 'numeric', hour12: false }
+      return new Intl.DateTimeFormat(locale, options).format(newDate).replace(/, /g, ' ')
     default:
       options = customFormat ?? { timeZone: 'UTC', timeZoneName: 'short' }
   }

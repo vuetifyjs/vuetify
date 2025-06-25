@@ -23,13 +23,3 @@
   const teams = useTeamStore()
   const members = computed(() => teams.members.filter(member => member.team === props.team))
 </script>
-
-<style lang="sass">
-  .team-members
-    .v-markdown
-      > p
-        margin: 0
-
-      a
-        text-decoration: none
-</style>

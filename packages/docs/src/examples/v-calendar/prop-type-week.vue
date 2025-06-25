@@ -6,9 +6,9 @@
           v-model="weekday"
           :items="weekdays"
           class="ma-2"
+          density="compact"
           label="weekdays"
           variant="outlined"
-          dense
           hide-details
         ></v-select>
       </v-sheet>
@@ -20,7 +20,7 @@
           v-model="today"
           :events="events"
           color="primary"
-          type="week"
+          view-mode="week"
         ></v-calendar>
       </v-sheet>
     </v-col>

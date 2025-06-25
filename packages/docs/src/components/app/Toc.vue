@@ -38,7 +38,7 @@
         >
           <a
             :href="href"
-            class="v-toc-link d-block transition-swing text-decoration-none"
+            class="v-toc-link d-block text-decoration-none"
             @click.prevent.stop="onClick(to)"
             v-text="text"
           />
@@ -62,11 +62,12 @@
             <v-col
               v-for="sponsor of sponsors"
               :key="sponsor.slug"
+              :cols="sponsor.metadata.tier === -2 ? 12 : 6"
               class="d-inline-flex"
             >
               <sponsor-card
                 :color="dark ? undefined : 'grey-lighten-5'"
-                :max-height="sponsor.metadata.tier === -1 ? 52 : 40"
+                :max-height="sponsor.metadata.tier === -2 ? 52 : 40"
                 :sponsor="sponsor"
               />
             </v-col>
@@ -102,14 +103,11 @@
           </v-col>
 
           <v-col
-            v-if="(!user.disableAds || (user.showHouseAds && spot.spot.sponsor === 'Vuetify')) && spot.spot"
+            v-if="spot.spot && (!user.disableAds || (user.showHouseAds && spot.spot.sponsor === 'Vuetify'))"
             cols="12"
           >
             <a
-              :data-umami-event-value="spot.spot.sponsor"
               :href="spot.spot.href"
-              data-umami-event="toc"
-              data-umami-event-type="promotion"
               rel="noopener noreferrer sponsored"
               target="_blank"
               @click="gtagClick('toc', 'promotion', spot.spot.sponsor)"
@@ -134,7 +132,7 @@
   const frontmatter = useFrontmatter()
 
   const activeStack = [] as string[]
-  const activeItem = ref('')
+  const activeItem = shallowRef('')
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {

@@ -20,7 +20,7 @@ meta:
 
 🖊️ John Leider • 📅 September 8th, 2024
 
-<VoPromotionsCardVuetify />
+<PromotedEntry />
 
 ---
 

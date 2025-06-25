@@ -1,0 +1,13 @@
+diff --git a/vue-gtag-next.d.ts b/vue-gtag-next.d.ts
+index 8953d7f756d7347f0c767c188d0aa49e17ec99e2..1d338c7610ee7646e0512964a5f2d8805dd6a544 100644
+--- a/vue-gtag-next.d.ts
++++ b/vue-gtag-next.d.ts
+@@ -309,7 +309,7 @@ declare module 'vue-gtag-next' {
+     static install(app: App, options: Options): void;
+   }
+ 
+-  module '@vue/runtime-core' {
++  module 'vue' {
+     interface ComponentCustomProperties {
+       $gtag: VueGtag;
+     }

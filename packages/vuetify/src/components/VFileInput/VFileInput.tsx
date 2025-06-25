@@ -5,7 +5,7 @@ import './VFileInput.sass'
 import { VChip } from '@/components/VChip'
 import { VCounter } from '@/components/VCounter'
 import { VField } from '@/components/VField'
-import { filterFieldProps, makeVFieldProps } from '@/components/VField/VField'
+import { makeVFieldProps } from '@/components/VField/VField'
 import { makeVInputProps, VInput } from '@/components/VInput/VInput'
 
 // Composables
@@ -155,6 +155,16 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
         callEvent(props['onClick:clear'], e)
       })
     }
+    function onDragover (e: DragEvent) {
+      e.preventDefault()
+    }
+    function onDrop (e: DragEvent) {
+      e.preventDefault()
+
+      if (!e.dataTransfer) return
+
+      model.value = [...e.dataTransfer.files ?? []]
+    }
 
     watch(model, newValue => {
       const hasModelReset = !Array.isArray(newValue) || !newValue.length
@@ -169,12 +179,12 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
       const hasDetails = !!(hasCounter || slots.details)
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
       const { modelValue: _, ...inputProps } = VInput.filterProps(props)
-      const fieldProps = filterFieldProps(props)
+      const fieldProps = VField.filterProps(props)
 
       return (
         <VInput
           ref={ vInputRef }
-          v-model={ model.value }
+          modelValue={ props.multiple ? model.value : model.value[0] }
           class={[
             'v-file-input',
             {
@@ -215,6 +225,8 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
                 disabled={ isDisabled.value }
                 focused={ isFocused.value }
                 error={ isValid.value === false }
+                onDragover={ onDragover }
+                onDrop={ onDrop }
               >
                 {{
                   ...slots,

@@ -1,0 +1,15 @@
+{
+  "props": {
+    "controlVariant": "The color of the control. It defaults to the value of `variant` prop.",
+    "hideInput": "Hide the input field.",
+    "inset": "Applies an indentation to the dividers used in the stepper buttons.",
+    "max": "Specifies the maximum allowable value for the input.",
+    "min": "Specifies the minimum allowable value for the input.",
+    "precision": "Enforces strict precision. It is expected to be an integer value in range between `0` and `15`, or null for unrestricted.",
+    "step": "Defines the interval between allowed values when the user increments or decrements the input"
+  },
+  "slots": {
+    "decrement": "Slot for customizing the decrement button or icon used to decrease the value of the input.",
+    "increment": "Slot for customizing the increment button or icon used to increase the value of the input."
+  }
+}

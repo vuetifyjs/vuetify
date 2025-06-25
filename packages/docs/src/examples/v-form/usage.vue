@@ -67,7 +67,7 @@
         value => {
           if (value) return true
 
-          return 'E-mail is requred.'
+          return 'E-mail is required.'
         },
         value => {
           if (/.+@.+\..+/.test(value)) return true

@@ -7,7 +7,8 @@
     "prefix": "Displays prefix text.",
     "rows": "Default row count.",
     "suffix": "Displays suffix text.",
-    "maxRows": "Specifies the maximum number of rows for **auto-grow**."
+    "maxRows": "Specifies the maximum number of rows for **auto-grow**.",
+    "autofocus": "The element should be focused as soon as the page loads."
   },
   "events": {
     "keydown": "Emitted when **any** key is pressed, textarea must be focused.",

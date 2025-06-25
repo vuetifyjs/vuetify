@@ -6,19 +6,19 @@
 
 @mixin background-color($color_value) {
   & {
-    background-color: $color_value !important;
+    background-color: $color_value;
   }
 }
 @mixin text-color($color_value) {
   & {
-    color: $color_value !important;
+    color: $color_value;
   }
 }
 @mixin background-text-color($color_name, $color_type) {
   $map_value: map-deep-get(colors.$text-on-colors, $color_name, $color_type);
 
   & {
-    color: $map_value !important;
+    color: $map_value;
   }
 }
 

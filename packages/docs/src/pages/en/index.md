@@ -45,3 +45,5 @@ Check out these beautiful apps, plugins, and themes built using Vuetify.{style="
 <br>
 <br>
 <br>
+
+<HomeEpicmaxSupport />

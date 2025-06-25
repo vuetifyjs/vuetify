@@ -5,13 +5,14 @@ on:
 
 jobs:
   triage:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
       - uses: vuetifyjs/triage-action@master
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           triageLabel: 'S: triage'
+          staleLabel: 'S: stale'
           sponsorsFile: '.github/sponsors.yml'
           duplicateLabel: 'duplicate'
           triagedLabels: |-

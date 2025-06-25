@@ -54,6 +54,7 @@
     "activeIcon": "mdi-palette",
     "items": [
       "css-reset",
+      "layers",
       "transitions",
       "colors",
       { "divider": true },
@@ -74,6 +75,19 @@
       "sizing",
       "spacing",
       "text-and-typography"
+    ]
+  },
+  {
+    "title": "concepts",
+    "emphasized": true,
+    "inactiveIcon": "mdi-puzzle-outline",
+    "activeIcon": "mdi-puzzle",
+    "items": [
+      "density-and-sizing",
+      "items",
+      "routing",
+      "v-model",
+      "variants"
     ]
   },
   {
@@ -124,6 +138,7 @@
       "file-inputs",
       "forms",
       "inputs",
+      "number-inputs",
       "otp-input",
       "radio-buttons",
       "range-sliders",
@@ -179,6 +194,7 @@
       "ratings",
       "skeleton-loaders",
       "snackbars",
+      "snackbar-queue",
       "timelines",
       { "divider": true },
       { "subheader": "images-and-icons" },
@@ -238,15 +254,15 @@
         "subfolder": "components"
       },
       {
-        "title": "number-inputs",
+        "title": "file-upload",
+        "subfolder": "components"
+      },
+      {
+        "title": "icon-buttons",
         "subfolder": "components"
       },
       {
         "title": "pull-to-refresh",
-        "subfolder": "components"
-      },
-      {
-        "title": "snackbar-queue",
         "subfolder": "components"
       },
       {
@@ -260,6 +276,10 @@
       {
         "title": "treeview",
         "subfolder": "components"
+      },
+      {
+        "title": "rules",
+        "subfolder": "features"
       }
     ]
   },

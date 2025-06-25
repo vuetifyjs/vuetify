@@ -118,7 +118,7 @@ const onRE = /^on[^a-z]/
 export const isOn = (key: string) => onRE.test(key)
 export const eventName = (name: string) => name.slice(2, 3).toLowerCase() + name.slice(3)
 
-export function propsToString (props: Record<string, any>, indent = 1, bound: string[] = []) {
+export function propsToString (props: Record<string, any>, bound: string[] = [], indent = 1) {
   const displayedProps =
     Object.entries(props)
       .filter(([k, v]) => v !== undefined)

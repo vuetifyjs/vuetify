@@ -15,9 +15,9 @@ $field-max-width: 100% !default;
 $field-transition-timing: .15s settings.$standard-easing !default;
 $field-subtle-transition-timing: 250ms settings.$standard-easing !default;
 $field-underlined-margin-bottom: 4px !default;
-$field-clearable-margin: 4px !default;
 $field-clearable-transition: .15s opacity, .15s width settings.$standard-easing !default;
 $field-chip-height: 24px !default;
+$field-gap: 6px !default;
 
 // CONTROL
 $field-control-solo-background: rgb(var(--v-theme-surface)) !default;
@@ -42,7 +42,7 @@ $field-input-min-height: #{max(
   var(--v-input-control-height, $input-control-height),
   calc($input-font-size * $input-line-height + var(--v-field-input-padding-top) + var(--v-field-input-padding-bottom))
 )} !default;
-$field-input-padding-top: calc(var(--v-field-padding-top, $field-control-padding-top) + var(--v-input-padding-top, 0)) !default;
+$field-input-padding-top: calc(var(--v-field-padding-top, $field-control-padding-top) + var(--v-input-padding-top, 0px)) !default;
 $field-input-padding-bottom: var(--v-field-padding-bottom, $field-control-padding-bottom) !default;
 $field-input-column-gap: 2px !default;
 $field-input-row-gap: 8px !default;

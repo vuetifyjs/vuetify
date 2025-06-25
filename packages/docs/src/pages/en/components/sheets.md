@@ -12,13 +12,12 @@ features:
   github: /components/VSheet/
   label: 'C: VSheet'
   report: true
+  spec: https://m2.material.io/design/environment/elevation.html
 ---
 
 # Sheets
 
 The `v-sheet` component is a transformable piece of _paper_ that provides a basic foundation for Vuetify features.
-
-![Sheet Entry](https://cdn.vuetifyjs.com/docs/images/components/v-sheet/v-sheet-entry.png)
 
 <PageFeatures />
 
@@ -58,7 +57,7 @@ Some of the standard props that can be applied to the `v-sheet` component are li
 
 #### Elevation
 
-The `v-sheet` component accepts a custom elevation between **0** and **24** (0 is default). The _elevation_ property modifies the `box-shadow` property. More information is located in the MD [Elevation Design Specification](https://material.io/design/environment/elevation.html).
+The `v-sheet` component accepts a custom elevation between **0** and **24** (0 is default). The _elevation_ property modifies the `box-shadow` property.
 
 <ExamplesExample file="v-sheet/prop-elevation" />
 

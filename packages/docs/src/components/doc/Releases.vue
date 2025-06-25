@@ -40,11 +40,11 @@
 
       <template #item="{ item, props: itemProps }">
         <v-list-item
-          v-if="item?.title"
+          v-if="item.name"
           v-bind="itemProps"
         >
-          <template v-if="item.raw?.reactions" #append>
-            {{ genEmoji(item.raw.reactions.total_count) }}
+          <template v-if="item.reactions" #append>
+            {{ genEmoji(item.reactions.total_count) }}
           </template>
         </v-list-item>
 
@@ -182,9 +182,9 @@
   const router = useRouter()
   const store = useReleasesStore()
 
-  const autocomplete = ref()
-  const clicked = ref('copy-link')
-  const model = ref<Release>()
+  const autocomplete = shallowRef()
+  const clicked = shallowRef('copy-link')
+  const model = shallowRef<Release>()
   const search = shallowRef('')
   let timeout = -1 as any
 

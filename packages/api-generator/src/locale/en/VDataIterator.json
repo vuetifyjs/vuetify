@@ -43,6 +43,7 @@
     "input": "Array of selected items.",
     "itemExpanded": "Event emitted when an item is expanded or closed.",
     "itemSelected": "Event emitted when an item is selected or deselected.",
+    "update:currentItems": "The `.sync` event for `currentItems` prop.",
     "update:expanded": "The `.sync` event for `expanded` prop.",
     "update:groupBy": "The `.sync` event for `groupBy` prop.",
     "update:itemsPerPage": "The `.sync` event for `itemsPerPage` prop.",

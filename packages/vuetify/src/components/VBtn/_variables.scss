@@ -27,7 +27,7 @@ $button-font-size: tools.map-deep-get(settings.$typography, 'button', 'size') !d
 $button-font-weight: tools.map-deep-get(settings.$typography, 'button', 'weight') !default;
 $button-height: 36px !default;
 $button-stacked-height: 72px !default;
-$button-stacked-icon-margin: 4px !default;
+$button-stacked-gap: 4px !default;
 $button-icon-border-radius: map.get(settings.$rounded, 'circle') !default;
 $button-icon-font-size: 1rem !default;
 $button-line-height: normal !default;

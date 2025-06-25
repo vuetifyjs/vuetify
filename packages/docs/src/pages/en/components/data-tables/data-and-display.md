@@ -26,11 +26,11 @@ The data table exposes a **search** prop that allows you to filter your data.
 
 <ExamplesExample file="v-data-table/prop-search" />
 
-### Filterable
+### Filter Keys
 
-You can easily disable specific columns from being included when searching through table rows by setting the property **filterable** to false on the header item(s). In the example below the dessert name column is no longer searchable.
+You can easily select only the column you want to filter on by using the **filter-keys** prop. This prop accepts an array of keys from the table items that will be used for filtering. You may also choose to disable columns from filtering by setting the **filter** property to `false` on the header item(s). In the example below the we only filter on the `name` column.
 
-<ExamplesExample file="v-data-table/prop-filterable" />
+<ExamplesExample file="v-data-table/prop-filter-keys" />
 
 ### Custom filter
 
@@ -40,7 +40,7 @@ You can override the default filtering used with the **search** prop by supplyin
 (value: string, query: string, item?: any) => boolean | number | [number, number] | [number, number][]
 ```
 
-In the example below, the custom filter will only match inputs that are in completely in upper case.
+Additionally, you may apply customize the filtering on a per column basis by setting custom function to the **filter** property on the header item(s). In the example below, the custom filter will only match inputs that are in completely in upper case.
 
 <ExamplesExample file="v-data-table/prop-custom-filter" />
 
@@ -122,11 +122,7 @@ Using the **multi-sort** prop will enable you to sort on multiple columns at the
 
 ### Sort by raw
 
-::: success
-
-This feature was introduced in [v3.5.0 (Polaris)](/getting-started/release-notes/?version=v3.5.0)
-
-:::
+<DocIntroduced version="3.5.0" />
 
 Using a *sortRaw* key in your headers object gives you access to all values on the item. This is useful if you want to sort by a value that is not displayed in the table or a combination of multiple values.
 

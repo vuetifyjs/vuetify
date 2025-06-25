@@ -26,6 +26,10 @@
     &--absolute
       display: flex
 
+    &--absolute
+      position: absolute
+      inset: 0
+
     &--start,
     &--left
       justify-content: flex-start
@@ -45,19 +49,20 @@
       align-items: flex-start
 
     &--extended
-      .v-btn
-        // min-height: 56px
-        // min-width: 80px
-        border-radius: 9999px !important
+      @include tools.layer('overrides')
+        .v-btn
+          // min-height: 56px
+          // min-width: 80px
+          border-radius: 9999px
 
   .v-fab__container
     align-self: center
     display: inline-flex
-    position: absolute
     vertical-align: middle
 
     .v-fab--app &
       margin: 12px
+      position: fixed
 
     .v-fab--absolute &
       position: absolute

@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   nav: Avatars
   title: Avatar component
@@ -19,8 +18,6 @@ features:
 # Avatars
 
 The `v-avatar` component is typically used to display circular user profile pictures. This component will allow you to dynamically size and add a border radius of responsive images, icons, and text.  When **rounded** prop set to `0` will display an avatar without border radius.
-
-![Avatar Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-avatar/v-avatar-entry.png)
 
 <PageFeatures />
 

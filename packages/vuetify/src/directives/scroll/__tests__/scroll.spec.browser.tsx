@@ -29,7 +29,7 @@ describe('v-scroll', () => {
     const { callback, root } = setup()
 
     await scroll({ top: 100 })
-    expect(callback).toHaveBeenCalled()
+    expect(callback).toHaveBeenCalledTimes(1)
 
     callback.mockClear()
     await scroll({ top: 100 }, root)
@@ -40,7 +40,7 @@ describe('v-scroll', () => {
     const { callback, root } = setup('[data-testid="root"]')
 
     await scroll({ top: 100 }, root)
-    expect(callback).toHaveBeenCalled()
+    expect(callback).toHaveBeenCalledTimes(1)
 
     callback.mockClear()
     await scroll({ top: 100 })

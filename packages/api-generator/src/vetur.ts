@@ -1,4 +1,4 @@
-import fs from 'fs'
+import fs from 'node:fs'
 import { kebabCase } from './helpers/text'
 import type { ComponentData } from './types'
 

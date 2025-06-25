@@ -1,8 +1,8 @@
 // Utilities
-import { computed, nextTick, ref, watch } from 'vue'
+import { computed, nextTick, ref, useId, watch } from 'vue'
 import { makeLineProps } from './util/line'
 import { genPath as _genPath } from './util/path'
-import { genericComponent, getPropertyFromItem, getUid, propsFactory, useRender } from '@/util'
+import { genericComponent, getPropertyFromItem, propsFactory, useRender } from '@/util'
 
 // Types
 export type VTrendlineSlots = {
@@ -42,7 +42,7 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
   props: makeVTrendlineProps(),
 
   setup (props, { slots }) {
-    const uid = getUid()
+    const uid = useId()
     const id = computed(() => props.id || `trendline-${uid}`)
     const autoDrawDuration = computed(() => Number(props.autoDrawDuration) || (props.fill ? 500 : 2000))
 
@@ -149,9 +149,11 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
     }, { immediate: true })
 
     function genPath (fill: boolean) {
+      const smoothValue = typeof props.smooth === 'boolean' ? (props.smooth ? 8 : 0) : Number(props.smooth)
+
       return _genPath(
         genPoints(items.value, boundary.value),
-        props.smooth ? 8 : Number(props.smooth),
+        smoothValue,
         fill,
         parseInt(props.height, 10)
       )

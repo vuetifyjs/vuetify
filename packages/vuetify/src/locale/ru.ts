@@ -2,7 +2,7 @@ export default {
   badge: 'Знак',
   open: 'Открыть',
   close: 'Закрыть',
-  dismiss: 'Dismiss',
+  dismiss: 'Отклонить',
   confirmEdit: {
     ok: 'ОК',
     cancel: 'Отмена',
@@ -57,7 +57,7 @@ export default {
   },
   calendar: {
     moreEvents: 'Еще {0}',
-    today: 'Today',
+    today: 'Сегодня',
   },
   input: {
     clear: 'Очистить {0}',
@@ -69,10 +69,15 @@ export default {
     counter: 'Файлов: {0}',
     counterSize: 'Файлов: {0} (всего {1})',
   },
+  fileUpload: {
+    title: 'Перетащите файлы сюда',
+    divider: 'или',
+    browse: 'Просмотр файлов',
+  },
   timePicker: {
     am: 'AM',
     pm: 'PM',
-    title: 'Select Time',
+    title: 'Выберите время',
   },
   pagination: {
     ariaLabel: {
@@ -98,5 +103,18 @@ export default {
   infiniteScroll: {
     loadMore: 'Загрузить ещё',
     empty: 'Больше нечего загружать',
+  },
+  rules: {
+    required: 'Это поле обязательно',
+    email: 'Пожалуйста, введите действительный email',
+    number: 'Это поле может содержать только цифры',
+    integer: 'Это поле может содержать только целые числа',
+    capital: 'Это поле может содержать только заглавные буквы',
+    maxLength: 'Вы должны ввести не более {0} символов',
+    minLength: 'Вы должны ввести не менее {0} символов',
+    strictLength: 'Длина введенного поля недействительна',
+    exclude: 'Символ {0} не разрешен',
+    notEmpty: 'Пожалуйста, выберите хотя бы одно значение',
+    pattern: 'Недопустимый формат',
   },
 }

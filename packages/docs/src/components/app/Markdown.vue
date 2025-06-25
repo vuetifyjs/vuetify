@@ -10,6 +10,7 @@
   import { compile } from '@vue/compiler-dom'
   import * as vue from 'vue'
 
+  import { VCode } from 'vuetify/components/VCode'
   import { VWindowItem } from 'vuetify/components/VWindow'
   import { VTab } from 'vuetify/components/VTabs'
   import AppMarkup from '@/components/app/Markup.vue'
@@ -125,6 +126,7 @@
   const template = computed(() => ({
     // These components are all used in markdown-it-rules
     components: {
+      VCode,
       VWindowItem,
       VTab,
       AppMarkup,
