@@ -8,7 +8,7 @@ import { makeDensityProps } from '@/composables/density'
 import { IconValue } from '@/composables/icons'
 
 // Utilities
-import { computed, reactive, ref, toRaw } from 'vue'
+import { computed, mergeProps, reactive, ref, toRaw } from 'vue'
 import { genericComponent, propsFactory } from '@/util'
 
 // Types
@@ -51,6 +51,7 @@ export const makeVTreeviewChildrenProps = propsFactory({
   falseIcon: IconValue,
   trueIcon: IconValue,
   returnObject: Boolean,
+  activatable: Boolean,
   selectable: Boolean,
   selectedColor: String,
   selectStrategy: [String, Function, Object] as PropType<SelectStrategyProp>,
@@ -80,7 +81,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
       !props.disabled && (
         props.openOnClick != null
           ? props.openOnClick
-          : props.selectable
+          : props.selectable && !props.activatable
       )))
 
     async function checkChildren (item: InternalListItem) {

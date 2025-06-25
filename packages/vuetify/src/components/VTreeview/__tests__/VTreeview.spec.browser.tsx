@@ -76,7 +76,7 @@ describe.each([
         />
       ))
 
-      await userEvent.click(screen.getByText(/Human Resources/))
+      await userEvent.click(screen.getByText(/Administrators/))
       expect(activated.value).toStrictEqual([])
 
       await userEvent.click(screen.getByText(/John/))
@@ -98,7 +98,7 @@ describe.each([
         />
       ))
 
-      await userEvent.click(screen.getByText(/Human Resources/))
+      await userEvent.click(screen.getByText(/Administrators/))
       expect(activated.value).toStrictEqual([])
 
       await userEvent.click(screen.getByText(/John/))
@@ -120,16 +120,16 @@ describe.each([
         />
       ))
 
-      await userEvent.click(screen.getByText(/Human Resources/))
-      expect(activated.value).toStrictEqual([1])
-
-      await userEvent.click(screen.getByText(/Core team/))
-      expect(activated.value).toStrictEqual([1, 2])
+      await userEvent.click(screen.getByText(/Administrators/))
+      expect(activated.value).toStrictEqual([3])
 
       await userEvent.click(screen.getByText(/John/))
       await userEvent.click(screen.getByText(/Kael/))
       await userEvent.click(screen.getByText(/Nekosaur/))
-      expect(activated.value).toStrictEqual([1, 2, 201, 202, 203])
+      expect(activated.value).toStrictEqual([3, 201, 202, 203])
+
+      await userEvent.click(screen.getByText(/Core team/))
+      expect(activated.value).toStrictEqual([3, 201, 202, 203, 2])
     })
 
     it('single-independent strategy', async () => {
@@ -145,16 +145,16 @@ describe.each([
         />
       ))
 
-      await userEvent.click(screen.getByText(/Human Resources/))
-      expect(activated.value).toStrictEqual([1])
-
-      await userEvent.click(screen.getByText(/Core team/))
-      expect(activated.value).toStrictEqual([2])
+      await userEvent.click(screen.getByText(/Administrators/))
+      expect(activated.value).toStrictEqual([3])
 
       await userEvent.click(screen.getByText(/John/))
       await userEvent.click(screen.getByText(/Kael/))
       await userEvent.click(screen.getByText(/Nekosaur/))
       expect(activated.value).toStrictEqual([203])
+
+      await userEvent.click(screen.getByText(/Core team/))
+      expect(activated.value).toStrictEqual([2])
     })
 
     // https://github.com/vuetifyjs/vuetify/issues/20665

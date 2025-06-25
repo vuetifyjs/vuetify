@@ -13,7 +13,7 @@ import { IconValue } from '@/composables/icons'
 
 // Utilities
 import { computed, inject, ref, toRaw } from 'vue'
-import { genericComponent, omit, propsFactory, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import { VTreeviewSymbol } from './shared'
@@ -68,7 +68,7 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
     }
 
     useRender(() => {
-      const listItemProps = omit(VListItem.filterProps(props), ['onClick'])
+      const listItemProps = VListItem.filterProps(props)
       const hasPrepend = slots.prepend || props.toggleIcon
 
       return (
@@ -85,7 +85,7 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
             props.class,
           ]}
           ripple={ false }
-          onClick={ props.onClick ?? activateGroupActivator }
+          onClick={ activateGroupActivator }
         >
           {{
             ...slots,
