@@ -7,6 +7,7 @@ import { VBtn } from '@/components/VBtn'
 // Composables
 import { makeCalendarProps, useCalendar } from '@/composables/calendar'
 import { createDateRange, useDate } from '@/composables/date/date'
+import { useLocale } from '@/composables/locale'
 import { MaybeTransition } from '@/composables/transition'
 
 // Utilities
@@ -56,6 +57,7 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
 
   setup (props, { emit, slots }) {
     const daysRef = ref()
+    const { t } = useLocale()
 
     const { daysInMonth, model, weekNumbers, weekDays, weekdayLabels } = useCalendar(props)
     const adapter = useDate()
@@ -117,6 +119,17 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
         rangeStop.value = undefined
         model.value = [rangeStart.value]
       }
+    }
+
+    function getDateAriaLabel (item: any) {
+      // Format the date in a more accessible way using the built-in formats
+      const fullDateFormat = adapter.format(item.date, 'fullDateWithWeekday')
+
+      if (item.isToday) {
+        return t('$vuetify.datePicker.ariaLabel.currentDate', fullDateFormat)
+      }
+
+      return t('$vuetify.datePicker.ariaLabel.selectDate', fullDateFormat)
     }
 
     function onMultipleClick (value: unknown) {
@@ -187,6 +200,8 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
                   ripple: false,
                   text: item.localized,
                   variant: item.isSelected ? 'flat' : item.isToday ? 'outlined' : 'text',
+                  'aria-label': getDateAriaLabel(item),
+                  'aria-current': item.isToday ? 'date' : undefined,
                   onClick: () => onClick(item.date),
                 },
                 item,

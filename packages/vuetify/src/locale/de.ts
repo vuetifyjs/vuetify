@@ -46,6 +46,13 @@ export default {
     input: {
       placeholder: 'Datum eingeben',
     },
+    ariaLabel: {
+      previousMonth: 'Vorheriger Monat',
+      nextMonth: 'Nächster Monat',
+      selectYear: 'Jahr auswählen',
+      selectDate: '{0}',
+      currentDate: 'Heute, {0}',
+    },
   },
   noDataText: 'Keine Daten vorhanden',
   carousel: {
