@@ -6,6 +6,7 @@
     "closableChips": "Enables the [closable](/api/v-chip/#props-closable) prop on all [v-chip](/components/chips/) components.",
     "combobox": "The single select variant of **tags**.",
     "hideSelected": "Do not display in the select menu items that are already selected.",
+    "itemBg" : "Sets the background color of the item list container.",
     "itemColor": "Sets color of selected items.",
     "itemChildren": "This property currently has **no effect**.",
     "itemDisabled": "Set property of **items**'s disabled value.",
