@@ -21,6 +21,13 @@ $hotkey-inline-icon-max-height: calc(1ex + 2px) !default;
 $hotkey-inline-divider-font-size: 1em !default;
 
 $hotkey-contained-padding: 0.2rem 4px !default;
+$hotkey-contained-prefix-margin-right: 2px !default;
+$hotkey-contained-suffix-margin-left: 2px !default;
+
+// Prefix and suffix variables
+$hotkey-prefix-suffix-opacity: var(--v-medium-emphasis-opacity) !default;
+$hotkey-prefix-suffix-contained-opacity: var(--v-high-emphasis-opacity) !default;
+$hotkey-prefix-suffix-font-weight: normal !default;
 
 // Variant variables
 $hotkey-background: rgb(var(--v-theme-surface)) !default;

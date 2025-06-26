@@ -23,6 +23,19 @@
       line-height: $hotkey-inline-line-height;
     }
 
+    // Prefix and suffix elements
+    &__prefix {
+      opacity: $hotkey-prefix-suffix-opacity;
+      font-weight: $hotkey-prefix-suffix-font-weight;
+      vertical-align: baseline;
+    }
+
+    &__suffix {
+      opacity: $hotkey-prefix-suffix-opacity;
+      font-weight: $hotkey-prefix-suffix-font-weight;
+      vertical-align: baseline;
+    }
+
     // Contained variant
     &--contained {
       .v-hotkey__contained-wrapper {
@@ -36,6 +49,15 @@
         min-height: 1em; // Match VKbd min-height exactly
         font-size: $hotkey-font-size;
         line-height: $hotkey-line-height;
+        .v-hotkey__prefix, .v-hotkey__suffix {
+          opacity: $hotkey-prefix-suffix-contained-opacity;
+        }
+        .v-hotkey__prefix {
+          margin-right: $hotkey-contained-prefix-margin-right;
+        }
+        .v-hotkey__suffix {
+          margin-left: $hotkey-contained-suffix-margin-left;
+        }
       }
 
       .v-hotkey__divider {
@@ -180,6 +202,12 @@
 
     &--inline &__divider {
       font-size: $hotkey-inline-divider-font-size;
+    }
+
+    &--inline &__prefix,
+    &--inline &__suffix {
+      align-self: baseline;
+      font-size: inherit;
     }
 
     // Variant-specific overrides

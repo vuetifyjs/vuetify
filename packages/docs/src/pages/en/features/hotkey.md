@@ -19,12 +19,16 @@ features:
 
 Provides a simple and powerful way to register keyboard shortcuts that work across different platforms and input contexts.
 
+::: info
+This is a new feature! Be sure to [report any issues you may encounter](https://issues.vuetifyjs.com/).
+:::
+
 <PageFeatures />
 
 <PromotedEntry />
 
 ::: warning
-This feature requires [v3.10.0](/getting-started/release-notes/?version=v3.10.0)
+This feature requires [v3.10.0](/getting-started/release-notes/?version=v3.10.0) and higher.
 :::
 
 ## Quick start

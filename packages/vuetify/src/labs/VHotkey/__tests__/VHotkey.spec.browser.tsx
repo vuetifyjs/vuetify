@@ -1696,23 +1696,5 @@ describe('VHotkey.tsx', () => {
       expect(keys[2]).toHaveTextContent('Shift')
       expect(keys[3]).toHaveTextContent('-')
     })
-
-    it('should render literal plus key correctly', () => {
-      render(() => <VHotkey keys="meta++" displayMode="text" />)
-
-      const keys = screen.getAllByCSS('.v-hotkey__key')
-      expect(keys).toHaveLength(2) // meta and +
-
-      const dividers = screen.getAllByCSS('.v-hotkey__divider')
-      expect(dividers).toHaveLength(1) // Only one separator
-      expect(dividers[0]).toHaveTextContent('+')
-
-      // Keys should be meta/ctrl (platform dependent) and +
-      const firstKeyText = keys[0].textContent?.toUpperCase()
-      expect(['META', 'CTRL', 'CMD', 'COMMAND']).toContain(firstKeyText)
-      expect(keys[1]).toHaveTextContent('+')
-    })
   })
-
-
 })

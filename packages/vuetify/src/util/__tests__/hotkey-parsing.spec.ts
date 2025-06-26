@@ -27,18 +27,26 @@ describe('hotkey-parsing.ts', () => {
 
     // Literal keys
     it('should handle single literal keys', () => {
-      expect(splitKeyCombination('+')).toEqual(['+'])
+      // '-' is the only reachable literal key
       expect(splitKeyCombination('-')).toEqual(['-'])
-      expect(splitKeyCombination('_')).toEqual(['_'])
+
+      // '+' and '_' are not reachable literal keys and should be invalid
+      expect(splitKeyCombination('+')).toEqual([])
+      expect('[Vue warn]: Vuetify: Invalid hotkey combination: "+" has invalid structure').toHaveBeenTipped()
+
+      expect(splitKeyCombination('_')).toEqual([])
+      expect('[Vue warn]: Vuetify: Invalid hotkey combination: "_" has invalid structure').toHaveBeenTipped()
     })
 
     // Combinations with doubled literals
-    it('should handle doubled literal +', () => {
-      expect(splitKeyCombination('ctrl++')).toEqual(['ctrl', '+'])
+    it('should treat doubled literal + as invalid', () => {
+      expect(splitKeyCombination('ctrl++')).toEqual([])
+      expect('[Vue warn]: Vuetify: Invalid hotkey combination: "ctrl++" has invalid structure').toHaveBeenTipped()
     })
 
-    it('should handle doubled literal _', () => {
-      expect(splitKeyCombination('ctrl__')).toEqual(['ctrl', '_'])
+    it('should treat doubled literal _ as invalid', () => {
+      expect(splitKeyCombination('ctrl__')).toEqual([])
+      expect('[Vue warn]: Vuetify: Invalid hotkey combination: "ctrl__" has invalid structure').toHaveBeenTipped()
     })
 
     it('should handle doubled literal -', () => {
@@ -79,8 +87,9 @@ describe('hotkey-parsing.ts', () => {
     })
 
     // Combinations starting with doubled literal separators
-    it('should handle combinations that start with doubled + literal', () => {
-      expect(splitKeyCombination('++k')).toEqual(['+', 'k'])
+    it('should treat combinations starting with doubled + literal as invalid', () => {
+      expect(splitKeyCombination('++k')).toEqual([])
+      expect('[Vue warn]: Vuetify: Invalid hotkey combination: "++k" has invalid structure').toHaveBeenTipped()
     })
   })
 
@@ -89,6 +98,10 @@ describe('hotkey-parsing.ts', () => {
     it('should split simple sequences', () => {
       expect(splitKeySequence('a-b')).toEqual(['a', 'b'])
       expect(splitKeySequence('g-g')).toEqual(['g', 'g'])
+    })
+
+    it('should handle ctrl-b as a valid sequence', () => {
+      expect(splitKeySequence('ctrl-b')).toEqual(['ctrl', 'b'])
     })
 
     it('should handle long sequences', () => {
@@ -115,15 +128,17 @@ describe('hotkey-parsing.ts', () => {
     })
 
     it('should correctly parse --+', () => {
-      expect(splitKeySequence('--+')).toEqual(['-', '+'])
+      expect(splitKeySequence('--+')).toEqual([])
+      expect('[Vue warn]: Vuetify: Invalid hotkey sequence: "--+" contains invalid combinations').toHaveBeenTipped()
     })
 
     it('should correctly parse ---', () => {
       expect(splitKeySequence('---')).toEqual(['-', '-'])
     })
 
-    it('should correctly parse shift---alt++', () => {
-      expect(splitKeySequence('shift---alt++')).toEqual(['shift', '-', 'alt++'])
+    it('should treat shift---alt++ as invalid', () => {
+      expect(splitKeySequence('shift---alt++')).toEqual([])
+      expect('[Vue warn]: Vuetify: Invalid hotkey sequence: "shift---alt++" contains invalid combinations').toHaveBeenTipped()
     })
 
     // Invalid sequences
@@ -148,23 +163,22 @@ describe('hotkey-parsing.ts', () => {
     })
 
     // Sequences with combinations that start with doubled literal
-    it('should correctly parse cmd+shift-++k sequence', () => {
-      expect(splitKeySequence('cmd+shift-++k')).toEqual(['cmd+shift', '++k'])
+    it('should treat cmd+shift-++k as invalid', () => {
+      expect(splitKeySequence('cmd+shift-++k')).toEqual([])
+      expect('[Vue warn]: Vuetify: Invalid hotkey sequence: "cmd+shift-++k" contains invalid combinations').toHaveBeenTipped()
     })
 
-    it('should correctly parse cmd+shift++-k sequence', () => {
-      expect(splitKeySequence('cmd+shift++-k')).toEqual(['cmd+shift++', 'k'])
-
-      const parts = splitKeyCombination('cmd+shift++')
-      expect(parts).toEqual(['cmd', 'shift', '+'])
+    it('should treat cmd+shift++-k as invalid', () => {
+      expect(splitKeySequence('cmd+shift++-k')).toEqual([])
+      expect('[Vue warn]: Vuetify: Invalid hotkey sequence: "cmd+shift++-k" contains invalid combinations').toHaveBeenTipped()
     })
   })
 
   describe('integration tests', () => {
     it('should correctly parse a complex sequence', () => {
-      const sequence = 'ctrl+shift+a-alt+--k-+'
+      const sequence = 'ctrl+shift+a-alt+--k'
       const combinations = splitKeySequence(sequence)
-      expect(combinations).toEqual(['ctrl+shift+a', 'alt+-', 'k', '+'])
+      expect(combinations).toEqual(['ctrl+shift+a', 'alt+-', 'k'])
 
       const first = splitKeyCombination(combinations[0])
       expect(first).toEqual(['ctrl', 'shift', 'a'])
@@ -174,9 +188,6 @@ describe('hotkey-parsing.ts', () => {
 
       const third = splitKeyCombination(combinations[2])
       expect(third).toEqual(['k'])
-
-      const fourth = splitKeyCombination(combinations[3])
-      expect(fourth).toEqual(['+'])
     })
   })
 })

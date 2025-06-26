@@ -19,7 +19,7 @@ const KEY_ALIASES: Record<string, string> = {
  * Splits a single combination string into individual key parts.
  *
  * A combination is a set of keys that must be pressed simultaneously.
- * e.g. `ctrl+k`, `shift--`, `alt++`
+ * e.g. `ctrl+k`, `shift--`
  */
 export function splitKeyCombination (combination: string, isInternal = false): string[] {
   if (!combination) {
@@ -39,6 +39,9 @@ export function splitKeyCombination (combination: string, isInternal = false): s
   const hasInvalidStructure = (
     // Invalid leading separator patterns
     (combination.length > 1 && hasInvalidLeadingSeparator) ||
+    // Disallow literal + or _ keys (they require shift)
+    combination.includes('++') || combination.includes('__') ||
+    combination === '+' || combination === '_' ||
     // Ends with a separator that is not part of a doubled literal
     (combination.length > 1 && (combination.endsWith('+') || combination.endsWith('_')) && combination.at(-2) !== combination.at(-1)) ||
     // Stand-alone doubled separators (dangling)
@@ -80,8 +83,8 @@ export function splitKeyCombination (combination: string, isInternal = false): s
   }
   flushBuffer()
 
-  // Combinations like `ctrl-b` are not valid, `-` is a sequence separator.
-  // `-` is only a valid key if it's on its own.
+  // Within a combination, `-` is only valid as a literal key (e.g., `ctrl+-`).
+  // `-` cannot be part of a longer key name within a combination.
   const hasInvalidMinus = keys.some(key => key.length > 1 && key.includes('-') && key !== '--')
   if (hasInvalidMinus) {
     if (!isInternal) consoleWarn(`Invalid hotkey combination: "${combination}" has invalid structure`)

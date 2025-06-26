@@ -195,6 +195,8 @@ export const makeVHotkeyProps = propsFactory({
   inline: Boolean,
   // Disabled state
   disabled: Boolean,
+  prefix: String,
+  suffix: String,
 
   ...makeComponentProps(),
   ...makeThemeProps(),
@@ -453,6 +455,7 @@ export const VHotkey = genericComponent()({
         { isContainedVariant.value ? (
           // Contained variant: Single VKbd wrapper with nested content
           <VKbd
+            key="contained"
             class={[
               'v-hotkey__contained-wrapper',
               borderClasses.value,
@@ -463,6 +466,9 @@ export const VHotkey = genericComponent()({
             style={ colorStyles.value }
             aria-hidden="true"
           >
+            { props.prefix && (
+              <span key="contained-prefix" class="v-hotkey__prefix">{ props.prefix }</span>
+            )}
             { keyCombinations.value.map((combination, comboIndex) => (
               <span class="v-hotkey__combination" key={ comboIndex }>
                 { combination.map((key, keyIndex) =>
@@ -473,19 +479,29 @@ export const VHotkey = genericComponent()({
                 { comboIndex < keyCombinations.value.length - 1 && <span aria-hidden="true">&nbsp;</span> }
               </span>
             ))}
+            { props.suffix && (
+              <span key="contained-suffix" class="v-hotkey__suffix">{ props.suffix }</span>
+            )}
           </VKbd>
         ) : (
-          // Standard variants: Individual VKbd elements
-          keyCombinations.value.map((combination, comboIndex) => (
-            <span class="v-hotkey__combination" key={ comboIndex }>
-              { combination.map((key, keyIndex) =>
-                isDelineator(key)
-                  ? renderDivider(key, keyIndex)
-                  : renderKey(key, keyIndex, false)
-              )}
-              { comboIndex < keyCombinations.value.length - 1 && <span aria-hidden="true">&nbsp;</span> }
-            </span>
-          ))
+          <>
+            { props.prefix && (
+              <span key="prefix" class="v-hotkey__prefix">{ props.prefix }</span>
+            )}
+            { keyCombinations.value.map((combination, comboIndex) => (
+              <span class="v-hotkey__combination" key={ comboIndex }>
+                { combination.map((key, keyIndex) =>
+                  isDelineator(key)
+                    ? renderDivider(key, keyIndex)
+                    : renderKey(key, keyIndex, false)
+                )}
+                { comboIndex < keyCombinations.value.length - 1 && <span aria-hidden="true">&nbsp;</span> }
+              </span>
+            ))}
+            { props.suffix && (
+              <span key="suffix" class="v-hotkey__suffix">{ props.suffix }</span>
+            )}
+          </>
         )}
       </div>
     ))
