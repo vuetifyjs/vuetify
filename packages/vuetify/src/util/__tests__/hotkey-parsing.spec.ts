@@ -119,6 +119,8 @@ describe('hotkey-parsing.ts', () => {
       expect(splitKeyCombination('esc')).toEqual(['escape'])
       expect(splitKeyCombination('return')).toEqual(['enter'])
       expect(splitKeyCombination('del')).toEqual(['delete'])
+      expect(splitKeyCombination('space')).toEqual([' '])
+      expect(splitKeyCombination('spacebar')).toEqual([' '])
 
       // Symbol aliases
       expect(splitKeyCombination('minus')).toEqual(['-'])

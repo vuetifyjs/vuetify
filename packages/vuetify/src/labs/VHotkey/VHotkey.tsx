@@ -150,7 +150,7 @@ export const hotkeyMap: KeyMapConfig = {
   escape: {
     default: { text: '$vuetify.hotkey.escape' },
   },
-  space: {
+  ' ': {
     mac: { symbol: '␣', icon: '$space', text: '$vuetify.hotkey.space' },
     default: { text: '$vuetify.hotkey.space' },
   },

@@ -19,9 +19,9 @@
               </thead>
               <tbody>
                 <tr>
-                  <td><v-hotkey keys="cmd+k-p"></v-hotkey></td>
+                  <td><v-hotkey keys="ctrl+x-p"></v-hotkey></td>
                   <td>Command Palette</td>
-                  <td>Press Cmd+K, then P (within timeout)</td>
+                  <td>Press Ctrl+X, then P (within timeout)</td>
                 </tr>
                 <tr>
                   <td><v-hotkey keys="g-g"></v-hotkey></td>
@@ -107,7 +107,7 @@
 
     // Register key sequences with current timeout
     cleanupFunctions.value.push(
-      useHotkey('cmd+k-p', () => {
+      useHotkey('ctrl+x-p', () => {
         addMessage('🎨 Command Palette opened!')
       }, { sequenceTimeout: sequenceTimeout.value })
     )

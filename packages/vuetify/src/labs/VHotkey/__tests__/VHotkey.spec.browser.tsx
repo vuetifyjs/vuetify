@@ -97,8 +97,6 @@ describe('VHotkey.tsx', () => {
       expect(dividers).toHaveLength(4)
     })
 
-
-
     it('should handle "then" keyword in key combinations correctly', () => {
       render(() => <VHotkey keys="meta+k-z" displayMode="text" />)
 
@@ -1695,6 +1693,66 @@ describe('VHotkey.tsx', () => {
       expect(keys[1]).toHaveTextContent('A')
       expect(keys[2]).toHaveTextContent('Shift')
       expect(keys[3]).toHaveTextContent('-')
+    })
+  })
+
+  describe('Space Key Rendering', () => {
+    it('should render the word "Space" in text mode, not an empty character', () => {
+      render(() => <VHotkey keys="ctrl+space" displayMode="text" />)
+
+      const keys = screen.getAllByCSS('.v-hotkey__key')
+      const spaceKey = keys.find(key => key.textContent?.match(/space/i))
+
+      expect(spaceKey).toBeInTheDocument()
+      expect(spaceKey).toHaveTextContent(/space/i)
+      expect(spaceKey?.textContent?.trim()).not.toBe('')
+    })
+
+    it('should render an icon for space on Mac in icon mode', () => {
+      render(() => <VHotkey keys="ctrl+space" displayMode="icon" platform="mac" />)
+
+      const keys = screen.getAllByCSS('.v-hotkey__key')
+      // ctrl, space
+      expect(keys).toHaveLength(2)
+
+      // The key for 'space' should be an icon
+      const spaceKey = keys[1]
+      expect(spaceKey).toHaveClass('v-hotkey__key-icon')
+      expect(spaceKey.querySelector('.v-icon')).toBeInTheDocument()
+    })
+
+    it('should fall back to text for space on PC in icon mode', () => {
+      render(() => <VHotkey keys="ctrl+space" displayMode="icon" platform="pc" />)
+
+      const keys = screen.getAllByCSS('.v-hotkey__key')
+      expect(keys).toHaveLength(2)
+
+      const spaceKey = keys[1]
+      expect(spaceKey).toHaveClass('v-hotkey__key-text')
+      expect(spaceKey).toHaveTextContent(/space/i)
+      expect(spaceKey.querySelector('.v-icon')).not.toBeInTheDocument()
+    })
+
+    it('should render the symbol for space on Mac in symbol mode', () => {
+      render(() => <VHotkey keys="ctrl+space" displayMode="symbol" platform="mac" />)
+
+      const keys = screen.getAllByCSS('.v-hotkey__key')
+      expect(keys).toHaveLength(2)
+
+      const spaceKey = keys[1]
+      expect(spaceKey).toHaveClass('v-hotkey__key-symbol')
+      expect(spaceKey).toHaveTextContent('␣')
+    })
+
+    it('should fall back to text for space on PC in symbol mode', () => {
+      render(() => <VHotkey keys="ctrl+space" displayMode="symbol" platform="pc" />)
+
+      const keys = screen.getAllByCSS('.v-hotkey__key')
+      expect(keys).toHaveLength(2)
+
+      const spaceKey = keys[1]
+      expect(spaceKey).toHaveClass('v-hotkey__key-text')
+      expect(spaceKey).toHaveTextContent(/space/i)
     })
   })
 })

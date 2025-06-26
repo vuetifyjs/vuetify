@@ -8,10 +8,10 @@ import { splitKeyCombination, splitKeySequence } from '@/util/hotkey-parsing'
 import type { MaybeRef } from '@/util'
 
 interface HotkeyOptions {
-  event?: 'keydown' | 'keyup'
-  inputs?: boolean
-  preventDefault?: boolean
-  sequenceTimeout?: number
+  event?: MaybeRef<'keydown' | 'keyup'>
+  inputs?: MaybeRef<boolean>
+  preventDefault?: MaybeRef<boolean>
+  sequenceTimeout?: MaybeRef<number>
 }
 
 export function useHotkey (
@@ -42,7 +42,7 @@ export function useHotkey (
   }
 
   function isInputFocused () {
-    if (inputs) return false
+    if (toValue(inputs)) return false
 
     const activeElement = document.activeElement as HTMLElement
 
@@ -69,7 +69,7 @@ export function useHotkey (
       return
     }
 
-    if (preventDefault) e.preventDefault()
+    if (toValue(preventDefault)) e.preventDefault()
 
     if (!isSequence) {
       callback(e)
@@ -85,11 +85,11 @@ export function useHotkey (
       return
     }
 
-    timeout = window.setTimeout(resetSequence, sequenceTimeout)
+    timeout = window.setTimeout(resetSequence, toValue(sequenceTimeout))
   }
 
   function cleanup () {
-    window.removeEventListener(event, handler)
+    window.removeEventListener(toValue(event), handler)
     clearTimer()
   }
 
@@ -102,9 +102,17 @@ export function useHotkey (
       isSequence = groups.length > 1
       keyGroups = groups
       resetSequence()
-      window.addEventListener(event, handler)
+      window.addEventListener(toValue(event), handler)
     }
   }, { immediate: true })
+
+  // Watch for changes in the event type to re-register the listener
+  watch(() => toValue(event), function (newEvent, oldEvent) {
+    if (oldEvent && keyGroups && keyGroups.length > 0) {
+      window.removeEventListener(oldEvent, handler)
+      window.addEventListener(newEvent, handler)
+    }
+  })
 
   try {
     getCurrentInstance('useHotkey')

@@ -25,12 +25,14 @@
                 <v-switch
                   v-model="allowInInputs"
                   class="mb-3"
+                  color="primary"
                   label="Allow hotkeys in input fields"
                 ></v-switch>
 
                 <v-switch
                   v-model="preventDefault"
                   class="mb-3"
+                  color="primary"
                   label="Prevent default browser behavior"
                 ></v-switch>
 
@@ -61,12 +63,12 @@
                   </thead>
                   <tbody>
                     <tr>
-                      <td><v-hotkey keys="cmd+t"></v-hotkey></td>
+                      <td><v-hotkey keys="cmd+j"></v-hotkey></td>
                       <td>Test Basic Hotkey</td>
                       <td>Event: {{ eventType }}</td>
                     </tr>
                     <tr>
-                      <td><v-hotkey keys="cmd+k-t"></v-hotkey></td>
+                      <td><v-hotkey keys="ctrl+x-e"></v-hotkey></td>
                       <td>Test Sequence</td>
                       <td>Timeout: {{ sequenceTimeout }}ms</td>
                     </tr>
@@ -80,8 +82,8 @@
 
                 <v-text-field
                   v-model="testInput"
+                  :hint="allowInInputs ? 'Try pressing Enter or Cmd+J while focused here' : 'Hotkeys disabled in inputs - try pressing them outside this field'"
                   class="mt-4"
-                  hint="Try pressing Enter or Cmd+T while focused here"
                   label="Test Input Field"
                   persistent-hint
                 ></v-text-field>
@@ -155,7 +157,7 @@
   const messages = ref([])
   const testInput = ref('')
   const eventType = ref('keydown')
-  const allowInInputs = ref(false)
+  const allowInInputs = ref(true)
   const preventDefault = ref(true)
   const sequenceTimeout = ref(1000)
   const cleanupFunctions = ref([])
@@ -189,9 +191,9 @@
       sequenceTimeout: sequenceTimeout.value,
     }
 
-    // Basic hotkey with current options
+        // Basic hotkey with current options
     cleanupFunctions.value.push(
-      useHotkey('cmd+t', event => {
+      useHotkey('cmd+j', event => {
         const target = event.target?.tagName || 'unknown'
         addMessage(`🔧 Test hotkey (${eventType.value}) - Target: ${target}`)
       }, options)
@@ -199,7 +201,7 @@
 
     // Sequence with timeout
     cleanupFunctions.value.push(
-      useHotkey('cmd+k-t', () => {
+      useHotkey('ctrl+x-e', () => {
         addMessage(`⏱️ Sequence completed within ${sequenceTimeout.value}ms`)
       }, options)
     )
@@ -223,6 +225,6 @@
 
   // Cleanup on unmount
   onBeforeUnmount(() => {
-    cleanupFunctions.value.forEach(cleanup => cleanup())
-  })
-</script>
+      cleanupFunctions.value.forEach(cleanup => cleanup())
+    })
+  </script>

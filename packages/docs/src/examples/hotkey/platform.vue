@@ -46,14 +46,9 @@
                       <td>Always Ctrl, even on Mac</td>
                     </tr>
                     <tr>
-                      <td><v-hotkey keys="meta+space"></v-hotkey></td>
-                      <td>Spotlight/Search</td>
+                      <td><v-hotkey keys="meta+f"></v-hotkey></td>
+                      <td>Find in Page</td>
                       <td>{{ isMac ? 'Cmd on Mac' : 'Windows key on PC' }}</td>
-                    </tr>
-                    <tr>
-                      <td><v-hotkey keys="alt+tab"></v-hotkey></td>
-                      <td>Switch Apps</td>
-                      <td>{{ isMac ? 'Option+Tab on Mac' : 'Alt+Tab on PC' }}</td>
                     </tr>
                   </tbody>
                 </v-table>
@@ -97,10 +92,6 @@
                 <tr>
                   <td>cmd maps to</td>
                   <td>{{ isMac ? 'Meta key (⌘)' : 'Control key (Ctrl)' }}</td>
-                </tr>
-                <tr>
-                  <td>meta maps to</td>
-                  <td>{{ isMac ? 'Command key (⌘)' : 'Windows key' }}</td>
                 </tr>
               </tbody>
             </v-table>
@@ -165,11 +156,7 @@
     addMessage('🔘 Select All (explicit Ctrl+A)')
   })
 
-  useHotkey('meta+space', () => {
-    addMessage(`🔍 Search/Spotlight (${isMac.value ? 'Cmd' : 'Win'}+Space)`)
-  })
-
-  useHotkey('alt+tab', () => {
-    addMessage(`🔄 App Switcher (${isMac.value ? 'Option' : 'Alt'}+Tab)`)
+  useHotkey('meta+f', () => {
+    addMessage(`🔍 Find in Page (${isMac.value ? 'Cmd' : 'Win'}+F)`)
   })
 </script>

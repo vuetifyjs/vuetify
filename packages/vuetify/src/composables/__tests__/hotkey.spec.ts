@@ -3,7 +3,7 @@ import { useHotkey } from '../hotkey'
 
 // Utilities
 import { wait } from '@test'
-import { ref } from 'vue'
+import { ref, nextTick } from 'vue'
 
 describe('hotkey.ts', () => {
   const originalNavigator = window.navigator
@@ -633,5 +633,52 @@ describe('hotkey.ts', () => {
         stop()
       })
     })
+  })
+
+  it('reactive options', async () => {
+    const preventDefault = ref(false)
+    const inputs = ref(false)
+    const cb = vi.fn()
+
+    const stop = useHotkey('ctrl+a', cb, { preventDefault, inputs })
+
+    // Test with initial values
+    const event1 = new KeyboardEvent('keydown', { ctrlKey: true, key: 'a' })
+    Object.defineProperty(event1, 'preventDefault', { value: vi.fn() })
+
+    window.dispatchEvent(event1)
+    expect(cb).toHaveBeenCalledTimes(1)
+    expect(event1.preventDefault).not.toHaveBeenCalled()
+
+    // Change preventDefault to true
+    preventDefault.value = true
+    await nextTick()
+
+    const event2 = new KeyboardEvent('keydown', { ctrlKey: true, key: 'a' })
+    Object.defineProperty(event2, 'preventDefault', { value: vi.fn() })
+
+    window.dispatchEvent(event2)
+    expect(cb).toHaveBeenCalledTimes(2)
+    expect(event2.preventDefault).toHaveBeenCalled()
+
+    // Test inputs reactivity
+    const input = document.createElement('input')
+    document.body.appendChild(input)
+    input.focus()
+
+    const event3 = new KeyboardEvent('keydown', { ctrlKey: true, key: 'a' })
+    window.dispatchEvent(event3)
+    expect(cb).toHaveBeenCalledTimes(2) // Should not fire because inputs=false
+
+    // Enable inputs
+    inputs.value = true
+    await nextTick()
+
+    const event4 = new KeyboardEvent('keydown', { ctrlKey: true, key: 'a' })
+    window.dispatchEvent(event4)
+    expect(cb).toHaveBeenCalledTimes(3) // Should fire because inputs=true
+
+    document.body.removeChild(input)
+    stop()
   })
 })
