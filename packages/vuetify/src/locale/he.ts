@@ -46,6 +46,13 @@ export default {
     input: {
       placeholder: 'הזן תאריך',
     },
+    ariaLabel: {
+      previousMonth: 'החודש הקודם',
+      nextMonth: 'החודש הבא',
+      selectYear: 'בחר שנה',
+      selectDate: '{0}',
+      currentDate: 'היום, {0}',
+    },
   },
   noDataText: 'אין נתונים זמינים',
   carousel: {

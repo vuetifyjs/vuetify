@@ -46,6 +46,13 @@ export default {
     input: {
       placeholder: 'Въведете дата',
     },
+    ariaLabel: {
+      previousMonth: 'Предишен месец',
+      nextMonth: 'Следващ месец',
+      selectYear: 'Изберете година',
+      selectDate: '{0}',
+      currentDate: 'Днес, {0}',
+    },
   },
   noDataText: 'Няма налични данни',
   carousel: {

@@ -46,6 +46,13 @@ export default {
     input: {
       placeholder: 'Introdueix la data',
     },
+    ariaLabel: {
+      previousMonth: 'Mes anterior',
+      nextMonth: 'Mes següent',
+      selectYear: 'Selecciona any',
+      selectDate: '{0}',
+      currentDate: 'Avui, {0}',
+    },
   },
   noDataText: 'Sense dades',
   carousel: {
