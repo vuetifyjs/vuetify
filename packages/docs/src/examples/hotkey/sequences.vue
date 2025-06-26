@@ -90,7 +90,6 @@
       time: new Date().toLocaleTimeString(),
     })
 
-    // Keep only last 8 messages
     if (messages.value.length > 8) {
       messages.value = messages.value.slice(-8)
     }
@@ -101,11 +100,9 @@
   }
 
   const setupSequences = () => {
-    // Clean up existing sequences
     cleanupFunctions.value.forEach(cleanup => cleanup())
     cleanupFunctions.value = []
 
-    // Register key sequences with current timeout
     cleanupFunctions.value.push(
       useHotkey('ctrl+x-p', () => {
         addMessage('🎨 Command Palette opened!')
@@ -129,11 +126,70 @@
     setupSequences()
   }
 
-  // Initialize sequences
   setupSequences()
 
-  // Cleanup on unmount
   onBeforeUnmount(() => {
     cleanupFunctions.value.forEach(cleanup => cleanup())
   })
+</script>
+
+<script>
+  import { useHotkey } from 'vuetify'
+
+  export default {
+    data () {
+      return {
+        messages: [],
+        sequenceTimeout: 1000,
+        cleanupFunctions: [],
+      }
+    },
+    mounted () {
+      this.setupSequences()
+    },
+    beforeUnmount () {
+      this.cleanupFunctions.forEach(cleanup => cleanup())
+    },
+    methods: {
+      addMessage (text) {
+        this.messages.push({
+          id: Date.now(),
+          text,
+          time: new Date().toLocaleTimeString(),
+        })
+
+        if (this.messages.length > 8) {
+          this.messages = this.messages.slice(-8)
+        }
+      },
+      clearMessages () {
+        this.messages = []
+      },
+      setupSequences () {
+        this.cleanupFunctions.forEach(cleanup => cleanup())
+        this.cleanupFunctions = []
+
+        this.cleanupFunctions.push(
+          useHotkey('ctrl+x-p', () => {
+            this.addMessage('🎨 Command Palette opened!')
+          }, { sequenceTimeout: this.sequenceTimeout })
+        )
+
+        this.cleanupFunctions.push(
+          useHotkey('g-g', () => {
+            this.addMessage('⬆️ Navigated to top!')
+          }, { sequenceTimeout: this.sequenceTimeout })
+        )
+
+        this.cleanupFunctions.push(
+          useHotkey('ctrl+x-ctrl+s', () => {
+            this.addMessage('💾 File saved (Emacs style)!')
+          }, { sequenceTimeout: this.sequenceTimeout })
+        )
+      },
+      updateTimeout () {
+        this.setupSequences()
+      },
+    },
+  }
 </script>

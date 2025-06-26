@@ -120,7 +120,6 @@
   const customHotkey = ref('alt+shift+x')
   const hotkeyEnabled = ref(true)
 
-  // Computed reactive hotkeys that can be disabled
   const activeSaveHotkey = computed(() => hotkeyEnabled.value ? saveHotkey.value : undefined)
   const activeUndoHotkey = computed(() => hotkeyEnabled.value ? undoHotkey.value : undefined)
   const activeCustomHotkey = computed(() => hotkeyEnabled.value ? customHotkey.value : undefined)
@@ -132,7 +131,6 @@
       time: new Date().toLocaleTimeString(),
     })
 
-    // Keep only last 8 messages
     if (messages.value.length > 8) {
       messages.value = messages.value.slice(-8)
     }
@@ -150,7 +148,6 @@
     addMessage('🔄 Reset hotkeys to defaults')
   }
 
-  // Register reactive hotkeys
   useHotkey(activeSaveHotkey, () => {
     addMessage(`💾 Save triggered with: ${saveHotkey.value}`)
   })
@@ -163,7 +160,6 @@
     addMessage(`⚡ Custom action triggered with: ${customHotkey.value}`)
   })
 
-  // Watch for changes to log them
   watch([saveHotkey, undoHotkey, customHotkey, hotkeyEnabled], () => {
     if (hotkeyEnabled.value) {
       addMessage('⚙️ Hotkey configuration updated')
@@ -171,4 +167,96 @@
       addMessage('⏸️ Hotkeys disabled')
     }
   })
+</script>
+
+<script>
+  import { useHotkey } from 'vuetify'
+
+  export default {
+    data () {
+      return {
+        messages: [],
+        saveHotkey: 'cmd+s',
+        undoHotkey: 'cmd+z',
+        customHotkey: 'alt+shift+x',
+        hotkeyEnabled: true,
+        cleanupFunctions: [],
+      }
+    },
+    computed: {
+      activeSaveHotkey () {
+        return this.hotkeyEnabled ? this.saveHotkey : undefined
+      },
+      activeUndoHotkey () {
+        return this.hotkeyEnabled ? this.undoHotkey : undefined
+      },
+      activeCustomHotkey () {
+        return this.hotkeyEnabled ? this.customHotkey : undefined
+      },
+    },
+    watch: {
+      saveHotkey () { this.logConfigChange() },
+      undoHotkey () { this.logConfigChange() },
+      customHotkey () { this.logConfigChange() },
+      hotkeyEnabled () { this.logConfigChange() },
+    },
+    mounted () {
+      this.setupReactiveHotkeys()
+    },
+    beforeUnmount () {
+      this.cleanupFunctions.forEach(cleanup => cleanup())
+    },
+    methods: {
+      addMessage (text) {
+        this.messages.push({
+          id: Date.now(),
+          text,
+          time: new Date().toLocaleTimeString(),
+        })
+
+        if (this.messages.length > 8) {
+          this.messages = this.messages.slice(-8)
+        }
+      },
+      clearMessages () {
+        this.messages = []
+      },
+      resetToDefaults () {
+        this.saveHotkey = 'cmd+s'
+        this.undoHotkey = 'cmd+z'
+        this.customHotkey = 'alt+shift+x'
+        this.hotkeyEnabled = true
+        this.addMessage('🔄 Reset hotkeys to defaults')
+      },
+      setupReactiveHotkeys () {
+        this.cleanupFunctions.forEach(cleanup => cleanup())
+        this.cleanupFunctions = []
+
+        this.cleanupFunctions.push(
+          useHotkey(() => this.activeSaveHotkey, () => {
+            this.addMessage(`💾 Save triggered with: ${this.saveHotkey}`)
+          })
+        )
+
+        this.cleanupFunctions.push(
+          useHotkey(() => this.activeUndoHotkey, () => {
+            this.addMessage(`↶ Undo triggered with: ${this.undoHotkey}`)
+          })
+        )
+
+        this.cleanupFunctions.push(
+          useHotkey(() => this.activeCustomHotkey, () => {
+            this.addMessage(`⚡ Custom action triggered with: ${this.customHotkey}`)
+          })
+        )
+      },
+      logConfigChange () {
+        if (this.hotkeyEnabled) {
+          this.addMessage('⚙️ Hotkey configuration updated')
+        } else {
+          this.addMessage('⏸️ Hotkeys disabled')
+        }
+      },
+    },
+  }
 </script>

@@ -169,7 +169,6 @@
       time: new Date().toLocaleTimeString(),
     })
 
-    // Keep only last 10 messages
     if (messages.value.length > 10) {
       messages.value = messages.value.slice(-10)
     }
@@ -180,7 +179,6 @@
   }
 
   const setupHotkeys = () => {
-    // Clean up existing hotkeys
     cleanupFunctions.value.forEach(cleanup => cleanup())
     cleanupFunctions.value = []
 
@@ -191,22 +189,18 @@
       sequenceTimeout: sequenceTimeout.value,
     }
 
-        // Basic hotkey with current options
     cleanupFunctions.value.push(
       useHotkey('cmd+j', event => {
         const target = event.target?.tagName || 'unknown'
         addMessage(`🔧 Test hotkey (${eventType.value}) - Target: ${target}`)
       }, options)
     )
-
-    // Sequence with timeout
     cleanupFunctions.value.push(
       useHotkey('ctrl+x-e', () => {
         addMessage(`⏱️ Sequence completed within ${sequenceTimeout.value}ms`)
       }, options)
     )
 
-    // Input-specific test
     cleanupFunctions.value.push(
       useHotkey('enter', event => {
         const inInput = event.target?.tagName === 'INPUT' || event.target?.tagName === 'TEXTAREA'
@@ -220,11 +214,84 @@
     addMessage(`⚙️ Options updated: event=${eventType.value}, inputs=${allowInInputs.value}, preventDefault=${preventDefault.value}`)
   }
 
-  // Initialize hotkeys
   setupHotkeys()
 
-  // Cleanup on unmount
   onBeforeUnmount(() => {
-      cleanupFunctions.value.forEach(cleanup => cleanup())
-    })
-  </script>
+    cleanupFunctions.value.forEach(cleanup => cleanup())
+  })
+</script>
+
+<script>
+  import { useHotkey } from 'vuetify'
+
+  export default {
+    data () {
+      return {
+        messages: [],
+        testInput: '',
+        eventType: 'keydown',
+        allowInInputs: true,
+        preventDefault: true,
+        sequenceTimeout: 1000,
+        cleanupFunctions: [],
+      }
+    },
+    mounted () {
+      this.setupHotkeys()
+    },
+    beforeUnmount () {
+      this.cleanupFunctions.forEach(cleanup => cleanup())
+    },
+    methods: {
+      addMessage (text) {
+        this.messages.push({
+          id: Date.now(),
+          text,
+          time: new Date().toLocaleTimeString(),
+        })
+
+        if (this.messages.length > 10) {
+          this.messages = this.messages.slice(-10)
+        }
+      },
+      clearMessages () {
+        this.messages = []
+      },
+      setupHotkeys () {
+        this.cleanupFunctions.forEach(cleanup => cleanup())
+        this.cleanupFunctions = []
+
+        const options = {
+          event: this.eventType,
+          inputs: this.allowInInputs,
+          preventDefault: this.preventDefault,
+          sequenceTimeout: this.sequenceTimeout,
+        }
+
+        this.cleanupFunctions.push(
+          useHotkey('cmd+j', event => {
+            const target = event.target?.tagName || 'unknown'
+            this.addMessage(`🔧 Test hotkey (${this.eventType}) - Target: ${target}`)
+          }, options)
+        )
+
+        this.cleanupFunctions.push(
+          useHotkey('ctrl+x-e', () => {
+            this.addMessage(`⏱️ Sequence completed within ${this.sequenceTimeout}ms`)
+          }, options)
+        )
+
+        this.cleanupFunctions.push(
+          useHotkey('enter', event => {
+            const inInput = event.target?.tagName === 'INPUT' || event.target?.tagName === 'TEXTAREA'
+            this.addMessage(`⏎ Enter pressed ${inInput ? 'in input field' : 'outside input'}`)
+          }, options)
+        )
+      },
+      updateOptions () {
+        this.setupHotkeys()
+        this.addMessage(`⚙️ Options updated: event=${this.eventType}, inputs=${this.allowInInputs}, preventDefault=${this.preventDefault}`)
+      },
+    },
+  }
+</script>

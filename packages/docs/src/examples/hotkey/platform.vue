@@ -108,7 +108,6 @@
 
   const messages = ref([])
 
-  // Platform detection
   const isMac = computed(() => {
     return typeof navigator !== 'undefined' && /macintosh/i.test(navigator.userAgent)
   })
@@ -128,7 +127,6 @@
       time: new Date().toLocaleTimeString(),
     })
 
-    // Keep only last 6 messages
     if (messages.value.length > 6) {
       messages.value = messages.value.slice(-6)
     }
@@ -138,7 +136,6 @@
     messages.value = []
   }
 
-  // Cross-platform hotkeys (cmd adapts to platform)
   useHotkey('cmd+c', () => {
     addMessage(`📋 Copy action (${isMac.value ? 'Cmd' : 'Ctrl'}+C)`)
   })
@@ -151,7 +148,6 @@
     addMessage(`↷ Redo action (${isMac.value ? 'Cmd+Shift' : 'Ctrl+Shift'}+Z)`)
   })
 
-  // Platform-specific hotkeys
   useHotkey('ctrl+a', () => {
     addMessage('🔘 Select All (explicit Ctrl+A)')
   })
@@ -159,4 +155,71 @@
   useHotkey('meta+f', () => {
     addMessage(`🔍 Find in Page (${isMac.value ? 'Cmd' : 'Win'}+F)`)
   })
+</script>
+
+<script>
+  import { useHotkey } from 'vuetify'
+
+  export default {
+    data () {
+      return {
+        messages: [],
+      }
+    },
+    computed: {
+      isMac () {
+        return typeof navigator !== 'undefined' && /macintosh/i.test(navigator.userAgent)
+      },
+      platformName () {
+        return this.isMac ? 'macOS' : 'Windows/Linux'
+      },
+      userAgent () {
+        return typeof navigator !== 'undefined' ? navigator.userAgent : 'Unknown'
+      },
+    },
+    mounted () {
+      this.cleanupCopy = useHotkey('cmd+c', () => {
+        this.addMessage(`📋 Copy action (${this.isMac ? 'Cmd' : 'Ctrl'}+C)`)
+      })
+
+      this.cleanupPaste = useHotkey('cmd+v', () => {
+        this.addMessage(`📄 Paste action (${this.isMac ? 'Cmd' : 'Ctrl'}+V)`)
+      })
+
+      this.cleanupRedo = useHotkey('cmd+shift+z', () => {
+        this.addMessage(`↷ Redo action (${this.isMac ? 'Cmd+Shift' : 'Ctrl+Shift'}+Z)`)
+      })
+
+      this.cleanupSelectAll = useHotkey('ctrl+a', () => {
+        this.addMessage('🔘 Select All (explicit Ctrl+A)')
+      })
+
+      this.cleanupFind = useHotkey('meta+f', () => {
+        this.addMessage(`🔍 Find in Page (${this.isMac ? 'Cmd' : 'Win'}+F)`)
+      })
+    },
+    beforeUnmount () {
+      this.cleanupCopy?.()
+      this.cleanupPaste?.()
+      this.cleanupRedo?.()
+      this.cleanupSelectAll?.()
+      this.cleanupFind?.()
+    },
+    methods: {
+      addMessage (text) {
+        this.messages.push({
+          id: Date.now(),
+          text,
+          time: new Date().toLocaleTimeString(),
+        })
+
+        if (this.messages.length > 6) {
+          this.messages = this.messages.slice(-6)
+        }
+      },
+      clearMessages () {
+        this.messages = []
+      },
+    },
+  }
 </script>

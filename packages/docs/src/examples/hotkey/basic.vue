@@ -64,7 +64,6 @@
       time: new Date().toLocaleTimeString(),
     })
 
-    // Keep only last 5 messages
     if (messages.value.length > 5) {
       messages.value = messages.value.slice(-5)
     }
@@ -74,7 +73,6 @@
     messages.value = []
   }
 
-  // Register basic hotkeys
   useHotkey('cmd+s', () => {
     addMessage('💾 Document saved!')
   })
@@ -82,4 +80,48 @@
   useHotkey('ctrl+z', () => {
     addMessage('↶ Action undone!')
   })
+</script>
+
+<script>
+  import { useHotkey } from 'vuetify'
+
+  export default {
+    data () {
+      return {
+        messages: [],
+      }
+    },
+    mounted () {
+      // Register basic hotkeys
+      this.cleanupSave = useHotkey('cmd+s', () => {
+        this.addMessage('💾 Document saved!')
+      })
+
+      this.cleanupUndo = useHotkey('ctrl+z', () => {
+        this.addMessage('↶ Action undone!')
+      })
+    },
+    beforeUnmount () {
+      // Clean up hotkeys
+      this.cleanupSave?.()
+      this.cleanupUndo?.()
+    },
+    methods: {
+      addMessage (text) {
+        this.messages.push({
+          id: Date.now(),
+          text,
+          time: new Date().toLocaleTimeString(),
+        })
+
+        // Keep only last 5 messages
+        if (this.messages.length > 5) {
+          this.messages = this.messages.slice(-5)
+        }
+      },
+      clearMessages () {
+        this.messages = []
+      },
+    },
+  }
 </script>

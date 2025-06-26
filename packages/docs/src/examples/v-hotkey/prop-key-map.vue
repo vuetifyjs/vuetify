@@ -183,10 +183,8 @@
 
   const platform = ref('mac')
 
-  // Custom key mapping using the new simplified object structure
-  // Import and extend the default hotkeyMap in real applications
   const customKeyMap = {
-    // Include common keys that we're not customizing
+          // Include common keys that we're not customizing
     shift: {
       mac: { symbol: '⇧', icon: '$shift', text: '$vuetify.hotkey.shift' },
       default: { text: 'Shift' },
@@ -200,7 +198,7 @@
       default: { text: 'Ctrl' },
     },
 
-    // Custom key overrides
+          // Custom key overrides
     ctrl: {
       mac: { symbol: '⌃', icon: '$ctrl', text: 'Control' },
       default: { symbol: '⌃', icon: '$ctrl', text: 'Control' },
@@ -213,7 +211,7 @@
       default: { symbol: '⏎', icon: '$enter', text: 'Return' },
     },
 
-    // Include other keys for completeness
+          // Include other keys for completeness
     arrowup: {
       default: { symbol: '↑', icon: '$arrowup', text: '$vuetify.hotkey.upArrow' },
     },
@@ -244,6 +242,77 @@
     },
     hyphen: {
       default: { symbol: '-', icon: '$minus', text: '-' },
+    },
+  }
+</script>
+
+<script>
+  export default {
+    data () {
+      return {
+        platform: 'mac',
+        customKeyMap: {
+          // Include common keys that we're not customizing
+          shift: {
+            mac: { symbol: '⇧', icon: '$shift', text: '$vuetify.hotkey.shift' },
+            default: { text: 'Shift' },
+          },
+          meta: {
+            mac: { symbol: '⌘', icon: '$command', text: '$vuetify.hotkey.command' },
+            default: { text: 'Ctrl' },
+          },
+          cmd: {
+            mac: { symbol: '⌘', icon: '$command', text: '$vuetify.hotkey.command' },
+            default: { text: 'Ctrl' },
+          },
+
+          // Custom key overrides
+          ctrl: {
+            mac: { symbol: '⌃', icon: '$ctrl', text: 'Control' },
+            default: { symbol: '⌃', icon: '$ctrl', text: 'Control' },
+          },
+          alt: {
+            mac: { symbol: '⌥', icon: '$alt', text: 'Option' },
+            default: { symbol: '⎇', icon: '$alt', text: 'Alt' },
+          },
+          enter: {
+            default: { symbol: '⏎', icon: '$enter', text: 'Return' },
+          },
+
+          // Include other keys for completeness
+          arrowup: {
+            default: { symbol: '↑', icon: '$arrowup', text: '$vuetify.hotkey.upArrow' },
+          },
+          arrowdown: {
+            default: { symbol: '↓', icon: '$arrowdown', text: '$vuetify.hotkey.downArrow' },
+          },
+          arrowleft: {
+            default: { symbol: '←', icon: '$arrowleft', text: '$vuetify.hotkey.leftArrow' },
+          },
+          arrowright: {
+            default: { symbol: '→', icon: '$arrowright', text: '$vuetify.hotkey.rightArrow' },
+          },
+          backspace: {
+            default: { symbol: '⌫', icon: '$backspace', text: '$vuetify.hotkey.backspace' },
+          },
+          escape: {
+            default: { text: '$vuetify.hotkey.escape' },
+          },
+          space: {
+            mac: { symbol: '␣', icon: '$space', text: '$vuetify.hotkey.space' },
+            default: { text: '$vuetify.hotkey.space' },
+          },
+          '-': {
+            default: { symbol: '-', icon: '$minus', text: '-' },
+          },
+          minus: {
+            default: { symbol: '-', icon: '$minus', text: '-' },
+          },
+          hyphen: {
+            default: { symbol: '-', icon: '$minus', text: '-' },
+          },
+        },
+      }
     },
   }
 </script>
