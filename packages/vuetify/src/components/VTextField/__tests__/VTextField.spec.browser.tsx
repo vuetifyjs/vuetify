@@ -80,7 +80,7 @@ describe('VTextField', () => {
     const input1 = screen.getByCSS('input[name="username"]') as HTMLInputElement
     const input2 = screen.getByCSS('input[name="password"]') as HTMLInputElement
 
-    const timeout = await commands.breakExecutionAfter(5000)
+    const timeout = await commands.abortAfter(5000, 'VTextField infinite loop detection')
 
     input1.focus()
     input1.value = 'my username'

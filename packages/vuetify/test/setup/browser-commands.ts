@@ -68,9 +68,11 @@ async function setFocusEmulationEnabled (ctx: BrowserCommandContext) {
   return ctx.browser.sendCommand('Emulation.setFocusEmulationEnabled', { enabled: true })
 }
 
-async function breakExecutionAfter (ctx: BrowserCommandContext, delay: number) {
+async function abortAfter (ctx: BrowserCommandContext, delay: number, name: string) {
   return setTimeout(() => {
-    throw new Error('Browser was paused. Test timeout')
+    // eslint-disable-next-line no-console
+    console.error(`[Test timeout] Aborting after ${delay}ms for ${name}`)
+    throw new Error('Abort')
   }, delay)
 }
 
@@ -81,7 +83,7 @@ export const commands = {
   percySnapshot,
   waitStable,
   setFocusEmulationEnabled,
-  breakExecutionAfter,
+  abortAfter,
 }
 
 export type CustomCommands = {
