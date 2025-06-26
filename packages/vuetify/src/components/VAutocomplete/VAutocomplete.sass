@@ -3,9 +3,12 @@
 @use '../../styles/settings'
 @use '../../styles/tools'
 @use './variables' as *
+@use '../VSelect/mixins' as *
 
 @include tools.layer('components')
   .v-autocomplete
+    @include select-compact-chip-label
+
     .v-field
       .v-text-field__prefix,
       .v-text-field__suffix,
@@ -57,15 +60,6 @@
       &:first-child
         margin-inline-start: 0
 
-    &--chips.v-input--density-compact
-      .v-field--variant-solo,
-      .v-field--variant-solo-inverted,
-      .v-field--variant-filled,
-      .v-field--variant-solo-filled
-        .v-label.v-field-label
-          &--floating
-            top: 0px
-
     &--selecting-index
       .v-autocomplete__selection
         opacity: var(--v-medium-emphasis-opacity)
@@ -102,5 +96,4 @@
       transition: $autocomplete-transition
 
       .v-autocomplete--active-menu &
-        opacity: var(--v-high-emphasis-opacity)
         transform: rotate(180deg)

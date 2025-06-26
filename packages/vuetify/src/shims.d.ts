@@ -45,4 +45,7 @@ declare module 'vue' {
   export interface GlobalComponents {
     // @generate-components
   }
+  export interface GlobalDirectives {
+    // @generate-directives
+  }
 }

@@ -12,11 +12,71 @@ meta:
 
 Latest news, updates, and stories about Vuetify.
 
-<VoPromotionsCardVuetify />
+<PromotedEntry />
 
 ---
 
 <br>
+
+## May 2025 Update
+
+🖊️ John Leider • 📅 June 6th, 2025
+
+This month brings exciting advancements across the Vuetify ecosystem, with major strides in AI integration, component refinements, and developer experience. Discover the official release of @vuetify/mcp (Model Context Protocol), substantial improvements to VDateInput and VNumberInput components, and the introduction of the new VColorInput Labs component... { .text-medium-emphasis }
+
+[Read More](/blog/may-2025-update/) { .text-end }
+
+---
+
+## April 2025 Update
+
+🖊️ John Leider • 📅 May 1st, 2025
+
+April delivered tangible progress on MCP, the new theming engine, component refinements, docs, ESLint v4, and tooling across the Vuetify ecosystem. Discover how these updates enhance your development experience and prepare Vuetify for the future... { .text-medium-emphasis }
+
+[Read More](/blog/april-2025-update/) { .text-end }
+
+---
+
+## Announcing Vuetify v3.8
+
+🖊️ John Leider • 📅 April 8th, 2025
+
+Vuetify v3.8 is here! Discover the latest features, improvements, and bug fixes in this minor release, including new components and form input enhancements. This release is packed with new features, improvements, and bug fixes, and contains no breaking changes... { .text-medium-emphasis }
+
+---
+
+[Read More](/blog/announcing-vuetify-3.8/) { .text-end }
+
+## Vuetify HeroDevs Partnership
+
+🖊️ Taylor Corbett • 📅 March 28th, 2025
+
+Vuetify is excited to announce a partnership with HeroDevs to provide extended long-term support for Vuetify 2 users through Vue 2 NES + Essentials. For teams that haven't yet migrated to Vuetify 3, this solution is designed to keep applications secure and up to date without requiring an immediate migration, addressing security vulnerabilities, compliance issues, and compatibility challenges... { .text-medium-emphasis }
+
+[Read More](/blog/vuetify-herodevs-partnership/) { .text-end }
+
+---
+
+## State of the Union 2024 - Post Mortem
+
+🖊️ John Leider • 📅 March 19th, 2025
+
+A lot has changed since the 2024 State of the Union. In this post, I want to share the journey we've been on, the challenges we've faced, and the incredible team that's come together to shape Vuetify's future. From nearly losing it all to finding renewed purpose and energy, this is a story of resilience, community, and a shared vision for what Vuetify can become... { .text-medium-emphasis }
+
+[Read More](/blog/state-of-the-union-2024-post-mortem/) { .text-end }
+
+---
+
+## Building a Basic Nuxt Application with Vuetify
+
+🖊️ Eric Sarrion • 📅 February 21st, 2025
+
+Discover how to craft a polished Nuxt application with Vuetify in this detailed guide. Leverage Vue.js and Nuxt’s streamlined framework to build a basic app featuring a toolbar, navigation menu, and multiple pages. Ideal for developers of all levels looking to simplify their workflow with automatic imports and reusable components... { .text-medium-emphasis }
+
+[Read More](/blog/building-a-basic-nuxt-application-with-vuetify/) { .text-end }
+
+---
 
 ## State of the Union 2024
 

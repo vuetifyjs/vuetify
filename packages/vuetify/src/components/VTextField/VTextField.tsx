@@ -3,16 +3,17 @@ import './VTextField.sass'
 
 // Components
 import { VCounter } from '@/components/VCounter/VCounter'
-import { filterFieldProps, makeVFieldProps, VField } from '@/components/VField/VField'
+import { makeVFieldProps, VField } from '@/components/VField/VField'
 import { makeVInputProps, VInput } from '@/components/VInput/VInput'
 
 // Composables
+import { useAutofocus } from '@/composables/autofocus'
 import { useFocus } from '@/composables/focus'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Directives
-import Intersect from '@/directives/intersect'
+import vIntersect from '@/directives/intersect'
 
 // Utilities
 import { cloneVNode, computed, nextTick, ref } from 'vue'
@@ -54,7 +55,7 @@ export type VTextFieldSlots = Omit<VInputSlots & VFieldSlots, 'default'> & {
 export const VTextField = genericComponent<VTextFieldSlots>()({
   name: 'VTextField',
 
-  directives: { Intersect },
+  directives: { vIntersect },
 
   inheritAttrs: false,
 
@@ -70,6 +71,7 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
   setup (props, { attrs, emit, slots }) {
     const model = useProxiedModel(props, 'modelValue')
     const { isFocused, focus, blur } = useFocus(props)
+    const { onIntersect } = useAutofocus(props)
     const counterValue = computed(() => {
       return typeof props.counterValue === 'function' ? props.counterValue(model.value)
         : typeof props.counterValue === 'number' ? props.counterValue
@@ -89,15 +91,6 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
 
     const isPlainOrUnderlined = computed(() => ['plain', 'underlined'].includes(props.variant))
 
-    function onIntersect (
-      isIntersecting: boolean,
-      entries: IntersectionObserverEntry[]
-    ) {
-      if (!props.autofocus || !isIntersecting) return
-
-      (entries[0].target as HTMLInputElement)?.focus?.()
-    }
-
     const vInputRef = ref<VInput>()
     const vFieldRef = ref<VField>()
     const inputRef = ref<HTMLInputElement>()
@@ -108,11 +101,13 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
       props.active
     ))
     function onFocus () {
-      if (inputRef.value !== document.activeElement) {
-        inputRef.value?.focus()
-      }
-
       if (!isFocused.value) focus()
+
+      nextTick(() => {
+        if (inputRef.value !== document.activeElement) {
+          inputRef.value?.focus()
+        }
+      })
     }
     function onControlMousedown (e: MouseEvent) {
       emit('mousedown:control', e)
@@ -123,17 +118,16 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
       e.preventDefault()
     }
     function onControlClick (e: MouseEvent) {
-      onFocus()
-
       emit('click:control', e)
     }
-    function onClear (e: MouseEvent) {
+    function onClear (e: MouseEvent, reset: () => void) {
       e.stopPropagation()
 
       onFocus()
 
       nextTick(() => {
         model.value = null
+        reset()
 
         callEvent(props['onClick:clear'], e)
       })
@@ -158,7 +152,7 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
       const hasDetails = !!(hasCounter || slots.details)
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
       const { modelValue: _, ...inputProps } = VInput.filterProps(props)
-      const fieldProps = filterFieldProps(props)
+      const fieldProps = VField.filterProps(props)
 
       return (
         <VInput
@@ -187,12 +181,13 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
               isDirty,
               isReadonly,
               isValid,
+              reset,
             }) => (
               <VField
                 ref={ vFieldRef }
                 onMousedown={ onControlMousedown }
                 onClick={ onControlClick }
-                onClick:clear={ onClear }
+                onClick:clear={ (e: MouseEvent) => onClear(e, reset) }
                 onClick:prependInner={ props['onClick:prependInner'] }
                 onClick:appendInner={ props['onClick:appendInner'] }
                 role={ props.role }

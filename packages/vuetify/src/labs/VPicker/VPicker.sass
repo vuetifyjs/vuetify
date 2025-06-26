@@ -7,6 +7,7 @@
     display: grid
     grid-auto-rows: min-content
     grid-template-areas: "title" "header" "body"
+    grid-template-columns: minmax(0, 1fr)
     overflow: hidden
     @include tools.elevation($picker-elevation)
     @include tools.rounded($picker-border-radius)
@@ -18,6 +19,9 @@
     grid-area: body
     overflow: hidden
     position: relative
+    display: flex
+    justify-content: center
+    flex-wrap: wrap
 
   .v-picker__header
     grid-area: header
@@ -34,6 +38,12 @@
 
       &:not(:last-child)
         margin-inline-end: 8px
+
+  .v-picker--divided
+    .v-picker__header
+      border-bottom-color: $picker-border-color
+      border-bottom-style: $picker-border-style
+      border-bottom-width: $picker-border-thin-width
 
   .v-picker--landscape
     grid-template-areas: "title" "header body" "header body"

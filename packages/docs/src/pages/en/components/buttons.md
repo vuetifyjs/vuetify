@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   nav: Buttons
   title: Button component
@@ -23,13 +22,13 @@ The `v-btn` component replaces the standard html button with a material design t
 
 <PageFeatures />
 
-<VoPromotionsCardVuetify slug="vuetify-snips" />
-
 ## Usage
 
 Buttons in their simplest form contain uppercase text, a slight elevation, hover effect, and a ripple effect on click.
 
 <ExamplesUsage name="v-btn" />
+
+<VoPromotionsCardVuetify slug="vuetify-snips" class="mb-4" />
 
 ## API
 
@@ -166,7 +165,7 @@ The **loader** slot allows you to customize the loading indicator. In this examp
 
 <ExamplesExample file="v-btn/slot-loader" />
 
-<VoPromotionsCardVuetify />
+<VoPromotionsCardVuetify class="mb-4" />
 
 ## Examples
 
@@ -403,7 +402,7 @@ The following properties are modified when used within a `v-toolbar` or `v-toolb
 | **height** | provided by `v-toolbar-items` |
 | **variant** | `text` |
 
-<VoPromotionsCardVuetify />
+<VoPromotionsCardVuetify class="mb-4" />
 
 ## Accessibility
 

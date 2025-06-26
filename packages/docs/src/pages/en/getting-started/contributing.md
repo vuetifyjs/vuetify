@@ -15,7 +15,7 @@ Vuetify is made possible by an amazing community that submits issues, creates pu
 
 <PageFeatures />
 
-<VoPromotionsCardVuetify />
+<PromotedEntry />
 
 It is our job to enable you to create amazing applications. A lot of the time, you come across something that can be made better. Maybe you find a bug, or you have an idea for additional functionality. That's great! It's as easy as cloning the Vuetify repository to get started working in a development environment.
 
@@ -134,6 +134,15 @@ All api descriptions are managed via the api-generator package. This package mus
 - Description keys should be in camelCase, except for `slot` keys which should be kebab-case.
 - Put keys in alphabetical order.
 - Descriptions utilize a hierarchy of `generic.json` < `Source.json` < `Component.json` to reduce duplication. Source can be viewed using the **Developer Mode** in docs settings.
+
+#### Adding API Documentation
+
+When creating a new component (or composable, though this is typically done by the Vuetify team), you need to add a corresponding JSON file named `ComponentName.json` in `packages/api-generator/src/locale/en/`. This file should contain descriptions for props, slots, events, and exposed methods. After adding or updating JSON files, run `pnpm build api` to regenerate the dist language files. Keep in mind:
+
+- Changes to Vuetify require a rebuild before building the API
+- The API must be built before running the documentation server
+
+Enabling **developer mode** in the documentation settings will allow you to see the source of truth on API description pages.
 
 ### Submitting Changes / Pull Requests
 

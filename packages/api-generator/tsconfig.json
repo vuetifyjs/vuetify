@@ -5,6 +5,7 @@
     "noUnusedLocals": false,
     "module": "ESNext",
     "moduleResolution": "bundler",
+    "noEmit": true,
     "noEmitOnError": false,
     "resolveJsonModule": true,
     "paths": {

@@ -27,10 +27,10 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
 
 // Directives
-import { Ripple } from '@/directives/ripple'
+import vRipple from '@/directives/ripple'
 
 // Utilities
-import { computed, withDirectives } from 'vue'
+import { computed, toDisplayString, toRef, withDirectives } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -70,7 +70,10 @@ export const makeVBtnProps = propsFactory({
     default: true,
   },
 
-  text: String,
+  text: {
+    type: [String, Number, Boolean],
+    default: undefined,
+  },
 
   ...makeBorderProps(),
   ...makeComponentProps(),
@@ -124,7 +127,7 @@ export const VBtn = genericComponent<VBtnSlots>()({
       return group?.isSelected.value
     })
 
-    const color = computed(() => isActive.value ? props.activeColor ?? props.color : props.color)
+    const color = toRef(() => isActive.value ? props.activeColor ?? props.color : props.color)
     const variantProps = computed(() => {
       const showColor = (
         (group?.isSelected.value && (!link.isLink.value || link.isActive?.value)) ||
@@ -138,7 +141,7 @@ export const VBtn = genericComponent<VBtnSlots>()({
     const { colorClasses, colorStyles, variantClasses } = useVariant(variantProps)
 
     const isDisabled = computed(() => group?.disabled.value || props.disabled)
-    const isElevated = computed(() => {
+    const isElevated = toRef(() => {
       return props.variant === 'elevated' && !(props.disabled || props.flat || props.border)
     })
     const valueAttr = computed(() => {
@@ -257,7 +260,7 @@ export const VBtn = genericComponent<VBtnSlots>()({
                   },
                 }}
               >
-                { slots.default?.() ?? props.text }
+                { slots.default?.() ?? toDisplayString(props.text) }
               </VDefaultsProvider>
             )}
           </span>
@@ -297,7 +300,7 @@ export const VBtn = genericComponent<VBtnSlots>()({
           )}
         </Tag>,
         [[
-          Ripple,
+          vRipple,
           !isDisabled.value && props.ripple,
           '',
           { center: !!props.icon },

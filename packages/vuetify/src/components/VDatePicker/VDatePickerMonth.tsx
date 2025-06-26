@@ -3,16 +3,15 @@ import './VDatePickerMonth.sass'
 
 // Components
 import { VBtn } from '@/components/VBtn'
-import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 
 // Composables
 import { makeCalendarProps, useCalendar } from '@/composables/calendar'
-import { useDate } from '@/composables/date/date'
+import { createDateRange, useDate } from '@/composables/date/date'
 import { MaybeTransition } from '@/composables/transition'
 
 // Utilities
-import { computed, ref, shallowRef, watch } from 'vue'
-import { genericComponent, omit, propsFactory } from '@/util'
+import { computed, ref, shallowRef, toRef, watch } from 'vue'
+import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -58,14 +57,14 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
   setup (props, { emit, slots }) {
     const daysRef = ref()
 
-    const { daysInMonth, model, weekNumbers } = useCalendar(props)
+    const { daysInMonth, model, weekNumbers, weekDays, weekdayLabels } = useCalendar(props)
     const adapter = useDate()
 
     const rangeStart = shallowRef()
     const rangeStop = shallowRef()
     const isReverse = shallowRef(false)
 
-    const transition = computed(() => {
+    const transition = toRef(() => {
       return !isReverse.value ? props.transition : props.reverseTransition
     })
 
@@ -112,17 +111,7 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
           rangeStop.value = adapter.endOfDay(_value)
         }
 
-        const diff = adapter.getDiff(rangeStop.value, rangeStart.value, 'days')
-        const datesInRange = [rangeStart.value]
-
-        for (let i = 1; i < diff; i++) {
-          const nextDate = adapter.addDays(rangeStart.value, i)
-          datesInRange.push(nextDate)
-        }
-
-        datesInRange.push(rangeStop.value)
-
-        model.value = datesInRange
+        model.value = createDateRange(adapter, rangeStart.value, rangeStop.value)
       } else {
         rangeStart.value = value
         rangeStop.value = undefined
@@ -152,8 +141,11 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
       }
     }
 
-    return () => (
-      <div class="v-date-picker-month">
+    useRender(() => (
+      <div
+        class="v-date-picker-month"
+        style={{ '--v-date-picker-days-in-week': weekDays.value.length }}
+      >
         { props.showWeek && (
           <div key="weeks" class="v-date-picker-month__weeks">
             { !props.hideWeekdays && (
@@ -176,7 +168,7 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
             key={ daysInMonth.value[0].date?.toString() }
             class="v-date-picker-month__days"
           >
-            { !props.hideWeekdays && adapter.getWeekdays(props.firstDayOfWeek).map(weekDay => (
+            { !props.hideWeekdays && weekdayLabels.value.map(weekDay => (
               <div
                 class={[
                   'v-date-picker-month__day',
@@ -188,6 +180,13 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
             { daysInMonth.value.map((item, i) => {
               const slotProps = {
                 props: {
+                  class: 'v-date-picker-month__day-btn',
+                  color: item.isSelected || item.isToday ? props.color : undefined,
+                  disabled: item.isDisabled,
+                  icon: true,
+                  ripple: false,
+                  text: item.localized,
+                  variant: item.isSelected ? 'flat' : item.isToday ? 'outlined' : 'text',
                   onClick: () => onClick(item.date),
                 },
                 item,
@@ -212,30 +211,8 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
                   ]}
                   data-v-date={ !item.isDisabled ? item.isoDate : undefined }
                 >
-
                   { (props.showAdjacentMonths || !item.isAdjacent) && (
-                    <VDefaultsProvider
-                      defaults={{
-                        VBtn: {
-                          class: 'v-date-picker-month__day-btn',
-                          color: (item.isSelected || item.isToday) && !item.isDisabled
-                            ? props.color
-                            : undefined,
-                          disabled: item.isDisabled,
-                          icon: true,
-                          ripple: false,
-                          text: item.localized,
-                          variant: item.isDisabled
-                            ? item.isToday ? 'outlined' : 'text'
-                            : item.isToday && !item.isSelected ? 'outlined' : 'flat',
-                          onClick: () => onClick(item.date),
-                        },
-                      }}
-                    >
-                      { slots.day?.(slotProps) ?? (
-                        <VBtn { ...slotProps.props } />
-                      )}
-                    </VDefaultsProvider>
+                    slots.day?.(slotProps) ?? (<VBtn { ...slotProps.props } />)
                   )}
                 </div>
               )
@@ -243,7 +220,7 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
           </div>
         </MaybeTransition>
       </div>
-    )
+    ))
   },
 })
 

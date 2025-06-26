@@ -10,7 +10,5 @@
     <AppDivider />
 
     <DocUpNext />
-
-    <DocContribute />
   </section>
 </template>

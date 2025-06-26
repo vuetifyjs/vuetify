@@ -2,7 +2,7 @@
 // Utilities
 import { toRaw } from 'vue'
 
-export type SelectStrategyFn = (data: {
+type SelectStrategyFunction = (data: {
   id: unknown
   value: boolean
   selected: Map<unknown, 'on' | 'off' | 'indeterminate'>
@@ -12,23 +12,23 @@ export type SelectStrategyFn = (data: {
   event?: Event
 }) => Map<unknown, 'on' | 'off' | 'indeterminate'>
 
-export type SelectStrategyTransformInFn = (
+type SelectStrategyTransformInFunction = (
   v: readonly unknown[] | undefined,
   children: Map<unknown, unknown[]>,
   parents: Map<unknown, unknown>,
   disabled: Set<unknown>,
 ) => Map<unknown, 'on' | 'off' | 'indeterminate'>
 
-export type SelectStrategyTransformOutFn = (
+type SelectStrategyTransformOutFunction = (
   v: Map<unknown, 'on' | 'off' | 'indeterminate'>,
   children: Map<unknown, unknown[]>,
   parents: Map<unknown, unknown>,
 ) => unknown[]
 
 export type SelectStrategy = {
-  select: SelectStrategyFn
-  in: SelectStrategyTransformInFn
-  out: SelectStrategyTransformOutFn
+  select: SelectStrategyFunction
+  in: SelectStrategyTransformInFunction
+  out: SelectStrategyTransformOutFunction
 }
 
 export const independentSelectStrategy = (mandatory?: boolean): SelectStrategy => {
@@ -213,6 +213,32 @@ export const classicSelectStrategy = (mandatory?: boolean): SelectStrategy => {
 
       for (const [key, value] of v.entries()) {
         if (value === 'on' && !children.has(key)) arr.push(key)
+      }
+
+      return arr
+    },
+  }
+
+  return strategy
+}
+
+export const trunkSelectStrategy = (mandatory?: boolean): SelectStrategy => {
+  const parentStrategy = classicSelectStrategy(mandatory)
+
+  const strategy: SelectStrategy = {
+    select: parentStrategy.select,
+    in: parentStrategy.in,
+    out: (v, children, parents) => {
+      const arr = []
+
+      for (const [key, value] of v.entries()) {
+        if (value === 'on') {
+          if (parents.has(key)) {
+            const parent = parents.get(key)
+            if (v.get(parent) === 'on') continue
+          }
+          arr.push(key)
+        }
       }
 
       return arr

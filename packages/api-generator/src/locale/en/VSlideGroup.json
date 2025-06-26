@@ -1,6 +1,7 @@
 {
   "props": {
     "centerActive": "Forces the selected component to be centered.",
+    "contentClass": "Adds classes to the slide group item.",
     "direction": "Switch between horizontal and vertical modes.",
     "mobileBreakpoint": "Sets the designated mobile breakpoint for the component.",
     "nextIcon": "The appended slot when arrows are shown.",
@@ -18,6 +19,8 @@
   },
   "exposed": {
     "focus": "Focus the component.",
+    "hasNext": "Returns true if there are items after current index.",
+    "hasPrev": "Returns true if there are items before current index.",
     "scrollOffset": "Scroll the component to a given index.",
     "scrollTo": "Scroll the component to a given index.",
     "selected": "Get the selected component index."

@@ -15,7 +15,6 @@
       text-transform: initial
       width: auto
       opacity: 1
-      pointer-events: none
       transition-property: opacity, transform
       overflow-wrap: $tooltip-overflow-wrap
 
@@ -26,3 +25,7 @@
       &[class*="leave-active"]
         transition-timing-function: settings.$accelerated-easing
         transition-duration: $tooltip-transition-leave-duration
+
+    &:not(.v-tooltip--interactive)
+      > .v-overlay__content
+        pointer-events: none

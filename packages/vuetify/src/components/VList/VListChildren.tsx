@@ -2,7 +2,7 @@
 import { VListGroup } from './VListGroup'
 import { VListItem } from './VListItem'
 import { VListSubheader } from './VListSubheader'
-import { VDivider } from '../VDivider'
+import { VDivider } from '@/components/VDivider'
 
 // Utilities
 import { createList } from './list'
@@ -67,8 +67,9 @@ export const VListChildren = genericComponent<new <T extends InternalListItem>(
 
       return children ? (
         <VListGroup
-          value={ itemProps?.value }
           { ...listGroupProps }
+          value={ props.returnObject ? item : itemProps?.value }
+          rawId={ itemProps?.value }
         >
           {{
             activator: ({ props: activatorProps }) => {

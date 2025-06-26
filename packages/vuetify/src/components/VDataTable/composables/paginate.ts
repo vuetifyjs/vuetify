@@ -43,8 +43,8 @@ type PaginationProps = {
 }
 
 export function createPagination (props: PaginationProps) {
-  const page = useProxiedModel(props, 'page', undefined, value => +(value ?? 1))
-  const itemsPerPage = useProxiedModel(props, 'itemsPerPage', undefined, value => +(value ?? 10))
+  const page = useProxiedModel(props, 'page', undefined, value => Number(value ?? 1))
+  const itemsPerPage = useProxiedModel(props, 'itemsPerPage', undefined, value => Number(value ?? 10))
 
   return { page, itemsPerPage }
 }

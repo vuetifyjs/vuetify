@@ -17,5 +17,9 @@
     "update:month": "Fired when the month changes.",
     "update:year": "Fired when the year changes.",
     "day": "Fired when a day is clicked."
+  },
+  "slots": {
+    "year": "Slot for the year.",
+    "day": "Slot for a day in the month."
   }
 }

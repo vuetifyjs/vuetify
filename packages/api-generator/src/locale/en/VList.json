@@ -1,8 +1,10 @@
 {
   "props": {
+    "activeColor": "Deprecated, use `color` instead.",
     "itemType": "Designates the key on the supplied items that is used for determining the nodes type.",
     "activatable": "Designates whether the list items are activatable.",
     "disabled": "Puts all children inputs into a disabled state.",
+    "filterable": "**FOR INTERNAL USE ONLY** Prevents list item selection using [space] key and pass it back to the text input. Used internally for VAutocomplete and VCombobox.",
     "inactive": "If set, the list tile will not be rendered as a link even if it has to/href prop or @click handler.",
     "lines": "Designates a **minimum-height** for all children `v-list-item` components. This prop uses [line-clamp](https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-line-clamp) and is not supported in all browsers.",
     "link": "Applies `v-list-item` hover styles. Useful when using the item is an _activator_.",
@@ -29,5 +31,12 @@
     "focus": "Slot for the focus.",
     "open": "Slot for the open.",
     "parents": "Slot for the parents."
+  },
+  "exposed": {
+    "children": "The nested list items within the component.",
+    "focus": "Focus the list item.",
+    "getPath": "Get the position of an item within the nested structure.",
+    "open": "Open the list item.",
+    "parents": "The parent list items within the component."
   }
 }

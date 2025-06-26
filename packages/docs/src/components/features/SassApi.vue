@@ -4,6 +4,7 @@
     :custom-filter="customFilter"
     :items="variables"
     base-color="disabled"
+    item-value="id"
     placeholder="Search SASS API"
     prepend-inner-icon="mdi-database-search-outline"
     variant="outlined"
@@ -38,14 +39,22 @@
   const files = import.meta.glob('../../../../api-generator/dist/api/*.json')
 
   const variables = ref([])
-  const model = ref([])
+  const model = shallowRef([])
 
   const code = computed(() => {
-    const $parsed = model.value.map(variable => {
-      return `  ${variable.title}: ${variable.value}`
-    }).join(',\n')
+    const $parsed = model.value?.reduce((acc, variable) => {
+      const varString = `  ${variable.title}: ${variable.default.replaceAll('\n', '\n  ')}`
+      acc[variable.use].push(varString)
+      return acc
+    }, { vuetify: [], 'vuetify/settings': [] })
+    const useList = []
 
-    return `@use 'vuetify' with (\n${$parsed},\n);`
+    for (const [use, value] of Object.entries($parsed)) {
+      if (value.length) {
+        useList.push(`@use '${use}' with (\n${value.join(',\n')},\n);`)
+      }
+    }
+    return useList.join('\n\n')
   })
 
   async function getVariables (name) {
@@ -65,15 +74,17 @@
       for (const file in files) {
         const name = file.split('/').pop().split('.')[0]
 
-        if (!name.startsWith('V')) continue
+        if (!name.startsWith('V') && name !== 'globals') continue
 
         const component = await getVariables(name)
 
         for (const variable in component.sass) {
           variables.value.push({
+            default: component.sass[variable]?.default || null,
             title: variable,
-            value: component.sass[variable]?.default || null,
             subtitle: name,
+            value: `${variable}-${name}`,
+            use: component.sass[variable]?.use || null,
           })
         }
       }

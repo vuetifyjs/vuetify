@@ -1,5 +1,5 @@
 // Utilities
-import { computed, inject, reactive, shallowRef, toRefs, watchEffect } from 'vue'
+import { computed, inject, onScopeDispose, reactive, shallowRef, toRef, toRefs, watchEffect } from 'vue'
 import { getCurrentInstanceName, mergeDeep, propsFactory } from '@/util'
 import { IN_BROWSER, SUPPORTS_TOUCH } from '@/util/globals'
 
@@ -209,6 +209,10 @@ export function createDisplay (options?: DisplayOptions, ssr?: SSROptions): Disp
 
   if (IN_BROWSER) {
     window.addEventListener('resize', updateSize, { passive: true })
+
+    onScopeDispose(() => {
+      window.removeEventListener('resize', updateSize)
+    }, true)
   }
 
   return { ...toRefs(state), update, ssr: !!ssr }
@@ -244,7 +248,7 @@ export function useDisplay (
     }
   })
 
-  const displayClasses = computed(() => {
+  const displayClasses = toRef(() => {
     if (!name) return {}
 
     return { [`${name}--mobile`]: mobile.value }
