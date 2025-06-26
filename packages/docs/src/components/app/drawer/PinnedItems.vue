@@ -1,6 +1,6 @@
 <template>
   <AppListList
-    v-if="one.isSubscriber && user.pins"
+    v-if="one.isSubscriber && user.ecosystem.docs.pins.enabled"
     v-model:opened="opened"
     :items="pinned"
     class="pb-0 mb-n2"
