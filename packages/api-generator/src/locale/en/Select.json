@@ -4,7 +4,7 @@
     "chips": "Changes display of selections to chips.",
     "closableChips": "Enables the [closable](/api/v-chip/#props-closable) prop on all [v-chip](/components/chips/) components.",
     "hideSelected": "Do not display in the select menu items that are already selected.",
-    "itemBg" : "Sets the background color of the item list container.",
+    "itemBg": "Sets the background color of the item list container.",
     "itemColor": "Sets color of selected items.",
     "listProps": "Pass props through to the `v-list` component. Accepts an object with anything from [v-list](/api/v-list/#props) props, camelCase keys are recommended.",
     "menuProps": "Pass props through to the `v-menu` component. Accepts an object with anything from [v-menu](/api/v-menu/#props) props, camelCase keys are recommended.",
