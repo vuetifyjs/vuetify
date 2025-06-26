@@ -8,7 +8,7 @@ import { makeDensityProps } from '@/composables/density'
 import { IconValue } from '@/composables/icons'
 
 // Utilities
-import { computed, mergeProps, reactive, ref, toRaw } from 'vue'
+import { computed, reactive, ref, toRaw } from 'vue'
 import { genericComponent, propsFactory } from '@/util'
 
 // Types
