@@ -105,8 +105,7 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
 
       nextTick(() => {
         if (inputRef.value !== document.activeElement) {
-          inputRef.value?.focus()
-          // nextTick(() => inputRef.value?.focus())
+          nextTick(() => inputRef.value?.focus())
         }
       })
     }

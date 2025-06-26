@@ -68,12 +68,19 @@ async function setFocusEmulationEnabled (ctx: BrowserCommandContext) {
   return ctx.browser.sendCommand('Emulation.setFocusEmulationEnabled', { enabled: true })
 }
 
-async function abortAfter (ctx: BrowserCommandContext, delay: number, name: string) {
-  return setTimeout(() => {
+let abortTimeout: ReturnType<typeof setTimeout> = null!
+function abortAfter (ctx: BrowserCommandContext, delay: number, name: string) {
+  abortTimeout = setTimeout(() => {
     // eslint-disable-next-line no-console
-    console.error(`[Test timeout] Aborting after ${delay}ms for ${name}`)
+    console.error(`[Error] Test timeout: Aborting after ${delay}ms for ${name}.`)
+    // eslint-disable-next-line no-console
+    console.error('[Warning] "chrome" process might still be running and require manual shutdown.')
     throw new Error('Abort')
   }, delay)
+}
+
+function clearAbortTimeout (ctx: BrowserCommandContext) {
+  clearTimeout(abortTimeout)
 }
 
 export const commands = {
@@ -84,6 +91,7 @@ export const commands = {
   waitStable,
   setFocusEmulationEnabled,
   abortAfter,
+  clearAbortTimeout,
 }
 
 export type CustomCommands = {

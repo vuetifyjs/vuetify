@@ -80,22 +80,16 @@ describe('VTextField', () => {
     const input1 = screen.getByCSS('input[name="username"]') as HTMLInputElement
     const input2 = screen.getByCSS('input[name="password"]') as HTMLInputElement
 
-    const timeout = await commands.abortAfter(5000, 'VTextField infinite loop detection')
+    await commands.abortAfter(5000, 'VTextField infinite loop detection')
 
     input1.focus()
     input1.value = 'my username'
-    input1.dispatchEvent(new InputEvent('input', {
-      bubbles: true,
-      inputType: 'insertFromPaste',
-    }))
+    input1.dispatchEvent(new InputEvent('input', { bubbles: true, inputType: 'insertFromPaste' }))
     input1.dispatchEvent(new Event('change', { bubbles: true }))
 
     input2.focus()
     input2.value = 'my password'
-    input2.dispatchEvent(new InputEvent('input', {
-      bubbles: true,
-      inputType: 'insertFromPaste',
-    }))
+    input2.dispatchEvent(new InputEvent('input', { bubbles: true, inputType: 'insertFromPaste' }))
     input2.dispatchEvent(new Event('change', { bubbles: true }))
 
     await wait(100)
@@ -106,7 +100,7 @@ describe('VTextField', () => {
     const menuContent = screen.getByCSS('.my-menu-content')
     expect(menuContent).toBeVisible()
 
-    clearTimeout(timeout)
+    await commands.clearAbortTimeout()
   })
 
   it('handles multiple options in validate-on prop', async () => {
