@@ -1,6 +1,9 @@
+// Composables
+import { makeRevealProps, useReveal } from '@/composables/reveal'
+
 // Utilities
-import { computed, shallowRef } from 'vue'
-import { useOuterSlicePath, usePieArc } from './utils'
+import { computed, shallowRef, toRef } from 'vue'
+import { useInnerSlicePath, useOuterSlicePath, usePieArc } from './utils'
 import { easingPatterns, genericComponent, propsFactory, useTransition } from '@/util'
 
 // Types
@@ -29,6 +32,7 @@ export const makeVPieSegmentProps = propsFactory({
   },
   pattern: String,
   hideSlice: Boolean,
+  ...makeRevealProps(),
 }, 'VPieSegment')
 
 export const VPieSegment = genericComponent()({
@@ -39,18 +43,22 @@ export const VPieSegment = genericComponent()({
   setup (props) {
     const isHovering = shallowRef(false)
 
+    const { state: revealState, duration: revealDuration } = useReveal(props)
+
     const transitionConfig = computed(() => {
       const defaultEasing = 'easeInOutCubic'
       const defaultDuration = 400
 
-      const easingName = props.animation === true
-        ? defaultEasing
-        : typeof props.animation === 'object'
-          ? props.animation.easing ?? defaultEasing
-          : 'linear'
+      const easingName = typeof props.animation === 'object'
+        ? props.animation.easing ?? defaultEasing
+        : defaultEasing
 
       return {
-        duration: typeof props.animation === 'object' ? props.animation.duration : (props.animation ? defaultDuration : 0),
+        duration: ['initial', 'pending'].includes(revealState.value)
+          ? revealDuration.value
+          : typeof props.animation === 'object'
+            ? props.animation.duration
+            : (props.animation ? defaultDuration : 0),
         transition: easingPatterns[easingName],
       }
     })
@@ -59,19 +67,20 @@ export const VPieSegment = genericComponent()({
       hoverZoomRatio,
       normalizedValue,
       normalizedInnerCut,
-      x,
-      y,
+      outerX,
+      outerY,
       arcWidth,
-      sliceRadius,
     } = usePieArc(props, isHovering)
 
-    const currentAngle = useTransition(() => (Number(props.rotate ?? 0) + Number(props.gap ?? 0) / 2), transitionConfig)
-    const currentSliceRadius = useTransition(() => sliceRadius.value, transitionConfig)
+    const arcSize = toRef(() => revealState.value === 'initial' ? 0 : normalizedValue.value)
+    const currentArcSize = useTransition(arcSize, transitionConfig)
 
-    const arcRadius = computed(() => 50 * (isHovering.value ? 1 : (1 - hoverZoomRatio.value)))
-    const currentArcRadius = useTransition(() => arcRadius.value, transitionConfig)
-    const currentArcSize = useTransition(() => normalizedValue.value, transitionConfig)
-    const currentArcWidth = useTransition(() => arcWidth.value, transitionConfig)
+    const angle = toRef(() => revealState.value === 'initial' ? 0 : (Number(props.rotate ?? 0) + Number(props.gap ?? 0) / 2))
+    const currentAngle = useTransition(angle, transitionConfig)
+
+    const arcRadius = toRef(() => 50 * (isHovering.value ? 1 : (1 - hoverZoomRatio.value)))
+    const currentArcRadius = useTransition(arcRadius, transitionConfig)
+    const currentArcWidth = useTransition(arcWidth, transitionConfig)
 
     const outerSlicePath = useOuterSlicePath({
       angle: currentAngle,
@@ -81,11 +90,13 @@ export const VPieSegment = genericComponent()({
       rounded: () => Number(props.rounded ?? 0),
     })
 
-    const circumference = (radius: number) => 2 * Math.PI * radius
-    const strokeDashOffset = (radius: number) => circumference(radius) * (1 - normalizedValue.value / 100)
+    const innerSlicePath = useInnerSlicePath({
+      angle: currentAngle,
+      radius: () => currentArcRadius.value - currentArcWidth.value,
+      size: currentArcSize,
+    })
 
-    const currentSliceCircumference = useTransition(() => circumference(sliceRadius.value), transitionConfig)
-    const currentSliceStrokeDashOffset = useTransition(() => strokeDashOffset(sliceRadius.value), transitionConfig)
+    const overlayPath = toRef(() => `M 50 0 A 50 50 0 ${normalizedValue.value > 50 ? 1 : 0} 1 ${outerX.value} ${outerY.value} L 50 50`)
 
     return () => (
       <g
@@ -107,26 +118,21 @@ export const VPieSegment = genericComponent()({
           />
         )}
         { !props.hideSlice && normalizedInnerCut.value > 0 && (
-          <circle
+          <path
             key="inner-slice"
-            fill="transparent"
-            cx="50%"
-            cy="50%"
-            r={ currentSliceRadius.value }
-            stroke="oklch(from currentColor l c h / calc(alpha / 2))"
-            stroke-width={ 2 * currentSliceRadius.value }
-            stroke-dasharray={ currentSliceCircumference.value }
-            stroke-dashoffset={ `${currentSliceStrokeDashOffset.value}px` }
-            transform={ `rotate(${-90 + currentAngle.value} 50 50)` }
+            fill="oklch(from currentColor l c h / calc(alpha / 2))"
+            d={ innerSlicePath.value }
           />
         )}
-        <path
-          transform={ `rotate(${currentAngle.value} 50 50)` }
-          class="v-pie-segment__overlay"
-          d={ `M 50 0 A 50 50 0 ${normalizedValue.value > 50 ? 1 : 0} 1 ${x.value} ${y.value} L 50 50` }
-          onMouseenter={ () => isHovering.value = true }
-          onMouseleave={ () => isHovering.value = false }
-        />
+        {['disabled', 'done'].includes(revealState.value) && (
+          <path
+            transform={ `rotate(${currentAngle.value} 50 50)` }
+            class="v-pie-segment__overlay"
+            d={ overlayPath.value }
+            onMouseenter={ () => isHovering.value = true }
+            onMouseleave={ () => isHovering.value = false }
+          />
+        )}
       </g>
     )
   },

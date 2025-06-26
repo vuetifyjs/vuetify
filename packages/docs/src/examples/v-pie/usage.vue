@@ -7,7 +7,7 @@
     :script="script"
   >
     <div class="d-flex justify-center">
-      <v-pie v-bind="{ ...props, items }"></v-pie>
+      <v-pie :key="reveal" v-bind="{ ...props, items }"></v-pie>
     </div>
 
     <template v-slot:configuration>
@@ -15,6 +15,7 @@
         <v-checkbox v-model="animation" label="Animate on interaction" hide-details></v-checkbox>
         <v-checkbox v-model="legend" label="Show legend" hide-details></v-checkbox>
         <v-checkbox v-model="tooltip" label="Show tooltip" hide-details></v-checkbox>
+        <v-checkbox v-model="reveal" label="Reveal animation" hide-details></v-checkbox>
 
         <v-slider
           v-if="model !== 'gauge'"
@@ -82,6 +83,7 @@
   const legend = ref(false)
   const tooltip = ref(false)
   const hideSlice = ref(false)
+  const reveal = ref(false)
   const size = ref(250)
 
   const innerCut = ref(85)
@@ -103,6 +105,7 @@
       rounded: (model.value !== 'default' && rounded.value) || undefined,
       size: size.value !== 250 ? size.value : undefined,
       tooltip: tooltip.value || undefined,
+      reveal: reveal.value || undefined,
     }
   })
 

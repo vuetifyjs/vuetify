@@ -22,9 +22,28 @@ function drawCircle ([x, y]: Point, r: number, width: number) {
   ]
 }
 
+export function simpleArc (center: Point, r: number, startAngle: number, endAngle: number) {
+  const start = pointOnArc(center, r, startAngle)
+  const end = pointOnArc(center, r, endAngle)
+  const sweep = endAngle - startAngle > 180 ? 1 : 0
+
+  return [
+    `M${start[0]} ${start[1]}`,
+    `A${r} ${r} 0 ${sweep} 1 ${end[0]} ${end[1]}`,
+    `L${center[0]} ${center[1]}Z`,
+  ]
+    .join(' ')
+}
+
 export function roundedArc (center: Point, radius: number, startAngle: number, endAngle: number, width: number, rounding: number): string {
+  width = Math.min(radius, width)
+
   if (Math.abs(endAngle - startAngle) === 360) {
     return drawCircle(center, radius, width).join(' ')
+  }
+
+  if (rounding === 0 && radius === width) {
+    return simpleArc(center, radius, startAngle, endAngle)
   }
 
   const innerR = radius - width

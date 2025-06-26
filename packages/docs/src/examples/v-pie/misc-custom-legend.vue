@@ -4,6 +4,7 @@
       <v-card-title class="d-flex align-center justify-space-between">
         <div class="text-truncate">Expense Analysis</div>
         <v-select
+          v-model="selectedGroup"
           :items="['Transactions', 'Other']"
           density="compact"
           max-width="200"
@@ -16,6 +17,7 @@
       </v-card-title>
 
       <v-pie
+        :key="selectedGroup"
         :items="items"
         :legend="{ position: 'right' }"
         :tooltip="{ subtitleFormat: '[value]%' }"
@@ -26,6 +28,7 @@
         size="300"
         animation
         hide-slice
+        reveal
       >
         <template v-slot:center>
           <div class="text-center">
@@ -76,25 +79,47 @@
 </template>
 
 <script setup>
-  const items = [
-    { key: 1, title: 'House & Bills', value: 40, color: 'rgba(var(--v-theme-on-surface), .2)', pattern: 'url(#pattern-0)' },
-    { key: 2, title: 'Transportation', value: 25, color: 'rgba(255, 151, 215, .4)' },
-    { key: 3, title: 'Entertainment', value: 20, color: 'rgba(255, 151, 215, .6)' },
-    { key: 4, title: 'Food', value: 10, color: 'rgba(255, 151, 215, .8)' },
-    { key: 5, title: 'Other', value: 5, color: 'rgba(255, 151, 215, 1)' },
-  ]
+  import { shallowRef, toRef } from 'vue'
+
+  const selectedGroup = shallowRef('Transactions')
+  const items = toRef(() => selectedGroup.value === 'Transactions'
+    ? [
+      { id: 1, title: 'House & Bills', value: 40, color: 'rgba(var(--v-theme-on-surface), .2)', pattern: 'url(#pattern-0)' },
+      { id: 2, title: 'Transportation', value: 25, color: 'rgba(255, 151, 215, .4)' },
+      { id: 3, title: 'Entertainment', value: 20, color: 'rgba(255, 151, 215, .6)' },
+      { id: 4, title: 'Food', value: 10, color: 'rgba(255, 151, 215, .8)' },
+      { id: 5, title: 'Other', value: 5, color: 'rgba(255, 151, 215, 1)' },
+    ]
+    : [
+      { id: 1, title: 'OSS Donations', value: 37, color: '#767119' },
+      { id: 2, title: 'Travel', value: 22, color: '#9e850d' },
+      { id: 3, title: 'Investment', value: 20, color: '#cb9700' },
+      { id: 4, title: 'Books', value: 11, color: '#ffa600' },
+    ])
 </script>
 
 <script>
   export default {
     data: () => ({
-      items: [
-        { key: 1, title: 'House & Bills', value: 40, color: 'rgba(var(--v-theme-on-surface), .2)', pattern: 'url(#pattern-0)' },
-        { key: 2, title: 'Transportation', value: 25, color: 'rgba(255, 151, 215, .4)' },
-        { key: 3, title: 'Entertainment', value: 20, color: 'rgba(255, 151, 215, .6)' },
-        { key: 4, title: 'Food', value: 10, color: 'rgba(255, 151, 215, .8)' },
-        { key: 5, title: 'Other', value: 5, color: 'rgba(255, 151, 215, 1)' },
-      ],
+      selectedGroup: 'Transactions',
     }),
+    computed: {
+      items () {
+        return this.selectedGroup === 'Transactions'
+          ? [
+            { id: 1, title: 'House & Bills', value: 40, color: 'rgba(var(--v-theme-on-surface), .2)', pattern: 'url(#pattern-0)' },
+            { id: 2, title: 'Transportation', value: 25, color: 'rgba(255, 151, 215, .4)' },
+            { id: 3, title: 'Entertainment', value: 20, color: 'rgba(255, 151, 215, .6)' },
+            { id: 4, title: 'Food', value: 10, color: 'rgba(255, 151, 215, .8)' },
+            { id: 5, title: 'Other', value: 5, color: 'rgba(255, 151, 215, 1)' },
+          ]
+          : [
+            { id: 1, title: 'OSS Donations', value: 37, color: '#767119' },
+            { id: 2, title: 'Travel', value: 22, color: '#9e850d' },
+            { id: 3, title: 'Investment', value: 20, color: '#cb9700' },
+            { id: 4, title: 'Books', value: 11, color: '#ffa600' },
+          ]
+      },
+    },
   }
 </script>

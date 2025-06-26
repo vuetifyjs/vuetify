@@ -88,6 +88,7 @@ export const makeVPieProps = propsFactory({
     'rounded',
     'hoverScale',
     'hideSlice',
+    'reveal',
   ]),
 }, 'VPie')
 
@@ -222,6 +223,7 @@ export const VPie = genericComponent<VPieSlots>()({
         'gap',
         'rounded',
         'hideSlice',
+        'reveal',
       ]))
 
       const defaultTooltipTransition = {

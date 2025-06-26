@@ -1,7 +1,7 @@
 // Utilities
 import { computed, toRef, toValue } from 'vue'
 import { clamp } from '@/util'
-import { roundedArc } from '@/util/svg-arc-corners'
+import { roundedArc, simpleArc } from '@/util/svg-arc-corners'
 
 // Types
 import type { MaybeRefOrGetter, Ref } from 'vue'
@@ -18,23 +18,24 @@ export function formatTextTemplate (template: string, item?: PieItem) {
 export function usePieArc (props: PieSegmentProps, isHovering: Ref<boolean>) {
   const hoverZoomRatio = toRef(() => clamp(Number(props.hoverScale ?? 0), 0, 0.25))
   const normalizedValue = toRef(() => clamp(props.value - 100 * Number(props.gap ?? 0) / 360, 0.01, 99.99))
-  const normalizedInnerCut = toRef(() => clamp(Number(props.innerCut ?? 0), Number(props.rounded ?? 0) > 0 ? 20 : 0, 100))
+  const normalizedInnerCut = toRef(() => {
+    const min = Number(props.rounded ?? 0) > 0 ? 0.2 : 0
+    return clamp(Number(props.innerCut ?? 0) / 100, min, 1)
+  })
 
   const radians = computed(() => (360 * (-normalizedValue.value / 100) + 90) * (Math.PI / 180))
-  const x = toRef(() => 50 + 50 * Math.cos(radians.value))
-  const y = toRef(() => 50 - 50 * Math.sin(radians.value))
+  const arcWidth = computed(() => 50 * (1 - normalizedInnerCut.value) * (isHovering.value ? 1 : (1 - hoverZoomRatio.value)))
 
-  const arcWidth = computed(() => (50 - normalizedInnerCut.value / 2) * (isHovering.value ? 1 : (1 - hoverZoomRatio.value)))
-  const sliceRadius = computed(() => normalizedInnerCut.value / 4 * (isHovering.value ? 1 : (1 - hoverZoomRatio.value)))
+  const outerX = toRef(() => 50 + 50 * Math.cos(radians.value))
+  const outerY = toRef(() => 50 - 50 * Math.sin(radians.value))
 
   return {
     hoverZoomRatio,
     normalizedValue,
     normalizedInnerCut,
-    x,
-    y,
+    outerX,
+    outerY,
     arcWidth,
-    sliceRadius,
   }
 }
 
@@ -59,6 +60,25 @@ export function useOuterSlicePath ({
       toValue(angle) + 360 * toValue(size) / 100, // angle end,
       toValue(width),
       toValue(rounded),
+    )
+  )
+}
+
+export function useInnerSlicePath ({
+  angle,
+  radius,
+  size,
+}: {
+  angle: MaybeRefOrGetter<number>
+  radius: MaybeRefOrGetter<number>
+  size: MaybeRefOrGetter<number>
+}) {
+  return computed(() =>
+    simpleArc(
+      [50, 50],
+      toValue(radius),
+      toValue(angle),
+      toValue(angle) + 360 * toValue(size) / 100, // angle end,
     )
   )
 }
