@@ -1,7 +1,10 @@
+// Components
 import { VTextField } from '../VTextField'
+import { VBtn } from '@/components/VBtn'
+import { VMenu } from '@/components/VMenu'
 
 // Utilities
-import { generate, render, userEvent } from '@test'
+import { generate, render, screen, userEvent, wait } from '@test'
 import { cloneVNode } from 'vue'
 
 const variants = ['underlined', 'outlined', 'filled', 'solo', 'plain'] as const
@@ -58,6 +61,54 @@ describe('VTextField', () => {
     expect(rule).toHaveBeenCalledTimes(5)
     expect(element).toHaveClass('v-input--error')
     expect(element).toHaveTextContent('Error!')
+  })
+
+  it('does not trigger infinite loop when autofilled by password manager', async () => {
+    render(() => (
+      <div>
+        <VTextField label="username" name="username" type="email" />
+        <VTextField label="password" name="password" type="password" />
+        <VBtn>
+          Some button
+          <VMenu activator="parent">
+            <div class="my-menu-content">Some text in menu</div>
+          </VMenu>
+        </VBtn>
+      </div>
+    ))
+
+    const input1 = screen.getByCSS('input[name="username"]') as HTMLInputElement
+    const input2 = screen.getByCSS('input[name="password"]') as HTMLInputElement
+
+    const timeout = setTimeout(() => {
+      throw new Error('Test timeout. Possible regression - VTextField infinite focus loop')
+    }, 5000)
+
+    input1.focus()
+    input1.value = 'my username'
+    input1.dispatchEvent(new InputEvent('input', {
+      bubbles: true,
+      inputType: 'insertFromPaste',
+    }))
+    input1.dispatchEvent(new Event('change', { bubbles: true }))
+
+    input2.focus()
+    input2.value = 'my password'
+    input2.dispatchEvent(new InputEvent('input', {
+      bubbles: true,
+      inputType: 'insertFromPaste',
+    }))
+    input2.dispatchEvent(new Event('change', { bubbles: true }))
+
+    await wait(100)
+    const button = screen.getByCSS('.v-btn')
+    await userEvent.click(button)
+    await wait(100)
+
+    const menuContent = screen.getByCSS('.my-menu-content')
+    expect(menuContent).toBeVisible()
+
+    clearTimeout(timeout)
   })
 
   it('handles multiple options in validate-on prop', async () => {
