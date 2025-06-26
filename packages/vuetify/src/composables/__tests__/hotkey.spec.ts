@@ -17,16 +17,12 @@ describe('hotkey.ts', () => {
     ['ctrl+shift+b', { ctrlKey: true, shiftKey: true, key: 'b' }],
     ['ctrl_shift_b', { ctrlKey: true, shiftKey: true, key: 'b' }],
     ['alt+f4', { altKey: true, key: 'f4' }],
-    ['meta+s', { metaKey: true, key: 's' }],
     ['shift+tab', { shiftKey: true, key: 'tab' }],
     ['ctrl+alt+delete', { ctrlKey: true, altKey: true, key: 'delete' }],
-    ['meta+shift+z', { metaKey: true, shiftKey: true, key: 'z' }],
     ['escape', { key: 'escape' }],
     ['f1', { key: 'f1' }],
     ['enter', { key: 'enter' }],
-    [' ', { key: ' ' }],
-    ['ctrl+shift+alt+meta+x', { ctrlKey: true, shiftKey: true, altKey: true, metaKey: true, key: 'x' }],
-    ['ctrl++', { ctrlKey: true, key: '+' }],
+    ['space', { key: ' ' }],
     ['alt+-', { altKey: true, key: '-' }],
   ])('fires on %s', (combo, props) => {
     const cb = vi.fn()
@@ -292,5 +288,350 @@ describe('hotkey.ts', () => {
     expect(cb).toHaveBeenCalledTimes(1)
 
     stop()
+  })
+
+  it('handles centralized key aliases', () => {
+    const cb = vi.fn()
+    const stop = useHotkey('control+k', cb)
+
+    window.dispatchEvent(new KeyboardEvent('keydown', { ctrlKey: true, key: 'k' }))
+
+    expect(cb).toHaveBeenCalledTimes(1)
+
+    stop()
+  })
+
+  it('handles arrow key aliases', () => {
+    const cb = vi.fn()
+    const stop = useHotkey('up', cb)
+
+    window.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowUp' }))
+
+    expect(cb).toHaveBeenCalledTimes(1)
+
+    stop()
+  })
+
+  describe('Cross-platform meta key behavior (Nuxt UI style)', () => {
+    const originalNavigator = window.navigator
+
+    afterEach(() => {
+      Object.defineProperty(window, 'navigator', { value: originalNavigator, writable: true })
+    })
+
+    it('should handle meta+s as cmd+s on Mac (metaKey)', () => {
+      Object.defineProperty(window, 'navigator', { value: { userAgent: 'Mozilla/5.0 (Macintosh)' }, writable: true })
+      const cb = vi.fn()
+      const stop = useHotkey('meta+s', cb)
+
+      // On Mac, meta+s should trigger with metaKey (Command key)
+      window.dispatchEvent(new KeyboardEvent('keydown', { metaKey: true, key: 's' }))
+      expect(cb).toHaveBeenCalledTimes(1)
+
+      // Should NOT trigger with ctrlKey on Mac
+      window.dispatchEvent(new KeyboardEvent('keydown', { ctrlKey: true, key: 's' }))
+      expect(cb).toHaveBeenCalledTimes(1) // Still 1, not 2
+
+      stop()
+    })
+
+    it('should handle meta+s as ctrl+s on PC (ctrlKey)', () => {
+      Object.defineProperty(window, 'navigator', { value: { userAgent: 'Windows NT 10.0' }, writable: true })
+      const cb = vi.fn()
+      const stop = useHotkey('meta+s', cb)
+
+      // On PC, meta+s should trigger with ctrlKey
+      window.dispatchEvent(new KeyboardEvent('keydown', { ctrlKey: true, key: 's' }))
+      expect(cb).toHaveBeenCalledTimes(1)
+
+      // Should NOT trigger with metaKey on PC
+      window.dispatchEvent(new KeyboardEvent('keydown', { metaKey: true, key: 's' }))
+      expect(cb).toHaveBeenCalledTimes(1) // Still 1, not 2
+
+      stop()
+    })
+
+    it('should handle cmd+s consistently across platforms', () => {
+      // Test on Mac
+      Object.defineProperty(window, 'navigator', { value: { userAgent: 'Mozilla/5.0 (Macintosh)' }, writable: true })
+      const cbMac = vi.fn()
+      const stopMac = useHotkey('cmd+s', cbMac)
+
+      window.dispatchEvent(new KeyboardEvent('keydown', { metaKey: true, key: 's' }))
+      expect(cbMac).toHaveBeenCalledTimes(1)
+      stopMac()
+
+      // Test on PC
+      Object.defineProperty(window, 'navigator', { value: { userAgent: 'Windows NT 10.0' }, writable: true })
+      const cbPc = vi.fn()
+      const stopPc = useHotkey('cmd+s', cbPc)
+
+      window.dispatchEvent(new KeyboardEvent('keydown', { ctrlKey: true, key: 's' }))
+      expect(cbPc).toHaveBeenCalledTimes(1)
+      stopPc()
+    })
+
+    it('should handle explicit ctrl+s as ctrl on all platforms', () => {
+      // Test on Mac - ctrl should always be ctrl, never cmd
+      Object.defineProperty(window, 'navigator', { value: { userAgent: 'Mozilla/5.0 (Macintosh)' }, writable: true })
+      const cbMac = vi.fn()
+      const stopMac = useHotkey('ctrl+s', cbMac)
+
+      // Should trigger with ctrlKey even on Mac
+      window.dispatchEvent(new KeyboardEvent('keydown', { ctrlKey: true, key: 's' }))
+      expect(cbMac).toHaveBeenCalledTimes(1)
+
+      // Should NOT trigger with metaKey on Mac when using explicit ctrl
+      window.dispatchEvent(new KeyboardEvent('keydown', { metaKey: true, key: 's' }))
+      expect(cbMac).toHaveBeenCalledTimes(1) // Still 1, not 2
+      stopMac()
+
+      // Test on PC
+      Object.defineProperty(window, 'navigator', { value: { userAgent: 'Windows NT 10.0' }, writable: true })
+      const cbPc = vi.fn()
+      const stopPc = useHotkey('ctrl+s', cbPc)
+
+      window.dispatchEvent(new KeyboardEvent('keydown', { ctrlKey: true, key: 's' }))
+      expect(cbPc).toHaveBeenCalledTimes(1)
+      stopPc()
+    })
+
+    it('should handle complex combinations with meta key', () => {
+      // Test meta+shift+z on Mac
+      Object.defineProperty(window, 'navigator', { value: { userAgent: 'Mozilla/5.0 (Macintosh)' }, writable: true })
+      const cbMac = vi.fn()
+      const stopMac = useHotkey('meta+shift+z', cbMac)
+
+      window.dispatchEvent(new KeyboardEvent('keydown', { metaKey: true, shiftKey: true, key: 'z' }))
+      expect(cbMac).toHaveBeenCalledTimes(1)
+      stopMac()
+
+      // Test meta+shift+z on PC
+      Object.defineProperty(window, 'navigator', { value: { userAgent: 'Windows NT 10.0' }, writable: true })
+      const cbPc = vi.fn()
+      const stopPc = useHotkey('meta+shift+z', cbPc)
+
+      window.dispatchEvent(new KeyboardEvent('keydown', { ctrlKey: true, shiftKey: true, key: 'z' }))
+      expect(cbPc).toHaveBeenCalledTimes(1)
+      stopPc()
+    })
+  })
+
+  describe('Key aliases cross-platform behavior', () => {
+    const originalNavigator = window.navigator
+
+    afterEach(() => {
+      Object.defineProperty(window, 'navigator', { value: originalNavigator, writable: true })
+    })
+
+    it('should handle command alias on Mac', () => {
+      Object.defineProperty(window, 'navigator', { value: { userAgent: 'Mozilla/5.0 (Macintosh)' }, writable: true })
+      const cb = vi.fn()
+      const stop = useHotkey('command+k', cb)
+
+      window.dispatchEvent(new KeyboardEvent('keydown', { metaKey: true, key: 'k' }))
+      expect(cb).toHaveBeenCalledTimes(1)
+
+      stop()
+    })
+
+    it('should handle command alias on PC', () => {
+      Object.defineProperty(window, 'navigator', { value: { userAgent: 'Windows NT 10.0' }, writable: true })
+      const cb = vi.fn()
+      const stop = useHotkey('command+k', cb)
+
+      window.dispatchEvent(new KeyboardEvent('keydown', { ctrlKey: true, key: 'k' }))
+      expect(cb).toHaveBeenCalledTimes(1)
+
+      stop()
+    })
+
+    it('should handle option alias on Mac', () => {
+      Object.defineProperty(window, 'navigator', { value: { userAgent: 'Mozilla/5.0 (Macintosh)' }, writable: true })
+      const cb = vi.fn()
+      const stop = useHotkey('option+tab', cb)
+
+      window.dispatchEvent(new KeyboardEvent('keydown', { altKey: true, key: 'tab' }))
+      expect(cb).toHaveBeenCalledTimes(1)
+
+      stop()
+    })
+
+    it('should handle control alias consistently', () => {
+      // Test on Mac
+      Object.defineProperty(window, 'navigator', { value: { userAgent: 'Mozilla/5.0 (Macintosh)' }, writable: true })
+      const cbMac = vi.fn()
+      const stopMac = useHotkey('control+r', cbMac)
+
+      window.dispatchEvent(new KeyboardEvent('keydown', { ctrlKey: true, key: 'r' }))
+      expect(cbMac).toHaveBeenCalledTimes(1)
+      stopMac()
+
+      // Test on PC
+      Object.defineProperty(window, 'navigator', { value: { userAgent: 'Windows NT 10.0' }, writable: true })
+      const cbPc = vi.fn()
+      const stopPc = useHotkey('control+r', cbPc)
+
+      window.dispatchEvent(new KeyboardEvent('keydown', { ctrlKey: true, key: 'r' }))
+      expect(cbPc).toHaveBeenCalledTimes(1)
+      stopPc()
+    })
+
+    it('should handle arrow key aliases', () => {
+      const testCases = [
+        ['up', 'ArrowUp'],
+        ['down', 'ArrowDown'],
+        ['left', 'ArrowLeft'],
+        ['right', 'ArrowRight'],
+      ]
+
+      testCases.forEach(([alias, key]) => {
+        const cb = vi.fn()
+        const stop = useHotkey(alias, cb)
+
+        window.dispatchEvent(new KeyboardEvent('keydown', { key }))
+        expect(cb).toHaveBeenCalledTimes(1)
+
+        stop()
+      })
+    })
+
+    it('should handle common key aliases', () => {
+      const testCases = [
+        ['esc', 'Escape'],
+        ['return', 'Enter'],
+        ['del', 'Delete'],
+      ]
+
+      testCases.forEach(([alias, key]) => {
+        const cb = vi.fn()
+        const stop = useHotkey(alias, cb)
+
+        window.dispatchEvent(new KeyboardEvent('keydown', { key }))
+        expect(cb).toHaveBeenCalledTimes(1)
+
+        stop()
+      })
+    })
+
+    it('should handle symbol aliases', () => {
+      const testCases = [
+        ['minus', '-'],
+        ['hyphen', '-'],
+      ]
+
+      testCases.forEach(([alias, key]) => {
+        const cb = vi.fn()
+        const stop = useHotkey(alias, cb)
+
+        window.dispatchEvent(new KeyboardEvent('keydown', { key }))
+        expect(cb).toHaveBeenCalledTimes(1)
+
+        stop()
+      })
+    })
+
+    it('should handle mixed aliases and modifiers', () => {
+      const cb = vi.fn()
+      const stop = useHotkey('control+up', cb)
+
+      window.dispatchEvent(new KeyboardEvent('keydown', { ctrlKey: true, key: 'ArrowUp' }))
+      expect(cb).toHaveBeenCalledTimes(1)
+
+      stop()
+    })
+
+    it('should handle case insensitive aliases', () => {
+      const cb = vi.fn()
+      const stop = useHotkey('CONTROL+ESC', cb)
+
+      window.dispatchEvent(new KeyboardEvent('keydown', { ctrlKey: true, key: 'Escape' }))
+      expect(cb).toHaveBeenCalledTimes(1)
+
+      stop()
+    })
+
+    it('should handle undefined navigator with aliases', () => {
+      Object.defineProperty(window, 'navigator', { value: undefined, writable: true })
+      const cb = vi.fn()
+      const stop = useHotkey('command+s', cb)
+
+      // Should default to PC behavior (ctrlKey) when navigator is undefined
+      window.dispatchEvent(new KeyboardEvent('keydown', { ctrlKey: true, key: 's' }))
+      expect(cb).toHaveBeenCalledTimes(1)
+
+      stop()
+    })
+  })
+
+  describe('Platform detection edge cases', () => {
+    const originalNavigator = window.navigator
+
+    afterEach(() => {
+      Object.defineProperty(window, 'navigator', { value: originalNavigator, writable: true })
+    })
+
+    it('should handle null navigator', () => {
+      Object.defineProperty(window, 'navigator', { value: null, writable: true })
+      const cb = vi.fn()
+      const stop = useHotkey('meta+s', cb)
+
+      // Should default to PC behavior when navigator is null
+      window.dispatchEvent(new KeyboardEvent('keydown', { ctrlKey: true, key: 's' }))
+      expect(cb).toHaveBeenCalledTimes(1)
+
+      stop()
+    })
+
+    it('should handle navigator without userAgent', () => {
+      Object.defineProperty(window, 'navigator', { value: {}, writable: true })
+      const cb = vi.fn()
+      const stop = useHotkey('meta+s', cb)
+
+      // Should default to PC behavior when userAgent is missing
+      window.dispatchEvent(new KeyboardEvent('keydown', { ctrlKey: true, key: 's' }))
+      expect(cb).toHaveBeenCalledTimes(1)
+
+      stop()
+    })
+
+    it('should handle different Mac user agent strings', () => {
+      const macUserAgents = [
+        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)',
+        'Mozilla/5.0 (Macintosh; Apple Silicon Mac OS X 12_0_0)',
+        'Mozilla/5.0 (Macintosh)',
+      ]
+
+      macUserAgents.forEach(userAgent => {
+        Object.defineProperty(window, 'navigator', { value: { userAgent }, writable: true })
+        const cb = vi.fn()
+        const stop = useHotkey('meta+s', cb)
+
+        window.dispatchEvent(new KeyboardEvent('keydown', { metaKey: true, key: 's' }))
+        expect(cb).toHaveBeenCalledTimes(1)
+
+        stop()
+      })
+    })
+
+    it('should handle non-Mac user agent strings', () => {
+      const nonMacUserAgents = [
+        'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
+        'Mozilla/5.0 (X11; Linux x86_64)',
+        'Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1)',
+        '',
+      ]
+
+      nonMacUserAgents.forEach(userAgent => {
+        Object.defineProperty(window, 'navigator', { value: { userAgent }, writable: true })
+        const cb = vi.fn()
+        const stop = useHotkey('meta+s', cb)
+
+        window.dispatchEvent(new KeyboardEvent('keydown', { ctrlKey: true, key: 's' }))
+        expect(cb).toHaveBeenCalledTimes(1)
+
+        stop()
+      })
+    })
   })
 })

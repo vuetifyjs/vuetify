@@ -1,19 +1,9 @@
 // Utilities
 import { consoleWarn } from './console'
+import { normalizeKey } from './key-aliases'
 
 // Types
 export const MODIFIERS = ['ctrl', 'shift', 'alt', 'meta', 'cmd']
-
-// All keys are normalized to lowercase strings
-const KEY_ALIASES: Record<string, string> = {
-  control: 'ctrl',
-  command: 'cmd',
-  option: 'alt',
-  windows: 'meta',
-  plus: '+',
-  minus: '-',
-  underscore: '_',
-}
 
 /**
  * Splits a single combination string into individual key parts.
@@ -58,7 +48,7 @@ export function splitKeyCombination (combination: string, isInternal = false): s
 
   const flushBuffer = () => {
     if (buffer) {
-      keys.push(KEY_ALIASES[buffer.toLowerCase()] || buffer.toLowerCase())
+      keys.push(normalizeKey(buffer))
       buffer = ''
     }
   }
@@ -92,7 +82,7 @@ export function splitKeyCombination (combination: string, isInternal = false): s
   }
 
   if (keys.length === 0 && combination) {
-    return [KEY_ALIASES[combination.toLowerCase()] || combination.toLowerCase()]
+    return [normalizeKey(combination)]
   }
 
   return keys

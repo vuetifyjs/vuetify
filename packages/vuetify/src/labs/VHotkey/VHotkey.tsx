@@ -157,13 +157,6 @@ export const hotkeyMap: KeyMapConfig = {
   '-': {
     default: { symbol: '-', icon: '$minus', text: '-' },
   },
-  // Alternative names for minus key
-  minus: {
-    default: { symbol: '-', icon: '$minus', text: '-' },
-  },
-  hyphen: {
-    default: { symbol: '-', icon: '$minus', text: '-' },
-  },
 }
 
 // Create custom variant props that extend the base variant props with our 'contained' option

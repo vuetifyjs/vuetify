@@ -91,6 +91,67 @@ describe('hotkey-parsing.ts', () => {
       expect(splitKeyCombination('++k')).toEqual([])
       expect('[Vue warn]: Vuetify: Invalid hotkey combination: "++k" has invalid structure').toHaveBeenTipped()
     })
+
+    // Key aliases from centralized key-aliases.ts
+    it('should handle centralized key aliases', () => {
+      expect(splitKeyCombination('control+k')).toEqual(['ctrl', 'k'])
+      expect(splitKeyCombination('command+s')).toEqual(['cmd', 's'])
+      expect(splitKeyCombination('option+tab')).toEqual(['alt', 'tab'])
+      expect(splitKeyCombination('up')).toEqual(['arrowup'])
+      expect(splitKeyCombination('esc')).toEqual(['escape'])
+      expect(splitKeyCombination('minus')).toEqual(['-'])
+      expect(splitKeyCombination('hyphen')).toEqual(['-'])
+    })
+
+    it('should handle all key aliases consistently', () => {
+      // Modifier aliases
+      expect(splitKeyCombination('control')).toEqual(['ctrl'])
+      expect(splitKeyCombination('command')).toEqual(['cmd'])
+      expect(splitKeyCombination('option')).toEqual(['alt'])
+
+      // Arrow key aliases
+      expect(splitKeyCombination('up')).toEqual(['arrowup'])
+      expect(splitKeyCombination('down')).toEqual(['arrowdown'])
+      expect(splitKeyCombination('left')).toEqual(['arrowleft'])
+      expect(splitKeyCombination('right')).toEqual(['arrowright'])
+
+      // Common key aliases
+      expect(splitKeyCombination('esc')).toEqual(['escape'])
+      expect(splitKeyCombination('return')).toEqual(['enter'])
+      expect(splitKeyCombination('del')).toEqual(['delete'])
+
+      // Symbol aliases
+      expect(splitKeyCombination('minus')).toEqual(['-'])
+      expect(splitKeyCombination('hyphen')).toEqual(['-'])
+    })
+
+    it('should handle key aliases in complex combinations', () => {
+      expect(splitKeyCombination('control+option+up')).toEqual(['ctrl', 'alt', 'arrowup'])
+      expect(splitKeyCombination('command+shift+esc')).toEqual(['cmd', 'shift', 'escape'])
+      expect(splitKeyCombination('control+return')).toEqual(['ctrl', 'enter'])
+      expect(splitKeyCombination('alt+del')).toEqual(['alt', 'delete'])
+      expect(splitKeyCombination('shift+minus')).toEqual(['shift', '-'])
+    })
+
+    it('should handle case insensitive key aliases', () => {
+      expect(splitKeyCombination('CONTROL+K')).toEqual(['ctrl', 'k'])
+      expect(splitKeyCombination('Command+S')).toEqual(['cmd', 's'])
+      expect(splitKeyCombination('OPTION+TAB')).toEqual(['alt', 'tab'])
+      expect(splitKeyCombination('UP')).toEqual(['arrowup'])
+      expect(splitKeyCombination('ESC')).toEqual(['escape'])
+      expect(splitKeyCombination('MINUS')).toEqual(['-'])
+    })
+
+    it('should handle mixed case aliases in combinations', () => {
+      expect(splitKeyCombination('Control+Option+Up')).toEqual(['ctrl', 'alt', 'arrowup'])
+      expect(splitKeyCombination('COMMAND+shift+ESC')).toEqual(['cmd', 'shift', 'escape'])
+    })
+
+    it('should handle meta key correctly for cross-platform use', () => {
+      expect(splitKeyCombination('meta+s')).toEqual(['meta', 's'])
+      expect(splitKeyCombination('meta+shift+z')).toEqual(['meta', 'shift', 'z'])
+      expect(splitKeyCombination('meta+alt+p')).toEqual(['meta', 'alt', 'p'])
+    })
   })
 
   describe('splitKeySequence', () => {

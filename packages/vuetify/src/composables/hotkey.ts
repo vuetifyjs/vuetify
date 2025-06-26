@@ -28,7 +28,7 @@ export function useHotkey (
     sequenceTimeout = 1000,
   } = options
 
-  const isMac = navigator?.userAgent?.includes('Macintosh')
+  const isMac = navigator?.userAgent?.includes('Macintosh') ?? false
   let timeout = 0
   let keyGroups: string[]
   let isSequence = false
@@ -141,9 +141,18 @@ export function useHotkey (
   function matchesKeyGroup (e: KeyboardEvent, group: string) {
     const { modifiers, actualKey } = parseKeyGroup(group)
 
+    // Cross-platform key mapping following Nuxt UI patterns:
+    // - cmd: Command on Mac, Ctrl on PC (explicit cross-platform)
+    // - meta: Command on Mac, Ctrl on PC (cross-platform like cmd)
+    // - ctrl: Always Ctrl (platform-specific)
+    // - meta in KeyboardEvent: Always the actual meta key (Cmd on Mac, Win on PC)
+
+    const expectCtrl = modifiers.ctrl || (!isMac && (modifiers.cmd || modifiers.meta))
+    const expectMeta = isMac && (modifiers.cmd || modifiers.meta)
+
     return (
-      e.ctrlKey === (isMac && modifiers.cmd ? false : modifiers.ctrl) &&
-      e.metaKey === (isMac && modifiers.cmd ? true : modifiers.meta) &&
+      e.ctrlKey === expectCtrl &&
+      e.metaKey === expectMeta &&
       e.shiftKey === modifiers.shift &&
       e.altKey === modifiers.alt &&
       e.key.toLowerCase() === actualKey?.toLowerCase()
