@@ -11,7 +11,8 @@ import {
   ref,
   shallowRef,
   toRaw,
-  toRef, toValue,
+  toRef,
+  toValue,
 } from 'vue'
 import {
   independentActiveStrategy,
@@ -136,8 +137,8 @@ export const useNested = (props: NestedProps) => {
     props,
     'opened',
     props.opened,
-    v => new Set(toRaw(v)),
-    v => [...toRaw(v).values()],
+    v => new Set(Array.isArray(v) ? v.map(i => toRaw(i)) : v),
+    v => [...v.values()],
   )
 
   const activeStrategy = computed(() => {
@@ -360,10 +361,10 @@ export const useNestedItem = (id: MaybeRefOrGetter<unknown>, isGroup: boolean) =
     isOpen: computed(() => parent.root.opened.value.has(computedId.value)),
     parent: computed(() => parent.root.parents.value.get(computedId.value)),
     activate: (activated: boolean, e?: Event) => parent.root.activate(computedId.value, activated, e),
-    isActivated: computed(() => parent.root.activated.value.has(toRaw(computedId.value))),
+    isActivated: computed(() => parent.root.activated.value.has(computedId.value)),
     select: (selected: boolean, e?: Event) => parent.root.select(computedId.value, selected, e),
-    isSelected: computed(() => parent.root.selected.value.get(toRaw(computedId.value)) === 'on'),
-    isIndeterminate: computed(() => parent.root.selected.value.get(toRaw(computedId.value)) === 'indeterminate'),
+    isSelected: computed(() => parent.root.selected.value.get(computedId.value) === 'on'),
+    isIndeterminate: computed(() => parent.root.selected.value.get(computedId.value) === 'indeterminate'),
     isLeaf: computed(() => !parent.root.children.value.get(computedId.value)),
     isGroupActivator: parent.isGroupActivator,
   }
