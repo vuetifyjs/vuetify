@@ -4,7 +4,7 @@ import { VBtn } from '@/components/VBtn'
 import { VMenu } from '@/components/VMenu'
 
 // Utilities
-import { generate, render, screen, userEvent, wait } from '@test'
+import { commands, generate, render, screen, userEvent, wait } from '@test'
 import { cloneVNode } from 'vue'
 
 const variants = ['underlined', 'outlined', 'filled', 'solo', 'plain'] as const
@@ -80,9 +80,7 @@ describe('VTextField', () => {
     const input1 = screen.getByCSS('input[name="username"]') as HTMLInputElement
     const input2 = screen.getByCSS('input[name="password"]') as HTMLInputElement
 
-    const timeout = setTimeout(() => {
-      throw new Error('Test timeout. Possible regression - VTextField infinite focus loop')
-    }, 5000)
+    const timeout = await commands.breakExecutionAfter(5000)
 
     input1.focus()
     input1.value = 'my username'

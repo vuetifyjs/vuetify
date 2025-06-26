@@ -68,7 +68,21 @@ async function setFocusEmulationEnabled (ctx: BrowserCommandContext) {
   return ctx.browser.sendCommand('Emulation.setFocusEmulationEnabled', { enabled: true })
 }
 
-export const commands = { drag, scroll, isDisplayed, percySnapshot, waitStable, setFocusEmulationEnabled }
+async function breakExecutionAfter (ctx: BrowserCommandContext, delay: number) {
+  return setTimeout(() => {
+    throw new Error('Browser was paused. Test timeout')
+  }, delay)
+}
+
+export const commands = {
+  drag,
+  scroll,
+  isDisplayed,
+  percySnapshot,
+  waitStable,
+  setFocusEmulationEnabled,
+  breakExecutionAfter,
+}
 
 export type CustomCommands = {
   [k in keyof typeof commands]: typeof commands[k] extends (ctx: any, ...args: infer A) => any
