@@ -1,6 +1,6 @@
 // Utilities
-import { consoleWarn } from './console'
 import { normalizeKey } from './key-aliases'
+import { consoleWarn } from '../../util/console'
 
 // Types
 export const MODIFIERS = ['ctrl', 'shift', 'alt', 'meta', 'cmd']

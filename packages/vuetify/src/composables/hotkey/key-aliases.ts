@@ -5,7 +5,7 @@
  * KeyboardEvent.key values (in lowercase) where possible.
  */
 export const keyAliasMap: Record<string, string> = {
-  // Modifier aliases (from vue-use, nuxt/ui, and current implementation)
+  // Modifier aliases (from vue-use, other libraries, and current implementation)
   control: 'ctrl',
   command: 'cmd',
   option: 'alt',

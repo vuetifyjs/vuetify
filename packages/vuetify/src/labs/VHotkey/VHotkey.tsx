@@ -38,6 +38,7 @@ import { VKbd } from '@/components/VKbd'
 import { makeBorderProps, useBorder } from '@/composables/border'
 import { makeComponentProps } from '@/composables/component'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
+import { splitKeyCombination, splitKeySequence } from '@/composables/hotkey/hotkey-parsing'
 import { useLocale, useRtl } from '@/composables/locale'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
@@ -46,7 +47,6 @@ import { useVariant } from '@/composables/variant'
 // Utilities
 import { computed } from 'vue'
 import { genericComponent, mergeDeep, propsFactory, useRender } from '@/util'
-import { splitKeyCombination, splitKeySequence } from '@/util/hotkey-parsing'
 
 // Types
 import type { PropType } from 'vue'

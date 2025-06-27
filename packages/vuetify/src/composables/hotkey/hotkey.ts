@@ -1,8 +1,10 @@
+// Composables
+import { splitKeyCombination, splitKeySequence } from '@/composables/hotkey/hotkey-parsing'
+
 // Utilities
 import { onBeforeUnmount, toValue, watch } from 'vue'
 import { IN_BROWSER } from '@/util'
 import { getCurrentInstance } from '@/util/getCurrentInstance'
-import { splitKeyCombination, splitKeySequence } from '@/util/hotkey-parsing'
 
 // Types
 import type { MaybeRef } from '@/util'
