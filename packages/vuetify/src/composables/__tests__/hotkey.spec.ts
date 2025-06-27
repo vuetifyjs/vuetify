@@ -3,7 +3,7 @@ import { useHotkey } from '../hotkey'
 
 // Utilities
 import { wait } from '@test'
-import { ref, nextTick } from 'vue'
+import { ref } from 'vue'
 
 describe('hotkey.ts', () => {
   const originalNavigator = window.navigator
