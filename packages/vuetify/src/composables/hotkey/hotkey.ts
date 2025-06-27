@@ -1,3 +1,6 @@
+// Composables
+import { splitKeyCombination, splitKeySequence } from '@/composables/hotkey/hotkey-parsing'
+
 // Utilities
 import { onBeforeUnmount, toValue, watch } from 'vue'
 import { IN_BROWSER } from '@/util'
@@ -7,10 +10,10 @@ import { getCurrentInstance } from '@/util/getCurrentInstance'
 import type { MaybeRef } from '@/util'
 
 interface HotkeyOptions {
-  event?: 'keydown' | 'keyup'
-  inputs?: boolean
-  preventDefault?: boolean
-  sequenceTimeout?: number
+  event?: MaybeRef<'keydown' | 'keyup'>
+  inputs?: MaybeRef<boolean>
+  preventDefault?: MaybeRef<boolean>
+  sequenceTimeout?: MaybeRef<number>
 }
 
 export function useHotkey (
@@ -27,7 +30,7 @@ export function useHotkey (
     sequenceTimeout = 1000,
   } = options
 
-  const isMac = navigator?.userAgent?.includes('Macintosh')
+  const isMac = navigator?.userAgent?.includes('Macintosh') ?? false
   let timeout = 0
   let keyGroups: string[]
   let isSequence = false
@@ -41,7 +44,7 @@ export function useHotkey (
   }
 
   function isInputFocused () {
-    if (inputs) return false
+    if (toValue(inputs)) return false
 
     const activeElement = document.activeElement as HTMLElement
 
@@ -68,7 +71,7 @@ export function useHotkey (
       return
     }
 
-    if (preventDefault) e.preventDefault()
+    if (toValue(preventDefault)) e.preventDefault()
 
     if (!isSequence) {
       callback(e)
@@ -84,34 +87,12 @@ export function useHotkey (
       return
     }
 
-    timeout = window.setTimeout(resetSequence, sequenceTimeout)
+    timeout = window.setTimeout(resetSequence, toValue(sequenceTimeout))
   }
 
   function cleanup () {
-    window.removeEventListener(event, handler)
+    window.removeEventListener(toValue(event), handler)
     clearTimer()
-  }
-
-  function splitKeySequence (str: string) {
-    const groups: string[] = []
-    let current = ''
-    for (let i = 0; i < str.length; i++) {
-      const char = str[i]
-      if (char === '-') {
-        const next = str[i + 1]
-        // Treat '-' as a sequence delimiter only if the next character exists
-        // and is NOT one of '-', '+', or '_' (these indicate the '-' belongs to the key itself)
-        if (next && !['-', '+', '_'].includes(next)) {
-          groups.push(current)
-          current = ''
-          continue
-        }
-      }
-      current += char
-    }
-    groups.push(current)
-
-    return groups
   }
 
   watch(() => toValue(keys), function (unrefKeys) {
@@ -122,9 +103,17 @@ export function useHotkey (
       isSequence = groups.length > 1
       keyGroups = groups
       resetSequence()
-      window.addEventListener(event, handler)
+      window.addEventListener(toValue(event), handler)
     }
   }, { immediate: true })
+
+  // Watch for changes in the event type to re-register the listener
+  watch(() => toValue(event), function (newEvent, oldEvent) {
+    if (oldEvent && keyGroups && keyGroups.length > 0) {
+      window.removeEventListener(oldEvent, handler)
+      window.addEventListener(newEvent, handler)
+    }
+  })
 
   try {
     getCurrentInstance('useHotkey')
@@ -136,25 +125,23 @@ export function useHotkey (
   function parseKeyGroup (group: string) {
     const MODIFIERS = ['ctrl', 'shift', 'alt', 'meta', 'cmd']
 
-    // Split on +, -, or _ but keep empty strings which indicate consecutive separators (e.g. alt--)
-    const parts = group.toLowerCase().split(/[+_-]/)
+    // Use the shared combination splitting logic
+    const parts = splitKeyCombination(group.toLowerCase())
+
+    // If the combination is invalid, return empty result
+    if (parts.length === 0) {
+      return { modifiers: Object.fromEntries(MODIFIERS.map(m => [m, false])), actualKey: undefined }
+    }
 
     const modifiers = Object.fromEntries(MODIFIERS.map(m => [m, false])) as Record<string, boolean>
     let actualKey: string | undefined
 
     for (const part of parts) {
-      if (!part) continue // Skip empty tokens
       if (MODIFIERS.includes(part)) {
         modifiers[part] = true
       } else {
         actualKey = part
       }
-    }
-
-    // Fallback for cases where actualKey is a literal '+' or '-' (e.g. alt--, alt++ , alt+-, alt-+)
-    if (!actualKey) {
-      const lastChar = group.slice(-1)
-      if (['+', '-', '_'].includes(lastChar)) actualKey = lastChar
     }
 
     return { modifiers, actualKey }
@@ -163,9 +150,12 @@ export function useHotkey (
   function matchesKeyGroup (e: KeyboardEvent, group: string) {
     const { modifiers, actualKey } = parseKeyGroup(group)
 
+    const expectCtrl = modifiers.ctrl || (!isMac && (modifiers.cmd || modifiers.meta))
+    const expectMeta = isMac && (modifiers.cmd || modifiers.meta)
+
     return (
-      e.ctrlKey === (isMac && modifiers.cmd ? false : modifiers.ctrl) &&
-      e.metaKey === (isMac && modifiers.cmd ? true : modifiers.meta) &&
+      e.ctrlKey === expectCtrl &&
+      e.metaKey === expectMeta &&
       e.shiftKey === modifiers.shift &&
       e.altKey === modifiers.alt &&
       e.key.toLowerCase() === actualKey?.toLowerCase()
