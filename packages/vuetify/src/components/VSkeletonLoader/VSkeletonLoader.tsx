@@ -132,7 +132,7 @@ export const VSkeletonLoader = genericComponent()({
 
   props: makeVSkeletonLoaderProps(),
 
-  setup (props, { slots }) {
+  setup (props, { attrs, slots }) {
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.color)
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
@@ -150,24 +150,30 @@ export const VSkeletonLoader = genericComponent()({
       }
 
       return (
-        <div
-          class={[
-            'v-skeleton-loader',
-            {
-              'v-skeleton-loader--boilerplate': props.boilerplate,
-            },
-            themeClasses.value,
-            backgroundColorClasses.value,
-            elevationClasses.value,
-          ]}
-          style={[
-            backgroundColorStyles.value,
-            isLoading ? dimensionStyles.value : {},
-          ]}
-          { ...loadingProps }
-        >
-          { isLoading ? items.value : slots.default?.() }
-        </div>
+        <>
+          { isLoading && (
+            <div
+              class={[
+                'v-skeleton-loader',
+                {
+                  'v-skeleton-loader--boilerplate': props.boilerplate,
+                },
+                themeClasses.value,
+                backgroundColorClasses.value,
+                elevationClasses.value,
+              ]}
+              style={[
+                backgroundColorStyles.value,
+                dimensionStyles.value,
+              ]}
+              { ...loadingProps }
+              { ...attrs }
+            >
+              { items.value }
+            </div>
+          )}
+          { !isLoading && slots.default?.() }
+        </>
       )
     })
 
