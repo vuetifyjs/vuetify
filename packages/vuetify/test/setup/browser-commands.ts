@@ -68,7 +68,7 @@ async function setFocusEmulationEnabled (ctx: BrowserCommandContext) {
   return ctx.browser.sendCommand('Emulation.setFocusEmulationEnabled', { enabled: true })
 }
 
-let abortTimeout: ReturnType<typeof setTimeout> = null!
+let abortTimeout: ReturnType<typeof setTimeout>
 function abortAfter (ctx: BrowserCommandContext, delay: number, name: string) {
   abortTimeout = setTimeout(async () => {
     // eslint-disable-next-line no-console
