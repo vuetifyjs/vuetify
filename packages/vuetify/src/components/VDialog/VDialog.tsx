@@ -5,6 +5,7 @@ import './VDialog.sass'
 import { VDialogTransition } from '@/components/transitions'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VOverlay } from '@/components/VOverlay'
+import { VDialogSymbol, VMenuSymbol } from '@/components/VOverlay/shared'
 import { makeVOverlayProps } from '@/components/VOverlay/VOverlay'
 
 // Composables
@@ -13,7 +14,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { useScopeId } from '@/composables/scopeId'
 
 // Utilities
-import { mergeProps, nextTick, onBeforeUnmount, ref, watch } from 'vue'
+import { inject, mergeProps, nextTick, onBeforeUnmount, provide, ref, watch } from 'vue'
 import { focusableChildren, genericComponent, IN_BROWSER, propsFactory, useRender } from '@/util'
 
 // Types
@@ -51,6 +52,22 @@ export const VDialog = genericComponent<OverlaySlots>()({
     const { scopeId } = useScopeId()
 
     const overlay = ref<VOverlay>()
+
+    const parentDialog = inject(VDialogSymbol, null)
+    const parentMenu = inject(VMenuSymbol, null)
+    const parent = parentDialog || parentMenu
+
+    provide(VDialogSymbol, {
+      closeParents (e) {
+        if (e ? overlay.value?.closeConditional(e) : true
+        ) {
+          isActive.value = false
+          parent?.closeParents()
+        }
+      },
+      closeConditional: overlay.value?.closeConditional ?? ((e: MouseEvent) => {}),
+    })
+
     function onFocusin (e: FocusEvent) {
       const before = e.relatedTarget as HTMLElement | null
       const after = e.target as HTMLElement | null
