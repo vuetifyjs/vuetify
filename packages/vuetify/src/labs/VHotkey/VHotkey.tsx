@@ -76,7 +76,6 @@ type PlatformKeyConfig = {
   default: KeyConfig
 }
 
-// Simplified key mapping - just data, no functions!
 type KeyMapConfig = Record<string, PlatformKeyConfig>
 
 function processKey (config: PlatformKeyConfig, requestedMode: DisplayMode, isMac: boolean): KeyDisplay {
@@ -109,28 +108,27 @@ function processKey (config: PlatformKeyConfig, requestedMode: DisplayMode, isMa
 
 export const hotkeyMap: KeyMapConfig = {
   ctrl: {
-    mac: { symbol: '⌃', icon: '$ctrl', text: '$vuetify.hotkey.ctrl' }, // Mac Control symbol
+    mac: { symbol: '⌃', icon: '$ctrl', text: '$vuetify.hotkey.ctrl' },
     default: { text: 'Ctrl' },
   },
-  // Meta and Cmd both map to Command on Mac, Ctrl on PC
   meta: {
-    mac: { symbol: '⌘', icon: '$command', text: '$vuetify.hotkey.command' }, // Mac Command symbol
+    mac: { symbol: '⌘', icon: '$command', text: '$vuetify.hotkey.command' },
     default: { text: 'Ctrl' },
   },
   cmd: {
-    mac: { symbol: '⌘', icon: '$command', text: '$vuetify.hotkey.command' }, // Mac Command symbol
+    mac: { symbol: '⌘', icon: '$command', text: '$vuetify.hotkey.command' },
     default: { text: 'Ctrl' },
   },
   shift: {
-    mac: { symbol: '⇧', icon: '$shift', text: '$vuetify.hotkey.shift' }, // Shift symbol
+    mac: { symbol: '⇧', icon: '$shift', text: '$vuetify.hotkey.shift' },
     default: { text: 'Shift' },
   },
   alt: {
-    mac: { symbol: '⌥', icon: '$alt', text: '$vuetify.hotkey.option' }, // Mac Option symbol
+    mac: { symbol: '⌥', icon: '$alt', text: '$vuetify.hotkey.option' },
     default: { text: 'Alt' },
   },
   enter: {
-    default: { symbol: '↵', icon: '$enter', text: '$vuetify.hotkey.enter' }, // Return symbol
+    default: { symbol: '↵', icon: '$enter', text: '$vuetify.hotkey.enter' },
   },
   arrowup: {
     default: { symbol: '↑', icon: '$arrowup', text: '$vuetify.hotkey.upArrow' },
@@ -145,7 +143,7 @@ export const hotkeyMap: KeyMapConfig = {
     default: { symbol: '→', icon: '$arrowright', text: '$vuetify.hotkey.rightArrow' },
   },
   backspace: {
-    default: { symbol: '⌫', icon: '$backspace', text: '$vuetify.hotkey.backspace' }, // Backspace symbol
+    default: { symbol: '⌫', icon: '$backspace', text: '$vuetify.hotkey.backspace' },
   },
   escape: {
     default: { text: '$vuetify.hotkey.escape' },
@@ -186,7 +184,6 @@ export const makeVHotkeyProps = propsFactory({
     default: 'auto',
   },
   inline: Boolean,
-  // Disabled state
   disabled: Boolean,
   prefix: String,
   suffix: String,
@@ -196,9 +193,7 @@ export const makeVHotkeyProps = propsFactory({
   ...makeBorderProps(),
   ...makeRoundedProps(),
   ...makeElevationProps(),
-  // Use our custom variant props instead of the base ones
   ...makeVHotkeyVariantProps(),
-  // Still include color from the base variant props
   color: String,
 }, 'VHotkey')
 
@@ -222,28 +217,22 @@ function isString (value: any): value is string {
 }
 
 function getKeyText (keyMap: KeyMapConfig, key: string, isMac: boolean): string {
-  // Normalize keys to lowercase for consistent lookup
   const lowerKey = key.toLowerCase()
 
-  // Check if we have a specific mapping for this key
   if (lowerKey in keyMap) {
     const result = processKey(keyMap[lowerKey], 'text', isMac)
     return typeof result[1] === 'string' ? result[1] : String(result[1])
   }
 
-  // Fallback to uppercase text for unknown keys
   return key.toUpperCase()
 }
 
 function applyDisplayModeToKey (keyMap: KeyMapConfig, mode: DisplayMode, key: string, isMac: boolean): Key {
-  // Normalize keys to lowercase for consistent lookup
   const lowerKey = key.toLowerCase()
 
-  // Check if we have a specific mapping for this key
   if (lowerKey in keyMap) {
     const result = processKey(keyMap[lowerKey], mode, isMac)
 
-    // If we get an icon token in text mode, convert it to readable text
     if (result[0] === 'text' && typeof result[1] === 'string' && result[1].startsWith('$') && !result[1].startsWith('$vuetify.')) {
       return ['text', result[1].replace('$', '').toUpperCase(), key]
     }
@@ -251,7 +240,6 @@ function applyDisplayModeToKey (keyMap: KeyMapConfig, mode: DisplayMode, key: st
     return [...result, key]
   }
 
-  // Fallback to uppercase text for unknown keys
   return ['text', key.toUpperCase(), key]
 }
 
@@ -268,10 +256,8 @@ export const VHotkey = genericComponent()({
     const { roundedClasses } = useRounded(props)
     const { elevationClasses } = useElevation(props)
 
-    // Handle variant logic - use standard variant composable for non-contained variants
     const isContainedVariant = computed(() => props.variant === 'contained')
 
-    // For contained variant, we'll use 'elevated' as the base variant for the wrapper
     const effectiveVariantProps = computed(() => ({
       ...props,
       variant: isContainedVariant.value ? 'elevated' as Variant : props.variant as Variant,
@@ -285,13 +271,11 @@ export const VHotkey = genericComponent()({
         : props.platform === 'mac'
     )
 
-    // The requested display mode remains unchanged; processKey handles platform-specific fallbacks
     const effectiveDisplayMode = computed<DisplayMode>(() => props.displayMode)
 
     const AND_DELINEATOR = new Delineator('and') // For + separators
     const THEN_DELINEATOR = new Delineator('then') // For - separators
 
-    // Use the provided keyMap directly (user can start with exported hotkeyMap and modify as needed)
     const effectiveKeyMap = computed(() => props.keyMap)
 
     const keyCombinations = computed(() => {
@@ -369,16 +353,12 @@ export const VHotkey = genericComponent()({
     }
 
     function getKeyTooltip (key: Key): string | undefined {
-      // Only provide tooltips for icon and symbol modes where visual clarity might be needed
-      // Check the requested display mode, not the actual rendered mode (which may fall back to text)
       if (effectiveDisplayMode.value === 'text') return undefined
 
-      // Get the text representation for tooltip
       const textKey = getKeyText(effectiveKeyMap.value, String(key[2]), isMac.value)
       return translateKey(textKey)
     }
 
-    // Simplified key rendering function to reduce duplication
     function renderKey (key: Key, keyIndex: number, isContained: boolean) {
       const KeyComponent = isContained ? 'kbd' : VKbd
       const keyClasses = [
@@ -412,7 +392,6 @@ export const VHotkey = genericComponent()({
       )
     }
 
-    // Simplified divider rendering function
     function renderDivider (key: Delineator, keyIndex: number) {
       return (
         <span
@@ -446,7 +425,6 @@ export const VHotkey = genericComponent()({
         aria-label={ accessibleLabel.value }
       >
         { isContainedVariant.value ? (
-          // Contained variant: Single VKbd wrapper with nested content
           <VKbd
             key="contained"
             class={[
@@ -503,5 +481,4 @@ export const VHotkey = genericComponent()({
 
 export type VHotkey = InstanceType<typeof VHotkey>
 
-// Export types for users to create custom key mappings
 export type { KeyConfig, PlatformKeyConfig, KeyMapConfig, DisplayMode }

@@ -9,12 +9,10 @@
     vertical-align: middle;
     line-height: $hotkey-line-height;
 
-    // Disabled state
     &--disabled {
       opacity: $hotkey-disabled-opacity;
     }
 
-    // Inline variant
     &--inline {
       align-items: baseline;
       max-height: 1lh;
@@ -23,7 +21,6 @@
       line-height: $hotkey-inline-line-height;
     }
 
-    // Prefix and suffix elements
     &__prefix {
       opacity: $hotkey-prefix-suffix-opacity;
       font-weight: $hotkey-prefix-suffix-font-weight;
@@ -42,11 +39,11 @@
         display: inline-flex;
         align-items: center;
         gap: $hotkey-combination-gap;
-        padding: $hotkey-contained-padding; // Use same padding as individual VKbd elements
+        padding: $hotkey-contained-padding;
         box-sizing: border-box;
         background: unset;
         box-shadow: unset;
-        min-height: 1em; // Match VKbd min-height exactly
+        min-height: 1em;
         font-size: $hotkey-font-size;
         line-height: $hotkey-line-height;
         .v-hotkey__prefix, .v-hotkey__suffix {
@@ -71,10 +68,9 @@
         gap: $hotkey-combination-gap;
       }
 
-      // Inline contained variant - baseline alignment fixes
       &.v-hotkey--inline .v-hotkey__contained-wrapper.v-kbd {
-        align-self: baseline !important; // Override VKbd's align-self: stretch
-        align-items: baseline; // Align content to baseline instead of center
+        align-self: baseline;
+        align-items: baseline;
         font-size: $hotkey-inline-font-size;
         line-height: $hotkey-inline-line-height;
         padding: $hotkey-inline-padding;
@@ -94,7 +90,6 @@
       }
     }
 
-    // Key elements
     &__key {
       &.v-kbd {
         min-height: unset;
@@ -115,7 +110,6 @@
         min-width: unset;
       }
 
-      // Nested keys in contained variant
       &--nested {
         background: none;
         border: none;
@@ -127,21 +121,19 @@
         align-items: center;
         min-width: auto;
         min-height: auto;
-        align-self: baseline; // Default to baseline
+        align-self: baseline;
 
         &.v-hotkey__key-icon {
-          align-self: center; // Icons need center alignment
+          align-self: center;
         }
 
         .v-icon {
           max-width: $hotkey-icon-max-width;
           min-width: unset;
-          // Remove max-height constraint to match non-contained variants
         }
       }
     }
 
-    // Divider elements
     &__divider {
       align-items: center;
       display: inline-flex;
@@ -149,7 +141,6 @@
       font-size: $hotkey-divider-font-size;
     }
 
-    // Combination containers
     &__combination {
       align-self: baseline;
       display: flex;
@@ -158,7 +149,6 @@
 
 
 
-    // Inline-specific styles
     &--inline &__key {
       &-symbol.v-kbd,
       &-text.v-kbd {
@@ -187,7 +177,7 @@
 
           .v-icon__svg {
             height: 100%;
-            width: unset; // Safari fix
+            width: unset;
           }
         }
       }
@@ -197,7 +187,7 @@
       height: inherit;
       align-self: baseline;
       display: flex;
-      gap: 1px; // Reduced gap for inline display
+      gap: 1px;
     }
 
     &--inline &__divider {
@@ -210,7 +200,6 @@
       font-size: inherit;
     }
 
-    // Variant-specific overrides
     &--variant-elevated &__key.v-kbd {
       @include tools.elevation($hotkey-elevation);
     }

@@ -97,7 +97,6 @@ export function useHotkey (
     cleanup()
 
     if (unrefKeys) {
-      // Use the shared sequence splitting logic
       const groups = splitKeySequence(unrefKeys.toLowerCase())
       isSequence = groups.length > 1
       keyGroups = groups
@@ -148,12 +147,6 @@ export function useHotkey (
 
   function matchesKeyGroup (e: KeyboardEvent, group: string) {
     const { modifiers, actualKey } = parseKeyGroup(group)
-
-    // Cross-platform key mapping following Nuxt UI patterns:
-    // - cmd: Command on Mac, Ctrl on PC (explicit cross-platform)
-    // - meta: Command on Mac, Ctrl on PC (cross-platform like cmd)
-    // - ctrl: Always Ctrl (platform-specific)
-    // - meta in KeyboardEvent: Always the actual meta key (Cmd on Mac, Win on PC)
 
     const expectCtrl = modifiers.ctrl || (!isMac && (modifiers.cmd || modifiers.meta))
     const expectMeta = isMac && (modifiers.cmd || modifiers.meta)
