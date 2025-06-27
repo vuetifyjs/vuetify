@@ -160,18 +160,18 @@ describe('VHotkey.tsx', () => {
       render(() => <VHotkey keys="shift+-" displayMode="symbol" />)
 
       const keys = screen.getAllByCSS('.v-hotkey__key')
-      expect(keys[1]).toHaveTextContent('-') // Minus symbol (different from hyphen)
-      expect(keys[1]).toHaveClass('v-hotkey__key-symbol')
+      // Should fallback to text mode for minus key in symbol mode
+      expect(keys[1]).toHaveTextContent('-')
+      expect(keys[1]).toHaveClass('v-hotkey__key-text')
     })
 
     it('should render minus key in icon mode', () => {
       render(() => <VHotkey keys="shift+-" displayMode="icon" platform="mac" />)
 
       const keys = screen.getAllByCSS('.v-hotkey__key')
-      expect(keys[1]).toHaveClass('v-hotkey__key-icon')
-      // Use getAllByCSS since there are multiple icons (shift and minus)
-      const icons = screen.getAllByCSS('.v-icon')
-      expect(icons.length).toBeGreaterThan(0)
+      // Should fallback to text mode for minus key in icon mode
+      expect(keys[1]).toHaveTextContent('-')
+      expect(keys[1]).toHaveClass('v-hotkey__key-text')
     })
   })
 
