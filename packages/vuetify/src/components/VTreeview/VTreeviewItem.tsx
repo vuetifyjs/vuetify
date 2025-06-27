@@ -75,7 +75,7 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
         <VListItem
           ref={ vListItemRef }
           { ...listItemProps }
-          active={ vListItemRef.value?.isActivated }
+          active={ vListItemRef.value?.isActivated || undefined }
           class={[
             'v-treeview-item',
             {
