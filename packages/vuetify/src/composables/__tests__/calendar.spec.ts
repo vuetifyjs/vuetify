@@ -7,6 +7,9 @@ import { mount } from '@vue/test-utils'
 import { defineComponent } from 'vue'
 import { createVuetify } from '@/framework'
 
+// Types
+import type { CalendarProps } from '@/composables/calendar'
+
 describe('calendar', () => {
   it('renders days based upon displayValue', () => {
     expect.assertions(2)
@@ -64,6 +67,25 @@ describe('calendar', () => {
           ]
         `)
 
+        return () => {}
+      },
+    }), {
+      global: { plugins: [createVuetify()] },
+    })
+  })
+
+  it.each([
+    [{ }, 'S,M,T,W,T,F,S'],
+    [{ weekdays: [1, 2, 3, 4, 5] }, 'M,T,W,T,F'],
+    [{ firstDayOfWeek: 1 }, 'M,T,W,T,F,S,S'],
+    [{ firstDayOfWeek: 1, weekdays: [1, 2, 3, 4] }, 'M,T,W,T'],
+  ] as [CalendarProps, string][])('calculates weekday labels correctly for %s', (customizedProps: CalendarProps, expected: string) => {
+    expect.assertions(1)
+    mount(defineComponent({
+      props: makeCalendarProps(customizedProps),
+      setup (props) {
+        const calendar = useCalendar({ ...props } as any)
+        expect(calendar.weekdayLabels.value.join(',')).toBe(expected)
         return () => {}
       },
     }), {
