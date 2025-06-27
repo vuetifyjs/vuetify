@@ -2,7 +2,7 @@
 import { VDatePicker } from '..'
 
 // Utilities
-import { render, screen, userEvent } from '@test'
+import { render, screen, userEvent, wait } from '@test'
 import { commands } from '@vitest/browser/context'
 import { ref } from 'vue'
 
@@ -42,5 +42,28 @@ describe('VDatePicker', () => {
 
     // Expect a 32-day range spanning across two months
     await expect.poll(() => model.value).toHaveLength(32)
+  })
+
+  it('does not trigger infinite loop when first-day-of-week is out of range', async () => {
+    const model = ref<unknown[]>([])
+    const firstDay = ref<number>(0)
+    render(() => (
+      <VDatePicker v-model={ model.value } firstDayOfWeek={ firstDay.value } multiple />
+    ))
+
+    await userEvent.click(await screen.findByText(10))
+    await userEvent.click(await screen.findByText(13))
+    await expect.poll(() => model.value).toHaveLength(2)
+
+    await commands.abortAfter(5000, 'VDatePicker infinite loop detection')
+
+    firstDay.value = 7
+    await wait(100)
+
+    await userEvent.click(await screen.findByText(21))
+    await userEvent.click(await screen.findByText(7))
+    await expect.poll(() => model.value).toHaveLength(4)
+
+    await commands.clearAbortTimeout()
   })
 })

@@ -85,7 +85,12 @@ function getWeekArray (date: Date, locale: string, firstDayOfWeek?: number) {
 }
 
 function startOfWeek (date: Date, locale: string, firstDayOfWeek?: number) {
-  const day = firstDayOfWeek ?? weekInfo(locale)?.firstDay ?? 0
+  let day = firstDayOfWeek ?? weekInfo(locale)?.firstDay ?? 0
+
+  // prevent infinite loop
+  if (![0, 1, 2, 3, 4, 5, 6].includes(day)) {
+    day = 0
+  }
 
   const d = new Date(date)
   while (d.getDay() !== day) {
