@@ -152,25 +152,25 @@
       <v-col cols="12">
         <v-card title="Code Example">
           <template v-slot:text>
-            <v-code>
-              // Import the default hotkeyMap and extend it
-              import { hotkeyMap } from 'vuetify/labs/VHotkey'
+            <pre class="text-mono">
+// Import the default hotkeyMap and extend it
+import { hotkeyMap } from 'vuetify/labs/VHotkey'
 
-              const customKeyMap = {
-              ...hotkeyMap,
-              ctrl: {
-              mac: { symbol: '⌃', icon: '$ctrl', text: 'Control' },
-              default: { symbol: '⌃', icon: '$ctrl', text: 'Control' },
-              },
-              alt: {
-              mac: { symbol: '⌥', icon: '$alt', text: 'Option' },
-              default: { symbol: '⎇', icon: '$alt', text: 'Alt' },
-              },
-              enter: {
-              default: { symbol: '⏎', icon: '$enter', text: 'Return' },
-              },
-              }
-            </v-code>
+const customKeyMap = {
+  ...hotkeyMap,
+  ctrl: {
+    mac: { symbol: '⌃', icon: '$ctrl', text: 'Control' },
+    default: { symbol: '⌃', icon: '$ctrl', text: 'Control' },
+  },
+  alt: {
+    mac: { symbol: '⌥', icon: '$alt', text: 'Option' },
+    default: { symbol: '⎇', icon: '$alt', text: 'Alt' },
+  },
+  enter: {
+    default: { symbol: '⏎', icon: '$enter', text: 'Return' },
+  },
+}
+            </pre>
           </template>
         </v-card>
       </v-col>
