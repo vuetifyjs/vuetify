@@ -14,7 +14,7 @@
     </page-feature-chip>
 
     <page-feature-chip
-      v-if="one.isSubscriber && user.pins"
+      v-if="one.isSubscriber && user.ecosystem.docs.pins.enabled"
       :prepend-icon="`mdi-pin${!pinned ? '-outline' : ''}`"
       text="Pin"
       @click="onClickPin"

@@ -22,7 +22,6 @@ export const VDataTableColumn = defineFunctionalComponent({
   const Tag = props.tag ?? 'td'
   return (
     <Tag
-      tabindex="0"
       class={[
         'v-data-table__td',
         {

@@ -164,13 +164,14 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
           }}
           colspan={ column.colspan }
           rowspan={ column.rowspan }
-          onClick={ column.sortable ? () => toggleSort(column) : undefined }
           fixed={ column.fixed }
           nowrap={ column.nowrap }
           lastFixed={ column.lastFixed }
           noPadding={ noPadding }
+          tabindex={ column.sortable ? 0 : undefined }
+          onClick={ column.sortable ? () => toggleSort(column) : undefined }
+          onKeydown={ column.sortable ? (event: KeyboardEvent) => handleEnterKeyPress(event, column) : undefined }
           { ...headerProps }
-          onKeydown={ (event: KeyboardEvent) => column.sortable && handleEnterKeyPress(event, column) }
         >
           {{
             default: () => {
