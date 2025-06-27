@@ -370,7 +370,6 @@ export const VAutocomplete = genericComponent<new <
         nextTick(() => isSelecting.value = false)
       } else {
         if (!props.multiple && search.value == null) model.value = []
-        menu.value = false
         if (props.multiple || hasSelectionSlot.value) search.value = ''
         selectionIndex.value = -1
       }
