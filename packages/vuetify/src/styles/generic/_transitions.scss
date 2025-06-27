@@ -17,6 +17,14 @@
     transition-property: transform !important;
     transition-timing-function: settings.$standard-easing !important;
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    &-enter-active,
+    &-leave-active,
+    &-move {
+      transition-duration: 0s !important;
+    }
+  }
 }
 @mixin fade-out() {
   &-leave-to {
