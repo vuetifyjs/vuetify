@@ -50,7 +50,7 @@ export const makeVCarouselProps = propsFactory({
   }),
 }, 'VCarousel')
 
-type VCarouselSlots = VWindowSlots & {
+type VCarouselSlots = Omit<VWindowSlots, 'additional'> & {
   item: {
     props: Record<string, any>
     item: {
