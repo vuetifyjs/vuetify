@@ -70,12 +70,13 @@ async function setFocusEmulationEnabled (ctx: BrowserCommandContext) {
 
 let abortTimeout: ReturnType<typeof setTimeout> = null!
 function abortAfter (ctx: BrowserCommandContext, delay: number, name: string) {
-  abortTimeout = setTimeout(() => {
+  abortTimeout = setTimeout(async () => {
     // eslint-disable-next-line no-console
-    console.error(`[Error] Test timeout: Aborting after ${delay}ms for ${name}.`)
+    console.error(`[Error] Test timeout: Aborting after ${delay}ms for ${name} in ${ctx.testPath}`)
     // eslint-disable-next-line no-console
     console.error('[Warning] "chrome" process might still be running and require manual shutdown.')
-    throw new Error('Abort')
+    process.exitCode = 1
+    await ctx.project.vitest.exit(true)
   }, delay)
 }
 
