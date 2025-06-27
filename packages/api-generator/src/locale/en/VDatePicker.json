@@ -56,6 +56,7 @@
   },
   "slots": {
     "actions": "Slot for the actions.",
+    "controls": "Slot for the controls.",
     "header": "Slot for the header.",
     "year": "Slot for the year."
   }
