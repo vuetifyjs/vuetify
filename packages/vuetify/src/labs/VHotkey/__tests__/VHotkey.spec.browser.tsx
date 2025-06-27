@@ -165,7 +165,7 @@ describe('VHotkey.tsx', () => {
     })
 
     it('should render minus key in icon mode', () => {
-      render(() => <VHotkey keys="shift+-" displayMode="icon" />)
+      render(() => <VHotkey keys="shift+-" displayMode="icon" platform="mac" />)
 
       const keys = screen.getAllByCSS('.v-hotkey__key')
       expect(keys[1]).toHaveClass('v-hotkey__key-icon')
@@ -244,7 +244,7 @@ describe('VHotkey.tsx', () => {
       unmountText()
 
       // Test symbol mode with keys that have symbols
-      const { unmount: unmountSymbol } = render(() => <VHotkey keys="cmd+shift" variant="contained" displayMode="symbol" />)
+      const { unmount: unmountSymbol } = render(() => <VHotkey keys="cmd+shift" variant="contained" displayMode="symbol" platform="mac" />)
 
       expect(screen.getByCSS('.v-hotkey__contained-wrapper')).toBeInTheDocument()
       nestedKbds = screen.getAllByCSS('.v-hotkey__key--nested')
