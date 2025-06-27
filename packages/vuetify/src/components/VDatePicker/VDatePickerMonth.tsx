@@ -123,7 +123,7 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
     }
 
     function onWeekClick (value: unknown) {
-      model.value = createWeekRange(adapter, value, props.firstDayOfWeek)
+      model.value = createWeekRange(adapter, value, weekDays.value.at(0), weekDays.value.length)
     }
 
     function onMultipleClick (value: unknown) {

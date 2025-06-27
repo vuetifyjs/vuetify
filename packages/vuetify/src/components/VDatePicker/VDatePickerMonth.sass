@@ -64,26 +64,37 @@
       position: absolute
       content: ''
       display: block
-      width: calc(7 * #{$date-picker-month-day-size} + 6 * #{$date-picker-month-column-gap})
+      width: calc(var(--v-date-picker-days-in-week) * (#{$date-picker-month-day-size} + #{$date-picker-month-column-gap}) - #{$date-picker-month-column-gap})
       height: $date-picker-month-day-size
       transition: 0.3s opacity settings.$standard-easing
       left: 0
       top: 0
-      border-radius: 999px
+      background-color: currentColor
+      border-radius: $date-picker-month-week-selection-border-radius
       z-index: 0
       pointer-events: none
       opacity: 0
 
     .v-date-picker-month__day--week-start
       &:hover,
-      &:has(+ *:hover),
-      &:has(+ * + *:hover),
-      &:has(+ * + * + *:hover),
-      &:has(+ * + * + * + *:hover),
-      &:has(+ * + * + * + * + *:hover),
+      &:has(+ *:hover)
+        .v-date-picker-month__week-background
+          opacity: calc(min(1, calc(var(--v-date-picker-days-in-week) - 1)) * $date-picker-month-week-selection-background-opacity)
+      &:has(+ * + *:hover)
+        .v-date-picker-month__week-background
+          opacity: calc(min(1, calc(var(--v-date-picker-days-in-week) - 2)) * $date-picker-month-week-selection-background-opacity)
+      &:has(+ * + * + *:hover)
+        .v-date-picker-month__week-background
+          opacity: calc(min(1, calc(var(--v-date-picker-days-in-week) - 3)) * $date-picker-month-week-selection-background-opacity)
+      &:has(+ * + * + * + *:hover)
+        .v-date-picker-month__week-background
+          opacity: calc(min(1, calc(var(--v-date-picker-days-in-week) - 4)) * $date-picker-month-week-selection-background-opacity)
+      &:has(+ * + * + * + * + *:hover)
+        .v-date-picker-month__week-background
+          opacity: calc(min(1, calc(var(--v-date-picker-days-in-week) - 5)) * $date-picker-month-week-selection-background-opacity)
       &:has(+ * + * + * + * + * + *:hover)
         .v-date-picker-month__week-background
-          opacity: 0.1
+          opacity: calc(min(1, calc(var(--v-date-picker-days-in-week) - 6)) * $date-picker-month-week-selection-background-opacity)
 
       &:is(.v-date-picker-month__day--selected)
         .v-date-picker-month__week-background
