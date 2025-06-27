@@ -8,7 +8,6 @@
           :items="['Transactions', 'Other']"
           density="compact"
           max-width="200"
-          model-value="Transactions"
           variant="solo-filled"
           flat
           hide-details
@@ -18,12 +17,13 @@
 
       <v-pie
         :key="selectedGroup"
-        :items="items"
+        :items="currentItems"
         :legend="{ position: 'right' }"
         :tooltip="{ subtitleFormat: '[value]%' }"
         class="pa-3 mt-3"
         gap="2"
         inner-cut="70"
+        item-key="id"
         rounded="2"
         size="300"
         animation
@@ -37,7 +37,7 @@
           </div>
         </template>
 
-        <template v-slot:legend="{ toggle, isActive }">
+        <template v-slot:legend="{ items, toggle, isActive }">
           <v-list class="py-0 bg-transparent" density="compact" width="300">
             <v-list-item
               v-for="item in items"
@@ -82,7 +82,7 @@
   import { shallowRef, toRef } from 'vue'
 
   const selectedGroup = shallowRef('Transactions')
-  const items = toRef(() => selectedGroup.value === 'Transactions'
+  const currentItems = toRef(() => selectedGroup.value === 'Transactions'
     ? [
       { id: 1, title: 'House & Bills', value: 40, color: 'rgba(var(--v-theme-on-surface), .2)', pattern: 'url(#pattern-0)' },
       { id: 2, title: 'Transportation', value: 25, color: 'rgba(255, 151, 215, .4)' },
@@ -104,7 +104,7 @@
       selectedGroup: 'Transactions',
     }),
     computed: {
-      items () {
+      currentItems () {
         return this.selectedGroup === 'Transactions'
           ? [
             { id: 1, title: 'House & Bills', value: 40, color: 'rgba(var(--v-theme-on-surface), .2)', pattern: 'url(#pattern-0)' },
