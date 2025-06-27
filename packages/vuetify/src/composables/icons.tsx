@@ -59,17 +59,17 @@ export interface IconAliases {
   upload: IconValue
   color: IconValue
   // Font Awesome does not have most of these icons!
-  // command: IconValue
-  // ctrl: IconValue
-  // space: IconValue
-  // shift: IconValue
-  // alt: IconValue
-  // enter: IconValue
-  // arrowup: IconValue
-  // arrowdown: IconValue
-  // arrowleft: IconValue
-  // arrowright: IconValue
-  // backspace: IconValue
+  command: IconValue
+  ctrl: IconValue
+  space: IconValue
+  shift: IconValue
+  alt: IconValue
+  enter: IconValue
+  arrowup: IconValue
+  arrowdown: IconValue
+  arrowleft: IconValue
+  arrowright: IconValue
+  backspace: IconValue
 }
 
 export interface IconProps {

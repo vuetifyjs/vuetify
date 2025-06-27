@@ -155,7 +155,7 @@ export const hotkeyMap: KeyMapConfig = {
     default: { text: '$vuetify.hotkey.space' },
   },
   '-': {
-    default: { symbol: '-', icon: '$minus', text: '-' },
+    default: { text: '-' },
   },
 }
 
