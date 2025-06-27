@@ -27,6 +27,7 @@
                   class="mb-3"
                   color="primary"
                   label="Allow hotkeys in input fields"
+                  hide-details
                 ></v-switch>
 
                 <v-switch
@@ -34,6 +35,7 @@
                   class="mb-3"
                   color="primary"
                   label="Prevent default browser behavior"
+                  hide-details
                 ></v-switch>
 
                 <v-slider
@@ -43,12 +45,9 @@
                   max="3000"
                   min="500"
                   step="100"
+                  hide-details
                   thumb-label
                 ></v-slider>
-
-                <v-btn color="primary" @click="updateOptions">
-                  Update Options
-                </v-btn>
               </v-col>
 
               <v-col cols="12" md="6">
@@ -151,7 +150,7 @@
 </template>
 
 <script setup>
-  import { onBeforeUnmount, ref } from 'vue'
+  import { onBeforeUnmount, ref, watch } from 'vue'
   import { useHotkey } from 'vuetify'
 
   const messages = ref([])
@@ -209,12 +208,15 @@
     )
   }
 
-  const updateOptions = () => {
-    setupHotkeys()
-    addMessage(`⚙️ Options updated: event=${eventType.value}, inputs=${allowInInputs.value}, preventDefault=${preventDefault.value}`)
-  }
-
   setupHotkeys()
+
+  // Watch all hotkey options and re-setup hotkeys automatically
+  watch([
+    eventType,
+    allowInInputs,
+    preventDefault,
+    sequenceTimeout,
+  ], setupHotkeys)
 
   onBeforeUnmount(() => {
     cleanupFunctions.value.forEach(cleanup => cleanup())
@@ -287,10 +289,6 @@
             this.addMessage(`⏎ Enter pressed ${inInput ? 'in input field' : 'outside input'}`)
           }, options)
         )
-      },
-      updateOptions () {
-        this.setupHotkeys()
-        this.addMessage(`⚙️ Options updated: event=${this.eventType}, inputs=${this.allowInInputs}, preventDefault=${this.preventDefault}`)
       },
     },
   }
