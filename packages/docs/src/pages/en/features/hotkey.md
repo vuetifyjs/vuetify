@@ -180,9 +180,8 @@ The hotkey string supports various modifiers and special keys:
 
 ### Modifiers
 
-- <v-kbd>cmd</v-kbd> - Command key (Mac) / Control key (PC) - **recommended over <v-kbd>ctrl</v-kbd> for cross-platform**
+- <v-kbd>cmd</v-kbd> / <v-kbd>meta</v-kbd> - Command key (Mac) / Control key (PC) - **recommended over <v-kbd>ctrl</v-kbd> for cross-platform**
 - <v-kbd>ctrl</v-kbd> - Control key (all platforms)
-- <v-kbd>meta</v-kbd> - Meta key (Command key on Mac, Windows key on PC)
 - <v-kbd>alt</v-kbd> - Alt key (all platforms)
 - <v-kbd>shift</v-kbd> - Shift key (all platforms)
 
@@ -230,7 +229,6 @@ useHotkey('ctrl+w', handleAction)    // Close tab
 
 // ❌ OS shortcuts
 useHotkey('alt+tab', handleAction)   // Window switching
-useHotkey('meta', handleAction)      // Start menu (Windows)
 
 // ✅ Safe alternatives
 useHotkey('cmd+shift+r', handleAction)
