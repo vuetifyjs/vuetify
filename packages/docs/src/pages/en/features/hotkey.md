@@ -27,8 +27,8 @@ This is a new feature! Be sure to [report any issues you may encounter](https://
 
 <PromotedEntry />
 
-::: info
-This feature requires [v3.9.0](/getting-started/release-notes/?version=v3.9.0)
+::: success
+This feature was introduced in [v3.9.0](/getting-started/release-notes/?version=v3.9.0)
 :::
 
 ## Quick start

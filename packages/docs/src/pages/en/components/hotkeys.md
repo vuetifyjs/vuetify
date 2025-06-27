@@ -21,8 +21,8 @@ The `v-hotkey` component renders keyboard shortcuts in a visually consistent and
 
 <PageFeatures />
 
-::: info
-This feature requires [v3.9.0](/getting-started/release-notes/?version=v3.9.0)
+::: success
+This feature was introduced in [v3.9.0](/getting-started/release-notes/?version=v3.9.0)
 :::
 
 ## Usage
