@@ -46,6 +46,8 @@ export default {
     input: {
       placeholder: 'تاریخ را وارد کنید',
     },
+    weekSelected: 'Week {0}, {1}',
+    weekTitle: 'Select week',
   },
   noDataText: 'داده‌ای موجود نیست',
   carousel: {
