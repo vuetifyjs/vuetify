@@ -89,6 +89,7 @@ export const makeSelectProps = propsFactory({
   },
   openOnClear: Boolean,
   itemColor: String,
+  itemBg: String,
 
   ...makeItemsProps({ itemChildren: false }),
 }, 'Select')
@@ -447,6 +448,7 @@ export const VSelect = genericComponent<new <
                       aria-live="polite"
                       aria-label={ `${props.label}-list` }
                       color={ props.itemColor ?? props.color }
+                      bgColor={ props.itemBg }
                       { ...listEvents }
                       { ...props.listProps }
                     >
