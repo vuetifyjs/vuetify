@@ -227,7 +227,10 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
 
     if (flipped.isFull) {
       const values = flipped.values()
-      if (deepEqual(values.at(-1), values.at(-3))) {
+      if (
+        deepEqual(values.at(-1), values.at(-3)) &&
+        !deepEqual(values.at(-1), values.at(-2))
+      ) {
         // Flipping is causing a container resize loop
         return
       }
