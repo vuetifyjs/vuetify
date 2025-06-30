@@ -26,6 +26,7 @@ export const makeVPickerProps = propsFactory({
   landscape: Boolean,
   title: String,
   hideHeader: Boolean,
+  hideTitle: Boolean,
 
   ...makeVSheetProps(),
 }, 'VPicker')
@@ -39,7 +40,7 @@ export const VPicker = genericComponent<VPickerSlots>()({
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.color)
     useRender(() => {
       const sheetProps = VSheet.filterProps(props)
-      const hasTitle = !!(props.title || slots.title)
+      const hasTitle = !props.hideTitle && !!(props.title || slots.title)
 
       return (
         <VSheet
