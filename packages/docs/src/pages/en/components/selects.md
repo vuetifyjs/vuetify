@@ -97,7 +97,7 @@ Custom props can be passed directly to `v-menu` using **menu-props** prop. In th
 
 #### List props
 
-Custom props can be passed directly to `v-list` using **list-props** prop. It helps address common use case of customizing dropdown list background color.
+Custom props can be passed directly to `v-list` using **list-props** prop. In this example a background color is added to the list.
 
 <ExamplesExample file="v-select/prop-list-props" />
 
