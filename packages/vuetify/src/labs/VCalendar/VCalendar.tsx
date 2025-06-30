@@ -206,7 +206,7 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
                     events={ props.events?.filter(e => adapter.isSameDay(e.start, day.date) || adapter.isSameDay(e.end, day.date)) }
                     { ...attrs }
                   >
-                    {{ ...pick(slots, ['interval', 'intervalBody', 'intervalEvent', 'intervalTitle']) }}
+                    {{ ...pick(slots, ['interval', 'interval-body', 'interval-event', 'interval-title']) }}
                   </VCalendarDay>
                 )
               ))
