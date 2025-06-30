@@ -7,6 +7,7 @@ import { VSlider } from '@/components/VSlider'
 
 // Composables
 import { makeComponentProps } from '@/composables/component'
+import { IconValue } from '@/composables/icons'
 
 // Utilities
 import { onUnmounted } from 'vue'
@@ -31,6 +32,10 @@ export const makeVColorPickerPreviewProps = propsFactory({
   },
   disabled: Boolean,
   hideAlpha: Boolean,
+  eyeDropperIcon: {
+    type: IconValue,
+    default: '$eyeDropper',
+  },
 
   ...makeComponentProps(),
 }, 'VColorPickerPreview')
@@ -73,7 +78,13 @@ export const VColorPickerPreview = defineComponent({
       >
         { SUPPORTS_EYE_DROPPER && (
           <div class="v-color-picker-preview__eye-dropper" key="eyeDropper">
-            <VBtn density="comfortable" disabled={ props.disabled } icon="$eyeDropper" variant="plain" onClick={ openEyeDropper } />
+            <VBtn
+              density="comfortable"
+              disabled={ props.disabled }
+              icon={ props.eyeDropperIcon }
+              variant="plain"
+              onClick={ openEyeDropper }
+            />
           </div>
         )}
 
