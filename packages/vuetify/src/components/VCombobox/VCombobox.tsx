@@ -541,13 +541,13 @@ export const VCombobox = genericComponent<new <
                             onClick: () => select(item, null),
                           })
 
-                          if (item.raw?.type === 'divider') {
+                          if (item.raw?.type === '$divider') {
                             return slots.divider?.({ props: item.raw, index }) ?? (
                               <VDivider { ...item.props } key={ `divider-${index}` } />
                             )
                           }
 
-                          if (item.raw?.type === 'subheader') {
+                          if (item.raw?.type === '$subheader') {
                             return slots.subheader?.({ props: item.raw, index }) ?? (
                               <VListSubheader { ...item.props } key={ `subheader-${index}` } />
                             )
