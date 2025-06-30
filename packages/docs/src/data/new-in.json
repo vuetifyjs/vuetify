@@ -76,6 +76,16 @@
       "glow": "3.8.0"
     }
   },
+  "VFileInput": {
+    "props": {
+      "filterByType": "3.10.0"
+    }
+  },
+  "VFileUpload": {
+    "props": {
+      "filterByType": "3.10.0"
+    }
+  },
   "VIcon": {
     "props": {
       "opacity": "3.8.0"
