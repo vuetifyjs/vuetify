@@ -113,6 +113,11 @@
       "persistent": "3.6.0"
     }
   },
+  "VPicker": {
+    "props": {
+      "hideTitle": "3.9.0"
+    }
+  },
   "VSelect": {
     "props": {
       "listProps": "3.5.0",
