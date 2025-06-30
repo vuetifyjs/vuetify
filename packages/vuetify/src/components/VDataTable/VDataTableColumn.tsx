@@ -9,10 +9,16 @@ export const VDataTableColumn = defineFunctionalComponent({
     type: String as PropType<'start' | 'center' | 'end'>,
     default: 'start',
   },
-  fixed: Boolean,
+  fixed: {
+    type: [Boolean, String] as PropType<boolean | 'start' | 'end'>,
+    default: false,
+  },
   fixedOffset: [Number, String],
+  fixedEndOffset: [Number, String],
   height: [Number, String],
   lastFixed: Boolean,
+  firstFixedEnd: Boolean,
+
   noPadding: Boolean,
   tag: String,
   width: [Number, String],
@@ -20,14 +26,23 @@ export const VDataTableColumn = defineFunctionalComponent({
   nowrap: Boolean,
 }, (props, { slots }) => {
   const Tag = props.tag ?? 'td'
+
+  const fixedSide = props.fixed === 'end'
+    ? 'end'
+    : props.fixed
+      ? 'start'
+      : 'none'
+
   return (
     <Tag
       tabindex="0"
       class={[
         'v-data-table__td',
         {
-          'v-data-table-column--fixed': props.fixed,
+          'v-data-table-column--fixed': fixedSide === 'start',
+          'v-data-table-column--fixed-end': fixedSide === 'end',
           'v-data-table-column--last-fixed': props.lastFixed,
+          'v-data-table-column--first-fixed-end': props.firstFixedEnd,
           'v-data-table-column--no-padding': props.noPadding,
           'v-data-table-column--nowrap': props.nowrap,
         },
@@ -37,7 +52,8 @@ export const VDataTableColumn = defineFunctionalComponent({
         height: convertToUnit(props.height),
         width: convertToUnit(props.width),
         maxWidth: convertToUnit(props.maxWidth),
-        left: convertToUnit(props.fixedOffset || null),
+        left: fixedSide === 'start' ? convertToUnit(props.fixedOffset || null) : undefined,
+        right: fixedSide === 'end' ? convertToUnit(props.fixedEndOffset || null) : undefined,
       }}
     >
       { slots.default?.() }
