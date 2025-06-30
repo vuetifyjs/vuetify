@@ -35,7 +35,8 @@
       "text": "3.2.0",
       "slim": "3.4.0",
       "readonly": "3.6.0",
-      "activeColor": "3.7.0"
+      "activeColor": "3.7.0",
+      "spaced": "3.10.0"
     }
   },
   "VChip": {
@@ -184,7 +185,13 @@
   },
   "VTab": {
     "props": {
-      "text": "3.2.0"
+      "text": "3.2.0",
+      "spaced": "3.10.0"
+    }
+  },
+  "VTabs": {
+    "props": {
+      "spaced": "3.10.0"
     }
   },
   "VTimePicker": {
