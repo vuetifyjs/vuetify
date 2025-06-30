@@ -86,6 +86,10 @@ export const VColorInput = genericComponent<VColorInputSlots>()({
       menu.value = false
     }
 
+    function onCancel () {
+      menu.value = false
+    }
+
     useRender(() => {
       const confirmEditProps = VConfirmEdit.filterProps(props)
       const colorPickerProps = VColorPicker.filterProps(omit(props, ['active', 'color']))
@@ -139,17 +143,14 @@ export const VColorInput = genericComponent<VColorInputSlots>()({
                     { ...confirmEditProps }
                     v-model={ model.value }
                     onSave={ onSave }
+                    onCancel={ onCancel }
                   >
                     {{
                       default: ({ actions, model: proxyModel, save, cancel, isPristine }) => {
                         return (
                           <VColorPicker
                             { ...colorPickerProps }
-                            modelValue={ proxyModel.value }
-                            onUpdate:modelValue={ val => {
-                              proxyModel.value = val
-                              model.value = val
-                            }}
+                            v-model={ proxyModel.value }
                             onMousedown={ (e: MouseEvent) => e.preventDefault() }
                           >
                             {{
