@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   nav: Time pickers
   title: Time picker component
@@ -16,25 +17,7 @@ The `v-time-picker` is stand-alone component that can be utilized in many existi
 
 <PageFeatures />
 
-::: warning
-
-This feature requires [v3.5.12](/getting-started/release-notes/?version=v3.5.12)
-
-:::
-
-## Installation
-
-Labs components require manual import and registration with the Vuetify instance.
-
-```js { resource="src/plugins/vuetify.js" }
-import { VTimePicker } from 'vuetify/labs/VTimePicker'
-
-export default createVuetify({
-  components: {
-    VTimePicker,
-  },
-})
-```
+<DocIntroduced version="3.9.0" />
 
 ## Usage
 

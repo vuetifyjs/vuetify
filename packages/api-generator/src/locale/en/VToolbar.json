@@ -3,7 +3,7 @@
     "absolute": "Applies position: absolute to the component.",
     "bottom": "Aligns the component towards the bottom.",
     "collapse": "Puts the toolbar into a collapsed state reducing its maximum width.",
-    "extended": "Use this prop to increase the height of the toolbar _without_ using the `extension` slot for adding content. May be used in conjunction with the **extension-height** prop, and any of the other props that affect the height of the toolbar, e.g. **prominent**, **dense**, etc., **WITH THE EXCEPTION** of **height**.",
+    "extended": "Use this prop to increase the height of the toolbar _without_ using the `extension` slot for adding content. May be used in conjunction with the **extension-height** prop. When false, will not show extension slot even if content is present.",
     "extensionHeight": "Specify an explicit height for the `extension` slot.",
     "flat": "Removes the toolbar's box-shadow.",
     "floating": "Applies **display: inline-flex** to the component.",

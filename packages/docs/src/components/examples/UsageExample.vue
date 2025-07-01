@@ -182,7 +182,7 @@
     {
       name: 'template',
       language: 'html',
-      content: `<template>\n  <v-app>\n    <v-container>\n      ${props.code.replaceAll('\n', '\n      ')}\n    </v-container>\n  </v-app>\n</template>\n${props.script || ''}`,
+      content: `<template>\n<v-app>\n   <v-container>\n     ${props.code.replaceAll('\n', '\n      ')}\n   </v-container>\n </v-app>\n</template>\n${props.script || ''}`,
     },
   ]))
 

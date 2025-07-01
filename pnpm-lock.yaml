@@ -262,6 +262,9 @@ importers:
       lodash-es:
         specifier: ^4.17.21
         version: 4.17.21
+      markdown-it-multimd-table:
+        specifier: ^4.2.3
+        version: 4.2.3
       pinia:
         specifier: ^3.0.2
         version: 3.0.2(typescript@5.8.3)(vue@3.5.13(typescript@5.8.3))
@@ -6301,6 +6304,9 @@ packages:
 
   markdown-it-link-attributes@4.0.1:
     resolution: {integrity: sha512-pg5OK0jPLg62H4k7M9mRJLT61gUp9nvG0XveKYHMOOluASo9OEF13WlXrpAp2aj35LbedAy3QOCgQCw0tkLKAQ==}
+
+  markdown-it-multimd-table@4.2.3:
+    resolution: {integrity: sha512-KepCr2OMJqm7IT6sOIbuqHGe+NERhgy66XMrc5lo6dHW7oaPzMDtYwR1EGwK16/blb6mCSg4jqityOe0o/H7HA==}
 
   markdown-it-prism@3.0.0:
     resolution: {integrity: sha512-M0LQsbVzjbzufV95nYdtbs99Sm/8f7zLnqFblb5yQZtFTGLM+y6hxMZ8BdujY3FFqVvTbnZ52/uoicQUqZUYbg==}
@@ -16226,6 +16232,8 @@ snapshots:
   markdown-it-header-sections@1.0.0: {}
 
   markdown-it-link-attributes@4.0.1: {}
+
+  markdown-it-multimd-table@4.2.3: {}
 
   markdown-it-prism@3.0.0:
     dependencies:

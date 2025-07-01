@@ -7,10 +7,11 @@ import { makeVInputProps, VInput } from '@/components/VInput/VInput'
 
 // Composables
 import { useFocus } from '@/composables/focus'
+import { forwardRefs } from '@/composables/forwardRefs'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { useId } from 'vue'
+import { ref, useId } from 'vue'
 import { filterInputAttrs, genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
@@ -46,6 +47,7 @@ export const VCheckbox = genericComponent<new <T>(
   setup (props, { attrs, slots }) {
     const model = useProxiedModel(props, 'modelValue')
     const { isFocused, focus, blur } = useFocus(props)
+    const inputRef = ref<VInput>()
 
     const uid = useId()
 
@@ -56,6 +58,7 @@ export const VCheckbox = genericComponent<new <T>(
 
       return (
         <VInput
+          ref={ inputRef }
           class={[
             'v-checkbox',
             props.class,
@@ -95,7 +98,7 @@ export const VCheckbox = genericComponent<new <T>(
       )
     })
 
-    return {}
+    return forwardRefs({}, inputRef)
   },
 })
 

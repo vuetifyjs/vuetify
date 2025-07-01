@@ -11,7 +11,8 @@ import {
   ref,
   shallowRef,
   toRaw,
-  toRef, toValue,
+  toRef,
+  toValue,
 } from 'vue'
 import {
   independentActiveStrategy,
@@ -129,10 +130,16 @@ export const makeNestedProps = propsFactory({
 
 export const useNested = (props: NestedProps) => {
   let isUnmounted = false
-  const children = ref(new Map<unknown, unknown[]>())
-  const parents = ref(new Map<unknown, unknown>())
+  const children = shallowRef(new Map<unknown, unknown[]>())
+  const parents = shallowRef(new Map<unknown, unknown>())
 
-  const opened = useProxiedModel(props, 'opened', props.opened, v => new Set(v), v => [...v.values()])
+  const opened = useProxiedModel(
+    props,
+    'opened',
+    props.opened,
+    v => new Set(Array.isArray(v) ? v.map(i => toRaw(i)) : v),
+    v => [...v.values()],
+  )
 
   const activeStrategy = computed(() => {
     if (typeof props.activeStrategy === 'object') return props.activeStrategy
@@ -194,7 +201,7 @@ export const useNested = (props: NestedProps) => {
 
   function getPath (id: unknown) {
     const path: unknown[] = []
-    let parent: unknown = id
+    let parent: unknown = toRaw(id)
 
     while (parent != null) {
       path.unshift(parent)
@@ -344,7 +351,7 @@ export const useNestedItem = (id: MaybeRefOrGetter<unknown>, isGroup: boolean) =
   const parent = inject(VNestedSymbol, emptyNested)
 
   const uidSymbol = Symbol('nested item')
-  const computedId = computed(() => toValue(id) ?? uidSymbol)
+  const computedId = computed(() => toRaw(toValue(id)) ?? uidSymbol)
 
   const item = {
     ...parent,
@@ -354,10 +361,10 @@ export const useNestedItem = (id: MaybeRefOrGetter<unknown>, isGroup: boolean) =
     isOpen: computed(() => parent.root.opened.value.has(computedId.value)),
     parent: computed(() => parent.root.parents.value.get(computedId.value)),
     activate: (activated: boolean, e?: Event) => parent.root.activate(computedId.value, activated, e),
-    isActivated: computed(() => parent.root.activated.value.has(toRaw(computedId.value))),
+    isActivated: computed(() => parent.root.activated.value.has(computedId.value)),
     select: (selected: boolean, e?: Event) => parent.root.select(computedId.value, selected, e),
-    isSelected: computed(() => parent.root.selected.value.get(toRaw(computedId.value)) === 'on'),
-    isIndeterminate: computed(() => parent.root.selected.value.get(toRaw(computedId.value)) === 'indeterminate'),
+    isSelected: computed(() => parent.root.selected.value.get(computedId.value) === 'on'),
+    isIndeterminate: computed(() => parent.root.selected.value.get(computedId.value) === 'indeterminate'),
     isLeaf: computed(() => !parent.root.children.value.get(computedId.value)),
     isGroupActivator: parent.isGroupActivator,
   }

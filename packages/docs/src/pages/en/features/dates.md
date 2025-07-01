@@ -338,3 +338,51 @@ export interface DateAdapter<TDate> {
   getNextMonth (date: TDate): TDate
 }
 ```
+
+## Inheritance
+
+You can also extend and override build-in DateAdapter using class inheritance:
+
+```ts
+import { VuetifyDateAdapter } from 'vuetify/date/adapters/vuetify'
+
+export class MyAdapter extends VuetifyDateAdapter {
+  sayHello () {
+    return `Hello, current week starts at ${this.startOfWeek(this.date())}`
+  }
+  override startOfWeek (date: Date, firstDayOfWeek?: string | number): Date {
+    return super.startOfWeek(date, 2) // forcing Tuesday
+  }
+}
+```
+
+```ts { resource="src/plugins/vuetify.js" }
+export default createVuetify({
+  date: {
+    adapter: MyAdapter,
+  },
+  ...
+})
+
+declare module 'vuetify' {
+  namespace DateModule {
+    interface Adapter extends MyAdapter {}
+  }
+}
+```
+
+## String adapter
+
+<DocIntroduced version="3.9.0" />
+
+Date objects can be inconvenient to work with, especially if you're just passing the value straight to a fetch request. Vuetify also exports a StringDateAdapter that will cause date components to emit strings instead.
+
+```ts { resource="src/plugins/vuetify.js" }
+import { StringDateAdapter } from 'vuetify/date/adapters/string'
+
+export default createVuetify({
+  date: {
+    adapter: StringDateAdapter,
+  },
+})
+```
