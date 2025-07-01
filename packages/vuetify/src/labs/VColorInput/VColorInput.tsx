@@ -147,10 +147,19 @@ export const VColorInput = genericComponent<VColorInputSlots>()({
                   >
                     {{
                       default: ({ actions, model: proxyModel, save, cancel, isPristine }) => {
+                        function onUpdateModel (value: string) {
+                          if (!props.hideActions) {
+                            proxyModel.value = value
+                          } else {
+                            model.value = value
+                          }
+                        }
+
                         return (
                           <VColorPicker
                             { ...colorPickerProps }
-                            v-model={ proxyModel.value }
+                            modelValue={ props.hideActions ? model.value : proxyModel.value }
+                            onUpdate:modelValue={ value => onUpdateModel(value) }
                             onMousedown={ (e: MouseEvent) => e.preventDefault() }
                           >
                             {{
