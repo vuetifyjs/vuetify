@@ -19,6 +19,7 @@
     "activeIcon": "mdi-speedometer",
     "items": [
       "installation",
+      "mcp",
       "frequently-asked-questions",
       "wireframes",
       "unit-testing",
