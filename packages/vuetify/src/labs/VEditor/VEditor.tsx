@@ -1,5 +1,3 @@
-// 1. editorRef.value?.focus() does not put blinking cursor in the editor.
-
 // Styles
 import './VEditor.sass'
 
@@ -208,6 +206,16 @@ export const VEditor = genericComponent<VEditorSlots>()({
       const textNode = document.createTextNode(zeroWidthSpace)
       element.appendChild(textNode)
       selectNode(textNode)
+      focusAtSelection()
+    }
+
+    function focusAtSelection () {
+      const selectionResult = getCurrentSelection()
+      if (!selectionResult) return
+
+      selectionResult.range.collapse(false)
+      selectionResult.selection.removeAllRanges()
+      selectionResult.selection.addRange(selectionResult.range)
     }
 
     function findFormattedElement (tag: string): Element | null {
@@ -335,6 +343,7 @@ export const VEditor = genericComponent<VEditorSlots>()({
 
     function addFormat (tag: string, attributes: Record<string, string> = {}) {
       if (!editorRef.value || props.readonly || props.disabled) return
+      editorRef.value?.focus()
 
       const newElement = document.createElement(tag)
       Object.entries(attributes).forEach(([key, value]) => {
@@ -367,6 +376,7 @@ export const VEditor = genericComponent<VEditorSlots>()({
 
       updateModel()
       updateActiveStates()
+      editorRef.value?.focus()
     }
 
     function surroundSelectionRange (element: Element) {
@@ -445,6 +455,7 @@ export const VEditor = genericComponent<VEditorSlots>()({
       parent.removeChild(element)
 
       selectNode(middle.firstChild || middle)
+      focusAtSelection()
       updateModel()
       updateActiveStates()
     }
