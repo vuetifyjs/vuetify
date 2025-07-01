@@ -6,14 +6,7 @@ import { VBtn } from '@/components/VBtn/VBtn'
 import { VToolbar } from '@/components/VToolbar/VToolbar'
 
 // Composables
-import { makeComponentProps } from '@/composables/component'
-import { makeDensityProps, useDensity } from '@/composables/density'
-import { makeDimensionProps, useDimension } from '@/composables/dimensions'
-import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { useProxiedModel } from '@/composables/proxiedModel'
-import { makeRoundedProps, useRounded } from '@/composables/rounded'
-import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { makeVariantProps, useVariant } from '@/composables/variant'
 
 // Utilities
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
@@ -27,47 +20,20 @@ export const makeVEditorProps = propsFactory({
   placeholder: String,
   readonly: Boolean,
   disabled: Boolean,
-  autoGrow: Boolean,
-  rows: {
-    type: [Number, String],
-    default: 8,
-  },
-  maxRows: {
-    type: [Number, String],
-  },
-  toolbar: {
+  hideToolbar: {
     type: Boolean,
-    default: true,
-  },
-  showToolbar: {
-    type: Boolean,
-    default: true,
+    default: false,
   },
   toolbarItems: {
     type: Array as PropType<string[]>,
     default: () => ['bold', 'italic', 'underline'],
   },
-
-  ...makeComponentProps(),
-  ...makeDensityProps(),
-  ...makeDimensionProps(),
-  ...makeElevationProps(),
-  ...makeRoundedProps(),
-  ...makeThemeProps(),
-  ...makeVariantProps({ variant: 'outlined' } as const),
 }, 'VEditor')
-
-export type VEditorSlots = {
-  default: never
-  toolbar: never
-  toolbarPrepend: never
-  toolbarAppend: never
-}
 
 const formatMap = { bold: 'b', italic: 'em', underline: 'u' }
 const zeroWidthSpace = '\u200B'
 
-export const VEditor = genericComponent<VEditorSlots>()({
+export const VEditor = genericComponent()({
   name: 'VEditor',
 
   props: makeVEditorProps(),
@@ -78,19 +44,11 @@ export const VEditor = genericComponent<VEditorSlots>()({
   },
 
   setup (props, { emit, slots }) {
-    const { themeClasses } = provideTheme(props)
-    const { densityClasses } = useDensity(props)
-    const { dimensionStyles } = useDimension(props)
-    const { elevationClasses } = useElevation(props)
-    const { roundedClasses } = useRounded(props)
-    const { variantClasses } = useVariant(props)
-
     const model = useProxiedModel(props, 'modelValue')
     const editorRef = ref<HTMLDivElement>()
     const isFocused = ref(false)
     const activeFormats = ref<Set<string>>(new Set())
 
-    const isActive = computed(() => isFocused.value)
     const isFormatActive = computed(() => (tag: string) => activeFormats.value.has(tag))
 
     watch(() => props.modelValue, newVal => {
@@ -476,104 +434,70 @@ export const VEditor = genericComponent<VEditorSlots>()({
     })
 
     useRender(() => {
-      const hasToolbar = props.showToolbar && props.toolbar
+      const hasToolbar = !props.hideToolbar && props.toolbarItems.length
 
       return (
-        <div
-          class={[
-            'v-editor',
-            {
-              'v-editor--focused': isActive.value,
-              'v-editor--disabled': props.disabled,
-              'v-editor--readonly': props.readonly,
-            },
-            themeClasses.value,
-            densityClasses.value,
-            elevationClasses.value,
-            roundedClasses.value,
-            variantClasses.value,
-            props.class,
-          ]}
-          style={[
-            dimensionStyles.value,
-            props.style,
-          ]}
-        >
+        <div>
           { hasToolbar && (
             <VToolbar
-              density="compact"
               flat
               key="toolbar"
-              class="v-editor__toolbar"
+              density="compact"
             >
               {{
-                prepend: slots.toolbarPrepend,
                 default: () => (
-                  <div>
+                  <div class="v-editor__toolbar-items">
                     { props.toolbarItems.includes('bold') && (
                       <VBtn
-                        icon="mdi-format-bold"
                         variant="text"
                         size="small"
                         key="bold-button"
+                        icon="mdi-format-bold"
                         onClick={ formatBold }
-                        class={[
-                          'v-editor__toolbar-btn',
-                          { 'v-editor__toolbar-btn--active': isFormatActive.value(formatMap.bold) },
-                        ]}
+                        color={ isFormatActive.value(formatMap.bold) ? 'primary' : undefined }
                       />
                     )}
                     { props.toolbarItems.includes('italic') && (
                       <VBtn
-                        icon="mdi-format-italic"
                         variant="text"
                         size="small"
                         key="italic-button"
+                        icon="mdi-format-italic"
                         onClick={ formatItalic }
-                        class={[
-                          'v-editor__toolbar-btn',
-                          { 'v-editor__toolbar-btn--active': isFormatActive.value(formatMap.italic) },
-                        ]}
+                        color={ isFormatActive.value(formatMap.italic) ? 'primary' : undefined }
                       />
                     )}
                     { props.toolbarItems.includes('underline') && (
                       <VBtn
-                        icon="mdi-format-underline"
                         variant="text"
                         size="small"
+                        icon="mdi-format-underline"
                         key="underline-button"
                         onClick={ formatUnderline }
-                        class={[
-                          'v-editor__toolbar-btn',
-                          { 'v-editor__toolbar-btn--active': isFormatActive.value(formatMap.underline) },
-                        ]}
+                        color={ isFormatActive.value(formatMap.underline) ? 'primary' : undefined }
                       />
                     )}
                   </div>
                 ),
-                append: slots.toolbarAppend,
               }}
             </VToolbar>
           )}
 
-          <div class="v-editor__content">
-            <div
-              ref={ editorRef }
-              class="v-editor__editor"
-              contenteditable={ !props.readonly && !props.disabled }
-              placeholder={ props.placeholder }
-              onFocus={ onFocus }
-              onBlur={ onBlur }
-              onInput={ onInput }
-            />
-          </div>
-
-          { slots.default?.() }
+          <div
+            ref={ editorRef }
+            contenteditable={ !props.readonly && !props.disabled }
+            placeholder={ props.placeholder }
+            onFocus={ onFocus }
+            onBlur={ onBlur }
+            onInput={ onInput }
+          />
         </div>
       )
     })
 
-    return {}
+    return {
+      editorRef,
+    }
   },
 })
 
