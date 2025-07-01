@@ -3,23 +3,28 @@ import './VEditor.sass'
 
 // Components
 import { VBtn } from '@/components/VBtn/VBtn'
+import { makeVFieldProps, VField } from '@/components/VField/VField'
+import { makeVInputProps, VInput } from '@/components/VInput/VInput'
+import { VSheet } from '@/components/VSheet/VSheet'
 import { VToolbar } from '@/components/VToolbar/VToolbar'
 
 // Composables
+import { useFocus } from '@/composables/focus'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { callEvent, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import type { VFieldSlots } from '@/components/VField/VField'
+import type { VInputSlots } from '@/components/VInput/VInput'
+
+type VEditorSlots = Omit<VInputSlots & VFieldSlots, 'default'>
 
 export const makeVEditorProps = propsFactory({
-  modelValue: String,
   placeholder: String,
-  readonly: Boolean,
-  disabled: Boolean,
   hideToolbar: {
     type: Boolean,
     default: false,
@@ -28,28 +33,49 @@ export const makeVEditorProps = propsFactory({
     type: Array as PropType<string[]>,
     default: () => ['bold', 'italic', 'underline'],
   },
+
+  height: {
+    type: [Number, String],
+    default: 200,
+  },
+  maxHeight: [Number, String],
+
+  ...makeVInputProps(),
+  ...makeVFieldProps(),
 }, 'VEditor')
 
 const formatMap = { bold: 'b', italic: 'em', underline: 'u' }
 const zeroWidthSpace = '\u200B'
 
-export const VEditor = genericComponent()({
+export const VEditor = genericComponent<VEditorSlots>()({
   name: 'VEditor',
 
   props: makeVEditorProps(),
 
   emits: {
-    'update:modelValue': (val: string) => true,
+    'click:control': (e: MouseEvent) => true,
+    'mousedown:control': (e: MouseEvent) => true,
     'update:focused': (focused: boolean) => true,
+    'update:modelValue': (val: string) => true,
   },
 
-  setup (props, { emit, slots }) {
+  setup (props, { attrs, emit, slots }) {
     const model = useProxiedModel(props, 'modelValue')
+    const { isFocused, focus, blur } = useFocus(props)
+
     const editorRef = ref<HTMLDivElement>()
-    const isFocused = ref(false)
+    const vFieldRef = ref<VField>()
+    const vInputRef = ref<VInput>()
+
+    const isActive = computed(() => (
+      isFocused.value ||
+      props.active
+    ))
+
     const activeFormats = ref<Set<string>>(new Set())
 
     const isFormatActive = computed(() => (tag: string) => activeFormats.value.has(tag))
+    const isPlainOrUnderlined = computed(() => ['plain', 'underlined'].includes(props.variant))
 
     watch(() => props.modelValue, newVal => {
       if (newVal === model.value) return
@@ -65,14 +91,41 @@ export const VEditor = genericComponent()({
       updateActiveStates()
     }
 
-    function onFocus () {
-      isFocused.value = true
-      emit('update:focused', true)
+    function onControlMousedown (e: MouseEvent) {
+      emit('mousedown:control', e)
+
+      if (e.target === editorRef.value) return
+
+      onFocus()
+      e.preventDefault()
     }
 
-    function onBlur () {
-      isFocused.value = false
-      emit('update:focused', false)
+    function onControlClick (e: MouseEvent) {
+      emit('click:control', e)
+    }
+
+    function onClear (e: MouseEvent, reset: () => void) {
+      e.stopPropagation()
+
+      onFocus()
+
+      nextTick(() => {
+        model.value = ''
+        reset()
+
+        updateEditorInnerHTML('')
+        updateActiveStates()
+
+        callEvent(props['onClick:clear'], e)
+      })
+    }
+
+    function onFocus () {
+      if (editorRef.value !== document.activeElement) {
+        editorRef.value?.focus()
+      }
+
+      if (!isFocused.value) focus()
     }
 
     function onInput (e: Event) {
@@ -436,6 +489,9 @@ export const VEditor = genericComponent()({
     useRender(() => {
       const hasToolbar = !props.hideToolbar && props.toolbarItems.length
 
+      const { modelValue: _, ...inputProps } = VInput.filterProps(props)
+      const fieldProps = VField.filterProps(props)
+
       return (
         <div>
           { hasToolbar && (
@@ -483,14 +539,65 @@ export const VEditor = genericComponent()({
             </VToolbar>
           )}
 
-          <div
-            ref={ editorRef }
-            contenteditable={ !props.readonly && !props.disabled }
-            placeholder={ props.placeholder }
-            onFocus={ onFocus }
-            onBlur={ onBlur }
-            onInput={ onInput }
-          />
+          <VInput
+            ref={ vInputRef }
+            v-model={ model.value }
+            class={ props.class }
+            style={ props.style }
+            { ...inputProps }
+            centerAffix={ !isPlainOrUnderlined.value }
+            focused={ isFocused.value }
+          >
+            {{
+              ...slots,
+              default: ({
+                id,
+                isDisabled,
+                isDirty,
+                isReadonly,
+                isValid,
+                reset,
+              }) => (
+                <VField
+                  ref={ vFieldRef }
+                  onClick={ onControlClick }
+                  onMousedown={ onControlMousedown }
+                  onClick:clear={ (e: MouseEvent) => onClear(e, reset) }
+                  onClick:prependInner={ props['onClick:prependInner'] }
+                  onClick:appendInner={ props['onClick:appendInner'] }
+                  { ...fieldProps }
+                  id={ id.value }
+                  active={ isActive.value || isDirty.value }
+                  dirty={ isDirty.value || props.dirty }
+                  disabled={ isDisabled.value }
+                  focused={ isFocused.value }
+                  error={ isValid.value === false }
+                >
+                  {{
+                    ...slots,
+                    default: () => (
+                      <VSheet
+                        width="100%"
+                        color="transparent"
+                        height={ props.height }
+                        maxHeight={ props.maxHeight }
+                      >
+                        <div
+                          class="v-editor"
+                          ref={ editorRef }
+                          contenteditable={ !isReadonly.value && !isDisabled.value }
+                          placeholder={ props.placeholder }
+                          onFocus={ onFocus }
+                          onBlur={ blur }
+                          onInput={ onInput }
+                        />
+                    </VSheet>
+                    ),
+                  }}
+                </VField>
+              ),
+            }}
+          </VInput>
         </div>
       )
     })
