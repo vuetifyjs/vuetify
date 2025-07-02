@@ -13,6 +13,7 @@ import { makeFocusProps, useFocus } from '@/composables/focus'
 import { useIntersectionObserver } from '@/composables/intersectionObserver'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { useToggleScope } from '@/composables/toggleScope'
 
 // Utilities
 import { computed, effectScope, nextTick, ref, toRef, watch, watchEffect } from 'vue'
@@ -98,16 +99,18 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
     const inputRef = ref<HTMLInputElement[]>([])
     const current = computed(() => inputRef.value[focusIndex.value])
 
-    const intersectScope = effectScope()
-    intersectScope.run(() => {
-      const { intersectionRef, isIntersecting } = useIntersectionObserver()
-      watch(isIntersecting, v => {
-        if (!v) return
-        intersectionRef.value?.focus()
-        intersectScope.stop()
-      })
-      watchEffect(() => {
-        intersectionRef.value = inputRef.value[0]
+    useToggleScope(() => props.autofocus, () => {
+      const intersectScope = effectScope()
+      intersectScope.run(() => {
+        const { intersectionRef, isIntersecting } = useIntersectionObserver()
+        watchEffect(() => {
+          intersectionRef.value = inputRef.value[0]
+        })
+        watch(isIntersecting, v => {
+          if (!v) return
+          intersectionRef.value?.focus()
+          intersectScope.stop()
+        })
       })
     })
 
