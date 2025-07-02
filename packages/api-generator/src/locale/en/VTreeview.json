@@ -9,6 +9,7 @@
     "hoverable": "Applies a hover class when mousing over nodes.",
     "filter": "Custom item filtering function. By default it will use case-insensitive search in item's label.",
     "fluid": "Removes indentation from nested items.",
+    "hideActions": "Hide the expand icon and loading indicator next to each item title.",
     "indeterminateIcon": "Icon used when node is in an indeterminate state. Only visible when `selectable` is `true`.",
     "itemChildren": "Property on supplied `items` that contains its children.",
     "itemDisabled": "Property on supplied `items` that contains the disabled state of the item.",
@@ -30,7 +31,9 @@
     "selectable": "Will render a checkbox next to each node allowing them to be selected. Additionally, the **[openOnClick](/api/v-treeview/#props-open-on-click)** property will be applied internally.",
     "selectedColor": "The color of the selection checkbox.",
     "selectionType": "Controls how the treeview selects nodes. There are two modes available: 'leaf' and 'independent'.",
+    "separateRoots": "Prevents showing lines between root-level nodes.",
     "shaped": "Provides an alternative active style for `v-treeview` node. Only visible when `activatable` is `true` and should not be used in conjunction with the `rounded` prop.",
+    "showLines": "Controls visibility of the indent lines.",
     "transition": "Applies a transition when nodes are opened and closed.",
     "value": "Allows one to control which nodes are selected. The array consists of the `item-key` of each selected item. Is used with `@input` event to allow for `v-model` binding.",
     "collapseIcon": "Icon to display when the list item is expanded."

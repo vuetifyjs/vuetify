@@ -1,6 +1,6 @@
 // Components
 import { VTreeviewGroup } from './VTreeviewGroup'
-import { VTreeviewItem } from './VTreeviewItem'
+import { makeVTreeviewItemProps, VTreeviewItem } from './VTreeviewItem'
 import { VCheckboxBtn } from '@/components/VCheckbox'
 
 // Composables
@@ -9,7 +9,7 @@ import { IconValue } from '@/composables/icons'
 
 // Utilities
 import { computed, reactive, ref, toRaw } from 'vue'
-import { genericComponent, propsFactory } from '@/util'
+import { genericComponent, getIndentLines, pick, propsFactory } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -56,10 +56,13 @@ export const makeVTreeviewChildrenProps = propsFactory({
   selectedColor: String,
   selectStrategy: [String, Function, Object] as PropType<SelectStrategyProp>,
   index: Number,
+  isLastGroup: Boolean,
+  separateRoots: Boolean,
   path: {
     type: Array as PropType<number[]>,
     default: () => [],
   },
+  ...pick(makeVTreeviewItemProps(), ['indentLines', 'hideActions']),
   ...makeDensityProps(),
 }, 'VTreeviewChildren')
 
@@ -106,14 +109,27 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
     return () => slots.default?.() ?? props.items?.map((item, index) => {
       const { children, props: itemProps } = item
       const loading = isLoading.has(item.value)
+      const nextItemHasChildren = !!props.items!.at(index + 1)?.children
 
+      const depth = props.path?.length ?? 0
+      const isLast = props.items!.length - 1 === index
       const treeItemProps = {
         index,
-        depth: props.path?.length ?? 0,
+        depth,
         isFirst: index === 0,
-        isLast: props.items ? props.items.length - 1 === index : false,
+        isLast,
         path: [...props.path, index],
+        hideAction: props.hideActions,
       }
+
+      const indentLines = getIndentLines({
+        depth,
+        isLast,
+        isLastGroup: props.isLastGroup,
+        leafLinks: !props.hideActions,
+        separateRoots: props.separateRoots,
+        parentIndentLines: props.indentLines,
+      })
 
       const slotsWithItem = {
         prepend: slotProps => (
@@ -177,6 +193,8 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
                 <VTreeviewItem
                   ref={ el => activatorItems.value[index] = el as VTreeviewItem }
                   { ...listItemProps }
+                  hide-actions={ props.hideActions }
+                  indent-lines={ indentLines.node }
                   value={ props.returnObject ? item.raw : itemProps.value }
                   loading={ loading }
                   v-slots={ slotsWithItem }
@@ -187,6 +205,8 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
               <VTreeviewChildren
                 { ...treeviewChildrenProps }
                 items={ children }
+                indent-lines={ indentLines.children }
+                is-last-group={ nextItemHasChildren }
                 returnObject={ props.returnObject }
                 v-slots={ slots }
               />
@@ -197,6 +217,8 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
         slots.item?.({ props: itemProps, item: item.raw, internalItem: item }) ?? (
           <VTreeviewItem
             { ...itemProps }
+            hide-actions={ props.hideActions }
+            indent-lines={ indentLines.leaf }
             value={ props.returnObject ? toRaw(item.raw) : itemProps.value }
             v-slots={ slotsWithItem }
           />

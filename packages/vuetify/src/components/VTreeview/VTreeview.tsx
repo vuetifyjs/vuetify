@@ -29,10 +29,11 @@ function flatten (items: ListItem[], flat: ListItem[] = []) {
 export const makeVTreeviewProps = propsFactory({
   fluid: Boolean,
   openAll: Boolean,
+  showLines: Boolean,
   search: String,
 
   ...makeFilterProps({ filterKeys: ['title'] }),
-  ...omit(makeVTreeviewChildrenProps(), ['index', 'path']),
+  ...omit(makeVTreeviewChildrenProps(), ['index', 'path', 'indentLines', 'isLastGroup']),
   ...omit(makeVListProps({
     collapseIcon: '$treeviewCollapse',
     expandIcon: '$treeviewExpand',
@@ -175,6 +176,7 @@ export const VTreeview = genericComponent<new <T>(
             density={ props.density }
             returnObject={ props.returnObject }
             items={ items.value }
+            indent-lines={ props.showLines ? [] : undefined }
             v-slots={ slots }
           ></VTreeviewChildren>
         </VList>

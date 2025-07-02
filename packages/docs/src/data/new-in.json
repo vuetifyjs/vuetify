@@ -148,6 +148,19 @@
       "text": "3.2.0"
     }
   },
+  "VTreeview": {
+    "props": {
+      "hideActions": "3.10.0",
+      "separateRoots": "3.10.0",
+      "showLines": "3.10.0"
+    }
+  },
+  "VTreeviewItem": {
+    "props": {
+      "hideActions": "3.10.0",
+      "indentLines": "3.10.0"
+    }
+  },
   "VTooltip": {
     "props": {
       "eager": "3.2.0",
