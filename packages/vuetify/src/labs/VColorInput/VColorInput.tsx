@@ -38,7 +38,9 @@ export const makeVColorInputProps = propsFactory({
   },
 
   ...makeFocusProps(),
-  ...makeVConfirmEditProps(),
+  ...makeVConfirmEditProps({
+    hideActions: true,
+  }),
   ...makeVTextFieldProps(),
   ...omit(makeVColorPickerProps(), ['width']),
 }, 'VColorInput')
