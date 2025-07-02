@@ -42,7 +42,7 @@ export const makeVEditorProps = propsFactory({
   ...omit(makeVFieldProps(), ['label']),
 }, 'VEditor')
 
-const formatMap = { bold: 'b', italic: 'em', underline: 'u' }
+const formatMap = { bold: 'b', italic: 'i', underline: 'u' }
 const zeroWidthSpace = '\u200B'
 
 export const VEditor = genericComponent<VEditorSlots>()({
@@ -86,7 +86,7 @@ export const VEditor = genericComponent<VEditorSlots>()({
     function onControlMousedown (e: MouseEvent) {
       emit('mousedown:control', e)
 
-      if (e.target === editorRef.value) return
+      if (editorRef.value?.contains(e.target as Node)) return
 
       onFocus()
       e.preventDefault()
