@@ -5,23 +5,29 @@
         v-model="content"
         :height="height"
         :max-height="maxHeight"
+        :min-height="minHeight"
       ></v-editor>
     </v-card-text>
     <v-card-text>
       <v-row>
-        <v-col cols="6">
+        <v-col cols="4">
           <v-text-field
             v-model.number="height"
             label="Height (px)"
-            type="number"
             variant="outlined"
           ></v-text-field>
         </v-col>
-        <v-col cols="6">
+        <v-col cols="4">
           <v-text-field
             v-model.number="maxHeight"
             label="Max Height (px)"
-            type="number"
+            variant="outlined"
+          ></v-text-field>
+        </v-col>
+        <v-col cols="4">
+          <v-text-field
+            v-model.number="minHeight"
+            label="Min Height (px)"
             variant="outlined"
           ></v-text-field>
         </v-col>
@@ -31,17 +37,19 @@
 </template>
 
 <script setup>
-  const content = ref('This is some content to demonstrate height configuration.')
-  const height = ref(200)
-  const maxHeight = ref(400)
+  const content = ref('<div>Long content</div><div>Long content</div><div>Long content</div><div>Long content</div><div>Long content</div><div>Long content</div><div>Long content</div><div>Long content</div><div>Long content</div><div>Long content</div><div>Long content</div><div>Long content</div><div>Long content</div><div>Long content</div>')
+  const height = ref('auto')
+  const maxHeight = ref(200)
+  const minHeight = ref(100)
 </script>
 
 <script>
   export default {
     data: () => ({
-      content: 'This is some content to demonstrate height configuration.',
-      height: 200,
-      maxHeight: 400,
+      content: '<div>Long content</div><div>Long content</div><div>Long content</div><div>Long content</div><div>Long content</div><div>Long content</div><div>Long content</div><div>Long content</div><div>Long content</div><div>Long content</div><div>Long content</div><div>Long content</div><div>Long content</div><div>Long content</div>',
+      height: 'auto',
+      maxHeight: 200,
+      minHeight: 100,
     }),
   }
 

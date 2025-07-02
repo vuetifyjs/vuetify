@@ -52,9 +52,9 @@ A simple editor with default toolbar (bold, italic, underline):
 
 #### Custom toolbar items
 
-You can customize which formatting options are available in the toolbar using the `toolbar-items` prop:
+You can customize which formatting options are available in the toolbar using the `formats` prop:
 
-<ExamplesExample file="v-editor/prop-toolbar-items" />
+<ExamplesExample file="v-editor/prop-formats" />
 
 #### Hide toolbar
 
