@@ -49,10 +49,12 @@ export const VColorInput = genericComponent<VColorInputSlots>()({
   props: makeVColorInputProps(),
 
   emits: {
+    save: (value: string | Record<string, unknown> | null) => true,
+    cancel: () => true,
     'update:modelValue': (val: string) => true,
   },
 
-  setup (props, { slots }) {
+  setup (props, { emit, slots }) {
     const model = useProxiedModel(props, 'modelValue')
     const menu = shallowRef(false)
     const isFocused = shallowRef(props.focused)
@@ -82,11 +84,13 @@ export const VColorInput = genericComponent<VColorInputSlots>()({
       menu.value = true
     }
 
-    function onSave () {
+    function onSave (value: string | Record<string, unknown> | null) {
+      emit('save', value)
       menu.value = false
     }
 
     function onCancel () {
+      emit('cancel')
       menu.value = false
     }
 
