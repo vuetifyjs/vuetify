@@ -16,7 +16,7 @@ features:
 
 # WYSIWYG Editor
 
-The `v-editor` component provides a rich text editor with formatting capabilities, allowing users to create and edit content with basic text formatting options like bold, italic, and underline.
+The `v-editor` component provides a rich text editor with formatting capabilities, allowing users to create and edit content with text formatting options.
 
 <PageFeatures />
 

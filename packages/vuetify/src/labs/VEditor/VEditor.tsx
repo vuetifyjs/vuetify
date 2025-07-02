@@ -24,26 +24,91 @@ import type { VInputSlots } from '@/components/VInput/VInput'
 
 type VEditorSlots = Omit<VInputSlots & VFieldSlots, 'default'>
 
+enum Formats {
+  Bold = 'bold',
+  Italic = 'italic',
+  Underline = 'underline',
+  StrikeThrough = 'strike-through',
+  Subscript = 'subscript',
+  Superscript = 'superscript',
+  Code = 'code',
+  Quote = 'quote',
+}
+
+type Formatter = {
+  name: Formats
+  icon: string
+  config: { tag: string, attributes: Record<string, string> }
+}
+
+const formats: Formatter[] = [
+  {
+    name: Formats.Bold,
+    icon: 'mdi-format-bold',
+    config: { tag: 'b', attributes: {} },
+  },
+  {
+    name: Formats.Italic,
+    icon: 'mdi-format-italic',
+    config: { tag: 'i', attributes: {} },
+  },
+  {
+    name: Formats.Underline,
+    icon: 'mdi-format-underline',
+    config: { tag: 'u', attributes: {} },
+  },
+  {
+    name: Formats.StrikeThrough,
+    icon: 'mdi-format-strikethrough',
+    config: { tag: 's', attributes: {} },
+  },
+  {
+    name: Formats.Subscript,
+    icon: 'mdi-format-subscript',
+    config: { tag: 'sub', attributes: {} },
+  },
+  {
+    name: Formats.Superscript,
+    icon: 'mdi-format-superscript',
+    config: { tag: 'sup', attributes: {} },
+  },
+  {
+    name: Formats.Code,
+    icon: 'mdi-code-tags',
+    config: { tag: 'code', attributes: {} },
+  },
+]
+
+const zeroWidthSpace = '\u200B'
+
 export const makeVEditorProps = propsFactory({
   hideToolbar: {
     type: Boolean,
     default: false,
   },
-  toolbarItems: {
-    type: Array as PropType<string[]>,
-    default: () => ['bold', 'italic', 'underline'],
+  formats: {
+    type: Array as PropType<Formats[]>,
+    default: () => [
+      Formats.Bold,
+      Formats.Italic,
+      Formats.Underline,
+      Formats.StrikeThrough,
+      Formats.Code,
+      Formats.Quote,
+    ],
   },
   height: {
     type: [Number, String],
-    default: 200,
+    default: 'auto',
   },
   maxHeight: [Number, String],
+  minHeight: {
+    type: [Number, String],
+    default: 100,
+  },
   ...omit(makeVInputProps(), ['label']),
   ...omit(makeVFieldProps(), ['label']),
 }, 'VEditor')
-
-const formatMap = { bold: 'b', italic: 'i', underline: 'u' }
-const zeroWidthSpace = '\u200B'
 
 export const VEditor = genericComponent<VEditorSlots>()({
   name: 'VEditor',
@@ -74,6 +139,7 @@ export const VEditor = genericComponent<VEditorSlots>()({
 
     const isFormatActive = computed(() => (tag: string) => activeFormats.value.has(tag))
     const isPlainOrUnderlined = computed(() => ['plain', 'underlined'].includes(props.variant))
+    const displayedFormats = computed(() => formats.filter(format => props.formats.includes(format.name)))
 
     function onKeyUp () {
       updateActiveStates()
@@ -122,18 +188,6 @@ export const VEditor = genericComponent<VEditorSlots>()({
 
     function onInput (e: Event) {
       updateModel()
-    }
-
-    function formatBold () {
-      applyFormat(formatMap.bold)
-    }
-
-    function formatItalic () {
-      applyFormat(formatMap.italic)
-    }
-
-    function formatUnderline () {
-      applyFormat(formatMap.underline)
     }
 
     function updateEditorInnerHTML (newVal: string) {
@@ -221,7 +275,7 @@ export const VEditor = genericComponent<VEditorSlots>()({
       selectionResult.selection.addRange(selectionResult.range)
     }
 
-    function findFormattedElement (tag: string): Element | null {
+    function findFormattedElement (tag: string, attributes: Record<string, string> = {}): Element | null {
       const result = getCurrentSelection()
       if (!result) return null
 
@@ -229,7 +283,10 @@ export const VEditor = genericComponent<VEditorSlots>()({
       if (!element) return null
 
       while (element && element !== editorRef.value) {
-        if (element.tagName.toLowerCase() === tag.toLowerCase()) {
+        if (
+          element.tagName.toLowerCase() === tag.toLowerCase() &&
+          Object.entries(attributes).every(([key, value]) => element?.getAttribute(key) === value)
+        ) {
           return element
         }
         element = element.parentElement
@@ -326,17 +383,19 @@ export const VEditor = genericComponent<VEditorSlots>()({
 
       const newActiveFormats = new Set<string>()
 
-      Object.entries(formatMap).forEach(([format, tag]) => {
-        if (findFormattedElement(tag)) {
-          newActiveFormats.add(tag)
+      formats.forEach((format: Formatter) => {
+        if (findFormattedElement(format.config.tag, format.config.attributes)) {
+          newActiveFormats.add(format.name)
         }
       })
 
       activeFormats.value = newActiveFormats
     }
 
-    function applyFormat (tag: string, attributes: Record<string, string> = {}) {
-      const formattedElement = findFormattedElement(tag)
+    function applyFormat (format: { tag: string, attributes: Record<string, string> }) {
+      const { tag, attributes } = format
+
+      const formattedElement = findFormattedElement(tag, attributes)
       if (formattedElement) {
         removeFormat(formattedElement, tag)
       } else {
@@ -485,7 +544,7 @@ export const VEditor = genericComponent<VEditorSlots>()({
     })
 
     useRender(() => {
-      const hasToolbar = !props.hideToolbar && !!props.toolbarItems.length
+      const hasToolbar = !props.hideToolbar && !!props.formats.length
 
       const { modelValue: _, ...inputProps } = VInput.filterProps(props)
       const fieldProps = VField.filterProps(props)
@@ -538,36 +597,16 @@ export const VEditor = genericComponent<VEditorSlots>()({
                           {{
                             default: () => (
                               <div class="v-editor__toolbar-items">
-                                { props.toolbarItems.includes('bold') && (
+                                { displayedFormats.value.map(format => (
                                   <VBtn
                                     variant="text"
                                     size="small"
-                                    key="bold-button"
-                                    icon="mdi-format-bold"
-                                    onClick={ formatBold }
-                                    color={ isFormatActive.value(formatMap.bold) ? 'primary' : undefined }
+                                    key={ format.name }
+                                    icon={ format.icon }
+                                    onClick={ () => applyFormat(format.config) }
+                                    color={ isFormatActive.value(format.name) ? 'primary' : undefined }
                                   />
-                                )}
-                                { props.toolbarItems.includes('italic') && (
-                                  <VBtn
-                                    variant="text"
-                                    size="small"
-                                    key="italic-button"
-                                    icon="mdi-format-italic"
-                                    onClick={ formatItalic }
-                                    color={ isFormatActive.value(formatMap.italic) ? 'primary' : undefined }
-                                  />
-                                )}
-                                { props.toolbarItems.includes('underline') && (
-                                  <VBtn
-                                    variant="text"
-                                    size="small"
-                                    icon="mdi-format-underline"
-                                    key="underline-button"
-                                    onClick={ formatUnderline }
-                                    color={ isFormatActive.value(formatMap.underline) ? 'primary' : undefined }
-                                  />
-                                )}
+                                ))}
                               </div>
                             ),
                           }}
@@ -579,6 +618,8 @@ export const VEditor = genericComponent<VEditorSlots>()({
                         color="transparent"
                         height={ props.height }
                         maxHeight={ props.maxHeight }
+                        minHeight={ props.minHeight }
+                        class="d-flex flex-column overflow-auto"
                       >
                         <div
                           ref={ editorRef }
