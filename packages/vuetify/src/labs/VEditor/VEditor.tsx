@@ -32,7 +32,6 @@ enum Formats {
   Subscript = 'subscript',
   Superscript = 'superscript',
   Code = 'code',
-  Quote = 'quote',
 }
 
 type Formatter = {
@@ -94,7 +93,6 @@ export const makeVEditorProps = propsFactory({
       Formats.Underline,
       Formats.StrikeThrough,
       Formats.Code,
-      Formats.Quote,
     ],
   },
   height: {
