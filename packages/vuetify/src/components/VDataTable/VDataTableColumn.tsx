@@ -27,11 +27,9 @@ export const VDataTableColumn = defineFunctionalComponent({
 }, (props, { slots }) => {
   const Tag = props.tag ?? 'td'
 
-  const fixedSide = props.fixed === 'end'
-    ? 'end'
-    : props.fixed
-      ? 'start'
-      : 'none'
+  const fixedSide = typeof props.fixed === 'string' ? props.fixed
+    : props.fixed ? 'start'
+    : 'none'
 
   return (
     <Tag
