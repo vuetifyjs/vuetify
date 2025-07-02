@@ -202,7 +202,7 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
     raf = requestAnimationFrame(_calculateVisibleItems)
   }
   function _calculateVisibleItems () {
-    if (!containerRef.value || !viewportHeight.value) return
+    if (!containerRef.value || !viewportHeight.value || !itemHeight.value) return
     const scrollTop = lastScrollTop - markerOffset
     const direction = Math.sign(scrollVelocity)
 
