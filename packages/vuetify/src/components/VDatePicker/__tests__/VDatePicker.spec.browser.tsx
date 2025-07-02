@@ -57,12 +57,14 @@ describe('VDatePicker', () => {
 
     await commands.abortAfter(5000, 'VDatePicker infinite loop detection')
 
-    firstDay.value = 7
+    firstDay.value = -1.5
     await wait(100)
 
     await userEvent.click(await screen.findByText(21))
     await userEvent.click(await screen.findByText(7))
     await expect.poll(() => model.value).toHaveLength(4)
+
+    expect('Invalid firstDayOfWeek, expected discrete number in range [0-6]').toHaveBeenTipped()
 
     await commands.clearAbortTimeout()
   })

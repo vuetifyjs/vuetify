@@ -1,5 +1,5 @@
 // Utilities
-import { createRange, padStart } from '@/util'
+import { consoleWarn, createRange, padStart } from '@/util'
 
 // Types
 import type { DateAdapter } from '../DateAdapter'
@@ -85,10 +85,11 @@ function getWeekArray (date: Date, locale: string, firstDayOfWeek?: number) {
 }
 
 function startOfWeek (date: Date, locale: string, firstDayOfWeek?: number) {
-  let day = firstDayOfWeek ?? weekInfo(locale)?.firstDay ?? 0
+  let day = (firstDayOfWeek ?? weekInfo(locale)?.firstDay ?? 0) % 7
 
   // prevent infinite loop
   if (![0, 1, 2, 3, 4, 5, 6].includes(day)) {
+    consoleWarn('Invalid firstDayOfWeek, expected discrete number in range [0-6]')
     day = 0
   }
 
