@@ -226,6 +226,23 @@ export const VAutocomplete = genericComponent<new <
         menu.value = false
       }
 
+      if(['ArrowDown', 'ArrowUp'].includes(e.key)) {
+        if (model.value.length > 0) {
+            const lastSelectedItem = model.value[model.value.length - 1];
+            const displayIndex = displayItems.value.findIndex(item => 
+              (props.valueComparator || deepEqual)(item.value, lastSelectedItem.value)
+            );
+            
+          if (displayIndex >= 0) {
+            vVirtualScrollRef.value?.scrollToIndex(displayIndex)
+            nextTick(() => {
+              listRef.value?.focus(displayIndex)
+            })
+            return;
+          }
+        }
+      }
+
       if (
         highlightFirst.value &&
         ['Enter', 'Tab'].includes(e.key) &&
