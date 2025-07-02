@@ -10,11 +10,12 @@ import { VToolbar } from '@/components/VToolbar/VToolbar'
 
 // Composables
 import { useFocus } from '@/composables/focus'
+import { forwardRefs } from '@/composables/forwardRefs'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
-import { callEvent, genericComponent, propsFactory, useRender } from '@/util'
+import { callEvent, genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -24,7 +25,6 @@ import type { VInputSlots } from '@/components/VInput/VInput'
 type VEditorSlots = Omit<VInputSlots & VFieldSlots, 'default'>
 
 export const makeVEditorProps = propsFactory({
-  placeholder: String,
   hideToolbar: {
     type: Boolean,
     default: false,
@@ -33,15 +33,13 @@ export const makeVEditorProps = propsFactory({
     type: Array as PropType<string[]>,
     default: () => ['bold', 'italic', 'underline'],
   },
-
   height: {
     type: [Number, String],
     default: 200,
   },
   maxHeight: [Number, String],
-
-  ...makeVInputProps(),
-  ...makeVFieldProps(),
+  ...omit(makeVInputProps(), ['label']),
+  ...omit(makeVFieldProps(), ['label']),
 }, 'VEditor')
 
 const formatMap = { bold: 'b', italic: 'em', underline: 'u' }
@@ -59,7 +57,7 @@ export const VEditor = genericComponent<VEditorSlots>()({
     'update:modelValue': (val: string) => true,
   },
 
-  setup (props, { attrs, emit, slots }) {
+  setup (props, { emit, slots }) {
     const model = useProxiedModel(props, 'modelValue')
     const { isFocused, focus, blur } = useFocus(props)
 
@@ -76,12 +74,6 @@ export const VEditor = genericComponent<VEditorSlots>()({
 
     const isFormatActive = computed(() => (tag: string) => activeFormats.value.has(tag))
     const isPlainOrUnderlined = computed(() => ['plain', 'underlined'].includes(props.variant))
-
-    watch(() => props.modelValue, newVal => {
-      if (newVal === model.value) return
-      model.value = newVal || ''
-      updateEditorInnerHTML(model.value)
-    })
 
     function onKeyUp () {
       updateActiveStates()
@@ -471,6 +463,12 @@ export const VEditor = genericComponent<VEditorSlots>()({
       updateActiveStates()
     }
 
+    watch(() => props.modelValue, newVal => {
+      if (newVal === model.value) return
+      model.value = newVal || ''
+      updateEditorInnerHTML(newVal)
+    })
+
     onMounted(() => {
       if (editorRef.value) {
         updateEditorInnerHTML(model.value || '')
@@ -487,95 +485,95 @@ export const VEditor = genericComponent<VEditorSlots>()({
     })
 
     useRender(() => {
-      const hasToolbar = !props.hideToolbar && props.toolbarItems.length
+      const hasToolbar = !props.hideToolbar && !!props.toolbarItems.length
 
       const { modelValue: _, ...inputProps } = VInput.filterProps(props)
       const fieldProps = VField.filterProps(props)
 
       return (
-        <div>
-          { hasToolbar && (
-            <VToolbar
-              flat
-              key="toolbar"
-              density="compact"
-            >
-              {{
-                default: () => (
-                  <div class="v-editor__toolbar-items">
-                    { props.toolbarItems.includes('bold') && (
-                      <VBtn
-                        variant="text"
-                        size="small"
-                        key="bold-button"
-                        icon="mdi-format-bold"
-                        onClick={ formatBold }
-                        color={ isFormatActive.value(formatMap.bold) ? 'primary' : undefined }
-                      />
-                    )}
-                    { props.toolbarItems.includes('italic') && (
-                      <VBtn
-                        variant="text"
-                        size="small"
-                        key="italic-button"
-                        icon="mdi-format-italic"
-                        onClick={ formatItalic }
-                        color={ isFormatActive.value(formatMap.italic) ? 'primary' : undefined }
-                      />
-                    )}
-                    { props.toolbarItems.includes('underline') && (
-                      <VBtn
-                        variant="text"
-                        size="small"
-                        icon="mdi-format-underline"
-                        key="underline-button"
-                        onClick={ formatUnderline }
-                        color={ isFormatActive.value(formatMap.underline) ? 'primary' : undefined }
-                      />
-                    )}
-                  </div>
-                ),
-              }}
-            </VToolbar>
-          )}
+        <VInput
+          ref={ vInputRef }
+          v-model={ model.value }
+          class={ props.class }
+          style={ props.style }
+          { ...inputProps }
+          centerAffix={ !isPlainOrUnderlined.value }
+          focused={ isFocused.value }
+        >
+          {{
+            ...slots,
+            default: ({
+              id,
+              isDisabled,
+              isDirty,
+              isReadonly,
+              isValid,
+              reset,
+            }) => (
+              <VField
+                ref={ vFieldRef }
+                onClick={ onControlClick }
+                onMousedown={ onControlMousedown }
+                onClick:clear={ (e: MouseEvent) => onClear(e, reset) }
+                onClick:prependInner={ props['onClick:prependInner'] }
+                onClick:appendInner={ props['onClick:appendInner'] }
+                { ...fieldProps }
+                id={ id.value }
+                active={ isActive.value || isDirty.value }
+                dirty={ isDirty.value || props.dirty }
+                disabled={ isDisabled.value }
+                focused={ isFocused.value }
+                error={ isValid.value === false }
+              >
+                {{
+                  ...slots,
+                  default: () => (
+                    <div class="v-editor__container">
+                      { hasToolbar && (
+                        <VToolbar
+                          key="toolbar"
+                          color="transparent"
+                          density="compact"
+                        >
+                          {{
+                            default: () => (
+                              <div class="v-editor__toolbar-items">
+                                { props.toolbarItems.includes('bold') && (
+                                  <VBtn
+                                    variant="text"
+                                    size="small"
+                                    key="bold-button"
+                                    icon="mdi-format-bold"
+                                    onClick={ formatBold }
+                                    color={ isFormatActive.value(formatMap.bold) ? 'primary' : undefined }
+                                  />
+                                )}
+                                { props.toolbarItems.includes('italic') && (
+                                  <VBtn
+                                    variant="text"
+                                    size="small"
+                                    key="italic-button"
+                                    icon="mdi-format-italic"
+                                    onClick={ formatItalic }
+                                    color={ isFormatActive.value(formatMap.italic) ? 'primary' : undefined }
+                                  />
+                                )}
+                                { props.toolbarItems.includes('underline') && (
+                                  <VBtn
+                                    variant="text"
+                                    size="small"
+                                    icon="mdi-format-underline"
+                                    key="underline-button"
+                                    onClick={ formatUnderline }
+                                    color={ isFormatActive.value(formatMap.underline) ? 'primary' : undefined }
+                                  />
+                                )}
+                              </div>
+                            ),
+                          }}
+                        </VToolbar>
+                      )}
 
-          <VInput
-            ref={ vInputRef }
-            v-model={ model.value }
-            class={ props.class }
-            style={ props.style }
-            { ...inputProps }
-            centerAffix={ !isPlainOrUnderlined.value }
-            focused={ isFocused.value }
-          >
-            {{
-              ...slots,
-              default: ({
-                id,
-                isDisabled,
-                isDirty,
-                isReadonly,
-                isValid,
-                reset,
-              }) => (
-                <VField
-                  ref={ vFieldRef }
-                  onClick={ onControlClick }
-                  onMousedown={ onControlMousedown }
-                  onClick:clear={ (e: MouseEvent) => onClear(e, reset) }
-                  onClick:prependInner={ props['onClick:prependInner'] }
-                  onClick:appendInner={ props['onClick:appendInner'] }
-                  { ...fieldProps }
-                  id={ id.value }
-                  active={ isActive.value || isDirty.value }
-                  dirty={ isDirty.value || props.dirty }
-                  disabled={ isDisabled.value }
-                  focused={ isFocused.value }
-                  error={ isValid.value === false }
-                >
-                  {{
-                    ...slots,
-                    default: () => (
                       <VSheet
                         width="100%"
                         color="transparent"
@@ -583,28 +581,25 @@ export const VEditor = genericComponent<VEditorSlots>()({
                         maxHeight={ props.maxHeight }
                       >
                         <div
-                          class="v-editor"
                           ref={ editorRef }
+                          class={ `v-editor px-4 ${hasToolbar ? 'py-0' : 'py-4'}` }
                           contenteditable={ !isReadonly.value && !isDisabled.value }
-                          placeholder={ props.placeholder }
                           onFocus={ onFocus }
                           onBlur={ blur }
                           onInput={ onInput }
                         />
-                    </VSheet>
-                    ),
-                  }}
-                </VField>
-              ),
-            }}
-          </VInput>
-        </div>
+                      </VSheet>
+                    </div>
+                  ),
+                }}
+              </VField>
+            ),
+          }}
+        </VInput>
       )
     })
 
-    return {
-      editorRef,
-    }
+    return forwardRefs({}, vInputRef, vFieldRef, editorRef)
   },
 })
 
