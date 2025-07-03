@@ -18,7 +18,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, shallowRef, toRef, watch } from 'vue'
-import { genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
+import { genericComponent, omit, propsFactory, useRender, wrapInArray, padStart } from '@/util'
 
 // Types
 import type { VPickerSlots } from '@/labs/VPicker/VPicker'
@@ -231,7 +231,8 @@ export const VDatePicker = genericComponent<new <
 
     function allowedMonths (month: number) {
       if (typeof props.allowedDates === 'function') {
-        const startOfMonth = adapter.parseISO(`${year.value}-${month + 1}-01`)
+        const monthTwoDigit = padStart(String(month + 1), 2, '0');
+        const startOfMonth = adapter.parseISO(`${year.value}-${monthTwoDigit}-01`)
         return isAllowedInRange(startOfMonth, adapter.endOfMonth(startOfMonth))
       }
 
