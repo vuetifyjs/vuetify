@@ -17,6 +17,7 @@ import type { InternalListItem } from '@/components/VList/VList'
 import type { VListItemSlots } from '@/components/VList/VListItem'
 import type { SelectStrategyProp } from '@/composables/nested/nested'
 import type { GenericProps } from '@/util'
+import type { ToggleListItemSlot } from './shared'
 
 export type VTreeviewChildrenSlots<T> = {
   [K in keyof Omit<VListItemSlots, 'default'>]: VListItemSlots[K] & {
@@ -30,6 +31,7 @@ export type VTreeviewChildrenSlots<T> = {
     item: T
     internalItem: InternalListItem<T>
   }
+  toggle: ToggleListItemSlot
 }
 
 export const makeVTreeviewChildrenProps = propsFactory({
@@ -96,6 +98,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
       const { children, props: itemProps } = item
       const loading = isLoading.has(item.value)
       const slotsWithItem = {
+        toggle: slots.toggle ? slotProps => slots.toggle?.(slotProps) : undefined,
         prepend: slotProps => (
           <>
             { props.selectable && (!children || (children && !['leaf', 'single-leaf'].includes(props.selectStrategy as string))) && (
