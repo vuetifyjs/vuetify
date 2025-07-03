@@ -121,6 +121,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
             'v-progress-linear--rounded': props.rounded,
             'v-progress-linear--rounded-bar': props.roundedBar,
             'v-progress-linear--striped': props.striped,
+            'v-progress-linear--clickable': props.clickable,
           },
           roundedClasses.value,
           themeClasses.value,
