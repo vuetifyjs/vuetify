@@ -46,6 +46,13 @@ export default {
     input: {
       placeholder: 'Indtast dato',
     },
+    ariaLabel: {
+      previousMonth: 'Forrige måned',
+      nextMonth: 'Næste måned',
+      selectYear: 'Vælg år',
+      selectDate: '{0}',
+      currentDate: 'I dag, {0}',
+    },
   },
   noDataText: 'Ingen data tilgængelig',
   carousel: {

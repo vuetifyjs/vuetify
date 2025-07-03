@@ -46,6 +46,13 @@ export default {
     input: {
       placeholder: 'Unesite datum',
     },
+    ariaLabel: {
+      previousMonth: 'Prethodni mesec',
+      nextMonth: 'Sledeći mesec',
+      selectYear: 'Izaberi godinu',
+      selectDate: '{0}',
+      currentDate: 'Danas, {0}',
+    },
   },
   noDataText: 'Nema dostupnih podataka',
   carousel: {

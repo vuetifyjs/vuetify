@@ -46,6 +46,13 @@ export default {
     input: {
       placeholder: 'بەروار بنووسە',
     },
+    ariaLabel: {
+      previousMonth: 'مانگی پێشوو',
+      nextMonth: 'مانگی داهاتوو',
+      selectYear: 'ساڵ هەڵبژێرە',
+      selectDate: '{0}',
+      currentDate: 'ئەمڕو، {0}',
+    },
   },
   noDataText: 'هیچ داتایەک بەردەست نیە',
   carousel: {

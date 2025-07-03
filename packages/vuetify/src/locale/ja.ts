@@ -46,6 +46,13 @@ export default {
     input: {
       placeholder: '日付を入力',
     },
+    ariaLabel: {
+      previousMonth: '前の月',
+      nextMonth: '次の月',
+      selectYear: '年を選択',
+      selectDate: '{0}',
+      currentDate: '今日、{0}',
+    },
   },
   noDataText: 'データはありません。',
   carousel: {
