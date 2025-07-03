@@ -51,7 +51,7 @@
         &--line
           border-left-width: var(--v-indent-line-width)
           height: 100%
-          width: calc(50% - var(--v-indent-line-width-half))
+          width: calc(50% + var(--v-indent-line-width-half))
           justify-self: end
 
         &--leaf
@@ -61,20 +61,20 @@
             content: ''
             position: absolute
             border-bottom-width: var(--v-indent-line-width)
-            height: calc(50% - var(--v-indent-line-width-half))
+            height: calc(50% + var(--v-indent-line-width-half))
             width: 100%
 
         &--leaf-link
           border-bottom-width: var(--v-indent-line-width)
-          height: calc(50% - var(--v-indent-line-width-half))
+          height: calc(50% + var(--v-indent-line-width-half))
           margin-left: $treeview-indent-lines-gap
           margin-right: $treeview-indent-line-leaf-link-margin-right
 
         &--last-leaf
           border-left-width: var(--v-indent-line-width)
           border-bottom-width: var(--v-indent-line-width)
-          height: calc(50% - var(--v-indent-line-width-half))
-          width: calc(50% - var(--v-indent-line-width-half))
+          height: calc(50% + var(--v-indent-line-width-half))
+          width: calc(50% + var(--v-indent-line-width-half))
           justify-self: end
 
   .v-treeview-group.v-list-group
