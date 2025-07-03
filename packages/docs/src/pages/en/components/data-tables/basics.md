@@ -172,6 +172,12 @@ When wanting to use a checkbox component inside of a slot template in your data 
 
 <ExamplesExample file="v-data-table/slot-simple-checkbox" />
 
+#### Group by
+
+The **group-by** prop makes it possible to group rows by one or more attributes.
+
+<ExamplesExample file="v-data-table/prop-grouping" />
+
 ### Slots
 
 #### Header slot
