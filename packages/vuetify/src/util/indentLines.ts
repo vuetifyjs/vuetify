@@ -1,4 +1,5 @@
 // Types
+export type IndentLinesVariant = 'default' | 'simple'
 export type IndentLineType = 'leaf' | 'last-leaf' | 'line' | 'leaf-link' | 'none'
 
 export type IndentLinesOptions = {
@@ -8,6 +9,7 @@ export type IndentLinesOptions = {
   leafLinks: boolean
   separateRoots: boolean
   parentIndentLines: IndentLineType[] | undefined
+  variant: IndentLinesVariant | undefined
 }
 
 export type IndentLines = {
@@ -23,12 +25,21 @@ export function getIndentLines ({
   leafLinks,
   separateRoots,
   parentIndentLines,
+  variant,
 }: IndentLinesOptions): IndentLines {
   if (!parentIndentLines || !depth) {
     return {
       leaf: undefined,
       node: undefined,
       children: parentIndentLines,
+    }
+  }
+
+  if (variant === 'simple') {
+    return {
+      leaf: [...parentIndentLines, 'line'],
+      node: [...parentIndentLines, 'line'],
+      children: [...parentIndentLines, 'line'],
     }
   }
 

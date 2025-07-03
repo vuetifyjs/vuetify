@@ -1,17 +1,48 @@
 <template>
   <div>
-    <v-toolbar>
-      <div class="d-flex ga-6 pl-6">
-        <v-switch v-model="actionIcons" color="success" label="action icons" hide-details></v-switch>
-        <v-switch v-model="prependIcons" color="success" label="prepend icons" hide-details></v-switch>
-        <v-switch v-model="separateRoots" color="success" label="separate roots" hide-details></v-switch>
+    <v-sheet class="px-6 py-2 border-b" color="surface">
+      <div class="d-flex gx-3 flex-wrap">
+        <div class="d-flex align-center ga-3">
+          <span class="mr-3">Lines:</span>
+          <v-chip-group v-model="indentLines">
+            <v-chip :value="false" text="none" filter label></v-chip>
+            <v-chip :value="true" text="default" filter label></v-chip>
+            <v-chip text="simple" value="simple" filter label></v-chip>
+          </v-chip-group>
+        </div>
+        <v-spacer></v-spacer>
+        <div class="d-flex align-center ga-6 text-no-wrap">
+          <v-switch
+            v-model="actionIcons"
+            color="success"
+            density="comfortable"
+            label="action icons"
+            hide-details
+          ></v-switch>
+          <v-switch
+            v-model="prependIcons"
+            color="success"
+            density="comfortable"
+            label="prepend icons"
+            hide-details
+          ></v-switch>
+          <v-switch
+            v-model="separateRoots"
+            :disabled="indentLines !== true"
+            color="success"
+            density="comfortable"
+            label="separate roots"
+            hide-details
+          ></v-switch>
+        </div>
       </div>
-    </v-toolbar>
+    </v-sheet>
     <v-container class="d-flex ga-8 justify-center flex-wrap" fluid>
 
       <v-sheet width="400">
         <v-treeview
           :hide-actions="!actionIcons"
+          :indent-lines="indentLines"
           :items="items1"
           :separate-roots="separateRoots"
           density="compact"
@@ -19,7 +50,6 @@
           max-width="400"
           open-all
           open-on-click
-          show-lines
         >
           <template v-if="prependIcons" v-slot:prepend="{ item, isOpen }">
             <v-icon :icon="getIcon(item, isOpen)"></v-icon>
@@ -30,13 +60,13 @@
       <v-sheet width="400">
         <v-treeview
           :hide-actions="!actionIcons"
+          :indent-lines="indentLines"
           :items="items2"
           :separate-roots="separateRoots"
           density="compact"
           item-value="id"
           open-all
           open-on-click
-          show-lines
         >
           <template v-if="prependIcons" v-slot:prepend="{ item, isOpen }">
             <v-icon :icon="getIcon(item, isOpen)"></v-icon>
@@ -53,6 +83,7 @@
   const separateRoots = shallowRef(false)
   const actionIcons = shallowRef(true)
   const prependIcons = shallowRef(true)
+  const indentLines = shallowRef(true)
 
   const files = {
     html: 'mdi-language-html5',

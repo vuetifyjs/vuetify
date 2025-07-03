@@ -161,6 +161,6 @@ Customize the **on**, **off** and **indeterminate** icons for your selectable tr
 
 ### Indent lines
 
-The `v-treeview` component can be configured to show indent lines. The `show-lines` prop controls lines visibility.
+The `v-treeview` component can be configured to show indent lines. The `indent-lines` prop controls lines visibility and the variant.
 
 <ExamplesExample file="v-treeview/misc-indent-lines" />

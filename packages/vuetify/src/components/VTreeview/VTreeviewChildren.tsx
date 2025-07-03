@@ -16,7 +16,7 @@ import type { PropType } from 'vue'
 import type { InternalListItem } from '@/components/VList/VList'
 import type { VListItemSlots } from '@/components/VList/VListItem'
 import type { SelectStrategyProp } from '@/composables/nested/nested'
-import type { GenericProps } from '@/util'
+import type { GenericProps, IndentLinesVariant, IndentLineType } from '@/util'
 
 export type VTreeviewChildrenSlots<T> = {
   [K in keyof Omit<VListItemSlots, 'default'>]: VListItemSlots[K] & {
@@ -58,11 +58,13 @@ export const makeVTreeviewChildrenProps = propsFactory({
   index: Number,
   isLastGroup: Boolean,
   separateRoots: Boolean,
+  parentIndentLines: Array as PropType<IndentLineType[]>,
+  indentLinesVariant: String as PropType<IndentLinesVariant>,
   path: {
     type: Array as PropType<number[]>,
     default: () => [],
   },
-  ...pick(makeVTreeviewItemProps(), ['indentLines', 'hideActions']),
+  ...pick(makeVTreeviewItemProps(), ['hideActions']),
   ...makeDensityProps(),
 }, 'VTreeviewChildren')
 
@@ -128,7 +130,8 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
         isLastGroup: props.isLastGroup,
         leafLinks: !props.hideActions,
         separateRoots: props.separateRoots,
-        parentIndentLines: props.indentLines,
+        parentIndentLines: props.parentIndentLines,
+        variant: props.indentLinesVariant,
       })
 
       const slotsWithItem = {
@@ -205,7 +208,8 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
               <VTreeviewChildren
                 { ...treeviewChildrenProps }
                 items={ children }
-                indentLines={ indentLines.children }
+                indentLinesVariant={ props.indentLinesVariant }
+                parentIndentLines={ indentLines.children }
                 isLastGroup={ nextItemHasChildren }
                 returnObject={ props.returnObject }
                 v-slots={ slots }
