@@ -2,7 +2,7 @@
 import './VAppBar.sass'
 
 // Components
-import { makeVToolbarProps, VToolbar } from '@/components/VToolbar/VToolbar'
+import { calculateHeight, makeVToolbarProps, VToolbar } from '@/components/VToolbar/VToolbar'
 
 // Composables
 import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
@@ -108,8 +108,12 @@ export const VAppBar = genericComponent<VToolbarSlots>()({
     const height = computed(() => {
       if (scrollBehavior.value.hide && scrollBehavior.value.inverted) return 0
 
-      const height = vToolbarRef.value?.contentHeight ?? 0
-      const extensionHeight = vToolbarRef.value?.extensionHeight ?? 0
+      const height = vToolbarRef.value?.contentHeight ?? calculateHeight(props.height, props.density, false)
+      const extensionHeight = vToolbarRef.value?.extensionHeight ??
+        (props.extended || slots.extension?.()
+          ? calculateHeight(props.extensionHeight, props.density, true)
+          : 0
+        )
 
       if (!canHide.value) return (height + extensionHeight)
 
