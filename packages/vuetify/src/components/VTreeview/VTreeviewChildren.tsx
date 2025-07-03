@@ -106,13 +106,13 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
       }
     }
 
-    return () => slots.default?.() ?? props.items?.map((item, index) => {
+    return () => slots.default?.() ?? props.items?.map((item, index, items) => {
       const { children, props: itemProps } = item
       const loading = isLoading.has(item.value)
-      const nextItemHasChildren = !!props.items!.at(index + 1)?.children
+      const nextItemHasChildren = !!items.at(index + 1)?.children
 
       const depth = props.path?.length ?? 0
-      const isLast = props.items!.length - 1 === index
+      const isLast = items.length - 1 === index
       const treeItemProps = {
         index,
         depth,
@@ -193,8 +193,8 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
                 <VTreeviewItem
                   ref={ el => activatorItems.value[index] = el as VTreeviewItem }
                   { ...listItemProps }
-                  hide-actions={ props.hideActions }
-                  indent-lines={ indentLines.node }
+                  hideActions={ props.hideActions }
+                  indentLines={ indentLines.node }
                   value={ props.returnObject ? item.raw : itemProps.value }
                   loading={ loading }
                   v-slots={ slotsWithItem }
@@ -205,8 +205,8 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
               <VTreeviewChildren
                 { ...treeviewChildrenProps }
                 items={ children }
-                indent-lines={ indentLines.children }
-                is-last-group={ nextItemHasChildren }
+                indentLines={ indentLines.children }
+                isLastGroup={ nextItemHasChildren }
                 returnObject={ props.returnObject }
                 v-slots={ slots }
               />
@@ -217,8 +217,8 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
         slots.item?.({ props: itemProps, item: item.raw, internalItem: item }) ?? (
           <VTreeviewItem
             { ...itemProps }
-            hide-actions={ props.hideActions }
-            indent-lines={ indentLines.leaf }
+            hideActions={ props.hideActions }
+            indentLines={ indentLines.leaf }
             value={ props.returnObject ? toRaw(item.raw) : itemProps.value }
             v-slots={ slotsWithItem }
           />

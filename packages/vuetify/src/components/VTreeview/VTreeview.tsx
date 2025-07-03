@@ -176,7 +176,7 @@ export const VTreeview = genericComponent<new <T>(
             density={ props.density }
             returnObject={ props.returnObject }
             items={ items.value }
-            indent-lines={ props.showLines ? [] : undefined }
+            indentLines={ props.showLines ? [] : undefined }
             v-slots={ slots }
           ></VTreeviewChildren>
         </VList>
