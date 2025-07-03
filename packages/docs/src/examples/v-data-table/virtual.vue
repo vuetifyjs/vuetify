@@ -113,7 +113,7 @@
           { title: 'Boat Type', align: 'start', key: 'name' },
           { title: 'Speed(knots)', align: 'end', key: 'speed' },
           { title: 'Length(m)', align: 'end', key: 'length' },
-          { title: 'Price($)', align: 'end', key: 'price', value: item => formatPrice(item.price) },
+          { title: 'Price($)', align: 'end', key: 'price', value: item => this.formatPrice(item.price) },
           { title: 'Year', align: 'end', key: 'year' },
         ],
         boats: [
