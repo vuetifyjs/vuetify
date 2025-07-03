@@ -153,6 +153,9 @@ export const VField = genericComponent<new <T>(
         : props.baseColor
     })
     const iconColor = computed(() => {
+      if (!props.iconColor && props.glow && isFocused.value) {
+        return color.value
+      }
       if (!props.iconColor || (props.glow && !isFocused.value)) return undefined
 
       return props.iconColor === true ? color.value : props.iconColor
@@ -372,7 +375,6 @@ export const VField = genericComponent<new <T>(
           { hasAppend && (
             <div key="append" class="v-field__append-inner">
               { slots['append-inner']?.(slotProps.value) }
-
               { props.appendInnerIcon && (
                 <InputIcon
                   key="append-icon"
