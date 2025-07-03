@@ -64,6 +64,9 @@
             height: calc(50% + var(--v-indent-line-width-half))
             width: 100%
 
+          &:last-child:before
+            width: calc(100% - $treeview-indent-line-leaf-margin-right)
+
         &--leaf-link
           border-bottom-width: var(--v-indent-line-width)
           height: calc(50% + var(--v-indent-line-width-half))
@@ -74,8 +77,10 @@
           border-left-width: var(--v-indent-line-width)
           border-bottom-width: var(--v-indent-line-width)
           height: calc(50% + var(--v-indent-line-width-half))
-          width: calc(50% + var(--v-indent-line-width-half))
-          justify-self: end
+          margin-left: calc(50% - var(--v-indent-line-width-half))
+
+          &:last-child
+            margin-right: $treeview-indent-line-leaf-margin-right
 
   .v-treeview-group.v-list-group
     --list-indent-size: 0px
