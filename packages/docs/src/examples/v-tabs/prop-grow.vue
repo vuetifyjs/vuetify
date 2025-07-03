@@ -8,7 +8,6 @@
 
     <v-tabs
       v-model="tab"
-      bg-color="transparent"
       color="basil"
       grow
     >
@@ -69,6 +68,7 @@
 /* Helper classes */
 .bg-basil {
   background-color: #FFFBE6 !important;
+  color: #000 !important;
 }
 .text-basil {
   color: #356859 !important;
