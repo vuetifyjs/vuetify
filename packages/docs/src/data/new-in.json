@@ -62,6 +62,8 @@
   },
   "VDataTable": {
     "props": {
+      "collapseIcon": "3.10.0",
+      "expandIcon": "3.10.0",
       "headerProps": "3.5.0"
     }
   },

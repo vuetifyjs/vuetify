@@ -46,6 +46,8 @@ const aliases: IconAliases = {
   calendar: 'fa-calendar',
   treeviewCollapse: 'fa-caret-down',
   treeviewExpand: 'fa-caret-right',
+  tableGroupCollapse: 'fa-chevron-right',
+  tableGroupExpand: 'fa-chevron-down',
   eyeDropper: 'fa-eye-dropper',
   upload: 'fa-cloud-upload',
   color: 'fa-paint-brush',
