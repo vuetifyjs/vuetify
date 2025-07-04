@@ -158,3 +158,9 @@ Easily filter your treeview by using the **search** prop. You can easily apply y
 Customize the **on**, **off** and **indeterminate** icons for your selectable tree. Combine with other advanced functionality like API loaded items.
 
 <ExamplesExample file="v-treeview/misc-selectable-icons" />
+
+### Indent lines
+
+The `v-treeview` component can be configured to show indent lines. The `indent-lines` prop controls lines visibility and the variant.
+
+<ExamplesExample file="v-treeview/misc-indent-lines" />

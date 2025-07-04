@@ -12,11 +12,12 @@ import { computed, provide, ref, toRaw, toRef } from 'vue'
 import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
+import type { PropType } from 'vue'
 import { VTreeviewSymbol } from './shared'
 import type { InternalListItem } from '@/components/VList/VList'
 import type { VListChildrenSlots } from '@/components/VList/VListChildren'
 import type { ListItem } from '@/composables/list-items'
-import type { GenericProps } from '@/util'
+import type { GenericProps, IndentLinesVariant } from '@/util'
 
 function flatten (items: ListItem[], flat: ListItem[] = []) {
   for (const item of items) {
@@ -29,10 +30,17 @@ function flatten (items: ListItem[], flat: ListItem[] = []) {
 export const makeVTreeviewProps = propsFactory({
   fluid: Boolean,
   openAll: Boolean,
+  indentLines: [Boolean, String] as PropType<boolean | IndentLinesVariant>,
   search: String,
 
   ...makeFilterProps({ filterKeys: ['title'] }),
-  ...omit(makeVTreeviewChildrenProps(), ['index', 'path']),
+  ...omit(makeVTreeviewChildrenProps(), [
+    'index',
+    'path',
+    'indentLinesVariant',
+    'parentIndentLines',
+    'isLastGroup',
+  ]),
   ...omit(makeVListProps({
     collapseIcon: '$treeviewCollapse',
     expandIcon: '$treeviewExpand',
@@ -149,6 +157,7 @@ export const VTreeview = genericComponent<new <T>(
     useRender(() => {
       const listProps = VList.filterProps(props)
       const treeviewChildrenProps = VTreeviewChildren.filterProps(props)
+      const indentLinesVariant = typeof props.indentLines === 'boolean' ? 'default' : props.indentLines
 
       return (
         <VList
@@ -172,6 +181,8 @@ export const VTreeview = genericComponent<new <T>(
             density={ props.density }
             returnObject={ props.returnObject }
             items={ items.value }
+            parentIndentLines={ props.indentLines ? [] : undefined }
+            indentLinesVariant={ indentLinesVariant }
             v-slots={ slots }
           ></VTreeviewChildren>
         </VList>
