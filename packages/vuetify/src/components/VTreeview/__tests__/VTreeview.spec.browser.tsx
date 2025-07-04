@@ -25,6 +25,7 @@ const items = [
           {
             id: 203,
             title: 'Nekosaur',
+            disabled: true,
           },
           {
             id: 204,
@@ -600,12 +601,13 @@ describe.each([
         render(() => (
           <VTreeview
             v-model:selected={ selected.value }
-            open-all
+            openAll
             items={ items }
-            item-value="id"
+            itemValue="id"
+            itemProps={ item => ({ disabled: item.disabled }) }
             selectable
-            return-object
-            select-strategy="classic"
+            returnObject
+            selectStrategy="classic"
           />
         ))
 
@@ -623,7 +625,7 @@ describe.each([
           expect.objectContaining({ id: 4 }),
           expect.objectContaining({ id: 201 }),
           expect.objectContaining({ id: 202 }),
-          expect.objectContaining({ id: 203 }),
+          // expect.objectContaining({ id: 203 }), // disabled
           expect.objectContaining({ id: 204 }),
           expect.objectContaining({ id: 205 }),
           expect.objectContaining({ id: 301 }),
