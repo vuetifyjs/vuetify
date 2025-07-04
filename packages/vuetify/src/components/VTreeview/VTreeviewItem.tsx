@@ -103,7 +103,7 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
                       style={{ '--v-indent-parts': props.indentLines.length }}
                     >
                       { props.indentLines.map(type => (
-                        <div class={ `v-treeview-indent-line--${type}` } />
+                        <div class={ `v-treeview-indent-line v-treeview-indent-line--${type}` } />
                       ))}
                     </div>
                   ) : '' }
