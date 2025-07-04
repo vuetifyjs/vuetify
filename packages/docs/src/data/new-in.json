@@ -62,8 +62,7 @@
   },
   "VDataTable": {
     "props": {
-      "headerProps": "3.5.0",
-      "lastFixed": "3.9.0"
+      "headerProps": "3.5.0"
     }
   },
   "VExpansionPanels": {

@@ -122,15 +122,10 @@ export function useCalendar (props: CalendarProps) {
     v => adapter.getMonth(v)
   )
 
-  const weekDays = computed(() => {
-    const firstDayOfWeek = adapter.toJsDate(adapter.startOfWeek(adapter.date(), props.firstDayOfWeek)).getDay()
-    return props.weekdays.map(day => (day + firstDayOfWeek) % 7)
-  })
-
   const weekdayLabels = computed(() => {
-    const labels = adapter.getWeekdays(props.firstDayOfWeek, props.weekdayFormat)
-
-    return weekDays.value.map(day => labels[day])
+    const firstDayOfWeek = adapter.toJsDate(adapter.startOfWeek(adapter.date(), props.firstDayOfWeek)).getDay()
+    return adapter.getWeekdays(props.firstDayOfWeek, props.weekdayFormat)
+      .filter((_, i) => props.weekdays.includes((i + firstDayOfWeek) % 7))
   })
 
   const weeksInMonth = computed(() => {
@@ -160,13 +155,14 @@ export function useCalendar (props: CalendarProps) {
 
   function genDays (days: Date[], today: Date): CalendarDay[] {
     return days.filter(date => {
-      return weekDays.value.includes(adapter.toJsDate(date).getDay())
+      return props.weekdays.includes(adapter.toJsDate(date).getDay())
     }).map((date, index) => {
       const isoDate = adapter.toISO(date)
       const isAdjacent = !adapter.isSameMonth(date, month.value)
       const isStart = adapter.isSameDay(date, adapter.startOfMonth(month.value))
       const isEnd = adapter.isSameDay(date, adapter.endOfMonth(month.value))
       const isSame = adapter.isSameDay(date, month.value)
+      const weekdaysCount = props.weekdays.length
 
       return {
         date,
@@ -179,8 +175,8 @@ export function useCalendar (props: CalendarProps) {
         isSelected: model.value.some(value => adapter.isSameDay(date, value)),
         isStart,
         isToday: adapter.isSameDay(date, today),
-        isWeekEnd: index % 7 === 6,
-        isWeekStart: index % 7 === 0,
+        isWeekEnd: index % weekdaysCount === weekdaysCount - 1,
+        isWeekStart: index % weekdaysCount === 0,
         isoDate,
         localized: adapter.format(date, 'dayOfMonth'),
         month: adapter.getMonth(date),
@@ -240,7 +236,6 @@ export function useCalendar (props: CalendarProps) {
     genDays,
     model,
     weeksInMonth,
-    weekDays,
     weekdayLabels,
     weekNumbers,
   }

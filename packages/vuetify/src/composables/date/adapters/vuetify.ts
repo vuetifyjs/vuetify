@@ -168,7 +168,7 @@ function format (
   let options: Intl.DateTimeFormatOptions = {}
   switch (formatString) {
     case 'fullDate':
-      options = { year: 'numeric', month: 'long', day: 'numeric' }
+      options = { year: 'numeric', month: 'short', day: 'numeric' }
       break
     case 'fullDateWithWeekday':
       options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
