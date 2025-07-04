@@ -77,13 +77,14 @@ type NestedProvide = {
   root: {
     children: Ref<Map<unknown, unknown[]>>
     parents: Ref<Map<unknown, unknown>>
+    disabled: Ref<Set<unknown>>
     activatable: Ref<boolean>
     selectable: Ref<boolean>
     opened: Ref<Set<unknown>>
     activated: Ref<Set<unknown>>
     selected: Ref<Map<unknown, 'on' | 'off' | 'indeterminate'>>
     selectedValues: Ref<unknown[]>
-    register: (id: unknown, parentId: unknown, isGroup?: boolean) => void
+    register: (id: unknown, parentId: unknown, isDisabled: boolean, isGroup?: boolean) => void
     unregister: (id: unknown) => void
     open: (id: unknown, value: boolean, event?: Event) => void
     activate: (id: unknown, value: boolean, event?: Event) => void
@@ -100,8 +101,9 @@ export const emptyNested: NestedProvide = {
   root: {
     register: () => null,
     unregister: () => null,
-    parents: ref(new Map()),
     children: ref(new Map()),
+    parents: ref(new Map()),
+    disabled: ref(new Set()),
     open: () => null,
     openOnSelect: () => null,
     activate: () => null,
@@ -132,6 +134,7 @@ export const useNested = (props: NestedProps) => {
   let isUnmounted = false
   const children = shallowRef(new Map<unknown, unknown[]>())
   const parents = shallowRef(new Map<unknown, unknown>())
+  const disabled = shallowRef(new Set<unknown>())
 
   const opened = useProxiedModel(
     props,
@@ -191,7 +194,7 @@ export const useNested = (props: NestedProps) => {
     props,
     'selected',
     props.selected,
-    v => selectStrategy.value.in(v, children.value, parents.value),
+    v => selectStrategy.value.in(v, children.value, parents.value, disabled.value),
     v => selectStrategy.value.out(v, children.value, parents.value),
   )
 
@@ -232,7 +235,7 @@ export const useNested = (props: NestedProps) => {
 
         return arr
       }),
-      register: (id, parentId, isGroup) => {
+      register: (id, parentId, isDisabled, isGroup) => {
         if (nodeIds.has(id)) {
           const path = getPath(id).map(String).join(' -> ')
           const newPath = getPath(parentId).concat(id).map(String).join(' -> ')
@@ -244,6 +247,7 @@ export const useNested = (props: NestedProps) => {
 
         parentId && id !== parentId && parents.value.set(id, parentId)
 
+        isDisabled && disabled.value.add(id)
         isGroup && children.value.set(id, [])
 
         if (parentId != null) {
@@ -255,6 +259,7 @@ export const useNested = (props: NestedProps) => {
 
         nodeIds.delete(id)
         children.value.delete(id)
+        disabled.value.delete(id)
         const parent = parents.value.get(id)
         if (parent) {
           const list = children.value.get(parent) ?? []
@@ -297,6 +302,7 @@ export const useNested = (props: NestedProps) => {
           selected: new Map(selected.value),
           children: children.value,
           parents: parents.value,
+          disabled: disabled.value,
           event,
         })
         newSelected && (selected.value = newSelected)
@@ -338,6 +344,7 @@ export const useNested = (props: NestedProps) => {
       },
       children,
       parents,
+      disabled,
       getPath,
     },
   }
@@ -347,7 +354,7 @@ export const useNested = (props: NestedProps) => {
   return nested.root
 }
 
-export const useNestedItem = (id: MaybeRefOrGetter<unknown>, isGroup: boolean) => {
+export const useNestedItem = (id: MaybeRefOrGetter<unknown>, isDisabled: MaybeRefOrGetter<boolean>, isGroup: boolean) => {
   const parent = inject(VNestedSymbol, emptyNested)
 
   const uidSymbol = Symbol('nested item')
@@ -370,11 +377,15 @@ export const useNestedItem = (id: MaybeRefOrGetter<unknown>, isGroup: boolean) =
   }
 
   onBeforeMount(() => {
-    !parent.isGroupActivator && parent.root.register(computedId.value, parent.id.value, isGroup)
+    if (!parent.isGroupActivator) {
+      parent.root.register(computedId.value, parent.id.value, toValue(isDisabled), isGroup)
+    }
   })
 
   onBeforeUnmount(() => {
-    !parent.isGroupActivator && parent.root.unregister(computedId.value)
+    if (!parent.isGroupActivator) {
+      parent.root.unregister(computedId.value)
+    }
   })
 
   isGroup && provide(VNestedSymbol, item)
