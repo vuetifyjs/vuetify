@@ -121,10 +121,21 @@ export const VEditor = genericComponent<VEditorSlots>()({
   },
 
   setup (props, { emit, slots }) {
-    const model = useProxiedModel(props, 'modelValue')
+    const editorRef = ref<HTMLDivElement>()
+
+    const model = useProxiedModel(
+      props,
+      'modelValue',
+      '',
+      value => value,
+      value => {
+        const textContent = editorRef.value?.textContent?.trim()
+        return textContent && textContent !== zeroWidthSpace ? value : ''
+      }
+    )
+
     const { isFocused, focus, blur } = useFocus(props)
 
-    const editorRef = ref<HTMLDivElement>()
     const vFieldRef = ref<VField>()
     const vInputRef = ref<VInput>()
 
@@ -589,6 +600,7 @@ export const VEditor = genericComponent<VEditorSlots>()({
                       { hasToolbar && (
                         <VToolbar
                           key="toolbar"
+                          height="auto"
                           color="transparent"
                           density="compact"
                         >
