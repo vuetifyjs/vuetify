@@ -2,6 +2,7 @@
   "props": {
     "canvasHeight": "Height of canvas.",
     "dotSize": "Changes the size of the selection dot on the canvas.",
+    "eyeDropperIcon": "Icon used to trigger EyeDropper API.",
     "flat": "Removes elevation.",
     "hideCanvas": "Hides canvas.",
     "hideSliders": "Hides sliders.",
