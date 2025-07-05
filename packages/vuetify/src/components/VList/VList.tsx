@@ -101,6 +101,7 @@ export const makeVListProps = propsFactory({
   },
   slim: Boolean,
   nav: Boolean,
+  cascade: Boolean,
 
   'onClick:open': EventProp<[{ id: unknown, value: boolean, path: unknown[] }]>(),
   'onClick:select': EventProp<[{ id: unknown, value: boolean, path: unknown[] }]>(),
@@ -285,6 +286,7 @@ export const VList = genericComponent<new <
           <VListChildren
             items={ items.value }
             returnObject={ props.returnObject }
+            cascade={ props.cascade }
             v-slots={ slots }
           />
         </props.tag>

@@ -24,6 +24,7 @@ export interface ItemProps {
   itemChildren: SelectItemKey
   itemProps: SelectItemKey
   returnObject: boolean
+  cascade: boolean
   valueComparator: typeof deepEqual | undefined
 }
 
@@ -50,6 +51,7 @@ export const makeItemsProps = propsFactory({
     default: 'props',
   },
   returnObject: Boolean,
+  cascade: Boolean,
   valueComparator: Function as PropType<typeof deepEqual>,
 }, 'list-items')
 
@@ -59,7 +61,7 @@ export function transformItem (props: Omit<ItemProps, 'items'>, item: any): List
   const children = getPropertyFromItem(item, props.itemChildren)
   const itemProps = props.itemProps === true
     ? typeof item === 'object' && item != null && !Array.isArray(item)
-      ? 'children' in item
+      ? 'children' in item && !props.cascade
         ? omit(item, ['children'])
         : item
       : undefined
@@ -68,6 +70,8 @@ export function transformItem (props: Omit<ItemProps, 'items'>, item: any): List
   const _props = {
     title,
     value,
+    cascade: props.cascade,
+    children: props.cascade ? children : [],
     ...itemProps,
   }
 
@@ -87,6 +91,7 @@ export function transformItems (props: Omit<ItemProps, 'items'>, items: ItemProp
     'itemChildren',
     'itemProps',
     'returnObject',
+    'cascade',
     'valueComparator',
   ])
 
@@ -141,6 +146,7 @@ export function useItems (props: ItemProps) {
       'itemChildren',
       'itemProps',
       'returnObject',
+      'cascade',
       'valueComparator',
     ])
 

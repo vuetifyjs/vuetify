@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 // Styles
 import './VListItem.sass'
 
@@ -27,11 +28,13 @@ import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant
 import vRipple from '@/directives/ripple'
 
 // Utilities
-import { computed, onBeforeMount, toDisplayString, toRef, watch } from 'vue'
+import { computed, onBeforeMount, shallowRef, toDisplayString, toRef, watch } from 'vue'
 import { deprecate, EventProp, genericComponent, keyCodes, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import { VList } from './VList'
+import { VMenu } from '../VMenu'
 import type { RippleDirectiveBinding } from '@/directives/ripple'
 
 export type ListItemSlot = {
@@ -44,6 +47,7 @@ export type ListItemSlot = {
   isOpen: boolean
   isSelected: boolean
   isIndeterminate: boolean
+  cascade: boolean
   select: (value: boolean) => void
 }
 
@@ -81,6 +85,9 @@ export const makeVListItemProps = propsFactory({
     default: undefined,
   },
   nav: Boolean,
+  cascade: Boolean,
+  children: Array as PropType<any[]>,
+
   prependAvatar: String,
   prependIcon: IconValue,
   ripple: {
@@ -146,6 +153,9 @@ export const VListItem = genericComponent<VListItemSlots>()({
       (props.active || link.isActive?.value || (root.activatable.value ? isActivated.value : isSelected.value))
     )
     const isLink = toRef(() => props.link !== false && link.isLink.value)
+    const hasSubmenu = toRef(props.cascade && !!props.children)
+    const submenu = shallowRef(false)
+
     const isSelectable = computed(() => (!!list && (root.selectable.value || root.activatable.value || props.value != null)))
     const isClickable = computed(() =>
       !props.disabled &&
@@ -200,17 +210,23 @@ export const VListItem = genericComponent<VListItemSlots>()({
       isOpen: isOpen.value,
       isSelected: isSelected.value,
       isIndeterminate: isIndeterminate.value,
+      cascade: props.cascade,
     } satisfies ListItemSlot))
 
     function onClick (e: MouseEvent) {
-      emit('click', e)
+      if (hasSubmenu.value) {
+        submenu.value = true
+      } else {
+        emit('click', e)
+      }
+
       if (['INPUT', 'TEXTAREA'].includes((e.target as Element)?.tagName)) return
 
       if (!isClickable.value) return
 
       link.navigate?.(e)
 
-      if (isGroupActivator) return
+      if (isGroupActivator || hasSubmenu.value) return
 
       if (root.activatable.value) {
         activate(!isActivated.value, e)
@@ -238,9 +254,10 @@ export const VListItem = genericComponent<VListItemSlots>()({
       const hasTitle = (slots.title || props.title != null)
       const hasSubtitle = (slots.subtitle || props.subtitle != null)
       const hasAppendMedia = !!(props.appendAvatar || props.appendIcon)
-      const hasAppend = !!(hasAppendMedia || slots.append)
+      const hasAppend = !!(hasAppendMedia || hasSubmenu.value || slots.append)
       const hasPrependMedia = !!(props.prependAvatar || props.prependIcon)
       const hasPrepend = !!(hasPrependMedia || slots.prepend)
+      const submenuIcon = !props.appendIcon && !props.appendAvatar && hasSubmenu.value ? '$submenuExpand' : undefined
 
       list?.updateHasPrepend(hasPrepend)
 
@@ -353,15 +370,32 @@ export const VListItem = genericComponent<VListItemSlots>()({
             { slots.default?.(slotProps.value) }
           </div>
 
+          { hasSubmenu.value && (
+            <VMenu
+              key="submenu"
+              v-model={ submenu.value }
+              close-on-content-click={ false }
+              offset={[0, 8]}
+              open-on-focus={ false }
+              activator="parent"
+              open-on-hover
+              submenu
+            >
+              <VList
+                items={ props.children }
+                cascade
+              />
+            </VMenu>
+          )}
           { hasAppend && (
             <div key="append" class="v-list-item__append">
               { !slots.append ? (
                 <>
-                  { props.appendIcon && (
+                  { (props.appendIcon || submenuIcon) && (
                     <VIcon
                       key="append-icon"
                       density={ props.density }
-                      icon={ props.appendIcon }
+                      icon={ props.appendIcon || submenuIcon }
                     />
                   )}
 
@@ -384,7 +418,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
                     },
                     VIcon: {
                       density: props.density,
-                      icon: props.appendIcon,
+                      icon: props.appendIcon || submenuIcon,
                     },
                     VListItemAction: {
                       end: true,

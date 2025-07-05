@@ -44,6 +44,7 @@ const aliases: IconAliases = {
   plus: 'fa-plus',
   minus: 'fa-minus',
   calendar: 'fa-calendar',
+  submenuExpand: 'fa-caret-right',
   treeviewCollapse: 'fa-caret-down',
   treeviewExpand: 'fa-caret-right',
   eyeDropper: 'fa-eye-dropper',

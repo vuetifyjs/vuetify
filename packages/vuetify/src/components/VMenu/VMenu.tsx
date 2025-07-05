@@ -146,7 +146,9 @@ export const VMenu = genericComponent<OverlaySlots>()({
     }, { immediate: true })
 
     function onClickOutside (e: MouseEvent) {
-      parent?.closeParents(e)
+      if (!props.submenu) {
+        parent?.closeParents(e)
+      }
     }
 
     function onKeydown (e: KeyboardEvent) {
