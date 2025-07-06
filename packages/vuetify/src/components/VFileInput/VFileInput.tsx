@@ -225,6 +225,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
               isDirty,
               isReadonly,
               isValid,
+              hasDetails,
             }) => (
               <VField
                 ref={ vFieldRef }
@@ -240,6 +241,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
                 dirty={ isDirty.value || props.dirty }
                 disabled={ isDisabled.value }
                 focused={ isFocused.value }
+                no-details={ !hasDetails.value }
                 error={ isValid.value === false }
                 onDragover={ onDragover }
                 onDrop={ onDrop }

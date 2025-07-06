@@ -181,6 +181,7 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
               isDirty,
               isReadonly,
               isValid,
+              hasDetails,
               reset,
             }) => (
               <VField
@@ -197,6 +198,7 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
                 dirty={ isDirty.value || props.dirty }
                 disabled={ isDisabled.value }
                 focused={ isFocused.value }
+                no-details={ !hasDetails.value }
                 error={ isValid.value === false }
               >
                 {{

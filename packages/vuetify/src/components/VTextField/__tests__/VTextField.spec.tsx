@@ -95,4 +95,127 @@ describe('VTextField', () => {
     expect(onClickPrependInner).toHaveBeenCalledTimes(1)
     expect(onClickAppendInner).toHaveBeenCalledTimes(1)
   })
+
+  describe('hide-details behavior', () => {
+    it('should not have aria-describedby when hide-details is true', () => {
+      const wrapper = mountFunction(
+        <VTextField hide-details />
+      )
+
+      const input = wrapper.find('input')
+      expect(input.attributes('aria-describedby')).toBeUndefined()
+
+      // Should not have details section
+      const details = wrapper.find('.v-input__details')
+      expect(details.exists()).toBe(false)
+    })
+
+    it('should have aria-describedby when hide-details is false or undefined', () => {
+      const wrapper = mountFunction(
+        <VTextField id="input-1" />
+      )
+
+      const input = wrapper.find('input')
+      expect(input.attributes('aria-describedby')).toBe('input-1-messages')
+
+      // Should have details section
+      const details = wrapper.find('.v-input__details')
+      expect(details.exists()).toBe(true)
+      expect(details.attributes('id')).toBe('input-1-messages')
+    })
+
+    it('should have aria-describedby when hide-details is "auto" and has messages', () => {
+      const wrapper = mountFunction(
+        <VTextField
+          id="input-2"
+          messages={['Hello World!']}
+          hide-details="auto"
+        />
+      )
+
+      const input = wrapper.find('input')
+      expect(input.attributes('aria-describedby')).toBe('input-2-messages')
+
+      // Should have details section with messages
+      const details = wrapper.find('.v-input__details')
+      expect(details.exists()).toBe(true)
+      expect(details.attributes('id')).toBe('input-2-messages')
+
+      const messages = wrapper.find('.v-messages')
+      expect(messages.exists()).toBe(true)
+    })
+
+    it('should not have aria-describedby when hide-details is "auto" and no messages', () => {
+      const wrapper = mountFunction(
+        <VTextField
+          id="input-3"
+          hide-details="auto"
+        />
+      )
+
+      const input = wrapper.find('input')
+      expect(input.attributes('aria-describedby')).toBeUndefined()
+
+      // Should not have details section
+      const details = wrapper.find('.v-input__details')
+      expect(details.exists()).toBe(false)
+    })
+
+    it('should have aria-describedby when hide-details is "auto" and has error messages', () => {
+      const wrapper = mountFunction(
+        <VTextField
+          id="input-4"
+          errorMessages={['This field is required']}
+          hide-details="auto"
+        />
+      )
+
+      const input = wrapper.find('input')
+      expect(input.attributes('aria-describedby')).toBe('input-4-messages')
+
+      // Should have details section with error messages
+      const details = wrapper.find('.v-input__details')
+      expect(details.exists()).toBe(true)
+      expect(details.attributes('id')).toBe('input-4-messages')
+    })
+
+    it('should have aria-describedby when hide-details is "auto" and has counter', () => {
+      const wrapper = mountFunction(
+        <VTextField
+          id="input-5"
+          counter={ 10 }
+          hide-details="auto"
+        />
+      )
+
+      const input = wrapper.find('input')
+      expect(input.attributes('aria-describedby')).toBe('input-5-messages')
+
+      // Should have details section with counter
+      const details = wrapper.find('.v-input__details')
+      expect(details.exists()).toBe(true)
+      expect(details.attributes('id')).toBe('input-5-messages')
+    })
+
+    it('should have aria-describedby when hide-details is "auto" and has details slot', () => {
+      const wrapper = mountFunction(
+        <VTextField
+          id="input-6"
+          hide-details="auto"
+          v-slots={{
+            details: () => <div>Custom details</div>,
+          }}
+        />
+      )
+
+      const input = wrapper.find('input')
+      expect(input.attributes('aria-describedby')).toBe('input-6-messages')
+
+      // Should have details section with custom content
+      const details = wrapper.find('.v-input__details')
+      expect(details.exists()).toBe(true)
+      expect(details.attributes('id')).toBe('input-6-messages')
+      expect(details.text()).toContain('Custom details')
+    })
+  })
 })
