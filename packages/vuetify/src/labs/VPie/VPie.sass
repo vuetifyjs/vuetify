@@ -4,6 +4,7 @@
 @include tools.layer('components')
   .v-pie
     display: grid
+    align-items: center
     column-gap: 24px
     --v-pie-size: 250px
 
@@ -46,10 +47,9 @@
 
     &__center-content
       position: absolute
-      inset: 0
-      display: flex
-      align-items: center
-      justify-content: center
+      top: 50%
+      left: 50%
+      transform: translate(-50%, -50%)
       pointer-events: none
 
       > div
@@ -57,7 +57,6 @@
 
     &__legend
       grid-area: legend
-      align-self: center
       padding-block: $pie-legend-padding-block
 
       .v-avatar

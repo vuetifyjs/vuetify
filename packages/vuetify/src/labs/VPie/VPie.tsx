@@ -155,7 +155,7 @@ export const VPie = genericComponent<VPieSlots>()({
     const total = computed(() => visibleItems.value.reduce((sum, item) => sum + item.value, 0))
 
     const gaugeCut = toRef(() => Number(props.gaugeCut ?? 0))
-    const gaugeOffset = computed(() => 0.4 * (Math.min(180, gaugeCut.value)) / 180)
+    const gaugeOffset = computed(() => (1 - Math.cos(Math.PI * Math.min(90, gaugeCut.value / 2) / 180)) / 2)
     const rotateDeg = computed(() => `${gaugeCut.value ? (180 + gaugeCut.value / 2) : (props.rotate ?? 0)}deg`)
 
     function arcOffset (index: number) {
@@ -320,8 +320,9 @@ export const VPie = genericComponent<VPieSlots>()({
             <div
               class="v-pie__center-content"
               style={{
-                transform: `rotate(-${rotateDeg.value})`,
-                marginTop: `-${40 * gaugeCut.value / 360}%`,
+                transform: `translate(-50%, -50%)
+                  rotate(-${rotateDeg.value})
+                  translateY(calc(-100% * ${gaugeOffset.value}))`,
               }}
             >
               <div>
