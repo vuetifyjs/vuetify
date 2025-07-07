@@ -16,11 +16,15 @@ import { computed, inject, ref, toRaw } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
+import type { PropType } from 'vue'
 import { VTreeviewSymbol } from './shared'
 import type { VListItemSlots } from '@/components/VList/VListItem'
+import type { IndentLineType } from '@/util'
 
 export const makeVTreeviewItemProps = propsFactory({
   loading: Boolean,
+  hideActions: Boolean,
+  indentLines: Array as PropType<IndentLineType[]>,
   toggleIcon: IconValue,
 
   ...makeVListItemProps({ slim: true }),
@@ -69,7 +73,7 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
 
     useRender(() => {
       const listItemProps = VListItem.filterProps(props)
-      const hasPrepend = slots.prepend || props.toggleIcon
+      const hasPrepend = slots.prepend || props.toggleIcon || props.indentLines
 
       return (
         <VListItem
@@ -92,30 +96,42 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
             prepend: hasPrepend ? slotProps => {
               return (
                 <>
-                  <VListItemAction start>
-                    { props.toggleIcon ? (
-                      <VBtn
-                        density="compact"
-                        icon={ props.toggleIcon }
-                        loading={ props.loading }
-                        variant="text"
-                        onClick={ onClickAction }
-                      >
-                        {{
-                          loader: () => (
-                            <VProgressCircular
-                              indeterminate="disable-shrink"
-                              size="20"
-                              width="2"
-                            />
-                          ),
-                        }}
-                      </VBtn>
-                    ) : (
-                      <div class="v-treeview-item__level" />
-                    )}
-                  </VListItemAction>
-
+                  { props.indentLines && props.indentLines.length > 0 ? (
+                    <div
+                      key="indent-lines"
+                      class="v-treeview-indent-lines"
+                      style={{ '--v-indent-parts': props.indentLines.length }}
+                    >
+                      { props.indentLines.map(type => (
+                        <div class={ `v-treeview-indent-line v-treeview-indent-line--${type}` } />
+                      ))}
+                    </div>
+                  ) : '' }
+                  { !props.hideActions && (
+                    <VListItemAction start>
+                      { props.toggleIcon ? (
+                        <VBtn
+                          density="compact"
+                          icon={ props.toggleIcon }
+                          loading={ props.loading }
+                          variant="text"
+                          onClick={ onClickAction }
+                        >
+                          {{
+                            loader: () => (
+                              <VProgressCircular
+                                indeterminate="disable-shrink"
+                                size="20"
+                                width="2"
+                              />
+                            ),
+                          }}
+                        </VBtn>
+                      ) : (
+                        <div class="v-treeview-item__level" />
+                      )}
+                    </VListItemAction>
+                  )}
                   { slots.prepend?.(slotProps) }
                 </>
               )
