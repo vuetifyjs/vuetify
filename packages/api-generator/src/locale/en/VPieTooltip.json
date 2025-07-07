@@ -1,0 +1,8 @@
+{
+  "props": {
+    "item": "Data item related to hovered segment",
+    "titleFormat": "Formatter definition or function. When passed as String macros for `[title]` and `[value]` get replaced dynamically.",
+    "subtitleFormat": "Formatter definition or function. When passed as String macros for `[title]` and `[value]` get replaced dynamically.",
+    "transition": "The transition used when hovering between chart segments"
+  }
+}
