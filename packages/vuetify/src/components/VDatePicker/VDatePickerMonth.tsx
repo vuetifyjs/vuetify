@@ -59,7 +59,7 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
     const daysRef = ref()
     const { t } = useLocale()
 
-    const { daysInMonth, model, weekNumbers, weekDays, weekdayLabels } = useCalendar(props)
+    const { daysInMonth, model, weekNumbers, weekdayLabels } = useCalendar(props)
     const adapter = useDate()
 
     const rangeStart = shallowRef()
@@ -157,7 +157,7 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
     useRender(() => (
       <div
         class="v-date-picker-month"
-        style={{ '--v-date-picker-days-in-week': weekDays.value.length }}
+        style={{ '--v-date-picker-days-in-week': props.weekdays.length }}
       >
         { props.showWeek && (
           <div key="weeks" class="v-date-picker-month__weeks">
