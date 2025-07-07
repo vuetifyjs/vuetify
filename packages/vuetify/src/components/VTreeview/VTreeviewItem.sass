@@ -14,9 +14,6 @@
         width: 0
 
   .v-treeview
-    --v-indent-line-width: #{$treeview-indent-line-width}
-    --v-indent-line-width-half: round(var(--v-indent-line-width) / 2, 1px)
-    --v-tree-indent: var(--indent-padding)
     &.v-list
       --indent-padding: #{$treeview-indent-padding}
 
@@ -49,9 +46,9 @@
 
     &--leaf,
     &--line
-      border-left-width: var(--v-indent-line-width)
+      border-left-width: $treeview-indent-line-width
       height: 100%
-      width: calc(50% + var(--v-indent-line-width-half))
+      width: calc(50% + #{$treeview-indent-line-width-half})
       justify-self: end
 
     &--leaf
@@ -60,24 +57,24 @@
       &::before
         content: ''
         position: absolute
-        border-bottom-width: var(--v-indent-line-width)
-        height: calc(50% + var(--v-indent-line-width-half))
+        border-bottom-width: $treeview-indent-line-width
+        height: calc(50% + #{$treeview-indent-line-width-half})
         width: 100%
 
       &:last-child::before
         width: calc(100% - $treeview-indent-line-leaf-margin-right)
 
     &--leaf-link
-      border-bottom-width: var(--v-indent-line-width)
-      height: calc(50% + var(--v-indent-line-width-half))
+      border-bottom-width: $treeview-indent-line-width
+      height: calc(50% + #{$treeview-indent-line-width-half})
       margin-left: $treeview-indent-lines-gap
       margin-right: $treeview-indent-line-leaf-link-margin-right
 
     &--last-leaf
-      border-left-width: var(--v-indent-line-width)
-      border-bottom-width: var(--v-indent-line-width)
-      height: calc(50% + var(--v-indent-line-width-half))
-      margin-left: calc(50% - var(--v-indent-line-width-half))
+      border-left-width: $treeview-indent-line-width
+      border-bottom-width: $treeview-indent-line-width
+      height: calc(50% + #{$treeview-indent-line-width-half})
+      margin-left: calc(50% - #{$treeview-indent-line-width-half})
       border-bottom-left-radius: $treeview-indent-line-border-radius
 
       &:last-child
