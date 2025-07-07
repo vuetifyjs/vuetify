@@ -241,6 +241,11 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
   })
 
   watch([data.target, data.contentEl], ([newTarget, newContentEl], [oldTarget, oldContentEl]) => {
+    if (newContentEl === oldContentEl && Array.isArray(newTarget)) {
+      updateLocation()
+      return
+    }
+
     if (oldTarget && !Array.isArray(oldTarget)) observer.unobserve(oldTarget)
     if (newTarget && !Array.isArray(newTarget)) observer.observe(newTarget)
 

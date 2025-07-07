@@ -121,6 +121,7 @@
   "components/overlays": ["VOverlay"],
   "components/paginations": ["VPagination"],
   "components/parallax": ["VParallax"],
+  "components/pie-charts": ["VPie", "VPieSegment", "VPieTooltip"],
   "components/progress-circular": ["VProgressCircular"],
   "components/progress-linear": ["VProgressLinear"],
   "components/radio-buttons": ["VRadio", "VRadioGroup"],
