@@ -13,6 +13,8 @@ import { genericComponent, getIndentLines, pick, propsFactory } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import { VDivider } from '../VDivider'
+import { VListSubheader } from '../VList'
 import type { InternalListItem } from '@/components/VList/VList'
 import type { VListItemSlots } from '@/components/VList/VListItem'
 import type { SelectStrategyProp } from '@/composables/nested/nested'
@@ -30,6 +32,8 @@ export type VTreeviewChildrenSlots<T> = {
     item: T
     internalItem: InternalListItem<T>
   }
+  divider: { props: InternalListItem['props'] }
+  subheader: { props: InternalListItem['props'] }
 }
 
 export const makeVTreeviewChildrenProps = propsFactory({
@@ -219,13 +223,27 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
         </VTreeviewGroup>
       ) : (
         slots.item?.({ props: itemProps, item: item.raw, internalItem: item }) ?? (
-          <VTreeviewItem
-            { ...itemProps }
-            hideActions={ props.hideActions }
-            indentLines={ indentLines.leaf }
-            value={ props.returnObject ? toRaw(item.raw) : itemProps.value }
-            v-slots={ slotsWithItem }
-          />
+          (
+            item.type === 'divider' &&
+            (slots.divider?.({ props: item.raw }) ?? (
+              <VDivider { ...item.props } />
+            ))
+          ) ||
+          (
+            item.type === 'subheader' &&
+            (slots.subheader?.({ props: item.raw }) ?? (
+                <VListSubheader { ...item.props } />
+            ))
+          ) ||
+          (
+            <VTreeviewItem
+              { ...itemProps }
+              hideActions={ props.hideActions }
+              indentLines={ indentLines.leaf }
+              value={ props.returnObject ? toRaw(item.raw) : itemProps.value }
+              v-slots={ slotsWithItem }
+            />
+          )
         ))
     })
   },

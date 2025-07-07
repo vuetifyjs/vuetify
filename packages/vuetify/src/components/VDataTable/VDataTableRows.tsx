@@ -101,7 +101,7 @@ export const VDataTableRows = genericComponent<new <T>(
       return (
         <>
           { props.items.map((item, index) => {
-            if (item.type === 'group') {
+            if (item.ψtype === 'group') {
               const slotProps = {
                 index,
                 item,

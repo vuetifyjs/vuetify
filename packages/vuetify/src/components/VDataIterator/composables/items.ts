@@ -44,7 +44,7 @@ export function transformItem (
   const selectable = getPropertyFromItem(item, props.itemSelectable, true)
 
   return {
-    type: 'item',
+    ψtype: 'item',
     value,
     selectable,
     raw: item,
