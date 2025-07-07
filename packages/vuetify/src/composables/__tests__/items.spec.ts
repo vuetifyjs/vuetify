@@ -8,6 +8,7 @@ describe('items', () => {
   const defaults = {
     itemTitle: 'title',
     itemValue: 'value',
+    itemType: 'type',
     itemChildren: 'children',
     itemProps: () => ({}),
     returnObject: false,
@@ -26,6 +27,7 @@ describe('items', () => {
       {
         title: 'Foo',
         value: 'Foo',
+        type: 'item',
         props: {
           title: 'Foo',
           value: 'Foo',
@@ -41,6 +43,7 @@ describe('items', () => {
       {
         title: 'Foo',
         value: 'Foo',
+        type: 'item',
         props: {
           title: 'Foo',
           value: 'Foo',
@@ -56,6 +59,7 @@ describe('items', () => {
       {
         title: 'Foo',
         value: 'Foo',
+        type: 'item',
         props: {
           title: 'Foo',
           value: 'Foo',
@@ -71,6 +75,7 @@ describe('items', () => {
       {
         title: 'Foo',
         value: 1,
+        type: 'item',
         props: {
           title: 'Foo',
           value: 1,
@@ -96,6 +101,7 @@ describe('items', () => {
       {
         title: 'Foo',
         value: 'Foo',
+        type: 'item',
         props: {
           title: 'Foo',
           value: 'Foo',
@@ -104,6 +110,7 @@ describe('items', () => {
           {
             title: 'Bar',
             value: 'Bar',
+            type: 'item',
             props: {
               title: 'Bar',
               value: 'Bar',
@@ -132,6 +139,7 @@ describe('items', () => {
       {
         title: 'Foo',
         value: 'Foo',
+        type: 'item',
         props: {
           title: 'Foo',
           value: 'Foo',
@@ -140,6 +148,7 @@ describe('items', () => {
           {
             title: 'Bar',
             value: 'Bar',
+            type: 'item',
             props: {
               title: 'Bar',
               value: 'Bar',
@@ -173,6 +182,7 @@ describe('items', () => {
       {
         title: 'Foo',
         value: 'Foo',
+        type: 'item',
         props: {
           title: 'Foo',
           value: 'Foo',
@@ -184,6 +194,7 @@ describe('items', () => {
       {
         title: 'Bar',
         value: 'Bar',
+        type: 'item',
         props: {
           title: 'Bar',
           value: 'Bar',
