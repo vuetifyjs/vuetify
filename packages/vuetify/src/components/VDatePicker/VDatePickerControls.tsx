@@ -45,7 +45,7 @@ export const makeVDatePickerControlsProps = propsFactory({
   controlHeight: [Number, String],
   controlVariant: {
     type: String as PropType<ControlVariant>,
-    default: 'modal',
+    default: 'docked',
   },
   noMonthPicker: Boolean,
   disabled: {
