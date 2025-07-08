@@ -30,9 +30,9 @@ export const makeVCalendarProps = propsFactory({
 export type VCalendarSlots = VCalendarDaySlots & {
   'day-body': { day?: CalendarDay, events?: Array<any> }
   'day-title': { title?: number | string }
-  'day-event': { day?: CalendarDay, allDay: Boolean, event?: Record<string, unknown> }
+  'day-event': { day?: CalendarDay, allDay: boolean, event?: Record<string, unknown> }
   header: { title: string, clickNext: Function, clickPrev: Function, clickToday: Function }
-  'day-interval': { day?: CalendarDay, dayIndex: Number, events?: Array<any> }
+  'day-interval': { day?: CalendarDay, dayIndex: number, events?: Array<any> }
   title: { title?: string }
 }
 

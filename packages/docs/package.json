@@ -4,7 +4,7 @@
   "description": "A Vue.js project",
   "private": true,
   "author": "John Leider <john@vuetifyjs.com>",
-  "version": "3.8.12",
+  "version": "3.9.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/vuetifyjs/vuetify.git",
@@ -31,6 +31,7 @@
     "fflate": "^0.8.2",
     "isomorphic-fetch": "^3.0.0",
     "lodash-es": "^4.17.21",
+    "markdown-it-multimd-table": "^4.2.3",
     "pinia": "^3.0.2",
     "prism-theme-vars": "^0.2.5",
     "prismjs": "^1.30.0",
