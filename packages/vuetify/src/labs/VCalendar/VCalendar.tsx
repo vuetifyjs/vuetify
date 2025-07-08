@@ -174,7 +174,7 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
                       ) : '',
                       week.map(day => (
                           <VCalendarMonthDay
-                            key={ day.date.getTime() }
+                            key={ adapter.toJsDate(day.date).getTime() }
                             { ...calendarDayProps }
                             day={ day }
                             title={ adapter.format(day.date, 'dayOfMonth') }
