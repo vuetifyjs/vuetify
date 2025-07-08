@@ -7,9 +7,10 @@ import { VCheckboxBtn } from '@/components/VCheckbox'
 import { useGroupBy } from './composables/group'
 import { useHeaders } from './composables/headers'
 import { useSelection } from './composables/select'
+import { IconValue } from '@/composables/icons'
 
 // Utilities
-import { computed } from 'vue'
+import { computed, toRef } from 'vue'
 import { genericComponent, propsFactory } from '@/util'
 
 // Types
@@ -25,6 +26,14 @@ export const makeVDataTableGroupHeaderRowProps = propsFactory({
   item: {
     type: Object as PropType<Group>,
     required: true,
+  },
+  collapseIcon: {
+    type: IconValue,
+    default: '$tableGroupCollapse',
+  },
+  expandIcon: {
+    type: IconValue,
+    default: '$tableGroupExpand',
   },
 }, 'VDataTableGroupHeaderRow')
 
@@ -42,6 +51,8 @@ export const VDataTableGroupHeaderRow = genericComponent<VDataTableGroupHeaderRo
       return extractRows([props.item])
     })
 
+    const colspan = toRef(() => columns.value.length - (columns.value.some(c => c.key === 'data-table-select') ? 1 : 0))
+
     return () => (
       <tr
         class="v-data-table-group-header-row"
@@ -49,42 +60,44 @@ export const VDataTableGroupHeaderRow = genericComponent<VDataTableGroupHeaderRo
           '--v-data-table-group-header-row-depth': props.item.depth,
         }}
       >
-        { columns.value.map(column => {
-          if (column.key === 'data-table-group') {
-            const icon = isGroupOpen(props.item) ? '$expand' : '$next'
-            const onClick = () => toggleGroup(props.item)
+        { columns.value
+          .filter(column => ['data-table-select', 'data-table-group'].includes(column.key || ''))
+          .map(column => {
+            if (column.key === 'data-table-group') {
+              const icon = isGroupOpen(props.item) ? props.collapseIcon : props.expandIcon
+              const onClick = () => toggleGroup(props.item)
 
-            return slots['data-table-group']?.({ item: props.item, count: rows.value.length, props: { icon, onClick } }) ?? (
-              <VDataTableColumn class="v-data-table-group-header-row__column">
-                <VBtn
-                  size="small"
-                  variant="text"
-                  icon={ icon }
-                  onClick={ onClick }
-                />
-                <span>{ props.item.value }</span>
-                <span>({ rows.value.length })</span>
-              </VDataTableColumn>
-            )
-          }
+              return slots['data-table-group']?.({ item: props.item, count: rows.value.length, props: { icon, onClick } }) ?? (
+                <VDataTableColumn class="v-data-table-group-header-row__column" colspan={ colspan.value }>
+                  <VBtn
+                    size="small"
+                    variant="text"
+                    icon={ icon }
+                    onClick={ onClick }
+                  />
+                  <span>{ props.item.value }</span>
+                  <span>({ rows.value.length })</span>
+                </VDataTableColumn>
+              )
+            }
 
-          if (column.key === 'data-table-select') {
-            const modelValue = isSelected(rows.value)
-            const indeterminate = isSomeSelected(rows.value) && !modelValue
-            const selectGroup = (v: boolean) => select(rows.value, v)
-            return slots['data-table-select']?.({ props: { modelValue, indeterminate, 'onUpdate:modelValue': selectGroup } }) ?? (
-              <td>
-                <VCheckboxBtn
-                  modelValue={ modelValue }
-                  indeterminate={ indeterminate }
-                  onUpdate:modelValue={ selectGroup }
-                />
-              </td>
-            )
-          }
+            if (column.key === 'data-table-select') {
+              const modelValue = isSelected(rows.value)
+              const indeterminate = isSomeSelected(rows.value) && !modelValue
+              const selectGroup = (v: boolean) => select(rows.value, v)
+              return slots['data-table-select']?.({ props: { modelValue, indeterminate, 'onUpdate:modelValue': selectGroup } }) ?? (
+                <VDataTableColumn class="v-data-table__td--select-row" noPadding>
+                  <VCheckboxBtn
+                    modelValue={ modelValue }
+                    indeterminate={ indeterminate }
+                    onUpdate:modelValue={ selectGroup }
+                  />
+                </VDataTableColumn>
+              )
+            }
 
-          return <td />
-        })}
+            return <td />
+          })}
       </tr>
     )
   },
