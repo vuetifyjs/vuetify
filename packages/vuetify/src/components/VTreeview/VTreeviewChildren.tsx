@@ -9,7 +9,7 @@ import { IconValue } from '@/composables/icons'
 
 // Utilities
 import { computed, reactive, ref, toRaw } from 'vue'
-import { genericComponent, getIndentLines, pick, propsFactory } from '@/util'
+import { genericComponent, getIndentLines, pick, propsFactory, renderSlot } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -221,21 +221,25 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
             ),
           }}
         </VTreeviewGroup>
-      ) : (
-        slots.item?.({ props: itemProps, item: item.raw, internalItem: item }) ?? (
-          (
-            item.type === 'divider' &&
-            (slots.divider?.({ props: item.raw }) ?? (
-              <VDivider { ...item.props } />
-            ))
-          ) ||
-          (
-            item.type === 'subheader' &&
-            (slots.subheader?.({ props: item.raw }) ?? (
-                <VListSubheader { ...item.props } />
-            ))
-          ) ||
-          (
+      ) : renderSlot(
+        slots.item,
+        { props: itemProps, item: item.raw, internalItem: item },
+        () => {
+          if (item.type === 'divider') {
+            return renderSlot(
+              slots.divider,
+              { props: item.raw },
+              () => <VDivider { ...item.props } />,
+            )
+          }
+          if (item.type === 'subheader') {
+            return renderSlot(
+              slots.subheader,
+              { props: item.raw },
+              () => <VListSubheader { ...item.props } />,
+            )
+          }
+          return (
             <VTreeviewItem
               { ...itemProps }
               hideActions={ props.hideActions }
@@ -244,7 +248,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
               v-slots={ slotsWithItem }
             />
           )
-        ))
+        })
     })
   },
 })
