@@ -163,6 +163,14 @@ The following are the already released **minor** and **major** version updates. 
 
 ----
 
+## Contributing
+
+If you'd like to help contribute to Vuetify, head to our [Contribution guide](/getting-started/contributing/) for more information on how to get started.
+
+## Archived
+
+The following releases are old and unsupported **minor** and **major** versions:
+
 ### v2.7 (Nirvana)
 
 - **Released:** July 2023
@@ -267,14 +275,6 @@ The following are the already released **minor** and **major** version updates. 
   - Convert from Javascript to Typescript
   - Convert from Stylus to Sass
   - Convert from avoriaz to vue-test-utils
-
-## Contributing
-
-If you'd like to help contribute to Vuetify, head to our [Contribution guide](/getting-started/contributing/) for more information on how to get started.
-
-## Archived
-
-The following releases are old and unsupported **minor** and **major** versions:
 
 ### v1.5
 
