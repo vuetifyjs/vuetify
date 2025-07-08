@@ -28,7 +28,6 @@ describe('list-items', () => {
         type: 'item',
         title: 'Foo',
         value: 'Foo',
-        type: 'item',
         props: {
           title: 'Foo',
           value: 'Foo',
@@ -45,7 +44,6 @@ describe('list-items', () => {
         type: 'item',
         title: 'Foo',
         value: 'Foo',
-        type: 'item',
         props: {
           title: 'Foo',
           value: 'Foo',
@@ -62,7 +60,6 @@ describe('list-items', () => {
         type: 'item',
         title: 'Foo',
         value: 'Foo',
-        type: 'item',
         props: {
           title: 'Foo',
           value: 'Foo',
@@ -79,7 +76,6 @@ describe('list-items', () => {
         type: 'item',
         title: 'Foo',
         value: 1,
-        type: 'item',
         props: {
           title: 'Foo',
           value: 1,
@@ -106,7 +102,6 @@ describe('list-items', () => {
         type: 'item',
         title: 'Foo',
         value: 'Foo',
-        type: 'item',
         props: {
           title: 'Foo',
           value: 'Foo',
@@ -116,7 +111,6 @@ describe('list-items', () => {
             type: 'item',
             title: 'Bar',
             value: 'Bar',
-            type: 'item',
             props: {
               title: 'Bar',
               value: 'Bar',
@@ -146,7 +140,6 @@ describe('list-items', () => {
         type: 'item',
         title: 'Foo',
         value: 'Foo',
-        type: 'item',
         props: {
           title: 'Foo',
           value: 'Foo',
@@ -156,7 +149,6 @@ describe('list-items', () => {
             type: 'item',
             title: 'Bar',
             value: 'Bar',
-            type: 'item',
             props: {
               title: 'Bar',
               value: 'Bar',
@@ -191,7 +183,6 @@ describe('list-items', () => {
         type: 'item',
         title: 'Foo',
         value: 'Foo',
-        type: 'item',
         props: {
           title: 'Foo',
           value: 'Foo',
@@ -204,7 +195,6 @@ describe('list-items', () => {
         type: 'item',
         title: 'Bar',
         value: 'Bar',
-        type: 'item',
         props: {
           title: 'Bar',
           value: 'Bar',

@@ -47,7 +47,7 @@ export function transformItem (
   }, {} as Record<string, unknown>)
 
   return {
-    ψtype: 'item',
+    type: 'item',
     key: props.returnObject ? getPropertyFromItem(item, props.itemValue) : value,
     index,
     value,

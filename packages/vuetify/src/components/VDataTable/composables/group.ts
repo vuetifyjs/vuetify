@@ -11,12 +11,12 @@ import type { SortItem } from './sort'
 import type { DataTableItem } from '../types'
 
 export interface GroupableItem<T = any> {
-  ψtype: 'item'
+  type: 'item'
   raw: T
 }
 
 export interface Group<T = any> {
-  ψtype: 'group'
+  type: 'group'
   depth: number
   id: string
   key: string
@@ -83,7 +83,7 @@ export function provideGroupBy (options: {
       const arr = []
 
       for (const item of group.items) {
-        if ('type' in item && item.ψtype === 'group') {
+        if ('type' in item && item.type === 'group') {
           arr.push(...dive(item))
         } else {
           arr.push(item as T)
@@ -92,7 +92,7 @@ export function provideGroupBy (options: {
 
       return [...new Set(arr)]
     }
-    return dive({ ψtype: 'group', items, id: 'dummy', key: 'dummy', value: 'dummy', depth: 0 })
+    return dive({ type: 'group', items, id: 'dummy', key: 'dummy', value: 'dummy', depth: 0 })
   }
 
   // onBeforeMount(() => {
@@ -148,7 +148,7 @@ function groupItems <T extends GroupableItem> (items: readonly T[], groupBy: rea
       key,
       value,
       items: rest.length ? groupItems(items, rest, depth + 1, id) : items,
-      ψtype: 'group',
+      type: 'group',
     })
   })
 
@@ -160,7 +160,7 @@ function flattenItems <T extends GroupableItem> (items: readonly (T | Group<T>)[
 
   for (const item of items) {
     // TODO: make this better
-    if ('type' in item && item.ψtype === 'group') {
+    if ('type' in item && item.type === 'group') {
       if (item.value != null) {
         flatItems.push(item)
       }

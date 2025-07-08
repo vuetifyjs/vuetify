@@ -24,7 +24,7 @@ export interface ItemProps {
   itemValue: SelectItemKey
   itemChildren: SelectItemKey
   itemProps: SelectItemKey
-  itemType?: SelectItemKey
+  itemType: SelectItemKey
   returnObject: boolean
   valueComparator: typeof deepEqual | undefined
 }
