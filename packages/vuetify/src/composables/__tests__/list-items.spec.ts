@@ -4,7 +4,7 @@ import { useItems } from '../list-items'
 // Utilities
 import { deepEqual } from '@/util'
 
-describe('items', () => {
+describe('list-items', () => {
   const defaults = {
     itemTitle: 'title',
     itemValue: 'value',
@@ -24,6 +24,7 @@ describe('items', () => {
     const { items } = useItems({ ...defaults, items: ['Foo'] })
     expect(items.value).toEqual([
       {
+        type: 'item',
         title: 'Foo',
         value: 'Foo',
         props: {
@@ -39,6 +40,7 @@ describe('items', () => {
     const { items } = useItems({ ...defaults, items: [{ title: 'Foo' }] })
     expect(items.value).toEqual([
       {
+        type: 'item',
         title: 'Foo',
         value: 'Foo',
         props: {
@@ -54,6 +56,7 @@ describe('items', () => {
     const { items } = useItems({ ...defaults, itemTitle: 'text', items: [{ text: 'Foo' }] })
     expect(items.value).toEqual([
       {
+        type: 'item',
         title: 'Foo',
         value: 'Foo',
         props: {
@@ -69,6 +72,7 @@ describe('items', () => {
     const { items } = useItems({ ...defaults, itemValue: 'id', items: [{ title: 'Foo', id: 1 }] })
     expect(items.value).toEqual([
       {
+        type: 'item',
         title: 'Foo',
         value: 1,
         props: {
@@ -94,6 +98,7 @@ describe('items', () => {
     const { items } = useItems({ ...defaults, items: rawItems })
     expect(items.value).toEqual([
       {
+        type: 'item',
         title: 'Foo',
         value: 'Foo',
         props: {
@@ -102,6 +107,7 @@ describe('items', () => {
         },
         children: [
           {
+            type: 'item',
             title: 'Bar',
             value: 'Bar',
             props: {
@@ -130,6 +136,7 @@ describe('items', () => {
     const { items } = useItems({ ...defaults, itemChildren: 'labels', items: rawItems })
     expect(items.value).toEqual([
       {
+        type: 'item',
         title: 'Foo',
         value: 'Foo',
         props: {
@@ -138,6 +145,7 @@ describe('items', () => {
         },
         children: [
           {
+            type: 'item',
             title: 'Bar',
             value: 'Bar',
             props: {
@@ -171,6 +179,7 @@ describe('items', () => {
 
     expect(items.value).toEqual([
       {
+        type: 'item',
         title: 'Foo',
         value: 'Foo',
         props: {
@@ -182,6 +191,7 @@ describe('items', () => {
         raw: rawItems[0],
       },
       {
+        type: 'item',
         title: 'Bar',
         value: 'Bar',
         props: {
