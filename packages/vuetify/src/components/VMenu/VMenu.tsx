@@ -5,6 +5,7 @@ import './VMenu.sass'
 import { VDialogTransition } from '@/components/transitions'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VOverlay } from '@/components/VOverlay'
+import { VDialogSymbol, VMenuSymbol } from '@/components/VOverlay/shared'
 import { makeVOverlayProps } from '@/components/VOverlay/VOverlay'
 
 // Composables
@@ -27,7 +28,6 @@ import {
   useId,
   watch,
 } from 'vue'
-import { VMenuSymbol } from './shared'
 import {
   focusableChildren,
   focusChild,
@@ -80,7 +80,10 @@ export const VMenu = genericComponent<OverlaySlots>()({
 
     const overlay = ref<VOverlay>()
 
-    const parent = inject(VMenuSymbol, null)
+    const parentDialog = inject(VDialogSymbol, null)
+    const parentMenu = inject(VMenuSymbol, null)
+    const closableParent = parentDialog || parentMenu
+
     const openChildren = shallowRef(new Set<string>())
     provide(VMenuSymbol, {
       register () {
@@ -90,20 +93,20 @@ export const VMenu = genericComponent<OverlaySlots>()({
         openChildren.value.delete(uid)
       },
       closeParents (e) {
-        setTimeout(() => {
-          if (!openChildren.value.size &&
-            !props.persistent &&
-            (e == null || (overlay.value?.contentEl && !isClickInsideElement(e, overlay.value.contentEl)))
-          ) {
-            isActive.value = false
-            parent?.closeParents()
-          }
-        }, 40)
+        if (!openChildren.value.size &&
+          !props.persistent &&
+          (e == null || (overlay.value?.contentEl && !isClickInsideElement(e, overlay.value.contentEl))) &&
+          e ? overlay.value?.closeConditional(e) : true
+        ) {
+          isActive.value = false
+          closableParent?.closeParents()
+        }
       },
+      closeConditional: overlay.value?.closeConditional ?? ((e: MouseEvent) => {}),
     })
 
     onBeforeUnmount(() => {
-      parent?.unregister()
+      parentMenu?.unregister()
       document.removeEventListener('focusin', onFocusIn)
     })
     onDeactivated(() => isActive.value = false)
@@ -132,12 +135,12 @@ export const VMenu = genericComponent<OverlaySlots>()({
 
     watch(isActive, val => {
       if (val) {
-        parent?.register()
+        parentMenu?.register()
         if (IN_BROWSER) {
           document.addEventListener('focusin', onFocusIn, { once: true })
         }
       } else {
-        parent?.unregister()
+        parentMenu?.unregister()
         if (IN_BROWSER) {
           document.removeEventListener('focusin', onFocusIn)
         }
@@ -145,7 +148,7 @@ export const VMenu = genericComponent<OverlaySlots>()({
     }, { immediate: true })
 
     function onClickOutside (e: MouseEvent) {
-      parent?.closeParents(e)
+      closableParent?.closeParents(e)
     }
 
     function onKeydown (e: KeyboardEvent) {

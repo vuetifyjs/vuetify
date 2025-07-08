@@ -1,5 +1,5 @@
 // Components
-import { VMenuSymbol } from '@/components/VMenu/shared'
+import { VMenuSymbol } from '@/components/VOverlay/shared'
 
 // Composables
 import { makeDelayProps, useDelay } from '@/composables/delay'
