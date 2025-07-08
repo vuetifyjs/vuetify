@@ -2,6 +2,8 @@
 import { VTreeviewGroup } from './VTreeviewGroup'
 import { makeVTreeviewItemProps, VTreeviewItem } from './VTreeviewItem'
 import { VCheckboxBtn } from '@/components/VCheckbox'
+import { VDivider } from '@/components/VDivider'
+import { VListSubheader } from '@/components/VList'
 
 // Composables
 import { makeDensityProps } from '@/composables/density'
@@ -13,8 +15,6 @@ import { genericComponent, getIndentLines, pick, propsFactory, renderSlot } from
 
 // Types
 import type { PropType } from 'vue'
-import { VDivider } from '../VDivider'
-import { VListSubheader } from '../VList'
 import type { InternalListItem } from '@/components/VList/VList'
 import type { VListItemSlots } from '@/components/VList/VListItem'
 import type { SelectStrategyProp } from '@/composables/nested/nested'
