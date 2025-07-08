@@ -8,6 +8,7 @@ describe('list-items', () => {
   const defaults = {
     itemTitle: 'title',
     itemValue: 'value',
+    itemType: 'type',
     itemChildren: 'children',
     itemProps: () => ({}),
     returnObject: false,

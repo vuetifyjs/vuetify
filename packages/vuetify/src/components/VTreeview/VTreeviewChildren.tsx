@@ -2,6 +2,8 @@
 import { VTreeviewGroup } from './VTreeviewGroup'
 import { makeVTreeviewItemProps, VTreeviewItem } from './VTreeviewItem'
 import { VCheckboxBtn } from '@/components/VCheckbox'
+import { VDivider } from '@/components/VDivider'
+import { VListSubheader } from '@/components/VList'
 
 // Composables
 import { makeDensityProps } from '@/composables/density'
@@ -9,7 +11,7 @@ import { IconValue } from '@/composables/icons'
 
 // Utilities
 import { computed, reactive, ref, toRaw } from 'vue'
-import { genericComponent, getIndentLines, pick, propsFactory } from '@/util'
+import { genericComponent, getIndentLines, pick, propsFactory, renderSlot } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -30,6 +32,8 @@ export type VTreeviewChildrenSlots<T> = {
     item: T
     internalItem: InternalListItem<T>
   }
+  divider: { props: InternalListItem['props'] }
+  subheader: { props: InternalListItem['props'] }
 }
 
 export const makeVTreeviewChildrenProps = propsFactory({
@@ -217,16 +221,34 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
             ),
           }}
         </VTreeviewGroup>
-      ) : (
-        slots.item?.({ props: itemProps, item: item.raw, internalItem: item }) ?? (
-          <VTreeviewItem
-            { ...itemProps }
-            hideActions={ props.hideActions }
-            indentLines={ indentLines.leaf }
-            value={ props.returnObject ? toRaw(item.raw) : itemProps.value }
-            v-slots={ slotsWithItem }
-          />
-        ))
+      ) : renderSlot(
+        slots.item,
+        { props: itemProps, item: item.raw, internalItem: item },
+        () => {
+          if (item.type === 'divider') {
+            return renderSlot(
+              slots.divider,
+              { props: item.raw },
+              () => <VDivider { ...item.props } />,
+            )
+          }
+          if (item.type === 'subheader') {
+            return renderSlot(
+              slots.subheader,
+              { props: item.raw },
+              () => <VListSubheader { ...item.props } />,
+            )
+          }
+          return (
+            <VTreeviewItem
+              { ...itemProps }
+              hideActions={ props.hideActions }
+              indentLines={ indentLines.leaf }
+              value={ props.returnObject ? toRaw(item.raw) : itemProps.value }
+              v-slots={ slotsWithItem }
+            />
+          )
+        })
     })
   },
 })
