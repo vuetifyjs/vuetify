@@ -196,7 +196,7 @@ export const VDatePickerControls = genericComponent<VDatePickerControlsSlots>()(
       const onlyMonthBtn = (
         <VBtn
           class="v-date-picker-controls__only-month-btn"
-          data-testid="year-btn"
+          data-testid="month-btn"
           density="default"
           disabled={ disableMonth.value }
           text={ props.monthText }
