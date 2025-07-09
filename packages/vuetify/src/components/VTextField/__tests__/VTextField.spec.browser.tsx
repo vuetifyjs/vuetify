@@ -81,7 +81,7 @@ describe('VTextField', () => {
     const input1 = screen.getByCSS('input[name="username"]') as HTMLInputElement
     const input2 = screen.getByCSS('input[name="password"]') as HTMLInputElement
 
-    await commands.abortAfter(5000, 'VTextField infinite loop detection')
+    await commands.abortAfter(5000, 'VTextField + password managers » infinite loop detection')
 
     input1.focus()
     input1.value = 'my username'
@@ -121,7 +121,7 @@ describe('VTextField', () => {
       </div>
     ))
 
-    await commands.abortAfter(5000, 'VTextField infinite loop detection')
+    await commands.abortAfter(5000, 'VTextField + autofocus » infinite loop detection')
 
     show.value = true
     await wait(300)
