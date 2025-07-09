@@ -77,9 +77,9 @@ export const VPieTooltip = genericComponent<VPieTooltipSlots>()({
     return () => (
       <VTooltip
         offset={ props.offset }
-        model-value={ props.modelValue }
+        modelValue={ props.modelValue }
         target={ target.value }
-        content-class="v-pie__tooltip-content"
+        contentClass="v-pie__tooltip-content"
       >
         { !!props.item && (
           slots.default?.({ item: props.item }) ?? (
