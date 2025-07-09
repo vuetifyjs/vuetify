@@ -339,13 +339,13 @@ describe.each([
         ))
 
         await userEvent.click(screen.getByText(/Vuetify/).parentElement!.previousElementSibling!)
-        expect(opened.value).toEqual([
+        await expect.poll(() => opened.value).toEqual([
           expect.objectContaining({ id: 1 }),
         ])
 
         await waitAnimationFrame()
         await userEvent.click(screen.getByText(/Core/).parentElement!.previousElementSibling!)
-        expect(opened.value).toEqual([
+        await expect.poll(() => opened.value).toEqual([
           expect.objectContaining({ id: 1 }),
           expect.objectContaining({ id: 2 }),
         ])
