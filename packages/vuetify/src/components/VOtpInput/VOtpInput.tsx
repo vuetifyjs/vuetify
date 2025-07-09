@@ -315,8 +315,8 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
 
             <VOverlay
               contained
-              content-class="v-otp-input__loader"
-              model-value={ !!props.loading }
+              contentClass="v-otp-input__loader"
+              modelValue={ !!props.loading }
               persistent
             >
               { slots.loader?.() ?? (

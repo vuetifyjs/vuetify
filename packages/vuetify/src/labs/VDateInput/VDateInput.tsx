@@ -255,7 +255,7 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
                 <VMenu
                   v-model={ menu.value }
                   activator="parent"
-                  min-width="0"
+                  minWidth="0"
                   eager={ isFocused.value }
                   location={ props.location }
                   closeOnContentClick={ false }

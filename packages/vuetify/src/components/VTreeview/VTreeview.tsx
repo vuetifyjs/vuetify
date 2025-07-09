@@ -170,7 +170,7 @@ export const VTreeview = genericComponent<new <T>(
             },
             props.class,
           ]}
-          open-strategy="multiple"
+          openStrategy="multiple"
           style={ props.style }
           opened={ opened.value }
           v-model:activated={ activated.value }
