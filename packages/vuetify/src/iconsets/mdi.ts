@@ -48,6 +48,18 @@ const aliases: IconAliases = {
   treeviewExpand: 'mdi-menu-right',
   eyeDropper: 'mdi-eyedropper',
   upload: 'mdi-cloud-upload',
+  color: 'mdi-palette',
+  command: 'mdi-apple-keyboard-command',
+  ctrl: 'mdi-apple-keyboard-control',
+  space: 'mdi-keyboard-space',
+  shift: 'mdi-apple-keyboard-shift',
+  alt: 'mdi-apple-keyboard-option',
+  enter: 'mdi-keyboard-return',
+  arrowup: 'mdi-arrow-up',
+  arrowdown: 'mdi-arrow-down',
+  arrowleft: 'mdi-arrow-left',
+  arrowright: 'mdi-arrow-right',
+  backspace: 'mdi-backspace',
 }
 
 const mdi: IconSet = {

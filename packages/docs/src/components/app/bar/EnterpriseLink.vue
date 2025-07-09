@@ -1,7 +1,6 @@
 <template>
   <AppBtn
     :to="rpath('/introduction/enterprise-support/')"
-    class="ms-1"
     color="primary"
     text="support"
     variant="outlined"
@@ -13,6 +12,6 @@
   const { name } = useRoute()
 
   function onClick () {
-    gtagClick('app-bar', 'enterprise', name)
+    sweClick('app-bar', 'enterprise', name)
   }
 </script>

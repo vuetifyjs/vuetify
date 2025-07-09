@@ -27,11 +27,34 @@
       </AppTextField>
 
       <v-card-text :class="['px-4 py-0 d-flex flex-wrap justify-center', searchString ? 'align-start' : 'align-center']">
-        <AppSearchSearchRecent
-          v-if="searches.length && !searchString"
-          :searches="searches"
-          @click:delete="onClickDelete"
-        />
+        <template v-if="(searches.length || favorites.length) && !searchString">
+          <AppSearchSearchGroup
+            :results="searches"
+            :title="t('search.recent')"
+            class="mb-4"
+            icon="mdi-history"
+          >
+            <template #actions="{ index }">
+              <div class="d-flex align-center ga-1">
+                <v-icon-btn icon="mdi-star-outline" icon-size="20" size="24" variant="text" @click.prevent="saveResult(index)" />
+                <v-icon-btn icon="mdi-delete-outline" icon-size="20" size="24" variant="text" @click.prevent="deleteRecent(index)" />
+              </div>
+            </template>
+          </AppSearchSearchGroup>
+
+          <AppSearchSearchGroup
+            :results="favorites"
+            :title="t('search.favorite')"
+            icon="mdi-history"
+          >
+            <template #actions="{ index }">
+              <div class="d-flex align-center ga-1">
+                <v-icon-btn icon="mdi-star" icon-size="20" size="24" variant="text" @click.prevent="unsaveResult(index)" />
+                <v-icon-btn icon="mdi-delete-outline" icon-size="20" size="24" variant="text" @click.prevent="deleteFavorite(index)" />
+              </div>
+            </template>
+          </AppSearchSearchGroup>
+        </template>
 
         <template v-else-if="!searchString">
           <div class="text-center">
@@ -66,15 +89,21 @@
             <AppSearchSearchResults
               ref="list"
               :groups="transformItems(items)"
-              @click:result="onClickResult"
+              @click:result="selectResult"
             />
           </ais-hits>
         </ais-instant-search>
       </v-card-text>
 
-      <v-divider class="my-4" />
+      <v-divider class="mt-4" />
 
-      <AisPoweredBy class="ms-auto me-4 mb-2" />
+      <div class="d-flex mx-4 my-2 align-center">
+        <AppLink class="text-caption" href="https://www.algolia.com/doc/api-reference/api-parameters/advancedSyntax/#how-to-use">
+          Advanced search
+        </AppLink>
+        <v-spacer />
+        <AisPoweredBy class="pt-2" />
+      </div>
     </v-card>
   </v-dialog>
 </template>
@@ -89,6 +118,7 @@
 
   // Types
   import type { AlgoliaSearchHelper } from 'algoliasearch-helper'
+  import type { ShallowRef } from 'vue'
 
   const { t } = useI18n()
 
@@ -100,12 +130,27 @@
     'NHT6C0IV19', // docsearch app ID
     'ffa344297924c76b0f4155384aff7ef2' // vuetify API key
   )
-  const searches = shallowRef(JSON.parse(localStorage.getItem('searches') || '[]'))
+
+  // Ensure to return array from local storage
+  function getLocalStorage (key: string): Record<string, string>[] {
+    const value = JSON.parse(localStorage.getItem(key) || '[]')
+    if (!Array.isArray(value)) {
+      return []
+    }
+    return value.filter(Boolean)
+  }
+
+  const searches = shallowRef(getLocalStorage('searches'))
+  const favorites = shallowRef(getLocalStorage('favorites'))
 
   const locale = 'en'
 
   watch(searches, val => {
     localStorage.setItem('searches', JSON.stringify(val))
+  })
+
+  watch(favorites, val => {
+    localStorage.setItem('favorites', JSON.stringify(val))
   })
 
   function searchFunction (helper: AlgoliaSearchHelper) {
@@ -152,19 +197,56 @@
 
     return groups
   }
-  function onClickDelete (index: number) {
-    const array = searches.value.slice(0, 6)
-
+  function deleteItem (results: ShallowRef<any, any>, index:number) {
+    const array = results.value.slice(0, 6)
     array.splice(index, 1)
-
-    searches.value = array
+    results.value = array
   }
-  function onClickResult (result: any) {
-    const array = searches.value.slice(0, 6)
+  function deleteRecent (index: number) {
+    deleteItem(searches, index)
+  }
+  function deleteFavorite (index: number) {
+    deleteItem(favorites, index)
+  }
+  function selectResult (result: any) {
+    // Check favorites
+    const favorite = favorites.value.find(search => JSON.stringify(search) === JSON.stringify(result))
 
-    array.unshift(result)
+    if (favorite) {
+      // Deduplication in favorites
+      const filtered = favorites.value.filter(search => JSON.stringify(search) !== JSON.stringify(result))
+      filtered.unshift(result)
 
-    searches.value = array
+      favorites.value = filtered.slice(0, 6)
+
+      // No longer need to proceed in searches
+      return
+    }
+
+    // Deduplication in searches
+    const filtered = searches.value.filter(search => JSON.stringify(search) !== JSON.stringify(result))
+    filtered.unshift(result)
+
+    searches.value = filtered.slice(0, 6)
+  }
+  function moveResult (from: ShallowRef<any, any>, to: ShallowRef<any, any>, index: number) {
+    const source = from.value.slice(0, 6)
+    const item = source[index]
+    source.splice(index, 1)
+
+    const target = to.value.slice(0, 6)
+    if (item) {
+      target.unshift(item)
+    }
+
+    from.value = source
+    to.value = target
+  }
+  function saveResult (index: number) {
+    moveResult(searches, favorites, index)
+  }
+  function unsaveResult (index: number) {
+    moveResult(favorites, searches, index)
   }
 </script>
 

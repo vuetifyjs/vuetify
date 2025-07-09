@@ -7,8 +7,9 @@ import { VAvatar } from '@/components/VAvatar'
 import { VCheckboxBtn } from '@/components/VCheckbox'
 import { VChip } from '@/components/VChip'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
+import { VDivider } from '@/components/VDivider'
 import { VIcon } from '@/components/VIcon'
-import { VList, VListItem } from '@/components/VList'
+import { VList, VListItem, VListSubheader } from '@/components/VList'
 import { VMenu } from '@/components/VMenu'
 import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextField'
 import { VVirtualScroll } from '@/components/VVirtualScroll'
@@ -24,8 +25,9 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeTransitionProps } from '@/composables/transition'
 
 // Utilities
-import { computed, mergeProps, nextTick, ref, shallowRef, watch } from 'vue'
+import { computed, mergeProps, nextTick, ref, shallowRef, toRef, watch } from 'vue'
 import {
+  camelizeProps,
   checkPrintable,
   deepEqual,
   ensureValidVNode,
@@ -88,6 +90,7 @@ export const makeSelectProps = propsFactory({
   },
   openOnClear: Boolean,
   itemColor: String,
+  noAutoScroll: Boolean,
 
   ...makeItemsProps({ itemChildren: false }),
 }, 'Select')
@@ -124,6 +127,8 @@ export const VSelect = genericComponent<new <
     item: { item: Item, internalItem: ListItem<Item>, index: number, props: Record<string, unknown> }
     chip: { item: Item, internalItem: ListItem<Item>, index: number, props: Record<string, unknown> }
     selection: { item: Item, internalItem: ListItem<Item>, index: number }
+    subheader: { props: Record<string, unknown>, index: number }
+    divider: { props: Record<string, unknown>, index: number }
     'prepend-item': never
     'append-item': never
     'no-data': never
@@ -165,6 +170,7 @@ export const VSelect = genericComponent<new <
     const isFocused = shallowRef(false)
 
     let keyboardLookupPrefix = ''
+    let keyboardLookupIndex = -1
     let keyboardLookupLastTime: number
 
     const displayItems = computed(() => {
@@ -188,7 +194,7 @@ export const VSelect = genericComponent<new <
       },
     })
 
-    const label = computed(() => menu.value ? props.closeText : props.openText)
+    const label = toRef(() => menu.value ? props.closeText : props.openText)
 
     const computedMenuProps = computed(() => {
       return {
@@ -246,17 +252,50 @@ export const VSelect = genericComponent<new <
       const now = performance.now()
       if (now - keyboardLookupLastTime > KEYBOARD_LOOKUP_THRESHOLD) {
         keyboardLookupPrefix = ''
+        keyboardLookupIndex = -1
       }
       keyboardLookupPrefix += e.key.toLowerCase()
       keyboardLookupLastTime = now
 
-      const item = items.value.find(item => item.title.toLowerCase().startsWith(keyboardLookupPrefix))
-      if (item !== undefined) {
+      const items = displayItems.value
+      function findItem () {
+        let result = findItemBase()
+        if (result) return result
+
+        if (keyboardLookupPrefix.at(-1) === keyboardLookupPrefix.at(-2)) {
+          // No matches but we have a repeated letter, try the next item with that prefix
+          keyboardLookupPrefix = keyboardLookupPrefix.slice(0, -1)
+          result = findItemBase()
+          if (result) return result
+        }
+
+        // Still nothing, wrap around to the top
+        keyboardLookupIndex = -1
+        result = findItemBase()
+        if (result) return result
+
+        // Still nothing, try just the new letter
+        keyboardLookupPrefix = e.key.toLowerCase()
+        return findItemBase()
+      }
+      function findItemBase () {
+        for (let i = keyboardLookupIndex + 1; i < items.length; i++) {
+          const _item = items[i]
+          if (_item.title.toLowerCase().startsWith(keyboardLookupPrefix)) {
+            return [_item, i] as const
+          }
+        }
+        return undefined
+      }
+
+      const result = findItem()
+      if (!result) return
+
+      const [item, index] = result
+      keyboardLookupIndex = index
+      listRef.value?.focus(index)
+      if (!props.multiple) {
         model.value = [item]
-        const index = displayItems.value.indexOf(item)
-        IN_BROWSER && window.requestAnimationFrame(() => {
-          index >= 0 && vVirtualScrollRef.value?.scrollToIndex(index)
-        })
       }
     }
 
@@ -319,7 +358,7 @@ export const VSelect = genericComponent<new <
         const index = displayItems.value.findIndex(
           item => model.value.some(s => (props.valueComparator || deepEqual)(s.value, item.value))
         )
-        IN_BROWSER && window.requestAnimationFrame(() => {
+        IN_BROWSER && !props.noAutoScroll && window.requestAnimationFrame(() => {
           index >= 0 && vVirtualScrollRef.value?.scrollToIndex(index)
         })
       }
@@ -410,6 +449,7 @@ export const VSelect = genericComponent<new <
                       onFocusin={ onFocusin }
                       tabindex="-1"
                       aria-live="polite"
+                      aria-label={ `${props.label}-list` }
                       color={ props.itemColor ?? props.color }
                       { ...listEvents }
                       { ...props.listProps }
@@ -422,11 +462,25 @@ export const VSelect = genericComponent<new <
 
                       <VVirtualScroll ref={ vVirtualScrollRef } renderless items={ displayItems.value } itemKey="value">
                         { ({ item, index, itemRef }) => {
+                          const camelizedProps = camelizeProps(item.props)
+
                           const itemProps = mergeProps(item.props, {
                             ref: itemRef,
                             key: item.value,
                             onClick: () => select(item, null),
                           })
+
+                          if (item.type === 'divider') {
+                            return slots.divider?.({ props: item.raw, index }) ?? (
+                              <VDivider { ...item.props } key={ `divider-${index}` } />
+                            )
+                          }
+
+                          if (item.type === 'subheader') {
+                            return slots.subheader?.({ props: item.raw, index }) ?? (
+                              <VListSubheader { ...item.props } key={ `subheader-${index}` } />
+                            )
+                          }
 
                           return slots.item?.({
                             item: item.raw,
@@ -447,12 +501,12 @@ export const VSelect = genericComponent<new <
                                       />
                                     ) : undefined }
 
-                                    { item.props.prependAvatar && (
-                                      <VAvatar image={ item.props.prependAvatar } />
+                                    { camelizedProps.prependAvatar && (
+                                      <VAvatar image={ camelizedProps.prependAvatar } />
                                     )}
 
-                                    { item.props.prependIcon && (
-                                      <VIcon icon={ item.props.prependIcon } />
+                                    { camelizedProps.prependIcon && (
+                                      <VIcon icon={ camelizedProps.prependIcon } />
                                     )}
                                   </>
                                 ),

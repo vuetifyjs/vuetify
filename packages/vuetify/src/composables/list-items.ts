@@ -14,7 +14,8 @@ export interface ListItem<T = any> extends InternalItem<T> {
     title: string
     value: any
   }
-  children?: ListItem<T>[]
+  children: ListItem<T>[] | undefined
+  type: string
 }
 
 export interface ItemProps {
@@ -23,6 +24,7 @@ export interface ItemProps {
   itemValue: SelectItemKey
   itemChildren: SelectItemKey
   itemProps: SelectItemKey
+  itemType: SelectItemKey
   returnObject: boolean
   valueComparator: typeof deepEqual | undefined
 }
@@ -49,6 +51,10 @@ export const makeItemsProps = propsFactory({
     type: [Boolean, String, Array, Function] as PropType<SelectItemKey>,
     default: 'props',
   },
+  itemType: {
+    type: [Boolean, String, Array, Function] as PropType<SelectItemKey>,
+    default: 'type',
+  },
   returnObject: Boolean,
   valueComparator: Function as PropType<typeof deepEqual>,
 }, 'list-items')
@@ -57,6 +63,7 @@ export function transformItem (props: Omit<ItemProps, 'items'>, item: any): List
   const title = getPropertyFromItem(item, props.itemTitle, item)
   const value = getPropertyFromItem(item, props.itemValue, title)
   const children = getPropertyFromItem(item, props.itemChildren)
+  const type = getPropertyFromItem(item, props.itemType, 'item')
   const itemProps = props.itemProps === true
     ? typeof item === 'object' && item != null && !Array.isArray(item)
       ? 'children' in item
@@ -72,10 +79,11 @@ export function transformItem (props: Omit<ItemProps, 'items'>, item: any): List
   }
 
   return {
+    type,
     title: String(_props.title ?? ''),
     value: _props.value,
     props: _props,
-    children: Array.isArray(children) ? transformItems(props, children) : undefined,
+    children: type === 'item' && Array.isArray(children) ? transformItems(props, children) : undefined,
     raw: item,
   }
 }
@@ -86,6 +94,7 @@ export function transformItems (props: Omit<ItemProps, 'items'>, items: ItemProp
     'itemValue',
     'itemChildren',
     'itemProps',
+    'itemType',
     'returnObject',
     'valueComparator',
   ])
@@ -140,6 +149,7 @@ export function useItems (props: ItemProps) {
       'itemValue',
       'itemChildren',
       'itemProps',
+      'itemType',
       'returnObject',
       'valueComparator',
     ])

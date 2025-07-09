@@ -12,6 +12,7 @@ $button-color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity)) !
 $button-banner-actions-padding: 0 8px !default; // @deprecated
 $button-pagination-active-overlay-opacity: var(--v-border-opacity) !default;
 $button-pagination-border-radius: settings.$border-radius-root !default;
+$button-pagination-padding-inline: 5px !default;
 $button-pagination-rounded-border-radius: map.get(settings.$rounded, 'circle') !default;
 $button-border-color: settings.$border-color-root !default;
 $button-border-radius: settings.$border-radius-root !default;

@@ -31,7 +31,7 @@
             </div>
 
             <div
-              v-else-if="user.dev && file"
+              v-else-if="user.one.devmode && file"
               class="text-body-2 ma-1 text-medium-emphasis"
             >
               <v-icon icon="mdi-file-tree" />
@@ -149,8 +149,8 @@
   const sections = computed(() => {
     const _code = code.value
     if (!_code) return []
-    const scriptContent = parseTemplate(user.composition, _code) ??
-      parseTemplate(({ composition: 'options', options: 'composition' } as any)[user.composition], _code)
+    const scriptContent = parseTemplate(user.ecosystem.docs.composition, _code) ??
+      parseTemplate(({ composition: 'options', options: 'composition' } as any)[user.ecosystem.docs.composition], _code)
 
     return [
       {
@@ -227,7 +227,7 @@
       path: 'view-in-github',
       href: `https://github.com/vuetifyjs/vuetify/tree/${getBranch()}/packages/docs/src/examples/${props.file}.vue`,
       target: '_blank',
-      hide: xs.value || !user.dev,
+      hide: xs.value || !user.one.devmode,
     },
     {
       icon: copied.value ? 'mdi-check' : 'mdi-clipboard-multiple-outline',

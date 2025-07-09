@@ -392,7 +392,7 @@ describe('VAutocomplete', () => {
         { code: 'de-DE', name: 'German' },
       ]
 
-      const { container } = render(() => (
+      render(() => (
         <VAutocomplete
           label="Language"
           items={ items }
@@ -402,7 +402,7 @@ describe('VAutocomplete', () => {
         />
       ))
 
-      expect(container.querySelector('.v-field')).not.toHaveClass('v-field--dirty')
+      expect(screen.getByCSS('.v-field')).not.toHaveClass('v-field--dirty')
     })
   })
 
@@ -458,17 +458,17 @@ describe('VAutocomplete', () => {
     expect(input).toHaveAttribute('placeholder', 'Placeholder')
 
     await rerender({ label: 'Label' })
-    expect(input).not.toBeVisible()
+    await expect.element(input).not.toBeDisplayed()
 
     input.focus()
     await waitAnimationFrame()
     expect(input).toHaveAttribute('placeholder', 'Placeholder')
-    expect(input).toBeVisible()
+    await expect.element(input).toBeDisplayed()
 
     input.blur()
     await rerender({ persistentPlaceholder: true })
     expect(input).toHaveAttribute('placeholder', 'Placeholder')
-    expect(input).toBeVisible()
+    await expect.element(input).toBeDisplayed()
 
     await rerender({ modelValue: 'Foobar' })
     expect(input).not.toHaveAttribute('placeholder')
@@ -633,7 +633,7 @@ describe('VAutocomplete', () => {
     expect(screen.queryByRole('listbox')).toBeNull()
 
     await rerender({ items: ['Foo', 'Bar'] })
-    await expect(screen.findByRole('listbox')).resolves.toBeVisible()
+    await expect(screen.findByRole('listbox')).resolves.toBeDisplayed()
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/19346
@@ -643,7 +643,7 @@ describe('VAutocomplete', () => {
     })
 
     await userEvent.click(element)
-    await expect(screen.findByRole('listbox')).resolves.toBeVisible()
+    await expect(screen.findByRole('listbox')).resolves.toBeDisplayed()
 
     await userEvent.click(screen.getAllByRole('option')[0])
     await rerender({ items: ['Foo', 'Bar', 'test', 'test 2'] })
@@ -681,6 +681,17 @@ describe('VAutocomplete', () => {
     await userEvent.keyboard('Item 1')
     await userEvent.click(await screen.findByRole('option'))
     await expect.poll(() => selectedItem.value).toBe('Item 1')
+  })
+
+  it('should not fire @update:focus twice when clicking bottom of input', async () => {
+    const onFocus = vi.fn()
+    const { element } = render(() => (
+      <VAutocomplete onUpdate:focused={ onFocus } />
+    ))
+
+    await userEvent.click(element, { y: 1 })
+
+    expect(onFocus).toHaveBeenCalledTimes(1)
   })
 
   describe('Showcase', () => {

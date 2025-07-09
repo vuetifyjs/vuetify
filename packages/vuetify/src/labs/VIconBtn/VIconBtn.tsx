@@ -10,6 +10,7 @@ import { VProgressCircular } from '@/components/VProgressCircular'
 import { makeBorderProps, useBorder } from '@/composables/border'
 import { makeComponentProps } from '@/composables/component'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
+import { makeIconSizeProps, useIconSizes } from '@/composables/iconSizes'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
@@ -17,7 +18,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
 
 // Utilities
-import { toDisplayString, toRef } from 'vue'
+import { toDisplayString } from 'vue'
 import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -50,20 +51,6 @@ export const makeVIconBtnProps = propsFactory({
   hideOverlay: Boolean,
   icon: [String, Function, Object] as PropType<IconValue>,
   iconColor: String,
-  iconSize: {
-    type: [Number, String] as PropType<VIconBtnSizes | number | string>,
-    default: 'default',
-  },
-  iconSizes: {
-    type: Array as PropType<[VIconBtnSizes, number][]>,
-    default: () => ([
-      ['x-small', 10],
-      ['small', 16],
-      ['default', 24],
-      ['large', 28],
-      ['x-large', 32],
-    ]),
-  },
   loading: Boolean,
   opacity: [Number, String],
   readonly: Boolean,
@@ -90,6 +77,7 @@ export const makeVIconBtnProps = propsFactory({
   ...makeBorderProps(),
   ...makeComponentProps(),
   ...makeElevationProps(),
+  ...makeIconSizeProps(),
   ...makeRoundedProps(),
   ...makeTagProps({ tag: 'button' }),
   ...makeThemeProps(),
@@ -113,7 +101,7 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props)
 
-    const { colorClasses, colorStyles, variantClasses } = useVariant(toRef(() => ({
+    const { colorClasses, colorStyles, variantClasses } = useVariant(() => ({
       color: (() => {
         if (props.disabled) return undefined
         if (!isActive.value) return props.color
@@ -128,10 +116,9 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
         if (isActive.value) return props.activeVariant ?? props.variant
         return props.baseVariant ?? props.variant
       })(),
-    })))
+    }))
 
     const btnSizeMap = new Map(props.sizes)
-    const iconSizeMap = new Map(props.iconSizes)
 
     function onClick () {
       if (
@@ -147,19 +134,23 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
     useRender(() => {
       const icon = isActive.value ? props.activeIcon ?? props.icon : props.icon
 
-      const size = props.size as VIconBtnSizes
-      const hasNamedSize = btnSizeMap.has(size)
-      const btnSize = hasNamedSize ? btnSizeMap.get(size) : size
+      const _btnSize = props.size as VIconBtnSizes
+      const hasNamedSize = btnSizeMap.has(_btnSize)
+      const btnSize = hasNamedSize ? btnSizeMap.get(_btnSize) : _btnSize
       const btnHeight = props.height ?? btnSize
       const btnWidth = props.width ?? btnSize
+      const { iconSize } = useIconSizes(props, () => new Map(props.iconSizes).get(_btnSize))
 
-      const _iconSize = hasNamedSize ? size : (props.iconSize as VIconBtnSizes ?? size)
-      const iconSize = iconSizeMap.get(_iconSize) ?? _iconSize
-
-      const iconProps = { icon, size: iconSize, iconColor: props.iconColor, opacity: props.opacity }
+      const iconProps = {
+        icon,
+        size: iconSize.value,
+        iconColor: props.iconColor,
+        opacity: props.opacity,
+      }
 
       return (
         <props.tag
+          type={ props.tag === 'button' ? 'button' : undefined }
           class={[
             {
               'v-icon-btn': true,
@@ -216,7 +207,7 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
                   color={ typeof props.loading === 'boolean' ? undefined : props.loading }
                   indeterminate="disable-shrink"
                   width="2"
-                  size={ iconSize }
+                  size={ iconSize.value }
                 />
               )}
             </span>
