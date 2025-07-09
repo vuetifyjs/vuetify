@@ -1,11 +1,12 @@
 // Components
 import { VTextField } from '../VTextField'
 import { VBtn } from '@/components/VBtn'
+import { VDialog } from '@/components/VDialog'
 import { VMenu } from '@/components/VMenu'
 
 // Utilities
 import { commands, generate, render, screen, userEvent, wait } from '@test'
-import { cloneVNode } from 'vue'
+import { cloneVNode, ref } from 'vue'
 
 const variants = ['underlined', 'outlined', 'filled', 'solo', 'plain'] as const
 const densities = ['default', 'comfortable', 'compact'] as const
@@ -95,6 +96,37 @@ describe('VTextField', () => {
     await wait(100)
     const button = screen.getByCSS('.v-btn')
     await userEvent.click(button)
+    await wait(100)
+
+    const menuContent = screen.getByCSS('.my-menu-content')
+    expect(menuContent).toBeVisible()
+
+    await commands.clearAbortTimeout()
+  })
+
+  it('does not trigger infinite loop when autofocus conflicts with VDialog', async () => {
+    const show = ref(false)
+
+    render(() => (
+      <div>
+        { show.value && <VTextField key="field" autofocus /> }
+        <VDialog modelValue={ show.value }>
+          <VBtn class="button-in-dialog">
+            Some other button
+            <VMenu activator="parent">
+              <div class="my-menu-content">Some text in menu</div>
+            </VMenu>
+          </VBtn>
+        </VDialog>
+      </div>
+    ))
+
+    await commands.abortAfter(5000, 'VTextField infinite loop detection')
+
+    show.value = true
+    await wait(300)
+    const button2 = screen.getByCSS('.button-in-dialog')
+    await userEvent.click(button2)
     await wait(100)
 
     const menuContent = screen.getByCSS('.my-menu-content')
