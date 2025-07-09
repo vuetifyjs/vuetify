@@ -74,6 +74,7 @@ export const VMaskInput = genericComponent<VMaskInputSlots>()({
           { ...textFieldProps }
           v-model={ model.value }
           ref={ vTextFieldRef }
+          validation-value={ returnMaskedValue.value ? maskText(model.value) : unmaskText(model.value) }
         >
           {{ ...slots }}
         </VTextField>
