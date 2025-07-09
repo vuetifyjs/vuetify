@@ -143,11 +143,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
     const list = useList()
     const isActive = computed(() =>
       props.active !== false &&
-      (props.active ||
-        link.isActive?.value ||
-        (root.activatable.value && isActivated.value) ||
-        (root.selectable.value && isSelected.value)
-      )
+      (props.active || link.isActive?.value || (root.activatable.value ? isActivated.value : isSelected.value))
     )
     const isLink = toRef(() => props.link !== false && link.isLink.value)
     const isSelectable = computed(() => (!!list && (root.selectable.value || root.activatable.value || props.value != null)))
