@@ -14,7 +14,7 @@ describe('VTextarea', () => {
     render(() => (
       <Application>
         <div>
-          <VTextarea auto-grow rows="1" v-model={ model.value } />
+          <VTextarea autoGrow rows="1" v-model={ model.value } />
         </div>
       </Application>
     ))
@@ -38,7 +38,7 @@ describe('VTextarea', () => {
     render(() => (
       <Application>
         <div>
-          <VTextarea auto-grow rows="1" max-rows="2" v-model={ model.value } />
+          <VTextarea autoGrow rows="1" maxRows="2" v-model={ model.value } />
         </div>
       </Application>
     ))
@@ -62,7 +62,7 @@ describe('VTextarea', () => {
     render(() => (
       <Application>
         <div>
-          <VTextarea auto-grow rows="1" v-model={ model.value } onUpdate:rows={ val => { rows.value = val } } />
+          <VTextarea autoGrow rows="1" v-model={ model.value } onUpdate:rows={ val => { rows.value = val } } />
         </div>
       </Application>
     ))
