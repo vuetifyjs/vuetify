@@ -72,14 +72,16 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
     }
 
     useRender(() => {
-      const listItemProps = VListItem.filterProps(props)
+      const listItemProps = {
+        ...VListItem.filterProps(props),
+        ...vListItemRef.value?.isActivated ? { active: true } : { },
+      }
       const hasPrepend = slots.prepend || props.toggleIcon || props.indentLines
 
       return (
         <VListItem
           ref={ vListItemRef }
           { ...listItemProps }
-          active={ vListItemRef.value?.isActivated || undefined }
           class={[
             'v-treeview-item',
             {
