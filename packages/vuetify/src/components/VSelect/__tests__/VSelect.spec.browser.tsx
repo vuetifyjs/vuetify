@@ -268,8 +268,8 @@ describe('VSelect', () => {
           items={ items }
           multiple
           returnObject
-          item-title="text"
-          item-value="id"
+          itemTitle="text"
+          itemValue="id"
         />
       ))
 
@@ -418,8 +418,8 @@ describe('VSelect', () => {
       <VSelect
         items={ items }
         modelValue={ selectedItems }
-        item-title={ itemTitleFunc }
-        item-value="id"
+        itemTitle={ itemTitleFunc }
+        itemValue="id"
       />
     ))
 
@@ -471,8 +471,8 @@ describe('VSelect', () => {
           v-model={ selectedItem.value }
           hideSelected
           items={ items }
-          item-title="text"
-          item-value="id"
+          itemTitle="text"
+          itemValue="id"
           returnObject
         />
       ))
@@ -531,7 +531,7 @@ describe('VSelect', () => {
     const { element } = render(() => (
       <VSelect
         chips
-        closable-chips
+        closableChips
         items={['foo', 'bar']}
         label="Select"
         modelValue={['foo', 'bar']}
@@ -558,7 +558,7 @@ describe('VSelect', () => {
       <VSelect
         v-model={ selectedItem.value }
         chips
-        closable-chips
+        closableChips
         items={['abc', 'def']}
       />
     ))

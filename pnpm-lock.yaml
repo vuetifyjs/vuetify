@@ -51,6 +51,9 @@ importers:
       '@stylistic/eslint-plugin-ts':
         specifier: ^3.1.0
         version: 3.1.0(eslint@8.57.0)(typescript@5.8.3)
+      '@types/lodash-es':
+        specifier: ^4.17.12
+        version: 4.17.12
       '@types/yargs':
         specifier: ^17.0.33
         version: 17.0.33
@@ -138,6 +141,9 @@ importers:
       lerna:
         specifier: ^8.2.2
         version: 8.2.2(encoding@0.1.13)
+      lodash-es:
+        specifier: ^4.17.21
+        version: 4.17.21
       magic-string:
         specifier: ^0.30.17
         version: 0.30.17
@@ -214,18 +220,12 @@ importers:
         specifier: workspace:*
         version: link:../vuetify
     devDependencies:
-      '@types/lodash-es':
-        specifier: ^4.17.12
-        version: 4.17.12
       '@types/stringify-object':
         specifier: ^4.0.5
         version: 4.0.5
       eslint:
         specifier: ^8.57.0
         version: 8.57.0
-      lodash-es:
-        specifier: ^4.17.21
-        version: 4.17.21
       stringify-object:
         specifier: ^5.0.0
         version: 5.0.0
@@ -259,9 +259,9 @@ importers:
       isomorphic-fetch:
         specifier: ^3.0.0
         version: 3.0.0(encoding@0.1.13)
-      lodash-es:
-        specifier: ^4.17.21
-        version: 4.17.21
+      markdown-it-multimd-table:
+        specifier: ^4.2.3
+        version: 4.2.3
       pinia:
         specifier: ^3.0.2
         version: 3.0.2(typescript@5.8.3)(vue@3.5.13(typescript@5.8.3))
@@ -320,9 +320,6 @@ importers:
       '@types/babel__generator':
         specifier: ^7.27.0
         version: 7.27.0
-      '@types/lodash-es':
-        specifier: ^4.17.12
-        version: 4.17.12
       '@types/markdown-it':
         specifier: ^14.1.2
         version: 14.1.2
@@ -6301,6 +6298,9 @@ packages:
 
   markdown-it-link-attributes@4.0.1:
     resolution: {integrity: sha512-pg5OK0jPLg62H4k7M9mRJLT61gUp9nvG0XveKYHMOOluASo9OEF13WlXrpAp2aj35LbedAy3QOCgQCw0tkLKAQ==}
+
+  markdown-it-multimd-table@4.2.3:
+    resolution: {integrity: sha512-KepCr2OMJqm7IT6sOIbuqHGe+NERhgy66XMrc5lo6dHW7oaPzMDtYwR1EGwK16/blb6mCSg4jqityOe0o/H7HA==}
 
   markdown-it-prism@3.0.0:
     resolution: {integrity: sha512-M0LQsbVzjbzufV95nYdtbs99Sm/8f7zLnqFblb5yQZtFTGLM+y6hxMZ8BdujY3FFqVvTbnZ52/uoicQUqZUYbg==}
@@ -16253,6 +16253,8 @@ snapshots:
   markdown-it-header-sections@1.0.0: {}
 
   markdown-it-link-attributes@4.0.1: {}
+
+  markdown-it-multimd-table@4.2.3: {}
 
   markdown-it-prism@3.0.0:
     dependencies:

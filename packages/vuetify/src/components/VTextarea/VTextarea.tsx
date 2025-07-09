@@ -71,6 +71,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
     'mousedown:control': (e: MouseEvent) => true,
     'update:focused': (focused: boolean) => true,
     'update:modelValue': (val: string) => true,
+    'update:rows': (rows: number) => true,
   },
 
   setup (props, { attrs, emit, slots }) {
@@ -180,6 +181,9 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
     watch(() => props.rows, calculateInputHeight)
     watch(() => props.maxRows, calculateInputHeight)
     watch(() => props.density, calculateInputHeight)
+    watch(rows, val => {
+      emit('update:rows', val)
+    })
 
     let observer: ResizeObserver | undefined
     watch(sizerRef, val => {

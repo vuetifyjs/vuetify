@@ -2,7 +2,7 @@
 import { VListGroup } from './VListGroup'
 import { VListItem } from './VListItem'
 import { VListSubheader } from './VListSubheader'
-import { VDivider } from '../VDivider'
+import { VDivider } from '@/components/VDivider'
 
 // Utilities
 import { createList } from './list'

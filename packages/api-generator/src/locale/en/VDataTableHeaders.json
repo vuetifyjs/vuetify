@@ -5,6 +5,8 @@
     "sortDescIcon": "Icon used for descending sort button.",
     "sticky": "Deprecated, use `fixed-header` instead.",
     "fixedHeader": "Sticks the header to the top of the table.",
+    "lastFixed": "**FOR INTERNAL USE ONLY** Applies right border to the last column fixed to the left.",
+    "firstFixedEnd": "**FOR INTERNAL USE ONLY** Applies left border to the first column fixed to the right.",
     "multiSort": "Sort on multiple columns at the same time.",
     "headerProps": "Additional props to be be passed to the default header"
   },

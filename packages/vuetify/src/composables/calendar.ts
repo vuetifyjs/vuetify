@@ -23,6 +23,7 @@ export interface CalendarProps {
   year: number | string | undefined
   weeksInMonth: 'dynamic' | 'static'
   firstDayOfWeek: number | string | undefined
+  weekdayFormat: 'long' | 'short' | 'narrow' | undefined
 
   'onUpdate:modelValue': ((value: unknown[]) => void) | undefined
   'onUpdate:month': ((value: number) => void) | undefined
@@ -76,6 +77,7 @@ export const makeCalendarProps = propsFactory({
     type: [Number, String],
     default: undefined,
   },
+  weekdayFormat: String as PropType<'long' | 'short' | 'narrow' | undefined>,
 }, 'calendar')
 
 export function useCalendar (props: CalendarProps) {
@@ -122,7 +124,7 @@ export function useCalendar (props: CalendarProps) {
 
   const weekdayLabels = computed(() => {
     const firstDayOfWeek = adapter.toJsDate(adapter.startOfWeek(adapter.date(), props.firstDayOfWeek)).getDay()
-    return adapter.getWeekdays(props.firstDayOfWeek)
+    return adapter.getWeekdays(props.firstDayOfWeek, props.weekdayFormat)
       .filter((_, i) => props.weekdays.includes((i + firstDayOfWeek) % 7))
   })
 
