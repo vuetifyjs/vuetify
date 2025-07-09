@@ -13,10 +13,10 @@
   const user = useUserStore()
 
   const icon = computed(() => {
-    return user.railDrawer ? 'mdi-chevron-double-right' : 'mdi-chevron-double-left'
+    return user.ecosystem.docs.railDrawer ? 'mdi-chevron-double-right' : 'mdi-chevron-double-left'
   })
 
   function onClick () {
-    user.railDrawer = !user.railDrawer
+    user.ecosystem.docs.railDrawer = !user.ecosystem.docs.railDrawer
   }
 </script>

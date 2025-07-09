@@ -130,7 +130,9 @@ export const VDataTableRow = genericComponent<new <T>(
               }}
               fixed={ column.fixed }
               fixedOffset={ column.fixedOffset }
+              fixedEndOffset={ column.fixedEndOffset }
               lastFixed={ column.lastFixed }
+              firstFixedEnd={ column.firstFixedEnd }
               maxWidth={ !mobile.value ? column.maxWidth : undefined }
               noPadding={ column.key === 'data-table-select' || column.key === 'data-table-expand' }
               nowrap={ column.nowrap }

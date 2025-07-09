@@ -21,7 +21,7 @@ features:
 
 # Icons
 
-The `v-icon` component provides a large set of glyphs to provide context to various aspects of your application. For a list of all available icons, visit the official [Material Design Icons](https://materialdesignicons.com/) page. To use any of these icons simply use the `mdi-` prefix followed by the icon name.
+The `v-icon` component provides a large set of glyphs to provide context to various aspects of your application. For a list of all available icons, visit the official [Material Design Icons](https://pictogrammers.com/library/mdi/) page. To use any of these icons simply use the `mdi-` prefix followed by the icon name.
 
 <PageFeatures />
 

@@ -35,6 +35,7 @@ export interface FilterProps {
 export interface InternalItem<T = any> {
   value: any
   raw: T
+  type?: string
 }
 
 // Composables
@@ -102,6 +103,10 @@ export function filterItems (
 
     if ((query || customFiltersLength > 0) && !options?.noFilter) {
       if (typeof item === 'object') {
+        if (item.type === 'divider' || item.type === 'subheader') {
+          continue
+        }
+
         const filterKeys = keys || Object.keys(transformed)
 
         for (const key of filterKeys) {

@@ -46,6 +46,17 @@ const aliases: IconAliases = {
   eyeDropper: 'fas fa-eye-dropper',
   upload: 'fas fa-cloud-upload-alt',
   color: 'fas fa-palette',
+  command: 'fas fa-keyboard',
+  ctrl: 'fas fa-keyboard',
+  shift: 'fas fa-arrow-up',
+  alt: 'fas fa-keyboard',
+  space: 'fas fa-square',
+  enter: 'fas fa-reply',
+  arrowup: 'fas fa-arrow-up',
+  arrowdown: 'fas fa-arrow-down',
+  arrowleft: 'fas fa-arrow-left',
+  arrowright: 'fas fa-arrow-right',
+  backspace: 'fas fa-backspace',
 }
 
 const fa: IconSet = {

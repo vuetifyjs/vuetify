@@ -8,11 +8,12 @@ import { VSelectionControl } from '@/components/VSelectionControl'
 import { makeSelectionControlGroupProps, VSelectionControlGroup } from '@/components/VSelectionControlGroup/VSelectionControlGroup'
 
 // Composables
+import { forwardRefs } from '@/composables/forwardRefs'
 import { IconValue } from '@/composables/icons'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, useId } from 'vue'
+import { computed, ref, useId } from 'vue'
 import { filterInputAttrs, genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
@@ -71,6 +72,7 @@ export const VRadioGroup = genericComponent<new <T>(
     const uid = useId()
     const id = computed(() => props.id || `radio-group-${uid}`)
     const model = useProxiedModel(props, 'modelValue')
+    const inputRef = ref<VInput>()
 
     useRender(() => {
       const [rootAttrs, controlAttrs] = filterInputAttrs(attrs)
@@ -85,6 +87,7 @@ export const VRadioGroup = genericComponent<new <T>(
 
       return (
         <VInput
+          ref={ inputRef }
           class={[
             'v-radio-group',
             props.class,
@@ -133,7 +136,7 @@ export const VRadioGroup = genericComponent<new <T>(
       )
     })
 
-    return {}
+    return forwardRefs({}, inputRef)
   },
 })
 

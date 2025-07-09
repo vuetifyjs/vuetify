@@ -12,7 +12,7 @@ export type DataTableHeader<T = Record<string, any>> = {
   value?: SelectItemKey<T>
   title?: string
 
-  fixed?: boolean
+  fixed?: boolean | 'start' | 'end'
   align?: 'start' | 'end' | 'center'
 
   width?: number | string
@@ -36,14 +36,16 @@ export type InternalDataTableHeader = Omit<DataTableHeader, 'key' | 'value' | 'c
   value: SelectItemKey | null
   sortable: boolean
   fixedOffset?: number
+  fixedEndOffset?: number
   lastFixed?: boolean
+  firstFixedEnd?: boolean
   nowrap?: boolean
   colspan?: number
   rowspan?: number
   children?: InternalDataTableHeader[]
 }
 
-export interface DataTableItem<T = any> extends InternalItem<T>, GroupableItem<T>, SelectableItem {
+export interface DataTableItem<T = any> extends Omit<InternalItem<T>, 'type'>, GroupableItem<T>, SelectableItem {
   key: any
   index: number
   columns: {

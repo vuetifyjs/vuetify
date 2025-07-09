@@ -30,9 +30,9 @@ export const makeVCalendarProps = propsFactory({
 export type VCalendarSlots = VCalendarDaySlots & {
   'day-body': { day?: CalendarDay, events?: Array<any> }
   'day-title': { title?: number | string }
-  'day-event': { day?: CalendarDay, allDay: Boolean, event?: Record<string, unknown> }
+  'day-event': { day?: CalendarDay, allDay: boolean, event?: Record<string, unknown> }
   header: { title: string, clickNext: Function, clickPrev: Function, clickToday: Function }
-  'day-interval': { day?: CalendarDay, dayIndex: Number, events?: Array<any> }
+  'day-interval': { day?: CalendarDay, dayIndex: number, events?: Array<any> }
   title: { title?: string }
 }
 
@@ -51,9 +51,7 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
   setup (props, { attrs, emit, slots }) {
     const adapter = useDate()
 
-    const { daysInMonth, daysInWeek, genDays, model, displayValue, weekNumbers, weekDays } = useCalendar(props as any)
-
-    const dayNames = adapter.getWeekdays()
+    const { daysInMonth, daysInWeek, genDays, model, displayValue, weekNumbers, weekdayLabels } = useCalendar(props as any)
 
     function onClickNext () {
       if (props.viewMode === 'month') {
@@ -97,6 +95,8 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
       const calendarDayProps = VCalendarDay.filterProps(props)
       const calendarHeaderProps = VCalendarHeader.filterProps(props)
 
+      const weekdaysCount = daysInWeek.value.length
+
       return (
         <div class={[
           'v-calendar',
@@ -129,13 +129,13 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
             )}
           </div>
 
-          <div class={['v-calendar__container', `days__${weekDays.value.length}`]}>
+          <div class={['v-calendar__container', `days__${weekdaysCount}`]}>
             { props.viewMode === 'month' && !props.hideDayHeader && (
               <div
                 class={
                   [
                     'v-calendar-weekly__head',
-                    `days__${weekDays.value.length}`,
+                    `days__${weekdaysCount}`,
                     ...(!props.hideWeekNumber ? ['v-calendar-weekly__head-weeknumbers'] : []),
                   ]
                 }
@@ -143,9 +143,9 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
               >
                 { !props.hideWeekNumber ? <div key="weekNumber0" class="v-calendar-weekly__head-weeknumber"></div> : '' }
                 {
-                  weekDays.value.map(weekday => (
+                  weekdayLabels.value.map(weekday => (
                     <div class={ `v-calendar-weekly__head-weekday${!props.hideWeekNumber ? '-with-weeknumber' : ''}` }>
-                      { dayNames[weekday] }
+                      { weekday }
                     </div>
                   ))
                 }
@@ -158,12 +158,12 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
                 class={
                   [
                     'v-calendar-month__days',
-                    `days${!props.hideWeekNumber ? '-with-weeknumbers' : ''}__${weekDays.value.length}`,
+                    `days${!props.hideWeekNumber ? '-with-weeknumbers' : ''}__${weekdaysCount}`,
                     ...(!props.hideWeekNumber ? ['v-calendar-month__weeknumbers'] : []),
                   ]
                 }
               >
-                { chunkArray(daysInMonth.value, weekDays.value.length)
+                { chunkArray(daysInMonth.value, weekdaysCount)
                   .map((week, wi) => (
                     [
                       !props.hideWeekNumber ? (
@@ -174,7 +174,7 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
                       ) : '',
                       week.map(day => (
                           <VCalendarMonthDay
-                            key={ day.date.getTime() }
+                            key={ adapter.toJsDate(day.date).getTime() }
                             { ...calendarDayProps }
                             day={ day }
                             title={ adapter.format(day.date, 'dayOfMonth') }
@@ -206,7 +206,7 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
                     events={ props.events?.filter(e => adapter.isSameDay(e.start, day.date) || adapter.isSameDay(e.end, day.date)) }
                     { ...attrs }
                   >
-                    {{ ...pick(slots, ['interval', 'intervalBody', 'intervalEvent', 'intervalTitle']) }}
+                    {{ ...pick(slots, ['interval', 'interval-body', 'interval-event', 'interval-title']) }}
                   </VCalendarDay>
                 )
               ))

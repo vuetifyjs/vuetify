@@ -15,11 +15,11 @@ export interface DateAdapter<T = unknown> {
   endOfYear (date: T): T
 
   isAfter (date: T, comparing: T): boolean
-  isAfterDay(value: T, comparing: T): boolean
+  isAfterDay(date: T, comparing: T): boolean
 
   isSameDay (date: T, comparing: T): boolean
   isSameMonth (date: T, comparing: T): boolean
-  isSameYear(value: T, comparing: T): boolean
+  isSameYear(date: T, comparing: T): boolean
 
   isBefore (date: T, comparing: T): boolean
   isEqual (date: T, comparing: T): boolean
@@ -36,7 +36,7 @@ export interface DateAdapter<T = unknown> {
   setYear (date: T, year: number): T
   getDiff (date: T, comparing: T | string, unit?: string): number
   getWeekArray (date: T, firstDayOfWeek?: number | string): T[][]
-  getWeekdays (firstDayOfWeek?: number | string): string[]
+  getWeekdays (firstDayOfWeek?: number | string, weekdayFormat?: 'long' | 'short' | 'narrow'): string[]
   getWeek (date: T, firstDayOfWeek?: number | string, firstWeekMinSize?: number): number
   getMonth (date: T): number
   setMonth (date: T, month: number): T

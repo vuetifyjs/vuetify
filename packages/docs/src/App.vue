@@ -70,7 +70,7 @@
 
     auth.verify()
 
-    watch(() => user.theme, val => {
+    watch(() => user.one.theme, val => {
       if (val === 'system') {
         media = getMatchMedia()!
         media.addEventListener('change', onThemeChange)
@@ -85,7 +85,7 @@
 
     watchEffect(() => {
       theme.global.name.value = (
-        user.theme === 'system' ? systemTheme.value : user.theme
+        user.one.theme === 'system' ? systemTheme.value : user.one.theme
       )
     })
 

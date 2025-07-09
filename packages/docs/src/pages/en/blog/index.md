@@ -18,6 +18,16 @@ Latest news, updates, and stories about Vuetify.
 
 <br>
 
+## June 2025 Update
+
+🖊️ John Leider • 📅 July 7th, 2025
+
+June delivered substantial progress on VHotkey component, VCommandPalette development, component stability improvements, and developer experience enhancements across the Vuetify ecosystem. Discover the completion of VHotkey and useHotkey composable, new components in development like VMaskInput and VEditor, and exciting ecosystem updates including documentation improvements and Vuetify Studio enhancements... { .text-medium-emphasis }
+
+[Read More](/blog/june-2025-update/) { .text-end }
+
+---
+
 ## May 2025 Update
 
 🖊️ John Leider • 📅 June 6th, 2025

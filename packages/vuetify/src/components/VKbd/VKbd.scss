@@ -1,0 +1,26 @@
+@use '../../styles/tools';
+@use './variables' as *;
+
+@include tools.layer('components') {
+  .v-kbd {
+    font-family: $kbd-font-family;
+    align-items: center;
+    align-self: stretch;
+    background: rgb(var(--v-theme-kbd));
+    color: rgb(var(--v-theme-on-kbd));
+    display: $kbd-display;
+    font-size: $kbd-font-size;
+    font-weight: $kbd-font-weight;
+    line-height: $kbd-line-height;
+    justify-content: center;
+    min-height: $kbd-min-height;
+    min-width: $kbd-min-width;
+    padding: $kbd-padding;
+    vertical-align: baseline;
+    margin-inline: $kbd-margin-inline;
+
+    @include tools.border($kbd-border...);
+    @include tools.elevation($kbd-elevation);
+    @include tools.rounded($kbd-border-radius);
+  }
+}

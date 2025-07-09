@@ -181,7 +181,8 @@ export function sortItems<T extends InternalItem> (
 
       // Dates should be compared numerically
       if (sortA instanceof Date && sortB instanceof Date) {
-        return sortA.getTime() - sortB.getTime()
+        sortA = sortA.getTime()
+        sortB = sortB.getTime()
       }
 
       [sortA, sortB] = [sortA, sortB].map(s => s != null ? s.toString().toLocaleLowerCase() : s)

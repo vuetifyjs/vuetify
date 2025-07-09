@@ -10,5 +10,8 @@
   "events": {
     "end": "Slider value emitted at the end of slider movement.",
     "start": "Slider value emitted at start of slider movement."
+  },
+  "exposed": {
+    "focus": "Focus the first slider handle"
   }
 }

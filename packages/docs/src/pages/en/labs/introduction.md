@@ -81,8 +81,7 @@ The following is a list of available and up-and-coming components for use with L
 | [v-date-input](/components/date-inputs/) | A date input component | [v3.6.0](/getting-started/release-notes/?version=v3.6.0) |
 | [v-pull-to-refresh](/components/pull-to-refresh/) | A component to update content by screen swipes | [v3.6.0](/getting-started/release-notes/?version=v3.6.0) |
 | [v-stepper-vertical](/components/vertical-steppers/) | Vertical version of v-stepper | [v3.6.5](/getting-started/release-notes/?version=v3.6.5) |
-| [v-time-picker](/components/time-pickers/) | A time-picker component | [v3.5.12](/getting-started/release-notes/?version=v3.5.12) |
-| [v-treeview](/components/treeview/) | A treeview component | [v3.5.9](/getting-started/release-notes/?version=v3.5.9) |
+| [v-hotkey](/components/hotkey/) | A component to display hotkey bindings | [v3.9.0](/getting-started/release-notes/?version=v3.9.0) |
 
 ::: warning
 Lab component APIs are **NOT** finalized and can and will change. You should **EXPECT** for things to break during the course of development.

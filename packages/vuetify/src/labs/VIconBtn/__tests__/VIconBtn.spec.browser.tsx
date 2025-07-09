@@ -15,7 +15,7 @@ describe('VIconBtn', () => {
     [64, 'small', 64, 16],
     [64, 32, 64, 32],
   ])('should work with %s button size and %s icon size', (btn, icon, btnSize, iconSize) => {
-    render(() => <VIconBtn size={ btn } icon-size={ icon } icon="$vuetify" />)
+    render(() => <VIconBtn size={ btn } iconSize={ icon } icon="$vuetify" />)
 
     const btnEl = screen.getByText('', { selector: '.v-icon-btn' })
     expect(btnEl).toHaveStyle(`--v-icon-btn-height: ${btnSize}px`)

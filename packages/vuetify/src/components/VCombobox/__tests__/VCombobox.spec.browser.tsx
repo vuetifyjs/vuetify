@@ -223,8 +223,8 @@ describe('VCombobox', () => {
       const { element } = render(() => (
         <VCombobox
           items={ items }
-          item-value="id"
-          item-title="name"
+          itemValue="id"
+          itemTitle="name"
         />
       ))
 
@@ -353,9 +353,9 @@ describe('VCombobox', () => {
           v-model={ selectedItems.value }
           items={ items.value }
           multiple
-          item-title="text"
-          item-value="value"
-          return-object
+          itemTitle="text"
+          itemValue="value"
+          returnObject
         />
       ))
 
@@ -521,7 +521,7 @@ describe('VCombobox', () => {
     const { element } = render(() => (
       <VCombobox
         chips
-        closable-chips
+        closableChips
         items={['foo', 'bar']}
         label="Select"
         modelValue={['foo', 'bar']}
@@ -634,7 +634,7 @@ describe('VCombobox', () => {
       <VCombobox
         chips
         v-model={ selectedItem.value }
-        closable-chips
+        closableChips
         items={['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']}
       />
     ))

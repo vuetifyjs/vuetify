@@ -131,7 +131,7 @@ export const VColorInput = genericComponent<VColorInputSlots>()({
                 <VMenu
                   v-model={ menu.value }
                   activator="parent"
-                  min-width="0"
+                  minWidth="0"
                   closeOnContentClick={ false }
                   openOnClick={ false }
                 >
