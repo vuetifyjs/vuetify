@@ -228,7 +228,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
             }) => (
               <VField
                 ref={ vFieldRef }
-                prepend-icon={ props.prependIcon }
+                prependIcon={ props.prependIcon }
                 onMousedown={ onControlMousedown }
                 onClick={ onControlClick }
                 onClick:clear={ onClear }
