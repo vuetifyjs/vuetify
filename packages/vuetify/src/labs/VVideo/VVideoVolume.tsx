@@ -80,7 +80,7 @@ export const VVideoVolume = genericComponent()({
                   activator="parent"
                   attach={ containerRef.value }
                   location={ props.menuProps?.location ?? 'top center' }
-                  close-on-content-click={ false }
+                  closeOnContentClick={ false }
                 >
                   <div
                     class={[
@@ -103,7 +103,7 @@ export const VVideoVolume = genericComponent()({
             { props.inline && (
               <VSlider
                 class="v-video-volume-inline__slider"
-                min-width="50"
+                minWidth="50"
                 modelValue={ volume.value }
                 onUpdate:modelValue={ v => volume.value = v }
                 onKeydown={ (e: KeyboardEvent) => { e.stopPropagation() } }

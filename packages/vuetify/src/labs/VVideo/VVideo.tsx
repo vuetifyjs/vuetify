@@ -366,7 +366,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
           size="80"
           color="#fff"
           variant="outlined"
-          icon-size="50"
+          iconSize="50"
           class="v-video__center-icon"
         />
       )
