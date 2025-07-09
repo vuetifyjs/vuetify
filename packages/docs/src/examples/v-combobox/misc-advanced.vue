@@ -54,6 +54,7 @@
             @click.stop
             @keydown.stop
             @keyup.enter="edit(item.raw)"
+            @mousedown.stop
           ></v-text-field>
           <v-chip
             v-else
