@@ -138,7 +138,7 @@ Other options are available for setting **width**, **align**, **fixed**, or pass
 
 ### Props
 
-There are no shortable of properties available for customizing various aspects of the Data table components.
+There is no shortage of properties available for customizing various aspects of the Data table components.
 
 #### Density
 

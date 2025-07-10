@@ -69,11 +69,11 @@ describe.each([
       render(() => (
         <VTreeview
           v-model:activated={ activated.value }
-          open-all
+          openAll
           items={ items }
-          item-value="id"
+          itemValue="id"
           activatable
-          active-strategy="single-leaf"
+          activeStrategy="single-leaf"
         />
       ))
 
@@ -91,11 +91,11 @@ describe.each([
       render(() => (
         <VTreeview
           v-model:activated={ activated.value }
-          open-all
+          openAll
           items={ items }
-          item-value="id"
+          itemValue="id"
           activatable
-          active-strategy="leaf"
+          activeStrategy="leaf"
         />
       ))
 
@@ -113,11 +113,11 @@ describe.each([
       render(() => (
         <VTreeview
           v-model:activated={ activated.value }
-          open-all
+          openAll
           items={ items }
-          item-value="id"
+          itemValue="id"
           activatable
-          active-strategy="independent"
+          activeStrategy="independent"
         />
       ))
 
@@ -138,11 +138,11 @@ describe.each([
       render(() => (
         <VTreeview
           v-model:activated={ activated.value }
-          open-all
+          openAll
           items={ items }
-          item-value="id"
+          itemValue="id"
           activatable
-          active-strategy="single-independent"
+          activeStrategy="single-independent"
         />
       ))
 
@@ -163,11 +163,11 @@ describe.each([
       const onActivated = vi.fn()
       render(() => (
         <VTreeview
-          open-all
+          openAll
           items={ items }
-          item-value="id"
+          itemValue="id"
           activatable
-          active-strategy="independent"
+          activeStrategy="independent"
           onUpdate:activated={ onActivated }
         />
       ))
@@ -186,11 +186,11 @@ describe.each([
       render(() => (
         <VTreeview
           v-model:selected={ selected.value }
-          open-all
+          openAll
           items={ items }
-          item-value="id"
+          itemValue="id"
           selectable
-          select-strategy="single-leaf"
+          selectStrategy="single-leaf"
         />
       ))
 
@@ -207,11 +207,11 @@ describe.each([
       render(() => (
         <VTreeview
           v-model:selected={ selected.value }
-          open-all
+          openAll
           items={ items }
-          item-value="id"
+          itemValue="id"
           selectable
-          select-strategy="leaf"
+          selectStrategy="leaf"
         />
       ))
 
@@ -228,11 +228,11 @@ describe.each([
       render(() => (
         <VTreeview
           v-model:selected={ selected.value }
-          open-all
+          openAll
           items={ items }
-          item-value="id"
+          itemValue="id"
           selectable
-          select-strategy="independent"
+          selectStrategy="independent"
         />
       ))
 
@@ -252,11 +252,11 @@ describe.each([
       render(() => (
         <VTreeview
           v-model:selected={ selected.value }
-          open-all
+          openAll
           items={ items }
-          item-value="id"
+          itemValue="id"
           selectable
-          select-strategy="single-independent"
+          selectStrategy="single-independent"
         />
       ))
 
@@ -274,11 +274,11 @@ describe.each([
       render(() => (
         <VTreeview
           v-model:selected={ selected.value }
-          open-all
+          openAll
           items={ items }
-          item-value="id"
+          itemValue="id"
           selectable
-          select-strategy="classic"
+          selectStrategy="classic"
         />
       ))
 
@@ -299,8 +299,8 @@ describe.each([
         render(() => (
           <VTreeview
             items={ items }
-            item-value="id"
-            return-object
+            itemValue="id"
+            returnObject
           />
         ))
 
@@ -313,10 +313,10 @@ describe.each([
       it('open-all should work', async () => {
         render(() => (
           <VTreeview
-            open-all
+            openAll
             items={ items }
-            item-value="id"
-            return-object
+            itemValue="id"
+            returnObject
           />
         ))
 
@@ -333,19 +333,19 @@ describe.each([
           <VTreeview
             v-model:opened={ opened.value }
             items={ items }
-            item-value="id"
-            return-object
+            itemValue="id"
+            returnObject
           />
         ))
 
         await userEvent.click(screen.getByText(/Vuetify/).parentElement!.previousElementSibling!)
-        expect(opened.value).toEqual([
+        await expect.poll(() => opened.value).toEqual([
           expect.objectContaining({ id: 1 }),
         ])
 
         await waitAnimationFrame()
         await userEvent.click(screen.getByText(/Core/).parentElement!.previousElementSibling!)
-        expect(opened.value).toEqual([
+        await expect.poll(() => opened.value).toEqual([
           expect.objectContaining({ id: 1 }),
           expect.objectContaining({ id: 2 }),
         ])
@@ -358,12 +358,12 @@ describe.each([
         render(() => (
           <VTreeview
             v-model:activated={ activated.value }
-            open-all
+            openAll
             items={ items }
-            item-value="id"
+            itemValue="id"
             activatable
-            active-strategy="single-leaf"
-            return-object
+            activeStrategy="single-leaf"
+            returnObject
           />
         ))
 
@@ -383,12 +383,12 @@ describe.each([
         render(() => (
           <VTreeview
             v-model:activated={ activated.value }
-            open-all
+            openAll
             items={ items }
-            item-value="id"
+            itemValue="id"
             activatable
-            active-strategy="leaf"
-            return-object
+            activeStrategy="leaf"
+            returnObject
           />
         ))
 
@@ -410,12 +410,12 @@ describe.each([
         render(() => (
           <VTreeview
             v-model:activated={ activated.value }
-            open-all
+            openAll
             items={ items }
-            item-value="id"
+            itemValue="id"
             activatable
-            active-strategy="independent"
-            return-object
+            activeStrategy="independent"
+            returnObject
           />
         ))
 
@@ -447,12 +447,12 @@ describe.each([
         render(() => (
           <VTreeview
             v-model:activated={ activated.value }
-            open-all
+            openAll
             items={ items }
-            item-value="id"
+            itemValue="id"
             activatable
-            active-strategy="single-independent"
-            return-object
+            activeStrategy="single-independent"
+            returnObject
           />
         ))
 
@@ -481,12 +481,12 @@ describe.each([
         render(() => (
           <VTreeview
             v-model:selected={ selected.value }
-            open-all
+            openAll
             items={ items }
-            item-value="id"
-            return-object
+            itemValue="id"
+            returnObject
             selectable
-            select-strategy="single-leaf"
+            selectStrategy="single-leaf"
           />
         ))
 
@@ -507,12 +507,12 @@ describe.each([
         render(() => (
           <VTreeview
             v-model:selected={ selected.value }
-            open-all
+            openAll
             items={ items }
-            item-value="id"
-            return-object
+            itemValue="id"
+            returnObject
             selectable
-            select-strategy="leaf"
+            selectStrategy="leaf"
           />
         ))
 
@@ -536,12 +536,12 @@ describe.each([
         render(() => (
           <VTreeview
             v-model:selected={ selected.value }
-            open-all
+            openAll
             items={ items }
-            item-value="id"
-            return-object
+            itemValue="id"
+            returnObject
             selectable
-            select-strategy="independent"
+            selectStrategy="independent"
           />
         ))
 
@@ -574,12 +574,12 @@ describe.each([
         render(() => (
           <VTreeview
             v-model:selected={ selected.value }
-            open-all
+            openAll
             items={ items }
-            item-value="id"
-            return-object
+            itemValue="id"
+            returnObject
             selectable
-            select-strategy="single-independent"
+            selectStrategy="single-independent"
           />
         ))
 
@@ -642,9 +642,9 @@ describe.each([
           <VTreeview
             search={ search.value }
             items={ items }
-            item-value="id"
-            open-all
-            return-object
+            itemValue="id"
+            openAll
+            returnObject
           />
         ))
 
@@ -663,9 +663,9 @@ describe.each([
   it('should have all items visible when open-all is applied', async () => {
     render(() => (
       <VTreeview
-        open-all
+        openAll
         items={ items }
-        item-value="id"
+        itemValue="id"
       />
     ))
 
@@ -681,9 +681,9 @@ describe.each([
     render(() => (
       <VTreeview
         items={ items }
-        item-value="id"
-        open-on-click
-        return-object
+        itemValue="id"
+        openOnClick
+        returnObject
       >
         {{
           prepend: ({ isOpen }) => (<span class="prepend-is-open">{ `${isOpen}` }</span>),
