@@ -42,14 +42,20 @@ import type { GenericProps, SelectItemKey } from '@/util'
 
 export interface InternalListItem<T = any> extends ListItem<T> {}
 
+const itemTypes = new Set(['item', 'divider', 'subheader'])
+
 function transformItem (props: ItemProps, item: any): ListItem {
-  const type = getPropertyFromItem(item, props.itemType, 'item')
   const title = isPrimitive(item) ? item : getPropertyFromItem(item, props.itemTitle)
   const value = isPrimitive(item) ? item : getPropertyFromItem(item, props.itemValue, undefined)
   const children = getPropertyFromItem(item, props.itemChildren)
   const itemProps = props.itemProps === true
     ? omit(item, ['children'])
     : getPropertyFromItem(item, props.itemProps)
+
+  let type = getPropertyFromItem(item, props.itemType, 'item')
+  if (!itemTypes.has(type)) {
+    type = 'item'
+  }
 
   const _props = {
     title,
