@@ -19,7 +19,7 @@ describe('VCheckbox', () => {
   describe('hide-details behavior', () => {
     it('should not have aria-describedby when hide-details is true', () => {
       const wrapper = mountFunction(
-        <VCheckbox hide-details />
+        <VCheckbox hideDetails />
       )
 
       const input = wrapper.find('input')
@@ -49,7 +49,7 @@ describe('VCheckbox', () => {
         <VCheckbox
           id="input-2"
           messages={['Hello World!']}
-          hide-details="auto"
+          hideDetails="auto"
         />
       )
 
@@ -69,7 +69,7 @@ describe('VCheckbox', () => {
       const wrapper = mountFunction(
         <VCheckbox
           id="input-3"
-          hide-details="auto"
+          hideDetails="auto"
         />
       )
 
@@ -86,7 +86,7 @@ describe('VCheckbox', () => {
         <VCheckbox
           id="input-4"
           errorMessages={['This field is required']}
-          hide-details="auto"
+          hideDetails="auto"
         />
       )
 
@@ -103,7 +103,7 @@ describe('VCheckbox', () => {
       const wrapper = mountFunction(
         <VCheckbox
           id="input-5"
-          hide-details="auto"
+          hideDetails="auto"
           v-slots={{
             details: () => <div>Custom details</div>,
           }}

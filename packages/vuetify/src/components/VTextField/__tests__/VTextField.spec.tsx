@@ -99,7 +99,7 @@ describe('VTextField', () => {
   describe('hide-details behavior', () => {
     it('should not have aria-describedby when hide-details is true', () => {
       const wrapper = mountFunction(
-        <VTextField hide-details />
+        <VTextField hideDetails />
       )
 
       const input = wrapper.find('input')
@@ -129,7 +129,7 @@ describe('VTextField', () => {
         <VTextField
           id="input-2"
           messages={['Hello World!']}
-          hide-details="auto"
+          hideDetails="auto"
         />
       )
 
@@ -149,7 +149,7 @@ describe('VTextField', () => {
       const wrapper = mountFunction(
         <VTextField
           id="input-3"
-          hide-details="auto"
+          hideDetails="auto"
         />
       )
 
@@ -166,7 +166,7 @@ describe('VTextField', () => {
         <VTextField
           id="input-4"
           errorMessages={['This field is required']}
-          hide-details="auto"
+          hideDetails="auto"
         />
       )
 
@@ -184,7 +184,7 @@ describe('VTextField', () => {
         <VTextField
           id="input-5"
           counter={ 10 }
-          hide-details="auto"
+          hideDetails="auto"
         />
       )
 
@@ -201,7 +201,7 @@ describe('VTextField', () => {
       const wrapper = mountFunction(
         <VTextField
           id="input-6"
-          hide-details="auto"
+          hideDetails="auto"
           v-slots={{
             details: () => <div>Custom details</div>,
           }}
