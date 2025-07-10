@@ -3,11 +3,11 @@ import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextFi
 
 // Composables
 import { forwardRefs } from '@/composables/forwardRefs'
-import { makeMaskProps, useMask } from '@/composables/mask'
+import { isMaskDelimiter, makeMaskProps, useMask } from '@/composables/mask'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, onBeforeMount, ref } from 'vue'
+import { computed, onBeforeMount, ref, shallowRef } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -16,6 +16,7 @@ import type { VTextFieldSlots } from '@/components/VTextField/VTextField'
 export type VMaskInputSlots = VTextFieldSlots
 
 export const makeVMaskInputProps = propsFactory({
+  returnMaskedValue: Boolean,
   ...makeVTextFieldProps(),
   ...makeMaskProps(),
 }, 'VMaskInput')
@@ -32,7 +33,10 @@ export const VMaskInput = genericComponent<VMaskInputSlots>()({
   setup (props, { slots, emit }) {
     const vTextFieldRef = ref<VTextField>()
 
-    const { maskText, updateRange, unmaskText } = useMask(props, vTextFieldRef)
+    const selection = shallowRef(0)
+    const lazySelection = shallowRef(0)
+
+    const mask = useMask(props)
     const returnMaskedValue = computed(() => props.mask && props.returnMaskedValue)
 
     const model = useProxiedModel(
@@ -40,21 +44,21 @@ export const VMaskInput = genericComponent<VMaskInputSlots>()({
       'modelValue',
       undefined,
       // Always display masked value in input when mask is applied
-      val => props.mask ? maskText(unmaskText(val)) : val,
+      val => props.mask ? mask.apply(mask.unapply(val)) : val,
       val => {
         if (props.mask) {
-          const valueBeforeChange = unmaskText(model.value)
+          const valueBeforeChange = mask.unapply(model.value)
           // E.g. mask is #-# and the input value is '2-23'
           // model-value should be enforced to '2-2'
-          const enforcedMaskedValue = maskText(unmaskText(val))
-          const newUnmaskedValue = unmaskText(enforcedMaskedValue)
+          const enforcedMaskedValue = mask.apply(mask.unapply(val))
+          const newUnmaskedValue = mask.unapply(enforcedMaskedValue)
 
           if (newUnmaskedValue === valueBeforeChange) {
             vTextFieldRef.value!.value = enforcedMaskedValue
           }
           val = newUnmaskedValue
           updateRange()
-          return returnMaskedValue.value ? maskText(val) : val
+          return returnMaskedValue.value ? mask.apply(val) : val
         }
         return val
       },
@@ -65,6 +69,39 @@ export const VMaskInput = genericComponent<VMaskInputSlots>()({
         emit('update:modelValue', model.value)
       }
     })
+
+    function setCaretPosition (newSelection: number) {
+      selection.value = newSelection
+      vTextFieldRef.value && vTextFieldRef.value.setSelectionRange(selection.value, selection.value)
+    }
+
+    function resetSelections () {
+      if (!vTextFieldRef.value?.selectionEnd) return
+
+      selection.value = vTextFieldRef.value.selectionEnd
+      lazySelection.value = 0
+
+      for (let index = 0; index < selection.value; index++) {
+        isMaskDelimiter(vTextFieldRef.value.value[index]) || lazySelection.value++
+      }
+    }
+
+    function updateRange () {
+      if (!vTextFieldRef.value) return
+      resetSelections()
+
+      let selection = 0
+      const newValue = vTextFieldRef.value.value
+
+      if (newValue) {
+        for (let index = 0; index < newValue.length; index++) {
+          if (lazySelection.value <= 0) break
+          isMaskDelimiter(newValue[index]) || lazySelection.value--
+          selection++
+        }
+      }
+      setCaretPosition(selection)
+    }
 
     useRender(() => {
       const textFieldProps = VTextField.filterProps(props)

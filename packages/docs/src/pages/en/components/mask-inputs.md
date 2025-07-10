@@ -42,6 +42,7 @@ At its core, the `v-mask-input` is a wrapper around [v-text-field](/components/t
 | Component | Description |
 | - | - |
 | [v-mask-input](/api/v-mask-input/) | Primary Component |
+| [useMask](/api/use-mask/) | Masking composable |
 
 <ApiInline hide-links />
 
@@ -75,6 +76,23 @@ Vuetify includes several pre-configured masks for common use cases:
 | social | ###-##-#### | 123-45-6789 |
 | time | ##:## | 23:59 |
 | time-with-seconds | ##:##:## | 23:59:59 |
+
+### useMask composable
+
+The `useMask` composable provides a set of methods for working with masks.
+
+```js
+  import { useMask } from 'vuetify'
+
+  const mask = useMask({ mask: '####-####' })
+
+  mask.apply('12345678') // 1234-5678
+  mask.unapply('1234-5678') // 12345678
+  mask.test('abc') // false
+  mask.test('1234') // true
+  mask.test('1234', { isExact: true }) // false
+  mask.test('1234-5678', { isExact: true }) // true
+```
 
 ### Examples
 

@@ -1,0 +1,7 @@
+{
+  "exposed": {
+    "test": "Check if a string is valid for the mask.",
+    "apply": "Apply mask to a string.",
+    "unapply": "Remove mask from a string."
+  }
+}
