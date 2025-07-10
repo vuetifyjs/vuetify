@@ -65,6 +65,7 @@ export const makeVFieldProps = propsFactory({
   },
   color: String,
   baseColor: String,
+  details: Boolean,
   dirty: Boolean,
   disabled: {
     type: Boolean,
@@ -79,7 +80,6 @@ export const makeVFieldProps = propsFactory({
   prependInnerIcon: IconValue,
   reverse: Boolean,
   singleLine: Boolean,
-  noDetails: Boolean,
   variant: {
     type: String as PropType<Variant>,
     default: 'filled',
@@ -142,7 +142,7 @@ export const VField = genericComponent<new <T>(
 
     const uid = useId()
     const id = computed(() => props.id || `input-${uid}`)
-    const messagesId = toRef(() => props.noDetails ? undefined : `${id.value}-messages`)
+    const messagesId = toRef(() => !props.details ? undefined : `${id.value}-messages`)
 
     const labelRef = ref<VFieldLabel>()
     const floatingLabelRef = ref<VFieldLabel>()

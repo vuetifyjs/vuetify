@@ -241,7 +241,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
                 dirty={ isDirty.value || props.dirty }
                 disabled={ isDisabled.value }
                 focused={ isFocused.value }
-                no-details={ !hasDetails.value }
+                details={ hasDetails.value }
                 error={ isValid.value === false }
                 onDragover={ onDragover }
                 onDrop={ onDrop }
