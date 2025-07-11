@@ -29,9 +29,10 @@ export const VBreadcrumbsItem = genericComponent()({
   setup (props, { slots, attrs }) {
     const link = useLink(props, attrs)
     const isActive = computed(() => props.active || link.isActive?.value)
-    const color = computed(() => isActive.value ? props.activeColor : props.color)
 
-    const { textColorClasses, textColorStyles } = useTextColor(color)
+    const { textColorClasses, textColorStyles } = useTextColor(
+      () => isActive.value ? props.activeColor : props.color
+    )
 
     useRender(() => {
       return (

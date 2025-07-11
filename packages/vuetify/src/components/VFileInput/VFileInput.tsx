@@ -9,13 +9,14 @@ import { makeVFieldProps } from '@/components/VField/VField'
 import { makeVInputProps, VInput } from '@/components/VInput/VInput'
 
 // Composables
+import { useFileDrop } from '@/composables/fileDrop'
 import { useFocus } from '@/composables/focus'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, nextTick, ref, watch } from 'vue'
+import { computed, nextTick, ref, shallowRef, toRef, watch } from 'vue'
 import {
   callEvent,
   filterInputAttrs,
@@ -121,11 +122,11 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
     const vInputRef = ref<VInput>()
     const vFieldRef = ref<VInput>()
     const inputRef = ref<HTMLInputElement>()
-    const isActive = computed(() => (
-      isFocused.value ||
-      props.active
-    ))
+    const isActive = toRef(() => isFocused.value || props.active)
     const isPlainOrUnderlined = computed(() => ['plain', 'underlined'].includes(props.variant))
+    const isDragging = shallowRef(false)
+    const { handleDrop, hasFilesOrFolders } = useFileDrop()
+
     function onFocus () {
       if (inputRef.value !== document.activeElement) {
         inputRef.value?.focus()
@@ -157,13 +158,27 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
     }
     function onDragover (e: DragEvent) {
       e.preventDefault()
+      e.stopImmediatePropagation()
+      isDragging.value = true
     }
-    function onDrop (e: DragEvent) {
+    function onDragleave (e: DragEvent) {
       e.preventDefault()
+      isDragging.value = false
+    }
+    async function onDrop (e: DragEvent) {
+      e.preventDefault()
+      e.stopImmediatePropagation()
+      isDragging.value = false
 
-      if (!e.dataTransfer) return
+      if (!inputRef.value || !hasFilesOrFolders(e)) return
 
-      model.value = [...e.dataTransfer.files ?? []]
+      const dataTransfer = new DataTransfer()
+      for (const file of await handleDrop(e)) {
+        dataTransfer.items.add(file)
+      }
+
+      inputRef.value.files = dataTransfer.files
+      inputRef.value.dispatchEvent(new Event('change', { bubbles: true }))
     }
 
     watch(model, newValue => {
@@ -189,6 +204,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
             'v-file-input',
             {
               'v-file-input--chips': !!props.chips,
+              'v-file-input--dragging': isDragging.value,
               'v-file-input--hide': props.hideInput,
               'v-input--plain-underlined': isPlainOrUnderlined.value,
             },
@@ -254,6 +270,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
                           const target = e.target as HTMLInputElement
                           model.value = [...target.files ?? []]
                         }}
+                        onDragleave={ onDragleave }
                         onFocus={ onFocus }
                         onBlur={ blur }
                         { ...slotProps }

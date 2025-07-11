@@ -59,8 +59,8 @@ exports[`createTheme > should allow for themes to be scoped 1`] = `
     --v-activated-opacity: 0.12;
     --v-pressed-opacity: 0.12;
     --v-dragged-opacity: 0.08;
-    --v-theme-kbd: 33, 37, 41;
-    --v-theme-on-kbd: 255, 255, 255;
+    --v-theme-kbd: 238, 238, 238;
+    --v-theme-on-kbd: 0, 0, 0;
     --v-theme-code: 245, 245, 245;
     --v-theme-on-code: 0, 0, 0;
   }
@@ -117,8 +117,8 @@ exports[`createTheme > should allow for themes to be scoped 1`] = `
     --v-activated-opacity: 0.12;
     --v-pressed-opacity: 0.12;
     --v-dragged-opacity: 0.08;
-    --v-theme-kbd: 33, 37, 41;
-    --v-theme-on-kbd: 255, 255, 255;
+    --v-theme-kbd: 238, 238, 238;
+    --v-theme-on-kbd: 0, 0, 0;
     --v-theme-code: 245, 245, 245;
     --v-theme-on-code: 0, 0, 0;
   }
@@ -132,9 +132,9 @@ exports[`createTheme > should allow for themes to be scoped 1`] = `
     --v-theme-surface-bright-overlay-multiplier: 2;
     --v-theme-surface-light: 66,66,66;
     --v-theme-surface-light-overlay-multiplier: 1;
-    --v-theme-surface-variant: 163,163,163;
+    --v-theme-surface-variant: 200,200,200;
     --v-theme-surface-variant-overlay-multiplier: 2;
-    --v-theme-on-surface-variant: 66,66,66;
+    --v-theme-on-surface-variant: 0,0,0;
     --v-theme-primary: 33,150,243;
     --v-theme-primary-overlay-multiplier: 2;
     --v-theme-primary-darken-1: 39,124,193;
@@ -175,7 +175,7 @@ exports[`createTheme > should allow for themes to be scoped 1`] = `
     --v-activated-opacity: 0.12;
     --v-pressed-opacity: 0.16;
     --v-dragged-opacity: 0.08;
-    --v-theme-kbd: 33, 37, 41;
+    --v-theme-kbd: 66, 66, 66;
     --v-theme-on-kbd: 255, 255, 255;
     --v-theme-code: 52, 52, 52;
     --v-theme-on-code: 204, 204, 204;
@@ -422,8 +422,8 @@ exports[`createTheme > should allow for themes to be scoped 1`] = `
     --v-activated-opacity: 0.12;
     --v-pressed-opacity: 0.12;
     --v-dragged-opacity: 0.08;
-    --v-theme-kbd: 33, 37, 41;
-    --v-theme-on-kbd: 255, 255, 255;
+    --v-theme-kbd: 238, 238, 238;
+    --v-theme-on-kbd: 0, 0, 0;
     --v-theme-code: 245, 245, 245;
     --v-theme-on-code: 0, 0, 0;
   }
@@ -480,8 +480,8 @@ exports[`createTheme > should allow for themes to be scoped 1`] = `
     --v-activated-opacity: 0.12;
     --v-pressed-opacity: 0.12;
     --v-dragged-opacity: 0.08;
-    --v-theme-kbd: 33, 37, 41;
-    --v-theme-on-kbd: 255, 255, 255;
+    --v-theme-kbd: 238, 238, 238;
+    --v-theme-on-kbd: 0, 0, 0;
     --v-theme-code: 245, 245, 245;
     --v-theme-on-code: 0, 0, 0;
   }
@@ -495,9 +495,9 @@ exports[`createTheme > should allow for themes to be scoped 1`] = `
     --v-theme-surface-bright-overlay-multiplier: 2;
     --v-theme-surface-light: 66,66,66;
     --v-theme-surface-light-overlay-multiplier: 1;
-    --v-theme-surface-variant: 163,163,163;
+    --v-theme-surface-variant: 200,200,200;
     --v-theme-surface-variant-overlay-multiplier: 2;
-    --v-theme-on-surface-variant: 66,66,66;
+    --v-theme-on-surface-variant: 0,0,0;
     --v-theme-primary: 33,150,243;
     --v-theme-primary-overlay-multiplier: 2;
     --v-theme-primary-darken-1: 39,124,193;
@@ -538,7 +538,7 @@ exports[`createTheme > should allow for themes to be scoped 1`] = `
     --v-activated-opacity: 0.12;
     --v-pressed-opacity: 0.16;
     --v-dragged-opacity: 0.08;
-    --v-theme-kbd: 33, 37, 41;
+    --v-theme-kbd: 66, 66, 66;
     --v-theme-on-kbd: 255, 255, 255;
     --v-theme-code: 52, 52, 52;
     --v-theme-on-code: 204, 204, 204;
@@ -790,8 +790,8 @@ exports[`createTheme > should create style element 1`] = `
     --v-activated-opacity: 0.12;
     --v-pressed-opacity: 0.12;
     --v-dragged-opacity: 0.08;
-    --v-theme-kbd: 33, 37, 41;
-    --v-theme-on-kbd: 255, 255, 255;
+    --v-theme-kbd: 238, 238, 238;
+    --v-theme-on-kbd: 0, 0, 0;
     --v-theme-code: 245, 245, 245;
     --v-theme-on-code: 0, 0, 0;
   }
@@ -848,8 +848,8 @@ exports[`createTheme > should create style element 1`] = `
     --v-activated-opacity: 0.12;
     --v-pressed-opacity: 0.12;
     --v-dragged-opacity: 0.08;
-    --v-theme-kbd: 33, 37, 41;
-    --v-theme-on-kbd: 255, 255, 255;
+    --v-theme-kbd: 238, 238, 238;
+    --v-theme-on-kbd: 0, 0, 0;
     --v-theme-code: 245, 245, 245;
     --v-theme-on-code: 0, 0, 0;
   }
@@ -863,9 +863,9 @@ exports[`createTheme > should create style element 1`] = `
     --v-theme-surface-bright-overlay-multiplier: 2;
     --v-theme-surface-light: 66,66,66;
     --v-theme-surface-light-overlay-multiplier: 1;
-    --v-theme-surface-variant: 163,163,163;
+    --v-theme-surface-variant: 200,200,200;
     --v-theme-surface-variant-overlay-multiplier: 2;
-    --v-theme-on-surface-variant: 66,66,66;
+    --v-theme-on-surface-variant: 0,0,0;
     --v-theme-primary: 33,150,243;
     --v-theme-primary-overlay-multiplier: 2;
     --v-theme-primary-darken-1: 39,124,193;
@@ -906,7 +906,7 @@ exports[`createTheme > should create style element 1`] = `
     --v-activated-opacity: 0.12;
     --v-pressed-opacity: 0.16;
     --v-dragged-opacity: 0.08;
-    --v-theme-kbd: 33, 37, 41;
+    --v-theme-kbd: 66, 66, 66;
     --v-theme-on-kbd: 255, 255, 255;
     --v-theme-code: 52, 52, 52;
     --v-theme-on-code: 204, 204, 204;

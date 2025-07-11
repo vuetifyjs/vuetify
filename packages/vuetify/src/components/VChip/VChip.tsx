@@ -26,10 +26,10 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
 
 // Directives
-import { Ripple } from '@/directives/ripple'
+import vRipple from '@/directives/ripple'
 
 // Utilities
-import { computed, toDisplayString } from 'vue'
+import { computed, toDisplayString, toRef } from 'vue'
 import { EventProp, genericComponent, propsFactory } from '@/util'
 
 // Types
@@ -112,7 +112,7 @@ export const makeVChipProps = propsFactory({
 export const VChip = genericComponent<VChipSlots>()({
   name: 'VChip',
 
-  directives: { Ripple },
+  directives: { vRipple },
 
   props: makeVChipProps(),
 
@@ -135,14 +135,15 @@ export const VChip = genericComponent<VChipSlots>()({
     const isActive = useProxiedModel(props, 'modelValue')
     const group = useGroupItem(props, VChipGroupSymbol, false)
     const link = useLink(props, attrs)
-    const isLink = computed(() => props.link !== false && link.isLink.value)
+    const isLink = toRef(() => props.link !== false && link.isLink.value)
     const isClickable = computed(() =>
       !props.disabled &&
       props.link !== false &&
       (!!group || props.link || link.isClickable.value)
     )
-    const closeProps = computed(() => ({
+    const closeProps = toRef(() => ({
       'aria-label': t(props.closeLabel),
+      disabled: props.disabled,
       onClick (e: MouseEvent) {
         e.preventDefault()
         e.stopPropagation()
@@ -153,14 +154,13 @@ export const VChip = genericComponent<VChipSlots>()({
       },
     }))
 
-    const variantProps = computed(() => {
+    const { colorClasses, colorStyles, variantClasses } = useVariant(() => {
       const showColor = !group || group.isSelected.value
       return ({
         color: showColor ? props.color ?? props.baseColor : props.baseColor,
         variant: props.variant,
       })
     })
-    const { colorClasses, colorStyles, variantClasses } = useVariant(variantProps)
 
     function onClick (e: MouseEvent) {
       emit('click', e)

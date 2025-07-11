@@ -58,7 +58,8 @@
             > th.v-data-table__th--fixed
               position: sticky
 
-            > th.v-data-table__th--sortable:hover
+            > th.v-data-table__th--sortable:hover,
+            > th.v-data-table__th--sortable:focus
                 cursor: pointer
                 color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity))
 
@@ -66,7 +67,8 @@
                 .v-data-table-header__sort-icon
                   opacity: 0
 
-                &:hover
+                &:hover,
+                &:focus
                   .v-data-table-header__sort-icon
                     opacity: 0.5
 
@@ -75,6 +77,7 @@
                 height: fit-content
 
   .v-data-table-column--fixed,
+  .v-data-table-column--fixed-end,
   .v-data-table__th--sticky
     background: $table-background
     left: 0
@@ -87,11 +90,20 @@
       // doesn't seem to be getting here any time soon
       position: sticky
 
+  .v-data-table-column--fixed-end
+    left: unset
+    right: 0
+
   .v-data-table-column--last-fixed
     border-right: 1px solid rgba(var(--v-border-color), var(--v-border-opacity))
 
-  .v-data-table.v-table--fixed-header > .v-table__wrapper > table > thead > tr > th.v-data-table-column--fixed
-    z-index: 2
+  .v-data-table-column--first-fixed-end
+    border-left: 1px solid rgba(var(--v-border-color), var(--v-border-opacity))
+
+  .v-data-table.v-table--fixed-header > .v-table__wrapper > table > thead > tr
+    > th.v-data-table-column--fixed,
+    > th.v-data-table-column--fixed-end
+      z-index: 2
 
   .v-data-table-group-header-row
     td
@@ -143,7 +155,7 @@
 
   .v-data-table__tr--mobile
     > .v-data-table__td--expanded-row
-      grid-template-columns: 0
+      grid-template-columns: auto
       justify-content: center
 
     > .v-data-table__td--select-row

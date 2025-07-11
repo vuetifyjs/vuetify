@@ -22,6 +22,7 @@ jobs:
             T: feature
             T: question
             Epic
+            Task
             duplicate
             layer 8 issue
             invalid

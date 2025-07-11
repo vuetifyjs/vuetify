@@ -23,7 +23,7 @@ import {
   onDeactivated,
   provide,
   ref,
-  shallowRef,
+  shallowRef, toRef,
   useId,
   watch,
 } from 'vue'
@@ -41,7 +41,6 @@ import {
 } from '@/util'
 
 // Types
-import type { Component } from 'vue'
 import type { OverlaySlots } from '@/components/VOverlay/VOverlay'
 
 export const makeVMenuProps = propsFactory({
@@ -49,6 +48,7 @@ export const makeVMenuProps = propsFactory({
   // disableKeys: Boolean,
   id: String,
   submenu: Boolean,
+  disableInitialFocus: Boolean,
 
   ...omit(makeVOverlayProps({
     closeDelay: 250,
@@ -58,7 +58,7 @@ export const makeVMenuProps = propsFactory({
     openDelay: 300,
     scrim: false,
     scrollStrategy: 'reposition' as const,
-    transition: { component: VDialogTransition as Component },
+    transition: { component: VDialogTransition },
   }), ['absolute']),
 }, 'VMenu')
 
@@ -77,7 +77,7 @@ export const VMenu = genericComponent<OverlaySlots>()({
     const { isRtl } = useRtl()
 
     const uid = useId()
-    const id = computed(() => props.id || `v-menu-${uid}`)
+    const id = toRef(() => props.id || `v-menu-${uid}`)
 
     const overlay = ref<VOverlay>()
 
@@ -134,7 +134,7 @@ export const VMenu = genericComponent<OverlaySlots>()({
     watch(isActive, val => {
       if (val) {
         parent?.register()
-        if (IN_BROWSER) {
+        if (IN_BROWSER && !props.disableInitialFocus) {
           document.addEventListener('focusin', onFocusIn, { once: true })
         }
       } else {

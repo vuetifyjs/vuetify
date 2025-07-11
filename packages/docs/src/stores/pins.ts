@@ -35,11 +35,12 @@ export const usePinsStore = defineStore('pins', () => {
 
   function load () {
     // TODO: remove next one release
-    pins.value = (user.pinned || []) as any
+    pins.value = (user.ecosystem.docs.pins.pinned || []) as any
   }
 
   function save () {
-    user.pinned = pins.value
+    // TODO: remove once fixed in one
+    user.ecosystem.docs.pins.pinned = pins.value as any
   }
 
   return {

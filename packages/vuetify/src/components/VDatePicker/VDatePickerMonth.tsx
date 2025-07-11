@@ -10,7 +10,7 @@ import { useDate } from '@/composables/date/date'
 import { MaybeTransition } from '@/composables/transition'
 
 // Utilities
-import { computed, ref, shallowRef, watch } from 'vue'
+import { computed, ref, shallowRef, toRef, watch } from 'vue'
 import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
@@ -57,14 +57,14 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
   setup (props, { emit, slots }) {
     const daysRef = ref()
 
-    const { daysInMonth, model, weekNumbers } = useCalendar(props)
+    const { daysInMonth, model, weekNumbers, weekdayLabels } = useCalendar(props)
     const adapter = useDate()
 
     const rangeStart = shallowRef()
     const rangeStop = shallowRef()
     const isReverse = shallowRef(false)
 
-    const transition = computed(() => {
+    const transition = toRef(() => {
       return !isReverse.value ? props.transition : props.reverseTransition
     })
 
@@ -143,7 +143,10 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
     }
 
     useRender(() => (
-      <div class="v-date-picker-month">
+      <div
+        class="v-date-picker-month"
+        style={{ '--v-date-picker-days-in-week': props.weekdays.length }}
+      >
         { props.showWeek && (
           <div key="weeks" class="v-date-picker-month__weeks">
             { !props.hideWeekdays && (
@@ -166,7 +169,7 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
             key={ daysInMonth.value[0].date?.toString() }
             class="v-date-picker-month__days"
           >
-            { !props.hideWeekdays && adapter.getWeekdays(props.firstDayOfWeek).map(weekDay => (
+            { !props.hideWeekdays && weekdayLabels.value.map(weekDay => (
               <div
                 class={[
                   'v-date-picker-month__day',

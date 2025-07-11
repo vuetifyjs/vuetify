@@ -46,6 +46,26 @@ const stories = Object.fromEntries(Object.entries({
 )]))
 
 describe('VSelect', () => {
+  it('should toggle menu with dropdown icon', async () => {
+    const { element } = render(() => (
+      <VSelect items={['Item #1', 'Item #2']} />
+    ))
+
+    const menuIcon = screen.getByCSS('.v-icon')
+    expect(screen.queryAllByCSS('.v-list-item')).toHaveLength(0)
+    expect(element).not.toHaveClass('v-select--active-menu')
+
+    await userEvent.click(menuIcon)
+    await commands.waitStable('.v-list')
+    expect(screen.queryAllByCSS('.v-list-item')).toHaveLength(2)
+    expect(element).toHaveClass('v-select--active-menu')
+
+    await userEvent.click(menuIcon)
+    await commands.waitStable('.v-list')
+    expect(screen.queryAllByCSS('.v-list-item')).toHaveLength(0)
+    expect(element).not.toHaveClass('v-select--active-menu')
+  })
+
   it('should render selection slot', () => {
     const items = [
       { title: 'a' },
@@ -678,6 +698,17 @@ describe('VSelect', () => {
       selection.value.push('Bar')
       await expect.poll(() => screen.getAllByText('Bar')).toHaveLength(2)
       expect(getAllByRole(menu, 'option', { selected: true })).toHaveLength(2)
+    })
+
+    it('should not fire @update:focus twice when clicking bottom of input', async () => {
+      const onFocus = vi.fn()
+      const { element } = render(() => (
+        <VSelect onUpdate:focused={ onFocus } />
+      ))
+
+      await userEvent.click(element, { y: 1 })
+
+      expect(onFocus).toHaveBeenCalledTimes(1)
     })
   })
 

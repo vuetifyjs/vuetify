@@ -482,16 +482,16 @@ describe('VCombobox', () => {
     await expect.element(input).toHaveAttribute('placeholder', 'Placeholder')
 
     await rerender({ label: 'Label' })
-    await expect.element(input).not.toBeVisible()
+    await expect.element(input).not.toBeDisplayed()
 
     await userEvent.click(input)
     await expect.element(input).toHaveAttribute('placeholder', 'Placeholder')
-    expect(input).toBeVisible()
+    await expect.element(input).toBeDisplayed()
 
     await userEvent.tab()
     await rerender({ persistentPlaceholder: true })
     await expect.element(input).toHaveAttribute('placeholder', 'Placeholder')
-    expect(input).toBeVisible()
+    await expect.element(input).toBeDisplayed()
 
     await rerender({ modelValue: 'Foobar' })
     await expect.element(input).not.toHaveAttribute('placeholder')
@@ -733,6 +733,17 @@ describe('VCombobox', () => {
 
     await userEvent.click(document.body)
     expect(model.value).toStrictEqual({ title: 'Item 1', value: 'item1' })
+  })
+
+  it('should not fire @update:focus twice when clicking bottom of input', async () => {
+    const onFocus = vi.fn()
+    const { element } = render(() => (
+      <VCombobox onUpdate:focused={ onFocus } />
+    ))
+
+    await userEvent.click(element, { y: 1 })
+
+    expect(onFocus).toHaveBeenCalledTimes(1)
   })
 
   describe('Showcase', () => {

@@ -1,7 +1,4 @@
 module.exports = {
-  parserOptions: {
-    project: './packages/vuetify/tsconfig.dev.json',
-  },
   globals: {
     __VUETIFY_VERSION__: true,
     __REQUIRED_VUE__: true,
@@ -24,8 +21,8 @@ module.exports = {
       paths: [{
         name: 'vue',
         importNames: ['defineComponent'],
-        message: 'Please use wrapped function from @/util instead'
-      }]
+        message: 'Please use wrapped function from @/util instead',
+      }],
     }],
 
     // 'import/no-cycle': 'warn',
@@ -47,7 +44,7 @@ module.exports = {
     {
       files: '**/*.spec.?(browser.){ts,tsx}',
       plugins: ['vitest'],
-      extends: ['plugin:vitest/all'],
+      extends: ['plugin:vitest/legacy-all'],
       rules: {
         'local-rules/vitest-global-imports': 'error',
 
@@ -66,6 +63,8 @@ module.exports = {
         'vitest/no-disabled-tests': 'off',
         'vitest/prefer-strict-equal': 'off',
         'vitest/prefer-called-with': 'off',
+
+        'vitest/no-focused-tests': ['error', { fixable: false }],
       },
     },
   ],

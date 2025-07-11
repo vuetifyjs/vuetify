@@ -25,7 +25,7 @@
         target="_blank"
         variant="flat"
         border
-        @click="onClick(job)"
+        @click="sweClick('jobs', job.title, job.id)"
       >
         <v-list-item
           :title="job.title"
@@ -77,7 +77,6 @@
 </template>
 
 <script setup>
-  const { event } = useGtag()
   const { jobs } = useJobsStore()
   const { t } = useI18n()
   const view = shallowRef(true)
@@ -96,12 +95,4 @@
   const placeholder = computed(() => {
     return t('search-jobs')
   })
-
-  function onClick (job) {
-    event('click', {
-      event_category: 'vuetify-job',
-      event_label: job.title,
-      value: job.id,
-    })
-  }
 </script>

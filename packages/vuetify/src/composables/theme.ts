@@ -7,6 +7,7 @@ import {
   provide,
   ref,
   shallowRef,
+  toRef,
   watch,
   watchEffect,
 } from 'vue'
@@ -28,7 +29,7 @@ import {
 } from '@/util'
 
 // Types
-import type { VueHeadClient } from '@unhead/vue'
+import type { VueHeadClient } from '@unhead/vue/client'
 import type { HeadClient } from '@vueuse/head'
 import type { App, DeepReadonly, InjectionKey, Ref } from 'vue'
 
@@ -36,7 +37,7 @@ type DeepPartial<T> = T extends object ? { [P in keyof T]?: DeepPartial<T[P]> } 
 
 export type ThemeOptions = false | {
   cspNonce?: string
-  defaultTheme?: 'light' | 'dark' | 'system' | string
+  defaultTheme?: 'light' | 'dark' | 'system' | string & {}
   variations?: false | VariationsOptions
   themes?: Record<string, ThemeDefinition>
   stylesheetId?: string
@@ -48,7 +49,7 @@ export type ThemeDefinition = DeepPartial<InternalThemeDefinition>
 interface InternalThemeOptions {
   cspNonce?: string
   isDisabled: boolean
-  defaultTheme: 'light' | 'dark' | 'system' | string
+  defaultTheme: 'light' | 'dark' | 'system' | string & {}
   prefix: string
   variations: false | VariationsOptions
   themes: Record<string, InternalThemeDefinition>
@@ -162,8 +163,8 @@ function genDefaults () {
           'activated-opacity': 0.12,
           'pressed-opacity': 0.12,
           'dragged-opacity': 0.08,
-          'theme-kbd': '#212529',
-          'theme-on-kbd': '#FFFFFF',
+          'theme-kbd': '#EEEEEE',
+          'theme-on-kbd': '#000000',
           'theme-code': '#F5F5F5',
           'theme-on-code': '#000000',
         },
@@ -175,8 +176,8 @@ function genDefaults () {
           surface: '#212121',
           'surface-bright': '#ccbfd6',
           'surface-light': '#424242',
-          'surface-variant': '#a3a3a3',
-          'on-surface-variant': '#424242',
+          'surface-variant': '#c8c8c8',
+          'on-surface-variant': '#000000',
           primary: '#2196F3',
           'primary-darken-1': '#277CC1',
           secondary: '#54B6B2',
@@ -199,7 +200,7 @@ function genDefaults () {
           'activated-opacity': 0.12,
           'pressed-opacity': 0.16,
           'dragged-opacity': 0.08,
-          'theme-kbd': '#212529',
+          'theme-kbd': '#424242',
           'theme-on-kbd': '#FFFFFF',
           'theme-code': '#343434',
           'theme-on-code': '#CCCCCC',
@@ -376,7 +377,7 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
     return acc
   })
 
-  const current = computed(() => computedThemes.value[name.value])
+  const current = toRef(() => computedThemes.value[name.value])
 
   const styles = computed(() => {
     const lines: string[] = []
@@ -421,8 +422,8 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
     return '@layer vuetify.theme {\n' + lines.map(v => `  ${v}`).join('') + '\n}'
   })
 
-  const themeClasses = computed(() => parsedOptions.isDisabled ? undefined : `${parsedOptions.prefix}theme--${name.value}`)
-  const themeNames = computed(() => Object.keys(computedThemes.value))
+  const themeClasses = toRef(() => parsedOptions.isDisabled ? undefined : `${parsedOptions.prefix}theme--${name.value}`)
+  const themeNames = toRef(() => Object.keys(computedThemes.value))
 
   if (SUPPORTS_MATCH_MEDIA) {
     const media = window.matchMedia('(prefers-color-scheme: dark)')
@@ -464,7 +465,7 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
         }
       } else {
         if (IN_BROWSER) {
-          head.addHeadObjs(computed(getHead))
+          head.addHeadObjs(toRef(getHead))
           watchEffect(() => head.updateDOM())
         } else {
           head.addHeadObjs(getHead())
@@ -505,17 +506,15 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
 
   const globalName = new Proxy(name, {
     get (target, prop) {
-      return target[prop as keyof typeof target]
+      return Reflect.get(target, prop)
     },
     set (target, prop, val) {
       if (prop === 'value') {
         deprecate(`theme.global.name.value = ${val}`, `theme.change('${val}')`)
       }
-      // @ts-expect-error
-      target[prop] = val
-      return true
+      return Reflect.set(target, prop, val)
     },
-  }) as typeof name
+  })
 
   return {
     install,
@@ -544,10 +543,10 @@ export function provideTheme (props: { theme?: string }) {
 
   if (!theme) throw new Error('Could not find Vuetify theme injection')
 
-  const name = computed(() => props.theme ?? theme.name.value)
-  const current = computed(() => theme.themes.value[name.value])
+  const name = toRef(() => props.theme ?? theme.name.value)
+  const current = toRef(() => theme.themes.value[name.value])
 
-  const themeClasses = computed(() => theme.isDisabled ? undefined : `${theme.prefix}theme--${name.value}`)
+  const themeClasses = toRef(() => theme.isDisabled ? undefined : `${theme.prefix}theme--${name.value}`)
 
   const newTheme: ThemeInstance = {
     ...theme,
