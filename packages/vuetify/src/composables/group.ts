@@ -169,9 +169,9 @@ export function useGroup (
     'modelValue',
     [],
     v => {
-      if (v == null) return []
+      if (v === undefined) return []
 
-      return getIds(items, wrapInArray(v))
+      return getIds(items, v === null ? [null] : wrapInArray(v))
     },
     v => {
       const arr = getValues(items, v)
@@ -190,7 +190,7 @@ export function useGroup (
     const children = findChildrenWithProvide(key, groupVm?.vnode)
     const index = children.indexOf(vm)
 
-    if (unref(unwrapped.value) == null) {
+    if (unref(unwrapped.value) === undefined) {
       unwrapped.value = index
       unwrapped.useIndexAsValue = true
     }
@@ -339,7 +339,7 @@ function getIds (items: UnwrapRef<GroupItem[]>, modelValue: any[]) {
     const item = items.find(item => deepEqual(value, item.value))
     const itemByIndex = items[value]
 
-    if (item?.value != null) {
+    if (item?.value !== undefined) {
       ids.push(item.id)
     } else if (itemByIndex?.useIndexAsValue) {
       ids.push(itemByIndex.id)
@@ -356,7 +356,7 @@ function getValues (items: UnwrapRef<GroupItem[]>, ids: any[]) {
     const itemIndex = items.findIndex(item => item.id === id)
     if (~itemIndex) {
       const item = items[itemIndex]
-      values.push(item.value != null ? item.value : itemIndex)
+      values.push(item.value !== undefined ? item.value : itemIndex)
     }
   })
 
