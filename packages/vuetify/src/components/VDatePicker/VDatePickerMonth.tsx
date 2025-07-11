@@ -6,7 +6,7 @@ import { VBtn } from '@/components/VBtn'
 
 // Composables
 import { makeCalendarProps, useCalendar } from '@/composables/calendar'
-import { createDateRange, useDate } from '@/composables/date/date'
+import { useDate } from '@/composables/date/date'
 import { MaybeTransition } from '@/composables/transition'
 
 // Utilities
@@ -96,6 +96,7 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
         rangeStart.value = model.value[0]
         rangeStop.value = undefined
       }
+
       if (!rangeStart.value) {
         rangeStart.value = _value
         model.value = [rangeStart.value]
@@ -111,7 +112,7 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
           rangeStop.value = adapter.endOfDay(_value)
         }
 
-        model.value = createDateRange(adapter, rangeStart.value, rangeStop.value)
+        model.value = [rangeStart.value, rangeStop.value]
       } else {
         rangeStart.value = value
         rangeStop.value = undefined
@@ -193,7 +194,11 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
                 i,
               } as const
 
-              if (atMax.value && !item.isSelected) {
+              const isSelected = props.multiple === 'range' && model.value.length === 2
+                ? adapter.isWithinRange(item.date, model.value as [Date, Date])
+                : model.value.some(selectedDate => adapter.isSameDay(selectedDate, item.date))
+
+              if (atMax.value && !isSelected) {
                 item.isDisabled = true
               }
 
@@ -204,7 +209,7 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
                     {
                       'v-date-picker-month__day--adjacent': item.isAdjacent,
                       'v-date-picker-month__day--hide-adjacent': item.isHidden,
-                      'v-date-picker-month__day--selected': item.isSelected,
+                      'v-date-picker-month__day--selected': isSelected,
                       'v-date-picker-month__day--week-end': item.isWeekEnd,
                       'v-date-picker-month__day--week-start': item.isWeekStart,
                     },
