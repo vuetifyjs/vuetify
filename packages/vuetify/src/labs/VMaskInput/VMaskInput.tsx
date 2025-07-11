@@ -7,7 +7,7 @@ import { makeMaskProps, useMask } from '@/composables/mask'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, onBeforeMount, ref } from 'vue'
+import { computed, onBeforeMount, ref, toRef } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -60,6 +60,8 @@ export const VMaskInput = genericComponent<VMaskInputSlots>()({
       },
     )
 
+    const validationValue = toRef(() => returnMaskedValue.value ? maskText(model.value) : unmaskText(model.value))
+
     onBeforeMount(() => {
       if (props.returnMaskedValue) {
         emit('update:modelValue', model.value)
@@ -74,6 +76,7 @@ export const VMaskInput = genericComponent<VMaskInputSlots>()({
           { ...textFieldProps }
           v-model={ model.value }
           ref={ vTextFieldRef }
+          validationValue={ validationValue.value }
         >
           {{ ...slots }}
         </VTextField>
