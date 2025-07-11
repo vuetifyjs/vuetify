@@ -36,7 +36,10 @@ export type VDateInputSlots = Omit<VTextFieldSlots, 'default'> & {
 }
 
 export const makeVDateInputProps = propsFactory({
-  displayFormat: [Function, String],
+  displayFormat: {
+    type: [Function, String] as PropType<string | ((date: typeof VDatePicker['props']['modelValue']) => any)>,
+    default: undefined,
+  },
   location: {
     type: String as PropType<StrategyProps['location']>,
     default: 'bottom start',
