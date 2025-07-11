@@ -138,7 +138,7 @@ Other options are available for setting **width**, **align**, **fixed**, or pass
 
 ### Props
 
-There are no shortable of properties available for customizing various aspects of the Data table components.
+There is no shortage of properties available for customizing various aspects of the Data table components.
 
 #### Density
 
@@ -213,6 +213,14 @@ When using the **group-by** prop, you can customize the group header with the `g
 The `loading` slot allows you to customize your table's display state when fetching data. In this example we utilize the [v-skeleton-loader](/components/skeleton-loaders) component to display a loading animation.
 
 <ExamplesExample file="v-data-table/slot-loading" />
+
+### Misc
+
+#### Select All
+
+The example below shows how to use the `@keydown` event to quickly select all rows in the data table using the `Ctrl+A` or `Cmd+A` keyboard shortcut. To begin using the shortcut, click anywhere inside the table first.
+
+<ExamplesExample file="v-data-table/misc-select-all" />
 
 ## Examples
 

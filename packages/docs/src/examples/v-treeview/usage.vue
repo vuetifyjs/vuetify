@@ -1,5 +1,5 @@
 <template>
-  <v-treeview :items="items"></v-treeview>
+  <v-treeview :items="items" item-value="id"></v-treeview>
 </template>
 
 <script>

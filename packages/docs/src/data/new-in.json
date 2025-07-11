@@ -62,8 +62,7 @@
   },
   "VDataTable": {
     "props": {
-      "headerProps": "3.5.0",
-      "lastFixed": "3.9.0"
+      "headerProps": "3.5.0"
     }
   },
   "VExpansionPanels": {
@@ -146,6 +145,19 @@
   "VTab": {
     "props": {
       "text": "3.2.0"
+    }
+  },
+  "VTreeview": {
+    "props": {
+      "hideActions": "3.10.0",
+      "separateRoots": "3.10.0",
+      "showLines": "3.10.0"
+    }
+  },
+  "VTreeviewItem": {
+    "props": {
+      "hideActions": "3.10.0",
+      "indentLines": "3.10.0"
     }
   },
   "VTooltip": {

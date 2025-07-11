@@ -15,7 +15,7 @@ features:
 
 # Icon Fonts
 
-Out of the box, Vuetify supports 4 popular icon font libraries—[Material Design Icons](https://materialdesignicons.com/), [Material Icons](https://fonts.google.com/icons), [Font Awesome 4](https://fontawesome.com/v4.7.0/) and [Font Awesome 5](https://fontawesome.com/).
+Out of the box, Vuetify supports 4 popular icon font libraries—[Material Design Icons](https://pictogrammers.com/library/mdi/), [Material Icons](https://fonts.google.com/icons), [Font Awesome 4](https://fontawesome.com/v4.7.0/) and [Font Awesome 5](https://fontawesome.com/).
 
 <PageFeatures />
 
@@ -56,11 +56,11 @@ While it is still possible to supply the icon value through the default slot in 
 
 ## Installing icon fonts
 
-You are required to include the specified icon library (even when using the default icons from [Material Design Icons](https://materialdesignicons.com/)). This can be done by including a CDN link or importing the icon library into your application.
+You are required to include the specified icon library (even when using the default icons from [Material Design Icons](https://pictogrammers.com/library/mdi/)). This can be done by including a CDN link or importing the icon library into your application.
 
 ::: info
 
-In this page "Material Icons" is used to refer to the [official google icons](https://fonts.google.com/icons) and "Material Design Icons" refers to the [extended third-party library](https://materialdesignicons.com/)
+In this page "Material Icons" is used to refer to the [official google icons](https://fonts.google.com/icons) and "Material Design Icons" refers to the [extended third-party library](https://pictogrammers.com/library/mdi/)
 
 :::
 

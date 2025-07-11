@@ -9,6 +9,7 @@ import { makeVFieldProps } from '@/components/VField/VField'
 import { makeVInputProps, VInput } from '@/components/VInput/VInput'
 
 // Composables
+import { useAutofocus } from '@/composables/autofocus'
 import { useFocus } from '@/composables/focus'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { useProxiedModel } from '@/composables/proxiedModel'
@@ -70,11 +71,13 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
     'mousedown:control': (e: MouseEvent) => true,
     'update:focused': (focused: boolean) => true,
     'update:modelValue': (val: string) => true,
+    'update:rows': (rows: number) => true,
   },
 
   setup (props, { attrs, emit, slots }) {
     const model = useProxiedModel(props, 'modelValue')
     const { isFocused, focus, blur } = useFocus(props)
+    const { onIntersect } = useAutofocus(props)
     const counterValue = computed(() => {
       return typeof props.counterValue === 'function'
         ? props.counterValue(model.value)
@@ -91,15 +94,6 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
 
       return props.counter
     })
-
-    function onIntersect (
-      isIntersecting: boolean,
-      entries: IntersectionObserverEntry[]
-    ) {
-      if (!props.autofocus || !isIntersecting) return
-
-      (entries[0].target as HTMLInputElement)?.focus?.()
-    }
 
     const vInputRef = ref<VInput>()
     const vFieldRef = ref<VInput>()
@@ -187,6 +181,9 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
     watch(() => props.rows, calculateInputHeight)
     watch(() => props.maxRows, calculateInputHeight)
     watch(() => props.density, calculateInputHeight)
+    watch(rows, val => {
+      emit('update:rows', val)
+    })
 
     let observer: ResizeObserver | undefined
     watch(sizerRef, val => {

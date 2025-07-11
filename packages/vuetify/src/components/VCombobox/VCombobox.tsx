@@ -493,7 +493,7 @@ export const VCombobox = genericComponent<new <
         >
           {{
             ...slots,
-            default: () => [
+            default: () => (
               <>
                 <VMenu
                   ref={ vMenuRef }
@@ -541,53 +541,53 @@ export const VCombobox = genericComponent<new <
                             onClick: () => select(item, null),
                           })
 
-                          if (item.raw.type === 'divider') {
-                            return slots.divider?.({ props: item.raw, index }) ?? [
-                              <VDivider { ...item.props } key={ `divider-${index}` } />,
-                            ]
+                          if (item.type === 'divider') {
+                            return slots.divider?.({ props: item.raw, index }) ?? (
+                              <VDivider { ...item.props } key={ `divider-${index}` } />
+                            )
                           }
 
-                          if (item.raw.type === 'subheader') {
-                            return slots.subheader?.({ props: item.raw, index }) ?? [
-                              <VListSubheader { ...item.props } key={ `subheader-${index}` } />,
-                            ]
+                          if (item.type === 'subheader') {
+                            return slots.subheader?.({ props: item.raw, index }) ?? (
+                              <VListSubheader { ...item.props } key={ `subheader-${index}` } />
+                            )
                           }
 
                           return slots.item?.({
                             item,
                             index,
                             props: itemProps,
-                          }) ?? [
+                          }) ?? (
                             <VListItem { ...itemProps } role="option">
-                              {{
-                                prepend: ({ isSelected }) => [
-                                  <>
-                                    { props.multiple && !props.hideSelected ? (
-                                      <VCheckboxBtn
-                                        key={ item.value }
-                                        modelValue={ isSelected }
-                                        ripple={ false }
-                                        tabindex="-1"
-                                      />
-                                    ) : undefined }
+                            {{
+                              prepend: ({ isSelected }) => (
+                                <>
+                                  { props.multiple && !props.hideSelected ? (
+                                    <VCheckboxBtn
+                                      key={ item.value }
+                                      modelValue={ isSelected }
+                                      ripple={ false }
+                                      tabindex="-1"
+                                    />
+                                  ) : undefined }
 
-                                    { item.props.prependAvatar && [
-                                      <VAvatar image={ item.props.prependAvatar } />,
-                                    ]}
+                                  { item.props.prependAvatar && (
+                                    <VAvatar image={ item.props.prependAvatar } />
+                                  )}
 
-                                    { item.props.prependIcon && [
-                                      <VIcon icon={ item.props.prependIcon } />,
-                                    ]}
-                                  </>,
-                                ],
-                                title: () => {
-                                  return isPristine.value
-                                    ? [item.title]
-                                    : highlightResult('v-combobox', item.title, getMatches(item)?.title)
-                                },
-                              }}
-                            </VListItem>,
-                          ]
+                                  { item.props.prependIcon && (
+                                    <VIcon icon={ item.props.prependIcon } />
+                                  )}
+                                </>
+                              ),
+                              title: () => {
+                                return isPristine.value
+                                  ? item.title
+                                  : highlightResult('v-combobox', item.title, getMatches(item)?.title)
+                              },
+                            }}
+                          </VListItem>
+                          )
                         }}
                       </VVirtualScroll>
 
@@ -682,9 +682,9 @@ export const VCombobox = genericComponent<new <
                     </div>
                   )
                 })}
-              </>,
-            ],
-            'append-inner': (...args) => [
+              </>
+            ),
+            'append-inner': (...args) => (
               <>
                 { slots['append-inner']?.(...args) }
                 { (!props.hideNoData || props.items.length) && props.menuIcon ? (
@@ -699,8 +699,8 @@ export const VCombobox = genericComponent<new <
                     tabindex="-1"
                   />
                 ) : undefined }
-              </>,
-            ],
+              </>
+            ),
           }}
         </VTextField>
       )

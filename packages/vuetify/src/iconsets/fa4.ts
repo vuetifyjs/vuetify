@@ -47,6 +47,19 @@ const aliases: IconAliases = {
   treeviewCollapse: 'fa-caret-down',
   treeviewExpand: 'fa-caret-right',
   eyeDropper: 'fa-eye-dropper',
+  upload: 'fa-cloud-upload',
+  color: 'fa-paint-brush',
+  command: 'fa-keyboard-o',
+  ctrl: 'fa-keyboard-o',
+  shift: 'fa-arrow-up',
+  alt: 'fa-keyboard-o',
+  space: 'fa-square-o',
+  enter: 'fa-reply',
+  arrowup: 'fa-arrow-up',
+  arrowdown: 'fa-arrow-down',
+  arrowleft: 'fa-arrow-left',
+  arrowright: 'fa-arrow-right',
+  backspace: 'fa-undo',
 }
 
 const fa: IconSet = {

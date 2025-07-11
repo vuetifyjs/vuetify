@@ -72,7 +72,8 @@ export const VFileUploadItem = genericComponent<VFileUploadItemSlots>()({
         >
           {{
             ...slots,
-            prepend: slotProps => [
+            title: () => props?.title ?? props.file?.name,
+            prepend: slotProps => (
               <>
                 { !slots.prepend ? (
                   <VAvatar
@@ -95,9 +96,9 @@ export const VFileUploadItem = genericComponent<VFileUploadItemSlots>()({
                     )}
                   </VDefaultsProvider>
                 )}
-              </>,
-            ],
-            append: slotProps => [
+              </>
+            ),
+            append: slotProps => (
               <>
                 { props.clearable && (
                   <>
@@ -128,8 +129,8 @@ export const VFileUploadItem = genericComponent<VFileUploadItemSlots>()({
                 )}
 
                 { slots.append?.(slotProps) }
-              </>,
-            ],
+              </>
+            ),
           }}
         </VListItem>
       )

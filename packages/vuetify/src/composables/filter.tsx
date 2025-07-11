@@ -35,6 +35,7 @@ export interface FilterProps {
 export interface InternalItem<T = any> {
   value: any
   raw: T
+  type?: string
 }
 
 // Composables
@@ -102,7 +103,7 @@ export function filterItems (
 
     if ((query || customFiltersLength > 0) && !options?.noFilter) {
       if (typeof item === 'object') {
-        if (['divider', 'subheader'].includes(item.raw?.type)) {
+        if (item.type === 'divider' || item.type === 'subheader') {
           continue
         }
 

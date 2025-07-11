@@ -47,6 +47,19 @@ const aliases: IconAliases = {
   treeviewCollapse: 'arrow_drop_down',
   treeviewExpand: 'arrow_right',
   eyeDropper: 'colorize',
+  upload: 'cloud_upload',
+  color: 'palette',
+  command: 'keyboard_command_key',
+  ctrl: 'keyboard_control_key',
+  shift: 'shift',
+  alt: 'keyboard_option_key',
+  space: 'keyboard_space',
+  enter: 'keyboard_return',
+  arrowup: 'keyboard_arrow_up',
+  arrowdown: 'keyboard_arrow_down',
+  arrowleft: 'keyboard_arrow_left',
+  arrowright: 'keyboard_arrow_right',
+  backspace: 'backspace',
 }
 
 const md: IconSet = {

@@ -27,6 +27,7 @@ import { makeTransitionProps } from '@/composables/transition'
 // Utilities
 import { computed, mergeProps, nextTick, ref, shallowRef, toRef, watch } from 'vue'
 import {
+  camelizeProps,
   checkPrintable,
   deepEqual,
   ensureValidVNode,
@@ -421,7 +422,7 @@ export const VSelect = genericComponent<new <
         >
           {{
             ...slots,
-            default: () => [
+            default: () => (
               <>
                 <VMenu
                   ref={ vMenuRef }
@@ -461,32 +462,34 @@ export const VSelect = genericComponent<new <
 
                       <VVirtualScroll ref={ vVirtualScrollRef } renderless items={ displayItems.value } itemKey="value">
                         { ({ item, index, itemRef }) => {
+                          const camelizedProps = camelizeProps(item.props)
+
                           const itemProps = mergeProps(item.props, {
                             ref: itemRef,
                             key: item.value,
                             onClick: () => select(item, null),
                           })
 
-                          if (item.raw.type === 'divider') {
-                            return slots.divider?.({ props: item.raw, index }) ?? [
-                              <VDivider { ...item.props } key={ `divider-${index}` } />,
-                            ]
+                          if (item.type === 'divider') {
+                            return slots.divider?.({ props: item.raw, index }) ?? (
+                              <VDivider { ...item.props } key={ `divider-${index}` } />
+                            )
                           }
 
-                          if (item.raw.type === 'subheader') {
-                            return slots.subheader?.({ props: item.raw, index }) ?? [
-                              <VListSubheader { ...item.props } key={ `subheader-${index}` } />,
-                            ]
+                          if (item.type === 'subheader') {
+                            return slots.subheader?.({ props: item.raw, index }) ?? (
+                              <VListSubheader { ...item.props } key={ `subheader-${index}` } />
+                            )
                           }
 
                           return slots.item?.({
                             item,
                             index,
                             props: itemProps,
-                          }) ?? [
+                          }) ?? (
                             <VListItem { ...itemProps } role="option">
                               {{
-                                prepend: ({ isSelected }) => [
+                                prepend: ({ isSelected }) => (
                                   <>
                                     { props.multiple && !props.hideSelected ? (
                                       <VCheckboxBtn
@@ -497,18 +500,18 @@ export const VSelect = genericComponent<new <
                                       />
                                     ) : undefined }
 
-                                    { item.props.prependAvatar && (
-                                      <VAvatar image={ item.props.prependAvatar } />
+                                    { camelizedProps.prependAvatar && (
+                                      <VAvatar image={ camelizedProps.prependAvatar } />
                                     )}
 
-                                    { item.props.prependIcon && (
-                                      <VIcon icon={ item.props.prependIcon } />
+                                    { camelizedProps.prependIcon && (
+                                      <VIcon icon={ camelizedProps.prependIcon } />
                                     )}
-                                  </>,
-                                ],
+                                  </>
+                                ),
                               }}
-                            </VListItem>,
-                          ]
+                            </VListItem>
+                          )
                         }}
                       </VVirtualScroll>
 
@@ -593,9 +596,9 @@ export const VSelect = genericComponent<new <
                     </div>
                   )
                 })}
-              </>,
-            ],
-            'append-inner': (...args) => [
+              </>
+            ),
+            'append-inner': (...args) => (
               <>
                 { slots['append-inner']?.(...args) }
                 { props.menuIcon ? (
@@ -605,8 +608,8 @@ export const VSelect = genericComponent<new <
                     icon={ props.menuIcon }
                   />
                 ) : undefined }
-              </>,
-            ],
+              </>
+            ),
           }}
         </VTextField>
       )

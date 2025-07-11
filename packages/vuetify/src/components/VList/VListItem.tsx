@@ -35,6 +35,11 @@ import type { PropType } from 'vue'
 import type { RippleDirectiveBinding } from '@/directives/ripple'
 
 export type ListItemSlot = {
+  index?: number
+  depth?: number
+  path?: number[]
+  isFirst?: boolean
+  isLast?: boolean
   isActive: boolean
   isOpen: boolean
   isSelected: boolean
@@ -134,7 +139,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
       parent,
       openOnSelect,
       id: uid,
-    } = useNestedItem(id, false)
+    } = useNestedItem(id, () => props.disabled, false)
     const list = useList()
     const isActive = computed(() =>
       props.active !== false &&

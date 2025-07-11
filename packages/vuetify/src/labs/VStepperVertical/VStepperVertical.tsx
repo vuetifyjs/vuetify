@@ -83,13 +83,13 @@ export const VStepperVertical = genericComponent<new <T = number>(
         color,
         eager,
         editable,
-        prevText,
-        nextText,
         hideActions,
         static: true,
       },
-      VStepperActions: {
+      VStepperVerticalActions: {
         color,
+        nextText,
+        prevText,
       },
     })
 

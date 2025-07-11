@@ -9,7 +9,7 @@ import { VMenu } from '@/components/VMenu/VMenu'
 import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextField'
 
 // Composables
-import { makeFocusProps, useFocus } from '@/composables/focus'
+import { makeFocusProps } from '@/composables/focus'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
@@ -53,9 +53,9 @@ export const VColorInput = genericComponent<VColorInputSlots>()({
   },
 
   setup (props, { slots }) {
-    const { isFocused, focus, blur } = useFocus(props)
     const model = useProxiedModel(props, 'modelValue')
     const menu = shallowRef(false)
+    const isFocused = shallowRef(props.focused)
 
     const isInteractive = computed(() => !props.disabled && !props.readonly)
 
@@ -104,10 +104,9 @@ export const VColorInput = genericComponent<VColorInputSlots>()({
           modelValue={ display.value }
           onKeydown={ isInteractive.value ? onKeydown : undefined }
           focused={ menu.value || isFocused.value }
-          onFocus={ focus }
-          onBlur={ blur }
           onClick:control={ isInteractive.value ? onClick : undefined }
           onClick:prependInner={ isInteractive.value ? onClick : undefined }
+          onUpdate:focused={ event => isFocused.value = event }
           onClick:appendInner={ isInteractive.value ? onClick : undefined }
           onUpdate:modelValue={ val => {
             model.value = val
@@ -132,7 +131,7 @@ export const VColorInput = genericComponent<VColorInputSlots>()({
                 <VMenu
                   v-model={ menu.value }
                   activator="parent"
-                  min-width="0"
+                  minWidth="0"
                   closeOnContentClick={ false }
                   openOnClick={ false }
                 >
