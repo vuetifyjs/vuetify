@@ -139,15 +139,18 @@ export const VBreadcrumbs = genericComponent<new <T extends BreadcrumbItem>(
                   key={ index }
                   disabled={ index >= array.length - 1 }
                   { ...(typeof item === 'string' ? { title: item } : item) }
-                >
-                  { slots.title?.({ item, index }) }
-                </VBreadcrumbsItem>
+                  v-slots={{
+                    default: slots.title ? () => slots.title?.({ item, index }) : undefined,
+                  }}
+                />
               )}
 
               { index < array.length - 1 && (
-                <VBreadcrumbsDivider>
-                  { slots.divider?.({ item: raw, index }) }
-                </VBreadcrumbsDivider>
+                <VBreadcrumbsDivider
+                  v-slots={{
+                    default: slots.divider ? () => slots.divider?.({ item: raw, index }) : undefined,
+                  }}
+                />
               )}
             </>
           ))}
