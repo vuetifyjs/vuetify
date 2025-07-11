@@ -12,9 +12,9 @@ describe('VVirtualScroll', () => {
     render(() => (
       <VVirtualScroll height="400" items={ items } itemHeight="24">
         {{
-          default: ({ index }) => [
-            <div>{ index }</div>,
-          ],
+          default: ({ index }) => (
+            <div>{ index }</div>
+          ),
         }}
       </VVirtualScroll>
     ))
@@ -30,9 +30,9 @@ describe('VVirtualScroll', () => {
     const result = render(() => (
       <VVirtualScroll height="400" items={ items }>
         {{
-          default: ({ item, index }) => [
-            <div>{ index }</div>,
-          ],
+          default: ({ item, index }) => (
+            <div>{ index }</div>
+          ),
         }}
       </VVirtualScroll>
     ))

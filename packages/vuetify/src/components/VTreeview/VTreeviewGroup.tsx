@@ -49,11 +49,13 @@ export const VTreeviewGroup = genericComponent<VListGroupSlots>()({
         >
           {{
             ...slots,
-            activator: slots.activator ? slotProps => [
-              <VDefaultsProvider defaults={ activatorDefaults.value }>
-                { slots.activator?.(slotProps) }
-              </VDefaultsProvider>,
-            ] : undefined,
+            activator: slots.activator ? slotProps => (
+              <>
+                <VDefaultsProvider defaults={ activatorDefaults.value }>
+                  { slots.activator?.(slotProps) }
+                </VDefaultsProvider>
+              </>
+            ) : undefined,
           }}
         </VListGroup>
       )

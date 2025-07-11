@@ -200,7 +200,7 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
         >
           {{
             top: () => slots.top?.(slotProps.value),
-            wrapper: () => [
+            wrapper: () => (
               <div
                 ref={ containerRef }
                 onScrollPassive={ handleScroll }
@@ -243,15 +243,15 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
                               onUpdate:height={ height => handleItemResize(itemSlotProps.internalItem.index, height) }
                             >
                               { ({ itemRef }) => (
-                                slots.item?.({ ...itemSlotProps, itemRef }) ?? [
+                                slots.item?.({ ...itemSlotProps, itemRef }) ?? (
                                   <VDataTableRow
                                     { ...itemSlotProps.props }
                                     ref={ itemRef }
                                     key={ itemSlotProps.internalItem.index }
                                     index={ itemSlotProps.internalItem.index }
                                     v-slots={ slots }
-                                  />,
-                                ]
+                                  />
+                                )
                               )}
                             </VVirtualScrollItem>
                           ),
@@ -268,8 +268,8 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
                   { slots.tbody?.(slotProps.value) }
                   { slots.tfoot?.(slotProps.value) }
                 </table>
-              </div>,
-            ],
+              </div>
+            ),
             bottom: () => slots.bottom?.(slotProps.value),
           }}
         </VTable>

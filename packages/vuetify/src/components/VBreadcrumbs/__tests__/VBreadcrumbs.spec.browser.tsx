@@ -11,7 +11,7 @@ describe('VBreadcrumbs', () => {
     render(() => (
       <VBreadcrumbs items={['hello', 'world']}>
         {{
-          title: ({ item }: any) => [`${item.title}!`],
+          title: ({ item }: any) => `${item.title}!`,
         }}
       </VBreadcrumbs>
     ))
@@ -25,7 +25,7 @@ describe('VBreadcrumbs', () => {
     render(() => (
       <VBreadcrumbs items={['hello', 'world']}>
         {{
-          divider: () => ['-'],
+          divider: () => '-',
         }}
       </VBreadcrumbs>
     ))

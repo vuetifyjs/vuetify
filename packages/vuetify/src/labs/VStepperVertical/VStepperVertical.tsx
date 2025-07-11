@@ -116,7 +116,7 @@ export const VStepperVertical = genericComponent<new <T = number>(
           {{
             ...slots,
             default: ({ prev, next }) => {
-              return [
+              return (
                 <>
                   { items.value.map(({ raw, ...item }) => (
                     <VStepperVerticalItem { ...item }>
@@ -128,8 +128,8 @@ export const VStepperVertical = genericComponent<new <T = number>(
                   ))}
 
                   { slots.default?.({ prev, next, step: model.value }) }
-                </>,
-              ]
+                </>
+              )
             },
           }}
         </VExpansionPanels>

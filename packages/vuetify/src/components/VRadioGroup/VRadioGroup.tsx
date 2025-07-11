@@ -105,7 +105,7 @@ export const VRadioGroup = genericComponent<new <T>(
               messagesId,
               isDisabled,
               isReadonly,
-            }) => [
+            }) => (
               <>
                 { label && (
                   <VLabel id={ id.value }>
@@ -129,8 +129,8 @@ export const VRadioGroup = genericComponent<new <T>(
                   v-model={ model.value }
                   v-slots={ slots }
                 />
-              </>,
-            ],
+              </>
+            ),
           }}
         </VInput>
       )

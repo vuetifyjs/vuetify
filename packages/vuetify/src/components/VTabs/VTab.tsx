@@ -125,7 +125,7 @@ export const VTab = genericComponent<VBtnSlots>()({
         >
           {{
             ...slots,
-            default: () => [
+            default: () => (
               <>
                 { slots.default?.() ?? props.text }
 
@@ -139,8 +139,8 @@ export const VTab = genericComponent<VBtnSlots>()({
                     style={ sliderColorStyles.value }
                   />
                 )}
-              </>,
-            ],
+              </>
+            ),
           }}
         </VBtn>
       )

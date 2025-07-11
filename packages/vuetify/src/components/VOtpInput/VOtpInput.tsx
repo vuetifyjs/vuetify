@@ -276,29 +276,31 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
                   {{
                     ...slots,
                     loader: undefined,
-                    default: () => [
-                      <input
-                        ref={ val => inputRef.value[i] = val as HTMLInputElement }
-                        aria-label={ t(props.label, i + 1) }
-                        autofocus={ i === 0 && props.autofocus }
-                        autocomplete="one-time-code"
-                        class={[
-                          'v-otp-input__field',
-                        ]}
-                        disabled={ props.disabled }
-                        inputmode={ props.type === 'number' ? 'numeric' : 'text' }
-                        min={ props.type === 'number' ? 0 : undefined }
-                        maxlength={ i === 0 ? length.value : '1' }
-                        placeholder={ props.placeholder }
-                        type={ props.type === 'number' ? 'text' : props.type }
-                        value={ model.value[i] }
-                        onInput={ onInput }
-                        onFocus={ e => onFocus(e, i) }
-                        onBlur={ onBlur }
-                        onKeydown={ onKeydown }
-                        onPaste={ event => onPaste(i, event) }
-                      />,
-                    ],
+                    default: () => {
+                      return (
+                        <input
+                          ref={ val => inputRef.value[i] = val as HTMLInputElement }
+                          aria-label={ t(props.label, i + 1) }
+                          autofocus={ i === 0 && props.autofocus }
+                          autocomplete="one-time-code"
+                          class={[
+                            'v-otp-input__field',
+                          ]}
+                          disabled={ props.disabled }
+                          inputmode={ props.type === 'number' ? 'numeric' : 'text' }
+                          min={ props.type === 'number' ? 0 : undefined }
+                          maxlength={ i === 0 ? length.value : '1' }
+                          placeholder={ props.placeholder }
+                          type={ props.type === 'number' ? 'text' : props.type }
+                          value={ model.value[i] }
+                          onInput={ onInput }
+                          onFocus={ e => onFocus(e, i) }
+                          onBlur={ onBlur }
+                          onKeydown={ onKeydown }
+                          onPaste={ event => onPaste(i, event) }
+                        />
+                      )
+                    },
                   }}
                 </VField>
               </>

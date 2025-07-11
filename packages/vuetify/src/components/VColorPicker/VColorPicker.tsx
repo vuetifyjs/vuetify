@@ -149,7 +149,7 @@ export const VColorPicker = defineComponent({
           ]}
           v-slots={{
             ...slots,
-            default: () => [
+            default: () => (
               <>
                 { !props.hideCanvas && (
                   <VColorPickerCanvas
@@ -199,8 +199,8 @@ export const VColorPicker = defineComponent({
                     disabled={ props.disabled }
                   />
                 )}
-              </>,
-            ],
+              </>
+            ),
           }}
         />
       )

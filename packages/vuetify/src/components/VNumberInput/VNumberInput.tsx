@@ -485,18 +485,18 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
         >
           {{
             ...slots,
-            'append-inner': hasAppendInner ? (...args) => [
+            'append-inner': hasAppendInner ? (...args) => (
               <>
                 { slots['append-inner']?.(...args) }
                 { appendInnerControl }
-              </>,
-            ] : undefined,
-            'prepend-inner': hasPrependInner ? (...args) => [
+              </>
+            ) : undefined,
+            'prepend-inner': hasPrependInner ? (...args) => (
               <>
                 { prependInnerControl }
                 { slots['prepend-inner']?.(...args) }
-              </>,
-            ] : undefined,
+              </>
+            ) : undefined,
           }}
         </VTextField>
       )

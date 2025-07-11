@@ -686,9 +686,7 @@ describe.each([
         returnObject
       >
         {{
-          prepend: ({ isOpen }) => [
-            <span class="prepend-is-open">{ `${isOpen}` }</span>,
-          ],
+          prepend: ({ isOpen }) => (<span class="prepend-is-open">{ `${isOpen}` }</span>),
         }}
       </VTreeview>
     ))

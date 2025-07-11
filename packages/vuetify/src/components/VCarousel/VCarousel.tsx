@@ -128,7 +128,7 @@ export const VCarousel = genericComponent<new <T>(
         >
           {{
             default: slots.default,
-            additional: ({ group }: { group: GroupProvide }) => [
+            additional: ({ group }: { group: GroupProvide }) => (
               <>
                 { !props.hideDelimiters && (
                   <div
@@ -178,8 +178,8 @@ export const VCarousel = genericComponent<new <T>(
                     modelValue={ (group.getItemIndex(model.value) + 1) / group.items.value.length * 100 }
                   />
                 )}
-              </>,
-            ],
+              </>
+            ),
             prev: slots.prev,
             next: slots.next,
           }}

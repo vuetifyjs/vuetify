@@ -11,9 +11,9 @@ describe('VConfirmEdit', () => {
 
     render(() => (
       <VConfirmEdit modelValue={ externalModel.value }>
-        { ({ model }) => [
-          <p>{ model.value }</p>,
-        ]}
+        { ({ model }) => (
+          <p>{ model.value }</p>
+        )}
       </VConfirmEdit>
     ))
 
@@ -29,12 +29,12 @@ describe('VConfirmEdit', () => {
 
     render(() => (
       <VConfirmEdit v-model={ externalModel.value } modelValue={ externalModel.value }>
-        { ({ model }) => [
+        { ({ model }) => (
           <>
             <p>{ model.value.join(',') }</p>
             <button data-testid="push" onClick={ () => model.value.push('bar') }>Push</button>
-          </>,
-        ]}
+          </>
+        )}
       </VConfirmEdit>
     ))
 
@@ -59,7 +59,6 @@ describe('VConfirmEdit', () => {
         <VConfirmEdit>
           { ({ model }) => {
             void model
-            return []
           }}
         </VConfirmEdit>
       ))
@@ -71,7 +70,6 @@ describe('VConfirmEdit', () => {
         <VConfirmEdit>
           { ({ actions }) => {
             void actions
-            return []
           }}
         </VConfirmEdit>
       ))

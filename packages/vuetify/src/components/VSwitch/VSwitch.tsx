@@ -140,7 +140,7 @@ export const VSwitch = genericComponent<new <T>(
                 isValid,
               }
 
-              return [
+              return (
                 <VSelectionControl
                   ref={ control }
                   { ...controlProps }
@@ -158,7 +158,7 @@ export const VSwitch = genericComponent<new <T>(
                 >
                   {{
                     ...slots,
-                    default: ({ backgroundColorClasses, backgroundColorStyles }) => [
+                    default: ({ backgroundColorClasses, backgroundColorStyles }) => (
                       <div
                         class={[
                           'v-switch__track',
@@ -178,9 +178,9 @@ export const VSwitch = genericComponent<new <T>(
                             { slots['track-false'](slotProps) }
                           </div>
                         )}
-                      </div>,
-                    ],
-                    input: ({ inputNode, icon, backgroundColorClasses, backgroundColorStyles }) => [
+                      </div>
+                    ),
+                    input: ({ inputNode, icon, backgroundColorClasses, backgroundColorStyles }) => (
                       <>
                         { inputNode }
                         <div
@@ -220,26 +220,26 @@ export const VSwitch = genericComponent<new <T>(
                                   { slotProps => (
                                     slots.loader
                                       ? slots.loader(slotProps)
-                                      : [
+                                      : (
                                         <VProgressCircular
                                           active={ slotProps.isActive }
                                           color={ slotProps.color }
                                           indeterminate
                                           size="16"
                                           width="2"
-                                        />,
-                                      ]
+                                        />
+                                      )
                                   )}
                                 </LoaderSlot>
                               )}
                             </VScaleTransition>
                           )}
                         </div>
-                      </>,
-                    ],
+                      </>
+                    ),
                   }}
-                </VSelectionControl>,
-              ]
+                </VSelectionControl>
+              )
             },
           }}
         </VInput>
