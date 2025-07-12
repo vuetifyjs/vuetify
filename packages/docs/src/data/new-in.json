@@ -112,6 +112,13 @@
       "persistent": "3.6.0"
     }
   },
+  "VProgressLinear": {
+    "props": {
+      "chunkCount": "3.10.0",
+      "chunkGap": "3.10.0",
+      "chunkWidth": "3.10.0"
+    }
+  },
   "VSelect": {
     "props": {
       "listProps": "3.5.0",
