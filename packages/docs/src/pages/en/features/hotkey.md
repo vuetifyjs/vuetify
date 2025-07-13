@@ -10,7 +10,7 @@ related:
   - /features/accessibility/
   - /features/global-configuration/
 features:
-  github: /composables/hotkey.ts
+  github: /composables/hotkey
   label: 'E: hotkey'
   report: true
 ---
