@@ -57,13 +57,13 @@
     },
   ]
 
-  const today = ref(new Date('2019-01-08'))
+  const today = ref([new Date('2019-01-08')])
 </script>
 
 <script>
   export default {
     data: () => ({
-      today: '2019-01-08',
+      today: ['2019-01-08'],
       weekday: [0, 1, 2, 3, 4, 5, 6],
       weekdays: [
         { title: 'Sun - Sat', value: [0, 1, 2, 3, 4, 5, 6] },

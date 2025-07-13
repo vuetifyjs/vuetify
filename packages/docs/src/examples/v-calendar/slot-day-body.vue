@@ -25,7 +25,7 @@
 
   const calendar = ref()
 
-  const value = ref('')
+  const value = ref([])
   const ready = ref(false)
 
   const cal = computed(() => {
@@ -57,7 +57,7 @@
 <script>
   export default {
     data: () => ({
-      value: '',
+      value: [],
       ready: false,
     }),
     computed: {
