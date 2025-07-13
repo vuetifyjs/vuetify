@@ -223,12 +223,12 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
               }) : (
                 <VCalendarDay
                   { ...calendarDayProps }
-                  day={ genDays([model.value[0] as Date], adapter.date() as Date)[0] }
+                  day={ genDays([(model.value[0] || adapter.date()) as Date], adapter.date() as Date)[0] }
                   dayIndex={ 0 }
                   events={
                     props.events?.filter(e =>
-                      adapter.isSameDay(e.start, genDays([model.value[0] as Date], adapter.date() as Date)[0].date) ||
-                      adapter.isSameDay(e.end, genDays([model.value[0] as Date], adapter.date() as Date)[0].date)
+                      adapter.isSameDay(e.start, genDays([(model.value[0] || adapter.date()) as Date], adapter.date() as Date)[0].date) ||
+                      adapter.isSameDay(e.end, genDays([(model.value[0] || adapter.date()) as Date], adapter.date() as Date)[0].date)
                     )
                   }
                   { ...attrs }

@@ -90,7 +90,7 @@ export function useCalendar (props: CalendarProps) {
   )
   const displayValue = computed(() => {
     if (props.displayValue) return adapter.date(props.displayValue)
-    if (model.value.length > 0) return adapter.date(model.value[0])
+    if (model.value[0]) return adapter.date(model.value[0])
     if (props.min) return adapter.date(props.min)
     if (Array.isArray(props.allowedDates)) return adapter.date(props.allowedDates[0])
 
