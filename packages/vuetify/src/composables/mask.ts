@@ -106,7 +106,9 @@ export function useMask (props: MaskProps, inputRef: Ref<HTMLInputElement | unde
     return item.convert ? item.convert(char) : char
   }
 
-  function maskText (text: string | null | undefined): string {
+  function maskText (text: string | number | null | undefined): string {
+    if (typeof text === "number") text = String(text);
+
     const trimmedText = text?.trim().replace(/\s+/g, ' ')
 
     if (trimmedText == null) return ''
