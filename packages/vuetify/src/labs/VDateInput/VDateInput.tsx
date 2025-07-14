@@ -39,7 +39,7 @@ type VDateInputModelValue = typeof VDatePicker['props']['modelValue']
 
 export const makeVDateInputProps = propsFactory({
   displayFormat: {
-    type: [Function, String] as PropType<string | ((date: typeof VDatePicker['props']['modelValue']) => any)>,
+    type: [Function, String] as PropType<string | ((date: VDateInputModelValue) => any)>,
     default: undefined,
   },
   location: {
