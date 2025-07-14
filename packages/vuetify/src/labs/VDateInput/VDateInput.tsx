@@ -35,6 +35,8 @@ export type VDateInputSlots = Omit<VTextFieldSlots, 'default'> & {
   default: never
 }
 
+type VDateInputModelValue = typeof VDatePicker['props']['modelValue']
+
 export const makeVDateInputProps = propsFactory({
   displayFormat: {
     type: [Function, String] as PropType<string | ((date: typeof VDatePicker['props']['modelValue']) => any)>,
@@ -73,10 +75,10 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
   props: makeVDateInputProps(),
 
   emits: {
-    save: (value: string) => true,
+    save: (value: VDateInputModelValue) => true,
     cancel: () => true,
     'update:focused': (val: boolean) => true,
-    'update:modelValue': (val: string) => true,
+    'update:modelValue': (val: VDateInputModelValue) => true,
     'update:menu': (val: boolean) => true,
   },
 
@@ -184,7 +186,7 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
       isEditingInput.value = false
     }
 
-    function onSave (value: string) {
+    function onSave (value: VDateInputModelValue) {
       emit('save', value)
       menu.value = false
     }
@@ -273,7 +275,7 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
                   >
                     {{
                       default: ({ actions, model: proxyModel, save, cancel, isPristine }) => {
-                        function onUpdateModel (value: string) {
+                        function onUpdateModel (value: VDateInputModelValue) {
                           if (!props.hideActions) {
                             proxyModel.value = value
                           } else {
