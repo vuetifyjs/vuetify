@@ -12,7 +12,7 @@ import { useSsrBoot } from '@/composables/ssrBoot'
 import { useToggleScope } from '@/composables/toggleScope'
 
 // Utilities
-import { computed, ref, shallowRef, toRef, watchEffect } from 'vue'
+import { computed, ref, toRef, watchEffect } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
