@@ -47,6 +47,7 @@ export function useReveal (props: RevealProps) {
       isRevealed.value = true
     }
   })
+
   return {
     duration,
     state,
