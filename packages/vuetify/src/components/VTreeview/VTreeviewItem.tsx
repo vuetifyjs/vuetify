@@ -74,7 +74,7 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
     useRender(() => {
       const listItemProps = {
         ...VListItem.filterProps(props),
-        ...vListItemRef.value?.isActivated ? { active: true } : { },
+        ...vListItemRef.value?.isActivated ? { active: true } : {},
       }
       const hasPrepend = slots.prepend || props.toggleIcon || props.indentLines
 
