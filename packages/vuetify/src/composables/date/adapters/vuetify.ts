@@ -610,9 +610,10 @@ export class VuetifyDateAdapter implements DateAdapter<Date> {
     return getMonth(date)
   }
 
-  getWeek (date: Date, firstDayOfWeek?: number | string, firstWeekMinSize?: number) {
+  getWeek (date: Date, firstDayOfWeek?: number | string, firstWeekMinSize?: number | string) {
     const firstDay = firstDayOfWeek !== undefined ? Number(firstDayOfWeek) : undefined
-    return getWeek(date, this.locale, firstDay, firstWeekMinSize)
+    const firstWeekSize = firstWeekMinSize !== undefined ? Number(firstWeekMinSize) : undefined
+    return getWeek(date, this.locale, firstDay, firstWeekSize)
   }
 
   getDate (date: Date) {
