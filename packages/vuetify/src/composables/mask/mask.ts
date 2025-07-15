@@ -1,13 +1,12 @@
 // Utilities
-import { computed, shallowRef } from 'vue'
+import { computed } from 'vue'
 import { isObject, propsFactory } from '@/util'
 
 // Types
-import type { PropType, Ref } from 'vue'
+import type { PropType } from 'vue'
 
 export interface MaskProps {
   mask: string | MaskOptions | undefined
-  returnMaskedValue?: boolean
 }
 
 export interface MaskOptions {
@@ -17,7 +16,6 @@ export interface MaskOptions {
 
 export const makeMaskProps = propsFactory({
   mask: [String, Object] as PropType<string | MaskOptions>,
-  returnMaskedValue: Boolean,
 }, 'mask')
 
 export type MaskItem = {
@@ -73,7 +71,7 @@ const defaultTokens: Record<string, MaskItem> = {
   },
 }
 
-export function useMask (props: MaskProps, inputRef: Ref<HTMLInputElement | undefined>) {
+export function useMask (props: MaskProps) {
   const mask = computed(() => {
     if (typeof props.mask === 'string') {
       if (props.mask in presets) return presets[props.mask]
@@ -87,8 +85,6 @@ export function useMask (props: MaskProps, inputRef: Ref<HTMLInputElement | unde
       ...(isObject(props.mask) ? props.mask.tokens : null),
     }
   })
-  const selection = shallowRef(0)
-  const lazySelection = shallowRef(0)
 
   function isMask (char: string): boolean {
     return char in tokens.value
@@ -196,42 +192,23 @@ export function useMask (props: MaskProps, inputRef: Ref<HTMLInputElement | unde
     return newText
   }
 
-  function setCaretPosition (newSelection: number) {
-    selection.value = newSelection
-    inputRef.value && inputRef.value.setSelectionRange(selection.value, selection.value)
+  function isValid (text: string): boolean {
+    if (!text) return false
+
+    return unmaskText(text) === unmaskText(maskText(text))
   }
 
-  function resetSelections () {
-    if (!inputRef.value?.selectionEnd) return
+  function isComplete (text: string): boolean {
+    if (!text) return false
 
-    selection.value = inputRef.value.selectionEnd
-    lazySelection.value = 0
-
-    for (let index = 0; index < selection.value; index++) {
-      isMaskDelimiter(inputRef.value.value[index]) || lazySelection.value++
-    }
-  }
-
-  function updateRange () {
-    if (!inputRef.value) return
-    resetSelections()
-
-    let selection = 0
-    const newValue = inputRef.value.value
-
-    if (newValue) {
-      for (let index = 0; index < newValue.length; index++) {
-        if (lazySelection.value <= 0) break
-        isMaskDelimiter(newValue[index]) || lazySelection.value--
-        selection++
-      }
-    }
-    setCaretPosition(selection)
+    const maskedText = maskText(text)
+    return maskedText.length === mask.value.length && isValid(text)
   }
 
   return {
-    updateRange,
-    maskText,
-    unmaskText,
+    isValid,
+    isComplete,
+    mask: maskText,
+    unmask: unmaskText,
   }
 }
