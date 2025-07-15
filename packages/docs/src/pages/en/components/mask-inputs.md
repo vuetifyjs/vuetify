@@ -86,12 +86,12 @@ The `useMask` composable provides a set of methods for working with masks.
 
   const mask = useMask({ mask: '####-####' })
 
-  mask.apply('12345678') // 1234-5678
-  mask.unapply('1234-5678') // 12345678
-  mask.test('abc') // false
-  mask.test('1234') // true
-  mask.test('1234', { isExact: true }) // false
-  mask.test('1234-5678', { isExact: true }) // true
+  mask.mask('12345678') // 1234-5678
+  mask.unmask('1234-5678') // 12345678
+  mask.isValid('abc') // false
+  mask.isValid('1234') // true
+  mask.isComplete('1234') // false
+  mask.isComplete('1234-5678') // true
 ```
 
 ### Examples

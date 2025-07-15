@@ -44,21 +44,21 @@ export const VMaskInput = genericComponent<VMaskInputSlots>()({
       'modelValue',
       undefined,
       // Always display masked value in input when mask is applied
-      val => props.mask ? mask.apply(mask.unapply(val)) : val,
+      val => props.mask ? mask.mask(mask.unmask(val)) : val,
       val => {
         if (props.mask) {
-          const valueBeforeChange = mask.unapply(model.value)
+          const valueBeforeChange = mask.unmask(model.value)
           // E.g. mask is #-# and the input value is '2-23'
           // model-value should be enforced to '2-2'
-          const enforcedMaskedValue = mask.apply(mask.unapply(val))
-          const newUnmaskedValue = mask.unapply(enforcedMaskedValue)
+          const enforcedMaskedValue = mask.mask(mask.unmask(val))
+          const newUnmaskedValue = mask.unmask(enforcedMaskedValue)
 
           if (newUnmaskedValue === valueBeforeChange) {
             vTextFieldRef.value!.value = enforcedMaskedValue
           }
           val = newUnmaskedValue
           updateRange()
-          return returnMaskedValue.value ? mask.apply(val) : val
+          return returnMaskedValue.value ? mask.mask(val) : val
         }
         return val
       },

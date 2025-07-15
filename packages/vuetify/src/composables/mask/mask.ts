@@ -14,10 +14,6 @@ export interface MaskOptions {
   tokens: Record<string, MaskItem>
 }
 
-export interface MaskValidateOptions {
-  isExact?: boolean
-}
-
 export const makeMaskProps = propsFactory({
   mask: [String, Object] as PropType<string | MaskOptions>,
 }, 'mask')
@@ -106,7 +102,7 @@ export function useMask (props: MaskProps) {
     return item.convert ? item.convert(char) : char
   }
 
-  function apply (text: string | null | undefined): string {
+  function maskText (text: string | null | undefined): string {
     const trimmedText = text?.trim().replace(/\s+/g, ' ')
 
     if (trimmedText == null) return ''
@@ -145,7 +141,7 @@ export function useMask (props: MaskProps) {
     return newText
   }
 
-  function unapply (text: string | null): string | null {
+  function unmaskText (text: string | null): string | null {
     if (text == null) return null
 
     if (!mask.value.length || !text.length) return text
@@ -196,24 +192,23 @@ export function useMask (props: MaskProps) {
     return newText
   }
 
-  function test (text: string, options: MaskValidateOptions = {}): boolean {
+  function isValid (text: string): boolean {
     if (!text) return false
 
-    const maskedText = apply(text)
-    const unmaskedText = unapply(text)
-    const unmaskedMaskedText = unapply(maskedText)
+    return unmaskText(text) === unmaskText(maskText(text))
+  }
 
-    if (options.isExact) {
-      return maskedText.length === mask.value.length &&
-             unmaskedText === unmaskedMaskedText
-    }
+  function isComplete (text: string): boolean {
+    if (!text) return false
 
-    return unmaskedText === unmaskedMaskedText
+    const maskedText = maskText(text)
+    return maskedText.length === mask.value.length && isValid(text)
   }
 
   return {
-    test,
-    apply,
-    unapply,
+    isValid,
+    isComplete,
+    mask: maskText,
+    unmask: unmaskText,
   }
 }
