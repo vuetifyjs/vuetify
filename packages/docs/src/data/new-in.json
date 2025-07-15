@@ -45,7 +45,7 @@
   },
   "VColorPicker": {
     "props": {
-      "eyeDropperIcon": "3.9.0"
+      "eyeDropperIcon": "3.10.0"
     }
   },
   "VCombobox": {
