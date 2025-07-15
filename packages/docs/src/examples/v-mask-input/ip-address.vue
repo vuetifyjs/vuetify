@@ -11,6 +11,7 @@
       mask="###.###.###.###"
       placeholder="192.168.001.001"
       persistent-hint
+      return-masked-value
     ></v-mask-input>
   </div>
 </template>
