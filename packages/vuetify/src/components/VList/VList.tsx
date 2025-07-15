@@ -22,8 +22,9 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeVariantProps } from '@/composables/variant'
 
 // Utilities
-import { computed, ref, shallowRef, toRef } from 'vue'
+import { computed, ref, shallowRef, toRef, watch } from 'vue'
 import {
+  convertToUnit,
   EventProp,
   focusChild,
   genericComponent,
@@ -98,6 +99,7 @@ export const makeVListProps = propsFactory({
     default: 'one',
   },
   slim: Boolean,
+  slimWidth: [Number, String],
   nav: Boolean,
 
   'onClick:open': EventProp<[{ id: unknown, value: boolean, path: unknown[] }]>(),
@@ -242,6 +244,14 @@ export const VList = genericComponent<new <
         return focusChild(contentRef.value, location)
       }
     }
+
+    watch([contentRef, () => props.slimWidth], () => {
+      if (props.slimWidth && contentRef.value) {
+        const spacer = convertToUnit(props.slimWidth)
+
+        if (spacer) contentRef.value.style.setProperty('--v-list-slim-spacer-width', spacer)
+      }
+    }, { immediate: true })
 
     useRender(() => {
       return (
