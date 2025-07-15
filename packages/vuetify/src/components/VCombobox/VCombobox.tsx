@@ -517,6 +517,7 @@ export const VCombobox = genericComponent<new <
                       selected={ selectedValues.value }
                       selectStrategy={ props.multiple ? 'independent' : 'single-independent' }
                       onMousedown={ (e: MouseEvent) => e.preventDefault() }
+                      selectable
                       onKeydown={ onListKeydown }
                       onFocusin={ onFocusin }
                       onFocusout={ onFocusout }
