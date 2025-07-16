@@ -7,7 +7,7 @@ import type { PropType, Ref } from 'vue'
 
 export interface MaskProps {
   mask: string | MaskOptions | undefined
-  returnMaskedValue?: Boolean
+  returnMaskedValue?: boolean
 }
 
 export interface MaskOptions {

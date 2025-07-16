@@ -139,5 +139,8 @@ export default {
     leftArrow: '왼쪽 화살표',
     rightArrow: '오른쪽 화살표',
     backspace: '백스페이스',
+    space: '스페이스',
+    plus: '플러스',
+    shortcut: '키보드 단축키: {0}',
   },
 }

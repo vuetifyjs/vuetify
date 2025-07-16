@@ -139,5 +139,8 @@ export default {
     leftArrow: 'Fletxa esquerra',
     rightArrow: 'Fletxa dreta',
     backspace: 'Retrocés',
+    space: 'Espai',
+    plus: 'més',
+    shortcut: 'Drecera de teclat: {0}',
   },
 }

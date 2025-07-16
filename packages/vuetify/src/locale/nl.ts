@@ -139,5 +139,8 @@ export default {
     leftArrow: 'Pijl naar links',
     rightArrow: 'Pijl naar rechts',
     backspace: 'Backspace',
+    space: 'Spatie',
+    plus: 'plus',
+    shortcut: 'Toetsenbordsnelkoppeling: {0}',
   },
 }

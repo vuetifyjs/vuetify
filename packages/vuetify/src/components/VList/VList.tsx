@@ -40,18 +40,22 @@ import type { VListChildrenSlots } from './VListChildren'
 import type { ItemProps, ListItem } from '@/composables/list-items'
 import type { GenericProps, SelectItemKey } from '@/util'
 
-export interface InternalListItem<T = any> extends ListItem<T> {
-  type?: 'item' | 'subheader' | 'divider'
-}
+export interface InternalListItem<T = any> extends ListItem<T> {}
 
-function transformItem (props: ItemProps & { itemType?: string }, item: any): InternalListItem {
-  const type = getPropertyFromItem(item, props.itemType, 'item')
+const itemTypes = new Set(['item', 'divider', 'subheader'])
+
+function transformItem (props: ItemProps, item: any): ListItem {
   const title = isPrimitive(item) ? item : getPropertyFromItem(item, props.itemTitle)
-  const value = getPropertyFromItem(item, props.itemValue, undefined)
+  const value = isPrimitive(item) ? item : getPropertyFromItem(item, props.itemValue, undefined)
   const children = getPropertyFromItem(item, props.itemChildren)
   const itemProps = props.itemProps === true
     ? omit(item, ['children'])
     : getPropertyFromItem(item, props.itemProps)
+
+  let type = getPropertyFromItem(item, props.itemType, 'item')
+  if (!itemTypes.has(type)) {
+    type = 'item'
+  }
 
   const _props = {
     title,
@@ -69,7 +73,7 @@ function transformItem (props: ItemProps & { itemType?: string }, item: any): In
   }
 }
 
-function transformItems (props: ItemProps & { itemType?: string }, items: (string | object)[]) {
+function transformItems (props: ItemProps, items: (string | object)[]) {
   const array: InternalListItem[] = []
 
   for (const item of items) {
@@ -79,7 +83,7 @@ function transformItems (props: ItemProps & { itemType?: string }, items: (strin
   return array
 }
 
-export function useListItems (props: ItemProps & { itemType?: string }) {
+export function useListItems (props: ItemProps) {
   const items = computed(() => transformItems(props, props.items))
 
   return { items }
@@ -114,10 +118,6 @@ export const makeVListProps = propsFactory({
   ...makeDensityProps(),
   ...makeDimensionProps(),
   ...makeElevationProps(),
-  itemType: {
-    type: String,
-    default: 'type',
-  },
   ...makeItemsProps(),
   ...makeRoundedProps(),
   ...makeTagProps(),

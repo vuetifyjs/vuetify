@@ -139,5 +139,8 @@ export default {
     leftArrow: 'Стрелица налево',
     rightArrow: 'Стрелица надесно',
     backspace: 'Backspace',
+    space: 'Размак',
+    plus: 'плус',
+    shortcut: 'Пречица на тастатури: {0}',
   },
 }

@@ -36,7 +36,10 @@ export type VDateInputSlots = Omit<VTextFieldSlots, 'default'> & {
 }
 
 export const makeVDateInputProps = propsFactory({
-  displayFormat: [Function, String],
+  displayFormat: {
+    type: [Function, String] as PropType<string | ((date: typeof VDatePicker['props']['modelValue']) => any)>,
+    default: undefined,
+  },
   location: {
     type: String as PropType<StrategyProps['location']>,
     default: 'bottom start',
@@ -255,7 +258,7 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
                 <VMenu
                   v-model={ menu.value }
                   activator="parent"
-                  min-width="0"
+                  minWidth="0"
                   eager={ isFocused.value }
                   location={ props.location }
                   closeOnContentClick={ false }

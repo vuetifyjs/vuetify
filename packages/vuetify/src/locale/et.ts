@@ -139,5 +139,8 @@ export default {
     leftArrow: 'Nool vasakule',
     rightArrow: 'Nool paremale',
     backspace: 'Tagasiklahv',
+    space: 'Tühik',
+    plus: 'pluss',
+    shortcut: 'Klaviatuuri otsetee: {0}',
   },
 }

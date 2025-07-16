@@ -4,11 +4,13 @@
     :code="code"
     :name="name"
     :options="options"
+    :script="script"
   >
-    <v-responsive
-      ref="responsive"
-      class="overflow-y-auto"
-      max-height="300"
+    <v-sheet
+      ref="sheetRef"
+      :max-height="300"
+      class="overflow-y-auto ma-4"
+      elevation="5"
     >
       <div class="pa-6 text-center position-sticky">
         Scroll down
@@ -22,31 +24,23 @@
 
       <v-lazy
         v-model="isActive"
-        :options="{
-          threshold: .5
-        }"
+        :options="{ threshold: .5 }"
         min-height="200"
         transition="fade-transition"
       >
         <v-card
           class="mx-auto"
+          color="primary"
           max-width="336"
+          text="This card was rendered later"
+          title="Lazy card"
         >
-          <v-card-title>Card title</v-card-title>
-
-          <v-card-text>
-            Phasellus magna. Quisque rutrum. Nunc egestas, augue at pellentesque laoreet, felis eros vehicula leo, at malesuada velit leo quis pede. Aliquam lobortis. Quisque libero metus, condimentum nec, tempor a, commodo mollis, magna.
-
-            In turpis. In dui magna, posuere eget, vestibulum et, tempor auctor, justo. In turpis. Pellentesque dapibus hendrerit tortor. Ut varius tincidunt libero.
-          </v-card-text>
-
           <v-card-actions class="justify-center">
             <v-btn @click="reset">Reset Demo</v-btn>
           </v-card-actions>
         </v-card>
       </v-lazy>
-      <br>
-    </v-responsive>
+    </v-sheet>
   </ExamplesUsageExample>
 </template>
 
@@ -56,17 +50,18 @@
   const name = 'v-lazy'
   const model = shallowRef('default')
   const isActive = shallowRef(false)
-  const responsive = ref()
+  const sheetRef = ref()
   const options = []
 
   async function reset () {
-    await goTo(0, { container: responsive.value.$el })
+    await goTo(0, { container: sheetRef.value.$el })
 
     isActive.value = false
   }
 
   const props = computed(() => {
     return {
+      'v-model': 'isActive',
       'min-height': 200,
       options: { threshold: 0.5 },
       transition: 'fade-transition',
@@ -75,15 +70,12 @@
 
   const slots = computed(() => {
     return `
-  <div class="text-center text-body-2 mb-12">
-    The card will appear below:
-  </div>
-
   <v-card
     class="mx-auto"
+    color="primary"
     max-width="336"
-    text="Phasellus magna. Quisque rutrum. Nunc egestas, augue at pellentesque laoreet."
-    title="Card title"
+    text="This card was rendered later"
+    title="Lazy card"
   >
     <v-card-actions class="justify-center">
       <v-btn @click="reset">Reset Demo</v-btn>
@@ -92,7 +84,39 @@
 `
   })
 
+  const script = computed(() => {
+    return `<script setup>
+  import { ref, shallowRef } from 'vue'
+  import { useGoTo } from 'vuetify'
+
+  const goTo = useGoTo()
+
+  const isActive = shallowRef(false)
+  const sheetRef = ref()
+
+  async function reset () {
+    await goTo(0, { container: sheetRef.value.$el })
+
+    isActive.value = false
+  }
+<` + '/script>'
+  })
+
   const code = computed(() => {
-    return `<v-lazy${propsToString(props.value)}>${slots.value}</v-lazy>`
+    return `<v-sheet
+  ref="sheetRef"
+  class="overflow-y-auto ma-4"
+  :max-height="300"
+  elevation="5"
+>
+  <div class="pa-6 text-center position-sticky">Scroll down</div>
+  <v-responsive min-height="100vh"></v-responsive>
+
+  <div class="text-center text-body-2 mb-12">
+    The card will appear below:
+  </div>
+
+  <${name}${propsToString(props.value)}>${slots.value}</${name}>
+</v-sheet>`
   })
 </script>

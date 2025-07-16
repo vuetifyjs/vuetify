@@ -139,5 +139,8 @@ export default {
     leftArrow: 'Flecha izquierda',
     rightArrow: 'Flecha derecha',
     backspace: 'Retroceso',
+    space: 'Espacio',
+    plus: 'más',
+    shortcut: 'Atajo de teclado: {0}',
   },
 }

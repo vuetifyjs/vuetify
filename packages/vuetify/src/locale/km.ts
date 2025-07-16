@@ -139,5 +139,8 @@ export default {
     leftArrow: 'ព្រួញ​ឆ្វេង',
     rightArrow: 'ព្រួញ​ស្តាំ',
     backspace: 'Backspace',
+    space: 'ដកឃ្លា',
+    plus: 'បូក',
+    shortcut: 'គ្រាប់ចុចរហ័ស: {0}',
   },
 }

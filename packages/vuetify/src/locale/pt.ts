@@ -139,5 +139,8 @@ export default {
     leftArrow: 'Seta para a esquerda',
     rightArrow: 'Seta para a direita',
     backspace: 'Backspace',
+    space: 'Espaço',
+    plus: 'mais',
+    shortcut: 'Atalho de teclado: {0}',
   },
 }

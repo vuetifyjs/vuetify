@@ -139,5 +139,8 @@ export default {
     leftArrow: 'ลูกศรซ้าย',
     rightArrow: 'ลูกศรขวา',
     backspace: 'Backspace',
+    space: 'เว้นวรรค',
+    plus: 'บวก',
+    shortcut: 'ทางลัดแป้นพิมพ์: {0}',
   },
 }

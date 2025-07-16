@@ -139,5 +139,8 @@ export default {
     leftArrow: '左箭頭',
     rightArrow: '右箭頭',
     backspace: '退格',
+    space: '空格',
+    plus: '加',
+    shortcut: '鍵盤快捷鍵：{0}',
   },
 }

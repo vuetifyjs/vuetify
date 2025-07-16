@@ -139,5 +139,8 @@ export default {
     leftArrow: 'Pil venstre',
     rightArrow: 'Pil høyre',
     backspace: 'Slett',
+    space: 'Mellomrom',
+    plus: 'pluss',
+    shortcut: 'Tastatursnarveier: {0}',
   },
 }

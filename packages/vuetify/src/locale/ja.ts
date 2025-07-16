@@ -139,5 +139,8 @@ export default {
     leftArrow: '左矢印',
     rightArrow: '右矢印',
     backspace: 'バックスペース',
+    space: 'スペース',
+    plus: 'プラス',
+    shortcut: 'キーボードショートカット: {0}',
   },
 }

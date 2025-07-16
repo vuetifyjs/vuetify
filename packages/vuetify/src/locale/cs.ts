@@ -139,5 +139,8 @@ export default {
     leftArrow: 'Šipka vlevo',
     rightArrow: 'Šipka vpravo',
     backspace: 'Backspace',
+    space: 'Mezerník',
+    plus: 'plus',
+    shortcut: 'Klávesová zkratka: {0}',
   },
 }

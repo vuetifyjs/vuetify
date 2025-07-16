@@ -139,5 +139,8 @@ export default {
     leftArrow: 'Strelica lijevo',
     rightArrow: 'Strelica desno',
     backspace: 'Backspace',
+    space: 'Razmak',
+    plus: 'plus',
+    shortcut: 'Tipkovnička prečica: {0}',
   },
 }

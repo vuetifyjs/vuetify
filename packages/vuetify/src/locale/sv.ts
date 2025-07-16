@@ -139,5 +139,8 @@ export default {
     leftArrow: 'Pil vänster',
     rightArrow: 'Pil höger',
     backspace: 'Backsteg',
+    space: 'Mellanslag',
+    plus: 'plus',
+    shortcut: 'Tangentbordsgenväg: {0}',
   },
 }

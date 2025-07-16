@@ -139,5 +139,8 @@ export default {
     leftArrow: 'Стрілка вліво',
     rightArrow: 'Стрілка вправо',
     backspace: 'Backspace',
+    space: 'Пробіл',
+    plus: 'плюс',
+    shortcut: 'Комбінація клавіш: {0}',
   },
 }
