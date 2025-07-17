@@ -125,10 +125,10 @@ $grid-breakpoints: map-deep-merge(
   (
     'xs': 0,
     'sm': 600px,
-    'md': 960px,
-    'lg': 1280px,
-    'xl': 1920px,
-    'xxl': 2560px,
+    'md': 840px,
+    'lg': 1145px,
+    'xl': 1545px,
+    'xxl': 2138px,
   ),
   $grid-breakpoints
 );
