@@ -231,6 +231,7 @@ const VCommandPaletteContent = genericComponent<VCommandPaletteSlots>()({
       itemValue: props.itemValue,
       itemChildren: props.itemChildren,
       itemProps: props.itemProps,
+      itemType: props.itemType,
       returnObject: props.returnObject,
       valueComparator: props.valueComparator,
     }))
@@ -609,36 +610,38 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
     // Provide isActive state to child components for state reset
     provide('commandPaletteIsActive', isActive)
 
-    // Focus restoration for accessibility compliance (WCAG 2.1 Level A)
-    const previouslyFocusedElement = shallowRef<HTMLElement | null>(null)
+    if (!props.contained) {
+      // Focus restoration for accessibility compliance (WCAG 2.1 Level A)
+      const previouslyFocusedElement = shallowRef<HTMLElement | null>(null)
 
-    // Register global hotkey for opening/closing the palette (only if provided)
-    // useHotkey automatically handles undefined values by not registering any listeners
-    useHotkey(toRef(props, 'hotkey'), () => {
-      isActive.value = !isActive.value
-    })
+      // Register global hotkey for opening/closing the palette (only if provided)
+      // useHotkey automatically handles undefined values by not registering any listeners
+      useHotkey(toRef(props, 'hotkey'), () => {
+        isActive.value = !isActive.value
+      })
 
-    // Register escape key to close the palette (respects persistent prop)
-    useHotkey('escape', () => {
-      if (isActive.value && !props.persistent) {
-        isActive.value = false
-      }
-    }, { inputs: true })
+      // Register escape key to close the palette (respects persistent prop)
+      useHotkey('escape', () => {
+        if (isActive.value && !props.persistent) {
+          isActive.value = false
+        }
+      }, { inputs: true })
 
-    // Watch for palette open/close to manage focus restoration
-    watch(isActive, (newValue, oldValue) => {
-      if (newValue && !oldValue) {
+      // Watch for palette open/close to manage focus restoration
+      watch(isActive, (newValue, oldValue) => {
+        if (newValue && !oldValue) {
         // Palette is opening - save the currently focused element
-        previouslyFocusedElement.value = document.activeElement as HTMLElement
-      } else if (!newValue && oldValue && previouslyFocusedElement.value && typeof previouslyFocusedElement.value.focus === 'function') {
+          previouslyFocusedElement.value = document.activeElement as HTMLElement
+        } else if (!newValue && oldValue && previouslyFocusedElement.value && typeof previouslyFocusedElement.value.focus === 'function') {
         // Palette is closing - restore focus to the previously focused element
         // Use nextTick to ensure the dialog has fully closed before restoring focus
-        nextTick(() => {
-          previouslyFocusedElement.value?.focus({ preventScroll: true })
-          previouslyFocusedElement.value = null
-        })
-      }
-    })
+          nextTick(() => {
+            previouslyFocusedElement.value?.focus({ preventScroll: true })
+            previouslyFocusedElement.value = null
+          })
+        }
+      })
+    }
 
     // Note: Item-specific hotkey registration has been moved to VCommandPaletteContent
     // This ensures hotkeys are only active when the dialog is open and automatically
@@ -673,11 +676,37 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
     }
 
     useRender(() => {
-      // Extract dialog-specific props
-      const dialogProps = VDialog.filterProps(props)
       // Extract content-specific props
       const contentProps = VCommandPaletteContent.filterProps(props)
 
+      const commandPaletteContent = (
+        <VCommandPaletteContent
+          { ...contentProps }
+          onClose={ onClose }
+          onClick:item={ onClickItem }
+          v-slots={ slots }
+        />
+      )
+
+      if (props.contained) {
+        return isActive.value ? (
+          <VSheet
+            rounded
+            class={[
+              'v-command-palette',
+              themeClasses.value,
+              densityClasses.value,
+              props.class,
+            ]}
+            style={ props.style }
+          >
+            { commandPaletteContent }
+          </VSheet>
+        ) : <></>
+      }
+
+      // Extract dialog-specific props
+      const dialogProps = VDialog.filterProps(props)
       // Pass transition prop directly to VDialog (follows VOverlay/VDialog conventions)
       const transitionProps = { transition: props.transition }
 
@@ -700,12 +729,7 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
           v-slots={{
             default: () => (
               <VSheet rounded class="v-command-palette__sheet">
-                <VCommandPaletteContent
-                  { ...contentProps }
-                  onClose={ onClose }
-                  onClick:item={ onClickItem }
-                  v-slots={ slots }
-                />
+                { commandPaletteContent }
               </VSheet>
             ),
           }}
