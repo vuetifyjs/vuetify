@@ -44,8 +44,8 @@
 
             <v-slider
               v-model="sequenceTimeout"
-              class="mb-4"
               :label="`Sequence Timeout (${sequenceTimeout}ms)`"
+              class="mb-4"
               max="3000"
               min="500"
               step="100"
