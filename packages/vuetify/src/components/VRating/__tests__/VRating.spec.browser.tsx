@@ -3,12 +3,37 @@ import { VRating } from '../VRating'
 import { VBtn } from '@/components/VBtn'
 
 // Utilities
-import { render, screen, userEvent } from '@test'
-import { ref } from 'vue'
+import { generate, render, screen, userEvent } from '@test'
+import { nextTick, ref } from 'vue'
+
+const stories = {
+  'Item labels': <VRating itemLabels={['1', '', '', '', '5']} />,
+  'Item slot': (
+    <VRating modelValue={ 1 }>
+      {{
+        item: ({ value, rating }) => (
+          <VBtn
+            variant="tonal"
+            class="mx-1"
+            color={ rating === value ? 'primary' : undefined }
+            text={ value }
+          />
+        ),
+      }}
+    </VRating>
+  ),
+  'Item label slot': (
+    <VRating>
+      {{
+        'item-label': props => <>C{ props.value }</>,
+      }}
+    </VRating>
+  ),
+}
 
 describe('VRating', () => {
   it('should response to user interaction', async () => {
-    const model = ref<number | null>(null)
+    const model = ref<number>()
     render(() => <VRating v-model={ model.value } />)
 
     const option = screen.getAllByCSS('.v-rating__item')[3]
@@ -17,7 +42,7 @@ describe('VRating', () => {
   })
 
   it('should respond to prop value changes', () => {
-    const model = ref<number | null>(null)
+    const model = ref<number>()
     render(() => <VRating v-model={ model.value } />)
 
     model.value = 4
@@ -31,7 +56,7 @@ describe('VRating', () => {
 
   it('should clear value if using clearable prop', async () => {
     const clearable = ref<boolean>()
-    const model = ref<number | null>(null)
+    const model = ref<number>()
     render(() => (
       <VRating
         clearable={ clearable.value }
@@ -51,16 +76,18 @@ describe('VRating', () => {
   })
 
   it('should not react to events when readonly', async () => {
-    const model = ref<number | null>(null)
+    const model = ref<number>()
     render(() => <VRating v-model={ model.value } readonly />)
 
     const buttons = screen.getAllByCSS('.v-rating__item .v-btn')
 
     await userEvent.click(buttons[1])
-    expect(model.value).toBeNull()
+    await nextTick()
+    expect(model.value).toBeUndefined()
 
     model.value = 4
     await userEvent.click(buttons[0])
+    await nextTick()
     expect(model.value).toBe(4)
   })
 
@@ -75,47 +102,6 @@ describe('VRating', () => {
     icons.forEach((el, i) => {
       expect(el.outerHTML).to.equal(icons[i < 3 ? 0 : 3].outerHTML)
     })
-  })
-
-  it('should show item-labels', () => {
-    render(() => (
-      <VRating itemLabels={['1', null, null, null, '5'] as any[]} />
-    ))
-
-    expect(screen.getAllByCSS('.v-rating__wrapper > span')).toHaveLength(5)
-  })
-
-  it('should support scoped item slot', async () => {
-    render(() => (
-      <VRating>
-        {{
-          item: ({ value, rating }) => (
-            <VBtn
-              variant="tonal"
-              class="mx-1"
-              color={ rating === value ? 'primary' : undefined }
-              text={ value }
-            />
-          ),
-        }}
-      </VRating>
-    ))
-
-    const buttons = screen.getAllByCSS('.v-btn.mx-1')
-    await userEvent.click(buttons[1])
-    expect(buttons[1]).toHaveClass('text-primary')
-  })
-
-  it('should support scoped item-label slot', () => {
-    render(() => (
-      <VRating>
-        {{
-          'item-label': props => <div class="foo">{ props.value }</div>,
-        }}
-      </VRating>
-    ))
-
-    expect(screen.getAllByCSS('.v-rating__wrapper > .foo')).toHaveLength(5)
   })
 
   it('should support half-increments', () => {
@@ -161,5 +147,9 @@ describe('VRating', () => {
     expect(buttons[1]).toHaveFocus()
     await userEvent.keyboard('{Space}')
     expect(model.value).toBe(2)
+  })
+
+  describe('Showcase', () => {
+    generate({ stories })
   })
 })
