@@ -17,7 +17,7 @@
 import '@/labs/VCommandPalette/VCommandPalette.scss'
 
 // Components
-import { VHotkey } from '@/labs/VCommandPalette/VHotkey'
+import { VHotkey } from '@/labs/VHotkey'
 
 // Composables
 import { useLocale } from '@/composables/locale'

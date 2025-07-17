@@ -47,7 +47,7 @@ import { genericComponent, omit, propsFactory, useRender } from '@/util'
 import type { MaybeRef, PropType } from 'vue'
 import type { RouteLocationRaw } from 'vue-router'
 import type { ListItem as VuetifyListItem } from '@/composables/list-items'
-import { VHotkey } from '@/labs/VCommandPalette/VHotkey'
+import { VHotkey } from '@/labs/VHotkey'
 
 /**
  * Common properties that all command palette items must have.
