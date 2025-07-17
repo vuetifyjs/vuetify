@@ -149,15 +149,15 @@
   },
   "VTreeview": {
     "props": {
-      "hideActions": "3.10.0",
-      "separateRoots": "3.10.0",
-      "showLines": "3.10.0"
+      "hideActions": "3.9.0",
+      "separateRoots": "3.9.0",
+      "indentLines": "3.9.0"
     }
   },
   "VTreeviewItem": {
     "props": {
-      "hideActions": "3.10.0",
-      "indentLines": "3.10.0"
+      "hideActions": "3.9.0",
+      "indentLines": "3.9.0"
     }
   },
   "VTooltip": {

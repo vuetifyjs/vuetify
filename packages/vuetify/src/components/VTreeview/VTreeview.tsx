@@ -176,15 +176,20 @@ export const VTreeview = genericComponent<new <T>(
           v-model:activated={ activated.value }
           v-model:selected={ selected.value }
         >
-          <VTreeviewChildren
-            { ...treeviewChildrenProps }
-            density={ props.density }
-            returnObject={ props.returnObject }
-            items={ items.value }
-            parentIndentLines={ props.indentLines ? [] : undefined }
-            indentLinesVariant={ indentLinesVariant }
-            v-slots={ slots }
-          ></VTreeviewChildren>
+          {{
+            default: () => (
+              <VTreeviewChildren
+                { ...treeviewChildrenProps }
+                density={ props.density }
+                returnObject={ props.returnObject }
+                items={ items.value }
+                parentIndentLines={ props.indentLines ? [] : undefined }
+                indentLinesVariant={ indentLinesVariant }
+                v-slots={ slots }
+              />
+            ),
+            $stable: true,
+          }}
         </VList>
       )
     })

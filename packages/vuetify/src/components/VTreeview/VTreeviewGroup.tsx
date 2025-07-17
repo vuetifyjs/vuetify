@@ -29,7 +29,6 @@ export const VTreeviewGroup = genericComponent<VListGroupSlots>()({
       VTreeviewItem: {
         prependIcon: undefined,
         appendIcon: undefined,
-        active: vListGroupRef.value?.isOpen,
         toggleIcon: toggleIcon.value,
       },
     }))

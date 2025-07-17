@@ -60,7 +60,7 @@ export const VMaskInput = genericComponent<VMaskInputSlots>()({
       },
     )
 
-    const validationValue = toRef(() => returnMaskedValue.value ? maskText(model.value) : unmaskText(model.value))
+    const validationValue = toRef(() => returnMaskedValue.value ? model.value : unmaskText(model.value))
 
     onBeforeMount(() => {
       if (props.returnMaskedValue) {
