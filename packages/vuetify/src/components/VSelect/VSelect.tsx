@@ -110,6 +110,7 @@ export const VSelect = genericComponent<new <
   T extends readonly any[],
   Item = ItemType<T>,
   ReturnObject extends boolean = false,
+  Cascade extends boolean = false,
   Multiple extends boolean = false,
   V extends Value<Item, ReturnObject, Multiple> = Value<Item, ReturnObject, Multiple>
 >(
@@ -119,6 +120,7 @@ export const VSelect = genericComponent<new <
     itemValue?: SelectItemKey<ItemType<T>>
     itemProps?: SelectItemKey<ItemType<T>>
     returnObject?: ReturnObject
+    cascade?: Cascade
     multiple?: Multiple
     modelValue?: V | null
     'onUpdate:modelValue'?: (value: V) => void
@@ -488,7 +490,7 @@ export const VSelect = genericComponent<new <
                             index,
                             props: itemProps,
                           }) ?? (
-                            <VListItem { ...itemProps } role="option">
+                            <VListItem { ...itemProps } cascade={ props.cascade } role="option">
                               {{
                                 prepend: ({ isSelected }) => (
                                   <>

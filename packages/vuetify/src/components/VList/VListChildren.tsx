@@ -27,6 +27,7 @@ export type VListChildrenSlots<T> = {
 export const makeVListChildrenProps = propsFactory({
   items: Array as PropType<readonly InternalListItem[]>,
   returnObject: Boolean,
+  cascade: Boolean,
 }, 'VListChildren')
 
 export const VListChildren = genericComponent<new <T extends InternalListItem>(
@@ -65,7 +66,7 @@ export const VListChildren = genericComponent<new <T extends InternalListItem>(
 
       const listGroupProps = VListGroup.filterProps(itemProps)
 
-      return children ? (
+      return children && !props.cascade ? (
         <VListGroup
           { ...listGroupProps }
           value={ props.returnObject ? item : itemProps?.value }
@@ -99,6 +100,8 @@ export const VListChildren = genericComponent<new <T extends InternalListItem>(
           <VListItem
             { ...itemProps }
             value={ props.returnObject ? item : itemProps.value }
+            cascade={ props.cascade }
+            children={ props.cascade ? item.children : undefined }
             v-slots={ slotsWithItem }
           />
         )
