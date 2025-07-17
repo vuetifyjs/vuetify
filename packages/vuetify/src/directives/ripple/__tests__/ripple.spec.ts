@@ -4,7 +4,6 @@ import Ripple from '../'
 // Utilities
 import { mount } from '@vue/test-utils'
 import { defineComponent } from 'vue'
-import { keyCodes } from '@/util'
 
 const testComponent = defineComponent({
   directives: { Ripple },
