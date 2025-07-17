@@ -76,14 +76,14 @@ export const makeVDatePickerProps = propsFactory({
   }),
   ...omit(makeVDatePickerMonthsProps(), ['modelValue']),
   ...omit(makeVDatePickerYearsProps(), ['modelValue']),
-  ...makeVPickerProps({ title: '$vuetify.datePicker.title' }),
+  ...makeVPickerProps(),
 
   modelValue: null,
 }, 'VDatePicker')
 
 export const VDatePicker = genericComponent<new <
   T,
-  Multiple extends boolean | 'range' | number | (string & {}) = false,
+  Multiple extends boolean | 'range' | 'week' | number | (string & {}) = false,
   TModel = Multiple extends true | number | string
     ? T[]
     : T,
@@ -163,6 +163,12 @@ export const VDatePicker = genericComponent<new <
 
     const isReversing = shallowRef(false)
     const header = computed(() => {
+      if (props.multiple === 'week' && model.value.length > 0) {
+        const week = adapter.getWeek(model.value[0])
+        const year = adapter.getYear(model.value[0])
+        return t('$vuetify.datePicker.weekSelected', week, year)
+      }
+
       if (props.multiple && model.value.length > 1) {
         return t('$vuetify.datePicker.itemsSelected', model.value.length)
       }
@@ -170,6 +176,12 @@ export const VDatePicker = genericComponent<new <
       return (model.value[0] && adapter.isValid(model.value[0]))
         ? adapter.format(adapter.date(model.value[0]), 'normalDateWithWeekday')
         : t(props.header)
+    })
+    const titleText = computed(() => {
+      const defaultTitle = props.multiple === 'week'
+        ? '$vuetify.datePicker.weekTitle'
+        : '$vuetify.datePicker.title'
+      return t(props.title ?? defaultTitle)
     })
     const text = computed(() => {
       let date = adapter.date()
@@ -360,7 +372,7 @@ export const VDatePicker = genericComponent<new <
           v-slots={{
             title: () => slots.title?.() ?? (
               <div class="v-date-picker__title">
-                { t(props.title) }
+                { titleText.value }
               </div>
             ),
             header: () => slots.header ? (

@@ -46,6 +46,8 @@ export default {
     input: {
       placeholder: 'Въведете дата',
     },
+    weekSelected: 'Week {0}, {1}',
+    weekTitle: 'Select week',
   },
   noDataText: 'Няма налични данни',
   carousel: {

@@ -109,6 +109,13 @@ export function createDateRange (adapter: DateInstance, start: unknown, stop?: u
   return datesInRange
 }
 
+export function createWeekRange (adapter: DateInstance, value: unknown, firstDayOfWeek?: string | number, weekLength = 7) {
+  const firstDay = firstDayOfWeek !== undefined ? Number(firstDayOfWeek) : undefined
+  const weekStart = adapter.startOfWeek(value, firstDay)
+  const weekEnd = adapter.addDays(weekStart, weekLength - 1)
+  return [weekStart, adapter.endOfDay(weekEnd)]
+}
+
 function createInstance (options: InternalDateOptions, locale: LocaleInstance) {
   const instance = reactive(
     typeof options.adapter === 'function'

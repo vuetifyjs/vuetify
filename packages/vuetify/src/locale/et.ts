@@ -46,6 +46,8 @@ export default {
     input: {
       placeholder: 'Sisesta kuupäev',
     },
+    weekSelected: 'Week {0}, {1}',
+    weekTitle: 'Select week',
   },
   noDataText: 'Andmed puuduvad',
   carousel: {
