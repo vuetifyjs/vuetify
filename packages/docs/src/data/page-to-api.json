@@ -171,10 +171,11 @@
   "directives/tooltip": ["v-tooltip"],
   "features/dates": ["useDate"],
   "features/display-and-platform": ["useDisplay"],
+  "features/hotkey": ["useHotkey"],
   "features/scrolling": ["useGoTo"],
   "features/global-configuration": ["VDefaultsProvider"],
   "features/internationalization": ["useLocale", "VLocaleProvider"],
-  "features/theme": ["VThemeProvider"],
+  "features/theme": ["useTheme", "VThemeProvider"],
   "styles/transitions": [
     "VDialogBottomTransition",
     "VDialogTopTransition",

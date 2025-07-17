@@ -96,9 +96,14 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
     function getFixedStyles (column: InternalDataTableHeader, y: number): CSSProperties | undefined {
       if (!(props.sticky || props.fixedHeader) && !column.fixed) return undefined
 
+      const fixedSide = typeof column.fixed === 'string' ? column.fixed
+        : column.fixed ? 'start'
+        : 'none'
+
       return {
         position: 'sticky',
-        left: column.fixed ? convertToUnit(column.fixedOffset) : undefined,
+        left: fixedSide === 'start' ? convertToUnit(column.fixedOffset) : undefined,
+        right: fixedSide === 'end' ? convertToUnit(column.fixedEndOffset) : undefined,
         top: (props.sticky || props.fixedHeader) ? `calc(var(--v-table-header-height) * ${y})` : undefined,
       }
     }
@@ -164,13 +169,15 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
           }}
           colspan={ column.colspan }
           rowspan={ column.rowspan }
-          onClick={ column.sortable ? () => toggleSort(column) : undefined }
           fixed={ column.fixed }
           nowrap={ column.nowrap }
           lastFixed={ column.lastFixed }
+          firstFixedEnd={ column.firstFixedEnd }
           noPadding={ noPadding }
+          tabindex={ column.sortable ? 0 : undefined }
+          onClick={ column.sortable ? () => toggleSort(column) : undefined }
+          onKeydown={ column.sortable ? (event: KeyboardEvent) => handleEnterKeyPress(event, column) : undefined }
           { ...headerProps }
-          onKeydown={ (event: KeyboardEvent) => column.sortable && handleEnterKeyPress(event, column) }
         >
           {{
             default: () => {

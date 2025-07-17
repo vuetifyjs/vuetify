@@ -58,12 +58,24 @@ export interface IconAliases {
   eyeDropper: IconValue
   upload: IconValue
   color: IconValue
+  // Font Awesome does not have most of these icons!
+  command: IconValue
+  ctrl: IconValue
+  space: IconValue
+  shift: IconValue
+  alt: IconValue
+  enter: IconValue
+  arrowup: IconValue
+  arrowdown: IconValue
+  arrowleft: IconValue
+  arrowright: IconValue
+  backspace: IconValue
 }
 
 export interface IconProps {
   tag: string | JSXComponent
   icon?: IconValue
-  disabled?: Boolean
+  disabled?: boolean
 }
 
 type IconComponent = JSXComponent<IconProps>
@@ -230,7 +242,6 @@ export const useIcon = (props: MaybeRefOrGetter<IconValue | undefined>) => {
 
     if (typeof icon === 'string') {
       icon = icon.trim()
-
       if (icon.startsWith('$')) {
         icon = icons.aliases?.[icon.slice(1)]
       }
