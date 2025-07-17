@@ -22,6 +22,7 @@ import { genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/
 import type { PropType } from 'vue'
 import type { StrategyProps } from '@/components/VOverlay/locationStrategies'
 import type { VTextFieldSlots } from '@/components/VTextField/VTextField'
+import type { GenericProps } from '@/util'
 
 // Types
 export type VDateInputActionsSlot = {
@@ -37,7 +38,7 @@ export type VDateInputSlots = Omit<VTextFieldSlots, 'default'> & {
 
 export const makeVDateInputProps = propsFactory({
   displayFormat: {
-    type: [Function, String] as PropType<string | ((date: typeof VDatePicker['props']['modelValue']) => any)>,
+    type: [Function, String] as PropType<string | ((date: unknown) => any)>,
     default: undefined,
   },
   location: {
@@ -67,16 +68,30 @@ export const makeVDateInputProps = propsFactory({
   }), ['active', 'location', 'rounded']),
 }, 'VDateInput')
 
-export const VDateInput = genericComponent<VDateInputSlots>()({
+export const VDateInput = genericComponent<new <
+  T,
+  Multiple extends boolean | 'range' | number | (string & {}) = false,
+  TModel = Multiple extends true | number | string
+    ? T[]
+    : T,
+> (
+  props: {
+    modelValue?: TModel
+    onSave?: (value: TModel) => void
+    'onUpdate:modelValue'?: (value: TModel) => void
+    multiple?: Multiple
+  },
+  slots: VDateInputSlots
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VDateInput',
 
   props: makeVDateInputProps(),
 
   emits: {
-    save: (value: string) => true,
+    save: (value: unknown) => true,
     cancel: () => true,
     'update:focused': (val: boolean) => true,
-    'update:modelValue': (val: string) => true,
+    'update:modelValue': (val: unknown) => true,
     'update:menu': (val: boolean) => true,
   },
 
