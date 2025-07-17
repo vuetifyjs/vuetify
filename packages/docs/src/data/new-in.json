@@ -96,6 +96,11 @@
       "glow": "3.8.0"
     }
   },
+  "VList": {
+    "props": {
+      "noSelection": "3.9.1"
+    }
+  },
   "VListItem": {
     "props": {
       "baseColor": "3.3.0",
@@ -150,6 +155,7 @@
   "VTreeview": {
     "props": {
       "hideActions": "3.10.0",
+      "noSelection": "3.9.1",
       "separateRoots": "3.10.0",
       "showLines": "3.10.0"
     }

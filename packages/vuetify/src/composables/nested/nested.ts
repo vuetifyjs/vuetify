@@ -59,6 +59,7 @@ export type OpenStrategyProp = 'single' | 'multiple' | 'list' | OpenStrategy
 export interface NestedProps {
   activatable: boolean
   selectable: boolean
+  noSelection: boolean
   activeStrategy: ActiveStrategyProp | undefined
   selectStrategy: SelectStrategyProp | undefined
   openStrategy: OpenStrategyProp | undefined
@@ -80,6 +81,7 @@ type NestedProvide = {
     disabled: Ref<Set<unknown>>
     activatable: Ref<boolean>
     selectable: Ref<boolean>
+    noSelection: Ref<boolean>
     opened: Ref<Set<unknown>>
     activated: Ref<Set<unknown>>
     selected: Ref<Map<unknown, 'on' | 'off' | 'indeterminate'>>
@@ -110,6 +112,7 @@ export const emptyNested: NestedProvide = {
     select: () => null,
     activatable: ref(false),
     selectable: ref(false),
+    noSelection: ref(false),
     opened: ref(new Set()),
     activated: ref(new Set()),
     selected: ref(new Map()),
@@ -121,6 +124,7 @@ export const emptyNested: NestedProvide = {
 export const makeNestedProps = propsFactory({
   activatable: Boolean,
   selectable: Boolean,
+  noSelection: Boolean,
   activeStrategy: [String, Function, Object] as PropType<ActiveStrategyProp>,
   selectStrategy: [String, Function, Object] as PropType<SelectStrategyProp>,
   openStrategy: [String, Object] as PropType<OpenStrategyProp>,
@@ -224,6 +228,7 @@ export const useNested = (props: NestedProps) => {
       opened,
       activatable: toRef(() => props.activatable),
       selectable: toRef(() => props.selectable),
+      noSelection: toRef(() => props.noSelection),
       activated,
       selected,
       selectedValues: computed(() => {
