@@ -6,7 +6,7 @@ import { VListItem } from '@/components/VList'
 // Utilities
 import { commands, generate, render, screen, userEvent } from '@test'
 import { getAllByRole } from '@testing-library/vue'
-import { cloneVNode, ref } from 'vue'
+import { cloneVNode, nextTick, ref } from 'vue'
 
 const variants = ['underlined', 'outlined', 'filled', 'solo', 'plain'] as const
 const densities = ['default', 'comfortable', 'compact'] as const
@@ -268,8 +268,8 @@ describe('VSelect', () => {
           items={ items }
           multiple
           returnObject
-          item-title="text"
-          item-value="id"
+          itemTitle="text"
+          itemValue="id"
         />
       ))
 
@@ -418,8 +418,8 @@ describe('VSelect', () => {
       <VSelect
         items={ items }
         modelValue={ selectedItems }
-        item-title={ itemTitleFunc }
-        item-value="id"
+        itemTitle={ itemTitleFunc }
+        itemValue="id"
       />
     ))
 
@@ -471,8 +471,8 @@ describe('VSelect', () => {
           v-model={ selectedItem.value }
           hideSelected
           items={ items }
-          item-title="text"
-          item-value="id"
+          itemTitle="text"
+          itemValue="id"
           returnObject
         />
       ))
@@ -531,7 +531,7 @@ describe('VSelect', () => {
     const { element } = render(() => (
       <VSelect
         chips
-        closable-chips
+        closableChips
         items={['foo', 'bar']}
         label="Select"
         modelValue={['foo', 'bar']}
@@ -558,7 +558,7 @@ describe('VSelect', () => {
       <VSelect
         v-model={ selectedItem.value }
         chips
-        closable-chips
+        closableChips
         items={['abc', 'def']}
       />
     ))
@@ -587,14 +587,30 @@ describe('VSelect', () => {
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/18556
-  it('should show menu if focused and items are added', async () => {
-    const { rerender } = render(VSelect)
+  // https://github.com/vuetifyjs/vuetify/issues/21205
+  it('should show menu if focused and items are added when hideNoData is true"', async () => {
+    const items = ref()
+    render(() => <VSelect items={ items.value } hideNoData />)
 
     await userEvent.keyboard('{Tab}')
     expect(screen.queryByRole('listbox')).toBeNull()
 
-    await rerender({ items: ['Foo', 'Bar'] })
+    items.value = ['Foo', 'Bar']
+    await nextTick()
     await expect.poll(() => screen.queryByRole('listbox')).toBeVisible()
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/21205
+  it('should not show menu if focused and items are added when hideNoData is false', async () => {
+    const items = ref()
+    render(() => <VSelect items={ items.value } />)
+
+    await userEvent.keyboard('{Tab}')
+    expect(screen.queryByRole('listbox')).toBeNull()
+
+    items.value = ['Foo', 'Bar']
+    await nextTick()
+    await expect.poll(() => screen.queryByRole('listbox')).toBeNull()
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/19346

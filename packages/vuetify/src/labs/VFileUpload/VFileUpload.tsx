@@ -305,7 +305,7 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
             )}
 
             <VOverlay
-              model-value={ isDragging.value }
+              modelValue={ isDragging.value }
               contained
               scrim={ props.scrim }
             />
