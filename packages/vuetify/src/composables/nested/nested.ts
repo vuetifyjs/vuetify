@@ -7,12 +7,14 @@ import {
   inject,
   onBeforeMount,
   onBeforeUnmount,
+  onMounted,
   provide,
   ref,
   shallowRef,
   toRaw,
   toRef,
   toValue,
+  watch,
 } from 'vue'
 import {
   independentActiveStrategy,
@@ -29,7 +31,7 @@ import {
   leafSingleSelectStrategy,
   trunkSelectStrategy,
 } from './selectStrategies'
-import { consoleError, getCurrentInstance, propsFactory } from '@/util'
+import { consoleError, createRange, getCurrentInstance, propsFactory } from '@/util'
 
 // Types
 import type { InjectionKey, MaybeRefOrGetter, PropType, Ref } from 'vue'
@@ -62,6 +64,8 @@ export interface NestedProps {
   activeStrategy: ActiveStrategyProp | undefined
   selectStrategy: SelectStrategyProp | undefined
   openStrategy: OpenStrategyProp | undefined
+  autoRevealSelected: boolean
+  autoRevealDelay: string | number | undefined
   activated: any
   selected: any
   opened: any
@@ -124,6 +128,8 @@ export const makeNestedProps = propsFactory({
   activeStrategy: [String, Function, Object] as PropType<ActiveStrategyProp>,
   selectStrategy: [String, Function, Object] as PropType<SelectStrategyProp>,
   openStrategy: [String, Object] as PropType<OpenStrategyProp>,
+  autoRevealSelected: Boolean,
+  autoRevealDelay: [String, Number] as PropType<string | number | undefined>,
   opened: null,
   activated: null,
   selected: null,
@@ -213,6 +219,46 @@ export const useNested = (props: NestedProps) => {
 
     return path
   }
+
+  let revealTimeout: ReturnType<typeof setTimeout> = null!
+  function autoReveal () {
+    clearTimeout(revealTimeout)
+    if (props.autoRevealSelected && selected.value.size > 0) {
+      const delay = Number(props.autoRevealDelay ?? 300)
+
+      function unique<T> (result: T[], n: T, i: number, all: T[]): T[] {
+        return [...result, ...all.indexOf(n) === i ? [n] : []]
+      }
+
+      const pathsToReveal = [...selected.value.keys()].map(getPath)
+        .map(path => path.slice(0, -1).filter(v => !opened.value.has(v)))
+        .filter(path => path.length > 0)
+        .reduce(unique<unknown[]>, [])
+
+      if (!pathsToReveal.length) {
+        return
+      }
+
+      const longestPathLength = Math.max(...pathsToReveal.map(path => path.length))
+      const layers = createRange(longestPathLength)
+        .map(depth => pathsToReveal
+          .map(path => path.slice(0, depth + 1))
+          .filter(path => path.length > depth)
+          .map(path => path.pop())
+          .reduce(unique<unknown>, [])
+        )
+
+      function revealLayer () {
+        if (!layers.length) return
+        opened.value = new Set([...opened.value, ...layers.shift()!])
+        revealTimeout = setTimeout(revealLayer, delay)
+      }
+      revealTimeout = setTimeout(revealLayer, delay)
+    }
+  }
+
+  watch(selected, autoReveal)
+  onMounted(autoReveal)
 
   const vm = getCurrentInstance('nested')
 

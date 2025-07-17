@@ -106,6 +106,12 @@
       "glow": "3.8.0"
     }
   },
+  "VList": {
+    "props": {
+      "autoRevealSelected": "3.10.0",
+      "autoRevealDelay": "3.10.0"
+    }
+  },
   "VListItem": {
     "props": {
       "baseColor": "3.3.0",
@@ -166,6 +172,8 @@
   },
   "VTreeview": {
     "props": {
+      "autoRevealSelected": "3.10.0",
+      "autoRevealDelay": "3.10.0",
       "hideActions": "3.10.0",
       "separateRoots": "3.10.0",
       "showLines": "3.10.0"
