@@ -3,8 +3,16 @@ import { VPagination } from '../VPagination'
 import { VLocaleProvider } from '@/components/VLocaleProvider'
 
 // Utilities
-import { page, render, screen, userEvent } from '@test'
+import { generate, page, render, screen, userEvent } from '@test'
 import { ref } from 'vue'
+
+const stories = {
+  RTL: (
+    <VLocaleProvider rtl>
+      <VPagination length="5" />
+    </VLocaleProvider>
+  ),
+}
 
 describe('VPagination', () => {
   it('should render set length', () => {
@@ -93,14 +101,6 @@ describe('VPagination', () => {
     ))
 
     expect(screen.getAllByCSS('.v-pagination__item')).toHaveLength(6)
-  })
-
-  it('should render in RTL mode', () => {
-    render(() => (
-      <VLocaleProvider rtl>
-        <VPagination length="5" />
-      </VLocaleProvider>
-    ))
   })
 
   it('should use color props', () => {
@@ -215,5 +215,9 @@ describe('VPagination', () => {
     expect(screen.getAllByCSS('.v-pagination__item').at(0)).toHaveTextContent('1')
     expect(screen.getAllByCSS('.v-pagination__item').at(2)).toHaveTextContent('8')
     expect(screen.getAllByCSS('.v-pagination__item').at(4)).toHaveTextContent('10')
+  })
+
+  describe('Showcase', () => {
+    generate({ stories })
   })
 })
