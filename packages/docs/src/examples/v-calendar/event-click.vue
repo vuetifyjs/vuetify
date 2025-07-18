@@ -140,7 +140,7 @@
   const colors = ['blue', 'indigo', 'deep-purple', 'cyan', 'green', 'orange', 'grey darken-1']
   const names = ['Meeting', 'Holiday', 'PTO', 'Travel', 'Event', 'Birthday', 'Conference', 'Party']
 
-  const focus = ref('')
+  const focus = ref([])
   const type = ref('month')
   const selectedEvent = ref({})
   const selectedElement = ref(null)
@@ -159,7 +159,7 @@
     return event.color
   }
   function setToday () {
-    focus.value = ''
+    focus.value = []
   }
   function prev () {
     calendar.value.prev()
@@ -211,7 +211,7 @@
 <script>
   export default {
     data: () => ({
-      focus: '',
+      focus: [],
       type: 'month',
       typeToLabel: {
         month: 'Month',
@@ -238,7 +238,7 @@
         return event.color
       },
       setToday () {
-        this.focus = ''
+        this.focus = []
       },
       prev () {
         this.$refs.calendar.prev()
