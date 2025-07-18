@@ -86,7 +86,6 @@ The **grow** prop will make the tab items take up all available space with no li
 Using **stacked** increases the `v-tabs` height to 72px to allow for both icons and text to be displayed.
 
 <ExamplesExample file="v-tabs/prop-stacked" />
-
 #### Pagination
 
 If the tab items overflow their container, pagination controls will appear on desktop. For mobile devices, arrows will only display with the **show-arrows** prop.
@@ -98,6 +97,12 @@ If the tab items overflow their container, pagination controls will appear on de
 The **direction** prop allows for `v-tab` components to stack vertically.
 
 <ExamplesExample file="v-tabs/prop-direction" />
+
+#### Spaced
+
+Vertical tabs can be customized with **spaced** prop to move the text away from the icon.
+
+<ExamplesExample file="v-tabs/prop-spaced" />
 
 ### Misc
 
