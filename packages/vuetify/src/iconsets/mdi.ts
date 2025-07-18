@@ -46,6 +46,8 @@ const aliases: IconAliases = {
   calendar: 'mdi-calendar',
   treeviewCollapse: 'mdi-menu-down',
   treeviewExpand: 'mdi-menu-right',
+  tableGroupCollapse: 'mdi-chevron-down',
+  tableGroupExpand: 'mdi-chevron-right',
   eyeDropper: 'mdi-eyedropper',
   upload: 'mdi-cloud-upload',
   color: 'mdi-palette',
