@@ -46,6 +46,13 @@ export default {
     input: {
       placeholder: 'Zadajte dátum',
     },
+    ariaLabel: {
+      previousMonth: 'Predchádzajúci mesiac',
+      nextMonth: 'Ďalší mesiac',
+      selectYear: 'Vyberte rok',
+      selectDate: '{0}',
+      currentDate: 'Dnes, {0}',
+    },
   },
   noDataText: 'Nie sú dostupné žiadne dáta',
   carousel: {

@@ -46,6 +46,13 @@ export default {
     input: {
       placeholder: 'Nhập ngày',
     },
+    ariaLabel: {
+      previousMonth: 'Tháng trước',
+      nextMonth: 'Tháng sau',
+      selectYear: 'Chọn năm',
+      selectDate: '{0}',
+      currentDate: 'Hôm nay, {0}',
+    },
   },
   noDataText: 'Không có dữ liệu',
   carousel: {

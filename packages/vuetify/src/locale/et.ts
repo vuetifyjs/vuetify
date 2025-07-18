@@ -46,6 +46,13 @@ export default {
     input: {
       placeholder: 'Sisesta kuupäev',
     },
+    ariaLabel: {
+      previousMonth: 'Eelmine kuu',
+      nextMonth: 'Järgmine kuu',
+      selectYear: 'Vali aasta',
+      selectDate: '{0}',
+      currentDate: 'Täna, {0}',
+    },
   },
   noDataText: 'Andmed puuduvad',
   carousel: {
