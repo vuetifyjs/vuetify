@@ -117,6 +117,14 @@ export default {
     notEmpty: 'Seleziona almeno un valore',
     pattern: 'Formato non valido',
   },
+  command: {
+    select: 'per selezionare',
+    navigate: 'per navigare',
+    goBack: 'per tornare indietro',
+    close: 'per chiudere',
+    then: 'poi',
+    placeholder: 'Digita un comando o cerca...',
+  },
   hotkey: {
     then: 'poi',
     ctrl: 'Ctrl',

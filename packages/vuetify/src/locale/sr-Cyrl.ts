@@ -117,6 +117,14 @@ export default {
     notEmpty: 'Изаберите бар једну вредност',
     pattern: 'Неважећи формат',
   },
+  command: {
+    select: 'за избор',
+    navigate: 'за навигацију',
+    goBack: 'за повратак',
+    close: 'за затварање',
+    then: 'затим',
+    placeholder: 'Укуцајте команду или претражите...',
+  },
   hotkey: {
     then: 'затим',
     ctrl: 'Ctrl',

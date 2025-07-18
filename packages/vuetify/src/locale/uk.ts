@@ -117,6 +117,14 @@ export default {
     notEmpty: 'Будь ласка, виберіть принаймні одне значення',
     pattern: 'Недійсний формат',
   },
+  command: {
+    select: 'для вибору',
+    navigate: 'для навігації',
+    goBack: 'для повернення',
+    close: 'для закриття',
+    then: 'потім',
+    placeholder: 'Введіть команду або шукайте...',
+  },
   hotkey: {
     then: 'потім',
     ctrl: 'Ctrl',

@@ -117,6 +117,14 @@ export default {
     notEmpty: 'Lūdzu, izvēlieties vismaz vienu vērtību',
     pattern: 'Nederīgs formāts',
   },
+  command: {
+    select: 'lai izvēlētos',
+    navigate: 'lai navigētu',
+    goBack: 'lai atgrieztos',
+    close: 'lai aizvērtu',
+    then: 'tad',
+    placeholder: 'Ierakstiet komandu vai meklējiet...',
+  },
   hotkey: {
     then: 'tad',
     ctrl: 'Ctrl',

@@ -117,6 +117,14 @@ export default {
     notEmpty: 'กรุณาเลือกอย่างน้อยหนึ่งค่า',
     pattern: 'รูปแบบไม่ถูกต้อง',
   },
+  command: {
+    select: 'เพื่อเลือก',
+    navigate: 'เพื่อนำทาง',
+    goBack: 'เพื่อย้อนกลับ',
+    close: 'เพื่อปิด',
+    then: 'จากนั้น',
+    placeholder: 'พิมพ์คำสั่งหรือค้นหา...',
+  },
   hotkey: {
     then: 'จากนั้น',
     ctrl: 'Ctrl',
