@@ -122,6 +122,11 @@
       "persistent": "3.6.0"
     }
   },
+  "VOverlay": {
+    "props": {
+      "stick-to-target": "3.10.0"
+    }
+  },
   "VProgressLinear": {
     "props": {
       "chunkCount": "3.10.0",
