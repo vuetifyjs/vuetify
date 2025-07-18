@@ -40,7 +40,13 @@
 
     <template v-slot:configuration>
       <v-checkbox v-model="allowInputs" label="Allow inputs"></v-checkbox>
-      <v-slider v-model="sequenceTimeout" label="Timeout"></v-slider>
+      <div class="text-subtitle-1 mt-3">Sequence Timeout <span class="text-caption text-medium-emphasis">({{ sequenceTimeout }}ms)</span></div>
+      <v-slider
+        v-model="sequenceTimeout"
+        max="3000"
+        min="500"
+        step="100"
+      ></v-slider>
     </template>
   </ExamplesUsageExample>
 </template>
@@ -56,7 +62,7 @@
   const keys = shallowRef('cmd+b')
   const binding = shallowRef(false)
   const allowInputs = shallowRef(false)
-  const sequenceTimeout = shallowRef(0)
+  const sequenceTimeout = shallowRef(2000)
 
   const and = computed(() => sequenceTimeout.value && allowInputs.value ? '\n  ' : '')
 

@@ -122,7 +122,7 @@
       return {
         groupBy: [
           {
-            key: 'gluten',
+            key: 'type',
             order: 'asc',
           },
         ],

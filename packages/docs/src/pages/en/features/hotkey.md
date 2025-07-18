@@ -57,8 +57,6 @@ The **hotkey** composable takes a key combination string and a callback function
 | - | - |
 | [useHotkey](/api/use-hotkey/) | The useHotkey composable |
 
-<ApiInline hide-links />
-
 ## Guide
 
 The `useHotkey` composable provides a declarative way to handle keyboard shortcuts in your Vue applications. It automatically cleans up event listeners when components are unmounted and supports reactive key combinations.
