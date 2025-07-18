@@ -176,7 +176,7 @@ export const VMenu = genericComponent<OverlaySlots>()({
     }
 
     function onActivatorKeydown (e: KeyboardEvent) {
-      if (props.disabled) return
+      if (props.disabled || e.isComposing) return
 
       const el = overlay.value?.contentEl
       if (el && isActive.value) {
