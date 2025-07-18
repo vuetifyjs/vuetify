@@ -5,7 +5,7 @@
     :name="name"
     :options="options"
   >
-    <div class="text-center">
+    <div class="d-flex align-center justify-center">
       <v-fab v-bind="props"></v-fab>
     </div>
 
