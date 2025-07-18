@@ -16,19 +16,15 @@ import { computed, ref, shallowRef, toRef, watchEffect } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
-import type { PropType } from 'vue'
+import type { ComputedRef, PropType } from 'vue'
 import type { VToolbarSlots } from '@/components/VToolbar/VToolbar'
+import type { Position } from '@/composables/layout'
 
 export const makeVAppBarProps = propsFactory({
   scrollBehavior: String as PropType<'hide' | 'fully-hide' | 'inverted' | 'collapse' | 'elevate' | 'fade-image' | (string & {})>,
   modelValue: {
     type: Boolean,
     default: true,
-  },
-  location: {
-    type: String as PropType<'top' | 'bottom'>,
-    default: 'top',
-    validator: (value: any) => ['top', 'bottom'].includes(value),
   },
 
   ...makeVToolbarProps(),
@@ -53,6 +49,11 @@ export const VAppBar = genericComponent<VToolbarSlots>()({
   setup (props, { slots }) {
     const vToolbarRef = ref<VToolbar>()
     const isActive = useProxiedModel(props, 'modelValue')
+
+    const position = computed(() => {
+      return props.location?.split(' ').includes('bottom') ? 'bottom' : 'top'
+    }) as ComputedRef<Position>
+
     const scrollBehavior = computed(() => {
       const behavior = new Set(props.scrollBehavior?.split(' ') ?? [])
       return {
@@ -136,7 +137,7 @@ export const VAppBar = genericComponent<VToolbarSlots>()({
     const { layoutItemStyles } = useLayoutItem({
       id: props.name,
       order: computed(() => parseInt(props.order, 10)),
-      position: toRef(() => props.location),
+      position,
       layoutSize: height,
       elementSize: shallowRef(undefined),
       active: isActive,
@@ -152,7 +153,7 @@ export const VAppBar = genericComponent<VToolbarSlots>()({
           class={[
             'v-app-bar',
             {
-              'v-app-bar--bottom': props.location === 'bottom',
+              'v-app-bar--bottom': position ? 0 : undefined,
             },
             props.class,
           ]}
