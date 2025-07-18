@@ -8,6 +8,7 @@
     <v-date-picker
       v-bind="props"
       v-model="date"
+      :control-variant="variant"
       class="mx-auto"
     ></v-date-picker>
 
@@ -22,12 +23,15 @@
   const name = 'v-date-picker'
   const model = ref('default')
   const date = ref()
-  const options = []
+  const options = ['docked']
   // const hideActions = ref(false)
   const adjacent = ref(false)
 
+  const variant = toRef(() => model.value !== 'default' ? model.value : undefined)
+
   const props = computed(() => {
     return {
+      variant: variant.value,
       // 'hide-actions': hideActions.value || undefined,
       'show-adjacent-months': adjacent.value || undefined,
     }

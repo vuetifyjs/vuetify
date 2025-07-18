@@ -57,7 +57,12 @@
   "VDatePicker": {
     "props": {
       "controlHeight": "3.8.0",
-      "headerColor": "3.8.0"
+      "headerColor": "3.8.0",
+      "controlVariant": "3.10.0",
+      "noMonthPicker": "3.10.0"
+    },
+    "slots": {
+      "controls": "3.10.0"
     }
   },
   "VDataTable": {

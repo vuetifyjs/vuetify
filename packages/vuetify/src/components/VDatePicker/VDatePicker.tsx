@@ -21,6 +21,7 @@ import { computed, shallowRef, toRef, watch } from 'vue'
 import { genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
+import type { VDatePickerControlsDefaultSlotProps } from './VDatePickerControls'
 import type { VDatePickerHeaderSlots } from './VDatePickerHeader'
 import type { VDatePickerMonthSlots } from './VDatePickerMonth'
 import type { VDatePickerMonthsSlots } from './VDatePickerMonths'
@@ -40,6 +41,7 @@ export type VDatePickerSlots =
       header: string
       transition: string
     }
+    controls: VDatePickerControlsDefaultSlotProps
   }
 
 export const makeVDatePickerProps = propsFactory({
@@ -171,15 +173,12 @@ export const VDatePicker = genericComponent<new <
         ? adapter.format(adapter.date(model.value[0]), 'normalDateWithWeekday')
         : t(props.header)
     })
-    const text = computed(() => {
-      let date = adapter.date()
 
-      date = adapter.setDate(date, 1)
-      date = adapter.setMonth(date, month.value)
-      date = adapter.setYear(date, year.value)
+    const date = toRef(() => adapter.parseISO(`${year.value}-${month.value + 1}-01`))
+    const monthYearText = toRef(() => adapter.format(date.value, 'monthAndYear'))
+    const monthText = toRef(() => adapter.format(date.value, 'monthShort'))
+    const yearText = toRef(() => adapter.format(date.value, 'year'))
 
-      return adapter.format(date, 'monthAndYear')
-    })
     // const headerIcon = toRef(() => props.inputMode === 'calendar' ? props.keyboardIcon : props.calendarIcon)
     const headerTransition = toRef(() => `date-picker-header${isReversing.value ? '-reverse' : ''}-transition`)
 
@@ -189,7 +188,7 @@ export const VDatePicker = genericComponent<new <
       const targets = []
 
       if (viewMode.value !== 'month') {
-        targets.push(...['prev', 'next'])
+        targets.push(...['prev-month', 'next-month', 'prev-year', 'next-year'])
       } else {
         let _date = adapter.date()
 
@@ -198,15 +197,19 @@ export const VDatePicker = genericComponent<new <
         _date = adapter.setYear(_date, year.value)
 
         if (minDate.value) {
-          const date = adapter.addDays(adapter.startOfMonth(_date), -1)
+          const prevMonthEnd = adapter.addDays(adapter.startOfMonth(_date), -1)
+          const prevYearEnd = adapter.addDays(adapter.startOfYear(_date), -1)
 
-          adapter.isAfter(minDate.value, date) && targets.push('prev')
+          adapter.isAfter(minDate.value, prevMonthEnd) && targets.push('prev-month')
+          adapter.isAfter(minDate.value, prevYearEnd) && targets.push('next-year')
         }
 
         if (maxDate.value) {
-          const date = adapter.addDays(adapter.endOfMonth(_date), 1)
+          const nextMonthStart = adapter.addDays(adapter.endOfMonth(_date), 1)
+          const nextYearStart = adapter.addDays(adapter.endOfYear(_date), 1)
 
-          adapter.isAfter(date, maxDate.value) && targets.push('next')
+          adapter.isAfter(nextMonthStart, maxDate.value) && targets.push('next-month')
+          adapter.isAfter(nextYearStart, maxDate.value) && targets.push('next-year')
         }
       }
 
@@ -263,7 +266,7 @@ export const VDatePicker = genericComponent<new <
     //   inputMode.value = inputMode.value === 'calendar' ? 'keyboard' : 'calendar'
     // }
 
-    function onClickNext () {
+    function onClickNextMonth () {
       if (month.value < 11) {
         month.value++
       } else {
@@ -274,7 +277,7 @@ export const VDatePicker = genericComponent<new <
       onUpdateMonth()
     }
 
-    function onClickPrev () {
+    function onClickPrevMonth () {
       if (month.value > 0) {
         month.value--
       } else {
@@ -283,6 +286,28 @@ export const VDatePicker = genericComponent<new <
         onUpdateYear()
       }
       onUpdateMonth()
+    }
+
+    function onClickNextYear () {
+      year.value++
+      if (maxDate.value) {
+        const monthStart = adapter.parseISO(`${year.value}-${month.value + 1}-01`)
+        if (adapter.isAfter(monthStart, maxDate.value)) {
+          month.value = adapter.getMonth(maxDate.value)
+        }
+      }
+      onUpdateYear()
+    }
+
+    function onClickPrevYear () {
+      year.value--
+      if (minDate.value) {
+        const monthStart = adapter.endOfMonth(adapter.parseISO(`${year.value}-${month.value + 1}-01`))
+        if (adapter.isAfter(minDate.value, monthStart)) {
+          month.value = adapter.getMonth(minDate.value)
+        }
+      }
+      onUpdateYear()
     }
 
     function onClickDate () {
@@ -331,7 +356,7 @@ export const VDatePicker = genericComponent<new <
 
     useRender(() => {
       const pickerProps = VPicker.filterProps(props)
-      const datePickerControlsProps = VDatePickerControls.filterProps(props)
+      const datePickerControlsProps = omit(VDatePickerControls.filterProps(props), ['viewMode'])
       const datePickerHeaderProps = VDatePickerHeader.filterProps(props)
       const datePickerMonthProps = VDatePickerMonth.filterProps(props)
       const datePickerMonthsProps = omit(VDatePickerMonths.filterProps(props), ['modelValue'])
@@ -388,11 +413,17 @@ export const VDatePicker = genericComponent<new <
                 <VDatePickerControls
                   { ...datePickerControlsProps }
                   disabled={ disabled.value }
-                  text={ text.value }
-                  onClick:next={ onClickNext }
-                  onClick:prev={ onClickPrev }
+                  viewMode={ viewMode.value }
+                  text={ monthYearText.value }
+                  monthText={ monthText.value }
+                  yearText={ yearText.value }
+                  onClick:next={ onClickNextMonth }
+                  onClick:prev={ onClickPrevMonth }
+                  onClick:nextYear={ onClickNextYear }
+                  onClick:prevYear={ onClickPrevYear }
                   onClick:month={ onClickMonth }
                   onClick:year={ onClickYear }
+                  v-slots={{ default: slots.controls }}
                 />
 
                 <VFadeTransition hideOnLeave>

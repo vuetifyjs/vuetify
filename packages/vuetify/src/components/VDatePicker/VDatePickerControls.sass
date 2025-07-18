@@ -1,3 +1,4 @@
+@use '../../styles/settings'
 @use '../../styles/tools'
 @use './variables' as *
 
@@ -8,54 +9,57 @@
     justify-content: space-between
     font-size: .875rem
     height: $date-picker-controls-height
-    padding-top: 4px
-    padding-bottom: 4px
-    padding-inline-start: 6px
-    padding-inline-end: 12px
+    padding: $date-picker-controls-padding
     flex: 1
 
-    > .v-btn:first-child
+    .v-btn
       text-transform: none
       font-weight: 400
       line-height: initial
       letter-spacing: initial
 
-    &--variant-classic
-      padding-inline-start: 12px
+      > .v-btn__append > .v-icon
+        // matching VBtn for icon rotation
+        transition-property: transform
+        transition-duration: 0.28s
+        transition-timing-function: settings.$standard-easing
 
-    &--variant-modern
-      .v-date-picker__title
-          &:not(:hover)
-            opacity: .7
-
-          .v-date-picker--month &
-            cursor: pointer
-
-          .v-date-picker--year &
-            opacity: 1
-
-    .v-btn:last-child
-      margin-inline-start: 4px
+    .v-date-picker--months &
+      .v-date-picker-controls__only-month-btn
+        > .v-btn__append > .v-icon
+          transform: rotate(180deg)
 
     .v-date-picker--year &
       .v-date-picker-controls__mode-btn
         transform: rotate(180deg)
+      .v-date-picker-controls__year-btn,
+      .v-date-picker-controls__only-year-btn
+        > .v-btn__append > .v-icon
+          transform: rotate(180deg)
 
-  .v-date-picker-controls__date
-    margin-inline-end: 4px
+    &__date
+      margin-inline-end: 4px
 
-    .v-date-picker-controls--variant-classic &
-      margin: auto
-      text-align: center
+    &__month,
+    &__year
+      display: flex
 
-  .v-date-picker-controls__month
-    display: flex
+      @include tools.rtl()
+        flex-direction: row-reverse
 
-    @include tools.rtl()
-      flex-direction: row-reverse
+    & &__month-btn,
+    & &__year-btn
+      padding: 0 12px
 
-    .v-date-picker-controls--variant-classic &
-      flex: 1 0 auto
+    & &__only-month-btn,
+    & &__only-year-btn
+      padding-inline: $date-picker-controls-docked-toggle-btn-padding
+
+      // just lower than default
+      min-width: 40px
+
+      > .v-btn__append
+        margin-inline: $date-picker-controls-docked-toggle-append-margin-inline
 
   .v-date-picker__title
     display: inline-block
