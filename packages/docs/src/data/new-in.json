@@ -14,6 +14,7 @@
   },
   "VAutocomplete": {
     "props": {
+      "autocomplete": "3.10.0",
       "autoSelectFirst": "3.3.0",
       "clearOnSelect": "3.5.0",
       "listProps": "3.5.0"
@@ -45,6 +46,7 @@
   },
   "VCombobox": {
     "props": {
+      "autocomplete": "3.10.0",
       "clearOnSelect": "3.5.0",
       "listProps": "3.5.0"
     }
@@ -122,6 +124,11 @@
       "persistent": "3.6.0"
     }
   },
+  "VNumberInput": {
+    "props": {
+      "autocomplete": "3.10.0"
+    }
+  },
   "VProgressLinear": {
     "props": {
       "chunkCount": "3.10.0",
@@ -131,6 +138,7 @@
   },
   "VSelect": {
     "props": {
+      "autocomplete": "3.10.0",
       "listProps": "3.5.0",
       "noAutoScroll": "3.9.0"
     }
@@ -162,6 +170,11 @@
   "VTab": {
     "props": {
       "text": "3.2.0"
+    }
+  },
+  "VTextField": {
+    "props": {
+      "autocomplete": "3.10.0"
     }
   },
   "VTreeview": {
