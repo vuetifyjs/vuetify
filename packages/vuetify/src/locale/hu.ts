@@ -78,6 +78,9 @@ export default {
     am: 'de',
     pm: 'du',
     title: 'Válassza ki az időpontot',
+    hour: 'Hour',
+    minute: 'Minute',
+    second: 'Second',
   },
   pagination: {
     ariaLabel: {
