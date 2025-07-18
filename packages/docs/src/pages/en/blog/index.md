@@ -18,6 +18,16 @@ Latest news, updates, and stories about Vuetify.
 
 <br>
 
+## Announcing Vuetify v3.9
+
+🖊️ John Leider • 📅 July 8th, 2025
+
+Vuetify v3.9 "Zealot" is here! Discover the latest features, improvements, and bug fixes in this minor release, including component promotions and revolutionary theme system enhancements. This release brings VTreeview and VTimePicker to the core framework, introduces the new system theme with automatic OS preference detection, powerful useHotkey composable, and enhanced Labs components like VHotkey and VMaskInput... { .text-medium-emphasis }
+
+[Read More](/blog/announcing-vuetify-3.9/) { .text-end }
+
+---
+
 ## June 2025 Update
 
 🖊️ John Leider • 📅 July 7th, 2025
