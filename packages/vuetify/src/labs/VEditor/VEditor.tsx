@@ -32,49 +32,96 @@ enum Formats {
   Subscript = 'subscript',
   Superscript = 'superscript',
   Code = 'code',
+  Heading1 = 'heading1',
+  Heading2 = 'heading2',
+  Heading3 = 'heading3',
+  Heading4 = 'heading4',
+  Heading5 = 'heading5',
+  Heading6 = 'heading6'
+}
+
+enum FormatCategory {
+  Heading = 'heading',
 }
 
 type Formatter = {
   name: Formats
   icon: string
-  config: { tag: string, attributes: Record<string, string> }
+  category?: FormatCategory
+  config: { tag: string, attributes?: Record<string, string> }
 }
 
 const formats: Formatter[] = [
   {
     name: Formats.Bold,
     icon: 'mdi-format-bold',
-    config: { tag: 'b', attributes: {} },
+    config: { tag: 'b' },
   },
   {
     name: Formats.Italic,
     icon: 'mdi-format-italic',
-    config: { tag: 'i', attributes: {} },
+    config: { tag: 'i' },
   },
   {
     name: Formats.Underline,
     icon: 'mdi-format-underline',
-    config: { tag: 'u', attributes: {} },
+    config: { tag: 'u' },
   },
   {
     name: Formats.StrikeThrough,
     icon: 'mdi-format-strikethrough',
-    config: { tag: 's', attributes: {} },
+    config: { tag: 's' },
   },
   {
     name: Formats.Subscript,
     icon: 'mdi-format-subscript',
-    config: { tag: 'sub', attributes: {} },
+    config: { tag: 'sub' },
   },
   {
     name: Formats.Superscript,
     icon: 'mdi-format-superscript',
-    config: { tag: 'sup', attributes: {} },
+    config: { tag: 'sup' },
   },
   {
     name: Formats.Code,
     icon: 'mdi-code-tags',
-    config: { tag: 'code', attributes: {} },
+    config: { tag: 'code' },
+  },
+  {
+    name: Formats.Heading1,
+    category: FormatCategory.Heading,
+    icon: 'mdi-format-header-1',
+    config: { tag: 'h1' },
+  },
+  {
+    name: Formats.Heading2,
+    icon: 'mdi-format-header-2',
+    category: FormatCategory.Heading,
+    config: { tag: 'h2' },
+  },
+  {
+    name: Formats.Heading3,
+    icon: 'mdi-format-header-3',
+    category: FormatCategory.Heading,
+    config: { tag: 'h3' },
+  },
+  {
+    name: Formats.Heading4,
+    icon: 'mdi-format-header-4',
+    category: FormatCategory.Heading,
+    config: { tag: 'h4' },
+  },
+  {
+    name: Formats.Heading5,
+    icon: 'mdi-format-header-5',
+    category: FormatCategory.Heading,
+    config: { tag: 'h5' },
+  },
+  {
+    name: Formats.Heading6,
+    icon: 'mdi-format-header-6',
+    category: FormatCategory.Heading,
+    config: { tag: 'h6' },
   },
 ]
 
@@ -93,6 +140,12 @@ export const makeVEditorProps = propsFactory({
       Formats.Underline,
       Formats.StrikeThrough,
       Formats.Code,
+      Formats.Heading1,
+      Formats.Heading2,
+      Formats.Heading3,
+      Formats.Heading4,
+      Formats.Heading5,
+      Formats.Heading6,
     ],
   },
   height: {
@@ -284,7 +337,23 @@ export const VEditor = genericComponent<VEditorSlots>()({
       selectionResult.selection.addRange(selectionResult.range)
     }
 
-    function findFormattedElement (tag: string, attributes: Record<string, string> = {}): Element | null {
+    function getFormatter (format: Formatter) {
+      const { tag, attributes } = format.config
+      const newElement = document.createElement(tag)
+      attributes && Object.entries(attributes).forEach(([key, value]) => {
+        newElement.setAttribute(key, value)
+      })
+
+      return newElement
+    }
+
+    function hasSameFormatting (element: Element, format: Formatter) {
+      const { tag, attributes } = format.config
+      return element.tagName.toLowerCase() === tag.toLowerCase() &&
+        Object.entries(attributes || {}).every(([key, value]) => element?.getAttribute(key) === value)
+    }
+
+    function findFormattedElement (format: Formatter): Element | null {
       const result = getCurrentSelection()
       if (!result) return null
 
@@ -292,10 +361,7 @@ export const VEditor = genericComponent<VEditorSlots>()({
       if (!element) return null
 
       while (element && element !== editorRef.value) {
-        if (
-          element.tagName.toLowerCase() === tag.toLowerCase() &&
-          Object.entries(attributes).every(([key, value]) => element?.getAttribute(key) === value)
-        ) {
+        if (hasSameFormatting(element, format)) {
           return element
         }
         element = element.parentElement
@@ -393,7 +459,7 @@ export const VEditor = genericComponent<VEditorSlots>()({
       const newActiveFormats = new Set<string>()
 
       formats.forEach((format: Formatter) => {
-        if (findFormattedElement(format.config.tag, format.config.attributes)) {
+        if (findFormattedElement(format)) {
           newActiveFormats.add(format.name)
         }
       })
@@ -401,38 +467,60 @@ export const VEditor = genericComponent<VEditorSlots>()({
       activeFormats.value = newActiveFormats
     }
 
-    function applyFormat (format: { tag: string, attributes: Record<string, string> }) {
-      const { tag, attributes } = format
-
-      const formattedElement = findFormattedElement(tag, attributes)
-      if (formattedElement) {
-        removeFormat(formattedElement, tag)
+    function applyFormat (format: Formatter) {
+      if (format.category === FormatCategory.Heading) {
+        applyHeadingFormat(format)
       } else {
-        addFormat(tag, attributes)
+        const formattedElement = findFormattedElement(format)
+        if (formattedElement) {
+          removeFormat(formattedElement)
+        } else {
+          addFormat(format)
+        }
       }
     }
 
-    function addFormat (tag: string, attributes: Record<string, string> = {}) {
-      if (!editorRef.value || props.readonly || props.disabled) return
-      editorRef.value?.focus()
+    function applyHeadingFormat (format: Formatter) {
+      const currentBlockElement = getCurrentBlockElement()
+      const isCurrentBlockHeading = currentBlockElement?.tagName.toLowerCase().startsWith('h')
 
-      const newElement = document.createElement(tag)
-      Object.entries(attributes).forEach(([key, value]) => {
-        newElement.setAttribute(key, value)
+      preserveCaretPosition(() => {
+        if (!editorRef.value) return
+
+        if (!currentBlockElement) {
+          formatContent(editorRef.value, format)
+        } else if (hasSameFormatting(currentBlockElement, format)) {
+          unwrapElement(currentBlockElement)
+        } else if (isCurrentBlockHeading) {
+          replaceFormat(currentBlockElement, format)
+        } else {
+          formatContent(currentBlockElement, format)
+        }
       })
 
+      updateModel()
+      updateActiveStates()
+    }
+
+    function addFormat (format: Formatter) {
+      if (!editorRef.value || props.readonly || props.disabled) return
+
+      editorRef.value?.focus()
+
+      const newElement = getFormatter(format)
       surroundSelectionRange(newElement)
 
       selectNode(newElement)
-      updateModel()
-      updateActiveStates()
 
       if (!hasSelection()) {
         placeCursorInsideElement(newElement)
       }
+
+      updateModel()
+      updateActiveStates()
     }
 
-    function removeFormat (element: Element, tag: string) {
+    function removeFormat (element: Element) {
       if (!editorRef.value || props.readonly || props.disabled) return
 
       const isElementEmpty = element.innerHTML.replace(/\u200B/g, '').trim() === ''
@@ -465,9 +553,58 @@ export const VEditor = genericComponent<VEditorSlots>()({
       }
     }
 
+    function getCurrentBlockElement () {
+      const selectionResult = getCurrentSelection()
+      if (!selectionResult) return null
+
+      let node = selectionResult.selection.anchorNode
+
+      // If it's a text node, move up to the parent
+      if (node?.nodeType === 3) node = node.parentNode
+
+      // Traverse up until we find a block element
+      while (node && node !== editorRef.value) {
+        const display = window.getComputedStyle(node as Element).display
+        if (['block', 'list-item', 'table'].includes(display)) {
+          return node as Element
+        }
+        node = node.parentNode
+      }
+
+      return null
+    }
+
     function removeElement (element: Element) {
       const parent = element.parentNode
       if (!parent) return
+      parent.removeChild(element)
+    }
+
+    function replaceFormat (element: Element, format: Formatter) {
+      const formatter = getFormatter(format)
+      while (element.firstChild) {
+        formatter.appendChild(element.firstChild)
+      }
+      element.parentNode?.replaceChild(formatter, element)
+    }
+
+    function formatContent (element: Element, format: Formatter) {
+      const formatter = getFormatter(format)
+
+      while (element.firstChild) {
+        formatter.appendChild(element.firstChild)
+      }
+      element.insertBefore(formatter, element.firstChild)
+    }
+
+    function unwrapElement (element: Element) {
+      const parent = element.parentNode
+      if (!parent) return
+
+      while (element.firstChild) {
+        parent.insertBefore(element.firstChild, element)
+      }
+
       parent.removeChild(element)
     }
 
@@ -493,12 +630,7 @@ export const VEditor = genericComponent<VEditorSlots>()({
       }
 
       if (!beforeFragment && !afterFragment) {
-        while (element.firstChild) {
-          parent.insertBefore(element.firstChild, element)
-        }
-
-        parent.removeChild(element)
-
+        unwrapElement(element)
         selectBetweenNodes(firstChild, lastChild)
       } else {
         parent.insertBefore(beforeFragment || emptyFragment, element)
@@ -529,6 +661,16 @@ export const VEditor = genericComponent<VEditorSlots>()({
       focusAtSelection()
       updateModel()
       updateActiveStates()
+    }
+
+    function preserveCaretPosition (callback: () => void) {
+      const textNode = document.createTextNode(zeroWidthSpace)
+      getCurrentSelection()?.range.insertNode(textNode)
+
+      callback()
+
+      selectNode(textNode)
+      focusAtSelection()
     }
 
     watch(() => props.modelValue, newVal => {
@@ -613,7 +755,7 @@ export const VEditor = genericComponent<VEditorSlots>()({
                                     size="small"
                                     key={ format.name }
                                     icon={ format.icon }
-                                    onClick={ () => applyFormat(format.config) }
+                                    onClick={ () => applyFormat(format) }
                                     color={ isFormatActive.value(format.name) ? 'primary' : undefined }
                                   />
                                 ))}
