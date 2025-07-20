@@ -9,7 +9,7 @@ import { VSheet } from '@/components/VSheet/VSheet'
 import { VToolbar } from '@/components/VToolbar/VToolbar'
 
 // Composables
-import { useSelection } from './utils'
+import { useSelection } from './composables'
 import { useFocus } from '@/composables/focus'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { useProxiedModel } from '@/composables/proxiedModel'
@@ -33,6 +33,7 @@ enum Formats {
   Subscript = 'subscript',
   Superscript = 'superscript',
   Code = 'code',
+  Highlight = 'highlight',
   Heading1 = 'heading1',
   Heading2 = 'heading2',
   Heading3 = 'heading3',
@@ -44,7 +45,6 @@ enum Formats {
   Right = 'right',
   Justify = 'justify',
   Block = 'block',
-  Highlight = 'highlight',
 }
 
 enum FormatCategory {
@@ -55,7 +55,6 @@ enum FormatCategory {
 type Formatter = {
   name: Formats
   icon: string
-
   category?: FormatCategory
   config: { tag?: string, styles?: Record<string, string>}
 }
@@ -101,6 +100,11 @@ const formats: Formatter[] = [
     name: Formats.Code,
     icon: 'mdi-code-tags',
     config: { tag: 'code' },
+  },
+  {
+    name: Formats.Highlight,
+    icon: 'mdi-format-color-highlight',
+    config: { tag: 'mark' },
   },
   {
     name: Formats.Heading1,
@@ -179,6 +183,7 @@ export const makeVEditorProps = propsFactory({
       Formats.Underline,
       Formats.StrikeThrough,
       Formats.Code,
+      Formats.Highlight,
       Formats.Heading1,
       Formats.Heading2,
       Formats.Heading3,
@@ -481,17 +486,20 @@ export const VEditor = genericComponent<VEditorSlots>()({
       activeFormats.value = newActiveFormats
     }
 
-    function applyFormat (format: Formatter) {
+    function toggleFormat (format: Formatter) {
       if (format.category === FormatCategory.Heading) {
-        applyHeadingFormat(format)
+        toggleHeadingFormat(format)
       } else if (format.category === FormatCategory.Alignment) {
-        applyAlignmentFormat(format)
+        toggleAlignmentFormat(format)
       } else {
-        applyInlineFormat(format)
+        toggleInlineFormat(format)
       }
+
+      updateModel()
+      updateActiveStates()
     }
 
-    function applyInlineFormat (format: Formatter) {
+    function toggleInlineFormat (format: Formatter) {
       const formattedElement = findFormattedElement(format)
       if (formattedElement) {
         removeFormat(formattedElement)
@@ -500,7 +508,7 @@ export const VEditor = genericComponent<VEditorSlots>()({
       }
     }
 
-    function applyHeadingFormat (format: Formatter) {
+    function toggleHeadingFormat (format: Formatter) {
       const currentBlockElement = getCurrentBlockElement()
       const currentBlockTag = currentBlockElement?.tagName.toLowerCase()
       const isCurrentBlockHeadingOrDiv = currentBlockTag?.startsWith('h') || currentBlockTag === 'div'
@@ -518,12 +526,9 @@ export const VEditor = genericComponent<VEditorSlots>()({
           formatContent(currentBlockElement, format)
         }
       })
-
-      updateModel()
-      updateActiveStates()
     }
 
-    function applyAlignmentFormat (format: Formatter) {
+    function toggleAlignmentFormat (format: Formatter) {
       const blockElement = getCurrentBlockElement()
       const targetStyles = format.config.styles
       const targetAlignment = targetStyles?.textAlign
@@ -555,9 +560,6 @@ export const VEditor = genericComponent<VEditorSlots>()({
           blockElement.setAttribute('style', newStyleString)
         }
       }
-
-      updateModel()
-      updateActiveStates()
     }
 
     function addFormat (format: Formatter) {
@@ -573,9 +575,6 @@ export const VEditor = genericComponent<VEditorSlots>()({
       if (!selection.hasText()) {
         placeCursorInsideNode(formatter)
       }
-
-      updateModel()
-      updateActiveStates()
     }
 
     function removeFormat (element: Element) {
@@ -590,10 +589,6 @@ export const VEditor = genericComponent<VEditorSlots>()({
       } else {
         splitFormattingAtCaret(element)
       }
-
-      updateModel()
-      updateActiveStates()
-      editorRef.value?.focus()
     }
 
     function surroundSelectionRange (element: Element) {
@@ -820,7 +815,7 @@ export const VEditor = genericComponent<VEditorSlots>()({
                                     size="small"
                                     key={ format.name }
                                     icon={ format.icon }
-                                    onClick={ () => applyFormat(format) }
+                                    onClick={ () => toggleFormat(format) }
                                     color={ isFormatActive.value(format.name) ? 'primary' : undefined }
                                   />
                                 ))}
