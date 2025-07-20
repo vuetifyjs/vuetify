@@ -14,8 +14,8 @@ import { forwardRefs } from '@/composables/forwardRefs'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
-import { callEvent, genericComponent, omit, propsFactory, useRender } from '@/util'
+import { camelize, computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { callEvent, genericComponent, omit, propsFactory, toKebabCase, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -37,18 +37,32 @@ enum Formats {
   Heading3 = 'heading3',
   Heading4 = 'heading4',
   Heading5 = 'heading5',
-  Heading6 = 'heading6'
+  Heading6 = 'heading6',
+  Center = 'center',
+  Left = 'left',
+  Right = 'right',
+  Justify = 'justify',
+  Block = 'block',
+  Highlight = 'highlight',
 }
 
 enum FormatCategory {
   Heading = 'heading',
+  Alignment = 'alignment',
 }
 
 type Formatter = {
   name: Formats
   icon: string
+
   category?: FormatCategory
-  config: { tag: string, attributes?: Record<string, string> }
+  config: { tag?: string, styles?: Record<string, string>}
+}
+
+const blockFormatter: Formatter = {
+  name: Formats.Block,
+  icon: 'mdi-format-default',
+  config: { tag: 'div' },
 }
 
 const formats: Formatter[] = [
@@ -123,6 +137,30 @@ const formats: Formatter[] = [
     category: FormatCategory.Heading,
     config: { tag: 'h6' },
   },
+  {
+    name: Formats.Left,
+    icon: 'mdi-format-align-left',
+    category: FormatCategory.Alignment,
+    config: { styles: { textAlign: 'left' } },
+  },
+  {
+    name: Formats.Right,
+    icon: 'mdi-format-align-right',
+    category: FormatCategory.Alignment,
+    config: { styles: { textAlign: 'right' } },
+  },
+  {
+    name: Formats.Center,
+    icon: 'mdi-format-align-center',
+    category: FormatCategory.Alignment,
+    config: { styles: { textAlign: 'center' } },
+  },
+  {
+    name: Formats.Justify,
+    icon: 'mdi-format-align-justify',
+    category: FormatCategory.Alignment,
+    config: { styles: { textAlign: 'justify' } },
+  },
 ]
 
 const zeroWidthSpace = '\u200B'
@@ -146,6 +184,11 @@ export const makeVEditorProps = propsFactory({
       Formats.Heading4,
       Formats.Heading5,
       Formats.Heading6,
+      Formats.Center,
+      Formats.Left,
+      Formats.Right,
+      Formats.Justify,
+      Formats.Highlight,
     ],
   },
   height: {
@@ -264,7 +307,29 @@ export const VEditor = genericComponent<VEditorSlots>()({
       }
     }
 
-    function getCurrentSelection () {
+    function getObjectStyles (styleString: string): Record<string, string> {
+      const styles: Record<string, string> = {}
+      if (!styleString) return styles
+
+      styleString.split(';').forEach(rule => {
+        const [property, value] = rule.split(':').map(s => s.trim())
+        if (property && value) {
+          styles[camelize(property)] = value
+        }
+      })
+
+      return styles
+    }
+
+    function getStringStyles (styles: Record<string, string>): string {
+      return Object.entries(styles)
+        .map(([property, value]) => {
+          return `${toKebabCase(property)}: ${value}`
+        })
+        .join('; ')
+    }
+
+    function getSelection () {
       if (!editorRef.value) return null
 
       const selection = window.getSelection()
@@ -277,8 +342,11 @@ export const VEditor = genericComponent<VEditorSlots>()({
       return { selection, range }
     }
 
-    function getSelectionContainer (range: Range): Element | null {
-      const commonAncestor = range.commonAncestorContainer
+    function getSelectionContainer (): Element | null {
+      const result = getSelection()
+      if (!result) return null
+
+      const commonAncestor = result.range.commonAncestorContainer
 
       const container = commonAncestor.nodeType === Node.TEXT_NODE
         ? commonAncestor.parentNode
@@ -290,7 +358,7 @@ export const VEditor = genericComponent<VEditorSlots>()({
     }
 
     function hasSelection () {
-      const selection = getCurrentSelection()?.selection
+      const selection = getSelection()?.selection
 
       if (!selection) return false
       return !selection.isCollapsed && selection.toString() !== zeroWidthSpace
@@ -329,7 +397,7 @@ export const VEditor = genericComponent<VEditorSlots>()({
     }
 
     function focusAtSelection () {
-      const selectionResult = getCurrentSelection()
+      const selectionResult = getSelection()
       if (!selectionResult) return
 
       selectionResult.range.collapse(false)
@@ -337,27 +405,34 @@ export const VEditor = genericComponent<VEditorSlots>()({
       selectionResult.selection.addRange(selectionResult.range)
     }
 
-    function getFormatter (format: Formatter) {
-      const { tag, attributes } = format.config
-      const newElement = document.createElement(tag)
-      attributes && Object.entries(attributes).forEach(([key, value]) => {
-        newElement.setAttribute(key, value)
-      })
+    function getFormatterElement (format: Formatter) {
+      const { tag, styles } = format.config
+      const newElement = document.createElement(tag || 'div')
+
+      if (styles) {
+        const styleString = getStringStyles(styles)
+        newElement.setAttribute('style', styleString)
+      }
 
       return newElement
     }
 
     function hasSameFormatting (element: Element, format: Formatter) {
-      const { tag, attributes } = format.config
-      return element.tagName.toLowerCase() === tag.toLowerCase() &&
-        Object.entries(attributes || {}).every(([key, value]) => element?.getAttribute(key) === value)
+      const { tag, styles } = format.config
+
+      const hasSameTag = tag ? element.tagName.toLowerCase() === tag.toLowerCase() : true
+
+      const hasSameStyles = styles ? (() => {
+        const elementStyleString = element.getAttribute('style') || ''
+        const elementStyles = getObjectStyles(elementStyleString)
+        return Object.entries(styles).every(([key, value]) => elementStyles[key] === value)
+      })() : true
+
+      return hasSameTag && hasSameStyles
     }
 
     function findFormattedElement (format: Formatter): Element | null {
-      const result = getCurrentSelection()
-      if (!result) return null
-
-      let element = getSelectionContainer(result.range)
+      let element = getSelectionContainer()
       if (!element) return null
 
       while (element && element !== editorRef.value) {
@@ -383,7 +458,7 @@ export const VEditor = genericComponent<VEditorSlots>()({
     }
 
     function getFragmentBeforeCaret (element: Element) {
-      const selectionResult = getCurrentSelection()
+      const selectionResult = getSelection()
       if (!selectionResult) return
       const { range } = selectionResult
 
@@ -396,7 +471,7 @@ export const VEditor = genericComponent<VEditorSlots>()({
     }
 
     function getFragmentAfterCaret (element: Element) {
-      const selectionResult = getCurrentSelection()
+      const selectionResult = getSelection()
       if (!selectionResult) return
       const { range } = selectionResult
 
@@ -409,7 +484,7 @@ export const VEditor = genericComponent<VEditorSlots>()({
     }
 
     function getFragmentAfterSelection (element: Element) {
-      const selectionResult = getCurrentSelection()
+      const selectionResult = getSelection()
       if (!selectionResult) return
       const { range } = selectionResult
 
@@ -422,7 +497,7 @@ export const VEditor = genericComponent<VEditorSlots>()({
     }
 
     function getFragmentInsideSelection () {
-      const selectionResult = getCurrentSelection()
+      const selectionResult = getSelection()
       if (!selectionResult) return
       const { range } = selectionResult
 
@@ -433,7 +508,7 @@ export const VEditor = genericComponent<VEditorSlots>()({
     }
 
     function getMiddleFragment (element: Element) {
-      const selectionResult = getCurrentSelection()
+      const selectionResult = getSelection()
       if (!selectionResult) return
       const { range } = selectionResult
 
@@ -470,19 +545,26 @@ export const VEditor = genericComponent<VEditorSlots>()({
     function applyFormat (format: Formatter) {
       if (format.category === FormatCategory.Heading) {
         applyHeadingFormat(format)
+      } else if (format.category === FormatCategory.Alignment) {
+        applyAlignmentFormat(format)
       } else {
-        const formattedElement = findFormattedElement(format)
-        if (formattedElement) {
-          removeFormat(formattedElement)
-        } else {
-          addFormat(format)
-        }
+        applyInlineFormat(format)
+      }
+    }
+
+    function applyInlineFormat (format: Formatter) {
+      const formattedElement = findFormattedElement(format)
+      if (formattedElement) {
+        removeFormat(formattedElement)
+      } else {
+        addFormat(format)
       }
     }
 
     function applyHeadingFormat (format: Formatter) {
       const currentBlockElement = getCurrentBlockElement()
-      const isCurrentBlockHeading = currentBlockElement?.tagName.toLowerCase().startsWith('h')
+      const currentBlockTag = currentBlockElement?.tagName.toLowerCase()
+      const isCurrentBlockHeadingOrDiv = currentBlockTag?.startsWith('h') || currentBlockTag === 'div'
 
       preserveCaretPosition(() => {
         if (!editorRef.value) return
@@ -490,8 +572,8 @@ export const VEditor = genericComponent<VEditorSlots>()({
         if (!currentBlockElement) {
           formatContent(editorRef.value, format)
         } else if (hasSameFormatting(currentBlockElement, format)) {
-          unwrapElement(currentBlockElement)
-        } else if (isCurrentBlockHeading) {
+          replaceFormat(currentBlockElement, blockFormatter)
+        } else if (isCurrentBlockHeadingOrDiv) {
           replaceFormat(currentBlockElement, format)
         } else {
           formatContent(currentBlockElement, format)
@@ -502,18 +584,55 @@ export const VEditor = genericComponent<VEditorSlots>()({
       updateActiveStates()
     }
 
+    function applyAlignmentFormat (format: Formatter) {
+      const blockElement = getCurrentBlockElement()
+      const targetStyles = format.config.styles
+      const targetAlignment = targetStyles?.textAlign
+
+      if (!targetAlignment) return
+
+      if (!blockElement) {
+        preserveCaretPosition(() => {
+          if (!editorRef.value) return
+          formatContent(editorRef.value, format)
+        })
+      } else {
+        const currentStyleString = blockElement.getAttribute('style') || ''
+        const currentStyles = getObjectStyles(currentStyleString)
+        const currentAlignment = currentStyles.textAlign
+
+        if (currentAlignment === targetAlignment) {
+          const newStyles = omit(currentStyles, ['textAlign'])
+          const newStyleString = getStringStyles(newStyles)
+
+          if (newStyleString) {
+            blockElement.setAttribute('style', newStyleString)
+          } else {
+            blockElement.removeAttribute('style')
+          }
+        } else {
+          const newStyles = { ...currentStyles, textAlign: targetAlignment }
+          const newStyleString = getStringStyles(newStyles)
+          blockElement.setAttribute('style', newStyleString)
+        }
+      }
+
+      updateModel()
+      updateActiveStates()
+    }
+
     function addFormat (format: Formatter) {
       if (!editorRef.value || props.readonly || props.disabled) return
 
       editorRef.value?.focus()
 
-      const newElement = getFormatter(format)
-      surroundSelectionRange(newElement)
+      const formatter = getFormatterElement(format)
+      surroundSelectionRange(formatter)
 
-      selectNode(newElement)
+      selectNode(formatter)
 
       if (!hasSelection()) {
-        placeCursorInsideElement(newElement)
+        placeCursorInsideElement(formatter)
       }
 
       updateModel()
@@ -539,7 +658,7 @@ export const VEditor = genericComponent<VEditorSlots>()({
     }
 
     function surroundSelectionRange (element: Element) {
-      const result = getCurrentSelection()
+      const result = getSelection()
       if (!result) return
 
       const { range } = result
@@ -554,7 +673,7 @@ export const VEditor = genericComponent<VEditorSlots>()({
     }
 
     function getCurrentBlockElement () {
-      const selectionResult = getCurrentSelection()
+      const selectionResult = getSelection()
       if (!selectionResult) return null
 
       let node = selectionResult.selection.anchorNode
@@ -581,15 +700,24 @@ export const VEditor = genericComponent<VEditorSlots>()({
     }
 
     function replaceFormat (element: Element, format: Formatter) {
-      const formatter = getFormatter(format)
-      while (element.firstChild) {
-        formatter.appendChild(element.firstChild)
+      const formatter = getFormatterElement(format)
+      replaceElement(element, formatter)
+    }
+
+    function replaceElement (element: Element, newElement: Element) {
+      const attributes = element.attributes
+      for (const attribute of attributes) {
+        newElement.setAttribute(attribute.name, attribute.value)
       }
-      element.parentNode?.replaceChild(formatter, element)
+
+      while (element.firstChild) {
+        newElement.appendChild(element.firstChild)
+      }
+      element.parentNode?.replaceChild(newElement, element)
     }
 
     function formatContent (element: Element, format: Formatter) {
-      const formatter = getFormatter(format)
+      const formatter = getFormatterElement(format)
 
       while (element.firstChild) {
         formatter.appendChild(element.firstChild)
@@ -659,13 +787,11 @@ export const VEditor = genericComponent<VEditorSlots>()({
 
       selectNode(middle.firstChild || middle)
       focusAtSelection()
-      updateModel()
-      updateActiveStates()
     }
 
     function preserveCaretPosition (callback: () => void) {
       const textNode = document.createTextNode(zeroWidthSpace)
-      getCurrentSelection()?.range.insertNode(textNode)
+      getSelection()?.range.insertNode(textNode)
 
       callback()
 
@@ -775,7 +901,7 @@ export const VEditor = genericComponent<VEditorSlots>()({
                       >
                         <div
                           ref={ editorRef }
-                          class={ `v-editor px-4 ${hasToolbar ? 'py-0' : 'py-4'}` }
+                          class={ `v-editor px-4 mb-2 ${hasToolbar ? 'py-0' : 'py-4'}` }
                           contenteditable={ !isReadonly.value && !isDisabled.value }
                           onFocus={ onFocus }
                           onBlur={ blur }
