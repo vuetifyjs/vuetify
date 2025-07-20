@@ -257,6 +257,28 @@ export const VEditor = genericComponent<VEditorSlots>()({
       updateActiveStates()
     }
 
+    function onKeyDown (e: KeyboardEvent) {
+      if (e.ctrlKey || e.metaKey) {
+        switch (e.key.toLowerCase()) {
+          case 'b':
+            e.preventDefault()
+            const boldFormat = formats.find(f => f.name === Formats.Bold)
+            if (boldFormat) toggleFormat(boldFormat)
+            break
+          case 'i':
+            e.preventDefault()
+            const italicFormat = formats.find(f => f.name === Formats.Italic)
+            if (italicFormat) toggleFormat(italicFormat)
+            break
+          case 'u':
+            e.preventDefault()
+            const underlineFormat = formats.find(f => f.name === Formats.Underline)
+            if (underlineFormat) toggleFormat(underlineFormat)
+            break
+        }
+      }
+    }
+
     function onMouseUp () {
       updateActiveStates()
     }
@@ -743,6 +765,7 @@ export const VEditor = genericComponent<VEditorSlots>()({
       if (editorRef.value) {
         updateEditorInnerHTML(model.value || '')
         editorRef.value.addEventListener('keyup', onKeyUp)
+        editorRef.value.addEventListener('keydown', onKeyDown)
         editorRef.value.addEventListener('mouseup', onMouseUp)
       }
     })
@@ -750,6 +773,7 @@ export const VEditor = genericComponent<VEditorSlots>()({
     onBeforeUnmount(() => {
       if (editorRef.value) {
         editorRef.value.removeEventListener('keyup', onKeyUp)
+        editorRef.value.removeEventListener('keydown', onKeyDown)
         editorRef.value.removeEventListener('mouseup', onMouseUp)
       }
     })
@@ -781,6 +805,7 @@ export const VEditor = genericComponent<VEditorSlots>()({
               reset,
             }) => (
               <VField
+                class="v-editor__field"
                 ref={ vFieldRef }
                 onClick={ onControlClick }
                 onMousedown={ onControlMousedown }
