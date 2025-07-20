@@ -9,6 +9,7 @@ import { VSheet } from '@/components/VSheet/VSheet'
 import { VToolbar } from '@/components/VToolbar/VToolbar'
 
 // Composables
+import { useSelection } from './utils'
 import { useFocus } from '@/composables/focus'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { useProxiedModel } from '@/composables/proxiedModel'
@@ -61,7 +62,7 @@ type Formatter = {
 
 const blockFormatter: Formatter = {
   name: Formats.Block,
-  icon: 'mdi-format-default',
+  icon: '',
   config: { tag: 'div' },
 }
 
@@ -231,6 +232,7 @@ export const VEditor = genericComponent<VEditorSlots>()({
     )
 
     const { isFocused, focus, blur } = useFocus(props)
+    const selection = useSelection(editorRef)
 
     const vFieldRef = ref<VField>()
     const vInputRef = ref<VInput>()
@@ -329,80 +331,11 @@ export const VEditor = genericComponent<VEditorSlots>()({
         .join('; ')
     }
 
-    function getSelection () {
-      if (!editorRef.value) return null
-
-      const selection = window.getSelection()
-      if (!selection || selection.rangeCount === 0) return null
-
-      const range = selection.getRangeAt(0)
-
-      if (!editorRef.value.contains(range.commonAncestorContainer)) return null
-
-      return { selection, range }
-    }
-
-    function getSelectionContainer (): Element | null {
-      const result = getSelection()
-      if (!result) return null
-
-      const commonAncestor = result.range.commonAncestorContainer
-
-      const container = commonAncestor.nodeType === Node.TEXT_NODE
-        ? commonAncestor.parentNode
-        : commonAncestor
-
-      return container && container.nodeType === Node.ELEMENT_NODE
-        ? container as Element
-        : null
-    }
-
-    function hasSelection () {
-      const selection = getSelection()?.selection
-
-      if (!selection) return false
-      return !selection.isCollapsed && selection.toString() !== zeroWidthSpace
-    }
-
-    function selectNode (element: Node) {
-      selectBetweenNodes(element)
-    }
-
-    function selectBetweenNodes (start: Node, end?: Node | null) {
-      const selection = window.getSelection()
-      if (!selection) return
-
-      const range = document.createRange()
-
-      if (!end) {
-        range.selectNodeContents(start)
-      } else {
-        range.setStart(start, 0)
-        if (end.nodeType === Node.ELEMENT_NODE) {
-          range.setEnd(end, end.childNodes.length)
-        } else {
-          range.setEnd(end, end.textContent?.length || 0)
-        }
-      }
-
-      selection.removeAllRanges()
-      selection.addRange(range)
-    }
-
-    function placeCursorInsideElement (element: Node) {
+    function placeCursorInsideNode (node: Node) {
       const textNode = document.createTextNode(zeroWidthSpace)
-      element.appendChild(textNode)
-      selectNode(textNode)
-      focusAtSelection()
-    }
-
-    function focusAtSelection () {
-      const selectionResult = getSelection()
-      if (!selectionResult) return
-
-      selectionResult.range.collapse(false)
-      selectionResult.selection.removeAllRanges()
-      selectionResult.selection.addRange(selectionResult.range)
+      node.appendChild(textNode)
+      selection.select(textNode)
+      selection.focus()
     }
 
     function getFormatterElement (format: Formatter) {
@@ -432,7 +365,7 @@ export const VEditor = genericComponent<VEditorSlots>()({
     }
 
     function findFormattedElement (format: Formatter): Element | null {
-      let element = getSelectionContainer()
+      let element = selection.getContainer()
       if (!element) return null
 
       while (element && element !== editorRef.value) {
@@ -445,7 +378,13 @@ export const VEditor = genericComponent<VEditorSlots>()({
       return null
     }
 
-    function isEmptyFragment (fragment: DocumentFragment): boolean {
+    function wrapBySpan (node: Node) {
+      const span = document.createElement('span')
+      span.appendChild(node)
+      return span
+    }
+
+    function isEmptyNode (fragment: Node): boolean {
       for (const node of fragment.childNodes) {
         if (node.nodeType === Node.TEXT_NODE || node.nodeType === Node.ELEMENT_NODE) {
           const content = (node.nodeType === Node.ELEMENT_NODE ? (node as Element) : node).textContent
@@ -457,9 +396,9 @@ export const VEditor = genericComponent<VEditorSlots>()({
       return true
     }
 
-    function getFragmentBeforeCaret (element: Element) {
-      const selectionResult = getSelection()
-      if (!selectionResult) return
+    function getFragmentBeforeCaret (element: Element): Node | null {
+      const selectionResult = selection.get()
+      if (!selectionResult) return null
       const { range } = selectionResult
 
       const beforeRange = range.cloneRange()
@@ -467,12 +406,12 @@ export const VEditor = genericComponent<VEditorSlots>()({
       beforeRange.setEnd(range.startContainer, range.startOffset)
       const fragment = beforeRange.cloneContents()
 
-      return isEmptyFragment(fragment) ? null : fragment
+      return isEmptyNode(fragment) ? null : fragment
     }
 
-    function getFragmentAfterCaret (element: Element) {
-      const selectionResult = getSelection()
-      if (!selectionResult) return
+    function getFragmentAfterCaret (element: Element): Node | null {
+      const selectionResult = selection.get()
+      if (!selectionResult) return null
       const { range } = selectionResult
 
       const afterRange = range.cloneRange()
@@ -480,12 +419,12 @@ export const VEditor = genericComponent<VEditorSlots>()({
       afterRange.setEndAfter(element)
 
       const fragment = afterRange.cloneContents()
-      return isEmptyFragment(fragment) ? null : fragment
+      return isEmptyNode(fragment) ? null : fragment
     }
 
-    function getFragmentAfterSelection (element: Element) {
-      const selectionResult = getSelection()
-      if (!selectionResult) return
+    function getFragmentAfterSelection (element: Element): Node | null {
+      const selectionResult = selection.get()
+      if (!selectionResult) return null
       const { range } = selectionResult
 
       const afterRange = range.cloneRange()
@@ -493,23 +432,23 @@ export const VEditor = genericComponent<VEditorSlots>()({
       afterRange.setEndAfter(element)
 
       const fragment = afterRange.cloneContents()
-      return isEmptyFragment(fragment) ? null : fragment
+      return isEmptyNode(fragment) ? null : fragment
     }
 
-    function getFragmentInsideSelection () {
-      const selectionResult = getSelection()
-      if (!selectionResult) return
+    function getContentInsideSelection (): Node | null {
+      const selectionResult = selection.get()
+      if (!selectionResult) return null
       const { range } = selectionResult
 
       if (range.collapsed) return null
 
-      const fragment = range.cloneContents()
-      return isEmptyFragment(fragment) ? null : fragment
+      const contents = range.cloneContents()
+      return isEmptyNode(contents) ? null : wrapBySpan(contents)
     }
 
-    function getMiddleFragment (element: Element) {
-      const selectionResult = getSelection()
-      if (!selectionResult) return
+    function getUnFormattedFragment (element: Element): Node | null {
+      const selectionResult = selection.get()
+      if (!selectionResult) return null
       const { range } = selectionResult
 
       const remainingFormatStack: HTMLElement[] = []
@@ -629,10 +568,10 @@ export const VEditor = genericComponent<VEditorSlots>()({
       const formatter = getFormatterElement(format)
       surroundSelectionRange(formatter)
 
-      selectNode(formatter)
+      selection.select(formatter)
 
-      if (!hasSelection()) {
-        placeCursorInsideElement(formatter)
+      if (!selection.hasText()) {
+        placeCursorInsideNode(formatter)
       }
 
       updateModel()
@@ -642,11 +581,11 @@ export const VEditor = genericComponent<VEditorSlots>()({
     function removeFormat (element: Element) {
       if (!editorRef.value || props.readonly || props.disabled) return
 
-      const isElementEmpty = element.innerHTML.replace(/\u200B/g, '').trim() === ''
+      const isElementEmpty = isEmptyNode(element)
 
       if (isElementEmpty) {
         removeElement(element)
-      } else if (hasSelection()) {
+      } else if (selection.hasText()) {
         unwrapSelection(element)
       } else {
         splitFormattingAtCaret(element)
@@ -658,7 +597,7 @@ export const VEditor = genericComponent<VEditorSlots>()({
     }
 
     function surroundSelectionRange (element: Element) {
-      const result = getSelection()
+      const result = selection.get()
       if (!result) return
 
       const { range } = result
@@ -673,7 +612,7 @@ export const VEditor = genericComponent<VEditorSlots>()({
     }
 
     function getCurrentBlockElement () {
-      const selectionResult = getSelection()
+      const selectionResult = selection.get()
       if (!selectionResult) return null
 
       let node = selectionResult.selection.anchorNode
@@ -749,24 +688,24 @@ export const VEditor = genericComponent<VEditorSlots>()({
 
       const emptyFragment = document.createTextNode(zeroWidthSpace)
 
-      const selectionFragment = getFragmentInsideSelection()
+      const selectedContent = getContentInsideSelection()
       const beforeFragment = getFragmentBeforeCaret(element)
       const afterFragment = getFragmentAfterSelection(element)
 
-      if (!selectionFragment) {
+      if (!selectedContent) {
         return
       }
 
       if (!beforeFragment && !afterFragment) {
         unwrapElement(element)
-        selectBetweenNodes(firstChild, lastChild)
+        selection.selectBetween(firstChild, lastChild)
       } else {
         parent.insertBefore(beforeFragment || emptyFragment, element)
-        parent.insertBefore(selectionFragment, element)
+        parent.insertBefore(selectedContent, element)
         parent.insertBefore(afterFragment || emptyFragment, element)
         parent.removeChild(element)
 
-        selectNode(selectionFragment)
+        selection.select(selectedContent)
       }
     }
 
@@ -778,25 +717,25 @@ export const VEditor = genericComponent<VEditorSlots>()({
 
       const beforeFragment = getFragmentBeforeCaret(element) || emptyFragment
       const afterFragment = getFragmentAfterCaret(element) || emptyFragment
-      const middle = getMiddleFragment(element) || emptyFragment
+      const middle = getUnFormattedFragment(element) || emptyFragment
 
       parent.insertBefore(beforeFragment, element)
       parent.insertBefore(middle, element)
       parent.insertBefore(afterFragment, element)
       parent.removeChild(element)
 
-      selectNode(middle.firstChild || middle)
-      focusAtSelection()
+      selection.select(middle.firstChild || middle)
+      selection.focus()
     }
 
     function preserveCaretPosition (callback: () => void) {
       const textNode = document.createTextNode(zeroWidthSpace)
-      getSelection()?.range.insertNode(textNode)
+      selection.get()?.range.insertNode(textNode)
 
       callback()
 
-      selectNode(textNode)
-      focusAtSelection()
+      selection.select(textNode)
+      selection.focus()
     }
 
     watch(() => props.modelValue, newVal => {
