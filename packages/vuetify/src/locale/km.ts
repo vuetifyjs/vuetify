@@ -46,6 +46,8 @@ export default {
     input: {
       placeholder: 'បញ្ចូលកាលបរិច្ឆេទ',
     },
+    weekSelected: 'Week {0}, {1}',
+    weekTitle: 'Select week',
   },
   noDataText: 'គ្មានទិន្នន័យដែលមាន',
   carousel: {

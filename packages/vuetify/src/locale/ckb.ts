@@ -46,6 +46,8 @@ export default {
     input: {
       placeholder: 'بەروار بنووسە',
     },
+    weekSelected: 'Week {0}, {1}',
+    weekTitle: 'Select week',
   },
   noDataText: 'هیچ داتایەک بەردەست نیە',
   carousel: {
