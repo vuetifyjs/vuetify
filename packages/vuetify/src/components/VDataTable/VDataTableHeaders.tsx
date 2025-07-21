@@ -55,6 +55,7 @@ export type VDataTableHeadersSlots = {
   loader: LoaderSlotProps
   'header.data-table-select': VDataTableHeaderCellColumnSlotProps
   'header.data-table-expand': VDataTableHeaderCellColumnSlotProps
+  'mobile.header': HeadersSlotProps
 } & { [key: `header.${string}`]: VDataTableHeaderCellColumnSlotProps }
 
 export const makeVDataTableHeadersProps = propsFactory({
@@ -258,42 +259,46 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
           { ...props.headerProps }
         >
           <div class="v-data-table-header__content">
-            <VSelect
-              chips
-              class="v-data-table__td-sort-select"
-              clearable
-              density="default"
-              items={ displayItems.value }
-              label={ t('$vuetify.dataTable.sortBy') }
-              multiple={ props.multiSort }
-              variant="underlined"
-              onClick:clear={ () => sortBy.value = [] }
-              appendIcon={ appendIcon.value }
-              onClick:append={ () => selectAll(!allSelected.value) }
-            >
-              {{
-                ...slots,
-                chip: props => (
-                  <VChip
-                    onClick={ props.item.raw?.sortable ? () => toggleSort(props.item.raw) : undefined }
-                    onMousedown={ (e: MouseEvent) => {
-                      e.preventDefault()
-                      e.stopPropagation()
-                    }}
-                  >
-                    { props.item.title }
-                    <VIcon
-                      class={[
-                        'v-data-table__td-sort-icon',
-                        isSorted(props.item.raw) && 'v-data-table__td-sort-icon-active',
-                      ]}
-                      icon={ getSortIcon(props.item.raw) }
-                      size="small"
-                    />
-                  </VChip>
-                ),
-              }}
-            </VSelect>
+            { slots['mobile.header']?.(slotProps.value) ??
+              (displayItems.value.length > 0 && (
+              <VSelect
+                chips
+                class="v-data-table__td-sort-select"
+                clearable
+                density="default"
+                items={ displayItems.value }
+                aria-label={ t('$vuetify.dataTable.sortBy') }
+                label={ t('$vuetify.dataTable.sortBy') }
+                multiple={ props.multiSort }
+                variant="underlined"
+                onClick:clear={ () => sortBy.value = [] }
+                appendIcon={ appendIcon.value }
+                onClick:append={ () => selectAll(!allSelected.value) }
+              >
+                {{
+                  ...slots,
+                  chip: props => (
+                    <VChip
+                      onClick={ props.item.raw?.sortable ? () => toggleSort(props.item.raw) : undefined }
+                      onMousedown={ (e: MouseEvent) => {
+                        e.preventDefault()
+                        e.stopPropagation()
+                      }}
+                    >
+                      { props.item.title }
+                      <VIcon
+                        class={[
+                          'v-data-table__td-sort-icon',
+                          isSorted(props.item.raw) && 'v-data-table__td-sort-icon-active',
+                        ]}
+                        icon={ getSortIcon(props.item.raw) }
+                        size="small"
+                      />
+                    </VChip>
+                  ),
+                }}
+              </VSelect>
+            ))}
           </div>
         </VDataTableColumn>
       )
