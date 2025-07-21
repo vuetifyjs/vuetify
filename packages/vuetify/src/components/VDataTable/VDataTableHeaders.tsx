@@ -171,6 +171,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
           rowspan={ column.rowspan }
           fixed={ column.fixed }
           nowrap={ column.nowrap }
+          hidden={ column.hidden }
           lastFixed={ column.lastFixed }
           firstFixedEnd={ column.firstFixedEnd }
           noPadding={ noPadding }

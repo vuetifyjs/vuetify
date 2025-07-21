@@ -24,6 +24,7 @@ export const VDataTableColumn = defineFunctionalComponent({
   width: [Number, String],
   maxWidth: [Number, String],
   nowrap: Boolean,
+  hidden: Boolean,
 }, (props, { slots }) => {
   const Tag = props.tag ?? 'td'
 
@@ -42,6 +43,7 @@ export const VDataTableColumn = defineFunctionalComponent({
           'v-data-table-column--first-fixed-end': props.firstFixedEnd,
           'v-data-table-column--no-padding': props.noPadding,
           'v-data-table-column--nowrap': props.nowrap,
+          'v-data-table-column--hidden': props.hidden,
         },
         `v-data-table-column--align-${props.align}`,
       ]}
