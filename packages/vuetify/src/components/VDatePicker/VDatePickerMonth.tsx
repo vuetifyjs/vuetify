@@ -122,14 +122,9 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
     }
 
     function getDateAriaLabel (item: any) {
-      // Format the date in a more accessible way using the built-in formats
-      const fullDateFormat = adapter.format(item.date, 'fullDateWithWeekday')
-
-      if (item.isToday) {
-        return t('$vuetify.datePicker.ariaLabel.currentDate', fullDateFormat)
-      }
-
-      return t('$vuetify.datePicker.ariaLabel.selectDate', fullDateFormat)
+      const fullDate = adapter.format(item.date, 'fullDateWithWeekday')
+      const localeKey = item.isToday ? 'currentDate' : 'selectDate'
+      return t(`$vuetify.datePicker.ariaLabel.${localeKey}`, fullDate)
     }
 
     function onMultipleClick (value: unknown) {
