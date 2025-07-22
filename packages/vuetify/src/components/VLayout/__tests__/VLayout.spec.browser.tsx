@@ -7,7 +7,6 @@ import { VNavigationDrawer } from '@/components/VNavigationDrawer'
 // Utilities
 import { page, render, screen, scroll, wait } from '@test'
 import { ref } from 'vue'
-import { createRange } from '@/util'
 
 describe('VLayout', () => {
   it('should position main component', async () => {
@@ -25,50 +24,54 @@ describe('VLayout', () => {
     expect(screen.getByCSS('.v-main')).toHaveStyle({ paddingTop: '64px', paddingLeft: '200px' })
   })
 
-  it.skip('should work with sticky elements', async () => {
+  it('should work with sticky elements', async () => {
     render(() => (
       <VLayout>
         <VAppBar height="64" />
         <VNavigationDrawer width="200" permanent />
         <VMain>
           <div>
-            { createRange(10).map(_ => <div>hello</div>) }
-            <nav style="position: sticky; top: var(--v-layout-top); background: grey">Sticky Header</nav>
-            { createRange(100).map(_ => <div>hello</div>) }
+            <div style="height: 200px"></div>
+            <nav
+              data-testid="sticky"
+              style="position: sticky; top: var(--v-layout-top); background: grey"
+            >
+              Sticky Header
+            </nav>
+            <div style="height: 2000px"></div>
           </div>
         </VMain>
       </VLayout>
     ))
 
     await scroll({ top: 1000 })
-
-    // TODO: figure out how to make it work
-    expect(screen.getByCSS('nav')).toBeVisible()
+    await expect(screen.getByTestId('sticky')).toBeOnScreen()
   })
 
-  it.skip('should work with scrollable main', async () => {
+  it('should work with scrollable main', async () => {
     render(() => (
       <VLayout>
         <VAppBar height="64" />
         <VNavigationDrawer width="200" permanent />
         <VMain scrollable>
           <div>
-            { createRange(10).map(_ => <div>hello</div>) }
-            <nav style="position: sticky; top: 0px; background: grey">Sticky Header</nav>
-            { createRange(100).map(_ => <div>hello</div>) }
+            <div style="height: 200px"></div>
+            <nav
+              data-testid="sticky"
+              style="position: sticky; top: 0px; background: grey"
+            >Sticky Header</nav>
+            <div style="height: 2000px"></div>
           </div>
         </VMain>
       </VLayout>
     ))
 
     await scroll({ top: 1000 }, screen.getByCSS('.v-main__scroller'))
-
-    // TODO: figure out how to make it work
-    expect(screen.getByCSS('nav')).toBeVisible()
+    await expect(screen.getByTestId('sticky')).toBeOnScreen()
   })
 
-  it.skip('should work when nested inside another layout', () => {
-    page.viewport(600, 600)
+  it.todo('should work when nested inside another layout', async () => {
+    await page.viewport(600, 600)
 
     const drawer = ref(false)
     render(() => (
@@ -87,10 +90,10 @@ describe('VLayout', () => {
 
     const nestedNav = screen.getByCSS('#nested .v-navigation-drawer')
 
-    // TODO: figure out how to make it work
-    expect(nestedNav).not.toBeVisible()
+    // TODO: this only checks bounding boxes not clipping
+    await expect(nestedNav).not.toBeOnScreen()
 
     drawer.value = true
-    expect(nestedNav).toBeVisible()
+    await expect(nestedNav).toBeOnScreen()
   })
 })
