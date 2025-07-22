@@ -22,12 +22,12 @@ const stories = {
 }
 
 describe('VNavigationDrawer', () => {
-  beforeEach(() => {
-    page.viewport(1280, 768)
+  beforeEach(async () => {
+    await page.viewport(1280, 768)
   })
 
   it('should open when changed to permanent on mobile', async () => {
-    page.viewport(400, 800)
+    await page.viewport(400, 800)
     const permanent = ref(false)
     render(() => (
       <VLayout>
@@ -101,14 +101,14 @@ describe('VNavigationDrawer', () => {
 
     expect(drawer).toHaveClass('v-navigation-drawer--active')
 
-    page.viewport(400, 800)
+    await page.viewport(400, 800)
 
     await commands.waitStable('.v-navigation-drawer')
     expect(drawer).not.toHaveClass('v-navigation-drawer--active')
   })
 
   it('should not hide drawer if window resizes below mobile breakpoint and disable-resize-watcher is used', async () => {
-    page.viewport(1200, 800)
+    await page.viewport(1280, 800)
     render(() => (
       <VLayout>
         <VNavigationDrawer disableResizeWatcher />
@@ -116,7 +116,7 @@ describe('VNavigationDrawer', () => {
     ))
 
     expect(screen.getByCSS('.v-navigation-drawer')).toHaveClass('v-navigation-drawer--active')
-    page.viewport(400, 800)
+    await page.viewport(400, 800)
     await commands.waitStable('.v-navigation-drawer')
     expect(screen.getByCSS('.v-navigation-drawer')).toHaveClass('v-navigation-drawer--active')
   })
@@ -129,7 +129,7 @@ describe('VNavigationDrawer', () => {
     ))
 
     expect(screen.getByCSS('.v-navigation-drawer')).toHaveClass('v-navigation-drawer--active')
-    page.viewport(400, 800)
+    await page.viewport(400, 800)
     await commands.waitStable('.v-navigation-drawer')
     expect(screen.getByCSS('.v-navigation-drawer')).toHaveClass('v-navigation-drawer--active')
     expect(screen.getByCSS('.v-navigation-drawer')).not.toHaveClass('v-navigation-drawer--temporary')
