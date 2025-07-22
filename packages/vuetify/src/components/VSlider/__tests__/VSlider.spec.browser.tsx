@@ -10,11 +10,19 @@ const stories = {
   'With icons': <VSlider prependIcon="$vuetify" appendIcon="$vuetify" />,
   'With messages': <VSlider messages="This is a message" />,
   Disabled: <VSlider disabled />,
-  Vertical: <VSlider direction="vertical" />,
   Ticks: (
     <>
       <VSlider ticks={[0, 2, 8, 10]} min="0" max="10" step="1" showTicks="always" />
       <VSlider ticks={{ 0: 'a', 5: 'b', 10: 'c' }} min="0" max="10" step="1" showTicks="always" />
+    </>
+  ),
+  Vertical: (
+    <>
+      <VSlider direction="vertical" thumbLabel="always" />
+      <VSlider direction="vertical" prependIcon="$vuetify" appendIcon="$vuetify" />
+      <VSlider direction="vertical" messages="This is a message" />
+      <VSlider direction="vertical" ticks={[0, 2, 8, 10]} min="0" max="10" step="1" showTicks="always" />
+      <VSlider direction="vertical" ticks={{ 0: 'a', 5: 'b', 10: 'c' }} min="0" max="10" step="1" showTicks="always" />
     </>
   ),
 }
