@@ -21,8 +21,8 @@ const stories = {
     </VWindow>
   ),
   'With arrows': (
-    <VWindow>
-      <VWindowItem showArrows>
+    <VWindow showArrows>
+      <VWindowItem>
         <div class="bg-grey d-flex justify-center align-center">
           <h1>1. foo</h1>
         </div>
@@ -166,7 +166,7 @@ describe('VWindow', () => {
   })
 
   it('should support touch control', async () => {
-    page.viewport(500, 300)
+    await page.viewport(500, 300)
 
     render(() => (
       <VWindow>
@@ -222,7 +222,7 @@ describe('VWindow', () => {
   })
 
   it('should disable touch support', async () => {
-    page.viewport(500, 300)
+    await page.viewport(500, 300)
 
     render(() => (
       <VWindow touch={ false }>
