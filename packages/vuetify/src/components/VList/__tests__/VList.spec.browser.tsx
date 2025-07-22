@@ -10,6 +10,7 @@ const FAKE_ROUTES = [
   { path: '/', component: { template: 'Home' } },
   { path: '/about', component: { template: 'About' } },
   { path: '/other', component: { template: 'Other' } },
+  { path: '/__vitest_test__/:path(.*)', component: { template: 'Test' } },
 ]
 
 const NESTED_ITEMS = [
@@ -54,7 +55,7 @@ const stories = {
 }
 
 describe('VList', () => {
-  it.skip('should set active item on route change', () => {
+  it('should set active item on route change', async () => {
     const router = createRouter({
       history: createWebHistory(),
       routes: FAKE_ROUTES,
@@ -71,12 +72,12 @@ describe('VList', () => {
       },
     })
 
-    router.push('/about')
+    await router.push('/about')
 
     expect(screen.getAllByCSS('.v-list-item')[1]).toHaveClass('v-list-item--active')
   })
 
-  it.skip('should change route when clicking item with to prop', async () => {
+  it('should change route when clicking item with to prop', async () => {
     const router = createRouter({
       history: createWebHistory(),
       routes: FAKE_ROUTES,
@@ -95,16 +96,15 @@ describe('VList', () => {
 
     await userEvent.click(screen.getAllByCSS('.v-list-item')[1])
 
-    expect(router.currentRoute.value.path).to.equal('/about')
+    expect(router.currentRoute.value.path).toBe('/about')
   })
 
-  it.skip('should deselect v-list-item if route changes externally', async () => {
+  it('should deselect v-list-item if route changes externally', async () => {
     const router = createRouter({
       history: createWebHistory(),
       routes: FAKE_ROUTES,
     })
 
-    // eslint-disable-next-line sonarjs/no-identical-functions
     render(() => (
       <VList>
         <VListItem to="/" title="Home" />
@@ -117,12 +117,14 @@ describe('VList', () => {
     })
 
     await userEvent.click(screen.getAllByCSS('.v-list-item')[1])
+
+    await router.isReady()
 
     expect(screen.getAllByCSS('.v-list-item')[1]).toHaveClass('v-list-item--active')
 
     expect(router.currentRoute.value.path).toBe('/about')
 
-    router.push('/other')
+    await router.push('/other')
 
     expect(screen.getAllByCSS('.v-list-item')[1]).not.toHaveClass('v-list-item--active')
   })
