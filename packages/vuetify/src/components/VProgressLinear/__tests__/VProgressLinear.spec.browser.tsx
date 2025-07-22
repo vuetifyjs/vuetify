@@ -7,11 +7,9 @@ import { generate, render, screen, userEvent, wait } from '@test'
 import { ref } from 'vue'
 
 const stories = {
-  Indeterminate: <VProgressLinear indeterminate />,
   'With value': <VProgressLinear modelValue="25" />,
   'With height': <VProgressLinear modelValue="25" height="50" />,
   'With reverse': <VProgressLinear modelValue="25" reverse />,
-  'With buffer and stream': <VProgressLinear bufferValue="50" modelValue="25" stream />,
   'With rtl': (
     <VLocaleProvider rtl>
       <VProgressLinear modelValue="25" />
@@ -27,7 +25,7 @@ const stories = {
   'With slot': (
     <VProgressLinear modelValue="25" height="20">
       {{
-        default: (props: any) => <div>{ props.value }%</div>,
+        default: props => <div>{ props.value }%</div>,
       }}
     </VProgressLinear>
   ),
