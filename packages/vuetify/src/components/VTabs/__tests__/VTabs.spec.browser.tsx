@@ -53,12 +53,13 @@ describe('VTabs', () => {
     expect(screen.getAllByCSS('.v-tab')[1]).toHaveClass('v-tab--selected')
   })
 
-  it.skip('should react to router changes', async () => {
+  it('should react to router changes', async () => {
     const router = createRouter({
       history: createWebHistory(),
       routes: [
         { path: '/', component: { template: 'Home' } },
         { path: '/about', component: { template: 'About' } },
+        { path: '/__vitest_test__/:path(.*)', component: { template: 'Test' } },
       ],
     })
 
@@ -77,7 +78,7 @@ describe('VTabs', () => {
 
     expect(router.currentRoute.value.path).toBe('/about')
 
-    router.push('/')
+    await router.push('/')
 
     expect(screen.getAllByCSS('.v-tab')[0]).not.toHaveClass('v-tab--selected')
     expect(screen.getAllByCSS('.v-tab')[1]).toHaveClass('v-tab--selected')
