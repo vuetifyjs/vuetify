@@ -225,7 +225,7 @@ type MaybePick<
 export function pick<
   T extends object,
   U extends Extract<keyof T, string>
-> (obj: T, paths: U[]): MaybePick<T, U> {
+> (obj: T, paths: readonly U[]): MaybePick<T, U> {
   const found: any = {}
 
   for (const key of paths) {

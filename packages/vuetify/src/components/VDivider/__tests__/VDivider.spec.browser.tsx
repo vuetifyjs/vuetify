@@ -1,37 +1,32 @@
-/// <reference types="../../../../types/cypress" />
+import { VDivider } from '../VDivider'
 
-import { VDivider } from '..'
-import { VList, VListItem } from '../../VList'
-import { VCard } from '../../VCard'
-import { VToolbar } from '../../VToolbar'
-import { VBtn } from '../../VBtn'
-import { VCol, VRow, VSpacer } from '../../VGrid'
+// Components
+import { VBtn } from '@/components/VBtn'
+import { VCard } from '@/components/VCard'
+import { VCol, VRow, VSpacer } from '@/components/VGrid'
+import { VList, VListItem } from '@/components/VList'
+import { VToolbar } from '@/components/VToolbar'
 
-// Tests
+// Utilities
+import { render, screen } from '@test'
+
 describe('VDivider', () => {
   describe('examples in documentation', () => {
     it('takes full height in flexbox container with static height', () => {
-      cy.mount(() => (
-        <>
-          <div
-            class="ma-2 d-flex align-center justify-center bg-grey-lighten-2"
-            style="height: 200px;"
-          >
-            <VDivider
-              data-test="divider-v"
-              vertical
-              class="opacity-100 text-red"
-            ></VDivider>
-          </div>
-        </>
+      render(() => (
+        <div
+          class="ma-2 d-flex align-center justify-center bg-grey-lighten-2"
+          style="height: 200px;"
+        >
+          <VDivider vertical class="opacity-100 text-red" />
+        </div>
       ))
-        .get("[data-test='divider-v']")
-        .should('have.length', 1)
-        .should('have.css', 'height', '200px')
+
+      expect(screen.getByCSS('.v-divider')).toHaveStyle({ height: '200px' })
     })
 
     it('takes defined length when used as centered separator in VToolbar', () => {
-      cy.mount(() => (
+      render(() => (
         <>
           <VToolbar>
             <VBtn icon="mdi-arrow-left"></VBtn>
@@ -40,27 +35,24 @@ describe('VDivider', () => {
             <VBtn icon="mdi-alert-circle-outline"></VBtn>
             <VBtn icon="mdi-delete-outline"></VBtn>
             <VDivider
-              data-test="divider-v"
               class="mx-3 align-self-center opacity-100 text-red"
               length="24"
               thickness="2"
               vertical
-            ></VDivider>
+            />
             <VBtn icon="mdi-folder-outline"></VBtn>
             <VBtn icon="mdi-tag-outline"></VBtn>
             <VBtn icon="mdi-dots-vertical"></VBtn>
           </VToolbar>
         </>
       ))
-        .get("[data-test='divider-v']")
-        .should('have.length', 1)
-        .should('have.css', 'height', '24px')
+      expect(screen.getByCSS('.v-divider')).toHaveStyle({ height: '24px' })
     })
   })
 
   describe('adaptive height', () => {
     it('takes full height in flexbox container with dynamic height', () => {
-      cy.mount(() => (
+      render(() => (
         <>
           <div
             class="ma-2 pa-3 d-flex flex-column"
@@ -79,7 +71,6 @@ describe('VDivider', () => {
                 </VList>
               </aside>
               <VDivider
-                data-test="divider-v"
                 vertical
                 class="opacity-100 text-red"
               ></VDivider>
@@ -93,20 +84,19 @@ describe('VDivider', () => {
           </div>
         </>
       ))
-        .get("[data-test='divider-v']")
-        .should('have.length', 1)
-        .should('have.css', 'height', '272px') // 272 = 3 * 80px (card height) + 2 * 16px (ga-4)
+
+      // 272 = 3 * 80px (card height) + 2 * 16px (ga-4)
+      expect(screen.getByCSS('.v-divider')).toHaveStyle({ height: '272px' })
     })
 
     it('takes relative height in flexbox container with dynamic height', () => {
-      cy.mount(() => (
+      render(() => (
         <>
           <div class="d-flex w-100 pa-6">
             <aside class="bg-grey" style="width: 200px; height: 300px">
               Sidebar
             </aside>
             <VDivider
-              data-test="divider-v"
               vertical
               class="mx-2 opacity-100 text-red"
             ></VDivider>
@@ -114,51 +104,46 @@ describe('VDivider', () => {
           </div>
         </>
       ))
-        .get("[data-test='divider-v']")
-        .should('have.length', 1)
-        .should('have.css', 'height', '300px')
+
+      expect(screen.getByCSS('.v-divider')).toHaveStyle({ height: '300px' })
     })
   })
 
   describe('separator in list', () => {
     it('takes full width in VList', () => {
-      cy.mount(() => (
-        <>
-          <div
-            class="ma-2 pa-3 d-flex flex-column"
-            style="height: 370px; width: 940px; outline: 1px solid currentColor"
-          >
-            <aside class="pr-4" style="max-width: 200px">
-              <VList class="bg-transparent py-0">
-                {[1, 2, 3].map(idx => (
-                  <>
-                    { idx > 1 && (
-                      <VDivider
-                        data-test="divider-h"
-                        class="my-2 opacity-100 text-red"
-                      ></VDivider>
-                    )}
-                    <VListItem
-                      rounded="lg"
-                      class="bg-grey"
-                      title={ `Nav item ${idx}` }
-                    ></VListItem>
-                  </>
-                ))}
-              </VList>
-            </aside>
-          </div>
-        </>
+      render(() => (
+        <div
+          class="ma-2 pa-3 d-flex flex-column"
+          style="height: 370px; width: 940px; outline: 1px solid currentColor"
+        >
+          <aside class="pr-4" style="max-width: 200px">
+            <VList class="bg-transparent py-0">
+              {[1, 2, 3].map(idx => (
+                <>
+                  { idx > 1 && (
+                    <VDivider class="my-2 opacity-100 text-red"></VDivider>
+                  )}
+                  <VListItem
+                    rounded="lg"
+                    class="bg-grey"
+                    title={ `Nav item ${idx}` }
+                  ></VListItem>
+                </>
+              ))}
+            </VList>
+          </aside>
+        </div>
       ))
-        .get("[data-test='divider-h']")
-        .should('have.length', 2)
-        .should('have.css', 'width', '184px')
+      expect(screen.getAllByCSS('.v-divider')).toHaveLength(2)
+      for (const item of screen.getAllByCSS('.v-divider')) {
+        expect(item).toHaveStyle({ width: '184px' })
+      }
     })
   })
 
   describe('separator in grid', () => {
     it('takes only necessary height when grid wraps', () => {
-      cy.mount(() => (
+      render(() => (
         <>
           <div
             class="ma-2 pa-3"
@@ -169,7 +154,6 @@ describe('VDivider', () => {
                 <>
                   { idx % 4 !== 0 && (
                     <VDivider
-                      data-test={ `divider-v-${idx}` }
                       vertical
                       class="opacity-100 text-red"
                     ></VDivider>
@@ -183,22 +167,23 @@ describe('VDivider', () => {
           </div>
         </>
       ))
-        .get("[data-test*='divider-v-']")
-        .should('have.length', 6)
-        .should('have.css', 'height', '104px') // 80px + 2 * 12px (v-col)
+      expect(screen.getAllByCSS('.v-divider')).toHaveLength(6)
+      // 80px + 2 * 12px (v-col)
+      for (const item of screen.getAllByCSS('.v-divider')) {
+        expect(item).toHaveStyle({ height: '104px' })
+      }
     })
   })
 
   describe('vertical inset variant', () => {
     it('accepts `inset` prop to get predefined margin', () => {
-      cy.mount(() => (
+      render(() => (
         <>
           <div
             class="ma-2 d-flex align-center justify-center bg-grey-lighten-2"
             style="height: 200px;"
           >
             <VDivider
-              data-test="divider-v"
               vertical
               inset
               class="opacity-100 text-red"
@@ -206,20 +191,19 @@ describe('VDivider', () => {
           </div>
         </>
       ))
-        .get("[data-test='divider-v']")
-        .should('have.length', 1)
-        .should('have.css', 'height', '184px') // 200px - 2 * 8px (inset margin)
+
+      // 200px - 2 * 8px (inset margin)
+      expect(screen.getByCSS('.v-divider')).toHaveStyle({ height: '184px' })
     })
 
     it('accepts custom margin', () => {
-      cy.mount(() => (
+      render(() => (
         <>
           <div
             class="ma-2 d-flex align-center justify-center bg-grey-lighten-2"
             style="height: 200px;"
           >
             <VDivider
-              data-test="divider-v"
               vertical
               thickness="3"
               class="my-6 opacity-100 text-red"
@@ -228,7 +212,6 @@ describe('VDivider', () => {
           <div class="ma-2 d-flex align-center bg-grey-lighten-2">
             <VCard color="blue" width="200" height="200" rounded="circle"></VCard>
             <VDivider
-              data-test="divider-v"
               vertical
               thickness="3"
               class="ma-6 opacity-100 text-red"
@@ -236,9 +219,12 @@ describe('VDivider', () => {
           </div>
         </>
       ))
-        .get("[data-test='divider-v']")
-        .should('have.length', 2)
-        .should('have.css', 'height', '152px') // 200px - 2 * 24px (margin)
+
+      expect(screen.getAllByCSS('.v-divider')).toHaveLength(2)
+      // 200px - 2 * 24px (margin)
+      for (const item of screen.getAllByCSS('.v-divider')) {
+        expect(item).toHaveStyle({ height: '152px' })
+      }
     })
   })
 })

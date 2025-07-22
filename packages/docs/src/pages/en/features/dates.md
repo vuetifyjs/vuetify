@@ -93,6 +93,39 @@ The following example shows how to use the date composable to format a date stri
 </script>
 ```
 
+### Custom formats
+
+You can extend available formats by providing definitions matching your adapter capabilities.
+
+```js { resource="src/plugins/vuetify.js" }
+import { createVuetify } from 'vuetify'
+
+export default createVuetify({
+  date: {
+    formats: {
+      // for built-in adapter
+      weekdayNarrow: { weekday: 'narrow' },
+      // for Moment or Day.js
+      weekdayNarrow: 'dd',
+      // for Luxon or DateFns
+      weekdayNarrow: 'EEEEE',
+    },
+  },
+})
+```
+
+```js
+// use registered key
+date.format(adapter.date(), 'weekdayNarrow')
+```
+
+Built-in adapter accepts objects that will be passed to Intl.DateTimeFormat.
+
+```js
+// works only with built-in adapter
+date.format(adapter.date(), { weekday: 'narrow' })
+```
+
 ## API
 
 | Feature | Description |

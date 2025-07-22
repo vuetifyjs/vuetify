@@ -28,7 +28,7 @@ import vRipple from '@/directives/ripple'
 
 // Utilities
 import { computed, onBeforeMount, toDisplayString, toRef, watch } from 'vue'
-import { deprecate, EventProp, genericComponent, keyCodes, propsFactory, useRender } from '@/util'
+import { deprecate, EventProp, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -190,7 +190,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
         !!props.ripple &&
         list?.filterable
       )
-        ? { keys: [keyCodes.enter] }
+        ? { keys: ['Enter'] }
         : props.ripple
     )
 

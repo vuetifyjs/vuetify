@@ -341,7 +341,7 @@ function getIds (items: UnwrapRef<GroupItem[]>, modelValue: any[]) {
 
     if (item?.value != null) {
       ids.push(item.id)
-    } else if (itemByIndex != null) {
+    } else if (itemByIndex?.useIndexAsValue) {
       ids.push(itemByIndex.id)
     }
   })

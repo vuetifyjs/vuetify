@@ -236,6 +236,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
               isDirty,
               isReadonly,
               isValid,
+              hasDetails,
             }) => (
               <VField
                 ref={ vFieldRef }
@@ -254,6 +255,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
                 dirty={ isDirty.value || props.dirty }
                 disabled={ isDisabled.value }
                 focused={ isFocused.value }
+                details={ hasDetails.value }
                 error={ isValid.value === false }
               >
                 {{

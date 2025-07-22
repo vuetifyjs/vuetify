@@ -44,8 +44,8 @@
 
             <v-slider
               v-model="sequenceTimeout"
+              :label="`Sequence Timeout (${sequenceTimeout}ms)`"
               class="mb-4"
-              label="Sequence Timeout (ms)"
               max="3000"
               min="500"
               step="100"
@@ -80,7 +80,7 @@
   import { useHotkey } from 'vuetify'
 
   const messages = ref([])
-  const sequenceTimeout = ref(1000)
+  const sequenceTimeout = ref(2000)
   const cleanupFunctions = ref([])
 
   const addMessage = text => {
@@ -140,7 +140,7 @@
     data () {
       return {
         messages: [],
-        sequenceTimeout: 1000,
+        sequenceTimeout: 2000,
         cleanupFunctions: [],
       }
     },
