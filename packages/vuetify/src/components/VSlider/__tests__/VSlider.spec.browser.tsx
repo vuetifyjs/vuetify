@@ -7,7 +7,7 @@ import { ref } from 'vue'
 
 const stories = {
   'Thumb label': <VSlider thumbLabel="always" />,
-  'With icons': <VSlider prependIcon="mdi-home" appendIcon="mdi-home" />,
+  'With icons': <VSlider prependIcon="$vuetify" appendIcon="$vuetify" />,
   'With messages': <VSlider messages="This is a message" />,
   Disabled: <VSlider disabled />,
   Vertical: <VSlider direction="vertical" />,
