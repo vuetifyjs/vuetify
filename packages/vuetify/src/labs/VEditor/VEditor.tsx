@@ -9,7 +9,7 @@ import { VSheet } from '@/components/VSheet/VSheet'
 import { VToolbar } from '@/components/VToolbar/VToolbar'
 
 // Composables
-import { useSelection } from './composables'
+import { useCaret, useSelection } from './composables'
 import { useFocus } from '@/composables/focus'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { useProxiedModel } from '@/composables/proxiedModel'
@@ -237,6 +237,7 @@ export const VEditor = genericComponent<VEditorSlots>()({
     )
 
     const { isFocused, focus, blur } = useFocus(props)
+    const caret = useCaret(editorRef)
     const selection = useSelection(editorRef)
 
     const vFieldRef = ref<VField>()
@@ -277,6 +278,71 @@ export const VEditor = genericComponent<VEditorSlots>()({
             break
         }
       }
+
+      if (e.key === 'Enter') {
+        onEnterKey(e)
+      }
+
+      if (e.key === 'Backspace') {
+        onBackspaceKey(e)
+      }
+    }
+
+    function onEnterKey (e: KeyboardEvent) {
+      if (selection.hasText()) {
+        e.preventDefault()
+        return
+      }
+
+      if (!editorRef.value) return
+
+      const currentBlockElement = getCurrentBlockElement()
+      const fragmentAfterCaret = getFragmentAfterCaret(currentBlockElement || editorRef.value)
+
+      if (fragmentAfterCaret) return
+
+      e.preventDefault()
+
+      const newBlockTag = currentBlockElement?.tagName.toLowerCase() || 'div'
+      const newBlock = document.createElement(newBlockTag)
+
+      if (!currentBlockElement) {
+        editorRef.value.appendChild(newBlock)
+        caret.insertInto(newBlock)
+      } else {
+        currentBlockElement.parentElement?.insertBefore(newBlock, currentBlockElement.nextSibling)
+        caret.insertInto(newBlock)
+      }
+
+      updateModel()
+    }
+
+    function onBackspaceKey (e: KeyboardEvent) {
+      if (selection.hasText()) return
+
+      const currentBlockElement = getCurrentBlockElement()
+      if (!currentBlockElement) return
+
+      if (currentBlockElement === editorRef.value?.firstChild) return
+
+      const fragmentBeforeCaret = getFragmentBeforeCaret(currentBlockElement)
+      if (fragmentBeforeCaret) return
+
+      e.preventDefault()
+
+      const previousSibling = currentBlockElement.previousElementSibling
+      const isPreviousSiblingBlock = previousSibling && window.getComputedStyle(previousSibling).display === 'block'
+      if (isPreviousSiblingBlock) {
+        caret.insertInto(previousSibling)
+        previousSibling.appendChild(currentBlockElement)
+      }
+
+      caret.save()
+      unwrapElement(currentBlockElement)
+      caret.restore()
+
+      updateActiveStates()
+      updateModel()
     }
 
     function onMouseUp () {
@@ -358,13 +424,6 @@ export const VEditor = genericComponent<VEditorSlots>()({
         .join('; ')
     }
 
-    function placeCursorInsideNode (node: Node) {
-      const textNode = document.createTextNode(zeroWidthSpace)
-      node.appendChild(textNode)
-      selection.select(textNode)
-      selection.focus()
-    }
-
     function getFormatterElement (format: Formatter) {
       const { tag, styles } = format.config
       const newElement = document.createElement(tag || 'div')
@@ -405,10 +464,10 @@ export const VEditor = genericComponent<VEditorSlots>()({
       return null
     }
 
-    function wrapBySpan (node: Node) {
-      const span = document.createElement('span')
-      span.appendChild(node)
-      return span
+    function wrapByTag (node: Node, tag: string) {
+      const newElement = document.createElement(tag)
+      newElement.appendChild(node)
+      return newElement
     }
 
     function isEmptyNode (fragment: Node): boolean {
@@ -470,7 +529,7 @@ export const VEditor = genericComponent<VEditorSlots>()({
       if (range.collapsed) return null
 
       const contents = range.cloneContents()
-      return isEmptyNode(contents) ? null : wrapBySpan(contents)
+      return isEmptyNode(contents) ? null : wrapByTag(contents, 'span')
     }
 
     function getUnFormattedFragment (element: Element): Node | null {
@@ -535,19 +594,21 @@ export const VEditor = genericComponent<VEditorSlots>()({
       const currentBlockTag = currentBlockElement?.tagName.toLowerCase()
       const isCurrentBlockHeadingOrDiv = currentBlockTag?.startsWith('h') || currentBlockTag === 'div'
 
-      preserveCaretPosition(() => {
-        if (!editorRef.value) return
+      if (!editorRef.value) return
 
-        if (!currentBlockElement) {
-          formatContent(editorRef.value, format)
-        } else if (hasSameFormatting(currentBlockElement, format)) {
-          replaceFormat(currentBlockElement, blockFormatter)
-        } else if (isCurrentBlockHeadingOrDiv) {
-          replaceFormat(currentBlockElement, format)
-        } else {
-          formatContent(currentBlockElement, format)
-        }
-      })
+      caret.save()
+
+      if (!currentBlockElement) {
+        formatContent(editorRef.value, format)
+      } else if (hasSameFormatting(currentBlockElement, format)) {
+        replaceFormat(currentBlockElement, blockFormatter)
+      } else if (isCurrentBlockHeadingOrDiv) {
+        replaceFormat(currentBlockElement, format)
+      } else {
+        formatContent(currentBlockElement, format)
+      }
+
+      caret.restore()
     }
 
     function toggleAlignmentFormat (format: Formatter) {
@@ -555,13 +616,14 @@ export const VEditor = genericComponent<VEditorSlots>()({
       const targetStyles = format.config.styles
       const targetAlignment = targetStyles?.textAlign
 
+      if (!editorRef.value) return
+
       if (!targetAlignment) return
 
       if (!blockElement) {
-        preserveCaretPosition(() => {
-          if (!editorRef.value) return
-          formatContent(editorRef.value, format)
-        })
+        caret.save()
+        formatContent(editorRef.value, format)
+        caret.restore()
       } else {
         const currentStyleString = blockElement.getAttribute('style') || ''
         const currentStyles = getObjectStyles(currentStyleString)
@@ -595,7 +657,7 @@ export const VEditor = genericComponent<VEditorSlots>()({
       selection.select(formatter)
 
       if (!selection.hasText()) {
-        placeCursorInsideNode(formatter)
+        caret.insertInto(formatter)
       }
     }
 
@@ -649,7 +711,7 @@ export const VEditor = genericComponent<VEditorSlots>()({
       return null
     }
 
-    function removeElement (element: Element) {
+    function removeElement (element: Node) {
       const parent = element.parentNode
       if (!parent) return
       parent.removeChild(element)
@@ -679,6 +741,7 @@ export const VEditor = genericComponent<VEditorSlots>()({
         formatter.appendChild(element.firstChild)
       }
       element.insertBefore(formatter, element.firstChild)
+      return formatter
     }
 
     function unwrapElement (element: Element) {
@@ -742,16 +805,6 @@ export const VEditor = genericComponent<VEditorSlots>()({
       parent.removeChild(element)
 
       selection.select(middle.firstChild || middle)
-      selection.focus()
-    }
-
-    function preserveCaretPosition (callback: () => void) {
-      const textNode = document.createTextNode(zeroWidthSpace)
-      selection.get()?.range.insertNode(textNode)
-
-      callback()
-
-      selection.select(textNode)
       selection.focus()
     }
 
