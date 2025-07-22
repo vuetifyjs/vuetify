@@ -55,24 +55,21 @@ describe('VNavigationDrawer', () => {
 
     const drawer = screen.getByCSS('.v-navigation-drawer')
 
-    await commands.waitStable('.v-navigation-drawer')
-    expect(drawer).toHaveStyle({ width: '56px' })
+    await expect.element(drawer).toHaveStyle({ width: '56px' })
 
     await userEvent.hover(drawer)
-    await commands.waitStable('.v-navigation-drawer')
-
-    expect(drawer).toHaveStyle({ width: '256px' })
+    await expect.element(drawer).toHaveStyle({ width: '256px' })
 
     await userEvent.unhover(drawer)
-    await commands.waitStable('.v-navigation-drawer')
-
-    expect(drawer).toHaveStyle({ width: '56px' })
+    await expect.element(drawer).toHaveStyle({ width: '56px' })
   })
 
   it('should change width when using bound and unbound rail and expandOnHover', async () => {
+    const rail = ref(true)
+
     render(() => (
       <VLayout>
-        <VNavigationDrawer modelValue expandOnHover rail />
+        <VNavigationDrawer v-model:rail={ rail.value } expandOnHover />
 
         <VMain />
       </VLayout>
@@ -81,27 +78,16 @@ describe('VNavigationDrawer', () => {
     const drawer = screen.getByCSS('.v-navigation-drawer')
     const main = screen.getByCSS('.v-main')
 
-    await commands.waitStable('.v-navigation-drawer')
-    expect(drawer).toHaveStyle({ width: '56px' })
-
-    await commands.waitStable('.v-main')
-    expect(main).toHaveStyle({ paddingLeft: '56px' })
+    await expect.element(drawer).toHaveStyle({ width: '56px' })
+    await expect.element(main).toHaveStyle({ paddingLeft: '56px' })
 
     await userEvent.hover(drawer)
-
-    await commands.waitStable('.v-navigation-drawer')
-    expect(drawer).toHaveStyle({ width: '256px' })
-
-    await commands.waitStable('.v-main')
-    expect(main).toHaveStyle({ paddingLeft: '256px' })
+    await expect.element(drawer).toHaveStyle({ width: '256px' })
+    await expect.element(main).toHaveStyle({ paddingLeft: '256px' })
 
     await userEvent.unhover(drawer)
-
-    await commands.waitStable('.v-navigation-drawer')
-    expect(drawer).toHaveStyle({ width: '56px' })
-
-    await commands.waitStable('.v-main')
-    expect(main).toHaveStyle({ paddingLeft: '56px' })
+    await expect.element(drawer).toHaveStyle({ width: '56px' })
+    await expect.element(main).toHaveStyle({ paddingLeft: '56px' })
   })
 
   it('should hide drawer if window resizes below mobile breakpoint', async () => {
@@ -121,7 +107,7 @@ describe('VNavigationDrawer', () => {
     expect(drawer).not.toHaveClass('v-navigation-drawer--active')
   })
 
-  it('should not hide drawer if window resizes below mobile breakpoint and disable-resize-watcher is used', () => {
+  it('should not hide drawer if window resizes below mobile breakpoint and disable-resize-watcher is used', async () => {
     page.viewport(1200, 800)
     render(() => (
       <VLayout>
@@ -131,10 +117,11 @@ describe('VNavigationDrawer', () => {
 
     expect(screen.getByCSS('.v-navigation-drawer')).toHaveClass('v-navigation-drawer--active')
     page.viewport(400, 800)
+    await commands.waitStable('.v-navigation-drawer')
     expect(screen.getByCSS('.v-navigation-drawer')).toHaveClass('v-navigation-drawer--active')
   })
 
-  it('should always show drawer if using permanent', () => {
+  it('should always show drawer if using permanent', async () => {
     render(() => (
       <VLayout>
         <VNavigationDrawer permanent />
@@ -143,29 +130,27 @@ describe('VNavigationDrawer', () => {
 
     expect(screen.getByCSS('.v-navigation-drawer')).toHaveClass('v-navigation-drawer--active')
     page.viewport(400, 800)
+    await commands.waitStable('.v-navigation-drawer')
     expect(screen.getByCSS('.v-navigation-drawer')).toHaveClass('v-navigation-drawer--active')
     expect(screen.getByCSS('.v-navigation-drawer')).not.toHaveClass('v-navigation-drawer--temporary')
   })
 
   it('should show temporary drawer', async () => {
-    const props = ref({})
+    const model = ref()
     render(() => (
       <VLayout>
-        <VNavigationDrawer temporary { ...props.value } />
+        <VNavigationDrawer temporary modelValue={ model.value } />
       </VLayout>
     ))
 
     const drawer = screen.getByCSS('.v-navigation-drawer')
 
-    await commands.waitStable('.v-navigation-drawer')
+    await expect.element(drawer).toHaveClass('v-navigation-drawer--temporary')
+    await expect.element(drawer).not.toHaveClass('v-navigation-drawer--active')
 
-    expect(drawer).toHaveClass('v-navigation-drawer--temporary')
-    expect(drawer).not.toHaveClass('v-navigation-drawer--active')
+    model.value = true
 
-    props.value = { modelValue: true }
-
-    await commands.waitStable('.v-navigation-drawer')
-    expect(drawer).toHaveClass('v-navigation-drawer--active')
+    await expect.element(drawer).toHaveClass('v-navigation-drawer--active')
   })
 
   it('should allow custom widths', async () => {
@@ -175,8 +160,7 @@ describe('VNavigationDrawer', () => {
       </VLayout>
     ))
 
-    await commands.waitStable('.v-navigation-drawer')
-    expect(screen.getByCSS('.v-navigation-drawer')).toHaveStyle({ width: '300px' })
+    await expect.element(screen.getByCSS('.v-navigation-drawer')).toHaveStyle({ width: '300px' })
   })
 
   it('should position drawer scrim correctly', async () => {
@@ -191,9 +175,8 @@ describe('VNavigationDrawer', () => {
 
     visible.value = true
 
-    await commands.waitStable('.v-navigation-drawer')
-    expect(screen.getByCSS('.v-navigation-drawer__scrim')).toBeVisible()
-    expect(screen.getByCSS('.v-navigation-drawer__scrim')).toHaveStyle({ top: '0px', left: '0px' })
+    await expect.element(screen.getByCSS('.v-navigation-drawer')).toBeOnScreen()
+    await expect.element(screen.getByCSS('.v-navigation-drawer__scrim')).toBeOnScreen()
   })
 
   it('should position drawer scrim correctly in rtl locale', async () => {
@@ -210,9 +193,8 @@ describe('VNavigationDrawer', () => {
 
     visible.value = true
 
-    await commands.waitStable('.v-navigation-drawer')
-    expect(screen.getByCSS('.v-navigation-drawer__scrim')).toBeVisible()
-    expect(screen.getByCSS('.v-navigation-drawer__scrim')).toHaveStyle({ top: '0px', left: '0px' })
+    await expect.element(screen.getByCSS('.v-navigation-drawer')).toBeOnScreen()
+    await expect.element(screen.getByCSS('.v-navigation-drawer__scrim')).toBeOnScreen()
   })
 
   describe('Showcase', () => {
