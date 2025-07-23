@@ -9,5 +9,8 @@
   },
   "events": {
     "toggleExpand": "Emitted when the item is toggled to expand or collapse."
+  },
+  "slots": {
+    "toggle": "Slot for custom expand icon and loading indicator."
   }
 }
