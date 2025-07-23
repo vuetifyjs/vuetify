@@ -238,6 +238,8 @@ export const VVideo = genericComponent<VVideoSlots>()({
 
     watch(triggered, () => onTriggered(), { once: true })
 
+    watch(() => props.eager, v => v && (triggered.value = true), { immediate: true })
+
     onMounted(() => {
       if (props.autoplay && !ssr) {
         triggered.value = true
