@@ -135,4 +135,15 @@ export default {
     plus: 'plus',
     shortcut: 'Tipkovnička prečica: {0}',
   },
+  video: {
+    play: 'Reproduciraj',
+    pause: 'Pauziraj',
+    seek: 'Traži',
+    volume: 'Glasnoća',
+    showVolume: 'Prikaži kontrolu glasnoće',
+    mute: 'Isključi zvuk',
+    unmute: 'Uključi zvuk',
+    enterFullscreen: 'Puni zaslon',
+    exitFullscreen: 'Izađi iz punog zaslona',
+  },
 }

@@ -135,4 +135,15 @@ export default {
     plus: 'plus',
     shortcut: 'Sleutelbordkortpad: {0}',
   },
+  video: {
+    play: 'Speel',
+    pause: 'Pouseer',
+    seek: 'Soek',
+    volume: 'Volume',
+    showVolume: 'Wys volumebeheer',
+    mute: 'Demp',
+    unmute: 'Ontdemp',
+    enterFullscreen: 'Volskerm',
+    exitFullscreen: 'Verlaat volskerm',
+  },
 }

@@ -5,6 +5,7 @@ import { VSlider } from '@/components/VSlider/VSlider'
 import { VIconBtn } from '@/labs/VIconBtn/VIconBtn'
 
 // Composables
+import { useLocale } from '@/composables'
 import { makeComponentProps } from '@/composables/component'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
@@ -17,6 +18,7 @@ import type { PropType } from 'vue'
 
 export const makeVVideoVolumeProps = propsFactory({
   inline: Boolean,
+  label: String,
   direction: {
     type: String as PropType<'horizontal' | 'vertical'>,
     default: 'vertical',
@@ -42,6 +44,7 @@ export const VVideoVolume = genericComponent()({
   },
 
   setup (props, { attrs }) {
+    const { t } = useLocale()
     const volume = useProxiedModel(props, 'modelValue')
 
     const volumeIcon = toRef(() => volume.value > 70 ? '$volumeHigh'
@@ -70,6 +73,8 @@ export const VVideoVolume = genericComponent()({
         >
             <VIconBtn
               icon={ volumeIcon.value }
+              aria-label={ props.label }
+              v-tooltip={[props.label, 'top']}
               onClick={ props.onClick as any }
               { ...attrs }
             >
@@ -90,6 +95,7 @@ export const VVideoVolume = genericComponent()({
                   >
                     <VSlider
                       direction={ props.direction }
+                      aria-label={ t('$vuetify.video.volume') }
                       modelValue={ volume.value }
                       onUpdate:modelValue={ v => volume.value = v }
                       { ...sliderDefaults }
@@ -104,6 +110,7 @@ export const VVideoVolume = genericComponent()({
               <VSlider
                 class="v-video-volume-inline__slider"
                 minWidth="50"
+                aria-label={ t('$vuetify.video.volume') }
                 modelValue={ volume.value }
                 onUpdate:modelValue={ v => volume.value = v }
                 onKeydown={ (e: KeyboardEvent) => { e.stopPropagation() } }

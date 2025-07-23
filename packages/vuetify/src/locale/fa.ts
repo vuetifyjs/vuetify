@@ -135,4 +135,15 @@ export default {
     plus: 'بعلاوه',
     shortcut: 'میانبر صفحه کلید: {0}',
   },
+  video: {
+    play: 'پخش',
+    pause: 'مکث',
+    seek: 'جستجو',
+    volume: 'صدا',
+    showVolume: 'نمایش کنترل صدا',
+    mute: 'بی‌صدا',
+    unmute: 'با صدا',
+    enterFullscreen: 'تمام صفحه',
+    exitFullscreen: 'خروج از تمام صفحه',
+  },
 }

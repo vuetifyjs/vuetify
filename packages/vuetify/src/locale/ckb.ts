@@ -135,4 +135,15 @@ export default {
     plus: 'زیادکردن',
     shortcut: 'کورتەبڕی تەختەکلیل: {0}',
   },
+  video: {
+    play: 'لێدان',
+    pause: 'ڕاگرتن',
+    seek: 'گەڕان',
+    volume: 'دەنگ',
+    showVolume: 'پیشاندانی کۆنترۆڵی دەنگ',
+    mute: 'بێدەنگکردن',
+    unmute: 'لە بێدەنگی دەرهێنان',
+    enterFullscreen: 'پڕ بە شاشە',
+    exitFullscreen: 'چوونە دەرەوە لە پڕ بە شاشە',
+  },
 }

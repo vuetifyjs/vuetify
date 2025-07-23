@@ -135,4 +135,15 @@ export default {
     plus: 'artı',
     shortcut: 'Klavye kısayolu: {0}',
   },
+  video: {
+    play: 'Oynat',
+    pause: 'Duraklat',
+    seek: 'Ara',
+    volume: 'Ses',
+    showVolume: 'Ses kontrolünü göster',
+    mute: 'Sesi kapat',
+    unmute: 'Sesi aç',
+    enterFullscreen: 'Tam ekran',
+    exitFullscreen: 'Tam ekrandan çık',
+  },
 }

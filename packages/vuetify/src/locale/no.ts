@@ -135,4 +135,15 @@ export default {
     plus: 'pluss',
     shortcut: 'Tastatursnarveier: {0}',
   },
+  video: {
+    play: 'Spill av',
+    pause: 'Pause',
+    seek: 'Søk',
+    volume: 'Volum',
+    showVolume: 'Vis volumkontroll',
+    mute: ' Demp',
+    unmute: 'Slå på lyd',
+    enterFullscreen: 'Fullskjerm',
+    exitFullscreen: 'Avslutt fullskjerm',
+  },
 }

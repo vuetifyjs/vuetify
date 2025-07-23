@@ -135,4 +135,15 @@ export default {
     plus: 'plus',
     shortcut: 'Tastatūras saīsne: {0}',
   },
+  video: {
+    play: 'Atskaņot',
+    pause: 'Pauzēt',
+    seek: 'Meklēt',
+    volume: 'Skaļums',
+    showVolume: 'Rādīt skaļuma kontroli',
+    mute: 'Izslēgt skaņu',
+    unmute: 'Ieslēgt skaņu',
+    enterFullscreen: 'Pilnekrāna režīms',
+    exitFullscreen: 'Iziet no pilnekrāna režīma',
+  },
 }

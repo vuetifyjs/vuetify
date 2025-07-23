@@ -135,4 +135,15 @@ export default {
     plus: 'pluss',
     shortcut: 'Klaviatuuri otsetee: {0}',
   },
+  video: {
+    play: 'Esita',
+    pause: 'Peata',
+    seek: 'Otsi',
+    volume: 'Helitugevus',
+    showVolume: 'Näita helitugevuse regulaatorit',
+    mute: 'Vaigista',
+    unmute: 'Lülita vaigistus välja',
+    enterFullscreen: 'Täisekraan',
+    exitFullscreen: 'Välju täisekraanilt',
+  },
 }

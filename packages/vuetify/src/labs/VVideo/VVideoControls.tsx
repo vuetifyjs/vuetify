@@ -8,6 +8,7 @@ import { VSlider } from '@/components/VSlider/VSlider'
 import { VIconBtn } from '@/labs/VIconBtn/VIconBtn'
 
 // Composables
+import { useLocale } from '@/composables'
 import { useBackgroundColor } from '@/composables/color'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
@@ -31,6 +32,7 @@ export type VVideoControlsActionsSlot = {
   toggleMuted: () => void
   fullscreen: boolean
   toggleFullscreen: () => void
+  labels: Record<string, string>
 }
 
 export type VVideoControlsSlots = {
@@ -90,6 +92,7 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
   },
 
   setup (props, { emit, slots }) {
+    const { t } = useLocale()
     const { themeClasses } = provideTheme(props)
     const { densityClasses } = useDensity(props)
     const { elevationClasses } = useElevation(props)
@@ -102,7 +105,7 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
     const playing = useProxiedModel(props, 'playing')
     const progress = useProxiedModel(props, 'progress')
     const volume = useProxiedModel(props, 'volume', 0, (v?: number | string) => Number(v ?? 0))
-    const lastVolume = shallowRef(0)
+    const lastVolume = shallowRef<number>()
 
     const currentTime = computed(() => {
       const secondsElapsed = Math.round(props.progress / 100 * props.duration)
@@ -110,6 +113,19 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
         elapsed: formatTime(secondsElapsed),
         remaining: formatTime(props.duration - secondsElapsed),
         total: formatTime(props.duration),
+      }
+    })
+
+    const labels = computed(() => {
+      const playIconLocaleKey = playing.value ? 'pause' : 'play'
+      const volumeIconLocaleKey = props.volumeProps?.inline ? (volume.value ? 'mute' : 'unmute') : 'showVolume'
+      const fullscreenIconLocaleKey = props.fullscreen ? 'exitFullscreen' : 'enterFullscreen'
+      return {
+        seek: t('$vuetify.video.seek'),
+        volume: t('$vuetify.video.volume'),
+        playAction: t(`$vuetify.video.${playIconLocaleKey}`),
+        volumeAction: t(`$vuetify.video.${volumeIconLocaleKey}`),
+        fullscreenAction: t(`$vuetify.video.${fullscreenIconLocaleKey}`),
       }
     })
 
@@ -179,6 +195,7 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
         toggleMuted,
         fullscreen: props.fullscreen,
         toggleFullscreen,
+        labels: labels.value,
       }
 
       return (
@@ -210,6 +227,8 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
                         <VIconBtn
                           icon={ playing.value ? '$pause' : '$play' }
                           size={ playBtnSize }
+                          aria-label={ labels.value.playAction }
+                          v-tooltip={[labels.value.playAction, 'top']}
                           onClick={ () => playing.value = !playing.value }
                         />
                       </div>
@@ -231,8 +250,14 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
                       color={ props.trackColor ?? props.color }
                       trackColor={ props.variant === 'tube' ? 'white' : undefined }
                       class="v-video__track"
+                      thumbLabel
+                      aria-label={ labels.value.seek }
                       onUpdate:modelValue={ skipTo }
-                    />
+                    >
+                      {{
+                        'thumb-label': () => currentTime.value.elapsed,
+                      }}
+                    </VSlider>
                     { props.variant === 'tube' && <VSpacer /> }
                     { props.splitTime
                       ? <span class={[pillClasses, 'v-video__time']}>{ currentTime.value.remaining }</span>
@@ -253,6 +278,8 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
                         <VIconBtn
                           icon={ playing.value ? '$pause' : '$play' }
                           size={ playBtnSize }
+                          aria-label={ labels.value.playAction }
+                          v-tooltip={[labels.value.playAction, 'top']}
                           onClick={ () => playing.value = !playing.value }
                         />
                       </div>
@@ -266,7 +293,9 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
                         key="volume-control"
                         sliderProps={{ color: props.color }}
                         modelValue={ volume.value }
+                        label={ labels.value.volumeAction }
                         onUpdate:modelValue={ v => volume.value = v }
+                        onClick={ () => props.volumeProps?.inline && toggleMuted() }
                         { ...props.volumeProps }
                       />
                     )}
@@ -274,6 +303,8 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
                     { !props.hideFullscreen && (
                       <VIconBtn
                         icon={ props.fullscreen ? '$fullscreenExit' : '$fullscreen' }
+                        aria-label={ labels.value.fullscreenAction }
+                        v-tooltip={[labels.value.fullscreenAction, 'top']}
                         onClick={ toggleFullscreen }
                       />
                     )}

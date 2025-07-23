@@ -135,4 +135,15 @@ export default {
     plus: 'plus',
     shortcut: 'Skrót klawiszowy: {0}',
   },
+  video: {
+    play: 'Odtwórz',
+    pause: 'Wstrzymaj',
+    seek: 'Przewiń',
+    volume: 'Głośność',
+    showVolume: 'Pokaż regulację głośności',
+    mute: 'Wycisz',
+    unmute: 'Wyłącz wyciszenie',
+    enterFullscreen: 'Pełny ekran',
+    exitFullscreen: 'Opuść pełny ekran',
+  },
 }

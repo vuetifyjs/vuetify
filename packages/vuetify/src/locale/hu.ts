@@ -135,4 +135,15 @@ export default {
     plus: 'plusz',
     shortcut: 'Billentyűparancs: {0}',
   },
+  video: {
+    play: 'Lejátszás',
+    pause: 'Szünet',
+    seek: 'Keresés',
+    volume: 'Hangerő',
+    showVolume: 'Hangerőszabályzó megjelenítése',
+    mute: 'Némítás',
+    unmute: 'Némítás feloldása',
+    enterFullscreen: 'Teljes képernyő',
+    exitFullscreen: 'Kilépés a teljes képernyőből',
+  },
 }

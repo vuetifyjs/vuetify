@@ -135,4 +135,15 @@ export default {
     plus: 'زائد',
     shortcut: 'اختصار لوحة المفاتيح: {0}',
   },
+  video: {
+    play: 'تشغيل',
+    pause: 'إيقاف مؤقت',
+    seek: 'بحث',
+    volume: 'مستوى الصوت',
+    showVolume: 'إظهار التحكم في مستوى الصوت',
+    mute: 'كتم الصوت',
+    unmute: 'إلغاء كتم الصوت',
+    enterFullscreen: 'ملء الشاشة',
+    exitFullscreen: 'الخروج من وضع ملء الشاشة',
+  },
 }

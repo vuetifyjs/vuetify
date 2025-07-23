@@ -2,6 +2,7 @@
   "props": {
     "inline": "Display slider next to the icon. VMenu won't be displayed on click. Recomended to pair with **sliderProps** to configure slider width.",
     "direction": "Switch between horizontal and vertical slider.",
+    "label": "Text to display in tooltip and passed to `aria-label`.",
     "modelValue": "Volume value (0 ~ 100)",
     "menuProps": "Props passed to VMenu containing volume slider. Useful to adjust **location** and control menu alignment",
     "sliderProps": "Selected props to customize volume slider."

@@ -135,4 +135,15 @@ export default {
     plus: 'plus',
     shortcut: 'Pintasan keyboard: {0}',
   },
+  video: {
+    play: 'Putar',
+    pause: 'Jeda',
+    seek: 'Cari',
+    volume: 'Volume',
+    showVolume: 'Tampilkan kontrol volume',
+    mute: 'Bisukan',
+    unmute: 'Bunyikan',
+    enterFullscreen: 'Layar penuh',
+    exitFullscreen: 'Keluar dari layar penuh',
+  },
 }

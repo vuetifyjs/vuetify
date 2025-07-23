@@ -135,4 +135,15 @@ export default {
     plus: 'συν',
     shortcut: 'Συντόμευση πληκτρολογίου: {0}',
   },
+  video: {
+    play: 'Αναπαραγωγή',
+    pause: 'Παύση',
+    seek: 'Αναζήτηση',
+    volume: 'Ένταση',
+    showVolume: 'Εμφάνιση ελέγχου έντασης',
+    mute: 'Σίγαση',
+    unmute: 'Κατάργηση σίγασης',
+    enterFullscreen: 'Πλήρης οθόνη',
+    exitFullscreen: 'Έξοδος από πλήρη οθόνη',
+  },
 }
