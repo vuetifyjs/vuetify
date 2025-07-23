@@ -44,3 +44,12 @@
   const color = shallowRef(null)
   const options = [null, 'primary', 'yellow', 'green-darken-1']
 </script>
+
+<script>
+  export default {
+    data: () => ({
+      color: null,
+      options: [null, 'primary', 'yellow', 'green-darken-1'],
+    }),
+  }
+</script>

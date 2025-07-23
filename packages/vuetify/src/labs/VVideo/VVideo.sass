@@ -8,7 +8,6 @@
     flex-direction: column
     align-items: center
     position: relative
-    --v-video-outline-width: thin
     --v-video-controls-height: #{$video-controls-height}
     --v-video-controls-pill-border-radius: #{$video-controls-pill-border-radius}
 
@@ -17,13 +16,11 @@
         --v-video-controls-height: #{$video-controls-height + $modifier * 2}
 
     &__video
-      --v-outline-opacity: .12
       position: absolute
       width: 100%
       height: 100%
       object-fit: cover
       z-index: 0
-      outline: var(--v-video-outline-width) solid rgba(var(--v-theme-on-surface), var(--v-outline-opacity))
 
       &::-webkit-media-controls
         display: none !important
