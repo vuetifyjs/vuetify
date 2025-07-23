@@ -19,7 +19,7 @@ The `v-video` component is useful for background video or as a customizable play
 
 ::: warning
 
-This feature requires [v3.9.0](/getting-started/release-notes/?version=v3.9.0)
+This feature requires [v3.9.3](/getting-started/release-notes/?version=v3.9.3)
 
 :::
 
@@ -79,7 +79,7 @@ You can display a cover image before the video is loaded.
 
 #### Start at
 
-Video can automatically skip to certain timestamp upon load. It can be useful to let the user continue where he stopped last time.
+Video can automatically skip to certain timestamp upon load. It can be useful to let the users continue where they stopped last time.
 
 <ExamplesExample file="v-video/prop-start-at" />
 
@@ -91,7 +91,7 @@ You can control the icon color and background color of the active video node.
 
 #### Density
 
-Three density modes provide more compact controls with decreased heights of the icon sizes.
+Three density modes provide basic control over control bar height and the icon sizes.
 
 <ExamplesExample file="v-video/prop-density" />
 
@@ -137,7 +137,7 @@ Props like `floating`, `detached` and `split-time` can help you seamlesly integr
 
 ### YouTube clone
 
-Easily recreate the most familiar interface to avoid distractions and let your users focus on the content.
+Easily recreate the most familiar interface to let your users focus on the content.
 
 <ExamplesExample file="v-video/misc-tube" />
 
