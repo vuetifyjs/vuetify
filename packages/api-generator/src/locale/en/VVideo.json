@@ -9,6 +9,7 @@
     "hideOverlay": "Hide center play icon.",
     "noFullscreen": "Disable fullscreen and hide the default fullscreen button.",
     "startAt": "Moves progress to the specified time (in seconds) once the media file is loaded.",
+    "controlsProps": "Pass props through to the `v-video-controls` component. Accepts an object with anything from [v-video-controls](/api/v-video-controls/#props) props, camelCase keys are recommended.",
     "controlsTransition": "The reveal transition applied to the VVideoControls component once the media file is loaded.",
     "controlsVariant": "Variant passed to the VVideoControls component."
   }

@@ -65,6 +65,9 @@ export const makeVVideoProps = propsFactory({
     type: String as PropType<VVideoControlsVariant>,
     default: 'default',
   },
+  controlsProps: {
+    type: Object as PropType<VVideoControls['$props']>,
+  },
   rounded: [Boolean, Number, String, Array] as PropType<boolean | number | string | string[]>,
 
   ...makeComponentProps(),
@@ -335,6 +338,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
         progress: progress.value,
         duration: duration.value,
         volume: volume.value,
+        ...props.controlsProps,
       }
 
       const controlsEventHandlers = {
