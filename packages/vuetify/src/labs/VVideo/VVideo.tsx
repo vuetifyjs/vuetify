@@ -68,7 +68,7 @@ export const makeVVideoProps = propsFactory({
   controlsProps: {
     type: Object as PropType<VVideoControls['$props']>,
   },
-  rounded: [Boolean, Number, String, Array] as PropType<boolean | number | string | string[]>,
+  rounded: [Boolean, Number, String, Array] as PropType<boolean | number | string | (boolean | number | string)[]>,
 
   ...makeComponentProps(),
   ...makeDensityProps(),
