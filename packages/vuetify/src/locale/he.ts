@@ -135,4 +135,15 @@ export default {
     plus: 'פלוס',
     shortcut: 'קיצור דרך במקלדת: {0}',
   },
+  video: {
+    play: 'נגן',
+    pause: 'השהה',
+    seek: 'חפש',
+    volume: 'עוצמת שמע',
+    showVolume: 'הצג בקרת עוצמת שמע',
+    mute: 'השתק',
+    unmute: 'בטל השתקה',
+    enterFullscreen: 'מסך מלא',
+    exitFullscreen: 'צא ממסך מלא',
+  },
 }

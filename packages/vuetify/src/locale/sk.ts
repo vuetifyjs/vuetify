@@ -135,4 +135,15 @@ export default {
     plus: 'plus',
     shortcut: 'Klávesová skratka: {0}',
   },
+  video: {
+    play: 'Prehrať',
+    pause: 'Pozastaviť',
+    seek: 'Vyhľadať',
+    volume: 'Hlasitosť',
+    showVolume: 'Zobraziť ovládanie hlasitosti',
+    mute: 'Stlmiť',
+    unmute: 'Zrušiť stlmenie',
+    enterFullscreen: 'Celá obrazovka',
+    exitFullscreen: 'Opustiť celú obrazovku',
+  },
 }

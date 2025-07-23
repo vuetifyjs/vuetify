@@ -135,4 +135,15 @@ export default {
     plus: 'plus',
     shortcut: 'Comandă rapidă tastatură: {0}',
   },
+  video: {
+    play: 'Redare',
+    pause: 'Pauză',
+    seek: 'Căutare',
+    volume: 'Volum',
+    showVolume: 'Afișare control volum',
+    mute: 'Fără sunet',
+    unmute: 'Cu sunet',
+    enterFullscreen: 'Ecran complet',
+    exitFullscreen: 'Ieșire din ecran complet',
+  },
 }

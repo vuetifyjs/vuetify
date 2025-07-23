@@ -135,4 +135,15 @@ export default {
     plus: 'плус',
     shortcut: 'Пречица на тастатури: {0}',
   },
+  video: {
+    play: 'Пусти',
+    pause: 'Паузирај',
+    seek: 'Тражи',
+    volume: 'Јачина звука',
+    showVolume: 'Прикажи контролу јачине звука',
+    mute: 'Искључи звук',
+    unmute: 'Укључи звук',
+    enterFullscreen: 'Цео екран',
+    exitFullscreen: 'Изађи из целог екрана',
+  },
 }

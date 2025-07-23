@@ -28,6 +28,7 @@ type SliderProvide = {
   min: Ref<number>
   max: Ref<number>
   mousePressed: Ref<boolean>
+  noKeyboard: Ref<boolean>
   numTicks: Ref<number>
   onSliderMousedown: (e: MouseEvent) => void
   onSliderTouchstart: (e: TouchEvent) => void
@@ -129,6 +130,7 @@ export const makeSliderProps = propsFactory({
     validator: (v: any) => ['vertical', 'horizontal'].includes(v),
   },
   reverse: Boolean,
+  noKeyboard: Boolean,
 
   ...makeRoundedProps(),
   ...makeElevationProps({
@@ -351,6 +353,7 @@ export const useSlider = ({
     min,
     max,
     mousePressed,
+    noKeyboard: toRef(() => props.noKeyboard),
     numTicks,
     onSliderMousedown,
     onSliderTouchstart,

@@ -135,4 +135,15 @@ export default {
     plus: 'plius',
     shortcut: 'Klaviatūros trumpinys: {0}',
   },
+  video: {
+    play: 'Groti',
+    pause: 'Pauzė',
+    seek: 'Ieškoti',
+    volume: 'Garsumas',
+    showVolume: 'Rodyti garso valdymą',
+    mute: 'Nutildyti',
+    unmute: 'Įjungti garsą',
+    enterFullscreen: 'Visas ekranas',
+    exitFullscreen: 'Išeiti iš viso ekrano',
+  },
 }

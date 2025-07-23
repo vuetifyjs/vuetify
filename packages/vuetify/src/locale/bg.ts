@@ -135,4 +135,15 @@ export default {
     plus: 'плюс',
     shortcut: 'Клавиатурна комбинация: {0}',
   },
+  video: {
+    play: 'Пусни',
+    pause: 'Пауза',
+    seek: 'Търсене',
+    volume: 'Сила на звука',
+    showVolume: 'Покажи контрола за силата на звука',
+    mute: 'Без звук',
+    unmute: 'Включи звука',
+    enterFullscreen: 'Цял екран',
+    exitFullscreen: 'Изход от цял екран',
+  },
 }

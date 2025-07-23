@@ -135,4 +135,15 @@ export default {
     plus: '플러스',
     shortcut: '키보드 단축키: {0}',
   },
+  video: {
+    play: '재생',
+    pause: '일시정지',
+    seek: '탐색',
+    volume: '볼륨',
+    showVolume: '볼륨 조절 표시',
+    mute: '음소거',
+    unmute: '음소거 해제',
+    enterFullscreen: '전체 화면',
+    exitFullscreen: '전체 화면 종료',
+  },
 }

@@ -49,6 +49,7 @@ export const makeVSliderThumbProps = propsFactory({
     default: true,
   },
   name: String,
+  noKeyboard: Boolean,
 
   ...makeComponentProps(),
 }, 'VSliderThumb')
@@ -100,6 +101,7 @@ export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
     })
 
     function parseKeydown (e: KeyboardEvent, value: number) {
+      if (props.noKeyboard) return
       if (!relevantKeys.includes(e.key)) return
 
       e.preventDefault()

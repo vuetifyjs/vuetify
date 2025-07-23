@@ -135,4 +135,15 @@ export default {
     plus: 'plus',
     shortcut: 'Näppäinyhdistelmä: {0}',
   },
+  video: {
+    play: 'Toista',
+    pause: 'Tauko',
+    seek: 'Hae',
+    volume: 'Äänenvoimakkuus',
+    showVolume: 'Näytä äänenvoimakkuuden säädin',
+    mute: 'Mykistä',
+    unmute: 'Poista mykistys',
+    enterFullscreen: 'Koko näyttö',
+    exitFullscreen: 'Poistu koko näytöstä',
+  },
 }

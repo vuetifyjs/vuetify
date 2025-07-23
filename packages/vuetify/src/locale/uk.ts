@@ -135,4 +135,15 @@ export default {
     plus: 'плюс',
     shortcut: 'Комбінація клавіш: {0}',
   },
+  video: {
+    play: 'Відтворити',
+    pause: 'Пауза',
+    seek: 'Пошук',
+    volume: 'Гучність',
+    showVolume: 'Показати регулятор гучності',
+    mute: 'Вимкнути звук',
+    unmute: 'Увімкнути звук',
+    enterFullscreen: 'На весь екран',
+    exitFullscreen: 'Вийти з повноекранного режиму',
+  },
 }
