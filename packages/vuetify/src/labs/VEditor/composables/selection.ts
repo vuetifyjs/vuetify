@@ -34,16 +34,22 @@ export function useSelection (editorRef: Ref<HTMLDivElement | undefined>) {
     const selection = get()?.selection
 
     if (!selection) return false
-    return !selection.isCollapsed && selection.toString() !== '\u200B'
+    return !selection.isCollapsed && !['\u200B', ''].includes(selection.toString())
   }
 
-  function focus () {
-    const selectionResult = get()
-    if (!selectionResult) return
+  function wrap (wrapper: Element) {
+    const result = get()
+    if (!result) return
 
-    selectionResult.range.collapse(false)
-    selectionResult.selection.removeAllRanges()
-    selectionResult.selection.addRange(selectionResult.range)
+    const { range } = result
+
+    try {
+      range.surroundContents(wrapper)
+    } catch (e) {
+      const fragment = range.extractContents()
+      wrapper.appendChild(fragment)
+      range.insertNode(wrapper)
+    }
   }
 
   function select (node: Node) {
@@ -75,8 +81,8 @@ export function useSelection (editorRef: Ref<HTMLDivElement | undefined>) {
     get,
     getContainer,
     hasText,
-    focus,
     select,
+    wrap,
     selectBetween,
   }
 }

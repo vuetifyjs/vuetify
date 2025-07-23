@@ -56,9 +56,20 @@ export function useCaret (editorRef: Ref<HTMLDivElement | undefined>) {
 
   function insertInto (node: Node) {
     const textNode = document.createTextNode(zeroWidthSpace)
-    node.appendChild(textNode)
-    selection.select(textNode)
-    selection.focus()
+
+    if (node.nodeType === Node.TEXT_NODE) {
+      selection.select(node)
+    } else {
+      node.appendChild(textNode)
+      selection.select(textNode)
+    }
+
+    const selectionResult = selection.get()
+    if (!selectionResult) return
+
+    selectionResult.range.collapse(false)
+    selectionResult.selection.removeAllRanges()
+    selectionResult.selection.addRange(selectionResult.range)
   }
 
   return {

@@ -10,163 +10,23 @@ import { VToolbar } from '@/components/VToolbar/VToolbar'
 
 // Composables
 import { useCaret, useSelection } from './composables'
+import { blockFormatter, FormatCategory, formats, Formats, useFormatter } from './composables/formatter'
 import { useFocus } from '@/composables/focus'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { camelize, computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
-import { callEvent, genericComponent, omit, propsFactory, toKebabCase, useRender } from '@/util'
+import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { getObjectStyles, getStringStyles, isEmptyNode, wrapByTag } from './utils'
+import { callEvent, genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import type { Formatter } from './composables/formatter'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
 
 type VEditorSlots = Omit<VInputSlots & VFieldSlots, 'default'>
-
-enum Formats {
-  Bold = 'bold',
-  Italic = 'italic',
-  Underline = 'underline',
-  StrikeThrough = 'strike-through',
-  Subscript = 'subscript',
-  Superscript = 'superscript',
-  Code = 'code',
-  Highlight = 'highlight',
-  Heading1 = 'heading1',
-  Heading2 = 'heading2',
-  Heading3 = 'heading3',
-  Heading4 = 'heading4',
-  Heading5 = 'heading5',
-  Heading6 = 'heading6',
-  Center = 'center',
-  Left = 'left',
-  Right = 'right',
-  Justify = 'justify',
-  Block = 'block',
-}
-
-enum FormatCategory {
-  Heading = 'heading',
-  Alignment = 'alignment',
-}
-
-type Formatter = {
-  name: Formats
-  icon: string
-  category?: FormatCategory
-  config: { tag?: string, styles?: Record<string, string>}
-}
-
-const blockFormatter: Formatter = {
-  name: Formats.Block,
-  icon: '',
-  config: { tag: 'div' },
-}
-
-const formats: Formatter[] = [
-  {
-    name: Formats.Bold,
-    icon: 'mdi-format-bold',
-    config: { tag: 'b' },
-  },
-  {
-    name: Formats.Italic,
-    icon: 'mdi-format-italic',
-    config: { tag: 'i' },
-  },
-  {
-    name: Formats.Underline,
-    icon: 'mdi-format-underline',
-    config: { tag: 'u' },
-  },
-  {
-    name: Formats.StrikeThrough,
-    icon: 'mdi-format-strikethrough',
-    config: { tag: 's' },
-  },
-  {
-    name: Formats.Subscript,
-    icon: 'mdi-format-subscript',
-    config: { tag: 'sub' },
-  },
-  {
-    name: Formats.Superscript,
-    icon: 'mdi-format-superscript',
-    config: { tag: 'sup' },
-  },
-  {
-    name: Formats.Code,
-    icon: 'mdi-code-tags',
-    config: { tag: 'code' },
-  },
-  {
-    name: Formats.Highlight,
-    icon: 'mdi-format-color-highlight',
-    config: { tag: 'mark' },
-  },
-  {
-    name: Formats.Heading1,
-    category: FormatCategory.Heading,
-    icon: 'mdi-format-header-1',
-    config: { tag: 'h1' },
-  },
-  {
-    name: Formats.Heading2,
-    icon: 'mdi-format-header-2',
-    category: FormatCategory.Heading,
-    config: { tag: 'h2' },
-  },
-  {
-    name: Formats.Heading3,
-    icon: 'mdi-format-header-3',
-    category: FormatCategory.Heading,
-    config: { tag: 'h3' },
-  },
-  {
-    name: Formats.Heading4,
-    icon: 'mdi-format-header-4',
-    category: FormatCategory.Heading,
-    config: { tag: 'h4' },
-  },
-  {
-    name: Formats.Heading5,
-    icon: 'mdi-format-header-5',
-    category: FormatCategory.Heading,
-    config: { tag: 'h5' },
-  },
-  {
-    name: Formats.Heading6,
-    icon: 'mdi-format-header-6',
-    category: FormatCategory.Heading,
-    config: { tag: 'h6' },
-  },
-  {
-    name: Formats.Left,
-    icon: 'mdi-format-align-left',
-    category: FormatCategory.Alignment,
-    config: { styles: { textAlign: 'left' } },
-  },
-  {
-    name: Formats.Right,
-    icon: 'mdi-format-align-right',
-    category: FormatCategory.Alignment,
-    config: { styles: { textAlign: 'right' } },
-  },
-  {
-    name: Formats.Center,
-    icon: 'mdi-format-align-center',
-    category: FormatCategory.Alignment,
-    config: { styles: { textAlign: 'center' } },
-  },
-  {
-    name: Formats.Justify,
-    icon: 'mdi-format-align-justify',
-    category: FormatCategory.Alignment,
-    config: { styles: { textAlign: 'justify' } },
-  },
-]
 
 const zeroWidthSpace = '\u200B'
 
@@ -239,6 +99,7 @@ export const VEditor = genericComponent<VEditorSlots>()({
     const { isFocused, focus, blur } = useFocus(props)
     const caret = useCaret(editorRef)
     const selection = useSelection(editorRef)
+    const formatter = useFormatter(editorRef)
 
     const vFieldRef = ref<VField>()
     const vInputRef = ref<VInput>()
@@ -255,7 +116,7 @@ export const VEditor = genericComponent<VEditorSlots>()({
     const displayedFormats = computed(() => formats.filter(format => props.formats.includes(format.name)))
 
     function onKeyUp () {
-      updateActiveStates()
+      updateActiveFormats()
     }
 
     function onKeyDown (e: KeyboardEvent) {
@@ -325,7 +186,7 @@ export const VEditor = genericComponent<VEditorSlots>()({
 
       if (currentBlockElement === editorRef.value?.firstChild) return
 
-      const fragmentBeforeCaret = getFragmentBeforeCaret(currentBlockElement)
+      const fragmentBeforeCaret = getFragmentBeforeSelection(currentBlockElement)
       if (fragmentBeforeCaret) return
 
       e.preventDefault()
@@ -341,12 +202,12 @@ export const VEditor = genericComponent<VEditorSlots>()({
       unwrapElement(currentBlockElement)
       caret.restore()
 
-      updateActiveStates()
+      updateActiveFormats()
       updateModel()
     }
 
     function onMouseUp () {
-      updateActiveStates()
+      updateActiveFormats()
     }
 
     function onControlMousedown (e: MouseEvent) {
@@ -371,8 +232,8 @@ export const VEditor = genericComponent<VEditorSlots>()({
         model.value = ''
         reset()
 
-        updateEditorInnerHTML('')
-        updateActiveStates()
+        updateEditorHtml('')
+        updateActiveFormats()
 
         callEvent(props['onClick:clear'], e)
       })
@@ -390,7 +251,7 @@ export const VEditor = genericComponent<VEditorSlots>()({
       updateModel()
     }
 
-    function updateEditorInnerHTML (newVal: string) {
+    function updateEditorHtml (newVal: string) {
       if (editorRef.value) {
         editorRef.value.innerHTML = newVal
       }
@@ -402,87 +263,21 @@ export const VEditor = genericComponent<VEditorSlots>()({
       }
     }
 
-    function getObjectStyles (styleString: string): Record<string, string> {
-      const styles: Record<string, string> = {}
-      if (!styleString) return styles
+    function updateActiveFormats () {
+      if (!editorRef.value || props.readonly || props.disabled) return
 
-      styleString.split(';').forEach(rule => {
-        const [property, value] = rule.split(':').map(s => s.trim())
-        if (property && value) {
-          styles[camelize(property)] = value
+      const newActiveFormats = new Set<string>()
+
+      formats.forEach((format: Formatter) => {
+        if (formatter.findElementWithFormat(format)) {
+          newActiveFormats.add(format.name)
         }
       })
 
-      return styles
+      activeFormats.value = newActiveFormats
     }
 
-    function getStringStyles (styles: Record<string, string>): string {
-      return Object.entries(styles)
-        .map(([property, value]) => {
-          return `${toKebabCase(property)}: ${value}`
-        })
-        .join('; ')
-    }
-
-    function getFormatterElement (format: Formatter) {
-      const { tag, styles } = format.config
-      const newElement = document.createElement(tag || 'div')
-
-      if (styles) {
-        const styleString = getStringStyles(styles)
-        newElement.setAttribute('style', styleString)
-      }
-
-      return newElement
-    }
-
-    function hasSameFormatting (element: Element, format: Formatter) {
-      const { tag, styles } = format.config
-
-      const hasSameTag = tag ? element.tagName.toLowerCase() === tag.toLowerCase() : true
-
-      const hasSameStyles = styles ? (() => {
-        const elementStyleString = element.getAttribute('style') || ''
-        const elementStyles = getObjectStyles(elementStyleString)
-        return Object.entries(styles).every(([key, value]) => elementStyles[key] === value)
-      })() : true
-
-      return hasSameTag && hasSameStyles
-    }
-
-    function findFormattedElement (format: Formatter): Element | null {
-      let element = selection.getContainer()
-      if (!element) return null
-
-      while (element && element !== editorRef.value) {
-        if (hasSameFormatting(element, format)) {
-          return element
-        }
-        element = element.parentElement
-      }
-
-      return null
-    }
-
-    function wrapByTag (node: Node, tag: string) {
-      const newElement = document.createElement(tag)
-      newElement.appendChild(node)
-      return newElement
-    }
-
-    function isEmptyNode (fragment: Node): boolean {
-      for (const node of fragment.childNodes) {
-        if (node.nodeType === Node.TEXT_NODE || node.nodeType === Node.ELEMENT_NODE) {
-          const content = (node.nodeType === Node.ELEMENT_NODE ? (node as Element) : node).textContent
-          if (content?.replace(/\u200B/g, '').trim()) {
-            return false
-          }
-        }
-      }
-      return true
-    }
-
-    function getFragmentBeforeCaret (element: Element): Node | null {
+    function getFragmentBeforeSelection (element: Element): Node | null {
       const selectionResult = selection.get()
       if (!selectionResult) return null
       const { range } = selectionResult
@@ -532,7 +327,7 @@ export const VEditor = genericComponent<VEditorSlots>()({
       return isEmptyNode(contents) ? null : wrapByTag(contents, 'span')
     }
 
-    function getUnFormattedFragment (element: Element): Node | null {
+    function getFragmemntAtSplit (element: Element): Node | null {
       const selectionResult = selection.get()
       if (!selectionResult) return null
       const { range } = selectionResult
@@ -553,20 +348,6 @@ export const VEditor = genericComponent<VEditorSlots>()({
       }, caretNode)
     }
 
-    function updateActiveStates () {
-      if (!editorRef.value || props.readonly || props.disabled) return
-
-      const newActiveFormats = new Set<string>()
-
-      formats.forEach((format: Formatter) => {
-        if (findFormattedElement(format)) {
-          newActiveFormats.add(format.name)
-        }
-      })
-
-      activeFormats.value = newActiveFormats
-    }
-
     function toggleFormat (format: Formatter) {
       if (format.category === FormatCategory.Heading) {
         toggleHeadingFormat(format)
@@ -577,15 +358,15 @@ export const VEditor = genericComponent<VEditorSlots>()({
       }
 
       updateModel()
-      updateActiveStates()
+      updateActiveFormats()
     }
 
     function toggleInlineFormat (format: Formatter) {
-      const formattedElement = findFormattedElement(format)
+      const formattedElement = formatter.findElementWithFormat(format)
       if (formattedElement) {
-        removeFormat(formattedElement)
+        removeInlineFormat(formattedElement)
       } else {
-        addFormat(format)
+        addInlineFormat(format)
       }
     }
 
@@ -599,13 +380,13 @@ export const VEditor = genericComponent<VEditorSlots>()({
       caret.save()
 
       if (!currentBlockElement) {
-        formatContent(editorRef.value, format)
-      } else if (hasSameFormatting(currentBlockElement, format)) {
+        formatChildren(editorRef.value, format)
+      } else if (formatter.isApplied(format, currentBlockElement)) {
         replaceFormat(currentBlockElement, blockFormatter)
       } else if (isCurrentBlockHeadingOrDiv) {
         replaceFormat(currentBlockElement, format)
       } else {
-        formatContent(currentBlockElement, format)
+        formatChildren(currentBlockElement, format)
       }
 
       caret.restore()
@@ -622,7 +403,7 @@ export const VEditor = genericComponent<VEditorSlots>()({
 
       if (!blockElement) {
         caret.save()
-        formatContent(editorRef.value, format)
+        formatChildren(editorRef.value, format)
         caret.restore()
       } else {
         const currentStyleString = blockElement.getAttribute('style') || ''
@@ -646,22 +427,22 @@ export const VEditor = genericComponent<VEditorSlots>()({
       }
     }
 
-    function addFormat (format: Formatter) {
+    function addInlineFormat (format: Formatter) {
       if (!editorRef.value || props.readonly || props.disabled) return
 
       editorRef.value?.focus()
 
-      const formatter = getFormatterElement(format)
-      surroundSelectionRange(formatter)
-
-      selection.select(formatter)
+      const formatterElement = formatter.get(format)
+      selection.wrap(formatterElement)
 
       if (!selection.hasText()) {
-        caret.insertInto(formatter)
+        caret.insertInto(formatterElement)
+      } else {
+        selection.select(formatterElement)
       }
     }
 
-    function removeFormat (element: Element) {
+    function removeInlineFormat (element: Element) {
       if (!editorRef.value || props.readonly || props.disabled) return
 
       const isElementEmpty = isEmptyNode(element)
@@ -671,22 +452,7 @@ export const VEditor = genericComponent<VEditorSlots>()({
       } else if (selection.hasText()) {
         unwrapSelection(element)
       } else {
-        splitFormattingAtCaret(element)
-      }
-    }
-
-    function surroundSelectionRange (element: Element) {
-      const result = selection.get()
-      if (!result) return
-
-      const { range } = result
-
-      try {
-        range.surroundContents(element)
-      } catch (e) {
-        const fragment = range.extractContents()
-        element.appendChild(fragment)
-        range.insertNode(element)
+        splitElementAtCaret(element)
       }
     }
 
@@ -718,8 +484,8 @@ export const VEditor = genericComponent<VEditorSlots>()({
     }
 
     function replaceFormat (element: Element, format: Formatter) {
-      const formatter = getFormatterElement(format)
-      replaceElement(element, formatter)
+      const formatterElement = formatter.get(format)
+      replaceElement(element, formatterElement)
     }
 
     function replaceElement (element: Element, newElement: Element) {
@@ -734,14 +500,14 @@ export const VEditor = genericComponent<VEditorSlots>()({
       element.parentNode?.replaceChild(newElement, element)
     }
 
-    function formatContent (element: Element, format: Formatter) {
-      const formatter = getFormatterElement(format)
+    function formatChildren (element: Element, format: Formatter) {
+      const formatterElement = formatter.get(format)
 
       while (element.firstChild) {
-        formatter.appendChild(element.firstChild)
+        formatterElement.appendChild(element.firstChild)
       }
-      element.insertBefore(formatter, element.firstChild)
-      return formatter
+      element.insertBefore(formatterElement, element.firstChild)
+      return formatterElement
     }
 
     function unwrapElement (element: Element) {
@@ -769,8 +535,8 @@ export const VEditor = genericComponent<VEditorSlots>()({
       const emptyFragment = document.createTextNode(zeroWidthSpace)
 
       const selectedContent = getContentInsideSelection()
-      const beforeFragment = getFragmentBeforeCaret(element)
       const afterFragment = getFragmentAfterSelection(element)
+      const beforeFragment = getFragmentBeforeSelection(element)
 
       if (!selectedContent) {
         return
@@ -789,34 +555,33 @@ export const VEditor = genericComponent<VEditorSlots>()({
       }
     }
 
-    function splitFormattingAtCaret (element: Element) {
+    function splitElementAtCaret (element: Element) {
       const parent = element.parentNode
       if (!parent) return
 
       const emptyFragment = document.createTextNode(zeroWidthSpace)
 
-      const beforeFragment = getFragmentBeforeCaret(element) || emptyFragment
+      const middle = getFragmemntAtSplit(element) || emptyFragment
       const afterFragment = getFragmentAfterCaret(element) || emptyFragment
-      const middle = getUnFormattedFragment(element) || emptyFragment
+      const beforeFragment = getFragmentBeforeSelection(element) || emptyFragment
 
       parent.insertBefore(beforeFragment, element)
       parent.insertBefore(middle, element)
       parent.insertBefore(afterFragment, element)
       parent.removeChild(element)
 
-      selection.select(middle.firstChild || middle)
-      selection.focus()
+      caret.insertInto(middle.firstChild || middle)
     }
 
     watch(() => props.modelValue, newVal => {
       if (newVal === model.value) return
       model.value = newVal || ''
-      updateEditorInnerHTML(newVal)
+      updateEditorHtml(newVal)
     })
 
     onMounted(() => {
       if (editorRef.value) {
-        updateEditorInnerHTML(model.value || '')
+        updateEditorHtml(model.value || '')
         editorRef.value.addEventListener('keyup', onKeyUp)
         editorRef.value.addEventListener('keydown', onKeyDown)
         editorRef.value.addEventListener('mouseup', onMouseUp)
