@@ -130,7 +130,7 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
         lastVolume.value = volume.value
         volume.value = 0
       } else {
-        volume.value = lastVolume.value
+        volume.value = lastVolume.value ?? 100
       }
     }
 
