@@ -31,6 +31,7 @@ $video-controls-pill-border-radius: 99px !default;
 $video-controls-pill-backdrop-filter: blur(5px) !default;
 $video-controls-default-background-opacity: .8 !default;
 $video-controls-default-background-color: var(--v-theme-surface) !default;
+$video-controls-default-color: rgb(var(--v-theme-on-surface)) !default;
 $video-controls-default-backdrop-filter: blur(5px) !default;
 $video-controls-split-time-padding-inline: 20px !default;
 $video-controls-detached-offset: 12px !default;
