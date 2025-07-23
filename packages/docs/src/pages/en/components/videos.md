@@ -113,6 +113,12 @@ Using the the **sources** slot you can make it possible to select different play
 <ExamplesExample file="v-video/slot-sources" />
 -->
 
+#### Header
+
+Optional **header** slot make it possible to put additional content on top of the video.
+
+<ExamplesExample file="v-video/slot-header" />
+
 #### Append and prepend
 
 `v-video` has `append` and `prepend` slots. You can place custom controls in them.

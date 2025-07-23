@@ -21,6 +21,7 @@
     "update:volume": "Emitted when the volume changes."
   },
   "slots": {
+    "header": "Slot for additional content placed on top of the video.",
     "append": "Additional content on the right within the control bar.",
     "controls": "Replaces controls bar with custom content.",
     "loader": "Slot used to replace loader displayed when the video is being loaded.",

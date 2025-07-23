@@ -28,6 +28,14 @@
       & ~ *
         z-index: 1
 
+    &__header
+      position: relative
+      opacity: 0
+      transition: opacity .6s ease-in-out
+      pointer-events: none
+      > *
+        pointer-events: auto
+
     &__content
       position: relative
       cursor: pointer
@@ -261,6 +269,7 @@
 
     &:not(.v-video--playing),
     &:hover
+      .v-video__header,
       .v-video-controls
         opacity: 1
 

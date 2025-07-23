@@ -32,6 +32,7 @@ import type { VVideoControlsActionsSlot, VVideoControlsVariant } from './VVideoC
 import type { LoaderSlotProps } from '@/composables/loader'
 
 export type VVideoSlots = {
+  header: never
   controls: VVideoControlsActionsSlot
   prepend: VVideoControlsActionsSlot
   append: VVideoControlsActionsSlot
@@ -445,6 +446,13 @@ export const VVideo = genericComponent<VVideoSlots>()({
                 <VSpacer />
               </VOverlay>
             )}
+            { props.variant === 'player' && !!slots.header
+              ? (
+                <div key="header" class="v-video__header">
+                  { slots.header() }
+                </div>
+              )
+              : '' }
             <VOverlay
               key="poster-overlay"
               modelValue={ state.value !== 'loaded' }
