@@ -397,6 +397,7 @@ export {
   mdiTimerSand,
   mdiTire,
   mdiTranslate,
+  mdiTrashCan,
   mdiTriangle,
   mdiTwitter,
   mdiUnfoldMoreHorizontal,
