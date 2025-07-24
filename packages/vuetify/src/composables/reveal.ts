@@ -21,30 +21,21 @@ export const makeRevealProps = propsFactory({
 }, 'reveal')
 
 export function useReveal (props: RevealProps) {
-  const isRevealing = shallowRef(false)
-  const isRevealed = shallowRef(false)
-
   const defaultDuration = 900
   const duration = toRef(() => typeof props.reveal === 'object'
     ? Math.max(0, Number(props.reveal.duration ?? defaultDuration))
     : defaultDuration
   )
 
-  const state = toRef(() => {
-    if (!props.reveal) return 'disabled'
-    return isRevealed.value ? 'done'
-      : isRevealing.value ? 'pending'
-      : 'initial'
-  })
+  const state = shallowRef(props.reveal ? 'initial' : 'disabled')
 
   onMounted(async () => {
     if (props.reveal) {
-      isRevealed.value = false
+      state.value = 'initial'
       await new Promise(resolve => requestAnimationFrame(resolve))
-      isRevealing.value = true
+      state.value = 'pending'
       await new Promise(resolve => setTimeout(resolve, duration.value))
-      isRevealing.value = false
-      isRevealed.value = true
+      state.value = 'done'
     }
   })
 
