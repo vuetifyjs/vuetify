@@ -15,6 +15,9 @@ import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 
+// Directives
+import vTooltip from '@/directives/tooltip'
+
 // Utilities
 import { computed, shallowRef } from 'vue'
 import { formatTime, genericComponent, propsFactory, useRender } from '@/util'
@@ -80,6 +83,8 @@ export const makeVVideoControlsProps = propsFactory({
 
 export const VVideoControls = genericComponent<VVideoControlsSlots>()({
   name: 'VVideoControls',
+
+  directives: { vTooltip: vTooltip as any },
 
   props: makeVVideoControlsProps(),
 

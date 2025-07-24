@@ -9,6 +9,9 @@ import { useLocale } from '@/composables'
 import { makeComponentProps } from '@/composables/component'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
+// Directives
+import vTooltip from '@/directives/tooltip'
+
 // Utilities
 import { ref, toRef } from 'vue'
 import { EventProp, genericComponent, propsFactory, useRender } from '@/util'
@@ -36,6 +39,8 @@ export const makeVVideoVolumeProps = propsFactory({
 
 export const VVideoVolume = genericComponent()({
   name: 'VVideoVolume',
+
+  directives: { vTooltip: vTooltip as any },
 
   props: makeVVideoVolumeProps(),
 
