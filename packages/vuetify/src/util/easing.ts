@@ -43,7 +43,7 @@ export function useTransition (source: MaybeRefOrGetter<number>, options: MaybeR
     transition: easingPatterns.easeInOutCubic,
   }
 
-  const raf: ReturnType<typeof requestAnimationFrame> = null!
+  let raf = -1
   const outputRef = shallowRef(toValue(source))
 
   watch(() => toValue(source), async to => {
@@ -52,23 +52,25 @@ export function useTransition (source: MaybeRefOrGetter<number>, options: MaybeR
     await executeTransition(outputRef, outputRef.value, to, easing)
   })
 
+  function executeTransition (out: Ref<number>, from: number, to: number, options: InternalEasingOptions) {
+    const startTime = performance.now()
+    const ease = options.transition ?? easingPatterns.easeInOutCubic
+
+    return new Promise<void>(resolve => {
+      raf = requestAnimationFrame(function step (currentTime: number) {
+        const timeElapsed = currentTime - startTime
+        const progress = timeElapsed / options.duration
+        out.value = from + (to - from) * ease(clamp(progress, 0, 1))
+
+        if (progress < 1) {
+          raf = requestAnimationFrame(step)
+        } else {
+          out.value = to
+          resolve()
+        }
+      })
+    })
+  }
+
   return computed(() => outputRef.value)
-}
-
-function executeTransition (out: Ref<number>, from: number, to: number, options: InternalEasingOptions) {
-  const startTime = performance.now()
-  const ease = options.transition ?? easingPatterns.easeInOutCubic
-
-  return new Promise<void>(resolve => requestAnimationFrame(function step (currentTime: number) {
-    const timeElapsed = currentTime - startTime
-    const progress = timeElapsed / options.duration
-    out.value = from + (to - from) * ease(clamp(progress, 0, 1))
-
-    if (progress < 1) {
-      requestAnimationFrame(step)
-    } else {
-      out.value = to
-      resolve()
-    }
-  }))
 }
