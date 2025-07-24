@@ -27,11 +27,11 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useToggleScope } from '@/composables/toggleScope'
 
 // Utilities
-import { computed, nextTick, readonly, ref, shallowRef, toRef, Transition, watch } from 'vue'
+import { computed, nextTick, provide, readonly, ref, shallowRef, toRef, Transition, watch } from 'vue'
 import { genericComponent, propsFactory, toPhysical, useRender } from '@/util'
 
 // Types
-import type { PropType } from 'vue'
+import type { InjectionKey, PropType, Ref } from 'vue'
 
 export type VNavigationDrawerImageSlot = {
   image: string | undefined
@@ -45,6 +45,8 @@ export type VNavigationDrawerSlots = {
 }
 
 const locations = ['start', 'end', 'left', 'right', 'top', 'bottom'] as const
+
+const DEFAULT_RAIL_WIDTH = 56
 
 export const makeVNavigationDrawerProps = propsFactory({
   color: String,
@@ -63,7 +65,7 @@ export const makeVNavigationDrawerProps = propsFactory({
   },
   railWidth: {
     type: [Number, String],
-    default: 56,
+    default: DEFAULT_RAIL_WIDTH,
   },
   scrim: {
     type: [Boolean, String],
@@ -94,6 +96,13 @@ export const makeVNavigationDrawerProps = propsFactory({
   ...makeTagProps({ tag: 'nav' }),
   ...makeThemeProps(),
 }, 'VNavigationDrawer')
+
+type VNavigationDrawerProvide = {
+  railWidth: Ref<number | string>
+  defaultRailWidth: typeof DEFAULT_RAIL_WIDTH
+}
+
+export const VNavigationDrawerSymbol: InjectionKey<VNavigationDrawerProvide> = Symbol.for('vuetify:v-navigation-drawer')
 
 export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
   name: 'VNavigationDrawer',
@@ -210,6 +219,11 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
       },
     })
 
+    provide(VNavigationDrawerSymbol, {
+      railWidth: toRef(() => props.railWidth ?? DEFAULT_RAIL_WIDTH),
+      defaultRailWidth: DEFAULT_RAIL_WIDTH,
+    })
+
     useRender(() => {
       const hasImage = (slots.image || props.image)
 
@@ -227,6 +241,7 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
                 'v-navigation-drawer--floating': props.floating,
                 'v-navigation-drawer--is-hovering': isHovering.value,
                 'v-navigation-drawer--rail': props.rail,
+                'v-navigation-drawer--rail-width': props.railWidth !== DEFAULT_RAIL_WIDTH,
                 'v-navigation-drawer--temporary': isTemporary.value,
                 'v-navigation-drawer--persistent': isPersistent.value,
                 'v-navigation-drawer--active': isActive.value,
