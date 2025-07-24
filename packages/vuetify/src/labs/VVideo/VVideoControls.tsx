@@ -250,7 +250,7 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
                       color={ props.trackColor ?? props.color }
                       trackColor={ props.variant === 'tube' ? 'white' : undefined }
                       class="v-video__track"
-                      thumbLabel
+                      thumbLabel="always"
                       aria-label={ labels.value.seek }
                       onUpdate:modelValue={ skipTo }
                     >
