@@ -91,7 +91,7 @@
     "overrides": {
       "@testing-library/dom": "npm:@vuetify/testing-library-dom@1.0.2",
       "@types/node": "22.15.31",
-      "@vue/babel-plugin-jsx": "npm:@vuetify/babel-plugin-jsx@1.6.0",
+      "@vue/babel-plugin-jsx": "npm:@vuetify/babel-plugin-jsx@1.7.0",
       "tough-cookie": "5.1.2"
     },
     "peerDependencyRules": {
