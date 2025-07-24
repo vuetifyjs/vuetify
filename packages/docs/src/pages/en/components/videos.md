@@ -6,7 +6,7 @@ meta:
   description: The video component acts as a customizable wrapper for native video element.
   keywords: video, player, vuetify video component, vue video component
 features:
-  github: /components/VVideo/
+  github: /labs/VVideo/
   label: 'C: VVideo'
   report: true
 ---
