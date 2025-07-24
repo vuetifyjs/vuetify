@@ -18,7 +18,7 @@
           ></v-list-item>
           <v-icon-btn
             class="ml-auto video-header-element"
-            icon="mdi-share"
+            icon="mdi-share-variant"
             variant="text"
           ></v-icon-btn>
         </div>
