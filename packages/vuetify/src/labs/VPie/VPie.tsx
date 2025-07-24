@@ -106,7 +106,6 @@ export const VPie = genericComponent<VPieSlots>()({
     }))
 
     const { colorClasses, colorStyles } = useColor(() => ({ background: props.bgColor }))
-    const textColorClasses = toRef(() => colorClasses.value.filter(v => v.startsWith('text-')))
     const textColorStyles = toRef(() => pick(colorStyles.value, ['color', 'caretColor']))
 
     const legendAvatarSize = toRef(() => ({ default: 20, comfortable: 18, compact: 16 }[props.density ?? 'default']))
@@ -282,7 +281,7 @@ export const VPie = genericComponent<VPieSlots>()({
           <div
             class={[
               'v-pie__content',
-              ...textColorClasses.value,
+              colorClasses.value,
             ]}
             style={{
               transform: `rotate(${rotateDeg.value})`,

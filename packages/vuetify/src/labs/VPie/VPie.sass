@@ -33,6 +33,11 @@
       width: var(--v-pie-size)
       height: var(--v-pie-size)
 
+      &:is(&)
+        // expected to get bg-* class for text color
+        // actual background is applied to underlay
+        background: none !important
+
       .v-overlay
         .v-overlay__scrim,
         .v-overlay__content
