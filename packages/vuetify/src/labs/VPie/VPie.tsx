@@ -283,11 +283,13 @@ export const VPie = genericComponent<VPieSlots>()({
               'v-pie__content',
               colorClasses.value,
             ]}
-            style={{
-              transform: `rotate(${rotateDeg.value})`,
-              marginBottom: `calc(-1 * ${convertToUnit(props.size)} * ${gaugeOffset.value})`,
-              ...textColorStyles.value,
-            }}
+            style={[
+              {
+                transform: `rotate(${rotateDeg.value})`,
+                marginBottom: `calc(-1 * ${convertToUnit(props.size)} * ${gaugeOffset.value})`,
+              },
+              textColorStyles.value,
+            ]}
           >
             <div
               class={[
