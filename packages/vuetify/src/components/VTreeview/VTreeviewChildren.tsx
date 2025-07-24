@@ -3,7 +3,7 @@ import { VTreeviewGroup } from './VTreeviewGroup'
 import { makeVTreeviewItemProps, VTreeviewItem } from './VTreeviewItem'
 import { VCheckboxBtn } from '@/components/VCheckbox'
 import { VDivider } from '@/components/VDivider'
-import { VListSubheader } from '@/components/VList'
+import { VListItemAction, VListSubheader } from '@/components/VList'
 
 // Composables
 import { makeDensityProps } from '@/composables/density'
@@ -149,7 +149,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
         prepend: slotProps => (
           <>
             { props.selectable && (!children || (children && !['leaf', 'single-leaf'].includes(props.selectStrategy as string))) && (
-              <div>
+              <VListItemAction start>
                 <VCheckboxBtn
                   key={ item.value }
                   modelValue={ slotProps.isSelected }
@@ -169,7 +169,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
                     selectItem(slotProps.select, slotProps.isSelected)
                   }}
                 />
-              </div>
+              </VListItemAction>
             )}
 
             { slots.prepend?.({ ...slotProps, ...treeItemProps, item: item.raw, internalItem: item }) }
@@ -210,6 +210,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
                   <VTreeviewItem
                     ref={ el => activatorItems.value[index] = el as VTreeviewItem }
                     { ...listItemProps }
+                    hasCustomPrepend={ !!slots.prepend }
                     hideActions={ props.hideActions }
                     indentLines={ indentLines.node }
                     value={ props.returnObject ? item.raw : itemProps.value }
@@ -253,6 +254,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
           return (
             <VTreeviewItem
               { ...itemProps }
+              hasCustomPrepend={ !!slots.prepend }
               hideActions={ props.hideActions }
               indentLines={ indentLines.leaf }
               value={ props.returnObject ? toRaw(item.raw) : itemProps.value }
