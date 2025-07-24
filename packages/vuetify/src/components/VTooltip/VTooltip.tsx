@@ -51,7 +51,7 @@ export const VTooltip = genericComponent<OverlaySlots>()({
     'update:modelValue': (value: boolean) => true,
   },
 
-  setup (props, { slots }) {
+  setup (props, { attrs, slots }) {
     const isActive = useProxiedModel(props, 'modelValue')
     const { scopeId } = useScopeId()
 
@@ -109,7 +109,7 @@ export const VTooltip = genericComponent<OverlaySlots>()({
           persistent
           role="tooltip"
           activatorProps={ activatorProps.value }
-          aria-label={ props.text }
+          aria-label={ attrs['aria-label'] ?? props.text }
           _disableGlobalStack
           { ...scopeId }
         >
