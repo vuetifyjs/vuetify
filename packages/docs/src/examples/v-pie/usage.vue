@@ -41,6 +41,20 @@
           ></v-slider>
 
           <v-slider
+            v-model="gap"
+            label="Gap"
+            max="10"
+            min="0"
+          ></v-slider>
+
+          <v-slider
+            v-model="rounded"
+            label="Rounded"
+            max="10"
+            min="0"
+          ></v-slider>
+
+          <v-slider
             v-if="model === 'gauge'"
             v-model="gaugeCut"
             label="Gauge cut"
@@ -53,16 +67,6 @@
             v-model="hideSlice"
             label="Hide inner slice"
           ></v-checkbox>
-
-          <v-chip-group v-model="gap" mandatory>
-            <v-chip :value="4" text="spaced" filter></v-chip>
-            <v-chip :value="0" text="tight" filter></v-chip>
-          </v-chip-group>
-
-          <v-chip-group v-model="rounded" mandatory>
-            <v-chip :value="4" text="rounded" filter></v-chip>
-            <v-chip :value="0" text="straight" filter></v-chip>
-          </v-chip-group>
         </template>
       </div>
 
@@ -82,7 +86,7 @@
   const animation = ref(false)
   const legend = ref(false)
   const tooltip = ref(false)
-  const hideSlice = ref(false)
+  const hideSlice = ref(true)
   const reveal = ref(false)
   const size = ref(250)
 
