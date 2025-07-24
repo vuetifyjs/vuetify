@@ -62,7 +62,6 @@ export const makeVPieProps = propsFactory({
     default: 250,
   },
   rotate: [Number, String],
-  innerCut: [Number, String],
   gaugeCut: [Number, String],
   legend: {
     type: [Boolean, Object] as PropType<boolean | {
@@ -86,6 +85,7 @@ export const makeVPieProps = propsFactory({
     'animation',
     'gap',
     'rounded',
+    'innerCut',
     'hoverScale',
     'hideSlice',
     'reveal',
@@ -217,13 +217,15 @@ export const VPie = genericComponent<VPieSlots>()({
     }
 
     return () => {
-      const itemProps = VPieSegment.filterProps(pick(props, [
+      const segmentProps = pick(props, [
         'animation',
         'gap',
         'rounded',
         'hideSlice',
         'reveal',
-      ]))
+        'innerCut',
+        'hoverScale',
+      ])
 
       const defaultTooltipTransition = {
         name: 'fade-transition',
@@ -304,14 +306,12 @@ export const VPie = genericComponent<VPieSlots>()({
             >
               { arcs.value.map((item, index) => (
                 <VPieSegment
-                  { ...itemProps }
+                  { ...segmentProps }
                   key={ item.key }
                   color={ item.color }
                   value={ isActive(item) ? arcSize(item.value) : 0 }
                   rotate={ arcOffset(index) }
                   pattern={ item.pattern }
-                  innerCut={ props.innerCut }
-                  hoverScale={ props.hoverScale }
                   onMouseenter={ () => onMouseenter(item) }
                   onMouseleave={ () => onMouseleave() }
                 />
