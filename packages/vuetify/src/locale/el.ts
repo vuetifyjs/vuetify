@@ -46,6 +46,13 @@ export default {
     input: {
       placeholder: 'Εισαγάγετε ημερομηνία',
     },
+    ariaLabel: {
+      previousMonth: 'Προηγούμενος μήνας',
+      nextMonth: 'Επόμενος μήνας',
+      selectYear: 'Επιλέξτε έτος',
+      selectDate: '{0}',
+      currentDate: 'Σήμερα, {0}',
+    },
   },
   noDataText: 'Χωρίς δεδομένα',
   carousel: {

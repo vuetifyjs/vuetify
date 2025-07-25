@@ -46,6 +46,13 @@ export default {
     input: {
       placeholder: 'Tarih girin',
     },
+    ariaLabel: {
+      previousMonth: 'Önceki ay',
+      nextMonth: 'Sonraki ay',
+      selectYear: 'Yıl seçin',
+      selectDate: '{0}',
+      currentDate: 'Bugün, {0}',
+    },
   },
   noDataText: 'Bu görünümde veri yok.',
   carousel: {

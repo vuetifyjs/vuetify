@@ -46,6 +46,13 @@ export default {
     input: {
       placeholder: '請輸入日期',
     },
+    ariaLabel: {
+      previousMonth: '上個月',
+      nextMonth: '下個月',
+      selectYear: '選擇年份',
+      selectDate: '{0}',
+      currentDate: '今天，{0}',
+    },
   },
   noDataText: '沒有資料',
   carousel: {

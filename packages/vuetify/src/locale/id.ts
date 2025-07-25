@@ -46,6 +46,13 @@ export default {
     input: {
       placeholder: 'Masukkan tanggal',
     },
+    ariaLabel: {
+      previousMonth: 'Bulan sebelumnya',
+      nextMonth: 'Bulan berikutnya',
+      selectYear: 'Pilih tahun',
+      selectDate: '{0}',
+      currentDate: 'Hari ini, {0}',
+    },
   },
   noDataText: 'Tidak ada data tersedia',
   carousel: {

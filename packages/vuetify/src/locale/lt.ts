@@ -46,6 +46,13 @@ export default {
     input: {
       placeholder: 'Įveskite datą',
     },
+    ariaLabel: {
+      previousMonth: 'Ankstesnis mėnuo',
+      nextMonth: 'Kitas mėnuo',
+      selectYear: 'Pasirinkite metus',
+      selectDate: '{0}',
+      currentDate: 'Šiandien, {0}',
+    },
   },
   noDataText: 'Nėra duomenų',
   carousel: {

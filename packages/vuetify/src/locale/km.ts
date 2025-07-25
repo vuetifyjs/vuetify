@@ -46,6 +46,13 @@ export default {
     input: {
       placeholder: 'បញ្ចូលកាលបរិច្ឆេទ',
     },
+    ariaLabel: {
+      previousMonth: 'Previous month',
+      nextMonth: 'Next month',
+      selectYear: 'Select year',
+      selectDate: '{0}',
+      currentDate: 'Today, {0}',
+    },
   },
   noDataText: 'គ្មានទិន្នន័យដែលមាន',
   carousel: {

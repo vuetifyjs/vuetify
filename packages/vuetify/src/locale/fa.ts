@@ -46,6 +46,13 @@ export default {
     input: {
       placeholder: 'تاریخ را وارد کنید',
     },
+    ariaLabel: {
+      previousMonth: 'ماه قبل',
+      nextMonth: 'ماه بعد',
+      selectYear: 'انتخاب سال',
+      selectDate: '{0}',
+      currentDate: 'امروز، {0}',
+    },
   },
   noDataText: 'داده‌ای موجود نیست',
   carousel: {
