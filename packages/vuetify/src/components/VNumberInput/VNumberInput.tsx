@@ -263,6 +263,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
 
       if (['ArrowDown', 'ArrowUp'].includes(e.key)) {
         e.preventDefault()
+        e.stopPropagation()
         clampModel()
         // _model is controlled, so need to wait until props['modelValue'] is updated
         await nextTick()
