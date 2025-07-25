@@ -180,187 +180,191 @@ exports[`createTheme > should allow for themes to be scoped 1`] = `
     --v-theme-code: 52, 52, 52;
     --v-theme-on-code: 204, 204, 204;
   }
-  .bg-background {
-    --v-theme-overlay-multiplier: var(--v-theme-background-overlay-multiplier);
-    background-color: rgb(var(--v-theme-background));
-    color: rgb(var(--v-theme-on-background));
+  @layer background {
+    .bg-background {
+      --v-theme-overlay-multiplier: var(--v-theme-background-overlay-multiplier);
+      background-color: rgb(var(--v-theme-background));
+      color: rgb(var(--v-theme-on-background));
+    }
+    .bg-surface {
+      --v-theme-overlay-multiplier: var(--v-theme-surface-overlay-multiplier);
+      background-color: rgb(var(--v-theme-surface));
+      color: rgb(var(--v-theme-on-surface));
+    }
+    .bg-surface-bright {
+      --v-theme-overlay-multiplier: var(--v-theme-surface-bright-overlay-multiplier);
+      background-color: rgb(var(--v-theme-surface-bright));
+      color: rgb(var(--v-theme-on-surface-bright));
+    }
+    .bg-surface-light {
+      --v-theme-overlay-multiplier: var(--v-theme-surface-light-overlay-multiplier);
+      background-color: rgb(var(--v-theme-surface-light));
+      color: rgb(var(--v-theme-on-surface-light));
+    }
+    .bg-surface-variant {
+      --v-theme-overlay-multiplier: var(--v-theme-surface-variant-overlay-multiplier);
+      background-color: rgb(var(--v-theme-surface-variant));
+      color: rgb(var(--v-theme-on-surface-variant));
+    }
+    .bg-primary {
+      --v-theme-overlay-multiplier: var(--v-theme-primary-overlay-multiplier);
+      background-color: rgb(var(--v-theme-primary));
+      color: rgb(var(--v-theme-on-primary));
+    }
+    .bg-primary-darken-1 {
+      --v-theme-overlay-multiplier: var(--v-theme-primary-darken-1-overlay-multiplier);
+      background-color: rgb(var(--v-theme-primary-darken-1));
+      color: rgb(var(--v-theme-on-primary-darken-1));
+    }
+    .bg-secondary {
+      --v-theme-overlay-multiplier: var(--v-theme-secondary-overlay-multiplier);
+      background-color: rgb(var(--v-theme-secondary));
+      color: rgb(var(--v-theme-on-secondary));
+    }
+    .bg-secondary-darken-1 {
+      --v-theme-overlay-multiplier: var(--v-theme-secondary-darken-1-overlay-multiplier);
+      background-color: rgb(var(--v-theme-secondary-darken-1));
+      color: rgb(var(--v-theme-on-secondary-darken-1));
+    }
+    .bg-error {
+      --v-theme-overlay-multiplier: var(--v-theme-error-overlay-multiplier);
+      background-color: rgb(var(--v-theme-error));
+      color: rgb(var(--v-theme-on-error));
+    }
+    .bg-info {
+      --v-theme-overlay-multiplier: var(--v-theme-info-overlay-multiplier);
+      background-color: rgb(var(--v-theme-info));
+      color: rgb(var(--v-theme-on-info));
+    }
+    .bg-success {
+      --v-theme-overlay-multiplier: var(--v-theme-success-overlay-multiplier);
+      background-color: rgb(var(--v-theme-success));
+      color: rgb(var(--v-theme-on-success));
+    }
+    .bg-warning {
+      --v-theme-overlay-multiplier: var(--v-theme-warning-overlay-multiplier);
+      background-color: rgb(var(--v-theme-warning));
+      color: rgb(var(--v-theme-on-warning));
+    }
   }
-  .bg-surface {
-    --v-theme-overlay-multiplier: var(--v-theme-surface-overlay-multiplier);
-    background-color: rgb(var(--v-theme-surface));
-    color: rgb(var(--v-theme-on-surface));
-  }
-  .bg-surface-bright {
-    --v-theme-overlay-multiplier: var(--v-theme-surface-bright-overlay-multiplier);
-    background-color: rgb(var(--v-theme-surface-bright));
-    color: rgb(var(--v-theme-on-surface-bright));
-  }
-  .bg-surface-light {
-    --v-theme-overlay-multiplier: var(--v-theme-surface-light-overlay-multiplier);
-    background-color: rgb(var(--v-theme-surface-light));
-    color: rgb(var(--v-theme-on-surface-light));
-  }
-  .bg-surface-variant {
-    --v-theme-overlay-multiplier: var(--v-theme-surface-variant-overlay-multiplier);
-    background-color: rgb(var(--v-theme-surface-variant));
-    color: rgb(var(--v-theme-on-surface-variant));
-  }
-  .bg-primary {
-    --v-theme-overlay-multiplier: var(--v-theme-primary-overlay-multiplier);
-    background-color: rgb(var(--v-theme-primary));
-    color: rgb(var(--v-theme-on-primary));
-  }
-  .bg-primary-darken-1 {
-    --v-theme-overlay-multiplier: var(--v-theme-primary-darken-1-overlay-multiplier);
-    background-color: rgb(var(--v-theme-primary-darken-1));
-    color: rgb(var(--v-theme-on-primary-darken-1));
-  }
-  .bg-secondary {
-    --v-theme-overlay-multiplier: var(--v-theme-secondary-overlay-multiplier);
-    background-color: rgb(var(--v-theme-secondary));
-    color: rgb(var(--v-theme-on-secondary));
-  }
-  .bg-secondary-darken-1 {
-    --v-theme-overlay-multiplier: var(--v-theme-secondary-darken-1-overlay-multiplier);
-    background-color: rgb(var(--v-theme-secondary-darken-1));
-    color: rgb(var(--v-theme-on-secondary-darken-1));
-  }
-  .bg-error {
-    --v-theme-overlay-multiplier: var(--v-theme-error-overlay-multiplier);
-    background-color: rgb(var(--v-theme-error));
-    color: rgb(var(--v-theme-on-error));
-  }
-  .bg-info {
-    --v-theme-overlay-multiplier: var(--v-theme-info-overlay-multiplier);
-    background-color: rgb(var(--v-theme-info));
-    color: rgb(var(--v-theme-on-info));
-  }
-  .bg-success {
-    --v-theme-overlay-multiplier: var(--v-theme-success-overlay-multiplier);
-    background-color: rgb(var(--v-theme-success));
-    color: rgb(var(--v-theme-on-success));
-  }
-  .bg-warning {
-    --v-theme-overlay-multiplier: var(--v-theme-warning-overlay-multiplier);
-    background-color: rgb(var(--v-theme-warning));
-    color: rgb(var(--v-theme-on-warning));
-  }
-  .text-background {
-    color: rgb(var(--v-theme-background));
-  }
-  .border-background {
-    --v-border-color: var(--v-theme-background);
-  }
-  .text-surface {
-    color: rgb(var(--v-theme-surface));
-  }
-  .border-surface {
-    --v-border-color: var(--v-theme-surface);
-  }
-  .text-surface-bright {
-    color: rgb(var(--v-theme-surface-bright));
-  }
-  .border-surface-bright {
-    --v-border-color: var(--v-theme-surface-bright);
-  }
-  .text-surface-light {
-    color: rgb(var(--v-theme-surface-light));
-  }
-  .border-surface-light {
-    --v-border-color: var(--v-theme-surface-light);
-  }
-  .text-surface-variant {
-    color: rgb(var(--v-theme-surface-variant));
-  }
-  .border-surface-variant {
-    --v-border-color: var(--v-theme-surface-variant);
-  }
-  .on-surface-variant {
-    color: rgb(var(--v-theme-on-surface-variant));
-  }
-  .text-primary {
-    color: rgb(var(--v-theme-primary));
-  }
-  .border-primary {
-    --v-border-color: var(--v-theme-primary);
-  }
-  .text-primary-darken-1 {
-    color: rgb(var(--v-theme-primary-darken-1));
-  }
-  .border-primary-darken-1 {
-    --v-border-color: var(--v-theme-primary-darken-1);
-  }
-  .text-secondary {
-    color: rgb(var(--v-theme-secondary));
-  }
-  .border-secondary {
-    --v-border-color: var(--v-theme-secondary);
-  }
-  .text-secondary-darken-1 {
-    color: rgb(var(--v-theme-secondary-darken-1));
-  }
-  .border-secondary-darken-1 {
-    --v-border-color: var(--v-theme-secondary-darken-1);
-  }
-  .text-error {
-    color: rgb(var(--v-theme-error));
-  }
-  .border-error {
-    --v-border-color: var(--v-theme-error);
-  }
-  .text-info {
-    color: rgb(var(--v-theme-info));
-  }
-  .border-info {
-    --v-border-color: var(--v-theme-info);
-  }
-  .text-success {
-    color: rgb(var(--v-theme-success));
-  }
-  .border-success {
-    --v-border-color: var(--v-theme-success);
-  }
-  .text-warning {
-    color: rgb(var(--v-theme-warning));
-  }
-  .border-warning {
-    --v-border-color: var(--v-theme-warning);
-  }
-  .on-background {
-    color: rgb(var(--v-theme-on-background));
-  }
-  .on-surface {
-    color: rgb(var(--v-theme-on-surface));
-  }
-  .on-surface-bright {
-    color: rgb(var(--v-theme-on-surface-bright));
-  }
-  .on-surface-light {
-    color: rgb(var(--v-theme-on-surface-light));
-  }
-  .on-primary {
-    color: rgb(var(--v-theme-on-primary));
-  }
-  .on-primary-darken-1 {
-    color: rgb(var(--v-theme-on-primary-darken-1));
-  }
-  .on-secondary {
-    color: rgb(var(--v-theme-on-secondary));
-  }
-  .on-secondary-darken-1 {
-    color: rgb(var(--v-theme-on-secondary-darken-1));
-  }
-  .on-error {
-    color: rgb(var(--v-theme-on-error));
-  }
-  .on-info {
-    color: rgb(var(--v-theme-on-info));
-  }
-  .on-success {
-    color: rgb(var(--v-theme-on-success));
-  }
-  .on-warning {
-    color: rgb(var(--v-theme-on-warning));
+  @layer foreground {
+    .text-background {
+      color: rgb(var(--v-theme-background));
+    }
+    .border-background {
+      --v-border-color: var(--v-theme-background);
+    }
+    .text-surface {
+      color: rgb(var(--v-theme-surface));
+    }
+    .border-surface {
+      --v-border-color: var(--v-theme-surface);
+    }
+    .text-surface-bright {
+      color: rgb(var(--v-theme-surface-bright));
+    }
+    .border-surface-bright {
+      --v-border-color: var(--v-theme-surface-bright);
+    }
+    .text-surface-light {
+      color: rgb(var(--v-theme-surface-light));
+    }
+    .border-surface-light {
+      --v-border-color: var(--v-theme-surface-light);
+    }
+    .text-surface-variant {
+      color: rgb(var(--v-theme-surface-variant));
+    }
+    .border-surface-variant {
+      --v-border-color: var(--v-theme-surface-variant);
+    }
+    .on-surface-variant {
+      color: rgb(var(--v-theme-on-surface-variant));
+    }
+    .text-primary {
+      color: rgb(var(--v-theme-primary));
+    }
+    .border-primary {
+      --v-border-color: var(--v-theme-primary);
+    }
+    .text-primary-darken-1 {
+      color: rgb(var(--v-theme-primary-darken-1));
+    }
+    .border-primary-darken-1 {
+      --v-border-color: var(--v-theme-primary-darken-1);
+    }
+    .text-secondary {
+      color: rgb(var(--v-theme-secondary));
+    }
+    .border-secondary {
+      --v-border-color: var(--v-theme-secondary);
+    }
+    .text-secondary-darken-1 {
+      color: rgb(var(--v-theme-secondary-darken-1));
+    }
+    .border-secondary-darken-1 {
+      --v-border-color: var(--v-theme-secondary-darken-1);
+    }
+    .text-error {
+      color: rgb(var(--v-theme-error));
+    }
+    .border-error {
+      --v-border-color: var(--v-theme-error);
+    }
+    .text-info {
+      color: rgb(var(--v-theme-info));
+    }
+    .border-info {
+      --v-border-color: var(--v-theme-info);
+    }
+    .text-success {
+      color: rgb(var(--v-theme-success));
+    }
+    .border-success {
+      --v-border-color: var(--v-theme-success);
+    }
+    .text-warning {
+      color: rgb(var(--v-theme-warning));
+    }
+    .border-warning {
+      --v-border-color: var(--v-theme-warning);
+    }
+    .on-background {
+      color: rgb(var(--v-theme-on-background));
+    }
+    .on-surface {
+      color: rgb(var(--v-theme-on-surface));
+    }
+    .on-surface-bright {
+      color: rgb(var(--v-theme-on-surface-bright));
+    }
+    .on-surface-light {
+      color: rgb(var(--v-theme-on-surface-light));
+    }
+    .on-primary {
+      color: rgb(var(--v-theme-on-primary));
+    }
+    .on-primary-darken-1 {
+      color: rgb(var(--v-theme-on-primary-darken-1));
+    }
+    .on-secondary {
+      color: rgb(var(--v-theme-on-secondary));
+    }
+    .on-secondary-darken-1 {
+      color: rgb(var(--v-theme-on-secondary-darken-1));
+    }
+    .on-error {
+      color: rgb(var(--v-theme-on-error));
+    }
+    .on-info {
+      color: rgb(var(--v-theme-on-info));
+    }
+    .on-success {
+      color: rgb(var(--v-theme-on-success));
+    }
+    .on-warning {
+      color: rgb(var(--v-theme-on-warning));
+    }
   }
 
 }
@@ -543,187 +547,191 @@ exports[`createTheme > should allow for themes to be scoped 1`] = `
     --v-theme-code: 52, 52, 52;
     --v-theme-on-code: 204, 204, 204;
   }
-  :where(#my-app) .bg-background {
-    --v-theme-overlay-multiplier: var(--v-theme-background-overlay-multiplier);
-    background-color: rgb(var(--v-theme-background));
-    color: rgb(var(--v-theme-on-background));
+  @layer background {
+    :where(#my-app) .bg-background {
+      --v-theme-overlay-multiplier: var(--v-theme-background-overlay-multiplier);
+      background-color: rgb(var(--v-theme-background));
+      color: rgb(var(--v-theme-on-background));
+    }
+    :where(#my-app) .bg-surface {
+      --v-theme-overlay-multiplier: var(--v-theme-surface-overlay-multiplier);
+      background-color: rgb(var(--v-theme-surface));
+      color: rgb(var(--v-theme-on-surface));
+    }
+    :where(#my-app) .bg-surface-bright {
+      --v-theme-overlay-multiplier: var(--v-theme-surface-bright-overlay-multiplier);
+      background-color: rgb(var(--v-theme-surface-bright));
+      color: rgb(var(--v-theme-on-surface-bright));
+    }
+    :where(#my-app) .bg-surface-light {
+      --v-theme-overlay-multiplier: var(--v-theme-surface-light-overlay-multiplier);
+      background-color: rgb(var(--v-theme-surface-light));
+      color: rgb(var(--v-theme-on-surface-light));
+    }
+    :where(#my-app) .bg-surface-variant {
+      --v-theme-overlay-multiplier: var(--v-theme-surface-variant-overlay-multiplier);
+      background-color: rgb(var(--v-theme-surface-variant));
+      color: rgb(var(--v-theme-on-surface-variant));
+    }
+    :where(#my-app) .bg-primary {
+      --v-theme-overlay-multiplier: var(--v-theme-primary-overlay-multiplier);
+      background-color: rgb(var(--v-theme-primary));
+      color: rgb(var(--v-theme-on-primary));
+    }
+    :where(#my-app) .bg-primary-darken-1 {
+      --v-theme-overlay-multiplier: var(--v-theme-primary-darken-1-overlay-multiplier);
+      background-color: rgb(var(--v-theme-primary-darken-1));
+      color: rgb(var(--v-theme-on-primary-darken-1));
+    }
+    :where(#my-app) .bg-secondary {
+      --v-theme-overlay-multiplier: var(--v-theme-secondary-overlay-multiplier);
+      background-color: rgb(var(--v-theme-secondary));
+      color: rgb(var(--v-theme-on-secondary));
+    }
+    :where(#my-app) .bg-secondary-darken-1 {
+      --v-theme-overlay-multiplier: var(--v-theme-secondary-darken-1-overlay-multiplier);
+      background-color: rgb(var(--v-theme-secondary-darken-1));
+      color: rgb(var(--v-theme-on-secondary-darken-1));
+    }
+    :where(#my-app) .bg-error {
+      --v-theme-overlay-multiplier: var(--v-theme-error-overlay-multiplier);
+      background-color: rgb(var(--v-theme-error));
+      color: rgb(var(--v-theme-on-error));
+    }
+    :where(#my-app) .bg-info {
+      --v-theme-overlay-multiplier: var(--v-theme-info-overlay-multiplier);
+      background-color: rgb(var(--v-theme-info));
+      color: rgb(var(--v-theme-on-info));
+    }
+    :where(#my-app) .bg-success {
+      --v-theme-overlay-multiplier: var(--v-theme-success-overlay-multiplier);
+      background-color: rgb(var(--v-theme-success));
+      color: rgb(var(--v-theme-on-success));
+    }
+    :where(#my-app) .bg-warning {
+      --v-theme-overlay-multiplier: var(--v-theme-warning-overlay-multiplier);
+      background-color: rgb(var(--v-theme-warning));
+      color: rgb(var(--v-theme-on-warning));
+    }
   }
-  :where(#my-app) .bg-surface {
-    --v-theme-overlay-multiplier: var(--v-theme-surface-overlay-multiplier);
-    background-color: rgb(var(--v-theme-surface));
-    color: rgb(var(--v-theme-on-surface));
-  }
-  :where(#my-app) .bg-surface-bright {
-    --v-theme-overlay-multiplier: var(--v-theme-surface-bright-overlay-multiplier);
-    background-color: rgb(var(--v-theme-surface-bright));
-    color: rgb(var(--v-theme-on-surface-bright));
-  }
-  :where(#my-app) .bg-surface-light {
-    --v-theme-overlay-multiplier: var(--v-theme-surface-light-overlay-multiplier);
-    background-color: rgb(var(--v-theme-surface-light));
-    color: rgb(var(--v-theme-on-surface-light));
-  }
-  :where(#my-app) .bg-surface-variant {
-    --v-theme-overlay-multiplier: var(--v-theme-surface-variant-overlay-multiplier);
-    background-color: rgb(var(--v-theme-surface-variant));
-    color: rgb(var(--v-theme-on-surface-variant));
-  }
-  :where(#my-app) .bg-primary {
-    --v-theme-overlay-multiplier: var(--v-theme-primary-overlay-multiplier);
-    background-color: rgb(var(--v-theme-primary));
-    color: rgb(var(--v-theme-on-primary));
-  }
-  :where(#my-app) .bg-primary-darken-1 {
-    --v-theme-overlay-multiplier: var(--v-theme-primary-darken-1-overlay-multiplier);
-    background-color: rgb(var(--v-theme-primary-darken-1));
-    color: rgb(var(--v-theme-on-primary-darken-1));
-  }
-  :where(#my-app) .bg-secondary {
-    --v-theme-overlay-multiplier: var(--v-theme-secondary-overlay-multiplier);
-    background-color: rgb(var(--v-theme-secondary));
-    color: rgb(var(--v-theme-on-secondary));
-  }
-  :where(#my-app) .bg-secondary-darken-1 {
-    --v-theme-overlay-multiplier: var(--v-theme-secondary-darken-1-overlay-multiplier);
-    background-color: rgb(var(--v-theme-secondary-darken-1));
-    color: rgb(var(--v-theme-on-secondary-darken-1));
-  }
-  :where(#my-app) .bg-error {
-    --v-theme-overlay-multiplier: var(--v-theme-error-overlay-multiplier);
-    background-color: rgb(var(--v-theme-error));
-    color: rgb(var(--v-theme-on-error));
-  }
-  :where(#my-app) .bg-info {
-    --v-theme-overlay-multiplier: var(--v-theme-info-overlay-multiplier);
-    background-color: rgb(var(--v-theme-info));
-    color: rgb(var(--v-theme-on-info));
-  }
-  :where(#my-app) .bg-success {
-    --v-theme-overlay-multiplier: var(--v-theme-success-overlay-multiplier);
-    background-color: rgb(var(--v-theme-success));
-    color: rgb(var(--v-theme-on-success));
-  }
-  :where(#my-app) .bg-warning {
-    --v-theme-overlay-multiplier: var(--v-theme-warning-overlay-multiplier);
-    background-color: rgb(var(--v-theme-warning));
-    color: rgb(var(--v-theme-on-warning));
-  }
-  :where(#my-app) .text-background {
-    color: rgb(var(--v-theme-background));
-  }
-  :where(#my-app) .border-background {
-    --v-border-color: var(--v-theme-background);
-  }
-  :where(#my-app) .text-surface {
-    color: rgb(var(--v-theme-surface));
-  }
-  :where(#my-app) .border-surface {
-    --v-border-color: var(--v-theme-surface);
-  }
-  :where(#my-app) .text-surface-bright {
-    color: rgb(var(--v-theme-surface-bright));
-  }
-  :where(#my-app) .border-surface-bright {
-    --v-border-color: var(--v-theme-surface-bright);
-  }
-  :where(#my-app) .text-surface-light {
-    color: rgb(var(--v-theme-surface-light));
-  }
-  :where(#my-app) .border-surface-light {
-    --v-border-color: var(--v-theme-surface-light);
-  }
-  :where(#my-app) .text-surface-variant {
-    color: rgb(var(--v-theme-surface-variant));
-  }
-  :where(#my-app) .border-surface-variant {
-    --v-border-color: var(--v-theme-surface-variant);
-  }
-  :where(#my-app) .on-surface-variant {
-    color: rgb(var(--v-theme-on-surface-variant));
-  }
-  :where(#my-app) .text-primary {
-    color: rgb(var(--v-theme-primary));
-  }
-  :where(#my-app) .border-primary {
-    --v-border-color: var(--v-theme-primary);
-  }
-  :where(#my-app) .text-primary-darken-1 {
-    color: rgb(var(--v-theme-primary-darken-1));
-  }
-  :where(#my-app) .border-primary-darken-1 {
-    --v-border-color: var(--v-theme-primary-darken-1);
-  }
-  :where(#my-app) .text-secondary {
-    color: rgb(var(--v-theme-secondary));
-  }
-  :where(#my-app) .border-secondary {
-    --v-border-color: var(--v-theme-secondary);
-  }
-  :where(#my-app) .text-secondary-darken-1 {
-    color: rgb(var(--v-theme-secondary-darken-1));
-  }
-  :where(#my-app) .border-secondary-darken-1 {
-    --v-border-color: var(--v-theme-secondary-darken-1);
-  }
-  :where(#my-app) .text-error {
-    color: rgb(var(--v-theme-error));
-  }
-  :where(#my-app) .border-error {
-    --v-border-color: var(--v-theme-error);
-  }
-  :where(#my-app) .text-info {
-    color: rgb(var(--v-theme-info));
-  }
-  :where(#my-app) .border-info {
-    --v-border-color: var(--v-theme-info);
-  }
-  :where(#my-app) .text-success {
-    color: rgb(var(--v-theme-success));
-  }
-  :where(#my-app) .border-success {
-    --v-border-color: var(--v-theme-success);
-  }
-  :where(#my-app) .text-warning {
-    color: rgb(var(--v-theme-warning));
-  }
-  :where(#my-app) .border-warning {
-    --v-border-color: var(--v-theme-warning);
-  }
-  :where(#my-app) .on-background {
-    color: rgb(var(--v-theme-on-background));
-  }
-  :where(#my-app) .on-surface {
-    color: rgb(var(--v-theme-on-surface));
-  }
-  :where(#my-app) .on-surface-bright {
-    color: rgb(var(--v-theme-on-surface-bright));
-  }
-  :where(#my-app) .on-surface-light {
-    color: rgb(var(--v-theme-on-surface-light));
-  }
-  :where(#my-app) .on-primary {
-    color: rgb(var(--v-theme-on-primary));
-  }
-  :where(#my-app) .on-primary-darken-1 {
-    color: rgb(var(--v-theme-on-primary-darken-1));
-  }
-  :where(#my-app) .on-secondary {
-    color: rgb(var(--v-theme-on-secondary));
-  }
-  :where(#my-app) .on-secondary-darken-1 {
-    color: rgb(var(--v-theme-on-secondary-darken-1));
-  }
-  :where(#my-app) .on-error {
-    color: rgb(var(--v-theme-on-error));
-  }
-  :where(#my-app) .on-info {
-    color: rgb(var(--v-theme-on-info));
-  }
-  :where(#my-app) .on-success {
-    color: rgb(var(--v-theme-on-success));
-  }
-  :where(#my-app) .on-warning {
-    color: rgb(var(--v-theme-on-warning));
+  @layer foreground {
+    :where(#my-app) .text-background {
+      color: rgb(var(--v-theme-background));
+    }
+    :where(#my-app) .border-background {
+      --v-border-color: var(--v-theme-background);
+    }
+    :where(#my-app) .text-surface {
+      color: rgb(var(--v-theme-surface));
+    }
+    :where(#my-app) .border-surface {
+      --v-border-color: var(--v-theme-surface);
+    }
+    :where(#my-app) .text-surface-bright {
+      color: rgb(var(--v-theme-surface-bright));
+    }
+    :where(#my-app) .border-surface-bright {
+      --v-border-color: var(--v-theme-surface-bright);
+    }
+    :where(#my-app) .text-surface-light {
+      color: rgb(var(--v-theme-surface-light));
+    }
+    :where(#my-app) .border-surface-light {
+      --v-border-color: var(--v-theme-surface-light);
+    }
+    :where(#my-app) .text-surface-variant {
+      color: rgb(var(--v-theme-surface-variant));
+    }
+    :where(#my-app) .border-surface-variant {
+      --v-border-color: var(--v-theme-surface-variant);
+    }
+    :where(#my-app) .on-surface-variant {
+      color: rgb(var(--v-theme-on-surface-variant));
+    }
+    :where(#my-app) .text-primary {
+      color: rgb(var(--v-theme-primary));
+    }
+    :where(#my-app) .border-primary {
+      --v-border-color: var(--v-theme-primary);
+    }
+    :where(#my-app) .text-primary-darken-1 {
+      color: rgb(var(--v-theme-primary-darken-1));
+    }
+    :where(#my-app) .border-primary-darken-1 {
+      --v-border-color: var(--v-theme-primary-darken-1);
+    }
+    :where(#my-app) .text-secondary {
+      color: rgb(var(--v-theme-secondary));
+    }
+    :where(#my-app) .border-secondary {
+      --v-border-color: var(--v-theme-secondary);
+    }
+    :where(#my-app) .text-secondary-darken-1 {
+      color: rgb(var(--v-theme-secondary-darken-1));
+    }
+    :where(#my-app) .border-secondary-darken-1 {
+      --v-border-color: var(--v-theme-secondary-darken-1);
+    }
+    :where(#my-app) .text-error {
+      color: rgb(var(--v-theme-error));
+    }
+    :where(#my-app) .border-error {
+      --v-border-color: var(--v-theme-error);
+    }
+    :where(#my-app) .text-info {
+      color: rgb(var(--v-theme-info));
+    }
+    :where(#my-app) .border-info {
+      --v-border-color: var(--v-theme-info);
+    }
+    :where(#my-app) .text-success {
+      color: rgb(var(--v-theme-success));
+    }
+    :where(#my-app) .border-success {
+      --v-border-color: var(--v-theme-success);
+    }
+    :where(#my-app) .text-warning {
+      color: rgb(var(--v-theme-warning));
+    }
+    :where(#my-app) .border-warning {
+      --v-border-color: var(--v-theme-warning);
+    }
+    :where(#my-app) .on-background {
+      color: rgb(var(--v-theme-on-background));
+    }
+    :where(#my-app) .on-surface {
+      color: rgb(var(--v-theme-on-surface));
+    }
+    :where(#my-app) .on-surface-bright {
+      color: rgb(var(--v-theme-on-surface-bright));
+    }
+    :where(#my-app) .on-surface-light {
+      color: rgb(var(--v-theme-on-surface-light));
+    }
+    :where(#my-app) .on-primary {
+      color: rgb(var(--v-theme-on-primary));
+    }
+    :where(#my-app) .on-primary-darken-1 {
+      color: rgb(var(--v-theme-on-primary-darken-1));
+    }
+    :where(#my-app) .on-secondary {
+      color: rgb(var(--v-theme-on-secondary));
+    }
+    :where(#my-app) .on-secondary-darken-1 {
+      color: rgb(var(--v-theme-on-secondary-darken-1));
+    }
+    :where(#my-app) .on-error {
+      color: rgb(var(--v-theme-on-error));
+    }
+    :where(#my-app) .on-info {
+      color: rgb(var(--v-theme-on-info));
+    }
+    :where(#my-app) .on-success {
+      color: rgb(var(--v-theme-on-success));
+    }
+    :where(#my-app) .on-warning {
+      color: rgb(var(--v-theme-on-warning));
+    }
   }
 
 }
@@ -911,187 +919,191 @@ exports[`createTheme > should create style element 1`] = `
     --v-theme-code: 52, 52, 52;
     --v-theme-on-code: 204, 204, 204;
   }
-  .bg-background {
-    --v-theme-overlay-multiplier: var(--v-theme-background-overlay-multiplier);
-    background-color: rgb(var(--v-theme-background));
-    color: rgb(var(--v-theme-on-background));
+  @layer background {
+    .bg-background {
+      --v-theme-overlay-multiplier: var(--v-theme-background-overlay-multiplier);
+      background-color: rgb(var(--v-theme-background));
+      color: rgb(var(--v-theme-on-background));
+    }
+    .bg-surface {
+      --v-theme-overlay-multiplier: var(--v-theme-surface-overlay-multiplier);
+      background-color: rgb(var(--v-theme-surface));
+      color: rgb(var(--v-theme-on-surface));
+    }
+    .bg-surface-bright {
+      --v-theme-overlay-multiplier: var(--v-theme-surface-bright-overlay-multiplier);
+      background-color: rgb(var(--v-theme-surface-bright));
+      color: rgb(var(--v-theme-on-surface-bright));
+    }
+    .bg-surface-light {
+      --v-theme-overlay-multiplier: var(--v-theme-surface-light-overlay-multiplier);
+      background-color: rgb(var(--v-theme-surface-light));
+      color: rgb(var(--v-theme-on-surface-light));
+    }
+    .bg-surface-variant {
+      --v-theme-overlay-multiplier: var(--v-theme-surface-variant-overlay-multiplier);
+      background-color: rgb(var(--v-theme-surface-variant));
+      color: rgb(var(--v-theme-on-surface-variant));
+    }
+    .bg-primary {
+      --v-theme-overlay-multiplier: var(--v-theme-primary-overlay-multiplier);
+      background-color: rgb(var(--v-theme-primary));
+      color: rgb(var(--v-theme-on-primary));
+    }
+    .bg-primary-darken-1 {
+      --v-theme-overlay-multiplier: var(--v-theme-primary-darken-1-overlay-multiplier);
+      background-color: rgb(var(--v-theme-primary-darken-1));
+      color: rgb(var(--v-theme-on-primary-darken-1));
+    }
+    .bg-secondary {
+      --v-theme-overlay-multiplier: var(--v-theme-secondary-overlay-multiplier);
+      background-color: rgb(var(--v-theme-secondary));
+      color: rgb(var(--v-theme-on-secondary));
+    }
+    .bg-secondary-darken-1 {
+      --v-theme-overlay-multiplier: var(--v-theme-secondary-darken-1-overlay-multiplier);
+      background-color: rgb(var(--v-theme-secondary-darken-1));
+      color: rgb(var(--v-theme-on-secondary-darken-1));
+    }
+    .bg-error {
+      --v-theme-overlay-multiplier: var(--v-theme-error-overlay-multiplier);
+      background-color: rgb(var(--v-theme-error));
+      color: rgb(var(--v-theme-on-error));
+    }
+    .bg-info {
+      --v-theme-overlay-multiplier: var(--v-theme-info-overlay-multiplier);
+      background-color: rgb(var(--v-theme-info));
+      color: rgb(var(--v-theme-on-info));
+    }
+    .bg-success {
+      --v-theme-overlay-multiplier: var(--v-theme-success-overlay-multiplier);
+      background-color: rgb(var(--v-theme-success));
+      color: rgb(var(--v-theme-on-success));
+    }
+    .bg-warning {
+      --v-theme-overlay-multiplier: var(--v-theme-warning-overlay-multiplier);
+      background-color: rgb(var(--v-theme-warning));
+      color: rgb(var(--v-theme-on-warning));
+    }
   }
-  .bg-surface {
-    --v-theme-overlay-multiplier: var(--v-theme-surface-overlay-multiplier);
-    background-color: rgb(var(--v-theme-surface));
-    color: rgb(var(--v-theme-on-surface));
-  }
-  .bg-surface-bright {
-    --v-theme-overlay-multiplier: var(--v-theme-surface-bright-overlay-multiplier);
-    background-color: rgb(var(--v-theme-surface-bright));
-    color: rgb(var(--v-theme-on-surface-bright));
-  }
-  .bg-surface-light {
-    --v-theme-overlay-multiplier: var(--v-theme-surface-light-overlay-multiplier);
-    background-color: rgb(var(--v-theme-surface-light));
-    color: rgb(var(--v-theme-on-surface-light));
-  }
-  .bg-surface-variant {
-    --v-theme-overlay-multiplier: var(--v-theme-surface-variant-overlay-multiplier);
-    background-color: rgb(var(--v-theme-surface-variant));
-    color: rgb(var(--v-theme-on-surface-variant));
-  }
-  .bg-primary {
-    --v-theme-overlay-multiplier: var(--v-theme-primary-overlay-multiplier);
-    background-color: rgb(var(--v-theme-primary));
-    color: rgb(var(--v-theme-on-primary));
-  }
-  .bg-primary-darken-1 {
-    --v-theme-overlay-multiplier: var(--v-theme-primary-darken-1-overlay-multiplier);
-    background-color: rgb(var(--v-theme-primary-darken-1));
-    color: rgb(var(--v-theme-on-primary-darken-1));
-  }
-  .bg-secondary {
-    --v-theme-overlay-multiplier: var(--v-theme-secondary-overlay-multiplier);
-    background-color: rgb(var(--v-theme-secondary));
-    color: rgb(var(--v-theme-on-secondary));
-  }
-  .bg-secondary-darken-1 {
-    --v-theme-overlay-multiplier: var(--v-theme-secondary-darken-1-overlay-multiplier);
-    background-color: rgb(var(--v-theme-secondary-darken-1));
-    color: rgb(var(--v-theme-on-secondary-darken-1));
-  }
-  .bg-error {
-    --v-theme-overlay-multiplier: var(--v-theme-error-overlay-multiplier);
-    background-color: rgb(var(--v-theme-error));
-    color: rgb(var(--v-theme-on-error));
-  }
-  .bg-info {
-    --v-theme-overlay-multiplier: var(--v-theme-info-overlay-multiplier);
-    background-color: rgb(var(--v-theme-info));
-    color: rgb(var(--v-theme-on-info));
-  }
-  .bg-success {
-    --v-theme-overlay-multiplier: var(--v-theme-success-overlay-multiplier);
-    background-color: rgb(var(--v-theme-success));
-    color: rgb(var(--v-theme-on-success));
-  }
-  .bg-warning {
-    --v-theme-overlay-multiplier: var(--v-theme-warning-overlay-multiplier);
-    background-color: rgb(var(--v-theme-warning));
-    color: rgb(var(--v-theme-on-warning));
-  }
-  .text-background {
-    color: rgb(var(--v-theme-background));
-  }
-  .border-background {
-    --v-border-color: var(--v-theme-background);
-  }
-  .text-surface {
-    color: rgb(var(--v-theme-surface));
-  }
-  .border-surface {
-    --v-border-color: var(--v-theme-surface);
-  }
-  .text-surface-bright {
-    color: rgb(var(--v-theme-surface-bright));
-  }
-  .border-surface-bright {
-    --v-border-color: var(--v-theme-surface-bright);
-  }
-  .text-surface-light {
-    color: rgb(var(--v-theme-surface-light));
-  }
-  .border-surface-light {
-    --v-border-color: var(--v-theme-surface-light);
-  }
-  .text-surface-variant {
-    color: rgb(var(--v-theme-surface-variant));
-  }
-  .border-surface-variant {
-    --v-border-color: var(--v-theme-surface-variant);
-  }
-  .on-surface-variant {
-    color: rgb(var(--v-theme-on-surface-variant));
-  }
-  .text-primary {
-    color: rgb(var(--v-theme-primary));
-  }
-  .border-primary {
-    --v-border-color: var(--v-theme-primary);
-  }
-  .text-primary-darken-1 {
-    color: rgb(var(--v-theme-primary-darken-1));
-  }
-  .border-primary-darken-1 {
-    --v-border-color: var(--v-theme-primary-darken-1);
-  }
-  .text-secondary {
-    color: rgb(var(--v-theme-secondary));
-  }
-  .border-secondary {
-    --v-border-color: var(--v-theme-secondary);
-  }
-  .text-secondary-darken-1 {
-    color: rgb(var(--v-theme-secondary-darken-1));
-  }
-  .border-secondary-darken-1 {
-    --v-border-color: var(--v-theme-secondary-darken-1);
-  }
-  .text-error {
-    color: rgb(var(--v-theme-error));
-  }
-  .border-error {
-    --v-border-color: var(--v-theme-error);
-  }
-  .text-info {
-    color: rgb(var(--v-theme-info));
-  }
-  .border-info {
-    --v-border-color: var(--v-theme-info);
-  }
-  .text-success {
-    color: rgb(var(--v-theme-success));
-  }
-  .border-success {
-    --v-border-color: var(--v-theme-success);
-  }
-  .text-warning {
-    color: rgb(var(--v-theme-warning));
-  }
-  .border-warning {
-    --v-border-color: var(--v-theme-warning);
-  }
-  .on-background {
-    color: rgb(var(--v-theme-on-background));
-  }
-  .on-surface {
-    color: rgb(var(--v-theme-on-surface));
-  }
-  .on-surface-bright {
-    color: rgb(var(--v-theme-on-surface-bright));
-  }
-  .on-surface-light {
-    color: rgb(var(--v-theme-on-surface-light));
-  }
-  .on-primary {
-    color: rgb(var(--v-theme-on-primary));
-  }
-  .on-primary-darken-1 {
-    color: rgb(var(--v-theme-on-primary-darken-1));
-  }
-  .on-secondary {
-    color: rgb(var(--v-theme-on-secondary));
-  }
-  .on-secondary-darken-1 {
-    color: rgb(var(--v-theme-on-secondary-darken-1));
-  }
-  .on-error {
-    color: rgb(var(--v-theme-on-error));
-  }
-  .on-info {
-    color: rgb(var(--v-theme-on-info));
-  }
-  .on-success {
-    color: rgb(var(--v-theme-on-success));
-  }
-  .on-warning {
-    color: rgb(var(--v-theme-on-warning));
+  @layer foreground {
+    .text-background {
+      color: rgb(var(--v-theme-background));
+    }
+    .border-background {
+      --v-border-color: var(--v-theme-background);
+    }
+    .text-surface {
+      color: rgb(var(--v-theme-surface));
+    }
+    .border-surface {
+      --v-border-color: var(--v-theme-surface);
+    }
+    .text-surface-bright {
+      color: rgb(var(--v-theme-surface-bright));
+    }
+    .border-surface-bright {
+      --v-border-color: var(--v-theme-surface-bright);
+    }
+    .text-surface-light {
+      color: rgb(var(--v-theme-surface-light));
+    }
+    .border-surface-light {
+      --v-border-color: var(--v-theme-surface-light);
+    }
+    .text-surface-variant {
+      color: rgb(var(--v-theme-surface-variant));
+    }
+    .border-surface-variant {
+      --v-border-color: var(--v-theme-surface-variant);
+    }
+    .on-surface-variant {
+      color: rgb(var(--v-theme-on-surface-variant));
+    }
+    .text-primary {
+      color: rgb(var(--v-theme-primary));
+    }
+    .border-primary {
+      --v-border-color: var(--v-theme-primary);
+    }
+    .text-primary-darken-1 {
+      color: rgb(var(--v-theme-primary-darken-1));
+    }
+    .border-primary-darken-1 {
+      --v-border-color: var(--v-theme-primary-darken-1);
+    }
+    .text-secondary {
+      color: rgb(var(--v-theme-secondary));
+    }
+    .border-secondary {
+      --v-border-color: var(--v-theme-secondary);
+    }
+    .text-secondary-darken-1 {
+      color: rgb(var(--v-theme-secondary-darken-1));
+    }
+    .border-secondary-darken-1 {
+      --v-border-color: var(--v-theme-secondary-darken-1);
+    }
+    .text-error {
+      color: rgb(var(--v-theme-error));
+    }
+    .border-error {
+      --v-border-color: var(--v-theme-error);
+    }
+    .text-info {
+      color: rgb(var(--v-theme-info));
+    }
+    .border-info {
+      --v-border-color: var(--v-theme-info);
+    }
+    .text-success {
+      color: rgb(var(--v-theme-success));
+    }
+    .border-success {
+      --v-border-color: var(--v-theme-success);
+    }
+    .text-warning {
+      color: rgb(var(--v-theme-warning));
+    }
+    .border-warning {
+      --v-border-color: var(--v-theme-warning);
+    }
+    .on-background {
+      color: rgb(var(--v-theme-on-background));
+    }
+    .on-surface {
+      color: rgb(var(--v-theme-on-surface));
+    }
+    .on-surface-bright {
+      color: rgb(var(--v-theme-on-surface-bright));
+    }
+    .on-surface-light {
+      color: rgb(var(--v-theme-on-surface-light));
+    }
+    .on-primary {
+      color: rgb(var(--v-theme-on-primary));
+    }
+    .on-primary-darken-1 {
+      color: rgb(var(--v-theme-on-primary-darken-1));
+    }
+    .on-secondary {
+      color: rgb(var(--v-theme-on-secondary));
+    }
+    .on-secondary-darken-1 {
+      color: rgb(var(--v-theme-on-secondary-darken-1));
+    }
+    .on-error {
+      color: rgb(var(--v-theme-on-error));
+    }
+    .on-info {
+      color: rgb(var(--v-theme-on-info));
+    }
+    .on-success {
+      color: rgb(var(--v-theme-on-success));
+    }
+    .on-warning {
+      color: rgb(var(--v-theme-on-warning));
+    }
   }
 
 }

@@ -416,7 +416,14 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
         }
       }
 
-      lines.push(...bgLines, ...fgLines)
+      lines.push(
+        '@layer background {\n',
+        ...bgLines.map(v => `  ${v}`),
+        '}\n',
+        '@layer foreground {\n',
+        ...fgLines.map(v => `  ${v}`),
+        '}\n',
+      )
     }
 
     return '@layer vuetify.theme {\n' + lines.map(v => `  ${v}`).join('') + '\n}'
