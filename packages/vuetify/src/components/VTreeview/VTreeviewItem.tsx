@@ -18,12 +18,16 @@ import { genericComponent, propsFactory, useRender } from '@/util'
 // Types
 import type { PropType } from 'vue'
 import { VTreeviewSymbol } from './shared'
+import { VAvatar } from '../VAvatar'
+import { VDefaultsProvider } from '../VDefaultsProvider'
+import { VIcon } from '../VIcon'
 import type { VListItemSlots } from '@/components/VList/VListItem'
 import type { IndentLineType } from '@/util'
 
 export const makeVTreeviewItemProps = propsFactory({
   loading: Boolean,
   hideActions: Boolean,
+  hasCustomPrepend: Boolean,
   indentLines: Array as PropType<IndentLineType[]>,
   toggleIcon: IconValue,
 
@@ -73,7 +77,11 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
 
     useRender(() => {
       const listItemProps = VListItem.filterProps(props)
-      const hasPrepend = slots.prepend || props.toggleIcon || props.indentLines
+      const hasPrepend = slots.prepend ||
+        props.toggleIcon ||
+        props.indentLines ||
+        props.prependIcon ||
+        props.prependAvatar
 
       return (
         <VListItem
@@ -132,7 +140,46 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
                       )}
                     </VListItemAction>
                   )}
-                  { slots.prepend?.(slotProps) }
+
+                  { !props.hasCustomPrepend ? (
+                    <>
+                      { slots.prepend?.(slotProps) }
+                      { props.prependAvatar && (
+                        <VAvatar
+                          key="prepend-avatar"
+                          density={ props.density }
+                          image={ props.prependAvatar }
+                        />
+                      )}
+
+                      { props.prependIcon && (
+                        <VIcon
+                          key="prepend-icon"
+                          density={ props.density }
+                          icon={ props.prependIcon }
+                        />
+                      )}
+                    </>
+                  ) : (
+                    <VDefaultsProvider
+                      key="prepend-defaults"
+                      defaults={{
+                        VAvatar: {
+                          density: props.density,
+                          image: props.appendAvatar,
+                        },
+                        VIcon: {
+                          density: props.density,
+                          icon: props.appendIcon,
+                        },
+                        VListItemAction: {
+                          start: true,
+                        },
+                      }}
+                    >
+                      { slots.prepend?.(slotProps) }
+                    </VDefaultsProvider>
+                  )}
                 </>
               )
             } : undefined,
