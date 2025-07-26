@@ -6,32 +6,38 @@
     :options="options"
   >
     <div>
-      <v-color-input v-bind="props"></v-color-input>
+      <v-color-input model-value="#14BCD3" v-bind="props"></v-color-input>
     </div>
 
     <template v-slot:configuration>
+      <v-select v-model="pipVariant" :items="pipVariants" label="Pip variant" clearable></v-select>
+
       <v-checkbox v-model="colorPip" label="Color Pip"></v-checkbox>
-
-      <v-checkbox v-model="clear" label="Clearable"></v-checkbox>
-
+      <v-checkbox v-model="clearable" label="Clearable"></v-checkbox>
       <v-checkbox v-model="disabled" label="Disabled"></v-checkbox>
+      <v-checkbox v-model="hideActions" label="Hide picker actions"></v-checkbox>
     </template>
   </ExamplesUsageExample>
 </template>
 
 <script setup>
   const name = 'v-color-input'
+
+  const pipVariants = ['flat', 'tonal', 'outlined']
+
   const model = ref('default')
   const options = ['outlined', 'underlined', 'solo', 'solo-filled', 'solo-inverted']
-  const clear = ref(false)
+  const clearable = ref(false)
+  const hideActions = ref(false)
+  const pipVariant = ref()
   const colorPip = ref(true)
-  const counter = ref(false)
   const disabled = ref(false)
   const props = computed(() => {
     return {
-      clearable: clear.value || undefined,
-      colorPip: colorPip.value || false,
-      counter: counter.value || undefined,
+      clearable: clearable.value || undefined,
+      'color-pip': colorPip.value || undefined,
+      'pip-variant': pipVariant.value || undefined,
+      'hide-actions': hideActions.value || undefined,
       disabled: disabled.value || undefined,
       label: 'Color input',
       variant: model.value === 'default' ? undefined : model.value,
