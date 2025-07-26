@@ -2,7 +2,7 @@
 import { VCommandPalette } from '../VCommandPalette'
 
 // Utilities
-import { render, screen, userEvent } from '@test'
+import { render, screen, userEvent, wait } from '@test'
 import { cleanup } from '@testing-library/vue'
 import { ref } from 'vue'
 
@@ -238,7 +238,7 @@ describe('VCommandPalette', () => {
       await screen.findByRole('dialog')
 
       // Wait a moment for the component to fully initialize
-      await new Promise(resolve => setTimeout(resolve, 50))
+      await wait(50)
 
       // Immediately press Enter without any ArrowDown/ArrowUp navigation
       // The first item should be auto-selected and executed

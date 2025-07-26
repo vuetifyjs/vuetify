@@ -281,7 +281,7 @@ describe('VCommandPalette', () => {
       expect(handler).toHaveBeenCalledTimes(1)
     })
 
-    it('should display hotkey hints in items', async () => {
+    it('should display hotkey hints in items', () => {
       const model = ref(true)
       const items = [
         {

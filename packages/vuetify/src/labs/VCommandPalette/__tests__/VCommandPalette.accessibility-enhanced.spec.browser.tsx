@@ -2,7 +2,7 @@
 import { VCommandPalette } from '../VCommandPalette'
 
 // Utilities
-import { render, screen, userEvent } from '@test'
+import { render, screen, userEvent, wait } from '@test'
 import { ref } from 'vue'
 
 // Test data
@@ -67,7 +67,7 @@ describe('VCommandPalette', () => {
       await screen.findByRole('dialog')
 
       // Wait for component to fully initialize
-      await new Promise(resolve => setTimeout(resolve, 50))
+      await wait(50)
 
       // Should have listbox with aria-activedescendant
       const listbox = screen.getByRole('listbox')
@@ -82,7 +82,7 @@ describe('VCommandPalette', () => {
       await userEvent.keyboard('{ArrowDown}')
 
       // Wait for navigation to complete
-      await new Promise(resolve => setTimeout(resolve, 50))
+      await wait(50)
 
       // aria-activedescendant should update
       expect(listbox).toHaveAttribute('aria-activedescendant', 'command-palette-item-1')
@@ -198,7 +198,7 @@ describe('VCommandPalette', () => {
       await screen.findByRole('dialog')
 
       // Wait for component to fully initialize
-      await new Promise(resolve => setTimeout(resolve, 50))
+      await wait(50)
 
       const listbox = screen.getByRole('listbox')
       const firstItem = screen.getByText('First Item').closest('[id^="command-palette-item"]')
@@ -211,7 +211,7 @@ describe('VCommandPalette', () => {
       await userEvent.keyboard('{ArrowDown}')
 
       // Wait for navigation to complete
-      await new Promise(resolve => setTimeout(resolve, 50))
+      await wait(50)
 
       // Selection should update to second item
       expect(listbox).toHaveAttribute('aria-activedescendant', secondItem?.id)
@@ -293,8 +293,10 @@ describe('VCommandPalette', () => {
 
     it('should handle keyboard navigation edge cases', async () => {
       const model = ref(true)
+      const element = ref()
       render(() => (
         <VCommandPalette
+          ref={ element }
           v-model={ model.value }
           items={ accessibilityItems }
         />
@@ -303,18 +305,19 @@ describe('VCommandPalette', () => {
       await screen.findByRole('dialog')
 
       // Wait for component to fully initialize
-      await new Promise(resolve => setTimeout(resolve, 50))
+      await wait(50)
 
       const listbox = screen.getByRole('listbox')
 
       // Should start with first item selected
+      expect(element.value.selectedIndex).toBe(0)
       expect(listbox).toHaveAttribute('aria-activedescendant', 'command-palette-item-0')
 
       // Arrow up from first item should wrap to last
       await userEvent.keyboard('{ArrowUp}')
 
       // Wait for navigation to complete
-      await new Promise(resolve => setTimeout(resolve, 50))
+      await wait(50)
 
       expect(listbox).toHaveAttribute('aria-activedescendant', 'command-palette-item-2')
 
@@ -322,7 +325,7 @@ describe('VCommandPalette', () => {
       await userEvent.keyboard('{ArrowDown}')
 
       // Wait for navigation to complete
-      await new Promise(resolve => setTimeout(resolve, 50))
+      await wait(50)
 
       expect(listbox).toHaveAttribute('aria-activedescendant', 'command-palette-item-0')
     })
