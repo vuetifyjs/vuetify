@@ -41,6 +41,7 @@ import { VCommandPaletteSearch } from '@/labs/VCommandPalette/VCommandPaletteSea
 import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeFilterProps, useFilter } from '@/composables/filter'
+import { forwardRefs } from '@/composables/forwardRefs'
 import { useHotkey } from '@/composables/hotkey'
 import { makeItemsProps, transformItems } from '@/composables/list-items'
 import { useLocale } from '@/composables/locale'
@@ -51,7 +52,7 @@ import { provideCommandPaletteContext } from '@/labs/VCommandPalette/composables
 import { useCommandPaletteNavigation } from '@/labs/VCommandPalette/composables/useCommandPaletteNavigation'
 
 // Utilities
-import { computed, inject, nextTick, provide, readonly, ref, shallowRef, toRef, watch, watchEffect } from 'vue'
+import { computed, nextTick, readonly, ref, shallowRef, toRef, watch, watchEffect } from 'vue'
 import { consoleError, EventProp, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -331,7 +332,7 @@ const VCommandPaletteContent = genericComponent<VCommandPaletteSlots>()({
 
     // Assign selectedIndex from navigation
     selectedIndex = navigation.selectedIndex
-    const { activeDescendantId, setSelectedIndex } = navigation
+    const { activeDescendantId, setSelectedIndex, reset } = navigation
 
     // Provide context for custom layouts
     const context = provideCommandPaletteContext({
@@ -350,24 +351,9 @@ const VCommandPaletteContent = genericComponent<VCommandPaletteSlots>()({
 
     // Reset navigation state when items change
     watch(() => props.items, () => {
-      navigationStack.value = []
-      search.value = ''
-      selectedIndex.value = -1
+      reset()
       // Reset to root level when items change
       currentItems.value = props.items || []
-    })
-
-    // Reset state when the parent dialog closes
-    // This is passed from the parent VCommandPalette component
-    const parentIsActive = inject<Ref<boolean>>('commandPaletteIsActive', ref(true))
-    watch(parentIsActive, (newValue, oldValue) => {
-      if (!newValue && oldValue) {
-        // Dialog is closing - reset state for next open
-        navigationStack.value = []
-        search.value = ''
-        selectedIndex.value = -1
-        currentItems.value = props.items || []
-      }
     })
 
     // Register item-specific hotkeys when the palette is open
@@ -486,6 +472,11 @@ const VCommandPaletteContent = genericComponent<VCommandPaletteSlots>()({
         </>
       )
     })
+
+    return {
+      selectedIndex,
+      reset,
+    }
   },
 })
 
@@ -607,9 +598,9 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
     const { themeClasses } = provideTheme(props)
     const { densityClasses } = useDensity(props)
 
-    // Provide isActive state to child components for state reset
-    provide('commandPaletteIsActive', isActive)
+    const vCommandPaletteContentRef = ref<InstanceType<typeof VCommandPaletteContent>>()
 
+    // Provide isActive state to child components for state reset
     if (!props.contained) {
       // Focus restoration for accessibility compliance (WCAG 2.1 Level A)
       const previouslyFocusedElement = shallowRef<HTMLElement | null>(null)
@@ -672,6 +663,7 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
      * Handles dialog leave transition completion
      */
     function onAfterLeave () {
+      vCommandPaletteContentRef.value?.reset()
       emit('afterLeave')
     }
 
@@ -685,6 +677,7 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
           onClose={ onClose }
           onClick:item={ onClickItem }
           v-slots={ slots }
+          ref={ vCommandPaletteContentRef }
         />
       )
 
@@ -736,6 +729,8 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
         />
       )
     })
+
+    return forwardRefs({}, vCommandPaletteContentRef)
   },
 })
 
