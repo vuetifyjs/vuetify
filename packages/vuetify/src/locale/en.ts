@@ -122,6 +122,7 @@ export default {
     navigate: 'to navigate',
     goBack: 'to go back',
     close: 'to close',
+    then: 'then',
     placeholder: 'Type a command or search...',
   },
   hotkey: {
