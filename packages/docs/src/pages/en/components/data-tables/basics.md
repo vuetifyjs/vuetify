@@ -214,6 +214,12 @@ When using the **group-by** prop, you can customize the group header with the `g
 
 <ExamplesExample file="v-data-table/slot-group-header" />
 
+#### Group summary slot
+
+By default grouping with **group-by** shows only the header slot. When you define `group-summary` slot, additional summary row will appear below the group rows.
+
+<ExamplesExample file="v-data-table/slot-group-summary" />
+
 #### Loading slot
 
 The `loading` slot allows you to customize your table's display state when fetching data. In this example we utilize the [v-skeleton-loader](/components/skeleton-loaders) component to display a loading animation.

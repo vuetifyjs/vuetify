@@ -16,8 +16,8 @@ import { genericComponent, getPrefixedEventHandlers, propsFactory, useRender } f
 
 // Types
 import type { PropType } from 'vue'
-import type { Group } from './composables/group'
-import type { CellProps, DataTableItem, GroupHeaderSlot, ItemSlot, RowProps } from './types'
+import type { Group, GroupSummary } from './composables/group'
+import type { CellProps, DataTableItem, GroupHeaderSlot, GroupSummarySlot, ItemSlot, RowProps } from './types'
 import type { VDataTableGroupHeaderRowSlots } from './VDataTableGroupHeaderRow'
 import type { VDataTableRowSlots } from './VDataTableRow'
 import type { GenericProps } from '@/util'
@@ -26,6 +26,7 @@ export type VDataTableRowsSlots<T> = VDataTableGroupHeaderRowSlots & VDataTableR
   item: ItemSlot<T> & { props: Record<string, any> }
   loading: never
   'group-header': GroupHeaderSlot
+  'group-summary': GroupSummarySlot
   'no-data': never
   'expanded-row': ItemSlot<T>
 }
@@ -38,7 +39,7 @@ export const makeVDataTableRowsProps = propsFactory({
   },
   hideNoData: Boolean,
   items: {
-    type: Array as PropType<readonly (DataTableItem | Group)[]>,
+    type: Array as PropType<readonly (DataTableItem | Group | GroupSummary)[]>,
     default: () => ([]),
   },
   noDataText: {
@@ -53,7 +54,7 @@ export const makeVDataTableRowsProps = propsFactory({
 
 export const VDataTableRows = genericComponent<new <T>(
   props: {
-    items?: readonly (DataTableItem<T> | Group<T>)[]
+    items?: readonly (DataTableItem<T> | Group<T> | GroupSummary<T>)[]
   },
   slots: VDataTableRowsSlots<T>,
 ) => GenericProps<typeof props, typeof slots>>()({
@@ -122,6 +123,17 @@ export const VDataTableRows = genericComponent<new <T>(
                   v-slots={ slots }
                 />
               )
+            }
+
+            if (item.type === 'group-summary') {
+              const slotProps = {
+                index,
+                item,
+                columns: columns.value,
+                toggleGroup,
+              } satisfies GroupSummarySlot
+
+              return slots['group-summary']?.(slotProps) ?? ''
             }
 
             const slotProps = {

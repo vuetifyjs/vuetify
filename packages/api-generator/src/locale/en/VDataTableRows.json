@@ -18,6 +18,7 @@
     "data-table-select": "Slot for custom rendering of a header cell with the select checkbox.",
     "expanded-row": "Slot for custom rendering of an expanded row.",
     "group-header": "Slot for custom rendering of a group header.",
+    "group-summary": "Slot for custom rendering of a group summary.",
     "item.data-table-expand": "Slot for custom rendering of a row cell with the expand icon.",
     "item.data-table-select": "Slot for custom rendering of a row cell with the select checkbox.",
     "loading": "Slot for custom rendering of the loading state."
