@@ -42,7 +42,7 @@ import { useLocale } from '@/composables/locale' // For default no-data text
 
 // Utilities
 import { computed, nextTick, ref, watch } from 'vue'
-import { genericComponent, omit, propsFactory, useRender } from '@/util'
+import { genericComponent, omit, onlyDefinedProps, propsFactory, useRender } from '@/util'
 
 // Types
 import type { MaybeRef, PropType } from 'vue'
@@ -291,46 +291,19 @@ export const VCommandPaletteList = genericComponent<VCommandPaletteListSlots>()(
 
     /**
      * An adapter function that extracts the necessary props from a `VuetifyListItem`
-     * to pass to a `VListItem` component. It also attaches the click handler.
+     * to pass to a VListItem component. It also attaches the click handler.
      *
      * This function bridges the gap between our internal item representation
-     * and the props expected by Vuetify's VListItem component.
+     * and the props expected by VListItem component.
      */
     function getVListItemProps (item: any, index: number, isSelectable = true) {
-      const baseProps = {
+      return {
         title: item.title,
-        // Only add click handler for selectable items
-        onClick: isSelectable ? (e: MouseEvent | KeyboardEvent) => emit('click:item', item, e) : undefined,
+        onClick: isSelectable
+          ? (e: MouseEvent | KeyboardEvent) => emit('click:item', item, e)
+          : undefined,
+        ...onlyDefinedProps(VListItem.filterProps(omit(item.props || {}, ['title', 'value']))),
       }
-
-      // Extract properties from item.props (VuetifyListItem structure)
-      const itemProps = item.props || {}
-      const optionalProps: Record<string, any> = {}
-
-      // Map VuetifyListItem props to VListItem props
-      if (itemProps.subtitle !== undefined) {
-        optionalProps.subtitle = itemProps.subtitle
-      }
-      if (itemProps.appendAvatar !== undefined) {
-        optionalProps.appendAvatar = itemProps.appendAvatar
-      }
-      if (itemProps.appendIcon !== undefined) {
-        optionalProps.appendIcon = itemProps.appendIcon
-      }
-      if (itemProps.prependAvatar !== undefined) {
-        optionalProps.prependAvatar = itemProps.prependAvatar
-      }
-      if (itemProps.prependIcon !== undefined) {
-        optionalProps.prependIcon = itemProps.prependIcon
-      }
-      if (itemProps.to !== undefined) {
-        optionalProps.to = itemProps.to
-      }
-      if (itemProps.href !== undefined) {
-        optionalProps.href = itemProps.href
-      }
-
-      return { ...baseProps, ...optionalProps }
     }
 
     /**
