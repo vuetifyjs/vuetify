@@ -132,9 +132,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
 
     const _inputText = shallowRef<string | null>(null)
     watchEffect(() => {
-      if (isFocused.value && !controlsDisabled.value) {
-        // ignore external changes
-      } else if (model.value == null) {
+      if (model.value == null) {
         _inputText.value = null
       } else if (!isNaN(model.value)) {
         _inputText.value = correctPrecision(model.value)
