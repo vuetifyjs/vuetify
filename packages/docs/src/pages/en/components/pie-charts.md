@@ -59,8 +59,9 @@ export default createVuetify({
 
 There are some notable features that are not common in other Vuetify components:
 
-- `tooltip-[title/substitle]-format` props take a string with `[title]` or `[value]` macro. It accepts custom formatter function, should you need to transform the value (e.g. format with i18n)
-- `animations` prop let you control duration and easing
+- each item is expected to have a `key` field (name can be changed with `item-key`)
+- `tooltip` accept object and lets you customize transition, offset and the text. Notably, the `titleFormat` and `subtitleFormat` can be functions or simple string templates that support `[title]` and `[value]` macros.
+- `animations` prop lets you control duration and easing
 
 ### Props
 
@@ -68,7 +69,7 @@ The `v-pie` supports various stylistic props to customize the appearance and hov
 
 #### Size
 
-Charts are more like drawings then regular HTML elements and their size needs to be controlled externally. `hover-scale` will reserve some space to move segments on hover.
+Charts are more like drawings then regular HTML elements and their size needs to be controlled externally. `hover-scale` will reserve some space to enlarge segments on hover.
 
 <ExamplesExample file="v-pie/prop-size" />
 
@@ -86,7 +87,7 @@ The legend can be moved to any side or hidden entirely. With little effort you c
 
 #### Item text overrides
 
-Single item representation can be easily customized
+Single item representation can be easily customized with string templates.
 
 <ExamplesExample file="v-pie/prop-formats" />
 
