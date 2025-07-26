@@ -103,20 +103,21 @@ export const VCommandPaletteItem = genericComponent<VCommandPaletteItemSlots>()(
       }
       // Register with the new key
       currentRegisteredId = newId
-      onMounted(() => {
-        context.registerItem(itemId.value, elementRef, props.item)
-      })
+    })
 
-      // Re-register with new ID
-      watch(itemId, (newId, oldId) => {
-        if (oldId) context.unregisterItem(oldId)
-        context.registerItem(newId, elementRef, props.item)
-      })
+    // Re-register with new ID
+    watch(itemId, (newId, oldId) => {
+      if (oldId) context.unregisterItem(oldId)
+      context.registerItem(newId, elementRef, props.item)
+    })
 
-      // Clean up registration when component unmounts
-      onBeforeUnmount(() => {
-        context.unregisterItem(itemId.value)
-      })
+    onMounted(() => {
+      context.registerItem(itemId.value, elementRef, props.item)
+    })
+
+    // Clean up registration when component unmounts
+    onBeforeUnmount(() => {
+      context.unregisterItem(itemId.value)
     })
 
     // Get computed props from the context (includes ARIA attributes, classes, etc.)
