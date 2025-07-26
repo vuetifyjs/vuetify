@@ -50,7 +50,7 @@
     <div class="d-flex mt-6 justify-center">
       <v-pie
         :items="items"
-        :legend="{ position: 'left' }"
+        :legend="{ position: $vuetify.display.sm ? 'left' : 'bottom' }"
         :tooltip="{ subtitleFormat: '[value]%' }"
         hover-scale=".1"
         inner-cut="60"

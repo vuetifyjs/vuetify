@@ -16,7 +16,7 @@
       </svg>
     </div>
 
-    <div class="d-flex align-center">
+    <div class="d-flex flex-wrap justify-center align-center ga-12">
       <v-pie
         :items="items"
         :palette="palettes[currentPalette]"
@@ -26,7 +26,7 @@
         tooltip
       ></v-pie>
 
-      <v-list v-model:selected="currentPalette" class="ml-12 py-0 bg-transparent" mandatory selectable>
+      <v-list v-model:selected="currentPalette" class="flex-shrink-0 py-0 bg-transparent" mandatory selectable>
         <v-list-item v-for="(palette, pi) in palettes" :key="pi" :value="pi" border="t b">
           <v-avatar
             v-for="(c, ci) in palette"

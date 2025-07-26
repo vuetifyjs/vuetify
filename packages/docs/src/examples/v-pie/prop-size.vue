@@ -1,5 +1,5 @@
 <template>
-  <v-container class="d-flex justify-center align-start ga-6" fluid>
+  <v-container class="d-flex flex-wrap justify-center align-start ga-6" fluid>
 
     <div>
       <v-sheet class="pa-3" rounded="xl" variant="outlined">
@@ -11,7 +11,7 @@
       </ul>
     </div>
 
-    <v-divider vertical></v-divider>
+    <v-divider class="hidden-sm-and-down" vertical></v-divider>
 
     <div>
       <v-sheet class="pa-3" rounded="xl" variant="outlined">
@@ -23,7 +23,7 @@
       </ul>
     </div>
 
-    <v-divider vertical></v-divider>
+    <v-divider class="hidden-sm-and-down" vertical></v-divider>
 
     <div>
       <v-sheet class="pa-3" rounded="xl" variant="outlined">

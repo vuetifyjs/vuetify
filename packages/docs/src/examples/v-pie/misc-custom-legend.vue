@@ -18,7 +18,7 @@
       <v-pie
         :key="selectedGroup"
         :items="currentItems"
-        :legend="{ position: 'right' }"
+        :legend="{ position: $vuetify.display.md ? 'right' : 'bottom' }"
         :tooltip="{ subtitleFormat: '[value]%' }"
         class="pa-3 mt-3"
         gap="2"
