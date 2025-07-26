@@ -267,10 +267,8 @@ describe('VCommandPalette Item Structure Validation', () => {
     }
 
     expect(isParentDefinition(validParentItem)).toBe(true)
-    if (validParentItem.type === 'parent') {
-      expect(validParentItem.children).toHaveLength(1)
-      expect(validParentItem.children[0].title).toBe('Child Item')
-    }
+    expect(validParentItem.children).toHaveLength(1)
+    expect(validParentItem.children[0].title).toBe('Child Item')
   })
 
   it('should validate proper item structure for group items', () => {

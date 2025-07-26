@@ -35,6 +35,7 @@ import '@/labs/VCommandPalette/VCommandPalette.scss'
 import { VDivider } from '@/components/VDivider'
 import { VList, VListItem, VListSubheader } from '@/components/VList'
 import { makeVListProps } from '@/components/VList/VList'
+import { VHotkey } from '@/labs/VHotkey'
 
 // Composables
 import { useLocale } from '@/composables/locale' // For default no-data text
@@ -47,7 +48,6 @@ import { genericComponent, omit, propsFactory, useRender } from '@/util'
 import type { MaybeRef, PropType } from 'vue'
 import type { RouteLocationRaw } from 'vue-router'
 import type { ListItem as VuetifyListItem } from '@/composables/list-items'
-import { VHotkey } from '@/labs/VHotkey'
 
 /**
  * Common properties that all command palette items must have.
@@ -547,7 +547,7 @@ export const VCommandPaletteList = genericComponent<VCommandPaletteListSlots>()(
                   >
                     {{
                       // Show hotkey in append slot if available
-                      append: flatItem.item?.props?.hotkey ? () => <VHotkey keys={ flatItem.item.props.hotkey } /> : undefined,
+                      append: item.raw?.hotkey ? () => <VHotkey keys={ item.raw.hotkey } /> : undefined
                     }}
                   </VListItem>
                 )

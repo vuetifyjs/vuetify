@@ -280,7 +280,7 @@ describe('VCommandPalette', () => {
 
     it('should display hotkey hints in items', async () => {
       const model = ref(true)
-      const itemsWithHotkeys = [
+      const items = [
         {
           id: 'item1',
           title: 'Save File',
@@ -292,30 +292,17 @@ describe('VCommandPalette', () => {
       render(() => (
         <VCommandPalette
           v-model={ model.value }
-          items={ itemsWithHotkeys }
+          items={ items }
         />
       ))
 
-      const dialog = await screen.findByRole('dialog')
-      await expect(screen.findByText('Save File')).resolves.toBeVisible()
+      expect(screen.getByText('Save File')).toBeVisible()
+      expect(screen.queryAllByCSS('.v-list .v-hotkey')).toHaveLength(1)
 
-      // VHotkey component should be present for items with hotkeys
-      const hotkeyElement = dialog.querySelector('.v-hotkey')
-      expect(hotkeyElement).toBeInTheDocument()
-
-      // VHotkey should render key elements
-      const keyElements = hotkeyElement!.querySelectorAll('.v-hotkey__key')
-      expect(keyElements.length).toBeGreaterThan(0)
-
-      // Should contain the hotkey information (ctrl+s)
-      // VHotkey renders keys as separate elements, so we check for their presence
-      const keyTexts = Array.from(keyElements).map(el => el.textContent?.toLowerCase() || '')
-      const hasCtrlKey = keyTexts.some(text => text.includes('ctrl')) ||
-                        Array.from(keyElements).some(el => el.classList.contains('v-hotkey__key-icon'))
-      const hasSKey = keyTexts.some(text => text.includes('s'))
-
-      // At least one of the keys should be present (implementation may vary)
-      expect(hasCtrlKey || hasSKey).toBeTruthy()
+      const keys = screen.getAllByCSS('.v-list .v-hotkey__key')
+      expect(keys).toHaveLength(2)
+      expect(keys[0].textContent === 'Ctrl' || keys[0].className.includes('v-hotkey__key-icon')).toBeTruthy()
+      expect(keys[1]).toHaveTextContent('S')
     })
 
     it('should handle conflicting hotkeys gracefully', async () => {
