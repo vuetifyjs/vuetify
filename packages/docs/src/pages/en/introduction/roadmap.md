@@ -22,7 +22,7 @@ Vuetify is always under development. We are constantly working towards improving
 
 The following is a list of all planned components for the year 2025.
 
-## Versions
+### Versions
 
 | Version                                                                 | Planned Release |
 |-------------------------------------------------------------------------|-----------------|
@@ -30,7 +30,7 @@ The following is a list of all planned components for the year 2025.
 | [v4.0 (Revisionist)](https://github.com/vuetifyjs/vuetify/milestone/62) | Q4 2025         |
 | [v4.1](https://github.com/vuetifyjs/vuetify/milestone/77)               | TBD             |
 
-## New form components and features
+### New form components and features
 
 | Name                                                            | Entering Labs | Production Release |
 |-----------------------------------------------------------------|---------------|--------------------|
@@ -47,7 +47,7 @@ The following is a list of all planned components for the year 2025.
 
 \* Already in Labs { .text-caption }
 
-## Other components and features
+### Other components and features
 
 | Name                                                       | Entering Labs | Production Release |
 |------------------------------------------------------------|---------------|--------------------|
