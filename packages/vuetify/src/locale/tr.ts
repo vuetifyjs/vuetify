@@ -117,6 +117,14 @@ export default {
     notEmpty: 'Lütfen en az bir değer seçin',
     pattern: 'Geçersiz biçim',
   },
+  command: {
+    select: 'seçmek için',
+    navigate: 'gezinmek için',
+    goBack: 'geri gitmek için',
+    close: 'kapatmak için',
+    then: 'sonra',
+    placeholder: 'Bir komut yazın veya arayın...',
+  },
   hotkey: {
     then: 'sonra',
     ctrl: 'Ctrl',

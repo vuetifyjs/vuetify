@@ -117,6 +117,13 @@ export default {
     notEmpty: 'Please choose at least one value',
     pattern: 'Invalid format',
   },
+  command: {
+    select: 'to select',
+    navigate: 'to navigate',
+    goBack: 'to go back',
+    close: 'to close',
+    placeholder: 'Type a command or search...',
+  },
   hotkey: {
     then: 'then',
     ctrl: 'Ctrl',

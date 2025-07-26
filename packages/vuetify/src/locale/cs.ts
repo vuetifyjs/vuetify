@@ -117,6 +117,14 @@ export default {
     notEmpty: 'Vyberte alespoň jednu hodnotu',
     pattern: 'Neplatný formát',
   },
+  command: {
+    select: 'pro výběr',
+    navigate: 'pro navigaci',
+    goBack: 'pro návrat',
+    close: 'pro zavření',
+    then: 'poté',
+    placeholder: 'Zadejte příkaz nebo hledejte...',
+  },
   hotkey: {
     then: 'poté',
     ctrl: 'Ctrl',

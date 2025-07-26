@@ -117,6 +117,14 @@ export default {
     notEmpty: 'Моля, изберете поне една стойност',
     pattern: 'Невалиден формат',
   },
+  command: {
+    select: 'за избор',
+    navigate: 'за навигация',
+    goBack: 'за връщане назад',
+    close: 'за затваряне',
+    then: 'след това',
+    placeholder: 'Въведете команда или търсете...',
+  },
   hotkey: {
     then: 'след това',
     ctrl: 'Ctrl',
