@@ -164,6 +164,9 @@ describe('VCommandPalette', () => {
       await expect.poll(() =>
         secondListItem?.classList.contains('v-list-item--active')
       ).toBeTruthy()
+
+      // avoid failing other tests
+      await userEvent.unhover(secondItem)
     })
 
     it('should execute item-specific hotkeys', async () => {
