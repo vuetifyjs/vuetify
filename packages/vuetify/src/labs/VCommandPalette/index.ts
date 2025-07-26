@@ -1,1 +1,6 @@
 export { VCommandPalette } from './VCommandPalette'
+export { VCommandPaletteInstructions } from './VCommandPaletteInstructions'
+export { VCommandPaletteItem } from './VCommandPaletteItem'
+export { VCommandPaletteItems } from './VCommandPaletteItems'
+export { VCommandPaletteList } from './VCommandPaletteList'
+export { VCommandPaletteSearch } from './VCommandPaletteSearch'
