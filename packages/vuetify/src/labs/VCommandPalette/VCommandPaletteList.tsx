@@ -547,7 +547,7 @@ export const VCommandPaletteList = genericComponent<VCommandPaletteListSlots>()(
                   >
                     {{
                       // Show hotkey in append slot if available
-                      append: item.raw?.hotkey ? () => <VHotkey keys={ item.raw.hotkey } /> : undefined
+                      append: item.raw?.hotkey ? () => <VHotkey keys={ item.raw.hotkey } /> : undefined,
                     }}
                   </VListItem>
                 )
