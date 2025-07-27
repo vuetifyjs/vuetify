@@ -115,7 +115,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       let [baseDigits, fractionDigits] = fixed.split('.')
 
       fractionDigits = (fractionDigits ?? '').padEnd(props.minFractionDigits, '0')
-        .replace(new RegExp(`(?<=\\d{${props.minFractionDigits}})0`, 'g'), '')
+        .replace(new RegExp(`(?<=\\d{${props.minFractionDigits}})0+$`, 'g'), '')
 
       return [
         baseDigits,
