@@ -81,6 +81,7 @@ export const makeVPieProps = propsFactory({
     type: [Boolean, Object] as PropType<boolean | {
       titleFormat?: TextTemplate
       subtitleFormat?: TextTemplate
+      avatarSize?: number
       transition?: string | boolean | TransitionProps
       offset?: number
     }>,
@@ -262,7 +263,7 @@ export const VPie = genericComponent<VPieSlots>()({
 
       const tooltipDefaults = {
         VAvatar: {
-          size: 28,
+          size: typeof props.tooltip === 'object' ? props.tooltip.avatarSize : 28,
         },
       }
 
