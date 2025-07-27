@@ -28,10 +28,17 @@ export type VPieSlots = {
     isActive: (item: PieItem) => boolean
     toggle: (item: PieItem) => void
     items: PieItem[]
+    total: number
   }
-  'legend-text': { item: PieItem }
+  'legend-text': {
+    item: PieItem
+    total: number
+  }
   title: never
-  tooltip: { item: PieItem }
+  tooltip: {
+    item: PieItem
+    total: number
+  }
 }
 
 export const makeVPieProps = propsFactory({
@@ -335,7 +342,7 @@ export const VPie = genericComponent<VPieSlots>()({
           { legendConfig.value.visible && (
             <VDefaultsProvider key="legend" defaults={ legendDefaults }>
               <div class="v-pie__legend">
-                { slots.legend?.({ isActive, toggle, items: arcs.value }) ?? (
+                { slots.legend?.({ isActive, toggle, items: arcs.value, total: total.value }) ?? (
                   <VChipGroup
                     column
                     multiple
@@ -348,7 +355,7 @@ export const VPie = genericComponent<VPieSlots>()({
                           prepend: () => avatarSlot({ item }),
                           default: () => (
                             <div class="v-pie__legend__text">
-                              { slots['legend-text']?.({ item }) ?? legendTextFormatFunction.value(item) }
+                              { slots['legend-text']?.({ item, total: total.value }) ?? legendTextFormatFunction.value(item) }
                             </div>
                           ),
                         }}
@@ -364,7 +371,7 @@ export const VPie = genericComponent<VPieSlots>()({
               <VPieTooltip
                 { ...tooltipProps }
                 v-slots={{
-                  default: slots.tooltip,
+                  default: slots.tooltip ? slotProps => slots.tooltip?.({ ...slotProps, total: total.value }) : undefined,
                   prepend: avatarSlot,
                 }}
               />
