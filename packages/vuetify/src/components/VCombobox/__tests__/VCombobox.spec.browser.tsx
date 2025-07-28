@@ -746,6 +746,25 @@ describe('VCombobox', () => {
     expect(onFocus).toHaveBeenCalledTimes(1)
   })
 
+  it.each([
+    { delimiters: [','], text: 'abc,foo, baz', expected: ['abc', 'foo', 'baz'] },
+    { delimiters: [':'], text: '012:2,32:0:1', expected: ['012', '2,32', '0', '1'] },
+    { delimiters: [':', '.', '-'], text: '(1) 231:13 - 123.', expected: ['(1) 231', '13', '123'] },
+  ])('should ingest new items when a delimited text is pasted', async ({ delimiters, text, expected }) => {
+    const model = ref(null)
+    render(() => (
+      <VCombobox
+        v-model={ model.value }
+        delimiters={ delimiters }
+        multiple
+      />
+    ))
+    await userEvent.tab()
+    navigator.clipboard.writeText(text)
+    await userEvent.paste()
+    expect(model.value).toEqual(expected)
+  })
+
   describe('Showcase', () => {
     generate({ stories })
   })
