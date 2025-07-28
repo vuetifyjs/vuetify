@@ -1,6 +1,22 @@
 // Types
 import type { Ref } from 'vue'
 
+function getFirstLeapNode (node: Node): Node {
+  let current = node
+  while (current.firstChild && current.firstChild.nodeType !== Node.TEXT_NODE) {
+    current = current.firstChild
+  }
+  return current
+}
+
+function getLastLeafNode (node: Node): Node {
+  let current = node
+  while (current.lastChild && current.lastChild.nodeType !== Node.TEXT_NODE) {
+    current = current.lastChild
+  }
+  return current
+}
+
 export function useSelection (editorRef: Ref<HTMLDivElement | undefined>) {
   function get () {
     if (!editorRef.value) return null
@@ -53,24 +69,32 @@ export function useSelection (editorRef: Ref<HTMLDivElement | undefined>) {
   }
 
   function select (node: Node) {
-    selectBetween(node)
-  }
-
-  function selectBetween (start: Node, end?: Node | null) {
     const selection = window.getSelection()
     if (!selection) return
 
     const range = document.createRange()
 
-    if (!end) {
-      range.selectNodeContents(start)
+    range.selectNodeContents(node)
+
+    selection.removeAllRanges()
+    selection.addRange(range)
+  }
+
+  function selectBetween (start: Node, end: Node) {
+    const selection = window.getSelection()
+    if (!selection) return
+
+    const range = document.createRange()
+
+    const startTextNode = getFirstLeapNode(start)
+    const endTextNode = getLastLeafNode(end)
+
+    range.setStart(startTextNode, 0)
+
+    if (endTextNode.nodeType === Node.ELEMENT_NODE) {
+      range.setEnd(endTextNode, endTextNode.childNodes.length)
     } else {
-      range.setStart(start, 0)
-      if (end.nodeType === Node.ELEMENT_NODE) {
-        range.setEnd(end, end.childNodes.length)
-      } else {
-        range.setEnd(end, end.textContent?.length || 0)
-      }
+      range.setEnd(endTextNode, endTextNode.textContent?.length || 0)
     }
 
     selection.removeAllRanges()

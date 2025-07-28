@@ -9,7 +9,7 @@ import { VSheet } from '@/components/VSheet/VSheet'
 import { VToolbar } from '@/components/VToolbar/VToolbar'
 
 // Composables
-import { useCaret, useSelection } from './composables'
+import { useCaret, useElement, useSelection } from './composables'
 import { blockFormatter, FormatCategory, formats, Formats, useFormatter } from './composables/formatter'
 import { useFocus } from '@/composables/focus'
 import { forwardRefs } from '@/composables/forwardRefs'
@@ -17,7 +17,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
-import { getObjectStyles, getStringStyles, isEmptyNode, wrapByTag } from './utils'
+import { getObjectStyles, getStringStyles, isEmptyNode } from './utils'
 import { callEvent, genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
@@ -100,6 +100,7 @@ export const VEditor = genericComponent<VEditorSlots>()({
     const caret = useCaret(editorRef)
     const selection = useSelection(editorRef)
     const formatter = useFormatter(editorRef)
+    const editorElement = useElement(editorRef)
 
     const vFieldRef = ref<VField>()
     const vInputRef = ref<VInput>()
@@ -114,97 +115,6 @@ export const VEditor = genericComponent<VEditorSlots>()({
     const isFormatActive = computed(() => (tag: string) => activeFormats.value.has(tag))
     const isPlainOrUnderlined = computed(() => ['plain', 'underlined'].includes(props.variant))
     const displayedFormats = computed(() => formats.filter(format => props.formats.includes(format.name)))
-
-    function onKeyUp () {
-      updateActiveFormats()
-    }
-
-    function onKeyDown (e: KeyboardEvent) {
-      if (e.ctrlKey || e.metaKey) {
-        switch (e.key.toLowerCase()) {
-          case 'b':
-            e.preventDefault()
-            const boldFormat = formats.find(f => f.name === Formats.Bold)
-            if (boldFormat) toggleFormat(boldFormat)
-            break
-          case 'i':
-            e.preventDefault()
-            const italicFormat = formats.find(f => f.name === Formats.Italic)
-            if (italicFormat) toggleFormat(italicFormat)
-            break
-          case 'u':
-            e.preventDefault()
-            const underlineFormat = formats.find(f => f.name === Formats.Underline)
-            if (underlineFormat) toggleFormat(underlineFormat)
-            break
-        }
-      }
-
-      if (e.key === 'Enter') {
-        onEnterKey(e)
-      }
-
-      if (e.key === 'Backspace') {
-        onBackspaceKey(e)
-      }
-    }
-
-    function onEnterKey (e: KeyboardEvent) {
-      if (selection.hasText()) {
-        e.preventDefault()
-        return
-      }
-
-      if (!editorRef.value) return
-
-      const currentBlockElement = getCurrentBlockElement()
-      const fragmentAfterCaret = getFragmentAfterCaret(currentBlockElement || editorRef.value)
-
-      if (fragmentAfterCaret) return
-
-      e.preventDefault()
-
-      const newBlockTag = currentBlockElement?.tagName.toLowerCase() || 'div'
-      const newBlock = document.createElement(newBlockTag)
-
-      if (!currentBlockElement) {
-        editorRef.value.appendChild(newBlock)
-        caret.insertInto(newBlock)
-      } else {
-        currentBlockElement.parentElement?.insertBefore(newBlock, currentBlockElement.nextSibling)
-        caret.insertInto(newBlock)
-      }
-
-      updateModel()
-    }
-
-    function onBackspaceKey (e: KeyboardEvent) {
-      if (selection.hasText()) return
-
-      const currentBlockElement = getCurrentBlockElement()
-      if (!currentBlockElement) return
-
-      if (currentBlockElement === editorRef.value?.firstChild) return
-
-      const fragmentBeforeCaret = getFragmentBeforeSelection(currentBlockElement)
-      if (fragmentBeforeCaret) return
-
-      e.preventDefault()
-
-      const previousSibling = currentBlockElement.previousElementSibling
-      const isPreviousSiblingBlock = previousSibling && window.getComputedStyle(previousSibling).display === 'block'
-      if (isPreviousSiblingBlock) {
-        caret.insertInto(previousSibling)
-        previousSibling.appendChild(currentBlockElement)
-      }
-
-      caret.save()
-      unwrapElement(currentBlockElement)
-      caret.restore()
-
-      updateActiveFormats()
-      updateModel()
-    }
 
     function onMouseUp () {
       updateActiveFormats()
@@ -251,6 +161,97 @@ export const VEditor = genericComponent<VEditorSlots>()({
       updateModel()
     }
 
+    function onKeyUp () {
+      updateActiveFormats()
+    }
+
+    function onKeyDown (e: KeyboardEvent) {
+      if (e.ctrlKey || e.metaKey) {
+        switch (e.key.toLowerCase()) {
+          case 'b':
+            e.preventDefault()
+            const boldFormat = formats.find(f => f.name === Formats.Bold)
+            if (boldFormat) toggleFormat(boldFormat)
+            break
+          case 'i':
+            e.preventDefault()
+            const italicFormat = formats.find(f => f.name === Formats.Italic)
+            if (italicFormat) toggleFormat(italicFormat)
+            break
+          case 'u':
+            e.preventDefault()
+            const underlineFormat = formats.find(f => f.name === Formats.Underline)
+            if (underlineFormat) toggleFormat(underlineFormat)
+            break
+        }
+      }
+
+      if (e.key === 'Enter') {
+        onEnterKey(e)
+      }
+
+      if (e.key === 'Backspace') {
+        onBackspaceKey(e)
+      }
+    }
+
+    function onEnterKey (e: KeyboardEvent) {
+      if (selection.hasText()) {
+        e.preventDefault()
+        return
+      }
+
+      if (!editorRef.value) return
+
+      const currentBlockElement = editorElement.getCurrentBlock()
+      const fragmentAfterCaret = editorElement.getFragmentAfterCaret(currentBlockElement || editorRef.value)
+
+      if (fragmentAfterCaret) return
+
+      e.preventDefault()
+
+      const newBlockTag = currentBlockElement?.tagName.toLowerCase() || 'div'
+      const newBlock = document.createElement(newBlockTag)
+
+      if (!currentBlockElement) {
+        editorRef.value.appendChild(newBlock)
+        caret.insertInto(newBlock)
+      } else {
+        currentBlockElement.parentElement?.insertBefore(newBlock, currentBlockElement.nextSibling)
+        caret.insertInto(newBlock)
+      }
+
+      updateModel()
+    }
+
+    function onBackspaceKey (e: KeyboardEvent) {
+      if (selection.hasText()) return
+
+      const currentBlockElement = editorElement.getCurrentBlock()
+      if (!currentBlockElement) return
+
+      if (currentBlockElement === editorRef.value?.firstChild) return
+
+      const fragmentBeforeCaret = editorElement.getFragmentBeforeSelection(currentBlockElement)
+      if (fragmentBeforeCaret) return
+
+      e.preventDefault()
+
+      const previousSibling = currentBlockElement.previousElementSibling
+      const isPreviousSiblingBlock = previousSibling && window.getComputedStyle(previousSibling).display === 'block'
+      if (isPreviousSiblingBlock) {
+        caret.insertInto(previousSibling)
+        previousSibling.appendChild(currentBlockElement)
+      }
+
+      caret.save()
+      editorElement.unwrap(currentBlockElement)
+      caret.restore()
+
+      updateActiveFormats()
+      updateModel()
+    }
+
     function updateEditorHtml (newVal: string) {
       if (editorRef.value) {
         editorRef.value.innerHTML = newVal
@@ -277,77 +278,6 @@ export const VEditor = genericComponent<VEditorSlots>()({
       activeFormats.value = newActiveFormats
     }
 
-    function getFragmentBeforeSelection (element: Element): Node | null {
-      const selectionResult = selection.get()
-      if (!selectionResult) return null
-      const { range } = selectionResult
-
-      const beforeRange = range.cloneRange()
-      beforeRange.setStartBefore(element)
-      beforeRange.setEnd(range.startContainer, range.startOffset)
-      const fragment = beforeRange.cloneContents()
-
-      return isEmptyNode(fragment) ? null : fragment
-    }
-
-    function getFragmentAfterCaret (element: Element): Node | null {
-      const selectionResult = selection.get()
-      if (!selectionResult) return null
-      const { range } = selectionResult
-
-      const afterRange = range.cloneRange()
-      afterRange.setStart(range.startContainer, range.startOffset)
-      afterRange.setEndAfter(element)
-
-      const fragment = afterRange.cloneContents()
-      return isEmptyNode(fragment) ? null : fragment
-    }
-
-    function getFragmentAfterSelection (element: Element): Node | null {
-      const selectionResult = selection.get()
-      if (!selectionResult) return null
-      const { range } = selectionResult
-
-      const afterRange = range.cloneRange()
-      afterRange.setStart(range.endContainer, range.endOffset)
-      afterRange.setEndAfter(element)
-
-      const fragment = afterRange.cloneContents()
-      return isEmptyNode(fragment) ? null : fragment
-    }
-
-    function getContentInsideSelection (): Node | null {
-      const selectionResult = selection.get()
-      if (!selectionResult) return null
-      const { range } = selectionResult
-
-      if (range.collapsed) return null
-
-      const contents = range.cloneContents()
-      return isEmptyNode(contents) ? null : wrapByTag(contents, 'span')
-    }
-
-    function getFragmemntAtSplit (element: Element): Node | null {
-      const selectionResult = selection.get()
-      if (!selectionResult) return null
-      const { range } = selectionResult
-
-      const remainingFormatStack: HTMLElement[] = []
-      let current: Node | null = range.startContainer
-      while (current && current !== element) {
-        if (current instanceof HTMLElement) {
-          remainingFormatStack.unshift(current.cloneNode(false) as HTMLElement)
-        }
-        current = current.parentNode
-      }
-
-      const caretNode = document.createTextNode(zeroWidthSpace)
-      return remainingFormatStack.reduce((child: Node, wrapper: Node) => {
-        wrapper.appendChild(child)
-        return wrapper
-      }, caretNode)
-    }
-
     function toggleFormat (format: Formatter) {
       if (format.category === FormatCategory.Heading) {
         toggleHeadingFormat(format)
@@ -371,7 +301,7 @@ export const VEditor = genericComponent<VEditorSlots>()({
     }
 
     function toggleHeadingFormat (format: Formatter) {
-      const currentBlockElement = getCurrentBlockElement()
+      const currentBlockElement = editorElement.getCurrentBlock()
       const currentBlockTag = currentBlockElement?.tagName.toLowerCase()
       const isCurrentBlockHeadingOrDiv = currentBlockTag?.startsWith('h') || currentBlockTag === 'div'
 
@@ -393,7 +323,7 @@ export const VEditor = genericComponent<VEditorSlots>()({
     }
 
     function toggleAlignmentFormat (format: Formatter) {
-      const blockElement = getCurrentBlockElement()
+      const blockElement = editorElement.getCurrentBlock()
       const targetStyles = format.config.styles
       const targetAlignment = targetStyles?.textAlign
 
@@ -448,129 +378,22 @@ export const VEditor = genericComponent<VEditorSlots>()({
       const isElementEmpty = isEmptyNode(element)
 
       if (isElementEmpty) {
-        removeElement(element)
+        editorElement.remove(element)
       } else if (selection.hasText()) {
-        unwrapSelection(element)
+        editorElement.removeFormatAtSelection(element)
       } else {
-        splitElementAtCaret(element)
+        editorElement.removeFormatAtCaret(element)
       }
-    }
-
-    function getCurrentBlockElement () {
-      const selectionResult = selection.get()
-      if (!selectionResult) return null
-
-      let node = selectionResult.selection.anchorNode
-
-      // If it's a text node, move up to the parent
-      if (node?.nodeType === 3) node = node.parentNode
-
-      // Traverse up until we find a block element
-      while (node && node !== editorRef.value) {
-        const display = window.getComputedStyle(node as Element).display
-        if (['block', 'list-item', 'table'].includes(display)) {
-          return node as Element
-        }
-        node = node.parentNode
-      }
-
-      return null
-    }
-
-    function removeElement (element: Node) {
-      const parent = element.parentNode
-      if (!parent) return
-      parent.removeChild(element)
     }
 
     function replaceFormat (element: Element, format: Formatter) {
       const formatterElement = formatter.get(format)
-      replaceElement(element, formatterElement)
-    }
-
-    function replaceElement (element: Element, newElement: Element) {
-      const attributes = element.attributes
-      for (const attribute of attributes) {
-        newElement.setAttribute(attribute.name, attribute.value)
-      }
-
-      while (element.firstChild) {
-        newElement.appendChild(element.firstChild)
-      }
-      element.parentNode?.replaceChild(newElement, element)
+      editorElement.replaceContainer(element, formatterElement)
     }
 
     function formatChildren (element: Element, format: Formatter) {
       const formatterElement = formatter.get(format)
-
-      while (element.firstChild) {
-        formatterElement.appendChild(element.firstChild)
-      }
-      element.insertBefore(formatterElement, element.firstChild)
-      return formatterElement
-    }
-
-    function unwrapElement (element: Element) {
-      const parent = element.parentNode
-      if (!parent) return
-
-      while (element.firstChild) {
-        parent.insertBefore(element.firstChild, element)
-      }
-
-      parent.removeChild(element)
-    }
-
-    function unwrapSelection (element: Element) {
-      const parent = element.parentNode
-      if (!parent) return
-
-      const firstChild = element.firstChild
-      const lastChild = element.lastChild
-
-      if (!firstChild) {
-        return
-      }
-
-      const emptyFragment = document.createTextNode(zeroWidthSpace)
-
-      const selectedContent = getContentInsideSelection()
-      const afterFragment = getFragmentAfterSelection(element)
-      const beforeFragment = getFragmentBeforeSelection(element)
-
-      if (!selectedContent) {
-        return
-      }
-
-      if (!beforeFragment && !afterFragment) {
-        unwrapElement(element)
-        selection.selectBetween(firstChild, lastChild)
-      } else {
-        parent.insertBefore(beforeFragment || emptyFragment, element)
-        parent.insertBefore(selectedContent, element)
-        parent.insertBefore(afterFragment || emptyFragment, element)
-        parent.removeChild(element)
-
-        selection.select(selectedContent)
-      }
-    }
-
-    function splitElementAtCaret (element: Element) {
-      const parent = element.parentNode
-      if (!parent) return
-
-      const emptyFragment = document.createTextNode(zeroWidthSpace)
-
-      const middle = getFragmemntAtSplit(element) || emptyFragment
-      const afterFragment = getFragmentAfterCaret(element) || emptyFragment
-      const beforeFragment = getFragmentBeforeSelection(element) || emptyFragment
-
-      parent.insertBefore(beforeFragment, element)
-      parent.insertBefore(middle, element)
-      parent.insertBefore(afterFragment, element)
-      parent.removeChild(element)
-
-      caret.insertInto(middle.firstChild || middle)
+      editorElement.wrapChildren(element, formatterElement)
     }
 
     watch(() => props.modelValue, newVal => {
