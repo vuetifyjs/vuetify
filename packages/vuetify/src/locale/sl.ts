@@ -153,4 +153,21 @@ export default {
     enterFullscreen: 'Celozaslonski način',
     exitFullscreen: 'Izhod iz celozaslonskega načina',
   },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Izberi barvo z zaslona',
+      hueSlider: 'Barvni odtenek',
+      alphaSlider: 'Alfa',
+      redInput: 'Rdeča',
+      greenInput: 'Zelena',
+      blueInput: 'Modra',
+      alphaInput: 'Alfa',
+      hueInput: 'Barvni odtenek',
+      saturationInput: 'Nasičenost',
+      lightnessInput: 'Svetlost',
+      hexInput: 'HEX vrednost',
+      hexaInput: 'HEX z alfa vrednostjo',
+      changeFormat: 'Spremeni format barve',
+    },
+  },
 }

@@ -153,4 +153,21 @@ export default {
     enterFullscreen: 'ملء الشاشة',
     exitFullscreen: 'الخروج من وضع ملء الشاشة',
   },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'اختيار لون من الشاشة',
+      hueSlider: 'درجة اللون',
+      alphaSlider: 'الشفافية',
+      redInput: 'أحمر',
+      greenInput: 'أخضر',
+      blueInput: 'أزرق',
+      alphaInput: 'الشفافية',
+      hueInput: 'درجة اللون',
+      saturationInput: 'التشبع اللوني',
+      lightnessInput: 'السطوع',
+      hexInput: 'قيمة HEX',
+      hexaInput: 'قيمة HEX مع الشفافية',
+      changeFormat: 'تغيير تنسيق اللون',
+    },
+  },
 }

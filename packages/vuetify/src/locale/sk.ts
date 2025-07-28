@@ -153,4 +153,21 @@ export default {
     enterFullscreen: 'Celá obrazovka',
     exitFullscreen: 'Opustiť celú obrazovku',
   },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Vybrať farbu z obrazovky',
+      hueSlider: 'Odtieň',
+      alphaSlider: 'Alfa',
+      redInput: 'Červená',
+      greenInput: 'Zelená',
+      blueInput: 'Modrá',
+      alphaInput: 'Alfa',
+      hueInput: 'Odtieň',
+      saturationInput: 'Sýtosť',
+      lightnessInput: 'Svetlosť',
+      hexInput: 'HEX hodnota',
+      hexaInput: 'HEX s alfa hodnotou',
+      changeFormat: 'Zmeniť formát farby',
+    },
+  },
 }

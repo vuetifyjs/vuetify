@@ -153,4 +153,21 @@ export default {
     enterFullscreen: 'Ecran complet',
     exitFullscreen: 'Ieșire din ecran complet',
   },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Alege culoarea de pe ecran',
+      hueSlider: 'Nuanță',
+      alphaSlider: 'Alfa',
+      redInput: 'Roșu',
+      greenInput: 'Verde',
+      blueInput: 'Albastru',
+      alphaInput: 'Alfa',
+      hueInput: 'Nuanță',
+      saturationInput: 'Saturație',
+      lightnessInput: 'Luminozitate',
+      hexInput: 'Valoare HEX',
+      hexaInput: 'Valoare HEX cu alfa',
+      changeFormat: 'Schimbă formatul culorii',
+    },
+  },
 }

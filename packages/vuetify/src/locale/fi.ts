@@ -153,4 +153,21 @@ export default {
     enterFullscreen: 'Koko näyttö',
     exitFullscreen: 'Poistu koko näytöstä',
   },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Valitse väri näytöltä',
+      hueSlider: 'Sävy',
+      alphaSlider: 'Alfa',
+      redInput: 'Punainen',
+      greenInput: 'Vihreä',
+      blueInput: 'Sininen',
+      alphaInput: 'Alfa',
+      hueInput: 'Sävy',
+      saturationInput: 'Kylläisyys',
+      lightnessInput: 'Vaaleus',
+      hexInput: 'HEX-arvo',
+      hexaInput: 'HEX alfa-arvolla',
+      changeFormat: 'Vaihda värimuotoa',
+    },
+  },
 }

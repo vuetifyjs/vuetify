@@ -153,4 +153,21 @@ export default {
     enterFullscreen: 'Pantalla completa',
     exitFullscreen: 'Salir de pantalla completa',
   },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Seleccionar color de la pantalla',
+      hueSlider: 'Tono',
+      alphaSlider: 'Alfa',
+      redInput: 'Rojo',
+      greenInput: 'Verde',
+      blueInput: 'Azul',
+      alphaInput: 'Alfa',
+      hueInput: 'Tono',
+      saturationInput: 'Saturación',
+      lightnessInput: 'Luminosidad',
+      hexInput: 'Valor HEX',
+      hexaInput: 'Valor HEX con alfa',
+      changeFormat: 'Cambiar formato de color',
+    },
+  },
 }

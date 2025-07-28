@@ -153,4 +153,21 @@ export default {
     enterFullscreen: 'Fullskjerm',
     exitFullscreen: 'Avslutt fullskjerm',
   },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Velg farge fra skjermen',
+      hueSlider: 'Fargetone',
+      alphaSlider: 'Alfa',
+      redInput: 'Rød',
+      greenInput: 'Grønn',
+      blueInput: 'Blå',
+      alphaInput: 'Alfa',
+      hueInput: 'Fargetone',
+      saturationInput: 'Metning',
+      lightnessInput: 'Lyshet',
+      hexInput: 'HEX-verdi',
+      hexaInput: 'HEX med alfa-verdi',
+      changeFormat: 'Endre fargeformat',
+    },
+  },
 }

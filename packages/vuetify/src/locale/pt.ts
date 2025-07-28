@@ -153,4 +153,21 @@ export default {
     enterFullscreen: 'Tela cheia',
     exitFullscreen: 'Sair da tela cheia',
   },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Selecionar cor da tela',
+      hueSlider: 'Matiz',
+      alphaSlider: 'Alfa',
+      redInput: 'Vermelho',
+      greenInput: 'Verde',
+      blueInput: 'Azul',
+      alphaInput: 'Alfa',
+      hueInput: 'Matiz',
+      saturationInput: 'Saturação',
+      lightnessInput: 'Luminosidade',
+      hexInput: 'Valor HEX',
+      hexaInput: 'HEX com valor alfa',
+      changeFormat: 'Alterar formato da cor',
+    },
+  },
 }

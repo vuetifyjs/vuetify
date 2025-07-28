@@ -153,4 +153,21 @@ export default {
     enterFullscreen: 'Pełny ekran',
     exitFullscreen: 'Opuść pełny ekran',
   },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Pobierz kolor z ekranu',
+      hueSlider: 'Odcień',
+      alphaSlider: 'Przezroczystość',
+      redInput: 'Czerwony',
+      greenInput: 'Zielony',
+      blueInput: 'Niebieski',
+      alphaInput: 'Przezroczystość',
+      hueInput: 'Odcień',
+      saturationInput: 'Nasycenie',
+      lightnessInput: 'Jasność',
+      hexInput: 'Wartość szesnastkowa',
+      hexaInput: 'Wartość szesnastkowa z kanałem alfa',
+      changeFormat: 'Zmień format koloru',
+    },
+  },
 }
