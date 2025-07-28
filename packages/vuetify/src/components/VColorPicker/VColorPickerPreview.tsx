@@ -6,6 +6,7 @@ import { VBtn } from '@/components/VBtn'
 import { VSlider } from '@/components/VSlider'
 
 // Composables
+import { useLocale } from '@/composables'
 import { makeComponentProps } from '@/composables/component'
 
 // Utilities
@@ -45,6 +46,8 @@ export const VColorPickerPreview = defineComponent({
   },
 
   setup (props, { emit }) {
+    const { t } = useLocale()
+
     const abortController = new AbortController()
 
     onUnmounted(() => abortController.abort())
@@ -73,7 +76,14 @@ export const VColorPickerPreview = defineComponent({
       >
         { SUPPORTS_EYE_DROPPER && (
           <div class="v-color-picker-preview__eye-dropper" key="eyeDropper">
-            <VBtn density="comfortable" disabled={ props.disabled } icon="$eyeDropper" variant="plain" onClick={ openEyeDropper } />
+            <VBtn
+              aria-label={ t('$vuetify.colorPicker.ariaLabel.eyedropper') }
+              density="comfortable"
+              disabled={ props.disabled }
+              icon="$eyeDropper"
+              variant="plain"
+              onClick={ openEyeDropper }
+            />
           </div>
         )}
 
@@ -84,6 +94,7 @@ export const VColorPickerPreview = defineComponent({
         <div class="v-color-picker-preview__sliders">
           <VSlider
             class="v-color-picker-preview__track v-color-picker-preview__hue"
+            name={ t('$vuetify.colorPicker.ariaLabel.hueSlider') }
             modelValue={ props.color?.h }
             onUpdate:modelValue={ h => emit('update:color', { ...(props.color ?? nullColor), h }) }
             step={ 0 }
@@ -99,6 +110,7 @@ export const VColorPickerPreview = defineComponent({
           { !props.hideAlpha && (
             <VSlider
               class="v-color-picker-preview__track v-color-picker-preview__alpha"
+              name={ t('$vuetify.colorPicker.ariaLabel.alphaSlider') }
               modelValue={ props.color?.a ?? 1 }
               onUpdate:modelValue={ a => emit('update:color', { ...(props.color ?? nullColor), a }) }
               step={ 1 / 256 }
