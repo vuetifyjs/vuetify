@@ -43,6 +43,7 @@ type SliderProvide = {
   step: Ref<number>
   thumbSize: Ref<number>
   thumbColor: Ref<string | undefined>
+  thumbLabelColor: Ref<string | undefined>
   trackColor: Ref<string | undefined>
   trackFillColor: Ref<string | undefined>
   trackSize: Ref<number>
@@ -202,6 +203,7 @@ export const useSlider = ({
   const disabled = toRef(() => props.disabled)
 
   const thumbColor = computed(() => props.error || props.disabled ? undefined : props.thumbColor ?? props.color)
+  const thumbLabelColor = computed(() => props.error || props.disabled ? undefined : props.thumbColor)
   const trackColor = computed(() => props.error || props.disabled ? undefined : props.trackColor ?? props.color)
   const trackFillColor = computed(() => props.error || props.disabled ? undefined : props.trackFillColor ?? props.color)
 
@@ -368,6 +370,7 @@ export const useSlider = ({
     step,
     thumbSize,
     thumbColor,
+    thumbLabelColor,
     thumbLabel: toRef(() => props.thumbLabel),
     ticks: toRef(() => props.ticks),
     tickSize,
