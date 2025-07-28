@@ -288,8 +288,7 @@ $typography: map-deep-merge(
     'button': (
       'size': .875rem,
       'weight': 500,
-      'line-height': 2.6,
-      'letter-spacing': .0892857143em,
+      'line-height': 1.425,
       'font-family': $body-font-family,
       'text-transform': none
     ),
@@ -359,4 +358,12 @@ $size-scales: (
   'default': 0,
   'large': 1,
   'x-large': 2
+) !default;
+
+$button-size-scales: (
+  'x-small': -1,
+  'small': 0,
+  'default': 2,
+  'large': 5,
+  'x-large': 9
 ) !default;
