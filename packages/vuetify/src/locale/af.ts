@@ -46,6 +46,13 @@ export default {
     input: {
       placeholder: 'Voer datum in',
     },
+    ariaLabel: {
+      previousMonth: 'Vorige maand',
+      nextMonth: 'Volgende maand',
+      selectYear: 'Kies jaar',
+      selectDate: '{0}',
+      currentDate: 'Vandag, {0}',
+    },
   },
   noDataText: 'Geen data is beskikbaar nie',
   carousel: {

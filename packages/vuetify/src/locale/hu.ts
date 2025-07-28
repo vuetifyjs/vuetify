@@ -46,6 +46,13 @@ export default {
     input: {
       placeholder: 'Adja meg a dátumot',
     },
+    ariaLabel: {
+      previousMonth: 'Előző hónap',
+      nextMonth: 'Következő hónap',
+      selectYear: 'Év kiválasztása',
+      selectDate: '{0}',
+      currentDate: 'Ma, {0}',
+    },
   },
   noDataText: 'Nincs elérhető adat',
   carousel: {

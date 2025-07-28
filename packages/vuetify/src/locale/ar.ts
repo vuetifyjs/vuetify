@@ -36,15 +36,22 @@ export default {
     divider: 'to',
   },
   datePicker: {
-    itemsSelected: '{0} selected',
+    itemsSelected: '{0} محدد',
     range: {
-      title: 'Select dates',
-      header: 'Enter dates',
+      title: 'اختر التواريخ',
+      header: 'أدخل التواريخ',
     },
-    title: 'Select date',
-    header: 'Enter date',
+    title: 'اختر التاريخ',
+    header: 'أدخل التاريخ',
     input: {
-      placeholder: 'Enter date',
+      placeholder: 'أدخل التاريخ',
+    },
+    ariaLabel: {
+      previousMonth: 'الشهر السابق',
+      nextMonth: 'الشهر التالي',
+      selectYear: 'اختر السنة',
+      selectDate: '{0}',
+      currentDate: 'اليوم، {0}',
     },
   },
   noDataText: 'لا توجد بيانات',

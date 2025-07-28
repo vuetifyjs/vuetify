@@ -46,6 +46,13 @@ export default {
     input: {
       placeholder: '날짜 입력',
     },
+    ariaLabel: {
+      previousMonth: '이전 달',
+      nextMonth: '다음 달',
+      selectYear: '연도 선택',
+      selectDate: '{0}',
+      currentDate: '오늘, {0}',
+    },
   },
   noDataText: '데이터가 없습니다.',
   carousel: {

@@ -46,6 +46,13 @@ export default {
     input: {
       placeholder: 'Syötä päivämäärä',
     },
+    ariaLabel: {
+      previousMonth: 'Edellinen kuukausi',
+      nextMonth: 'Seuraava kuukausi',
+      selectYear: 'Valitse vuosi',
+      selectDate: '{0}',
+      currentDate: 'Tänään, {0}',
+    },
   },
   noDataText: 'Ei dataa',
   carousel: {

@@ -46,6 +46,13 @@ export default {
     input: {
       placeholder: 'ป้อนวันที่',
     },
+    ariaLabel: {
+      previousMonth: 'เดือนก่อนหน้า',
+      nextMonth: 'เดือนถัดไป',
+      selectYear: 'เลือกปี',
+      selectDate: '{0}',
+      currentDate: 'วันนี้, {0}',
+    },
   },
   noDataText: 'ไม่มีข้อมูล',
   carousel: {
