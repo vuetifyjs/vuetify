@@ -66,6 +66,12 @@ The `custom-filter` prop can be used to filter each individual item with custom 
 
 <ExamplesExample file="v-autocomplete/prop-filter" />
 
+#### Subheaders and dividers
+
+The `items` prop recognizes special type of `divider` and `subheader`. Those items will be excluded when using filter and can be further customized with dedicated slots.
+
+<ExamplesExample file="v-autocomplete/prop-items" />
+
 ::: tip
 
 The **v-autocomplete** component updates the search model on focus/blur events. Focus sets search to the current model (if available), and blur clears it.

@@ -274,6 +274,7 @@ export function useGroup (
     } else {
       const isSelected = selected.value.includes(id)
       if (props.mandatory && isSelected) return
+      if (!isSelected && !value) return
 
       selected.value = (value ?? !isSelected) ? [id] : []
     }
@@ -340,7 +341,7 @@ function getIds (items: UnwrapRef<GroupItem[]>, modelValue: any[]) {
 
     if (item?.value != null) {
       ids.push(item.id)
-    } else if (itemByIndex != null) {
+    } else if (itemByIndex?.useIndexAsValue) {
       ids.push(itemByIndex.id)
     }
   })

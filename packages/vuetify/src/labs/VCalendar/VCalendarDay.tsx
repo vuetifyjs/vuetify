@@ -76,7 +76,7 @@ export const VCalendarDay = genericComponent<VCalendarDaySlots>()({
                 { ...getPrefixedEventHandlers(attrs, ':interval', () => calendarIntervalProps) }
               >
                 {{
-                  ...pick(slots, ['intervalBody', 'intervalEvent', 'intervalTitle']),
+                  ...pick(slots, ['interval-body', 'interval-event', 'interval-title']),
                 }}
               </VCalendarInterval>
             )

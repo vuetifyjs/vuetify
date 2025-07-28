@@ -1,5 +1,6 @@
 // Utilities
 import {
+  camelize,
   capitalize,
   Comment,
   Fragment,
@@ -224,7 +225,7 @@ type MaybePick<
 export function pick<
   T extends object,
   U extends Extract<keyof T, string>
-> (obj: T, paths: U[]): MaybePick<T, U> {
+> (obj: T, paths: readonly U[]): MaybePick<T, U> {
   const found: any = {}
 
   for (const key of paths) {
@@ -720,6 +721,15 @@ export function ensureValidVNode (vnodes: VNodeArrayChildren): VNodeArrayChildre
     : null
 }
 
+type Slot<T> = [T] extends [never] ? () => VNodeChild : (arg: T) => VNodeChild
+
+export function renderSlot <T> (slot: Slot<never> | undefined, fallback?: Slot<never> | undefined): VNodeChild
+export function renderSlot <T> (slot: Slot<T> | undefined, props: T, fallback?: Slot<T> | undefined): VNodeChild
+export function renderSlot (slot?: Slot<unknown>, props?: unknown, fallback?: Slot<unknown>) {
+  // TODO: check if slot returns elements: #18308
+  return slot?.(props) ?? fallback?.(props)
+}
+
 export function defer (timeout: number, cb: () => void) {
   if (!IN_BROWSER || timeout === 0) {
     cb()
@@ -779,25 +789,49 @@ export function isPrimitive (value: unknown): value is Primitive {
   return typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean' || typeof value === 'bigint'
 }
 
-export function extractNumber (text: string, decimalDigitsLimit: number | null) {
+export function escapeForRegex (sign: string) {
+  return '\\^$*+?.()|{}[]'.includes(sign)
+    ? `\\${sign}`
+    : sign
+}
+
+export function extractNumber (text: string, decimalDigitsLimit: number | null, decimalSeparator: string) {
+  const onlyValidCharacters = new RegExp(`[\\d\\-${escapeForRegex(decimalSeparator)}]`)
   const cleanText = text.split('')
-    .filter(x => /[\d\-.]/.test(x))
+    .filter(x => onlyValidCharacters.test(x))
     .filter((x, i, all) => (i === 0 && /[-]/.test(x)) || // sign allowed at the start
-        (x === '.' && i === all.indexOf('.')) || // decimal separator allowed only once
+        (x === decimalSeparator && i === all.indexOf(x)) || // decimal separator allowed only once
         /\d/.test(x))
     .join('')
 
   if (decimalDigitsLimit === 0) {
-    return cleanText.split('.')[0]
+    return cleanText.split(decimalSeparator)[0]
   }
 
-  if (decimalDigitsLimit !== null && /\.\d/.test(cleanText)) {
-    const parts = cleanText.split('.')
+  const decimalPart = new RegExp(`${escapeForRegex(decimalSeparator)}\\d`)
+  if (decimalDigitsLimit !== null && decimalPart.test(cleanText)) {
+    const parts = cleanText.split(decimalSeparator)
     return [
       parts[0],
       parts[1].substring(0, decimalDigitsLimit),
-    ].join('.')
+    ].join(decimalSeparator)
   }
 
   return cleanText
 }
+
+export function camelizeProps<T extends Record<string, unknown>> (props: T | null): T {
+  const out = {} as T
+  for (const prop in props) {
+    out[camelize(prop) as keyof T] = props[prop]
+  }
+  return out
+}
+
+export function onlyDefinedProps (props: Record<string, any>) {
+  const booleanAttributes = ['checked', 'disabled']
+  return Object.fromEntries(Object.entries(props)
+    .filter(([key, v]) => booleanAttributes.includes(key) ? !!v : v !== undefined))
+}
+
+export type NonEmptyArray<T> = [T, ...T[]]

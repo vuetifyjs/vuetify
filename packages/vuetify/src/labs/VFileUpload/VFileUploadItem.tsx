@@ -66,12 +66,17 @@ export const VFileUploadItem = genericComponent<VFileUploadItemSlots>()({
       return (
         <VListItem
           { ...listItemProps }
+          class={[
+            'v-file-upload-item',
+            props.class,
+          ]}
           title={ props.title ?? props.file?.name }
           subtitle={ props.showSize ? humanReadableFileSize(props.file?.size, base.value) : props.file?.type }
-          class="v-file-upload-item"
+          style={ props.style }
         >
           {{
             ...slots,
+            title: slots.title ?? (() => props?.title ?? props.file?.name),
             prepend: slotProps => (
               <>
                 { !slots.prepend ? (

@@ -242,7 +242,7 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
                 ref={ timerRef }
                 color={ typeof props.timer === 'string' ? props.timer : 'info' }
                 max={ props.timeout }
-                model-value={ countdown.time.value }
+                modelValue={ countdown.time.value }
               />
             </div>
           )}

@@ -2,7 +2,7 @@
 import './VRipple.sass'
 
 // Utilities
-import { isObject, keyValues } from '@/util'
+import { isObject } from '@/util'
 
 // Types
 import type { DirectiveBinding } from 'vue'
@@ -25,7 +25,10 @@ interface RippleOptions {
 }
 
 export interface RippleDirectiveBinding extends Omit<DirectiveBinding, 'modifiers' | 'value'> {
-  value?: boolean | { class: string }
+  value?: boolean | {
+    class?: string
+    keys?: string[]
+  }
   modifiers: {
     center?: boolean
     circle?: boolean
@@ -120,11 +123,13 @@ const ripples = {
   hide (el: HTMLElement | null) {
     if (!el?._ripple?.enabled) return
 
-    const nodes = el.querySelectorAll<HTMLElement>('.v-ripple__animation:not([data-is-hiding])')
-    const animation = nodes[nodes.length - 1]
-    if (!animation) return
+    const ripples = el.getElementsByClassName('v-ripple__animation')
 
-    animation.dataset.isHiding = 'true'
+    if (ripples.length === 0) return
+    const animation = Array.from(ripples).findLast(ripple => !ripple.dataset.isHiding)
+
+    if (!animation) return
+    else animation.dataset.isHiding = 'true'
 
     const diff = performance.now() - Number(animation.dataset.activated)
     const delay = Math.max(250 - diff, 0)
@@ -250,20 +255,21 @@ function rippleCancel (e: PointerEvent) {
   rippleHide(e)
 }
 
-function keyboardRippleShow (e: KeyboardEvent) {
-  if (e.key === keyValues.space || e.key === keyValues.enter) {
+function keyboardRippleShow (e: KeyboardEvent, keys: string[]) {
+  if (keys.includes(e.key)) {
     rippleShow(e)
   }
 }
 
-function keyboardRippleHide (e: KeyboardEvent) {
-  if (e.key === keyValues.space || e.key === keyValues.enter) {
+function keyboardRippleHide (e: KeyboardEvent, keys: string[]) {
+  if (keys.includes(e.key)) {
     rippleHide(e)
   }
 }
 
 function updateRipple (el: HTMLElement, binding: RippleDirectiveBinding, wasEnabled: boolean) {
   const { value, modifiers } = binding
+
   const enabled = isRippleEnabled(value)
   if (!enabled) {
     ripples.hide(el)
@@ -273,9 +279,15 @@ function updateRipple (el: HTMLElement, binding: RippleDirectiveBinding, wasEnab
   el._ripple.enabled = enabled
   el._ripple.centered = modifiers.center
   el._ripple.circle = modifiers.circle
-  if (isObject(value) && value.class) {
-    el._ripple.class = value.class
+
+  const bindingValue = isObject(value) ? value : {}
+  if (bindingValue.class) {
+    el._ripple.class = bindingValue.class
   }
+
+  const allowedKeys = bindingValue.keys ?? ['Enter', 'Space']
+  el._ripple.keyDownHandler = (e: KeyboardEvent) => keyboardRippleShow(e, allowedKeys)
+  el._ripple.keyUpHandler = (e: KeyboardEvent) => keyboardRippleHide(e, allowedKeys)
 
   if (enabled && !wasEnabled) {
     if (modifiers.stop) {
@@ -289,8 +301,8 @@ function updateRipple (el: HTMLElement, binding: RippleDirectiveBinding, wasEnab
     el.addEventListener('pointermove', rippleMove)
     el.addEventListener('pointercancel', rippleCancel)
 
-    el.addEventListener('keydown', keyboardRippleShow)
-    el.addEventListener('keyup', keyboardRippleHide)
+    el.addEventListener('keydown', el._ripple.keyDownHandler)
+    el.addEventListener('keyup', el._ripple.keyUpHandler)
 
     el.addEventListener('blur', rippleHide)
 
@@ -307,8 +319,12 @@ function removeListeners (el: HTMLElement) {
   el.removeEventListener('pointerleave', rippleLeave)
   el.removeEventListener('pointermove', rippleMove)
   el.removeEventListener('pointercancel', rippleCancel)
-  el.removeEventListener('keydown', keyboardRippleShow)
-  el.removeEventListener('keyup', keyboardRippleHide)
+  if (el._ripple?.keyDownHandler) {
+    el.removeEventListener('keydown', el._ripple.keyDownHandler)
+  }
+  if (el._ripple?.keyUpHandler) {
+    el.removeEventListener('keydown', el._ripple.keyUpHandler)
+  }
   el.removeEventListener('dragstart', rippleHide)
   el.removeEventListener('blur', rippleHide)
 }
@@ -318,8 +334,8 @@ function mounted (el: HTMLElement, binding: RippleDirectiveBinding) {
 }
 
 function unmounted (el: HTMLElement) {
-  delete el._ripple
   removeListeners(el)
+  delete el._ripple
 }
 
 function updated (el: HTMLElement, binding: RippleDirectiveBinding) {
