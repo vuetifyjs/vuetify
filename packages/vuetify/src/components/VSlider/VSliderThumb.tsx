@@ -16,7 +16,7 @@ import vRipple from '@/directives/ripple'
 
 // Utilities
 import { computed, inject } from 'vue'
-import { convertToUnit, genericComponent, includes, keyValues, propsFactory, useRender } from '@/util'
+import { convertToUnit, genericComponent, keyValues, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -114,7 +114,7 @@ export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
         const increase = vertical.value
           ? [isRtl.value ? left : right, isReversed.value ? down : up]
           : indexFromEnd.value !== isRtl.value ? [left, up] : [right, up]
-        const direction = includes(increase, e.key) ? 1 : -1
+        const direction = increase.includes(e.key) ? 1 : -1
         const multiplier = e.shiftKey ? 2 : (e.ctrlKey ? 1 : 0)
 
         if (direction === -1 && value === max.value && !multiplier && !Number.isInteger(steps)) {
