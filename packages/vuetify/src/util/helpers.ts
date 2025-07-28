@@ -188,7 +188,7 @@ export const keyCodes = Object.freeze({
   shift: 16,
 })
 
-export const keyValues = Object.freeze({
+export const keyValues: Record<string, string> = Object.freeze({
   enter: 'Enter',
   tab: 'Tab',
   delete: 'Delete',
