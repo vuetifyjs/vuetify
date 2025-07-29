@@ -47,11 +47,15 @@ Use any available icon as your carousel's slide delimiter.
 
 <ExamplesExample file="v-carousel/prop-custom-icons" />
 
-<!-- #### Custom transition
+#### Custom transition
 
 The `v-carousel-item` component can have its **transition/reverse-transition** changed.
 
-<ExamplesExample file="v-carousel/prop-custom-transition" /> -->
+::: info
+Crossfade transition will get significantly easier to apply with a dedicated `crossfade` prop planned for **3.10.0**.
+:::
+
+<ExamplesExample file="v-carousel/prop-custom-transition" />
 
 #### Cycle
 
