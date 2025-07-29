@@ -10,6 +10,7 @@ export interface ScrollStrategyData {
   root: Ref<HTMLElement | undefined>
   contentEl: Ref<HTMLElement | undefined>
   targetEl: Ref<HTMLElement | undefined>
+  target: Ref<HTMLElement | [x: number, y: number] | undefined>
   isActive: Ref<boolean>
   updateLocation: Ref<((e: Event) => void) | undefined>
 }
@@ -69,13 +70,16 @@ function closeScrollStrategy (data: ScrollStrategyData) {
     data.isActive.value = false
   }
 
-  bindScroll(data.targetEl.value ?? data.contentEl.value, onScroll)
+  bindScroll(data.target.value ?? data.contentEl.value, onScroll)
 }
 
 function blockScrollStrategy (data: ScrollStrategyData, props: StrategyProps) {
   const offsetParent = data.root.value?.offsetParent
+  const target = Array.isArray(data.target.value)
+    ? document.elementFromPoint(...data.target.value)
+    : data.target.value
   const scrollElements = [...new Set([
-    ...getScrollParents(data.targetEl.value, props.contained ? offsetParent : undefined),
+    ...getScrollParents(target, props.contained ? offsetParent : undefined),
     ...getScrollParents(data.contentEl.value, props.contained ? offsetParent : undefined),
   ])].filter(el => !el.classList.contains('v-overlay-scroll-blocked'))
   const scrollbarWidth = window.innerWidth - document.documentElement.offsetWidth
@@ -136,7 +140,7 @@ function repositionScrollStrategy (data: ScrollStrategyData, props: StrategyProp
 
   ric = (typeof requestIdleCallback === 'undefined' ? (cb: Function) => cb() : requestIdleCallback)(() => {
     scope.run(() => {
-      bindScroll(data.targetEl.value ?? data.contentEl.value, e => {
+      bindScroll(data.target.value ?? data.contentEl.value, e => {
         if (slow) {
           // If the position calculation is slow,
           // defer updates until scrolling is finished.
@@ -162,7 +166,8 @@ function repositionScrollStrategy (data: ScrollStrategyData, props: StrategyProp
 }
 
 /** @private */
-function bindScroll (el: HTMLElement | undefined, onScroll: (e: Event) => void) {
+function bindScroll (target: HTMLElement | [x: number, y: number] | undefined, onScroll: (e: Event) => void) {
+  const el = Array.isArray(target) ? document.elementFromPoint(...target) : target
   const scrollElements = [document, ...getScrollParents(el)]
   scrollElements.forEach(el => {
     el.addEventListener('scroll', onScroll, { passive: true })

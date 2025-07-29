@@ -46,6 +46,13 @@ export default {
     input: {
       placeholder: 'Voer datum in',
     },
+    ariaLabel: {
+      previousMonth: 'Vorige maand',
+      nextMonth: 'Volgende maand',
+      selectYear: 'Kies jaar',
+      selectDate: '{0}',
+      currentDate: 'Vandag, {0}',
+    },
   },
   noDataText: 'Geen data is beskikbaar nie',
   carousel: {
@@ -134,5 +141,16 @@ export default {
     space: 'Spasie',
     plus: 'plus',
     shortcut: 'Sleutelbordkortpad: {0}',
+  },
+  video: {
+    play: 'Speel',
+    pause: 'Pouseer',
+    seek: 'Soek',
+    volume: 'Volume',
+    showVolume: 'Wys volumebeheer',
+    mute: 'Demp',
+    unmute: 'Ontdemp',
+    enterFullscreen: 'Volskerm',
+    exitFullscreen: 'Verlaat volskerm',
   },
 }

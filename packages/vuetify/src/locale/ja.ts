@@ -46,6 +46,13 @@ export default {
     input: {
       placeholder: '日付を入力',
     },
+    ariaLabel: {
+      previousMonth: '前の月',
+      nextMonth: '次の月',
+      selectYear: '年を選択',
+      selectDate: '{0}',
+      currentDate: '今日、{0}',
+    },
   },
   noDataText: 'データはありません。',
   carousel: {
@@ -134,5 +141,16 @@ export default {
     space: 'スペース',
     plus: 'プラス',
     shortcut: 'キーボードショートカット: {0}',
+  },
+  video: {
+    play: '再生',
+    pause: '一時停止',
+    seek: 'シーク',
+    volume: '音量',
+    showVolume: '音量コントロールを表示',
+    mute: 'ミュート',
+    unmute: 'ミュート解除',
+    enterFullscreen: '全画面表示',
+    exitFullscreen: '全画面表示を終了',
   },
 }

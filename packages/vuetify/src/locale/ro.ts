@@ -46,6 +46,13 @@ export default {
     input: {
       placeholder: 'Introduceți data',
     },
+    ariaLabel: {
+      previousMonth: 'Luna anterioară',
+      nextMonth: 'Luna următoare',
+      selectYear: 'Selectați anul',
+      selectDate: '{0}',
+      currentDate: 'Astăzi, {0}',
+    },
   },
   noDataText: 'Nu există date disponibile',
   carousel: {
@@ -134,5 +141,16 @@ export default {
     space: 'Spațiu',
     plus: 'plus',
     shortcut: 'Comandă rapidă tastatură: {0}',
+  },
+  video: {
+    play: 'Redare',
+    pause: 'Pauză',
+    seek: 'Căutare',
+    volume: 'Volum',
+    showVolume: 'Afișare control volum',
+    mute: 'Fără sunet',
+    unmute: 'Cu sunet',
+    enterFullscreen: 'Ecran complet',
+    exitFullscreen: 'Ieșire din ecran complet',
   },
 }

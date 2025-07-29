@@ -37,6 +37,7 @@ export type VTreeviewChildrenSlots<T> = {
 }
 
 export const makeVTreeviewChildrenProps = propsFactory({
+  fluid: Boolean,
   disabled: Boolean,
   loadChildren: Function as PropType<(item: unknown) => Promise<void>>,
   loadingIcon: {
@@ -132,7 +133,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
         depth,
         isLast,
         isLastGroup: props.isLastGroup,
-        leafLinks: !props.hideActions,
+        leafLinks: !props.hideActions && !props.fluid,
         separateRoots: props.separateRoots,
         parentIndentLines: props.parentIndentLines,
         variant: props.indentLinesVariant,

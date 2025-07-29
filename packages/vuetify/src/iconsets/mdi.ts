@@ -60,6 +60,14 @@ const aliases: IconAliases = {
   arrowleft: 'mdi-arrow-left',
   arrowright: 'mdi-arrow-right',
   backspace: 'mdi-backspace',
+  play: 'mdi-play',
+  pause: 'mdi-pause',
+  fullscreen: 'mdi-fullscreen',
+  fullscreenExit: 'mdi-fullscreen-exit',
+  volumeHigh: 'mdi-volume-high',
+  volumeMedium: 'mdi-volume-medium',
+  volumeLow: 'mdi-volume-low',
+  volumeOff: 'mdi-volume-variant-off',
 }
 
 const mdi: IconSet = {

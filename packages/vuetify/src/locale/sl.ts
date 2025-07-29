@@ -46,6 +46,13 @@ export default {
     input: {
       placeholder: 'Vnesite datum',
     },
+    ariaLabel: {
+      previousMonth: 'Prejšnji mesec',
+      nextMonth: 'Naslednji mesec',
+      selectYear: 'Izberite leto',
+      selectDate: '{0}',
+      currentDate: 'Danes, {0}',
+    },
   },
   noDataText: 'Ni podatkov',
   carousel: {
@@ -134,5 +141,16 @@ export default {
     space: 'Presledek',
     plus: 'plus',
     shortcut: 'Tipkovnična bližnjica: {0}',
+  },
+  video: {
+    play: 'Predvajaj',
+    pause: 'Zaustavi',
+    seek: 'Išči',
+    volume: 'Glasnost',
+    showVolume: 'Prikaži nadzor glasnosti',
+    mute: 'Utišaj',
+    unmute: 'Vklopi zvok',
+    enterFullscreen: 'Celozaslonski način',
+    exitFullscreen: 'Izhod iz celozaslonskega načina',
   },
 }

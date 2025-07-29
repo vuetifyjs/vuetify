@@ -60,6 +60,14 @@ const aliases: IconAliases = {
   arrowleft: 'keyboard_arrow_left',
   arrowright: 'keyboard_arrow_right',
   backspace: 'backspace',
+  play: 'play',
+  pause: 'pause',
+  fullscreen: 'fullscreen',
+  fullscreenExit: 'fullscreen_exit',
+  volumeHigh: 'volume_high',
+  volumeMedium: 'volume_medium',
+  volumeLow: 'volume_low',
+  volumeOff: 'volume_variant_off',
 }
 
 const md: IconSet = {

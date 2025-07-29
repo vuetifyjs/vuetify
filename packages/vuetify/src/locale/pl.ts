@@ -46,6 +46,13 @@ export default {
     input: {
       placeholder: 'Wprowadź datę',
     },
+    ariaLabel: {
+      previousMonth: 'Poprzedni miesiąc',
+      nextMonth: 'Następny miesiąc',
+      selectYear: 'Wybierz rok',
+      selectDate: '{0}',
+      currentDate: 'Dzisiaj, {0}',
+    },
   },
   noDataText: 'Brak danych',
   carousel: {
@@ -134,5 +141,16 @@ export default {
     space: 'Spacja',
     plus: 'plus',
     shortcut: 'Skrót klawiszowy: {0}',
+  },
+  video: {
+    play: 'Odtwórz',
+    pause: 'Wstrzymaj',
+    seek: 'Przewiń',
+    volume: 'Głośność',
+    showVolume: 'Pokaż regulację głośności',
+    mute: 'Wycisz',
+    unmute: 'Wyłącz wyciszenie',
+    enterFullscreen: 'Pełny ekran',
+    exitFullscreen: 'Opuść pełny ekran',
   },
 }

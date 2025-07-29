@@ -46,6 +46,13 @@ export default {
     input: {
       placeholder: '输入日期',
     },
+    ariaLabel: {
+      previousMonth: '上个月',
+      nextMonth: '下个月',
+      selectYear: '选择年份',
+      selectDate: '{0}',
+      currentDate: '今天，{0}',
+    },
   },
   noDataText: '没有数据',
   carousel: {
@@ -134,5 +141,16 @@ export default {
     space: '空格',
     plus: '加',
     shortcut: '键盘快捷键：{0}',
+  },
+  video: {
+    play: '播放',
+    pause: '暂停',
+    seek: '跳转',
+    volume: '音量',
+    showVolume: '显示音量控制',
+    mute: '静音',
+    unmute: '取消静音',
+    enterFullscreen: '全屏',
+    exitFullscreen: '退出全屏',
   },
 }

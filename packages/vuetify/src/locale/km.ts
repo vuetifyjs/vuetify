@@ -46,6 +46,13 @@ export default {
     input: {
       placeholder: 'បញ្ចូលកាលបរិច្ឆេទ',
     },
+    ariaLabel: {
+      previousMonth: 'Previous month',
+      nextMonth: 'Next month',
+      selectYear: 'Select year',
+      selectDate: '{0}',
+      currentDate: 'Today, {0}',
+    },
   },
   noDataText: 'គ្មានទិន្នន័យដែលមាន',
   carousel: {
@@ -134,5 +141,16 @@ export default {
     space: 'ដកឃ្លា',
     plus: 'បូក',
     shortcut: 'គ្រាប់ចុចរហ័ស: {0}',
+  },
+  video: {
+    play: 'លេង',
+    pause: 'ផ្អាក',
+    seek: 'ស្វែងរក',
+    volume: 'កម្រិតសំឡេង',
+    showVolume: 'បង្ហាញការគ្រប់គ្រងកម្រិតសំឡេង',
+    mute: 'បិទសំឡេង',
+    unmute: 'បើក​សំឡេង',
+    enterFullscreen: 'ពេញអេក្រង់',
+    exitFullscreen: 'ចេញពីអេក្រង់ពេ',
   },
 }

@@ -46,6 +46,13 @@ export default {
     input: {
       placeholder: 'Masukkan tanggal',
     },
+    ariaLabel: {
+      previousMonth: 'Bulan sebelumnya',
+      nextMonth: 'Bulan berikutnya',
+      selectYear: 'Pilih tahun',
+      selectDate: '{0}',
+      currentDate: 'Hari ini, {0}',
+    },
   },
   noDataText: 'Tidak ada data tersedia',
   carousel: {
@@ -134,5 +141,16 @@ export default {
     space: 'Spasi',
     plus: 'plus',
     shortcut: 'Pintasan keyboard: {0}',
+  },
+  video: {
+    play: 'Putar',
+    pause: 'Jeda',
+    seek: 'Cari',
+    volume: 'Volume',
+    showVolume: 'Tampilkan kontrol volume',
+    mute: 'Bisukan',
+    unmute: 'Bunyikan',
+    enterFullscreen: 'Layar penuh',
+    exitFullscreen: 'Keluar dari layar penuh',
   },
 }

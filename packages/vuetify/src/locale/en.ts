@@ -46,6 +46,13 @@ export default {
     input: {
       placeholder: 'Enter date',
     },
+    ariaLabel: {
+      previousMonth: 'Previous month',
+      nextMonth: 'Next month',
+      selectYear: 'Select year',
+      selectDate: '{0}', // Full date format
+      currentDate: 'Today, {0}',
+    },
   },
   noDataText: 'No data available',
   carousel: {
@@ -134,5 +141,16 @@ export default {
     option: 'Option',
     plus: 'plus',
     shortcut: 'Keyboard shortcut: {0}',
+  },
+  video: {
+    play: 'Play',
+    pause: 'Pause',
+    seek: 'Seek',
+    volume: 'Volume',
+    showVolume: 'Show volume control',
+    mute: 'Mute',
+    unmute: 'Unmute',
+    enterFullscreen: 'Full screen',
+    exitFullscreen: 'Exit full screen',
   },
 }

@@ -46,6 +46,13 @@ export default {
     input: {
       placeholder: 'Введіть дату',
     },
+    ariaLabel: {
+      previousMonth: 'Попередній місяць',
+      nextMonth: 'Наступний місяць',
+      selectYear: 'Виберіть рік',
+      selectDate: '{0}',
+      currentDate: 'Сьогодні, {0}',
+    },
   },
   noDataText: 'Немає даних для відображення',
   carousel: {
@@ -134,5 +141,16 @@ export default {
     space: 'Пробіл',
     plus: 'плюс',
     shortcut: 'Комбінація клавіш: {0}',
+  },
+  video: {
+    play: 'Відтворити',
+    pause: 'Пауза',
+    seek: 'Пошук',
+    volume: 'Гучність',
+    showVolume: 'Показати регулятор гучності',
+    mute: 'Вимкнути звук',
+    unmute: 'Увімкнути звук',
+    enterFullscreen: 'На весь екран',
+    exitFullscreen: 'Вийти з повноекранного режиму',
   },
 }

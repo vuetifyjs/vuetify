@@ -46,6 +46,13 @@ export default {
     input: {
       placeholder: 'Sisesta kuupäev',
     },
+    ariaLabel: {
+      previousMonth: 'Eelmine kuu',
+      nextMonth: 'Järgmine kuu',
+      selectYear: 'Vali aasta',
+      selectDate: '{0}',
+      currentDate: 'Täna, {0}',
+    },
   },
   noDataText: 'Andmed puuduvad',
   carousel: {
@@ -134,5 +141,16 @@ export default {
     space: 'Tühik',
     plus: 'pluss',
     shortcut: 'Klaviatuuri otsetee: {0}',
+  },
+  video: {
+    play: 'Esita',
+    pause: 'Peata',
+    seek: 'Otsi',
+    volume: 'Helitugevus',
+    showVolume: 'Näita helitugevuse regulaatorit',
+    mute: 'Vaigista',
+    unmute: 'Lülita vaigistus välja',
+    enterFullscreen: 'Täisekraan',
+    exitFullscreen: 'Välju täisekraanilt',
   },
 }

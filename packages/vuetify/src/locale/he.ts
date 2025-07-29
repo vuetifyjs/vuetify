@@ -46,6 +46,13 @@ export default {
     input: {
       placeholder: 'הזן תאריך',
     },
+    ariaLabel: {
+      previousMonth: 'החודש הקודם',
+      nextMonth: 'החודש הבא',
+      selectYear: 'בחר שנה',
+      selectDate: '{0}',
+      currentDate: 'היום, {0}',
+    },
   },
   noDataText: 'אין נתונים זמינים',
   carousel: {
@@ -134,5 +141,16 @@ export default {
     space: 'רווח',
     plus: 'פלוס',
     shortcut: 'קיצור דרך במקלדת: {0}',
+  },
+  video: {
+    play: 'נגן',
+    pause: 'השהה',
+    seek: 'חפש',
+    volume: 'עוצמת שמע',
+    showVolume: 'הצג בקרת עוצמת שמע',
+    mute: 'השתק',
+    unmute: 'בטל השתקה',
+    enterFullscreen: 'מסך מלא',
+    exitFullscreen: 'צא ממסך מלא',
   },
 }

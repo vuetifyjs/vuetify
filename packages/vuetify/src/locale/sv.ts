@@ -46,6 +46,13 @@ export default {
     input: {
       placeholder: 'Välj datum',
     },
+    ariaLabel: {
+      previousMonth: 'Föregående månad',
+      nextMonth: 'Nästa månad',
+      selectYear: 'Välj år',
+      selectDate: '{0}',
+      currentDate: 'Idag, {0}',
+    },
   },
   noDataText: 'Ingen data tillgänglig',
   carousel: {
@@ -134,5 +141,16 @@ export default {
     space: 'Mellanslag',
     plus: 'plus',
     shortcut: 'Tangentbordsgenväg: {0}',
+  },
+  video: {
+    play: 'Spela upp',
+    pause: 'Pausa',
+    seek: 'Sök',
+    volume: 'Volym',
+    showVolume: 'Visa volymkontroll',
+    mute: 'Stäng av ljud',
+    unmute: 'Slå på ljud',
+    enterFullscreen: 'Helskärm',
+    exitFullscreen: 'Avsluta helskärm',
   },
 }

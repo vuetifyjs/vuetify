@@ -46,6 +46,13 @@ export default {
     input: {
       placeholder: 'ป้อนวันที่',
     },
+    ariaLabel: {
+      previousMonth: 'เดือนก่อนหน้า',
+      nextMonth: 'เดือนถัดไป',
+      selectYear: 'เลือกปี',
+      selectDate: '{0}',
+      currentDate: 'วันนี้, {0}',
+    },
   },
   noDataText: 'ไม่มีข้อมูล',
   carousel: {
@@ -134,5 +141,16 @@ export default {
     space: 'เว้นวรรค',
     plus: 'บวก',
     shortcut: 'ทางลัดแป้นพิมพ์: {0}',
+  },
+  video: {
+    play: 'เล่น',
+    pause: 'หยุดชั่วคราว',
+    seek: 'ค้นหา',
+    volume: 'ระดับเสียง',
+    showVolume: 'แสดงตัวควบคุมระดับเสียง',
+    mute: 'ปิดเสียง',
+    unmute: 'เปิดเสียง',
+    enterFullscreen: 'เต็มหน้าจอ',
+    exitFullscreen: 'ออกจากเต็มหน้าจอ',
   },
 }

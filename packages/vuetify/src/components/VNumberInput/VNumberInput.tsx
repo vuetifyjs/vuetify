@@ -115,7 +115,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       let [baseDigits, fractionDigits] = fixed.split('.')
 
       fractionDigits = (fractionDigits ?? '').padEnd(props.minFractionDigits, '0')
-        .replace(new RegExp(`(?<=\\d{${props.minFractionDigits}})0`, 'g'), '')
+        .replace(new RegExp(`(?<=\\d{${props.minFractionDigits}})0+$`, 'g'), '')
 
       return [
         baseDigits,
@@ -247,6 +247,9 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       if (potentialNewInputVal.split(decimalSeparator.value)[1]?.length > props.precision) {
         e.preventDefault()
         inputElement!.value = potentialNewNumber
+
+        const cursorPosition = (selectionStart ?? 0) + e.data.length
+        inputElement!.setSelectionRange(cursorPosition, cursorPosition)
       }
       // Ignore decimal separator when precision = 0
       if (props.precision === 0 && potentialNewInputVal.includes(decimalSeparator.value)) {

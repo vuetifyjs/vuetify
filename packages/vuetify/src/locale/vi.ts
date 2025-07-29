@@ -46,6 +46,13 @@ export default {
     input: {
       placeholder: 'Nhập ngày',
     },
+    ariaLabel: {
+      previousMonth: 'Tháng trước',
+      nextMonth: 'Tháng sau',
+      selectYear: 'Chọn năm',
+      selectDate: '{0}',
+      currentDate: 'Hôm nay, {0}',
+    },
   },
   noDataText: 'Không có dữ liệu',
   carousel: {
@@ -134,5 +141,16 @@ export default {
     space: 'Khoảng trắng',
     plus: 'cộng',
     shortcut: 'Phím tắt: {0}',
+  },
+  video: {
+    play: 'Phát',
+    pause: 'Tạm dừng',
+    seek: 'Tìm kiếm',
+    volume: 'Âm lượng',
+    showVolume: 'Hiện điều khiển âm lượng',
+    mute: 'Tắt tiếng',
+    unmute: 'Bật tiếng',
+    enterFullscreen: 'Toàn màn hình',
+    exitFullscreen: 'Thoát toàn màn hình',
   },
 }

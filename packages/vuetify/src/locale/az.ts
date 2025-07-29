@@ -46,6 +46,13 @@ export default {
     input: {
       placeholder: 'Tarixi daxil edin',
     },
+    ariaLabel: {
+      previousMonth: 'Əvvəlki ay',
+      nextMonth: 'Növbəti ay',
+      selectYear: 'İli seçin',
+      selectDate: '{0}',
+      currentDate: 'Bu gün, {0}',
+    },
   },
   noDataText: 'Heç bir məlumat yoxdur.',
   carousel: {
@@ -134,5 +141,16 @@ export default {
     space: 'Boşluq',
     plus: 'plus',
     shortcut: 'Klaviatura qısayolu: {0}',
+  },
+  video: {
+    play: 'Oynat',
+    pause: 'Pauza',
+    seek: 'Axtar',
+    volume: 'Səs',
+    showVolume: 'Səs səviyyəsini göstər',
+    mute: 'Səsi kəs',
+    unmute: 'Səsi aç',
+    enterFullscreen: 'Tam ekran',
+    exitFullscreen: 'Tam ekrandan çıx',
   },
 }

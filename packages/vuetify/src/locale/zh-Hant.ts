@@ -46,6 +46,13 @@ export default {
     input: {
       placeholder: '請輸入日期',
     },
+    ariaLabel: {
+      previousMonth: '上個月',
+      nextMonth: '下個月',
+      selectYear: '選擇年份',
+      selectDate: '{0}',
+      currentDate: '今天，{0}',
+    },
   },
   noDataText: '沒有資料',
   carousel: {
@@ -134,5 +141,16 @@ export default {
     space: '空格',
     plus: '加',
     shortcut: '鍵盤快捷鍵：{0}',
+  },
+  video: {
+    play: '播放',
+    pause: '暫停',
+    seek: '搜尋',
+    volume: '音量',
+    showVolume: '顯示音量控制',
+    mute: '靜音',
+    unmute: '取消靜音',
+    enterFullscreen: '全螢幕',
+    exitFullscreen: '退出全螢幕',
   },
 }

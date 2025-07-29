@@ -46,6 +46,13 @@ export default {
     input: {
       placeholder: 'Въведете дата',
     },
+    ariaLabel: {
+      previousMonth: 'Предишен месец',
+      nextMonth: 'Следващ месец',
+      selectYear: 'Изберете година',
+      selectDate: '{0}',
+      currentDate: 'Днес, {0}',
+    },
   },
   noDataText: 'Няма налични данни',
   carousel: {
@@ -134,5 +141,16 @@ export default {
     space: 'Интервал',
     plus: 'плюс',
     shortcut: 'Клавиатурна комбинация: {0}',
+  },
+  video: {
+    play: 'Пусни',
+    pause: 'Пауза',
+    seek: 'Търсене',
+    volume: 'Сила на звука',
+    showVolume: 'Покажи контрола за силата на звука',
+    mute: 'Без звук',
+    unmute: 'Включи звука',
+    enterFullscreen: 'Цял екран',
+    exitFullscreen: 'Изход от цял екран',
   },
 }
