@@ -2,7 +2,7 @@
   <div class="d-flex my-6 justify-center">
     <v-card class="pa-6" elevation="6" rounded="xl">
       <v-card-title class="d-flex align-center justify-space-between">
-        <div class="text-truncate">Expense Analysis</div>
+        <div class="text-truncate mr-6">Expenses</div>
         <v-select
           v-model="selectedGroup"
           :items="['Transactions', 'Other']"
@@ -18,9 +18,9 @@
       <v-pie
         :key="selectedGroup"
         :items="currentItems"
-        :legend="{ position: $vuetify.display.md ? 'right' : 'bottom' }"
+        :legend="{ position: $vuetify.display.mdAndUp ? 'right' : 'bottom' }"
         :tooltip="{ subtitleFormat: '[value]%' }"
-        class="pa-3 mt-3"
+        class="pa-3 mt-3 justify-center"
         gap="2"
         inner-cut="70"
         item-key="id"
@@ -38,7 +38,7 @@
         </template>
 
         <template v-slot:legend="{ items, toggle, isActive }">
-          <v-list class="py-0 bg-transparent" density="compact" width="300">
+          <v-list class="py-0 mb-n5 mb-md-0 bg-transparent" density="compact" width="300">
             <v-list-item
               v-for="item in items"
               :key="item.key"
