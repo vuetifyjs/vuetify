@@ -258,3 +258,11 @@
 
     .v-pagination__item--is-active .v-btn__overlay
       opacity: $button-pagination-active-overlay-opacity
+
+@media (forced-colors: active)
+  .v-btn
+    &:not(
+      &--variant-text,
+      &--variant-plain) 
+        border: thin solid
+
