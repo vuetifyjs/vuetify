@@ -1,4 +1,5 @@
 import 'vue/jsx'
+import 'temporal-spec/global'
 
 // Types
 import type { ComponentInjectOptions, ComponentOptionsMixin, EmitsOptions, SlotsType } from 'vue'

@@ -12,7 +12,7 @@ import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { makeVPickerProps, VPicker } from '@/labs/VPicker/VPicker'
 
 // Composables
-import { useDate } from '@/composables/date'
+import * as dateUtil from '@/composables/date/temporal'
 import { useLocale, useRtl } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
@@ -21,6 +21,7 @@ import { computed, shallowRef, toRef, watch } from 'vue'
 import { genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
+import type { PropType } from 'vue'
 import type { VDatePickerHeaderSlots } from './VDatePickerHeader'
 import type { VDatePickerMonthSlots } from './VDatePickerMonth'
 import type { VDatePickerMonthsSlots } from './VDatePickerMonths'
@@ -78,7 +79,7 @@ export const makeVDatePickerProps = propsFactory({
   ...omit(makeVDatePickerYearsProps(), ['modelValue']),
   ...makeVPickerProps({ title: '$vuetify.datePicker.title' }),
 
-  modelValue: null,
+  modelValue: [String, Array] as PropType<string | (string | undefined)[]>,
 }, 'VDatePicker')
 
 export const VDatePicker = genericComponent<new <
@@ -108,7 +109,6 @@ export const VDatePicker = genericComponent<new <
   },
 
   setup (props, { emit, slots }) {
-    const adapter = useDate()
     const { t } = useLocale()
     const { rtlClasses } = useRtl()
 
@@ -116,48 +116,44 @@ export const VDatePicker = genericComponent<new <
       props,
       'modelValue',
       undefined,
-      v => wrapInArray(v).map(i => adapter.date(i)),
-      v => props.multiple ? v : v[0],
+      v => wrapInArray(v).map(i => dateUtil.parsePlainDate(i)),
+      v => props.multiple ? v.map(i => i?.toString()) : v[0]?.toString(),
     )
 
     const viewMode = useProxiedModel(props, 'viewMode')
     // const inputMode = useProxiedModel(props, 'inputMode')
 
     const minDate = computed(() => {
-      const date = adapter.date(props.min)
-
-      return props.min && adapter.isValid(date) ? date : null
+      return dateUtil.parsePlainDate(props.min)
     })
     const maxDate = computed(() => {
-      const date = adapter.date(props.max)
-
-      return props.max && adapter.isValid(date) ? date : null
+      return dateUtil.parsePlainDate(props.max)
     })
 
     const internal = computed(() => {
-      const today = adapter.date()
+      const today = Temporal.Now.plainDateISO()
       let value = today
       if (model.value?.[0]) {
-        value = adapter.date(model.value[0])
-      } else if (minDate.value && adapter.isBefore(today, minDate.value)) {
+        value = model.value[0]
+      } else if (minDate.value && dateUtil.isBefore(today, minDate.value)) {
         value = minDate.value
-      } else if (maxDate.value && adapter.isAfter(today, maxDate.value)) {
+      } else if (maxDate.value && dateUtil.isAfter(today, maxDate.value)) {
         value = maxDate.value
       }
 
-      return value && adapter.isValid(value) ? value : today
+      return value
     })
     const headerColor = toRef(() => props.headerColor ?? props.color)
 
     const _month = useProxiedModel(props, 'month')
     const month = computed({
-      get: () => Number(_month.value ?? adapter.getMonth(adapter.startOfMonth(internal.value))),
+      get: () => Number(_month.value ?? internal.value.month),
       set: v => _month.value = v,
     })
 
     const _year = useProxiedModel(props, 'year')
     const year = computed({
-      get: () => Number(_year.value ?? adapter.getYear(adapter.startOfYear(adapter.setMonth(internal.value, month.value)))),
+      get: () => Number(_year.value ?? internal.value.year),
       set: v => _year.value = v,
     })
 
@@ -174,18 +170,19 @@ export const VDatePicker = genericComponent<new <
         return t('$vuetify.datePicker.itemsSelected', model.value.length)
       }
 
-      return (model.value[0] && adapter.isValid(model.value[0]))
-        ? adapter.format(adapter.date(model.value[0]), 'normalDateWithWeekday')
+      return model.value[0]
+        ? dateUtil.format(model.value[0], 'normalDateWithWeekday')
         : t(props.header)
     })
     const text = computed(() => {
-      let date = adapter.date()
-
-      date = adapter.setDate(date, 1)
-      date = adapter.setMonth(date, month.value)
-      date = adapter.setYear(date, year.value)
-
-      return adapter.format(date, 'monthAndYear')
+      return dateUtil.format(
+        Temporal.PlainDate.from({
+          year: year.value,
+          month: month.value,
+          day: 1,
+        }),
+        'monthAndYear'
+      )
     })
     // const headerIcon = toRef(() => props.inputMode === 'calendar' ? props.keyboardIcon : props.calendarIcon)
     const headerTransition = toRef(() => `date-picker-header${isReversing.value ? '-reverse' : ''}-transition`)
@@ -198,47 +195,47 @@ export const VDatePicker = genericComponent<new <
       if (viewMode.value !== 'month') {
         targets.push(...['prev', 'next'])
       } else {
-        let _date = adapter.date()
-
-        _date = adapter.startOfMonth(_date)
-        _date = adapter.setMonth(_date, month.value)
-        _date = adapter.setYear(_date, year.value)
+        const _date = Temporal.PlainDate.from({
+          year: year.value,
+          month: month.value,
+          day: 1,
+        })
 
         if (minDate.value) {
-          const date = adapter.addDays(adapter.startOfMonth(_date), -1)
+          const date = _date.subtract({ days: 1 })
 
-          adapter.isAfter(minDate.value, date) && targets.push('prev')
+          dateUtil.isAfter(minDate.value, date) && targets.push('prev')
         }
 
         if (maxDate.value) {
-          const date = adapter.addDays(adapter.endOfMonth(_date), 1)
+          const date = _date.with({ day: _date.daysInMonth }).add({ days: 1 })
 
-          adapter.isAfter(date, maxDate.value) && targets.push('next')
+          dateUtil.isAfter(date, maxDate.value) && targets.push('next')
         }
       }
 
       return targets
     })
 
-    function isAllowedInRange (start: unknown, end: unknown) {
+    function isAllowedInRange (start: Temporal.PlainDate, end: Temporal.PlainDate) {
       const allowedDates = props.allowedDates
       if (typeof allowedDates !== 'function') return true
-      const days = adapter.getDiff(end, start, 'days')
+      const days = start.until(end, { largestUnit: 'day' }).days
       for (let i = 0; i < days; i++) {
-        if (allowedDates(adapter.addDays(start, i))) return true
+        if (allowedDates(start.add({ days: i }).toString())) return true
       }
       return false
     }
 
     function allowedYears (year: number) {
       if (typeof props.allowedDates === 'function') {
-        const startOfYear = adapter.parseISO(`${year}-01-01`)
-        return isAllowedInRange(startOfYear, adapter.endOfYear(startOfYear))
+        const startOfYear = dateUtil.parseISO(`${year}-01-01`)
+        return isAllowedInRange(startOfYear, dateUtil.endOfYear(startOfYear))
       }
 
       if (Array.isArray(props.allowedDates) && props.allowedDates.length) {
         for (const date of props.allowedDates) {
-          if (adapter.getYear(adapter.date(date)) === year) return true
+          if (Temporal.PlainDate.from(date).year === year) return true
         }
         return false
       }
@@ -248,17 +245,20 @@ export const VDatePicker = genericComponent<new <
 
     function allowedMonths (month: number) {
       if (typeof props.allowedDates === 'function') {
-        const monthTwoDigits = String(month + 1).padStart(2, '0')
-        const startOfMonth = adapter.parseISO(`${year.value}-${monthTwoDigits}-01`)
-        return isAllowedInRange(startOfMonth, adapter.endOfMonth(startOfMonth))
+        const startOfMonth = Temporal.PlainDate.from({
+          year: year.value,
+          month,
+          day: 1,
+        })
+        return isAllowedInRange(startOfMonth, dateUtil.endOfMonth(startOfMonth))
       }
 
       if (Array.isArray(props.allowedDates) && props.allowedDates.length) {
         for (const date of props.allowedDates) {
-          if (
-            adapter.getYear(adapter.date(date)) === year.value &&
-            adapter.getMonth(adapter.date(date)) === month
-          ) return true
+          const _date = Temporal.PlainDate.from(date)
+          if (_date.year === year.value && _date.month === month) {
+            return true
+          }
         }
         return false
       }
@@ -318,22 +318,24 @@ export const VDatePicker = genericComponent<new <
 
       if (!arrAfter.length) return
 
-      const before = adapter.date(arrBefore[arrBefore.length - 1])
-      const after = adapter.date(arrAfter[arrAfter.length - 1])
-      const newMonth = adapter.getMonth(after)
-      const newYear = adapter.getYear(after)
+      const before = arrBefore.at(-1)
+      const after = arrAfter.at(-1)
+      const newMonth = after?.month
+      const newYear = after?.year
 
-      if (newMonth !== month.value) {
+      if (newMonth && newMonth !== month.value) {
         month.value = newMonth
         onUpdateMonth()
       }
 
-      if (newYear !== year.value) {
+      if (newYear && newYear !== year.value) {
         year.value = newYear
         onUpdateYear()
       }
 
-      isReversing.value = adapter.isBefore(before, after)
+      if (before && after) {
+        isReversing.value = dateUtil.isBefore(before, after)
+      }
     })
 
     useRender(() => {
