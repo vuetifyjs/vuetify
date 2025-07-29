@@ -19,7 +19,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import vTooltip from '@/directives/tooltip'
 
 // Utilities
-import { computed, shallowRef } from 'vue'
+import { computed, shallowRef, toRef } from 'vue'
 import { formatTime, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -98,13 +98,22 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
 
   setup (props, { emit, slots }) {
     const { t } = useLocale()
-    const { themeClasses } = provideTheme(props)
+    const { themeClasses, current: currentTheme } = provideTheme(props)
     const { densityClasses } = useDensity(props)
     const { elevationClasses } = useElevation(props)
 
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => {
       const fallbackBackground = props.detached ? 'surface' : undefined
       return props.backgroundColor ?? fallbackBackground
+    })
+
+    const trackColor = toRef(() => {
+      if (props.trackColor) {
+        return props.trackColor
+      }
+
+      const fallback = currentTheme.value.dark || !props.pills ? undefined : 'surface'
+      return (props.pills ? props.backgroundColor : props.color) ?? fallback
     })
 
     const playing = useProxiedModel(props, 'playing')
@@ -275,7 +284,7 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
                     <VSlider
                       modelValue={ props.progress }
                       noKeyboard
-                      color={ props.trackColor ?? props.color }
+                      color={ trackColor.value ?? 'surface-variant' }
                       trackColor={ props.variant === 'tube' ? 'white' : undefined }
                       class="v-video__track"
                       thumbLabel="always"
