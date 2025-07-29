@@ -20,6 +20,7 @@
     </v-sheet>
 
     <v-carousel
+      :key="mode"
       :class="{ 'crossfade-carousel': currentTransition === 'crossfade' }"
       hide-delimiters
     >
