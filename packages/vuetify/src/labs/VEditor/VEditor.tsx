@@ -10,14 +10,13 @@ import { VToolbar } from '@/components/VToolbar/VToolbar'
 
 // Composables
 import { useCaret, useElement, useSelection } from './composables'
-import { blockFormatter, FormatCategory, formats, Formats, useFormatter } from './composables/formatter'
+import { FormatCategory, formats, Formats, useFormatter } from './composables/formatter'
 import { useFocus } from '@/composables/focus'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
-import { getObjectStyles, getStringStyles, isEmptyNode } from './utils'
 import { callEvent, genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
@@ -96,22 +95,20 @@ export const VEditor = genericComponent<VEditorSlots>()({
       }
     )
 
-    const { isFocused, focus, blur } = useFocus(props)
     const caret = useCaret(editorRef)
     const selection = useSelection(editorRef)
     const formatter = useFormatter(editorRef)
     const editorElement = useElement(editorRef)
+    const { isFocused, focus, blur } = useFocus(props)
 
     const vFieldRef = ref<VField>()
     const vInputRef = ref<VInput>()
+    const activeFormats = ref<Set<string>>(new Set())
 
     const isActive = computed(() => (
       isFocused.value ||
       props.active
     ))
-
-    const activeFormats = ref<Set<string>>(new Set())
-
     const isFormatActive = computed(() => (tag: string) => activeFormats.value.has(tag))
     const isPlainOrUnderlined = computed(() => ['plain', 'underlined'].includes(props.variant))
     const displayedFormats = computed(() => formats.filter(format => props.formats.includes(format.name)))
@@ -158,7 +155,7 @@ export const VEditor = genericComponent<VEditorSlots>()({
     }
 
     function onInput (e: Event) {
-      updateModel()
+      updateModelValue()
     }
 
     function onKeyUp () {
@@ -171,17 +168,17 @@ export const VEditor = genericComponent<VEditorSlots>()({
           case 'b':
             e.preventDefault()
             const boldFormat = formats.find(f => f.name === Formats.Bold)
-            if (boldFormat) toggleFormat(boldFormat)
+            if (boldFormat) applyFormat(boldFormat)
             break
           case 'i':
             e.preventDefault()
             const italicFormat = formats.find(f => f.name === Formats.Italic)
-            if (italicFormat) toggleFormat(italicFormat)
+            if (italicFormat) applyFormat(italicFormat)
             break
           case 'u':
             e.preventDefault()
             const underlineFormat = formats.find(f => f.name === Formats.Underline)
-            if (underlineFormat) toggleFormat(underlineFormat)
+            if (underlineFormat) applyFormat(underlineFormat)
             break
         }
       }
@@ -196,60 +193,34 @@ export const VEditor = genericComponent<VEditorSlots>()({
     }
 
     function onEnterKey (e: KeyboardEvent) {
+      if (!editorRef.value) return
+
       if (selection.hasText()) {
         e.preventDefault()
         return
       }
 
-      if (!editorRef.value) return
+      const currentBlockElement = editorElement.getCurrentBlock() || editorRef.value
 
-      const currentBlockElement = editorElement.getCurrentBlock()
-      const fragmentAfterCaret = editorElement.getFragmentAfterCaret(currentBlockElement || editorRef.value)
-
-      if (fragmentAfterCaret) return
-
-      e.preventDefault()
-
-      const newBlockTag = currentBlockElement?.tagName.toLowerCase() || 'div'
-      const newBlock = document.createElement(newBlockTag)
-
-      if (!currentBlockElement) {
-        editorRef.value.appendChild(newBlock)
-        caret.insertInto(newBlock)
-      } else {
-        currentBlockElement.parentElement?.insertBefore(newBlock, currentBlockElement.nextSibling)
-        caret.insertInto(newBlock)
+      // Custom behavior is needed for cross browser compatibility
+      if (isAtLineEnd(currentBlockElement)) {
+        e.preventDefault()
+        startNewLine(currentBlockElement)
+        updateModelValue()
       }
-
-      updateModel()
     }
 
     function onBackspaceKey (e: KeyboardEvent) {
-      if (selection.hasText()) return
+      if (!editorRef.value || selection.hasText()) return
 
-      const currentBlockElement = editorElement.getCurrentBlock()
-      if (!currentBlockElement) return
+      const currentBlockElement = editorElement.getCurrentBlock() || editorRef.value
 
-      if (currentBlockElement === editorRef.value?.firstChild) return
-
-      const fragmentBeforeCaret = editorElement.getFragmentBeforeSelection(currentBlockElement)
-      if (fragmentBeforeCaret) return
-
-      e.preventDefault()
-
-      const previousSibling = currentBlockElement.previousElementSibling
-      const isPreviousSiblingBlock = previousSibling && window.getComputedStyle(previousSibling).display === 'block'
-      if (isPreviousSiblingBlock) {
-        caret.insertInto(previousSibling)
-        previousSibling.appendChild(currentBlockElement)
+      // Custom behavior is needed for cross browser compatibility
+      if (isAtLineStart(currentBlockElement) && !isFirstLine(currentBlockElement)) {
+        e.preventDefault()
+        mergeIntoPreviousLine(currentBlockElement)
+        updateModelValue()
       }
-
-      caret.save()
-      editorElement.unwrap(currentBlockElement)
-      caret.restore()
-
-      updateActiveFormats()
-      updateModel()
     }
 
     function updateEditorHtml (newVal: string) {
@@ -258,7 +229,7 @@ export const VEditor = genericComponent<VEditorSlots>()({
       }
     }
 
-    function updateModel () {
+    function updateModelValue () {
       if (editorRef.value) {
         model.value = editorRef.value.innerHTML
       }
@@ -278,122 +249,63 @@ export const VEditor = genericComponent<VEditorSlots>()({
       activeFormats.value = newActiveFormats
     }
 
-    function toggleFormat (format: Formatter) {
+    function applyFormat (format: Formatter) {
+      if (props.readonly || props.disabled) return
+
       if (format.category === FormatCategory.Heading) {
-        toggleHeadingFormat(format)
+        formatter.heading.toggle(format)
       } else if (format.category === FormatCategory.Alignment) {
-        toggleAlignmentFormat(format)
+        formatter.alignment.toggle(format)
       } else {
-        toggleInlineFormat(format)
+        formatter.inline.toggle(format)
       }
 
-      updateModel()
+      updateModelValue()
       updateActiveFormats()
     }
 
-    function toggleInlineFormat (format: Formatter) {
-      const formattedElement = formatter.findElementWithFormat(format)
-      if (formattedElement) {
-        removeInlineFormat(formattedElement)
-      } else {
-        addInlineFormat(format)
-      }
+    function isFirstLine (currentBlockElement: Element | undefined) {
+      return !currentBlockElement || [editorRef.value?.firstChild, editorRef.value].includes(currentBlockElement)
     }
 
-    function toggleHeadingFormat (format: Formatter) {
-      const currentBlockElement = editorElement.getCurrentBlock()
-      const currentBlockTag = currentBlockElement?.tagName.toLowerCase()
-      const isCurrentBlockHeadingOrDiv = currentBlockTag?.startsWith('h') || currentBlockTag === 'div'
+    function isAtLineStart (currentBlockElement: Element) {
+      const fragmentBeforeCaret = editorElement.getFragmentBeforeSelection(currentBlockElement)
+      return !fragmentBeforeCaret
+    }
 
+    function isAtLineEnd (currentBlockElement: Element) {
+      const fragmentAfterCaret = editorElement.getFragmentAfterCaret(currentBlockElement)
+      return !fragmentAfterCaret
+    }
+
+    function startNewLine (currentBlockElement: Element | null) {
       if (!editorRef.value) return
 
-      caret.save()
+      const newBlockTag = currentBlockElement?.tagName.toLowerCase() || 'div'
+      const newBlock = document.createElement(newBlockTag)
 
       if (!currentBlockElement) {
-        formatChildren(editorRef.value, format)
-      } else if (formatter.isApplied(format, currentBlockElement)) {
-        replaceFormat(currentBlockElement, blockFormatter)
-      } else if (isCurrentBlockHeadingOrDiv) {
-        replaceFormat(currentBlockElement, format)
+        editorRef.value.appendChild(newBlock)
+        caret.insertInto(newBlock)
       } else {
-        formatChildren(currentBlockElement, format)
+        currentBlockElement.parentElement?.insertBefore(newBlock, currentBlockElement.nextSibling)
+        caret.insertInto(newBlock)
+      }
+    }
+
+    function mergeIntoPreviousLine (currentBlockElement: Element) {
+      if (!currentBlockElement) return
+
+      const previousSibling = currentBlockElement.previousElementSibling
+      const isPreviousSiblingBlock = previousSibling && window.getComputedStyle(previousSibling).display === 'block'
+      if (isPreviousSiblingBlock) {
+        caret.insertInto(previousSibling)
+        previousSibling.appendChild(currentBlockElement)
       }
 
+      caret.save()
+      editorElement.unwrap(currentBlockElement)
       caret.restore()
-    }
-
-    function toggleAlignmentFormat (format: Formatter) {
-      const blockElement = editorElement.getCurrentBlock()
-      const targetStyles = format.config.styles
-      const targetAlignment = targetStyles?.textAlign
-
-      if (!editorRef.value) return
-
-      if (!targetAlignment) return
-
-      if (!blockElement) {
-        caret.save()
-        formatChildren(editorRef.value, format)
-        caret.restore()
-      } else {
-        const currentStyleString = blockElement.getAttribute('style') || ''
-        const currentStyles = getObjectStyles(currentStyleString)
-        const currentAlignment = currentStyles.textAlign
-
-        if (currentAlignment === targetAlignment) {
-          const newStyles = omit(currentStyles, ['textAlign'])
-          const newStyleString = getStringStyles(newStyles)
-
-          if (newStyleString) {
-            blockElement.setAttribute('style', newStyleString)
-          } else {
-            blockElement.removeAttribute('style')
-          }
-        } else {
-          const newStyles = { ...currentStyles, textAlign: targetAlignment }
-          const newStyleString = getStringStyles(newStyles)
-          blockElement.setAttribute('style', newStyleString)
-        }
-      }
-    }
-
-    function addInlineFormat (format: Formatter) {
-      if (!editorRef.value || props.readonly || props.disabled) return
-
-      editorRef.value?.focus()
-
-      const formatterElement = formatter.get(format)
-      selection.wrap(formatterElement)
-
-      if (!selection.hasText()) {
-        caret.insertInto(formatterElement)
-      } else {
-        selection.select(formatterElement)
-      }
-    }
-
-    function removeInlineFormat (element: Element) {
-      if (!editorRef.value || props.readonly || props.disabled) return
-
-      const isElementEmpty = isEmptyNode(element)
-
-      if (isElementEmpty) {
-        editorElement.remove(element)
-      } else if (selection.hasText()) {
-        editorElement.removeFormatAtSelection(element)
-      } else {
-        editorElement.removeFormatAtCaret(element)
-      }
-    }
-
-    function replaceFormat (element: Element, format: Formatter) {
-      const formatterElement = formatter.get(format)
-      editorElement.replaceContainer(element, formatterElement)
-    }
-
-    function formatChildren (element: Element, format: Formatter) {
-      const formatterElement = formatter.get(format)
-      editorElement.wrapChildren(element, formatterElement)
     }
 
     watch(() => props.modelValue, newVal => {
@@ -481,7 +393,7 @@ export const VEditor = genericComponent<VEditorSlots>()({
                                     size="small"
                                     key={ format.name }
                                     icon={ format.icon }
-                                    onClick={ () => toggleFormat(format) }
+                                    onClick={ () => applyFormat(format) }
                                     color={ isFormatActive.value(format.name) ? 'primary' : undefined }
                                   />
                                 ))}
