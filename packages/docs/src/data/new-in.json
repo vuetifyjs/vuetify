@@ -38,6 +38,12 @@
       "activeColor": "3.7.0"
     }
   },
+  "VCarousel": {
+    "props": {
+      "crossfade": "3.10.0",
+      "transitionDuration": "3.10.0"
+    }
+  },
   "VChip": {
     "props": {
       "baseColor": "3.8.0"
@@ -216,6 +222,12 @@
   "VVirtualScroll": {
     "props": {
       "itemKey": "3.8.0"
+    }
+  },
+  "VWindow": {
+    "props": {
+      "crossfade": "3.10.0",
+      "transitionDuration": "3.10.0"
     }
   }
 }
