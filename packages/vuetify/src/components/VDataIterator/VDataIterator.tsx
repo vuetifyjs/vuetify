@@ -28,7 +28,7 @@ import { genericComponent, propsFactory, useRender } from '@/util'
 // Types
 import type { Component } from 'vue'
 import type { DataIteratorItem } from './composables/items'
-import type { Group } from '@/components/VDataTable/composables/group'
+import type { Group, GroupSummary } from '@/components/VDataTable/composables/group'
 import type { SortItem } from '@/components/VDataTable/composables/sort'
 import type { LoaderSlotProps } from '@/composables/loader'
 import type { GenericProps } from '@/util'
@@ -53,7 +53,7 @@ type VDataIteratorSlotProps<T> = {
   toggleGroup: ReturnType<typeof provideGroupBy>['toggleGroup']
   items: readonly DataIteratorItem<T>[]
   itemsCount: number
-  groupedItems: readonly (DataIteratorItem<T> | Group<DataIteratorItem<T>>)[]
+  groupedItems: readonly (DataIteratorItem<T> | Group<DataIteratorItem<T>> | GroupSummary<DataIteratorItem<T>>)[]
 }
 
 export type VDataIteratorSlots<T> = {
@@ -120,7 +120,7 @@ export const VDataIterator = genericComponent<new <T> (
     const { sortByWithGroups, opened, extractRows, isGroupOpen, toggleGroup } = provideGroupBy({ groupBy, sortBy })
 
     const { sortedItems } = useSortedItems(props, filteredItems, sortByWithGroups, { transform: item => item.raw })
-    const { flatItems } = useGroupedItems(sortedItems, groupBy, opened)
+    const { flatItems } = useGroupedItems(sortedItems, groupBy, opened, false)
 
     const itemsLength = toRef(() => flatItems.value.length)
 

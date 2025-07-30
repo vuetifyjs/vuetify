@@ -84,6 +84,9 @@
       "groupCollapseIcon": "3.10.0",
       "groupExpandIcon": "3.10.0",
       "headerProps": "3.5.0"
+    },
+    "slots": {
+      "group-summary": "3.10.0"
     }
   },
   "VDataTableServer": {
@@ -92,6 +95,9 @@
       "expandIcon": "3.10.0",
       "groupCollapseIcon": "3.10.0",
       "groupExpandIcon": "3.10.0"
+    },
+    "slots": {
+      "group-summary": "3.10.0"
     }
   },
   "VDataTableVirtual": {
@@ -100,6 +106,9 @@
       "expandIcon": "3.10.0",
       "groupCollapseIcon": "3.10.0",
       "groupExpandIcon": "3.10.0"
+    },
+    "slots": {
+      "group-summary": "3.10.0"
     }
   },
   "VDialog": {
