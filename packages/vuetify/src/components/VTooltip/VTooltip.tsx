@@ -35,6 +35,7 @@ export const makeVTooltipProps = propsFactory({
     origin: 'auto' as const,
     scrim: false,
     scrollStrategy: 'reposition' as const,
+    stickToTarget: true,
     transition: null,
   }), [
     'absolute',

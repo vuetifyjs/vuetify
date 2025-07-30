@@ -65,6 +65,11 @@
       "headerProps": "3.5.0"
     }
   },
+  "VDialog": {
+    "props": {
+      "stickToTarget": "3.10.0"
+    }
+  },
   "VExpansionPanels": {
     "props": {
       "static": "3.4.0"
@@ -114,12 +119,18 @@
   },
   "VMenu": {
     "props": {
+      "stickToTarget": "3.10.0",
       "submenu": "3.7.0"
     }
   },
   "VNavigationDrawer": {
     "props": {
       "persistent": "3.6.0"
+    }
+  },
+  "VOverlay": {
+    "props": {
+      "stickToTarget": "3.10.0"
     }
   },
   "VProgressLinear": {
@@ -180,7 +191,8 @@
   "VTooltip": {
     "props": {
       "eager": "3.2.0",
-      "interactive": "3.8.0"
+      "interactive": "3.8.0",
+      "stickToTarget": "3.10.0"
     }
   },
   "VVirtualScroll": {
