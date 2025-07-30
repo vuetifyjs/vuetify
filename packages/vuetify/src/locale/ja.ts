@@ -153,4 +153,21 @@ export default {
     enterFullscreen: '全画面表示',
     exitFullscreen: '全画面表示を終了',
   },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: '画面から色を選択',
+      hueSlider: '色相',
+      alphaSlider: 'アルファ',
+      redInput: '赤',
+      greenInput: '緑',
+      blueInput: '青',
+      alphaInput: 'アルファ',
+      hueInput: '色相',
+      saturationInput: '彩度',
+      lightnessInput: '明度',
+      hexInput: 'HEX値',
+      hexaInput: 'アルファ付きHEX値',
+      changeFormat: 'カラーフォーマットを変更',
+    },
+  },
 }

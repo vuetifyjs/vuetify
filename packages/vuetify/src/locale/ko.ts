@@ -153,4 +153,21 @@ export default {
     enterFullscreen: '전체 화면',
     exitFullscreen: '전체 화면 종료',
   },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: '화면에서 색상 선택',
+      hueSlider: '색조',
+      alphaSlider: '투명도',
+      redInput: '빨강',
+      greenInput: '초록',
+      blueInput: '파랑',
+      alphaInput: '투명도',
+      hueInput: '색조',
+      saturationInput: '채도',
+      lightnessInput: '명도',
+      hexInput: 'HEX 값',
+      hexaInput: '알파 값이 있는 HEX',
+      changeFormat: '색상 형식 변경',
+    },
+  },
 }

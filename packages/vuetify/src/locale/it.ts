@@ -153,4 +153,21 @@ export default {
     enterFullscreen: 'Schermo intero',
     exitFullscreen: 'Esci da schermo intero',
   },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Seleziona il colore dallo schermo',
+      hueSlider: 'Tonalità',
+      alphaSlider: 'Trasparenza',
+      redInput: 'Rosso',
+      greenInput: 'Verde',
+      blueInput: 'Blu',
+      alphaInput: 'Trasparenza',
+      hueInput: 'Tonalità',
+      saturationInput: 'Saturazione',
+      lightnessInput: 'Luminosità',
+      hexInput: 'Valore esadecimale',
+      hexaInput: 'Valore esadecimale con trasparenza',
+      changeFormat: 'Cambia formato colore',
+    },
+  },
 }

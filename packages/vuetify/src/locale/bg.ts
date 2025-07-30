@@ -153,4 +153,21 @@ export default {
     enterFullscreen: 'Цял екран',
     exitFullscreen: 'Изход от цял екран',
   },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Вземане на цвят от екрана',
+      hueSlider: 'Цветови тон',
+      alphaSlider: 'Алфа',
+      redInput: 'Червено',
+      greenInput: 'Зелено',
+      blueInput: 'Синьо',
+      alphaInput: 'Алфа',
+      hueInput: 'Цветови тон',
+      saturationInput: 'Наситеност',
+      lightnessInput: 'Светлина',
+      hexInput: 'HEX стойност',
+      hexaInput: 'HEX стойност с алфа',
+      changeFormat: 'Промяна на цветовия формат',
+    },
+  },
 }

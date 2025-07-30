@@ -153,4 +153,21 @@ export default {
     enterFullscreen: 'Volskerm',
     exitFullscreen: 'Verlaat volskerm',
   },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Kies kleur van die skerm af',
+      hueSlider: 'Tint',
+      alphaSlider: 'Alfa',
+      redInput: 'Rooi',
+      greenInput: 'Groen',
+      blueInput: 'Blou',
+      alphaInput: 'Alfa',
+      hueInput: 'Tint',
+      saturationInput: 'Versadiging',
+      lightnessInput: 'Ligtheid',
+      hexInput: 'HEX-waarde',
+      hexaInput: 'HEX met alfa-waarde',
+      changeFormat: 'Verander kleurformaat',
+    },
+  },
 }

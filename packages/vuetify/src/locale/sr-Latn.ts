@@ -153,4 +153,21 @@ export default {
     enterFullscreen: 'Prikaz preko cijelog ekrana',
     exitFullscreen: 'Izađi iz prikaza preko cijelog ekrana',
   },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Izaberite boju sa ekrana',
+      hueSlider: 'Nijansa',
+      alphaSlider: 'Alfa',
+      redInput: 'Crvena',
+      greenInput: 'Zelena',
+      blueInput: 'Plava',
+      alphaInput: 'Alfa',
+      hueInput: 'Nijansa',
+      saturationInput: 'Zasićenost',
+      lightnessInput: 'Svetlina',
+      hexInput: 'HEX vrednost',
+      hexaInput: 'HEX sa alfa vrednošću',
+      changeFormat: 'Promeni format boje',
+    },
+  },
 }

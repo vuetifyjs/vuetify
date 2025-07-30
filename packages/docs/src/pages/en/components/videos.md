@@ -85,7 +85,7 @@ Video can automatically skip to certain timestamp upon load. It can be useful to
 
 #### Color
 
-You can control the icon color and background color of the active video node.
+You can control the icon color and background color of the controls.
 
 <ExamplesExample file="v-video/prop-color" />
 

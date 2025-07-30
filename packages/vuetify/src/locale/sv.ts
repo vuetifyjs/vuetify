@@ -153,4 +153,21 @@ export default {
     enterFullscreen: 'Helskärm',
     exitFullscreen: 'Avsluta helskärm',
   },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Välj färg från skärmen',
+      hueSlider: 'Nyans',
+      alphaSlider: 'Alfa',
+      redInput: 'Röd',
+      greenInput: 'Grön',
+      blueInput: 'Blå',
+      alphaInput: 'Alfa',
+      hueInput: 'Nyans',
+      saturationInput: 'Mättnad',
+      lightnessInput: 'Ljushet',
+      hexInput: 'HEX-värde',
+      hexaInput: 'HEX med alfavärde',
+      changeFormat: 'Ändra färgformat',
+    },
+  },
 }

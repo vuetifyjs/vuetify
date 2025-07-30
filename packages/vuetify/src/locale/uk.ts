@@ -153,4 +153,21 @@ export default {
     enterFullscreen: 'На весь екран',
     exitFullscreen: 'Вийти з повноекранного режиму',
   },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Вибрати колір з екрана',
+      hueSlider: 'Відтінок',
+      alphaSlider: 'Прозорість',
+      redInput: 'Червоний',
+      greenInput: 'Зелений',
+      blueInput: 'Синій',
+      alphaInput: 'Прозорість',
+      hueInput: 'Відтінок',
+      saturationInput: 'Насиченість',
+      lightnessInput: 'Яскравість',
+      hexInput: 'HEX значення',
+      hexaInput: 'HEX зі значенням прозорості',
+      changeFormat: 'Змінити формат кольору',
+    },
+  },
 }

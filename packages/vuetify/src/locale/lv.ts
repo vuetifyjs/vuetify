@@ -153,4 +153,21 @@ export default {
     enterFullscreen: 'Pilnekrāna režīms',
     exitFullscreen: 'Iziet no pilnekrāna režīma',
   },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Izvēlēties krāsu no ekrāna',
+      hueSlider: 'Tonis',
+      alphaSlider: 'Caurspīdīgums',
+      redInput: 'Sarkans',
+      greenInput: 'Zaļš',
+      blueInput: 'Zils',
+      alphaInput: 'Caurspīdīgums',
+      hueInput: 'Tonis',
+      saturationInput: 'Piesātinājums',
+      lightnessInput: 'Gaišums',
+      hexInput: 'HEX vērtība',
+      hexaInput: 'HEX ar caurspīdīguma vērtību',
+      changeFormat: 'Mainīt krāsas formātu',
+    },
+  },
 }

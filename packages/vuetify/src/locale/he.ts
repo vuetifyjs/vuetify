@@ -153,4 +153,21 @@ export default {
     enterFullscreen: 'מסך מלא',
     exitFullscreen: 'צא ממסך מלא',
   },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'בחר צבע מהמסך',
+      hueSlider: 'גוון',
+      alphaSlider: 'אלפא',
+      redInput: 'אדום',
+      greenInput: 'ירוק',
+      blueInput: 'כחול',
+      alphaInput: 'אלפא',
+      hueInput: 'גוון',
+      saturationInput: 'רוויה',
+      lightnessInput: 'בהירות',
+      hexInput: 'ערך HEX',
+      hexaInput: 'HEX עם ערך אלפא',
+      changeFormat: 'שנה פורמט צבע',
+    },
+  },
 }

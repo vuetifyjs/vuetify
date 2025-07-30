@@ -153,4 +153,21 @@ export default {
     enterFullscreen: 'Tam ekran',
     exitFullscreen: 'Tam ekrandan çık',
   },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Ekranda renk seç',
+      hueSlider: 'Ton',
+      alphaSlider: 'Alfa',
+      redInput: 'Kırmızı',
+      greenInput: 'Yeşil',
+      blueInput: 'Mavi',
+      alphaInput: 'Alfa',
+      hueInput: 'Ton',
+      saturationInput: 'Doygunluk',
+      lightnessInput: 'Parlaklık',
+      hexInput: 'HEX değeri',
+      hexaInput: 'Alfa değerli HEX',
+      changeFormat: 'Renk biçimini değiştir',
+    },
+  },
 }
