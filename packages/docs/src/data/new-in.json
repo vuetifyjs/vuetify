@@ -189,7 +189,8 @@
   },
   "VTimePicker": {
     "props": {
-      "hideTitle": "3.10.0"
+      "hideTitle": "3.10.0",
+      "period": "3.10.0"
     }
   },
   "VTreeview": {
