@@ -2,8 +2,10 @@
 import './VTreeviewItem.sass'
 
 // Components
+import { VAvatar } from '@/components/VAvatar'
 import { VBtn } from '@/components/VBtn'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
+import { VIcon } from '@/components/VIcon'
 import { VListItemAction } from '@/components/VList'
 import { makeVListItemProps, VListItem } from '@/components/VList/VListItem'
 import { VProgressCircular } from '@/components/VProgressCircular'
@@ -14,15 +16,12 @@ import { IconValue } from '@/composables/icons'
 
 // Utilities
 import { computed, inject, ref, toRaw } from 'vue'
+import { VTreeviewSymbol } from './shared'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import { VTreeviewSymbol } from './shared'
 import type { ToggleListItemSlot } from './shared'
-import { VAvatar } from '../VAvatar'
-import { VDefaultsProvider } from '../VDefaultsProvider'
-import { VIcon } from '../VIcon'
 import type { VListItemSlots } from '@/components/VList/VListItem'
 import type { IndentLineType } from '@/util'
 
