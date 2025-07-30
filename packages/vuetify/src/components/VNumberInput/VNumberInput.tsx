@@ -144,7 +144,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
     })
     const inputText = computed<string | null>({
       get: () => _inputText.value,
-      async set (val) {
+      set (val) {
         if (val === null || val === '') {
           model.value = null
           _inputText.value = null
