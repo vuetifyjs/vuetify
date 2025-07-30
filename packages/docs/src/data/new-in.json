@@ -62,8 +62,7 @@
   },
   "VDataTable": {
     "props": {
-      "headerProps": "3.5.0",
-      "lastFixed": "3.9.0"
+      "headerProps": "3.5.0"
     }
   },
   "VExpansionPanels": {
@@ -75,6 +74,16 @@
     "props": {
       "iconColor": "3.8.0",
       "glow": "3.8.0"
+    }
+  },
+  "VFileInput": {
+    "props": {
+      "filterByType": "3.10.0"
+    }
+  },
+  "VFileUpload": {
+    "props": {
+      "filterByType": "3.10.0"
     }
   },
   "VIcon": {
@@ -113,6 +122,13 @@
       "persistent": "3.6.0"
     }
   },
+  "VProgressLinear": {
+    "props": {
+      "chunkCount": "3.10.0",
+      "chunkGap": "3.10.0",
+      "chunkWidth": "3.10.0"
+    }
+  },
   "VSelect": {
     "props": {
       "listProps": "3.5.0",
@@ -146,6 +162,19 @@
   "VTab": {
     "props": {
       "text": "3.2.0"
+    }
+  },
+  "VTreeview": {
+    "props": {
+      "hideActions": "3.9.0",
+      "separateRoots": "3.9.0",
+      "indentLines": "3.9.0"
+    }
+  },
+  "VTreeviewItem": {
+    "props": {
+      "hideActions": "3.9.0",
+      "indentLines": "3.9.0"
     }
   },
   "VTooltip": {

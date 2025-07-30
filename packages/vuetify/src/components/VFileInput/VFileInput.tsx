@@ -9,6 +9,8 @@ import { makeVFieldProps } from '@/components/VField/VField'
 import { makeVInputProps, VInput } from '@/components/VInput/VInput'
 
 // Composables
+import { useFileDrop } from '@/composables/fileDrop'
+import { makeFileFilterProps, useFileFilter } from '@/composables/fileFilter'
 import { useFocus } from '@/composables/focus'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { useLocale } from '@/composables/locale'
@@ -74,6 +76,7 @@ export const makeVFileInputProps = propsFactory({
     },
   },
 
+  ...makeFileFilterProps(),
   ...makeVFieldProps({ clearable: true }),
 }, 'VFileInput')
 
@@ -89,10 +92,12 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
     'mousedown:control': (e: MouseEvent) => true,
     'update:focused': (focused: boolean) => true,
     'update:modelValue': (files: File | File[]) => true,
+    rejected: (files: File[]) => true,
   },
 
   setup (props, { attrs, emit, slots }) {
     const { t } = useLocale()
+    const { filterAccepted } = useFileFilter(props)
     const model = useProxiedModel(
       props,
       'modelValue',
@@ -124,6 +129,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
     const isActive = toRef(() => isFocused.value || props.active)
     const isPlainOrUnderlined = computed(() => ['plain', 'underlined'].includes(props.variant))
     const isDragging = shallowRef(false)
+    const { handleDrop, hasFilesOrFolders } = useFileDrop()
 
     function onFocus () {
       if (inputRef.value !== document.activeElement) {
@@ -163,21 +169,46 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
       e.preventDefault()
       isDragging.value = false
     }
-    function onDrop (e: DragEvent) {
+    async function onDrop (e: DragEvent) {
       e.preventDefault()
       e.stopImmediatePropagation()
       isDragging.value = false
 
-      if (!e.dataTransfer?.files?.length || !inputRef.value) return
+      if (!inputRef.value || !hasFilesOrFolders(e)) return
 
+      const allDroppedFiles = await handleDrop(e)
+      selectAccepted(allDroppedFiles)
+    }
+
+    function onFileSelection (e: Event) {
+      if (!e.target || (e as any).repack) return // prevent loop
+
+      if (!props.filterByType) {
+        const target = e.target as HTMLInputElement
+        model.value = [...target.files ?? []]
+      } else {
+        selectAccepted([...(e as any).target.files])
+      }
+    }
+
+    function selectAccepted (files: File[]) {
       const dataTransfer = new DataTransfer()
+      const { accepted, rejected } = filterAccepted(files)
 
-      for (const file of e.dataTransfer.files) {
+      if (rejected.length) {
+        emit('rejected', rejected)
+      }
+
+      for (const file of accepted) {
         dataTransfer.items.add(file)
       }
 
-      inputRef.value.files = dataTransfer.files
-      inputRef.value.dispatchEvent(new Event('change', { bubbles: true }))
+      inputRef.value!.files = dataTransfer.files
+      model.value = [...dataTransfer.files]
+
+      const event = new Event('change', { bubbles: true }) as any
+      event.repack = true
+      inputRef.value!.dispatchEvent(event)
     }
 
     watch(model, newValue => {
@@ -194,6 +225,9 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
       const { modelValue: _, ...inputProps } = VInput.filterProps(props)
       const fieldProps = VField.filterProps(props)
+
+      const expectsDirectory = attrs.webkitdirectory !== undefined && attrs.webkitdirectory !== false
+      const inputAccept = expectsDirectory ? undefined : (props.filterByType ?? String(attrs.accept))
 
       return (
         <VInput
@@ -224,10 +258,11 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
               isDirty,
               isReadonly,
               isValid,
+              hasDetails,
             }) => (
               <VField
                 ref={ vFieldRef }
-                prepend-icon={ props.prependIcon }
+                prependIcon={ props.prependIcon }
                 onMousedown={ onControlMousedown }
                 onClick={ onControlClick }
                 onClick:clear={ onClear }
@@ -239,6 +274,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
                 dirty={ isDirty.value || props.dirty }
                 disabled={ isDisabled.value }
                 focused={ isFocused.value }
+                details={ hasDetails.value }
                 error={ isValid.value === false }
                 onDragover={ onDragover }
                 onDrop={ onDrop }
@@ -252,6 +288,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
                       <input
                         ref={ inputRef }
                         type="file"
+                        accept={ inputAccept }
                         readonly={ isReadonly.value }
                         disabled={ isDisabled.value }
                         multiple={ props.multiple }
@@ -263,12 +300,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
 
                           onFocus()
                         }}
-                        onChange={ e => {
-                          if (!e.target) return
-
-                          const target = e.target as HTMLInputElement
-                          model.value = [...target.files ?? []]
-                        }}
+                        onChange={ onFileSelection }
                         onDragleave={ onDragleave }
                         onFocus={ onFocus }
                         onBlur={ blur }

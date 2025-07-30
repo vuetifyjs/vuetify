@@ -173,8 +173,8 @@ describe('VAutocomplete', () => {
         items={ items.value }
         multiple
         returnObject
-        item-title="text"
-        item-value="id"
+        itemTitle="text"
+        itemValue="id"
       />
     ))
 
@@ -231,8 +231,8 @@ describe('VAutocomplete', () => {
         v-model={ selectedItems.value }
         items={ items.value }
         multiple
-        item-title="text"
-        item-value="text"
+        itemTitle="text"
+        itemValue="text"
       />
     ))
 
@@ -348,8 +348,8 @@ describe('VAutocomplete', () => {
       <VAutocomplete
         items={ items }
         v-model={ selectedItems.value }
-        item-title={ itemTitle }
-        item-value="id"
+        itemTitle={ itemTitle }
+        itemValue="id"
       />
     ))
 
@@ -496,7 +496,7 @@ describe('VAutocomplete', () => {
     const { element } = render(() => (
         <VAutocomplete
           chips
-          closable-chips
+          closableChips
           items={['foo', 'bar']}
           label="Autocomplete"
           modelValue={['foo', 'bar']}
@@ -577,7 +577,7 @@ describe('VAutocomplete', () => {
       <VAutocomplete
         v-model={ selectedItem.value }
         chips
-        closable-chips
+        closableChips
         items={['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']}
       />
     ))
@@ -593,7 +593,7 @@ describe('VAutocomplete', () => {
       <VAutocomplete
         v-model={ selectedItem.value }
         chips
-        closable-chips
+        closableChips
         multiple
         items={['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']}
       />
@@ -681,6 +681,17 @@ describe('VAutocomplete', () => {
     await userEvent.keyboard('Item 1')
     await userEvent.click(await screen.findByRole('option'))
     await expect.poll(() => selectedItem.value).toBe('Item 1')
+  })
+
+  it('should not fire @update:focus twice when clicking bottom of input', async () => {
+    const onFocus = vi.fn()
+    const { element } = render(() => (
+      <VAutocomplete onUpdate:focused={ onFocus } />
+    ))
+
+    await userEvent.click(element, { y: 1 })
+
+    expect(onFocus).toHaveBeenCalledTimes(1)
   })
 
   describe('Showcase', () => {

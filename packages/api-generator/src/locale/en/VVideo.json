@@ -1,0 +1,36 @@
+{
+  "props": {
+    "src": "Media file URL",
+    "type": "Media file type (optional)",
+    "image": "Apply a specific image as cover before the video is loaded.",
+    "autoplay": "Starts loading the media file without waiting for user to click. Playback begins once enough data is loaded.",
+    "muted": "Hides volume control and disables the playback sound.",
+    "eager": "Silently loades the media file without waiting for user to click.",
+    "hideOverlay": "Hide center play icon.",
+    "noFullscreen": "Disable fullscreen and hide the default fullscreen button.",
+    "rounded": "Applies a border radius to the video container and the controls. Accepts array of two values to customize elements separately.",
+    "startAt": "Moves progress to the specified time (in seconds) once the media file is loaded.",
+    "controlsProps": "Pass props through to the `v-video-controls` component. Accepts an object with anything from [v-video-controls](/api/v-video-controls/#props) props, camelCase keys are recommended.",
+    "controlsTransition": "The reveal transition applied to the VVideoControls component once the media file is loaded.",
+    "controlsVariant": "Variant passed to the VVideoControls component."
+  },
+  "events": {
+    "loaded": "Emitted when the video has loaded and is ready to be played.",
+    "update:playing": "Emitted when playing state changes.",
+    "update:progress": "Emitted when the internal playback progress changes.",
+    "update:volume": "Emitted when the volume changes."
+  },
+  "slots": {
+    "header": "Slot for additional content placed on top of the video.",
+    "append": "Additional content on the right within the control bar.",
+    "controls": "Replaces controls bar with custom content.",
+    "loader": "Slot used to replace loader displayed when the video is being loaded.",
+    "prepend": "Additional content on the left within the control bar.",
+    "sources": "Slot for content placed within native `<video>` element."
+  },
+  "exposed": {
+    "skipTo": "Skip to specific moment in the video playback. Accepts percent value (0-100).",
+    "toggleFullscreen": "Toggle fullscreen mode.",
+    "toggleMuted": "Mute/unmute audio."
+  }
+}

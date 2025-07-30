@@ -1,5 +1,5 @@
 // Utilities
-import { createRange, padStart } from '@/util'
+import { consoleWarn, createRange, padStart } from '@/util'
 
 // Types
 import type { DateAdapter } from '../DateAdapter'
@@ -85,7 +85,13 @@ function getWeekArray (date: Date, locale: string, firstDayOfWeek?: number) {
 }
 
 function startOfWeek (date: Date, locale: string, firstDayOfWeek?: number) {
-  const day = firstDayOfWeek ?? weekInfo(locale)?.firstDay ?? 0
+  let day = (firstDayOfWeek ?? weekInfo(locale)?.firstDay ?? 0) % 7
+
+  // prevent infinite loop
+  if (![0, 1, 2, 3, 4, 5, 6].includes(day)) {
+    consoleWarn('Invalid firstDayOfWeek, expected discrete number in range [0-6]')
+    day = 0
+  }
 
   const d = new Date(date)
   while (d.getDay() !== day) {
@@ -168,7 +174,7 @@ function format (
   let options: Intl.DateTimeFormatOptions = {}
   switch (formatString) {
     case 'fullDate':
-      options = { year: 'numeric', month: 'long', day: 'numeric' }
+      options = { year: 'numeric', month: 'short', day: 'numeric' }
       break
     case 'fullDateWithWeekday':
       options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
@@ -330,7 +336,7 @@ function getWeek (date: Date, locale: string, firstDayOfWeek?: number, firstWeek
     ? addDays(yearStart, size - 7)
     : addDays(yearStart, size)
 
-  return 1 + getDiff(date, d1w1, 'weeks')
+  return 1 + getDiff(endOfDay(date), startOfDay(d1w1), 'weeks')
 }
 
 function getDate (date: Date) {

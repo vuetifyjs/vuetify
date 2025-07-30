@@ -28,7 +28,7 @@
             }"
           />
 
-          <tr v-if="item.description || (user.dev && item.source)">
+          <tr v-if="item.description || (user.one.devmode && item.source)">
             <td class="text-mono pt-4" colspan="3">
               <template v-if="item.description">
                 <AppMarkdown
@@ -39,9 +39,9 @@
                 <span v-else>{{ item.description }}</span>
               </template>
 
-              <p v-if="user.dev && item.source">
+              <p v-if="user.one.devmode && item.source">
                 <strong>source: {{ item.source }}</strong>
-                <template v-if="user.dev && item.descriptionSource && item.source !== item.descriptionSource">
+                <template v-if="user.one.devmode && item.descriptionSource && item.source !== item.descriptionSource">
                   <br>
                   <strong>description source: {{ item.descriptionSource }}</strong>
                 </template>
@@ -82,7 +82,7 @@
 
   const filtered = computed(() => {
     const items = props.items.filter((item: any) => {
-      return user.dev || item.description !== '**FOR INTERNAL USE ONLY**'
+      return user.one.devmode || item.description !== '**FOR INTERNAL USE ONLY**'
     })
     if (!appStore.apiSearch) return items
 

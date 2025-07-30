@@ -27,6 +27,7 @@ import { makeTransitionProps } from '@/composables/transition'
 // Utilities
 import { computed, mergeProps, nextTick, ref, shallowRef, toRef, watch } from 'vue'
 import {
+  camelizeProps,
   checkPrintable,
   deepEqual,
   ensureValidVNode,
@@ -366,7 +367,7 @@ export const VSelect = genericComponent<new <
     watch(() => props.items, (newVal, oldVal) => {
       if (menu.value) return
 
-      if (isFocused.value && !oldVal.length && newVal.length) {
+      if (isFocused.value && props.hideNoData && !oldVal.length && newVal.length) {
         menu.value = true
       }
     })
@@ -447,6 +448,7 @@ export const VSelect = genericComponent<new <
                       onKeydown={ onListKeydown }
                       onFocusin={ onFocusin }
                       tabindex="-1"
+                      selectable
                       aria-live="polite"
                       aria-label={ `${props.label}-list` }
                       color={ props.itemColor ?? props.color }
@@ -461,19 +463,21 @@ export const VSelect = genericComponent<new <
 
                       <VVirtualScroll ref={ vVirtualScrollRef } renderless items={ displayItems.value } itemKey="value">
                         { ({ item, index, itemRef }) => {
+                          const camelizedProps = camelizeProps(item.props)
+
                           const itemProps = mergeProps(item.props, {
                             ref: itemRef,
                             key: item.value,
                             onClick: () => select(item, null),
                           })
 
-                          if (item.raw.type === 'divider') {
+                          if (item.type === 'divider') {
                             return slots.divider?.({ props: item.raw, index }) ?? (
                               <VDivider { ...item.props } key={ `divider-${index}` } />
                             )
                           }
 
-                          if (item.raw.type === 'subheader') {
+                          if (item.type === 'subheader') {
                             return slots.subheader?.({ props: item.raw, index }) ?? (
                               <VListSubheader { ...item.props } key={ `subheader-${index}` } />
                             )
@@ -497,12 +501,12 @@ export const VSelect = genericComponent<new <
                                       />
                                     ) : undefined }
 
-                                    { item.props.prependAvatar && (
-                                      <VAvatar image={ item.props.prependAvatar } />
+                                    { camelizedProps.prependAvatar && (
+                                      <VAvatar image={ camelizedProps.prependAvatar } />
                                     )}
 
-                                    { item.props.prependIcon && (
-                                      <VIcon icon={ item.props.prependIcon } />
+                                    { camelizedProps.prependIcon && (
+                                      <VIcon icon={ camelizedProps.prependIcon } />
                                     )}
                                   </>
                                 ),

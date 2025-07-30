@@ -6,7 +6,8 @@ import { VBtn } from '@/components/VBtn'
 
 // Composables
 import { makeCalendarProps, useCalendar } from '@/composables/calendar'
-import { useDate } from '@/composables/date/date'
+import { createDateRange, useDate } from '@/composables/date/date'
+import { useLocale } from '@/composables/locale'
 import { MaybeTransition } from '@/composables/transition'
 
 // Utilities
@@ -56,8 +57,9 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
 
   setup (props, { emit, slots }) {
     const daysRef = ref()
+    const { t } = useLocale()
 
-    const { daysInMonth, model, weekNumbers } = useCalendar(props)
+    const { daysInMonth, model, weekNumbers, weekdayLabels } = useCalendar(props)
     const adapter = useDate()
 
     const rangeStart = shallowRef()
@@ -111,12 +113,18 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
           rangeStop.value = adapter.endOfDay(_value)
         }
 
-        model.value = adapter.createDateRange(rangeStart.value, rangeStop.value)
+        model.value = createDateRange(adapter, rangeStart.value, rangeStop.value)
       } else {
         rangeStart.value = value
         rangeStop.value = undefined
         model.value = [rangeStart.value]
       }
+    }
+
+    function getDateAriaLabel (item: any) {
+      const fullDate = adapter.format(item.date, 'fullDateWithWeekday')
+      const localeKey = item.isToday ? 'currentDate' : 'selectDate'
+      return t(`$vuetify.datePicker.ariaLabel.${localeKey}`, fullDate)
     }
 
     function onMultipleClick (value: unknown) {
@@ -142,7 +150,10 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
     }
 
     useRender(() => (
-      <div class="v-date-picker-month">
+      <div
+        class="v-date-picker-month"
+        style={{ '--v-date-picker-days-in-week': props.weekdays.length }}
+      >
         { props.showWeek && (
           <div key="weeks" class="v-date-picker-month__weeks">
             { !props.hideWeekdays && (
@@ -165,7 +176,7 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
             key={ daysInMonth.value[0].date?.toString() }
             class="v-date-picker-month__days"
           >
-            { !props.hideWeekdays && adapter.getWeekdays(props.firstDayOfWeek, props.weekdayFormat).map(weekDay => (
+            { !props.hideWeekdays && weekdayLabels.value.map(weekDay => (
               <div
                 class={[
                   'v-date-picker-month__day',
@@ -184,6 +195,8 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
                   ripple: false,
                   text: item.localized,
                   variant: item.isSelected ? 'flat' : item.isToday ? 'outlined' : 'text',
+                  'aria-label': getDateAriaLabel(item),
+                  'aria-current': item.isToday ? 'date' : undefined,
                   onClick: () => onClick(item.date),
                 },
                 item,

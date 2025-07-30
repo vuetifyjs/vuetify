@@ -74,6 +74,22 @@ async function setReduceMotionEnabled (ctx: BrowserCommandContext) {
   })
 }
 
+let abortTimeout: ReturnType<typeof setTimeout>
+function abortAfter (ctx: BrowserCommandContext, delay: number, name: string) {
+  abortTimeout = setTimeout(async () => {
+    // eslint-disable-next-line no-console
+    console.error(`[Error] Test timeout: Aborting after ${delay}ms for ${name} in ${ctx.testPath}`)
+    // eslint-disable-next-line no-console
+    console.error('[Warning] "chrome" process might still be running and require manual shutdown.')
+    process.exitCode = 1
+    await ctx.project.vitest.exit(true)
+  }, delay)
+}
+
+function clearAbortTimeout (ctx: BrowserCommandContext) {
+  clearTimeout(abortTimeout)
+}
+
 export const commands = {
   drag,
   scroll,
@@ -82,6 +98,8 @@ export const commands = {
   waitStable,
   setFocusEmulationEnabled,
   setReduceMotionEnabled,
+  abortAfter,
+  clearAbortTimeout,
 }
 
 export type CustomCommands = {
