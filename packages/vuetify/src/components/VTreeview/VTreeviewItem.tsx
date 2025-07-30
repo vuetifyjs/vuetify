@@ -36,7 +36,7 @@ export const makeVTreeviewItemProps = propsFactory({
 }, 'VTreeviewItem')
 
 export type VTreeviewItemSlots = VListItemSlots & {
-  toggle: ToggleListItemSlot
+  toggle: ToggleListItemSlot & { loading: boolean }
 }
 
 export const VTreeviewItem = genericComponent<VTreeviewItemSlots>()({
@@ -162,6 +162,7 @@ export const VTreeviewItem = genericComponent<VTreeviewItemSlots>()({
                             >
                               { slots.toggle({
                                 ...slotProps,
+                                loading: props.loading,
                                 props: {
                                   onClick: onClickAction,
                                 },

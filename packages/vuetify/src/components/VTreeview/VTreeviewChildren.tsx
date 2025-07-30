@@ -147,7 +147,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
 
       const slotsWithItem = {
         toggle: slots.toggle
-          ? slotProps => slots.toggle?.({ ...slotProps, ...treeItemProps, item: item.raw, internalItem: item })
+          ? slotProps => slots.toggle?.({ ...slotProps, ...treeItemProps, item: item.raw, internalItem: item, loading })
           : undefined,
         prepend: slotProps => (
           <>
