@@ -45,7 +45,8 @@
   },
   "VColorPicker": {
     "props": {
-      "eyeDropperIcon": "3.10.0"
+      "eyeDropperIcon": "3.10.0",
+      "hideTitle": "3.10.0"
     }
   },
   "VCombobox": {
@@ -62,7 +63,8 @@
   "VDatePicker": {
     "props": {
       "controlHeight": "3.8.0",
-      "headerColor": "3.8.0"
+      "headerColor": "3.8.0",
+      "hideTitle": "3.10.0"
     }
   },
   "VDataTable": {
@@ -138,6 +140,11 @@
       "stickToTarget": "3.10.0"
     }
   },
+  "VPicker": {
+    "props": {
+      "hideTitle": "3.10.0"
+    }
+  },
   "VProgressLinear": {
     "props": {
       "chunkCount": "3.10.0",
@@ -178,6 +185,11 @@
   "VTab": {
     "props": {
       "text": "3.2.0"
+    }
+  },
+  "VTimePicker": {
+    "props": {
+      "hideTitle": "3.10.0"
     }
   },
   "VTreeview": {
