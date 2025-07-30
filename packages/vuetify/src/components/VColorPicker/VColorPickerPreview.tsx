@@ -7,6 +7,7 @@ import { VSlider } from '@/components/VSlider'
 
 // Composables
 import { makeComponentProps } from '@/composables/component'
+import { IconValue } from '@/composables/icons'
 import { useLocale } from '@/composables/locale'
 
 // Utilities
@@ -32,6 +33,10 @@ export const makeVColorPickerPreviewProps = propsFactory({
   },
   disabled: Boolean,
   hideAlpha: Boolean,
+  eyeDropperIcon: {
+    type: IconValue,
+    default: '$eyeDropper',
+  },
 
   ...makeComponentProps(),
 }, 'VColorPickerPreview')
@@ -80,7 +85,7 @@ export const VColorPickerPreview = defineComponent({
               aria-label={ t('$vuetify.colorPicker.ariaLabel.eyedropper') }
               density="comfortable"
               disabled={ props.disabled }
-              icon="$eyeDropper"
+              icon={ props.eyeDropperIcon }
               variant="plain"
               onClick={ openEyeDropper }
             />
