@@ -64,6 +64,28 @@ function normaliseMatch (match: FilterMatch, query: string): FilterMatchArrayMul
   return [match] as FilterMatchArrayMultiple
 }
 
+function isInternalItem (item: InternalItem | {}): item is InternalItem {
+  return 'value' in item && 'raw' in item
+}
+
+/**
+ * Normalizes an InternalItem by merging its raw data with the item itself.
+ * This is needed when filtering the items in order to ensure that the raw data is accessible at the top level.
+ *
+ * The properties of the raw object overwrite the properties of the item itself, which means that custom transformations
+ * to generate the item title (when using ListItem), will not work if trying to filter based on the transformed item's title,
+ * if the raw object has its own title property.
+ *
+ * @param item InternalItem
+ * @returns The original item, merged with its raw data if it is an object.
+ */
+function normalizeInternalItem (item: InternalItem) {
+  if (typeof item.raw === 'object' && item.raw != null && !Array.isArray(item.raw)) {
+    return { ...item, ...item.raw }
+  }
+  return item
+}
+
 export const makeFilterProps = propsFactory({
   customFilter: Function as PropType<FilterFunction>,
   customKeyFilter: Object as PropType<FilterKeyFunctions>,
@@ -96,7 +118,7 @@ export function filterItems (
 
   loop:
   for (let i = 0; i < items.length; i++) {
-    const [item, transformed = item] = wrapInArray(items[i]) as readonly [InternalItem, {}]
+    const [item, transformed = item] = wrapInArray(items[i]) as readonly [InternalItem, InternalItem | {}]
     const customMatches: Record<string, FilterMatchArrayMultiple | undefined> = {}
     const defaultMatches: Record<string, FilterMatchArrayMultiple | undefined> = {}
     let match: FilterMatch = -1
@@ -108,9 +130,10 @@ export function filterItems (
         }
 
         const filterKeys = keys || Object.keys(transformed)
+        const normalizedTransformedItem = isInternalItem(transformed) ? normalizeInternalItem(transformed) : transformed
 
         for (const key of filterKeys) {
-          const value = getPropertyFromItem(transformed, key)
+          const value = getPropertyFromItem(normalizedTransformedItem, key)
           const keyFilter = options?.customKeyFilter?.[key]
 
           match = keyFilter
