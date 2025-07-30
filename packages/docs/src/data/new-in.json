@@ -43,6 +43,11 @@
       "baseColor": "3.8.0"
     }
   },
+  "VColorPicker": {
+    "props": {
+      "eyeDropperIcon": "3.10.0"
+    }
+  },
   "VCombobox": {
     "props": {
       "clearOnSelect": "3.5.0",
