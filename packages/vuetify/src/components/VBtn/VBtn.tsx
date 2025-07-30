@@ -64,7 +64,7 @@ export const makeVBtnProps = propsFactory({
   readonly: Boolean,
   slim: Boolean,
   stacked: Boolean,
-  spaced: String as PropType<'start' | 'end' | 'center'>,
+  spaced: String as PropType<'start' | 'end' | 'both'>,
 
   ripple: {
     type: [Boolean, Object] as PropType<RippleDirectiveBinding['value']>,
