@@ -153,4 +153,21 @@ export default {
     enterFullscreen: 'Πλήρης οθόνη',
     exitFullscreen: 'Έξοδος από πλήρη οθόνη',
   },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Επιλογή χρώματος από την οθόνη',
+      hueSlider: 'Απόχρωση',
+      alphaSlider: 'Άλφα',
+      redInput: 'Κόκκινο',
+      greenInput: 'Πράσινο',
+      blueInput: 'Μπλε',
+      alphaInput: 'Άλφα',
+      hueInput: 'Απόχρωση',
+      saturationInput: 'Κορεσμός',
+      lightnessInput: 'Φωτεινότητα',
+      hexInput: 'Δεκαεξαδική τιμή',
+      hexaInput: 'Δεκαεξαδική τιμή με άλφα',
+      changeFormat: 'Αλλαγή μορφής χρώματος',
+    },
+  },
 }

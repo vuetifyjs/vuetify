@@ -153,4 +153,21 @@ export default {
     enterFullscreen: 'Täisekraan',
     exitFullscreen: 'Välju täisekraanilt',
   },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Võta värv ekraanilt',
+      hueSlider: 'Toon',
+      alphaSlider: 'Alfa',
+      redInput: 'Punane',
+      greenInput: 'Roheline',
+      blueInput: 'Sinine',
+      alphaInput: 'Alfa',
+      hueInput: 'Toon',
+      saturationInput: 'Küllastus',
+      lightnessInput: 'Heledus',
+      hexInput: 'HEKS väärtus',
+      hexaInput: 'HEKS koos alfa väärtusega',
+      changeFormat: 'Muuda värvi formaati',
+    },
+  },
 }

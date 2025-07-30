@@ -8,10 +8,10 @@ import { VSlider } from '@/components/VSlider/VSlider'
 import { VIconBtn } from '@/labs/VIconBtn/VIconBtn'
 
 // Composables
-import { useLocale } from '@/composables'
 import { useBackgroundColor } from '@/composables/color'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
+import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 

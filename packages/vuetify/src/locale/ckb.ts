@@ -153,4 +153,21 @@ export default {
     enterFullscreen: 'پڕ بە شاشە',
     exitFullscreen: 'چوونە دەرەوە لە پڕ بە شاشە',
   },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'ڕەنگ لەسەر شاشە هەڵبژێرە',
+      hueSlider: 'ڕەنگ',
+      alphaSlider: 'ئەلفا',
+      redInput: 'سوور',
+      greenInput: 'سەوز',
+      blueInput: 'شین',
+      alphaInput: 'ئەلفا',
+      hueInput: 'ڕەنگ',
+      saturationInput: 'تێربوون',
+      lightnessInput: 'کاڵی',
+      hexInput: 'بەهای HEX',
+      hexaInput: 'HEX لەگەڵ بەهای ئەلفا',
+      changeFormat: 'گۆڕینی فۆرماتی ڕەنگ',
+    },
+  },
 }

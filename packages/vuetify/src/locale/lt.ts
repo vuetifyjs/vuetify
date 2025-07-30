@@ -153,4 +153,21 @@ export default {
     enterFullscreen: 'Visas ekranas',
     exitFullscreen: 'Išeiti iš viso ekrano',
   },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Pasirinkite spalvą iš ekrano',
+      hueSlider: 'Atspalvis',
+      alphaSlider: 'Skaidrumas',
+      redInput: 'Raudona',
+      greenInput: 'Žalia',
+      blueInput: 'Mėlyna',
+      alphaInput: 'Skaidrumas',
+      hueInput: 'Atspalvis',
+      saturationInput: 'Sodrumas',
+      lightnessInput: 'Šviesumas',
+      hexInput: 'HEX reikšmė',
+      hexaInput: 'HEX su skaidrumo reikšme',
+      changeFormat: 'Keisti spalvos formatą',
+    },
+  },
 }
