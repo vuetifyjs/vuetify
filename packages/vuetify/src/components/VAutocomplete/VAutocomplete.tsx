@@ -144,7 +144,12 @@ export const VAutocomplete = genericComponent<new <
         : model.value.length
     })
     const form = useForm(props)
-    const { filteredItems, getMatches } = useFilter(props, items, () => isPristine.value ? '' : search.value)
+    const { filteredItems, getMatches } = useFilter(
+      props,
+      items,
+      () => isPristine.value ? '' : search.value,
+      { transform: item => item.raw }
+    )
 
     const displayItems = computed(() => {
       if (props.hideSelected) {
