@@ -112,7 +112,7 @@
 
       > .v-slider-thumb__label-wedge
         clip-path: polygon(50% 100%, 0 50%, 100% 50%)
-        bottom: -$slider-thumb-label-wedge-size
+        bottom: calc(#{-$slider-thumb-label-wedge-size} + 0.2px)
 
   // Vertical
   .v-slider.v-input--vertical
@@ -129,7 +129,7 @@
 
       > .v-slider-thumb__label-wedge
         clip-path: polygon(0 50%, 50% 0, 50% 100%)
-        left: -$slider-thumb-label-wedge-size
+        left: calc(#{-$slider-thumb-label-wedge-size} + 0.2px)
 
   // Modifiers
   .v-slider-thumb--focused
