@@ -5,8 +5,8 @@ import './VColorPickerEdit.sass'
 import { VBtn } from '@/components/VBtn'
 
 // Composables
-import { useLocale } from '@/composables'
 import { makeComponentProps } from '@/composables/component'
+import { useLocale } from '@/composables/locale'
 
 // Utilities
 import { computed } from 'vue'

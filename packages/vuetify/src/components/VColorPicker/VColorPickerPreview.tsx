@@ -6,8 +6,8 @@ import { VBtn } from '@/components/VBtn'
 import { VSlider } from '@/components/VSlider'
 
 // Composables
-import { useLocale } from '@/composables'
 import { makeComponentProps } from '@/composables/component'
+import { useLocale } from '@/composables/locale'
 
 // Utilities
 import { onUnmounted } from 'vue'
