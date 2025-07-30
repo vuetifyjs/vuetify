@@ -32,6 +32,12 @@ export type VTreeviewChildrenSlots<T> = {
     item: T
     internalItem: InternalListItem<T>
   }
+  header: {
+    props: InternalListItem['props']
+    item: T
+    internalItem: InternalListItem<T>
+    loading: boolean
+  }
   divider: { props: InternalListItem['props'] }
   subheader: { props: InternalListItem['props'] }
 }
@@ -200,17 +206,21 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
                   : () => selectItem(activatorItems.value[index]?.select, !activatorItems.value[index]?.isSelected),
               }
 
-              return (
-                <VTreeviewItem
-                  ref={ el => activatorItems.value[index] = el as VTreeviewItem }
-                  { ...listItemProps }
-                  hasCustomPrepend={ !!slots.prepend }
-                  hideActions={ props.hideActions }
-                  indentLines={ indentLines.node }
-                  value={ props.returnObject ? item.raw : itemProps.value }
-                  loading={ loading }
-                  v-slots={ slotsWithItem }
-                />
+              return renderSlot(
+                slots.header,
+                { props: listItemProps, item: item.raw, internalItem: item, loading },
+                () => (
+                  <VTreeviewItem
+                    ref={ el => activatorItems.value[index] = el as VTreeviewItem }
+                    { ...listItemProps }
+                    hasCustomPrepend={ !!slots.prepend }
+                    hideActions={ props.hideActions }
+                    indentLines={ indentLines.node }
+                    value={ props.returnObject ? item.raw : itemProps.value }
+                    loading={ loading }
+                    v-slots={ slotsWithItem }
+                  />
+                )
               )
             },
             default: () => (

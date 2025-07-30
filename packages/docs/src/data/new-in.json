@@ -258,6 +258,7 @@
       "indentLines": "3.9.0"
     },
     "slots": {
+      "header": "3.10.0",
       "toggle": "3.10.0"
     }
   },
