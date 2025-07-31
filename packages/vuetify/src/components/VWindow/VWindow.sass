@@ -68,6 +68,9 @@
       &-leave-active
         transition: $window-transition
 
+        @media (prefers-reduced-motion: reduce)
+          transition-duration: 0s
+
       &-leave-from,
       &-leave-to
         position: absolute !important

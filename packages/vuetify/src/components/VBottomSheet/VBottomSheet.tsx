@@ -8,7 +8,7 @@ import { makeVDialogProps, VDialog } from '@/components/VDialog/VDialog'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { genericComponent, PREFERS_REDUCED_MOTION, propsFactory, useRender } from '@/util'
 
 // Types
 import type { OverlaySlots } from '@/components/VOverlay/VOverlay'

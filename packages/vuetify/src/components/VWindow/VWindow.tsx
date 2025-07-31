@@ -16,7 +16,7 @@ import vTouch from '@/directives/touch'
 
 // Utilities
 import { computed, provide, ref, shallowRef, toRef, watch } from 'vue'
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { genericComponent, PREFERS_REDUCED_MOTION, propsFactory, useRender } from '@/util'
 
 // Types
 import type { ComputedRef, InjectionKey, PropType, Ref } from 'vue'

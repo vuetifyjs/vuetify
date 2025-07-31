@@ -24,7 +24,7 @@ import {
   convertToUnit,
   EventProp,
   genericComponent,
-  nullifyTransforms,
+  nullifyTransforms, PREFERS_REDUCED_MOTION,
   propsFactory,
   standardEasing,
   useRender,
@@ -163,7 +163,7 @@ export const VField = genericComponent<new <T>(
     const { textColorClasses, textColorStyles } = useTextColor(color)
 
     watch(isActive, val => {
-      if (hasFloatingLabel.value) {
+      if (hasFloatingLabel.value && !PREFERS_REDUCED_MOTION()) {
         const el: HTMLElement = labelRef.value!.$el
         const targetEl: HTMLElement = floatingLabelRef.value!.$el
 
