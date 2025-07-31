@@ -15,13 +15,13 @@ import { genericComponent, getIndentLines, pick, propsFactory, renderSlot } from
 
 // Types
 import type { PropType } from 'vue'
+import type { VTreeviewItemSlots } from './VTreeviewItem'
 import type { InternalListItem } from '@/components/VList/VList'
-import type { VListItemSlots } from '@/components/VList/VListItem'
 import type { SelectStrategyProp } from '@/composables/nested/nested'
 import type { GenericProps, IndentLinesVariant, IndentLineType } from '@/util'
 
 export type VTreeviewChildrenSlots<T> = {
-  [K in keyof Omit<VListItemSlots, 'default'>]: VListItemSlots[K] & {
+  [K in keyof Omit<VTreeviewItemSlots, 'default'>]: VTreeviewItemSlots[K] & {
     item: T
     internalItem: InternalListItem<T>
   }
@@ -146,6 +146,9 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
       })
 
       const slotsWithItem = {
+        toggle: slots.toggle
+          ? slotProps => slots.toggle?.({ ...slotProps, ...treeItemProps, item: item.raw, internalItem: item, loading })
+          : undefined,
         prepend: slotProps => (
           <>
             { props.selectable && (!children || (children && !['leaf', 'single-leaf'].includes(props.selectStrategy as string))) && (

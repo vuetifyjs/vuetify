@@ -224,12 +224,18 @@
       "hideActions": "3.9.0",
       "separateRoots": "3.9.0",
       "indentLines": "3.9.0"
+    },
+    "slots": {
+      "toggle": "3.10.0"
     }
   },
   "VTreeviewItem": {
     "props": {
       "hideActions": "3.9.0",
       "indentLines": "3.9.0"
+    },
+    "slots": {
+      "toggle": "3.10.0"
     }
   },
   "VTooltip": {
