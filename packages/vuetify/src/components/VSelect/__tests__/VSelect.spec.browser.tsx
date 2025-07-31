@@ -4,7 +4,7 @@ import { VForm } from '@/components/VForm'
 import { VListItem } from '@/components/VList'
 
 // Utilities
-import { commands, generate, render, screen, userEvent } from '@test'
+import { commands, generate, render, screen, userEvent, waitForClickable } from '@test'
 import { getAllByRole } from '@testing-library/vue'
 import { cloneVNode, nextTick, ref } from 'vue'
 
@@ -56,13 +56,11 @@ describe('VSelect', () => {
     expect(element).not.toHaveClass('v-select--active-menu')
 
     await userEvent.click(menuIcon)
-    await commands.waitStable('.v-list')
-    expect(screen.queryAllByCSS('.v-list-item')).toHaveLength(2)
+    await expect.poll(() => screen.queryAllByCSS('.v-list-item')).toHaveLength(2)
     expect(element).toHaveClass('v-select--active-menu')
 
     await userEvent.click(menuIcon)
-    await commands.waitStable('.v-list')
-    expect(screen.queryAllByCSS('.v-list-item')).toHaveLength(0)
+    await expect.poll(() => screen.queryAllByCSS('.v-list-item')).toHaveLength(0)
     expect(element).not.toHaveClass('v-select--active-menu')
   })
 
@@ -153,7 +151,7 @@ describe('VSelect', () => {
       await expect(screen.findAllByRole('option', { selected: true })).resolves.toHaveLength(2)
 
       const option = screen.getAllByRole('option')[2]
-      await commands.waitStable('.v-list')
+      await waitForClickable(option)
       await userEvent.click(option)
       expect(selectedItems.value).toStrictEqual(['California', 'Colorado', 'Florida'])
 
@@ -204,8 +202,9 @@ describe('VSelect', () => {
 
       await userEvent.click(element)
       await expect(screen.findAllByRole('option', { selected: true })).resolves.toHaveLength(2)
-      await commands.waitStable('.v-list')
-      await userEvent.click(screen.getAllByRole('option')[2])
+      const option = screen.getAllByRole('option')[2]
+      await waitForClickable(option)
+      await userEvent.click(option)
       expect(selectedItems.value).toStrictEqual([
         {
           title: 'Item 1',
@@ -280,6 +279,7 @@ describe('VSelect', () => {
       expect(element).toHaveTextContent('Item 1')
       expect(element).toHaveTextContent('Item 2')
 
+      await waitForClickable(options[0])
       await userEvent.click(options[0])
       expect(selectedItems.value).toStrictEqual([{
         text: 'Item 2',
@@ -484,6 +484,7 @@ describe('VSelect', () => {
       expect(options).toHaveLength(2)
       expect(options[0]).toHaveTextContent('Item 2')
 
+      await waitForClickable(options[0])
       await userEvent.click(options[0])
       expect(selectedItem.value).toStrictEqual({ text: 'Item 2', id: 'item2' })
       expect(screen.queryAllByRole('option', { selected: true })).toHaveLength(0)
