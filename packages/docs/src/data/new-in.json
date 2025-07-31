@@ -120,7 +120,8 @@
   },
   "VFileInput": {
     "props": {
-      "filterByType": "3.10.0"
+      "filterByType": "3.10.0",
+      "truncateLength": "3.10.0"
     }
   },
   "VFileUpload": {
