@@ -2,7 +2,7 @@
 import { VDateInput } from '../VDateInput'
 
 // Utilities
-import { commands, render, screen, userEvent } from '@test'
+import { render, screen, userEvent } from '@test'
 import { ref } from 'vue'
 
 describe('VDateInput', () => {
