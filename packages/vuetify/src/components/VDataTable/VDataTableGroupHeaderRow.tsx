@@ -7,6 +7,7 @@ import { VCheckboxBtn } from '@/components/VCheckbox'
 import { useGroupBy } from './composables/group'
 import { useHeaders } from './composables/headers'
 import { useSelection } from './composables/select'
+import { IconValue } from '@/composables/icons'
 
 // Utilities
 import { computed } from 'vue'
@@ -25,6 +26,14 @@ export const makeVDataTableGroupHeaderRowProps = propsFactory({
   item: {
     type: Object as PropType<Group>,
     required: true,
+  },
+  collapseIcon: {
+    type: IconValue,
+    default: '$tableGroupCollapse',
+  },
+  expandIcon: {
+    type: IconValue,
+    default: '$tableGroupExpand',
   },
 }, 'VDataTableGroupHeaderRow')
 
@@ -51,7 +60,7 @@ export const VDataTableGroupHeaderRow = genericComponent<VDataTableGroupHeaderRo
       >
         { columns.value.map(column => {
           if (column.key === 'data-table-group') {
-            const icon = isGroupOpen(props.item) ? '$expand' : '$next'
+            const icon = isGroupOpen(props.item) ? props.collapseIcon : props.expandIcon
             const onClick = () => toggleGroup(props.item)
 
             return slots['data-table-group']?.({ item: props.item, count: rows.value.length, props: { icon, onClick } }) ?? (
