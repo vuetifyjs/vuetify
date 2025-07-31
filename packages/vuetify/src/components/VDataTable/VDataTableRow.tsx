@@ -9,6 +9,7 @@ import { useHeaders } from './composables/headers'
 import { useSelection } from './composables/select'
 import { useSort } from './composables/sort'
 import { makeDisplayProps, useDisplay } from '@/composables/display'
+import { IconValue } from '@/composables/icons'
 
 // Utilities
 import { toDisplayString, withModifiers } from 'vue'
@@ -38,6 +39,15 @@ export const makeVDataTableRowProps = propsFactory({
   index: Number,
   item: Object as PropType<DataTableItem>,
   cellProps: [Object, Function] as PropType<CellProps<any>>,
+  collapseIcon: {
+    type: IconValue,
+    default: '$collapse',
+  },
+  expandIcon: {
+    type: IconValue,
+    default: '$expand',
+  },
+
   onClick: EventProp<[MouseEvent]>(),
   onContextmenu: EventProp<[MouseEvent]>(),
   onDblclick: EventProp<[MouseEvent]>(),
@@ -166,14 +176,14 @@ export const VDataTableRow = genericComponent<new <T>(
                     return slots['item.data-table-expand']?.({
                       ...slotProps,
                       props: {
-                        icon: isExpanded(item) ? '$collapse' : '$expand',
+                        icon: isExpanded(item) ? props.collapseIcon : props.expandIcon,
                         size: 'small',
                         variant: 'text',
                         onClick: withModifiers(() => toggleExpand(item), ['stop']),
                       },
                     }) ?? (
                       <VBtn
-                        icon={ isExpanded(item) ? '$collapse' : '$expand' }
+                        icon={ isExpanded(item) ? props.collapseIcon : props.expandIcon }
                         size="small"
                         variant="text"
                         onClick={ withModifiers(() => toggleExpand(item), ['stop']) }

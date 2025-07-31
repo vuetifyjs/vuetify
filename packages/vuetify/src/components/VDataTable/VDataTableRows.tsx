@@ -1,6 +1,6 @@
 // Components
-import { VDataTableGroupHeaderRow } from './VDataTableGroupHeaderRow'
-import { VDataTableRow } from './VDataTableRow'
+import { makeVDataTableGroupHeaderRowProps, VDataTableGroupHeaderRow } from './VDataTableGroupHeaderRow'
+import { makeVDataTableRowProps, VDataTableRow } from './VDataTableRow'
 
 // Composables
 import { useExpanded } from './composables/expand'
@@ -12,7 +12,7 @@ import { useLocale } from '@/composables/locale'
 
 // Utilities
 import { Fragment, mergeProps } from 'vue'
-import { genericComponent, getPrefixedEventHandlers, propsFactory, useRender } from '@/util'
+import { genericComponent, getPrefixedEventHandlers, pick, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -48,6 +48,8 @@ export const makeVDataTableRowsProps = propsFactory({
   rowProps: [Object, Function] as PropType<RowProps<any>>,
   cellProps: [Object, Function] as PropType<CellProps<any>>,
 
+  ...pick(makeVDataTableRowProps(), ['collapseIcon', 'expandIcon']),
+  ...pick(makeVDataTableGroupHeaderRowProps(), ['groupCollapseIcon', 'groupExpandIcon']),
   ...makeDisplayProps(),
 }, 'VDataTableRows')
 
@@ -72,6 +74,8 @@ export const VDataTableRows = genericComponent<new <T>(
     const { mobile } = useDisplay(props)
 
     useRender(() => {
+      const groupHeaderRowProps = pick(props, ['groupCollapseIcon', 'groupExpandIcon'])
+
       if (props.loading && (!props.items.length || slots.loading)) {
         return (
           <tr
@@ -119,6 +123,7 @@ export const VDataTableRows = genericComponent<new <T>(
                   key={ `group-header_${item.id}` }
                   item={ item }
                   { ...getPrefixedEventHandlers(attrs, ':group-header', () => slotProps) }
+                  { ...groupHeaderRowProps }
                   v-slots={ slots }
                 />
               )
@@ -146,6 +151,8 @@ export const VDataTableRows = genericComponent<new <T>(
                   index,
                   item,
                   cellProps: props.cellProps,
+                  collapseIcon: props.collapseIcon,
+                  expandIcon: props.expandIcon,
                   mobile: mobile.value,
                 },
                 getPrefixedEventHandlers(attrs, ':row', () => slotProps),
