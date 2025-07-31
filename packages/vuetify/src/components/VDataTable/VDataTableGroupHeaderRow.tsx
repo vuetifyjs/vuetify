@@ -10,7 +10,7 @@ import { useSelection } from './composables/select'
 import { IconValue } from '@/composables/icons'
 
 // Utilities
-import { computed } from 'vue'
+import { computed, toRef } from 'vue'
 import { genericComponent, propsFactory } from '@/util'
 
 // Types
@@ -51,6 +51,8 @@ export const VDataTableGroupHeaderRow = genericComponent<VDataTableGroupHeaderRo
       return extractRows([props.item])
     })
 
+    const colspan = toRef(() => columns.value.length - (columns.value.some(c => c.key === 'data-table-select') ? 1 : 0))
+
     return () => (
       <tr
         class="v-data-table-group-header-row"
@@ -64,7 +66,10 @@ export const VDataTableGroupHeaderRow = genericComponent<VDataTableGroupHeaderRo
             const onClick = () => toggleGroup(props.item)
 
             return slots['data-table-group']?.({ item: props.item, count: rows.value.length, props: { icon, onClick } }) ?? (
-              <VDataTableColumn class="v-data-table-group-header-row__column">
+              <VDataTableColumn
+                class="v-data-table-group-header-row__column"
+                colspan={ colspan.value }
+              >
                 <VBtn
                   size="small"
                   variant="text"
@@ -75,9 +80,7 @@ export const VDataTableGroupHeaderRow = genericComponent<VDataTableGroupHeaderRo
                 <span>({ rows.value.length })</span>
               </VDataTableColumn>
             )
-          }
-
-          if (column.key === 'data-table-select') {
+          } else if (column.key === 'data-table-select') {
             const modelValue = isSelected(rows.value)
             const indeterminate = isSomeSelected(rows.value) && !modelValue
             const selectGroup = (v: boolean) => select(rows.value, v)
@@ -92,7 +95,7 @@ export const VDataTableGroupHeaderRow = genericComponent<VDataTableGroupHeaderRo
             )
           }
 
-          return <td />
+          return ''
         })}
       </tr>
     )
