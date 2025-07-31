@@ -3,7 +3,7 @@ import { consoleError, createRange } from '@/util'
 
 export type TemporalDate = Temporal.PlainDate | Temporal.PlainDateTime | Temporal.ZonedDateTime
 
-export function parsePlainDate (value?: string): Temporal.PlainDate | null {
+export function parsePlainDate (value?: string | Temporal.PlainDate | null): Temporal.PlainDate | null {
   if (!value) return null
   try {
     return Temporal.PlainDate.from(value)
@@ -161,8 +161,8 @@ export function endOfDay<T extends TemporalDate> (date: T): T {
     nanosecond: 999,
   }) as T
 }
-export function startOfWeek<T extends TemporalDate> (date: T, firstDayOfWeek: number | string = 1): T {
-  const distance = Number(firstDayOfWeek) - date.dayOfWeek
+export function startOfWeek<T extends TemporalDate> (date: T, locale: string, firstDayOfWeek: number | string): T {
+  const distance = Number(firstDayOfWeek ?? weekInfo(locale)?.firstDay ?? 1) - date.dayOfWeek
 
   return startOfDay(
     date.subtract({ days: distance < 0 ? date.daysInWeek + distance : distance })
@@ -236,7 +236,7 @@ export function isSameMonth (date: TemporalDate, comparing: TemporalDate): boole
 export function isSameYear (date: TemporalDate, comparing: TemporalDate): boolean {
   return date.year === comparing.year
 }
-export function isWithinRange (date: TemporalDate, range: [TemporalDate, TemporalDate]): boolean {
+export function isWithinRange (date: TemporalDate, range: readonly [TemporalDate, TemporalDate]): boolean {
   return date.since(range[0]).sign !== -1 && date.until(range[1]).sign !== -1
 }
 
@@ -250,8 +250,8 @@ export function getWeekArray (
   const firstDayOfMonth = startOfMonth(date)
   const lastDayOfMonth = endOfMonth(date)
   const first = Number(firstDayOfWeek ?? weekInfo(locale)?.firstDay ?? 1)
-  const firstDayWeekIndex = (firstDayOfMonth.day - first + 7) % 7
-  const lastDayWeekIndex = (lastDayOfMonth.day - first + 7) % 7
+  const firstDayWeekIndex = (firstDayOfMonth.dayOfWeek - first + 7) % 7
+  const lastDayWeekIndex = (lastDayOfMonth.dayOfWeek - first + 7) % 7
 
   // Adjacent month last days
   for (let i = 0; i < firstDayWeekIndex; i++) {
@@ -293,7 +293,7 @@ export function getWeekArray (
 
 const sundayJanuarySecond2000 = Temporal.PlainDate.from('2000-01-02')
 export function getWeekdays (locale: string, firstDayOfWeek?: number, weekdayFormat?: 'long' | 'short' | 'narrow') {
-  const daysFromSunday = firstDayOfWeek ?? weekInfo(locale)?.firstDay ?? 0
+  const daysFromSunday = firstDayOfWeek ?? weekInfo(locale)?.firstDay ?? 1
   const formatter = new Intl.DateTimeFormat(locale, { weekday: weekdayFormat ?? 'narrow' })
 
   return createRange(7).map(i => {
@@ -336,7 +336,7 @@ function weekInfo (locale: string): { firstDay: number, firstWeekSize: number } 
   const code = locale.slice(-2).toUpperCase()
   switch (true) {
     case locale === 'GB-alt-variant': {
-      return { firstDay: 0, firstWeekSize: 4 }
+      return { firstDay: 7, firstWeekSize: 4 }
     }
     case locale === '001': {
       return { firstDay: 1, firstWeekSize: 1 }
@@ -344,7 +344,7 @@ function weekInfo (locale: string): { firstDay: number, firstWeekSize: number } 
     case `AG AS BD BR BS BT BW BZ CA CO DM DO ET GT GU HK HN ID IL IN JM JP KE
     KH KR LA MH MM MO MT MX MZ NI NP PA PE PH PK PR PY SA SG SV TH TT TW UM US
     VE VI WS YE ZA ZW`.includes(code): {
-      return { firstDay: 0, firstWeekSize: 1 }
+      return { firstDay: 7, firstWeekSize: 1 }
     }
     case `AI AL AM AR AU AZ BA BM BN BY CL CM CN CR CY EC GE HR KG KZ LB LK LV
     MD ME MK MN MY NZ RO RS SI TJ TM TR UA UY UZ VN XK`.includes(code): {
@@ -361,7 +361,7 @@ function weekInfo (locale: string): { firstDay: number, firstWeekSize: number } 
       return { firstDay: 5, firstWeekSize: 1 }
     }
     case code === 'PT': {
-      return { firstDay: 0, firstWeekSize: 4 }
+      return { firstDay: 7, firstWeekSize: 4 }
     }
     default: return null
   }

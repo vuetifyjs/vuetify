@@ -59,7 +59,7 @@ export const makeCalendarProps = propsFactory({
     default: null,
   },
   displayValue: String,
-  modelValue: Array as PropType<string[]>,
+  modelValue: Array as PropType<string[] | Temporal.PlainDate[]>,
   month: [Number, String],
   min: [String, Object] as PropType<string | Temporal.PlainDate | null>,
   max: [String, Object] as PropType<string | Temporal.PlainDate | null>,
@@ -67,7 +67,7 @@ export const makeCalendarProps = propsFactory({
   year: [Number, String],
   weekdays: {
     type: Array as PropType<CalendarWeekdays[]>,
-    default: () => [0, 1, 2, 3, 4, 5, 6],
+    default: () => [1, 2, 3, 4, 5, 6, 7],
   },
   weeksInMonth: {
     type: String as PropType<'dynamic' | 'static'>,
@@ -124,9 +124,11 @@ export function useCalendar (props: CalendarProps) {
   )
 
   const weekdayLabels = computed(() => {
-    const firstDayOfWeek = dateUtil.startOfWeek(Temporal.Now.plainDateISO(), props.firstDayOfWeek).day
-    return dateUtil.getWeekdays('en', props.firstDayOfWeek, props.weekdayFormat)
-      .filter((_, i) => props.weekdays.includes((i + firstDayOfWeek) % 7))
+    const firstDayOfWeek = dateUtil.startOfWeek(Temporal.Now.plainDateISO(), 'en', props.firstDayOfWeek).dayOfWeek
+    const val = dateUtil.getWeekdays('en', props.firstDayOfWeek, props.weekdayFormat)
+    // .filter((_, i) => props.weekdays.includes((i + firstDayOfWeek) % 7))
+    console.log(val)
+    return val
   })
 
   const weeksInMonth = computed(() => {
@@ -156,7 +158,7 @@ export function useCalendar (props: CalendarProps) {
 
   function genDays (days: Temporal.PlainDate[], today: Temporal.PlainDate): CalendarDay[] {
     return days.filter(date => {
-      return props.weekdays.includes(date.day)
+      return props.weekdays.includes(date.dayOfWeek)
     }).map((date, index) => {
       const isoDate = date.toString()
       const isAdjacent = !dateUtil.isSameMonth(date, month.value)
@@ -187,7 +189,7 @@ export function useCalendar (props: CalendarProps) {
   }
 
   const daysInWeek = computed(() => {
-    const lastDay = dateUtil.startOfWeek(displayValue.value, props.firstDayOfWeek)
+    const lastDay = dateUtil.startOfWeek(displayValue.value, 'en', props.firstDayOfWeek)
     const week: Temporal.PlainDate[] = []
     for (let day = 0; day <= 6; day++) {
       week.push(lastDay.add({ days: day }))
