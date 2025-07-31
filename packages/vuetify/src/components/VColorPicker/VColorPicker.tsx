@@ -56,7 +56,7 @@ export const makeVColorPickerProps = propsFactory({
   },
 
   ...makeVPickerProps({ hideHeader: true }),
-  ...pick(makeVColorPickerPreviewProps(), ['eyeDropperIcon']),
+  ...pick(makeVColorPickerPreviewProps(), ['hideEyeDropper', 'eyeDropperIcon']),
 }, 'VColorPicker')
 
 export const VColorPicker = defineComponent({
@@ -173,6 +173,7 @@ export const VColorPicker = defineComponent({
                         onUpdate:color={ updateColor }
                         hideAlpha={ !mode.value.endsWith('a') }
                         disabled={ props.disabled }
+                        hideEyeDropper={ props.hideEyeDropper }
                         eyeDropperIcon={ props.eyeDropperIcon }
                       />
                     )}

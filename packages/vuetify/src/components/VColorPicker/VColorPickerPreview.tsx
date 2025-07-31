@@ -33,6 +33,7 @@ export const makeVColorPickerPreviewProps = propsFactory({
   },
   disabled: Boolean,
   hideAlpha: Boolean,
+  hideEyeDropper: Boolean,
   eyeDropperIcon: {
     type: IconValue,
     default: '$eyeDropper',
@@ -79,7 +80,7 @@ export const VColorPickerPreview = defineComponent({
         ]}
         style={ props.style }
       >
-        { SUPPORTS_EYE_DROPPER && (
+        { SUPPORTS_EYE_DROPPER && !props.hideEyeDropper && (
           <div class="v-color-picker-preview__eye-dropper" key="eyeDropper">
             <VBtn
               aria-label={ t('$vuetify.colorPicker.ariaLabel.eyedropper') }

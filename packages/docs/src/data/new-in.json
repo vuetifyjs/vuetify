@@ -53,6 +53,7 @@
   },
   "VColorPicker": {
     "props": {
+      "hideEyeDropper": "3.10.0",
       "eyeDropperIcon": "3.10.0",
       "hideTitle": "3.10.0"
     }
