@@ -82,13 +82,13 @@ export const VDataTableGroupHeaderRow = genericComponent<VDataTableGroupHeaderRo
             const indeterminate = isSomeSelected(rows.value) && !modelValue
             const selectGroup = (v: boolean) => select(rows.value, v)
             return slots['data-table-select']?.({ props: { modelValue, indeterminate, 'onUpdate:modelValue': selectGroup } }) ?? (
-              <td>
+              <VDataTableColumn class="v-data-table__td--select-row" noPadding>
                 <VCheckboxBtn
                   modelValue={ modelValue }
                   indeterminate={ indeterminate }
                   onUpdate:modelValue={ selectGroup }
                 />
-              </td>
+              </VDataTableColumn>
             )
           }
 
