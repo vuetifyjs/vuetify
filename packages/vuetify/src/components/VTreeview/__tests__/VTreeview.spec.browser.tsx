@@ -2,7 +2,7 @@
 import { VTreeview } from '../VTreeview'
 
 // Utilities
-import { render, screen, userEvent, waitAnimationFrame, waitIdle } from '@test'
+import { render, screen, userEvent, wait, waitAnimationFrame, waitIdle } from '@test'
 import { nextTick, reactive, ref, shallowRef } from 'vue'
 
 const items = [
@@ -712,5 +712,150 @@ describe.each([
     await waitIdle()
     expect(itemsPrepend[0]).toHaveTextContent(/^false$/)
     expect(itemsPrepend[1]).toHaveTextContent(/^false$/)
+  })
+})
+
+describe('VTreeview with loading', () => {
+  it('should respond to direct clicks on the toggle icon', async () => {
+    const loadSpy = vi.fn()
+
+    const items = ref([
+      { value: 1, title: '1.root', children: [] },
+      { value: 2, title: '2.another', children: [] },
+    ] as any[])
+
+    async function loadChildren (item: any) {
+      loadSpy(item)
+      await wait(50)
+      if (item.value === 1) {
+        items.value[0].children = [{ value: 3, title: '3.node', children: [] }]
+      }
+      if (item.value === 3) {
+        items.value[0].children[0].children = [{ value: 4, title: '4.leaf' }]
+      }
+    }
+    render(() => (
+      <VTreeview
+        items={ items.value }
+        loadChildren={ loadChildren }
+      />
+    ))
+
+    expect(screen.queryAllByText(/3.node/)).toHaveLength(0)
+    expect(screen.queryAllByText(/4.leaf/)).toHaveLength(0)
+
+    await userEvent.tab()
+    await userEvent.tab()
+    await userEvent.keyboard('{enter}')
+    expect(loadSpy).toHaveBeenCalledOnce()
+    await wait(350) // needs to fully render for the following click
+    expect(screen.getByText(/3.node/)).toBeVisible()
+
+    await userEvent.click(screen.getAllByCSS('.v-treeview-item .v-list-item-action .v-btn')[1])
+    expect(loadSpy).toHaveBeenCalledTimes(2)
+    await wait(200)
+    expect(screen.queryByText(/4.leaf/)).toBeVisible()
+
+    await userEvent.click(screen.getAllByCSS('.v-treeview-item .v-list-item-action .v-btn')[0])
+    await expect.poll(() => screen.getByText(/3.node/)).not.toBeVisible()
+    expect(screen.getByText(/4.leaf/)).not.toBeVisible()
+    expect(loadSpy).toHaveBeenCalledTimes(2)
+  })
+
+  it('should respond to full item click', async () => {
+    const loadSpy = vi.fn()
+
+    const items = ref([
+      { value: 1, title: '1.root', children: [] },
+      { value: 2, title: '2.another', children: [] },
+    ] as any[])
+
+    // eslint-disable-next-line sonarjs/no-identical-functions
+    async function loadChildren (item: any) {
+      loadSpy(item)
+      await wait(50)
+      if (item.value === 1) {
+        items.value[0].children = [{ value: 3, title: '3.node', children: [] }]
+      }
+      if (item.value === 3) {
+        items.value[0].children[0].children = [{ value: 4, title: '4.leaf' }]
+      }
+    }
+    render(() => (
+      <VTreeview
+        items={ items.value }
+        loadChildren={ loadChildren }
+        openOnClick
+      />
+    ))
+
+    expect(screen.queryAllByText(/3.node/)).toHaveLength(0)
+    expect(screen.queryAllByText(/4.leaf/)).toHaveLength(0)
+
+    await userEvent.tab() // single tab selects the whole item
+    await userEvent.keyboard(' ')
+    expect(loadSpy).toHaveBeenCalledOnce()
+    await wait(350) // needs to fully render for the following click
+    expect(screen.getByText(/3.node/)).toBeVisible()
+
+    await userEvent.click(screen.getByText(/3.node/))
+    await nextTick()
+    expect(loadSpy).toHaveBeenCalledTimes(2)
+    await wait(200)
+    expect(screen.queryByText(/4.leaf/)).toBeVisible()
+
+    await userEvent.click(screen.getAllByCSS('.v-treeview-item')[0])
+    await expect.poll(() => screen.getByText(/3.node/)).not.toBeVisible()
+    expect(screen.getByText(/4.leaf/)).not.toBeVisible()
+  })
+
+  it('should support toggle slot', async () => {
+    const loadSpy = vi.fn()
+
+    const items = ref([
+      { value: 1, title: '1.root', children: [] },
+      { value: 2, title: '2.another', children: [] },
+    ] as any[])
+
+    // eslint-disable-next-line sonarjs/no-identical-functions
+    async function loadChildren (item: any) {
+      loadSpy(item)
+      await wait(50)
+      if (item.value === 1) {
+        items.value[0].children = [{ value: 3, title: '3.node', children: [] }]
+      }
+      if (item.value === 3) {
+        items.value[0].children[0].children = [{ value: 4, title: '4.leaf' }]
+      }
+    }
+    render(() => (
+      <VTreeview
+        items={ items.value }
+        loadChildren={ loadChildren }
+      >
+        {{
+          toggle: ({ props, loading }) => loading
+            ? 'loading...'
+            : <div onClick={ (e: any) => props.onClick(e) } class="text-blue">[toggle]</div>,
+        }}
+      </VTreeview>
+    ))
+
+    expect(screen.queryAllByText(/3.node/)).toHaveLength(0)
+    expect(screen.queryAllByText(/4.leaf/)).toHaveLength(0)
+
+    await userEvent.click(screen.queryAllByText('[toggle]')[0])
+    expect(loadSpy).toHaveBeenCalledOnce()
+    await wait(350) // needs to fully render for the following click
+    expect(screen.getByText(/3.node/)).toBeVisible()
+
+    await userEvent.click(screen.queryAllByText('[toggle]')[1])
+    await nextTick()
+    expect(loadSpy).toHaveBeenCalledTimes(2)
+    await expect.poll(() => screen.queryByText(/4.leaf/)).toBeVisible()
+
+    await userEvent.click(screen.queryAllByText('[toggle]')[0])
+    await expect.poll(() => screen.getByText(/3.node/)).not.toBeVisible()
+    expect(screen.getByText(/4.leaf/)).not.toBeVisible()
   })
 })

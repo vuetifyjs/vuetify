@@ -36,7 +36,6 @@ A basic example of the treeview component.
 | - | - |
 | [v-treeview](/api/v-treeview/) | Primary Component |
 | [v-treeview-item](/api/v-treeview-item/) | Sub-component used to display a single treeview node |
-| [v-treeview-children](/api/v-treeview-children/) | Sub-component used to display a single treeview node's children |
 | [v-treeview-group](/api/v-treeview-group/) | Sub-component used to display a single treeview node's children |
 
 <ApiInline hide-links />
@@ -142,6 +141,12 @@ Both **append**, and **prepend** slots get additional information about the item
 In this example we use a custom **title** slot to apply a line-through the treeview item's text when selected.
 
 <ExamplesExample file="v-treeview/slot-title" />
+
+#### Toggle
+
+Here, a custom **toggle** slot is utilized to assign a specific color and variant to the button depending on the state of the item.
+
+<ExamplesExample file="v-treeview/slot-toggle" />
 
 ## Examples
 

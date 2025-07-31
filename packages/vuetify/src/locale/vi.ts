@@ -153,4 +153,21 @@ export default {
     enterFullscreen: 'Toàn màn hình',
     exitFullscreen: 'Thoát toàn màn hình',
   },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Chọn màu từ màn hình',
+      hueSlider: 'Sắc độ',
+      alphaSlider: 'Độ trong suốt',
+      redInput: 'Đỏ',
+      greenInput: 'Xanh lục',
+      blueInput: 'Xanh lam',
+      alphaInput: 'Độ trong suốt',
+      hueInput: 'Sắc độ',
+      saturationInput: 'Độ bão hòa',
+      lightnessInput: 'Độ sáng',
+      hexInput: 'Giá trị HEX',
+      hexaInput: 'Giá trị HEX có độ trong suốt',
+      changeFormat: 'Thay đổi định dạng màu',
+    },
+  },
 }

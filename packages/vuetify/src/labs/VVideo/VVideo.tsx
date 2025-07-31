@@ -466,18 +466,20 @@ export const VVideo = genericComponent<VVideoSlots>()({
                     ...roundedContainerClasses.value,
                   ]}
                 >
-                  { overlayPlayIcon }
+                  { props.variant === 'player' && overlayPlayIcon }
                 </div>
               </VImg>
             </VOverlay>
-            <VOverlay
-              key="loading-overlay"
-              modelValue={ state.value === 'loading' || waiting.value }
-              opacity=".1"
-              { ...overlayProps }
-            >
-              { loadingIndicator }
-            </VOverlay>
+            { props.variant === 'player' && (
+              <VOverlay
+                key="loading-overlay"
+                modelValue={ state.value === 'loading' || waiting.value }
+                opacity=".1"
+                { ...overlayProps }
+              >
+                { loadingIndicator }
+              </VOverlay>
+            )}
           </div>
           <MaybeTransition key="actions" transition={ props.controlsTransition }>
             { showControls && (

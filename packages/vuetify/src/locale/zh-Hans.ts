@@ -153,4 +153,21 @@ export default {
     enterFullscreen: '全屏',
     exitFullscreen: '退出全屏',
   },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: '从屏幕拾取颜色',
+      hueSlider: '色相',
+      alphaSlider: '不透明度',
+      redInput: '红色',
+      greenInput: '绿色',
+      blueInput: '蓝色',
+      alphaInput: '不透明度',
+      hueInput: '色相',
+      saturationInput: '饱和度',
+      lightnessInput: '亮度',
+      hexInput: 'HEX 值',
+      hexaInput: '带不透明度 HEX 值',
+      changeFormat: '更改颜色格式',
+    },
+  },
 }

@@ -153,4 +153,21 @@ export default {
     enterFullscreen: 'เต็มหน้าจอ',
     exitFullscreen: 'ออกจากเต็มหน้าจอ',
   },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'เลือกสีจากหน้าจอ',
+      hueSlider: 'ค่าสี',
+      alphaSlider: 'ค่าความโปร่งใส',
+      redInput: 'สีแดง',
+      greenInput: 'สีเขียว',
+      blueInput: 'สีน้ำเงิน',
+      alphaInput: 'ค่าความโปร่งใส',
+      hueInput: 'ค่าสี',
+      saturationInput: 'ค่าความอิ่มตัวของสี',
+      lightnessInput: 'ค่าความสว่าง',
+      hexInput: 'ค่า HEX',
+      hexaInput: 'ค่า HEX พร้อมค่าความโปร่งใส',
+      changeFormat: 'เปลี่ยนรูปแบบสี',
+    },
+  },
 }

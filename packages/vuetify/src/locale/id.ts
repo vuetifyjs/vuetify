@@ -153,4 +153,21 @@ export default {
     enterFullscreen: 'Layar penuh',
     exitFullscreen: 'Keluar dari layar penuh',
   },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Pilih warna dari layar',
+      hueSlider: 'Rona',
+      alphaSlider: 'Alfa',
+      redInput: 'Merah',
+      greenInput: 'Hijau',
+      blueInput: 'Biru',
+      alphaInput: 'Alfa',
+      hueInput: 'Rona',
+      saturationInput: 'Saturasi',
+      lightnessInput: 'Kecerahan',
+      hexInput: 'Nilai HEX',
+      hexaInput: 'HEX dengan nilai alfa',
+      changeFormat: 'Ubah format warna',
+    },
+  },
 }

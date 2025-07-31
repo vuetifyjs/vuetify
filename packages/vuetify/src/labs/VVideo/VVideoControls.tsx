@@ -8,10 +8,10 @@ import { VSlider } from '@/components/VSlider/VSlider'
 import { VIconBtn } from '@/labs/VIconBtn/VIconBtn'
 
 // Composables
-import { useLocale } from '@/composables'
 import { useBackgroundColor } from '@/composables/color'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
+import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 
@@ -19,7 +19,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import vTooltip from '@/directives/tooltip'
 
 // Utilities
-import { computed, shallowRef } from 'vue'
+import { computed, shallowRef, toRef } from 'vue'
 import { formatTime, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -98,13 +98,22 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
 
   setup (props, { emit, slots }) {
     const { t } = useLocale()
-    const { themeClasses } = provideTheme(props)
+    const { themeClasses, current: currentTheme } = provideTheme(props)
     const { densityClasses } = useDensity(props)
     const { elevationClasses } = useElevation(props)
 
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => {
       const fallbackBackground = props.detached ? 'surface' : undefined
       return props.backgroundColor ?? fallbackBackground
+    })
+
+    const trackColor = toRef(() => {
+      if (props.trackColor) {
+        return props.trackColor
+      }
+
+      const fallback = currentTheme.value.dark || !props.pills ? undefined : 'surface'
+      return (props.pills ? props.backgroundColor : props.color) ?? fallback
     })
 
     const playing = useProxiedModel(props, 'playing')
@@ -187,7 +196,10 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
       const pillClasses = [
         'v-video-control__pill',
         props.pills ? elevationClasses.value : [],
+        props.pills ? backgroundColorClasses.value : [],
       ]
+
+      const pillStyles = props.pills ? backgroundColorStyles.value : []
 
       const slotProps = {
         play,
@@ -212,13 +224,13 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
             { 'v-video-controls--detached': props.detached },
             { 'v-video-controls--floating': props.floating },
             { 'v-video-controls--split-time': props.splitTime },
-            backgroundColorClasses.value,
+            !props.pills ? backgroundColorClasses.value : [],
             props.detached && !props.pills ? elevationClasses.value : [],
             densityClasses.value,
             themeClasses.value,
           ]}
           style={[
-            backgroundColorStyles.value,
+            !props.pills ? backgroundColorStyles.value : [],
             { '--v-video-controls-pill-height': `${regularBtnSize}px` },
           ]}
         >
@@ -228,7 +240,10 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
                 { props.variant !== 'mini' && (
                   <>
                     { !props.hidePlay && (
-                      <div class={[pillClasses, 'v-video__action-play']}>
+                      <div
+                        class={[pillClasses, 'v-video__action-play']}
+                        style={ pillStyles }
+                      >
                         <VIconBtn
                           icon={ playing.value ? '$pause' : '$play' }
                           size={ playBtnSize }
@@ -239,20 +254,37 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
                       </div>
                     )}
                     { slots.prepend && (
-                      <div class={ pillClasses }>
+                      <div
+                        class={ pillClasses }
+                        style={ pillStyles }
+                      >
                         { slots.prepend(slotProps) }
                       </div>
                     )}
                     { props.splitTime
-                      ? <span class={[pillClasses, 'v-video__time']}>{ currentTime.value.elapsed }</span>
+                      ? (
+                        <span
+                          class={[pillClasses, 'v-video__time']}
+                          style={ pillStyles }
+                        >
+                          { currentTime.value.elapsed }
+                        </span>
+                      )
                       : props.variant !== 'default'
-                        ? <span class={[pillClasses, 'v-video__time']}>{ currentTime.value.elapsed } / { currentTime.value.total }</span>
+                        ? (
+                          <span
+                            class={[pillClasses, 'v-video__time']}
+                            style={ pillStyles }
+                          >
+                            { currentTime.value.elapsed } / { currentTime.value.total }
+                          </span>
+                        )
                         : ''
                     }
                     <VSlider
                       modelValue={ props.progress }
                       noKeyboard
-                      color={ props.trackColor ?? props.color }
+                      color={ trackColor.value ?? 'surface-variant' }
                       trackColor={ props.variant === 'tube' ? 'white' : undefined }
                       class="v-video__track"
                       thumbLabel="always"
@@ -265,7 +297,14 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
                     </VSlider>
                     { props.variant === 'tube' && <VSpacer /> }
                     { props.splitTime
-                      ? <span class={[pillClasses, 'v-video__time']}>{ currentTime.value.remaining }</span>
+                      ? (
+                        <span
+                          class={[pillClasses, 'v-video__time']}
+                          style={ pillStyles }
+                        >
+                          { currentTime.value.remaining }
+                        </span>
+                      )
                       : ''
                     }
                   </>
@@ -274,12 +313,18 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
                   <>
                     <VSpacer />
                     { slots.prepend && (
-                      <div class={ pillClasses }>
+                      <div
+                        class={ pillClasses }
+                        style={ pillStyles }
+                      >
                         { slots.prepend(slotProps) }
                       </div>
                     )}
                     { !props.hidePlay && (
-                      <div class={[pillClasses, 'v-video__action-play']}>
+                      <div
+                        class={[pillClasses, 'v-video__action-play']}
+                        style={ pillStyles }
+                      >
                         <VIconBtn
                           icon={ playing.value ? '$pause' : '$play' }
                           size={ playBtnSize }
@@ -292,7 +337,10 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
                   </>
                 )}
                 { (!props.hideVolume || !props.hideFullscreen || slots.append) && (
-                  <div class={ pillClasses }>
+                  <div
+                    class={ pillClasses }
+                    style={ pillStyles }
+                  >
                     { !props.hideVolume && (
                       <VVideoVolume
                         key="volume-control"

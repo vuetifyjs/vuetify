@@ -1,30 +1,41 @@
 <template>
-  <v-carousel>
-    <v-carousel-item
-      v-for="(item,i) in items"
-      :key="i"
-      :src="item.src"
-      reverse-transition="fade-transition"
-      transition="fade-transition"
-      cover
-    ></v-carousel-item>
-  </v-carousel>
+  <v-container max-width="600">
+    <div class="mb-1 mt-6">
+      <v-code class="bg-purple-darken-2">default, slower</v-code>
+    </div>
+    <v-carousel height="200" transition-duration="600">
+      <v-carousel-item v-for="(src, i) in items" :key="i" :src="src" cover></v-carousel-item>
+    </v-carousel>
+
+    <div class="mb-1 mt-6">
+      <v-code class="bg-purple-darken-2">crossfade</v-code>
+    </div>
+    <v-carousel height="200" transition-duration="700" crossfade>
+      <v-carousel-item v-for="(src, i) in items" :key="i" :src="src" cover></v-carousel-item>
+    </v-carousel>
+
+    <div class="mb-1 mt-6">
+      <v-code class="bg-purple-darken-2">cross-scale (custom)</v-code>
+    </div>
+    <v-carousel height="200">
+      <v-carousel-item
+        v-for="(src, i) in items"
+        :key="i"
+        :src="src"
+        reverse-transition="cross-scale"
+        transition="cross-scale"
+        cover
+      ></v-carousel-item>
+    </v-carousel>
+  </v-container>
 </template>
 
 <script setup>
   const items = [
-    {
-      src: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
-    },
-    {
-      src: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg',
-    },
-    {
-      src: 'https://cdn.vuetifyjs.com/images/carousel/bird.jpg',
-    },
-    {
-      src: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg',
-    },
+    'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
+    'https://cdn.vuetifyjs.com/images/carousel/sky.jpg',
+    'https://cdn.vuetifyjs.com/images/carousel/bird.jpg',
+    'https://cdn.vuetifyjs.com/images/carousel/planet.jpg',
   ]
 </script>
 
@@ -33,20 +44,33 @@
     data () {
       return {
         items: [
-          {
-            src: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
-          },
-          {
-            src: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg',
-          },
-          {
-            src: 'https://cdn.vuetifyjs.com/images/carousel/bird.jpg',
-          },
-          {
-            src: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg',
-          },
+          'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
+          'https://cdn.vuetifyjs.com/images/carousel/sky.jpg',
+          'https://cdn.vuetifyjs.com/images/carousel/bird.jpg',
+          'https://cdn.vuetifyjs.com/images/carousel/planet.jpg',
         ],
       }
     },
   }
 </script>
+
+<style>
+  .cross-scale-enter-active,
+  .cross-scale-leave-active {
+    transition: .5s cubic-bezier(0.25, 0.8, 0.5, 1);
+    transition-property: opacity, transform;
+  }
+
+  .cross-scale-leave-from,
+  .cross-scale-leave-to {
+    position: absolute !important;
+    top: 0;
+    width: 100%;
+  }
+
+  .cross-scale-enter-from,
+  .cross-scale-leave-to {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+</style>

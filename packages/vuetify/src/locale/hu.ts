@@ -153,4 +153,21 @@ export default {
     enterFullscreen: 'Teljes képernyő',
     exitFullscreen: 'Kilépés a teljes képernyőből',
   },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Szín kiválasztása a képernyőről',
+      hueSlider: 'Árnyalat',
+      alphaSlider: 'Átlátszóság',
+      redInput: 'Vörös',
+      greenInput: 'Zöld',
+      blueInput: 'Kék',
+      alphaInput: 'Átlátszóság',
+      hueInput: 'Árnyalat',
+      saturationInput: 'Telítettség',
+      lightnessInput: 'Világosság',
+      hexInput: 'HEX érték',
+      hexaInput: 'HEX érték átlátszósággal',
+      changeFormat: 'Színformátum módosítása',
+    },
+  },
 }
