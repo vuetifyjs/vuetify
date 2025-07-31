@@ -22,13 +22,11 @@ describe('VDateInput', () => {
     const { element } = render(() => <VDateInput v-model={ model.value } />)
 
     await userEvent.click(element)
-    await commands.waitStable('.v-picker')
-    expect(screen.getByCSS('.v-picker')).toBeVisible()
+    await expect.poll(() => screen.getByCSS('.v-picker')).toBeVisible()
 
     await userEvent.keyboard('{Escape}') // hide picker, but keep the focus
 
-    await commands.waitStable('.v-picker')
-    expect(screen.getByCSS('.v-picker')).not.toBeVisible()
+    await expect.poll(() => screen.getByCSS('.v-picker')).not.toBeVisible()
 
     const input = screen.getByCSS('input')
     await userEvent.type(input, '02/20/2022{Enter}')
