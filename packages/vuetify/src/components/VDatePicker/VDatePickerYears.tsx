@@ -37,8 +37,8 @@ export type VDatePickerYearsSlots = {
 export const makeVDatePickerYearsProps = propsFactory({
   color: String,
   height: [String, Number],
-  min: null as any as PropType<unknown>,
-  max: null as any as PropType<unknown>,
+  min: Object as PropType<Temporal.PlainDate | null>,
+  max: Object as PropType<Temporal.PlainDate | null>,
   modelValue: Number,
   allowedYears: [Array, Function] as PropType<number[] | ((date: number) => boolean)>,
 }, 'VDatePickerYears')

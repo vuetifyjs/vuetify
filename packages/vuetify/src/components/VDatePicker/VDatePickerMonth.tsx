@@ -6,7 +6,7 @@ import { VBtn } from '@/components/VBtn'
 
 // Composables
 import { makeCalendarProps, useCalendar } from '@/composables/calendar'
-import { useDate } from '@/composables/date/date'
+import * as dateUtil from '@/composables/date/temporal'
 import { MaybeTransition } from '@/composables/transition'
 
 // Utilities
@@ -58,10 +58,9 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
     const daysRef = ref()
 
     const { daysInMonth, model, weekNumbers, weekdayLabels } = useCalendar(props)
-    const adapter = useDate()
 
-    const rangeStart = shallowRef()
-    const rangeStop = shallowRef()
+    const rangeStart = shallowRef<Temporal.PlainDate | null>()
+    const rangeStop = shallowRef<Temporal.PlainDate | null>()
     const isReverse = shallowRef(false)
 
     const transition = toRef(() => {
@@ -84,12 +83,10 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
     watch(daysInMonth, (val, oldVal) => {
       if (!oldVal) return
 
-      isReverse.value = adapter.isBefore(val[0].date, oldVal[0].date)
+      isReverse.value = dateUtil.isBefore(val[0].date, oldVal[0].date)
     })
 
-    function onRangeClick (value: unknown) {
-      const _value = adapter.startOfDay(value)
-
+    function onRangeClick (value: Temporal.PlainDate) {
       if (model.value.length === 0) {
         rangeStart.value = undefined
       } else if (model.value.length === 1) {
@@ -98,18 +95,18 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
       }
 
       if (!rangeStart.value) {
-        rangeStart.value = _value
+        rangeStart.value = value
         model.value = [rangeStart.value]
       } else if (!rangeStop.value) {
-        if (adapter.isSameDay(_value, rangeStart.value)) {
+        if (dateUtil.isSameDay(value, rangeStart.value)) {
           rangeStart.value = undefined
           model.value = []
           return
-        } else if (adapter.isBefore(_value, rangeStart.value)) {
-          rangeStop.value = adapter.endOfDay(rangeStart.value)
-          rangeStart.value = _value
+        } else if (dateUtil.isBefore(value, rangeStart.value)) {
+          rangeStop.value = rangeStart.value
+          rangeStart.value = value
         } else {
-          rangeStop.value = adapter.endOfDay(_value)
+          rangeStop.value = value
         }
 
         model.value = [rangeStart.value, rangeStop.value]
@@ -120,8 +117,8 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
       }
     }
 
-    function onMultipleClick (value: unknown) {
-      const index = model.value.findIndex(selection => adapter.isSameDay(selection, value))
+    function onMultipleClick (value: Temporal.PlainDate) {
+      const index = model.value.findIndex(selection => dateUtil.isSameDay(selection!, value))
 
       if (index === -1) {
         model.value = [...model.value, value]
@@ -132,7 +129,7 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
       }
     }
 
-    function onClick (value: unknown) {
+    function onClick (value: Temporal.PlainDate) {
       if (props.multiple === 'range') {
         onRangeClick(value)
       } else if (props.multiple) {
@@ -195,8 +192,8 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
               } as const
 
               const isSelected = props.multiple === 'range' && model.value.length === 2
-                ? adapter.isWithinRange(item.date, model.value as [Date, Date])
-                : model.value.some(selectedDate => adapter.isSameDay(selectedDate, item.date))
+                ? dateUtil.isWithinRange(item.date, model.value as [Temporal.PlainDate, Temporal.PlainDate])
+                : model.value.some(selectedDate => dateUtil.isSameDay(selectedDate!, item.date))
 
               if (atMax.value && !isSelected) {
                 item.isDisabled = true
