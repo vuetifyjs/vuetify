@@ -1,8 +1,8 @@
 <template>
   <v-select
     :items="items"
-    disabled
     label="Disabled"
+    disabled
   ></v-select>
 </template>
 

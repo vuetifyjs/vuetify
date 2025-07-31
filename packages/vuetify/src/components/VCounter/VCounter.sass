@@ -1,8 +1,10 @@
 @use '../../styles/settings'
+@use '../../styles/tools'
 @use './variables' as *
 
-.v-counter
-  color: $counter-color
-  flex: $counter-flex
-  font-size: $counter-font-size
-  transition-duration: $counter-transition-duration
+@include tools.layer('components')
+  .v-counter
+    color: $counter-color
+    flex: $counter-flex
+    font-size: $counter-font-size
+    transition-duration: $counter-transition-duration

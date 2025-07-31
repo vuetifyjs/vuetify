@@ -1,9 +1,9 @@
 <template>
-  <usage-example
+  <ExamplesUsageExample
     v-model="model"
     :code="code"
-    :options="options"
     :name="name"
+    :options="options"
   >
     <div>
       <v-hover v-bind="props">
@@ -11,20 +11,16 @@
           <v-card
             v-bind="hoverProps"
             :color="isHovering ? 'primary' : undefined"
-            title="Hover over me"
             text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima, at placeat totam, magni doloremque veniam neque porro libero rerum unde voluptatem!"
+            title="Hover over me"
           ></v-card>
         </template>
       </v-hover>
     </div>
-  </usage-example>
+  </ExamplesUsageExample>
 </template>
 
 <script setup>
-  // Utilities
-  import { computed, ref } from 'vue'
-  import { propsToString } from '@/util/helpers'
-
   const name = 'v-hover'
   const model = ref('default')
   const options = []

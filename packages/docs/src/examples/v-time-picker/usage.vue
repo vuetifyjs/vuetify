@@ -1,41 +1,32 @@
 <template>
-  <v-time-picker
-    v-bind="$attrs"
-  ></v-time-picker>
+  <ExamplesUsageExample
+    v-model="model"
+    :code="code"
+    :name="name"
+    :options="options"
+  >
+    <v-row justify="center">
+      <v-time-picker v-bind="props"></v-time-picker>
+    </v-row>
+  </ExamplesUsageExample>
 </template>
 
-<script>
-  export default {
-    name: 'Usage',
+<script setup>
+  const name = 'v-time-picker'
+  const model = ref('default')
+  const options = []
 
-    inheritAttrs: false,
+  const props = computed(() => {
+    return {
+      //
+    }
+  })
 
-    data: () => ({
-      defaults: {
-        'ampm-in-title': false,
-        disabled: false,
-        format: 'ampm',
-        'full-width': false,
-        landscape: false,
-        'no-title': false,
-        readonly: false,
-        scrollable: false,
-        'use-seconds': false,
-      },
-      options: {
-        booleans: [
-          'ampm-in-title',
-          'disabled',
-          'full-width',
-          'no-title',
-          'readonly',
-          'use-seconds',
-        ],
-        btnToggles: {
-          format: ['ampm', '24hr'],
-        },
-      },
-      tabs: ['landscape', 'scrollable'],
-    }),
-  }
+  const slots = computed(() => {
+    return ''
+  })
+
+  const code = computed(() => {
+    return `<${name}${propsToString(props.value)}>${slots.value}</${name}>`
+  })
 </script>

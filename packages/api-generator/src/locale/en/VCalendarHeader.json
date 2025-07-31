@@ -1,0 +1,12 @@
+{
+  "props": {
+    "nextIcon": "The icon to use for the next button.",
+    "prevIcon": "The icon to use for the prev button.",
+    "viewMode": "The current view mode of the calendar."
+  },
+  "events": {
+    "click:next": "Event emitted when clicking the next button.",
+    "click:prev": "Event emitted when clicking the prev button.",
+    "click:toToday": "Event emitted when clicking the today button."
+  }
+}

@@ -1,19 +1,19 @@
 <template>
-  <app-menu
-    v-if="user.notifications.show"
+  <AppMenuMenu
+    v-if="user.one.notifications.enabled"
     v-model="menu"
     :close-on-content-click="false"
     :open-on-hover="false"
     :width="width"
   >
     <template #activator="{ props }">
-      <app-tooltip-btn v-bind="props">
+      <AppTooltipBtn v-bind="props">
         <template #icon>
           <v-badge
             :model-value="unread.length > 0"
             color="#ED561B"
-            dot
             location="top end"
+            dot
           >
             <v-icon
               :icon="icon"
@@ -22,7 +22,7 @@
             />
           </v-badge>
         </template>
-      </app-tooltip-btn>
+      </AppTooltipBtn>
     </template>
 
     <v-toolbar
@@ -31,7 +31,6 @@
       density="compact"
     >
       <v-btn
-        :disabled="showArchived ? unread.length < 1 : read.length < 1"
         class="px-2 ms-n1 text-none font-weight-regular"
         size="small"
         variant="text"
@@ -54,7 +53,7 @@
       >
         <p>{{ t('done') }}</p>
 
-        <v-icon icon="$vuetify" size="96" color="#D7D7D7" />
+        <v-icon color="#D7D7D7" icon="$vuetify" size="96" />
       </div>
 
       <template v-else>
@@ -83,15 +82,14 @@
               <div class="text-caption mb-1 font-weight-bold text-medium-emphasis">{{ format(notification.created_at) }}</div>
 
               <div class="text-medium-emphasis text-caption">
-                <app-markdown :content="notification.metadata.text" class="mb-n3" />
+                <AppMarkdown :content="notification.metadata.text" class="mb-n3" />
 
-                <app-link
+                <border-chip
                   :href="notification.metadata.action"
-                  class="border px-2 py-1 rounded"
+                  :text="notification.metadata.action_text"
+                  append-icon="mdi-open-in-new"
                   @click="onClick(notification)"
-                >
-                  {{ notification.metadata.action_text }}
-                </app-link>
+                />
               </div>
 
               <template v-if="!showArchived" #append>
@@ -108,26 +106,10 @@
         </v-list>
       </template>
     </v-responsive>
-  </app-menu>
+  </AppMenuMenu>
 </template>
 
 <script setup lang="ts">
-  // Components
-  import AppTooltipBtn from '@/components/app/TooltipBtn.vue'
-
-  // Composables
-  import { useCosmic } from '@/composables/cosmic'
-  import { useDate } from 'vuetify/labs/date'
-  import { useDisplay } from 'vuetify'
-  import { useGtag } from 'vue-gtag-next'
-  import { useI18n } from 'vue-i18n'
-
-  // Stores
-  import { useUserStore } from '@/store/user'
-
-  // Utilities
-  import { computed, onMounted, ref } from 'vue'
-
   // Types
   interface Notification {
     metadata: {
@@ -143,18 +125,17 @@
   }
 
   const { t } = useI18n()
-  const { event } = useGtag()
   const { bucket } = useCosmic()
   const { mobile } = useDisplay()
   const date = useDate()
   const user = useUserStore()
 
-  const menu = ref(false)
+  const menu = shallowRef(false)
   const all = ref<Notification[]>([])
-  const showArchived = ref(false)
+  const showArchived = shallowRef(false)
 
-  const unread = computed(() => all.value.filter(({ slug }) => !user.notifications.read.includes(slug)))
-  const read = computed(() => all.value.filter(({ slug }) => user.notifications.read.includes(slug)))
+  const unread = computed(() => all.value.filter(({ slug }) => !user.one.notifications.read.includes(slug)))
+  const read = computed(() => all.value.filter(({ slug }) => user.one.notifications.read.includes(slug)))
   const notifications = computed(() => showArchived.value ? read.value : unread.value)
   const done = computed(() => {
     return (
@@ -174,21 +155,17 @@
   const width = computed(() => mobile.value ? 420 : 520)
 
   function format (str: string) {
-    return date.format(new Date(str), 'normalDateWithWeekday')
+    return date.format(new Date(str), 'fullDateWithWeekday')
   }
   function onClick (notification: Notification) {
     toggle(notification)
     menu.value = false
-    event('click', {
-      event_category: 'vuetify-notification',
-      event_label: notification.slug,
-      value: notification.metadata.action,
-    })
+    sweClick('notification', notification.slug, notification.metadata.action)
   }
   function toggle ({ slug }: Notification) {
-    user.notifications.read = user.notifications.read.includes(slug)
-      ? user.notifications.read.filter(n => n !== slug)
-      : [...user.notifications.read, slug]
+    user.one.notifications.read = user.one.notifications.read.includes(slug)
+      ? user.one.notifications.read.filter((n: any) => n !== slug)
+      : [...user.one.notifications.read, slug]
   }
 
   onMounted(async () => {

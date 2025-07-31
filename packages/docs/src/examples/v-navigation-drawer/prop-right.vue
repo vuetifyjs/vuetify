@@ -2,15 +2,15 @@
   <v-card>
     <v-layout>
       <v-navigation-drawer
-        permanent
         location="right"
+        permanent
       >
         <template v-slot:prepend>
           <v-list-item
             lines="two"
             prepend-avatar="https://randomuser.me/api/portraits/women/81.jpg"
-            title="Jane Smith"
             subtitle="Logged in"
+            title="Jane Smith"
           ></v-list-item>
         </template>
 

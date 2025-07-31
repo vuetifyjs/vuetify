@@ -1,4 +1,1 @@
-import VOtpInput from './VOtpInput'
-
-export { VOtpInput }
-export default VOtpInput
+export { VOtpInput } from './VOtpInput'

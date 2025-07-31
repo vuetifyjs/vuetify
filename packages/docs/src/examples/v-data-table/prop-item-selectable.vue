@@ -1,11 +1,10 @@
 <template>
   <v-data-table
-    class="elevation-1"
     :headers="headers"
     :items="desserts"
-    items-per-page="5"
-    item-value="name"
     item-selectable="selectable"
+    item-value="name"
+    items-per-page="5"
     show-select
   ></v-data-table>
 </template>

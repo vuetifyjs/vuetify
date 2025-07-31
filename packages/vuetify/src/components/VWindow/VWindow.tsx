@@ -12,17 +12,18 @@ import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Directives
-import { Touch } from '@/directives/touch'
+import vTouch from '@/directives/touch'
 
 // Utilities
-import { computed, provide, ref, shallowRef, watch } from 'vue'
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { computed, provide, ref, shallowRef, toRef, watch } from 'vue'
+import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { ComputedRef, InjectionKey, PropType, Ref } from 'vue'
 import type { GroupItemProvide, GroupProvide } from '@/composables/group'
 import type { IconValue } from '@/composables/icons'
 import type { TouchHandlers } from '@/directives/touch'
+import type { GenericProps } from '@/util'
 
 export type VWindowSlots = {
   default: { group: GroupProvide }
@@ -43,7 +44,7 @@ type ControlProps = {
   icon: IconValue
   class: string
   onClick: () => void
-  ariaLabel: string
+  'aria-label': string
 }
 
 export const VWindowSymbol: InjectionKey<WindowProvide> = Symbol.for('vuetify:v-window')
@@ -64,6 +65,7 @@ export const makeVWindowProps = propsFactory({
     type: [Boolean, String],
     validator: (v: any) => typeof v === 'boolean' || v === 'hover',
   },
+  verticalArrows: [Boolean, String] as PropType<boolean | 'left' | 'right'>,
   touch: {
     type: [Object, Boolean] as PropType<boolean | TouchHandlers>,
     default: undefined,
@@ -84,23 +86,29 @@ export const makeVWindowProps = propsFactory({
     type: [Boolean, String] as PropType<boolean | 'force'>,
     default: 'force' as const,
   },
+  crossfade: Boolean,
+  transitionDuration: Number,
 
   ...makeComponentProps(),
   ...makeTagProps(),
   ...makeThemeProps(),
 }, 'VWindow')
 
-export const VWindow = genericComponent<VWindowSlots>()({
+export const VWindow = genericComponent<new <T>(
+  props: {
+    modelValue?: T
+    'onUpdate:modelValue'?: (value: T) => void
+  },
+  slots: VWindowSlots,
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VWindow',
 
-  directives: {
-    Touch,
-  },
+  directives: { vTouch },
 
   props: makeVWindowProps(),
 
   emits: {
-    'update:modelValue': (v: any) => true,
+    'update:modelValue': (value: any) => true,
   },
 
   setup (props, { slots }) {
@@ -114,6 +122,10 @@ export const VWindow = genericComponent<VWindowSlots>()({
     const isRtlReverse = computed(() => isRtl.value ? !props.reverse : props.reverse)
     const isReversed = shallowRef(false)
     const transition = computed(() => {
+      if (props.crossfade) {
+        return 'v-window-crossfade-transition'
+      }
+
       const axis = props.direction === 'vertical' ? 'y' : 'x'
       const reverse = isRtlReverse.value ? !isReversed.value : isReversed.value
       const direction = reverse ? '-reverse' : ''
@@ -150,8 +162,8 @@ export const VWindow = genericComponent<VWindowSlots>()({
       rootRef,
     })
 
-    const canMoveBack = computed(() => props.continuous || activeIndex.value !== 0)
-    const canMoveForward = computed(() => props.continuous || activeIndex.value !== group.items.value.length - 1)
+    const canMoveBack = toRef(() => props.continuous || activeIndex.value !== 0)
+    const canMoveForward = toRef(() => props.continuous || activeIndex.value !== group.items.value.length - 1)
 
     function prev () {
       canMoveBack.value && group.prev()
@@ -168,7 +180,7 @@ export const VWindow = genericComponent<VWindowSlots>()({
         icon: isRtl.value ? props.nextIcon : props.prevIcon,
         class: `v-window__${isRtlReverse.value ? 'right' : 'left'}`,
         onClick: group.prev,
-        ariaLabel: t('$vuetify.carousel.prev'),
+        'aria-label': t('$vuetify.carousel.prev'),
       }
 
       arrows.push(canMoveBack.value
@@ -182,7 +194,7 @@ export const VWindow = genericComponent<VWindowSlots>()({
         icon: isRtl.value ? props.prevIcon : props.nextIcon,
         class: `v-window__${isRtlReverse.value ? 'left' : 'right'}`,
         onClick: group.next,
-        ariaLabel: t('$vuetify.carousel.next'),
+        'aria-label': t('$vuetify.carousel.next'),
       }
 
       arrows.push(canMoveForward.value
@@ -223,11 +235,18 @@ export const VWindow = genericComponent<VWindowSlots>()({
           'v-window',
           {
             'v-window--show-arrows-on-hover': props.showArrows === 'hover',
+            'v-window--vertical-arrows': !!props.verticalArrows,
+            'v-window--crossfade': !!props.crossfade,
           },
           themeClasses.value,
           props.class,
         ]}
-        style={ props.style }
+        style={[
+          props.style,
+          props.transitionDuration
+            ? { '--v-window-transition-duration': convertToUnit(props.transitionDuration, 'ms') }
+            : undefined,
+        ]}
         v-touch={ touchOptions.value }
       >
         <div
@@ -239,7 +258,13 @@ export const VWindow = genericComponent<VWindowSlots>()({
           { slots.default?.({ group }) }
 
           { props.showArrows !== false && (
-            <div class="v-window__controls">
+            <div
+              class={[
+                'v-window__controls',
+                { 'v-window__controls--left': props.verticalArrows === 'left' || props.verticalArrows === true },
+                { 'v-window__controls--right': props.verticalArrows === 'right' },
+              ]}
+            >
               { arrows.value }
             </div>
           )}

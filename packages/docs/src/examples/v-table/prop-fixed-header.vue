@@ -1,7 +1,7 @@
 <template>
   <v-table
-    fixed-header
     height="300px"
+    fixed-header
   >
     <thead>
       <tr>

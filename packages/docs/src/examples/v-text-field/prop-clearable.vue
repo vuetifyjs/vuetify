@@ -5,9 +5,9 @@
   >
     <v-text-field
       v-model="model"
-      clearable
       hide-details="auto"
       label="Last name"
+      clearable
     ></v-text-field>
   </v-responsive>
 </template>

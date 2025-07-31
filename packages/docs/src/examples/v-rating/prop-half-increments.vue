@@ -2,8 +2,8 @@
   <div class="text-center">
     <v-rating
       v-model="rating"
-      hover
       half-increments
+      hover
     ></v-rating>
     <pre>{{ rating }}</pre>
   </div>

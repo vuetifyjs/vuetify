@@ -1,0 +1,16 @@
+{
+  "props": {
+    "day": "Represents the specific day associated with the interval.",
+    "dayIndex": "Index of the day this interval is a part of, in a week or month view.",
+    "events": "Array of events specific to this interval.",
+    "index": "Index or position of the interval in the day view.",
+    "intervalDivisions": "Number of subdivisions within this interval.",
+    "intervalDuration": "Duration of this specific interval in minutes.",
+    "intervalFormat": "Formatting rule for displaying the interval, as a string or function.",
+    "intervalHeight": "Height of the interval in pixels in the calendar view.",
+    "intervalStart": "Starting time for this specific interval."
+  },
+  "exposed": {
+    "interval": "Computed reference for the interval, including label, start and end times, and associated events."
+  }
+}

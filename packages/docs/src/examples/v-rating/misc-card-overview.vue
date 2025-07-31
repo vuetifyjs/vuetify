@@ -39,7 +39,7 @@
 
         <template v-slot:prepend>
           <span>{{ rating }}</span>
-          <v-icon icon="mdi-star" class="mx-3"></v-icon>
+          <v-icon class="mx-3" icon="mdi-star"></v-icon>
         </template>
 
         <template v-slot:append>

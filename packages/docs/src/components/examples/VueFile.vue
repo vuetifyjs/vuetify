@@ -8,7 +8,6 @@
 <script setup>
   // Utilities
   import { getExample } from 'virtual:examples'
-  import { onBeforeMount, shallowRef } from 'vue'
 
   const props = defineProps({
     file: {

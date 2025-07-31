@@ -18,8 +18,8 @@
         ></v-checkbox-btn>
         <v-text-field
           :disabled="!enabled"
-          hide-details
           label="I only work if you check the box"
+          hide-details
         ></v-text-field>
       </div>
     </v-card-text>

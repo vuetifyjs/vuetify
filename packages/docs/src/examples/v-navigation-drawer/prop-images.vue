@@ -3,8 +3,8 @@
     <v-layout>
       <v-navigation-drawer
         image="https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg"
-        permanent
         theme="dark"
+        permanent
       >
         <v-list nav>
           <v-list-item prepend-icon="mdi-email" title="Inbox" value="inbox"></v-list-item>

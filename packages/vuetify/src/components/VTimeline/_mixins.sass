@@ -1,27 +1,3 @@
-@use '../../styles/tools'
-@use './variables' as *
-
-@mixin timeline-item-align($direction)
-  .v-timeline-item__wrapper
-    flex-direction: if($direction == left, row-reverse, if($direction == right, row, if($direction == top, column-reverse, column)))
-
-    .v-timeline-item__body
-      #{if($direction == right or $direction == left, justify-content, align-items)}: if($direction == left or $direction == top, flex-start, flex-end)
-      #{if($direction == top or $direction == bottom, max-height, max-width)}: calc(#{if($direction == top or $direction == left, '100% - ', '')}var(--v-timeline-line-position) - #{$timeline-divider-width * .5})
-
-    .v-timeline-item__opposite
-      #{if($direction == top or $direction == bottom, align-items, justify-content)}: #{if($direction == top or $direction == left, flex-end, flex-start)}
-
-@mixin timeline-line-align($center, $first, $second)
-  &::before
-    +tools.ltr()
-      #{$first}: calc(#{$center} - #{var(--v-timeline-line-width)} / 2)
-      #{$second}: initial
-
-    +tools.rtl()
-      #{$first}: initial
-      #{$second}: calc(#{$center} - #{var(--v-timeline-line-width)} / 2)
-
 @mixin vertical($immediate: false)
   @at-root .v-timeline--vertical#{if($immediate, &, ' &')}
     @content

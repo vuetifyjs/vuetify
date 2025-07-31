@@ -1,6 +1,8 @@
 .DS_Store
 node_modules/
 .env
+.knit
+knit.lock
 
 # IDE user config
 .vscode/
@@ -18,6 +20,9 @@ coverage/
 # cypress
 cypress/screenshots
 cypress/videos
+
+# vitest
+__screenshots__/
 
 .vercel
 .now

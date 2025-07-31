@@ -1,8 +1,8 @@
 <template>
-  <usage-example
+  <ExamplesUsageExample
     v-model="model"
-    :name="name"
     :code="code"
+    :name="name"
     :options="options"
   >
     <div>
@@ -10,9 +10,9 @@
         <v-list-item
           v-for="n in 3"
           :key="n"
+          :prepend-avatar="avatar ? 'https://randomuser.me/api/portraits/women/8.jpg' : undefined"
           :title="'Item ' + n"
           subtitle="Lorem ipsum dolor sit amet consectetur adipisicing elit"
-          :prepend-avatar="avatar ? 'https://randomuser.me/api/portraits/women/8.jpg' : undefined"
         ></v-list-item>
       </v-list>
     </div>
@@ -20,14 +20,10 @@
     <template v-slot:configuration>
       <v-checkbox v-model="avatar" label="Show avatars"></v-checkbox>
     </template>
-  </usage-example>
+  </ExamplesUsageExample>
 </template>
 
 <script setup>
-  // Utilities
-  import { computed, ref } from 'vue'
-  import { propsToString } from '@/util/helpers'
-
   const name = 'v-list'
   const model = ref('default')
   const options = ['two-lines', 'three-lines']

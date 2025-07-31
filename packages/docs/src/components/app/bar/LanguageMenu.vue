@@ -1,27 +1,20 @@
 <template>
-  <app-menu
+  <AppMenuMenu
     key="language-menu"
-    :open-on-hover="false"
     :items="items"
+    :open-on-hover="false"
   >
     <template #activator="{ props }">
-      <app-btn
+      <AppBtn
         color="medium-emphasis"
         icon="mdi-translate"
         v-bind="props"
       />
     </template>
-  </app-menu>
+  </AppMenuMenu>
 </template>
 
 <script setup lang="ts">
-  // Composables
-  import { useI18n } from 'vue-i18n'
-  import { useRoute } from 'vue-router'
-
-  // Utilities
-  import { computed } from 'vue'
-
   // Language
   import locales from '@/i18n/locales.json'
 

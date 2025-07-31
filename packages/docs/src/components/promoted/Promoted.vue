@@ -7,7 +7,7 @@
       v-bind="attrs"
       @click="onClick"
     >
-      <promoted-base
+      <PromotedBase
         v-bind="$attrs"
         class="v-vuetify--promoted"
         density="compact"
@@ -25,38 +25,25 @@
               :alt="`Link to ${ad.title}`"
               :src="logo"
               class="mx-1 mx-md-2"
-              contain
               height="56"
               max-width="56"
             />
 
-            <app-markdown
+            <AppMarkdown
               v-if="description"
               :content="description"
               class="text-subtitle-2 text-sm-h6 font-weight-light text-white"
             />
           </div>
         </v-img>
-      </promoted-base>
+      </PromotedBase>
     </a>
 
-    <vuetify v-else />
+    <PromotedVuetify v-else />
   </div>
 </template>
 
 <script setup>
-  // Components
-  import PromotedBase from './Base.vue'
-  import Vuetify from './Vuetify.vue'
-
-  // Composables
-  import { createAdProps, useAd } from '@/composables/ad'
-  import { useGtag } from 'vue-gtag-next'
-  import { useRoute } from 'vue-router'
-
-  // Utilities
-  import { computed } from 'vue'
-
   const props = defineProps({
     ...createAdProps(),
 
@@ -67,7 +54,6 @@
   })
 
   const { ad, attrs } = useAd(props)
-  const { event } = useGtag()
   const { name } = useRoute()
 
   const background = computed(() => ad.value?.metadata?.images?.background?.url)
@@ -92,11 +78,7 @@
 
     if (!slug) return
 
-    event('click', {
-      event_category: 'promoted',
-      event_label: slug,
-      value: name?.toString().toLowerCase(),
-    })
+    sweClick('promoted', slug, name?.toString().toLowerCase())
   }
 </script>
 

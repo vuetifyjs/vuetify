@@ -1,15 +1,9 @@
 {
   "props": {
-    "column": "Displays radio buttons in column",
-    "inline": "Displays radio buttons in row",
-    "type": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-radio-group.json))",
-    "falseIcon": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-radio-group.json))",
-    "trueIcon": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-radio-group.json))",
-    "height": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-radio-group.json))"
+    "column": "Displays radio buttons in column.",
+    "inline": "Displays radio buttons in row."
   },
   "events": {
-    "change": "Emitted when the input is changed by user interaction",
-    "click:prepend": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-radio-group.json))",
-    "click:append": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-radio-group.json))"
+    "change": "Emitted when the input is changed by user interaction."
   }
 }

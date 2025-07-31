@@ -6,7 +6,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     if: ${{ github.repository_owner == 'vuetifyjs' }}
     strategy:
       max-parallel: 1
@@ -25,7 +25,7 @@ jobs:
           - branch: 'v2-dev'
             tag: 'v2-dev'
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           ref: ${{ matrix.branch }}
           fetch-depth: 0
@@ -45,14 +45,14 @@ jobs:
           release-id: ${{ matrix.branch }}.${{ env.RELEASE_ID }}
           npm-tag: ${{ matrix.tag }}
           npm-token: ${{ secrets.NPM_TOKEN }}
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
   percy:
     name: Visual regression tests
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     if: ${{ github.repository_owner == 'vuetifyjs' }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           ref: master
           fetch-depth: 0
@@ -64,18 +64,12 @@ jobs:
               echo "Last commit was more than 24 hours ago, skipping tests"
               exit 1
           fi
-      - uses: ./.github/actions/yarn-install
+      - uses: vuetifyjs/setup-action@master
       - run: echo "COMMIT=$(git rev-parse HEAD)" >> $GITHUB_ENV
-      - run: yarn cy:run
+      - run: pnpm test:percy
         working-directory: ./packages/vuetify
         env:
           PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
           PERCY_BRANCH: master
           PERCY_TARGET_BRANCH: master
           PERCY_COMMIT: ${{ env.COMMIT }}
-      - uses: actions/upload-artifact@v2
-        if: failure()
-        with:
-          name: cypress-screenshots
-          path: ./packages/vuetify/cypress/screenshots/
-          if-no-files-found: ignore

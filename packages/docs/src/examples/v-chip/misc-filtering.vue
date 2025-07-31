@@ -15,10 +15,10 @@
 
       <v-text-field
         v-model="search"
-        clearable
-        hide-details
         label="Search News"
         prepend-inner-icon="mdi-magnify"
+        clearable
+        hide-details
         single-line
       ></v-text-field>
 

@@ -5,17 +5,17 @@
         <v-calendar
           ref="calendar"
           v-model="value"
-          color="primary"
-          type="4day"
-          :events="events"
           :event-color="getEventColor"
           :event-ripple="false"
+          :events="events"
+          color="primary"
+          type="4day"
           @change="getEvents"
           @mousedown:event="startDrag"
           @mousedown:time="startTime"
+          @mouseleave="cancelDrag"
           @mousemove:time="mouseMove"
           @mouseup:time="endDrag"
-          @mouseleave="cancelDrag"
         >
           <template v-slot:event="{ event, timed /*, eventSummary */ }">
             <!--<div class="v-event-draggable">

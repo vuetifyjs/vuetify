@@ -4,7 +4,6 @@
     :items="desserts"
     :sort-by="[{ key: 'calories', order: 'asc' }, { key: 'fat', order: 'desc' }]"
     multi-sort
-    class="elevation-1"
   ></v-data-table>
 </template>
 

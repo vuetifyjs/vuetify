@@ -1,0 +1,10 @@
+{
+  "props": {
+    "allDay": "Indicates whether the event spans the entire day.",
+    "event": "The event object associated with this calendar interval.",
+    "interval": "The specific time interval this event is associated with.",
+    "intervalDivisions": "Number of subdivisions within the interval for this event.",
+    "intervalDuration": "Duration of the interval in which this event occurs, in minutes.",
+    "intervalHeight": "Height of the interval in the calendar view, in pixels."
+  }
+}

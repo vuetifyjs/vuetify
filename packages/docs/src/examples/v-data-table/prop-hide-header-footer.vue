@@ -2,24 +2,23 @@
   <v-data-table
     :headers="headers"
     :items="desserts"
-    hide-default-header
     hide-default-footer
-    class="elevation-1"
+    hide-default-header
   ></v-data-table>
 </template>
 
 <script setup>
   const headers = [
     {
-      title: 'Dessert (100g serving)',
+      title: 'Dessert(100g serving)',
       align: 'start',
       key: 'name',
     },
     { title: 'Calories', align: 'end', key: 'calories' },
-    { title: 'Fat (g)', align: 'end', key: 'fat' },
-    { title: 'Carbs (g)', align: 'end', key: 'carbs' },
-    { title: 'Protein (g)', align: 'end', key: 'protein' },
-    { title: 'Iron (%)', align: 'end', key: 'iron' },
+    { title: 'Fat(g)', align: 'end', key: 'fat' },
+    { title: 'Carbs(g)', align: 'end', key: 'carbs' },
+    { title: 'Protein(g)', align: 'end', key: 'protein' },
+    { title: 'Iron(%)', align: 'end', key: 'iron' },
   ]
   const desserts = [
     {
@@ -110,15 +109,15 @@
     data: () => ({
       headers: [
         {
-          title: 'Dessert (100g serving)',
+          title: 'Dessert(100g serving)',
           align: 'start',
           key: 'name',
         },
         { title: 'Calories', align: 'end', key: 'calories' },
-        { title: 'Fat (g)', align: 'end', key: 'fat' },
-        { title: 'Carbs (g)', align: 'end', key: 'carbs' },
-        { title: 'Protein (g)', align: 'end', key: 'protein' },
-        { title: 'Iron (%)', align: 'end', key: 'iron' },
+        { title: 'Fat(g)', align: 'end', key: 'fat' },
+        { title: 'Carbs(g)', align: 'end', key: 'carbs' },
+        { title: 'Protein(g)', align: 'end', key: 'protein' },
+        { title: 'Iron(%)', align: 'end', key: 'iron' },
       ],
       desserts: [
         {

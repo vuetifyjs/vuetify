@@ -3,11 +3,9 @@
     v-model:sort-by="sortBy"
     :headers="headers"
     :items="desserts"
-    class="elevation-1"
   ></v-data-table>
-  <v-code class="mt-4">
-    <pre>{{ sortBy }}</pre>
-  </v-code>
+
+  <pre>{{ sortBy }}</pre>
 </template>
 
 <script setup>

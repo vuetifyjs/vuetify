@@ -1,5 +1,5 @@
 <template>
-  <v-sheet max-width="300" class="mx-auto">
+  <v-sheet class="mx-auto" max-width="300">
     <v-form validate-on="submit lazy" @submit.prevent="submit">
       <v-text-field
         v-model="userName"
@@ -9,10 +9,10 @@
 
       <v-btn
         :loading="loading"
-        type="submit"
-        block
         class="mt-2"
         text="Submit"
+        type="submit"
+        block
       ></v-btn>
     </v-form>
   </v-sheet>

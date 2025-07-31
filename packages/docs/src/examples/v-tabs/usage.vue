@@ -10,19 +10,19 @@
     </v-tabs>
 
     <v-card-text>
-      <v-window v-model="tab">
-        <v-window-item value="one">
+      <v-tabs-window v-model="tab">
+        <v-tabs-window-item value="one">
           One
-        </v-window-item>
+        </v-tabs-window-item>
 
-        <v-window-item value="two">
+        <v-tabs-window-item value="two">
           Two
-        </v-window-item>
+        </v-tabs-window-item>
 
-        <v-window-item value="three">
+        <v-tabs-window-item value="three">
           Three
-        </v-window-item>
-      </v-window>
+        </v-tabs-window-item>
+      </v-tabs-window>
     </v-card-text>
   </v-card>
 </template>

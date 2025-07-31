@@ -1,5 +1,5 @@
 <template>
-  <app-link-list-item
+  <AppListLinkListItem
     v-if="GITHUB_SHA"
     :append-icon="appendIcon"
     :href="`https://github.com/vuetifyjs/vuetify/commit/${GITHUB_SHA}`"
@@ -12,9 +12,6 @@
 </template>
 
 <script setup>
-  // Composables
-  import { useI18n } from 'vue-i18n'
-
   const GITHUB_SHA = import.meta.env.VITE_GITHUB_SHA
 
   const { t } = useI18n()

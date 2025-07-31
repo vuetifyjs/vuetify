@@ -8,8 +8,8 @@
       >
         <v-card
           class="pa-2"
-          variant="outlined"
           rounded="0"
+          variant="outlined"
         >
           .col-12 .col-md-8
         </v-card>
@@ -20,8 +20,8 @@
       >
         <v-card
           class="pa-2"
-          variant="outlined"
           rounded="0"
+          variant="outlined"
         >
           .col-6 .col-md-4
         </v-card>
@@ -38,8 +38,8 @@
       >
         <v-card
           class="pa-2"
-          variant="outlined"
           rounded="0"
+          variant="outlined"
         >
           .col-6 .col-md-4
         </v-card>
@@ -55,8 +55,8 @@
       >
         <v-card
           class="pa-2"
-          variant="outlined"
           rounded="0"
+          variant="outlined"
         >
           .col-6
         </v-card>

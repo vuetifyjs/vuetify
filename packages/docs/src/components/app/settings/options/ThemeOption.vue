@@ -1,10 +1,10 @@
 <template>
   <v-radio-group
-    v-model="user.theme"
+    v-model="user.one.theme"
     class="mb-2"
     color="primary"
-    hide-details
     true-icon="mdi-check-circle-outline"
+    hide-details
   >
     <v-radio
       v-for="(item, i) in items"
@@ -23,24 +23,29 @@
     v-if="!theme.current.value?.dark"
     :defaults="{
       VIcon: {
-        color: user.mixedTheme ? 'primary' : 'disabled'
+        color: user.ecosystem.docs.mixedTheme ? 'primary' : 'disabled'
       }
     }"
   >
-    <settings-switch
-      v-model="user.mixedTheme"
+    <SettingsSwitch
+      v-model="user.ecosystem.docs.mixedTheme"
       :label="t('dark-code')"
       :messages="t('dark-code-message')"
     />
   </v-defaults-provider>
+
+  <AppBtn
+    append-icon="mdi-page-next"
+    color="surface-variant"
+    to="?one=settings"
+    variant="flat"
+    block
+  >
+    Vuetify One Themes
+  </AppBtn>
 </template>
 
 <script setup lang="ts">
-  // Composables
-  import { useUserStore } from '@/store/user'
-  import { useI18n } from 'vue-i18n'
-  import { useTheme } from 'vuetify'
-
   const { t } = useI18n()
   const theme = useTheme()
   const user = useUserStore()
@@ -60,11 +65,6 @@
       text: t('system'),
       icon: 'mdi-desktop-tower-monitor',
       value: 'system',
-    },
-    {
-      text: t('blackguard'),
-      icon: 'mdi-space-invaders',
-      value: 'blackguard',
     },
   ]
 </script>

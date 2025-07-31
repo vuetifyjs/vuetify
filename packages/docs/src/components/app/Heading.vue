@@ -6,9 +6,9 @@
     <router-link
       v-if="href"
       :to="href"
+      aria-hidden="true"
       class="text-decoration-none text-end text-md-start d-none d-sm-inline-block"
       style="user-select: none"
-      aria-hidden="true"
     >
       <span class="text-primary">#</span>
     </router-link>
@@ -20,9 +20,6 @@
 </template>
 
 <script setup>
-  // Utilities
-  import { computed } from 'vue'
-
   const HEADING_CLASSES = {
     1: 'text-h3 text-sm-h3',
     2: 'text-h4 text-sm-h4',

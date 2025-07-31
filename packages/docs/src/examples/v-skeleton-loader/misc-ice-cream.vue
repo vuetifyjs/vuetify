@@ -11,9 +11,9 @@
     </div>
 
     <v-card
-      theme="dark"
       max-width="800"
       rounded="lg"
+      theme="dark"
     >
       <v-container>
         <v-row>
@@ -21,8 +21,8 @@
             v-for="{ src, title, subtitle } in cards"
             :key="title"
             cols="12"
-            md="6"
             lg="4"
+            md="6"
           >
             <v-skeleton-loader
               :loading="loading"
@@ -33,13 +33,13 @@
                 <v-img
                   :src="src"
                   class="rounded-lg mb-2"
-                  cover
                   height="184"
+                  cover
                 ></v-img>
 
                 <v-list-item
-                  :title="title"
                   :subtitle="subtitle"
+                  :title="title"
                   class="px-0"
                 ></v-list-item>
               </v-responsive>
@@ -50,10 +50,10 @@
         <br>
 
         <v-chip
-          border
           prepend-icon="mdi-check-circle"
           size="large"
           variant="text"
+          border
         >
           <template v-slot:prepend>
             <v-icon color="disabled"></v-icon>

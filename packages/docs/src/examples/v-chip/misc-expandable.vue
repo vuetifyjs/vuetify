@@ -17,9 +17,9 @@
       >
         <template v-slot:activator="{ props }">
           <v-chip
-            pill
             v-bind="props"
             link
+            pill
           >
             <v-avatar start>
               <v-img src="https://cdn.vuetifyjs.com/images/john.png"></v-img>
@@ -43,8 +43,8 @@
               <template v-slot:append>
                 <v-list-item-action>
                   <v-btn
-                    icon
                     variant="text"
+                    icon
                     @click="menu = false"
                   >
                     <v-icon>mdi-close-circle</v-icon>
@@ -55,7 +55,7 @@
           </v-list>
 
           <v-list>
-            <v-list-item link prepend-icon="mdi-briefcase">
+            <v-list-item prepend-icon="mdi-briefcase" link>
               <v-list-item-subtitle>john@gmail.com</v-list-item-subtitle>
             </v-list-item>
           </v-list>
@@ -69,14 +69,14 @@
       <v-text-field
         label="Subject"
         model-value="Re: Vacation Request"
-        single-line
         variant="underlined"
+        single-line
       ></v-text-field>
 
       <v-textarea
         label="Message"
-        single-line
         variant="underlined"
+        single-line
       ></v-textarea>
     </div>
   </v-card>

@@ -7,32 +7,37 @@ related:
   - /features/sass-variables/
   - /features/blueprints/
   - /introduction/why-vuetify/
+features:
+  report: true
 ---
 
 # Treeshaking
 
 Being a component framework, Vuetify will always grow horizontally. Depending on your project, a small bundle size may be a requirement.
 
-<entry />
+<PageFeatures />
+
+<PromotedEntry />
 
 ## Automatic treeshaking
 
 Treeshaking enables you to drastically lower your build size by only including the components you actually use in the final bundle. Vuetify comes with plugins for both [Webpack](https://webpack.js.org/) and [vite](https://vitejs.dev/) that enable automatic treeshaking.
 
-Install [`webpack-plugin-vuetify`](https://www.npmjs.com/package/webpack-plugin-vuetify) or [`vite-plugin-vuetify`](https://www.npmjs.com/package/vite-plugin-vuetify) then enable it in your bundler configuration. Make sure the vuetify plugin comes after the vue plugin or it won't work correctly.
+Install [webpack-plugin-vuetify](https://www.npmjs.com/package/webpack-plugin-vuetify) or [vite-plugin-vuetify](https://www.npmjs.com/package/vite-plugin-vuetify) then enable it in your bundler configuration. Make sure the vuetify plugin comes after the vue plugin or it won't work correctly.
 
 ::: tabs
 
 ```js [Vite] { resource="vite.config.js" }
+import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vuetify from 'vite-plugin-vuetify'
 
-export default {
+export default defineConfig({
   plugins: [
     vue(),
     vuetify(),
   ],
-}
+})
 ```
 
 ```js [Webpack] { resource="webpack.config.js" }
@@ -85,7 +90,7 @@ And that's it! Vuetify components and directives will be automatically imported 
 - import * as directives from 'vuetify/directives'
 ```
 
-<promoted />
+<PromotedPromoted />
 
 ## Manual imports
 
@@ -163,11 +168,11 @@ export default new Vuetify(opts)
 ```
 -->
 
-Dynamic components using `<component>` can be registered locally:
+Dynamic components using `<component>` can just be imported in setup components:
 
 ```html { resource="Component.vue" }
 <template>
-  <component :is="button ? 'v-btn' : 'v-chip'" />
+  <component :is="button ? VBtn : VChip" />
 </template>
 
 <script setup>
@@ -175,7 +180,25 @@ Dynamic components using `<component>` can be registered locally:
   import { VChip } from 'vuetify/components/VChip'
   import { shallowRef } from 'vue'
 
-  const btn = shallowRef(false)
+  const button = shallowRef(false)
+</script>
+```
+
+Or registered locally in options components:
+
+```html { resource="Component.vue" }
+<template>
+  <component :is="button ? 'v-btn' : 'v-chip'" />
+</template>
+
+<script>
+  import { VBtn } from 'vuetify/components/VBtn'
+  import { VChip } from 'vuetify/components/VChip'
+
+  export default {
+    components: { VBtn, VChip },
+    data: () => ({ button: false }),
+  }
 </script>
 ```
 

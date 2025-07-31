@@ -13,7 +13,9 @@ related:
 
 Smooth animations help make a UI feel great. Using Vue's transition system and re-usable functional components, you can easily control the motion of your application. Most components can have their transition altered through the **transition** prop.
 
-<entry />
+<PageFeatures />
+
+<PromotedEntry />
 
 ## API
 
@@ -36,7 +38,7 @@ Smooth animations help make a UI feel great. Using Vue's transition system and r
 | [v-toggle-slide-y-reverse-transition](/api/v-toggle-slide-y-reverse-transition/) | Toggle Slide Y reverse transitions slide in from the bottom. |
 | [v-toggle-slide-y-transition](/api/v-toggle-slide-y-transition/) | Toggle Slide Y transitions slide in from the top. |
 
-<api-inline hide-links />
+<ApiInline hide-links />
 
 ## Examples
 
@@ -47,7 +49,7 @@ Smooth animations help make a UI feel great. Using Vue's transition system and r
 
 Programmatically control the transition origin with a simple prop.
 
-<example file="transitions/prop-custom-origin" />
+<ExamplesExample file="transitions/prop-custom-origin" />
 -->
 
 ### Misc
@@ -56,80 +58,93 @@ Programmatically control the transition origin with a simple prop.
 
 The expand transition is used in Expansion Panels and List Groups. There is also a horizontal version available with `v-expand-x-transition`.
 
-<example file="transitions/misc-expand-x" />
+<ExamplesExample file="transitions/misc-expand-x" />
 
 #### Fab
 
 An example of the fab transition can be found in the `v-speed-dial` component.
 
-<example file="transitions/misc-fab" />
+<ExamplesExample file="transitions/misc-fab" />
 
 #### Fade
 
 An example of the fade transition can be found on the Carousel component.
 
-<example file="transitions/misc-fade" />
+<ExamplesExample file="transitions/misc-fade" />
 
 #### Scale
 
 Many of Vuetify's components contain a **transition** prop which allows you to specify your own.
 
-<example file="transitions/misc-scale" />
+<ExamplesExample file="transitions/misc-scale" />
 
 #### Scroll x
 
 Scroll X transitions continue along the horizontal axis.
 
-<example file="transitions/misc-scroll-x" />
+<ExamplesExample file="transitions/misc-scroll-x" />
 
 #### Scroll y
 
 Scroll Y transitions continue along the vertical axis.
 
-<example file="transitions/misc-scroll-y" />
+<ExamplesExample file="transitions/misc-scroll-y" />
 
 #### Slide x
 
 Slide x transitions move along the horizontal axis.
 
-<example file="transitions/misc-slide-x" />
+<ExamplesExample file="transitions/misc-slide-x" />
 
 #### Slide y
 
 Animations use the application's `$primary-transition`.
 
-<example file="transitions/misc-slide-y" />
+<ExamplesExample file="transitions/misc-slide-y" />
 
 #### Todo list
 
 Using multiple custom transitions, it is easy to bring a simple todo list to life!
 
-<example file="transitions/misc-todo" />
+<ExamplesExample file="transitions/misc-todo" />
 
-<!--
 ## Create your own
 
-You can use Vuetify's transition helper function to easily create your own custom transitions. This function will return an object that you can import into Vue. Using Vue's [functional component](https://vuejs.org/v2/guide/render-function.html#Functional-Components) option will make sure your transition is as efficient as possible. Simply import the function:
+You can use Vuetify's transition helper function to easily create your own custom transitions.
 
 ```js
-import { createSimpleTransition } from 'vuetify/components/transitions/createTransition'
+import { createCssTransition } from 'vuetify/util/transitions';
 
-const myTransition = createSimpleTransition('my-transition')
-
-Vue.component('my-transition', myTransition)
+createCssTransition('my-transition')
 ```
 
-The **createSimpleTransition** function accepts 1 argument, name. This will be the name that you can hook into with your style. This is an example of what `v-fade-transition` looks like:
+The argument passed to the **createCssTransition** function will be the name of the transition that you can hook into your style. This is an example of what `my-transition` looks like:
 
-```stylus
-.fade-transition
-  &-leave-active
-    position: absolute
+```scss
+.my-transition {
+  &-enter-active,
+  &-leave-active {
+    position: absolute;
+    transition: 1s;
+  }
 
-  &-enter-active, &-leave, &-leave-to
-    transition: $primary-transition
-
-  &-enter, &-leave-to
-    opacity: 0
+  &-enter-from,
+  &-leave-to {
+    opacity: 0;
+  }
+}
 ```
--->
+
+You can now use this custom transition in a few different ways.
+
+### As a component
+
+The **createCssTransition** function will return a component that you can use in your template.
+
+<ExamplesExample file="transitions/create-css-transition-component" />
+
+### As a prop
+
+Many of Vuetify’s components contain a **transition** prop. You can send the name of your custom transition to the transition prop.
+
+<ExamplesExample file="transitions/create-css-transition-prop" />

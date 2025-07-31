@@ -7,18 +7,16 @@
       <v-card
         :ripple="false"
         class="portrait"
-        img="https://cdn.vuetifyjs.com/images/cards/girl.jpg"
         height="300px"
+        img="https://cdn.vuetifyjs.com/images/cards/girl.jpg"
         @contextmenu="show"
       ></v-card>
     </v-row>
 
     <v-menu
       v-model="showMenu"
-      :position-x="x"
-      :position-y="y"
+      :target="[x, y]"
       absolute
-      offset-y
     >
       <v-list>
         <v-list-item

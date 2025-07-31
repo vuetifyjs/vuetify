@@ -1,5 +1,5 @@
 <template>
-  <v-layout style="height: 128px;" class="border rounded">
+  <v-layout class="border rounded" style="height: 128px;">
     <div class="mx-auto my-4">
       <v-btn
         color="deep-purple"

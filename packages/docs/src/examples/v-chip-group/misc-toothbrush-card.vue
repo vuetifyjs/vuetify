@@ -3,11 +3,11 @@
     class="mx-auto"
     max-width="400"
   >
-    <v-card-title>
-      <h2 class="text-h4">
-        Toothbrush
-      </h2>
+    <v-card-title class="d-flex">
+      <h2 class="text-h4">Toothbrush</h2>
+
       <v-spacer></v-spacer>
+
       <span class="text-h6">$4.99</span>
     </v-card-title>
 
@@ -23,31 +23,31 @@
 
       <v-chip-group
         v-model="selection"
-        selected-class="text-deep-purple-accent-4"
+        variant="flat"
         mandatory
       >
-        <v-chip>Extra Soft</v-chip>
-        <v-chip>Soft</v-chip>
-        <v-chip>Medium</v-chip>
-        <v-chip>Hard</v-chip>
+        <v-chip text="Extra Soft" border></v-chip>
+        <v-chip text="Soft" border></v-chip>
+        <v-chip text="Medium" border></v-chip>
+        <v-chip text="Hard" border></v-chip>
       </v-chip-group>
     </v-card-text>
 
     <v-card-actions>
       <v-btn
+        color="secondary"
+        text="Add to Cart"
+        variant="flat"
         block
-        color="deep-purple-accent-4"
-      >
-        Add to Cart
-      </v-btn>
+      ></v-btn>
     </v-card-actions>
   </v-card>
 </template>
 
 <script setup>
-  import { ref } from 'vue'
+  import { shallowRef } from 'vue'
 
-  const selection = ref(2)
+  const selection = shallowRef(2)
 </script>
 
 <script>

@@ -1,7 +1,10 @@
->0.5% and last 2 major versions
-safari >= 14
-ios >= 14
+>0.5%
+Chrome >0 and since 2021-05
+ChromeAndroid >0 and since 2021-05
+Firefox >0 and since 2021-05
+FirefoxAndroid >0 and since 2021-05
+Safari >0 and since 2021-05
+iOS >0 and since 2021-05
 not dead
 not op_mini all
-not ie 11
 not and_uc 1

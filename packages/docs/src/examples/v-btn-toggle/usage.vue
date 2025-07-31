@@ -2,9 +2,9 @@
   <v-container>
     <v-row>
       <v-col
+        class="py-2"
         cols="12"
         sm="6"
-        class="py-2"
       >
         <p>Exclusive</p>
 
@@ -28,16 +28,15 @@
       </v-col>
 
       <v-col
+        class="py-2"
         cols="12"
         sm="6"
-        class="py-2"
       >
         <p>Multiple</p>
 
         <v-btn-toggle
           v-model="toggle_multiple"
-          background-color="primary"
-          dark
+          color="primary"
           multiple
         >
           <v-btn>
@@ -59,9 +58,9 @@
       </v-col>
 
       <v-col
+        class="py-2"
         cols="12"
         sm="6"
-        class="py-2"
       >
         <p>No Options Selected</p>
 
@@ -84,17 +83,13 @@
       </v-col>
 
       <v-col
+        class="py-2"
         cols="12"
         sm="6"
-        class="py-2"
       >
         <p>Mandatory</p>
 
-        <v-btn-toggle
-          v-model="toggle_one"
-          shaped
-          mandatory
-        >
+        <v-btn-toggle v-model="toggle_one" mandatory>
           <v-btn>
             <v-icon>mdi-format-align-left</v-icon>
           </v-btn>
@@ -114,15 +109,15 @@
       </v-col>
 
       <v-col
-        cols="12"
         class="py-2"
+        cols="12"
       >
         <p>Text Options</p>
 
         <v-btn-toggle
           v-model="text"
-          rounded="0"
           color="deep-purple-accent-3"
+          rounded="0"
           group
         >
           <v-btn value="left">
@@ -144,15 +139,12 @@
       </v-col>
 
       <v-col
-        cols="12"
         class="py-2"
+        cols="12"
       >
         <p>Text &amp; Icon Options</p>
 
-        <v-btn-toggle
-          v-model="icon"
-          borderless
-        >
+        <v-btn-toggle v-model="icon" divided>
           <v-btn value="left">
             <span class="hidden-sm-and-down">Left</span>
 

@@ -1,12 +1,16 @@
 {
   "props": {
-    "disabled": "Disables the expansion-panel content",
-    "readonly": "Makes the expansion-panel content read only.",
-    "value": "Controls the opened/closed state of content",
-    "title": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-expansion-panel.json))"
+    "disabled": "Disables the expansion-panel content.",
+    "readonly": "Makes the expansion panel content read only.",
+    "focusable": "Makes the expansion panel content focusable.",
+    "value": "Controls the opened/closed state of content.",
+    "static": "Remove title size expansion when selected."
   },
   "events": {
-    "change": "Toggles the value of the selected panel",
-    "click": "Mouse click event"
+    "change": "Toggles the value of the selected panel.",
+    "click": "Mouse click event."
+  },
+  "exposed": {
+    "groupItem": "The current expansion panel within the group in `<v-expansion-panels>`."
   }
 }

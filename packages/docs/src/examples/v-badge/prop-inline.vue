@@ -1,13 +1,13 @@
 <template>
   <v-list
-    border
     class="mx-auto"
     max-width="256"
+    border
   >
     <v-list-item
-      link
       prepend-icon="mdi-inbox-arrow-down"
       title="Inbox"
+      link
     >
       <template v-slot:append>
         <v-badge
@@ -19,15 +19,15 @@
     </v-list-item>
 
     <v-list-item
-      link
       prepend-icon="mdi-send"
       title="Sent Mail"
+      link
     ></v-list-item>
 
     <v-list-item
-      link
       prepend-icon="mdi-delete"
       title="Trash"
+      link
     >
       <template v-slot:append>
         <v-badge
@@ -39,9 +39,9 @@
     </v-list-item>
 
     <v-list-item
-      link
       prepend-icon="mdi-alert-circle"
       title="Spam"
+      link
     ></v-list-item>
   </v-list>
 </template>

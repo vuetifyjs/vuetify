@@ -1,5 +1,5 @@
 {
   "props": {
-    "clickable": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-label.json))"
+    "clickable": "Changes the cursor to a pointer when the mouse is over the element."
   }
 }

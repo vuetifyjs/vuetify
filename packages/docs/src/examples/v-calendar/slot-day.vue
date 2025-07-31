@@ -15,8 +15,8 @@
                 <v-sheet
                   v-for="(percent, i) in tracked[date]"
                   :key="i"
-                  :title="category[i]"
                   :color="colors[i]"
+                  :title="category[i]"
                   :width="`${percent}%`"
                   height="100%"
                   tile

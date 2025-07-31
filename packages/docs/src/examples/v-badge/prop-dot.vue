@@ -1,5 +1,5 @@
 <template>
-  <v-toolbar title="Application" color="grey-lighten-3">
+  <v-toolbar color="grey-lighten-3" title="Application">
     <v-btn stacked>
       <v-badge
         color="error"
@@ -13,8 +13,8 @@
 
     <v-btn stacked>
       <v-badge
-        dot
         color="error"
+        dot
       >
         <v-icon icon="mdi-post"></v-icon>
       </v-badge>
@@ -23,8 +23,8 @@
     </v-btn>
 
     <v-btn
-      stacked
       variant="tonal"
+      stacked
     >
       <v-icon icon="mdi-login"></v-icon>
 

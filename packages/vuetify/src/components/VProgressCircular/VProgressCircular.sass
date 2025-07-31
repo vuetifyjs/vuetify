@@ -1,89 +1,91 @@
 @use 'sass:list'
 @use '../../styles/settings'
+@use '../../styles/tools'
 @use './variables' as *
 
-// Elements
-.v-progress-circular
-  align-items: center
-  display: inline-flex
-  justify-content: center
-  position: relative
-  vertical-align: middle
+@include tools.layer('components')
+  // Elements
+  .v-progress-circular
+    align-items: center
+    display: inline-flex
+    justify-content: center
+    position: relative
+    vertical-align: middle
 
-  > svg
-    width: 100%
-    height: 100%
-    margin: auto
-    position: absolute
-    top: 0
-    bottom: 0
-    left: 0
-    right: 0
-    z-index: 0
+    > svg
+      width: 100%
+      height: 100%
+      margin: auto
+      position: absolute
+      top: 0
+      bottom: 0
+      left: 0
+      right: 0
+      z-index: 0
 
-.v-progress-circular__content
-  align-items: center
-  display: flex
-  justify-content: center
+  .v-progress-circular__content
+    align-items: center
+    display: flex
+    justify-content: center
 
-.v-progress-circular__underlay
-  color: $progress-circular-underlay-color
-  stroke: currentColor
-  z-index: 1
-
-.v-progress-circular__overlay
-  stroke: currentColor
-  transition: $progress-circular-overlay-transition
-  z-index: 2
-
-// Modifiers
-.v-progress-circular
-  @each $name, $multiplier in $progress-circular-sizes
-    $size: $progress-circular-size + (settings.$size-scale * $multiplier)
-
-    &--size-#{$name}
-      height: $size
-      width: $size
-
-.v-progress-circular--indeterminate
-  > svg
-    animation: $progress-circular-rotate-animation
-    transform-origin: center center
-    transition: $progress-circular-intermediate-svg-transition
+  .v-progress-circular__underlay
+    color: $progress-circular-underlay-color
+    stroke: currentColor
+    z-index: 1
 
   .v-progress-circular__overlay
-    animation: $progress-circular-rotate-dash, $progress-circular-rotate-animation
-    stroke-dasharray: 25, 200
-    stroke-dashoffset: 0
-    stroke-linecap: round
-    transform-origin: center center
-    transform: $progress-circular-overlay-transform
+    stroke: currentColor
+    transition: $progress-circular-overlay-transition
+    z-index: 2
 
-.v-progress-circular--disable-shrink
-  > svg
-    animation-duration: list.nth($progress-circular-rotate-animation, 2) * .5
+  // Modifiers
+  .v-progress-circular
+    @each $name, $multiplier in $progress-circular-sizes
+      $size: $progress-circular-size + (settings.$size-scale * $multiplier)
 
-  .v-progress-circular__overlay
-    animation: none
+      &--size-#{$name}
+        height: $size
+        width: $size
 
-.v-progress-circular--indeterminate:not(.v-progress-circular--visible)
-  > svg,
-  .v-progress-circular__overlay
-    animation-play-state: paused !important
+  .v-progress-circular--indeterminate
+    > svg
+      animation: $progress-circular-rotate-animation
+      transform-origin: center center
+      transition: $progress-circular-intermediate-svg-transition
 
-@keyframes progress-circular-dash
-  0%
-    stroke-dasharray: 1, 200
-    stroke-dashoffset: 0px
+    .v-progress-circular__overlay
+      animation: $progress-circular-rotate-dash, $progress-circular-rotate-animation
+      stroke-dasharray: 25, 200
+      stroke-dashoffset: 0
+      stroke-linecap: round
+      transform-origin: center center
+      transform: $progress-circular-overlay-transform
 
-  50%
-    stroke-dasharray: 100, 200
-    stroke-dashoffset: -15px
+  .v-progress-circular--disable-shrink
+    > svg
+      animation-duration: list.nth($progress-circular-rotate-animation, 2) * .5
 
-  100%
-    stroke-dasharray: 100, 200
-    stroke-dashoffset: -124px
+    .v-progress-circular__overlay
+      animation: none
 
-@keyframes progress-circular-rotate
-  100%
-    transform: rotate(270deg)
+  .v-progress-circular--indeterminate:not(.v-progress-circular--visible)
+    > svg,
+    .v-progress-circular__overlay
+      animation-play-state: paused !important
+
+  @keyframes progress-circular-dash
+    0%
+      stroke-dasharray: 1, 200
+      stroke-dashoffset: 0px
+
+    50%
+      stroke-dasharray: 100, 200
+      stroke-dashoffset: -15px
+
+    100%
+      stroke-dasharray: 100, 200
+      stroke-dashoffset: -124px
+
+  @keyframes progress-circular-rotate
+    100%
+      transform: rotate(270deg)

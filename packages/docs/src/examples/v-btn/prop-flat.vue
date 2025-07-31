@@ -5,15 +5,15 @@
     </v-btn>
 
     <v-btn
-      variant="flat"
       color="secondary"
+      variant="flat"
     >
       Secondary
     </v-btn>
 
     <v-btn
-      variant="flat"
       color="error"
+      variant="flat"
     >
       Error
     </v-btn>

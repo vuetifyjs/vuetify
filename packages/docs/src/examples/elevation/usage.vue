@@ -7,9 +7,9 @@
         cols="auto"
       >
         <v-card
+          :class="['d-flex justify-center align-center bg-secondary', `elevation-${n}`]"
           height="100"
           width="100"
-          :class="['d-flex justify-center align-center bg-secondary', `elevation-${n}`]"
         >
           <div>{{ n }}</div>
         </v-card>

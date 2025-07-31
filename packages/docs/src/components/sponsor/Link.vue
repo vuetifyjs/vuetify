@@ -5,7 +5,7 @@
     :to="rpath('/introduction/sponsors-and-backers/')"
     color="primary"
     variant="outlined"
-    @click="onClick"
+    @click="sweClick('button', 'sponsors', name)"
   >
     <span
       class="text-capitalize font-weight-regular"
@@ -15,29 +15,10 @@
 </template>
 
 <script setup>
-  // Composables
-  import { useGtag } from 'vue-gtag-next'
-  import { useI18n } from 'vue-i18n'
-  import { useRoute } from 'vue-router'
-
-  // Utilities
-  import { rpath } from '@/util/routes'
-
   defineProps({
     size: String,
   })
 
-  const { event } = useGtag()
   const { name } = useRoute()
   const { t } = useI18n()
-
-  const onClick = () =>
-
-    function onClick () {
-      event('click', {
-        event_category: 'toolbar',
-        event_label: 'sponsors',
-        value: name,
-      })
-    }
 </script>

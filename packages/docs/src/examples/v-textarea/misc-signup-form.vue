@@ -31,34 +31,34 @@
       <v-text-field
         v-model="password"
         :rules="[rules.password, rules.length(6)]"
-        variant="filled"
         color="deep-purple"
         counter="6"
         label="Password"
         style="min-height: 96px"
         type="password"
+        variant="filled"
       ></v-text-field>
       <v-text-field
         v-model="phone"
-        variant="filled"
         color="deep-purple"
         label="Phone number"
+        variant="filled"
       ></v-text-field>
       <v-text-field
         v-model="email"
         :rules="[rules.email]"
-        variant="filled"
         color="deep-purple"
         label="Email address"
         type="email"
+        variant="filled"
       ></v-text-field>
       <v-textarea
         v-model="bio"
-        auto-grow
-        variant="filled"
         color="deep-purple"
         label="Bio"
         rows="1"
+        variant="filled"
+        auto-grow
       ></v-textarea>
       <v-checkbox
         v-model="agreement"

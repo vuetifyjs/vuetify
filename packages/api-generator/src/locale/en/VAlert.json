@@ -1,7 +1,7 @@
 {
   "props": {
     "border": "Adds a colored border to the component.",
-    "borderColor": "Specifies the color of the border. Accepts any color value.",
+    "borderColor": "Specifies the color of the border. Only used in combination with **border** prop. Accepts any color value.",
     "closable": "Adds a close icon that can hide the alert.",
     "closeIcon": "Change the default icon used for **closable** alerts.",
     "closeLabel": "Text used for *aria-label* on **closable** alerts. Can also be customized globally in [Internationalization](/customization/internationalization).",
@@ -12,10 +12,10 @@
     "maxWidth": "Sets the maximum width for the component.",
     "minHeight": "Sets the minimum height for the component.",
     "minWidth": "Sets the minimum width for the component.",
+    "modelValue": "Controls whether the component is visible or hidden.",
     "prominent": "Displays a larger vertically centered icon to draw more attention.",
     "tile": "Removes the component's border-radius.",
     "type": "Create a specialized alert that uses a contextual color and has a pre-defined icon.",
-    "model-value": "Controls whether the component is visible or hidden.",
     "width": "Sets the width for the component."
   },
   "slots": {

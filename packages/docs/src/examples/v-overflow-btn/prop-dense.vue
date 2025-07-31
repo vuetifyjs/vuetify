@@ -1,8 +1,8 @@
 <template>
   <v-container>
     <v-overflow-btn
-      class="my-2"
       :items="items"
+      class="my-2"
       label="Overflow Btn - Dense"
       dense
     ></v-overflow-btn>

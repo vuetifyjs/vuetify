@@ -13,6 +13,7 @@ import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeGroupProps, useGroup } from '@/composables/group'
 import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
+import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { useSsrBoot } from '@/composables/ssrBoot'
 import { makeTagProps } from '@/composables/tag'
@@ -22,7 +23,11 @@ import { makeThemeProps, useTheme } from '@/composables/theme'
 import { computed, toRef } from 'vue'
 import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
+// Types
+import type { GenericProps } from '@/util'
+
 export const makeVBottomNavigationProps = propsFactory({
+  baseColor: String,
   bgColor: String,
   color: String,
   grow: Boolean,
@@ -46,26 +51,30 @@ export const makeVBottomNavigationProps = propsFactory({
   ...makeRoundedProps(),
   ...makeLayoutItemProps({ name: 'bottom-navigation' }),
   ...makeTagProps({ tag: 'header' }),
-  ...makeGroupProps({
-    modelValue: true,
-    selectedClass: 'v-btn--selected',
-  }),
+  ...makeGroupProps({ selectedClass: 'v-btn--selected' }),
   ...makeThemeProps(),
 }, 'VBottomNavigation')
 
-export const VBottomNavigation = genericComponent()({
+export const VBottomNavigation = genericComponent<new <T>(
+  props: {
+    modelValue?: T
+    'onUpdate:modelValue'?: (value: T) => void
+  },
+  slots: { default: never },
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VBottomNavigation',
 
   props: makeVBottomNavigationProps(),
 
   emits: {
+    'update:active': (value: any) => true,
     'update:modelValue': (value: any) => true,
   },
 
   setup (props, { slots }) {
     const { themeClasses } = useTheme()
     const { borderClasses } = useBorder(props)
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'bgColor'))
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.bgColor)
     const { densityClasses } = useDensity(props)
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props)
@@ -75,24 +84,25 @@ export const VBottomNavigation = genericComponent()({
       (props.density === 'comfortable' ? 8 : 0) -
       (props.density === 'compact' ? 16 : 0)
     ))
-    const isActive = toRef(props, 'active')
+    const isActive = useProxiedModel(props, 'active', props.active)
     const { layoutItemStyles } = useLayoutItem({
       id: props.name,
       order: computed(() => parseInt(props.order, 10)),
-      position: computed(() => 'bottom'),
-      layoutSize: computed(() => isActive.value ? height.value : 0),
+      position: toRef(() => 'bottom'),
+      layoutSize: toRef(() => isActive.value ? height.value : 0),
       elementSize: height,
       active: isActive,
-      absolute: toRef(props, 'absolute'),
+      absolute: toRef(() => props.absolute),
     })
 
     useGroup(props, VBtnToggleSymbol)
 
     provideDefaults({
       VBtn: {
-        color: toRef(props, 'color'),
-        density: toRef(props, 'density'),
-        stacked: computed(() => props.mode !== 'horizontal'),
+        baseColor: toRef(() => props.baseColor),
+        color: toRef(() => props.color),
+        density: toRef(() => props.density),
+        stacked: toRef(() => props.mode !== 'horizontal'),
         variant: 'text',
       },
     }, { scoped: true })
@@ -120,7 +130,6 @@ export const VBottomNavigation = genericComponent()({
             layoutItemStyles.value,
             {
               height: convertToUnit(height.value),
-              transform: `translateY(${convertToUnit(!isActive.value ? 100 : 0, '%')})`,
             },
             ssrBootStyles.value,
             props.style,

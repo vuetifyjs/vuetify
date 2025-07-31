@@ -1,24 +1,16 @@
 <template>
-  <v-row justify="space-around">
-    <v-col cols="auto">
-      <v-sheet
-        elevation="10"
-        class="py-4 px-1"
-      >
-        <v-chip-group
-          mandatory
-          selected-class="text-primary"
-        >
-          <v-chip
-            v-for="tag in tags"
-            :key="tag"
-          >
-            {{ tag }}
-          </v-chip>
-        </v-chip-group>
-      </v-sheet>
-    </v-col>
-  </v-row>
+  <v-sheet class="py-4 px-1">
+    <v-chip-group
+      selected-class="text-primary"
+      mandatory
+    >
+      <v-chip
+        v-for="tag in tags"
+        :key="tag"
+        :text="tag"
+      ></v-chip>
+    </v-chip-group>
+  </v-sheet>
 </template>
 
 <script setup>

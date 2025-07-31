@@ -1,27 +1,28 @@
 @use '../../styles/tools'
 @use './variables' as *
 
-.v-main
-  flex: 1 0 auto
-  max-width: 100%
-  transition: $main-transition
-  padding-left: var(--v-layout-left)
-  padding-right: var(--v-layout-right)
-  padding-top: var(--v-layout-top)
-  padding-bottom: var(--v-layout-bottom)
-
-  &__scroller
+@include tools.layer('components')
+  .v-main
+    flex: 1 0 auto
     max-width: 100%
-    position: relative
+    transition: $main-transition
+    padding-left: var(--v-layout-left)
+    padding-right: var(--v-layout-right)
+    padding-top: var(--v-layout-top)
+    padding-bottom: var(--v-layout-bottom)
 
-  &--scrollable
-    display: flex
-    @include tools.absolute()
+    &__scroller
+      max-width: 100%
+      position: relative
 
-    & > .v-main__scroller
-      flex: 1 1 auto
-      overflow-y: auto
-      --v-layout-left: 0px
-      --v-layout-right: 0px
-      --v-layout-top: 0px
-      --v-layout-bottom: 0px
+    &--scrollable
+      display: flex
+      @include tools.absolute()
+
+      & > .v-main__scroller
+        flex: 1 1 auto
+        overflow-y: auto
+        --v-layout-left: 0px
+        --v-layout-right: 0px
+        --v-layout-top: 0px
+        --v-layout-bottom: 0px

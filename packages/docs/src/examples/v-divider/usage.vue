@@ -1,29 +1,25 @@
 <template>
-  <usage-example
+  <ExamplesUsageExample
     v-model="model"
     :code="code"
-    :options="options"
     :name="name"
+    :options="options"
   >
-    <div style="height: 200px;" class="d-flex align-center justify-center">
+    <div class="d-flex align-center justify-center" style="height: 200px;">
       <v-divider v-bind="props"></v-divider>
     </div>
 
     <template v-slot:configuration>
-      <v-slider v-model="thickness" min="1" max="20" label="Thickness"></v-slider>
+      <v-slider v-model="thickness" label="Thickness" max="20" min="1"></v-slider>
 
-      <v-select v-model="opacity" label="Opacity" :items="opacities"></v-select>
+      <v-select v-model="opacity" :items="opacities" label="Opacity"></v-select>
 
-      <v-select v-model="color" label="Color" :items="colors"></v-select>
+      <v-select v-model="color" :items="colors" label="Color"></v-select>
     </template>
-  </usage-example>
+  </ExamplesUsageExample>
 </template>
 
 <script setup>
-  // Utilities
-  import { computed, ref } from 'vue'
-  import { propsToString } from '@/util/helpers'
-
   const name = 'v-divider'
   const model = ref('default')
   const color = ref()

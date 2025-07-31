@@ -1,5 +1,5 @@
 <template>
-  <usage-example
+  <ExamplesUsageExample
     v-model="model"
     :code="code"
     :name="name"
@@ -14,16 +14,12 @@
       <v-checkbox v-model="focus" label="Focus all"></v-checkbox>
       <v-checkbox v-model="disabled" label="Disabled"></v-checkbox>
       <v-checkbox v-model="loading" label="Loading"></v-checkbox>
-      <v-slider v-model="length" min="4" max="8" step="1" label="Length"></v-slider>
+      <v-slider v-model="length" label="Length" max="8" min="4" step="1"></v-slider>
     </template>
-  </usage-example>
+  </ExamplesUsageExample>
 </template>
 
 <script setup>
-  // Utilities
-  import { computed, ref } from 'vue'
-  import { propsToString } from '@/util/helpers'
-
   const name = 'v-stepper'
   const model = ref('default')
   const options = ['solo', 'solo-filled', 'underlined']

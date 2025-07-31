@@ -1,10 +1,10 @@
 <template>
   <v-container fluid>
     <v-textarea
-      counter
-      label="Text"
-      :rules="rules"
       :model-value="value"
+      :rules="rules"
+      label="Text"
+      counter
     ></v-textarea>
   </v-container>
 </template>

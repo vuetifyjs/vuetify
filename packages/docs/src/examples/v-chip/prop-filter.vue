@@ -1,30 +1,30 @@
 <template>
   <v-row
-    justify="space-around"
     align="center"
+    justify="space-around"
   >
     <v-chip
-      class="ma-2"
       :model-value="active"
+      class="ma-2"
       filter
     >
       I'm v-chip
     </v-chip>
 
     <v-chip
-      class="ma-2"
       :model-value="active"
-      filter
+      class="ma-2"
       filter-icon="mdi-plus"
+      filter
     >
       I'm v-chip
     </v-chip>
 
     <v-chip
-      class="ma-2"
       :model-value="active"
-      filter
+      class="ma-2"
       filter-icon="mdi-minus"
+      filter
     >
       I'm v-chip
     </v-chip>

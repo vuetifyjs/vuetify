@@ -1,22 +1,24 @@
 <template>
-  <v-app
-    :theme="theme"
-    class="rounded-lg border"
-    style="max-height: 200px;"
-  >
-    <v-app-bar>
-      <v-spacer></v-spacer>
+  <v-responsive class="border rounded" max-height="300">
+    <v-app :theme="theme">
+      <v-app-bar class="px-3">
+        <v-spacer></v-spacer>
 
-      <v-btn
-        :prepend-icon="theme === 'light' ? 'mdi-weather-sunny' : 'mdi-weather-night'"
-        @click="onClick"
-      >Toggle Theme</v-btn>
-    </v-app-bar>
+        <v-btn
+          :prepend-icon="theme === 'light' ? 'mdi-weather-sunny' : 'mdi-weather-night'"
+          text="Toggle Theme"
+          slim
+          @click="onClick"
+        ></v-btn>
+      </v-app-bar>
 
-    <v-main>
-      <v-container class="text-center">Content area</v-container>
-    </v-main>
-  </v-app>
+      <v-main>
+        <v-container>
+          <h1>Main Content</h1>
+        </v-container>
+      </v-main>
+    </v-app>
+  </v-responsive>
 </template>
 
 <script setup>

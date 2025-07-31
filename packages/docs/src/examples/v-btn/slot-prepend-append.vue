@@ -1,8 +1,8 @@
 <template>
   <div class="text-center">
     <v-btn
-      prepend-icon="mdi-check-circle"
       append-icon="mdi-account-circle"
+      prepend-icon="mdi-check-circle"
     >
       <template v-slot:prepend>
         <v-icon color="success"></v-icon>

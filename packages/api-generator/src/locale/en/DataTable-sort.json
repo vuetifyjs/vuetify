@@ -1,0 +1,8 @@
+{
+  "props": {
+    "customKeySort": "Function used on specific keys within the item object. `customSort` is skipped for columns with `customKeySort` specified.",
+    "mustSort": "Forces sorting on the column(s).",
+    "sortBy": "Array of column keys and sort orders that determines the sort order of the table."
+
+  }
+}

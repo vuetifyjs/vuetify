@@ -9,8 +9,8 @@
         open-delay="200"
       >
         <v-card
-          :elevation="isHovering ? 16 : 2"
           :class="{ 'on-hover': isHovering }"
+          :elevation="isHovering ? 16 : 2"
           class="mx-auto"
           height="350"
           max-width="350"
@@ -32,8 +32,8 @@
         close-delay="200"
       >
         <v-card
-          :elevation="isHovering ? 16 : 2"
           :class="{ 'on-hover': isHovering }"
+          :elevation="isHovering ? 16 : 2"
           class="mx-auto"
           height="350"
           max-width="350"

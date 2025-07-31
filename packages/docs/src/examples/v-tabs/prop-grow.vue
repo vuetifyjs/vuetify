@@ -8,21 +8,19 @@
 
     <v-tabs
       v-model="tab"
-      bg-color="transparent"
       color="basil"
       grow
     >
       <v-tab
         v-for="item in items"
         :key="item"
+        :text="item"
         :value="item"
-      >
-        {{ item }}
-      </v-tab>
+      ></v-tab>
     </v-tabs>
 
-    <v-window v-model="tab">
-      <v-window-item
+    <v-tabs-window v-model="tab">
+      <v-tabs-window-item
         v-for="item in items"
         :key="item"
         :value="item"
@@ -33,8 +31,8 @@
         >
           <v-card-text>{{ text }}</v-card-text>
         </v-card>
-      </v-window-item>
-    </v-window>
+      </v-tabs-window-item>
+    </v-tabs-window>
   </v-card>
 </template>
 
@@ -70,6 +68,7 @@
 /* Helper classes */
 .bg-basil {
   background-color: #FFFBE6 !important;
+  color: #000 !important;
 }
 .text-basil {
   color: #356859 !important;

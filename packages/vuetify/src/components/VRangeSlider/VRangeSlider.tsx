@@ -10,6 +10,7 @@ import { VSliderTrack } from '@/components/VSlider/VSliderTrack'
 
 // Composables
 import { makeFocusProps, useFocus } from '@/composables/focus'
+import { forwardRefs } from '@/composables/forwardRefs'
 import { useRtl } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
@@ -86,6 +87,7 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
       onSliderTouchstart,
       position,
       trackContainerRef,
+      readonly,
     } = useSlider({
       props,
       steps,
@@ -125,7 +127,7 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
     const trackStop = computed(() => position(model.value[1]))
 
     useRender(() => {
-      const [inputProps, _] = VInput.filterProps(props)
+      const inputProps = VInput.filterProps(props)
       const hasPrepend = !!(props.label || slots.label || slots.prepend)
 
       return (
@@ -151,14 +153,15 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
             ...slots,
             prepend: hasPrepend ? slotProps => (
               <>
-                { slots.label?.(slotProps) ?? props.label
-                  ? (
-                    <VLabel
-                      class="v-slider__label"
-                      text={ props.label }
-                    />
-                  ) : undefined
-                }
+                { slots.label?.(slotProps) ?? (
+                  props.label
+                    ? (
+                      <VLabel
+                        class="v-slider__label"
+                        text={ props.label }
+                      />
+                    ) : undefined
+                )}
 
                 { slots.prepend?.(slotProps) }
               </>
@@ -166,8 +169,8 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
             default: ({ id, messagesId }) => (
               <div
                 class="v-slider__container"
-                onMousedown={ onSliderMousedown }
-                onTouchstartPassive={ onSliderTouchstart }
+                onMousedown={ !readonly.value ? onSliderMousedown : undefined }
+                onTouchstartPassive={ !readonly.value ? onSliderTouchstart : undefined }
               >
                 <input
                   id={ `${id.value}_start` }
@@ -210,6 +213,7 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
                     // and they are both at minimum value
                     // but only if focused from outside.
                     if (
+                      max.value !== min.value &&
                       model.value[0] === model.value[1] &&
                       model.value[1] === min.value &&
                       e.relatedTarget !== stopThumbRef.value?.$el
@@ -245,6 +249,7 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
                     // and they are both at maximum value
                     // but only if focused from outside.
                     if (
+                      max.value !== min.value &&
                       model.value[0] === model.value[1] &&
                       model.value[0] === max.value &&
                       e.relatedTarget !== startThumbRef.value?.$el
@@ -271,7 +276,9 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
       )
     })
 
-    return {}
+    return forwardRefs({
+      focus: () => startThumbRef.value?.$el.focus(),
+    }, inputRef)
   },
 })
 

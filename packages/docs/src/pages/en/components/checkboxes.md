@@ -8,23 +8,32 @@ related:
   - /components/switches
   - /components/forms
   - /components/text-fields
+features:
+  label: 'C: VCheckbox'
+  report: true
+  github: /components/VCheckbox/
+  spec: https://m2.material.io/components/checkboxes
 ---
 
 # Checkboxes
 
-The `v-checkbox` component provides users the ability to choose between two distinct values. These are very similar to a switch and can be used in complex forms and checklists. A simpler version, `v-simple-checkbox` is used primarily as a lightweight alternative in data-table components to select rows or display inline boolean data.
+The `v-checkbox` component provides users the ability to choose between two distinct values. These are very similar to a switch and can be used in complex forms and checklists.
 
-<!-- ![checkbox Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-checkbox/v-checkbox-entry.png) -->
-
----
+<PageFeatures />
 
 ## Usage
 
 A `v-checkbox` in its simplest form provides a toggle between 2 values.
 
-<usage name="v-checkbox" />
+<ExamplesUsage name="v-checkbox" />
 
-<entry />
+<PromotedEntry />
+
+::: tip
+
+A simpler version, [`v-checkbox-btn`](/components/data-tables/basics/#simple-checkbox) is used primarily as a lightweight alternative in data-table components to select rows or display inline boolean data.
+
+:::
 
 ## API
 
@@ -32,7 +41,7 @@ A `v-checkbox` in its simplest form provides a toggle between 2 values.
 | - | - |
 | [v-checkbox](/api/v-checkbox/) | Primary component |
 
-<api-inline hide-links />
+<ApiInline hide-links />
 
 ## Examples
 
@@ -42,25 +51,25 @@ A `v-checkbox` in its simplest form provides a toggle between 2 values.
 
 Checkboxes can be colored by using any of the builtin colors and contextual names using the **color** prop.
 
-<example file="v-checkbox/prop-colors" />
+<ExamplesExample file="v-checkbox/prop-colors" />
 
 #### Model as array
 
 Multiple `v-checkbox`'s can share the same **v-model** by using an array.
 
-<example file="v-checkbox/prop-model-as-array" />
+<ExamplesExample file="v-checkbox/prop-model-as-array" />
 
 #### Model as boolean
 
 A single `v-checkbox` will have a boolean value as its **value**.
 
-<example file="v-checkbox/prop-model-as-boolean" />
+<ExamplesExample file="v-checkbox/prop-model-as-boolean" />
 
 #### States
 
 `v-checkbox` can have different states such as **default**, **disabled**, and **indeterminate**.
 
-<example file="v-checkbox/prop-states" />
+<ExamplesExample file="v-checkbox/prop-states" />
 
 ### Slots
 
@@ -68,7 +77,7 @@ A single `v-checkbox` will have a boolean value as its **value**.
 
 Checkbox labels can be defined in `label` slot - that will allow to use HTML content.
 
-<example file="v-checkbox/slot-label" />
+<ExamplesExample file="v-checkbox/slot-label" />
 
 ### Misc
 
@@ -78,4 +87,4 @@ If you need to place checkboxes in line with other components, you can use the `
 
 This component renders just checkbox, without the trapping of a form input such as validation, a label, and messages.
 
-<example file="v-checkbox/misc-inline-textfield" />
+<ExamplesExample file="v-checkbox/misc-inline-textfield" />

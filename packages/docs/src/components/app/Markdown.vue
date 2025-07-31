@@ -6,15 +6,27 @@
 
 <script setup>
   // Utilities
-  import { computed } from 'vue'
-  import { configureMarkdown } from '@/util/markdown-it'
   import MarkdownIt from 'markdown-it'
+  import { compile } from '@vue/compiler-dom'
+  import * as vue from 'vue'
+
+  import { VCode } from 'vuetify/components/VCode'
+  import { VWindowItem } from 'vuetify/components/VWindow'
+  import { VTab } from 'vuetify/components/VTabs'
+  import AppMarkup from '@/components/app/Markup.vue'
+  import AppFigure from '@/components/app/Figure.vue'
+  import AppDivider from '@/components/app/Divider.vue'
+  import AppHeading from '@/components/app/Heading.vue'
+  import AppLink from '@/components/app/Link.vue'
+  import AppTable from '@/components/app/Table.vue'
+  import Alert from '@/components/Alert.vue'
+  import DocTabs from '@/components/doc/Tabs.vue'
 
   const md = configureMarkdown(MarkdownIt({
     html: true,
     linkify: true,
     typographer: true,
-  }))
+  }), { headerSections: false })
 
   md.core.ruler.after('linkify', 'gh_links', state => {
     const blockTokens = state.tokens
@@ -111,5 +123,25 @@
   })
 
   const markdown = computed(() => md.render(props.content, {}))
-  const template = computed(() => ({ template: markdown.value }))
+  const template = computed(() => ({
+    // These components are all used in markdown-it-rules
+    components: {
+      VCode,
+      VWindowItem,
+      VTab,
+      AppMarkup,
+      AppFigure,
+      AppDivider,
+      AppHeading,
+      AppLink,
+      AppTable,
+      Alert,
+      DocTabs,
+    },
+    // eslint-disable-next-line no-new-func
+    render: new Function(
+      'Vue',
+      compile(markdown.value, { hoistStatic: true }).code
+    )(vue),
+  }))
 </script>

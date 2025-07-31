@@ -3,12 +3,12 @@
     "dark": "Applies the dark theme variant to the component. You can find more information on the Material Design documentation for [dark themes](https://material.io/design/color/dark-theme.html).",
     "indeterminate": "Sets an indeterminate state for the simple checkbox.",
     "indeterminateIcon": "The icon used when in an indeterminate state.",
-    "light": "Applies the light theme variant to the component.",
     "falseIcon": "The icon used when inactive.",
+    "light": "Applies the light theme variant to the component.",
     "trueIcon": "The icon used when active.",
     "value": "A boolean value that represents whether the simple checkbox is checked."
   },
   "events": {
-    "click": "Event that is emitted when the component is clicked"
+    "click": "Event that is emitted when the component is clicked."
   }
 }

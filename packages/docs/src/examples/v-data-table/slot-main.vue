@@ -8,14 +8,14 @@
     ></v-select>
     <v-data-table
       :headers="headerArray"
-      :items="itemsArray"
-      :search="search"
       :hide-default-header="hideHeaders"
-      :show-select="showSelect"
+      :items="itemsArray"
       :loading="isLoading"
-      hide-default-footer
-      item-key="name"
+      :search="search"
+      :show-select="showSelect"
       class="elevation-1"
+      item-key="name"
+      hide-default-footer
     >
       <template
         v-if="isEnabled('top')"
@@ -25,8 +25,8 @@
       </template>
 
       <template
-        v-if="isEnabled('column.data-table-select')"
-        v-slot:column.data-table-select="{ on, props }"
+        v-if="isEnabled('header.data-table-select')"
+        v-slot:header.data-table-select="{ on, props }"
       >
         <v-checkbox-btn
           color="purple"
@@ -53,8 +53,8 @@
         v-slot:progress
       >
         <v-progress-linear
-          color="purple"
           :height="10"
+          color="purple"
           indeterminate
         ></v-progress-linear>
       </template>
@@ -64,17 +64,17 @@
         v-slot:item.data-table-select="{ isSelected, select }"
       >
         <v-checkbox-btn
-          color="green"
           :value="isSelected"
+          color="green"
           @input="select($event)"
         ></v-checkbox-btn>
       </template>
 
       <template
         v-if="isEnabled('item.<name>')"
-        v-slot:item.name="{ item }"
+        v-slot:item.name="{ value }"
       >
-        {{ item.name.toUpperCase() }}
+        {{ value.toUpperCase() }}
       </template>
 
       <template
@@ -95,9 +95,9 @@
         <tbody>
           <tr
             v-for="item in items"
-            :key="item.name"
+            :key="item.raw.name"
           >
-            <td>{{ item.name }}</td>
+            <td>{{ item.raw.name }}</td>
             <td>CONTENT</td>
             <td>CONTENT</td>
             <td>CONTENT</td>

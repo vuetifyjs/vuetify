@@ -1,0 +1,7 @@
+{
+  "props": {
+    "expanded": "Whether the item is expanded or not.",
+    "expandOnClick": "Expands item when the row is clicked.",
+    "showExpand": "Shows the expand icon."
+  }
+}

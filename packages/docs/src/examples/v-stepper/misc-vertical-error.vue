@@ -12,8 +12,8 @@
 
     <v-stepper-content step="1">
       <v-card
-        color="grey-lighten-1"
         class="mb-12"
+        color="grey-lighten-1"
         height="200px"
       ></v-card>
       <v-btn
@@ -36,8 +36,8 @@
 
     <v-stepper-content step="2">
       <v-card
-        color="grey-lighten-1"
         class="mb-12"
+        color="grey-lighten-1"
         height="200px"
       ></v-card>
       <v-btn
@@ -61,8 +61,8 @@
 
     <v-stepper-content step="3">
       <v-card
-        color="grey-lighten-1"
         class="mb-12"
+        color="grey-lighten-1"
         height="200px"
       ></v-card>
       <v-btn
@@ -82,8 +82,8 @@
 
     <v-stepper-content step="4">
       <v-card
-        color="grey-lighten-1"
         class="mb-12"
+        color="grey-lighten-1"
         height="200px"
       ></v-card>
       <v-btn
