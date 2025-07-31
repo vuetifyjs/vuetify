@@ -6,6 +6,7 @@ import {
   deceleratedEasing,
   genericComponent,
   nullifyTransforms,
+  PREFERS_REDUCED_MOTION,
   propsFactory,
   standardEasing,
 } from '@/util'
@@ -40,7 +41,7 @@ export const VDialogTransition = genericComponent()({
         const { x, y, sx, sy, speed } = dimensions
         saved.set(el, dimensions)
 
-        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        if (PREFERS_REDUCED_MOTION()) {
           animate(el, [
             { opacity: 0 },
             {},
@@ -91,7 +92,7 @@ export const VDialogTransition = genericComponent()({
         }
         const { x, y, sx, sy, speed } = dimensions
 
-        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        if (PREFERS_REDUCED_MOTION()) {
           animate(el, [
             {},
             { opacity: 0 },
