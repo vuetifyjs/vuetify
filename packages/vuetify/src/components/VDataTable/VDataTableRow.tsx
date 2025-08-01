@@ -131,9 +131,13 @@ export const VDataTableRow = genericComponent<new <T>(
             })
             : column.cellProps
 
+          const noPadding = column.key === 'data-table-select' || column.key === 'data-table-expand'
+          const isEmpty = column.key === 'data-table-group' && column.width === 0 && !column.title
+
           return (
             <VDataTableColumn
               align={ column.align }
+              indent={ column.intent }
               class={{
                 'v-data-table__td--expanded-row': column.key === 'data-table-expand',
                 'v-data-table__td--select-row': column.key === 'data-table-select',
@@ -144,7 +148,8 @@ export const VDataTableRow = genericComponent<new <T>(
               lastFixed={ column.lastFixed }
               firstFixedEnd={ column.firstFixedEnd }
               maxWidth={ !mobile.value ? column.maxWidth : undefined }
-              noPadding={ column.key === 'data-table-select' || column.key === 'data-table-expand' }
+              noPadding={ noPadding }
+              empty={ isEmpty }
               nowrap={ column.nowrap }
               width={ !mobile.value ? column.width : undefined }
               { ...cellProps }
