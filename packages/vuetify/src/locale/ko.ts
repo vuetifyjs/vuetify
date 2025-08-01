@@ -85,6 +85,9 @@ export default {
     am: '오전',
     pm: '오후',
     title: '시간을 선택하세요',
+    hour: 'Hour',
+    minute: 'Minute',
+    second: 'Second',
   },
   pagination: {
     ariaLabel: {
