@@ -2,15 +2,19 @@
 import './VEditor.sass'
 
 // Components
-import { VBtn } from '@/components/VBtn/VBtn'
+import { VBtn } from '@/components/VBtn'
+import { VBtnToggle } from '@/components/VBtnToggle/VBtnToggle'
+import { VCard } from '@/components/VCard/VCard'
 import { makeVFieldProps, VField } from '@/components/VField/VField'
+import { VIcon } from '@/components/VIcon'
 import { makeVInputProps, VInput } from '@/components/VInput/VInput'
+import { VMenu } from '@/components/VMenu/VMenu'
 import { VSheet } from '@/components/VSheet/VSheet'
 import { VToolbar } from '@/components/VToolbar/VToolbar'
 
 // Composables
 import { useCaret, useElement, useSelection } from './composables'
-import { FormatCategory, formats, Formats, useFormatter } from './composables/formatter'
+import { alignmentFormats, FormatCategory, Formats, generalFormats, headingFormats, useFormatter } from './composables/formatter'
 import { useFocus } from '@/composables/focus'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { useProxiedModel } from '@/composables/proxiedModel'
@@ -111,7 +115,10 @@ export const VEditor = genericComponent<VEditorSlots>()({
     ))
     const isFormatActive = computed(() => (tag: string) => activeFormats.value.has(tag))
     const isPlainOrUnderlined = computed(() => ['plain', 'underlined'].includes(props.variant))
-    const displayedFormats = computed(() => formats.filter(format => props.formats.includes(format.name)))
+
+    const displayedGeneralFormats = computed(() => generalFormats.filter(format => props.formats.includes(format.name)))
+    const displayedHeadingFormats = computed(() => headingFormats.filter(format => props.formats.includes(format.name)))
+    const displayedAlignmentFormats = computed(() => alignmentFormats.filter(format => props.formats.includes(format.name)))
 
     function onMouseUp () {
       updateActiveFormats()
@@ -167,17 +174,17 @@ export const VEditor = genericComponent<VEditorSlots>()({
         switch (e.key.toLowerCase()) {
           case 'b':
             e.preventDefault()
-            const boldFormat = formats.find(f => f.name === Formats.Bold)
+            const boldFormat = displayedGeneralFormats.value.find(f => f.name === Formats.Bold)
             if (boldFormat) applyFormat(boldFormat)
             break
           case 'i':
             e.preventDefault()
-            const italicFormat = formats.find(f => f.name === Formats.Italic)
+            const italicFormat = displayedGeneralFormats.value.find(f => f.name === Formats.Italic)
             if (italicFormat) applyFormat(italicFormat)
             break
           case 'u':
             e.preventDefault()
-            const underlineFormat = formats.find(f => f.name === Formats.Underline)
+            const underlineFormat = displayedGeneralFormats.value.find(f => f.name === Formats.Underline)
             if (underlineFormat) applyFormat(underlineFormat)
             break
         }
@@ -200,12 +207,12 @@ export const VEditor = genericComponent<VEditorSlots>()({
         return
       }
 
-      const currentBlockElement = editorElement.getCurrentBlock() || editorRef.value
+      const currentLine = editorElement.getCurrentBlock() || editorRef.value
 
       // Custom behavior is needed for cross browser compatibility
-      if (isAtLineEnd(currentBlockElement)) {
+      if (isAtLineEnd(currentLine)) {
         e.preventDefault()
-        startNewLine(currentBlockElement)
+        startNewLine(currentLine)
         updateModelValue()
       }
     }
@@ -213,12 +220,12 @@ export const VEditor = genericComponent<VEditorSlots>()({
     function onBackspaceKey (e: KeyboardEvent) {
       if (!editorRef.value || selection.hasText()) return
 
-      const currentBlockElement = editorElement.getCurrentBlock() || editorRef.value
+      const currentLine = editorElement.getCurrentBlock() || editorRef.value
 
       // Custom behavior is needed for cross browser compatibility
-      if (isAtLineStart(currentBlockElement) && !isFirstLine(currentBlockElement)) {
+      if (isAtLineStart(currentLine) && !isFirstLine(currentLine)) {
         e.preventDefault()
-        mergeIntoPreviousLine(currentBlockElement)
+        mergeIntoPreviousLine(currentLine)
         updateModelValue()
       }
     }
@@ -240,7 +247,9 @@ export const VEditor = genericComponent<VEditorSlots>()({
 
       const newActiveFormats = new Set<string>()
 
-      formats.forEach((format: Formatter) => {
+      const allDisplayedFormats = [...displayedGeneralFormats.value, ...displayedHeadingFormats.value, ...displayedAlignmentFormats.value]
+
+      allDisplayedFormats.forEach((format: Formatter) => {
         if (formatter.findElementWithFormat(format)) {
           newActiveFormats.add(format.name)
         }
@@ -278,33 +287,33 @@ export const VEditor = genericComponent<VEditorSlots>()({
       return !fragmentAfterCaret
     }
 
-    function startNewLine (currentBlockElement: Element | null) {
+    function startNewLine (currentLine: Element) {
       if (!editorRef.value) return
 
-      const newBlockTag = currentBlockElement?.tagName.toLowerCase() || 'div'
-      const newBlock = document.createElement(newBlockTag)
+      const newLineTag = currentLine?.tagName.toLowerCase() || 'div'
+      const newLine = document.createElement(newLineTag)
 
-      if (!currentBlockElement) {
-        editorRef.value.appendChild(newBlock)
-        caret.insertInto(newBlock)
+      if (currentLine === editorRef.value) {
+        editorRef.value.appendChild(newLine)
+        caret.insertInto(newLine)
       } else {
-        currentBlockElement.parentElement?.insertBefore(newBlock, currentBlockElement.nextSibling)
-        caret.insertInto(newBlock)
+        currentLine.parentElement?.insertBefore(newLine, currentLine.nextSibling)
+        caret.insertInto(newLine)
       }
     }
 
-    function mergeIntoPreviousLine (currentBlockElement: Element) {
-      if (!currentBlockElement) return
+    function mergeIntoPreviousLine (currentLine: Element) {
+      if (!currentLine) return
 
-      const previousSibling = currentBlockElement.previousElementSibling
-      const isPreviousSiblingBlock = previousSibling && window.getComputedStyle(previousSibling).display === 'block'
-      if (isPreviousSiblingBlock) {
-        caret.insertInto(previousSibling)
-        previousSibling.appendChild(currentBlockElement)
+      const previourLine = currentLine.previousElementSibling
+      const isPreviousLineBlock = previourLine && window.getComputedStyle(previourLine).display === 'block'
+      if (isPreviousLineBlock) {
+        caret.insertInto(previourLine)
+        previourLine.appendChild(currentLine)
       }
 
       caret.save()
-      editorElement.unwrap(currentBlockElement)
+      editorElement.unwrap(currentLine)
       caret.restore()
     }
 
@@ -387,16 +396,63 @@ export const VEditor = genericComponent<VEditorSlots>()({
                           {{
                             default: () => (
                               <div class="v-editor__toolbar-items">
-                                { displayedFormats.value.map(format => (
+                                { displayedGeneralFormats.value.map(format => (
                                   <VBtn
-                                    variant="text"
                                     size="small"
+                                    variant="text"
                                     key={ format.name }
                                     icon={ format.icon }
                                     onClick={ () => applyFormat(format) }
                                     color={ isFormatActive.value(format.name) ? 'primary' : undefined }
                                   />
                                 ))}
+
+                                {[displayedHeadingFormats.value, displayedAlignmentFormats.value]
+                                  .map(groupFormats => {
+                                    const activeFormat = groupFormats.find(format => activeFormats.value.has(format.name))
+
+                                    return (
+                                      groupFormats.length ? (
+                                        <VBtn
+                                          icon
+                                          size="small"
+                                          variant="text"
+                                          color={ activeFormat ? 'primary' : undefined }
+                                        >
+                                          <VIcon
+                                            icon={ activeFormat?.icon || groupFormats[0].icon }
+                                          />
+
+                                          <VMenu activator="parent" location="bottom center">
+                                            {{
+                                              default: () => (
+                                                <VCard>
+                                                  <VBtnToggle
+                                                    variant="text"
+                                                    color="primary"
+                                                    density="compact"
+                                                    model-value={ activeFormat?.name }
+                                                  >
+                                                    { groupFormats.map(format => (
+                                                      <VBtn
+                                                        size="small"
+                                                        width="40px"
+                                                        variant="text"
+                                                        value={ format.name }
+                                                        key={ format.name }
+                                                        icon={ format.icon }
+                                                        onClick={ () => applyFormat(format) }
+                                                      />
+                                                    ))}
+                                                  </VBtnToggle>
+                                                </VCard>
+                                              ),
+                                            }}
+                                          </VMenu>
+                                        </VBtn>
+                                      ) : undefined
+                                    )
+                                  })}
                               </div>
                             ),
                           }}

@@ -7,7 +7,7 @@ import { isEmptyNode, wrapByTag } from '../utils'
 import type { Ref } from 'vue'
 
 const zeroWidthSpace = '\u200B'
-const emptyNode = document.createTextNode(zeroWidthSpace)
+const emptyNode = () => document.createTextNode(zeroWidthSpace)
 
 export function useElement (editorRef: Ref<HTMLDivElement | undefined>) {
   const caret = useCaret(editorRef)
@@ -70,7 +70,7 @@ export function useElement (editorRef: Ref<HTMLDivElement | undefined>) {
     return null
   }
 
-  function getRemainingFormats (element: Element, innerContent: Node = emptyNode): Node | null {
+  function getRemainingFormats (element: Element, innerContent: Node = emptyNode()): Node | null {
     const selectionResult = selection.get()
     if (!selectionResult) return null
     const { range } = selectionResult

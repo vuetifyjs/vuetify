@@ -23,10 +23,10 @@ export enum Formats {
   Heading4 = 'heading4',
   Heading5 = 'heading5',
   Heading6 = 'heading6',
-  Center = 'center',
-  Left = 'left',
-  Right = 'right',
-  Justify = 'justify',
+  Center = 'align-center',
+  Left = 'align-left',
+  Right = 'align-right',
+  Justify = 'align-justify',
   Block = 'block',
 }
 
@@ -48,7 +48,7 @@ export const blockFormatter: Formatter = {
   config: { tag: 'div' },
 }
 
-export const formats: Formatter[] = [
+export const generalFormats: Formatter[] = [
   {
     name: Formats.Bold,
     icon: 'mdi-format-bold',
@@ -89,6 +89,9 @@ export const formats: Formatter[] = [
     icon: 'mdi-format-color-highlight',
     config: { tag: 'mark' },
   },
+]
+
+export const headingFormats: Formatter[] = [
   {
     name: Formats.Heading1,
     category: FormatCategory.Heading,
@@ -125,6 +128,9 @@ export const formats: Formatter[] = [
     category: FormatCategory.Heading,
     config: { tag: 'h6' },
   },
+]
+
+export const alignmentFormats: Formatter[] = [
   {
     name: Formats.Left,
     icon: 'mdi-format-align-left',
