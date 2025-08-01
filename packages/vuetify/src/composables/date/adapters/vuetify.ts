@@ -315,17 +315,48 @@ function getMonth (date: Date) {
   return date.getMonth()
 }
 
-function getWeek (date: Date, locale: string, firstDayOfWeek?: number, firstWeekMinSize?: number) {
+function getWeek (date: Date, locale: string, firstDayOfWeek?: number, firstDayOfYear?: number) {
   const weekInfoFromLocale = weekInfo(locale)
   const weekStart = firstDayOfWeek ?? weekInfoFromLocale?.firstDay ?? 0
-  const minWeekSize = firstWeekMinSize ?? weekInfoFromLocale?.firstWeekSize ?? 1
+  const minWeekSize = weekInfoFromLocale?.firstWeekSize ?? 1
+
+  return firstDayOfYear !== undefined
+    ? calculateWeekWithFirstDayOfYear(date, locale, weekStart, firstDayOfYear)
+    : calculateWeekWithMinWeekSize(date, locale, weekStart, minWeekSize)
+}
+
+function calculateWeekWithFirstDayOfYear (date: Date, locale: string, weekStart: number, firstDayOfYear: number) {
+  const firstDayOfYearOffset = (7 + firstDayOfYear - weekStart) % 7
+  const currentWeekStart = startOfWeek(date, locale, weekStart)
+  const currentWeekEnd = addDays(currentWeekStart, 6)
+
+  function yearStartWeekdayOffset (year: number) {
+    return (7 + new Date(year, 0, 1).getDay() - weekStart) % 7
+  }
+
+  let year = getYear(date)
+  if (year < getYear(currentWeekEnd) && yearStartWeekdayOffset(year + 1) <= firstDayOfYearOffset) {
+    year++
+  }
+
+  const yearStart = new Date(year, 0, 1)
+  const offset = yearStartWeekdayOffset(year)
+  const d1w1 = offset <= firstDayOfYearOffset
+    ? addDays(yearStart, -offset)
+    : addDays(yearStart, 7 - offset)
+
+  return 1 + getDiff(endOfDay(date), startOfDay(d1w1), 'weeks')
+}
+
+function calculateWeekWithMinWeekSize (date: Date, locale: string, weekStart: number, minWeekSize: number) {
+  const currentWeekEnd = addDays(startOfWeek(date, locale, weekStart), 6)
+
   function firstWeekSize (year: number) {
     const yearStart = new Date(year, 0, 1)
     return 7 - getDiff(yearStart, startOfWeek(yearStart, locale, weekStart), 'days')
   }
 
   let year = getYear(date)
-  const currentWeekEnd = addDays(startOfWeek(date, locale, weekStart), 6)
   if (year < getYear(currentWeekEnd) && firstWeekSize(year + 1) >= minWeekSize) {
     year++
   }
@@ -335,7 +366,6 @@ function getWeek (date: Date, locale: string, firstDayOfWeek?: number, firstWeek
   const d1w1 = size >= minWeekSize
     ? addDays(yearStart, size - 7)
     : addDays(yearStart, size)
-
   return 1 + getDiff(endOfDay(date), startOfDay(d1w1), 'weeks')
 }
 
@@ -616,9 +646,10 @@ export class VuetifyDateAdapter implements DateAdapter<Date> {
     return getMonth(date)
   }
 
-  getWeek (date: Date, firstDayOfWeek?: number | string, firstWeekMinSize?: number) {
+  getWeek (date: Date, firstDayOfWeek?: number | string, firstDayOfYear?: number | string) {
     const firstDay = firstDayOfWeek !== undefined ? Number(firstDayOfWeek) : undefined
-    return getWeek(date, this.locale, firstDay, firstWeekMinSize)
+    const firstWeekStart = firstDayOfYear !== undefined ? Number(firstDayOfYear) : undefined
+    return getWeek(date, this.locale, firstDay, firstWeekStart)
   }
 
   getDate (date: Date) {
