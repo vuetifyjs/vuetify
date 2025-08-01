@@ -124,6 +124,14 @@ export default {
     notEmpty: 'Odaberite barem jednu vrijednost',
     pattern: 'Nevaljan format',
   },
+  command: {
+    select: 'za odabir',
+    navigate: 'za navigaciju',
+    goBack: 'za povratak',
+    close: 'za zatvaranje',
+    then: 'zatim',
+    placeholder: 'Upišite naredbu ili pretražite...',
+  },
   hotkey: {
     then: 'zatim',
     ctrl: 'Ctrl',
