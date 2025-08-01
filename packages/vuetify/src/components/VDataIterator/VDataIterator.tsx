@@ -52,6 +52,7 @@ type VDataIteratorSlotProps<T> = {
   isGroupOpen: ReturnType<typeof provideGroupBy>['isGroupOpen']
   toggleGroup: ReturnType<typeof provideGroupBy>['toggleGroup']
   items: readonly DataIteratorItem<T>[]
+  itemsCount: number
   groupedItems: readonly (DataIteratorItem<T> | Group<DataIteratorItem<T>>)[]
 }
 
@@ -171,6 +172,7 @@ export const VDataIterator = genericComponent<new <T> (
       isGroupOpen,
       toggleGroup,
       items: paginatedItemsWithoutGroups.value,
+      itemsCount: filteredItems.value.length,
       groupedItems: paginatedItems.value,
     }))
 
