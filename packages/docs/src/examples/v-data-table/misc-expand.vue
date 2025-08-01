@@ -65,9 +65,7 @@
     { width: 150, title: 'Genre', key: 'genre' },
     { width: 100, title: 'Year', key: 'year', align: 'end' },
     { width: 140, title: 'Runtime(min)', key: 'runtime', align: 'end' },
-
-    // optional, to keep it as short as possible
-    { width: 1, key: 'data-table-expand', align: 'end' },
+    { width: 1, key: 'data-table-expand', align: 'end' }, // optional, to keep it as short as possible
   ]
 
   const movies = [
@@ -143,9 +141,7 @@
         { width: 150, title: 'Genre', key: 'genre' },
         { width: 100, title: 'Year', key: 'year', align: 'end' },
         { width: 140, title: 'Runtime(min)', key: 'runtime', align: 'end' },
-
-        // optional, to keep it as short as possible
-        { width: 1, key: 'data-table-expand', align: 'end' },
+        { width: 1, key: 'data-table-expand', align: 'end' }, // optional, to keep it as short as possible
       ],
       movies: [
         {
