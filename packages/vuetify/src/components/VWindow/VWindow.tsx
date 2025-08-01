@@ -16,7 +16,7 @@ import vTouch from '@/directives/touch'
 
 // Utilities
 import { computed, provide, ref, shallowRef, toRef, watch } from 'vue'
-import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
+import { convertToUnit, genericComponent, PREFERS_REDUCED_MOTION, propsFactory, useRender } from '@/util'
 
 // Types
 import type { ComputedRef, InjectionKey, PropType, Ref } from 'vue'
@@ -243,7 +243,7 @@ export const VWindow = genericComponent<new <T>(
         ]}
         style={[
           props.style,
-          props.transitionDuration
+          props.transitionDuration && !PREFERS_REDUCED_MOTION
             ? { '--v-window-transition-duration': convertToUnit(props.transitionDuration, 'ms') }
             : undefined,
         ]}

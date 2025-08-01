@@ -3,6 +3,9 @@
     <div class="mb-1 mt-6">
       <v-code class="bg-purple-darken-2">default, slower</v-code>
     </div>
+    <div class="my-1 reduced-motion-info">
+      <v-code class="bg-red">duration change suppressed - prefers-reduced-motion: reduce</v-code>
+    </div>
     <v-carousel height="200" transition-duration="600">
       <v-carousel-item v-for="(src, i) in items" :key="i" :src="src" cover></v-carousel-item>
     </v-carousel>
@@ -16,6 +19,9 @@
 
     <div class="mb-1 mt-6">
       <v-code class="bg-purple-darken-2">cross-scale (custom)</v-code>
+    </div>
+    <div class="my-1 reduced-motion-info">
+      <v-code class="bg-red">scale suppressed - prefers-reduced-motion: reduce</v-code>
     </div>
     <v-carousel height="200">
       <v-carousel-item
@@ -72,5 +78,23 @@
   .cross-scale-leave-to {
     opacity: 0;
     transform: scale(0.9);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cross-scale-enter-from,
+    .cross-scale-leave-to {
+      transform: none;
+    }
+  }
+</style>
+
+<style scoped>
+  .reduced-motion-info {
+    display: none;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .reduced-motion-info {
+      display: block;
+    }
   }
 </style>
