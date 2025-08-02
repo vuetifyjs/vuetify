@@ -431,7 +431,7 @@ export const VEditor = genericComponent<VEditorSlots>()({
                                                     variant="text"
                                                     color="primary"
                                                     density="compact"
-                                                    model-value={ activeFormat?.name }
+                                                    modelValue={ activeFormat?.name }
                                                   >
                                                     { groupFormats.map(format => (
                                                       <VBtn

@@ -23,16 +23,16 @@
 
 <script setup>
   const content = ref('This is some <b>rich text</b> content with <i>formatting</i>')
-  const availableItems = ['bold', 'italic', 'underline', 'strike-through', 'code', 'subscript', 'superscript', 'quote']
-  const formats = ref(['bold', 'italic', 'underline', 'strike-through', 'code', 'subscript', 'superscript', 'quote'])
+  const availableItems = ['bold', 'italic', 'underline', 'strike-through', 'code', 'heading1', 'heading2', 'heading3', 'heading4', 'heading5', 'heading6', 'subscript', 'superscript', 'quote']
+  const formats = ref(['bold', 'italic', 'underline', 'strike-through', 'code', 'heading1', 'heading2', 'subscript', 'superscript', 'quote'])
 </script>
 
 <script>
   export default {
     data: () => ({
       content: 'This is some <b>rich text</b> content with <i>formatting</i>',
-      availableItems: ['bold', 'italic', 'underline', 'strike-through', 'code', 'subscript', 'superscript', 'quote'],
-      formats: ['bold', 'italic', 'underline', 'strike-through', 'code', 'subscript', 'superscript', 'quote'],
+      availableItems: ['bold', 'italic', 'underline', 'strike-through', 'code', 'heading1', 'heading2', 'heading3', 'heading4', 'heading5', 'heading6', 'subscript', 'superscript', 'quote'],
+      formats: ['bold', 'italic', 'underline', 'strike-through', 'code', 'heading1', 'heading2', 'subscript', 'superscript', 'quote'],
     }),
   }
 </script>
