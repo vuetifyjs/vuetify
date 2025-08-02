@@ -694,6 +694,68 @@ describe('VAutocomplete', () => {
     expect(onFocus).toHaveBeenCalledTimes(1)
   })
 
+  describe('filterKeys', () => {
+    const objectItems = [
+      { firstName: 'John', lastName: 'Doe' },
+      { firstName: 'Jane', lastName: 'Smith' },
+      { firstName: 'Alice', lastName: 'Johnson' },
+      { firstName: 'Bob', lastName: 'Brown' },
+      { firstName: 'Smith', lastName: 'Janesson' },
+    ]
+
+    it('should filter by itemTitle field only when filterKeys is not provided', async () => {
+      const { element } = render(() => (
+        <VAutocomplete
+          items={ objectItems }
+          itemTitle="firstName"
+        />
+      ))
+
+      await userEvent.click(element)
+      await userEvent.keyboard('Smith')
+
+      const options = await screen.findAllByRole('option')
+      expect(options).toHaveLength(1)
+      expect(options[0]).toHaveTextContent('Smith')
+    })
+
+    it('should filter across multiple fields when filterKeys is provided', async () => {
+      const { element } = render(() => (
+        <VAutocomplete
+          items={ objectItems }
+          itemTitle="firstName"
+          filterKeys={['firstName', 'lastName']}
+        />
+      ))
+
+      await userEvent.click(element)
+      await userEvent.keyboard('Smith')
+
+      const options = await screen.findAllByRole('option')
+      expect(options).toHaveLength(2)
+      expect(options[0]).toHaveTextContent('Jane')
+      expect(options[1]).toHaveTextContent('Smith')
+    })
+
+    it('should work with primitive items regardless of filterKeys', async () => {
+      const stringItems = ['John', 'Jane', 'Alice', 'Bob', 'Smith']
+
+      const { element } = render(() => (
+        <VAutocomplete
+          items={ stringItems }
+        />
+      ))
+
+      await userEvent.click(element)
+      await userEvent.keyboard('J')
+
+      const options = await screen.findAllByRole('option')
+      expect(options).toHaveLength(2)
+      expect(options[0]).toHaveTextContent('John')
+      expect(options[1]).toHaveTextContent('Jane')
+    })
+  })
+
   describe('Showcase', () => {
     generate({ stories })
   })
