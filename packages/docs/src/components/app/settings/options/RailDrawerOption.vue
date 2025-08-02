@@ -3,12 +3,12 @@
     <v-defaults-provider
       :defaults="{
         VIcon: {
-          color: user.railDrawer && one.isSubscriber ? 'primary' : 'disabled'
+          color: user.ecosystem.docs.railDrawer && one.isSubscriber ? 'primary' : 'disabled'
         }
       }"
     >
       <SettingsSwitch
-        v-model="user.railDrawer"
+        v-model="user.ecosystem.docs.railDrawer"
         :disabled="!one.isSubscriber"
         :readonly="!one.isSubscriber"
       />

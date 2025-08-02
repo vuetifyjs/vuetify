@@ -21,6 +21,6 @@
 
   function onClick () {
     sweClick('app-bar', 'theme-toggle', name)
-    user.theme = theme.global.name.value === 'dark' ? 'light' : 'dark'
+    user.one.theme = theme.global.name.value === 'dark' ? 'light' : 'dark'
   }
 </script>

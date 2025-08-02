@@ -11,7 +11,7 @@ import { useDate } from '@/composables/date'
 import { convertToUnit, genericComponent, getPrefixedEventHandlers, propsFactory, useRender } from '@/util'
 
 export type VCalendarIntervalEventSlots = {
-  intervalEvent: { height: string, margin: string, eventClass: string, event: any, interval: any }
+  'interval-event': { height: string, margin: string, eventClass: string, event: any, interval: any }
 }
 
 export const makeVCalendarIntervalEventProps = propsFactory({
@@ -65,7 +65,7 @@ export const VCalendarIntervalEvent = genericComponent<VCalendarIntervalEventSlo
       return (
         <div>
           {
-            slots.intervalEvent?.({
+            slots['interval-event']?.({
               height: calcHeight().height,
               margin: calcHeight().margin,
               eventClass: 'v-calendar-internal-event',

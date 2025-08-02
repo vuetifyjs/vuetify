@@ -16,7 +16,7 @@ import vTouch from '@/directives/touch'
 
 // Utilities
 import { computed, provide, ref, shallowRef, toRef, watch } from 'vue'
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { convertToUnit, genericComponent, PREFERS_REDUCED_MOTION, propsFactory, useRender } from '@/util'
 
 // Types
 import type { ComputedRef, InjectionKey, PropType, Ref } from 'vue'
@@ -86,6 +86,8 @@ export const makeVWindowProps = propsFactory({
     type: [Boolean, String] as PropType<boolean | 'force'>,
     default: 'force' as const,
   },
+  crossfade: Boolean,
+  transitionDuration: Number,
 
   ...makeComponentProps(),
   ...makeTagProps(),
@@ -120,6 +122,10 @@ export const VWindow = genericComponent<new <T>(
     const isRtlReverse = computed(() => isRtl.value ? !props.reverse : props.reverse)
     const isReversed = shallowRef(false)
     const transition = computed(() => {
+      if (props.crossfade) {
+        return 'v-window-crossfade-transition'
+      }
+
       const axis = props.direction === 'vertical' ? 'y' : 'x'
       const reverse = isRtlReverse.value ? !isReversed.value : isReversed.value
       const direction = reverse ? '-reverse' : ''
@@ -230,11 +236,17 @@ export const VWindow = genericComponent<new <T>(
           {
             'v-window--show-arrows-on-hover': props.showArrows === 'hover',
             'v-window--vertical-arrows': !!props.verticalArrows,
+            'v-window--crossfade': !!props.crossfade,
           },
           themeClasses.value,
           props.class,
         ]}
-        style={ props.style }
+        style={[
+          props.style,
+          props.transitionDuration && !PREFERS_REDUCED_MOTION
+            ? { '--v-window-transition-duration': convertToUnit(props.transitionDuration, 'ms') }
+            : undefined,
+        ]}
         v-touch={ touchOptions.value }
       >
         <div

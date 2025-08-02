@@ -65,7 +65,7 @@ describe('VBreadcrumbs', () => {
 
   it('should apply active color', async () => {
     render(() => (
-      <VBreadcrumbs active-color="primary">
+      <VBreadcrumbs activeColor="primary">
         <VBreadcrumbsItem active title="hello"></VBreadcrumbsItem>
         <VBreadcrumbsItem title="world" to="/world"></VBreadcrumbsItem>
       </VBreadcrumbs>

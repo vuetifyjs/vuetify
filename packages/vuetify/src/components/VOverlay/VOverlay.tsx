@@ -184,6 +184,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
       root,
       contentEl,
       targetEl,
+      target,
       isActive,
       updateLocation,
     })

@@ -115,7 +115,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       let [baseDigits, fractionDigits] = fixed.split('.')
 
       fractionDigits = (fractionDigits ?? '').padEnd(props.minFractionDigits, '0')
-        .replace(new RegExp(`(?<=\\d{${props.minFractionDigits}})0`, 'g'), '')
+        .replace(new RegExp(`(?<=\\d{${props.minFractionDigits}})0+$`, 'g'), '')
 
       return [
         baseDigits,
@@ -132,8 +132,14 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
 
     const _inputText = shallowRef<string | null>(null)
     watchEffect(() => {
-      if (isFocused.value && !controlsDisabled.value) {
-        // ignore external changes
+      if (
+        isFocused.value &&
+          !controlsDisabled.value &&
+          Number(_inputText.value) === model.value
+      ) {
+        // ignore external changes while typing
+        // e.g. 5.01{backspace}2 » should result in 5.02
+        //      but we emit '5' in and want to preserve '5.0'
       } else if (model.value == null) {
         _inputText.value = null
       } else if (!isNaN(model.value)) {
@@ -247,6 +253,9 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       if (potentialNewInputVal.split(decimalSeparator.value)[1]?.length > props.precision) {
         e.preventDefault()
         inputElement!.value = potentialNewNumber
+
+        const cursorPosition = (selectionStart ?? 0) + e.data.length
+        inputElement!.setSelectionRange(cursorPosition, cursorPosition)
       }
       // Ignore decimal separator when precision = 0
       if (props.precision === 0 && potentialNewInputVal.includes(decimalSeparator.value)) {
@@ -263,6 +272,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
 
       if (['ArrowDown', 'ArrowUp'].includes(e.key)) {
         e.preventDefault()
+        e.stopPropagation()
         clampModel()
         // _model is controlled, so need to wait until props['modelValue'] is updated
         await nextTick()

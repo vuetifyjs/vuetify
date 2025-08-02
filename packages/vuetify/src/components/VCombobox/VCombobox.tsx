@@ -32,6 +32,7 @@ import {
   checkPrintable,
   deepEqual,
   ensureValidVNode,
+  escapeForRegex,
   genericComponent,
   IN_BROWSER,
   isComposingIgnoreKey,
@@ -153,7 +154,7 @@ export const VCombobox = genericComponent<new <
       get: () => {
         return _search.value
       },
-      set: (val: string | null) => {
+      set: async (val: string | null) => {
         _search.value = val ?? ''
         if (!props.multiple && !hasSelectionSlot.value) {
           model.value = [transformItem(props, val)]
@@ -161,12 +162,16 @@ export const VCombobox = genericComponent<new <
         }
 
         if (val && props.multiple && props.delimiters?.length) {
-          const values = val.split(new RegExp(`(?:${props.delimiters.join('|')})+`))
+          const signsToMatch = props.delimiters.map(escapeForRegex).join('|')
+          const values = val.split(new RegExp(`(?:${signsToMatch})+`))
           if (values.length > 1) {
-            values.forEach(v => {
+            for (let v of values) {
               v = v.trim()
-              if (v) select(transformItem(props, v))
-            })
+              if (v) {
+                select(transformItem(props, v))
+                await nextTick()
+              }
+            }
             _search.value = ''
           }
         }
@@ -517,6 +522,7 @@ export const VCombobox = genericComponent<new <
                       selected={ selectedValues.value }
                       selectStrategy={ props.multiple ? 'independent' : 'single-independent' }
                       onMousedown={ (e: MouseEvent) => e.preventDefault() }
+                      selectable
                       onKeydown={ onListKeydown }
                       onFocusin={ onFocusin }
                       onFocusout={ onFocusout }
@@ -541,13 +547,13 @@ export const VCombobox = genericComponent<new <
                             onClick: () => select(item, null),
                           })
 
-                          if (item.raw.type === 'divider') {
+                          if (item.type === 'divider') {
                             return slots.divider?.({ props: item.raw, index }) ?? (
                               <VDivider { ...item.props } key={ `divider-${index}` } />
                             )
                           }
 
-                          if (item.raw.type === 'subheader') {
+                          if (item.type === 'subheader') {
                             return slots.subheader?.({ props: item.raw, index }) ?? (
                               <VListSubheader { ...item.props } key={ `subheader-${index}` } />
                             )

@@ -46,6 +46,13 @@ export default {
     input: {
       placeholder: 'Tarih girin',
     },
+    ariaLabel: {
+      previousMonth: 'Önceki ay',
+      nextMonth: 'Sonraki ay',
+      selectYear: 'Yıl seçin',
+      selectDate: '{0}',
+      currentDate: 'Bugün, {0}',
+    },
   },
   noDataText: 'Bu görünümde veri yok.',
   carousel: {
@@ -134,5 +141,33 @@ export default {
     space: 'Boşluk',
     plus: 'artı',
     shortcut: 'Klavye kısayolu: {0}',
+  },
+  video: {
+    play: 'Oynat',
+    pause: 'Duraklat',
+    seek: 'Ara',
+    volume: 'Ses',
+    showVolume: 'Ses kontrolünü göster',
+    mute: 'Sesi kapat',
+    unmute: 'Sesi aç',
+    enterFullscreen: 'Tam ekran',
+    exitFullscreen: 'Tam ekrandan çık',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Ekranda renk seç',
+      hueSlider: 'Ton',
+      alphaSlider: 'Alfa',
+      redInput: 'Kırmızı',
+      greenInput: 'Yeşil',
+      blueInput: 'Mavi',
+      alphaInput: 'Alfa',
+      hueInput: 'Ton',
+      saturationInput: 'Doygunluk',
+      lightnessInput: 'Parlaklık',
+      hexInput: 'HEX değeri',
+      hexaInput: 'Alfa değerli HEX',
+      changeFormat: 'Renk biçimini değiştir',
+    },
   },
 }

@@ -14,12 +14,12 @@ describe('VTextarea', () => {
     render(() => (
       <Application>
         <div>
-          <VTextarea auto-grow rows="1" v-model={ model.value } />
+          <VTextarea autoGrow rows="1" v-model={ model.value } />
         </div>
       </Application>
     ))
 
-    const el = screen.getByCSS('#input-v-0')
+    const el = screen.getByCSS('textarea[rows]')
 
     expect(el.offsetHeight).toBe(56)
 
@@ -38,12 +38,12 @@ describe('VTextarea', () => {
     render(() => (
       <Application>
         <div>
-          <VTextarea auto-grow rows="1" max-rows="2" v-model={ model.value } />
+          <VTextarea autoGrow rows="1" maxRows="2" v-model={ model.value } />
         </div>
       </Application>
     ))
 
-    const el = screen.getByCSS('#input-v-0')
+    const el = screen.getByCSS('textarea[rows]')
 
     expect(el.offsetHeight).toBe(56)
 
@@ -62,7 +62,7 @@ describe('VTextarea', () => {
     render(() => (
       <Application>
         <div>
-          <VTextarea auto-grow rows="1" v-model={ model.value } onUpdate:rows={ val => { rows.value = val } } />
+          <VTextarea autoGrow rows="1" v-model={ model.value } onUpdate:rows={ val => { rows.value = val } } />
         </div>
       </Application>
     ))

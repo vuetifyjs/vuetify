@@ -48,6 +48,12 @@ The primary value is controlled by **v-model**, whereas the buffer is controlled
 
 <ExamplesExample file="v-progress-linear/prop-buffer-value" />
 
+#### Chunks
+
+The component can be split into chunks using `chunk-count` or `chunk-width`. Visible progress is snapped to the last filled chunk.
+
+<ExamplesExample file="v-progress-linear/prop-chunks" />
+
 #### Colors
 
 You can set the colors of the progress bar using the props **color** and **bg-color**.

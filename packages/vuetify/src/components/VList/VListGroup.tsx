@@ -39,6 +39,7 @@ export const makeVListGroupProps = propsFactory({
     type: IconValue,
     default: '$collapse',
   },
+  disabled: Boolean,
   expandIcon: {
     type: IconValue,
     default: '$expand',
@@ -61,7 +62,7 @@ export const VListGroup = genericComponent<VListGroupSlots>()({
   props: makeVListGroupProps(),
 
   setup (props, { slots }) {
-    const { isOpen, open, id: _id } = useNestedItem(() => props.value, true)
+    const { isOpen, open, id: _id } = useNestedItem(() => props.value, () => props.disabled, true)
     const id = computed(() => `v-list-group--id-${String(props.rawId ?? _id.value)}`)
     const list = useList()
     const { isBooted } = useSsrBoot()
@@ -80,7 +81,6 @@ export const VListGroup = genericComponent<VListGroupSlots>()({
     const toggleIcon = computed(() => isOpen.value ? props.collapseIcon : props.expandIcon)
     const activatorDefaults = computed(() => ({
       VListItem: {
-        active: isOpen.value,
         activeColor: props.activeColor,
         baseColor: props.baseColor,
         color: props.color,

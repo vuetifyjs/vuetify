@@ -2,9 +2,9 @@
 import './VColorInput.sass'
 
 // Components
+import { VAvatar } from '@/components/VAvatar'
 import { makeVColorPickerProps, VColorPicker } from '@/components/VColorPicker/VColorPicker'
 import { makeVConfirmEditProps, VConfirmEdit } from '@/components/VConfirmEdit/VConfirmEdit'
-import { VIcon } from '@/components/VIcon/VIcon'
 import { VMenu } from '@/components/VMenu/VMenu'
 import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextField'
 
@@ -17,6 +17,7 @@ import { computed, shallowRef } from 'vue'
 import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
+import type { PropType } from 'vue'
 import type { VTextFieldSlots } from '@/components/VTextField/VTextField'
 
 export type VColorInputActionsSlot = {
@@ -30,11 +31,24 @@ export type VColorInputSlots = Omit<VTextFieldSlots, 'default'> & {
   default: never
 }
 
+const availablePipLocations = ['prepend', 'prepend-inner', 'append', 'append-inner'] as const
+export type PipLocation = typeof availablePipLocations[number]
+
 export const makeVColorInputProps = propsFactory({
-  pip: Boolean,
+  hidePip: Boolean,
+  colorPip: Boolean,
   pipIcon: {
     type: String,
     default: '$color',
+  },
+  pipLocation: {
+    type: String as PropType<PipLocation>,
+    default: 'prepend',
+    validator: (v: any) => availablePipLocations.includes(v),
+  },
+  pipVariant: {
+    type: String as PropType<VAvatar['$props']['variant']>,
+    default: 'text',
   },
 
   ...makeFocusProps(),
@@ -86,12 +100,30 @@ export const VColorInput = genericComponent<VColorInputSlots>()({
       menu.value = false
     }
 
+    function onCancel () {
+      menu.value = false
+    }
+
     useRender(() => {
       const confirmEditProps = VConfirmEdit.filterProps(props)
       const colorPickerProps = VColorPicker.filterProps(omit(props, ['active', 'color']))
-      const textFieldProps = VTextField.filterProps(omit(props, ['prependInnerIcon']))
+      const textFieldProps = VTextField.filterProps(props)
 
-      const hasPrepend = !!(slots.prepend || props.pipIcon)
+      const slotWithPip = props.hidePip
+        ? undefined
+        : {
+          [props.pipLocation]: (arg: any) => (
+            <>
+              <VAvatar
+                class="v-color-input__pip"
+                color={ props.colorPip ? model.value as string : undefined }
+                variant={ props.pipVariant }
+                icon={ props.pipIcon }
+              />
+              { slots[props.pipLocation]?.(arg) }
+            </>
+          ),
+        }
 
       return (
         <VTextField
@@ -114,24 +146,13 @@ export const VColorInput = genericComponent<VColorInputSlots>()({
         >
           {{
             ...slots,
-            prepend: props.pipIcon ? arg => (
-              <>
-               { hasPrepend && (
-                  <VIcon
-                    color={ props.pip ? model.value as string : undefined }
-                    icon={ props.pipIcon }
-                  />
-               )}
-
-                { slots.prepend?.(arg) }
-              </>
-            ) : undefined,
+            ...slotWithPip,
             default: () => (
               <>
                 <VMenu
                   v-model={ menu.value }
                   activator="parent"
-                  min-width="0"
+                  minWidth="0"
                   closeOnContentClick={ false }
                   openOnClick={ false }
                 >
@@ -139,17 +160,23 @@ export const VColorInput = genericComponent<VColorInputSlots>()({
                     { ...confirmEditProps }
                     v-model={ model.value }
                     onSave={ onSave }
+                    onCancel={ onCancel }
                   >
                     {{
                       default: ({ actions, model: proxyModel, save, cancel, isPristine }) => {
+                        function onUpdateModel (value: string) {
+                          if (!props.hideActions) {
+                            proxyModel.value = value
+                          } else {
+                            model.value = value
+                          }
+                        }
+
                         return (
                           <VColorPicker
                             { ...colorPickerProps }
-                            modelValue={ proxyModel.value }
-                            onUpdate:modelValue={ val => {
-                              proxyModel.value = val
-                              model.value = val
-                            }}
+                            modelValue={ props.hideActions ? model.value : proxyModel.value }
+                            onUpdate:modelValue={ value => onUpdateModel(value) }
                             onMousedown={ (e: MouseEvent) => e.preventDefault() }
                           >
                             {{

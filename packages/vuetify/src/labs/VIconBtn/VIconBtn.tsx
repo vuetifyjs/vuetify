@@ -150,6 +150,7 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
 
       return (
         <props.tag
+          type={ props.tag === 'button' ? 'button' : undefined }
           class={[
             {
               'v-icon-btn': true,

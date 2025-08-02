@@ -2,7 +2,7 @@
 import { computed, nextTick, ref, useId, watch } from 'vue'
 import { makeLineProps } from './util/line'
 import { genPath as _genPath } from './util/path'
-import { genericComponent, getPropertyFromItem, propsFactory, useRender } from '@/util'
+import { genericComponent, getPropertyFromItem, PREFERS_REDUCED_MOTION, propsFactory, useRender } from '@/util'
 
 // Types
 export type VTrendlineSlots = {
@@ -119,7 +119,7 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
     watch(() => props.modelValue, async () => {
       await nextTick()
 
-      if (!props.autoDraw || !path.value) return
+      if (!props.autoDraw || !path.value || PREFERS_REDUCED_MOTION()) return
 
       const pathRef = path.value
       const length = pathRef.getTotalLength()

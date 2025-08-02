@@ -23,7 +23,7 @@ The `v-navigation-drawer` component is what your users will utilize to navigate 
 
 ## Usage
 
-The navigation drawer is primarily used to house links to the pages in your application and is pre-configured to work with or without **vue-router** right out the box. Using `null` as the starting value for its **v-model** will initialize the drawer as closed on mobile and as open on desktop. It is common to pair drawers with the [v-list](/components/lists) component using the **nav** property.
+The navigation drawer is primarily used to house links to the pages in your application and is pre-configured to work with or without **vue-router** right out the box. Using `null` as the starting value for its **v-model** will initialize the drawer as closed on mobile and as open on desktop. It is common to pair drawers with the [v-list](/components/lists) component using the **nav** property. You can learn more by exploring [application layout](/features/application-layout) examples.
 
 <ExamplesUsage name="v-navigation-drawer" />
 

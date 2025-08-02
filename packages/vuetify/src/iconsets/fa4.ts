@@ -46,6 +46,8 @@ const aliases: IconAliases = {
   calendar: 'fa-calendar',
   treeviewCollapse: 'fa-caret-down',
   treeviewExpand: 'fa-caret-right',
+  tableGroupExpand: 'fa-chevron-right',
+  tableGroupCollapse: 'fa-chevron-down',
   eyeDropper: 'fa-eye-dropper',
   upload: 'fa-cloud-upload',
   color: 'fa-paint-brush',
@@ -60,6 +62,14 @@ const aliases: IconAliases = {
   arrowleft: 'fa-arrow-left',
   arrowright: 'fa-arrow-right',
   backspace: 'fa-undo',
+  play: 'fa-play',
+  pause: 'fa-pause',
+  fullscreen: 'fa-fullscreen',
+  fullscreenExit: 'fa-compress',
+  volumeHigh: 'fa-volume-high',
+  volumeMedium: 'fa-volume-low',
+  volumeLow: 'fa-volume-off',
+  volumeOff: 'fa-volume-off',
 }
 
 const fa: IconSet = {

@@ -11,11 +11,11 @@
     </template>
     <v-defaults-provider
       :defaults="{
-        VIcon: { color: one.isSubscriber && user.pins ? 'primary' : 'disabled' }
+        VIcon: { color: one.isSubscriber && user.ecosystem.docs.pins.enabled ? 'primary' : 'disabled' }
       }"
     >
       <SettingsSwitch
-        v-model="user.pins"
+        v-model="user.ecosystem.docs.pins.enabled"
         :disabled="!one.isSubscriber"
       />
     </v-defaults-provider>

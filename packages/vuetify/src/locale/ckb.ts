@@ -46,6 +46,13 @@ export default {
     input: {
       placeholder: 'بەروار بنووسە',
     },
+    ariaLabel: {
+      previousMonth: 'مانگی پێشوو',
+      nextMonth: 'مانگی داهاتوو',
+      selectYear: 'ساڵ هەڵبژێرە',
+      selectDate: '{0}',
+      currentDate: 'ئەمڕو، {0}',
+    },
   },
   noDataText: 'هیچ داتایەک بەردەست نیە',
   carousel: {
@@ -134,5 +141,33 @@ export default {
     space: 'بۆشایی',
     plus: 'زیادکردن',
     shortcut: 'کورتەبڕی تەختەکلیل: {0}',
+  },
+  video: {
+    play: 'لێدان',
+    pause: 'ڕاگرتن',
+    seek: 'گەڕان',
+    volume: 'دەنگ',
+    showVolume: 'پیشاندانی کۆنترۆڵی دەنگ',
+    mute: 'بێدەنگکردن',
+    unmute: 'لە بێدەنگی دەرهێنان',
+    enterFullscreen: 'پڕ بە شاشە',
+    exitFullscreen: 'چوونە دەرەوە لە پڕ بە شاشە',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'ڕەنگ لەسەر شاشە هەڵبژێرە',
+      hueSlider: 'ڕەنگ',
+      alphaSlider: 'ئەلفا',
+      redInput: 'سوور',
+      greenInput: 'سەوز',
+      blueInput: 'شین',
+      alphaInput: 'ئەلفا',
+      hueInput: 'ڕەنگ',
+      saturationInput: 'تێربوون',
+      lightnessInput: 'کاڵی',
+      hexInput: 'بەهای HEX',
+      hexaInput: 'HEX لەگەڵ بەهای ئەلفا',
+      changeFormat: 'گۆڕینی فۆرماتی ڕەنگ',
+    },
   },
 }

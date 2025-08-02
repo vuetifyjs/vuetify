@@ -36,7 +36,6 @@ A basic example of the treeview component.
 | - | - |
 | [v-treeview](/api/v-treeview/) | Primary Component |
 | [v-treeview-item](/api/v-treeview-item/) | Sub-component used to display a single treeview node |
-| [v-treeview-children](/api/v-treeview-children/) | Sub-component used to display a single treeview node's children |
 | [v-treeview-group](/api/v-treeview-group/) | Sub-component used to display a single treeview node's children |
 
 <ApiInline hide-links />
@@ -143,6 +142,12 @@ In this example we use a custom **title** slot to apply a line-through the treev
 
 <ExamplesExample file="v-treeview/slot-title" />
 
+#### Toggle
+
+Here, a custom **toggle** slot is utilized to assign a specific color and variant to the button depending on the state of the item.
+
+<ExamplesExample file="v-treeview/slot-toggle" />
+
 ## Examples
 
 The following are a collection of examples that demonstrate more advanced and real world use of the `v-treeview` component.
@@ -158,3 +163,9 @@ Easily filter your treeview by using the **search** prop. You can easily apply y
 Customize the **on**, **off** and **indeterminate** icons for your selectable tree. Combine with other advanced functionality like API loaded items.
 
 <ExamplesExample file="v-treeview/misc-selectable-icons" />
+
+### Indent lines
+
+The `v-treeview` component can be configured to show indent lines. The `indent-lines` prop controls lines visibility and the variant.
+
+<ExamplesExample file="v-treeview/misc-indent-lines" />

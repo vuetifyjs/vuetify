@@ -48,7 +48,7 @@
                     <tr>
                       <td><v-hotkey keys="meta+f"></v-hotkey></td>
                       <td>Find in Page</td>
-                      <td>{{ isMac ? 'Cmd on Mac' : 'Windows key on PC' }}</td>
+                      <td>{{ isMac ? 'Cmd on Mac' : 'Ctrl key on PC' }}</td>
                     </tr>
                   </tbody>
                 </v-table>

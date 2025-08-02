@@ -10,7 +10,7 @@ related:
   - /features/accessibility/
   - /features/global-configuration/
 features:
-  github: /composables/hotkey.ts
+  github: /composables/hotkey
   label: 'E: hotkey'
   report: true
 ---
@@ -56,8 +56,6 @@ The **hotkey** composable takes a key combination string and a callback function
 | Composable | Description |
 | - | - |
 | [useHotkey](/api/use-hotkey/) | The useHotkey composable |
-
-<ApiInline hide-links />
 
 ## Guide
 
@@ -236,8 +234,12 @@ useHotkey('cmd+k-t', handleAction)
 useHotkey('alt+1', handleAction)
 ```
 
-### Best practices
+## Best practices
+
+::: info
+Hotkeys are a powerful feature, but they utilize APIs that are managed by the browser and the operating system. The reliability of the key bindings you make are subject to factors that can be difficult to control. It's recommended you test your key bindings in the browsers and operating systems you are targeting.
+:::
 
 - **Test cross-platform**: _Verify shortcuts work_ on Windows, macOS, and Linux!
 - **Use modifier combinations**: Prefer `Ctrl+Shift+Key` for custom actions
-- **Document your shortcuts**: Maintain a list of all application hotkeys
+- **Document your shortcuts**: Maintain a list of all application hotkeys in your application

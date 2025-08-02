@@ -43,6 +43,8 @@ const aliases: IconAliases = {
   calendar: 'fas fa-calendar',
   treeviewCollapse: 'fas fa-caret-down',
   treeviewExpand: 'fas fa-caret-right',
+  tableGroupExpand: 'fas fa-chevron-right',
+  tableGroupCollapse: 'fas fa-chevron-down',
   eyeDropper: 'fas fa-eye-dropper',
   upload: 'fas fa-cloud-upload-alt',
   color: 'fas fa-palette',
@@ -57,6 +59,14 @@ const aliases: IconAliases = {
   arrowleft: 'fas fa-arrow-left',
   arrowright: 'fas fa-arrow-right',
   backspace: 'fas fa-backspace',
+  play: 'fas fa-play',
+  pause: 'fas fa-pause',
+  fullscreen: 'fas fa-fullscreen',
+  fullscreenExit: 'fas fa-compress',
+  volumeHigh: 'fas fa-volume-high',
+  volumeMedium: 'fas fa-volume-low',
+  volumeLow: 'fas fa-volume-off',
+  volumeOff: 'fas fa-volume-off',
 }
 
 const fa: IconSet = {

@@ -18,7 +18,7 @@
         ]"
       >
         <span v-if="mdAndUp">
-          {{ t(`search.key-hint${user.slashSearch ? '-slash' : platform.mac ? '-mac' : ''}`) }}
+          {{ t(`search.key-hint${user.ecosystem.docs.slashSearch ? '-slash' : platform.mac ? '-mac' : ''}`) }}
         </span>
       </span>
     </span>
@@ -68,7 +68,7 @@
 
   function onDocumentKeydown (e: KeyboardEvent) {
     const modifierKey = platform.value.mac ? e.metaKey : e.ctrlKey
-    const isSearchKey = user.slashSearch ? e.key === '/' : modifierKey && e.key === 'k'
+    const isSearchKey = user.ecosystem.docs.slashSearch ? e.key === '/' : modifierKey && e.key === 'k'
 
     if (!model.value && isSearchKey) {
       e.preventDefault()

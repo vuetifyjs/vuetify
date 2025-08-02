@@ -46,6 +46,8 @@ const aliases: IconAliases = {
   calendar: 'mdi-calendar',
   treeviewCollapse: 'mdi-menu-down',
   treeviewExpand: 'mdi-menu-right',
+  tableGroupCollapse: 'mdi-chevron-down',
+  tableGroupExpand: 'mdi-chevron-right',
   eyeDropper: 'mdi-eyedropper',
   upload: 'mdi-cloud-upload',
   color: 'mdi-palette',
@@ -60,6 +62,14 @@ const aliases: IconAliases = {
   arrowleft: 'mdi-arrow-left',
   arrowright: 'mdi-arrow-right',
   backspace: 'mdi-backspace',
+  play: 'mdi-play',
+  pause: 'mdi-pause',
+  fullscreen: 'mdi-fullscreen',
+  fullscreenExit: 'mdi-fullscreen-exit',
+  volumeHigh: 'mdi-volume-high',
+  volumeMedium: 'mdi-volume-medium',
+  volumeLow: 'mdi-volume-low',
+  volumeOff: 'mdi-volume-variant-off',
 }
 
 const mdi: IconSet = {

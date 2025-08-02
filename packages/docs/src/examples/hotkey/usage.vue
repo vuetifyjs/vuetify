@@ -30,7 +30,7 @@
       </template>
 
       <template v-slot:actions>
-        <span class="ps-2">Current hotkey:</span> <v-hotkey :display-mode="displayMode" :keys></v-hotkey>
+        <span class="ps-2">Current hotkey:</span> <v-hotkey :keys></v-hotkey>
 
         <v-spacer></v-spacer>
 
@@ -40,7 +40,13 @@
 
     <template v-slot:configuration>
       <v-checkbox v-model="allowInputs" label="Allow inputs"></v-checkbox>
-      <v-slider v-model="sequenceTimeout" label="Timeout"></v-slider>
+      <div class="text-subtitle-1 mt-3">Sequence Timeout <span class="text-caption text-medium-emphasis">({{ sequenceTimeout }}ms)</span></div>
+      <v-slider
+        v-model="sequenceTimeout"
+        max="3000"
+        min="500"
+        step="100"
+      ></v-slider>
     </template>
   </ExamplesUsageExample>
 </template>
@@ -51,16 +57,12 @@
 
   const name = 'hotkey'
   const model = ref('default')
-  const options = ['text', 'symbol', 'icon']
+  const options = []
   const logs = ref([])
   const keys = shallowRef('cmd+b')
   const binding = shallowRef(false)
   const allowInputs = shallowRef(false)
-  const sequenceTimeout = shallowRef(0)
-
-  const displayMode = computed(() => {
-    return model.value === 'default' ? undefined : model.value
-  })
+  const sequenceTimeout = shallowRef(2000)
 
   const and = computed(() => sequenceTimeout.value && allowInputs.value ? '\n  ' : '')
 
@@ -70,17 +72,22 @@
 }` : ''
   })
 
-  const code = `<template>
-  <div>Hello world</div>
-</template>`
+  const code = toRef(() => `<span>Current hotkey:</span>
+<v-hotkey keys="${keys.value}" />
+<pre>log: {{ log }}</pre>`)
 
-  const script = computed(() => {
+  const script = toRef(() => {
     return `<script setup>
+  import { shallowRef } from 'vue'
   import { useHotkey } from 'vuetify'
 
-  function onHotkey () {}
+  const log = shallowRef('')
 
-  const unwatch = useHotkey('${keys.value}', onHotkey${args.value})
+  function onHotkey () {
+    log.value += '\\n- Hotkey pressed'
+  }
+
+  useHotkey('${keys.value}', onHotkey${args.value})
 <\\/script>`.replace('\\/', '/')
   })
 

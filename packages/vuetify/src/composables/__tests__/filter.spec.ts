@@ -9,6 +9,7 @@ import { deepEqual } from '@/util'
 const itemProps = {
   itemTitle: 'title',
   itemValue: 'value',
+  itemType: 'type',
   itemChildren: 'children',
   itemProps: 'props',
   returnObject: false,

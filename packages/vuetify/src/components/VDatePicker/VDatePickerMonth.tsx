@@ -7,6 +7,7 @@ import { VBtn } from '@/components/VBtn'
 // Composables
 import { makeCalendarProps, useCalendar } from '@/composables/calendar'
 import { createDateRange, useDate } from '@/composables/date/date'
+import { useLocale } from '@/composables/locale'
 import { MaybeTransition } from '@/composables/transition'
 
 // Utilities
@@ -56,8 +57,9 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
 
   setup (props, { emit, slots }) {
     const daysRef = ref()
+    const { t } = useLocale()
 
-    const { daysInMonth, model, weekNumbers, weekDays, weekdayLabels } = useCalendar(props)
+    const { daysInMonth, model, weekNumbers, weekdayLabels } = useCalendar(props)
     const adapter = useDate()
 
     const rangeStart = shallowRef()
@@ -119,6 +121,12 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
       }
     }
 
+    function getDateAriaLabel (item: any) {
+      const fullDate = adapter.format(item.date, 'fullDateWithWeekday')
+      const localeKey = item.isToday ? 'currentDate' : 'selectDate'
+      return t(`$vuetify.datePicker.ariaLabel.${localeKey}`, fullDate)
+    }
+
     function onMultipleClick (value: unknown) {
       const index = model.value.findIndex(selection => adapter.isSameDay(selection, value))
 
@@ -144,7 +152,7 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
     useRender(() => (
       <div
         class="v-date-picker-month"
-        style={{ '--v-date-picker-days-in-week': weekDays.value.length }}
+        style={{ '--v-date-picker-days-in-week': props.weekdays.length }}
       >
         { props.showWeek && (
           <div key="weeks" class="v-date-picker-month__weeks">
@@ -187,6 +195,8 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
                   ripple: false,
                   text: item.localized,
                   variant: item.isSelected ? 'flat' : item.isToday ? 'outlined' : 'text',
+                  'aria-label': getDateAriaLabel(item),
+                  'aria-current': item.isToday ? 'date' : undefined,
                   onClick: () => onClick(item.date),
                 },
                 item,

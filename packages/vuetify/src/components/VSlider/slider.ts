@@ -28,6 +28,7 @@ type SliderProvide = {
   min: Ref<number>
   max: Ref<number>
   mousePressed: Ref<boolean>
+  noKeyboard: Ref<boolean>
   numTicks: Ref<number>
   onSliderMousedown: (e: MouseEvent) => void
   onSliderTouchstart: (e: TouchEvent) => void
@@ -42,6 +43,7 @@ type SliderProvide = {
   step: Ref<number>
   thumbSize: Ref<number>
   thumbColor: Ref<string | undefined>
+  thumbLabelColor: Ref<string | undefined>
   trackColor: Ref<string | undefined>
   trackFillColor: Ref<string | undefined>
   trackSize: Ref<number>
@@ -129,6 +131,7 @@ export const makeSliderProps = propsFactory({
     validator: (v: any) => ['vertical', 'horizontal'].includes(v),
   },
   reverse: Boolean,
+  noKeyboard: Boolean,
 
   ...makeRoundedProps(),
   ...makeElevationProps({
@@ -200,6 +203,7 @@ export const useSlider = ({
   const disabled = toRef(() => props.disabled)
 
   const thumbColor = computed(() => props.error || props.disabled ? undefined : props.thumbColor ?? props.color)
+  const thumbLabelColor = computed(() => props.error || props.disabled ? undefined : props.thumbColor)
   const trackColor = computed(() => props.error || props.disabled ? undefined : props.trackColor ?? props.color)
   const trackFillColor = computed(() => props.error || props.disabled ? undefined : props.trackFillColor ?? props.color)
 
@@ -351,6 +355,7 @@ export const useSlider = ({
     min,
     max,
     mousePressed,
+    noKeyboard: toRef(() => props.noKeyboard),
     numTicks,
     onSliderMousedown,
     onSliderTouchstart,
@@ -365,6 +370,7 @@ export const useSlider = ({
     step,
     thumbSize,
     thumbColor,
+    thumbLabelColor,
     thumbLabel: toRef(() => props.thumbLabel),
     ticks: toRef(() => props.ticks),
     tickSize,

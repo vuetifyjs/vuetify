@@ -45,6 +45,11 @@ export const makeVTimePickerProps = propsFactory({
     type: String as PropType<VTimePickerViewMode>,
     default: 'hour',
   },
+  period: {
+    type: String as PropType<Period>,
+    default: 'am',
+    validator: (v: any) => ['am', 'pm'].includes(v),
+  },
   modelValue: null as any as PropType<any>,
   readonly: Boolean,
   scrollable: Boolean,
@@ -74,7 +79,7 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
     const lazyInputHour = ref(null as number | null)
     const lazyInputMinute = ref(null as number | null)
     const lazyInputSecond = ref(null as number | null)
-    const period = ref('am' as Period)
+    const period = useProxiedModel(props, 'period', 'am')
     const viewMode = useProxiedModel(props, 'viewMode', 'hour')
     const controlsRef = ref<VTimePickerControls | null>(null)
     const clockRef = ref<VTimePickerClock | null>(null)
@@ -165,6 +170,8 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
     const isAmPm = computed((): boolean => {
       return props.format === 'ampm'
     })
+
+    watch(() => props.period, val => setPeriod(val))
 
     watch(() => props.modelValue, val => setInputData(val))
 

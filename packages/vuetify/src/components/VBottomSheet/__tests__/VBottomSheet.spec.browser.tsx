@@ -8,7 +8,7 @@ import { ref } from 'vue'
 describe('VBottomSheet', () => {
   it('renders properly with default props', async () => {
     render(() => (
-      <VBottomSheet model-value>
+      <VBottomSheet modelValue>
         <div>Content inside bottom sheet</div>
       </VBottomSheet>
     ))
@@ -23,7 +23,7 @@ describe('VBottomSheet', () => {
     const inset = ref<boolean>(false)
 
     render(() => (
-      <VBottomSheet model-value inset={ inset.value }>
+      <VBottomSheet modelValue inset={ inset.value }>
         <div>Content inside bottom sheet</div>
       </VBottomSheet>
     ))
@@ -37,7 +37,7 @@ describe('VBottomSheet', () => {
 
   it('applies custom styles and classes', async () => {
     render(() => (
-      <VBottomSheet model-value class="custom-class" style="color: red;">
+      <VBottomSheet modelValue class="custom-class" style="color: red;">
         <div>Custom styles</div>
       </VBottomSheet>
     ))
