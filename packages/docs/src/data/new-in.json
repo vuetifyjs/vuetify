@@ -90,6 +90,16 @@
       "glow": "3.8.0"
     }
   },
+  "VFileInput": {
+    "props": {
+      "filterByType": "3.10.0"
+    }
+  },
+  "VFileUpload": {
+    "props": {
+      "filterByType": "3.10.0"
+    }
+  },
   "VIcon": {
     "props": {
       "opacity": "3.8.0"
@@ -124,6 +134,13 @@
   "VNavigationDrawer": {
     "props": {
       "persistent": "3.6.0"
+    }
+  },
+  "VProgressLinear": {
+    "props": {
+      "chunkCount": "3.10.0",
+      "chunkGap": "3.10.0",
+      "chunkWidth": "3.10.0"
     }
   },
   "VSelect": {
