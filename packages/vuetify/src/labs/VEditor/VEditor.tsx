@@ -400,6 +400,7 @@ export const VEditor = genericComponent<VEditorSlots>()({
                                   <VBtn
                                     size="small"
                                     variant="text"
+                                    name={ format.name }
                                     key={ format.name }
                                     icon={ format.icon }
                                     onClick={ () => applyFormat(format) }
@@ -417,6 +418,7 @@ export const VEditor = genericComponent<VEditorSlots>()({
                                           icon
                                           size="small"
                                           variant="text"
+                                          name={ groupFormats[0].category }
                                           color={ activeFormat ? 'primary' : undefined }
                                         >
                                           <VIcon
@@ -438,6 +440,7 @@ export const VEditor = genericComponent<VEditorSlots>()({
                                                         size="small"
                                                         width="40px"
                                                         variant="text"
+                                                        name={ format.name }
                                                         value={ format.name }
                                                         key={ format.name }
                                                         icon={ format.icon }
