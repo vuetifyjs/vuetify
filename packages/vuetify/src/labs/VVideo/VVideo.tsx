@@ -394,7 +394,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
           ]}
           style={[
             { '--v-video-aspect-ratio': props.aspectRatio },
-            props.variant === 'background' ? [] : pick(dimensionStyles.value, ['width', 'min-width', 'max-width']),
+            props.variant === 'background' ? [] : pick(dimensionStyles.value, ['width', 'minWidth', 'maxWidth']),
             props.style,
           ]}
           onKeydown={ onKeydown }

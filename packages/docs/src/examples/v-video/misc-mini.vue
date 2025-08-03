@@ -1,10 +1,10 @@
 <template>
-  <div class="d-flex align-center justify-center ga-6">
+  <div class="d-flex align-center justify-center ga-6 flex-wrap">
     <v-defaults-provider :defaults="{ VVideoControls: { VIconBtn: { color: 'red', border: 'sm' } } }">
       <v-video
+        aspect-ratio="1"
         color="blue"
         controls-variant="mini"
-        height="300"
         image="https://jsek.work/vt-sunflowers.jpg"
         rounded="lg"
         src="https://jsek.work/vt-sunflowers.mp4"
@@ -26,8 +26,8 @@
     </v-defaults-provider>
 
     <v-video
+      aspect-ratio="1"
       controls-variant="mini"
-      height="300"
       image="https://jsek.work/vt-sunflowers.jpg"
       rounded="xl"
       src="https://jsek.work/vt-sunflowers.mp4"
