@@ -20,6 +20,11 @@
       .v-list-item__overlay {
         transition: none;
       }
+
+      .v-list-subheader {
+        color: inherit;
+        opacity: .7;
+      }
     }
 
     &__list-divider {
