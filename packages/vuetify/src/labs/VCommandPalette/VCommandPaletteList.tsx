@@ -225,6 +225,7 @@ export const makeVCommandPaletteListProps = propsFactory({
   },
   // Inherit VList props but exclude conflicting ones
   ...omit(makeVListProps({
+    bgColor: 'transparent',
     density: 'compact' as const,
     nav: true,
   }), [

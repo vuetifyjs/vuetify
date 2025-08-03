@@ -109,8 +109,8 @@ const makeVCommandPaletteContentProps = propsFactory({
   title: String,
   // Placeholder text for the search input
   placeholder: String,
-  // Whether the search input should have a clear button
-  clearableSearch: Boolean,
+  listProps: Object as PropType<VCommandPaletteList['$props']>,
+  searchProps: Object as PropType<VCommandPaletteSearch['$props']>,
   // Include standard item transformation props
   ...makeItemsProps({ itemTitle: 'title' }),
   // Items array with proper typing for command palette items
@@ -406,9 +406,9 @@ const VCommandPaletteContent = genericComponent<VCommandPaletteSlots>()({
                 <VCommandPaletteSearch
                   v-model={ search.value }
                   placeholder={ props.placeholder }
-                  clearable={ props.clearableSearch }
                   aria-label="Search commands"
                   aria-describedby="command-palette-instructions"
+                  { ...props.searchProps }
                 />
               </>
             )}
@@ -440,9 +440,9 @@ const VCommandPaletteContent = genericComponent<VCommandPaletteSlots>()({
               <VCommandPaletteSearch
                 v-model={ search.value }
                 placeholder={ props.placeholder }
-                clearable={ props.clearableSearch }
                 aria-label="Search commands"
                 aria-describedby="command-palette-instructions"
+                { ...props.searchProps }
               />
             </>
           )}
@@ -453,6 +453,7 @@ const VCommandPaletteContent = genericComponent<VCommandPaletteSlots>()({
             onClick:item={ onItemClickFromList }
             onHover={ setSelectedIndex }
             aria-label="Command options"
+            { ...props.listProps }
           >
             {{
               item: slots.item,
@@ -534,9 +535,9 @@ export const makeVCommandPaletteProps = propsFactory({
     type: String,
   },
   // Placeholder text for the search input
-  placeholder: {
-    type: String,
-  },
+  placeholder: String,
+  listProps: Object as PropType<VCommandPaletteList['$props']>,
+  searchProps: Object as PropType<VCommandPaletteSearch['$props']>,
   // Whether to close the palette when an item is executed
   closeOnExecute: {
     type: Boolean,
@@ -545,11 +546,6 @@ export const makeVCommandPaletteProps = propsFactory({
   // Event callbacks for dialog lifecycle
   afterEnter: EventProp<[]>(),
   afterLeave: EventProp<[]>(),
-  // Whether the search input should have a clear button
-  clearableSearch: {
-    type: Boolean,
-    default: true,
-  },
   // Include standard item transformation props
   ...makeItemsProps({ itemTitle: 'title' }),
   // Items array with proper typing for command palette items

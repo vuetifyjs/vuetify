@@ -11,6 +11,7 @@
 
 // Components
 import { VTextField } from '@/components/VTextField'
+import { makeVTextFieldProps } from '@/components/VTextField/VTextField'
 
 // Composables
 import { useLocale } from '@/composables'
@@ -27,20 +28,17 @@ import type { Ref } from 'vue'
  * Defines the configurable properties for the search component
  */
 export const makeVCommandPaletteSearchProps = propsFactory({
-  // The search query value (v-model)
-  modelValue: String,
-  // Placeholder text for the search input
-  placeholder: {
-    type: String,
-  },
-  // Whether to show a clear button
-  clearable: {
-    type: Boolean,
-  },
   // ARIA label for accessibility
   ariaLabel: String,
   // ARIA describedby for accessibility (typically points to instructions)
   ariaDescribedby: String,
+  ...makeVTextFieldProps({
+    autofocus: true,
+    bgColor: 'transparent',
+    hideDetails: true,
+    flat: true,
+    variant: 'solo' as const,
+  }),
 }, 'VCommandPaletteSearch')
 
 /**
@@ -74,6 +72,7 @@ export const VCommandPaletteSearch = genericComponent<VCommandPaletteSearchSlots
     const { t } = useLocale()
     // Create a proxied model for two-way binding
     const search = useProxiedModel(props, 'modelValue')
+    const textFieldProps = VTextField.filterProps(props)
 
     useRender(() => {
       return (
@@ -84,13 +83,9 @@ export const VCommandPaletteSearch = genericComponent<VCommandPaletteSearchSlots
           }) ?? (
             // Default search input implementation
             <VTextField
+              { ...textFieldProps }
               v-model={ search.value }
               placeholder={ props.placeholder ?? t('$vuetify.command.placeholder') }
-              hideDetails // No validation messages needed for search
-              variant="solo" // Consistent with command palette design
-              flat // Remove elevation for clean look
-              clearable={ props.clearable }
-              autofocus // Automatically focus when palette opens
               aria-label={ props.ariaLabel }
               aria-describedby={ props.ariaDescribedby }
             />
