@@ -30,9 +30,9 @@ import '@/labs/VCommandPalette/VCommandPalette.scss'
 
 // Components
 import { VDialog } from '@/components/VDialog'
-import { makeVDialogProps } from '@/components/VDialog/VDialog'
 import { VDivider } from '@/components/VDivider'
 import { VSheet } from '@/components/VSheet'
+import { makeVSheetProps } from '@/components/VSheet/VSheet'
 import { VCommandPaletteInstructions } from '@/labs/VCommandPalette/VCommandPaletteInstructions'
 import { isGroupDefinition, isParentDefinition, VCommandPaletteList } from '@/labs/VCommandPalette/VCommandPaletteList'
 import { VCommandPaletteSearch } from '@/labs/VCommandPalette/VCommandPaletteSearch'
@@ -528,6 +528,9 @@ export type VCommandPaletteFooterSlotScope = {
  * Combines props from multiple concerns: dialog, theming, filtering, etc.
  */
 export const makeVCommandPaletteProps = propsFactory({
+  contained: Boolean,
+  persistent: Boolean,
+  modelValue: Boolean,
   // Global hotkey to open/close the palette (e.g., "ctrl+k") - optional
   hotkey: String,
   // Title displayed at the top of the palette
@@ -554,18 +557,15 @@ export const makeVCommandPaletteProps = propsFactory({
     default: () => [],
   },
   // Standard Vuetify component props
+  ...makeVSheetProps({
+    maxHeight: 450,
+    maxWidth: 720,
+  }),
   ...makeComponentProps(),
   ...makeDensityProps(),
   ...makeFilterProps({ filterKeys: ['title', 'subtitle', 'keywords'] }),
   ...makeTransitionProps({ transition: 'dialog-transition' }),
   ...makeThemeProps(),
-  // Dialog-specific props with command palette defaults
-  ...makeVDialogProps({
-    maxHeight: 450,
-    maxWidth: 720,
-    absolute: true,
-    scrollable: true,
-  }),
 }, 'VCommandPalette')
 
 /**
@@ -666,6 +666,7 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
     useRender(() => {
       // Extract content-specific props
       const contentProps = VCommandPaletteContent.filterProps(props)
+      const sheetProps = VSheet.filterProps(props)
 
       const commandPaletteContent = (
         <VCommandPaletteContent
@@ -680,7 +681,6 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
       if (props.contained) {
         return isActive.value ? (
           <VSheet
-            rounded
             class={[
               'v-command-palette',
               themeClasses.value,
@@ -688,6 +688,7 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
               props.class,
             ]}
             style={ props.style }
+            { ...sheetProps }
           >
             { commandPaletteContent }
           </VSheet>
@@ -695,15 +696,17 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
       }
 
       // Extract dialog-specific props
-      const dialogProps = VDialog.filterProps(props)
       // Pass transition prop directly to VDialog (follows VOverlay/VDialog conventions)
       const transitionProps = { transition: props.transition }
 
       return (
         <VDialog
-          { ...dialogProps }
           { ...transitionProps }
           modelValue={ isActive.value }
+          maxHeight={ sheetProps.maxHeight }
+          maxWidth={ sheetProps.maxWidth }
+          absolute
+          scrollable
           onUpdate:modelValue={ (v: boolean) => isActive.value = v }
           onAfterEnter={ onAfterEnter }
           onAfterLeave={ onAfterLeave }
@@ -717,7 +720,10 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
           style={ props.style }
           v-slots={{
             default: () => (
-              <VSheet rounded class="v-command-palette__sheet">
+              <VSheet
+                class="v-command-palette__sheet"
+                { ...sheetProps }
+              >
                 { commandPaletteContent }
               </VSheet>
             ),
