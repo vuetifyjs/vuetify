@@ -715,13 +715,15 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
             'v-command-palette__dialog',
             themeClasses.value,
             densityClasses.value,
-            props.class,
           ]}
           style={ props.style }
           v-slots={{
             default: () => (
               <VSheet
-                class="v-command-palette__sheet"
+                class={[
+                  'v-command-palette__sheet',
+                  props.class,
+                ]}
                 { ...sheetProps }
               >
                 { commandPaletteContent }
