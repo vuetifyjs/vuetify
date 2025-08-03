@@ -1,8 +1,10 @@
+@use 'sass:math';
 @use '../../styles/settings';
 
 // Defaults
 $video-player-width: 480px !default;
 $video-player-height: 270px !default;
+$video-aspect-ratio: math.div(16, 9) !default;
 
 $video-elevation: 4 !default;
 $video-padding: 0px !default;
