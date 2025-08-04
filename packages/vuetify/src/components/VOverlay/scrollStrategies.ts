@@ -70,14 +70,12 @@ function closeScrollStrategy (data: ScrollStrategyData) {
     data.isActive.value = false
   }
 
-  bindScroll(data.target.value ?? data.contentEl.value, onScroll)
+  bindScroll(getTargetEl(data.target.value, data.contentEl.value), onScroll)
 }
 
 function blockScrollStrategy (data: ScrollStrategyData, props: StrategyProps) {
   const offsetParent = data.root.value?.offsetParent
-  const target = Array.isArray(data.target.value)
-    ? document.elementFromPoint(...data.target.value)
-    : data.target.value
+  const target = getTargetEl(data.target.value, data.contentEl.value)
   const scrollElements = [...new Set([
     ...getScrollParents(target, props.contained ? offsetParent : undefined),
     ...getScrollParents(data.contentEl.value, props.contained ? offsetParent : undefined),
@@ -140,7 +138,7 @@ function repositionScrollStrategy (data: ScrollStrategyData, props: StrategyProp
 
   ric = (typeof requestIdleCallback === 'undefined' ? (cb: Function) => cb() : requestIdleCallback)(() => {
     scope.run(() => {
-      bindScroll(data.target.value ?? data.contentEl.value, e => {
+      bindScroll(getTargetEl(data.target.value, data.contentEl.value), e => {
         if (slow) {
           // If the position calculation is slow,
           // defer updates until scrolling is finished.
@@ -165,9 +163,16 @@ function repositionScrollStrategy (data: ScrollStrategyData, props: StrategyProp
   })
 }
 
-/** @private */
-function bindScroll (target: HTMLElement | [x: number, y: number] | undefined, onScroll: (e: Event) => void) {
-  const el = Array.isArray(target) ? document.elementFromPoint(...target) : target
+function getTargetEl (
+  target: HTMLElement | [x: number, y: number] | undefined,
+  contentEl: HTMLElement | undefined,
+) {
+  return Array.isArray(target)
+    ? document.elementsFromPoint(...target).find(el => !contentEl?.contains(el))
+    : target ?? contentEl
+}
+
+function bindScroll (el: Element | undefined, onScroll: (e: Event) => void) {
   const scrollElements = [document, ...getScrollParents(el)]
   scrollElements.forEach(el => {
     el.addEventListener('scroll', onScroll, { passive: true })
