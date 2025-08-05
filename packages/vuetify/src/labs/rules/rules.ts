@@ -34,7 +34,10 @@ export type RulesOptions = {
 type ValidationRuleParams = [any, string?]
 export type ValidationAlias = string | [string, ...ValidationRuleParams]
 
-export type RulesInstance = (fn: () => ValidationProps['rules']) => Readonly<Ref<any[]>>
+export type RulesInstance = {
+  resolve: (fn: () => ValidationProps['rules']) => Readonly<Ref<any[]>>
+  aliases: RuleAliases
+}
 
 export function createRules (options: RulesOptions | undefined, locale: LocaleInstance) {
   const { t } = locale
@@ -86,7 +89,7 @@ export function createRules (options: RulesOptions | undefined, locale: LocaleIn
     ...options?.aliases,
   }
 
-  function resolveRules (fn: () => ValidationProps['rules']) {
+  function resolve (fn: () => ValidationProps['rules']) {
     return computed(() => fn().map(rule => {
       let ruleName: string | null = null
       let ruleParams: ValidationRuleParams = [undefined]
@@ -109,15 +112,26 @@ export function createRules (options: RulesOptions | undefined, locale: LocaleIn
     }))
   }
 
-  return resolveRules
+  return {
+    resolve,
+    aliases,
+  }
 }
 
 export const RulesSymbol: InjectionKey<RulesInstance> = Symbol.for('vuetify:rules')
 
-export function useRules (fn: () => ValidationProps['rules']) {
-  const resolveRules = inject(RulesSymbol, null)
+export function useRules (): RuleAliases
+export function useRules (fn: () => ValidationProps['rules']): Readonly<Ref<ValidationProps['rules']>> | Readonly<Ref<ValidationRule[]>>
 
-  if (!resolveRules) return toRef(fn)
+export function useRules (fn?: () => ValidationProps['rules']) {
+  const rules = inject(RulesSymbol, null)
 
-  return resolveRules(fn)
+  if (!fn) {
+    if (!rules) {
+      throw new Error('Could not find Vuetify rules injection')
+    }
+    return rules.aliases
+  }
+
+  return rules?.resolve(fn) ?? toRef(fn)
 }

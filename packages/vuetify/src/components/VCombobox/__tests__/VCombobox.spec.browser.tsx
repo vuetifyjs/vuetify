@@ -223,8 +223,8 @@ describe('VCombobox', () => {
       const { element } = render(() => (
         <VCombobox
           items={ items }
-          item-value="id"
-          item-title="name"
+          itemValue="id"
+          itemTitle="name"
         />
       ))
 
@@ -353,9 +353,9 @@ describe('VCombobox', () => {
           v-model={ selectedItems.value }
           items={ items.value }
           multiple
-          item-title="text"
-          item-value="value"
-          return-object
+          itemTitle="text"
+          itemValue="value"
+          returnObject
         />
       ))
 
@@ -521,7 +521,7 @@ describe('VCombobox', () => {
     const { element } = render(() => (
       <VCombobox
         chips
-        closable-chips
+        closableChips
         items={['foo', 'bar']}
         label="Select"
         modelValue={['foo', 'bar']}
@@ -634,7 +634,7 @@ describe('VCombobox', () => {
       <VCombobox
         chips
         v-model={ selectedItem.value }
-        closable-chips
+        closableChips
         items={['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']}
       />
     ))
@@ -744,6 +744,25 @@ describe('VCombobox', () => {
     await userEvent.click(element, { y: 1 })
 
     expect(onFocus).toHaveBeenCalledTimes(1)
+  })
+
+  it.each([
+    { delimiters: [','], text: 'abc,foo, baz', expected: ['abc', 'foo', 'baz'] },
+    { delimiters: [':'], text: '012:2,32:0:1', expected: ['012', '2,32', '0', '1'] },
+    { delimiters: [':', '.', '-'], text: '(1) 231:13 - 123.', expected: ['(1) 231', '13', '123'] },
+  ])('should ingest new items when a delimited text is pasted', async ({ delimiters, text, expected }) => {
+    const model = ref(null)
+    render(() => (
+      <VCombobox
+        v-model={ model.value }
+        delimiters={ delimiters }
+        multiple
+      />
+    ))
+    await userEvent.tab()
+    navigator.clipboard.writeText(text)
+    await userEvent.paste()
+    expect(model.value).toEqual(expected)
   })
 
   describe('Showcase', () => {

@@ -367,7 +367,7 @@ export const VSelect = genericComponent<new <
     watch(() => props.items, (newVal, oldVal) => {
       if (menu.value) return
 
-      if (isFocused.value && !oldVal.length && newVal.length) {
+      if (isFocused.value && props.hideNoData && !oldVal.length && newVal.length) {
         menu.value = true
       }
     })
@@ -448,6 +448,7 @@ export const VSelect = genericComponent<new <
                       onKeydown={ onListKeydown }
                       onFocusin={ onFocusin }
                       tabindex="-1"
+                      selectable
                       aria-live="polite"
                       aria-label={ `${props.label}-list` }
                       color={ props.itemColor ?? props.color }

@@ -2,7 +2,7 @@
 import { VBtn } from '@/components/VBtn'
 
 // Composables
-import { useLocale } from '@/composables'
+import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities

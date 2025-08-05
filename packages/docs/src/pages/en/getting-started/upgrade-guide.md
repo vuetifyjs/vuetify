@@ -273,6 +273,7 @@ app.use(vuetify)
 
 - `v-tab-item` has been removed, use `v-window-item`
 - `optional` has been replaced with `:mandatory="false"`
+- `<v-tab href="#foo">` no longer sets the v-tabs model to "foo" when selected, use `value="foo"` instead
 
 ### v-img
 

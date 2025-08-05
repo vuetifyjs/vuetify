@@ -1,11 +1,12 @@
 // Utilities
 import { inject, toRef } from 'vue'
 import { useRtl } from './locale'
-import { clamp, consoleWarn, mergeDeep, refElement } from '@/util'
+import { clamp, consoleWarn, easingPatterns, mergeDeep, refElement } from '@/util'
 
 // Types
 import type { ComponentPublicInstance, InjectionKey, Ref } from 'vue'
 import type { LocaleInstance, RtlInstance } from './locale'
+import type { EasingFunction } from '@/util'
 
 export interface GoToInstance {
   rtl: Ref<boolean>
@@ -17,8 +18,8 @@ export interface InternalGoToOptions {
   duration: number
   layout: boolean
   offset: number
-  easing: string | ((t: number) => number)
-  patterns: Record<string, (t: number) => number>
+  easing: string | EasingFunction
+  patterns: Record<string, EasingFunction>
 }
 
 export type GoToOptions = Partial<InternalGoToOptions>
@@ -31,22 +32,8 @@ function genDefaults () {
     duration: 300,
     layout: false,
     offset: 0,
-    easing: 'easeInOutCubic',
-    patterns: {
-      linear: (t: number) => t,
-      easeInQuad: (t: number) => t ** 2,
-      easeOutQuad: (t: number) => t * (2 - t),
-      easeInOutQuad: (t: number) => (t < 0.5 ? 2 * t ** 2 : -1 + (4 - 2 * t) * t),
-      easeInCubic: (t: number) => t ** 3,
-      easeOutCubic: (t: number) => --t ** 3 + 1,
-      easeInOutCubic: (t: number) => t < 0.5 ? 4 * t ** 3 : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1,
-      easeInQuart: (t: number) => t ** 4,
-      easeOutQuart: (t: number) => 1 - --t ** 4,
-      easeInOutQuart: (t: number) => (t < 0.5 ? 8 * t ** 4 : 1 - 8 * --t ** 4),
-      easeInQuint: (t: number) => t ** 5,
-      easeOutQuint: (t: number) => 1 + --t ** 5,
-      easeInOutQuint: (t: number) => t < 0.5 ? 16 * t ** 5 : 1 + 16 * --t ** 5,
-    },
+    easing: 'easeInOutCubic' satisfies keyof typeof easingPatterns,
+    patterns: easingPatterns,
   }
 }
 
@@ -94,7 +81,9 @@ export async function scrollTo (
   const container = options.container === 'parent' && target instanceof HTMLElement
     ? target.parentElement!
     : getContainer(options.container)
-  const ease = typeof options.easing === 'function' ? options.easing : options.patterns[options.easing]
+  const ease = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? options.patterns.instant
+    : typeof options.easing === 'function' ? options.easing
+    : options.patterns[options.easing]
 
   if (!ease) throw new TypeError(`Easing function "${options.easing}" not found.`)
 

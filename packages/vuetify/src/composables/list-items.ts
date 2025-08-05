@@ -59,11 +59,15 @@ export const makeItemsProps = propsFactory({
   valueComparator: Function as PropType<typeof deepEqual>,
 }, 'list-items')
 
-export function transformItem (props: Omit<ItemProps, 'items'>, item: any): ListItem {
+const itemTypes = new Set(['item', 'divider', 'subheader'])
+
+export function transformItem (
+  props: Pick<ItemProps, typeof transformItem.neededProps[number]>,
+  item: any
+): ListItem {
   const title = getPropertyFromItem(item, props.itemTitle, item)
   const value = getPropertyFromItem(item, props.itemValue, title)
   const children = getPropertyFromItem(item, props.itemChildren)
-  const type = getPropertyFromItem(item, props.itemType, 'item')
   const itemProps = props.itemProps === true
     ? typeof item === 'object' && item != null && !Array.isArray(item)
       ? 'children' in item
@@ -71,6 +75,11 @@ export function transformItem (props: Omit<ItemProps, 'items'>, item: any): List
         : item
       : undefined
     : getPropertyFromItem(item, props.itemProps)
+
+  let type = getPropertyFromItem(item, props.itemType, 'item')
+  if (!itemTypes.has(type)) {
+    type = 'item'
+  }
 
   const _props = {
     title,
@@ -88,16 +97,20 @@ export function transformItem (props: Omit<ItemProps, 'items'>, item: any): List
   }
 }
 
-export function transformItems (props: Omit<ItemProps, 'items'>, items: ItemProps['items']) {
-  const _props = pick(props, [
-    'itemTitle',
-    'itemValue',
-    'itemChildren',
-    'itemProps',
-    'itemType',
-    'returnObject',
-    'valueComparator',
-  ])
+transformItem.neededProps = [
+  'itemTitle',
+  'itemValue',
+  'itemChildren',
+  'itemProps',
+  'itemType',
+] as const
+
+export function transformItems (
+  props: Pick<ItemProps, typeof transformItem.neededProps[number]>,
+  items: ItemProps['items']
+) {
+  // avoid reactive access in the loop
+  const _props = pick(props, transformItem.neededProps)
 
   const array: ListItem[] = []
   for (const item of items) {
@@ -144,15 +157,7 @@ export function useItems (props: ItemProps) {
     const _returnObject = props.returnObject
     const hasValueComparator = !!props.valueComparator
     const valueComparator = props.valueComparator || deepEqual
-    const _props = pick(props, [
-      'itemTitle',
-      'itemValue',
-      'itemChildren',
-      'itemProps',
-      'itemType',
-      'returnObject',
-      'valueComparator',
-    ])
+    const _props = pick(props, transformItem.neededProps)
 
     const returnValue: ListItem[] = []
     main: for (const v of value) {

@@ -138,7 +138,7 @@ Other options are available for setting **width**, **align**, **fixed**, or pass
 
 ### Props
 
-There are no shortable of properties available for customizing various aspects of the Data table components.
+There is no shortage of properties available for customizing various aspects of the Data table components.
 
 #### Density
 
@@ -172,6 +172,12 @@ When wanting to use a checkbox component inside of a slot template in your data 
 
 <ExamplesExample file="v-data-table/slot-simple-checkbox" />
 
+#### Group by
+
+The **group-by** prop makes it possible to group rows by one or more attributes.
+
+<ExamplesExample file="v-data-table/prop-grouping" />
+
 ### Slots
 
 #### Header slot
@@ -204,9 +210,19 @@ You can use the dynamic slots `item.<key>` to customize only certain columns. `<
 
 #### Group header slot
 
-When using the **group-by** prop, you can customize the group header with the `group-header` slot.
+When using the **group-by** prop, you can customize the group header with the `group-header` slot. Example below makes the whole row clickable.
 
 <ExamplesExample file="v-data-table/slot-group-header" />
+
+#### Group summary slot
+
+::: info
+This feature requires [v3.9.4](/getting-started/release-notes/?version=v3.9.4)
+:::
+
+By default grouping with **group-by** shows only the header slot. When you define `group-summary` slot, additional summary row will appear below the group rows.
+
+<ExamplesExample file="v-data-table/slot-group-summary" />
 
 #### Loading slot
 

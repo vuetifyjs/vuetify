@@ -28,7 +28,7 @@ import vRipple from '@/directives/ripple'
 
 // Utilities
 import { computed, onBeforeMount, toDisplayString, toRef, watch } from 'vue'
-import { deprecate, EventProp, genericComponent, keyCodes, propsFactory, useRender } from '@/util'
+import { deprecate, EventProp, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -152,6 +152,13 @@ export const VListItem = genericComponent<VListItemSlots>()({
       props.link !== false &&
       (props.link || link.isClickable.value || isSelectable.value)
     )
+    const role = computed(() => list ? (isSelectable.value ? 'option' : 'listitem') : undefined)
+    const ariaSelected = computed(() => {
+      if (!isSelectable.value) return undefined
+      return root.activatable.value ? isActivated.value
+        : root.selectable.value ? isSelected.value
+        : isActive.value
+    })
 
     const roundedProps = toRef(() => props.rounded || props.nav)
     const color = toRef(() => props.color ?? props.activeColor)
@@ -190,7 +197,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
         !!props.ripple &&
         list?.filterable
       )
-        ? { keys: [keyCodes.enter] }
+        ? { keys: ['Enter'] }
         : props.ripple
     )
 
@@ -277,13 +284,8 @@ export const VListItem = genericComponent<VListItemSlots>()({
             props.style,
           ]}
           tabindex={ isClickable.value ? (list ? -2 : 0) : undefined }
-          aria-selected={
-            isSelectable.value ? (
-              root.activatable.value ? isActivated.value
-              : root.selectable.value ? isSelected.value
-              : isActive.value
-            ) : undefined
-          }
+          aria-selected={ ariaSelected.value }
+          role={ role.value }
           onClick={ onClick }
           onKeydown={ isClickable.value && !isLink.value && onKeyDown }
           v-ripple={ isClickable.value && rippleOptions.value }
