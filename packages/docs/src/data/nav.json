@@ -285,6 +285,10 @@
         "subfolder": "components"
       },
       {
+        "title": "editor",
+        "subfolder": "components"
+      },
+      {
         "title": "hotkeys",
         "subfolder": "components"
       },
