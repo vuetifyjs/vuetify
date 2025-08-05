@@ -26,7 +26,7 @@ import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { DeepReadonly, UnwrapRef } from 'vue'
-import type { Group, GroupSummary } from './composables/group'
+import type { Group } from './composables/group'
 import type { CellProps, DataTableHeader, DataTableItem, InternalDataTableHeader, RowProps } from './types'
 import type { VDataTableHeadersSlots } from './VDataTableHeaders'
 import type { VDataTableRowsSlots } from './VDataTableRows'
@@ -51,7 +51,7 @@ export type VDataTableSlotProps<T> = {
   toggleGroup: ReturnType<typeof provideGroupBy>['toggleGroup']
   items: readonly T[]
   internalItems: readonly DataTableItem[]
-  groupedItems: readonly (DataTableItem<T> | Group<DataTableItem<T>> | GroupSummary<DataTableItem<T>>)[]
+  groupedItems: readonly (DataTableItem<T> | Group<DataTableItem<T>>)[]
   columns: InternalDataTableHeader[]
   headers: InternalDataTableHeader[][]
 }
@@ -160,7 +160,7 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
       sortFunctions,
       sortRawFunctions,
     })
-    const { flatItems } = useGroupedItems(sortedItems, groupBy, opened, () => !!slots['group-summary'])
+    const { flatItems } = useGroupedItems(sortedItems, groupBy, opened)
     const itemsLength = computed(() => flatItems.value.length)
 
     const { startIndex, stopIndex, pageCount, setItemsPerPage } = providePagination({ page, itemsPerPage, itemsLength })

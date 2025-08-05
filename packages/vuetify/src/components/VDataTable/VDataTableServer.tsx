@@ -88,7 +88,7 @@ export const VDataTableServer = genericComponent<new <T extends readonly any[], 
 
     const { pageCount, setItemsPerPage } = providePagination({ page, itemsPerPage, itemsLength })
 
-    const { flatItems } = useGroupedItems(items, groupBy, opened, () => !!slots['group-summary'])
+    const { flatItems } = useGroupedItems(items, groupBy, opened)
 
     const { isSelected, select, selectAll, toggleSelect, someSelected, allSelected } = provideSelection(props, {
       allItems: items,

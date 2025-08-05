@@ -64,19 +64,6 @@
   "VDataTable": {
     "props": {
       "headerProps": "3.5.0"
-    },
-    "slots": {
-      "group-summary": "3.9.4"
-    }
-  },
-  "VDataTableServer": {
-    "slots": {
-      "group-summary": "3.9.4"
-    }
-  },
-  "VDataTableVirtual": {
-    "slots": {
-      "group-summary": "3.9.4"
     }
   },
   "VExpansionPanels": {

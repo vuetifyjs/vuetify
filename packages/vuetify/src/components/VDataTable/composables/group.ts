@@ -2,11 +2,11 @@
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, inject, provide, ref, toValue } from 'vue'
+import { computed, inject, provide, ref } from 'vue'
 import { getObjectValueByPath, propsFactory } from '@/util'
 
 // Types
-import type { InjectionKey, MaybeRefOrGetter, PropType, Ref } from 'vue'
+import type { InjectionKey, PropType, Ref } from 'vue'
 import type { SortItem } from './sort'
 import type { DataTableItem } from '../types'
 
@@ -21,16 +21,7 @@ export interface Group<T = any> {
   id: string
   key: string
   value: any
-  items: readonly (T | Group<T> | GroupSummary<T>)[]
-}
-
-export interface GroupSummary<T = any> {
-  type: 'group-summary'
-  depth: number
-  id: string
-  key: string
-  value: any
-  items: readonly (T | Group<T> | GroupSummary<T>)[]
+  items: readonly (T | Group<T>)[]
 }
 
 export const makeDataTableGroupProps = propsFactory({
@@ -87,7 +78,7 @@ export function provideGroupBy (options: {
     opened.value = newOpened
   }
 
-  function extractRows <T extends GroupableItem> (items: readonly (T | Group<T> | GroupSummary<T>)[]) {
+  function extractRows <T extends GroupableItem> (items: readonly (T | Group<T>)[]) {
     function dive (group: Group<T>): T[] {
       const arr = []
 
@@ -164,12 +155,8 @@ function groupItems <T extends GroupableItem> (items: readonly T[], groupBy: rea
   return groups
 }
 
-function flattenItems <T extends GroupableItem> (
-  items: readonly (T | Group<T> | GroupSummary<T>)[],
-  opened: Set<string>,
-  hasSummary: boolean
-): readonly (T | Group<T> | GroupSummary<T>)[] {
-  const flatItems: (T | Group<T> | GroupSummary<T>)[] = []
+function flattenItems <T extends GroupableItem> (items: readonly (T | Group<T>)[], opened: Set<string>): readonly (T | Group<T>)[] {
+  const flatItems: (T | Group<T>)[] = []
 
   for (const item of items) {
     // TODO: make this better
@@ -179,11 +166,7 @@ function flattenItems <T extends GroupableItem> (
       }
 
       if (opened.has(item.id) || item.value == null) {
-        flatItems.push(...flattenItems(item.items, opened, hasSummary))
-
-        if (hasSummary) {
-          flatItems.push({ ...item, type: 'group-summary' })
-        }
+        flatItems.push(...flattenItems(item.items, opened))
       }
     } else {
       flatItems.push(item)
@@ -196,15 +179,14 @@ function flattenItems <T extends GroupableItem> (
 export function useGroupedItems <T extends GroupableItem> (
   items: Ref<T[]>,
   groupBy: Ref<readonly SortItem[]>,
-  opened: Ref<Set<string>>,
-  hasSummary: MaybeRefOrGetter<boolean>,
+  opened: Ref<Set<string>>
 ) {
   const flatItems = computed(() => {
     if (!groupBy.value.length) return items.value
 
     const groupedItems = groupItems(items.value, groupBy.value.map(item => item.key))
 
-    return flattenItems(groupedItems, opened.value, toValue(hasSummary))
+    return flattenItems(groupedItems, opened.value)
   })
 
   return { flatItems }

@@ -119,7 +119,7 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
       sortFunctions,
       sortRawFunctions,
     })
-    const { flatItems } = useGroupedItems(sortedItems, groupBy, opened, () => !!slots['group-summary'])
+    const { flatItems } = useGroupedItems(sortedItems, groupBy, opened)
 
     const allItems = computed(() => extractRows(flatItems.value))
 

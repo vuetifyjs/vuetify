@@ -22,7 +22,6 @@
     "expanded-row": "Slot for custom rendering of an expanded row.",
     "footer.prepend": "Adds content to the empty space in the footer.",
     "group-header": "Slot for custom rendering of a group header.",
-    "group-summary": "Slot for custom rendering of a group summary.",
     "headers": "Slot to replace the default rendering of the `<thead>` element.",
     "item": "Slot to replace the default rendering of a row.",
     "item.data-table-expand": "Slot to replace the default `v-icon` used when expanding rows.",
