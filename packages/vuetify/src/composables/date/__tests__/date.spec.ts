@@ -178,16 +178,6 @@ describe('VuetifyDateAdapter', () => {
       expect(adapter.getWeek(adapter.parseISO('2025-11-03'))).toBe(45)
     })
   })
-
-  describe('week numbers with first-day-of-week', () => {
-    it('should calculate weeks correctly when adapting for UK', () => {
-      const adapterUS = new VuetifyDateAdapter({ locale: 'en-US' })
-      const adapterGB = new VuetifyDateAdapter({ locale: 'en-GB' })
-      expect(adapterUS.getWeek(adapterUS.parseISO('2025-03-16'))).toBe(12)
-      expect(adapterGB.getWeek(adapterGB.parseISO('2025-03-16'))).toBe(11)
-      expect(adapterUS.getWeek(adapterUS.parseISO('2025-03-16'), 1, 4)).toBe(11)
-    })
-  })
 })
 
 describe('StringDateAdapter', () => {

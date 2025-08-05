@@ -57,7 +57,6 @@
   "VDatePicker": {
     "props": {
       "controlHeight": "3.8.0",
-      "firstDayOfYear": "3.9.3",
       "headerColor": "3.8.0"
     }
   },
