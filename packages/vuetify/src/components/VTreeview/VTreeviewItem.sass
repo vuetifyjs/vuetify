@@ -7,6 +7,13 @@
     &.v-treeview-item--filtered
       display: none
 
+    &.v-list-item--disabled:not(a)
+      pointer-events: auto
+
+      .v-selection-control
+        pointer-events: none
+
+
     &__level
       width: #{$treeview-indent-size}
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex align-start justify-center ga-6">
+  <div class="d-flex flex-wrap align-start justify-center ga-6">
     <div v-for="density in options" :key="density">
       <v-video
         :density="density"

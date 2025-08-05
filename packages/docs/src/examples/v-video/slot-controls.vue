@@ -7,9 +7,9 @@
       controls-variant="mini"
       height="300"
       image="https://jsek.work/vt-sunflowers.jpg"
+      max-width="500"
       rounded="lg"
       src="https://jsek.work/vt-sunflowers.mp4"
-      width="500"
       eager
       hide-overlay
       pills

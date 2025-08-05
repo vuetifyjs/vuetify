@@ -4,6 +4,7 @@
       :key="resetToPoster"
       :image="posterUrl"
       class="mx-auto mb-3"
+      max-width="450"
       src="https://jsek.work/vt-sunflowers.mp4"
       muted
       @loaded="loaded = true"

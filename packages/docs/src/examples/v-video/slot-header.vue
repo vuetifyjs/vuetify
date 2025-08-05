@@ -3,6 +3,7 @@
     <v-video
       class="align-self-center"
       image="https://jsek.work/vt-sunflowers.jpg"
+      max-width="450"
       src="https://jsek.work/vt-sunflowers.mp4"
       eager
       muted

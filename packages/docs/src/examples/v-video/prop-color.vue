@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-sheet class="px-6 py-2 border-b mb-3" color="surface">
-      <div class="d-flex ga-12 flex-wrap align-center justify-center">
+      <div class="d-flex ga-2 ga-md-12 flex-wrap align-center justify-center">
         <div class="d-flex align-center ga-3">
           <v-chip-group v-model="controlsVariant" mandatory>
             <v-chip text="default" value="default" filter label></v-chip>
@@ -52,6 +52,7 @@
       :track-color="colors.track"
       class="mx-auto mb-3"
       image="https://jsek.work/vt-sunflowers.jpg"
+      max-width="450"
       src="https://jsek.work/vt-sunflowers.mp4"
       eager
       muted

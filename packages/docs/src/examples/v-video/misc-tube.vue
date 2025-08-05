@@ -6,6 +6,7 @@
     controls-variant="tube"
     density="comfortable"
     image="https://jsek.work/vt-video-poster.jpg"
+    max-width="450"
     rounded="lg"
     src="https://jsek.work/vt-video.mp4"
     track-color="red"

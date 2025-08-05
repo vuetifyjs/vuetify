@@ -44,6 +44,7 @@ const allowedVariants = ['background', 'player'] as const
 type Variant = typeof allowedVariants[number]
 
 export const makeVVideoProps = propsFactory({
+  aspectRatio: [String, Number],
   autoplay: Boolean,
   muted: Boolean,
   eager: Boolean,
@@ -392,7 +393,8 @@ export const VVideo = genericComponent<VVideoSlots>()({
             props.class,
           ]}
           style={[
-            props.variant === 'background' ? [] : pick(dimensionStyles.value, ['width', 'min-width', 'max-width']),
+            { '--v-video-aspect-ratio': props.aspectRatio },
+            props.variant === 'background' ? [] : pick(dimensionStyles.value, ['width', 'minWidth', 'maxWidth']),
             props.style,
           ]}
           onKeydown={ onKeydown }
