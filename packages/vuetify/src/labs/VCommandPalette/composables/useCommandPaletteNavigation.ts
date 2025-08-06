@@ -73,9 +73,8 @@ export function useCommandPaletteNavigation (options: UseCommandPaletteNavigatio
     let count = 0
     filteredItems.value.forEach(item => {
       if (item.raw?.type === 'parent') {
-        // Parent item itself is selectable, plus all its children
-        const children = item.raw.children || []
-        count += 1 + children.length
+        // Parent items are selectable themselves; their children are not visible/selectable until navigated into
+        count += 1
       } else if (item.raw?.type === 'group') {
         // Only children are selectable, not the group header
         const children = item.raw.children || []
@@ -178,22 +177,12 @@ export function useCommandPaletteNavigation (options: UseCommandPaletteNavigatio
     for (const item of filteredItems.value) {
       const raw = item.raw
       if (raw?.type === 'parent') {
-        // Check if target is the parent item itself
+        // Parent item itself
         if (selectableCount === targetIndex) {
           return item
         }
-        // Check if target is within the parent's children
-        const children = raw.children || []
-        const childrenStart = selectableCount + 1
-        const childrenEnd = childrenStart + children.length - 1
-        if (targetIndex >= childrenStart && targetIndex <= childrenEnd) {
-          const childIndex = targetIndex - childrenStart
-          const child = children[childIndex]
-          // Transform the raw child into a VuetifyListItem
-          const [transformedChild] = transformItems(itemTransformationProps.value, [child])
-          return transformedChild
-        }
-        selectableCount += 1 + children.length
+        // Children are not selectable in this view; move to next item
+        selectableCount += 1
       } else if (raw?.type === 'group') {
         // Groups themselves are not selectable, only their children
         const children = raw.children || []
