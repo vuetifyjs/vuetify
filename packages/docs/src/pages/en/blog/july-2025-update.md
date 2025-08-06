@@ -177,19 +177,19 @@ We've made significant progress on several key components and features this mont
 
 **VCommandPalette** has moved from concept to reality. This keyboard-first navigation component brings the power of command palettes (think **VS Code** or **Raycast**) to web applications. Early prototypes show seamless integration with Vuetify's existing keyboard navigation, making power-user features accessible to all developers.
 
-<video width="100%" height="auto" autoplay loop controls>
+<video width="100%" height="auto" loop controls>
   <source src="https://cdn.vuetifyjs.com/docs/images/blog/july-2025-update/vcommand-palette.mp4" type="video/mp4"></source>
 </video>
 
 **VEditor** reached a significant milestone with the completion of heading formatting (h1-h6) and substantial progress on alignment controls. This rich text editor is becoming the *go-to solution* for content management within Vuetify applications.
 
-<video width="100%" height="auto" autoplay loop controls>
+<video width="100%" height="auto" loop controls>
   <source src="https://cdn.vuetifyjs.com/docs/images/blog/july-2025-update/veditor.m4v" type="video/mp4"></source>
 </video>
 
 **VVideo** officially entered Labs with the release of [v3.9.3](https://vuetifyjs.com/getting-started/release-notes/?version=v3.9.3). This component provides a flexible and powerful way to embed videos in Vuetify applications, supporting various formats and configurations.
 
-<video width="100%" height="auto" autoplay loop controls>
+<video width="100%" height="auto" loop controls>
   <source src="https://vuetifyjs.b-cdn.net/docs/images/blog/june-2025-update/vvideo.mp4" type="video/mp4"></source>
 </video>
 
