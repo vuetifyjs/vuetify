@@ -13,6 +13,9 @@ import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { useColor } from '@/composables/color'
 import { makeDensityProps } from '@/composables/density'
 
+// Directives
+import vClickOutside from '@/directives/click-outside'
+
 // Utilities
 import { computed, shallowRef, toRef, watch } from 'vue'
 import { formatTextTemplate } from './utils'
@@ -103,6 +106,8 @@ export const makeVPieProps = propsFactory({
 export const VPie = genericComponent<VPieSlots>()({
   name: 'VPie',
 
+  directives: { vClickOutside },
+
   props: makeVPieProps(),
 
   setup (props, { slots }) {
@@ -153,7 +158,7 @@ export const VPie = genericComponent<VPieSlots>()({
     const visibleItems = computed(() => {
       // hidden items get (value: 0) to trigger disappearing animation
       return arcs.value.map(item => {
-        return isActive(item)
+        return isVisible(item)
           ? item
           : { ...item, value: 0 }
       })
@@ -185,12 +190,12 @@ export const VPie = genericComponent<VPieSlots>()({
       return typeof paletteItem === 'object' ? paletteItem.pattern : undefined
     }
 
-    function isActive (item: PieItem) {
+    function isVisible (item: PieItem) {
       return visibleItemsKeys.value.includes(item.key)
     }
 
     function toggle (item: PieItem) {
-      if (isActive(item)) {
+      if (isVisible(item)) {
         visibleItemsKeys.value = visibleItemsKeys.value.filter(x => x !== item.key)
       } else {
         visibleItemsKeys.value = [...visibleItemsKeys.value, item.key]
@@ -199,29 +204,53 @@ export const VPie = genericComponent<VPieSlots>()({
 
     const tooltipItem = shallowRef<PieItem | null>(null)
     const tooltipVisible = shallowRef(false)
+    const tooltipTarget = shallowRef<[x: number, y: number]>([0, 0])
 
     let mouseLeaveTimeout = null! as ReturnType<typeof setTimeout>
 
-    function onMouseenter (item: PieItem) {
-      if (!props.tooltip) return
+    function setItemActive (item: PieItem, active: boolean) {
+      arcs.value.forEach(a => a.isActive = a.key === item.key && active)
 
-      clearTimeout(mouseLeaveTimeout)
-      tooltipVisible.value = true
-      tooltipItem.value = item
+      if (props.tooltip) {
+        setTooltip(item, active)
+      }
     }
 
-    function onMouseleave () {
-      if (!props.tooltip) return
-
+    function setTooltip (item: PieItem, active: boolean) {
       clearTimeout(mouseLeaveTimeout)
-      mouseLeaveTimeout = setTimeout(() => {
-        tooltipVisible.value = false
 
-        // intentionally reusing timeout here
+      if (active) {
+        tooltipVisible.value = true
+        tooltipItem.value = item
+      } else {
         mouseLeaveTimeout = setTimeout(() => {
-          tooltipItem.value = null
-        }, 500)
-      }, 100)
+          tooltipVisible.value = false
+
+          // intentionally reusing timeout here
+          mouseLeaveTimeout = setTimeout(() => {
+            tooltipItem.value = null
+          }, 500)
+        }, 100)
+      }
+    }
+
+    let frame = -1
+    function onSvgMousemove ({ clientX, clientY }: MouseEvent) {
+      cancelAnimationFrame(frame)
+      frame = requestAnimationFrame(() => {
+        tooltipTarget.value = [clientX, clientY]
+      })
+    }
+
+    function onSvgTouchstart ({ touches }: TouchEvent) {
+      if (!touches) return
+      const { clientX, clientY } = touches[0]
+      tooltipTarget.value = [clientX, clientY]
+    }
+
+    function onSvgClickOutside () {
+      arcs.value.forEach(a => a.isActive = false)
+      tooltipVisible.value = false
     }
 
     return () => {
@@ -247,6 +276,7 @@ export const VPie = genericComponent<VPieSlots>()({
         subtitleFormat: typeof props.tooltip === 'object' ? props.tooltip.subtitleFormat : '[value]',
         transition: typeof props.tooltip === 'object' ? props.tooltip.transition : defaultTooltipTransition,
         offset: typeof props.tooltip === 'object' ? props.tooltip.offset : 16,
+        target: tooltipTarget.value,
       }
 
       const legendDefaults = {
@@ -311,17 +341,22 @@ export const VPie = genericComponent<VPieSlots>()({
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 100 100"
+              class="v-pie__segments"
+              onMousemove={ onSvgMousemove }
+              onTouchstart={ onSvgTouchstart }
+              v-click-outside={{ handler: onSvgClickOutside }}
             >
               { arcs.value.map((item, index) => (
                 <VPieSegment
                   { ...segmentProps }
                   key={ item.key }
+                  active={ item.isActive }
                   color={ item.color }
-                  value={ isActive(item) ? arcSize(item.value) : 0 }
+                  value={ isVisible(item) ? arcSize(item.value) : 0 }
                   rotate={ arcOffset(index) }
                   pattern={ item.pattern }
-                  onMouseenter={ () => onMouseenter(item) }
-                  onMouseleave={ () => onMouseleave() }
+                  onUpdate:active={ val => setItemActive(item, val) }
+                  onTouchend={ () => setItemActive(item, true) }
                 />
               ))}
             </svg>
@@ -343,7 +378,7 @@ export const VPie = genericComponent<VPieSlots>()({
           { legendConfig.value.visible && (
             <VDefaultsProvider key="legend" defaults={ legendDefaults }>
               <div class="v-pie__legend">
-                { slots.legend?.({ isActive, toggle, items: arcs.value, total: total.value }) ?? (
+                { slots.legend?.({ isActive: isVisible, toggle, items: arcs.value, total: total.value }) ?? (
                   <VChipGroup
                     column
                     multiple

@@ -6,9 +6,9 @@ import { makeVTooltipProps, VTooltip } from '@/components/VTooltip/VTooltip'
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 
 // Utilities
-import { onBeforeUnmount, onMounted, shallowRef, toRef } from 'vue'
+import { toRef } from 'vue'
 import { formatTextTemplate } from './utils'
-import { genericComponent, getCurrentInstance, pick, propsFactory } from '@/util'
+import { genericComponent, pick, propsFactory } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -21,6 +21,7 @@ export type VPieTooltipSlots = {
 
 export const makeVPieTooltipProps = propsFactory({
   modelValue: Boolean,
+  target: Object as PropType<[x: number, y: number]>,
   item: {
     type: Object as PropType<PieItem | null>,
     default: null,
@@ -43,25 +44,6 @@ export const VPieTooltip = genericComponent<VPieTooltipSlots>()({
   props: makeVPieTooltipProps(),
 
   setup (props, { slots }) {
-    const target = shallowRef<[x: number, y: number]>([0, 0])
-    const vm = getCurrentInstance('VPieTooltip')
-
-    let frame = -1
-    function onMouseMove ({ clientX, clientY }: MouseEvent) {
-      cancelAnimationFrame(frame)
-      frame = requestAnimationFrame(() => {
-        target.value = [clientX, clientY]
-      })
-    }
-
-    onMounted(() => {
-      vm.proxy!.$el.parentNode.addEventListener('mousemove', onMouseMove)
-    })
-
-    onBeforeUnmount(() => {
-      vm.proxy!.$el.parentNode.removeEventListener('mousemove', onMouseMove)
-    })
-
     const tooltipTitleFormatFunction = toRef(() => (segment: PieItem) => {
       return typeof props.titleFormat === 'function'
         ? props.titleFormat(segment)
@@ -78,7 +60,7 @@ export const VPieTooltip = genericComponent<VPieTooltipSlots>()({
       <VTooltip
         offset={ props.offset }
         modelValue={ props.modelValue }
-        target={ target.value }
+        target={ props.target }
         contentClass="v-pie__tooltip-content"
       >
         { !!props.item && (
