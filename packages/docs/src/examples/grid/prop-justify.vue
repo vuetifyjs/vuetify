@@ -6,8 +6,8 @@
         :key="k"
         cols="4"
       >
-        <v-sheet class="pa-2 ma-2">
-          .justify-start
+        <v-sheet class="pa-2">
+          justify-start
         </v-sheet>
       </v-col>
     </v-row>
@@ -18,8 +18,8 @@
         :key="k"
         cols="4"
       >
-        <v-sheet class="pa-2 ma-2">
-          .justify-center
+        <v-sheet class="pa-2">
+          justify-center
         </v-sheet>
       </v-col>
     </v-row>
@@ -30,8 +30,8 @@
         :key="k"
         cols="4"
       >
-        <v-sheet class="pa-2 ma-2">
-          .justify-end
+        <v-sheet class="pa-2">
+          justify-end
         </v-sheet>
       </v-col>
     </v-row>
@@ -42,8 +42,8 @@
         :key="k"
         cols="4"
       >
-        <v-sheet class="pa-2 ma-2">
-          .justify-space-around
+        <v-sheet class="pa-2">
+          justify-space-around
         </v-sheet>
       </v-col>
     </v-row>
@@ -54,8 +54,8 @@
         :key="k"
         cols="4"
       >
-        <v-sheet class="pa-2 ma-2">
-          .justify-space-between
+        <v-sheet class="pa-2">
+          justify-space-between
         </v-sheet>
       </v-col>
     </v-row>
