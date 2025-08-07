@@ -46,6 +46,13 @@ export default {
     input: {
       placeholder: 'Introduceți data',
     },
+    ariaLabel: {
+      previousMonth: 'Luna anterioară',
+      nextMonth: 'Luna următoare',
+      selectYear: 'Selectați anul',
+      selectDate: '{0}',
+      currentDate: 'Astăzi, {0}',
+    },
   },
   noDataText: 'Nu există date disponibile',
   carousel: {
@@ -142,5 +149,33 @@ export default {
     space: 'Spațiu',
     plus: 'plus',
     shortcut: 'Comandă rapidă tastatură: {0}',
+  },
+  video: {
+    play: 'Redare',
+    pause: 'Pauză',
+    seek: 'Căutare',
+    volume: 'Volum',
+    showVolume: 'Afișare control volum',
+    mute: 'Fără sunet',
+    unmute: 'Cu sunet',
+    enterFullscreen: 'Ecran complet',
+    exitFullscreen: 'Ieșire din ecran complet',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Alege culoarea de pe ecran',
+      hueSlider: 'Nuanță',
+      alphaSlider: 'Alfa',
+      redInput: 'Roșu',
+      greenInput: 'Verde',
+      blueInput: 'Albastru',
+      alphaInput: 'Alfa',
+      hueInput: 'Nuanță',
+      saturationInput: 'Saturație',
+      lightnessInput: 'Luminozitate',
+      hexInput: 'Valoare HEX',
+      hexaInput: 'Valoare HEX cu alfa',
+      changeFormat: 'Schimbă formatul culorii',
+    },
   },
 }

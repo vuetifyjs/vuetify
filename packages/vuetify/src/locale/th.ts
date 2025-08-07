@@ -46,6 +46,13 @@ export default {
     input: {
       placeholder: 'ป้อนวันที่',
     },
+    ariaLabel: {
+      previousMonth: 'เดือนก่อนหน้า',
+      nextMonth: 'เดือนถัดไป',
+      selectYear: 'เลือกปี',
+      selectDate: '{0}',
+      currentDate: 'วันนี้, {0}',
+    },
   },
   noDataText: 'ไม่มีข้อมูล',
   carousel: {
@@ -142,5 +149,33 @@ export default {
     space: 'เว้นวรรค',
     plus: 'บวก',
     shortcut: 'ทางลัดแป้นพิมพ์: {0}',
+  },
+  video: {
+    play: 'เล่น',
+    pause: 'หยุดชั่วคราว',
+    seek: 'ค้นหา',
+    volume: 'ระดับเสียง',
+    showVolume: 'แสดงตัวควบคุมระดับเสียง',
+    mute: 'ปิดเสียง',
+    unmute: 'เปิดเสียง',
+    enterFullscreen: 'เต็มหน้าจอ',
+    exitFullscreen: 'ออกจากเต็มหน้าจอ',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'เลือกสีจากหน้าจอ',
+      hueSlider: 'ค่าสี',
+      alphaSlider: 'ค่าความโปร่งใส',
+      redInput: 'สีแดง',
+      greenInput: 'สีเขียว',
+      blueInput: 'สีน้ำเงิน',
+      alphaInput: 'ค่าความโปร่งใส',
+      hueInput: 'ค่าสี',
+      saturationInput: 'ค่าความอิ่มตัวของสี',
+      lightnessInput: 'ค่าความสว่าง',
+      hexInput: 'ค่า HEX',
+      hexaInput: 'ค่า HEX พร้อมค่าความโปร่งใส',
+      changeFormat: 'เปลี่ยนรูปแบบสี',
+    },
   },
 }

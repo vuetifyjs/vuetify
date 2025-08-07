@@ -46,6 +46,13 @@ export default {
     input: {
       placeholder: 'Syötä päivämäärä',
     },
+    ariaLabel: {
+      previousMonth: 'Edellinen kuukausi',
+      nextMonth: 'Seuraava kuukausi',
+      selectYear: 'Valitse vuosi',
+      selectDate: '{0}',
+      currentDate: 'Tänään, {0}',
+    },
   },
   noDataText: 'Ei dataa',
   carousel: {
@@ -142,5 +149,33 @@ export default {
     space: 'Välilyönti',
     plus: 'plus',
     shortcut: 'Näppäinyhdistelmä: {0}',
+  },
+  video: {
+    play: 'Toista',
+    pause: 'Tauko',
+    seek: 'Hae',
+    volume: 'Äänenvoimakkuus',
+    showVolume: 'Näytä äänenvoimakkuuden säädin',
+    mute: 'Mykistä',
+    unmute: 'Poista mykistys',
+    enterFullscreen: 'Koko näyttö',
+    exitFullscreen: 'Poistu koko näytöstä',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Valitse väri näytöltä',
+      hueSlider: 'Sävy',
+      alphaSlider: 'Alfa',
+      redInput: 'Punainen',
+      greenInput: 'Vihreä',
+      blueInput: 'Sininen',
+      alphaInput: 'Alfa',
+      hueInput: 'Sävy',
+      saturationInput: 'Kylläisyys',
+      lightnessInput: 'Vaaleus',
+      hexInput: 'HEX-arvo',
+      hexaInput: 'HEX alfa-arvolla',
+      changeFormat: 'Vaihda värimuotoa',
+    },
   },
 }

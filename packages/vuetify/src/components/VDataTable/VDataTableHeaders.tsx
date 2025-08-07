@@ -272,7 +272,6 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
               onClick:append={ () => selectAll(!allSelected.value) }
             >
               {{
-                ...slots,
                 chip: props => (
                   <VChip
                     onClick={ props.item.raw?.sortable ? () => toggleSort(props.item.raw) : undefined }

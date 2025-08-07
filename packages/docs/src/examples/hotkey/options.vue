@@ -40,8 +40,8 @@
 
                 <v-slider
                   v-model="sequenceTimeout"
+                  :label="`Sequence Timeout (${sequenceTimeout}ms)`"
                   class="mb-3"
-                  label="Sequence Timeout (ms)"
                   max="3000"
                   min="500"
                   step="100"
@@ -158,7 +158,7 @@
   const eventType = ref('keydown')
   const allowInInputs = ref(true)
   const preventDefault = ref(true)
-  const sequenceTimeout = ref(1000)
+  const sequenceTimeout = ref(2000)
   const cleanupFunctions = ref([])
 
   const addMessage = text => {

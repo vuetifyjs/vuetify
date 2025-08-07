@@ -28,7 +28,6 @@ function flatten (items: ListItem[], flat: ListItem[] = []) {
 }
 
 export const makeVTreeviewProps = propsFactory({
-  fluid: Boolean,
   openAll: Boolean,
   indentLines: [Boolean, String] as PropType<boolean | IndentLinesVariant>,
   search: String,
@@ -176,20 +175,15 @@ export const VTreeview = genericComponent<new <T>(
           v-model:activated={ activated.value }
           v-model:selected={ selected.value }
         >
-          {{
-            default: () => (
-              <VTreeviewChildren
-                { ...treeviewChildrenProps }
-                density={ props.density }
-                returnObject={ props.returnObject }
-                items={ items.value }
-                parentIndentLines={ props.indentLines ? [] : undefined }
-                indentLinesVariant={ indentLinesVariant }
-                v-slots={ slots }
-              />
-            ),
-            $stable: true,
-          }}
+          <VTreeviewChildren
+            { ...treeviewChildrenProps }
+            density={ props.density }
+            returnObject={ props.returnObject }
+            items={ items.value }
+            parentIndentLines={ props.indentLines ? [] : undefined }
+            indentLinesVariant={ indentLinesVariant }
+            v-slots={ slots }
+          ></VTreeviewChildren>
         </VList>
       )
     })

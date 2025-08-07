@@ -167,9 +167,10 @@
     "joined": "May 2024"
   },
   "J-Sek": {
+    "avatar": "https://cdn.vuetifyjs.com/docs/images/team/j-sek.png",
     "discord": "jacek#1420",
     "focus": [
-      "[vuetifyjs/studio](https://github.com/vuetifyjs/studio)"
+      "[vuetifyjs/vuetify](https://github.com/vuetifyjs/vuetify)"
     ],
     "languages": [
       "Polish",

@@ -48,20 +48,20 @@
                 background: $table-hover-color
                 pointer-events: none
                 @include tools.absolute(true)
-    
+
     &.v-table--striped-even
       > .v-table__wrapper
         > table
           > tbody
             > tr:nth-child(even)
-              background-color: $table-stripe-color
-    
+              background-image: linear-gradient(0deg, $table-stripe-color, $table-stripe-color)
+
     &.v-table--striped-odd
       > .v-table__wrapper
         > table
           > tbody
             > tr:nth-child(odd)
-              background-color: $table-stripe-color
+              background-image: linear-gradient(0deg, $table-stripe-color, $table-stripe-color)
 
     &.v-table--fixed-header
       > .v-table__wrapper

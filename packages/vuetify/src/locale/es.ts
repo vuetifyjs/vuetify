@@ -46,6 +46,13 @@ export default {
     input: {
       placeholder: 'Introducir fecha',
     },
+    ariaLabel: {
+      previousMonth: 'Mes anterior',
+      nextMonth: 'Mes siguiente',
+      selectYear: 'Seleccionar año',
+      selectDate: '{0}',
+      currentDate: 'Hoy, {0}',
+    },
   },
   noDataText: 'No hay datos disponibles',
   carousel: {
@@ -142,5 +149,33 @@ export default {
     space: 'Espacio',
     plus: 'más',
     shortcut: 'Atajo de teclado: {0}',
+  },
+  video: {
+    play: 'Reproducir',
+    pause: 'Pausa',
+    seek: 'Buscar',
+    volume: 'Volumen',
+    showVolume: 'Mostrar control de volumen',
+    mute: 'Silenciar',
+    unmute: 'Activar sonido',
+    enterFullscreen: 'Pantalla completa',
+    exitFullscreen: 'Salir de pantalla completa',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Seleccionar color de la pantalla',
+      hueSlider: 'Tono',
+      alphaSlider: 'Alfa',
+      redInput: 'Rojo',
+      greenInput: 'Verde',
+      blueInput: 'Azul',
+      alphaInput: 'Alfa',
+      hueInput: 'Tono',
+      saturationInput: 'Saturación',
+      lightnessInput: 'Luminosidad',
+      hexInput: 'Valor HEX',
+      hexaInput: 'Valor HEX con alfa',
+      changeFormat: 'Cambiar formato de color',
+    },
   },
 }

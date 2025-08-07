@@ -46,6 +46,13 @@ export default {
     input: {
       placeholder: 'Введите дату',
     },
+    ariaLabel: {
+      previousMonth: 'Предыдущий месяц',
+      nextMonth: 'Следующий месяц',
+      selectYear: 'Выбрать год',
+      selectDate: '{0}',
+      currentDate: 'Сегодня, {0}',
+    },
   },
   noDataText: 'Отсутствуют данные',
   carousel: {
@@ -142,5 +149,33 @@ export default {
     space: 'Пробел',
     plus: 'плюс',
     shortcut: 'Сочетание клавиш: {0}',
+  },
+  video: {
+    play: 'Воспроизвести',
+    pause: 'Пауза',
+    seek: 'Перемотка',
+    volume: 'Громкость',
+    showVolume: 'Показать регулятор громкости',
+    mute: 'Отключить звук',
+    unmute: 'Включить звук',
+    enterFullscreen: 'Полноэкранный режим',
+    exitFullscreen: 'Выйти из полноэкранного режима',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Выбрать цвет с экрана',
+      hueSlider: 'Оттенок',
+      alphaSlider: 'Прозрачность',
+      redInput: 'Красный',
+      greenInput: 'Зеленый',
+      blueInput: 'Синий',
+      alphaInput: 'Прозрачность',
+      hueInput: 'Оттенок',
+      saturationInput: 'Насыщенность',
+      lightnessInput: 'Яркость',
+      hexInput: 'Значение HEX',
+      hexaInput: 'Значение HEX с прозрачностью',
+      changeFormat: 'Изменить формат цвета',
+    },
   },
 }

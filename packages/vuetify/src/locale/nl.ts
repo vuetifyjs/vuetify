@@ -46,6 +46,13 @@ export default {
     input: {
       placeholder: 'Voer datum in',
     },
+    ariaLabel: {
+      previousMonth: 'Vorige maand',
+      nextMonth: 'Volgende maand',
+      selectYear: 'Selecteer jaar',
+      selectDate: '{0}',
+      currentDate: 'Vandaag, {0}',
+    },
   },
   noDataText: 'Geen gegevens beschikbaar',
   carousel: {
@@ -142,5 +149,33 @@ export default {
     space: 'Spatie',
     plus: 'plus',
     shortcut: 'Toetsenbordsnelkoppeling: {0}',
+  },
+  video: {
+    play: 'Afspelen',
+    pause: 'Pauzeren',
+    seek: 'Zoeken',
+    volume: 'Volume',
+    showVolume: 'Volumeregeling weergeven',
+    mute: 'Dempen',
+    unmute: 'Dempen opheffen',
+    enterFullscreen: 'Volledig scherm',
+    exitFullscreen: 'Volledig scherm verlaten',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Kies een kleur van het scherm',
+      hueSlider: 'Tint',
+      alphaSlider: 'Alpha',
+      redInput: 'Rood',
+      greenInput: 'Groen',
+      blueInput: 'Blauw',
+      alphaInput: 'Alpha',
+      hueInput: 'Tint',
+      saturationInput: 'Verzadiging',
+      lightnessInput: 'Helderheid',
+      hexInput: 'HEX-waarde',
+      hexaInput: 'HEX met alpha-waarde',
+      changeFormat: 'Wijzig kleurformaat',
+    },
   },
 }

@@ -46,6 +46,13 @@ export default {
     input: {
       placeholder: 'Indtast dato',
     },
+    ariaLabel: {
+      previousMonth: 'Forrige måned',
+      nextMonth: 'Næste måned',
+      selectYear: 'Vælg år',
+      selectDate: '{0}',
+      currentDate: 'I dag, {0}',
+    },
   },
   noDataText: 'Ingen data tilgængelig',
   carousel: {
@@ -142,5 +149,33 @@ export default {
     space: 'Mellemrum',
     plus: 'plus',
     shortcut: 'Tastaturgenvej: {0}',
+  },
+  video: {
+    play: 'Afspil',
+    pause: 'Pause',
+    seek: 'Søg',
+    volume: 'Lydstyrke',
+    showVolume: 'Vis lydstyrkekontrol',
+    mute: 'Slå lyd fra',
+    unmute: 'Slå lyd til',
+    enterFullscreen: 'Fuld skærm',
+    exitFullscreen: 'Afslut fuld skærm',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Vælg farve fra skærmen',
+      hueSlider: 'Farvetone',
+      alphaSlider: 'Alfa',
+      redInput: 'Rød',
+      greenInput: 'Grøn',
+      blueInput: 'Blå',
+      alphaInput: 'Alfa',
+      hueInput: 'Farvetone',
+      saturationInput: 'Mætning',
+      lightnessInput: 'Lyshed',
+      hexInput: 'HEX-værdi',
+      hexaInput: 'HEX med alfaværdi',
+      changeFormat: 'Skift farveformat',
+    },
   },
 }
