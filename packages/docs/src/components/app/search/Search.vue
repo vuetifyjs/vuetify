@@ -7,7 +7,7 @@
     @click="shouldLoad = true"
   >
     <span :class="mdAndUp && 'me-n1'">
-      <span v-if="smAndUp">
+      <span v-if="lgAndUp">
         {{ t('search.label') }}
       </span>
 
@@ -38,7 +38,7 @@
   const SearchDialog = defineAsyncComponent(() => import('@/components/app/search/SearchDialog.vue'))
 
   const { t } = useI18n()
-  const { smAndUp, smAndDown, mdAndUp, xs, platform } = useDisplay()
+  const { smAndUp, smAndDown, mdAndUp, lgAndUp, xs, platform } = useDisplay()
   const { query } = useRoute()
   const user = useUserStore()
 

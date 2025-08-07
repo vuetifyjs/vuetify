@@ -7,6 +7,11 @@
     margin-top: $color-picker-input-margin-top
 
   .v-color-picker-edit__input
+    > input::-webkit-outer-spin-button,
+    > input::-webkit-inner-spin-button
+      -webkit-appearance: none
+      margin: 0
+
     width: 100%
     display: flex
     flex-wrap: wrap

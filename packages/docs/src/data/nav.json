@@ -269,6 +269,10 @@
         "subfolder": "components"
       },
       {
+        "title": "pie-charts",
+        "subfolder": "components"
+      },
+      {
         "title": "pull-to-refresh",
         "subfolder": "components"
       },
@@ -282,6 +286,10 @@
       },
       {
         "title": "hotkeys",
+        "subfolder": "components"
+      },
+      {
+        "title": "videos",
         "subfolder": "components"
       },
       {

@@ -28,7 +28,6 @@ function flatten (items: ListItem[], flat: ListItem[] = []) {
 }
 
 export const makeVTreeviewProps = propsFactory({
-  fluid: Boolean,
   openAll: Boolean,
   indentLines: [Boolean, String] as PropType<boolean | IndentLinesVariant>,
   search: String,

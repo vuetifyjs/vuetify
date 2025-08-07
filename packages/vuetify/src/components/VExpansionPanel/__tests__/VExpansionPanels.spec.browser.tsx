@@ -47,6 +47,20 @@ const stories = {
 }
 
 describe('VExpansionPanels', () => {
+  it('responds to title click', async () => {
+    render(() => (
+      <VExpansionPanels>
+        <VExpansionPanel title="Header" text="Content" />
+      </VExpansionPanels>
+    ))
+
+    const title = screen.getByCSS('.v-expansion-panel-title')
+
+    await userEvent.click(title)
+
+    expect(title).toHaveClass('v-expansion-panel-title--active')
+  })
+
   it('supports v-model', async () => {
     const model = ref()
     render(() => (

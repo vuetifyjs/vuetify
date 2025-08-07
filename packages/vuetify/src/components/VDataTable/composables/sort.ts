@@ -1,5 +1,5 @@
 // Composables
-import { useLocale } from '@/composables'
+import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities

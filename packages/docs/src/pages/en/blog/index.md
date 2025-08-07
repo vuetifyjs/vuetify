@@ -18,6 +18,14 @@ Latest news, updates, and stories about Vuetify.
 
 <br>
 
+## July 2025 Update
+
+🖊️ John Leider • 📅 August 6th, 2025
+
+July was a month of significant advancements in the Vuetify ecosystem, highlighted by the release of v3.9.0 (Zealot) and the promotion of VTreeview and VTimePicker from labs to core components. This update also includes a focus on component stability, bug fixes, and developer experience improvements, with subsequent patches up to v3.9.3... { .text-medium-emphasis }
+
+[Read More](/blog/july-2025-update/) { .text-end }
+
 ## June 2025 Update
 
 🖊️ John Leider • 📅 July 7th, 2025
