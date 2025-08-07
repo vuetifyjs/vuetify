@@ -8,4 +8,6 @@ export function codeTransform (code) {
     .replaceAll(/import([^;])*?from 'vue-router'/gm, '// @ts-ignore\n$&')
     // tsc adds extra export statements to namespaces that break module augmentation
     .replaceAll(/^\s*export \{\s*\};?$/gm, '')
+    // ignore style imports
+    .replaceAll(/import '[^']*\.s[ac]ss';$/gm, '')
 }
