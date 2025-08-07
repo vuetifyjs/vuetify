@@ -176,14 +176,7 @@ export function useCommandPaletteNavigation (options: UseCommandPaletteNavigatio
 
     for (const item of filteredItems.value) {
       const raw = item.raw
-      if (raw?.type === 'parent') {
-        // Parent item itself
-        if (selectableCount === targetIndex) {
-          return item
-        }
-        // Children are not selectable in this view; move to next item
-        selectableCount += 1
-      } else if (raw?.type === 'group') {
+      if (raw?.type === 'group') {
         // Groups themselves are not selectable, only their children
         const children = raw.children || []
         if (selectableCount + children.length > targetIndex) {
@@ -195,7 +188,7 @@ export function useCommandPaletteNavigation (options: UseCommandPaletteNavigatio
         }
         selectableCount += children.length
       } else {
-        // Regular item
+        // Regular or parent item
         if (selectableCount === targetIndex) {
           return item
         }

@@ -1,28 +1,7 @@
 /**
  * VCommandPalette Component
  *
- * A comprehensive command palette implementation that provides keyboard-driven navigation
- * for applications. This component combines search functionality, hierarchical navigation,
- * keyboard shortcuts, and accessibility features into a unified interface.
- *
- * Key Features:
- * - Fuzzy search with keyword support
- * - Hierarchical navigation (groups, parents, children)
- * - Keyboard navigation with arrow keys, enter, escape, backspace
- * - Individual item hotkeys that work globally when palette is open
- * - Full accessibility compliance (ARIA, screen reader support)
- * - Customizable layouts via slots and custom components
- * - Focus restoration for proper accessibility
- * - Transition support following Vuetify conventions
- *
- * Architecture:
- * - VCommandPalette: Main container and dialog management
- * - VCommandPaletteContent: Core logic and state management
- * - VCommandPaletteList: Default list rendering with complex item flattening
- * - VCommandPaletteSearch: Search input with accessibility
- * - VCommandPaletteInstructions: Contextual keyboard shortcuts
- * - useCommandPaletteNavigation: Keyboard navigation logic
- * - useCommandPaletteContext: Custom layout support
+ * A comprehensive, keyboard-driven command palette.
  */
 
 // Styles
@@ -705,6 +684,7 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
           modelValue={ isActive.value }
           maxHeight={ sheetProps.maxHeight }
           maxWidth={ sheetProps.maxWidth }
+          persistent={ props.persistent }
           absolute
           scrollable
           onUpdate:modelValue={ (v: boolean) => isActive.value = v }
@@ -715,6 +695,7 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
             'v-command-palette__dialog',
             themeClasses.value,
             densityClasses.value,
+            props.class,
           ]}
           style={ props.style }
           v-slots={{
@@ -722,7 +703,6 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
               <VSheet
                 class={[
                   'v-command-palette__sheet',
-                  props.class,
                 ]}
                 { ...sheetProps }
               >

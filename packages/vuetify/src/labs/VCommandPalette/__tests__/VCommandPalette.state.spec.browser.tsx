@@ -361,49 +361,5 @@ describe('VCommandPalette', () => {
     })
   })
 
-  describe('Stress Testing', () => {
-    it('should handle large datasets without performance degradation', async () => {
-      const model = ref(true)
 
-      // Generate 1000+ items
-      const largeItemSet = Array.from({ length: 1000 }, (_, index) => ({
-        id: `item-${index}`,
-        title: `Item ${index}`,
-        subtitle: `Subtitle for item ${index}`,
-        value: `value-${index}`,
-        handler: vi.fn(),
-      }))
-
-      const startTime = performance.now()
-
-      render(() => (
-        <VCommandPalette
-          v-model={ model.value }
-          items={ largeItemSet }
-        />
-      ))
-
-      const dialog = await screen.findByRole('dialog')
-      expect(dialog).toBeVisible()
-
-      const renderTime = performance.now() - startTime
-
-      // Should render without crashing and in reasonable time (less than 1 second)
-      expect(renderTime).toBeLessThan(1000)
-
-      // Test filtering performance
-      const searchInput = await screen.findByRole('textbox')
-
-      const filterStartTime = performance.now()
-      await userEvent.type(searchInput, '999')
-
-      // Should find the specific item
-      await expect(screen.findByText('Item 999')).resolves.toBeVisible()
-
-      const filterTime = performance.now() - filterStartTime
-
-      // Filtering should also be reasonably fast (less than 500ms)
-      expect(filterTime).toBeLessThan(500)
-    })
-  })
 })

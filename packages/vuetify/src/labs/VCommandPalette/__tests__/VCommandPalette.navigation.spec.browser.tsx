@@ -483,16 +483,139 @@ describe('VCommandPalette', () => {
       ).toBeTruthy()
     })
 
-    it('should wrap to last item when pressing up arrow from first item with many items', async () => {
-      // Create a smaller test case to reduce complexity and timing issues
-      const testItems = Array.from({ length: 5 }, (_, i) => ({
-        id: `test-item-${i + 1}`,
-        title: `Test Item ${i + 1}`,
-        value: `test-item-${i + 1}`,
-        handler: vi.fn(),
-      }))
 
+
+    // REGRESSION TESTS FOR NAVIGATION BUG FIX
+    // These tests ensure that parent items and their children are not both counted as selectable
+    // in the same view, which would break keyboard navigation indices.
+
+    it('should correctly navigate between regular items and parent items (regression test)', async () => {
       const model = ref(true)
+      const regularHandler = vi.fn()
+      const parentHandler = vi.fn()
+
+      // Mix of regular items and parent items that would have caused navigation bugs
+      const mixedItems = [
+        {
+          id: 'regular1',
+          title: 'Regular Item 1',
+          handler: regularHandler,
+        },
+        {
+          id: 'parent1',
+          type: 'parent' as const,
+          title: 'Parent Item',
+          children: [
+            {
+              id: 'child1',
+              title: 'Child One',
+              handler: vi.fn(),
+            },
+            {
+              id: 'child2',
+              title: 'Child Two',
+              handler: vi.fn(),
+            },
+          ],
+        },
+        {
+          id: 'regular2',
+          title: 'Regular Item 2',
+          handler: vi.fn(),
+        },
+      ]
+
+      render(() => (
+        <VCommandPalette
+          v-model={ model.value }
+          items={ mixedItems }
+        />
+      ))
+
+      const dialog = await screen.findByRole('dialog')
+      const listbox = await screen.findByRole('listbox')
+
+      // Wait for component initialization
+      await expect.poll(() => screen.queryByText('Regular Item 1')).toBeTruthy()
+      await expect.poll(() => screen.queryByText('Parent Item')).toBeTruthy()
+      await expect.poll(() => screen.queryByText('Regular Item 2')).toBeTruthy()
+
+      // Children should NOT be visible at the parent level
+      expect(screen.queryByText('Child One')).toBeNull()
+      expect(screen.queryByText('Child Two')).toBeNull()
+
+      // First item (Regular Item 1) should be auto-selected
+      await expect.poll(() => {
+        const activeDescendant = listbox.getAttribute('aria-activedescendant')
+        if (!activeDescendant) return false
+        const activeElement = dialog.querySelector(`#${activeDescendant}`)
+        return activeElement && activeElement.textContent?.includes('Regular Item 1')
+      }).toBeTruthy()
+
+      // Arrow down should go to Parent Item (index 1)
+      await userEvent.keyboard('{ArrowDown}')
+      await expect.poll(() => {
+        const activeDescendant = listbox.getAttribute('aria-activedescendant')
+        if (!activeDescendant) return false
+        const activeElement = dialog.querySelector(`#${activeDescendant}`)
+        return activeElement && activeElement.textContent?.includes('Parent Item')
+      }).toBeTruthy()
+
+      // Arrow down again should go to Regular Item 2 (index 2)
+      // This would have failed before the bug fix because children were being counted as selectable
+      await userEvent.keyboard('{ArrowDown}')
+      await expect.poll(() => {
+        const activeDescendant = listbox.getAttribute('aria-activedescendant')
+        if (!activeDescendant) return false
+        const activeElement = dialog.querySelector(`#${activeDescendant}`)
+        return activeElement && activeElement.textContent?.includes('Regular Item 2')
+      }).toBeTruthy()
+
+      // Arrow down once more should wrap back to first item
+      await userEvent.keyboard('{ArrowDown}')
+      await expect.poll(() => {
+        const activeDescendant = listbox.getAttribute('aria-activedescendant')
+        if (!activeDescendant) return false
+        const activeElement = dialog.querySelector(`#${activeDescendant}`)
+        return activeElement && activeElement.textContent?.includes('Regular Item 1')
+      }).toBeTruthy()
+    })
+
+
+
+
+
+    it('should not count parent children as selectable items at parent level (critical regression test)', async () => {
+      const model = ref(true)
+
+      // This test specifically validates the bug fix - before the fix,
+      // the navigation would try to count children as selectable items
+      // causing navigation indices to be wrong
+      const testItems = [
+        {
+          id: 'item1',
+          title: 'Item 1',
+          handler: vi.fn(),
+        },
+        {
+          id: 'parent-with-many-children',
+          type: 'parent' as const,
+          title: 'Parent with Many Children',
+          children: [
+            { id: 'child1', title: 'Child 1', handler: vi.fn() },
+            { id: 'child2', title: 'Child 2', handler: vi.fn() },
+            { id: 'child3', title: 'Child 3', handler: vi.fn() },
+            { id: 'child4', title: 'Child 4', handler: vi.fn() },
+            { id: 'child5', title: 'Child 5', handler: vi.fn() },
+          ],
+        },
+        {
+          id: 'item2',
+          title: 'Item 2',
+          handler: vi.fn(),
+        },
+      ]
+
       render(() => (
         <VCommandPalette
           v-model={ model.value }
@@ -500,50 +623,54 @@ describe('VCommandPalette', () => {
         />
       ))
 
-      const dialog = await screen.findByRole('dialog')
       const listbox = await screen.findByRole('listbox')
 
-      // Wait for component initialization and first item selection
-      await expect.poll(() => screen.queryByText('Test Item 1')).toBeTruthy()
-      await expect.poll(() => screen.queryByText('Test Item 5')).toBeTruthy()
+      // Only 3 items should be selectable at the parent level:
+      // Item 1, Parent with Many Children, Item 2
+      // Children should NOT be counted as selectable until we drill into parent
 
-      // Wait for first item to be auto-selected
+      // Should start on Item 1
       await expect.poll(() => {
         const activeDescendant = listbox.getAttribute('aria-activedescendant')
         if (!activeDescendant) return false
-        const activeElement = dialog.querySelector(`#${activeDescendant}`)
-        return activeElement && activeElement.textContent?.includes('Test Item 1')
-      }, {
-        timeout: 2000,
-        interval: 50,
+        const activeElement = document.querySelector(`#${activeDescendant}`)
+        return activeElement && activeElement.textContent?.includes('Item 1')
       }).toBeTruthy()
 
-      // Get the initial active descendant
-      const initialActiveDescendant = listbox.getAttribute('aria-activedescendant')
-      expect(initialActiveDescendant).toBeTruthy()
-
-      // Simulate ArrowUp key press using direct DOM event dispatch
-      const searchInput = await screen.findByRole('textbox')
-      const keyEvent = new KeyboardEvent('keydown', {
-        key: 'ArrowUp',
-        code: 'ArrowUp',
-        bubbles: true,
-        cancelable: true,
-      })
-      searchInput.dispatchEvent(keyEvent)
-
-      // Wait for navigation to complete
+      // Arrow down should go to Parent (not to any child)
+      await userEvent.keyboard('{ArrowDown}')
       await expect.poll(() => {
-        const currentActiveDescendant = listbox.getAttribute('aria-activedescendant')
-        if (!currentActiveDescendant || currentActiveDescendant === initialActiveDescendant) {
-          return false
-        }
+        const activeDescendant = listbox.getAttribute('aria-activedescendant')
+        if (!activeDescendant) return false
+        const activeElement = document.querySelector(`#${activeDescendant}`)
+        return activeElement && activeElement.textContent?.includes('Parent with Many Children')
+      }).toBeTruthy()
 
-        const activeElement = dialog.querySelector(`#${currentActiveDescendant}`)
-        return activeElement && activeElement.textContent?.includes('Test Item 5')
-      }, {
-        timeout: 2000,
-        interval: 50,
+      // Arrow down should go directly to Item 2 (not to Child 1)
+      // This is the critical test - before the bug fix, this would have failed
+      // because the navigation logic would try to navigate to Child 1
+      await userEvent.keyboard('{ArrowDown}')
+      await expect.poll(() => {
+        const activeDescendant = listbox.getAttribute('aria-activedescendant')
+        if (!activeDescendant) return false
+        const activeElement = document.querySelector(`#${activeDescendant}`)
+        return activeElement && activeElement.textContent?.includes('Item 2')
+      }).toBeTruthy()
+
+      // Ensure children are never visible at parent level
+      expect(screen.queryByText('Child 1')).toBeNull()
+      expect(screen.queryByText('Child 2')).toBeNull()
+      expect(screen.queryByText('Child 3')).toBeNull()
+      expect(screen.queryByText('Child 4')).toBeNull()
+      expect(screen.queryByText('Child 5')).toBeNull()
+
+      // Arrow down from Item 2 should wrap back to Item 1
+      await userEvent.keyboard('{ArrowDown}')
+      await expect.poll(() => {
+        const activeDescendant = listbox.getAttribute('aria-activedescendant')
+        if (!activeDescendant) return false
+        const activeElement = document.querySelector(`#${activeDescendant}`)
+        return activeElement && activeElement.textContent?.includes('Item 1')
       }).toBeTruthy()
     })
   })

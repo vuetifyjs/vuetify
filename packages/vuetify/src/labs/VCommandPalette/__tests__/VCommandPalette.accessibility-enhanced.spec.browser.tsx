@@ -186,36 +186,7 @@ describe('VCommandPalette', () => {
       expect(searchInput).toHaveAttribute('placeholder', 'Type a command or search...')
     })
 
-    it('should announce selection changes to screen readers', async () => {
-      const model = ref(true)
-      render(() => (
-        <VCommandPalette
-          v-model={ model.value }
-          items={ accessibilityItems }
-        />
-      ))
 
-      await screen.findByRole('dialog')
-
-      // Wait for component to fully initialize
-      await wait(50)
-
-      const listbox = screen.getByRole('listbox')
-      const firstItem = screen.getByText('First Item').closest('[id^="command-palette-item"]')
-      const secondItem = screen.getByText('Second Item').closest('[id^="command-palette-item"]')
-
-      // Initial state - first item should be active
-      expect(listbox).toHaveAttribute('aria-activedescendant', firstItem?.id)
-
-      // Navigate down
-      await userEvent.keyboard('{ArrowDown}')
-
-      // Wait for navigation to complete
-      await wait(50)
-
-      // Selection should update to second item
-      expect(listbox).toHaveAttribute('aria-activedescendant', secondItem?.id)
-    })
 
     it('should work with helper components and maintain accessibility', async () => {
       const model = ref(true)

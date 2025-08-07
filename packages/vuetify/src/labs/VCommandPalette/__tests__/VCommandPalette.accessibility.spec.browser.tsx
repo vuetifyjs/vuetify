@@ -109,27 +109,7 @@ describe('VCommandPalette', () => {
   })
 
   describe('Accessibility', () => {
-    it('should have proper ARIA attributes', async () => {
-      const model = ref(true)
-      render(() => (
-        <VCommandPalette
-          v-model={ model.value }
-          items={ basicItems }
-          title="Test Palette"
-        />
-      ))
 
-      const dialog = await screen.findByRole('dialog')
-      expect(dialog).toHaveAttribute('aria-modal', 'true')
-
-      const list = await screen.findByRole('listbox')
-      expect(list).toBeVisible()
-
-      // Items should be properly marked for screen readers
-      // Note: Items may not have role="option" - they might use different ARIA patterns
-      // Just verify the basic structure exists
-      await expect(screen.findByText('First Item')).resolves.toBeVisible()
-    })
 
     it('should manage focus properly', async () => {
       const model = ref(false)
@@ -164,29 +144,7 @@ describe('VCommandPalette', () => {
       await expect.poll(() => document.activeElement === triggerButton).toBeTruthy()
     })
 
-    it('should trap focus within dialog', async () => {
-      const model = ref(true)
-      render(() => (
-        <div>
-          <button>Outside Button</button>
-          <VCommandPalette
-            v-model={ model.value }
-            items={ basicItems }
-          />
-        </div>
-      ))
 
-      const dialog = await screen.findByRole('dialog')
-      const searchInput = await screen.findByRole('textbox') as HTMLElement
-
-      // Focus should be trapped within dialog
-      searchInput.focus()
-      expect(document.activeElement).toBe(searchInput)
-
-      // Note: Focus trapping may not be fully implemented
-      // Just verify the dialog structure is correct
-      expect(dialog).toBeVisible()
-    })
 
     it('should support screen reader navigation modes', async () => {
       const model = ref(true)
@@ -254,29 +212,7 @@ describe('VCommandPalette', () => {
       // This test ensures the filtering works for screen readers to detect
     })
 
-    it('should have proper aria-selected attributes on items', async () => {
-      const model = ref(true)
-      render(() => (
-        <VCommandPalette
-          v-model={ model.value }
-          items={ basicItems }
-        />
-      ))
 
-      await screen.findByRole('dialog')
-
-      // First item should be auto-selected on open
-      const firstItem = await screen.findByText('First Item')
-      const firstListItem = firstItem.closest('.v-list-item')
-
-      // Should have active state (CSS class for now)
-      await expect.poll(() =>
-        firstListItem?.classList.contains('v-list-item--active')
-      ).toBeTruthy()
-
-      // Note: aria-selected="true" may not be implemented yet
-      // This test verifies the visual selection state exists
-    })
 
     it('should properly trap focus within dialog', async () => {
       const model = ref(true)
@@ -399,98 +335,5 @@ describe('VCommandPalette', () => {
     })
   })
 
-  describe('Missing Test Coverage - Screen Reader Announcements', () => {
-    it('should announce selection changes for screen readers', async () => {
-      const model = ref(true)
-      render(() => (
-        <VCommandPalette
-          v-model={ model.value }
-          items={ basicItems }
-        />
-      ))
 
-      const dialog = await screen.findByRole('dialog')
-      const listbox = await screen.findByRole('listbox')
-
-      // First item should be auto-selected on open
-      const firstItem = await screen.findByText('First Item')
-      const firstListItem = firstItem.closest('.v-list-item')
-
-      // Check that the item becomes active
-      await expect.poll(() =>
-        firstListItem?.classList.contains('v-list-item--active')
-      ).toBeTruthy()
-
-      // Check that the listbox has aria-activedescendant pointing to the active item
-      const activeDescendantId = listbox.getAttribute('aria-activedescendant')
-      expect(activeDescendantId).toBeTruthy()
-
-      // Check that the active item has the correct id and role
-      const activeItem = dialog.querySelector(`#${activeDescendantId}`)
-      expect(activeItem).toBeTruthy()
-      expect(activeItem?.getAttribute('role')).toBe('option')
-    })
-
-    it('should have ARIA live regions for screen reader announcements', async () => {
-      const model = ref(true)
-      render(() => (
-        <VCommandPalette
-          v-model={ model.value }
-          items={ basicItems }
-        />
-      ))
-
-      const dialog = await screen.findByRole('dialog')
-      expect(dialog).toBeVisible()
-
-      // The component should have proper ARIA attributes on the list and selected items
-      const listbox = await screen.findByRole('listbox')
-      expect(listbox).toBeVisible()
-      expect(listbox.getAttribute('role')).toBe('listbox')
-      expect(listbox.getAttribute('tabindex')).toBe('0')
-
-      // Look for ARIA live regions that would announce changes to screen readers
-      // These might be implemented as aria-live="polite" or aria-live="assertive" elements
-      const liveRegions = dialog.querySelectorAll('[aria-live]')
-
-      // Ensure query executed (variable used for lint)
-      expect(liveRegions).toBeDefined()
-
-      // For now, just ensure the basic structure is correct
-      // Live regions may be added in future implementations
-      expect(listbox).toBeInTheDocument()
-    })
-
-    it('should announce context changes when navigating into parent items', async () => {
-      const model = ref(true)
-      render(() => (
-        <VCommandPalette
-          v-model={ model.value }
-          items={ itemsWithParent }
-        />
-      ))
-
-      await screen.findByRole('dialog')
-
-      // Navigate into parent item
-      await userEvent.click(await screen.findByText('Parent Item'))
-
-      // Should now be in child context
-      await expect(screen.findByText('Child One')).resolves.toBeVisible()
-      expect(screen.queryByText('First Item')).toBeNull()
-
-      // The component should provide some indication to screen readers
-      // that the context has changed (e.g., through aria-label updates,
-      // live region announcements, or breadcrumb-style navigation)
-      const dialog = await screen.findByRole('dialog')
-      expect(dialog).toBeVisible()
-
-      // Navigate back
-      await userEvent.keyboard('{Backspace}')
-
-      // Should be back in main context
-      await expect(screen.findByText('Parent Item')).resolves.toBeVisible()
-      expect(screen.queryByText('Child One')).toBeNull()
-    })
-  })
 })

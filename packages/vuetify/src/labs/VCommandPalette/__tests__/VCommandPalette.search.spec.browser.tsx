@@ -138,7 +138,7 @@ describe('VCommandPalette', () => {
       await expect.element(searchInput).toHaveValue('first')
     })
 
-    it('should filter items based on search query', async () => {
+    it('should filter items by title and subtitle, case-insensitively', async () => {
       const model = ref(true)
       render(() => (
         <VCommandPalette
@@ -148,45 +148,31 @@ describe('VCommandPalette', () => {
       ))
 
       const searchInput = await screen.findByRole('textbox')
-      await userEvent.type(searchInput, 'first')
 
-      await expect(screen.findByText('First Item')).resolves.toBeVisible()
-      expect(screen.queryByText('Second Item')).toBeNull()
-      expect(screen.queryByText('Third Item')).toBeNull()
-    })
-
-    it('should filter case-insensitively', async () => {
-      const model = ref(true)
-      render(() => (
-        <VCommandPalette
-          v-model={ model.value }
-          items={ basicItems }
-        />
-      ))
-
-      const searchInput = await screen.findByRole('textbox')
+      // Filter by title (case-insensitive)
       await userEvent.type(searchInput, 'FIRST')
-
       await expect(screen.findByText('First Item')).resolves.toBeVisible()
       expect(screen.queryByText('Second Item')).toBeNull()
-    })
 
-    it('should filter by subtitle', async () => {
-      const model = ref(true)
-      render(() => (
-        <VCommandPalette
-          v-model={ model.value }
-          items={ basicItems }
-        />
-      ))
+      // Clear search and filter by subtitle
+      const inputElement = searchInput as HTMLInputElement
+      inputElement.value = ''
+      inputElement.dispatchEvent(new Event('input', { bubbles: true }))
+      inputElement.dispatchEvent(new Event('change', { bubbles: true }))
 
-      const searchInput = await screen.findByRole('textbox')
+      // Wait for the search input to be cleared
+      await expect.poll(() => inputElement.value, {
+        timeout: 2000,
+        interval: 50,
+      }).toBe('')
+
       await userEvent.type(searchInput, 'subtitle')
-
       await expect(screen.findByText('First Item')).resolves.toBeVisible()
       await expect(screen.findByText('Second Item')).resolves.toBeVisible()
       expect(screen.queryByText('Third Item')).toBeNull()
     })
+
+
 
     it('should restore full list when search is cleared', async () => {
       const model = ref(true)
