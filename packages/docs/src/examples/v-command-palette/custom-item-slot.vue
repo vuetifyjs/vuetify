@@ -1,24 +1,17 @@
 <template>
   <div class="text-center">
-    <v-btn
-      color="primary"
-      @click="dialog = true"
-    >
-      Open Custom Item Slot Palette
-    </v-btn>
-
     <v-command-palette
-      v-model="dialog"
       :items="items"
-      title="User List"
+      :model-value="true"
+      contained
     >
-      <template #item="{ item, props: itemProps }">
-        <v-list-item v-bind="itemProps" :title="null" :subtitle="null">
+      <template v-slot:item="{ item, props: itemProps }">
+        <v-list-item v-bind="itemProps" :subtitle="null" :title="null">
           <v-list-item-title class="d-flex align-center">
-            <v-avatar :image="item.raw.avatar" size="small" class="mr-2" />
+            <v-avatar :image="item.raw.avatar" class="mr-2" size="small"></v-avatar>
             <span>{{ item.title }}</span>
           </v-list-item-title>
-          <template #append>
+          <template v-slot:append>
             <span class="text-caption text-disabled">{{ item.raw.email }}</span>
           </template>
         </v-list-item>
@@ -28,10 +21,6 @@
 </template>
 
 <script setup>
-  import { ref } from 'vue'
-
-  const dialog = ref(false)
-
   const items = [
     {
       id: '1',
@@ -53,4 +42,3 @@
     },
   ]
 </script>
-

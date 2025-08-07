@@ -1,17 +1,10 @@
 <template>
   <div class="text-center">
-    <v-btn
-      color="primary"
-      @click="dialog = true"
-    >
-      Open Palette with Hotkeys
-    </v-btn>
-
     <v-command-palette
-      v-model="dialog"
       :items="items"
-      title="Editor Commands"
-    />
+      :model-value="true"
+      contained
+    ></v-command-palette>
 
     <v-snackbar v-model="snackbar" :timeout="2000">
       {{ snackbarText }}
@@ -22,7 +15,6 @@
 <script setup>
   import { ref } from 'vue'
 
-  const dialog = ref(false)
   const snackbar = ref(false)
   const snackbarText = ref('')
 
@@ -55,4 +47,3 @@
     },
   ]
 </script>
-

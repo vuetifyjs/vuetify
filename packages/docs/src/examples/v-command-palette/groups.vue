@@ -1,25 +1,14 @@
 <template>
   <div class="text-center">
-    <v-btn
-      color="primary"
-      @click="dialog = true"
-    >
-      Open Grouped Palette
-    </v-btn>
-
     <v-command-palette
-      v-model="dialog"
       :items="items"
-      title="Application Settings"
-    />
+      :model-value="true"
+      contained
+    ></v-command-palette>
   </div>
 </template>
 
 <script setup>
-  import { ref } from 'vue'
-
-  const dialog = ref(false)
-
   const items = [
     {
       type: 'group',
@@ -39,4 +28,3 @@
     },
   ]
 </script>
-

@@ -1,25 +1,14 @@
 <template>
   <div class="text-center">
-    <v-btn
-      color="primary"
-      @click="dialog = true"
-    >
-      Open Palette with Keywords
-    </v-btn>
-
     <v-command-palette
-      v-model="dialog"
       :items="items"
-      title="Search for 'dark' or 'light'"
-    />
+      :model-value="true"
+      contained
+    ></v-command-palette>
   </div>
 </template>
 
 <script setup>
-  import { ref } from 'vue'
-
-  const dialog = ref(false)
-
   const items = [
     {
       id: 'toggle-theme',
@@ -34,7 +23,6 @@
       prependIcon: 'mdi-cog',
       keywords: ['preferences', 'options'],
       handler: () => alert('Opening system settings...'),
-    }
+    },
   ]
 </script>
-

@@ -10,8 +10,7 @@
     <v-command-palette
       v-model="dialog"
       :items="items"
-      title="Vuetify"
-    />
+    ></v-command-palette>
   </div>
 </template>
 
@@ -41,4 +40,3 @@
     },
   ]
 </script>
-

@@ -1,25 +1,14 @@
 <template>
   <div class="text-center">
-    <v-btn
-      color="primary"
-      @click="dialog = true"
-    >
-      Open Hierarchical Palette
-    </v-btn>
-
     <v-command-palette
-      v-model="dialog"
       :items="items"
-      title="File Explorer"
-    />
+      :model-value="true"
+      contained
+    ></v-command-palette>
   </div>
 </template>
 
 <script setup>
-  import { ref } from 'vue'
-
-  const dialog = ref(false)
-
   const items = [
     {
       id: 'documents',
@@ -49,4 +38,3 @@
     },
   ]
 </script>
-
