@@ -31,11 +31,11 @@ For new projects, Vuetify 3 is the recommended choice, and we encourage teams st
 
 We understand migration isn't always straightforward or immediately achievable. If you're currently unable to transition, here are practical steps to manage your Vuetify 2 projects post-EOL:
 
-### Consider HeroDev Extended LTS Support
+### Consider HeroDevs Extended LTS Support
 
-HeroDev offers an Extended Long-Term Support (LTS) service specifically for Vuetify 2. This service includes critical security updates, bug fixes, and compatibility patches, ensuring your application remains secure and functional beyond the official EOL date. HeroDev's team of experts can provide tailored support to meet your project's unique needs, allowing you to maintain compliance and operational stability while planning your migration to Vuetify 3.
+HeroDevs offers an Extended Long-Term Support (LTS) service specifically for Vuetify 2. This service includes critical security updates, bug fixes, and compatibility patches, ensuring your application remains secure and functional beyond the official EOL date. HeroDevs's team of experts can provide tailored support to meet your project's unique needs, allowing you to maintain compliance and operational stability while planning your migration to Vuetify 3.
 
-For more information, visit [HeroDev Extended LTS](https://www.herodevs.com/support/vuetify-nes?utm_source=partnership&utm_medium=partnership&utm_campaign=partnership&utm_id=vuetify2) and explore how their services can benefit your project.
+For more information, visit [HeroDevs Extended LTS](https://www.herodevs.com/support/vuetify-nes?utm_source=partnership&utm_medium=partnership&utm_campaign=partnership&utm_id=vuetify2) and explore how their services can benefit your project.
 
 ### Upgrade to the Latest Vuetify 2.x Release
 
