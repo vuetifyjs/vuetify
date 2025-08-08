@@ -157,7 +157,7 @@
     "@vue/reactivity": "^3.5.13",
     "@vue/shared": "^3.5.13",
     "@vue/test-utils": "^2.4.6",
-    "@vuetify/babel-plugin-jsx": "^1.6.0",
+    "@vuetify/babel-plugin-jsx": "^1.7.0",
     "acorn-walk": "^8.3.4",
     "autoprefixer": "^10.4.21",
     "babel-plugin-add-import-extension": "1.5.1",
