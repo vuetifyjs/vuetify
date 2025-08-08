@@ -124,6 +124,14 @@ export default {
     notEmpty: 'Por favor, elige al menos un valor',
     pattern: 'Formato inválido',
   },
+  command: {
+    select: 'para seleccionar',
+    navigate: 'para navegar',
+    goBack: 'para volver',
+    close: 'para cerrar',
+    then: 'luego',
+    placeholder: 'Escribe un comando o busca...',
+  },
   hotkey: {
     then: 'luego',
     ctrl: 'Ctrl',

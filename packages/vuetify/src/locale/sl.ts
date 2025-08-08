@@ -124,6 +124,14 @@ export default {
     notEmpty: 'Izberite vsaj eno vrednost',
     pattern: 'Neveljaven format',
   },
+  command: {
+    select: 'za izbiro',
+    navigate: 'za navigacijo',
+    goBack: 'za vrnitev',
+    close: 'za zapiranje',
+    then: 'nato',
+    placeholder: 'Vnesite ukaz ali iščite...',
+  },
   hotkey: {
     then: 'nato',
     ctrl: 'Ctrl',

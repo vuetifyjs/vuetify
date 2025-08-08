@@ -293,6 +293,10 @@
         "subfolder": "components"
       },
       {
+        "title": "command-palette",
+        "subfolder": "components"
+      },
+      {
         "title": "rules",
         "subfolder": "features"
       }

@@ -124,6 +124,14 @@ export default {
     notEmpty: 'សូមជ្រើសរើសយ៉ាងហោចណាស់តម្លៃមួយ',
     pattern: 'ទម្រង់មិនត្រឹមត្រូវ',
   },
+  command: {
+    select: 'ដើម្បីជ្រើសរើស',
+    navigate: 'ដើម្បីរុករក',
+    goBack: 'ដើម្បីត្រលប់ក្រោយ',
+    close: 'ដើម្បីបិទ',
+    then: 'បន្ទាប់មក',
+    placeholder: 'វាយបញ្ជាឬស្វែងរក...',
+  },
   hotkey: {
     then: 'បន្ទាប់មក',
     ctrl: 'Ctrl',
