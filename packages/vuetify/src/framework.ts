@@ -6,7 +6,7 @@ import { createGoTo, GoToSymbol } from '@/composables/goto'
 import { createIcons, IconSymbol } from '@/composables/icons'
 import { createLocale, LocaleSymbol } from '@/composables/locale'
 import { createTheme, ThemeSymbol } from '@/composables/theme'
-
+import { createTypography, TypographyConfig, TypographySymbol } from '@/composables/typography'
 // Utilities
 import { effectScope, nextTick, reactive } from 'vue'
 import { defineComponent, IN_BROWSER, mergeDeep } from '@/util'
@@ -38,6 +38,7 @@ export interface VuetifyOptions {
   icons?: IconOptions
   locale?: LocaleOptions & RtlOptions
   ssr?: SSROptions
+  typography?: TypographyConfig
 }
 
 export interface Blueprint extends Omit<VuetifyOptions, 'blueprint'> {}
@@ -60,6 +61,7 @@ export function createVuetify (vuetify: VuetifyOptions = {}) {
     const locale = createLocale(options.locale)
     const date = createDate(options.date, locale)
     const goTo = createGoTo(options.goTo, locale)
+    const typography = createTypography(options.typography)
 
     function install (app: App) {
       for (const key in directives) {
@@ -92,6 +94,7 @@ export function createVuetify (vuetify: VuetifyOptions = {}) {
       app.provide(DateOptionsSymbol, date.options)
       app.provide(DateAdapterSymbol, date.instance)
       app.provide(GoToSymbol, goTo)
+      app.provide(TypographySymbol, typography)
 
       if (IN_BROWSER && options.ssr) {
         if (app.$nuxt) {
@@ -120,6 +123,7 @@ export function createVuetify (vuetify: VuetifyOptions = {}) {
                 icons: inject.call(this, IconSymbol),
                 locale: inject.call(this, LocaleSymbol),
                 date: inject.call(this, DateAdapterSymbol),
+                typography: inject.call(this, TypographySymbol)
               })
             },
           },
