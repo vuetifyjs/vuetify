@@ -120,6 +120,19 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
       return item.order === 'asc' ? props.sortAscIcon : props.sortDescIcon
     }
 
+    function getSortedAriaLabel (column: InternalDataTableHeader) {
+      if (!isSorted(column)) {
+        return t('$vuetify.dataTable.ariaLabel.sortNone')
+      }
+      const item = sortBy.value.find(item => item.key === column.key)
+
+      if (!item) {
+        return t('$vuetify.dataTable.ariaLabel.sortAscending')
+      }
+
+      return item.order === 'asc' ? t('$vuetify.dataTable.ariaLabel.sortAscending') : t('$vuetify.dataTable.ariaLabel.sortDescending')
+    }
+
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.color)
 
     const { displayClasses, mobile } = useDisplay(props)
@@ -144,6 +157,16 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
       displayClasses.value,
       loaderClasses.value,
     ]))
+
+    function getSelectedAreaLabel () {
+      if (allSelected.value) {
+        return t('$vuetify.dataTable.ariaLabel.allRowsSelected')
+      }
+      if (someSelected.value) {
+        return t('$vuetify.dataTable.ariaLabel.someRowsSelected')
+      }
+      return t('$vuetify.dataTable.ariaLabel.noRowSelected')
+    }
 
     const VDataTableHeaderCell = ({ column, x, y }: { column: InternalDataTableHeader, x: number, y: number }) => {
       const noPadding = column.key === 'data-table-select' || column.key === 'data-table-expand'
@@ -201,6 +224,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
                     modelValue={ allSelected.value }
                     indeterminate={ someSelected.value && !allSelected.value }
                     onUpdate:modelValue={ selectAll }
+                    aria-label={ getSelectedAreaLabel() }
                   />
                 ))
               }
@@ -213,6 +237,8 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
                       key="icon"
                       class="v-data-table-header__sort-icon"
                       icon={ getSortIcon(column) }
+                      aria-label={ getSortedAriaLabel(column) }
+
                     />
                   )}
                   { props.multiSort && isSorted(column) && (
@@ -269,7 +295,6 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
               variant="underlined"
               onClick:clear={ () => sortBy.value = [] }
               appendIcon={ appendIcon.value }
-              onClick:append={ () => selectAll(!allSelected.value) }
             >
               {{
                 chip: props => (
