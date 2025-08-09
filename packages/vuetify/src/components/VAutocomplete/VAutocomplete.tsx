@@ -23,7 +23,6 @@ import { forwardRefs } from '@/composables/forwardRefs'
 import { useItems } from '@/composables/list-items'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
-import { makeTransitionProps } from '@/composables/transition'
 
 // Utilities
 import { computed, mergeProps, nextTick, ref, shallowRef, watch } from 'vue'
@@ -72,7 +71,6 @@ export const makeVAutocompleteProps = propsFactory({
     modelValue: null,
     role: 'combobox',
   }), ['validationValue', 'dirty', 'appendInnerIcon']),
-  ...makeTransitionProps({ transition: false }),
 }, 'VAutocomplete')
 
 type ItemType<T> = T extends readonly (infer U)[] ? U : never
@@ -116,7 +114,7 @@ export const VAutocomplete = genericComponent<new <
     'update:menu': (value: boolean) => true,
   },
 
-  setup (props, { slots }) {
+  setup (props, { emit, slots }) {
     const { t } = useLocale()
     const vTextFieldRef = ref<VTextField>()
     const isFocused = shallowRef(false)
@@ -125,9 +123,9 @@ export const VAutocomplete = genericComponent<new <
     const vMenuRef = ref<VMenu>()
     const vVirtualScrollRef = ref<VVirtualScroll>()
     const selectionIndex = shallowRef(-1)
+    let cleared = false
     const { items, transformIn, transformOut } = useItems(props)
     const { textColorClasses, textColorStyles } = useTextColor(() => vTextFieldRef.value?.color)
-    const search = useProxiedModel(props, 'search', '')
     const model = useProxiedModel(
       props,
       'modelValue',
@@ -138,12 +136,30 @@ export const VAutocomplete = genericComponent<new <
         return props.multiple ? transformed : (transformed[0] ?? null)
       }
     )
+    const form = useForm(props)
+
+    const hasChips = computed(() => !!(props.chips || slots.chip))
+    const hasSelectionSlot = computed(() => hasChips.value || !!slots.selection)
+
+    const _search = shallowRef(!props.multiple && !hasSelectionSlot.value ? model.value[0]?.title ?? '' : '')
+
+    const search = computed<string>({
+      get: () => {
+        return _search.value
+      },
+      set: (val: string | null) => {
+        _search.value = val ?? ''
+        if (!val) selectionIndex.value = -1
+        isPristine.value = !val
+      },
+    })
+
     const counterValue = computed(() => {
       return typeof props.counterValue === 'function' ? props.counterValue(model.value)
         : typeof props.counterValue === 'number' ? props.counterValue
         : model.value.length
     })
-    const form = useForm(props)
+
     const { filteredItems, getMatches } = useFilter(props, items, () => isPristine.value ? '' : search.value)
 
     const displayItems = computed(() => {
@@ -152,9 +168,6 @@ export const VAutocomplete = genericComponent<new <
       }
       return filteredItems.value
     })
-
-    const hasChips = computed(() => !!(props.chips || slots.chip))
-    const hasSelectionSlot = computed(() => hasChips.value || !!slots.selection)
 
     const selectedValues = computed(() => model.value.map(selection => selection.props.value))
 
@@ -186,6 +199,7 @@ export const VAutocomplete = genericComponent<new <
     const listRef = ref<VList>()
     const listEvents = useScrolling(listRef, vTextFieldRef)
     function onClear (e: MouseEvent) {
+      cleared = true
       if (props.openOnClear) {
         menu.value = true
       }
@@ -352,12 +366,11 @@ export const VAutocomplete = genericComponent<new <
       } else {
         const add = set !== false
         model.value = add ? [item] : []
-        search.value = add && !hasSelectionSlot.value ? item.title : ''
+        _search.value = add && !hasSelectionSlot.value ? item.title : ''
 
         // watch for search watcher to trigger
         nextTick(() => {
           menu.value = false
-          isPristine.value = true
         })
       }
     }
@@ -367,24 +380,27 @@ export const VAutocomplete = genericComponent<new <
 
       if (val) {
         isSelecting.value = true
-        search.value = (props.multiple || hasSelectionSlot.value) ? '' : String(model.value.at(-1)?.props.title ?? '')
-        isPristine.value = true
+        _search.value = (props.multiple || hasSelectionSlot.value) ? '' : String(model.value.at(-1)?.props.title ?? '')
 
         nextTick(() => isSelecting.value = false)
       } else {
         if (!props.multiple && search.value == null) model.value = []
         menu.value = false
-        if (props.multiple || hasSelectionSlot.value) search.value = ''
+        if (props.multiple || hasSelectionSlot.value) _search.value = ''
         selectionIndex.value = -1
       }
     })
 
-    watch(search, val => {
-      if (!isFocused.value || isSelecting.value) return
+    watch(_search, value => {
+      if (cleared) {
+        // wait for clear to finish, VTextField sets _search to null
+        // then search computed triggers and updates _search to ''
+        nextTick(() => (cleared = false))
+      } else if (isFocused.value && !isSelecting.value) {
+        menu.value = true
+      }
 
-      if (val) menu.value = true
-
-      isPristine.value = !val
+      emit('update:search', value)
     })
 
     watch(menu, () => {
@@ -459,7 +475,6 @@ export const VAutocomplete = genericComponent<new <
                   maxHeight={ 310 }
                   openOnClick={ false }
                   closeOnContentClick={ false }
-                  transition={ props.transition }
                   onAfterEnter={ onAfterEnter }
                   onAfterLeave={ onAfterLeave }
                   { ...props.menuProps }
