@@ -188,7 +188,7 @@ export const VCombobox = genericComponent<new <
         : (props.multiple ? model.value.length : search.value.length)
     })
 
-    const { filteredItems, getMatches } = useFilter(props, items, () => isPristine.value ? '' : search.value)
+    const { filteredItems, getMatches } = useFilter(props, items, () => isPristine.value && !_search.value ? '' : search.value)
 
     const displayItems = computed(() => {
       if (props.hideSelected) {
@@ -586,7 +586,7 @@ export const VCombobox = genericComponent<new <
                                 </>
                               ),
                               title: () => {
-                                return isPristine.value
+                                return isPristine.value && !search.value
                                   ? item.title
                                   : highlightResult('v-combobox', item.title, getMatches(item)?.title)
                               },
