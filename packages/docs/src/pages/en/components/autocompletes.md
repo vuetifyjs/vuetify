@@ -68,7 +68,7 @@ The `custom-filter` prop can be used to filter each individual item with custom 
 
 #### Filter keys
 
-The `filter-keys` prop can be used to filter items by properties other than the default `title`. Properties of the original items passed need to be accessed via the `raw.*` path, as `filter-keys` index the root level of `InternalItem`.
+When user is typing in the field to narrow the list of options, the input text is matched against the `title`. With `filter-keys` you can specify which properties should be used instead. Properties of original objects passed to `items` need to be accessed via the `raw.*` path, as `filter-keys` index the root level of `InternalItem`.
 
 <ExamplesExample file="v-autocomplete/prop-filter-keys" />
 
