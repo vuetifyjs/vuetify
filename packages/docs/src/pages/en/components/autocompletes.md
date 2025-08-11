@@ -66,6 +66,12 @@ The `custom-filter` prop can be used to filter each individual item with custom 
 
 <ExamplesExample file="v-autocomplete/prop-filter" />
 
+#### Filter keys
+
+The `filter-keys` prop can be used to filter items by properties other than the default `title`. Properties of the original items passed need to be accessed via the `raw.*` path, as `filter-keys` index the root level of `InternalItem`.
+
+<ExamplesExample file="v-autocomplete/prop-filter-keys" />
+
 #### Subheaders and dividers
 
 The `items` prop recognizes special type of `divider` and `subheader`. Those items will be excluded when using filter and can be further customized with dedicated slots.
