@@ -185,7 +185,7 @@ export default defineComponent({
 
         if (hidden) {
           more.style.display = ''
-          more.innerHTML = this.$vuetify.lang.t(this.eventMoreText, hidden)
+          more.innerHTML = this.$vuetify.locale.t(this.eventMoreText, hidden)
         } else {
           more.style.display = 'none'
         }
@@ -357,7 +357,7 @@ export default defineComponent({
           style={{ height: `${height}px` }}
           data-date={ day.date }
           ref="events"
-          refInFor
+          ref_for
         />
       )
     },
@@ -377,7 +377,7 @@ export default defineComponent({
             marginBottom: `${eventMarginBottom}px`,
           }}
           ref="events"
-          refInFor
+          ref_for
           { ...events }
           v-ripple={ this.eventRipple ?? true }
         />
