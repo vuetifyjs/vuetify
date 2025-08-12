@@ -98,6 +98,13 @@ export default defineComponent({
   },
 
   methods: {
+    // TODO
+    setTextColor () {
+      return []
+    },
+    setBackgroundColor () {
+      return []
+    },
     getRelativeClasses (timestamp: CalendarTimestamp, outside = false): object {
       return {
         'v-present': timestamp.present,

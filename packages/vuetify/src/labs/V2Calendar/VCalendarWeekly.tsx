@@ -2,7 +2,7 @@
 import './VCalendarWeekly.sass'
 
 // Components
-import { VBtn } from '@/components/VBtn'
+import { VIconBtn } from '@/labs/VIconBtn'
 
 // Utilities
 import { weekNumber } from './util/dateTimeUtils'
@@ -196,18 +196,16 @@ export default defineComponent({
       const events = getPrefixedEventHandlers(this.$attrs, ':date', nativeEvent => ({ nativeEvent, ...day }))
 
       return (
-        <VBtn
+        <VIconBtn
           color={ color }
-          fab
-          depressed
-          small
+          size="small"
           { ...events }
         >
           { hasMonth
             ? this.monthFormatter(day, this.shortMonths) + ' ' + this.dayFormatter(day, false)
             : this.dayFormatter(day, false)
           }
-        </VBtn>
+        </VIconBtn>
       )
     },
     genDayMonth (day: CalendarTimestamp): VNode {

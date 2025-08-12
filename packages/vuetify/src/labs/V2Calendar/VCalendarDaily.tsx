@@ -2,7 +2,7 @@
 import './VCalendarDaily.sass'
 
 // Components
-import VBtn from '@/components/VBtn'
+import { VIconBtn } from '@/labs/VIconBtn'
 
 // Directives
 import vResize from '@/directives/resize'
@@ -116,14 +116,12 @@ export default defineComponent({
         nativeEvent, ...day,
       }))
       return (
-        <VBtn
+        <VIconBtn
           color={ color }
-          fab
-          depressed
           { ...events }
         >
           { this.dayFormatter(day, false) }
-        </VBtn>
+        </VIconBtn>
       )
     },
     genBody (): VNode {

@@ -1,3 +1,4 @@
+export * from './V2Calendar'
 export * from './VCalendar'
 export * from './VColorInput'
 export * from './VDateInput'
