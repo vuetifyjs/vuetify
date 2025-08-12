@@ -3,9 +3,6 @@
 @use '../variables' as *
 
 //+theme(v-calendar-events) using ($material)
-//  .v-event-timed
-//    border: $calendar-event-border-width solid !important
-//
 //  .v-event-more
 //    background-color: map-deep-get($material, 'calendar', 'background-color')
 //
@@ -50,6 +47,7 @@
     text-overflow: ellipsis
     font-size: $calendar-event-font-size
     cursor: pointer
+    border: $calendar-event-border-width solid
     border-radius: $calendar-event-border-radius
     pointer-events: all
 

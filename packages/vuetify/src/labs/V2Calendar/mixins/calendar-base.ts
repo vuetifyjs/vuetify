@@ -102,8 +102,8 @@ export default defineComponent({
     setTextColor () {
       return []
     },
-    setBackgroundColor () {
-      return []
+    setBackgroundColor (color: string) {
+      return `bg-${color}`
     },
     getRelativeClasses (timestamp: CalendarTimestamp, outside = false): object {
       return {

@@ -244,22 +244,19 @@ export default defineComponent({
       const scope = { eventParsed: event, day, start, end, timed: false }
 
       return this.genEvent(event, scope, false, {
-        staticClass: 'v-event',
-        class: {
-          'v-event-start': start,
-          'v-event-end': end,
-        },
+        class: [
+          'v-event',
+          { 'v-event-start': start, 'v-event-end': end },
+        ],
         style: {
           height: `${eventHeight}px`,
           width: `${width}%`,
-          'margin-bottom': `${eventMarginBottom}px`,
+          marginBottom: `${eventMarginBottom}px`,
         },
-        attrs: {
-          'data-date': day.date,
-        },
+        'data-date': day.date,
         key: event.index,
         ref: 'events',
-        refInFor: true,
+        ref_for: true,
       })
     },
     genTimedEvent ({ event, left, width }: CalendarEventVisual, day: CalendarDayBodySlotScope): VNode | false {
@@ -276,7 +273,7 @@ export default defineComponent({
       const scope = { eventParsed: event, day, start, end, timed: true }
 
       return this.genEvent(event, scope, true, {
-        staticClass: 'v-event-timed',
+        class: 'v-event-timed',
         style: {
           top: `${top}px`,
           height: `${height}px`,
@@ -337,7 +334,7 @@ export default defineComponent({
       return (
         <div
           v-ripple={ this.eventRipple ?? true }
-          class={ this.setTextColor(text, this.setBackgroundColor(background)) }
+          class={[this.setTextColor(text), this.setBackgroundColor(background)]}
           { ...events }
           { ...data }
         >
