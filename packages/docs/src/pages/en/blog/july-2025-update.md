@@ -23,6 +23,8 @@ meta:
 
 This month showcases the power of collaborative development as our team and community work together to enhance Vuetify's ecosystem.
 
+![Hero image for July release notes](https://vuetifyjs.b-cdn.net/docs/images/blog/july-2025-update/july-hero.png "July release notes hero image"){ height=112 }
+
 ---
 
 🖊️ John Leider • 📅 August 6th, 2025
@@ -58,8 +60,6 @@ Cool example of the month: [VChatList](https://play.vuetifyjs.com/playgrounds/sp
 ## Releases
 
 July featured the release of [v3.9.0 (Zealot)](/getting-started/release-notes/?version=v3.9.0) on July 8th, promoting [VTreeview](/components/treeview/) and [VTimePicker](/components/time-pickers/) from labs to the core framework; along with subsequent patches up to v3.9.3 on July 29th, focusing on component stability, bug fixes, and developer experience improvements. View the complete list of changes in the [Full Changelog](#july-2025-changelog).
-
-![Hero image for July release notes](https://vuetifyjs.b-cdn.net/docs/images/blog/july-2025-update/july-hero.png "July release notes hero image"){ height=112 }
 
 **Details:**
 
