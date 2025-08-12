@@ -1,38 +1,40 @@
-@import './_variables.scss'
+@use '../../styles/tools'
+@use '../../styles/settings'
+@use './variables' as *
 
 // Theme
-+theme(v-calendar-weekly) using ($material)
-  background-color: map-deep-get($material, 'calendar', 'background-color')
-  border-top: map-deep-get($material, 'calendar', 'line-color') $calendar-line-width solid
-  border-left: map-deep-get($material, 'calendar', 'line-color') $calendar-line-width solid
-
-  .v-calendar-weekly__head-weekday
-    border-right: map-deep-get($material, 'calendar', 'line-color') $calendar-line-width solid
-    color: map-deep-get($material, 'calendar', 'text-color')
-
-    &.v-past
-      color: map-deep-get($material, 'calendar', 'past-color')
-
-    &.v-outside
-      background-color: map-deep-get($material, 'calendar', 'outside-background-color')
-
-  .v-calendar-weekly__head-weeknumber
-    background-color:  map-deep-get($material, 'calendar', 'weeknumber-background-color')
-    border-right: map-deep-get($material, 'calendar', 'line-color') $calendar-line-width solid
-
-  .v-calendar-weekly__day
-    border-right: map-deep-get($material, 'calendar', 'line-color') $calendar-line-width solid
-    border-bottom: map-deep-get($material, 'calendar', 'line-color') $calendar-line-width solid
-    color: map-deep-get($material, 'calendar', 'text-color')
-
-    &.v-outside
-      background-color: map-deep-get($material, 'calendar', 'outside-background-color')
-
-  .v-calendar-weekly__weeknumber
-      background-color:  map-deep-get($material, 'calendar', 'weeknumber-background-color')
-      border-right: map-deep-get($material, 'calendar', 'line-color') $calendar-line-width solid
-      border-bottom: map-deep-get($material, 'calendar', 'line-color') $calendar-line-width solid
-      color: map-deep-get($material, 'calendar', 'text-color')
+//+theme(v-calendar-weekly) using ($material)
+//  background-color: map-deep-get($material, 'calendar', 'background-color')
+//  border-top: map-deep-get($material, 'calendar', 'line-color') $calendar-line-width solid
+//  border-left: map-deep-get($material, 'calendar', 'line-color') $calendar-line-width solid
+//
+//  .v-calendar-weekly__head-weekday
+//    border-right: map-deep-get($material, 'calendar', 'line-color') $calendar-line-width solid
+//    color: map-deep-get($material, 'calendar', 'text-color')
+//
+//    &.v-past
+//      color: map-deep-get($material, 'calendar', 'past-color')
+//
+//    &.v-outside
+//      background-color: map-deep-get($material, 'calendar', 'outside-background-color')
+//
+//  .v-calendar-weekly__head-weeknumber
+//    background-color:  map-deep-get($material, 'calendar', 'weeknumber-background-color')
+//    border-right: map-deep-get($material, 'calendar', 'line-color') $calendar-line-width solid
+//
+//  .v-calendar-weekly__day
+//    border-right: map-deep-get($material, 'calendar', 'line-color') $calendar-line-width solid
+//    border-bottom: map-deep-get($material, 'calendar', 'line-color') $calendar-line-width solid
+//    color: map-deep-get($material, 'calendar', 'text-color')
+//
+//    &.v-outside
+//      background-color: map-deep-get($material, 'calendar', 'outside-background-color')
+//
+//  .v-calendar-weekly__weeknumber
+//      background-color:  map-deep-get($material, 'calendar', 'weeknumber-background-color')
+//      border-right: map-deep-get($material, 'calendar', 'line-color') $calendar-line-width solid
+//      border-bottom: map-deep-get($material, 'calendar', 'line-color') $calendar-line-width solid
+//      color: map-deep-get($material, 'calendar', 'text-color')
 
 .v-calendar-weekly
   width: 100%

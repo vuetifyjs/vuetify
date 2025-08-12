@@ -1,15 +1,16 @@
-@import '../../../styles/styles.sass'
-@import '../_variables.scss'
+@use '../../../styles/tools'
+@use '../../../styles/settings'
+@use '../variables' as *
 
-+theme(v-calendar-events) using ($material)
-  .v-event-timed
-    border: $calendar-event-border-width solid !important
-
-  .v-event-more
-    background-color: map-deep-get($material, 'calendar', 'background-color')
-
-    &.v-outside
-      background-color: map-deep-get($material, 'calendar', 'outside-background-color')
+//+theme(v-calendar-events) using ($material)
+//  .v-event-timed
+//    border: $calendar-event-border-width solid !important
+//
+//  .v-event-more
+//    background-color: map-deep-get($material, 'calendar', 'background-color')
+//
+//    &.v-outside
+//      background-color: map-deep-get($material, 'calendar', 'outside-background-color')
 
 .v-calendar
   .v-event
