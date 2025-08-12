@@ -14,18 +14,14 @@ import {
   parseEvent,
 } from '../util/events'
 import props from '../util/props'
-
-// Types
-import type { VNode } from 'vue'
+import { diffMinutes, getDayIdentifier } from '../util/timestamp'
+import { defineComponent, getPrefixedEventHandlers } from '@/util'
 
 // Mixins
 import CalendarBase from './calendar-base'
 
-// Utilities
-import { diffMinutes, getDayIdentifier } from '../util/timestamp'
-import { defineComponent } from '@/util'
-
 // Types
+import type { VNode } from 'vue'
 import type {
   CalendarCategory,
   CalendarDayBodySlotScope,
@@ -290,7 +286,7 @@ export default defineComponent({
       })
     },
     genEvent (event: CalendarEventParsed, scopeInput: VEventScopeInput, timedEvent: boolean, data: VNodeData): VNode {
-      const slot = this.$scopedSlots.event
+      const slot = this.$slots.event
       const text = this.eventTextColorFunction(event.input)
       const background = this.eventColorFunction(event.input)
       const overlapsNoon = event.start.hour < 12 && event.end.hour >= 12
@@ -302,25 +298,27 @@ export default defineComponent({
         if (event.start.hasTime) {
           if (timedEvent) {
             const time = timeSummary()
-            const delimiter = singline ? ', ' : this.$createElement('br')
+            const delimiter = singline ? ', ' : <br />
 
-            return this.$createElement('span', { staticClass: 'v-event-summary' }, [
-              this.$createElement('strong', [name]),
-              delimiter,
-              time,
-            ])
+            return (
+              <span class="v-event-summary">
+                <strong>{ name }</strong>
+                { delimiter }
+                { time }
+              </span>
+            )
           } else {
             const time = formatTime(event.start, true)
 
-            return this.$createElement('span', { staticClass: 'v-event-summary' }, [
-              this.$createElement('strong', [time]),
-              ' ',
-              name,
-            ])
+            return (
+              <span class="v-event-summary">
+                <strong>{ time }</strong> { name }
+              </span>
+            )
           }
         }
 
-        return this.$createElement('span', { staticClass: 'v-event-summary' }, [name])
+        return <span class="v-event-summary">{ name }</span>
       }
 
       const scope = {
@@ -334,69 +332,59 @@ export default defineComponent({
         eventSummary,
       }
 
-      return this.$createElement('div',
-        this.setTextColor(text,
-          this.setBackgroundColor(background, {
-            on: this.getDefaultMouseEventHandlers(':event', nativeEvent => ({ ...scope, nativeEvent })),
-            directives: [{
-              name: 'ripple',
-              value: this.eventRipple ?? true,
-            }],
-            ...data,
-          })
-        ), slot
-          ? slot(scope)
-          : [this.genName(eventSummary)]
+      const events = getPrefixedEventHandlers(this.$attrs, ':event', nativeEvent => ({ ...scope, nativeEvent }))
+
+      return (
+        <div
+          v-ripple={ this.eventRipple ?? true }
+          class={ this.setTextColor(text, this.setBackgroundColor(background)) }
+          { ...events }
+          { ...data }
+        >
+          { slot?.(scope) ?? this.genName(eventSummary) }
+        </div>
       )
     },
     genName (eventSummary: () => string | VNode): VNode {
-      return this.$createElement('div', {
-        staticClass: 'pl-1',
-      }, [eventSummary()])
+      return (
+        <div class="pl-1">
+          { eventSummary() }
+        </div>
+      )
     },
     genPlaceholder (day: CalendarTimestamp): VNode {
       const height = this.eventHeight + this.eventMarginBottom
 
-      return this.$createElement('div', {
-        style: {
-          height: `${height}px`,
-        },
-        attrs: {
-          'data-date': day.date,
-        },
-        ref: 'events',
-        refInFor: true,
-      })
+      return (
+        <div
+          style={{ height: `${height}px` }}
+          data-date={ day.date }
+          ref="events"
+          refInFor
+        />
+      )
     },
     genMore (day: CalendarDaySlotScope): VNode {
       const eventHeight = this.eventHeight
       const eventMarginBottom = this.eventMarginBottom
+      const events = getPrefixedEventHandlers(this.$attrs, ':more', nativeEvent => ({ nativeEvent, ...day }))
 
-      return this.$createElement('div', {
-        staticClass: 'v-event-more pl-1',
-        class: {
-          'v-outside': day.outside,
-        },
-        attrs: {
-          'data-date': day.date,
-          'data-more': 1,
-        },
-        directives: [{
-          name: 'ripple',
-          value: this.eventRipple ?? true,
-        }],
-        on: this.getDefaultMouseEventHandlers(':more', nativeEvent => {
-          return { nativeEvent, ...day }
-        }),
-
-        style: {
-          display: 'none',
-          height: `${eventHeight}px`,
-          'margin-bottom': `${eventMarginBottom}px`,
-        },
-        ref: 'events',
-        refInFor: true,
-      })
+      return (
+        <div
+          class={['v-event-more pl-1', { 'v-outside': day.outside }]}
+          data-date={ day.date }
+          data-more={ 1 }
+          style={{
+            display: 'none',
+            height: `${eventHeight}px`,
+            marginBottom: `${eventMarginBottom}px`,
+          }}
+          ref="events"
+          refInFor
+          { ...events }
+          v-ripple={ this.eventRipple ?? true }
+        />
+      )
     },
     getVisibleEvents (): CalendarEventParsed[] {
       const start = getDayIdentifier(this.days[0])
@@ -441,7 +429,7 @@ export default defineComponent({
     },
     getScopedSlots () {
       if (this.noEvents) {
-        return { ...this.$scopedSlots }
+        return { ...this.$slots }
       }
 
       const mode = this.eventModeFunction(
@@ -475,7 +463,7 @@ export default defineComponent({
         return children
       }
 
-      const slots = this.$scopedSlots
+      const slots = this.$slots
       const slotDay = slots.day
       const slotDayHeader = slots['day-header']
       const slotDayBody = slots['day-body']
@@ -509,9 +497,7 @@ export default defineComponent({
         'day-body': (day: CalendarDayBodySlotScope) => {
           const events = getSlotChildren(day, this.getEventsForDayTimed, this.genTimedEvent, true)
           let children: VNode[] = [
-            this.$createElement('div', {
-              staticClass: 'v-event-timed-container',
-            }, events),
+            <div class="v-event-timed-container">{ events }</div>,
           ]
 
           if (slotDayBody) {

@@ -4,16 +4,13 @@ import './VCalendarWeekly.sass'
 // Mixins
 import VCalendarWeekly from './VCalendarWeekly'
 
-// Util
-import { getEndOfMonth, getStartOfMonth, parseTimestamp } from './util/timestamp'
-
 // Utilities
+import { getEndOfMonth, getStartOfMonth, parseTimestamp } from './util/timestamp'
 import { defineComponent } from '@/util'
 
 // Types
 import type { CalendarTimestamp } from './types'
 
-/* @vue/component */
 export default defineComponent({
   name: 'VCalendarMonthly',
 
@@ -30,5 +27,4 @@ export default defineComponent({
       return getEndOfMonth(parseTimestamp(this.end, true))
     },
   },
-
 })

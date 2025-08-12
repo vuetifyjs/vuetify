@@ -343,43 +343,25 @@ export default defineComponent({
     },
   },
 
-  render (h): VNode {
-    const { start, end, maxDays, component, weekdays, categories } = this.renderProps
-
-    return h(component, {
-      staticClass: 'v-calendar',
-      class: {
-        'v-calendar-events': !this.noEvents,
-      },
-      props: {
-        ...this.$props,
-        start: start.date,
-        end: end.date,
-        maxDays,
-        weekdays,
-        categories,
-      },
-      attrs: {
-        role: 'grid',
-      },
-      directives: [{
-        modifiers: { quiet: true },
-        name: 'resize',
-        value: this.updateEventVisibility,
-      }],
-      on: {
-        ...this.$listeners,
-
-        'click:date': (day: CalendarTimestamp, e?: MouseEvent) => {
-          if (this.$listeners.input) {
-            this.$emit('input', day.date)
-          }
-          if (this.$listeners['click:date']) {
-            this.$emit('click:date', day, e)
-          }
-        },
-      },
-      scopedSlots: this.getScopedSlots(),
-    })
+  render (): VNode {
+    const { start, end, maxDays, component: Component, weekdays, categories } = this.renderProps
+    return (
+      <Component
+        class={['v-calendar', { 'v-calendar-events': !this.noEvents }]}
+        v-resize_quiet={ this.updateEventVisibility }
+        role="grid"
+        { ...this.$props }
+        start={ start.date }
+        end={ end.date }
+        maxDays={ maxDays }
+        weekdays={ weekdays }
+        categories={ categories }
+        onClickDate={ (e?: MouseEvent, day: CalendarTimestamp) => {
+          if (this.onInput) this.$emit('input', day.date)
+          if (this['onClick:date']) this.$emit('click:date', e, day)
+        }}
+        v-slots={ this.getScopedSlots() }
+      />
+    )
   },
 })

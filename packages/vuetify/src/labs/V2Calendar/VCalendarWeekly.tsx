@@ -12,17 +12,14 @@ import {
   createNativeLocaleFormatter,
   getDayIdentifier,
 } from './util/timestamp'
-import { getSlot } from '../../util/helpers'
-import { defineComponent } from '@/util'
+import { defineComponent, getPrefixedEventHandlers } from '@/util'
 
 // Types
 import type { VNode } from 'vue'
+import type { CalendarFormatter, CalendarTimestamp } from './types'
 
 // Mixins
 import CalendarBase from './mixins/calendar-base'
-
-// Types
-import type { CalendarFormatter, CalendarTimestamp } from './types'
 
 export default defineComponent({
   name: 'VCalendarWeekly',
@@ -92,20 +89,19 @@ export default defineComponent({
              dayIdentifier > getDayIdentifier(this.parsedEnd)
     },
     genHead (): VNode {
-      return this.$createElement('div', {
-        staticClass: 'v-calendar-weekly__head',
-        attrs: {
-          role: 'row',
-        },
-      }, this.genHeadDays())
+      return (
+        <div class="v-calendar-weekly__head" role="row">
+          { this.genHeadDays() }
+        </div>
+      )
     },
     genHeadDays (): VNode[] {
       const header = this.todayWeek.map(this.genHeadDay)
 
       if (this.showWeek) {
-        header.unshift(this.$createElement('div', {
-          staticClass: 'v-calendar-weekly__head-weeknumber',
-        }))
+        header.unshift(
+          <div class="v-calendar-weekly__head-weeknumber" />
+        )
       }
 
       return header
@@ -114,14 +110,16 @@ export default defineComponent({
       const outside = this.isOutside(this.days[index])
       const color = day.present ? this.color : undefined
 
-      return this.$createElement('div', this.setTextColor(color, {
-        key: day.date,
-        staticClass: 'v-calendar-weekly__head-weekday',
-        class: this.getRelativeClasses(day, outside),
-        attrs: {
-          role: 'columnheader',
-        },
-      }), this.weekdayFormatter(day, this.shortWeekdays))
+      return (
+        <div
+          key={ day.date }
+          class={['v-calendar-weekly__head-weekday', this.getRelativeClasses(day, outside)]}
+          style={ this.setTextColor(color) }
+          role="columnheader"
+        >
+          { this.weekdayFormatter(day, this.shortWeekdays) }
+        </div>
+      )
     },
     genWeeks (): VNode[] {
       const days = this.days
@@ -141,13 +139,15 @@ export default defineComponent({
         weekNodes.unshift(this.genWeekNumber(weekNumber))
       }
 
-      return this.$createElement('div', {
-        key: week[0].date,
-        staticClass: 'v-calendar-weekly__week',
-        attrs: {
-          role: 'row',
-        },
-      }, weekNodes)
+      return (
+        <div
+          key={ week[0].date }
+          class="v-calendar-weekly__week"
+          role="row"
+        >
+          { weekNodes }
+        </div>
+      )
     },
     getWeekNumber (determineDay: CalendarTimestamp) {
       return weekNumber(
@@ -159,76 +159,77 @@ export default defineComponent({
       )
     },
     genWeekNumber (weekNumber: number) {
-      return this.$createElement('div', {
-        staticClass: 'v-calendar-weekly__weeknumber',
-      }, [
-        this.$createElement('small', String(weekNumber)),
-      ])
+      return (
+        <div class="v-calendar-weekly__weeknumber">
+          <small>{ String(weekNumber) }</small>
+        </div>
+      )
     },
     genDay (day: CalendarTimestamp, index: number, week: CalendarTimestamp[]): VNode {
       const outside = this.isOutside(day)
+      const events = getPrefixedEventHandlers(this.$attrs, ':day', nativeEvent => {
+        return { nativeEvent, ...day }
+      })
 
-      return this.$createElement('div', {
-        key: day.date,
-        staticClass: 'v-calendar-weekly__day',
-        class: this.getRelativeClasses(day, outside),
-        attrs: {
-          role: 'cell',
-        },
-        on: this.getDefaultMouseEventHandlers(':day', nativeEvent => {
-          return { nativeEvent, ...day }
-        }),
-      }, [
-        this.genDayLabel(day),
-        ...(getSlot(this, 'day', () => ({ outside, index, week, ...day })) || []),
-      ])
+      return (
+        <div
+          key={ day.date }
+          class={['v-calendar-weekly__day', this.getRelativeClasses(day, outside)]}
+          role="cell"
+          { ...events }
+        >
+          { this.genDayLabel(day) }
+          { this.$slots.day?.({ outside, index, week, ...day }) }
+        </div>
+      )
     },
     genDayLabel (day: CalendarTimestamp): VNode {
-      return this.$createElement('div', {
-        staticClass: 'v-calendar-weekly__day-label',
-      }, getSlot(this, 'day-label', day) || [this.genDayLabelButton(day)])
+      return (
+        <div class="v-calendar-weekly__day-label">
+          { this.$slots['day-label']?.(day) ?? this.genDayLabelButton(day) }
+        </div>
+      )
     },
     genDayLabelButton (day: CalendarTimestamp): VNode {
       const color = day.present ? this.color : 'transparent'
       const hasMonth = day.day === 1 && this.showMonthOnFirst
+      const events = getPrefixedEventHandlers(this.$attrs, ':date', nativeEvent => ({ nativeEvent, ...day }))
 
-      return this.$createElement(VBtn, {
-        props: {
-          color,
-          fab: true,
-          depressed: true,
-          small: true,
-        },
-        on: this.getMouseEventHandlers({
-          'click:date': { event: 'click', stop: true },
-          'contextmenu:date': { event: 'contextmenu', stop: true, prevent: true, result: false },
-        }, nativeEvent => ({ nativeEvent, ...day })),
-      }, hasMonth
-        ? this.monthFormatter(day, this.shortMonths) + ' ' + this.dayFormatter(day, false)
-        : this.dayFormatter(day, false)
+      return (
+        <VBtn
+          color={ color }
+          fab
+          depressed
+          small
+          { ...events }
+        >
+          { hasMonth
+            ? this.monthFormatter(day, this.shortMonths) + ' ' + this.dayFormatter(day, false)
+            : this.dayFormatter(day, false)
+          }
+        </VBtn>
       )
     },
-    genDayMonth (day: CalendarTimestamp): VNode | string {
+    genDayMonth (day: CalendarTimestamp): VNode {
       const color = day.present ? this.color : undefined
 
-      return this.$createElement('div', this.setTextColor(color, {
-        staticClass: 'v-calendar-weekly__day-month',
-      }), getSlot(this, 'day-month', day) || this.monthFormatter(day, this.shortMonths))
+      return (
+        <div class="v-calendar-weekly__day-month" style={ this.setTextColor(color) }>
+          { this.$slots['day-month']?.(day) ?? this.monthFormatter(day, this.shortMonths) }
+        </div>
+      )
     },
   },
 
-  render (h): VNode {
-    return h('div', {
-      staticClass: this.staticClass,
-      class: this.classes,
-      on: {
-        dragstart: (e: MouseEvent) => {
-          e.preventDefault()
-        },
-      },
-    }, [
-      !this.hideHeader ? this.genHead() : '',
-      ...this.genWeeks(),
-    ])
+  render () {
+    return (
+      <div
+        class={[this.staticClass, this.classes]}
+        onDragstart={ (e: MouseEvent) => e.preventDefault() }
+      >
+        { !this.hideHeader ? this.genHead() : undefined }
+        { this.genWeeks() }
+      </div>
+    )
   },
 })
