@@ -47,6 +47,8 @@ export default {
       type: Function as PropType<CalendarFormatter>,
       default: null,
     },
+    locale: String,
+    color: String,
   },
   intervals: {
     maxDays: {

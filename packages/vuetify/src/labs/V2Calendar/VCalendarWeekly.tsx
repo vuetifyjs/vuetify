@@ -32,8 +32,8 @@ export default defineComponent({
     staticClass (): string {
       return 'v-calendar-weekly'
     },
-    classes (): object {
-      return this.themeClasses
+    classes (): any {
+      return this.$vuetify.theme.themeClasses
     },
     parsedMinWeeks (): number {
       return parseInt(this.minWeeks)

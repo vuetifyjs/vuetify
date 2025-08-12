@@ -235,7 +235,7 @@ export default defineComponent({
   render () {
     return (
       <div
-        class={['v-calendar-daily', this.themeClasses]}
+        class={['v-calendar-daily', this.$vuetify.theme.themeClasses]}
         onDragstart={ (e: MouseEvent) => e.preventDefault() }
         v-resize_quiet={ this.onResize }
       >

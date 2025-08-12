@@ -1,8 +1,4 @@
 // Mixins
-import Colorable from '../mixins/colorable'
-import Localable from '../mixins/localable'
-import Mouse from '../mixins/mouse'
-import Themeable from '../mixins/themeable'
 import Times from './times'
 
 // Directives
@@ -29,13 +25,7 @@ export default defineComponent({
 
   directives: { vResize },
 
-  mixins: [
-    // Colorable,
-    // Localable,
-    // Mouse,
-    // Themeable,
-    Times,
-  ],
+  mixins: [Times],
 
   props: props.base,
 
@@ -94,6 +84,9 @@ export default defineComponent({
         this.currentLocale,
         (_tms, short) => short ? shortOptions : longOptions
       )
+    },
+    currentLocale (): string {
+      return this.locale || this.$vuetify.locale.name
     },
   },
 

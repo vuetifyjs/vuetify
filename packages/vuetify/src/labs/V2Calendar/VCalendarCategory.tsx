@@ -21,12 +21,12 @@ export default defineComponent({
   props: props.category,
 
   computed: {
-    classes (): object {
-      return {
-        'v-calendar-daily': true,
-        'v-calendar-category': true,
-        ...this.themeClasses,
-      }
+    classes (): any[] {
+      return [
+        'v-calendar-daily',
+        'v-calendar-category',
+        this.$vuetify.theme.themeClasses,
+      ]
     },
     parsedCategories (): CalendarCategory[] {
       return getParsedCategories(this.categories, this.categoryText)
