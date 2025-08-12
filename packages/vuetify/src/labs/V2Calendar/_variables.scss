@@ -1,0 +1,34 @@
+@import '../../styles/styles.sass';
+
+$calendar-line-width: 1px !default;
+
+$calendar-daily-head-day-label-size: 56px !default;
+$calendar-daily-head-weekday-size: 50px !default;
+$calendar-daily-weekday-padding: 3px 0px 0px 0px !default;
+$calendar-daily-weekday-font-size: 11px !default;
+$calendar-daily-day-padding: 0px 0px 3px 0px !default;
+$calendar-daily-day-font-size: 40px !default;
+$calendar-daily-interval-gutter-top: -6px !default;
+$calendar-daily-interval-gutter-width: 4px !default;
+$calendar-daily-interval-gutter-align: right !default;
+$calendar-daily-interval-gutter-line-width: 8px !default;
+$calendar-daily-interval-gutter-font-size: 10px !default;
+
+$calendar-category-column-min-width: 200px !default;
+
+$calendar-weekly-weekday-padding: 0px 4px 0px 4px !default;
+$calendar-weekly-weekday-font-size: 11px !default;
+$calendar-weekly-day-padding: 0px 0px 0px 0px !default;
+$calendar-weekly-day-label-size: 32px !default;
+$calendar-weekly-day-label-font-size: 12px !default;
+$calendar-weekly-day-label-margin: 4px 0 0 0 !default;
+$calendar-weekly-day-month-left: 36px !default;
+$calendar-weekly-weeknumber-flex-basis: 24px !default;
+$calendar-weekly-weeknumber-padding-top: 14.5px !default;
+
+$calendar-event-bottom-space: 1px !default;
+$calendar-event-border-width: 1px !default;
+$calendar-event-border-radius: $border-radius-root !default;
+$calendar-event-font-size: 12px !default;
+$calendar-event-line-height: 20px !default;
+$calendar-event-right-empty: 10px !default;

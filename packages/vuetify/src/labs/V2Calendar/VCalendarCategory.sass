@@ -1,0 +1,100 @@
+@import './_variables.scss'
+
+// Theme
++theme(v-calendar-category) using ($material)
+  .v-calendar-category__column,
+  .v-calendar-category__column-header
+    border-right: map-deep-get($material, 'calendar', 'line-color') $calendar-line-width solid
+
+  .v-calendar-daily__head
+    background: map-deep-get($material, 'calendar', 'background-color')
+
+  .v-calendar-daily__intervals-head
+    background: map-deep-get($material, 'calendar', 'background-color')
+
+  .v-calendar-daily__intervals-body
+    background: map-deep-get($material, 'calendar', 'background-color')
+
+.v-calendar-category
+  overflow: auto
+  position: relative
+
+  .v-calendar-category__category
+    text-align: center
+
+  .v-calendar-daily__day-container
+    width: min-content
+    .v-calendar-category__columns
+      position: absolute
+      height: 100%
+      width: 100%
+      top: 0
+
+  .v-calendar-daily__day-body
+    display: flex
+    flex: 1
+    width: 100%
+    height: 100%
+
+  .v-calendar-daily__head
+    flex-direction: row
+    width: min-content
+    min-width: 100%
+    position: sticky
+    top: 0
+    z-index: 2
+
+  .v-calendar-daily_head-day
+    width: auto
+    position: unset
+
+  .v-calendar-daily__intervals-head
+    position: sticky
+    left: 0
+    top: 0
+    z-index: 2
+
+  .v-calendar-daily_head-weekday
+    position: sticky
+    left: 50%
+    width: $calendar-daily-head-weekday-size
+
+  .v-calendar-daily_head-day-label
+    width: $calendar-daily-head-day-label-size
+    position: sticky
+    left: 50%
+
+  .v-calendar-daily__day
+    min-width: $calendar-category-column-min-width
+
+  .v-calendar-daily__intervals-body
+    position: sticky
+    left: 0
+    z-index: 1
+
+  .v-calendar-daily__interval
+    &:last-of-type::after
+      display: none
+
+  .v-calendar-daily__body
+    overflow: visible
+    .v-calendar-daily__scroll-area
+      overflow-y: visible
+      flex: none
+
+  .v-calendar-daily__pane
+    overflow-y: visible
+
+  .v-calendar-category__columns
+    display: flex
+    width: min-content
+    min-width: 100%
+
+    .v-calendar-category__column,
+    .v-calendar-category__column-header
+      flex: 1 1 auto
+      width: 0
+      position: relative
+
+    .v-calendar-category__column-header
+      min-width: $calendar-category-column-min-width
