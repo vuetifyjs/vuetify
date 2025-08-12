@@ -335,3 +335,25 @@
     &:hover
       .v-list-item__overlay
         opacity: calc(#{map.get(settings.$states, 'hover')} * var(--v-theme-overlay-multiplier))
+
+  @media (forced-colors: active)
+    .v-list-item            
+      &:not(&--active)
+        color: buttontext
+
+      &--variant-plain.v-list-item--active
+        color: highlight
+
+      &:not(&--variant-plain).v-list-item--active
+        background-color: highlight
+        color: highlighttext
+
+      &-title
+        forced-color-adjust: preserve-parent-color
+        
+      &--active
+        .v-list-item__prepend,
+        .v-list-item__append
+          > .v-badge .v-icon,
+          > .v-icon
+            forced-color-adjust: preserve-parent-color 
