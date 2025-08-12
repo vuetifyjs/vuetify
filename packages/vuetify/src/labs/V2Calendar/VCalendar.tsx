@@ -63,8 +63,8 @@ export default defineComponent({
 
   computed: {
     parsedValue (): CalendarTimestamp {
-      return (validateTimestamp(this.value)
-        ? parseTimestamp(this.value, true)
+      return (validateTimestamp(this.modelValue)
+        ? parseTimestamp(this.modelValue, true)
         : (this.parsedStart || this.times.today))
     },
     parsedCategoryDays (): number {
@@ -231,12 +231,12 @@ export default defineComponent({
       updateFormatted(moved)
       updateRelative(moved, this.times.now)
 
-      if (this.value instanceof Date) {
-        this.$emit('input', timestampToDate(moved))
-      } else if (typeof this.value === 'number') {
-        this.$emit('input', timestampToDate(moved).getTime())
+      if (this.modelValue instanceof Date) {
+        this.$emit('update:modelValue', timestampToDate(moved))
+      } else if (typeof this.modelValue === 'number') {
+        this.$emit('update:modelValue', timestampToDate(moved).getTime())
       } else {
-        this.$emit('input', moved.date)
+        this.$emit('update:modelValue', moved.date)
       }
 
       this.$emit('moved', moved)
@@ -357,8 +357,8 @@ export default defineComponent({
         weekdays={ weekdays }
         categories={ categories }
         onClickDate={ (e?: MouseEvent, day: CalendarTimestamp) => {
-          if (this.onInput) this.$emit('input', day.date)
-          if (this['onClick:date']) this.$emit('click:date', e, day)
+          if (this.$attrs['onUpdate:modelValue']) this.$emit('update:modelValue', day.date)
+          if (this.$attrs['onClick:date']) this.$emit('click:date', e, day)
         }}
         v-slots={ this.getScopedSlots() }
       />

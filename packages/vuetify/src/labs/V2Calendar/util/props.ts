@@ -127,7 +127,7 @@ export default {
       type: String,
       default: 'month',
     },
-    value: {
+    modelValue: {
       type: [String, Number, Date] as PropType<string | number | Date>,
       validate: validateTimestamp,
     },
