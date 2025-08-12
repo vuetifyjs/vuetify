@@ -3,7 +3,7 @@ import type { CalendarCategory, CalendarCategoryTextFunction } from '../types'
 
 export function parsedCategoryText (
   category: CalendarCategory,
-  categoryText: string | CalendarCategoryTextFunction
+  categoryText: string | CalendarCategoryTextFunction | undefined
 ): string {
   return typeof categoryText === 'string' && typeof category === 'object' && category
     ? category[categoryText]
@@ -14,7 +14,7 @@ export function parsedCategoryText (
 
 export function getParsedCategories (
   categories: CalendarCategory | CalendarCategory[],
-  categoryText: string | CalendarCategoryTextFunction
+  categoryText: string | CalendarCategoryTextFunction | undefined
 ): CalendarCategory[] {
   if (typeof categories === 'string') return categories.split(/\s*,\s/)
   if (Array.isArray(categories)) {
