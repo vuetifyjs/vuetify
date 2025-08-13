@@ -220,6 +220,7 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
                         name={ props.name }
                         placeholder={ props.placeholder }
                         size={ 1 }
+                        role={ props.role }
                         type={ props.type }
                         onFocus={ focus }
                         onBlur={ blur }
