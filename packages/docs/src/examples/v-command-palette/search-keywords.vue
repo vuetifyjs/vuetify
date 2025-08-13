@@ -1,8 +1,10 @@
 <template>
-  <div class="text-center">
+  <div class="d-flex justify-center">
     <v-command-palette
+      :close-on-execute="false"
       :items="items"
       :model-value="true"
+      class="flex-grow-1"
       contained
     ></v-command-palette>
   </div>

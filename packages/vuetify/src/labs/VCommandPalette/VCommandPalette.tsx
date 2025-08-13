@@ -31,7 +31,7 @@ import { provideCommandPaletteContext } from '@/labs/VCommandPalette/composables
 import { useCommandPaletteNavigation } from '@/labs/VCommandPalette/composables/useCommandPaletteNavigation'
 
 // Utilities
-import { computed, nextTick, readonly, ref, shallowRef, toRef, watch, watchEffect } from 'vue'
+import { computed, nextTick, readonly, ref, shallowRef, toRef, useId, watch, watchEffect } from 'vue'
 import { consoleError, EventProp, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -124,6 +124,8 @@ const VCommandPaletteContent = genericComponent<VCommandPaletteSlots>()({
   },
   setup (props, { emit, slots }) {
     const { t } = useLocale()
+    const uid = useId()
+    const instructionsId = `command-palette-instructions-${uid}`
 
     // Navigation state management
     interface NavigationFrame { items: any[], selected: number }
@@ -386,7 +388,7 @@ const VCommandPaletteContent = genericComponent<VCommandPaletteSlots>()({
                   v-model={ search.value }
                   placeholder={ props.placeholder }
                   aria-label="Search commands"
-                  aria-describedby="command-palette-instructions"
+                  aria-describedby={ instructionsId }
                   { ...props.searchProps }
                 />
               </>
@@ -395,7 +397,7 @@ const VCommandPaletteContent = genericComponent<VCommandPaletteSlots>()({
             { slots.default(defaultSlotScope.value) }
             { slots.footer ? slots.footer(footerSlotScope.value) : (
               <VCommandPaletteInstructions
-                id="command-palette-instructions"
+                id={ instructionsId }
                 hasItems={ footerSlotScope.value.hasItems }
                 hasParent={ footerSlotScope.value.hasParent }
               />
@@ -443,7 +445,7 @@ const VCommandPaletteContent = genericComponent<VCommandPaletteSlots>()({
           </VCommandPaletteList>
           { slots.footer ? slots.footer(footerSlotScope.value) : (
             <VCommandPaletteInstructions
-              id="command-palette-instructions"
+              id={ instructionsId }
               hasItems={ footerSlotScope.value.hasItems }
               hasParent={ footerSlotScope.value.hasParent }
             />
