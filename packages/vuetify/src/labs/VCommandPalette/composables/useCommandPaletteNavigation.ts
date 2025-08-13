@@ -40,6 +40,8 @@ export interface UseCommandPaletteNavigationOptions {
   itemTransformationProps: ComputedRef<any> // Props for transforming raw items
   onItemClick: (item: VuetifyListItem, event: MouseEvent | KeyboardEvent) => void // Item execution callback
   onClose: () => void // Close callback
+  // Optional guard to scope hotkeys
+  isScopeActive?: () => boolean
 }
 
 /**
@@ -145,6 +147,20 @@ export function useCommandPaletteNavigation (options: UseCommandPaletteNavigatio
   }
 
   /**
+   * Move selection left/right for grid-style layouts.
+   * Falls back to up/down if we cannot compute a grid.
+   */
+  function moveSelectionLeft () {
+    // Default behavior mirrors up
+    moveSelectionUp()
+  }
+
+  function moveSelectionRight () {
+    // Default behavior mirrors down
+    moveSelectionDown()
+  }
+
+  /**
    * Executes the currently selected item
    * Handles the case where no item is selected by auto-selecting the first
    */
@@ -216,29 +232,47 @@ export function useCommandPaletteNavigation (options: UseCommandPaletteNavigatio
   // Register keyboard navigation hotkeys
   // These are active whenever the command palette is open
 
+  function scoped (fn: (e: KeyboardEvent) => void) {
+    return (e: KeyboardEvent) => {
+      if (options.isScopeActive && !options.isScopeActive()) return
+      fn(e)
+    }
+  }
+
   // Arrow key navigation
-  useHotkey('arrowup', e => {
+  useHotkey('arrowup', scoped(e => {
     e.preventDefault() // Prevent default browser behavior
     moveSelectionUp()
-  }, { inputs: true }) // Allow in input fields
+  }), { inputs: true }) // Allow in input fields
 
-  useHotkey('arrowdown', e => {
+  useHotkey('arrowdown', scoped(e => {
     e.preventDefault() // Prevent default browser behavior
     moveSelectionDown()
-  }, { inputs: true }) // Allow in input fields
+  }), { inputs: true }) // Allow in input fields
 
   // Enter key to execute selected item
-  useHotkey('enter', e => {
+  useHotkey('enter', scoped(e => {
     e.preventDefault() // Prevent form submission
     executeSelectedItem(e)
-  }, { inputs: true }) // Allow in input fields
+  }), { inputs: true }) // Allow in input fields
+
+  // Left/Right navigation for grid and custom layouts
+  useHotkey('arrowleft', scoped(e => {
+    e.preventDefault()
+    moveSelectionLeft()
+  }), { inputs: true })
+
+  useHotkey('arrowright', scoped(e => {
+    e.preventDefault()
+    moveSelectionRight()
+  }), { inputs: true })
 
   // Backspace for navigation (only when search is empty)
-  useHotkey('backspace', e => {
+  useHotkey('backspace', scoped(e => {
     if (search.value) return // Let the search input handle backspace
     e.preventDefault() // Prevent browser back navigation
     navigateBack()
-  }, { inputs: true, preventDefault: false }) // Conditional preventDefault
+  }), { inputs: true, preventDefault: false }) // Conditional preventDefault
 
   // Note: Escape key handling is done at the main VCommandPalette level
   // to properly respect the persistent prop
@@ -270,6 +304,8 @@ export function useCommandPaletteNavigation (options: UseCommandPaletteNavigatio
     reset,
     moveSelectionUp,
     moveSelectionDown,
+    moveSelectionLeft,
+    moveSelectionRight,
     executeSelectedItem,
     navigateBack,
   }

@@ -5,6 +5,7 @@
       :items="items"
       :model-value="true"
       class="flex-grow-1"
+      hotkeys-scope="focused"
       contained
     >
       <template v-slot:default="{ items: filteredItems, rootProps, getItemProps }">

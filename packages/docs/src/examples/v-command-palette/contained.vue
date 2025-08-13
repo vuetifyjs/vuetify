@@ -11,6 +11,7 @@
       :items="items"
       :model-value="true"
       class="align-self-stretch mx-auto"
+      hotkeys-scope="focused"
       contained
     ></v-command-palette>
   </v-container>

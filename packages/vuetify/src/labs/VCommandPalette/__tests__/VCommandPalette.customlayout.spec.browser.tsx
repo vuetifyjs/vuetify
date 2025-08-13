@@ -203,8 +203,8 @@ describe('VCommandPalette', () => {
       const firstItem = screen.getByTestId('custom-item-0')
       expect(firstItem).toHaveClass('v-list-item--active')
 
-      // Arrow down should move selection
-      await userEvent.keyboard('{ArrowDown}')
+      // Arrow right should move selection in custom layout
+      await userEvent.keyboard('{ArrowRight}')
 
       const secondItem = screen.getByTestId('custom-item-1')
       await expect.poll(() =>
@@ -249,6 +249,39 @@ describe('VCommandPalette', () => {
 
       // Should execute the handler
       expect(handler).toHaveBeenCalledTimes(1)
+    })
+
+    it('should select custom item on click and reflect active state', async () => {
+      const model = ref(true)
+      render(() => (
+        <VCommandPalette
+          v-model={ model.value }
+          items={ basicItems }
+          v-slots={{
+            default: ({ items, rootProps, getItemProps }) => (
+              <div { ...rootProps }>
+                { items.map((item, index) => (
+                  <div
+                    key={ item.id }
+                    { ...getItemProps(item, index) }
+                    data-testid={ `click-item-${index}` }
+                  >
+                    { item.title }
+                  </div>
+                ))}
+              </div>
+            ),
+          }}
+        />
+      ))
+
+      await screen.findByRole('dialog')
+
+      const second = await screen.findByTestId('click-item-1')
+      await userEvent.click(second)
+
+      // second should carry active class now
+      await expect.poll(() => second.classList.contains('v-list-item--active')).toBeTruthy()
     })
   })
 })

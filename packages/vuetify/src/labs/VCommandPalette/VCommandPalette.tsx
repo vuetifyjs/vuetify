@@ -90,6 +90,11 @@ const makeVCommandPaletteContentProps = propsFactory({
   placeholder: String,
   listProps: Object as PropType<VCommandPaletteList['$props']>,
   searchProps: Object as PropType<VCommandPaletteSearch['$props']>,
+  // Scope for hotkeys: 'global' listens globally, 'focused' only when palette is focused
+  hotkeysScope: {
+    type: String as PropType<'global' | 'focused'>,
+    default: 'global',
+  },
   // Include standard item transformation props
   ...makeItemsProps({ itemTitle: 'title' }),
   // Items array with proper typing for command palette items
@@ -309,6 +314,14 @@ const VCommandPaletteContent = genericComponent<VCommandPaletteSlots>()({
       itemTransformationProps,
       onItemClick: onItemClickFromList,
       onClose,
+      isScopeActive: () => {
+        if (props.hotkeysScope !== 'focused') return true
+        const active = document.activeElement as HTMLElement | null
+        if (!active) return false
+        const container = active.closest('.v-command-palette') as HTMLElement | null
+        if (!container) return false
+        return !!container.querySelector(`#${instructionsId}`)
+      },
     })
 
     // Assign selectedIndex from navigation
@@ -321,6 +334,12 @@ const VCommandPaletteContent = genericComponent<VCommandPaletteSlots>()({
       selectedIndex,
       activeDescendantId,
       navigationMode: shallowRef('list'),
+      setSelectedIndex: navigation.setSelectedIndex,
+      onItemClick: (item: any, e: any) => {
+        // Transform possible raw item from custom layout back to list item
+        const [transformed] = transformItems(itemTransformationProps.value, [item.raw ?? item])
+        if (transformed) onItemClickFromList(transformed, e)
+      },
     })
 
     // Computed slot scope for default slot (custom layouts)
@@ -422,7 +441,7 @@ const VCommandPaletteContent = genericComponent<VCommandPaletteSlots>()({
                 v-model={ search.value }
                 placeholder={ props.placeholder }
                 aria-label="Search commands"
-                aria-describedby="command-palette-instructions"
+                aria-describedby={ instructionsId }
                 { ...props.searchProps }
               />
             </>

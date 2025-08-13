@@ -64,6 +64,8 @@ export function provideCommandPaletteContext (options: {
   activeDescendantId: ComputedRef<string | undefined>
   onKeydown?: (event: KeyboardEvent) => void
   navigationMode?: Ref<'list' | 'grid'>
+  setSelectedIndex?: (index: number) => void
+  onItemClick?: (item: any, event: MouseEvent | KeyboardEvent) => void
 }) {
   const {
     items,
@@ -71,6 +73,8 @@ export function provideCommandPaletteContext (options: {
     activeDescendantId,
     onKeydown,
     navigationMode = shallowRef('list'), // Default to list mode
+    setSelectedIndex,
+    onItemClick,
   } = options
 
   // Track registered items for custom layouts
@@ -113,6 +117,11 @@ export function provideCommandPaletteContext (options: {
         'v-list-item--active': isSelected, // Vuetify active class
       },
       tabindex: -1, // Not directly focusable (parent manages focus)
+      onMouseenter: () => setSelectedIndex?.(index),
+      onClick: (e: MouseEvent | KeyboardEvent) => {
+        setSelectedIndex?.(index)
+        onItemClick?.(item, e)
+      },
     }
   }
 
