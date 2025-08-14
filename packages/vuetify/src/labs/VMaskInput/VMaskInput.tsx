@@ -3,7 +3,7 @@ import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextFi
 
 // Composables
 import { forwardRefs } from '@/composables/forwardRefs'
-import { isMaskDelimiter, makeMaskProps, useMask } from '@/composables/mask'
+import { isMaskDelimiter,  makeMaskProps, useMask } from '@/composables/mask'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
@@ -33,11 +33,12 @@ export const VMaskInput = genericComponent<VMaskInputSlots>()({
   setup (props, { slots, emit }) {
     const vTextFieldRef = ref<VTextField>()
 
-    const selection = shallowRef(0)
-    const lazySelection = shallowRef(0)
+    const caretPosition = shallowRef(0)
 
     const mask = useMask(props)
     const returnMaskedValue = computed(() => props.mask && props.returnMaskedValue)
+
+    const validationValue = toRef(() => returnMaskedValue.value ? model.value : mask.unmask(model.value))
 
     const model = useProxiedModel(
       props,
@@ -47,24 +48,79 @@ export const VMaskInput = genericComponent<VMaskInputSlots>()({
       val => props.mask ? mask.mask(mask.unmask(val)) : val,
       val => {
         if (props.mask) {
-          const valueBeforeChange = mask.unmask(model.value)
+          let valueWithoutDelimiters = removeMaskDelimiters(val)
+
           // E.g. mask is #-# and the input value is '2-23'
           // model-value should be enforced to '2-2'
-          const enforcedMaskedValue = mask.mask(mask.unmask(val))
-          const newUnmaskedValue = mask.unmask(enforcedMaskedValue)
+          const newMaskedValue = mask.mask(valueWithoutDelimiters)
+          const newUnmaskedValue = mask.unmask(newMaskedValue)
 
-          if (newUnmaskedValue === valueBeforeChange) {
-            vTextFieldRef.value!.value = enforcedMaskedValue
-          }
-          val = newUnmaskedValue
-          updateRange()
-          return returnMaskedValue.value ? mask.mask(val) : val
+          const newCaretPosition = getNewCaretPosition({
+            oldValue: model.value,
+            newValue: newMaskedValue,
+            oldCaret: caretPosition.value,
+          })
+
+          vTextFieldRef.value!.value = newMaskedValue;
+          vTextFieldRef.value!.setSelectionRange(newCaretPosition, newCaretPosition);
+
+          return returnMaskedValue.value ? mask.mask(newUnmaskedValue) : newUnmaskedValue
         }
         return val
       },
     )
 
-    const validationValue = toRef(() => returnMaskedValue.value ? model.value : mask.unmask(model.value))
+    function removeMaskDelimiters (val: string): string {
+      return val.split('').filter(ch => !isMaskDelimiter(ch)).join('')
+    }
+
+    function mapMaskedToUnmaskedIndex(masked: string, caretPos: number) {
+      let rawIndex = 0;
+      for (let i = 0; i < caretPos; i++) {
+        if (!isMaskDelimiter(masked[i])) rawIndex++;
+      }
+      return rawIndex;
+    }
+
+    function mapUnmaskedToMaskedIndex(masked: string, rawIndex: number) {
+      let caret = 0;
+      let dataCount = 0;
+      while (caret < masked.length && dataCount < rawIndex) {
+        if (!isMaskDelimiter(masked[caret])) dataCount++;
+        caret++;
+      }
+      return caret;
+    }
+
+    function getNewCaretPosition({
+      oldValue,
+      newValue,
+      oldCaret,
+    }: {
+      oldValue: string
+      newValue: string
+      oldCaret: number
+    }) {
+      const oldRawValue = removeMaskDelimiters(oldValue);
+      const newRawValue  = removeMaskDelimiters(newValue);
+
+      const diff = newRawValue.length - oldRawValue.length;
+
+      const oldRawValueCaret = mapMaskedToUnmaskedIndex(oldValue, oldCaret);
+      let newRawValueCaret = oldRawValueCaret + diff;
+
+      if (newRawValueCaret < 0) newRawValueCaret = 0;
+      if (newRawValueCaret > newRawValue.length) newRawValueCaret = newRawValue.length;
+
+      let newCaret = mapUnmaskedToMaskedIndex(newValue, newRawValueCaret);
+
+      // If inserting and caret lands before a delimiter, move it to the next non-delimiter character.
+      if (diff > 0 && isMaskDelimiter(newValue[newCaret]) && newCaret < newValue.length) {
+        while (newCaret < newValue.length && isMaskDelimiter(newValue[newCaret])) newCaret++
+      }
+
+      return newCaret;
+    }
 
     onBeforeMount(() => {
       if (props.returnMaskedValue) {
@@ -72,37 +128,11 @@ export const VMaskInput = genericComponent<VMaskInputSlots>()({
       }
     })
 
-    function setCaretPosition (newSelection: number) {
-      selection.value = newSelection
-      vTextFieldRef.value && vTextFieldRef.value.setSelectionRange(selection.value, selection.value)
-    }
+    function setCaretPosition (e: KeyboardEvent) {
+      caretPosition.value = vTextFieldRef.value?.selectionEnd || 0
 
-    function resetSelections () {
-      if (!vTextFieldRef.value?.selectionEnd) return
-
-      selection.value = vTextFieldRef.value.selectionEnd
-      lazySelection.value = 0
-
-      for (let index = 0; index < selection.value; index++) {
-        isMaskDelimiter(vTextFieldRef.value.value[index]) || lazySelection.value++
-      }
-    }
-
-    function updateRange () {
-      if (!vTextFieldRef.value) return
-      resetSelections()
-
-      let selection = 0
-      const newValue = vTextFieldRef.value.value
-
-      if (newValue) {
-        for (let index = 0; index < newValue.length; index++) {
-          if (lazySelection.value <= 0) break
-          isMaskDelimiter(newValue[index]) || lazySelection.value--
-          selection++
-        }
-      }
-      setCaretPosition(selection)
+      // To handle forward deletion
+      if (e.key === 'Delete') caretPosition.value++
     }
 
     useRender(() => {
@@ -114,6 +144,8 @@ export const VMaskInput = genericComponent<VMaskInputSlots>()({
           v-model={ model.value }
           ref={ vTextFieldRef }
           validationValue={ validationValue.value }
+          onKeydown={ setCaretPosition }
+          onPaste={ setCaretPosition }
         >
           {{ ...slots }}
         </VTextField>
