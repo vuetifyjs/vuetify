@@ -38,7 +38,7 @@
 
   const { mobile } = useDisplay()
 
-  const rail = shallowRef(user.railDrawer)
+  const rail = shallowRef(user.ecosystem.docs.railDrawer)
   const _opened = shallowRef([])
   const opened = computed({
     get: () => rail.value ? [] : _opened.value,
@@ -48,7 +48,7 @@
       _opened.value = val
     },
   })
-  const railEnabled = computed(() => user.railDrawer)
+  const railEnabled = computed(() => user.ecosystem.docs.railDrawer)
 
   // Restore scroll position when drawer is expanded
   let scrollingElement

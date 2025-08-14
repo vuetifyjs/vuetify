@@ -2,6 +2,7 @@
   <v-treeview
     :items="items"
     density="compact"
+    item-value="id"
   ></v-treeview>
 </template>
 

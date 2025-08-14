@@ -1,5 +1,4 @@
 /* eslint-disable vitest/no-commented-out-tests */
-
 // Composables
 import { createTheme } from '../theme'
 
@@ -227,5 +226,103 @@ describe('createTheme', () => {
 
     // Verify updateDOM is called during reactivity
     expect(mockUpdateHead).toHaveBeenCalled()
+  })
+
+  it('should change, toggle, and cycle theme', async () => {
+    const theme = createTheme({
+      defaultTheme: 'light',
+      themes: {
+        custom: { dark: false },
+        utopia: { dark: true },
+      },
+    })
+
+    // Test 1: Toggle through all available themes when no argument provided
+    expect(theme.name.value).toBe('light')
+
+    theme.toggle()
+    expect(theme.name.value).toBe('dark')
+
+    theme.toggle()
+    expect(theme.name.value).toBe('light')
+
+    // Test 2: Change to a specific theme
+    theme.change('dark')
+    expect(theme.name.value).toBe('dark')
+
+    // Test 3: Cycle between a limited set of themes
+    theme.cycle()
+    expect(theme.name.value).toBe('custom')
+
+    theme.cycle()
+    expect(theme.name.value).toBe('utopia')
+
+    theme.cycle()
+    expect(theme.name.value).toBe('light')
+
+    // Test 4: Cycle between a subset of themes
+    theme.cycle(['light', 'utopia'])
+    expect(theme.name.value).toBe('utopia')
+
+    theme.cycle(['light', 'utopia'])
+    expect(theme.name.value).toBe('light')
+
+    // Test 5: Error when changing to a non-existent theme
+    const consoleMock = vi.spyOn(console, 'warn').mockImplementation(() => {})
+    theme.change('nonexistent')
+    expect(consoleMock).toHaveBeenCalledWith('[Vue warn]: Vuetify: Theme "nonexistent" not found on the Vuetify theme instance')
+    consoleMock.mockReset()
+  })
+
+  it('should generate utility classes without !important', async () => {
+    const theme = createTheme({ unimportant: true })
+
+    theme.install(app)
+
+    const stylesheet = document.getElementById('vuetify-theme-stylesheet')
+    const css = stylesheet!.innerHTML
+
+    expect(css).not.toContain('!important')
+  })
+
+  it('should generate utility classes with a custom prefix', async () => {
+    // @ts-expect-error next-line
+    const theme = createTheme({ prefix: 'custom-' })
+
+    theme.install(app)
+
+    const stylesheet = document.getElementById('vuetify-theme-stylesheet')
+    const css = stylesheet!.innerHTML
+
+    expect(css).not.toContain('--v-theme-primary')
+    expect(css).toContain('--custom-theme-primary')
+  })
+
+  it('should use defined prefix for utility classes', async () => {
+    // @ts-expect-error next-line
+    const theme = createTheme({ prefix: 'custom-', scoped: true })
+
+    theme.install(app)
+
+    const stylesheet = document.getElementById('vuetify-theme-stylesheet')
+    const css = stylesheet!.innerHTML
+
+    expect(css).toContain('.custom-bg-primary')
+    expect(css).toContain('.custom-text-primary')
+    expect(css).toContain('.custom-border-primary')
+  })
+
+  it('should not generate utility classes if disabled', async () => {
+    // @ts-expect-error next-line
+    const theme = createTheme({ utilities: false })
+
+    theme.install(app)
+
+    const stylesheet = document.getElementById('vuetify-theme-stylesheet')
+    const css = stylesheet!.innerHTML
+
+    expect(css).not.toContain('.bg-primary')
+    expect(css).not.toContain('.text-primary')
+    expect(css).not.toContain('.border-primary')
   })
 })

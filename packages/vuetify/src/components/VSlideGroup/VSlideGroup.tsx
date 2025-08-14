@@ -50,6 +50,7 @@ type VSlideGroupSlots = {
 
 export const makeVSlideGroupProps = propsFactory({
   centerActive: Boolean,
+  contentClass: null,
   direction: {
     type: String as PropType<'horizontal' | 'vertical'>,
     default: 'horizontal',
@@ -425,7 +426,10 @@ export const VSlideGroup = genericComponent<new <T>(
         <div
           key="container"
           ref={ containerRef }
-          class="v-slide-group__container"
+          class={[
+            'v-slide-group__container',
+            props.contentClass,
+          ]}
           onScroll={ onScroll }
         >
           <div

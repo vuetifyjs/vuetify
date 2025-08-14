@@ -160,6 +160,9 @@ export const VInfiniteScroll = genericComponent<VInfiniteScrollSlots>()({
         startStatus.value = status
       } else if (side === 'end') {
         endStatus.value = status
+      } else if (side === 'both') {
+        startStatus.value = status
+        endStatus.value = status
       }
     }
 
@@ -195,6 +198,9 @@ export const VInfiniteScroll = genericComponent<VInfiniteScrollSlots>()({
           }
           if (props.mode !== 'manual') {
             nextTick(() => {
+              // Browser takes 2 - 3 animation frames to trigger IntersectionObserver after
+              // VInfiniteScrollIntersect leaves the viewpoint. So far I couldn't come up
+              // with a better solution than using 3 nested window.requestAnimationFrame. (#17475)
               window.requestAnimationFrame(() => {
                 window.requestAnimationFrame(() => {
                   window.requestAnimationFrame(() => {
@@ -292,6 +298,36 @@ export const VInfiniteScroll = genericComponent<VInfiniteScrollSlots>()({
         </Tag>
       )
     })
+
+    function reset (side?: InfiniteScrollSide) {
+      const effectiveSide = side ?? props.side
+      setStatus(effectiveSide, 'ok')
+
+      nextTick(() => {
+        setScrollAmount(
+          getScrollSize() - previousScrollSize + getScrollAmount(),
+        )
+        if (props.mode !== 'manual') {
+          nextTick(() => {
+            // See #17475
+            window.requestAnimationFrame(() => {
+              window.requestAnimationFrame(() => {
+                window.requestAnimationFrame(() => {
+                  if (effectiveSide === 'both') {
+                    intersecting('start')
+                    intersecting('end')
+                  } else {
+                    intersecting(effectiveSide)
+                  }
+                })
+              })
+            })
+          })
+        }
+      })
+    }
+
+    return { reset }
   },
 })
 

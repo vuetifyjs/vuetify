@@ -9,6 +9,7 @@ import { makeVFieldProps } from '@/components/VField/VField'
 import { makeVInputProps, VInput } from '@/components/VInput/VInput'
 
 // Composables
+import { useFileDrop } from '@/composables/fileDrop'
 import { useFocus } from '@/composables/focus'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { useLocale } from '@/composables/locale'
@@ -124,6 +125,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
     const isActive = toRef(() => isFocused.value || props.active)
     const isPlainOrUnderlined = computed(() => ['plain', 'underlined'].includes(props.variant))
     const isDragging = shallowRef(false)
+    const { handleDrop, hasFilesOrFolders } = useFileDrop()
 
     function onFocus () {
       if (inputRef.value !== document.activeElement) {
@@ -163,16 +165,15 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
       e.preventDefault()
       isDragging.value = false
     }
-    function onDrop (e: DragEvent) {
+    async function onDrop (e: DragEvent) {
       e.preventDefault()
       e.stopImmediatePropagation()
       isDragging.value = false
 
-      if (!e.dataTransfer?.files?.length || !inputRef.value) return
+      if (!inputRef.value || !hasFilesOrFolders(e)) return
 
       const dataTransfer = new DataTransfer()
-
-      for (const file of e.dataTransfer.files) {
+      for (const file of await handleDrop(e)) {
         dataTransfer.items.add(file)
       }
 
@@ -224,10 +225,11 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
               isDirty,
               isReadonly,
               isValid,
+              hasDetails,
             }) => (
               <VField
                 ref={ vFieldRef }
-                prepend-icon={ props.prependIcon }
+                prependIcon={ props.prependIcon }
                 onMousedown={ onControlMousedown }
                 onClick={ onControlClick }
                 onClick:clear={ onClear }
@@ -239,6 +241,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
                 dirty={ isDirty.value || props.dirty }
                 disabled={ isDisabled.value }
                 focused={ isFocused.value }
+                details={ hasDetails.value }
                 error={ isValid.value === false }
                 onDragover={ onDragover }
                 onDrop={ onDrop }
