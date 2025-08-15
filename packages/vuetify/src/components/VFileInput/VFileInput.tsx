@@ -194,7 +194,10 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
       const hasDetails = !!(hasCounter || slots.details)
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
       const { modelValue: _, ...inputProps } = VInput.filterProps(props)
-      const fieldProps = VField.filterProps(props)
+      const fieldProps = {
+        ...VField.filterProps(props),
+        'onClick:clear': onClear,
+      }
 
       return (
         <VInput
@@ -232,7 +235,6 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
                 prependIcon={ props.prependIcon }
                 onMousedown={ onControlMousedown }
                 onClick={ onControlClick }
-                onClick:clear={ onClear }
                 onClick:prependInner={ props['onClick:prependInner'] }
                 onClick:appendInner={ props['onClick:appendInner'] }
                 { ...fieldProps }
