@@ -6,10 +6,9 @@
   ],
   "exclude": ["**/*.spec.cy.ts", "**/*.spec.cy.tsx"],
   "compilerOptions": {
-    "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"],
-      "@test": ["test/index.ts"]
+      "@/*": ["./src/*"],
+      "@test": ["./test/index.ts"]
     },
     "types": [
       "node",
