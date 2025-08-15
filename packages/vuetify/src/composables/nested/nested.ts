@@ -13,6 +13,7 @@ import {
   toRaw,
   toRef,
   toValue,
+  watch,
 } from 'vue'
 import {
   independentActiveStrategy,
@@ -385,6 +386,13 @@ export const useNestedItem = (id: MaybeRefOrGetter<unknown>, isDisabled: MaybeRe
   onBeforeUnmount(() => {
     if (!parent.isGroupActivator) {
       parent.root.unregister(computedId.value)
+    }
+  })
+
+  watch(computedId, (val, oldVal) => {
+    if (!parent.isGroupActivator) {
+      parent.root.unregister(oldVal)
+      parent.root.register(val, parent.id.value, toValue(isDisabled), isGroup)
     }
   })
 
