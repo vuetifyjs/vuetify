@@ -1,8 +1,9 @@
 // Composables
+import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeRevealProps, useReveal } from '@/composables/reveal'
 
 // Utilities
-import { computed, shallowRef, toRef } from 'vue'
+import { computed, toRef } from 'vue'
 import { useInnerSlicePath, useOuterSlicePath, usePieArc } from './utils'
 import { easingPatterns, genericComponent, propsFactory, useTransition } from '@/util'
 
@@ -10,6 +11,7 @@ import { easingPatterns, genericComponent, propsFactory, useTransition } from '@
 import type { PropType } from 'vue'
 
 export const makeVPieSegmentProps = propsFactory({
+  active: Boolean,
   rotate: [Number, String],
   value: {
     type: Number,
@@ -40,8 +42,12 @@ export const VPieSegment = genericComponent()({
 
   props: makeVPieSegmentProps(),
 
+  emits: {
+    'update:active': (val: boolean) => true,
+  },
+
   setup (props) {
-    const isHovering = shallowRef(false)
+    const isActive = useProxiedModel(props, 'active')
 
     const { state: revealState, duration: revealDuration } = useReveal(props)
 
@@ -70,7 +76,7 @@ export const VPieSegment = genericComponent()({
       outerX,
       outerY,
       arcWidth,
-    } = usePieArc(props, isHovering)
+    } = usePieArc(props, isActive)
 
     const arcSize = toRef(() => revealState.value === 'initial' ? 0 : normalizedValue.value)
     const currentArcSize = useTransition(arcSize, transitionConfig)
@@ -78,7 +84,7 @@ export const VPieSegment = genericComponent()({
     const angle = toRef(() => revealState.value === 'initial' ? 0 : (Number(props.rotate ?? 0) + Number(props.gap ?? 0) / 2))
     const currentAngle = useTransition(angle, transitionConfig)
 
-    const arcRadius = toRef(() => 50 * (isHovering.value ? 1 : (1 - hoverZoomRatio.value)))
+    const arcRadius = toRef(() => 50 * (isActive.value ? 1 : (1 - hoverZoomRatio.value)))
     const currentArcRadius = useTransition(arcRadius, transitionConfig)
     const currentArcWidth = useTransition(arcWidth, transitionConfig)
 
@@ -129,8 +135,8 @@ export const VPieSegment = genericComponent()({
             transform={ `rotate(${currentAngle.value} 50 50)` }
             class="v-pie-segment__overlay"
             d={ overlayPath.value }
-            onMouseenter={ () => isHovering.value = true }
-            onMouseleave={ () => isHovering.value = false }
+            onMouseenter={ () => isActive.value = true }
+            onMouseleave={ () => isActive.value = false }
           />
         )}
       </g>
