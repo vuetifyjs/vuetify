@@ -88,6 +88,11 @@ const makeVCommandPaletteContentProps = propsFactory({
   title: String,
   // Placeholder text for the search input
   placeholder: String,
+  // Whether to show the back button in the search input when in nested navigation
+  showSearchBackButton: {
+    type: Boolean,
+    default: true,
+  },
   listProps: Object as PropType<VCommandPaletteList['$props']>,
   searchProps: Object as PropType<VCommandPaletteSearch['$props']>,
   // Scope for hotkeys: 'global' listens globally, 'focused' only when palette is focused
@@ -326,7 +331,7 @@ const VCommandPaletteContent = genericComponent<VCommandPaletteSlots>()({
 
     // Assign selectedIndex from navigation
     selectedIndex = navigation.selectedIndex
-    const { activeDescendantId, setSelectedIndex, reset } = navigation
+    const { activeDescendantId, setSelectedIndex, reset, navigateBack } = navigation
 
     // Provide context for custom layouts
     const context = provideCommandPaletteContext({
@@ -390,6 +395,15 @@ const VCommandPaletteContent = genericComponent<VCommandPaletteSlots>()({
       navigationStack,
     }))
 
+    const subheaderSlotScope = computed<VCommandPaletteSubheaderSlotScope>(() => ({
+      search,
+      filteredItems: filteredActions.value,
+      totalResults: filteredActions.value.length,
+      hasQuery: !!search.value.trim(),
+      navigateBack,
+      navigationStack,
+    }))
+
     useRender(() => {
       // Check if default slot is provided for custom layout
       if (slots.default) {
@@ -408,11 +422,14 @@ const VCommandPaletteContent = genericComponent<VCommandPaletteSlots>()({
                   placeholder={ props.placeholder }
                   aria-label="Search commands"
                   aria-describedby={ instructionsId }
+                  showBackButton={ props.showSearchBackButton && navigationStack.value.length > 0 }
+                  onClick:back={ navigateBack }
                   { ...props.searchProps }
                 />
               </>
             )}
             <VDivider />
+            { subheaderSlotScope.value.hasQuery && slots.subheader?.(subheaderSlotScope.value) }
             { slots.default(defaultSlotScope.value) }
             { slots.footer ? slots.footer(footerSlotScope.value) : (
               <VCommandPaletteInstructions
@@ -442,11 +459,14 @@ const VCommandPaletteContent = genericComponent<VCommandPaletteSlots>()({
                 placeholder={ props.placeholder }
                 aria-label="Search commands"
                 aria-describedby={ instructionsId }
+                showBackButton={ props.showSearchBackButton && navigationStack.value.length > 0 }
+                onClick:back={ navigateBack }
                 { ...props.searchProps }
               />
             </>
           )}
           <VDivider />
+          { subheaderSlotScope.value.hasQuery && slots.subheader?.(subheaderSlotScope.value) }
           <VCommandPaletteList
             items={ filteredActions.value }
             selectedIndex={ selectedIndex.value }
@@ -508,12 +528,22 @@ export type VCommandPaletteSlots = {
   'append-list': never
   prepend: VCommandPaletteGenericSlotScope
   append: VCommandPaletteGenericSlotScope
+  subheader: VCommandPaletteSubheaderSlotScope
 }
 
 export type VCommandPaletteHeaderSlotScope = {
   search: Ref<string>
   navigationStack: Ref<any[]>
   title?: string
+}
+
+export type VCommandPaletteSubheaderSlotScope = {
+  search: Ref<string>
+  filteredItems: any[]
+  totalResults: number
+  hasQuery: boolean
+  navigateBack: () => void
+  navigationStack: Ref<any[]>
 }
 
 export type VCommandPaletteFooterSlotScope = {
@@ -539,6 +569,11 @@ export const makeVCommandPaletteProps = propsFactory({
   },
   // Placeholder text for the search input
   placeholder: String,
+  // Whether to show the back button in the search input when in nested navigation
+  showSearchBackButton: {
+    type: Boolean,
+    default: true,
+  },
   listProps: Object as PropType<VCommandPaletteList['$props']>,
   searchProps: Object as PropType<VCommandPaletteSearch['$props']>,
   // Whether to close the palette when an item is executed

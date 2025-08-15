@@ -10,6 +10,8 @@
  */
 
 // Components
+import { VBtn } from '@/components/VBtn'
+import { VIcon } from '@/components/VIcon'
 import { VTextField } from '@/components/VTextField'
 import { makeVTextFieldProps } from '@/components/VTextField/VTextField'
 
@@ -32,6 +34,8 @@ export const makeVCommandPaletteSearchProps = propsFactory({
   ariaLabel: String,
   // ARIA describedby for accessibility (typically points to instructions)
   ariaDescribedby: String,
+  // Show back navigation button instead of search icon
+  showBackButton: Boolean,
   ...makeVTextFieldProps({
     autofocus: true,
     bgColor: 'transparent',
@@ -66,13 +70,19 @@ export const VCommandPaletteSearch = genericComponent<VCommandPaletteSearchSlots
   emits: {
     // Emitted when the search value changes
     'update:modelValue': (value: string) => true,
+    // Emitted when the back button is clicked
+    'click:back': () => true,
   },
 
-  setup (props, { slots }) {
+  setup (props, { slots, emit }) {
     const { t } = useLocale()
     // Create a proxied model for two-way binding
     const search = useProxiedModel(props, 'modelValue')
     const textFieldProps = VTextField.filterProps(props)
+
+    function onBackClick () {
+      emit('click:back')
+    }
 
     useRender(() => {
       return (
@@ -88,7 +98,20 @@ export const VCommandPaletteSearch = genericComponent<VCommandPaletteSearchSlots
               placeholder={ props.placeholder ?? t('$vuetify.command.placeholder') }
               aria-label={ props.ariaLabel }
               aria-describedby={ props.ariaDescribedby }
-            />
+            >
+              {{
+                'prepend-inner': props.showBackButton ? () => (
+                  <VBtn
+                    icon="$prev"
+                    size="small"
+                    aria-label="Navigate back"
+                    onClick={ onBackClick }
+                  />
+                ) : () => (
+                  <VIcon icon="mdi-magnify" />
+                ),
+              }}
+            </VTextField>
           )}
         </>
       )

@@ -113,15 +113,23 @@ export function useCommandPaletteNavigation (options: UseCommandPaletteNavigatio
 
   /**
    * Reset selection when filtered items change to ensure it stays within bounds
-   * Also auto-selects first item when filtered results change
+   * Only auto-selects first item when there was no valid selection before
    */
-  watch(filteredItems, () => {
+  watch(filteredItems, (newItems, oldItems) => {
     const maxIndex = selectableItemsCount.value - 1
+
+    // Only reset if selection is out of bounds
     if (selectedIndex.value > maxIndex) {
       selectedIndex.value = maxIndex >= 0 ? maxIndex : -1
     }
-    // Auto-select first item when filtered results change
-    if (selectedIndex.value === -1 && selectableItemsCount.value > 0) {
+
+    // Only auto-select first item if:
+    // 1. No current selection AND
+    // 2. Items are available AND
+    // 3. This is not just a reactive update of the same items
+    if (selectedIndex.value === -1 &&
+        selectableItemsCount.value > 0 &&
+        (!oldItems || oldItems.length === 0)) {
       selectedIndex.value = 0
     }
   })
@@ -265,6 +273,18 @@ export function useCommandPaletteNavigation (options: UseCommandPaletteNavigatio
   useHotkey('arrowright', scoped(e => {
     e.preventDefault()
     moveSelectionRight()
+  }), { inputs: true })
+
+  // Tab navigation for accessibility
+  useHotkey('tab', scoped(e => {
+    e.preventDefault() // Prevent default tab behavior
+    moveSelectionDown()
+  }), { inputs: true })
+
+  // Shift+Tab navigation for accessibility
+  useHotkey('shift+tab', scoped(e => {
+    e.preventDefault() // Prevent default tab behavior
+    moveSelectionUp()
   }), { inputs: true })
 
   // Backspace for navigation (only when search is empty)
