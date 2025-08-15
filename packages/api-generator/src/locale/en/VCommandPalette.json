@@ -1,0 +1,33 @@
+{
+  "props": {
+    "hotkey": "The global hotkey to open/close the palette. For example, 'ctrl+k'.",
+    "title": "The title displayed at the top of the palette.",
+    "placeholder": "The placeholder text for the search input. Defaults to 'Search...'",
+    "closeOnExecute": "Whether to close the palette when an item is executed.",
+    "clearableSearch": "Whether the search input should have a clear button.",
+    "items": "The array of items to display in the palette. These can be actions, links, or parent items with children.",
+    "contained": "Renders the component inline instead of in a dialog, allowing it to be embedded within other components or layouts.",
+    "persistent": "Prevents the dialog from closing when clicking outside or pressing the Escape key.",
+    "modelValue": "Controls the visibility of the command palette.",
+    "listProps": "Props to pass to the underlying VList component.",
+    "searchProps": "Props to pass to the underlying VCommandPaletteSearch component."
+  },
+  "slots": {
+    "default": "Provides a scoped slot for creating completely custom layouts. The slot provides `items`, `rootProps`, and `getItemProps` for building custom UIs.",
+    "item": "Allows for custom rendering of individual items within the default list layout.",
+    "no-data": "Content to display when there are no items or search results.",
+    "header": "Slot for custom header content. Replaces the default title and search input.",
+    "footer": "Slot for custom footer content. Replaces the default instructions.",
+    "prepend-list": "Content to prepend to the default list of items.",
+    "append-list": "Content to append to the default list of items.",
+    "prepend": "Content to prepend to the entire component, inside the sheet but before the header.",
+    "append": "Content to append to the entire component, inside the sheet but after the footer."
+  },
+  "events": {
+    "click:item": "Emitted when an item is clicked or executed with the Enter key. The event payload is the item's raw data object.",
+    "update:modelValue": "Standard event for v-model, emitted when the palette's visibility changes.",
+    "afterEnter": "Emitted after the dialog open transition has completed.",
+    "afterLeave": "Emitted after the dialog close transition has completed."
+  }
+}
+
