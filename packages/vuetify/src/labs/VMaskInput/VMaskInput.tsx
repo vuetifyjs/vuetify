@@ -130,6 +130,7 @@ export const VMaskInput = genericComponent<VMaskInputSlots>()({
     }
 
     function handleClipboardEvent (e: Event) {
+      caretPosition.value = vTextFieldRef.value?.selectionEnd || 0
       inputAction.value = e.type
     }
 
