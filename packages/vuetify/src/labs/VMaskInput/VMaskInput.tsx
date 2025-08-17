@@ -122,15 +122,15 @@ export const VMaskInput = genericComponent<VMaskInputSlots>()({
       }
     })
 
-    function handleKeyDown (e: KeyboardEvent) {
+    function onKeyDown (e: KeyboardEvent) {
       if (e.metaKey) return
 
-      caretPosition.value = vTextFieldRef.value?.selectionEnd || 0
+      caretPosition.value = (e.target as HTMLInputElement).selectionEnd || 0
       inputAction.value = e.key
     }
 
-    function handleClipboardEvent (e: Event) {
-      caretPosition.value = vTextFieldRef.value?.selectionEnd || 0
+    function onClipboardEvent (e: Event) {
+      caretPosition.value = (e.target as HTMLInputElement).selectionEnd || 0
       inputAction.value = e.type
     }
 
@@ -143,9 +143,9 @@ export const VMaskInput = genericComponent<VMaskInputSlots>()({
           v-model={ model.value }
           ref={ vTextFieldRef }
           validationValue={ validationValue.value }
-          onKeydown={ handleKeyDown }
-          onPaste={ handleClipboardEvent }
-          onCut={ handleClipboardEvent }
+          onKeydown={ onKeyDown }
+          onPaste={ onClipboardEvent }
+          onCut={ onClipboardEvent }
         >
           {{ ...slots }}
         </VTextField>
