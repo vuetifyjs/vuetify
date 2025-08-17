@@ -39,8 +39,6 @@ export const VMaskInput = genericComponent<VMaskInputSlots>()({
     const mask = useMask(props)
     const returnMaskedValue = computed(() => props.mask && props.returnMaskedValue)
 
-    const validationValue = toRef(() => returnMaskedValue.value ? model.value : mask.unmask(model.value))
-
     const model = useProxiedModel(
       props,
       'modelValue',
@@ -70,6 +68,8 @@ export const VMaskInput = genericComponent<VMaskInputSlots>()({
         return val
       },
     )
+
+    const validationValue = toRef(() => returnMaskedValue.value ? model.value : mask.unmask(model.value))
 
     function removeMaskDelimiters (val: string): string {
       return val.split('').filter(ch => !isMaskDelimiter(ch)).join('')
