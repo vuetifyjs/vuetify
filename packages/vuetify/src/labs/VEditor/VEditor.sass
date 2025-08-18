@@ -1,0 +1,46 @@
+@use 'sass:map';
+@use '../../styles/settings';
+
+.v-editor__container
+  flex: 1
+
+  .v-editor
+    flex: 1
+    width: 100%
+    height: 100%
+    overflow: auto
+
+    &:focus,
+    &:active
+      outline: none
+
+    &:invalid
+      box-shadow: none
+
+    code
+      background-color: rgb(var(--v-theme-code))
+      color: rgb(var(--v-theme-on-code))
+
+    h1
+      font-size: map.get(settings.$typography, 'h1', 'size')
+      font-weight: map.get(settings.$typography, 'h1', 'weight')
+
+    h2
+      font-size: map.get(settings.$typography, 'h2', 'size')
+      font-weight: map.get(settings.$typography, 'h2', 'weight')
+
+    h3
+      font-size: map.get(settings.$typography, 'h3', 'size')
+      font-weight: map.get(settings.$typography, 'h3', 'weight')
+
+    h4
+      font-size: map.get(settings.$typography, 'h4', 'size')
+      font-weight: map.get(settings.$typography, 'h4', 'weight')
+
+    h5
+      font-size: map.get(settings.$typography, 'h5', 'size')
+      font-weight: map.get(settings.$typography, 'h5', 'weight')
+
+    h6
+      font-size: map.get(settings.$typography, 'h6', 'size')
+      font-weight: map.get(settings.$typography, 'h6', 'weight')
