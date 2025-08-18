@@ -112,9 +112,9 @@ export default defineComponent({
 
       return (
         <div
+          { ...this.getColorProps({ text: color }) }
           key={ day.date }
           class={['v-calendar-weekly__head-weekday', this.getRelativeClasses(day, outside)]}
-          style={ this.setTextColor(color) }
           role="columnheader"
         >
           { this.weekdayFormatter(day, this.shortWeekdays) }
@@ -212,7 +212,10 @@ export default defineComponent({
       const color = day.present ? this.color : undefined
 
       return (
-        <div class="v-calendar-weekly__day-month" style={ this.setTextColor(color) }>
+        <div
+          { ...this.getColorProps({ text: color }) }
+          class="v-calendar-weekly__day-month"
+        >
           { this.$slots['day-month']?.(day) ?? this.monthFormatter(day, this.shortMonths) }
         </div>
       )

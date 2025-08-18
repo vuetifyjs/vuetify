@@ -125,7 +125,7 @@ export default defineComponent({
   },
 
   methods: {
-    eventColorFunction (e: CalendarEvent): string {
+    eventColorFunction (e: CalendarEvent): string | undefined {
       return typeof this.eventColor === 'function'
         ? this.eventColor(e)
         : e.color || this.eventColor
@@ -334,7 +334,7 @@ export default defineComponent({
       return (
         <div
           v-ripple={ this.eventRipple ?? true }
-          class={[this.setTextColor(text), this.setBackgroundColor(background)]}
+          { ...this.getColorProps({ text, background }) }
           { ...events }
           { ...data }
         >

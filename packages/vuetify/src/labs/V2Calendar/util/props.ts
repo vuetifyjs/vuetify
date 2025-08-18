@@ -188,8 +188,8 @@ export default {
       default: 'primary',
     },
     eventTextColor: {
-      type: [String, Function] as PropType<string | CalendarEventColorFunction>,
-      default: 'white',
+      type: [String, Function] as PropType<string | CalendarEventColorFunction | undefined>,
+      default: undefined,
     },
     eventName: {
       type: [String, Function] as PropType<string | CalendarEventNameFunction>,

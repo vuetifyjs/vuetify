@@ -1,6 +1,9 @@
 // Mixins
 import Times from './times'
 
+// Composables
+import { computeColor } from '@/composables/color'
+
 // Directives
 import vResize from '@/directives/resize'
 
@@ -19,6 +22,7 @@ import { defineComponent } from '@/util'
 
 // Types
 import type { CalendarFormatter, CalendarTimestamp } from '../types'
+import type { ColorValue } from '@/composables/color'
 
 export default defineComponent({
   name: 'CalendarBase',
@@ -91,12 +95,8 @@ export default defineComponent({
   },
 
   methods: {
-    // TODO
-    setTextColor () {
-      return []
-    },
-    setBackgroundColor (color: string) {
-      return `bg-${color}`
+    getColorProps (colors: { background?: ColorValue, text?: ColorValue }) {
+      return computeColor(colors)
     },
     getRelativeClasses (timestamp: CalendarTimestamp, outside = false): object {
       return {

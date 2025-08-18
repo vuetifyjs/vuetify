@@ -84,7 +84,7 @@ export type CalendarEventOverlapMode = (
   reset: boolean
 ) => CalendarEventVisual[]
 
-export type CalendarEventColorFunction = (event: CalendarEvent) => string
+export type CalendarEventColorFunction = (event: CalendarEvent) => string | undefined
 
 export type CalendarEventTimedFunction = (event: CalendarEvent) => boolean
 

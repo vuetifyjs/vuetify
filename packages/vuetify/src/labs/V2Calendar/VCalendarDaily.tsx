@@ -95,9 +95,8 @@ export default defineComponent({
       const color = day.present ? this.color : undefined
       return (
         <div
-          { ...this.setTextColor(color, {
-            class: 'v-calendar-daily_head-weekday',
-          })}
+          { ...this.getColorProps({ text: color }) }
+          class="v-calendar-daily_head-weekday"
         >
           { this.weekdayFormatter(day, this.shortWeekdays) }
         </div>
@@ -160,7 +159,8 @@ export default defineComponent({
     genDays (): VNode[] {
       return this.days.map((day, index) => {
         const events = getPrefixedEventHandlers(this.$attrs, ':time', nativeEvent => ({
-          nativeEvent, ...this.getSlotScope(this.getTimestampAtEvent(nativeEvent, day)),
+          nativeEvent,
+          ...this.getSlotScope(this.getTimestampAtEvent(nativeEvent, day)),
         }))
         return (
           <div
