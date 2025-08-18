@@ -8,27 +8,25 @@ import { useElement } from './element'
 import { useSelection } from './selection'
 import { getObjectStyles, getStringStyles, isEmptyNode } from '../utils'
 
-export enum Formats {
-  Bold = 'bold',
-  Italic = 'italic',
-  Underline = 'underline',
-  StrikeThrough = 'strike-through',
-  Subscript = 'subscript',
-  Superscript = 'superscript',
-  Code = 'code',
-  Highlight = 'highlight',
-  Heading1 = 'heading1',
-  Heading2 = 'heading2',
-  Heading3 = 'heading3',
-  Heading4 = 'heading4',
-  Heading5 = 'heading5',
-  Heading6 = 'heading6',
-  Center = 'align-center',
-  Left = 'align-left',
-  Right = 'align-right',
-  Justify = 'align-justify',
-  Block = 'block',
-}
+export type Formats = 'block' |
+  'bold' |
+  'italic' |
+  'underline' |
+  'strike-through' |
+  'subscript' |
+  'superscript' |
+  'code' |
+  'highlight' |
+  'heading1' |
+  'heading2' |
+  'heading3' |
+  'heading4' |
+  'heading5' |
+  'heading6' |
+  'align-center' |
+  'align-left' |
+  'align-right' |
+  'align-justify'
 
 export enum FormatCategory {
   Heading = 'heading',
@@ -43,49 +41,49 @@ export type Formatter = {
 }
 
 export const blockFormatter: Formatter = {
-  name: Formats.Block,
+  name: 'block',
   icon: '',
   config: { tag: 'div' },
 }
 
 export const generalFormats: Formatter[] = [
   {
-    name: Formats.Bold,
+    name: 'bold',
     icon: 'mdi-format-bold',
     config: { tag: 'b' },
   },
   {
-    name: Formats.Italic,
+    name: 'italic',
     icon: 'mdi-format-italic',
     config: { tag: 'i' },
   },
   {
-    name: Formats.Underline,
+    name: 'underline',
     icon: 'mdi-format-underline',
     config: { tag: 'u' },
   },
   {
-    name: Formats.StrikeThrough,
+    name: 'strike-through',
     icon: 'mdi-format-strikethrough',
     config: { tag: 's' },
   },
   {
-    name: Formats.Subscript,
+    name: 'subscript',
     icon: 'mdi-format-subscript',
     config: { tag: 'sub' },
   },
   {
-    name: Formats.Superscript,
+    name: 'superscript',
     icon: 'mdi-format-superscript',
     config: { tag: 'sup' },
   },
   {
-    name: Formats.Code,
+    name: 'code',
     icon: 'mdi-code-tags',
     config: { tag: 'code' },
   },
   {
-    name: Formats.Highlight,
+    name: 'highlight',
     icon: 'mdi-format-color-highlight',
     config: { tag: 'mark' },
   },
@@ -93,37 +91,37 @@ export const generalFormats: Formatter[] = [
 
 export const headingFormats: Formatter[] = [
   {
-    name: Formats.Heading1,
+    name: 'heading1',
     category: FormatCategory.Heading,
     icon: 'mdi-format-header-1',
     config: { tag: 'h1' },
   },
   {
-    name: Formats.Heading2,
+    name: 'heading2',
     icon: 'mdi-format-header-2',
     category: FormatCategory.Heading,
     config: { tag: 'h2' },
   },
   {
-    name: Formats.Heading3,
+    name: 'heading3',
     icon: 'mdi-format-header-3',
     category: FormatCategory.Heading,
     config: { tag: 'h3' },
   },
   {
-    name: Formats.Heading4,
+    name: 'heading4',
     icon: 'mdi-format-header-4',
     category: FormatCategory.Heading,
     config: { tag: 'h4' },
   },
   {
-    name: Formats.Heading5,
+    name: 'heading5',
     icon: 'mdi-format-header-5',
     category: FormatCategory.Heading,
     config: { tag: 'h5' },
   },
   {
-    name: Formats.Heading6,
+    name: 'heading6',
     icon: 'mdi-format-header-6',
     category: FormatCategory.Heading,
     config: { tag: 'h6' },
@@ -132,25 +130,25 @@ export const headingFormats: Formatter[] = [
 
 export const alignmentFormats: Formatter[] = [
   {
-    name: Formats.Left,
+    name: 'align-left',
     icon: 'mdi-format-align-left',
     category: FormatCategory.Alignment,
     config: { styles: { textAlign: 'left' } },
   },
   {
-    name: Formats.Right,
+    name: 'align-right',
     icon: 'mdi-format-align-right',
     category: FormatCategory.Alignment,
     config: { styles: { textAlign: 'right' } },
   },
   {
-    name: Formats.Center,
+    name: 'align-center',
     icon: 'mdi-format-align-center',
     category: FormatCategory.Alignment,
     config: { styles: { textAlign: 'center' } },
   },
   {
-    name: Formats.Justify,
+    name: 'align-justify',
     icon: 'mdi-format-align-justify',
     category: FormatCategory.Alignment,
     config: { styles: { textAlign: 'justify' } },

@@ -21,6 +21,26 @@ The `v-editor` component provides a rich text editor with formatting capabilitie
 
 <PageFeatures />
 
+::: warning
+
+This feature requires [v3.9.6](/getting-started/release-notes/?version=v3.9.6)
+
+:::
+
+## Installation
+
+Labs components require manual import and registration with the Vuetify instance.
+
+```js { resource="src/plugins/vuetify.js" }
+import { VEditor } from 'vuetify/labs/VEditor'
+
+export default createVuetify({
+  components: {
+    VEditor,
+  },
+})
+```
+
 ## Usage
 
 The `v-editor` component combines the functionality of a text area with a toolbar for text formatting. It supports basic rich text editing with a clean, intuitive interface.

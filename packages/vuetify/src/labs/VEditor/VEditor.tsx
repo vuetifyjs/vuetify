@@ -14,7 +14,7 @@ import { VToolbar } from '@/components/VToolbar/VToolbar'
 
 // Composables
 import { useCaret, useElement, useSelection } from './composables'
-import { alignmentFormats, FormatCategory, Formats, generalFormats, headingFormats, useFormatter } from './composables/formatter'
+import { alignmentFormats, FormatCategory, generalFormats, headingFormats, useFormatter } from './composables/formatter'
 import { useFocus } from '@/composables/focus'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { useProxiedModel } from '@/composables/proxiedModel'
@@ -25,7 +25,7 @@ import { callEvent, genericComponent, omit, propsFactory, useRender } from '@/ut
 
 // Types
 import type { PropType } from 'vue'
-import type { Formatter } from './composables/formatter'
+import type { Formats, Formatter } from './composables/formatter'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
 
@@ -41,23 +41,23 @@ export const makeVEditorProps = propsFactory({
   formats: {
     type: Array as PropType<Formats[]>,
     default: () => [
-      Formats.Bold,
-      Formats.Italic,
-      Formats.Underline,
-      Formats.StrikeThrough,
-      Formats.Code,
-      Formats.Highlight,
-      Formats.Heading1,
-      Formats.Heading2,
-      Formats.Heading3,
-      Formats.Heading4,
-      Formats.Heading5,
-      Formats.Heading6,
-      Formats.Center,
-      Formats.Left,
-      Formats.Right,
-      Formats.Justify,
-      Formats.Highlight,
+      'bold',
+      'italic',
+      'underline',
+      'strike-through',
+      'code',
+      'highlight',
+      'heading1',
+      'heading2',
+      'heading3',
+      'heading4',
+      'heading5',
+      'heading6',
+      'align-center',
+      'align-left',
+      'align-right',
+      'align-justify',
+      'highlight',
     ],
   },
   height: {
@@ -174,17 +174,17 @@ export const VEditor = genericComponent<VEditorSlots>()({
         switch (e.key.toLowerCase()) {
           case 'b':
             e.preventDefault()
-            const boldFormat = displayedGeneralFormats.value.find(f => f.name === Formats.Bold)
+            const boldFormat = displayedGeneralFormats.value.find(f => f.name === 'bold')
             if (boldFormat) applyFormat(boldFormat)
             break
           case 'i':
             e.preventDefault()
-            const italicFormat = displayedGeneralFormats.value.find(f => f.name === Formats.Italic)
+            const italicFormat = displayedGeneralFormats.value.find(f => f.name === 'italic')
             if (italicFormat) applyFormat(italicFormat)
             break
           case 'u':
             e.preventDefault()
-            const underlineFormat = displayedGeneralFormats.value.find(f => f.name === Formats.Underline)
+            const underlineFormat = displayedGeneralFormats.value.find(f => f.name === 'underline')
             if (underlineFormat) applyFormat(underlineFormat)
             break
         }

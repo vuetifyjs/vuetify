@@ -1,7 +1,7 @@
 // Utilities
-import { render, screen, userEvent, waitAnimationFrame } from '@test'
+import { render, screen, userEvent, wait } from '@test'
 import { ref } from 'vue'
-import { FormatCategory, Formats } from '../composables/formatter'
+import { FormatCategory } from '../composables/formatter'
 import { VEditor } from '../VEditor'
 
 const removeAllZeroWidthSpaces = (text: string) => text.replace(/\u200B/g, '')
@@ -65,7 +65,7 @@ describe('VEditor', () => {
     })
 
     it('should filter formats based on formats prop', async () => {
-      render(() => <VEditor formats={[Formats.Bold, Formats.Italic]} />)
+      render(() => <VEditor formats={['bold', 'italic']} />)
 
       // Check that toolbar exists
       const toolbar = screen.getByCSS('.v-editor__toolbar-items')
@@ -120,11 +120,11 @@ describe('VEditor', () => {
       render(() => (
         <VEditor
           v-model={ modelValue.value }
-          formats={[Formats.Bold]}
+          formats={['bold']}
         />
       ))
 
-      const boldButton = screen.getByCSS(`button[name="${Formats.Bold}"]`)
+      const boldButton = screen.getByCSS(`button[name="bold"]`)
       await userEvent.click(boldButton)
 
       const editor = screen.getByCSS('.v-editor')
@@ -139,7 +139,7 @@ describe('VEditor', () => {
       render(() => (
         <VEditor
           v-model={ modelValue.value }
-          formats={[Formats.Bold]}
+          formats={['bold']}
         />
       ))
 
@@ -148,7 +148,7 @@ describe('VEditor', () => {
       await userEvent.click(editor)
       await userEvent.keyboard('{Ctrl>}a{/Ctrl}')
 
-      const boldButton = screen.getByCSS(`button[name="${Formats.Bold}"]`)
+      const boldButton = screen.getByCSS(`button[name="bold"]`)
       await userEvent.click(boldButton)
 
       expect(removeAllZeroWidthSpaces(modelValue.value)).toBe('<b>Hello</b>')
@@ -160,14 +160,14 @@ describe('VEditor', () => {
       render(() => (
         <VEditor
           v-model={ modelValue.value }
-          formats={[Formats.Bold]}
+          formats={['bold']}
         />
       ))
 
       const editor = screen.getByCSS('.v-editor')
       await userEvent.click(editor)
 
-      const boldButton = screen.getByCSS(`button[name="${Formats.Bold}"]`)
+      const boldButton = screen.getByCSS(`button[name="bold"]`)
 
       // this should enable bold format
       await userEvent.click(boldButton)
@@ -185,7 +185,7 @@ describe('VEditor', () => {
       render(() => (
         <VEditor
           v-model={ modelValue.value }
-          formats={[Formats.Bold]}
+          formats={['bold']}
         />
       ))
 
@@ -194,7 +194,7 @@ describe('VEditor', () => {
       await userEvent.click(editor)
       await userEvent.keyboard('{Ctrl>}a{/Ctrl}')
 
-      const boldButton = screen.getByCSS(`button[name="${Formats.Bold}"]`)
+      const boldButton = screen.getByCSS(`button[name="bold"]`)
       await userEvent.click(boldButton)
 
       expect(removeAllZeroWidthSpaces(modelValue.value)).toBe('Hello')
@@ -206,7 +206,7 @@ describe('VEditor', () => {
       render(() => (
         <VEditor
           v-model={ modelValue.value }
-          formats={[Formats.Bold]}
+          formats={['bold']}
         />
       ))
 
@@ -215,7 +215,7 @@ describe('VEditor', () => {
 
       await userEvent.keyboard('{Shift>}{ArrowLeft>5}{/Shift}')
 
-      const boldButton = screen.getByCSS(`button[name="${Formats.Bold}"]`)
+      const boldButton = screen.getByCSS(`button[name="bold"]`)
       await userEvent.click(boldButton)
 
       expect(removeAllZeroWidthSpaces(modelValue.value)).toBe('<b>Hello</b><span>World</span>')
@@ -227,7 +227,7 @@ describe('VEditor', () => {
       render(() => (
         <VEditor
           v-model={ modelValue.value }
-          formats={[Formats.Bold]}
+          formats={['bold']}
         />
       ))
 
@@ -236,7 +236,7 @@ describe('VEditor', () => {
 
       await userEvent.keyboard('{ArrowLeft>5}')
 
-      const boldButton = screen.getByCSS(`button[name="${Formats.Bold}"]`)
+      const boldButton = screen.getByCSS(`button[name="bold"]`)
       await userEvent.click(boldButton)
 
       await userEvent.type(editor, 'middle')
@@ -250,7 +250,7 @@ describe('VEditor', () => {
       render(() => (
         <VEditor
           v-model={ modelValue.value }
-          formats={[Formats.Heading1, Formats.Heading2]}
+          formats={['heading1', 'heading2']}
         />
       ))
 
@@ -258,22 +258,22 @@ describe('VEditor', () => {
       await userEvent.click(editor)
 
       await userEvent.click(screen.getByCSS(`button[name="${FormatCategory.Heading}"]`))
-      await waitAnimationFrame()
-      await userEvent.click(screen.getByCSS(`button[name="${Formats.Heading1}"]`))
+      await wait(200)
+      await userEvent.click(screen.getByCSS(`button[name="heading1"]`))
 
       // should apply heading 1
       expect(removeAllZeroWidthSpaces(modelValue.value)).toBe('<h1><b>Hello</b></h1>')
 
       await userEvent.click(screen.getByCSS(`button[name="${FormatCategory.Heading}"]`))
-      await waitAnimationFrame()
-      await userEvent.click(screen.getByCSS(`button[name="${Formats.Heading2}"]`))
+      await wait(200)
+      await userEvent.click(screen.getByCSS(`button[name="heading2"]`))
 
       // should apply heading 2
       expect(removeAllZeroWidthSpaces(modelValue.value)).toBe('<h2><b>Hello</b></h2>')
 
       await userEvent.click(screen.getByCSS(`button[name="${FormatCategory.Heading}"]`))
-      await waitAnimationFrame()
-      await userEvent.click(screen.getByCSS(`button[name="${Formats.Heading2}"]`))
+      await wait(200)
+      await userEvent.click(screen.getByCSS(`button[name="heading2"]`))
 
       // should remove heading
       expect(removeAllZeroWidthSpaces(modelValue.value)).toBe('<div><b>Hello</b></div>')
@@ -285,7 +285,7 @@ describe('VEditor', () => {
       render(() => (
         <VEditor
           v-model={ modelValue.value }
-          formats={[Formats.Left, Formats.Right]}
+          formats={['align-left', 'align-right']}
         />
       ))
 
@@ -293,22 +293,22 @@ describe('VEditor', () => {
       await userEvent.click(editor)
 
       await userEvent.click(screen.getByCSS(`button[name="${FormatCategory.Alignment}"]`))
-      await waitAnimationFrame()
-      await userEvent.click(screen.getByCSS(`button[name="${Formats.Left}"]`))
+      await wait(200)
+      await userEvent.click(screen.getByCSS(`button[name="align-left"]`))
 
       // should align left
       expect(removeAllZeroWidthSpaces(modelValue.value)).toBe('<div style="text-align: left"><b>Hello</b></div>')
 
       await userEvent.click(screen.getByCSS(`button[name="${FormatCategory.Alignment}"]`))
-      await waitAnimationFrame()
-      await userEvent.click(screen.getByCSS(`button[name="${Formats.Right}"]`))
+      await wait(200)
+      await userEvent.click(screen.getByCSS(`button[name="align-right"]`))
 
       // should align right
       expect(removeAllZeroWidthSpaces(modelValue.value)).toBe('<div style="text-align: right"><b>Hello</b></div>')
 
       await userEvent.click(screen.getByCSS(`button[name="${FormatCategory.Alignment}"]`))
-      await waitAnimationFrame()
-      await userEvent.click(screen.getByCSS(`button[name="${Formats.Right}"]`))
+      await wait(200)
+      await userEvent.click(screen.getByCSS(`button[name="align-right"]`))
 
       // should remove alignment
       expect(removeAllZeroWidthSpaces(modelValue.value)).toBe('<div><b>Hello</b></div>')
@@ -322,7 +322,7 @@ describe('VEditor', () => {
       render(() => (
         <VEditor
           v-model={ modelValue.value }
-          formats={[Formats.Bold]}
+          formats={['bold']}
         />
       ))
 
@@ -341,7 +341,7 @@ describe('VEditor', () => {
       render(() => (
         <VEditor
           v-model={ modelValue.value }
-          formats={[Formats.Bold]}
+          formats={['bold']}
         />
       ))
 
