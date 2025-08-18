@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   nav: WYSIWYG Editor
   title: Editor component
