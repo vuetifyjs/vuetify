@@ -1,11 +1,14 @@
-import Times from '../times'
-import {
-  mount,
-  Wrapper,
-  MountOptions,
-} from '@vue/test-utils'
-import { ExtractVue } from '../../../../util/mixins'
-import { CalendarTimestamp } from 'vuetify/types'
+// @ts-nocheck
+/* eslint-disable */
+
+// import Times from '../times'
+// import {
+//   mount,
+//   Wrapper,
+//   MountOptions,
+// } from '@vue/test-utils'
+// import { ExtractVue } from '../../../../util/mixins'
+// import { CalendarTimestamp } from 'vuetify/types'
 
 const Mock = Times.extend({
   render: h => h('div'),

@@ -27,9 +27,10 @@ import {
 import { defineComponent } from '@/util'
 
 // Types
-import type { Component, VNode } from 'vue'
+import type { VNode } from 'vue'
 import type { CalendarCategory, CalendarFormatter, CalendarTimestamp } from './types'
 import type { VTime, VTimestampInput } from './util/timestamp'
+import type { JSXComponent } from '@/util'
 
 // Mixins
 import CalendarWithEvents from './mixins/calendar-with-events'
@@ -38,7 +39,7 @@ import CalendarWithEvents from './mixins/calendar-with-events'
 interface VCalendarRenderProps {
   start: CalendarTimestamp
   end: CalendarTimestamp
-  component: string | Component
+  component: JSXComponent
   maxDays: number
   weekdays: number[]
   categories: CalendarCategory[]
@@ -248,7 +249,8 @@ export default defineComponent({
       this.move(-amount)
     },
     timeToY (time: VTime, clamp = true): number | false {
-      const c = this.$children[0] as any
+      // TODO
+      const c = (this as any).$children[0]
 
       if (c && c.timeToY) {
         return c.timeToY(time, clamp)
@@ -257,7 +259,8 @@ export default defineComponent({
       }
     },
     timeDelta (time: VTime): number | false {
-      const c = this.$children[0] as any
+      // TODO
+      const c = (this as any).$children[0]
 
       if (c && c.timeDelta) {
         return c.timeDelta(time)
@@ -266,7 +269,8 @@ export default defineComponent({
       }
     },
     minutesToPixels (minutes: number): number {
-      const c = this.$children[0] as any
+      // TODO
+      const c = (this as any).$children[0]
 
       if (c && c.minutesToPixels) {
         return c.minutesToPixels(minutes)
@@ -275,7 +279,8 @@ export default defineComponent({
       }
     },
     scrollToTime (time: VTime): boolean {
-      const c = this.$children[0] as any
+      // TODO
+      const c = (this as any).$children[0]
 
       if (c && c.scrollToTime) {
         return c.scrollToTime(time)
@@ -356,7 +361,7 @@ export default defineComponent({
         maxDays={ maxDays }
         weekdays={ weekdays }
         categories={ categories }
-        onClickDate={ (e?: MouseEvent, day: CalendarTimestamp) => {
+        onClick:date={ (e: MouseEvent, day: CalendarTimestamp) => {
           if (this.$attrs['onUpdate:modelValue']) this.$emit('update:modelValue', day.date)
           if (this.$attrs['onClick:date']) this.$emit('click:date', e, day)
         }}

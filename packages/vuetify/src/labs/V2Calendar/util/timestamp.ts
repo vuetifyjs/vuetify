@@ -111,9 +111,9 @@ export function validateTimestamp (input: any): input is VTimestampInput {
     (input instanceof Date)
 }
 
-export function parseTimestamp (input: VTimestampInput, required?: false, now?: CalendarTimestamp): CalendarTimestamp | null
+export function parseTimestamp (input: VTimestampInput | null, required?: false, now?: CalendarTimestamp | null): CalendarTimestamp | null
 export function parseTimestamp (input: VTimestampInput, required: true, now?: CalendarTimestamp): CalendarTimestamp
-export function parseTimestamp (input: VTimestampInput, required = false, now?: CalendarTimestamp): CalendarTimestamp | null {
+export function parseTimestamp (input: VTimestampInput | null, required = false, now?: CalendarTimestamp | null): CalendarTimestamp | null {
   if (typeof input === 'number' && isFinite(input)) {
     input = new Date(input)
   }
@@ -283,7 +283,11 @@ export function daysInMonth (year: number, month: number) {
   return isLeapYear(year) ? DAYS_IN_MONTH_LEAP[month] : DAYS_IN_MONTH[month]
 }
 
-export function copyTimestamp (timestamp: CalendarTimestamp): CalendarTimestamp {
+export function copyTimestamp (timestamp: null): null
+export function copyTimestamp (timestamp: CalendarTimestamp): CalendarTimestamp
+export function copyTimestamp (timestamp: CalendarTimestamp | null): CalendarTimestamp | null {
+  if (timestamp == null) return null
+
   const { date, time, year, month, day, weekday, hour, minute, hasDay, hasTime, past, present, future } = timestamp
 
   return { date, time, year, month, day, weekday, hour, minute, hasDay, hasTime, past, present, future }

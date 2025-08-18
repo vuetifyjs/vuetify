@@ -114,7 +114,7 @@ export default defineComponent({
     },
     getFormatter (options: object): CalendarFormatter {
       return createNativeLocaleFormatter(
-        this.locale,
+        this.locale || '',
         (_tms, _short) => options
       )
     },

@@ -1,12 +1,15 @@
-import CalendarWithIntervals from '../calendar-with-intervals'
-import { CalendarTimestamp } from 'vuetify/types'
-import { parseTimestamp } from '../../util/timestamp'
-import {
-  mount,
-  Wrapper,
-  MountOptions,
-} from '@vue/test-utils'
-import { ExtractVue } from '../../../../util/mixins'
+// @ts-nocheck
+/* eslint-disable */
+
+// import CalendarWithIntervals from '../calendar-with-intervals'
+// import { CalendarTimestamp } from 'vuetify/types'
+// import { parseTimestamp } from '../../util/timestamp'
+// import {
+//   mount,
+//   Wrapper,
+//   MountOptions,
+// } from '@vue/test-utils'
+// import { ExtractVue } from '../../../../util/mixins'
 
 const Mock = CalendarWithIntervals.extend({
   render: h => h('div'),

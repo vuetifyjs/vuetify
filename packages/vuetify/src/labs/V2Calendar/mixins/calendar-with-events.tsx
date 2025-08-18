@@ -260,7 +260,15 @@ export default defineComponent({
       })
     },
     genTimedEvent ({ event, left, width }: CalendarEventVisual, day: CalendarDayBodySlotScope): VNode | false {
-      if (day.timeDelta(event.end) < 0 || day.timeDelta(event.start) >= 1 || isEventHiddenOn(event, day)) {
+      const endDelta = day.timeDelta(event.end)
+      const startDelta = day.timeDelta(event.start)
+      if (
+        endDelta === false ||
+        startDelta === false ||
+        endDelta < 0 ||
+        startDelta >= 1 ||
+        isEventHiddenOn(event, day)
+      ) {
         return false
       }
 
@@ -282,7 +290,12 @@ export default defineComponent({
         },
       })
     },
-    genEvent (event: CalendarEventParsed, scopeInput: VEventScopeInput, timedEvent: boolean, data: VNodeData): VNode {
+    genEvent (
+      event: CalendarEventParsed,
+      scopeInput: VEventScopeInput,
+      timedEvent: boolean,
+      data: Record<string, unknown>
+    ): VNode {
       const slot = this.$slots.event
       const text = this.eventTextColorFunction(event.input)
       const background = this.eventColorFunction(event.input)

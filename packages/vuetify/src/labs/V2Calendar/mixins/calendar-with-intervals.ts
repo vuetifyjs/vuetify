@@ -15,6 +15,7 @@ import {
 import { defineComponent } from '@/util'
 
 // Types
+import type { StyleValue } from 'vue'
 import type { CalendarDayBodySlotScope, CalendarFormatter, CalendarTimestamp } from '../types'
 import type { VTime } from '../util/timestamp'
 
@@ -92,10 +93,10 @@ export default defineComponent({
       const isFirst: boolean = first.hour === interval.hour && first.minute === interval.minute
       return !isFirst
     },
-    intervalStyleDefault (_interval: CalendarTimestamp): object | undefined {
+    intervalStyleDefault (_interval: CalendarTimestamp): StyleValue {
       return undefined
     },
-    getTimestampAtEvent (e: MouseEvent | TouchEvent, day: CalendarTimestamp): CalendarTimestamp {
+    getTimestampAtEvent (e: Event, day: CalendarTimestamp): CalendarTimestamp {
       const timestamp: CalendarTimestamp = copyTimestamp(day)
       const bounds = (e.currentTarget as HTMLElement).getBoundingClientRect()
       const baseMinutes: number = this.firstMinute

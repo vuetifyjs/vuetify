@@ -5,11 +5,10 @@ export function parsedCategoryText (
   category: CalendarCategory,
   categoryText: string | CalendarCategoryTextFunction | undefined
 ): string {
-  return typeof categoryText === 'string' && typeof category === 'object' && category
-    ? category[categoryText]
-    : typeof categoryText === 'function'
-      ? categoryText(category)
-      : category
+  return typeof categoryText === 'function' ? categoryText(category)
+    : typeof categoryText === 'string' && typeof category === 'object' && category ? category[categoryText]
+    : typeof category === 'string' ? category
+    : ''
 }
 
 export function getParsedCategories (

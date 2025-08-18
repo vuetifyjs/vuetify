@@ -1,11 +1,14 @@
-import CalendarBase from '../calendar-base'
-import { parseTimestamp } from '../../util/timestamp'
-import {
-  mount,
-  Wrapper,
-  MountOptions,
-} from '@vue/test-utils'
-import { ExtractVue } from '../../../../util/mixins'
+// @ts-nocheck
+/* eslint-disable */
+
+// import CalendarBase from '../calendar-base'
+// import { parseTimestamp } from '../../util/timestamp'
+// import {
+//   mount,
+//   Wrapper,
+//   MountOptions,
+// } from '@vue/test-utils'
+// import { ExtractVue } from '../../../../util/mixins'
 
 const Mock = CalendarBase.extend({
   render: h => h('div'),

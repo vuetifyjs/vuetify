@@ -24,7 +24,7 @@ export default defineComponent({
       return getStartOfMonth(parseTimestamp(this.start, true))
     },
     parsedEnd (): CalendarTimestamp {
-      return getEndOfMonth(parseTimestamp(this.end, true))
+      return getEndOfMonth(parseTimestamp(this.end!, true))
     },
   },
 })

@@ -2,7 +2,7 @@ import { DAYS_IN_WEEK, parseDate, validateTime, validateTimestamp } from './time
 import { CalendarEventOverlapModes } from '../modes'
 
 // Types
-import type { PropType } from 'vue'
+import type { PropType, StyleValue } from 'vue'
 import type {
   CalendarCategory,
   CalendarCategoryTextFunction,
@@ -93,7 +93,7 @@ export default {
       default: null,
     },
     intervalStyle: {
-      type: Function as PropType<(interval: CalendarTimestamp) => object>,
+      type: Function as PropType<(interval: CalendarTimestamp) => StyleValue>,
       default: null,
     },
     showIntervalLabel: {
