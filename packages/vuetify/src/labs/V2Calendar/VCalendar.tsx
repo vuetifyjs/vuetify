@@ -45,8 +45,8 @@ interface VCalendarRenderProps {
   categories: CalendarCategory[]
 }
 
-export default defineComponent({
-  name: 'VCalendar',
+export const V2Calendar = defineComponent({
+  name: 'V2Calendar',
 
   extends: CalendarWithEvents,
 
@@ -370,3 +370,5 @@ export default defineComponent({
     )
   },
 })
+
+export type V2Calendar = InstanceType<typeof V2Calendar>
