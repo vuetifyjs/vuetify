@@ -118,7 +118,7 @@ export const VMaskInput = genericComponent<VMaskInputSlots>()({
 
       const inputElement = e.target as HTMLInputElement
 
-      caretPosition.value = inputElement.selectionEnd || 0
+      caretPosition.value = inputElement.selectionStart || 0
       inputAction.value = e.key
 
       const hasSelection = inputElement.selectionStart !== inputElement.selectionEnd
