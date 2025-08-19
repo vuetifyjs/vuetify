@@ -28,6 +28,7 @@ import { defineComponent } from '@/util'
 
 // Types
 import type { VNode } from 'vue'
+import type CalendarWithIntervals from './mixins/calendar-with-intervals'
 import type { CalendarCategory, CalendarFormatter, CalendarTimestamp } from './types'
 import type { VTime, VTimestampInput } from './util/timestamp'
 import type { JSXComponent } from '@/util'
@@ -249,8 +250,7 @@ export const V2Calendar = defineComponent({
       this.move(-amount)
     },
     timeToY (time: VTime, clamp = true): number | false {
-      // TODO
-      const c = (this as any).$children[0]
+      const c = this.$refs.root as InstanceType<typeof CalendarWithIntervals>
 
       if (c && c.timeToY) {
         return c.timeToY(time, clamp)
@@ -259,8 +259,7 @@ export const V2Calendar = defineComponent({
       }
     },
     timeDelta (time: VTime): number | false {
-      // TODO
-      const c = (this as any).$children[0]
+      const c = this.$refs.root as InstanceType<typeof CalendarWithIntervals>
 
       if (c && c.timeDelta) {
         return c.timeDelta(time)
@@ -269,8 +268,7 @@ export const V2Calendar = defineComponent({
       }
     },
     minutesToPixels (minutes: number): number {
-      // TODO
-      const c = (this as any).$children[0]
+      const c = this.$refs.root as InstanceType<typeof CalendarWithIntervals>
 
       if (c && c.minutesToPixels) {
         return c.minutesToPixels(minutes)
@@ -279,8 +277,7 @@ export const V2Calendar = defineComponent({
       }
     },
     scrollToTime (time: VTime): boolean {
-      // TODO
-      const c = (this as any).$children[0]
+      const c = this.$refs.root as InstanceType<typeof CalendarWithIntervals>
 
       if (c && c.scrollToTime) {
         return c.scrollToTime(time)
@@ -352,6 +349,7 @@ export const V2Calendar = defineComponent({
     const { start, end, maxDays, component: Component, weekdays, categories } = this.renderProps
     return (
       <Component
+        ref="root"
         class={['v-calendar', { 'v-calendar-events': !this.noEvents }]}
         v-resize_quiet={ this.updateEventVisibility }
         role="grid"
