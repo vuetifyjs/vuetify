@@ -24,14 +24,22 @@ import {
   updateWeekday,
   validateTimestamp,
 } from './util/timestamp'
-import { defineComponent } from '@/util'
+import { genericComponent } from '@/util'
 
 // Types
 import type { VNode } from 'vue'
 import type CalendarWithIntervals from './mixins/calendar-with-intervals'
-import type { CalendarCategory, CalendarFormatter, CalendarTimestamp } from './types'
+import type {
+  CalendarCategory,
+  CalendarDayBodySlotScope,
+  CalendarDaySlotScope,
+  CalendarEvent,
+  CalendarEventParsed,
+  CalendarFormatter,
+  CalendarTimestamp,
+} from './types'
 import type { VTime, VTimestampInput } from './util/timestamp'
-import type { JSXComponent } from '@/util'
+import type { EventProp, GenericProps, JSXComponent } from '@/util'
 
 // Mixins
 import CalendarWithEvents from './mixins/calendar-with-events'
@@ -46,7 +54,57 @@ interface VCalendarRenderProps {
   categories: CalendarCategory[]
 }
 
-export const V2Calendar = defineComponent({
+interface EventSlotScope {
+  event: CalendarEvent
+  outside: boolean
+  singline: boolean
+  overlapsNoon: boolean
+  formatTime: (withTime: CalendarTimestamp, ampm: boolean) => string
+  timeSummary: () => string
+  eventSummary: () => JSX.Element
+  eventParsed: CalendarEventParsed
+  day: CalendarDaySlotScope
+  start: boolean
+  end: boolean
+  timed: boolean
+}
+
+interface DaySlotScope extends CalendarTimestamp {
+  outside: boolean
+  index: number
+  week: CalendarTimestamp[]
+}
+
+interface DayHeaderSlotScope extends CalendarTimestamp {
+  index: number
+  week: CalendarTimestamp[]
+}
+
+interface CalendarDayCategorySlotScope extends CalendarDayBodySlotScope {
+  category: CalendarCategory
+}
+
+export const V2Calendar = genericComponent<new () => GenericProps<{
+  [key: `on${Capitalize<string>}:date`]: EventProp<[Event, CalendarTimestamp]>
+  [key: `on${Capitalize<string>}:day-category`]: EventProp<[Event, CalendarDayCategorySlotScope]>
+  [key: `on${Capitalize<string>}:day`]: EventProp<[Event, CalendarDayBodySlotScope]>
+  [key: `on${Capitalize<string>}:event`]: EventProp<[Event, EventSlotScope]>
+  [key: `on${Capitalize<string>}:interval`]: EventProp<[Event, CalendarTimestamp]>
+  [key: `on${Capitalize<string>}:more`]: EventProp<[Event, CalendarDaySlotScope]>
+  [key: `on${Capitalize<string>}:time-category`]: EventProp<[Event, CalendarDayCategorySlotScope]>
+  [key: `on${Capitalize<string>}:time`]: EventProp<[Event, CalendarDayBodySlotScope]>
+}, {
+  'category': CalendarDayCategorySlotScope
+  'day': DaySlotScope
+  'day-body': CalendarDayBodySlotScope
+  'day-header': DayHeaderSlotScope
+  'day-label': CalendarTimestamp
+  'day-label-header': CalendarTimestamp
+  'day-month': CalendarTimestamp
+  'event': EventSlotScope
+  'interval': CalendarDayCategorySlotScope
+  'interval-header': never
+}>>()({
   name: 'V2Calendar',
 
   extends: CalendarWithEvents,
