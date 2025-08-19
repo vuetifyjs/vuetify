@@ -228,7 +228,7 @@ export const VCombobox = genericComponent<new <
     watch(model, value => {
       if (!props.multiple && !hasSelectionSlot.value) {
         _search.value = value[0]?.title ?? ''
-        emit('update:search' , value[0]?.title ?? '')
+        emit('update:search', value[0]?.title ?? '')
       }
     })
 
