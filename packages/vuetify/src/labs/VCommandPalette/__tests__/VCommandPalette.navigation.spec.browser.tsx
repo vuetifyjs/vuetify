@@ -483,8 +483,6 @@ describe('VCommandPalette', () => {
       ).toBeTruthy()
     })
 
-
-
     // REGRESSION TESTS FOR NAVIGATION BUG FIX
     // These tests ensure that parent items and their children are not both counted as selectable
     // in the same view, which would break keyboard navigation indices.
@@ -492,7 +490,6 @@ describe('VCommandPalette', () => {
     it('should correctly navigate between regular items and parent items (regression test)', async () => {
       const model = ref(true)
       const regularHandler = vi.fn()
-      const parentHandler = vi.fn()
 
       // Mix of regular items and parent items that would have caused navigation bugs
       const mixedItems = [
@@ -580,10 +577,6 @@ describe('VCommandPalette', () => {
         return activeElement && activeElement.textContent?.includes('Regular Item 1')
       }).toBeTruthy()
     })
-
-
-
-
 
     it('should not count parent children as selectable items at parent level (critical regression test)', async () => {
       const model = ref(true)

@@ -29,30 +29,6 @@ const basicItems = [
   },
 ]
 
-const itemsWithParent = [
-  ...basicItems,
-  {
-    id: 'parent1',
-    type: 'parent' as const,
-    title: 'Parent Item',
-    subtitle: 'Has children',
-    children: [
-      {
-        id: 'child1',
-        title: 'Child One',
-        value: 'child1',
-        handler: vi.fn(),
-      },
-      {
-        id: 'child2',
-        title: 'Child Two',
-        value: 'child2',
-        handler: vi.fn(),
-      },
-    ],
-  },
-]
-
 const itemsWithGroups = [
   {
     id: 'group1',
@@ -109,8 +85,6 @@ describe('VCommandPalette', () => {
   })
 
   describe('Accessibility', () => {
-
-
     it('should manage focus properly', async () => {
       const model = ref(false)
 
@@ -143,8 +117,6 @@ describe('VCommandPalette', () => {
       // Focus should be restored to the trigger button (WCAG 2.1 Level A compliance)
       await expect.poll(() => document.activeElement === triggerButton).toBeTruthy()
     })
-
-
 
     it('should support screen reader navigation modes', async () => {
       const model = ref(true)
@@ -211,8 +183,6 @@ describe('VCommandPalette', () => {
       // Note: ARIA live region announcements may not be implemented
       // This test ensures the filtering works for screen readers to detect
     })
-
-
 
     it('should properly trap focus within dialog', async () => {
       const model = ref(true)
@@ -334,6 +304,4 @@ describe('VCommandPalette', () => {
       expect(listbox).toBeVisible()
     })
   })
-
-
 })

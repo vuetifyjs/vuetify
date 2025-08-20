@@ -34,6 +34,11 @@ The `VCommandPalette` is most commonly used as a dialog that overlays your appli
 | Component | Description |
 | - | - |
 | [v-command-palette](/api/v-command-palette/) | Primary Component |
+| [v-command-palette-list](/api/v-command-palette-list/) | Sub-component used to display the list of items. |
+| [v-command-palette-item](/api/v-command-palette-item/) | Sub-component used to display an individual item. |
+| [v-command-palette-items](/api/v-command-palette-items/) | Sub-component used to display the items. Contains `v-command-palette-item` components. |
+| [v-command-palette-search](/api/v-command-palette-search/) | Sub-component used to display the search input. |
+| [v-command-palette-instructions](/api/v-command-palette-instructions/) | Sub-component used to display the instructions. |
 
 <ApiInline hide-links />
 
@@ -100,4 +105,3 @@ The `VCommandPalette` is designed with accessibility in mind and follows WAI-ARI
 - Keyboard navigation is fully supported, including `ArrowUp`, `ArrowDown`, `Enter`, `Escape`, and `Backspace` for hierarchy navigation.
 - The component uses `aria-activedescendant` to manage selection, ensuring screen readers announce the currently focused item correctly.
 - Custom layouts are supported with accessibility in mind through the provided `rootProps` and `getItemProps` in the default slot.
-

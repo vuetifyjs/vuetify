@@ -1,0 +1,16 @@
+{
+  "props": {
+    "items": "Array of transformed VuetifyListItem objects to display in the list. These are typically processed items from the parent command palette component.",
+    "selectedIndex": "Zero-based index of the currently selected item for keyboard navigation. Defaults to -1 (no selection)."
+  },
+  "slots": {
+    "item": "Customizes individual item rendering. Scoped slot receives: `item` (VCommandPaletteItem data), `props` (computed accessibility and styling props).",
+    "no-data": "Content displayed when no items are available. No slot props provided.",
+    "prepend-list": "Content prepended to the list, before the first item. No slot props provided.",
+    "append-list": "Content appended to the list, after the last item. No slot props provided."
+  },
+  "events": {
+    "click:item": "Emitted when an item is clicked. Payload: item (VuetifyListItem object), event (MouseEvent or KeyboardEvent).",
+    "hover": "Emitted when an item is hovered. Payload: selectableIndex (number) - the index of the hovered selectable item."
+  }
+}

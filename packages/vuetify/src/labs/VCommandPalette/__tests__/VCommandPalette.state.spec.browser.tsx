@@ -360,6 +360,4 @@ describe('VCommandPalette', () => {
       // Cherry may or may not be present depending on filter implementation
     })
   })
-
-
 })

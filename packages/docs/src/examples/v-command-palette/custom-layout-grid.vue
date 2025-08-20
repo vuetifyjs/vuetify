@@ -28,14 +28,58 @@
         </div>
       </template>
     </v-command-palette>
+
+    <v-snackbar v-model="snackbar" :timeout="2000">
+      {{ snackbarText }}
+    </v-snackbar>
   </div>
 </template>
 
 <script setup>
+  import { ref } from 'vue'
+
+  const snackbar = ref(false)
+  const snackbarText = ref('')
+
+  function showSnackbar (text) {
+    snackbarText.value = text
+    snackbar.value = true
+  }
+
   const items = [
-    { id: 'new-doc', title: 'New Doc', prependIcon: 'mdi-file-document-plus-outline', handler: () => {} },
-    { id: 'new-sheet', title: 'New Sheet', prependIcon: 'mdi-file-excel-box-outline', handler: () => {} },
-    { id: 'new-slide', title: 'New Slide', prependIcon: 'mdi-file-powerpoint-box-outline', handler: () => {} },
-    { id: 'upload', title: 'Upload', prependIcon: 'mdi-upload-outline', handler: () => {} },
+    { id: 'new-doc', title: 'New Doc', prependIcon: 'mdi-file-document-plus-outline', handler: () => showSnackbar('Creating new document') },
+    { id: 'new-sheet', title: 'New Sheet', prependIcon: 'mdi-file-excel-box-outline', handler: () => showSnackbar('Creating new spreadsheet') },
+    { id: 'new-slide', title: 'New Slide', prependIcon: 'mdi-file-powerpoint-box-outline', handler: () => showSnackbar('Creating new presentation') },
+    { id: 'upload', title: 'Upload', prependIcon: 'mdi-upload-outline', handler: () => showSnackbar('Opening file upload') },
   ]
+</script>
+
+<script>
+  import { ref } from 'vue'
+
+  export default {
+    setup () {
+      const snackbar = ref(false)
+      const snackbarText = ref('')
+
+      function showSnackbar (text) {
+        snackbarText.value = text
+        snackbar.value = true
+      }
+
+      const items = [
+        { id: 'new-doc', title: 'New Doc', prependIcon: 'mdi-file-document-plus-outline', handler: () => showSnackbar('Creating new document') },
+        { id: 'new-sheet', title: 'New Sheet', prependIcon: 'mdi-file-excel-box-outline', handler: () => showSnackbar('Creating new spreadsheet') },
+        { id: 'new-slide', title: 'New Slide', prependIcon: 'mdi-file-powerpoint-box-outline', handler: () => showSnackbar('Creating new presentation') },
+        { id: 'upload', title: 'Upload', prependIcon: 'mdi-upload-outline', handler: () => showSnackbar('Opening file upload') },
+      ]
+
+      return {
+        snackbar,
+        snackbarText,
+        showSnackbar,
+        items,
+      }
+    },
+  }
 </script>

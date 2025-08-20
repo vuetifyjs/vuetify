@@ -172,8 +172,6 @@ describe('VCommandPalette', () => {
       expect(screen.queryByText('Third Item')).toBeNull()
     })
 
-
-
     it('should restore full list when search is cleared', async () => {
       const model = ref(true)
       render(() => (

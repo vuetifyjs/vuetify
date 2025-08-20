@@ -1,0 +1,13 @@
+{
+  "props": {
+    "ariaLabel": "ARIA label for the search input to improve accessibility for screen readers.",
+    "ariaDescribedby": "ARIA describedby attribute that references instruction elements for enhanced accessibility.",
+    "showBackButton": "Whether to show a back navigation button instead of the search icon. Used for nested navigation in command palettes."
+  },
+  "slots": {
+    "default": "Complete override of the search input component. Scoped slot receives: `modelValue` (reactive search string ref) for full customization."
+  },
+  "events": {
+    "click:back": "Emitted when the back navigation button is clicked (when showBackButton is true). No payload."
+  }
+}

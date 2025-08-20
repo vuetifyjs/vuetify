@@ -186,8 +186,6 @@ describe('VCommandPalette', () => {
       expect(searchInput).toHaveAttribute('placeholder', 'Type a command or search...')
     })
 
-
-
     it('should work with helper components and maintain accessibility', async () => {
       const model = ref(true)
       render(() => (

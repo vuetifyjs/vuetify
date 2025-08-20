@@ -1,33 +1,35 @@
 {
   "props": {
-    "hotkey": "The global hotkey to open/close the palette. For example, 'ctrl+k'.",
-    "title": "The title displayed at the top of the palette.",
-    "placeholder": "The placeholder text for the search input. Defaults to 'Search...'",
-    "closeOnExecute": "Whether to close the palette when an item is executed.",
-    "clearableSearch": "Whether the search input should have a clear button.",
-    "items": "The array of items to display in the palette. These can be actions, links, or parent items with children.",
-    "contained": "Renders the component inline instead of in a dialog, allowing it to be embedded within other components or layouts.",
-    "persistent": "Prevents the dialog from closing when clicking outside or pressing the Escape key.",
-    "modelValue": "Controls the visibility of the command palette.",
-    "listProps": "Props to pass to the underlying VList component.",
-    "searchProps": "Props to pass to the underlying VCommandPaletteSearch component."
+    "modelValue": "Controls the visibility of the command palette. Used with v-model to show/hide the dialog.",
+    "items": "Array of command palette items. Supports action items (with handlers), link items (with navigation), parent items (with children for drill-down), and group items (with visual grouping).",
+    "hotkey": "Global keyboard shortcut to open/close the palette (e.g., 'ctrl+k', 'cmd+shift+p'). The hotkey is registered globally and works regardless of focus.",
+    "title": "Title text displayed at the top of the command palette. If not provided, no title section is shown.",
+    "placeholder": "Placeholder text for the search input field. Defaults to the localized 'Search...' text.",
+    "closeOnExecute": "Whether to automatically close the palette when an item is executed. Defaults to true.",
+    "showSearchBackButton": "Whether to show a back navigation button in the search input when in nested navigation. Defaults to true.",
+    "contained": "Renders the component inline instead of in a modal dialog, allowing it to be embedded within other components or layouts.",
+    "persistent": "Prevents the dialog from closing when clicking outside the palette or pressing the Escape key.",
+    "listProps": "Props object passed to the underlying VList component. Allows customization of list behavior and appearance.",
+    "searchProps": "Props object passed to the underlying VCommandPaletteSearch component. Allows customization of search input behavior.",
+    "clearableSearch": "Whether the search input should display a clear button to quickly empty the search query."
   },
   "slots": {
-    "default": "Provides a scoped slot for creating completely custom layouts. The slot provides `items`, `rootProps`, and `getItemProps` for building custom UIs.",
-    "item": "Allows for custom rendering of individual items within the default list layout.",
-    "no-data": "Content to display when there are no items or search results.",
-    "header": "Slot for custom header content. Replaces the default title and search input.",
-    "footer": "Slot for custom footer content. Replaces the default instructions.",
-    "prepend-list": "Content to prepend to the default list of items.",
-    "append-list": "Content to append to the default list of items.",
-    "prepend": "Content to prepend to the entire component, inside the sheet but before the header.",
-    "append": "Content to append to the entire component, inside the sheet but after the footer."
+    "default": "Provides complete control over the palette layout. Scoped slot receives: `items` (filtered items array), `rootProps` (ARIA and container props), `getItemProps` (function to get item props for accessibility).",
+    "item": "Customizes individual item rendering within the default list layout. Scoped slot receives: `item` (the item data), `props` (computed accessibility and styling props).",
+    "no-data": "Content displayed when no items are available or search yields no results. No slot props provided.",
+    "header": "Replaces the default header (title and search). Scoped slot receives: `search` (reactive search ref), `navigationStack` (navigation history), `title` (header title).",
+    "footer": "Replaces the default footer instructions. Scoped slot receives: `hasItems` (boolean), `hasParent` (boolean), `hasSelection` (boolean), `navigationStack` (navigation history).",
+    "subheader": "Content shown between header and list when there's an active search query. Scoped slot receives: `search` (reactive search ref), `filteredItems` (current results), `totalResults` (count), `hasQuery` (boolean), `navigateBack` (function), `navigationStack` (navigation history).",
+    "prepend": "Content prepended to the entire component, inside the sheet container but before the header. Scoped slot receives: `search` (readonly search ref).",
+    "append": "Content appended to the entire component, inside the sheet container but after the footer. Scoped slot receives: `search` (readonly search ref).",
+    "prepend-list": "Content prepended to the item list, after the header but before the first item. No slot props provided.",
+    "append-list": "Content appended to the item list, after the last item but before the footer. No slot props provided.",
+    "search": "Complete override of the search input component. Scoped slot receives: `modelValue` (reactive search string ref)."
   },
   "events": {
-    "click:item": "Emitted when an item is clicked or executed with the Enter key. The event payload is the item's raw data object.",
-    "update:modelValue": "Standard event for v-model, emitted when the palette's visibility changes.",
-    "afterEnter": "Emitted after the dialog open transition has completed.",
-    "afterLeave": "Emitted after the dialog close transition has completed."
+    "update:modelValue": "Emitted when the palette visibility changes. Used for v-model binding. Payload: boolean (visible state).",
+    "click:item": "Emitted when any item is clicked or executed via keyboard. Payload: item (raw item data), event (MouseEvent or KeyboardEvent).",
+    "afterEnter": "Emitted after the dialog enter transition animation completes. No payload.",
+    "afterLeave": "Emitted after the dialog leave transition animation completes. No payload."
   }
 }
-

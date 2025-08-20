@@ -14,20 +14,74 @@
       hotkeys-scope="focused"
       contained
     ></v-command-palette>
+
+    <v-snackbar v-model="snackbar" :timeout="2000">
+      {{ snackbarText }}
+    </v-snackbar>
   </v-container>
 </template>
 
 <script setup>
+  import { ref } from 'vue'
+
+  const snackbar = ref(false)
+  const snackbarText = ref('')
+
+  function showSnackbar (text) {
+    snackbarText.value = text
+    snackbar.value = true
+  }
+
   const items = [
     {
       id: 'profile',
       title: 'Profile',
       prependIcon: 'mdi-account',
+      handler: () => showSnackbar('Opening Profile'),
     },
     {
       id: 'settings',
       title: 'Settings',
       prependIcon: 'mdi-cog',
+      handler: () => showSnackbar('Opening Settings'),
     },
   ]
+</script>
+
+<script>
+  import { ref } from 'vue'
+
+  export default {
+    setup () {
+      const snackbar = ref(false)
+      const snackbarText = ref('')
+
+      function showSnackbar (text) {
+        snackbarText.value = text
+        snackbar.value = true
+      }
+
+      const items = [
+        {
+          id: 'profile',
+          title: 'Profile',
+          prependIcon: 'mdi-account',
+          handler: () => showSnackbar('Opening Profile'),
+        },
+        {
+          id: 'settings',
+          title: 'Settings',
+          prependIcon: 'mdi-cog',
+          handler: () => showSnackbar('Opening Settings'),
+        },
+      ]
+
+      return {
+        snackbar,
+        snackbarText,
+        showSnackbar,
+        items,
+      }
+    },
+  }
 </script>
