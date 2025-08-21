@@ -61,6 +61,7 @@
     "item.data-table-select": "Slot to replace the default `v-checkbox-btn` used when selecting rows.",
     "item.data-table-expand": "Slot to replace the default `v-icon` used when expanding rows.",
     "item.<name>": "Slot to customize a specific column.",
+    "item.prepend": "Slot to add content before each row.",
     "loading": "Defines content for when `loading` is true and no items are provided.",
     "tbody": "Slot to replace the default table `<tbody>`.",
     "thead": "Slot to replace the default table `<thead>`.",
