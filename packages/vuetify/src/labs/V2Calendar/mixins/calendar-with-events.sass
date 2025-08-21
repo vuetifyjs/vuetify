@@ -2,12 +2,14 @@
 @use '../../../styles/settings'
 @use '../variables' as *
 
-//+theme(v-calendar-events) using ($material)
-//  .v-event-more
-//    background-color: map-deep-get($material, 'calendar', 'background-color')
-//
-//    &.v-outside
-//      background-color: map-deep-get($material, 'calendar', 'outside-background-color')
+.v-calendar-events
+  .v-event-more
+    background-color: $calendar-background
+    color: $calendar-on-background
+
+    &.v-outside
+      background-color: $calendar-outside-background
+      color: $calendar-on-outside-background
 
 .v-calendar
   .v-event
@@ -47,7 +49,7 @@
     text-overflow: ellipsis
     font-size: $calendar-event-font-size
     cursor: pointer
-    border: $calendar-event-border-width solid
+    border: $calendar-event-border-width solid $calendar-background
     border-radius: $calendar-event-border-radius
     pointer-events: all
 

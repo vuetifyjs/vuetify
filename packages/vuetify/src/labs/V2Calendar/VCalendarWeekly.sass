@@ -2,39 +2,40 @@
 @use '../../styles/settings'
 @use './variables' as *
 
-// Theme
-//+theme(v-calendar-weekly) using ($material)
-//  background-color: map-deep-get($material, 'calendar', 'background-color')
-//  border-top: map-deep-get($material, 'calendar', 'line-color') $calendar-line-width solid
-//  border-left: map-deep-get($material, 'calendar', 'line-color') $calendar-line-width solid
-//
-//  .v-calendar-weekly__head-weekday
-//    border-right: map-deep-get($material, 'calendar', 'line-color') $calendar-line-width solid
-//    color: map-deep-get($material, 'calendar', 'text-color')
-//
-//    &.v-past
-//      color: map-deep-get($material, 'calendar', 'past-color')
-//
-//    &.v-outside
-//      background-color: map-deep-get($material, 'calendar', 'outside-background-color')
-//
-//  .v-calendar-weekly__head-weeknumber
-//    background-color:  map-deep-get($material, 'calendar', 'weeknumber-background-color')
-//    border-right: map-deep-get($material, 'calendar', 'line-color') $calendar-line-width solid
-//
-//  .v-calendar-weekly__day
-//    border-right: map-deep-get($material, 'calendar', 'line-color') $calendar-line-width solid
-//    border-bottom: map-deep-get($material, 'calendar', 'line-color') $calendar-line-width solid
-//    color: map-deep-get($material, 'calendar', 'text-color')
-//
-//    &.v-outside
-//      background-color: map-deep-get($material, 'calendar', 'outside-background-color')
-//
-//  .v-calendar-weekly__weeknumber
-//      background-color:  map-deep-get($material, 'calendar', 'weeknumber-background-color')
-//      border-right: map-deep-get($material, 'calendar', 'line-color') $calendar-line-width solid
-//      border-bottom: map-deep-get($material, 'calendar', 'line-color') $calendar-line-width solid
-//      color: map-deep-get($material, 'calendar', 'text-color')
+.v-calendar-weekly
+  background-color: $calendar-background
+  color: $calendar-on-background
+  border-top: $calendar-outline-color $calendar-line-width solid
+  border-left: $calendar-outline-color $calendar-line-width solid
+
+  .v-calendar-weekly__head-weekday
+    border-right: $calendar-grid-color $calendar-line-width solid
+
+    &.v-past
+      color: $calendar-past-color
+
+    &.v-outside
+      background-color: $calendar-outside-background
+      color: $calendar-on-outside-background
+
+  .v-calendar-weekly__head-weeknumber
+    background-color: $calendar-weeknumber-background
+    color: $calendar-on-weeknumber-background
+    border-right: $calendar-grid-color $calendar-line-width solid
+
+  .v-calendar-weekly__day
+    border-right: $calendar-grid-color $calendar-line-width solid
+    border-bottom: $calendar-grid-color $calendar-line-width solid
+
+    &.v-outside
+      background-color: $calendar-outside-background
+      color: $calendar-on-outside-background
+
+  .v-calendar-weekly__weeknumber
+      background-color: $calendar-weeknumber-background
+      color: $calendar-on-weeknumber-background
+      border-right: $calendar-grid-color $calendar-line-width solid
+      border-bottom: $calendar-grid-color $calendar-line-width solid
 
 .v-calendar-weekly
   width: 100%

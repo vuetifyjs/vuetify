@@ -2,20 +2,22 @@
 @use '../../styles/settings'
 @use './variables' as *
 
-// Theme
-//+theme(v-calendar-category) using ($material)
-//  .v-calendar-category__column,
-//  .v-calendar-category__column-header
-//    border-right: map-deep-get($material, 'calendar', 'line-color') $calendar-line-width solid
-//
-//  .v-calendar-daily__head
-//    background: map-deep-get($material, 'calendar', 'background-color')
-//
-//  .v-calendar-daily__intervals-head
-//    background: map-deep-get($material, 'calendar', 'background-color')
-//
-//  .v-calendar-daily__intervals-body
-//    background: map-deep-get($material, 'calendar', 'background-color')
+.v-calendar-category
+  .v-calendar-category__column,
+  .v-calendar-category__column-header
+    border-right: $calendar-grid-color $calendar-line-width solid
+
+  .v-calendar-daily__head
+    background: $calendar-background
+    color: $calendar-on-background
+
+  .v-calendar-daily__intervals-head
+    background: $calendar-background
+    color: $calendar-on-background
+
+  .v-calendar-daily__intervals-body
+    background: $calendar-background
+    color: $calendar-on-background
 
 .v-calendar-category
   overflow: auto

@@ -198,7 +198,6 @@ export default defineComponent({
       return (
         <VIconBtn
           color={ color }
-          size="small"
           { ...events }
         >
           { hasMonth

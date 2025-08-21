@@ -32,3 +32,14 @@ $calendar-event-border-radius: settings.$border-radius-root !default;
 $calendar-event-font-size: 12px !default;
 $calendar-event-line-height: 20px !default;
 $calendar-event-right-empty: 10px !default;
+
+$calendar-background: rgb(var(--v-theme-surface)) !default;
+$calendar-on-background: rgb(var(--v-theme-on-surface)) !default;
+$calendar-outside-background: rgb(var(--v-theme-surface-light)) !default;
+$calendar-on-outside-background: rgb(var(--v-theme-on-surface-light)) !default;
+$calendar-weeknumber-background: rgb(var(--v-theme-surface)) !default;
+$calendar-on-weeknumber-background: rgb(var(--v-theme-on-surface)) !default;
+$calendar-outline-color: rgba(var(--v-border-color), var(--v-border-opacity)) !default;
+$calendar-grid-color: rgba(var(--v-border-color), var(--v-border-opacity)) !default;
+$calendar-past-color: rgb(var(--v-theme-on-surface)) !default;
+$calendar-interval-text-color: rgb(var(--v-theme-on-surface)) !default;
