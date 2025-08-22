@@ -144,3 +144,22 @@
     text-transform: $alert-title-text-transform
     word-break: $alert-title-word-break
     word-wrap: $alert-title-word-wrap
+
+@media (forced-colors: active)
+  .v-alert
+    border-style: solid
+
+    &--variant-plain
+      border-style: dashed
+
+    &--variant-text,
+    &--variant-plain
+      border-width: thin
+
+    &--variant-outlined,
+    &--variant-tonal
+      border-width: medium
+
+    &--variant-elevated,
+    &--variant-flat
+      border-width: thick
