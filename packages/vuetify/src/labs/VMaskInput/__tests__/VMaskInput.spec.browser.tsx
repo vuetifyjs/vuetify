@@ -301,6 +301,13 @@ describe('VMaskInput', () => {
           outputText: '(CD)-123-XYZ-45-67',
           outputCaret: 5,
         },
+        // pasted with junk delimiters when selection is in middle
+        {
+          inputCaret: [1, 3],
+          inputText: '_CD',
+          outputText: '(CD)-123-XYZ-45-67',
+          outputCaret: 5,
+        },
         // pasted when selection contains one character before, one at and one after delimiter
         {
           inputCaret: [11, 14],

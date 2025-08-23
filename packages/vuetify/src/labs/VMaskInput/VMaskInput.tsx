@@ -135,7 +135,7 @@ export const VMaskInput = genericComponent<VMaskInputSlots>()({
       e.preventDefault()
 
       const inputElement = e.target as HTMLInputElement
-      const pastedString = e.clipboardData?.getData('text')
+      const pastedString = removeMaskDelimiters(e.clipboardData?.getData('text') || '')
 
       if (!pastedString) return
 
