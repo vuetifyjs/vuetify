@@ -194,10 +194,9 @@ export const VCombobox = genericComponent<new <
     const { filteredItems, getMatches } = useFilter(props, items, () => isPristine.value ? '' : search.value)
 
     const displayItems = computed(() => {
-      const base = props.hideSelected
+      return props.hideSelected
         ? filteredItems.value.filter(filteredItem => !model.value.some(someItem => someItem.value === filteredItem.value))
         : filteredItems.value
-      return base
     })
 
     const menuDisabled = computed(() => (
