@@ -70,8 +70,8 @@ describe('VMaskInput', () => {
       it('when typing', async () => {
         const { input, model } = renderComponent({ defaultModel: '', defaultMask: '####' })
         await userEvent.type(input, '123')
-        expect(input.selectionStart).toBe(input.value.length)
         expect(model.value).toBe('123')
+        expect(input.selectionStart).toBe(input.value.length)
       })
 
       it('when typing before before delimiter', async () => {
@@ -81,8 +81,8 @@ describe('VMaskInput', () => {
 
         await userEvent.type(input, '1')
 
-        expect(input.selectionStart).toBe(14)
         expect(model.value).toBe('(AS)-123-XYZ-14-56')
+        expect(input.selectionStart).toBe(14)
       })
 
       it('when typing such that cursor lands before delimiter.', async () => {
@@ -92,8 +92,8 @@ describe('VMaskInput', () => {
 
         await userEvent.type(input, 'S')
 
-        expect(input.selectionStart).toBe(5)
         expect(model.value).toBe('(AS)-')
+        expect(input.selectionStart).toBe(5)
       })
 
       it('when typing in the middle of input', async () => {
@@ -102,8 +102,8 @@ describe('VMaskInput', () => {
         await insertCaretAt(13)
 
         await userEvent.type(input, '1')
-        expect(input.selectionStart).toBe(14)
         expect(model.value).toBe('(AS)-123-XYZ-14-56')
+        expect(input.selectionStart).toBe(14)
       })
 
       it('when selected in the middle', async () => {
@@ -112,8 +112,8 @@ describe('VMaskInput', () => {
         await insertCaretAt(9, 11)
 
         await userEvent.type(input, 'A')
-        expect(input.selectionStart).toBe(10)
         expect(model.value).toBe('(AS)-123-AZ4-56-7')
+        expect(input.selectionStart).toBe(10)
       })
 
       it('when selected such that one character before, one at and one after delimiter', async () => {
@@ -122,8 +122,8 @@ describe('VMaskInput', () => {
         await insertCaretAt(11, 14)
 
         await userEvent.type(input, '1')
-        expect(input.selectionStart).toBe(13)
         expect(model.value).toBe('(AS)-123-XY1-56-7')
+        expect(input.selectionStart).toBe(13)
       })
     })
 
@@ -134,8 +134,8 @@ describe('VMaskInput', () => {
         await insertCaretAt(3)
 
         await userEvent.type(input, '{backspace}')
-        expect(input.selectionStart).toBe(2)
         expect(model.value).toBe('124')
+        expect(input.selectionStart).toBe(2)
       })
 
       it('backspace pressed when cursor is after delimiter', async () => {
@@ -144,8 +144,8 @@ describe('VMaskInput', () => {
         await insertCaretAt(3)
 
         await userEvent.type(input, '{backspace}')
-        expect(input.selectionStart).toBe(2)
         expect(model.value).toBe('12-34')
+        expect(input.selectionStart).toBe(2)
       })
 
       it('backspace pressed such that cursor lands after delimiter', async () => {
@@ -154,8 +154,8 @@ describe('VMaskInput', () => {
         await insertCaretAt(4)
 
         await userEvent.type(input, '{backspace}')
-        expect(input.selectionStart).toBe(2)
         expect(model.value).toBe('12-4')
+        expect(input.selectionStart).toBe(2)
       })
 
       it('backspace pressed in the middle of input', async () => {
@@ -164,8 +164,8 @@ describe('VMaskInput', () => {
         await insertCaretAt(15)
 
         await userEvent.type(input, '{backspace}')
-        expect(input.selectionStart).toBe(14)
         expect(model.value).toBe('(AS)-123-XYZ-46-7')
+        expect(input.selectionStart).toBe(14)
       })
 
       it('backspace pressed with selection in middle', async () => {
@@ -174,8 +174,8 @@ describe('VMaskInput', () => {
         await insertCaretAt(10, 12)
 
         await userEvent.type(input, '{backspace}')
-        expect(input.selectionStart).toBe(10)
         expect(model.value).toBe('(AS)-123-X45-67-')
+        expect(input.selectionStart).toBe(10)
       })
 
       it('selection contains one character before, one at and one after delimiter', async () => {
@@ -184,8 +184,8 @@ describe('VMaskInput', () => {
         await insertCaretAt(11, 14)
 
         await userEvent.type(input, '{backspace}')
-        expect(input.selectionStart).toBe(11)
         expect(model.value).toBe('(AS)-123-XY5-67-')
+        expect(input.selectionStart).toBe(11)
       })
     })
 
@@ -196,8 +196,8 @@ describe('VMaskInput', () => {
         await insertCaretAt(2)
 
         await userEvent.type(input, '{delete}')
-        expect(input.selectionStart).toBe(2)
         expect(model.value).toBe('124')
+        expect(input.selectionStart).toBe(2)
       })
 
       it('forward delete pressed when cursor is after delimiter', async () => {
@@ -206,8 +206,8 @@ describe('VMaskInput', () => {
         await insertCaretAt(3)
 
         await userEvent.type(input, '{delete}')
-        expect(input.selectionStart).toBe(3)
         expect(model.value).toBe('12-4')
+        expect(input.selectionStart).toBe(3)
       })
 
       it('forward delete pressed in the middle of input', async () => {
@@ -216,8 +216,8 @@ describe('VMaskInput', () => {
         await insertCaretAt(14)
 
         await userEvent.type(input, '{delete}')
-        expect(input.selectionStart).toBe(14)
         expect(model.value).toBe('(AS)-123-XYZ-46-7')
+        expect(input.selectionStart).toBe(14)
       })
 
       it('forward delete pressed with selection in middle', async () => {
@@ -226,8 +226,8 @@ describe('VMaskInput', () => {
         await insertCaretAt(10, 12)
 
         await userEvent.type(input, '{delete}')
-        expect(input.selectionStart).toBe(10)
         expect(model.value).toBe('(AS)-123-X45-67-')
+        expect(input.selectionStart).toBe(10)
       })
 
       it('selection contains one character before, one at and one after delimiter', async () => {
@@ -236,8 +236,8 @@ describe('VMaskInput', () => {
         await insertCaretAt(11, 14)
 
         await userEvent.type(input, '{delete}')
-        expect(input.selectionStart).toBe(11)
         expect(model.value).toBe('(AS)-123-XY5-67-')
+        expect(input.selectionStart).toBe(11)
       })
     })
 
@@ -248,8 +248,8 @@ describe('VMaskInput', () => {
         await insertCaretAt(10, 12)
         await userEvent.keyboard('{Ctrl>}x{/Ctrl}')
 
-        expect(input.selectionStart).toBe(10)
         expect(model.value).toBe('(AS)-123-X45-67-')
+        expect(input.selectionStart).toBe(10)
       })
 
       it('selection contains one character before, one at and one after delimiter', async () => {
@@ -258,8 +258,8 @@ describe('VMaskInput', () => {
         await insertCaretAt(11, 14)
 
         await userEvent.keyboard('{Ctrl>}x{/Ctrl}')
-        expect(input.selectionStart).toBe(11)
         expect(model.value).toBe('(AS)-123-XY5-67-')
+        expect(input.selectionStart).toBe(11)
       })
     })
 
@@ -272,8 +272,8 @@ describe('VMaskInput', () => {
         await insertCaretAt(2)
         await userEvent.paste()
 
-        expect(input.selectionStart).toBe(4)
         expect(model.value).toBe('1234')
+        expect(input.selectionStart).toBe(4)
       })
 
       it('pasted when cursor is in middle', async () => {
@@ -283,8 +283,8 @@ describe('VMaskInput', () => {
         await insertCaretAt(2)
         await userEvent.paste()
 
-        expect(input.selectionStart).toBe(3)
         expect(model.value).toBe('12345')
+        expect(input.selectionStart).toBe(3)
       })
 
       it('pasted when cursor is after delimiter', async () => {
@@ -294,8 +294,8 @@ describe('VMaskInput', () => {
         await insertCaretAt(13)
         await userEvent.paste()
 
-        expect(input.selectionStart).toBe(16)
         expect(model.value).toBe('(AS)-123-XYZ-12-')
+        expect(input.selectionStart).toBe(16)
       })
 
       it('pasted when cursor is before delimiter', async () => {
@@ -305,8 +305,8 @@ describe('VMaskInput', () => {
         await insertCaretAt(2)
         await userEvent.paste()
 
-        expect(input.selectionStart).toBe(5)
         expect(model.value).toBe('12-34')
+        expect(input.selectionStart).toBe(5)
       })
 
       it('pasted when selection is in middle', async () => {
@@ -316,9 +316,9 @@ describe('VMaskInput', () => {
         await insertCaretAt(10, 12)
         await userEvent.paste()
 
+        expect(model.value).toBe('(AS)-123-XCD-45-67')
         // TODO: Fix this test
         expect(input.selectionStart).toBe(12)
-        expect(model.value).toBe('(AS)-123-XCD-45-67')
       })
 
       it('pasted when selection is in middle', async () => {
@@ -328,9 +328,9 @@ describe('VMaskInput', () => {
         await insertCaretAt(1, 3)
         await userEvent.paste()
 
+        expect(model.value).toBe('(CD)-123-XCD-45-67')
         // TODO: Fix this test
         expect(input.selectionStart).toBe(5)
-        expect(model.value).toBe('(CD)-123-XCD-45-67')
       })
 
       it('pasted when selection contains one character before, one at and one after delimiter', async () => {
@@ -340,9 +340,9 @@ describe('VMaskInput', () => {
         await insertCaretAt(11, 14)
         await userEvent.paste()
 
+        expect(model.value).toBe('(AS)-123-XYA-05-67')
         // TODO: Fix this test
         expect(input.selectionStart).toBe(14)
-        expect(model.value).toBe('(AS)-123-XYA-05-67')
       })
     })
   })
