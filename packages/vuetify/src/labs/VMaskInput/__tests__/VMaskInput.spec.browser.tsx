@@ -67,282 +67,257 @@ describe('VMaskInput', () => {
     }
 
     describe('Insertion', () => {
-      it('when typing', async () => {
+      it('should work as expected when typing', async () => {
         const { input, model } = renderComponent({ defaultModel: '', defaultMask: '####' })
         await userEvent.type(input, '123')
         expect(model.value).toBe('123')
         expect(input.selectionStart).toBe(input.value.length)
       })
 
-      it('when typing before before delimiter', async () => {
-        const { input, model, insertCaretAt } = renderComponent()
+      it.each([
+        // when cursor before delimiter
+        {
+          inputCaret: [12],
+          inputText: '1',
+          outputText: '(AS)-123-XYZ-14-56',
+          outputCaret: 14,
+        },
+        // when typing such that cursor lands before delimiter.
+        {
+          defaultModel: '(A',
+          inputCaret: [2],
+          inputText: 'S',
+          outputText: '(AS)-',
+          outputCaret: 5,
+        },
+        // when typing in the middle of input
+        {
+          inputCaret: [13],
+          inputText: '1',
+          outputText: '(AS)-123-XYZ-14-56',
+          outputCaret: 14,
+        },
+        // when selected in the middle
+        {
+          inputCaret: [9, 11],
+          inputText: 'A',
+          outputText: '(AS)-123-AZ4-56-7',
+          outputCaret: 10,
+        },
+        // when selected such that one character before, one at and one after delimiter
+        {
+          inputCaret: [11, 14],
+          inputText: '1',
+          outputText: '(AS)-123-XY1-56-7',
+          outputCaret: 13,
+        },
+      ])('should work as expected when typing', async ({ defaultModel, inputText, inputCaret, outputText, outputCaret }) => {
+        const { input, model, insertCaretAt } = renderComponent({ defaultModel })
 
-        await insertCaretAt(12)
+        await insertCaretAt(inputCaret[0], inputCaret[1])
 
-        await userEvent.type(input, '1')
+        await userEvent.type(input, inputText)
 
-        expect(model.value).toBe('(AS)-123-XYZ-14-56')
-        expect(input.selectionStart).toBe(14)
-      })
-
-      it('when typing such that cursor lands before delimiter.', async () => {
-        const { input, model, insertCaretAt } = renderComponent({ defaultModel: '(A' })
-
-        await insertCaretAt(2)
-
-        await userEvent.type(input, 'S')
-
-        expect(model.value).toBe('(AS)-')
-        expect(input.selectionStart).toBe(5)
-      })
-
-      it('when typing in the middle of input', async () => {
-        const { input, model, insertCaretAt } = renderComponent()
-
-        await insertCaretAt(13)
-
-        await userEvent.type(input, '1')
-        expect(model.value).toBe('(AS)-123-XYZ-14-56')
-        expect(input.selectionStart).toBe(14)
-      })
-
-      it('when selected in the middle', async () => {
-        const { input, model, insertCaretAt } = renderComponent()
-
-        await insertCaretAt(9, 11)
-
-        await userEvent.type(input, 'A')
-        expect(model.value).toBe('(AS)-123-AZ4-56-7')
-        expect(input.selectionStart).toBe(10)
-      })
-
-      it('when selected such that one character before, one at and one after delimiter', async () => {
-        const { input, model, insertCaretAt } = renderComponent()
-
-        await insertCaretAt(11, 14)
-
-        await userEvent.type(input, '1')
-        expect(model.value).toBe('(AS)-123-XY1-56-7')
-        expect(input.selectionStart).toBe(13)
+        expect(model.value).toBe(outputText)
+        expect(input.selectionStart).toBe(outputCaret)
       })
     })
 
     describe('Backward Delete / Backspace', () => {
-      it('when backspace is pressed', async () => {
-        const { input, model, insertCaretAt } = renderComponent({ defaultMask: '####', defaultModel: '1234' })
+      it.each([
+        // when backspace is pressed
+        {
+          defaultMask: '####',
+          defaultModel: '1234',
+          inputCaret: [3],
+          outputText: '124',
+          outputCaret: 2,
+        },
+        // when backspace pressed when cursor is after delimiter
+        {
+          defaultMask: '##-##',
+          defaultModel: '12-34',
+          inputCaret: [3],
+          outputText: '12-34',
+          outputCaret: 2,
+        },
+        // backspace pressed such that cursor lands after delimiter
+        {
+          defaultMask: '##-##',
+          defaultModel: '12-34',
+          inputCaret: [4],
+          outputText: '12-4',
+          outputCaret: 2,
+        },
+        // backspace pressed in the middle of input
+        {
+          inputCaret: [15],
+          outputText: '(AS)-123-XYZ-46-7',
+          outputCaret: 14,
+        },
+        // backspace pressed with selection in middle
+        {
+          inputCaret: [10, 12],
+          outputText: '(AS)-123-X45-67-',
+          outputCaret: 10,
+        },
+        // backspace pressed with selection containing one character before, one at and one after delimiter
+        {
+          inputCaret: [11, 14],
+          outputText: '(AS)-123-XY5-67-',
+          outputCaret: 11,
+        },
+      ])('should work as expected when pressing backspace', async ({ defaultModel, defaultMask, inputCaret, outputText, outputCaret }) => {
+        const { input, model, insertCaretAt } = renderComponent({ defaultModel, defaultMask })
 
-        await insertCaretAt(3)
-
-        await userEvent.type(input, '{backspace}')
-        expect(model.value).toBe('124')
-        expect(input.selectionStart).toBe(2)
-      })
-
-      it('backspace pressed when cursor is after delimiter', async () => {
-        const { input, model, insertCaretAt } = renderComponent({ defaultMask: '##-##', defaultModel: '12-34' })
-
-        await insertCaretAt(3)
-
-        await userEvent.type(input, '{backspace}')
-        expect(model.value).toBe('12-34')
-        expect(input.selectionStart).toBe(2)
-      })
-
-      it('backspace pressed such that cursor lands after delimiter', async () => {
-        const { input, model, insertCaretAt } = renderComponent({ defaultMask: '##-##', defaultModel: '12-34' })
-
-        await insertCaretAt(4)
-
-        await userEvent.type(input, '{backspace}')
-        expect(model.value).toBe('12-4')
-        expect(input.selectionStart).toBe(2)
-      })
-
-      it('backspace pressed in the middle of input', async () => {
-        const { input, model, insertCaretAt } = renderComponent()
-
-        await insertCaretAt(15)
-
-        await userEvent.type(input, '{backspace}')
-        expect(model.value).toBe('(AS)-123-XYZ-46-7')
-        expect(input.selectionStart).toBe(14)
-      })
-
-      it('backspace pressed with selection in middle', async () => {
-        const { input, model, insertCaretAt } = renderComponent()
-
-        await insertCaretAt(10, 12)
-
-        await userEvent.type(input, '{backspace}')
-        expect(model.value).toBe('(AS)-123-X45-67-')
-        expect(input.selectionStart).toBe(10)
-      })
-
-      it('selection contains one character before, one at and one after delimiter', async () => {
-        const { input, model, insertCaretAt } = renderComponent()
-
-        await insertCaretAt(11, 14)
+        await insertCaretAt(inputCaret[0], inputCaret[1])
 
         await userEvent.type(input, '{backspace}')
-        expect(model.value).toBe('(AS)-123-XY5-67-')
-        expect(input.selectionStart).toBe(11)
+        expect(model.value).toBe(outputText)
+        expect(input.selectionStart).toBe(outputCaret)
       })
     })
 
     describe('Forward Delete', () => {
-      it('when forward delete is pressed', async () => {
-        const { input, model, insertCaretAt } = renderComponent({ defaultMask: '####', defaultModel: '1234' })
+      it.each([
+        // when forward delete is pressed
+        {
+          defaultMask: '####',
+          defaultModel: '1234',
+          inputCaret: [2],
+          outputText: '124',
+          outputCaret: 2,
+        },
+        // when forward delete pressed when cursor is after delimiter
+        {
+          defaultMask: '##-##',
+          defaultModel: '12-34',
+          inputCaret: [3],
+          outputText: '12-4',
+          outputCaret: 3,
+        },
+        // forward delete pressed in the middle of input
+        {
+          inputCaret: [14],
+          outputText: '(AS)-123-XYZ-46-7',
+          outputCaret: 14,
+        },
+        // forward delete pressed with selection in middle
+        {
+          inputCaret: [10, 12],
+          outputText: '(AS)-123-X45-67-',
+          outputCaret: 10,
+        },
+        // forward delete pressed with selection containing one character before, one at and one after delimiter
+        {
+          inputCaret: [11, 14],
+          outputText: '(AS)-123-XY5-67-',
+          outputCaret: 11,
+        },
+      ])('should work as expected when pressing delete', async ({ defaultModel, defaultMask, inputCaret, outputText, outputCaret }) => {
+        const { input, model, insertCaretAt } = renderComponent({ defaultModel, defaultMask })
 
-        await insertCaretAt(2)
-
-        await userEvent.type(input, '{delete}')
-        expect(model.value).toBe('124')
-        expect(input.selectionStart).toBe(2)
-      })
-
-      it('forward delete pressed when cursor is after delimiter', async () => {
-        const { input, model, insertCaretAt } = renderComponent({ defaultMask: '##-##', defaultModel: '12-34' })
-
-        await insertCaretAt(3)
-
-        await userEvent.type(input, '{delete}')
-        expect(model.value).toBe('12-4')
-        expect(input.selectionStart).toBe(3)
-      })
-
-      it('forward delete pressed in the middle of input', async () => {
-        const { input, model, insertCaretAt } = renderComponent()
-
-        await insertCaretAt(14)
-
-        await userEvent.type(input, '{delete}')
-        expect(model.value).toBe('(AS)-123-XYZ-46-7')
-        expect(input.selectionStart).toBe(14)
-      })
-
-      it('forward delete pressed with selection in middle', async () => {
-        const { input, model, insertCaretAt } = renderComponent()
-
-        await insertCaretAt(10, 12)
-
-        await userEvent.type(input, '{delete}')
-        expect(model.value).toBe('(AS)-123-X45-67-')
-        expect(input.selectionStart).toBe(10)
-      })
-
-      it('selection contains one character before, one at and one after delimiter', async () => {
-        const { input, model, insertCaretAt } = renderComponent()
-
-        await insertCaretAt(11, 14)
+        await insertCaretAt(inputCaret[0], inputCaret[1])
 
         await userEvent.type(input, '{delete}')
-        expect(model.value).toBe('(AS)-123-XY5-67-')
-        expect(input.selectionStart).toBe(11)
+        expect(model.value).toBe(outputText)
+        expect(input.selectionStart).toBe(outputCaret)
       })
     })
 
     describe('Cut', () => {
-      it('cut with selection in middle', async () => {
+      it.each([
+        // when cut with selection in middle
+        {
+          inputCaret: [10, 12],
+          outputText: '(AS)-123-X45-67-',
+          outputCaret: 10,
+        },
+        // when cut with selection containing one character before, one at and one after delimiter
+        {
+          inputCaret: [11, 14],
+          outputText: '(AS)-123-XY5-67-',
+          outputCaret: 11,
+        },
+      ])('should work as expected when pressing cut', async ({ inputCaret, outputText, outputCaret }) => {
         const { input, model, insertCaretAt } = renderComponent()
 
-        await insertCaretAt(10, 12)
-        await userEvent.keyboard('{Ctrl>}x{/Ctrl}')
-
-        expect(model.value).toBe('(AS)-123-X45-67-')
-        expect(input.selectionStart).toBe(10)
-      })
-
-      it('selection contains one character before, one at and one after delimiter', async () => {
-        const { input, model, insertCaretAt } = renderComponent()
-
-        await insertCaretAt(11, 14)
+        await insertCaretAt(inputCaret[0], inputCaret[1])
 
         await userEvent.keyboard('{Ctrl>}x{/Ctrl}')
-        expect(model.value).toBe('(AS)-123-XY5-67-')
-        expect(input.selectionStart).toBe(11)
+        expect(model.value).toBe(outputText)
+        expect(input.selectionStart).toBe(outputCaret)
       })
     })
 
     describe('Paste', () => {
-      it('pasted when cursor is at end', async () => {
-        const { input, model, insertCaretAt } = renderComponent({ defaultMask: '####', defaultModel: '12' })
+      it.each([
+        // pasted when cursor is at end
+        {
+          defaultMask: '####',
+          defaultModel: '12',
+          inputText: '34',
+          inputCaret: [2],
+          outputText: '1234',
+          outputCaret: 4,
+        },
+        // pasted when cursor is in middle
+        {
+          defaultMask: '#####',
+          defaultModel: '1245',
+          inputText: '3',
+          inputCaret: [2],
+          outputText: '12345',
+          outputCaret: 3,
+        },
+        // pasted when cursor is after delimiter
+        {
+          defaultModel: '(AS)-123-XYZ-',
+          inputText: '12',
+          inputCaret: [13],
+          outputText: '(AS)-123-XYZ-12-',
+          outputCaret: 16,
+        },
+        // pasted when cursor is before delimiter
+        {
+          defaultMask: '##-##',
+          defaultModel: '12-',
+          inputText: '34',
+          inputCaret: [2],
+          outputText: '12-34',
+          outputCaret: 5,
+        },
+        // pasted when selection is in middle
+        {
+          inputCaret: [10, 12],
+          inputText: 'CD',
+          outputText: '(AS)-123-XCD-45-67', // TODO: Fix this output
+          outputCaret: 12, // TODO: Fix this output
+        },
+        // pasted when selection is in middle
+        {
+          inputCaret: [1, 3],
+          inputText: 'CD',
+          outputText: '(CD)-123-XCD-45-67', // TODO: Fix this output
+          outputCaret: 5, // TODO: Fix this output
+        },
+        // pasted when selection contains one character before, one at and one after delimiter
+        {
+          inputCaret: [11, 14],
+          inputText: 'A0',
+          outputText: '(AS)-123-XYA-05-67', // TODO: Fix this output
+          outputCaret: 14, // TODO: Fix this output
+        },
+      ])('should work as expected when pasting', async ({ defaultModel, defaultMask, inputText, inputCaret, outputText, outputCaret }) => {
+        const { input, model, insertCaretAt } = renderComponent({ defaultModel, defaultMask })
 
-        navigator.clipboard.writeText('34')
+        navigator.clipboard.writeText(inputText)
 
-        await insertCaretAt(2)
+        await insertCaretAt(inputCaret[0], inputCaret[1])
         await userEvent.paste()
 
-        expect(model.value).toBe('1234')
-        expect(input.selectionStart).toBe(4)
-      })
-
-      it('pasted when cursor is in middle', async () => {
-        const { input, model, insertCaretAt } = renderComponent({ defaultMask: '#####', defaultModel: '1245' })
-
-        navigator.clipboard.writeText('3')
-        await insertCaretAt(2)
-        await userEvent.paste()
-
-        expect(model.value).toBe('12345')
-        expect(input.selectionStart).toBe(3)
-      })
-
-      it('pasted when cursor is after delimiter', async () => {
-        const { input, model, insertCaretAt } = renderComponent({ defaultModel: '(AS)-123-XYZ-' })
-
-        navigator.clipboard.writeText('12')
-        await insertCaretAt(13)
-        await userEvent.paste()
-
-        expect(model.value).toBe('(AS)-123-XYZ-12-')
-        expect(input.selectionStart).toBe(16)
-      })
-
-      it('pasted when cursor is before delimiter', async () => {
-        const { input, model, insertCaretAt } = renderComponent({ defaultMask: '##-##', defaultModel: '12-' })
-
-        navigator.clipboard.writeText('34')
-        await insertCaretAt(2)
-        await userEvent.paste()
-
-        expect(model.value).toBe('12-34')
-        expect(input.selectionStart).toBe(5)
-      })
-
-      it('pasted when selection is in middle', async () => {
-        const { input, model, insertCaretAt } = renderComponent()
-
-        navigator.clipboard.writeText('CD')
-        await insertCaretAt(10, 12)
-        await userEvent.paste()
-
-        expect(model.value).toBe('(AS)-123-XCD-45-67')
-        // TODO: Fix this test
-        expect(input.selectionStart).toBe(12)
-      })
-
-      it('pasted when selection is in middle', async () => {
-        const { input, model, insertCaretAt } = renderComponent()
-
-        navigator.clipboard.writeText('CD')
-        await insertCaretAt(1, 3)
-        await userEvent.paste()
-
-        expect(model.value).toBe('(CD)-123-XCD-45-67')
-        // TODO: Fix this test
-        expect(input.selectionStart).toBe(5)
-      })
-
-      it('pasted when selection contains one character before, one at and one after delimiter', async () => {
-        const { input, model, insertCaretAt } = renderComponent()
-
-        navigator.clipboard.writeText('A0')
-        await insertCaretAt(11, 14)
-        await userEvent.paste()
-
-        expect(model.value).toBe('(AS)-123-XYA-05-67')
-        // TODO: Fix this test
-        expect(input.selectionStart).toBe(14)
+        expect(model.value).toBe(outputText)
+        expect(input.selectionStart).toBe(outputCaret)
       })
     })
   })
