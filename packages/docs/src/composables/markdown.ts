@@ -35,8 +35,14 @@ export function useMarkdown () {
 
       if (response.data && 'content' in response.data) {
         const rawMd = atob(response.data.content)
-        // 🔁 Replace every <ExamplesExample ...> tag with the raw Vue source of its file
         let processedMd = rawMd
+
+        // Remove paired <ApiInline>...</ApiInline> and <ExamplesUsage>...</ExamplesUsage> tags completely
+        processedMd = processedMd
+          .replace(/<ApiInline[\s\S]*?>([\s\S]*?<\/ApiInline>)?/g, '')
+          .replace(/<ExamplesUsage[\s\S]*?>([\s\S]*?<\/ExamplesUsage>)?/g, '')
+
+        // Replace every <ExamplesExample ...> tag with the raw Vue source of its file
         if (processedMd.includes('<ExamplesExample')) {
           const tagRegex = /<ExamplesExample\b([^>]*?)>(?:[\s\S]*?<\/ExamplesExample>)|<ExamplesExample\b([^>]*?)\/>/g
           const matches = [...processedMd.matchAll(tagRegex)]
