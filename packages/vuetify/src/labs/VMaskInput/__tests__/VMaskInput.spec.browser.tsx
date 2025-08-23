@@ -291,22 +291,22 @@ describe('VMaskInput', () => {
         {
           inputCaret: [10, 12],
           inputText: 'CD',
-          outputText: '(AS)-123-XCD-45-67', // TODO: Fix this output
-          outputCaret: 12, // TODO: Fix this output
+          outputText: '(AS)-123-XCD-45-67',
+          outputCaret: 13,
         },
         // pasted when selection is in middle
         {
           inputCaret: [1, 3],
           inputText: 'CD',
-          outputText: '(CD)-123-XCD-45-67', // TODO: Fix this output
-          outputCaret: 5, // TODO: Fix this output
+          outputText: '(CD)-123-XYZ-45-67',
+          outputCaret: 5,
         },
         // pasted when selection contains one character before, one at and one after delimiter
         {
           inputCaret: [11, 14],
           inputText: 'A0',
-          outputText: '(AS)-123-XYA-05-67', // TODO: Fix this output
-          outputCaret: 14, // TODO: Fix this output
+          outputText: '(AS)-123-XYA-05-67',
+          outputCaret: 14,
         },
       ])('should work as expected when pasting', async ({ defaultModel, defaultMask, inputText, inputCaret, outputText, outputCaret }) => {
         const { input, model, insertCaretAt } = renderComponent({ defaultModel, defaultMask })

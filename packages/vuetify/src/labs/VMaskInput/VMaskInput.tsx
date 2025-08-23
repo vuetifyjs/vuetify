@@ -88,20 +88,16 @@ export const VMaskInput = genericComponent<VMaskInputSlots>()({
       if (!oldValue) return newValue.length
 
       let newCaret: number
-      const oldRawValue = removeMaskDelimiters(oldValue)
-      const newRawValue = removeMaskDelimiters(newValue)
 
       if (inputAction.value === 'Backspace') {
         newCaret = oldCaret - 1
         while (newCaret > 0 && isMaskDelimiter(newValue[newCaret - 1])) newCaret--
       } else if (inputAction.value === 'Delete') {
         newCaret = oldCaret
-      } else if (oldRawValue !== newRawValue) { // insertion
+      } else { // insertion
         newCaret = oldCaret + 1
         while (isMaskDelimiter(newValue[newCaret])) newCaret++
         if (isMaskDelimiter(newValue[oldCaret])) newCaret++
-      } else { // no change
-        newCaret = oldCaret
       }
 
       return newCaret
@@ -144,8 +140,13 @@ export const VMaskInput = genericComponent<VMaskInputSlots>()({
       if (!pastedString) return
 
       const pastedCharacters = [...pastedString]
-      for (let i = 0; i < pastedCharacters.length; i++) {
-        await insertCharacter(inputElement, pastedCharacters[i])
+
+      const hasSelection = inputElement.selectionStart !== inputElement.selectionEnd
+
+      if (hasSelection) {
+        replaceSelection(inputElement, pastedCharacters)
+      } else {
+        insertCharacters(inputElement, pastedCharacters)
       }
     }
 
@@ -178,9 +179,33 @@ export const VMaskInput = genericComponent<VMaskInputSlots>()({
       return true
     }
 
+    async function insertCharacters (inputElement: HTMLInputElement, pastedCharacters: string[]) {
+      for (let i = 0; i < pastedCharacters.length; i++) {
+        await insertCharacter(inputElement, pastedCharacters[i])
+      }
+    }
+
     async function insertCharacter (inputElement: HTMLInputElement, character: string) {
       caretPosition.value = inputElement.selectionEnd || 0
       model.value = inputElement.value.slice(0, caretPosition.value) + character + inputElement.value.slice(caretPosition.value)
+      await nextTick()
+    }
+
+    async function replaceSelection (inputElement: HTMLInputElement, pastedCharacters: string[]) {
+      caretPosition.value = inputElement.selectionStart || 0
+      for (let i = 0; i < pastedCharacters.length; i++) {
+        await replaceCharacter(caretPosition.value, pastedCharacters[i])
+        caretPosition.value++
+      }
+    }
+
+    async function replaceCharacter (index: number, character: string) {
+      let targetIndex = index
+
+      // Find next non-delimiter position
+      while (targetIndex < model.value.length && isMaskDelimiter(model.value[targetIndex])) targetIndex++
+
+      model.value = model.value.slice(0, targetIndex) + character + model.value.slice(targetIndex + 1)
       await nextTick()
     }
 
