@@ -128,6 +128,7 @@ export const VCombobox = genericComponent<new <
     const isPristine = shallowRef(true)
     const listHasFocus = shallowRef(false)
     const hasEverOpened = shallowRef(false)
+    const hadNoMatchOnLastOpen = shallowRef(false)
     const vMenuRef = ref<VMenu>()
     const vVirtualScrollRef = ref<VVirtualScroll>()
     const selectionIndex = shallowRef(-1)
@@ -229,9 +230,14 @@ export const VCombobox = genericComponent<new <
     })
 
     watch(menu, (newValue, oldValue) => {
+      if (!newValue && oldValue) {
+        hadNoMatchOnLastOpen.value = !!search.value && filteredItems.value.length === 0
+        return
+      }
+
       if (newValue && !oldValue) {
         if (hasEverOpened.value) {
-          isPristine.value = true
+          isPristine.value = hadNoMatchOnLastOpen.value ? true : !search.value
         }
         hasEverOpened.value = true
       }
@@ -381,8 +387,8 @@ export const VCombobox = genericComponent<new <
     }
     function onAfterLeave () {
       if (isFocused.value) {
-        isPristine.value = true
         vTextFieldRef.value?.focus()
+        if (hadNoMatchOnLastOpen.value) isPristine.value = true
       }
     }
     /** @param set - null means toggle */
