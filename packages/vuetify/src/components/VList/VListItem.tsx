@@ -28,7 +28,7 @@ import vRipple from '@/directives/ripple'
 
 // Utilities
 import { computed, onBeforeMount, toDisplayString, toRef, watch } from 'vue'
-import { deprecate, EventProp, genericComponent, propsFactory, useRender } from '@/util'
+import { deprecate, EventProp, genericComponent, IN_BROWSER, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -159,6 +159,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
         : root.selectable.value ? isSelected.value
         : isActive.value
     })
+    const isForcedColorsModeActive = IN_BROWSER && window.matchMedia('(forced-colors: active)').matches
 
     const roundedProps = toRef(() => props.rounded || props.nav)
     const color = toRef(() => props.color ?? props.activeColor)
@@ -266,11 +267,11 @@ export const VListItem = genericComponent<VListItemSlots>()({
               'v-list-item--nav': props.nav,
               'v-list-item--prepend': !hasPrepend && list?.hasPrepend.value,
               'v-list-item--slim': props.slim,
-              [`${props.activeClass}`]: props.activeClass && isActive.value,
+              [`${props.activeClass}`]: !isForcedColorsModeActive && props.activeClass && isActive.value,
             },
             themeClasses.value,
             borderClasses.value,
-            colorClasses.value,
+            !isForcedColorsModeActive ? colorClasses.value : undefined,
             densityClasses.value,
             elevationClasses.value,
             lineClasses.value,
