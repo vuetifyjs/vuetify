@@ -39,8 +39,8 @@ export function useMarkdown () {
 
         // Remove <ApiInline /> and <ExamplesUsage /> tags completely
         processedMd = processedMd
-          .replace(/<ApiInline[\s\S]*?>([\s\S]*?\/>)?/g, '')
-          .replace(/<ExamplesUsage[\s\S]*?>([\s\S]*?\/>)?/g, '')
+          .replace(/<ApiInline[\s\S]*?>([\s\S]*?\/>\n\n)?/g, '')
+          .replace(/<ExamplesUsage[\s\S]*?>([\s\S]*?\/>\n\n)?/g, '')
 
         // Replace every <ExamplesExample ...> tag with the raw Vue source of its file
         if (processedMd.includes('<ExamplesExample')) {
