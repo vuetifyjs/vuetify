@@ -241,6 +241,7 @@ export {
   mdiInformation,
   mdiInformationOutline,
   mdiInstagram,
+  mdiKeyboardOutline,
   mdiKeyboardReturn,
   mdiKeyboardSpace,
   mdiLabel,

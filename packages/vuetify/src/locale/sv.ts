@@ -85,6 +85,9 @@ export default {
     am: 'FM',
     pm: 'EM',
     title: 'Välj tid',
+    hour: 'Hour',
+    minute: 'Minute',
+    second: 'Second',
   },
   pagination: {
     ariaLabel: {
