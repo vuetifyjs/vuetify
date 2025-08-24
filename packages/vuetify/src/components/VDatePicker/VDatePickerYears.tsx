@@ -98,6 +98,7 @@ export const VDatePickerYears = genericComponent<VDatePickerYearsSlots>()({
 
     function focusSelectedYear () {
       yearRef.el?.focus()
+      yearRef.el?.scrollIntoView({ block: 'center' })
     }
 
     function isYearAllowed (year: number) {
