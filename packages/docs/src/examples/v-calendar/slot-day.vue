@@ -33,7 +33,7 @@
 <script setup>
   import { ref } from 'vue'
 
-  const today = ref('2019-01-10')
+  const today = ref(['2019-01-10'])
   const tracked = ref({
     '2019-01-09': [23, 45, 10],
     '2019-01-08': [10],
@@ -52,7 +52,7 @@
 <script>
   export default {
     data: () => ({
-      today: '2019-01-10',
+      today: ['2019-01-10'],
       tracked: {
         '2019-01-09': [23, 45, 10],
         '2019-01-08': [10],
