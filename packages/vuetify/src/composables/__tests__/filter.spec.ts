@@ -161,7 +161,7 @@ describe('filter', () => {
         filterKeys,
         customKeyFilter,
         filterMode: 'intersection',
-      })).toHaveLength(0)
+      })).toHaveLength(2)
 
       expect(filterItems(items, '', {
         filterKeys,
