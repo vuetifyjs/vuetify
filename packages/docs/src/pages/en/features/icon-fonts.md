@@ -48,6 +48,56 @@ export default createVuetify({
 
 In the above examples we import the default `mdi` icon set and its corresponding aliases. These aliases reference commonly used types of icons that are utilized by Vuetify components.
 
+#### Custom aliases
+
+Aliases allow you to define short, reusable names for icons that can map to different sources — such as icon names from a set, local Vue components, or raw SVG paths. This makes it easier to manage icons consistently throughout your project.
+
+Here’s an example:
+
+```js { resource="src/plugins/vuetify.js" }
+import { createVuetify } from 'vuetify'
+import AccountIcon from './account-icon.vue'
+import ClosetIcon from './closet-icon.vue'
+
+export const customIcons = {
+  mdiCustomAlias: 'mdi-cow',
+  account: AccountIcon,
+  annotation: [
+    'M14 9.45h-1v-1a1 1 0 0 0-2 0v1h-1a1 1 0 0 0 0 2h1v1a1 1 0 0 0 2 0v-1h1a1 1 0 0 0 0-2Zm6.46.18A8.5 8.5 0 1 0 6 16.46l5.3 5.31a1 1 0 0 0 1.42 0L18 16.46a8.46 8.46 0 0 0 2.46-6.83Zm-3.86 5.42l-4.6 4.6l-4.6-4.6a6.49 6.49 0 0 1-1.87-5.22A6.57 6.57 0 0 1 8.42 5a6.47 6.47 0 0 1 7.16 0a6.57 6.57 0 0 1 2.89 4.81a6.49 6.49 0 0 1-1.87 5.24Z',
+  ],
+  closet: ClosetIcon,
+}
+
+export const vuetify = createVuetify({
+  theme: {
+    defaultTheme: 'light',
+    //
+  },
+  icons: {
+    defaultSet: 'mdi',
+    aliases: {
+      ...customIcons,
+    },
+  },
+})
+```
+
+```html
+<template>
+<v-btn prepend-icon="$account">Custom Icon 1</v-btn>
+<v-btn prepend-icon="$mdiCustomAlias">Custom Icon 2</v-btn>
+<v-btn prepend-icon="$closet">Custom Icon 3</v-btn>
+<v-btn prepend-icon="$annotation">Custom Icon 4</v-btn>
+<v-btn prepend-icon="mdi-close">Default MDI Icon</v-btn>
+</template>
+```
+
+In this setup:
+  * $account and $closet render your own Vue component SVG icons.
+  * $mdiCustomAlias references an alias for the mdi-cow icon.
+  * $annotation references inline SVG path data.
+This approach gives you flexibility: you can mix external libraries with your own icons seamlessly, while keeping your templates cleaner and easier to maintain.
+
 ::: info
 
 While it is still possible to supply the icon value through the default slot in Vuetify 3.0 (`<v-icon>mdi-home</v-icon>`), we recommend using the `icon` prop instead.
