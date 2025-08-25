@@ -147,14 +147,11 @@
 
 @media (forced-colors: active)
   .v-alert
-    border-style: solid
-
-    &--variant-plain
-      border-style: dashed
-
-    &--variant-text,
-    &--variant-plain
-      border-width: thin
+    &:not(
+      &--variant-text,
+      &--variant-plain
+    )
+      border-style: solid
 
     &--variant-outlined,
     &--variant-tonal
