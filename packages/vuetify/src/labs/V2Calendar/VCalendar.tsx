@@ -1,0 +1,430 @@
+// Components
+import VCalendarCategory from './VCalendarCategory'
+import VCalendarDaily from './VCalendarDaily'
+import VCalendarMonthly from './VCalendarMonthly'
+import VCalendarWeekly from './VCalendarWeekly'
+
+// Utilities
+import { getParsedCategories } from './util/parser'
+import props from './util/props'
+import {
+  copyTimestamp,
+  DAY_MIN,
+  DAYS_IN_MONTH_MAX,
+  DAYS_IN_WEEK,
+  getEndOfMonth,
+  getStartOfMonth,
+  nextDay,
+  parseTimestamp,
+  prevDay,
+  relativeDays,
+  timestampToDate,
+  updateFormatted,
+  updateRelative,
+  updateWeekday,
+  validateTimestamp,
+} from './util/timestamp'
+import { genericComponent } from '@/util'
+
+// Types
+import type { VNode } from 'vue'
+import type CalendarWithIntervals from './mixins/calendar-with-intervals'
+import type {
+  CalendarCategory,
+  CalendarDayBodySlotScope,
+  CalendarDaySlotScope,
+  CalendarEvent,
+  CalendarEventParsed,
+  CalendarFormatter,
+  CalendarTimestamp,
+} from './types'
+import type { VTime, VTimestampInput } from './util/timestamp'
+import type { EventProp, GenericProps, JSXComponent } from '@/util'
+
+// Mixins
+import CalendarWithEvents from './mixins/calendar-with-events'
+
+// Types
+interface VCalendarRenderProps {
+  start: CalendarTimestamp
+  end: CalendarTimestamp
+  component: JSXComponent
+  maxDays: number
+  weekdays: number[]
+  categories: CalendarCategory[]
+}
+
+interface EventSlotScope {
+  event: CalendarEvent
+  outside: boolean
+  singline: boolean
+  overlapsNoon: boolean
+  formatTime: (withTime: CalendarTimestamp, ampm: boolean) => string
+  timeSummary: () => string
+  eventSummary: () => JSX.Element
+  eventParsed: CalendarEventParsed
+  day: CalendarDaySlotScope
+  start: boolean
+  end: boolean
+  timed: boolean
+}
+
+interface DaySlotScope extends CalendarTimestamp {
+  outside: boolean
+  index: number
+  week: CalendarTimestamp[]
+}
+
+interface DayHeaderSlotScope extends CalendarTimestamp {
+  index: number
+  week: CalendarTimestamp[]
+}
+
+interface CalendarDayCategorySlotScope extends CalendarDayBodySlotScope {
+  category: CalendarCategory
+}
+
+export const V2Calendar = genericComponent<new () => GenericProps<{
+  [key: `on${Capitalize<string>}:date`]: EventProp<[Event, CalendarTimestamp]>
+  [key: `on${Capitalize<string>}:day-category`]: EventProp<[Event, CalendarDayCategorySlotScope]>
+  [key: `on${Capitalize<string>}:day`]: EventProp<[Event, CalendarDayBodySlotScope]>
+  [key: `on${Capitalize<string>}:event`]: EventProp<[Event, EventSlotScope]>
+  [key: `on${Capitalize<string>}:interval`]: EventProp<[Event, CalendarTimestamp]>
+  [key: `on${Capitalize<string>}:more`]: EventProp<[Event, CalendarDaySlotScope]>
+  [key: `on${Capitalize<string>}:time-category`]: EventProp<[Event, CalendarDayCategorySlotScope]>
+  [key: `on${Capitalize<string>}:time`]: EventProp<[Event, CalendarDayBodySlotScope]>
+}, {
+  'category': CalendarDayCategorySlotScope
+  'day': DaySlotScope
+  'day-body': CalendarDayBodySlotScope
+  'day-header': DayHeaderSlotScope
+  'day-label': CalendarTimestamp
+  'day-label-header': CalendarTimestamp
+  'day-month': CalendarTimestamp
+  'event': EventSlotScope
+  'interval': CalendarDayCategorySlotScope
+  'interval-header': never
+}>>()({
+  name: 'V2Calendar',
+
+  extends: CalendarWithEvents,
+
+  props: {
+    ...props.calendar,
+    ...props.weeks,
+    ...props.intervals,
+    ...props.category,
+  },
+
+  data: () => ({
+    lastStart: null as CalendarTimestamp | null,
+    lastEnd: null as CalendarTimestamp | null,
+  }),
+
+  computed: {
+    parsedValue (): CalendarTimestamp {
+      return (validateTimestamp(this.modelValue)
+        ? parseTimestamp(this.modelValue, true)
+        : (this.parsedStart || this.times.today))
+    },
+    parsedCategoryDays (): number {
+      return parseInt(this.categoryDays) || 1
+    },
+    renderProps (): VCalendarRenderProps {
+      const around = this.parsedValue
+      let component: any = null
+      let maxDays = this.maxDays
+      let weekdays = this.parsedWeekdays
+      let categories = this.parsedCategories
+      let start = around
+      let end = around
+      switch (this.type) {
+        case 'month':
+          component = VCalendarMonthly
+          start = getStartOfMonth(around)
+          end = getEndOfMonth(around)
+          break
+        case 'week':
+          component = VCalendarDaily
+          start = this.getStartOfWeek(around)
+          end = this.getEndOfWeek(around)
+          maxDays = 7
+          break
+        case 'day':
+          component = VCalendarDaily
+          maxDays = 1
+          weekdays = [start.weekday]
+          break
+        case '4day':
+          component = VCalendarDaily
+          end = relativeDays(copyTimestamp(end), nextDay, 3)
+          updateFormatted(end)
+          maxDays = 4
+          weekdays = [
+            start.weekday,
+            (start.weekday + 1) % 7,
+            (start.weekday + 2) % 7,
+            (start.weekday + 3) % 7,
+          ]
+          break
+        case 'custom-weekly':
+          component = VCalendarWeekly
+          start = this.parsedStart || around
+          end = this.parsedEnd
+          break
+        case 'custom-daily':
+          component = VCalendarDaily
+          start = this.parsedStart || around
+          end = this.parsedEnd
+          break
+        case 'category':
+          const days = this.parsedCategoryDays
+
+          component = VCalendarCategory
+          end = relativeDays(copyTimestamp(end), nextDay, days)
+          updateFormatted(end)
+          maxDays = days
+          weekdays = []
+
+          for (let i = 0; i < days; i++) {
+            weekdays.push((start.weekday + i) % 7)
+          }
+
+          categories = this.getCategoryList(categories)
+          break
+        default:
+          throw new Error(this.type + ' is not a valid Calendar type')
+      }
+
+      return { component, start, end, maxDays, weekdays, categories }
+    },
+    eventWeekdays (): number[] {
+      return this.renderProps.weekdays
+    },
+    categoryMode (): boolean {
+      return this.type === 'category'
+    },
+    title (): string {
+      const { start, end } = this.renderProps
+      const spanYears = start.year !== end.year
+      const spanMonths = spanYears || start.month !== end.month
+
+      if (spanYears) {
+        return this.monthShortFormatter(start, true) + ' ' + start.year + ' - ' + this.monthShortFormatter(end, true) + ' ' + end.year
+      }
+
+      if (spanMonths) {
+        return this.monthShortFormatter(start, true) + ' - ' + this.monthShortFormatter(end, true) + ' ' + end.year
+      } else {
+        return this.monthLongFormatter(start, false) + ' ' + start.year
+      }
+    },
+    monthLongFormatter (): CalendarFormatter {
+      return this.getFormatter({
+        timeZone: 'UTC', month: 'long',
+      })
+    },
+    monthShortFormatter (): CalendarFormatter {
+      return this.getFormatter({
+        timeZone: 'UTC', month: 'short',
+      })
+    },
+    parsedCategories (): CalendarCategory[] {
+      return getParsedCategories(this.categories, this.categoryText)
+    },
+  },
+
+  watch: {
+    renderProps: 'checkChange',
+  },
+
+  mounted () {
+    this.updateEventVisibility()
+    this.checkChange()
+  },
+
+  updated () {
+    window.requestAnimationFrame(this.updateEventVisibility)
+  },
+
+  methods: {
+    checkChange (): void {
+      const { lastStart, lastEnd } = this
+      const { start, end } = this.renderProps
+      if (!lastStart || !lastEnd ||
+        start.date !== lastStart.date ||
+        end.date !== lastEnd.date) {
+        this.lastStart = start
+        this.lastEnd = end
+        this.$emit('change', { start, end })
+      }
+    },
+    move (amount = 1): void {
+      const moved = copyTimestamp(this.parsedValue)
+      const forward = amount > 0
+      const mover = forward ? nextDay : prevDay
+      const limit = forward ? DAYS_IN_MONTH_MAX : DAY_MIN
+      let times = forward ? amount : -amount
+
+      while (--times >= 0) {
+        switch (this.type) {
+          case 'month':
+            moved.day = limit
+            mover(moved)
+            break
+          case 'week':
+            relativeDays(moved, mover, DAYS_IN_WEEK)
+            break
+          case 'day':
+            relativeDays(moved, mover, 1)
+            break
+          case '4day':
+            relativeDays(moved, mover, 4)
+            break
+          case 'category':
+            relativeDays(moved, mover, this.parsedCategoryDays)
+            break
+        }
+      }
+
+      updateWeekday(moved)
+      updateFormatted(moved)
+      updateRelative(moved, this.times.now)
+
+      if (this.modelValue instanceof Date) {
+        this.$emit('update:modelValue', timestampToDate(moved))
+      } else if (typeof this.modelValue === 'number') {
+        this.$emit('update:modelValue', timestampToDate(moved).getTime())
+      } else {
+        this.$emit('update:modelValue', moved.date)
+      }
+
+      this.$emit('moved', moved)
+    },
+    next (amount = 1): void {
+      this.move(amount)
+    },
+    prev (amount = 1): void {
+      this.move(-amount)
+    },
+    timeToY (time: VTime, clamp = true): number | false {
+      const c = this.$refs.root as InstanceType<typeof CalendarWithIntervals>
+
+      if (c && c.timeToY) {
+        return c.timeToY(time, clamp)
+      } else {
+        return false
+      }
+    },
+    timeDelta (time: VTime): number | false {
+      const c = this.$refs.root as InstanceType<typeof CalendarWithIntervals>
+
+      if (c && c.timeDelta) {
+        return c.timeDelta(time)
+      } else {
+        return false
+      }
+    },
+    minutesToPixels (minutes: number): number {
+      const c = this.$refs.root as InstanceType<typeof CalendarWithIntervals>
+
+      if (c && c.minutesToPixels) {
+        return c.minutesToPixels(minutes)
+      } else {
+        return -1
+      }
+    },
+    scrollToTime (time: VTime): boolean {
+      const c = this.$refs.root as InstanceType<typeof CalendarWithIntervals>
+
+      if (c && c.scrollToTime) {
+        return c.scrollToTime(time)
+      } else {
+        return false
+      }
+    },
+    parseTimestamp (input: VTimestampInput, required?: false): CalendarTimestamp | null {
+      return parseTimestamp(input, required, this.times.now)
+    },
+    timestampToDate (timestamp: CalendarTimestamp): Date {
+      return timestampToDate(timestamp)
+    },
+    getCategoryList (categories: CalendarCategory[]): CalendarCategory[] {
+      if (!this.noEvents) {
+        const categoryMap: any = categories.reduce((map: any, category, index) => {
+          if (typeof category === 'object' && category.categoryName) map[category.categoryName] = { index, count: 0 }
+          else if (typeof category === 'string') map[category] = { index, count: 0 }
+          return map
+        }, {})
+
+        if (!this.categoryHideDynamic || !this.categoryShowAll) {
+          let categoryLength = categories.length
+
+          this.parsedEvents.forEach(ev => {
+            let category = ev.category
+
+            if (typeof category !== 'string') {
+              category = this.categoryForInvalid
+            }
+
+            if (!category) {
+              return
+            }
+
+            if (category in categoryMap) {
+              categoryMap[category].count++
+            } else if (!this.categoryHideDynamic) {
+              categoryMap[category] = {
+                index: categoryLength++,
+                count: 1,
+              }
+            }
+          })
+        }
+
+        if (!this.categoryShowAll) {
+          for (const category in categoryMap) {
+            if (categoryMap[category].count === 0) {
+              delete categoryMap[category]
+            }
+          }
+        }
+
+        categories = categories.filter((category: CalendarCategory) => {
+          if (typeof category === 'object' && category.categoryName) {
+            return categoryMap.hasOwnProperty(category.categoryName)
+          } else if (typeof category === 'string') {
+            return categoryMap.hasOwnProperty(category)
+          }
+          return false
+        })
+      }
+      return categories
+    },
+  },
+
+  render (): VNode {
+    const { start, end, maxDays, component: Component, weekdays, categories } = this.renderProps
+    return (
+      <Component
+        ref="root"
+        class={['v-calendar', { 'v-calendar-events': !this.noEvents }]}
+        v-resize_quiet={ this.updateEventVisibility }
+        role="grid"
+        { ...this.$props }
+        start={ start.date }
+        end={ end.date }
+        maxDays={ maxDays }
+        weekdays={ weekdays }
+        categories={ categories }
+        onClick:date={ (e: MouseEvent, day: CalendarTimestamp) => {
+          if (this.$attrs['onUpdate:modelValue']) this.$emit('update:modelValue', day.date)
+          if (this.$attrs['onClick:date']) this.$emit('click:date', e, day)
+        }}
+        v-slots={ this.getScopedSlots() }
+      />
+    )
+  },
+})
+
+export type V2Calendar = InstanceType<typeof V2Calendar>

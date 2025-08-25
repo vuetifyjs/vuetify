@@ -1,0 +1,5 @@
+export { V2Calendar } from './VCalendar'
+// export { VCalendarCategory as V2CalendarCategory } from './VCalendarDaily'
+// export { VCalendarDaily as V2CalendarDaily } from './VCalendarWeekly'
+// export { VCalendarWeekly as V2CalendarWeekly } from './VCalendarMonthly'
+// export { VCalendarMonthly as V2CalendarMonthly } from './VCalendarCategory'
