@@ -447,7 +447,7 @@ Icon aliases allow you to define short, reusable names for icons that can map to
 
 ### Custom aliases
 
-If you are developing custom Vuetify components, you can extend the `aliases` object to utilize the same functionality that internal Vuetify components use. This makes it easier to manage icons consistently throughout your project. 
+If you are developing custom Vuetify components, you can extend the `aliases` object to utilize the same functionality that internal Vuetify components use. This makes it easier to manage icons consistently throughout your project.
 
 Here’s an example:
 
@@ -490,9 +490,11 @@ export const vuetify = createVuetify({
 ```
 
 In this setup:
+
 * $account and $closet render your own Vue component SVG icons.
 * $mdiCustomAlias references an alias for the mdi-cow icon.
 * $annotation references inline SVG path data.
+
 This approach gives you flexibility: you can mix external libraries with your own icons seamlessly, while keeping your templates cleaner and easier to maintain.
 
 ## Multiple icon sets
