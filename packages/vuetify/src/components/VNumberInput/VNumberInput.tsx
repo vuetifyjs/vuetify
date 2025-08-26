@@ -357,7 +357,6 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
             aria-hidden="true"
             data-testid="increment"
             disabled={ !canIncrease.value }
-            flat
             height={ controlNodeDefaultHeight.value }
             icon={ incrementIcon.value }
             key="increment-btn"
@@ -366,6 +365,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
             onPointerup={ onControlMouseup }
             onPointercancel={ onControlMouseup }
             size={ controlNodeSize.value }
+            variant="text"
             tabindex="-1"
           />
         ) : (
@@ -374,10 +374,10 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
             defaults={{
               VBtn: {
                 disabled: !canIncrease.value,
-                flat: true,
                 height: controlNodeDefaultHeight.value,
                 size: controlNodeSize.value,
                 icon: incrementIcon.value,
+                variant: 'text',
               },
             }}
           >
@@ -392,7 +392,6 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
             aria-hidden="true"
             data-testid="decrement"
             disabled={ !canDecrease.value }
-            flat
             height={ controlNodeDefaultHeight.value }
             icon={ decrementIcon.value }
             key="decrement-btn"
@@ -401,6 +400,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
             onPointerup={ onControlMouseup }
             onPointercancel={ onControlMouseup }
             size={ controlNodeSize.value }
+            variant="text"
             tabindex="-1"
           />
         ) : (
@@ -409,10 +409,10 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
             defaults={{
               VBtn: {
                 disabled: !canDecrease.value,
-                flat: true,
                 height: controlNodeDefaultHeight.value,
                 size: controlNodeSize.value,
                 icon: decrementIcon.value,
+                variant: 'text',
               },
             }}
           >

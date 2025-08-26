@@ -210,7 +210,10 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
       const hasDetails = !!(hasCounter || slots.details)
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
       const { modelValue: _, ...inputProps } = VInput.filterProps(props)
-      const fieldProps = VField.filterProps(props)
+      const fieldProps = {
+        ...VField.filterProps(props),
+        'onClick:clear': onClear,
+      }
 
       return (
         <VInput
@@ -252,7 +255,6 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
                 }}
                 onClick={ onControlClick }
                 onMousedown={ onControlMousedown }
-                onClick:clear={ onClear }
                 onClick:prependInner={ props['onClick:prependInner'] }
                 onClick:appendInner={ props['onClick:appendInner'] }
                 { ...fieldProps }

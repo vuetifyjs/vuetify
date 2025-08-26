@@ -18,7 +18,7 @@ import vIntersect from '@/directives/intersect'
 
 // Utilities
 import { cloneVNode, computed, nextTick, ref } from 'vue'
-import { callEvent, filterInputAttrs, genericComponent, propsFactory, useRender } from '@/util'
+import { callEvent, filterInputAttrs, genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -199,7 +199,7 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
                 onClick:prependInner={ props['onClick:prependInner'] }
                 onClick:appendInner={ props['onClick:appendInner'] }
                 role={ props.role }
-                { ...fieldProps }
+                { ...omit(fieldProps, ['onClick:clear']) }
                 id={ id.value }
                 active={ isActive.value || isDirty.value }
                 dirty={ isDirty.value || props.dirty }
