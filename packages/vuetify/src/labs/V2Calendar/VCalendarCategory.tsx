@@ -5,8 +5,8 @@ import './VCalendarCategory.sass'
 import { VCalendarDaily } from './VCalendarDaily'
 
 // Composables
-import { makeCalendarBaseProps } from './mixins/calendar-base'
-import { makeCalendarWithIntervalsProps } from './mixins/calendar-with-intervals'
+import { makeCalendarBaseProps } from './composables/calendarBase'
+import { makeCalendarWithIntervalsProps } from './composables/calendarWithIntervals'
 
 // Utilities
 import { computed, shallowRef } from 'vue'

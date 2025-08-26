@@ -5,7 +5,7 @@ import './VCalendarWeekly.sass'
 import { VCalendarWeekly } from './VCalendarWeekly'
 
 // Composables
-import { makeCalendarBaseProps } from './mixins/calendar-base'
+import { makeCalendarBaseProps } from './composables/calendarBase'
 import { forwardRefs } from '@/composables/forwardRefs'
 
 // Utilities

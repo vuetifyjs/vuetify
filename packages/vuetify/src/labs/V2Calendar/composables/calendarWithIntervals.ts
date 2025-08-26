@@ -1,5 +1,5 @@
 // Composables
-import { useCalendarBase } from './calendar-base'
+import { useCalendarBase } from './calendarBase'
 
 // Utilities
 import { computed, shallowRef } from 'vue'
@@ -18,7 +18,7 @@ import { propsFactory } from '@/util'
 
 // Types
 import type { PropType, StyleValue } from 'vue'
-import type { CalendarBaseProps } from './calendar-base'
+import type { CalendarBaseProps } from './calendarBase'
 import type { CalendarDayBodySlotScope, CalendarFormatter, CalendarTimestamp } from '../types'
 import type { VTime } from '../util/timestamp'
 

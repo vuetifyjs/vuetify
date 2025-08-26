@@ -1,8 +1,8 @@
 // Styles
-import './calendar-with-events.sass'
+import './calendarWithEvents.sass'
 
 // Composables
-import { useCalendarBase } from './calendar-base'
+import { useCalendarBase } from './calendarBase'
 
 // Utilities
 import { computed, ref } from 'vue'
@@ -19,7 +19,7 @@ import { getPrefixedEventHandlers, propsFactory } from '@/util'
 
 // Types
 import type { PropType, VNode } from 'vue'
-import type { CalendarBaseProps } from './calendar-base'
+import type { CalendarBaseProps } from './calendarBase'
 import type {
   CalendarCategory,
   CalendarDayBodySlotScope,

@@ -5,8 +5,8 @@ import { VCalendarMonthly } from './VCalendarMonthly'
 import { VCalendarWeekly } from './VCalendarWeekly'
 
 // Composables
-import { makeCalendarBaseProps } from './mixins/calendar-base'
-import { makeCalendarWithEventsProps, useCalendarWithEvents } from './mixins/calendar-with-events'
+import { makeCalendarBaseProps } from './composables/calendarBase'
+import { makeCalendarWithEventsProps, useCalendarWithEvents } from './composables/calendarWithEvents'
 
 // Utilities
 import { computed, onMounted, onUpdated, ref, watch } from 'vue'

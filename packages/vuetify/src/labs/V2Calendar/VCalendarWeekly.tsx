@@ -5,7 +5,7 @@ import './VCalendarWeekly.sass'
 import { VIconBtn } from '@/labs/VIconBtn'
 
 // Composables
-import { makeCalendarBaseProps, useCalendarBase } from './mixins/calendar-base'
+import { makeCalendarBaseProps, useCalendarBase } from './composables/calendarBase'
 import { useTheme } from '@/composables'
 
 // Utilities

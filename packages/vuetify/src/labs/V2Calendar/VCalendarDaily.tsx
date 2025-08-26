@@ -5,8 +5,8 @@ import './VCalendarDaily.sass'
 import { VIconBtn } from '@/labs/VIconBtn'
 
 // Composables
-import { makeCalendarBaseProps } from './mixins/calendar-base'
-import { makeCalendarWithIntervalsProps, useCalendarWithIntervals } from './mixins/calendar-with-intervals'
+import { makeCalendarBaseProps } from './composables/calendarBase'
+import { makeCalendarWithIntervalsProps, useCalendarWithIntervals } from './composables/calendarWithIntervals'
 
 // Directives
 import vResize from '@/directives/resize'
