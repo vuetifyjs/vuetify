@@ -23,6 +23,7 @@ import {
   relativeDays,
   updateMinutes,
   updateRelative,
+  validateNumber,
   validateTimestamp,
 } from '../timestamp'
 
@@ -499,5 +500,19 @@ describe.skip('VCalendar/util/timestamp.ts', () => { // eslint-disable-line max-
     expect(relativeDays(parseTimestamp('2019-01-03'), prevDay, 1)).toMatchObject({ day: 2 })
     expect(relativeDays(parseTimestamp('2019-01-03'), prevDay, 10)).toMatchObject({ day: 24 })
     expect(relativeDays(parseTimestamp('2019-01-03'), prevDay, 1000)).toMatchObject({ day: 8, month: 4, year: 2016 })
+  })
+
+  describe('validateNumber', () => {
+    it('should return true if number is valid', () => {
+      expect(validateNumber(1)).toBe(true)
+      expect(validateNumber(1000000)).toBe(true)
+      expect(validateNumber('1234')).toBe(true)
+    })
+
+    it('should return false if number is bad', () => {
+      expect(validateNumber(Infinity)).toBe(false)
+      expect(validateNumber(NaN)).toBe(false)
+      expect(validateNumber('bad')).toBe(false)
+    })
   })
 })

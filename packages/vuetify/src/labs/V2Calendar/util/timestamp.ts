@@ -25,7 +25,7 @@ export const OFFSET_MONTH = 100
 export const OFFSET_HOUR = 100
 export const OFFSET_TIME = 10000
 
-type CalendarTimestampFormatOptions = (timestamp: CalendarTimestamp, short: boolean) => object
+type CalendarTimestampFormatOptions = (timestamp: CalendarTimestamp, short: boolean) => Intl.DateTimeFormatOptions
 type CalendarTimestampOperation = (timestamp: CalendarTimestamp) => CalendarTimestamp
 export type VTime = number | string | {
   hour: number
@@ -72,6 +72,10 @@ export function getEndOfMonth (timestamp: CalendarTimestamp): CalendarTimestamp 
   updateFormatted(end)
 
   return end
+}
+
+export function validateNumber (input: any): boolean {
+  return isFinite(parseInt(input))
 }
 
 export function validateTime (input: any): input is VTime {
@@ -483,4 +487,50 @@ export function createNativeLocaleFormatter (locale: string, getOptions: Calenda
       return ''
     }
   }
+}
+
+export function validateWeekdays (input: string | (number | string)[]): boolean {
+  if (typeof input === 'string') {
+    input = input.split(',')
+  }
+
+  if (Array.isArray(input)) {
+    const ints = input.map(x => parseInt(x))
+
+    if (ints.length > DAYS_IN_WEEK || ints.length === 0) {
+      return false
+    }
+
+    const visited: Record<number, boolean> = {}
+    let wrapped = false
+
+    for (let i = 0; i < ints.length; i++) {
+      const x = ints[i]
+
+      if (!isFinite(x) || x < 0 || x >= DAYS_IN_WEEK) {
+        return false
+      }
+
+      if (i > 0) {
+        const d = x - ints[i - 1]
+        if (d < 0) {
+          if (wrapped) {
+            return false
+          }
+          wrapped = true
+        } else if (d === 0) {
+          return false
+        }
+      }
+
+      if (visited[x]) {
+        return false
+      }
+      visited[x] = true
+    }
+
+    return true
+  }
+
+  return false
 }

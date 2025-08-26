@@ -4,114 +4,138 @@ import './VCalendarDaily.sass'
 // Components
 import { VIconBtn } from '@/labs/VIconBtn'
 
+// Composables
+import { makeCalendarBaseProps } from './mixins/calendar-base'
+import { makeCalendarWithIntervalsProps, useCalendarWithIntervals } from './mixins/calendar-with-intervals'
+
 // Directives
 import vResize from '@/directives/resize'
 
 // Utilities
-import { convertToUnit, defineComponent, getPrefixedEventHandlers } from '@/util'
-
-// Mixins
-import CalendarWithIntervals from './mixins/calendar-with-intervals'
+import { nextTick, onMounted, ref } from 'vue'
+import { convertToUnit, defineComponent, getPrefixedEventHandlers, useRender } from '@/util'
 
 // Types
-import type { VNode } from 'vue'
 import type { CalendarTimestamp } from './types'
 
-export default defineComponent({
+export const VCalendarDaily = defineComponent({
   name: 'VCalendarDaily',
 
   directives: { vResize },
 
-  extends: CalendarWithIntervals,
+  props: {
+    color: String,
+    shortWeekdays: {
+      type: Boolean,
+      default: true,
+    },
+    shortIntervals: {
+      type: Boolean,
+      default: true,
+    },
+    hideHeader: Boolean,
 
-  data: () => ({
-    scrollPush: 0,
-  }),
-
-  mounted () {
-    this.init()
+    ...makeCalendarBaseProps(),
+    ...makeCalendarWithIntervalsProps(),
   },
 
-  methods: {
-    init () {
-      this.$nextTick(this.onResize)
-    },
-    onResize () {
-      this.scrollPush = this.getScrollPush()
-    },
-    getScrollPush (): number {
-      const area = this.$refs.scrollArea as HTMLElement
-      const pane = this.$refs.pane as HTMLElement
+  setup (props, { slots, attrs }) {
+    const scrollPush = ref(0)
+    const scrollArea = ref<HTMLElement>()
+    const pane = ref<HTMLElement>()
 
-      return area && pane ? (area.offsetWidth - pane.offsetWidth) : 0
-    },
-    genHead (): VNode {
+    const base = useCalendarWithIntervals(props)
+
+    function init () {
+      nextTick(onResize)
+    }
+
+    function onResize () {
+      scrollPush.value = getScrollPush()
+    }
+
+    function getScrollPush (): number {
+      return scrollArea.value && pane.value
+        ? (scrollArea.value.offsetWidth - pane.value.offsetWidth)
+        : 0
+    }
+
+    function genHead () {
       return (
         <div
           class="v-calendar-daily__head"
-          style={{ marginRight: this.scrollPush + 'px' }}
+          style={{ marginRight: scrollPush.value + 'px' }}
         >
-          { this.genHeadIntervals() }
-          { this.genHeadDays() }
+          { genHeadIntervals() }
+          { genHeadDays() }
         </div>
       )
-    },
-    genHeadIntervals (): VNode {
-      const width: string | undefined = convertToUnit(this.intervalWidth)
+    }
+
+    function genHeadIntervals () {
+      const width: string | undefined = convertToUnit(props.intervalWidth)
       return (
         <div
           class="v-calendar-daily__intervals-head"
           style={{ width }}
         >
-          { this.$slots['interval-header']?.() }
+          { slots['interval-header']?.() }
         </div>
       )
-    },
-    genHeadDays (): VNode[] {
-      return this.days.map(this.genHeadDay)
-    },
-    genHeadDay (day: CalendarTimestamp, index: number): VNode {
-      const events = getPrefixedEventHandlers(this.$attrs, ':day', nativeEvent => ({
-        nativeEvent, ...this.getSlotScope(day),
+    }
+
+    function genHeadDays () {
+      return base.days.value.map(genHeadDay)
+    }
+
+    function genHeadDay (day: CalendarTimestamp, index: number) {
+      const events = getPrefixedEventHandlers(attrs, ':day', nativeEvent => ({
+        nativeEvent, ...base.getSlotScope(day),
       }))
       return (
         <div
           key={ day.date }
-          class={['v-calendar-daily_head-day', this.getRelativeClasses(day)]}
+          class={['v-calendar-daily_head-day', base.getRelativeClasses(day)]}
           { ...events }
         >
-          { this.genHeadWeekday(day) }
-          { this.genHeadDayLabel(day) }
-          { this.genDayHeader(day, index) }
+          { genHeadWeekday(day) }
+          { genHeadDayLabel(day) }
+          { genDayHeader(day, index) }
         </div>
       )
-    },
-    genDayHeader (day: CalendarTimestamp, index: number): VNode[] {
-      return this.$slots['day-header']?.({
-        week: this.days, ...day, index,
+    }
+
+    function genDayHeader (day: CalendarTimestamp, index: number) {
+      return slots['day-header']?.({
+        week: base.days.value,
+        ...day,
+        index,
       }) ?? []
-    },
-    genHeadWeekday (day: CalendarTimestamp): VNode {
-      const color = day.present ? this.color : undefined
+    }
+
+    function genHeadWeekday (day: CalendarTimestamp) {
+      const color = day.present ? props.color : undefined
       return (
         <div
-          { ...this.getColorProps({ text: color }) }
+          { ...base.getColorProps({ text: color }) }
           class="v-calendar-daily_head-weekday"
         >
-          { this.weekdayFormatter(day, this.shortWeekdays) }
+          { base.weekdayFormatter.value(day, props.shortWeekdays) }
         </div>
       )
-    },
-    genHeadDayLabel (day: CalendarTimestamp): VNode {
+    }
+
+    function genHeadDayLabel (day: CalendarTimestamp) {
       return (
         <div class="v-calendar-daily_head-day-label">
-          { this.$slots['day-label-header']?.(day) ?? this.genHeadDayButton(day) }
+          { slots['day-label-header']?.(day) ?? genHeadDayButton(day) }
         </div>
       )
-    },
-    genHeadDayButton (day: CalendarTimestamp): VNode {
-      const color = day.present ? this.color : 'transparent'
-      const events = getPrefixedEventHandlers(this.$attrs, ':date', nativeEvent => ({
+    }
+
+    function genHeadDayButton (day: CalendarTimestamp) {
+      const color = day.present ? props.color : 'transparent'
+      const events = getPrefixedEventHandlers(attrs, ':date', nativeEvent => ({
         nativeEvent, ...day,
       }))
       return (
@@ -119,84 +143,93 @@ export default defineComponent({
           color={ color }
           { ...events }
         >
-          { this.dayFormatter(day, false) }
+          { base.dayFormatter.value(day, false) }
         </VIconBtn>
       )
-    },
-    genBody (): VNode {
+    }
+
+    function genBody () {
       return (
         <div class="v-calendar-daily__body">
-          { this.genScrollArea() }
+          { genScrollArea() }
         </div>
       )
-    },
-    genScrollArea (): VNode {
+    }
+
+    function genScrollArea () {
       return (
-        <div ref="scrollArea" class="v-calendar-daily__scroll-area">
-          { this.genPane() }
+        <div ref={ scrollArea } class="v-calendar-daily__scroll-area">
+          { genPane() }
         </div>
       )
-    },
-    genPane (): VNode {
+    }
+
+    function genPane () {
       return (
         <div
-          ref="pane"
+          ref={ pane }
           class="v-calendar-daily__pane"
-          style={{ height: convertToUnit(this.bodyHeight) }}
+          style={{ height: convertToUnit(base.bodyHeight.value) }}
         >
-          { this.genDayContainer() }
+          { genDayContainer() }
         </div>
       )
-    },
-    genDayContainer (): VNode {
+    }
+
+    function genDayContainer () {
       return (
         <div class="v-calendar-daily__day-container">
-          { this.genBodyIntervals() }
-          { this.genDays() }
+          { genBodyIntervals() }
+          { genDays() }
         </div>
       )
-    },
-    genDays (): VNode[] {
-      return this.days.map((day, index) => {
-        const events = getPrefixedEventHandlers(this.$attrs, ':time', nativeEvent => ({
+    }
+
+    function genDays () {
+      return base.days.value.map((day, index) => {
+        const events = getPrefixedEventHandlers(attrs, ':time', nativeEvent => ({
           nativeEvent,
-          ...this.getSlotScope(this.getTimestampAtEvent(nativeEvent, day)),
+          ...base.getSlotScope(base.getTimestampAtEvent(nativeEvent, day)),
         }))
         return (
           <div
             key={ day.date }
-            class={['v-calendar-daily__day', this.getRelativeClasses(day)]}
+            class={['v-calendar-daily__day', base.getRelativeClasses(day)]}
             { ...events }
           >
-            { this.genDayIntervals(index) }
-            { this.genDayBody(day) }
+            { genDayIntervals(index) }
+            { genDayBody(day) }
           </div>
         )
       })
-    },
-    genDayBody (day: CalendarTimestamp): VNode[] {
-      return this.$slots['day-body']?.(this.getSlotScope(day)) ?? []
-    },
-    genDayIntervals (index: number): VNode[] {
-      return this.intervals[index].map(this.genDayInterval)
-    },
-    genDayInterval (interval: CalendarTimestamp): VNode {
-      const height: string | undefined = convertToUnit(this.intervalHeight)
-      const styler = this.intervalStyle || this.intervalStyleDefault
+    }
+
+    function genDayBody (day: CalendarTimestamp) {
+      return slots['day-body']?.(base.getSlotScope(day)) ?? []
+    }
+
+    function genDayIntervals (index: number) {
+      return base.intervals.value[index].map(genDayInterval)
+    }
+
+    function genDayInterval (interval: CalendarTimestamp) {
+      const height: string | undefined = convertToUnit(props.intervalHeight)
+      const styler = props.intervalStyle || base.intervalStyleDefault
       return (
         <div
           class="v-calendar-daily__day-interval"
           key={ interval.time }
           style={[{ height }, styler(interval)]}
         >
-          { this.$slots.interval?.(this.getSlotScope(interval)) }
+          { slots.interval?.(base.getSlotScope(interval)) }
         </div>
       )
-    },
-    genBodyIntervals (): VNode {
-      const width: string | undefined = convertToUnit(this.intervalWidth)
-      const events = getPrefixedEventHandlers(this.$attrs, ':interval', nativeEvent => ({
-        nativeEvent, ...this.getTimestampAtEvent(nativeEvent, this.parsedStart),
+    }
+
+    function genBodyIntervals () {
+      const width: string | undefined = convertToUnit(props.intervalWidth)
+      const events = getPrefixedEventHandlers(attrs, ':interval', nativeEvent => ({
+        nativeEvent, ...base.getTimestampAtEvent(nativeEvent, base.parsedStart.value),
       }))
       return (
         <div
@@ -204,20 +237,22 @@ export default defineComponent({
           style={{ width }}
           { ...events }
         >
-          { this.genIntervalLabels() }
+          { genIntervalLabels() }
         </div>
       )
-    },
-    genIntervalLabels (): VNode[] | null {
-      if (!this.intervals.length) return null
-      return this.intervals[0].map(this.genIntervalLabel)
-    },
-    genIntervalLabel (interval: CalendarTimestamp): VNode {
-      const height: string | undefined = convertToUnit(this.intervalHeight)
-      const short: boolean = this.shortIntervals
-      const shower = this.showIntervalLabel || this.showIntervalLabelDefault
+    }
+
+    function genIntervalLabels () {
+      if (!base.intervals.value.length) return null
+      return base.intervals.value[0].map(genIntervalLabel)
+    }
+
+    function genIntervalLabel (interval: CalendarTimestamp) {
+      const height: string | undefined = convertToUnit(props.intervalHeight)
+      const short = props.shortIntervals
+      const shower = props.showIntervalLabel || base.showIntervalLabelDefault
       const show = shower(interval)
-      const label = show ? this.intervalFormatter(interval, short) : undefined
+      const label = show ? base.intervalFormatter.value(interval, short) : undefined
       return (
         <div
           key={ interval.time }
@@ -229,19 +264,41 @@ export default defineComponent({
           </div>
         </div>
       )
-    },
-  },
+    }
 
-  render () {
-    return (
+    onMounted(init)
+
+    useRender(() => (
       <div
-        class={['v-calendar-daily', this.$vuetify.theme.themeClasses]}
+        class={['v-calendar-daily', attrs.class]}
         onDragstart={ (e: MouseEvent) => e.preventDefault() }
-        v-resize_quiet={ this.onResize }
+        v-resize_quiet={ onResize }
       >
-        { !this.hideHeader ? this.genHead() : undefined }
-        { this.genBody() }
+        { !props.hideHeader ? genHead() : undefined }
+        { genBody() }
       </div>
-    )
+    ))
+
+    return {
+      scrollPush,
+      scrollArea,
+      pane,
+      init,
+      onResize,
+      getScrollPush,
+      timeToY: base.timeToY,
+      timeDelta: base.timeDelta,
+      minutesToPixels: base.minutesToPixels,
+      genHead,
+      genBody,
+      getSlotScope: base.getSlotScope,
+      getTimestampAtEvent: base.getTimestampAtEvent,
+      getRelativeClasses: base.getRelativeClasses,
+      intervals: base.intervals,
+      days: base.days,
+      intervalStyleDefault: base.intervalStyleDefault,
+    }
   },
 })
+
+export type VCalendarDaily = InstanceType<typeof VCalendarDaily>

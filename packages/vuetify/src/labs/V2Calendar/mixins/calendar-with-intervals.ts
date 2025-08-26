@@ -1,8 +1,8 @@
-// Mixins
-import CalendarBase from './calendar-base'
+// Composables
+import { useCalendarBase } from './calendar-base'
 
 // Utilities
-import props from '../util/props'
+import { computed, shallowRef } from 'vue'
 import {
   copyTimestamp,
   createDayList,
@@ -11,157 +11,251 @@ import {
   MINUTES_IN_DAY,
   parseTime,
   updateMinutes,
+  validateNumber,
+  validateTime,
 } from '../util/timestamp'
-import { defineComponent } from '@/util'
+import { propsFactory } from '@/util'
 
 // Types
-import type { StyleValue } from 'vue'
+import type { PropType, StyleValue } from 'vue'
+import type { CalendarBaseProps } from './calendar-base'
 import type { CalendarDayBodySlotScope, CalendarFormatter, CalendarTimestamp } from '../types'
 import type { VTime } from '../util/timestamp'
 
-/* @vue/component */
-export default defineComponent({
-  name: 'CalendarWithIntervals',
-
-  extends: CalendarBase,
-
-  props: props.intervals,
-
-  computed: {
-    parsedFirstInterval (): number {
-      return parseInt(this.firstInterval)
-    },
-    parsedIntervalMinutes (): number {
-      return parseInt(this.intervalMinutes)
-    },
-    parsedIntervalCount (): number {
-      return parseInt(this.intervalCount)
-    },
-    parsedIntervalHeight (): number {
-      return parseFloat(this.intervalHeight)
-    },
-    parsedFirstTime (): number | false {
-      return parseTime(this.firstTime)
-    },
-    firstMinute (): number {
-      const time = this.parsedFirstTime
-
-      return time !== false && time >= 0 && time <= MINUTES_IN_DAY
-        ? time
-        : this.parsedFirstInterval * this.parsedIntervalMinutes
-    },
-    bodyHeight (): number {
-      return this.parsedIntervalCount * this.parsedIntervalHeight
-    },
-    days (): CalendarTimestamp[] {
-      return createDayList(
-        this.parsedStart,
-        this.parsedEnd,
-        this.times.today,
-        this.weekdaySkips,
-        this.maxDays
-      )
-    },
-    intervals (): CalendarTimestamp[][] {
-      const days: CalendarTimestamp[] = this.days
-      const first: number = this.firstMinute
-      const minutes: number = this.parsedIntervalMinutes
-      const count: number = this.parsedIntervalCount
-      const now: CalendarTimestamp = this.times.now
-
-      return days.map(d => createIntervalList(d, first, minutes, count, now))
-    },
-    intervalFormatter (): CalendarFormatter {
-      if (this.intervalFormat) {
-        return this.intervalFormat as CalendarFormatter
-      }
-
-      const longOptions = { timeZone: 'UTC', hour: '2-digit', minute: '2-digit' }
-      const shortOptions = { timeZone: 'UTC', hour: 'numeric', minute: '2-digit' }
-      const shortHourOptions = { timeZone: 'UTC', hour: 'numeric' }
-
-      return createNativeLocaleFormatter(
-        this.currentLocale,
-        (tms, short) => short ? (tms.minute === 0 ? shortHourOptions : shortOptions) : longOptions
-      )
-    },
+export const makeCalendarWithIntervalsProps = propsFactory({
+  maxDays: {
+    type: Number,
+    default: 7,
   },
+  intervalHeight: {
+    type: [Number, String],
+    default: 48,
+    validate: validateNumber,
+  },
+  intervalWidth: {
+    type: [Number, String],
+    default: 60,
+    validate: validateNumber,
+  },
+  intervalMinutes: {
+    type: [Number, String],
+    default: 60,
+    validate: validateNumber,
+  },
+  firstInterval: {
+    type: [Number, String],
+    default: 0,
+    validate: validateNumber,
+  },
+  firstTime: {
+    type: [Number, String, Object] as PropType<VTime>,
+    validate: validateTime,
+  },
+  intervalCount: {
+    type: [Number, String],
+    default: 24,
+    validate: validateNumber,
+  },
+  intervalFormat: {
+    type: Function as PropType<CalendarFormatter>,
+    default: null,
+  },
+  intervalStyle: {
+    type: Function as PropType<(interval: CalendarTimestamp) => StyleValue>,
+    default: null,
+  },
+  showIntervalLabel: {
+    type: Function as PropType<(interval: CalendarTimestamp) => boolean>,
+    default: null,
+  },
+}, 'VCalendar-intervals')
 
-  methods: {
-    showIntervalLabelDefault (interval: CalendarTimestamp): boolean {
-      const first: CalendarTimestamp = this.intervals[0][0]
-      const isFirst: boolean = first.hour === interval.hour && first.minute === interval.minute
-      return !isFirst
-    },
-    intervalStyleDefault (_interval: CalendarTimestamp): StyleValue {
-      return undefined
-    },
-    getTimestampAtEvent (e: Event, day: CalendarTimestamp): CalendarTimestamp {
-      const timestamp: CalendarTimestamp = copyTimestamp(day)
-      const bounds = (e.currentTarget as HTMLElement).getBoundingClientRect()
-      const baseMinutes: number = this.firstMinute
-      const touchEvent: TouchEvent = e as TouchEvent
-      const mouseEvent: MouseEvent = e as MouseEvent
-      const touches: TouchList = touchEvent.changedTouches || touchEvent.touches
-      const clientY: number = touches && touches[0] ? touches[0].clientY : mouseEvent.clientY
-      const addIntervals: number = (clientY - bounds.top) / this.parsedIntervalHeight
-      const addMinutes: number = Math.floor(addIntervals * this.parsedIntervalMinutes)
-      const minutes: number = baseMinutes + addMinutes
+interface CalendarWithIntervalsProps extends CalendarBaseProps {
+  maxDays: number
+  intervalHeight: string | number
+  intervalMinutes: string | number
+  firstInterval: string | number
+  firstTime: VTime | undefined
+  intervalCount: string | number
+  intervalFormat: CalendarFormatter | string | undefined
+}
 
-      return updateMinutes(timestamp, minutes, this.times.now)
-    },
-    getSlotScope (timestamp: CalendarTimestamp): CalendarDayBodySlotScope {
-      const scope = copyTimestamp(timestamp) as any
-      scope.timeToY = this.timeToY
-      scope.timeDelta = this.timeDelta
-      scope.minutesToPixels = this.minutesToPixels
-      scope.week = this.days
-      return scope
-    },
-    scrollToTime (time: VTime): boolean {
-      const y = this.timeToY(time)
-      const pane = this.$refs.scrollArea as HTMLElement
+export function useCalendarWithIntervals (props: CalendarWithIntervalsProps) {
+  const base = useCalendarBase(props)
 
-      if (y === false || !pane) {
-        return false
-      }
+  const scrollAreaRef = shallowRef<HTMLElement>()
 
-      pane.scrollTop = y
+  const parsedFirstInterval = computed((): number => {
+    return parseInt(String(props.firstInterval || 0))
+  })
 
-      return true
-    },
-    minutesToPixels (minutes: number): number {
-      return minutes / this.parsedIntervalMinutes * this.parsedIntervalHeight
-    },
-    timeToY (time: VTime, clamp = true): number | false {
-      let y = this.timeDelta(time)
+  const parsedIntervalMinutes = computed((): number => {
+    return parseInt(String(props.intervalMinutes || 60))
+  })
 
-      if (y !== false) {
-        y *= this.bodyHeight
+  const parsedIntervalCount = computed((): number => {
+    return parseInt(String(props.intervalCount || 24))
+  })
 
-        if (clamp) {
-          if (y < 0) {
-            y = 0
-          }
-          if (y > this.bodyHeight) {
-            y = this.bodyHeight
-          }
+  const parsedIntervalHeight = computed((): number => {
+    return parseFloat(String(props.intervalHeight || 48))
+  })
+
+  const parsedFirstTime = computed((): number | false => {
+    return parseTime(props.firstTime)
+  })
+
+  const firstMinute = computed((): number => {
+    const time = parsedFirstTime.value
+
+    return time !== false && time >= 0 && time <= MINUTES_IN_DAY
+      ? time
+      : parsedFirstInterval.value * parsedIntervalMinutes.value
+  })
+
+  const bodyHeight = computed((): number => {
+    return parsedIntervalCount.value * parsedIntervalHeight.value
+  })
+
+  const days = computed((): CalendarTimestamp[] => {
+    return createDayList(
+      base.parsedStart.value,
+      base.parsedEnd.value,
+      base.times.today,
+      base.weekdaySkips.value,
+      props.maxDays
+    )
+  })
+
+  const intervals = computed((): CalendarTimestamp[][] => {
+    const daysValue = days.value
+    const first: number = firstMinute.value
+    const minutes: number = parsedIntervalMinutes.value
+    const count: number = parsedIntervalCount.value
+    const now: CalendarTimestamp = base.times.now
+
+    return daysValue.map(d => createIntervalList(d, first, minutes, count, now))
+  })
+
+  const intervalFormatter = computed((): CalendarFormatter => {
+    if (props.intervalFormat) {
+      return props.intervalFormat as CalendarFormatter
+    }
+
+    return createNativeLocaleFormatter(
+      base.locale.current.value,
+      (tms, short) => (
+        !short ? { timeZone: 'UTC', hour: '2-digit', minute: '2-digit' }
+        : tms.minute === 0 ? { timeZone: 'UTC', hour: 'numeric' }
+        : { timeZone: 'UTC', hour: 'numeric', minute: '2-digit' }
+      )
+    )
+  })
+
+  function showIntervalLabelDefault (interval: CalendarTimestamp): boolean {
+    const first: CalendarTimestamp = intervals.value[0][0]
+    const isFirst: boolean = first.hour === interval.hour && first.minute === interval.minute
+    return !isFirst
+  }
+
+  function intervalStyleDefault (_interval: CalendarTimestamp): StyleValue {
+    return undefined
+  }
+
+  function getTimestampAtEvent (e: Event, day: CalendarTimestamp): CalendarTimestamp {
+    const timestamp: CalendarTimestamp = copyTimestamp(day)
+    const bounds = (e.currentTarget as HTMLElement).getBoundingClientRect()
+    const baseMinutes: number = firstMinute.value
+    const touchEvent: TouchEvent = e as TouchEvent
+    const mouseEvent: MouseEvent = e as MouseEvent
+    const touches: TouchList = touchEvent.changedTouches || touchEvent.touches
+    const clientY: number = touches && touches[0] ? touches[0].clientY : mouseEvent.clientY
+    const addIntervals: number = (clientY - bounds.top) / parsedIntervalHeight.value
+    const addMinutes: number = Math.floor(addIntervals * parsedIntervalMinutes.value)
+    const minutes: number = baseMinutes + addMinutes
+
+    return updateMinutes(timestamp, minutes, base.times.now)
+  }
+
+  function getSlotScope (timestamp: CalendarTimestamp): CalendarDayBodySlotScope {
+    const scope = copyTimestamp(timestamp) as any
+    scope.timeToY = timeToY
+    scope.timeDelta = timeDelta
+    scope.minutesToPixels = minutesToPixels
+    scope.week = days.value
+    return scope
+  }
+
+  function scrollToTime (time: VTime): boolean {
+    const y = timeToY(time)
+
+    const pane = scrollAreaRef.value
+
+    if (y === false || !pane) {
+      return false
+    }
+
+    pane.scrollTop = y
+
+    return true
+  }
+
+  function minutesToPixels (minutes: number): number {
+    return minutes / parsedIntervalMinutes.value * parsedIntervalHeight.value
+  }
+
+  function timeToY (time: VTime, clamp = true): number | false {
+    let y = timeDelta(time)
+
+    if (y !== false) {
+      y *= bodyHeight.value
+
+      if (clamp) {
+        if (y < 0) {
+          y = 0
+        }
+        if (y > bodyHeight.value) {
+          y = bodyHeight.value
         }
       }
+    }
 
-      return y
-    },
-    timeDelta (time: VTime): number | false {
-      const minutes = parseTime(time)
+    return y
+  }
 
-      if (minutes === false) {
-        return false
-      }
+  function timeDelta (time: VTime): number | false {
+    const minutes = parseTime(time)
 
-      const min: number = this.firstMinute
-      const gap: number = this.parsedIntervalCount * this.parsedIntervalMinutes
+    if (minutes === false) {
+      return false
+    }
 
-      return (minutes - min) / gap
-    },
-  },
-})
+    const min: number = firstMinute.value
+    const gap: number = parsedIntervalCount.value * parsedIntervalMinutes.value
+
+    return (minutes - min) / gap
+  }
+
+  return {
+    ...base,
+    scrollAreaRef,
+    parsedFirstInterval,
+    parsedIntervalMinutes,
+    parsedIntervalCount,
+    parsedIntervalHeight,
+    parsedFirstTime,
+    firstMinute,
+    bodyHeight,
+    days,
+    intervals,
+    intervalFormatter,
+    showIntervalLabelDefault,
+    intervalStyleDefault,
+    getTimestampAtEvent,
+    getSlotScope,
+    scrollToTime,
+    minutesToPixels,
+    timeToY,
+    timeDelta,
+  }
+}

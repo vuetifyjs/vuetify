@@ -1,12 +1,16 @@
 // Components
-import VCalendarCategory from './VCalendarCategory'
-import VCalendarDaily from './VCalendarDaily'
-import VCalendarMonthly from './VCalendarMonthly'
-import VCalendarWeekly from './VCalendarWeekly'
+import { VCalendarCategory } from './VCalendarCategory'
+import { VCalendarDaily } from './VCalendarDaily'
+import { VCalendarMonthly } from './VCalendarMonthly'
+import { VCalendarWeekly } from './VCalendarWeekly'
+
+// Composables
+import { makeCalendarBaseProps } from './mixins/calendar-base'
+import { makeCalendarWithEventsProps, useCalendarWithEvents } from './mixins/calendar-with-events'
 
 // Utilities
+import { computed, onMounted, onUpdated, ref, watch } from 'vue'
 import { getParsedCategories } from './util/parser'
-import props from './util/props'
 import {
   copyTimestamp,
   DAY_MIN,
@@ -24,25 +28,18 @@ import {
   updateWeekday,
   validateTimestamp,
 } from './util/timestamp'
-import { genericComponent } from '@/util'
+import { genericComponent, useRender } from '@/util'
 
 // Types
-import type { VNode } from 'vue'
-import type CalendarWithIntervals from './mixins/calendar-with-intervals'
+import type { PropType } from 'vue'
 import type {
-  CalendarCategory,
+  CalendarCategory, CalendarCategoryTextFunction,
   CalendarDayBodySlotScope,
-  CalendarDaySlotScope,
-  CalendarEvent,
-  CalendarEventParsed,
-  CalendarFormatter,
+  CalendarDaySlotScope, CalendarEvent, CalendarEventParsed,
   CalendarTimestamp,
 } from './types'
 import type { VTime, VTimestampInput } from './util/timestamp'
 import type { EventProp, GenericProps, JSXComponent } from '@/util'
-
-// Mixins
-import CalendarWithEvents from './mixins/calendar-with-events'
 
 // Types
 interface VCalendarRenderProps {
@@ -84,61 +81,101 @@ interface CalendarDayCategorySlotScope extends CalendarDayBodySlotScope {
   category: CalendarCategory
 }
 
-export const V2Calendar = genericComponent<new () => GenericProps<{
-  [key: `on${Capitalize<string>}:date`]: EventProp<[Event, CalendarTimestamp]>
-  [key: `on${Capitalize<string>}:day-category`]: EventProp<[Event, CalendarDayCategorySlotScope]>
-  [key: `on${Capitalize<string>}:day`]: EventProp<[Event, CalendarDayBodySlotScope]>
-  [key: `on${Capitalize<string>}:event`]: EventProp<[Event, EventSlotScope]>
-  [key: `on${Capitalize<string>}:interval`]: EventProp<[Event, CalendarTimestamp]>
-  [key: `on${Capitalize<string>}:more`]: EventProp<[Event, CalendarDaySlotScope]>
-  [key: `on${Capitalize<string>}:time-category`]: EventProp<[Event, CalendarDayCategorySlotScope]>
-  [key: `on${Capitalize<string>}:time`]: EventProp<[Event, CalendarDayBodySlotScope]>
-}, {
-  'category': CalendarDayCategorySlotScope
-  'day': DaySlotScope
-  'day-body': CalendarDayBodySlotScope
-  'day-header': DayHeaderSlotScope
-  'day-label': CalendarTimestamp
-  'day-label-header': CalendarTimestamp
-  'day-month': CalendarTimestamp
-  'event': EventSlotScope
-  'interval': CalendarDayCategorySlotScope
-  'interval-header': never
-}>>()({
+export const V2Calendar = genericComponent<new (
+  props: {
+    [key: `on${Capitalize<string>}:date`]: EventProp<[Event, CalendarTimestamp]>
+    [key: `on${Capitalize<string>}:day-category`]: EventProp<[Event, CalendarDayCategorySlotScope]>
+    [key: `on${Capitalize<string>}:day`]: EventProp<[Event, CalendarDayBodySlotScope]>
+    [key: `on${Capitalize<string>}:event`]: EventProp<[Event, EventSlotScope]>
+    [key: `on${Capitalize<string>}:interval`]: EventProp<[Event, CalendarTimestamp]>
+    [key: `on${Capitalize<string>}:more`]: EventProp<[Event, CalendarDaySlotScope]>
+    [key: `on${Capitalize<string>}:time-category`]: EventProp<[Event, CalendarDayCategorySlotScope]>
+    [key: `on${Capitalize<string>}:time`]: EventProp<[Event, CalendarDayBodySlotScope]>
+  },
+  slots: {
+    'category': CalendarDayCategorySlotScope
+    'day': DaySlotScope
+    'day-body': CalendarDayBodySlotScope
+    'day-header': DayHeaderSlotScope
+    'day-label': CalendarTimestamp
+    'day-label-header': CalendarTimestamp
+    'day-month': CalendarTimestamp
+    'event': EventSlotScope
+    'interval': CalendarDayCategorySlotScope
+    'interval-header': never
+  },
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'V2Calendar',
 
-  extends: CalendarWithEvents,
-
   props: {
-    ...props.calendar,
-    ...props.weeks,
-    ...props.intervals,
-    ...props.category,
+    modelValue: {
+      type: [String, Number, Date] as PropType<string | number | Date>,
+      validate: validateTimestamp,
+    },
+    categoryDays: {
+      type: [Number, String],
+      default: 1,
+      validate: (x: any) => isFinite(parseInt(x)) && parseInt(x) > 0,
+    },
+    categories: {
+      type: [Array, String] as PropType<CalendarCategory[] | string>,
+      default: '',
+    },
+    categoryText: {
+      type: [String, Function] as PropType<string | CalendarCategoryTextFunction>,
+    },
+    maxDays: {
+      type: Number,
+      default: 7,
+    },
+    categoryHideDynamic: {
+      type: Boolean,
+    },
+    categoryShowAll: {
+      type: Boolean,
+    },
+    categoryForInvalid: {
+      type: String,
+      default: '',
+    },
+
+    ...makeCalendarBaseProps(),
+    ...makeCalendarWithEventsProps(),
   },
 
-  data: () => ({
-    lastStart: null as CalendarTimestamp | null,
-    lastEnd: null as CalendarTimestamp | null,
-  }),
+  // emits: ['change', 'moved', 'update:modelValue', 'click:date'],
 
-  computed: {
-    parsedValue (): CalendarTimestamp {
-      return (validateTimestamp(this.modelValue)
-        ? parseTimestamp(this.modelValue, true)
-        : (this.parsedStart || this.times.today))
-    },
-    parsedCategoryDays (): number {
-      return parseInt(this.categoryDays) || 1
-    },
-    renderProps (): VCalendarRenderProps {
-      const around = this.parsedValue
+  setup (props, { slots, attrs, emit }) {
+    const rootRef = ref(null)
+    const lastStart = ref<CalendarTimestamp | null>(null)
+    const lastEnd = ref<CalendarTimestamp | null>(null)
+
+    const base = useCalendarWithEvents(props, slots, attrs)
+
+    const parsedValue = computed((): CalendarTimestamp => {
+      return (validateTimestamp(props.modelValue)
+        ? parseTimestamp(props.modelValue, true)
+        : (base.parsedStart.value || base.times.today))
+    })
+
+    const parsedCategoryDays = computed((): number => {
+      return parseInt(String(props.categoryDays)) || 1
+    })
+
+    const parsedCategories = computed((): CalendarCategory[] => {
+      return getParsedCategories(props.categories, props.categoryText)
+    })
+
+    const renderProps = computed((): VCalendarRenderProps => {
+      const around = parsedValue.value
       let component: any = null
-      let maxDays = this.maxDays
-      let weekdays = this.parsedWeekdays
-      let categories = this.parsedCategories
+      let maxDays = props.maxDays
+      let weekdays = base.parsedWeekdays.value
+      let categories = parsedCategories.value
       let start = around
       let end = around
-      switch (this.type) {
+
+      switch (props.type) {
         case 'month':
           component = VCalendarMonthly
           start = getStartOfMonth(around)
@@ -146,8 +183,8 @@ export const V2Calendar = genericComponent<new () => GenericProps<{
           break
         case 'week':
           component = VCalendarDaily
-          start = this.getStartOfWeek(around)
-          end = this.getEndOfWeek(around)
+          start = base.getStartOfWeek(around)
+          end = base.getEndOfWeek(around)
           maxDays = 7
           break
         case 'day':
@@ -169,16 +206,16 @@ export const V2Calendar = genericComponent<new () => GenericProps<{
           break
         case 'custom-weekly':
           component = VCalendarWeekly
-          start = this.parsedStart || around
-          end = this.parsedEnd
+          start = base.parsedStart.value || around
+          end = base.parsedEnd.value
           break
         case 'custom-daily':
           component = VCalendarDaily
-          start = this.parsedStart || around
-          end = this.parsedEnd
+          start = base.parsedStart.value || around
+          end = base.parsedEnd.value
           break
         case 'category':
-          const days = this.parsedCategoryDays
+          const days = parsedCategoryDays.value
 
           component = VCalendarCategory
           end = relativeDays(copyTimestamp(end), nextDay, days)
@@ -190,84 +227,73 @@ export const V2Calendar = genericComponent<new () => GenericProps<{
             weekdays.push((start.weekday + i) % 7)
           }
 
-          categories = this.getCategoryList(categories)
+          categories = getCategoryList(categories)
           break
         default:
-          throw new Error(this.type + ' is not a valid Calendar type')
+          const type = props.type satisfies never
+          throw new Error(`${type} is not a valid Calendar type`)
       }
 
       return { component, start, end, maxDays, weekdays, categories }
-    },
-    eventWeekdays (): number[] {
-      return this.renderProps.weekdays
-    },
-    categoryMode (): boolean {
-      return this.type === 'category'
-    },
-    title (): string {
-      const { start, end } = this.renderProps
+    })
+
+    const eventWeekdays = computed((): number[] => {
+      return renderProps.value.weekdays
+    })
+
+    const categoryMode = computed((): boolean => {
+      return props.type === 'category'
+    })
+
+    const monthLongFormatter = computed(() => {
+      return base.getFormatter({
+        timeZone: 'UTC', month: 'long',
+      })
+    })
+
+    const monthShortFormatter = computed(() => {
+      return base.getFormatter({
+        timeZone: 'UTC', month: 'short',
+      })
+    })
+
+    const title = computed((): string => {
+      const { start, end } = renderProps.value
       const spanYears = start.year !== end.year
       const spanMonths = spanYears || start.month !== end.month
 
       if (spanYears) {
-        return this.monthShortFormatter(start, true) + ' ' + start.year + ' - ' + this.monthShortFormatter(end, true) + ' ' + end.year
+        return monthShortFormatter.value(start, true) + ' ' + start.year + ' - ' + monthShortFormatter.value(end, true) + ' ' + end.year
       }
 
       if (spanMonths) {
-        return this.monthShortFormatter(start, true) + ' - ' + this.monthShortFormatter(end, true) + ' ' + end.year
+        return monthShortFormatter.value(start, true) + ' - ' + monthShortFormatter.value(end, true) + ' ' + end.year
       } else {
-        return this.monthLongFormatter(start, false) + ' ' + start.year
+        return monthLongFormatter.value(start, false) + ' ' + start.year
       }
-    },
-    monthLongFormatter (): CalendarFormatter {
-      return this.getFormatter({
-        timeZone: 'UTC', month: 'long',
-      })
-    },
-    monthShortFormatter (): CalendarFormatter {
-      return this.getFormatter({
-        timeZone: 'UTC', month: 'short',
-      })
-    },
-    parsedCategories (): CalendarCategory[] {
-      return getParsedCategories(this.categories, this.categoryText)
-    },
-  },
+    })
 
-  watch: {
-    renderProps: 'checkChange',
-  },
-
-  mounted () {
-    this.updateEventVisibility()
-    this.checkChange()
-  },
-
-  updated () {
-    window.requestAnimationFrame(this.updateEventVisibility)
-  },
-
-  methods: {
-    checkChange (): void {
-      const { lastStart, lastEnd } = this
-      const { start, end } = this.renderProps
-      if (!lastStart || !lastEnd ||
-        start.date !== lastStart.date ||
-        end.date !== lastEnd.date) {
-        this.lastStart = start
-        this.lastEnd = end
-        this.$emit('change', { start, end })
+    // Methods
+    function checkChange (): void {
+      const { start, end } = renderProps.value
+      if (!lastStart.value || !lastEnd.value ||
+        start.date !== lastStart.value.date ||
+        end.date !== lastEnd.value.date) {
+        lastStart.value = start
+        lastEnd.value = end
+        emit('change', { start, end })
       }
-    },
-    move (amount = 1): void {
-      const moved = copyTimestamp(this.parsedValue)
+    }
+
+    function move (amount = 1): void {
+      const moved = copyTimestamp(parsedValue.value)
       const forward = amount > 0
       const mover = forward ? nextDay : prevDay
       const limit = forward ? DAYS_IN_MONTH_MAX : DAY_MIN
       let times = forward ? amount : -amount
 
       while (--times >= 0) {
-        switch (this.type) {
+        switch (props.type) {
           case 'month':
             moved.day = limit
             mover(moved)
@@ -282,89 +308,98 @@ export const V2Calendar = genericComponent<new () => GenericProps<{
             relativeDays(moved, mover, 4)
             break
           case 'category':
-            relativeDays(moved, mover, this.parsedCategoryDays)
+            relativeDays(moved, mover, parsedCategoryDays.value)
             break
         }
       }
 
       updateWeekday(moved)
       updateFormatted(moved)
-      updateRelative(moved, this.times.now)
+      updateRelative(moved, base.times.now)
 
-      if (this.modelValue instanceof Date) {
-        this.$emit('update:modelValue', timestampToDate(moved))
-      } else if (typeof this.modelValue === 'number') {
-        this.$emit('update:modelValue', timestampToDate(moved).getTime())
+      if (props.modelValue instanceof Date) {
+        emit('update:modelValue', timestampToDate(moved))
+      } else if (typeof props.modelValue === 'number') {
+        emit('update:modelValue', timestampToDate(moved).getTime())
       } else {
-        this.$emit('update:modelValue', moved.date)
+        emit('update:modelValue', moved.date)
       }
 
-      this.$emit('moved', moved)
-    },
-    next (amount = 1): void {
-      this.move(amount)
-    },
-    prev (amount = 1): void {
-      this.move(-amount)
-    },
-    timeToY (time: VTime, clamp = true): number | false {
-      const c = this.$refs.root as InstanceType<typeof CalendarWithIntervals>
+      emit('moved', moved)
+    }
+
+    function next (amount = 1): void {
+      move(amount)
+    }
+
+    function prev (amount = 1): void {
+      move(-amount)
+    }
+
+    function timeToY (time: VTime, clamp = true): number | false {
+      const c = rootRef.value as any
 
       if (c && c.timeToY) {
         return c.timeToY(time, clamp)
       } else {
         return false
       }
-    },
-    timeDelta (time: VTime): number | false {
-      const c = this.$refs.root as InstanceType<typeof CalendarWithIntervals>
+    }
+
+    function timeDelta (time: VTime): number | false {
+      const c = rootRef.value as any
 
       if (c && c.timeDelta) {
         return c.timeDelta(time)
       } else {
         return false
       }
-    },
-    minutesToPixels (minutes: number): number {
-      const c = this.$refs.root as InstanceType<typeof CalendarWithIntervals>
+    }
+
+    function minutesToPixels (minutes: number): number {
+      const c = rootRef.value as any
 
       if (c && c.minutesToPixels) {
         return c.minutesToPixels(minutes)
       } else {
         return -1
       }
-    },
-    scrollToTime (time: VTime): boolean {
-      const c = this.$refs.root as InstanceType<typeof CalendarWithIntervals>
+    }
+
+    function scrollToTime (time: VTime): boolean {
+      const c = rootRef.value as any
 
       if (c && c.scrollToTime) {
         return c.scrollToTime(time)
       } else {
         return false
       }
-    },
-    parseTimestamp (input: VTimestampInput, required?: false): CalendarTimestamp | null {
-      return parseTimestamp(input, required, this.times.now)
-    },
-    timestampToDate (timestamp: CalendarTimestamp): Date {
+    }
+
+    function parseTimestampFunc (input: VTimestampInput, required?: false): CalendarTimestamp | null {
+      return parseTimestamp(input, required, base.times.now)
+    }
+
+    function timestampToDateFunc (timestamp: CalendarTimestamp): Date {
       return timestampToDate(timestamp)
-    },
-    getCategoryList (categories: CalendarCategory[]): CalendarCategory[] {
-      if (!this.noEvents) {
+    }
+
+    function getCategoryList (categories: CalendarCategory[]): CalendarCategory[] {
+      if (!base.noEvents.value) {
         const categoryMap: any = categories.reduce((map: any, category, index) => {
           if (typeof category === 'object' && category.categoryName) map[category.categoryName] = { index, count: 0 }
           else if (typeof category === 'string') map[category] = { index, count: 0 }
           return map
         }, {})
 
-        if (!this.categoryHideDynamic || !this.categoryShowAll) {
+        if (!props.categoryHideDynamic || !props.categoryShowAll) {
           let categoryLength = categories.length
 
-          this.parsedEvents.forEach(ev => {
+          base.parsedEvents.value.forEach(ev => {
             let category = ev.category
 
             if (typeof category !== 'string') {
-              category = this.categoryForInvalid
+              category = props.categoryForInvalid
             }
 
             if (!category) {
@@ -373,7 +408,7 @@ export const V2Calendar = genericComponent<new () => GenericProps<{
 
             if (category in categoryMap) {
               categoryMap[category].count++
-            } else if (!this.categoryHideDynamic) {
+            } else if (!props.categoryHideDynamic) {
               categoryMap[category] = {
                 index: categoryLength++,
                 count: 1,
@@ -382,7 +417,7 @@ export const V2Calendar = genericComponent<new () => GenericProps<{
           })
         }
 
-        if (!this.categoryShowAll) {
+        if (!props.categoryShowAll) {
           for (const category in categoryMap) {
             if (categoryMap[category].count === 0) {
               delete categoryMap[category]
@@ -400,30 +435,70 @@ export const V2Calendar = genericComponent<new () => GenericProps<{
         })
       }
       return categories
-    },
-  },
+    }
 
-  render (): VNode {
-    const { start, end, maxDays, component: Component, weekdays, categories } = this.renderProps
-    return (
-      <Component
-        ref="root"
-        class={['v-calendar', { 'v-calendar-events': !this.noEvents }]}
-        v-resize_quiet={ this.updateEventVisibility }
-        role="grid"
-        { ...this.$props }
-        start={ start.date }
-        end={ end.date }
-        maxDays={ maxDays }
-        weekdays={ weekdays }
-        categories={ categories }
-        onClick:date={ (e: MouseEvent, day: CalendarTimestamp) => {
-          if (this.$attrs['onUpdate:modelValue']) this.$emit('update:modelValue', day.date)
-          if (this.$attrs['onClick:date']) this.$emit('click:date', e, day)
-        }}
-        v-slots={ this.getScopedSlots() }
-      />
-    )
+    // Setup watchers and lifecycle hooks
+    watch(renderProps, checkChange)
+
+    onMounted(() => {
+      base.updateEventVisibility()
+      checkChange()
+    })
+
+    onUpdated(() => {
+      window.requestAnimationFrame(base.updateEventVisibility)
+    })
+
+    // Render function
+    useRender(() => {
+      const { start, end, maxDays, component: Component, weekdays, categories } = renderProps.value
+      return (
+        <Component
+          ref={ rootRef }
+          class={['v-calendar', { 'v-calendar-events': !base.noEvents.value }]}
+          v-resize_quiet={ base.updateEventVisibility }
+          role="grid"
+          { ...props }
+          events={ props.events }
+          start={ start.date }
+          end={ end.date }
+          maxDays={ maxDays }
+          weekdays={ weekdays }
+          categories={ categories }
+          onClick:date={ (e: MouseEvent, day: CalendarTimestamp) => {
+            if (attrs['onUpdate:modelValue']) emit('update:modelValue', day.date)
+            if (attrs['onClick:date']) emit('click:date', e, day)
+          }}
+          v-slots={ base.getScopedSlots() }
+        />
+      )
+    })
+
+    return {
+      rootRef,
+      lastStart,
+      lastEnd,
+      parsedValue,
+      parsedCategoryDays,
+      renderProps,
+      eventWeekdays,
+      categoryMode,
+      title,
+      monthLongFormatter,
+      monthShortFormatter,
+      parsedCategories,
+      checkChange,
+      move,
+      next,
+      prev,
+      timeToY,
+      timeDelta,
+      minutesToPixels,
+      scrollToTime,
+      parseTimestamp: parseTimestampFunc,
+      timestampToDate: timestampToDateFunc,
+      getCategoryList,
+    }
   },
 })
 

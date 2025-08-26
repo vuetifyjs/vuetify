@@ -1,112 +1,132 @@
 // Styles
 import './VCalendarCategory.sass'
 
-// Mixins
-import VCalendarDaily from './VCalendarDaily'
+// Components
+import { VCalendarDaily } from './VCalendarDaily'
+
+// Composables
+import { makeCalendarBaseProps } from './mixins/calendar-base'
+import { makeCalendarWithIntervalsProps } from './mixins/calendar-with-intervals'
 
 // Utilities
+import { computed, shallowRef } from 'vue'
 import { getParsedCategories } from './util/parser'
-import props from './util/props'
-import { convertToUnit, defineComponent, getPrefixedEventHandlers } from '@/util'
+import { convertToUnit, defineComponent, getPrefixedEventHandlers, useRender } from '@/util'
 
 // Types
-import type { VNode } from 'vue'
-import type { CalendarCategory, CalendarTimestamp } from './types'
+import type { PropType } from 'vue'
+import type { CalendarCategory, CalendarCategoryTextFunction, CalendarTimestamp } from './types'
 
-export default defineComponent({
+export const VCalendarCategory = defineComponent({
   name: 'VCalendarCategory',
 
-  extends: VCalendarDaily,
-
-  props: props.category,
-
-  computed: {
-    classes (): any[] {
-      return [
-        'v-calendar-daily',
-        'v-calendar-category',
-        this.$vuetify.theme.themeClasses,
-      ]
+  props: {
+    categories: {
+      type: [Array, String] as PropType<CalendarCategory[] | string>,
+      default: '',
     },
-    parsedCategories (): CalendarCategory[] {
-      return getParsedCategories(this.categories, this.categoryText)
+    categoryText: [String, Function] as PropType<string | CalendarCategoryTextFunction>,
+    categoryForInvalid: {
+      type: String,
+      default: '',
     },
+
+    ...makeCalendarBaseProps(),
+    ...makeCalendarWithIntervalsProps(),
   },
-  methods: {
-    genDayHeader (day: CalendarTimestamp, index: number): VNode {
-      const scope = {
-        week: this.days, ...day, index,
-      }
 
-      return (
-        <div class="v-calendar-category__columns">
-          { this.parsedCategories.map(category => {
-            return this.genDayHeaderCategory(day, this.getCategoryScope(scope, category))
-          })}
-        </div>
-      )
-    },
-    getCategoryScope (scope: any, category: CalendarCategory) {
+  setup (props, { slots, attrs }) {
+    const dailyRef = shallowRef<VCalendarDaily>()
+
+    const parsedCategories = computed((): CalendarCategory[] => {
+      return getParsedCategories(props.categories, props.categoryText)
+    })
+
+    function getCategoryScope (scope: any, category: CalendarCategory) {
       const cat = typeof category === 'object' && category &&
-          category.categoryName === this.categoryForInvalid ? null : category
+          category.categoryName === props.categoryForInvalid ? null : category
       return {
         ...scope,
         category: cat,
       }
-    },
-    genDayHeaderCategory (day: CalendarTimestamp, scope: any): VNode {
+    }
+
+    function genDayHeader (scope: CalendarTimestamp & { week: any, index: number }) {
+      return (
+        <div class="v-calendar-category__columns">
+          { parsedCategories.value.map(category => {
+            return genDayHeaderCategory(scope, getCategoryScope(scope, category))
+          })}
+        </div>
+      )
+    }
+
+    function genDayHeaderCategory (day: CalendarTimestamp, scope: any) {
       const headerTitle = typeof scope.category === 'object' ? scope.category.categoryName : scope.category
-      const events = getPrefixedEventHandlers(this.$attrs, ':day-category', () => {
-        return this.getCategoryScope(this.getSlotScope(day), scope.category)
+      const events = getPrefixedEventHandlers(attrs, ':day-category', () => {
+        return getCategoryScope(dailyRef.value?.getSlotScope(day) || day, scope.category)
       })
       return (
         <div
           class="v-calendar-category__column-header"
           { ...events }
         >
-          { this.$slots.category?.(scope) ?? this.genDayHeaderCategoryTitle(headerTitle) }
-          { this.$slots['day-header']?.(scope) }
+          { slots.category?.(scope) ?? genDayHeaderCategoryTitle(headerTitle) }
+          { slots['day-header']?.(scope) }
         </div>
       )
-    },
-    genDayHeaderCategoryTitle (categoryName: string | null) {
+    }
+
+    function genDayHeaderCategoryTitle (categoryName: string | null) {
       return (
         <div class="v-calendar-category__category">
-          { categoryName === null ? this.categoryForInvalid : categoryName }
+          { categoryName === null ? props.categoryForInvalid : categoryName }
         </div>
       )
-    },
-    genDays (): VNode[] {
-      const days: VNode[] = []
-      this.days.forEach((d, j) => {
-        const day = new Array(this.parsedCategories.length || 1)
+    }
+
+    function genDays () {
+      if (!dailyRef.value) return []
+
+      const days: any[] = []
+      dailyRef.value.days.forEach((d: CalendarTimestamp, j: number) => {
+        const day = new Array(parsedCategories.value.length || 1)
         day.fill(d)
-        days.push(...day.map((v, i) => this.genDay(v, j, i)))
+        days.push(...day.map((v: CalendarTimestamp, i: number) => genDay(v, j, i)))
       })
       return days
-    },
-    genDay (day: CalendarTimestamp, index: number, categoryIndex: number): VNode {
-      const category = this.parsedCategories[categoryIndex]
-      const events = getPrefixedEventHandlers(this.$attrs, ':time', e => {
-        return this.getSlotScope(this.getTimestampAtEvent(e, day))
+    }
+
+    function genDay (day: CalendarTimestamp, index: number, categoryIndex: number) {
+      if (!dailyRef.value) return null
+
+      const category = parsedCategories.value[categoryIndex]
+      const events = getPrefixedEventHandlers(attrs, ':time', e => {
+        // TODO: shared composable instead of passing through template ref
+        return dailyRef.value!.getSlotScope(dailyRef.value!.getTimestampAtEvent(e, day))
       })
       return (
         <div
           key={ day.date + '-' + categoryIndex }
-          class={['v-calendar-daily__day', this.getRelativeClasses(day)]}
+          class={['v-calendar-daily__day', dailyRef.value.getRelativeClasses(day)]}
           { ...events }
         >
-          { this.genDayIntervals(index, category) }
-          { this.genDayBody(day, category) }
+          { genDayIntervals(index, category) }
+          { genDayBody(day, category) }
         </div>
       )
-    },
-    genDayIntervals (index: number, category: CalendarCategory): VNode[] {
-      return this.intervals[index].map(v => this.genDayInterval(v, category))
-    },
-    genDayInterval (interval: CalendarTimestamp, category: CalendarCategory): VNode {
-      const height: string | undefined = convertToUnit(this.intervalHeight)
-      const styler = this.intervalStyle || this.intervalStyleDefault
+    }
+
+    function genDayIntervals (index: number, category: CalendarCategory) {
+      if (!dailyRef.value) return []
+      return dailyRef.value.intervals[index].map((v: CalendarTimestamp) => genDayInterval(v, category))
+    }
+
+    function genDayInterval (interval: CalendarTimestamp, category: CalendarCategory) {
+      if (!dailyRef.value) return null
+
+      const height: string | undefined = convertToUnit(props.intervalHeight)
+      const styler = props.intervalStyle || dailyRef.value.intervalStyleDefault
 
       return (
         <div
@@ -114,29 +134,72 @@ export default defineComponent({
           class="v-calendar-daily__day-interval"
           style={[{ height }, styler({ ...interval, category })]}
         >
-          { this.$slots.interval?.(
-            this.getCategoryScope(this.getSlotScope(interval), category)
+          { slots.interval?.(
+            getCategoryScope(dailyRef.value.getSlotScope(interval), category)
           )}
         </div>
       )
-    },
-    genDayBody (day: CalendarTimestamp, category: CalendarCategory): VNode {
+    }
+
+    function genDayBody (day: CalendarTimestamp, category: CalendarCategory) {
       return (
         <div class="v-calendar-category__columns">
-          { this.genDayBodyCategory(day, category) }
+          { genDayBodyCategory(day, category) }
         </div>
       )
-    },
-    genDayBodyCategory (day: CalendarTimestamp, category: CalendarCategory): VNode {
-      const events = getPrefixedEventHandlers(this.$attrs, ':time-category', e => {
-        return this.getCategoryScope(this.getSlotScope(this.getTimestampAtEvent(e, day)), category)
+    }
+
+    function genDayBodyCategory (day: CalendarTimestamp, category: CalendarCategory) {
+      if (!dailyRef.value) return null
+
+      const events = getPrefixedEventHandlers(attrs, ':time-category', e => {
+        return getCategoryScope(
+          dailyRef.value!.getSlotScope(dailyRef.value!.getTimestampAtEvent(e, day)),
+          category
+        )
       })
 
       return (
         <div class="v-calendar-category__column" { ...events }>
-          { this.$slots['day-body']?.(this.getCategoryScope(this.getSlotScope(day), category)) }
+          { slots['day-body']?.(getCategoryScope(dailyRef.value.getSlotScope(day), category)) }
         </div>
       )
-    },
+    }
+
+    useRender(() => (
+      <VCalendarDaily
+        ref={ dailyRef }
+        class={[
+          'v-calendar-daily',
+          'v-calendar-category',
+        ]}
+        { ...props }
+      >
+        {{
+          ...slots,
+          default: () => {
+            // TODO: override rendering
+          },
+          'day-header': (scope: any) => genDayHeader(scope),
+          'day-body': () => null,
+        }}
+      </VCalendarDaily>
+    ))
+
+    return {
+      parsedCategories,
+      getCategoryScope,
+      genDayHeader,
+      genDayHeaderCategory,
+      genDayHeaderCategoryTitle,
+      genDays,
+      genDay,
+      genDayIntervals,
+      genDayInterval,
+      genDayBody,
+      genDayBodyCategory,
+    }
   },
 })
+
+export type VCalendarCategory = InstanceType<typeof VCalendarCategory>
