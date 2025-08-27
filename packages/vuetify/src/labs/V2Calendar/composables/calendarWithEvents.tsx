@@ -5,7 +5,7 @@ import './calendarWithEvents.sass'
 import { useCalendarBase } from './calendarBase'
 
 // Utilities
-import { computed, ref } from 'vue'
+import { computed, inject, provide, ref } from 'vue'
 import { CalendarEventOverlapModes } from '../modes'
 import {
   isEventHiddenOn,
@@ -18,7 +18,7 @@ import { diffMinutes, getDayIdentifier } from '../util/timestamp'
 import { getPrefixedEventHandlers, propsFactory } from '@/util'
 
 // Types
-import type { PropType, VNode } from 'vue'
+import type { InjectionKey, PropType, VNode } from 'vue'
 import type { CalendarBaseProps } from './calendarBase'
 import type {
   CalendarCategory,
@@ -150,8 +150,25 @@ interface CalendarWithEventsProps extends CalendarBaseProps {
   type: 'month' | 'week' | 'day' | '4day' | 'custom-weekly' | 'custom-daily' | 'category'
 }
 
-export function useCalendarWithEvents (props: CalendarWithEventsProps, slots: any, attrs: any) {
-  const base = useCalendarBase(props)
+const VCalendarWithEventsSymbol: InjectionKey<
+  ReturnType<typeof createState>
+> = Symbol.for('vuetify:calendar:withEvents')
+
+export function useCalendarWithEvents (props: CalendarWithEventsProps, slots: any, attrs: any, root = false) {
+  if (!root) {
+    const provided = inject(VCalendarWithEventsSymbol, null)
+    if (provided) return provided
+  }
+
+  const state = createState(props, slots, attrs, root)
+
+  provide(VCalendarWithEventsSymbol, state)
+
+  return state
+}
+
+function createState (props: CalendarWithEventsProps, slots: any, attrs: any, root = false) {
+  const base = useCalendarBase(props, root)
 
   const noEvents = computed((): boolean => {
     return !Array.isArray(props.events) || props.events.length === 0

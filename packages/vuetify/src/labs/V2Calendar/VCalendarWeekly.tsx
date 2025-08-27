@@ -58,7 +58,6 @@ export const VCalendarWeekly = defineComponent({
   setup (props, { slots, attrs }) {
     const base = useCalendarBase(props)
 
-    const staticClass = 'v-calendar-weekly'
     const theme = useTheme()
 
     const parsedMinWeeks = computed((): number => {
@@ -243,22 +242,9 @@ export const VCalendarWeekly = defineComponent({
       )
     }
 
-    function genDayMonth (day: CalendarTimestamp) {
-      const color = day.present ? props.color : undefined
-
-      return (
-        <div
-          { ...base.getColorProps({ text: color }) }
-          class="v-calendar-weekly__day-month"
-        >
-          { slots['day-month']?.(day) ?? monthFormatter.value(day, props.shortMonths) }
-        </div>
-      )
-    }
-
     useRender(() => (
       <div
-        class={[staticClass, theme.themeClasses.value]}
+        class={['v-calendar-weekly', theme.themeClasses.value]}
         onDragstart={ (e: MouseEvent) => e.preventDefault() }
       >
         { !props.hideHeader ? genHead() : undefined }
@@ -267,21 +253,11 @@ export const VCalendarWeekly = defineComponent({
     ))
 
     return {
+      ...base,
       days,
       todayWeek,
       monthFormatter,
       isOutside,
-      genHead,
-      genHeadDays,
-      genHeadDay,
-      genWeeks,
-      genWeek,
-      getWeekNumber,
-      genWeekNumber,
-      genDay,
-      genDayLabel,
-      genDayLabelButton,
-      genDayMonth,
     }
   },
 })

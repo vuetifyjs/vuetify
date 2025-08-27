@@ -180,7 +180,7 @@ export const VCalendarDaily = defineComponent({
       return (
         <div class="v-calendar-daily__day-container">
           { genBodyIntervals() }
-          { genDays() }
+          { slots.days?.() ?? genDays() }
         </div>
       )
     }
@@ -280,23 +280,13 @@ export const VCalendarDaily = defineComponent({
     ))
 
     return {
+      ...base,
       scrollPush,
       scrollArea,
       pane,
       init,
       onResize,
       getScrollPush,
-      timeToY: base.timeToY,
-      timeDelta: base.timeDelta,
-      minutesToPixels: base.minutesToPixels,
-      genHead,
-      genBody,
-      getSlotScope: base.getSlotScope,
-      getTimestampAtEvent: base.getTimestampAtEvent,
-      getRelativeClasses: base.getRelativeClasses,
-      intervals: base.intervals,
-      days: base.days,
-      intervalStyleDefault: base.intervalStyleDefault,
     }
   },
 })

@@ -38,7 +38,7 @@ import type {
   CalendarDaySlotScope, CalendarEvent, CalendarEventParsed,
   CalendarTimestamp,
 } from './types'
-import type { VTime, VTimestampInput } from './util/timestamp'
+import type { VTimestampInput } from './util/timestamp'
 import type { EventProp, GenericProps, JSXComponent } from '@/util'
 
 // Types
@@ -146,7 +146,6 @@ export const V2Calendar = genericComponent<new (
   // emits: ['change', 'moved', 'update:modelValue', 'click:date'],
 
   setup (props, { slots, attrs, emit }) {
-    const rootRef = ref(null)
     const lastStart = ref<CalendarTimestamp | null>(null)
     const lastEnd = ref<CalendarTimestamp | null>(null)
 
@@ -336,46 +335,6 @@ export const V2Calendar = genericComponent<new (
       move(-amount)
     }
 
-    function timeToY (time: VTime, clamp = true): number | false {
-      const c = rootRef.value as any
-
-      if (c && c.timeToY) {
-        return c.timeToY(time, clamp)
-      } else {
-        return false
-      }
-    }
-
-    function timeDelta (time: VTime): number | false {
-      const c = rootRef.value as any
-
-      if (c && c.timeDelta) {
-        return c.timeDelta(time)
-      } else {
-        return false
-      }
-    }
-
-    function minutesToPixels (minutes: number): number {
-      const c = rootRef.value as any
-
-      if (c && c.minutesToPixels) {
-        return c.minutesToPixels(minutes)
-      } else {
-        return -1
-      }
-    }
-
-    function scrollToTime (time: VTime): boolean {
-      const c = rootRef.value as any
-
-      if (c && c.scrollToTime) {
-        return c.scrollToTime(time)
-      } else {
-        return false
-      }
-    }
-
     function parseTimestampFunc (input: VTimestampInput, required?: false): CalendarTimestamp | null {
       return parseTimestamp(input, required, base.times.now)
     }
@@ -454,7 +413,6 @@ export const V2Calendar = genericComponent<new (
       const { start, end, maxDays, component: Component, weekdays, categories } = renderProps.value
       return (
         <Component
-          ref={ rootRef }
           class={['v-calendar', { 'v-calendar-events': !base.noEvents.value }]}
           v-resize_quiet={ base.updateEventVisibility }
           role="grid"
@@ -475,7 +433,7 @@ export const V2Calendar = genericComponent<new (
     })
 
     return {
-      rootRef,
+      ...base,
       lastStart,
       lastEnd,
       parsedValue,
@@ -491,10 +449,6 @@ export const V2Calendar = genericComponent<new (
       move,
       next,
       prev,
-      timeToY,
-      timeDelta,
-      minutesToPixels,
-      scrollToTime,
       parseTimestamp: parseTimestampFunc,
       timestampToDate: timestampToDateFunc,
       getCategoryList,

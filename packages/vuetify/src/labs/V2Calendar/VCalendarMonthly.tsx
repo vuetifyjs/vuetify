@@ -5,11 +5,10 @@ import './VCalendarWeekly.sass'
 import { VCalendarWeekly } from './VCalendarWeekly'
 
 // Composables
-import { makeCalendarBaseProps } from './composables/calendarBase'
-import { forwardRefs } from '@/composables/forwardRefs'
+import { makeCalendarBaseProps, useCalendarBase } from './composables/calendarBase'
 
 // Utilities
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 import { getEndOfMonth, getStartOfMonth, parseTimestamp } from './util/timestamp'
 import { defineComponent, useRender } from '@/util'
 
@@ -24,6 +23,8 @@ export const VCalendarMonthly = defineComponent({
   },
 
   setup (props, { slots }) {
+    const base = useCalendarBase(props)
+
     const parsedStart = computed((): CalendarTimestamp => {
       return getStartOfMonth(parseTimestamp(props.start, true))
     })
@@ -32,11 +33,8 @@ export const VCalendarMonthly = defineComponent({
       return getEndOfMonth(parseTimestamp(props.end!, true))
     })
 
-    const weeklyRef = ref<VCalendarWeekly>()
-
     useRender(() => (
       <VCalendarWeekly
-        ref={ weeklyRef }
         class="v-calendar-monthly"
         { ...props }
         start={ parsedStart.value.date }
@@ -45,10 +43,11 @@ export const VCalendarMonthly = defineComponent({
       />
     ))
 
-    return forwardRefs({
+    return {
+      ...base,
       parsedStart,
       parsedEnd,
-    }, weeklyRef)
+    }
   },
 })
 

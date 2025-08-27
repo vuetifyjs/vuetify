@@ -6,10 +6,10 @@ import { VCalendarDaily } from './VCalendarDaily'
 
 // Composables
 import { makeCalendarBaseProps } from './composables/calendarBase'
-import { makeCalendarWithIntervalsProps } from './composables/calendarWithIntervals'
+import { makeCalendarWithIntervalsProps, useCalendarWithIntervals } from './composables/calendarWithIntervals'
 
 // Utilities
-import { computed, shallowRef } from 'vue'
+import { computed } from 'vue'
 import { getParsedCategories } from './util/parser'
 import { convertToUnit, defineComponent, getPrefixedEventHandlers, useRender } from '@/util'
 
@@ -36,7 +36,7 @@ export const VCalendarCategory = defineComponent({
   },
 
   setup (props, { slots, attrs }) {
-    const dailyRef = shallowRef<VCalendarDaily>()
+    const base = useCalendarWithIntervals(props)
 
     const parsedCategories = computed((): CalendarCategory[] => {
       return getParsedCategories(props.categories, props.categoryText)
@@ -64,7 +64,7 @@ export const VCalendarCategory = defineComponent({
     function genDayHeaderCategory (day: CalendarTimestamp, scope: any) {
       const headerTitle = typeof scope.category === 'object' ? scope.category.categoryName : scope.category
       const events = getPrefixedEventHandlers(attrs, ':day-category', () => {
-        return getCategoryScope(dailyRef.value?.getSlotScope(day) || day, scope.category)
+        return getCategoryScope(base.getSlotScope(day) || day, scope.category)
       })
       return (
         <div
@@ -86,10 +86,8 @@ export const VCalendarCategory = defineComponent({
     }
 
     function genDays () {
-      if (!dailyRef.value) return []
-
       const days: any[] = []
-      dailyRef.value.days.forEach((d: CalendarTimestamp, j: number) => {
+      base.days.value.forEach((d: CalendarTimestamp, j: number) => {
         const day = new Array(parsedCategories.value.length || 1)
         day.fill(d)
         days.push(...day.map((v: CalendarTimestamp, i: number) => genDay(v, j, i)))
@@ -98,17 +96,14 @@ export const VCalendarCategory = defineComponent({
     }
 
     function genDay (day: CalendarTimestamp, index: number, categoryIndex: number) {
-      if (!dailyRef.value) return null
-
       const category = parsedCategories.value[categoryIndex]
       const events = getPrefixedEventHandlers(attrs, ':time', e => {
-        // TODO: shared composable instead of passing through template ref
-        return dailyRef.value!.getSlotScope(dailyRef.value!.getTimestampAtEvent(e, day))
+        return base.getSlotScope(base.getTimestampAtEvent(e, day))
       })
       return (
         <div
           key={ day.date + '-' + categoryIndex }
-          class={['v-calendar-daily__day', dailyRef.value.getRelativeClasses(day)]}
+          class={['v-calendar-daily__day', base.getRelativeClasses(day)]}
           { ...events }
         >
           { genDayIntervals(index, category) }
@@ -118,15 +113,12 @@ export const VCalendarCategory = defineComponent({
     }
 
     function genDayIntervals (index: number, category: CalendarCategory) {
-      if (!dailyRef.value) return []
-      return dailyRef.value.intervals[index].map((v: CalendarTimestamp) => genDayInterval(v, category))
+      return base.intervals.value[index].map((v: CalendarTimestamp) => genDayInterval(v, category))
     }
 
     function genDayInterval (interval: CalendarTimestamp, category: CalendarCategory) {
-      if (!dailyRef.value) return null
-
       const height: string | undefined = convertToUnit(props.intervalHeight)
-      const styler = props.intervalStyle || dailyRef.value.intervalStyleDefault
+      const styler = props.intervalStyle || base.intervalStyleDefault
 
       return (
         <div
@@ -135,7 +127,7 @@ export const VCalendarCategory = defineComponent({
           style={[{ height }, styler({ ...interval, category })]}
         >
           { slots.interval?.(
-            getCategoryScope(dailyRef.value.getSlotScope(interval), category)
+            getCategoryScope(base.getSlotScope(interval), category)
           )}
         </div>
       )
@@ -150,25 +142,22 @@ export const VCalendarCategory = defineComponent({
     }
 
     function genDayBodyCategory (day: CalendarTimestamp, category: CalendarCategory) {
-      if (!dailyRef.value) return null
-
       const events = getPrefixedEventHandlers(attrs, ':time-category', e => {
         return getCategoryScope(
-          dailyRef.value!.getSlotScope(dailyRef.value!.getTimestampAtEvent(e, day)),
+          base.getSlotScope(base.getTimestampAtEvent(e, day)),
           category
         )
       })
 
       return (
         <div class="v-calendar-category__column" { ...events }>
-          { slots['day-body']?.(getCategoryScope(dailyRef.value.getSlotScope(day), category)) }
+          { slots['day-body']?.(getCategoryScope(base.getSlotScope(day), category)) }
         </div>
       )
     }
 
     useRender(() => (
       <VCalendarDaily
-        ref={ dailyRef }
         class={[
           'v-calendar-daily',
           'v-calendar-category',
@@ -177,27 +166,15 @@ export const VCalendarCategory = defineComponent({
       >
         {{
           ...slots,
-          default: () => {
-            // TODO: override rendering
-          },
-          'day-header': (scope: any) => genDayHeader(scope),
-          'day-body': () => null,
+          days: genDays,
+          'day-header': genDayHeader,
         }}
       </VCalendarDaily>
     ))
 
     return {
+      ...base,
       parsedCategories,
-      getCategoryScope,
-      genDayHeader,
-      genDayHeaderCategory,
-      genDayHeaderCategoryTitle,
-      genDays,
-      genDay,
-      genDayIntervals,
-      genDayInterval,
-      genDayBody,
-      genDayBodyCategory,
     }
   },
 })
