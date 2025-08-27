@@ -85,6 +85,9 @@ export default {
     am: 'לפנה"צ',
     pm: 'אחה"צ',
     title: 'בחר שעה',
+    hour: 'Hour',
+    minute: 'Minute',
+    second: 'Second',
   },
   pagination: {
     ariaLabel: {
