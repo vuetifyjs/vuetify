@@ -1,6 +1,4 @@
 <template>
-  <PromotedBitterBrains v-if="user.one.ads.enabled" />
-
   <PromotedCarbon v-if="user.one.ads.enabled" />
 
   <VoPromotionsCardVuetify v-else-if="user.one.ads.house" />

@@ -136,7 +136,6 @@ declare module 'vue' {
     IntroductionSlaDeck: typeof import('./src/components/introduction/SlaDeck.vue')['default']
     PageFeatures: typeof import('./src/components/PageFeatures.vue')['default']
     PromotedBase: typeof import('./src/components/promoted/Base.vue')['default']
-    PromotedBitterBrains: typeof import('./src/components/promoted/BitterBrains.vue')['default']
     PromotedCarbon: typeof import('./src/components/promoted/Carbon.vue')['default']
     PromotedDiscovery: typeof import('./src/components/promoted/Discovery.vue')['default']
     PromotedEntry: typeof import('./src/components/promoted/Entry.vue')['default']
