@@ -408,9 +408,9 @@ Lastly, do not forget to install [icons](/features/icon-fonts/).
 
 ## Fonts
 
-Vuetify uses Roboto as its default font. To ensure your project renders correctly, you need to add the Roboto font yourself. We recommend using @fontsource/roboto or bundling with unplugin-fonts.
+Vuetify uses Roboto as its default font. To ensure your project renders correctly, you need to add the Roboto font yourself. We recommend using @fontsource/roboto or bundling with unplugin-fonts which is the default used in [vuetify-create](https://github.com/vuetifyjs/create) installations.
 
-### Option A — Install via @fontsource/roboto (recommended)
+### Option A — Install via @fontsource/roboto
 
 ::: tabs
 
@@ -451,7 +451,7 @@ import '@fontsource/roboto/700-italic.css'
 import '@fontsource/roboto/900-italic.css'
 ```
 
-### Option B — Install via unplugin-fonts + @fontsource
+### Option B — Install via unplugin-fonts + @fontsource  (recommended)
 
 ::: tabs
 
