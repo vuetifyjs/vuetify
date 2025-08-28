@@ -21,6 +21,7 @@ import { VTabsSymbol } from './shared'
 import { convertToUnit, genericComponent, isObject, pick, propsFactory, useRender } from '@/util'
 
 // Types
+import type { VSlideGroupSlots } from 'lib/components/VSlideGroup/VSlideGroup'
 import type { PropType } from 'vue'
 import type { GenericProps } from '@/util'
 
@@ -30,7 +31,7 @@ export type VTabsSlot<T> = {
   item: T
 }
 
-export type VTabsSlots<T> = {
+export type VTabsSlots<T> = Pick<VSlideGroupSlots, 'next' | 'prev'> & {
   default: never
   tab: VTabsSlot<T>
   item: VTabsSlot<T>
@@ -144,19 +145,23 @@ export const VTabs = genericComponent<new <T = TabItem>(
             { ...scopeId }
             { ...attrs }
           >
-            { slots.default?.() ?? items.value.map(item => (
-              slots.tab?.({ item }) ?? (
-                <VTab
-                  { ...item }
-                  key={ item.text }
-                  value={ item.value }
-                  spaced={ props.spaced }
-                  v-slots={{
-                    default: slots[`tab.${item.value}`] ? () => slots[`tab.${item.value}`]?.({ item }) : undefined,
-                  }}
-                />
-              )
-            ))}
+            {{
+              default: slots.default ?? (() => items.value.map(item => (
+                slots.tab?.({ item }) ?? (
+                  <VTab
+                    { ...item }
+                    key={ item.text }
+                    value={ item.value }
+                    spaced={ props.spaced }
+                    v-slots={{
+                      default: slots[`tab.${item.value}`] ? () => slots[`tab.${item.value}`]?.({ item }) : undefined,
+                    }}
+                  />
+                )
+              ))),
+              prev: slots.prev,
+              next: slots.next,
+            }}
           </VSlideGroup>
 
           { hasWindow && (
