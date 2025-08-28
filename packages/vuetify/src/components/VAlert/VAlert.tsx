@@ -114,7 +114,7 @@ export const VAlert = genericComponent<VAlertSlots>()({
       return props.icon ?? `$${props.type}`
     })
 
-    const { iconSize } = useIconSizes(props, () => props.prominent ? 44 : 28)
+    const { iconSize } = useIconSizes(props, () => props.prominent ? 44 : undefined)
     const { themeClasses } = provideTheme(props)
     const { colorClasses, colorStyles, variantClasses } = useVariant(() => ({
       color: props.color ?? props.type,
@@ -146,7 +146,9 @@ export const VAlert = genericComponent<VAlertSlots>()({
       const iconProps = {
         density: props.density,
         icon: icon.value,
-        size: iconSize.value,
+        size: props.iconSize || props.prominent
+          ? iconSize.value
+          : undefined,
       }
 
       return isActive.value && (

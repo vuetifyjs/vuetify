@@ -44,6 +44,9 @@
               &.v-data-table-column--no-padding
                 padding: 0 8px
 
+              &.v-data-table-column--empty
+                padding: 0
+
               &.v-data-table-column--nowrap
                 text-overflow: ellipsis
                 text-wrap: nowrap
@@ -77,17 +80,28 @@
                 height: fit-content
 
   .v-data-table-column--fixed,
+  .v-data-table-column--fixed-end,
   .v-data-table__th--sticky
-    background: $table-background
+    background-color: $table-background
+    background-image: inherit
     position: sticky !important
     left: 0
     z-index: 1
 
+  .v-data-table-column--fixed-end
+    left: unset
+    right: 0
+
   .v-data-table-column--last-fixed
     border-right: 1px solid rgba(var(--v-border-color), var(--v-border-opacity))
 
-  .v-data-table.v-table--fixed-header > .v-table__wrapper > table > thead > tr > th.v-data-table-column--fixed
-    z-index: 2
+  .v-data-table-column--first-fixed-end
+    border-left: 1px solid rgba(var(--v-border-color), var(--v-border-opacity))
+
+  .v-data-table.v-table--fixed-header > .v-table__wrapper > table > thead > tr
+    > th.v-data-table-column--fixed,
+    > th.v-data-table-column--fixed-end
+      z-index: 2
 
   .v-data-table-group-header-row
     td
@@ -102,7 +116,7 @@
       opacity: $data-table-loading-opacity
 
   .v-data-table-group-header-row__column
-    padding-left: calc(var(--v-data-table-group-header-row-depth) * 16px) !important
+    padding-inline-start: calc(var(--v-data-table-group-header-row-depth) * 16px) !important
 
   .v-data-table-header__content
     display: flex

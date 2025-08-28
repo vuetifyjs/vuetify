@@ -14,7 +14,7 @@
     </page-feature-chip>
 
     <page-feature-chip
-      v-if="one.isSubscriber && user.pins"
+      v-if="one.isSubscriber && user.ecosystem.docs.pins.enabled"
       :prepend-icon="`mdi-pin${!pinned ? '-outline' : ''}`"
       text="Pin"
       @click="onClickPin"
@@ -90,7 +90,7 @@
     </page-feature-chip>
 
     <div
-      v-if="isClipboardSupported"
+      v-if="isClipboardSupported && !isGeneratedPage"
       class="d-inline-block"
       v-tooltip:top="{
         disabled: one.isSubscriber,

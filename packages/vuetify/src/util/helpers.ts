@@ -225,7 +225,7 @@ type MaybePick<
 export function pick<
   T extends object,
   U extends Extract<keyof T, string>
-> (obj: T, paths: U[]): MaybePick<T, U> {
+> (obj: T, paths: readonly U[]): MaybePick<T, U> {
   const found: any = {}
 
   for (const key of paths) {
@@ -721,6 +721,15 @@ export function ensureValidVNode (vnodes: VNodeArrayChildren): VNodeArrayChildre
     : null
 }
 
+type Slot<T> = [T] extends [never] ? () => VNodeChild : (arg: T) => VNodeChild
+
+export function renderSlot <T> (slot: Slot<never> | undefined, fallback?: Slot<never> | undefined): VNodeChild
+export function renderSlot <T> (slot: Slot<T> | undefined, props: T, fallback?: Slot<T> | undefined): VNodeChild
+export function renderSlot (slot?: Slot<unknown>, props?: unknown, fallback?: Slot<unknown>) {
+  // TODO: check if slot returns elements: #18308
+  return slot?.(props) ?? fallback?.(props)
+}
+
 export function defer (timeout: number, cb: () => void) {
   if (!IN_BROWSER || timeout === 0) {
     cb()
@@ -824,3 +833,5 @@ export function onlyDefinedProps (props: Record<string, any>) {
   return Object.fromEntries(Object.entries(props)
     .filter(([key, v]) => booleanAttributes.includes(key) ? !!v : v !== undefined))
 }
+
+export type NonEmptyArray<T> = [T, ...T[]]

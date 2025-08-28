@@ -40,6 +40,7 @@
       "dates",
       "display-and-platform",
       "global-configuration",
+      "hotkey",
       "icon-fonts",
       "internationalization",
       "scrolling",
@@ -78,7 +79,6 @@
   },
   {
     "title": "concepts",
-    "emphasized": true,
     "inactiveIcon": "mdi-puzzle-outline",
     "activeIcon": "mdi-puzzle",
     "items": [
@@ -207,6 +207,7 @@
       { "subheader": "pickers" },
       "color-pickers",
       "date-pickers",
+      "time-pickers",
       { "divider": true },
       { "subheader": "providers" },
       "defaults-providers",
@@ -222,7 +223,9 @@
     "title": "api",
     "inactiveIcon": "mdi-flask-empty-outline",
     "activeIcon": "mdi-flask-outline",
-    "items": []
+    "items": [
+      "hotkey"
+    ]
   },
   {
     "title": "directives",
@@ -266,6 +269,10 @@
         "subfolder": "components"
       },
       {
+        "title": "pie-charts",
+        "subfolder": "components"
+      },
+      {
         "title": "pull-to-refresh",
         "subfolder": "components"
       },
@@ -274,11 +281,15 @@
         "subfolder": "components"
       },
       {
-        "title": "time-pickers",
+        "title": "mask-inputs",
         "subfolder": "components"
       },
       {
-        "title": "mask-inputs",
+        "title": "hotkeys",
+        "subfolder": "components"
+      },
+      {
+        "title": "videos",
         "subfolder": "components"
       },
       {

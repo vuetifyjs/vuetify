@@ -61,7 +61,6 @@ export const makeVDataTableHeadersProps = propsFactory({
   color: String,
   disableSort: Boolean,
   fixedHeader: Boolean,
-  lastFixed: Boolean,
   multiSort: Boolean,
   sortAscIcon: {
     type: IconValue,
@@ -95,12 +94,16 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
     const { loaderClasses } = useLoader(props)
 
     function getFixedStyles (column: InternalDataTableHeader, y: number): CSSProperties | undefined {
-      if (!(props.sticky || props.fixedHeader) && !(column.fixed || column.lastFixed)) return undefined
+      if (!(props.sticky || props.fixedHeader) && !column.fixed) return undefined
+
+      const fixedSide = typeof column.fixed === 'string' ? column.fixed
+        : column.fixed ? 'start'
+        : 'none'
 
       return {
         position: 'sticky',
-        left: column.fixed || column.lastFixed ? convertToUnit(column.fixedOffset) : undefined,
-        right: column.lastFixed ? convertToUnit(column.fixedOffset ?? 0) : undefined,
+        left: fixedSide === 'start' ? convertToUnit(column.fixedOffset) : undefined,
+        right: fixedSide === 'end' ? convertToUnit(column.fixedEndOffset) : undefined,
         top: (props.sticky || props.fixedHeader) ? `calc(var(--v-table-header-height) * ${y})` : undefined,
       }
     }
@@ -144,6 +147,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
 
     const VDataTableHeaderCell = ({ column, x, y }: { column: InternalDataTableHeader, x: number, y: number }) => {
       const noPadding = column.key === 'data-table-select' || column.key === 'data-table-expand'
+      const isEmpty = column.key === 'data-table-group' && column.width === 0 && !column.title
       const headerProps = mergeProps(props.headerProps ?? {}, column.headerProps ?? {})
 
       return (
@@ -166,13 +170,16 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
           }}
           colspan={ column.colspan }
           rowspan={ column.rowspan }
-          onClick={ column.sortable ? () => toggleSort(column) : undefined }
           fixed={ column.fixed }
           nowrap={ column.nowrap }
           lastFixed={ column.lastFixed }
+          firstFixedEnd={ column.firstFixedEnd }
           noPadding={ noPadding }
+          empty={ isEmpty }
+          tabindex={ column.sortable ? 0 : undefined }
+          onClick={ column.sortable ? () => toggleSort(column) : undefined }
+          onKeydown={ column.sortable ? (event: KeyboardEvent) => handleEnterKeyPress(event, column) : undefined }
           { ...headerProps }
-          onKeydown={ (event: KeyboardEvent) => column.sortable && handleEnterKeyPress(event, column) }
         >
           {{
             default: () => {
@@ -189,6 +196,8 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
               }
 
               if (slots[columnSlotName]) return slots[columnSlotName]!(columnSlotProps)
+
+              if (isEmpty) return ''
 
               if (column.key === 'data-table-select') {
                 return slots['header.data-table-select']?.(columnSlotProps) ?? (showSelectAll.value && (
@@ -267,7 +276,6 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
               onClick:append={ () => selectAll(!allSelected.value) }
             >
               {{
-                ...slots,
                 chip: props => (
                   <VChip
                     onClick={ props.item.raw?.sortable ? () => toggleSort(props.item.raw) : undefined }

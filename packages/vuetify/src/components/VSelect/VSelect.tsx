@@ -367,7 +367,7 @@ export const VSelect = genericComponent<new <
     watch(() => props.items, (newVal, oldVal) => {
       if (menu.value) return
 
-      if (isFocused.value && !oldVal.length && newVal.length) {
+      if (isFocused.value && props.hideNoData && !oldVal.length && newVal.length) {
         menu.value = true
       }
     })
@@ -393,7 +393,7 @@ export const VSelect = genericComponent<new <
         <VTextField
           ref={ vTextFieldRef }
           { ...textFieldProps }
-          modelValue={ model.value.map(v => v.props.value).join(', ') }
+          modelValue={ model.value.map(v => v.props.title).join(', ') }
           onUpdate:modelValue={ onModelUpdate }
           v-model:focused={ isFocused.value }
           validationValue={ model.externalValue }
@@ -448,6 +448,7 @@ export const VSelect = genericComponent<new <
                       onKeydown={ onListKeydown }
                       onFocusin={ onFocusin }
                       tabindex="-1"
+                      selectable
                       aria-live="polite"
                       aria-label={ `${props.label}-list` }
                       color={ props.itemColor ?? props.color }
@@ -470,13 +471,13 @@ export const VSelect = genericComponent<new <
                             onClick: () => select(item, null),
                           })
 
-                          if (item.raw.type === 'divider') {
+                          if (item.type === 'divider') {
                             return slots.divider?.({ props: item.raw, index }) ?? (
                               <VDivider { ...item.props } key={ `divider-${index}` } />
                             )
                           }
 
-                          if (item.raw.type === 'subheader') {
+                          if (item.type === 'subheader') {
                             return slots.subheader?.({ props: item.raw, index }) ?? (
                               <VListSubheader { ...item.props } key={ `subheader-${index}` } />
                             )

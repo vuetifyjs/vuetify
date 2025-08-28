@@ -12,11 +12,12 @@ import { computed, provide, ref, toRaw, toRef } from 'vue'
 import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
+import type { PropType } from 'vue'
 import { VTreeviewSymbol } from './shared'
+import type { VTreeviewChildrenSlots } from './VTreeviewChildren'
 import type { InternalListItem } from '@/components/VList/VList'
-import type { VListChildrenSlots } from '@/components/VList/VListChildren'
 import type { ListItem } from '@/composables/list-items'
-import type { GenericProps } from '@/util'
+import type { GenericProps, IndentLinesVariant } from '@/util'
 
 function flatten (items: ListItem[], flat: ListItem[] = []) {
   for (const item of items) {
@@ -27,28 +28,32 @@ function flatten (items: ListItem[], flat: ListItem[] = []) {
 }
 
 export const makeVTreeviewProps = propsFactory({
-  fluid: Boolean,
   openAll: Boolean,
+  indentLines: [Boolean, String] as PropType<boolean | IndentLinesVariant>,
   search: String,
 
   ...makeFilterProps({ filterKeys: ['title'] }),
-  ...omit(makeVTreeviewChildrenProps(), ['index', 'path']),
+  ...omit(makeVTreeviewChildrenProps(), [
+    'index',
+    'path',
+    'indentLinesVariant',
+    'parentIndentLines',
+    'isLastGroup',
+  ]),
   ...omit(makeVListProps({
     collapseIcon: '$treeviewCollapse',
     expandIcon: '$treeviewExpand',
     slim: true,
-  }), ['itemType', 'nav', 'openStrategy']),
-  modelValue: {
-    type: Array,
-    default: () => ([]),
-  },
+  }), ['nav', 'openStrategy']),
+
+  modelValue: Array,
 }, 'VTreeview')
 
 export const VTreeview = genericComponent<new <T>(
   props: {
     items?: T[]
   },
-  slots: VListChildrenSlots<T>
+  slots: VTreeviewChildrenSlots<T>
 ) => GenericProps<typeof props, typeof slots>>()({
   name: 'VTreeview',
 
@@ -63,20 +68,19 @@ export const VTreeview = genericComponent<new <T>(
     'click:select': (value: { id: unknown, value: boolean, path: unknown[] }) => true,
   },
 
-  setup (props, { slots }) {
+  setup (props, { slots, emit }) {
     const { items } = useListItems(props)
     const activeColor = toRef(() => props.activeColor)
     const baseColor = toRef(() => props.baseColor)
     const color = toRef(() => props.color)
     const activated = useProxiedModel(props, 'activated')
-    const model = useProxiedModel(props, 'modelValue')
-    const _selected = useProxiedModel(props, 'selected', props.modelValue)
+    const _selected = useProxiedModel(props, 'selected')
 
     const selected = computed({
-      get: () => _selected.value,
+      get: () => props.modelValue ?? _selected.value,
       set (val) {
         _selected.value = val
-        model.value = val
+        emit('update:modelValue', val)
       },
     })
 
@@ -152,6 +156,7 @@ export const VTreeview = genericComponent<new <T>(
     useRender(() => {
       const listProps = VList.filterProps(props)
       const treeviewChildrenProps = VTreeviewChildren.filterProps(props)
+      const indentLinesVariant = typeof props.indentLines === 'boolean' ? 'default' : props.indentLines
 
       return (
         <VList
@@ -164,7 +169,7 @@ export const VTreeview = genericComponent<new <T>(
             },
             props.class,
           ]}
-          open-strategy="multiple"
+          openStrategy="multiple"
           style={ props.style }
           opened={ opened.value }
           v-model:activated={ activated.value }
@@ -175,6 +180,8 @@ export const VTreeview = genericComponent<new <T>(
             density={ props.density }
             returnObject={ props.returnObject }
             items={ items.value }
+            parentIndentLines={ props.indentLines ? [] : undefined }
+            indentLinesVariant={ indentLinesVariant }
             v-slots={ slots }
           ></VTreeviewChildren>
         </VList>

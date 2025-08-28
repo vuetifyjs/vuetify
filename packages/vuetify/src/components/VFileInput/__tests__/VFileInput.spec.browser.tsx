@@ -68,7 +68,7 @@ describe('VFileInput', () => {
 
   it('should show size of files', async () => {
     const { element } = render(() => (
-      <VFileInput modelValue={[oneMBFile, twoMBFile]} multiple show-size />
+      <VFileInput modelValue={[oneMBFile, twoMBFile]} multiple showSize />
     ))
 
     expect(element).toHaveTextContent('1MB file (1.0 MB), 2MB file (2.0 MB)')
@@ -76,7 +76,7 @@ describe('VFileInput', () => {
 
   it('should show total size of files in counter', async () => {
     const { element } = render(() => (
-      <VFileInput modelValue={[oneMBFile, twoMBFile]} multiple counter show-size />
+      <VFileInput modelValue={[oneMBFile, twoMBFile]} multiple counter showSize />
     ))
 
     expect(element).toHaveTextContent('2 files (3.0 MB in total)')

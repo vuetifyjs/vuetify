@@ -13,6 +13,7 @@ import { makeFocusProps, useFocus } from '@/composables/focus'
 import { useIntersectionObserver } from '@/composables/intersectionObserver'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { useToggleScope } from '@/composables/toggleScope'
 
 // Utilities
 import { computed, effectScope, nextTick, ref, toRef, watch, watchEffect } from 'vue'
@@ -97,17 +98,20 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
     const contentRef = ref<HTMLElement>()
     const inputRef = ref<HTMLInputElement[]>([])
     const current = computed(() => inputRef.value[focusIndex.value])
+    let _isComposing = false
 
-    const intersectScope = effectScope()
-    intersectScope.run(() => {
-      const { intersectionRef, isIntersecting } = useIntersectionObserver()
-      watch(isIntersecting, v => {
-        if (!v) return
-        intersectionRef.value?.focus()
-        intersectScope.stop()
-      })
-      watchEffect(() => {
-        intersectionRef.value = inputRef.value[0]
+    useToggleScope(() => props.autofocus, () => {
+      const intersectScope = effectScope()
+      intersectScope.run(() => {
+        const { intersectionRef, isIntersecting } = useIntersectionObserver()
+        watchEffect(() => {
+          intersectionRef.value = inputRef.value[0]
+        })
+        watch(isIntersecting, v => {
+          if (!v) return
+          intersectionRef.value?.focus()
+          intersectScope.stop()
+        })
       })
     })
 
@@ -118,6 +122,8 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
         current.value.value = ''
         return
       }
+
+      if (_isComposing) return
 
       const array = model.value.slice()
       const value = current.value.value
@@ -135,6 +141,11 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
       model.value = array
 
       if (target) focusChild(contentRef.value!, target)
+    }
+
+    function onCompositionend () {
+      _isComposing = false
+      onInput()
     }
 
     function onKeydown (e: KeyboardEvent) {
@@ -294,6 +305,8 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
                           onFocus={ e => onFocus(e, i) }
                           onBlur={ onBlur }
                           onKeydown={ onKeydown }
+                          onCompositionstart={ () => _isComposing = true }
+                          onCompositionend={ onCompositionend }
                           onPaste={ event => onPaste(i, event) }
                         />
                       )
@@ -312,8 +325,8 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
 
             <VOverlay
               contained
-              content-class="v-otp-input__loader"
-              model-value={ !!props.loading }
+              contentClass="v-otp-input__loader"
+              modelValue={ !!props.loading }
               persistent
             >
               { slots.loader?.() ?? (

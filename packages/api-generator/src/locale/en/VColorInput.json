@@ -1,0 +1,9 @@
+{
+  "props": {
+    "hidePip": "Hide pip icon",
+    "colorPip": "Synchronize pip color with current value",
+    "pipIcon": "The icon used for pip",
+    "pipLocation": "Move pip icon to a different slot",
+    "pipVariant": "Variant of the pip control"
+  }
+}

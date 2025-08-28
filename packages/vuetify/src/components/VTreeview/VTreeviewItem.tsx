@@ -2,30 +2,44 @@
 import './VTreeviewItem.sass'
 
 // Components
+import { VAvatar } from '@/components/VAvatar'
 import { VBtn } from '@/components/VBtn'
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
+import { VIcon } from '@/components/VIcon'
 import { VListItemAction } from '@/components/VList'
 import { makeVListItemProps, VListItem } from '@/components/VList/VListItem'
 import { VProgressCircular } from '@/components/VProgressCircular'
 
 // Composables
+import { forwardRefs } from '@/composables/forwardRefs'
 import { IconValue } from '@/composables/icons'
 
 // Utilities
 import { computed, inject, ref, toRaw } from 'vue'
-import { genericComponent, omit, propsFactory, useRender } from '@/util'
+import { VTreeviewSymbol } from './shared'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
-import { VTreeviewSymbol } from './shared'
+import type { PropType } from 'vue'
+import type { ToggleListItemSlot } from './shared'
 import type { VListItemSlots } from '@/components/VList/VListItem'
+import type { IndentLineType } from '@/util'
 
 export const makeVTreeviewItemProps = propsFactory({
   loading: Boolean,
+  hideActions: Boolean,
+  hasCustomPrepend: Boolean,
+  indentLines: Array as PropType<IndentLineType[]>,
   toggleIcon: IconValue,
 
   ...makeVListItemProps({ slim: true }),
 }, 'VTreeviewItem')
 
-export const VTreeviewItem = genericComponent<VListItemSlots>()({
+export type VTreeviewItemSlots = VListItemSlots & {
+  toggle: ToggleListItemSlot & { loading: boolean }
+}
+
+export const VTreeviewItem = genericComponent<VTreeviewItemSlots>()({
   name: 'VTreeviewItem',
 
   props: makeVTreeviewItemProps(),
@@ -67,14 +81,18 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
     }
 
     useRender(() => {
-      const listItemProps = omit(VListItem.filterProps(props), ['onClick'])
-      const hasPrepend = slots.prepend || props.toggleIcon
+      const listItemProps = VListItem.filterProps(props)
+      const hasPrepend = slots.prepend ||
+        props.toggleIcon ||
+        props.indentLines ||
+        props.prependIcon ||
+        props.prependAvatar
 
       return (
         <VListItem
           ref={ vListItemRef }
           { ...listItemProps }
-          active={ vListItemRef.value?.isActivated }
+          active={ vListItemRef.value?.isActivated || undefined }
           class={[
             'v-treeview-item',
             {
@@ -84,40 +102,119 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
             props.class,
           ]}
           ripple={ false }
-          onClick={ props.onClick ?? activateGroupActivator }
+          onClick={ activateGroupActivator }
         >
           {{
             ...slots,
             prepend: hasPrepend ? slotProps => {
               return (
                 <>
-                  <VListItemAction start={ false }>
-                    { props.toggleIcon ? (
-                        <VBtn
-                          density="compact"
-                          icon={ props.toggleIcon }
-                          loading={ props.loading }
-                          variant="text"
-                          onClick={ onClickAction }
-                        >
-                          {{
-                            loader () {
-                              return (
-                                <VProgressCircular
-                                  indeterminate="disable-shrink"
-                                  size="20"
-                                  width="2"
-                                />
-                              )
-                            },
-                          }}
-                        </VBtn>
-                    ) : (
-                      <div class="v-treeview-item__level" />
-                    )}
-                  </VListItemAction>
+                  { props.indentLines && props.indentLines.length > 0 ? (
+                    <div
+                      key="indent-lines"
+                      class="v-treeview-indent-lines"
+                      style={{ '--v-indent-parts': props.indentLines.length }}
+                    >
+                      { props.indentLines.map(type => (
+                        <div class={ `v-treeview-indent-line v-treeview-indent-line--${type}` } />
+                      ))}
+                    </div>
+                  ) : '' }
+                  { !props.hideActions && (
+                    <VListItemAction start>
+                      { props.toggleIcon ? (
+                        <>
+                          { !slots.toggle ? (
+                            <VBtn
+                              key="prepend-toggle"
+                              density="compact"
+                              icon={ props.toggleIcon }
+                              loading={ props.loading }
+                              variant="text"
+                              onClick={ onClickAction }
+                            >
+                              {{
+                                loader: () => (
+                                  <VProgressCircular
+                                    indeterminate="disable-shrink"
+                                    size="20"
+                                    width="2"
+                                  />
+                                ),
+                              }}
+                            </VBtn>
+                          ) : (
+                            <VDefaultsProvider
+                              key="prepend-defaults"
+                              defaults={{
+                                VBtn: {
+                                  density: 'compact',
+                                  icon: props.toggleIcon,
+                                  variant: 'text',
+                                  loading: props.loading,
+                                },
+                                VProgressCircular: {
+                                  indeterminate: 'disable-shrink',
+                                  size: 20,
+                                  width: 2,
+                                },
+                              }}
+                            >
+                              { slots.toggle({
+                                ...slotProps,
+                                loading: props.loading,
+                                props: {
+                                  onClick: onClickAction,
+                                },
+                              })}
+                            </VDefaultsProvider>
+                          )}
+                        </>
+                      ) : (
+                        <div class="v-treeview-item__level" />
+                      )}
+                    </VListItemAction>
+                  )}
 
-                  { slots.prepend?.(slotProps) }
+                  { !props.hasCustomPrepend ? (
+                    <>
+                      { slots.prepend?.(slotProps) }
+                      { props.prependAvatar && (
+                        <VAvatar
+                          key="prepend-avatar"
+                          density={ props.density }
+                          image={ props.prependAvatar }
+                        />
+                      )}
+
+                      { props.prependIcon && (
+                        <VIcon
+                          key="prepend-icon"
+                          density={ props.density }
+                          icon={ props.prependIcon }
+                        />
+                      )}
+                    </>
+                  ) : (
+                    <VDefaultsProvider
+                      key="prepend-defaults"
+                      defaults={{
+                        VAvatar: {
+                          density: props.density,
+                          image: props.appendAvatar,
+                        },
+                        VIcon: {
+                          density: props.density,
+                          icon: props.appendIcon,
+                        },
+                        VListItemAction: {
+                          start: true,
+                        },
+                      }}
+                    >
+                      { slots.prepend?.(slotProps) }
+                    </VDefaultsProvider>
+                  )}
                 </>
               )
             } : undefined,
@@ -126,7 +223,7 @@ export const VTreeviewItem = genericComponent<VListItemSlots>()({
       )
     })
 
-    return {}
+    return forwardRefs({}, vListItemRef)
   },
 })
 
