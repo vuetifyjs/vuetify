@@ -1,5 +1,5 @@
 <template>
-  <v-row dense>
+  <v-row density="comfortable">
     <v-col
       v-for="(variant, i) in variants"
       :key="i"

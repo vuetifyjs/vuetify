@@ -12,13 +12,14 @@
     "alignContentSm": "Changes the **align-content** property on small and greater breakpoints.",
     "alignContentXl": "Changes the **align-content** property on extra large and greater breakpoints.",
     "alignContentXxl": "Changes the **align-content** property on extra extra large and greater breakpoints.",
-    "dense": "Reduces the gutter between `v-col`s.",
+    "dense": "Deprecated, use `density` with **comfortable** instead.",
+    "density": "Adjusts the spacing between `v-col`s. Available options are: **default**, **comfortable**, **compact**.",
     "justify": "Applies the [justify-content](https://developer.mozilla.org/en-US/docs/Web/CSS/justify-content) css property. Available options are: **start**, **center**, **end**, **space-between** and **space-around**.",
     "justifyLg": "Changes the **justify-content** property on large and greater breakpoints.",
     "justifyMd": "Changes the **justify-content** property on medium and greater breakpoints.",
     "justifySm": "Changes the **justify-content** property on small and greater breakpoints.",
     "justifyXl": "Changes the **justify-content** property on extra large and greater breakpoints.",
     "justifyXxl": "Changes the **justify-content** property on extra extra large and greater breakpoints.",
-    "noGutters": "Removes the gutter between `v-col`s."
+    "noGutters": "Deprecated, use `density` with **compact** instead."
   }
 }
