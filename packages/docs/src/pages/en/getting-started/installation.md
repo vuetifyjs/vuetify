@@ -406,6 +406,106 @@ This will include all components and directives regardless of whether or not you
 
 Lastly, do not forget to install [icons](/features/icon-fonts/).
 
+## Fonts
+
+Vuetify uses Roboto as its default font. To ensure your project renders correctly, you need to add the Roboto font yourself. We recommend using @fontsource/roboto or bundling with unplugin-fonts.
+
+### Option A — Install via @fontsource/roboto (recommended)
+
+::: tabs
+
+```bash [pnpm]
+pnpm i @fontsource/roboto
+```
+
+```bash [yarn]
+yarn add @fontsource/roboto
+```
+
+```bash [npm]
+npm i @fontsource/roboto
+```
+
+```bash [bun]
+bun add @fontsource/roboto
+```
+
+:::
+
+Then import the styles you need in your main.ts or main.js:
+
+```js
+import '@fontsource/roboto/100.css'
+import '@fontsource/roboto/300.css'
+import '@fontsource/roboto/400.css'
+import '@fontsource/roboto/500.css'
+import '@fontsource/roboto/700.css'
+import '@fontsource/roboto/900.css'
+
+/* optional italic styles */
+import '@fontsource/roboto/100-italic.css'
+import '@fontsource/roboto/300-italic.css'
+import '@fontsource/roboto/400-italic.css'
+import '@fontsource/roboto/500-italic.css'
+import '@fontsource/roboto/700-italic.css'
+import '@fontsource/roboto/900-italic.css'
+```
+
+### Option B — Install via unplugin-fonts + @fontsource
+
+::: tabs
+
+```bash [pnpm]
+pnpm i --save-dev unplugin-fonts
+pnpm i @fontsource/roboto
+```
+
+```bash [yarn]
+yarn add --save-dev unplugin-fonts
+yarn add @fontsource/roboto
+```
+
+```bash [npm]
+npm i --save-dev unplugin-fonts
+npm i @fontsource/roboto
+```
+
+```bash [bun]
+bun add --save-dev unplugin-fonts
+bun add @fontsource/roboto
+```
+
+:::
+
+Update your vite.config.ts:
+
+```ts
+import { defineConfig } from 'vite'
+import ViteFonts from 'unplugin-fonts/vite'
+
+export default defineConfig({
+  plugins: [
+    ViteFonts({
+      fontsource: {
+        families: [
+          {
+            name: 'Roboto',
+            weights: [100, 300, 400, 500, 700, 900],
+            styles: ['normal', 'italic'],
+          },
+        ],
+      },
+    }),
+  ],
+})
+```
+
+And import the generated CSS once in your main.ts or main.js:
+
+```ts
+import 'unfonts.css'
+```
+
 ## SSR caveats
 
 Vue 3 has no way to automatically detect if SSR is used &mdash; so nuxt, gridsome, and other SSR frameworks must manually set the `ssr` option to `true` in order to properly render the application.
