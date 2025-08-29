@@ -222,6 +222,13 @@ The **variant** prop provides an easy way to customize the style of your text fi
 
 <ExamplesExample file="v-text-field/prop-variant" />
 
+#### Focused Prop
+
+The focused prop in v-text-field is a model prop, which means it sets the initial value but will normally be updated by focus/blur events.
+If you want to override this behavior (e.g., keep the input always focused), you can bind an empty @update:focused handler.
+
+<ExamplesExample file="v-text-field/prop-focused" />
+
 ### Events
 
 #### Icon events
