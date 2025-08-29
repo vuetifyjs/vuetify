@@ -124,6 +124,14 @@ export default {
     notEmpty: 'Prašome pasirinkti bent vieną reikšmę',
     pattern: 'Neteisingas formatas',
   },
+  command: {
+    select: 'pasirinkti',
+    navigate: 'naršyti',
+    goBack: 'grįžti atgal',
+    close: 'uždaryti',
+    then: 'tada',
+    placeholder: 'Įveskite komandą arba ieškokite...',
+  },
   hotkey: {
     then: 'tada',
     ctrl: 'Ctrl',
