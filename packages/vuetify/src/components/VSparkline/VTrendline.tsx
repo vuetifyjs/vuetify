@@ -54,6 +54,11 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
       boundary: Boundary
     ): Point[] {
       const { minX, maxX, minY, maxY } = boundary
+
+      if (values.length === 1) {
+        values = [values[0], values[0]]
+      }
+
       const totalValues = values.length
       const maxValue = props.max != null ? Number(props.max) : Math.max(...values)
       const minValue = props.min != null ? Number(props.min) : Math.min(...values)

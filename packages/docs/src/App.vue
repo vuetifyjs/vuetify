@@ -4,6 +4,13 @@
       <component :is="Component" />
     </v-fade-transition>
   </router-view>
+
+  <PromotedScript
+    id="bitterbrainsads-script"
+    script-id="_bitterbrainsads_js"
+    src="//media.bitterbrains.com/main.js?from=VUETIFY&type=top"
+    async
+  />
 </template>
 
 <script setup lang="ts">

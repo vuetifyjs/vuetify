@@ -4,9 +4,7 @@ import './VVideo.sass'
 // Components
 import { makeVVideoControlsProps, VVideoControls } from './VVideoControls'
 import { VFadeTransition } from '@/components/transitions'
-import { VSpacer } from '@/components/VGrid/VSpacer'
 import { VImg } from '@/components/VImg/VImg'
-import { VOverlay } from '@/components/VOverlay/VOverlay'
 import { VProgressCircular } from '@/components/VProgressCircular/VProgressCircular'
 import { VIconBtn } from '@/labs/VIconBtn/VIconBtn'
 
@@ -23,7 +21,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { MaybeTransition } from '@/composables/transition'
 
 // Utilities
-import { nextTick, onBeforeUnmount, onMounted, ref, shallowRef, toRef, watch } from 'vue'
+import { nextTick, onBeforeUnmount, onMounted, ref, shallowRef, toRef, Transition, watch } from 'vue'
 import { createRange, genericComponent, omit, pick, propsFactory, useRender } from '@/util'
 
 // Types
@@ -324,12 +322,6 @@ export const VVideo = genericComponent<VVideoSlots>()({
         ? 'poster-fade-out'
         : 'fade-transition'
 
-      const overlayProps = {
-        contained: true,
-        persistent: true,
-        contentClass: 'v-video__overlay-fill',
-      }
-
       const controlsProps = {
         ...VVideoControls.filterProps(omit(props, ['variant', 'rounded', 'hideVolume'])),
         rounded: Array.isArray(props.rounded) ? props.rounded.at(-1) : props.rounded,
@@ -376,8 +368,22 @@ export const VVideo = genericComponent<VVideoSlots>()({
           variant="outlined"
           iconSize="50"
           class="v-video__center-icon"
+          onClick={ onVideoClick }
         />
       )
+
+      const activeOverlays = {
+        playIcon: props.variant === 'player' &&
+          state.value === 'loaded' &&
+          !props.hideOverlay &&
+          !playing.value,
+        poster: state.value !== 'loaded',
+        loading: props.variant === 'player' &&
+          (
+            state.value === 'loading' ||
+            waiting.value
+          ),
+      }
 
       return (
         <div
@@ -434,53 +440,41 @@ export const VVideo = genericComponent<VVideoSlots>()({
                 { slots.sources?.() ?? <source src={ props.src } type={ props.type } /> }
               </video>
             )}
-            { props.variant === 'player' && !props.hideOverlay && (
-              <VOverlay
-                key="pause-overlay"
-                modelValue={ state.value === 'loaded' }
-                opacity="0"
-                { ...overlayProps }
-              >
-                <VSpacer />
-                <MaybeTransition name="fade-transition">
-                  { !playing.value && overlayPlayIcon }
-                </MaybeTransition>
-                <VSpacer />
-              </VOverlay>
-            )}
-            { props.variant === 'player' && !!slots.header
-              ? (
+            <Transition name="fade-transition">
+              { activeOverlays.playIcon && (
+                <div class="v-video__overlay-fill">
+                  { overlayPlayIcon }
+                </div>
+              )}
+            </Transition>
+            { props.variant === 'player' &&
+              !!slots.header &&
+              (
                 <div key="header" class="v-video__header">
                   { slots.header() }
                 </div>
               )
-              : '' }
-            <VOverlay
-              key="poster-overlay"
-              modelValue={ state.value !== 'loaded' }
-              transition={ posterTransition }
-              { ...overlayProps }
-            >
-              <VImg cover src={ props.image }>
-                <div
-                  class={[
-                    'v-video__overlay-fill',
-                    ...roundedContainerClasses.value,
-                  ]}
-                >
-                  { props.variant === 'player' && overlayPlayIcon }
+            }
+            <MaybeTransition transition={ posterTransition }>
+              { activeOverlays.poster && (
+                <div class="v-video__overlay-fill">
+                  <VImg cover src={ props.image }>
+                    <div
+                      class={[
+                        'v-video__overlay-fill',
+                        ...roundedContainerClasses.value,
+                      ]}
+                    >
+                      { props.variant === 'player' && overlayPlayIcon }
+                    </div>
+                  </VImg>
                 </div>
-              </VImg>
-            </VOverlay>
-            { props.variant === 'player' && (
-              <VOverlay
-                key="loading-overlay"
-                modelValue={ state.value === 'loading' || waiting.value }
-                opacity=".1"
-                { ...overlayProps }
-              >
+              )}
+            </MaybeTransition>
+            { activeOverlays.loading && (
+              <div class="v-video__overlay-fill">
                 { loadingIndicator }
-              </VOverlay>
+              </div>
             )}
           </div>
           <MaybeTransition key="actions" transition={ props.controlsTransition }>
