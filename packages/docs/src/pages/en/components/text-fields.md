@@ -222,10 +222,10 @@ The **variant** prop provides an easy way to customize the style of your text fi
 
 <ExamplesExample file="v-text-field/prop-variant" />
 
-#### Focused Prop
+#### Focused
 
-The focused prop in v-text-field is a model prop, which means it sets the initial value but will normally be updated by focus/blur events.
-If you want to override this behavior (e.g., keep the input always focused), you can bind an empty @update:focused handler.
+The **focused** prop that sets the initial focus state of the component. It is a model prop, which handles 2 way binding with `focused` and `@update:focused`. This means its value sets the initial state but will be updated internally by focus/blur events.
+If you want to override this behavior (e.g., keep the input always focused), you can bind an empty `@update:focused` handler.
 
 <ExamplesExample file="v-text-field/prop-focused" />
 
