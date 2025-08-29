@@ -7,6 +7,7 @@ import { VListItemTitle } from './VListItemTitle'
 import { VAvatar } from '@/components/VAvatar'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VIcon } from '@/components/VIcon'
+import { VNavigationDrawerSymbol } from '@/components/VNavigationDrawer/VNavigationDrawer'
 
 // Composables
 import { useList } from './list'
@@ -27,8 +28,8 @@ import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant
 import vRipple from '@/directives/ripple'
 
 // Utilities
-import { computed, onBeforeMount, toDisplayString, toRef, watch } from 'vue'
-import { deprecate, EventProp, genericComponent, propsFactory, useRender } from '@/util'
+import { computed, inject, onBeforeMount, toDisplayString, toRef, watch } from 'vue'
+import { convertToUnit, deprecate, EventProp, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -201,6 +202,19 @@ export const VListItem = genericComponent<VListItemSlots>()({
         : props.ripple
     )
 
+    // Determine if VListItem is within a VNavigationDrawer
+    // prepend width is important for drawer rail mode
+    const navigationDrawer = inject(VNavigationDrawerSymbol, null)
+    const prependWidth = computed(() => {
+      if (navigationDrawer) {
+        const value = Number(navigationDrawer.railWidth.value)
+        return value !== navigationDrawer.defaultRailWidth ? convertToUnit(value) : 'auto'
+      }
+
+      // Default
+      return 'auto'
+    })
+
     const slotProps = computed(() => ({
       isActive: isActive.value,
       select,
@@ -294,7 +308,13 @@ export const VListItem = genericComponent<VListItemSlots>()({
           { genOverlays(isClickable.value || isActive.value, 'v-list-item') }
 
           { hasPrepend && (
-            <div key="prepend" class="v-list-item__prepend">
+            <div
+              key="prepend"
+              class="v-list-item__prepend"
+              style={{
+                width: prependWidth.value,
+              }}
+            >
               { !slots.prepend ? (
                 <>
                   { props.prependAvatar && (

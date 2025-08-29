@@ -4,13 +4,14 @@
       <v-navigation-drawer
         v-model="drawer"
         :rail="rail"
+        rail-width="70"
         permanent
         @click="rail = false"
       >
         <v-list nav>
           <v-list-item
-            prepend-avatar="https://randomuser.me/api/portraits/men/85.jpg"
-            title="John Leider"
+            prepend-avatar="https://randomuser.me/api/portraits/women/17.jpg"
+            title="Jane Lee"
           >
             <template v-slot:append>
               <v-btn
@@ -52,15 +53,4 @@
 
   const drawer = ref(true)
   const rail = ref(true)
-</script>
-
-<script>
-  export default {
-    data () {
-      return {
-        drawer: true,
-        rail: true,
-      }
-    },
-  }
 </script>
