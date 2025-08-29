@@ -17,6 +17,14 @@
         .v-chip__overlay
           opacity: $chip-group-selected-opacity
 
+        @media (forced-colors: active)
+          background: highlight
+          color: highlighttext
+          forced-color-adjust: preserve-parent-color
+
+          &:focus-visible
+            outline-offset: 2px
+
   // Modifiers
   .v-chip-group--column
     .v-slide-group__content
