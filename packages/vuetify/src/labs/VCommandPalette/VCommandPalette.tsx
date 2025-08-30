@@ -730,19 +730,13 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
         ) : <></>
       }
 
-      // Extract dialog-specific props
-      // Pass transition prop directly to VDialog (follows VOverlay/VDialog conventions)
-      const transitionProps = { transition: props.transition }
-
       return (
         <VDialog
-          { ...transitionProps }
           modelValue={ isActive.value }
           maxHeight={ sheetProps.maxHeight }
           maxWidth={ sheetProps.maxWidth }
           persistent={ props.persistent }
-          absolute
-          scrollable
+          transition={ props.transition }
           onUpdate:modelValue={ (v: boolean) => isActive.value = v }
           onAfterEnter={ onAfterEnter }
           onAfterLeave={ onAfterLeave }
@@ -776,12 +770,10 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
 
 export type VCommandPalette = InstanceType<typeof VCommandPalette>
 
-// Export helper components for custom layouts
 export { VCommandPaletteItem as VCommandPaletteItemComponent } from './VCommandPaletteItem'
 export { VCommandPaletteItems } from './VCommandPaletteItems'
 export { useCommandPaletteContext } from './composables/useCommandPaletteContext'
 
-// Export types for proper typing of items prop
 export type {
   VCommandPaletteItem,
   VCommandPaletteActionItem,
