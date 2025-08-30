@@ -79,20 +79,13 @@ function itemMatches (testItem: any, searchLower: string): boolean {
  * Defines the internal content component's configuration options
  */
 const makeVCommandPaletteContentProps = propsFactory({
-  // Whether to close the palette when an item is executed
   closeOnExecute: {
     type: Boolean,
     default: true,
   },
-  // Title displayed at the top of the palette
   title: String,
-  // Placeholder text for the search input
   placeholder: String,
-  // Whether to show the back button in the search input when in nested navigation
-  showSearchBackButton: {
-    type: Boolean,
-    default: true,
-  },
+  hideBack: Boolean,
   listProps: Object as PropType<VCommandPaletteList['$props']>,
   searchProps: Object as PropType<VCommandPaletteSearch['$props']>,
   // Scope for hotkeys: 'global' listens globally, 'focused' only when palette is focused
@@ -137,13 +130,11 @@ const VCommandPaletteContent = genericComponent<VCommandPaletteSlots>()({
     const uid = useId()
     const instructionsId = `command-palette-instructions-${uid}`
 
-    // Navigation state management
     interface NavigationFrame { items: any[], selected: number }
-    const navigationStack = ref<NavigationFrame[]>([]) // History of navigation levels
-    const search = shallowRef('') // Current search query
+    const navigationStack = ref<NavigationFrame[]>([])
+    const search = shallowRef('')
     const currentItems = ref<any[]>([]) // Current level items (before filtering)
 
-    // Initialize currentItems with props.items
     watch(() => props.items, newItems => {
       if (navigationStack.value.length === 0) {
         currentItems.value = newItems || []
@@ -362,7 +353,7 @@ const VCommandPaletteContent = genericComponent<VCommandPaletteSlots>()({
     })
 
     // Register item-specific hotkeys when the palette is open
-    // Use watchEffect to automatically handle cleanup and re-registration
+    // automatically handle cleanup and re-registration
     watchEffect(() => {
       const allItems = props.items ?? []
       function processItems (items: VCommandPaletteItem[]): void {
@@ -404,69 +395,30 @@ const VCommandPaletteContent = genericComponent<VCommandPaletteSlots>()({
       navigationStack,
     }))
 
-    useRender(() => {
-      // Check if default slot is provided for custom layout
-      if (slots.default) {
-        return (
+    useRender(() => (
+      <>
+        { slots.prepend?.({ search: readonly(search) }) }
+        { slots.header ? slots.header(headerSlotScope.value) : (
           <>
-            { slots.prepend?.({ search: readonly(search) }) }
-            { slots.header ? slots.header(headerSlotScope.value) : (
-              <>
-                { props.title && (
-                  <div key="command-palette-title" class="v-command-palette__title pa-4">
-                    { t(props.title) }
-                  </div>
-                )}
-                <VCommandPaletteSearch
-                  v-model={ search.value }
-                  placeholder={ props.placeholder }
-                  aria-label="Search commands"
-                  aria-describedby={ instructionsId }
-                  showBackButton={ props.showSearchBackButton && navigationStack.value.length > 0 }
-                  onClick:back={ navigateBack }
-                  { ...props.searchProps }
-                />
-              </>
+            { props.title && (
+              <div key="command-palette-title" class="v-command-palette__title pa-4">
+                { t(props.title) }
+              </div>
             )}
-            <VDivider />
-            { subheaderSlotScope.value.hasQuery && slots.subheader?.(subheaderSlotScope.value) }
-            { slots.default(defaultSlotScope.value) }
-            { slots.footer ? slots.footer(footerSlotScope.value) : (
-              <VCommandPaletteInstructions
-                id={ instructionsId }
-                hasItems={ footerSlotScope.value.hasItems }
-                hasParent={ footerSlotScope.value.hasParent }
-              />
-            )}
-            { slots.append?.({ search: readonly(search) }) }
+            <VCommandPaletteSearch
+              v-model={ search.value }
+              placeholder={ props.placeholder }
+              aria-label="Search commands"
+              aria-describedby={ instructionsId }
+              showBackButton={ !props.hideBack && navigationStack.value.length > 0 }
+              onClick:back={ navigateBack }
+              { ...props.searchProps }
+            />
           </>
-        )
-      }
-
-      // Default layout (backward compatibility)
-      return (
-        <>
-          { slots.prepend?.({ search: readonly(search) }) }
-          { slots.header ? slots.header(headerSlotScope.value) : (
-            <>
-              { props.title && (
-                <div key="command-palette-title" class="v-command-palette__title pa-4">
-                  { t(props.title) }
-                </div>
-              )}
-              <VCommandPaletteSearch
-                v-model={ search.value }
-                placeholder={ props.placeholder }
-                aria-label="Search commands"
-                aria-describedby={ instructionsId }
-                showBackButton={ props.showSearchBackButton && navigationStack.value.length > 0 }
-                onClick:back={ navigateBack }
-                { ...props.searchProps }
-              />
-            </>
-          )}
-          <VDivider />
-          { subheaderSlotScope.value.hasQuery && slots.subheader?.(subheaderSlotScope.value) }
+        )}
+        <VDivider />
+        { subheaderSlotScope.value.hasQuery && slots.subheader?.(subheaderSlotScope.value) }
+        { slots.default?.(defaultSlotScope.value) ?? (
           <VCommandPaletteList
             items={ filteredActions.value }
             selectedIndex={ selectedIndex.value }
@@ -482,17 +434,17 @@ const VCommandPaletteContent = genericComponent<VCommandPaletteSlots>()({
               'append-list': slots['append-list'],
             }}
           </VCommandPaletteList>
-          { slots.footer ? slots.footer(footerSlotScope.value) : (
-            <VCommandPaletteInstructions
-              id={ instructionsId }
-              hasItems={ footerSlotScope.value.hasItems }
-              hasParent={ footerSlotScope.value.hasParent }
-            />
-          )}
-          { slots.append?.({ search: readonly(search) }) }
-        </>
-      )
-    })
+        )}
+        { slots.footer?.(footerSlotScope.value) ?? (
+          <VCommandPaletteInstructions
+            id={ instructionsId }
+            hasItems={ footerSlotScope.value.hasItems }
+            hasParent={ footerSlotScope.value.hasParent }
+          />
+        )}
+        { slots.append?.({ search: readonly(search) }) }
+      </>
+    ))
 
     return {
       selectedIndex,
@@ -553,27 +505,14 @@ export type VCommandPaletteFooterSlotScope = {
   navigationStack: Ref<any[]>
 }
 
-/**
- * Props factory for the main VCommandPalette component
- * Combines props from multiple concerns: dialog, theming, filtering, etc.
- */
 export const makeVCommandPaletteProps = propsFactory({
   contained: Boolean,
   persistent: Boolean,
   modelValue: Boolean,
-  // Global hotkey to open/close the palette (e.g., "ctrl+k") - optional
   hotkey: String,
-  // Title displayed at the top of the palette
-  title: {
-    type: String,
-  },
-  // Placeholder text for the search input
+  title: String,
   placeholder: String,
-  // Whether to show the back button in the search input when in nested navigation
-  showSearchBackButton: {
-    type: Boolean,
-    default: true,
-  },
+  hideBack: Boolean,
   listProps: Object as PropType<VCommandPaletteList['$props']>,
   searchProps: Object as PropType<VCommandPaletteSearch['$props']>,
   // Whether to close the palette when an item is executed
