@@ -8,14 +8,10 @@
       hotkeys-scope="focused"
       contained
     >
-      <template v-slot:item="{ item, props: itemProps }">
-        <v-list-item v-bind="itemProps" :subtitle="null" :title="null">
-          <v-list-item-title class="d-flex align-center">
-            <v-avatar :image="item.raw.avatar" class="mr-2" size="small"></v-avatar>
-            <span>{{ item.title }}</span>
-          </v-list-item-title>
+      <template v-slot:item="{ item, props }">
+        <v-list-item v-bind="props" :prepend-avatar="item.raw.avatar">
           <template v-slot:append>
-            <span class="text-caption text-disabled">{{ item.raw.email }}</span>
+            <span class="text-caption opacity-70">{{ item.raw.email }}</span>
           </template>
         </v-list-item>
       </template>
