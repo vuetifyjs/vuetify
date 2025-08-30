@@ -182,6 +182,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
       return children ? (
         <VTreeviewGroup
           { ...treeviewGroupProps }
+          key={ item.value }
           value={ props.returnObject ? item.raw : treeviewGroupProps?.value }
           rawId={ treeviewGroupProps?.value }
         >
@@ -243,6 +244,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
           return (
             <VTreeviewItem
               { ...itemProps }
+              key={ item.value }
               hideActions={ props.hideActions }
               indentLines={ indentLines.leaf }
               value={ props.returnObject ? toRaw(item.raw) : itemProps.value }
