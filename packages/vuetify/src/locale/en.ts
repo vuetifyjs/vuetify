@@ -127,6 +127,7 @@ export default {
   command: {
     select: 'to select',
     navigate: 'to navigate',
+    navigateBack: 'Navigate back',
     goBack: 'to go back',
     close: 'to close',
     then: 'then',

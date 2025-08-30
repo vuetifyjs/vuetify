@@ -456,6 +456,7 @@ export const VCommandPaletteList = genericComponent<VCommandPaletteListSlots>()(
         aria-activedescendant={ activeDescendantId.value } // Current selection for screen readers
         aria-label={ `${selectableItemsCount.value} ${selectableItemsCount.value === 1 ? 'option' : 'options'} available` }
         aria-multiselectable="false" // Single selection only
+        slim
       >
         { slots['prepend-list']?.() }
         { flattenedItems.value.length > 0

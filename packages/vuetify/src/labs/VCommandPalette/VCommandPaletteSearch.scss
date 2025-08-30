@@ -1,0 +1,9 @@
+@use '../../styles/tools';
+
+@include tools.layer('components') {
+  .v-command-palette-search {
+    .v-field__prepend-inner > .v-icon {
+      margin-inline: 4px 12px;
+    }
+  }
+}

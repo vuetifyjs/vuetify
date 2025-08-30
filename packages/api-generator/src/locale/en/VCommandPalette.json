@@ -10,8 +10,7 @@
     "contained": "Renders the component inline instead of in a modal dialog, allowing it to be embedded within other components or layouts.",
     "persistent": "Prevents the dialog from closing when clicking outside the palette or pressing the Escape key.",
     "listProps": "Props object passed to the underlying VList component. Allows customization of list behavior and appearance.",
-    "searchProps": "Props object passed to the underlying VCommandPaletteSearch component. Allows customization of search input behavior.",
-    "clearableSearch": "Whether the search input should display a clear button to quickly empty the search query."
+    "searchProps": "Props object passed to the underlying VCommandPaletteSearch component. Allows customization of search input behavior."
   },
   "slots": {
     "default": "Provides complete control over the palette layout. Scoped slot receives: `items` (filtered items array), `rootProps` (ARIA and container props), `getItemProps` (function to get item props for accessibility).",

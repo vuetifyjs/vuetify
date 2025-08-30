@@ -32,7 +32,7 @@ import { useCommandPaletteNavigation } from '@/labs/VCommandPalette/composables/
 
 // Utilities
 import { computed, nextTick, readonly, ref, shallowRef, toRef, useId, watch, watchEffect } from 'vue'
-import { consoleError, EventProp, genericComponent, propsFactory, useRender } from '@/util'
+import { consoleError, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType, Ref } from 'vue'
@@ -410,9 +410,12 @@ const VCommandPaletteContent = genericComponent<VCommandPaletteSlots>()({
               placeholder={ props.placeholder }
               aria-label="Search commands"
               aria-describedby={ instructionsId }
-              showBackButton={ !props.hideBack && navigationStack.value.length > 0 }
+              showBack={ !props.hideBack && navigationStack.value.length > 0 }
               onClick:back={ navigateBack }
               { ...props.searchProps }
+              v-slots={{
+                back: slots.back,
+              }}
             />
           </>
         )}
@@ -520,9 +523,6 @@ export const makeVCommandPaletteProps = propsFactory({
     type: Boolean,
     default: true,
   },
-  // Event callbacks for dialog lifecycle
-  afterEnter: EventProp<[]>(),
-  afterLeave: EventProp<[]>(),
   // Include standard item transformation props
   ...makeItemsProps({ itemTitle: 'title' }),
   // Items array with proper typing for command palette items

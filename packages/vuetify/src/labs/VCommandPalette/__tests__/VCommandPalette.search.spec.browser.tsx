@@ -178,7 +178,6 @@ describe('VCommandPalette', () => {
         <VCommandPalette
           v-model={ model.value }
           items={ basicItems }
-          clearableSearch
         />
       ))
 
@@ -243,22 +242,6 @@ describe('VCommandPalette', () => {
       await expect(screen.findByText('Group Item 1')).resolves.toBeVisible()
       expect(screen.queryByText('Group Item 2')).toBeNull()
       expect(screen.queryByText('Second Group')).toBeNull()
-    })
-
-    it('should not show clear button when clearableSearch is false', async () => {
-      const model = ref(true)
-      render(() => (
-        <VCommandPalette
-          v-model={ model.value }
-          items={ basicItems }
-          clearableSearch={ false }
-        />
-      ))
-
-      const searchInput = await screen.findByRole('textbox')
-      await userEvent.type(searchInput, 'test')
-
-      expect(screen.queryByRole('button', { name: /Clear/ })).toBeNull()
     })
 
     it('should filter within drilled-down parent view', async () => {
@@ -447,7 +430,6 @@ describe('VCommandPalette', () => {
         <VCommandPalette
           v-model={ model.value }
           items={ specialItems }
-          clearableSearch
         />
       ))
 
