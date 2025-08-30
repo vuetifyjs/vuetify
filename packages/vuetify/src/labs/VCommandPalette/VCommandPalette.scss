@@ -25,6 +25,10 @@
         color: inherit;
         opacity: .7;
       }
+
+      .v-hotkey {
+        font-size: 0.8125rem;
+      }
     }
 
     &__list-divider {
@@ -38,7 +42,7 @@
     align-items: center;
     gap: 16px;
     padding: 8px 12px;
-    font-size: 0.8rem;
+    font-size: 0.8125rem;
     border-top: thin solid rgba(var(--v-border-color), var(--v-border-opacity));
   }
 }
