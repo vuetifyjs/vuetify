@@ -72,7 +72,7 @@ export const makeVComboboxProps = propsFactory({
   delimiters: Array as PropType<readonly string[]>,
 
   ...makeFilterProps({ filterKeys: ['title'] }),
-  ...makeSelectProps({ hideNoData: true, returnObject: true }),
+  ...makeSelectProps({ hideNoData: false, returnObject: true }),
   ...omit(makeVTextFieldProps({
     modelValue: null,
     role: 'combobox',
@@ -127,6 +127,8 @@ export const VCombobox = genericComponent<new <
     const isFocused = shallowRef(false)
     const isPristine = shallowRef(true)
     const listHasFocus = shallowRef(false)
+    const hasEverOpened = shallowRef(false)
+    const hadNoMatchOnLastOpen = shallowRef(false)
     const vMenuRef = ref<VMenu>()
     const vVirtualScrollRef = ref<VVirtualScroll>()
     const selectionIndex = shallowRef(-1)
@@ -149,6 +151,8 @@ export const VCombobox = genericComponent<new <
     const hasSelectionSlot = computed(() => hasChips.value || !!slots.selection)
 
     const _search = shallowRef(!props.multiple && !hasSelectionSlot.value ? model.value[0]?.title ?? '' : '')
+
+    isPristine.value = !_search.value
 
     const search = computed<string>({
       get: () => {
@@ -191,10 +195,9 @@ export const VCombobox = genericComponent<new <
     const { filteredItems, getMatches } = useFilter(props, items, () => isPristine.value ? '' : search.value)
 
     const displayItems = computed(() => {
-      if (props.hideSelected) {
-        return filteredItems.value.filter(filteredItem => !model.value.some(s => s.value === filteredItem.value))
-      }
-      return filteredItems.value
+      return props.hideSelected
+        ? filteredItems.value.filter(filteredItem => !model.value.some(someItem => someItem.value === filteredItem.value))
+        : filteredItems.value
     })
 
     const menuDisabled = computed(() => (
@@ -222,12 +225,28 @@ export const VCombobox = genericComponent<new <
         menu.value = true
       }
 
+      isPristine.value = !value
       emit('update:search', value)
+    })
+
+    watch(menu, (newValue, oldValue) => {
+      if (!newValue && oldValue) {
+        hadNoMatchOnLastOpen.value = !!search.value && filteredItems.value.length === 0
+        return
+      }
+
+      if (newValue && !oldValue) {
+        if (hasEverOpened.value) {
+          isPristine.value = hadNoMatchOnLastOpen.value ? true : !search.value
+        }
+        hasEverOpened.value = true
+      }
     })
 
     watch(model, value => {
       if (!props.multiple && !hasSelectionSlot.value) {
         _search.value = value[0]?.title ?? ''
+        emit('update:search', value[0]?.title ?? '')
       }
     })
 
@@ -368,8 +387,8 @@ export const VCombobox = genericComponent<new <
     }
     function onAfterLeave () {
       if (isFocused.value) {
-        isPristine.value = true
         vTextFieldRef.value?.focus()
+        if (hadNoMatchOnLastOpen.value) isPristine.value = true
       }
     }
     /** @param set - null means toggle */
@@ -692,7 +711,7 @@ export const VCombobox = genericComponent<new <
             'append-inner': (...args) => (
               <>
                 { slots['append-inner']?.(...args) }
-                { (!props.hideNoData || props.items.length) && props.menuIcon ? (
+                { props.menuIcon ? (
                   <VIcon
                     class="v-combobox__menu-icon"
                     color={ vTextFieldRef.value?.fieldIconColor }
