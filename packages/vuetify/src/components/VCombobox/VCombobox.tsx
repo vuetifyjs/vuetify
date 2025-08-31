@@ -206,12 +206,10 @@ export const VCombobox = genericComponent<new <
       if (showAllOnRepeatNoData.value && search.value === lastSearch.value) {
         return items.value
       }
-
-      return props.hideSelected
-        ? filteredItems.value.filter(
-          filteredItem => !model.value.some(
-            someItem => someItem.value === filteredItem.value
-          )) : filteredItems.value
+      if (props.hideSelected) {
+        return filteredItems.value.filter(filteredItem => !model.value.some(s => s.value === filteredItem.value))
+      }
+      return filteredItems.value
     })
 
     const menuDisabled = computed(() => (
