@@ -97,6 +97,16 @@ Menus with other menus inside them will not close until their children are close
 
 <ExamplesExample file="v-menu/prop-submenu" />
 
+#### Positioning Menus with Coordinates
+
+`v-menu` can be positioned relative to the mouse cursor or to explicit `[x, y]` coordinates. This is useful for building context menus or dynamic popups.
+  * Use `:target="[x, y]"` to anchor the menu at specific screen coordinates.
+  * `:offset` is used to shift the menu position relative to its anchor, not to define an absolute position.
+  * Setting `scrim="transparent"` can be helpful when showing context menus so the background isn’t blocked.
+  * Any DOM event with `clientX` and `clientY` can be used (e.g. `click`, `contextmenu`).
+
+<ExamplesExample file="v-menu/prop-positioningmenu" />
+
 ### Slots
 
 #### Activator and tooltip
