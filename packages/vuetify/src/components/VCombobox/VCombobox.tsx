@@ -188,7 +188,7 @@ export const VCombobox = genericComponent<new <
       },
     })
 
-    watch(search, (newValue) => {
+    watch(search, newValue => {
       if (newValue !== lastSearch.value) {
         showAllOnRepeatNoData.value = false
       }
@@ -203,15 +203,15 @@ export const VCombobox = genericComponent<new <
     const { filteredItems, getMatches } = useFilter(props, items, () => isPristine.value ? '' : search.value)
 
     const displayItems = computed(() => {
-
       if (showAllOnRepeatNoData.value && search.value === lastSearch.value) {
         return items.value
       }
 
       return props.hideSelected
-        ? filteredItems.value.filter(filteredItem =>
-            !model.value.some(someItem => someItem.value === filteredItem.value))
-        : filteredItems.value
+        ? filteredItems.value.filter(
+          filteredItem => !model.value.some(
+            someItem => someItem.value === filteredItem.value
+          )) : filteredItems.value
     })
 
     const menuDisabled = computed(() => (
