@@ -42,7 +42,7 @@ import { useLocale } from '@/composables/locale' // For default no-data text
 
 // Utilities
 import { computed, nextTick, ref, watch } from 'vue'
-import { genericComponent, omit, onlyDefinedProps, propsFactory, useRender } from '@/util'
+import { genericComponent, getPropertyFromItem, omit, onlyDefinedProps, propsFactory, useRender } from '@/util'
 
 // Types
 import type { MaybeRef, PropType } from 'vue'
@@ -248,10 +248,13 @@ export type VCommandPaletteListItemSlotScope = {
  * Provides customization points for different parts of the list
  */
 export type VCommandPaletteListSlots = {
+  subheader: { item: any, childrenCount: number }
   item: VCommandPaletteListItemSlotScope // Custom item rendering
   'no-data': never // No data state (no scope needed)
   'prepend-list': never // Content before the list
   'append-list': never // Content after the list
+  'item.title': { item: any }
+  'item.prepend': { item: any }
   'item.append': { item: any }
 }
 
@@ -300,7 +303,7 @@ export const VCommandPaletteList = genericComponent<VCommandPaletteListSlots>()(
      */
     function getVListItemProps (item: any, index: number, isSelectable = true) {
       return {
-        title: item.title,
+        title: getPropertyFromItem(item.raw, props.itemTitle, item),
         onClick: isSelectable
           ? (e: MouseEvent | KeyboardEvent) => emit('click:item', item, e)
           : undefined,
@@ -345,11 +348,12 @@ export const VCommandPaletteList = genericComponent<VCommandPaletteListSlots>()(
           // Add all group children as selectable items
           groupItem.children.forEach((child: any, childIndex: number) => {
             // Transform raw child into VuetifyListItem format
+            const title = getPropertyFromItem(child, props.itemTitle, child)
             const transformedChild = {
-              title: child.title,
+              title,
               value: child.value,
               props: {
-                title: child.title,
+                title,
                 subtitle: child.subtitle,
                 prependIcon: child.prependIcon,
                 appendIcon: child.appendIcon,
@@ -457,7 +461,6 @@ export const VCommandPaletteList = genericComponent<VCommandPaletteListSlots>()(
         aria-activedescendant={ activeDescendantId.value } // Current selection for screen readers
         aria-label={ `${selectableItemsCount.value} ${selectableItemsCount.value === 1 ? 'option' : 'options'} available` }
         aria-multiselectable="false" // Single selection only
-        slim
       >
         { slots['prepend-list']?.() }
         { flattenedItems.value.length > 0
@@ -486,11 +489,21 @@ export const VCommandPaletteList = genericComponent<VCommandPaletteListSlots>()(
               if (flatItem.type === 'group') {
                 // Group headers are non-selectable visual elements
                 const groupProps = getVListItemProps(flatItem.item!, flatItem.originalIndex!, false)
+                const childrenCount = (flatItem.item!.raw.children ?? []).length
                 const slotProps = { item: flatItem.item, props: groupProps }
 
                 return slots.item
                   ? slots.item(slotProps)
-                  : <VListSubheader key={ flatItem.key } { ...groupProps } class="v-command-palette__list-group" role="presentation" />
+                  : slots.subheader
+                    ? slots.subheader({ item: flatItem.item.raw, childrenCount })
+                    : (
+                      <VListSubheader
+                        key={ flatItem.key }
+                        { ...groupProps }
+                        class="v-command-palette__list-group"
+                        role="presentation"
+                      />
+                    )
               }
 
               if (flatItem.type === 'item') {
@@ -522,6 +535,12 @@ export const VCommandPaletteList = genericComponent<VCommandPaletteListSlots>()(
                     onMouseenter={ () => emit('hover', currentSelectableIndex) } // Mouse hover updates selection
                   >
                     {{
+                      title: slots['item.title']
+                        ? () => slots['item.title']!({ item: item.raw })
+                        : undefined,
+                      prepend: slots['item.prepend']
+                        ? () => slots['item.prepend']!({ item: item.raw })
+                        : undefined,
                       append: slots['item.append']
                         ? () => slots['item.append']!({ item: item.raw })
                         : item.raw?.hotkey

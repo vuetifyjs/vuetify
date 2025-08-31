@@ -165,19 +165,19 @@ const VCommandPaletteContent = genericComponent<VCommandPaletteSlots>()({
 
       if (isGroupDefinition(rawItem)) {
         // For groups, check if group itself matches or any child matches
-        const groupMatches = itemMatches(rawItem, searchLower)
-        const children = rawItem.children || []
+        const groupMatches = itemMatches(item, searchLower)
+        const children = (item as any).children || []
         const hasMatchingChildren = children.some((child: any) => itemMatches(child, searchLower))
         return groupMatches || hasMatchingChildren
       } else if (isParentDefinition(rawItem)) {
         // For parents, check if parent itself matches or any child matches
-        const parentMatches = itemMatches(rawItem, searchLower)
-        const children = rawItem.children || []
+        const parentMatches = itemMatches(item, searchLower)
+        const children = (item as any).children || []
         const hasMatchingChildren = children.some((child: any) => itemMatches(child, searchLower))
         return parentMatches || hasMatchingChildren
       } else {
         // For regular items, use standard matching
-        return itemMatches(rawItem, searchLower)
+        return itemMatches(item, searchLower)
       }
     }
 
@@ -195,15 +195,21 @@ const VCommandPaletteContent = genericComponent<VCommandPaletteSlots>()({
         if (!rawItem) return item
 
         if (isGroupDefinition(rawItem)) {
-          const groupMatches = itemMatches(rawItem, searchLower)
-          const children = rawItem.children || []
+          const groupMatches = itemMatches(item, searchLower)
+          const children = (item as any).children || []
 
           // If group title matches, show all children; otherwise, show only matching children
           const filteredChildren = groupMatches
             ? children
             : children.filter((child: any) => itemMatches(child, searchLower))
 
-          return { ...item, raw: { ...rawItem, children: filteredChildren } }
+          return {
+            ...item,
+            raw: {
+              ...rawItem,
+              children: filteredChildren.map((child: any) => child.raw),
+            },
+          }
         }
         return item
       })
@@ -426,6 +432,8 @@ const VCommandPaletteContent = genericComponent<VCommandPaletteSlots>()({
         { slots.default?.(defaultSlotScope.value) ?? (
           <VCommandPaletteList
             items={ filteredActions.value }
+            itemTitle={ props.itemTitle }
+            itemValue={ props.itemValue }
             selectedIndex={ selectedIndex.value }
             onClick:item={ onItemClickFromList }
             onHover={ setSelectedIndex }
@@ -433,7 +441,10 @@ const VCommandPaletteContent = genericComponent<VCommandPaletteSlots>()({
             { ...props.listProps }
           >
             {{
+              subheader: slots['list.subheader'],
               item: slots.item,
+              'item.title': slots['item.title'],
+              'item.prepend': slots['item.prepend'],
               'item.append': slots['item.append'],
               'no-data': slots['no-data'],
               'prepend-list': slots['prepend-list'],
@@ -479,6 +490,8 @@ export type VCommandPaletteSlots = Pick<VCommandPaletteSearchSlots, 'back'> & {
   default: VCommandPaletteDefaultSlotScope
   search: { modelValue: string }
   item: VCommandPaletteItemRenderScope
+  'item.title': VCommandPaletteListSlots['item.title']
+  'item.prepend': VCommandPaletteListSlots['item.prepend']
   'item.append': VCommandPaletteListSlots['item.append']
   'search.append': VCommandPaletteSearchSlots['append']
   'no-data': never
@@ -486,6 +499,7 @@ export type VCommandPaletteSlots = Pick<VCommandPaletteSearchSlots, 'back'> & {
   footer: VCommandPaletteFooterSlotScope
   'prepend-list': never
   'append-list': never
+  'list.subheader': VCommandPaletteListSlots['subheader']
   prepend: VCommandPaletteGenericSlotScope
   append: VCommandPaletteGenericSlotScope
   subheader: VCommandPaletteSubheaderSlotScope
