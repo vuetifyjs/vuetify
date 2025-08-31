@@ -229,20 +229,6 @@ export const VCombobox = genericComponent<new <
       emit('update:search', value)
     })
 
-    watch(menu, (newValue, oldValue) => {
-      if (!newValue && oldValue) {
-        hadNoMatchOnLastOpen.value = !!search.value && filteredItems.value.length === 0
-        return
-      }
-
-      if (newValue && !oldValue) {
-        if (hasEverOpened.value) {
-          isPristine.value = hadNoMatchOnLastOpen.value ? true : !search.value
-        }
-        hasEverOpened.value = true
-      }
-    })
-
     watch(model, value => {
       if (!props.multiple && !hasSelectionSlot.value) {
         _search.value = value[0]?.title ?? ''
@@ -458,7 +444,7 @@ export const VCombobox = genericComponent<new <
       }
     })
 
-    watch(menu, () => {
+    watch(menu, (newValue, oldValue) => {
       if (!props.hideSelected && menu.value && model.value.length) {
         const index = displayItems.value.findIndex(
           item => model.value.some(s => (props.valueComparator || deepEqual)(s.value, item.value))
@@ -466,6 +452,18 @@ export const VCombobox = genericComponent<new <
         IN_BROWSER && window.requestAnimationFrame(() => {
           index >= 0 && vVirtualScrollRef.value?.scrollToIndex(index)
         })
+      }
+
+      if (!newValue && oldValue) {
+        hadNoMatchOnLastOpen.value = !!search.value && filteredItems.value.length === 0
+        return
+      }
+
+      if (newValue && !oldValue) {
+        if (hasEverOpened.value) {
+          isPristine.value = hadNoMatchOnLastOpen.value ? true : !search.value
+        }
+        hasEverOpened.value = true
       }
     })
 
