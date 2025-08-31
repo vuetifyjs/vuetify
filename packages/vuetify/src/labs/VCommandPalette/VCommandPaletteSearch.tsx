@@ -22,7 +22,6 @@ export const makeVCommandPaletteSearchProps = propsFactory({
   ...makeVTextFieldProps({
     autofocus: true,
     bgColor: 'transparent',
-    clearable: true,
     hideDetails: true,
     flat: true,
     placeholder: '$vuetify.command.placeholder',
