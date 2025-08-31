@@ -252,6 +252,7 @@ export type VCommandPaletteListSlots = {
   'no-data': never // No data state (no scope needed)
   'prepend-list': never // Content before the list
   'append-list': never // Content after the list
+  'item.append': { item: any }
 }
 
 /**
@@ -521,8 +522,11 @@ export const VCommandPaletteList = genericComponent<VCommandPaletteListSlots>()(
                     onMouseenter={ () => emit('hover', currentSelectableIndex) } // Mouse hover updates selection
                   >
                     {{
-                      // Show hotkey in append slot if available
-                      append: item.raw?.hotkey ? () => <VHotkey keys={ item.raw.hotkey } /> : undefined,
+                      append: slots['item.append']
+                        ? () => slots['item.append']!({ item: item.raw })
+                        : item.raw?.hotkey
+                          ? () => <VHotkey keys={ item.raw.hotkey } />
+                          : undefined,
                     }}
                   </VListItem>
                 )

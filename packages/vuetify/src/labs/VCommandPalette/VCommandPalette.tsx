@@ -36,9 +36,10 @@ import { consoleError, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType, Ref } from 'vue'
-import type { VCommandPaletteItem } from './VCommandPaletteList'
+import type { VCommandPaletteItem, VCommandPaletteListSlots } from './VCommandPaletteList'
 import type { InternalItem } from '@/composables/filter'
 import type { ListItem as VuetifyListItem } from '@/composables/list-items'
+import type { VCommandPaletteSearchSlots } from '@/labs/VCommandPalette/VCommandPaletteSearch'
 
 type FilterFunction = (value: string, query: string, item?: InternalItem) => boolean
 
@@ -414,6 +415,7 @@ const VCommandPaletteContent = genericComponent<VCommandPaletteSlots>()({
               onClick:back={ navigateBack }
               { ...props.searchProps }
               v-slots={{
+                append: slots['search.append'],
                 back: slots.back,
               }}
             />
@@ -432,6 +434,7 @@ const VCommandPaletteContent = genericComponent<VCommandPaletteSlots>()({
           >
             {{
               item: slots.item,
+              'item.append': slots['item.append'],
               'no-data': slots['no-data'],
               'prepend-list': slots['prepend-list'],
               'append-list': slots['append-list'],
@@ -472,10 +475,12 @@ export type VCommandPaletteDefaultSlotScope = {
   getItemProps: (item: any, index: number) => Record<string, any>
 }
 
-export type VCommandPaletteSlots = {
+export type VCommandPaletteSlots = Pick<VCommandPaletteSearchSlots, 'back'> & {
   default: VCommandPaletteDefaultSlotScope
   search: { modelValue: string }
   item: VCommandPaletteItemRenderScope
+  'item.append': VCommandPaletteListSlots['item.append']
+  'search.append': VCommandPaletteSearchSlots['append']
   'no-data': never
   header: VCommandPaletteHeaderSlotScope
   footer: VCommandPaletteFooterSlotScope

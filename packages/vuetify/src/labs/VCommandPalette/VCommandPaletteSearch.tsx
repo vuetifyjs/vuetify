@@ -3,7 +3,7 @@ import './VCommandPaletteSearch.scss'
 
 // Components
 import { VTextField } from '@/components/VTextField'
-import { makeVTextFieldProps } from '@/components/VTextField/VTextField'
+import { makeVTextFieldProps, VTextFieldSlots } from '@/components/VTextField/VTextField'
 
 // Composables
 import { useLocale } from '@/composables'
@@ -31,6 +31,7 @@ export const makeVCommandPaletteSearchProps = propsFactory({
 }, 'VCommandPaletteSearch')
 
 export type VCommandPaletteSearchSlots = {
+  append: VTextFieldSlots['append-inner']
   back: {
     props: {
       onClick: (e: Event) => void
@@ -71,6 +72,7 @@ export const VCommandPaletteSearch = genericComponent<VCommandPaletteSearchSlots
           { ...textFieldProps }
           v-model={ search.value }
           v-slots={{
+            'append-inner': slots.append,
             'prepend-inner': props.showBack
               ? () => slots.back?.({ props: backButtonProps }) ?? (
                 <VIconBtn
