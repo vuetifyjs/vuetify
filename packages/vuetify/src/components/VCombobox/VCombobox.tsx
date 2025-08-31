@@ -129,6 +129,8 @@ export const VCombobox = genericComponent<new <
     const listHasFocus = shallowRef(false)
     const hasEverOpened = shallowRef(false)
     const hadNoMatchOnLastOpen = shallowRef(false)
+    const lastSearch = shallowRef('')
+    const showAllOnRepeatNoData = shallowRef(false)
     const vMenuRef = ref<VMenu>()
     const vVirtualScrollRef = ref<VVirtualScroll>()
     const selectionIndex = shallowRef(-1)
@@ -186,6 +188,12 @@ export const VCombobox = genericComponent<new <
       },
     })
 
+    watch(search, (newValue) => {
+      if (newValue !== lastSearch.value) {
+        showAllOnRepeatNoData.value = false
+      }
+    })
+
     const counterValue = computed(() => {
       return typeof props.counterValue === 'function' ? props.counterValue(model.value)
         : typeof props.counterValue === 'number' ? props.counterValue
@@ -195,8 +203,14 @@ export const VCombobox = genericComponent<new <
     const { filteredItems, getMatches } = useFilter(props, items, () => isPristine.value ? '' : search.value)
 
     const displayItems = computed(() => {
+
+      if (showAllOnRepeatNoData.value && search.value === lastSearch.value) {
+        return items.value
+      }
+
       return props.hideSelected
-        ? filteredItems.value.filter(filteredItem => !model.value.some(someItem => someItem.value === filteredItem.value))
+        ? filteredItems.value.filter(filteredItem =>
+            !model.value.some(someItem => someItem.value === filteredItem.value))
         : filteredItems.value
     })
 
@@ -454,14 +468,15 @@ export const VCombobox = genericComponent<new <
         })
       }
 
-      if (!newValue && oldValue) {
-        hadNoMatchOnLastOpen.value = !!search.value && filteredItems.value.length === 0
+      if (!newValue && oldValue && search.value && filteredItems.value.length === 0) {
+        showAllOnRepeatNoData.value = true
+        lastSearch.value = search.value
         return
       }
 
       if (newValue && !oldValue) {
-        if (hasEverOpened.value) {
-          isPristine.value = hadNoMatchOnLastOpen.value ? true : !search.value
+        if (hasEverOpened.value && !hadNoMatchOnLastOpen.value) {
+          isPristine.value = !search.value
         }
         hasEverOpened.value = true
       }
