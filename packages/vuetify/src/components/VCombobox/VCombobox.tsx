@@ -127,10 +127,7 @@ export const VCombobox = genericComponent<new <
     const isFocused = shallowRef(false)
     const isPristine = shallowRef(true)
     const listHasFocus = shallowRef(false)
-    const hasEverOpened = shallowRef(false)
-    const hadNoMatchOnLastOpen = shallowRef(false)
-    const lastSearch = shallowRef('')
-    const showAllOnRepeatNoData = shallowRef(false)
+    const showAllItemsForNoMatch = shallowRef(false)
     const vMenuRef = ref<VMenu>()
     const vVirtualScrollRef = ref<VVirtualScroll>()
     const selectionIndex = shallowRef(-1)
@@ -153,8 +150,6 @@ export const VCombobox = genericComponent<new <
     const hasSelectionSlot = computed(() => hasChips.value || !!slots.selection)
 
     const _search = shallowRef(!props.multiple && !hasSelectionSlot.value ? model.value[0]?.title ?? '' : '')
-
-    isPristine.value = !_search.value
 
     const search = computed<string>({
       get: () => {
@@ -188,12 +183,6 @@ export const VCombobox = genericComponent<new <
       },
     })
 
-    watch(search, newValue => {
-      if (newValue !== lastSearch.value) {
-        showAllOnRepeatNoData.value = false
-      }
-    })
-
     const counterValue = computed(() => {
       return typeof props.counterValue === 'function' ? props.counterValue(model.value)
         : typeof props.counterValue === 'number' ? props.counterValue
@@ -203,11 +192,11 @@ export const VCombobox = genericComponent<new <
     const { filteredItems, getMatches } = useFilter(props, items, () => isPristine.value ? '' : search.value)
 
     const displayItems = computed(() => {
-      if (showAllOnRepeatNoData.value && search.value === lastSearch.value) {
-        return items.value
-      }
       if (props.hideSelected) {
         return filteredItems.value.filter(filteredItem => !model.value.some(s => s.value === filteredItem.value))
+      }
+      if (filteredItems.value.length === 0 && showAllItemsForNoMatch.value) {
+        return items.value
       }
       return filteredItems.value
     })
@@ -229,6 +218,7 @@ export const VCombobox = genericComponent<new <
     const label = toRef(() => menu.value ? props.closeText : props.openText)
 
     watch(_search, value => {
+      showAllItemsForNoMatch.value = false
       if (cleared) {
         // wait for clear to finish, VTextField sets _search to null
         // then search computed triggers and updates _search to ''
@@ -384,12 +374,8 @@ export const VCombobox = genericComponent<new <
     }
     function onAfterLeave () {
       if (isFocused.value) {
+        isPristine.value = true
         vTextFieldRef.value?.focus()
-        if (hadNoMatchOnLastOpen.value) isPristine.value = true
-      }
-
-      if (search.value && filteredItems.value.length === 0) {
-        showAllOnRepeatNoData.value = true
       }
     }
     /** @param set - null means toggle */
@@ -459,8 +445,8 @@ export const VCombobox = genericComponent<new <
       }
     })
 
-    watch(menu, (newValue, oldValue) => {
-      if (!props.hideSelected && menu.value && model.value.length) {
+    watch(menu, val => {
+      if (!props.hideSelected && val && model.value.length) {
         const index = displayItems.value.findIndex(
           item => model.value.some(s => (props.valueComparator || deepEqual)(s.value, item.value))
         )
@@ -469,18 +455,12 @@ export const VCombobox = genericComponent<new <
         })
       }
 
-      if (!newValue && oldValue && search.value && filteredItems.value.length === 0) {
-        lastSearch.value = search.value
-        return
+      if (val && search.value && filteredItems.value.length === 0) {
+        showAllItemsForNoMatch.value = true
       }
 
-      if (newValue && !oldValue) {
-        if (hasEverOpened.value && !hadNoMatchOnLastOpen.value) {
-          isPristine.value = !search.value
-        }
-        hasEverOpened.value = true
-      }
-    })
+      isPristine.value = !search.value
+    }, { immediate: true })
 
     watch(() => props.items, (newVal, oldVal) => {
       if (menu.value) return
@@ -568,7 +548,6 @@ export const VCombobox = genericComponent<new <
                       { !displayItems.value.length && !props.hideNoData && (slots['no-data']?.() ?? (
                         <VListItem key="no-data" title={ t(props.noDataText) } />
                       ))}
-
                       <VVirtualScroll ref={ vVirtualScrollRef } renderless items={ displayItems.value } itemKey="value">
                         { ({ item, index, itemRef }) => {
                           const itemProps = mergeProps(item.props, {
