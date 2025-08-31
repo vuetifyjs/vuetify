@@ -387,6 +387,10 @@ export const VCombobox = genericComponent<new <
         vTextFieldRef.value?.focus()
         if (hadNoMatchOnLastOpen.value) isPristine.value = true
       }
+
+      if (search.value && filteredItems.value.length === 0) {
+        showAllOnRepeatNoData.value = true
+      }
     }
     /** @param set - null means toggle */
     function select (item: ListItem | undefined, set: boolean | null = true) {
@@ -466,7 +470,6 @@ export const VCombobox = genericComponent<new <
       }
 
       if (!newValue && oldValue && search.value && filteredItems.value.length === 0) {
-        showAllOnRepeatNoData.value = true
         lastSearch.value = search.value
         return
       }
