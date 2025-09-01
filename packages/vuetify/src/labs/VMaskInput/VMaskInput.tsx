@@ -7,7 +7,7 @@ import { isMaskDelimiter, makeMaskProps, useMask } from '@/composables/mask'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, onBeforeMount, ref, shallowRef, toRef } from 'vue'
+import { computed, nextTick, onBeforeMount, ref, shallowRef, toRef } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -33,8 +33,8 @@ export const VMaskInput = genericComponent<VMaskInputSlots>()({
   setup (props, { slots, emit }) {
     const vTextFieldRef = ref<VTextField>()
 
-    const selection = shallowRef(0)
-    const lazySelection = shallowRef(0)
+    const inputAction = shallowRef()
+    const caretPosition = shallowRef(0)
 
     const mask = useMask(props)
     const returnMaskedValue = computed(() => props.mask && props.returnMaskedValue)
@@ -47,18 +47,23 @@ export const VMaskInput = genericComponent<VMaskInputSlots>()({
       val => props.mask ? mask.mask(mask.unmask(val)) : val,
       val => {
         if (props.mask) {
-          const valueBeforeChange = mask.unmask(model.value)
+          const valueWithoutDelimiters = removeMaskDelimiters(val)
+
           // E.g. mask is #-# and the input value is '2-23'
           // model-value should be enforced to '2-2'
-          const enforcedMaskedValue = mask.mask(mask.unmask(val))
-          const newUnmaskedValue = mask.unmask(enforcedMaskedValue)
+          const newMaskedValue = mask.mask(valueWithoutDelimiters)
+          const newUnmaskedValue = mask.unmask(newMaskedValue)
 
-          if (newUnmaskedValue === valueBeforeChange) {
-            vTextFieldRef.value!.value = enforcedMaskedValue
-          }
-          val = newUnmaskedValue
-          updateRange()
-          return returnMaskedValue.value ? mask.mask(val) : val
+          const newCaretPosition = getNewCaretPosition({
+            oldValue: model.value,
+            newValue: newMaskedValue,
+            oldCaret: caretPosition.value,
+          })
+
+          vTextFieldRef.value!.value = newMaskedValue
+          vTextFieldRef.value!.setSelectionRange(newCaretPosition, newCaretPosition)
+
+          return returnMaskedValue.value ? mask.mask(newUnmaskedValue) : newUnmaskedValue
         }
         return val
       },
@@ -66,43 +71,142 @@ export const VMaskInput = genericComponent<VMaskInputSlots>()({
 
     const validationValue = toRef(() => returnMaskedValue.value ? model.value : mask.unmask(model.value))
 
+    function removeMaskDelimiters (val: string): string {
+      return val.split('').filter(ch => !isMaskDelimiter(ch)).join('')
+    }
+
+    function getNewCaretPosition ({
+      oldValue,
+      newValue,
+      oldCaret,
+    }: {
+      oldValue: string
+      newValue: string
+      oldCaret: number
+    }): number {
+      if (!newValue) return 0
+      if (!oldValue) return newValue.length
+
+      let newCaret: number
+
+      if (inputAction.value === 'Backspace') {
+        newCaret = oldCaret - 1
+        while (newCaret > 0 && isMaskDelimiter(newValue[newCaret - 1])) newCaret--
+      } else if (inputAction.value === 'Delete') {
+        newCaret = oldCaret
+      } else { // insertion
+        newCaret = oldCaret + 1
+        while (isMaskDelimiter(newValue[newCaret])) newCaret++
+        if (isMaskDelimiter(newValue[oldCaret])) newCaret++
+      }
+
+      return newCaret
+    }
+
     onBeforeMount(() => {
       if (props.returnMaskedValue) {
         emit('update:modelValue', model.value)
       }
     })
 
-    function setCaretPosition (newSelection: number) {
-      selection.value = newSelection
-      vTextFieldRef.value && vTextFieldRef.value.setSelectionRange(selection.value, selection.value)
-    }
+    function onKeyDown (e: KeyboardEvent) {
+      if (e.metaKey) return
 
-    function resetSelections () {
-      if (!vTextFieldRef.value?.selectionEnd) return
+      const inputElement = e.target as HTMLInputElement
 
-      selection.value = vTextFieldRef.value.selectionEnd
-      lazySelection.value = 0
+      caretPosition.value = inputElement.selectionStart || 0
+      inputAction.value = e.key
 
-      for (let index = 0; index < selection.value; index++) {
-        isMaskDelimiter(vTextFieldRef.value.value[index]) || lazySelection.value++
+      const hasSelection = inputElement.selectionStart !== inputElement.selectionEnd
+      if (e.key === 'Backspace' && hasSelection) {
+        e.preventDefault()
+        deleteSelection(e)
       }
     }
 
-    function updateRange () {
-      if (!vTextFieldRef.value) return
-      resetSelections()
+    async function onCut (e: Event) {
+      e.preventDefault()
 
-      let selection = 0
-      const newValue = vTextFieldRef.value.value
+      copySelectionToClipboard(e)
+      deleteSelection(e)
+    }
 
-      if (newValue) {
-        for (let index = 0; index < newValue.length; index++) {
-          if (lazySelection.value <= 0) break
-          isMaskDelimiter(newValue[index]) || lazySelection.value--
-          selection++
-        }
+    async function onPaste (e: ClipboardEvent) {
+      e.preventDefault()
+
+      const inputElement = e.target as HTMLInputElement
+      const pastedString = removeMaskDelimiters(e.clipboardData?.getData('text') || '')
+
+      if (!pastedString) return
+
+      const pastedCharacters = [...pastedString]
+
+      const hasSelection = inputElement.selectionStart !== inputElement.selectionEnd
+
+      if (hasSelection) {
+        replaceSelection(inputElement, pastedCharacters)
+      } else {
+        insertCharacters(inputElement, pastedCharacters)
       }
-      setCaretPosition(selection)
+    }
+
+    function copySelectionToClipboard (e: Event) {
+      const inputElement = e.target as HTMLInputElement
+      const start = inputElement.selectionStart || 0
+      const end = inputElement.selectionEnd || 0
+      const selectedText = inputElement.value.substring(start, end)
+      navigator.clipboard.writeText(selectedText)
+    }
+
+    async function deleteSelection (e: Event) {
+      const inputElement = e.target as HTMLInputElement
+      const curStart = inputElement.selectionStart || 0
+      caretPosition.value = inputElement.selectionEnd || 0
+
+      while (caretPosition.value > curStart) {
+        const success = await simulateBackspace(inputElement)
+        if (!success) break
+      }
+    }
+
+    async function simulateBackspace (inputElement: HTMLInputElement) {
+      inputAction.value = 'Backspace'
+      model.value = inputElement.value.slice(0, caretPosition.value - 1) + inputElement.value.slice(caretPosition.value)
+      inputAction.value = ''
+      if (caretPosition.value === inputElement.selectionEnd) return false
+      caretPosition.value = inputElement.selectionEnd || 0
+      await nextTick()
+      return true
+    }
+
+    async function insertCharacters (inputElement: HTMLInputElement, pastedCharacters: string[]) {
+      for (let i = 0; i < pastedCharacters.length; i++) {
+        await insertCharacter(inputElement, pastedCharacters[i])
+      }
+    }
+
+    async function insertCharacter (inputElement: HTMLInputElement, character: string) {
+      caretPosition.value = inputElement.selectionEnd || 0
+      model.value = inputElement.value.slice(0, caretPosition.value) + character + inputElement.value.slice(caretPosition.value)
+      await nextTick()
+    }
+
+    async function replaceSelection (inputElement: HTMLInputElement, pastedCharacters: string[]) {
+      caretPosition.value = inputElement.selectionStart || 0
+      for (let i = 0; i < pastedCharacters.length; i++) {
+        await replaceCharacter(caretPosition.value, pastedCharacters[i])
+        caretPosition.value++
+      }
+    }
+
+    async function replaceCharacter (index: number, character: string) {
+      let targetIndex = index
+
+      // Find next non-delimiter position
+      while (targetIndex < model.value.length && isMaskDelimiter(model.value[targetIndex])) targetIndex++
+
+      model.value = model.value.slice(0, targetIndex) + character + model.value.slice(targetIndex + 1)
+      await nextTick()
     }
 
     useRender(() => {
@@ -114,6 +218,9 @@ export const VMaskInput = genericComponent<VMaskInputSlots>()({
           v-model={ model.value }
           ref={ vTextFieldRef }
           validationValue={ validationValue.value }
+          onCut={ onCut }
+          onPaste={ onPaste }
+          onKeydown={ onKeyDown }
         >
           {{ ...slots }}
         </VTextField>

@@ -73,6 +73,7 @@ export const VBarline = genericComponent<VBarlineSlots>()({
       boundary: Boundary
     ): Bar[] {
       const { minX, maxX, minY, maxY } = boundary
+
       const totalValues = values.length
       let maxValue = props.max != null ? Number(props.max) : Math.max(...values)
       let minValue = props.min != null ? Number(props.min) : Math.min(...values)
@@ -80,7 +81,7 @@ export const VBarline = genericComponent<VBarlineSlots>()({
       if (minValue > 0 && props.min == null) minValue = 0
       if (maxValue < 0 && props.max == null) maxValue = 0
 
-      const gridX = maxX / totalValues
+      const gridX = maxX / (totalValues === 1 ? 2 : totalValues)
       const gridY = (maxY - minY) / ((maxValue - minValue) || 1)
       const horizonY = maxY - Math.abs(minValue * gridY)
 
@@ -122,7 +123,10 @@ export const VBarline = genericComponent<VBarlineSlots>()({
     })
 
     const bars = computed(() => genBars(items.value, boundary.value))
-    const offsetX = computed(() => (Math.abs(bars.value[0].x - bars.value[1].x) - lineWidth.value) / 2)
+    const offsetX = computed(() => bars.value.length === 1
+      ? (boundary.value.maxX - lineWidth.value) / 2
+      : (Math.abs(bars.value[0].x - (bars.value[1].x)) - lineWidth.value) / 2
+    )
     const smooth = computed(() => typeof props.smooth === 'boolean' ? (props.smooth ? 2 : 0) : Number(props.smooth))
 
     useRender(() => {
