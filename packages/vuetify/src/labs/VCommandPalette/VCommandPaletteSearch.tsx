@@ -3,7 +3,7 @@ import './VCommandPaletteSearch.scss'
 
 // Components
 import { VTextField } from '@/components/VTextField'
-import { makeVTextFieldProps, VTextFieldSlots } from '@/components/VTextField/VTextField'
+import { makeVTextFieldProps } from '@/components/VTextField/VTextField'
 
 // Composables
 import { useLocale } from '@/composables'
@@ -12,6 +12,9 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 // Utilities
 import { VIconBtn } from '@/labs/VIconBtn'
 import { genericComponent, propsFactory, useRender } from '@/util'
+
+// Types
+import type { VTextFieldSlots } from '@/components/VTextField/VTextField'
 
 export const makeVCommandPaletteSearchProps = propsFactory({
   showBack: Boolean,
