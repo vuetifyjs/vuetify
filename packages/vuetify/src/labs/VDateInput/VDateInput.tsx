@@ -16,10 +16,11 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, ref, shallowRef, watch } from 'vue'
-import { genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
+import { genericComponent, omit, pick, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import type { VDatePickerSlots } from '@/components/VDatePicker/VDatePicker'
 import type { StrategyProps } from '@/components/VOverlay/locationStrategies'
 import type { VTextFieldSlots } from '@/components/VTextField/VTextField'
 import type { GenericProps } from '@/util'
@@ -31,10 +32,11 @@ export type VDateInputActionsSlot = {
   isPristine: boolean
 }
 
-export type VDateInputSlots = Omit<VTextFieldSlots, 'default'> & {
-  actions: VDateInputActionsSlot
-  default: never
-}
+export type VDateInputSlots = Omit<VTextFieldSlots, 'default'> &
+  Pick<VDatePickerSlots, 'title' | 'header' | 'day' | 'month' | 'year'> & {
+    actions: VDateInputActionsSlot
+    default: never
+  }
 
 export const makeVDateInputProps = propsFactory({
   displayFormat: {
@@ -245,6 +247,7 @@ export const VDateInput = genericComponent<new <
     useRender(() => {
       const confirmEditProps = VConfirmEdit.filterProps(props)
       const datePickerProps = VDatePicker.filterProps(omit(props, ['active', 'location', 'rounded']))
+      const datePickerSlots = pick(slots, ['title', 'header', 'day', 'month', 'year'])
       const textFieldProps = VTextField.filterProps(omit(props, ['placeholder']))
 
       return (
@@ -312,6 +315,7 @@ export const VDateInput = genericComponent<new <
                             onMousedown={ (e: MouseEvent) => e.preventDefault() }
                           >
                             {{
+                              ...datePickerSlots,
                               actions: !props.hideActions ? () => slots.actions?.({ save, cancel, isPristine }) ?? actions() : undefined,
                             }}
                           </VDatePicker>

@@ -94,6 +94,11 @@ With the power of slots, you can customize the visual output of the select. In t
 
 <ExamplesExample file="v-autocomplete/slot-item-and-selection" />
 
+When customizing v-autocomplete items with the #item slot, make sure to forward the slot props using v-bind="props".
+This is required for virtual scrolling to work properly — without it, only part of your items may be displayed.
+
+<ExamplesExample file="v-autocomplete/slot-item-and-vbind-props" />
+
 ### Misc
 
 <!--

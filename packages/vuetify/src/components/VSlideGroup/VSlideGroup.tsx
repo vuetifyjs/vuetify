@@ -344,6 +344,8 @@ export const VSlideGroup = genericComponent<new <T>(
       isSelected: group.isSelected,
     }))
 
+    const hasOverflowOrScroll = computed(() => isOverflowing.value || Math.abs(scrollOffset.value) > 0)
+
     const hasAffixes = computed(() => {
       switch (props.showArrows) {
         // Always show arrows on desktop & mobile
@@ -354,12 +356,12 @@ export const VSlideGroup = genericComponent<new <T>(
 
         // Show arrows on mobile when overflowing.
         // This matches the default 2.2 behavior
-        case true: return isOverflowing.value || Math.abs(scrollOffset.value) > 0
+        case true: return hasOverflowOrScroll.value
 
         // Always show on mobile
         case 'mobile': return (
           mobile.value ||
-          (isOverflowing.value || Math.abs(scrollOffset.value) > 0)
+          hasOverflowOrScroll.value
         )
 
         // https://material.io/components/tabs#scrollable-tabs
@@ -367,7 +369,7 @@ export const VSlideGroup = genericComponent<new <T>(
         // overflowed on desktop
         default: return (
           !mobile.value &&
-          (isOverflowing.value || Math.abs(scrollOffset.value) > 0)
+          hasOverflowOrScroll.value
         )
       }
     })
@@ -378,7 +380,7 @@ export const VSlideGroup = genericComponent<new <T>(
     })
 
     const hasNext = computed(() => {
-      if (!containerRef.value) return false
+      if (!containerRef.value || !hasOverflowOrScroll.value) return false
 
       const scrollSize = getScrollSize(isHorizontal.value, containerRef.el)
       const clientSize = getClientSize(isHorizontal.value, containerRef.el)
