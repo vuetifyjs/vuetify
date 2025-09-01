@@ -23,10 +23,9 @@
               <div class="mb-auto text-caption">
                 <div class="mb-4">{{ text }}</div>
                 <ul v-if="notes && notes.length" class="mb-0 ml-5">
-                  <li v-for="item in notes">{{ item }}</li>
+                  <li v-for="(item, j) in notes" :key="j">{{ item }}</li>
                 </ul>
               </div>
-
 
               <v-btn
                 :href="href"
@@ -38,7 +37,7 @@
                 target="_blank"
               />
 
-              <v-divider class="my-8"/>
+              <v-divider class="my-8" />
             </v-responsive>
           </v-col>
         </template>
