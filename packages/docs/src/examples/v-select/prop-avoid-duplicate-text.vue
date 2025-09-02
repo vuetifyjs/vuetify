@@ -2,7 +2,7 @@
   <v-app>
     <v-container>
       <v-select v-model="model" :items="items">
-        <template v-slot:item="{props, item}">
+        <template v-slot:item="{ props, item }">
           <v-list-item v-bind="props" :title="null">
             <v-list-item-title>{{ item.title }}</v-list-item-title>
           </v-list-item>
