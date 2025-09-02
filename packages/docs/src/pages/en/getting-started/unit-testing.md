@@ -110,9 +110,9 @@ When testing Vuetify components, we recommend running tests in a real browser en
 
 ### Recommended Test Runners
 
-  * [Vitest (browser mode)](https://vitest.dev/guide/browser/) – Fast, Vite-native test runner with browser support.
-  * [Playwright](https://playwright.dev/) – End-to-end testing in actual browsers.
-  * [Cypress](https://www.cypress.io/) – Great for integration and E2E tests.
+* [Vitest (browser mode)](https://vitest.dev/guide/browser/) – Fast, Vite-native test runner with browser support.
+* [Playwright](https://playwright.dev/) – End-to-end testing in actual browsers.
+* [Cypress](https://www.cypress.io/) – Great for integration and E2E tests.
 
 ### Rendering with Vuetify
 
