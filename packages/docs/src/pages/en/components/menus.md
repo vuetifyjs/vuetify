@@ -100,10 +100,11 @@ Menus with other menus inside them will not close until their children are close
 #### Positioning Menus with Coordinates
 
 `v-menu` can be positioned relative to a DOM element or explicit `[x, y]` coordinates.
-  * The most common use case is to pass an **event target element**. This allows the menu to anchor itself to the element that was clicked.
-  * You can also use `[x, y]` screen coordinates, though this is less common and typically used for context menus.
-  * `:offset` is used to shift the menu position relative to its anchor, not to define an absolute position.
-  * Any DOM event with `clientX` and `clientY` can be used (e.g. `click`, `contextmenu`).
+
+* The most common use case is to pass an **event target element**. This allows the menu to anchor itself to the element that was clicked.
+* You can also use `[x, y]` screen coordinates, though this is less common and typically used for context menus.
+* `:offset` is used to shift the menu position relative to its anchor, not to define an absolute position.
+* Any DOM event with `clientX` and `clientY` can be used (e.g. `click`, `contextmenu`).
 
 <ExamplesExample file="v-menu/prop-positioningmenu" />
 
