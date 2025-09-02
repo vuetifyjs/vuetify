@@ -52,10 +52,10 @@
     { title: 'Remove', prependIcon: 'mdi-trash-can-outline', code: 'delete' },
   ]
 
-  async function show(evt) {
+  async function show (evt) {
     if (showMenu.value) {
       showMenu.value = false
-      await new Promise(r => setTimeout(r, 100))
+      await new Promise(resolve => setTimeout(resolve, 100))
     }
     menuTarget.value = evt.target.closest('.v-icon-btn')
     showMenu.value = true
