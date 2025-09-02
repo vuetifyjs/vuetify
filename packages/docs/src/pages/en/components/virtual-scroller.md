@@ -78,6 +78,14 @@ If your items are not of a uniform size, omit the **item-height** prop to have `
 
 <ExamplesExample file="v-virtual-scroll/prop-dynamic-item-height" />
 
+#### Using `v-virtual-scroll` with `v-table` (Renderless Mode)
+
+When using `v-virtual-scroll` in **renderless** mode inside a `v-table`, you need to explicitly provide `:ref="itemRef"` to your row elements.  
+
+Renderless mode does not generate DOM nodes automatically, so you must bind `itemRef` yourself for virtual scrolling to work properly.
+
+<ExamplesExample file="v-virtual-scroll/renderless" />
+
 ### Examples
 
 The following is a collection of `v-virtual-scroll` examples that demonstrate how different the properties work in an application.
