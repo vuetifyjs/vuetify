@@ -13,9 +13,32 @@
     .v-chip
       margin: $chip-group-margin
 
+      @media (forced-colors: active)
+        background-color: buttonface !important
+        color: buttontext !important
+
+        &:hover
+          color: highlight !important
+
       &.v-chip--selected:not(.v-chip--disabled)
         .v-chip__overlay
           opacity: $chip-group-selected-opacity
+
+        @media (forced-colors: active)
+          color: highlight !important
+          forced-color-adjust: preserve-parent-color
+
+          &:focus-visible
+            outline-offset: 2px
+
+          &.v-chip--variant-elevated,
+          &.v-chip--variant-flat
+            background-color: highlight !important
+            color: highlighttext !important
+
+          &.v-chip--variant-outlined,
+          &.v-chip--variant-tonal
+            border-width: medium 
 
   // Modifiers
   .v-chip-group--column

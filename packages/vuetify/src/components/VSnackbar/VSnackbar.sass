@@ -27,6 +27,9 @@
       @at-root .v-snackbar
         @include tools.variant($snackbar-variants...)
 
+      @media (forced-colors: active)
+        border: thick solid
+
     &__content
       flex-grow: 1
       font-size: $snackbar-font-size

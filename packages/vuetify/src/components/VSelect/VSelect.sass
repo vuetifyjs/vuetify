@@ -42,9 +42,10 @@
 
     &__content
       overflow: hidden
-
       @include tools.elevation($select-content-elevation)
-      @include tools.rounded($select-content-border-radius)
+
+      @at-root #{selector.append('.v-menu > .v-overlay__content', &)}
+        @include tools.rounded($select-content-border-radius)
 
     &__selection
       display: inline-flex

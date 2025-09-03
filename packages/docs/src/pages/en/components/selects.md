@@ -89,6 +89,11 @@ You can specify the specific properties within your items array that correspond 
 
 <ExamplesExample file="v-select/prop-custom-title-and-value" />
 
+When customizing items with the `item` slot, you should disable the default `title` prop rendering to avoid duplicate text.
+You can do this by setting `:title="null"` on `v-list-item`.
+
+<ExamplesExample file="v-select/prop-avoid-duplicate-text" />
+
 #### Menu props
 
 Custom props can be passed directly to `v-menu` using **menu-props** prop. In this example a scrim as added to the select and the menu closes when you scroll.
