@@ -1,7 +1,9 @@
 // Utilities
 import {
   computed,
+  getCurrentScope,
   inject,
+  onScopeDispose,
   provide,
   ref,
   shallowRef,
@@ -10,8 +12,10 @@ import {
   watchEffect,
 } from 'vue'
 import {
+  consoleWarn,
   createRange,
   darken,
+  deprecate,
   getCurrentInstance,
   getForeground,
   getLuma,
@@ -21,6 +25,7 @@ import {
   parseColor,
   propsFactory,
   RGBtoHex,
+  SUPPORTS_MATCH_MEDIA,
 } from '@/util'
 
 // Types
@@ -32,22 +37,27 @@ type DeepPartial<T> = T extends object ? { [P in keyof T]?: DeepPartial<T[P]> } 
 
 export type ThemeOptions = false | {
   cspNonce?: string
-  defaultTheme?: string
+  defaultTheme?: 'light' | 'dark' | 'system' | string & {}
   variations?: false | VariationsOptions
   themes?: Record<string, ThemeDefinition>
   stylesheetId?: string
   scope?: string
+  unimportant?: boolean
 }
 export type ThemeDefinition = DeepPartial<InternalThemeDefinition>
 
 interface InternalThemeOptions {
   cspNonce?: string
   isDisabled: boolean
-  defaultTheme: string
+  defaultTheme: 'light' | 'dark' | 'system' | string & {}
+  prefix: string
   variations: false | VariationsOptions
   themes: Record<string, InternalThemeDefinition>
   stylesheetId: string
   scope?: string
+  scoped: boolean
+  unimportant: boolean
+  utilities: boolean
 }
 
 interface VariationsOptions {
@@ -89,12 +99,18 @@ interface OnColors {
 }
 
 export interface ThemeInstance {
+  change: (themeName: string) => void
+  cycle: (themeArray?: string[]) => void
+  toggle: (themeArray?: [string, string]) => void
+
   readonly isDisabled: boolean
+  readonly isSystem: Readonly<Ref<boolean>>
   readonly themes: Ref<Record<string, InternalThemeDefinition>>
 
   readonly name: Readonly<Ref<string>>
   readonly current: DeepReadonly<Ref<InternalThemeDefinition>>
   readonly computedThemes: DeepReadonly<Ref<Record<string, InternalThemeDefinition>>>
+  readonly prefix: string
 
   readonly themeClasses: Readonly<Ref<string | undefined>>
   readonly styles: Readonly<Ref<string>>
@@ -114,6 +130,7 @@ export const makeThemeProps = propsFactory({
 function genDefaults () {
   return {
     defaultTheme: 'light',
+    prefix: 'v-',
     variations: { colors: [], lighten: 0, darken: 0 },
     themes: {
       light: {
@@ -147,8 +164,8 @@ function genDefaults () {
           'activated-opacity': 0.12,
           'pressed-opacity': 0.12,
           'dragged-opacity': 0.08,
-          'theme-kbd': '#212529',
-          'theme-on-kbd': '#FFFFFF',
+          'theme-kbd': '#EEEEEE',
+          'theme-on-kbd': '#000000',
           'theme-code': '#F5F5F5',
           'theme-on-code': '#000000',
         },
@@ -184,7 +201,7 @@ function genDefaults () {
           'activated-opacity': 0.12,
           'pressed-opacity': 0.16,
           'dragged-opacity': 0.08,
-          'theme-kbd': '#212529',
+          'theme-kbd': '#424242',
           'theme-on-kbd': '#FFFFFF',
           'theme-code': '#343434',
           'theme-on-code': '#CCCCCC',
@@ -192,6 +209,9 @@ function genDefaults () {
       },
     },
     stylesheetId: 'vuetify-theme-stylesheet',
+    scoped: false,
+    unimportant: false,
+    utilities: true,
   }
 }
 
@@ -222,23 +242,23 @@ function createCssClass (lines: string[], selector: string, content: string[], s
   )
 }
 
-function genCssVariables (theme: InternalThemeDefinition) {
+function genCssVariables (theme: InternalThemeDefinition, prefix: string) {
   const lightOverlay = theme.dark ? 2 : 1
   const darkOverlay = theme.dark ? 1 : 2
 
   const variables: string[] = []
   for (const [key, value] of Object.entries(theme.colors)) {
     const rgb = parseColor(value)
-    variables.push(`--v-theme-${key}: ${rgb.r},${rgb.g},${rgb.b}`)
+    variables.push(`--${prefix}theme-${key}: ${rgb.r},${rgb.g},${rgb.b}`)
     if (!key.startsWith('on-')) {
-      variables.push(`--v-theme-${key}-overlay-multiplier: ${getLuma(value) > 0.18 ? lightOverlay : darkOverlay}`)
+      variables.push(`--${prefix}theme-${key}-overlay-multiplier: ${getLuma(value) > 0.18 ? lightOverlay : darkOverlay}`)
     }
   }
 
   for (const [key, value] of Object.entries(theme.variables)) {
     const color = typeof value === 'string' && value.startsWith('#') ? parseColor(value) : undefined
     const rgb = color ? `${color.r}, ${color.g}, ${color.b}` : undefined
-    variables.push(`--v-${key}: ${rgb ?? value}`)
+    variables.push(`--${prefix}${key}: ${rgb ?? value}`)
   }
 
   return variables
@@ -297,7 +317,9 @@ function getScopedSelector (selector: string, scope?: string) {
   return selector === ':root' ? scopeSelector : `${scopeSelector} ${selector}`
 }
 
-function upsertStyles (styleEl: HTMLStyleElement | null, styles: string) {
+function upsertStyles (id: string, cspNonce: string | undefined, styles: string) {
+  const styleEl = getOrCreateStyleElement(id, cspNonce)
+
   if (!styleEl) return
 
   styleEl.innerHTML = styles
@@ -324,8 +346,18 @@ function getOrCreateStyleElement (id: string, cspNonce?: string) {
 // Composables
 export function createTheme (options?: ThemeOptions): ThemeInstance & { install: (app: App) => void } {
   const parsedOptions = parseThemeOptions(options)
-  const name = shallowRef(parsedOptions.defaultTheme)
+  const _name = shallowRef(parsedOptions.defaultTheme)
   const themes = ref(parsedOptions.themes)
+  const systemName = shallowRef('light')
+
+  const name = computed({
+    get () {
+      return _name.value === 'system' ? systemName.value : _name.value
+    },
+    set (val: string) {
+      _name.value = val
+    },
+  })
 
   const computedThemes = computed(() => {
     const acc: Record<string, InternalThemeDefinition> = {}
@@ -348,44 +380,71 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
 
   const current = toRef(() => computedThemes.value[name.value])
 
+  const isSystem = toRef(() => _name.value === 'system')
+
   const styles = computed(() => {
     const lines: string[] = []
+    const important = parsedOptions.unimportant ? '' : ' !important'
+    const scoped = parsedOptions.scoped ? parsedOptions.prefix : ''
 
     if (current.value?.dark) {
       createCssClass(lines, ':root', ['color-scheme: dark'], parsedOptions.scope)
     }
 
-    createCssClass(lines, ':root', genCssVariables(current.value), parsedOptions.scope)
+    createCssClass(lines, ':root', genCssVariables(current.value, parsedOptions.prefix), parsedOptions.scope)
 
     for (const [themeName, theme] of Object.entries(computedThemes.value)) {
-      createCssClass(lines, `.v-theme--${themeName}`, [
+      createCssClass(lines, `.${parsedOptions.prefix}theme--${themeName}`, [
         `color-scheme: ${theme.dark ? 'dark' : 'normal'}`,
-        ...genCssVariables(theme),
+        ...genCssVariables(theme, parsedOptions.prefix),
       ], parsedOptions.scope)
     }
 
-    const bgLines: string[] = []
-    const fgLines: string[] = []
+    if (parsedOptions.utilities) {
+      const bgLines: string[] = []
+      const fgLines: string[] = []
 
-    const colors = new Set(Object.values(computedThemes.value).flatMap(theme => Object.keys(theme.colors)))
-    for (const key of colors) {
-      if (key.startsWith('on-')) {
-        createCssClass(fgLines, `.${key}`, [`color: rgb(var(--v-theme-${key})) !important`], parsedOptions.scope)
-      } else {
-        createCssClass(bgLines, `.bg-${key}`, [
-          `--v-theme-overlay-multiplier: var(--v-theme-${key}-overlay-multiplier)`,
-          `background-color: rgb(var(--v-theme-${key})) !important`,
-          `color: rgb(var(--v-theme-on-${key})) !important`,
-        ], parsedOptions.scope)
-        createCssClass(fgLines, `.text-${key}`, [`color: rgb(var(--v-theme-${key})) !important`], parsedOptions.scope)
-        createCssClass(fgLines, `.border-${key}`, [`--v-border-color: var(--v-theme-${key})`], parsedOptions.scope)
+      const colors = new Set(Object.values(computedThemes.value).flatMap(theme => Object.keys(theme.colors)))
+      for (const key of colors) {
+        if (key.startsWith('on-')) {
+          createCssClass(fgLines, `.${key}`, [`color: rgb(var(--${parsedOptions.prefix}theme-${key}))${important}`], parsedOptions.scope)
+        } else {
+          createCssClass(bgLines, `.${scoped}bg-${key}`, [
+            `--${parsedOptions.prefix}theme-overlay-multiplier: var(--${parsedOptions.prefix}theme-${key}-overlay-multiplier)`,
+            `background-color: rgb(var(--${parsedOptions.prefix}theme-${key}))${important}`,
+            `color: rgb(var(--${parsedOptions.prefix}theme-on-${key}))${important}`,
+          ], parsedOptions.scope)
+          createCssClass(fgLines, `.${scoped}text-${key}`, [`color: rgb(var(--${parsedOptions.prefix}theme-${key}))${important}`], parsedOptions.scope)
+          createCssClass(fgLines, `.${scoped}border-${key}`, [`--${parsedOptions.prefix}border-color: var(--${parsedOptions.prefix}theme-${key})`], parsedOptions.scope)
+        }
       }
-    }
 
-    lines.push(...bgLines, ...fgLines)
+      lines.push(...bgLines, ...fgLines)
+    }
 
     return lines.map((str, i) => i === 0 ? str : `    ${str}`).join('')
   })
+
+  const themeClasses = toRef(() => parsedOptions.isDisabled ? undefined : `${parsedOptions.prefix}theme--${name.value}`)
+  const themeNames = toRef(() => Object.keys(computedThemes.value))
+
+  if (SUPPORTS_MATCH_MEDIA) {
+    const media = window.matchMedia('(prefers-color-scheme: dark)')
+
+    function updateSystemName () {
+      systemName.value = media.matches ? 'dark' : 'light'
+    }
+
+    updateSystemName()
+
+    media.addEventListener('change', updateSystemName, { passive: true })
+
+    if (getCurrentScope()) {
+      onScopeDispose(() => {
+        media.removeEventListener('change', updateSystemName)
+      })
+    }
+  }
 
   function install (app: App) {
     if (parsedOptions.isDisabled) return
@@ -423,27 +482,59 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
       }
 
       function updateStyles () {
-        upsertStyles(
-          getOrCreateStyleElement(parsedOptions.stylesheetId, parsedOptions.cspNonce),
-          styles.value
-        )
+        upsertStyles(parsedOptions.stylesheetId, parsedOptions.cspNonce, styles.value)
       }
     }
   }
 
-  const themeClasses = toRef(() => parsedOptions.isDisabled ? undefined : `v-theme--${name.value}`)
+  function change (themeName: string) {
+    if (themeName !== 'system' && !themeNames.value.includes(themeName)) {
+      consoleWarn(`Theme "${themeName}" not found on the Vuetify theme instance`)
+      return
+    }
+
+    name.value = themeName
+  }
+
+  function cycle (themeArray: string[] = themeNames.value) {
+    const currentIndex = themeArray.indexOf(name.value)
+    const nextIndex = currentIndex === -1 ? 0 : (currentIndex + 1) % themeArray.length
+
+    change(themeArray[nextIndex])
+  }
+
+  function toggle (themeArray: [string, string] = ['light', 'dark']) {
+    cycle(themeArray)
+  }
+
+  const globalName = new Proxy(name, {
+    get (target, prop) {
+      return Reflect.get(target, prop)
+    },
+    set (target, prop, val) {
+      if (prop === 'value') {
+        deprecate(`theme.global.name.value = ${val}`, `theme.change('${val}')`)
+      }
+      return Reflect.set(target, prop, val)
+    },
+  })
 
   return {
     install,
+    change,
+    cycle,
+    toggle,
     isDisabled: parsedOptions.isDisabled,
+    isSystem,
     name,
     themes,
     current,
     computedThemes,
+    prefix: parsedOptions.prefix,
     themeClasses,
     styles,
     global: {
-      name,
+      name: globalName,
       current,
     },
   }
@@ -459,7 +550,7 @@ export function provideTheme (props: { theme?: string }) {
   const name = toRef(() => props.theme ?? theme.name.value)
   const current = toRef(() => theme.themes.value[name.value])
 
-  const themeClasses = toRef(() => theme.isDisabled ? undefined : `v-theme--${name.value}`)
+  const themeClasses = toRef(() => theme.isDisabled ? undefined : `${theme.prefix}theme--${name.value}`)
 
   const newTheme: ThemeInstance = {
     ...theme,

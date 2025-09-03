@@ -4,7 +4,6 @@ import Ripple from '../'
 // Utilities
 import { mount } from '@vue/test-utils'
 import { defineComponent } from 'vue'
-import { keyCodes } from '@/util'
 
 const testComponent = defineComponent({
   directives: { Ripple },
@@ -56,11 +55,11 @@ describe('v-ripple', () => {
     expect(wrapper.find('.v-ripple__container').exists()).toBe(false)
   })
 
-  it.each(['enter', 'space'] as const)('should trigger ripple on %s key press', key => {
+  it.each(['Enter', 'Space'] as const)('should trigger ripple on %s key press', key => {
     vi.useFakeTimers()
     const wrapper = mount(testComponent)
 
-    const keydownEvent = new KeyboardEvent('keydown', { keyCode: keyCodes[key] })
+    const keydownEvent = new KeyboardEvent('keydown', { key })
     wrapper.element.dispatchEvent(keydownEvent)
 
     expect(wrapper.find('.v-ripple__container').exists()).toBe(true)
@@ -97,7 +96,7 @@ describe('v-ripple', () => {
   it('should hide ripple on blur if keyboardRipple is true', () => {
     vi.useFakeTimers()
     const wrapper = mount(testComponent)
-    const keydownEvent = new KeyboardEvent('keydown', { keyCode: 13 })
+    const keydownEvent = new KeyboardEvent('keydown', { key: 'Enter' })
     wrapper.element.dispatchEvent(keydownEvent)
 
     expect(wrapper.find('.v-ripple__container').exists()).toBe(true)

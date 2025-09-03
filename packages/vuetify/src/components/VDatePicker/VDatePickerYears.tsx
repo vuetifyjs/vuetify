@@ -8,8 +8,11 @@ import { VBtn } from '@/components/VBtn'
 import { useDate } from '@/composables/date'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
+// Directives
+import vIntersect from '@/directives/intersect'
+
 // Utilities
-import { computed, nextTick, onMounted, watchEffect } from 'vue'
+import { computed, watchEffect } from 'vue'
 import { convertToUnit, createRange, genericComponent, propsFactory, templateRef, useRender } from '@/util'
 
 // Types
@@ -47,6 +50,8 @@ export const VDatePickerYears = genericComponent<VDatePickerYearsSlots>()({
   name: 'VDatePickerYears',
 
   props: makeVDatePickerYearsProps(),
+
+  directives: { vIntersect },
 
   emits: {
     'update:modelValue': (year: number) => true,
@@ -91,10 +96,10 @@ export const VDatePickerYears = genericComponent<VDatePickerYearsSlots>()({
 
     const yearRef = templateRef()
 
-    onMounted(async () => {
-      await nextTick()
+    function focusSelectedYear () {
       yearRef.el?.focus()
-    })
+      yearRef.el?.scrollIntoView({ block: 'center' })
+    }
 
     function isYearAllowed (year: number) {
       if (Array.isArray(props.allowedYears) && props.allowedYears.length) {
@@ -111,6 +116,9 @@ export const VDatePickerYears = genericComponent<VDatePickerYearsSlots>()({
     useRender(() => (
       <div
         class="v-date-picker-years"
+        v-intersect={[{
+          handler: focusSelectedYear,
+        }, null, ['once']]}
         style={{
           height: convertToUnit(props.height),
         }}

@@ -1,5 +1,5 @@
 // Utilities
-import { createRange, padStart } from '@/util'
+import { consoleWarn, createRange, padStart } from '@/util'
 
 // Types
 import type { DateAdapter } from '../DateAdapter'
@@ -85,7 +85,13 @@ function getWeekArray (date: Date, locale: string, firstDayOfWeek?: number) {
 }
 
 function startOfWeek (date: Date, locale: string, firstDayOfWeek?: number) {
-  const day = firstDayOfWeek ?? weekInfo(locale)?.firstDay ?? 0
+  let day = (firstDayOfWeek ?? weekInfo(locale)?.firstDay ?? 0) % 7
+
+  // prevent infinite loop
+  if (![0, 1, 2, 3, 4, 5, 6].includes(day)) {
+    consoleWarn('Invalid firstDayOfWeek, expected discrete number in range [0-6]')
+    day = 0
+  }
 
   const d = new Date(date)
   while (d.getDay() !== day) {
@@ -142,13 +148,13 @@ function date (value?: any): Date | null {
 
 const sundayJanuarySecond2000 = new Date(2000, 0, 2)
 
-function getWeekdays (locale: string, firstDayOfWeek?: number) {
+function getWeekdays (locale: string, firstDayOfWeek?: number, weekdayFormat?: 'long' | 'short' | 'narrow') {
   const daysFromSunday = firstDayOfWeek ?? weekInfo(locale)?.firstDay ?? 0
 
   return createRange(7).map(i => {
     const weekday = new Date(sundayJanuarySecond2000)
     weekday.setDate(sundayJanuarySecond2000.getDate() + daysFromSunday + i)
-    return new Intl.DateTimeFormat(locale, { weekday: 'narrow' }).format(weekday)
+    return new Intl.DateTimeFormat(locale, { weekday: weekdayFormat ?? 'narrow' }).format(weekday)
   })
 }
 
@@ -168,7 +174,7 @@ function format (
   let options: Intl.DateTimeFormatOptions = {}
   switch (formatString) {
     case 'fullDate':
-      options = { year: 'numeric', month: 'long', day: 'numeric' }
+      options = { year: 'numeric', month: 'short', day: 'numeric' }
       break
     case 'fullDateWithWeekday':
       options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
@@ -597,9 +603,9 @@ export class VuetifyDateAdapter implements DateAdapter<Date> {
     return getDiff(date, comparing, unit)
   }
 
-  getWeekdays (firstDayOfWeek?: number | string) {
+  getWeekdays (firstDayOfWeek?: number | string, weekdayFormat?: 'long' | 'short' | 'narrow') {
     const firstDay = firstDayOfWeek !== undefined ? Number(firstDayOfWeek) : undefined
-    return getWeekdays(this.locale, firstDay)
+    return getWeekdays(this.locale, firstDay, weekdayFormat)
   }
 
   getYear (date: Date) {

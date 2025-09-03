@@ -1,5 +1,5 @@
 <template>
-  <v-container class="bg-grey-lighten-5">
+  <v-container class="bg-surface-variant">
     <!-- Stack the columns on mobile by making one full-width and the other half-width -->
     <v-row>
       <v-col

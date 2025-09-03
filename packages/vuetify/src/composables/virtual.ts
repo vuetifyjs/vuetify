@@ -132,7 +132,12 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
 
   function calculateOffset (index: number) {
     index = clamp(index, 0, items.value.length - 1)
-    return offsets[index] || 0
+    const whole = Math.floor(index)
+    const fraction = index % 1
+    const next = whole + 1
+    const wholeOffset = offsets[whole] || 0
+    const nextOffset = offsets[next] || wholeOffset
+    return wholeOffset + (nextOffset - wholeOffset) * fraction
   }
 
   function calculateIndex (scrollTop: number) {
@@ -197,7 +202,7 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
     raf = requestAnimationFrame(_calculateVisibleItems)
   }
   function _calculateVisibleItems () {
-    if (!containerRef.value || !viewportHeight.value) return
+    if (!containerRef.value || !viewportHeight.value || !itemHeight.value) return
     const scrollTop = lastScrollTop - markerOffset
     const direction = Math.sign(scrollVelocity)
 
