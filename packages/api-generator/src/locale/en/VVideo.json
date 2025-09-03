@@ -1,5 +1,6 @@
 {
   "props": {
+    "aspectRatio": "Sets the aspect ratio for the playback, calculated as width/height.",
     "src": "Media file URL",
     "type": "Media file type (optional)",
     "image": "Apply a specific image as cover before the video is loaded.",

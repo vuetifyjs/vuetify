@@ -13,6 +13,7 @@
       <v-select v-model="theme" :items="['light', 'dark']" label="Theme" clearable></v-select>
       <v-select v-model="color" :items="colorOptions" label="Color" clearable></v-select>
       <v-select v-model="elevation" :items="[4, 8, 12]" label="Elevation" clearable></v-select>
+      <v-select v-model="aspectRatio" :items="['16/9', '3/2', '1']" label="Aspect ratio" clearable></v-select>
       <v-checkbox v-if="!isHidden" v-model="hidePlay" label="Hide play"></v-checkbox>
       <v-checkbox v-if="!isHidden" v-model="hideVolume" label="Hide volume"></v-checkbox>
       <v-checkbox v-if="!isHidden" v-model="noFullscreen" label="No fullscreen"></v-checkbox>
@@ -31,6 +32,7 @@
   const theme = shallowRef(null)
   const color = shallowRef(null)
   const elevation = shallowRef(null)
+  const aspectRatio = shallowRef('16/9')
 
   const isHidden = toRef(() => model.value === 'hidden')
 
@@ -46,6 +48,7 @@
       theme: theme.value || undefined,
       color: color.value || undefined,
       elevation: elevation.value || undefined,
+      'aspect-ratio': aspectRatio.value || undefined,
       'hide-play': (!isHidden.value && hidePlay.value) || undefined,
       'hide-volume': (!isHidden.value && hideVolume.value) || undefined,
       noFullscreen: (!isHidden.value && noFullscreen.value) || undefined,

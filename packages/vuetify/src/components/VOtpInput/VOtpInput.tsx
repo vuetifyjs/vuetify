@@ -98,6 +98,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
     const contentRef = ref<HTMLElement>()
     const inputRef = ref<HTMLInputElement[]>([])
     const current = computed(() => inputRef.value[focusIndex.value])
+    let _isComposing = false
 
     useToggleScope(() => props.autofocus, () => {
       const intersectScope = effectScope()
@@ -122,6 +123,8 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
         return
       }
 
+      if (_isComposing) return
+
       const array = model.value.slice()
       const value = current.value.value
 
@@ -138,6 +141,11 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
       model.value = array
 
       if (target) focusChild(contentRef.value!, target)
+    }
+
+    function onCompositionend () {
+      _isComposing = false
+      onInput()
     }
 
     function onKeydown (e: KeyboardEvent) {
@@ -190,7 +198,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
 
       model.value = clipboardText.split('')
 
-      inputRef.value?.[finalIndex].focus()
+      focusIndex.value = finalIndex
     }
 
     function reset () {
@@ -226,7 +234,6 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
 
     watch(model, val => {
       if (val.length === length.value) {
-        focusIndex.value = length.value - 1
         emit('finish', val.join(''))
       }
     }, { deep: true })
@@ -297,6 +304,8 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
                           onFocus={ e => onFocus(e, i) }
                           onBlur={ onBlur }
                           onKeydown={ onKeydown }
+                          onCompositionstart={ () => _isComposing = true }
+                          onCompositionend={ onCompositionend }
                           onPaste={ event => onPaste(i, event) }
                         />
                       )

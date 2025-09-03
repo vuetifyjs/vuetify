@@ -46,6 +46,13 @@ export default {
     input: {
       placeholder: 'Унесите датум',
     },
+    ariaLabel: {
+      previousMonth: 'Previous month',
+      nextMonth: 'Next month',
+      selectYear: 'Select year',
+      selectDate: '{0}',
+      currentDate: 'Today, {0}',
+    },
   },
   noDataText: 'Нема доступних података',
   carousel: {
@@ -145,5 +152,22 @@ export default {
     unmute: 'Укључи звук',
     enterFullscreen: 'Цео екран',
     exitFullscreen: 'Изађи из целог екрана',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Изаберите боју са екрана',
+      hueSlider: 'Нијанса',
+      alphaSlider: 'Алфа',
+      redInput: 'Црвена',
+      greenInput: 'Зелена',
+      blueInput: 'Плава',
+      alphaInput: 'Алфа',
+      hueInput: 'Нијанса',
+      saturationInput: 'Засићеност',
+      lightnessInput: 'Осветљеност',
+      hexInput: 'ХЕКС вредност',
+      hexaInput: 'ХЕКС са алфа вредношћу',
+      changeFormat: 'Промени формат боје',
+    },
   },
 }

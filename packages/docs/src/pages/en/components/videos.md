@@ -6,7 +6,7 @@ meta:
   description: The video component acts as a customizable wrapper for native video element.
   keywords: video, player, vuetify video component, vue video component
 features:
-  github: /components/VVideo/
+  github: /labs/VVideo/
   label: 'C: VVideo'
   report: true
 ---
@@ -51,7 +51,7 @@ A basic example of the video component.
 | - | - |
 | [v-video](/api/v-video/) | Primary Component |
 | [v-video-controls](/api/v-video-controls/) | Sub-component used to display a video player controls |
-| [v-video-video](/api/v-video-video/) | Sub-component used to display a volume control |
+| [v-video-volume](/api/v-video-volume/) | Sub-component used to display a volume control |
 
 <ApiInline hide-links />
 
@@ -85,7 +85,7 @@ Video can automatically skip to certain timestamp upon load. It can be useful to
 
 #### Color
 
-You can control the icon color and background color of the active video node.
+You can control the icon color and background color of the controls.
 
 <ExamplesExample file="v-video/prop-color" />
 

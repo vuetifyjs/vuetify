@@ -46,6 +46,13 @@ export default {
     input: {
       placeholder: 'Datum eingeben',
     },
+    ariaLabel: {
+      previousMonth: 'Vorheriger Monat',
+      nextMonth: 'Nächster Monat',
+      selectYear: 'Jahr auswählen',
+      selectDate: '{0}',
+      currentDate: 'Heute, {0}',
+    },
   },
   noDataText: 'Keine Daten vorhanden',
   carousel: {
@@ -145,5 +152,22 @@ export default {
     unmute: 'Stummschaltung aufheben',
     enterFullscreen: 'Vollbild',
     exitFullscreen: 'Vollbild beenden',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Farbe vom Bildschirm auswählen',
+      hueSlider: 'Farbton',
+      alphaSlider: 'Transparenz',
+      redInput: 'Rot',
+      greenInput: 'Grün',
+      blueInput: 'Blau',
+      alphaInput: 'Transparenz',
+      hueInput: 'Farbton',
+      saturationInput: 'Sättigung',
+      lightnessInput: 'Helligkeit',
+      hexInput: 'HEX-Wert',
+      hexaInput: 'HEX-Wert mit Transparenz',
+      changeFormat: 'Farbformat ändern',
+    },
   },
 }

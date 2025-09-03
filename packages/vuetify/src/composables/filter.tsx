@@ -102,12 +102,15 @@ export function filterItems (
     let match: FilterMatch = -1
 
     if ((query || customFiltersLength > 0) && !options?.noFilter) {
+      let hasOnlyCustomFilters = false
+
       if (typeof item === 'object') {
         if (item.type === 'divider' || item.type === 'subheader') {
           continue
         }
 
         const filterKeys = keys || Object.keys(transformed)
+        hasOnlyCustomFilters = filterKeys.length === customFiltersLength
 
         for (const key of filterKeys) {
           const value = getPropertyFromItem(transformed, key)
@@ -146,7 +149,7 @@ export function filterItems (
         options?.filterMode === 'intersection' &&
         (
           customMatchesLength !== customFiltersLength ||
-          !defaultMatchesLength
+          (!defaultMatchesLength && customFiltersLength > 0 && !hasOnlyCustomFilters)
         )
       ) continue
     }

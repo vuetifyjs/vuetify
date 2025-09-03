@@ -46,6 +46,13 @@ export default {
     input: {
       placeholder: 'Εισαγάγετε ημερομηνία',
     },
+    ariaLabel: {
+      previousMonth: 'Προηγούμενος μήνας',
+      nextMonth: 'Επόμενος μήνας',
+      selectYear: 'Επιλέξτε έτος',
+      selectDate: '{0}',
+      currentDate: 'Σήμερα, {0}',
+    },
   },
   noDataText: 'Χωρίς δεδομένα',
   carousel: {
@@ -145,5 +152,22 @@ export default {
     unmute: 'Κατάργηση σίγασης',
     enterFullscreen: 'Πλήρης οθόνη',
     exitFullscreen: 'Έξοδος από πλήρη οθόνη',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Επιλογή χρώματος από την οθόνη',
+      hueSlider: 'Απόχρωση',
+      alphaSlider: 'Άλφα',
+      redInput: 'Κόκκινο',
+      greenInput: 'Πράσινο',
+      blueInput: 'Μπλε',
+      alphaInput: 'Άλφα',
+      hueInput: 'Απόχρωση',
+      saturationInput: 'Κορεσμός',
+      lightnessInput: 'Φωτεινότητα',
+      hexInput: 'Δεκαεξαδική τιμή',
+      hexaInput: 'Δεκαεξαδική τιμή με άλφα',
+      changeFormat: 'Αλλαγή μορφής χρώματος',
+    },
   },
 }

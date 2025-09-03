@@ -6,7 +6,7 @@ import { VSliderSymbol } from './slider'
 import { VScaleTransition } from '../transitions'
 
 // Composables
-import { useTextColor } from '@/composables/color'
+import { useBackgroundColor, useTextColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
 import { useElevation } from '@/composables/elevation'
 import { useRtl } from '@/composables/locale'
@@ -74,6 +74,7 @@ export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
       min,
       max,
       thumbColor,
+      thumbLabelColor,
       step,
       disabled,
       thumbSize,
@@ -91,6 +92,7 @@ export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
     const elevationProps = computed(() => !disabled.value ? elevation.value : undefined)
     const { elevationClasses } = useElevation(elevationProps)
     const { textColorClasses, textColorStyles } = useTextColor(thumbColor)
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(thumbLabelColor)
 
     const { pageup, pagedown, end, home, left, right, down, up } = keyValues
     const relevantKeys = [pageup, pagedown, end, home, left, right, down, up]
@@ -175,9 +177,7 @@ export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
               textColorClasses.value,
               elevationClasses.value,
             ]}
-            style={{
-              ...textColorStyles.value,
-            }}
+            style={ textColorStyles.value }
           />
           <div
             class={[
@@ -195,12 +195,14 @@ export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
               <div
                 class={[
                   'v-slider-thumb__label',
-                  textColorClasses.value,
+                  backgroundColorClasses.value,
                 ]}
+                style={ backgroundColorStyles.value }
               >
                 <div>
                   { slots['thumb-label']?.({ modelValue: props.modelValue }) ?? props.modelValue.toFixed(step.value ? decimals.value : 1) }
                 </div>
+                <div class="v-slider-thumb__label-wedge" />
               </div>
             </div>
           </VScaleTransition>

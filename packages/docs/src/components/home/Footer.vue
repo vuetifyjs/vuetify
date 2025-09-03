@@ -114,6 +114,11 @@
       title: 'x',
     },
     {
+      icon: 'mdi-bluesky',
+      href: 'https://bsky.app/profile/vuetify.bsky.social',
+      title: 'bluesky',
+    },
+    {
       icon: 'mdi-discord',
       href: 'https://community.vuetifyjs.com',
       title: 'discord',

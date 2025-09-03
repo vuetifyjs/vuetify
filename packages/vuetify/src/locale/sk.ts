@@ -46,6 +46,13 @@ export default {
     input: {
       placeholder: 'Zadajte dátum',
     },
+    ariaLabel: {
+      previousMonth: 'Predchádzajúci mesiac',
+      nextMonth: 'Ďalší mesiac',
+      selectYear: 'Vyberte rok',
+      selectDate: '{0}',
+      currentDate: 'Dnes, {0}',
+    },
   },
   noDataText: 'Nie sú dostupné žiadne dáta',
   carousel: {
@@ -145,5 +152,22 @@ export default {
     unmute: 'Zrušiť stlmenie',
     enterFullscreen: 'Celá obrazovka',
     exitFullscreen: 'Opustiť celú obrazovku',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Vybrať farbu z obrazovky',
+      hueSlider: 'Odtieň',
+      alphaSlider: 'Alfa',
+      redInput: 'Červená',
+      greenInput: 'Zelená',
+      blueInput: 'Modrá',
+      alphaInput: 'Alfa',
+      hueInput: 'Odtieň',
+      saturationInput: 'Sýtosť',
+      lightnessInput: 'Svetlosť',
+      hexInput: 'HEX hodnota',
+      hexaInput: 'HEX s alfa hodnotou',
+      changeFormat: 'Zmeniť formát farby',
+    },
   },
 }

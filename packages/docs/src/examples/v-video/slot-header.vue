@@ -3,6 +3,7 @@
     <v-video
       class="align-self-center"
       image="https://jsek.work/vt-sunflowers.jpg"
+      max-width="450"
       src="https://jsek.work/vt-sunflowers.mp4"
       eager
       muted
@@ -18,7 +19,7 @@
           ></v-list-item>
           <v-icon-btn
             class="ml-auto video-header-element"
-            icon="mdi-share"
+            icon="mdi-share-variant"
             variant="text"
           ></v-icon-btn>
         </div>

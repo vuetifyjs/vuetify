@@ -46,6 +46,13 @@ export default {
     input: {
       placeholder: 'Vnesite datum',
     },
+    ariaLabel: {
+      previousMonth: 'Prejšnji mesec',
+      nextMonth: 'Naslednji mesec',
+      selectYear: 'Izberite leto',
+      selectDate: '{0}',
+      currentDate: 'Danes, {0}',
+    },
   },
   noDataText: 'Ni podatkov',
   carousel: {
@@ -145,5 +152,22 @@ export default {
     unmute: 'Vklopi zvok',
     enterFullscreen: 'Celozaslonski način',
     exitFullscreen: 'Izhod iz celozaslonskega načina',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Izberi barvo z zaslona',
+      hueSlider: 'Barvni odtenek',
+      alphaSlider: 'Alfa',
+      redInput: 'Rdeča',
+      greenInput: 'Zelena',
+      blueInput: 'Modra',
+      alphaInput: 'Alfa',
+      hueInput: 'Barvni odtenek',
+      saturationInput: 'Nasičenost',
+      lightnessInput: 'Svetlost',
+      hexInput: 'HEX vrednost',
+      hexaInput: 'HEX z alfa vrednostjo',
+      changeFormat: 'Spremeni format barve',
+    },
   },
 }

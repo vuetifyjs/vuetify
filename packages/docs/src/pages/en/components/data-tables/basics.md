@@ -210,7 +210,7 @@ You can use the dynamic slots `item.<key>` to customize only certain columns. `<
 
 #### Group header slot
 
-When using the **group-by** prop, you can customize the group header with the `group-header` slot.
+When using the **group-by** prop, you can customize the group header with the `group-header` slot. Example below makes the whole row clickable.
 
 <ExamplesExample file="v-data-table/slot-group-header" />
 

@@ -8,6 +8,7 @@
     flex-direction: column
     align-items: center
     position: relative
+    --v-video-aspect-ratio: #{$video-aspect-ratio}
     --v-video-controls-height: #{$video-controls-height}
     --v-video-controls-pill-border-radius: #{$video-controls-pill-border-radius}
 
@@ -44,16 +45,16 @@
       @include tools.elevation($video-elevation)
 
     &:not(.v-video--idle)
-      .v-video__content .v-overlay
+      .v-video__content .v-video__overlay-fill
         &, > *
           pointer-events: none
 
     &__overlay-fill
+      position: absolute
+      inset: 0
       display: flex
       align-items: center
       justify-content: center
-      width: 100%
-      height: 100%
       border-radius: inherit
 
       > .v-img
@@ -119,6 +120,14 @@
       &.v-slider.v-input--horizontal > .v-input__control
         min-height: 4px
 
+      .v-slider-thumb:not(:hover)
+        .v-slider-thumb__label
+          opacity: 0
+          transition-delay: .2s
+
+      .v-slider-thumb__label
+        color: rgb(var(--v-theme-on-surface-variant)) !important
+
     &__time
       font-size: $video-time-font-size
       line-height: $video-time-line-height
@@ -129,14 +138,13 @@
 
       > .v-video__content
         width: 100%
-        height: $video-player-height
+        aspect-ratio: var(--v-video-aspect-ratio)
 
     &--variant-background
       outline: none
       position: absolute
+      inset: 0
       pointer-events: none
-      width: 100%
-      height: 100%
 
       > .v-video__content
         width: 100%
@@ -170,6 +178,8 @@
       &, &--pills > .v-video-control__pill
         transition: .6s ease-in-out
         transition-property: opacity, background-color
+
+      &--pills > .v-video-control__pill
         @include tools.elevation($video-elevation)
 
       &:hover

@@ -86,3 +86,8 @@
 
   .v-chip--label
     border-radius: $chip-label-border-radius
+
+  @media (forced-colors: active)
+    .v-chip
+      &:not(&--variant-text, &--variant-plain)
+        border: thin solid

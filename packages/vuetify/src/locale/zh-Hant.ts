@@ -46,6 +46,13 @@ export default {
     input: {
       placeholder: '請輸入日期',
     },
+    ariaLabel: {
+      previousMonth: '上個月',
+      nextMonth: '下個月',
+      selectYear: '選擇年份',
+      selectDate: '{0}',
+      currentDate: '今天，{0}',
+    },
   },
   noDataText: '沒有資料',
   carousel: {
@@ -145,5 +152,22 @@ export default {
     unmute: '取消靜音',
     enterFullscreen: '全螢幕',
     exitFullscreen: '退出全螢幕',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: '從螢幕上選取顏色',
+      hueSlider: '色相',
+      alphaSlider: '透明度',
+      redInput: '紅色',
+      greenInput: '綠色',
+      blueInput: '藍色',
+      alphaInput: '透明度',
+      hueInput: '色相',
+      saturationInput: '飽和度',
+      lightnessInput: '亮度',
+      hexInput: '十六進位值',
+      hexaInput: '帶透明度的十六進位值',
+      changeFormat: '變更顏色格式',
+    },
   },
 }

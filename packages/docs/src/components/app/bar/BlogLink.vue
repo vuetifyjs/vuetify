@@ -1,13 +1,11 @@
 <template>
-  <v-badge color="success" offset-x="8" offset-y="8" dot>
-    <AppBtn
-      :to="rpath('/blog/')"
-      color="medium-emphasis"
-      text="blog"
-      variant="text"
-      @click="sweClick('app-bar', 'blog', name)"
-    />
-  </v-badge>
+  <AppBtn
+    :to="rpath('/blog/')"
+    color="medium-emphasis"
+    text="blog"
+    variant="text"
+    @click="sweClick('app-bar', 'blog', name)"
+  />
 </template>
 
 <script setup>

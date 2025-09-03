@@ -46,6 +46,13 @@ export default {
     input: {
       placeholder: 'Introdueix la data',
     },
+    ariaLabel: {
+      previousMonth: 'Mes anterior',
+      nextMonth: 'Mes següent',
+      selectYear: 'Selecciona any',
+      selectDate: '{0}',
+      currentDate: 'Avui, {0}',
+    },
   },
   noDataText: 'Sense dades',
   carousel: {
@@ -145,5 +152,22 @@ export default {
     unmute: 'Activar so',
     enterFullscreen: 'Pantalla completa',
     exitFullscreen: 'Sortir de pantalla completa',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Seleccionar color de la pantalla',
+      hueSlider: 'To',
+      alphaSlider: 'Alfa',
+      redInput: 'Vermell',
+      greenInput: 'Verd',
+      blueInput: 'Blau',
+      alphaInput: 'Alfa',
+      hueInput: 'To',
+      saturationInput: 'Saturació',
+      lightnessInput: 'Lluminositat',
+      hexInput: 'Valor HEX',
+      hexaInput: 'Valor HEX amb alfa',
+      changeFormat: 'Canviar format de color',
+    },
   },
 }

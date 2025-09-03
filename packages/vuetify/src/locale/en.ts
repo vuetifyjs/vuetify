@@ -46,6 +46,13 @@ export default {
     input: {
       placeholder: 'Enter date',
     },
+    ariaLabel: {
+      previousMonth: 'Previous month',
+      nextMonth: 'Next month',
+      selectYear: 'Select year',
+      selectDate: '{0}', // Full date format
+      currentDate: 'Today, {0}',
+    },
   },
   noDataText: 'No data available',
   carousel: {
@@ -145,5 +152,22 @@ export default {
     unmute: 'Unmute',
     enterFullscreen: 'Full screen',
     exitFullscreen: 'Exit full screen',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Select color with eyedropper',
+      hueSlider: 'Hue',
+      alphaSlider: 'Alpha',
+      redInput: 'Red value',
+      greenInput: 'Green value',
+      blueInput: 'Blue value',
+      alphaInput: 'Alpha value',
+      hueInput: 'Hue value',
+      saturationInput: 'Saturation value',
+      lightnessInput: 'Lightness value',
+      hexInput: 'HEX value',
+      hexaInput: 'HEX with alpha value',
+      changeFormat: 'Change color format',
+    },
   },
 }

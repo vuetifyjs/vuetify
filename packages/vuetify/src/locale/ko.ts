@@ -46,6 +46,13 @@ export default {
     input: {
       placeholder: '날짜 입력',
     },
+    ariaLabel: {
+      previousMonth: '이전 달',
+      nextMonth: '다음 달',
+      selectYear: '연도 선택',
+      selectDate: '{0}',
+      currentDate: '오늘, {0}',
+    },
   },
   noDataText: '데이터가 없습니다.',
   carousel: {
@@ -145,5 +152,22 @@ export default {
     unmute: '음소거 해제',
     enterFullscreen: '전체 화면',
     exitFullscreen: '전체 화면 종료',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: '화면에서 색상 선택',
+      hueSlider: '색조',
+      alphaSlider: '투명도',
+      redInput: '빨강',
+      greenInput: '초록',
+      blueInput: '파랑',
+      alphaInput: '투명도',
+      hueInput: '색조',
+      saturationInput: '채도',
+      lightnessInput: '명도',
+      hexInput: 'HEX 값',
+      hexaInput: '알파 값이 있는 HEX',
+      changeFormat: '색상 형식 변경',
+    },
   },
 }

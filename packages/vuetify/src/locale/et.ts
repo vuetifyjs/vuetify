@@ -46,6 +46,13 @@ export default {
     input: {
       placeholder: 'Sisesta kuupäev',
     },
+    ariaLabel: {
+      previousMonth: 'Eelmine kuu',
+      nextMonth: 'Järgmine kuu',
+      selectYear: 'Vali aasta',
+      selectDate: '{0}',
+      currentDate: 'Täna, {0}',
+    },
   },
   noDataText: 'Andmed puuduvad',
   carousel: {
@@ -145,5 +152,22 @@ export default {
     unmute: 'Lülita vaigistus välja',
     enterFullscreen: 'Täisekraan',
     exitFullscreen: 'Välju täisekraanilt',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Võta värv ekraanilt',
+      hueSlider: 'Toon',
+      alphaSlider: 'Alfa',
+      redInput: 'Punane',
+      greenInput: 'Roheline',
+      blueInput: 'Sinine',
+      alphaInput: 'Alfa',
+      hueInput: 'Toon',
+      saturationInput: 'Küllastus',
+      lightnessInput: 'Heledus',
+      hexInput: 'HEKS väärtus',
+      hexaInput: 'HEKS koos alfa väärtusega',
+      changeFormat: 'Muuda värvi formaati',
+    },
   },
 }

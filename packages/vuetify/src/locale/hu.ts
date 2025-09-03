@@ -46,6 +46,13 @@ export default {
     input: {
       placeholder: 'Adja meg a dátumot',
     },
+    ariaLabel: {
+      previousMonth: 'Előző hónap',
+      nextMonth: 'Következő hónap',
+      selectYear: 'Év kiválasztása',
+      selectDate: '{0}',
+      currentDate: 'Ma, {0}',
+    },
   },
   noDataText: 'Nincs elérhető adat',
   carousel: {
@@ -145,5 +152,22 @@ export default {
     unmute: 'Némítás feloldása',
     enterFullscreen: 'Teljes képernyő',
     exitFullscreen: 'Kilépés a teljes képernyőből',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Szín kiválasztása a képernyőről',
+      hueSlider: 'Árnyalat',
+      alphaSlider: 'Átlátszóság',
+      redInput: 'Vörös',
+      greenInput: 'Zöld',
+      blueInput: 'Kék',
+      alphaInput: 'Átlátszóság',
+      hueInput: 'Árnyalat',
+      saturationInput: 'Telítettség',
+      lightnessInput: 'Világosság',
+      hexInput: 'HEX érték',
+      hexaInput: 'HEX érték átlátszósággal',
+      changeFormat: 'Színformátum módosítása',
+    },
   },
 }

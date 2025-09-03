@@ -5,9 +5,12 @@ import { VSlider } from '@/components/VSlider/VSlider'
 import { VIconBtn } from '@/labs/VIconBtn/VIconBtn'
 
 // Composables
-import { useLocale } from '@/composables'
 import { makeComponentProps } from '@/composables/component'
+import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
+
+// Directives
+import vTooltip from '@/directives/tooltip'
 
 // Utilities
 import { ref, toRef } from 'vue'
@@ -36,6 +39,8 @@ export const makeVVideoVolumeProps = propsFactory({
 
 export const VVideoVolume = genericComponent()({
   name: 'VVideoVolume',
+
+  directives: { vTooltip: vTooltip as any },
 
   props: makeVVideoVolumeProps(),
 
