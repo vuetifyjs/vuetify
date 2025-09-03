@@ -101,6 +101,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
     const vFieldRef = ref<VInput>()
     const controlHeight = shallowRef('')
     const textareaRef = ref<HTMLInputElement>()
+    const scrollbarWidth = ref(0)
     const autocomplete = useAutocomplete(props)
     const isActive = computed(() => (
       props.persistentPlaceholder ||
@@ -157,6 +158,12 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
       if (!props.autoGrow) rows.value = Number(props.rows)
     })
     function calculateInputHeight () {
+      nextTick(() => {
+        if (!textareaRef.value) return
+        const { offsetWidth, clientWidth } = textareaRef.value
+        scrollbarWidth.value = Math.max(0, offsetWidth - clientWidth)
+      })
+
       if (!props.autoGrow) return
 
       nextTick(() => {
@@ -232,7 +239,12 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
             },
             props.class,
           ]}
-          style={ props.style }
+          style={[
+            {
+              '--v-textarea-scroll-bar-width': convertToUnit(scrollbarWidth.value),
+            },
+            props.style,
+          ]}
           { ...rootAttrs }
           { ...inputProps }
           centerAffix={ rows.value === 1 && !isPlainOrUnderlined.value }
