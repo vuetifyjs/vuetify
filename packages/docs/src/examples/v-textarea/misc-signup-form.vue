@@ -102,7 +102,7 @@
       persistent
     >
       <v-card>
-        <v-card-title class="text-h5 bg-grey-lighten-3">
+        <v-card-title class="text-h5 text-center mt-5">
           Legal
         </v-card-title>
         <v-card-text>
