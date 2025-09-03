@@ -65,6 +65,7 @@ export const makeVFieldProps = propsFactory({
   },
   color: String,
   baseColor: String,
+  details: Boolean,
   dirty: Boolean,
   disabled: {
     type: Boolean,
@@ -141,7 +142,7 @@ export const VField = genericComponent<new <T>(
 
     const uid = useId()
     const id = computed(() => props.id || `input-${uid}`)
-    const messagesId = toRef(() => `${id.value}-messages`)
+    const messagesId = toRef(() => !props.details ? undefined : `${id.value}-messages`)
 
     const labelRef = ref<VFieldLabel>()
     const floatingLabelRef = ref<VFieldLabel>()
@@ -299,6 +300,7 @@ export const VField = genericComponent<new <T>(
                 class={[textColorClasses.value]}
                 floating
                 for={ id.value }
+                aria-hidden={ !isActive.value }
                 style={ textColorStyles.value }
               >
                 { label() }
@@ -397,7 +399,7 @@ export const VField = genericComponent<new <T>(
 
                 { hasFloatingLabel.value && (
                   <div class="v-field__outline__notch">
-                    <VFieldLabel ref={ floatingLabelRef } floating for={ id.value }>
+                    <VFieldLabel ref={ floatingLabelRef } floating for={ id.value } aria-hidden={ !isActive.value }>
                       { label() }
                     </VFieldLabel>
                   </div>
@@ -408,7 +410,7 @@ export const VField = genericComponent<new <T>(
             )}
 
             { isPlainOrUnderlined.value && hasFloatingLabel.value && (
-              <VFieldLabel ref={ floatingLabelRef } floating for={ id.value }>
+              <VFieldLabel ref={ floatingLabelRef } floating for={ id.value } aria-hidden={ !isActive.value }>
                 { label() }
               </VFieldLabel>
             )}

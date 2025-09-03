@@ -227,7 +227,10 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
 
     if (flipped.isFull) {
       const values = flipped.values()
-      if (deepEqual(values.at(-1), values.at(-3))) {
+      if (
+        deepEqual(values.at(-1), values.at(-3)) &&
+        !deepEqual(values.at(-1), values.at(-2))
+      ) {
         // Flipping is causing a container resize loop
         return
       }
@@ -237,21 +240,25 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
     if (result) flipped.push(result.flipped)
   })
 
-  watch([data.target, data.contentEl], ([newTarget, newContentEl], [oldTarget, oldContentEl]) => {
-    if (oldTarget && !Array.isArray(oldTarget)) observer.unobserve(oldTarget)
-    if (newTarget && !Array.isArray(newTarget)) observer.observe(newTarget)
+  let targetBox = new Box({ x: 0, y: 0, width: 0, height: 0 })
 
+  watch(data.target, (newTarget, oldTarget) => {
+    if (oldTarget && !Array.isArray(oldTarget)) observer.unobserve(oldTarget)
+    if (!Array.isArray(newTarget)) {
+      if (newTarget) observer.observe(newTarget)
+    } else if (!deepEqual(newTarget, oldTarget)) {
+      updateLocation()
+    }
+  }, { immediate: true })
+
+  watch(data.contentEl, (newContentEl, oldContentEl) => {
     if (oldContentEl) observer.unobserve(oldContentEl)
     if (newContentEl) observer.observe(newContentEl)
-  }, {
-    immediate: true,
-  })
+  }, { immediate: true })
 
   onScopeDispose(() => {
     observer.disconnect()
   })
-
-  let targetBox = new Box({ x: 0, y: 0, width: 0, height: 0 })
 
   // eslint-disable-next-line max-statements
   function updateLocation () {

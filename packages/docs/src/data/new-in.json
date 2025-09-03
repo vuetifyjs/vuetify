@@ -1,4 +1,12 @@
 {
+  "useTheme": {
+    "exposed": {
+      "change": "3.9.0",
+      "toggle": "3.9.0",
+      "cycle": "3.9.0",
+      "unimportant": "3.9.0"
+    }
+  },
   "VAppBar": {
     "props": {
       "scrollBehavior": "3.2.0"
@@ -106,13 +114,19 @@
   },
   "VSelect": {
     "props": {
-      "listProps": "3.5.0"
+      "listProps": "3.5.0",
+      "noAutoScroll": "3.9.0"
     }
   },
   "VSlider": {
     "events": {
       "start": "3.2.0",
       "end": "3.2.0"
+    }
+  },
+  "VSlideGroup": {
+    "props": {
+      "contentClass": "3.9.0"
     }
   },
   "VSnackbar": {
@@ -131,6 +145,19 @@
   "VTab": {
     "props": {
       "text": "3.2.0"
+    }
+  },
+  "VTreeview": {
+    "props": {
+      "hideActions": "3.9.0",
+      "separateRoots": "3.9.0",
+      "indentLines": "3.9.0"
+    }
+  },
+  "VTreeviewItem": {
+    "props": {
+      "hideActions": "3.9.0",
+      "indentLines": "3.9.0"
     }
   },
   "VTooltip": {

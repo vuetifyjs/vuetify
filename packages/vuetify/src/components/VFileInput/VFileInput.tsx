@@ -194,7 +194,10 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
       const hasDetails = !!(hasCounter || slots.details)
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
       const { modelValue: _, ...inputProps } = VInput.filterProps(props)
-      const fieldProps = VField.filterProps(props)
+      const fieldProps = {
+        ...VField.filterProps(props),
+        'onClick:clear': onClear,
+      }
 
       return (
         <VInput
@@ -225,13 +228,13 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
               isDirty,
               isReadonly,
               isValid,
+              hasDetails,
             }) => (
               <VField
                 ref={ vFieldRef }
-                prepend-icon={ props.prependIcon }
+                prependIcon={ props.prependIcon }
                 onMousedown={ onControlMousedown }
                 onClick={ onControlClick }
-                onClick:clear={ onClear }
                 onClick:prependInner={ props['onClick:prependInner'] }
                 onClick:appendInner={ props['onClick:appendInner'] }
                 { ...fieldProps }
@@ -240,6 +243,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
                 dirty={ isDirty.value || props.dirty }
                 disabled={ isDisabled.value }
                 focused={ isFocused.value }
+                details={ hasDetails.value }
                 error={ isValid.value === false }
                 onDragover={ onDragover }
                 onDrop={ onDrop }

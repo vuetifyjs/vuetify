@@ -41,9 +41,10 @@
   .v-autocomplete
     &__content
       overflow: hidden
-
       @include tools.elevation($autocomplete-content-elevation)
-      @include tools.rounded($autocomplete-content-border-radius)
+
+      @at-root #{selector.append('.v-menu > .v-overlay__content', &)}
+        @include tools.rounded($autocomplete-content-border-radius)
 
     &__mask
       background: rgb(var(--v-theme-surface-light))

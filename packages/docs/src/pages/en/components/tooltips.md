@@ -41,6 +41,12 @@ Tooltips can wrap any element.
 
 ### Props
 
+#### Interactive
+
+The **interactive** prop prevents the tooltip from closing during mouse interactions. For example, if the tooltip contains text that users might want to click or copy.
+
+<ExamplesExample file="v-tooltip/prop-interactive" />
+
 #### Location
 
 Use the **location** prop to specify on which side of the element the tooltip should show. Read more about **location** [here](/components/overlays/#location).
@@ -55,8 +61,22 @@ Tooltip color can be set with the `color` prop.
 <ExamplesExample file="v-tooltip/prop-color" />
 -->
 
+#### Open on Click
+
+The **open-on-click** prop allows tooltip to open when the activator is clicked. Useful for touch devices or when manual triggering is preferred.
+
+<ExamplesExample file="v-tooltip/prop-open-on-click"/>
+
 #### Visibility
 
 Tooltip visibility can be programmatically changed using `v-model`.
 
 <ExamplesExample file="v-tooltip/prop-visibility" />
+
+### Misc
+
+#### Tooltip at cursor
+
+Tooltip can appear where the cursor is by setting the **target** prop to `cursor`. This is currently only available with **open-on-click**.
+
+<ExamplesExample file="v-tooltip/misc-at-cursor" />
