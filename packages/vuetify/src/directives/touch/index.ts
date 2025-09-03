@@ -136,7 +136,7 @@ function unmounted (el: HTMLElement, binding: TouchDirectiveBinding) {
   const target = binding.value?.parent ? el.parentElement : el
   const uid = binding.instance?.$.uid
 
-  if (!target?._touchHandlers || !uid) return
+  if (!target?._touchHandlers || uid === undefined) return
 
   const handlers = target._touchHandlers[uid]
 
