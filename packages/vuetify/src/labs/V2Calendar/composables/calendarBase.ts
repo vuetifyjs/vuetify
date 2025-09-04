@@ -7,8 +7,8 @@ import { provideLocale } from '@/composables/locale'
 import { computed, inject, provide } from 'vue'
 import {
   createDayList,
-  createNativeLocaleFormatter,
-  getEndOfWeek,
+  createNativeLocaleFormatter, getEndOfMonth,
+  getEndOfWeek, getStartOfMonth,
   getStartOfWeek,
   getTimestampIdentifier,
   getWeekdaySkips,
@@ -52,6 +52,10 @@ export const makeCalendarBaseProps = propsFactory({
     type: String,
     validator: validateTimestamp,
   },
+  type: {
+    type: String as PropType<'month' | 'week' | 'day' | '4day' | 'custom-weekly' | 'custom-daily' | 'category'>,
+    default: 'month',
+  },
 }, 'VCalendar-base')
 
 export interface CalendarBaseProps {
@@ -62,6 +66,7 @@ export interface CalendarBaseProps {
   dayFormat: CalendarFormatter | string | undefined
   locale: string | undefined
   now: string | undefined
+  type: 'month' | 'week' | 'day' | '4day' | 'custom-weekly' | 'custom-daily' | 'category'
 }
 
 const VCalendarBaseSymbol: InjectionKey<
@@ -96,14 +101,21 @@ function createState (props: CalendarBaseProps) {
   })
 
   const parsedStart = computed((): CalendarTimestamp => {
+    if (props.type === 'month') {
+      return getStartOfMonth(parseTimestamp(props.start, true))
+    }
     return parseTimestamp(props.start, true)
   })
 
   const parsedEnd = computed((): CalendarTimestamp => {
     const start = parsedStart.value
     const end: CalendarTimestamp = props.end ? parseTimestamp(props.end) || start : start
+    const value = getTimestampIdentifier(end) < getTimestampIdentifier(start) ? start : end
 
-    return getTimestampIdentifier(end) < getTimestampIdentifier(start) ? start : end
+    if (props.type === 'month') {
+      return getEndOfMonth(value)
+    }
+    return value
   })
 
   const days = computed((): CalendarTimestamp[] => {
@@ -111,7 +123,7 @@ function createState (props: CalendarBaseProps) {
       parsedStart.value,
       parsedEnd.value,
       times.today,
-      weekdaySkips.value
+      weekdaySkips.value,
     )
   })
 

@@ -1,7 +1,6 @@
 // Components
 import { VCalendarCategory } from './VCalendarCategory'
 import { VCalendarDaily } from './VCalendarDaily'
-import { VCalendarMonthly } from './VCalendarMonthly'
 import { VCalendarWeekly } from './VCalendarWeekly'
 
 // Composables
@@ -143,8 +142,6 @@ export const V2Calendar = genericComponent<new (
     ...makeCalendarWithEventsProps(),
   },
 
-  // emits: ['change', 'moved', 'update:modelValue', 'click:date'],
-
   setup (props, { slots, attrs, emit }) {
     const lastStart = ref<CalendarTimestamp | null>(null)
     const lastEnd = ref<CalendarTimestamp | null>(null)
@@ -176,7 +173,7 @@ export const V2Calendar = genericComponent<new (
 
       switch (props.type) {
         case 'month':
-          component = VCalendarMonthly
+          component = VCalendarWeekly
           start = getStartOfMonth(around)
           end = getEndOfMonth(around)
           break
@@ -396,7 +393,6 @@ export const V2Calendar = genericComponent<new (
       return categories
     }
 
-    // Setup watchers and lifecycle hooks
     watch(renderProps, checkChange)
 
     onMounted(() => {
@@ -408,7 +404,6 @@ export const V2Calendar = genericComponent<new (
       window.requestAnimationFrame(base.updateEventVisibility)
     })
 
-    // Render function
     useRender(() => {
       const { start, end, maxDays, component: Component, weekdays, categories } = renderProps.value
       return (

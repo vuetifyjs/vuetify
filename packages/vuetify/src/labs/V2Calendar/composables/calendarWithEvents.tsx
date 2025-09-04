@@ -125,10 +125,6 @@ export const makeCalendarWithEventsProps = propsFactory({
     type: Number,
     default: 1,
   },
-  type: {
-    type: String as PropType<'month' | 'week' | 'day' | '4day' | 'custom-weekly' | 'custom-daily' | 'category'>,
-    default: 'month',
-  },
 }, 'VCalendar-events')
 
 interface CalendarWithEventsProps extends CalendarBaseProps {
