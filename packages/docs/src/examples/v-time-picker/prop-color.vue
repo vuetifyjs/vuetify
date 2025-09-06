@@ -7,7 +7,6 @@
 
       <v-time-picker
         color="pink"
-        header-color="primary"
       ></v-time-picker>
     </v-row>
   </v-container>
