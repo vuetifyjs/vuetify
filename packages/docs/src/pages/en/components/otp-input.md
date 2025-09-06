@@ -117,5 +117,7 @@ The following example is a detailed example of a `v-otp-input` component used to
 ### Divider
 
 The following example is a detailed example of a `v-otp-input` component used with a divider.
+The `v-otp-input` must include a `v-model` prop to bind its value.
+This ensures the input value is properly bound and can be cleared when resetting or sending a new code, which matches the expected behavior.
 
 <ExamplesExample file="v-otp-input/misc-divider" />
