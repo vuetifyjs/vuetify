@@ -88,4 +88,6 @@ In this example we utilize a custom **no-data** slot to provide context to the u
 
 The `v-combobox` improves upon the added functionality from `v-select` and `v-autocomplete`. This provides you with an expansive interface to create truly customized implementations. This example takes advantage of some more advanced features such as a custom **filter** algorithm, inline list editing and dynamic input items.
 
+Additionally, when working with custom chip slots, it’s worth noting that binding `v-bind="props"` also includes helpful event handling such as `@mousedown.stop`. This pattern allows chips to behave correctly without unintentionally triggering the dropdown, and serves as a good reference for building more advanced interactions.
+
 <ExamplesExample file="v-combobox/misc-advanced" />
