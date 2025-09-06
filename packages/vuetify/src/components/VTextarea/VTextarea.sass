@@ -33,6 +33,12 @@
     &--no-resize
       .v-field__input
         resize: none
+        scrollbar-width: none
+
+      &.v-textarea--height-capped
+        .v-field__input
+          scrollbar-gutter: stable
+          scrollbar-width: thin
 
     .v-field--no-label,
     .v-field--active
