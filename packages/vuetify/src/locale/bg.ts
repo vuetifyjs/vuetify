@@ -85,6 +85,9 @@ export default {
     am: 'пр. обяд',
     pm: 'сл. обяд',
     title: 'Изберете време',
+    hour: 'Hour',
+    minute: 'Minute',
+    second: 'Second',
   },
   pagination: {
     ariaLabel: {
