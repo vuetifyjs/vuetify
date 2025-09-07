@@ -35,3 +35,25 @@
   const selected = ref(['Apple', 'Kiwi', 'Grapes']
     .map(v => items.find(item => item.name === v)))
 </script>
+
+<script>
+  export default {
+    data () {
+      return {
+        items: [
+          { symbol: '🍎', name: 'Apple' },
+          { symbol: '🍌', name: 'Banana' },
+          { symbol: '🍇', name: 'Grapes' },
+          { symbol: '🍉', name: 'Watermelon' },
+          { symbol: '🍓', name: 'Strawberry' },
+          { symbol: '🥝', name: 'Kiwi' },
+        ],
+        selected: [],
+      }
+    },
+    mounted () {
+      this.selected = ['Apple', 'Kiwi', 'Grapes']
+        .map(v => this.items.find(item => item.name === v))
+    },
+  }
+</script>
