@@ -8,13 +8,13 @@
     closable-chips
     multiple
   >
-    <template #chip="{ props, item }">
+    <template v-slot:chip="{ props, item }">
       <v-chip v-bind="props" label>
-        <template #prepend>
+        <template v-slot:prepend>
           <div class="me-1">{{ item.raw.symbol }}</div>
         </template>
-        <template #close>
-          <v-icon icon="$close" size="14" />
+        <template v-slot:close>
+          <v-icon icon="$close" size="14"></v-icon>
         </template>
       </v-chip>
     </template>
