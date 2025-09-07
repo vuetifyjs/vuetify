@@ -208,6 +208,17 @@ You can use the dynamic slots `item.<key>` to customize only certain columns. `<
 
 <ExamplesExample file="v-data-table/slot-item-key" />
 
+#### Item name slot
+
+The `item.<name>` slot allows you to customize the rendering of a cell in a given column. It exposes the following props:
+* isMobile (`boolean`) – Whether the table is in mobile layout.
+* item (`any`) – The row item associated with this cell.
+* header (`DataTableHeader`) – The column header definition.
+* value (`any`) – The cell value for the current column.
+* index (`number`) – The zero-based row index.
+
+<ExamplesExample file="v-data-table/slot-item-name" />
+
 #### Group header slot
 
 When using the **group-by** prop, you can customize the group header with the `group-header` slot. Example below makes the whole row clickable.
