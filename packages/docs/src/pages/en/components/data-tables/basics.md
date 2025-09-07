@@ -211,6 +211,7 @@ You can use the dynamic slots `item.<key>` to customize only certain columns. `<
 #### Item name slot
 
 The `item.<name>` slot allows you to customize the rendering of a cell in a given column. It exposes the following props:
+
 * isMobile (`boolean`) – Whether the table is in mobile layout.
 * item (`any`) – The row item associated with this cell.
 * header (`DataTableHeader`) – The column header definition.
