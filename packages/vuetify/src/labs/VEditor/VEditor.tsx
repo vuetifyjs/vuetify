@@ -5,6 +5,7 @@ import './VEditor.sass'
 import { VBtn } from '@/components/VBtn'
 import { VBtnToggle } from '@/components/VBtnToggle/VBtnToggle'
 import { VCard } from '@/components/VCard/VCard'
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { makeVFieldProps, VField } from '@/components/VField/VField'
 import { VIcon } from '@/components/VIcon'
 import { makeVInputProps, VInput } from '@/components/VInput/VInput'
@@ -29,15 +30,15 @@ import type { Formats, Formatter } from './composables/formatter'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
 
-type VEditorSlots = Omit<VInputSlots & VFieldSlots, 'default'>
+type VEditorSlots = Omit<VInputSlots & VFieldSlots, 'default'> & {
+  'toolbar.prepend': never
+  'toolbar.append': never
+}
 
 const zeroWidthSpace = '\u200B'
 
 export const makeVEditorProps = propsFactory({
-  hideToolbar: {
-    type: Boolean,
-    default: false,
-  },
+  hideToolbar: Boolean,
   formats: {
     type: Array as PropType<Formats[]>,
     default: () => [
@@ -69,6 +70,7 @@ export const makeVEditorProps = propsFactory({
     type: [Number, String],
     default: 100,
   },
+  toolbarProps: Object as PropType<VToolbar['$props']>,
   ...omit(makeVInputProps(), ['label']),
   ...omit(makeVFieldProps(), ['label']),
 }, 'VEditor')
@@ -346,6 +348,12 @@ export const VEditor = genericComponent<VEditorSlots>()({
       const { modelValue: _, ...inputProps } = VInput.filterProps(props)
       const fieldProps = VField.filterProps(props)
 
+      const buttonProps = {
+        size: 'small',
+        variant: 'text',
+        tile: true,
+      }
+
       return (
         <VInput
           ref={ vInputRef }
@@ -387,79 +395,80 @@ export const VEditor = genericComponent<VEditorSlots>()({
                   default: () => (
                     <div class="v-editor__container">
                       { hasToolbar && (
-                        <VToolbar
+                        <VDefaultsProvider
                           key="toolbar"
-                          height="auto"
-                          color="transparent"
-                          density="compact"
+                          defaults={{ VBtn: { ...buttonProps } }}
                         >
-                          {{
-                            default: () => (
-                              <div class="v-editor__toolbar-items">
-                                { displayedGeneralFormats.value.map(format => (
-                                  <VBtn
-                                    size="small"
-                                    variant="text"
-                                    name={ format.name }
-                                    key={ format.name }
-                                    icon={ format.icon }
-                                    onClick={ () => applyFormat(format) }
-                                    color={ isFormatActive.value(format.name) ? 'primary' : undefined }
-                                  />
-                                ))}
+                          <VToolbar
+                            key="toolbar"
+                            height="auto"
+                            color="transparent"
+                            density="compact"
+                            { ...props.toolbarProps }
+                          >
+                            {{
+                              default: () => (
+                                <div class="v-editor__toolbar-items">
+                                  { slots['toolbar.prepend']?.() }
+                                  { displayedGeneralFormats.value.map(format => (
+                                    <VBtn
+                                      name={ format.name }
+                                      key={ format.name }
+                                      icon={ format.icon }
+                                      onClick={ () => applyFormat(format) }
+                                      color={ isFormatActive.value(format.name) ? 'primary' : undefined }
+                                    />
+                                  ))}
 
-                                {[displayedHeadingFormats.value, displayedAlignmentFormats.value]
-                                  .map(groupFormats => {
-                                    const activeFormat = groupFormats.find(format => activeFormats.value.has(format.name))
+                                  {[
+                                    displayedHeadingFormats.value,
+                                    displayedAlignmentFormats.value,
+                                  ]
+                                    .map(groupFormats => {
+                                      const activeFormat = groupFormats.find(format => activeFormats.value.has(format.name))
 
-                                    return (
-                                      groupFormats.length ? (
-                                        <VBtn
-                                          icon
-                                          size="small"
-                                          variant="text"
-                                          name={ groupFormats[0].category }
-                                          color={ activeFormat ? 'primary' : undefined }
-                                        >
-                                          <VIcon
-                                            icon={ activeFormat?.icon || groupFormats[0].icon }
-                                          />
+                                      return (
+                                        groupFormats.length ? (
+                                          <VBtn
+                                            icon
+                                            name={ groupFormats[0].category }
+                                            color={ activeFormat ? 'primary' : undefined }
+                                          >
+                                            <VIcon icon={ activeFormat?.icon || groupFormats[0].icon } />
 
-                                          <VMenu activator="parent" location="bottom center">
-                                            {{
-                                              default: () => (
-                                                <VCard>
-                                                  <VBtnToggle
-                                                    variant="text"
-                                                    color="primary"
-                                                    density="compact"
-                                                    modelValue={ activeFormat?.name }
-                                                  >
-                                                    { groupFormats.map(format => (
-                                                      <VBtn
-                                                        size="small"
-                                                        width="40px"
-                                                        variant="text"
-                                                        name={ format.name }
-                                                        value={ format.name }
-                                                        key={ format.name }
-                                                        icon={ format.icon }
-                                                        onClick={ () => applyFormat(format) }
-                                                      />
-                                                    ))}
-                                                  </VBtnToggle>
-                                                </VCard>
-                                              ),
-                                            }}
-                                          </VMenu>
-                                        </VBtn>
-                                      ) : undefined
-                                    )
-                                  })}
-                              </div>
-                            ),
-                          }}
-                        </VToolbar>
+                                            <VMenu activator="parent" location="bottom center">
+                                              <VCard>
+                                                <VBtnToggle
+                                                  variant="text"
+                                                  color="primary"
+                                                  density="compact"
+                                                  modelValue={ activeFormat?.name }
+                                                >
+                                                  { groupFormats.map(format => (
+                                                    <VBtn
+                                                      size="small"
+                                                      width="40px"
+                                                      variant="text"
+                                                      name={ format.name }
+                                                      value={ format.name }
+                                                      key={ format.name }
+                                                      icon={ format.icon }
+                                                      onClick={ () => applyFormat(format) }
+                                                    />
+                                                  ))}
+                                                </VBtnToggle>
+                                              </VCard>
+                                            </VMenu>
+                                          </VBtn>
+                                        ) : undefined
+                                      )
+                                    })}
+                                  { slots['toolbar.append']?.() }
+                                </div>
+                              ),
+                            }}
+                          </VToolbar>
+                        </VDefaultsProvider>
                       )}
 
                       <VSheet
