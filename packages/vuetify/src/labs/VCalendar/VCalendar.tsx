@@ -93,7 +93,7 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
 
     function eventFilter (date: Date, e: {start: Date, end: Date}) {
       return adapter.isSameDay(date, e.start) || adapter.isSameDay(date, e.end) ||
-        (adapter.isAfter(date, adapter.endOfDay(e.start)) && adapter.isBefore(date, adapter.startOfDay(e.end)))
+        adapter.isWithinRange(date, [adapter.endOfDay(e.start), adapter.startOfDay(e.end)])
     }
 
     useRender(() => {
