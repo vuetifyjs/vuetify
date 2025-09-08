@@ -269,7 +269,6 @@ export const VCalendar = genericComponent<new (
       }
     })
 
-    // Methods
     function checkChange (): void {
       const { start, end } = renderProps.value
       if (!lastStart.value || !lastEnd.value ||
@@ -330,14 +329,6 @@ export const VCalendar = genericComponent<new (
 
     function prev (amount = 1): void {
       move(-amount)
-    }
-
-    function parseTimestampFunc (input: VTimestampInput, required?: false): CalendarTimestamp | null {
-      return parseTimestamp(input, required, base.times.now)
-    }
-
-    function timestampToDateFunc (timestamp: CalendarTimestamp): Date {
-      return timestampToDate(timestamp)
     }
 
     function getCategoryList (categories: CalendarCategory[]): CalendarCategory[] {
@@ -444,8 +435,6 @@ export const VCalendar = genericComponent<new (
       move,
       next,
       prev,
-      parseTimestamp: parseTimestampFunc,
-      timestampToDate: timestampToDateFunc,
       getCategoryList,
     }
   },
