@@ -17,10 +17,10 @@
           @mousemove:time="mouseMove"
           @mouseup:time="endDrag"
         >
-          <template v-slot:event="{ event, timed /*, eventSummary */ }">
-            <!--<div class="v-event-draggable">
-              <component :is="{ render: eventSummary }"></component>
-            </div>-->
+          <template v-slot:event="{ event, timed, eventSummary }">
+            <div class="v-event-draggable">
+              <component :is="eventSummary"></component>
+            </div>
             <div
               v-if="timed"
               class="v-event-drag-bottom"
@@ -47,14 +47,14 @@
       extendOriginal: null,
     }),
     methods: {
-      startDrag ({ event, timed }) {
+      startDrag (nativeEvent, { event, timed }) {
         if (event && timed) {
           this.dragEvent = event
           this.dragTime = null
           this.extendOriginal = null
         }
       },
-      startTime (tms) {
+      startTime (nativeEvent, tms) {
         const mouse = this.toTime(tms)
 
         if (this.dragEvent && this.dragTime === null) {
@@ -79,7 +79,7 @@
         this.createStart = event.start
         this.extendOriginal = event.end
       },
-      mouseMove (tms) {
+      mouseMove (nativeEvent, tms) {
         const mouse = this.toTime(tms)
 
         if (this.dragEvent && this.dragTime !== null) {

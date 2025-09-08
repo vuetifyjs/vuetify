@@ -42,7 +42,7 @@
         </v-toolbar>
       </v-sheet>
       <v-sheet height="600">
-        <v2-calendar
+        <v-calendar
           ref="calendar"
           v-model="focus"
           :categories="categories"
@@ -52,7 +52,7 @@
           type="category"
           category-show-all
           @change="fetchEvents"
-        ></v2-calendar>
+        ></v-calendar>
       </v-sheet>
     </v-col>
   </v-row>

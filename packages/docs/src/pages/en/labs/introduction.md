@@ -76,8 +76,7 @@ The following is a list of available and up-and-coming components for use with L
 
 | Component                                            | Description                                                | Min Version                                                |
 |------------------------------------------------------|------------------------------------------------------------|------------------------------------------------------------|
-| [v-calendar](/components/calendars/)                 | A calendar component                                       | [v3.4.9](/getting-started/release-notes/?version=v3.4.9)   |
-| [v2-calendar](/components/v2-calendars/)             | A direct port of VCalendar from Vuetify 2                  | [v3.10.0](/getting-started/release-notes/?version=v3.10.0) |
+| [v-calendar](/components/calendars/)                 | A calendar component                                       | [v3.10.0](/getting-started/release-notes/?version=v3.10.0) |
 | [v-color-input](/components/color-inputs/)           | A color input component                                    | [vTBD](/getting-started/release-notes/?version=vTBD)       |
 | [v-date-input](/components/date-inputs/)             | A date input component                                     | [v3.6.0](/getting-started/release-notes/?version=v3.6.0)   |
 | [v-pull-to-refresh](/components/pull-to-refresh/)    | A component to update content by screen swipes             | [v3.6.0](/getting-started/release-notes/?version=v3.6.0)   |
