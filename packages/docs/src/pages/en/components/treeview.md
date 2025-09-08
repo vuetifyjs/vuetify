@@ -136,6 +136,12 @@ Both **append**, and **prepend** slots get additional information about the item
 
 <ExamplesExample file="v-treeview/slot-append-and-prepend-item" />
 
+#### No data
+
+When searching within the treeview, you might want to show custom **no-data** slot to provide context or immediate action.
+
+<ExamplesExample file="v-treeview/slot-no-data" />
+
 #### Title
 
 In this example we use a custom **title** slot to apply a line-through the treeview item's text when selected.
