@@ -91,6 +91,11 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
       return adapter.format(displayValue.value, 'monthAndYear')
     })
 
+    function eventFilter (date: Date, e: {start: Date, end: Date}) {
+      return adapter.isSameDay(date, e.start) || adapter.isSameDay(date, e.end) ||
+        (adapter.isAfter(date, adapter.endOfDay(e.start)) && adapter.isBefore(date, adapter.startOfDay(e.end)))
+    }
+
     useRender(() => {
       const calendarDayProps = VCalendarDay.filterProps(props)
       const calendarHeaderProps = VCalendarHeader.filterProps(props)
@@ -178,7 +183,7 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
                             { ...calendarDayProps }
                             day={ day }
                             title={ adapter.format(day.date, 'dayOfMonth') }
-                            events={ props.events?.filter(e => adapter.isSameDay(day.date, e.start) || adapter.isSameDay(day.date, e.end)) }
+                            events={ props.events?.filter(e => eventFilter(day.date, e)) }
                             { ...attrs }
                           >
                             {{
@@ -197,13 +202,13 @@ export const VCalendar = genericComponent<VCalendarSlots>()({
                   ...calendarDayProps,
                   day,
                   dayIndex: i,
-                  events: props.events?.filter(e => adapter.isSameDay(e.start, day.date) || adapter.isSameDay(e.end, day.date)),
+                  events: props.events?.filter(e => eventFilter(day.date, e)),
                 }) : (
                   <VCalendarDay
                     { ...calendarDayProps }
                     day={ day }
                     dayIndex={ i }
-                    events={ props.events?.filter(e => adapter.isSameDay(e.start, day.date) || adapter.isSameDay(e.end, day.date)) }
+                    events={ props.events?.filter(e => eventFilter(day.date, e)) }
                     { ...attrs }
                   >
                     {{ ...pick(slots, ['interval', 'interval-body', 'interval-event', 'interval-title']) }}
