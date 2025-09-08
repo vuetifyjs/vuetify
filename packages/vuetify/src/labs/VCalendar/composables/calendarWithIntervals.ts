@@ -2,7 +2,7 @@
 import { useCalendarBase } from './calendarBase'
 
 // Utilities
-import { computed, inject, provide, shallowRef } from 'vue'
+import { computed, shallowRef } from 'vue'
 import {
   copyTimestamp,
   createDayList,
@@ -17,7 +17,7 @@ import {
 import { propsFactory } from '@/util'
 
 // Types
-import type { InjectionKey, PropType, StyleValue } from 'vue'
+import type { PropType, StyleValue } from 'vue'
 import type { CalendarBaseProps } from './calendarBase'
 import type { CalendarDayBodySlotScope, CalendarFormatter, CalendarTimestamp } from '../types'
 import type { VTime } from '../util/timestamp'
@@ -80,24 +80,7 @@ interface CalendarWithIntervalsProps extends CalendarBaseProps {
   intervalFormat: CalendarFormatter | string | undefined
 }
 
-const VCalendarWithIntervalsSymbol: InjectionKey<
-  ReturnType<typeof createState>
-> = Symbol.for('vuetify:calendar:withIntervals')
-
-export function useCalendarWithIntervals (props: CalendarWithIntervalsProps, root = false) {
-  if (!root) {
-    const provided = inject(VCalendarWithIntervalsSymbol, null)
-    if (provided) return provided
-  }
-
-  const state = createState(props, root)
-
-  provide(VCalendarWithIntervalsSymbol, state)
-
-  return state
-}
-
-function createState (props: CalendarWithIntervalsProps, root = false) {
+export function useCalendarWithIntervals (props: CalendarWithIntervalsProps) {
   const base = useCalendarBase(props)
 
   const scrollAreaRef = shallowRef<HTMLElement>()

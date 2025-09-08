@@ -4,7 +4,7 @@ import { computeColor } from '@/composables/color'
 import { provideLocale } from '@/composables/locale'
 
 // Utilities
-import { computed, inject, provide } from 'vue'
+import { computed } from 'vue'
 import {
   createDayList,
   createNativeLocaleFormatter, getEndOfMonth,
@@ -20,7 +20,7 @@ import {
 import { propsFactory } from '@/util'
 
 // Types
-import type { InjectionKey, PropType } from 'vue'
+import type { PropType } from 'vue'
 import type { CalendarFormatter, CalendarTimestamp } from '../types'
 import type { ColorValue } from '@/composables/color'
 
@@ -69,24 +69,7 @@ export interface CalendarBaseProps {
   type: 'month' | 'week' | 'day' | '4day' | 'custom-weekly' | 'custom-daily' | 'category'
 }
 
-const VCalendarBaseSymbol: InjectionKey<
-  ReturnType<typeof createState>
-> = Symbol.for('vuetify:calendar:base')
-
-export function useCalendarBase (props: CalendarBaseProps, root = false) {
-  if (!root) {
-    const provided = inject(VCalendarBaseSymbol, null)
-    if (provided) return provided
-  }
-
-  const state = createState(props)
-
-  provide(VCalendarBaseSymbol, state)
-
-  return state
-}
-
-function createState (props: CalendarBaseProps) {
+export function useCalendarBase (props: CalendarBaseProps) {
   const { times } = useTimes({ now: props.now })
   const locale = provideLocale(props)
 
