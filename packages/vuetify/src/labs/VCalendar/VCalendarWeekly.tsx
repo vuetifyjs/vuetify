@@ -225,13 +225,15 @@ export const VCalendarWeekly = defineComponent({
     }
 
     function genDayLabelButton (day: CalendarTimestamp) {
-      const color = day.present ? props.color : 'transparent'
       const hasMonth = day.day === 1 && props.showMonthOnFirst
       const events = getPrefixedEventHandlers(attrs, ':date', nativeEvent => ({ nativeEvent, ...day }))
 
       return (
         <VIconBtn
-          color={ color }
+          active={ day.present }
+          activeColor={ props.color }
+          variant={ props.color ? 'flat' : 'tonal' }
+          baseVariant="text"
           { ...events }
         >
           { hasMonth

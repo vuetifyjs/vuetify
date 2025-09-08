@@ -134,13 +134,15 @@ export const VCalendarDaily = defineComponent({
     }
 
     function genHeadDayButton (day: CalendarTimestamp) {
-      const color = day.present ? props.color : 'transparent'
       const events = getPrefixedEventHandlers(attrs, ':date', nativeEvent => ({
         nativeEvent, ...day,
       }))
       return (
         <VIconBtn
-          color={ color }
+          active={ day.present }
+          activeColor={ props.color }
+          variant={ props.color ? 'flat' : 'tonal' }
+          baseVariant="text"
           { ...events }
         >
           { base.dayFormatter.value(day, false) }
