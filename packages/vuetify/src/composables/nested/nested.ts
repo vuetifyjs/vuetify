@@ -206,7 +206,7 @@ export const useNested = (props: NestedProps) => {
     const path: unknown[] = []
     let parent: unknown = toRaw(id)
 
-    while (parent != null) {
+    while (parent !== undefined) {
       path.unshift(parent)
       parent = parents.value.get(parent)
     }
@@ -358,7 +358,10 @@ export const useNestedItem = (id: MaybeRefOrGetter<unknown>, isDisabled: MaybeRe
   const parent = inject(VNestedSymbol, emptyNested)
 
   const uidSymbol = Symbol('nested item')
-  const computedId = computed(() => toRaw(toValue(id)) ?? uidSymbol)
+  const computedId = computed(() => {
+    const idValue = toRaw(toValue(id))
+    return idValue !== undefined ? idValue : uidSymbol
+  })
 
   const item = {
     ...parent,

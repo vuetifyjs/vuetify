@@ -4,6 +4,7 @@ export interface PieItem {
   value: number
   title: string
   pattern?: string
+  isActive: boolean
   raw?: Record<string, any>
 }
 
