@@ -37,14 +37,13 @@ import type {
   CalendarDaySlotScope, CalendarEvent, CalendarEventParsed,
   CalendarTimestamp,
 } from './types'
-import type { VTimestampInput } from './util/timestamp'
 import type { EventProp, GenericProps, JSXComponent } from '@/util'
 
 // Types
 interface VCalendarRenderProps {
   start: CalendarTimestamp
   end: CalendarTimestamp
-  component: JSXComponent
+  component: JSXComponent & { filterProps: <T>(props: T) => Partial<T> }
   maxDays: number
   weekdays: number[]
   categories: CalendarCategory[]
@@ -402,8 +401,7 @@ export const VCalendar = genericComponent<new (
           class={['v-calendar', { 'v-calendar-events': !base.noEvents.value }]}
           v-resize_quiet={ base.updateEventVisibility }
           role="grid"
-          { ...props }
-          events={ props.events }
+          { ...Component.filterProps(props) }
           start={ start.date }
           end={ end.date }
           maxDays={ maxDays }
