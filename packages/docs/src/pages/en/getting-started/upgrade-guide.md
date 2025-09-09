@@ -171,8 +171,6 @@ app.use(vuetify)
 
 - The first emit argument is now the native event, custom data has been moved to the second argument.
   - `onClickEvent ({ nativeEvent, event, day })` should be changed to `onClickDate (nativeEvent, { event, day })`.
-- `*:more`, `*:date`, `*:day`, `*:time`, `*:day-category`, `*:time-category`, `*:interval` events now have the timestamp as a separate key on the data object for consistency with the `*:event` event.
-  - `onClickMore ({ nativeEvent, ...day })` should be changed to `onClickMore (nativeEvent, { day })`
 
 ### v-checkbox/v-radio/v-switch
 
