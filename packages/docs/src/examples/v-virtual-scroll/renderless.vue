@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-container>
-      <v-table>
+      <v-table height="300">
         <thead>
           <tr>
             <th>Col 1</th>
