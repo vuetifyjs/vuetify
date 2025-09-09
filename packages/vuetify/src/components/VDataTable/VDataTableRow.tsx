@@ -9,6 +9,7 @@ import { useHeaders } from './composables/headers'
 import { useSelection } from './composables/select'
 import { useSort } from './composables/sort'
 import { makeDisplayProps, useDisplay } from '@/composables/display'
+import { useLocale } from '@/composables/locale'
 
 // Utilities
 import { toDisplayString, withModifiers } from 'vue'
@@ -57,11 +58,17 @@ export const VDataTableRow = genericComponent<new <T>(
   props: makeVDataTableRowProps(),
 
   setup (props, { slots }) {
+    const { t } = useLocale()
     const { displayClasses, mobile } = useDisplay(props, 'v-data-table__tr')
     const { isSelected, toggleSelect, someSelected, allSelected, selectAll } = useSelection()
     const { isExpanded, toggleExpand } = useExpanded()
     const { toggleSort, sortBy, isSorted } = useSort()
     const { columns } = useHeaders()
+
+    function getSelectedAreaLabel (item: any) {
+      const identifier = isSelected([item]) ? '$vuetify.dataTable.ariaLabel.rowSelected' : '$vuetify.dataTable.ariaLabel.rowNotSelected'
+      return t(identifier, props.index ? props.index + 1 : 1)
+    }
 
     useRender(() => (
       <tr
@@ -158,6 +165,7 @@ export const VDataTableRow = genericComponent<new <T>(
                           (event: Event) => toggleSelect(item, props.index, event as PointerEvent),
                           ['stop']
                         )}
+                        aria-label={ getSelectedAreaLabel(item) }
                       />
                     )
                   }
