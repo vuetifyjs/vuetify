@@ -1,6 +1,3 @@
-// Styles
-import './VCalendarCategory.sass'
-
 // Components
 import { VCalendarDaily } from './VCalendarDaily'
 

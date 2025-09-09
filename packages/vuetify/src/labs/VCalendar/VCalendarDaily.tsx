@@ -1,6 +1,3 @@
-// Styles
-import './VCalendarDaily.sass'
-
 // Components
 import { VIconBtn } from '@/labs/VIconBtn'
 
