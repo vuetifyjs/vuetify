@@ -11,6 +11,7 @@ import { VCalendarWeekly } from './VCalendarWeekly'
 // Composables
 import { makeCalendarBaseProps } from './composables/calendarBase'
 import { makeCalendarWithEventsProps, useCalendarWithEvents } from './composables/calendarWithEvents'
+import { forwardRefs } from '@/composables/forwardRefs'
 
 // Utilities
 import { computed, onMounted, onUpdated, ref, watch } from 'vue'
@@ -147,10 +148,11 @@ export const VCalendar = genericComponent<new (
   },
 
   setup (props, { slots, attrs, emit }) {
+    const root = ref<VCalendarWeekly | VCalendarDaily | VCalendarCategory>()
+    const base = useCalendarWithEvents(props, slots, attrs)
+
     const lastStart = ref<CalendarTimestamp | null>(null)
     const lastEnd = ref<CalendarTimestamp | null>(null)
-
-    const base = useCalendarWithEvents(props, slots, attrs)
 
     const parsedValue = computed((): CalendarTimestamp => {
       return (validateTimestamp(props.modelValue)
@@ -403,6 +405,7 @@ export const VCalendar = genericComponent<new (
       const { start, end, maxDays, component: Component, weekdays, categories } = renderProps.value
       return (
         <Component
+          ref={ root }
           class={['v-calendar', { 'v-calendar-events': !base.noEvents.value }]}
           v-resize_quiet={ base.updateEventVisibility }
           role="grid"
@@ -421,7 +424,7 @@ export const VCalendar = genericComponent<new (
       )
     })
 
-    return {
+    return forwardRefs({
       ...base,
       lastStart,
       lastEnd,
@@ -439,7 +442,7 @@ export const VCalendar = genericComponent<new (
       next,
       prev,
       getCategoryList,
-    }
+    }, root)
   },
 })
 
