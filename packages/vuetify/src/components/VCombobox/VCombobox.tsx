@@ -72,7 +72,7 @@ export const makeVComboboxProps = propsFactory({
   delimiters: Array as PropType<readonly string[]>,
 
   ...makeFilterProps({ filterKeys: ['title'] }),
-  ...makeSelectProps({ hideNoData: false, returnObject: true }),
+  ...makeSelectProps({ hideNoData: true, returnObject: true }),
   ...omit(makeVTextFieldProps({
     modelValue: null,
     role: 'combobox',
