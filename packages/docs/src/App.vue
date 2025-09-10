@@ -186,6 +186,8 @@
   ul:not([class]),
   ol:not([class])
     padding-left: 20px
+
+  ul:not([class]):not(li > ul)
     margin-bottom: 16px
 
   // Theme transition

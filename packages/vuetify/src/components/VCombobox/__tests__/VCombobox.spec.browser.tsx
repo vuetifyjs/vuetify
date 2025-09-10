@@ -771,6 +771,41 @@ describe('VCombobox', () => {
     expect(model.value).toEqual(expected)
   })
 
+  it('should show only matching items when reopening the menu', async () => {
+    const { element } = render(() => (
+      <VCombobox items={['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']} />
+    ))
+
+    await userEvent.click(element)
+    await userEvent.keyboard('c')
+    await expect(screen.findAllByRole('option')).resolves.toHaveLength(2)
+    await userEvent.keyboard('al')
+    await expect(screen.findAllByRole('option')).resolves.toHaveLength(1)
+    await userEvent.click(document.body)
+    await expect.poll(() => screen.queryAllByRole('option')).toHaveLength(0)
+    await userEvent.click(element)
+    await expect.poll(() => screen.queryAllByRole('option')).toHaveLength(1)
+  })
+
+  it('should show only matching items when opening for the first time', async () => {
+    const model = ref('flor')
+    const { element } = render(() => (
+      <VCombobox
+        v-model={ model.value }
+        items={['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']}
+      />
+    ))
+
+    await userEvent.click(element)
+    expect(screen.getAllByRole('option')).toHaveLength(1)
+    await userEvent.click(document.body)
+    await expect.poll(() => screen.queryAllByRole('option')).toHaveLength(0)
+
+    // expect same behavior when re-opening the menu
+    await userEvent.click(element)
+    await expect.poll(() => screen.queryAllByRole('option')).toHaveLength(1)
+  })
+
   describe('Showcase', () => {
     generate({ stories })
   })

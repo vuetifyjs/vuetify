@@ -47,7 +47,7 @@ You can specify allowed times using arrays, objects, and functions. You can also
 
 #### Colors
 
-Time picker colors can be set using the `color` and `header-color` props. If `header-color` prop is not provided  header will use the `color` prop value."
+Time picker colors can be set using the `color` prop.
 
 <ExamplesExample file="v-time-picker/prop-color" />
 

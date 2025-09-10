@@ -393,7 +393,7 @@ export const VSelect = genericComponent<new <
         <VTextField
           ref={ vTextFieldRef }
           { ...textFieldProps }
-          modelValue={ model.value.map(v => v.props.title).join(', ') }
+          modelValue={ model.value.map(v => v.props.value).join(', ') }
           onUpdate:modelValue={ onModelUpdate }
           v-model:focused={ isFocused.value }
           validationValue={ model.externalValue }
