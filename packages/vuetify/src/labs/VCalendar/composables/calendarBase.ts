@@ -59,6 +59,8 @@ export const makeCalendarBaseProps = propsFactory({
 }, 'VCalendar-base')
 
 export interface CalendarBaseProps {
+  modelValue?: string | number | Date
+  categoryDays?: string | number
   start: string | number | Date
   end: string | number | Date | undefined
   weekdays: string | number[]
@@ -73,21 +75,44 @@ export function useCalendarBase (props: CalendarBaseProps) {
   const { times } = useTimes({ now: props.now })
   const locale = provideLocale(props)
 
+  const parsedStart = computed((): CalendarTimestamp => {
+    if (props.type === 'month') {
+      return getStartOfMonth(parseTimestamp(props.start, true))
+    }
+    return parseTimestamp(props.start, true)
+  })
+
+  const parsedValue = computed((): CalendarTimestamp => {
+    return (validateTimestamp(props.modelValue)
+      ? parseTimestamp(props.modelValue, true)
+      : (parsedStart.value || times.today))
+  })
+
   const parsedWeekdays = computed((): number[] => {
     return Array.isArray(props.weekdays)
       ? props.weekdays
       : (props.weekdays || '').split(',').map(x => parseInt(x, 10))
   })
 
-  const weekdaySkips = computed((): number[] => {
-    return getWeekdaySkips(parsedWeekdays.value)
+  const effectiveWeekdays = computed((): number[] => {
+    const start = parsedValue.value
+    const days = parseInt(String(props.categoryDays)) || 1
+
+    switch (props.type) {
+      case 'day': return [start.weekday]
+      case '4day': return [
+        start.weekday,
+        (start.weekday + 1) % 7,
+        (start.weekday + 2) % 7,
+        (start.weekday + 3) % 7,
+      ]
+      case 'category': return Array.from({ length: days }, (_, i) => (start.weekday + i) % 7)
+      default: return parsedWeekdays.value
+    }
   })
 
-  const parsedStart = computed((): CalendarTimestamp => {
-    if (props.type === 'month') {
-      return getStartOfMonth(parseTimestamp(props.start, true))
-    }
-    return parseTimestamp(props.start, true)
+  const weekdaySkips = computed((): number[] => {
+    return getWeekdaySkips(parsedWeekdays.value)
   })
 
   const parsedEnd = computed((): CalendarTimestamp => {
@@ -160,7 +185,9 @@ export function useCalendarBase (props: CalendarBaseProps) {
   return {
     times,
     locale,
+    parsedValue,
     parsedWeekdays,
+    effectiveWeekdays,
     weekdaySkips,
     parsedStart,
     parsedEnd,
