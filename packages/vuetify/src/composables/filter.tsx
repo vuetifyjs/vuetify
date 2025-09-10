@@ -38,6 +38,12 @@ export interface InternalItem<T = any> {
   type?: string
 }
 
+type FilterResult = {
+  index: number
+  matches: Record<string, FilterMatchArrayMultiple | undefined>
+  type?: 'divider' | 'subheader'
+}
+
 // Composables
 export const defaultFilter: FilterFunction = (value, query, item) => {
   if (value == null || query == null) return -1
@@ -75,6 +81,7 @@ export const makeFilterProps = propsFactory({
   noFilter: Boolean,
 }, 'filter')
 
+// eslint-disable-next-line complexity
 export function filterItems (
   items: readonly (readonly [item: InternalItem, transformed: {}])[] | readonly InternalItem[],
   query: string,
@@ -86,7 +93,6 @@ export function filterItems (
     noFilter?: boolean
   },
 ) {
-  type FilterResult = { index: number, matches: Record<string, FilterMatchArrayMultiple | undefined>, type?: 'divider' | 'subheader' }
   const array: FilterResult[] = []
   // always ensure we fall back to a functioning filter
   const filter = options?.default ?? defaultFilter
