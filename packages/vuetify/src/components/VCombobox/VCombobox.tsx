@@ -24,7 +24,6 @@ import { forwardRefs } from '@/composables/forwardRefs'
 import { transformItem, useItems } from '@/composables/list-items'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
-import { makeTransitionProps } from '@/composables/transition'
 
 // Utilities
 import { computed, mergeProps, nextTick, ref, shallowRef, toRef, watch } from 'vue'
@@ -77,7 +76,6 @@ export const makeVComboboxProps = propsFactory({
     modelValue: null,
     role: 'combobox',
   }), ['validationValue', 'dirty', 'appendInnerIcon']),
-  ...makeTransitionProps({ transition: false }),
 }, 'VCombobox')
 
 type ItemType<T> = T extends readonly (infer U)[] ? U : never
@@ -295,16 +293,11 @@ export const VCombobox = genericComponent<new <
         menu.value = false
       }
 
-      if (['Enter', 'Escape', 'Tab'].includes(e.key)) {
-        if (
-          highlightFirst.value &&
-          ['Enter', 'Tab'].includes(e.key) &&
-          !model.value.some(({ value }) => value === displayItems.value[0].value)
-        ) {
-          select(filteredItems.value[0])
-        }
-
-        isPristine.value = true
+      if (highlightFirst.value &&
+        ['Enter', 'Tab'].includes(e.key) &&
+        !model.value.some(({ value }) => value === displayItems.value[0].value)
+      ) {
+        select(filteredItems.value[0])
       }
 
       if (e.key === 'ArrowDown' && highlightFirst.value) {
@@ -405,7 +398,6 @@ export const VCombobox = genericComponent<new <
         // watch for search watcher to trigger
         nextTick(() => {
           menu.value = false
-          isPristine.value = true
         })
       }
     }
@@ -522,7 +514,6 @@ export const VCombobox = genericComponent<new <
                   maxHeight={ 310 }
                   openOnClick={ false }
                   closeOnContentClick={ false }
-                  transition={ props.transition }
                   onAfterEnter={ onAfterEnter }
                   onAfterLeave={ onAfterLeave }
                   { ...props.menuProps }
