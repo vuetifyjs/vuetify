@@ -204,7 +204,7 @@ export function useCalendarWithEvents (props: CalendarWithEventsProps, slots: an
   })
 
   const eventWeekdays = computed((): number[] => {
-    return base.parsedWeekdays.value
+    return base.effectiveWeekdays.value
   })
 
   function eventColorFunction (e: CalendarEvent): string | undefined {
