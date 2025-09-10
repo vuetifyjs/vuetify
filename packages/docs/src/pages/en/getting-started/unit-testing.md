@@ -119,26 +119,26 @@ When testing Vuetify components, we recommend running tests in a real browser en
 To properly render Vuetify components in tests, create a Vuetify instance and pass it to the test renderer. You don’t need to mock transitions or other internals.
 
 ```ts { resource="vuetify/packages/vuetify/test/index.ts" }
-export function render<C> ( 
-  component: C, 
-  options?: RenderOptions<C> | null, 
-  vuetifyOptions?: VuetifyOptions 
-): RenderResult { 
-  const vuetify = createVuetify(mergeDeep({ icons: { aliases } }, vuetifyOptions)) 
+export function render<C> (
+  component: C,
+  options?: RenderOptions<C> | null,
+  vuetifyOptions?: VuetifyOptions
+): RenderResult {
+  const vuetify = createVuetify(mergeDeep({ icons: { aliases } }, vuetifyOptions))
 
-  const defaultOptions = { 
-    global: { 
-      stubs: { 
-        transition: false, 
-        'transition-group': false, 
-      }, 
-      plugins: [vuetify], 
-    }, 
-  } 
+  const defaultOptions = {
+    global: {
+      stubs: {
+        transition: false,
+        'transition-group': false,
+      },
+      plugins: [vuetify],
+    },
+  }
 
-  const mountOptions = mergeDeep(defaultOptions, options!, (a, b) => a.concat(b)) 
+  const mountOptions = mergeDeep(defaultOptions, options!, (a, b) => a.concat(b))
 
-  return _render(component, mountOptions) 
+  return _render(component, mountOptions)
 }
 ```
 
@@ -146,7 +146,7 @@ export function render<C> (
 
 For reliable queries in tests, use `data-testid` attributes in your components:
 
-```vue
+```html
 <v-btn data-testid="submit-btn">Submit</v-btn>
 ```
 
