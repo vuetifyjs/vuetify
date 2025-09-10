@@ -17,7 +17,7 @@
     </v-card-item>
 
     <v-card-text class="py-0">
-      <v-row align="center" no-gutters>
+      <v-row align="center" density="compact">
         <v-col
           class="text-h2"
           cols="6"
