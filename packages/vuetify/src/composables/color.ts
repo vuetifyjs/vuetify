@@ -5,7 +5,7 @@ import { destructComputed, getForeground, isCssColor, isParsableColor, parseColo
 // Types
 import type { CSSProperties, MaybeRefOrGetter, Ref } from 'vue'
 
-type ColorValue = string | false | null | undefined
+export type ColorValue = string | false | null | undefined
 
 export interface TextColorData {
   textColorClasses: Ref<string[]>
@@ -20,38 +20,12 @@ export interface BackgroundColorData {
 // Composables
 export function useColor (colors: MaybeRefOrGetter<{ background?: ColorValue, text?: ColorValue }>) {
   return destructComputed(() => {
-    const _colors = toValue(colors)
-    const classes: string[] = []
-    const styles: CSSProperties = {}
+    const {
+      class: colorClasses,
+      style: colorStyles,
+    } = computeColor(colors)
 
-    if (_colors.background) {
-      if (isCssColor(_colors.background)) {
-        styles.backgroundColor = _colors.background
-
-        if (!_colors.text && isParsableColor(_colors.background)) {
-          const backgroundColor = parseColor(_colors.background)
-          if (backgroundColor.a == null || backgroundColor.a === 1) {
-            const textColor = getForeground(backgroundColor)
-
-            styles.color = textColor
-            styles.caretColor = textColor
-          }
-        }
-      } else {
-        classes.push(`bg-${_colors.background}`)
-      }
-    }
-
-    if (_colors.text) {
-      if (isCssColor(_colors.text)) {
-        styles.color = _colors.text
-        styles.caretColor = _colors.text
-      } else {
-        classes.push(`text-${_colors.text}`)
-      }
-    }
-
-    return { colorClasses: classes, colorStyles: styles }
+    return { colorClasses, colorStyles }
   })
 }
 
@@ -75,4 +49,39 @@ export function useBackgroundColor (color: MaybeRefOrGetter<ColorValue>): Backgr
   }))
 
   return { backgroundColorClasses, backgroundColorStyles }
+}
+
+export function computeColor (colors: MaybeRefOrGetter<{ background?: ColorValue, text?: ColorValue }>) {
+  const _colors = toValue(colors)
+  const classes: string[] = []
+  const styles: CSSProperties = {}
+
+  if (_colors.background) {
+    if (isCssColor(_colors.background)) {
+      styles.backgroundColor = _colors.background
+
+      if (!_colors.text && isParsableColor(_colors.background)) {
+        const backgroundColor = parseColor(_colors.background)
+        if (backgroundColor.a == null || backgroundColor.a === 1) {
+          const textColor = getForeground(backgroundColor)
+
+          styles.color = textColor
+          styles.caretColor = textColor
+        }
+      }
+    } else {
+      classes.push(`bg-${_colors.background}`)
+    }
+  }
+
+  if (_colors.text) {
+    if (isCssColor(_colors.text)) {
+      styles.color = _colors.text
+      styles.caretColor = _colors.text
+    } else {
+      classes.push(`text-${_colors.text}`)
+    }
+  }
+
+  return { class: classes, style: styles }
 }
