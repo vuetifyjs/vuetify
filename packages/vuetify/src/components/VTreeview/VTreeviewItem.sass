@@ -35,6 +35,12 @@
         > .v-icon
           margin-inline-start: $treeview-item-first-icon-margin-start
 
+    &:has(.v-treeview-indent-lines)
+      .v-list-item-action:first-child,
+      .v-treeview-indent-lines + .v-list-item-action
+        > .v-selection-control
+          margin-inline: min(0px, calc(-1 * (var(--v-selection-control-size) - #{$treeview-indent-size}) / 2))
+
   .v-treeview-indent-lines
     position: absolute
     inset-inline-start: 0

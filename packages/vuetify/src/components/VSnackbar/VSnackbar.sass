@@ -90,6 +90,7 @@
     &--end
       justify-content: flex-end
 
+@include tools.layer('transitions')
   .v-snackbar-transition
     &-enter-active,
     &-leave-active
@@ -98,6 +99,9 @@
 
     &-enter-active
       transition-property: opacity, transform
+
+      @media (prefers-reduced-motion: reduce)
+        transition-property: opacity
 
     &-enter-from
       opacity: 0

@@ -1,7 +1,7 @@
 // Utilities
 import { computed, useId } from 'vue'
 import { makeLineProps } from './util/line'
-import { genericComponent, getPropertyFromItem, propsFactory, useRender } from '@/util'
+import { genericComponent, getPropertyFromItem, PREFERS_REDUCED_MOTION, propsFactory, useRender } from '@/util'
 
 // Types
 export type VBarlineSlots = {
@@ -163,7 +163,7 @@ export const VBarline = genericComponent<VBarlineSlots>()({
                     rx={ smooth.value }
                     ry={ smooth.value }
                 >
-                  { props.autoDraw && (
+                  { props.autoDraw && !PREFERS_REDUCED_MOTION() && (
                     <>
                       <animate
                         attributeName="y"

@@ -1,6 +1,7 @@
 // Utilities
 import { computed, shallowRef, toValue, watch } from 'vue'
 import { clamp } from './helpers'
+import { PREFERS_REDUCED_MOTION } from '@/util/globals'
 
 // Types
 import type { MaybeRefOrGetter, Ref } from 'vue'
@@ -25,6 +26,7 @@ export const easingPatterns = {
   easeInQuint: (t: number) => t ** 5,
   easeOutQuint: (t: number) => 1 + --t ** 5,
   easeInOutQuint: (t: number) => t < 0.5 ? 16 * t ** 5 : 1 + 16 * --t ** 5,
+  instant: (t: number) => 1,
 } as const
 
 export type EasingOptions = {
@@ -54,7 +56,8 @@ export function useTransition (source: MaybeRefOrGetter<number>, options: MaybeR
 
   function executeTransition (out: Ref<number>, from: number, to: number, options: InternalEasingOptions) {
     const startTime = performance.now()
-    const ease = options.transition ?? easingPatterns.easeInOutCubic
+    const ease = PREFERS_REDUCED_MOTION() ? easingPatterns.instant
+      : options.transition ?? easingPatterns.easeInOutCubic
 
     return new Promise<void>(resolve => {
       raf = requestAnimationFrame(function step (currentTime: number) {

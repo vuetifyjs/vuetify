@@ -393,7 +393,7 @@ export const VSelect = genericComponent<new <
         <VTextField
           ref={ vTextFieldRef }
           { ...textFieldProps }
-          modelValue={ model.value.map(v => v.props.title).join(', ') }
+          modelValue={ model.value.map(v => v.props.value).join(', ') }
           onUpdate:modelValue={ onModelUpdate }
           v-model:focused={ isFocused.value }
           validationValue={ model.externalValue }
@@ -448,6 +448,7 @@ export const VSelect = genericComponent<new <
                       onKeydown={ onListKeydown }
                       onFocusin={ onFocusin }
                       tabindex="-1"
+                      selectable
                       aria-live="polite"
                       aria-label={ `${props.label}-list` }
                       color={ props.itemColor ?? props.color }

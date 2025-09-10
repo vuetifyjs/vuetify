@@ -86,13 +86,16 @@ export function filterItems (
     noFilter?: boolean
   },
 ) {
-  const array: { index: number, matches: Record<string, FilterMatchArrayMultiple | undefined> }[] = []
+  type FilterResult = { index: number, matches: Record<string, FilterMatchArrayMultiple | undefined>, type?: 'divider' | 'subheader' }
+  const array: FilterResult[] = []
   // always ensure we fall back to a functioning filter
   const filter = options?.default ?? defaultFilter
   const keys = options?.filterKeys ? wrapInArray(options.filterKeys) : false
   const customFiltersLength = Object.keys(options?.customKeyFilter ?? {}).length
 
   if (!items?.length) return array
+
+  let lookAheadItem: FilterResult | null = null
 
   loop:
   for (let i = 0; i < items.length; i++) {
@@ -106,6 +109,11 @@ export function filterItems (
 
       if (typeof item === 'object') {
         if (item.type === 'divider' || item.type === 'subheader') {
+          if (lookAheadItem?.type === 'divider' && item.type === 'subheader') {
+            array.push(lookAheadItem) // divider before subheader
+          }
+
+          lookAheadItem = { index: i, matches: { }, type: item.type }
           continue
         }
 
@@ -152,6 +160,11 @@ export function filterItems (
           (!defaultMatchesLength && customFiltersLength > 0 && !hasOnlyCustomFilters)
         )
       ) continue
+    }
+
+    if (lookAheadItem) {
+      array.push(lookAheadItem)
+      lookAheadItem = null
     }
 
     array.push({ index: i, matches: { ...defaultMatches, ...customMatches } })

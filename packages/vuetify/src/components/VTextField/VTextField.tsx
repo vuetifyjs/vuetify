@@ -7,6 +7,7 @@ import { makeVFieldProps, VField } from '@/components/VField/VField'
 import { makeVInputProps, VInput } from '@/components/VInput/VInput'
 
 // Composables
+import { makeAutocompleteProps, useAutocomplete } from '@/composables/autocomplete'
 import { useAutofocus } from '@/composables/autofocus'
 import { useFocus } from '@/composables/focus'
 import { forwardRefs } from '@/composables/forwardRefs'
@@ -43,6 +44,7 @@ export const makeVTextFieldProps = propsFactory({
   },
   modelModifiers: Object as PropType<Record<string, boolean>>,
 
+  ...makeAutocompleteProps(),
   ...makeVInputProps(),
   ...makeVFieldProps(),
 }, 'VTextField')
@@ -94,6 +96,7 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
     const vInputRef = ref<VInput>()
     const vFieldRef = ref<VField>()
     const inputRef = ref<HTMLInputElement>()
+    const autocomplete = useAutocomplete(props)
     const isActive = computed(() => (
       activeTypes.includes(props.type) ||
       props.persistentPlaceholder ||
@@ -101,6 +104,10 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
       props.active
     ))
     function onFocus () {
+      if (autocomplete.isSuppressing.value) {
+        autocomplete.update()
+      }
+
       if (!isFocused.value) focus()
 
       nextTick(() => {
@@ -217,7 +224,8 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
                         autofocus={ props.autofocus }
                         readonly={ isReadonly.value }
                         disabled={ isDisabled.value }
-                        name={ props.name }
+                        name={ autocomplete.fieldName.value }
+                        autocomplete={ autocomplete.fieldAutocomplete.value }
                         placeholder={ props.placeholder }
                         size={ 1 }
                         role={ props.role }
