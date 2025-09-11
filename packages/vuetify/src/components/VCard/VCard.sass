@@ -203,3 +203,8 @@
     pointer-events: none
     opacity: 0
     transition: opacity 0.2s ease-in-out
+
+  @media (forced-colors: active)
+    .v-card
+      &:not(&--variant-text, &--variant-plain)
+        border: thin solid
