@@ -3,9 +3,9 @@
     <v-container>
       <v-chip-group
         v-model="selected"
-        filter
         center-active
         selected-class="text-red"
+        filter
       >
         <v-slide-group-item v-for="n in 25" :key="n">
           <v-chip :value="n">Chip {{ n }}</v-chip>
