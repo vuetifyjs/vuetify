@@ -126,7 +126,6 @@ export const VMenu = genericComponent<OverlaySlots>()({
       await nextTick()
 
       if (
-        !focusTrapSuppressed &&
         isActive.value &&
         before !== after &&
         overlay.value?.contentEl &&
@@ -137,10 +136,14 @@ export const VMenu = genericComponent<OverlaySlots>()({
         // It isn't inside the menu body
         !overlay.value.contentEl.contains(after)
       ) {
-        const focusable = focusableChildren(overlay.value.contentEl)
-        focusable[0]?.focus()
+        if (focusTrapSuppressed) {
+          isActive.value = false
+        } else {
+          const focusable = focusableChildren(overlay.value.contentEl)
+          focusable[0]?.focus()
 
-        document.removeEventListener('pointerdown', onPointerdown)
+          document.removeEventListener('pointerdown', onPointerdown)
+        }
       }
     }
 
