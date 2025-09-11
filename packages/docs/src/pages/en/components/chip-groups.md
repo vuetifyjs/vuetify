@@ -65,6 +65,13 @@ Chip groups with **multiple** prop can have many values selected.
 
 <ExamplesExample file="v-chip-group/prop-multiple" />
 
+#### Center Active
+
+When using the `center-active` prop on `<v-chip-group>`, chips need to be wrapped in `<v-slide-group-item>` components.  
+This ensures that each chip is properly tracked by the underlying slide group and can be scrolled into the center when selected.
+
+<ExamplesExample file="v-chip-group/prop-centeractive" />
+
 ### Misc
 
 #### Product card
