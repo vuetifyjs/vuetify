@@ -1,5 +1,5 @@
 <template>
-  <v-app theme="dark">
+  <v-app>
     <v-container>
       <v-chip-group
         v-model="selected"
