@@ -3,8 +3,8 @@
     <v-container>
       <v-chip-group
         v-model="selected"
-        center-active
         selected-class="text-red"
+        center-active
         filter
       >
         <v-slide-group-item v-for="n in 25" :key="n">
