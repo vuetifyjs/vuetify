@@ -27,7 +27,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeTransitionProps } from '@/composables/transition'
 
 // Utilities
-import { computed, mergeProps, nextTick, ref, shallowRef, toRef, watch } from 'vue'
+import { computed, mergeProps, nextTick, ref, shallowRef, toRef, useId, watch } from 'vue'
 import {
   checkPrintable,
   deepEqual,
@@ -214,6 +214,12 @@ export const VCombobox = genericComponent<new <
         _menu.value = v
       },
     })
+
+    const uid = useId()
+    const menuId = computed(() => `menu-${uid}`)
+    const hasRoleCombobox = toRef(() => props.role === 'combobox')
+    const ariaExpanded = toRef(() => hasRoleCombobox.value && menu.value)
+    const ariaControls = toRef(() => !hasRoleCombobox.value ? undefined : menuId.value)
 
     const label = toRef(() => menu.value ? props.closeText : props.openText)
 
@@ -507,12 +513,15 @@ export const VCombobox = genericComponent<new <
           onClick:clear={ onClear }
           onMousedown:control={ onMousedownControl }
           onKeydown={ onKeydown }
+          aria-expanded={ ariaExpanded.value }
+          aria-controls={ ariaControls.value }
         >
           {{
             ...slots,
             default: () => (
               <>
                 <VMenu
+                  id={ menuId.value }
                   ref={ vMenuRef }
                   v-model={ menu.value }
                   activator="parent"
