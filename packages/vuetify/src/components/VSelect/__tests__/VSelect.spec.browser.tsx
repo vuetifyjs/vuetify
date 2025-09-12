@@ -729,6 +729,36 @@ describe('VSelect', () => {
     })
   })
 
+  it('should show an aria-expanded as true if menu is open', async () => {
+    const { getByRole } = render(() => (
+      <VSelect menu />
+    ))
+
+    const inputField = getByRole('combobox', { expanded: true })
+    expect(inputField).toHaveAttribute('aria-expanded')
+    expect(inputField).toHaveAttribute('aria-controls')
+  })
+
+  it('should show an aria-expanded as false if menu is closed', () => {
+    const { getByRole } = render(() => (
+      <VSelect />
+    ))
+
+    const inputField = getByRole('combobox', { expanded: false })
+    expect(inputField).toHaveAttribute('aria-expanded')
+    expect(inputField).toHaveAttribute('aria-controls')
+  })
+
+  it('should show an aria-controls', () => {
+    const { getByRole } = render(() => (
+      <VSelect />
+    ))
+
+    const inputField = getByRole('combobox', { expanded: false })
+    expect(inputField).toHaveAttribute('aria-expanded')
+    expect(inputField).toHaveAttribute('aria-controls')
+  })
+
   describe('Showcase', () => {
     generate({ stories })
   })
