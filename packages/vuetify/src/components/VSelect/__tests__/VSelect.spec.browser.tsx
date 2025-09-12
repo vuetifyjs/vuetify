@@ -729,6 +729,27 @@ describe('VSelect', () => {
     })
   })
 
+  it('should have reactive accessibility attributes', async () => {
+    const { getByRole } = render(() => (
+      <VSelect items={['Foo']} />
+    ))
+
+    const inputField = getByRole('combobox', { expanded: false })
+    expect(inputField).toHaveAttribute('aria-expanded', 'false')
+    expect(inputField).toHaveAttribute('aria-label', 'Open')
+    expect(inputField.getAttribute('aria-controls')).toMatch(/^menu-v-\d+/)
+
+    await userEvent.click(inputField)
+
+    expect(inputField).toHaveAttribute('aria-expanded', 'true')
+    expect(inputField).toHaveAttribute('aria-label', 'Close')
+
+    await userEvent.click(screen.getAllByRole('option')[0])
+
+    expect(inputField).toHaveAttribute('aria-expanded', 'false')
+    expect(inputField).toHaveAttribute('aria-label', 'Open')
+  })
+
   describe('Showcase', () => {
     generate({ stories })
   })
