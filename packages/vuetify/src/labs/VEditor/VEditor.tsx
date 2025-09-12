@@ -15,7 +15,7 @@ import { VToolbar } from '@/components/VToolbar/VToolbar'
 
 // Composables
 import { useCaret, useElement, useSelection } from './composables'
-import { alignmentFormats, FormatCategory, generalFormats, headingFormats, useFormatter } from './composables/formatter'
+import { alignmentFormats, FormatCategory, generalFormats, headingFormats, listFormats, useFormatter } from './composables/formatter'
 import { useFocus } from '@/composables/focus'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { useProxiedModel } from '@/composables/proxiedModel'
@@ -58,7 +58,9 @@ export const makeVEditorProps = propsFactory({
       'align-left',
       'align-right',
       'align-justify',
-      'highlight',
+      'list-unordered',
+      'list-ordered',
+      'list-tasks',
     ],
   },
   height: {
@@ -121,6 +123,7 @@ export const VEditor = genericComponent<VEditorSlots>()({
     const displayedGeneralFormats = computed(() => generalFormats.filter(format => props.formats.includes(format.name)))
     const displayedHeadingFormats = computed(() => headingFormats.filter(format => props.formats.includes(format.name)))
     const displayedAlignmentFormats = computed(() => alignmentFormats.filter(format => props.formats.includes(format.name)))
+    const displayedListFormats = computed(() => listFormats.filter(format => props.formats.includes(format.name)))
 
     function onMouseUp () {
       updateActiveFormats()
@@ -249,7 +252,12 @@ export const VEditor = genericComponent<VEditorSlots>()({
 
       const newActiveFormats = new Set<string>()
 
-      const allDisplayedFormats = [...displayedGeneralFormats.value, ...displayedHeadingFormats.value, ...displayedAlignmentFormats.value]
+      const allDisplayedFormats = [
+        ...displayedGeneralFormats.value,
+        ...displayedHeadingFormats.value,
+        ...displayedAlignmentFormats.value,
+        ...displayedListFormats.value,
+      ]
 
       allDisplayedFormats.forEach((format: Formatter) => {
         if (formatter.findElementWithFormat(format)) {
@@ -267,6 +275,8 @@ export const VEditor = genericComponent<VEditorSlots>()({
         formatter.heading.toggle(format)
       } else if (format.category === FormatCategory.Alignment) {
         formatter.alignment.toggle(format)
+      } else if (format.category === FormatCategory.List) {
+        formatter.list.toggle(format)
       } else {
         formatter.inline.toggle(format)
       }
@@ -423,6 +433,7 @@ export const VEditor = genericComponent<VEditorSlots>()({
                                   {[
                                     displayedHeadingFormats.value,
                                     displayedAlignmentFormats.value,
+                                    displayedListFormats.value,
                                   ]
                                     .map(groupFormats => {
                                       const activeFormat = groupFormats.find(format => activeFormats.value.has(format.name))
