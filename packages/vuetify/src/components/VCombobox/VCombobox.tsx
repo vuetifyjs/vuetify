@@ -23,11 +23,12 @@ import { useForm } from '@/composables/form'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { transformItem, useItems } from '@/composables/list-items'
 import { useLocale } from '@/composables/locale'
+import { useMenuActivator } from '@/composables/menuActivator'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeTransitionProps } from '@/composables/transition'
 
 // Utilities
-import { computed, mergeProps, nextTick, ref, shallowRef, toRef, useId, watch } from 'vue'
+import { computed, mergeProps, nextTick, ref, shallowRef, watch } from 'vue'
 import {
   checkPrintable,
   deepEqual,
@@ -215,13 +216,7 @@ export const VCombobox = genericComponent<new <
       },
     })
 
-    const uid = useId()
-    const menuId = computed(() => `menu-${uid}`)
-    const hasRoleCombobox = toRef(() => props.role === 'combobox')
-    const ariaExpanded = toRef(() => hasRoleCombobox.value && menu.value)
-    const ariaControls = toRef(() => !hasRoleCombobox.value ? undefined : menuId.value)
-
-    const label = toRef(() => menu.value ? props.closeText : props.openText)
+    const { menuId, ariaExpanded, ariaControls, ariaLabel } = useMenuActivator(props, menu)
 
     watch(_search, value => {
       showAllItemsForNoMatch.value = false
@@ -720,8 +715,8 @@ export const VCombobox = genericComponent<new <
                     icon={ props.menuIcon }
                     onMousedown={ onMousedownMenuIcon }
                     onClick={ noop }
-                    aria-label={ t(label.value) }
-                    title={ t(label.value) }
+                    aria-label={ ariaLabel.value }
+                    title={ ariaLabel.value }
                     tabindex="-1"
                   />
                 ) : undefined }

@@ -729,34 +729,25 @@ describe('VSelect', () => {
     })
   })
 
-  it('should show an aria-expanded as true if menu is open', async () => {
+  it('should have reactive accessibility attributes', async () => {
     const { getByRole } = render(() => (
-      <VSelect menu />
-    ))
-
-    const inputField = getByRole('combobox', { expanded: true })
-    expect(inputField).toHaveAttribute('aria-expanded')
-    expect(inputField).toHaveAttribute('aria-controls')
-  })
-
-  it('should show an aria-expanded as false if menu is closed', () => {
-    const { getByRole } = render(() => (
-      <VSelect />
+      <VSelect items={['Foo']} />
     ))
 
     const inputField = getByRole('combobox', { expanded: false })
-    expect(inputField).toHaveAttribute('aria-expanded')
-    expect(inputField).toHaveAttribute('aria-controls')
-  })
+    expect(inputField).toHaveAttribute('aria-expanded', 'false')
+    expect(inputField).toHaveAttribute('aria-label', 'Open')
+    expect(inputField.getAttribute('aria-controls')).toMatch(/^menu-v-\d+/)
 
-  it('should show an aria-controls', () => {
-    const { getByRole } = render(() => (
-      <VSelect />
-    ))
+    await userEvent.click(inputField)
 
-    const inputField = getByRole('combobox', { expanded: false })
-    expect(inputField).toHaveAttribute('aria-expanded')
-    expect(inputField).toHaveAttribute('aria-controls')
+    expect(inputField).toHaveAttribute('aria-expanded', 'true')
+    expect(inputField).toHaveAttribute('aria-label', 'Close')
+
+    await userEvent.click(screen.getAllByRole('option')[0])
+
+    expect(inputField).toHaveAttribute('aria-expanded', 'false')
+    expect(inputField).toHaveAttribute('aria-label', 'Open')
   })
 
   describe('Showcase', () => {

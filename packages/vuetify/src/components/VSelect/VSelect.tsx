@@ -21,11 +21,12 @@ import { forwardRefs } from '@/composables/forwardRefs'
 import { IconValue } from '@/composables/icons'
 import { makeItemsProps, useItems } from '@/composables/list-items'
 import { useLocale } from '@/composables/locale'
+import { makeMenuActivatorProps, useMenuActivator } from '@/composables/menuActivator'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeTransitionProps } from '@/composables/transition'
 
 // Utilities
-import { computed, mergeProps, nextTick, ref, shallowRef, toRef, useId, watch } from 'vue'
+import { computed, mergeProps, nextTick, ref, shallowRef, watch } from 'vue'
 import {
   camelizeProps,
   checkPrintable,
@@ -61,14 +62,6 @@ type Value <T, ReturnObject extends boolean, Multiple extends boolean> =
 export const makeSelectProps = propsFactory({
   chips: Boolean,
   closableChips: Boolean,
-  closeText: {
-    type: String,
-    default: '$vuetify.close',
-  },
-  openText: {
-    type: String,
-    default: '$vuetify.open',
-  },
   eager: Boolean,
   hideNoData: Boolean,
   hideSelected: Boolean,
@@ -92,6 +85,7 @@ export const makeSelectProps = propsFactory({
   itemColor: String,
   noAutoScroll: Boolean,
 
+  ...makeMenuActivatorProps(),
   ...makeItemsProps({ itemChildren: false }),
 }, 'Select')
 
@@ -194,13 +188,7 @@ export const VSelect = genericComponent<new <
       },
     })
 
-    const uid = useId()
-    const menuId = computed(() => `menu-${uid}`)
-    const hasRoleCombobox = toRef(() => props.role === 'combobox')
-    const ariaExpanded = toRef(() => hasRoleCombobox.value && menu.value)
-    const ariaControls = toRef(() => !hasRoleCombobox.value ? undefined : menuId.value)
-
-    const label = toRef(() => menu.value ? props.closeText : props.openText)
+    const { menuId, ariaExpanded, ariaControls, ariaLabel } = useMenuActivator(props, menu)
 
     const computedMenuProps = computed(() => {
       return {
@@ -423,10 +411,10 @@ export const VSelect = genericComponent<new <
           onMousedown:control={ onMousedownControl }
           onBlur={ onBlur }
           onKeydown={ onKeydown }
-          aria-label={ t(label.value) }
           aria-expanded={ ariaExpanded.value }
           aria-controls={ ariaControls.value }
-          title={ t(label.value) }
+          aria-label={ ariaLabel.value }
+          title={ ariaLabel.value }
         >
           {{
             ...slots,

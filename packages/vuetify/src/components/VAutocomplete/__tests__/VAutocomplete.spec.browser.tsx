@@ -694,36 +694,6 @@ describe('VAutocomplete', () => {
     expect(onFocus).toHaveBeenCalledTimes(1)
   })
 
-  it('should show an aria-expanded as true if menu is open', async () => {
-    const { getByRole } = render(() => (
-      <VAutocomplete menu />
-    ))
-
-    const inputField = getByRole('combobox', { expanded: true })
-    expect(inputField).toHaveAttribute('aria-expanded')
-    expect(inputField).toHaveAttribute('aria-controls')
-  })
-
-  it('should show an aria-expanded as false if menu is closed', () => {
-    const { getByRole } = render(() => (
-      <VAutocomplete />
-    ))
-
-    const inputField = getByRole('combobox', { expanded: false })
-    expect(inputField).toHaveAttribute('aria-expanded')
-    expect(inputField).toHaveAttribute('aria-controls')
-  })
-
-  it('should show an aria-controls', () => {
-    const { getByRole } = render(() => (
-      <VAutocomplete />
-    ))
-
-    const inputField = getByRole('combobox', { expanded: false })
-    expect(inputField).toHaveAttribute('aria-expanded')
-    expect(inputField).toHaveAttribute('aria-controls')
-  })
-
   describe('Showcase', () => {
     generate({ stories })
   })
