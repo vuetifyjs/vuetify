@@ -648,6 +648,7 @@ describe.each([
           />
         ))
 
+        await nextTick()
         search.value = 'j'
         await nextTick()
         expect(screen.getByText(/Vuetify/)).toBeVisible()

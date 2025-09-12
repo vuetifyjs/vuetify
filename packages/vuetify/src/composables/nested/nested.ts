@@ -5,6 +5,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import {
   computed,
   inject,
+  nextTick,
   onBeforeMount,
   onBeforeUnmount,
   provide,
@@ -13,6 +14,7 @@ import {
   toRaw,
   toRef,
   toValue,
+  watch,
 } from 'vue'
 import {
   independentActiveStrategy,
@@ -381,13 +383,24 @@ export const useNestedItem = (id: MaybeRefOrGetter<unknown>, isDisabled: MaybeRe
 
   onBeforeMount(() => {
     if (!parent.isGroupActivator) {
-      parent.root.register(computedId.value, parent.id.value, toValue(isDisabled), isGroup)
+      nextTick(() => {
+        parent.root.register(computedId.value, parent.id.value, toValue(isDisabled), isGroup)
+      })
     }
   })
 
   onBeforeUnmount(() => {
     if (!parent.isGroupActivator) {
       parent.root.unregister(computedId.value)
+    }
+  })
+
+  watch(computedId, (val, oldVal) => {
+    if (!parent.isGroupActivator) {
+      parent.root.unregister(oldVal)
+      nextTick(() => {
+        parent.root.register(val, parent.id.value, toValue(isDisabled), isGroup)
+      })
     }
   })
 
