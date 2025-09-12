@@ -110,6 +110,16 @@ export const VMenu = genericComponent<OverlaySlots>()({
     })
     onDeactivated(() => isActive.value = false)
 
+    let focusTrapSuppressed = false
+    let focusTrapSuppressionTimeout = -1
+
+    async function onPointerdown () {
+      focusTrapSuppressed = true
+      focusTrapSuppressionTimeout = window.setTimeout(() => {
+        focusTrapSuppressed = false
+      }, 100)
+    }
+
     async function onFocusIn (e: FocusEvent) {
       const before = e.relatedTarget as HTMLElement | null
       const after = e.target as HTMLElement | null
@@ -127,8 +137,14 @@ export const VMenu = genericComponent<OverlaySlots>()({
         // It isn't inside the menu body
         !overlay.value.contentEl.contains(after)
       ) {
-        const focusable = focusableChildren(overlay.value.contentEl)
-        focusable[0]?.focus()
+        if (focusTrapSuppressed) {
+          isActive.value = false
+        } else {
+          const focusable = focusableChildren(overlay.value.contentEl)
+          focusable[0]?.focus()
+
+          document.removeEventListener('pointerdown', onPointerdown)
+        }
       }
     }
 
@@ -136,11 +152,14 @@ export const VMenu = genericComponent<OverlaySlots>()({
       if (val) {
         parent?.register()
         if (IN_BROWSER && !props.disableInitialFocus) {
+          document.addEventListener('pointerdown', onPointerdown)
           document.addEventListener('focusin', onFocusIn, { once: true })
         }
       } else {
         parent?.unregister()
         if (IN_BROWSER) {
+          clearTimeout(focusTrapSuppressionTimeout)
+          document.removeEventListener('pointerdown', onPointerdown)
           document.removeEventListener('focusin', onFocusIn)
         }
       }
