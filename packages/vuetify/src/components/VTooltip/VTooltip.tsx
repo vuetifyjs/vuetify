@@ -111,6 +111,7 @@ export const VTooltip = genericComponent<OverlaySlots>()({
           role="tooltip"
           activatorProps={ activatorProps.value }
           _disableGlobalStack
+          onClick:outside={ () => isActive.value = false }
           { ...scopeId }
         >
           {{
