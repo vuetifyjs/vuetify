@@ -165,7 +165,7 @@ export const VBtn = genericComponent<VBtnSlots>()({
         ))
       ) return
 
-      link.navigate?.(e)
+      link.navigate.value?.(e)
       group?.toggle()
     }
 
