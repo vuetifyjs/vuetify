@@ -2,7 +2,7 @@
 import { useProxiedModel } from './proxiedModel'
 
 // Utilities
-import { computed, inject, onBeforeUnmount, onMounted, onUpdated, provide, reactive, toRef, unref, useId, watch } from 'vue'
+import { computed, inject, onBeforeUnmount, onMounted, onUnmounted, onUpdated, provide, reactive, toRef, unref, useId, watch } from 'vue'
 import { consoleWarn, deepEqual, findChildrenWithProvide, getCurrentInstance, propsFactory, wrapInArray } from '@/util'
 
 // Types
@@ -55,6 +55,8 @@ export interface GroupItemProvide {
   value: Ref<unknown>
   disabled: Ref<boolean | undefined>
   group: GroupProvide
+  register: () => void
+  unregister: () => void
 }
 
 export const makeGroupProps = propsFactory({
@@ -118,15 +120,16 @@ export function useGroupItem (
   const value = toRef(() => props.value)
   const disabled = computed(() => !!(group.disabled.value || props.disabled))
 
-  group.register({
-    id,
-    value,
-    disabled,
-  }, vm)
+  function register () {
+    group?.register({ id, value, disabled }, vm)
+  }
 
-  onBeforeUnmount(() => {
-    group.unregister(id)
-  })
+  function unregister () {
+    group?.unregister(id)
+  }
+
+  onMounted(() => register())
+  onBeforeUnmount(() => unregister())
 
   const isSelected = computed(() => {
     return group.isSelected(id)
@@ -155,6 +158,8 @@ export function useGroupItem (
     value,
     disabled,
     group,
+    register,
+    unregister,
   }
 }
 
