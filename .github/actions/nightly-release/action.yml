@@ -14,9 +14,6 @@ inputs:
   npm-tag:
     description: 'NPM tag'
     required: true
-  npm-token:
-    description: 'NPM token'
-    required: true
 
 outputs:
   full-version:
@@ -60,9 +57,10 @@ runs:
       shell: bash
     - run: pnpm run --filter @vuetify/api-generator build
       shell: bash
+    - run: npm install -g npm@latest
+      shell: bash
     - name: NPM Release
       run: |
-        npm config set //registry.npmjs.org/:_authToken ${NPM_API_KEY:?}
         npm publish ./packages/vuetify --tag ${{ inputs.npm-tag }} --access public
       shell: bash
       env:

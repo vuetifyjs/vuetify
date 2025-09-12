@@ -92,6 +92,9 @@ jobs:
     runs-on: ubuntu-24.04
     if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v') && github.repository_owner == 'vuetifyjs'
     environment: production
+    permissions:
+      contents: write
+      id-token: write
     steps:
       - uses: actions/checkout@v4
         with:
@@ -102,9 +105,9 @@ jobs:
           path: packages/vuetify
       - uses: vuetifyjs/setup-action@master
       - run: pnpm build api
+      - run: npm install -g npm@latest
       - name: NPM Release
         run: |
-          npm config set //registry.npmjs.org/:_authToken ${{ secrets.NPM_TOKEN }}
           npm publish ./packages/vuetify --tag $(node ./scripts/parse-npm-tag.js $GITHUB_REF_NAME)
       - name: GitHub release
         id: create_release
