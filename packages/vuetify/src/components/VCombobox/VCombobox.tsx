@@ -133,13 +133,13 @@ export const VCombobox = genericComponent<new <
     const vVirtualScrollRef = ref<VVirtualScroll>()
     const selectionIndex = shallowRef(-1)
     let cleared = false
-    const { items, transformIn, transformOut } = useItems(props)
+    const { items, transformIn, transformOut, emptyValues } = useItems(props)
     const { textColorClasses, textColorStyles } = useTextColor(() => vTextFieldRef.value?.color)
     const model = useProxiedModel(
       props,
       'modelValue',
       [],
-      v => transformIn(wrapInArray(v)),
+      v => transformIn(v === null ? [null] : wrapInArray(v, emptyValues.value)),
       v => {
         const transformed = transformOut(v)
         return props.multiple ? transformed : (transformed[0] ?? null)
@@ -478,7 +478,8 @@ export const VCombobox = genericComponent<new <
         slots['append-item'] ||
         slots['no-data']
       )
-      const isDirty = model.value.length > 0
+      const isEmptyString = model.value.length === 1 && model.value[0].value === ''
+      const isDirty = model.value.length > 0 && !isEmptyString
       const textFieldProps = VTextField.filterProps(props)
 
       return (
