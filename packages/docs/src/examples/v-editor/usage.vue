@@ -19,10 +19,10 @@
 
 <script setup>
   const name = 'v-editor'
-  const model = ref('default')
-  const clearable = ref(false)
-  const field = ref('This is some <b>rich text</b> content with <i>formatting</i>')
-  const hideToolbar = ref(false)
+  const model = shallowRef('default')
+  const clearable = shallowRef(false)
+  const field = shallowRef('This is some <b>rich text</b> content with <i>formatting</i>')
+  const hideToolbar = shallowRef(false)
   const options = ['outlined', 'underlined', 'solo', 'solo-filled', 'solo-inverted']
   const props = computed(() => {
     return {

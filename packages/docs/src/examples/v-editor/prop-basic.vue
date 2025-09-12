@@ -6,6 +6,7 @@
         height="200"
       ></v-editor>
     </v-card-text>
+
     <v-card-text>
       <v-textarea
         v-model="content"
@@ -17,7 +18,7 @@
 </template>
 
 <script setup>
-  const content = ref('This is some <b>rich text</b> content with <i>formatting</i>.')
+  const content = shallowRef('This is some <b>rich text</b> content with <i>formatting</i>.')
 </script>
 
 <script>

@@ -1,7 +1,7 @@
 // Types
 import type { Ref } from 'vue'
 
-function getFirstLeapNode (node: Node): Node {
+function getFirstLeafNode (node: Node): Node {
   let current = node
   while (current.firstChild && current.firstChild.nodeType !== Node.TEXT_NODE) {
     current = current.firstChild
@@ -86,7 +86,7 @@ export function useSelection (editorRef: Ref<HTMLDivElement | undefined>) {
 
     const range = document.createRange()
 
-    const startTextNode = getFirstLeapNode(start)
+    const startTextNode = getFirstLeafNode(start)
     const endTextNode = getLastLeafNode(end)
 
     range.setStart(startTextNode, 0)

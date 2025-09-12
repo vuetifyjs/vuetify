@@ -8,6 +8,7 @@
         :min-height="minHeight"
       ></v-editor>
     </v-card-text>
+
     <v-card-text>
       <v-row>
         <v-col cols="4">
@@ -17,6 +18,7 @@
             variant="outlined"
           ></v-text-field>
         </v-col>
+
         <v-col cols="4">
           <v-text-field
             v-model.number="maxHeight"
@@ -24,6 +26,7 @@
             variant="outlined"
           ></v-text-field>
         </v-col>
+
         <v-col cols="4">
           <v-text-field
             v-model.number="minHeight"
@@ -37,10 +40,10 @@
 </template>
 
 <script setup>
-  const content = ref('<div>Long content</div><div>Long content</div><div>Long content</div><div>Long content</div><div>Long content</div><div>Long content</div><div>Long content</div><div>Long content</div><div>Long content</div><div>Long content</div><div>Long content</div><div>Long content</div><div>Long content</div><div>Long content</div>')
-  const height = ref('auto')
-  const maxHeight = ref(200)
-  const minHeight = ref(100)
+  const content = shallowRef('<div>Long content</div><div>Long content</div><div>Long content</div><div>Long content</div><div>Long content</div><div>Long content</div><div>Long content</div><div>Long content</div><div>Long content</div><div>Long content</div><div>Long content</div><div>Long content</div><div>Long content</div><div>Long content</div>')
+  const height = shallowRef('auto')
+  const maxHeight = shallowRef(200)
+  const minHeight = shallowRef(100)
 </script>
 
 <script>

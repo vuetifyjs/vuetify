@@ -7,6 +7,7 @@
         disabled
       ></v-editor>
     </v-card-text>
+
     <v-card-text>
       <v-editor
         v-model="content"
@@ -20,7 +21,7 @@
 </template>
 
 <script setup>
-  const content = ref('This content cannot be edited in disabled or readonly mode.')
+  const content = shallowRef('This content cannot be edited in disabled or readonly mode.')
 </script>
 
 <script>

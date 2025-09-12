@@ -10,6 +10,7 @@
         multiple
       ></v-select>
     </v-card-text>
+
     <v-card-text>
       <v-editor
         v-model="content"
@@ -17,7 +18,6 @@
         height="200"
       ></v-editor>
     </v-card-text>
-
   </v-card>
 </template>
 

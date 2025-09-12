@@ -1,6 +1,7 @@
 <template>
   <v-card class="mx-auto" max-width="600">
     <v-card-title>Create Article</v-card-title>
+
     <v-card-text>
       <v-form ref="form" v-model="isValid">
         <v-text-field
@@ -34,11 +35,11 @@
 </template>
 
 <script setup>
-  const form = ref()
-  const isValid = ref(false)
-  const title = ref('')
-  const content = ref('')
-  const author = ref('')
+  const form = shallowRef()
+  const isValid = shallowRef(false)
+  const title = shallowRef('')
+  const content = shallowRef('')
+  const author = shallowRef('')
 
   const titleRules = [
     v => !!v || 'Title is required',

@@ -7,6 +7,7 @@
         hint="Use the toolbar to format your text with bold, italic, and underline."
       ></v-editor>
     </v-card-text>
+
     <v-card-text>
       <v-editor
         v-model="content2"
@@ -18,9 +19,9 @@
 </template>
 
 <script setup>
-  const content = ref('This editor shows a helpful hint below.')
-  const content2 = ref('This editor shows custom messages.')
-  const messages = ref(['This is a custom message', 'You can add multiple messages'])
+  const content = shallowRef('This editor shows a helpful hint below.')
+  const content2 = shallowRef('This editor shows custom messages.')
+  const messages = shallowRef(['This is a custom message', 'You can add multiple messages'])
 </script>
 
 <script>

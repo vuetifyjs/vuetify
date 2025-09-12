@@ -7,6 +7,7 @@
         height="200"
       ></v-editor>
     </v-card-text>
+
     <v-card-text>
       <v-editor
         v-model="content2"
@@ -20,8 +21,8 @@
 </template>
 
 <script setup>
-  const content = ref('This editor uses <b>primary</b> color theme.')
-  const content2 = ref('This editor uses <b>success</b> color theme.')
+  const content = shallowRef('This editor uses <b>primary</b> color theme.')
+  const content2 = shallowRef('This editor uses <b>success</b> color theme.')
 </script>
 
 <script>

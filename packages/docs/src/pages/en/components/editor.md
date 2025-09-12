@@ -79,7 +79,7 @@ You can customize which formatting options are available in the toolbar using th
 
 #### Hide toolbar
 
-You can hide the formatting toolbar entirely using the `hide-toolbar` prop:
+You can hide the formatting toolbar entirely using the `hide-toolbar` prop. formatting can then be achieved with keyboard shortcuts or by pasting the formatted text:
 
 <ExamplesExample file="v-editor/prop-hide-toolbar" />
 

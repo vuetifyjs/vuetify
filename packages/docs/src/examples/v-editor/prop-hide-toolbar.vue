@@ -11,13 +11,13 @@
 </template>
 
 <script setup>
-  const content = ref('This is some plain text content without formatting options.')
+  const content = ref('This is some plain text content.')
 </script>
 
 <script>
   export default {
     data: () => ({
-      content: 'This is some plain text content without formatting options.',
+      content: 'This is some plain text content.',
     }),
   }
 </script>
