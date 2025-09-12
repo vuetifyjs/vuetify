@@ -30,6 +30,9 @@
 
       @include tools.elevation($bottom-sheet-elevation)
 
+      @media (prefers-reduced-motion: reduce)
+        transition: none
+
       > .v-card,
       > .v-sheet
         border-radius: $bottom-sheet-border-radius

@@ -45,16 +45,16 @@
       @include tools.elevation($video-elevation)
 
     &:not(.v-video--idle)
-      .v-video__content .v-overlay
+      .v-video__content .v-video__overlay-fill
         &, > *
           pointer-events: none
 
     &__overlay-fill
+      position: absolute
+      inset: 0
       display: flex
       align-items: center
       justify-content: center
-      width: 100%
-      height: 100%
       border-radius: inherit
 
       > .v-img
@@ -143,8 +143,8 @@
     &--variant-background
       outline: none
       position: absolute
+      inset: 0
       pointer-events: none
-      height: 100%
 
       > .v-video__content
         width: 100%

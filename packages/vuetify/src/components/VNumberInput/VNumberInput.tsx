@@ -132,8 +132,14 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
 
     const _inputText = shallowRef<string | null>(null)
     watchEffect(() => {
-      if (isFocused.value && !controlsDisabled.value) {
-        // ignore external changes
+      if (
+        isFocused.value &&
+          !controlsDisabled.value &&
+          Number(_inputText.value) === model.value
+      ) {
+        // ignore external changes while typing
+        // e.g. 5.01{backspace}2 » should result in 5.02
+        //      but we emit '5' in and want to preserve '5.0'
       } else if (model.value == null) {
         _inputText.value = null
       } else if (!isNaN(model.value)) {
@@ -351,7 +357,6 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
             aria-hidden="true"
             data-testid="increment"
             disabled={ !canIncrease.value }
-            flat
             height={ controlNodeDefaultHeight.value }
             icon={ incrementIcon.value }
             key="increment-btn"
@@ -360,6 +365,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
             onPointerup={ onControlMouseup }
             onPointercancel={ onControlMouseup }
             size={ controlNodeSize.value }
+            variant="text"
             tabindex="-1"
           />
         ) : (
@@ -368,10 +374,10 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
             defaults={{
               VBtn: {
                 disabled: !canIncrease.value,
-                flat: true,
                 height: controlNodeDefaultHeight.value,
                 size: controlNodeSize.value,
                 icon: incrementIcon.value,
+                variant: 'text',
               },
             }}
           >
@@ -386,7 +392,6 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
             aria-hidden="true"
             data-testid="decrement"
             disabled={ !canDecrease.value }
-            flat
             height={ controlNodeDefaultHeight.value }
             icon={ decrementIcon.value }
             key="decrement-btn"
@@ -395,6 +400,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
             onPointerup={ onControlMouseup }
             onPointercancel={ onControlMouseup }
             size={ controlNodeSize.value }
+            variant="text"
             tabindex="-1"
           />
         ) : (
@@ -403,10 +409,10 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
             defaults={{
               VBtn: {
                 disabled: !canDecrease.value,
-                flat: true,
                 height: controlNodeDefaultHeight.value,
                 size: controlNodeSize.value,
                 icon: decrementIcon.value,
+                variant: 'text',
               },
             }}
           >

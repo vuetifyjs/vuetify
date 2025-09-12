@@ -12,7 +12,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
 import { ref, toRef, watchEffect } from 'vue'
-import { clamp, convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
+import { clamp, convertToUnit, genericComponent, PREFERS_REDUCED_MOTION, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -89,7 +89,8 @@ export const VProgressCircular = genericComponent<VProgressCircularSlots>()({
           {
             'v-progress-circular--indeterminate': !!props.indeterminate,
             'v-progress-circular--visible': isIntersecting.value,
-            'v-progress-circular--disable-shrink': props.indeterminate === 'disable-shrink',
+            'v-progress-circular--disable-shrink': props.indeterminate &&
+              (props.indeterminate === 'disable-shrink' || PREFERS_REDUCED_MOTION()),
           },
           themeClasses.value,
           sizeClasses.value,

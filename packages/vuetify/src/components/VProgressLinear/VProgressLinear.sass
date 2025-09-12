@@ -7,7 +7,7 @@
     background: transparent
     overflow: hidden
     position: relative
-    transition: $progress-linear-transition
+    transition: $progress-linear-transition, mask-size 0s
     width: 100%
 
     &--rounded
@@ -31,8 +31,8 @@
 
   @media (forced-colors: active)
     .v-progress-linear__buffer
-      background-color: highlight
-      opacity: $progress-linear-stream-opacity
+      background-color: highlight !important
+      opacity: .5 !important
 
   .v-progress-linear__content
     align-items: center
@@ -53,7 +53,7 @@
     background: $progress-linear-background
 
     @media (forced-colors: active)
-      background-color: highlight
+      background-color: highlight !important
 
   .v-progress-linear__determinate
     height: inherit

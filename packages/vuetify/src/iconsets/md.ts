@@ -46,6 +46,8 @@ const aliases: IconAliases = {
   calendar: 'event',
   treeviewCollapse: 'arrow_drop_down',
   treeviewExpand: 'arrow_right',
+  tableGroupCollapse: 'chevron_down',
+  tableGroupExpand: 'chevron_right',
   eyeDropper: 'colorize',
   upload: 'cloud_upload',
   color: 'palette',

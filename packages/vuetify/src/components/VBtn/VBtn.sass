@@ -84,6 +84,16 @@
       flex: 1 0 auto
       min-width: 100%
 
+    &--spaced
+      display: grid
+      grid-template-columns: max-content 1fr max-content
+
+      &.v-btn--spaced-start > .v-btn__content
+        justify-content: end
+
+      &.v-btn--spaced-end > .v-btn__content
+        justify-content: start
+
     &--disabled
       pointer-events: none
 
@@ -258,3 +268,12 @@
 
     .v-pagination__item--is-active .v-btn__overlay
       opacity: $button-pagination-active-overlay-opacity
+
+@media (forced-colors: active)
+  .v-btn
+    &:not(&--variant-text, &--variant-plain)
+      border: thin solid
+
+    &:focus-visible
+      outline: 2px solid
+      outline-offset: 2px

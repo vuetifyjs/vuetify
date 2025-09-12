@@ -20,7 +20,10 @@ async function inspect (project: Project, node?: Node<ts.Node>) {
           Object.entries(definition.properties)
             // Exclude private properties
             .filter(([name]) => !name.startsWith('$') && !name.startsWith('_') && !name.startsWith('Ψ'))
-            .map(async ([name, prop]) => [name, await prettifyType(name, prop)])
+            .map(async ([name, prop]) => [
+              name.replace('Uncapitalize<Capitalize<string>>', 'string'),
+              await prettifyType(name, prop),
+            ])
         )
       )
     }
@@ -331,6 +334,10 @@ const allowedRefs = [
   'TemplateRef',
   'TouchHandlers',
   'ValidationRule',
+  'CalendarTimestamp',
+  'CalendarDaySlotScope',
+  'CalendarEventParsed',
+  'CalendarEventVisual',
 ]
 
 // Types that displayed without their generic arguments

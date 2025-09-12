@@ -81,7 +81,9 @@ export async function scrollTo (
   const container = options.container === 'parent' && target instanceof HTMLElement
     ? target.parentElement!
     : getContainer(options.container)
-  const ease = typeof options.easing === 'function' ? options.easing : options.patterns[options.easing]
+  const ease = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? options.patterns.instant
+    : typeof options.easing === 'function' ? options.easing
+    : options.patterns[options.easing]
 
   if (!ease) throw new TypeError(`Easing function "${options.easing}" not found.`)
 

@@ -324,6 +324,9 @@
     --indent-padding: calc(var(--parent-padding) + var(--list-indent-size))
     min-width: min-content
 
+    .v-navigation-drawer--rail &
+      min-width: 0
+
   .v-list-group__items .v-list-item
     padding-inline-start: calc(#{$base-padding} + var(--indent-padding)) !important
 
@@ -335,3 +338,32 @@
     &:hover
       .v-list-item__overlay
         opacity: calc(#{map.get(settings.$states, 'hover')} * var(--v-theme-overlay-multiplier))
+
+  @media (forced-colors: active)
+    .v-list-item
+      &:not(&--active)
+        color: buttontext
+
+      &--variant-plain.v-list-item--active
+        color: highlight !important
+
+      &:not(&--variant-plain).v-list-item--active
+        background-color: highlight !important
+        color: highlighttext !important
+
+      &-title
+        forced-color-adjust: preserve-parent-color
+        
+      &--active
+        .v-list-item__prepend,
+        .v-list-item__append
+          > .v-badge .v-icon,
+          > .v-icon
+            forced-color-adjust: preserve-parent-color
+ 
+      @supports selector(:focus-visible)
+        &::after
+          color: buttontext
+
+        &:focus-visible::after
+          opacity: 1
