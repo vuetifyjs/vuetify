@@ -46,7 +46,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        scopes: ['--scope vuetify --scope @vuetify/api-generator', '--scope vuetifyjs.com']
+        scopes: ['--filter vuetify --filter @vuetify/api-generator', '--filter vuetifyjs.com']
     steps:
       - uses: actions/checkout@v4
       - uses: actions/download-artifact@v4
@@ -54,7 +54,7 @@ jobs:
           name: vuetify-dist
           path: packages/vuetify
       - uses: vuetifyjs/setup-action@master
-      - run: pnpm lerna run lint $SCOPES
+      - run: pnpm run $SCOPES lint
         env:
           SCOPES: ${{ matrix.scopes }}
 
@@ -102,12 +102,10 @@ jobs:
           path: packages/vuetify
       - uses: vuetifyjs/setup-action@master
       - run: pnpm build api
-      - run: echo "RELEASE_TAG=$GITHUB_REF_NAME" >> $GITHUB_ENV
       - name: NPM Release
-        run: bash scripts/deploy.sh
-        env:
-          NPM_API_KEY: ${{ secrets.NPM_TOKEN }}
-          RELEASE_TAG: ${{ env.RELEASE_TAG }}
+        run: |
+          npm config set //registry.npmjs.org/:_authToken ${{ secrets.NPM_TOKEN }}
+          npm publish ./packages/vuetify --tag $(node ./scripts/parse-npm-tag.js $GITHUB_REF_NAME)
       - name: GitHub release
         id: create_release
         run: pnpm conventional-github-releaser -p vuetify

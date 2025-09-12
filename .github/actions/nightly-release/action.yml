@@ -56,9 +56,9 @@ runs:
         )"
       shell: bash
       working-directory: ./packages/vuetify
-    - run: pnpm lerna run build --scope @vuetify/nightly
+    - run: pnpm run --filter @vuetify/nightly build
       shell: bash
-    - run: pnpm lerna run build --scope @vuetify/api-generator
+    - run: pnpm run --filter @vuetify/api-generator build
       shell: bash
     - name: NPM Release
       run: |
