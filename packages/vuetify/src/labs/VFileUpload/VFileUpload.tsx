@@ -325,7 +325,7 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
 
                 return (
                   <VDefaultsProvider
-                    key={ i }
+                    key={ `${file.name}-${i}` }
                     defaults={{
                       VFileUploadItem: {
                         file,
@@ -337,7 +337,7 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
                   >
                     { slots.item?.(slotProps) ?? (
                       <VFileUploadItem
-                        key={ i }
+                        key={ `${file.name}-${i}` }
                         onClick:remove={ () => onClickRemove(i) }
                         v-slots={ slots }
                       />
