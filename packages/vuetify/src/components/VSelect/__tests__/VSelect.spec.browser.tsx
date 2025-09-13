@@ -740,10 +740,12 @@ describe('VSelect', () => {
     expect(inputField.getAttribute('aria-controls')).toMatch(/^menu-v-\d+/)
 
     await userEvent.click(inputField)
+    await commands.waitStable('.v-list')
 
     expect(inputField).toHaveAttribute('aria-expanded', 'true')
     expect(inputField).toHaveAttribute('aria-label', 'Close')
 
+    await commands.waitStable('.v-list')
     await userEvent.click(screen.getAllByRole('option')[0])
 
     expect(inputField).toHaveAttribute('aria-expanded', 'false')
