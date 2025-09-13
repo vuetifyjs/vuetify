@@ -238,6 +238,33 @@ describe('VCombobox', () => {
       await userEvent.keyboard('antonsen')
       await expect(screen.findByRole('option')).resolves.toHaveTextContent('Antonsen PK')
     })
+
+    // https://github.com/vuetifyjs/vuetify/pull/22045
+    it.only('should keep menu open while typing', async () => {
+      const items = ['Item 1', 'Item 1a', 'Another']
+
+      const { element } = render(() => (
+        <VCombobox items={ items } multiple />
+      ))
+
+      const optionsPerAction = [
+        ['1', 2],
+        ['a', 1],
+        ['x', 0],
+        ['y', 0],
+        ['{Backspace}', 0],
+        ['{Backspace}', 1],
+        ['{Backspace}', 2],
+        ['{Backspace}', 3],
+      ] as const
+
+      await userEvent.click(element)
+      await expect(screen.findAllByRole('option')).resolves.toHaveLength(3)
+      for (const [text, expectedItemsCount] of optionsPerAction) {
+        await userEvent.keyboard(text)
+        await expect.poll(() => screen.queryAllByRole('option')).toHaveLength(expectedItemsCount)
+      }
+    })
   })
 
   describe('prefilled data', () => {
