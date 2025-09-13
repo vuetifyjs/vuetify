@@ -149,6 +149,7 @@ export const VCombobox = genericComponent<new <
     const hasSelectionSlot = computed(() => hasChips.value || !!slots.selection)
 
     const _search = shallowRef(!props.multiple && !hasSelectionSlot.value ? model.value[0]?.title ?? '' : '')
+    const _searchLock = shallowRef<string | null>(null)
 
     const search = computed<string>({
       get: () => {
@@ -188,7 +189,7 @@ export const VCombobox = genericComponent<new <
         : (props.multiple ? model.value.length : search.value.length)
     })
 
-    const { filteredItems, getMatches } = useFilter(props, items, search)
+    const { filteredItems, getMatches } = useFilter(props, items, () => _searchLock.value ?? search.value)
 
     const hasMatchingItems = computed(() => {
       return props.hideSelected
@@ -378,7 +379,9 @@ export const VCombobox = genericComponent<new <
         isPristine.value = true
         vTextFieldRef.value?.focus()
       }
+      _searchLock.value = null
     }
+
     /** @param set - null means toggle */
     function select (item: ListItem | undefined, set: boolean | null = true) {
       if (!item || item.props.disabled) return
@@ -401,7 +404,13 @@ export const VCombobox = genericComponent<new <
       } else {
         const add = set !== false
         model.value = add ? [item] : []
-        _search.value = add && !hasSelectionSlot.value ? item.title : ''
+
+        if (hasSelectionSlot.value) {
+          _search.value = ''
+        } else {
+          _searchLock.value = _search.value
+          _search.value = add ? item.title : ''
+        }
 
         // watch for search watcher to trigger
         nextTick(() => {
@@ -458,6 +467,8 @@ export const VCombobox = genericComponent<new <
       if (val && search.value && !hasMatchingItems.value) {
         showAllItemsForNoMatch.value = true
       }
+
+      if (val) _searchLock.value = null
 
       isPristine.value = !search.value
     }, { immediate: true })

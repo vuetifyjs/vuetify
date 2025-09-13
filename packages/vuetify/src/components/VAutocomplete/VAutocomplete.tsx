@@ -143,6 +143,7 @@ export const VAutocomplete = genericComponent<new <
     const hasSelectionSlot = computed(() => hasChips.value || !!slots.selection)
 
     const _search = shallowRef(!props.multiple && !hasSelectionSlot.value ? model.value[0]?.title ?? '' : '')
+    const _searchLock = shallowRef<string | null>(null)
 
     const search = computed<string>({
       get: () => {
@@ -161,7 +162,11 @@ export const VAutocomplete = genericComponent<new <
         : model.value.length
     })
 
-    const { filteredItems, getMatches } = useFilter(props, items, () => isPristine.value ? '' : search.value)
+    const { filteredItems, getMatches } = useFilter(
+      props,
+      items,
+      () => isPristine.value ? '' : (_searchLock.value ?? search.value),
+    )
 
     const displayItems = computed(() => {
       if (props.hideSelected) {
@@ -328,6 +333,7 @@ export const VAutocomplete = genericComponent<new <
         isPristine.value = true
         vTextFieldRef.value?.focus()
       }
+      _searchLock.value = null
     }
 
     function onFocusin (e: FocusEvent) {
@@ -367,6 +373,7 @@ export const VAutocomplete = genericComponent<new <
       } else {
         const add = set !== false
         model.value = add ? [item] : []
+        _searchLock.value = _search.value
         _search.value = add && !hasSelectionSlot.value ? item.title : ''
 
         // watch for search watcher to trigger
