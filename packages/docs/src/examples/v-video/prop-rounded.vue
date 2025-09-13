@@ -6,9 +6,9 @@
       :start-at="10"
       class="mx-auto"
       height="260"
-      image="https://jsek.work/vt-sunflowers.jpg"
+      image="https://jsek.work/cdn/vt-sunflowers.jpg"
       max-width="450"
-      src="https://jsek.work/vt-sunflowers.mp4"
+      src="https://jsek.work/cdn/vt-sunflowers.mp4"
       eager
       floating
       muted

@@ -51,9 +51,9 @@
       :start-at="10"
       :track-color="colors.track"
       class="mx-auto mb-3"
-      image="https://jsek.work/vt-sunflowers.jpg"
+      image="https://jsek.work/cdn/vt-sunflowers.jpg"
       max-width="450"
-      src="https://jsek.work/vt-sunflowers.mp4"
+      src="https://jsek.work/cdn/vt-sunflowers.mp4"
       eager
       muted
       no-fullscreen

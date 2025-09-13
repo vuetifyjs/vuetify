@@ -5,7 +5,7 @@
       :image="posterUrl"
       class="mx-auto mb-3"
       max-width="450"
-      src="https://jsek.work/vt-sunflowers.mp4"
+      src="https://jsek.work/cdn/vt-sunflowers.mp4"
       muted
       @loaded="loaded = true"
     ></v-video>
@@ -37,7 +37,7 @@
   const posterUrl = toRef(() => {
     return posterId.value
       ? `https://picsum.photos/500/300?image=${posterId.value}`
-      : 'https://jsek.work/vt-sunflowers.jpg'
+      : 'https://jsek.work/cdn/vt-sunflowers.jpg'
   })
 </script>
 
@@ -52,7 +52,7 @@
       posterUrl () {
         return this.posterId
           ? `https://picsum.photos/500/300?image=${this.posterId}`
-          : 'https://jsek.work/vt-sunflowers.jpg'
+          : 'https://jsek.work/cdn/vt-sunflowers.jpg'
       },
     },
     methods: {
