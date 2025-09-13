@@ -191,6 +191,11 @@
       "hideTitle": "3.10.0"
     }
   },
+  "VProgressCircular": {
+    "props": {
+      "rounded": "3.11.0"
+    }
+  },
   "VProgressLinear": {
     "props": {
       "chunkCount": "3.10.0",
