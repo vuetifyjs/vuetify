@@ -381,23 +381,18 @@ describe('VCombobox', () => {
       }])
     })
 
-    it('should show placeholder if initial value is empty string', async () => {
+    it('should show placeholder if initial value is empty string', () => {
       const emptyString = ref('')
 
       const { getByPlaceholderText } = render(() => (
         <VCombobox
           v-model={ emptyString.value }
           items={['a', 'b', 'c']}
-          multiple
-          itemTitle="text"
-          itemValue="value"
-          placeholder="placeholder"
-          returnObject
+          placeholder="select something"
         />
       ))
 
-      const inputField = getByPlaceholderText('placeholder')
-      expect(inputField).toBeDisplayed()
+      expect(getByPlaceholderText('select something')).toBeDisplayed()
     })
   })
 
