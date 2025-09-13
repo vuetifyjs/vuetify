@@ -11,7 +11,7 @@ import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
-import { ref, toRef, watchEffect } from 'vue'
+import { computed, ref, toRef, watchEffect } from 'vue'
 import { clamp, convertToUnit, genericComponent, PREFERS_REDUCED_MOTION, propsFactory, useRender } from '@/util'
 
 // Types
@@ -21,6 +21,7 @@ export const makeVProgressCircularProps = propsFactory({
   bgColor: String,
   color: String,
   indeterminate: [Boolean, String] as PropType<boolean | 'disable-shrink'>,
+  rounded: Boolean,
   modelValue: {
     type: [Number, String],
     default: 0,
@@ -74,7 +75,18 @@ export const VProgressCircular = genericComponent<VProgressCircularSlots>()({
     })
     const diameter = toRef(() => (MAGIC_RADIUS_CONSTANT / (1 - width.value / size.value)) * 2)
     const strokeWidth = toRef(() => width.value / size.value * diameter.value)
-    const strokeDashOffset = toRef(() => convertToUnit(((100 - normalizedValue.value) / 100) * CIRCUMFERENCE))
+    const strokeDashOffset = toRef(() => {
+      const baseLength = ((100 - normalizedValue.value) / 100) * CIRCUMFERENCE
+      return props.rounded && normalizedValue.value > 0 && normalizedValue.value < 100
+        ? convertToUnit(Math.min(CIRCUMFERENCE - 0.01, baseLength + strokeWidth.value))
+        : convertToUnit(baseLength)
+    })
+    const startAngle = computed(() => {
+      const baseAngle = Number(props.rotate)
+      return props.rounded
+        ? baseAngle + (strokeWidth.value / 2) / CIRCUMFERENCE * 360
+        : baseAngle
+    })
 
     watchEffect(() => {
       intersectionRef.value = root.value
@@ -109,7 +121,7 @@ export const VProgressCircular = genericComponent<VProgressCircularSlots>()({
       >
         <svg
           style={{
-            transform: `rotate(calc(-90deg + ${Number(props.rotate)}deg))`,
+            transform: `rotate(calc(-90deg + ${startAngle.value}deg))`,
           }}
           xmlns="http://www.w3.org/2000/svg"
           viewBox={ `0 0 ${diameter.value} ${diameter.value}` }
@@ -138,6 +150,7 @@ export const VProgressCircular = genericComponent<VProgressCircularSlots>()({
             stroke-width={ strokeWidth.value }
             stroke-dasharray={ CIRCUMFERENCE }
             stroke-dashoffset={ strokeDashOffset.value }
+            stroke-linecap={ props.rounded ? 'round' : undefined }
           />
         </svg>
 
