@@ -190,7 +190,13 @@ export const VCombobox = genericComponent<new <
         : (props.multiple ? model.value.length : search.value.length)
     })
 
-    const { filteredItems, getMatches } = useFilter(props, items, () => isPristine.value ? '' : search.value)
+    const { filteredItems, getMatches } = useFilter(props, items, search)
+
+    const hasMatchingItems = computed(() => {
+      return props.hideSelected
+        ? filteredItems.value.some(filteredItem => !model.value.some(s => s.value === filteredItem.value))
+        : filteredItems.value.length > 0
+    })
 
     const displayItems = computed(() => {
       if (props.hideSelected) {
@@ -202,10 +208,9 @@ export const VCombobox = genericComponent<new <
       return filteredItems.value
     })
 
-    const menuDisabled = computed(() => (
-      (props.hideNoData && !displayItems.value.length) ||
-      form.isReadonly.value || form.isDisabled.value
-    ))
+    const menuDisabled = computed(() => {
+      return form.isReadonly.value || form.isDisabled.value
+    })
     const _menu = useProxiedModel(props, 'menu')
     const menu = computed({
       get: () => _menu.value,
@@ -225,7 +230,9 @@ export const VCombobox = genericComponent<new <
         // then search computed triggers and updates _search to ''
         nextTick(() => (cleared = false))
       } else if (isFocused.value && !menu.value) {
-        menu.value = true
+        menu.value = hasMatchingItems.value || !props.hideNoData
+      } else if (isFocused.value && menu.value && !hasMatchingItems.value && props.hideNoData) {
+        menu.value = false
       }
 
       isPristine.value = !value
@@ -456,7 +463,7 @@ export const VCombobox = genericComponent<new <
         })
       }
 
-      if (val && search.value && filteredItems.value.length === 0) {
+      if (val && search.value && !hasMatchingItems.value) {
         showAllItemsForNoMatch.value = true
       }
 
