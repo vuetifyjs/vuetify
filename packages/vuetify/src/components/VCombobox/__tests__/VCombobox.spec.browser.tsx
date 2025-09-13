@@ -380,6 +380,22 @@ describe('VCombobox', () => {
         id: 'item2',
       }])
     })
+
+    it('should show placeholder if initial value is empty string', async () => {
+      render(() => (
+        <VCombobox
+          v-model={''}
+          items={['a', 'b', 'c']}
+          multiple
+          itemTitle="text"
+          itemValue="value"
+          returnObject
+        />
+      ))
+
+      const inputField = screen.getByCSS('.v-field')
+      expect(inputField).toBeUndefined()
+    })
   })
 
   describe('readonly', () => {
