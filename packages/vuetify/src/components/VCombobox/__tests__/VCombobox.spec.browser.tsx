@@ -392,7 +392,7 @@ describe('VCombobox', () => {
         />
       ))
 
-      expect(getByPlaceholderText('select something')).toBeDisplayed()
+      expect(getByPlaceholderText('select something')).toBeVisible()
     })
   })
 
