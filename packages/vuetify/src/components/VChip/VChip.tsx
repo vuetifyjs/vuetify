@@ -167,8 +167,9 @@ export const VChip = genericComponent<VChipSlots>()({
 
       if (!isClickable.value) return
 
-      link.navigate?.(e)
-      group?.toggle()
+      if (await (link.navigateWithCheck?.(e) ?? true)) {
+        group?.toggle()
+      }
     }
 
     function onKeyDown (e: KeyboardEvent) {
