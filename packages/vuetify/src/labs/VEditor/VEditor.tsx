@@ -416,7 +416,7 @@ export const VEditor = genericComponent<VEditorSlots>()({
                                       key={ format.name }
                                       icon={ format.icon }
                                       onClick={ () => applyFormat(format) }
-                                      color={ isFormatActive.value(format.name) ? 'primary' : undefined }
+                                      active={ isFormatActive.value(format.name) }
                                     />
                                   ))}
 
@@ -432,7 +432,7 @@ export const VEditor = genericComponent<VEditorSlots>()({
                                           <VBtn
                                             icon
                                             name={ groupFormats[0].category }
-                                            color={ activeFormat ? 'primary' : undefined }
+                                            active={ !!activeFormat }
                                           >
                                             <VIcon icon={ activeFormat?.icon || groupFormats[0].icon } />
 
@@ -440,7 +440,6 @@ export const VEditor = genericComponent<VEditorSlots>()({
                                               <VCard>
                                                 <VBtnToggle
                                                   variant="text"
-                                                  color="primary"
                                                   density="compact"
                                                   modelValue={ activeFormat?.name }
                                                 >
