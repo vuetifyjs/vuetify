@@ -162,7 +162,7 @@ export const VChip = genericComponent<VChipSlots>()({
       })
     })
 
-    function onClick (e: MouseEvent) {
+    async function onClick (e: MouseEvent) {
       emit('click', e)
 
       if (!isClickable.value) return
