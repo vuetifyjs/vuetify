@@ -48,7 +48,7 @@ export interface UseLink extends Omit<Partial<ReturnType<typeof _useLink>>, 'hre
   isClickable: Readonly<Ref<boolean>>
   href: Ref<string | undefined>
   linkProps: Record<string, string | undefined>
-  navigateWithCheck?: (e: MouseEvent|undefined) => Promise<boolean>
+  navigateWithCheck?: (e: MouseEvent | undefined) => Promise<boolean>
 }
 
 export function useLink (props: LinkProps & LinkListeners, attrs: SetupContext['attrs']): UseLink {
@@ -86,21 +86,23 @@ export function useLink (props: LinkProps & LinkListeners, attrs: SetupContext['
   })
   const href = computed(() => props.to ? link.value?.route.value.href : props.href)
 
+  async function navigateWithCheck (e: MouseEvent | undefined) {
+    const result = await link.value?.navigate(e)
+    return !isNavigationFailure(result)
+  }
+
   return {
     isLink,
     isClickable,
     isActive,
     route: link.value?.route,
     navigate: link.value?.navigate,
+    navigateWithCheck,
     href,
     linkProps: reactive({
       href,
       'aria-current': toRef(() => isActive.value ? 'page' : undefined),
     }),
-    navigateWithCheck: async e => {
-      const result = await link.value?.navigate(e)
-      return !isNavigationFailure(result)
-    },
   }
 }
 
