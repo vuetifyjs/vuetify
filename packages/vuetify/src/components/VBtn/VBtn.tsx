@@ -165,9 +165,7 @@ export const VBtn = genericComponent<VBtnSlots>()({
         ))
       ) return
 
-      if (link.navigateWithCheck) {
-        await link.navigateWithCheck(e) && group?.toggle()
-      } else {
+      if (await (link.navigateWithCheck?.(e) ?? true)) {
         group?.toggle()
       }
     }
