@@ -3,7 +3,7 @@ import { VCombobox } from '../VCombobox'
 import { VForm } from '@/components/VForm'
 
 // Utilities
-import { generate, render, screen, userEvent, waitAnimationFrame, waitIdle } from '@test'
+import { generate, render, screen, userEvent, wait, waitAnimationFrame, waitIdle } from '@test'
 import { commands } from '@vitest/browser/context'
 import { cloneVNode, ref } from 'vue'
 
@@ -93,10 +93,10 @@ describe('VCombobox', () => {
       ))
 
       await userEvent.click(element)
-      await commands.waitStable('.v-list')
+      await wait(100)
       await userEvent.click((await screen.findAllByRole('option'))[0])
       expect(model.value).toStrictEqual(items[0])
-      expect(search.value).toBe(items[0].title)
+      await expect.poll(() => search.value).toBe(items[0].title)
       expect(screen.getByCSS('input')).toHaveValue(items[0].title)
       expect(screen.getByCSS('.v-combobox__selection')).toHaveTextContent(items[0].title)
 
@@ -143,7 +143,7 @@ describe('VCombobox', () => {
       const input = screen.getByCSS('input')
 
       await userEvent.click(element)
-      await commands.waitStable('.v-list')
+      await wait(100)
       await userEvent.click(screen.getAllByRole('option')[0])
       expect(model.value).toStrictEqual([items[0]])
       expect(search.value).toBeUndefined()
@@ -396,7 +396,7 @@ describe('VCombobox', () => {
       ))
 
       await userEvent.click(element)
-      await commands.waitStable('.v-list')
+      await wait(100)
 
       const options = await screen.findAllByRole('option', { selected: true })
       expect(options).toHaveLength(2)
@@ -504,11 +504,11 @@ describe('VCombobox', () => {
     ))
 
     await userEvent.click(element)
-    await commands.waitStable('.v-list')
+    await wait(100)
 
     await userEvent.click(screen.getAllByRole('option')[0])
 
-    expect(screen.getByCSS('input')).toHaveValue('0')
+    await expect.poll(() => screen.getByCSS('input')).toHaveValue('0')
   })
 
   it('should conditionally show placeholder', async () => {
@@ -775,9 +775,9 @@ describe('VCombobox', () => {
     ))
 
     await userEvent.click(element)
-    await commands.waitStable('.v-list')
+    await wait(100)
     await userEvent.click(screen.getAllByRole('option')[0])
-    expect(model.value).toStrictEqual({ title: 'Item 1', value: 'item1' })
+    await expect.poll(() => model.value).toStrictEqual({ title: 'Item 1', value: 'item1' })
 
     await userEvent.click(document.body)
     expect(model.value).toStrictEqual({ title: 'Item 1', value: 'item1' })
@@ -839,6 +839,7 @@ describe('VCombobox', () => {
     ))
 
     await userEvent.click(element)
+    await commands.waitStable('.v-list')
     expect(screen.getAllByRole('option')).toHaveLength(1)
     await userEvent.click(document.body)
     await expect.poll(() => screen.queryAllByRole('option')).toHaveLength(0)

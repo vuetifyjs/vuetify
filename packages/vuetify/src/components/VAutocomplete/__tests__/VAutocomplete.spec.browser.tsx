@@ -3,7 +3,7 @@ import { VAutocomplete } from '../VAutocomplete'
 import { VForm } from '@/components/VForm'
 
 // Utilities
-import { generate, render, screen, userEvent, waitAnimationFrame, waitIdle } from '@test'
+import { generate, render, screen, userEvent, wait, waitAnimationFrame, waitIdle } from '@test'
 import { findAllByRole, queryAllByRole, within } from '@testing-library/vue'
 import { commands } from '@vitest/browser/context'
 import { cloneVNode, ref } from 'vue'
@@ -83,7 +83,7 @@ describe('VAutocomplete', () => {
     ))
 
     await userEvent.click(container)
-    await commands.waitStable('.v-list')
+    await wait(100) // waitStable was very flaky here
 
     const menu = await screen.findByRole('listbox')
 
@@ -182,7 +182,7 @@ describe('VAutocomplete', () => {
     ))
 
     await userEvent.click(container)
-    await commands.waitStable('.v-list')
+    await wait(100)
 
     const menu = await screen.findByRole('listbox')
 
@@ -450,8 +450,7 @@ describe('VAutocomplete', () => {
     ))
 
     await userEvent.type(element, 'f')
-    const listItems = screen.getAllByRole('option')
-    expect(listItems).toHaveLength(2)
+    await expect.poll(() => screen.findAllByRole('option')).toHaveLength(2)
     expect(selectedItems.value).toBeUndefined()
   })
 
@@ -640,7 +639,7 @@ describe('VAutocomplete', () => {
     expect(screen.queryByRole('listbox')).toBeNull()
 
     await rerender({ items: ['Foo', 'Bar'] })
-    await expect(screen.findByRole('listbox')).resolves.toBeDisplayed()
+    await expect(screen.findByRole('listbox')).resolves.toBeVisible()
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/19346
