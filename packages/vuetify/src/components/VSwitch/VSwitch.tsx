@@ -17,7 +17,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { ref, toRef, useId } from 'vue'
-import { filterInputAttrs, genericComponent, SUPPORTS_MATCH_MEDIA, propsFactory, useRender } from '@/util'
+import { filterInputAttrs, genericComponent, propsFactory, SUPPORTS_MATCH_MEDIA, useRender } from '@/util'
 
 // Types
 import type { ComputedRef, Ref } from 'vue'
