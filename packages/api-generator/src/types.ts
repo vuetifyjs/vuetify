@@ -1,7 +1,7 @@
 import type { Node, Type } from 'ts-morph'
 import { Project, ts } from 'ts-morph'
-import { prettifyType } from './utils'
-import { kebabCase } from './helpers/text'
+import { prettifyType } from './utils.ts'
+import { kebabCase } from './helpers/text.ts'
 
 const project = new Project({
   tsConfigFilePath: './tsconfig.json',

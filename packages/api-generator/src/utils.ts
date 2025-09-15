@@ -2,7 +2,7 @@ import { execSync } from 'node:child_process'
 import stringifyObject from 'stringify-object'
 import prettier from 'prettier'
 import * as typescriptParser from 'prettier/plugins/typescript'
-import type { Definition, DirectiveData } from './types'
+import type { Definition, DirectiveData } from './types.ts'
 
 function parseFunctionParams (func: string) {
   const [, regular] = /function\s\((.*)\)\s\{.*/i.exec(func) || []

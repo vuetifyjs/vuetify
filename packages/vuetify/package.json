@@ -102,9 +102,6 @@
       ]
     }
   },
-  "engines": {
-    "node": "^12.20 || >=14.13"
-  },
   "scripts": {
     "watch": "pnpm build:lib --watch",
     "dev": "NODE_ENV=development vite",
