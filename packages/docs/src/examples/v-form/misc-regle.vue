@@ -79,8 +79,8 @@
 <playground-resources lang="json">
   {
     "imports": {
-      "@regle/core": "https://www.unpkg.com/@regle/core@latest/dist/regle-core.min.js",
-      "@regle/rules": "https://www.unpkg.com/@regle/rules@latest/dist/regle-rules.min.js"
+      "@regle/core": "https://www.unpkg.com/@regle/core@1.8.4/dist/regle-core.min.js",
+      "@regle/rules": "https://www.unpkg.com/@regle/rules@1.8.4/dist/regle-rules.min.js"
     }
   }
 </playground-resources>
