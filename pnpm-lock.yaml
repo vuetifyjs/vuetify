@@ -223,6 +223,9 @@ importers:
       vue-tsc:
         specifier: ^2.2.10
         version: 2.2.10(typescript@5.8.3)
+      vuetify:
+        specifier: workspace:*
+        version: link:packages/vuetify
       yargs:
         specifier: ^17.7.2
         version: 17.7.2
