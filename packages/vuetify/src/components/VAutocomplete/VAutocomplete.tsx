@@ -26,7 +26,7 @@ import { useMenuActivator } from '@/composables/menuActivator'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, mergeProps, nextTick, ref, shallowRef, watch } from 'vue'
+import { computed, mergeProps, nextTick, ref, shallowRef, toRef, watch } from 'vue'
 import {
   checkPrintable,
   deepEqual,
@@ -139,8 +139,8 @@ export const VAutocomplete = genericComponent<new <
     )
     const form = useForm(props)
 
-    const hasChips = computed(() => !!(props.chips || slots.chip))
-    const hasSelectionSlot = computed(() => hasChips.value || !!slots.selection)
+    const hasChips = toRef(() => !!(props.chips || slots.chip))
+    const hasSelectionSlot = toRef(() => hasChips.value || !!slots.selection)
 
     const _search = shallowRef(!props.multiple && !hasSelectionSlot.value ? model.value[0]?.title ?? '' : '')
     const _searchLock = shallowRef<string | null>(null)
