@@ -26,7 +26,7 @@ The `v-form` component makes it easy to add validation to form inputs. All input
 
 ::: tip
 
-If you prefer using a 3rd party validation plugin, we provide [examples](#vee-validate) further down the page for integrating both [Vee-validate](https://github.com/baianat/Vee-validate) and [vuelidate](https://github.com/vuelidate/vuelidate) validation libraries.
+If you prefer using a 3rd party validation plugin, we provide [examples](#vee-validate) further down the page for integrating both [Vee-validate](https://github.com/baianat/Vee-validate) and [Regle](https://github.com/victorgarciaesgi/regle) validation libraries.
 
 :::
 
@@ -127,8 +127,10 @@ The difference between `reset()` and `resetValidation()` is that the former rese
 
 <ExamplesExample file="v-form/misc-vee-validate" />
 
-#### Vuelidate
+#### Regle
 
-**vuelidate** documentation can be found [here](https://vuelidate-next.netlify.app/).
+**regle** documentation can be found [here](https://reglejs.dev/).
 
-<ExamplesExample file="v-form/misc-vuelidate" />
+<ExamplesExample file="v-form/misc-regle" />
+
+
