@@ -5,13 +5,13 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
-  vite-ssr>react-router-dom: '-'
-  vite-ssr>react-ssr-prepass: '-'
-  brilliant-errors>bumpp: '-'
-  brilliant-errors>vitest: '-'
   '@testing-library/dom': npm:@vuetify/testing-library-dom@1.0.2
   '@types/node': 22.15.31
   '@vue/babel-plugin-jsx': npm:@vuetify/babel-plugin-jsx@1.6.0
+  brilliant-errors>bumpp: '-'
+  brilliant-errors>vitest: '-'
+  vite-ssr>react-router-dom: '-'
+  vite-ssr>react-ssr-prepass: '-'
 
 patchedDependencies:
   '@mdi/js@7.4.47':
@@ -73,6 +73,9 @@ importers:
       '@typescript-eslint/parser':
         specifier: ^8.32.0
         version: 8.32.0(eslint@8.57.0)(typescript@5.8.3)
+      '@typescript/native-preview':
+        specifier: 7.0.0-dev.20250912.1
+        version: 7.0.0-dev.20250912.1
       '@unhead/vue':
         specifier: ^2.0.5
         version: 2.0.5(vue@3.5.13(typescript@5.8.3))
@@ -220,6 +223,9 @@ importers:
       vue-tsc:
         specifier: ^2.2.10
         version: 2.2.10(typescript@5.8.3)
+      vuetify:
+        specifier: workspace:*
+        version: link:packages/vuetify
       yargs:
         specifier: ^17.7.2
         version: 17.7.2
@@ -603,12 +609,6 @@ importers:
       ts-node:
         specifier: ^10.9.2
         version: 10.9.2(@types/node@22.15.31)(typescript@5.8.3)
-      ts-patch:
-        specifier: ^3.3.0
-        version: 3.3.0
-      typescript-transform-paths:
-        specifier: ^3.5.5
-        version: 3.5.5(typescript@5.8.3)
       unplugin-auto-import:
         specifier: 19.3.0
         version: 19.3.0
@@ -2925,6 +2925,45 @@ packages:
     resolution: {integrity: sha512-1rYQTCLFFzOI5Nl0c8LUpJT8HxpwVRn9E4CkMsYfuN6ctmQqExjSTzzSk0Tz2apmXy7WU6/6fyaZVVA/thPN+w==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
+  '@typescript/native-preview-darwin-arm64@7.0.0-dev.20250912.1':
+    resolution: {integrity: sha512-yI9dgT+VGwNe4eS9ys9MTtbQcT3Ma+9AYVyab36oD10fbzgK/HScELbZLvBIAviHuyAlYX2BWq4Iits4RFnijg==}
+    cpu: [arm64]
+    os: [darwin]
+
+  '@typescript/native-preview-darwin-x64@7.0.0-dev.20250912.1':
+    resolution: {integrity: sha512-SQ8QGEYva0NQ6kP2t/CeDMSua3PXJznTXe7vzQa+F8CYpv+52x+d+p8bOfKUKEZaRy5lvl/JBaIauxXGu6VmEQ==}
+    cpu: [x64]
+    os: [darwin]
+
+  '@typescript/native-preview-linux-arm64@7.0.0-dev.20250912.1':
+    resolution: {integrity: sha512-PklJj6+5c54FAsr7xjqZCUaLWZbIOcgX+z/1eKUwIvgAgm3DxiTnomVth1SLqXkQuZ5IagrTRH+AmVAFsJtzuw==}
+    cpu: [arm64]
+    os: [linux]
+
+  '@typescript/native-preview-linux-arm@7.0.0-dev.20250912.1':
+    resolution: {integrity: sha512-xXcens3GBg3EIpUY5gh56FZ8OVBsl+bVFRa75KjuN42D64JbCCyiQtaDO745MXNohc21VOOYTG6sWxhcmyIb8w==}
+    cpu: [arm]
+    os: [linux]
+
+  '@typescript/native-preview-linux-x64@7.0.0-dev.20250912.1':
+    resolution: {integrity: sha512-vxZsR/O1qa+6QbwdHKT2LVGT6hJopxur9uqYuOc/bIxcprIWO2up789Fq8ssNTwnwo2v0nZAtx7758aveDcHGg==}
+    cpu: [x64]
+    os: [linux]
+
+  '@typescript/native-preview-win32-arm64@7.0.0-dev.20250912.1':
+    resolution: {integrity: sha512-qkof7aS2at9tb8/SvPzH85JgIms1txPU9gZlPh5mkNTW1ylZyjYEuux2kt5EvnNa+XB/vhMAFnPmAW7X2EqA4w==}
+    cpu: [arm64]
+    os: [win32]
+
+  '@typescript/native-preview-win32-x64@7.0.0-dev.20250912.1':
+    resolution: {integrity: sha512-cDyLN7k1a//cKIlkMepuyIpEtDQTC3cltjhw+wKwxiKNrPnLuYG7cCbGttzG5zWU9R6ACsZLR+tYjLth8L88aA==}
+    cpu: [x64]
+    os: [win32]
+
+  '@typescript/native-preview@7.0.0-dev.20250912.1':
+    resolution: {integrity: sha512-gHhW7qbRRtbkxv5pEmmIGYUMGBkBZsfgDABLr5izOZY1qDP7ranAhIgfjjFF0gvYotYvW8dO4bArytwMqKysdg==}
+    hasBin: true
+
   '@ungap/structured-clone@1.2.0':
     resolution: {integrity: sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==}
 
@@ -4630,8 +4669,8 @@ packages:
     resolution: {integrity: sha512-Zk/eNKV2zbjpKzrsQ+n1G6poVbErQxJ0LBOJXaKZ1EViLzH+hrLu9cdXI4zw9dBQJslwBEpbQ2P1oS7nDxs6jQ==}
     engines: {node: '>= 0.8.0'}
 
-  expect-type@1.2.1:
-    resolution: {integrity: sha512-/kP8CAwxzLVEeFrMm4kMmy4CCDlpipyA7MYLVrdJIkV0fYF0UaigQHRsxHiuY/GEea+bh4KSv3TIlgr+2UL6bw==}
+  expect-type@1.2.2:
+    resolution: {integrity: sha512-JhFGDVJ7tmDJItKhYgJCGLOWjuK9vPxiXoUFLwLDc99NlmklilbiQJwoctZtt13+xMw91MCk/REan6MWHqDjyA==}
     engines: {node: '>=12.0.0'}
 
   expect@29.7.0:
@@ -4954,10 +4993,6 @@ packages:
   glob@9.3.5:
     resolution: {integrity: sha512-e1LleDykUz2Iu+MTYdkSsuWX8lvAjAcs0Xef0lNIu0S2wOAzuTxCJtcd9S3cijlwYF18EsU3rzb8jPVobxDh9Q==}
     engines: {node: '>=16 || 14 >=14.17'}
-
-  global-prefix@4.0.0:
-    resolution: {integrity: sha512-w0Uf9Y9/nyHinEk5vMJKRie+wa4kR5hmDbEhGGds/kG1PwGLLHKRoNMeJOyCQjjBkANlnScqgzcFwGHgmgLkVA==}
-    engines: {node: '>=16'}
 
   globals@11.12.0:
     resolution: {integrity: sha512-WOBp/EEGUiIsJSp7wcv/y6MO+lV9UoncWqxuFfm8eBwzWNgyfBd6Gz+IeKQ9jCmyhoH99g15M3T+QaVHFjizVA==}
@@ -7756,10 +7791,6 @@ packages:
       '@swc/wasm':
         optional: true
 
-  ts-patch@3.3.0:
-    resolution: {integrity: sha512-zAOzDnd5qsfEnjd9IGy1IRuvA7ygyyxxdxesbhMdutt8AHFjD8Vw8hU2rMF89HX1BKRWFYqKHrO8Q6lw0NeUZg==}
-    hasBin: true
-
   tsconfig-paths@3.15.0:
     resolution: {integrity: sha512-2Ac2RgzDe/cn48GvOe3M+o82pEFewD3UPbyoUHHdKasHwJKjds4fLXWf/Ux5kATBKN20oaFGu+jbElp1pos0mg==}
 
@@ -7821,11 +7852,6 @@ packages:
 
   typescript-auto-import-cache@0.3.3:
     resolution: {integrity: sha512-ojEC7+Ci1ij9eE6hp8Jl9VUNnsEKzztktP5gtYNRMrTmfXVwA1PITYYAkpxCvvupdSYa/Re51B6KMcv1CTZEUA==}
-
-  typescript-transform-paths@3.5.5:
-    resolution: {integrity: sha512-RMK86wKe/4+ad+3kMT9SKAs3K0tUHLe7hF+MLbD6VpC9VUmFuKorhf3pHz+qO5GdS4mUp2ncNUo14j6ws9UvBQ==}
-    peerDependencies:
-      typescript: '>=3.6.5'
 
   typescript@5.8.3:
     resolution: {integrity: sha512-p1diW6TqL9L07nNxvRMM7hMMw4c5XOo/1ibL4aAIGmSAt9slTE1Xgw5KWuof2uTOvCg9BY7ZRi+GaF+7sfgPeQ==}
@@ -8469,11 +8495,6 @@ packages:
   which@2.0.2:
     resolution: {integrity: sha512-BLI3Tl1TW3Pvl70l3yq3Y64i+awpwXqsGBYWkkqMtnbXgrMD+yj7rhW0kuEDxzJaYXGjEW5ogapKNMEKNMjibA==}
     engines: {node: '>= 8'}
-    hasBin: true
-
-  which@4.0.0:
-    resolution: {integrity: sha512-GlaYyEb07DPxYCKhKzplCWBJtvxZcZMrL+4UkrTSJHHPyZU4mYYTv3qaOe77H7EODLSSopAUFAc6W8U4yqvscg==}
-    engines: {node: ^16.13.0 || >=18.0.0}
     hasBin: true
 
   which@5.0.0:
@@ -11344,6 +11365,37 @@ snapshots:
       '@typescript-eslint/types': 8.32.0
       eslint-visitor-keys: 4.2.0
 
+  '@typescript/native-preview-darwin-arm64@7.0.0-dev.20250912.1':
+    optional: true
+
+  '@typescript/native-preview-darwin-x64@7.0.0-dev.20250912.1':
+    optional: true
+
+  '@typescript/native-preview-linux-arm64@7.0.0-dev.20250912.1':
+    optional: true
+
+  '@typescript/native-preview-linux-arm@7.0.0-dev.20250912.1':
+    optional: true
+
+  '@typescript/native-preview-linux-x64@7.0.0-dev.20250912.1':
+    optional: true
+
+  '@typescript/native-preview-win32-arm64@7.0.0-dev.20250912.1':
+    optional: true
+
+  '@typescript/native-preview-win32-x64@7.0.0-dev.20250912.1':
+    optional: true
+
+  '@typescript/native-preview@7.0.0-dev.20250912.1':
+    optionalDependencies:
+      '@typescript/native-preview-darwin-arm64': 7.0.0-dev.20250912.1
+      '@typescript/native-preview-darwin-x64': 7.0.0-dev.20250912.1
+      '@typescript/native-preview-linux-arm': 7.0.0-dev.20250912.1
+      '@typescript/native-preview-linux-arm64': 7.0.0-dev.20250912.1
+      '@typescript/native-preview-linux-x64': 7.0.0-dev.20250912.1
+      '@typescript/native-preview-win32-arm64': 7.0.0-dev.20250912.1
+      '@typescript/native-preview-win32-x64': 7.0.0-dev.20250912.1
+
   '@ungap/structured-clone@1.2.0': {}
 
   '@unhead/dom@1.11.20':
@@ -13528,7 +13580,7 @@ snapshots:
 
   exit@0.1.2: {}
 
-  expect-type@1.2.1: {}
+  expect-type@1.2.2: {}
 
   expect@29.7.0:
     dependencies:
@@ -13902,12 +13954,6 @@ snapshots:
       minimatch: 8.0.4
       minipass: 4.2.8
       path-scurry: 1.11.1
-
-  global-prefix@4.0.0:
-    dependencies:
-      ini: 4.1.3
-      kind-of: 6.0.3
-      which: 4.0.0
 
   globals@11.12.0: {}
 
@@ -17000,15 +17046,6 @@ snapshots:
       v8-compile-cache-lib: 3.0.1
       yn: 3.1.1
 
-  ts-patch@3.3.0:
-    dependencies:
-      chalk: 4.1.2
-      global-prefix: 4.0.0
-      minimist: 1.2.8
-      resolve: 1.22.8
-      semver: 7.7.2
-      strip-ansi: 6.0.1
-
   tsconfig-paths@3.15.0:
     dependencies:
       '@types/json5': 0.0.29
@@ -17079,11 +17116,6 @@ snapshots:
   typescript-auto-import-cache@0.3.3:
     dependencies:
       semver: 7.7.2
-
-  typescript-transform-paths@3.5.5(typescript@5.8.3):
-    dependencies:
-      minimatch: 9.0.5
-      typescript: 5.8.3
 
   typescript@5.8.3: {}
 
@@ -17464,7 +17496,7 @@ snapshots:
       '@vitest/utils': 3.1.1
       chai: 5.2.0
       debug: 4.4.1
-      expect-type: 1.2.1
+      expect-type: 1.2.2
       magic-string: 0.30.17
       pathe: 2.0.3
       std-env: 3.9.0
@@ -17816,10 +17848,6 @@ snapshots:
   which@2.0.2:
     dependencies:
       isexe: 2.0.0
-
-  which@4.0.0:
-    dependencies:
-      isexe: 3.1.1
 
   which@5.0.0:
     dependencies:

@@ -10,6 +10,8 @@ ignoredBuiltDependencies:
 
 linkWorkspacePackages: deep
 
+nodeLinker: hoisted
+
 onlyBuiltDependencies:
   - '@percy/core'
   - edgedriver
