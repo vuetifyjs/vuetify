@@ -10,6 +10,10 @@ ignoredBuiltDependencies:
 
 linkWorkspacePackages: deep
 
+minimumReleaseAge: 4320 # 3 days
+minimumReleaseAgeExclude:
+  - '@vuetify/one'
+
 nodeLinker: hoisted
 
 onlyBuiltDependencies:
