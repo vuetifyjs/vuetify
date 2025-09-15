@@ -1,6 +1,7 @@
 /* eslint-disable max-statements */
 // Composables
 import { makeElevationProps } from '@/composables/elevation'
+import { useForm } from '@/composables/form'
 import { useRtl } from '@/composables/locale'
 import { makeRoundedProps } from '@/composables/rounded'
 
@@ -189,6 +190,7 @@ export const useSlider = ({
   onSliderMove: (data: SliderData) => void
   getActiveThumb: (e: MouseEvent | TouchEvent) => HTMLElement
 }) => {
+  const form = useForm(props)
   const { isRtl } = useRtl()
   const isReversed = toRef(() => props.reverse)
   const vertical = computed(() => props.direction === 'vertical')
@@ -200,12 +202,11 @@ export const useSlider = ({
   const tickSize = computed(() => parseInt(props.tickSize, 10))
   const trackSize = computed(() => parseInt(props.trackSize, 10))
   const numTicks = computed(() => (max.value - min.value) / step.value)
-  const disabled = toRef(() => props.disabled)
 
-  const thumbColor = computed(() => props.error || props.disabled ? undefined : props.thumbColor ?? props.color)
-  const thumbLabelColor = computed(() => props.error || props.disabled ? undefined : props.thumbColor)
-  const trackColor = computed(() => props.error || props.disabled ? undefined : props.trackColor ?? props.color)
-  const trackFillColor = computed(() => props.error || props.disabled ? undefined : props.trackFillColor ?? props.color)
+  const thumbColor = computed(() => props.error || form.isDisabled.value ? undefined : props.thumbColor ?? props.color)
+  const thumbLabelColor = computed(() => props.error || form.isDisabled.value ? undefined : props.thumbColor)
+  const trackColor = computed(() => props.error || form.isDisabled.value ? undefined : props.trackColor ?? props.color)
+  const trackFillColor = computed(() => props.error || form.isDisabled.value ? undefined : props.trackFillColor ?? props.color)
 
   const mousePressed = shallowRef(false)
 
@@ -346,7 +347,7 @@ export const useSlider = ({
     activeThumbRef,
     color: toRef(() => props.color),
     decimals,
-    disabled,
+    disabled: form.isDisabled,
     direction: toRef(() => props.direction),
     elevation: toRef(() => props.elevation),
     hasLabels,
@@ -362,7 +363,7 @@ export const useSlider = ({
     parsedTicks,
     parseMouseMove,
     position,
-    readonly: toRef(() => props.readonly),
+    readonly: form.isReadonly,
     rounded: toRef(() => props.rounded),
     roundValue,
     showTicks,
