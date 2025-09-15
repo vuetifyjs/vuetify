@@ -132,5 +132,3 @@ The difference between `reset()` and `resetValidation()` is that the former rese
 **regle** documentation can be found [here](https://reglejs.dev/).
 
 <ExamplesExample file="v-form/misc-regle" />
-
-
