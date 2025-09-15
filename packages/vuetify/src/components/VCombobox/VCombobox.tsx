@@ -157,6 +157,8 @@ export const VCombobox = genericComponent<new <
       },
       set: async (val: string | null) => {
         _search.value = val ?? ''
+        showAllItemsForNoMatch.value = false
+
         if (!props.multiple && !hasSelectionSlot.value) {
           model.value = [transformItem(props, val)]
           nextTick(() => vVirtualScrollRef.value?.scrollToIndex(0))
@@ -223,7 +225,6 @@ export const VCombobox = genericComponent<new <
     const { menuId, ariaExpanded, ariaControls, ariaLabel } = useMenuActivator(props, menu)
 
     watch(_search, value => {
-      showAllItemsForNoMatch.value = false
       if (cleared) {
         // wait for clear to finish, VTextField sets _search to null
         // then search computed triggers and updates _search to ''
