@@ -1,7 +1,7 @@
 import type { Node, Type } from 'ts-morph'
 import { Project, ts } from 'ts-morph'
-import { prettifyType } from './utils'
-import { kebabCase } from './helpers/text'
+import { prettifyType } from './utils.ts'
+import { kebabCase } from './helpers/text.ts'
 
 const project = new Project({
   tsConfigFilePath: './tsconfig.json',
@@ -319,6 +319,7 @@ const allowedRefs = [
   'FilterFunction',
   'FormValidationResult',
   'Group',
+  'GroupSummary',
   'InternalDataTableHeader',
   'ListItem',
   'LocationStrategyFunction',
@@ -326,11 +327,13 @@ const allowedRefs = [
   'OpenStrategy',
   'OpenStrategyFunction',
   'ScrollStrategyFunction',
+  'SelectableItem',
   'SelectItemKey',
   'SelectStrategy',
   'SelectStrategyFunction',
   'SortItem',
   'SubmitEventPromise',
+  'ItemKeySlot',
   'TemplateRef',
   'TouchHandlers',
   'ValidationRule',
@@ -349,7 +352,10 @@ const plainRefs = [
   'DataTableItem',
   'ListItem',
   'Group',
+  'GroupSummary',
   'DataIteratorItem',
+  'ItemKeySlot',
+  'SelectItemKey',
 ]
 
 function formatDefinition (definition: Definition) {
@@ -397,6 +403,9 @@ function formatDefinition (definition: Definition) {
       } else {
         formatted = definition.text
       }
+      if (allowedRefs.includes(definition.ref)) {
+        formatted = `<a href="https://github.com/vuetifyjs/vuetify/blob/master/packages/${definition.source}" target="_blank">${formatted}</a>`
+      }
       break
     case 'interface':
     case 'boolean':
@@ -409,10 +418,6 @@ function formatDefinition (definition: Definition) {
   }
 
   definition.formatted = formatted
-
-  if (allowedRefs.includes(formatted)) {
-    definition.formatted = `<a href="https://github.com/vuetifyjs/vuetify/blob/master/packages/${definition.source}" target="_blank">${formatted}</a>`
-  }
 }
 
 // eslint-disable-next-line complexity

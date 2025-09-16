@@ -58,7 +58,6 @@ export const makeVMenuProps = propsFactory({
     openDelay: 300,
     scrim: false,
     scrollStrategy: 'reposition' as const,
-    stickToTarget: true,
     transition: { component: VDialogTransition },
   }), ['absolute']),
 }, 'VMenu')

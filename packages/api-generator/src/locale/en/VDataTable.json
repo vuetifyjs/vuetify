@@ -4,8 +4,6 @@
     "checkboxColor": "Set the color of the checkboxes (showSelect must be used).",
     "collapseIcon": "Icon to display when the expandable row is expanded.",
     "customFilter": "Function to filter items.",
-    "customGroup": "Function used to group items.",
-    "customSort": "Function used to sort items.",
     "caption": "Set the caption (using `<caption>`).",
     "density": "Adjusts the vertical height of the table rows.",
     "disableFiltering": "Disables filtering completely.",
@@ -22,7 +20,7 @@
     "height": "Set an explicit height of table.",
     "hover": "Adds a hover effects to a table rows.",
     "itemClass": "Property on supplied `items` that contains item's row class or function that takes an item as an argument and returns the class of corresponding row.",
-    "itemsPerPage": "Changes how many items per page should be visible. Can be used with `.sync` modifier. Setting this prop to `-1` will display all items on the page.",
+    "itemsPerPage": "Changes how many items per page should be visible. Can be bound to external variable using **v-model:itemsPerPage**.. Setting this prop to `-1` will display all items on the page.",
     "locale": "Sets the locale used for sorting. This is passed into [`Intl.Collator()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/Collator/Collator) in the default `customSort` function.",
     "multiSort": "If `true` then one can sort on multiple properties.",
     "mustSort": "If `true` then one can not disable sorting, it will always switch between ascending and descending.",
@@ -31,8 +29,7 @@
     "showSelect": "Shows the select checkboxes in both the header and rows (if using default rows).",
     "showExpand": "Shows the expand toggle in default rows.",
     "showGroupBy": "Shows the group by toggle in the header and enables grouped rows.",
-    "sortBy": "Changes which item property (or properties) should be used for sort order. Can be used with `.sync` modifier.",
-    "sortDesc": "Changes which direction sorting is done. Can be used with `.sync` modifier.",
+    "sortBy": "Changes which item property (or properties) should be used for sort order. Can be bound to external variable using **v-model:sortBy**..",
     "virtualRows": "Virtualizes the rendering of rows. Be aware that you can not use the `body`, `body.prepend` or `body.append` slots with this prop."
   },
   "slots": {
@@ -74,20 +71,12 @@
     "click:row": "Emits when a table row is clicked. This event provides 2 arguments: the first is the native click event, and the second is an object containing the corresponding item for that row. **NOTE:** will not emit when table rows are defined through a slot such as `item` or `body`.",
     "contextmenu:row": "Emits when a table row is right-clicked. The item for the row is included. **NOTE:** will not emit when table rows are defined through a slot such as `item` or `body`.",
     "dblclick:row": "Emits when a table row is double-clicked. The item for the row is included. **NOTE:** will not emit when table rows are defined through a slot such as `item` or `body`.",
-    "currentItems": "Emits the items provided via the **items** prop, every time the internal **computedItems** is changed.",
-    "pageCount": "Emits when the **pageCount** property of the **pagination** prop is updated.",
-    "pagination": "Emits when something changed to the `pagination` which can be provided via the `pagination` prop.",
-    "toggleSelectAll": "Emits when the `select-all` checkbox in table header is clicked. This checkbox is enabled by the **show-select** prop.",
     "update:currentItems": "Emits with the items currently being displayed.",
-    "update:expanded": "Emits when the **expanded** prop is updated.",
     "update:groupBy": "Emits when the **group-by** prop is updated.",
     "update:itemsPerPage": "Emits when the **items-per-page** prop is updated.",
     "update:modelValue": "Emits when the component's model changes.",
-    "update:multiSort": "Emits when the **multi-sort** prop is updated.",
-    "update:mustSort": "Emits when the **must-sort** prop is updated.",
     "update:options": "Emits when pagination related properties (page, itemsPerPage, sortBy, groupBy, search) is updated.",
     "update:page": "Emits when the **page** prop is updated.",
-    "update:sortBy": "Emits when the **sortBy** prop is updated.",
-    "update:sortDesc": "Emits when the **sort-desc** prop is updated."
+    "update:sortBy": "Emits when the **sortBy** prop is updated."
   }
 }

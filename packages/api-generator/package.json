@@ -1,11 +1,11 @@
 {
   "name": "@vuetify/api-generator",
   "type": "module",
-  "version": "3.10.0",
+  "version": "3.10.1",
   "private": true,
   "description": "",
   "scripts": {
-    "build": "node --import tsx src/index.ts",
+    "build": "node src/index.ts",
     "lint": "eslint --ext .ts,.json src -f codeframe --max-warnings 0",
     "lint:fix": "pnpm lint --fix"
   },
@@ -16,7 +16,6 @@
     "piscina": "^4.9.2",
     "prettier": "^3.5.3",
     "ts-morph": "^25.0.1",
-    "tsx": "^4.19.3",
     "vue": "^3.5.13",
     "vuetify": "workspace:*"
   },

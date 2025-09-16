@@ -24,7 +24,6 @@ import {
   getEndOfMonth,
   getStartOfMonth,
   nextDay,
-  parseTimestamp,
   prevDay,
   relativeDays,
   timestampToDate,
@@ -51,7 +50,6 @@ interface VCalendarRenderProps {
   end: CalendarTimestamp
   component: JSXComponent & { filterProps: <T>(props: T) => Partial<T> }
   maxDays: number
-  weekdays: number[]
   categories: CalendarCategory[]
 }
 
@@ -88,12 +86,12 @@ interface CalendarDayCategorySlotScope extends CalendarDayBodySlotScope {
 export const VCalendar = genericComponent<new (
   props: {
     [key: `on${Capitalize<string>}:date`]: EventProp<[Event, CalendarTimestamp]>
-    [key: `on${Capitalize<string>}:day-category`]: EventProp<[Event, CalendarDayCategorySlotScope]>
+    [key: `on${Capitalize<string>}:dayCategory`]: EventProp<[Event, CalendarDayCategorySlotScope]>
     [key: `on${Capitalize<string>}:day`]: EventProp<[Event, CalendarDayBodySlotScope]>
     [key: `on${Capitalize<string>}:event`]: EventProp<[Event, EventSlotScope]>
     [key: `on${Capitalize<string>}:interval`]: EventProp<[Event, CalendarTimestamp]>
     [key: `on${Capitalize<string>}:more`]: EventProp<[Event, CalendarDaySlotScope]>
-    [key: `on${Capitalize<string>}:time-category`]: EventProp<[Event, CalendarDayCategorySlotScope]>
+    [key: `on${Capitalize<string>}:timeCategory`]: EventProp<[Event, CalendarDayCategorySlotScope]>
     [key: `on${Capitalize<string>}:time`]: EventProp<[Event, CalendarDayBodySlotScope]>
   },
   slots: {
@@ -154,12 +152,6 @@ export const VCalendar = genericComponent<new (
     const lastStart = ref<CalendarTimestamp | null>(null)
     const lastEnd = ref<CalendarTimestamp | null>(null)
 
-    const parsedValue = computed((): CalendarTimestamp => {
-      return (validateTimestamp(props.modelValue)
-        ? parseTimestamp(props.modelValue, true)
-        : (base.parsedStart.value || base.times.today))
-    })
-
     const parsedCategoryDays = computed((): number => {
       return parseInt(String(props.categoryDays)) || 1
     })
@@ -169,10 +161,9 @@ export const VCalendar = genericComponent<new (
     })
 
     const renderProps = computed((): VCalendarRenderProps => {
-      const around = parsedValue.value
+      const around = base.parsedValue.value
       let component: any = null
       let maxDays = props.maxDays
-      let weekdays = base.parsedWeekdays.value
       let categories = parsedCategories.value
       let start = around
       let end = around
@@ -192,19 +183,12 @@ export const VCalendar = genericComponent<new (
         case 'day':
           component = VCalendarDaily
           maxDays = 1
-          weekdays = [start.weekday]
           break
         case '4day':
           component = VCalendarDaily
           end = relativeDays(copyTimestamp(end), nextDay, 3)
           updateFormatted(end)
           maxDays = 4
-          weekdays = [
-            start.weekday,
-            (start.weekday + 1) % 7,
-            (start.weekday + 2) % 7,
-            (start.weekday + 3) % 7,
-          ]
           break
         case 'custom-weekly':
           component = VCalendarWeekly
@@ -223,11 +207,6 @@ export const VCalendar = genericComponent<new (
           end = relativeDays(copyTimestamp(end), nextDay, days)
           updateFormatted(end)
           maxDays = days
-          weekdays = []
-
-          for (let i = 0; i < days; i++) {
-            weekdays.push((start.weekday + i) % 7)
-          }
 
           categories = getCategoryList(categories)
           break
@@ -236,11 +215,11 @@ export const VCalendar = genericComponent<new (
           throw new Error(`${type} is not a valid Calendar type`)
       }
 
-      return { component, start, end, maxDays, weekdays, categories }
+      return { component, start, end, maxDays, categories }
     })
 
     const eventWeekdays = computed((): number[] => {
-      return renderProps.value.weekdays
+      return base.effectiveWeekdays.value
     })
 
     const categoryMode = computed((): boolean => {
@@ -287,7 +266,7 @@ export const VCalendar = genericComponent<new (
     }
 
     function move (amount = 1): void {
-      const moved = copyTimestamp(parsedValue.value)
+      const moved = copyTimestamp(base.parsedValue.value)
       const forward = amount > 0
       const mover = forward ? nextDay : prevDay
       const limit = forward ? DAYS_IN_MONTH_MAX : DAY_MIN
@@ -402,7 +381,7 @@ export const VCalendar = genericComponent<new (
     })
 
     useRender(() => {
-      const { start, end, maxDays, component: Component, weekdays, categories } = renderProps.value
+      const { start, end, maxDays, component: Component, categories } = renderProps.value
       return (
         <Component
           ref={ root }
@@ -413,7 +392,7 @@ export const VCalendar = genericComponent<new (
           start={ start.date }
           end={ end.date }
           maxDays={ maxDays }
-          weekdays={ weekdays }
+          weekdays={ base.effectiveWeekdays.value }
           categories={ categories }
           onClick:date={ (e: MouseEvent, day: CalendarTimestamp) => {
             if (attrs['onUpdate:modelValue']) emit('update:modelValue', day.date)
@@ -428,7 +407,6 @@ export const VCalendar = genericComponent<new (
       ...base,
       lastStart,
       lastEnd,
-      parsedValue,
       parsedCategoryDays,
       renderProps,
       eventWeekdays,

@@ -12,9 +12,9 @@
           color="orange"
           controls-transition="slide-y-transition"
           elevation="0"
-          image="https://jsek.work/vt-video-poster.jpg"
+          image="https://jsek.work/cdn/vt-video-poster.jpg"
           rounded="xl"
-          src="https://jsek.work/vt-video.mp4"
+          src="https://jsek.work/cdn/vt-video.mp4"
           width="100%"
           detached
           eager

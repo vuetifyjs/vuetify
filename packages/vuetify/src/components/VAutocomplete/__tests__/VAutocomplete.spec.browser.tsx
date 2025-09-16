@@ -494,14 +494,14 @@ describe('VAutocomplete', () => {
 
   it('should not open menu when closing a chip', async () => {
     const { element } = render(() => (
-        <VAutocomplete
-          chips
-          closableChips
-          items={['foo', 'bar']}
-          label="Autocomplete"
-          modelValue={['foo', 'bar']}
-          multiple
-        />
+      <VAutocomplete
+        chips
+        closableChips
+        items={['foo', 'bar']}
+        label="Autocomplete"
+        modelValue={['foo', 'bar']}
+        multiple
+      />
     ))
 
     expect(screen.queryByRole('listbox')).toBeNull()

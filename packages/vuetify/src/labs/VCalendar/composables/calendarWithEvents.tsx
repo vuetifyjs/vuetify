@@ -204,7 +204,7 @@ export function useCalendarWithEvents (props: CalendarWithEventsProps, slots: an
   })
 
   const eventWeekdays = computed((): number[] => {
-    return base.parsedWeekdays.value
+    return base.effectiveWeekdays.value
   })
 
   function eventColorFunction (e: CalendarEvent): string | undefined {
@@ -213,7 +213,6 @@ export function useCalendarWithEvents (props: CalendarWithEventsProps, slots: an
       : e.color || props.eventColor
   }
 
-  // Reference to track DOM elements
   const eventsRef = ref<HTMLElement[]>([])
 
   function updateEventVisibility () {
@@ -250,10 +249,10 @@ export function useCalendarWithEvents (props: CalendarWithEventsProps, slots: an
         }
       }
 
+      // TODO: avoid direct DOM manipulation
       if (hidden) {
         more.style.display = ''
-        // Assuming $vuetify is available in the context - this may need to be modified
-        more.innerHTML = `${hidden} more` // This would need proper i18n support
+        more.innerHTML = base.locale.t(props.eventMoreText, hidden)
       } else {
         more.style.display = 'none'
       }
@@ -427,9 +426,8 @@ export function useCalendarWithEvents (props: CalendarWithEventsProps, slots: an
         { ...base.getColorProps({ text, background }) }
         { ...events }
         { ...data }
-        ref={ el => {
-          if (el) eventsRef.value.push(el as HTMLElement)
-        }}
+        ref_for
+        ref={ eventsRef }
         v-ripple={ props.eventRipple ?? true }
       >
         { slot?.(scope) ?? genName(eventSummary) }
@@ -451,9 +449,8 @@ export function useCalendarWithEvents (props: CalendarWithEventsProps, slots: an
       <div
         style={{ height: `${height}px` }}
         data-date={ day.date }
-        ref={ el => {
-          if (el) eventsRef.value.push(el as HTMLElement)
-        }}
+        ref_for
+        ref={ eventsRef }
       />
     )
   }
@@ -473,9 +470,8 @@ export function useCalendarWithEvents (props: CalendarWithEventsProps, slots: an
           height: `${eventHeight}px`,
           marginBottom: `${eventMarginBottom}px`,
         }}
-        ref={ el => {
-          if (el) eventsRef.value.push(el as HTMLElement)
-        }}
+        ref_for
+        ref={ eventsRef }
         v-ripple={ props.eventRipple ?? true }
         { ...events }
       />

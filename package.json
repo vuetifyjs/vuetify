@@ -9,35 +9,38 @@
   "scripts": {
     "dev": "node scripts/dev.js",
     "build": "node scripts/build.js",
-    "lint": "lerna run lint --parallel --stream",
-    "lint:fix": "lerna run lint:fix --parallel",
+    "lint": "pnpm run -r --parallel --stream lint",
+    "lint:fix": "pnpm run -r --parallel lint:fix",
     "version": "node scripts/confirm-npm-tag.js",
     "prepare": "husky; node scripts/post-install.js",
     "postversion": "node scripts/post-release-merge.js",
-    "clean": "lerna clean",
+    "clean": "pnpm -r exec rm -r node_modules && rm -r node_modules",
     "changelog": "conventional-changelog -u -p vuetify",
-    "all-checks": "pnpm run lint && lerna run test && lerna run cy:run && pnpm run build",
+    "all-checks": "pnpm run lint && pnpm run -r test && pnpm run -r cy:run && pnpm run -r --stream build",
     "vue-ecosystem-ci:build": "pnpm --filter vuetify run build",
     "vue-ecosystem-ci:test": "pnpm --filter vuetify run lint && pnpm --filter vuetify run test"
   },
   "engines": {
-    "node": ">=22.0.0"
+    "node": ">=24.8.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.27.0",
     "@babel/core": "^7.27.4",
     "@babel/preset-env": "^7.27.2",
     "@babel/preset-typescript": "^7.27.0",
+    "@lerna-lite/cli": "^4.7.3",
+    "@lerna-lite/version": "^4.7.3",
     "@mdi/font": "7.4.47",
     "@mdi/js": "7.4.47",
     "@mdi/svg": "7.4.47",
     "@octokit/core": "^6.1.5",
     "@stylistic/eslint-plugin-ts": "^3.1.0",
     "@types/lodash-es": "^4.17.12",
-    "@types/node": "22.15.31",
+    "@types/node": "24.4.0",
     "@types/yargs": "^17.0.33",
     "@typescript-eslint/eslint-plugin": "^8.32.0",
     "@typescript-eslint/parser": "^8.32.0",
+    "@typescript/native-preview": "7.0.0-dev.20250912.1",
     "@unhead/vue": "^2.0.5",
     "@vitejs/plugin-vue": "^5.2.1",
     "@vue/compiler-sfc": "^3.5.13",
@@ -64,7 +67,6 @@
     "glob": "^11.0.1",
     "husky": "^9.1.7",
     "inquirer": "^12.6.0",
-    "lerna": "^8.2.2",
     "lodash-es": "^4.17.21",
     "magic-string": "^0.30.17",
     "mkdirp": "^3.0.1",
@@ -88,7 +90,8 @@
     "vue": "^3.5.13",
     "vue-eslint-parser": "^10.1.3",
     "vue-tsc": "^2.2.10",
+    "vuetify": "workspace:*",
     "yargs": "^17.7.2"
   },
-  "packageManager": "pnpm@10.15.1"
+  "packageManager": "pnpm@10.16.1"
 }

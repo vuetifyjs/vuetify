@@ -18,6 +18,14 @@ Latest news, updates, and stories about Vuetify.
 
 <br>
 
+## August 2025 Update
+
+🖊️ John Leider • 📅 September 9th, 2025
+
+August marks a pivotal moment in Vuetify's evolution as we prepare to release the pre-alpha of Vuetify0 (v0), launch our redesigned issues page, and continue delivering powerful components and improvements. This month brings exciting developments including the "Mastering Vuetify Theming" webinar recap, VEditor final testing phase, free premium themes for personal use, and significant framework updates with 87 merged pull requests... { .text-medium-emphasis }
+
+[Read More](/blog/august-2025-update/) { .text-end }
+
 ## July 2025 Update
 
 🖊️ John Leider • 📅 August 6th, 2025

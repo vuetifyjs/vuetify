@@ -65,12 +65,12 @@
   },
   "events": {
     "[`${string}:date`]": "Any event on the day of the month link. The second argument is the day & time object.",
-    "[`${string}:day-category`]": "Any event on a day in the `category` view. The second argument is the day object.",
+    "[`${string}:dayCategory`]": "Any event on a day in the `category` view. The second argument is the day object.",
     "[`${string}:day`]": "Any event on a day. The second argument is the day object.",
     "[`${string}:event`]": "Any event on a specific event. The second argument is the day & time object.",
     "[`${string}:interval`]": "Any event at a specific interval label in the `day` view. The second argument is the day & time object.",
     "[`${string}:more`]": "Any event on the `X more` button on views with too many events in a day. The second argument is the day & time object.",
-    "[`${string}:time-category`]": "Any event at a specific time in the `category` view. The second argument is the day & time object.",
+    "[`${string}:timeCategory`]": "Any event at a specific time in the `category` view. The second argument is the day & time object.",
     "[`${string}:time`]": "Any event at a specific time in the `day` view. The second argument is the day & time object.",
     "change": "The range of days displayed on the calendar changed. This is triggered on initialization. The event passed is an object with start and end date objects.",
     "moved": "One of the functions `next`, `prev`, and `move` was called. The event passed is the day object calculated for the movement."

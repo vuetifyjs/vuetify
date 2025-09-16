@@ -2,9 +2,9 @@
   <div class="d-flex justify-center">
     <v-video
       class="align-self-center"
-      image="https://jsek.work/vt-sunflowers.jpg"
+      image="https://jsek.work/cdn/vt-sunflowers.jpg"
       max-width="450"
-      src="https://jsek.work/vt-sunflowers.mp4"
+      src="https://jsek.work/cdn/vt-sunflowers.mp4"
       eager
       muted
     >
@@ -12,7 +12,7 @@
         <div class="d-flex pa-2 pointer-pass-through">
           <v-list-item
             class="py-2 pl-3 pr-8 video-header-element"
-            prepend-avatar="https://jsek.work/vt-sunflowers.jpg"
+            prepend-avatar="https://jsek.work/cdn/vt-sunflowers.jpg"
             rounded="pill"
             subtitle="Example video"
             title="Sunflowers"

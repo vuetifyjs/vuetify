@@ -5,10 +5,10 @@
     class="mx-auto"
     controls-variant="tube"
     density="comfortable"
-    image="https://jsek.work/vt-video-poster.jpg"
+    image="https://jsek.work/cdn/vt-video-poster.jpg"
     max-width="450"
     rounded="lg"
-    src="https://jsek.work/vt-video.mp4"
+    src="https://jsek.work/cdn/vt-video.mp4"
     track-color="red"
     eager
   >
