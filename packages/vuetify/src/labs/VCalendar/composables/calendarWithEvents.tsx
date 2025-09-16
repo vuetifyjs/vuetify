@@ -426,9 +426,8 @@ export function useCalendarWithEvents (props: CalendarWithEventsProps, slots: an
         { ...base.getColorProps({ text, background }) }
         { ...events }
         { ...data }
-        ref={ el => {
-          if (el) eventsRef.value.push(el as HTMLElement)
-        }}
+        ref_for
+        ref={ eventsRef }
         v-ripple={ props.eventRipple ?? true }
       >
         { slot?.(scope) ?? genName(eventSummary) }
@@ -450,9 +449,8 @@ export function useCalendarWithEvents (props: CalendarWithEventsProps, slots: an
       <div
         style={{ height: `${height}px` }}
         data-date={ day.date }
-        ref={ el => {
-          if (el) eventsRef.value.push(el as HTMLElement)
-        }}
+        ref_for
+        ref={ eventsRef }
       />
     )
   }
@@ -472,9 +470,8 @@ export function useCalendarWithEvents (props: CalendarWithEventsProps, slots: an
           height: `${eventHeight}px`,
           marginBottom: `${eventMarginBottom}px`,
         }}
-        ref={ el => {
-          if (el) eventsRef.value.push(el as HTMLElement)
-        }}
+        ref_for
+        ref={ eventsRef }
         v-ripple={ props.eventRipple ?? true }
         { ...events }
       />
