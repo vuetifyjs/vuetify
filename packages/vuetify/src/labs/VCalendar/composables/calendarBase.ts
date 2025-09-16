@@ -82,6 +82,17 @@ export function useCalendarBase (props: CalendarBaseProps) {
     return parseTimestamp(props.start, true)
   })
 
+  const parsedEnd = computed((): CalendarTimestamp => {
+    const start = parsedStart.value
+    const end: CalendarTimestamp = props.end ? parseTimestamp(props.end) || start : start
+    const value = getTimestampIdentifier(end) < getTimestampIdentifier(start) ? start : end
+
+    if (props.type === 'month') {
+      return getEndOfMonth(value)
+    }
+    return value
+  })
+
   const parsedValue = computed((): CalendarTimestamp => {
     return (validateTimestamp(props.modelValue)
       ? parseTimestamp(props.modelValue, true)
@@ -113,17 +124,6 @@ export function useCalendarBase (props: CalendarBaseProps) {
 
   const weekdaySkips = computed((): number[] => {
     return getWeekdaySkips(parsedWeekdays.value)
-  })
-
-  const parsedEnd = computed((): CalendarTimestamp => {
-    const start = parsedStart.value
-    const end: CalendarTimestamp = props.end ? parseTimestamp(props.end) || start : start
-    const value = getTimestampIdentifier(end) < getTimestampIdentifier(start) ? start : end
-
-    if (props.type === 'month') {
-      return getEndOfMonth(value)
-    }
-    return value
   })
 
   const days = computed((): CalendarTimestamp[] => {
