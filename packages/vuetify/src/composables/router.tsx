@@ -6,7 +6,6 @@ import {
   resolveDynamicComponent,
   toRef,
 } from 'vue'
-import { isNavigationFailure } from 'vue-router'
 import { deepEqual, getCurrentInstance, hasEvent, IN_BROWSER, propsFactory } from '@/util'
 
 // Types
@@ -14,6 +13,7 @@ import type { PropType, Ref, SetupContext } from 'vue'
 import type {
   RouterLink as _RouterLink,
   useLink as _useLink,
+  NavigationFailure,
   NavigationGuardNext,
   RouteLocationNormalizedLoaded,
   RouteLocationRaw,
@@ -49,6 +49,12 @@ export interface UseLink extends Omit<Partial<ReturnType<typeof _useLink>>, 'hre
   href: Ref<string | undefined>
   linkProps: Record<string, string | undefined>
   navigateWithCheck?: (e: MouseEvent | undefined) => Promise<boolean>
+}
+
+function isNavigationFailure (result: void | NavigationFailure) {
+  return result instanceof Error &&
+    result.hasOwnProperty('type') &&
+    !!result.type
 }
 
 export function useLink (props: LinkProps & LinkListeners, attrs: SetupContext['attrs']): UseLink {
@@ -114,6 +120,7 @@ export const makeRouterProps = propsFactory({
 }, 'router')
 
 let inTransition = false
+
 export function useBackButton (router: Router | undefined, cb: (next: NavigationGuardNext) => void) {
   let popped = false
   let removeBefore: (() => void) | undefined
