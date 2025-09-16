@@ -88,12 +88,12 @@ interface CalendarDayCategorySlotScope extends CalendarDayBodySlotScope {
 export const VCalendar = genericComponent<new (
   props: {
     [key: `on${Capitalize<string>}:date`]: EventProp<[Event, CalendarTimestamp]>
-    [key: `on${Capitalize<string>}:day-category`]: EventProp<[Event, CalendarDayCategorySlotScope]>
+    [key: `on${Capitalize<string>}:dayCategory`]: EventProp<[Event, CalendarDayCategorySlotScope]>
     [key: `on${Capitalize<string>}:day`]: EventProp<[Event, CalendarDayBodySlotScope]>
     [key: `on${Capitalize<string>}:event`]: EventProp<[Event, EventSlotScope]>
     [key: `on${Capitalize<string>}:interval`]: EventProp<[Event, CalendarTimestamp]>
     [key: `on${Capitalize<string>}:more`]: EventProp<[Event, CalendarDaySlotScope]>
-    [key: `on${Capitalize<string>}:time-category`]: EventProp<[Event, CalendarDayCategorySlotScope]>
+    [key: `on${Capitalize<string>}:timeCategory`]: EventProp<[Event, CalendarDayCategorySlotScope]>
     [key: `on${Capitalize<string>}:time`]: EventProp<[Event, CalendarDayBodySlotScope]>
   },
   slots: {
