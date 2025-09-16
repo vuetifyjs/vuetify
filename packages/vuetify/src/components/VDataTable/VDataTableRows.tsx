@@ -123,7 +123,7 @@ export const VDataTableRows = genericComponent<new <T>(
                 <VDataTableGroupHeaderRow
                   key={ `group-header_${item.id}` }
                   item={ item }
-                  { ...getPrefixedEventHandlers(attrs, ':group-header', () => slotProps) }
+                  { ...getPrefixedEventHandlers(attrs, ':groupHeader', () => slotProps) }
                   { ...groupHeaderRowProps }
                   v-slots={ slots }
                 />

@@ -223,7 +223,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
         activate(!isActivated.value, e)
       } else if (root.selectable.value) {
         select(!isSelected.value, e)
-      } else if (props.value != null) {
+      } else if (props.value != null && !isLink.value) {
         select(!isSelected.value, e)
       }
     }
