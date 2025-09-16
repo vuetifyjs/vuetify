@@ -213,7 +213,6 @@ export function useCalendarWithEvents (props: CalendarWithEventsProps, slots: an
       : e.color || props.eventColor
   }
 
-  // Reference to track DOM elements
   const eventsRef = ref<HTMLElement[]>([])
 
   function updateEventVisibility () {
@@ -250,10 +249,10 @@ export function useCalendarWithEvents (props: CalendarWithEventsProps, slots: an
         }
       }
 
+      // TODO: avoid direct DOM manipulation
       if (hidden) {
         more.style.display = ''
-        // Assuming $vuetify is available in the context - this may need to be modified
-        more.innerHTML = `${hidden} more` // This would need proper i18n support
+        more.innerHTML = base.locale.t(props.eventMoreText, hidden)
       } else {
         more.style.display = 'none'
       }
