@@ -104,6 +104,7 @@ export interface ThemeInstance {
   toggle: (themeArray?: [string, string]) => void
 
   readonly isDisabled: boolean
+  readonly isSystem: Readonly<Ref<boolean>>
   readonly themes: Ref<Record<string, InternalThemeDefinition>>
 
   readonly name: Readonly<Ref<string>>
@@ -379,6 +380,8 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
 
   const current = toRef(() => computedThemes.value[name.value])
 
+  const isSystem = toRef(() => _name.value === 'system')
+
   const styles = computed(() => {
     const lines: string[] = []
     const important = parsedOptions.unimportant ? '' : ' !important'
@@ -492,7 +495,7 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
   }
 
   function change (themeName: string) {
-    if (!themeNames.value.includes(themeName)) {
+    if (themeName !== 'system' && !themeNames.value.includes(themeName)) {
       consoleWarn(`Theme "${themeName}" not found on the Vuetify theme instance`)
       return
     }
@@ -529,6 +532,7 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
     cycle,
     toggle,
     isDisabled: parsedOptions.isDisabled,
+    isSystem,
     name,
     themes,
     current,

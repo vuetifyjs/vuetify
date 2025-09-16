@@ -45,7 +45,7 @@
 
     &:not(:has(.v-alert-title))
       .v-alert__content
-        padding-top: calc(($alert-title-line-height - settings.$line-height-root * 1rem) / 2)
+        padding-block: calc((#{$alert-prepend-icon-size} - #{settings.$line-height-root} * 1rem) / 2)
 
   .v-alert__border
     border-radius: inherit
@@ -75,7 +75,9 @@
   .v-alert__close
     flex: 0 1 auto
     grid-area: close
-    margin-block: -2px
+
+    > .v-btn
+      margin-block: calc(-1 * (var(--v-btn-height) + 12px - #{$alert-prepend-icon-size}) / 2)
 
   .v-alert__content
     align-self: center
@@ -99,7 +101,12 @@
     align-items: center
     grid-area: prepend
     margin-inline-end: $alert-prepend-margin-inline-end
-    min-height: $alert-title-line-height
+    min-height: $alert-prepend-icon-size
+
+    > .v-icon
+      font-size: $alert-prepend-icon-size
+      height: $alert-prepend-icon-size
+      width: $alert-prepend-icon-size
 
     .v-alert--prominent &
       align-self: center
@@ -137,3 +144,16 @@
     text-transform: $alert-title-text-transform
     word-break: $alert-title-word-break
     word-wrap: $alert-title-word-wrap
+
+@media (forced-colors: active)
+  .v-alert
+    &:not(&--variant-text, &--variant-plain)
+      border-style: solid
+
+    &--variant-outlined,
+    &--variant-tonal
+      border-width: medium
+
+    &--variant-elevated,
+    &--variant-flat
+      border-width: thick

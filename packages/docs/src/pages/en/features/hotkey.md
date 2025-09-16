@@ -10,7 +10,7 @@ related:
   - /features/accessibility/
   - /features/global-configuration/
 features:
-  github: /composables/hotkey.ts
+  github: /composables/hotkey
   label: 'E: hotkey'
   report: true
 ---
@@ -56,8 +56,6 @@ The **hotkey** composable takes a key combination string and a callback function
 | Composable | Description |
 | - | - |
 | [useHotkey](/api/use-hotkey/) | The useHotkey composable |
-
-<ApiInline hide-links />
 
 ## Guide
 

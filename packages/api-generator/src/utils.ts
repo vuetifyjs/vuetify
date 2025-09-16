@@ -2,7 +2,7 @@ import { execSync } from 'node:child_process'
 import stringifyObject from 'stringify-object'
 import prettier from 'prettier'
 import * as typescriptParser from 'prettier/plugins/typescript'
-import type { Definition, DirectiveData } from './types'
+import type { Definition, DirectiveData } from './types.ts'
 
 function parseFunctionParams (func: string) {
   const [, regular] = /function\s\((.*)\)\s\{.*/i.exec(func) || []
@@ -241,7 +241,7 @@ export function sortByKey (data: Record<string, any>) {
 export function stripLinks (str: string): [string, Record<string, string>] {
   let out = str.slice()
   const obj: Record<string, string> = {}
-  const regexp = /<a.*?>(.*?)<\/a>/g
+  const regexp = /<a .+?>(.+?)<\/a>/g
 
   let matches = regexp.exec(str)
 

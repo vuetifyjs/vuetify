@@ -81,7 +81,6 @@ export const VListGroup = genericComponent<VListGroupSlots>()({
     const toggleIcon = computed(() => isOpen.value ? props.collapseIcon : props.expandIcon)
     const activatorDefaults = computed(() => ({
       VListItem: {
-        active: isOpen.value,
         activeColor: props.activeColor,
         baseColor: props.baseColor,
         color: props.color,

@@ -38,6 +38,12 @@ export interface InternalItem<T = any> {
   type?: string
 }
 
+type FilterResult = {
+  index: number
+  matches: Record<string, FilterMatchArrayMultiple | undefined>
+  type?: 'divider' | 'subheader'
+}
+
 // Composables
 export const defaultFilter: FilterFunction = (value, query, item) => {
   if (value == null || query == null) return -1
@@ -75,6 +81,7 @@ export const makeFilterProps = propsFactory({
   noFilter: Boolean,
 }, 'filter')
 
+// eslint-disable-next-line complexity
 export function filterItems (
   items: readonly (readonly [item: InternalItem, transformed: {}])[] | readonly InternalItem[],
   query: string,
@@ -86,13 +93,15 @@ export function filterItems (
     noFilter?: boolean
   },
 ) {
-  const array: { index: number, matches: Record<string, FilterMatchArrayMultiple | undefined> }[] = []
+  const array: FilterResult[] = []
   // always ensure we fall back to a functioning filter
   const filter = options?.default ?? defaultFilter
   const keys = options?.filterKeys ? wrapInArray(options.filterKeys) : false
   const customFiltersLength = Object.keys(options?.customKeyFilter ?? {}).length
 
   if (!items?.length) return array
+
+  let lookAheadItem: FilterResult | null = null
 
   loop:
   for (let i = 0; i < items.length; i++) {
@@ -102,12 +111,20 @@ export function filterItems (
     let match: FilterMatch = -1
 
     if ((query || customFiltersLength > 0) && !options?.noFilter) {
+      let hasOnlyCustomFilters = false
+
       if (typeof item === 'object') {
         if (item.type === 'divider' || item.type === 'subheader') {
+          if (lookAheadItem?.type === 'divider' && item.type === 'subheader') {
+            array.push(lookAheadItem) // divider before subheader
+          }
+
+          lookAheadItem = { index: i, matches: { }, type: item.type }
           continue
         }
 
         const filterKeys = keys || Object.keys(transformed)
+        hasOnlyCustomFilters = filterKeys.length === customFiltersLength
 
         for (const key of filterKeys) {
           const value = getPropertyFromItem(transformed, key)
@@ -146,9 +163,14 @@ export function filterItems (
         options?.filterMode === 'intersection' &&
         (
           customMatchesLength !== customFiltersLength ||
-          !defaultMatchesLength
+          (!defaultMatchesLength && customFiltersLength > 0 && !hasOnlyCustomFilters)
         )
       ) continue
+    }
+
+    if (lookAheadItem) {
+      array.push(lookAheadItem)
+      lookAheadItem = null
     }
 
     array.push({ index: i, matches: { ...defaultMatches, ...customMatches } })

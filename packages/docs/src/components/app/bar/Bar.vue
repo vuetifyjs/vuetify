@@ -20,6 +20,8 @@
 
     <template #append>
       <div v-if="mdAndUp" class="d-flex ga-1">
+        <AppBarBlogLink />
+
         <AppBarLearnMenu />
 
         <AppBarSupportMenu />
@@ -31,7 +33,7 @@
         <AppBarSponsorLink />
       </div>
 
-      <AppVerticalDivider v-if="smAndUp" />
+      <AppVerticalDivider v-if="mdAndUp" />
 
       <div class="d-flex ga-1">
         <AppBarStoreLink v-if="smAndUp" />

@@ -4,6 +4,13 @@
       <component :is="Component" />
     </v-fade-transition>
   </router-view>
+
+  <PromotedScript
+    id="bitterbrainsads-script"
+    script-id="_bitterbrainsads_js"
+    src="//media.bitterbrains.com/main.js?from=VUETIFY&type=top"
+    async
+  />
 </template>
 
 <script setup lang="ts">
@@ -179,6 +186,8 @@
   ul:not([class]),
   ol:not([class])
     padding-left: 20px
+
+  ul:not([class]):not(li > ul)
     margin-bottom: 16px
 
   // Theme transition

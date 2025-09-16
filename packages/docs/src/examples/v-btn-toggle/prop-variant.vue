@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex align-center flex-column bg-grey-lighten-4 pa-6">
+  <div class="d-flex align-center flex-column pa-6">
     <div class="text-subtitle-2">Default</div>
     <v-btn-toggle
       v-model="toggle"

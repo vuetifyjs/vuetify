@@ -15,6 +15,9 @@
     transition-property: height, width, transform, max-width, left, right, top, bottom, box-shadow
     width: 100%
 
+    @media (prefers-reduced-motion: reduce)
+      transition-property: box-shadow
+
     @include tools.border($toolbar-border...)
     @include tools.elevation($toolbar-elevation)
     @include tools.rounded($toolbar-border-radius)

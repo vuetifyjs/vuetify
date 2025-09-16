@@ -296,6 +296,26 @@ describe('VNumberInput', () => {
       input.blur()
       expect(model.value).toBe(expected)
     })
+
+    // https://github.com/vuetifyjs/vuetify/issues/21828
+    it('should only trim values from the end', async () => {
+      const model = ref(0.01)
+      render(() => (
+        <VNumberInput
+          v-model={ model.value }
+          minFractionDigits={ 0 }
+          precision={ 4 }
+        />
+      ))
+
+      await userEvent.click(screen.getByCSS('input'))
+      expect(screen.getByCSS('input')).toHaveValue('0.01')
+
+      await userEvent.keyboard('{backspace}2')
+      await userEvent.tab()
+      expect(screen.getByCSS('input')).toHaveValue('0.02')
+      expect(model.value).toBe(0.02)
+    })
   })
 
   describe('fraction digits control', () => {

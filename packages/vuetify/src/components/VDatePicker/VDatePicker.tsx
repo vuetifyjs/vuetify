@@ -220,6 +220,14 @@ export const VDatePicker = genericComponent<new <
       return targets
     })
 
+    const allowedYears = computed(() => {
+      return props.allowedYears || isYearAllowed
+    })
+
+    const allowedMonths = computed(() => {
+      return props.allowedMonths || isMonthAllowed
+    })
+
     function isAllowedInRange (start: unknown, end: unknown) {
       const allowedDates = props.allowedDates
       if (typeof allowedDates !== 'function') return true
@@ -230,7 +238,7 @@ export const VDatePicker = genericComponent<new <
       return false
     }
 
-    function allowedYears (year: number) {
+    function isYearAllowed (year: number) {
       if (typeof props.allowedDates === 'function') {
         const startOfYear = adapter.parseISO(`${year}-01-01`)
         return isAllowedInRange(startOfYear, adapter.endOfYear(startOfYear))
@@ -246,7 +254,7 @@ export const VDatePicker = genericComponent<new <
       return true
     }
 
-    function allowedMonths (month: number) {
+    function isMonthAllowed (month: number) {
       if (typeof props.allowedDates === 'function') {
         const monthTwoDigits = String(month + 1).padStart(2, '0')
         const startOfMonth = adapter.parseISO(`${year.value}-${monthTwoDigits}-01`)
@@ -411,7 +419,7 @@ export const VDatePicker = genericComponent<new <
                       min={ minDate.value }
                       max={ maxDate.value }
                       year={ year.value }
-                      allowedMonths={ allowedMonths }
+                      allowedMonths={ allowedMonths.value }
                       onUpdate:modelValue={ onUpdateMonth }
                     >
                       {{ month: slots.month }}
@@ -423,7 +431,7 @@ export const VDatePicker = genericComponent<new <
                       v-model={ year.value }
                       min={ minDate.value }
                       max={ maxDate.value }
-                      allowedYears={ allowedYears }
+                      allowedYears={ allowedYears.value }
                       onUpdate:modelValue={ onUpdateYear }
                     >
                       {{ year: slots.year }}

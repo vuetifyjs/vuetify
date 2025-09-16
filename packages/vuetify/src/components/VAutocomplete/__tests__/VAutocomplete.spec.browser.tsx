@@ -173,8 +173,8 @@ describe('VAutocomplete', () => {
         items={ items.value }
         multiple
         returnObject
-        item-title="text"
-        item-value="id"
+        itemTitle="text"
+        itemValue="id"
       />
     ))
 
@@ -185,14 +185,14 @@ describe('VAutocomplete', () => {
     const activeItems = await findAllByRole(menu, 'option', { selected: true })
     expect(activeItems).toHaveLength(2)
 
-    const input = await screen.findByRole('combobox')
-    expect(input).toHaveTextContent('Item 1')
-    expect(input).toHaveTextContent('Item 2')
+    const inputField = await screen.findByCSS('.v-field')
+    expect(inputField).toHaveTextContent('Item 1')
+    expect(inputField).toHaveTextContent('Item 2')
 
     await userEvent.click(activeItems[0])
 
-    expect(input).not.toHaveTextContent('Item 1')
-    expect(input).toHaveTextContent('Item 2')
+    expect(inputField).not.toHaveTextContent('Item 1')
+    expect(inputField).toHaveTextContent('Item 2')
     expect(selectedItems.value).toEqual([{
       text: 'Item 2',
       id: 'item2',
@@ -231,8 +231,8 @@ describe('VAutocomplete', () => {
         v-model={ selectedItems.value }
         items={ items.value }
         multiple
-        item-title="text"
-        item-value="text"
+        itemTitle="text"
+        itemValue="text"
       />
     ))
 
@@ -325,7 +325,7 @@ describe('VAutocomplete', () => {
     await userEvent.click(options[0])
 
     await userEvent.click(element)
-    await userEvent.keyboard('{Control>}a{/Ctrl}{Backspace}')
+    await userEvent.keyboard('{Ctrl>}a{/Ctrl}{Backspace}')
     await userEvent.click(document.body)
 
     expect(element).not.toHaveTextContent('Item 1')
@@ -348,8 +348,8 @@ describe('VAutocomplete', () => {
       <VAutocomplete
         items={ items }
         v-model={ selectedItems.value }
-        item-title={ itemTitle }
-        item-value="id"
+        itemTitle={ itemTitle }
+        itemValue="id"
       />
     ))
 
@@ -494,14 +494,14 @@ describe('VAutocomplete', () => {
 
   it('should not open menu when closing a chip', async () => {
     const { element } = render(() => (
-        <VAutocomplete
-          chips
-          closable-chips
-          items={['foo', 'bar']}
-          label="Autocomplete"
-          modelValue={['foo', 'bar']}
-          multiple
-        />
+      <VAutocomplete
+        chips
+        closableChips
+        items={['foo', 'bar']}
+        label="Autocomplete"
+        modelValue={['foo', 'bar']}
+        multiple
+      />
     ))
 
     expect(screen.queryByRole('listbox')).toBeNull()
@@ -577,7 +577,7 @@ describe('VAutocomplete', () => {
       <VAutocomplete
         v-model={ selectedItem.value }
         chips
-        closable-chips
+        closableChips
         items={['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']}
       />
     ))
@@ -593,7 +593,7 @@ describe('VAutocomplete', () => {
       <VAutocomplete
         v-model={ selectedItem.value }
         chips
-        closable-chips
+        closableChips
         multiple
         items={['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']}
       />

@@ -18,6 +18,22 @@ Latest news, updates, and stories about Vuetify.
 
 <br>
 
+## August 2025 Update
+
+🖊️ John Leider • 📅 September 9th, 2025
+
+August marks a pivotal moment in Vuetify's evolution as we prepare to release the pre-alpha of Vuetify0 (v0), launch our redesigned issues page, and continue delivering powerful components and improvements. This month brings exciting developments including the "Mastering Vuetify Theming" webinar recap, VEditor final testing phase, free premium themes for personal use, and significant framework updates with 87 merged pull requests... { .text-medium-emphasis }
+
+[Read More](/blog/august-2025-update/) { .text-end }
+
+## July 2025 Update
+
+🖊️ John Leider • 📅 August 6th, 2025
+
+July was a month of significant advancements in the Vuetify ecosystem, highlighted by the release of v3.9.0 (Zealot) and the promotion of VTreeview and VTimePicker from labs to core components. This update also includes a focus on component stability, bug fixes, and developer experience improvements, with subsequent patches up to v3.9.3... { .text-medium-emphasis }
+
+[Read More](/blog/july-2025-update/) { .text-end }
+
 ## June 2025 Update
 
 🖊️ John Leider • 📅 July 7th, 2025

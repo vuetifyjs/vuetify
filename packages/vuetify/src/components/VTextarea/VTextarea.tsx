@@ -9,6 +9,7 @@ import { makeVFieldProps } from '@/components/VField/VField'
 import { makeVInputProps, VInput } from '@/components/VInput/VInput'
 
 // Composables
+import { makeAutocompleteProps, useAutocomplete } from '@/composables/autocomplete'
 import { useAutofocus } from '@/composables/autofocus'
 import { useFocus } from '@/composables/focus'
 import { forwardRefs } from '@/composables/forwardRefs'
@@ -49,6 +50,7 @@ export const makeVTextareaProps = propsFactory({
   suffix: String,
   modelModifiers: Object as PropType<Record<string, boolean>>,
 
+  ...makeAutocompleteProps(),
   ...makeVInputProps(),
   ...makeVFieldProps(),
 }, 'VTextarea')
@@ -99,6 +101,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
     const vFieldRef = ref<VInput>()
     const controlHeight = shallowRef('')
     const textareaRef = ref<HTMLInputElement>()
+    const autocomplete = useAutocomplete(props)
     const isActive = computed(() => (
       props.persistentPlaceholder ||
       isFocused.value ||
@@ -106,6 +109,10 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
     ))
 
     function onFocus () {
+      if (autocomplete.isSuppressing.value) {
+        autocomplete.update()
+      }
+
       if (textareaRef.value !== document.activeElement) {
         textareaRef.value?.focus()
       }
@@ -203,7 +210,10 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
       const hasDetails = !!(hasCounter || slots.details)
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
       const { modelValue: _, ...inputProps } = VInput.filterProps(props)
-      const fieldProps = VField.filterProps(props)
+      const fieldProps = {
+        ...VField.filterProps(props),
+        'onClick:clear': onClear,
+      }
 
       return (
         <VInput
@@ -236,6 +246,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
               isDirty,
               isReadonly,
               isValid,
+              hasDetails,
             }) => (
               <VField
                 ref={ vFieldRef }
@@ -244,7 +255,6 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
                 }}
                 onClick={ onControlClick }
                 onMousedown={ onControlMousedown }
-                onClick:clear={ onClear }
                 onClick:prependInner={ props['onClick:prependInner'] }
                 onClick:appendInner={ props['onClick:appendInner'] }
                 { ...fieldProps }
@@ -254,6 +264,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
                 dirty={ isDirty.value || props.dirty }
                 disabled={ isDisabled.value }
                 focused={ isFocused.value }
+                details={ hasDetails.value }
                 error={ isValid.value === false }
               >
                 {{
@@ -281,7 +292,8 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
                         disabled={ isDisabled.value }
                         placeholder={ props.placeholder }
                         rows={ props.rows }
-                        name={ props.name }
+                        name={ autocomplete.fieldName.value }
+                        autocomplete={ autocomplete.fieldAutocomplete.value }
                         onFocus={ onFocus }
                         onBlur={ blur }
                         { ...slotProps }
