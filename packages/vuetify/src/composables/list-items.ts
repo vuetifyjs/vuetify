@@ -122,7 +122,8 @@ export function transformItems (
 
 export function useItems (props: ItemProps) {
   const items = computed(() => transformItems(props, props.items))
-  const hasNullItem = computed(() => items.value.some(item => item.value === null))
+  const allValues = computed(() => items.value.map(item => item.value))
+  const hasNullItem = computed(() => allValues.value.includes(null))
 
   const itemsMap = shallowRef<Map<Primitive, ListItem[]>>(new Map())
   const keylessItems = shallowRef<ListItem[]>([])
@@ -204,5 +205,7 @@ export function useItems (props: ItemProps) {
       : value.map(({ value }) => value)
   }
 
-  return { items, transformIn, transformOut }
+  const emptyValues = computed(() => ['', null, undefined].filter(v => !allValues.value.includes(v)))
+
+  return { items, transformIn, transformOut, emptyValues }
 }
