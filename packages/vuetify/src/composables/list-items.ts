@@ -122,18 +122,25 @@ export function transformItems (
 
 export function useItems (props: ItemProps) {
   const items = computed(() => transformItems(props, props.items))
-  const hasNullItem = computed(() => items.value.some(item => item.value === null))
-  const allValues = computed(() => items.value.map(item => item.value))
-  const emptyValues = computed(() => ['', null, undefined].filter(v => !allValues.value.includes(v)))
 
+  const hasNullItem = shallowRef(false)
+  const emptyValues = shallowRef<any[]>([])
   const itemsMap = shallowRef<Map<Primitive, ListItem[]>>(new Map())
   const keylessItems = shallowRef<ListItem[]>([])
   watchEffect(() => {
     const _items = items.value
+    let _hasNullItem = false
+    const _emptyValues = new Set()
     const map = new Map()
     const keyless = []
     for (let i = 0; i < _items.length; i++) {
       const item = _items[i]
+      if (item.value === null) {
+        _hasNullItem = true
+      }
+      if (item.value === '' || item.value == null) {
+        _emptyValues.add(item.value)
+      }
       if (isPrimitive(item.value) || item.value === null) {
         let values = map.get(item.value)
         if (!values) {
@@ -145,6 +152,8 @@ export function useItems (props: ItemProps) {
         keyless.push(item)
       }
     }
+    hasNullItem.value = _hasNullItem
+    emptyValues.value = ['', null, undefined].filter(v => !_emptyValues.has(v))
     itemsMap.value = map
     keylessItems.value = keyless
   })
