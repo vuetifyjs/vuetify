@@ -153,7 +153,7 @@ export const VBtn = genericComponent<VBtnSlots>()({
         : props.value
     })
 
-    async function onClick (e: MouseEvent) {
+    function onClick (e: MouseEvent) {
       if (
         isDisabled.value ||
         (link.isLink.value && (
@@ -165,7 +165,10 @@ export const VBtn = genericComponent<VBtnSlots>()({
         ))
       ) return
 
-      if (await (link.navigateWithCheck?.(e) ?? true)) {
+      if (link.isLink.value) {
+        link.navigate?.(e)
+      } else {
+        // Group active state for links is handled by useSelectLink
         group?.toggle()
       }
     }
