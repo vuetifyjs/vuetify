@@ -162,14 +162,13 @@ export const VChip = genericComponent<VChipSlots>()({
       })
     })
 
-    async function onClick (e: MouseEvent) {
+    function onClick (e: MouseEvent) {
       emit('click', e)
 
       if (!isClickable.value) return
 
-      if (await (link.navigateWithCheck?.(e) ?? true)) {
-        group?.toggle()
-      }
+      link.navigate?.(e)
+      group?.toggle()
     }
 
     function onKeyDown (e: KeyboardEvent) {
