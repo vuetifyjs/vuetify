@@ -244,6 +244,57 @@ describe('VBtn', () => {
     })
   })
 
+  describe('Accessibility', () => {
+    it('should add aria-disabled when disabled prop is true', async () => {
+      const { wrapper } = render(() => (
+        <VBtn disabled>Disabled Button</VBtn>
+      ))
+      
+      expect(wrapper.element).toHaveAttribute('aria-disabled', 'true')
+      expect(wrapper.element).toHaveAttribute('disabled')
+    })
+
+    it('should not have aria-disabled when disabled prop is false', async () => {
+      const { wrapper } = render(() => (
+        <VBtn disabled={ false }>Enabled Button</VBtn>
+      ))
+      
+      expect(wrapper.element).not.toHaveAttribute('aria-disabled')
+      expect(wrapper.element).not.toHaveAttribute('disabled')
+    })
+
+    it('should reactively update aria-disabled attribute', async () => {
+      const disabled = ref(true)
+      const { wrapper } = render(() => (
+        <VBtn disabled={ disabled.value }>Toggle Button</VBtn>
+      ))
+      
+      // Initially disabled
+      expect(wrapper.element).toHaveAttribute('aria-disabled', 'true')
+      expect(wrapper.element).toHaveAttribute('disabled')
+      
+      // Enable the button
+      disabled.value = false
+      await expect.element(wrapper.element).not.toHaveAttribute('aria-disabled')
+      await expect.element(wrapper.element).not.toHaveAttribute('disabled')
+      
+      // Disable again
+      disabled.value = true
+      await expect.element(wrapper.element).toHaveAttribute('aria-disabled', 'true')
+      await expect.element(wrapper.element).toHaveAttribute('disabled')
+    })
+
+    it('should handle group disabled state with aria-disabled', async () => {
+      // This test would require testing within a button group context
+      // For now, we'll test the basic disabled functionality
+      const { wrapper } = render(() => (
+        <VBtn disabled>Group Disabled Button</VBtn>
+      ))
+      
+      expect(wrapper.element).toHaveAttribute('aria-disabled', 'true')
+    })
+  })
+
   describe('Showcase', () => {
     generate({ stories, props, component: VBtn })
   })

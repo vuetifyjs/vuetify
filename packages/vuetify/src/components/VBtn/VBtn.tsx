@@ -222,6 +222,7 @@ export const VBtn = genericComponent<VBtnSlots>()({
             props.style,
           ]}
           aria-busy={ props.loading ? true : undefined }
+          aria-disabled={ isDisabled.value ? true : undefined }
           disabled={ isDisabled.value || undefined }
           tabindex={ props.loading || props.readonly ? -1 : undefined }
           onClick={ onClick }
