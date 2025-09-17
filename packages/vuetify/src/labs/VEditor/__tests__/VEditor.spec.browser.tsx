@@ -313,6 +313,25 @@ describe('VEditor', () => {
       // should remove alignment
       expect(removeAllZeroWidthSpaces(modelValue.value)).toBe('<div><b>Hello</b></div>')
     })
+
+    it('should apply alignment format when editor is empty', async () => {
+      const modelValue = ref('')
+
+      render(() => (
+        <VEditor v-model={ modelValue.value } formats={['align-right']} />
+      ))
+
+      const editor = screen.getByCSS('.v-editor')
+      await userEvent.click(editor)
+
+      await userEvent.click(screen.getByCSS(`button[name="${FormatCategory.Alignment}"]`))
+      await wait(200)
+      await userEvent.click(screen.getByCSS(`button[name="align-right"]`))
+
+      await userEvent.type(editor, 'hello')
+
+      expect(removeAllZeroWidthSpaces(modelValue.value)).toBe('<div style="text-align: right">hello</div>')
+    })
   })
 
   describe('keyboard shortcuts', () => {

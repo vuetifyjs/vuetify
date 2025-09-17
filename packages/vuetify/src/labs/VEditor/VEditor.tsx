@@ -401,6 +401,7 @@ export const VEditor = genericComponent<VEditorSlots>()({
                         >
                           <VToolbar
                             key="toolbar"
+                            class="mb-1"
                             height="auto"
                             color="transparent"
                             density="compact"

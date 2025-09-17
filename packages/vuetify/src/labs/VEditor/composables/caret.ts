@@ -41,6 +41,13 @@ export function useCaret (editorRef: Ref<HTMLDivElement | undefined>) {
     const marker = document.getElementById(markerId)
     if (!marker || !marker.parentNode) return
 
+    // If marker is the only child of it's parent, a text node is needed to place the cursor into
+    if (marker.parentNode.childNodes.length === 1) {
+      insertInto(marker.parentNode)
+      removeMarker()
+      return
+    }
+
     const range = document.createRange()
     const sel = window.getSelection()
     if (!sel) return
