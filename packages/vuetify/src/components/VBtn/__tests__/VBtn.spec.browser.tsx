@@ -249,7 +249,7 @@ describe('VBtn', () => {
       const { wrapper } = render(() => (
         <VBtn disabled>Disabled Button</VBtn>
       ))
-      
+
       expect(wrapper.element).toHaveAttribute('aria-disabled', 'true')
       expect(wrapper.element).toHaveAttribute('disabled')
     })
@@ -258,7 +258,7 @@ describe('VBtn', () => {
       const { wrapper } = render(() => (
         <VBtn disabled={ false }>Enabled Button</VBtn>
       ))
-      
+
       expect(wrapper.element).not.toHaveAttribute('aria-disabled')
       expect(wrapper.element).not.toHaveAttribute('disabled')
     })
@@ -268,16 +268,16 @@ describe('VBtn', () => {
       const { wrapper } = render(() => (
         <VBtn disabled={ disabled.value }>Toggle Button</VBtn>
       ))
-      
+
       // Initially disabled
       expect(wrapper.element).toHaveAttribute('aria-disabled', 'true')
       expect(wrapper.element).toHaveAttribute('disabled')
-      
+
       // Enable the button
       disabled.value = false
       await expect.element(wrapper.element).not.toHaveAttribute('aria-disabled')
       await expect.element(wrapper.element).not.toHaveAttribute('disabled')
-      
+
       // Disable again
       disabled.value = true
       await expect.element(wrapper.element).toHaveAttribute('aria-disabled', 'true')
@@ -289,7 +289,7 @@ describe('VBtn', () => {
       const { wrapper } = render(() => (
         <VBtn disabled>Disabled Button</VBtn>
       ))
-      
+
       expect(wrapper.element).toHaveAttribute('aria-disabled', 'true')
       expect(wrapper.element).toHaveAttribute('disabled')
       expect(wrapper.element).toHaveClass('v-btn--disabled')
@@ -299,7 +299,7 @@ describe('VBtn', () => {
       const { wrapper } = render(() => (
         <VBtn>Default Button</VBtn>
       ))
-      
+
       expect(wrapper.element).not.toHaveAttribute('aria-disabled')
       expect(wrapper.element).not.toHaveAttribute('disabled')
       expect(wrapper.element).not.toHaveClass('v-btn--disabled')
