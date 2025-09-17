@@ -285,13 +285,24 @@ describe('VBtn', () => {
     })
 
     it('should handle group disabled state with aria-disabled', async () => {
-      // This test would require testing within a button group context
-      // For now, we'll test the basic disabled functionality
+      // Test disabled state from isDisabled computed property
       const { wrapper } = render(() => (
-        <VBtn disabled>Group Disabled Button</VBtn>
+        <VBtn disabled>Disabled Button</VBtn>
       ))
       
       expect(wrapper.element).toHaveAttribute('aria-disabled', 'true')
+      expect(wrapper.element).toHaveAttribute('disabled')
+      expect(wrapper.element).toHaveClass('v-btn--disabled')
+    })
+
+    it('should work with default disabled prop', async () => {
+      const { wrapper } = render(() => (
+        <VBtn>Default Button</VBtn>
+      ))
+      
+      expect(wrapper.element).not.toHaveAttribute('aria-disabled')
+      expect(wrapper.element).not.toHaveAttribute('disabled')
+      expect(wrapper.element).not.toHaveClass('v-btn--disabled')
     })
   })
 
