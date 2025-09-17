@@ -381,7 +381,7 @@ export default defineConfig(({ command, mode, isSsrBuild }) => {
     },
 
     ssr: {
-      noExternal: ['vue-i18n', '@vuelidate/core', 'pinia'],
+      noExternal: ['vue-i18n', 'pinia'],
     },
 
     server: {

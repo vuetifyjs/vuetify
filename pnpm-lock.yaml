@@ -266,18 +266,18 @@ importers:
       '@cosmicjs/sdk':
         specifier: ^1.5.2
         version: 1.5.2
+      '@regle/core':
+        specifier: 1.8.4
+        version: 1.8.4(pinia@3.0.2(typescript@5.8.3)(vue@3.5.13(typescript@5.8.3)))(vue@3.5.13(typescript@5.8.3))
+      '@regle/rules':
+        specifier: 1.8.4
+        version: 1.8.4(pinia@3.0.2(typescript@5.8.3)(vue@3.5.13(typescript@5.8.3)))(vue@3.5.13(typescript@5.8.3))
       '@sentry/vue':
         specifier: ^9.12.0
         version: 9.12.0(pinia@3.0.2(typescript@5.8.3)(vue@3.5.13(typescript@5.8.3)))(vue@3.5.13(typescript@5.8.3))
       '@vue/compiler-dom':
         specifier: ^3.5.13
         version: 3.5.13
-      '@vuelidate/core':
-        specifier: ^2.0.3
-        version: 2.0.3(vue@3.5.13(typescript@5.8.3))
-      '@vuelidate/validators':
-        specifier: ^2.0.4
-        version: 2.0.4(vue@3.5.13(typescript@5.8.3))
       '@vuetify/one':
         specifier: ^2.3.0
         version: 2.3.0(@mdi/js@7.4.47(patch_hash=3c2a78b1509745df3a3100e3e59075dd87718e67632cc14dc64dd9ac34098f9f))(@vue/compiler-sfc@3.5.13)(lodash-es@4.17.21)(vite@6.3.5(@types/node@24.4.0)(sass-embedded@1.87.0)(sass@1.87.0)(terser@5.31.3)(yaml@2.8.1))(vue-router@4.5.0(vue@3.5.13(typescript@5.8.3)))(vue@3.5.13(typescript@5.8.3))(vuetify@packages+vuetify)
@@ -2401,6 +2401,18 @@ packages:
     engines: {node: '>=18'}
     hasBin: true
 
+  '@regle/core@1.8.4':
+    resolution: {integrity: sha512-wcGvkQdShARDDtfRsTd4JMrUkdfM2E60xHvvdL0EA5kvmS5gYYz+n64O7VRFR0BsQtNtRD/7n9VYkTgIsrOq7g==}
+    peerDependencies:
+      pinia: '>=2.2.5'
+      vue: '>=3.3.0'
+    peerDependenciesMeta:
+      pinia:
+        optional: true
+
+  '@regle/rules@1.8.4':
+    resolution: {integrity: sha512-YF1EJtm/zEoI2klsitsamvL9a88EchhzdGCpUr78OtM43dDszC3LN3eoFV/PJI37Pc55af/4sJv2Kve/yrSRsg==}
+
   '@rolldown/pluginutils@1.0.0-beta.17':
     resolution: {integrity: sha512-i6p5fc1+lAmR3OHmNlv7/3PIY3EtuUu4kVARjkid38p7cmyIyqr0QFnA+k3xoB06wQUpBA91H1HFlRreZ2v5oA==}
 
@@ -3191,24 +3203,6 @@ packages:
 
   '@vue/typescript-plugin@2.2.8':
     resolution: {integrity: sha512-9fzhFYrzIsPm5Qylv6yBmV1tISqkUhE1PD5uBwkeLCxIwNUjIbnGBdN8HszDa1ZWFWuBsbQpx7FxmV7vQincDw==}
-
-  '@vuelidate/core@2.0.3':
-    resolution: {integrity: sha512-AN6l7KF7+mEfyWG0doT96z+47ljwPpZfi9/JrNMkOGLFv27XVZvKzRLXlmDPQjPl/wOB1GNnHuc54jlCLRNqGA==}
-    peerDependencies:
-      '@vue/composition-api': ^1.0.0-rc.1
-      vue: ^2.0.0 || >=3.0.0
-    peerDependenciesMeta:
-      '@vue/composition-api':
-        optional: true
-
-  '@vuelidate/validators@2.0.4':
-    resolution: {integrity: sha512-odTxtUZ2JpwwiQ10t0QWYJkkYrfd0SyFYhdHH44QQ1jDatlZgTh/KRzrWVmn/ib9Gq7H4hFD4e8ahoo5YlUlDw==}
-    peerDependencies:
-      '@vue/composition-api': ^1.0.0-rc.1
-      vue: ^2.0.0 || >=3.0.0
-    peerDependenciesMeta:
-      '@vue/composition-api':
-        optional: true
 
   '@vuetify/babel-helper-vue-transform-on@1.6.0':
     resolution: {integrity: sha512-/2ocOtcTFoMt3cmHBNH0OE2AhE1Y2OHctQDsyyoHq2zjqUgwLUx/miA2zJyGtGNS5QcATCXfhJJ9dF2k5EGbpA==}
@@ -8357,17 +8351,6 @@ packages:
   vue-component-type-helpers@2.0.11:
     resolution: {integrity: sha512-8aluKz5oVC8PvVQAYgyIefOlqzKVmAOTCx2imbrFBVLbF7mnJvyMsE2A7rqX/4f4uT6ee9o8u3GcoRpUWc0xsw==}
 
-  vue-demi@0.13.11:
-    resolution: {integrity: sha512-IR8HoEEGM65YY3ZJYAjMlKygDQn25D5ajNFNoKh9RSDMQtlzCxtfQjdQgv9jjK+m3377SsJXY8ysq8kLCZL25A==}
-    engines: {node: '>=12'}
-    hasBin: true
-    peerDependencies:
-      '@vue/composition-api': ^1.0.0-rc.1
-      vue: ^3.0.0-0 || ^2.6.0
-    peerDependenciesMeta:
-      '@vue/composition-api':
-        optional: true
-
   vue-eslint-parser@10.1.3:
     resolution: {integrity: sha512-dbCBnd2e02dYWsXoqX5yKUZlOt+ExIpq7hmHKPb5ZqKcjf++Eo0hMseFTZMLKThrUk61m+Uv6A2YSBve6ZvuDQ==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
@@ -10845,6 +10828,19 @@ snapshots:
       - bare-buffer
       - supports-color
 
+  '@regle/core@1.8.4(pinia@3.0.2(typescript@5.8.3)(vue@3.5.13(typescript@5.8.3)))(vue@3.5.13(typescript@5.8.3))':
+    dependencies:
+      vue: 3.5.13(typescript@5.8.3)
+    optionalDependencies:
+      pinia: 3.0.2(typescript@5.8.3)(vue@3.5.13(typescript@5.8.3))
+
+  '@regle/rules@1.8.4(pinia@3.0.2(typescript@5.8.3)(vue@3.5.13(typescript@5.8.3)))(vue@3.5.13(typescript@5.8.3))':
+    dependencies:
+      '@regle/core': 1.8.4(pinia@3.0.2(typescript@5.8.3)(vue@3.5.13(typescript@5.8.3)))(vue@3.5.13(typescript@5.8.3))
+    transitivePeerDependencies:
+      - pinia
+      - vue
+
   '@rolldown/pluginutils@1.0.0-beta.17': {}
 
   '@rollup/plugin-alias@5.1.1(rollup@4.43.0)':
@@ -11772,16 +11768,6 @@ snapshots:
       '@vue/shared': 3.5.13
     transitivePeerDependencies:
       - typescript
-
-  '@vuelidate/core@2.0.3(vue@3.5.13(typescript@5.8.3))':
-    dependencies:
-      vue: 3.5.13(typescript@5.8.3)
-      vue-demi: 0.13.11(vue@3.5.13(typescript@5.8.3))
-
-  '@vuelidate/validators@2.0.4(vue@3.5.13(typescript@5.8.3))':
-    dependencies:
-      vue: 3.5.13(typescript@5.8.3)
-      vue-demi: 0.13.11(vue@3.5.13(typescript@5.8.3))
 
   '@vuetify/babel-helper-vue-transform-on@1.6.0': {}
 
@@ -17644,10 +17630,6 @@ snapshots:
   vscode-uri@3.0.8: {}
 
   vue-component-type-helpers@2.0.11: {}
-
-  vue-demi@0.13.11(vue@3.5.13(typescript@5.8.3)):
-    dependencies:
-      vue: 3.5.13(typescript@5.8.3)
 
   vue-eslint-parser@10.1.3(eslint@8.57.0):
     dependencies:

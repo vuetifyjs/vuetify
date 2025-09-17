@@ -312,7 +312,7 @@ You can display a progress bar instead of the bottom line. You can use the defau
 
 #### Custom validation
 
-While the built in `v-form` or 3rd party plugin such as [vuelidate](https://github.com/monterail/vuelidate) or [vee-validation](https://github.com/logaretm/vee-validate) can help streamline your validation process, you can choose to simply control it yourself.
+While the built in `v-form` or 3rd party plugin such as [Regle](https://github.com/victorgarciaesgi/regle) or [vee-validation](https://github.com/logaretm/vee-validate) can help streamline your validation process, you can choose to simply control it yourself.
 
 <ExamplesExample file="v-text-field/misc-custom-validation" />
 
