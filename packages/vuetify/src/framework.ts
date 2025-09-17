@@ -3,7 +3,7 @@ import { createDate, DateAdapterSymbol, DateOptionsSymbol } from '@/composables/
 import { createDefaults, DefaultsSymbol } from '@/composables/defaults'
 import { createDisplay, DisplaySymbol } from '@/composables/display'
 import { createGoTo, GoToSymbol } from '@/composables/goto'
-import { createIcons, IconSymbol } from '@/composables/icons'
+import { IconSymbol } from '@/composables/icons'
 import { createLocale, LocaleSymbol } from '@/composables/locale'
 import { createTheme, ThemeSymbol } from '@/composables/theme'
 
@@ -13,6 +13,7 @@ import { defineComponent, IN_BROWSER, mergeDeep } from '@/util'
 
 // Types
 import type { App, ComponentPublicInstance, InjectionKey } from 'vue'
+import { createIcons } from './icons'
 import type { DateOptions } from '@/composables/date'
 import type { DefaultsOptions } from '@/composables/defaults'
 import type { DisplayOptions, SSROptions } from '@/composables/display'
