@@ -470,7 +470,7 @@ export const VCombobox = genericComponent<new <
       isPristine.value = !search.value
     }, { immediate: true })
 
-    watch(() => props.items, (newVal, oldVal) => {
+    watch(items, (newVal, oldVal) => {
       if (menu.value) return
 
       if (isFocused.value && !oldVal.length && newVal.length) {
