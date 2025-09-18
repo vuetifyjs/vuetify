@@ -76,11 +76,17 @@ Previously known as **tags** - user is allowed to enter more than one value.
 
 ### Slots
 
-#### No data with chips
+#### No data
 
 In this example we utilize a custom **no-data** slot to provide context to the user when searching / creating items.
 
 <ExamplesExample file="v-combobox/slot-no-data" />
+
+#### Custom chips
+
+When working with custom chip slots, it’s recommended to use `v-bind="props"` to pass event handler `@mousedown.stop`. This helps prevent unintentionally opening the dropdown.
+
+<ExamplesExample file="v-combobox/slot-custom-chip" />
 
 ### Misc
 

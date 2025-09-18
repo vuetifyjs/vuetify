@@ -2,6 +2,7 @@
   "props": {
     "max": "Sets the maximum allowed value.",
     "min": "Sets the minimum allowed value.",
+    "noKeyboard": "**FOR INTERNAL USE ONLY** Ignore keyboard events.",
     "reverse": "Reverses the slider direction.",
     "showTicks": "Show track ticks. If `true` it shows ticks when using slider. If set to `'always'` it always shows ticks.",
     "step": "If greater than 0, sets step interval for ticks.",

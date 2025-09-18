@@ -9,6 +9,7 @@
     "max": "Maximum allowed time.",
     "min": "Minimum allowed time.",
     "hide-header": "Hide the header of the picker.",
+    "period": "Sets period for 12hr format.",
     "readonly": "Puts picker in readonly state.",
     "scrollable": "Allows changing hour/minute with mouse scroll.",
     "useSeconds": "Toggles the use of seconds in picker.",

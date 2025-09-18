@@ -1,6 +1,5 @@
 <template>
   <v-sheet
-    class="overflow-hidden"
     border
     rounded
   >

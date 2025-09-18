@@ -1,0 +1,101 @@
+@use '../../styles/tools'
+@use './variables' as *
+
+@include tools.layer('components')
+  .v-time-picker-controls
+    display: flex
+    align-items: center
+    justify-content: center
+    font-size: .875rem
+    padding-top: 4px
+    padding-bottom: 4px
+    margin-inline: $time-picker-padding
+    margin-bottom: 18px
+
+    &__text
+      padding-bottom: 12px
+
+    &__time
+      display: flex
+      white-space: nowrap
+      direction: ltr
+      justify-content: center
+
+      &__btn.v-btn--density-default.v-btn
+        width: $time-picker-controls-btn-width
+        height: $time-picker-controls-btn-height
+        font-size: $time-picker-controls-btn-font
+
+        &__active
+          background: rgb(var(--v-theme-primary))
+        &.v-time-picker-controls__time--with-ampm__btn
+          width: $time-picker-controls-ampm-btn-width
+          height: $time-picker-controls-ampm-btn-height
+        &.v-time-picker-controls__time--with-seconds__btn
+          // overridden
+          width: $time-picker-controls-seconds-btn-width
+          height: $time-picker-controls-seconds-btn-height
+          font-size: $time-picker-controls-seconds-btn-font
+      &__separator
+        font-size: $time-picker-controls-btn-font
+        height: $time-picker-controls-btn-height
+        width: $time-picker-controls-separator-width
+        text-align: center
+      &__separator.v-time-picker-controls--with-seconds__time__separator
+        height: $time-picker-controls-seconds-btn-height
+        font-size: $time-picker-controls-btn-font
+
+  .v-time-picker-controls__ampm
+    margin-left: 12px
+    align-self: flex-end
+    display: flex
+    flex-direction: column
+    font-size: $time-picker-ampm-title-font-size
+    text-transform: uppercase
+
+    &--readonly
+      pointer-events: none
+
+    &--readonly
+      .v-picker__title__btn.v-picker__title__btn--active
+        opacity: $picker-inactive-btn-opacity
+
+    &__btn.v-btn.v-btn--density-default
+      font-size: $time-picker-ampm-title-font-size
+      padding: 0 8px
+      min-width: 52px
+      height: $time-picker-controls-ampm-height
+      &.v-time-picker-controls__ampm__am
+        border-radius: $time-picker-controls-ampm-am-border-radius
+        border: 1px solid
+      &.v-time-picker-controls__ampm__pm
+        border-radius: $time-picker-controls-ampm-pm-border-radius
+        border: 1px solid
+        border-top: none
+      &__active
+        background: rgb(var(--v-theme-primary))
+
+  .v-picker__title--landscape
+    .v-time-picker-controls
+      flex-direction: column
+      justify-content: center
+      height: 100%
+
+    .v-time-picker-controls__time
+      text-align: right
+
+      .v-picker__title__btn,
+      span
+        height: $time-picker-landscape-title-btn-height
+        font-size: $time-picker-landscape-title-btn-height
+
+    .v-time-picker-controls__ampm
+      margin: $time-picker-landscape-ampm-title-margin
+      align-self: initial
+      text-align: center
+
+  .v-picker--time .v-picker__title--landscape
+    padding: 0
+
+    .v-time-picker-controls__time
+      text-align: center

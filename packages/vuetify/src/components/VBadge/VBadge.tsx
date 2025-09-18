@@ -7,6 +7,7 @@ import { VIcon } from '@/components/VIcon'
 // Composables
 import { useBackgroundColor, useTextColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
+import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { IconValue } from '@/composables/icons'
 import { useLocale } from '@/composables/locale'
 import { makeLocationProps, useLocation } from '@/composables/location'
@@ -50,6 +51,7 @@ export const makeVBadgeProps = propsFactory({
   ...makeTagProps(),
   ...makeThemeProps(),
   ...makeTransitionProps({ transition: 'scale-rotate-transition' }),
+  ...makeDimensionProps(),
 }, 'VBadge')
 
 export const VBadge = genericComponent<VBadgeSlots>()({
@@ -77,6 +79,8 @@ export const VBadge = genericComponent<VBadgeSlots>()({
         : 0
       )
     })
+
+    const { dimensionStyles } = useDimension(props)
 
     useRender(() => {
       const value = Number(props.content)
@@ -123,6 +127,7 @@ export const VBadge = genericComponent<VBadgeSlots>()({
                 style={[
                   backgroundColorStyles.value,
                   textColorStyles.value,
+                  dimensionStyles.value,
                   props.inline ? {} : locationStyles.value,
                 ]}
                 aria-atomic="true"

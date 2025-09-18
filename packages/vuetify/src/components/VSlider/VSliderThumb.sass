@@ -18,8 +18,8 @@
     background: rgba(var(--v-theme-surface-variant), .7)
     color: rgb(var(--v-theme-on-surface-variant))
 
-    &::before
-      color: rgba(var(--v-theme-surface-variant), .7)
+    > .v-slider-thumb__label-wedge
+      background: inherit
 
   // Block
   .v-slider-thumb
@@ -78,10 +78,9 @@
     user-select: none
     transition: $slider-thumb-label-transition
 
-    &::before
-      content: ''
-      width: 0
-      height: 0
+    > .v-slider-thumb__label-wedge
+      width: $slider-thumb-label-wedge-size * 2
+      height: $slider-thumb-label-wedge-size * 2
       position: absolute
 
   .v-slider-thumb__ripple
@@ -111,11 +110,9 @@
       @include tools.rtl()
         transform: translateX(50%)
 
-      &::before
-        border-left: $slider-thumb-label-wedge-size solid transparent
-        border-right: $slider-thumb-label-wedge-size solid transparent
-        border-top: $slider-thumb-label-wedge-size solid currentColor
-        bottom: -$slider-thumb-label-wedge-size
+      > .v-slider-thumb__label-wedge
+        clip-path: polygon(50% 100%, 0 50%, 100% 50%)
+        bottom: calc(#{-$slider-thumb-label-wedge-size} + 0.2px)
 
   // Vertical
   .v-slider.v-input--vertical
@@ -130,11 +127,9 @@
       top: math.div($slider-thumb-label-height, -2)
       left: $slider-thumb-label-offset
 
-      &::before
-        border-right: $slider-thumb-label-wedge-size solid currentColor
-        border-top: $slider-thumb-label-wedge-size solid transparent
-        border-bottom: $slider-thumb-label-wedge-size solid transparent
-        left: -$slider-thumb-label-wedge-size
+      > .v-slider-thumb__label-wedge
+        clip-path: polygon(0 50%, 50% 0, 50% 100%)
+        left: calc(#{-$slider-thumb-label-wedge-size} + 0.2px)
 
   // Modifiers
   .v-slider-thumb--focused

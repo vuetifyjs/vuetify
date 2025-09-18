@@ -13,6 +13,7 @@ const colors = ['success', 'info', 'warning', 'error', 'invalid']
 const sizes = ['x-small', 'small', 'default', 'large', 'x-large'] as const
 const densities = ['default', 'comfortable', 'compact'] as const
 const variants = ['elevated', 'flat', 'tonal', 'outlined', 'text', 'plain'] as const
+const spaced = ['start', 'both', 'end'] as const
 const props = {
   color: colors,
   // variant: variants,
@@ -45,6 +46,10 @@ const stories = {
   Stacked: gridOn([undefined], variants, (_, variant) =>
     <VBtn stacked prependIcon="$vuetify" variant={ variant }>{ variant }</VBtn>
   ),
+  Spaced: gridOn([undefined], spaced, (_, spaced) =>
+    <VBtn spaced={ spaced } prependIcon="$prev" appendIcon="$next" width="200">{ spaced }</VBtn>
+  ),
+  'Block + spaced': <VBtn block spaced="both" prependIcon="$prev" appendIcon="$next">Spaced</VBtn>,
 }
 
 // Actual tests

@@ -38,9 +38,9 @@
 <script setup>
   const user = useUserStore()
 
-  const showBanner = computed(() => !user.notifications.last.v2banner)
+  const showBanner = computed(() => !user.one.banners.last)
 
   function onClose () {
-    user.notifications.last.v2banner = Date.now()
+    user.one.banners.last = Date.now()
   }
 </script>

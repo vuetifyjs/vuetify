@@ -1,5 +1,5 @@
 <template>
-  <v-container class="bg-grey-lighten-5">
+  <v-container class="bg-surface-variant">
     <v-row
       class="mb-6"
       justify="center"

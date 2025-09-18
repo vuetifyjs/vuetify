@@ -1,6 +1,6 @@
 <template>
   <v-radio-group
-    v-model="user.theme"
+    v-model="user.one.theme"
     class="mb-2"
     color="primary"
     true-icon="mdi-check-circle-outline"
@@ -23,12 +23,12 @@
     v-if="!theme.current.value?.dark"
     :defaults="{
       VIcon: {
-        color: user.mixedTheme ? 'primary' : 'disabled'
+        color: user.ecosystem.docs.mixedTheme ? 'primary' : 'disabled'
       }
     }"
   >
     <SettingsSwitch
-      v-model="user.mixedTheme"
+      v-model="user.ecosystem.docs.mixedTheme"
       :label="t('dark-code')"
       :messages="t('dark-code-message')"
     />

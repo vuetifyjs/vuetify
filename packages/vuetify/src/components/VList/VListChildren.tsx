@@ -2,9 +2,10 @@
 import { VListGroup } from './VListGroup'
 import { VListItem } from './VListItem'
 import { VListSubheader } from './VListSubheader'
-import { VDivider } from '../VDivider'
+import { VDivider } from '@/components/VDivider'
 
 // Utilities
+import { mergeProps } from 'vue'
 import { createList } from './list'
 import { genericComponent, propsFactory } from '@/util'
 
@@ -73,11 +74,11 @@ export const VListChildren = genericComponent<new <T extends InternalListItem>(
         >
           {{
             activator: ({ props: activatorProps }) => {
-              const listItemProps = {
-                ...itemProps,
-                ...activatorProps,
-                value: props.returnObject ? item : itemProps.value,
-              }
+              const listItemProps = mergeProps(
+                itemProps,
+                activatorProps,
+                { value: props.returnObject ? item : itemProps.value }
+              ) as typeof itemProps
 
               return slots.header
                 ? slots.header({ props: listItemProps })

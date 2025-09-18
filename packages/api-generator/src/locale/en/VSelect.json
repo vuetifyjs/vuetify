@@ -1,6 +1,5 @@
 {
   "props": {
-    "autocomplete": "Filter the items in the list based on user input.",
     "cacheItems": "Keeps a local _unique_ copy of all items that have been passed through the **items** prop.",
     "chips": "Changes display of selections to chips.",
     "closableChips": "Enables the [closable](/api/v-chip/#props-closable) prop on all [v-chip](/components/chips/) components.",
@@ -15,6 +14,7 @@
     "minWidth": "Sets the minimum width of the select's `v-menu` content.",
     "multiple": "Changes select to multiple. Accepts array for value.",
     "multiLine": "Causes label to float when the select component is focused or dirty.",
+    "noAutoScroll": "Prevents the select menu to scroll to the selected item automatically.",
     "openOnClear": "When using the **clearable** prop, once cleared, the select menu will either open or stay open, depending on the current state.",
     "overflow": "Creates an overflow button - [spec](https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons).",
     "searchInput": "Use the **.sync** modifier to catch user input from the search input.",

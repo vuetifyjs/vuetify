@@ -1,0 +1,43 @@
+@use '../../components/VKbd/variables' as vkdb;
+@use '../../styles/settings';
+
+$hotkey-gap: 4px !default;
+$hotkey-icon-max-width: 0.75em !default;
+$hotkey-divider-opacity: var(--v-medium-emphasis-opacity) !default;
+$hotkey-divider-font-size: 1em !default;
+$hotkey-combination-gap: 2px !default;
+$hotkey-font-size: 0.75rem !default;
+$hotkey-line-height: 1.5 !default;
+$hotkey-padding: 0.2rem !default;
+$hotkey-min-width: 1.5em !default;
+$hotkey-disabled-opacity: 0.26 !default;
+
+
+$hotkey-inline-font-size: 1em !default;
+$hotkey-inline-line-height: vkdb.$kbd-line-height !default;
+$hotkey-inline-padding: 2px 4px !default;
+$hotkey-inline-min-width: vkdb.$kbd-min-width !default;
+$hotkey-inline-icon-max-height: calc(1ex + 2px) !default;
+$hotkey-inline-divider-font-size: 1em !default;
+
+$hotkey-contained-padding: 0.2rem 4px !default;
+$hotkey-contained-prefix-margin-right: 2px !default;
+$hotkey-contained-suffix-margin-left: 2px !default;
+
+$hotkey-prefix-suffix-opacity: var(--v-medium-emphasis-opacity) !default;
+$hotkey-prefix-suffix-contained-opacity: var(--v-high-emphasis-opacity) !default;
+$hotkey-prefix-suffix-font-weight: normal !default;
+
+// Variant variables
+$hotkey-background: rgb(var(--v-theme-surface)) !default;
+$hotkey-color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity)) !default;
+$hotkey-elevation: 2 !default;
+$hotkey-plain-opacity: .62 !default;
+
+$hotkey-variants: (
+  $hotkey-background,
+  $hotkey-color,
+  $hotkey-elevation,
+  $hotkey-plain-opacity,
+  'v-hotkey'
+) !default;

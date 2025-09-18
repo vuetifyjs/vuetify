@@ -15,7 +15,7 @@ import {
   shallowRef, toRef,
   useId,
 } from 'vue'
-import { convertToUnit, findChildrenWithProvide, getCurrentInstance, propsFactory } from '@/util'
+import { consoleWarn, convertToUnit, findChildrenWithProvide, getCurrentInstance, propsFactory } from '@/util'
 
 // Types
 import type { ComponentInternalInstance, CSSProperties, InjectionKey, Prop, Ref } from 'vue'
@@ -301,7 +301,7 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
 
         const item = items.value[index.value]
 
-        if (!item) throw new Error(`[Vuetify] Could not find layout item "${id}"`)
+        if (!item) consoleWarn(`[Vuetify] Could not find layout item "${id}"`)
 
         const overlap = computedOverlaps.value.get(id)
         if (overlap) {

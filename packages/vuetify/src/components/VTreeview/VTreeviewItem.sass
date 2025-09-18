@@ -1,0 +1,107 @@
+@use '../../styles/tools'
+@use './variables' as *
+
+@include tools.layer('components')
+  .v-treeview-item
+    --list-indent-size: #{$treeview-indent-size}
+    &.v-treeview-item--filtered
+      display: none
+
+    &.v-list-item--disabled:not(a)
+      pointer-events: auto
+
+      .v-selection-control
+        pointer-events: none
+
+
+    &__level
+      width: #{$treeview-indent-size}
+
+      .v-treeview--fluid &
+        width: 0
+
+  .v-treeview
+    &.v-list
+      --indent-padding: #{$treeview-indent-padding}
+
+    &.v-list--disabled .v-list-item__prepend
+      pointer-events: auto
+
+    .v-list-item--slim > .v-list-item__prepend
+      > .v-icon ~ .v-list-item__spacer
+        width: $treeview-item-spacer-width
+
+      &:not(:has(.v-list-item-action))
+        > .v-icon
+          margin-inline-start: $treeview-item-first-icon-margin-start
+
+    &:has(.v-treeview-indent-lines)
+      .v-list-item-action:first-child,
+      .v-treeview-indent-lines + .v-list-item-action
+        > .v-selection-control
+          margin-inline: min(0px, calc(-1 * (var(--v-selection-control-size) - #{$treeview-indent-size}) / 2))
+
+  .v-treeview-indent-lines
+    position: absolute
+    inset-inline-start: 0
+    height: 100%
+    display: grid
+    padding-inline-start: $treeview-indent-lines-padding-left
+    padding-block: $treeview-indent-lines-gap
+    grid-template-columns: repeat(var(--v-indent-parts, 1), var(--prepend-width))
+    opacity: $treeview-indent-lines-opacity
+    pointer-events: none
+
+  .v-treeview-indent-line
+    &,
+    &::before
+      border: 0px $treeview-indent-line-style $treeview-indent-line-color
+
+    &--leaf,
+    &--line
+      border-inline-start-width: $treeview-indent-line-width
+      height: 100%
+      width: calc(50% + #{$treeview-indent-line-width-half})
+      justify-self: end
+
+    &--leaf
+      position: relative
+
+      &::before
+        content: ''
+        position: absolute
+        border-bottom-width: $treeview-indent-line-width
+        height: calc(50% + #{$treeview-indent-line-width-half})
+        width: 100%
+
+      &:last-child::before
+        width: calc(100% - $treeview-indent-line-leaf-margin-right)
+
+    &--leaf-link
+      border-bottom-width: $treeview-indent-line-width
+      height: calc(50% + #{$treeview-indent-line-width-half})
+      margin-inline-start: $treeview-indent-lines-gap
+      margin-inline-end: $treeview-indent-line-leaf-link-margin-right
+
+    &--last-leaf
+      border-inline-start-width: $treeview-indent-line-width
+      border-bottom-width: $treeview-indent-line-width
+      height: calc(50% + #{$treeview-indent-line-width-half})
+      margin-inline-start: calc(50% - #{$treeview-indent-line-width-half})
+      border-bottom-left-radius: $treeview-indent-line-border-radius
+
+      @include tools.rtl()
+        border-bottom-left-radius: 0
+        border-bottom-right-radius: $treeview-indent-line-border-radius
+
+      &:last-child
+        margin-inline-end: $treeview-indent-line-leaf-margin-right
+
+  .v-treeview-group.v-list-group
+    --list-indent-size: 0px
+
+    & > .v-treeview-item__level
+      width: 0px
+
+    .v-list-group__items .v-list-item
+      padding-inline-start: calc(var(--indent-padding)) !important

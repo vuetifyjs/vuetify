@@ -29,6 +29,9 @@
 
     &--disabled
       opacity: var(--v-medium-emphasis-opacity)
+
+    &[disabled],
+    &--disabled
       pointer-events: none
 
     .v-stepper--alt-labels &
@@ -60,9 +63,11 @@
       margin-bottom: $stepper-item-alt-labels-margin-bottom
       margin-inline-end: 0
 
-  //.v-stepper-item__content
-  //  .v-stepper--alt-labels &
-  //    min-height: 28px
+  .v-stepper-item__content
+    text-align: start
+
+    .v-stepper--alt-labels &
+      text-align: center
 
   .v-stepper-item__title
     line-height: $stepper-item-title-line-height
@@ -72,12 +77,8 @@
 
   .v-stepper-item__subtitle
     font-size: $stepper-item-subtitle-font-size
-    text-align: left
     line-height: $stepper-item-subtitle-line-height
     opacity: $stepper-item-subtitle-opacity
-
-    .v-stepper--alt-labels &
-      text-align: center
 
     .v-stepper--mobile &
       display: none

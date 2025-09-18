@@ -136,7 +136,7 @@ export const VStepperVerticalItem = genericComponent<VStepperVerticalItemSlots>(
           readonly={ !props.editable }
           style={ props.style }
           color=""
-          hide-actions={ false }
+          hideActions={ false }
           value={ step.value }
         >
           {{

@@ -58,6 +58,7 @@ export const VDatePickerMonths = genericComponent<VDatePickerMonthsSlots>()({
       }
       return createRange(12).map(i => {
         const text = adapter.format(date, 'monthShort')
+        const label = adapter.format(date, 'month')
         const isDisabled =
           !!(
             !isMonthAllowed(i) ||
@@ -69,6 +70,7 @@ export const VDatePickerMonths = genericComponent<VDatePickerMonthsSlots>()({
         return {
           isDisabled,
           text,
+          label,
           value: i,
         }
       })
@@ -101,6 +103,7 @@ export const VDatePickerMonths = genericComponent<VDatePickerMonthsSlots>()({
           { months.value.map((month, i) => {
             const btnProps = {
               active: model.value === i,
+              ariaLabel: month.label,
               color: model.value === i ? props.color : undefined,
               disabled: month.isDisabled,
               rounded: true,

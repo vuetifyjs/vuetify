@@ -115,3 +115,9 @@ In this example we offset our card onto the extended content area of a toolbar u
 A floating toolbar is turned into an inline element that only takes up as much space as needed. This is particularly useful when placing toolbars over content.
 
 <ExamplesExample file="v-toolbar/prop-floating-with-search" />
+
+### Tooltips and Speed Dial
+
+Toolbar elements can include menus (like Speed Dial) and tooltips to help users understand the action intent when buttons show only icons to keep interface minimalistic.
+
+<ExamplesExample file="v-toolbar/misc-tooltips-and-speed-dial" />

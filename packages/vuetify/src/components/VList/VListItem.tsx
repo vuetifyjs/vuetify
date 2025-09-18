@@ -35,6 +35,11 @@ import type { PropType } from 'vue'
 import type { RippleDirectiveBinding } from '@/directives/ripple'
 
 export type ListItemSlot = {
+  index?: number
+  depth?: number
+  path?: number[]
+  isFirst?: boolean
+  isLast?: boolean
   isActive: boolean
   isOpen: boolean
   isSelected: boolean
@@ -134,7 +139,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
       parent,
       openOnSelect,
       id: uid,
-    } = useNestedItem(id, false)
+    } = useNestedItem(id, () => props.disabled, false)
     const list = useList()
     const isActive = computed(() =>
       props.active !== false &&
@@ -147,6 +152,13 @@ export const VListItem = genericComponent<VListItemSlots>()({
       props.link !== false &&
       (props.link || link.isClickable.value || isSelectable.value)
     )
+    const role = computed(() => list ? (isSelectable.value ? 'option' : 'listitem') : undefined)
+    const ariaSelected = computed(() => {
+      if (!isSelectable.value) return undefined
+      return root.activatable.value ? isActivated.value
+        : root.selectable.value ? isSelected.value
+        : isActive.value
+    })
 
     const roundedProps = toRef(() => props.rounded || props.nav)
     const color = toRef(() => props.color ?? props.activeColor)
@@ -179,6 +191,15 @@ export const VListItem = genericComponent<VListItemSlots>()({
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(roundedProps)
     const lineClasses = toRef(() => props.lines ? `v-list-item--${props.lines}-line` : undefined)
+    const rippleOptions = toRef(() =>
+      (
+        props.ripple !== undefined &&
+        !!props.ripple &&
+        list?.filterable
+      )
+        ? { keys: ['Enter'] }
+        : props.ripple
+    )
 
     const slotProps = computed(() => ({
       isActive: isActive.value,
@@ -202,7 +223,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
         activate(!isActivated.value, e)
       } else if (root.selectable.value) {
         select(!isSelected.value, e)
-      } else if (props.value != null) {
+      } else if (props.value != null && !isLink.value) {
         select(!isSelected.value, e)
       }
     }
@@ -212,8 +233,9 @@ export const VListItem = genericComponent<VListItemSlots>()({
 
       if (['INPUT', 'TEXTAREA'].includes(target.tagName)) return
 
-      if (e.key === 'Enter' || e.key === ' ') {
+      if (e.key === 'Enter' || (e.key === ' ' && !list?.filterable)) {
         e.preventDefault()
+        e.stopPropagation()
         e.target!.dispatchEvent(new MouseEvent('click', e))
       }
     }
@@ -262,16 +284,11 @@ export const VListItem = genericComponent<VListItemSlots>()({
             props.style,
           ]}
           tabindex={ isClickable.value ? (list ? -2 : 0) : undefined }
-          aria-selected={
-            isSelectable.value ? (
-              root.activatable.value ? isActivated.value
-              : root.selectable.value ? isSelected.value
-              : isActive.value
-            ) : undefined
-          }
+          aria-selected={ ariaSelected.value }
+          role={ role.value }
           onClick={ onClick }
           onKeydown={ isClickable.value && !isLink.value && onKeyDown }
-          v-ripple={ isClickable.value && props.ripple }
+          v-ripple={ isClickable.value && rippleOptions.value }
           { ...link.linkProps }
         >
           { genOverlays(isClickable.value || isActive.value, 'v-list-item') }

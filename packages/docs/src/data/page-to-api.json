@@ -121,6 +121,7 @@
   "components/overlays": ["VOverlay"],
   "components/paginations": ["VPagination"],
   "components/parallax": ["VParallax"],
+  "components/pie-charts": ["VPie", "VPieSegment", "VPieTooltip"],
   "components/progress-circular": ["VProgressCircular"],
   "components/progress-linear": ["VProgressLinear"],
   "components/radio-buttons": ["VRadio", "VRadioGroup"],
@@ -159,6 +160,7 @@
     "VTreeviewChildren",
     "VTreeviewGroup"
   ],
+  "components/videos": ["VVideo", "VVideoControls", "VVideoVolume"],
   "components/virtual-scroller": ["VVirtualScroll"],
   "components/windows": ["VWindow", "VWindowItem"],
   "directives/click-outside": ["v-click-outside"],
@@ -171,10 +173,11 @@
   "directives/tooltip": ["v-tooltip"],
   "features/dates": ["useDate"],
   "features/display-and-platform": ["useDisplay"],
+  "features/hotkey": ["useHotkey"],
   "features/scrolling": ["useGoTo"],
   "features/global-configuration": ["VDefaultsProvider"],
   "features/internationalization": ["useLocale", "VLocaleProvider"],
-  "features/theme": ["VThemeProvider"],
+  "features/theme": ["useTheme", "VThemeProvider"],
   "styles/transitions": [
     "VDialogBottomTransition",
     "VDialogTopTransition",

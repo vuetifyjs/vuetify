@@ -6,8 +6,9 @@ import { VAvatar } from '@/components/VAvatar'
 import { VCheckboxBtn } from '@/components/VCheckbox'
 import { VChip } from '@/components/VChip'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
+import { VDivider } from '@/components/VDivider'
 import { VIcon } from '@/components/VIcon'
-import { VList, VListItem } from '@/components/VList'
+import { VList, VListItem, VListSubheader } from '@/components/VList'
 import { VMenu } from '@/components/VMenu'
 import { makeSelectProps } from '@/components/VSelect/VSelect'
 import { VTextField } from '@/components/VTextField'
@@ -22,15 +23,17 @@ import { useForm } from '@/composables/form'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { transformItem, useItems } from '@/composables/list-items'
 import { useLocale } from '@/composables/locale'
+import { useMenuActivator } from '@/composables/menuActivator'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeTransitionProps } from '@/composables/transition'
 
 // Utilities
-import { computed, mergeProps, nextTick, ref, shallowRef, toRef, watch } from 'vue'
+import { computed, mergeProps, nextTick, ref, shallowRef, watch } from 'vue'
 import {
   checkPrintable,
   deepEqual,
   ensureValidVNode,
+  escapeForRegex,
   genericComponent,
   IN_BROWSER,
   isComposingIgnoreKey,
@@ -101,6 +104,8 @@ export const VCombobox = genericComponent<new <
     item: { item: ListItem<Item>, index: number, props: Record<string, unknown> }
     chip: { item: ListItem<Item>, index: number, props: Record<string, unknown> }
     selection: { item: ListItem<Item>, index: number }
+    subheader: { props: Record<string, unknown>, index: number }
+    divider: { props: Record<string, unknown>, index: number }
     'prepend-item': never
     'append-item': never
     'no-data': never
@@ -123,6 +128,7 @@ export const VCombobox = genericComponent<new <
     const isFocused = shallowRef(false)
     const isPristine = shallowRef(true)
     const listHasFocus = shallowRef(false)
+    const showAllItemsForNoMatch = shallowRef(false)
     const vMenuRef = ref<VMenu>()
     const vVirtualScrollRef = ref<VVirtualScroll>()
     const selectionIndex = shallowRef(-1)
@@ -150,19 +156,24 @@ export const VCombobox = genericComponent<new <
       get: () => {
         return _search.value
       },
-      set: (val: string | null) => {
+      set: async (val: string | null) => {
         _search.value = val ?? ''
         if (!props.multiple && !hasSelectionSlot.value) {
           model.value = [transformItem(props, val)]
+          nextTick(() => vVirtualScrollRef.value?.scrollToIndex(0))
         }
 
         if (val && props.multiple && props.delimiters?.length) {
-          const values = val.split(new RegExp(`(?:${props.delimiters.join('|')})+`))
+          const signsToMatch = props.delimiters.map(escapeForRegex).join('|')
+          const values = val.split(new RegExp(`(?:${signsToMatch})+`))
           if (values.length > 1) {
-            values.forEach(v => {
+            for (let v of values) {
               v = v.trim()
-              if (v) select(transformItem(props, v))
-            })
+              if (v) {
+                select(transformItem(props, v))
+                await nextTick()
+              }
+            }
             _search.value = ''
           }
         }
@@ -179,19 +190,27 @@ export const VCombobox = genericComponent<new <
         : (props.multiple ? model.value.length : search.value.length)
     })
 
-    const { filteredItems, getMatches } = useFilter(props, items, () => isPristine.value ? '' : search.value)
+    const { filteredItems, getMatches } = useFilter(props, items, search)
+
+    const hasMatchingItems = computed(() => {
+      return props.hideSelected
+        ? filteredItems.value.some(filteredItem => !model.value.some(s => s.value === filteredItem.value))
+        : filteredItems.value.length > 0
+    })
 
     const displayItems = computed(() => {
       if (props.hideSelected) {
         return filteredItems.value.filter(filteredItem => !model.value.some(s => s.value === filteredItem.value))
       }
+      if (filteredItems.value.length === 0 && showAllItemsForNoMatch.value) {
+        return items.value
+      }
       return filteredItems.value
     })
 
-    const menuDisabled = computed(() => (
-      (props.hideNoData && !displayItems.value.length) ||
-      form.isReadonly.value || form.isDisabled.value
-    ))
+    const menuDisabled = computed(() => {
+      return form.isReadonly.value || form.isDisabled.value
+    })
     const _menu = useProxiedModel(props, 'menu')
     const menu = computed({
       get: () => _menu.value,
@@ -202,17 +221,21 @@ export const VCombobox = genericComponent<new <
       },
     })
 
-    const label = toRef(() => menu.value ? props.closeText : props.openText)
+    const { menuId, ariaExpanded, ariaControls, ariaLabel } = useMenuActivator(props, menu)
 
     watch(_search, value => {
+      showAllItemsForNoMatch.value = false
       if (cleared) {
         // wait for clear to finish, VTextField sets _search to null
         // then search computed triggers and updates _search to ''
         nextTick(() => (cleared = false))
       } else if (isFocused.value && !menu.value) {
-        menu.value = true
+        menu.value = hasMatchingItems.value || !props.hideNoData
+      } else if (isFocused.value && menu.value && !hasMatchingItems.value && props.hideNoData) {
+        menu.value = false
       }
 
+      isPristine.value = !value
       emit('update:search', value)
     })
 
@@ -257,7 +280,7 @@ export const VCombobox = genericComponent<new <
       menu.value = !menu.value
     }
     function onListKeydown (e: KeyboardEvent) {
-      if (e.key !== ' ' && checkPrintable(e)) {
+      if (checkPrintable(e) || e.key === 'Backspace') {
         vTextFieldRef.value?.focus()
       }
     }
@@ -430,8 +453,8 @@ export const VCombobox = genericComponent<new <
       }
     })
 
-    watch(menu, () => {
-      if (!props.hideSelected && menu.value && model.value.length) {
+    watch(menu, val => {
+      if (!props.hideSelected && val && model.value.length) {
         const index = displayItems.value.findIndex(
           item => model.value.some(s => (props.valueComparator || deepEqual)(s.value, item.value))
         )
@@ -439,9 +462,15 @@ export const VCombobox = genericComponent<new <
           index >= 0 && vVirtualScrollRef.value?.scrollToIndex(index)
         })
       }
-    })
 
-    watch(() => props.items, (newVal, oldVal) => {
+      if (val && search.value && !hasMatchingItems.value) {
+        showAllItemsForNoMatch.value = true
+      }
+
+      isPristine.value = !search.value
+    }, { immediate: true })
+
+    watch(items, (newVal, oldVal) => {
       if (menu.value) return
 
       if (isFocused.value && !oldVal.length && newVal.length) {
@@ -486,12 +515,15 @@ export const VCombobox = genericComponent<new <
           onClick:clear={ onClear }
           onMousedown:control={ onMousedownControl }
           onKeydown={ onKeydown }
+          aria-expanded={ ariaExpanded.value }
+          aria-controls={ ariaControls.value }
         >
           {{
             ...slots,
             default: () => (
               <>
                 <VMenu
+                  id={ menuId.value }
                   ref={ vMenuRef }
                   v-model={ menu.value }
                   activator="parent"
@@ -509,9 +541,11 @@ export const VCombobox = genericComponent<new <
                   { hasList && (
                     <VList
                       ref={ listRef }
+                      filterable
                       selected={ selectedValues.value }
                       selectStrategy={ props.multiple ? 'independent' : 'single-independent' }
                       onMousedown={ (e: MouseEvent) => e.preventDefault() }
+                      selectable
                       onKeydown={ onListKeydown }
                       onFocusin={ onFocusin }
                       onFocusout={ onFocusout }
@@ -526,7 +560,6 @@ export const VCombobox = genericComponent<new <
                       { !displayItems.value.length && !props.hideNoData && (slots['no-data']?.() ?? (
                         <VListItem key="no-data" title={ t(props.noDataText) } />
                       ))}
-
                       <VVirtualScroll ref={ vVirtualScrollRef } renderless items={ displayItems.value } itemKey="value">
                         { ({ item, index, itemRef }) => {
                           const itemProps = mergeProps(item.props, {
@@ -535,6 +568,18 @@ export const VCombobox = genericComponent<new <
                             active: (highlightFirst.value && index === 0) ? true : undefined,
                             onClick: () => select(item, null),
                           })
+
+                          if (item.type === 'divider') {
+                            return slots.divider?.({ props: item.raw, index }) ?? (
+                              <VDivider { ...item.props } key={ `divider-${index}` } />
+                            )
+                          }
+
+                          if (item.type === 'subheader') {
+                            return slots.subheader?.({ props: item.raw, index }) ?? (
+                              <VListSubheader { ...item.props } key={ `subheader-${index}` } />
+                            )
+                          }
 
                           return slots.item?.({
                             item,
@@ -670,15 +715,15 @@ export const VCombobox = genericComponent<new <
             'append-inner': (...args) => (
               <>
                 { slots['append-inner']?.(...args) }
-                { (!props.hideNoData || props.items.length) && props.menuIcon ? (
+                { props.menuIcon ? (
                   <VIcon
                     class="v-combobox__menu-icon"
                     color={ vTextFieldRef.value?.fieldIconColor }
                     icon={ props.menuIcon }
                     onMousedown={ onMousedownMenuIcon }
                     onClick={ noop }
-                    aria-label={ t(label.value) }
-                    title={ t(label.value) }
+                    aria-label={ ariaLabel.value }
+                    title={ ariaLabel.value }
                     tabindex="-1"
                   />
                 ) : undefined }

@@ -27,6 +27,11 @@
       appendIcon: '$x',
     },
     {
+      title: 'bluesky',
+      href: 'https://bsky.app/profile/vuetify.bsky.social',
+      appendIcon: 'mdi-bluesky',
+    },
+    {
       title: 'Discord',
       href: 'https://community.vuetifyjs.com/',
       appendIcon: '$discord',

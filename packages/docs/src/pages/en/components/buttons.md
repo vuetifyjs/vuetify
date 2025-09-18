@@ -159,6 +159,14 @@ When you use the **prepend-icon** and **append-icon** props in conjunction with 
 
 <ExamplesExample file="v-btn/slot-prepend-append" />
 
+#### Spaced
+
+<DocIntroduced version="3.10.0" />
+
+By default icons stick to the button content, but you can space them out with `spaced` prop.
+
+<ExamplesExample file="v-btn/prop-spaced" />
+
 #### Custom loader
 
 The **loader** slot allows you to customize the loading indicator. In this example we use a [v-progress-linear](/components/progress-linear/) component to create a loading bar that spans the full width of the button.
