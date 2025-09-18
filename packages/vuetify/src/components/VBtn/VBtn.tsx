@@ -154,7 +154,6 @@ export const VBtn = genericComponent<VBtnSlots>()({
     })
 
     function onClick (e: MouseEvent) {
-
       if (
         isDisabled.value ||
         (link.isLink.value && (
@@ -164,7 +163,7 @@ export const VBtn = genericComponent<VBtnSlots>()({
           (e.button !== 0) ||
           attrs.target === '_blank'
         ))
-      )  {
+      ) {
         e.preventDefault()
         e.stopImmediatePropagation()
         return
