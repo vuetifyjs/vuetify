@@ -163,7 +163,7 @@ export const VBtn = genericComponent<VBtnSlots>()({
           (e.button !== 0) ||
           attrs.target === '_blank'
         ))
-      ) return
+      )  return e.preventDefault()
 
       if (link.isLink.value) {
         link.navigate?.(e)
