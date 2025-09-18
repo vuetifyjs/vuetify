@@ -182,6 +182,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
 
     const incrementSlotProps = {
       props: {
+        style: { touchAction: 'none' },
         onClick: onControlClick,
         onPointerup: onControlMouseup,
         onPointerdown: onUpControlMousedown,
@@ -190,6 +191,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
     }
     const decrementSlotProps = {
       props: {
+        style: { touchAction: 'none' },
         onClick: onControlClick,
         onPointerup: onControlMouseup,
         onPointerdown: onDownControlMousedown,
@@ -365,6 +367,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
             onPointerup={ onControlMouseup }
             onPointercancel={ onControlMouseup }
             size={ controlNodeSize.value }
+            style="touch-action: none"
             variant="text"
             tabindex="-1"
           />
@@ -400,6 +403,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
             onPointerup={ onControlMouseup }
             onPointercancel={ onControlMouseup }
             size={ controlNodeSize.value }
+            style="touch-action: none"
             variant="text"
             tabindex="-1"
           />
