@@ -96,6 +96,7 @@ export function useLink (props: LinkProps & LinkListeners, attrs: SetupContext['
       href,
       'aria-current': toRef(() => isActive.value ? 'page' : undefined),
       'aria-disabled': toRef(() => props.disabled && isLink.value ? 'true' : undefined),
+      tabindex: toRef(() => props.disabled && isLink.value ? '-1' : undefined),
     }),
   }
 }
