@@ -154,6 +154,7 @@ export const VBtn = genericComponent<VBtnSlots>()({
     })
 
     function onClick (e: MouseEvent) {
+
       if (
         isDisabled.value ||
         (link.isLink.value && (
@@ -163,7 +164,11 @@ export const VBtn = genericComponent<VBtnSlots>()({
           (e.button !== 0) ||
           attrs.target === '_blank'
         ))
-      )  return e.preventDefault()
+      )  {
+        e.preventDefault()
+        e.stopImmediatePropagation()
+        return
+      }
 
       if (link.isLink.value) {
         link.navigate?.(e)
