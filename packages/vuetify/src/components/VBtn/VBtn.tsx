@@ -163,11 +163,7 @@ export const VBtn = genericComponent<VBtnSlots>()({
           (e.button !== 0) ||
           attrs.target === '_blank'
         ))
-      ) {
-        e.preventDefault()
-        e.stopImmediatePropagation()
-        return
-      }
+      ) return
 
       if (link.isLink.value) {
         link.navigate?.(e)
@@ -229,8 +225,9 @@ export const VBtn = genericComponent<VBtnSlots>()({
             props.style,
           ]}
           aria-busy={ props.loading ? true : undefined }
-          disabled={ isDisabled.value || undefined }
-          tabindex={ props.loading || props.readonly ? -1 : undefined }
+          disabled={ (isDisabled.value && Tag !== 'a') || undefined }
+          aria-disabled={ (isDisabled.value && Tag === 'a') || undefined }
+          tabindex={ props.loading || props.readonly || isDisabled.value ? -1 : undefined }
           onClick={ onClick }
           value={ valueAttr.value }
           { ...link.linkProps }
