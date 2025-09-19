@@ -1,0 +1,9 @@
+{
+  "props": {
+    "tag": "HTML tag to use for the root container element. Defaults to 'div'."
+  },
+  "slots": {
+    "default": "Container for VCommandPaletteItem components in custom layouts. Automatically receives proper ARIA attributes and navigation mode classes for accessibility and styling."
+  },
+  "events": {}
+}
