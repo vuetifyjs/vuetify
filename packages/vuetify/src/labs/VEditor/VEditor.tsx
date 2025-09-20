@@ -201,6 +201,10 @@ export const VEditor = genericComponent<VEditorSlots>()({
       if (e.key === 'Backspace') {
         onBackspaceKey(e)
       }
+
+      if (e.key === 'Delete') {
+        onDeleteKey(e)
+      }
     }
 
     function onEnterKey (e: KeyboardEvent) {
@@ -232,6 +236,21 @@ export const VEditor = genericComponent<VEditorSlots>()({
       if (isAtLineStart(currentLine) && !isFirstLine(currentLine)) {
         e.preventDefault()
         mergeIntoPreviousLine(currentLine)
+        removeStrayZWSP()
+        updateModelValue()
+      }
+    }
+
+    function onDeleteKey (e: KeyboardEvent) {
+      if (!editorRef.value || selection.hasText()) return
+
+      const currentLine = editorElement.getCurrentLine()
+      if (!currentLine) return
+
+      // Custom behavior is needed for cross browser compatibility
+      if (isAtLineEnd(currentLine)) {
+        e.preventDefault()
+        mergeIntoPreviousLine(currentLine.nextElementSibling)
         removeStrayZWSP()
         updateModelValue()
       }
@@ -322,7 +341,7 @@ export const VEditor = genericComponent<VEditorSlots>()({
       }
     }
 
-    function mergeIntoPreviousLine (currentLine: Element) {
+    function mergeIntoPreviousLine (currentLine: Element | null) {
       if (!currentLine) return
 
       const previousLine = currentLine.previousElementSibling
