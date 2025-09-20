@@ -22,6 +22,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { isEmptyNode } from './utils'
 import { callEvent, genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
@@ -165,6 +166,7 @@ export const VEditor = genericComponent<VEditorSlots>()({
 
     function onInput (e: Event) {
       updateModelValue()
+      removeStrayZWSP()
     }
 
     function onKeyUp () {
@@ -228,8 +230,21 @@ export const VEditor = genericComponent<VEditorSlots>()({
       if (isAtLineStart(currentLine) && !isFirstLine(currentLine)) {
         e.preventDefault()
         mergeIntoPreviousLine(currentLine)
+        removeStrayZWSP()
         updateModelValue()
       }
+    }
+
+    function removeStrayZWSP () {
+      const currentNode = selection.getContainer()
+
+      if (!currentNode) return
+
+      Array.from(currentNode.childNodes).forEach(child => {
+        caret.save()
+        child.nodeValue = child.nodeValue?.replace(zeroWidthSpace, '') || null
+        caret.restore()
+      })
     }
 
     function updateEditorHtml (newVal: string) {
@@ -315,7 +330,8 @@ export const VEditor = genericComponent<VEditorSlots>()({
       }
 
       caret.save()
-      editorElement.unwrap(currentLine)
+      if (isEmptyNode(currentLine)) currentLine.remove()
+      else editorElement.unwrap(currentLine)
       caret.restore()
     }
 
