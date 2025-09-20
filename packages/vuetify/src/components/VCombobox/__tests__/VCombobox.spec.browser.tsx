@@ -818,9 +818,9 @@ describe('VCombobox', () => {
     const model = ref('flor')
     const { element } = render(() => (
       <VCombobox
-        always-filter
         v-model={ model.value }
         items={['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']}
+        alwaysFilter
       />
     ))
 
