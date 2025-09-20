@@ -63,6 +63,10 @@ type Value <T, ReturnObject extends boolean, Multiple extends boolean> =
     : Val<T, ReturnObject> | null
 
 export const makeVComboboxProps = propsFactory({
+  alwaysFilter: {
+    type: Boolean,
+    default: false,
+  },
   autoSelectFirst: {
     type: [Boolean, String] as PropType<boolean | 'exact'>,
   },
