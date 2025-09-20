@@ -323,6 +323,12 @@ export const VEditor = genericComponent<VEditorSlots>()({
       if (!currentLine) return
 
       const previourLine = currentLine.previousElementSibling
+
+      if (previourLine && isEmptyNode(previourLine)) {
+        previourLine.remove()
+        return
+      }
+
       const isPreviousLineBlock = previourLine && window.getComputedStyle(previourLine).display === 'block'
       if (isPreviousLineBlock) {
         caret.insertInto(previourLine)
