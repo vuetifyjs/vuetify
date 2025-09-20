@@ -53,7 +53,7 @@ export function useSelection (editorRef: Ref<HTMLDivElement | undefined>) {
     return !selection.isCollapsed && !['\u200B', ''].includes(selection.toString())
   }
 
-  function wrap (wrapper: Element) {
+  function wrapBy (wrapper: Element) {
     const result = get()
     if (!result) return
 
@@ -106,7 +106,7 @@ export function useSelection (editorRef: Ref<HTMLDivElement | undefined>) {
     getContainer,
     hasText,
     select,
-    wrap,
+    wrapBy,
     selectBetween,
   }
 }

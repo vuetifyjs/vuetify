@@ -66,9 +66,11 @@ export function useCaret (editorRef: Ref<HTMLDivElement | undefined>) {
 
     if (node.nodeType === Node.TEXT_NODE) {
       selection.select(node)
-    } else {
+    } else if (!node.textContent) {
       node.appendChild(textNode)
       selection.select(textNode)
+    } else {
+      selection.select(node)
     }
 
     const selectionResult = selection.get()

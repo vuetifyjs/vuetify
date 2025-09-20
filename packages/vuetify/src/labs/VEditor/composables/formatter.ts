@@ -214,7 +214,7 @@ export function useFormatter (editorRef: Ref<HTMLDivElement | undefined>) {
     editorRef.value?.focus()
 
     const formatterElement = get(format)
-    selection.wrap(formatterElement)
+    selection.wrapBy(formatterElement)
 
     if (!selection.hasText()) {
       caret.insertInto(formatterElement)

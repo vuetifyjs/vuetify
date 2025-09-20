@@ -169,7 +169,7 @@ export function useElement (editorRef: Ref<HTMLDivElement | undefined>) {
       unwrap(element)
       selection.selectBetween(firstChild, lastChild)
     } else {
-      const emptyFragment = document.createTextNode(zeroWidthSpace)
+      const emptyFragment = emptyNode()
 
       parent.insertBefore(beforeFragment || emptyFragment, element)
       parent.insertBefore(selectedContent, element)
@@ -184,7 +184,7 @@ export function useElement (editorRef: Ref<HTMLDivElement | undefined>) {
     const parent = element.parentNode
     if (!parent) return
 
-    const emptyFragment = document.createTextNode(zeroWidthSpace)
+    const emptyFragment = emptyNode()
 
     const middle = getRemainingFormats(element) || emptyFragment
     const afterFragment = getFragmentAfterCaret(element) || emptyFragment
