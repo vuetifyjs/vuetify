@@ -1,12 +1,10 @@
-// Utilities
-import { omit } from '@/util/helpers'
-
 // Types
 import type { Ref } from 'vue'
+
 import { useCaret } from './caret'
 import { useElement } from './element'
 import { useSelection } from './selection'
-import { getObjectStyles, getStringStyles, isEmptyNode } from '../utils'
+import { getObjectStyles, getStringStyles, isEmptyNode, toggleElementStyle } from '../utils'
 
 export type Formats = 'block' |
   'bold' |
@@ -275,34 +273,17 @@ export function useFormatter (editorRef: Ref<HTMLDivElement | undefined>) {
     const targetStyles = format.config.styles
     const targetAlignment = targetStyles?.textAlign
 
-    if (!editorRef.value) return
+    if (!editorRef.value || !targetAlignment) return
 
-    if (!targetAlignment) return
+    caret.save()
 
     if (!blockElement) {
-      caret.save()
       formatElementChildren(editorRef.value, format)
-      caret.restore()
     } else {
-      const currentStyleString = blockElement.getAttribute('style') || ''
-      const currentStyles = getObjectStyles(currentStyleString)
-      const currentAlignment = currentStyles.textAlign
-
-      if (currentAlignment === targetAlignment) {
-        const newStyles = omit(currentStyles, ['textAlign'])
-        const newStyleString = getStringStyles(newStyles)
-
-        if (newStyleString) {
-          blockElement.setAttribute('style', newStyleString)
-        } else {
-          blockElement.removeAttribute('style')
-        }
-      } else {
-        const newStyles = { ...currentStyles, textAlign: targetAlignment }
-        const newStyleString = getStringStyles(newStyles)
-        blockElement.setAttribute('style', newStyleString)
-      }
+      toggleElementStyle(blockElement, 'textAlign', targetAlignment)
     }
+
+    caret.restore()
   }
 
   const inline = {
