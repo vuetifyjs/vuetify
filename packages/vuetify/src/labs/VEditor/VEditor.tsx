@@ -211,7 +211,8 @@ export const VEditor = genericComponent<VEditorSlots>()({
         return
       }
 
-      const currentLine = editorElement.getCurrentBlock() || editorRef.value
+      const currentLine = editorElement.getCurrentLine()
+      if (!currentLine) return
 
       // Custom behavior is needed for cross browser compatibility
       if (isAtLineEnd(currentLine)) {
@@ -224,7 +225,8 @@ export const VEditor = genericComponent<VEditorSlots>()({
     function onBackspaceKey (e: KeyboardEvent) {
       if (!editorRef.value || selection.hasText()) return
 
-      const currentLine = editorElement.getCurrentBlock() || editorRef.value
+      const currentLine = editorElement.getCurrentLine()
+      if (!currentLine) return
 
       // Custom behavior is needed for cross browser compatibility
       if (isAtLineStart(currentLine) && !isFirstLine(currentLine)) {
@@ -243,6 +245,7 @@ export const VEditor = genericComponent<VEditorSlots>()({
       Array.from(currentNode.childNodes).forEach(child => {
         caret.save()
         child.nodeValue = child.nodeValue?.replace(zeroWidthSpace, '') || null
+        if (child.nodeValue === ' ') child.nodeValue = '\u00A0'
         caret.restore()
       })
     }
@@ -291,7 +294,7 @@ export const VEditor = genericComponent<VEditorSlots>()({
     }
 
     function isFirstLine (currentBlockElement: Element | undefined) {
-      return !currentBlockElement || [editorRef.value?.firstChild, editorRef.value].includes(currentBlockElement)
+      return !currentBlockElement || editorRef.value?.firstChild === currentBlockElement
     }
 
     function isAtLineStart (currentBlockElement: Element) {
@@ -322,21 +325,21 @@ export const VEditor = genericComponent<VEditorSlots>()({
     function mergeIntoPreviousLine (currentLine: Element) {
       if (!currentLine) return
 
-      const previourLine = currentLine.previousElementSibling
+      const previousLine = currentLine.previousElementSibling
 
-      if (previourLine && isEmptyNode(previourLine)) {
-        previourLine.remove()
+      if (previousLine && isEmptyNode(previousLine)) {
+        editorElement.remove(previousLine)
         return
       }
 
-      const isPreviousLineBlock = previourLine && window.getComputedStyle(previourLine).display === 'block'
+      const isPreviousLineBlock = previousLine && editorElement.isBlock(previousLine)
       if (isPreviousLineBlock) {
-        caret.insertInto(previourLine)
-        previourLine.appendChild(currentLine)
+        caret.insertInto(previousLine)
+        previousLine.appendChild(currentLine)
       }
 
       caret.save()
-      if (isEmptyNode(currentLine)) currentLine.remove()
+      if (isEmptyNode(currentLine)) editorElement.remove(currentLine)
       else editorElement.unwrap(currentLine)
       caret.restore()
     }

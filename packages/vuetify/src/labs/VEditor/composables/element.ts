@@ -58,25 +58,62 @@ export function useElement (editorRef: Ref<HTMLDivElement | undefined>) {
     return wrapper
   }
 
-  function getCurrentBlock () {
+  function wrapAll (nodes: Node[], wrapper: Element) {
+    nodes.forEach(node => {
+      wrap(node, wrapper)
+    })
+    return wrapper
+  }
+
+  function isBlock (element: Element) {
+    if (element.nodeType !== Node.ELEMENT_NODE) return false
+
+    const display = window.getComputedStyle(element).display
+    return ['block', 'list-item', 'table'].includes(display)
+  }
+
+  function getCurrentLine () {
     const selectionResult = selection.get()
     if (!selectionResult) return null
 
     let node = selectionResult.selection.anchorNode
+    if (!node) return null
 
-    // If it's a text node, move up to the parent
-    if (node?.nodeType === 3) node = node.parentNode
+    if (node === editorRef.value) {
+      node = editorRef.value.firstChild
+    }
 
-    // Traverse up until we find a block element
-    while (node && node !== editorRef.value) {
-      const display = window.getComputedStyle(node as Element).display
-      if (['block', 'list-item', 'table'].includes(display)) {
-        return node as Element
-      }
+    while (node && node.parentNode !== editorRef.value) {
       node = node.parentNode
     }
 
-    return null
+    if (!node) return null
+
+    if (isBlock(node as Element)) {
+      return node as Element
+    }
+
+    caret.save()
+    const line: Node[] = []
+    let prev = node.previousSibling
+    let next = node.nextSibling
+
+    while (prev && !(prev.nodeType === Node.ELEMENT_NODE && isBlock(prev as Element))) {
+      line.unshift(prev)
+      prev = prev.previousSibling
+    }
+
+    line.push(node)
+
+    while (next && !(next.nodeType === Node.ELEMENT_NODE && isBlock(next as Element))) {
+      line.push(next)
+      next = next.nextSibling
+    }
+
+    const wrappedLine = wrapAll(line, document.createElement('div'))
+    caret.restore()
+
+    return wrappedLine
   }
 
   function getRemainingFormats (element: Element, innerContent: Node = emptyNode()): Node | null {
@@ -210,9 +247,11 @@ export function useElement (editorRef: Ref<HTMLDivElement | undefined>) {
   return {
     remove,
     wrap,
+    wrapAll,
     unwrap,
+    isBlock,
     wrapChildren,
-    getCurrentBlock,
+    getCurrentLine,
     replaceContainer,
     removeFormatAtCaret,
     removeFormatAtSelection,

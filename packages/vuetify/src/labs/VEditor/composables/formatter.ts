@@ -247,29 +247,29 @@ export function useFormatter (editorRef: Ref<HTMLDivElement | undefined>) {
   }
 
   function toggleHeadingFormat (format: Formatter) {
-    const currentBlockElement = editorElement.getCurrentBlock()
-    const currentBlockTag = currentBlockElement?.tagName.toLowerCase()
-    const isCurrentBlockHeadingOrDiv = currentBlockTag?.startsWith('h') || currentBlockTag === 'div'
+    const currentLine = editorElement.getCurrentLine()
+    const currentLineTag = currentLine?.tagName.toLowerCase()
+    const isCurrentBlockHeadingOrDiv = currentLineTag?.startsWith('h') || currentLineTag === 'div'
 
     if (!editorRef.value) return
 
     caret.save()
 
-    if (!currentBlockElement) {
+    if (!currentLine) {
       formatElementChildren(editorRef.value, format)
-    } else if (isApplied(format, currentBlockElement)) {
-      replaceElementFormat(currentBlockElement, blockFormatter)
+    } else if (isApplied(format, currentLine)) {
+      replaceElementFormat(currentLine, blockFormatter)
     } else if (isCurrentBlockHeadingOrDiv) {
-      replaceElementFormat(currentBlockElement, format)
+      replaceElementFormat(currentLine, format)
     } else {
-      formatElementChildren(currentBlockElement, format)
+      formatElementChildren(currentLine, format)
     }
 
     caret.restore()
   }
 
   function toggleAlignmentFormat (format: Formatter) {
-    const blockElement = editorElement.getCurrentBlock()
+    const currentLine = editorElement.getCurrentLine()
     const targetStyles = format.config.styles
     const targetAlignment = targetStyles?.textAlign
 
@@ -277,10 +277,10 @@ export function useFormatter (editorRef: Ref<HTMLDivElement | undefined>) {
 
     caret.save()
 
-    if (!blockElement) {
+    if (!currentLine) {
       formatElementChildren(editorRef.value, format)
     } else {
-      toggleElementStyle(blockElement, 'textAlign', targetAlignment)
+      toggleElementStyle(currentLine, 'textAlign', targetAlignment)
     }
 
     caret.restore()
