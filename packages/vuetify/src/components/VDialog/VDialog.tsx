@@ -80,15 +80,39 @@ export const VDialog = genericComponent<OverlaySlots>()({
       }
     }
 
+    function onKeydown (e: KeyboardEvent) {
+      if (e.key !== 'Tab' || !overlay.value?.contentEl) return
+
+      const focusable = focusableChildren(overlay.value.contentEl)
+      if (!focusable.length) return
+
+      const firstElement = focusable[0]
+      const lastElement = focusable[focusable.length - 1]
+      const active = document.activeElement as HTMLElement | null
+
+      if (e.shiftKey && active === firstElement) {
+        e.preventDefault()
+        lastElement.focus()
+      } else if (!e.shiftKey && active === lastElement) {
+        e.preventDefault()
+        firstElement.focus()
+      }
+    }
+
     onBeforeUnmount(() => {
       document.removeEventListener('focusin', onFocusin)
+      document.removeEventListener('keydown', onKeydown)
     })
 
     if (IN_BROWSER) {
       watch(() => isActive.value && props.retainFocus, val => {
-        val
-          ? document.addEventListener('focusin', onFocusin)
-          : document.removeEventListener('focusin', onFocusin)
+        if (val) {
+          document.addEventListener('focusin', onFocusin)
+          document.addEventListener('keydown', onKeydown)
+        } else {
+          document.removeEventListener('focusin', onFocusin)
+          document.removeEventListener('keydown', onKeydown)
+        }
       }, { immediate: true })
     }
 
