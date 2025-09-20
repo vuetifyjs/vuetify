@@ -49,6 +49,15 @@ export function useElement (editorRef: Ref<HTMLDivElement | undefined>) {
     parent.removeChild(element)
   }
 
+  function wrap (node: Node, wrapper: Element) {
+    const parent = node.parentNode
+    if (!parent) return
+
+    parent.insertBefore(wrapper, node) // insert wrapper before node
+    wrapper.appendChild(node) // move node inside wrapper
+    return wrapper
+  }
+
   function getCurrentBlock () {
     const selectionResult = selection.get()
     if (!selectionResult) return null
@@ -200,6 +209,7 @@ export function useElement (editorRef: Ref<HTMLDivElement | undefined>) {
 
   return {
     remove,
+    wrap,
     unwrap,
     wrapChildren,
     getCurrentBlock,
