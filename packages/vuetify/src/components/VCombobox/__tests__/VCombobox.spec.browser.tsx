@@ -814,12 +814,13 @@ describe('VCombobox', () => {
     await expect.poll(() => screen.queryAllByRole('option')).toHaveLength(1)
   })
 
-  it('should show only matching items when opening for the first time', async () => {
+  it('should show only matching items when opening for the first time with always filter props', async () => {
     const model = ref('flor')
     const { element } = render(() => (
       <VCombobox
         v-model={ model.value }
         items={['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']}
+        alwaysFilter
       />
     ))
 
