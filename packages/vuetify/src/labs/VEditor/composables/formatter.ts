@@ -24,18 +24,26 @@ export type Formats = 'block' |
   'align-center' |
   'align-left' |
   'align-right' |
-  'align-justify'
+  'align-justify' |
+  'list-unordered' |
+  'list-ordered' |
+  'list-tasks'
 
 export enum FormatCategory {
   Heading = 'heading',
   Alignment = 'alignment',
+  List = 'list',
 }
 
 export type Formatter = {
   name: Formats
   icon: string
   category?: FormatCategory
-  config: { tag?: string, styles?: Record<string, string>}
+  config: {
+    tag?: string
+    tagCondition?: string
+    styles?: Record<string, string>
+  }
 }
 
 export const blockFormatter: Formatter = {
@@ -153,6 +161,27 @@ export const alignmentFormats: Formatter[] = [
   },
 ]
 
+export const listFormats: Formatter[] = [
+  {
+    name: 'list-unordered',
+    icon: 'mdi-format-list-bulleted',
+    category: FormatCategory.List,
+    config: { tag: 'ul' },
+  },
+  {
+    name: 'list-ordered',
+    icon: 'mdi-format-list-numbered',
+    category: FormatCategory.List,
+    config: { tag: 'ol' },
+  },
+  {
+    name: 'list-tasks',
+    icon: 'mdi-format-list-checks',
+    category: FormatCategory.List,
+    config: { tag: 'ul', tagCondition: '>li>input[type="checkbox"]' },
+  },
+]
+
 export function useFormatter (editorRef: Ref<HTMLDivElement | undefined>) {
   const selection = useSelection(editorRef)
   const caret = useCaret(editorRef)
@@ -171,7 +200,7 @@ export function useFormatter (editorRef: Ref<HTMLDivElement | undefined>) {
   }
 
   function isApplied (format: Formatter, element: Element) {
-    const { tag, styles } = format.config
+    const { tag, tagCondition, styles } = format.config
 
     const hasSameTag = tag ? element.tagName.toLowerCase() === tag.toLowerCase() : true
 
@@ -286,6 +315,46 @@ export function useFormatter (editorRef: Ref<HTMLDivElement | undefined>) {
     caret.restore()
   }
 
+  function toggleListFormat (format: Formatter) {
+    const blockElement = editorElement.getCurrentBlock()
+
+    if (!editorRef.value) return
+
+    if (!blockElement) {
+      caret.save()
+      formatElementChildren(editorRef.value, format)
+      caret.restore()
+    } else {
+      const closestListParent = blockElement.closest('ul,ol')
+      const closestListItemParent = blockElement.closest('li')
+      const isTaskList = !!closestListItemParent?.children[0] &&
+        closestListItemParent.children[0].tagName === 'INPUT' &&
+        closestListItemParent.children[0].getAttribute('type') === 'checkbox'
+
+      const currentListType = isTaskList ? 'tasks' : closestListParent?.tagName.toLowerCase()
+      const targetListType = format.name.endsWith('-tasks') ? 'tasks' : format.name.endsWith('-ordered') ? 'ol' : 'ul'
+
+      if (currentListType && currentListType === targetListType) {
+        // TODO: unwrap selected `<li>` nodes from the list
+        // TODO: leave unselected `<li>` nodes within list (split if necessary)
+
+        // experimenting to have anything close...
+        closestListParent?.replaceWith(blockElement)
+      } else {
+        const listTag = targetListType === 'ol' ? 'ol' : 'ul'
+        const newList = document.createElement(listTag)
+        // TODO: wrap all lines/paragraphs individually, ignore/drop <hr>
+        // TODO: merge with neighbouring lists if possible
+
+        // experimenting to have anything close...
+        const newListItem = document.createElement('li')
+        blockElement.prepend(newList)
+        newList.appendChild(newListItem)
+        newList.appendChild(blockElement)
+      }
+    }
+  }
+
   const inline = {
     toggle: toggleInlineFormat,
     add: addInlineFormat,
@@ -300,6 +369,10 @@ export function useFormatter (editorRef: Ref<HTMLDivElement | undefined>) {
     toggle: toggleAlignmentFormat,
   }
 
+  const list = {
+    toggle: toggleListFormat,
+  }
+
   return {
     isApplied,
     findElementWithFormat,
@@ -307,5 +380,6 @@ export function useFormatter (editorRef: Ref<HTMLDivElement | undefined>) {
     inline,
     heading,
     alignment,
+    list,
   }
 }
