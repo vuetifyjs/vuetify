@@ -44,6 +44,7 @@ export interface LinkListeners {
 
 export interface UseLink extends Omit<Partial<ReturnType<typeof _useLink>>, 'href'> {
   isLink: Readonly<Ref<boolean>>
+  isRouterLink: Readonly<Ref<boolean>>
   isClickable: Readonly<Ref<boolean>>
   href: Ref<string | undefined>
   linkProps: Record<string, string | undefined>
@@ -61,6 +62,7 @@ export function useLink (props: LinkProps & LinkListeners, attrs: SetupContext['
     const href = toRef(() => props.href)
     return {
       isLink,
+      isRouterLink: toRef(() => false),
       isClickable,
       href,
       linkProps: reactive({ href }),
@@ -83,9 +85,11 @@ export function useLink (props: LinkProps & LinkListeners, attrs: SetupContext['
     return link.value.isExactActive?.value && deepEqual(link.value.route.value.query, route.value.query)
   })
   const href = computed(() => props.to ? link.value?.route.value.href : props.href)
+  const isRouterLink = toRef(() => !!props.to)
 
   return {
     isLink,
+    isRouterLink,
     isClickable,
     isActive,
     route: link.value?.route,
