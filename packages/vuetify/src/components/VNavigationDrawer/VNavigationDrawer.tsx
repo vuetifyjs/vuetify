@@ -16,6 +16,7 @@ import { provideDefaults } from '@/composables/defaults'
 import { makeDelayProps, useDelay } from '@/composables/delay'
 import { makeDisplayProps, useDisplay } from '@/composables/display'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
+import { makeFocusTrapProps, useFocusTrap } from '@/composables/focusTrap'
 import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
@@ -91,6 +92,7 @@ export const makeVNavigationDrawerProps = propsFactory({
   ...makeElevationProps(),
   ...makeLayoutItemProps(),
   ...makeRoundedProps(),
+  ...makeFocusTrapProps(),
   ...makeTagProps({ tag: 'nav' }),
   ...makeThemeProps(),
 }, 'VNavigationDrawer')
@@ -120,6 +122,8 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
 
     const rootEl = ref<HTMLElement>()
     const isHovering = shallowRef(false)
+
+    useFocusTrap(props, { isActive, contentEl: rootEl })
 
     const { runOpenDelay, runCloseDelay } = useDelay(props, value => {
       isHovering.value = value

@@ -165,7 +165,7 @@ export const VMenu = genericComponent<OverlaySlots>()({
           e.shiftKey ? 'prev' : 'next',
           (el: HTMLElement) => el.tabIndex >= 0
         )
-        if (!nextElement) {
+        if (!nextElement && !props.focusTrap) {
           isActive.value = false
           overlay.value?.activatorEl?.focus()
         }
