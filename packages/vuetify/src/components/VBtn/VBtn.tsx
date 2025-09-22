@@ -121,7 +121,7 @@ export const VBtn = genericComponent<VBtnSlots>()({
         return props.active
       }
 
-      if (link.isLink.value) {
+      if (link.isRouterLink.value) {
         return link.isActive?.value
       }
 
