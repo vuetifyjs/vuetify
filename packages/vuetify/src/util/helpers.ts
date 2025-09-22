@@ -650,11 +650,16 @@ export function callEvent<T extends any[]> (handler: EventProp<T> | EventProp<T>
   }
 }
 
+function isRendered (el: HTMLElement) {
+  return !!el.offsetParent || el.getClientRects().length > 0
+}
+
 export function focusableChildren (el: Element, filterByTabIndex = true) {
   const targets = ['button', '[href]', 'input:not([type="hidden"])', 'select', 'textarea', '[tabindex]']
-    .map(s => `${s}${filterByTabIndex ? ':not([tabindex="-1"])' : ''}:not([disabled])`)
+    .map(s => `${s}${filterByTabIndex ? ':not([tabindex="-1"])' : ''}:not([disabled]):not([inert])`)
     .join(', ')
-  return [...el.querySelectorAll(targets)] as HTMLElement[]
+  return ([...el.querySelectorAll(targets)] as HTMLElement[])
+    .filter(isRendered)
 }
 
 export function getNextElement (elements: HTMLElement[], location?: 'next' | 'prev', condition?: (el: HTMLElement) => boolean) {
