@@ -8,6 +8,7 @@ import { makeActivatorProps, useActivator } from './useActivator'
 import { useBackgroundColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
+import { makeFocusTrapProps, useFocusTrap } from '@/composables/focusTrap'
 import { useHydration } from '@/composables/hydration'
 import { makeLazyProps, useLazy } from '@/composables/lazy'
 import { useRtl } from '@/composables/locale'
@@ -108,6 +109,7 @@ export const makeVOverlayProps = propsFactory({
   ...makeLazyProps(),
   ...makeLocationStrategyProps(),
   ...makeScrollStrategyProps(),
+  ...makeFocusTrapProps(),
   ...makeThemeProps(),
   ...makeTransitionProps(),
 }, 'VOverlay')
@@ -202,6 +204,8 @@ export const VOverlay = genericComponent<OverlaySlots>()({
         !props.scrim || e.target === scrimEl.value || (e instanceof MouseEvent && e.shadowTarget === scrimEl.value)
       )
     }
+
+    useFocusTrap(props, { isActive, localTop, contentEl })
 
     IN_BROWSER && watch(isActive, val => {
       if (val) {

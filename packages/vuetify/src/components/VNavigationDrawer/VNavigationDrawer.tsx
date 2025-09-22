@@ -16,6 +16,7 @@ import { provideDefaults } from '@/composables/defaults'
 import { makeDelayProps, useDelay } from '@/composables/delay'
 import { makeDisplayProps, useDisplay } from '@/composables/display'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
+import { makeFocusTrapProps, useFocusTrap } from '@/composables/focusTrap'
 import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
@@ -91,6 +92,7 @@ export const makeVNavigationDrawerProps = propsFactory({
   ...makeElevationProps(),
   ...makeLayoutItemProps(),
   ...makeRoundedProps(),
+  ...makeFocusTrapProps({ disableInitialFocus: true }),
   ...makeTagProps({ tag: 'nav' }),
   ...makeThemeProps(),
 }, 'VNavigationDrawer')
@@ -140,6 +142,8 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
       !isTemporary.value &&
       location.value !== 'bottom'
     )
+
+    useFocusTrap(props, { isActive, localTop: isTemporary, contentEl: rootEl })
 
     useToggleScope(() => props.expandOnHover && props.rail != null, () => {
       watch(isHovering, val => emit('update:rail', !val))
