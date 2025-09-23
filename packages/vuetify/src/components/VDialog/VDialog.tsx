@@ -14,7 +14,7 @@ import { useScopeId } from '@/composables/scopeId'
 
 // Utilities
 import { mergeProps, nextTick, onBeforeUnmount, ref, watch } from 'vue'
-import { focusableChildren, focusChild, genericComponent, IN_BROWSER, propsFactory, useRender } from '@/util'
+import { focusableChildren, genericComponent, IN_BROWSER, propsFactory, useRender } from '@/util'
 
 // Types
 import type { OverlaySlots } from '@/components/VOverlay/VOverlay'
@@ -81,17 +81,22 @@ export const VDialog = genericComponent<OverlaySlots>()({
     }
 
     function onKeydown (e: KeyboardEvent) {
-      if (e.key !== 'Tab' ||
-        !overlay.value?.contentEl ||
-        // We're the topmost dialog
-        !overlay.value?.globalTop
-      ) return
+      if (e.key !== 'Tab' || !overlay.value?.contentEl) return
 
       const focusable = focusableChildren(overlay.value.contentEl)
       if (!focusable.length) return
 
-      e.preventDefault()
-      focusChild(overlay.value.contentEl, e.shiftKey ? 'prev' : 'next')
+      const firstElement = focusable[0]
+      const lastElement = focusable[focusable.length - 1]
+      const active = document.activeElement as HTMLElement | null
+
+      if (e.shiftKey && active === firstElement) {
+        e.preventDefault()
+        lastElement.focus()
+      } else if (!e.shiftKey && active === lastElement) {
+        e.preventDefault()
+        firstElement.focus()
+      }
     }
 
     onBeforeUnmount(() => {
