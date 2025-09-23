@@ -39,6 +39,8 @@ export const makeVTooltipProps = propsFactory({
   }), [
     'absolute',
     'retainFocus',
+    'captureFocus',
+    'disableInitialFocus',
     'persistent',
   ]),
 }, 'VTooltip')

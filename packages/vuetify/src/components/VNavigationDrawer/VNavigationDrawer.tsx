@@ -29,7 +29,7 @@ import { useToggleScope } from '@/composables/toggleScope'
 
 // Utilities
 import { computed, nextTick, readonly, ref, shallowRef, toRef, Transition, watch } from 'vue'
-import { genericComponent, propsFactory, toPhysical, useRender } from '@/util'
+import { genericComponent, omit, propsFactory, toPhysical, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -92,7 +92,7 @@ export const makeVNavigationDrawerProps = propsFactory({
   ...makeElevationProps(),
   ...makeLayoutItemProps(),
   ...makeRoundedProps(),
-  ...makeFocusTrapProps({ disableInitialFocus: true }),
+  ...omit(makeFocusTrapProps({ captureFocus: false }), ['disableInitialFocus']),
   ...makeTagProps({ tag: 'nav' }),
   ...makeThemeProps(),
 }, 'VNavigationDrawer')

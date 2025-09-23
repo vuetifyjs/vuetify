@@ -48,6 +48,7 @@ export const makeVMenuProps = propsFactory({
   submenu: Boolean,
 
   ...omit(makeVOverlayProps({
+    captureFocus: true,
     closeDelay: 250,
     closeOnContentClick: true,
     locationStrategy: 'connected' as const,

@@ -14,7 +14,7 @@ import { useScopeId } from '@/composables/scopeId'
 
 // Utilities
 import { mergeProps, nextTick, ref, watch } from 'vue'
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { OverlaySlots } from '@/components/VOverlay/VOverlay'
@@ -23,13 +23,14 @@ export const makeVDialogProps = propsFactory({
   fullscreen: Boolean,
   scrollable: Boolean,
 
-  ...makeVOverlayProps({
+  ...omit(makeVOverlayProps({
+    captureFocus: true,
     origin: 'center center' as const,
     scrollStrategy: 'block' as const,
     transition: { component: VDialogTransition },
     zIndex: 2400,
     retainFocus: true,
-  }),
+  }), ['disableInitialFocus']),
 }, 'VDialog')
 
 export const VDialog = genericComponent<OverlaySlots>()({
