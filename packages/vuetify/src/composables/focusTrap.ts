@@ -1,18 +1,20 @@
 // Utilities
-import { watch } from 'vue'
+import { nextTick, onBeforeUnmount, toRef, toValue, watch } from 'vue'
 import { focusableChildren, IN_BROWSER, propsFactory } from '@/util'
 
 // Types
-import type { Ref } from 'vue'
+import type { MaybeRefOrGetter, Ref } from 'vue'
 
 // Types
 export interface FocusTrapProps {
   retainFocus: boolean
+  disableInitialFocus: boolean
 }
 
 // Composables
 export const makeFocusTrapProps = propsFactory({
   retainFocus: Boolean,
+  disableInitialFocus: Boolean,
 }, 'focusTrap')
 
 const registry = new Map<symbol, {
@@ -59,9 +61,10 @@ function onKeydown (e: KeyboardEvent) {
 
 export function useFocusTrap (
   props: FocusTrapProps,
-  { isActive, contentEl }: {
-    isActive: Ref<boolean>
-    contentEl: Ref<HTMLElement | undefined>
+  { isActive, globalTop, contentEl }: {
+    isActive: Readonly<Ref<boolean>>
+    globalTop: Readonly<Ref<boolean>>
+    contentEl: Readonly<Ref<HTMLElement | undefined>>
   }
 ) {
   const trapId = Symbol('trap')
@@ -72,6 +75,42 @@ export function useFocusTrap (
       registry.delete(trapId)
     }
   }, { immediate: true })
+
+  async function captureFocus (e: FocusEvent) {
+    const before = e.relatedTarget as HTMLElement | null
+    const after = e.target as HTMLElement | null
+
+    await nextTick()
+
+    if (
+      isActive.value &&
+      before !== after &&
+      contentEl.value &&
+      // We're the topmost menu
+      toValue(globalTop) &&
+      // It isn't the document or the container body
+      ![document, contentEl.value].includes(after!) &&
+      // It isn't inside the container body
+      !contentEl.value.contains(after)
+    ) {
+      const focusable = focusableChildren(contentEl.value)
+      focusable[0]?.focus()
+    }
+  }
+
+  const shouldCapture = toRef(() => isActive.value && !props.disableInitialFocus)
+
+  IN_BROWSER && watch(shouldCapture, val => {
+    if (val) {
+      document.addEventListener('focusin', captureFocus, { once: true })
+    } else {
+      document.removeEventListener('focusin', captureFocus)
+    }
+  }, { immediate: true })
+
+  onBeforeUnmount(() => {
+    document.removeEventListener('focusin', captureFocus)
+  })
 
   IN_BROWSER && document.addEventListener('keydown', onKeydown)
 }

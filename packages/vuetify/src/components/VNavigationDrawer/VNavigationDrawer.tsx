@@ -92,7 +92,7 @@ export const makeVNavigationDrawerProps = propsFactory({
   ...makeElevationProps(),
   ...makeLayoutItemProps(),
   ...makeRoundedProps(),
-  ...makeFocusTrapProps(),
+  ...makeFocusTrapProps({ disableInitialFocus: true }),
   ...makeTagProps({ tag: 'nav' }),
   ...makeThemeProps(),
 }, 'VNavigationDrawer')
@@ -123,8 +123,6 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
     const rootEl = ref<HTMLElement>()
     const isHovering = shallowRef(false)
 
-    useFocusTrap(props, { isActive, contentEl: rootEl })
-
     const { runOpenDelay, runCloseDelay } = useDelay(props, value => {
       isHovering.value = value
     })
@@ -144,6 +142,8 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
       !isTemporary.value &&
       location.value !== 'bottom'
     )
+
+    useFocusTrap(props, { isActive, globalTop: isTemporary, contentEl: rootEl })
 
     useToggleScope(() => props.expandOnHover && props.rail != null, () => {
       watch(isHovering, val => emit('update:rail', !val))

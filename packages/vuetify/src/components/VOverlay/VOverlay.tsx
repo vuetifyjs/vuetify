@@ -205,7 +205,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
       )
     }
 
-    useFocusTrap(props, { isActive, contentEl })
+    useFocusTrap(props, { isActive, globalTop, contentEl })
 
     IN_BROWSER && watch(isActive, val => {
       if (val) {

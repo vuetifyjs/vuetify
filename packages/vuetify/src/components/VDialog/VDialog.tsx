@@ -13,8 +13,8 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { useScopeId } from '@/composables/scopeId'
 
 // Utilities
-import { mergeProps, nextTick, onBeforeUnmount, ref, watch } from 'vue'
-import { focusableChildren, genericComponent, IN_BROWSER, propsFactory, useRender } from '@/util'
+import { mergeProps, nextTick, ref, watch } from 'vue'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { OverlaySlots } from '@/components/VOverlay/VOverlay'
@@ -48,36 +48,6 @@ export const VDialog = genericComponent<OverlaySlots>()({
     const { scopeId } = useScopeId()
 
     const overlay = ref<VOverlay>()
-    function onFocusin (e: FocusEvent) {
-      const before = e.relatedTarget as HTMLElement | null
-      const after = e.target as HTMLElement | null
-
-      if (
-        before !== after &&
-        overlay.value?.contentEl &&
-        // We're the topmost dialog
-        overlay.value?.globalTop &&
-        // It isn't the document or the dialog body
-        ![document, overlay.value.contentEl].includes(after!) &&
-        // It isn't inside the dialog body
-        !overlay.value.contentEl.contains(after)
-      ) {
-        const focusable = focusableChildren(overlay.value.contentEl)
-        focusable[0]?.focus()
-      }
-    }
-
-    onBeforeUnmount(() => {
-      document.removeEventListener('focusin', onFocusin)
-    })
-
-    if (IN_BROWSER) {
-      watch(() => isActive.value && props.retainFocus, val => {
-        val
-          ? document.addEventListener('focusin', onFocusin, { once: true })
-          : document.removeEventListener('focusin', onFocusin)
-      }, { immediate: true })
-    }
 
     function onAfterEnter () {
       emit('afterEnter')

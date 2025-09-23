@@ -18,7 +18,6 @@ import {
   computed,
   inject,
   mergeProps,
-  nextTick,
   onBeforeUnmount,
   onDeactivated,
   provide,
@@ -33,7 +32,6 @@ import {
   focusChild,
   genericComponent,
   getNextElement,
-  IN_BROWSER,
   isClickInsideElement,
   omit,
   propsFactory,
@@ -48,7 +46,6 @@ export const makeVMenuProps = propsFactory({
   // disableKeys: Boolean,
   id: String,
   submenu: Boolean,
-  disableInitialFocus: Boolean,
 
   ...omit(makeVOverlayProps({
     closeDelay: 250,
@@ -103,46 +100,13 @@ export const VMenu = genericComponent<OverlaySlots>()({
       },
     })
 
-    onBeforeUnmount(() => {
-      parent?.unregister()
-      document.removeEventListener('focusin', onFocusIn)
-    })
+    onBeforeUnmount(() => parent?.unregister())
     onDeactivated(() => isActive.value = false)
 
-    async function onFocusIn (e: FocusEvent) {
-      const before = e.relatedTarget as HTMLElement | null
-      const after = e.target as HTMLElement | null
-
-      await nextTick()
-
-      if (
-        isActive.value &&
-        before !== after &&
-        overlay.value?.contentEl &&
-        // We're the topmost menu
-        overlay.value?.globalTop &&
-        // It isn't the document or the menu body
-        ![document, overlay.value.contentEl].includes(after!) &&
-        // It isn't inside the menu body
-        !overlay.value.contentEl.contains(after)
-      ) {
-        const focusable = focusableChildren(overlay.value.contentEl)
-        focusable[0]?.focus()
-      }
-    }
-
     watch(isActive, val => {
-      if (val) {
-        parent?.register()
-        if (IN_BROWSER && !props.disableInitialFocus) {
-          document.addEventListener('focusin', onFocusIn, { once: true })
-        }
-      } else {
-        parent?.unregister()
-        if (IN_BROWSER) {
-          document.removeEventListener('focusin', onFocusIn)
-        }
-      }
+      val
+        ? parent?.register()
+        : parent?.unregister()
     }, { immediate: true })
 
     function onClickOutside (e: MouseEvent) {
