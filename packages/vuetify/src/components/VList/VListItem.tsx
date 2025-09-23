@@ -283,13 +283,13 @@ export const VListItem = genericComponent<VListItemSlots>()({
             dimensionStyles.value,
             props.style,
           ]}
-          tabindex={ isClickable.value ? (list ? -2 : 0) : undefined }
           aria-selected={ ariaSelected.value }
           role={ role.value }
           onClick={ onClick }
           onKeydown={ isClickable.value && !isLink.value && onKeyDown }
           v-ripple={ isClickable.value && rippleOptions.value }
           { ...link.linkProps }
+          tabindex={ isClickable.value ? (list ? -2 : 0) : undefined }
         >
           { genOverlays(isClickable.value || isActive.value, 'v-list-item') }
 
