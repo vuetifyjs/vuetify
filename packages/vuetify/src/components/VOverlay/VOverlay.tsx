@@ -41,6 +41,7 @@ import {
   getCurrentInstance,
   getScrollParent,
   IN_BROWSER,
+  omit,
   propsFactory,
   standardEasing,
   useRender,
@@ -124,7 +125,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
   props: {
     _disableGlobalStack: Boolean,
 
-    ...makeVOverlayProps(),
+    ...omit(makeVOverlayProps(), ['disableInitialFocus']),
   },
 
   emits: {

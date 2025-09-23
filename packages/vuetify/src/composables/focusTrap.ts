@@ -3,18 +3,20 @@ import { nextTick, onBeforeUnmount, toRef, toValue, watch } from 'vue'
 import { focusableChildren, IN_BROWSER, propsFactory } from '@/util'
 
 // Types
-import type { MaybeRefOrGetter, Ref } from 'vue'
+import type { Ref } from 'vue'
 
 // Types
 export interface FocusTrapProps {
   retainFocus: boolean
-  disableInitialFocus: boolean
+  captureFocus: boolean
+  disableInitialFocus?: boolean // deprecated
 }
 
 // Composables
 export const makeFocusTrapProps = propsFactory({
   retainFocus: Boolean,
-  disableInitialFocus: Boolean,
+  captureFocus: Boolean,
+  disableInitialFocus: Boolean, // deprecated
 }, 'focusTrap')
 
 const registry = new Map<symbol, {
@@ -98,7 +100,7 @@ export function useFocusTrap (
     }
   }
 
-  const shouldCapture = toRef(() => isActive.value && !props.disableInitialFocus)
+  const shouldCapture = toRef(() => isActive.value && props.captureFocus && !props.disableInitialFocus)
 
   IN_BROWSER && watch(shouldCapture, val => {
     if (val) {
