@@ -7,12 +7,12 @@ import type { Ref } from 'vue'
 
 // Types
 export interface FocusTrapProps {
-  focusTrap: boolean
+  retainFocus: boolean
 }
 
 // Composables
 export const makeFocusTrapProps = propsFactory({
-  focusTrap: Boolean,
+  retainFocus: Boolean,
 }, 'focusTrap')
 
 const registry = new Map<symbol, {
@@ -65,7 +65,7 @@ export function useFocusTrap (
   }
 ) {
   const trapId = Symbol('trap')
-  watch(() => props.focusTrap, val => {
+  watch(() => props.retainFocus, val => {
     if (val) {
       registry.set(trapId, { isActive, contentEl })
     } else {

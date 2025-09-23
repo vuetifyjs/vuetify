@@ -21,10 +21,6 @@ import type { OverlaySlots } from '@/components/VOverlay/VOverlay'
 
 export const makeVDialogProps = propsFactory({
   fullscreen: Boolean,
-  retainFocus: {
-    type: Boolean,
-    default: true,
-  },
   scrollable: Boolean,
 
   ...makeVOverlayProps({
@@ -32,7 +28,7 @@ export const makeVDialogProps = propsFactory({
     scrollStrategy: 'block' as const,
     transition: { component: VDialogTransition },
     zIndex: 2400,
-    focusTrap: true,
+    retainFocus: true,
   }),
 }, 'VDialog')
 
