@@ -1,5 +1,5 @@
 // Utilities
-import { computed, toRef, toValue, useId } from 'vue'
+import { toRef, toValue } from 'vue'
 import { propsFactory } from '@/util'
 
 // Types
@@ -27,17 +27,7 @@ export const makeMenuActivatorProps = propsFactory({
 export function useMenuActivator (props: MenuActivatorProps, isOpen: MaybeRefOrGetter<boolean>) {
   const { t } = useLocale()
 
-  const uid = useId()
-  const menuId = computed(() => `menu-${uid}`)
-
-  const ariaExpanded = toRef(() => toValue(isOpen))
-  const ariaControls = toRef(() => menuId.value)
   const ariaLabel = toRef(() => t(toValue(isOpen) ? props.closeText : props.openText))
 
-  return {
-    menuId,
-    ariaExpanded,
-    ariaControls,
-    ariaLabel,
-  }
+  return { ariaLabel }
 }

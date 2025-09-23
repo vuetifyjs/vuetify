@@ -198,7 +198,6 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
                 onClick:clear={ (e: MouseEvent) => onClear(e, reset) }
                 onClick:prependInner={ props['onClick:prependInner'] }
                 onClick:appendInner={ props['onClick:appendInner'] }
-                role={ props.role }
                 { ...omit(fieldProps, ['onClick:clear']) }
                 id={ id.value }
                 active={ isActive.value || isDirty.value }
