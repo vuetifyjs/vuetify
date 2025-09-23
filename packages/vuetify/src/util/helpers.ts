@@ -656,7 +656,7 @@ function isRendered (el: HTMLElement) {
 
 export function focusableChildren (el: Element, filterByTabIndex = true) {
   const targets = ['button', '[href]', 'input:not([type="hidden"])', 'select', 'textarea', '[tabindex]']
-    .map(s => `${s}${filterByTabIndex ? ':not([tabindex="-1"])' : ''}:not([disabled]):not([inert])`)
+    .map(s => `${s}${filterByTabIndex ? ':not([tabindex="-1"])' : ''}:not([disabled]):not(:is([inert] *))`)
     .join(', ')
   return ([...el.querySelectorAll(targets)] as HTMLElement[])
     .filter(isRendered)
