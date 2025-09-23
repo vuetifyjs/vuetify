@@ -51,34 +51,6 @@ export const VDialog = genericComponent<OverlaySlots>()({
     const { scopeId } = useScopeId()
 
     const overlay = ref<VOverlay>()
-    function onFocusin (e: FocusEvent) {
-      const before = e.relatedTarget as HTMLElement | null
-      const after = e.target as HTMLElement | null
-
-      if (
-        before !== after &&
-        overlay.value?.contentEl &&
-        // We're the topmost dialog
-        overlay.value?.globalTop &&
-        // It isn't the document or the dialog body
-        ![document, overlay.value.contentEl].includes(after!) &&
-        // It isn't inside the dialog body
-        !overlay.value.contentEl.contains(after)
-      ) {
-        const focusable = focusableChildren(overlay.value.contentEl)
-
-        if (!focusable.length) return
-
-        const firstElement = focusable[0]
-        const lastElement = focusable[focusable.length - 1]
-
-        if (before === firstElement) {
-          lastElement.focus()
-        } else {
-          firstElement.focus()
-        }
-      }
-    }
 
     function onKeydown (e: KeyboardEvent) {
       if (e.key !== 'Tab' ||
@@ -95,17 +67,14 @@ export const VDialog = genericComponent<OverlaySlots>()({
     }
 
     onBeforeUnmount(() => {
-      document.removeEventListener('focusin', onFocusin)
       document.removeEventListener('keydown', onKeydown)
     })
 
     if (IN_BROWSER) {
       watch(() => isActive.value && props.retainFocus, val => {
         if (val) {
-          document.addEventListener('focusin', onFocusin)
           document.addEventListener('keydown', onKeydown)
         } else {
-          document.removeEventListener('focusin', onFocusin)
           document.removeEventListener('keydown', onKeydown)
         }
       }, { immediate: true })
