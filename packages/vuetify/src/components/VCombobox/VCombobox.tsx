@@ -139,7 +139,7 @@ export const VCombobox = genericComponent<new <
       props,
       'modelValue',
       [],
-      v => transformIn(v === null ? [null] : wrapInArray(v, emptyValues.value)),
+      v => transformIn(wrapInArray(v, emptyValues)),
       v => {
         const transformed = transformOut(v)
         return props.multiple ? transformed : (transformed[0] ?? null)
