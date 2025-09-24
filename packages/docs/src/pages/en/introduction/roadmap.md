@@ -26,7 +26,7 @@ The following is a list of all planned components for the year 2025.
 
 | Version                                                                 | Planned Release |
 |-------------------------------------------------------------------------|-----------------|
-| [v3.10](https://github.com/vuetifyjs/vuetify/milestone/80)              | Q3 2025         |
+| [v3.11](https://github.com/vuetifyjs/vuetify/milestone/82)              | Q4 2025         |
 | [v4.0 (Revisionist)](https://github.com/vuetifyjs/vuetify/milestone/62) | Q4 2025         |
 | [v4.1](https://github.com/vuetifyjs/vuetify/milestone/77)               | TBD             |
 
@@ -34,7 +34,7 @@ The following is a list of all planned components for the year 2025.
 
 | Name                                                            | Entering Labs | Production Release |
 |-----------------------------------------------------------------|---------------|--------------------|
-| [validation rules](/features/rules)                             | *             | Q3 2025            |
+| [validation rules](/features/rules)                             | *             | Q4 2025            |
 | [v-file-upload](/components/file-upload/)                       | *             | Q4 2025            |
 | [v-date-input](/components/date-inputs/)                        | *             | Q4 2025            |
 | [v-color-input](/components/color-inputs/)                      | *             | Q1 2026            |
@@ -51,7 +51,7 @@ The following is a list of all planned components for the year 2025.
 
 | Name                                                       | Entering Labs | Production Release |
 |------------------------------------------------------------|---------------|--------------------|
-| [v-icon-btn](/components/icon-buttons/)                    | *             | Q3 2025            |
+| [v-icon-btn](/components/icon-buttons/)                    | *             | Q4 2025            |
 | [v-calendar](/components/calendars/)                       | *             | Q2 2026            |
 | [v-hotkey](/components/hotkeys/)                           | *             | Q2 2026            |
 | [v-video](https://github.com/vuetifyjs/vuetify/pull/21460) | *             | TBD                |
@@ -68,6 +68,16 @@ The following is a list of all planned components for the year 2025.
 ## Released
 
 The following are the already released **minor** and **major** version updates. Find more information on the [latest releases](https://github.com/vuetifyjs/vuetify/releases/latest) on GitHub.
+
+### v3.10 (Argos)
+
+- **Released:** September 2025
+- **Target Release:** Q3 2025
+- **Notes:** [v3.10 Release](/getting-started/release-notes/?version=v3.10.0)
+- **Overview:**
+  - Now using `prefers-reduced-motion` to disable animations
+  - v2 compatible calendar implementation in Labs
+- **Milestone Issues:** [Github Issues](https://github.com/vuetifyjs/vuetify/milestone/80)
 
 ### v3.9 (Zealot)
 

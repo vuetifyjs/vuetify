@@ -396,7 +396,6 @@ export const VCalendar = genericComponent<new (
           categories={ categories }
           onClick:date={ (e: MouseEvent, day: CalendarTimestamp) => {
             if (attrs['onUpdate:modelValue']) emit('update:modelValue', day.date)
-            if (attrs['onClick:date']) emit('click:date', e, day)
           }}
           v-slots={ base.getScopedSlots() }
         />
