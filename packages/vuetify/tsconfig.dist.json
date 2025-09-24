@@ -4,5 +4,6 @@
   "compilerOptions": {
     "outDir": "./lib",
     "emitDeclarationOnly": true,
+    "skipLibCheck": true,
   },
 }

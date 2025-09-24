@@ -257,6 +257,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
 
       return (
         <Tag
+          { ...link.linkProps }
           class={[
             'v-list-item',
             {
@@ -289,7 +290,6 @@ export const VListItem = genericComponent<VListItemSlots>()({
           onClick={ onClick }
           onKeydown={ isClickable.value && !isLink.value && onKeyDown }
           v-ripple={ isClickable.value && rippleOptions.value }
-          { ...link.linkProps }
         >
           { genOverlays(isClickable.value || isActive.value, 'v-list-item') }
 

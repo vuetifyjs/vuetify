@@ -184,7 +184,7 @@ const customKeyMap = {
   const platform = ref('mac')
 
   const customKeyMap = {
-          // Include common keys that we're not customizing
+    // Include common keys that we're not customizing
     shift: {
       mac: { symbol: '⇧', icon: '$shift', text: '$vuetify.hotkey.shift' },
       default: { text: 'Shift' },
@@ -198,7 +198,7 @@ const customKeyMap = {
       default: { text: 'Ctrl' },
     },
 
-          // Custom key overrides
+    // Custom key overrides
     ctrl: {
       mac: { symbol: '⌃', icon: '$ctrl', text: 'Control' },
       default: { symbol: '⌃', icon: '$ctrl', text: 'Control' },
@@ -211,7 +211,7 @@ const customKeyMap = {
       default: { symbol: '⏎', icon: '$enter', text: 'Return' },
     },
 
-          // Include other keys for completeness
+    // Include other keys for completeness
     arrowup: {
       default: { symbol: '↑', icon: '$arrowup', text: '$vuetify.hotkey.upArrow' },
     },

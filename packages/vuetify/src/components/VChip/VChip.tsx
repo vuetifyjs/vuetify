@@ -189,6 +189,7 @@ export const VChip = genericComponent<VChipSlots>()({
 
       return isActive.value && (
         <Tag
+          { ...link.linkProps }
           class={[
             'v-chip',
             {
@@ -220,7 +221,6 @@ export const VChip = genericComponent<VChipSlots>()({
           onClick={ onClick }
           onKeydown={ isClickable.value && !isLink.value && onKeyDown }
           v-ripple={[isClickable.value && props.ripple, null]}
-          { ...link.linkProps }
         >
           { genOverlays(isClickable.value, 'v-chip') }
 

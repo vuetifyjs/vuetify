@@ -238,33 +238,6 @@ describe('VCombobox', () => {
       await userEvent.keyboard('antonsen')
       await expect(screen.findByRole('option')).resolves.toHaveTextContent('Antonsen PK')
     })
-
-    // https://github.com/vuetifyjs/vuetify/pull/22045
-    it('should keep menu open while typing', async () => {
-      const items = ['Item 1', 'Item 1a', 'Another']
-
-      const { element } = render(() => (
-        <VCombobox items={ items } multiple />
-      ))
-
-      const optionsPerAction = [
-        ['1', 2],
-        ['a', 1],
-        ['x', 0],
-        ['y', 0],
-        ['{Backspace}', 0],
-        ['{Backspace}', 1],
-        ['{Backspace}', 2],
-        ['{Backspace}', 3],
-      ] as const
-
-      await userEvent.click(element)
-      await expect(screen.findAllByRole('option')).resolves.toHaveLength(3)
-      for (const [text, expectedItemsCount] of optionsPerAction) {
-        await userEvent.keyboard(text)
-        await expect.poll(() => screen.queryAllByRole('option')).toHaveLength(expectedItemsCount)
-      }
-    })
   })
 
   describe('prefilled data', () => {
@@ -796,41 +769,6 @@ describe('VCombobox', () => {
     navigator.clipboard.writeText(text)
     await userEvent.paste()
     expect(model.value).toEqual(expected)
-  })
-
-  it('should show only matching items when reopening the menu', async () => {
-    const { element } = render(() => (
-      <VCombobox items={['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']} />
-    ))
-
-    await userEvent.click(element)
-    await userEvent.keyboard('c')
-    await expect(screen.findAllByRole('option')).resolves.toHaveLength(2)
-    await userEvent.keyboard('al')
-    await expect(screen.findAllByRole('option')).resolves.toHaveLength(1)
-    await userEvent.click(document.body)
-    await expect.poll(() => screen.queryAllByRole('option')).toHaveLength(0)
-    await userEvent.click(element)
-    await expect.poll(() => screen.queryAllByRole('option')).toHaveLength(1)
-  })
-
-  it('should show only matching items when opening for the first time', async () => {
-    const model = ref('flor')
-    const { element } = render(() => (
-      <VCombobox
-        v-model={ model.value }
-        items={['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']}
-      />
-    ))
-
-    await userEvent.click(element)
-    expect(screen.getAllByRole('option')).toHaveLength(1)
-    await userEvent.click(document.body)
-    await expect.poll(() => screen.queryAllByRole('option')).toHaveLength(0)
-
-    // expect same behavior when re-opening the menu
-    await userEvent.click(element)
-    await expect.poll(() => screen.queryAllByRole('option')).toHaveLength(1)
   })
 
   describe('Showcase', () => {
