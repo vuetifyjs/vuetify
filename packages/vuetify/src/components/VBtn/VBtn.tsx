@@ -183,6 +183,7 @@ export const VBtn = genericComponent<VBtnSlots>()({
 
       return withDirectives(
         <Tag
+          { ...link.linkProps }
           type={ Tag === 'a' ? undefined : 'button' }
           class={[
             'v-btn',
@@ -229,7 +230,6 @@ export const VBtn = genericComponent<VBtnSlots>()({
           tabindex={ props.loading || props.readonly ? -1 : undefined }
           onClick={ onClick }
           value={ valueAttr.value }
-          { ...link.linkProps }
         >
           { genOverlays(true, 'v-btn') }
 
