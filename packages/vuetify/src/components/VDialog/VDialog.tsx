@@ -66,17 +66,7 @@ export const VDialog = genericComponent<OverlaySlots>()({
         !overlay.value.contentEl.contains(after)
       ) {
         const focusable = focusableChildren(overlay.value.contentEl)
-
-        if (!focusable.length) return
-
-        const firstElement = focusable[0]
-        const lastElement = focusable[focusable.length - 1]
-
-        if (before === firstElement) {
-          lastElement.focus()
-        } else {
-          firstElement.focus()
-        }
+        focusable[0]?.focus()
       }
     }
 
@@ -107,7 +97,7 @@ export const VDialog = genericComponent<OverlaySlots>()({
     if (IN_BROWSER) {
       watch(() => isActive.value && props.retainFocus, val => {
         if (val) {
-          document.addEventListener('focusin', onFocusin)
+          document.addEventListener('focusin', onFocusin, { once: true })
           document.addEventListener('keydown', onKeydown)
         } else {
           document.removeEventListener('focusin', onFocusin)
