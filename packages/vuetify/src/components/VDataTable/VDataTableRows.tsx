@@ -29,6 +29,7 @@ export type VDataTableRowsSlots<T> = VDataTableGroupHeaderRowSlots & VDataTableR
   'group-summary': GroupSummarySlot
   'no-data': never
   'expanded-row': ItemSlot<T>
+  'item.prepend': ItemSlot<T>
 }
 
 export const makeVDataTableRowsProps = propsFactory({
@@ -180,6 +181,8 @@ export const VDataTableRows = genericComponent<new <T>(
 
             return (
               <Fragment key={ itemSlotProps.props.key as string }>
+                { slots['item.prepend']?.(slotProps) }
+
                 { slots.item ? slots.item(itemSlotProps) : (
                   <VDataTableRow
                     { ...itemSlotProps.props }
