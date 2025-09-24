@@ -390,7 +390,7 @@ export function arrayDiff (a: any[], b: any[]): any[] {
 type IfAny<T, Y, N> = 0 extends (1 & T) ? Y : N;
 export function wrapInArray<T> (
   v: T | null | undefined,
-  emptyValues: Ref<any[]>
+  emptyValues?: Ref<any[]>
 ): T extends readonly any[]
     ? IfAny<T, T[], T>
     : NonNullable<T>[] {
