@@ -9,7 +9,6 @@
     <div>
       <v-infinite-scroll
         v-bind="props"
-        :items="items.value"
         @load="load"
       >
         <template v-for="(item, index) in items" :key="item">
@@ -64,7 +63,7 @@
   })
 
   const code = computed(() => {
-    return `<v-infinite-scroll${propsToString(props.value, ['items'])}>${slots.value}</v-infinite-scroll>`
+    return `<v-infinite-scroll>${slots.value}</v-infinite-scroll>`
   })
 
   const script = computed(() => {
