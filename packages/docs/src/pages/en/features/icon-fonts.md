@@ -230,6 +230,24 @@ bun add unocss @iconify-json/mdi -D
 
 then, configure UnoCSS in your project adding the preset (read the [UnoCSS integration section](https://unocss.dev/integrations/) for further details).
 
+::: warning
+
+Don't change the default prefix `i-` of UnoCSS preset-icons, Vuetify's MDI icon set relies on it.
+
+:::
+
+
+```js { resource="unocss.config.js" }
+import { presetIcons, defineConfig } from 'unocss'
+
+export default defineConfig({
+  presets: [
+    presetIcons(),
+  ],
+})
+```
+
+
 To register the icon set, use the following code:
 
 ```js { resource="src/plugins/vuetify.js" }
