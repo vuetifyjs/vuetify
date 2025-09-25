@@ -51,11 +51,14 @@ export const VDialog = genericComponent<OverlaySlots>()({
     const { scopeId } = useScopeId()
 
     const overlay = ref<VOverlay>()
-    function onFocusin (e: FocusEvent) {
+    async function onFocusin (e: FocusEvent) {
       const before = e.relatedTarget as HTMLElement | null
       const after = e.target as HTMLElement | null
 
+      await nextTick()
+
       if (
+        isActive.value &&
         before !== after &&
         overlay.value?.contentEl &&
         // We're the topmost dialog
