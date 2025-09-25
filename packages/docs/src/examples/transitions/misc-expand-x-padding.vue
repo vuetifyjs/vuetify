@@ -7,7 +7,7 @@
 
       <v-expand-transition>
         <div v-show="expand">
-          <v-alert text="Smooth transition here" type="info" />
+          <v-alert text="Smooth transition here" type="info"></v-alert>
         </div>
       </v-expand-transition>
     </v-container>
