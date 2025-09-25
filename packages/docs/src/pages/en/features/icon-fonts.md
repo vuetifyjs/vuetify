@@ -236,7 +236,6 @@ Don't change the default prefix `i-` of UnoCSS preset-icons, Vuetify's MDI icon 
 
 :::
 
-
 ```js { resource="unocss.config.js" }
 import { presetIcons, defineConfig } from 'unocss'
 
@@ -246,7 +245,6 @@ export default defineConfig({
   ],
 })
 ```
-
 
 To register the icon set, use the following code:
 
