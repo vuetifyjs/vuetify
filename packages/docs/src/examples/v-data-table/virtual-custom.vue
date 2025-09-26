@@ -1,22 +1,42 @@
 <template>
-  <v-data-table-virtual
-    :headers="headers"
-    :items="items"
-    item-key="id"
-    fixed-header
-  >
-    <template v-slot:item="{ columns, internalItem, props, itemRef }">
-      <tr v-bind="props" :ref="itemRef">
-        <td v-for="column in columns" :key="column.key">
-          {{ internalItem.raw[column.key] }}
-        </td>
-      </tr>
-    </template>
-  </v-data-table-virtual>
+  <v-app>
+    <v-container>
+      <v-chip-group v-model="selectedSize" class="mb-4" mandatory row>
+        <v-chip
+          v-for="size in sizes"
+          :key="size"
+          :value="size"
+          color="primary"
+          variant="outlined"
+        >
+          {{ size }} items
+        </v-chip>
+      </v-chip-group>
+
+      <v-data-table-virtual
+        :headers="headers"
+        :items="items"
+        height="400"
+        item-key="id"
+        fixed-header
+      >
+        <template v-slot:item="{ columns, internalItem, props, itemRef }">
+          <tr v-bind="props" :ref="itemRef">
+            <td v-for="column in columns" :key="column.key">
+              {{ internalItem.raw[column.key] }}
+            </td>
+          </tr>
+        </template>
+      </v-data-table-virtual>
+    </v-container>
+  </v-app>
 </template>
 
 <script setup>
-  import { computed } from 'vue'
+  import { computed, ref } from 'vue'
+
+  const sizes = [100, 400, 800]
+  const selectedSize = ref(100)
 
   const headers = [
     { title: 'ID', value: 'id', sortable: true },
@@ -26,26 +46,35 @@
     { title: 'Role', value: 'role', sortable: true },
   ]
 
-  const items = computed(() => [
-    { id: 1, title: 'Dr.', name: 'Sarah Johnson', email: 'sarah.johnson@company.com', role: 'Owner' },
-    { id: 2, title: 'Mr.', name: 'Michael Chen', email: 'michael.chen@company.com', role: 'Manager' },
-    { id: 3, title: 'Ms.', name: 'Emily Rodriguez', email: 'emily.rodriguez@company.com', role: 'Board Member' },
-    { id: 4, title: 'Mr.', name: 'David Thompson', email: 'david.thompson@company.com', role: 'Manager' },
-    { id: 5, title: 'Mrs.', name: 'Lisa Wang', email: 'lisa.wang@company.com', role: 'Owner' },
-    { id: 6, title: 'Mr.', name: 'Robert Garcia', email: 'robert.garcia@company.com', role: 'Board Member' },
-    { id: 7, title: 'Ms.', name: 'Jennifer Smith', email: 'jennifer.smith@company.com', role: 'Manager' },
-    { id: 8, title: 'Mr.', name: 'Alex Kumar', email: 'alex.kumar@company.com', role: 'Board Member' },
-    { id: 9, title: 'Ms.', name: 'Maria Gonzalez', email: 'maria.gonzalez@company.com', role: 'Manager' },
-    { id: 10, title: 'Mr.', name: 'James Wilson', email: 'james.wilson@company.com', role: 'Owner' },
-    { id: 11, title: 'Ms.', name: 'Rachel Brown', email: 'rachel.brown@company.com', role: 'Manager' },
-    { id: 12, title: 'Mr.', name: 'Kevin Lee', email: 'kevin.lee@company.com', role: 'Board Member' },
-  ])
+  const baseItems = [
+    { title: 'Mr.', name: 'James Smith', email: 'james.smith@gmail.com', role: 'Owner' },
+    { title: 'Ms.', name: 'Mary Johnson', email: 'mary.johnson@yahoo.com', role: 'Manager' },
+    { title: 'Dr.', name: 'Robert Williams', email: 'robert.williams@outlook.com', role: 'Board Member' },
+    { title: 'Mrs.', name: 'Patricia Brown', email: 'patricia.brown@hotmail.com', role: 'Developer' },
+    { title: 'Mr.', name: 'John Davis', email: 'john.davis@gmail.com', role: 'Designer' },
+    { title: 'Ms.', name: 'Jennifer Garcia', email: 'jennifer.garcia@yahoo.com', role: 'Manager' },
+    { title: 'Mr.', name: 'Michael Miller', email: 'michael.miller@outlook.com', role: 'Owner' },
+    { title: 'Mrs.', name: 'Linda Martinez', email: 'linda.martinez@hotmail.com', role: 'Developer' },
+    { title: 'Dr.', name: 'William Rodriguez', email: 'william.rodriguez@gmail.com', role: 'Board Member' },
+    { title: 'Ms.', name: 'Elizabeth Hernandez', email: 'elizabeth.hernandez@yahoo.com', role: 'Designer' },
+    { title: 'Mr.', name: 'David Lopez', email: 'david.lopez@outlook.com', role: 'Manager' },
+    { title: 'Mrs.', name: 'Barbara Gonzalez', email: 'barbara.gonzalez@hotmail.com', role: 'Owner' },
+  ]
+
+  const items = computed(() => {
+    return Array.from({ length: selectedSize.value }).map((_, i) => {
+      const base = baseItems[i % baseItems.length]
+      return { id: i + 1, ...base }
+    })
+  })
 </script>
 
 <script>
   export default {
     data () {
       return {
+        sizes: [100, 400, 800],
+        selectedSize: 100,
         headers: [
           { title: 'ID', value: 'id', sortable: true },
           { title: 'Title', value: 'title', sortable: true },
@@ -53,21 +82,30 @@
           { title: 'Email', value: 'email', sortable: true },
           { title: 'Role', value: 'role', sortable: true },
         ],
-        items: [
-          { id: 1, title: 'Dr.', name: 'Sarah Johnson', email: 'sarah.johnson@company.com', role: 'Owner' },
-          { id: 2, title: 'Mr.', name: 'Michael Chen', email: 'michael.chen@company.com', role: 'Manager' },
-          { id: 3, title: 'Ms.', name: 'Emily Rodriguez', email: 'emily.rodriguez@company.com', role: 'Board Member' },
-          { id: 4, title: 'Mr.', name: 'David Thompson', email: 'david.thompson@company.com', role: 'Manager' },
-          { id: 5, title: 'Mrs.', name: 'Lisa Wang', email: 'lisa.wang@company.com', role: 'Owner' },
-          { id: 6, title: 'Mr.', name: 'Robert Garcia', email: 'robert.garcia@company.com', role: 'Board Member' },
-          { id: 7, title: 'Ms.', name: 'Jennifer Smith', email: 'jennifer.smith@company.com', role: 'Manager' },
-          { id: 8, title: 'Mr.', name: 'Alex Kumar', email: 'alex.kumar@company.com', role: 'Board Member' },
-          { id: 9, title: 'Ms.', name: 'Maria Gonzalez', email: 'maria.gonzalez@company.com', role: 'Manager' },
-          { id: 10, title: 'Mr.', name: 'James Wilson', email: 'james.wilson@company.com', role: 'Owner' },
-          { id: 11, title: 'Ms.', name: 'Rachel Brown', email: 'rachel.brown@company.com', role: 'Manager' },
-          { id: 12, title: 'Mr.', name: 'Kevin Lee', email: 'kevin.lee@company.com', role: 'Board Member' },
+        baseItems: [
+          { title: 'Mr.', name: 'James Smith', email: 'james.smith@gmail.com', role: 'Owner' },
+          { title: 'Ms.', name: 'Mary Johnson', email: 'mary.johnson@yahoo.com', role: 'Manager' },
+          { title: 'Dr.', name: 'Robert Williams', email: 'robert.williams@outlook.com', role: 'Board Member' },
+          { title: 'Mrs.', name: 'Patricia Brown', email: 'patricia.brown@hotmail.com', role: 'Developer' },
+          { title: 'Mr.', name: 'John Davis', email: 'john.davis@gmail.com', role: 'Designer' },
+          { title: 'Ms.', name: 'Jennifer Garcia', email: 'jennifer.garcia@yahoo.com', role: 'Manager' },
+          { title: 'Mr.', name: 'Michael Miller', email: 'michael.miller@outlook.com', role: 'Owner' },
+          { title: 'Mrs.', name: 'Linda Martinez', email: 'linda.martinez@hotmail.com', role: 'Developer' },
+          { title: 'Dr.', name: 'William Rodriguez', email: 'william.rodriguez@gmail.com', role: 'Board Member' },
+          { title: 'Ms.', name: 'Elizabeth Hernandez', email: 'elizabeth.hernandez@yahoo.com', role: 'Designer' },
+          { title: 'Mr.', name: 'David Lopez', email: 'david.lopez@outlook.com', role: 'Manager' },
+          { title: 'Mrs.', name: 'Barbara Gonzalez', email: 'barbara.gonzalez@hotmail.com', role: 'Owner' },
         ],
       }
+    },
+
+    computed: {
+      items () {
+        return Array.from({ length: this.selectedSize }).map((_, i) => {
+          const base = this.baseItems[i % this.baseItems.length]
+          return { id: i + 1, ...base }
+        })
+      },
     },
   }
 </script>
