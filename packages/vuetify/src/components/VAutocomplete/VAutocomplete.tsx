@@ -126,14 +126,14 @@ export const VAutocomplete = genericComponent<new <
     const vMenuRef = ref<VMenu>()
     const vVirtualScrollRef = ref<VVirtualScroll>()
     const selectionIndex = shallowRef(-1)
-    const { items, transformIn, transformOut } = useItems(props)
+    const { items, transformIn, transformOut, emptyValues } = useItems(props)
     const { textColorClasses, textColorStyles } = useTextColor(() => vTextFieldRef.value?.color)
     const search = useProxiedModel(props, 'search', '')
     const model = useProxiedModel(
       props,
       'modelValue',
       [],
-      v => transformIn(v === null ? [null] : wrapInArray(v)),
+      v => transformIn(v === null ? [null] : wrapInArray(v, emptyValues.value)),
       v => {
         const transformed = transformOut(v)
         return props.multiple ? transformed : (transformed[0] ?? null)
