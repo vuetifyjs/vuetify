@@ -5,11 +5,15 @@
         Expand Transition
       </v-btn>
 
-      <v-expand-transition>
-        <div v-show="expand">
-          <v-alert text="Smooth transition here" type="info"></v-alert>
-        </div>
-      </v-expand-transition>
+      <v-expand-x-transition>
+        <v-responsive v-show="expand" width="fit-content">
+          <v-alert
+            class="text-no-wrap"
+            text="Smooth transition here"
+            type="info"
+          ></v-alert>
+        </v-responsive>
+      </v-expand-x-transition>
     </v-container>
   </v-app>
 </template>
