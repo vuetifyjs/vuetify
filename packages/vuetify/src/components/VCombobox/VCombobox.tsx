@@ -212,7 +212,7 @@ export const VCombobox = genericComponent<new <
       },
     })
 
-    const { menuId, ariaExpanded, ariaControls, ariaLabel } = useMenuActivator(props, menu)
+    const { ariaLabel } = useMenuActivator(props, menu)
 
     watch(_search, value => {
       if (cleared) {
@@ -496,15 +496,12 @@ export const VCombobox = genericComponent<new <
           onClick:clear={ onClear }
           onMousedown:control={ onMousedownControl }
           onKeydown={ onKeydown }
-          aria-expanded={ ariaExpanded.value }
-          aria-controls={ ariaControls.value }
         >
           {{
             ...slots,
             default: () => (
               <>
                 <VMenu
-                  id={ menuId.value }
                   ref={ vMenuRef }
                   v-model={ menu.value }
                   activator="parent"
