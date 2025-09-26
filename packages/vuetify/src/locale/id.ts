@@ -124,6 +124,14 @@ export default {
     notEmpty: 'Pilih setidaknya satu nilai',
     pattern: 'Format tidak valid',
   },
+  command: {
+    select: 'untuk memilih',
+    navigate: 'untuk navigasi',
+    goBack: 'untuk kembali',
+    close: 'untuk menutup',
+    then: 'kemudian',
+    placeholder: 'Ketik perintah atau cari...',
+  },
   hotkey: {
     then: 'kemudian',
     ctrl: 'Ctrl',

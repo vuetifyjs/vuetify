@@ -124,6 +124,14 @@ export default {
     notEmpty: 'Si us plau, tria almenys un valor',
     pattern: 'Format no vàlid',
   },
+  command: {
+    select: 'per seleccionar',
+    navigate: 'per navegar',
+    goBack: 'per tornar enrere',
+    close: 'per tancar',
+    then: 'després',
+    placeholder: 'Escriu una comanda o cerca...',
+  },
   hotkey: {
     then: 'després',
     ctrl: 'Ctrl',
