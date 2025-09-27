@@ -771,6 +771,22 @@ describe('VCombobox', () => {
     expect(model.value).toEqual(expected)
   })
 
+  it('should show only matching items when reopening the menu if alwaysFilter is true', async () => {
+    const { element } = render(() => (
+      <VCombobox alwaysFilter items={['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']} />
+    ))
+
+    await userEvent.click(element)
+    await userEvent.keyboard('c')
+    await expect(screen.findAllByRole('option')).resolves.toHaveLength(2)
+    await userEvent.keyboard('al')
+    await expect(screen.findAllByRole('option')).resolves.toHaveLength(1)
+    await userEvent.click(document.body)
+    await expect.poll(() => screen.queryAllByRole('option')).toHaveLength(0)
+    await userEvent.click(element)
+    await expect.poll(() => screen.queryAllByRole('option')).toHaveLength(1)
+  })
+
   describe('Showcase', () => {
     generate({ stories })
   })
