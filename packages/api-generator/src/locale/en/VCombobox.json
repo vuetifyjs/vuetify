@@ -4,7 +4,8 @@
     "clearOnSelect": "Reset the search text when a selection is made while using the **multiple** prop.",
     "itemChildren": "This property currently has **no effect**.",
     "delimiters": "Accepts an array of strings that will trigger a new tag when typing. Does not replace the normal Tab and Enter keys.",
-    "items": "Can be an array of objects or strings. By default objects should have **title** and **value** properties, and can optionally have a **props** property containing any [VListItem props](/api/v-list-item/#props). Keys to use for these can be changed with the **item-title**, **item-value**, and **item-props** props."
+    "items": "Can be an array of objects or strings. By default objects should have **title** and **value** properties, and can optionally have a **props** property containing any [VListItem props](/api/v-list-item/#props). Keys to use for these can be changed with the **item-title**, **item-value**, and **item-props** props.",
+    "alwaysFilter": "When enabled, the combobox will only apply filtering **after the user types**, rather than immediately on load. This provides more predictable **matching** and **suggestions** behavior. For optimal UX, consider combining with `:menu-icon=\"false\"` (to hide the dropdown arrow) and `hide-selected` (to avoid showing already-selected items in the suggestions)."
   },
   "slots": {
     "item": "Define a custom item appearance. The root element of this slot must be a **v-list-item** with `v-bind=\"props\"` applied. `props` includes everything required for the default select list behaviour - including title, value, click handlers, virtual scrolling, and anything else that has been added with `item-props`."
