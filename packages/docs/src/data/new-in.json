@@ -60,7 +60,7 @@
   },
   "VCombobox": {
     "props": {
-      "alwaysFilter": "3.11.0",
+      "alwaysFilter": "3.10.4",
       "autocomplete": "3.10.0",
       "clearOnSelect": "3.5.0",
       "listProps": "3.5.0"
