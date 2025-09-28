@@ -10,11 +10,11 @@
 
       <v-col class="text-center text-lg-start" cols="auto">
         <h1 class="text-h2 font-weight-medium mb-3 ms-n1">
-          Vue Component Framework
+          {{ $t("home.title") }}
         </h1>
 
         <p class="mb-10 mx-auto ms-lg-0" style="max-width: 568px;">
-          Vuetify is a no design skills required Open Source UI Library with beautifully handcrafted Vue Components.
+          {{ $t("home.description") }}
         </p>
 
         <HomeActionBtns />
@@ -67,7 +67,7 @@
               border
               rounded
             >
-              <span class="me-2">Latest Commit:</span>
+              <span class="me-2">{{ $t("home.entry.last-commit") }}</span>
 
               <AppCommitBtn />
             </v-sheet>
@@ -81,7 +81,7 @@
               border
               rounded
             >
-              <span class="me-2">Latest Release:</span>
+              <span class="me-2">{{ $t("home.entry.last-release") }}</span>
 
               <AppVersionBtn />
             </v-sheet>
