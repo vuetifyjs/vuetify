@@ -1,8 +1,10 @@
 {
   "props": {
     "customKeySort": "Function used on specific keys within the item object. `customSort` is skipped for columns with `customKeySort` specified.",
+    "disableSort": "Toggles rendering of sort button.",
+    "multiSort": "Let user sort by multiple properties/columns.",
+    "multiSortOrder": "When user selects a new column to sort by, it will be set first (`prepend`) or last (`append`) in the sort priority.",
     "mustSort": "Forces sorting on the column(s).",
     "sortBy": "Array of column keys and sort orders that determines the sort order of the table."
-
   }
 }

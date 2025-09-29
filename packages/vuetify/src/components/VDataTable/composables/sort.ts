@@ -18,6 +18,10 @@ export const makeDataTableSortProps = propsFactory({
   },
   customKeySort: Object as PropType<Record<string, DataTableCompareFunction>>,
   multiSort: Boolean,
+  multiSortOrder: {
+    type: String as PropType<MultiSortOrder>,
+    default: 'append',
+  },
   mustSort: Boolean,
 }, 'DataTable-sort')
 
@@ -28,29 +32,33 @@ const VDataTableSortSymbol: InjectionKey<{
 }> = Symbol.for('vuetify:data-table-sort')
 
 export type SortItem = { key: string, order?: boolean | 'asc' | 'desc' }
+export type MultiSortOrder = 'append' | 'prepend'
 
 type SortProps = {
   sortBy: readonly SortItem[]
   'onUpdate:sortBy': ((value: any) => void) | undefined
-  mustSort: boolean
   multiSort: boolean
+  multiSortOrder: MultiSortOrder
+  mustSort: boolean
 }
 
 export function createSort (props: SortProps) {
   const sortBy = useProxiedModel(props, 'sortBy')
   const mustSort = toRef(() => props.mustSort)
   const multiSort = toRef(() => props.multiSort)
+  const multiSortOrder = toRef(() => props.multiSortOrder)
 
-  return { sortBy, mustSort, multiSort }
+  return { sortBy, mustSort, multiSort, multiSortOrder }
 }
 
 export function provideSort (options: {
   sortBy: Ref<readonly SortItem[]>
   mustSort: Ref<boolean>
   multiSort: Ref<boolean>
+  multiSortOrder: Ref<MultiSortOrder>
   page?: Ref<number>
 }) {
-  const { sortBy, mustSort, multiSort, page } = options
+  const { sortBy, mustSort, multiSort, multiSortOrder, page } = options
 
   const toggleSort = (column: InternalDataTableHeader) => {
     if (column.key == null) return
@@ -60,7 +68,11 @@ export function provideSort (options: {
 
     if (!item) {
       if (multiSort.value) {
-        newSortBy.push({ key: column.key, order: 'asc' })
+        if (multiSortOrder.value === 'prepend') {
+          newSortBy.unshift({ key: column.key, order: 'asc' })
+        } else {
+          newSortBy.push({ key: column.key, order: 'asc' })
+        }
       } else {
         newSortBy = [{ key: column.key, order: 'asc' }]
       }
