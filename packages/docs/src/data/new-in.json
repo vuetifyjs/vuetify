@@ -178,7 +178,9 @@
   },
   "VNumberInput": {
     "props": {
-      "autocomplete": "3.10.0"
+      "autocomplete": "3.10.0",
+      "grouping": "3.11.0",
+      "groupingSeparator": "3.11.0"
     }
   },
   "VOverlay": {
