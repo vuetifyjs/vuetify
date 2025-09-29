@@ -252,6 +252,7 @@ export const VCombobox = genericComponent<new <
     const listEvents = useScrolling(listRef, vTextFieldRef)
     function onClear (e: MouseEvent) {
       cleared = true
+      nextTick(() => (cleared = false))
 
       if (props.openOnClear) {
         menu.value = true
