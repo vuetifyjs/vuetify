@@ -200,6 +200,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
                 ...itemProps,
                 ...activatorProps,
                 value: itemProps?.value,
+                indentLines: indentLines.node,
                 onToggleExpand: [() => checkChildren(item), activatorProps.onClick] as any,
                 onClick: isClickOnOpen.value
                   ? [() => checkChildren(item), activatorProps.onClick] as any
@@ -215,7 +216,6 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
                     { ...listItemProps }
                     hasCustomPrepend={ !!slots.prepend }
                     hideActions={ props.hideActions }
-                    indentLines={ indentLines.node }
                     value={ props.returnObject ? item.raw : itemProps.value }
                     loading={ loading }
                     v-slots={ slotsWithItem }
