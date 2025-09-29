@@ -186,6 +186,7 @@ const messages = {
   en: {
     ...en,
     dataFooter: {
+      ...en.dataFooter,
       itemsPerPageText: 'Items per page:',
       pageText: '{0}-{1} of {2}',
     },
@@ -193,6 +194,7 @@ const messages = {
   sv: {
     ...sv,
     dataFooter: {
+      ...sv.dataFooter,
       itemsPerPageText: 'Element per sida:',
       pageText: '{0}-{1} av {2}',
     },
