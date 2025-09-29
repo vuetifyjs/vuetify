@@ -38,6 +38,11 @@ export type VTreeviewChildrenSlots<T> = {
     internalItem: InternalListItem<T>
     loading: boolean
   }
+  footer: {
+    item: T
+    internalItem: InternalListItem<T>
+    loading: boolean
+  }
   divider: { props: InternalListItem['props'] }
   subheader: { props: InternalListItem['props'] }
 }
@@ -224,15 +229,18 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
               )
             },
             default: () => (
-              <VTreeviewChildren
-                { ...treeviewChildrenProps }
-                items={ children }
-                indentLinesVariant={ props.indentLinesVariant }
-                parentIndentLines={ indentLines.children }
-                isLastGroup={ nextItemHasChildren }
-                returnObject={ props.returnObject }
-                v-slots={ slots }
-              />
+              <>
+                <VTreeviewChildren
+                  { ...treeviewChildrenProps }
+                  items={ children }
+                  indentLinesVariant={ props.indentLinesVariant }
+                  parentIndentLines={ indentLines.children }
+                  isLastGroup={ nextItemHasChildren }
+                  returnObject={ props.returnObject }
+                  v-slots={ slots }
+                />
+                { slots.footer?.({ item: item.raw, internalItem: item, loading }) }
+              </>
             ),
           }}
         </VTreeviewGroup>
