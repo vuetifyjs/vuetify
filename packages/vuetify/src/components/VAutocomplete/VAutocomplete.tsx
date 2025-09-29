@@ -70,7 +70,6 @@ export const makeVAutocompleteProps = propsFactory({
   ...makeFilterProps({ filterKeys: ['title'] }),
   ...makeSelectProps(),
   ...omit(makeVTextFieldProps({
-    modelValue: null,
     role: 'combobox',
   }), ['validationValue', 'dirty', 'appendInnerIcon']),
   ...makeTransitionProps({ transition: false }),
