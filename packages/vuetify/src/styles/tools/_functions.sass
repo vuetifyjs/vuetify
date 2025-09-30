@@ -80,3 +80,34 @@
 
 @function roundEven($val)
   @return 2 * math.round($val * .5)
+
+// Grid utility generation functions
+@function generate-grid-template($max: 12)
+  $values: ()
+  @for $i from 1 through $max
+    $values: map.merge($values, (#{$i}: repeat(#{$i}, minmax(0, 1fr))))
+  @return map.merge($values, (none: none))
+
+@function generate-auto-variants($sizes: (100, 150, 200, 250, 300, 350, 400, 500))
+  $values: ()
+  @each $size in $sizes
+    $values: map.merge($values, (auto-fill-#{$size}: repeat(auto-fill, minmax(#{$size}px, 1fr)), auto-fit-#{$size}: repeat(auto-fit, minmax(#{$size}px, 1fr))))
+  @return $values
+
+@function generate-grid-positions($max: 12)
+  $values: (auto: auto)
+  @for $i from 1 through $max
+    $values: map.merge($values, (#{$i}: #{$i}))
+  @return $values
+
+@function generate-grid-spans($max: 12)
+  $values: (auto: auto)
+  @for $i from 1 through $max
+    $values: map.merge($values, (#{$i}: #{$i}, span-#{$i}: span #{$i} / span #{$i}))
+  @return map.merge($values, (span-full: 1 / -1))
+
+@function generate-grid-start-end($max: 13)
+  $values: (auto: auto)
+  @for $i from 1 through $max
+    $values: map.merge($values, (#{$i}: #{$i}))
+  @return $values

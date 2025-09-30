@@ -24,7 +24,7 @@ $utilities: () !default;
         print: true,
         property: display,
         class: d,
-        values: none inline inline-block block table table-row table-cell flex inline-flex
+        values: none inline inline-block block table table-row table-cell flex inline-flex grid
       ),
       "float": (
         responsive: true,
@@ -173,6 +173,96 @@ $utilities: () !default;
           11: 11,
           12: 12,
           last: 13,
+        ),
+      ),
+
+      // Grid utilities
+      "grid-template-columns": (
+        responsive: true,
+        property: grid-template-columns,
+        class: grid-cols,
+        values: map.merge(
+          generate-grid-template(12),
+          generate-auto-variants()
+        ),
+      ),
+      "grid-template-rows": (
+        responsive: true,
+        property: grid-template-rows,
+        class: grid-rows,
+        values: map.merge(
+          generate-grid-template(12),
+          generate-auto-variants()
+        ),
+      ),
+      "grid-column": (
+        responsive: true,
+        property: grid-column,
+        class: col,
+        values: generate-grid-spans(12),
+      ),
+      "grid-row": (
+        responsive: true,
+        property: grid-row,
+        class: row,
+        values: generate-grid-spans(12),
+      ),
+      "grid-column-start": (
+        responsive: true,
+        property: grid-column-start,
+        class: col-start,
+        values: generate-grid-start-end(13),
+      ),
+      "grid-column-end": (
+        responsive: true,
+        property: grid-column-end,
+        class: col-end,
+        values: generate-grid-start-end(13),
+      ),
+      "grid-row-start": (
+        responsive: true,
+        property: grid-row-start,
+        class: row-start,
+        values: generate-grid-start-end(13),
+      ),
+      "grid-row-end": (
+        responsive: true,
+        property: grid-row-end,
+        class: row-end,
+        values: generate-grid-start-end(13),
+      ),
+      "grid-auto-flow": (
+        responsive: true,
+        property: grid-auto-flow,
+        class: grid-flow,
+        values: (
+          row: row,
+          col: column,
+          dense: dense,
+          row-dense: row dense,
+          col-dense: column dense,
+        ),
+      ),
+      "grid-auto-columns": (
+        responsive: true,
+        property: grid-auto-columns,
+        class: auto-cols,
+        values: (
+          auto: auto,
+          min: min-content,
+          max: max-content,
+          fr: minmax(0, 1fr),
+        ),
+      ),
+      "grid-auto-rows": (
+        responsive: true,
+        property: grid-auto-rows,
+        class: auto-rows,
+        values: (
+          auto: auto,
+          min: min-content,
+          max: max-content,
+          fr: minmax(0, 1fr),
         ),
       ),
 
