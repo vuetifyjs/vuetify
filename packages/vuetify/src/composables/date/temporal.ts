@@ -13,6 +13,48 @@ export function parsePlainDate (value?: string | Temporal.PlainDate | null): Tem
   return null
 }
 
+export function parseRFC9557 (value: string | TemporalDate | null | undefined): TemporalDate | null {
+  if (!value) return null
+  if (typeof value !== 'string') return value
+
+  const s = value.trim()
+  let state: 'date' | 'time' | 'instant' | 'offset' | 'zoned' = 'date'
+  let offsetStart = 0
+
+  for (let i = 0; i < s.length; i++) {
+    const c = s[i]
+    if (state === 'date') {
+      if (c === 'T' || c === ' ') {
+        state = 'time'
+      }
+    } else if (state === 'time') {
+      if (c === 'Z') {
+        state = 'instant'
+      } else if (c === '+' || c === '-') {
+        state = 'offset'
+        offsetStart = i
+      } else if (c === '[') {
+        state = 'zoned'
+        break
+      }
+    } else if ((state === 'instant' || state === 'offset') && c === '[') {
+      state = 'zoned'
+      break
+    }
+  }
+
+  switch (state) {
+    case 'date': return Temporal.PlainDate.from(s)
+    case 'time': return Temporal.PlainDateTime.from(s)
+    case 'instant': return Temporal.Instant.from(s).toZonedDateTimeISO('UTC')
+    case 'offset': return Temporal.Instant.from(s).toZonedDateTimeISO(s.slice(offsetStart))
+    case 'zoned': return Temporal.ZonedDateTime.from(s)
+    default:
+      void (state satisfies never)
+      return null
+  }
+}
+
 // export function date (value?: any): TemporalDate | null {
 //   try {
 //     return Temporal.ZonedDateTime.from(value)

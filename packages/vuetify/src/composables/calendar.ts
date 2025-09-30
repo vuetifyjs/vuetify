@@ -90,17 +90,17 @@ export function useCalendar (props: CalendarProps) {
     props,
     'modelValue',
     [],
-    v => wrapInArray(v).map(i => dateUtil.parsePlainDate(i)),
+    v => wrapInArray(v).map(i => dateUtil.parseRFC9557(i)),
   )
   const displayValue = computed(() => {
     let v
-    if (props.displayValue) v = dateUtil.parsePlainDate(props.displayValue)
+    if (props.displayValue) v = dateUtil.parseRFC9557(props.displayValue)
     if (v) return v
     if (model.value.length > 0) v = model.value[0]
     if (v) return v
-    if (props.min) v = dateUtil.parsePlainDate(props.min)
+    if (props.min) v = dateUtil.parseRFC9557(props.min)
     if (v) return v
-    if (Array.isArray(props.allowedDates)) v = dateUtil.parsePlainDate(props.allowedDates[0])
+    if (Array.isArray(props.allowedDates)) v = dateUtil.parseRFC9557(props.allowedDates[0])
     if (v) return v
 
     return Temporal.Now.plainDateISO()
@@ -221,11 +221,11 @@ export function useCalendar (props: CalendarProps) {
   function isDisabled (value: Temporal.PlainDate) {
     if (props.disabled) return true
 
-    if (props.min && dateUtil.isBefore(dateUtil.endOfDay(value), dateUtil.parsePlainDate(props.min))) return true
-    if (props.max && dateUtil.isAfter(value, dateUtil.parsePlainDate(props.max))) return true
+    if (props.min && dateUtil.isBefore(dateUtil.endOfDay(value), dateUtil.parseRFC9557(props.min))) return true
+    if (props.max && dateUtil.isAfter(value, dateUtil.parseRFC9557(props.max))) return true
 
     if (Array.isArray(props.allowedDates) && props.allowedDates.length > 0) {
-      return !props.allowedDates.some(d => dateUtil.isSameDay(dateUtil.parsePlainDate(d), value))
+      return !props.allowedDates.some(d => dateUtil.isSameDay(dateUtil.parseRFC9557(d), value))
     }
 
     if (typeof props.allowedDates === 'function') {

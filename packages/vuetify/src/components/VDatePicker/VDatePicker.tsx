@@ -116,7 +116,7 @@ export const VDatePicker = genericComponent<new <
       props,
       'modelValue',
       undefined,
-      v => wrapInArray(v).map(i => dateUtil.parsePlainDate(i)),
+      v => wrapInArray(v).map(i => dateUtil.parseRFC9557(i)),
       v => props.multiple ? v.map(i => i?.toString()) : v[0]?.toString(),
     )
 
@@ -124,15 +124,15 @@ export const VDatePicker = genericComponent<new <
     // const inputMode = useProxiedModel(props, 'inputMode')
 
     const minDate = computed(() => {
-      return dateUtil.parsePlainDate(props.min)
+      return dateUtil.parseRFC9557(props.min)
     })
     const maxDate = computed(() => {
-      return dateUtil.parsePlainDate(props.max)
+      return dateUtil.parseRFC9557(props.max)
     })
 
     const internal = computed(() => {
       const today = Temporal.Now.plainDateISO()
-      let value = today
+      let value: dateUtil.TemporalDate = today
       if (model.value?.[0]) {
         value = model.value[0]
       } else if (minDate.value && dateUtil.isBefore(today, minDate.value)) {

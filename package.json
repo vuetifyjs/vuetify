@@ -82,6 +82,7 @@
     "semver": "^7.7.1",
     "shelljs": "^0.10.0",
     "stringify-object": "^5.0.0",
+    "temporal-polyfill": "^0.3.0",
     "typescript": "~5.8.3",
     "upath": "^2.0.1",
     "vite": "^6.3.5",
