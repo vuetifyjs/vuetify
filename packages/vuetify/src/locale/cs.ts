@@ -46,6 +46,13 @@ export default {
     input: {
       placeholder: 'Zadejte datum',
     },
+    ariaLabel: {
+      previousMonth: 'Předchozí měsíc',
+      nextMonth: 'Další měsíc',
+      selectYear: 'Vyberte rok',
+      selectDate: '{0}',
+      currentDate: 'Dnes, {0}',
+    },
   },
   noDataText: 'Nejsou dostupná žádná data',
   carousel: {
@@ -134,5 +141,33 @@ export default {
     space: 'Mezerník',
     plus: 'plus',
     shortcut: 'Klávesová zkratka: {0}',
+  },
+  video: {
+    play: 'Přehrát',
+    pause: 'Pozastavit',
+    seek: 'Vyhledat',
+    volume: 'Hlasitost',
+    showVolume: 'Zobrazit ovládání hlasitosti',
+    mute: 'Ztlumit',
+    unmute: 'Zrušit ztlumení',
+    enterFullscreen: 'Celá obrazovka',
+    exitFullscreen: 'Ukončit celou obrazovku',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Vybrat barvu z obrazovky',
+      hueSlider: 'Odstín',
+      alphaSlider: 'Alfa',
+      redInput: 'Červená',
+      greenInput: 'Zelená',
+      blueInput: 'Modrá',
+      alphaInput: 'Alfa',
+      hueInput: 'Odstín',
+      saturationInput: 'Sytost',
+      lightnessInput: 'Světlost',
+      hexInput: 'HEX hodnota',
+      hexaInput: 'HEX s alfa hodnotou',
+      changeFormat: 'Změnit formát barvy',
+    },
   },
 }

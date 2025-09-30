@@ -23,13 +23,14 @@
 
       <v-chip-group
         v-model="selection"
-        variant="flat"
+        selected-class="v-chip--selected v-chip--variant-flat"
+        variant="outlined"
         mandatory
       >
-        <v-chip text="Extra Soft" border></v-chip>
-        <v-chip text="Soft" border></v-chip>
-        <v-chip text="Medium" border></v-chip>
-        <v-chip text="Hard" border></v-chip>
+        <v-chip text="Extra Soft"></v-chip>
+        <v-chip text="Soft"></v-chip>
+        <v-chip text="Medium"></v-chip>
+        <v-chip text="Hard"></v-chip>
       </v-chip-group>
     </v-card-text>
 

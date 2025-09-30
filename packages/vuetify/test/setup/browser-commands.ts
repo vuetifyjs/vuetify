@@ -64,8 +64,18 @@ async function waitStable (ctx: BrowserCommandContext, selector: string) {
   return ctx.browser.$(selector).waitForStable()
 }
 
+async function waitForClickable (ctx: BrowserCommandContext, selector: string) {
+  return ctx.browser.$(selector).waitForClickable()
+}
+
 async function setFocusEmulationEnabled (ctx: BrowserCommandContext) {
   return ctx.browser.sendCommand('Emulation.setFocusEmulationEnabled', { enabled: true })
+}
+
+async function setReduceMotionEnabled (ctx: BrowserCommandContext) {
+  return ctx.browser.sendCommand('Emulation.setEmulatedMedia', {
+    features: [{ name: 'prefers-reduced-motion', value: 'reduce' }],
+  })
 }
 
 let abortTimeout: ReturnType<typeof setTimeout>
@@ -90,7 +100,9 @@ export const commands = {
   isDisplayed,
   percySnapshot,
   waitStable,
+  waitForClickable,
   setFocusEmulationEnabled,
+  setReduceMotionEnabled,
   abortAfter,
   clearAbortTimeout,
 }

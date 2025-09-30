@@ -14,8 +14,8 @@ import { genericComponent, omit, propsFactory, useRender } from '@/util'
 // Types
 import type { PropType } from 'vue'
 import { VTreeviewSymbol } from './shared'
+import type { VTreeviewChildrenSlots } from './VTreeviewChildren'
 import type { InternalListItem } from '@/components/VList/VList'
-import type { VListChildrenSlots } from '@/components/VList/VListChildren'
 import type { ListItem } from '@/composables/list-items'
 import type { GenericProps, IndentLinesVariant } from '@/util'
 
@@ -28,7 +28,6 @@ function flatten (items: ListItem[], flat: ListItem[] = []) {
 }
 
 export const makeVTreeviewProps = propsFactory({
-  fluid: Boolean,
   openAll: Boolean,
   indentLines: [Boolean, String] as PropType<boolean | IndentLinesVariant>,
   search: String,
@@ -54,7 +53,7 @@ export const VTreeview = genericComponent<new <T>(
   props: {
     items?: T[]
   },
-  slots: VListChildrenSlots<T>
+  slots: VTreeviewChildrenSlots<T>
 ) => GenericProps<typeof props, typeof slots>>()({
   name: 'VTreeview',
 
@@ -170,7 +169,7 @@ export const VTreeview = genericComponent<new <T>(
             },
             props.class,
           ]}
-          open-strategy="multiple"
+          openStrategy="multiple"
           style={ props.style }
           opened={ opened.value }
           v-model:activated={ activated.value }

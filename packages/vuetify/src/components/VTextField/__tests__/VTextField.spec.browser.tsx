@@ -51,7 +51,7 @@ describe('VTextField', () => {
     const rule = vi.fn(v => v?.length > 5 || 'Error!')
 
     const { element } = render(() => (
-      <VTextField rules={[rule]} validate-on="lazy" />
+      <VTextField rules={[rule]} validateOn="lazy" />
     ))
 
     expect(element).not.toHaveClass('v-input--error')
@@ -107,7 +107,7 @@ describe('VTextField', () => {
     const rule = vi.fn(v => v?.length > 5 || 'Error!')
 
     const { element } = render(() => (
-      <VTextField validate-on="blur lazy" rules={[rule]} />
+      <VTextField validateOn="blur lazy" rules={[rule]} />
     ))
 
     expect(element).not.toHaveClass('v-input--error')
@@ -127,7 +127,7 @@ describe('VTextField', () => {
   // https://github.com/vuetifyjs/vuetify/issues/15231
   it('renders details if using hide-details="auto" and counter prop', async () => {
     const { element } = render(() => (
-      <VTextField hide-details="auto" counter></VTextField>
+      <VTextField hideDetails="auto" counter></VTextField>
     ))
     await userEvent.click(element)
     expect(element).toHaveTextContent('0')

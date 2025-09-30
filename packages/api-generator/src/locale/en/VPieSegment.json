@@ -1,0 +1,15 @@
+{
+  "props": {
+    "animation": "Controls duration and easing of the expand/collapse and hover effect. Defaults to `easeInOutCubic` over 400ms.",
+    "color": "Sets segment color to be passed straight to CSS style attribute.",
+    "gap": "Reduces segment size by a specified angle. Recommended to in range (0-10).",
+    "hideSlice": "Makes inner slice invisible instead of semi-transparent.",
+    "innerCut": "Sets inner slice size in percent (0-100).",
+    "pattern": "Decal pattern to put on top of the outer slice.",
+    "rotate": "Sets segment offset angle.",
+    "rounded": "Number passed as corner radius relative to 100x100 SVG viewport",
+    "value": "The value used for calculate segment/arc angle size.",
+    "hoverScale": "Reduces outer radius until segment is hovered. Expects fraction value (0-0.25)",
+    "reveal": "Enables and controls duration for initial reveal animation. Easing function is shared with `animation` prop."
+  }
+}

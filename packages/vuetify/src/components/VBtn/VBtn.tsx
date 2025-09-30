@@ -64,6 +64,7 @@ export const makeVBtnProps = propsFactory({
   readonly: Boolean,
   slim: Boolean,
   stacked: Boolean,
+  spaced: String as PropType<'start' | 'end' | 'both'>,
 
   ripple: {
     type: [Boolean, Object] as PropType<RippleDirectiveBinding['value']>,
@@ -152,7 +153,7 @@ export const VBtn = genericComponent<VBtnSlots>()({
         : props.value
     })
 
-    function onClick (e: MouseEvent) {
+    async function onClick (e: MouseEvent) {
       if (
         isDisabled.value ||
         (link.isLink.value && (
@@ -164,8 +165,9 @@ export const VBtn = genericComponent<VBtnSlots>()({
         ))
       ) return
 
-      link.navigate?.(e)
-      group?.toggle()
+      if (await (link.navigateWithCheck?.(e) ?? true)) {
+        group?.toggle()
+      }
     }
 
     useSelectLink(link, group?.select)
@@ -194,6 +196,12 @@ export const VBtn = genericComponent<VBtnSlots>()({
               'v-btn--slim': props.slim,
               'v-btn--stacked': props.stacked,
             },
+            props.spaced
+              ? [
+                'v-btn--spaced',
+                `v-btn--spaced-${props.spaced}`,
+              ]
+              : [],
             themeClasses.value,
             borderClasses.value,
             colorClasses.value,

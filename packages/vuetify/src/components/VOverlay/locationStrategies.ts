@@ -51,6 +51,7 @@ export interface StrategyProps {
   location: Anchor
   origin: Anchor | 'auto' | 'overlap'
   offset?: number | string | number[]
+  stickToTarget?: boolean
   maxHeight?: number | string
   maxWidth?: number | string
   minHeight?: number | string
@@ -72,6 +73,7 @@ export const makeLocationStrategyProps = propsFactory({
     default: 'auto',
   },
   offset: [Number, String, Array] as PropType<StrategyProps['offset']>,
+  stickToTarget: Boolean,
 }, 'VOverlay-location-strategies')
 
 export function useLocationStrategies (
@@ -240,21 +242,25 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
     if (result) flipped.push(result.flipped)
   })
 
-  watch([data.target, data.contentEl], ([newTarget, newContentEl], [oldTarget, oldContentEl]) => {
-    if (oldTarget && !Array.isArray(oldTarget)) observer.unobserve(oldTarget)
-    if (newTarget && !Array.isArray(newTarget)) observer.observe(newTarget)
+  let targetBox = new Box({ x: 0, y: 0, width: 0, height: 0 })
 
+  watch(data.target, (newTarget, oldTarget) => {
+    if (oldTarget && !Array.isArray(oldTarget)) observer.unobserve(oldTarget)
+    if (!Array.isArray(newTarget)) {
+      if (newTarget) observer.observe(newTarget)
+    } else if (!deepEqual(newTarget, oldTarget)) {
+      updateLocation()
+    }
+  }, { immediate: true })
+
+  watch(data.contentEl, (newContentEl, oldContentEl) => {
     if (oldContentEl) observer.unobserve(oldContentEl)
     if (newContentEl) observer.observe(newContentEl)
-  }, {
-    immediate: true,
-  })
+  }, { immediate: true })
 
   onScopeDispose(() => {
     observer.disconnect()
   })
-
-  let targetBox = new Box({ x: 0, y: 0, width: 0, height: 0 })
 
   // eslint-disable-next-line max-statements
   function updateLocation () {
@@ -391,19 +397,19 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
 
       // shift
       if (overflows.x.before) {
-        x += overflows.x.before
+        if (!props.stickToTarget) x += overflows.x.before
         contentBox.x += overflows.x.before
       }
       if (overflows.x.after) {
-        x -= overflows.x.after
+        if (!props.stickToTarget) x -= overflows.x.after
         contentBox.x -= overflows.x.after
       }
       if (overflows.y.before) {
-        y += overflows.y.before
+        if (!props.stickToTarget) y += overflows.y.before
         contentBox.y += overflows.y.before
       }
       if (overflows.y.after) {
-        y -= overflows.y.after
+        if (!props.stickToTarget) y -= overflows.y.after
         contentBox.y -= overflows.y.after
       }
 
@@ -413,9 +419,9 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
         available.x = viewport.width - overflows.x.before - overflows.x.after
         available.y = viewport.height - overflows.y.before - overflows.y.after
 
-        x += overflows.x.before
+        if (!props.stickToTarget) x += overflows.x.before
         contentBox.x += overflows.x.before
-        y += overflows.y.before
+        if (!props.stickToTarget) y += overflows.y.before
         contentBox.y += overflows.y.before
       }
 

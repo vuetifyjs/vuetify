@@ -7,6 +7,7 @@ import { VSpacer } from '@/components/VGrid'
 
 // Composables
 import { IconValue } from '@/composables/icons'
+import { useLocale } from '@/composables/locale'
 
 // Utilities
 import { computed } from 'vue'
@@ -58,6 +59,8 @@ export const VDatePickerControls = genericComponent()({
   },
 
   setup (props, { emit }) {
+    const { t } = useLocale()
+
     const disableMonth = computed(() => {
       return Array.isArray(props.disabled)
         ? props.disabled.includes('text')
@@ -123,6 +126,7 @@ export const VDatePickerControls = genericComponent()({
             density="comfortable"
             icon={ props.modeIcon }
             variant="text"
+            aria-label={ t('$vuetify.datePicker.ariaLabel.selectYear') }
             onClick={ onClickYear }
           />
 
@@ -135,6 +139,7 @@ export const VDatePickerControls = genericComponent()({
               density="comfortable"
               icon={ props.prevIcon }
               variant="text"
+              aria-label={ t('$vuetify.datePicker.ariaLabel.previousMonth') }
               onClick={ onClickPrev }
             />
 
@@ -144,6 +149,7 @@ export const VDatePickerControls = genericComponent()({
               icon={ props.nextIcon }
               density="comfortable"
               variant="text"
+              aria-label={ t('$vuetify.datePicker.ariaLabel.nextMonth') }
               onClick={ onClickNext }
             />
           </div>
