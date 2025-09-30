@@ -263,7 +263,6 @@ Control the size of rows implicitly created grid tracks using `grid-auto-cols-mi
 
 <ExamplesExample file="display-grid/auto-sizing-columns" />
 
-
 ## Responsive Variants
 
 All grid classes support responsive variants. Use the format `{class}-{breakpoint}-{value}`.
