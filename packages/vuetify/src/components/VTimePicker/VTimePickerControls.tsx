@@ -6,6 +6,7 @@ import { pad } from './util'
 import { VBtn } from '@/components/VBtn'
 
 // Composables
+import { makeDensityProps, useDensity } from '@/composables/density'
 import { useLocale } from '@/composables/locale'
 
 // Utilities
@@ -28,6 +29,7 @@ export const makeVTimePickerControlsProps = propsFactory({
   useSeconds: Boolean,
   value: Number,
   viewMode: String as PropType<VTimePickerViewMode>,
+  ...makeDensityProps(),
 }, 'VTimePickerControls')
 
 export const VTimePickerControls = genericComponent()({
@@ -42,6 +44,7 @@ export const VTimePickerControls = genericComponent()({
 
   setup (props, { emit, slots }) {
     const { t } = useLocale()
+    const { densityClasses } = useDensity(props)
 
     useRender(() => {
       let hour = props.hour
@@ -51,10 +54,12 @@ export const VTimePickerControls = genericComponent()({
       return (
         <div class="v-time-picker-controls">
           <div
-            class={{
+            class={[{
               'v-time-picker-controls__time': true,
               'v-time-picker-controls__time--with-seconds': props.useSeconds,
-            }}
+            },
+            densityClasses.value,
+            ]}
           >
             <VBtn
               active={ props.viewMode === 'hour' }
