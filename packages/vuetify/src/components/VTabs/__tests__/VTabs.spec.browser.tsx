@@ -44,6 +44,7 @@ describe('VTabs', () => {
       </VTabs>
     ))
 
+    await nextTick()
     expect(screen.getAllByCSS('.v-tab')[0]).toHaveClass('v-tab--selected')
 
     model.value = 'bar'
