@@ -152,7 +152,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
       props.link !== false &&
       (props.link || link.isClickable.value || isSelectable.value)
     )
-    const role = computed(() => list ? (isSelectable.value ? 'option' : 'listitem') : undefined)
+    const role = computed(() => list ? (isLink.value ? 'link' : isSelectable.value ? 'option' : 'listitem') : undefined)
     const ariaSelected = computed(() => {
       if (!isSelectable.value) return undefined
       return root.activatable.value ? isActivated.value
