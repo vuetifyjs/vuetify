@@ -25,7 +25,6 @@ import { transformItem, useItems } from '@/composables/list-items'
 import { useLocale } from '@/composables/locale'
 import { useMenuActivator } from '@/composables/menuActivator'
 import { useProxiedModel } from '@/composables/proxiedModel'
-import { makeTransitionProps } from '@/composables/transition'
 
 // Utilities
 import { computed, mergeProps, nextTick, ref, shallowRef, watch } from 'vue'
@@ -79,7 +78,6 @@ export const makeVComboboxProps = propsFactory({
     modelValue: null,
     role: 'combobox',
   }), ['validationValue', 'dirty', 'appendInnerIcon']),
-  ...makeTransitionProps({ transition: false }),
 }, 'VCombobox')
 
 type ItemType<T> = T extends readonly (infer U)[] ? U : never
@@ -151,6 +149,7 @@ export const VCombobox = genericComponent<new <
     const hasSelectionSlot = computed(() => hasChips.value || !!slots.selection)
 
     const _search = shallowRef(!props.multiple && !hasSelectionSlot.value ? model.value[0]?.title ?? '' : '')
+    const _searchLock = shallowRef<string | null>(null)
 
     const search = computed<string>({
       get: () => {
@@ -193,11 +192,11 @@ export const VCombobox = genericComponent<new <
     const { filteredItems, getMatches } = useFilter(
       props,
       items,
-      () => props.alwaysFilter || !isPristine.value ? search.value : ''
+      () => _searchLock.value ?? (props.alwaysFilter || !isPristine.value ? search.value : '')
     )
 
     const displayItems = computed(() => {
-      if (props.hideSelected) {
+      if (props.hideSelected && _searchLock.value === null) {
         return filteredItems.value.filter(filteredItem => !model.value.some(s => s.value === filteredItem.value))
       }
       return filteredItems.value
@@ -296,16 +295,11 @@ export const VCombobox = genericComponent<new <
         menu.value = false
       }
 
-      if (['Enter', 'Escape', 'Tab'].includes(e.key)) {
-        if (
-          highlightFirst.value &&
-          ['Enter', 'Tab'].includes(e.key) &&
-          !model.value.some(({ value }) => value === displayItems.value[0].value)
-        ) {
-          select(filteredItems.value[0])
-        }
-
-        isPristine.value = true
+      if (highlightFirst.value &&
+        ['Enter', 'Tab'].includes(e.key) &&
+        !model.value.some(({ value }) => value === displayItems.value[0].value)
+      ) {
+        select(filteredItems.value[0])
       }
 
       if (e.key === 'ArrowDown' && highlightFirst.value) {
@@ -378,6 +372,7 @@ export const VCombobox = genericComponent<new <
         isPristine.value = true
         vTextFieldRef.value?.focus()
       }
+      _searchLock.value = null
     }
     /** @param set - null means toggle */
     function select (item: ListItem | undefined, set: boolean | null = true) {
@@ -401,6 +396,9 @@ export const VCombobox = genericComponent<new <
       } else {
         const add = set !== false
         model.value = add ? [item] : []
+        if ((!isPristine.value || props.alwaysFilter) && _search.value) {
+          _searchLock.value = _search.value
+        }
         _search.value = add && !hasSelectionSlot.value ? item.title : ''
 
         // watch for search watcher to trigger
@@ -446,8 +444,8 @@ export const VCombobox = genericComponent<new <
       }
     })
 
-    watch(menu, () => {
-      if (!props.hideSelected && menu.value && model.value.length) {
+    watch(menu, val => {
+      if (!props.hideSelected && val && model.value.length && isPristine.value) {
         const index = displayItems.value.findIndex(
           item => model.value.some(s => (props.valueComparator || deepEqual)(s.value, item.value))
         )
@@ -455,6 +453,8 @@ export const VCombobox = genericComponent<new <
           index >= 0 && vVirtualScrollRef.value?.scrollToIndex(index)
         })
       }
+
+      if (val) _searchLock.value = null
     })
 
     watch(items, (newVal, oldVal) => {
@@ -520,7 +520,6 @@ export const VCombobox = genericComponent<new <
                   maxHeight={ 310 }
                   openOnClick={ false }
                   closeOnContentClick={ false }
-                  transition={ props.transition }
                   onAfterEnter={ onAfterEnter }
                   onAfterLeave={ onAfterLeave }
                   { ...props.menuProps }
