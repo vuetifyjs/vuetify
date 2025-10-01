@@ -307,7 +307,7 @@ export const VCombobox = genericComponent<new <
       }
 
       if (e.key === 'Enter' && search.value) {
-        select(transformItem(props, search.value))
+        select(transformItem(props, search.value), true, true)
         if (hasSelectionSlot.value) _search.value = ''
       }
 
@@ -375,7 +375,7 @@ export const VCombobox = genericComponent<new <
       _searchLock.value = null
     }
     /** @param set - null means toggle */
-    function select (item: ListItem | undefined, set: boolean | null = true) {
+    function select (item: ListItem | undefined, set: boolean | null = true, keepMenu = false) {
       if (!item || item.props.disabled) return
 
       if (props.multiple) {
@@ -403,7 +403,7 @@ export const VCombobox = genericComponent<new <
 
         // watch for search watcher to trigger
         nextTick(() => {
-          menu.value = false
+          menu.value = keepMenu
           isPristine.value = true
         })
       }
