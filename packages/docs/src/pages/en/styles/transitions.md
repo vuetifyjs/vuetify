@@ -60,6 +60,12 @@ The expand transition is used in Expansion Panels and List Groups. There is also
 
 <ExamplesExample file="transitions/misc-expand-x" />
 
+When using `v-expand-transition` or `v-expand-x-transition`, the transition works by animating an element’s height or width between `0` and its natural size. Because of this, applying **padding directly to the transitioning element** (such as `v-alert`) can cause jittery or uneven animations.
+
+If you need padding, wrap your content in a container element (like a `div` or `v-card`) and apply the transition to that container instead. This ensures the expand transition runs smoothly, since the wrapper div has no conflicting padding or margin.
+
+<ExamplesExample file="transitions/misc-expand-x-padding" />
+
 #### Fab
 
 An example of the fab transition can be found in the `v-speed-dial` component.

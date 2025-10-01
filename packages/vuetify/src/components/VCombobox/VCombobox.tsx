@@ -63,6 +63,7 @@ type Value <T, ReturnObject extends boolean, Multiple extends boolean> =
     : Val<T, ReturnObject> | null
 
 export const makeVComboboxProps = propsFactory({
+  alwaysFilter: Boolean,
   autoSelectFirst: {
     type: [Boolean, String] as PropType<boolean | 'exact'>,
   },
@@ -189,7 +190,11 @@ export const VCombobox = genericComponent<new <
         : (props.multiple ? model.value.length : search.value.length)
     })
 
-    const { filteredItems, getMatches } = useFilter(props, items, () => isPristine.value ? '' : search.value)
+    const { filteredItems, getMatches } = useFilter(
+      props,
+      items,
+      () => props.alwaysFilter || !isPristine.value ? search.value : ''
+    )
 
     const displayItems = computed(() => {
       if (props.hideSelected) {
@@ -247,6 +252,7 @@ export const VCombobox = genericComponent<new <
     const listEvents = useScrolling(listRef, vTextFieldRef)
     function onClear (e: MouseEvent) {
       cleared = true
+      nextTick(() => (cleared = false))
 
       if (props.openOnClear) {
         menu.value = true
