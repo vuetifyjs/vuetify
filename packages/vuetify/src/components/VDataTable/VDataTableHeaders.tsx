@@ -109,7 +109,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
     }
     function handleEnterKeyPress (event: KeyboardEvent, column: InternalDataTableHeader) {
       if (event.key === 'Enter' && !props.disableSort) {
-        toggleSort(column)
+        toggleSort(column, event)
       }
     }
     function getSortIcon (column: InternalDataTableHeader) {
@@ -177,7 +177,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
           noPadding={ noPadding }
           empty={ isEmpty }
           tabindex={ column.sortable ? 0 : undefined }
-          onClick={ column.sortable ? () => toggleSort(column) : undefined }
+          onClick={ column.sortable ? (event: PointerEvent) => toggleSort(column, event) : undefined }
           onKeydown={ column.sortable ? (event: KeyboardEvent) => handleEnterKeyPress(event, column) : undefined }
           { ...headerProps }
         >
