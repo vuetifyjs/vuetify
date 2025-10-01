@@ -43,16 +43,20 @@ export function parseRFC9557 (value: string | TemporalDate | null | undefined): 
     }
   }
 
-  switch (state) {
-    case 'date': return Temporal.PlainDate.from(s)
-    case 'time': return Temporal.PlainDateTime.from(s)
-    case 'instant': return Temporal.Instant.from(s).toZonedDateTimeISO('UTC')
-    case 'offset': return Temporal.Instant.from(s).toZonedDateTimeISO(s.slice(offsetStart))
-    case 'zoned': return Temporal.ZonedDateTime.from(s)
-    default:
-      void (state satisfies never)
-      return null
+  try {
+    switch (state) {
+      case 'date': return Temporal.PlainDate.from(s)
+      case 'time': return Temporal.PlainDateTime.from(s)
+      case 'instant': return Temporal.Instant.from(s).toZonedDateTimeISO('UTC')
+      case 'offset': return Temporal.Instant.from(s).toZonedDateTimeISO(s.slice(offsetStart))
+      case 'zoned': return Temporal.ZonedDateTime.from(s)
+      default: void (state satisfies never)
+    }
+  } catch (err) {
+    consoleError(err as any)
   }
+
+  return null
 }
 
 // export function date (value?: any): TemporalDate | null {
