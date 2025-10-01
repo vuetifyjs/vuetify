@@ -18,57 +18,82 @@ export const makeDataTableSortProps = propsFactory({
   },
   customKeySort: Object as PropType<Record<string, DataTableCompareFunction>>,
   multiSort: Boolean,
+  multiSortKey: String as PropType<MultiSortKey>,
   multiSortMode: {
     type: String as PropType<MultiSortMode>,
     default: 'append',
   },
+  multiSortModeModifier: String as PropType<MultiSortModeModifier>,
   mustSort: Boolean,
 }, 'DataTable-sort')
 
 const VDataTableSortSymbol: InjectionKey<{
   sortBy: Ref<readonly SortItem[]>
-  toggleSort: (column: InternalDataTableHeader) => void
+  toggleSort: (column: InternalDataTableHeader, event?: KeyboardEvent | PointerEvent) => void
   isSorted: (column: InternalDataTableHeader) => boolean
 }> = Symbol.for('vuetify:data-table-sort')
 
 export type SortItem = { key: string, order?: boolean | 'asc' | 'desc' }
+export type MultiSortKey = 'ctrl' | undefined
 export type MultiSortMode = 'append' | 'prepend'
+export type MultiSortModeModifier = 'alt' | 'shift' | undefined
 
 type SortProps = {
   sortBy: readonly SortItem[]
   'onUpdate:sortBy': ((value: any) => void) | undefined
   multiSort: boolean
+  multiSortKey: MultiSortKey
   multiSortMode: MultiSortMode
+  multiSortModeModifier: MultiSortModeModifier
   mustSort: boolean
+}
+
+type MultiSortProps = {
+  enabled: boolean
+  key: MultiSortKey
+  mode: MultiSortMode
+  modifier?: MultiSortModeModifier
 }
 
 export function createSort (props: SortProps) {
   const sortBy = useProxiedModel(props, 'sortBy')
   const mustSort = toRef(() => props.mustSort)
-  const multiSort = toRef(() => props.multiSort)
-  const multiSortMode = toRef(() => props.multiSortMode)
+  const multiSort = toRef(() => ({
+    enabled: props.multiSort,
+    key: props.multiSortKey,
+    mode: props.multiSortMode,
+    modifier: props.multiSortModeModifier,
+  } satisfies MultiSortProps))
 
-  return { sortBy, mustSort, multiSort, multiSortMode }
+  return { sortBy, mustSort, multiSort }
+}
+
+function resolveMultiSortMode ({ mode, modifier }: MultiSortProps, event?: KeyboardEvent | PointerEvent): MultiSortMode {
+  const reverseMode = (modifier === 'alt' && event?.altKey) ||
+    (modifier === 'shift' && event?.shiftKey)
+  return reverseMode
+    ? (mode === 'append' ? 'prepend' : 'append')
+    : mode
 }
 
 export function provideSort (options: {
   sortBy: Ref<readonly SortItem[]>
   mustSort: Ref<boolean>
-  multiSort: Ref<boolean>
-  multiSortMode: Ref<MultiSortMode>
+  multiSort: Ref<MultiSortProps>
   page?: Ref<number>
 }) {
-  const { sortBy, mustSort, multiSort, multiSortMode, page } = options
+  const { sortBy, mustSort, multiSort, page } = options
 
-  const toggleSort = (column: InternalDataTableHeader) => {
+  const toggleSort = (column: InternalDataTableHeader, event?: KeyboardEvent | PointerEvent) => {
     if (column.key == null) return
 
     let newSortBy = sortBy.value.map(x => ({ ...x })) ?? []
     const item = newSortBy.find(x => x.key === column.key)
 
     if (!item) {
-      if (multiSort.value) {
-        if (multiSortMode.value === 'prepend') {
+      if (multiSort.value.enabled && (!multiSort.value.key || event?.ctrlKey || event?.metaKey)) {
+        const mode = resolveMultiSortMode(multiSort.value, event)
+        if (mode === 'prepend') {
           newSortBy.unshift({ key: column.key, order: 'asc' })
         } else {
           newSortBy.push({ key: column.key, order: 'asc' })
