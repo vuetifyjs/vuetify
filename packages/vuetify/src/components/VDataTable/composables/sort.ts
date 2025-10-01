@@ -18,8 +18,8 @@ export const makeDataTableSortProps = propsFactory({
   },
   customKeySort: Object as PropType<Record<string, DataTableCompareFunction>>,
   multiSort: Boolean,
-  multiSortOrder: {
-    type: String as PropType<MultiSortOrder>,
+  multiSortMode: {
+    type: String as PropType<MultiSortMode>,
     default: 'append',
   },
   mustSort: Boolean,
@@ -32,13 +32,13 @@ const VDataTableSortSymbol: InjectionKey<{
 }> = Symbol.for('vuetify:data-table-sort')
 
 export type SortItem = { key: string, order?: boolean | 'asc' | 'desc' }
-export type MultiSortOrder = 'append' | 'prepend'
+export type MultiSortMode = 'append' | 'prepend'
 
 type SortProps = {
   sortBy: readonly SortItem[]
   'onUpdate:sortBy': ((value: any) => void) | undefined
   multiSort: boolean
-  multiSortOrder: MultiSortOrder
+  multiSortMode: MultiSortMode
   mustSort: boolean
 }
 
@@ -46,19 +46,19 @@ export function createSort (props: SortProps) {
   const sortBy = useProxiedModel(props, 'sortBy')
   const mustSort = toRef(() => props.mustSort)
   const multiSort = toRef(() => props.multiSort)
-  const multiSortOrder = toRef(() => props.multiSortOrder)
+  const multiSortMode = toRef(() => props.multiSortMode)
 
-  return { sortBy, mustSort, multiSort, multiSortOrder }
+  return { sortBy, mustSort, multiSort, multiSortMode }
 }
 
 export function provideSort (options: {
   sortBy: Ref<readonly SortItem[]>
   mustSort: Ref<boolean>
   multiSort: Ref<boolean>
-  multiSortOrder: Ref<MultiSortOrder>
+  multiSortMode: Ref<MultiSortMode>
   page?: Ref<number>
 }) {
-  const { sortBy, mustSort, multiSort, multiSortOrder, page } = options
+  const { sortBy, mustSort, multiSort, multiSortMode, page } = options
 
   const toggleSort = (column: InternalDataTableHeader) => {
     if (column.key == null) return
@@ -68,7 +68,7 @@ export function provideSort (options: {
 
     if (!item) {
       if (multiSort.value) {
-        if (multiSortOrder.value === 'prepend') {
+        if (multiSortMode.value === 'prepend') {
           newSortBy.unshift({ key: column.key, order: 'asc' })
         } else {
           newSortBy.push({ key: column.key, order: 'asc' })

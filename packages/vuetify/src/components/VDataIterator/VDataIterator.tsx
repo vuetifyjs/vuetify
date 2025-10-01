@@ -113,10 +113,10 @@ export const VDataIterator = genericComponent<new <T> (
     const { items } = useDataIteratorItems(props)
     const { filteredItems } = useFilter(props, items, search, { transform: item => item.raw })
 
-    const { sortBy, multiSort, multiSortOrder, mustSort } = createSort(props)
+    const { sortBy, multiSort, multiSortMode, mustSort } = createSort(props)
     const { page, itemsPerPage } = createPagination(props)
 
-    const { toggleSort } = provideSort({ sortBy, multiSort, multiSortOrder, mustSort, page })
+    const { toggleSort } = provideSort({ sortBy, multiSort, multiSortMode, mustSort, page })
     const { sortByWithGroups, opened, extractRows, isGroupOpen, toggleGroup } = provideGroupBy({ groupBy, sortBy })
 
     const { sortedItems } = useSortedItems(props, filteredItems, sortByWithGroups, { transform: item => item.raw })

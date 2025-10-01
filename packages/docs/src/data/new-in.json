@@ -86,7 +86,7 @@
       "groupCollapseIcon": "3.10.0",
       "groupExpandIcon": "3.10.0",
       "headerProps": "3.5.0",
-      "multiSortOrder": "3.11.0"
+      "multiSortMode": "3.11.0"
     },
     "slots": {
       "group-summary": "3.10.0"
@@ -98,7 +98,7 @@
       "expandIcon": "3.10.0",
       "groupCollapseIcon": "3.10.0",
       "groupExpandIcon": "3.10.0",
-      "multiSortOrder": "3.11.0"
+      "multiSortMode": "3.11.0"
     },
     "slots": {
       "group-summary": "3.10.0"
@@ -110,7 +110,7 @@
       "expandIcon": "3.10.0",
       "groupCollapseIcon": "3.10.0",
       "groupExpandIcon": "3.10.0",
-      "multiSortOrder": "3.11.0"
+      "multiSortMode": "3.11.0"
     },
     "slots": {
       "group-summary": "3.10.0"

@@ -89,7 +89,7 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
 
   setup (props, { attrs, slots }) {
     const { groupBy } = createGroupBy(props)
-    const { sortBy, multiSort, multiSortOrder, mustSort } = createSort(props)
+    const { sortBy, multiSort, multiSortMode, mustSort } = createSort(props)
     const { disableSort } = toRefs(props)
 
     const {
@@ -111,7 +111,7 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
       customKeyFilter: filterFunctions,
     })
 
-    const { toggleSort } = provideSort({ sortBy, multiSort, multiSortOrder, mustSort })
+    const { toggleSort } = provideSort({ sortBy, multiSort, multiSortMode, mustSort })
     const { sortByWithGroups, opened, extractRows, isGroupOpen, toggleGroup } = provideGroupBy({ groupBy, sortBy, disableSort })
 
     const { sortedItems } = useSortedItems(props, filteredItems, sortByWithGroups, {
