@@ -62,13 +62,13 @@ export function createRules (options: RulesOptions | undefined, locale: LocaleIn
       return (v: string) => (/^[A-Z]*$/.test(v)) || t(err || '$vuetify.rules.capital')
     },
     maxLength: (len: number, err?: string) => {
-      return (v: any) => (!v || v.length <= len) || t(err || '$vuetify.rules.maxLength', [len])
+      return (v: any) => (!v || v.length <= len) || t(err || '$vuetify.rules.maxLength', len)
     },
     minLength: (len: number, err?: string) => {
-      return (v: any) => (!v || v.length >= len) || t(err || '$vuetify.rules.minLength', [len])
+      return (v: any) => (!v || v.length >= len) || t(err || '$vuetify.rules.minLength', len)
     },
     strictLength: (len: number, err?: string) => {
-      return (v: any) => (!v || v.length === len) || t(err || '$vuetify.rules.strictLength', [len])
+      return (v: any) => (!v || v.length === len) || t(err || '$vuetify.rules.strictLength', len)
     },
     exclude: (forbiddenCharacters: string[], err?: string) => {
       return (v: string) => {
