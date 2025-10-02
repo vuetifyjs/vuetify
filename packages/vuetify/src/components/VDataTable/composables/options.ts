@@ -35,7 +35,7 @@ export function useOptions ({
 
     // Reset page when searching
     if (oldOptions && oldOptions.search !== value.search) {
-      page.value = 1
+      value.page = 1
     }
 
     vm.emit('update:options', value)
