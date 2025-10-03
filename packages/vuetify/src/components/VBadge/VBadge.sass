@@ -78,8 +78,10 @@
       margin: $badge-wrapper-margin
 
   @media (forced-colors: active)
-    .v-badge__badge,
-    .v-badge__badge[class*="bg-"]
-      background: highlight !important
-      color: highlighttext !important
+    .v-badge__badge
       forced-color-adjust: preserve-parent-color
+      // override .bg-* classes specificity when used without $layers
+      &.v-badge__badge
+        background: highlight !important
+        color: highlighttext !important
+        
