@@ -73,6 +73,9 @@
     "./locale": "./lib/locale/index.js",
     "./locale/adapters/*": "./lib/locale/adapters/*.js",
     "./iconsets/*": "./lib/iconsets/*.js",
+    "./internal-types": {
+      "types": "./lib/internal-types.d.ts"
+    },
     "./labs/components": "./lib/labs/components.js",
     "./labs/*": "./lib/labs/*/index.js",
     "./util/colors": "./lib/util/colors.js",
