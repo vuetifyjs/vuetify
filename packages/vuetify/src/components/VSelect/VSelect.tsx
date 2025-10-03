@@ -188,7 +188,7 @@ export const VSelect = genericComponent<new <
       },
     })
 
-    const { menuId, ariaExpanded, ariaControls, ariaLabel } = useMenuActivator(props, menu)
+    const { ariaLabel } = useMenuActivator(props, menu)
 
     const computedMenuProps = computed(() => {
       return {
@@ -411,8 +411,6 @@ export const VSelect = genericComponent<new <
           onMousedown:control={ onMousedownControl }
           onBlur={ onBlur }
           onKeydown={ onKeydown }
-          aria-expanded={ ariaExpanded.value }
-          aria-controls={ ariaControls.value }
           aria-label={ ariaLabel.value }
           title={ ariaLabel.value }
         >
@@ -421,7 +419,6 @@ export const VSelect = genericComponent<new <
             default: () => (
               <>
                 <VMenu
-                  id={ menuId.value }
                   ref={ vMenuRef }
                   v-model={ menu.value }
                   activator="parent"
