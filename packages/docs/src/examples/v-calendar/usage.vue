@@ -41,7 +41,7 @@
         class="ma-2"
         variant="text"
         icon
-        @click="calendar.next()"
+        @click="$refs.calendar.next()"
       >
         <v-icon>mdi-chevron-right</v-icon>
       </v-btn>
