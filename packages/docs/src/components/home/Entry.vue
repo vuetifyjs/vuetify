@@ -1,8 +1,8 @@
 <template>
   <v-container class="text-left position-relative">
     <v-row
-      :class="mdAndDown ? 'h-auto py-10' : 'h-screen mt-n16'"
       align="center"
+      class="py-16"
       justify="center"
     >
 
@@ -15,7 +15,7 @@
           A complete <br class="d-none d-md-block"> <span class="text-primary">design system</span> that works.
         </h1>
 
-        <h2 class="text-h6  text-medium-emphasis my-5">
+        <h2 class="text-h6 font-weight-regular text-medium-emphasis my-5">
           Built by the Vue Community, Backed by Sponsors.
         </h2>
 
@@ -95,13 +95,10 @@
         <v-sheet class="rounded-lg bg-surface elevation-10">
           <AppMarkup :code="code" class="bg-black rounded-lg" />
         </v-sheet>
-
       </v-col>
     </v-row>
 
-    <div class="v-bg position-absolute top-0 right-0 left-0 bottom-0">
-      <div aria-hidden="true" class="overflow-hidden opacity-20 w-100 h-100" />
-    </div>
+    <HomeBgGradient />
   </v-container>
 </template>
 
@@ -120,7 +117,6 @@
 
   const isCopying = shallowRef(false)
 
-  const { mdAndDown } = useDisplay()
   const packages = ['pnpm', 'yarn', 'npm', 'bun']
   const randomPackage = packages[Math.floor(Math.random() * packages.length)]
 
@@ -136,17 +132,6 @@
 </script>
 
 <style scoped>
-  .v-bg {
-    filter: blur(200px);
-    pointer-events: none;
-  }
-
-  .v-bg > div {
-    background: rgb(var(--v-theme-primary));
-    z-index: -10;
-    clip-path: polygon(5% 20%, 15% 10%, 30% 15%, 40% 5%, 50% 25%, 60% 15%, 75% 30%, 85% 20%, 90% 40%, 70% 50%, 85% 70%, 65% 60%, 50% 85%, 35% 70%, 20% 80%, 10% 60%, 5% 40%);
-  }
-
   .code-shadow {
     box-shadow: 10px 10px 100px -5px #00000044;
   }

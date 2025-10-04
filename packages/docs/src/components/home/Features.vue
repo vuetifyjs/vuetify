@@ -1,40 +1,46 @@
 <template>
-  <v-responsive class="text-center">
+  <v-responsive>
     <v-container>
+      <HomeBgGradient color="grey" />
+
+      <h4 class="text-h4 font-weight-bold mb-10">
+        More Than Components. A Complete Vue Ecosystem.
+      </h4>
+
       <v-row justify="center">
         <v-col
           v-for="(feature, i) in features"
           :key="i"
           class="d-flex flex-shrink-1"
-          cols="auto"
+          cols="12"
+          lg="3"
+          md="6"
         >
           <v-card
-            :href="feature.href"
-            :rel="feature.href && 'noopener noreferrer'"
-            :target="feature.href && '_blank'"
-            :to="feature.to"
-            class="text-center mx-auto"
-            max-width="350"
+            class="text-left d-flex flex-column pa-5"
+            rounded="lg"
+            width="100%"
             border
             flat
           >
-            <v-img
-              :alt="feature.title"
-              :aspect-ratio="2.6"
-              :src="feature.src"
-              width="100%"
-              cover
-            />
+            <v-avatar :color="feature.color" class="ml-3 mb-3" size="60">
+              <v-icon :icon="feature.icon" size="30" />
+            </v-avatar>
+
+            <v-card-title>
+              {{ feature.title }}
+            </v-card-title>
+
             <v-card-text>
-              <h3
-                class="text-subheading-1 font-weight-bold mb-2"
-                v-text="feature.title"
-              />
-              <p
-                class="mb-2"
-                v-text="feature.text"
-              />
+              {{ feature.description }}
             </v-card-text>
+
+            <v-card-actions>
+              <v-btn color="primary">
+                Learn more
+                <v-icon icon="mdi-arrow-right" />
+              </v-btn>
+            </v-card-actions>
           </v-card>
         </v-col>
       </v-row>
@@ -45,22 +51,28 @@
 <script setup>
   const features = [
     {
-      text: 'When you run into a roadblock, you need assistance right away. Vuetify offers support in our massive community on Discord.',
-      title: 'Vibrant Community',
-      src: 'https://cdn.vuetifyjs.com/docs/images/featured/feature-1.png',
-      href: 'https://community.vuetifyjs.com',
+      title: 'Core Framework',
+      description: '700+ Material-compliant Vue components, themable by default.',
+      icon: 'mdi-view-dashboard',
+      color: 'indigo',
     },
     {
-      text: 'Be prepared for an armada of specialized components at your disposal. With over 80 in total, there is a solution to any situation.',
-      title: 'Semantic Vue Components',
-      src: 'https://cdn.vuetifyjs.com/docs/images/featured/feature-2.png',
-      to: rpath('/components/all/'),
+      title: 'Official Labs',
+      description: 'Pro tables, Charts, Maps, and more (beta).',
+      icon: 'mdi-factory',
+      color: 'teal',
     },
     {
-      text: 'Vuetify supports the future of Vite tooling through its create plugin. This allows you to scaffold a new project in seconds.',
-      title: 'Ready-Made Project Scaffolding',
-      src: 'https://cdn.vuetifyjs.com/docs/images/featured/feature-3.png',
-      href: 'https://tryvuetify.com',
+      title: 'Community Plugins',
+      description: '50+ extensions on Vuetify Hub.',
+      color: 'deep-purple',
+      icon: 'mdi-account-group-outline',
+    },
+    {
+      title: 'Partner Integrations',
+      description: 'Nuxt, Storybook, Vite, Figma kits.',
+      color: 'purple',
+      icon: 'mdi-source-commit',
     },
   ]
 </script>
