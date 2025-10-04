@@ -121,6 +121,7 @@ declare module 'vue' {
     HomeActionBtns: typeof import('./src/components/home/ActionBtns.vue')['default']
     HomeBackgroundGradient: typeof import('./src/components/home/BackgroundGradient.vue')['default']
     HomeBgGradient: typeof import('./src/components/home/BgGradient.vue')['default']
+    HomeComponentGallery: typeof import('./src/components/home/ComponentGallery.vue')['default']
     HomeEntry: typeof import('./src/components/home/Entry.vue')['default']
     HomeEpicmaxSupport: typeof import('./src/components/home/EpicmaxSupport.vue')['default']
     HomeFeatures: typeof import('./src/components/home/Features.vue')['default']

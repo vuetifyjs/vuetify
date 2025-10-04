@@ -16,6 +16,10 @@ meta:
 
 <v-divider />
 
+<HomeComponentGallery class="py-16" />
+
+<v-divider />
+
 <HomeSpecialSponsor />
 
 <br>
