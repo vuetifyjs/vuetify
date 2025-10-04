@@ -8,11 +8,13 @@ meta:
 
 <HomeEntry />
 
-<br>
+<v-divider />
 
-<HomeFeatures />
+<HomeFeatures class="py-16" />
 
-<br>
+<HomeStats class="mb-16" />
+
+<v-divider />
 
 <HomeSpecialSponsor />
 
