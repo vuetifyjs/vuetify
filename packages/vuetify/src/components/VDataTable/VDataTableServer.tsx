@@ -19,7 +19,7 @@ import { provideDefaults } from '@/composables/defaults'
 
 // Utilities
 import { computed, provide, toRef, toRefs } from 'vue'
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { DeepReadonly } from 'vue'
@@ -147,7 +147,7 @@ export const VDataTableServer = genericComponent<new <T extends readonly any[], 
 
     useRender(() => {
       const dataTableFooterProps = VDataTableFooter.filterProps(props)
-      const dataTableHeadersProps = VDataTableHeaders.filterProps(props)
+      const dataTableHeadersProps = VDataTableHeaders.filterProps(omit(props, ['multiSort']))
       const dataTableRowsProps = VDataTableRows.filterProps(props)
       const tableProps = VTable.filterProps(props)
 
@@ -173,6 +173,7 @@ export const VDataTableServer = genericComponent<new <T extends readonly any[], 
                   <thead key="thead" class="v-data-table__thead" role="rowgroup">
                     <VDataTableHeaders
                       { ...dataTableHeadersProps }
+                      multiSort={ !!props.multiSort }
                       v-slots={ slots }
                     />
                   </thead>
