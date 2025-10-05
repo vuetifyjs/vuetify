@@ -181,7 +181,7 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
     }))
 
     useRender(() => {
-      const dataTableHeadersProps = VDataTableHeaders.filterProps(props)
+      const dataTableHeadersProps = VDataTableHeaders.filterProps(omit(props, ['multiSort']))
       const dataTableRowsProps = VDataTableRows.filterProps(props)
       const tableProps = VTable.filterProps(props)
 
@@ -216,6 +216,7 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
                     <thead key="thead">
                       <VDataTableHeaders
                         { ...dataTableHeadersProps }
+                        multiSort={ !!props.multiSort }
                         v-slots={ slots }
                       />
                     </thead>

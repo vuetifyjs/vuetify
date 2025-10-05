@@ -2,10 +2,7 @@
   "props": {
     "customKeySort": "Function used on specific keys within the item object. `customSort` is skipped for columns with `customKeySort` specified.",
     "disableSort": "Toggles rendering of sort button.",
-    "multiSort": "Let user sort by multiple properties/columns.",
-    "multiSortKey": "When enabled, user is required to hold a keyboard key (Ctrl on PC and Command on Mac) to sort by multiple columns.",
-    "multiSortMode": "When user selects a new column to sort by, it will be set first (`prepend`) or last (`append`) in the sort priority.",
-    "multiSortModeModifier": "Allows user to use both multi-sort modes (`append` and `prepend`) simultaneously.",
+    "multiSort": "Let user sort by multiple properties/columns.\n\n- **key**: (optional) when set to `ctrl`, user is required to hold a keyboard key (Ctrl on PC and Command on Mac)\n- **mode**: when user selects a new column to sort by, it will be set first (`prepend`) or last (`append`) in the sort priority. Defaults to `append`\n- **modifier**: (optional) allows user to use both multi-sort modes (`append` and `prepend`) simultaneously",
     "mustSort": "Forces sorting on the column(s).",
     "sortBy": "Array of column keys and sort orders that determines the sort order of the table."
   }
