@@ -12,6 +12,11 @@ import type { DataTableCompareFunction, InternalDataTableHeader } from '../types
 import type { InternalItem } from '@/composables/filter'
 
 export const makeDataTableSortProps = propsFactory({
+  initialSortOrder: {
+    type: String as PropType<'asc' | 'desc'>,
+    default: 'asc',
+    validator: (v: any) => !v || ['asc', 'desc'].includes(v),
+  },
   sortBy: {
     type: Array as PropType<readonly SortItem[]>,
     default: () => ([]),
@@ -40,6 +45,7 @@ export type MultiSortProps = {
 export type MultiSortMode = 'append' | 'prepend'
 
 type SortProps = {
+  initialSortOrder: 'asc' | 'desc'
   sortBy: readonly SortItem[]
   'onUpdate:sortBy': ((value: any) => void) | undefined
   multiSort: boolean | MultiSortProps
@@ -47,10 +53,11 @@ type SortProps = {
 }
 
 export function createSort (props: SortProps) {
+  const initialSortOrder = toRef(() => props.initialSortOrder)
   const sortBy = useProxiedModel(props, 'sortBy')
   const mustSort = toRef(() => props.mustSort)
   const multiSort = toRef(() => props.multiSort)
-  return { sortBy, mustSort, multiSort }
+  return { initialSortOrder, sortBy, multiSort, mustSort }
 }
 
 function resolveMultiSort (
@@ -75,12 +82,13 @@ function resolveMultiSort (
 }
 
 export function provideSort (options: {
+  initialSortOrder: Ref<'asc' | 'desc'>
   sortBy: Ref<readonly SortItem[]>
-  mustSort: Ref<boolean>
   multiSort: Ref<boolean | MultiSortProps>
+  mustSort: Ref<boolean>
   page?: Ref<number>
 }) {
-  const { sortBy, mustSort, multiSort, page } = options
+  const { initialSortOrder, sortBy, mustSort, multiSort, page } = options
 
   const toggleSort = (column: InternalDataTableHeader, event?: KeyboardEvent | PointerEvent) => {
     if (column.key == null) return
@@ -88,25 +96,27 @@ export function provideSort (options: {
     let newSortBy = sortBy.value.map(x => ({ ...x })) ?? []
     const item = newSortBy.find(x => x.key === column.key)
 
+    const initialOrder = initialSortOrder.value
+    const secondaryOrder = initialSortOrder.value === 'desc' ? 'asc' : 'desc'
     if (!item) {
       const { active, mode } = resolveMultiSort(multiSort.value, event)
       if (active) {
         if (mode === 'prepend') {
-          newSortBy.unshift({ key: column.key, order: 'asc' })
+          newSortBy.unshift({ key: column.key, order: initialOrder })
         } else {
-          newSortBy.push({ key: column.key, order: 'asc' })
+          newSortBy.push({ key: column.key, order: initialOrder })
         }
       } else {
-        newSortBy = [{ key: column.key, order: 'asc' }]
+        newSortBy = [{ key: column.key, order: initialOrder }]
       }
-    } else if (item.order === 'desc') {
+    } else if (item.order === secondaryOrder) {
       if (mustSort.value && newSortBy.length === 1) {
-        item.order = 'asc'
+        item.order = initialSortOrder.value
       } else {
         newSortBy = newSortBy.filter(x => x.key !== column.key)
       }
     } else {
-      item.order = 'desc'
+      item.order = secondaryOrder
     }
 
     sortBy.value = newSortBy
