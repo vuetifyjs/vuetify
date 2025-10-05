@@ -79,13 +79,19 @@
       "hideTitle": "3.10.0"
     }
   },
+  "VDataIterator": {
+    "props": {
+      "initialSortOrder": "3.11.0"
+    }
+  },
   "VDataTable": {
     "props": {
       "collapseIcon": "3.10.0",
       "expandIcon": "3.10.0",
       "groupCollapseIcon": "3.10.0",
       "groupExpandIcon": "3.10.0",
-      "headerProps": "3.5.0"
+      "headerProps": "3.5.0",
+      "initialSortOrder": "3.11.0"
     },
     "slots": {
       "group-summary": "3.10.0"
@@ -96,7 +102,8 @@
       "collapseIcon": "3.10.0",
       "expandIcon": "3.10.0",
       "groupCollapseIcon": "3.10.0",
-      "groupExpandIcon": "3.10.0"
+      "groupExpandIcon": "3.10.0",
+      "initialSortOrder": "3.11.0"
     },
     "slots": {
       "group-summary": "3.10.0"
@@ -107,7 +114,8 @@
       "collapseIcon": "3.10.0",
       "expandIcon": "3.10.0",
       "groupCollapseIcon": "3.10.0",
-      "groupExpandIcon": "3.10.0"
+      "groupExpandIcon": "3.10.0",
+      "initialSortOrder": "3.11.0"
     },
     "slots": {
       "group-summary": "3.10.0"

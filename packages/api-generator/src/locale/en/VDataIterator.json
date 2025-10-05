@@ -8,6 +8,7 @@
     "footerProps": "See the [`v-data-footer`](/api/v-data-footer) API for more information.",
     "groupBy": "Configures attributes (and sort order) to group items together.",
     "hideDefaultFooter": "Hides default footer.",
+    "initialSortOrder": "Specifies the initial sort order when an **toggleSort** is called for unsorted property.",
     "itemKey": "The property on each item that is used as a unique key.",
     "itemsPerPage": "Changes how many items per page should be visible. Can be bound to external variable using **v-model:itemsPerPage**.. Setting this prop to `-1` will display all items on the page.",
     "loading": "If `true` and no items are provided, then a loading text will be shown.",
