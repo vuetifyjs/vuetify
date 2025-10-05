@@ -13,8 +13,6 @@ features:
 
 The `v-no-ssr` component is a simple wrapper that allows a developer to designate what a server-side renderer should not render, but leave to the client.
 
-<!-- ![No-Ssr Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-No-Ssr/v-No-Ssr-entry.png) -->
-
 <PageFeatures />
 
 ## Usage

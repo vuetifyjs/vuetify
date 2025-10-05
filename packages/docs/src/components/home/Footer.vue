@@ -11,7 +11,6 @@
             :src="`https://cdn.vuetifyjs.com/docs/images/logos/vuetify-logo-${theme.current.value.dark ? 'dark' : 'light'}-slim.svg`"
             class="mx-auto"
             height="64"
-            contain
           />
         </v-col>
 
@@ -113,6 +112,11 @@
       icon: '$x',
       href: 'https://x.com/vuetifyjs',
       title: 'x',
+    },
+    {
+      icon: 'mdi-bluesky',
+      href: 'https://bsky.app/profile/vuetify.bsky.social',
+      title: 'bluesky',
     },
     {
       icon: 'mdi-discord',

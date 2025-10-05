@@ -20,25 +20,7 @@ The VNumberInput extends the standard HTML number-type input, ensuring style con
 
 <page-features />
 
-::: warning
-
-This feature requires [v3.5.10](/getting-started/release-notes/?version=v3.5.10)
-
-:::
-
-## Installation
-
-Labs components require a manual import and installation of the component.
-
-```js { resource="src/plugins/vuetify.js" }
-import { VNumberInput } from 'vuetify/labs/VNumberInput'
-
-export default createVuetify({
-  components: {
-    VNumberInput,
-  },
-})
-```
+<DocIntroduced version="3.8.0" />
 
 ## Usage
 
@@ -56,6 +38,16 @@ Here we display a list of settings that could be applied within an application.
 
 <ApiInline hide-links />
 
+## Caveats
+
+::: warning
+**v-number-input** is designed for simple numeric input usage. It has limitations with very long integers and highly precise decimal arithmetic due to JavaScript number precision issues:
+
+- For integers, **v-model** is restricted within [Number.MIN_SAFE_INTEGER](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/MIN_SAFE_INTEGER) and [Number.MAX_SAFE_INTEGER](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/MAX_SAFE_INTEGER) to ensure precision is not lost.
+
+- To cope with JavaScript floating-point issues (e.g. 0.1 + 0.2 === 0.30000000000000004), Vuetify's internal logic uses **toFixed()** with the maximum number of decimal places between v-model and step. If accurate arbitrary-precision decimal arithmetic is required, consider working with strings using [decimal.js](https://github.com/MikeMcl/decimal.js) and  [v-text-field](/components/text-fields) instead.
+:::
+
 ## Guide
 
 The `v-number-input` component is built upon the `v-field` and `v-input` components. It is used as a replacement for `<input type="number">`, accepting numeric values from the user.
@@ -66,7 +58,7 @@ The `v-number-input` component has support for most of `v-field`'s props and is 
 
 #### Control-variant
 
-The `control-variant` prop offers an easy way to customize steppers button layout. The following values are valid options: **default**, **stacked** and **split**.
+The `control-variant` prop offers an easy way to customize steppers button layout. The following values are valid options: **default**, **stacked**, **split** and **hidden**.
 
 <ExamplesExample file="v-number-input/prop-control-variant" />
 
@@ -99,3 +91,9 @@ The `min` and `max` props specify the minimum and maximum values accepted by v-n
 The `step` prop behaves the same as the `step` attribute in the `<input type="number">`, it defines the incremental steps for adjusting the numeric value.
 
 <ExamplesExample file="v-number-input/prop-step" />
+
+#### Precision
+
+The `precision` prop enforces strict precision. It is expected to be an integer value in range between `0` and `15`. Input will prevent user from typing or pasting an invalid value.
+
+<ExamplesExample file="v-number-input/prop-precision" />

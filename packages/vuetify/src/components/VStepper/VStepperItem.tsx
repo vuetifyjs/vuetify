@@ -7,57 +7,61 @@ import { VIcon } from '@/components/VIcon/VIcon'
 
 // Composables
 import { makeGroupItemProps, useGroupItem } from '@/composables/group'
+import { IconValue } from '@/composables/icons'
+import { genOverlays } from '@/composables/variant'
 
 // Directives
-import { Ripple } from '@/directives/ripple'
+import vRipple from '@/directives/ripple'
 
 // Utilities
 import { computed } from 'vue'
-import { VStepperSymbol } from './VStepper'
+import { VStepperSymbol } from './shared'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
 import type { RippleDirectiveBinding } from '@/directives/ripple'
 
-export type StepperItemSlot = {
+export type StepperItem = string | Record<string, any>
+
+export type StepperItemSlot<T = any> = {
   canEdit: boolean
   hasError: boolean
   hasCompleted: boolean
   title?: string | number
   subtitle?: string | number
-  step: any
+  step: T
 }
 
-export type VStepperItemSlots = {
-  default: StepperItemSlot
-  icon: StepperItemSlot
-  title: StepperItemSlot
-  subtitle: StepperItemSlot
+export type VStepperItemSlots<T = any> = {
+  default: StepperItemSlot<T>
+  icon: StepperItemSlot<T>
+  title: StepperItemSlot<T>
+  subtitle: StepperItemSlot<T>
 }
 
 export type ValidationRule = () => string | boolean
 
-export const makeVStepperItemProps = propsFactory({
+export const makeStepperItemProps = propsFactory({
   color: String,
   title: String,
   subtitle: String,
   complete: Boolean,
   completeIcon: {
-    type: String,
+    type: IconValue,
     default: '$complete',
   },
   editable: Boolean,
   editIcon: {
-    type: String,
+    type: IconValue,
     default: '$edit',
   },
   error: Boolean,
   errorIcon: {
-    type: String,
+    type: IconValue,
     default: '$error',
   },
-  icon: String,
+  icon: IconValue,
   ripple: {
     type: [Boolean, Object] as PropType<RippleDirectiveBinding['value']>,
     default: true,
@@ -66,14 +70,17 @@ export const makeVStepperItemProps = propsFactory({
     type: Array as PropType<readonly ValidationRule[]>,
     default: () => ([]),
   },
+}, 'StepperItem')
 
+export const makeVStepperItemProps = propsFactory({
+  ...makeStepperItemProps(),
   ...makeGroupItemProps(),
 }, 'VStepperItem')
 
 export const VStepperItem = genericComponent<VStepperItemSlots>()({
   name: 'VStepperItem',
 
-  directives: { Ripple },
+  directives: { vRipple },
 
   props: makeVStepperItemProps(),
 
@@ -85,13 +92,14 @@ export const VStepperItem = genericComponent<VStepperItemSlots>()({
     const group = useGroupItem(props, VStepperSymbol, true)
     const step = computed(() => group?.value.value ?? props.value)
     const isValid = computed(() => props.rules.every(handler => handler() === true))
+    const isClickable = computed(() => !props.disabled && props.editable)
     const canEdit = computed(() => !props.disabled && props.editable)
     const hasError = computed(() => props.error || !isValid.value)
     const hasCompleted = computed(() => props.complete || (props.rules.length > 0 && isValid.value))
     const icon = computed(() => {
       if (hasError.value) return props.errorIcon
       if (hasCompleted.value) return props.completeIcon
-      if (props.editable) return props.editIcon
+      if (group.isSelected.value && props.editable) return props.editIcon
 
       return props.icon
     })
@@ -134,13 +142,16 @@ export const VStepperItem = genericComponent<VStepperItemSlots>()({
             group?.selectedClass.value,
           ]}
           disabled={ !props.editable }
+          type="button"
           v-ripple={[
-            props.ripple && props.editable,
+            props.editable && props.ripple,
             null,
             null,
           ]}
           onClick={ onClick }
         >
+          { isClickable.value && genOverlays(true, 'v-stepper-item') }
+
           <VAvatar
             key="stepper-avatar"
             class="v-stepper-item__avatar"

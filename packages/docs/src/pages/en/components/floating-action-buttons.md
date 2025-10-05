@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   nav: Floating Action Buttons
   title: FAB component
@@ -11,6 +10,8 @@ related:
   - /styles/transitions/
 features:
   report: true
+  label: 'C: VFab'
+  github: /components/VFab/
   spec: https://m2.material.io/components/buttons-floating-action-button
 ---
 
@@ -20,25 +21,7 @@ The `v-fab` component can be used as a floating action button. This provides an 
 
 <PageFeatures />
 
-::: warning
-
-This feature requires [v3.5.7](/getting-started/release-notes/?version=v3.5.7)
-
-:::
-
-## Installation
-
-Labs components require a manual import and installation of the component.
-
-```js { resource="src/plugins/vuetify.js" }
-import { VFab } from 'vuetify/labs/VFab'
-
-export default createVuetify({
-  components: {
-    VFab,
-  },
-})
-```
+<DocIntroduced version="3.6.0" />
 
 ## Usage
 
@@ -85,3 +68,9 @@ When changing the default action of your button, it is recommended that you disp
 For better visual appeal, we use a small button to match our list avatars.
 
 <ExamplesExample file="v-fab/misc-small" />
+
+### Speed dial
+
+The speed-dial component has a very robust api for customizing your FAB experience exactly how you want.
+
+<ExamplesExample file="v-fab/misc-speed-dial" />

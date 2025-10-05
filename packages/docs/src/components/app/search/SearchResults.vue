@@ -27,7 +27,7 @@
 
         <template
           v-for="(child, ci) in group.items"
-          :key="`group-item-${child.name}-${i}`"
+          :key="`group-item-${child.name}-${ci}`"
         >
           <v-list-item
             :to="getPathname(child)"
@@ -96,7 +96,7 @@
 
   const app = useAppStore()
 
-  const rootEl = ref<VList>()
+  const rootEl = ref<InstanceType<typeof VList>>()
   defineExpose({ rootEl })
 
   function makeBreadcrumbs (hierarchy: any) {

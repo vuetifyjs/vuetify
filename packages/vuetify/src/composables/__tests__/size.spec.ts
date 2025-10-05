@@ -2,7 +2,8 @@
 import { useSize } from '../size'
 
 // Utilities
-import { describe, expect, it } from '@jest/globals'
+
+// Utilities
 
 describe('size', () => {
   it.each([

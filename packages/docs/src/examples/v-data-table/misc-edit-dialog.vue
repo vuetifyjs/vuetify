@@ -59,12 +59,8 @@
     >
       {{ snackText }}
 
-      <template v-slot:action="{ attrs }">
-        <v-btn
-          v-bind="attrs"
-          variant="text"
-          @click="snack = false"
-        >
+      <template v-slot:actions>
+        <v-btn @click="snack = false">
           Close
         </v-btn>
       </template>

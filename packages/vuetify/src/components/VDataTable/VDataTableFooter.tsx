@@ -7,6 +7,7 @@ import { VSelect } from '@/components/VSelect'
 
 // Composables
 import { usePagination } from './composables/paginate'
+import { IconValue } from '@/composables/icons'
 import { useLocale } from '@/composables/locale'
 
 // Utilities
@@ -19,19 +20,19 @@ import type { PropType } from 'vue'
 export const makeVDataTableFooterProps = propsFactory({
   color: String,
   prevIcon: {
-    type: String,
+    type: IconValue,
     default: '$prev',
   },
   nextIcon: {
-    type: String,
+    type: IconValue,
     default: '$next',
   },
   firstIcon: {
-    type: String,
+    type: IconValue,
     default: '$first',
   },
   lastIcon: {
-    type: String,
+    type: IconValue,
     default: '$last',
   },
   itemsPerPageText: {
@@ -106,7 +107,7 @@ export const VDataTableFooter = genericComponent<{ prepend: never }>()({
           { slots.prepend?.() }
 
           <div class="v-data-table-footer__items-per-page">
-            <span>{ t(props.itemsPerPageText) }</span>
+            <span aria-label={ t(props.itemsPerPageText) }>{ t(props.itemsPerPageText) }</span>
 
             <VSelect
               items={ itemsPerPageOptions.value }
@@ -115,7 +116,7 @@ export const VDataTableFooter = genericComponent<{ prepend: never }>()({
               onUpdate:modelValue={ v => setItemsPerPage(Number(v)) }
               density="compact"
               variant="outlined"
-              hide-details
+              hideDetails
             />
           </div>
 
@@ -129,14 +130,14 @@ export const VDataTableFooter = genericComponent<{ prepend: never }>()({
             <VPagination
               v-model={ page.value }
               density="comfortable"
-              first-aria-label={ props.firstPageLabel }
-              last-aria-label={ props.lastPageLabel }
+              firstAriaLabel={ props.firstPageLabel }
+              lastAriaLabel={ props.lastPageLabel }
               length={ pageCount.value }
-              next-aria-label={ props.nextPageLabel }
-              previous-aria-label={ props.prevPageLabel }
+              nextAriaLabel={ props.nextPageLabel }
+              previousAriaLabel={ props.prevPageLabel }
               rounded
-              show-first-last-page
-              total-visible={ props.showCurrentPage ? 1 : 0 }
+              showFirstLastPage
+              totalVisible={ props.showCurrentPage ? 1 : 0 }
               variant="plain"
               { ...omit(paginationProps, ['color']) }
             ></VPagination>
@@ -148,3 +149,5 @@ export const VDataTableFooter = genericComponent<{ prepend: never }>()({
     return {}
   },
 })
+
+export type VDataTableFooter = InstanceType<typeof VDataTableFooter>

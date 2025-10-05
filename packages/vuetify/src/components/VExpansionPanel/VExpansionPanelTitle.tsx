@@ -1,17 +1,19 @@
 // Components
-import { VExpansionPanelSymbol } from './VExpansionPanels'
+import { VExpansionPanelSymbol } from './shared'
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VIcon } from '@/components/VIcon'
 
 // Composables
 import { useBackgroundColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
+import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { IconValue } from '@/composables/icons'
 
 // Directives
-import { Ripple } from '@/directives/ripple'
+import vRipple from '@/directives/ripple'
 
 // Utilities
-import { computed, inject } from 'vue'
+import { computed, inject, toRef } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -51,12 +53,13 @@ export const makeVExpansionPanelTitleProps = propsFactory({
   readonly: Boolean,
 
   ...makeComponentProps(),
+  ...makeDimensionProps(),
 }, 'VExpansionPanelTitle')
 
 export const VExpansionPanelTitle = genericComponent<VExpansionPanelTitleSlots>()({
   name: 'VExpansionPanelTitle',
 
-  directives: { Ripple },
+  directives: { vRipple },
 
   props: makeVExpansionPanelTitleProps(),
 
@@ -65,7 +68,8 @@ export const VExpansionPanelTitle = genericComponent<VExpansionPanelTitleSlots>(
 
     if (!expansionPanel) throw new Error('[Vuetify] v-expansion-panel-title needs to be placed inside v-expansion-panel')
 
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(props, 'color')
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.color)
+    const { dimensionStyles } = useDimension(props)
 
     const slotProps = computed(() => ({
       collapseIcon: props.collapseIcon,
@@ -74,6 +78,8 @@ export const VExpansionPanelTitle = genericComponent<VExpansionPanelTitleSlots>(
       expandIcon: props.expandIcon,
       readonly: props.readonly,
     }))
+
+    const icon = toRef(() => expansionPanel.isSelected.value ? props.collapseIcon : props.expandIcon)
 
     useRender(() => (
       <button
@@ -89,6 +95,7 @@ export const VExpansionPanelTitle = genericComponent<VExpansionPanelTitleSlots>(
         ]}
         style={[
           backgroundColorStyles.value,
+          dimensionStyles.value,
           props.style,
         ]}
         type="button"
@@ -103,12 +110,17 @@ export const VExpansionPanelTitle = genericComponent<VExpansionPanelTitleSlots>(
         { slots.default?.(slotProps.value) }
 
         { !props.hideActions && (
-          <span class="v-expansion-panel-title__icon">
-            {
-              slots.actions ? slots.actions(slotProps.value)
-              : <VIcon icon={ expansionPanel.isSelected.value ? props.collapseIcon : props.expandIcon } />
-            }
-          </span>
+          <VDefaultsProvider
+            defaults={{
+              VIcon: {
+                icon: icon.value,
+              },
+            }}
+          >
+            <span class="v-expansion-panel-title__icon">
+              { slots.actions?.(slotProps.value) ?? <VIcon /> }
+            </span>
+          </VDefaultsProvider>
         )}
       </button>
     ))

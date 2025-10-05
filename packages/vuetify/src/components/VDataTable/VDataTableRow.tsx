@@ -1,4 +1,5 @@
 // Components
+import { VDataTableColumn } from './VDataTableColumn'
 import { VBtn } from '@/components/VBtn'
 import { VCheckboxBtn } from '@/components/VCheckbox'
 
@@ -6,7 +7,9 @@ import { VCheckboxBtn } from '@/components/VCheckbox'
 import { useExpanded } from './composables/expand'
 import { useHeaders } from './composables/headers'
 import { useSelection } from './composables/select'
-import { VDataTableColumn } from './VDataTableColumn'
+import { useSort } from './composables/sort'
+import { makeDisplayProps, useDisplay } from '@/composables/display'
+import { IconValue } from '@/composables/icons'
 
 // Utilities
 import { toDisplayString, withModifiers } from 'vue'
@@ -15,21 +18,42 @@ import { EventProp, genericComponent, getObjectValueByPath, propsFactory, useRen
 // Types
 import type { PropType } from 'vue'
 import type { CellProps, DataTableItem, ItemKeySlot } from './types'
+import type { VDataTableHeaderCellColumnSlotProps } from './VDataTableHeaders'
 import type { GenericProps } from '@/util'
 
+export type VDataTableItemCellColumnSlotProps<T> = Omit<ItemKeySlot<T>, 'value'> & {
+  props: Record<string, unknown>
+}
+
 export type VDataTableRowSlots<T> = {
-  'item.data-table-select': Omit<ItemKeySlot<T>, 'value'>
-  'item.data-table-expand': Omit<ItemKeySlot<T>, 'value'>
-} & { [key: `item.${string}`]: ItemKeySlot<T> }
+  'item.data-table-select': VDataTableItemCellColumnSlotProps<T>
+  'item.data-table-expand': VDataTableItemCellColumnSlotProps<T>
+  'header.data-table-select': VDataTableHeaderCellColumnSlotProps
+  'header.data-table-expand': VDataTableHeaderCellColumnSlotProps
+} & {
+  [key: `item.${string}`]: ItemKeySlot<T>
+  [key: `header.${string}`]: VDataTableHeaderCellColumnSlotProps
+}
 
 export const makeVDataTableRowProps = propsFactory({
   color: String,
   index: Number,
   item: Object as PropType<DataTableItem>,
   cellProps: [Object, Function] as PropType<CellProps<any>>,
+  collapseIcon: {
+    type: IconValue,
+    default: '$collapse',
+  },
+  expandIcon: {
+    type: IconValue,
+    default: '$expand',
+  },
+
   onClick: EventProp<[MouseEvent]>(),
   onContextmenu: EventProp<[MouseEvent]>(),
   onDblclick: EventProp<[MouseEvent]>(),
+
+  ...makeDisplayProps(),
 }, 'VDataTableRow')
 
 export const VDataTableRow = genericComponent<new <T>(
@@ -44,8 +68,10 @@ export const VDataTableRow = genericComponent<new <T>(
   props: makeVDataTableRowProps(),
 
   setup (props, { slots }) {
-    const { isSelected, toggleSelect } = useSelection()
+    const { displayClasses, mobile } = useDisplay(props, 'v-data-table__tr')
+    const { isSelected, toggleSelect, someSelected, allSelected, selectAll } = useSelection()
     const { isExpanded, toggleExpand } = useExpanded()
+    const { toggleSort, sortBy, isSorted } = useSort()
     const { columns } = useHeaders()
 
     useRender(() => (
@@ -55,6 +81,7 @@ export const VDataTableRow = genericComponent<new <T>(
           {
             'v-data-table__tr--clickable': !!(props.onClick || props.onContextmenu || props.onDblclick),
           },
+          displayClasses.value,
         ]}
         onClick={ props.onClick as any }
         onContextmenu={ props.onContextmenu as any }
@@ -63,6 +90,7 @@ export const VDataTableRow = genericComponent<new <T>(
         { props.item && columns.value.map((column, i) => {
           const item = props.item!
           const slotName = `item.${column.key}` as const
+          const headerSlotName = `header.${column.key}` as const
           const slotProps = {
             index: props.index!,
             item: item.raw,
@@ -74,6 +102,17 @@ export const VDataTableRow = genericComponent<new <T>(
             isExpanded,
             toggleExpand,
           } satisfies ItemKeySlot<any>
+
+          const columnSlotProps: VDataTableHeaderCellColumnSlotProps = {
+            column,
+            selectAll,
+            isSorted,
+            toggleSort,
+            sortBy: sortBy.value,
+            someSelected: someSelected.value,
+            allSelected: allSelected.value,
+            getSortIcon: () => '',
+          }
 
           const cellProps = typeof props.cellProps === 'function'
             ? props.cellProps({
@@ -93,38 +132,65 @@ export const VDataTableRow = genericComponent<new <T>(
             })
             : column.cellProps
 
+          const noPadding = column.key === 'data-table-select' || column.key === 'data-table-expand'
+          const isEmpty = column.key === 'data-table-group' && column.width === 0 && !column.title
+
           return (
             <VDataTableColumn
               align={ column.align }
+              indent={ column.intent }
+              class={{
+                'v-data-table__td--expanded-row': column.key === 'data-table-expand',
+                'v-data-table__td--select-row': column.key === 'data-table-select',
+              }}
               fixed={ column.fixed }
               fixedOffset={ column.fixedOffset }
+              fixedEndOffset={ column.fixedEndOffset }
               lastFixed={ column.lastFixed }
-              noPadding={ column.key === 'data-table-select' || column.key === 'data-table-expand' }
-              width={ column.width }
-              maxWidth={ column.maxWidth }
+              firstFixedEnd={ column.firstFixedEnd }
+              maxWidth={ !mobile.value ? column.maxWidth : undefined }
+              noPadding={ noPadding }
+              empty={ isEmpty }
               nowrap={ column.nowrap }
+              width={ !mobile.value ? column.width : undefined }
               { ...cellProps }
               { ...columnCellProps }
             >
               {{
                 default: () => {
-                  if (slots[slotName]) return slots[slotName]!(slotProps)
-
                   if (column.key === 'data-table-select') {
-                    return slots['item.data-table-select']?.(slotProps) ?? (
+                    return slots['item.data-table-select']?.({
+                      ...slotProps,
+                      props: {
+                        disabled: !item.selectable,
+                        modelValue: isSelected([item]),
+                        onClick: withModifiers(() => toggleSelect(item), ['stop']),
+                      },
+                    }) ?? (
                       <VCheckboxBtn
                         color={ props.color }
                         disabled={ !item.selectable }
                         modelValue={ isSelected([item]) }
-                        onClick={ withModifiers(() => toggleSelect(item), ['stop']) }
+                        onClick={ withModifiers(
+                          (event: Event) => toggleSelect(item, props.index, event as PointerEvent),
+                          ['stop']
+                        )}
                       />
                     )
                   }
 
                   if (column.key === 'data-table-expand') {
-                    return slots['item.data-table-expand']?.(slotProps) ?? (
+                    return slots['item.data-table-expand']?.({
+                      ...slotProps,
+                      props: {
+                        icon: isExpanded(item) ? props.collapseIcon : props.expandIcon,
+                        size: 'small',
+                        variant: 'text',
+                        onClick: withModifiers(() => toggleExpand(item), ['stop']),
+                      },
+                    }) ?? (
                       <VBtn
-                        icon={ isExpanded(item) ? '$collapse' : '$expand' }
+                        icon={ isExpanded(item) ? props.collapseIcon : props.expandIcon }
                         size="small"
                         variant="text"
                         onClick={ withModifiers(() => toggleExpand(item), ['stop']) }
@@ -132,7 +198,21 @@ export const VDataTableRow = genericComponent<new <T>(
                     )
                   }
 
-                  return toDisplayString(slotProps.value)
+                  if (slots[slotName] && !mobile.value) return slots[slotName](slotProps)
+
+                  const displayValue = toDisplayString(slotProps.value)
+
+                  return !mobile.value ? displayValue : (
+                    <>
+                      <div class="v-data-table__td-title">
+                        { slots[headerSlotName]?.(columnSlotProps) ?? column.title }
+                      </div>
+
+                      <div class="v-data-table__td-value">
+                        { slots[slotName]?.(slotProps) ?? displayValue }
+                      </div>
+                    </>
+                  )
                 },
               }}
             </VDataTableColumn>

@@ -2,12 +2,12 @@
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, inject, provide, watch, watchEffect } from 'vue'
+import { computed, inject, provide, watch } from 'vue'
 import { clamp, getCurrentInstance, propsFactory } from '@/util'
 
 // Types
 import type { InjectionKey, Ref } from 'vue'
-import type { Group } from './group'
+import type { Group, GroupSummary } from './group'
 import type { EventProp } from '@/util'
 
 export const makeDataTablePaginateProps = propsFactory({
@@ -43,8 +43,8 @@ type PaginationProps = {
 }
 
 export function createPagination (props: PaginationProps) {
-  const page = useProxiedModel(props, 'page', undefined, value => +(value ?? 1))
-  const itemsPerPage = useProxiedModel(props, 'itemsPerPage', undefined, value => +(value ?? 10))
+  const page = useProxiedModel(props, 'page', undefined, value => Number(value ?? 1))
+  const itemsPerPage = useProxiedModel(props, 'itemsPerPage', undefined, value => Number(value ?? 10))
 
   return { page, itemsPerPage }
 }
@@ -73,7 +73,8 @@ export function providePagination (options: {
     return Math.ceil(itemsLength.value / itemsPerPage.value)
   })
 
-  watchEffect(() => {
+  // Don't run immediately, items may not have been loaded yet: #17966
+  watch([page, pageCount], () => {
     if (page.value > pageCount.value) {
       page.value = pageCount.value
     }
@@ -112,7 +113,7 @@ export function usePagination () {
 }
 
 export function usePaginatedItems <T> (options: {
-  items: Ref<readonly (T | Group<T>)[]>
+  items: Ref<readonly (T | Group<T> | GroupSummary<T>)[]>
   startIndex: Ref<number>
   stopIndex: Ref<number>
   itemsPerPage: Ref<number>
@@ -128,7 +129,7 @@ export function usePaginatedItems <T> (options: {
 
   watch(paginatedItems, val => {
     vm.emit('update:currentItems', val)
-  })
+  }, { immediate: true })
 
   return { paginatedItems }
 }

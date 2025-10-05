@@ -1,6 +1,6 @@
 <template>
   <v-radio-group
-    v-model="user.theme"
+    v-model="user.one.theme"
     class="mb-2"
     color="primary"
     true-icon="mdi-check-circle-outline"
@@ -23,16 +23,26 @@
     v-if="!theme.current.value?.dark"
     :defaults="{
       VIcon: {
-        color: user.mixedTheme ? 'primary' : 'disabled'
+        color: user.ecosystem.docs.mixedTheme ? 'primary' : 'disabled'
       }
     }"
   >
     <SettingsSwitch
-      v-model="user.mixedTheme"
+      v-model="user.ecosystem.docs.mixedTheme"
       :label="t('dark-code')"
       :messages="t('dark-code-message')"
     />
   </v-defaults-provider>
+
+  <AppBtn
+    append-icon="mdi-page-next"
+    color="surface-variant"
+    to="?one=settings"
+    variant="flat"
+    block
+  >
+    Vuetify One Themes
+  </AppBtn>
 </template>
 
 <script setup lang="ts">
@@ -50,21 +60,6 @@
       text: t('dark'),
       icon: 'mdi-weather-night',
       value: 'dark',
-    },
-    {
-      text: 'Blackguard',
-      icon: 'mdi-space-invaders',
-      value: 'blackguard',
-    },
-    {
-      text: 'Polaris',
-      icon: 'mdi-image-filter-hdr',
-      value: 'polaris',
-    },
-    {
-      text: 'Nebula',
-      icon: 'mdi-rocket-launch-outline',
-      value: 'nebula',
     },
     {
       text: t('system'),

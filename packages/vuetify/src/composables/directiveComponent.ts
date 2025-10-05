@@ -1,6 +1,6 @@
 // Utilities
 import { h, mergeProps, render, resolveComponent } from 'vue'
-import { isObject } from '@/util'
+import { consoleError, isObject } from '@/util'
 
 // Types
 import type {
@@ -66,11 +66,11 @@ export function useDirectiveComponent (
 function mountComponent (component: ConcreteComponent, props?: Record<string, any> | ((binding: DirectiveBinding) => Record<string, any>)) {
   return function (el: HTMLElement, binding: DirectiveBinding, vnode: VNode) {
     const _props = typeof props === 'function' ? props(binding) : props
-    const text = binding.value?.text ?? binding.value
+    const text = binding.value?.text ?? binding.value ?? _props?.text
     const value = isObject(binding.value) ? binding.value : {}
 
     // Get the children from the props or directive value, or the element's children
-    const children = () => text ?? el.innerHTML
+    const children = () => text ?? el.textContent
 
     // If vnode.ctx is the same as the instance, then we're bound to a plain element
     // and need to find the nearest parent component instance to inherit provides from
@@ -96,7 +96,7 @@ function findComponentParent (vnode: VNode, root: ComponentInternalInstance): Co
     for (const child of children) {
       if (!child) continue
 
-      if (child === vnode) {
+      if (child === vnode || (child.el && vnode.el && child.el === vnode.el)) {
         return true
       }
 
@@ -118,7 +118,8 @@ function findComponentParent (vnode: VNode, root: ComponentInternalInstance): Co
     return false
   }
   if (!walk([root.subTree])) {
-    throw new Error('Could not find original vnode')
+    consoleError('Could not find original vnode, component will not inherit provides')
+    return root
   }
 
   // Return the first component parent

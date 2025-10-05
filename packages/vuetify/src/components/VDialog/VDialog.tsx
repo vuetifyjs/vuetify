@@ -13,11 +13,10 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { useScopeId } from '@/composables/scopeId'
 
 // Utilities
-import { mergeProps, nextTick, ref, watch } from 'vue'
+import { mergeProps, nextTick, onBeforeUnmount, ref, watch } from 'vue'
 import { focusableChildren, genericComponent, IN_BROWSER, propsFactory, useRender } from '@/util'
 
 // Types
-import type { Component } from 'vue'
 import type { OverlaySlots } from '@/components/VOverlay/VOverlay'
 
 export const makeVDialogProps = propsFactory({
@@ -31,7 +30,7 @@ export const makeVDialogProps = propsFactory({
   ...makeVOverlayProps({
     origin: 'center center' as const,
     scrollStrategy: 'block' as const,
-    transition: { component: VDialogTransition as Component },
+    transition: { component: VDialogTransition },
     zIndex: 2400,
   }),
 }, 'VDialog')
@@ -43,6 +42,7 @@ export const VDialog = genericComponent<OverlaySlots>()({
 
   emits: {
     'update:modelValue': (value: boolean) => true,
+    afterEnter: () => true,
     afterLeave: () => true,
   },
 
@@ -51,11 +51,14 @@ export const VDialog = genericComponent<OverlaySlots>()({
     const { scopeId } = useScopeId()
 
     const overlay = ref<VOverlay>()
-    function onFocusin (e: FocusEvent) {
+    async function onFocusin (e: FocusEvent) {
       const before = e.relatedTarget as HTMLElement | null
       const after = e.target as HTMLElement | null
 
+      await nextTick()
+
       if (
+        isActive.value &&
         before !== after &&
         overlay.value?.contentEl &&
         // We're the topmost dialog
@@ -66,30 +69,53 @@ export const VDialog = genericComponent<OverlaySlots>()({
         !overlay.value.contentEl.contains(after)
       ) {
         const focusable = focusableChildren(overlay.value.contentEl)
-
-        if (!focusable.length) return
-
-        const firstElement = focusable[0]
-        const lastElement = focusable[focusable.length - 1]
-
-        if (before === firstElement) {
-          lastElement.focus()
-        } else {
-          firstElement.focus()
-        }
+        focusable[0]?.focus()
       }
     }
 
+    function onKeydown (e: KeyboardEvent) {
+      if (e.key !== 'Tab' || !overlay.value?.contentEl) return
+
+      const focusable = focusableChildren(overlay.value.contentEl)
+      if (!focusable.length) return
+
+      const firstElement = focusable[0]
+      const lastElement = focusable[focusable.length - 1]
+      const active = document.activeElement as HTMLElement | null
+
+      if (e.shiftKey && active === firstElement) {
+        e.preventDefault()
+        lastElement.focus()
+      } else if (!e.shiftKey && active === lastElement) {
+        e.preventDefault()
+        firstElement.focus()
+      }
+    }
+
+    onBeforeUnmount(() => {
+      document.removeEventListener('focusin', onFocusin)
+      document.removeEventListener('keydown', onKeydown)
+    })
+
     if (IN_BROWSER) {
       watch(() => isActive.value && props.retainFocus, val => {
-        val
-          ? document.addEventListener('focusin', onFocusin)
-          : document.removeEventListener('focusin', onFocusin)
+        if (val) {
+          document.addEventListener('focusin', onFocusin, { once: true })
+          document.addEventListener('keydown', onKeydown)
+        } else {
+          document.removeEventListener('focusin', onFocusin)
+          document.removeEventListener('keydown', onKeydown)
+        }
       }, { immediate: true })
     }
 
     function onAfterEnter () {
-      if (overlay.value?.contentEl && !overlay.value.contentEl.contains(document.activeElement)) {
+      emit('afterEnter')
+      if (
+        (props.scrim || props.retainFocus) &&
+        overlay.value?.contentEl &&
+        !overlay.value.contentEl.contains(document.activeElement)
+      ) {
         overlay.value.contentEl.focus({ preventScroll: true })
       }
     }
@@ -109,7 +135,6 @@ export const VDialog = genericComponent<OverlaySlots>()({
       const overlayProps = VOverlay.filterProps(props)
       const activatorProps = mergeProps({
         'aria-haspopup': 'dialog',
-        'aria-expanded': String(isActive.value),
       }, props.activatorProps)
       const contentProps = mergeProps({
         tabindex: -1,
@@ -132,6 +157,10 @@ export const VDialog = genericComponent<OverlaySlots>()({
           aria-modal="true"
           activatorProps={ activatorProps }
           contentProps={ contentProps }
+          height={ !props.fullscreen ? props.height : undefined }
+          width={ !props.fullscreen ? props.width : undefined }
+          maxHeight={ !props.fullscreen ? props.maxHeight : undefined }
+          maxWidth={ !props.fullscreen ? props.maxWidth : undefined }
           role="dialog"
           onAfterEnter={ onAfterEnter }
           onAfterLeave={ onAfterLeave }

@@ -27,7 +27,6 @@
               class="mx-1 mx-md-2"
               height="56"
               max-width="56"
-              contain
             />
 
             <AppMarkdown
@@ -55,7 +54,6 @@
   })
 
   const { ad, attrs } = useAd(props)
-  const { event } = useGtag()
   const { name } = useRoute()
 
   const background = computed(() => ad.value?.metadata?.images?.background?.url)
@@ -80,11 +78,7 @@
 
     if (!slug) return
 
-    event('click', {
-      event_category: 'promoted',
-      event_label: slug,
-      value: name?.toString().toLowerCase(),
-    })
+    sweClick('promoted', slug, name?.toString().toLowerCase())
   }
 </script>
 

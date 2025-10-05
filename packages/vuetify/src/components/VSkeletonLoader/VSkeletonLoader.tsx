@@ -9,7 +9,7 @@ import { useLocale } from '@/composables/locale'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
-import { computed, toRef } from 'vue'
+import { computed } from 'vue'
 import { genericComponent, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
@@ -130,10 +130,12 @@ export const makeVSkeletonLoaderProps = propsFactory({
 export const VSkeletonLoader = genericComponent()({
   name: 'VSkeletonLoader',
 
+  inheritAttrs: false,
+
   props: makeVSkeletonLoaderProps(),
 
-  setup (props, { slots }) {
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
+  setup (props, { attrs, slots }) {
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.color)
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
     const { themeClasses } = provideTheme(props)
@@ -143,29 +145,39 @@ export const VSkeletonLoader = genericComponent()({
 
     useRender(() => {
       const isLoading = !slots.default || props.loading
+      const loadingProps = (props.boilerplate || !isLoading) ? {} : {
+        ariaLive: 'polite',
+        ariaLabel: t(props.loadingText),
+        role: 'alert',
+      }
 
       return (
-        <div
-          class={[
-            'v-skeleton-loader',
-            {
-              'v-skeleton-loader--boilerplate': props.boilerplate,
-            },
-            themeClasses.value,
-            backgroundColorClasses.value,
-            elevationClasses.value,
-          ]}
-          style={[
-            backgroundColorStyles.value,
-            isLoading ? dimensionStyles.value : {},
-          ]}
-          aria-busy={ !props.boilerplate ? isLoading : undefined }
-          aria-live={ !props.boilerplate ? 'polite' : undefined }
-          aria-label={ !props.boilerplate ? t(props.loadingText) : undefined }
-          role={ !props.boilerplate ? 'alert' : undefined }
-        >
-          { isLoading ? items.value : slots.default?.() }
-        </div>
+        <>
+          { isLoading
+            ? (
+              <div
+                class={[
+                  'v-skeleton-loader',
+                  {
+                    'v-skeleton-loader--boilerplate': props.boilerplate,
+                  },
+                  themeClasses.value,
+                  backgroundColorClasses.value,
+                  elevationClasses.value,
+                ]}
+                style={[
+                  backgroundColorStyles.value,
+                  dimensionStyles.value,
+                ]}
+                { ...loadingProps }
+                { ...attrs }
+              >
+                { items.value }
+              </div>
+            )
+            : slots.default?.()
+          }
+        </>
       )
     })
 

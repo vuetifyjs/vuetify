@@ -48,12 +48,11 @@
       position: relative
 
       &::after
-        @include tools.absolute(true)
-
         animation: $skeleton-loader-loading-animation
         background: $skeleton-loader-bone-background
         transform: $skeleton-loader-loading-transform
         z-index: 1
+        @include tools.absolute(true)
 
     &__avatar
       border-radius: 50%

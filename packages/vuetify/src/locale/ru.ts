@@ -2,7 +2,7 @@ export default {
   badge: 'Знак',
   open: 'Открыть',
   close: 'Закрыть',
-  dismiss: 'Dismiss',
+  dismiss: 'Отклонить',
   confirmEdit: {
     ok: 'ОК',
     cancel: 'Отмена',
@@ -46,6 +46,13 @@ export default {
     input: {
       placeholder: 'Введите дату',
     },
+    ariaLabel: {
+      previousMonth: 'Предыдущий месяц',
+      nextMonth: 'Следующий месяц',
+      selectYear: 'Выбрать год',
+      selectDate: '{0}',
+      currentDate: 'Сегодня, {0}',
+    },
   },
   noDataText: 'Отсутствуют данные',
   carousel: {
@@ -57,7 +64,7 @@ export default {
   },
   calendar: {
     moreEvents: 'Еще {0}',
-    today: 'Today',
+    today: 'Сегодня',
   },
   input: {
     clear: 'Очистить {0}',
@@ -69,10 +76,15 @@ export default {
     counter: 'Файлов: {0}',
     counterSize: 'Файлов: {0} (всего {1})',
   },
+  fileUpload: {
+    title: 'Перетащите файлы сюда',
+    divider: 'или',
+    browse: 'Просмотр файлов',
+  },
   timePicker: {
     am: 'AM',
     pm: 'PM',
-    title: 'Select Time',
+    title: 'Выберите время',
   },
   pagination: {
     ariaLabel: {
@@ -98,5 +110,64 @@ export default {
   infiniteScroll: {
     loadMore: 'Загрузить ещё',
     empty: 'Больше нечего загружать',
+  },
+  rules: {
+    required: 'Это поле обязательно',
+    email: 'Пожалуйста, введите действительный email',
+    number: 'Это поле может содержать только цифры',
+    integer: 'Это поле может содержать только целые числа',
+    capital: 'Это поле может содержать только заглавные буквы',
+    maxLength: 'Вы должны ввести не более {0} символов',
+    minLength: 'Вы должны ввести не менее {0} символов',
+    strictLength: 'Длина введенного поля недействительна',
+    exclude: 'Символ {0} не разрешен',
+    notEmpty: 'Пожалуйста, выберите хотя бы одно значение',
+    pattern: 'Недопустимый формат',
+  },
+  hotkey: {
+    then: 'затем',
+    ctrl: 'Ctrl',
+    command: 'Command',
+    shift: 'Shift',
+    alt: 'Alt',
+    option: 'Option',
+    enter: 'Enter',
+    escape: 'Escape',
+    upArrow: 'Стрелка вверх',
+    downArrow: 'Стрелка вниз',
+    leftArrow: 'Стрелка влево',
+    rightArrow: 'Стрелка вправо',
+    backspace: 'Backspace',
+    space: 'Пробел',
+    plus: 'плюс',
+    shortcut: 'Сочетание клавиш: {0}',
+  },
+  video: {
+    play: 'Воспроизвести',
+    pause: 'Пауза',
+    seek: 'Перемотка',
+    volume: 'Громкость',
+    showVolume: 'Показать регулятор громкости',
+    mute: 'Отключить звук',
+    unmute: 'Включить звук',
+    enterFullscreen: 'Полноэкранный режим',
+    exitFullscreen: 'Выйти из полноэкранного режима',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Выбрать цвет с экрана',
+      hueSlider: 'Оттенок',
+      alphaSlider: 'Прозрачность',
+      redInput: 'Красный',
+      greenInput: 'Зеленый',
+      blueInput: 'Синий',
+      alphaInput: 'Прозрачность',
+      hueInput: 'Оттенок',
+      saturationInput: 'Насыщенность',
+      lightnessInput: 'Яркость',
+      hexInput: 'Значение HEX',
+      hexaInput: 'Значение HEX с прозрачностью',
+      changeFormat: 'Изменить формат цвета',
+    },
   },
 }

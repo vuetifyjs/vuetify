@@ -99,6 +99,12 @@ The **direction** prop allows for `v-tab` components to stack vertically.
 
 <ExamplesExample file="v-tabs/prop-direction" />
 
+#### Spaced
+
+Vertical tabs can be customized with **spaced** prop to move the text away from the icon.
+
+<ExamplesExample file="v-tabs/prop-spaced" />
+
 ### Misc
 
 #### Content
@@ -131,10 +137,6 @@ You can use a menu to hold additional tabs, swapping them out on the fly.
 
 Use the **tab** and **item** slots with the **items** prop to reduce the markup required to build tabs.
 
-::: success
-
-This feature was introduced in [v3.6.0 (Nebula)](/getting-started/release-notes/?version=v3.6.0)
-
-:::
+<DocIntroduced version="3.6.0" />
 
 <ExamplesExample file="v-tabs/slot-tabs" />

@@ -1,5 +1,5 @@
 // Composables
-import { getWeek, useDate } from '@/composables/date/date'
+import { useDate } from '@/composables/date/date'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
@@ -13,7 +13,7 @@ import type { PropType } from 'vue'
 export interface CalendarProps {
   allowedDates: unknown[] | ((date: unknown) => boolean) | undefined
   disabled: boolean
-  displayValue: unknown
+  displayValue?: unknown
   modelValue: unknown[] | undefined
   max: unknown
   min: unknown
@@ -22,16 +22,43 @@ export interface CalendarProps {
   weekdays: number[]
   year: number | string | undefined
   weeksInMonth: 'dynamic' | 'static'
+  firstDayOfWeek: number | string | undefined
+  firstDayOfYear: number | string | undefined
+  weekdayFormat: 'long' | 'short' | 'narrow' | undefined
 
   'onUpdate:modelValue': ((value: unknown[]) => void) | undefined
   'onUpdate:month': ((value: number) => void) | undefined
   'onUpdate:year': ((value: number) => void) | undefined
 }
 
+export type CalendarDay = {
+  date: Date
+  formatted: string
+  isAdjacent: boolean
+  isDisabled: boolean
+  isEnd: boolean
+  isHidden: boolean
+  isSame: boolean
+  isSelected: boolean
+  isStart: boolean
+  isToday: boolean
+  isWeekEnd: boolean
+  isWeekStart: boolean
+  isoDate: string
+  localized: string
+  month: number
+  year: number
+}
+
+export type CalendarWeekdays = 0 | 1 | 2 | 3 | 4 | 5 | 6
+
 // Composables
 export const makeCalendarProps = propsFactory({
   allowedDates: [Array, Function] as PropType<unknown[] | ((date: unknown) => boolean)>,
-  disabled: Boolean,
+  disabled: {
+    type: Boolean,
+    default: null,
+  },
   displayValue: null as any as PropType<unknown>,
   modelValue: Array as PropType<unknown[]>,
   month: [Number, String],
@@ -40,13 +67,22 @@ export const makeCalendarProps = propsFactory({
   showAdjacentMonths: Boolean,
   year: [Number, String],
   weekdays: {
-    type: Array<number>,
+    type: Array as PropType<CalendarWeekdays[]>,
     default: () => [0, 1, 2, 3, 4, 5, 6],
   },
   weeksInMonth: {
     type: String as PropType<'dynamic' | 'static'>,
     default: 'dynamic',
   },
+  firstDayOfWeek: {
+    type: [Number, String],
+    default: undefined,
+  },
+  firstDayOfYear: {
+    type: [Number, String],
+    default: undefined,
+  },
+  weekdayFormat: String as PropType<'long' | 'short' | 'narrow' | undefined>,
 }, 'calendar')
 
 export function useCalendar (props: CalendarProps) {
@@ -55,7 +91,7 @@ export function useCalendar (props: CalendarProps) {
     props,
     'modelValue',
     [],
-    v => wrapInArray(v),
+    v => wrapInArray(v).map(i => adapter.date(i)),
   )
   const displayValue = computed(() => {
     if (props.displayValue) return adapter.date(props.displayValue)
@@ -91,8 +127,14 @@ export function useCalendar (props: CalendarProps) {
     v => adapter.getMonth(v)
   )
 
+  const weekdayLabels = computed(() => {
+    const firstDayOfWeek = adapter.toJsDate(adapter.startOfWeek(adapter.date(), props.firstDayOfWeek)).getDay()
+    return adapter.getWeekdays(props.firstDayOfWeek, props.weekdayFormat)
+      .filter((_, i) => props.weekdays.includes((i + firstDayOfWeek) % 7))
+  })
+
   const weeksInMonth = computed(() => {
-    const weeks = adapter.getWeekArray(month.value)
+    const weeks = adapter.getWeekArray(month.value, props.firstDayOfWeek)
 
     const days = weeks.flat()
 
@@ -116,7 +158,7 @@ export function useCalendar (props: CalendarProps) {
     return weeks
   })
 
-  function genDays (days: unknown[], today: unknown) {
+  function genDays (days: Date[], today: Date): CalendarDay[] {
     return days.filter(date => {
       return props.weekdays.includes(adapter.toJsDate(date).getDay())
     }).map((date, index) => {
@@ -125,50 +167,51 @@ export function useCalendar (props: CalendarProps) {
       const isStart = adapter.isSameDay(date, adapter.startOfMonth(month.value))
       const isEnd = adapter.isSameDay(date, adapter.endOfMonth(month.value))
       const isSame = adapter.isSameDay(date, month.value)
+      const weekdaysCount = props.weekdays.length
 
       return {
         date,
-        isoDate,
         formatted: adapter.format(date, 'keyboardDate'),
-        year: adapter.getYear(date),
-        month: adapter.getMonth(date),
-        isDisabled: isDisabled(date),
-        isWeekStart: index % 7 === 0,
-        isWeekEnd: index % 7 === 6,
-        isToday: adapter.isSameDay(date, today),
         isAdjacent,
-        isHidden: isAdjacent && !props.showAdjacentMonths,
-        isStart,
-        isSelected: model.value.some(value => adapter.isSameDay(date, value)),
+        isDisabled: isDisabled(date),
         isEnd,
+        isHidden: isAdjacent && !props.showAdjacentMonths,
         isSame,
+        isSelected: model.value.some(value => adapter.isSameDay(date, value)),
+        isStart,
+        isToday: adapter.isSameDay(date, today),
+        isWeekEnd: index % weekdaysCount === weekdaysCount - 1,
+        isWeekStart: index % weekdaysCount === 0,
+        isoDate,
         localized: adapter.format(date, 'dayOfMonth'),
+        month: adapter.getMonth(date),
+        year: adapter.getYear(date),
       }
     })
   }
 
   const daysInWeek = computed(() => {
-    const lastDay = adapter.startOfWeek(displayValue.value)
-    const week = []
+    const lastDay = adapter.startOfWeek(displayValue.value, props.firstDayOfWeek)
+    const week: Date[] = []
     for (let day = 0; day <= 6; day++) {
-      week.push(adapter.addDays(lastDay, day))
+      week.push(adapter.addDays(lastDay, day) as Date)
     }
 
-    const today = adapter.date()
+    const today = adapter.date() as Date
 
-    return genDays(week, today)
+    return genDays(week as Date[], today as Date)
   })
 
   const daysInMonth = computed(() => {
-    const days = weeksInMonth.value.flat()
+    const days = weeksInMonth.value.flat() as Date[]
     const today = adapter.date() as Date
 
-    return genDays(days, today)
+    return genDays(days as Date[], today)
   })
 
   const weekNumbers = computed(() => {
     return weeksInMonth.value.map(week => {
-      return week.length ? getWeek(adapter, week[0]) : null
+      return week.length ? adapter.getWeek(week[0], props.firstDayOfWeek, props.firstDayOfYear) : null
     })
   })
 
@@ -177,7 +220,7 @@ export function useCalendar (props: CalendarProps) {
 
     const date = adapter.date(value)
 
-    if (props.min && adapter.isAfter(adapter.date(props.min), date)) return true
+    if (props.min && adapter.isBefore(adapter.endOfDay(date), adapter.date(props.min))) return true
     if (props.max && adapter.isAfter(date, adapter.date(props.max))) return true
 
     if (Array.isArray(props.allowedDates) && props.allowedDates.length > 0) {
@@ -198,6 +241,7 @@ export function useCalendar (props: CalendarProps) {
     genDays,
     model,
     weeksInMonth,
+    weekdayLabels,
     weekNumbers,
   }
 }

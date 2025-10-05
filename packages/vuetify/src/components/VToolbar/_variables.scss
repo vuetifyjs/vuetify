@@ -17,13 +17,13 @@ $toolbar-collapsed-max-width: 112px !default;
 $toolbar-elevation: 0 !default;
 $toolbar-flat-elevation: 0 !default;
 $toolbar-flex: none !default;
-$toolbar-prepend-btn-margin-start: 10px !default;
-$toolbar-append-btn-margin-end: 10px !default;
+$toolbar-prepend-btn-margin-start: 4px !default;
+$toolbar-append-btn-margin-end: 4px !default;
 $toolbar-rounded-border-radius: variables.$border-radius-root !default;
 $toolbar-transition: .2s variables.$standard-easing !default;
 
 // VToolbarTitle
-$toolbar-title-margin: 16px !default;
+$toolbar-title-margin: 20px !default;
 $toolbar-title-font-size: 1.25rem !default;
 $toolbar-title-font-weight: 400 !default;
 $toolbar-title-letter-spacing: 0 !default;

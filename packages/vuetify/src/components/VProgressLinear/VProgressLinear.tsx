@@ -8,12 +8,15 @@ import { useIntersectionObserver } from '@/composables/intersectionObserver'
 import { useRtl } from '@/composables/locale'
 import { makeLocationProps, useLocation } from '@/composables/location'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { useResizeObserver } from '@/composables/resizeObserver'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
+import { useToggleScope } from '@/composables/toggleScope'
 
 // Utilities
-import { computed, Transition } from 'vue'
+import { computed, ref, shallowRef, Transition, watchEffect } from 'vue'
+import { makeChunksProps, useChunks } from './chunks'
 import { clamp, convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 type VProgressLinearSlots = {
@@ -55,6 +58,7 @@ export const makeVProgressLinearProps = propsFactory({
   striped: Boolean,
   roundedBar: Boolean,
 
+  ...makeChunksProps(),
   ...makeComponentProps(),
   ...makeLocationProps({ location: 'top' } as const),
   ...makeRoundedProps(),
@@ -72,23 +76,25 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
   },
 
   setup (props, { slots }) {
+    const root = ref<HTMLElement>()
+
     const progress = useProxiedModel(props, 'modelValue')
     const { isRtl, rtlClasses } = useRtl()
     const { themeClasses } = provideTheme(props)
     const { locationStyles } = useLocation(props)
-    const { textColorClasses, textColorStyles } = useTextColor(props, 'color')
+    const { textColorClasses, textColorStyles } = useTextColor(() => props.color)
     const {
       backgroundColorClasses,
       backgroundColorStyles,
-    } = useBackgroundColor(computed(() => props.bgColor || props.color))
+    } = useBackgroundColor(() => props.bgColor || props.color)
     const {
       backgroundColorClasses: bufferColorClasses,
       backgroundColorStyles: bufferColorStyles,
-    } = useBackgroundColor(computed(() => props.bufferColor || props.bgColor || props.color))
+    } = useBackgroundColor(() => props.bufferColor || props.bgColor || props.color)
     const {
       backgroundColorClasses: barColorClasses,
       backgroundColorStyles: barColorStyles,
-    } = useBackgroundColor(props, 'color')
+    } = useBackgroundColor(() => props.color)
     const { roundedClasses } = useRounded(props)
     const { intersectionRef, isIntersecting } = useIntersectionObserver()
 
@@ -99,6 +105,25 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
     const isReversed = computed(() => isRtl.value !== props.reverse)
     const transition = computed(() => props.indeterminate ? 'fade-transition' : 'slide-x-transition')
 
+    const containerWidth = shallowRef(0)
+    const { hasChunks, chunksMaskStyles, snapValueToChunk } = useChunks(props, containerWidth)
+    useToggleScope(hasChunks, () => {
+      const { resizeRef } = useResizeObserver(entries => containerWidth.value = entries[0].contentRect.width)
+      watchEffect(() => resizeRef.value = root.value)
+    })
+
+    const bufferWidth = computed(() => {
+      return hasChunks.value
+        ? snapValueToChunk(normalizedBuffer.value)
+        : normalizedBuffer.value
+    })
+
+    const barWidth = computed(() => {
+      return hasChunks.value
+        ? snapValueToChunk(normalizedValue.value)
+        : normalizedValue.value
+    })
+
     function handleClick (e: MouseEvent) {
       if (!intersectionRef.value) return
 
@@ -108,9 +133,13 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
       progress.value = Math.round(value / width * max.value)
     }
 
+    watchEffect(() => {
+      intersectionRef.value = root.value
+    })
+
     useRender(() => (
       <props.tag
-        ref={ intersectionRef }
+        ref={ root }
         class={[
           'v-progress-linear',
           {
@@ -120,6 +149,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
             'v-progress-linear--rounded': props.rounded,
             'v-progress-linear--rounded-bar': props.roundedBar,
             'v-progress-linear--striped': props.striped,
+            'v-progress-linear--clickable': props.clickable,
           },
           roundedClasses.value,
           themeClasses.value,
@@ -134,13 +164,14 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
             '--v-progress-linear-height': convertToUnit(height.value),
             ...(props.absolute ? locationStyles.value : {}),
           },
+          chunksMaskStyles.value,
           props.style,
         ]}
         role="progressbar"
         aria-hidden={ props.active ? 'false' : 'true' }
         aria-valuemin="0"
         aria-valuemax={ props.max }
-        aria-valuenow={ props.indeterminate ? undefined : normalizedValue.value }
+        aria-valuenow={ props.indeterminate ? undefined : Math.min(parseFloat(progress.value), max.value) }
         onClick={ props.clickable && handleClick }
       >
         { props.stream && (
@@ -185,7 +216,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
             bufferColorStyles.value,
             {
               opacity: parseFloat(props.bufferOpacity!),
-              width: convertToUnit(normalizedBuffer.value, '%'),
+              width: convertToUnit(bufferWidth.value, '%'),
             },
           ]}
         />
@@ -199,7 +230,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
               ]}
               style={[
                 barColorStyles.value,
-                { width: convertToUnit(normalizedValue.value, '%') },
+                { width: convertToUnit(barWidth.value, '%') },
               ]}
             />
           ) : (

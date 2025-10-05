@@ -2,7 +2,7 @@ export default {
   badge: 'ផ្លាក',
   open: 'បើក',
   close: 'បិទ',
-  dismiss: 'Dismiss',
+  dismiss: 'បោះបង់',
   confirmEdit: {
     ok: 'យល់ព្រម',
     cancel: 'បោះបង់',
@@ -46,6 +46,13 @@ export default {
     input: {
       placeholder: 'បញ្ចូលកាលបរិច្ឆេទ',
     },
+    ariaLabel: {
+      previousMonth: 'Previous month',
+      nextMonth: 'Next month',
+      selectYear: 'Select year',
+      selectDate: '{0}',
+      currentDate: 'Today, {0}',
+    },
   },
   noDataText: 'គ្មានទិន្នន័យដែលមាន',
   carousel: {
@@ -57,7 +64,7 @@ export default {
   },
   calendar: {
     moreEvents: '{0} ទៀត',
-    today: 'Today',
+    today: 'ថ្ងៃនេះ',
   },
   input: {
     clear: 'សម្អាត {0}',
@@ -69,10 +76,15 @@ export default {
     counter: '{0} ឯកសារ',
     counterSize: '{0} ឯកសារ ({1} សរុប)',
   },
+  fileUpload: {
+    title: 'អូសហើយទម្លាក់ឯកសារនៅទីនេះ',
+    divider: 'ឬ',
+    browse: 'រកមើលឯកសារ',
+  },
   timePicker: {
     am: 'ព្រឹក',
     pm: 'ល្ងាច',
-    title: 'Select Time',
+    title: 'ជ្រើសរើសម៉ោង',
   },
   pagination: {
     ariaLabel: {
@@ -98,5 +110,64 @@ export default {
   infiniteScroll: {
     loadMore: 'ទាញយកបន្ថែម',
     empty: 'គ្មានទំព័រទៀត',
+  },
+  rules: {
+    required: 'វាលនេះត្រូវបានទាមទារ',
+    email: 'សូមបញ្ចូលអ៊ីមែលត្រឹមត្រូវ',
+    number: 'វាលនេះអាចមានតែលេខប៉ុណ្ណោះ',
+    integer: 'វាលនេះអាចមានតែចំនួនគត់ប៉ុណ្ណោះ',
+    capital: 'វាលនេះអាចមានតែអក្សរធំប៉ុណ្ណោះ',
+    maxLength: 'អ្នកត្រូវបញ្ចូលអតិបរមា {0} តួអក្សរ',
+    minLength: 'អ្នកត្រូវបញ្ចូលយ៉ាងហោចណាស់ {0} តួអក្សរ',
+    strictLength: 'ប្រវែងនៃវាលដែលបានបញ្ចូលមិនត្រឹមត្រូវទេ',
+    exclude: 'តួអក្សរ {0} មិនត្រូវបានអនុញ្ញាតទេ',
+    notEmpty: 'សូមជ្រើសរើសយ៉ាងហោចណាស់តម្លៃមួយ',
+    pattern: 'ទម្រង់មិនត្រឹមត្រូវ',
+  },
+  hotkey: {
+    then: 'បន្ទាប់មក',
+    ctrl: 'Ctrl',
+    command: 'Command',
+    shift: 'Shift',
+    alt: 'Alt',
+    option: 'Option',
+    enter: 'Enter',
+    escape: 'Escape',
+    upArrow: 'ព្រួញ​ឡើង​លើ',
+    downArrow: 'ព្រួញ​ចុះក្រោម',
+    leftArrow: 'ព្រួញ​ឆ្វេង',
+    rightArrow: 'ព្រួញ​ស្តាំ',
+    backspace: 'Backspace',
+    space: 'ដកឃ្លា',
+    plus: 'បូក',
+    shortcut: 'គ្រាប់ចុចរហ័ស: {0}',
+  },
+  video: {
+    play: 'លេង',
+    pause: 'ផ្អាក',
+    seek: 'ស្វែងរក',
+    volume: 'កម្រិតសំឡេង',
+    showVolume: 'បង្ហាញការគ្រប់គ្រងកម្រិតសំឡេង',
+    mute: 'បិទសំឡេង',
+    unmute: 'បើក​សំឡេង',
+    enterFullscreen: 'ពេញអេក្រង់',
+    exitFullscreen: 'ចេញពីអេក្រង់ពេ',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'ជ្រើសរើសពណ៌ពីអេក្រង់',
+      hueSlider: 'ពណ៌',
+      alphaSlider: 'អាល់ហ្វា',
+      redInput: 'ក្រហម',
+      greenInput: 'បៃតង',
+      blueInput: 'ខៀវ',
+      alphaInput: 'អាល់ហ្វា',
+      hueInput: 'ពណ៌',
+      saturationInput: 'តិត្ថិភាព',
+      lightnessInput: 'ពន្លឺ',
+      hexInput: 'តម្លៃ HEX',
+      hexaInput: 'HEX ដែលមានតម្លៃអាល់ហ្វា',
+      changeFormat: 'ប្ដូរទម្រង់ពណ៌',
+    },
   },
 }

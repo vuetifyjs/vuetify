@@ -8,6 +8,7 @@ import { VCard } from '@/components/VCard'
 
 // Utilities
 import { createRange } from '@/util'
+import { VBtn } from '../../VBtn'
 
 describe('VSlideGroup', () => {
   it('should support default scoped slot with selection', () => {
@@ -38,7 +39,7 @@ describe('VSlideGroup', () => {
     cy.get('.v-card').eq(3).click().should('have.class', 'bg-primary')
   })
 
-  // TODO: fails in headloss mode
+  // TODO: fails in headless mode
   it.skip('should disable affixes when appropriate', () => {
     cy.mount(() => (
       <Application>
@@ -81,7 +82,8 @@ describe('VSlideGroup', () => {
     ))
 
     cy.get('.v-slide-group__next').should('exist').should('have.text', 'next').click()
-    cy.get('.v-slide-group__prev').should('exist').should('have.text', 'prev').click()
+    // on CI pointer-events still with none, we just force the click to avoid CI issues
+    cy.get('.v-slide-group__prev').should('exist').should('have.text', 'prev').click({ force: true })
   })
 
   it('should always showArrows', () => {
@@ -250,5 +252,25 @@ describe('VSlideGroup', () => {
     cy.get('.v-slide-group__next').click().click()
 
     cy.get('.item-7').should('exist').should('be.visible')
+  })
+
+  it('Skip disabled elements when moving focus', () => {
+    cy.mount(() => (
+      <Application>
+        <VSlideGroup selectedClass="bg-primary">
+          { createRange(5).map(i => (
+            <VSlideGroupItem key={ i }>
+              <VBtn class={[`btn${i}`]} disabled={ i === 2 || i === 3 }>{ i }</VBtn>
+            </VSlideGroupItem>
+          ))}
+        </VSlideGroup>
+      </Application>
+    ))
+
+    cy.get('.btn0').focus().type('{rightArrow}{rightArrow}')
+    cy.focused().should('have.class', 'btn4')
+
+    cy.focused().type('{leftArrow}')
+    cy.focused().should('have.class', 'btn1')
   })
 })

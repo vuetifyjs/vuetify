@@ -8,9 +8,12 @@ import { VBtn } from '@/components/VBtn'
 import { useDate } from '@/composables/date'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
+// Directives
+import vIntersect from '@/directives/intersect'
+
 // Utilities
-import { computed, nextTick, onMounted, ref, watchEffect } from 'vue'
-import { convertToUnit, createRange, genericComponent, propsFactory, useRender } from '@/util'
+import { computed, watchEffect } from 'vue'
+import { convertToUnit, createRange, genericComponent, propsFactory, templateRef, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -40,12 +43,15 @@ export const makeVDatePickerYearsProps = propsFactory({
   min: null as any as PropType<unknown>,
   max: null as any as PropType<unknown>,
   modelValue: Number,
+  allowedYears: [Array, Function] as PropType<number[] | ((date: number) => boolean)>,
 }, 'VDatePickerYears')
 
 export const VDatePickerYears = genericComponent<VDatePickerYearsSlots>()({
   name: 'VDatePickerYears',
 
   props: makeVDatePickerYearsProps(),
+
+  directives: { vIntersect },
 
   emits: {
     'update:modelValue': (year: number) => true,
@@ -79,6 +85,7 @@ export const VDatePickerYears = genericComponent<VDatePickerYearsSlots>()({
         return {
           text,
           value: i,
+          isDisabled: !isYearAllowed(i),
         }
       })
     })
@@ -87,15 +94,31 @@ export const VDatePickerYears = genericComponent<VDatePickerYearsSlots>()({
       model.value = model.value ?? adapter.getYear(adapter.date())
     })
 
-    const yearRef = ref<VBtn>()
-    onMounted(async () => {
-      await nextTick()
-      yearRef.value?.$el.scrollIntoView({ block: 'center' })
-    })
+    const yearRef = templateRef()
+
+    function focusSelectedYear () {
+      yearRef.el?.focus()
+      yearRef.el?.scrollIntoView({ block: 'center' })
+    }
+
+    function isYearAllowed (year: number) {
+      if (Array.isArray(props.allowedYears) && props.allowedYears.length) {
+        return props.allowedYears.includes(year)
+      }
+
+      if (typeof props.allowedYears === 'function') {
+        return props.allowedYears(year)
+      }
+
+      return true
+    }
 
     useRender(() => (
       <div
         class="v-date-picker-years"
+        v-intersect={[{
+          handler: focusSelectedYear,
+        }, null, ['once']]}
         style={{
           height: convertToUnit(props.height),
         }}
@@ -108,6 +131,7 @@ export const VDatePickerYears = genericComponent<VDatePickerYearsSlots>()({
               color: model.value === year.value ? props.color : undefined,
               rounded: true,
               text: year.text,
+              disabled: year.isDisabled,
               variant: model.value === year.value ? 'flat' : 'text',
               onClick: () => {
                 if (model.value === year.value) {

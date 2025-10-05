@@ -7,8 +7,6 @@
 
       <v-toolbar-title>Page title</v-toolbar-title>
 
-      <v-spacer></v-spacer>
-
       <v-btn icon="mdi-magnify"></v-btn>
 
       <v-btn icon="mdi-dots-vertical"></v-btn>

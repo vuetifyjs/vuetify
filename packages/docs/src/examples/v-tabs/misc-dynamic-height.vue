@@ -1,18 +1,14 @@
 <template>
   <v-card>
-    <v-toolbar
-      color="purple"
-      flat
-      prominent
-    >
+    <v-toolbar color="purple" flat>
       <v-text-field
         append-icon="mdi-microphone"
         class="mx-4"
         label="Search"
         prepend-inner-icon="mdi-magnify"
+        variant="solo-inverted"
         flat
         hide-details
-        solo-inverted
       ></v-text-field>
 
       <template v-slot:extension>
@@ -29,15 +25,15 @@
       </template>
     </v-toolbar>
 
-    <v-tabs-items v-model="tabs">
-      <v-tab-item>
+    <v-tabs-window v-model="tabs">
+      <v-tabs-window-item>
         <v-card flat>
           <v-card-text>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
           </v-card-text>
         </v-card>
-      </v-tab-item>
-      <v-tab-item>
+      </v-tabs-window-item>
+      <v-tabs-window-item>
         <v-card flat>
           <v-card-title class="text-h5">
             An awesome title
@@ -56,8 +52,8 @@
             </p>
           </v-card-text>
         </v-card>
-      </v-tab-item>
-      <v-tab-item>
+      </v-tabs-window-item>
+      <v-tabs-window-item>
         <v-card flat>
           <v-card-title class="text-h5">
             An even better title
@@ -72,8 +68,8 @@
             </p>
           </v-card-text>
         </v-card>
-      </v-tab-item>
-    </v-tabs-items>
+      </v-tabs-window-item>
+    </v-tabs-window>
   </v-card>
 </template>
 

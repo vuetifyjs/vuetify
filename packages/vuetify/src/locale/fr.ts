@@ -2,7 +2,7 @@ export default {
   badge: 'Badge',
   open: 'Ouvrir',
   close: 'Fermer',
-  dismiss: 'Dismiss',
+  dismiss: 'Ignorer',
   confirmEdit: {
     ok: 'OK',
     cancel: 'Annuler',
@@ -36,7 +36,7 @@ export default {
     divider: 'à',
   },
   datePicker: {
-    itemsSelected: '{0} selected',
+    itemsSelected: '{0} sélectionné(s)',
     range: {
       title: 'Sélectionner des dates',
       header: 'Entrer des dates',
@@ -45,6 +45,13 @@ export default {
     header: 'Entrer une date',
     input: {
       placeholder: 'Entrer une date',
+    },
+    ariaLabel: {
+      previousMonth: 'Mois précédent',
+      nextMonth: 'Mois suivant',
+      selectYear: 'Sélectionner une année',
+      selectDate: '{0}',
+      currentDate: 'Aujourd\'hui, {0}',
     },
   },
   noDataText: 'Aucune donnée disponible',
@@ -57,7 +64,7 @@ export default {
   },
   calendar: {
     moreEvents: '{0} de plus',
-    today: 'Today',
+    today: 'Aujourd\'hui',
   },
   input: {
     clear: 'Vider {0}',
@@ -69,10 +76,15 @@ export default {
     counter: '{0} fichier(s)',
     counterSize: '{0} fichier(s) ({1} au total)',
   },
+  fileUpload: {
+    title: 'Glissez-déposez des fichiers ici',
+    divider: 'ou',
+    browse: 'Parcourir les fichiers',
+  },
   timePicker: {
     am: 'AM',
     pm: 'PM',
-    title: 'Select Time',
+    title: 'Sélectionner une heure',
   },
   pagination: {
     ariaLabel: {
@@ -98,5 +110,64 @@ export default {
   infiniteScroll: {
     loadMore: 'Charger plus',
     empty: 'Aucune donnée supplémentaire',
+  },
+  rules: {
+    required: 'Ce champ est requis',
+    email: 'Veuillez entrer une adresse email valide',
+    number: 'Ce champ ne peut contenir que des chiffres',
+    integer: 'Ce champ ne peut contenir que des valeurs entières',
+    capital: 'Ce champ ne peut contenir que des lettres majuscules',
+    maxLength: 'Vous devez entrer un maximum de {0} caractères',
+    minLength: 'Vous devez entrer un minimum de {0} caractères',
+    strictLength: 'La longueur du champ entré est invalide',
+    exclude: 'Le caractère {0} n’est pas autorisé',
+    notEmpty: 'Veuillez choisir au moins une valeur',
+    pattern: 'Format invalide',
+  },
+  hotkey: {
+    then: 'puis',
+    ctrl: 'Ctrl',
+    command: 'Command',
+    shift: 'Shift',
+    alt: 'Alt',
+    option: 'Option',
+    enter: 'Entrée',
+    escape: 'Échap',
+    upArrow: 'Flèche haut',
+    downArrow: 'Flèche bas',
+    leftArrow: 'Flèche gauche',
+    rightArrow: 'Flèche droite',
+    backspace: 'Retour',
+    space: 'Espace',
+    plus: 'plus',
+    shortcut: 'Raccourci clavier : {0}',
+  },
+  video: {
+    play: 'Lire',
+    pause: 'Pause',
+    seek: 'Chercher',
+    volume: 'Volume',
+    showVolume: 'Afficher le contrôle du volume',
+    mute: 'Muet',
+    unmute: 'Activer le son',
+    enterFullscreen: 'Plein écran',
+    exitFullscreen: 'Quitter le plein écran',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Sélectionner une couleur à l\'écran',
+      hueSlider: 'Teinte',
+      alphaSlider: 'Opacité',
+      redInput: 'Rouge',
+      greenInput: 'Vert',
+      blueInput: 'Bleu',
+      alphaInput: 'Opacité',
+      hueInput: 'Teinte',
+      saturationInput: 'Saturation',
+      lightnessInput: 'Luminosité',
+      hexInput: 'Valeur HEX',
+      hexaInput: 'Valeur HEX avec opacité',
+      changeFormat: 'Changer le format de couleur',
+    },
   },
 }

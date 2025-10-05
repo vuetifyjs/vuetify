@@ -11,7 +11,7 @@ import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 
 // Directives
-import intersect from '@/directives/intersect'
+import vIntersect from '@/directives/intersect'
 
 // Utilities
 import {
@@ -54,6 +54,7 @@ export type VImgSlots = {
 }
 
 export const makeVImgProps = propsFactory({
+  absolute: Boolean,
   alt: String,
   cover: Boolean,
   color: String,
@@ -102,7 +103,7 @@ export const makeVImgProps = propsFactory({
 export const VImg = genericComponent<VImgSlots>()({
   name: 'VImg',
 
-  directives: { intersect },
+  directives: { vIntersect },
 
   props: makeVImgProps(),
 
@@ -113,7 +114,7 @@ export const VImg = genericComponent<VImgSlots>()({
   },
 
   setup (props, { emit, slots }) {
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.color)
     const { roundedClasses } = useRounded(props)
     const vm = getCurrentInstance('VImg')
 
@@ -243,7 +244,7 @@ export const VImg = genericComponent<VImgSlots>()({
       poll()
     }
 
-    const containClasses = computed(() => ({
+    const containClasses = toRef(() => ({
       'v-img__img--cover': props.cover,
       'v-img__img--contain': !props.cover,
     }))
@@ -255,10 +256,10 @@ export const VImg = genericComponent<VImgSlots>()({
         <img
           class={['v-img__img', containClasses.value]}
           style={{ objectPosition: props.position }}
+          crossorigin={ props.crossorigin }
           src={ normalisedSrc.value.src }
           srcset={ normalisedSrc.value.srcset }
           alt={ props.alt }
-          crossorigin={ props.crossorigin }
           referrerpolicy={ props.referrerpolicy }
           draggable={ props.draggable }
           sizes={ props.sizes }
@@ -290,9 +291,9 @@ export const VImg = genericComponent<VImgSlots>()({
           <img
             class={['v-img__img', 'v-img__img--preload', containClasses.value]}
             style={{ objectPosition: props.position }}
+            crossorigin={ props.crossorigin }
             src={ normalisedSrc.value.lazySrc }
             alt={ props.alt }
-            crossorigin={ props.crossorigin }
             referrerpolicy={ props.referrerpolicy }
             draggable={ props.draggable }
           />
@@ -351,7 +352,10 @@ export const VImg = genericComponent<VImgSlots>()({
         <VResponsive
           class={[
             'v-img',
-            { 'v-img--booting': !isBooted.value },
+            {
+              'v-img--absolute': props.absolute,
+              'v-img--booting': !isBooted.value,
+            },
             backgroundColorClasses.value,
             roundedClasses.value,
             props.class,

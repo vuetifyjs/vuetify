@@ -10,16 +10,18 @@ import { VProgressLinear } from '@/components/VProgressLinear'
 // Composables
 import { useLayout } from '@/composables'
 import { forwardRefs } from '@/composables/forwardRefs'
+import { VuetifyLayoutKey } from '@/composables/layout'
 import { makeLocationProps } from '@/composables/location'
 import { makePositionProps, usePosition } from '@/composables/position'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { useScopeId } from '@/composables/scopeId'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
+import { useToggleScope } from '@/composables/toggleScope'
 import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
 
 // Utilities
-import { computed, mergeProps, nextTick, onMounted, onScopeDispose, ref, shallowRef, watch } from 'vue'
+import { computed, inject, mergeProps, nextTick, onMounted, onScopeDispose, ref, shallowRef, watch, watchEffect } from 'vue'
 import { genericComponent, omit, propsFactory, refElement, useRender } from '@/util'
 
 // Types
@@ -32,8 +34,8 @@ type VSnackbarSlots = {
   text: never
 }
 
-function useCountdown (milliseconds: number) {
-  const time = shallowRef(milliseconds)
+function useCountdown (milliseconds: () => number) {
+  const time = shallowRef(milliseconds())
   let timer = -1
 
   function clear () {
@@ -43,7 +45,7 @@ function useCountdown (milliseconds: number) {
   function reset () {
     clear()
 
-    nextTick(() => time.value = milliseconds)
+    nextTick(() => time.value = milliseconds())
   }
 
   function start (el?: HTMLElement) {
@@ -57,7 +59,7 @@ function useCountdown (milliseconds: number) {
     const startTime = performance.now()
     timer = window.setInterval(() => {
       const elapsed = performance.now() - startTime + interval
-      time.value = Math.max(milliseconds - elapsed, 0)
+      time.value = Math.max(milliseconds() - elapsed, 0)
 
       if (time.value <= 0) clear()
     }, interval)
@@ -85,7 +87,7 @@ export const makeVSnackbarProps = propsFactory({
   ...makeThemeProps(),
   ...omit(makeVOverlayProps({
     transition: 'v-snackbar-transition',
-  }), ['persistent', 'noClickAnimation', 'scrim', 'scrollStrategy']),
+  }), ['persistent', 'noClickAnimation', 'scrim', 'scrollStrategy', 'stickToTarget']),
 }, 'VSnackbar')
 
 export const VSnackbar = genericComponent<VSnackbarSlots>()({
@@ -99,18 +101,27 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
 
   setup (props, { slots }) {
     const isActive = useProxiedModel(props, 'modelValue')
-    const { mainStyles } = useLayout()
     const { positionClasses } = usePosition(props)
     const { scopeId } = useScopeId()
     const { themeClasses } = provideTheme(props)
     const { colorClasses, colorStyles, variantClasses } = useVariant(props)
     const { roundedClasses } = useRounded(props)
-    const countdown = useCountdown(Number(props.timeout))
+    const countdown = useCountdown(() => Number(props.timeout))
 
     const overlay = ref<VOverlay>()
     const timerRef = ref<VProgressLinear>()
     const isHovering = shallowRef(false)
     const startY = shallowRef(0)
+    const mainStyles = ref()
+    const hasLayout = inject(VuetifyLayoutKey, undefined)
+
+    useToggleScope(() => !!hasLayout, () => {
+      const layout = useLayout()
+
+      watchEffect(() => {
+        mainStyles.value = layout.mainStyles.value
+      })
+    })
 
     watch(isActive, startTimeout)
     watch(() => props.timeout, startTimeout)
@@ -159,6 +170,10 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
       if (Math.abs(startY.value - event.changedTouches[0].clientY) > 50) {
         isActive.value = false
       }
+    }
+
+    function onAfterLeave () {
+      if (isHovering.value) onPointerleave()
     }
 
     const locationClasses = computed(() => {
@@ -213,8 +228,9 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
           scrim={ false }
           scrollStrategy="none"
           _disableGlobalStack
-          onTouchstart={ onTouchstart }
+          onTouchstartPassive={ onTouchstart }
           onTouchend={ onTouchend }
+          onAfterLeave={ onAfterLeave }
           { ...scopeId }
           v-slots={{ activator: slots.activator }}
         >
@@ -226,7 +242,7 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
                 ref={ timerRef }
                 color={ typeof props.timer === 'string' ? props.timer : 'info' }
                 max={ props.timeout }
-                model-value={ countdown.time.value }
+                modelValue={ countdown.time.value }
               />
             </div>
           )}

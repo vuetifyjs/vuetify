@@ -40,6 +40,7 @@
       "dates",
       "display-and-platform",
       "global-configuration",
+      "hotkey",
       "icon-fonts",
       "internationalization",
       "scrolling",
@@ -77,6 +78,18 @@
     ]
   },
   {
+    "title": "concepts",
+    "inactiveIcon": "mdi-puzzle-outline",
+    "activeIcon": "mdi-puzzle",
+    "items": [
+      "density-and-sizing",
+      "items",
+      "routing",
+      "v-model",
+      "variants"
+    ]
+  },
+  {
     "title": "components",
     "inactiveIcon": "mdi-view-dashboard-outline",
     "activeIcon": "mdi-view-dashboard",
@@ -88,6 +101,7 @@
         "routePath": "explorer",
         "subtitle": "browse-components"
       },
+      "application",
       { "divider": true },
       { "subheader": "containment" },
       "bottom-sheets",
@@ -108,9 +122,11 @@
       "app-bars",
       "bottom-navigation",
       "breadcrumbs",
+      "floating-action-buttons",
       "footers",
       "navigation-drawers",
       "paginations",
+      "speed-dials",
       "system-bars",
       "tabs",
       { "divider": true },
@@ -121,6 +137,7 @@
       "file-inputs",
       "forms",
       "inputs",
+      "number-inputs",
       "otp-input",
       "radio-buttons",
       "range-sliders",
@@ -131,6 +148,7 @@
       "textareas",
       { "divider": true },
       { "subheader": "data-and-display" },
+      "confirm-edit",
       "data-iterators",
       {
         "title": "data-tables",
@@ -147,8 +165,10 @@
           "virtual-tables"
         ]
       },
+      "sparklines",
       "infinite-scroller",
       "tables",
+      "treeview",
       "virtual-scroller",
       { "divider": true },
       { "subheader": "grids" },
@@ -167,12 +187,14 @@
       "alerts",
       "badges",
       "banners",
+      "empty-states",
       "hover",
       "progress-circular",
       "progress-linear",
       "ratings",
       "skeleton-loaders",
       "snackbars",
+      "snackbar-queue",
       "timelines",
       { "divider": true },
       { "subheader": "images-and-icons" },
@@ -185,6 +207,7 @@
       { "subheader": "pickers" },
       "color-pickers",
       "date-pickers",
+      "time-pickers",
       { "divider": true },
       { "subheader": "providers" },
       "defaults-providers",
@@ -200,7 +223,9 @@
     "title": "api",
     "inactiveIcon": "mdi-flask-empty-outline",
     "activeIcon": "mdi-flask-outline",
-    "items": []
+    "items": [
+      "hotkey"
+    ]
   },
   {
     "title": "directives",
@@ -228,7 +253,7 @@
         "subfolder": "components"
       },
       {
-        "title": "confirm-edit",
+        "title": "color-inputs",
         "subfolder": "components"
       },
       {
@@ -236,36 +261,40 @@
         "subfolder": "components"
       },
       {
-        "title": "empty-states",
+        "title": "file-upload",
         "subfolder": "components"
       },
       {
-        "title": "floating-action-buttons",
+        "title": "icon-buttons",
         "subfolder": "components"
       },
       {
-        "title": "number-inputs",
+        "title": "pie-charts",
         "subfolder": "components"
       },
       {
-        "title": "snackbar-queue",
+        "title": "pull-to-refresh",
         "subfolder": "components"
       },
       {
-        "title": "sparklines",
+        "title": "vertical-steppers",
         "subfolder": "components"
       },
       {
-        "title": "speed-dials",
+        "title": "mask-inputs",
         "subfolder": "components"
       },
       {
-        "title": "time-pickers",
+        "title": "hotkeys",
         "subfolder": "components"
       },
       {
-        "title": "treeview",
+        "title": "videos",
         "subfolder": "components"
+      },
+      {
+        "title": "rules",
+        "subfolder": "features"
       }
     ]
   },

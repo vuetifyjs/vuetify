@@ -8,10 +8,7 @@
             md="6"
             sm="6"
           >
-            <v-radio-group
-              v-model="ex7"
-              column
-            >
+            <v-radio-group v-model="ex7">
               <v-radio
                 color="red"
                 label="red"
@@ -49,10 +46,7 @@
             md="6"
             sm="6"
           >
-            <v-radio-group
-              v-model="ex8"
-              column
-            >
+            <v-radio-group v-model="ex8">
               <v-radio
                 color="primary"
                 label="primary"

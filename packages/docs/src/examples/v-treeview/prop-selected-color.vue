@@ -1,15 +1,14 @@
 <template>
   <v-treeview
     :items="items"
+    item-value="id"
     selected-color="red"
     selectable
   ></v-treeview>
 </template>
 
 <script setup>
-  import { ref } from 'vue'
-
-  const items = ref([
+  const items = [
     {
       id: 1,
       title: 'Applications :',
@@ -80,7 +79,7 @@
         { id: 25, title: 'Conference introduction : avi' },
       ],
     },
-  ])
+  ]
 </script>
 
 <script>

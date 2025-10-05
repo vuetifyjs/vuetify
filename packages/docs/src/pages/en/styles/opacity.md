@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   title: Opacity
   description: Use opacity utilities to quickly style the opacity of any element.
@@ -18,11 +17,7 @@ Utilities for controlling the opacity of elements in your application.
 
 <PageFeatures />
 
-::: success
-
-This feature was introduced in [v3.6.0 (Nebula)](/getting-started/release-notes/?version=v3.6.0)
-
-:::
+<DocIntroduced version="3.6.0" />
 
 | Class | Properties |
 | - | - |

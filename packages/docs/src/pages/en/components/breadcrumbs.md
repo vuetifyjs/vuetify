@@ -19,8 +19,6 @@ features:
 
 The `v-breadcrumbs` component is used as a navigational helper and hierarchy for pages.
 
-<!-- ![breadcrumbs Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-breadcrumbs/v-breadcrumbs-entry.png) -->
-
 <PageFeatures />
 
 ## Usage

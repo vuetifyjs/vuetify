@@ -1,10 +1,11 @@
+@use 'sass:map';
 @use '../../styles/settings';
 
 // VProgressLinear
 $progress-linear-background: currentColor !default;
 $progress-linear-background-background: $progress-linear-background !default;
 $progress-linear-background-opacity: var(--v-border-opacity) !default;
-$progress-linear-border-radius: map-get(settings.$rounded, 'pill') !default;
+$progress-linear-border-radius: map.get(settings.$rounded, 'pill') !default;
 $progress-linear-stream-opacity: 0.3 !default;
 $progress-linear-stripe-background-size: 40px 40px !default;
 $progress-linear-stream-border-width: 4px !default;

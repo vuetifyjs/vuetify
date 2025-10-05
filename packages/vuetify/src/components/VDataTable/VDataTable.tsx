@@ -21,12 +21,12 @@ import { provideDefaults } from '@/composables/defaults'
 import { makeFilterProps, useFilter } from '@/composables/filter'
 
 // Utilities
-import { computed, toRef } from 'vue'
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { computed, toRef, toRefs } from 'vue'
+import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { DeepReadonly, UnwrapRef } from 'vue'
-import type { Group } from './composables/group'
+import type { Group, GroupSummary } from './composables/group'
 import type { CellProps, DataTableHeader, DataTableItem, InternalDataTableHeader, RowProps } from './types'
 import type { VDataTableHeadersSlots } from './VDataTableHeaders'
 import type { VDataTableRowsSlots } from './VDataTableRows'
@@ -51,7 +51,7 @@ export type VDataTableSlotProps<T> = {
   toggleGroup: ReturnType<typeof provideGroupBy>['toggleGroup']
   items: readonly T[]
   internalItems: readonly DataTableItem[]
-  groupedItems: readonly (DataTableItem<T> | Group<DataTableItem<T>>)[]
+  groupedItems: readonly (DataTableItem<T> | Group<DataTableItem<T>> | GroupSummary<DataTableItem<T>>)[]
   columns: InternalDataTableHeader[]
   headers: InternalDataTableHeader[][]
 }
@@ -73,6 +73,9 @@ export type VDataTableSlots<T> = VDataTableRowsSlots<T> & VDataTableHeadersSlots
 export const makeDataTableProps = propsFactory({
   ...makeVDataTableRowsProps(),
 
+  hideDefaultBody: Boolean,
+  hideDefaultFooter: Boolean,
+  hideDefaultHeader: Boolean,
   width: [String, Number],
   search: String,
 
@@ -82,7 +85,7 @@ export const makeDataTableProps = propsFactory({
   ...makeDataTableItemsProps(),
   ...makeDataTableSelectProps(),
   ...makeDataTableSortProps(),
-  ...makeVDataTableHeadersProps(),
+  ...omit(makeVDataTableHeadersProps(), ['multiSort']),
   ...makeVTableProps(),
 }, 'DataTable')
 
@@ -125,8 +128,9 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
 
   setup (props, { attrs, slots }) {
     const { groupBy } = createGroupBy(props)
-    const { sortBy, multiSort, mustSort } = createSort(props)
+    const { initialSortOrder, sortBy, multiSort, mustSort } = createSort(props)
     const { page, itemsPerPage } = createPagination(props)
+    const { disableSort } = toRefs(props)
 
     const {
       columns,
@@ -136,27 +140,27 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
       filterFunctions,
     } = createHeaders(props, {
       groupBy,
-      showSelect: toRef(props, 'showSelect'),
-      showExpand: toRef(props, 'showExpand'),
+      showSelect: toRef(() => props.showSelect),
+      showExpand: toRef(() => props.showExpand),
     })
 
     const { items } = useDataTableItems(props, columns)
 
-    const search = toRef(props, 'search')
+    const search = toRef(() => props.search)
     const { filteredItems } = useFilter(props, items, search, {
       transform: item => item.columns,
       customKeyFilter: filterFunctions,
     })
 
-    const { toggleSort } = provideSort({ sortBy, multiSort, mustSort, page })
-    const { sortByWithGroups, opened, extractRows, isGroupOpen, toggleGroup } = provideGroupBy({ groupBy, sortBy })
+    const { toggleSort } = provideSort({ initialSortOrder, sortBy, multiSort, mustSort, page })
+    const { sortByWithGroups, opened, extractRows, isGroupOpen, toggleGroup } = provideGroupBy({ groupBy, sortBy, disableSort })
 
     const { sortedItems } = useSortedItems(props, filteredItems, sortByWithGroups, {
-      transform: item => item.columns,
+      transform: item => ({ ...item.raw, ...item.columns }),
       sortFunctions,
       sortRawFunctions,
     })
-    const { flatItems } = useGroupedItems(sortedItems, groupBy, opened)
+    const { flatItems } = useGroupedItems(sortedItems, groupBy, opened, () => !!slots['group-summary'])
     const itemsLength = computed(() => flatItems.value.length)
 
     const { startIndex, stopIndex, pageCount, setItemsPerPage } = providePagination({ page, itemsPerPage, itemsLength })
@@ -185,10 +189,10 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
 
     provideDefaults({
       VDataTableRows: {
-        hideNoData: toRef(props, 'hideNoData'),
-        noDataText: toRef(props, 'noDataText'),
-        loading: toRef(props, 'loading'),
-        loadingText: toRef(props, 'loadingText'),
+        hideNoData: toRef(() => props.hideNoData),
+        noDataText: toRef(() => props.noDataText),
+        loading: toRef(() => props.loading),
+        loadingText: toRef(() => props.loadingText),
       },
     })
 
@@ -218,7 +222,7 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
 
     useRender(() => {
       const dataTableFooterProps = VDataTableFooter.filterProps(props)
-      const dataTableHeadersProps = VDataTableHeaders.filterProps(props)
+      const dataTableHeadersProps = VDataTableHeaders.filterProps(omit(props, ['multiSort']))
       const dataTableRowsProps = VDataTableRows.filterProps(props)
       const tableProps = VTable.filterProps(props)
 
@@ -234,36 +238,42 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
           ]}
           style={ props.style }
           { ...tableProps }
+          fixedHeader={ props.fixedHeader || props.sticky }
         >
           {{
             top: () => slots.top?.(slotProps.value),
             default: () => slots.default ? slots.default(slotProps.value) : (
               <>
                 { slots.colgroup?.(slotProps.value) }
-                <thead>
-                  <VDataTableHeaders
-                    { ...dataTableHeadersProps }
-                    v-slots={ slots }
-                  />
-                </thead>
-                { slots.thead?.(slotProps.value) }
-                <tbody>
-                  { slots['body.prepend']?.(slotProps.value) }
-                  { slots.body ? slots.body(slotProps.value) : (
-                    <VDataTableRows
-                      { ...attrs }
-                      { ...dataTableRowsProps }
-                      items={ paginatedItems.value }
+                { !props.hideDefaultHeader && (
+                  <thead key="thead">
+                    <VDataTableHeaders
+                      { ...dataTableHeadersProps }
+                      multiSort={ !!props.multiSort }
                       v-slots={ slots }
                     />
-                  )}
-                  { slots['body.append']?.(slotProps.value) }
-                </tbody>
+                  </thead>
+                )}
+                { slots.thead?.(slotProps.value) }
+                { !props.hideDefaultBody && (
+                  <tbody>
+                    { slots['body.prepend']?.(slotProps.value) }
+                    { slots.body ? slots.body(slotProps.value) : (
+                      <VDataTableRows
+                        { ...attrs }
+                        { ...dataTableRowsProps }
+                        items={ paginatedItems.value }
+                        v-slots={ slots }
+                      />
+                    )}
+                    { slots['body.append']?.(slotProps.value) }
+                  </tbody>
+                )}
                 { slots.tbody?.(slotProps.value) }
                 { slots.tfoot?.(slotProps.value) }
               </>
             ),
-            bottom: () => slots.bottom ? slots.bottom(slotProps.value) : (
+            bottom: () => slots.bottom ? slots.bottom(slotProps.value) : !props.hideDefaultFooter && (
               <>
                 <VDivider />
 

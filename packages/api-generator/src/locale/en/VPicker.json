@@ -1,6 +1,12 @@
 {
   "props": {
+    "divided": "Adds a divider between the header and controls.",
     "landscape": "Puts the picker into landscape mode.",
-    "hideHeader": "Hide the picker header."
+    "hideHeader": "Hide the picker header.",
+    "hideTitle": "Hide the picker title."
+  },
+  "slots": {
+    "actions": "Slot for customizing the content in the actions area",
+    "header": "Slot for the component's header content."
   }
 }

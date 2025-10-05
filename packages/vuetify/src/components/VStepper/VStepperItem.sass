@@ -8,11 +8,18 @@
     align-self: stretch
     display: inline-flex
     flex: none
+    outline: none
     opacity: $stepper-item-opacity
     padding: $stepper-item-padding
+    position: relative
     transition-duration: $stepper-item-transition-duration
     transition-property: $stepper-item-transition-property
     transition-timing-function: $stepper-item-transition-timing-function
+
+    @include tools.states('.v-stepper-item__overlay')
+
+    .v-stepper--non-linear &
+      opacity: var(--v-high-emphasis-opacity)
 
     &--selected
       opacity: 1
@@ -22,6 +29,9 @@
 
     &--disabled
       opacity: var(--v-medium-emphasis-opacity)
+
+    &[disabled],
+    &--disabled
       pointer-events: none
 
     .v-stepper--alt-labels &
@@ -35,6 +45,9 @@
     color: $stepper-item-avatar-color
     font-size: $stepper-item-avatar-font-size
     margin-inline-end: $stepper-item-avatar-margin-inline-end
+
+    .v-stepper--mobile &
+      margin-inline-end: 0
 
     .v-icon
       font-size: $stepper-item-avatar-icon-font-size
@@ -50,9 +63,11 @@
       margin-bottom: $stepper-item-alt-labels-margin-bottom
       margin-inline-end: 0
 
-  //.v-stepper-item__content
-  //  .v-stepper--alt-labels &
-  //    min-height: 28px
+  .v-stepper-item__content
+    text-align: start
+
+    .v-stepper--alt-labels &
+      text-align: center
 
   .v-stepper-item__title
     line-height: $stepper-item-title-line-height
@@ -62,12 +77,19 @@
 
   .v-stepper-item__subtitle
     font-size: $stepper-item-subtitle-font-size
-    text-align: left
     line-height: $stepper-item-subtitle-line-height
     opacity: $stepper-item-subtitle-opacity
 
-    .v-stepper--alt-labels &
-      text-align: center
-
     .v-stepper--mobile &
       display: none
+
+  .v-stepper-item__overlay
+    background-color: currentColor
+    border-radius: inherit
+    opacity: 0
+    transition: opacity .2s ease-in-out
+
+  .v-stepper-item__overlay,
+  .v-stepper-item__underlay
+    pointer-events: none
+    @include tools.absolute()

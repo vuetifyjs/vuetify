@@ -1,7 +1,11 @@
 // @ts-nocheck
 /* eslint-disable */
 
-// import { touch } from '../../../../test'
+// Components
+import { VDatePicker } from '../VDatePicker'
+
+// import { touch } from '@/../test'
+import { render, screen } from '@test'
 import {
   mount,
   MountOptions,
@@ -606,7 +610,7 @@ describe.skip('VDatePicker.ts', () => { // eslint-disable-line max-statements
     expect(cb.mock.calls[0][0]).toEqual('2019-01-06')
   })
 
-  it('should emit @input and not emit @change when month is clicked (not reative picker)', async () => {
+  it('should emit @input and not emit @change when month is clicked (not reactive picker)', async () => {
     const wrapper = mountFunction({
       propsData: {
         value: '2013-02-07',
@@ -724,7 +728,7 @@ describe.skip('VDatePicker.ts', () => { // eslint-disable-line max-statements
     expect(wrapper.vm.tableDate).toBe('2030-04')
   })
 
-  it('should not higlight not allowed dates in range', async () => {
+  it('should not highlight not allowed dates in range', async () => {
     const wrapper = mountFunction({
       propsData: {
         range: true,
@@ -763,5 +767,34 @@ describe.skip('VDatePicker.ts', () => { // eslint-disable-line max-statements
 
     expect(lastWeekEl.text()).toBe('09')
     expect(lastDayEl.text()).toBe('7')
+  })
+})
+
+describe('week numbers with time zone', () => {
+  beforeEach(() => vi.stubEnv('TZ', 'Europe/Warsaw'))
+  afterEach(() => vi.unstubAllEnvs())
+
+  it('should calculate weeks correctly near ST/DST transition', async () => {
+    render(VDatePicker, {
+      props: {
+        showWeek: true,
+        modelValue: new Date(2025,3,1),
+      },
+    })
+    const $weeks = await screen.findAllByCSS('.v-date-picker-month__weeks > div')
+    expect($weeks[1].innerHTML).toBe('14')
+    expect($weeks[2].innerHTML).toBe('15')
+  })
+
+  it('should calculate weeks correctly near DST/ST transition', async () => {
+    render(VDatePicker, {
+      props: {
+        showWeek: true,
+        modelValue: new Date(2025,10,1),
+      },
+    })
+    const $weeks = await screen.findAllByCSS('.v-date-picker-month__weeks > div')
+    expect($weeks[1].innerHTML).toBe('44')
+    expect($weeks[2].innerHTML).toBe('45')
   })
 })

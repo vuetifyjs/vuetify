@@ -114,7 +114,6 @@
   "customization/sass-variables": "/features/sass-variables",
   "customization/theme": "/features/theme",
   "about/sponsors-and-backers": "/introduction/sponsors-and-backers",
-  "components/application": "/features/application-layout",
   "components/simple-tables": "/components/tables",
   "components/data-tables": "/components/data-tables/basics",
   "components/date-pickers-month": "/introduction/roadmap",

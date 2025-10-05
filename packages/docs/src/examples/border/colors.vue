@@ -11,7 +11,7 @@
       <v-col cols="auto">
         <div class="text-center">
           <v-sheet border="success sm" height="64" width="64" rounded></v-sheet>
-          <div class="text-caption">"sucess sm"</div>
+          <div class="text-caption">"success sm"</div>
         </div>
       </v-col>
 

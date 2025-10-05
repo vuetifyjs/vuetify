@@ -1,10 +1,11 @@
 @forward '../VInput/variables';
+@use 'sass:map';
 @use '../../styles/settings';
 @use '../VInput/variables' as *;
 
 // INPUT
 $field-border-radius: settings.$border-radius-root !default;
-$field-rounded-border-radius: map-get(settings.$rounded, 'xl') !default;
+$field-rounded-border-radius: map.get(settings.$rounded, 'xl') !default;
 $field-color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity)) !default;
 $field-disabled-color: rgba(var(--v-theme-on-surface), var(--v-disabled-opacity)) !default;
 $field-error-color: rgb(var(--v-theme-error)) !default;
@@ -41,7 +42,7 @@ $field-input-min-height: #{max(
   var(--v-input-control-height, $input-control-height),
   calc($input-font-size * $input-line-height + var(--v-field-input-padding-top) + var(--v-field-input-padding-bottom))
 )} !default;
-$field-input-padding-top: calc(var(--v-field-padding-top, $field-control-padding-top) + var(--v-input-padding-top, 0)) !default;
+$field-input-padding-top: calc(var(--v-field-padding-top, $field-control-padding-top) + var(--v-input-padding-top, 0px)) !default;
 $field-input-padding-bottom: var(--v-field-padding-bottom, $field-control-padding-bottom) !default;
 $field-input-column-gap: 2px !default;
 $field-input-row-gap: 8px !default;

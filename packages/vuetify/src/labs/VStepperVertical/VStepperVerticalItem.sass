@@ -1,0 +1,75 @@
+@use '../../styles/settings'
+@use '../../styles/tools'
+@use './variables' as *
+
+.v-stepper-vertical-item
+  position: relative
+  transition-duration: $stepper-vertical-item-transition-duration
+  transition-property: $stepper-vertical-item-transition-property
+  transition-timing-function: $stepper-vertical-item-transition-timing-function
+
+  &__title
+    font-size: 1rem
+
+  &__subtitle
+    font-size: .75rem
+
+  .v-expansion-panel-text
+    padding-inline-start: 32px
+
+  &:not(:last-child):before
+    content: ''
+    position: absolute
+    width: 2px
+    height: calc(100% - 30px)
+    background: rgba(var(--v-border-color), var(--v-border-opacity))
+    left: 35px
+    top: 44px
+    z-index: 1
+    transition-duration: 300ms
+    transition-property: height
+
+  &:after
+    display: none
+
+  &.v-expansion-panel--disabled,
+  &:not(.v-stepper-vertical-item--editable)
+    .v-expansion-panel-title
+      pointer-events: none
+
+      .v-expansion-panel-title__overlay
+        opacity: 0
+
+.v-stepper-vertical-item__avatar.v-avatar
+  background: rgba(var(--v-theme-surface-variant), var(--v-medium-emphasis-opacity))
+  color: rgb(var(--v-theme-on-surface-variant))
+  transition-property: background
+  align-self: start
+
+  .v-icon
+    font-size: .875rem
+
+  .v-expansion-panel--active &
+    background: rgb(var(--v-theme-surface-variant))
+
+  .v-stepper-vertical-item--error &
+    background: rgb(var(--v-theme-error))
+    color: rgb(var(--v-theme-on-error))
+
+.v-stepper-vertical-item__title
+  .v-stepper-vertical-item--error &
+    color: rgb(var(--v-theme-error))
+
+.v-stepper-vertical-item__subtitle
+  .v-stepper-vertical-item--error &
+    color: rgb(var(--v-theme-error))
+
+.v-stepper-vertical-actions
+  &.v-stepper-actions
+    .v-btn
+      margin-inline-end: 8px
+
+    .v-stepper &
+      justify-content: flex-end
+      padding: 24px 0 0
+      flex-direction: row-reverse

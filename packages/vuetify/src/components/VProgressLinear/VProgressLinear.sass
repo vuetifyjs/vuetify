@@ -7,11 +7,14 @@
     background: transparent
     overflow: hidden
     position: relative
-    transition: $progress-linear-transition
+    transition: $progress-linear-transition, mask-size 0s
     width: 100%
 
     &--rounded
       @include tools.rounded($progress-linear-border-radius)
+
+    @media (forced-colors: active)
+      border: thin solid buttontext
 
   // Elements
   .v-progress-linear__background,
@@ -26,20 +29,31 @@
     transition-property: width, left, right
     transition: inherit
 
+  @media (forced-colors: active)
+    .v-progress-linear__buffer
+      background-color: highlight !important
+      opacity: .5 !important
+
   .v-progress-linear__content
     align-items: center
     display: flex
     height: 100%
     justify-content: center
     left: 0
-    pointer-events: none
     position: absolute
     top: 0
     width: 100%
 
+  .v-progress-linear--clickable
+    .v-progress-linear__content
+      pointer-events: none
+
   .v-progress-linear__determinate,
   .v-progress-linear__indeterminate
     background: $progress-linear-background
+
+    @media (forced-colors: active)
+      background-color: highlight !important
 
   .v-progress-linear__determinate
     height: inherit

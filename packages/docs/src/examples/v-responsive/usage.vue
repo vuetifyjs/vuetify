@@ -38,6 +38,6 @@
   })
 
   const code = computed(() => {
-    return `<${name}${propsToString(props.value, 1, ['aspect-ratio'])}>${slots.value}</${name}>`
+    return `<${name}${propsToString(props.value, ['aspect-ratio'])}>${slots.value}</${name}>`
   })
 </script>

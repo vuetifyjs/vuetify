@@ -10,6 +10,7 @@ import { VLabel } from '@/components/VLabel'
 // Composables
 import { makeSliderProps, useSlider, useSteps } from './slider'
 import { makeFocusProps, useFocus } from '@/composables/focus'
+import { forwardRefs } from '@/composables/forwardRefs'
 import { useRtl } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
@@ -50,7 +51,8 @@ export const VSlider = genericComponent<VSliderSlots>()({
   },
 
   setup (props, { slots, emit }) {
-    const thumbContainerRef = ref()
+    const thumbContainerRef = ref<VSliderThumb>()
+    const inputRef = ref<VInput>()
     const { rtlClasses } = useRtl()
 
     const steps = useSteps(props)
@@ -74,7 +76,9 @@ export const VSlider = genericComponent<VSliderSlots>()({
       trackContainerRef,
       position,
       hasLabels,
+      disabled,
       readonly,
+      noKeyboard,
     } = useSlider({
       props,
       steps,
@@ -99,6 +103,7 @@ export const VSlider = genericComponent<VSliderSlots>()({
 
       return (
         <VInput
+          ref={ inputRef }
           class={[
             'v-slider',
             {
@@ -141,8 +146,8 @@ export const VSlider = genericComponent<VSliderSlots>()({
                 <input
                   id={ id.value }
                   name={ props.name || id.value }
-                  disabled={ !!props.disabled }
-                  readonly={ !!props.readonly }
+                  disabled={ !!disabled.value }
+                  readonly={ !!readonly.value }
                   tabindex="-1"
                   value={ model.value }
                 />
@@ -159,6 +164,7 @@ export const VSlider = genericComponent<VSliderSlots>()({
                   ref={ thumbContainerRef }
                   aria-describedby={ messagesId.value }
                   focused={ isFocused.value }
+                  noKeyboard={ noKeyboard.value }
                   min={ min.value }
                   max={ max.value }
                   modelValue={ model.value }
@@ -168,6 +174,7 @@ export const VSlider = genericComponent<VSliderSlots>()({
                   onFocus={ focus }
                   onBlur={ blur }
                   ripple={ props.ripple }
+                  name={ props.name }
                 >
                   {{ 'thumb-label': slots['thumb-label'] }}
                 </VSliderThumb>
@@ -178,7 +185,9 @@ export const VSlider = genericComponent<VSliderSlots>()({
       )
     })
 
-    return {}
+    return forwardRefs({
+      focus: () => thumbContainerRef.value?.$el.focus(),
+    }, inputRef)
   },
 })
 

@@ -8,13 +8,27 @@ related:
   - /components/data-tables/basics/
   - /components/data-tables/virtual-tables/
   - /components/tables/
+features:
+  github: /components/VDataTable/VDataTableServer.tsx
+  label: 'C: VDataTableServer'
+  report: true
 ---
 
 # Data table - Server side tables
 
 Server-side Data tables are used for showing data coming from an API.
 
+<PageFeatures />
+
 <PromotedEntry />
+
+## API
+
+| Component | Description |
+| - | - |
+| [v-data-table-server](/api/v-data-table-server/) | Primary Component |
+
+<ApiInline hide-links />
 
 ## Examples
 

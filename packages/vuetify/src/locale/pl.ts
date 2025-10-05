@@ -2,7 +2,7 @@ export default {
   badge: 'Odznaka',
   open: 'Otwórz',
   close: 'Zamknij',
-  dismiss: 'Dismiss',
+  dismiss: 'Odrzuć',
   confirmEdit: {
     ok: 'OK',
     cancel: 'Anuluj',
@@ -36,7 +36,7 @@ export default {
     divider: 'do',
   },
   datePicker: {
-    itemsSelected: '{0} selected',
+    itemsSelected: '{0} wybrano',
     range: {
       title: 'Wybór zakresu dat',
       header: 'Wprowadź zakres dat',
@@ -45,6 +45,13 @@ export default {
     header: 'Wprowadź datę',
     input: {
       placeholder: 'Wprowadź datę',
+    },
+    ariaLabel: {
+      previousMonth: 'Poprzedni miesiąc',
+      nextMonth: 'Następny miesiąc',
+      selectYear: 'Wybierz rok',
+      selectDate: '{0}',
+      currentDate: 'Dzisiaj, {0}',
     },
   },
   noDataText: 'Brak danych',
@@ -57,7 +64,7 @@ export default {
   },
   calendar: {
     moreEvents: '{0} więcej',
-    today: 'Today',
+    today: 'Dzisiaj',
   },
   input: {
     clear: 'Wyczyść {0}',
@@ -69,10 +76,15 @@ export default {
     counter: 'Liczba plików: {0}',
     counterSize: 'Liczba plików: {0} (łącznie {1})',
   },
+  fileUpload: {
+    title: 'Przeciągnij i upuść pliki tutaj',
+    divider: 'lub',
+    browse: 'Przeglądaj pliki',
+  },
   timePicker: {
     am: 'AM',
     pm: 'PM',
-    title: 'Select Time',
+    title: 'Wybierz godzinę',
   },
   pagination: {
     ariaLabel: {
@@ -98,5 +110,64 @@ export default {
   infiniteScroll: {
     loadMore: 'Wczytaj więcej',
     empty: 'Brak kolejnych danych',
+  },
+  rules: {
+    required: 'To pole jest wymagane',
+    email: 'Proszę podać prawidłowy adres e-mail',
+    number: 'To pole może zawierać tylko cyfry',
+    integer: 'To pole może zawierać tylko liczby całkowite',
+    capital: 'To pole może zawierać tylko wielkie litery',
+    maxLength: 'Musisz wprowadzić maksymalnie {0} znaków',
+    minLength: 'Musisz wprowadzić co najmniej {0} znaków',
+    strictLength: 'Długość wprowadzonego pola jest nieprawidłowa',
+    exclude: 'Znak {0} nie jest dozwolony',
+    notEmpty: 'Proszę wybrać co najmniej jedną wartość',
+    pattern: 'Nieprawidłowy format',
+  },
+  hotkey: {
+    then: 'następnie',
+    ctrl: 'Ctrl',
+    command: 'Command',
+    shift: 'Shift',
+    alt: 'Alt',
+    option: 'Option',
+    enter: 'Enter',
+    escape: 'Escape',
+    upArrow: 'Strzałka w górę',
+    downArrow: 'Strzałka w dół',
+    leftArrow: 'Strzałka w lewo',
+    rightArrow: 'Strzałka w prawo',
+    backspace: 'Backspace',
+    space: 'Spacja',
+    plus: 'plus',
+    shortcut: 'Skrót klawiszowy: {0}',
+  },
+  video: {
+    play: 'Odtwórz',
+    pause: 'Wstrzymaj',
+    seek: 'Przewiń',
+    volume: 'Głośność',
+    showVolume: 'Pokaż regulację głośności',
+    mute: 'Wycisz',
+    unmute: 'Wyłącz wyciszenie',
+    enterFullscreen: 'Pełny ekran',
+    exitFullscreen: 'Opuść pełny ekran',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Pobierz kolor z ekranu',
+      hueSlider: 'Odcień',
+      alphaSlider: 'Przezroczystość',
+      redInput: 'Czerwony',
+      greenInput: 'Zielony',
+      blueInput: 'Niebieski',
+      alphaInput: 'Przezroczystość',
+      hueInput: 'Odcień',
+      saturationInput: 'Nasycenie',
+      lightnessInput: 'Jasność',
+      hexInput: 'Wartość szesnastkowa',
+      hexaInput: 'Wartość szesnastkowa z kanałem alfa',
+      changeFormat: 'Zmień format koloru',
+    },
   },
 }

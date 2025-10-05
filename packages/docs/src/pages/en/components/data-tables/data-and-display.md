@@ -8,11 +8,17 @@ related:
   - /components/data-tables/basics/
   - /components/paginations/
   - /components/tables/
+features:
+  github: /components/VDataTable/
+  label: 'C: VDataTable'
+  report: true
 ---
 
 # Data and Display
 
-Data table filtering is key feature that allows users to quickly find the data they are looking for.
+Data table filtering is a key feature that allows users to quickly find the data they are looking for.
+
+<PageFeatures />
 
 <PromotedEntry />
 
@@ -26,11 +32,11 @@ The data table exposes a **search** prop that allows you to filter your data.
 
 <ExamplesExample file="v-data-table/prop-search" />
 
-### Filterable
+### Filter Keys
 
-You can easily disable specific columns from being included when searching through table rows by setting the property **filterable** to false on the header item(s). In the example below the dessert name column is no longer searchable.
+You can easily select only the column you want to filter on by using the **filter-keys** prop. This prop accepts an array of keys from the table items that will be used for filtering. You may also choose to disable columns from filtering by setting the **filter** property to `false` on the header item(s). In the example below the we only filter on the `name` column.
 
-<ExamplesExample file="v-data-table/prop-filterable" />
+<ExamplesExample file="v-data-table/prop-filter-keys" />
 
 ### Custom filter
 
@@ -40,7 +46,7 @@ You can override the default filtering used with the **search** prop by supplyin
 (value: string, query: string, item?: any) => boolean | number | [number, number] | [number, number][]
 ```
 
-In the example below, the custom filter will only match inputs that are in completely in upper case.
+Additionally, you may apply customize the filtering on a per column basis by setting custom function to the **filter** property on the header item(s). In the example below, the custom filter will only match inputs that are in completely in upper case.
 
 <ExamplesExample file="v-data-table/prop-custom-filter" />
 
@@ -80,6 +86,12 @@ Use the **item-selectable** prop to designate a property on your items that cont
 
 <ExamplesExample file="v-data-table/prop-item-selectable" />
 
+### Custom select column
+
+Use the **item.data-table-select** slot alongside `v-checkbox-btn` to customize the checkbox used for row selection. You can also use the **header.data-table-select** slot to customize the select-all checkbox in the header of the column.
+
+<ExamplesExample file="v-data-table/slot-item-data-table-select" />
+
 ### Select strategies
 
 Data-tables support three different select strategies.
@@ -110,17 +122,17 @@ Unless you are using the **multi-sort** prop seen below, this array will almost 
 
 ### Multi sort
 
-Using the **multi-sort** prop will enable you to sort on multiple columns at the same time.
+Using the **multi-sort** prop will allow user to sort on multiple columns at the same time. You can specify whether new columns should be added first or last to the **sort-by** array. By specifying optional **modifier** key, you can support both modes.
+
+::: warning
+`multi-sort` with object parameter requires at least [v3.11.0](/getting-started/release-notes/?version=v3.11.0)
+:::
 
 <ExamplesExample file="v-data-table/prop-multi-sort" />
 
 ### Sort by raw
 
-::: success
-
-This feature was introduced in [v3.5.0 (Polaris)](/getting-started/release-notes/?version=v3.5.0)
-
-:::
+<DocIntroduced version="3.5.0" />
 
 Using a *sortRaw* key in your headers object gives you access to all values on the item. This is useful if you want to sort by a value that is not displayed in the table or a combination of multiple values.
 

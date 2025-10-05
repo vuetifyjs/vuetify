@@ -16,7 +16,6 @@
       :src="src"
       :width="imgWidth"
       max-height="64"
-      contain
     />
   </v-card>
 </template>
@@ -30,11 +29,10 @@
     width: [Number, String],
   })
 
-  const { event } = useGtag()
   const { name } = useRoute()
   const theme = useTheme()
   const sponsorStore = useSponsorsStore()
-  const sponsor = ref(props.sponsor)
+  const sponsor = shallowRef(props.sponsor)
 
   const src = computed(() => {
     const {
@@ -69,10 +67,6 @@
 
     if (!slug) return
 
-    event('click', {
-      event_category: 'vuetify-sponsor',
-      event_label: slug,
-      value: name,
-    })
+    sweClick('sponsor-card', slug, name)
   }
 </script>

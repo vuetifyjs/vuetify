@@ -13,7 +13,7 @@
     "height": "Sets the height of the tabs bar.",
     "hideSlider": "Hide's the generated `v-tabs-slider`.",
     "iconsAndText": "Will stack icon and text vertically.",
-    "items": "The items to display in the component. This can be an array of strings or objects with a property `title`.",
+    "items": "The items to display in the component. This can be an array of strings or objects with a property `text`.",
     "light": "Applies the light theme variant to the component.",
     "mobileBreakpoint": "Sets the designated mobile breakpoint for the component.",
     "optional": "Does not require an active item. Useful when using `v-tab` as a `router-link`.",
@@ -27,5 +27,11 @@
     "stacked": "Apply the stacked prop to all children v-tab components.",
     "touchless": "Disable mobile touch functionality.",
     "vertical": "Stacks tabs on top of each other vertically."
+  },
+  "slots": {
+    "[`item.${string}`]": "Dynamic slot to define custom slots for specific tab window items",
+    "[`tab.${string}`]": "Dynamic slot to define custom slots for specific tab headers in the slide group",
+    "tab": "Slot for custom tab header content.",
+    "window": "Slot for custom tab window content."
   }
 }

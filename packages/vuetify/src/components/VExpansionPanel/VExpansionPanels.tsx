@@ -2,33 +2,58 @@
 import './VExpansionPanel.sass'
 
 // Components
+import { VExpansionPanelSymbol } from './shared'
 import { makeVExpansionPanelProps } from './VExpansionPanel'
 
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { provideDefaults } from '@/composables/defaults'
 import { makeGroupProps, useGroup } from '@/composables/group'
+import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
-import { computed, toRef } from 'vue'
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { toRef } from 'vue'
+import { genericComponent, pick, propsFactory, useRender } from '@/util'
 
 // Types
-import type { InjectionKey, PropType } from 'vue'
-import type { GroupItemProvide } from '@/composables/group'
-
-export const VExpansionPanelSymbol: InjectionKey<GroupItemProvide> = Symbol.for('vuetify:v-expansion-panel')
+import type { PropType } from 'vue'
 
 const allowedVariants = ['default', 'accordion', 'inset', 'popout'] as const
 
 type Variant = typeof allowedVariants[number]
 
+export type VExpansionPanelSlot = {
+  prev: () => void
+  next: () => void
+}
+
+export type VExpansionPanelSlots = {
+  default: VExpansionPanelSlot
+}
+
 export const makeVExpansionPanelsProps = propsFactory({
   flat: Boolean,
 
   ...makeGroupProps(),
-  ...makeVExpansionPanelProps(),
+  ...pick(makeVExpansionPanelProps(), [
+    'bgColor',
+    'collapseIcon',
+    'color',
+    'eager',
+    'elevation',
+    'expandIcon',
+    'focusable',
+    'hideActions',
+    'readonly',
+    'ripple',
+    'rounded',
+    'tile',
+    'static',
+  ]),
   ...makeThemeProps(),
+  ...makeComponentProps(),
+  ...makeTagProps(),
 
   variant: {
     type: String as PropType<Variant>,
@@ -37,7 +62,7 @@ export const makeVExpansionPanelsProps = propsFactory({
   },
 }, 'VExpansionPanels')
 
-export const VExpansionPanels = genericComponent()({
+export const VExpansionPanels = genericComponent<VExpansionPanelSlots>()({
   name: 'VExpansionPanels',
 
   props: makeVExpansionPanelsProps(),
@@ -47,26 +72,26 @@ export const VExpansionPanels = genericComponent()({
   },
 
   setup (props, { slots }) {
-    useGroup(props, VExpansionPanelSymbol)
+    const { next, prev } = useGroup(props, VExpansionPanelSymbol)
 
     const { themeClasses } = provideTheme(props)
 
-    const variantClass = computed(() => props.variant && `v-expansion-panels--variant-${props.variant}`)
+    const variantClass = toRef(() => props.variant && `v-expansion-panels--variant-${props.variant}`)
 
     provideDefaults({
       VExpansionPanel: {
-        bgColor: toRef(props, 'bgColor'),
-        collapseIcon: toRef(props, 'collapseIcon'),
-        color: toRef(props, 'color'),
-        eager: toRef(props, 'eager'),
-        elevation: toRef(props, 'elevation'),
-        expandIcon: toRef(props, 'expandIcon'),
-        focusable: toRef(props, 'focusable'),
-        hideActions: toRef(props, 'hideActions'),
-        readonly: toRef(props, 'readonly'),
-        ripple: toRef(props, 'ripple'),
-        rounded: toRef(props, 'rounded'),
-        static: toRef(props, 'static'),
+        bgColor: toRef(() => props.bgColor),
+        collapseIcon: toRef(() => props.collapseIcon),
+        color: toRef(() => props.color),
+        eager: toRef(() => props.eager),
+        elevation: toRef(() => props.elevation),
+        expandIcon: toRef(() => props.expandIcon),
+        focusable: toRef(() => props.focusable),
+        hideActions: toRef(() => props.hideActions),
+        readonly: toRef(() => props.readonly),
+        ripple: toRef(() => props.ripple),
+        rounded: toRef(() => props.rounded),
+        static: toRef(() => props.static),
       },
     })
 
@@ -83,11 +108,15 @@ export const VExpansionPanels = genericComponent()({
           props.class,
         ]}
         style={ props.style }
-        v-slots={ slots }
-      />
+      >
+        { slots.default?.({ prev, next }) }
+      </props.tag>
     ))
 
-    return {}
+    return {
+      next,
+      prev,
+    }
   },
 })
 

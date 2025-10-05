@@ -1,16 +1,8 @@
 <template>
-  <div v-if="items?.length" class="mb-4">
-    <!-- <div class="d-flex mb-2">
-      <AppTextField
-        clearable
-        icon="$mdiMagnify"
-        label="Filter"
-        @input="filter = $event"
-      />
-    </div> -->
-    <AppHeadline v-if="showHeadline" :path="`api-headers.${section}`" />
+  <section v-if="items?.length" :id="section" class="mb-4">
+    <AppHeadline :path="`api-headers.${section}`" />
     <TableComponent :items="items" :name="name" />
-  </div>
+  </section>
 </template>
 
 <script setup lang="ts">
@@ -45,11 +37,10 @@
       type: String as PropType<PartKey>,
       required: true,
     },
-    showHeadline: Boolean,
   })
 
   const store = useLocaleStore()
-  const items = ref()
+  const items = shallowRef()
 
   const TableComponent = computed(() => {
     return {

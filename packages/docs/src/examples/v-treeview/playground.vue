@@ -58,6 +58,8 @@
       :selectable="selectable"
       :selected-color="selectedColor"
       :shaped="shaped"
+      item-title="name"
+      item-value="id"
     ></v-treeview>
   </div>
 </template>

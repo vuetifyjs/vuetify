@@ -11,12 +11,13 @@ import { makeVSelectionControlProps, VSelectionControl } from '@/components/VSel
 
 // Composables
 import { useFocus } from '@/composables/focus'
+import { forwardRefs } from '@/composables/forwardRefs'
 import { LoaderSlot, useLoader } from '@/composables/loader'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, ref } from 'vue'
-import { filterInputAttrs, genericComponent, getUid, propsFactory, useRender } from '@/util'
+import { ref, toRef, useId } from 'vue'
+import { filterInputAttrs, genericComponent, propsFactory, SUPPORTS_MATCH_MEDIA, useRender } from '@/util'
 
 // Types
 import type { ComputedRef, Ref } from 'vue'
@@ -79,15 +80,17 @@ export const VSwitch = genericComponent<new <T>(
     const { loaderClasses } = useLoader(props)
     const { isFocused, focus, blur } = useFocus(props)
     const control = ref<VSelectionControl>()
+    const inputRef = ref<VInput>()
+    const isForcedColorsModeActive = SUPPORTS_MATCH_MEDIA && window.matchMedia('(forced-colors: active)').matches
 
-    const loaderColor = computed(() => {
+    const loaderColor = toRef(() => {
       return typeof props.loading === 'string' && props.loading !== ''
         ? props.loading
         : props.color
     })
 
-    const uid = getUid()
-    const id = computed(() => props.id || `switch-${uid}`)
+    const uid = useId()
+    const id = toRef(() => props.id || `switch-${uid}`)
 
     function onChange () {
       if (indeterminate.value) {
@@ -107,6 +110,7 @@ export const VSwitch = genericComponent<new <T>(
 
       return (
         <VInput
+          ref={ inputRef }
           class={[
             'v-switch',
             { 'v-switch--flat': props.flat },
@@ -158,7 +162,7 @@ export const VSwitch = genericComponent<new <T>(
                       <div
                         class={[
                           'v-switch__track',
-                          ...backgroundColorClasses.value,
+                          !isForcedColorsModeActive ? backgroundColorClasses.value : undefined,
                         ]}
                         style={ backgroundColorStyles.value }
                         onClick={ onTrackClick }
@@ -183,7 +187,7 @@ export const VSwitch = genericComponent<new <T>(
                           class={[
                             'v-switch__thumb',
                             { 'v-switch__thumb--filled': icon || props.loading },
-                            props.inset ? undefined : backgroundColorClasses.value,
+                            props.inset || isForcedColorsModeActive ? undefined : backgroundColorClasses.value,
                           ]}
                           style={ props.inset ? undefined : backgroundColorStyles.value }
                         >
@@ -242,7 +246,7 @@ export const VSwitch = genericComponent<new <T>(
       )
     })
 
-    return {}
+    return forwardRefs({}, inputRef)
   },
 })
 

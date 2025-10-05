@@ -20,7 +20,7 @@ import type { PropType } from 'vue'
 import type { VToolbarSlots } from '@/components/VToolbar/VToolbar'
 
 export const makeVAppBarProps = propsFactory({
-  scrollBehavior: String as PropType<'hide' | 'inverted' | 'collapse' | 'elevate' | 'fade-image' | (string & {})>,
+  scrollBehavior: String as PropType<'hide' | 'fully-hide' | 'inverted' | 'collapse' | 'elevate' | 'fade-image' | (string & {})>,
   modelValue: {
     type: Boolean,
     default: true,
@@ -85,7 +85,7 @@ export const VAppBar = genericComponent<VToolbarSlots>()({
       scrollRatio,
     } = useScroll(props, { canScroll })
 
-    const canHide = computed(() => (
+    const canHide = toRef(() => (
       scrollBehavior.value.hide ||
       scrollBehavior.value.fullyHide
     ))
@@ -106,8 +106,10 @@ export const VAppBar = genericComponent<VToolbarSlots>()({
         : undefined
     ))
     const height = computed(() => {
-      const height = Number(vToolbarRef.value?.contentHeight ?? props.height)
-      const extensionHeight = Number(vToolbarRef.value?.extensionHeight ?? 0)
+      if (scrollBehavior.value.hide && scrollBehavior.value.inverted) return 0
+
+      const height = vToolbarRef.value?.contentHeight ?? 0
+      const extensionHeight = vToolbarRef.value?.extensionHeight ?? 0
 
       if (!canHide.value) return (height + extensionHeight)
 
@@ -116,7 +118,7 @@ export const VAppBar = genericComponent<VToolbarSlots>()({
         : height
     })
 
-    useToggleScope(computed(() => !!props.scrollBehavior), () => {
+    useToggleScope(() => !!props.scrollBehavior, () => {
       watchEffect(() => {
         if (canHide.value) {
           if (scrollBehavior.value.inverted) {
@@ -131,14 +133,14 @@ export const VAppBar = genericComponent<VToolbarSlots>()({
     })
 
     const { ssrBootStyles } = useSsrBoot()
-    const { layoutItemStyles, layoutIsReady } = useLayoutItem({
+    const { layoutItemStyles } = useLayoutItem({
       id: props.name,
       order: computed(() => parseInt(props.order, 10)),
-      position: toRef(props, 'location'),
+      position: toRef(() => props.location),
       layoutSize: height,
       elementSize: shallowRef(undefined),
       active: isActive,
-      absolute: toRef(props, 'absolute'),
+      absolute: toRef(() => props.absolute),
     })
 
     useRender(() => {
@@ -171,7 +173,7 @@ export const VAppBar = genericComponent<VToolbarSlots>()({
       )
     })
 
-    return layoutIsReady
+    return {}
   },
 })
 

@@ -1,8 +1,8 @@
-import { execSync } from 'child_process'
+import { execSync } from 'node:child_process'
 import stringifyObject from 'stringify-object'
 import prettier from 'prettier'
 import * as typescriptParser from 'prettier/plugins/typescript'
-import type { Definition, DirectiveData } from './types'
+import type { Definition, DirectiveData } from './types.ts'
 
 function parseFunctionParams (func: string) {
   const [, regular] = /function\s\((.*)\)\s\{.*/i.exec(func) || []
@@ -108,7 +108,7 @@ async function loadLocale (componentName: string, locale: string): Promise<Recor
   }
   try {
     const data = await import(`../src/locale/${cacheKey}.json`, {
-      assert: { type: 'json' },
+      with: { type: 'json' },
     })
     localeCache.set(cacheKey, data.default)
     return data.default
@@ -124,6 +124,31 @@ async function loadLocale (componentName: string, locale: string): Promise<Recor
 }
 
 const currentBranch = execSync('git branch --show-current', { encoding: 'utf-8' }).trim()
+
+type MissingDescription = {
+  name: string
+  section: string
+  key: string
+  locale: string
+}
+
+const missingDescriptions: MissingDescription[] = []
+
+export function reportMissingDescriptions () {
+  if (!missingDescriptions.length) return
+
+  const red = '\x1b[31m'
+  const reset = '\x1b[0m'
+  const space = '\x20'
+
+  console.warn(`\n${red}Missing API Descriptions:${reset}`)
+  missingDescriptions.forEach(({ name, section, key, locale }) => {
+    console.warn(`${red}- ${name} (${locale}): [${section}]${space + key + reset}`)
+  })
+
+  // Clear missing descriptions in case of multiple runs
+  missingDescriptions.length = 0
+}
 
 async function getSources (name: string, locale: string, sources: string[]) {
   const arr = await Promise.all([
@@ -144,6 +169,15 @@ async function getSources (name: string, locale: string, sources: string[]) {
           return { text: found, source: sourcesMap[i] }
         }
       }
+
+      // Collect missing descriptions
+      missingDescriptions.push({
+        name,
+        section,
+        key: key || '',
+        locale,
+      })
+
       const githubUrl = `https://github.com/vuetifyjs/vuetify/tree/${currentBranch}/packages/api-generator/src/locale/${locale}/${ogSource}.json`
       return { text: `MISSING DESCRIPTION ([edit in github](${githubUrl}))`, source: name }
     },
@@ -195,10 +229,19 @@ export async function addDirectiveDescriptions (
   }
 }
 
+export function sortByKey (data: Record<string, any>) {
+  return Object.keys(data)
+    .sort()
+    .reduce((obj: Record<string, any>, key: string) => {
+      obj[key] = data[key]
+      return obj
+    }, {})
+}
+
 export function stripLinks (str: string): [string, Record<string, string>] {
   let out = str.slice()
   const obj: Record<string, string> = {}
-  const regexp = /<a.*?>(.*?)<\/a>/g
+  const regexp = /<a .+?>(.+?)<\/a>/g
 
   let matches = regexp.exec(str)
 

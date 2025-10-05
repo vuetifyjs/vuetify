@@ -67,7 +67,11 @@ $utilities: () !default;
           '1-1-100': 1 1 100%,
           '1-0-100': 1 0 100%,
           '0-1-100': 0 1 100%,
-          '0-0-100': 0 0 100%
+          '0-0-100': 0 0 100%,
+          '1-1-0': 1 1 0,
+          '1-0-0': 1 0 0,
+          '0-1-0': 0 1 0,
+          '0-0-0': 0 0 0,
         )
       ),
       "flex-direction": (
@@ -412,6 +416,11 @@ $utilities: () !default;
         property: border-width border-style border-color,
         class: border,
         values: variables.$borders
+      ),
+      "border-current": (
+        property: border-color,
+        class: border,
+        values: (current: currentColor)
       ),
       "border-opacity": (
         property: --v-border-opacity,

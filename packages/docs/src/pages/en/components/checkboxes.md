@@ -31,7 +31,7 @@ A `v-checkbox` in its simplest form provides a toggle between 2 values.
 
 ::: tip
 
-A simpler version, `v-simple-checkbox` is used primarily as a lightweight alternative in data-table components to select rows or display inline boolean data.
+A simpler version, [`v-checkbox-btn`](/components/data-tables/basics/#simple-checkbox) is used primarily as a lightweight alternative in data-table components to select rows or display inline boolean data.
 
 :::
 

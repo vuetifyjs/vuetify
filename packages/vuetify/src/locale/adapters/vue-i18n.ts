@@ -2,7 +2,7 @@
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { watch } from 'vue'
+import { toRef, watch } from 'vue'
 
 // Types
 import type { Ref } from 'vue'
@@ -26,6 +26,10 @@ function useProvided <T> (props: any, prop: string, provided: Ref<T>) {
   })
 
   return internal as Ref<T>
+}
+
+function inferDecimalSeparator (format: (v: number) => string) {
+  return format(0.1).includes(',') ? ',' : '.'
 }
 
 function createProvideFunction (data: {
@@ -57,6 +61,7 @@ function createProvideFunction (data: {
       current,
       fallback,
       messages,
+      decimalSeparator: toRef(() => props.decimalSeparator ?? inferDecimalSeparator(i18n.n)),
       t: (key: string, ...params: unknown[]) => i18n.t(key, params),
       n: i18n.n,
       provide: createProvideFunction({ current, fallback, messages, useI18n: data.useI18n }),
@@ -74,7 +79,7 @@ export function createVueI18nAdapter ({ i18n, useI18n }: VueI18nAdapterParams): 
     current,
     fallback,
     messages,
-    // @ts-expect-error Type instantiation is excessively deep and possibly infinite
+    decimalSeparator: toRef(() => inferDecimalSeparator(i18n.global.n)),
     t: (key: string, ...params: unknown[]) => i18n.global.t(key, params),
     n: i18n.global.n,
     provide: createProvideFunction({ current, fallback, messages, useI18n }),

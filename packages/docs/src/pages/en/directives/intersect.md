@@ -16,13 +16,13 @@ The `v-intersect` directive utilizes the [Intersection Observer API](https://dev
 
 <PageFeatures />
 
-<PromotedEntry />
-
 ## Usage
 
 Scroll the window and watch the colored dot. Notice as the [v-card](/components/cards) comes into view that it changes from error to success.
 
 <ExamplesExample file="v-intersect/usage" />
+
+<PromotedEntry />
 
 ## API
 

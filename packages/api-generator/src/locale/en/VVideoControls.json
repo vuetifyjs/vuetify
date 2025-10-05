@@ -1,0 +1,20 @@
+{
+  "props": {
+    "color": "General color applied to icons and sliders.",
+    "backgroundColor": "Container background color.",
+    "trackColor": "Passed to the main slider `color` prop.",
+    "playing": "Applies correct icon of the default play button.",
+    "hidePlay": "Hides default play button.",
+    "hideVolume": "Hides default volume control.",
+    "hideFullscreen": "Hides default fullscreen button.",
+    "fullscreen": "Applies correct icon on the default fullscreen button.",
+    "floating": "Introduces visual spacing from the video boundaries.",
+    "splitTime": "Splits time into elapsed and remaining on each side of the main slider.",
+    "pills": "Makes the container transparent and shows inner actions in separated boxes.",
+    "detached": "Moves the container below so it won't obstruct the video.",
+    "progress": "Controls main slider value (0 ~ 100)",
+    "duration": "Total duration of the video used to calculate displayed time.",
+    "volume": "Volume value passed to the underlying control and slots.",
+    "volumeProps": "Props passed down to the VVideoVolume component."
+  }
+}

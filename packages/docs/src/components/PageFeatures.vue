@@ -1,7 +1,20 @@
 <template>
   <div class="mb-4">
     <page-feature-chip
-      v-if="one.isSubscriber && user.pins"
+      v-if="!isGeneratedPage"
+      :href="contribute"
+      prepend-icon="mdi-pencil-outline"
+      rel="noopener noreferrer"
+      target="_blank"
+      text="Edit this page"
+    >
+      <template #prepend>
+        <v-icon color="blue-darken-3" />
+      </template>
+    </page-feature-chip>
+
+    <page-feature-chip
+      v-if="one.isSubscriber && user.ecosystem.docs.pins.enabled"
       :prepend-icon="`mdi-pin${!pinned ? '-outline' : ''}`"
       text="Pin"
       @click="onClickPin"
@@ -12,7 +25,7 @@
     </page-feature-chip>
 
     <page-feature-chip
-      v-if="route.meta?.features?.figma"
+      v-if="frontmatter?.features?.figma"
       :text="t('figma-design')"
       href="https://figma.vuetifyjs.com/"
       prepend-icon="mdi-image"
@@ -25,7 +38,7 @@
     </page-feature-chip>
 
     <page-feature-chip
-      v-if="route.meta?.features?.report"
+      v-if="frontmatter?.features?.report"
       :text="t('report-a-bug')"
       href="https://issues.vuetifyjs.com/"
       prepend-icon="mdi-bug-outline"
@@ -51,8 +64,8 @@
     </page-feature-chip>
 
     <page-feature-chip
-      v-if="route.meta?.features?.github"
-      :href="`https://github.com/vuetifyjs/vuetify/tree/${branch}/packages/vuetify/src${route.meta.features.github}`"
+      v-if="frontmatter?.features?.github"
+      :href="`https://github.com/vuetifyjs/vuetify/tree/${branch}/packages/vuetify/src${frontmatter.features.github}`"
       :text="t('view-in-github')"
       prepend-icon="mdi-github"
       rel="noopener noreferrer"
@@ -64,8 +77,8 @@
     </page-feature-chip>
 
     <page-feature-chip
-      v-if="route.meta?.features?.spec"
-      :href="route.meta.features.spec"
+      v-if="frontmatter?.features?.spec"
+      :href="frontmatter.features.spec"
       :text="t('design-spec')"
       prepend-icon="mdi-material-design"
       rel="noopener noreferrer"
@@ -75,6 +88,26 @@
         <v-icon color="surface-variant" />
       </template>
     </page-feature-chip>
+
+    <div
+      v-if="isClipboardSupported && !isGeneratedPage"
+      class="d-inline-block"
+      v-tooltip:top="{
+        disabled: one.isSubscriber,
+        text: 'Subscribe to Vuetify One for access',
+      }"
+    >
+      <page-feature-chip
+        :disabled="!one.isSubscriber"
+        :text="copied ? t('copied') : t('copy-as-markdown')"
+        prepend-icon="mdi-language-markdown-outline"
+        @click="copyPageAsMarkdown"
+      >
+        <template #prepend>
+          <v-icon :color="copied ? 'success' : 'surface-variant'" />
+        </template>
+      </page-feature-chip>
+    </div>
   </div>
 </template>
 
@@ -84,6 +117,8 @@
   const route = useRoute()
   const user = useUserStore()
   const { t } = useI18n()
+  const frontmatter = useFrontmatter()
+  const { copyPageAsMarkdown, copied, isClipboardSupported } = useMarkdown()
 
   const branch = getBranch()
 
@@ -91,19 +126,30 @@
     return pins.pins.some(p => p.to === route.path)
   })
 
-  const label = computed(() => {
-    if (!route.meta.features?.label) return false
+  const isGeneratedPage = computed(() => {
+    return route.path.includes('/api/')
+  })
 
-    const original = encodeURIComponent(route.meta.features.label)
+  const label = computed(() => {
+    if (!frontmatter.value?.features?.label) return false
+
+    const original = encodeURIComponent(frontmatter.value.features.label)
 
     return `https://github.com/vuetifyjs/vuetify/labels/${original}`
+  })
+
+  const contribute = computed(() => {
+    const branch = getBranch()
+    const link = route.path.split('/').slice(2).filter(v => v).join('/')
+
+    return `https://github.com/vuetifyjs/vuetify/edit/${branch}/packages/docs/src/pages/en/${link}.md`
   })
 
   function onClickPin () {
     pins.toggle(!pinned.value, {
       title: route.meta.title,
       to: route.path,
-      category: route.meta.category,
+      category: frontmatter.value?.category,
     })
   }
 </script>

@@ -58,6 +58,16 @@ You can use `density` prop to adjust vertical spacing within the component.
 
 <ExamplesExample file="v-combobox/prop-density" />
 
+#### Placeholder
+
+Use the **placeholder** prop to give users additional context about the expected values in the combobox. The placeholder will only appear when no items are selected.
+
+::: info
+  Use the **persistent-placeholder** prop to force the **placeholder** to be visible, even when the input is not focused.
+:::
+
+<ExamplesExample file="v-combobox/prop-placeholder" />
+
 #### Multiple combobox
 
 Previously known as **tags** - user is allowed to enter more than one value.
@@ -66,8 +76,22 @@ Previously known as **tags** - user is allowed to enter more than one value.
 
 ### Slots
 
-#### No data with chips
+#### No data
 
 In this example we utilize a custom **no-data** slot to provide context to the user when searching / creating items.
 
 <ExamplesExample file="v-combobox/slot-no-data" />
+
+#### Custom chips
+
+When working with custom chip slots, it’s recommended to use `v-bind="props"` to pass event handler `@mousedown.stop`. This helps prevent unintentionally opening the dropdown.
+
+<ExamplesExample file="v-combobox/slot-custom-chip" />
+
+### Misc
+
+#### Advanced custom options
+
+The `v-combobox` improves upon the added functionality from `v-select` and `v-autocomplete`. This provides you with an expansive interface to create truly customized implementations. This example takes advantage of some more advanced features such as a custom **filter** algorithm, inline list editing and dynamic input items.
+
+<ExamplesExample file="v-combobox/misc-advanced" />

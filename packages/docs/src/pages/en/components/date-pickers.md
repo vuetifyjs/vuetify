@@ -18,15 +18,9 @@ features:
 
 `v-date-picker` is a fully featured date selection component that lets users select a date.
 
-![Date picker Entry](https://cdn.vuetifyjs.com/docs/images/components/v-date-picker/v-date-picker-entry.png)
-
 <PageFeatures />
 
-::: success
-
-This feature was introduced in [v3.4.0 (Blackguard)](/getting-started/release-notes/?version=v3.4.0)
-
-:::
+<DocIntroduced version="3.4.0" />
 
 ## Usage
 
