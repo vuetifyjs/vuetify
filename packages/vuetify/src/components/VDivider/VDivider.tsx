@@ -10,8 +10,14 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { computed } from 'vue'
 import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
+// Types
+import type { PropType } from 'vue'
+
 type DividerKey = 'borderRightWidth' | 'borderTopWidth' | 'height' | 'width'
 type DividerStyles = Partial<Record<DividerKey, string>>
+
+const allowedVariants = ['dotted', 'dashed', 'solid', 'double'] as const
+type Variant = typeof allowedVariants[number]
 
 export const makeVDividerProps = propsFactory({
   color: String,
@@ -21,6 +27,11 @@ export const makeVDividerProps = propsFactory({
   opacity: [Number, String],
   thickness: [Number, String],
   vertical: Boolean,
+  variant: {
+    type: String as PropType<Variant>,
+    default: 'solid',
+    validator: (v: any) => allowedVariants.includes(v),
+  },
 
   ...makeComponentProps(),
   ...makeThemeProps(),
@@ -66,6 +77,7 @@ export const VDivider = genericComponent()({
             dividerStyles.value,
             textColorStyles.value,
             { '--v-border-opacity': props.opacity },
+            { 'border-style': props.variant },
             props.style,
           ]}
           aria-orientation={

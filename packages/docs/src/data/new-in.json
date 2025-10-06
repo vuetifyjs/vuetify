@@ -128,7 +128,8 @@
   },
   "VDivider": {
     "props": {
-      "gradient": "3.11.0"
+      "gradient": "3.11.0",
+      "variant": "3.11.0"
     }
   },
   "VExpansionPanels": {
