@@ -126,6 +126,11 @@
       "stickToTarget": "3.10.0"
     }
   },
+  "VDivider": {
+    "props": {
+      "gradient": "3.11.0"
+    }
+  },
   "VExpansionPanels": {
     "props": {
       "static": "3.4.0"

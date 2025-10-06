@@ -53,6 +53,12 @@ Inset dividers are moved 72px to the right. This will cause them to line up with
 
 <ExamplesExample file="v-divider/prop-inset" />
 
+#### Gradient
+
+Easily enable fading effect with **gradient** prop for a modern look.
+
+<ExamplesExample file="v-divider/prop-gradient" />
+
 #### Vertical
 
 Vertical dividers give you more tools for unique layouts.

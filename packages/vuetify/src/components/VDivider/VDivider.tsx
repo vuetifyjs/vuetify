@@ -15,6 +15,7 @@ type DividerStyles = Partial<Record<DividerKey, string>>
 
 export const makeVDividerProps = propsFactory({
   color: String,
+  gradient: Boolean,
   inset: Boolean,
   length: [Number, String],
   opacity: [Number, String],
@@ -53,6 +54,7 @@ export const VDivider = genericComponent()({
           class={[
             {
               'v-divider': true,
+              'v-divider--gradient': props.gradient && !slots.default,
               'v-divider--inset': props.inset,
               'v-divider--vertical': props.vertical,
             },
@@ -82,8 +84,9 @@ export const VDivider = genericComponent()({
           class={[
             'v-divider__wrapper',
             {
-              'v-divider__wrapper--vertical': props.vertical,
+              'v-divider__wrapper--gradient': props.gradient,
               'v-divider__wrapper--inset': props.inset,
+              'v-divider__wrapper--vertical': props.vertical,
             },
           ]}
         >
