@@ -65,10 +65,6 @@ Vertical dividers give you more tools for unique layouts.
 
 <ExamplesExample file="v-divider/prop-vertical" />
 
-#### Thickness
-
-By using the **thickness** prop, the thickness of the divider can be adjusted to the desired value.
-
 ### Slots
 
 #### Default
