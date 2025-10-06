@@ -129,6 +129,7 @@
   "VDivider": {
     "props": {
       "gradient": "3.11.0",
+      "contentOffset": "3.11.0",
       "variant": "3.11.0"
     }
   },

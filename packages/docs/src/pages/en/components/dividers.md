@@ -69,6 +69,14 @@ Vertical dividers give you more tools for unique layouts.
 
 By using the **thickness** prop, the thickness of the divider can be adjusted to the desired value.
 
+### Slots
+
+#### Default
+
+When you pass any content to be placed in between dividers simply by utilizing the default slot.
+
+<ExamplesExample file="v-divider/slot-default" />
+
 ### Misc
 
 #### Portrait View

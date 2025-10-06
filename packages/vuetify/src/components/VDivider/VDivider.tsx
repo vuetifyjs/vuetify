@@ -7,7 +7,7 @@ import { makeComponentProps } from '@/composables/component'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
-import { computed } from 'vue'
+import { computed, toRef } from 'vue'
 import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -21,6 +21,7 @@ type Variant = typeof allowedVariants[number]
 
 export const makeVDividerProps = propsFactory({
   color: String,
+  contentOffset: [Number, String, Array] as PropType<number | string | (string | number)[]>,
   gradient: Boolean,
   inset: Boolean,
   length: [Number, String],
@@ -57,6 +58,19 @@ export const VDivider = genericComponent()({
       }
 
       return styles
+    })
+
+    const contentStyles = toRef(() => {
+      const margin = Array.isArray(props.contentOffset) ? props.contentOffset[0] : props.contentOffset
+      const shift = Array.isArray(props.contentOffset) ? props.contentOffset[1] : 0
+
+      return {
+        marginBlock: props.vertical && margin ? convertToUnit(margin) : undefined,
+        marginInline: !props.vertical && margin ? convertToUnit(margin) : undefined,
+        transform: shift
+          ? `translate${props.vertical ? 'X' : 'Y'}(${convertToUnit(shift)})`
+          : undefined,
+      }
     })
 
     useRender(() => {
@@ -104,7 +118,10 @@ export const VDivider = genericComponent()({
         >
           { divider }
 
-          <div class="v-divider__content">
+          <div
+            class="v-divider__content"
+            style={ contentStyles.value }
+          >
             { slots.default() }
           </div>
 
