@@ -129,15 +129,15 @@ export const VMenu = genericComponent<OverlaySlots>()({
         isActive.value &&
         before !== after &&
         overlay.value?.contentEl &&
-        // We're the topmost menu
-        overlay.value?.globalTop &&
         // It isn't the document or the menu body
         ![document, overlay.value.contentEl].includes(after!) &&
         // It isn't inside the menu body
         !overlay.value.contentEl.contains(after)
       ) {
         if (focusTrapSuppressed) {
-          isActive.value = false
+          if (!props.openOnHover) {
+            isActive.value = false
+          }
         } else {
           const focusable = focusableChildren(overlay.value.contentEl)
           focusable[0]?.focus()
