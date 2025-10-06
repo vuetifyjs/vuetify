@@ -10,6 +10,7 @@ import { useHeaders } from './composables/headers'
 import { useSelection } from './composables/select'
 import { useSort } from './composables/sort'
 import { useBackgroundColor } from '@/composables/color'
+import { makeDensityProps } from '@/composables/density'
 import { makeDisplayProps, useDisplay } from '@/composables/display'
 import { IconValue } from '@/composables/icons'
 import { LoaderSlot, makeLoaderProps, useLoader } from '@/composables/loader'
@@ -77,6 +78,7 @@ export const makeVDataTableHeadersProps = propsFactory({
   /** @deprecated */
   sticky: Boolean,
 
+  ...makeDensityProps(),
   ...makeDisplayProps(),
   ...makeLoaderProps(),
 }, 'VDataTableHeaders')
@@ -202,6 +204,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
               if (column.key === 'data-table-select') {
                 return slots['header.data-table-select']?.(columnSlotProps) ?? (showSelectAll.value && (
                   <VCheckboxBtn
+                    density={ props.density }
                     modelValue={ allSelected.value }
                     indeterminate={ someSelected.value && !allSelected.value }
                     onUpdate:modelValue={ selectAll }
