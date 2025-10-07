@@ -13,6 +13,9 @@ import { makeCalendarBaseProps } from './composables/calendarBase'
 import { makeCalendarWithEventsProps, useCalendarWithEvents } from './composables/calendarWithEvents'
 import { forwardRefs } from '@/composables/forwardRefs'
 
+// Directives
+import vResize from '@/directives/resize'
+
 // Utilities
 import { computed, onMounted, onUpdated, ref, watch } from 'vue'
 import { getParsedCategories } from './util/parser'
@@ -108,6 +111,8 @@ export const VCalendar = genericComponent<new (
   },
 ) => GenericProps<typeof props, typeof slots>>()({
   name: 'VCalendar',
+
+  directives: { vResize },
 
   props: {
     modelValue: {

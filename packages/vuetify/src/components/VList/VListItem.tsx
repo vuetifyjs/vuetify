@@ -152,7 +152,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
       props.link !== false &&
       (props.link || link.isClickable.value || isSelectable.value)
     )
-    const role = computed(() => list ? (isSelectable.value ? 'option' : 'listitem') : undefined)
+    const role = computed(() => list ? (isLink.value ? 'link' : isSelectable.value ? 'option' : 'listitem') : undefined)
     const ariaSelected = computed(() => {
       if (!isSelectable.value) return undefined
       return root.activatable.value ? isActivated.value
@@ -257,6 +257,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
 
       return (
         <Tag
+          { ...link.linkProps }
           class={[
             'v-list-item',
             {
@@ -289,7 +290,6 @@ export const VListItem = genericComponent<VListItemSlots>()({
           onClick={ onClick }
           onKeydown={ isClickable.value && !isLink.value && onKeyDown }
           v-ripple={ isClickable.value && rippleOptions.value }
-          { ...link.linkProps }
         >
           { genOverlays(isClickable.value || isActive.value, 'v-list-item') }
 
