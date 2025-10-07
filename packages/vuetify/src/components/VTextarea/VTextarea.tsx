@@ -100,6 +100,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
     const vInputRef = ref<VInput>()
     const vFieldRef = ref<VInput>()
     const controlHeight = shallowRef('')
+    const heightCapped = shallowRef(false)
     const textareaRef = ref<HTMLInputElement>()
     const autocomplete = useAutocomplete(props)
     const isActive = computed(() => (
@@ -157,7 +158,10 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
       if (!props.autoGrow) rows.value = Number(props.rows)
     })
     function calculateInputHeight () {
-      if (!props.autoGrow) return
+      if (!props.autoGrow) {
+        heightCapped.value = false
+        return
+      }
 
       nextTick(() => {
         if (!sizerRef.value || !vFieldRef.value) return
@@ -177,9 +181,10 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
         )
         const maxHeight = parseFloat(props.maxRows!) * lineHeight + padding || Infinity
         const newHeight = clamp(height ?? 0, minHeight, maxHeight)
-        rows.value = Math.floor((newHeight - padding) / lineHeight)
 
+        rows.value = Math.floor((newHeight - padding) / lineHeight)
         controlHeight.value = convertToUnit(newHeight)
+        heightCapped.value = height > maxHeight
       })
     }
 
@@ -228,6 +233,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
               'v-text-field--suffixed': props.suffix,
               'v-textarea--auto-grow': props.autoGrow,
               'v-textarea--no-resize': props.noResize || props.autoGrow,
+              'v-textarea--height-capped': heightCapped.value,
               'v-input--plain-underlined': isPlainOrUnderlined.value,
             },
             props.class,

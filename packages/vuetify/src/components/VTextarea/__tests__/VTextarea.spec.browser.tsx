@@ -24,16 +24,16 @@ describe('VTextarea', () => {
     expect(el.offsetHeight).toBe(56)
 
     await userEvent.tab()
-    await userEvent.keyboard('sed d')
+    await userEvent.keyboard(' sed do ')
     await expect.poll(() => el.offsetHeight).toBe(56)
 
-    await userEvent.keyboard('o')
+    await userEvent.keyboard('e')
     await expect.poll(() => el.offsetHeight).toBe(80)
   })
 
   it('should respect max-rows', async () => {
     await page.viewport(500, 500)
-    const model = ref('Lorem ipsum dolor sit amet, consectetur adipiscing elit')
+    const model = ref('Lorem ipsum dolor sit amet, consectetur adipiscing elit. ')
 
     render(() => (
       <Application>
@@ -57,7 +57,7 @@ describe('VTextarea', () => {
 
   it('should emit update rows', async () => {
     await page.viewport(500, 500)
-    const model = ref('Lorem ipsum dolor sit amet, consectetur adipiscing elit')
+    const model = ref('Lorem ipsum dolor sit amet, consectetur adipiscing elit. ')
     const rows = ref(1)
     render(() => (
       <Application>
