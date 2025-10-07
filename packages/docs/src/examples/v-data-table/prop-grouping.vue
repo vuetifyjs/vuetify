@@ -15,13 +15,13 @@
   const groupBy = ref([{ key: 'category', order: 'asc' }, { key: 'status', order: 'asc' }])
 
   const headers = [
+    { key: 'data-table-group', title: 'Category' },
     {
       title: 'Dessert (100g serving)',
       align: 'start',
       key: 'name',
       groupable: false,
     },
-    { title: 'Category', key: 'category', align: 'end' },
     { title: 'Dairy', key: 'dairy', align: 'end' },
   ]
   const desserts = [

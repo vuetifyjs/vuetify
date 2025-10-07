@@ -4,9 +4,9 @@
       <v-video
         :density="density"
         height="150"
-        image="https://jsek.work/cdn/vt-sunflowers.jpg"
+        image="https://cdn.jsek.work/cdn/vt-sunflowers.jpg"
         rounded="lg"
-        src="https://jsek.work/cdn/vt-sunflowers.mp4"
+        src="https://cdn.jsek.work/cdn/vt-sunflowers.mp4"
         start-at="10"
         volume="80"
         width="250"

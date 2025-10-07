@@ -1,13 +1,11 @@
 <template>
-  <v-app>
-    <v-container>
-      <v-autocomplete :items="items">
-        <template v-slot:item="{ props }">
-          <v-list-item v-bind="props"></v-list-item>
-        </template>
-      </v-autocomplete>
-    </v-container>
-  </v-app>
+  <v-container>
+    <v-autocomplete :items="items">
+      <template v-slot:item="{ props }">
+        <v-list-item v-bind="props"></v-list-item>
+      </template>
+    </v-autocomplete>
+  </v-container>
 </template>
 
 <script setup>
