@@ -88,7 +88,7 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
     const start = performance.now()
     offsets[0] = 0
     const length = items.value.length
-    for (let i = 1; i <= length - 1; i++) {
+    for (let i = 1; i <= length; i++) {
       offsets[i] = (offsets[i - 1] || 0) + getSize(i - 1)
     }
     updateTime.value = Math.max(updateTime.value, performance.now() - start)
@@ -131,13 +131,8 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
   }
 
   function calculateOffset (index: number) {
-    index = clamp(index, 0, items.value.length - 1)
-    const whole = Math.floor(index)
-    const fraction = index % 1
-    const next = whole + 1
-    const wholeOffset = offsets[whole] || 0
-    const nextOffset = offsets[next] || wholeOffset
-    return wholeOffset + (nextOffset - wholeOffset) * fraction
+    index = clamp(index, 0, items.value.length)
+    return offsets[index]
   }
 
   function calculateIndex (scrollTop: number) {
