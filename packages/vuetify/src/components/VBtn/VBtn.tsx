@@ -137,9 +137,15 @@ export const VBtn = genericComponent<VBtnSlots>()({
       return ({
         color: showColor ? color.value ?? props.baseColor : props.baseColor,
         variant: props.variant,
+        bgColor: props.bgColor,
       })
     })
-    const { colorClasses, colorStyles, variantClasses } = useVariant(variantProps)
+    const {
+      colorClasses,
+      colorStyles,
+      variantClasses,
+      backgroundColorClasses,
+      backgroundColorStyles, } = useVariant(variantProps)
 
     const isDisabled = computed(() => group?.disabled.value || props.disabled)
     const isElevated = toRef(() => {
@@ -208,6 +214,7 @@ export const VBtn = genericComponent<VBtnSlots>()({
             themeClasses.value,
             borderClasses.value,
             colorClasses.value,
+            backgroundColorClasses.value,
             densityClasses.value,
             elevationClasses.value,
             loaderClasses.value,
