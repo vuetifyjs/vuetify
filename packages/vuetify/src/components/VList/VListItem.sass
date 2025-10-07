@@ -347,30 +347,22 @@
       &--link[href]:not(&--active)
         color: unset
 
-      &--variant-text.v-list-item--active,
-      &--variant-plain.v-list-item--active
-        color: highlight !important
-
-        .v-list-item-title,
-        .v-list-item-subtitle,
-        .v-list-item-action
+      &--variant-text.v-list-item--active:not(&--disabled),
+      &--variant-plain.v-list-item--active:not(&--disabled)
+        [class*="v-list-item-"],
+        [class*="v-list-item-"] > *,
+        .v-icon
           color: highlight !important
 
-      &--active:not(&--variant-text, &--variant-plain)
-        background-color: highlight !important
-        color: highlighttext !important
+      &--active:not(&--variant-text, &--variant-plain):not(&--disabled)
+        background: highlight !important
 
-        .v-list-item-title,
-        .v-list-item-subtitle
+        [class*="v-list-item-"],
+        [class*="v-list-item-"] > *,
+        .v-icon
           opacity: 1
+          color: highlighttext !important
           forced-color-adjust: preserve-parent-color
-
-        .v-list-item__prepend,
-        .v-list-item__append
-          > .v-badge .v-icon,
-          > .v-icon
-            opacity: 1
-            forced-color-adjust: preserve-parent-color
  
       @supports selector(:focus-visible)
         &::after
