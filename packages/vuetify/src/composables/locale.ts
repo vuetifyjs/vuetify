@@ -11,6 +11,7 @@ export interface LocaleMessages {
 
 export interface LocaleOptions {
   decimalSeparator?: string
+  numericGroupSeparator?: string
   messages?: LocaleMessages
   locale?: string
   fallback?: string
@@ -20,6 +21,7 @@ export interface LocaleOptions {
 export interface LocaleInstance {
   name: string
   decimalSeparator: ShallowRef<string>
+  numericGroupSeparator: ShallowRef<string>
   messages: Ref<LocaleMessages>
   current: Ref<string>
   fallback: Ref<string>
