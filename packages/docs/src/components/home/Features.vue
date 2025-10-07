@@ -1,9 +1,9 @@
 <template>
-  <v-responsive>
-    <v-container>
+  <v-responsive class="py-10">
+    <v-container class="pb-0">
       <HomeBgGradient color="grey" />
 
-      <h4 class="text-h4 font-weight-bold mb-10">
+      <h4 class="text-md-h4 text-h5 font-weight-bold mb-10">
         More Than Components. A Complete Vue Ecosystem.
       </h4>
 

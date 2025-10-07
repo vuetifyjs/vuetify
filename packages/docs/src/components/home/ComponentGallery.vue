@@ -1,13 +1,13 @@
 <template>
   <v-responsive class="py-16">
-    <v-container>
+    <v-container class="pt-0">
       <HomeBgGradient color="grey" />
 
-      <h4 class="text-h4 font-weight-bold mb-10">
+      <h4 class="text-md-h4 text-h5 font-weight-bold mb-10">
         Component Gallery
       </h4>
 
-      <div class="d-flex justify-center my-10">
+      <div class="d-flex justify-center mb-5">
         <v-chip-group
           v-model="selectedComponent"
           class="d-flex justify-center"

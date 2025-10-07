@@ -1,5 +1,5 @@
 <template>
-  <div v-if="specialSponsor" class="mb-8">
+  <div v-if="specialSponsor">
     <v-divider class="mx-auto" />
 
     <div class="d-flex align-center justify-center my-1 px-4">
