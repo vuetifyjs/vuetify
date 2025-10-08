@@ -42,7 +42,7 @@ interface SlideGroupSlot {
   isSelected: GroupProvide['isSelected']
 }
 
-type VSlideGroupSlots = {
+export type VSlideGroupSlots = {
   default: SlideGroupSlot
   prev: SlideGroupSlot
   next: SlideGroupSlot
