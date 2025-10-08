@@ -131,6 +131,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
     )
 
     const _inputText = shallowRef<string | null>(null)
+    const _lastParsedValue = shallowRef<number | null>(null)
     watchEffect(() => {
       if (
         isFocused.value &&
@@ -144,6 +145,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
         _inputText.value = null
       } else if (!isNaN(model.value)) {
         _inputText.value = correctPrecision(model.value)
+        _lastParsedValue.value = Number(_inputText.value.replace(decimalSeparator.value, '.'))
       }
     })
     const inputText = computed<string | null>({
@@ -155,11 +157,21 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
           return
         }
         const parsedValue = Number(val.replace(decimalSeparator.value, '.'))
-        if (!isNaN(parsedValue) && parsedValue <= props.max && parsedValue >= props.min) {
-          model.value = parsedValue
+        if (!isNaN(parsedValue)) {
           _inputText.value = val
+          _lastParsedValue.value = parsedValue
+
+          if (parsedValue <= props.max && parsedValue >= props.min) {
+            model.value = parsedValue
+          }
         }
       },
+    })
+
+    const isOutOfRange = computed(() => {
+      if (!_lastParsedValue.value) return false
+      const numberFromText = Number(_lastParsedValue.value)
+      return numberFromText !== clamp(numberFromText, props.min, props.max)
     })
 
     const canIncrease = computed(() => {
@@ -474,6 +486,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
           v-model={ inputText.value }
           v-model:focused={ isFocused.value }
           validationValue={ model.value }
+          error={ isOutOfRange.value || undefined }
           onBeforeinput={ onBeforeinput }
           onFocus={ onFocus }
           onBlur={ onBlur }
