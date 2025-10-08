@@ -15,7 +15,7 @@ import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, nextTick, onMounted, ref, shallowRef, toRef, watch, watchEffect } from 'vue'
+import { computed, nextTick, onMounted, ref, shallowRef, toRef, watch } from 'vue'
 import { clamp, escapeForRegex, extractNumber, genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
@@ -131,35 +131,51 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
     )
 
     const _inputText = shallowRef<string | null>(null)
-    watchEffect(() => {
+    const _lastParsedValue = shallowRef<number | null>(null)
+
+    watch(model, val => {
       if (
         isFocused.value &&
           !controlsDisabled.value &&
-          Number(_inputText.value) === model.value
+          Number(_inputText.value) === val
       ) {
         // ignore external changes while typing
         // e.g. 5.01{backspace}2 » should result in 5.02
         //      but we emit '5' in and want to preserve '5.0'
-      } else if (model.value == null) {
+      } else if (val == null) {
         _inputText.value = null
-      } else if (!isNaN(model.value)) {
-        _inputText.value = correctPrecision(model.value)
+        _lastParsedValue.value = null
+      } else if (!isNaN(val)) {
+        _inputText.value = correctPrecision(val)
+        _lastParsedValue.value = Number(_inputText.value.replace(decimalSeparator.value, '.'))
       }
-    })
+    }, { immediate: true })
+
     const inputText = computed<string | null>({
       get: () => _inputText.value,
       set (val) {
         if (val === null || val === '') {
           model.value = null
           _inputText.value = null
+          _lastParsedValue.value = null
           return
         }
         const parsedValue = Number(val.replace(decimalSeparator.value, '.'))
-        if (!isNaN(parsedValue) && parsedValue <= props.max && parsedValue >= props.min) {
-          model.value = parsedValue
+        if (!isNaN(parsedValue)) {
           _inputText.value = val
+          _lastParsedValue.value = parsedValue
+
+          if (parsedValue <= props.max && parsedValue >= props.min) {
+            model.value = parsedValue
+          }
         }
       },
+    })
+
+    const isOutOfRange = computed(() => {
+      if (_lastParsedValue.value === null) return false
+      const numberFromText = Number(_inputText.value)
+      return numberFromText !== clamp(numberFromText, props.min, props.max)
     })
 
     const canIncrease = computed(() => {
@@ -474,6 +490,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
           v-model={ inputText.value }
           v-model:focused={ isFocused.value }
           validationValue={ model.value }
+          error={ isOutOfRange.value || undefined }
           onBeforeinput={ onBeforeinput }
           onFocus={ onFocus }
           onBlur={ onBlur }
