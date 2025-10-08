@@ -259,6 +259,10 @@
   "VTabs": {
     "props": {
       "spaced": "3.10.0"
+    },
+    "slots": {
+      "next": "3.11.0",
+      "prev": "3.11.0"
     }
   },
   "VTextField": {
