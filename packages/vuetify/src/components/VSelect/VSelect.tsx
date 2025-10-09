@@ -92,6 +92,9 @@ export const makeSelectProps = propsFactory({
 export const makeVSelectProps = propsFactory({
   ...makeSelectProps(),
   ...omit(makeVTextFieldProps({
+    clearValue: (props: VSelect['$props']) => {
+      return props.multiple ? [] : null
+    },
     modelValue: null,
     role: 'combobox',
   }), ['validationValue', 'dirty', 'appendInnerIcon']),

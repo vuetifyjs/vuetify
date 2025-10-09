@@ -62,6 +62,9 @@ export const makeVDateInputProps = propsFactory({
     hideActions: true,
   }),
   ...makeVTextFieldProps({
+    clearValue: (props: VDateInput['$props']) => {
+      return props.multiple ? [] : null
+    },
     prependIcon: '$calendar',
   }),
   ...omit(makeVDatePickerProps({
