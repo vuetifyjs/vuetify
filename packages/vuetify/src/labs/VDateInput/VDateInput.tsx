@@ -256,6 +256,7 @@ export const VDateInput = genericComponent<new <
       const datePickerProps = VDatePicker.filterProps(omit(props, [
         'active',
         'bgColor',
+        'color',
         'location',
         'rounded',
         'maxWidth',
