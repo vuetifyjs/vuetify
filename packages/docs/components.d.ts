@@ -126,6 +126,7 @@ declare module 'vue' {
     HomeEpicmaxSupport: typeof import('./src/components/home/EpicmaxSupport.vue')['default']
     HomeFeatures: typeof import('./src/components/home/Features.vue')['default']
     HomeFooter: typeof import('./src/components/home/Footer.vue')['default']
+    HomeFreeThemes: typeof import('./src/components/home/FreeThemes.vue')['default']
     HomeGradientBackground: typeof import('./src/components/home/GradientBackground.vue')['default']
     HomeLogo: typeof import('./src/components/home/Logo.vue')['default']
     HomeSpecialSponsor: typeof import('./src/components/home/SpecialSponsor.vue')['default']

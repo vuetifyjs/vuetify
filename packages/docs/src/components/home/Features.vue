@@ -17,13 +17,13 @@
           md="6"
         >
           <v-card
-            class="text-left d-flex flex-column pa-5"
+            class="text-left d-flex flex-column pa-3"
             rounded="lg"
             width="100%"
             border
             flat
           >
-            <v-avatar :color="feature.color" class="ml-3 mb-3" size="60">
+            <v-avatar :color="feature.color" class="ml-3 my-3" size="60">
               <v-icon :icon="feature.icon" size="30" />
             </v-avatar>
 
@@ -35,10 +35,10 @@
               {{ feature.description }}
             </v-card-text>
 
-            <v-card-actions>
-              <v-btn color="primary">
+            <v-card-actions class="pb-0">
+              <v-btn class="text-none" color="primary">
                 Learn more
-                <v-icon icon="mdi-arrow-right" />
+                <v-icon icon="mdi-chevron-right" />
               </v-btn>
             </v-card-actions>
           </v-card>
@@ -58,7 +58,7 @@
     },
     {
       title: 'Official Labs',
-      description: 'Pro tables, Charts, Maps, and more (beta).',
+      description: 'Pro tables, Charts, Editors, and more (beta).',
       icon: 'mdi-factory',
       color: 'teal',
     },

@@ -2,10 +2,11 @@
   <div class="v-bg position-absolute top-0 right-0 left-0 bottom-0">
     <div
       :class="{
-        [`bg-${props.color}`]: true
+        [`bg-${props.color}`]: true,
+        'opacity-20': !props.removeOpacity,
       }"
       aria-hidden="true"
-      class="overflow-hidden opacity-20 w-100 h-100"
+      class="overflow-hidden w-100 h-100"
     />
   </div>
 </template>
@@ -16,13 +17,16 @@
       type: String,
       default: 'primary',
     },
+    removeOpacity: {
+      type: Boolean,
+      default: false,
+    },
   })
 </script>
 
 <style scoped>
   .v-bg {
     filter: blur(100px);
-    opacity: 80%;
     pointer-events: none;
   }
 

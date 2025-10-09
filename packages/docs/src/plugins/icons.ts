@@ -145,6 +145,7 @@ export {
   mdiDotsHorizontal,
   mdiDotsVertical,
   mdiDownloadBoxOutline,
+  mdiDownloadOutline,
   mdiDropbox,
   mdiEarth,
   mdiEmail,

@@ -5,7 +5,6 @@
       class="py-16"
       justify="center"
     >
-
       <v-col cols="12" md="6">
         <v-chip color="primary">
           #1 Vue UI Library

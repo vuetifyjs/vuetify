@@ -10,27 +10,21 @@ meta:
 
 <v-divider />
 
-<HomeFeatures class="py-16" />
+<HomeFeatures />
 
 <HomeStats class="mb-16" />
 
 <v-divider />
 
-<HomeComponentGallery class="py-16" />
-
-<v-divider />
-
-<HomeSpecialSponsor />
-
-<br>
-
-## Project Sponsors
-
-The continued development and maintenance of Vuetify is made possible by these generous sponsors:{style="max-width: 568px" .mx-auto .px-4}
+<HomeComponentGallery />
 
 <HomeSponsors />
 
-<v-divider style="max-width: 500px;" class="mx-auto my-16" />
+<v-divider />
+
+<HomeFreeThemes />
+
+<v-divider style="max-width: 500px;" class="mx-auto mb-16" />
 
 ## Templates Built With Vuetify
 
