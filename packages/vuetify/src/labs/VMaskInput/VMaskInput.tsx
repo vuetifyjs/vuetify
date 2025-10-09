@@ -47,7 +47,7 @@ export const VMaskInput = genericComponent<VMaskInputSlots>()({
       val => props.mask ? mask.mask(mask.unmask(val)) : val,
       val => {
         if (props.mask) {
-          const valueWithoutDelimiters = removeMaskDelimiters(val === null ? '' : val)
+          const valueWithoutDelimiters = val ? removeMaskDelimiters(val) : ''
 
           // E.g. mask is #-# and the input value is '2-23'
           // model-value should be enforced to '2-2'
