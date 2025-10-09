@@ -1,5 +1,5 @@
 <template>
-  <v-responsive>
+  <v-responsive class="pb-16">
     <v-container>
       <v-row align="start">
         <v-col
