@@ -1,6 +1,8 @@
+@use '../../styles/settings';
+
 // VKbd
 // Kbd elements naturally use monospace fonts, if users want to change this, they can do so by setting the font-family on the v-kbd element.
-$kbd-font-family: "Roboto", sans-serif !default;
+$kbd-font-family: settings.$body-font-family !default;
 $kbd-border-radius: 4px !default;
 $kbd-display: inline-flex !default;
 $kbd-elevation: 1 !default;

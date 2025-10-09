@@ -345,7 +345,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
     }
 
     useRender(() => {
-      const { modelValue: _, ...textFieldProps } = VTextField.filterProps(props)
+      const { modelValue: _, type, ...textFieldProps } = VTextField.filterProps(props)
 
       function incrementControlNode () {
         return !slots.increment ? (

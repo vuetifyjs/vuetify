@@ -6,7 +6,6 @@ import {
   resolveDynamicComponent,
   toRef,
 } from 'vue'
-import { isNavigationFailure } from 'vue-router'
 import { deepEqual, getCurrentInstance, hasEvent, IN_BROWSER, propsFactory } from '@/util'
 
 // Types
@@ -36,6 +35,7 @@ export interface LinkProps {
   replace: boolean | undefined
   to: RouteLocationRaw | undefined
   exact: boolean | undefined
+  disabled: boolean | undefined
 }
 
 export interface LinkListeners {
@@ -45,10 +45,10 @@ export interface LinkListeners {
 
 export interface UseLink extends Omit<Partial<ReturnType<typeof _useLink>>, 'href'> {
   isLink: Readonly<Ref<boolean>>
+  isRouterLink: Readonly<Ref<boolean>>
   isClickable: Readonly<Ref<boolean>>
   href: Ref<string | undefined>
   linkProps: Record<string, string | undefined>
-  navigateWithCheck?: (e: MouseEvent | undefined) => Promise<boolean>
 }
 
 export function useLink (props: LinkProps & LinkListeners, attrs: SetupContext['attrs']): UseLink {
@@ -63,6 +63,7 @@ export function useLink (props: LinkProps & LinkListeners, attrs: SetupContext['
     const href = toRef(() => props.href)
     return {
       isLink,
+      isRouterLink: toRef(() => false),
       isClickable,
       href,
       linkProps: reactive({ href }),
@@ -85,23 +86,21 @@ export function useLink (props: LinkProps & LinkListeners, attrs: SetupContext['
     return link.value.isExactActive?.value && deepEqual(link.value.route.value.query, route.value.query)
   })
   const href = computed(() => props.to ? link.value?.route.value.href : props.href)
-
-  async function navigateWithCheck (e: MouseEvent | undefined) {
-    const result = await link.value?.navigate(e)
-    return !isNavigationFailure(result)
-  }
+  const isRouterLink = toRef(() => !!props.to)
 
   return {
     isLink,
+    isRouterLink,
     isClickable,
     isActive,
     route: link.value?.route,
     navigate: link.value?.navigate,
-    navigateWithCheck,
     href,
     linkProps: reactive({
       href,
       'aria-current': toRef(() => isActive.value ? 'page' : undefined),
+      'aria-disabled': toRef(() => props.disabled && isLink.value ? 'true' : undefined),
+      tabindex: toRef(() => props.disabled && isLink.value ? '-1' : undefined),
     }),
   }
 }

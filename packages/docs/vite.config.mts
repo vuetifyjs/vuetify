@@ -386,6 +386,9 @@ export default defineConfig(({ command, mode, isSsrBuild }) => {
 
     server: {
       port: +(process.env.PORT ?? 8095),
+      warmup: {
+        clientFiles: ['./index.html'],
+      },
     },
   }
 })

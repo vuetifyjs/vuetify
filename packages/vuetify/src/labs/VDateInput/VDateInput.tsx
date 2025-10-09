@@ -67,7 +67,14 @@ export const makeVDateInputProps = propsFactory({
   ...omit(makeVDatePickerProps({
     hideHeader: true,
     showAdjacentMonths: true,
-  }), ['active', 'location', 'rounded']),
+  }), [
+    'active',
+    'location',
+    'rounded',
+    'height',
+    'minHeight',
+    'maxHeight',
+  ]),
 }, 'VDateInput')
 
 export const VDateInput = genericComponent<new <
@@ -246,7 +253,16 @@ export const VDateInput = genericComponent<new <
 
     useRender(() => {
       const confirmEditProps = VConfirmEdit.filterProps(props)
-      const datePickerProps = VDatePicker.filterProps(omit(props, ['active', 'location', 'rounded']))
+      const datePickerProps = VDatePicker.filterProps(omit(props, [
+        'active',
+        'bgColor',
+        'color',
+        'location',
+        'rounded',
+        'maxWidth',
+        'minWidth',
+        'width',
+      ]))
       const datePickerSlots = pick(slots, ['title', 'header', 'day', 'month', 'year'])
       const textFieldProps = VTextField.filterProps(omit(props, ['placeholder']))
 

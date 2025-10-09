@@ -358,7 +358,7 @@ export const VSelect = genericComponent<new <
       }
     })
 
-    watch(() => props.items, (newVal, oldVal) => {
+    watch(items, (newVal, oldVal) => {
       if (menu.value) return
 
       if (isFocused.value && props.hideNoData && !oldVal.length && newVal.length) {
