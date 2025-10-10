@@ -6,7 +6,7 @@ import { VListItem } from '@/components/VList'
 // Utilities
 import { commands, generate, render, screen, userEvent, waitForClickable } from '@test'
 import { getAllByRole } from '@testing-library/vue'
-import { cloneVNode, nextTick, ref } from 'vue'
+import { cloneVNode, computed, nextTick, ref } from 'vue'
 
 const variants = ['underlined', 'outlined', 'filled', 'solo', 'plain'] as const
 const densities = ['default', 'comfortable', 'compact'] as const
@@ -750,6 +750,83 @@ describe('VSelect', () => {
 
     expect(inputField).toHaveAttribute('aria-expanded', 'false')
     expect(inputField).toHaveAttribute('aria-label', 'Open')
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/22052
+  it('should keep the state in sync for checkboxes if all other checkboxes are selected except for All', async () => {
+    type OptionValue = number | 'all'
+
+    const titles = ['Sunday', 'Monday']
+    const dayOptions = computed(() => [
+      { title: 'All', value: 'all' as OptionValue },
+      ...Array.from({ length: 2 }, (_, i) => ({ title: titles[i], value: i as OptionValue })),
+    ])
+    const model = ref<number[]>([])
+    const selectModel = computed<OptionValue[]>({
+      get () {
+        return model.value.length === 2 ? ['all'] : [...model.value]
+      },
+      set (value: OptionValue[]) {
+        if (value?.includes('all')) {
+          model.value = [0, 1]
+        } else {
+          model.value = value as number[]
+        }
+      },
+    })
+
+    const { element } = render(() => (
+      <VSelect
+        v-model={ selectModel.value }
+        items={ dayOptions.value }
+        multiple
+        chips
+        closableChips
+        itemProps={ (item: any) =>
+          (selectModel.value?.includes('all') && item.value !== 'all') ? { disabled: true } : {}
+        }
+        menuProps={{ maxHeight: undefined }}
+      />
+    ))
+
+    await userEvent.click(element)
+    await commands.waitStable('.v-list')
+
+    const options = screen.getAllByRole('option')
+    expect(options).toHaveLength(3)
+
+    for (let index = 1; index < options.length; index++) {
+      const option = options[index]
+      const checkbox =
+        (option.querySelector('.v-checkbox-btn input') as HTMLInputElement) ||
+        (option.querySelector('input[type="checkbox"]') as HTMLInputElement)
+      expect(checkbox).toBeTruthy()
+      await new Promise(resolve => setTimeout(resolve, 50))
+      await userEvent.click(checkbox!)
+      await nextTick()
+    }
+
+    expect(model.value).toStrictEqual([0, 1])
+    expect(selectModel.value).toStrictEqual(['all'])
+
+    // other options except All should be disabled and unchecked
+    for (let index = 1; index < options.length; index++) {
+      const option = options[index]
+      const checkbox =
+        (option.querySelector('.v-checkbox-btn input') as HTMLInputElement) ||
+        (option.querySelector('input[type="checkbox"]') as HTMLInputElement)
+      expect(checkbox).toBeTruthy()
+
+      const isDisabled =
+        option.getAttribute('aria-disabled') === 'true' ||
+        option.classList.contains('v-list-item--disabled')
+      expect(isDisabled).toBe(true)
+      expect(checkbox.checked).toBe(false)
+    }
+
+    const selectedOptions = screen.getAllByRole('option', { selected: true })
+    expect(selectedOptions).toHaveLength(1)
+    expect(selectedOptions[0]).toHaveTextContent('All')
   })
 
   describe('Showcase', () => {
