@@ -124,6 +124,14 @@ export default {
     notEmpty: 'Vælg venligst mindst én værdi',
     pattern: 'Ugyldigt format',
   },
+  command: {
+    select: 'for at vælge',
+    navigate: 'for at navigere',
+    goBack: 'for at gå tilbage',
+    close: 'for at lukke',
+    then: 'derefter',
+    placeholder: 'Skriv en kommando eller søg...',
+  },
   hotkey: {
     then: 'derefter',
     ctrl: 'Ctrl',

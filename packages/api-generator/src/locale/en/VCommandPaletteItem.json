@@ -1,0 +1,11 @@
+{
+  "props": {
+    "item": "The command palette item data object to render. This should be one of the items from the command palette's items array.",
+    "index": "The zero-based index of this item in the selectable items list. Used for keyboard navigation and ARIA attributes.",
+    "tag": "HTML tag to use for the root element. Defaults to 'div'."
+  },
+  "slots": {
+    "default": "Provides complete control over item rendering within custom layouts. Scoped slot receives: `item` (raw item data), `index` (item position), `selected` (boolean selection state), `props` (computed accessibility and styling props)."
+  },
+  "events": {}
+}
