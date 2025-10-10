@@ -467,6 +467,7 @@ export const VSelect = genericComponent<new <
                             key: item.value,
                             onClick: () => select(item, null),
                           })
+                          const itemPropsClickHandler = itemProps.onClick as unknown as (() => void) | undefined
 
                           if (item.type === 'divider') {
                             return slots.divider?.({ props: item.raw, index }) ?? (
@@ -499,7 +500,7 @@ export const VSelect = genericComponent<new <
                                         onClick={ (event: MouseEvent) => {
                                           event.stopPropagation()
                                           event.preventDefault()
-                                          itemProps.onClick?.()
+                                          itemPropsClickHandler?.()
                                         } }
                                       />
                                     ) : undefined }
