@@ -6,7 +6,7 @@ import { VListItem } from '@/components/VList'
 // Utilities
 import { commands, generate, render, screen, userEvent, waitForClickable } from '@test'
 import { getAllByRole } from '@testing-library/vue'
-import { cloneVNode, nextTick, ref } from 'vue'
+import { cloneVNode, computed, nextTick, ref } from 'vue'
 
 const variants = ['underlined', 'outlined', 'filled', 'solo', 'plain'] as const
 const densities = ['default', 'comfortable', 'compact'] as const
@@ -750,6 +750,75 @@ describe('VSelect', () => {
 
     expect(inputField).toHaveAttribute('aria-expanded', 'false')
     expect(inputField).toHaveAttribute('aria-label', 'Open')
+  })
+
+  it('selects Every Day when clicking all day checkboxes and disables other items', async () => {
+    type OptionValue = number | 'everyDay'
+
+    const weekDayTitles = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+    const dayOptions = computed(() => [
+      { title: 'Every Day', value: 'everyDay' as OptionValue },
+      ...Array.from({ length: 7 }, (_, i) => ({ title: weekDayTitles[i], value: i as OptionValue })),
+    ])
+    const model = ref<number[]>([])
+    const selectModel = computed<OptionValue[]>({
+      get() {
+        return model.value.length === 7 ? ['everyDay'] : [...model.value]
+      },
+      set(value: OptionValue[]) {
+        if (value.includes('everyDay')) {
+          model.value = [0, 1, 2, 3, 4, 5, 6]
+        } else {
+          model.value = value as number[]
+        }
+      },
+    })
+
+    const { element } = render(() => (
+      <VSelect
+        v-model={selectModel.value}
+        items={dayOptions.value}
+        multiple
+        chips
+        closableChips
+        itemProps={(item: any) =>
+          (selectModel.value.includes('everyDay') && item.value !== 'everyDay') ? { disabled: true } : {}
+        }
+        menuProps={{ maxHeight: undefined }}
+      />
+    ))
+
+    await userEvent.click(element)
+    await commands.waitStable('.v-list')
+
+    const options = screen.getAllByRole('option')
+    expect(options).toHaveLength(8)
+
+    for (let index = 1; index < options.length; index++) {
+      const option = options[index]
+      const checkbox = option.querySelector('.v-checkbox-btn input') as HTMLInputElement || option.querySelector('input[type="checkbox"]') as HTMLInputElement
+      expect(checkbox).toBeTruthy()
+      await waitForClickable(checkbox)
+      await userEvent.click(checkbox)
+    }
+
+    await nextTick()
+    await commands.waitStable('.v-list')
+
+    expect(model.value).toStrictEqual([0, 1, 2, 3, 4, 5, 6])
+    expect(selectModel.value).toStrictEqual(['everyDay'])
+
+    const selectedOptions = screen.getAllByRole('option', { selected: true })
+    expect(selectedOptions).toHaveLength(1)
+    expect(selectedOptions[0]).toHaveTextContent('Every Day')
+
+    for (let index = 1; index < options.length; index++) {
+      const opt = options[index]
+      expect(opt).toHaveAttribute('aria-disabled', 'true')
+      const checkbox = opt.querySelector('.v-checkbox-btn input') as HTMLInputElement || opt.querySelector('input[type="checkbox"]') as HTMLInputElement
+      expect(checkbox).toBeTruthy()
+      expect(checkbox.checked).toBe(false)
+    }
   })
 
   describe('Showcase', () => {
