@@ -501,7 +501,7 @@ export const VSelect = genericComponent<new <
                                           event.stopPropagation()
                                           event.preventDefault()
                                           itemPropsClickHandler?.()
-                                        } }
+                                        }}
                                       />
                                     ) : undefined }
 
