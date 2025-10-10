@@ -762,10 +762,10 @@ describe('VSelect', () => {
     ])
     const model = ref<number[]>([])
     const selectModel = computed<OptionValue[]>({
-      get() {
+      get () {
         return model.value.length === 7 ? ['everyDay'] : [...model.value]
       },
-      set(value: OptionValue[]) {
+      set (value: OptionValue[]) {
         if (value.includes('everyDay')) {
           model.value = [0, 1, 2, 3, 4, 5, 6]
         } else {
@@ -776,12 +776,12 @@ describe('VSelect', () => {
 
     const { element } = render(() => (
       <VSelect
-        v-model={selectModel.value}
-        items={dayOptions.value}
+        v-model={ selectModel.value }
+        items={ dayOptions.value }
         multiple
         chips
         closableChips
-        itemProps={(item: any) =>
+        itemProps={ (item: any) =>
           (selectModel.value.includes('everyDay') && item.value !== 'everyDay') ? { disabled: true } : {}
         }
         menuProps={{ maxHeight: undefined }}
@@ -796,7 +796,9 @@ describe('VSelect', () => {
 
     for (let index = 1; index < options.length; index++) {
       const option = options[index]
-      const checkbox = option.querySelector('.v-checkbox-btn input') as HTMLInputElement || option.querySelector('input[type="checkbox"]') as HTMLInputElement
+      const checkbox =
+        (option.querySelector('.v-checkbox-btn input') as HTMLInputElement) ||
+        (option.querySelector('input[type="checkbox"]') as HTMLInputElement)
       expect(checkbox).toBeTruthy()
       await waitForClickable(checkbox)
       await userEvent.click(checkbox)
@@ -815,7 +817,9 @@ describe('VSelect', () => {
     for (let index = 1; index < options.length; index++) {
       const opt = options[index]
       expect(opt).toHaveAttribute('aria-disabled', 'true')
-      const checkbox = opt.querySelector('.v-checkbox-btn input') as HTMLInputElement || opt.querySelector('input[type="checkbox"]') as HTMLInputElement
+      const checkbox =
+        (opt.querySelector('.v-checkbox-btn input') as HTMLInputElement) ||
+        (opt.querySelector('input[type="checkbox"]') as HTMLInputElement)
       expect(checkbox).toBeTruthy()
       expect(checkbox.checked).toBe(false)
     }
