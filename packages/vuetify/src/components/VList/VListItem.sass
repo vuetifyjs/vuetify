@@ -347,8 +347,7 @@
       &--link[href]:not(&--active)
         color: unset
 
-      &--variant-text.v-list-item--active:not(&--disabled),
-      &--variant-plain.v-list-item--active:not(&--disabled)
+      &--active:not(&--disabled)
         [class*="v-list-item-"],
         [class*="v-list-item-"] > *,
         .v-icon
@@ -363,7 +362,7 @@
           opacity: 1
           color: highlighttext !important
           forced-color-adjust: preserve-parent-color
- 
+
       @supports selector(:focus-visible)
         &::after
           color: buttontext
