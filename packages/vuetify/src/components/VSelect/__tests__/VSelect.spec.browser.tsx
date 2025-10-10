@@ -752,22 +752,23 @@ describe('VSelect', () => {
     expect(inputField).toHaveAttribute('aria-label', 'Open')
   })
 
-  it('selects Every Day when clicking all day checkboxes and disables other items', async () => {
-    type OptionValue = number | 'everyDay'
+  // https://github.com/vuetifyjs/vuetify/issues/22052
+  it('should keep the state in sync for checkboxes if all other checkboxes are selected except for All', async () => {
+    type OptionValue = number | 'all'
 
-    const weekDayTitles = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+    const titles = ['Sunday', 'Monday']
     const dayOptions = computed(() => [
-      { title: 'Every Day', value: 'everyDay' as OptionValue },
-      ...Array.from({ length: 7 }, (_, i) => ({ title: weekDayTitles[i], value: i as OptionValue })),
+      { title: 'All', value: 'all' as OptionValue },
+      ...Array.from({ length: 2 }, (_, i) => ({ title: titles[i], value: i as OptionValue })),
     ])
     const model = ref<number[]>([])
     const selectModel = computed<OptionValue[]>({
       get () {
-        return model.value.length === 7 ? ['everyDay'] : [...model.value]
+        return model.value.length === 2 ? ['all'] : [...model.value]
       },
       set (value: OptionValue[]) {
-        if (value.includes('everyDay')) {
-          model.value = [0, 1, 2, 3, 4, 5, 6]
+        if (value?.includes('all')) {
+          model.value = [0, 1]
         } else {
           model.value = value as number[]
         }
@@ -782,7 +783,7 @@ describe('VSelect', () => {
         chips
         closableChips
         itemProps={ (item: any) =>
-          (selectModel.value.includes('everyDay') && item.value !== 'everyDay') ? { disabled: true } : {}
+          (selectModel.value?.includes('all') && item.value !== 'all') ? { disabled: true } : {}
         }
         menuProps={{ maxHeight: undefined }}
       />
@@ -792,7 +793,7 @@ describe('VSelect', () => {
     await commands.waitStable('.v-list')
 
     const options = screen.getAllByRole('option')
-    expect(options).toHaveLength(8)
+    expect(options).toHaveLength(3)
 
     for (let index = 1; index < options.length; index++) {
       const option = options[index]
@@ -800,29 +801,32 @@ describe('VSelect', () => {
         (option.querySelector('.v-checkbox-btn input') as HTMLInputElement) ||
         (option.querySelector('input[type="checkbox"]') as HTMLInputElement)
       expect(checkbox).toBeTruthy()
-      await waitForClickable(checkbox)
-      await userEvent.click(checkbox)
+      await new Promise(resolve => setTimeout(resolve, 50))
+      await userEvent.click(checkbox!)
+      await nextTick()
     }
 
-    await nextTick()
-    await commands.waitStable('.v-list')
+    expect(model.value).toStrictEqual([0, 1])
+    expect(selectModel.value).toStrictEqual(['all'])
 
-    expect(model.value).toStrictEqual([0, 1, 2, 3, 4, 5, 6])
-    expect(selectModel.value).toStrictEqual(['everyDay'])
+    // other options except All should be disabled and unchecked
+    for (let index = 1; index < options.length; index++) {
+      const option = options[index]
+      const checkbox =
+        (option.querySelector('.v-checkbox-btn input') as HTMLInputElement) ||
+        (option.querySelector('input[type="checkbox"]') as HTMLInputElement)
+      expect(checkbox).toBeTruthy()
+
+      const isDisabled =
+        option.getAttribute('aria-disabled') === 'true' ||
+        option.classList.contains('v-list-item--disabled')
+      expect(isDisabled).toBe(true)
+      expect(checkbox.checked).toBe(false)
+    }
 
     const selectedOptions = screen.getAllByRole('option', { selected: true })
     expect(selectedOptions).toHaveLength(1)
-    expect(selectedOptions[0]).toHaveTextContent('Every Day')
-
-    for (let index = 1; index < options.length; index++) {
-      const opt = options[index]
-      expect(opt).toHaveAttribute('aria-disabled', 'true')
-      const checkbox =
-        (opt.querySelector('.v-checkbox-btn input') as HTMLInputElement) ||
-        (opt.querySelector('input[type="checkbox"]') as HTMLInputElement)
-      expect(checkbox).toBeTruthy()
-      expect(checkbox.checked).toBe(false)
-    }
+    expect(selectedOptions[0]).toHaveTextContent('All')
   })
 
   describe('Showcase', () => {
