@@ -778,16 +778,15 @@ describe('VSelect', () => {
     ))
 
     await userEvent.click(element)
-    await commands.waitStable('.v-list')
+    await wait(100)
 
     const options = screen.getAllByRole('option')
     expect(options).toHaveLength(3)
 
     await userEvent.click(screen.getAllByCSS('.v-checkbox-btn input')[1])
     await userEvent.click(screen.getAllByCSS('.v-checkbox-btn input')[2])
-    await nextTick()
 
-    expect(model.value).toStrictEqual(['a', 'b'])
+    await expect.poll(() => model.value).toStrictEqual(['a', 'b'])
     expect(selectModel.value).toStrictEqual(['both'])
     expect(screen.getAllByCSS('.v-checkbox-btn input')[0]).toBeChecked()
     expect(screen.getAllByCSS('.v-checkbox-btn input:checked')).toHaveLength(1)
