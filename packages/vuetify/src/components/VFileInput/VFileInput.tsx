@@ -295,10 +295,11 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
                   ...slots,
                   default: ({
                     props: { class: fieldClass, ...slotProps },
+                    controlRef,
                   }) => (
                     <>
                       <input
-                        ref={ inputRef }
+                        ref={ val => inputRef.value = controlRef.value = val as HTMLInputElement }
                         type="file"
                         accept={ inputAccept }
                         readonly={ isReadonly.value }
