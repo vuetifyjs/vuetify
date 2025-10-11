@@ -341,26 +341,28 @@
 
   @media (forced-colors: active)
     .v-list-item
-      &:not(&--active)
+      &--link:not(&--active)
         color: buttontext
 
-      &--variant-plain.v-list-item--active
-        color: highlight !important
+      &--link[href]:not(&--active)
+        color: unset
 
-      &:not(&--variant-plain).v-list-item--active
-        background-color: highlight !important
-        color: highlighttext !important
+      &--active:not(&--disabled)
+        [class*="v-list-item-"],
+        [class*="v-list-item-"] > *,
+        .v-icon
+          color: highlight !important
 
-      &-title
-        forced-color-adjust: preserve-parent-color
-        
-      &--active
-        .v-list-item__prepend,
-        .v-list-item__append
-          > .v-badge .v-icon,
-          > .v-icon
-            forced-color-adjust: preserve-parent-color
- 
+      &--active:not(&--variant-text, &--variant-plain):not(&--disabled)
+        background: highlight !important
+
+        [class*="v-list-item-"],
+        [class*="v-list-item-"] > *,
+        .v-icon
+          opacity: 1
+          color: highlighttext !important
+          forced-color-adjust: preserve-parent-color
+
       @supports selector(:focus-visible)
         &::after
           color: buttontext
