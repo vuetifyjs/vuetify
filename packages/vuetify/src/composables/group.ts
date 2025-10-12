@@ -128,7 +128,7 @@ export function useGroupItem (
     group?.unregister(id)
   }
 
-  onMounted(() => register())
+  register()
   onBeforeUnmount(() => unregister())
 
   const isSelected = computed(() => {
