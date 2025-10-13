@@ -107,8 +107,18 @@ export const VDateInput = genericComponent<new <
   setup (props, { emit, slots }) {
     const { t, current: currentLocale } = useLocale()
     const adapter = useDate()
-    const { isValid, parseDate, formatDate, parserFormat } = useDateFormat(props, currentLocale)
+    const { isValid: _isValid, parseDate, formatDate, parserFormat } = useDateFormat(props, currentLocale)
     const { mobile } = useDisplay(props)
+
+    const isValid = (text: string): boolean => {
+      if (!_isValid(text)) {
+        return false
+      }
+      if (props.max && adapter.isAfter(parseDate(text), props.max)) {
+        return false
+      }
+      return !!props.min && adapter.isBefore(props.min, parseDate(text))
+    }
 
     const emptyModelValue = () => props.multiple ? [] : null
 
