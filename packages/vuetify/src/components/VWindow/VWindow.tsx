@@ -15,7 +15,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import vTouch from '@/directives/touch'
 
 // Utilities
-import { computed, provide, ref, shallowRef, toRef, watch } from 'vue'
+import { computed, nextTick, provide, ref, shallowRef, toRef, watch } from 'vue'
 import { convertToUnit, genericComponent, PREFERS_REDUCED_MOTION, propsFactory, useRender } from '@/util'
 
 // Types
@@ -139,7 +139,14 @@ export const VWindow = genericComponent<new <T>(
       return group.items.value.findIndex(item => group.selected.value.includes(item.id))
     })
 
+    // Fix for #18447
+    const savedScrollPosition = ref<{ x: number, y: number } | null>(null)
+
     watch(activeIndex, (newVal, oldVal) => {
+      const scrollX = typeof window !== 'undefined' ? (window as any).scrollX || 0 : 0
+      const scrollY = typeof window !== 'undefined' ? (window as any).scrollY || 0 : 0
+      savedScrollPosition.value = { x: scrollX, y: scrollY }
+
       const itemsLength = group.items.value.length
       const lastIndex = itemsLength - 1
 
@@ -152,7 +159,23 @@ export const VWindow = genericComponent<new <T>(
       } else {
         isReversed.value = newVal < oldVal
       }
-    })
+
+      nextTick(() => {
+        const currentScrollY = typeof window !== 'undefined' ? (window as any).scrollY || 0 : 0
+
+        if (savedScrollPosition.value && currentScrollY !== savedScrollPosition.value.y) {
+          (window as any).scrollTo(savedScrollPosition.value.x, savedScrollPosition.value.y)
+        }
+
+        requestAnimationFrame(() => {
+          const rafScrollY = typeof window !== 'undefined' ? (window as any).scrollY || 0 : 0
+
+          if (savedScrollPosition.value && rafScrollY !== savedScrollPosition.value.y) {
+            (window as any).scrollTo(savedScrollPosition.value.x, savedScrollPosition.value.y)
+          }
+        })
+      })
+    }, { flush: 'sync' }) // Run synchronously before DOM updates
 
     provide(VWindowSymbol, {
       transition,

@@ -81,8 +81,8 @@ export const VWindowItem = genericComponent()({
       isTransitioning.value = true
 
       if (window.transitionCount.value === 0) {
-        // Set initial height for height transition.
-        window.transitionHeight.value = convertToUnit(window.rootRef.value?.clientHeight)
+        const currentHeight = window.rootRef.value?.clientHeight
+        window.transitionHeight.value = convertToUnit(currentHeight)
       }
 
       window.transitionCount.value += 1
@@ -103,8 +103,8 @@ export const VWindowItem = genericComponent()({
           return
         }
 
-        // Set transition target height.
-        window.transitionHeight.value = convertToUnit(el.clientHeight)
+        const targetHeight = el.clientHeight
+        window.transitionHeight.value = convertToUnit(targetHeight)
       })
     }
 
