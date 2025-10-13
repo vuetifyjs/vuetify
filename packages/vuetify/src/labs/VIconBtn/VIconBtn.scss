@@ -39,6 +39,26 @@
           opacity: calc(.25 * var(--v-theme-overlay-multiplier));
         }
       }
+
+      @media (forced-colors: active) {
+        &:focus-visible {
+          outline: 2px solid;
+          outline-offset: 2px;
+        }
+
+        &:not(&--active):hover,
+        &:not(&--active):focus {
+          color: highlight !important;
+        }
+
+        &--active,
+        &--active[class*="bg-"]
+        {
+          outline-color: canvastext !important;
+          background: highlight !important;
+          color: highlighttext !important;
+        }
+      }
     }
 
     &--disabled,
@@ -49,6 +69,10 @@
 
     &--disabled {
       opacity: $icon-btn-disabled-opacity;
+
+      @media (forced-colors: active) {
+        color: graytext;
+      }
     }
 
     &--start {
@@ -76,6 +100,10 @@
       transition: 0.2s settings.$standard-easing;
       transition-property: opacity, font-size, width, height;
       transform-origin: center;
+    
+      @media (forced-colors: active) {
+        forced-color-adjust: preserve-parent-color;
+      }
     }
   }
 
@@ -96,6 +124,10 @@
     pointer-events: none;
 
     @include tools.absolute();
+
+    @media (forced-colors: active) {
+      forced-color-adjust: preserve-parent-color;
+    }
   }
 
   .v-icon-btn__overlay {
