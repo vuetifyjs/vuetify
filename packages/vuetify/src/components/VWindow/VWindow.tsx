@@ -16,7 +16,7 @@ import vTouch from '@/directives/touch'
 
 // Utilities
 import { computed, nextTick, provide, ref, shallowRef, toRef, watch } from 'vue'
-import { convertToUnit, genericComponent, PREFERS_REDUCED_MOTION, propsFactory, useRender } from '@/util'
+import { convertToUnit, genericComponent, IN_BROWSER, PREFERS_REDUCED_MOTION, propsFactory, useRender } from '@/util'
 
 // Types
 import type { ComputedRef, InjectionKey, PropType, Ref } from 'vue'
@@ -143,8 +143,8 @@ export const VWindow = genericComponent<new <T>(
     const savedScrollPosition = ref<{ x: number, y: number } | null>(null)
 
     watch(activeIndex, (newVal, oldVal) => {
-      const scrollX = typeof window !== 'undefined' ? (window as any).scrollX || 0 : 0
-      const scrollY = typeof window !== 'undefined' ? (window as any).scrollY || 0 : 0
+      const scrollX = IN_BROWSER ? window.scrollX : 0
+      const scrollY = IN_BROWSER ? window.scrollY : 0
       savedScrollPosition.value = { x: scrollX, y: scrollY }
 
       const itemsLength = group.items.value.length
@@ -161,17 +161,19 @@ export const VWindow = genericComponent<new <T>(
       }
 
       nextTick(() => {
-        const currentScrollY = typeof window !== 'undefined' ? (window as any).scrollY || 0 : 0
+        if (!IN_BROWSER) return
+
+        const currentScrollY = window.scrollY
 
         if (savedScrollPosition.value && currentScrollY !== savedScrollPosition.value.y) {
-          (window as any).scrollTo(savedScrollPosition.value.x, savedScrollPosition.value.y)
+          window.scrollTo(savedScrollPosition.value.x, savedScrollPosition.value.y)
         }
 
         requestAnimationFrame(() => {
-          const rafScrollY = typeof window !== 'undefined' ? (window as any).scrollY || 0 : 0
+          const rafScrollY = window.scrollY
 
           if (savedScrollPosition.value && rafScrollY !== savedScrollPosition.value.y) {
-            (window as any).scrollTo(savedScrollPosition.value.x, savedScrollPosition.value.y)
+            window.scrollTo(savedScrollPosition.value.x, savedScrollPosition.value.y)
           }
         })
       })
