@@ -141,7 +141,7 @@ export const VWindow = genericComponent<new <T>(
 
     // Fix for https://github.com/vuetifyjs/vuetify/issues/18447
     watch(activeIndex, (newVal, oldVal) => {
-      let scrollableParent: HTMLElement | Window = window
+      let scrollableParent: HTMLElement | undefined
       const savedScrollPosition = { x: 0, y: 0 }
 
       if (IN_BROWSER) {
@@ -157,14 +157,12 @@ export const VWindow = genericComponent<new <T>(
           parent = parent.parentElement
         }
 
+        // Default to document root if no scrollable parent found
+        if (!scrollableParent) scrollableParent = document.documentElement
+
         // Save current scroll position
-        if (scrollableParent === window) {
-          savedScrollPosition.x = window.scrollX
-          savedScrollPosition.y = window.scrollY
-        } else {
-          savedScrollPosition.x = (scrollableParent as HTMLElement).scrollLeft
-          savedScrollPosition.y = (scrollableParent as HTMLElement).scrollTop
-        }
+        savedScrollPosition.x = scrollableParent.scrollLeft
+        savedScrollPosition.y = scrollableParent.scrollTop
       }
 
       const itemsLength = group.items.value.length
@@ -181,33 +179,21 @@ export const VWindow = genericComponent<new <T>(
       }
 
       nextTick(() => {
-        if (!IN_BROWSER) return
+        if (!IN_BROWSER || !scrollableParent) return
 
-        const currentScrollY = scrollableParent === window
-          ? window.scrollY
-          : (scrollableParent as HTMLElement).scrollTop
+        const currentScrollY = scrollableParent.scrollTop
 
         if (currentScrollY !== savedScrollPosition.y) {
-          if (scrollableParent === window) {
-            window.scrollTo(savedScrollPosition.x, savedScrollPosition.y)
-          } else {
-            (scrollableParent as HTMLElement).scrollLeft = savedScrollPosition.x
-            ;(scrollableParent as HTMLElement).scrollTop = savedScrollPosition.y
-          }
+          scrollableParent.scrollTo({ left: savedScrollPosition.x, top: savedScrollPosition.y, behavior: 'instant' })
         }
 
         requestAnimationFrame(() => {
-          const rafScrollY = scrollableParent === window
-            ? window.scrollY
-            : (scrollableParent as HTMLElement).scrollTop
+          if (!scrollableParent) return
+
+          const rafScrollY = scrollableParent.scrollTop
 
           if (rafScrollY !== savedScrollPosition.y) {
-            if (scrollableParent === window) {
-              window.scrollTo(savedScrollPosition.x, savedScrollPosition.y)
-            } else {
-              (scrollableParent as HTMLElement).scrollLeft = savedScrollPosition.x
-              ;(scrollableParent as HTMLElement).scrollTop = savedScrollPosition.y
-            }
+            scrollableParent.scrollTo({ left: savedScrollPosition.x, top: savedScrollPosition.y, behavior: 'instant' })
           }
         })
       })
