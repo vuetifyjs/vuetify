@@ -16,7 +16,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, nextTick, onMounted, ref, shallowRef, toRef, watch, watchEffect } from 'vue'
-import { clamp, consoleError, escapeForRegex, extractNumber, genericComponent, omit, propsFactory, useRender } from '@/util'
+import { clamp, escapeForRegex, extractNumber, genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
