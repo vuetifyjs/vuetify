@@ -140,12 +140,32 @@ export const VWindow = genericComponent<new <T>(
     })
 
     // Fix for https://github.com/vuetifyjs/vuetify/issues/18447
-    const savedScrollPosition = ref<{ x: number, y: number } | null>(null)
-
     watch(activeIndex, (newVal, oldVal) => {
-      const scrollX = IN_BROWSER ? window.scrollX : 0
-      const scrollY = IN_BROWSER ? window.scrollY : 0
-      savedScrollPosition.value = { x: scrollX, y: scrollY }
+      let scrollableParent: HTMLElement | Window = window
+      const savedScrollPosition = { x: 0, y: 0 }
+
+      if (IN_BROWSER) {
+        // Find the first scrollable parent
+        let parent = rootRef.value?.parentElement
+        while (parent) {
+          const { overflowY, overflowX } = window.getComputedStyle(parent)
+          const isScrollable = /(auto|scroll)/.test(overflowY + overflowX)
+          if (isScrollable && (parent.scrollHeight > parent.clientHeight || parent.scrollWidth > parent.clientWidth)) {
+            scrollableParent = parent
+            break
+          }
+          parent = parent.parentElement
+        }
+
+        // Save current scroll position
+        if (scrollableParent === window) {
+          savedScrollPosition.x = window.scrollX
+          savedScrollPosition.y = window.scrollY
+        } else {
+          savedScrollPosition.x = (scrollableParent as HTMLElement).scrollLeft
+          savedScrollPosition.y = (scrollableParent as HTMLElement).scrollTop
+        }
+      }
 
       const itemsLength = group.items.value.length
       const lastIndex = itemsLength - 1
@@ -163,17 +183,31 @@ export const VWindow = genericComponent<new <T>(
       nextTick(() => {
         if (!IN_BROWSER) return
 
-        const currentScrollY = window.scrollY
+        const currentScrollY = scrollableParent === window
+          ? window.scrollY
+          : (scrollableParent as HTMLElement).scrollTop
 
-        if (savedScrollPosition.value && currentScrollY !== savedScrollPosition.value.y) {
-          window.scrollTo(savedScrollPosition.value.x, savedScrollPosition.value.y)
+        if (currentScrollY !== savedScrollPosition.y) {
+          if (scrollableParent === window) {
+            window.scrollTo(savedScrollPosition.x, savedScrollPosition.y)
+          } else {
+            (scrollableParent as HTMLElement).scrollLeft = savedScrollPosition.x
+            ;(scrollableParent as HTMLElement).scrollTop = savedScrollPosition.y
+          }
         }
 
         requestAnimationFrame(() => {
-          const rafScrollY = window.scrollY
+          const rafScrollY = scrollableParent === window
+            ? window.scrollY
+            : (scrollableParent as HTMLElement).scrollTop
 
-          if (savedScrollPosition.value && rafScrollY !== savedScrollPosition.value.y) {
-            window.scrollTo(savedScrollPosition.value.x, savedScrollPosition.value.y)
+          if (rafScrollY !== savedScrollPosition.y) {
+            if (scrollableParent === window) {
+              window.scrollTo(savedScrollPosition.x, savedScrollPosition.y)
+            } else {
+              (scrollableParent as HTMLElement).scrollLeft = savedScrollPosition.x
+              ;(scrollableParent as HTMLElement).scrollTop = savedScrollPosition.y
+            }
           }
         })
       })
