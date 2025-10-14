@@ -16,7 +16,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, nextTick, onMounted, ref, shallowRef, toRef, watch, watchEffect } from 'vue'
-import { clamp, escapeForRegex, extractNumber, genericComponent, omit, propsFactory, useRender } from '@/util'
+import { clamp, consoleError, escapeForRegex, extractNumber, genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -135,7 +135,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       if (
         isFocused.value &&
           !controlsDisabled.value &&
-          Number(_inputText.value) === model.value
+          Number(_inputText.value?.replace(decimalSeparator.value, '.')) === model.value
       ) {
         // ignore external changes while typing
         // e.g. 5.01{backspace}2 » should result in 5.02
