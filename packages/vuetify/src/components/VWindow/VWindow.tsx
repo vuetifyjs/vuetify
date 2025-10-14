@@ -139,7 +139,7 @@ export const VWindow = genericComponent<new <T>(
       return group.items.value.findIndex(item => group.selected.value.includes(item.id))
     })
 
-    // Fix for #18447
+    // Fix for https://github.com/vuetifyjs/vuetify/issues/18447
     const savedScrollPosition = ref<{ x: number, y: number } | null>(null)
 
     watch(activeIndex, (newVal, oldVal) => {
