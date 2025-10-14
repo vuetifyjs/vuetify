@@ -107,17 +107,17 @@ export const VDateInput = genericComponent<new <
   setup (props, { emit, slots }) {
     const { t, current: currentLocale } = useLocale()
     const adapter = useDate()
-    const { isValid: _isValid, parseDate, formatDate, parserFormat } = useDateFormat(props, currentLocale)
+    const { isValid, parseDate, formatDate, parserFormat } = useDateFormat(props, currentLocale)
     const { mobile } = useDisplay(props)
 
-    const isValid = (text: string): boolean => {
-      if (!_isValid(text)) {
-        return false
+    const clamp = (date: unknown) => {
+      if (props.max && adapter.isAfter(date, props.max)) {
+        return props.max
       }
-      if (props.max && adapter.isAfter(parseDate(text), props.max)) {
-        return false
+      if (props.min && adapter.isBefore(date, props.min)) {
+        return props.min
       }
-      return !!props.min && adapter.isBefore(props.min, parseDate(text))
+      return date
     }
 
     const emptyModelValue = () => props.multiple ? [] : null
@@ -127,7 +127,7 @@ export const VDateInput = genericComponent<new <
       'modelValue',
       emptyModelValue(),
       val => Array.isArray(val) ? val.map(item => adapter.toJsDate(item)) : val ? adapter.toJsDate(val) : val,
-      val => Array.isArray(val) ? val.map(item => adapter.date(item)) : val ? adapter.date(val) : val
+      val => Array.isArray(val) ? val.map(item => adapter.date(clamp(item))) : val ? adapter.date(clamp(val)) : val
     )
 
     const menu = useProxiedModel(props, 'menu')
