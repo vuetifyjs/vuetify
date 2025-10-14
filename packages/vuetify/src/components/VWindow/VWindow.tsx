@@ -166,14 +166,14 @@ export const VWindow = genericComponent<new <T>(
         const currentScrollY = window.scrollY
 
         if (savedScrollPosition.value && currentScrollY !== savedScrollPosition.value.y) {
-          window.scrollTo(savedScrollPosition.value.x, savedScrollPosition.value.y)
+          window.scrollTo({ left: savedScrollPosition.value.x, top: savedScrollPosition.value.y, behavior: 'instant' })
         }
 
         requestAnimationFrame(() => {
           const rafScrollY = window.scrollY
 
           if (savedScrollPosition.value && rafScrollY !== savedScrollPosition.value.y) {
-            window.scrollTo(savedScrollPosition.value.x, savedScrollPosition.value.y)
+            window.scrollTo({ left: savedScrollPosition.value.x, top: savedScrollPosition.value.y, behavior: 'instant' })
           }
         })
       })
