@@ -137,7 +137,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       if (
         isFocused.value &&
           !controlsDisabled.value &&
-          Number(_inputText.value) === val
+          Number(_inputText.value?.replace(decimalSeparator.value, '.')) === model.value
       ) {
         // ignore external changes while typing
         // e.g. 5.01{backspace}2 » should result in 5.02

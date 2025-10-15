@@ -4,9 +4,6 @@
 
 @include tools.layer('components')
   .v-number-input
-    $root: &
-    $control-root: #{selector.append($root, '__control')}
-
     input[type="number"]
       -moz-appearance: textfield
 
@@ -51,10 +48,19 @@
         text-align: center
 
     &--stacked
-      #{$control-root}
+      .v-number-input__control
         flex-direction: column-reverse
         .v-btn
           flex: 1
+
+      .v-field--variant-underlined
+        > .v-field__prepend-inner:has(.v-number-input__control),
+        > .v-field__append-inner:has(.v-number-input__control)
+          // drop input padding
+          padding-top: var(--v-field-padding-top)
+          // and pass it down
+          > *:not(.v-number-input__control, .v-divider--vertical)
+            margin-top: var(--v-input-padding-top, 0)
 
     &--hide-input
       .v-field
