@@ -127,7 +127,7 @@ export const VDateInput = genericComponent<new <
       'modelValue',
       emptyModelValue(),
       val => Array.isArray(val) ? val.map(item => adapter.toJsDate(item)) : val ? adapter.toJsDate(val) : val,
-      val => Array.isArray(val) ? val.map(item => adapter.date(clamp(item))) : val ? adapter.date(clamp(val)) : val
+      val => Array.isArray(val) ? val.map(item => adapter.date(item)) : val ? adapter.date(val) : val
     )
 
     const menu = useProxiedModel(props, 'menu')
@@ -246,16 +246,16 @@ export const VDateInput = genericComponent<new <
         model.value = emptyModelValue()
       } else if (!props.multiple) {
         if (isValid(value)) {
-          model.value = parseDate(value)
+          model.value = clamp(parseDate(value))
         }
       } else {
         const parts = value.trim().split(/\D+-\D+|[^\d\-/.]+/)
         if (parts.every(isValid)) {
           if (props.multiple === 'range') {
-            const [start, stop] = parts.map(parseDate).toSorted((a, b) => adapter.isAfter(a, b) ? 1 : -1)
+            const [start, stop] = parts.map(parseDate).map(clamp).toSorted((a, b) => adapter.isAfter(a, b) ? 1 : -1)
             model.value = createDateRange(adapter, start, stop)
           } else {
-            model.value = parts.map(parseDate)
+            model.value = parts.map(parseDate).map(clamp)
           }
         }
       }
