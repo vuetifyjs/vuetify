@@ -196,7 +196,7 @@ export const VDateInput = genericComponent<new <
         menu.value = true
       }
 
-      if (props.updateOn.includes('enter')) {
+      if (props.updateOn.includes('enter') && !props.readonly) {
         onUserInput(e.target as HTMLInputElement)
       }
     }
@@ -230,7 +230,7 @@ export const VDateInput = genericComponent<new <
     }
 
     function onBlur (e: FocusEvent) {
-      if (props.updateOn.includes('blur')) {
+      if (props.updateOn.includes('blur') && !props.readonly) {
         onUserInput(e.target as HTMLInputElement)
       }
 
