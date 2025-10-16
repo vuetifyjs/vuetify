@@ -72,6 +72,8 @@ export const VMaskInput = genericComponent<VMaskInputSlots>()({
     const validationValue = toRef(() => returnMaskedValue.value ? model.value : mask.unmask(model.value))
 
     function removeMaskDelimiters (val: string): string {
+      if (!val) return ''
+
       return val.split('').filter(ch => !isMaskDelimiter(ch)).join('')
     }
 
