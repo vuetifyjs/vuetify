@@ -31,6 +31,17 @@
       "bgColor": "3.4.0"
     }
   },
+  "VBreadcrumbs": {
+    "props": {
+      "itemProps": "3.11.0"
+    }
+  },
+  "VBreadcrumbsItem": {
+    "props": {
+      "width": "3.11.0",
+      "maxWidth": "3.11.0"
+    }
+  },
   "VBtn": {
     "props": {
       "text": "3.2.0",
