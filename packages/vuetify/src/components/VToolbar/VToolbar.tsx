@@ -112,7 +112,7 @@ export const VToolbar = genericComponent<VToolbarSlots>()({
     })
 
     useRender(() => {
-      const collapsePositon = typeof (props.collapse) === 'string' ? props.collapse : 'left'
+      const collapsePositon = props.collapse === 'right' ? 'right' : 'left'
 
       const hasTitle = !!(props.title || slots.title)
       const hasImage = !!(slots.image || props.image)
@@ -126,8 +126,8 @@ export const VToolbar = genericComponent<VToolbarSlots>()({
             'v-toolbar',
             {
               'v-toolbar--absolute': props.absolute,
-              'v-toolbar--collapse': props.collapse,
-              [`v-toolbar--collapse-${collapsePositon}`]: props.collapse,
+              'v-toolbar--collapse': !!props.collapse,
+              `v-toolbar--collapse-${collapsePositon}`,
               'v-toolbar--flat': props.flat,
               'v-toolbar--floating': props.floating,
               [`v-toolbar--density-${props.density}`]: true,
