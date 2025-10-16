@@ -30,13 +30,15 @@
       max-width: $toolbar-collapsed-max-width
       overflow: hidden
 
-      &-left
-        border-end-end-radius: $toolbar-collapsed-border-radius
-  
       &-right
-        border-end-start-radius: $toolbar-collapsed-border-radius
         margin-inline-start: auto
-        
+
+      &.v-toolbar--collapse-left
+        border-end-end-radius: $toolbar-collapsed-border-radius
+
+      &.v-toolbar--collapse-right
+        border-end-start-radius: $toolbar-collapsed-border-radius
+
       .v-toolbar-title
         display: none
 
