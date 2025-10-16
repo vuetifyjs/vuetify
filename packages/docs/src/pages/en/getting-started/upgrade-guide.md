@@ -35,6 +35,19 @@ export default createVuetify({
 
 ## Components
 
+### VSnackbar
+
+Removed the `multi-line` prop and the **$snackbar-multi-line-wrapper-min-height** SASS variable. It can be replaced with `min-height` equivalent.
+
+```diff
+  <VSnackbar
+    v-model="visible"
+-    multi-line
++    min-height="68"
+    :text="message"
+  />
+```
+
 ### VTextField
 
 Removed the **$text-field-details-padding-inline** SASS variable.
