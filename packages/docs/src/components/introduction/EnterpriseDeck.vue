@@ -15,7 +15,7 @@
       <v-row>
         <template v-for="(item, i) in items" :key="i">
           <v-col cols="12" md="4">
-            <v-responsive class="mb-4" :min-height="mdAndUp ? 96 : undefined">
+            <v-responsive :min-height="mdAndUp ? 96 : undefined" class="mb-4">
               <h3 class="text-h5 font-weight-medium">
                 {{ item.name }}
               </h3>
@@ -32,14 +32,14 @@
 
             <v-btn
               :href="item.href"
-              target="_blank"
-              rel="noopener"
+              :variant="i === 0 ? 'flat' : 'outlined'"
               class="mb-6 text-none"
               color="primary"
-              block
-              text="Book Now"
+              rel="noopener"
               size="x-large"
-              :variant="i === 0 ? 'flat' : 'outlined'"
+              target="_blank"
+              text="Book Now"
+              block
             />
 
             <ul class="text-caption ps-1" style="list-style-type: none;">
@@ -63,16 +63,13 @@
 </template>
 
 <script setup>
-  // eslint-disable
-  import { useDisplay } from 'vuetify'
-
   const { mdAndUp } = useDisplay()
 
   const items = [
     {
       name: 'Direct Support',
       text: 'Get direct help from the author of Vuetify in a live conference call',
-      price: '180',
+      price: '120',
       suffix: '/60m',
       benefits: [
         {
@@ -97,7 +94,7 @@
     {
       name: 'Project Upgrade',
       text: 'Ready to upgrade to Vuetify 3? Let us help you make the transition as smooth as possible',
-      price: '2,000',
+      price: '1,500',
       suffix: '*',
       benefits: [
         {
@@ -122,7 +119,7 @@
     {
       name: 'SLA',
       text: 'Get dedicated support with a customized Service Level Agreement',
-      price: '1,500',
+      price: '1,000',
       suffix: '/mo',
       benefits: [
         {
@@ -130,16 +127,20 @@
           text: "We work with your company to forge a customized SLA plan, tailored for your development team's productivity and growth",
         },
         {
-          emoji: '💬',
-          text: 'Direct chat access to the Vuetify team through Discord with guaranteed response times',
-        },
-        {
           emoji: '🕒',
           text: '2x1h live support calls per month with the author of Vuetify',
         },
         {
+          emoji: '💬',
+          text: 'Direct chat access to the Vuetify team through Discord with guaranteed response times',
+        },
+        {
           emoji: '🎯',
           text: 'Get priority on reported or identified Vuetify GitHub issues and bugs',
+        },
+        {
+          emoji: '🚌',
+          text: 'Great for large teams or companies with 3 or more developers',
         },
       ],
       href: 'https://calendly.com/vuetify/sla-consultation',

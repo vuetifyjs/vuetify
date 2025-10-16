@@ -1,9 +1,9 @@
 <template>
-  <usage-example
+  <ExamplesUsageExample
     v-model="model"
     :code="code"
-    :options="options"
     :name="name"
+    :options="options"
   >
     <div>
       <v-textarea v-bind="props" v-model="field" hide-details></v-textarea>
@@ -16,14 +16,10 @@
 
       <v-checkbox v-model="clearable" label="Clearable"></v-checkbox>
     </template>
-  </usage-example>
+  </ExamplesUsageExample>
 </template>
 
 <script setup>
-  // Utilities
-  import { computed, ref, watch } from 'vue'
-  import { propsToString } from '@/util/helpers'
-
   const name = 'v-textarea'
   const model = ref('default')
   const clearable = ref(false)

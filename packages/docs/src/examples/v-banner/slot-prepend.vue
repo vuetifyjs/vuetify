@@ -1,7 +1,7 @@
 <template>
   <v-banner
-    lines="two"
     color="deep-purple-accent-4"
+    lines="two"
   >
     <template v-slot:prepend>
       <v-avatar

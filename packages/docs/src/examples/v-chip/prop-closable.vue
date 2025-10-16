@@ -11,9 +11,7 @@
 
     <v-btn
       v-if="!chip"
-      close
       color="primary"
-      dark
       @click="chip = true"
     >
       Reset Chip

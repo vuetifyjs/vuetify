@@ -1,21 +1,31 @@
 <template>
   <v-data-table
-    :headers="headers"
-    :items="desserts"
     :group-by="groupBy"
+    :headers="headers"
+    :items="tools"
+    :items-per-page="-1"
     item-value="name"
-    class="elevation-1"
+    hide-default-footer
   >
     <template v-slot:group-header="{ item, columns, toggleGroup, isGroupOpen }">
       <tr>
-        <td :colspan="columns.length">
-          <VBtn
-            size="small"
-            variant="text"
-            :icon="isGroupOpen(item) ? '$expand' : '$next'"
-            @click="toggleGroup(item)"
-          ></VBtn>
-          {{ item.value ? 'Contains gluten' : 'Gluten free' }}
+        <td
+          :colspan="columns.length"
+          class="cursor-pointer"
+          v-ripple
+          @click="toggleGroup(item)"
+        >
+          <div class="d-flex align-center">
+            <v-btn
+              :icon="isGroupOpen(item) ? '$expand' : '$next'"
+              color="medium-emphasis"
+              density="comfortable"
+              size="small"
+              variant="outlined"
+            ></v-btn>
+
+            <span class="ms-4">Tool Type: {{ item.value }}</span>
+          </div>
         </td>
       </tr>
     </template>
@@ -23,119 +33,31 @@
 </template>
 
 <script setup>
-  import { ref } from 'vue'
-
-  const groupBy = ref([
-    {
-      key: 'gluten',
-      order: 'asc',
-    },
-  ])
+  const groupBy = [{ key: 'type', order: 'asc' }]
 
   const headers = [
     {
-      title: 'Dessert (100g serving)',
+      title: 'Tool Name',
       align: 'start',
       sortable: false,
       key: 'name',
     },
-    { title: 'Calories', key: 'calories' },
-    { title: 'Fat (g)', key: 'fat' },
-    { title: 'Carbs (g)', key: 'carbs' },
-    { title: 'Protein (g)', key: 'protein' },
-    { title: 'Iron (%)', key: 'iron' },
+    { title: 'Weight(kg)', key: 'weight' },
+    { title: 'Length(cm)', key: 'length' },
+    { title: 'Price($)', key: 'price' },
   ]
-  const desserts = [
-    {
-      name: 'Frozen Yogurt',
-      calories: 159,
-      fat: 6,
-      carbs: 24,
-      protein: 4,
-      iron: '1%',
-      gluten: false,
-    },
-    {
-      name: 'Ice cream sandwich',
-      calories: 237,
-      fat: 9,
-      carbs: 37,
-      protein: 4.3,
-      iron: '1%',
-      gluten: false,
-    },
-    {
-      name: 'Eclair',
-      calories: 262,
-      fat: 16,
-      carbs: 23,
-      protein: 6,
-      iron: '7%',
-      gluten: true,
-    },
-    {
-      name: 'Cupcake',
-      calories: 305,
-      fat: 3.7,
-      carbs: 67,
-      protein: 4.3,
-      iron: '8%',
-      gluten: true,
-    },
-    {
-      name: 'Gingerbread',
-      calories: 356,
-      fat: 16,
-      carbs: 49,
-      protein: 3.9,
-      iron: '16%',
-      gluten: true,
-    },
-    {
-      name: 'Jelly bean',
-      calories: 375,
-      fat: 0,
-      carbs: 94,
-      protein: 0,
-      iron: '0%',
-      gluten: false,
-    },
-    {
-      name: 'Lollipop',
-      calories: 392,
-      fat: 0.2,
-      carbs: 98,
-      protein: 0,
-      iron: '2%',
-      gluten: false,
-    },
-    {
-      name: 'Honeycomb',
-      calories: 408,
-      fat: 3.2,
-      carbs: 87,
-      protein: 6.5,
-      iron: '45%',
-      gluten: true,
-    },
-    {
-      name: 'Donut',
-      calories: 452,
-      fat: 25,
-      carbs: 51,
-      protein: 4.9,
-      iron: '22%',
-      gluten: true,
-    },
-    {
-      name: 'KitKat',
-      calories: 518,
-      fat: 26,
-      carbs: 65,
-      protein: 7,
-      iron: '6%',
-      gluten: true,
-    },
+
+  const tools = [
+    { name: 'Hammer', weight: 0.5, length: 30, price: 10, type: 'hand' },
+    { name: 'Screwdriver', weight: 0.2, length: 20, price: 5, type: 'hand' },
+    { name: 'Drill', weight: 1.5, length: 25, price: 50, type: 'power' },
+    { name: 'Saw', weight: 0.7, length: 50, price: 15, type: 'hand' },
+    { name: 'Tape Measure', weight: 0.3, length: 10, price: 8, type: 'measuring' },
+    { name: 'Level', weight: 0.4, length: 60, price: 12, type: 'measuring' },
+    { name: 'Wrench', weight: 0.6, length: 25, price: 10, type: 'hand' },
+    { name: 'Pliers', weight: 0.3, length: 15, price: 7, type: 'hand' },
+    { name: 'Sander', weight: 2.0, length: 30, price: 60, type: 'power' },
+    { name: 'Multimeter', weight: 0.5, length: 15, price: 30, type: 'measuring' },
   ]
 </script>
 
@@ -145,114 +67,32 @@
       return {
         groupBy: [
           {
-            key: 'gluten',
+            key: 'type',
             order: 'asc',
           },
         ],
         headers: [
           {
-            title: 'Dessert (100g serving)',
+            title: 'Tool Name',
             align: 'start',
             sortable: false,
             key: 'name',
           },
-          { title: 'Calories', key: 'calories' },
-          { title: 'Fat (g)', key: 'fat' },
-          { title: 'Carbs (g)', key: 'carbs' },
-          { title: 'Protein (g)', key: 'protein' },
-          { title: 'Iron (%)', key: 'iron' },
+          { title: 'Weight (kg)', key: 'weight' },
+          { title: 'Length (cm)', key: 'length' },
+          { title: 'Price ($)', key: 'price' },
         ],
-        desserts: [
-          {
-            name: 'Frozen Yogurt',
-            calories: 159,
-            fat: 6.0,
-            carbs: 24,
-            protein: 4.0,
-            iron: '1%',
-            gluten: false,
-          },
-          {
-            name: 'Ice cream sandwich',
-            calories: 237,
-            fat: 9.0,
-            carbs: 37,
-            protein: 4.3,
-            iron: '1%',
-            gluten: false,
-          },
-          {
-            name: 'Eclair',
-            calories: 262,
-            fat: 16.0,
-            carbs: 23,
-            protein: 6.0,
-            iron: '7%',
-            gluten: true,
-          },
-          {
-            name: 'Cupcake',
-            calories: 305,
-            fat: 3.7,
-            carbs: 67,
-            protein: 4.3,
-            iron: '8%',
-            gluten: true,
-          },
-          {
-            name: 'Gingerbread',
-            calories: 356,
-            fat: 16.0,
-            carbs: 49,
-            protein: 3.9,
-            iron: '16%',
-            gluten: true,
-          },
-          {
-            name: 'Jelly bean',
-            calories: 375,
-            fat: 0.0,
-            carbs: 94,
-            protein: 0.0,
-            iron: '0%',
-            gluten: false,
-          },
-          {
-            name: 'Lollipop',
-            calories: 392,
-            fat: 0.2,
-            carbs: 98,
-            protein: 0,
-            iron: '2%',
-            gluten: false,
-          },
-          {
-            name: 'Honeycomb',
-            calories: 408,
-            fat: 3.2,
-            carbs: 87,
-            protein: 6.5,
-            iron: '45%',
-            gluten: true,
-          },
-          {
-            name: 'Donut',
-            calories: 452,
-            fat: 25.0,
-            carbs: 51,
-            protein: 4.9,
-            iron: '22%',
-            gluten: true,
-          },
-          {
-            name: 'KitKat',
-            calories: 518,
-            fat: 26.0,
-            carbs: 65,
-            protein: 7,
-            iron: '6%',
-            gluten: true,
-          },
+        tools: [
+          { name: 'Hammer', weight: 0.5, length: 30, price: 10, type: 'hand' },
+          { name: 'Screwdriver', weight: 0.2, length: 20, price: 5, type: 'hand' },
+          { name: 'Drill', weight: 1.5, length: 25, price: 50, type: 'power' },
+          { name: 'Saw', weight: 0.7, length: 50, price: 15, type: 'hand' },
+          { name: 'Tape Measure', weight: 0.3, length: 10, price: 8, type: 'measuring' },
+          { name: 'Level', weight: 0.4, length: 60, price: 12, type: 'measuring' },
+          { name: 'Wrench', weight: 0.6, length: 25, price: 10, type: 'hand' },
+          { name: 'Pliers', weight: 0.3, length: 15, price: 7, type: 'hand' },
+          { name: 'Sander', weight: 2.0, length: 30, price: 60, type: 'power' },
+          { name: 'Multimeter', weight: 0.5, length: 15, price: 30, type: 'measuring' },
         ],
       }
     },

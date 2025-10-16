@@ -10,8 +10,8 @@
     >
       <v-row justify="center">
         <v-btn
-          color="success"
           class="mt-12"
+          color="success"
           @click="overlay = !overlay"
         >
           Show Overlay
@@ -19,8 +19,8 @@
 
         <v-overlay
           v-model="overlay"
-          contained
           class="align-center justify-center"
+          contained
         >
           <v-btn
             color="success"

@@ -2,13 +2,13 @@
   <v-card
     class="mx-auto text-center"
     color="green"
-    dark
     max-width="600"
+    dark
   >
     <v-card-text>
       <v-sheet color="rgba(0, 0, 0, .12)">
         <v-sparkline
-          :value="value"
+          :model-value="value"
           color="rgba(255, 255, 255, .7)"
           height="100"
           padding="24"
@@ -32,8 +32,8 @@
 
     <v-card-actions class="justify-center">
       <v-btn
-        block
         variant="text"
+        block
       >
         Go to Report
       </v-btn>

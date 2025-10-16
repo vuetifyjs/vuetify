@@ -5,10 +5,10 @@
         <v-col cols="12">
           <v-text-field
             v-model="message"
-            clearable
             label="Message"
             type="text"
             variant="outlined"
+            clearable
           >
             <template v-slot:prepend>
               <v-tooltip location="bottom">
@@ -25,16 +25,16 @@
                 <v-progress-circular
                   v-if="loading"
                   color="info"
-                  indeterminate
                   size="24"
+                  indeterminate
                 ></v-progress-circular>
 
                 <img
                   v-else
-                  height="24"
-                  width="24"
-                  src="https://cdn.vuetifyjs.com/images/logos/v-alt.svg"
                   alt=""
+                  height="24"
+                  src="https://cdn.vuetifyjs.com/images/logos/v-alt.svg"
+                  width="24"
                 >
               </v-fade-transition>
             </template>

@@ -4,12 +4,12 @@
       v-for="(person, index) in direct"
       :key="index"
       cols="12"
-      sm="6"
       md="5"
+      sm="6"
       xl="4"
     >
-      <app-sheet class="text-center px-10 py-8">
-        <v-avatar size="x-large" :image="person.image" />
+      <AppSheet class="text-center px-10 py-8">
+        <v-avatar :image="person.image" size="x-large" />
 
         <div class="text-h6 text-high-emphasis mb-8">
           {{ person.name }}
@@ -31,14 +31,14 @@
         <v-btn
           :href="person.link"
           append-icon="mdi-open-in-new"
-          block
           color="primary"
           target="_blank"
           variant="flat"
+          block
         >
           Book Now
         </v-btn>
-      </app-sheet>
+      </AppSheet>
     </v-col>
   </v-row>
 </template>

@@ -1,29 +1,7 @@
-export type Item = {
-  name: string
-  source: string
-  type?: string | string[]
-  anyOf: Item[]
-  enum?: string[]
-  parameters?: Item[]
-  returnType?: Item
-  default: any
-  description: Record<string, string>
-  snippet: string
-  value: any
-  example: string
-  props: unknown
-  $ref?: string
-  properties?: Record<string, Item>
-  items?: Item | Item[]
-  minItems?: number
-  maxItems?: number
-  allOf?: Item[]
-}
-
 export function stripLinks (str: string): [string, Record<string, string>] {
   let out = str.slice()
   const obj: Record<string, string> = {}
-  const regexp = /<a.*?>(.*?)<\/a>/g
+  const regexp = /<a .+?>(.+?)<\/a>/g
 
   let matches = regexp.exec(str)
 

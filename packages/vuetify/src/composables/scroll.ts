@@ -44,6 +44,7 @@ export function useScroll (
 ) {
   const { canScroll } = args
   let previousScroll = 0
+  let previousScrollHeight = 0
   const target = ref<Element | Window | null>(null)
   const currentScroll = shallowRef(0)
   const savedScroll = shallowRef(0)
@@ -70,6 +71,12 @@ export function useScroll (
 
     previousScroll = currentScroll.value
     currentScroll.value = ('window' in targetEl) ? targetEl.pageYOffset : targetEl.scrollTop
+
+    const currentScrollHeight = targetEl instanceof Window ? document.documentElement.scrollHeight : targetEl.scrollHeight
+    if (previousScrollHeight !== currentScrollHeight) {
+      previousScrollHeight = currentScrollHeight
+      return
+    }
 
     isScrollingUp.value = currentScroll.value < previousScroll
     currentThreshold.value = Math.abs(currentScroll.value - scrollThreshold.value)

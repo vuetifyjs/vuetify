@@ -1,0 +1,6 @@
+{
+  "props": {
+    "selectStrategy": "Defines the strategy of selecting items in the list. Possible values are: 'single' (only one item can be selected at a time), 'page' ('Select all' button will select only items on the current page), 'all' ('Select all' button will select all items in the list).",
+    "showSelect": "Shows the column with checkboxes for selecting items in the list."
+  }
+}

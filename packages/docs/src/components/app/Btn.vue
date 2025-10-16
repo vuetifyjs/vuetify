@@ -1,7 +1,8 @@
 <template>
   <v-btn
-    :variant="variant"
     :icon="!!icon"
+    :size="smAndUp ? 'default' : 'small'"
+    :variant="variant"
     class="text-body-2 text-capitalize px-3 app-btn"
     color="medium-emphasis"
   >
@@ -20,9 +21,6 @@
 </template>
 
 <script setup>
-  // Composables
-  import { useI18n } from 'vue-i18n'
-
   defineProps({
     icon: String,
     text: String,
@@ -32,5 +30,6 @@
     },
   })
 
+  const { smAndUp } = useDisplay()
   const { t } = useI18n()
 </script>

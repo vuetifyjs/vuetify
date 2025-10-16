@@ -26,7 +26,7 @@ $bottom-navigation-shift-content-color: rgba(var(--v-theme-on-surface), 0) !defa
 $bottom-navigation-shift-icon-top: math.div($bottom-navigation-icon-font-size, 3) !default;
 $bottom-navigation-shift-icon-transform: translateY($bottom-navigation-shift-icon-top) !default;
 $bottom-navigation-text-transform: none !default;
-$bottom-navigation-transition: transform, color .2s, .2s settings.$standard-easing !default;
+$bottom-navigation-transition: transform, color, .2s, .1s settings.$standard-easing !default;
 
 // Lists
 $bottom-navigation-border: (

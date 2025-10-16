@@ -5,22 +5,22 @@
         <v-calendar
           ref="calendar"
           v-model="value"
-          color="primary"
-          type="4day"
-          :events="events"
           :event-color="getEventColor"
           :event-ripple="false"
+          :events="events"
+          color="primary"
+          type="4day"
           @change="getEvents"
           @mousedown:event="startDrag"
           @mousedown:time="startTime"
+          @mouseleave="cancelDrag"
           @mousemove:time="mouseMove"
           @mouseup:time="endDrag"
-          @mouseleave="cancelDrag"
         >
-          <template v-slot:event="{ event, timed /*, eventSummary */ }">
-            <!--<div class="v-event-draggable">
-              <component :is="{ render: eventSummary }"></component>
-            </div>-->
+          <template v-slot:event="{ event, timed, eventSummary }">
+            <div class="v-event-draggable">
+              <component :is="eventSummary"></component>
+            </div>
             <div
               v-if="timed"
               class="v-event-drag-bottom"
@@ -32,6 +32,167 @@
     </v-col>
   </v-row>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const value = ref('')
+  const events = ref([])
+  const colors = [
+    '#2196F3', '#3F51B5', '#673AB7', '#00BCD4', '#4CAF50', '#FF9800', '#757575',
+  ]
+  const names = [
+    'Meeting', 'Holiday', 'PTO', 'Travel', 'Event', 'Birthday', 'Conference', 'Party',
+  ]
+  const dragEvent = ref(null)
+  const dragTime = ref(null)
+  const createEvent = ref(null)
+  const createStart = ref(null)
+  const extendOriginal = ref(null)
+
+  function startDrag (nativeEvent, { event, timed }) {
+    if (event && timed) {
+      dragEvent.value = event
+      dragTime.value = null
+      extendOriginal.value = null
+    }
+  }
+
+  function startTime (nativeEvent, tms) {
+    const mouse = toTime(tms)
+
+    if (dragEvent.value && dragTime.value === null) {
+      const start = dragEvent.value.start
+      dragTime.value = mouse - start
+    } else {
+      createStart.value = roundTime(mouse)
+      createEvent.value = {
+        name: `Event #${events.value.length}`,
+        color: rndElement(colors),
+        start: createStart.value,
+        end: createStart.value,
+        timed: true,
+      }
+      events.value.push(createEvent.value)
+    }
+  }
+
+  function extendBottom (event) {
+    createEvent.value = event
+    createStart.value = event.start
+    extendOriginal.value = event.end
+  }
+
+  function mouseMove (nativeEvent, tms) {
+    const mouse = toTime(tms)
+
+    if (dragEvent.value && dragTime.value !== null) {
+      const start = dragEvent.value.start
+      const end = dragEvent.value.end
+      const duration = end - start
+      const newStartTime = mouse - dragTime.value
+      const newStart = roundTime(newStartTime)
+      const newEnd = newStart + duration
+
+      dragEvent.value.start = newStart
+      dragEvent.value.end = newEnd
+    } else if (createEvent.value && createStart.value !== null) {
+      const mouseRounded = roundTime(mouse, false)
+      const min = Math.min(mouseRounded, createStart.value)
+      const max = Math.max(mouseRounded, createStart.value)
+
+      createEvent.value.start = min
+      createEvent.value.end = max
+    }
+  }
+
+  function endDrag () {
+    dragTime.value = null
+    dragEvent.value = null
+    createEvent.value = null
+    createStart.value = null
+    extendOriginal.value = null
+  }
+
+  function cancelDrag () {
+    if (createEvent.value) {
+      if (extendOriginal.value) {
+        createEvent.value.end = extendOriginal.value
+      } else {
+        const i = events.value.indexOf(createEvent.value)
+        if (i !== -1) {
+          events.value.splice(i, 1)
+        }
+      }
+    }
+
+    createEvent.value = null
+    createStart.value = null
+    dragTime.value = null
+    dragEvent.value = null
+  }
+
+  function roundTime (time, down = true) {
+    const roundTo = 15 // minutes
+    const roundDownTime = roundTo * 60 * 1000
+
+    return down
+      ? time - time % roundDownTime
+      : time + (roundDownTime - (time % roundDownTime))
+  }
+
+  function toTime (tms) {
+    return new Date(tms.year, tms.month - 1, tms.day, tms.hour, tms.minute).getTime()
+  }
+
+  function getEventColor (event) {
+    const rgb = parseInt(event.color.substring(1), 16)
+    const r = (rgb >> 16) & 0xFF
+    const g = (rgb >> 8) & 0xFF
+    const b = (rgb >> 0) & 0xFF
+
+    return event === dragEvent.value
+      ? `rgba(${r}, ${g}, ${b}, 0.7)`
+      : event === createEvent.value
+        ? `rgba(${r}, ${g}, ${b}, 0.7)`
+        : event.color
+  }
+
+  function getEvents ({ start, end }) {
+    const newEvents = []
+
+    const min = new Date(`${start.date}T00:00:00`).getTime()
+    const max = new Date(`${end.date}T23:59:59`).getTime()
+    const days = (max - min) / 86400000
+    const eventCount = rnd(days, days + 20)
+
+    for (let i = 0; i < eventCount; i++) {
+      const timed = rnd(0, 3) !== 0
+      const firstTimestamp = rnd(min, max)
+      const secondTimestamp = rnd(2, timed ? 8 : 288) * 900000
+      const startTime = firstTimestamp - (firstTimestamp % 900000)
+      const endTime = startTime + secondTimestamp
+
+      newEvents.push({
+        name: rndElement(names),
+        color: rndElement(colors),
+        start: startTime,
+        end: endTime,
+        timed,
+      })
+    }
+
+    events.value = newEvents
+  }
+
+  function rnd (a, b) {
+    return Math.floor((b - a + 1) * Math.random()) + a
+  }
+
+  function rndElement (arr) {
+    return arr[rnd(0, arr.length - 1)]
+  }
+</script>
 
 <script>
   export default {
@@ -47,14 +208,14 @@
       extendOriginal: null,
     }),
     methods: {
-      startDrag ({ event, timed }) {
+      startDrag (nativeEvent, { event, timed }) {
         if (event && timed) {
           this.dragEvent = event
           this.dragTime = null
           this.extendOriginal = null
         }
       },
-      startTime (tms) {
+      startTime (nativeEvent, tms) {
         const mouse = this.toTime(tms)
 
         if (this.dragEvent && this.dragTime === null) {
@@ -79,7 +240,7 @@
         this.createStart = event.start
         this.extendOriginal = event.end
       },
-      mouseMove (tms) {
+      mouseMove (nativeEvent, tms) {
         const mouse = this.toTime(tms)
 
         if (this.dragEvent && this.dragTime !== null) {

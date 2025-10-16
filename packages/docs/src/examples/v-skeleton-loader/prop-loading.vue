@@ -24,9 +24,9 @@
           type="list-item-two-line"
         >
           <v-list-item
-            title="Title"
-            subtitle="Subtitle"
             lines="two"
+            subtitle="Subtitle"
+            title="Title"
             rounded
           ></v-list-item>
         </v-skeleton-loader>
@@ -47,9 +47,9 @@
 
         <v-list-item
           v-else
-          title="Title"
-          subtitle="Subtitle"
           lines="two"
+          subtitle="Subtitle"
+          title="Title"
           rounded
         ></v-list-item>
       </v-col>

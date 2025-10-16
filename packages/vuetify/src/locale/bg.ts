@@ -2,6 +2,11 @@ export default {
   badge: 'Значка',
   open: 'Отвори',
   close: 'Затвори',
+  dismiss: 'Отхвърли',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'Отмяна',
+  },
   dataIterator: {
     noResultsText: 'Не са намерени записи',
     loadingText: 'Зареждане на елементи...',
@@ -31,8 +36,7 @@ export default {
     divider: 'до',
   },
   datePicker: {
-    ok: 'ОК',
-    cancel: 'Отмяна',
+    itemsSelected: '{0} избрани',
     range: {
       title: 'Избор на дати',
       header: 'Въвеждане на дати',
@@ -41,6 +45,13 @@ export default {
     header: 'Въвеждане на дата',
     input: {
       placeholder: 'Въведете дата',
+    },
+    ariaLabel: {
+      previousMonth: 'Предишен месец',
+      nextMonth: 'Следващ месец',
+      selectYear: 'Изберете година',
+      selectDate: '{0}',
+      currentDate: 'Днес, {0}',
     },
   },
   noDataText: 'Няма налични данни',
@@ -53,6 +64,7 @@ export default {
   },
   calendar: {
     moreEvents: 'Още {0}',
+    today: 'Днес',
   },
   input: {
     clear: 'Изчисти {0}',
@@ -64,9 +76,15 @@ export default {
     counter: '{0} файла',
     counterSize: '{0} файла ({1} общо)',
   },
+  fileUpload: {
+    title: 'Плъзнете и пуснете файлове тук',
+    divider: 'или',
+    browse: 'Разгледайте файлове',
+  },
   timePicker: {
     am: 'пр. обяд',
     pm: 'сл. обяд',
+    title: 'Изберете време',
   },
   pagination: {
     ariaLabel: {
@@ -92,5 +110,64 @@ export default {
   infiniteScroll: {
     loadMore: 'Зареди още',
     empty: 'Няма повече',
+  },
+  rules: {
+    required: 'Това поле е задължително',
+    email: 'Моля, въведете валиден имейл',
+    number: 'Това поле може да съдържа само числа',
+    integer: 'Това поле може да съдържа само цели числа',
+    capital: 'Това поле може да съдържа само главни букви',
+    maxLength: 'Трябва да въведете максимум {0} символа',
+    minLength: 'Трябва да въведете минимум {0} символа',
+    strictLength: 'Дължината на въведеното поле е невалидна',
+    exclude: 'Символът {0} не е позволен',
+    notEmpty: 'Моля, изберете поне една стойност',
+    pattern: 'Невалиден формат',
+  },
+  hotkey: {
+    then: 'след това',
+    ctrl: 'Ctrl',
+    command: 'Command',
+    shift: 'Shift',
+    alt: 'Alt',
+    option: 'Option',
+    enter: 'Enter',
+    escape: 'Escape',
+    upArrow: 'Горна стрелка',
+    downArrow: 'Долна стрелка',
+    leftArrow: 'Лява стрелка',
+    rightArrow: 'Дясна стрелка',
+    backspace: 'Връщане назад',
+    space: 'Интервал',
+    plus: 'плюс',
+    shortcut: 'Клавиатурна комбинация: {0}',
+  },
+  video: {
+    play: 'Пусни',
+    pause: 'Пауза',
+    seek: 'Търсене',
+    volume: 'Сила на звука',
+    showVolume: 'Покажи контрола за силата на звука',
+    mute: 'Без звук',
+    unmute: 'Включи звука',
+    enterFullscreen: 'Цял екран',
+    exitFullscreen: 'Изход от цял екран',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Вземане на цвят от екрана',
+      hueSlider: 'Цветови тон',
+      alphaSlider: 'Алфа',
+      redInput: 'Червено',
+      greenInput: 'Зелено',
+      blueInput: 'Синьо',
+      alphaInput: 'Алфа',
+      hueInput: 'Цветови тон',
+      saturationInput: 'Наситеност',
+      lightnessInput: 'Светлина',
+      hexInput: 'HEX стойност',
+      hexaInput: 'HEX стойност с алфа',
+      changeFormat: 'Промяна на цветовия формат',
+    },
   },
 }

@@ -1,0 +1,10 @@
+{
+  "props": {
+    "expanded": "Array of expanded items. Can be bound to external variable using **v-model:expanded**.",
+    "expandOnClick": "Expands item when the row is clicked.",
+    "showExpand": "Shows the expand icon."
+  },
+  "events": {
+    "update:expanded": "Emits when the **expanded** items are updated."
+  }
+}

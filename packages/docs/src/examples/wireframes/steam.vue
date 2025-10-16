@@ -12,8 +12,8 @@
 
     <v-app-bar
       color="grey-lighten-4"
-      flat
       height="72"
+      flat
     >
       <v-avatar
         class="ms-2"
@@ -64,9 +64,9 @@
     </v-app-bar>
 
     <v-footer
-      app
       color="grey"
       height="44"
+      app
     ></v-footer>
 
     <v-navigation-drawer floating>
@@ -81,17 +81,17 @@
         <v-avatar
           class="ms-2"
           color="surface-variant"
-          rounded
           variant="flat"
+          rounded
         ></v-avatar>
       </div>
 
       <div class="d-flex px-2 my-2 align-center">
         <v-btn
-          color="grey-lighten-4"
-          variant="flat"
-          height="40"
           class="flex-grow-1 me-2"
+          color="grey-lighten-4"
+          height="40"
+          variant="flat"
         ></v-btn>
 
         <v-avatar
@@ -110,10 +110,10 @@
         <v-text-field
           class="mb-4"
           density="compact"
-          flat
-          hide-details
           prepend-inner-icon="mdi-magnify"
           variant="solo-filled"
+          flat
+          hide-details
         ></v-text-field>
 
         <v-sheet
@@ -221,8 +221,8 @@
               class="ma-3"
               color="grey-lighten-1"
               height="200"
-              rounded
               width="250"
+              rounded
             ></v-sheet>
           </v-slide-group-item>
         </v-slide-group>
@@ -246,8 +246,8 @@
           >
             <v-sheet
               :width="n === 1 ? 300 : 150"
-              color="grey-lighten-1"
               class="ma-3"
+              color="grey-lighten-1"
               height="200"
               rounded
             ></v-sheet>

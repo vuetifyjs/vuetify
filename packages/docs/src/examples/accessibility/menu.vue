@@ -1,13 +1,8 @@
 <template>
   <div class="text-center">
     <v-menu>
-      <template v-slot:activator="{ on, attrs }">
-        <v-btn
-          v-bind="attrs"
-          v-on="on"
-        >
-          Click me
-        </v-btn>
+      <template v-slot:activator="{ props: activatorProps }">
+        <v-btn text="Click me" v-bind="activatorProps"></v-btn>
       </template>
 
       <v-list>
@@ -29,7 +24,7 @@
 
 <script setup>
   function onClick () {
-        // Perform an action
+    // Perform an action
   }
 </script>
 

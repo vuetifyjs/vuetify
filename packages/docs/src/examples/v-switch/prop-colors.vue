@@ -5,60 +5,60 @@
         <v-row>
           <v-col
             cols="12"
-            sm="4"
             md="4"
+            sm="4"
           >
             <v-switch
               v-model="ex11"
-              label="red"
               color="red"
+              label="red"
               value="red"
               hide-details
             ></v-switch>
             <v-switch
               v-model="ex11"
-              label="red-darken-3"
               color="red-darken-3"
+              label="red-darken-3"
               value="red-darken-3"
               hide-details
             ></v-switch>
           </v-col>
           <v-col
             cols="12"
-            sm="4"
             md="4"
+            sm="4"
           >
             <v-switch
               v-model="ex11"
-              label="indigo"
               color="indigo"
+              label="indigo"
               value="indigo"
               hide-details
             ></v-switch>
             <v-switch
               v-model="ex11"
-              label="indigo-darken-3"
               color="indigo-darken-3"
+              label="indigo-darken-3"
               value="indigo-darken-3"
               hide-details
             ></v-switch>
           </v-col>
           <v-col
             cols="12"
-            sm="4"
             md="4"
+            sm="4"
           >
             <v-switch
               v-model="ex11"
-              label="orange"
               color="orange"
+              label="orange"
               value="orange"
               hide-details
             ></v-switch>
             <v-switch
               v-model="ex11"
-              label="orange-darken-3"
               color="orange-darken-3"
+              label="orange-darken-3"
               value="orange-darken-3"
               hide-details
             ></v-switch>
@@ -68,60 +68,60 @@
         <v-row class="mt-12">
           <v-col
             cols="12"
-            sm="4"
             md="4"
+            sm="4"
           >
             <v-switch
               v-model="ex11"
-              label="primary"
               color="primary"
+              label="primary"
               value="primary"
               hide-details
             ></v-switch>
             <v-switch
               v-model="ex11"
-              label="secondary"
               color="secondary"
+              label="secondary"
               value="secondary"
               hide-details
             ></v-switch>
           </v-col>
           <v-col
             cols="12"
-            sm="4"
             md="4"
+            sm="4"
           >
             <v-switch
               v-model="ex11"
-              label="success"
               color="success"
+              label="success"
               value="success"
               hide-details
             ></v-switch>
             <v-switch
               v-model="ex11"
-              label="info"
               color="info"
+              label="info"
               value="info"
               hide-details
             ></v-switch>
           </v-col>
           <v-col
             cols="12"
-            sm="4"
             md="4"
+            sm="4"
           >
             <v-switch
               v-model="ex11"
-              label="warning"
               color="warning"
+              label="warning"
               value="warning"
               hide-details
             ></v-switch>
             <v-switch
               v-model="ex11"
-              label="error"
               color="error"
+              label="error"
               value="error"
               hide-details
             ></v-switch>

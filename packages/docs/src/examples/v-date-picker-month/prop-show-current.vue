@@ -7,8 +7,8 @@
     ></v-date-picker>
     <v-date-picker
       v-model="month2"
-      type="month"
       show-current="2013-07"
+      type="month"
     ></v-date-picker>
   </v-row>
 </template>

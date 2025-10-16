@@ -7,8 +7,8 @@
           <v-tooltip location="bottom">
             <template v-slot:activator="{ props }">
               <a
-                target="_blank"
                 href="https://vuetifyjs.com"
+                target="_blank"
                 v-bind="props"
                 @click.stop
               >

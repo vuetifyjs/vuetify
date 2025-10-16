@@ -26,8 +26,8 @@
           <v-list-item
             v-for="([title, icon], i) in admins"
             :key="i"
-            :title="title"
             :prepend-icon="icon"
+            :title="title"
             :value="title"
           ></v-list-item>
         </v-list-group>
@@ -43,9 +43,9 @@
           <v-list-item
             v-for="([title, icon], i) in cruds"
             :key="i"
-            :value="title"
-            :title="title"
             :prepend-icon="icon"
+            :title="title"
+            :value="title"
           ></v-list-item>
         </v-list-group>
       </v-list-group>

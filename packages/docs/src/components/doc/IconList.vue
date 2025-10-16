@@ -1,31 +1,36 @@
 <template>
   <v-autocomplete
     v-model="selection"
+    v-model:menu="menu"
     v-model:search="search"
     :items="filteredIcons"
+    :loading="loading ? 'primary' : false"
+    :placeholder="t('search.icons')"
     item-title="name"
     item-value="name"
-    placeholder="Search for icons (e.g. account, close)"
-    :item-props="itemProps"
+    variant="outlined"
+    clearable
     no-filter
+    return-object
+    @focus.once="load"
   >
     <template #prepend-inner>
       <v-expand-x-transition>
-        <v-icon v-if="selection" color="primary" start>
-          {{ getIcon(selection) }}
-        </v-icon>
+        <v-icon v-if="selection" :icon="'mdi-' + selection.name" start />
       </v-expand-x-transition>
+
       <code class="me-n1">mdi-</code>
     </template>
 
     <template #item="{ props, item }">
-      <v-list-item v-bind="props">
+      <v-list-item v-bind="props" :prepend-icon="'svg:' + item.raw.path">
         <template #append>
           <v-btn
             icon="mdi-content-copy"
-            variant="plain"
             size="small"
-            @click="copy(item.raw.name)"
+            tabindex="-1"
+            variant="plain"
+            @click.stop="copy(item.raw.name)"
           />
         </template>
       </v-list-item>
@@ -34,53 +39,66 @@
     <template #append-inner>
       <v-expand-x-transition>
         <span v-if="copied" class="text-primary pt-1">
-          Copied
+          {{ t('copied') }}
         </span>
       </v-expand-x-transition>
     </template>
   </v-autocomplete>
 </template>
 
-<script setup>
-  import icons from '@mdi/svg/meta.json'
-  import * as paths from '@mdi/js'
-  import { distance } from '@/util/helpers'
-  import { camelize, computed, ref, watch } from 'vue'
+<script setup lang="ts">
+  import type { IconEntry } from 'virtual:mdi-js-icons'
 
-  const copied = ref(false)
-  const selection = ref()
-  const search = ref('')
+  const { t } = useI18n()
+
+  const copied = shallowRef(false)
+  const loading = shallowRef(false)
+  const menu = shallowRef(false)
+  const icons = shallowRef<IconEntry[]>([])
+  const selection = shallowRef<IconEntry>()
+  const search = shallowRef('')
+
+  async function load () {
+    const _menu = menu.value
+    loading.value = true
+    // TODO: virtual loads everything if menu is open
+    menu.value = false
+    await import('virtual:mdi-js-icons')
+      .then(m => icons.value = m.icons)
+      .catch(console.error)
+    loading.value = false
+    menu.value = _menu
+  }
+
+  function * filterIcons (s: string) {
+    for (const icon of icons.value) {
+      const distance = Math.max(
+        getDistance(s, icon.name),
+        ...icon.aliases.map(v => getDistance(search.value, v))
+      )
+      if (distance > 0.7) {
+        yield {
+          name: icon.name,
+          path: icon.path,
+          distance,
+        }
+      }
+    }
+  }
+
   const filteredIcons = computed(() => {
-    if (!search.value) return icons
+    const s = search.value.trim()
+    if (!s.length) return icons.value
 
-    return icons
-      .map(icon => ({
-        name: icon.name,
-        distance: Math.max(
-          distance(search.value, icon.name),
-          ...icon.aliases.map(v => distance(search.value, v))
-        ),
-      }))
-      .filter(v => v.distance > 0.7)
-      .sort((a, b) => {
-        return b.distance - a.distance
-      })
+    return [...filterIcons(s)].sort((a, b) => b.distance - a.distance)
   })
 
   watch(selection, value => {
-    value && copy(value)
+    value && copy(value.name)
   })
 
-  function getIcon (name) {
-    return 'svg:' + paths[camelize('mdi-' + name)]
-  }
-  function itemProps (item) {
-    return {
-      prependIcon: getIcon(item.name),
-    }
-  }
-  function copy (item) {
-    navigator.clipboard.writeText('mdi-' + item).then(() => {
+  function copy (name: string) {
+    navigator.clipboard.writeText('mdi-' + name).then(() => {
       copied.value = true
       setTimeout(() => {
         copied.value = false

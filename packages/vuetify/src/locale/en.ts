@@ -2,6 +2,11 @@ export default {
   badge: 'Badge',
   open: 'Open',
   close: 'Close',
+  dismiss: 'Dismiss',
+  confirmEdit: {
+    ok: 'OK',
+    cancel: 'Cancel',
+  },
   dataIterator: {
     noResultsText: 'No matching records found',
     loadingText: 'Loading items...',
@@ -31,8 +36,7 @@ export default {
     divider: 'to',
   },
   datePicker: {
-    ok: 'OK',
-    cancel: 'Cancel',
+    itemsSelected: '{0} selected',
     range: {
       title: 'Select dates',
       header: 'Enter dates',
@@ -41,6 +45,13 @@ export default {
     header: 'Enter date',
     input: {
       placeholder: 'Enter date',
+    },
+    ariaLabel: {
+      previousMonth: 'Previous month',
+      nextMonth: 'Next month',
+      selectYear: 'Select year',
+      selectDate: '{0}', // Full date format
+      currentDate: 'Today, {0}',
     },
   },
   noDataText: 'No data available',
@@ -53,6 +64,7 @@ export default {
   },
   calendar: {
     moreEvents: '{0} more',
+    today: 'Today',
   },
   input: {
     clear: 'Clear {0}',
@@ -64,9 +76,15 @@ export default {
     counter: '{0} files',
     counterSize: '{0} files ({1} in total)',
   },
+  fileUpload: {
+    title: 'Drag and drop files here',
+    divider: 'or',
+    browse: 'Browse Files',
+  },
   timePicker: {
     am: 'AM',
     pm: 'PM',
+    title: 'Select Time',
   },
   pagination: {
     ariaLabel: {
@@ -92,5 +110,64 @@ export default {
   infiniteScroll: {
     loadMore: 'Load more',
     empty: 'No more',
+  },
+  rules: {
+    required: 'This field is required',
+    email: 'Please enter a valid email',
+    number: 'This field can only contain numbers',
+    integer: 'This field can only contain integer values',
+    capital: 'This field can only contain uppercase letters',
+    maxLength: 'You must enter a maximum of {0} characters',
+    minLength: 'You must enter a minimum of {0} characters',
+    strictLength: 'The length of the entered field is invalid',
+    exclude: 'The {0} character is not allowed',
+    notEmpty: 'Please choose at least one value',
+    pattern: 'Invalid format',
+  },
+  hotkey: {
+    then: 'then',
+    ctrl: 'Ctrl',
+    command: 'Command',
+    space: 'Space',
+    shift: 'Shift',
+    alt: 'Alt',
+    enter: 'Enter',
+    escape: 'Escape',
+    upArrow: 'Up Arrow',
+    downArrow: 'Down Arrow',
+    leftArrow: 'Left Arrow',
+    rightArrow: 'Right Arrow',
+    backspace: 'Backspace',
+    option: 'Option',
+    plus: 'plus',
+    shortcut: 'Keyboard shortcut: {0}',
+  },
+  video: {
+    play: 'Play',
+    pause: 'Pause',
+    seek: 'Seek',
+    volume: 'Volume',
+    showVolume: 'Show volume control',
+    mute: 'Mute',
+    unmute: 'Unmute',
+    enterFullscreen: 'Full screen',
+    exitFullscreen: 'Exit full screen',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Select color with eyedropper',
+      hueSlider: 'Hue',
+      alphaSlider: 'Alpha',
+      redInput: 'Red value',
+      greenInput: 'Green value',
+      blueInput: 'Blue value',
+      alphaInput: 'Alpha value',
+      hueInput: 'Hue value',
+      saturationInput: 'Saturation value',
+      lightnessInput: 'Lightness value',
+      hexInput: 'HEX value',
+      hexaInput: 'HEX with alpha value',
+      changeFormat: 'Change color format',
+    },
   },
 }

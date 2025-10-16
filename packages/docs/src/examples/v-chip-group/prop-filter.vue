@@ -3,21 +3,14 @@
     class="mx-auto"
     max-width="400"
   >
-    <v-toolbar
-      flat
-      color="deep-purple-accent-4"
-      dark
-    >
-      <v-btn icon>
-        <v-icon>mdi-close</v-icon>
-      </v-btn>
+    <v-toolbar color="deep-purple-accent-4">
+      <v-btn icon="mdi-close"></v-btn>
+
       <v-toolbar-title>Filter results</v-toolbar-title>
     </v-toolbar>
 
     <v-card-text>
-      <h2 class="text-h6 mb-2">
-        Choose amenities
-      </h2>
+      <h2 class="text-h6 mb-2">Choose amenities</h2>
 
       <v-chip-group
         v-model="amenities"
@@ -25,48 +18,45 @@
         multiple
       >
         <v-chip
-          filter
+          text="Elevator"
           variant="outlined"
-        >
-          Elevator
-        </v-chip>
+          filter
+        ></v-chip>
+
         <v-chip
-          filter
+          text="Washer / Dryer"
           variant="outlined"
-        >
-          Washer / Dryer
-        </v-chip>
+          filter
+        ></v-chip>
+
         <v-chip
-          filter
+          text="Fireplace"
           variant="outlined"
-        >
-          Fireplace
-        </v-chip>
+          filter
+        ></v-chip>
+
         <v-chip
-          filter
+          text="Wheelchair access"
           variant="outlined"
-        >
-          Wheelchair access
-        </v-chip>
+          filter
+        ></v-chip>
+
         <v-chip
-          filter
+          text="Dogs ok"
           variant="outlined"
-        >
-          Dogs ok
-        </v-chip>
+          filter
+        ></v-chip>
+
         <v-chip
-          filter
+          text="Cats ok"
           variant="outlined"
-        >
-          Cats ok
-        </v-chip>
+          filter
+        ></v-chip>
       </v-chip-group>
     </v-card-text>
 
     <v-card-text>
-      <h2 class="text-h6 mb-2">
-        Choose neighborhoods
-      </h2>
+      <h2 class="text-h6 mb-2">Choose neighborhoods</h2>
 
       <v-chip-group
         v-model="neighborhoods"
@@ -74,51 +64,50 @@
         multiple
       >
         <v-chip
-          filter
+          text="Snowy Rock Place"
           variant="outlined"
-        >
-          Snowy Rock Place
-        </v-chip>
+          filter
+        ></v-chip>
+
         <v-chip
-          filter
+          text="Honeylane Circle"
           variant="outlined"
-        >
-          Honeylane Circle
-        </v-chip>
+          filter
+        ></v-chip>
+
         <v-chip
-          filter
+          text="Donna Drive"
           variant="outlined"
-        >
-          Donna Drive
-        </v-chip>
+          filter
+        ></v-chip>
+
         <v-chip
-          filter
+          text="Elaine Street"
           variant="outlined"
-        >
-          Elaine Street
-        </v-chip>
+          filter
+        ></v-chip>
+
         <v-chip
-          filter
+          text="Court Street"
           variant="outlined"
-        >
-          Court Street
-        </v-chip>
+          filter
+        ></v-chip>
+
         <v-chip
-          filter
+          text="Kennedy Park"
           variant="outlined"
-        >
-          Kennedy Park
-        </v-chip>
+          filter
+        ></v-chip>
       </v-chip-group>
     </v-card-text>
   </v-card>
 </template>
 
 <script setup>
-  import { ref } from 'vue'
+  import { shallowRef } from 'vue'
 
-  const amenities = ref([1, 4])
-  const neighborhoods = ref([1])
+  const amenities = shallowRef([1, 4])
+  const neighborhoods = shallowRef([1])
 </script>
 
 <script>

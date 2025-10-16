@@ -6,7 +6,7 @@
       <v-btn>Resources</v-btn>
     </v-toolbar-items>
 
-    <v-divider vertical class="mx-2"></v-divider>
+    <v-divider class="mx-2" vertical></v-divider>
 
     <v-btn icon="mdi-dots-vertical"></v-btn>
   </v-toolbar>

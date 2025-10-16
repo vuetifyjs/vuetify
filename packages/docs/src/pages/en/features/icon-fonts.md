@@ -7,19 +7,19 @@ related:
   - /components/icons
   - /components/buttons
   - /components/avatars
+features:
+  github: /composables/icons.tsx
+  label: 'E: icons'
+  report: true
 ---
-
-<script setup>
-  import { defineAsyncComponent } from 'vue'
-
-  const IconList = defineAsyncComponent(() => import('@/components/doc/IconList.vue'))
-</script>
 
 # Icon Fonts
 
-Out of the box, Vuetify supports 4 popular icon font libraries—[Material Design Icons](https://materialdesignicons.com/), [Material Icons](https://fonts.google.com/icons), [Font Awesome 4](https://fontawesome.com/v4.7.0/) and [Font Awesome 5](https://fontawesome.com/).
+Out of the box, Vuetify supports 4 popular icon font libraries—[Material Design Icons](https://pictogrammers.com/library/mdi/), [Material Icons](https://fonts.google.com/icons), [Font Awesome 4](https://fontawesome.com/v4.7.0/) and [Font Awesome 5](https://fontawesome.com/).
 
-<entry />
+<PageFeatures />
+
+<PromotedEntry />
 
 ## Usage
 
@@ -41,62 +41,34 @@ export default createVuetify({
 ```
 
 ```html
-
 <template>
   <v-icon icon="mdi-home" />
 </template>
-
 ```
 
 In the above examples we import the default `mdi` icon set and its corresponding aliases. These aliases reference commonly used types of icons that are utilized by Vuetify components.
 
 ::: info
-  While it is still possible to supply the icon value through the default slot in Vuetify 3.0 (`<v-icon>mdi-home</v-icon>`), we recommend using the `icon` prop instead.
-:::
 
-### Multiple icon sets
+While it is still possible to supply the icon value through the default slot in Vuetify 3.0 (`<v-icon>mdi-home</v-icon>`), we recommend using the `icon` prop instead.
 
-Out of the box, Vuetify supports the use of multiple *different* icon sets at the same time. The following example demonstrates how to change the default icon font to Font Awesome (`fa`) while still maintaining access to the original Material Design Icons (`mdi`) through the use of a prefix:
-
-```js { resource="src/plugins/vuetify.js" }
-import { createVuetify } from 'vuetify'
-import { aliases, fa } from 'vuetify/iconsets/fa'
-import { mdi } from 'vuetify/iconsets/mdi'
-
-export default createVuetify({
-  icons: {
-    defaultSet: 'fa',
-    aliases,
-    sets: {
-      fa,
-      mdi,
-    },
-  },
-})
-```
-
-```html
-<template>
-  <v-icon icon="fas fa-plus" /> // This renders a FontAwesome icon
-  <v-icon icon="mdi:mdi-minus" /> // This renders a MDI icon
-</template>
-```
-
-::: info
-  It is not necessary to provide a prefix (such as `mdi:`) for icons from the default icon set
 :::
 
 ## Installing icon fonts
 
-You are required to include the specified icon library (even when using the default icons from [Material Design Icons](https://materialdesignicons.com/)). This can be done by including a CDN link or importing the icon library into your application.
+You are required to include the specified icon library (even when using the default icons from [Material Design Icons](https://pictogrammers.com/library/mdi/)). This can be done by including a CDN link or importing the icon library into your application.
 
 ::: info
-  In this page "Material Icons" is used to refer to the [official google icons](https://fonts.google.com/icons) and "Material Design Icons" refers to the [extended third-party library](https://materialdesignicons.com/)
+
+In this page "Material Icons" is used to refer to the [official google icons](https://fonts.google.com/icons) and "Material Design Icons" refers to the [extended third-party library](https://pictogrammers.com/library/mdi/)
+
 :::
 
 ### Material Design Icons
 
 This is the default icon set used by Vuetify. It supports local installation with a build process or a CDN link. The following shows how to add the CDN link to your `index.html`:
+
+#### MDI - CSS
 
 ```html
 <link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
@@ -104,11 +76,25 @@ This is the default icon set used by Vuetify. It supports local installation wit
 
 Or as a local dependency:
 
-```bash
-$ yarn add @mdi/font -D
-// OR
-$ npm install @mdi/font -D
+::: tabs
+
+```bash [pnpm]
+pnpm add @mdi/font -D
 ```
+
+```bash [yarn]
+yarn add @mdi/font -D
+```
+
+```bash [npm]
+npm install @mdi/font -D
+```
+
+```bash [bun]
+bun add @mdi/font -D
+```
+
+:::
 
 ```js { resource="src/plugins/vuetify.js" }
 import '@mdi/font/css/materialdesignicons.css' // Ensure you are using css-loader
@@ -122,18 +108,14 @@ export default createVuetify({
 ```
 
 ::: error
-  **DO NOT** use a CDN link without specifying a package *version*. Failure to do so can result in unexpected changes to your application with new releases.
+
+**DO NOT** use a CDN link without specifying a package *version*. Failure to do so can result in unexpected changes to your application with new releases.
+
 :::
 
-Use this tool to search for any Material Design Icons and copy them to your clipboard by clicking the item.
+#### MDI - JS SVG
 
-<icon-list />
-
-### Material Design Icons - JS SVG
-
-This is the recommended installation when optimizing your application for production, as only icons used for
-Vuetify components internally will be imported into your application bundle. You will need to provide your
-own icons for the rest of the app.
+This is the recommended installation when optimizing your application for production, as only icons used for Vuetify components internally will be imported into your application bundle. You will need to provide your own icons for the rest of the app.
 
 ```js { resource="src/plugins/vuetify.js" }
 import { createVuetify } from 'vuetify'
@@ -150,18 +132,32 @@ export default createVuetify({
 })
 ```
 
-`@mdi/js` or [unplugin-icons](https://github.com/antfu/unplugin-icons) are two alternatives to get the
-rest of the icons that you will need in your application.
+`@mdi/js` or [unplugin-icons](https://github.com/antfu/unplugin-icons) are two alternatives to get the rest of the icons that you will need in your application.
 
 If you want to stick with `@mdi/js`, use the SVG paths as designated in [@mdi/js](https://www.npmjs.com/package/@mdi/js) and
 only import the icons that you need.
+
 The following example shows how to use an imported icon within a `.vue` SFC template:
 
-```bash
-$ yarn add @mdi/js -D
-// OR
-$ npm install @mdi/js -D
+::: tabs
+
+```bash [pnpm]
+pnpm add @mdi/js -D
 ```
+
+```bash [yarn]
+yarn add @mdi/js -D
+```
+
+```bash [npm]
+npm install @mdi/js -D
+```
+
+```bash [bun]
+bun add @mdi/js -D
+```
+
+:::
 
 ```html
 <template>
@@ -200,9 +196,17 @@ export default createVuetify({
 </template>
 ```
 
+#### MDI - Icon search
+
+Use this tool to search for any Material Design Icons and copy them to your clipboard by clicking the item.
+
+<DocIconList />
+
 ### Material Icons
 
 For projects without a build process, it is recommended to import the icons from CDN.
+
+#### Material Icons - CSS
 
 ```html
 <link href="https://fonts.googleapis.com/css?family=Material+Icons" rel="stylesheet">
@@ -219,11 +223,25 @@ Some Material Icons are missing by default. For example, `person` and `person_ou
 
 Alternatively, it is possible to install locally using yarn or npm. Keep in mind that this is not an official google repository and may not contain all icons.
 
-```bash
-$ yarn add material-design-icons-iconfont -D
-// OR
-$ npm install material-design-icons-iconfont -D
+::: tabs
+
+```bash [pnpm]
+pnpm add material-design-icons-iconfont -D
 ```
+
+```bash [yarn]
+yarn add material-design-icons-iconfont -D
+```
+
+```bash [npm]
+npm install material-design-icons-iconfont -D
+```
+
+```bash [bun]
+bun add material-design-icons-iconfont -D
+```
+
+:::
 
 ```js { resource="src/plugins/vuetify.js" }
 import 'material-design-icons-iconfont/dist/material-design-icons.css' // Ensure your project is capable of handling css files
@@ -247,9 +265,11 @@ export default createVuetify({
 </template>
 ```
 
-### Font Awesome 5 Icons
+### Font Awesome
 
 The easiest way to get started with **FontAwesome** is to use a CDN.
+
+#### FA 5 - CSS
 
 ```html
 <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">
@@ -257,11 +277,25 @@ The easiest way to get started with **FontAwesome** is to use a CDN.
 
 To install locally you can pull in the [free](https://fontawesome.com/) version of **FontAwesome** using your preferred package manager:
 
-```bash
-$ yarn add @fortawesome/fontawesome-free -D
-// OR
-$ npm install @fortawesome/fontawesome-free -D
+::: tabs
+
+```bash [pnpm]
+pnpm add @fortawesome/fontawesome-free -D
 ```
+
+```bash [yarn]
+yarn add @fortawesome/fontawesome-free -D
+```
+
+```bash [npm]
+npm install @fortawesome/fontawesome-free -D
+```
+
+```bash [bun]
+bun add @fortawesome/fontawesome-free -D
+```
+
+:::
 
 ```js { resource="src/plugins/vuetify.js" }
 import '@fortawesome/fontawesome-free/css/all.css' // Ensure your project is capable of handling css files
@@ -286,10 +320,12 @@ export default createVuetify({
 ```
 
 ::: error
-  The JavaScript version (`all.js`) of the FontAwesome icons will **NOT** work with Vue
+
+The JavaScript version (`all.js`) of the FontAwesome icons will **NOT** work with Vue
+
 :::
 
-### Font Awesome 4 Icons
+#### FA 4 - CSS
 
 The easiest way to get started with **FontAwesome** is to use a CDN.
 
@@ -299,11 +335,25 @@ The easiest way to get started with **FontAwesome** is to use a CDN.
 
 To install FontAwesome **4** locally is the same as its newer version, just from a different package. You will be using the `font-awesome` package as opposed to `@fortawesome`.
 
-```bash
-$ yarn add font-awesome@4.7.0 -D
-// OR
-$ npm install font-awesome@4.7.0 -D
+::: tabs
+
+```bash [pnpm]
+pnpm add font-awesome@4.7.0 -D
 ```
+
+```bash [yarn]
+yarn add font-awesome@4.7.0 -D
+```
+
+```bash [npm]
+npm install font-awesome@4.7.0 -D
+```
+
+```bash [bun]
+bun add font-awesome@4.7.0 -D
+```
+
+:::
 
 ```js { resource="src/plugins/vuetify.js" }
 import 'font-awesome/css/font-awesome.min.css' // Ensure your project is capable of handling css files
@@ -327,15 +377,29 @@ export default createVuetify({
 </template>
 ```
 
-### Font Awesome SVG Icons
+#### FA 5 - SVG
 
 Install the following packages.
 
-```bash
-$ yarn add @fortawesome/fontawesome-svg-core @fortawesome/vue-fontawesome @fortawesome/free-solid-svg-icons @fortawesome/free-regular-svg-icons -D
-// or
-$ npm install @fortawesome/fontawesome-svg-core @fortawesome/vue-fontawesome @fortawesome/free-solid-svg-icons @fortawesome/free-regular-svg-icons -D
+::: tabs
+
+```bash [pnpm]
+pnpm add @fortawesome/fontawesome-svg-core @fortawesome/vue-fontawesome @fortawesome/free-solid-svg-icons @fortawesome/free-regular-svg-icons -D
 ```
+
+```bash [yarn]
+yarn add @fortawesome/fontawesome-svg-core @fortawesome/vue-fontawesome @fortawesome/free-solid-svg-icons @fortawesome/free-regular-svg-icons -D
+```
+
+```bash [npm]
+npm install @fortawesome/fontawesome-svg-core @fortawesome/vue-fontawesome @fortawesome/free-solid-svg-icons @fortawesome/free-regular-svg-icons -D
+```
+
+```bash [bun]
+bun add @fortawesome/fontawesome-svg-core @fortawesome/vue-fontawesome @fortawesome/free-solid-svg-icons @fortawesome/free-regular-svg-icons -D
+```
+
+:::
 
 Then register the global `font-awesome-icon` component and use the pre-defined `fa-svg` icon set. If you have access to Font Awesome Pro icons they can be added to the library in the same way.
 
@@ -375,6 +439,98 @@ app.mount('#app')
 </template>
 ```
 
+## Icon aliases
+
+Icon aliases allow you to define short, reusable names for icons that can map to different sources — such as icon names from a set, local Vue components, or raw SVG paths. Aliases are referenced with an initial `$` followed by the name of the alias, e.g. `$product`. The following icons are available as aliases for use in Vuetify components:
+
+<DocIconTable />
+
+### Custom aliases
+
+If you are developing custom Vuetify components, you can extend the `aliases` object to utilize the same functionality that internal Vuetify components use. This makes it easier to manage icons consistently throughout your project.
+
+Here’s an example:
+
+```js { resource="src/plugins/vuetify.js" }
+import { createVuetify } from 'vuetify'
+import AccountIcon from './account-icon.vue'
+import ClosetIcon from './closet-icon.vue'
+
+export const customIcons = {
+  mdiCustomAlias: 'mdi-tag',
+  account: AccountIcon,
+  annotation: [
+    'M14 9.45h-1v-1a1 1 0 0 0-2 0v1h-1a1 1 0 0 0 0 2h1v1a1 1 0 0 0 2 0v-1h1a1 1 0 0 0 0-2Zm6.46.18A8.5 8.5 0 1 0 6 16.46l5.3 5.31a1 1 0 0 0 1.42 0L18 16.46a8.46 8.46 0 0 0 2.46-6.83Zm-3.86 5.42l-4.6 4.6l-4.6-4.6a6.49 6.49 0 0 1-1.87-5.22A6.57 6.57 0 0 1 8.42 5a6.47 6.47 0 0 1 7.16 0a6.57 6.57 0 0 1 2.89 4.81a6.49 6.49 0 0 1-1.87 5.24Z',
+  ],
+  closet: ClosetIcon,
+}
+
+export const vuetify = createVuetify({
+  theme: {
+    defaultTheme: 'light',
+    //
+  },
+  icons: {
+    defaultSet: 'mdi',
+    aliases: {
+      ...customIcons,
+    },
+  },
+})
+```
+
+```html
+<template>
+  <v-btn prepend-icon="$account">Custom Icon 1</v-btn>
+  <v-btn prepend-icon="$mdiCustomAlias">Custom Icon 2</v-btn>
+  <v-btn prepend-icon="$closet">Custom Icon 3</v-btn>
+  <v-btn prepend-icon="$annotation">Custom Icon 4</v-btn>
+  <v-btn prepend-icon="mdi-close">Default MDI Icon</v-btn>
+</template>
+```
+
+In this setup:
+
+* `$account` and `$closet` render your own Vue component SVG icons.
+* `$mdiCustomAlias` references an alias for the `mdi-tag` icon.
+* `$annotation` references inline SVG path data.
+
+This approach gives you flexibility: you can mix external libraries with your own icons seamlessly, while keeping your templates cleaner and easier to maintain.
+
+## Multiple icon sets
+
+Out of the box, Vuetify supports the use of multiple *different* icon sets at the same time. The following example demonstrates how to change the default icon font to Font Awesome (`fa`) while still maintaining access to the original Material Design Icons (`mdi`) through the use of a prefix:
+
+```js { resource="src/plugins/vuetify.js" }
+import { createVuetify } from 'vuetify'
+import { aliases, fa } from 'vuetify/iconsets/fa'
+import { mdi } from 'vuetify/iconsets/mdi'
+
+export default createVuetify({
+  icons: {
+    defaultSet: 'fa',
+    aliases,
+    sets: {
+      fa,
+      mdi,
+    },
+  },
+})
+```
+
+```html
+<template>
+  <v-icon icon="fas fa-plus" /> // This renders a FontAwesome icon
+  <v-icon icon="mdi:mdi-minus" /> // This renders a MDI icon
+</template>
+```
+
+::: info
+
+It is not necessary to provide a prefix (such as `mdi:`) for icons from the default icon set
+
+:::
+
 ## Creating a custom icon set
 
 An icon set consists of an object with one property `component` which should be a functional component that receives props of type `IconsProps`, and renders an icon.
@@ -402,6 +558,8 @@ const aliases: IconAliases = {
   checkboxOff: '...',
   checkboxIndeterminate: '...',
   delimiter: '...',
+  sortAsc: '...',
+  sortDesc: '...',
   sort: '...',
   expand: '...',
   menu: '...',
@@ -420,6 +578,7 @@ const aliases: IconAliases = {
   file: '...',
   plus: '...',
   minus: '...',
+  calendar:  '...',
 }
 
 const custom: IconSet = {
@@ -442,30 +601,4 @@ export default createVuetify({
     },
   },
 })
-```
-
-## Extending available aliases
-
-If you are developing custom Vuetify components, you can extend the `aliases` object to utilize the same functionality that internal Vuetify components use. Icon aliases are referenced with an initial `$` followed by the name of the alias, e.g. `$product`.
-
-```js { resource="src/plugins/vuetify.js" }
-import { createVuetify } from 'vuetify'
-import { aliases, mdi } from 'vuetify/iconsets/mdi'
-
-export default createVuetify({
-  icons: {
-    aliases: {
-      ...aliases,
-      product: 'mdi-dropbox',
-      support: 'mdi-lifebuoy',
-    },
-  },
-})
-```
-
-```html
-<template>
-  <v-icon icon="$product" />
-  <v-icon icon="$support" />
-</template>
 ```

@@ -7,7 +7,7 @@ import { genericComponent, propsFactory } from '@/util'
 
 type VHoverSlots = {
   default: {
-    isHovering: boolean | undefined
+    isHovering: boolean | null
     props: Record<string, unknown>
   }
 }
@@ -16,7 +16,7 @@ export const makeVHoverProps = propsFactory({
   disabled: Boolean,
   modelValue: {
     type: Boolean,
-    default: undefined,
+    default: null,
   },
 
   ...makeDelayProps(),

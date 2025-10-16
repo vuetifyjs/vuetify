@@ -1,7 +1,7 @@
 <template>
   <v-card
-    flat
     color="transparent"
+    flat
   >
     <div class="text-subtitle-2">Rules</div>
 
@@ -24,9 +24,9 @@
         :rules="rules"
         hint="40 in stock"
         label="How many?"
-        persistent-hint
         step="10"
         thumb-label="always"
+        persistent-hint
         ticks
       ></v-slider>
     </v-card-text>

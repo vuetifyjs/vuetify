@@ -1,5 +1,5 @@
 // Utilities
-import { effectScope, nextTick, onScopeDispose, watchEffect } from 'vue'
+import { effectScope, onScopeDispose, watchEffect } from 'vue'
 import { requestNewFrame } from './requestNewFrame'
 import { convertToUnit, getScrollParents, hasScrollbar, IN_BROWSER, propsFactory } from '@/util'
 
@@ -10,11 +10,12 @@ export interface ScrollStrategyData {
   root: Ref<HTMLElement | undefined>
   contentEl: Ref<HTMLElement | undefined>
   targetEl: Ref<HTMLElement | undefined>
+  target: Ref<HTMLElement | [x: number, y: number] | undefined>
   isActive: Ref<boolean>
   updateLocation: Ref<((e: Event) => void) | undefined>
 }
 
-type ScrollStrategyFn = (data: ScrollStrategyData, props: StrategyProps, scope: EffectScope) => void
+export type ScrollStrategyFunction = (data: ScrollStrategyData, props: StrategyProps, scope: EffectScope) => void
 
 const scrollStrategies = {
   none: null,
@@ -24,7 +25,7 @@ const scrollStrategies = {
 }
 
 export interface StrategyProps {
-  scrollStrategy: keyof typeof scrollStrategies | ScrollStrategyFn
+  scrollStrategy: keyof typeof scrollStrategies | ScrollStrategyFunction
   contained: boolean | undefined
 }
 
@@ -49,7 +50,7 @@ export function useScrollStrategies (
     if (!(data.isActive.value && props.scrollStrategy)) return
 
     scope = effectScope()
-    await nextTick()
+    await new Promise(resolve => setTimeout(resolve))
     scope.active && scope.run(() => {
       if (typeof props.scrollStrategy === 'function') {
         props.scrollStrategy(data, props, scope!)
@@ -69,13 +70,14 @@ function closeScrollStrategy (data: ScrollStrategyData) {
     data.isActive.value = false
   }
 
-  bindScroll(data.targetEl.value ?? data.contentEl.value, onScroll)
+  bindScroll(getTargetEl(data.target.value, data.contentEl.value), onScroll)
 }
 
 function blockScrollStrategy (data: ScrollStrategyData, props: StrategyProps) {
   const offsetParent = data.root.value?.offsetParent
+  const target = getTargetEl(data.target.value, data.contentEl.value)
   const scrollElements = [...new Set([
-    ...getScrollParents(data.targetEl.value, props.contained ? offsetParent : undefined),
+    ...getScrollParents(target, props.contained ? offsetParent : undefined),
     ...getScrollParents(data.contentEl.value, props.contained ? offsetParent : undefined),
   ])].filter(el => !el.classList.contains('v-overlay-scroll-blocked'))
   const scrollbarWidth = window.innerWidth - document.documentElement.offsetWidth
@@ -101,6 +103,9 @@ function blockScrollStrategy (data: ScrollStrategyData, props: StrategyProps) {
       const x = parseFloat(el.style.getPropertyValue('--v-body-scroll-x'))
       const y = parseFloat(el.style.getPropertyValue('--v-body-scroll-y'))
 
+      const scrollBehavior = el.style.scrollBehavior
+
+      el.style.scrollBehavior = 'auto'
       el.style.removeProperty('--v-body-scroll-x')
       el.style.removeProperty('--v-body-scroll-y')
       el.style.removeProperty('--v-scrollbar-offset')
@@ -108,6 +113,8 @@ function blockScrollStrategy (data: ScrollStrategyData, props: StrategyProps) {
 
       el.scrollLeft = -x
       el.scrollTop = -y
+
+      el.style.scrollBehavior = scrollBehavior
     })
     if (scrollableParent) {
       data.root.value!.classList.remove('v-overlay--scroll-blocked')
@@ -131,7 +138,7 @@ function repositionScrollStrategy (data: ScrollStrategyData, props: StrategyProp
 
   ric = (typeof requestIdleCallback === 'undefined' ? (cb: Function) => cb() : requestIdleCallback)(() => {
     scope.run(() => {
-      bindScroll(data.targetEl.value ?? data.contentEl.value, e => {
+      bindScroll(getTargetEl(data.target.value, data.contentEl.value), e => {
         if (slow) {
           // If the position calculation is slow,
           // defer updates until scrolling is finished.
@@ -156,8 +163,16 @@ function repositionScrollStrategy (data: ScrollStrategyData, props: StrategyProp
   })
 }
 
-/** @private */
-function bindScroll (el: HTMLElement | undefined, onScroll: (e: Event) => void) {
+function getTargetEl (
+  target: HTMLElement | [x: number, y: number] | undefined,
+  contentEl: HTMLElement | undefined,
+) {
+  return Array.isArray(target)
+    ? document.elementsFromPoint(...target).find(el => !contentEl?.contains(el))
+    : target ?? contentEl
+}
+
+function bindScroll (el: Element | undefined, onScroll: (e: Event) => void) {
   const scrollElements = [document, ...getScrollParents(el)]
   scrollElements.forEach(el => {
     el.addEventListener('scroll', onScroll, { passive: true })

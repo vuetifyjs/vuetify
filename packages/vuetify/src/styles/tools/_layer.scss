@@ -1,0 +1,11 @@
+@use '../settings';
+
+@mixin layer ($name) {
+  @if (settings.$layers) {
+    @layer vuetify.#{$name} {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}

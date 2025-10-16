@@ -1,16 +1,18 @@
+@use '../../styles/tools'
 @use './variables' as *
 
-.v-application
-  display: flex
-  background: $application-background
-  color: $application-color
+@include tools.layer('components')
+  .v-application
+    display: flex
+    background: $application-background
+    color: $application-color
 
-.v-application__wrap
-  backface-visibility: hidden
-  display: flex
-  flex-direction: column
-  flex: 1 1 auto
-  max-width: 100%
-  min-height: 100vh
-  min-height: 100dvh
-  position: relative
+  .v-application__wrap
+    backface-visibility: hidden
+    display: flex
+    flex-direction: column
+    flex: 1 1 auto
+    max-width: 100%
+    min-height: 100vh
+    min-height: 100dvh
+    position: relative

@@ -1,70 +1,77 @@
 @use 'sass:map';
 @use '../settings';
 @use '../settings/colors';
+@use '../tools';
 @use '../tools/functions' as *;
 
 @mixin background-color($color_value) {
-  background-color: $color_value !important;
+  & {
+    background-color: $color_value !important;
+  }
 }
 @mixin text-color($color_value) {
-  color: $color_value !important;
+  & {
+    color: $color_value !important;
+  }
 }
 @mixin background-text-color($color_name, $color_type) {
   $map_value: map-deep-get(colors.$text-on-colors, $color_name, $color_type);
 
-  color: $map_value !important;
+  & {
+    color: $map_value !important;
+  }
 }
 
 @if (settings.$color-pack) {
-  @each $color_name, $color_value in colors.$shades {
-    .bg-#{$color_name} {
-      @include background-color($color_value);
+  @include tools.layer('colors') {
+    @each $color_name, $color_value in colors.$shades {
+      .bg-#{$color_name} {
+        @include background-color($color_value);
 
-      @if (map.has-key(colors.$text-on-colors, 'shades')) {
-        @include background-text-color('shades', $color_name);
+        @if (map.has-key(colors.$text-on-colors, 'shades')) {
+          @include background-text-color('shades', $color_name);
+        }
       }
     }
-  }
 
-  @each $color_name, $color_color in colors.$colors {
-    @each $color_type, $color_value in $color_color {
-      @if ($color_type == 'base') {
-        .bg-#{$color_name} {
-          @include background-color($color_value);
+    @each $color_name, $color_color in colors.$colors {
+      @each $color_type, $color_value in $color_color {
+        @if ($color_type == 'base') {
+          .bg-#{$color_name} {
+            @include background-color($color_value);
 
-          @if (map.has-key(colors.$text-on-colors, $color_name)) {
-            @include background-text-color($color_name, $color_type);
+            @if (map.has-key(colors.$text-on-colors, $color_name)) {
+              @include background-text-color($color_name, $color_type);
+            }
+          }
+        } @else if ($color_type != 'shades') {
+          .bg-#{$color_name}-#{$color_type} {
+            @include background-color($color_value);
+
+            @if (map.has-key(colors.$text-on-colors, $color_name)) {
+              @include background-text-color($color_name, $color_type);
+            }
           }
         }
       }
-      @else if ($color_type != 'shades') {
-        .bg-#{$color_name}-#{$color_type} {
-          @include background-color($color_value);
+    }
 
-          @if (map.has-key(colors.$text-on-colors, $color_name)) {
-            @include background-text-color($color_name, $color_type);
+    @each $color_name, $color_value in colors.$shades {
+      .text-#{$color_name} {
+        @include text-color($color_value);
+      }
+    }
+
+    @each $color_name, $color_color in colors.$colors {
+      @each $color_type, $color_value in $color_color {
+        @if ($color_type == 'base') {
+          .text-#{$color_name} {
+            @include text-color($color_value);
           }
-        }
-      }
-    }
-  }
-
-  @each $color_name, $color_value in colors.$shades {
-    .text-#{$color_name} {
-      @include text-color($color_value);
-    }
-  }
-
-  @each $color_name, $color_color in colors.$colors {
-    @each $color_type, $color_value in $color_color {
-      @if ($color_type == 'base') {
-        .text-#{$color_name} {
-          @include text-color($color_value);
-        }
-      }
-      @else if ($color_type != 'shades') {
-        .text-#{$color_name}-#{$color_type} {
-          @include text-color($color_value);
+        } @else if ($color_type != 'shades') {
+          .text-#{$color_name}-#{$color_type} {
+            @include text-color($color_value);
+          }
         }
       }
     }

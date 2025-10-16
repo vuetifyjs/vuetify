@@ -1,5 +1,5 @@
 <template>
-  <usage-example
+  <ExamplesUsageExample
     v-model="model"
     :code="code"
     :options="options"
@@ -19,20 +19,16 @@
 
       <v-slider
         v-model="size"
-        min="40"
-        max="80"
-        step="1"
         label="Size"
+        max="80"
+        min="40"
+        step="1"
       ></v-slider>
     </template>
-  </usage-example>
+  </ExamplesUsageExample>
 </template>
 
 <script setup>
-  // Utilities
-  import { computed, ref } from 'vue'
-  import { propsToString } from '@/util/helpers'
-
   const model = ref('default')
   const icon = ref(false)
   const image = ref(false)

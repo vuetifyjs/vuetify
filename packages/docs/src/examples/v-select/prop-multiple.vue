@@ -2,17 +2,17 @@
   <v-select
     v-model="favorites"
     :items="states"
+    hint="Pick your favorite states"
     label="Select"
     multiple
-    hint="Pick your favorite states"
     persistent-hint
   ></v-select>
 </template>
 
 <script setup>
-  import { ref } from 'vue'
+  import { shallowRef } from 'vue'
 
-  const favorites = ref([])
+  const favorites = shallowRef([])
 
   const states = [
     'Alabama',

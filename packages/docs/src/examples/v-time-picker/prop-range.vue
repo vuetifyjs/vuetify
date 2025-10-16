@@ -2,8 +2,8 @@
   <div>
     <h1>Plan your event:</h1>
     <v-row
-      justify="space-around"
       align="center"
+      justify="space-around"
     >
       <v-col style="width: 350px; flex: 0 1 auto;">
         <h2>Start:</h2>

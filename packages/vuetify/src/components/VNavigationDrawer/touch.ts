@@ -1,13 +1,23 @@
 // Composables
+import { useToggleScope } from '@/composables/toggleScope'
 import { useVelocity } from '@/composables/touch'
 
 // Utilities
-import { computed, onBeforeUnmount, onMounted, shallowRef } from 'vue'
+import { computed, onBeforeUnmount, onMounted, onScopeDispose, shallowRef, watchEffect } from 'vue'
+import { clamp } from '@/util'
 
 // Types
 import type { Ref } from 'vue'
 
-export function useTouch ({ isActive, isTemporary, width, touchless, position }: {
+export function useTouch ({
+  el,
+  isActive,
+  isTemporary,
+  width,
+  touchless,
+  position,
+}: {
+  el: Ref<HTMLElement | undefined>
   isActive: Ref<boolean>
   isTemporary: Ref<boolean>
   width: Ref<number>
@@ -53,7 +63,7 @@ export function useTouch ({ isActive, isTemporary, width, touchless, position }:
       : position.value === 'bottom' ? (document.documentElement.clientHeight - pos - offset.value) / width.value
       : oops()
     )
-    return limit ? Math.max(0, Math.min(1, progress)) : progress
+    return limit ? clamp(progress) : progress
   }
 
   function onTouchstart (e: TouchEvent) {
@@ -83,12 +93,12 @@ export function useTouch ({ isActive, isTemporary, width, touchless, position }:
       inElement ||
       (isActive.value && isTemporary.value)
     ) {
-      maybeDragging = true
       start = [touchX, touchY]
 
       offset.value = getOffset(isHorizontal.value ? touchX : touchY, isActive.value)
       dragProgress.value = getProgress(isHorizontal.value ? touchX : touchY)
 
+      maybeDragging = offset.value > -20 && offset.value < 80
       endTouch(e)
       addMovement(e)
     }
@@ -172,6 +182,21 @@ export function useTouch ({ isActive, isTemporary, width, touchless, position }:
         : oops(),
       transition: 'none',
     } : undefined
+  })
+
+  useToggleScope(isDragging, () => {
+    const transform = el.value?.style.transform ?? null
+    const transition = el.value?.style.transition ?? null
+
+    watchEffect(() => {
+      el.value?.style.setProperty('transform', dragStyles.value?.transform || 'none')
+      el.value?.style.setProperty('transition', dragStyles.value?.transition || null)
+    })
+
+    onScopeDispose(() => {
+      el.value?.style.setProperty('transform', transform)
+      el.value?.style.setProperty('transition', transition)
+    })
   })
 
   return {

@@ -4,15 +4,13 @@
     max-width="600"
   >
     <v-toolbar color="secondary">
-      <v-btn variant="text" icon="mdi-menu"></v-btn>
+      <v-btn icon="mdi-menu" variant="text"></v-btn>
 
       <v-toolbar-title>My files</v-toolbar-title>
 
-      <v-spacer></v-spacer>
+      <v-btn icon="mdi-magnify" variant="text"></v-btn>
 
-      <v-btn variant="text" icon="mdi-magnify"></v-btn>
-
-      <v-btn variant="text" icon="mdi-view-module"></v-btn>
+      <v-btn icon="mdi-view-module" variant="text"></v-btn>
     </v-toolbar>
 
     <v-list lines="two">
@@ -21,8 +19,8 @@
       <v-list-item
         v-for="folder in folders"
         :key="folder.title"
-        :title="folder.title"
         :subtitle="folder.subtitle"
+        :title="folder.title"
       >
         <template v-slot:prepend>
           <v-avatar color="grey-lighten-1">
@@ -46,8 +44,8 @@
       <v-list-item
         v-for="file in files"
         :key="file.title"
-        :title="file.title"
         :subtitle="file.subtitle"
+        :title="file.title"
       >
         <template v-slot:prepend>
           <v-avatar :color="file.color">

@@ -11,8 +11,8 @@
     <template v-slot:append>
       <div class="me-n2">
         <v-btn
-          icon="$close"
           density="comfortable"
+          icon="$close"
           variant="plain"
         ></v-btn>
       </div>
@@ -28,12 +28,12 @@
       >
         <template v-slot:default="{ toggle }">
           <v-btn
-            :icon="`mdi-numeric-${n}`"
             :active="model != null && model + 1 >= n"
-            border
+            :icon="`mdi-numeric-${n}`"
             height="40"
             variant="text"
             width="40"
+            border
             @click="toggle"
           ></v-btn>
         </template>

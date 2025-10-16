@@ -11,10 +11,10 @@
         v-model="model"
         :hint="!isEditing ? 'Click the icon to edit' : 'Click the icon to save'"
         :items="states"
-        :readonly="!isEditing"
         :label="`State — ${isEditing ? 'Editable' : 'Readonly'}`"
-        persistent-hint
+        :readonly="!isEditing"
         prepend-icon="mdi-city"
+        persistent-hint
       >
         <template v-slot:append>
           <v-slide-x-reverse-transition mode="out-in">

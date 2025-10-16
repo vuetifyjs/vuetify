@@ -1,5 +1,0 @@
-tasks:
-  - init: yarn install && yarn run build
-vscode:
-  extensions:
-    - octref.vetur@0.23.0:TEzauMObB6f3i2JqlvrOpA==

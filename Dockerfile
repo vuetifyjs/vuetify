@@ -1,9 +1,3 @@
-FROM mhart/alpine-node:12
-
-COPY . .
-
-EXPOSE 8095
-
-RUN yarn
-RUN yarn build
-CMD ["yarn", "start"]
+FROM caddy:2.10.2-alpine
+COPY ./packages/docs/dist /srv
+COPY ./packages/docs/build/Caddyfile /etc/caddy/Caddyfile

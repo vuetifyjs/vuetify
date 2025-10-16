@@ -1,6 +1,6 @@
 <template>
   <v-file-input
-    multiple
     label="File input"
+    multiple
   ></v-file-input>
 </template>

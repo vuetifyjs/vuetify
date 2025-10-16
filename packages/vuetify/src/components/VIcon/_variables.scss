@@ -3,6 +3,7 @@
 @use '../../styles/tools';
 
 // VIcon
+$icon-disabled-opacity: 0.38 !default;
 $icon-left-margin-left: map.get(settings.$grid-gutters, 'md') !default;
 $icon-letter-spacing: normal !default;
 $icon-line-height: 1 !default;

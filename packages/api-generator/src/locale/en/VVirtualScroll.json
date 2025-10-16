@@ -1,12 +1,14 @@
 {
   "props": {
-    "height": "Height of the component as a css value",
-    "itemHeight": "Height in pixels of each item to display. When using **dynamic-item-height** this should be an average initial size.",
-    "itemKey": "Required when using **dynamic-item-height** together with object items. Should point to a property with a unique value for each item.",
-    "dynamicItemHeight": "Allows the scroller to support items with different and/or dynamic heights.",
-    "items": "The array of items to display"
+    "height": "Height of the component as a css value/",
+    "itemKey": "Should point to a property with a unique value for each item, if not set then item index will be used as a key which may result in unnecessary re-renders.",
+    "items": "The array of items to display.",
+    "renderless": "Disables default component rendering functionality. The parent node must be [a positioned element](https://developer.mozilla.org/en-US/docs/Web/CSS/position#types_of_positioning), e.g. using `position: relative;`"
   },
   "slots": {
-    "default": "Default slot to render a single item"
+    "default": "Default slot to render a single item."
+  },
+  "exposed": {
+    "calculateVisibleItems": "Trigger updating the currently rendered items based on scroll position."
   }
 }

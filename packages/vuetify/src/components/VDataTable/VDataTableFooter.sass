@@ -1,0 +1,36 @@
+@forward './variables'
+@use '../../styles/tools'
+@use './variables' as *
+
+@include tools.layer('components')
+  .v-data-table-footer
+    align-items: center
+    display: flex
+    flex-wrap: wrap
+    justify-content: flex-end
+    padding: $data-table-footer-padding
+
+    &__items-per-page
+      align-items: center
+      display: flex
+      justify-content: center
+
+      > span
+        padding-inline-end: $data-table-footer-items-per-page-padding
+
+      > .v-select
+        width: $data-table-footer-select-width
+
+    &__info
+      display: flex
+      justify-content: flex-end
+      min-width: $data-table-footer-info-min-width
+      padding: $data-table-footer-info-padding
+
+    &__paginationz
+      align-items: center
+      display: flex
+      margin-inline-start: $data-table-footer-pagination-margin-inline-start
+
+    &__page
+      padding: 0 8px

@@ -19,11 +19,6 @@
 </template>
 
 <script setup>
-  // Composables
-  import { rpath } from '@/util/routes'
-  import { useDisplay } from 'vuetify'
-  import { useI18n } from 'vue-i18n'
-
   const { mdAndDown } = useDisplay()
 
   const { t } = useI18n()

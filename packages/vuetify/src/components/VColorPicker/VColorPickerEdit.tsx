@@ -6,6 +6,7 @@ import { VBtn } from '@/components/VBtn'
 
 // Composables
 import { makeComponentProps } from '@/composables/component'
+import { useLocale } from '@/composables/locale'
 
 // Utilities
 import { computed } from 'vue'
@@ -55,6 +56,7 @@ export const VColorPickerEdit = defineComponent({
   },
 
   setup (props, { emit }) {
+    const { t } = useLocale()
     const enabledModes = computed(() => {
       return props.modes.map(key => ({ ...modes[key], name: key }))
     })
@@ -66,10 +68,11 @@ export const VColorPickerEdit = defineComponent({
 
       const color = props.color ? mode.to(props.color) : null
 
-      return mode.inputs?.map(({ getValue, getColor, ...inputProps }) => {
+      return mode.inputs?.map(({ getValue, getColor, localeKey, ...inputProps }) => {
         return {
           ...mode.inputProps,
           ...inputProps,
+          ariaLabel: t(`$vuetify.colorPicker.ariaLabel.${localeKey}`),
           disabled: props.disabled,
           value: color && getValue(color),
           onChange: (e: InputEvent) => {
@@ -77,7 +80,7 @@ export const VColorPickerEdit = defineComponent({
 
             if (!target) return
 
-            emit('update:color', mode.from(getColor(color ?? nullColor, target.value)))
+            emit('update:color', mode.from(getColor(color ?? mode.to(nullColor), target.value)))
           },
         }
       })
@@ -99,6 +102,7 @@ export const VColorPickerEdit = defineComponent({
             icon="$unfold"
             size="x-small"
             variant="plain"
+            aria-label={ t('$vuetify.colorPicker.ariaLabel.changeFormat') }
             onClick={ () => {
               const mi = enabledModes.value.findIndex(m => m.name === props.mode)
 

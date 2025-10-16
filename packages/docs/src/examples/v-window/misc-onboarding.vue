@@ -1,8 +1,8 @@
 <template>
   <v-card
+    rounded="0"
     theme="dark"
     flat
-    rounded="0"
   >
     <v-window v-model="onboarding">
       <v-window-item
@@ -11,8 +11,8 @@
         :value="n"
       >
         <v-card
-          height="200"
           class="d-flex justify-center align-center"
+          height="200"
         >
           <span class="text-h2">
             Card {{ n }}
@@ -23,8 +23,8 @@
 
     <v-card-actions class="justify-space-between">
       <v-btn
-        variant="plain"
         icon="mdi-chevron-left"
+        variant="plain"
         @click="prev"
       ></v-btn>
       <v-item-group
@@ -46,8 +46,8 @@
         </v-item>
       </v-item-group>
       <v-btn
-        variant="plain"
         icon="mdi-chevron-right"
+        variant="plain"
         @click="next"
       ></v-btn>
     </v-card-actions>
@@ -58,7 +58,7 @@
   import { ref } from 'vue'
 
   const length = ref(3)
-  const onboarding = ref(0)
+  const onboarding = ref(1)
 
   function next () {
     onboarding.value = onboarding.value + 1 > length.value ? 1 : onboarding.value + 1
@@ -72,7 +72,7 @@
   export default {
     data: () => ({
       length: 3,
-      onboarding: 0,
+      onboarding: 1,
     }),
 
     methods: {

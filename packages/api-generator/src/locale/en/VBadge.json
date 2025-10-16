@@ -3,13 +3,13 @@
     "bordered": "Applies a **2px** by default and **1.5px** border around the badge when using the **dot** property.",
     "content": "Text content to show in the badge.",
     "dot": "Reduce the size of the badge and hide its contents.",
-    "inline": "Moves the badge to be inline with the wrapping element. Supports the usage of the **left** prop.",
-    "label": "The **aria-label** used for the badge",
+    "floating": "Move the badge further away from the slotted content. Equivalent to an 8px offset.",
+    "inline": "Display as an inline block instead of absolute position. **location**, **floating**, and **offset** will have no effect.",
+    "label": "The **aria-label** used for the badge.",
+    "max": "Sets the maximum number allowed when using the **content** prop with a `number` like value. If the content number exceeds the maximum value, a `+` suffix is added.",
     "offsetX": "Offset the badge on the x-axis.",
     "offsetY": "Offset the badge on the y-axis.",
-    "overlap": "Overlaps the slotted content on top of the component.",
-    "max": "Sets the maximum number allowed when using the **content** prop with a `number` like value. If the content number exceeds the maximum value, a `+` suffix is added.",
-    "floating": "Elevates the badge above the slotted content."
+    "modelValue": "Controls whether the component is visible or hidden."
   },
   "slots": {
     "badge": "The slot used for the badge's content."

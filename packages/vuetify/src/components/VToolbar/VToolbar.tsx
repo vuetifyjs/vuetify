@@ -19,7 +19,7 @@ import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
-import { computed, shallowRef, toRef } from 'vue'
+import { computed, shallowRef } from 'vue'
 import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -41,7 +41,10 @@ export const makeVToolbarProps = propsFactory({
     default: 'default',
     validator: (v: any) => allowedDensities.includes(v),
   },
-  extended: Boolean,
+  extended: {
+    type: Boolean,
+    default: null,
+  },
   extensionHeight: {
     type: [Number, String],
     default: 48,
@@ -78,14 +81,14 @@ export const VToolbar = genericComponent<VToolbarSlots>()({
   props: makeVToolbarProps(),
 
   setup (props, { slots }) {
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.color)
     const { borderClasses } = useBorder(props)
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props)
     const { themeClasses } = provideTheme(props)
     const { rtlClasses } = useRtl()
 
-    const isExtended = shallowRef(!!(props.extended || slots.extension?.()))
+    const isExtended = shallowRef(props.extended === null ? !!(slots.extension?.()) : props.extended)
     const contentHeight = computed(() => parseInt((
       Number(props.height) +
       (props.density === 'prominent' ? Number(props.height) : 0) -
@@ -115,7 +118,7 @@ export const VToolbar = genericComponent<VToolbarSlots>()({
       const hasImage = !!(slots.image || props.image)
 
       const extension = slots.extension?.()
-      isExtended.value = !!(props.extended || extension)
+      isExtended.value = props.extended === null ? !!extension : props.extended
 
       return (
         <props.tag

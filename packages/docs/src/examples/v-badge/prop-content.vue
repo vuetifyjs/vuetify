@@ -3,7 +3,7 @@
     <v-spacer></v-spacer>
 
     <v-btn class="text-none" stacked>
-      <v-badge dot color="success">
+      <v-badge color="success" dot>
         <v-icon>mdi-home-outline</v-icon>
       </v-badge>
     </v-btn>
@@ -13,13 +13,13 @@
     </v-btn>
 
     <v-btn class="text-none" stacked>
-      <v-badge content="9+" color="error">
+      <v-badge color="error" content="9+">
         <v-icon>mdi-store-outline</v-icon>
       </v-badge>
     </v-btn>
 
     <v-btn class="text-none" stacked>
-      <v-badge content="2" color="error">
+      <v-badge color="error" content="2">
         <v-icon>mdi-bell-outline</v-icon>
       </v-badge>
     </v-btn>

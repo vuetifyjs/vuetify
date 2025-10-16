@@ -8,15 +8,17 @@ import { VSelectionControl } from '@/components/VSelectionControl'
 import { makeSelectionControlGroupProps, VSelectionControlGroup } from '@/components/VSelectionControlGroup/VSelectionControlGroup'
 
 // Composables
+import { forwardRefs } from '@/composables/forwardRefs'
 import { IconValue } from '@/composables/icons'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed } from 'vue'
-import { filterInputAttrs, genericComponent, getUid, omit, propsFactory, useRender } from '@/util'
+import { computed, ref, useId } from 'vue'
+import { filterInputAttrs, genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { VInputSlots } from '@/components/VInput/VInput'
+import type { GenericProps } from '@/util'
 
 export type VRadioGroupSlots = Omit<VInputSlots, 'default'> & {
   default: never
@@ -49,7 +51,13 @@ export const makeVRadioGroupProps = propsFactory({
   },
 }, 'VRadioGroup')
 
-export const VRadioGroup = genericComponent<VRadioGroupSlots>()({
+export const VRadioGroup = genericComponent<new <T>(
+  props: {
+    modelValue?: T | null
+    'onUpdate:modelValue'?: (value: T | null) => void
+  },
+  slots: VRadioGroupSlots,
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VRadioGroup',
 
   inheritAttrs: false,
@@ -57,18 +65,19 @@ export const VRadioGroup = genericComponent<VRadioGroupSlots>()({
   props: makeVRadioGroupProps(),
 
   emits: {
-    'update:modelValue': (val: any) => true,
+    'update:modelValue': (value: any) => true,
   },
 
   setup (props, { attrs, slots }) {
-    const uid = getUid()
+    const uid = useId()
     const id = computed(() => props.id || `radio-group-${uid}`)
     const model = useProxiedModel(props, 'modelValue')
+    const inputRef = ref<VInput>()
 
     useRender(() => {
       const [rootAttrs, controlAttrs] = filterInputAttrs(attrs)
-      const [inputProps, _1] = VInput.filterProps(props)
-      const [controlProps, _2] = VSelectionControl.filterProps(props)
+      const inputProps = VInput.filterProps(props)
+      const controlProps = VSelectionControl.filterProps(props)
       const label = slots.label
         ? slots.label({
           label: props.label,
@@ -78,6 +87,7 @@ export const VRadioGroup = genericComponent<VRadioGroupSlots>()({
 
       return (
         <VInput
+          ref={ inputRef }
           class={[
             'v-radio-group',
             props.class,
@@ -126,7 +136,7 @@ export const VRadioGroup = genericComponent<VRadioGroupSlots>()({
       )
     })
 
-    return {}
+    return forwardRefs({}, inputRef)
   },
 })
 

@@ -1,5 +1,6 @@
 {
   "props": {
+    "baseColor": "Sets the color of the input when it is not focused.",
     "value": "The value used when the component is selected in a group. If not provided, a unique ID will be used."
   },
   "slots": {

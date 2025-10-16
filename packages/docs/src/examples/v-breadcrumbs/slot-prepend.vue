@@ -1,7 +1,7 @@
 <template>
   <v-breadcrumbs :items="items">
     <template v-slot:prepend>
-      <v-icon size="small" icon="$vuetify"></v-icon>
+      <v-icon icon="$vuetify" size="small"></v-icon>
     </template>
   </v-breadcrumbs>
 </template>
