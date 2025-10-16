@@ -29,8 +29,14 @@
     &--collapse
       max-width: $toolbar-collapsed-max-width
       overflow: hidden
-      border-end-end-radius: $toolbar-collapsed-border-radius
 
+      &-left
+        border-end-end-radius: $toolbar-collapsed-border-radius
+  
+      &-right
+        border-end-start-radius: $toolbar-collapsed-border-radius
+        margin-inline-start: auto
+        
       .v-toolbar-title
         display: none
 
@@ -55,16 +61,6 @@
 
   .v-toolbar__content
     overflow: hidden
-
-    &--left
-      border-end-end-radius: $toolbar-collapsed-border-radius
-
-    &--right
-      border-end-start-radius: $toolbar-collapsed-border-radius
-      margin-inline-start: auto
-
-    .v-toolbar-title
-      display: none
 
   &--flat
     @include tools.elevation($toolbar-flat-elevation)
