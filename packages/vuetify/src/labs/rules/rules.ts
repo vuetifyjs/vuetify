@@ -53,7 +53,7 @@ export function createRules (options: RulesOptions | undefined, locale: LocaleIn
       return (v: any) => (!v || (typeof v === 'string' && /^.+@\S+\.\S+$/.test(v))) || t(err || '$vuetify.rules.email')
     },
     number: (err?: string) => {
-      return (v: string) => !v || !isNaN(v) || t(err || '$vuetify.rules.number')
+      return (v: string) => !v || !isNaN(Number(v)) || t(err || '$vuetify.rules.number')
     },
     integer: (err?: string) => {
       return (v: string) => (/^[\d]*$/.test(v)) || t(err || '$vuetify.rules.integer')
