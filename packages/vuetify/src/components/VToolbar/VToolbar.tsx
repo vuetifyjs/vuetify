@@ -123,10 +123,10 @@ export const VToolbar = genericComponent<VToolbarSlots>()({
         <props.tag
           class={[
             'v-toolbar',
+            `v-toolbar--collapse-${props.collapsePosition}`,
             {
               'v-toolbar--absolute': props.absolute,
               'v-toolbar--collapse': props.collapse,
-              `v-toolbar--collapse-${collapsePositon}`,
               'v-toolbar--flat': props.flat,
               'v-toolbar--floating': props.floating,
               [`v-toolbar--density-${props.density}`]: true,
