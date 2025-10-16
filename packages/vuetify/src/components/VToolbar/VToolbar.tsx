@@ -33,8 +33,8 @@ export const makeVToolbarProps = propsFactory({
   absolute: Boolean,
   collapse: Boolean,
   collapsePosition: {
-    type: String as PropType<'left' | 'right'>,
-    default: 'left',
+    type: String as PropType<'start' | 'end'>,
+    default: 'start',
   },
   color: String,
   density: {
