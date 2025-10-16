@@ -17,6 +17,7 @@ import vTouch from '@/directives/touch'
 // Utilities
 import { computed, nextTick, provide, ref, shallowRef, toRef, watch } from 'vue'
 import { convertToUnit, genericComponent, IN_BROWSER, PREFERS_REDUCED_MOTION, propsFactory, useRender } from '@/util'
+import { getScrollParent } from '@/util/getScrollParent'
 
 // Types
 import type { ComputedRef, InjectionKey, PropType, Ref } from 'vue'
@@ -145,20 +146,7 @@ export const VWindow = genericComponent<new <T>(
       const savedScrollPosition = { x: 0, y: 0 }
 
       if (IN_BROWSER) {
-        // Find the first scrollable parent
-        let parent = rootRef.value?.parentElement
-        while (parent) {
-          const { overflowY, overflowX } = window.getComputedStyle(parent)
-          const isScrollable = /(auto|scroll)/.test(overflowY + overflowX)
-          if (isScrollable && (parent.scrollHeight > parent.clientHeight || parent.scrollWidth > parent.clientWidth)) {
-            scrollableParent = parent
-            break
-          }
-          parent = parent.parentElement
-        }
-
-        // Default to document root if no scrollable parent found
-        if (!scrollableParent) scrollableParent = document.documentElement
+        scrollableParent = getScrollParent(rootRef.value)
 
         // Save current scroll position
         savedScrollPosition.x = scrollableParent.scrollLeft
