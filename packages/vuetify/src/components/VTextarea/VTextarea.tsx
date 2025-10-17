@@ -101,7 +101,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
     const vInputRef = ref<VInput>()
     const vFieldRef = ref<VInput>()
     const controlHeight = shallowRef('')
-    const textareaRef = ref<HTMLInputElement>()
+    const textareaRef = ref<HTMLTextAreaElement>()
     const scrollbarWidth = ref(0)
     const { platform } = useDisplay()
     const autocomplete = useAutocomplete(props)
@@ -289,6 +289,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
                   ...slots,
                   default: ({
                     props: { class: fieldClass, ...slotProps },
+                    controlRef,
                   }) => (
                     <>
                       { props.prefix && (
@@ -298,7 +299,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
                       )}
 
                       <textarea
-                        ref={ textareaRef }
+                        ref={ val => textareaRef.value = controlRef.value = val as HTMLTextAreaElement }
                         class={ fieldClass }
                         value={ model.value }
                         onInput={ onInput }
