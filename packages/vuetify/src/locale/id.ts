@@ -124,6 +124,9 @@ export default {
     notEmpty: 'Pilih setidaknya satu nilai',
     pattern: 'Format tidak valid',
   },
+  command: {
+    search: 'Ketik perintah atau cari...',
+  },
   hotkey: {
     then: 'kemudian',
     ctrl: 'Ctrl',
