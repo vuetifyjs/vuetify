@@ -278,6 +278,7 @@ export default createVuetify({
   },
 })
 ```
+
 ## Caveats
 
 When using sass variables, there are a few considerations to be aware of.
