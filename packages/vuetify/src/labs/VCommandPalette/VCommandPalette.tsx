@@ -249,24 +249,24 @@ export const VCommandPalette = genericComponent()({
                 densityClasses.value,
               ]}
             >
+              { /* @ts-expect-error slots type is inferred as 'default' only */ }
+              { (slots.prepend as any)?.() }
+
+              <div class="px-4 py-2">
+                <VTextField
+                  ref={ searchInputRef }
+                  v-model={ searchQuery.value }
+                  placeholder={ props.placeholder || t('$vuetify.command.search') }
+                  prependInnerIcon="mdi-magnify"
+                  singleLine
+                  hideDetails
+                  variant="solo"
+                  flat
+                  bgColor="transparent"
+                />
+              </div>
+
               <VCardText class="pa-0">
-                { /* @ts-expect-error slots type is inferred as 'default' only */ }
-                { (slots.prepend as any)?.() }
-
-                <div class="px-4 py-2">
-                  <VTextField
-                    ref={ searchInputRef }
-                    v-model={ searchQuery.value }
-                    placeholder={ props.placeholder || t('$vuetify.command.search') }
-                    prependInnerIcon="mdi-magnify"
-                    singleLine
-                    hideDetails
-                    variant="solo"
-                    flat
-                    bgColor="transparent"
-                  />
-                </div>
-
                 { filteredItems.value.length > 0 ? (
                   <VList
                     key="list"
@@ -293,10 +293,10 @@ export const VCommandPalette = genericComponent()({
                     { (slots['no-data'] as any)?.() || (props.noDataText || t('$vuetify.noDataText')) }
                   </div>
                 )}
-
-                { /* @ts-expect-error slots type is inferred as 'default' only */ }
-                { (slots.append as any)?.() }
               </VCardText>
+
+              { /* @ts-expect-error slots type is inferred as 'default' only */ }
+              { (slots.append as any)?.() }
             </VCard>
           ),
         }}
