@@ -145,7 +145,7 @@ export const VWindow = genericComponent<new <T>(
       let scrollableParent: HTMLElement | undefined
       const savedScrollPosition = { x: 0, y: 0 }
 
-      if (IN_BROWSER) {
+      if (IN_BROWSER && oldVal >= 0) {
         scrollableParent = getScrollParent(rootRef.value)
 
         // Save current scroll position
