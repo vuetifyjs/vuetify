@@ -47,10 +47,6 @@ export function useCommandPaletteNavigation (
 ): UseCommandPaletteNavigationReturn {
   const selectedIndex = ref(-1)
 
-  const selectableItemsCount = computed(() => {
-    return options.filteredItems.value.filter(isSelectableItem).length
-  })
-
   /**
    * Get the active descendant ID for accessibility
    * Returns the ID of the currently selected item
@@ -81,13 +77,24 @@ export function useCommandPaletteNavigation (
    * Skips non-selectable items (subheaders, dividers)
    */
   function moveSelectionUp () {
-    const maxIndex = selectableItemsCount.value - 1
+    const maxIndex = options.filteredItems.value.length - 1
     if (maxIndex < 0) return
 
-    if (selectedIndex.value <= 0) {
-      selectedIndex.value = maxIndex
-    } else {
-      selectedIndex.value--
+    let nextIndex = selectedIndex.value - 1
+    if (nextIndex < 0) {
+      nextIndex = maxIndex
+    }
+
+    // Skip non-selectable items going backwards
+    while (nextIndex >= 0 && nextIndex !== selectedIndex.value) {
+      if (isSelectableItem(options.filteredItems.value[nextIndex])) {
+        selectedIndex.value = nextIndex
+        return
+      }
+      nextIndex--
+      if (nextIndex < 0) {
+        nextIndex = maxIndex
+      }
     }
   }
 
@@ -96,13 +103,24 @@ export function useCommandPaletteNavigation (
    * Skips non-selectable items (subheaders, dividers)
    */
   function moveSelectionDown () {
-    const maxIndex = selectableItemsCount.value - 1
+    const maxIndex = options.filteredItems.value.length - 1
     if (maxIndex < 0) return
 
-    if (selectedIndex.value >= maxIndex) {
-      selectedIndex.value = 0
-    } else {
-      selectedIndex.value++
+    let nextIndex = selectedIndex.value + 1
+    if (nextIndex > maxIndex) {
+      nextIndex = 0
+    }
+
+    // Skip non-selectable items going forwards
+    while (nextIndex <= maxIndex && nextIndex !== selectedIndex.value) {
+      if (isSelectableItem(options.filteredItems.value[nextIndex])) {
+        selectedIndex.value = nextIndex
+        return
+      }
+      nextIndex++
+      if (nextIndex > maxIndex) {
+        nextIndex = 0
+      }
     }
   }
 

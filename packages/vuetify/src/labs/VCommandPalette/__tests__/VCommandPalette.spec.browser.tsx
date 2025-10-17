@@ -686,4 +686,109 @@ describe('VCommandPalette', () => {
       expect(handleClick).toHaveBeenCalled()
     })
   })
+
+  describe('Keyboard Navigation Edge Cases', () => {
+    it('should navigate through all selectable items with mixed types', async () => {
+      const model = ref(true)
+      render(() => (
+        <VCommandPalette
+          v-model={ model.value }
+          items={ testItems }
+        />
+      ))
+
+      await screen.findByRole('dialog')
+      await wait(100)
+
+      const selectableItems = testItems.filter(item => !item.type || item.type === 'item')
+      expect(selectableItems.length).toBe(4) // File, Folder, Project, Open File
+
+      // Navigate through each selectable item
+      for (let i = 1; i < selectableItems.length; i++) {
+        await userEvent.keyboard('{ArrowDown}')
+        await wait(50)
+      }
+
+      // After navigating to the last item, next arrow down should wrap to first
+      await userEvent.keyboard('{ArrowDown}')
+      await wait(50)
+
+      // The first item (File) should be selected
+      const listbox = screen.getByRole('listbox')
+      expect(listbox).toHaveAttribute('aria-activedescendant', 'v-command-palette-item-0')
+    })
+
+    it('should navigate to Settings item through all items without wrapping prematurely', async () => {
+      const model = ref(true)
+      render(() => (
+        <VCommandPalette
+          v-model={ model.value }
+          items={ testItems }
+        />
+      ))
+
+      await screen.findByRole('dialog')
+      await wait(100)
+
+      // The items are: File (0), Folder (1), Project (2), Divider, Subheader, Open File (5)
+      // Indices: 0, 1, 2, 3, 4, 5
+      // Selectable: 0, 1, 2, 5
+
+      // Start at File (index 0)
+      let listbox = screen.getByRole('listbox')
+      expect(listbox).toHaveAttribute('aria-activedescendant', 'v-command-palette-item-0')
+
+      // Navigate to Folder (index 1)
+      await userEvent.keyboard('{ArrowDown}')
+      await wait(50)
+      listbox = screen.getByRole('listbox')
+      expect(listbox).toHaveAttribute('aria-activedescendant', 'v-command-palette-item-1')
+
+      // Navigate to Project (index 2)
+      await userEvent.keyboard('{ArrowDown}')
+      await wait(50)
+      listbox = screen.getByRole('listbox')
+      expect(listbox).toHaveAttribute('aria-activedescendant', 'v-command-palette-item-2')
+
+      // Navigate to Open File (index 5, should skip divider at 3 and subheader at 4)
+      await userEvent.keyboard('{ArrowDown}')
+      await wait(50)
+      listbox = screen.getByRole('listbox')
+      expect(listbox).toHaveAttribute('aria-activedescendant', 'v-command-palette-item-5')
+
+      // Navigate should wrap back to File (index 0)
+      await userEvent.keyboard('{ArrowDown}')
+      await wait(50)
+      listbox = screen.getByRole('listbox')
+      expect(listbox).toHaveAttribute('aria-activedescendant', 'v-command-palette-item-0')
+    })
+
+    it('should skip dividers and subheaders when navigating', async () => {
+      const model = ref(true)
+      render(() => (
+        <VCommandPalette
+          v-model={ model.value }
+          items={ testItems }
+        />
+      ))
+
+      await screen.findByRole('dialog')
+      await wait(100)
+
+      // From Project (2), next arrow down should skip divider (3) and subheader (4), landing on Open File (5)
+      await userEvent.keyboard('{ArrowDown}')
+      await wait(50)
+      await userEvent.keyboard('{ArrowDown}')
+      await wait(50)
+      await userEvent.keyboard('{ArrowDown}')
+      await wait(50)
+
+      const listbox = screen.getByRole('listbox')
+      expect(listbox).toHaveAttribute('aria-activedescendant', 'v-command-palette-item-5')
+
+      // Verify we never landed on divider or subheader
+      expect(listbox).not.toHaveAttribute('aria-activedescendant', 'v-command-palette-item-3')
+      expect(listbox).not.toHaveAttribute('aria-activedescendant', 'v-command-palette-item-4')
+    })
+  })
 })
