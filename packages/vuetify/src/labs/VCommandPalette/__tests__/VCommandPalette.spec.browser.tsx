@@ -499,9 +499,7 @@ describe('VCommandPalette', () => {
       })
 
       // Focus button before opening
-      if (previousFocus.value) {
-        previousFocus.value.focus()
-      }
+      previousFocus.value?.focus()
 
       // Wait for dialog to open
       await screen.findByRole('dialog')
@@ -700,8 +698,8 @@ describe('VCommandPalette', () => {
       await screen.findByRole('dialog')
       await wait(100)
 
-      const selectableItems = testItems.filter(item => !item.type || item.type === 'item')
-      expect(selectableItems.length).toBe(4) // File, Folder, Project, Open File
+      const selectableItems = testItems.filter(item => item.type === undefined)
+      expect(selectableItems).toHaveLength(4) // File, Folder, Project, Open File
 
       // Navigate through each selectable item
       for (let i = 1; i < selectableItems.length; i++) {
