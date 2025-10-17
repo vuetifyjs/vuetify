@@ -72,6 +72,7 @@ export const makeVTabsProps = propsFactory({
   },
   hideSlider: Boolean,
   sliderColor: String,
+  sliderTransition: String as PropType<'shift' | 'grow' | 'fade'>,
 
   ...pick(makeVTabProps(), ['spaced']),
   ...makeVSlideGroupProps({
@@ -105,12 +106,13 @@ export const VTabs = genericComponent<new <T = TabItem>(
 
     provideDefaults({
       VTab: {
-        color: toRef(() => props.color),
-        direction: toRef(() => props.direction),
-        stacked: toRef(() => props.stacked),
-        fixed: toRef(() => props.fixedTabs),
-        sliderColor: toRef(() => props.sliderColor),
-        hideSlider: toRef(() => props.hideSlider),
+        color: toRef(props, 'color'),
+        direction: toRef(props, 'direction'),
+        stacked: toRef(props, 'stacked'),
+        fixed: toRef(props, 'fixedTabs'),
+        sliderColor: toRef(props, 'sliderColor'),
+        sliderTransition: toRef(props, 'sliderTransition'),
+        hideSlider: toRef(props, 'hideSlider'),
       },
     })
 
