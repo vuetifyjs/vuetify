@@ -124,6 +124,9 @@ export default {
     notEmpty: '請至少選擇一個值',
     pattern: '格式無效',
   },
+  command: {
+    search: '輸入指令或搜尋...',
+  },
   hotkey: {
     then: '然後',
     ctrl: 'Ctrl',

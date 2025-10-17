@@ -124,6 +124,9 @@ export default {
     notEmpty: 'Seleziona almeno un valore',
     pattern: 'Formato non valido',
   },
+  command: {
+    search: 'Digita un comando o cerca...',
+  },
   hotkey: {
     then: 'poi',
     ctrl: 'Ctrl',

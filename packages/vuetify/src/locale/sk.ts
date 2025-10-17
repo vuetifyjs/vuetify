@@ -124,6 +124,9 @@ export default {
     notEmpty: 'Vyberte aspoň jednu hodnotu',
     pattern: 'Neplatný formát',
   },
+  command: {
+    search: 'Zadajte príkaz alebo hľadajte...',
+  },
   hotkey: {
     then: 'potom',
     ctrl: 'Ctrl',

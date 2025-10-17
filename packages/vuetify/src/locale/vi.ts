@@ -124,6 +124,9 @@ export default {
     notEmpty: 'Vui lòng chọn ít nhất một giá trị',
     pattern: 'Định dạng không hợp lệ',
   },
+  command: {
+    search: 'Nhập lệnh hoặc tìm kiếm...',
+  },
   hotkey: {
     then: 'sau đó',
     ctrl: 'Ctrl',

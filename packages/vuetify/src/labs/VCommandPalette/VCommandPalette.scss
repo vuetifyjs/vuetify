@@ -1,0 +1,44 @@
+@use '../../styles/tools';
+
+@include tools.layer('components') {
+  .v-command-palette {
+    &__list {
+      // Ensure proper scrolling behavior
+      overflow-y: auto;
+
+      .v-list-item {
+        // Active/selected state styling
+        &--active {
+          background-color: rgba(var(--v-theme-primary), 0.12);
+
+          &:hover {
+            background-color: rgba(var(--v-theme-primary), 0.16);
+          }
+        }
+
+        // Hover state
+        &:hover {
+          background-color: rgba(var(--v-theme-on-surface), 0.08);
+        }
+
+        // Focus visible for keyboard navigation
+        &:focus-visible {
+          outline: 2px solid rgb(var(--v-theme-primary));
+          outline-offset: -2px;
+        }
+      }
+
+      // Subheader styling
+      .v-list-subheader {
+        // Non-selectable, visual only
+        opacity: 0.7;
+        user-select: none;
+      }
+
+      // Divider styling
+      .v-divider {
+        margin-block: 4px;
+      }
+    }
+  }
+}

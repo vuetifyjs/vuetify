@@ -124,6 +124,9 @@ export default {
     notEmpty: 'Lūdzu, izvēlieties vismaz vienu vērtību',
     pattern: 'Nederīgs formāts',
   },
+  command: {
+    search: 'Ierakstiet komandu vai meklējiet...',
+  },
   hotkey: {
     then: 'tad',
     ctrl: 'Ctrl',
