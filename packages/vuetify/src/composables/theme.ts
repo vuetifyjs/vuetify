@@ -43,6 +43,7 @@ export type ThemeOptions = false | {
   stylesheetId?: string
   scope?: string
   unimportant?: boolean
+  layer?: boolean | string
 }
 export type ThemeDefinition = DeepPartial<InternalThemeDefinition>
 
@@ -58,6 +59,7 @@ interface InternalThemeOptions {
   scoped: boolean
   unimportant: boolean
   utilities: boolean
+  layer?: boolean | string
 }
 
 interface VariationsOptions {
@@ -317,6 +319,12 @@ function getScopedSelector (selector: string, scope?: string) {
   return selector === ':root' ? scopeSelector : `${scopeSelector} ${selector}`
 }
 
+function getLayerName (layer: string | boolean | undefined) {
+  if (typeof layer === 'string') return layer
+
+  return layer ? 'vuetify-theme' : undefined
+}
+
 function upsertStyles (id: string, cspNonce: string | undefined, styles: string) {
   const styleEl = getOrCreateStyleElement(id, cspNonce)
 
@@ -386,6 +394,7 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
     const lines: string[] = []
     const important = parsedOptions.unimportant ? '' : ' !important'
     const scoped = parsedOptions.scoped ? parsedOptions.prefix : ''
+    const layer = getLayerName(parsedOptions.layer)
 
     if (current.value?.dark) {
       createCssClass(lines, ':root', ['color-scheme: dark'], parsedOptions.scope)
@@ -422,7 +431,11 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
       lines.push(...bgLines, ...fgLines)
     }
 
-    return lines.map((str, i) => i === 0 ? str : `    ${str}`).join('')
+    let final = lines.map((str, i) => i === 0 ? str : `    ${str}`).join('')
+    if (layer) {
+      final = `@layer ${layer} { \n ${final} }`
+    }
+    return final
   })
 
   const themeClasses = toRef(() => parsedOptions.isDisabled ? undefined : `${parsedOptions.prefix}theme--${name.value}`)
