@@ -265,6 +265,19 @@ Your own styles will always<sup>*</sup> override vuetify's if you don't use `@la
 
 \* Layers invert `!important`, so anything trying to override an important vuetify style must also be in a layer. { class="text-caption" }
 
+You can also enable a layer for the vuetify theme by setting the `layer` option in your theme config:
+
+```ts { resource="src/plugins/vuetify.ts" }
+import { createVuetify } from 'vuetify'
+
+export default createVuetify({
+  theme: {
+    layer: true,
+    // or a custom layer name
+    layer: 'my-vuetify-theme',
+  },
+})
+```
 ## Caveats
 
 When using sass variables, there are a few considerations to be aware of.

@@ -316,6 +316,22 @@ export default createVuetify({
 })
 ```
 
+## Theme layers
+
+The layer option can be used to enable a [css cascade layer](https://developer.mozilla.org/en-US/docs/Web/CSS/@layer) for the theme:
+
+```ts { resource="src/plugins/vuetify.ts" }
+import { createVuetify } from 'vuetify'
+
+export default createVuetify({
+  theme: {
+    layer: true,
+    // or a custom layer name
+    layer: 'my-vuetify-theme',
+  },
+})
+```
+
 ## Theme object structure
 
 ```ts
