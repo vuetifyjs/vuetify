@@ -791,4 +791,93 @@ describe('VCommandPalette', () => {
       expect(listbox).not.toHaveAttribute('aria-activedescendant', 'v-command-palette-item-4')
     })
   })
+
+  describe('Item Hotkeys', () => {
+    it('should trigger item hotkey when palette is open via button click', async () => {
+      const model = ref(false)
+      const handleClick = vi.fn()
+      const itemsWithHotkeys = [
+        {
+          title: 'Save File',
+          subtitle: 'Save the current file',
+          value: 'save',
+          hotkey: 'ctrl+s',
+          onClick: handleClick,
+        },
+        {
+          title: 'Toggle Theme',
+          subtitle: 'Switch theme',
+          value: 'theme',
+          hotkey: 'ctrl+t',
+          onClick: handleClick,
+        },
+      ]
+
+      render(() => (
+        <VCommandPalette
+          v-model={ model.value }
+          items={ itemsWithHotkeys }
+        />
+      ))
+
+      // Open palette via v-model (simulating button click)
+      model.value = true
+      await screen.findByRole('dialog')
+      await wait(100)
+
+      // Press Ctrl+S to trigger Save hotkey
+      await userEvent.keyboard('{Control>}s{/Control}')
+      await wait(100)
+
+      // Handler should have been called
+      expect(handleClick).toHaveBeenCalled()
+      expect(handleClick).toHaveBeenCalledWith(
+        expect.any(KeyboardEvent),
+        'save'
+      )
+
+      // Dialog should close
+      expect(document.querySelector('[role="dialog"]')).not.toBeInTheDocument()
+    })
+
+    it('should trigger item hotkey when palette is open via global hotkey', async () => {
+      const model = ref(false)
+      const handleClick = vi.fn()
+      const itemsWithHotkeys = [
+        {
+          title: 'Save File',
+          subtitle: 'Save the current file',
+          value: 'save',
+          hotkey: 'ctrl+s',
+          onClick: handleClick,
+        },
+      ]
+
+      render(() => (
+        <VCommandPalette
+          v-model={ model.value }
+          items={ itemsWithHotkeys }
+          hotkey="ctrl+shift+p"
+        />
+      ))
+
+      // Open palette via global hotkey
+      await userEvent.keyboard('{Control>}{Shift>}p{/Shift}{/Control}')
+      await wait(100)
+
+      // Press Ctrl+S to trigger Save hotkey
+      await userEvent.keyboard('{Control>}s{/Control}')
+      await wait(100)
+
+      // Handler should have been called
+      expect(handleClick).toHaveBeenCalled()
+      expect(handleClick).toHaveBeenCalledWith(
+        expect.any(KeyboardEvent),
+        'save'
+      )
+
+      // Dialog should close
+      expect(document.querySelector('[role="dialog"]')).not.toBeInTheDocument()
+    })
+  })
 })

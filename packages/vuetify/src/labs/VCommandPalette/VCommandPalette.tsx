@@ -174,7 +174,7 @@ export const VCommandPalette = genericComponent()({
               }
               emit('click:item', item, event as KeyboardEvent)
               isOpen.value = false
-            })
+            }, { inputs: true })
             hotkeyUnsubscribes.push(unsubscribe)
           }
         })
