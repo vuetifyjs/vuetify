@@ -22,6 +22,7 @@ export const makeVTabProps = propsFactory({
 
   sliderColor: String,
   sliderTransition: String as PropType<'shift' | 'grow' | 'fade'>,
+  sliderTransitionDuration: [String, Number],
   hideSlider: Boolean,
 
   direction: {
@@ -61,9 +62,7 @@ export const VTab = genericComponent<VBtnSlots>()({
     }
 
     function grow (nextEl: HTMLElement, prevEl: HTMLElement) {
-      return {
-        transform: ['scaleX(0)', 'scaleX(1)'],
-      }
+      return { transform: ['scaleX(0)', 'scaleX(1)'] }
     }
 
     function shift (nextEl: HTMLElement, prevEl: HTMLElement) {
@@ -108,17 +107,15 @@ export const VTab = genericComponent<VBtnSlots>()({
 
         const color = getComputedStyle(prevEl).color
 
-        const keyframes = {
-          fade,
-          grow,
-          shift,
-        }[props.sliderTransition ?? 'shift'] ?? shift
+        const keyframes = { fade, grow, shift }[props.sliderTransition ?? 'shift'] ?? shift
+        const duration = Number(props.sliderTransitionDuration) ||
+          ({ fade: 400, grow: 350, shift: 225 }[props.sliderTransition ?? 'shift'] ?? 225)
 
         animate(nextEl, {
           backgroundColor: [color, 'currentcolor'],
           ...keyframes(nextEl, prevEl),
         }, {
-          duration: 225,
+          duration,
           easing: standardEasing,
         })
       }
