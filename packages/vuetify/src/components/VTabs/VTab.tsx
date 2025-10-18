@@ -62,7 +62,9 @@ export const VTab = genericComponent<VBtnSlots>()({
     }
 
     function grow (nextEl: HTMLElement, prevEl: HTMLElement) {
-      return { transform: ['scaleX(0)', 'scaleX(1)'] }
+      return props.direction === 'vertical'
+        ? { transform: ['scaleY(0)', 'scaleY(1)'] }
+        : { transform: ['scaleX(0)', 'scaleX(1)'] }
     }
 
     function shift (nextEl: HTMLElement, prevEl: HTMLElement) {
