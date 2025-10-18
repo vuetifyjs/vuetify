@@ -15,6 +15,10 @@ import { MaybeTransition } from '@/composables/transition'
 import { computed } from 'vue'
 import { defineComponent, genericComponent, propsFactory, useRender } from '@/util'
 
+// Types
+import type { PropType } from 'vue'
+import type { TagProps } from '@/composables/tag'
+
 export type VListGroupSlots = {
   default: never
   activator: { isOpen: boolean, props: Record<string, unknown> }
@@ -31,6 +35,10 @@ const VListGroupActivator = defineComponent({
 })
 
 export const makeVListGroupProps = propsFactory({
+  groupTag: {
+    type: [String, Object, Function] as PropType<TagProps['tag']>,
+    default: 'div',
+  },
   /* @deprecated */
   activeColor: String,
   baseColor: String,
@@ -114,9 +122,9 @@ export const VListGroup = genericComponent<VListGroupSlots>()({
         )}
 
         <MaybeTransition transition={{ component: VExpandTransition }} disabled={ !isBooted.value }>
-          <div class="v-list-group__items" role="group" aria-labelledby={ id.value } v-show={ isOpen.value }>
+          <props.groupTag class="v-list-group__items" role="group" aria-labelledby={ id.value } v-show={ isOpen.value }>
             { slots.default?.() }
-          </div>
+          </props.groupTag>
         </MaybeTransition>
       </props.tag>
     ))
