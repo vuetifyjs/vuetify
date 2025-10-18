@@ -21,7 +21,6 @@
     "nextIcon": "Right pagination icon.",
     "reverseTransition": "The transition used when the component is reversing items. Can be one of the [built in transitions](/styles/transitions) or one your own.",
     "right": "Aligns tabs to the right.",
-    "ripple": "Passes ripple prop to the tabs within (for convenience).",
     "showArrows": "Show pagination arrows if the tab items overflow their container. For mobile devices, arrows will only display when using this prop.",
     "sliderColor": "Changes the background color of an auto-generated `v-tabs-slider`.",
     "sliderSize": "Changes the size of the slider, **height** for horizontal, **width** for vertical.",

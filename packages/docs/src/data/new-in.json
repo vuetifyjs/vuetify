@@ -268,7 +268,6 @@
   },
   "VTabs": {
     "props": {
-      "ripple": "3.11.0",
       "spaced": "3.10.0",
       "sliderTransition": "3.11.0",
       "sliderTransitionDuration": "3.11.0"
