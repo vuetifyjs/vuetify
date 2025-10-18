@@ -310,8 +310,10 @@ function _useActivator (
   function getActivator (selector = props.activator): HTMLElement | undefined {
     const activator = getTarget(selector, vm)
 
-    // The activator should only be a valid element (Ignore comments and text nodes)
-    activatorEl.value = activator?.nodeType === Node.ELEMENT_NODE ? activator : undefined
+    activatorEl.value = activator?.querySelector('input[role="combobox"]') ??
+      (activator?.nodeType === Node.ELEMENT_NODE
+        ? activator
+        : undefined)
 
     return activatorEl.value
   }
