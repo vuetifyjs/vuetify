@@ -175,6 +175,7 @@
     "moment": "^2.30.1",
     "postcss": "^8.5.3",
     "roboto-fontface": "^0.10.0",
+    "temporal-spec": "^0.3.0",
     "timezone-mock": "^1.3.6",
     "ts-node": "^10.9.2",
     "unplugin-auto-import": "19.3.0",
