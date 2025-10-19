@@ -367,6 +367,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       if (!new RegExp(`^-?\\d*${escapeForRegex(decimalSeparator.value)}?\\d*$`).test(potentialNewInputVal)) {
         e.preventDefault()
         inputElement!.value = potentialNewNumber
+        clampModel()
       }
 
       if (props.precision == null) return
@@ -378,14 +379,14 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
 
         const cursorPosition = (selectionStart ?? 0) + pastedText.length
         inputElement!.setSelectionRange(cursorPosition, cursorPosition)
+        clampModel()
       }
       // Ignore decimal separator when precision = 0
       if (props.precision === 0 && potentialNewInputVal.includes(decimalSeparator.value)) {
         e.preventDefault()
         inputElement!.value = potentialNewNumber
+        clampModel()
       }
-
-      clampModel()
     }
 
     useRender(() => {
