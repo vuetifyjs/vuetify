@@ -8,6 +8,7 @@ import { useExpanded } from './composables/expand'
 import { useHeaders } from './composables/headers'
 import { useSelection } from './composables/select'
 import { useSort } from './composables/sort'
+import { makeDensityProps } from '@/composables/density'
 import { makeDisplayProps, useDisplay } from '@/composables/display'
 import { IconValue } from '@/composables/icons'
 
@@ -52,6 +53,7 @@ export const makeVDataTableRowProps = propsFactory({
   onContextmenu: EventProp<[MouseEvent]>(),
   onDblclick: EventProp<[MouseEvent]>(),
 
+  ...makeDensityProps(),
   ...makeDisplayProps(),
 }, 'VDataTableRow')
 
@@ -168,6 +170,7 @@ export const VDataTableRow = genericComponent<new <T>(
                     }) ?? (
                       <VCheckboxBtn
                         disabled={ !item.selectable }
+                        density={ props.density }
                         modelValue={ isSelected([item]) }
                         onClick={ withModifiers(
                           (event: Event) => toggleSelect(item, props.index, event as PointerEvent),

@@ -14,7 +14,7 @@ function processVariableFile (filePath: string, tagUse: string | string[]) {
           : varArr.join(':')
         varValues[varName] = {
           default: varDefault.replace('!default', '').trim(),
-          ...(tagUse) && { use: tagUse === 'all' || tagUse?.includes(varName) ? 'vuetify' : 'vuetify/settings' },
+          ...{ use: tagUse === 'all' || tagUse?.includes(varName) ? 'vuetify' : 'vuetify/settings' },
         }
       }
     }

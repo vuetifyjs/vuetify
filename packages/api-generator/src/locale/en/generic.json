@@ -50,6 +50,7 @@
     "prependIcon": "Creates a [v-icon](/api/v-icon/) component in the **prepend** slot before default content.",
     "ripple": "Applies the [v-ripple](/directives/ripple) directive.",
     "search": "Text input used to filter items.",
+    "scrollToActive": "Keeps the last active element visible when resizing the scrollable container.",
     "selectedClass": "Configure the active CSS class applied when an item is selected.",
     "size": "Sets the height and width of the component.",
     "subtitle": "Specify a subtitle text for the component.",
