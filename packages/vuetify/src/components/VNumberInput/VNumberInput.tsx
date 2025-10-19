@@ -348,6 +348,46 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       clampModel()
     }
 
+    function onPaste (e: ClipboardEvent) {
+      e.preventDefault()
+      if (!e.clipboardData) return
+      const pastedText = e.clipboardData.getData('text/plain')
+      const inputElement = e.target as HTMLInputElement
+      const { value: existingTxt, selectionStart, selectionEnd } = inputElement ?? {}
+      const potentialNewInputVal =
+        existingTxt
+          ? existingTxt.slice(0, selectionStart as number | undefined) + pastedText + existingTxt.slice(selectionEnd as number | undefined)
+          : pastedText
+
+      const potentialNewNumber = extractNumber(potentialNewInputVal, props.precision, decimalSeparator.value)
+
+      // Allow only numbers, "-" and {decimal separator}
+      // Allow "-" and {decimal separator} only once
+      // Allow "-" only at the start
+      if (!new RegExp(`^-?\\d*${escapeForRegex(decimalSeparator.value)}?\\d*$`).test(potentialNewInputVal)) {
+        e.preventDefault()
+        inputElement!.value = potentialNewNumber
+      }
+
+      if (props.precision == null) return
+
+      // Ignore decimal digits above precision limit
+      if (potentialNewInputVal.split(decimalSeparator.value)[1]?.length > props.precision) {
+        e.preventDefault()
+        inputElement!.value = potentialNewNumber
+
+        const cursorPosition = (selectionStart ?? 0) + pastedText.length
+        inputElement!.setSelectionRange(cursorPosition, cursorPosition)
+      }
+      // Ignore decimal separator when precision = 0
+      if (props.precision === 0 && potentialNewInputVal.includes(decimalSeparator.value)) {
+        e.preventDefault()
+        inputElement!.value = potentialNewNumber
+      }
+
+      clampModel()
+    }
+
     useRender(() => {
       const { modelValue: _, type, ...textFieldProps } = VTextField.filterProps(props)
 
@@ -478,6 +518,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
           onFocus={ onFocus }
           onBlur={ onBlur }
           onKeydown={ onKeydown }
+          onPaste={ onPaste }
           class={[
             'v-number-input',
             {

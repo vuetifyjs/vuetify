@@ -341,4 +341,19 @@ describe('VNumberInput', () => {
       expect(screen.getByCSS('input')).toHaveValue(expected)
     })
   })
+
+  describe('can process copy number text with space', () => {
+    it.each([
+      { precision: 0, typing: '320001  ', expected: '320001' },
+      { precision: 0, typing: '320001  320001', expected: '320001320001' },
+      { precision: 0, typing: '320001\n320001', expected: '320001320001' },
+    ])('prevents NaN from arbitrary input', async ({ precision, typing, expected }) => {
+      const { element } = render(() => <VNumberInput precision={ precision } />)
+      await userEvent.click(element)
+      await userEvent.keyboard(typing)
+      await userEvent.copy()
+      await userEvent.paste()
+      expect(screen.getByCSS('input')).toHaveValue(expected)
+    })
+  })
 })
