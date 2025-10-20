@@ -8,6 +8,7 @@ import { VTimePickerControls } from './VTimePickerControls'
 import { makeVPickerProps, VPicker } from '@/labs/VPicker/VPicker'
 
 // Composables
+import { makeDensityProps, useDensity } from '@/composables/density'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
@@ -61,6 +62,7 @@ export const makeVTimePickerProps = propsFactory({
     default: 'dial',
   },
   ...omit(makeVPickerProps({ title: '$vuetify.timePicker.title' }), ['landscape']),
+  ...makeDensityProps(),
 }, 'VTimePicker')
 
 export const VTimePicker = genericComponent<VTimePickerSlots>()({
@@ -79,6 +81,7 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
 
   setup (props, { emit, slots }) {
     const { t } = useLocale()
+    const { densityClasses } = useDensity(props)
     const inputHour = ref(null as number | null)
     const inputMinute = ref(null as number | null)
     const inputSecond = ref(null as number | null)
@@ -315,6 +318,7 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
             'v-time-picker',
             `v-time-picker--variant-${props.variant}`,
             props.class,
+            densityClasses.value,
           ]}
           hideHeader={ props.hideHeader && props.variant !== 'input' }
           style={ props.style }

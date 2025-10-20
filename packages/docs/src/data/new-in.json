@@ -303,13 +303,10 @@
   },
   "VTimePicker": {
     "props": {
+      "density": "3.11.0",
       "hideTitle": "3.10.0",
-      "period": "3.10.0"
-    }
-  },
-  "VTimePicker": {
-    "props": {
-      "variant": "3.10.0"
+      "period": "3.10.0",
+      "variant": "3.11.0"
     }
   },
   "VTreeview": {
