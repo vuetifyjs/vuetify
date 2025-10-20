@@ -80,10 +80,9 @@ export function useScroll (
     const { clientHeight, scrollHeight } = getScrollMetrics(targetEl)
     const maxScrollableDistance = scrollHeight - clientHeight
 
-    // Only enable scroll-hide if there's significantly more scrollable space than the threshold
-    // Use 1.5x threshold AND at least 150px to ensure smooth behavior and avoid edge cases
-    // where the page barely scrolls past the threshold before hitting bottom
-    const minScrollableDistance = Math.max(scrollThreshold.value * 1.5, 150)
+    // Only enable scroll-hide if there's enough scrollable space
+    // Require scrollable distance to be at least threshold + 50px to ensure smooth behavior
+    const minScrollableDistance = scrollThreshold.value + 50
     hasEnoughScrollableSpace.value = maxScrollableDistance > minScrollableDistance
   }
 
@@ -97,9 +96,12 @@ export function useScroll (
 
     const currentScrollHeight = targetEl instanceof Window ? document.documentElement.scrollHeight : targetEl.scrollHeight
     if (previousScrollHeight !== currentScrollHeight) {
+      // If page is growing (content loading), recalculate scrollable space
+      // If page is shrinking (likely due to navbar animation), don't recalculate
+      if (currentScrollHeight > previousScrollHeight) {
+        checkScrollableSpace()
+      }
       previousScrollHeight = currentScrollHeight
-      // Recalculate scrollable space when content height changes
-      checkScrollableSpace()
       return
     }
 
@@ -122,12 +124,13 @@ export function useScroll (
     }
 
     // Reset the flag when:
-    // 1. Scrolling up away from bottom
+    // 1. Scrolling up away from bottom (with tolerance for small movements)
     // 2. Scroll position jumped significantly (e.g., navigation, scroll restoration)
     // 3. Scroll is at the very top (page navigation resets to top)
     const scrollJumped = Math.abs(currentScroll.value - previousScroll) > 100
     const atTop = currentScroll.value <= 5
-    if ((isScrollingUp.value && !atBottom) || (scrollJumped && currentScroll.value < scrollThreshold.value) || atTop) {
+    const scrolledUpSignificantly = isScrollingUp.value && (previousScroll - currentScroll.value) > 10
+    if ((scrolledUpSignificantly && !atBottom) || (scrollJumped && currentScroll.value < scrollThreshold.value) || atTop) {
       reachedBottomWhileScrollingDown.value = false
     }
 
