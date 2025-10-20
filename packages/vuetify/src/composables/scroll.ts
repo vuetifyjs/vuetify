@@ -86,6 +86,10 @@ export function useScroll (
     hasEnoughScrollableSpace.value = maxScrollableDistance > minScrollableDistance
   }
 
+  const onResize = () => {
+    checkScrollableSpace()
+  }
+
   const onScroll = () => {
     const targetEl = target.value
 
@@ -167,10 +171,14 @@ export function useScroll (
         checkScrollableSpace()
       })
     }, { immediate: true })
+
+    // Listen to window resize to recalculate scrollable space
+    window.addEventListener('resize', onResize, { passive: true })
   })
 
   onBeforeUnmount(() => {
     target.value?.removeEventListener('scroll', onScroll)
+    window.removeEventListener('resize', onResize)
   })
 
   // Do we need this? If yes - seems that
