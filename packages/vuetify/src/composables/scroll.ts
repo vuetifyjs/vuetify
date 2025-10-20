@@ -73,6 +73,20 @@ export function useScroll (
     return { clientHeight, scrollHeight }
   }
 
+  const checkScrollableSpace = () => {
+    const targetEl = target.value
+    if (!targetEl) return
+
+    const { clientHeight, scrollHeight } = getScrollMetrics(targetEl)
+    const maxScrollableDistance = scrollHeight - clientHeight
+
+    // Only enable scroll-hide if there's significantly more scrollable space than the threshold
+    // Use 1.5x threshold AND at least 150px to ensure smooth behavior and avoid edge cases
+    // where the page barely scrolls past the threshold before hitting bottom
+    const minScrollableDistance = Math.max(scrollThreshold.value * 1.5, 150)
+    hasEnoughScrollableSpace.value = maxScrollableDistance > minScrollableDistance
+  }
+
   const onScroll = () => {
     const targetEl = target.value
 
@@ -128,20 +142,6 @@ export function useScroll (
   watch(isScrollActive, () => {
     savedScroll.value = 0
   })
-
-  const checkScrollableSpace = () => {
-    const targetEl = target.value
-    if (!targetEl) return
-
-    const { clientHeight, scrollHeight } = getScrollMetrics(targetEl)
-    const maxScrollableDistance = scrollHeight - clientHeight
-
-    // Only enable scroll-hide if there's significantly more scrollable space than the threshold
-    // Use 1.5x threshold AND at least 150px to ensure smooth behavior and avoid edge cases
-    // where the page barely scrolls past the threshold before hitting bottom
-    const minScrollableDistance = Math.max(scrollThreshold.value * 1.5, 150)
-    hasEnoughScrollableSpace.value = maxScrollableDistance > minScrollableDistance
-  }
 
   onMounted(() => {
     watch(() => props.scrollTarget, scrollTarget => {
