@@ -133,7 +133,7 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
       onFocus()
 
       nextTick(() => {
-        model.value = null
+        model.value = typeof props.clearValue === 'function' ? props.clearValue() : props.clearValue
         reset()
 
         callEvent(props['onClick:clear'], e)
