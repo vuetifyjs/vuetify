@@ -54,7 +54,12 @@ export const makeVColorInputProps = propsFactory({
   ...makeFocusProps(),
   ...makeVConfirmEditProps(),
   ...makeVTextFieldProps(),
-  ...omit(makeVColorPickerProps(), ['width']),
+  ...omit(makeVColorPickerProps(), [
+    'location',
+    'height',
+    'minHeight',
+    'maxHeight',
+  ]),
 }, 'VColorInput')
 
 export const VColorInput = genericComponent<VColorInputSlots>()({
@@ -106,7 +111,15 @@ export const VColorInput = genericComponent<VColorInputSlots>()({
 
     useRender(() => {
       const confirmEditProps = VConfirmEdit.filterProps(props)
-      const colorPickerProps = VColorPicker.filterProps(omit(props, ['active', 'color']))
+      const colorPickerProps = VColorPicker.filterProps(omit(props, [
+        'active',
+        'bgColor',
+        'color',
+        'rounded',
+        'maxWidth',
+        'minWidth',
+        'width',
+      ]))
       const textFieldProps = VTextField.filterProps(props)
 
       const slotWithPip = props.hidePip
