@@ -124,6 +124,14 @@ export default {
     notEmpty: 'تکایە بەلایەنی کەم یەک هەڵبژێرە',
     pattern: 'فۆرماتەکە نادروستە',
   },
+  command: {
+    select: 'بۆ هەڵبژاردن',
+    navigate: 'بۆ گەشتکردن',
+    goBack: 'بۆ گەڕانەوە',
+    close: 'بۆ داخستن',
+    then: 'پاشان',
+    placeholder: 'فەرمانێک بنووسە یان بگەڕێ...',
+  },
   hotkey: {
     then: 'پاشان',
     ctrl: 'Ctrl',
