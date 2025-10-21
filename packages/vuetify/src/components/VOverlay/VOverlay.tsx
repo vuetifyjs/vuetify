@@ -197,7 +197,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
     }
 
     function closeConditional (e: Event) {
-      return isActive.value && globalTop.value && (
+      return isActive.value && (
         // If using scrim, only close if clicking on it rather than anything opened on top
         !props.scrim || e.target === scrimEl.value || (e instanceof MouseEvent && e.shadowTarget === scrimEl.value)
       )
