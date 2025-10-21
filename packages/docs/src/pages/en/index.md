@@ -32,17 +32,17 @@ meta:
 
 <HomeVuetifyOne />
 
-<v-divider thickness="2" color="primary" />
-
-<HomeDiscord />
-
-<v-divider :color="theme.current.value.dark ? '' : 'primary'" />
+<v-divider />
 
 <HomeBlogs />
 
 <v-divider />
 
 <HomeStore />
+
+<v-divider thickness="2" color="primary" />
+
+<HomeDiscord />
 
 <script setup>
   const theme = useTheme()

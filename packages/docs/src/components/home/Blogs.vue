@@ -1,19 +1,25 @@
 <template>
   <v-responsive class="py-16">
+    <HomeBgGradient />
+
     <v-container class="pt-0">
       <div class="mb-10">
-        <h4 class="text-h4 font-weight-bold mb-5">
-          Blog Posts
+        <p class="text-primary font-weight-bold mb-0">
+          Latest news and updates
+        </p>
+
+        <h4 class="text-h4 font-weight-bold my-3">
+          Vuetify Blog
         </h4>
 
-        <v-responsive class="mx-auto my-5" max-width="700">
+        <v-responsive class="mx-auto mb-5" max-width="700">
           <h6 class="text-h6 font-weight-regular text-medium-emphasis">
             Stay up to date with the latest news and updates from the Vuetify team.
           </h6>
         </v-responsive>
       </div>
 
-      <v-row class="text-left">
+      <v-row class="text-left mb-10">
         <v-col
           v-for="(item , i) in items"
           :key="i"
@@ -43,6 +49,21 @@
           </v-card>
         </v-col>
       </v-row>
+
+      <v-btn
+        append-icon="mdi-open-in-new"
+        aria-label="See More Templates"
+        class="text-none"
+        color="primary"
+        href="https://store.vuetifyjs.com"
+        rel="noopener noreferrer"
+        rounded="lg"
+        size="large"
+        target="_blank"
+        variant="flat"
+      >
+        View More
+      </v-btn>
     </v-container>
   </v-responsive>
 </template>

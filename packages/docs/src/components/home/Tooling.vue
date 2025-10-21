@@ -4,11 +4,15 @@
 
     <v-container>
       <div class="mb-10">
-        <h4 class="text-h4 font-weight-bold mb-5">
+        <p class="text-primary font-weight-bold mb-0">
+          Tools & Resources
+        </p>
+
+        <h4 class="text-h4 font-weight-bold my-3">
           Vuetify Tooling
         </h4>
 
-        <v-responsive class="mx-auto my-5" max-width="700">
+        <v-responsive class="mx-auto mb-5" max-width="700">
           <h6 class="text-h6 font-weight-regular text-medium-emphasis">
             Vuetify provides a suite of tools for managing your Vuetify projects.
           </h6>
