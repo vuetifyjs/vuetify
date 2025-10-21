@@ -1,18 +1,14 @@
 <template>
   <div v-if="specialSponsor">
-    <v-divider class="mx-auto" />
-
     <div class="d-flex align-center justify-center my-1 px-4">
-      <small class="font-weight-bold me-4 text-no-wrap">Special Sponsor</small>
+      <small class="font-weight-bold text-no-wrap">Special Sponsor</small>
 
       <SponsorCard
         :slug="specialSponsor.slug"
         min-height="64"
-        width="240"
+        width="200"
       />
     </div>
-
-    <v-divider class="mx-auto" />
   </div>
 </template>
 

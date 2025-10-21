@@ -1,13 +1,19 @@
 <template>
   <v-responsive class="py-16">
     <v-container class="pt-0">
-      <HomeBgGradient color="grey" />
+      <HomeBgGradient />
 
-      <h4 class="text-md-h4 text-h5 font-weight-bold mb-10">
+      <h4 class="text-h4 font-weight-bold mb-5">
         Component Gallery
       </h4>
 
-      <div class="d-flex justify-center mb-5">
+      <v-responsive class="mx-auto mb-5" max-width="700">
+        <h6 class="text-h6 font-weight-regular text-medium-emphasis">
+          Vuetify provides a comprehensive collection of components that can be used to build your application.
+        </h6>
+      </v-responsive>
+
+      <div class="d-flex justify-center mb-10">
         <v-chip-group
           v-model="selectedComponent"
           class="d-flex justify-center"
