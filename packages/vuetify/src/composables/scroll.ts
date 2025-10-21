@@ -36,13 +36,14 @@ export const makeScrollProps = propsFactory({
 
 export interface ScrollArguments {
   canScroll?: Readonly<Ref<boolean>>
+  layoutSize?: Readonly<Ref<number>>
 }
 
 export function useScroll (
   props: ScrollProps,
   args: ScrollArguments = {},
 ) {
-  const { canScroll } = args
+  const { canScroll, layoutSize } = args
   let previousScroll = 0
   let previousScrollHeight = 0
   const target = ref<Element | Window | null>(null)
@@ -80,10 +81,14 @@ export function useScroll (
     const { clientHeight, scrollHeight } = getScrollMetrics(targetEl)
     const maxScrollableDistance = scrollHeight - clientHeight
 
+    // When the scroll-hide element (like AppBar) hides, it causes the page to grow
+    // We need extra scrollable space beyond the threshold to prevent bouncing
+    // Add the element's height to the required minimum distance
+    const elementHeight = layoutSize?.value || 0
+    const minRequiredDistance = scrollThreshold.value + elementHeight
+
     // Only enable scroll-hide if there's enough scrollable space
-    // Require scrollable distance to be at least threshold + 50px to ensure smooth behavior
-    const minScrollableDistance = scrollThreshold.value + 50
-    hasEnoughScrollableSpace.value = maxScrollableDistance > minScrollableDistance
+    hasEnoughScrollableSpace.value = maxScrollableDistance > minRequiredDistance
   }
 
   const onResize = () => {
@@ -106,7 +111,6 @@ export function useScroll (
         checkScrollableSpace()
       }
       previousScrollHeight = currentScrollHeight
-      return
     }
 
     isScrollingUp.value = currentScroll.value < previousScroll
@@ -128,12 +132,12 @@ export function useScroll (
     }
 
     // Reset the flag when:
-    // 1. Scrolling up away from bottom (with tolerance for small movements)
+    // 1. Scrolling up away from bottom (with small tolerance for touchpad/momentum scrolling)
     // 2. Scroll position jumped significantly (e.g., navigation, scroll restoration)
     // 3. Scroll is at the very top (page navigation resets to top)
     const scrollJumped = Math.abs(currentScroll.value - previousScroll) > 100
     const atTop = currentScroll.value <= 5
-    const scrolledUpSignificantly = isScrollingUp.value && (previousScroll - currentScroll.value) > 10
+    const scrolledUpSignificantly = isScrollingUp.value && (previousScroll - currentScroll.value) > 1
     if ((scrolledUpSignificantly && !atBottom) || (scrollJumped && currentScroll.value < scrollThreshold.value) || atTop) {
       reachedBottomWhileScrollingDown.value = false
     }
@@ -165,8 +169,7 @@ export function useScroll (
       target.value = newTarget
       target.value.addEventListener('scroll', onScroll, { passive: true })
 
-      // Check scrollable space immediately when target is set
-      // Need to use nextTick to ensure DOM is ready
+      // Check scrollable space when target is set
       Promise.resolve().then(() => {
         checkScrollableSpace()
       })

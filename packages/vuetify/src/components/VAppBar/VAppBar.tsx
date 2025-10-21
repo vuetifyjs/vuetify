@@ -78,6 +78,13 @@ export const VAppBar = genericComponent<VToolbarSlots>()({
         !isActive.value
       )
     })
+
+    const appBarHeight = computed(() => {
+      const height = vToolbarRef.value?.contentHeight ?? 0
+      const extensionHeight = vToolbarRef.value?.extensionHeight ?? 0
+      return height + extensionHeight
+    })
+
     const {
       currentScroll,
       scrollThreshold,
@@ -86,7 +93,7 @@ export const VAppBar = genericComponent<VToolbarSlots>()({
       isAtBottom,
       reachedBottomWhileScrollingDown,
       hasEnoughScrollableSpace,
-    } = useScroll(props, { canScroll })
+    } = useScroll(props, { canScroll, layoutSize: appBarHeight })
 
     const canHide = toRef(() => (
       scrollBehavior.value.hide ||
