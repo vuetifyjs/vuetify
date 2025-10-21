@@ -51,6 +51,11 @@
       "baseColor": "3.8.0"
     }
   },
+  "VChipGroup": {
+    "props": {
+      "scrollToActive": "3.10.6"
+    }
+  },
   "VColorPicker": {
     "props": {
       "hideEyeDropper": "3.10.0",
@@ -234,7 +239,8 @@
   },
   "VSlideGroup": {
     "props": {
-      "contentClass": "3.9.0"
+      "contentClass": "3.9.0",
+      "scrollToActive": "3.10.6"
     }
   },
   "VSnackbar": {

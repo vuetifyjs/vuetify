@@ -651,10 +651,27 @@ export function callEvent<T extends any[]> (handler: EventProp<T> | EventProp<T>
 }
 
 export function focusableChildren (el: Element, filterByTabIndex = true) {
-  const targets = ['button', '[href]', 'input:not([type="hidden"])', 'select', 'textarea', '[tabindex]']
-    .map(s => `${s}${filterByTabIndex ? ':not([tabindex="-1"])' : ''}:not([disabled])`)
+  const targets = [
+    'button',
+    '[href]',
+    'input:not([type="hidden"])',
+    'select',
+    'textarea',
+    'details:not(:has(> summary))',
+    'details > summary',
+    '[tabindex]',
+    '[contenteditable]:not([contenteditable="false"])',
+    'audio[controls]',
+    'video[controls]',
+  ]
+    .map(s => `${s}${filterByTabIndex ? ':not([tabindex="-1"])' : ''}:not([disabled], [inert])`)
     .join(', ')
-  return [...el.querySelectorAll(targets)] as HTMLElement[]
+  return ([...el.querySelectorAll(targets)] as HTMLElement[])
+    .filter(x => !x.closest('[inert]')) // does not have inert parent
+    .filter(x => !!x.offsetParent || x.getClientRects().length > 0) // is rendered
+    .filter(x => !x.parentElement?.closest('details:not([open])') ||
+      (x.tagName === 'SUMMARY' && x.parentElement?.tagName === 'DETAILS')
+    )
 }
 
 export function getNextElement (elements: HTMLElement[], location?: 'next' | 'prev', condition?: (el: HTMLElement) => boolean) {

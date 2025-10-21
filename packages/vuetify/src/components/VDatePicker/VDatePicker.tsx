@@ -224,7 +224,13 @@ export const VDatePicker = genericComponent<new <
     function isAllowedInRange (start: unknown, end: unknown) {
       const allowedDates = props.allowedDates
       if (typeof allowedDates !== 'function') return true
-      const days = adapter.getDiff(end, start, 'days')
+
+      const days = 1 + adapter.getDiff(
+        new Date(`${adapter.toISO(end)}T00:00:00Z`),
+        new Date(`${adapter.toISO(start)}T00:00:00Z`),
+        'days',
+      )
+
       for (let i = 0; i < days; i++) {
         if (allowedDates(adapter.addDays(start, i))) return true
       }

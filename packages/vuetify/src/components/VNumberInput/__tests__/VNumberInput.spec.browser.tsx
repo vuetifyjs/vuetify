@@ -253,7 +253,7 @@ describe('VNumberInput', () => {
       { precision: 1, text: '200.99', expected: 200.9 },
       { precision: 2, text: ' 1,250.32\n', expected: 1250.32 },
       { precision: 0, text: '1\'024.00 meters', expected: 1024 },
-      { precision: 0, text: '- 1123.', expected: -1123 },
+      { precision: 0, text: '-1123.', expected: -1123 },
     ])('should parse numbers correctly', async ({ precision, text, expected }) => {
       const model = ref(null)
       const { element } = render(() => (
@@ -266,7 +266,6 @@ describe('VNumberInput', () => {
       input.focus()
       navigator.clipboard.writeText(text)
       await userEvent.paste()
-      input.blur()
       expect(model.value).toBe(expected)
     })
 

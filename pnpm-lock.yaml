@@ -276,8 +276,8 @@ importers:
         specifier: ^2.0.4
         version: 2.0.4(vue@3.5.21(typescript@5.8.3))
       '@vuetify/one':
-        specifier: ^2.3.0
-        version: 2.3.0(@mdi/js@7.4.47(patch_hash=3c2a78b1509745df3a3100e3e59075dd87718e67632cc14dc64dd9ac34098f9f))(@vue/compiler-sfc@3.5.21)(lodash-es@4.17.21)(vite@7.1.5(@types/node@24.4.0)(sass-embedded@1.87.0)(sass@1.87.0)(terser@5.44.0)(yaml@2.8.1))(vue-router@4.5.0(vue@3.5.21(typescript@5.8.3)))(vue@3.5.21(typescript@5.8.3))(vuetify@packages+vuetify)
+        specifier: ^2.5.1
+        version: 2.5.1(@mdi/js@7.4.47(patch_hash=3c2a78b1509745df3a3100e3e59075dd87718e67632cc14dc64dd9ac34098f9f))(@vue/compiler-sfc@3.5.21)(lodash-es@4.17.21)(vite@7.1.5(@types/node@24.4.0)(sass-embedded@1.87.0)(sass@1.87.0)(terser@5.44.0)(yaml@2.8.1))(vue-router@4.5.0(vue@3.5.21(typescript@5.8.3)))(vue@3.5.21(typescript@5.8.3))(vuetify@packages+vuetify)
       algoliasearch:
         specifier: ^4.24.0
         version: 4.24.0
@@ -3270,8 +3270,8 @@ packages:
       vue: ^3.0.0
       vuetify: ^3.0.0
 
-  '@vuetify/one@2.3.0':
-    resolution: {integrity: sha512-IMaeexlFf9fSy4EjNiS3EqSiyRXtGfy+jyhUcz3URY5yIwu+QkToPY2eNNNfe5q3/A2/ycoEqmvx8nFlKLcLEA==}
+  '@vuetify/one@2.5.1':
+    resolution: {integrity: sha512-BoAuBubM+oVcNW0z1g+695s8vLtntfqAEQ7pZnm+HlgnrkrSJbPZW0aNi6ns0nFk35hDHw7jb6mbxqZeDQDYtA==}
     peerDependencies:
       '@mdi/js': 7.4.47
       lodash-es: ^4.17.21
@@ -8167,10 +8167,10 @@ packages:
       '@vite-pwa/assets-generator':
         optional: true
 
-  vite-plugin-vue-layouts-next@0.1.5:
-    resolution: {integrity: sha512-m6rVGTRPcTKKLQb9c4SZa7FESXhK6T0F8JPx+dL3IupfOo/LcGXIyKOjisQXy3oELluD+wRieD6XPr1uIcqbEg==}
+  vite-plugin-vue-layouts-next@1.0.0:
+    resolution: {integrity: sha512-y3oNYcJs5lrv4F/E0EXU7OXi88CH1/b/DOk9nsFAeglxmk4Ps635DTy9R29Nl9Vj7LteBRKaxOkKVSHKOMqo7A==}
     peerDependencies:
-      vite: ^4.0.0 || ^5.0.0 || ^6.0.0
+      vite: ^5.0.0 || ^6.0.0 || ^7.0.0
       vue: ^3.2.4
       vue-router: ^4.0.11
 
@@ -11889,12 +11889,12 @@ snapshots:
       vue: 3.5.21(typescript@5.8.3)
       vuetify: link:packages/vuetify
 
-  '@vuetify/one@2.3.0(@mdi/js@7.4.47(patch_hash=3c2a78b1509745df3a3100e3e59075dd87718e67632cc14dc64dd9ac34098f9f))(@vue/compiler-sfc@3.5.21)(lodash-es@4.17.21)(vite@7.1.5(@types/node@24.4.0)(sass-embedded@1.87.0)(sass@1.87.0)(terser@5.44.0)(yaml@2.8.1))(vue-router@4.5.0(vue@3.5.21(typescript@5.8.3)))(vue@3.5.21(typescript@5.8.3))(vuetify@packages+vuetify)':
+  '@vuetify/one@2.5.1(@mdi/js@7.4.47(patch_hash=3c2a78b1509745df3a3100e3e59075dd87718e67632cc14dc64dd9ac34098f9f))(@vue/compiler-sfc@3.5.21)(lodash-es@4.17.21)(vite@7.1.5(@types/node@24.4.0)(sass-embedded@1.87.0)(sass@1.87.0)(terser@5.44.0)(yaml@2.8.1))(vue-router@4.5.0(vue@3.5.21(typescript@5.8.3)))(vue@3.5.21(typescript@5.8.3))(vuetify@packages+vuetify)':
     dependencies:
       '@mdi/js': 7.4.47(patch_hash=3c2a78b1509745df3a3100e3e59075dd87718e67632cc14dc64dd9ac34098f9f)
       lodash-es: 4.17.21
       vite-plugin-pages: 0.33.1(@vue/compiler-sfc@3.5.21)(vite@7.1.5(@types/node@24.4.0)(sass-embedded@1.87.0)(sass@1.87.0)(terser@5.44.0)(yaml@2.8.1))(vue-router@4.5.0(vue@3.5.21(typescript@5.8.3)))
-      vite-plugin-vue-layouts-next: 0.1.5(vite@7.1.5(@types/node@24.4.0)(sass-embedded@1.87.0)(sass@1.87.0)(terser@5.44.0)(yaml@2.8.1))(vue-router@4.5.0(vue@3.5.21(typescript@5.8.3)))(vue@3.5.21(typescript@5.8.3))
+      vite-plugin-vue-layouts-next: 1.0.0(vite@7.1.5(@types/node@24.4.0)(sass-embedded@1.87.0)(sass@1.87.0)(terser@5.44.0)(yaml@2.8.1))(vue-router@4.5.0(vue@3.5.21(typescript@5.8.3)))(vue@3.5.21(typescript@5.8.3))
       vue: 3.5.21(typescript@5.8.3)
       vuetify: link:packages/vuetify
     transitivePeerDependencies:
@@ -17481,7 +17481,7 @@ snapshots:
       - '@types/babel__core'
       - supports-color
 
-  vite-plugin-vue-layouts-next@0.1.5(vite@7.1.5(@types/node@24.4.0)(sass-embedded@1.87.0)(sass@1.87.0)(terser@5.44.0)(yaml@2.8.1))(vue-router@4.5.0(vue@3.5.21(typescript@5.8.3)))(vue@3.5.21(typescript@5.8.3)):
+  vite-plugin-vue-layouts-next@1.0.0(vite@7.1.5(@types/node@24.4.0)(sass-embedded@1.87.0)(sass@1.87.0)(terser@5.44.0)(yaml@2.8.1))(vue-router@4.5.0(vue@3.5.21(typescript@5.8.3)))(vue@3.5.21(typescript@5.8.3)):
     dependencies:
       debug: 4.4.3
       fast-glob: 3.3.3
