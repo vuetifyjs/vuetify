@@ -136,11 +136,6 @@ Funds donated through GitHub Sponsors directly support [John Leider](https://git
         </a>
       </td>
       <td>
-        <a href="http://vuemastery.com/?ref=vuetify-github">
-          <img height="30px" src="https://cdn.vuetifyjs.com/images/backers/vuemastery.svg">
-        </a>
-      </td>
-      <td>
         <a href="https://views4you.com/buy-instagram-followers/">
           <img height="30px" src="https://cdn.cosmicjs.com/861b0ce0-50e4-11ef-b1ea-f56c65dfade9-views-4-you-light.png">
         </a>
@@ -164,7 +159,6 @@ Funds donated through GitHub Sponsors directly support [John Leider](https://git
           <img height="30px" src="https://cdn.cosmicjs.com/ba1af160-1a27-11f0-a229-dfe84053cfeb-hcof-logo-light-1.png">
         </a>
       </td>
-      <td></td>
       <td></td>
     </tr>
   </tbody>

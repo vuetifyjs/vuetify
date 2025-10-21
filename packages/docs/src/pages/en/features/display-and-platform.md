@@ -147,7 +147,7 @@ In the following example, we use a switch statement and the current breakpoint n
 ```ts
 {
   // Breakpoints
-  xs: boolean // 0 - 595
+  xs: boolean // 0 - 599
   sm: boolean // 600 - 959
   md: boolean // 960 - 1279
   lg: boolean // 1280 - 1919
