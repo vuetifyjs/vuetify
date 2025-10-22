@@ -137,7 +137,7 @@ export const VMenu = genericComponent<OverlaySlots>()({
         !overlay.value.contentEl.contains(after)
       ) {
         if (focusTrapSuppressed) {
-          if (!props.openOnHover || !overlay.value.activatorEl?.contains(after)) {
+          if (!props.openOnHover && !overlay.value.activatorEl?.contains(after)) {
             isActive.value = false
           }
         } else {

@@ -371,9 +371,9 @@ export const VCombobox = genericComponent<new <
     }
     function onAfterLeave () {
       if (isFocused.value) {
-        isPristine.value = true
         vTextFieldRef.value?.focus()
       }
+      isPristine.value = true
       _searchLock.value = null
     }
     /** @param set - null means toggle */
@@ -581,6 +581,7 @@ export const VCombobox = genericComponent<new <
                                       modelValue={ isSelected }
                                       ripple={ false }
                                       tabindex="-1"
+                                      onClick={ (event: MouseEvent) => event.preventDefault() }
                                     />
                                   ) : undefined }
 
