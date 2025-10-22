@@ -649,7 +649,7 @@ describe('VAutocomplete', () => {
     })
 
     await userEvent.click(element)
-    await expect(screen.findByRole('listbox')).resolves.toBeDisplayed()
+    await expect.poll(() => screen.findByRole('listbox')).toBeDisplayed()
 
     await userEvent.click(screen.getAllByRole('option')[0])
     await rerender({ items: ['Foo', 'Bar', 'test', 'test 2'] })

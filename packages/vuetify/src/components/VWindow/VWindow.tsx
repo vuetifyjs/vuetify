@@ -143,14 +143,13 @@ export const VWindow = genericComponent<new <T>(
     // Fix for https://github.com/vuetifyjs/vuetify/issues/18447
     watch(activeIndex, (newVal, oldVal) => {
       let scrollableParent: HTMLElement | undefined
-      const savedScrollPosition = { x: 0, y: 0 }
+      const savedScrollPosition = { left: 0, top: 0 }
 
       if (IN_BROWSER && oldVal >= 0) {
         scrollableParent = getScrollParent(rootRef.value)
 
-        // Save current scroll position
-        savedScrollPosition.x = scrollableParent.scrollLeft
-        savedScrollPosition.y = scrollableParent.scrollTop
+        savedScrollPosition.left = scrollableParent?.scrollLeft
+        savedScrollPosition.top = scrollableParent?.scrollTop
       }
 
       const itemsLength = group.items.value.length
@@ -171,8 +170,8 @@ export const VWindow = genericComponent<new <T>(
 
         const currentScrollY = scrollableParent.scrollTop
 
-        if (currentScrollY !== savedScrollPosition.y) {
-          scrollableParent.scrollTo({ left: savedScrollPosition.x, top: savedScrollPosition.y, behavior: 'instant' })
+        if (currentScrollY !== savedScrollPosition.top) {
+          scrollableParent.scrollTo({ ...savedScrollPosition, behavior: 'instant' })
         }
 
         requestAnimationFrame(() => {
@@ -180,8 +179,8 @@ export const VWindow = genericComponent<new <T>(
 
           const rafScrollY = scrollableParent.scrollTop
 
-          if (rafScrollY !== savedScrollPosition.y) {
-            scrollableParent.scrollTo({ left: savedScrollPosition.x, top: savedScrollPosition.y, behavior: 'instant' })
+          if (rafScrollY !== savedScrollPosition.top) {
+            scrollableParent.scrollTo({ ...savedScrollPosition, behavior: 'instant' })
           }
         })
       })

@@ -4,9 +4,9 @@ import { VForm } from '@/components/VForm'
 import { VListItem } from '@/components/VList'
 
 // Utilities
-import { commands, generate, render, screen, userEvent, waitForClickable } from '@test'
+import { commands, generate, render, screen, userEvent, wait, waitForClickable } from '@test'
 import { getAllByRole } from '@testing-library/vue'
-import { cloneVNode, nextTick, ref } from 'vue'
+import { cloneVNode, computed, nextTick, ref } from 'vue'
 
 const variants = ['underlined', 'outlined', 'filled', 'solo', 'plain'] as const
 const densities = ['default', 'comfortable', 'compact'] as const
@@ -750,6 +750,46 @@ describe('VSelect', () => {
 
     expect(inputField).toHaveAttribute('aria-expanded', 'false')
     expect(inputField).toHaveAttribute('aria-label', 'Open')
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/22052
+  it('should keep the checkboxes in sync with the model', async () => {
+    const items = [
+      { title: 'Both', value: 'both' },
+      { title: 'Option A', value: 'a' },
+      { title: 'Option B', value: 'b' },
+    ]
+
+    const model = ref<string[]>([])
+    const selectModel = computed({
+      get: () => model.value.length === 2 ? ['both'] : model.value,
+      set: val => model.value = val.includes('both') ? ['a', 'b'] : val,
+    })
+
+    const { element } = render(() => (
+      <VSelect
+        v-model={ selectModel.value }
+        items={ items }
+        multiple
+        itemProps={ (item: any) =>
+          (selectModel.value?.includes('both') && item.value !== 'both') ? { disabled: true } : {}
+        }
+      />
+    ))
+
+    await userEvent.click(element)
+    await wait(100)
+
+    const options = screen.getAllByRole('option')
+    expect(options).toHaveLength(3)
+
+    await userEvent.click(screen.getAllByCSS('.v-checkbox-btn input')[1])
+    await userEvent.click(screen.getAllByCSS('.v-checkbox-btn input')[2])
+
+    await expect.poll(() => model.value).toStrictEqual(['a', 'b'])
+    expect(selectModel.value).toStrictEqual(['both'])
+    expect(screen.getAllByCSS('.v-checkbox-btn input')[0]).toBeChecked()
+    expect(screen.getAllByCSS('.v-checkbox-btn input:checked')).toHaveLength(1)
   })
 
   describe('Showcase', () => {
