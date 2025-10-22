@@ -149,8 +149,10 @@ export const VWindow = genericComponent<new <T>(
         scrollableParent = getScrollParent(rootRef.value)
 
         // Save current scroll position
-        savedScrollPosition.x = scrollableParent.scrollLeft
-        savedScrollPosition.y = scrollableParent.scrollTop
+        if (scrollableParent) {
+          savedScrollPosition.x = scrollableParent.scrollLeft
+          savedScrollPosition.y = scrollableParent.scrollTop
+        }
       }
 
       const itemsLength = group.items.value.length
