@@ -93,7 +93,11 @@
 
         <v-col class="d-md-block d-none" cols="12" md="6">
           <v-sheet class="rounded-lg bg-surface elevation-10">
-            <AppMarkup :code="code" class="bg-black rounded-lg" />
+            <AppMarkup
+              :code="code"
+              class="bg-black rounded-lg pa-5"
+              open-in-playground
+            />
           </v-sheet>
         </v-col>
       </v-row>
@@ -106,17 +110,23 @@
 </template>
 
 <script setup>
-  const code = `
-      <template>
-        <v-app>
-          <v-container>
-            <v-btn color="primary">
-              Hello Vuetify!
-            </v-btn>
-          </v-container>
-        </v-app>
-      </template>
-    `
+  const codeContent = `<template>
+  <v-app>
+    <v-container>
+      <v-btn color="primary">
+        Hello Vuetify!
+      </v-btn>
+    </v-container>
+  </v-app>
+</template>`
+
+  const code = [
+    {
+      name: 'template',
+      content: codeContent,
+      language: 'html',
+    },
+  ]
 
   const isCopying = shallowRef(false)
 
