@@ -42,6 +42,7 @@ interface ActivatorProps extends DelayProps {
   activatorProps: Record<string, any>
 
   openOnClick: boolean | undefined
+  openOnTouch: boolean
   openOnHover: boolean
   openOnFocus: boolean | undefined
 
@@ -60,6 +61,7 @@ export const makeActivatorProps = propsFactory({
     type: Boolean,
     default: undefined,
   },
+  openOnTouch: Boolean,
   openOnHover: Boolean,
   openOnFocus: {
     type: Boolean,
@@ -113,6 +115,13 @@ export function useActivator (
       }
       isActive.value = !isActive.value
     },
+    onTouchstart: (e: TouchEvent) => {
+      activatorEl.value = (e.currentTarget || e.target) as HTMLElement
+      if (!isActive.value) {
+        cursorTarget.value = [e.touches[0].clientX, e.touches[0].clientY]
+      }
+      isActive.value = !isActive.value
+    },
     onMouseenter: (e: MouseEvent) => {
       if (e.sourceCapabilities?.firesTouchEvents) return
 
@@ -146,6 +155,9 @@ export function useActivator (
 
     if (openOnClick.value) {
       events.onClick = availableEvents.onClick
+    }
+    if (props.openOnTouch) {
+      events.onTouchstart = availableEvents.onTouchstart
     }
     if (props.openOnHover) {
       events.onMouseenter = availableEvents.onMouseenter
