@@ -433,8 +433,10 @@ export function throttle<T extends (...args: any[]) => any> (
     const now = Date.now()
     const elapsed = now - lastExec
 
-    if ((!throttling && options.leading) || elapsed >= delay) {
+    if (!throttling || elapsed >= delay) {
       lastExec = now
+    }
+    if ((!throttling && options.leading) || elapsed >= delay) {
       window.setTimeout(() => fn(...args)) // ignore 'fn' executin errors
     }
 
