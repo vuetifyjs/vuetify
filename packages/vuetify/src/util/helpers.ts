@@ -419,15 +419,37 @@ export function debounce (fn: Function, delay: MaybeRef<number>) {
   return wrap
 }
 
-export function throttle<T extends (...args: any[]) => any> (fn: T, limit: number) {
+export function throttle<T extends (...args: any[]) => any> (
+  fn: T,
+  delay: number,
+  options = { leading: false, trailing: true },
+) {
+  let timeoutId = 0
+  let lastExec = 0
   let throttling = false
-  return (...args: Parameters<T>): void | ReturnType<T> => {
-    if (!throttling) {
-      throttling = true
-      setTimeout(() => throttling = false, limit)
-      return fn(...args)
+
+  const wrap = (...args: Parameters<T>): void | ReturnType<T> => {
+    clearTimeout(timeoutId)
+    const now = Date.now()
+    const elapsed = now - lastExec
+
+    if ((!throttling && options.leading) || elapsed >= delay) {
+      lastExec = now
+      window.setTimeout(() => fn(...args)) // ignore 'fn' executin errors
     }
+
+    throttling = true
+    timeoutId = window.setTimeout(() => {
+      throttling = false
+      if (options.trailing) {
+        fn(...args)
+      }
+    }, delay)
   }
+
+  wrap.clear = () => clearTimeout(timeoutId)
+  wrap.immediate = fn
+  return wrap
 }
 
 export function clamp (value: number, min = 0, max = 1) {
