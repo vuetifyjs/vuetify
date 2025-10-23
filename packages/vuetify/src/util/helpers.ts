@@ -422,7 +422,7 @@ export function debounce (fn: Function, delay: MaybeRef<number>) {
 export function throttle<T extends (...args: any[]) => any> (
   fn: T,
   delay: number,
-  options = { leading: false, trailing: true },
+  options = { leading: true, trailing: true },
 ) {
   let timeoutId = 0
   let lastExec = 0
