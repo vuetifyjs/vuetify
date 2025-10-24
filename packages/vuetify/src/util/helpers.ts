@@ -11,6 +11,7 @@ import {
   unref,
   watchEffect,
 } from 'vue'
+import { consoleError } from '@/util/console'
 import { IN_BROWSER } from '@/util/globals'
 
 // Types
@@ -419,15 +420,39 @@ export function debounce (fn: Function, delay: MaybeRef<number>) {
   return wrap
 }
 
-export function throttle<T extends (...args: any[]) => any> (fn: T, limit: number) {
+export function throttle<T extends (...args: any[]) => any> (
+  fn: T,
+  delay: number,
+  options = { leading: true, trailing: true },
+) {
+  let timeoutId = 0
+  let lastExec = 0
   let throttling = false
-  return (...args: Parameters<T>): void | ReturnType<T> => {
-    if (!throttling) {
-      throttling = true
-      setTimeout(() => throttling = false, limit)
-      return fn(...args)
+
+  const wrap = (...args: Parameters<T>): void | ReturnType<T> => {
+    clearTimeout(timeoutId)
+    const now = Date.now()
+    const elapsed = now - lastExec
+
+    if (!throttling || elapsed >= delay) {
+      lastExec = now
     }
+    if ((!throttling && options.leading) || elapsed >= delay) {
+      window.setTimeout(() => fn(...args)) // ignore 'fn' executin errors
+    }
+
+    throttling = true
+    timeoutId = window.setTimeout(() => {
+      throttling = false
+      if (options.trailing) {
+        fn(...args)
+      }
+    }, delay)
   }
+
+  wrap.clear = () => clearTimeout(timeoutId)
+  wrap.immediate = fn
+  return wrap
 }
 
 export function clamp (value: number, min = 0, max = 1) {
@@ -666,7 +691,16 @@ export function focusableChildren (el: Element, filterByTabIndex = true) {
   ]
     .map(s => `${s}${filterByTabIndex ? ':not([tabindex="-1"])' : ''}:not([disabled], [inert])`)
     .join(', ')
-  return ([...el.querySelectorAll(targets)] as HTMLElement[])
+
+  let elements
+  try {
+    elements = [...el.querySelectorAll(targets)] as HTMLElement[]
+  } catch (err) {
+    consoleError(String(err))
+    return []
+  }
+
+  return elements
     .filter(x => !x.closest('[inert]')) // does not have inert parent
     .filter(x => !!x.offsetParent || x.getClientRects().length > 0) // is rendered
     .filter(x => !x.parentElement?.closest('details:not([open])') ||
