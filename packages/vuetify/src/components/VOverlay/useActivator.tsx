@@ -135,7 +135,7 @@ export function useActivator (
       isFocused = false
       e.stopPropagation()
 
-      runCloseDelay()
+      runCloseDelay({ minDelay: 1 })
     },
   }
 
@@ -178,7 +178,7 @@ export function useActivator (
       }
       events.onFocusout = () => {
         isFocused = false
-        runCloseDelay()
+        runCloseDelay({ minDelay: 1 })
       }
     }
 
