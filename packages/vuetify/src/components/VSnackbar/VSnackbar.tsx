@@ -87,7 +87,7 @@ export const makeVSnackbarProps = propsFactory({
   ...makeThemeProps(),
   ...omit(makeVOverlayProps({
     transition: 'v-snackbar-transition',
-  }), ['persistent', 'noClickAnimation', 'scrim', 'scrollStrategy']),
+  }), ['persistent', 'noClickAnimation', 'scrim', 'scrollStrategy', 'stickToTarget']),
 }, 'VSnackbar')
 
 export const VSnackbar = genericComponent<VSnackbarSlots>()({
@@ -242,7 +242,7 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
                 ref={ timerRef }
                 color={ typeof props.timer === 'string' ? props.timer : 'info' }
                 max={ props.timeout }
-                model-value={ countdown.time.value }
+                modelValue={ countdown.time.value }
               />
             </div>
           )}

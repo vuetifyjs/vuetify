@@ -4,6 +4,13 @@
       <component :is="Component" />
     </v-fade-transition>
   </router-view>
+
+  <PromotedScript
+    id="bitterbrainsads-script"
+    script-id="_bitterbrainsads_js"
+    src="//media.bitterbrains.com/main.js?from=VUETIFY&type=top"
+    async
+  />
 </template>
 
 <script setup lang="ts">
@@ -70,7 +77,7 @@
 
     auth.verify()
 
-    watch(() => user.theme, val => {
+    watch(() => user.one.theme, val => {
       if (val === 'system') {
         media = getMatchMedia()!
         media.addEventListener('change', onThemeChange)
@@ -84,9 +91,7 @@
     }
 
     watchEffect(() => {
-      theme.global.name.value = (
-        user.theme === 'system' ? systemTheme.value : user.theme
-      )
+      theme.change(user.one.theme === 'system' ? systemTheme.value : user.one.theme)
     })
 
     watch(theme.global.name, themeTransition)
@@ -179,6 +184,8 @@
   ul:not([class]),
   ol:not([class])
     padding-left: 20px
+
+  ul:not([class]):not(li > ul)
     margin-bottom: 16px
 
   // Theme transition

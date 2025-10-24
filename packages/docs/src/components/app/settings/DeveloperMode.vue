@@ -3,12 +3,12 @@
     <v-defaults-provider
       :defaults="{
         VIcon: {
-          color: user.dev ? 'error' : 'disabled'
+          color: user.one.devmode ? 'error' : 'disabled'
         }
       }"
     >
       <SettingsSwitch
-        v-model="user.dev"
+        v-model="user.one.devmode"
         base-color="error"
         color="error"
       />

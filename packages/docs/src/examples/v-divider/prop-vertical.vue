@@ -39,3 +39,9 @@
     <v-app-bar-nav-icon class="ms-2"></v-app-bar-nav-icon>
   </v-toolbar>
 </template>
+
+<style scoped>
+.v-toolbar .v-divider {
+  --v-border-opacity: .7
+}
+</style>

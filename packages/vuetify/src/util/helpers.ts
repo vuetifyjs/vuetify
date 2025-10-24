@@ -11,6 +11,7 @@ import {
   unref,
   watchEffect,
 } from 'vue'
+import { consoleError } from '@/util/console'
 import { IN_BROWSER } from '@/util/globals'
 
 // Types
@@ -225,7 +226,7 @@ type MaybePick<
 export function pick<
   T extends object,
   U extends Extract<keyof T, string>
-> (obj: T, paths: U[]): MaybePick<T, U> {
+> (obj: T, paths: readonly U[]): MaybePick<T, U> {
   const found: any = {}
 
   for (const key of paths) {
@@ -419,15 +420,39 @@ export function debounce (fn: Function, delay: MaybeRef<number>) {
   return wrap
 }
 
-export function throttle<T extends (...args: any[]) => any> (fn: T, limit: number) {
+export function throttle<T extends (...args: any[]) => any> (
+  fn: T,
+  delay: number,
+  options = { leading: true, trailing: true },
+) {
+  let timeoutId = 0
+  let lastExec = 0
   let throttling = false
-  return (...args: Parameters<T>): void | ReturnType<T> => {
-    if (!throttling) {
-      throttling = true
-      setTimeout(() => throttling = false, limit)
-      return fn(...args)
+
+  const wrap = (...args: Parameters<T>): void | ReturnType<T> => {
+    clearTimeout(timeoutId)
+    const now = Date.now()
+    const elapsed = now - lastExec
+
+    if (!throttling || elapsed >= delay) {
+      lastExec = now
     }
+    if ((!throttling && options.leading) || elapsed >= delay) {
+      window.setTimeout(() => fn(...args)) // ignore 'fn' executin errors
+    }
+
+    throttling = true
+    timeoutId = window.setTimeout(() => {
+      throttling = false
+      if (options.trailing) {
+        fn(...args)
+      }
+    }, delay)
   }
+
+  wrap.clear = () => clearTimeout(timeoutId)
+  wrap.immediate = fn
+  return wrap
 }
 
 export function clamp (value: number, min = 0, max = 1) {
@@ -651,10 +676,36 @@ export function callEvent<T extends any[]> (handler: EventProp<T> | EventProp<T>
 }
 
 export function focusableChildren (el: Element, filterByTabIndex = true) {
-  const targets = ['button', '[href]', 'input:not([type="hidden"])', 'select', 'textarea', '[tabindex]']
-    .map(s => `${s}${filterByTabIndex ? ':not([tabindex="-1"])' : ''}:not([disabled])`)
+  const targets = [
+    'button',
+    '[href]',
+    'input:not([type="hidden"])',
+    'select',
+    'textarea',
+    'details:not(:has(> summary))',
+    'details > summary',
+    '[tabindex]',
+    '[contenteditable]:not([contenteditable="false"])',
+    'audio[controls]',
+    'video[controls]',
+  ]
+    .map(s => `${s}${filterByTabIndex ? ':not([tabindex="-1"])' : ''}:not([disabled], [inert])`)
     .join(', ')
-  return [...el.querySelectorAll(targets)] as HTMLElement[]
+
+  let elements
+  try {
+    elements = [...el.querySelectorAll(targets)] as HTMLElement[]
+  } catch (err) {
+    consoleError(String(err))
+    return []
+  }
+
+  return elements
+    .filter(x => !x.closest('[inert]')) // does not have inert parent
+    .filter(x => !!x.offsetParent || x.getClientRects().length > 0) // is rendered
+    .filter(x => !x.parentElement?.closest('details:not([open])') ||
+      (x.tagName === 'SUMMARY' && x.parentElement?.tagName === 'DETAILS')
+    )
 }
 
 export function getNextElement (elements: HTMLElement[], location?: 'next' | 'prev', condition?: (el: HTMLElement) => boolean) {
@@ -719,6 +770,15 @@ export function ensureValidVNode (vnodes: VNodeArrayChildren): VNodeArrayChildre
   })
     ? vnodes
     : null
+}
+
+type Slot<T> = [T] extends [never] ? () => VNodeChild : (arg: T) => VNodeChild
+
+export function renderSlot <T> (slot: Slot<never> | undefined, fallback?: Slot<never> | undefined): VNodeChild
+export function renderSlot <T> (slot: Slot<T> | undefined, props: T, fallback?: Slot<T> | undefined): VNodeChild
+export function renderSlot (slot?: Slot<unknown>, props?: unknown, fallback?: Slot<unknown>) {
+  // TODO: check if slot returns elements: #18308
+  return slot?.(props) ?? fallback?.(props)
 }
 
 export function defer (timeout: number, cb: () => void) {
@@ -818,3 +878,11 @@ export function camelizeProps<T extends Record<string, unknown>> (props: T | nul
   }
   return out
 }
+
+export function onlyDefinedProps (props: Record<string, any>) {
+  const booleanAttributes = ['checked', 'disabled']
+  return Object.fromEntries(Object.entries(props)
+    .filter(([key, v]) => booleanAttributes.includes(key) ? !!v : v !== undefined))
+}
+
+export type NonEmptyArray<T> = [T, ...T[]]

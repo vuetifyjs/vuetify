@@ -15,7 +15,7 @@ import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, nextTick, onMounted, ref, shallowRef, toRef, watch, watchEffect } from 'vue'
+import { computed, nextTick, onMounted, ref, shallowRef, toRef, watch } from 'vue'
 import { clamp, escapeForRegex, extractNumber, genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
@@ -115,7 +115,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       let [baseDigits, fractionDigits] = fixed.split('.')
 
       fractionDigits = (fractionDigits ?? '').padEnd(props.minFractionDigits, '0')
-        .replace(new RegExp(`(?<=\\d{${props.minFractionDigits}})0`, 'g'), '')
+        .replace(new RegExp(`(?<=\\d{${props.minFractionDigits}})0+$`, 'g'), '')
 
       return [
         baseDigits,
@@ -131,29 +131,51 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
     )
 
     const _inputText = shallowRef<string | null>(null)
-    watchEffect(() => {
-      if (isFocused.value && !controlsDisabled.value) {
-        // ignore external changes
-      } else if (model.value == null) {
+    const _lastParsedValue = shallowRef<number | null>(null)
+
+    watch(model, val => {
+      if (
+        isFocused.value &&
+          !controlsDisabled.value &&
+          Number(_inputText.value?.replace(decimalSeparator.value, '.')) === val
+      ) {
+        // ignore external changes while typing
+        // e.g. 5.01{backspace}2 » should result in 5.02
+        //      but we emit '5' in and want to preserve '5.0'
+      } else if (val == null) {
         _inputText.value = null
-      } else if (!isNaN(model.value)) {
-        _inputText.value = correctPrecision(model.value)
+        _lastParsedValue.value = null
+      } else if (!isNaN(val)) {
+        _inputText.value = correctPrecision(val)
+        _lastParsedValue.value = Number(_inputText.value.replace(decimalSeparator.value, '.'))
       }
-    })
+    }, { immediate: true })
+
     const inputText = computed<string | null>({
       get: () => _inputText.value,
       set (val) {
         if (val === null || val === '') {
           model.value = null
           _inputText.value = null
+          _lastParsedValue.value = null
           return
         }
         const parsedValue = Number(val.replace(decimalSeparator.value, '.'))
-        if (!isNaN(parsedValue) && parsedValue <= props.max && parsedValue >= props.min) {
-          model.value = parsedValue
+        if (!isNaN(parsedValue)) {
           _inputText.value = val
+          _lastParsedValue.value = parsedValue
+
+          if (parsedValue <= props.max && parsedValue >= props.min) {
+            model.value = parsedValue
+          }
         }
       },
+    })
+
+    const isOutOfRange = computed(() => {
+      if (_lastParsedValue.value === null) return false
+      const numberFromText = Number(_inputText.value)
+      return numberFromText !== clamp(numberFromText, props.min, props.max)
     })
 
     const canIncrease = computed(() => {
@@ -179,7 +201,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
         onClick: onControlClick,
         onPointerup: onControlMouseup,
         onPointerdown: onUpControlMousedown,
-        onPointercancel: onControlPointerCancel,
+        onPointercancel: onControlMouseup,
       },
     }
     const decrementSlotProps = {
@@ -187,7 +209,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
         onClick: onControlClick,
         onPointerup: onControlMouseup,
         onPointerdown: onDownControlMousedown,
-        onPointercancel: onControlPointerCancel,
+        onPointercancel: onControlMouseup,
       },
     }
 
@@ -239,6 +261,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       if (!new RegExp(`^-?\\d*${escapeForRegex(decimalSeparator.value)}?\\d*$`).test(potentialNewInputVal)) {
         e.preventDefault()
         inputElement!.value = potentialNewNumber
+        nextTick(() => inputText.value = potentialNewNumber)
       }
 
       if (props.precision == null) return
@@ -247,11 +270,16 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       if (potentialNewInputVal.split(decimalSeparator.value)[1]?.length > props.precision) {
         e.preventDefault()
         inputElement!.value = potentialNewNumber
+        nextTick(() => inputText.value = potentialNewNumber)
+
+        const cursorPosition = (selectionStart ?? 0) + e.data.length
+        inputElement!.setSelectionRange(cursorPosition, cursorPosition)
       }
       // Ignore decimal separator when precision = 0
-      if (props.precision === 0 && potentialNewInputVal.includes(decimalSeparator.value)) {
+      if (props.precision === 0 && potentialNewInputVal.endsWith(decimalSeparator.value)) {
         e.preventDefault()
         inputElement!.value = potentialNewNumber
+        nextTick(() => inputText.value = potentialNewNumber)
       }
     }
 
@@ -263,6 +291,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
 
       if (['ArrowDown', 'ArrowUp'].includes(e.key)) {
         e.preventDefault()
+        e.stopPropagation()
         clampModel()
         // _model is controlled, so need to wait until props['modelValue'] is updated
         await nextTick()
@@ -282,7 +311,6 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       const el = e.currentTarget as HTMLElement
       el?.releasePointerCapture(e.pointerId)
       e.preventDefault()
-      e.stopPropagation()
       holdStop()
     }
 
@@ -300,12 +328,6 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       e.preventDefault()
       e.stopPropagation()
       holdStart('down')
-    }
-
-    function onControlPointerCancel (e: PointerEvent) {
-      const el = e.currentTarget as HTMLElement
-      el?.releasePointerCapture(e.pointerId)
-      holdStop()
     }
 
     function clampModel () {
@@ -346,7 +368,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
     }
 
     useRender(() => {
-      const { modelValue: _, ...textFieldProps } = VTextField.filterProps(props)
+      const { modelValue: _, type, ...textFieldProps } = VTextField.filterProps(props)
 
       function incrementControlNode () {
         return !slots.increment ? (
@@ -354,15 +376,15 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
             aria-hidden="true"
             data-testid="increment"
             disabled={ !canIncrease.value }
-            flat
             height={ controlNodeDefaultHeight.value }
             icon={ incrementIcon.value }
             key="increment-btn"
             onClick={ onControlClick }
             onPointerdown={ onUpControlMousedown }
             onPointerup={ onControlMouseup }
-            onPointercancel={ onControlPointerCancel }
+            onPointercancel={ onControlMouseup }
             size={ controlNodeSize.value }
+            variant="text"
             tabindex="-1"
           />
         ) : (
@@ -371,10 +393,10 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
             defaults={{
               VBtn: {
                 disabled: !canIncrease.value,
-                flat: true,
                 height: controlNodeDefaultHeight.value,
                 size: controlNodeSize.value,
                 icon: incrementIcon.value,
+                variant: 'text',
               },
             }}
           >
@@ -389,15 +411,15 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
             aria-hidden="true"
             data-testid="decrement"
             disabled={ !canDecrease.value }
-            flat
             height={ controlNodeDefaultHeight.value }
             icon={ decrementIcon.value }
             key="decrement-btn"
             onClick={ onControlClick }
             onPointerdown={ onDownControlMousedown }
             onPointerup={ onControlMouseup }
-            onPointercancel={ onControlPointerCancel }
+            onPointercancel={ onControlMouseup }
             size={ controlNodeSize.value }
+            variant="text"
             tabindex="-1"
           />
         ) : (
@@ -406,10 +428,10 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
             defaults={{
               VBtn: {
                 disabled: !canDecrease.value,
-                flat: true,
                 height: controlNodeDefaultHeight.value,
                 size: controlNodeSize.value,
                 icon: decrementIcon.value,
+                variant: 'text',
               },
             }}
           >
@@ -471,6 +493,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
           v-model={ inputText.value }
           v-model:focused={ isFocused.value }
           validationValue={ model.value }
+          error={ isOutOfRange.value || undefined }
           onBeforeinput={ onBeforeinput }
           onFocus={ onFocus }
           onBlur={ onBlur }

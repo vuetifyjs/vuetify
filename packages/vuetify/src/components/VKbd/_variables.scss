@@ -1,11 +1,19 @@
-// VKbd
-$kbd-border-radius: 3px !default;
-$kbd-display: inline !default;
-$kbd-elevation: 0 !default;
-$kbd-font-size: 85% !default;
-$kbd-font-weight: normal !default;
-$kbd-padding: .2em .4rem !default;
+@use '../../styles/settings';
 
+// VKbd
+// Kbd elements naturally use monospace fonts, if users want to change this, they can do so by setting the font-family on the v-kbd element.
+$kbd-font-family: settings.$body-font-family !default;
+$kbd-border-radius: 4px !default;
+$kbd-display: inline-flex !default;
+$kbd-elevation: 1 !default;
+// Kbd elements are used inline with text, so we should use the same font size as the text it's with.
+$kbd-font-size: 0.875em !default;
+$kbd-font-weight: normal !default;
+$kbd-line-height: 1 !default;
+$kbd-padding: 3px 6px !default;;
+$kbd-min-height: 1em !default;
+$kbd-min-width: 20px !default;
+$kbd-margin-inline: 1px !default;
 $kbd-border-color: rgba(var(--v-border-color), var(--v-border-opacity)) !default;
 $kbd-border-style: solid !default;
 $kbd-border-width: thin !default;

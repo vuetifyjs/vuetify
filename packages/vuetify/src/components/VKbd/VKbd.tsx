@@ -1,5 +1,5 @@
 // Styles
-import './VKbd.sass'
+import './VKbd.scss'
 
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'
@@ -14,14 +14,14 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 export const makeVKbdProps = propsFactory({
+  color: String,
+
   ...makeBorderProps(),
   ...makeComponentProps(),
   ...makeRoundedProps(),
   ...makeTagProps({ tag: 'kbd' }),
   ...makeThemeProps(),
   ...makeElevationProps(),
-
-  color: String,
 }, 'VKbd')
 
 export const VKbd = genericComponent()({

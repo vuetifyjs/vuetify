@@ -18,6 +18,40 @@ Latest news, updates, and stories about Vuetify.
 
 <br>
 
+## September 2025 Update
+
+🖊️ John Leider • 📅 October 12th, 2025
+
+September marks significant progress as we assemble the building blocks for Vuetify's next phase. From revolutionary design-to-development workflows with our new Figma UI Kit to foundational v0 composables, September has been about connecting the pieces that will define the future of Vue development. This update includes the release of v3.10.0 (Argo), updated Figma UI Kit, new Vuetify0 composables, and over 60 bug fixes and features... { .text-medium-emphasis }
+
+[Read More](/blog/september-2025-update/) { .text-end }
+
+## August 2025 Update
+
+🖊️ John Leider • 📅 September 9th, 2025
+
+August marks a pivotal moment in Vuetify's evolution as we prepare to release the pre-alpha of Vuetify0 (v0), launch our redesigned issues page, and continue delivering powerful components and improvements. This month brings exciting developments including the "Mastering Vuetify Theming" webinar recap, VEditor final testing phase, free premium themes for personal use, and significant framework updates with 87 merged pull requests... { .text-medium-emphasis }
+
+[Read More](/blog/august-2025-update/) { .text-end }
+
+## July 2025 Update
+
+🖊️ John Leider • 📅 August 6th, 2025
+
+July was a month of significant advancements in the Vuetify ecosystem, highlighted by the release of v3.9.0 (Zealot) and the promotion of VTreeview and VTimePicker from labs to core components. This update also includes a focus on component stability, bug fixes, and developer experience improvements, with subsequent patches up to v3.9.3... { .text-medium-emphasis }
+
+[Read More](/blog/july-2025-update/) { .text-end }
+
+## June 2025 Update
+
+🖊️ John Leider • 📅 July 7th, 2025
+
+June delivered substantial progress on VHotkey component, VCommandPalette development, component stability improvements, and developer experience enhancements across the Vuetify ecosystem. Discover the completion of VHotkey and useHotkey composable, new components in development like VMaskInput and VEditor, and exciting ecosystem updates including documentation improvements and Vuetify Studio enhancements... { .text-medium-emphasis }
+
+[Read More](/blog/june-2025-update/) { .text-end }
+
+---
+
 ## May 2025 Update
 
 🖊️ John Leider • 📅 June 6th, 2025

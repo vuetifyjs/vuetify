@@ -22,11 +22,11 @@ import { makeFilterProps, useFilter } from '@/composables/filter'
 
 // Utilities
 import { computed, toRef, toRefs } from 'vue'
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { DeepReadonly, UnwrapRef } from 'vue'
-import type { Group } from './composables/group'
+import type { Group, GroupSummary } from './composables/group'
 import type { CellProps, DataTableHeader, DataTableItem, InternalDataTableHeader, RowProps } from './types'
 import type { VDataTableHeadersSlots } from './VDataTableHeaders'
 import type { VDataTableRowsSlots } from './VDataTableRows'
@@ -51,7 +51,7 @@ export type VDataTableSlotProps<T> = {
   toggleGroup: ReturnType<typeof provideGroupBy>['toggleGroup']
   items: readonly T[]
   internalItems: readonly DataTableItem[]
-  groupedItems: readonly (DataTableItem<T> | Group<DataTableItem<T>>)[]
+  groupedItems: readonly (DataTableItem<T> | Group<DataTableItem<T>> | GroupSummary<DataTableItem<T>>)[]
   columns: InternalDataTableHeader[]
   headers: InternalDataTableHeader[][]
 }
@@ -85,7 +85,7 @@ export const makeDataTableProps = propsFactory({
   ...makeDataTableItemsProps(),
   ...makeDataTableSelectProps(),
   ...makeDataTableSortProps(),
-  ...makeVDataTableHeadersProps(),
+  ...omit(makeVDataTableHeadersProps(), ['multiSort']),
   ...makeVTableProps(),
 }, 'DataTable')
 
@@ -128,7 +128,7 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
 
   setup (props, { attrs, slots }) {
     const { groupBy } = createGroupBy(props)
-    const { sortBy, multiSort, mustSort } = createSort(props)
+    const { initialSortOrder, sortBy, multiSort, mustSort } = createSort(props)
     const { page, itemsPerPage } = createPagination(props)
     const { disableSort } = toRefs(props)
 
@@ -152,7 +152,7 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
       customKeyFilter: filterFunctions,
     })
 
-    const { toggleSort } = provideSort({ sortBy, multiSort, mustSort, page })
+    const { toggleSort } = provideSort({ initialSortOrder, sortBy, multiSort, mustSort, page })
     const { sortByWithGroups, opened, extractRows, isGroupOpen, toggleGroup } = provideGroupBy({ groupBy, sortBy, disableSort })
 
     const { sortedItems } = useSortedItems(props, filteredItems, sortByWithGroups, {
@@ -160,7 +160,7 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
       sortFunctions,
       sortRawFunctions,
     })
-    const { flatItems } = useGroupedItems(sortedItems, groupBy, opened)
+    const { flatItems } = useGroupedItems(sortedItems, groupBy, opened, () => !!slots['group-summary'])
     const itemsLength = computed(() => flatItems.value.length)
 
     const { startIndex, stopIndex, pageCount, setItemsPerPage } = providePagination({ page, itemsPerPage, itemsLength })
@@ -222,7 +222,7 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
 
     useRender(() => {
       const dataTableFooterProps = VDataTableFooter.filterProps(props)
-      const dataTableHeadersProps = VDataTableHeaders.filterProps(props)
+      const dataTableHeadersProps = VDataTableHeaders.filterProps(omit(props, ['multiSort']))
       const dataTableRowsProps = VDataTableRows.filterProps(props)
       const tableProps = VTable.filterProps(props)
 
@@ -249,6 +249,7 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
                   <thead key="thead">
                     <VDataTableHeaders
                       { ...dataTableHeadersProps }
+                      multiSort={ !!props.multiSort }
                       v-slots={ slots }
                     />
                   </thead>

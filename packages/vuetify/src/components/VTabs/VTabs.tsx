@@ -2,7 +2,7 @@
 import './VTabs.sass'
 
 // Components
-import { VTab } from './VTab'
+import { makeVTabProps, VTab } from './VTab'
 import { VTabsWindow } from './VTabsWindow'
 import { VTabsWindowItem } from './VTabsWindowItem'
 import { makeVSlideGroupProps, VSlideGroup } from '@/components/VSlideGroup/VSlideGroup'
@@ -18,7 +18,7 @@ import { makeTagProps } from '@/composables/tag'
 // Utilities
 import { computed, toRef } from 'vue'
 import { VTabsSymbol } from './shared'
-import { convertToUnit, genericComponent, isObject, propsFactory, useRender } from '@/util'
+import { convertToUnit, genericComponent, isObject, pick, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -35,6 +35,8 @@ export type VTabsSlots<T> = {
   tab: VTabsSlot<T>
   item: VTabsSlot<T>
   window: never
+  prev: never
+  next: never
 } & {
   [key: `tab.${string}`]: VTabsSlot<T>
   [key: `item.${string}`]: VTabsSlot<T>
@@ -71,6 +73,7 @@ export const makeVTabsProps = propsFactory({
   hideSlider: Boolean,
   sliderColor: String,
 
+  ...pick(makeVTabProps(), ['spaced']),
   ...makeVSlideGroupProps({
     mandatory: 'force' as const,
     selectedClass: 'v-tab-item--selected',
@@ -143,18 +146,23 @@ export const VTabs = genericComponent<new <T = TabItem>(
             { ...scopeId }
             { ...attrs }
           >
-            { slots.default?.() ?? items.value.map(item => (
-              slots.tab?.({ item }) ?? (
-                <VTab
-                  { ...item }
-                  key={ item.text }
-                  value={ item.value }
-                  v-slots={{
-                    default: slots[`tab.${item.value}`] ? () => slots[`tab.${item.value}`]?.({ item }) : undefined,
-                  }}
-                />
-              )
-            ))}
+            {{
+              default: slots.default ?? (() => items.value.map(item => (
+                slots.tab?.({ item }) ?? (
+                  <VTab
+                    { ...item }
+                    key={ item.text }
+                    value={ item.value }
+                    spaced={ props.spaced }
+                    v-slots={{
+                      default: slots[`tab.${item.value}`] ? () => slots[`tab.${item.value}`]?.({ item }) : undefined,
+                    }}
+                  />
+                )
+              ))),
+              prev: slots.prev,
+              next: slots.next,
+            }}
           </VSlideGroup>
 
           { hasWindow && (

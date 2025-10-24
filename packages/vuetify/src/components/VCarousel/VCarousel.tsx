@@ -50,7 +50,7 @@ export const makeVCarouselProps = propsFactory({
   }),
 }, 'VCarousel')
 
-type VCarouselSlots = VWindowSlots & {
+type VCarouselSlots = Omit<VWindowSlots, 'additional'> & {
   item: {
     props: Record<string, any>
     item: {
@@ -172,6 +172,7 @@ export const VCarousel = genericComponent<new <T>(
 
                 { props.progress && (
                   <VProgressLinear
+                    absolute
                     class="v-carousel__progress"
                     color={ typeof props.progress === 'string' ? props.progress : undefined }
                     modelValue={ (group.getItemIndex(model.value) + 1) / group.items.value.length * 100 }

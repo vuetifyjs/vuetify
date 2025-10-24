@@ -34,7 +34,10 @@ export type RulesOptions = {
 type ValidationRuleParams = [any, string?]
 export type ValidationAlias = string | [string, ...ValidationRuleParams]
 
-export type RulesInstance = (fn: () => ValidationProps['rules']) => Readonly<Ref<any[]>>
+export type RulesInstance = {
+  resolve: (fn: () => ValidationProps['rules']) => Readonly<Ref<any[]>>
+  aliases: RuleAliases
+}
 
 export function createRules (options: RulesOptions | undefined, locale: LocaleInstance) {
   const { t } = locale
@@ -50,7 +53,7 @@ export function createRules (options: RulesOptions | undefined, locale: LocaleIn
       return (v: any) => (!v || (typeof v === 'string' && /^.+@\S+\.\S+$/.test(v))) || t(err || '$vuetify.rules.email')
     },
     number: (err?: string) => {
-      return (v: string) => !!Number(v) || t(err || '$vuetify.rules.number')
+      return (v: string) => !v || !isNaN(Number(v)) || t(err || '$vuetify.rules.number')
     },
     integer: (err?: string) => {
       return (v: string) => (/^[\d]*$/.test(v)) || t(err || '$vuetify.rules.integer')
@@ -59,13 +62,13 @@ export function createRules (options: RulesOptions | undefined, locale: LocaleIn
       return (v: string) => (/^[A-Z]*$/.test(v)) || t(err || '$vuetify.rules.capital')
     },
     maxLength: (len: number, err?: string) => {
-      return (v: any) => (!v || v.length <= len) || t(err || '$vuetify.rules.maxLength', [len])
+      return (v: any) => (!v || v.length <= len) || t(err || '$vuetify.rules.maxLength', len)
     },
     minLength: (len: number, err?: string) => {
-      return (v: any) => (!v || v.length >= len) || t(err || '$vuetify.rules.minLength', [len])
+      return (v: any) => (!v || v.length >= len) || t(err || '$vuetify.rules.minLength', len)
     },
     strictLength: (len: number, err?: string) => {
-      return (v: any) => (!v || v.length === len) || t(err || '$vuetify.rules.strictLength', [len])
+      return (v: any) => (!v || v.length === len) || t(err || '$vuetify.rules.strictLength', len)
     },
     exclude: (forbiddenCharacters: string[], err?: string) => {
       return (v: string) => {
@@ -86,7 +89,7 @@ export function createRules (options: RulesOptions | undefined, locale: LocaleIn
     ...options?.aliases,
   }
 
-  function resolveRules (fn: () => ValidationProps['rules']) {
+  function resolve (fn: () => ValidationProps['rules']) {
     return computed(() => fn().map(rule => {
       let ruleName: string | null = null
       let ruleParams: ValidationRuleParams = [undefined]
@@ -109,15 +112,26 @@ export function createRules (options: RulesOptions | undefined, locale: LocaleIn
     }))
   }
 
-  return resolveRules
+  return {
+    resolve,
+    aliases,
+  }
 }
 
 export const RulesSymbol: InjectionKey<RulesInstance> = Symbol.for('vuetify:rules')
 
-export function useRules (fn: () => ValidationProps['rules']) {
-  const resolveRules = inject(RulesSymbol, null)
+export function useRules (): RuleAliases
+export function useRules (fn: () => ValidationProps['rules']): Readonly<Ref<ValidationProps['rules']>> | Readonly<Ref<ValidationRule[]>>
 
-  if (!resolveRules) return toRef(fn)
+export function useRules (fn?: () => ValidationProps['rules']) {
+  const rules = inject(RulesSymbol, null)
 
-  return resolveRules(fn)
+  if (!fn) {
+    if (!rules) {
+      throw new Error('Could not find Vuetify rules injection')
+    }
+    return rules.aliases
+  }
+
+  return rules?.resolve(fn) ?? toRef(fn)
 }

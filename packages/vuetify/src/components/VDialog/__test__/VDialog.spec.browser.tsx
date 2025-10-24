@@ -44,4 +44,48 @@ describe('VDialog', () => {
     await userEvent.click(element)
     await expect.poll(() => onAfterLeave).toHaveBeenCalledTimes(1)
   })
+
+  it('should focus on the last element when shift + tab key is pressed on the first element', async () => {
+    const model = ref(true)
+    render(() => (
+      <div>
+        <VDialog v-model={ model.value } persistent>
+          <div>
+            <button data-testid="first">First</button>
+            <button data-testid="last">Last</button>
+          </div>
+        </VDialog>
+      </div>
+    ))
+    const first = screen.getByCSS('button[data-testid="first"]')
+    const last = screen.getByCSS('button[data-testid="last"]')
+
+    first.focus()
+    await expect.poll(() => document.activeElement).toBe(first)
+
+    await userEvent.tab({ shift: true })
+    await expect.poll(() => document.activeElement).toBe(last)
+  })
+
+  it('should focus on the first element when Tab key is pressed on the last element', async () => {
+    const model = ref(true)
+    render(() => (
+      <div>
+        <VDialog v-model={ model.value }>
+          <div>
+            <button data-testid="first">First</button>
+            <button data-testid="last">Last</button>
+          </div>
+        </VDialog>
+      </div>
+    ))
+    const first = screen.getByCSS('button[data-testid="first"]')
+    const last = screen.getByCSS('button[data-testid="last"]')
+
+    last.focus()
+    await expect.poll(() => document.activeElement).toBe(last)
+
+    await userEvent.tab()
+    await expect.poll(() => document.activeElement).toBe(first)
+  })
 })

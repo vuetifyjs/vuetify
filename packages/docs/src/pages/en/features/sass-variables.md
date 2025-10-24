@@ -56,7 +56,7 @@ For additional details about css-pre-processors, please refer to the official vi
 
 ## Usage
 
-There are many SASS variables such as **font size**, **font family**, and **line height** that can be configured globally. An extensive list of configurable global SASS variables can be found [here](/api/globals/). To start, Follow the plugin setup guide from [treeshaking](/features/treeshaking/) then add `styles.configFile` to the plugin options:
+There are many SASS variables such as **font size**, **font family**, and **line height** that can be configured globally. An extensive list of configurable global SASS variables can be found [here](/api/globals/). To start, follow the plugin setup guide from [treeshaking](/features/treeshaking/) then add `styles.configFile` to the plugin options:
 
 ```js { resource="vite.config.js" }
 vuetify({
@@ -136,24 +136,34 @@ Utility classes are a powerful feature of Vuetify, but they can also be unnecess
     "align-items": false,
     "align-self": false,
     "border-bottom": false,
+    "border-current": false,
     "border-end": false,
     "border-opacity": false,
     "border-start": false,
     "border-style": false,
     "border-top": false,
     "border": false,
+    "bottom": false,
+    "cursor": false,
     "display": false,
+    "fill-height": false,
     "flex-direction": false,
     "flex-grow": false,
     "flex-shrink": false,
     "flex-wrap": false,
     "flex": false,
-    "float-ltr": false,
-    "float-rtl": false,
+    "float:ltr": false,
+    "float:rtl": false,
     "float": false,
     "font-italic": false,
     "font-weight": false,
+    "gap-column": false,
+    "gap-row": false,
+    "gap": false,
+    "height-screen": false,
+    "height": false,
     "justify-content": false,
+    "left": false,
     "margin-bottom": false,
     "margin-end": false,
     "margin-left": false,
@@ -172,6 +182,7 @@ Utility classes are a powerful feature of Vuetify, but they can also be unnecess
     "negative-margin-x": false,
     "negative-margin-y": false,
     "negative-margin": false,
+    "opacity": false,
     "order": false,
     "overflow-wrap": false,
     "overflow-x": false,
@@ -186,6 +197,8 @@ Utility classes are a powerful feature of Vuetify, but they can also be unnecess
     "padding-x": false,
     "padding-y": false,
     "padding": false,
+    "position": false,
+    "right": false,
     "rounded-bottom-end": false,
     "rounded-bottom-start": false,
     "rounded-bottom": false,
@@ -201,8 +214,10 @@ Utility classes are a powerful feature of Vuetify, but they can also be unnecess
     "text-opacity": false,
     "text-overflow": false,
     "text-transform": false,
+    "top": false,
     "typography": false,
     "white-space": false,
+    "width": false,
   ),
 );
 ```

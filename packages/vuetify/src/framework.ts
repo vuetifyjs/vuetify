@@ -1,9 +1,10 @@
 // Composables
+import { createIcons } from './icons'
 import { createDate, DateAdapterSymbol, DateOptionsSymbol } from '@/composables/date/date'
 import { createDefaults, DefaultsSymbol } from '@/composables/defaults'
 import { createDisplay, DisplaySymbol } from '@/composables/display'
 import { createGoTo, GoToSymbol } from '@/composables/goto'
-import { createIcons, IconSymbol } from '@/composables/icons'
+import { IconSymbol } from '@/composables/icons'
 import { createLocale, LocaleSymbol } from '@/composables/locale'
 import { createTheme, ThemeSymbol } from '@/composables/theme'
 
