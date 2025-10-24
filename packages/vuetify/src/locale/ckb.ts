@@ -124,6 +124,9 @@ export default {
     notEmpty: 'تکایە بەلایەنی کەم یەک هەڵبژێرە',
     pattern: 'فۆرماتەکە نادروستە',
   },
+  command: {
+    search: 'فرمان بنووسە یان بگەڕە...',
+  },
   hotkey: {
     then: 'پاشان',
     ctrl: 'Ctrl',
