@@ -279,7 +279,7 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
 
     const contentBox = getIntrinsicSize(data.contentEl.value, data.isRtl.value)
     const scrollParents = getScrollParents(data.contentEl.value)
-    const viewportMargin = 12
+    const viewportMargin = props.stickToTarget ? 0 : 12 // TOOD: prop.viewportMargin
 
     if (!scrollParents.length) {
       scrollParents.push(document.documentElement)
@@ -302,10 +302,18 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
       }
       return scrollBox
     }, undefined!)
-    viewport.x += viewportMargin
-    viewport.y += viewportMargin
-    viewport.width -= viewportMargin * 2
-    viewport.height -= viewportMargin * 2
+
+    if (props.stickToTarget) {
+      viewport.x += Math.min(0, targetBox.x)
+      viewport.y += Math.min(0, targetBox.y)
+      viewport.width = Math.max(viewport.width, targetBox.x + targetBox.width)
+      viewport.height = Math.max(viewport.height, targetBox.y + targetBox.height)
+    } else {
+      viewport.x += viewportMargin
+      viewport.y += viewportMargin
+      viewport.width -= viewportMargin * 2
+      viewport.height -= viewportMargin * 2
+    }
 
     let placement = {
       anchor: preferredAnchor.value,
@@ -397,19 +405,19 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
 
       // shift
       if (overflows.x.before) {
-        if (!props.stickToTarget) x += overflows.x.before
+        x += overflows.x.before
         contentBox.x += overflows.x.before
       }
       if (overflows.x.after) {
-        if (!props.stickToTarget) x -= overflows.x.after
+        x -= overflows.x.after
         contentBox.x -= overflows.x.after
       }
       if (overflows.y.before) {
-        if (!props.stickToTarget) y += overflows.y.before
+        y += overflows.y.before
         contentBox.y += overflows.y.before
       }
       if (overflows.y.after) {
-        if (!props.stickToTarget) y -= overflows.y.after
+        y -= overflows.y.after
         contentBox.y -= overflows.y.after
       }
 
@@ -419,9 +427,9 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
         available.x = viewport.width - overflows.x.before - overflows.x.after
         available.y = viewport.height - overflows.y.before - overflows.y.after
 
-        if (!props.stickToTarget) x += overflows.x.before
+        x += overflows.x.before
         contentBox.x += overflows.x.before
-        if (!props.stickToTarget) y += overflows.y.before
+        y += overflows.y.before
         contentBox.y += overflows.y.before
       }
 
