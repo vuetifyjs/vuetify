@@ -120,7 +120,7 @@ export const makeVListProps = propsFactory({
   ...makeElevationProps(),
   ...makeItemsProps(),
   ...makeRoundedProps(),
-  ...makeTagProps(),
+  ...makeTagProps({ tag: 'ul' }),
   ...makeThemeProps(),
   ...makeVariantProps({ variant: 'text' } as const),
 }, 'VList')
@@ -288,6 +288,7 @@ export const VList = genericComponent<new <
           onMousedown={ onMousedown }
         >
           <VListChildren
+            groupTag={ props.tag }
             items={ items.value }
             returnObject={ props.returnObject }
             v-slots={ slots }
