@@ -4,6 +4,9 @@ import './calendarWithEvents.sass'
 // Composables
 import { useCalendarBase } from './calendarBase'
 
+// Directives
+import vRipple from '@/directives/ripple'
+
 // Utilities
 import { computed, ref } from 'vue'
 import { CalendarEventOverlapModes } from '../modes'
@@ -63,6 +66,9 @@ export interface VEventScopeInput {
   end: boolean
   timed: boolean
 }
+
+// Prevent import from being erased
+void vRipple
 
 export const makeCalendarWithEventsProps = propsFactory({
   events: {

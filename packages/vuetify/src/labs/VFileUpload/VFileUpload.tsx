@@ -192,7 +192,8 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
 
       const expectsDirectory = attrs.webkitdirectory !== undefined && attrs.webkitdirectory !== false
-      const inputAccept = expectsDirectory ? undefined : (props.filterByType ?? String(attrs.accept))
+      const acceptFallback = attrs.accept ? String(attrs.accept) : undefined
+      const inputAccept = expectsDirectory ? undefined : (props.filterByType ?? acceptFallback)
 
       const inputNode = (
         <input

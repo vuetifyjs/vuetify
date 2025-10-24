@@ -165,7 +165,7 @@ export const VBtn = genericComponent<VBtnSlots>()({
         ))
       ) return
 
-      if (link.isLink.value) {
+      if (link.isRouterLink.value) {
         link.navigate?.(e)
       } else {
         // Group active state for links is handled by useSelectLink

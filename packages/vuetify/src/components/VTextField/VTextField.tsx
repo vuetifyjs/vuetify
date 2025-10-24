@@ -133,7 +133,6 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
       onFocus()
 
       nextTick(() => {
-        model.value = null
         reset()
 
         callEvent(props['onClick:clear'], e)
@@ -196,8 +195,6 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
                 onMousedown={ onControlMousedown }
                 onClick={ onControlClick }
                 onClick:clear={ (e: MouseEvent) => onClear(e, reset) }
-                onClick:prependInner={ props['onClick:prependInner'] }
-                onClick:appendInner={ props['onClick:appendInner'] }
                 role={ props.role }
                 { ...omit(fieldProps, ['onClick:clear']) }
                 id={ id.value }
@@ -212,10 +209,11 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
                   ...slots,
                   default: ({
                     props: { class: fieldClass, ...slotProps },
+                    controlRef,
                   }) => {
                     const inputNode = (
                       <input
-                        ref={ inputRef }
+                        ref={ val => inputRef.value = controlRef.value = val as HTMLInputElement }
                         value={ model.value }
                         onInput={ onInput }
                         v-intersect={[{

@@ -8,6 +8,7 @@ import { useExpanded } from './composables/expand'
 import { useHeaders } from './composables/headers'
 import { useSelection } from './composables/select'
 import { useSort } from './composables/sort'
+import { makeDensityProps } from '@/composables/density'
 import { makeDisplayProps, useDisplay } from '@/composables/display'
 import { IconValue } from '@/composables/icons'
 
@@ -36,6 +37,7 @@ export type VDataTableRowSlots<T> = {
 }
 
 export const makeVDataTableRowProps = propsFactory({
+  color: String,
   index: Number,
   item: Object as PropType<DataTableItem>,
   cellProps: [Object, Function] as PropType<CellProps<any>>,
@@ -52,6 +54,7 @@ export const makeVDataTableRowProps = propsFactory({
   onContextmenu: EventProp<[MouseEvent]>(),
   onDblclick: EventProp<[MouseEvent]>(),
 
+  ...makeDensityProps(),
   ...makeDisplayProps(),
 }, 'VDataTableRow')
 
@@ -161,13 +164,16 @@ export const VDataTableRow = genericComponent<new <T>(
                     return slots['item.data-table-select']?.({
                       ...slotProps,
                       props: {
+                        color: props.color,
                         disabled: !item.selectable,
                         modelValue: isSelected([item]),
                         onClick: withModifiers(() => toggleSelect(item), ['stop']),
                       },
                     }) ?? (
                       <VCheckboxBtn
+                        color={ props.color }
                         disabled={ !item.selectable }
+                        density={ props.density }
                         modelValue={ isSelected([item]) }
                         onClick={ withModifiers(
                           (event: Event) => toggleSelect(item, props.index, event as PointerEvent),

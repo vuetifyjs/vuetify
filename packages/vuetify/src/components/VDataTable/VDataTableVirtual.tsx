@@ -89,7 +89,7 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
 
   setup (props, { attrs, slots }) {
     const { groupBy } = createGroupBy(props)
-    const { sortBy, multiSort, mustSort } = createSort(props)
+    const { initialSortOrder, sortBy, multiSort, mustSort } = createSort(props)
     const { disableSort } = toRefs(props)
 
     const {
@@ -111,7 +111,7 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
       customKeyFilter: filterFunctions,
     })
 
-    const { toggleSort } = provideSort({ sortBy, multiSort, mustSort })
+    const { toggleSort } = provideSort({ initialSortOrder, sortBy, multiSort, mustSort })
     const { sortByWithGroups, opened, extractRows, isGroupOpen, toggleGroup } = provideGroupBy({ groupBy, sortBy, disableSort })
 
     const { sortedItems } = useSortedItems(props, filteredItems, sortByWithGroups, {
@@ -181,7 +181,7 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
     }))
 
     useRender(() => {
-      const dataTableHeadersProps = VDataTableHeaders.filterProps(props)
+      const dataTableHeadersProps = VDataTableHeaders.filterProps(omit(props, ['multiSort']))
       const dataTableRowsProps = VDataTableRows.filterProps(props)
       const tableProps = VTable.filterProps(props)
 
@@ -216,6 +216,7 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
                     <thead key="thead">
                       <VDataTableHeaders
                         { ...dataTableHeadersProps }
+                        multiSort={ !!props.multiSort }
                         v-slots={ slots }
                       />
                     </thead>

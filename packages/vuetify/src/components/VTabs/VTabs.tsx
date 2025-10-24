@@ -35,6 +35,8 @@ export type VTabsSlots<T> = {
   tab: VTabsSlot<T>
   item: VTabsSlot<T>
   window: never
+  prev: never
+  next: never
 } & {
   [key: `tab.${string}`]: VTabsSlot<T>
   [key: `item.${string}`]: VTabsSlot<T>
@@ -144,19 +146,23 @@ export const VTabs = genericComponent<new <T = TabItem>(
             { ...scopeId }
             { ...attrs }
           >
-            { slots.default?.() ?? items.value.map(item => (
-              slots.tab?.({ item }) ?? (
-                <VTab
-                  { ...item }
-                  key={ item.text }
-                  value={ item.value }
-                  spaced={ props.spaced }
-                  v-slots={{
-                    default: slots[`tab.${item.value}`] ? () => slots[`tab.${item.value}`]?.({ item }) : undefined,
-                  }}
-                />
-              )
-            ))}
+            {{
+              default: slots.default ?? (() => items.value.map(item => (
+                slots.tab?.({ item }) ?? (
+                  <VTab
+                    { ...item }
+                    key={ item.text }
+                    value={ item.value }
+                    spaced={ props.spaced }
+                    v-slots={{
+                      default: slots[`tab.${item.value}`] ? () => slots[`tab.${item.value}`]?.({ item }) : undefined,
+                    }}
+                  />
+                )
+              ))),
+              prev: slots.prev,
+              next: slots.next,
+            }}
           </VSlideGroup>
 
           { hasWindow && (

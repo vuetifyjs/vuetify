@@ -4,16 +4,21 @@ export class Box {
   width: number
   height: number
 
-  constructor ({ x, y, width, height }: {
+  constructor (args: DOMRect | {
     x: number
     y: number
     width: number
     height: number
   }) {
-    this.x = x
-    this.y = y
-    this.width = width
-    this.height = height
+    const pageScale = document.body.currentCSSZoom ?? 1
+    const factor = args instanceof DOMRect ? 1 + (1 - pageScale) / pageScale : 1
+
+    const { x, y, width, height } = args
+
+    this.x = x * factor
+    this.y = y * factor
+    this.width = width * factor
+    this.height = height * factor
   }
 
   get top () { return this.y }
@@ -37,14 +42,17 @@ export function getOverflow (a: Box, b: Box) {
 
 export function getTargetBox (target: HTMLElement | [x: number, y: number]): Box {
   if (Array.isArray(target)) {
+    const pageScale = document.body.currentCSSZoom ?? 1
+    const factor = 1 + (1 - pageScale) / pageScale
+
     return new Box({
-      x: target[0],
-      y: target[1],
-      width: 0,
-      height: 0,
+      x: target[0] * factor,
+      y: target[1] * factor,
+      width: 0 * factor,
+      height: 0 * factor,
     })
   } else {
-    return target.getBoundingClientRect()
+    return new Box(target.getBoundingClientRect())
   }
 }
 
@@ -58,11 +66,12 @@ export function getElementBox (el: HTMLElement) {
         height: document.documentElement.clientHeight,
       })
     } else {
+      const pageScale = document.body.currentCSSZoom ?? 1
       return new Box({
         x: visualViewport.scale > 1 ? 0 : visualViewport.offsetLeft,
         y: visualViewport.scale > 1 ? 0 : visualViewport.offsetTop,
-        width: visualViewport.width * visualViewport.scale,
-        height: visualViewport.height * visualViewport.scale,
+        width: visualViewport.width * visualViewport.scale / pageScale,
+        height: visualViewport.height * visualViewport.scale / pageScale,
       })
     }
   } else {

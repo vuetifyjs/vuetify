@@ -27,7 +27,7 @@ import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant
 import vRipple from '@/directives/ripple'
 
 // Utilities
-import { computed, onBeforeMount, toDisplayString, toRef, watch } from 'vue'
+import { computed, nextTick, onBeforeMount, toDisplayString, toRef, watch } from 'vue'
 import { deprecate, EventProp, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -152,7 +152,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
       props.link !== false &&
       (props.link || link.isClickable.value || isSelectable.value)
     )
-    const role = computed(() => list ? (isSelectable.value ? 'option' : 'listitem') : undefined)
+    const role = computed(() => list ? (isLink.value ? 'link' : isSelectable.value ? 'option' : 'listitem') : undefined)
     const ariaSelected = computed(() => {
       if (!isSelectable.value) return undefined
       return root.activatable.value ? isActivated.value
@@ -174,7 +174,9 @@ export const VListItem = genericComponent<VListItemSlots>()({
       handleActiveLink()
     })
     onBeforeMount(() => {
-      if (link.isActive?.value) handleActiveLink()
+      if (link.isActive?.value) {
+        nextTick(() => handleActiveLink())
+      }
     })
     function handleActiveLink () {
       if (parent.value != null) {

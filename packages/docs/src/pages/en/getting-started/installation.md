@@ -20,8 +20,6 @@ Get started with Vuetify, the world’s most popular Vue.js framework for buildi
 
 <PageFeatures />
 
-<VoPromotionsCardHighlight class="mb-4" slug="vuemastery-getting-started" />
-
 ## Installation
 
 Vuetify has support for multiple different installation paths with the most common scaffolding tool being [create-vuetify](https://github.com/vuetifyjs/create-vuetify)
@@ -343,7 +341,7 @@ import { createVuetify } from 'vuetify'
 const vuetify = createVuetify({ components, directives })
 
 export default {
-  ...DefaultTheme,
+  extends: DefaultTheme,
   enhanceApp({ app }) {
     app.use(vuetify)
   },

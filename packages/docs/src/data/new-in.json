@@ -51,6 +51,11 @@
       "baseColor": "3.8.0"
     }
   },
+  "VChipGroup": {
+    "props": {
+      "scrollToActive": "3.10.6"
+    }
+  },
   "VColorPicker": {
     "props": {
       "hideEyeDropper": "3.10.0",
@@ -60,6 +65,7 @@
   },
   "VCombobox": {
     "props": {
+      "alwaysFilter": "3.10.4",
       "autocomplete": "3.10.0",
       "clearOnSelect": "3.5.0",
       "listProps": "3.5.0"
@@ -78,13 +84,19 @@
       "hideTitle": "3.10.0"
     }
   },
+  "VDataIterator": {
+    "props": {
+      "initialSortOrder": "3.11.0"
+    }
+  },
   "VDataTable": {
     "props": {
       "collapseIcon": "3.10.0",
       "expandIcon": "3.10.0",
       "groupCollapseIcon": "3.10.0",
       "groupExpandIcon": "3.10.0",
-      "headerProps": "3.5.0"
+      "headerProps": "3.5.0",
+      "initialSortOrder": "3.11.0"
     },
     "slots": {
       "group-summary": "3.10.0"
@@ -95,7 +107,8 @@
       "collapseIcon": "3.10.0",
       "expandIcon": "3.10.0",
       "groupCollapseIcon": "3.10.0",
-      "groupExpandIcon": "3.10.0"
+      "groupExpandIcon": "3.10.0",
+      "initialSortOrder": "3.11.0"
     },
     "slots": {
       "group-summary": "3.10.0"
@@ -106,7 +119,8 @@
       "collapseIcon": "3.10.0",
       "expandIcon": "3.10.0",
       "groupCollapseIcon": "3.10.0",
-      "groupExpandIcon": "3.10.0"
+      "groupExpandIcon": "3.10.0",
+      "initialSortOrder": "3.11.0"
     },
     "slots": {
       "group-summary": "3.10.0"
@@ -115,6 +129,13 @@
   "VDialog": {
     "props": {
       "stickToTarget": "3.10.0"
+    }
+  },
+  "VDivider": {
+    "props": {
+      "gradient": "3.11.0",
+      "contentOffset": "3.11.0",
+      "variant": "3.11.0"
     }
   },
   "VExpansionPanels": {
@@ -218,7 +239,8 @@
   },
   "VSlideGroup": {
     "props": {
-      "contentClass": "3.9.0"
+      "contentClass": "3.9.0",
+      "scrollToActive": "3.10.6"
     }
   },
   "VSnackbar": {
@@ -243,6 +265,10 @@
   "VTabs": {
     "props": {
       "spaced": "3.10.0"
+    },
+    "slots": {
+      "next": "3.11.0",
+      "prev": "3.11.0"
     }
   },
   "VTextField": {
@@ -259,12 +285,15 @@
   "VTreeview": {
     "props": {
       "hideActions": "3.9.0",
+      "hideNoData": "3.10.0",
+      "noDataText": "3.10.0",
       "separateRoots": "3.9.0",
       "indentLines": "3.9.0"
     },
     "slots": {
       "header": "3.10.0",
       "footer": "3.11.0",
+      "no-data": "3.11.0",
       "toggle": "3.10.0"
     }
   },
@@ -275,6 +304,11 @@
     },
     "slots": {
       "toggle": "3.10.0"
+    }
+  },
+  "VToolbar": {
+    "props": {
+      "collapsePosition": "3.11.0"
     }
   },
   "VTooltip": {

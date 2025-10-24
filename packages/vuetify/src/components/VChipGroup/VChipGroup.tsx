@@ -31,7 +31,7 @@ export const makeVChipGroupProps = propsFactory({
     default: deepEqual,
   },
 
-  ...makeVSlideGroupProps(),
+  ...makeVSlideGroupProps({ scrollToActive: false }),
   ...makeComponentProps(),
   ...makeGroupProps({ selectedClass: 'v-chip--selected' }),
   ...makeTagProps(),

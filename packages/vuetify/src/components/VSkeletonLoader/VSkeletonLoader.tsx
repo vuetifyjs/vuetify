@@ -151,34 +151,29 @@ export const VSkeletonLoader = genericComponent()({
         role: 'alert',
       }
 
-      return (
-        <>
-          { isLoading
-            ? (
-              <div
-                class={[
-                  'v-skeleton-loader',
-                  {
-                    'v-skeleton-loader--boilerplate': props.boilerplate,
-                  },
-                  themeClasses.value,
-                  backgroundColorClasses.value,
-                  elevationClasses.value,
-                ]}
-                style={[
-                  backgroundColorStyles.value,
-                  dimensionStyles.value,
-                ]}
-                { ...loadingProps }
-                { ...attrs }
-              >
-                { items.value }
-              </div>
-            )
-            : slots.default?.()
-          }
-        </>
-      )
+      return isLoading
+        ? (
+          <div
+            class={[
+              'v-skeleton-loader',
+              {
+                'v-skeleton-loader--boilerplate': props.boilerplate,
+              },
+              themeClasses.value,
+              backgroundColorClasses.value,
+              elevationClasses.value,
+            ]}
+            style={[
+              backgroundColorStyles.value,
+              dimensionStyles.value,
+            ]}
+            { ...loadingProps }
+            { ...attrs }
+          >
+            { items.value }
+          </div>
+        )
+        : <>{ slots.default?.() }</>
     })
 
     return {}

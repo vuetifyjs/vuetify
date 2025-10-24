@@ -39,6 +39,7 @@ export type VTreeviewChildrenSlots<T> = {
     loading: boolean
   }
   footer: {
+    props: { indentLines?: IndentLineType[] }
     item: T
     internalItem: InternalListItem<T>
     loading: boolean
@@ -193,6 +194,11 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
       const treeviewGroupProps = VTreeviewGroup.filterProps(itemProps)
       const treeviewChildrenProps = VTreeviewChildren.filterProps({ ...props, ...treeItemProps })
 
+      const footerProps = {
+        hideActions: props.hideActions,
+        indentLines: indentLines.footer,
+      }
+
       return children ? (
         <VTreeviewGroup
           { ...treeviewGroupProps }
@@ -205,6 +211,8 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
                 ...itemProps,
                 ...activatorProps,
                 value: itemProps?.value,
+                hideActions: props.hideActions,
+                indentLines: indentLines.node,
                 onToggleExpand: [() => checkChildren(item), activatorProps.onClick] as any,
                 onClick: isClickOnOpen.value
                   ? [() => checkChildren(item), activatorProps.onClick] as any
@@ -219,8 +227,6 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
                     ref={ el => activatorItems.value[index] = el as VTreeviewItem }
                     { ...listItemProps }
                     hasCustomPrepend={ !!slots.prepend }
-                    hideActions={ props.hideActions }
-                    indentLines={ indentLines.node }
                     value={ props.returnObject ? item.raw : itemProps.value }
                     loading={ loading }
                     v-slots={ slotsWithItem }
@@ -239,7 +245,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
                   returnObject={ props.returnObject }
                   v-slots={ slots }
                 />
-                { slots.footer?.({ item: item.raw, internalItem: item, loading }) }
+                { slots.footer?.({ props: footerProps, item: item.raw, internalItem: item, loading }) }
               </>
             ),
           }}

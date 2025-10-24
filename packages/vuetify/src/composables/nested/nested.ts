@@ -5,6 +5,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import {
   computed,
   inject,
+  nextTick,
   onBeforeMount,
   onBeforeUnmount,
   provide,
@@ -13,6 +14,7 @@ import {
   toRaw,
   toRef,
   toValue,
+  watch,
 } from 'vue'
 import {
   independentActiveStrategy,
@@ -29,7 +31,7 @@ import {
   leafSingleSelectStrategy,
   trunkSelectStrategy,
 } from './selectStrategies'
-import { consoleError, getCurrentInstance, propsFactory } from '@/util'
+import { consoleError, getCurrentInstance, propsFactory, throttle } from '@/util'
 
 // Types
 import type { InjectionKey, MaybeRefOrGetter, PropType, Ref } from 'vue'
@@ -218,6 +220,11 @@ export const useNested = (props: NestedProps) => {
 
   const nodeIds = new Set<unknown>()
 
+  const itemsUpdatePropagation = throttle(() => {
+    children.value = new Map(children.value)
+    parents.value = new Map(parents.value)
+  }, 100)
+
   const nested: NestedProvide = {
     id: shallowRef(),
     root: {
@@ -253,6 +260,7 @@ export const useNested = (props: NestedProps) => {
         if (parentId != null) {
           children.value.set(parentId, [...children.value.get(parentId) || [], id])
         }
+        itemsUpdatePropagation()
       },
       unregister: id => {
         if (isUnmounted) return
@@ -266,6 +274,7 @@ export const useNested = (props: NestedProps) => {
           children.value.set(parent, list.filter(child => child !== id))
         }
         parents.value.delete(id)
+        itemsUpdatePropagation()
       },
       open: (id, value, event) => {
         vm.emit('click:open', { id, value, path: getPath(id), event })
@@ -381,13 +390,24 @@ export const useNestedItem = (id: MaybeRefOrGetter<unknown>, isDisabled: MaybeRe
 
   onBeforeMount(() => {
     if (!parent.isGroupActivator) {
-      parent.root.register(computedId.value, parent.id.value, toValue(isDisabled), isGroup)
+      nextTick(() => {
+        parent.root.register(computedId.value, parent.id.value, toValue(isDisabled), isGroup)
+      })
     }
   })
 
   onBeforeUnmount(() => {
     if (!parent.isGroupActivator) {
       parent.root.unregister(computedId.value)
+    }
+  })
+
+  watch(computedId, (val, oldVal) => {
+    if (!parent.isGroupActivator) {
+      parent.root.unregister(oldVal)
+      nextTick(() => {
+        parent.root.register(val, parent.id.value, toValue(isDisabled), isGroup)
+      })
     }
   })
 

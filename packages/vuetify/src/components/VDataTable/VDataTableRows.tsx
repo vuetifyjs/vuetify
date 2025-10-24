@@ -32,6 +32,7 @@ export type VDataTableRowsSlots<T> = VDataTableGroupHeaderRowSlots & VDataTableR
 }
 
 export const makeVDataTableRowsProps = propsFactory({
+  color: String,
   loading: [Boolean, String],
   loadingText: {
     type: String,
@@ -49,8 +50,8 @@ export const makeVDataTableRowsProps = propsFactory({
   rowProps: [Object, Function] as PropType<RowProps<any>>,
   cellProps: [Object, Function] as PropType<CellProps<any>>,
 
-  ...pick(makeVDataTableRowProps(), ['collapseIcon', 'expandIcon']),
-  ...pick(makeVDataTableGroupHeaderRowProps(), ['groupCollapseIcon', 'groupExpandIcon']),
+  ...pick(makeVDataTableRowProps(), ['collapseIcon', 'expandIcon', 'density']),
+  ...pick(makeVDataTableGroupHeaderRowProps(), ['groupCollapseIcon', 'groupExpandIcon', 'density']),
   ...makeDisplayProps(),
 }, 'VDataTableRows')
 
@@ -75,7 +76,7 @@ export const VDataTableRows = genericComponent<new <T>(
     const { mobile } = useDisplay(props)
 
     useRender(() => {
-      const groupHeaderRowProps = pick(props, ['groupCollapseIcon', 'groupExpandIcon'])
+      const groupHeaderRowProps = pick(props, ['groupCollapseIcon', 'groupExpandIcon', 'density'])
 
       if (props.loading && (!props.items.length || slots.loading)) {
         return (
@@ -162,9 +163,11 @@ export const VDataTableRows = genericComponent<new <T>(
                   } : undefined,
                   index,
                   item,
+                  color: props.color,
                   cellProps: props.cellProps,
                   collapseIcon: props.collapseIcon,
                   expandIcon: props.expandIcon,
+                  density: props.density,
                   mobile: mobile.value,
                 },
                 getPrefixedEventHandlers(attrs, ':row', () => slotProps),
