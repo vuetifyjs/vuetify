@@ -237,23 +237,37 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
                         {{
                           ...slots,
                           item: itemSlotProps => (
-                            <VVirtualScrollItem
-                              key={ itemSlotProps.internalItem.index }
-                              renderless
-                              onUpdate:height={ height => handleItemResize(itemSlotProps.internalItem.index, height) }
-                            >
-                              { ({ itemRef }) => (
-                                slots.item?.({ ...itemSlotProps, itemRef }) ?? (
-                                  <VDataTableRow
-                                    { ...itemSlotProps.props }
-                                    ref={ itemRef }
-                                    key={ itemSlotProps.internalItem.index }
-                                    index={ itemSlotProps.internalItem.index }
-                                    v-slots={ slots }
-                                  />
-                                )
+                            <>
+                              <VVirtualScrollItem
+                                key={ itemSlotProps.internalItem.index }
+                                renderless
+                                onUpdate:height={ height => handleItemResize(itemSlotProps.internalItem.index, height) }
+                              >
+                                { ({ itemRef }) => (
+                                  slots.item?.({ ...itemSlotProps, itemRef }) ?? (
+                                    <VDataTableRow
+                                      { ...itemSlotProps.props }
+                                      ref={ itemRef }
+                                      key={ itemSlotProps.internalItem.index }
+                                      index={ itemSlotProps.internalItem.index }
+                                      v-slots={ slots }
+                                    />
+                                  )
+                                )}
+                              </VVirtualScrollItem>
+                              { props.showExpand && (
+                                <VVirtualScrollItem
+                                  key={ `expanded-${itemSlotProps.internalItem.index}` }
+                                  renderless
+                                  onUpdate:height={ height => handleItemResize(itemSlotProps.internalItem.index, height) }
+                                >
+                                  { ({ itemRef }) => (
+                                    <template ref={ itemRef }>
+                                    </template>
+                                  )}
+                                </VVirtualScrollItem>
                               )}
-                            </VVirtualScrollItem>
+                            </>
                           ),
                         }}
                       </VDataTableRows>
