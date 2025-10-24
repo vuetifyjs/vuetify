@@ -10,7 +10,7 @@ import vResize from '@/directives/resize'
 
 // Utilities
 import { nextTick, onMounted, ref } from 'vue'
-import { convertToUnit, defineComponent, getPrefixedEventHandlers, useRender } from '@/util'
+import { convertToUnit, defineComponent, getPrefixedEventHandlers, noop, useRender } from '@/util'
 
 // Types
 import type { CalendarTimestamp } from './types'
@@ -140,6 +140,7 @@ export const VCalendarDaily = defineComponent({
           activeColor={ props.color }
           variant={ props.color ? 'flat' : 'tonal' }
           baseVariant="text"
+          onUpdate:active={ noop }
           { ...events }
         >
           { base.dayFormatter.value(day, false) }
