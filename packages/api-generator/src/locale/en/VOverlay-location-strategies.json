@@ -2,6 +2,7 @@
   "props": {
     "locationStrategy": "A function used to specifies how the component should position relative to its activator.",
     "offset": "Increases distance from the target. When passed as a pair of numbers, the second value shifts anchor along the side and away from the target.",
-    "stickToTarget": "Enables the overlay content to go off-screen when scrolling."
+    "stickToTarget": "Enables the overlay content to go off-screen when scrolling (and changes default viewport margin to 0px, unless **viewport-margin** is defined).",
+    "viewportMargin": "Sets custom viewport margin for the overlay content. Defaults to 12px (or 0px when **stick-to-target** is present)."
   }
 }
