@@ -11,6 +11,7 @@ import {
   unref,
   watchEffect,
 } from 'vue'
+import { consoleError } from '@/util/console'
 import { IN_BROWSER } from '@/util/globals'
 
 // Types
@@ -666,7 +667,16 @@ export function focusableChildren (el: Element, filterByTabIndex = true) {
   ]
     .map(s => `${s}${filterByTabIndex ? ':not([tabindex="-1"])' : ''}:not([disabled], [inert])`)
     .join(', ')
-  return ([...el.querySelectorAll(targets)] as HTMLElement[])
+
+  let elements
+  try {
+    elements = [...el.querySelectorAll(targets)] as HTMLElement[]
+  } catch (err) {
+    consoleError(String(err))
+    return []
+  }
+
+  return elements
     .filter(x => !x.closest('[inert]')) // does not have inert parent
     .filter(x => !!x.offsetParent || x.getClientRects().length > 0) // is rendered
     .filter(x => !x.parentElement?.closest('details:not([open])') ||
