@@ -75,7 +75,10 @@ export const makeLocationStrategyProps = propsFactory({
   },
   offset: [Number, String, Array] as PropType<StrategyProps['offset']>,
   stickToTarget: Boolean,
-  viewportMargin: [Number, String],
+  viewportMargin: {
+    type: [Number, String],
+    default: 12,
+  },
 }, 'VOverlay-location-strategies')
 
 export function useLocationStrategies (
@@ -281,7 +284,7 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
 
     const contentBox = getIntrinsicSize(data.contentEl.value, data.isRtl.value)
     const scrollParents = getScrollParents(data.contentEl.value)
-    const viewportMargin = Number(props.viewportMargin ?? (props.stickToTarget ? 0 : 12))
+    const viewportMargin = Number(props.viewportMargin)
 
     if (!scrollParents.length) {
       scrollParents.push(document.documentElement)
