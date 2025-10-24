@@ -85,6 +85,9 @@ export default {
     am: 'ΠΜ',
     pm: 'ΜΜ',
     title: 'Επιλέξτε ώρα',
+    hour: 'Hour',
+    minute: 'Minute',
+    second: 'Second',
   },
   pagination: {
     ariaLabel: {
