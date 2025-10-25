@@ -45,33 +45,6 @@ export function getNestedValue (obj: any, path: (string | number)[], fallback?: 
   return obj[path[last]] === undefined ? fallback : obj[path[last]]
 }
 
-export function deepEqual (a: any, b: any): boolean {
-  if (a === b) return true
-
-  if (
-    a instanceof Date &&
-    b instanceof Date &&
-    a.getTime() !== b.getTime()
-  ) {
-    // If the values are Date, compare them as timestamps
-    return false
-  }
-
-  if (a !== Object(a) || b !== Object(b)) {
-    // If the values aren't objects, they were already checked for equality
-    return false
-  }
-
-  const props = Object.keys(a)
-
-  if (props.length !== Object.keys(b).length) {
-    // Different number of props, don't bother to check
-    return false
-  }
-
-  return props.every(p => deepEqual(a[p], b[p]))
-}
-
 export function getObjectValueByPath (obj: any, path?: string | null, fallback?: any): any {
   // credit: http://stackoverflow.com/questions/6491463/accessing-nested-javascript-objects-with-string-key#comment55278413_6491621
   if (obj == null || !path || typeof path !== 'string') return fallback
