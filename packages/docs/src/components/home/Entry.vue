@@ -51,26 +51,50 @@
                 rounded
                 v-bind="props"
               >
-                <v-icon
-                  class="me-1"
-                  color="medium-emphasis"
-                  icon="mdi-chevron-right"
-                  size="16"
-                />
 
-                {{ randomPackage }} create
+                <v-menu offset="4">
+                  <template #activator="{ props: iconProps }">
+                    <v-icon-btn
+                      v-bind="iconProps"
+                      class="mr-2"
+                      color="primary"
+                      cursor="pointer"
+                      height="20"
+                      icon="mdi-chevron-down"
+                      icon-size="16"
+                      rounded="lg"
+                      variant="text"
+                      width="20"
+                    />
+                  </template>
+
+                  <v-list density="compact" rounded="lg">
+                    <v-list-item
+                      v-for="manager in packageManagers"
+                      :key="manager"
+                      :value="manager"
+                      @click="selectedPackageManager = manager"
+                    >
+                      <v-list-item-title>
+                        {{ manager }}
+                      </v-list-item-title>
+                    </v-list-item>
+                  </v-list>
+                </v-menu>
+
+                {{ commands[selectedPackageManager] }}
 
                 <span class="text-primary font-weight-medium ms-2">
                   vuetify
                 </span>
 
                 <v-icon
+                  :color="isCopying ? 'success' : 'medium-emphasis'"
                   :icon="isCopying ? 'mdi-check' : 'mdi-clipboard-text-outline'"
                   :style="{
                     opacity: isHovering || isCopying ? 1 : 0,
                   }"
                   class="ms-auto"
-                  color="medium-emphasis"
                   size="17"
                   @click="copy"
                 />
@@ -78,12 +102,12 @@
             </v-hover>
 
             <v-sheet
-              class="pa-1 ps-3 d-inline-flex align-center justify-space-between text-caption"
+              class="pa-1 ps-3 d-inline-flex align-center justify-space-between"
               color="surface"
               border
               rounded
             >
-              <span class="me-2">Latest</span>
+              <span class="text-body-2 me-2">Latest</span>
 
               <AppVersionBtn />
             </v-sheet>
@@ -128,15 +152,23 @@
     },
   ]
 
-  const isCopying = shallowRef(false)
+  const packageManagers = ['npm', 'pnpm', 'yarn', 'bun']
+  const randomPackageManager = packageManagers[Math.floor(Math.random() * packageManagers.length)]
 
-  const packages = ['pnpm', 'yarn', 'npm', 'bun']
-  const randomPackage = packages[Math.floor(Math.random() * packages.length)]
+  const commands: Record<string, string> = {
+    pnpm: 'pnpm create',
+    yarn: 'yarn create',
+    npm: 'npm create',
+    bun: 'bun create',
+  }
+
+  const isCopying = shallowRef(false)
+  const selectedPackageManager = shallowRef(randomPackageManager)
 
   function copy () {
     isCopying.value = true
 
-    navigator.clipboard.writeText(`${randomPackage} create vuetify`)
+    navigator.clipboard.writeText(`${commands[selectedPackageManager.value]} vuetify`)
 
     setTimeout(() => {
       isCopying.value = false
