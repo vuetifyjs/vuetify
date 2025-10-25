@@ -450,7 +450,11 @@ export function throttle<T extends (...args: any[]) => any> (
     }, delay)
   }
 
-  wrap.clear = () => clearTimeout(timeoutId)
+  wrap.clear = () => {
+    clearTimeout(timeoutId)
+    lastExec = 0
+    throttling = false
+  }
   wrap.immediate = fn
   return wrap
 }
