@@ -20,7 +20,7 @@
           mandatory
         >
           <v-chip
-            v-for="(component, componentName) in components"
+            v-for="(_component, componentName) in components"
             :key="componentName"
             :value="componentName"
             class="px-5 mx-2"
@@ -55,8 +55,8 @@
   </v-responsive>
 </template>
 
-<script setup>
-  const components = {
+<script setup lang="ts">
+  const components: Record<string, { name: string; html: string }[]> = {
     Inputs: [
       {
         name: 'Text Field',

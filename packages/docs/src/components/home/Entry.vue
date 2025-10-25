@@ -109,7 +109,7 @@
   </v-responsive>
 </template>
 
-<script setup>
+<script setup lang="ts">
   const codeContent = `<template>
   <v-app>
     <v-container>

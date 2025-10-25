@@ -67,7 +67,7 @@
   </v-responsive>
 </template>
 
-<script setup>
+<script setup lang="ts">
   const toolings = computed(() => [
     {
       name: 'Figma UI Kit',

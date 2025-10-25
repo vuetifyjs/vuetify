@@ -82,7 +82,9 @@
   </v-responsive>
 </template>
 
-<script setup>
+<script setup lang="ts">
+  import type { ShopifyProduct } from '@vuetify/one'
+
   defineProps({
     itemsPerPage: {
       type: [Number, String],
@@ -94,7 +96,7 @@
 
   const products = useProductsStore()
 
-  const items = shallowRef([])
+  const items = shallowRef<ShopifyProduct[]>([])
 
   onMounted(async () => {
     await products.index()

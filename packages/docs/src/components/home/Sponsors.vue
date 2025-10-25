@@ -43,7 +43,7 @@
   </v-responsive>
 </template>
 
-<script setup>
+<script setup lang="ts">
   const { smAndDown } = useDisplay()
   const sponsorStore = useSponsorsStore()
 

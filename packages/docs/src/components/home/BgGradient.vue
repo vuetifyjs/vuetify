@@ -11,7 +11,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
   const theme = useTheme()
 
   const props = defineProps({

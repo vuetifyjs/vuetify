@@ -68,7 +68,7 @@
   </v-responsive>
 </template>
 
-<script setup>
+<script setup lang="ts">
   const items = [
     {
       title: 'Enhance Your Lead Conversion Strategies',
@@ -89,5 +89,4 @@
       personName: 'Kael Watts-Deuchar',
     },
   ]
-
 </script>
