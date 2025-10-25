@@ -1,33 +1,52 @@
 <template>
-  <v-container class="pt-12">
-    <v-row
-      align="center"
-      justify="center"
-    >
-      <v-col cols="auto">
-        <HomeLogo size="300" />
-      </v-col>
+  <v-responsive>
+    <v-container class="text-left position-relative">
+      <v-row
+        align="center"
+        class="py-16"
+        justify="center"
+      >
+        <v-col cols="12" md="6">
+          <v-chip color="primary">
+            #1 Vue UI Library
+          </v-chip>
 
-      <v-col class="text-center text-lg-start" cols="auto">
-        <h1 class="text-h2 font-weight-medium mb-3 ms-n1">
-          Vue Component Framework
-        </h1>
+          <h1 class="text-h3 text-md-h2 font-weight-bold my-5">
+            A complete <br class="d-none d-md-block"> <span class="text-primary">design system</span> that works.
+          </h1>
 
-        <p class="mb-10 mx-auto ms-lg-0" style="max-width: 568px;">
-          Vuetify is a no design skills required Open Source UI Library with beautifully handcrafted Vue Components.
-        </p>
+          <h2 class="text-h6 font-weight-regular text-medium-emphasis my-5">
+            Built by the Vue Community, Backed by Sponsors.
+          </h2>
 
-        <HomeActionBtns />
+          <div class="d-flex flex-wrap ga-4 justify-start my-5">
+            <v-btn
+              :to="rpath('/getting-started/installation/')"
+              class="text-none"
+              color="primary"
+              rounded="lg"
+              size="large"
+              text="Get started"
+              flat
+            />
 
-        <br>
+            <v-btn
+              append-icon="mdi-chevron-right"
+              class="text-none"
+              color="primary"
+              rounded="lg"
+              size="large"
+              text="Explore Ecosystem"
+              variant="tonal"
+              flat
+            />
+          </div>
 
-        <v-row :justify="mdAndDown ? 'center' : undefined">
-          <v-col cols="auto">
+          <div class="d-flex flex-wrap ga-4 align-center">
             <v-hover v-slot="{ isHovering, props }">
               <v-sheet
                 class="px-2 py-2 d-inline-flex align-center text-mono text-body-2 text-no-wrap"
                 color="surface"
-                width="215"
                 border
                 rounded
                 v-bind="props"
@@ -57,49 +76,60 @@
                 />
               </v-sheet>
             </v-hover>
-          </v-col>
 
-          <v-col cols="auto">
             <v-sheet
               class="pa-1 ps-3 d-inline-flex align-center justify-space-between text-caption"
               color="surface"
-              width="215"
               border
               rounded
             >
-              <span class="me-2">Latest Commit:</span>
-
-              <AppCommitBtn />
-            </v-sheet>
-          </v-col>
-
-          <v-col cols="auto">
-            <v-sheet
-              class="pa-1 ps-3 d-inline-flex align-center justify-space-between text-caption"
-              color="surface"
-              width="215"
-              border
-              rounded
-            >
-              <span class="me-2">Latest Release:</span>
+              <span class="me-2">Latest</span>
 
               <AppVersionBtn />
             </v-sheet>
-          </v-col>
-        </v-row>
-      </v-col>
+          </div>
 
-      <v-col cols="12">
-        <VoPromotionsCardHighlight class="mb-n8" max-width="1096" slug="vuetify-snips" />
-      </v-col>
-    </v-row>
-  </v-container>
+        </v-col>
+
+        <v-col class="d-md-block d-none" cols="12" md="6">
+          <v-sheet class="rounded-lg bg-surface elevation-10">
+            <AppMarkup
+              :code="code"
+              class="bg-black rounded-lg pa-5"
+              open-in-playground
+            />
+          </v-sheet>
+        </v-col>
+      </v-row>
+
+      <HomeSpecialSponsor />
+    </v-container>
+
+    <HomeBgGradient color="primary" />
+  </v-responsive>
 </template>
 
-<script setup>
+<script setup lang="ts">
+  const codeContent = `<template>
+  <v-app>
+    <v-container>
+      <v-btn color="primary">
+        Hello Vuetify!
+      </v-btn>
+    </v-container>
+  </v-app>
+</template>`
+
+  const code = [
+    {
+      name: 'template',
+      content: codeContent,
+      language: 'html',
+    },
+  ]
+
   const isCopying = shallowRef(false)
 
-  const { mdAndDown } = useDisplay()
   const packages = ['pnpm', 'yarn', 'npm', 'bun']
   const randomPackage = packages[Math.floor(Math.random() * packages.length)]
 
@@ -114,7 +144,8 @@
   }
 </script>
 
-<style lang="sass" scoped>
-  :deep(.v-card-item)
-    max-width: 100%
+<style scoped>
+  .code-shadow {
+    box-shadow: 10px 10px 100px -5px #00000044;
+  }
 </style>

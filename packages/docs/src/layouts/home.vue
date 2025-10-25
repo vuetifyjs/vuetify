@@ -6,7 +6,7 @@
 
     <AppBarBar />
 
-    <v-main class="text-center font-weight-light">
+    <v-main class="text-center">
       <router-view />
     </v-main>
 

@@ -8,42 +8,42 @@ meta:
 
 <HomeEntry />
 
-<br>
+<v-divider  />
 
-<HomeFeatures />
+<HomeEcosystem />
 
-<br>
+<v-divider />
 
-<HomeSpecialSponsor />
+<HomeComponentGallery />
 
-<br>
+<v-divider thickness="2" color="primary" />
 
-## Project Sponsors
+<HomeSnips />
 
-The continued development and maintenance of Vuetify is made possible by these generous sponsors:{style="max-width: 568px" .mx-auto .px-4}
+<v-divider :color="theme.current.value.dark ? '' : 'primary'" />
 
 <HomeSponsors />
 
-<v-divider style="max-width: 500px;" class="mx-auto my-16" />
+<v-divider />
 
-## Templates Built With Vuetify
+<HomeTooling />
 
-Check out these premium templates built using Vuetify.{style="max-width: 568px" .mx-auto .px-4}
+<v-divider />
 
-<DocPremiumThemesGallery />
+<HomeVuetifyOne />
 
-<v-divider style="max-width: 500px;" class="mx-auto my-16" />
+<v-divider />
 
-## Made With Vuetify
+<HomeBlogs />
 
-Check out these beautiful apps, plugins, and themes built using Vuetify.{style="max-width: 568px" .mx-auto .px-4}
+<v-divider />
 
-<DocMadeWithVuetifyGallery class="pa-3 mb-4" />
+<HomeStore />
 
-<DocMadeWithVuetifyLink />
+<v-divider thickness="2" color="primary" />
 
-<br>
-<br>
-<br>
+<HomeDiscord />
 
-<HomeEpicmaxSupport />
+<script setup>
+  const theme = useTheme()
+</script>
