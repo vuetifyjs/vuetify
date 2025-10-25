@@ -19,43 +19,80 @@
         </v-responsive>
       </div>
 
-      <v-row class="text-left mb-10">
+      <v-row align="center" class="text-left mb-10" justify="space-between">
+        <v-col v-if="latestBlog" cols="12" md="7">
+          <v-card
+            color="transparent"
+            rounded="xl"
+            flat
+          >
+            <v-card-subtitle class="pt-5 text-subtitle-2">
+              {{ latestBlog.date }}
+            </v-card-subtitle>
+
+            <v-card-title class="text-pre-wrap mb-2">
+              {{ latestBlog.title }}
+            </v-card-title>
+
+            <div class="text-medium-emphasis text-subtitle-1 px-4">
+              {{ latestBlog.shortDescription }}
+            </div>
+
+            <v-card-text>
+              <div class="d-flex align-center ga-2 text-subtitle-2 text-medium-emphasis">
+                <v-icon size="small">mdi-circle-edit-outline</v-icon>
+                {{ latestBlog.personName }}
+
+                <v-btn
+                  append-icon="mdi-arrow-right"
+                  class="text-none px-0 ml-5"
+                  color="primary"
+                  text="Continue reading"
+                  variant="text"
+                />
+              </div>
+            </v-card-text>
+          </v-card>
+        </v-col>
+
         <v-col
-          v-for="(item , i) in items"
-          :key="i"
-          class="d-flex"
           cols="12"
-          md="4"
+          md="5"
         >
           <v-card
-            class="d-flex flex-column pa-4"
+            v-for="(item , index) in remainingBlogs"
+            :key="index"
+            class="d-flex flex-column"
+            color="transparent"
             rounded="lg"
-            border
             flat
-            link
           >
-            <p class="text-caption text-medium-emphasis mb-0">{{ item.date }}</p>
+            <v-card-subtitle class="pt-5 text-body-2">
+              {{ item.date }}
+            </v-card-subtitle>
 
-            <p class="mb-1">{{ item.title }}</p>
+            <v-card-title class="text-subtitle-1 pt-1">
+              {{ item.title }}
+            </v-card-title>
 
-            <p class="text-medium-emphasis mt-1 mb-1 flex-grow-1">
-              {{ item.shortDescription }}
-            </p>
+            <v-card-text class="text-body-2 text-medium-emphasis">
+              <div class="d-flex align-center ga-2 text-body-2 text-medium-emphasis">
+                <v-icon size="small">mdi-circle-edit-outline</v-icon>
+                {{ item.personName }}
+              </div>
+            </v-card-text>
 
-            <div class="d-flex align-center ga-2 text-medium-emphasis">
-              <v-icon size="small">mdi-circle-edit-outline</v-icon>
-              {{ item.personName }}
-            </div>
+            <v-divider v-if="index !== remainingBlogs.length - 1" />
           </v-card>
         </v-col>
       </v-row>
 
       <v-btn
+        :to="rpath('/blog/')"
         append-icon="mdi-open-in-new"
         aria-label="See More Templates"
         class="text-none"
         color="primary"
-        href="https://store.vuetifyjs.com"
         rel="noopener noreferrer"
         rounded="lg"
         size="large"
@@ -69,24 +106,35 @@
 </template>
 
 <script setup lang="ts">
+  const { mobile } = useDisplay()
+
   const items = [
     {
-      title: 'Enhance Your Lead Conversion Strategies',
-      shortDescription: 'Culpa anim laboris consequat excepteur dolor ex adipisicing ea aliquip veniam. Officia duis mollit id labore. Duis labore ex minim anim nulla minim dolore amet...',
+      title: 'August 2025 Update',
+      shortDescription: 'August marks a pivotal moment in Vuetify’s evolution as we prepare to release the pre-alpha of Vuetify0 (v0), launch our redesigned issues page, and continue delivering powerful components and improvements. This month brings exciting developments including the “Mastering Vuetify Theming',
       date: 'Apr 5, 2023',
       personName: 'John Leider',
     },
     {
-      title: 'Leveraging SEO to Boost Sales Effectively',
+      title: 'July 2025 Update',
       shortDescription: 'Earum molestias dolores autem quam natus. Aut velit fugiat excepturi minus voluptatem rerum voluptas. Ea rerum nemo quaerat...',
       date: 'Sep 15, 2023',
-      personName: 'Heather Leider',
+      personName: 'John Leider',
     },
     {
-      title: 'Optimizing Customer Engagement',
+      title: 'State of the Union 2024 - Post Mortem',
       shortDescription: 'Qui voluptatum molestiae sint et atque facere. Distinctio ipsum voluptatum asperiores fuga consequatur aliquam.',
       date: 'Feb 20, 2022',
-      personName: 'Kael Watts-Deuchar',
+      personName: 'John Leider',
+    },
+    {
+      title: 'Building a Basic Nuxt Application with Vuetify',
+      shortDescription: 'Qui voluptatum molestiae sint et atque facere. Distinctio ipsum voluptatum asperiores fuga consequatur aliquam.',
+      date: 'Feb 20, 2022',
+      personName: 'John Leider',
     },
   ]
+
+  const latestBlog = computed(() => mobile.value ? null : items[0])
+  const remainingBlogs = computed(() => mobile.value ? items : items.slice(1))
 </script>

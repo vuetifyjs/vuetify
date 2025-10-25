@@ -4,6 +4,10 @@
       <HomeBgGradient />
 
       <div class="mb-10">
+        <p class="text-primary font-weight-bold mb-3">
+          A complete Vue ecosystem
+        </p>
+
         <h4 class="text-h4 font-weight-bold mb-5">
           More than just Components
         </h4>
