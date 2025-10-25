@@ -16,7 +16,8 @@
           </h6>
         </v-responsive>
       </div>
-      <v-row class="text-left">
+
+      <v-row class="text-left mb-10">
         <v-col
           v-for="(item, i) in features"
           :key="i"
@@ -37,11 +38,22 @@
           </v-btn>
         </v-col>
       </v-row>
+
+      <v-btn
+        class="text-none"
+        color="primary"
+        rounded="lg"
+        size="large"
+        text="Experience Vuetify One"
+        flat
+        @click="app.settings = true"
+      />
     </v-container>
   </v-responsive>
 </template>
 
 <script setup lang="ts">
+  const app = useAppStore()
   const theme = useTheme()
 
   const features = computed(() => [
