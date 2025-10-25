@@ -8,6 +8,9 @@
           class="pa-6 pa-md-12 text-center"
           cols="12"
         >
+          <v-icon class="mb-5" size="60">
+            mdi-discord
+          </v-icon>
 
           <h4 class="text-h4 font-weight-bold mb-5">
             Join our community of 40k+ developers
@@ -19,8 +22,8 @@
 
           <v-btn
             :color="theme.current.value.dark ? 'primary' : 'background'"
+            append-icon="mdi-open-in-new"
             class="mr-4 text-none"
-            prepend-icon="mdi-discord"
             rounded="lg"
             size="large"
             text="Join Discord"
