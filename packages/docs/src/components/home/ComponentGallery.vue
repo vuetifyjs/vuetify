@@ -17,6 +17,7 @@
         <v-chip-group
           v-model="selectedComponent"
           class="d-flex justify-center"
+          mandatory
         >
           <v-chip
             v-for="(component, componentName) in components"

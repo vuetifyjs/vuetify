@@ -36,10 +36,9 @@
         :items="items"
         :items-per-page="itemsPerPage"
         :page="page"
-        class="my-10"
       >
         <template #default="{ items: _items }">
-          <v-row>
+          <v-row class="my-10">
             <v-col
               v-for="product in _items"
               :key="product.raw.id"

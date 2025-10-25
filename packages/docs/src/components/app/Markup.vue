@@ -64,7 +64,7 @@
           </v-fade-transition>
         </template>
 
-        <span>{{ needsPlaygroundLink ? t('open-in-playground') : t('open-in-vuetify-bin') }}</span>
+        <span>{{ t(needsPlaygroundLink ? 'open-in-playground' : 'open-in-vuetify-bin') }}</span>
       </v-tooltip>
 
       <div class="pa-4 pe-12">
