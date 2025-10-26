@@ -6,6 +6,7 @@
     "disabled": "Puts all children inputs into a disabled state.",
     "filterable": "**FOR INTERNAL USE ONLY** Prevents list item selection using [space] key and pass it back to the text input. Used internally for VAutocomplete and VCombobox.",
     "inactive": "If set, the list tile will not be rendered as a link even if it has to/href prop or @click handler.",
+    "itemsRegistration": "When set to 'props', skips rendering collpased items/nodes (for significant performance gains). Does not support links, so you might need to set **item-value** to `href`, `to` or a custom resolver function.",
     "lines": "Designates a **minimum-height** for all children `v-list-item` components. This prop uses [line-clamp](https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-line-clamp) and is not supported in all browsers.",
     "link": "Applies `v-list-item` hover styles. Useful when using the item is an _activator_.",
     "nav": "An alternative styling that reduces `v-list-item` width and rounds the corners. Typically used with **[v-navigation-drawer](/components/navigation-drawers)**.",

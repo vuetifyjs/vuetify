@@ -57,6 +57,7 @@ export type SelectStrategyProp =
   | SelectStrategy
   | ((mandatory: boolean) => SelectStrategy)
 export type OpenStrategyProp = 'single' | 'multiple' | 'list' | OpenStrategy
+export type ItemsRegistrationType = 'props' | 'render'
 
 export interface NestedProps {
   activatable: boolean
@@ -68,6 +69,7 @@ export interface NestedProps {
   selected: any
   opened: any
   mandatory: boolean
+  itemsRegistration: ItemsRegistrationType
   'onUpdate:activated': EventProp<[any]> | undefined
   'onUpdate:selected': EventProp<[any]> | undefined
   'onUpdate:opened': EventProp<[any]> | undefined
@@ -86,6 +88,7 @@ type NestedProvide = {
     activated: Ref<Set<unknown>>
     selected: Ref<Map<unknown, 'on' | 'off' | 'indeterminate'>>
     selectedValues: Ref<unknown[]>
+    itemsRegistration: Ref<ItemsRegistrationType>
     register: (id: unknown, parentId: unknown, isDisabled: boolean, isGroup?: boolean) => void
     unregister: (id: unknown) => void
     open: (id: unknown, value: boolean, event?: Event) => void
@@ -101,6 +104,7 @@ export const VNestedSymbol: InjectionKey<NestedProvide> = Symbol.for('vuetify:ne
 export const emptyNested: NestedProvide = {
   id: shallowRef(),
   root: {
+    itemsRegistration: ref('render'),
     register: () => null,
     unregister: () => null,
     children: ref(new Map()),
@@ -130,6 +134,10 @@ export const makeNestedProps = propsFactory({
   activated: null,
   selected: null,
   mandatory: Boolean,
+  itemsRegistration: {
+    type: String as PropType<ItemsRegistrationType>,
+    default: 'render',
+  },
 }, 'nested')
 
 export const useNested = (props: NestedProps) => {
@@ -244,6 +252,7 @@ export const useNested = (props: NestedProps) => {
 
         return arr
       }),
+      itemsRegistration: toRef(() => props.itemsRegistration),
       register: (id, parentId, isDisabled, isGroup) => {
         if (nodeIds.has(id)) {
           const path = getPath(id).map(String).join(' -> ')
@@ -391,26 +400,23 @@ export const useNestedItem = (id: MaybeRefOrGetter<unknown>, isDisabled: MaybeRe
   }
 
   onBeforeMount(() => {
-    if (!parent.isGroupActivator) {
-      nextTick(() => {
-        parent.root.register(computedId.value, parent.id.value, toValue(isDisabled), isGroup)
-      })
-    }
+    if (parent.isGroupActivator || parent.root.itemsRegistration.value === 'props') return
+    nextTick(() => {
+      parent.root.register(computedId.value, parent.id.value, toValue(isDisabled), isGroup)
+    })
   })
 
   onBeforeUnmount(() => {
-    if (!parent.isGroupActivator) {
-      parent.root.unregister(computedId.value)
-    }
+    if (parent.isGroupActivator || parent.root.itemsRegistration.value === 'props') return
+    parent.root.unregister(computedId.value)
   })
 
   watch(computedId, (val, oldVal) => {
-    if (!parent.isGroupActivator) {
-      parent.root.unregister(oldVal)
-      nextTick(() => {
-        parent.root.register(val, parent.id.value, toValue(isDisabled), isGroup)
-      })
-    }
+    if (parent.isGroupActivator || parent.root.itemsRegistration.value === 'props') return
+    parent.root.unregister(oldVal)
+    nextTick(() => {
+      parent.root.register(val, parent.id.value, toValue(isDisabled), isGroup)
+    })
   })
 
   isGroup && provide(VNestedSymbol, item)
