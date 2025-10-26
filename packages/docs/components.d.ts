@@ -132,6 +132,7 @@ declare module 'vue' {
     HomeSpecialSponsor: typeof import('./src/components/home/SpecialSponsor.vue')['default']
     HomeSponsors: typeof import('./src/components/home/Sponsors.vue')['default']
     HomeStore: typeof import('./src/components/home/Store.vue')['default']
+    HomeSupport: typeof import('./src/components/home/Support.vue')['default']
     HomeTooling: typeof import('./src/components/home/Tooling.vue')['default']
     HomeVuetifyOne: typeof import('./src/components/home/VuetifyOne.vue')['default']
     IconsChevronDown: typeof import('./src/components/icons/ChevronDown.vue')['default']

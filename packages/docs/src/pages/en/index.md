@@ -34,6 +34,10 @@ meta:
 
 <v-divider />
 
+<HomeSupport />
+
+<v-divider />
+
 <HomeBlogs />
 
 <v-divider />
