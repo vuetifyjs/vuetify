@@ -21,7 +21,6 @@
           </p>
 
           <v-btn
-            :color="theme.current.value.dark ? 'primary' : 'background'"
             append-icon="mdi-open-in-new"
             class="mr-4 text-none"
             rounded="lg"

@@ -3,7 +3,7 @@
     <HomeBgGradient />
 
     <v-container class="text-center text-md-left py-16">
-      <v-row align="center">
+      <v-row align="end">
         <v-col class="pr-md-15" cols="12" md="6">
           <p class="font-weight-medium text-primary mb-4">
             Vuetify Support Services
