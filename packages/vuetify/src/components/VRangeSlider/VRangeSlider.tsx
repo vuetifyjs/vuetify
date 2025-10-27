@@ -95,6 +95,11 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
         emit('start', model.value)
       },
       onSliderEnd: ({ value }) => {
+        if (props.disabled || props.readonly) {
+          activeThumbRef.value?.blur()
+          return
+        }
+
         const newValue: [number, number] = activeThumbRef.value === startThumbRef.value?.$el
           ? [value, model.value[1]]
           : [model.value[0], value]
@@ -107,6 +112,11 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
       },
       onSliderMove: ({ value }) => {
         const [start, stop] = model.value
+
+        if (props.disabled || props.readonly) {
+          activeThumbRef.value?.blur()
+          return
+        }
 
         if (!props.strict && start === stop && start !== min.value) {
           activeThumbRef.value = value > start ? stopThumbRef.value?.$el : startThumbRef.value?.$el
