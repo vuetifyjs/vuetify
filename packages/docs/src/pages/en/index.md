@@ -16,15 +16,11 @@ meta:
 
 <HomeComponentGallery />
 
-<v-divider thickness="2" color="primary" />
-
-<HomeSnips />
-
-<v-divider :color="theme.current.value.dark ? '' : 'primary'" />
+<v-divider />
 
 <HomeSponsors />
 
-<v-divider />
+<v-divider color="primary" />
 
 <HomeTooling />
 
@@ -32,13 +28,17 @@ meta:
 
 <HomeVuetifyOne />
 
-<v-divider />
+<v-divider color="primary" />
 
 <HomeSupport />
 
 <v-divider />
 
 <HomeBlogs />
+
+<v-divider color="primary" />
+
+<HomeSnips />
 
 <v-divider />
 

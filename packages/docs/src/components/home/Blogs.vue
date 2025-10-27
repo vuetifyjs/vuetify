@@ -1,6 +1,6 @@
 <template>
   <v-responsive class="py-16">
-    <HomeBgGradient />
+    <HomeBgGradient opacity-class="opacity-10" />
 
     <v-container class="pt-0">
       <div class="mb-16 text-center">

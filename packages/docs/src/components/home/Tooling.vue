@@ -1,9 +1,9 @@
 <template>
-  <v-responsive class="py-16">
+  <v-responsive class="py-10">
     <HomeBgGradient />
 
     <v-container>
-      <div class="mb-10">
+      <div class="mb-16 pb-2">
         <p class="text-primary font-weight-bold mb-0">
           Tools & Resources
         </p>
@@ -19,71 +19,110 @@
         </v-responsive>
       </div>
 
-      <v-row align="center" class="text-left">
+      <v-row
+        v-for="(tooling, i) in toolings"
+        :key="tooling.name"
+        align="center"
+        class="text-left"
+        justify="space-between"
+      >
         <v-col
-          class="d-none d-md-block"
+          :order-md="!isAlternateSection(i) ? '3' : '1'"
           cols="12"
           md="6"
+          order="3"
+        >
+          <p class="text-primary font-weight-bold mb-3">
+            {{ tooling.title }}
+          </p>
+
+          <h5 class="font-weight-bold text-h5 mb-1">{{ tooling.name }}</h5>
+
+          <h6 class="text-h6 font-weight-regular text-medium-emphasis my-4">
+            {{ tooling.description }}
+          </h6>
+
+          <v-btn
+            class="text-none my-2"
+            color="primary"
+            rounded="lg"
+            size="large"
+            flat
+          >
+            Get Started
+          </v-btn>
+        </v-col>
+
+        <v-col
+          :class="{
+            'justify-center': smAndDown,
+            'justify-start': !smAndDown && !isAlternateSection(i),
+            'justify-end': !smAndDown && isAlternateSection(i),
+          }"
+          class="d-flex"
+          cols="12"
+          md="6"
+          order="2"
         >
           <v-img
-            :height="$vuetify.display.smAndDown ? 250 : 500"
-            :max-width="$vuetify.display.smAndDown ? '100%' : 500"
+            :src="tooling.image"
+            height="250"
+            max-width="80%"
             rounded="xl"
-            src="https://cdn.vuetifyjs.com/docs/images/logos/vuetify-logo-light-atom.svg"
             width="100%"
           />
         </v-col>
 
-        <v-col
-          cols="12"
-          md="6"
-        >
-          <div
-            v-for="tooling in toolings"
-            :key="tooling.name"
-            class="pb-4"
-          >
-            <div class="font-weight-bold mb-1">{{ tooling.name }}</div>
-
-            <p class="text-medium-emphasis mb-0">
-              {{ tooling.description }}
-            </p>
-
-            <v-btn
-              class="mb-4 text-none px-0"
-              color="primary"
-              height="30"
-              variant="text"
-            >
-              Learn More
-            </v-btn>
-
-            <v-divider v-if="tooling !== toolings[toolings.length - 1]" />
-          </div>
+        <v-col cols="12" order="4">
+          <v-divider
+            v-if="i !== toolings.length - 1"
+            class="my-10"
+            color="primary"
+          />
         </v-col>
       </v-row>
     </v-container>
-
   </v-responsive>
 </template>
 
 <script setup lang="ts">
+  const theme = useTheme()
+  const { smAndDown } = useDisplay()
+
+  const isDark = computed(() => theme.current.value.dark)
+
   const toolings = computed(() => [
     {
-      name: 'Figma UI Kit',
-      description: `Fully optimized for Figma and based on Material Design - Vuetify UI Kit`,
+      title: 'Figma UI Kit',
+      name: 'Build beautiful Vuetify components with Figma UI Kit',
+      // TODO: Use proper image
+      image: 'https://upload.wikimedia.org/wikipedia/commons/3/33/Figma-logo.svg',
+      description: `Fully optimized for Figma and based on Material Design - Vuetify UI Kit. You can use it to create your own Vuetify components and use them in your projects.`,
     },
     {
-      name: '@vuetify/create',
-      description: `Scaffold your next Vuetify application with just a few commands. Perfect for getting started with Vuetify.`,
+      title: 'Write Clean code',
+      name: 'Vuetify ESLint Plugin will keep your code clean and consistent',
+      // TODO: Use proper image
+      image: 'https://cdn.vuetifyjs.com/docs/images/logos/vuetify-logo-light-atom.svg',
+      description: `Version upgrade automation eslint plugin, to keep your code clean and consistent! You can use it to keep your code clean and consistent.`,
     },
     {
-      name: '@vuetify/eslint-plugin',
-      description: `Version upgrade automation eslint plugin, to keep your code clean and consistent!`,
+      title: 'Scaffold your application',
+      name: 'Vuetify Create will scaffold your next application',
+      // TODO: Use proper image
+      image: `https://cdn.vuetifyjs.com/docs/images/logos/vcreate-logo-${isDark.value ? 'dark' : 'light'}.png`,
+      description: `Scaffold your next Vuetify application with just a few commands. Perfect for getting started with Vuetify. You can use it to create your own Vuetify components and use them in your projects.`,
     },
     {
-      name: '@vuetify/eslint-config',
-      description: `An opinionated eslint config for Vuetify, crafted to keep your code clean and consistent!`,
+      title: 'Vuetify ESLint Config',
+      name: 'Vuetify ESLint Config to keep your code clean and consistent',
+      description: `An opinionated eslint config for Vuetify, crafted to keep your code clean and consistent! You can use it to keep your code clean and consistent.`,
+      // TODO: Use proper image
+      image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/ESLint_logo.svg/1200px-ESLint_logo.svg.png',
     },
   ])
+
+  function isAlternateSection (index: number) {
+    return index % 2 !== 0
+  }
 </script>

@@ -1,6 +1,6 @@
 <template>
   <v-responsive class="pb-16">
-    <HomeBgGradient />
+    <HomeBgGradient opacity-class="opacity-10" />
 
     <v-container class="pt-10">
       <v-icon class="mb-5" color="primary" size="60">

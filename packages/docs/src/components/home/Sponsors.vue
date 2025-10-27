@@ -1,5 +1,7 @@
 <template>
   <v-responsive class="pb-16">
+    <HomeBgGradient />
+
     <v-container class="pt-10">
       <v-icon class="mb-5" color="red-lighten-2" size="60">
         mdi-heart-outline

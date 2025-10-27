@@ -1,8 +1,8 @@
 <template>
   <v-responsive class="py-16">
-    <v-container>
-      <HomeBgGradient />
+    <HomeBgGradient opacity-class="opacity-10" />
 
+    <v-container>
       <div class="mb-16">
         <v-img
           :src="`https://cdn.vuetifyjs.com/docs/images/logos/vone-logo-${theme.current.value.dark ? 'dark' : 'light'}.png`"

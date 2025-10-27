@@ -1,6 +1,6 @@
 <template>
   <v-responsive v-if="specialSponsor">
-    <v-divider :opacity="isDark ? 0.2 : 0.1" color="primary" />
+    <v-divider color="primary" />
 
     <HomeBgGradient
       :opacity-class="isDark ? 'opacity-40' : 'opacity-20'"
@@ -17,7 +17,7 @@
       />
     </div>
 
-    <v-divider :opacity="isDark ? 0.2 : 0.1" color="primary" />
+    <v-divider color="primary" />
   </v-responsive>
 </template>
 
