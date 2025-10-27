@@ -92,7 +92,7 @@ export const makeVNavigationDrawerProps = propsFactory({
   ...makeElevationProps(),
   ...makeLayoutItemProps(),
   ...makeRoundedProps(),
-  ...omit(makeFocusTrapProps({ captureFocus: false }), ['disableInitialFocus']),
+  ...omit(makeFocusTrapProps(), ['disableInitialFocus']),
   ...makeTagProps({ tag: 'nav' }),
   ...makeThemeProps(),
 }, 'VNavigationDrawer')
