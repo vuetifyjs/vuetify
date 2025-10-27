@@ -92,6 +92,10 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
       props,
       steps,
       onSliderStart: () => {
+        if (props.disabled || props.readonly) {
+          activeThumbRef.value?.blur()
+          return
+        }
         emit('start', model.value)
       },
       onSliderEnd: ({ value }) => {
