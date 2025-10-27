@@ -3,7 +3,7 @@
     <div
       :class="{
         [`bg-${props.color || defaultColor}`]: true,
-        'opacity-20': !props.removeOpacity,
+        [props.opacityClass]: true,
       }"
       aria-hidden="true"
       class="overflow-hidden w-100 h-100"
@@ -18,9 +18,9 @@
     color: {
       type: String,
     },
-    removeOpacity: {
-      type: Boolean,
-      default: false,
+    opacityClass: {
+      type: String,
+      default: 'opacity-20',
     },
   })
 

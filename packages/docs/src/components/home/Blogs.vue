@@ -81,14 +81,6 @@
               <div class="d-flex align-center ga-2 text-body-2 text-medium-emphasis">
                 <v-icon size="small">mdi-circle-edit-outline</v-icon>
                 {{ item.personName }}
-
-                <v-btn
-                  class="text-none px-0 ml-5"
-                  color="primary"
-                  size="small"
-                  text="Read more"
-                  variant="text"
-                />
               </div>
             </v-card-text>
 

@@ -8,7 +8,7 @@ meta:
 
 <HomeEntry />
 
-<v-divider  />
+<HomeSpecialSponsor />
 
 <HomeEcosystem />
 

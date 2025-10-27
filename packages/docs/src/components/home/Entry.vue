@@ -1,5 +1,5 @@
 <template>
-  <v-responsive>
+  <v-responsive class="pb-5">
     <v-container class="text-left position-relative">
       <v-row
         align="center"
@@ -125,8 +125,6 @@
           </v-sheet>
         </v-col>
       </v-row>
-
-      <HomeSpecialSponsor />
     </v-container>
 
     <HomeBgGradient color="primary" />
