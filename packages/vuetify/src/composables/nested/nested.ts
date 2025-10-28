@@ -141,7 +141,7 @@ export const makeNestedProps = propsFactory({
   },
 }, 'nested')
 
-export const useNested = (props: NestedProps, items: Ref<ListItem[]>) => {
+export const useNested = (props: NestedProps, items: Ref<ListItem[]>, returnObject: MaybeRefOrGetter<boolean>) => {
   let isUnmounted = false
   const children = shallowRef(new Map<unknown, unknown[]>())
   const parents = shallowRef(new Map<unknown, unknown>())
@@ -236,37 +236,47 @@ export const useNested = (props: NestedProps, items: Ref<ListItem[]>) => {
     })
   }, 100)
 
-  watch(items, val => {
-    if (props.itemsRegistration === 'render') return
+  watch(() => [items.value, toValue(returnObject)], () => {
+    if (props.itemsRegistration === 'props') {
+      updateInternalMaps()
+    }
+  }, { immediate: true })
 
+  function updateInternalMaps () {
     const _parents = new Map()
     const _children = new Map()
     const _disabled = new Set()
 
-    const stack = [...val]
+    const getValue = toValue(returnObject)
+      ? (item: ListItem) => toRaw(item.raw)
+      : (item: ListItem) => item.value
+
+    const stack = [...items.value]
     let i = 0
     while (i < stack.length) {
       const item = stack[i++]
+      const itemValue = getValue(item)
 
       if (item.children) {
         const childValues = []
         for (const child of item.children) {
-          _parents.set(child.value, item.value)
-          childValues.push(child.value)
+          const childValue = getValue(child)
+          _parents.set(childValue, itemValue)
+          childValues.push(childValue)
           stack.push(child)
         }
-        _children.set(item.value, childValues)
+        _children.set(itemValue, childValues)
       }
 
-      if ((item as any).disabled) {
-        _disabled.add(item.value)
+      if (item.props.disabled) {
+        _disabled.add(itemValue)
       }
     }
 
     children.value = _children
     parents.value = _parents
     disabled.value = _disabled
-  }, { immediate: true })
+  }
 
   const nested: NestedProvide = {
     id: shallowRef(),
