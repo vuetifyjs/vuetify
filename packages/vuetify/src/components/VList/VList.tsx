@@ -22,7 +22,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeVariantProps } from '@/composables/variant'
 
 // Utilities
-import { computed, ref, shallowRef, toRef, watch } from 'vue'
+import { computed, ref, shallowRef, toRef } from 'vue'
 import {
   convertToUnit,
   EventProp,
@@ -172,34 +172,7 @@ export const VList = genericComponent<new <
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props)
-    const { children, disabled, open, parents, select, getPath } = useNested(props)
-
-    function flatten (items: InternalListItem<any>[]): InternalListItem<any>[] {
-      return [
-        ...items,
-        ...items.length ? flatten(items.flatMap(x => x.children ?? [])) : [],
-      ]
-    }
-
-    watch(items, val => {
-      if (props.itemsRegistration === 'render') return
-      const allNodes = flatten(val)
-      children.value = new Map(
-        allNodes
-          .filter(item => item.children)
-          .map(item => [item.value, item.children!.map(x => x.value)])
-      )
-      parents.value = new Map(
-        allNodes
-          .filter(item => !val.includes(item))
-          .map(item => [item.value, allNodes.find(x => x.children?.includes(item))?.value])
-      )
-      disabled.value = new Set(
-        allNodes
-          .filter(item => (item as any).disabled)
-          .map(item => item.value)
-      )
-    }, { immediate: true })
+    const { children, open, parents, select, getPath } = useNested(props, items)
 
     const lineClasses = toRef(() => props.lines ? `v-list--${props.lines}-line` : undefined)
     const activeColor = toRef(() => props.activeColor)

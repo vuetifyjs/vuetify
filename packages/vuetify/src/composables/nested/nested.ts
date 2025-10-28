@@ -38,6 +38,7 @@ import type { InjectionKey, MaybeRefOrGetter, PropType, Ref } from 'vue'
 import type { ActiveStrategy } from './activeStrategies'
 import type { OpenStrategy } from './openStrategies'
 import type { SelectStrategy } from './selectStrategies'
+import type { ListItem } from '@/composables/list-items'
 import type { EventProp } from '@/util'
 
 export type ActiveStrategyProp =
@@ -140,7 +141,7 @@ export const makeNestedProps = propsFactory({
   },
 }, 'nested')
 
-export const useNested = (props: NestedProps) => {
+export const useNested = (props: NestedProps, items: Ref<ListItem[]>) => {
   let isUnmounted = false
   const children = shallowRef(new Map<unknown, unknown[]>())
   const parents = shallowRef(new Map<unknown, unknown>())
@@ -234,6 +235,34 @@ export const useNested = (props: NestedProps) => {
       parents.value = new Map(parents.value)
     })
   }, 100)
+
+  function flatten (items: ListItem[]): ListItem[] {
+    return [
+      ...items,
+      ...items.length ? flatten(items.flatMap(x => x.children ?? [])) : [],
+    ]
+  }
+
+  watch(items, val => {
+    if (props.itemsRegistration === 'render') return
+
+    const allNodes = flatten(val)
+    children.value = new Map(
+      allNodes
+        .filter(item => item.children)
+        .map(item => [item.value, item.children!.map(x => x.value)])
+    )
+    parents.value = new Map(
+      allNodes
+        .filter(item => !val.includes(item))
+        .map(item => [item.value, allNodes.find(x => x.children?.includes(item))?.value])
+    )
+    disabled.value = new Set(
+      allNodes
+        .filter(item => (item as any).disabled)
+        .map(item => item.value)
+    )
+  }, { immediate: true })
 
   const nested: NestedProvide = {
     id: shallowRef(),
