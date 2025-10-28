@@ -110,7 +110,7 @@ export const VSlider = genericComponent<VSliderSlots>()({
               'v-slider--has-labels': !!slots['tick-label'] || hasLabels.value,
               'v-slider--focused': isFocused.value,
               'v-slider--pressed': mousePressed.value,
-              'v-slider--disabled': props.disabled,
+              'v-slider--disabled': disabled.value,
             },
             rtlClasses.value,
             props.class,
@@ -146,8 +146,8 @@ export const VSlider = genericComponent<VSliderSlots>()({
                 <input
                   id={ id.value }
                   name={ props.name || id.value }
-                  disabled={ !!disabled.value }
-                  readonly={ !!readonly.value }
+                  disabled={ disabled.value }
+                  readonly={ readonly.value }
                   tabindex="-1"
                   value={ model.value }
                 />

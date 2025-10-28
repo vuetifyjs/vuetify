@@ -87,6 +87,7 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
       onSliderTouchstart,
       position,
       trackContainerRef,
+      disabled,
       readonly,
     } = useSlider({
       props,
@@ -139,7 +140,7 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
               'v-slider--has-labels': !!slots['tick-label'] || hasLabels.value,
               'v-slider--focused': isFocused.value,
               'v-slider--pressed': mousePressed.value,
-              'v-slider--disabled': props.disabled,
+              'v-slider--disabled': disabled.value,
             },
             rtlClasses.value,
             props.class,
@@ -175,8 +176,8 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
                 <input
                   id={ `${id.value}_start` }
                   name={ props.name || id.value }
-                  disabled={ !!props.disabled }
-                  readonly={ !!props.readonly }
+                  disabled={ disabled.value }
+                  readonly={ readonly.value }
                   tabindex="-1"
                   value={ model.value[0] }
                 />
@@ -184,8 +185,8 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
                 <input
                   id={ `${id.value}_stop` }
                   name={ props.name || id.value }
-                  disabled={ !!props.disabled }
-                  readonly={ !!props.readonly }
+                  disabled={ disabled.value }
+                  readonly={ readonly.value }
                   tabindex="-1"
                   value={ model.value[1] }
                 />
