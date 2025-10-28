@@ -83,14 +83,24 @@ export const VSlider = genericComponent<VSliderSlots>()({
       props,
       steps,
       onSliderStart: () => {
-        emit('start', model.value)
+        if (!disabled.value && !readonly.value) {
+          emit('start', model.value)
+        }
       },
       onSliderEnd: ({ value }) => {
         const roundedValue = roundValue(value)
-        model.value = roundedValue
+
+        if (!disabled.value && !readonly.value) {
+          model.value = roundedValue
+        }
+
         emit('end', roundedValue)
       },
-      onSliderMove: ({ value }) => model.value = roundValue(value),
+      onSliderMove: ({ value }) => {
+        if (!disabled.value && !readonly.value) {
+          model.value = roundValue(value)
+        }
+      },
       getActiveThumb: () => thumbContainerRef.value?.$el,
     })
 

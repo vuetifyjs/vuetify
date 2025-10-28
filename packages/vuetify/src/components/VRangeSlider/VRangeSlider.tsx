@@ -93,15 +93,24 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
       props,
       steps,
       onSliderStart: () => {
+        if (disabled.value || readonly.value) {
+          activeThumbRef.value?.blur()
+          return
+        }
         emit('start', model.value)
       },
       onSliderEnd: ({ value }) => {
-        const newValue: [number, number] = activeThumbRef.value === startThumbRef.value?.$el
-          ? [value, model.value[1]]
-          : [model.value[0], value]
+        if (disabled.value || readonly.value) {
+          activeThumbRef.value?.blur()
+        } else {
+          const newValue: [number, number] =
+            activeThumbRef.value === startThumbRef.value?.$el
+              ? [value, model.value[1]]
+              : [model.value[0], value]
 
-        if (!props.strict && newValue[0] < newValue[1]) {
-          model.value = newValue
+          if (!props.strict && newValue[0] < newValue[1]) {
+            model.value = newValue
+          }
         }
 
         emit('end', model.value)
@@ -109,8 +118,14 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
       onSliderMove: ({ value }) => {
         const [start, stop] = model.value
 
+        if (disabled.value || readonly.value) {
+          activeThumbRef.value?.blur()
+          return
+        }
+
         if (!props.strict && start === stop && start !== min.value) {
-          activeThumbRef.value = value > start ? stopThumbRef.value?.$el : startThumbRef.value?.$el
+          activeThumbRef.value =
+            value > start ? stopThumbRef.value?.$el : startThumbRef.value?.$el
           activeThumbRef.value?.focus()
         }
 
