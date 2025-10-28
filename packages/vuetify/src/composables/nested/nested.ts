@@ -236,32 +236,36 @@ export const useNested = (props: NestedProps, items: Ref<ListItem[]>) => {
     })
   }, 100)
 
-  function flatten (items: ListItem[]): ListItem[] {
-    return [
-      ...items,
-      ...items.length ? flatten(items.flatMap(x => x.children ?? [])) : [],
-    ]
-  }
-
   watch(items, val => {
     if (props.itemsRegistration === 'render') return
 
-    const allNodes = flatten(val)
-    children.value = new Map(
-      allNodes
-        .filter(item => item.children)
-        .map(item => [item.value, item.children!.map(x => x.value)])
-    )
-    parents.value = new Map(
-      allNodes
-        .filter(item => !val.includes(item))
-        .map(item => [item.value, allNodes.find(x => x.children?.includes(item))?.value])
-    )
-    disabled.value = new Set(
-      allNodes
-        .filter(item => (item as any).disabled)
-        .map(item => item.value)
-    )
+    const _parents = new Map()
+    const _children = new Map()
+    const _disabled = new Set()
+
+    const stack = [...val]
+    let i = 0
+    while (i < stack.length) {
+      const item = stack[i++]
+
+      if (item.children) {
+        const childValues = []
+        for (const child of item.children) {
+          _parents.set(child.value, item.value)
+          childValues.push(child.value)
+          stack.push(child)
+        }
+        _children.set(item.value, childValues)
+      }
+
+      if ((item as any).disabled) {
+        _disabled.add(item.value)
+      }
+    }
+
+    children.value = _children
+    parents.value = _parents
+    disabled.value = _disabled
   }, { immediate: true })
 
   const nested: NestedProvide = {
