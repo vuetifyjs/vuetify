@@ -60,9 +60,11 @@ const items = [
 ]
 
 describe.each([
-  ['plain', items],
-  ['reactive', reactive(items)],
-])('VTreeview with %s items', (_, items) => {
+  ['plain', 'render', items],
+  ['reactive', 'render', reactive(items)],
+  ['plain', 'props', items],
+  ['reactive', 'props', reactive(items)],
+] as const)('VTreeview with %s items and %s registration', (_, itemsRegistration, items) => {
   describe('activate', () => {
     it('single-leaf strategy', async () => {
       const activated = ref([])
@@ -74,6 +76,7 @@ describe.each([
           itemValue="id"
           activatable
           activeStrategy="single-leaf"
+          itemsRegistration={ itemsRegistration }
         />
       ))
 
@@ -96,6 +99,7 @@ describe.each([
           itemValue="id"
           activatable
           activeStrategy="leaf"
+          itemsRegistration={ itemsRegistration }
         />
       ))
 
@@ -118,6 +122,7 @@ describe.each([
           itemValue="id"
           activatable
           activeStrategy="independent"
+          itemsRegistration={ itemsRegistration }
         />
       ))
 
@@ -143,6 +148,7 @@ describe.each([
           itemValue="id"
           activatable
           activeStrategy="single-independent"
+          itemsRegistration={ itemsRegistration }
         />
       ))
 
@@ -169,6 +175,7 @@ describe.each([
           activatable
           activeStrategy="independent"
           onUpdate:activated={ onActivated }
+          itemsRegistration={ itemsRegistration }
         />
       ))
 
@@ -191,6 +198,7 @@ describe.each([
           itemValue="id"
           selectable
           selectStrategy="single-leaf"
+          itemsRegistration={ itemsRegistration }
         />
       ))
 
@@ -212,6 +220,7 @@ describe.each([
           itemValue="id"
           selectable
           selectStrategy="leaf"
+          itemsRegistration={ itemsRegistration }
         />
       ))
 
@@ -233,6 +242,7 @@ describe.each([
           itemValue="id"
           selectable
           selectStrategy="independent"
+          itemsRegistration={ itemsRegistration }
         />
       ))
 
@@ -257,6 +267,7 @@ describe.each([
           itemValue="id"
           selectable
           selectStrategy="single-independent"
+          itemsRegistration={ itemsRegistration }
         />
       ))
 
@@ -279,6 +290,7 @@ describe.each([
           itemValue="id"
           selectable
           selectStrategy="classic"
+          itemsRegistration={ itemsRegistration }
         />
       ))
 
@@ -301,6 +313,7 @@ describe.each([
             items={ items }
             itemValue="id"
             returnObject
+            itemsRegistration={ itemsRegistration }
           />
         ))
 
@@ -317,6 +330,7 @@ describe.each([
             items={ items }
             itemValue="id"
             returnObject
+            itemsRegistration={ itemsRegistration }
           />
         ))
 
@@ -335,6 +349,7 @@ describe.each([
             items={ items }
             itemValue="id"
             returnObject
+            itemsRegistration={ itemsRegistration }
           />
         ))
 
@@ -389,6 +404,7 @@ describe.each([
             activatable
             activeStrategy="leaf"
             returnObject
+            itemsRegistration={ itemsRegistration }
           />
         ))
 
@@ -416,6 +432,7 @@ describe.each([
             activatable
             activeStrategy="independent"
             returnObject
+            itemsRegistration={ itemsRegistration }
           />
         ))
 
@@ -453,6 +470,7 @@ describe.each([
             activatable
             activeStrategy="single-independent"
             returnObject
+            itemsRegistration={ itemsRegistration }
           />
         ))
 
@@ -487,6 +505,7 @@ describe.each([
             returnObject
             selectable
             selectStrategy="single-leaf"
+            itemsRegistration={ itemsRegistration }
           />
         ))
 
@@ -513,6 +532,7 @@ describe.each([
             returnObject
             selectable
             selectStrategy="leaf"
+            itemsRegistration={ itemsRegistration }
           />
         ))
 
@@ -542,6 +562,7 @@ describe.each([
             returnObject
             selectable
             selectStrategy="independent"
+            itemsRegistration={ itemsRegistration }
           />
         ))
 
@@ -580,6 +601,7 @@ describe.each([
             returnObject
             selectable
             selectStrategy="single-independent"
+            itemsRegistration={ itemsRegistration }
           />
         ))
 
@@ -608,6 +630,7 @@ describe.each([
             selectable
             returnObject
             selectStrategy="classic"
+            itemsRegistration={ itemsRegistration }
           />
         ))
 
@@ -645,6 +668,7 @@ describe.each([
             itemValue="id"
             openAll
             returnObject
+            itemsRegistration={ itemsRegistration }
           />
         ))
 
@@ -667,6 +691,7 @@ describe.each([
         openAll
         items={ items }
         itemValue="id"
+        itemsRegistration={ itemsRegistration }
       />
     ))
 
@@ -685,6 +710,7 @@ describe.each([
         itemValue="id"
         openOnClick
         returnObject
+        itemsRegistration={ itemsRegistration }
       >
         {{
           prepend: ({ isOpen }) => (<span class="prepend-is-open">{ `${isOpen}` }</span>),
