@@ -4,9 +4,13 @@ import {
   capitalize,
   Comment,
   Fragment,
+  isProxy,
+  isReactive,
+  isRef,
   isVNode,
   reactive,
   shallowRef,
+  toRaw,
   toRef,
   unref,
   watchEffect,
@@ -824,3 +828,23 @@ export function onlyDefinedProps (props: Record<string, any>) {
 }
 
 export type NonEmptyArray<T> = [T, ...T[]]
+
+export function deepToRaw<T extends {}> (value: T): T {
+  const objectIterator = (input: any): any => {
+    if (Array.isArray(input)) {
+      return input.map(item => objectIterator(item))
+    }
+    if (isRef(input) || isReactive(input) || isProxy(input)) {
+      return objectIterator(toRaw(input))
+    }
+    if (isPlainObject(input)) {
+      return Object.keys(input).reduce((acc, key) => {
+        acc[key as keyof typeof acc] = objectIterator(input[key])
+        return acc
+      }, {} as T)
+    }
+    return input
+  }
+
+  return objectIterator(value)
+}
