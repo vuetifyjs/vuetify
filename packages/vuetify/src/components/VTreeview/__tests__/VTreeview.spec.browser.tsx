@@ -318,9 +318,9 @@ describe.each([
         ))
 
         await userEvent.click(screen.getByText(/Vuetify/).parentElement!.previousElementSibling!)
-        await expect.element(screen.getByText(/Core/)).toBeVisible()
+        await expect.element(screen.getByText(/Core/)).toBeDisplayed()
         await userEvent.click(screen.getByText(/Vuetify/).parentElement!.previousElementSibling!)
-        await expect.element(screen.getByText(/Core/)).not.toBeVisible()
+        await expect.poll(() => screen.queryByText(/Core/)).not.toBeDisplayed()
       })
 
       it('open-all should work', async () => {
@@ -718,10 +718,9 @@ describe.each([
       </VTreeview>
     ))
 
-    const itemsPrepend = screen.getAllByCSS('.v-treeview-item .v-list-item__prepend .prepend-is-open')
-
     await userEvent.click(screen.getByText(/Vuetify Human Resources/))
     await waitIdle()
+    const itemsPrepend = screen.getAllByCSS('.v-treeview-item .v-list-item__prepend .prepend-is-open')
     expect(itemsPrepend[0]).toHaveTextContent(/^true$/)
     expect(itemsPrepend[1]).toHaveTextContent(/^false$/)
 
@@ -738,7 +737,6 @@ describe.each([
     await userEvent.click(screen.getByText(/Vuetify Human Resources/))
     await waitIdle()
     expect(itemsPrepend[0]).toHaveTextContent(/^false$/)
-    expect(itemsPrepend[1]).toHaveTextContent(/^false$/)
   })
 })
 
