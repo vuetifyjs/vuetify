@@ -182,6 +182,11 @@
       "glow": "3.8.0"
     }
   },
+  "VList": {
+    "props": {
+      "itemsRegistration": "3.11.0"
+    }
+  },
   "VListItem": {
     "props": {
       "baseColor": "3.3.0",
@@ -290,7 +295,8 @@
       "hideNoData": "3.10.0",
       "noDataText": "3.10.0",
       "separateRoots": "3.9.0",
-      "indentLines": "3.9.0"
+      "indentLines": "3.9.0",
+      "itemsRegistration": "3.11.0"
     },
     "slots": {
       "header": "3.10.0",
