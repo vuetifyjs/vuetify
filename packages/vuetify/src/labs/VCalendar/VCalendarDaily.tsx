@@ -38,9 +38,7 @@ export const VCalendarDaily = defineComponent({
 
   setup (props, { slots, attrs }) {
     const scrollPush = ref(0)
-    const scrollArea = ref<HTMLElement>()
     const pane = ref<HTMLElement>()
-
     const base = useCalendarWithIntervals(props)
 
     function init () {
@@ -52,8 +50,8 @@ export const VCalendarDaily = defineComponent({
     }
 
     function getScrollPush (): number {
-      return scrollArea.value && pane.value
-        ? (scrollArea.value.offsetWidth - pane.value.offsetWidth)
+      return base.scrollAreaRef.value && pane.value
+        ? (base.scrollAreaRef.value.offsetWidth - pane.value.offsetWidth)
         : 0
     }
 
@@ -158,7 +156,7 @@ export const VCalendarDaily = defineComponent({
 
     function genScrollArea () {
       return (
-        <div ref={ scrollArea } class="v-calendar-daily__scroll-area">
+        <div ref={ base.scrollAreaRef } class="v-calendar-daily__scroll-area">
           { genPane() }
         </div>
       )
@@ -282,7 +280,6 @@ export const VCalendarDaily = defineComponent({
     return {
       ...base,
       scrollPush,
-      scrollArea,
       pane,
       init,
       onResize,
