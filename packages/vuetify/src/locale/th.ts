@@ -85,6 +85,9 @@ export default {
     am: 'ช่วงเช้า',
     pm: 'ช่วงบ่าย',
     title: 'เลือกเวลา',
+    hour: 'Hour',
+    minute: 'Minute',
+    second: 'Second',
   },
   pagination: {
     ariaLabel: {

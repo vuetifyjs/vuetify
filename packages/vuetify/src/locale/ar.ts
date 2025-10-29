@@ -85,6 +85,9 @@ export default {
     am: 'صباحاً',
     pm: 'مساءً',
     title: 'Select Time',
+    hour: 'Hour',
+    minute: 'Minute',
+    second: 'Second',
   },
   pagination: {
     ariaLabel: {
