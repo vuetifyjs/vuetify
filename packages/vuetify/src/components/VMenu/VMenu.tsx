@@ -128,13 +128,14 @@ export const VMenu = genericComponent<OverlaySlots>()({
       if (
         isActive.value &&
         before !== after &&
+        overlay.value?.rootEl &&
         overlay.value?.contentEl &&
         // We're the menu without open submenus or overlays
         overlay.value?.localTop &&
         // It isn't the document or the menu body
-        ![document, overlay.value.contentEl].includes(after!) &&
+        ![document, overlay.value.rootEl].includes(after!) &&
         // It isn't inside the menu body
-        !overlay.value.contentEl.contains(after)
+        !overlay.value.rootEl.contains(after)
       ) {
         if (focusTrapSuppressed) {
           if (!props.openOnHover && !overlay.value.activatorEl?.contains(after)) {
