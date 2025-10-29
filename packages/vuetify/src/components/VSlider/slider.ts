@@ -24,7 +24,7 @@ type SliderProvide = {
   color: Ref<string | undefined>
   decimals: Ref<number>
   direction: Ref<'vertical' | 'horizontal'>
-  disabled: Ref<boolean | null | undefined>
+  disabled: Ref<boolean>
   elevation: Ref<number | string | undefined>
   min: Ref<number>
   max: Ref<number>
@@ -35,7 +35,7 @@ type SliderProvide = {
   onSliderTouchstart: (e: TouchEvent) => void
   parseMouseMove: (e: MouseEvent | TouchEvent) => number | void
   position: (val: number) => number
-  readonly: Ref<boolean | null | undefined>
+  readonly: Ref<boolean>
   rounded: Ref<boolean | number | string | undefined>
   roundValue: (value: number) => number
   thumbLabel: Ref<boolean | string | undefined>
