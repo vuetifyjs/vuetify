@@ -6,11 +6,13 @@
     <v-list v-model:opened="open">
       <v-list-item prepend-icon="mdi-home" title="Home"></v-list-item>
 
-      <v-list-group value="Users">
+      <v-list-group
+        prepend-icon="mdi-account-circle"
+        value="Users"
+      >
         <template v-slot:activator="{ props }">
           <v-list-item
             v-bind="props"
-            prepend-icon="mdi-account-circle"
             title="Users"
           ></v-list-item>
         </template>
