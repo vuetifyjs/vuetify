@@ -71,6 +71,7 @@ function useCountdown (milliseconds: () => number) {
 }
 
 export const makeVSnackbarProps = propsFactory({
+  /* @deprecated */
   multiLine: Boolean,
   text: String,
   timer: [Boolean, String],

@@ -3,7 +3,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, inject, provide, shallowRef, toRef } from 'vue'
-import { deepEqual, propsFactory, wrapInArray } from '@/util'
+import { deepEqual, isPrimitive, propsFactory, wrapInArray } from '@/util'
 
 // Types
 import type { InjectionKey, PropType, Ref } from 'vue'
@@ -37,7 +37,7 @@ export interface DataTableSelectStrategy {
 type SelectionProps = Pick<DataTableItemProps, 'itemValue'> & {
   modelValue: readonly any[]
   selectStrategy: 'single' | 'page' | 'all'
-  valueComparator: typeof deepEqual
+  valueComparator?: typeof deepEqual
   'onUpdate:modelValue': EventProp<[any[]]> | undefined
 }
 
@@ -75,7 +75,9 @@ const allSelectStrategy: DataTableSelectStrategy = {
 
     return selected
   },
-  selectAll: ({ value, allItems, selected }) => allSelectStrategy.select({ items: allItems, value, selected }),
+  selectAll: ({ value, allItems }) => {
+    return new Set(value ? allItems.map(item => item.value) : [])
+  },
 }
 
 export const makeDataTableSelectProps = propsFactory({
@@ -88,10 +90,7 @@ export const makeDataTableSelectProps = propsFactory({
     type: Array as PropType<readonly any[]>,
     default: () => ([]),
   },
-  valueComparator: {
-    type: Function as PropType<typeof deepEqual>,
-    default: deepEqual,
-  },
+  valueComparator: Function as PropType<typeof deepEqual>,
 }, 'DataTable-select')
 
 export const VDataTableSelectionSymbol: InjectionKey<ReturnType<typeof provideSelection>> = Symbol.for('vuetify:data-table-selection')
@@ -101,8 +100,16 @@ export function provideSelection (
   { allItems, currentPage }: { allItems: Ref<SelectableItem[]>, currentPage: Ref<SelectableItem[]> }
 ) {
   const selected = useProxiedModel(props, 'modelValue', props.modelValue, v => {
+    const customComparator = props.valueComparator
+    if (customComparator) {
+      return new Set(wrapInArray(v).map(v => {
+        return allItems.value.find(item => customComparator(v, item.value))?.value ?? v
+      }))
+    }
     return new Set(wrapInArray(v).map(v => {
-      return allItems.value.find(item => props.valueComparator(v, item.value))?.value ?? v
+      return isPrimitive(v)
+        ? allItems.value.find(item => v === item.value)?.value ?? v
+        : allItems.value.find(item => deepEqual(v, item.value))?.value ?? v
     }))
   }, v => {
     return [...v.values()]

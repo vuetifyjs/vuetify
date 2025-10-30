@@ -157,7 +157,9 @@ export const VCombobox = genericComponent<new <
       },
       set: async (val: string | null) => {
         _search.value = val ?? ''
-        if (!props.multiple && !hasSelectionSlot.value) {
+        if (val === null || (val === '' && !props.multiple && !hasSelectionSlot.value)) {
+          model.value = []
+        } else if (!props.multiple && !hasSelectionSlot.value) {
           model.value = [transformItem(props, val)]
           nextTick(() => vVirtualScrollRef.value?.scrollToIndex(0))
         }
@@ -369,9 +371,9 @@ export const VCombobox = genericComponent<new <
     }
     function onAfterLeave () {
       if (isFocused.value) {
-        isPristine.value = true
         vTextFieldRef.value?.focus()
       }
+      isPristine.value = true
       _searchLock.value = null
     }
     /** @param set - null means toggle */
@@ -417,9 +419,6 @@ export const VCombobox = genericComponent<new <
     }
     function onFocusout (e: FocusEvent) {
       listHasFocus.value = false
-    }
-    function onUpdateModelValue (v: any) {
-      if (v == null || (v === '' && !props.multiple && !hasSelectionSlot.value)) model.value = []
     }
 
     watch(isFocused, (val, oldVal) => {
@@ -480,7 +479,6 @@ export const VCombobox = genericComponent<new <
           ref={ vTextFieldRef }
           { ...textFieldProps }
           v-model={ search.value }
-          onUpdate:modelValue={ onUpdateModelValue }
           v-model:focused={ isFocused.value }
           validationValue={ model.externalValue }
           counterValue={ counterValue.value }
@@ -583,6 +581,7 @@ export const VCombobox = genericComponent<new <
                                       modelValue={ isSelected }
                                       ripple={ false }
                                       tabindex="-1"
+                                      onClick={ (event: MouseEvent) => event.preventDefault() }
                                     />
                                   ) : undefined }
 

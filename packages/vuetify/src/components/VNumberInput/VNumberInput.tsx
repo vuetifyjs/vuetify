@@ -245,6 +245,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       if (!new RegExp(`^-?\\d*${escapeForRegex(decimalSeparator.value)}?\\d*$`).test(potentialNewInputVal)) {
         e.preventDefault()
         inputElement!.value = potentialNewNumber
+        nextTick(() => inputText.value = potentialNewNumber)
       }
 
       if (props.precision == null) return
@@ -253,14 +254,16 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       if (potentialNewInputVal.split(decimalSeparator.value)[1]?.length > props.precision) {
         e.preventDefault()
         inputElement!.value = potentialNewNumber
+        nextTick(() => inputText.value = potentialNewNumber)
 
         const cursorPosition = (selectionStart ?? 0) + e.data.length
         inputElement!.setSelectionRange(cursorPosition, cursorPosition)
       }
       // Ignore decimal separator when precision = 0
-      if (props.precision === 0 && potentialNewInputVal.includes(decimalSeparator.value)) {
+      if (props.precision === 0 && potentialNewInputVal.endsWith(decimalSeparator.value)) {
         e.preventDefault()
         inputElement!.value = potentialNewNumber
+        nextTick(() => inputText.value = potentialNewNumber)
       }
     }
 
