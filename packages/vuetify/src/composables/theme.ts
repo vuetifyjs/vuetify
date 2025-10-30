@@ -435,7 +435,7 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
       }
     }
 
-    let final = lines.map(v => `  ${v}`).join('')
+    let final = lines.map((str, i) => (i === 0 ? str : `    ${str}`)).join('')
     if (parsedOptions.layer) {
       final =
         '@layer vuetify.theme {\n' +
