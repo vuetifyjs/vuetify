@@ -3,39 +3,52 @@
     <HomeBgGradient opacity-class="opacity-10" />
 
     <v-container>
-      <div class="mb-16">
+      <div class="mb-15 text-center">
         <v-img
           :src="`https://cdn.vuetifyjs.com/docs/images/logos/vone-logo-${theme.current.value.dark ? 'dark' : 'light'}.png`"
-          class="mx-auto mb-5"
+          class="mx-auto mb-6"
           width="200"
         />
 
+        <h4 class="text-h4 font-weight-bold mb-5">
+          All Ecosystem Tools in One Place
+        </h4>
+
         <v-responsive class="mx-auto my-5" max-width="700">
           <h6 class="text-h6 font-weight-regular text-medium-emphasis">
-            All Vuetify ecosystem tools in one place.
+            A unified platform providing powerful tools for development, collaboration, and design.
+            Build faster, collaborate better, and create stunning Vuetify applications.
           </h6>
         </v-responsive>
       </div>
 
-      <v-row class="text-left mb-10">
+      <v-row class="text-left mb-15">
         <v-col
           v-for="(item, i) in features"
           :key="i"
           cols="12"
-          lg="4"
+          lg="6"
           sm="6"
         >
-          <v-img
-            :src="item.image"
-            class="mb-3"
-            width="120"
-          />
+          <v-card
+            border="primary thin"
+            class="pa-6 d-md-flex justify-space-between align-center h-100"
+            elevation="0"
+            rounded="xl"
+            link
+          >
+            <HomeBgGradient color="primary" opacity-class="opacity-20" />
 
-          <p class="text-medium-emphasis mb-3">{{ item.subtitle }}</p>
+            <v-img
+              :src="item.image"
+              class="mr-4"
+              width="120"
+            />
 
-          <v-btn class="text-none px-0" color="primary" variant="text">
-            Learn More
-          </v-btn>
+            <p class="text-medium-emphasis text-body-2 text-left mb-0 mt-3 my-md-0" style="line-height: 1.6;">
+              {{ item.subtitle }}
+            </p>
+          </v-card>
         </v-col>
       </v-row>
 
@@ -61,38 +74,37 @@
       title: 'Vuetify Play',
       image: `https://cdn.vuetifyjs.com/docs/images/logos/vplay-logo-${theme.current.value.dark ? 'dark' : 'light'}.png`,
       subtitle:
-        `Playground for Vuetify components and see how they work. You can also create and share your own projects.
-        Save your projects and share them with others.`,
+        'Interactive playground to experiment with Vuetify components. Create, save, and share your projects with the community.',
     },
     {
       title: 'Vuetify Bin',
       image: `https://cdn.vuetifyjs.com/docs/images/logos/vbin-logo-${theme.current.value.dark ? 'dark' : 'light'}.png`,
       subtitle:
-        'Share your code snippets with others. You can also save your snippets and share them with others. Complete code formatting and syntax highlighting.',
+        'Save and share code snippets instantly. Features complete syntax highlighting and code formatting for a seamless experience.',
     },
     {
       title: 'Vuetify Link',
       image: `https://cdn.vuetifyjs.com/docs/images/one/logos/vlink-logo-${theme.current.value.dark ? 'dark' : 'light'}.png`,
       subtitle:
-        'QuiArcu egestas dolor vel iaculis in ipsum mauris. Tincidunt mattis aliquet hac quis. Id hac maecenas ac donec pharetra eget.',
+        'Generate shareable links to documentation, components, and resources. Simplify collaboration and streamline your workflow.',
     },
     {
       title: 'Vuetify Studio',
       image: `https://cdn.vuetifyjs.com/docs/images/logos/vstudio-logo-${theme.current.value.dark ? 'dark' : 'light'}.png`,
       subtitle:
-        'Commodo nec sagittis tortor mauris sed. Turpis tortor quis scelerisque diam id accumsan nullam tempus. Pulvinar etiam lacus volutpat eu.',
+        'Visual design tool for building Vuetify applications. Drag and drop components to create beautiful interfaces in minutes.',
     },
     {
       title: 'Vuetify Issues',
       image: `https://cdn.vuetifyjs.com/docs/images/logos/vissues-logo-${theme.current.value.dark ? 'dark' : 'light'}.png`,
       subtitle:
-        'Pellentesque sit elit congue ante nec amet. Dolor aenean curabitur viverra suspendisse iaculis eget. Nec mollis placerat ultricies euismod ut condimentum.',
+        'Integrated issue tracking for Vuetify projects. Report bugs, request features, and stay updated with development progress.',
     },
     {
       title: 'Vuetify MCP',
       image: `https://cdn.vuetifyjs.com/docs/images/logos/vloader-logo-${theme.current.value.dark ? 'dark' : 'light'}.png`,
       subtitle:
-        'Pellentesque enim a commodo malesuada turpis eleifend risus. Facilisis donec placerat sapien consequat tempor fermentum nibh.',
+        'Modular component provider for seamless integration. Access pre-built components and utilities to accelerate development.',
     },
   ])
 </script>
