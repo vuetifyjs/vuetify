@@ -334,19 +334,7 @@ describe('createTheme', () => {
     const stylesheet = document.getElementById('vuetify-theme-stylesheet')
     const css = stylesheet!.innerHTML
 
-    expect(css).toContain('@layer vuetify-theme {')
-    expect(css).toContain('}')
-  })
-
-  it('should generate layer classes if layer option is provided', async () => {
-    const theme = createTheme({ layer: 'custom-layer' })
-
-    theme.install(app)
-
-    const stylesheet = document.getElementById('vuetify-theme-stylesheet')
-    const css = stylesheet!.innerHTML
-
-    expect(css).toContain('@layer custom-layer {')
+    expect(css).toContain('@layer vuetify.theme {')
     expect(css).toContain('}')
   })
 

@@ -43,7 +43,7 @@ export type ThemeOptions = false | {
   stylesheetId?: string
   scope?: string
   unimportant?: boolean
-  layer?: boolean | string
+  layer?: boolean
 }
 export type ThemeDefinition = DeepPartial<InternalThemeDefinition>
 
@@ -319,12 +319,6 @@ function getScopedSelector (selector: string, scope?: string) {
   return selector === ':root' ? scopeSelector : `${scopeSelector} ${selector}`
 }
 
-function getLayerName (layer: string | boolean | undefined) {
-  if (typeof layer === 'string') return layer
-
-  return layer ? 'vuetify-theme' : undefined
-}
-
 function upsertStyles (id: string, cspNonce: string | undefined, styles: string) {
   const styleEl = getOrCreateStyleElement(id, cspNonce)
 
@@ -394,7 +388,6 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
     const lines: string[] = []
     const important = parsedOptions.unimportant ? '' : ' !important'
     const scoped = parsedOptions.scoped ? parsedOptions.prefix : ''
-    const layer = getLayerName(parsedOptions.layer)
 
     if (current.value?.dark) {
       createCssClass(lines, ':root', ['color-scheme: dark'], parsedOptions.scope)
@@ -428,13 +421,28 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
         }
       }
 
-      lines.push(...bgLines, ...fgLines)
+      if (parsedOptions.layer) {
+        lines.push(
+          '@layer background {\n',
+          ...bgLines.map(v => `  ${v}`),
+          '}\n',
+          '@layer foreground {\n',
+          ...fgLines.map(v => `  ${v}`),
+          '}\n',
+        )
+      } else {
+        lines.push(...bgLines, ...fgLines)
+      }
     }
 
-    let final = lines.map((str, i) => i === 0 ? str : `    ${str}`).join('')
-    if (layer) {
-      final = `@layer ${layer} { \n ${final} }`
+    let final = lines.map(v => `  ${v}`).join('')
+    if (parsedOptions.layer) {
+      final =
+        '@layer vuetify.theme {\n' +
+          lines.map(v => `  ${v}`).join('') +
+        '\n}'
     }
+
     return final
   })
 
