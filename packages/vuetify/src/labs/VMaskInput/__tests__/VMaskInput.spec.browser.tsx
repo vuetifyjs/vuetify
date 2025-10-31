@@ -32,6 +32,21 @@ describe('VMaskInput', () => {
     expect(inputValue.value).toBe('(456) 7')
   })
 
+  it('should clear the input when clear icon is clicked', async () => {
+    const inputValue = ref('(456) 7')
+
+    render(() => (
+      <VMaskInput
+        v-model={ inputValue.value }
+        mask="(###) #"
+        clearable
+      />
+    ))
+
+    await userEvent.click(screen.getByLabelText('Clear'))
+    expect(inputValue.value).toBe('')
+  })
+
   describe('Caret Position and Formatting', () => {
     const renderComponent = ({
       defaultModel = '(AS)-123-XYZ-45-67',
