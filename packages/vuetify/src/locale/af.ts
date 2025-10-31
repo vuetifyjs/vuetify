@@ -124,6 +124,9 @@ export default {
     notEmpty: 'Kies asseblief ten minste een waarde',
     pattern: 'Ongeldige formaat',
   },
+  command: {
+    search: 'Tik \'n opdrag of soek...',
+  },
   hotkey: {
     then: 'dan',
     ctrl: 'Ctrl',
