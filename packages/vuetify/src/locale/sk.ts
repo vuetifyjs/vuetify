@@ -124,6 +124,14 @@ export default {
     notEmpty: 'Vyberte aspoň jednu hodnotu',
     pattern: 'Neplatný formát',
   },
+  command: {
+    select: 'na výber',
+    navigate: 'na navigáciu',
+    goBack: 'na návrat',
+    close: 'na zatvorenie',
+    then: 'potom',
+    placeholder: 'Zadajte príkaz alebo hľadajte...',
+  },
   hotkey: {
     then: 'potom',
     ctrl: 'Ctrl',

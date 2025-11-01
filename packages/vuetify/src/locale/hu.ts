@@ -124,6 +124,14 @@ export default {
     notEmpty: 'Kérlek, válassz legalább egy értéket',
     pattern: 'Érvénytelen formátum',
   },
+  command: {
+    select: 'kiválasztáshoz',
+    navigate: 'navigáláshoz',
+    goBack: 'visszalépéshez',
+    close: 'bezáráshoz',
+    then: 'majd',
+    placeholder: 'Írj be egy parancsot vagy keress...',
+  },
   hotkey: {
     then: 'majd',
     ctrl: 'Ctrl',

@@ -1,0 +1,9 @@
+{
+  "props": {
+    "hasItems": "Whether there are selectable items in the command palette. When true, shows Enter key and arrow navigation instructions.",
+    "hasParent": "Whether there is a parent navigation level to return to. When true, shows the Backspace key instruction for navigating back.",
+    "id": "HTML id attribute for the instructions element. Used for ARIA describedby relationships to connect the instructions with the search input."
+  },
+  "slots": {},
+  "events": {}
+}
