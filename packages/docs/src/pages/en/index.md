@@ -14,7 +14,7 @@ meta:
 
 <v-divider />
 
-<HomeComponentGallery />
+<HomeGalleryComponents />
 
 <v-divider />
 
