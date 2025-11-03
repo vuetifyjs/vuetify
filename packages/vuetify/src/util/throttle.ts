@@ -3,7 +3,7 @@ export function throttle<T extends (...args: any[]) => any> (
   delay: number,
   options = { leading: true, trailing: true },
 ) {
-  let timeoutId = 0
+  let timeoutId = 0 as any
   let lastExec = 0
   let throttling = false
   let start = 0
@@ -24,7 +24,7 @@ export function throttle<T extends (...args: any[]) => any> (
 
     function invoke () {
       lastExec = Date.now()
-      timeoutId = window.setTimeout(clear, delay)
+      timeoutId = setTimeout(clear, delay)
       fn(...args)
     }
 
@@ -36,7 +36,7 @@ export function throttle<T extends (...args: any[]) => any> (
     } else if (elapsed >= delay) {
       invoke()
     } else if (options.trailing) {
-      timeoutId = window.setTimeout(invoke, delay - elapsed)
+      timeoutId = setTimeout(invoke, delay - elapsed)
     }
   }
 
