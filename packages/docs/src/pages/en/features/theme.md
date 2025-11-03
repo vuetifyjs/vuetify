@@ -326,10 +326,26 @@ import { createVuetify } from 'vuetify'
 export default createVuetify({
   theme: {
     layer: true,
-    // or a custom layer name
-    layer: 'my-vuetify-theme',
   },
 })
+```
+
+which generates the theme layer with two sub-layers (background and foreground):
+
+```css
+@layer vuetify.theme {
+  :root {
+    /* ... */
+  }
+
+  @layer background {
+    /* ... */
+  }
+
+  @layer foreground {
+    /* ... */
+  }
+}
 ```
 
 ## Theme object structure

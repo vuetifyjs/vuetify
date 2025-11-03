@@ -273,8 +273,6 @@ import { createVuetify } from 'vuetify'
 export default createVuetify({
   theme: {
     layer: true,
-    // or a custom layer name
-    layer: 'my-vuetify-theme',
   },
 })
 ```
