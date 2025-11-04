@@ -44,6 +44,10 @@ export const makeVTextareaProps = propsFactory({
     default: 5,
     validator: (v: any) => !isNaN(parseFloat(v)),
   },
+  maxGrow: {
+    type: [Number, String],
+    validator: (v: any) => !isNaN(parseFloat(v)),
+  },
   maxRows: {
     type: [Number, String],
     validator: (v: any) => !isNaN(parseFloat(v)),
@@ -188,7 +192,11 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
           parseFloat(props.rows) * lineHeight + padding,
           parseFloat(fieldStyle.getPropertyValue('--v-input-control-height'))
         )
-        const maxHeight = parseFloat(props.maxRows!) * lineHeight + padding || Infinity
+
+        const maxHeight = props.maxGrow
+          ? parseFloat(props.maxGrow!)
+          : parseFloat(props.maxRows!) * lineHeight + padding || Infinity
+
         const newHeight = clamp(height ?? 0, minHeight, maxHeight)
         rows.value = Math.floor((newHeight - padding) / lineHeight)
 
@@ -199,6 +207,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
     onMounted(calculateInputHeight)
     watch(model, calculateInputHeight)
     watch(() => props.rows, calculateInputHeight)
+    watch(() => props.maxGrow, calculateInputHeight)
     watch(() => props.maxRows, calculateInputHeight)
     watch(() => props.density, calculateInputHeight)
     watch(rows, val => {
