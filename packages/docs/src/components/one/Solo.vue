@@ -4,7 +4,7 @@
       <v-card-title class="text-h4 font-weight-bold mb-4">Unlock Vuetify One</v-card-title>
 
       <v-card-text class="text-body-1 mb-6">
-        Get priority support, premium components, advanced themes, and the future of Vuetify UI in one subscription.
+        Get priority support, advanced themes, and the future of Vuetify UI<span v-if="team">, for your entire team, all</span> in one subscription.
       </v-card-text>
 
       <v-row class="mb-6" justify="center">
@@ -19,7 +19,10 @@
         </v-col>
       </v-row>
 
-      <div class="text-h5 font-weight-bold mb-4">$2.99/month</div>
+      <div class="d-flex flex-column justify-center align-center mb-2">
+        <p class="text-h5 font-weight-bold">{{ price }}</p>
+        <v-switch v-model="team" color="primary" label="Team Subscription" />
+      </div>
 
       <v-btn class="mb-4" color="primary" rounded="lg" size="x-large">
         Subscribe Now
@@ -33,7 +36,11 @@
 </template>
 
 <script setup>
-// using Vuetify 3 composition setup
+  const team = ref(false)
+
+  const price = computed(() => {
+    return team.value ? '$29.99/month' : '$2.99/month'
+  })
 </script>
 
 <style scoped>
