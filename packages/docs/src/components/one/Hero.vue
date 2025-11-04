@@ -1,12 +1,11 @@
 <template>
   <section class="bg-primary d-flex flex-column justify-center align-center text-center px-6 py-12">
-    <img
+    <v-img
+      :width="500"
       alt="Vuetify One Logo"
       class="mb-8"
-      max-width="160"
-      src="https://vuetifyjs.b-cdn.net/docs/images/avatars/one.png"
-    >
-
+      src="https://cdn.vuetifyjs.com/docs/images/one/logos/vone-logo-dark.png"
+    />
     <h1 class="text-h2 font-weight-bold mb-4 text-white">
       Elevate Your Vuetify Experience
     </h1>
