@@ -62,7 +62,7 @@ export function useCommandPaletteNavigation (
   /**
    * Auto-select first item when items change
    */
-  watch(() => options.filteredItems.value.length, newLength => {
+  watch(() => options.filteredItems, newLength => {
     if (newLength > 0 && selectedIndex.value === -1) {
       selectedIndex.value = 0
     } else if (newLength === 0) {
