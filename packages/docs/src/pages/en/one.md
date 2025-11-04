@@ -11,4 +11,4 @@ related:
 
 <OneHero />
 
-<OneSolo />
+<OneSubscribeCard />
