@@ -272,12 +272,16 @@
   "VTab": {
     "props": {
       "text": "3.2.0",
-      "spaced": "3.10.0"
+      "spaced": "3.10.0",
+      "sliderTransition": "3.11.0",
+      "sliderTransitionDuration": "3.11.0"
     }
   },
   "VTabs": {
     "props": {
-      "spaced": "3.10.0"
+      "spaced": "3.10.0",
+      "sliderTransition": "3.11.0",
+      "sliderTransitionDuration": "3.11.0"
     },
     "slots": {
       "next": "3.11.0",
