@@ -87,6 +87,12 @@ Using **stacked** increases the `v-tabs` height to 72px to allow for both icons 
 
 <ExamplesExample file="v-tabs/prop-stacked" />
 
+#### Slider Transition
+
+With **slider-transition** you can change default animation of the slider so it better fits with the app design.
+
+<ExamplesExample file="v-tabs/prop-slider-transition" />
+
 #### Pagination
 
 If the tab items overflow their container, pagination controls will appear on desktop. For mobile devices, arrows will only display with the **show-arrows** prop.
