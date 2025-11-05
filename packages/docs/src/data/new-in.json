@@ -141,7 +141,8 @@
   },
   "VDialog": {
     "props": {
-      "stickToTarget": "3.10.0"
+      "stickToTarget": "3.10.0",
+      "viewportMargin": "3.11.0"
     }
   },
   "VDivider": {
@@ -202,7 +203,8 @@
   "VMenu": {
     "props": {
       "stickToTarget": "3.10.0",
-      "submenu": "3.7.0"
+      "submenu": "3.7.0",
+      "viewportMargin": "3.11.0"
     }
   },
   "VNavigationDrawer": {
@@ -217,7 +219,8 @@
   },
   "VOverlay": {
     "props": {
-      "stickToTarget": "3.10.0"
+      "stickToTarget": "3.10.0",
+      "viewportMargin": "3.11.0"
     }
   },
   "VPicker": {
@@ -332,7 +335,8 @@
     "props": {
       "eager": "3.2.0",
       "interactive": "3.8.0",
-      "stickToTarget": "3.10.0"
+      "stickToTarget": "3.10.0",
+      "viewportMargin": "3.11.0"
     }
   },
   "VVirtualScroll": {
