@@ -32,6 +32,7 @@ export type VDataTableRowsSlots<T> = VDataTableGroupHeaderRowSlots & VDataTableR
 }
 
 export const makeVDataTableRowsProps = propsFactory({
+  color: String,
   loading: [Boolean, String],
   loadingText: {
     type: String,
@@ -162,6 +163,7 @@ export const VDataTableRows = genericComponent<new <T>(
                   } : undefined,
                   index,
                   item,
+                  color: props.color,
                   cellProps: props.cellProps,
                   collapseIcon: props.collapseIcon,
                   expandIcon: props.expandIcon,

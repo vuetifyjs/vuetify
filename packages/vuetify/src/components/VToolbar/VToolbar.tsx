@@ -32,6 +32,10 @@ export type Density = null | 'prominent' | 'default' | 'comfortable' | 'compact'
 export const makeVToolbarProps = propsFactory({
   absolute: Boolean,
   collapse: Boolean,
+  collapsePosition: {
+    type: String as PropType<'start' | 'end'>,
+    default: 'start',
+  },
   color: String,
   density: {
     type: String as PropType<Density>,
@@ -119,6 +123,7 @@ export const VToolbar = genericComponent<VToolbarSlots>()({
         <props.tag
           class={[
             'v-toolbar',
+            `v-toolbar--collapse-${props.collapsePosition}`,
             {
               'v-toolbar--absolute': props.absolute,
               'v-toolbar--collapse': props.collapse,

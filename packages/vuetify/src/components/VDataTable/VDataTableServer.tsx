@@ -19,7 +19,7 @@ import { provideDefaults } from '@/composables/defaults'
 
 // Utilities
 import { computed, provide, toRef, toRefs } from 'vue'
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { DeepReadonly } from 'vue'
@@ -69,7 +69,7 @@ export const VDataTableServer = genericComponent<new <T extends readonly any[], 
 
   setup (props, { attrs, slots }) {
     const { groupBy } = createGroupBy(props)
-    const { sortBy, multiSort, mustSort } = createSort(props)
+    const { initialSortOrder, sortBy, multiSort, mustSort } = createSort(props)
     const { page, itemsPerPage } = createPagination(props)
     const { disableSort } = toRefs(props)
     const itemsLength = computed(() => parseInt(props.itemsLength, 10))
@@ -82,7 +82,7 @@ export const VDataTableServer = genericComponent<new <T extends readonly any[], 
 
     const { items } = useDataTableItems(props, columns)
 
-    const { toggleSort } = provideSort({ sortBy, multiSort, mustSort, page })
+    const { toggleSort } = provideSort({ initialSortOrder, sortBy, multiSort, mustSort, page })
 
     const { opened, isGroupOpen, toggleGroup, extractRows } = provideGroupBy({ groupBy, sortBy, disableSort })
 
@@ -147,7 +147,7 @@ export const VDataTableServer = genericComponent<new <T extends readonly any[], 
 
     useRender(() => {
       const dataTableFooterProps = VDataTableFooter.filterProps(props)
-      const dataTableHeadersProps = VDataTableHeaders.filterProps(props)
+      const dataTableHeadersProps = VDataTableHeaders.filterProps(omit(props, ['multiSort']))
       const dataTableRowsProps = VDataTableRows.filterProps(props)
       const tableProps = VTable.filterProps(props)
 
@@ -173,6 +173,7 @@ export const VDataTableServer = genericComponent<new <T extends readonly any[], 
                   <thead key="thead" class="v-data-table__thead" role="rowgroup">
                     <VDataTableHeaders
                       { ...dataTableHeadersProps }
+                      multiSort={ !!props.multiSort }
                       v-slots={ slots }
                     />
                   </thead>
