@@ -5,7 +5,7 @@
     <div class="d-flex ga-6 justify-center align-center flex-wrap">
       <v-card
         v-for="sponsor in sponsorships"
-        :key="sponsor"
+        :key="sponsor.name"
         class="pa-6"
         elevation="6"
         max-width="400"
@@ -36,7 +36,7 @@
   </v-container>
 </template>
 
-<script setup>
+<script setup lang="ts">
 
   const sponsorships = [
     {

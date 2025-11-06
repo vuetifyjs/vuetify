@@ -42,10 +42,10 @@
   </v-container>
 </template>
 
-<script setup>
+<script setup lang="ts">
   const one = useOneStore()
-  const type = ref('solo')
-  const interval = ref('month')
+  const type = ref <'solo' | 'team'>('solo')
+  const interval = ref<'month' | 'year'>('month')
 
   const team = computed(() => type.value === 'team')
 

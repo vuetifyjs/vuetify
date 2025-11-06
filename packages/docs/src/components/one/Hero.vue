@@ -27,6 +27,6 @@
   </section>
 </template>
 
-<script setup>
+<script setup lang="ts">
   const one = useOneStore()
 </script>
