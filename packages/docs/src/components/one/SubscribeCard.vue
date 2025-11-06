@@ -1,6 +1,7 @@
 <template>
   <v-container class=" d-flex justify-center align-center text-center py-8 ga-4">
     <v-card
+      id="subscribe"
       class="py-10"
       elevation="6"
       max-width="600"
@@ -26,13 +27,13 @@
       </v-row>
 
       <div class="d-flex flex-column justify-center align-center mb-2">
-        <p class="text-h5 font-weight-bold">${{ prices[team ? 'team' : 'solo'][interval] }}</p>
-        <v-switch v-model="team" color="primary" label="Team Subscription" />
+        <p class="text-h5 font-weight-bold">${{ prices[type][interval] }}</p>
+        <v-switch v-model="type" color="primary" false-value="solo" label="Team Subscription" true-value="team" />
 
-        <v-btn color="primary" rounded="lg" size="x-large" @click="subscribe">
+        <v-btn :loading="one.isLoading" color="primary" rounded="lg" size="x-large" @click="subscribe">
           Subscribe Now
         </v-btn>
-        <v-checkbox-btn v-model="interval" color="primary" false-value="month" label="Annual Billing (Save 20%)" true-value="year" />
+        <v-checkbox v-model="interval" color="primary" false-value="month" label="Annual Billing (Save 20%)" true-value="year" />
       </div>
       <div class="text-caption text-medium-emphasis">
         Cancel any time. No long‑term commitment.
@@ -43,8 +44,10 @@
 
 <script setup>
   const one = useOneStore()
-  const team = ref(false)
+  const type = ref('solo')
   const interval = ref('month')
+
+  const team = computed(() => type.value === 'team')
 
   const prices = {
     solo: {
@@ -58,10 +61,7 @@
   }
 
   async function subscribe () {
-    await one.subscribe({
-      plan: team.value ? 'team' : 'solo',
-      interval: interval.value,
-    })
+    await one.subscribe(interval.value, type.value)
   }
 </script>
 
