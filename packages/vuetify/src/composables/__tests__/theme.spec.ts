@@ -268,17 +268,6 @@ describe('createTheme', () => {
     consoleMock.mockReset()
   })
 
-  it('should generate utility classes without !important', async () => {
-    const theme = createTheme({ unimportant: true })
-
-    theme.install(app)
-
-    const stylesheet = document.getElementById('vuetify-theme-stylesheet')
-    const css = stylesheet!.innerHTML
-
-    expect(css).not.toContain('!important')
-  })
-
   it('should generate utility classes with a custom prefix', async () => {
     // @ts-expect-error next-line
     const theme = createTheme({ prefix: 'custom-' })

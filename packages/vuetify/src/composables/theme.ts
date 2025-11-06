@@ -42,7 +42,6 @@ export type ThemeOptions = false | {
   themes?: Record<string, ThemeDefinition>
   stylesheetId?: string
   scope?: string
-  unimportant?: boolean
 }
 export type ThemeDefinition = DeepPartial<InternalThemeDefinition>
 
@@ -56,7 +55,6 @@ interface InternalThemeOptions {
   stylesheetId: string
   scope?: string
   scoped: boolean
-  unimportant: boolean
   utilities: boolean
 }
 
@@ -210,7 +208,6 @@ function genDefaults () {
     },
     stylesheetId: 'vuetify-theme-stylesheet',
     scoped: false,
-    unimportant: true,
     utilities: true,
   }
 }
@@ -384,7 +381,6 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
 
   const styles = computed(() => {
     const lines: string[] = []
-    const important = parsedOptions.unimportant ? '' : ' !important'
     const scoped = parsedOptions.scoped ? parsedOptions.prefix : ''
 
     if (current.value?.dark) {
@@ -407,14 +403,14 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
       const colors = new Set(Object.values(computedThemes.value).flatMap(theme => Object.keys(theme.colors)))
       for (const key of colors) {
         if (key.startsWith('on-')) {
-          createCssClass(fgLines, `.${key}`, [`color: rgb(var(--${parsedOptions.prefix}theme-${key}))${important}`], parsedOptions.scope)
+          createCssClass(fgLines, `.${key}`, [`color: rgb(var(--${parsedOptions.prefix}theme-${key}))`], parsedOptions.scope)
         } else {
           createCssClass(bgLines, `.${scoped}bg-${key}`, [
             `--${parsedOptions.prefix}theme-overlay-multiplier: var(--${parsedOptions.prefix}theme-${key}-overlay-multiplier)`,
-            `background-color: rgb(var(--${parsedOptions.prefix}theme-${key}))${important}`,
-            `color: rgb(var(--${parsedOptions.prefix}theme-on-${key}))${important}`,
+            `background-color: rgb(var(--${parsedOptions.prefix}theme-${key}))`,
+            `color: rgb(var(--${parsedOptions.prefix}theme-on-${key}))`,
           ], parsedOptions.scope)
-          createCssClass(fgLines, `.${scoped}text-${key}`, [`color: rgb(var(--${parsedOptions.prefix}theme-${key}))${important}`], parsedOptions.scope)
+          createCssClass(fgLines, `.${scoped}text-${key}`, [`color: rgb(var(--${parsedOptions.prefix}theme-${key}))`], parsedOptions.scope)
           createCssClass(fgLines, `.${scoped}border-${key}`, [`--${parsedOptions.prefix}border-color: var(--${parsedOptions.prefix}theme-${key})`], parsedOptions.scope)
         }
       }
