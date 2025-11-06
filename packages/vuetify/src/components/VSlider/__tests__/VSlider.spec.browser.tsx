@@ -132,7 +132,7 @@ describe('VSlider', () => {
       />
     ))
 
-    await commands.drag([15, 15], [250, 15])
+    await commands.drag([8, 16], [250, 16])
 
     expect(onStart).toHaveBeenCalledExactlyOnceWith(0)
     expect(onEnd).toHaveBeenCalledOnce()
