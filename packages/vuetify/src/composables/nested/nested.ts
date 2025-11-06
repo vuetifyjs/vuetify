@@ -221,8 +221,10 @@ export const useNested = (props: NestedProps) => {
   const nodeIds = new Set<unknown>()
 
   const itemsUpdatePropagation = throttle(() => {
-    children.value = new Map(children.value)
-    parents.value = new Map(parents.value)
+    nextTick(() => {
+      children.value = new Map(children.value)
+      parents.value = new Map(parents.value)
+    })
   }, 100)
 
   const nested: NestedProvide = {

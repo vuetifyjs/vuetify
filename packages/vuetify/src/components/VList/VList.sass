@@ -21,6 +21,12 @@
     &--nav
       padding-inline: $list-nav-padding
 
+      .v-list-item:not(:first-child),
+      .v-list-group:not(:first-child) > .v-list-item,
+      .v-list-group__items > .v-list-item,
+      .v-list-group__items > .v-list-group
+        margin-top: $list-item-nav-margin-top
+
     &--rounded
       @include tools.rounded($list-rounded-border-radius)
 

@@ -4,6 +4,8 @@
     "hideSlider": "Hides the active tab slider component (no exit or enter animation).",
     "fixed": "Forces component to take up all available space up to their maximum width (300px), and centers it.",
     "sliderColor": "Applies specified color to the slider when active on that component - supports utility colors (for example `success` or `purple`) or css color (`#033` or `rgba(255, 0, 0, 0.5)`). Find a list of built-in classes on the [colors page](/styles/colors#material-colors).",
+    "sliderTransition": "Changes slider transition to one of the predefined animation presets.",
+    "sliderTransitionDuration": "Applies custom slider transition duration. Default duration depends on transition type (fade: 400, grow: 350, shift: 225).",
     "stacked": "Displays the tab as a flex-column."
   },
   "events": {

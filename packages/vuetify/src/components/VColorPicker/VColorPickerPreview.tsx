@@ -103,7 +103,7 @@ export const VColorPickerPreview = defineComponent({
             name={ t('$vuetify.colorPicker.ariaLabel.hueSlider') }
             modelValue={ props.color?.h }
             onUpdate:modelValue={ h => emit('update:color', { ...(props.color ?? nullColor), h }) }
-            step={ 0 }
+            step={ 1 }
             min={ 0 }
             max={ 360 }
             disabled={ props.disabled }
@@ -119,7 +119,7 @@ export const VColorPickerPreview = defineComponent({
               name={ t('$vuetify.colorPicker.ariaLabel.alphaSlider') }
               modelValue={ props.color?.a ?? 1 }
               onUpdate:modelValue={ a => emit('update:color', { ...(props.color ?? nullColor), a }) }
-              step={ 1 / 256 }
+              step={ 0.01 }
               min={ 0 }
               max={ 1 }
               disabled={ props.disabled }

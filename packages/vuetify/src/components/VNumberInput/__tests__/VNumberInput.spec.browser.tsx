@@ -4,7 +4,7 @@ import { VForm } from '@/components/VForm'
 
 // Utilities
 import { render, screen, userEvent } from '@test'
-import { ref } from 'vue'
+import { nextTick, ref } from 'vue'
 
 describe('VNumberInput', () => {
   it.each([
@@ -366,6 +366,79 @@ describe('VNumberInput', () => {
       await userEvent.keyboard(typing)
       await userEvent.click(document.body)
       expect(screen.getByCSS('input')).toHaveValue(expected)
+    })
+  })
+
+  describe('should indicate range error', () => {
+    // enable in 4.0.0
+    it.todo('on mount', async () => {
+      const model = ref(-13)
+      const onChange = vi.fn()
+      render(() => (
+        <VNumberInput
+          v-model={ model.value }
+          min={ 5 }
+          onUpdate:modelValue={ onChange }
+        />
+      ))
+
+      await nextTick()
+      expect(model.value).toBe(-13)
+      expect(onChange).not.toHaveBeenCalled()
+      expect(screen.getByCSS('.v-input')).toHaveClass('v-input--error')
+    })
+
+    it('while typing', async () => {
+      const model = ref(null)
+      const onChange = vi.fn()
+      render(() => (
+        <VNumberInput
+          v-model={ model.value }
+          min={ 5 }
+          onUpdate:modelValue={ onChange }
+        />
+      ))
+
+      const vInput = screen.getByCSS('.v-input')
+
+      await userEvent.tab()
+      await userEvent.keyboard('1')
+      expect(vInput).toHaveClass('v-input--error')
+
+      await userEvent.keyboard('2')
+      expect(vInput).not.toHaveClass('v-input--error')
+      expect(model.value).toBe(12)
+
+      await userEvent.keyboard('{arrowLeft}{arrowLeft}-')
+      expect(vInput).toHaveClass('v-input--error')
+    })
+
+    it('while typing', async () => {
+      const model = ref(0)
+      const onChange = vi.fn()
+      render(() => (
+        <VNumberInput
+          v-model={ model.value }
+          max={ 50 }
+          onUpdate:modelValue={ onChange }
+        />
+      ))
+
+      await nextTick()
+      const vInput = screen.getByCSS('.v-input')
+      expect(vInput).not.toHaveClass('v-input--error')
+
+      model.value = 50.55 // will be rounded to 51
+      await nextTick()
+      expect(vInput).toHaveClass('v-input--error')
+
+      model.value = 99
+      await nextTick()
+      expect(vInput).toHaveClass('v-input--error')
+
+      model.value = 45
+      await nextTick()
+      expect(vInput).not.toHaveClass('v-input--error')
     })
   })
 })
