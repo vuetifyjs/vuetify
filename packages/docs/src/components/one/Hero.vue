@@ -14,8 +14,19 @@
       Join the community shaping the future of Vuetify. Access exclusive support today and early access to next-gen tools like MCP, shared workspaces, and team-wide cloud features.
     </p>
 
-    <v-btn class="text-primary" color="white" rounded="lg" size="x-large">
+    <v-btn
+      :loading="one.isLoading"
+      class="text-primary"
+      color="white"
+      rounded="lg"
+      size="x-large"
+      to="#subscribe"
+    >
       Join Vuetify One
     </v-btn>
   </section>
 </template>
+
+<script setup>
+  const one = useOneStore()
+</script>
