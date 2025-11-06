@@ -172,6 +172,7 @@ export const VTreeview = genericComponent<new <T>(
         <VList
           ref={ vListRef }
           { ...listProps }
+          tag="div"
           class={[
             'v-treeview',
             {
