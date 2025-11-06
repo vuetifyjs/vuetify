@@ -1,6 +1,6 @@
 <template>
-  <v-container class="bg-primary d-flex align-center justify-center pa-md-12 pa-sm-6" min-height="550" fluid>
-    <v-responsive class="mx-auto text-center" max-width="700">
+  <v-container class="bg-primary mx-auto text-center pa-md-12 pa-6 pb-7" fluid>
+    <v-responsive class="mx-auto" max-width="700">
       <v-img
         :width="$vuetify.display.mdAndUp ? 500 : 300"
         alt="Vuetify One Logo"

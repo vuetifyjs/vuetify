@@ -1,8 +1,8 @@
 <template>
-  <v-container class="pa-md-12 pa-sm-6 mx-auto text-center" max-width="700" fluid>
+  <v-container class="pa-md-12 pa-4 mx-auto text-center" max-width="700" fluid>
     <v-card
       id="subscribe"
-      class="pa-8"
+      class="pa-2"
       elevation="0"
       rounded="xl"
       border
@@ -19,11 +19,15 @@
         Get priority support, advanced themes, and the future of Vuetify UI<span v-if="team">, for your entire team, all</span> in one subscription.
       </v-card-text>
 
-      <v-list class="mb-6 px-0 text-start" density="compact">
-        <v-list-item v-for="item in items" :key="item" :title="item">
+      <v-list class="mb-6 px-0 text-start" density="compact" slim>
+        <v-list-item v-for="item in items" :key="item">
           <template #prepend>
             <v-icon color="primary" icon="mdi-check" />
           </template>
+
+          <v-list-item-title :class="$vuetify.display.smAndDown ? 'text-caption' : ''" class="text-wrap">
+            {{ item }}
+          </v-list-item-title>
         </v-list-item>
       </v-list>
 
@@ -88,7 +92,7 @@
     solo: [
       'Access for a Single Developer',
       'Ad Free Experience on all Vuetify properties',
-      'Premium tools on our platforms; VPlay, VBin, and VStudio',
+      'Premium tools on our platforms; VPlay, VBin, VLink, and VStudio',
       'Pinned Navigation Items and Rail drawer in Documentation',
       'Customize Navigation components with Page Suits',
       'Custom Vuetify One menu avatar',
