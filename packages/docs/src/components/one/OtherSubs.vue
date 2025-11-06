@@ -1,43 +1,57 @@
 <template>
-  <v-container class=" d-flex flex-column justify-center align-center text-center py-10">
-    <h2 class="text-h4 mb-6 font-weight-bold">Other ways to subscribe</h2>
+  <v-container class="pa-md-12 pa-sm-6 mx-auto text-center" max-width="1200" fluid>
+    <h2 class="text-h4 text-md-h3 mb-6 mb-md-12 font-weight-bold">
+      Other ways to subscribe
+    </h2>
 
-    <div class="d-flex ga-6 justify-center align-center flex-wrap">
-      <v-card
+    <v-row>
+      <v-col
         v-for="sponsor in sponsorships"
         :key="sponsor.name"
-        class="pa-6"
-        elevation="6"
-        max-width="400"
+        cols="12"
+        md="4"
       >
-        <v-card-title class="text-h5 font-weight-bold mb-4">{{ sponsor.name }}</v-card-title>
-
-        <v-icon aria-hidden="false" role="img" size="48">
-          {{ sponsor.icon }}
-        </v-icon>
-
-        <v-card-text class="text-body-1 mb-6">
-          Support Vuetify development directly through {{ sponsor.name }} and gain access to exclusive benefits and updates.
-        </v-card-text>
-
-        <v-btn
-          :href="sponsor.link"
-          class="mb-4"
-          color="primary"
-          rounded="lg"
-          size="large"
-          target="_blank"
+        <v-card
+          class="pa-6 h-100 d-flex flex-column text-center"
+          elevation="0"
+          rounded="xl"
+          border
         >
-          Sponsor on {{ sponsor.name }}
-        </v-btn>
+          <v-card-title class="text-h5 font-weight-bold mb-4">
+            {{ sponsor.name }}
+          </v-card-title>
 
-      </v-card>
-    </div>
+          <div class="d-flex justify-center align-center mb-4">
+            <v-icon
+              :icon="sponsor.icon"
+              aria-hidden="false"
+              color="primary"
+              role="img"
+              size="64"
+            />
+          </div>
+
+          <v-card-text class="text-body-1 text-medium-emphasis mb-6 flex-grow-1">
+            Support Vuetify development directly through {{ sponsor.name }} and gain access to exclusive benefits and updates.
+          </v-card-text>
+
+          <v-btn
+            :href="sponsor.link"
+            :text="`Sponsor on ${sponsor.name}`"
+            class="text-none"
+            color="primary"
+            rounded="lg"
+            size="large"
+            target="_blank"
+            variant="outlined"
+          />
+        </v-card>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
 <script setup lang="ts">
-
   const sponsorships = [
     {
       name: 'GitHub',
@@ -55,5 +69,4 @@
       icon: 'mdi-account-group-outline',
     },
   ]
-
 </script>
