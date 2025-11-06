@@ -1,15 +1,21 @@
 <template>
-  <v-container class=" d-flex justify-center align-center text-center py-10">
-    <v-card class="pa-10" elevation="6" max-width="600">
+  <v-container class=" d-flex justify-center align-center text-center py-8 ga-4">
+    <v-card
+      class="py-10"
+      elevation="6"
+      max-width="600"
+    >
       <v-card-title class="text-h4 font-weight-bold mb-4">Unlock Vuetify One</v-card-title>
 
       <v-card-text class="text-body-1 mb-6">
+        <h3 class="mb-1">{{ team ? 'Team Access' : 'Solo Developer' }}</h3>
         Get priority support, advanced themes, and the future of Vuetify UI<span v-if="team">, for your entire team, all</span> in one subscription.
       </v-card-text>
 
-      <v-row class="mb-6" justify="center">
+      <v-row justify="center">
         <v-col cols="12">
           <v-list density="compact">
+            <v-list-item v-if="team" prepend-icon="mdi-check">Access for up to 25 team members</v-list-item>
             <v-list-item prepend-icon="mdi-check">Ad Free Experience on all Vuetify properties</v-list-item>
             <v-list-item prepend-icon="mdi-check">Save and share across our platforms VPlay, VBin, and VStudio</v-list-item>
             <v-list-item prepend-icon="mdi-check">Pinned Navigation Items and Rail drawer in Documentation</v-list-item>
@@ -20,14 +26,14 @@
       </v-row>
 
       <div class="d-flex flex-column justify-center align-center mb-2">
-        <p class="text-h5 font-weight-bold">{{ price }}</p>
+        <p class="text-h5 font-weight-bold">${{ prices[team ? 'team' : 'solo'][interval] }}</p>
         <v-switch v-model="team" color="primary" label="Team Subscription" />
+
+        <v-btn color="primary" rounded="lg" size="x-large" @click="subscribe">
+          Subscribe Now
+        </v-btn>
+        <v-checkbox-btn v-model="interval" color="primary" false-value="month" label="Annual Billing (Save 20%)" true-value="year" />
       </div>
-
-      <v-btn class="mb-4" color="primary" rounded="lg" size="x-large">
-        Subscribe Now
-      </v-btn>
-
       <div class="text-caption text-medium-emphasis">
         Cancel any time. No long‑term commitment.
       </div>
@@ -36,11 +42,27 @@
 </template>
 
 <script setup>
+  const one = useOneStore()
   const team = ref(false)
+  const interval = ref('month')
 
-  const price = computed(() => {
-    return team.value ? '$29.99/month' : '$2.99/month'
-  })
+  const prices = {
+    solo: {
+      month: '2.99 /month',
+      year: '29.99 /year',
+    },
+    team: {
+      month: '29.99 /month',
+      year: '299.99 /year',
+    },
+  }
+
+  async function subscribe () {
+    await one.subscribe({
+      plan: team.value ? 'team' : 'solo',
+      interval: interval.value,
+    })
+  }
 </script>
 
 <style scoped>
