@@ -12,11 +12,12 @@ import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Directives
-import { Touch } from '@/directives/touch'
+import vTouch from '@/directives/touch'
 
 // Utilities
-import { computed, provide, ref, shallowRef, watch } from 'vue'
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { computed, nextTick, provide, ref, shallowRef, toRef, watch } from 'vue'
+import { convertToUnit, genericComponent, IN_BROWSER, PREFERS_REDUCED_MOTION, propsFactory, useRender } from '@/util'
+import { getScrollParent } from '@/util/getScrollParent'
 
 // Types
 import type { ComputedRef, InjectionKey, PropType, Ref } from 'vue'
@@ -65,6 +66,7 @@ export const makeVWindowProps = propsFactory({
     type: [Boolean, String],
     validator: (v: any) => typeof v === 'boolean' || v === 'hover',
   },
+  verticalArrows: [Boolean, String] as PropType<boolean | 'left' | 'right'>,
   touch: {
     type: [Object, Boolean] as PropType<boolean | TouchHandlers>,
     default: undefined,
@@ -85,6 +87,8 @@ export const makeVWindowProps = propsFactory({
     type: [Boolean, String] as PropType<boolean | 'force'>,
     default: 'force' as const,
   },
+  crossfade: Boolean,
+  transitionDuration: Number,
 
   ...makeComponentProps(),
   ...makeTagProps(),
@@ -100,9 +104,7 @@ export const VWindow = genericComponent<new <T>(
 ) => GenericProps<typeof props, typeof slots>>()({
   name: 'VWindow',
 
-  directives: {
-    Touch,
-  },
+  directives: { vTouch },
 
   props: makeVWindowProps(),
 
@@ -121,6 +123,10 @@ export const VWindow = genericComponent<new <T>(
     const isRtlReverse = computed(() => isRtl.value ? !props.reverse : props.reverse)
     const isReversed = shallowRef(false)
     const transition = computed(() => {
+      if (props.crossfade) {
+        return 'v-window-crossfade-transition'
+      }
+
       const axis = props.direction === 'vertical' ? 'y' : 'x'
       const reverse = isRtlReverse.value ? !isReversed.value : isReversed.value
       const direction = reverse ? '-reverse' : ''
@@ -134,7 +140,18 @@ export const VWindow = genericComponent<new <T>(
       return group.items.value.findIndex(item => group.selected.value.includes(item.id))
     })
 
+    // Fix for https://github.com/vuetifyjs/vuetify/issues/18447
     watch(activeIndex, (newVal, oldVal) => {
+      let scrollableParent: HTMLElement | undefined
+      const savedScrollPosition = { left: 0, top: 0 }
+
+      if (IN_BROWSER && oldVal >= 0) {
+        scrollableParent = getScrollParent(rootRef.value)
+
+        savedScrollPosition.left = scrollableParent?.scrollLeft
+        savedScrollPosition.top = scrollableParent?.scrollTop
+      }
+
       const itemsLength = group.items.value.length
       const lastIndex = itemsLength - 1
 
@@ -147,7 +164,27 @@ export const VWindow = genericComponent<new <T>(
       } else {
         isReversed.value = newVal < oldVal
       }
-    })
+
+      nextTick(() => {
+        if (!IN_BROWSER || !scrollableParent) return
+
+        const currentScrollY = scrollableParent.scrollTop
+
+        if (currentScrollY !== savedScrollPosition.top) {
+          scrollableParent.scrollTo({ ...savedScrollPosition, behavior: 'instant' })
+        }
+
+        requestAnimationFrame(() => {
+          if (!scrollableParent) return
+
+          const rafScrollY = scrollableParent.scrollTop
+
+          if (rafScrollY !== savedScrollPosition.top) {
+            scrollableParent.scrollTo({ ...savedScrollPosition, behavior: 'instant' })
+          }
+        })
+      })
+    }, { flush: 'sync' }) // Run synchronously before DOM updates
 
     provide(VWindowSymbol, {
       transition,
@@ -157,8 +194,8 @@ export const VWindow = genericComponent<new <T>(
       rootRef,
     })
 
-    const canMoveBack = computed(() => props.continuous || activeIndex.value !== 0)
-    const canMoveForward = computed(() => props.continuous || activeIndex.value !== group.items.value.length - 1)
+    const canMoveBack = toRef(() => props.continuous || activeIndex.value !== 0)
+    const canMoveForward = toRef(() => props.continuous || activeIndex.value !== group.items.value.length - 1)
 
     function prev () {
       canMoveBack.value && group.prev()
@@ -230,11 +267,18 @@ export const VWindow = genericComponent<new <T>(
           'v-window',
           {
             'v-window--show-arrows-on-hover': props.showArrows === 'hover',
+            'v-window--vertical-arrows': !!props.verticalArrows,
+            'v-window--crossfade': !!props.crossfade,
           },
           themeClasses.value,
           props.class,
         ]}
-        style={ props.style }
+        style={[
+          props.style,
+          props.transitionDuration && !PREFERS_REDUCED_MOTION
+            ? { '--v-window-transition-duration': convertToUnit(props.transitionDuration, 'ms') }
+            : undefined,
+        ]}
         v-touch={ touchOptions.value }
       >
         <div
@@ -246,7 +290,13 @@ export const VWindow = genericComponent<new <T>(
           { slots.default?.({ group }) }
 
           { props.showArrows !== false && (
-            <div class="v-window__controls">
+            <div
+              class={[
+                'v-window__controls',
+                { 'v-window__controls--left': props.verticalArrows === 'left' || props.verticalArrows === true },
+                { 'v-window__controls--right': props.verticalArrows === 'right' },
+              ]}
+            >
               { arrows.value }
             </div>
           )}

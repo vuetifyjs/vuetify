@@ -6,7 +6,6 @@
     "displayDate": "The date displayed in the picker header.",
     "eventColor": "Sets the color for event dot. It can be string (all events will have the same color) or `object` where attribute is the event date and value is boolean/color/array of colors for specified date or `function` taking date as a parameter and returning boolean/color/array of colors for that date.",
     "events": "Array of dates or object defining events or colors or function returning boolean/color/array of colors.",
-    "expandIcon": "Icon used for **view-mode** toggle.",
     "headerColor": "Allows you to set a different color for the header when used in conjunction with the `color` prop.",
     "hideHeader": "Hides the header.",
     "hideWeekdays": "Hides the weekdays.",
@@ -14,7 +13,6 @@
     "month": "Sets the month.",
     "weekdays": "Array of weekdays.",
     "year": "Sets the year.",
-    "firstDayOfWeek": "Sets the first day of the week, starting with 0 for Sunday.",
     "flat": "Removes  elevation.",
     "format": "Takes a date object and returns it in a specified format.",
     "header": "Text shown when no **display-date** is set.",
@@ -41,7 +39,6 @@
     "type": "Determines the type of the picker - `date` for date picker, `month` for month picker.",
     "value": "Date picker model (ISO 8601 format, YYYY-mm-dd or YYYY-mm).",
     "viewMode": "Determines which picker in the date or month picker is being displayed. Allowed values: `'month'`, `'months'`, `'year'`.",
-    "weekdayFormat": "Allows you to customize the format of the weekday string that appears in the body of the calendar. Called with date (ISO 8601 **date** string) arguments.",
     "width": "Width of the picker.",
     "yearFormat": "Allows you to customize the format of the year string that appears in the header of the calendar. Called with date (ISO 8601 **date** string) arguments.",
     "yearIcon": "Sets the icon in the year selection button."

@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   nav: Time pickers
   title: Time picker component
@@ -16,25 +17,7 @@ The `v-time-picker` is stand-alone component that can be utilized in many existi
 
 <PageFeatures />
 
-::: warning
-
-This feature requires [v3.5.12](/getting-started/release-notes/?version=v3.5.12)
-
-:::
-
-## Installation
-
-Labs components require manual import and registration with the Vuetify instance.
-
-```js { resource="src/plugins/vuetify.js" }
-import { VTimePicker } from 'vuetify/labs/VTimePicker'
-
-export default createVuetify({
-  components: {
-    VTimePicker,
-  },
-})
-```
+<DocIntroduced version="3.9.0" />
 
 ## Usage
 
@@ -64,7 +47,7 @@ You can specify allowed times using arrays, objects, and functions. You can also
 
 #### Colors
 
-Time picker colors can be set using the `color` and `header-color` props. If `header-color` prop is not provided  header will use the `color` prop value."
+Time picker colors can be set using the `color` prop.
 
 <ExamplesExample file="v-time-picker/prop-color" />
 

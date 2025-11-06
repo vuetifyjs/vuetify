@@ -12,7 +12,8 @@
   },
   "events": {
     "keydown": "Emitted when **any** key is pressed, textarea must be focused.",
-    "mousedown:control": "Event that is emitted when using mousedown on the main control area."
+    "mousedown:control": "Event that is emitted when using mousedown on the main control area.",
+    "update:rows": "Emitted when the number of rows changes."
   },
   "slots": {
     "counter": "Slot for the input’s counter text."

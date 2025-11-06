@@ -4,9 +4,9 @@ import { VForm } from '@/components/VForm'
 import { VListItem } from '@/components/VList'
 
 // Utilities
-import { commands, generate, render, screen, userEvent } from '@test'
+import { commands, generate, render, screen, userEvent, wait, waitForClickable } from '@test'
 import { getAllByRole } from '@testing-library/vue'
-import { cloneVNode, ref } from 'vue'
+import { cloneVNode, computed, nextTick, ref } from 'vue'
 
 const variants = ['underlined', 'outlined', 'filled', 'solo', 'plain'] as const
 const densities = ['default', 'comfortable', 'compact'] as const
@@ -46,6 +46,24 @@ const stories = Object.fromEntries(Object.entries({
 )]))
 
 describe('VSelect', () => {
+  it('should toggle menu with dropdown icon', async () => {
+    const { element } = render(() => (
+      <VSelect items={['Item #1', 'Item #2']} />
+    ))
+
+    const menuIcon = screen.getByCSS('.v-icon')
+    expect(screen.queryAllByCSS('.v-list-item')).toHaveLength(0)
+    expect(element).not.toHaveClass('v-select--active-menu')
+
+    await userEvent.click(menuIcon)
+    await expect.poll(() => screen.queryAllByCSS('.v-list-item')).toHaveLength(2)
+    expect(element).toHaveClass('v-select--active-menu')
+
+    await userEvent.click(menuIcon)
+    await expect.poll(() => screen.queryAllByCSS('.v-list-item')).toHaveLength(0)
+    expect(element).not.toHaveClass('v-select--active-menu')
+  })
+
   it('should render selection slot', () => {
     const items = [
       { title: 'a' },
@@ -133,7 +151,7 @@ describe('VSelect', () => {
       await expect(screen.findAllByRole('option', { selected: true })).resolves.toHaveLength(2)
 
       const option = screen.getAllByRole('option')[2]
-      await commands.waitStable('.v-list')
+      await waitForClickable(option)
       await userEvent.click(option)
       expect(selectedItems.value).toStrictEqual(['California', 'Colorado', 'Florida'])
 
@@ -184,8 +202,9 @@ describe('VSelect', () => {
 
       await userEvent.click(element)
       await expect(screen.findAllByRole('option', { selected: true })).resolves.toHaveLength(2)
-      await commands.waitStable('.v-list')
-      await userEvent.click(screen.getAllByRole('option')[2])
+      const option = screen.getAllByRole('option')[2]
+      await waitForClickable(option)
+      await userEvent.click(option)
       expect(selectedItems.value).toStrictEqual([
         {
           title: 'Item 1',
@@ -248,8 +267,8 @@ describe('VSelect', () => {
           items={ items }
           multiple
           returnObject
-          item-title="text"
-          item-value="id"
+          itemTitle="text"
+          itemValue="id"
         />
       ))
 
@@ -260,6 +279,7 @@ describe('VSelect', () => {
       expect(element).toHaveTextContent('Item 1')
       expect(element).toHaveTextContent('Item 2')
 
+      await waitForClickable(options[0])
       await userEvent.click(options[0])
       expect(selectedItems.value).toStrictEqual([{
         text: 'Item 2',
@@ -398,8 +418,8 @@ describe('VSelect', () => {
       <VSelect
         items={ items }
         modelValue={ selectedItems }
-        item-title={ itemTitleFunc }
-        item-value="id"
+        itemTitle={ itemTitleFunc }
+        itemValue="id"
       />
     ))
 
@@ -451,8 +471,8 @@ describe('VSelect', () => {
           v-model={ selectedItem.value }
           hideSelected
           items={ items }
-          item-title="text"
-          item-value="id"
+          itemTitle="text"
+          itemValue="id"
           returnObject
         />
       ))
@@ -464,6 +484,7 @@ describe('VSelect', () => {
       expect(options).toHaveLength(2)
       expect(options[0]).toHaveTextContent('Item 2')
 
+      await waitForClickable(options[0])
       await userEvent.click(options[0])
       expect(selectedItem.value).toStrictEqual({ text: 'Item 2', id: 'item2' })
       expect(screen.queryAllByRole('option', { selected: true })).toHaveLength(0)
@@ -511,7 +532,7 @@ describe('VSelect', () => {
     const { element } = render(() => (
       <VSelect
         chips
-        closable-chips
+        closableChips
         items={['foo', 'bar']}
         label="Select"
         modelValue={['foo', 'bar']}
@@ -538,7 +559,7 @@ describe('VSelect', () => {
       <VSelect
         v-model={ selectedItem.value }
         chips
-        closable-chips
+        closableChips
         items={['abc', 'def']}
       />
     ))
@@ -567,14 +588,30 @@ describe('VSelect', () => {
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/18556
-  it('should show menu if focused and items are added', async () => {
-    const { rerender } = render(VSelect)
+  // https://github.com/vuetifyjs/vuetify/issues/21205
+  it('should show menu if focused and items are added when hideNoData is true"', async () => {
+    const items = ref()
+    render(() => <VSelect items={ items.value } hideNoData />)
 
     await userEvent.keyboard('{Tab}')
     expect(screen.queryByRole('listbox')).toBeNull()
 
-    await rerender({ items: ['Foo', 'Bar'] })
+    items.value = ['Foo', 'Bar']
+    await nextTick()
     await expect.poll(() => screen.queryByRole('listbox')).toBeVisible()
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/21205
+  it('should not show menu if focused and items are added when hideNoData is false', async () => {
+    const items = ref()
+    render(() => <VSelect items={ items.value } />)
+
+    await userEvent.keyboard('{Tab}')
+    expect(screen.queryByRole('listbox')).toBeNull()
+
+    items.value = ['Foo', 'Bar']
+    await nextTick()
+    await expect.poll(() => screen.queryByRole('listbox')).toBeNull()
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/19346
@@ -679,6 +716,80 @@ describe('VSelect', () => {
       await expect.poll(() => screen.getAllByText('Bar')).toHaveLength(2)
       expect(getAllByRole(menu, 'option', { selected: true })).toHaveLength(2)
     })
+
+    it('should not fire @update:focus twice when clicking bottom of input', async () => {
+      const onFocus = vi.fn()
+      const { element } = render(() => (
+        <VSelect onUpdate:focused={ onFocus } />
+      ))
+
+      await userEvent.click(element, { y: 1 })
+
+      expect(onFocus).toHaveBeenCalledTimes(1)
+    })
+  })
+
+  it('should have reactive accessibility attributes', async () => {
+    const { getByRole } = render(() => (
+      <VSelect items={['Foo']} />
+    ))
+
+    const inputField = getByRole('combobox', { expanded: false })
+    expect(inputField).toHaveAttribute('aria-expanded', 'false')
+    expect(inputField).toHaveAttribute('aria-label', 'Open')
+    expect(inputField.getAttribute('aria-controls')).toMatch(/^menu-v-\d+/)
+
+    await userEvent.click(inputField)
+    await commands.waitStable('.v-list')
+
+    expect(inputField).toHaveAttribute('aria-expanded', 'true')
+    expect(inputField).toHaveAttribute('aria-label', 'Close')
+
+    await commands.waitStable('.v-list')
+    await userEvent.click(screen.getAllByRole('option')[0])
+
+    expect(inputField).toHaveAttribute('aria-expanded', 'false')
+    expect(inputField).toHaveAttribute('aria-label', 'Open')
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/22052
+  it('should keep the checkboxes in sync with the model', async () => {
+    const items = [
+      { title: 'Both', value: 'both' },
+      { title: 'Option A', value: 'a' },
+      { title: 'Option B', value: 'b' },
+    ]
+
+    const model = ref<string[]>([])
+    const selectModel = computed({
+      get: () => model.value.length === 2 ? ['both'] : model.value,
+      set: val => model.value = val.includes('both') ? ['a', 'b'] : val,
+    })
+
+    const { element } = render(() => (
+      <VSelect
+        v-model={ selectModel.value }
+        items={ items }
+        multiple
+        itemProps={ (item: any) =>
+          (selectModel.value?.includes('both') && item.value !== 'both') ? { disabled: true } : {}
+        }
+      />
+    ))
+
+    await userEvent.click(element)
+    await wait(100)
+
+    const options = screen.getAllByRole('option')
+    expect(options).toHaveLength(3)
+
+    await userEvent.click(screen.getAllByCSS('.v-checkbox-btn input')[1])
+    await userEvent.click(screen.getAllByCSS('.v-checkbox-btn input')[2])
+
+    await expect.poll(() => model.value).toStrictEqual(['a', 'b'])
+    expect(selectModel.value).toStrictEqual(['both'])
+    expect(screen.getAllByCSS('.v-checkbox-btn input')[0]).toBeChecked()
+    expect(screen.getAllByCSS('.v-checkbox-btn input:checked')).toHaveLength(1)
   })
 
   describe('Showcase', () => {

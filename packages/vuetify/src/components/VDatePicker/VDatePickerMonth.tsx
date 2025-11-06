@@ -7,10 +7,11 @@ import { VBtn } from '@/components/VBtn'
 // Composables
 import { makeCalendarProps, useCalendar } from '@/composables/calendar'
 import { useDate } from '@/composables/date/date'
+import { useLocale } from '@/composables/locale'
 import { MaybeTransition } from '@/composables/transition'
 
 // Utilities
-import { computed, ref, shallowRef, watch } from 'vue'
+import { computed, ref, shallowRef, toRef, watch } from 'vue'
 import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
@@ -56,15 +57,16 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
 
   setup (props, { emit, slots }) {
     const daysRef = ref()
+    const { t } = useLocale()
 
-    const { daysInMonth, model, weekNumbers } = useCalendar(props)
+    const { daysInMonth, model, weekNumbers, weekdayLabels } = useCalendar(props)
     const adapter = useDate()
 
     const rangeStart = shallowRef()
     const rangeStop = shallowRef()
     const isReverse = shallowRef(false)
 
-    const transition = computed(() => {
+    const transition = toRef(() => {
       return !isReverse.value ? props.transition : props.reverseTransition
     })
 
@@ -96,6 +98,7 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
         rangeStart.value = model.value[0]
         rangeStop.value = undefined
       }
+
       if (!rangeStart.value) {
         rangeStart.value = _value
         model.value = [rangeStart.value]
@@ -111,22 +114,18 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
           rangeStop.value = adapter.endOfDay(_value)
         }
 
-        const diff = adapter.getDiff(rangeStop.value, rangeStart.value, 'days')
-        const datesInRange = [rangeStart.value]
-
-        for (let i = 1; i < diff; i++) {
-          const nextDate = adapter.addDays(rangeStart.value, i)
-          datesInRange.push(nextDate)
-        }
-
-        datesInRange.push(rangeStop.value)
-
-        model.value = datesInRange
+        model.value = [rangeStart.value, rangeStop.value]
       } else {
         rangeStart.value = value
         rangeStop.value = undefined
         model.value = [rangeStart.value]
       }
+    }
+
+    function getDateAriaLabel (item: any) {
+      const fullDate = adapter.format(item.date, 'fullDateWithWeekday')
+      const localeKey = item.isToday ? 'currentDate' : 'selectDate'
+      return t(`$vuetify.datePicker.ariaLabel.${localeKey}`, fullDate)
     }
 
     function onMultipleClick (value: unknown) {
@@ -152,7 +151,10 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
     }
 
     useRender(() => (
-      <div class="v-date-picker-month">
+      <div
+        class="v-date-picker-month"
+        style={{ '--v-date-picker-days-in-week': props.weekdays.length }}
+      >
         { props.showWeek && (
           <div key="weeks" class="v-date-picker-month__weeks">
             { !props.hideWeekdays && (
@@ -175,7 +177,7 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
             key={ daysInMonth.value[0].date?.toString() }
             class="v-date-picker-month__days"
           >
-            { !props.hideWeekdays && adapter.getWeekdays(props.firstDayOfWeek).map(weekDay => (
+            { !props.hideWeekdays && weekdayLabels.value.map(weekDay => (
               <div
                 class={[
                   'v-date-picker-month__day',
@@ -194,13 +196,19 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
                   ripple: false,
                   text: item.localized,
                   variant: item.isSelected ? 'flat' : item.isToday ? 'outlined' : 'text',
+                  'aria-label': getDateAriaLabel(item),
+                  'aria-current': item.isToday ? 'date' : undefined,
                   onClick: () => onClick(item.date),
                 },
                 item,
                 i,
               } as const
 
-              if (atMax.value && !item.isSelected) {
+              const isSelected = props.multiple === 'range' && model.value.length === 2
+                ? adapter.isWithinRange(item.date, model.value as [Date, Date])
+                : model.value.some(selectedDate => adapter.isSameDay(selectedDate, item.date))
+
+              if (atMax.value && !isSelected) {
                 item.isDisabled = true
               }
 
@@ -211,7 +219,7 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
                     {
                       'v-date-picker-month__day--adjacent': item.isAdjacent,
                       'v-date-picker-month__day--hide-adjacent': item.isHidden,
-                      'v-date-picker-month__day--selected': item.isSelected,
+                      'v-date-picker-month__day--selected': isSelected,
                       'v-date-picker-month__day--week-end': item.isWeekEnd,
                       'v-date-picker-month__day--week-start': item.isWeekStart,
                     },

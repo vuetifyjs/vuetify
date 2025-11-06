@@ -2,7 +2,6 @@
   <v-progress-circular
     v-if="pwa.availableOffline && pwa.isUpdating"
     :model-value="pwa.progress / pwa.progressTotal * 100"
-    class="me-n2"
     color="primary"
     size="42"
     width="1"
@@ -30,7 +29,7 @@
   const { name } = useRoute()
 
   function onClick () {
-    gtagClick('app-bar', 'settings-toggle', name)
+    sweClick('app-bar', 'settings-toggle', name)
 
     app.settings = !app.settings
   }

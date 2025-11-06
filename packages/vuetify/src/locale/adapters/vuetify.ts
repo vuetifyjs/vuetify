@@ -2,7 +2,7 @@
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { ref, shallowRef, watch } from 'vue'
+import { ref, shallowRef, toRef, watch } from 'vue'
 import { consoleError, consoleWarn, getObjectValueByPath } from '@/util'
 
 // Locales
@@ -63,6 +63,11 @@ function createNumberFunction (current: Ref<string>, fallback: Ref<string>) {
   }
 }
 
+function inferDecimalSeparator (current: Ref<string>, fallback: Ref<string>) {
+  const format = createNumberFunction(current, fallback)
+  return format(0.1).includes(',') ? ',' : '.'
+}
+
 function useProvided <T> (props: any, prop: string, provided: Ref<T>) {
   const internal = useProxiedModel(props, prop, props[prop] ?? provided.value)
 
@@ -89,6 +94,7 @@ function createProvideFunction (state: { current: Ref<string>, fallback: Ref<str
       current,
       fallback,
       messages,
+      decimalSeparator: toRef(() => inferDecimalSeparator(current, fallback)),
       t: createTranslateFunction(current, fallback, messages),
       n: createNumberFunction(current, fallback),
       provide: createProvideFunction({ current, fallback, messages }),
@@ -106,6 +112,7 @@ export function createVuetifyAdapter (options?: LocaleOptions): LocaleInstance {
     current,
     fallback,
     messages,
+    decimalSeparator: toRef(() => options?.decimalSeparator ?? inferDecimalSeparator(current, fallback)),
     t: createTranslateFunction(current, fallback, messages),
     n: createNumberFunction(current, fallback),
     provide: createProvideFunction({ current, fallback, messages }),

@@ -40,18 +40,22 @@ import type { VListChildrenSlots } from './VListChildren'
 import type { ItemProps, ListItem } from '@/composables/list-items'
 import type { GenericProps, SelectItemKey } from '@/util'
 
-export interface InternalListItem<T = any> extends ListItem<T> {
-  type?: 'item' | 'subheader' | 'divider'
-}
+export interface InternalListItem<T = any> extends ListItem<T> {}
 
-function transformItem (props: ItemProps & { itemType?: string }, item: any): InternalListItem {
-  const type = getPropertyFromItem(item, props.itemType, 'item')
+const itemTypes = new Set(['item', 'divider', 'subheader'])
+
+function transformItem (props: ItemProps, item: any): ListItem {
   const title = isPrimitive(item) ? item : getPropertyFromItem(item, props.itemTitle)
-  const value = getPropertyFromItem(item, props.itemValue, undefined)
+  const value = isPrimitive(item) ? item : getPropertyFromItem(item, props.itemValue, undefined)
   const children = getPropertyFromItem(item, props.itemChildren)
   const itemProps = props.itemProps === true
     ? omit(item, ['children'])
     : getPropertyFromItem(item, props.itemProps)
+
+  let type = getPropertyFromItem(item, props.itemType, 'item')
+  if (!itemTypes.has(type)) {
+    type = 'item'
+  }
 
   const _props = {
     title,
@@ -69,7 +73,7 @@ function transformItem (props: ItemProps & { itemType?: string }, item: any): In
   }
 }
 
-function transformItems (props: ItemProps & { itemType?: string }, items: (string | object)[]) {
+function transformItems (props: ItemProps, items: (string | object)[]) {
   const array: InternalListItem[] = []
 
   for (const item of items) {
@@ -79,7 +83,7 @@ function transformItems (props: ItemProps & { itemType?: string }, items: (strin
   return array
 }
 
-export function useListItems (props: ItemProps & { itemType?: string }) {
+export function useListItems (props: ItemProps) {
   const items = computed(() => transformItems(props, props.items))
 
   return { items }
@@ -92,6 +96,7 @@ export const makeVListProps = propsFactory({
   activeClass: String,
   bgColor: String,
   disabled: Boolean,
+  filterable: Boolean,
   expandIcon: IconValue,
   collapseIcon: IconValue,
   lines: {
@@ -103,7 +108,7 @@ export const makeVListProps = propsFactory({
 
   'onClick:open': EventProp<[{ id: unknown, value: boolean, path: unknown[] }]>(),
   'onClick:select': EventProp<[{ id: unknown, value: boolean, path: unknown[] }]>(),
-  'onUpdate:opened': EventProp<[]>(),
+  'onUpdate:opened': EventProp<[unknown]>(),
   ...makeNestedProps({
     selectStrategy: 'single-leaf' as const,
     openStrategy: 'list' as const,
@@ -113,10 +118,6 @@ export const makeVListProps = propsFactory({
   ...makeDensityProps(),
   ...makeDimensionProps(),
   ...makeElevationProps(),
-  itemType: {
-    type: String,
-    default: 'type',
-  },
   ...makeItemsProps(),
   ...makeRoundedProps(),
   ...makeTagProps(),
@@ -162,39 +163,42 @@ export const VList = genericComponent<new <
   setup (props, { slots }) {
     const { items } = useListItems(props)
     const { themeClasses } = provideTheme(props)
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'bgColor'))
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.bgColor)
     const { borderClasses } = useBorder(props)
     const { densityClasses } = useDensity(props)
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props)
     const { children, open, parents, select, getPath } = useNested(props)
-    const lineClasses = computed(() => props.lines ? `v-list--${props.lines}-line` : undefined)
-    const activeColor = toRef(props, 'activeColor')
-    const baseColor = toRef(props, 'baseColor')
-    const color = toRef(props, 'color')
+    const lineClasses = toRef(() => props.lines ? `v-list--${props.lines}-line` : undefined)
+    const activeColor = toRef(() => props.activeColor)
+    const baseColor = toRef(() => props.baseColor)
+    const color = toRef(() => props.color)
+    const isSelectable = toRef(() => (props.selectable || props.activatable))
 
-    createList()
+    createList({
+      filterable: props.filterable,
+    })
 
     provideDefaults({
       VListGroup: {
         activeColor,
         baseColor,
         color,
-        expandIcon: toRef(props, 'expandIcon'),
-        collapseIcon: toRef(props, 'collapseIcon'),
+        expandIcon: toRef(() => props.expandIcon),
+        collapseIcon: toRef(() => props.collapseIcon),
       },
       VListItem: {
-        activeClass: toRef(props, 'activeClass'),
+        activeClass: toRef(() => props.activeClass),
         activeColor,
         baseColor,
         color,
-        density: toRef(props, 'density'),
-        disabled: toRef(props, 'disabled'),
-        lines: toRef(props, 'lines'),
-        nav: toRef(props, 'nav'),
-        slim: toRef(props, 'slim'),
-        variant: toRef(props, 'variant'),
+        density: toRef(() => props.density),
+        disabled: toRef(() => props.disabled),
+        lines: toRef(() => props.lines),
+        nav: toRef(() => props.nav),
+        slim: toRef(() => props.slim),
+        variant: toRef(() => props.variant),
       },
     })
 
@@ -218,7 +222,11 @@ export const VList = genericComponent<new <
     function onKeydown (e: KeyboardEvent) {
       const target = e.target as HTMLElement
 
-      if (!contentRef.value || ['INPUT', 'TEXTAREA'].includes(target.tagName)) return
+      if (!contentRef.value ||
+        (target.tagName === 'INPUT' && ['Home', 'End'].includes(e.key)) ||
+        target.tagName === 'TEXTAREA') {
+        return
+      }
 
       if (e.key === 'ArrowDown') {
         focus('next')
@@ -239,7 +247,7 @@ export const VList = genericComponent<new <
       isFocused.value = true
     }
 
-    function focus (location?: 'next' | 'prev' | 'first' | 'last') {
+    function focus (location?: 'next' | 'prev' | 'first' | 'last' | number) {
       if (contentRef.value) {
         return focusChild(contentRef.value, location)
       }
@@ -271,7 +279,7 @@ export const VList = genericComponent<new <
             props.style,
           ]}
           tabindex={ props.disabled ? -1 : 0 }
-          role="listbox"
+          role={ isSelectable.value ? 'listbox' : 'list' }
           aria-activedescendant={ undefined }
           onFocusin={ onFocusin }
           onFocusout={ onFocusout }

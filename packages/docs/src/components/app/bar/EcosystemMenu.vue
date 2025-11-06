@@ -17,9 +17,19 @@
   const items = computed(() => ([
     { subheader: t('social') },
     {
+      title: 'Blog',
+      to: rpath('/blog'),
+      appendIcon: 'mdi-post-outline',
+    },
+    {
       title: 'X',
       href: 'https://x.com/vuetifyjs',
       appendIcon: '$x',
+    },
+    {
+      title: 'bluesky',
+      href: 'https://bsky.app/profile/vuetify.bsky.social',
+      appendIcon: 'mdi-bluesky',
     },
     {
       title: 'Discord',

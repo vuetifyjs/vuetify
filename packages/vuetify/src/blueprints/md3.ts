@@ -10,7 +10,7 @@ export const md3: Blueprint = {
       flat: true,
     },
     VAutocomplete: {
-      variant: 'filled',
+      variant: 'outlined',
     },
     VBanner: {
       color: 'primary',
@@ -32,12 +32,16 @@ export const md3: Blueprint = {
     VCheckbox: {
       color: 'secondary',
       inset: true,
+      indentDetails: true,
     },
     VChip: {
       rounded: 'sm',
     },
     VCombobox: {
-      variant: 'filled',
+      variant: 'outlined',
+    },
+    VDateInput: {
+      variant: 'outlined',
     },
     VDatePicker: {
       controlHeight: 48,
@@ -52,6 +56,9 @@ export const md3: Blueprint = {
         rounded: 'circle',
       },
     },
+    VFileInput: {
+      variant: 'outlined',
+    },
     VNavigationDrawer: {
       // VList: {
       //   nav: true,
@@ -60,20 +67,38 @@ export const md3: Blueprint = {
       //   },
       // },
     },
+    VNumberInput: {
+      variant: 'outlined',
+
+      VBtn: {
+        color: undefined,
+        rounded: undefined,
+      },
+    },
+    VRadioGroup: {
+      indentDetails: true,
+    },
     VSelect: {
-      variant: 'filled',
+      variant: 'outlined',
     },
     VSlider: {
       color: 'primary',
+      indentDetails: true,
+    },
+    VRangeSlider: {
+      indentDetails: true,
+    },
+    VSwitch: {
+      indentDetails: true,
     },
     VTabs: {
       color: 'primary',
     },
     VTextarea: {
-      variant: 'filled',
+      variant: 'outlined',
     },
     VTextField: {
-      variant: 'filled',
+      variant: 'outlined',
     },
     VToolbar: {
       VBtn: {

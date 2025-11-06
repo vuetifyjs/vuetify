@@ -11,7 +11,7 @@ import path from 'upath'
 const require = createRequire(import.meta.url)
 
 const pkg = JSON.parse(readFileSync('../../package.json', 'utf8'))
-const wdioPkg = JSON.parse(readFileSync(path.resolve(require.resolve('webdriverio'), '../../../package.json'), 'utf8'))
+const wdioPkg = JSON.parse(readFileSync(path.resolve(require.resolve('webdriverio'), '../../package.json'), 'utf8'))
 const CLIENT_INFO = `${pkg.name}/${pkg.version}`
 const ENV_INFO = `${wdioPkg.name}/${wdioPkg.version}`
 
@@ -32,11 +32,11 @@ function scroll (ctx: BrowserCommandContext, x: number, y: number) {
   return ctx.browser.scroll(x, y)
 }
 
-export function isDisplayedInViewport (ctx: BrowserCommandContext, el: any) {
-  return ctx.browser.$(el).isDisplayedInViewport()
+function isDisplayed (ctx: BrowserCommandContext, selector: string, withinViewport = false) {
+  return ctx.browser.$(selector).isDisplayed({ withinViewport })
 }
 
-export async function percySnapshot (ctx: BrowserCommandContext, name: string, options?: PercyOptions) {
+async function percySnapshot (ctx: BrowserCommandContext, name: string, options?: PercyOptions) {
   if (!(await percy.isPercyEnabled())) return
 
   try {
@@ -60,11 +60,52 @@ export async function percySnapshot (ctx: BrowserCommandContext, name: string, o
   }
 }
 
-export async function waitStable (ctx: BrowserCommandContext, el: any) {
-  return ctx.browser.$(el).waitForStable()
+async function waitStable (ctx: BrowserCommandContext, selector: string) {
+  return ctx.browser.$(selector).waitForStable()
 }
 
-export const commands = { drag, scroll, isDisplayedInViewport, percySnapshot, waitStable }
+async function waitForClickable (ctx: BrowserCommandContext, selector: string) {
+  return ctx.browser.$(selector).waitForClickable()
+}
+
+async function setFocusEmulationEnabled (ctx: BrowserCommandContext) {
+  return ctx.browser.sendCommand('Emulation.setFocusEmulationEnabled', { enabled: true })
+}
+
+async function setReduceMotionEnabled (ctx: BrowserCommandContext) {
+  return ctx.browser.sendCommand('Emulation.setEmulatedMedia', {
+    features: [{ name: 'prefers-reduced-motion', value: 'reduce' }],
+  })
+}
+
+let abortTimeout: ReturnType<typeof setTimeout>
+function abortAfter (ctx: BrowserCommandContext, delay: number, name: string) {
+  abortTimeout = setTimeout(async () => {
+    // eslint-disable-next-line no-console
+    console.error(`[Error] Test timeout: Aborting after ${delay}ms for ${name} in ${ctx.testPath}`)
+    // eslint-disable-next-line no-console
+    console.error('[Warning] "chrome" process might still be running and require manual shutdown.')
+    process.exitCode = 1
+    await ctx.project.vitest.exit(true)
+  }, delay)
+}
+
+function clearAbortTimeout (ctx: BrowserCommandContext) {
+  clearTimeout(abortTimeout)
+}
+
+export const commands = {
+  drag,
+  scroll,
+  isDisplayed,
+  percySnapshot,
+  waitStable,
+  waitForClickable,
+  setFocusEmulationEnabled,
+  setReduceMotionEnabled,
+  abortAfter,
+  clearAbortTimeout,
+}
 
 export type CustomCommands = {
   [k in keyof typeof commands]: typeof commands[k] extends (ctx: any, ...args: infer A) => any

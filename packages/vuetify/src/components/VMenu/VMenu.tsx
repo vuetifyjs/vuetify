@@ -23,7 +23,7 @@ import {
   onDeactivated,
   provide,
   ref,
-  shallowRef,
+  shallowRef, toRef,
   useId,
   watch,
 } from 'vue'
@@ -41,7 +41,6 @@ import {
 } from '@/util'
 
 // Types
-import type { Component } from 'vue'
 import type { OverlaySlots } from '@/components/VOverlay/VOverlay'
 
 export const makeVMenuProps = propsFactory({
@@ -49,6 +48,7 @@ export const makeVMenuProps = propsFactory({
   // disableKeys: Boolean,
   id: String,
   submenu: Boolean,
+  disableInitialFocus: Boolean,
 
   ...omit(makeVOverlayProps({
     closeDelay: 250,
@@ -58,7 +58,7 @@ export const makeVMenuProps = propsFactory({
     openDelay: 300,
     scrim: false,
     scrollStrategy: 'reposition' as const,
-    transition: { component: VDialogTransition as Component },
+    transition: { component: VDialogTransition },
   }), ['absolute']),
 }, 'VMenu')
 
@@ -77,7 +77,7 @@ export const VMenu = genericComponent<OverlaySlots>()({
     const { isRtl } = useRtl()
 
     const uid = useId()
-    const id = computed(() => props.id || `v-menu-${uid}`)
+    const id = toRef(() => props.id || `v-menu-${uid}`)
 
     const overlay = ref<VOverlay>()
 
@@ -109,6 +109,16 @@ export const VMenu = genericComponent<OverlaySlots>()({
     })
     onDeactivated(() => isActive.value = false)
 
+    let focusTrapSuppressed = false
+    let focusTrapSuppressionTimeout = -1
+
+    async function onPointerdown () {
+      focusTrapSuppressed = true
+      focusTrapSuppressionTimeout = window.setTimeout(() => {
+        focusTrapSuppressed = false
+      }, 100)
+    }
+
     async function onFocusIn (e: FocusEvent) {
       const before = e.relatedTarget as HTMLElement | null
       const after = e.target as HTMLElement | null
@@ -119,27 +129,38 @@ export const VMenu = genericComponent<OverlaySlots>()({
         isActive.value &&
         before !== after &&
         overlay.value?.contentEl &&
-        // We're the topmost menu
-        overlay.value?.globalTop &&
+        // We're the menu without open submenus or overlays
+        overlay.value?.localTop &&
         // It isn't the document or the menu body
         ![document, overlay.value.contentEl].includes(after!) &&
         // It isn't inside the menu body
         !overlay.value.contentEl.contains(after)
       ) {
-        const focusable = focusableChildren(overlay.value.contentEl)
-        focusable[0]?.focus()
+        if (focusTrapSuppressed) {
+          if (!props.openOnHover && !overlay.value.activatorEl?.contains(after)) {
+            isActive.value = false
+          }
+        } else {
+          const focusable = focusableChildren(overlay.value.contentEl)
+          focusable[0]?.focus()
+
+          document.removeEventListener('pointerdown', onPointerdown)
+        }
       }
     }
 
     watch(isActive, val => {
       if (val) {
         parent?.register()
-        if (IN_BROWSER) {
+        if (IN_BROWSER && !props.disableInitialFocus) {
+          document.addEventListener('pointerdown', onPointerdown)
           document.addEventListener('focusin', onFocusIn, { once: true })
         }
       } else {
         parent?.unregister()
         if (IN_BROWSER) {
+          clearTimeout(focusTrapSuppressionTimeout)
+          document.removeEventListener('pointerdown', onPointerdown)
           document.removeEventListener('focusin', onFocusIn)
         }
       }

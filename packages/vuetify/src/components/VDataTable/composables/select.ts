@@ -2,7 +2,7 @@
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, inject, provide, shallowRef } from 'vue'
+import { computed, inject, provide, shallowRef, toRef } from 'vue'
 import { deepEqual, propsFactory, wrapInArray } from '@/util'
 
 // Types
@@ -149,7 +149,7 @@ export function provideSelection (
     if (props.selectStrategy !== 'single' && event?.shiftKey && lastSelectedIndex.value !== null) {
       const [start, end] = [lastSelectedIndex.value, index].sort((a, b) => a - b)
 
-      items.push(...currentPage.value.slice(start, end + 1))
+      items.push(...currentPage.value.slice(start, end + 1).filter(item => item.selectable))
     } else {
       items.push(item)
       lastSelectedIndex.value = index
@@ -177,7 +177,7 @@ export function provideSelection (
     })
     return !!items.length && isSelected(items)
   })
-  const showSelectAll = computed(() => selectStrategy.value.showSelectAll)
+  const showSelectAll = toRef(() => selectStrategy.value.showSelectAll)
 
   const data = {
     toggleSelect,

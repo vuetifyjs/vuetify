@@ -8,7 +8,7 @@ import { defineConfig, loadEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import Components from 'unplugin-vue-components/vite'
-import { warmup } from 'vite-plugin-warmup'
+import livePreview from 'vite-live-preview'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const resolve = (file: string) => path.resolve(__dirname, file)
@@ -36,6 +36,9 @@ export default defineConfig(({ mode }) => {
       host: process.env.HOST,
       port: process.env.TEST ? undefined : Number(process.env.PORT ?? 8090),
       strictPort: !!process.env.PORT && !process.env.TEST,
+      warmup: {
+        clientFiles: process.env.TEST ? [] : ['./index.html'],
+      },
     },
     preview: {
       host: process.env.HOST,
@@ -64,9 +67,7 @@ export default defineConfig(({ mode }) => {
           },
         ],
       }),
-      warmup({
-        clientFiles: process.env.TEST ? [] : ['./dev/index.html'],
-      }),
+      livePreview(),
     ],
     define: {
       __VUETIFY_VERSION__: JSON.stringify(vuetifyPackage.version),
@@ -75,13 +76,7 @@ export default defineConfig(({ mode }) => {
     },
     build: {
       minify: false,
-    },
-    css: {
-      preprocessorOptions: {
-        sass: {
-          api: 'modern-compiler',
-        },
-      },
+      sourcemap: 'inline',
     },
   }
 })

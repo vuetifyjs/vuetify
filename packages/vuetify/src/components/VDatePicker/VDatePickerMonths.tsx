@@ -35,6 +35,7 @@ export const makeVDatePickerMonthsProps = propsFactory({
   max: null as any as PropType<unknown>,
   modelValue: Number,
   year: Number,
+  allowedMonths: [Array, Function] as PropType<number[] | ((date: number) => boolean)>,
 }, 'VDatePickerMonths')
 
 export const VDatePickerMonths = genericComponent<VDatePickerMonthsSlots>()({
@@ -57,8 +58,10 @@ export const VDatePickerMonths = genericComponent<VDatePickerMonthsSlots>()({
       }
       return createRange(12).map(i => {
         const text = adapter.format(date, 'monthShort')
+        const label = adapter.format(date, 'month')
         const isDisabled =
           !!(
+            !isMonthAllowed(i) ||
             (props.min && adapter.isAfter(adapter.startOfMonth(adapter.date(props.min)), date)) ||
             (props.max && adapter.isAfter(date, adapter.startOfMonth(adapter.date(props.max))))
           )
@@ -67,6 +70,7 @@ export const VDatePickerMonths = genericComponent<VDatePickerMonthsSlots>()({
         return {
           isDisabled,
           text,
+          label,
           value: i,
         }
       })
@@ -75,6 +79,18 @@ export const VDatePickerMonths = genericComponent<VDatePickerMonthsSlots>()({
     watchEffect(() => {
       model.value = model.value ?? adapter.getMonth(adapter.date())
     })
+
+    function isMonthAllowed (month: number) {
+      if (Array.isArray(props.allowedMonths) && props.allowedMonths.length) {
+        return props.allowedMonths.includes(month)
+      }
+
+      if (typeof props.allowedMonths === 'function') {
+        return props.allowedMonths(month)
+      }
+
+      return true
+    }
 
     useRender(() => (
       <div
@@ -87,6 +103,7 @@ export const VDatePickerMonths = genericComponent<VDatePickerMonthsSlots>()({
           { months.value.map((month, i) => {
             const btnProps = {
               active: model.value === i,
+              ariaLabel: month.label,
               color: model.value === i ? props.color : undefined,
               disabled: month.isDisabled,
               rounded: true,

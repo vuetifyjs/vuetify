@@ -65,10 +65,10 @@ describe('VBreadcrumbs', () => {
 
   it('should apply active color', async () => {
     render(() => (
-      <VBreadcrumbs active-color="primary">
-      <VBreadcrumbsItem active text="hello"></VBreadcrumbsItem>
-      <VBreadcrumbsItem text="world" to="/world"></VBreadcrumbsItem>
-    </VBreadcrumbs>
+      <VBreadcrumbs activeColor="primary">
+        <VBreadcrumbsItem active title="hello"></VBreadcrumbsItem>
+        <VBreadcrumbsItem title="world" to="/world"></VBreadcrumbsItem>
+      </VBreadcrumbs>
     ))
     // Initial check for the active color class
     expect(screen.getByCSS('.v-breadcrumbs-item.text-primary')).toBeVisible()

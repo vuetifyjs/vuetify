@@ -3,8 +3,9 @@ import { VAutocomplete } from '../VAutocomplete'
 import { VForm } from '@/components/VForm'
 
 // Utilities
-import { generate, render, screen, userEvent, waitAnimationFrame, waitIdle } from '@test'
+import { generate, render, screen, userEvent, wait, waitAnimationFrame, waitIdle } from '@test'
 import { findAllByRole, queryAllByRole, within } from '@testing-library/vue'
+import { commands } from '@vitest/browser/context'
 import { cloneVNode, ref } from 'vue'
 
 const variants = ['underlined', 'outlined', 'filled', 'solo', 'plain'] as const
@@ -82,6 +83,7 @@ describe('VAutocomplete', () => {
     ))
 
     await userEvent.click(container)
+    await wait(100) // waitStable was very flaky here
 
     const menu = await screen.findByRole('listbox')
 
@@ -128,6 +130,7 @@ describe('VAutocomplete', () => {
     ))
 
     await userEvent.click(container)
+    await commands.waitStable('.v-list')
 
     const menu = await screen.findByRole('listbox')
 
@@ -173,26 +176,27 @@ describe('VAutocomplete', () => {
         items={ items.value }
         multiple
         returnObject
-        item-title="text"
-        item-value="id"
+        itemTitle="text"
+        itemValue="id"
       />
     ))
 
     await userEvent.click(container)
+    await wait(100)
 
     const menu = await screen.findByRole('listbox')
 
     const activeItems = await findAllByRole(menu, 'option', { selected: true })
     expect(activeItems).toHaveLength(2)
 
-    const input = await screen.findByRole('combobox')
-    expect(input).toHaveTextContent('Item 1')
-    expect(input).toHaveTextContent('Item 2')
+    const inputField = await screen.findByCSS('.v-field')
+    expect(inputField).toHaveTextContent('Item 1')
+    expect(inputField).toHaveTextContent('Item 2')
 
     await userEvent.click(activeItems[0])
 
-    expect(input).not.toHaveTextContent('Item 1')
-    expect(input).toHaveTextContent('Item 2')
+    expect(inputField).not.toHaveTextContent('Item 1')
+    expect(inputField).toHaveTextContent('Item 2')
     expect(selectedItems.value).toEqual([{
       text: 'Item 2',
       id: 'item2',
@@ -231,8 +235,8 @@ describe('VAutocomplete', () => {
         v-model={ selectedItems.value }
         items={ items.value }
         multiple
-        item-title="text"
-        item-value="text"
+        itemTitle="text"
+        itemValue="text"
       />
     ))
 
@@ -325,7 +329,7 @@ describe('VAutocomplete', () => {
     await userEvent.click(options[0])
 
     await userEvent.click(element)
-    await userEvent.keyboard('{Control>}a{/Ctrl}{Backspace}')
+    await userEvent.keyboard('{Ctrl>}a{/Ctrl}{Backspace}')
     await userEvent.click(document.body)
 
     expect(element).not.toHaveTextContent('Item 1')
@@ -348,12 +352,13 @@ describe('VAutocomplete', () => {
       <VAutocomplete
         items={ items }
         v-model={ selectedItems.value }
-        item-title={ itemTitle }
-        item-value="id"
+        itemTitle={ itemTitle }
+        itemValue="id"
       />
     ))
 
     await userEvent.click(element)
+    await commands.waitStable('.v-list')
 
     await userEvent.click(screen.getAllByRole('option')[0])
     expect(selectedItems.value).toBe(1)
@@ -392,7 +397,7 @@ describe('VAutocomplete', () => {
         { code: 'de-DE', name: 'German' },
       ]
 
-      const { container } = render(() => (
+      render(() => (
         <VAutocomplete
           label="Language"
           items={ items }
@@ -402,7 +407,7 @@ describe('VAutocomplete', () => {
         />
       ))
 
-      expect(container.querySelector('.v-field')).not.toHaveClass('v-field--dirty')
+      expect(screen.getByCSS('.v-field')).not.toHaveClass('v-field--dirty')
     })
   })
 
@@ -422,6 +427,7 @@ describe('VAutocomplete', () => {
 
       const menuIcon = screen.getByRole('button', { name: /open/i })
       await userEvent.click(menuIcon)
+      await commands.waitStable('.v-list')
 
       const listItems = screen.getAllByRole('option')
       expect(listItems).toHaveLength(2)
@@ -444,8 +450,7 @@ describe('VAutocomplete', () => {
     ))
 
     await userEvent.type(element, 'f')
-    const listItems = screen.getAllByRole('option')
-    expect(listItems).toHaveLength(2)
+    await expect.poll(() => screen.findAllByRole('option')).toHaveLength(2)
     expect(selectedItems.value).toBeUndefined()
   })
 
@@ -458,17 +463,17 @@ describe('VAutocomplete', () => {
     expect(input).toHaveAttribute('placeholder', 'Placeholder')
 
     await rerender({ label: 'Label' })
-    expect(input).not.toBeVisible()
+    await expect.element(input).not.toBeDisplayed()
 
     input.focus()
     await waitAnimationFrame()
     expect(input).toHaveAttribute('placeholder', 'Placeholder')
-    expect(input).toBeVisible()
+    await expect.element(input).toBeDisplayed()
 
     input.blur()
     await rerender({ persistentPlaceholder: true })
     expect(input).toHaveAttribute('placeholder', 'Placeholder')
-    expect(input).toBeVisible()
+    await expect.element(input).toBeDisplayed()
 
     await rerender({ modelValue: 'Foobar' })
     expect(input).not.toHaveAttribute('placeholder')
@@ -494,14 +499,14 @@ describe('VAutocomplete', () => {
 
   it('should not open menu when closing a chip', async () => {
     const { element } = render(() => (
-        <VAutocomplete
-          chips
-          closable-chips
-          items={['foo', 'bar']}
-          label="Autocomplete"
-          modelValue={['foo', 'bar']}
-          multiple
-        />
+      <VAutocomplete
+        chips
+        closableChips
+        items={['foo', 'bar']}
+        label="Autocomplete"
+        modelValue={['foo', 'bar']}
+        multiple
+      />
     ))
 
     expect(screen.queryByRole('listbox')).toBeNull()
@@ -535,6 +540,7 @@ describe('VAutocomplete', () => {
       const getItems = () => screen.queryAllByRole('option')
 
       await userEvent.click(element)
+      await commands.waitStable('.v-list')
       await expect.poll(getItems).toHaveLength(6)
 
       await userEvent.keyboard('Cal')
@@ -577,7 +583,7 @@ describe('VAutocomplete', () => {
       <VAutocomplete
         v-model={ selectedItem.value }
         chips
-        closable-chips
+        closableChips
         items={['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']}
       />
     ))
@@ -593,7 +599,7 @@ describe('VAutocomplete', () => {
       <VAutocomplete
         v-model={ selectedItem.value }
         chips
-        closable-chips
+        closableChips
         multiple
         items={['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']}
       />
@@ -615,7 +621,7 @@ describe('VAutocomplete', () => {
     ))
 
     await userEvent.click(element)
-
+    await commands.waitStable('.v-list')
     const items = await screen.findAllByRole('option')
     expect(items).toHaveLength(2)
 
@@ -643,7 +649,7 @@ describe('VAutocomplete', () => {
     })
 
     await userEvent.click(element)
-    await expect(screen.findByRole('listbox')).resolves.toBeVisible()
+    await expect.poll(() => screen.findByRole('listbox')).toBeDisplayed()
 
     await userEvent.click(screen.getAllByRole('option')[0])
     await rerender({ items: ['Foo', 'Bar', 'test', 'test 2'] })
@@ -681,6 +687,17 @@ describe('VAutocomplete', () => {
     await userEvent.keyboard('Item 1')
     await userEvent.click(await screen.findByRole('option'))
     await expect.poll(() => selectedItem.value).toBe('Item 1')
+  })
+
+  it('should not fire @update:focus twice when clicking bottom of input', async () => {
+    const onFocus = vi.fn()
+    const { element } = render(() => (
+      <VAutocomplete onUpdate:focused={ onFocus } />
+    ))
+
+    await userEvent.click(element, { y: 1 })
+
+    expect(onFocus).toHaveBeenCalledTimes(1)
   })
 
   describe('Showcase', () => {

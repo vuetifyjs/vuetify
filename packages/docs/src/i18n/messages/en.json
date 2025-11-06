@@ -82,6 +82,7 @@
   "community-support": "Community support",
   "contact-us": "Contact Us",
   "cookie-policy": "Cookie Policy",
+  "copy-as-markdown": "Copy Page as Markdown",
   "copy-example-source": "Copy example source",
   "copy-source": "Copy source",
   "copyright": "Copyright {0}",
@@ -241,6 +242,7 @@
   "notifications": "Notifications",
   "not-found": "Not Found",
   "open-github-release": "Open GitHub release",
+  "open-in-vuetify-bin": "Open in Vuetify Bin",
   "open-issues": "Open issues",
   "options": "Options",
   "overlays": "Overlays",
@@ -265,6 +267,7 @@
   "ready-text": "Continue your learning with related content selected by the {team} or move between pages by using the navigation links below.",
   "ready": "Ready for more?",
   "reddit": "Reddit",
+  "bluesky": "Bluesky",
   "release-notes": "Release notes",
   "released-by": "Released by: {author}",
   "release": "Release",
@@ -289,7 +292,8 @@
     "key-hint-slash": "Press /",
     "results": "Your search results will appear here",
     "no-results": "No results found",
-    "recent": "Recent"
+    "recent": "Recent",
+    "favorite": "Favorite"
   },
   "search-api": "Search API",
   "search-jobs": "Search Jobs",

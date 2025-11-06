@@ -60,6 +60,12 @@ The expand transition is used in Expansion Panels and List Groups. There is also
 
 <ExamplesExample file="transitions/misc-expand-x" />
 
+When using `v-expand-transition` or `v-expand-x-transition`, the transition works by animating an element’s height or width between `0` and its natural size. Because of this, applying **padding directly to the transitioning element** (such as `v-alert`) can cause jittery or uneven animations.
+
+If you need padding, wrap your content in a container element (like a `div` or `v-card`) and apply the transition to that container instead. This ensures the expand transition runs smoothly, since the wrapper div has no conflicting padding or margin.
+
+<ExamplesExample file="transitions/misc-expand-x-padding" />
+
 #### Fab
 
 An example of the fab transition can be found in the `v-speed-dial` component.
@@ -108,30 +114,43 @@ Using multiple custom transitions, it is easy to bring a simple todo list to lif
 
 <ExamplesExample file="transitions/misc-todo" />
 
-<!--
 ## Create your own
 
-You can use Vuetify's transition helper function to easily create your own custom transitions. This function will return an object that you can import into Vue. Using Vue's [functional component](https://vuejs.org/v2/guide/render-function.html#Functional-Components) option will make sure your transition is as efficient as possible. Simply import the function:
+You can use Vuetify's transition helper function to easily create your own custom transitions.
 
 ```js
-import { createSimpleTransition } from 'vuetify/components/transitions/createTransition'
+import { createCssTransition } from 'vuetify/util/transitions';
 
-const myTransition = createSimpleTransition('my-transition')
-
-Vue.component('my-transition', myTransition)
+createCssTransition('my-transition')
 ```
 
-The **createSimpleTransition** function accepts 1 argument, name. This will be the name that you can hook into with your style. This is an example of what `v-fade-transition` looks like:
+The argument passed to the **createCssTransition** function will be the name of the transition that you can hook into your style. This is an example of what `my-transition` looks like:
 
-```stylus
-.fade-transition
-  &-leave-active
-    position: absolute
+```scss
+.my-transition {
+  &-enter-active,
+  &-leave-active {
+    position: absolute;
+    transition: 1s;
+  }
 
-  &-enter-active, &-leave, &-leave-to
-    transition: $primary-transition
-
-  &-enter, &-leave-to
-    opacity: 0
+  &-enter-from,
+  &-leave-to {
+    opacity: 0;
+  }
+}
 ```
--->
+
+You can now use this custom transition in a few different ways.
+
+### As a component
+
+The **createCssTransition** function will return a component that you can use in your template.
+
+<ExamplesExample file="transitions/create-css-transition-component" />
+
+### As a prop
+
+Many of Vuetify’s components contain a **transition** prop. You can send the name of your custom transition to the transition prop.
+
+<ExamplesExample file="transitions/create-css-transition-prop" />

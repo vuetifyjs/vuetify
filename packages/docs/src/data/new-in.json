@@ -14,6 +14,7 @@
   },
   "VAutocomplete": {
     "props": {
+      "autocomplete": "3.10.0",
       "autoSelectFirst": "3.3.0",
       "clearOnSelect": "3.5.0",
       "listProps": "3.5.0"
@@ -35,7 +36,14 @@
       "text": "3.2.0",
       "slim": "3.4.0",
       "readonly": "3.6.0",
-      "activeColor": "3.7.0"
+      "activeColor": "3.7.0",
+      "spaced": "3.10.0"
+    }
+  },
+  "VCarousel": {
+    "props": {
+      "crossfade": "3.10.0",
+      "transitionDuration": "3.10.0"
     }
   },
   "VChip": {
@@ -43,8 +51,22 @@
       "baseColor": "3.8.0"
     }
   },
+  "VChipGroup": {
+    "props": {
+      "scrollToActive": "3.10.6"
+    }
+  },
+  "VColorPicker": {
+    "props": {
+      "hideEyeDropper": "3.10.0",
+      "eyeDropperIcon": "3.10.0",
+      "hideTitle": "3.10.0"
+    }
+  },
   "VCombobox": {
     "props": {
+      "alwaysFilter": "3.10.4",
+      "autocomplete": "3.10.0",
       "clearOnSelect": "3.5.0",
       "listProps": "3.5.0"
     }
@@ -57,12 +79,48 @@
   "VDatePicker": {
     "props": {
       "controlHeight": "3.8.0",
-      "headerColor": "3.8.0"
+      "firstDayOfYear": "3.10.0",
+      "headerColor": "3.8.0",
+      "hideTitle": "3.10.0"
     }
   },
   "VDataTable": {
     "props": {
+      "collapseIcon": "3.10.0",
+      "expandIcon": "3.10.0",
+      "groupCollapseIcon": "3.10.0",
+      "groupExpandIcon": "3.10.0",
       "headerProps": "3.5.0"
+    },
+    "slots": {
+      "group-summary": "3.10.0"
+    }
+  },
+  "VDataTableServer": {
+    "props": {
+      "collapseIcon": "3.10.0",
+      "expandIcon": "3.10.0",
+      "groupCollapseIcon": "3.10.0",
+      "groupExpandIcon": "3.10.0"
+    },
+    "slots": {
+      "group-summary": "3.10.0"
+    }
+  },
+  "VDataTableVirtual": {
+    "props": {
+      "collapseIcon": "3.10.0",
+      "expandIcon": "3.10.0",
+      "groupCollapseIcon": "3.10.0",
+      "groupExpandIcon": "3.10.0"
+    },
+    "slots": {
+      "group-summary": "3.10.0"
+    }
+  },
+  "VDialog": {
+    "props": {
+      "stickToTarget": "3.10.0"
     }
   },
   "VExpansionPanels": {
@@ -74,6 +132,17 @@
     "props": {
       "iconColor": "3.8.0",
       "glow": "3.8.0"
+    }
+  },
+  "VFileInput": {
+    "props": {
+      "filterByType": "3.10.0",
+      "truncateLength": "3.10.0"
+    }
+  },
+  "VFileUpload": {
+    "props": {
+      "filterByType": "3.10.0"
     }
   },
   "VIcon": {
@@ -104,6 +173,7 @@
   },
   "VMenu": {
     "props": {
+      "stickToTarget": "3.10.0",
       "submenu": "3.7.0"
     }
   },
@@ -112,15 +182,45 @@
       "persistent": "3.6.0"
     }
   },
+  "VNumberInput": {
+    "props": {
+      "autocomplete": "3.10.0"
+    }
+  },
+  "VOverlay": {
+    "props": {
+      "stickToTarget": "3.10.0"
+    }
+  },
+  "VPicker": {
+    "props": {
+      "hideTitle": "3.10.0"
+    }
+  },
+  "VProgressLinear": {
+    "props": {
+      "chunkCount": "3.10.0",
+      "chunkGap": "3.10.0",
+      "chunkWidth": "3.10.0"
+    }
+  },
   "VSelect": {
     "props": {
-      "listProps": "3.5.0"
+      "autocomplete": "3.10.0",
+      "listProps": "3.5.0",
+      "noAutoScroll": "3.9.0"
     }
   },
   "VSlider": {
     "events": {
       "start": "3.2.0",
       "end": "3.2.0"
+    }
+  },
+  "VSlideGroup": {
+    "props": {
+      "contentClass": "3.9.0",
+      "scrollToActive": "3.10.6"
     }
   },
   "VSnackbar": {
@@ -138,18 +238,62 @@
   },
   "VTab": {
     "props": {
-      "text": "3.2.0"
+      "text": "3.2.0",
+      "spaced": "3.10.0"
+    }
+  },
+  "VTabs": {
+    "props": {
+      "spaced": "3.10.0"
+    }
+  },
+  "VTextField": {
+    "props": {
+      "autocomplete": "3.10.0"
+    }
+  },
+  "VTimePicker": {
+    "props": {
+      "hideTitle": "3.10.0",
+      "period": "3.10.0"
+    }
+  },
+  "VTreeview": {
+    "props": {
+      "hideActions": "3.9.0",
+      "separateRoots": "3.9.0",
+      "indentLines": "3.9.0"
+    },
+    "slots": {
+      "header": "3.10.0",
+      "toggle": "3.10.0"
+    }
+  },
+  "VTreeviewItem": {
+    "props": {
+      "hideActions": "3.9.0",
+      "indentLines": "3.9.0"
+    },
+    "slots": {
+      "toggle": "3.10.0"
     }
   },
   "VTooltip": {
     "props": {
       "eager": "3.2.0",
-      "interactive": "3.8.0"
+      "interactive": "3.8.0",
+      "stickToTarget": "3.10.0"
     }
   },
   "VVirtualScroll": {
     "props": {
       "itemKey": "3.8.0"
+    }
+  },
+  "VWindow": {
+    "props": {
+      "crossfade": "3.10.0",
+      "transitionDuration": "3.10.0"
     }
   }
 }

@@ -10,7 +10,7 @@ related:
   - /components/buttons/
   - /components/floating-action-buttons/
 features:
-  github: /components/VIconBtn/
+  github: /labs/VIconBtn/
   label: 'C: VIconBtn'
   report: true
   spec: https://m3.material.io/components/icon-buttons/

@@ -31,7 +31,7 @@ export const makeVChipGroupProps = propsFactory({
     default: deepEqual,
   },
 
-  ...makeVSlideGroupProps(),
+  ...makeVSlideGroupProps({ scrollToActive: false }),
   ...makeComponentProps(),
   ...makeGroupProps({ selectedClass: 'v-chip--selected' }),
   ...makeTagProps(),
@@ -70,11 +70,11 @@ export const VChipGroup = genericComponent<new <T>(
 
     provideDefaults({
       VChip: {
-        baseColor: toRef(props, 'baseColor'),
-        color: toRef(props, 'color'),
-        disabled: toRef(props, 'disabled'),
-        filter: toRef(props, 'filter'),
-        variant: toRef(props, 'variant'),
+        baseColor: toRef(() => props.baseColor),
+        color: toRef(() => props.color),
+        disabled: toRef(() => props.disabled),
+        filter: toRef(() => props.filter),
+        variant: toRef(() => props.variant),
       },
     })
 

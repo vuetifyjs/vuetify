@@ -1,5 +1,17 @@
 // Utilities
-import { capitalize, Comment, computed, Fragment, isVNode, reactive, shallowRef, toRefs, unref, watchEffect } from 'vue'
+import {
+  camelize,
+  capitalize,
+  Comment,
+  Fragment,
+  isVNode,
+  reactive,
+  shallowRef,
+  toRef,
+  unref,
+  watchEffect,
+} from 'vue'
+import { consoleError } from '@/util/console'
 import { IN_BROWSER } from '@/util/globals'
 
 // Types
@@ -10,7 +22,7 @@ import type {
   InjectionKey,
   PropType,
   Ref,
-  ToRefs,
+  ToRef,
   VNode,
   VNodeArrayChildren,
   VNodeChild,
@@ -214,7 +226,7 @@ type MaybePick<
 export function pick<
   T extends object,
   U extends Extract<keyof T, string>
-> (obj: T, paths: U[]): MaybePick<T, U> {
+> (obj: T, paths: readonly U[]): MaybePick<T, U> {
   const found: any = {}
 
   for (const key of paths) {
@@ -383,9 +395,9 @@ export function wrapInArray<T> (
     ? IfAny<T, T[], T>
     : NonNullable<T>[] {
   return v == null
-    ? []
+    ? [] as any
     : Array.isArray(v)
-      ? v as any : [v]
+      ? v as any : [v] as any
 }
 
 export function defaultFilter (value: any, search: string | null, item: any) {
@@ -408,15 +420,39 @@ export function debounce (fn: Function, delay: MaybeRef<number>) {
   return wrap
 }
 
-export function throttle<T extends (...args: any[]) => any> (fn: T, limit: number) {
+export function throttle<T extends (...args: any[]) => any> (
+  fn: T,
+  delay: number,
+  options = { leading: true, trailing: true },
+) {
+  let timeoutId = 0
+  let lastExec = 0
   let throttling = false
-  return (...args: Parameters<T>): void | ReturnType<T> => {
-    if (!throttling) {
-      throttling = true
-      setTimeout(() => throttling = false, limit)
-      return fn(...args)
+
+  const wrap = (...args: Parameters<T>): void | ReturnType<T> => {
+    clearTimeout(timeoutId)
+    const now = Date.now()
+    const elapsed = now - lastExec
+
+    if (!throttling || elapsed >= delay) {
+      lastExec = now
     }
+    if ((!throttling && options.leading) || elapsed >= delay) {
+      window.setTimeout(() => fn(...args)) // ignore 'fn' executin errors
+    }
+
+    throttling = true
+    timeoutId = window.setTimeout(() => {
+      throttling = false
+      if (options.trailing) {
+        fn(...args)
+      }
+    }, delay)
   }
+
+  wrap.clear = () => clearTimeout(timeoutId)
+  wrap.immediate = fn
+  return wrap
 }
 
 export function clamp (value: number, min = 0, max = 1) {
@@ -555,6 +591,10 @@ export class CircularBuffer<T = never> {
 
   constructor (public readonly size: number) {}
 
+  get isFull () {
+    return this.#arr.length === this.size
+  }
+
   push (val: T) {
     this.#arr[this.#pointer] = val
     this.#pointer = (this.#pointer + 1) % this.size
@@ -562,6 +602,11 @@ export class CircularBuffer<T = never> {
 
   values (): T[] {
     return this.#arr.slice(this.#pointer).concat(this.#arr.slice(0, this.#pointer))
+  }
+
+  clear () {
+    this.#arr.length = 0
+    this.#pointer = 0
   }
 }
 
@@ -580,20 +625,26 @@ export function getEventCoordinates (e: MouseEvent | TouchEvent) {
 type NotAUnion<T> = [T] extends [infer U] ? _NotAUnion<U, U> : never
 type _NotAUnion<T, U> = U extends any ? [T] extends [U] ? unknown : never : never
 
+type ToReadonlyRefs<T> = { [K in keyof T]: Readonly<ToRef<T[K]>> }
+
 /**
  * Convert a computed ref to a record of refs.
  * The getter function must always return an object with the same keys.
  */
-export function destructComputed<T extends object> (getter: ComputedGetter<T & NotAUnion<T>>): ToRefs<T>
+export function destructComputed<T extends object> (getter: ComputedGetter<T & NotAUnion<T>>): ToReadonlyRefs<T>
 export function destructComputed<T extends object> (getter: ComputedGetter<T>) {
   const refs = reactive({}) as T
-  const base = computed(getter)
   watchEffect(() => {
-    for (const key in base.value) {
-      refs[key] = base.value[key]
+    const base = getter()
+    for (const key in base) {
+      refs[key] = base[key]
     }
   }, { flush: 'sync' })
-  return toRefs(refs)
+  const obj = {} as ToReadonlyRefs<T>
+  for (const key in refs) {
+    obj[key] = toRef(() => refs[key]) as any
+  }
+  return obj
 }
 
 /** Array.includes but value can be any type */
@@ -625,10 +676,36 @@ export function callEvent<T extends any[]> (handler: EventProp<T> | EventProp<T>
 }
 
 export function focusableChildren (el: Element, filterByTabIndex = true) {
-  const targets = ['button', '[href]', 'input:not([type="hidden"])', 'select', 'textarea', '[tabindex]']
-    .map(s => `${s}${filterByTabIndex ? ':not([tabindex="-1"])' : ''}:not([disabled])`)
+  const targets = [
+    'button',
+    '[href]',
+    'input:not([type="hidden"])',
+    'select',
+    'textarea',
+    'details:not(:has(> summary))',
+    'details > summary',
+    '[tabindex]',
+    '[contenteditable]:not([contenteditable="false"])',
+    'audio[controls]',
+    'video[controls]',
+  ]
+    .map(s => `${s}${filterByTabIndex ? ':not([tabindex="-1"])' : ''}:not([disabled], [inert])`)
     .join(', ')
-  return [...el.querySelectorAll(targets)] as HTMLElement[]
+
+  let elements
+  try {
+    elements = [...el.querySelectorAll(targets)] as HTMLElement[]
+  } catch (err) {
+    consoleError(String(err))
+    return []
+  }
+
+  return elements
+    .filter(x => !x.closest('[inert]')) // does not have inert parent
+    .filter(x => !!x.offsetParent || x.getClientRects().length > 0) // is rendered
+    .filter(x => !x.parentElement?.closest('details:not([open])') ||
+      (x.tagName === 'SUMMARY' && x.parentElement?.tagName === 'DETAILS')
+    )
 }
 
 export function getNextElement (elements: HTMLElement[], location?: 'next' | 'prev', condition?: (el: HTMLElement) => boolean) {
@@ -645,7 +722,7 @@ export function getNextElement (elements: HTMLElement[], location?: 'next' | 'pr
 export function focusChild (el: Element, location?: 'next' | 'prev' | 'first' | 'last' | number) {
   const focusable = focusableChildren(el)
 
-  if (!location) {
+  if (location == null) {
     if (el === document.activeElement || !el.contains(document.activeElement)) {
       focusable[0]?.focus()
     }
@@ -693,6 +770,15 @@ export function ensureValidVNode (vnodes: VNodeArrayChildren): VNodeArrayChildre
   })
     ? vnodes
     : null
+}
+
+type Slot<T> = [T] extends [never] ? () => VNodeChild : (arg: T) => VNodeChild
+
+export function renderSlot <T> (slot: Slot<never> | undefined, fallback?: Slot<never> | undefined): VNodeChild
+export function renderSlot <T> (slot: Slot<T> | undefined, props: T, fallback?: Slot<T> | undefined): VNodeChild
+export function renderSlot (slot?: Slot<unknown>, props?: unknown, fallback?: Slot<unknown>) {
+  // TODO: check if slot returns elements: #18308
+  return slot?.(props) ?? fallback?.(props)
 }
 
 export function defer (timeout: number, cb: () => void) {
@@ -753,3 +839,50 @@ export type Primitive = string | number | boolean | symbol | bigint
 export function isPrimitive (value: unknown): value is Primitive {
   return typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean' || typeof value === 'bigint'
 }
+
+export function escapeForRegex (sign: string) {
+  return '\\^$*+?.()|{}[]'.includes(sign)
+    ? `\\${sign}`
+    : sign
+}
+
+export function extractNumber (text: string, decimalDigitsLimit: number | null, decimalSeparator: string) {
+  const onlyValidCharacters = new RegExp(`[\\d\\-${escapeForRegex(decimalSeparator)}]`)
+  const cleanText = text.split('')
+    .filter(x => onlyValidCharacters.test(x))
+    .filter((x, i, all) => (i === 0 && /[-]/.test(x)) || // sign allowed at the start
+        (x === decimalSeparator && i === all.indexOf(x)) || // decimal separator allowed only once
+        /\d/.test(x))
+    .join('')
+
+  if (decimalDigitsLimit === 0) {
+    return cleanText.split(decimalSeparator)[0]
+  }
+
+  const decimalPart = new RegExp(`${escapeForRegex(decimalSeparator)}\\d`)
+  if (decimalDigitsLimit !== null && decimalPart.test(cleanText)) {
+    const parts = cleanText.split(decimalSeparator)
+    return [
+      parts[0],
+      parts[1].substring(0, decimalDigitsLimit),
+    ].join(decimalSeparator)
+  }
+
+  return cleanText
+}
+
+export function camelizeProps<T extends Record<string, unknown>> (props: T | null): T {
+  const out = {} as T
+  for (const prop in props) {
+    out[camelize(prop) as keyof T] = props[prop]
+  }
+  return out
+}
+
+export function onlyDefinedProps (props: Record<string, any>) {
+  const booleanAttributes = ['checked', 'disabled']
+  return Object.fromEntries(Object.entries(props)
+    .filter(([key, v]) => booleanAttributes.includes(key) ? !!v : v !== undefined))
+}
+
+export type NonEmptyArray<T> = [T, ...T[]]

@@ -8,6 +8,7 @@ import { VAvatar } from '@/components/VAvatar'
 import { VChipGroupSymbol } from '@/components/VChipGroup/VChipGroup'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VIcon } from '@/components/VIcon'
+import { VSlideGroupSymbol } from '@/components/VSlideGroup/VSlideGroup'
 
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'
@@ -26,10 +27,10 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
 
 // Directives
-import { Ripple } from '@/directives/ripple'
+import vRipple from '@/directives/ripple'
 
 // Utilities
-import { computed, toDisplayString } from 'vue'
+import { computed, toDisplayString, toRef, watch } from 'vue'
 import { EventProp, genericComponent, propsFactory } from '@/util'
 
 // Types
@@ -112,7 +113,7 @@ export const makeVChipProps = propsFactory({
 export const VChip = genericComponent<VChipSlots>()({
   name: 'VChip',
 
-  directives: { Ripple },
+  directives: { vRipple },
 
   props: makeVChipProps(),
 
@@ -133,16 +134,20 @@ export const VChip = genericComponent<VChipSlots>()({
     const { themeClasses } = provideTheme(props)
 
     const isActive = useProxiedModel(props, 'modelValue')
+
     const group = useGroupItem(props, VChipGroupSymbol, false)
+    const slideGroup = useGroupItem(props, VSlideGroupSymbol, false)
+
     const link = useLink(props, attrs)
-    const isLink = computed(() => props.link !== false && link.isLink.value)
+    const isLink = toRef(() => props.link !== false && link.isLink.value)
     const isClickable = computed(() =>
       !props.disabled &&
       props.link !== false &&
       (!!group || props.link || link.isClickable.value)
     )
-    const closeProps = computed(() => ({
+    const closeProps = toRef(() => ({
       'aria-label': t(props.closeLabel),
+      disabled: props.disabled,
       onClick (e: MouseEvent) {
         e.preventDefault()
         e.stopPropagation()
@@ -153,14 +158,23 @@ export const VChip = genericComponent<VChipSlots>()({
       },
     }))
 
-    const variantProps = computed(() => {
+    watch(isActive, val => {
+      if (val) {
+        group?.register()
+        slideGroup?.register()
+      } else {
+        group?.unregister()
+        slideGroup?.unregister()
+      }
+    })
+
+    const { colorClasses, colorStyles, variantClasses } = useVariant(() => {
       const showColor = !group || group.isSelected.value
       return ({
         color: showColor ? props.color ?? props.baseColor : props.baseColor,
         variant: props.variant,
       })
     })
-    const { colorClasses, colorStyles, variantClasses } = useVariant(variantProps)
 
     function onClick (e: MouseEvent) {
       emit('click', e)
@@ -189,6 +203,7 @@ export const VChip = genericComponent<VChipSlots>()({
 
       return isActive.value && (
         <Tag
+          { ...link.linkProps }
           class={[
             'v-chip',
             {
@@ -220,7 +235,6 @@ export const VChip = genericComponent<VChipSlots>()({
           onClick={ onClick }
           onKeydown={ isClickable.value && !isLink.value && onKeyDown }
           v-ripple={[isClickable.value && props.ripple, null]}
-          { ...link.linkProps }
         >
           { genOverlays(isClickable.value, 'v-chip') }
 

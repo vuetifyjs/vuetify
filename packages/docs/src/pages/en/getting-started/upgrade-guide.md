@@ -35,6 +35,51 @@ export default createVuetify({
 
 ## Components
 
+### VSnackbar
+
+Removed the `multi-line` prop and the **$snackbar-multi-line-wrapper-min-height** SASS variable. It can be replaced with `min-height` equivalent.
+
+```diff
+  <VSnackbar
+    v-model="visible"
+-    multi-line
++    min-height="68"
+    :text="message"
+  />
+```
+
+### VTextField
+
+Removed the **$text-field-details-padding-inline** SASS variable.
+
+```diff { resource="src/styles/settings/_variables.scss" }
+@use 'vuetify/settings' with (
+-  $text-field-details-padding-inline: <value>
++  $input-details-padding-inline: <value>
+);
+```
+
+### VRadioGroup
+
+Removed the **$radio-group-details-padding-inline** SASS variable.
+
+```diff { resource="src/styles/settings/_variables.scss" }
+@use 'vuetify/settings' with (
+-  $radio-group-details-padding-inline: <value>
++  $input-details-padding-inline: <value>
+);
+```
+
+### VFileInput
+
+Removed the **$file-input-details-padding-inline** SASS variable.
+
+```diff { resource="src/styles/settings/_variables.scss" }
+@use 'vuetify/settings' with (
+-  $file-input-details-padding-inline: <value>
++  $input-details-padding-inline: <value>
+);
+
 ### VBtn display
 
 In Vuetify 3, VField's layout was changed from `display: flex` to `display: grid` to better handle its internal elements. However, the grid implementation had limitations with gap control, so in Vuetify 4 we've reverted back to using `display: flex`.

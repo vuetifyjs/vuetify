@@ -26,7 +26,7 @@ The `v-tabs` component is used for hiding content behind a selectable item. This
 
 The `v-tabs` component is a styled extension of [v-slide-group](/components/slide-groups). It provides an easy to use interface for organizing content into separate sections.
 
-<ExamplesExample file="v-tabs/usage" />
+<ExamplesUsage name="v-tabs" />
 
 <PromotedEntry />
 
@@ -98,6 +98,12 @@ If the tab items overflow their container, pagination controls will appear on de
 The **direction** prop allows for `v-tab` components to stack vertically.
 
 <ExamplesExample file="v-tabs/prop-direction" />
+
+#### Spaced
+
+Vertical tabs can be customized with **spaced** prop to move the text away from the icon.
+
+<ExamplesExample file="v-tabs/prop-spaced" />
 
 ### Misc
 

@@ -158,7 +158,6 @@
     modelValue: {
       type: [Array, String],
       default: () => ([]),
-      required: true,
     },
     script: String,
   })
@@ -183,7 +182,7 @@
     {
       name: 'template',
       language: 'html',
-      content: `<template>\n  <v-app>\n    <v-container>\n      ${props.code.replaceAll('\n', '\n      ')}\n    </v-container>\n  </v-app>\n</template>\n${props.script || ''}`,
+      content: `<template>\n<v-app>\n   <v-container>\n     ${props.code.replaceAll('\n', '\n      ')}\n   </v-container>\n </v-app>\n</template>\n${props.script || ''}`,
     },
   ]))
 
@@ -219,13 +218,13 @@
   }
 </script>
 
-<style lang="sass">
+<style lang="sass" scoped>
   .usage-example
-    .v-text-field
+    ::v-deep(.v-text-field)
       margin-bottom: 8px
 
   // Hack to get around navigation-drawer default bgColor
   // TODO: find a better way
-  .v-select__content .v-list
+  ::v-deep(.v-select__content .v-list)
     background: rgb(var(--v-theme-surface)) !important
 </style>

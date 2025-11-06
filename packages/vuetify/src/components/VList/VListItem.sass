@@ -150,6 +150,7 @@
     align-self: center
     grid-area: content
     overflow: hidden
+    min-width: $list-item-content-min-width
 
   .v-list-item-action
     align-self: center
@@ -321,6 +322,10 @@
 
   .v-list-group__items
     --indent-padding: calc(var(--parent-padding) + var(--list-indent-size))
+    min-width: min-content
+
+    .v-navigation-drawer--rail &
+      min-width: 0
 
   .v-list-group__items .v-list-item
     @include tools.layer('overrides')
@@ -334,3 +339,34 @@
     &:hover
       .v-list-item__overlay
         opacity: calc(#{map.get(settings.$states, 'hover')} * var(--v-theme-overlay-multiplier))
+
+  @media (forced-colors: active)
+    .v-list-item
+      &--link:not(&--active)
+        color: buttontext
+
+      &--link[href]:not(&--active)
+        color: unset
+
+      &--active:not(&--disabled)
+        [class*="v-list-item-"],
+        [class*="v-list-item-"] > *,
+        .v-icon
+          color: highlight !important
+
+      &--active:not(&--variant-text, &--variant-plain):not(&--disabled)
+        background: highlight !important
+
+        [class*="v-list-item-"],
+        [class*="v-list-item-"] > *,
+        .v-icon
+          opacity: 1
+          color: highlighttext !important
+          forced-color-adjust: preserve-parent-color
+
+      @supports selector(:focus-visible)
+        &::after
+          color: buttontext
+
+        &:focus-visible::after
+          opacity: 1

@@ -2,7 +2,7 @@
 import './VTabs.sass'
 
 // Components
-import { VTab } from './VTab'
+import { makeVTabProps, VTab } from './VTab'
 import { VTabsWindow } from './VTabsWindow'
 import { VTabsWindowItem } from './VTabsWindowItem'
 import { makeVSlideGroupProps, VSlideGroup } from '@/components/VSlideGroup/VSlideGroup'
@@ -18,7 +18,7 @@ import { makeTagProps } from '@/composables/tag'
 // Utilities
 import { computed, toRef } from 'vue'
 import { VTabsSymbol } from './shared'
-import { convertToUnit, genericComponent, isObject, propsFactory, useRender } from '@/util'
+import { convertToUnit, genericComponent, isObject, pick, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -71,6 +71,7 @@ export const makeVTabsProps = propsFactory({
   hideSlider: Boolean,
   sliderColor: String,
 
+  ...pick(makeVTabProps(), ['spaced']),
   ...makeVSlideGroupProps({
     mandatory: 'force' as const,
     selectedClass: 'v-tab-item--selected',
@@ -97,17 +98,17 @@ export const VTabs = genericComponent<new <T = TabItem>(
     const model = useProxiedModel(props, 'modelValue')
     const items = computed(() => parseItems(props.items))
     const { densityClasses } = useDensity(props)
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'bgColor'))
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.bgColor)
     const { scopeId } = useScopeId()
 
     provideDefaults({
       VTab: {
-        color: toRef(props, 'color'),
-        direction: toRef(props, 'direction'),
-        stacked: toRef(props, 'stacked'),
-        fixed: toRef(props, 'fixedTabs'),
-        sliderColor: toRef(props, 'sliderColor'),
-        hideSlider: toRef(props, 'hideSlider'),
+        color: toRef(() => props.color),
+        direction: toRef(() => props.direction),
+        stacked: toRef(() => props.stacked),
+        fixed: toRef(() => props.fixedTabs),
+        sliderColor: toRef(() => props.sliderColor),
+        hideSlider: toRef(() => props.hideSlider),
       },
     })
 
@@ -149,6 +150,7 @@ export const VTabs = genericComponent<new <T = TabItem>(
                   { ...item }
                   key={ item.text }
                   value={ item.value }
+                  spaced={ props.spaced }
                   v-slots={{
                     default: slots[`tab.${item.value}`] ? () => slots[`tab.${item.value}`]?.({ item }) : undefined,
                   }}
