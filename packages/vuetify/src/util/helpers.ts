@@ -724,7 +724,7 @@ export function renderSlot (slot?: Slot<unknown>, props?: unknown, fallback?: Sl
 }
 
 export function defer (timeout: number, cb: () => void) {
-  if (!IN_BROWSER || timeout === 0) {
+  if (!IN_BROWSER || timeout === 0 || Number.isNaN(timeout)) {
     cb()
 
     return () => {}
