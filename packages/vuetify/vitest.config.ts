@@ -90,10 +90,11 @@ export default defineConfig(configEnv => {
                 instances: [{
                   browser: 'chrome',
                   capabilities: {
-                    browserVersion: '136',
+                    browserVersion: '142',
                     'goog:chromeOptions': {
                       args: [
                         '--start-maximized',
+                        '--disable-infobars',
                         process.env.TEST_BAIL && '--auto-open-devtools-for-tabs',
                         // I have no idea why this is needed, it throws "WebDriverError: session
                         // not created: probably user data directory is already in use" without it

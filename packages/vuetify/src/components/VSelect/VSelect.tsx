@@ -495,6 +495,7 @@ export const VSelect = genericComponent<new <
                                         modelValue={ isSelected }
                                         ripple={ false }
                                         tabindex="-1"
+                                        onClick={ (event: MouseEvent) => event.preventDefault() }
                                       />
                                     ) : undefined }
 
