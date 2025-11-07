@@ -259,6 +259,13 @@ describe('helpers', () => {
       expect(mockCallback).toHaveBeenCalledWith()
     })
 
+    it('executes callback immediately if timeout is NaN', () => {
+      const mockCallback = vi.fn()
+      defer(NaN, mockCallback)()
+
+      expect(mockCallback).toHaveBeenCalledWith()
+    })
+
     it('executes callback after specified timeout', () => {
       const mockCallback = vi.fn()
       defer(1000, mockCallback)
