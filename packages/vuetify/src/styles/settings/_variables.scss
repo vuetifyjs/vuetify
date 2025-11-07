@@ -125,10 +125,10 @@ $grid-breakpoints: map-deep-merge(
   (
     'xs': 0,
     'sm': 600px,
-    'md': 960px,
-    'lg': 1280px,
-    'xl': 1920px,
-    'xxl': 2560px,
+    'md': 840px,
+    'lg': 1145px,
+    'xl': 1545px,
+    'xxl': 2138px,
   ),
   $grid-breakpoints
 );
@@ -155,10 +155,10 @@ $container-max-widths: map-deep-merge(
   (
     'xs': null,
     'sm': null,
-    'md': map.get($grid-breakpoints, 'md') * 0.9375,
-    'lg': map.get($grid-breakpoints, 'lg') * 0.9375,
-    'xl': map.get($grid-breakpoints, 'xl') * 0.9375,
-    'xxl': map.get($grid-breakpoints, 'xxl') * 0.9375,
+    'md': 100 * math.floor(map.get($grid-breakpoints, 'md') * 0.009375),
+    'lg': 100 * math.floor(map.get($grid-breakpoints, 'lg') * 0.009375),
+    'xl': 100 * math.floor(map.get($grid-breakpoints, 'xl') * 0.009375),
+    'xxl': 100 * math.floor(map.get($grid-breakpoints, 'xxl') * 0.009375),
   ),
   $container-max-widths
 );
