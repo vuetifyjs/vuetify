@@ -1,3 +1,4 @@
+@use '../../styles/settings'
 @use '../../styles/tools'
 @use './variables' as *
 
@@ -36,6 +37,9 @@
     display: flex
     justify-content: center
     padding: $infinite-scroll-side-padding
+    transition-property: padding
+    transition-duration: settings.$transition-duration-root
+    transition-timing-function: settings.$standard-easing
 
     &:empty,
     &:has(> div:only-child:empty)
