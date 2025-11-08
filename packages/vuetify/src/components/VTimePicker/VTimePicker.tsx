@@ -13,8 +13,8 @@ import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, onMounted, ref, watch } from 'vue'
-import { createRange, genericComponent, omit, propsFactory, useRender } from '@/util'
+import { computed, onMounted, ref, toRef, watch } from 'vue'
+import { createRange, debounce, genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -75,7 +75,7 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
     'update:minute': (val: number) => true,
     'update:period': (val: Period) => true,
     'update:second': (val: number) => true,
-    'update:modelValue': (val: string) => true,
+    'update:modelValue': (val: string | null) => true,
     'update:viewMode': (val: VTimePickerViewMode) => true,
   },
 
@@ -180,9 +180,40 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
       return props.format === 'ampm'
     })
 
+    const shouldClear = toRef(() => {
+      return props.modelValue !== null &&
+        inputHour.value === null &&
+        inputMinute.value === null &&
+        (!props.useSeconds || inputSecond.value === null)
+    })
+
+    const emitValue = debounce(() => {
+      const value = genValue()
+
+      if (value !== null) {
+        emit('update:modelValue', value)
+      }
+      if (shouldClear.value) {
+        emit('update:modelValue', null)
+      }
+    }, 100)
+
+    watch(inputHour, emitValue)
+    watch(inputMinute, emitValue)
+    watch(inputSecond, emitValue)
+
     watch(() => props.period, val => setPeriod(val))
 
     watch(() => props.modelValue, val => setInputData(val))
+
+    watch(() => props.useSeconds, (val, old) => {
+      if (old && !val && viewMode.value === 'second') {
+        viewMode.value = 'minute'
+      }
+      if (!val && inputSecond.value !== null) {
+        inputSecond.value = null
+      }
+    })
 
     onMounted(() => {
       setInputData(props.modelValue)
@@ -194,11 +225,6 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
       }
 
       return null
-    }
-
-    function emitValue () {
-      const value = genValue()
-      if (value !== null) emit('update:modelValue', value)
     }
 
     function convert24to12 (hour: number) {
