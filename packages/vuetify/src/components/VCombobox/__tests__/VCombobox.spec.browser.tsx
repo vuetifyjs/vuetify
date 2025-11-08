@@ -802,6 +802,21 @@ describe('VCombobox', () => {
     await expect.poll(() => screen.queryAllByRole('option')).toHaveLength(1)
   })
 
+  it('should create new items when pasting with line break characters', async () => {
+    const model = ref(null)
+    render(() => (
+      <VCombobox
+        v-model={ model.value }
+        multiple
+      />
+    ))
+
+    await userEvent.tab()
+    navigator.clipboard.writeText('foo\nbar')
+    await userEvent.paste()
+    expect(model.value).toEqual(['foo', 'bar'])
+  })
+
   describe('Showcase', () => {
     generate({ stories })
   })
