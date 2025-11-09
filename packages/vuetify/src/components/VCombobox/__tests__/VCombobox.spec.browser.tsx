@@ -808,11 +808,12 @@ describe('VCombobox', () => {
       <VCombobox
         v-model={ model.value }
         multiple
+        delimiters={[',']}
       />
     ))
 
     await userEvent.tab()
-    navigator.clipboard.writeText('foo\nbar')
+    navigator.clipboard.writeText('foo,\nbar')
     await userEvent.paste()
     expect(model.value).toEqual(['foo', 'bar'])
   })

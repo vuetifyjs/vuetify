@@ -165,8 +165,7 @@ export const VCombobox = genericComponent<new <
         }
 
         if (val && props.multiple && props.delimiters?.length) {
-          const signsToMatch = props.delimiters.map(escapeForRegex).join('|')
-          const values = val.split(new RegExp(`(?:${signsToMatch})+`))
+          const values = splitByDelimiters(val)
           if (values.length > 1) {
             selectMultiple(values)
             _search.value = ''
@@ -360,7 +359,7 @@ export const VCombobox = genericComponent<new <
     }
     function onPaste (e: ClipboardEvent) {
       const clipboardText = e?.clipboardData?.getData('Text') ?? ''
-      const values = clipboardText.split('\n').filter(item => item.trim() !== '')
+      const values = splitByDelimiters(clipboardText)
 
       if (values.length > 1 && props.multiple) {
         e.preventDefault()
@@ -412,6 +411,11 @@ export const VCombobox = genericComponent<new <
           isPristine.value = true
         })
       }
+    }
+    function splitByDelimiters (val: string) {
+      const effectiveDelimiters = ['\n', ...props.delimiters ?? []]
+      const signsToMatch = effectiveDelimiters.map(escapeForRegex).join('|')
+      return val.split(new RegExp(`(?:${signsToMatch})+`))
     }
     async function selectMultiple (values: string[]) {
       for (let value of values) {
