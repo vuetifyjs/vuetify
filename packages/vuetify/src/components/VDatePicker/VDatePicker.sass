@@ -6,5 +6,18 @@
     overflow: hidden
     width: $date-picker-width
 
+    &.v-picker--landscape
+      width: $date-picker-width + $date-picker-landscape-header-width
+
+      .v-picker__header-wrapper
+        width: $date-picker-landscape-header-width
+
+        .v-date-picker-header
+          height: auto
+          padding-inline: 24px
+
     &--show-week
       width: $date-picker-show-week-width
+
+      &.v-picker--landscape
+        width: $date-picker-show-week-width + $date-picker-landscape-header-width
