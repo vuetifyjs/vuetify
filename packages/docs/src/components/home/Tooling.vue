@@ -27,18 +27,17 @@
         justify="space-between"
       >
         <v-col
-          :order-md="!isAlternateSection(i) ? '3' : '1'"
           cols="12"
-          md="6"
+          md="8"
           order="3"
         >
-          <p class="text-primary font-weight-bold mb-3">
+          <p class="text-subtitle-2 text-primary font-weight-bold mb-2">
             {{ tooling.title }}
           </p>
 
-          <h5 class="font-weight-bold text-h5 mb-1">{{ tooling.name }}</h5>
+          <h5 class="font-weight-bold text-h6 mb-1">{{ tooling.name }}</h5>
 
-          <h6 class="text-h6 font-weight-regular text-medium-emphasis my-4">
+          <h6 class="text-subtitle-1 font-weight-regular text-medium-emphasis my-2">
             {{ tooling.description }}
           </h6>
 
@@ -46,7 +45,6 @@
             class="text-none my-2"
             color="primary"
             rounded="lg"
-            size="large"
             flat
           >
             Get Started
@@ -54,19 +52,15 @@
         </v-col>
 
         <v-col
-          :class="{
-            'justify-center': smAndDown,
-            'justify-start': !smAndDown && !isAlternateSection(i),
-            'justify-end': !smAndDown && isAlternateSection(i),
-          }"
+          v-if="!smAndDown"
           class="d-flex"
           cols="12"
-          md="6"
+          md="4"
           order="2"
         >
           <v-img
             :src="tooling.image"
-            height="250"
+            max-height="150"
             max-width="80%"
             rounded="xl"
             width="100%"
@@ -76,7 +70,7 @@
         <v-col cols="12" order="4">
           <v-divider
             v-if="i !== toolings.length - 1"
-            class="my-10"
+            class="my-6"
             color="primary"
           />
         </v-col>
@@ -93,25 +87,18 @@
 
   const toolings = computed(() => [
     {
-      title: 'Figma UI Kit',
-      name: 'Build beautiful Vuetify components with Figma UI Kit',
-      // TODO: Use proper image
-      image: 'https://upload.wikimedia.org/wikipedia/commons/3/33/Figma-logo.svg',
-      description: `Fully optimized for Figma and based on Material Design - Vuetify UI Kit. You can use it to create your own Vuetify components and use them in your projects.`,
-    },
-    {
-      title: 'Write Clean code',
-      name: 'Vuetify ESLint Plugin will keep your code clean and consistent',
-      // TODO: Use proper image
-      image: 'https://cdn.vuetifyjs.com/docs/images/logos/vuetify-logo-light-atom.svg',
-      description: `Version upgrade automation eslint plugin, to keep your code clean and consistent! You can use it to keep your code clean and consistent.`,
-    },
-    {
       title: 'Scaffold your application',
       name: 'Vuetify Create will scaffold your next application',
       // TODO: Use proper image
       image: `https://cdn.vuetifyjs.com/docs/images/logos/vcreate-logo-${isDark.value ? 'dark' : 'light'}.png`,
       description: `Scaffold your next Vuetify application with just a few commands. Perfect for getting started with Vuetify. You can use it to create your own Vuetify components and use them in your projects.`,
+    },
+    {
+      title: 'Figma UI Kit',
+      name: 'Build beautiful Vuetify components with Figma UI Kit',
+      // TODO: Use proper image
+      image: 'https://upload.wikimedia.org/wikipedia/commons/3/33/Figma-logo.svg',
+      description: `Fully optimized for Figma and based on Material Design - Vuetify UI Kit. You can use it to create your own Vuetify components and use them in your projects.`,
     },
     {
       title: 'Vuetify ESLint Config',
@@ -120,9 +107,12 @@
       // TODO: Use proper image
       image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/ESLint_logo.svg/1200px-ESLint_logo.svg.png',
     },
+    {
+      title: 'Write Clean code',
+      name: 'Vuetify ESLint Plugin will keep your code clean and consistent',
+      // TODO: Use proper image
+      image: 'https://cdn.vuetifyjs.com/docs/images/logos/vuetify-logo-light-atom.svg',
+      description: `Version upgrade automation eslint plugin, to keep your code clean and consistent! You can use it to keep your code clean and consistent.`,
+    },
   ])
-
-  function isAlternateSection (index: number) {
-    return index % 2 !== 0
-  }
 </script>
