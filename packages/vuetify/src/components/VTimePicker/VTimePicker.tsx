@@ -187,16 +187,16 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
         (!props.useSeconds || inputSecond.value === null)
     })
 
-    const emitValue = debounce(() => {
+    function emitValue () {
       const value = genValue()
 
-      if (value !== null) {
+      if (value !== null && value !== props.modelValue) {
         emit('update:modelValue', value)
       }
       if (shouldClear.value) {
         emit('update:modelValue', null)
       }
-    }, 100)
+    }
 
     watch(inputHour, emitValue)
     watch(inputMinute, emitValue)

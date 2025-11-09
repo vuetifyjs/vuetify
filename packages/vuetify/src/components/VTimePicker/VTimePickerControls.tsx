@@ -69,6 +69,7 @@ export const VTimePickerControls = genericComponent()({
         const val = typeof v === 'string' ? extractNumber(v) : Number(v)
         if (val === null) return null
         if (props.ampm && props.period === 'am' && val === 12) return 0
+        if (props.ampm && props.period === 'pm' && val === 12) return 12
         if (props.ampm && props.period === 'pm') return val + 12
         return clamp(val, 0, 23)
       },
@@ -103,30 +104,80 @@ export const VTimePickerControls = genericComponent()({
       transformMinutesOrSeconds.out,
     )
 
+    function togglePeriod () {
+      emit('update:period', props.period === 'am' ? 'pm' : 'am')
+    }
+
     function onHourFieldKeydown (e: KeyboardEvent) {
       if (!['ArrowUp', 'ArrowDown'].includes(e.key)) return
       e.preventDefault()
       e.stopPropagation()
-      const increment = e.key === 'ArrowUp' ? 1 : -1
-      if (props.ampm && hour.value === '12' && increment < 0) return
-      if (props.ampm && hour.value === '11' && increment > 0) return
-      hour.value = hour.value ? clamp(Number(hour.value) + increment, 0, 23) : 0
+      const increment = e.key === 'ArrowUp'
+      const current = Number(hour.value ?? 0)
+      if (props.ampm) {
+        if (current === 12 && increment) {
+          hour.value = '01'
+          return
+        }
+        if (current === 11 && increment) {
+          hour.value = '12'
+          togglePeriod()
+          return
+        }
+        if (current === 12 && !increment) {
+          hour.value = '11'
+          togglePeriod()
+          return
+        }
+        if (current === 1 && !increment) {
+          hour.value = '12'
+          return
+        }
+      } else {
+        if (current === 23 && increment) {
+          hour.value = '00'
+          return
+        }
+        if (current === 0 && !increment) {
+          hour.value = '23'
+          return
+        }
+      }
+      hour.value = current + (increment ? 1 : -1)
     }
 
     function onMinuteFieldKeydown (e: KeyboardEvent) {
       if (!['ArrowUp', 'ArrowDown'].includes(e.key)) return
       e.preventDefault()
       e.stopPropagation()
-      const increment = e.key === 'ArrowUp' ? 1 : -1
-      minute.value = minute.value ? clamp(Number(minute.value) + increment, 0, 59) : 0
+      const increment = e.key === 'ArrowUp'
+      const current = Number(minute.value)
+      if (current === 59 && increment) {
+        minute.value = '00'
+        return
+      }
+      if (current === 0 && !increment) {
+        minute.value = '59'
+        return
+      }
+      minute.value = current + (increment ? 1 : -1)
     }
 
     function onSecondFieldKeydown (e: KeyboardEvent) {
       if (!['ArrowUp', 'ArrowDown'].includes(e.key)) return
       e.preventDefault()
       e.stopPropagation()
-      const increment = e.key === 'ArrowUp' ? 1 : -1
-      second.value = second.value ? clamp(Number(second.value) + increment, 0, 59) : 0
+      const increment = e.key === 'ArrowUp'
+      const current = Number(second.value)
+      if (current === 59 && increment) {
+        second.value = '00'
+        return
+      }
+      if (current === 0 && !increment) {
+        second.value = '59'
+        return
+      }
+      second.value = current + (increment ? 1 : -1)
     }
 
     function createInputInterceptor (
