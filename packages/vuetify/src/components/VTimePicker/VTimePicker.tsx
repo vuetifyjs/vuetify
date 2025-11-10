@@ -2,7 +2,6 @@
 import './VTimePicker.sass'
 
 // Components
-import { pad } from './util'
 import { VTimePickerClock } from './VTimePickerClock'
 import { VTimePickerControls } from './VTimePickerControls'
 import { makeVPickerProps, VPicker } from '@/labs/VPicker/VPicker'
@@ -14,14 +13,14 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, onMounted, ref, toRef, watch } from 'vue'
+import { convert12to24, convert24to12, pad } from './util'
 import { createRange, genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import type { VTimePickerViewMode } from './shared'
+import type { Period, VTimePickerViewMode } from './shared'
 import type { VPickerSlots } from '@/labs/VPicker/VPicker'
 
-type Period = 'am' | 'pm'
 type AllowFunction = (val: number) => boolean
 
 const rangeHours24 = createRange(24)
@@ -225,14 +224,6 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
       }
 
       return null
-    }
-
-    function convert24to12 (hour: number) {
-      return hour ? ((hour - 1) % 12 + 1) : 12
-    }
-
-    function convert12to24 (hour: number, period: Period) {
-      return hour % 12 + (period === 'pm' ? 12 : 0)
     }
 
     function setInputData (value: string | null | Date) {

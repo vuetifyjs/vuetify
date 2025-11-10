@@ -2,7 +2,6 @@
 import './VTimePickerControls.sass'
 
 // Components
-import { pad } from './util'
 import { VTimePickerField } from './VTimePickerField'
 import { VBtn } from '@/components/VBtn'
 
@@ -12,12 +11,12 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { ref, watch } from 'vue'
+import { convert12to24, convert24to12, extractInteger, incrementHour, incrementMinuteOrSecond, pad } from './util'
 import { clamp, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType, Ref } from 'vue'
-import type { VTimePickerViewMode } from './shared'
-type Period = 'am' | 'pm'
+import type { Period, VTimePickerViewMode } from './shared'
 
 export const makeVTimePickerControlsProps = propsFactory({
   ampm: Boolean,
@@ -49,29 +48,21 @@ export const VTimePickerControls = genericComponent()({
   setup (props, { emit, slots }) {
     const { t } = useLocale()
 
-    function extractNumber (v: string): number | null {
-      const digits = v.replaceAll(/\D/g, '')
-      return digits.length > 0
-        ? Number(digits)
-        : null
-    }
-
     const transformHours = {
       in: (v?: number | string | null) => {
         if (v == null || isNaN(Number(v))) return null
         const val = Number(v)
         return props.ampm
-          ? pad((val ? ((val - 1) % 12 + 1) : 12))
+          ? pad(convert24to12(val))
           : pad(val)
       },
       out: (v: number | string | null) => {
         if (isNaN(Number(v)) || v == null || v === '') return null
-        const val = typeof v === 'string' ? extractNumber(v) : Number(v)
+        const val = typeof v === 'string' ? extractInteger(v) : Number(v)
         if (val === null) return null
-        if (props.ampm && props.period === 'am' && val === 12) return 0
-        if (props.ampm && props.period === 'pm' && val === 12) return 12
-        if (props.ampm && props.period === 'pm') return val + 12
-        return clamp(val, 0, 23)
+        return props.ampm
+          ? convert12to24(val, props.period ?? 'am')
+          : clamp(val, 0, 23)
       },
     }
 
@@ -81,7 +72,7 @@ export const VTimePickerControls = genericComponent()({
       in: (v?: number | string | null) => v != null && !isNaN(Number(v)) ? pad(`${v}`) : null,
       out: (v: number | string | null) => {
         if (isNaN(Number(v)) || v == null || v === '') return null
-        const val = typeof v === 'string' ? extractNumber(v) : Number(v)
+        const val = typeof v === 'string' ? extractInteger(v) : Number(v)
         return val !== null
           ? clamp(val, 0, 59)
           : null
@@ -104,80 +95,31 @@ export const VTimePickerControls = genericComponent()({
       transformMinutesOrSeconds.out,
     )
 
-    function togglePeriod () {
-      emit('update:period', props.period === 'am' ? 'pm' : 'am')
-    }
-
     function onHourFieldKeydown (e: KeyboardEvent) {
       if (!['ArrowUp', 'ArrowDown'].includes(e.key)) return
       e.preventDefault()
       e.stopPropagation()
-      const increment = e.key === 'ArrowUp'
       const current = Number(hour.value ?? 0)
-      if (props.ampm) {
-        if (current === 12 && increment) {
-          hour.value = '01'
-          return
-        }
-        if (current === 11 && increment) {
-          hour.value = '12'
-          togglePeriod()
-          return
-        }
-        if (current === 12 && !increment) {
-          hour.value = '11'
-          togglePeriod()
-          return
-        }
-        if (current === 1 && !increment) {
-          hour.value = '12'
-          return
-        }
-      } else {
-        if (current === 23 && increment) {
-          hour.value = '00'
-          return
-        }
-        if (current === 0 && !increment) {
-          hour.value = '23'
-          return
-        }
+      const period = props.ampm ? (props.period ?? 'am') : null
+      const { value, togglePeriod } = incrementHour(current, e.key === 'ArrowUp', period)
+      hour.value = pad(value)
+      if (togglePeriod) {
+        emit('update:period', props.period === 'am' ? 'pm' : 'am')
       }
-      hour.value = current + (increment ? 1 : -1)
     }
 
     function onMinuteFieldKeydown (e: KeyboardEvent) {
       if (!['ArrowUp', 'ArrowDown'].includes(e.key)) return
       e.preventDefault()
       e.stopPropagation()
-      const increment = e.key === 'ArrowUp'
-      const current = Number(minute.value)
-      if (current === 59 && increment) {
-        minute.value = '00'
-        return
-      }
-      if (current === 0 && !increment) {
-        minute.value = '59'
-        return
-      }
-      minute.value = current + (increment ? 1 : -1)
+      minute.value = incrementMinuteOrSecond(Number(minute.value), e.key === 'ArrowUp')
     }
 
     function onSecondFieldKeydown (e: KeyboardEvent) {
       if (!['ArrowUp', 'ArrowDown'].includes(e.key)) return
       e.preventDefault()
       e.stopPropagation()
-      const increment = e.key === 'ArrowUp'
-      const current = Number(second.value)
-      if (current === 59 && increment) {
-        second.value = '00'
-        return
-      }
-      if (current === 0 && !increment) {
-        second.value = '59'
-        return
-      }
-      second.value = current + (increment ? 1 : -1)
+      second.value = incrementMinuteOrSecond(Number(second.value), e.key === 'ArrowUp')
     }
 
     function createInputInterceptor (
@@ -190,7 +132,7 @@ export const VTimePickerControls = genericComponent()({
         const inputElement = e.target as HTMLInputElement
         const { value: existingTxt, selectionStart, selectionEnd } = inputElement ?? {}
 
-        if (extractNumber(e.data) === null) {
+        if (extractInteger(e.data) === null) {
           e.preventDefault()
           return
         }
@@ -218,10 +160,10 @@ export const VTimePickerControls = genericComponent()({
           }
 
           const maxValue = props.viewMode === 'hour' ? (props.ampm ? 12 : 23) : 59
-          const value = extractNumber(potentialNewInputVal)!
+          const value = extractInteger(potentialNewInputVal)!
           if (value > maxValue) {
             e.preventDefault()
-            inputElement!.value = pad(String(extractNumber(e.data)).substring(0, 2))
+            inputElement!.value = pad(String(extractInteger(e.data)).substring(0, 2))
             apply(inputElement!.value)
             return
           }
