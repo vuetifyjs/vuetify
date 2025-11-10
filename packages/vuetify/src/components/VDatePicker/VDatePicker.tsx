@@ -12,6 +12,7 @@ import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { makeVPickerProps, VPicker } from '@/labs/VPicker/VPicker'
 
 // Composables
+import { useCalendarRange } from '@/composables/calendar'
 import { useDate } from '@/composables/date'
 import { daysDiff } from '@/composables/date/date'
 import { useLocale, useRtl } from '@/composables/locale'
@@ -124,27 +125,13 @@ export const VDatePicker = genericComponent<new <
     const viewMode = useProxiedModel(props, 'viewMode')
     // const inputMode = useProxiedModel(props, 'inputMode')
 
-    const minDate = computed(() => {
-      const date = adapter.date(props.min)
-
-      return props.min && adapter.isValid(date) ? date : null
-    })
-    const maxDate = computed(() => {
-      const date = adapter.date(props.max)
-
-      return props.max && adapter.isValid(date) ? date : null
-    })
+    const { minDate, maxDate, clampDate } = useCalendarRange(props)
 
     const internal = computed(() => {
       const today = adapter.date()
-      let value = today
-      if (model.value?.[0]) {
-        value = adapter.date(model.value[0])
-      } else if (minDate.value && adapter.isBefore(today, minDate.value)) {
-        value = minDate.value
-      } else if (maxDate.value && adapter.isAfter(today, maxDate.value)) {
-        value = maxDate.value
-      }
+      const value = model.value?.[0]
+        ? adapter.date(model.value[0])
+        : clampDate(today)
 
       return value && adapter.isValid(value) ? value : today
     })

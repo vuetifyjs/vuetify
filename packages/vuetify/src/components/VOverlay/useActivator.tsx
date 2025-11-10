@@ -172,7 +172,8 @@ export function useActivator (
     }
 
     if (openOnFocus.value) {
-      events.onFocusin = () => {
+      events.onFocusin = (e: Event) => {
+        if (!(e.target as HTMLElement).matches(':focus-visible')) return
         isFocused = true
         runOpenDelay()
       }

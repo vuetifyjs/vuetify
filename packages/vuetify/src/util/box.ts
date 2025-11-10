@@ -11,7 +11,8 @@ export class Box {
     height: number
   }) {
     const pageScale = document.body.currentCSSZoom ?? 1
-    const factor = args instanceof DOMRect ? 1 + (1 - pageScale) / pageScale : 1
+    const ignoreZoom = (args as any).top === undefined // detect DOMRect without breaking in jsdom
+    const factor = ignoreZoom ? 1 : 1 + (1 - pageScale) / pageScale
 
     const { x, y, width, height } = args
 
@@ -75,12 +76,6 @@ export function getElementBox (el: HTMLElement) {
       })
     }
   } else {
-    const rect = el.getBoundingClientRect()
-    return new Box({
-      x: rect.x,
-      y: rect.y,
-      width: el.clientWidth,
-      height: el.clientHeight,
-    })
+    return new Box(el.getBoundingClientRect())
   }
 }
