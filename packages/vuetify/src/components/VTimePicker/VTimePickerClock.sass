@@ -130,3 +130,15 @@
     .v-time-picker-clock
       &__container
         flex-direction: row
+
+  .v-time-picker-clock
+    @media (forced-colors: active)
+      &__hand
+        background-color: highlight
+        &:before
+          border-color: highlight
+        &:after
+          background-color: highlight
+
+      &__item--active
+        outline: 2px solid highlight !important

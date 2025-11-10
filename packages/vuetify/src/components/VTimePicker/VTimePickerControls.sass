@@ -167,3 +167,14 @@
 
     .v-time-picker-controls__time
       text-align: center
+
+
+  .v-time-picker-controls
+    @media (forced-colors: active)
+      .v-time-picker-controls__time__field:has(input:focus-visible)
+        outline: 2px solid highlight
+        outline-offset: 2px
+
+      .v-time-picker-controls__ampm__btn.v-btn--active
+        color: highlight !important
+        forced-color-adjust: preserve-parent-color
