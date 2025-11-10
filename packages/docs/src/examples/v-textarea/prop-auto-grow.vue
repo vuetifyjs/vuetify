@@ -18,7 +18,7 @@
     <v-textarea
       v-model="text"
       hint="Growing up to 300px"
-      max-grow="300"
+      max-height="300"
       auto-grow
       persistent-hint
     ></v-textarea>

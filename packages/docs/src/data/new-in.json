@@ -275,7 +275,7 @@
   },
   "VTextarea": {
     "props": {
-      "maxGrow": "3.11.0"
+      "maxHeight": "3.11.0"
     }
   },
   "VTextField": {
