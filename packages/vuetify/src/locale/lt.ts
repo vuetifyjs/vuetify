@@ -85,6 +85,9 @@ export default {
     am: 'AM',
     pm: 'PM',
     title: 'Pasirinkite laiką',
+    hour: 'Valanda',
+    minute: 'Minutės',
+    second: 'Sekundės',
   },
   pagination: {
     ariaLabel: {

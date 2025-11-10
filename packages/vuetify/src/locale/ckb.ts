@@ -85,6 +85,9 @@ export default {
     am: 'پێش نیوەڕۆژ',
     pm: 'دوای نیوەڕۆژ',
     title: 'کات دیاریبکە',
+    hour: 'کاتژمێر',
+    minute: 'خولەک',
+    second: 'چرکە',
   },
   pagination: {
     ariaLabel: {

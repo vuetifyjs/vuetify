@@ -85,6 +85,9 @@ export default {
     am: 'ព្រឹក',
     pm: 'ល្ងាច',
     title: 'ជ្រើសរើសម៉ោង',
+    hour: 'ម៉ោង',
+    minute: 'នាទី',
+    second: 'វិនាទី',
   },
   pagination: {
     ariaLabel: {

@@ -85,6 +85,9 @@ export default {
     am: 'AM',
     pm: 'PM',
     title: 'Vælg tidspunkt',
+    hour: 'Time',
+    minute: 'Minutter',
+    second: 'Sekunder',
   },
   pagination: {
     ariaLabel: {

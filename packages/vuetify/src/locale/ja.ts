@@ -85,6 +85,9 @@ export default {
     am: '午前',
     pm: '午後',
     title: '時間を選択',
+    hour: '時',
+    minute: '分',
+    second: '秒',
   },
   pagination: {
     ariaLabel: {

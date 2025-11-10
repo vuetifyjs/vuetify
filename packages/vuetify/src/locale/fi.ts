@@ -85,6 +85,9 @@ export default {
     am: 'ap.',
     pm: 'ip.',
     title: 'Valitse aika',
+    hour: 'Tunti',
+    minute: 'Minuutit',
+    second: 'Sekunnit',
   },
   pagination: {
     ariaLabel: {

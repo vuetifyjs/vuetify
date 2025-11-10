@@ -85,6 +85,9 @@ export default {
     am: '上午',
     pm: '下午',
     title: '选择时间',
+    hour: '小时',
+    minute: '分钟',
+    second: '秒',
   },
   pagination: {
     ariaLabel: {

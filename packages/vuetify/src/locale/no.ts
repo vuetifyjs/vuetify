@@ -85,6 +85,9 @@ export default {
     am: 'AM',
     pm: 'PM',
     title: 'Velg tid',
+    hour: 'Time',
+    minute: 'Minutter',
+    second: 'Sekunder',
   },
   pagination: {
     ariaLabel: {

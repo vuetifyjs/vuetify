@@ -85,6 +85,9 @@ export default {
     am: 'AM',
     pm: 'PM',
     title: 'Selecciona l’hora',
+    hour: 'Hora',
+    minute: 'Minuts',
+    second: 'Segons',
   },
   pagination: {
     ariaLabel: {
