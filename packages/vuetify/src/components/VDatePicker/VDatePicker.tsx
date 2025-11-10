@@ -73,6 +73,10 @@ export const makeVDatePickerProps = propsFactory({
     default: '$vuetify.datePicker.header',
   },
   headerColor: String,
+  headerDateFormat: {
+    type: String,
+    default: 'normalDateWithWeekday',
+  },
 
   ...makeVDatePickerControlsProps(),
   ...makeVDatePickerMonthProps({
@@ -158,7 +162,7 @@ export const VDatePicker = genericComponent<new <
       }
 
       return (model.value[0] && adapter.isValid(model.value[0]))
-        ? adapter.format(adapter.date(model.value[0]), 'normalDateWithWeekday')
+        ? adapter.format(adapter.date(model.value[0]), props.headerDateFormat)
         : t(props.header)
     })
 
