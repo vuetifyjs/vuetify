@@ -22,8 +22,8 @@
   },
   "dependencies": {
     "@cosmicjs/sdk": "^1.5.2",
-    "@regle/core": "1.8.4",
-    "@regle/rules": "1.8.4",
+    "@regle/core": "1.9.8",
+    "@regle/rules": "1.9.8",
     "@sentry/vue": "^9.12.0",
     "@vue/compiler-dom": "^3.5.13",
     "@vuetify/one": "^2.3.0",

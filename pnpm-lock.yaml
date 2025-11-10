@@ -267,11 +267,11 @@ importers:
         specifier: ^1.5.2
         version: 1.5.2
       '@regle/core':
-        specifier: 1.8.4
-        version: 1.8.4(pinia@3.0.2(typescript@5.8.3)(vue@3.5.13(typescript@5.8.3)))(vue@3.5.13(typescript@5.8.3))
+        specifier: 1.9.8
+        version: 1.9.8(pinia@3.0.2(typescript@5.8.3)(vue@3.5.13(typescript@5.8.3)))(vue@3.5.13(typescript@5.8.3))
       '@regle/rules':
-        specifier: 1.8.4
-        version: 1.8.4(pinia@3.0.2(typescript@5.8.3)(vue@3.5.13(typescript@5.8.3)))(vue@3.5.13(typescript@5.8.3))
+        specifier: 1.9.8
+        version: 1.9.8(pinia@3.0.2(typescript@5.8.3)(vue@3.5.13(typescript@5.8.3)))(vue@3.5.13(typescript@5.8.3))
       '@sentry/vue':
         specifier: ^9.12.0
         version: 9.12.0(pinia@3.0.2(typescript@5.8.3)(vue@3.5.13(typescript@5.8.3)))(vue@3.5.13(typescript@5.8.3))
@@ -2401,8 +2401,8 @@ packages:
     engines: {node: '>=18'}
     hasBin: true
 
-  '@regle/core@1.8.4':
-    resolution: {integrity: sha512-wcGvkQdShARDDtfRsTd4JMrUkdfM2E60xHvvdL0EA5kvmS5gYYz+n64O7VRFR0BsQtNtRD/7n9VYkTgIsrOq7g==}
+  '@regle/core@1.9.8':
+    resolution: {integrity: sha512-vId9W0Hr1TTaBPHZ3lO5S2inqlbQIFqo/pUbyO+wuXIO2ZQthHOKhyfRlyDuJ2rjajM9nugs2RL5KA050gBEjQ==}
     peerDependencies:
       pinia: '>=2.2.5'
       vue: '>=3.3.0'
@@ -2410,8 +2410,8 @@ packages:
       pinia:
         optional: true
 
-  '@regle/rules@1.8.4':
-    resolution: {integrity: sha512-YF1EJtm/zEoI2klsitsamvL9a88EchhzdGCpUr78OtM43dDszC3LN3eoFV/PJI37Pc55af/4sJv2Kve/yrSRsg==}
+  '@regle/rules@1.9.8':
+    resolution: {integrity: sha512-Kxs+GY6j6XO4ZlNRwLKdGE8TRLDwFEpcF50ngXEmzhYhFnNv5Nb8thanF/qsDNyrFFvgt+jusPzwVdiYP/xw+A==}
 
   '@rolldown/pluginutils@1.0.0-beta.17':
     resolution: {integrity: sha512-i6p5fc1+lAmR3OHmNlv7/3PIY3EtuUu4kVARjkid38p7cmyIyqr0QFnA+k3xoB06wQUpBA91H1HFlRreZ2v5oA==}
@@ -2689,6 +2689,9 @@ packages:
 
   '@sinonjs/fake-timers@10.3.0':
     resolution: {integrity: sha512-V4BG07kuYSUkTCSBHG8G8TNhM+F19jXFWnQtzj+we8DrkpSBCee9Z3Ms8yiGer/dlmhe35/Xdgyo3/0rQKg7YA==}
+
+  '@standard-schema/spec@1.0.0':
+    resolution: {integrity: sha512-m2bOd0f2RT9k8QJx1JN85cZYyH1RqFBdlwtkSlf4tBDYLCiiZnv1fIIwacK6cqwXavOydf0NPToMQgpKq+dVlA==}
 
   '@stylistic/eslint-plugin-ts@3.1.0':
     resolution: {integrity: sha512-ExsbaLmPTt3Y9bWN64nw+hpsnLAScLH25ncPxrV16FG2Lvg5wn6aRfMqldUGpu+YdqVmFFU1zehgFh6RIHT6YA==}
@@ -10828,15 +10831,16 @@ snapshots:
       - bare-buffer
       - supports-color
 
-  '@regle/core@1.8.4(pinia@3.0.2(typescript@5.8.3)(vue@3.5.13(typescript@5.8.3)))(vue@3.5.13(typescript@5.8.3))':
+  '@regle/core@1.9.8(pinia@3.0.2(typescript@5.8.3)(vue@3.5.13(typescript@5.8.3)))(vue@3.5.13(typescript@5.8.3))':
     dependencies:
+      '@standard-schema/spec': 1.0.0
       vue: 3.5.13(typescript@5.8.3)
     optionalDependencies:
       pinia: 3.0.2(typescript@5.8.3)(vue@3.5.13(typescript@5.8.3))
 
-  '@regle/rules@1.8.4(pinia@3.0.2(typescript@5.8.3)(vue@3.5.13(typescript@5.8.3)))(vue@3.5.13(typescript@5.8.3))':
+  '@regle/rules@1.9.8(pinia@3.0.2(typescript@5.8.3)(vue@3.5.13(typescript@5.8.3)))(vue@3.5.13(typescript@5.8.3))':
     dependencies:
-      '@regle/core': 1.8.4(pinia@3.0.2(typescript@5.8.3)(vue@3.5.13(typescript@5.8.3)))(vue@3.5.13(typescript@5.8.3))
+      '@regle/core': 1.9.8(pinia@3.0.2(typescript@5.8.3)(vue@3.5.13(typescript@5.8.3)))(vue@3.5.13(typescript@5.8.3))
     transitivePeerDependencies:
       - pinia
       - vue
@@ -11070,6 +11074,8 @@ snapshots:
   '@sinonjs/fake-timers@10.3.0':
     dependencies:
       '@sinonjs/commons': 3.0.1
+
+  '@standard-schema/spec@1.0.0': {}
 
   '@stylistic/eslint-plugin-ts@3.1.0(eslint@8.57.0)(typescript@5.8.3)':
     dependencies:
