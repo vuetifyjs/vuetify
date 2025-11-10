@@ -256,6 +256,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
           ]}
           style={[
             {
+              '--v-textarea-max-height': props.maxHeight ? convertToUnit(props.maxHeight) : undefined,
               '--v-textarea-scroll-bar-width': convertToUnit(scrollbarWidth.value),
             },
             props.style,
