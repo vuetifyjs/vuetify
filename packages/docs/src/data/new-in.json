@@ -291,6 +291,11 @@
       "prev": "3.11.0"
     }
   },
+  "VTextarea": {
+    "props": {
+      "maxHeight": "3.11.0"
+    }
+  },
   "VTextField": {
     "props": {
       "autocomplete": "3.10.0"
