@@ -8,9 +8,17 @@ import { injectSelf } from '@/util/injectSelf'
 import type { ComputedRef, InjectionKey, Ref, VNode } from 'vue'
 import type { MaybeRef } from '@/util'
 
+export type SlotDefaults = {
+  [slotName: string]: Record<string, unknown>
+}
+
+export type ComponentDefaults = Record<string, unknown> & {
+  [slotKey: `#${string}`]: Record<string, unknown>
+}
+
 export type DefaultsInstance = undefined | {
-  [key: string]: undefined | Record<string, unknown>
-  global?: Record<string, unknown>
+  [key: string]: undefined | ComponentDefaults
+  global?: ComponentDefaults
 }
 
 export type DefaultsOptions = Partial<DefaultsInstance>
@@ -89,6 +97,29 @@ function propIsDefined (vnode: VNode, prop: string) {
     typeof vnode.props[toKebabCase(prop)] !== 'undefined')
 }
 
+function extractSlotDefaults (componentDefaults: ComponentDefaults | undefined): {
+  componentDefaults: Record<string, unknown>
+  slotDefaults: SlotDefaults
+} {
+  if (!componentDefaults) {
+    return { componentDefaults: {}, slotDefaults: {} }
+  }
+
+  const slotDefaults: SlotDefaults = {}
+  const filteredComponentDefaults: Record<string, unknown> = {}
+
+  for (const [key, value] of Object.entries(componentDefaults)) {
+    if (key.startsWith('#')) {
+      const slotName = key.slice(1) // Remove the '#' prefix
+      slotDefaults[slotName] = value as Record<string, unknown>
+    } else {
+      filteredComponentDefaults[key] = value
+    }
+  }
+
+  return { componentDefaults: filteredComponentDefaults, slotDefaults }
+}
+
 export function internalUseDefaults (
   props: Record<string, any> = {},
   name?: string,
@@ -101,7 +132,12 @@ export function internalUseDefaults (
     throw new Error('[Vuetify] Could not determine component name')
   }
 
-  const componentDefaults = computed(() => defaults.value?.[props._as ?? name])
+  const rawComponentDefaults = computed(() => defaults.value?.[props._as ?? name] as ComponentDefaults | undefined)
+  const extractedDefaults = computed(() => 
+    extractSlotDefaults(rawComponentDefaults.value)
+  )
+  const componentDefaults = computed(() => extractedDefaults.value.componentDefaults)
+
   const _props = new Proxy(props, {
     get (target, prop: string) {
       const propValue = Reflect.get(target, prop)
@@ -118,14 +154,20 @@ export function internalUseDefaults (
   })
 
   const _subcomponentDefaults = shallowRef()
+  const _slotDefaults = shallowRef<SlotDefaults>()
+  
   watchEffect(() => {
-    if (componentDefaults.value) {
-      const subComponents = Object.entries(componentDefaults.value)
+    const extracted = extractedDefaults.value
+    
+    if (extracted.componentDefaults) {
+      const subComponents = Object.entries(extracted.componentDefaults)
         .filter(([key]) => key.startsWith(key[0].toUpperCase()))
       _subcomponentDefaults.value = subComponents.length ? Object.fromEntries(subComponents) : undefined
     } else {
       _subcomponentDefaults.value = undefined
     }
+    
+    _slotDefaults.value = extracted.slotDefaults
   })
 
   function provideSubDefaults () {
@@ -138,16 +180,78 @@ export function internalUseDefaults (
     }))
   }
 
-  return { props: _props, provideSubDefaults }
+  function getSlotDefaults (slotName: string): Record<string, unknown> | undefined {
+    return _slotDefaults.value?.[slotName]
+  }
+
+  return { props: _props, provideSubDefaults, getSlotDefaults }
 }
 
-export function useDefaults<T extends Record<string, any>> (props: T, name?: string): T
-export function useDefaults (props?: undefined, name?: string): Record<string, any>
+export function useDefaults<T extends Record<string, any>> (props: T, name?: string): T & { getSlotDefaults: (slotName: string) => Record<string, unknown> | undefined }
+export function useDefaults (props?: undefined, name?: string): Record<string, any> & { getSlotDefaults: (slotName: string) => Record<string, unknown> | undefined }
 export function useDefaults (
   props: Record<string, any> = {},
   name?: string,
 ) {
-  const { props: _props, provideSubDefaults } = internalUseDefaults(props, name)
+  const { props: _props, provideSubDefaults, getSlotDefaults } = internalUseDefaults(props, name)
   provideSubDefaults()
-  return _props
+  
+  // Create a new proxy that includes getSlotDefaults
+  return new Proxy(_props, {
+    get(target, prop) {
+      if (prop === 'getSlotDefaults') {
+        return getSlotDefaults
+      }
+      return Reflect.get(target, prop)
+    },
+    has(target, prop) {
+      if (prop === 'getSlotDefaults') {
+        return true
+      }
+      return Reflect.has(target, prop)
+    },
+    ownKeys(target) {
+      return [...Reflect.ownKeys(target), 'getSlotDefaults']
+    }
+  })
+}
+
+export function createSlotDefaults (slotDefaults: Record<string, unknown> | undefined) {
+  if (!slotDefaults) return {}
+
+  const componentDefaults: Record<string, unknown> = {}
+  const directProps: Record<string, unknown> = {}
+
+  for (const [key, value] of Object.entries(slotDefaults)) {
+    if (key[0] === key[0].toUpperCase()) {
+      // Component defaults (e.g., VBtn: { size: 'md' })
+      componentDefaults[key] = value
+    } else {
+      // Direct props (e.g., class: 'pa-0')
+      directProps[key] = value
+    }
+  }
+
+  return { componentDefaults, directProps }
+}
+
+// Helper function to get slot defaults info without rendering
+export function useSlotDefaults() {
+  const defaults = injectDefaults()
+  const vm = getCurrentInstance('useSlotDefaults')
+  
+  function getSlotDefaultsInfo(slotName: string) {
+    const componentName = vm?.type.name ?? vm?.type.__name
+    if (!componentName) return null
+    
+    const componentDefaults = defaults.value?.[componentName] as ComponentDefaults | undefined
+    const { slotDefaults } = extractSlotDefaults(componentDefaults)
+    const slotDefaultsForSlot = slotDefaults[slotName]
+    
+    if (!slotDefaultsForSlot) return null
+    
+    return createSlotDefaults(slotDefaultsForSlot)
+  }
+  
+  return { getSlotDefaultsInfo }
 }

@@ -10,6 +10,7 @@ import { VIcon } from '@/components/VIcon'
 // Composables
 import { useTextColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
+import { useDefaults, useSlotDefaults } from '@/composables/defaults'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
@@ -106,31 +107,33 @@ export const VAlert = genericComponent<VAlertSlots>()({
   },
 
   setup (props, { emit, slots }) {
-    const isActive = useProxiedModel(props, 'modelValue')
+    const _props = useDefaults(props)
+    const { getSlotDefaultsInfo } = useSlotDefaults()
+    const isActive = useProxiedModel(_props, 'modelValue')
     const icon = toRef(() => {
-      if (props.icon === false) return undefined
-      if (!props.type) return props.icon
+      if (_props.icon === false) return undefined
+      if (!_props.type) return _props.icon
 
-      return props.icon ?? `$${props.type}`
+      return _props.icon ?? `$${_props.type}`
     })
 
-    const { iconSize } = useIconSizes(props, () => props.prominent ? 44 : undefined)
-    const { themeClasses } = provideTheme(props)
+    const { iconSize } = useIconSizes(_props, () => _props.prominent ? 44 : undefined)
+    const { themeClasses } = provideTheme(_props)
     const { colorClasses, colorStyles, variantClasses } = useVariant(() => ({
-      color: props.color ?? props.type,
-      variant: props.variant,
+      color: _props.color ?? _props.type,
+      variant: _props.variant,
     }))
-    const { densityClasses } = useDensity(props)
-    const { dimensionStyles } = useDimension(props)
-    const { elevationClasses } = useElevation(props)
-    const { locationStyles } = useLocation(props)
-    const { positionClasses } = usePosition(props)
-    const { roundedClasses } = useRounded(props)
-    const { textColorClasses, textColorStyles } = useTextColor(() => props.borderColor)
+    const { densityClasses } = useDensity(_props)
+    const { dimensionStyles } = useDimension(_props)
+    const { elevationClasses } = useElevation(_props)
+    const { locationStyles } = useLocation(_props)
+    const { positionClasses } = usePosition(_props)
+    const { roundedClasses } = useRounded(_props)
+    const { textColorClasses, textColorStyles } = useTextColor(() => _props.borderColor)
     const { t } = useLocale()
 
     const closeProps = toRef(() => ({
-      'aria-label': t(props.closeLabel),
+      'aria-label': t(_props.closeLabel),
       onClick (e: MouseEvent) {
         isActive.value = false
 
@@ -138,29 +141,52 @@ export const VAlert = genericComponent<VAlertSlots>()({
       },
     }))
 
+    // Helper function to wrap slot content with defaults
+    function wrapSlot(slotName: string, slotFn: (() => any) | undefined, fallbackContent?: any) {
+      const slotDefaultsInfo = getSlotDefaultsInfo(slotName)
+      
+      if (!slotDefaultsInfo && !slotFn) {
+        return fallbackContent
+      }
+      
+      if (!slotDefaultsInfo) {
+        return slotFn?.() ?? fallbackContent
+      }
+      
+      const { componentDefaults, directProps } = slotDefaultsInfo
+      
+      return (
+        <VDefaultsProvider defaults={componentDefaults as any}>
+          <div {...directProps}>
+            {slotFn?.() ?? fallbackContent}
+          </div>
+        </VDefaultsProvider>
+      )
+    }
+
     return () => {
       const hasPrepend = !!(slots.prepend || icon.value)
-      const hasTitle = !!(slots.title || props.title)
-      const hasClose = !!(slots.close || props.closable)
+      const hasTitle = !!(slots.title || _props.title)
+      const hasClose = !!(slots.close || _props.closable)
 
       const iconProps = {
-        density: props.density,
+        density: _props.density,
         icon: icon.value,
-        size: props.iconSize || props.prominent
+        size: _props.iconSize || _props.prominent
           ? iconSize.value
           : undefined,
       }
 
       return isActive.value && (
-        <props.tag
+        <_props.tag
           class={[
             'v-alert',
-            props.border && {
-              'v-alert--border': !!props.border,
-              [`v-alert--border-${props.border === true ? 'start' : props.border}`]: true,
+            _props.border && {
+              'v-alert--border': !!_props.border,
+              [`v-alert--border-${_props.border === true ? 'start' : _props.border}`]: true,
             },
             {
-              'v-alert--prominent': props.prominent,
+              'v-alert--prominent': _props.prominent,
             },
             themeClasses.value,
             colorClasses.value,
@@ -169,19 +195,19 @@ export const VAlert = genericComponent<VAlertSlots>()({
             positionClasses.value,
             roundedClasses.value,
             variantClasses.value,
-            props.class,
+            _props.class,
           ]}
           style={[
             colorStyles.value,
             dimensionStyles.value,
             locationStyles.value,
-            props.style,
+            _props.style,
           ]}
           role="alert"
         >
           { genOverlays(false, 'v-alert') }
 
-          { props.border && (
+          { _props.border && (
             <div
               key="border"
               class={[
@@ -201,8 +227,9 @@ export const VAlert = genericComponent<VAlertSlots>()({
                   key="prepend-defaults"
                   disabled={ !icon.value }
                   defaults={{ VIcon: { ...iconProps } }}
-                  v-slots:default={ slots.prepend }
-                />
+                >
+                  { wrapSlot('prepend', slots.prepend) }
+                </VDefaultsProvider>
               )}
             </div>
           )}
@@ -210,18 +237,18 @@ export const VAlert = genericComponent<VAlertSlots>()({
           <div class="v-alert__content">
             { hasTitle && (
               <VAlertTitle key="title">
-                { slots.title?.() ?? props.title }
+                { wrapSlot('title', slots.title, _props.title) }
               </VAlertTitle>
             )}
 
-            { slots.text?.() ?? props.text }
+            { wrapSlot('text', slots.text, _props.text) }
 
-            { slots.default?.() }
+            { wrapSlot('default', slots.default) }
           </div>
 
           { slots.append && (
             <div key="append" class="v-alert__append">
-              { slots.append() }
+              { wrapSlot('append', slots.append) }
             </div>
           )}
 
@@ -230,7 +257,7 @@ export const VAlert = genericComponent<VAlertSlots>()({
               { !slots.close ? (
                 <VBtn
                   key="close-btn"
-                  icon={ props.closeIcon }
+                  icon={ _props.closeIcon }
                   size="x-small"
                   variant="text"
                   { ...closeProps.value }
@@ -240,18 +267,18 @@ export const VAlert = genericComponent<VAlertSlots>()({
                   key="close-defaults"
                   defaults={{
                     VBtn: {
-                      icon: props.closeIcon,
+                      icon: _props.closeIcon,
                       size: 'x-small',
                       variant: 'text',
                     },
                   }}
                 >
-                  { slots.close?.({ props: closeProps.value }) }
+                  { wrapSlot('close', () => slots.close?.({ props: closeProps.value })) }
                 </VDefaultsProvider>
               )}
             </div>
           )}
-        </props.tag>
+        </_props.tag>
       )
     }
   },
