@@ -147,8 +147,6 @@
       gap: $hotkey-combination-gap;
     }
 
-
-
     &--inline &__key {
       &-symbol.v-kbd,
       &-text.v-kbd {
@@ -209,22 +207,20 @@
     }
 
     &--variant-outlined &__key.v-kbd {
+      background: none;
+
       @include tools.elevation(0);
-      & {
-        background: none;
-      }
     }
 
     &--variant-text {
       .v-hotkey__key.v-kbd {
+        background: transparent !important;
+        border: none !important;
+        padding-left: 0;
+        padding-right: 0;
+        min-width: auto;
+
         @include tools.elevation(0);
-        & {
-          background: transparent !important;
-          border: none !important;
-          padding-left: 0;
-          padding-right: 0;
-          min-width: auto;
-        }
       }
 
       .v-hotkey__combination {
@@ -236,18 +232,5 @@
       border: unset;
       box-shadow: unset;
     }
-  }
-
-  // Screen reader only content
-  .sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
   }
 }
