@@ -46,20 +46,45 @@ function onKeydown (e: KeyboardEvent) {
   if (!closestTrap) return
 
   const focusable = focusableChildren(closestTrap)
-    .filter(x => !x.classList.contains('v-list'))
+    // excluding VListItems with tabindex="-2"
+    .filter(x => x.tabIndex >= 0)
 
   if (!focusable.length) return
 
-  const focusedIndex = focusable.indexOf(activeElement)
-  let newIndex = focusedIndex + (e.shiftKey ? -1 : 1)
-  if (newIndex === -1) {
-    newIndex = focusable.length - 1
-  } else if (newIndex === focusable.length) {
-    newIndex = 0
+  const active = document.activeElement as HTMLElement | null
+  if (
+    focusable.length === 1 &&
+    focusable[0].classList.contains('v-list') &&
+    focusable[0].contains(active)
+  ) {
+    e.preventDefault()
+    return
   }
 
-  e.preventDefault()
-  focusable[newIndex].focus()
+  const firstElement = focusable[0]
+  const lastElement = focusable[focusable.length - 1]
+
+  if (
+    e.shiftKey &&
+    (
+      active === firstElement ||
+      (firstElement.classList.contains('v-list') && firstElement.contains(active))
+    )
+  ) {
+    e.preventDefault()
+    lastElement.focus()
+  }
+
+  if (
+    !e.shiftKey &&
+    (
+      active === lastElement ||
+      (lastElement.classList.contains('v-list') && lastElement.contains(active))
+    )
+  ) {
+    e.preventDefault()
+    firstElement.focus()
+  }
 }
 
 export function useFocusTrap (
@@ -90,7 +115,7 @@ export function useFocusTrap (
     }, 100)
   }
 
-  async function captureFocus (e: FocusEvent) {
+  async function captureOnFocus (e: FocusEvent) {
     const before = e.relatedTarget as HTMLElement | null
     const after = e.target as HTMLElement | null
 
@@ -117,6 +142,32 @@ export function useFocusTrap (
         focusable[0]?.focus()
 
         document.removeEventListener('pointerdown', onPointerdown)
+        document.removeEventListener('keydown', captureOnKeydown)
+      }
+    }
+  }
+
+  function captureOnKeydown (e: KeyboardEvent) {
+    if (e.key !== 'Tab') return
+    document.removeEventListener('keydown', captureOnKeydown)
+
+    if (
+      isActive.value &&
+      contentEl.value &&
+      e.target &&
+      !contentEl.value.contains(e.target as Element)
+    ) {
+      const allFocusableElements = focusableChildren(document.documentElement)
+
+      if (
+        (e.shiftKey && e.target === allFocusableElements.at(0)) ||
+        (!e.shiftKey && e.target === allFocusableElements.at(-1))
+      ) {
+        const focusable = focusableChildren(contentEl.value)
+        if (focusable.length > 0) {
+          e.preventDefault()
+          focusable[0]?.focus()
+        }
       }
     }
   }
@@ -126,17 +177,20 @@ export function useFocusTrap (
   IN_BROWSER && watch(shouldCapture, val => {
     if (val) {
       document.addEventListener('pointerdown', onPointerdown)
-      document.addEventListener('focusin', captureFocus, { once: true })
+      document.addEventListener('focusin', captureOnFocus, { once: true })
+      document.addEventListener('keydown', captureOnKeydown)
     } else {
       document.removeEventListener('pointerdown', onPointerdown)
-      document.removeEventListener('focusin', captureFocus)
+      document.removeEventListener('focusin', captureOnFocus)
+      document.removeEventListener('keydown', captureOnKeydown)
     }
   }, { immediate: true })
 
   onBeforeUnmount(() => {
     clearTimeout(focusTrapSuppressionTimeout)
     document.removeEventListener('pointerdown', onPointerdown)
-    document.removeEventListener('focusin', captureFocus)
+    document.removeEventListener('focusin', captureOnFocus)
+    document.removeEventListener('keydown', captureOnKeydown)
   })
 
   IN_BROWSER && document.addEventListener('keydown', onKeydown)

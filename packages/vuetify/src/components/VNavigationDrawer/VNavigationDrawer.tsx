@@ -251,6 +251,7 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
               stickyStyles.value,
               props.style,
             ]}
+            inert={ !isActive.value }
             { ...scopeId }
             { ...attrs }
           >
