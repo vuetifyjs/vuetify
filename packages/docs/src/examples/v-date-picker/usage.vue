@@ -23,7 +23,7 @@
   const name = 'v-date-picker'
   const model = ref('default')
   const date = ref()
-  const options = ['docked']
+  const options = ['modal']
   // const hideActions = ref(false)
   const adjacent = ref(false)
 
