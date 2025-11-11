@@ -48,11 +48,11 @@ export default {
     },
     ariaLabel: {
       previousMonth: 'Previous month',
-      previousYear: 'Previous year',
       nextMonth: 'Next month',
+      selectYear: 'Select year',
+      previousYear: 'Previous year',
       nextYear: 'Next year',
       selectMonth: 'Select month',
-      selectYear: 'Select year',
       selectDate: '{0}', // Full date format
       currentDate: 'Today, {0}',
     },
