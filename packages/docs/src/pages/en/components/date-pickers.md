@@ -94,6 +94,14 @@ You can specify events using arrays, objects or functions. To change the default
 
 <ExamplesExample file="v-date-picker/prop-events" />
 
+### Slots
+
+#### Controls
+
+Replace main controls to adapt behavior and/or visual appearance beyond CSS styling.
+
+<ExamplesExample file="v-date-picker/slots-controls" />
+
 ### Internationalization
 
 Vuetify components can localize date formats by utilizing the [i18n](/features/internationalization) feature. This determines the appropriate locale for date display. When the default date adapter is in use, localization is managed automatically.
