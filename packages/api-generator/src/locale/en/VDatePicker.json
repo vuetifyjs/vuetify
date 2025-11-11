@@ -10,6 +10,7 @@
     "hideHeader": "Hides the header.",
     "hideWeekdays": "Hides the weekdays.",
     "landscape": "Changes the picker to landscape mode.",
+    "landscapeHeaderWidth": "Sets header width when in landscape mode.",
     "month": "Sets the month.",
     "weekdays": "Array of weekdays.",
     "year": "Sets the year.",

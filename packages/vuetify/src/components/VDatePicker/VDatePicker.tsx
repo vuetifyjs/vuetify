@@ -20,7 +20,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, shallowRef, toRef, watch } from 'vue'
-import { genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
+import { convertToUnit, genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { VDatePickerControlsDefaultSlotProps } from './VDatePickerControls'
@@ -77,6 +77,7 @@ export const makeVDatePickerProps = propsFactory({
     type: String,
     default: 'normalDateWithWeekday',
   },
+  landscapeHeaderWidth: [Number, String],
 
   ...makeVDatePickerControlsProps(),
   ...makeVDatePickerMonthProps({
@@ -161,9 +162,13 @@ export const VDatePicker = genericComponent<new <
         return t('$vuetify.datePicker.itemsSelected', model.value.length)
       }
 
-      return (model.value[0] && adapter.isValid(model.value[0]))
+      const formattedDate = (model.value[0] && adapter.isValid(model.value[0]))
         ? adapter.format(adapter.date(model.value[0]), props.headerDateFormat)
         : t(props.header)
+
+      return props.landscape && formattedDate.split(' ').length === 3
+        ? formattedDate.replace(' ', '\n')
+        : formattedDate
     })
 
     const date = toRef(() => adapter.parseISO(`${year.value}-${month.value + 1}-01`))
@@ -383,7 +388,12 @@ export const VDatePicker = genericComponent<new <
             rtlClasses.value,
             props.class,
           ]}
-          style={ props.style }
+          style={[
+            {
+              '--v-date-picker-landscape-header-width': convertToUnit(props.landscapeHeaderWidth),
+            },
+            props.style,
+          ]}
           v-slots={{
             title: () => slots.title?.() ?? (
               <div class="v-date-picker__title">
