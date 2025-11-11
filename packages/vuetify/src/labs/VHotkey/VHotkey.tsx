@@ -51,7 +51,6 @@ import { genericComponent, mergeDeep, propsFactory, useRender } from '@/util'
 // Types
 import type { PropType } from 'vue'
 import type { IconValue } from '@/composables/icons'
-import type { Variant } from '@/composables/variant'
 
 // Display mode types for different visual representations
 type DisplayMode = 'icon' | 'symbol' | 'text'
@@ -62,7 +61,7 @@ type HotkeyVariant = 'elevated' | 'flat' | 'tonal' | 'outlined' | 'text' | 'plai
 // Key display tuple: [mode, content] where content is string or IconValue
 type KeyDisplay = [Exclude<DisplayMode, 'icon'>, string] | [Extract<DisplayMode, 'icon'>, IconValue]
 
-// Key tuple: [mode, content] where content is string or IconValue
+// Key tuple: [mode, content, keycode] where content is string or IconValue
 type Key = [Exclude<DisplayMode, 'icon'>, string, string] | [Extract<DisplayMode, 'icon'>, IconValue, string]
 
 type KeyConfig = {
@@ -157,15 +156,6 @@ export const hotkeyMap: KeyMapConfig = {
   },
 }
 
-// Create custom variant props that extend the base variant props with our 'contained' option
-const makeVHotkeyVariantProps = propsFactory({
-  variant: {
-    type: String as PropType<HotkeyVariant>,
-    default: 'elevated' as const,
-    validator: (v: any) => ['elevated', 'flat', 'tonal', 'outlined', 'text', 'plain', 'contained'].includes(v),
-  },
-}, 'VHotkeyVariant')
-
 export const makeVHotkeyProps = propsFactory({
   // String representing keyboard shortcuts (e.g., "ctrl+k", "meta+shift+p")
   keys: String,
@@ -187,34 +177,23 @@ export const makeVHotkeyProps = propsFactory({
   disabled: Boolean,
   prefix: String,
   suffix: String,
+  variant: {
+    type: String as PropType<HotkeyVariant>,
+    default: 'elevated' as const,
+    validator: (v: any) => ['elevated', 'flat', 'tonal', 'outlined', 'text', 'plain', 'contained'].includes(v),
+  },
 
   ...makeComponentProps(),
   ...makeThemeProps(),
   ...makeBorderProps(),
   ...makeRoundedProps(),
   ...makeElevationProps(),
-  ...makeVHotkeyVariantProps(),
   color: String,
 }, 'VHotkey')
 
-class Delineator {
-  val
-  constructor (delineator: string) {
-    if (['and', 'then'].includes(delineator)) this.val = delineator as 'then' | 'and'
-    else { throw new Error('Not a valid delineator') }
-  }
-
-  public isEqual (d: Delineator) {
-    return this.val === d.val
-  }
-}
-
-function isDelineator (value: any): value is Delineator {
-  return value instanceof Delineator
-}
-function isString (value: any): value is string {
-  return typeof value === 'string'
-}
+const AND_DELINEATOR = Symbol('VHotkey:AND_DELINEATOR') // For + separators
+const THEN_DELINEATOR = Symbol('VHotkey:THEN_DELINEATOR') // For - separators
+type Delineator = typeof AND_DELINEATOR | typeof THEN_DELINEATOR
 
 function getKeyText (keyMap: KeyMapConfig, key: string, isMac: boolean): string {
   const lowerKey = key.toLowerCase()
@@ -256,14 +235,10 @@ export const VHotkey = genericComponent()({
     const { roundedClasses } = useRounded(props)
     const { elevationClasses } = useElevation(props)
 
-    const isContainedVariant = computed(() => props.variant === 'contained')
-
-    const effectiveVariantProps = computed(() => ({
-      ...props,
-      variant: isContainedVariant.value ? 'elevated' as Variant : props.variant as Variant,
+    const { colorClasses, colorStyles, variantClasses } = useVariant(() => ({
+      color: props.color,
+      variant: props.variant === 'contained' ? 'elevated' : props.variant,
     }))
-
-    const { colorClasses, colorStyles, variantClasses } = useVariant(effectiveVariantProps)
 
     const isMac = computed(() =>
       props.platform === 'auto'
@@ -271,50 +246,32 @@ export const VHotkey = genericComponent()({
         : props.platform === 'mac'
     )
 
-    const effectiveDisplayMode = computed<DisplayMode>(() => props.displayMode)
-
-    const AND_DELINEATOR = new Delineator('and') // For + separators
-    const THEN_DELINEATOR = new Delineator('then') // For - separators
-
-    const effectiveKeyMap = computed(() => props.keyMap)
-
     const keyCombinations = computed(() => {
       if (!props.keys) return []
 
       // Split by spaces to handle multiple key combinations
       // Example: "ctrl+k meta+p" -> ["ctrl+k", "meta+p"]
       return props.keys.split(' ').map(combination => {
-        // Use the shared sequence splitting logic
+        const result: Array<Key | Delineator> = []
+
         const sequenceGroups = splitKeySequence(combination)
-
-        // Process each sequence group
-        return sequenceGroups.flatMap((group, groupIndex) => {
-          // Use the shared key combination splitting logic
-          const keyParts = splitKeyCombination(group)
-
-          const parts = keyParts.reduce<Array<string | Delineator>>((acc, part, index) => {
-            if (index !== 0) {
-              // Add AND delineator between keys
-              return [...acc, AND_DELINEATOR, part]
-            }
-            return [...acc, part]
-          }, [])
+        for (let i = 0; i < sequenceGroups.length; i++) {
+          const group = sequenceGroups[i]
 
           // Add THEN delineator between sequence groups
-          const result = parts.map(key => {
-            if (isString(key)) {
-              return applyDisplayModeToKey(effectiveKeyMap.value, effectiveDisplayMode.value, key, isMac.value)
-            }
-            return key
-          })
+          if (i > 0) result.push(THEN_DELINEATOR)
 
-          // Add sequence separator if not the last group
-          if (groupIndex < sequenceGroups.length - 1) {
-            result.push(THEN_DELINEATOR)
+          const keyParts = splitKeyCombination(group)
+          for (let j = 0; j < keyParts.length; j++) {
+            const part = keyParts[j]
+
+            // Add AND delineator between keys
+            if (j > 0) result.push(AND_DELINEATOR)
+            result.push(applyDisplayModeToKey(props.keyMap, props.displayMode, part, isMac.value))
           }
+        }
 
-          return result
-        })
+        return result
       })
     })
 
@@ -326,18 +283,18 @@ export const VHotkey = genericComponent()({
         const readableParts: string[] = []
 
         for (const key of combination) {
-          if (isDelineator(key)) {
-            if (AND_DELINEATOR.isEqual(key)) {
-              readableParts.push(t('$vuetify.hotkey.plus'))
-            } else if (THEN_DELINEATOR.isEqual(key)) {
-              readableParts.push(t('$vuetify.hotkey.then'))
-            }
-          } else {
+          if (Array.isArray(key)) {
             // Always use text representation for screen readers
             const textKey = key[0] === 'icon' || key[0] === 'symbol'
               ? applyDisplayModeToKey(mergeDeep(hotkeyMap, props.keyMap), 'text', String(key[1]), isMac.value)[1]
               : key[1]
             readableParts.push(translateKey(textKey as string))
+          } else {
+            if (key === AND_DELINEATOR) {
+              readableParts.push(t('$vuetify.hotkey.plus'))
+            } else if (key === THEN_DELINEATOR) {
+              readableParts.push(t('$vuetify.hotkey.then'))
+            }
           }
         }
 
@@ -353,13 +310,14 @@ export const VHotkey = genericComponent()({
     }
 
     function getKeyTooltip (key: Key): string | undefined {
-      if (effectiveDisplayMode.value === 'text') return undefined
+      if (props.displayMode === 'text') return undefined
 
-      const textKey = getKeyText(effectiveKeyMap.value, String(key[2]), isMac.value)
+      const textKey = getKeyText(props.keyMap, String(key[2]), isMac.value)
       return translateKey(textKey)
     }
 
-    function renderKey (key: Key, keyIndex: number, isContained: boolean) {
+    function renderKey (key: Key, keyIndex: number) {
+      const isContained = props.variant === 'contained'
       const KeyComponent = isContained ? 'kbd' : VKbd
       const keyClasses = [
         'v-hotkey__key',
@@ -399,83 +357,76 @@ export const VHotkey = genericComponent()({
           class="v-hotkey__divider"
           aria-hidden="true"
         >
-          {
-            AND_DELINEATOR.isEqual(key) ? '+' : t('$vuetify.hotkey.then')
-          }
+          { key === AND_DELINEATOR
+            ? '+'
+            : t('$vuetify.hotkey.then')}
         </span>
       )
     }
 
-    useRender(() => (
-      <div
-        class={[
-          'v-hotkey',
-          {
-            'v-hotkey--disabled': props.disabled,
-            'v-hotkey--inline': props.inline,
-            'v-hotkey--contained': isContainedVariant.value,
-          },
-          themeClasses.value,
-          rtlClasses.value,
-          variantClasses.value,
-          props.class,
-        ]}
-        style={ props.style }
-        role="img"
-        aria-label={ accessibleLabel.value }
-      >
-        { isContainedVariant.value ? (
-          <VKbd
-            key="contained"
-            class={[
-              'v-hotkey__contained-wrapper',
-              borderClasses.value,
-              roundedClasses.value,
-              elevationClasses.value,
-              colorClasses.value,
-            ]}
-            style={ colorStyles.value }
-            aria-hidden="true"
-          >
-            { props.prefix && (
-              <span key="contained-prefix" class="v-hotkey__prefix">{ props.prefix }</span>
-            )}
-            { keyCombinations.value.map((combination, comboIndex) => (
-              <span class="v-hotkey__combination" key={ comboIndex }>
-                { combination.map((key, keyIndex) =>
-                  isDelineator(key)
-                    ? renderDivider(key, keyIndex)
-                    : renderKey(key, keyIndex, true)
-                )}
-                { comboIndex < keyCombinations.value.length - 1 && <span aria-hidden="true">&nbsp;</span> }
-              </span>
-            ))}
-            { props.suffix && (
-              <span key="contained-suffix" class="v-hotkey__suffix">{ props.suffix }</span>
-            )}
-          </VKbd>
-        ) : (
-          <>
-            { props.prefix && (
-              <span key="prefix" class="v-hotkey__prefix">{ props.prefix }</span>
-            )}
-            { keyCombinations.value.map((combination, comboIndex) => (
-              <span class="v-hotkey__combination" key={ comboIndex }>
-                { combination.map((key, keyIndex) =>
-                  isDelineator(key)
-                    ? renderDivider(key, keyIndex)
-                    : renderKey(key, keyIndex, false)
-                )}
-                { comboIndex < keyCombinations.value.length - 1 && <span aria-hidden="true">&nbsp;</span> }
-              </span>
-            ))}
-            { props.suffix && (
-              <span key="suffix" class="v-hotkey__suffix">{ props.suffix }</span>
-            )}
-          </>
-        )}
-      </div>
-    ))
+    useRender(() => {
+      const content = (
+        <>
+          { props.prefix && (
+            <span key="prefix" class="v-hotkey__prefix">{ props.prefix }</span>
+          )}
+
+          { keyCombinations.value.map((combination, comboIndex) => (
+            <span class="v-hotkey__combination" key={ comboIndex }>
+              { combination.map((key, keyIndex) =>
+                Array.isArray(key)
+                  ? renderKey(key, keyIndex)
+                  : renderDivider(key, keyIndex)
+              )}
+              { comboIndex < keyCombinations.value.length - 1 && (
+                <span aria-hidden="true">&nbsp;</span>
+              )}
+            </span>
+          ))}
+
+          { props.suffix && (
+            <span key="suffix" class="v-hotkey__suffix">{ props.suffix }</span>
+          )}
+        </>
+      )
+
+      return (
+        <div
+          class={[
+            'v-hotkey',
+            {
+              'v-hotkey--disabled': props.disabled,
+              'v-hotkey--inline': props.inline,
+              'v-hotkey--contained': props.variant === 'contained',
+            },
+            themeClasses.value,
+            rtlClasses.value,
+            variantClasses.value,
+            props.class,
+          ]}
+          style={ props.style }
+          role="img"
+          aria-label={ accessibleLabel.value }
+        >
+          { props.variant !== 'contained' ? content : (
+            <VKbd
+              key="contained"
+              class={[
+                'v-hotkey__contained-wrapper',
+                borderClasses.value,
+                roundedClasses.value,
+                elevationClasses.value,
+                colorClasses.value,
+              ]}
+              style={ colorStyles.value }
+              aria-hidden="true"
+            >
+              { content }
+            </VKbd>
+          )}
+        </div>
+      )
+    })
   },
 })
 

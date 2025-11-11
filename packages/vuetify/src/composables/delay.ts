@@ -19,13 +19,15 @@ export function useDelay (props: DelayProps, cb?: (value: boolean) => void) {
   function runDelay (isOpening: boolean, options?: { minDelay: number }) {
     clearDelay?.()
 
-    const delay = Math.max(
+    const delay = isOpening ? props.openDelay : props.closeDelay
+
+    const normalizedDelay = Math.max(
       options?.minDelay ?? 0,
-      Number(isOpening ? props.openDelay : props.closeDelay)
+      Number(delay ?? 0)
     )
 
     return new Promise(resolve => {
-      clearDelay = defer(delay, () => {
+      clearDelay = defer(normalizedDelay, () => {
         cb?.(isOpening)
         resolve(isOpening)
       })
