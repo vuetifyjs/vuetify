@@ -88,6 +88,9 @@ export default {
     am: 'قبل از ظهر',
     pm: 'بعد از ظهر',
     title: 'انتخاب زمان',
+    hour: 'ساعت',
+    minute: 'دقیقه',
+    second: 'ثانیه',
   },
   pagination: {
     ariaLabel: {

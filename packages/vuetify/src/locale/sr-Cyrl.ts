@@ -88,6 +88,9 @@ export default {
     am: 'АМ',
     pm: 'ПМ',
     title: 'Изаберите време',
+    hour: 'Сат',
+    minute: 'Минути',
+    second: 'Секунде',
   },
   pagination: {
     ariaLabel: {

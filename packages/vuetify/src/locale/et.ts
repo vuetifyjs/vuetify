@@ -88,6 +88,9 @@ export default {
     am: 'AM',
     pm: 'PM',
     title: 'Vali aeg',
+    hour: 'Tund',
+    minute: 'Minut',
+    second: 'Sekund',
   },
   pagination: {
     ariaLabel: {

@@ -88,6 +88,9 @@ export default {
     am: 'ÖÖ',
     pm: 'ÖS',
     title: 'Saat seçin',
+    hour: 'Saat',
+    minute: 'Dakika',
+    second: 'Saniye',
   },
   pagination: {
     ariaLabel: {

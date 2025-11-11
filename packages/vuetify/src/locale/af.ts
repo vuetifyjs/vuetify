@@ -88,6 +88,9 @@ export default {
     am: 'VM',
     pm: 'NM',
     title: 'Kies tyd',
+    hour: 'Uur',
+    minute: 'Minute',
+    second: 'Sekondes',
   },
   pagination: {
     ariaLabel: {

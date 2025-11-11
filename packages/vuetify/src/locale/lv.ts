@@ -88,6 +88,9 @@ export default {
     am: 'AM',
     pm: 'PM',
     title: 'Izvēlieties laiku',
+    hour: 'Stunda',
+    minute: 'Minūtes',
+    second: 'Sekundes',
   },
   pagination: {
     ariaLabel: {

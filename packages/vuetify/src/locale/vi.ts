@@ -88,6 +88,9 @@ export default {
     am: 'SA',
     pm: 'CH',
     title: 'Chọn thời gian',
+    hour: 'Giờ',
+    minute: 'Phút',
+    second: 'Giây',
   },
   pagination: {
     ariaLabel: {
