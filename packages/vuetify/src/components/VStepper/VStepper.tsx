@@ -24,6 +24,7 @@ import { genericComponent, getPropertyFromItem, pick, propsFactory, useRender } 
 // Types
 import type { PropType } from 'vue'
 import type { StepperItem, StepperItemSlot } from './VStepperItem'
+import type { SelectItemKey } from '@/util'
 
 export type VStepperSlot = {
   prev: () => void
@@ -59,12 +60,16 @@ export const makeStepperProps = propsFactory({
     default: () => ([]),
   },
   itemTitle: {
-    type: String,
+    type: [String, Array, Function] as PropType<SelectItemKey>,
     default: 'title',
   },
   itemValue: {
-    type: String,
+    type: [String, Array, Function] as PropType<SelectItemKey>,
     default: 'value',
+  },
+  itemProps: {
+    type: [Boolean, String, Array, Function] as PropType<SelectItemKey>,
+    default: 'props',
   },
   nonLinear: Boolean,
   flat: Boolean,
@@ -99,10 +104,20 @@ export const VStepper = genericComponent<VStepperSlots>()({
     const items = computed(() => props.items.map((item, index) => {
       const title = getPropertyFromItem(item, props.itemTitle, item)
       const value = getPropertyFromItem(item, props.itemValue, index + 1)
+      const itemProps = props.itemProps === true
+        ? item
+        : getPropertyFromItem(item, props.itemProps)
 
-      return {
+      const _props = {
         title,
         value,
+        ...itemProps,
+      }
+
+      return {
+        title: _props.title,
+        value: _props.value,
+        props: _props,
         raw: item,
       }
     }))
@@ -165,7 +180,7 @@ export const VStepper = genericComponent<VStepperSlots>()({
                   { !!index && (<VDivider />) }
 
                   <VStepperItem
-                    { ...item }
+                    { ...item.props }
                     v-slots={{
                       default: slots[`header-item.${item.value}`] ?? slots.header,
                       icon: slots.icon,
