@@ -5,7 +5,7 @@
     "closeOnClick": "Designates if menu should close on outside-activator click.",
     "closeOnContentClick": "Designates if menu should close when its content is clicked.",
     "closeDelay": "Milliseconds to wait before closing component. Only works with the **open-on-hover** prop.",
-    "disableInitialFocus": "Prevents automatic redirect of first `focusin` event. Intended to use on permanently open menus or VSpeedDial.",
+    "disableInitialFocus": "Deprecated, use `capture-focus` instead. Prevents automatic redirect of first `focusin` event. Intended to use on permanently open menus or VSpeedDial.",
     "disableKeys": "Removes all keyboard interaction.",
     "internalActivator": "Detaches the menu content inside of the component as opposed to the document.",
     "minWidth": "Sets the minimum width for the component. Use `auto` to use the activator width.",

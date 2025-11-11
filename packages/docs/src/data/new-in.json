@@ -149,6 +149,8 @@
   },
   "VDialog": {
     "props": {
+      "captureFocus": "3.11.0",
+      "retainFocus": "3.11.0",
       "stickToTarget": "3.10.0",
       "viewportMargin": "3.11.0"
     }
@@ -210,6 +212,8 @@
   },
   "VMenu": {
     "props": {
+      "captureFocus": "3.11.0",
+      "retainFocus": "3.11.0",
       "stickToTarget": "3.10.0",
       "submenu": "3.7.0",
       "viewportMargin": "3.11.0"
@@ -217,6 +221,8 @@
   },
   "VNavigationDrawer": {
     "props": {
+      "captureFocus": "3.11.0",
+      "retainFocus": "3.11.0",
       "persistent": "3.6.0"
     }
   },
@@ -227,6 +233,8 @@
   },
   "VOverlay": {
     "props": {
+      "captureFocus": "3.11.0",
+      "retainFocus": "3.11.0",
       "stickToTarget": "3.10.0",
       "viewportMargin": "3.11.0"
     }
