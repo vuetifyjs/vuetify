@@ -26,7 +26,6 @@
     "monthFormat": "Formatting function used for displaying months in the months table. Called with date (ISO 8601 **date** string) arguments.",
     "multiple": "Allow the selection of multiple dates. The **range** value selects all dates between two selections.",
     "nextIcon": "Sets the icon for next month/year button.",
-    "pickerDate": "Displayed year/month.",
     "prevIcon": "Sets the icon for previous month/year button.",
     "reactive": "Updates the picker model when changing months/years automatically.",
     "readonly": "Makes the picker readonly (doesn't allow to select new date).",
@@ -50,8 +49,7 @@
     "<domevent>:date": "Emitted when the specified DOM event occurs on the date button.",
     "<domevent>:month": "Emitted when the specified DOM event occurs on the month button.",
     "<domevent>:year": "Emitted when the specified DOM event occurs on the year button.",
-    "change": "Reactive date picker emits `input` even when any part of the date (year/month/day) changes, but `change` event is emitted only when the day (for date pickers) or month (for month pickers) changes. If `range` prop is set, date picker emits `change` when both [from, to] are selected.",
-    "update:pickerDate": "The `.sync` event for `picker-date` prop."
+    "change": "Reactive date picker emits `input` even when any part of the date (year/month/day) changes, but `change` event is emitted only when the day (for date pickers) or month (for month pickers) changes. If `range` prop is set, date picker emits `change` when both [from, to] are selected."
   },
   "slots": {
     "actions": "Slot for the actions.",
