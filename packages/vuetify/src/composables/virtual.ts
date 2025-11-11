@@ -75,7 +75,7 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
     return !!(containerRef.value && markerRef.value && viewportHeight.value && itemHeight.value)
   })
 
-  let sizes = Array.from<number | null>({ length: items.value.length })
+  let sizes = Array.from({ length: items.value.length }, () => 0.001)
   let offsets = Array.from<number>({ length: items.value.length })
   const updateTime = shallowRef(0)
   let targetScrollIndex = -1
@@ -257,7 +257,7 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
   })
 
   watch(items, () => {
-    sizes = Array.from({ length: items.value.length })
+    sizes = Array.from({ length: items.value.length }, () => 0.001)
     offsets = Array.from({ length: items.value.length })
     updateOffsets.immediate()
     calculateVisibleItems()
