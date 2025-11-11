@@ -70,7 +70,9 @@ export const VStepperVertical = genericComponent<new <T = number>(
     const items = computed(() => props.items.map((item, index) => {
       const title = getPropertyFromItem(item, props.itemTitle, item)
       const value = getPropertyFromItem(item, props.itemValue, index + 1)
-      const itemProps = props.itemProps ? item : getPropertyFromItem(item, props.itemProps)
+      const itemProps = props.itemProps === true
+        ? item
+        : getPropertyFromItem(item, props.itemProps)
 
       const _props = {
         title,
