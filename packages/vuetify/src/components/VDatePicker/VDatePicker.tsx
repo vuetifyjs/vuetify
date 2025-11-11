@@ -20,7 +20,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, shallowRef, toRef, watch } from 'vue'
-import { genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
+import { convertToUnit, genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { VDatePickerControlsDefaultSlotProps } from './VDatePickerControls'
@@ -77,6 +77,7 @@ export const makeVDatePickerProps = propsFactory({
     type: String,
     default: 'normalDateWithWeekday',
   },
+  landscapeHeaderWidth: [Number, String],
 
   ...makeVDatePickerControlsProps(),
   ...makeVDatePickerMonthProps({
@@ -387,7 +388,12 @@ export const VDatePicker = genericComponent<new <
             rtlClasses.value,
             props.class,
           ]}
-          style={ props.style }
+          style={[
+            {
+              '--v-date-picker-landscape-header-width': convertToUnit(props.landscapeHeaderWidth),
+            },
+            props.style,
+          ]}
           v-slots={{
             title: () => slots.title?.() ?? (
               <div class="v-date-picker__title">

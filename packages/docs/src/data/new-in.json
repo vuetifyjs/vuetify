@@ -97,6 +97,8 @@
       "headerColor": "3.8.0",
       "headerDateFormat": "3.11.0",
       "hideTitle": "3.10.0",
+      "landscape": "3.11.0",
+      "landscapeHeaderWidth": "3.11.0",
       "noMonthPicker": "3.11.0"
     },
     "slots": {
