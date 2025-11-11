@@ -119,10 +119,14 @@ export function useFocusTrap (
     const before = e.relatedTarget as HTMLElement | null
     const after = e.target as HTMLElement | null
 
+    document.removeEventListener('pointerdown', onPointerdown)
+    document.removeEventListener('keydown', captureOnKeydown)
+
     await nextTick()
 
     if (
       isActive.value &&
+      !focusTrapSuppressed &&
       before !== after &&
       contentEl.value &&
       // We're the menu without open submenus or overlays
@@ -132,18 +136,8 @@ export function useFocusTrap (
       // It isn't inside the container body
       !contentEl.value.contains(after)
     ) {
-      if (focusTrapSuppressed) {
-        if (!activatorEl?.value?.contains(after)) {
-          // TODO: callback for VMenu and VTooltip, or skip for VDialog... suppressOnClickOutside?
-          // if (!props.openOnHover) isActive.value = false
-        }
-      } else {
-        const focusable = focusableChildren(contentEl.value)
-        focusable[0]?.focus()
-
-        document.removeEventListener('pointerdown', onPointerdown)
-        document.removeEventListener('keydown', captureOnKeydown)
-      }
+      const focusable = focusableChildren(contentEl.value)
+      focusable[0]?.focus()
     }
   }
 
@@ -166,7 +160,7 @@ export function useFocusTrap (
         const focusable = focusableChildren(contentEl.value)
         if (focusable.length > 0) {
           e.preventDefault()
-          focusable[0]?.focus()
+          focusable[0].focus()
         }
       }
     }
