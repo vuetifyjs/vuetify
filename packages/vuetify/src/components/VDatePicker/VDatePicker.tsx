@@ -161,9 +161,13 @@ export const VDatePicker = genericComponent<new <
         return t('$vuetify.datePicker.itemsSelected', model.value.length)
       }
 
-      return (model.value[0] && adapter.isValid(model.value[0]))
+      const formattedDate = (model.value[0] && adapter.isValid(model.value[0]))
         ? adapter.format(adapter.date(model.value[0]), props.headerDateFormat)
         : t(props.header)
+
+      return props.landscape && formattedDate.split(' ').length === 3
+        ? formattedDate.replace(' ', '\n')
+        : formattedDate
     })
 
     const date = toRef(() => adapter.parseISO(`${year.value}-${month.value + 1}-01`))
