@@ -274,6 +274,11 @@
       "text": "3.4.0"
     }
   },
+  "VStepper": {
+    "props": {
+      "itemProps": "3.11.0"
+    }
+  },
   "VSwitch": {
     "slots": {
       "thumb": "3.5.0",
