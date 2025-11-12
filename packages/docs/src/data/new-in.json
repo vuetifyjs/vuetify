@@ -206,8 +206,9 @@
   },
   "VList": {
     "props": {
-      "prependGap": "3.11.0",
-      "indent": "3.11.0"
+      "indent": "3.11.0",
+      "itemsRegistration": "3.11.0",
+      "prependGap": "3.11.0"
     }
   },
   "VListItem": {
@@ -344,7 +345,8 @@
       "hideNoData": "3.10.0",
       "noDataText": "3.10.0",
       "separateRoots": "3.9.0",
-      "indentLines": "3.9.0"
+      "indentLines": "3.9.0",
+      "itemsRegistration": "3.11.0"
     },
     "slots": {
       "header": "3.10.0",
