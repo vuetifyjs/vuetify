@@ -55,6 +55,7 @@ Control text size, alignment, wrapping, overflow, transforms and more. By defaul
 | **text-decoration-underline** | text-decoration: underline; |
 | **text-decoration-line-through** | text-decoration: line-through; |
 | **font-weight-black** | font-weight: 900; |
+| **font-weight-semibold** | font-weight: 600; |
 | **font-weight-bold** | font-weight: 700; |
 | **font-weight-medium** | font-weight: 500; |
 | **font-weight-regular** | font-weight: 400; |
