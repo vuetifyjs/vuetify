@@ -6,8 +6,8 @@ import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, ref, toRaw, watchEffect } from 'vue'
-import { deepEqual, genericComponent, propsFactory, useRender } from '@/util'
+import { computed, ref, watchEffect } from 'vue'
+import { deepEqual, deepToRaw, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType, Ref, VNode } from 'vue'
@@ -63,7 +63,7 @@ export const VConfirmEdit = genericComponent<new <T> (
     const model = useProxiedModel(props, 'modelValue')
     const internalModel = ref()
     watchEffect(() => {
-      internalModel.value = structuredClone(toRaw(model.value))
+      internalModel.value = structuredClone(deepToRaw(model.value))
     })
 
     const { t } = useLocale()
@@ -93,7 +93,7 @@ export const VConfirmEdit = genericComponent<new <T> (
     }
 
     function cancel () {
-      internalModel.value = structuredClone(toRaw(model.value))
+      internalModel.value = structuredClone(deepToRaw(model.value))
       emit('cancel')
     }
 

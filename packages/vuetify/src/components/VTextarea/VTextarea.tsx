@@ -101,7 +101,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
     const vInputRef = ref<VInput>()
     const vFieldRef = ref<VInput>()
     const controlHeight = shallowRef('')
-    const textareaRef = ref<HTMLInputElement>()
+    const textareaRef = ref<HTMLTextAreaElement>()
     const scrollbarWidth = ref(0)
     const { platform } = useDisplay()
     const autocomplete = useAutocomplete(props)
@@ -143,14 +143,27 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
     }
     function onInput (e: Event) {
       const el = e.target as HTMLTextAreaElement
-      model.value = el.value
-      if (props.modelModifiers?.trim) {
-        const caretPosition = [el.selectionStart, el.selectionEnd]
-        nextTick(() => {
-          el.selectionStart = caretPosition[0]
-          el.selectionEnd = caretPosition[1]
-        })
+      if (!props.modelModifiers?.trim) {
+        model.value = el.value
+        return
       }
+
+      const value = el.value
+      const start = el.selectionStart
+      const end = el.selectionEnd
+
+      model.value = value
+
+      nextTick(() => {
+        let offset = 0
+        if (value.trimStart().length === el.value.length) {
+          // #22307 - Whitespace has been removed from the
+          // start, offset the caret position to compensate
+          offset = value.length - el.value.length
+        }
+        if (start != null) el.selectionStart = start - offset
+        if (end != null) el.selectionEnd = end - offset
+      })
     }
 
     const sizerRef = ref<HTMLTextAreaElement>()
@@ -289,6 +302,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
                   ...slots,
                   default: ({
                     props: { class: fieldClass, ...slotProps },
+                    controlRef,
                   }) => (
                     <>
                       { props.prefix && (
@@ -298,7 +312,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
                       )}
 
                       <textarea
-                        ref={ textareaRef }
+                        ref={ val => textareaRef.value = controlRef.value = val as HTMLTextAreaElement }
                         class={ fieldClass }
                         value={ model.value }
                         onInput={ onInput }

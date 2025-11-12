@@ -133,7 +133,6 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
       onFocus()
 
       nextTick(() => {
-        model.value = null
         reset()
 
         callEvent(props['onClick:clear'], e)
@@ -141,17 +140,31 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
     }
     function onInput (e: Event) {
       const el = e.target as HTMLInputElement
-      model.value = el.value
-      if (
+
+      if (!(
         props.modelModifiers?.trim &&
         ['text', 'search', 'password', 'tel', 'url'].includes(props.type)
-      ) {
-        const caretPosition = [el.selectionStart, el.selectionEnd]
-        nextTick(() => {
-          el.selectionStart = caretPosition[0]
-          el.selectionEnd = caretPosition[1]
-        })
+      )) {
+        model.value = el.value
+        return
       }
+
+      const value = el.value
+      const start = el.selectionStart
+      const end = el.selectionEnd
+
+      model.value = value
+
+      nextTick(() => {
+        let offset = 0
+        if (value.trimStart().length === el.value.length) {
+          // #22307 - Whitespace has been removed from the
+          // start, offset the caret position to compensate
+          offset = value.length - el.value.length
+        }
+        if (start != null) el.selectionStart = start - offset
+        if (end != null) el.selectionEnd = end - offset
+      })
     }
 
     useRender(() => {
@@ -196,8 +209,6 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
                 onMousedown={ onControlMousedown }
                 onClick={ onControlClick }
                 onClick:clear={ (e: MouseEvent) => onClear(e, reset) }
-                onClick:prependInner={ props['onClick:prependInner'] }
-                onClick:appendInner={ props['onClick:appendInner'] }
                 role={ props.role }
                 { ...omit(fieldProps, ['onClick:clear']) }
                 id={ id.value }
@@ -212,10 +223,11 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
                   ...slots,
                   default: ({
                     props: { class: fieldClass, ...slotProps },
+                    controlRef,
                   }) => {
                     const inputNode = (
                       <input
-                        ref={ inputRef }
+                        ref={ val => inputRef.value = controlRef.value = val as HTMLInputElement }
                         value={ model.value }
                         onInput={ onInput }
                         v-intersect={[{

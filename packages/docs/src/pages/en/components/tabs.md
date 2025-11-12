@@ -26,7 +26,7 @@ The `v-tabs` component is used for hiding content behind a selectable item. This
 
 The `v-tabs` component is a styled extension of [v-slide-group](/components/slide-groups). It provides an easy to use interface for organizing content into separate sections.
 
-<ExamplesExample file="v-tabs/usage" />
+<ExamplesUsage name="v-tabs" />
 
 <PromotedEntry />
 

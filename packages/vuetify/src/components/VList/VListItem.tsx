@@ -27,7 +27,7 @@ import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant
 import vRipple from '@/directives/ripple'
 
 // Utilities
-import { computed, onBeforeMount, toDisplayString, toRef, watch } from 'vue'
+import { computed, nextTick, onBeforeMount, toDisplayString, toRef, watch } from 'vue'
 import { deprecate, EventProp, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -174,7 +174,9 @@ export const VListItem = genericComponent<VListItemSlots>()({
       handleActiveLink()
     })
     onBeforeMount(() => {
-      if (link.isActive?.value) handleActiveLink()
+      if (link.isActive?.value) {
+        nextTick(() => handleActiveLink())
+      }
     })
     function handleActiveLink () {
       if (parent.value != null) {
