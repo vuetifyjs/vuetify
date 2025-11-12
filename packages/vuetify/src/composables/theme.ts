@@ -43,7 +43,7 @@ export type ThemeOptions = false | {
   stylesheetId?: string
   scope?: string
   unimportant?: boolean
-  layer?: boolean
+  layers?: boolean
 }
 export type ThemeDefinition = DeepPartial<InternalThemeDefinition>
 
@@ -59,7 +59,7 @@ interface InternalThemeOptions {
   scoped: boolean
   unimportant: boolean
   utilities: boolean
-  layer?: boolean | string
+  layers?: boolean
 }
 
 interface VariationsOptions {
@@ -421,7 +421,7 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
         }
       }
 
-      if (parsedOptions.layer) {
+      if (parsedOptions.layers) {
         lines.push(
           '@layer background {\n',
           ...bgLines.map(v => `  ${v}`),
@@ -436,7 +436,7 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
     }
 
     let final = lines.map((str, i) => (i === 0 ? str : `    ${str}`)).join('')
-    if (parsedOptions.layer) {
+    if (parsedOptions.layers) {
       final =
         '@layer vuetify.theme {\n' +
           lines.map(v => `  ${v}`).join('') +
