@@ -326,8 +326,8 @@ describe('createTheme', () => {
     expect(css).not.toContain('.border-primary')
   })
 
-  it('should generate layer with default name if layer option is provided', async () => {
-    const theme = createTheme({ layer: true })
+  it('should generate layers', async () => {
+    const theme = createTheme({ layers: true })
 
     theme.install(app)
 
@@ -335,17 +335,5 @@ describe('createTheme', () => {
     const css = stylesheet!.innerHTML
 
     expect(css).toContain('@layer vuetify.theme {')
-    expect(css).toContain('}')
-  })
-
-  it('should not generate a layer if disabled', async () => {
-    const theme = createTheme({ layer: false })
-
-    theme.install(app)
-
-    const stylesheet = document.getElementById('vuetify-theme-stylesheet')
-    const css = stylesheet!.innerHTML
-
-    expect(css).not.toMatch(/@layer vuetify-theme {/)
   })
 })
