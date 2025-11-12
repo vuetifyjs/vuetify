@@ -50,6 +50,9 @@ export default {
       previousMonth: 'Iepriekšējais mēnesis',
       nextMonth: 'Nākamais mēnesis',
       selectYear: 'Izvēlieties gadu',
+      previousYear: 'Iepriekšējais gads',
+      nextYear: 'Nākamais gads',
+      selectMonth: 'Izvēlieties mēnesi',
       selectDate: '{0}',
       currentDate: 'Šodien, {0}',
     },
@@ -85,6 +88,9 @@ export default {
     am: 'AM',
     pm: 'PM',
     title: 'Izvēlieties laiku',
+    hour: 'Stunda',
+    minute: 'Minūtes',
+    second: 'Sekundes',
   },
   pagination: {
     ariaLabel: {

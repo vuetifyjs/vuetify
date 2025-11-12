@@ -16,14 +16,7 @@
     "multiLine": "Causes label to float when the select component is focused or dirty.",
     "noAutoScroll": "Prevents the select menu to scroll to the selected item automatically.",
     "openOnClear": "When using the **clearable** prop, once cleared, the select menu will either open or stay open, depending on the current state.",
-    "overflow": "Creates an overflow button - [spec](https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons).",
-    "searchInput": "Use the **.sync** modifier to catch user input from the search input.",
-    "segmented": "Creates a segmented button - [spec](https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons).",
     "tags": "Tagging functionality, allows the user to create new values not available from the **items** prop."
-  },
-  "events": {
-    "update:listIndex": "Emitted when menu item is selected using keyboard arrows.",
-    "update:searchInput": "The `search-input.sync` event."
   },
   "slots": {
     "item": "Define a custom item appearance. The root element of this slot must be a **v-list-item** with `v-bind=\"props\"` applied. `props` includes everything required for the default select list behaviour - including title, value, click handlers, virtual scrolling, and anything else that has been added with [`item-props`](api/v-select/#props-item-props)."

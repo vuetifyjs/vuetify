@@ -50,6 +50,9 @@ export default {
       previousMonth: 'Vorige maand',
       nextMonth: 'Volgende maand',
       selectYear: 'Selecteer jaar',
+      previousYear: 'Vorig jaar',
+      nextYear: 'Volgend jaar',
+      selectMonth: 'Selecteer maand',
       selectDate: '{0}',
       currentDate: 'Vandaag, {0}',
     },
@@ -85,6 +88,9 @@ export default {
     am: 'AM',
     pm: 'PM',
     title: 'Selecteer tijd',
+    hour: 'Uur',
+    minute: 'Minuten',
+    second: 'Seconden',
   },
   pagination: {
     ariaLabel: {

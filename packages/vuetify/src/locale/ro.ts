@@ -50,6 +50,9 @@ export default {
       previousMonth: 'Luna anterioară',
       nextMonth: 'Luna următoare',
       selectYear: 'Selectați anul',
+      previousYear: 'Anul precedent',
+      nextYear: 'Anul următor',
+      selectMonth: 'Selectați luna',
       selectDate: '{0}',
       currentDate: 'Astăzi, {0}',
     },
@@ -85,6 +88,9 @@ export default {
     am: 'AM',
     pm: 'PM',
     title: 'Selectați ora',
+    hour: 'Oră',
+    minute: 'Minute',
+    second: 'Secunde',
   },
   pagination: {
     ariaLabel: {

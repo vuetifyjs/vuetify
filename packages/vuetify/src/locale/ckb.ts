@@ -50,6 +50,9 @@ export default {
       previousMonth: 'مانگی پێشوو',
       nextMonth: 'مانگی داهاتوو',
       selectYear: 'ساڵ هەڵبژێرە',
+      previousYear: 'ساڵی پێشوو',
+      nextYear: 'ساڵی داهاتوو',
+      selectMonth: 'مانگ هەڵبژێرە',
       selectDate: '{0}',
       currentDate: 'ئەمڕو، {0}',
     },
@@ -85,6 +88,9 @@ export default {
     am: 'پێش نیوەڕۆژ',
     pm: 'دوای نیوەڕۆژ',
     title: 'کات دیاریبکە',
+    hour: 'کاتژمێر',
+    minute: 'خولەک',
+    second: 'چرکە',
   },
   pagination: {
     ariaLabel: {

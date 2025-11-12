@@ -165,16 +165,9 @@ export const VCombobox = genericComponent<new <
         }
 
         if (val && props.multiple && props.delimiters?.length) {
-          const signsToMatch = props.delimiters.map(escapeForRegex).join('|')
-          const values = val.split(new RegExp(`(?:${signsToMatch})+`))
+          const values = splitByDelimiters(val)
           if (values.length > 1) {
-            for (let v of values) {
-              v = v.trim()
-              if (v) {
-                select(transformItem(props, v))
-                await nextTick()
-              }
-            }
+            selectMultiple(values)
             _search.value = ''
           }
         }
@@ -364,6 +357,15 @@ export const VCombobox = genericComponent<new <
         selectionIndex.value = -1
       }
     }
+    function onPaste (e: ClipboardEvent) {
+      const clipboardText = e?.clipboardData?.getData('Text') ?? ''
+      const values = splitByDelimiters(clipboardText)
+
+      if (values.length > 1 && props.multiple) {
+        e.preventDefault()
+        selectMultiple(values)
+      }
+    }
     function onAfterEnter () {
       if (props.eager) {
         vVirtualScrollRef.value?.calculateVisibleItems()
@@ -410,7 +412,20 @@ export const VCombobox = genericComponent<new <
         })
       }
     }
-
+    function splitByDelimiters (val: string) {
+      const effectiveDelimiters = ['\n', ...props.delimiters ?? []]
+      const signsToMatch = effectiveDelimiters.map(escapeForRegex).join('|')
+      return val.split(new RegExp(`(?:${signsToMatch})+`))
+    }
+    async function selectMultiple (values: string[]) {
+      for (let value of values) {
+        value = value.trim()
+        if (value) {
+          select(transformItem(props, value))
+          await nextTick()
+        }
+      }
+    }
     function onFocusin (e: FocusEvent) {
       isFocused.value = true
       setTimeout(() => {
@@ -500,6 +515,7 @@ export const VCombobox = genericComponent<new <
           onClick:clear={ onClear }
           onMousedown:control={ onMousedownControl }
           onKeydown={ onKeydown }
+          onPaste={ onPaste }
           aria-expanded={ ariaExpanded.value }
           aria-controls={ ariaControls.value }
         >

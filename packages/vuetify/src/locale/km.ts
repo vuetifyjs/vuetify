@@ -50,6 +50,9 @@ export default {
       previousMonth: 'Previous month',
       nextMonth: 'Next month',
       selectYear: 'Select year',
+      previousYear: 'ឆ្នាំមុន',
+      nextYear: 'ឆ្នាំក្រោយ',
+      selectMonth: 'ជ្រើសរើសខែ',
       selectDate: '{0}',
       currentDate: 'Today, {0}',
     },
@@ -85,6 +88,9 @@ export default {
     am: 'ព្រឹក',
     pm: 'ល្ងាច',
     title: 'ជ្រើសរើសម៉ោង',
+    hour: 'ម៉ោង',
+    minute: 'នាទី',
+    second: 'វិនាទី',
   },
   pagination: {
     ariaLabel: {

@@ -50,6 +50,9 @@ export default {
       previousMonth: 'Əvvəlki ay',
       nextMonth: 'Növbəti ay',
       selectYear: 'İli seçin',
+      previousYear: 'Əvvəlki il',
+      nextYear: 'Növbəti il',
+      selectMonth: 'Ayı seçin',
       selectDate: '{0}',
       currentDate: 'Bu gün, {0}',
     },
@@ -85,6 +88,9 @@ export default {
     am: 'Səhər',
     pm: 'Axşam',
     title: 'Vaxtı seçin',
+    hour: 'Saat',
+    minute: 'Dəqiqə',
+    second: 'Saniyə',
   },
   pagination: {
     ariaLabel: {

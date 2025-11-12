@@ -50,6 +50,9 @@ export default {
       previousMonth: 'Prejšnji mesec',
       nextMonth: 'Naslednji mesec',
       selectYear: 'Izberite leto',
+      previousYear: 'Prejšnje leto',
+      nextYear: 'Naslednje leto',
+      selectMonth: 'Izberite mesec',
       selectDate: '{0}',
       currentDate: 'Danes, {0}',
     },
@@ -85,6 +88,9 @@ export default {
     am: 'AM',
     pm: 'PM',
     title: 'Izberite čas',
+    hour: 'Ura',
+    minute: 'Minute',
+    second: 'Sekunde',
   },
   pagination: {
     ariaLabel: {

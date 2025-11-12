@@ -50,6 +50,9 @@ export default {
       previousMonth: 'החודש הקודם',
       nextMonth: 'החודש הבא',
       selectYear: 'בחר שנה',
+      previousYear: 'השנה הקודמת',
+      nextYear: 'השנה הבאה',
+      selectMonth: 'בחר חודש',
       selectDate: '{0}',
       currentDate: 'היום, {0}',
     },
@@ -85,6 +88,9 @@ export default {
     am: 'לפנה"צ',
     pm: 'אחה"צ',
     title: 'בחר שעה',
+    hour: 'שעה',
+    minute: 'דקות',
+    second: 'שניות',
   },
   pagination: {
     ariaLabel: {

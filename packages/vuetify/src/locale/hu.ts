@@ -50,6 +50,9 @@ export default {
       previousMonth: 'Előző hónap',
       nextMonth: 'Következő hónap',
       selectYear: 'Év kiválasztása',
+      previousYear: 'Előző év',
+      nextYear: 'Következő év',
+      selectMonth: 'Hónap kiválasztása',
       selectDate: '{0}',
       currentDate: 'Ma, {0}',
     },
@@ -85,6 +88,9 @@ export default {
     am: 'de',
     pm: 'du',
     title: 'Válassza ki az időpontot',
+    hour: 'Óra',
+    minute: 'Perc',
+    second: 'Másodperc',
   },
   pagination: {
     ariaLabel: {

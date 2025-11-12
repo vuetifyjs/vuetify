@@ -47,6 +47,56 @@
     .v-tab:last-child
       margin-inline-end: 0
 
+  .v-tabs--inset
+    --v-tabs-inset-radius: #{$tab-inset-radius}
+    --v-tabs-inset-padding: #{$tab-inset-padding}
+
+    background: rgba(var(--v-theme-on-surface), 0.06)
+    box-shadow: inset 0 0 0 2px rgba(var(--v-border-color), var(--v-border-opacity))
+    max-width: max-content
+    border-radius: calc(var(--v-tabs-inset-radius) + var(--v-tabs-inset-padding))
+
+    .v-tab
+      margin: var(--v-tabs-inset-padding)
+      transition-property: box-shadow, transform, opacity, background, color
+
+      &.v-tab.v-btn
+        border-radius: var(--v-tabs-inset-radius)
+
+      &:focus-visible
+        outline: 2px solid rgb(var(--v-border-color))
+        outline-offset: 2px
+
+        &:after
+          opacity: 0
+
+    .v-tab__slider
+      inset: 0
+      border-radius: var(--v-tabs-inset-radius)
+      z-index: -1
+      width: auto
+
+    &.v-tabs--horizontal
+      height: calc(var(--v-tabs-height) + var(--v-tabs-inset-padding) * 2)
+      --v-tabs-inset-tab-radius: calc(var(--v-tabs-outer-radius) - var(--v-tabs-inset-padding) + 4px)
+
+    &.v-tabs--horizontal .v-tab__slider
+      height: auto
+
+    &.v-tabs--vertical .v-tab__slider
+      height: calc(100% - 2 * var(--v-slider-padding))
+
+    .v-slide-group__content
+      padding-inline: var(--v-slider-padding)
+
+    .v-btn__overlay
+      display: none
+
+    &.v-tabs--vertical .v-tab
+      grid-template-columns: max-content 1fr max-content
+      > .v-btn__content
+        justify-content: start
+
   @media #{map.get(settings.$display-breakpoints, 'md-and-down')}
     .v-tabs.v-slide-group--is-overflowing.v-slide-group--horizontal:not(.v-slide-group--has-affixes)
       .v-tab:first-child

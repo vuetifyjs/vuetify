@@ -158,9 +158,9 @@ export const VWindow = genericComponent<new <T>(
       if (itemsLength <= 2) {
         isReversed.value = newVal < oldVal
       } else if (newVal === lastIndex && oldVal === 0) {
-        isReversed.value = true
-      } else if (newVal === 0 && oldVal === lastIndex) {
         isReversed.value = false
+      } else if (newVal === 0 && oldVal === lastIndex) {
+        isReversed.value = true
       } else {
         isReversed.value = newVal < oldVal
       }

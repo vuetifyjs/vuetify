@@ -90,6 +90,7 @@ export const makeSelectProps = propsFactory({
 }, 'Select')
 
 export const makeVSelectProps = propsFactory({
+  autoSelectFirst: Boolean,
   ...makeSelectProps(),
   ...omit(makeVTextFieldProps({
     modelValue: null,
@@ -162,6 +163,7 @@ export const VSelect = genericComponent<new <
     const form = useForm(props)
     const selectedValues = computed(() => model.value.map(selection => selection.value))
     const isFocused = shallowRef(false)
+    const listHasFocus = shallowRef(false)
 
     let keyboardLookupPrefix = ''
     let keyboardLookupIndex = -1
@@ -200,6 +202,12 @@ export const VSelect = genericComponent<new <
       }
     })
 
+    const highlightFirst = computed(() => {
+      return props.autoSelectFirst &&
+        displayItems.value.length > 0 &&
+        !listHasFocus.value
+    })
+
     const listRef = ref<VList>()
     const listEvents = useScrolling(listRef, vTextFieldRef)
     function onClear (e: MouseEvent) {
@@ -226,6 +234,9 @@ export const VSelect = genericComponent<new <
 
       if (['Enter', 'ArrowDown', ' '].includes(e.key)) {
         menu.value = true
+        if (highlightFirst.value) {
+          listRef.value?.focus('next')
+        }
       }
 
       if (['Escape', 'Tab'].includes(e.key)) {
@@ -334,6 +345,12 @@ export const VSelect = genericComponent<new <
     }
     function onFocusin (e: FocusEvent) {
       isFocused.value = true
+      setTimeout(() => {
+        listHasFocus.value = true
+      })
+    }
+    function onFocusout (e: FocusEvent) {
+      listHasFocus.value = false
     }
     function onModelUpdate (v: any) {
       if (v == null) model.value = []
@@ -444,6 +461,7 @@ export const VSelect = genericComponent<new <
                       onMousedown={ (e: MouseEvent) => e.preventDefault() }
                       onKeydown={ onListKeydown }
                       onFocusin={ onFocusin }
+                      onFocusout={ onFocusout }
                       tabindex="-1"
                       selectable
                       aria-live="polite"

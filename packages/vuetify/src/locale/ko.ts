@@ -50,6 +50,9 @@ export default {
       previousMonth: '이전 달',
       nextMonth: '다음 달',
       selectYear: '연도 선택',
+      previousYear: '이전 연도',
+      nextYear: '다음 연도',
+      selectMonth: '월 선택',
       selectDate: '{0}',
       currentDate: '오늘, {0}',
     },
@@ -85,6 +88,9 @@ export default {
     am: '오전',
     pm: '오후',
     title: '시간을 선택하세요',
+    hour: '시간',
+    minute: '분',
+    second: '초',
   },
   pagination: {
     ariaLabel: {

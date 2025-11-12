@@ -50,6 +50,9 @@ export default {
       previousMonth: 'Mês anterior',
       nextMonth: 'Próximo mês',
       selectYear: 'Selecionar ano',
+      previousYear: 'Ano anterior',
+      nextYear: 'Próximo ano',
+      selectMonth: 'Selecionar mês',
       selectDate: '{0}',
       currentDate: 'Hoje, {0}',
     },
@@ -85,6 +88,9 @@ export default {
     am: 'AM',
     pm: 'PM',
     title: 'Selecione o horário',
+    hour: 'Hora',
+    minute: 'Minuto',
+    second: 'Segundos',
   },
   pagination: {
     ariaLabel: {

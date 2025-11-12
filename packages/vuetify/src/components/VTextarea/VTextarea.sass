@@ -6,6 +6,8 @@
 
 @include tools.layer('components')
   .v-textarea
+    --v-textarea-max-height: initial
+
     .v-field
       --v-textarea-control-height: var(--v-input-control-height)
 
@@ -13,6 +15,8 @@
       --v-input-control-height: var(--v-textarea-control-height)
 
     .v-field__input
+      max-height: var(--v-textarea-max-height)
+
       $a: calc((var(--v-field-padding-top, 0) + var(--v-input-padding-top, 0)) - 6px)
       $b: calc(var(--v-field-padding-top, 0) + var(--v-input-padding-top, 0) + 4px)
       $c: calc(100% - var(--v-textarea-scroll-bar-width, 16px))

@@ -50,6 +50,9 @@ export default {
       previousMonth: 'Eelmine kuu',
       nextMonth: 'Järgmine kuu',
       selectYear: 'Vali aasta',
+      previousYear: 'Eelmine aasta',
+      nextYear: 'Järgmine aasta',
+      selectMonth: 'Valige kuu',
       selectDate: '{0}',
       currentDate: 'Täna, {0}',
     },
@@ -85,6 +88,9 @@ export default {
     am: 'AM',
     pm: 'PM',
     title: 'Vali aeg',
+    hour: 'Tund',
+    minute: 'Minut',
+    second: 'Sekund',
   },
   pagination: {
     ariaLabel: {
