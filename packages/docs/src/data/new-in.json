@@ -204,9 +204,16 @@
       "glow": "3.8.0"
     }
   },
+  "VList": {
+    "props": {
+      "prependGap": "3.11.0",
+      "indent": "3.11.0"
+    }
+  },
   "VListItem": {
     "props": {
       "baseColor": "3.3.0",
+      "prependGap": "3.11.0",
       "slim": "3.4.0"
     }
   },
