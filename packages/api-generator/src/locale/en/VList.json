@@ -11,6 +11,8 @@
     "nav": "An alternative styling that reduces `v-list-item` width and rounds the corners. Typically used with **[v-navigation-drawer](/components/navigation-drawers)**.",
     "subheader": "Removes the top padding from `v-list-subheader` components. When used as a **String**, renders a subheader for you.",
     "slim": "Reduces horizontal spacing for badges, icons, tooltips, and avatars within slim list items to create a more compact visual representation.",
+    "prependGap": "Sets the horizontal spacing between prepend slot and the main content within list item. Also affects indent to ensure expected alignment of group children.",
+    "indent": "Overrides the indent size for nested groups.",
     "collapseIcon": "Icon to display when the list item is expanded.",
     "expandIcon": "Icon to display when the list item is collapsed.",
     "selectable": "Designates whether the list items are selectable. Additionally, sets necessary accessibility attributes internally."
