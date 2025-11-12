@@ -267,7 +267,6 @@
   "VSelect": {
     "props": {
       "autocomplete": "3.10.0",
-      "autoSelectFirst": "3.11.0",
       "listProps": "3.5.0",
       "noAutoScroll": "3.9.0"
     }
