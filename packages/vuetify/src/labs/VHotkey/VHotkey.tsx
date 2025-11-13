@@ -82,9 +82,6 @@ function processKey (config: PlatformKeyConfig, requestedMode: DisplayMode, isMa
 
   // 1. Resolve the safest display mode for the current platform
   const mode: DisplayMode = (() => {
-    // Non-Mac platforms rarely use icons – prefer text
-    if (requestedMode === 'icon' && !isMac) return 'text'
-
     // If the requested mode lacks an asset, fall back to text
     if (requestedMode === 'icon' && !keyCfg.icon) return 'text'
     if (requestedMode === 'symbol' && !keyCfg.symbol) return 'text'
