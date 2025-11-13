@@ -1,12 +1,9 @@
 /**
  * useCommandPaletteNavigation Composable
  *
- * Manages keyboard navigation and selection state for the command palette.
- * Provides arrow key navigation, tab support, and enter to execute.
+ * Manages selection state for the command palette.
+ * Keyboard navigation is now handled by VList in 'track' mode.
  */
-
-// Composables
-import { useHotkey } from '@/composables/hotkey'
 
 // Utilities
 import { computed, ref, watch } from 'vue'
@@ -21,14 +18,11 @@ import { isSelectableItem } from '../types'
 export interface UseCommandPaletteNavigationOptions {
   filteredItems: ComputedRef<VCommandPaletteItem[]>
   onItemClick: (item: VCommandPaletteItem, event: KeyboardEvent | MouseEvent) => void
-  isScopeActive: () => boolean
 }
 
 export interface UseCommandPaletteNavigationReturn {
   selectedIndex: Ref<number>
   activeDescendantId: ComputedRef<string | undefined>
-  moveSelectionUp: () => void
-  moveSelectionDown: () => void
   getSelectedItem: () => VCommandPaletteItem | undefined
   executeSelected: (event: KeyboardEvent | MouseEvent) => void
   reset: () => void
@@ -36,11 +30,10 @@ export interface UseCommandPaletteNavigationReturn {
 }
 
 /**
- * Composable for managing command palette keyboard navigation
+ * Composable for managing command palette selection state
  *
- * Handles arrow key navigation, tab support, and item execution.
- * Navigation updates occur only for selectable items (skips subheaders/dividers).
- * The search input retains focus while navigation is visual.
+ * VList handles keyboard navigation in 'track' mode.
+ * This composable manages the selected index and execution logic.
  */
 export function useCommandPaletteNavigation (
   options: UseCommandPaletteNavigationOptions
@@ -73,58 +66,6 @@ export function useCommandPaletteNavigation (
   }, { immediate: true })
 
   /**
-   * Move selection up with wrapping
-   * Skips non-selectable items (subheaders, dividers)
-   */
-  function moveSelectionUp () {
-    const maxIndex = options.filteredItems.value.length - 1
-    if (maxIndex < 0) return
-
-    let nextIndex = selectedIndex.value - 1
-    if (nextIndex < 0) {
-      nextIndex = maxIndex
-    }
-
-    // Skip non-selectable items going backwards
-    while (nextIndex >= 0 && nextIndex !== selectedIndex.value) {
-      if (isSelectableItem(options.filteredItems.value[nextIndex])) {
-        selectedIndex.value = nextIndex
-        return
-      }
-      nextIndex--
-      if (nextIndex < 0) {
-        nextIndex = maxIndex
-      }
-    }
-  }
-
-  /**
-   * Move selection down with wrapping
-   * Skips non-selectable items (subheaders, dividers)
-   */
-  function moveSelectionDown () {
-    const maxIndex = options.filteredItems.value.length - 1
-    if (maxIndex < 0) return
-
-    let nextIndex = selectedIndex.value + 1
-    if (nextIndex > maxIndex) {
-      nextIndex = 0
-    }
-
-    // Skip non-selectable items going forwards
-    while (nextIndex <= maxIndex && nextIndex !== selectedIndex.value) {
-      if (isSelectableItem(options.filteredItems.value[nextIndex])) {
-        selectedIndex.value = nextIndex
-        return
-      }
-      nextIndex++
-      if (nextIndex > maxIndex) {
-        nextIndex = 0
-      }
-    }
-  }
-
-  /**
    * Get the currently selected item
    */
   function getSelectedItem (): VCommandPaletteItem | undefined {
@@ -143,7 +84,7 @@ export function useCommandPaletteNavigation (
 
   /**
    * Reset navigation state
-   * Called when palette opens or filter changes
+   * Called when palette opens
    */
   function reset () {
     selectedIndex.value = -1
@@ -151,58 +92,15 @@ export function useCommandPaletteNavigation (
 
   /**
    * Set selected index directly
+   * Called by VList when keyboard navigation occurs
    */
   function setSelectedIndex (index: number) {
     selectedIndex.value = index
   }
 
-  /**
-   * Register keyboard shortcuts
-   * Only active when palette is focused
-   */
-  useHotkey('arrowup', e => {
-    if (options.isScopeActive()) {
-      e.preventDefault()
-      moveSelectionUp()
-    }
-  }, { inputs: true })
-
-  useHotkey('arrowdown', e => {
-    if (options.isScopeActive()) {
-      e.preventDefault()
-      moveSelectionDown()
-    }
-  }, { inputs: true })
-
-  useHotkey('tab', e => {
-    if (options.isScopeActive()) {
-      e.preventDefault()
-      moveSelectionDown()
-    }
-  }, { inputs: true })
-
-  useHotkey('shift+tab', e => {
-    if (options.isScopeActive()) {
-      e.preventDefault()
-      moveSelectionUp()
-    }
-  }, { inputs: true })
-
-  useHotkey('enter', e => {
-    if (options.isScopeActive()) {
-      e.preventDefault()
-      const item = getSelectedItem()
-      if (item) {
-        executeSelected(e)
-      }
-    }
-  }, { inputs: true })
-
   return {
     selectedIndex,
     activeDescendantId,
-    moveSelectionUp,
-    moveSelectionDown,
     getSelectedItem,
     executeSelected,
     reset,

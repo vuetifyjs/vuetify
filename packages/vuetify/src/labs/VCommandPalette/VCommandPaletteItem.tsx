@@ -39,12 +39,6 @@ export const makeVCommandPaletteItemProps = propsFactory({
   onExecute: Function as PropType<(event: MouseEvent | KeyboardEvent) => void>,
 }, 'VCommandPaletteItem')
 
-/**
- * VCommandPaletteItem Component
- *
- * Renders different item types (action, subheader, divider) based on the item's type.
- * Handles selection styling and hotkey badge display.
- */
 export const VCommandPaletteItemComponent = genericComponent()({
   name: 'VCommandPaletteItem',
 
@@ -88,7 +82,6 @@ export const VCommandPaletteItemComponent = genericComponent()({
             onClick={ handleClick }
             role="option"
             aria-selected={ props.isSelected }
-            tabindex={ -1 }
             v-slots={{
               append: item.hotkey ? () => <VHotkey keys={ item.hotkey } /> : undefined,
             }}

@@ -130,7 +130,6 @@ export const VCommandPalette = genericComponent()({
         emit('click:item', item, event)
         isOpen.value = false
       },
-      isScopeActive: () => isOpen.value,
     })
 
     /**
@@ -272,6 +271,9 @@ export const VCommandPalette = genericComponent()({
                     key="list"
                     class="v-command-palette__list"
                     role="listbox"
+                    navigationMode="track"
+                    navigationIndex={ navigation.selectedIndex.value }
+                    onUpdate:navigationIndex={ navigation.setSelectedIndex }
                     aria-label={ `${filteredItems.value.length} options available` }
                     aria-activedescendant={ navigation.activeDescendantId.value }
                   >
