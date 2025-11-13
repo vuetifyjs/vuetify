@@ -143,7 +143,7 @@ export const VDataTableRows = genericComponent<new <T>(
             }
 
             const slotProps = {
-              index,
+              index: item._virtualIndex ?? index,
               item: item.raw,
               internalItem: item,
               columns: columns.value,
