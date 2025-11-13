@@ -147,6 +147,7 @@ export default {
     space: 'Mellanslag',
     plus: 'plus',
     shortcut: 'Tangentbordsgenväg: {0}',
+    or: 'eller',
   },
   video: {
     play: 'Spela upp',

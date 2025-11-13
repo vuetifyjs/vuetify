@@ -147,6 +147,7 @@ export default {
     space: 'Spasie',
     plus: 'plus',
     shortcut: 'Sleutelbordkortpad: {0}',
+    or: 'of',
   },
   video: {
     play: 'Speel',

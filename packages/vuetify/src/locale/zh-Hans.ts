@@ -147,6 +147,7 @@ export default {
     space: '空格',
     plus: '加',
     shortcut: '键盘快捷键：{0}',
+    or: '或',
   },
   video: {
     play: '播放',

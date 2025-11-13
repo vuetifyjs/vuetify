@@ -131,7 +131,7 @@ function parseKeyGroup (group: string) {
   const MODIFIERS = ['ctrl', 'shift', 'alt', 'meta', 'cmd']
 
   // Use the shared combination splitting logic
-  const parts = splitKeyCombination(group.toLowerCase())
+  const { keys: parts } = splitKeyCombination(group.toLowerCase())
 
   // If the combination is invalid, return empty result
   if (parts.length === 0) {

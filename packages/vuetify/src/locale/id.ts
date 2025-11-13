@@ -147,6 +147,7 @@ export default {
     space: 'Spasi',
     plus: 'plus',
     shortcut: 'Pintasan keyboard: {0}',
+    or: 'atau',
   },
   video: {
     play: 'Putar',

@@ -147,6 +147,7 @@ export default {
     space: 'Mellemrum',
     plus: 'plus',
     shortcut: 'Tastaturgenvej: {0}',
+    or: 'eller',
   },
   video: {
     play: 'Afspil',

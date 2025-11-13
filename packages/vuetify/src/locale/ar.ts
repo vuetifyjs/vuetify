@@ -147,6 +147,7 @@ export default {
     space: 'مسافة',
     plus: 'زائد',
     shortcut: 'اختصار لوحة المفاتيح: {0}',
+    or: 'or',
   },
   video: {
     play: 'تشغيل',

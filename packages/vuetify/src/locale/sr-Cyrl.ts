@@ -147,6 +147,7 @@ export default {
     space: 'Размак',
     plus: 'плус',
     shortcut: 'Пречица на тастатури: {0}',
+    or: 'или',
   },
   video: {
     play: 'Пусти',

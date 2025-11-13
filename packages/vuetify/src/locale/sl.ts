@@ -147,6 +147,7 @@ export default {
     space: 'Presledek',
     plus: 'plus',
     shortcut: 'Tipkovnična bližnjica: {0}',
+    or: 'ali',
   },
   video: {
     play: 'Predvajaj',

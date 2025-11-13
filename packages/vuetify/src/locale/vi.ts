@@ -147,6 +147,7 @@ export default {
     space: 'Khoảng trắng',
     plus: 'cộng',
     shortcut: 'Phím tắt: {0}',
+    or: 'hoặc',
   },
   video: {
     play: 'Phát',

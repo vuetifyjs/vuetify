@@ -147,6 +147,7 @@ export default {
     space: 'Пробел',
     plus: 'плюс',
     shortcut: 'Сочетание клавиш: {0}',
+    or: 'или',
   },
   video: {
     play: 'Воспроизвести',

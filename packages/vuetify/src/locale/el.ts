@@ -147,6 +147,7 @@ export default {
     space: 'Διάστημα',
     plus: 'συν',
     shortcut: 'Συντόμευση πληκτρολογίου: {0}',
+    or: 'ή',
   },
   video: {
     play: 'Αναπαραγωγή',

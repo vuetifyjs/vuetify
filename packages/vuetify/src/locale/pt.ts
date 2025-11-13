@@ -147,6 +147,7 @@ export default {
     space: 'Espaço',
     plus: 'mais',
     shortcut: 'Atalho de teclado: {0}',
+    or: 'ou',
   },
   video: {
     play: 'Reproduzir',

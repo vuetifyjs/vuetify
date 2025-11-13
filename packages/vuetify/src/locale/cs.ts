@@ -147,6 +147,7 @@ export default {
     space: 'Mezerník',
     plus: 'plus',
     shortcut: 'Klávesová zkratka: {0}',
+    or: 'nebo',
   },
   video: {
     play: 'Přehrát',

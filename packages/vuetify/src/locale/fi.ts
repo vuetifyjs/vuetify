@@ -147,6 +147,7 @@ export default {
     space: 'Välilyönti',
     plus: 'plus',
     shortcut: 'Näppäinyhdistelmä: {0}',
+    or: 'tai',
   },
   video: {
     play: 'Toista',

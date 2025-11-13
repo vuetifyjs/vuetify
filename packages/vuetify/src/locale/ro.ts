@@ -147,6 +147,7 @@ export default {
     space: 'Spațiu',
     plus: 'plus',
     shortcut: 'Comandă rapidă tastatură: {0}',
+    or: 'sau',
   },
   video: {
     play: 'Redare',

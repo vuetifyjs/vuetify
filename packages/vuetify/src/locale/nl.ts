@@ -147,6 +147,7 @@ export default {
     space: 'Spatie',
     plus: 'plus',
     shortcut: 'Toetsenbordsnelkoppeling: {0}',
+    or: 'of',
   },
   video: {
     play: 'Afspelen',

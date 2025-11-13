@@ -147,6 +147,7 @@ export default {
     space: 'Medzera',
     plus: 'plus',
     shortcut: 'Klávesová skratka: {0}',
+    or: 'alebo',
   },
   video: {
     play: 'Prehrať',

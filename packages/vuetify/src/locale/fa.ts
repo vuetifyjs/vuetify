@@ -147,6 +147,7 @@ export default {
     space: 'فاصله',
     plus: 'بعلاوه',
     shortcut: 'میانبر صفحه کلید: {0}',
+    or: 'یا',
   },
   video: {
     play: 'پخش',

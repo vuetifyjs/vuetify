@@ -147,6 +147,7 @@ export default {
     space: 'Интервал',
     plus: 'плюс',
     shortcut: 'Клавиатурна комбинация: {0}',
+    or: 'или',
   },
   video: {
     play: 'Пусни',

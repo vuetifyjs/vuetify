@@ -147,6 +147,7 @@ export default {
     space: 'רווח',
     plus: 'פלוס',
     shortcut: 'קיצור דרך במקלדת: {0}',
+    or: 'או',
   },
   video: {
     play: 'נגן',

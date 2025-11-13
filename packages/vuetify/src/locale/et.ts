@@ -147,6 +147,7 @@ export default {
     space: 'Tühik',
     plus: 'pluss',
     shortcut: 'Klaviatuuri otsetee: {0}',
+    or: 'või',
   },
   video: {
     play: 'Esita',

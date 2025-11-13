@@ -147,6 +147,7 @@ export default {
     space: 'Atstarpe',
     plus: 'plus',
     shortcut: 'Tastatūras saīsne: {0}',
+    or: 'vai',
   },
   video: {
     play: 'Atskaņot',

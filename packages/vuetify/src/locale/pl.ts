@@ -147,6 +147,7 @@ export default {
     space: 'Spacja',
     plus: 'plus',
     shortcut: 'Skrót klawiszowy: {0}',
+    or: 'lub',
   },
   video: {
     play: 'Odtwórz',

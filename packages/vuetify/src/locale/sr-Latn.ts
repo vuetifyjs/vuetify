@@ -147,6 +147,7 @@ export default {
     space: 'Razmak',
     plus: 'plus',
     shortcut: 'Prečica na tastaturi: {0}',
+    or: 'ili',
   },
   video: {
     play: 'Reprodukuj',

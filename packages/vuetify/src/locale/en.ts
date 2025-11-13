@@ -147,6 +147,7 @@ export default {
     option: 'Option',
     plus: 'plus',
     shortcut: 'Keyboard shortcut: {0}',
+    or: 'or',
   },
   video: {
     play: 'Play',

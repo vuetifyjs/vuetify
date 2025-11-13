@@ -147,6 +147,7 @@ export default {
     space: 'Leertaste',
     plus: 'plus',
     shortcut: 'Tastenkürzel: {0}',
+    or: 'oder',
   },
   video: {
     play: 'Abspielen',

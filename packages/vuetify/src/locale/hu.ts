@@ -147,6 +147,7 @@ export default {
     space: 'Szóköz',
     plus: 'plusz',
     shortcut: 'Billentyűparancs: {0}',
+    or: 'vagy',
   },
   video: {
     play: 'Lejátszás',

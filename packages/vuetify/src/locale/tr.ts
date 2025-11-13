@@ -147,6 +147,7 @@ export default {
     space: 'Boşluk',
     plus: 'artı',
     shortcut: 'Klavye kısayolu: {0}',
+    or: 'veya',
   },
   video: {
     play: 'Oynat',

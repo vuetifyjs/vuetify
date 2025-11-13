@@ -147,6 +147,7 @@ export default {
     space: 'ដកឃ្លា',
     plus: 'បូក',
     shortcut: 'គ្រាប់ចុចរហ័ស: {0}',
+    or: 'ឬ',
   },
   video: {
     play: 'លេង',

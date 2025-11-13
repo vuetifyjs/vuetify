@@ -189,8 +189,9 @@ export const makeVHotkeyProps = propsFactory({
 }, 'VHotkey')
 
 const AND_DELINEATOR = Symbol('VHotkey:AND_DELINEATOR') // For + separators
+const SLASH_DELINEATOR = Symbol('VHotkey:SLASH_DELINEATOR') // For / separators
 const THEN_DELINEATOR = Symbol('VHotkey:THEN_DELINEATOR') // For - separators
-type Delineator = typeof AND_DELINEATOR | typeof THEN_DELINEATOR
+type Delineator = typeof AND_DELINEATOR | typeof SLASH_DELINEATOR | typeof THEN_DELINEATOR
 
 function getKeyText (keyMap: KeyMapConfig, key: string, isMac: boolean): string {
   const lowerKey = key.toLowerCase()
@@ -258,12 +259,14 @@ export const VHotkey = genericComponent()({
           // Add THEN delineator between sequence groups
           if (i > 0) result.push(THEN_DELINEATOR)
 
-          const keyParts = splitKeyCombination(group)
+          const { keys: keyParts, separators } = splitKeyCombination(group)
           for (let j = 0; j < keyParts.length; j++) {
             const part = keyParts[j]
 
             // Add AND delineator between keys
-            if (j > 0) result.push(AND_DELINEATOR)
+            if (j > 0) {
+              result.push(separators[j - 1] === '/' ? SLASH_DELINEATOR : AND_DELINEATOR)
+            }
             result.push(applyDisplayModeToKey(props.keyMap, props.displayMode, part, isMac.value))
           }
         }
@@ -289,6 +292,8 @@ export const VHotkey = genericComponent()({
           } else {
             if (key === AND_DELINEATOR) {
               readableParts.push(t('$vuetify.hotkey.plus'))
+            } else if (key === SLASH_DELINEATOR) {
+              readableParts.push(t('$vuetify.hotkey.or'))
             } else if (key === THEN_DELINEATOR) {
               readableParts.push(t('$vuetify.hotkey.then'))
             }
@@ -354,9 +359,9 @@ export const VHotkey = genericComponent()({
           class="v-hotkey__divider"
           aria-hidden="true"
         >
-          { key === AND_DELINEATOR
-            ? '+'
-            : t('$vuetify.hotkey.then')}
+          { key === AND_DELINEATOR ? '+'
+          : key === SLASH_DELINEATOR ? '/'
+          : t('$vuetify.hotkey.then')}
         </span>
       )
     }

@@ -147,6 +147,7 @@ export default {
     space: 'เว้นวรรค',
     plus: 'บวก',
     shortcut: 'ทางลัดแป้นพิมพ์: {0}',
+    or: 'หรือ',
   },
   video: {
     play: 'เล่น',

@@ -147,6 +147,7 @@ export default {
     space: 'بۆشایی',
     plus: 'زیادکردن',
     shortcut: 'کورتەبڕی تەختەکلیل: {0}',
+    or: 'یان',
   },
   video: {
     play: 'لێدان',

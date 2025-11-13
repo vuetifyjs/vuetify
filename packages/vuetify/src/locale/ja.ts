@@ -147,6 +147,7 @@ export default {
     space: 'スペース',
     plus: 'プラス',
     shortcut: 'キーボードショートカット: {0}',
+    or: 'または',
   },
   video: {
     play: '再生',

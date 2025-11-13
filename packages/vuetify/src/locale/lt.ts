@@ -147,6 +147,7 @@ export default {
     space: 'Tarpas',
     plus: 'plius',
     shortcut: 'Klaviatūros trumpinys: {0}',
+    or: 'arba',
   },
   video: {
     play: 'Groti',

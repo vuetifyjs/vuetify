@@ -147,6 +147,7 @@ export default {
     space: 'Spazio',
     plus: 'più',
     shortcut: 'Scorciatoia da tastiera: {0}',
+    or: 'o',
   },
   video: {
     play: 'Riproduci',
