@@ -14,11 +14,10 @@
     }
 
     &--inline {
-      align-items: baseline;
       max-height: 1lh;
       vertical-align: baseline;
       font-size: $hotkey-inline-font-size;
-      line-height: $hotkey-inline-line-height;
+      line-height: inherit;
     }
 
     &__prefix {
@@ -72,7 +71,7 @@
         align-self: baseline;
         align-items: baseline;
         font-size: $hotkey-inline-font-size;
-        line-height: $hotkey-inline-line-height;
+        line-height: inherit;
         padding: $hotkey-inline-padding;
         gap: $hotkey-combination-gap;
         margin-left: 0;
@@ -106,8 +105,16 @@
       }
 
       &-icon .v-icon {
-        max-width: $hotkey-icon-max-width;
         min-width: unset;
+
+        &:has(svg) {
+          max-width: $hotkey-icon-size;
+        }
+        &:not(:has(svg)) {
+          font-size: $hotkey-icon-size;
+          line-height: inherit;
+          height: inherit;
+        }
       }
 
       &--nested {
@@ -126,11 +133,6 @@
         &.v-hotkey__key-icon {
           align-self: center;
         }
-
-        .v-icon {
-          max-width: $hotkey-icon-max-width;
-          min-width: unset;
-        }
       }
     }
 
@@ -142,30 +144,20 @@
     }
 
     &__combination {
-      align-self: baseline;
       display: flex;
       gap: $hotkey-combination-gap;
     }
 
     &--inline &__key {
-      &-symbol.v-kbd,
-      &-text.v-kbd {
-        align-self: baseline;
-      }
-
-      &.v-kbd {
-        font-size: $hotkey-inline-font-size;
-        line-height: $hotkey-inline-line-height;
-        padding: $hotkey-inline-padding;
-        min-width: $hotkey-inline-min-width;
-      }
+      align-self: center;
+      padding: $hotkey-inline-padding;
+      min-width: $hotkey-inline-min-width;
+      height: calc(1lh - 2px);
+      line-height: calc(1lh - 2px);
 
       &-icon {
-        align-self: stretch;
-
         &.v-kbd {
-          padding-top: 0;
-          padding-bottom: 0;
+          padding-block: 0;
         }
 
         .v-icon {
@@ -182,9 +174,7 @@
     }
 
     &--inline &__combination {
-      height: inherit;
-      align-self: baseline;
-      display: flex;
+      align-items: baseline;
       gap: 1px;
     }
 
@@ -216,8 +206,7 @@
       .v-hotkey__key.v-kbd {
         background: transparent !important;
         border: none !important;
-        padding-left: 0;
-        padding-right: 0;
+        padding-inline: 0;
         min-width: auto;
 
         @include tools.elevation(0);
