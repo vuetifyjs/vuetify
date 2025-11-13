@@ -146,6 +146,16 @@ Longer content can be truncated with a text ellipsis using the `.text-truncate` 
 
 <ExamplesExample file="text-and-typography/text-truncate" />
 
+## Changing Global Font
+
+You can change the global font-family **Roboto** used by Vuetify. Ensure you have [SASS Variable](/features/sass-variables) configured in your project, import your font, and set the  `$body-font-family` / `$heading-font-family` sass variable to your new font. By default, `$heading-font-family` is set to `$body-font-family`.
+
+```scss { resource="src/styles/main.scss" }
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@100,300,400,500,700,900&display=swap')
+
+$body-font-family: "Open Sans", sans-serif;
+```
+
 ## RTL Alignment
 
 When using [RTL](/features/bidirectionality), you may want to keep the alignment regardless of current text direction. This can be achieved by setting the direction to either `left` or `right`.
