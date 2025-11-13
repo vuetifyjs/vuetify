@@ -22,7 +22,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeVariantProps } from '@/composables/variant'
 
 // Utilities
-import { computed, ref, shallowRef, toRef } from 'vue'
+import { computed, ref, shallowRef, toRef, watch } from 'vue'
 import {
   EventProp,
   focusChild,
@@ -105,6 +105,11 @@ export const makeVListProps = propsFactory({
   },
   slim: Boolean,
   nav: Boolean,
+  navigationMode: {
+    type: String as PropType<'focus' | 'track'>,
+    default: 'focus',
+  },
+  navigationIndex: Number,
 
   'onClick:open': EventProp<[{ id: unknown, value: boolean, path: unknown[] }]>(),
   'onClick:select': EventProp<[{ id: unknown, value: boolean, path: unknown[] }]>(),
@@ -155,12 +160,13 @@ export const VList = genericComponent<new <
     'update:selected': (value: unknown) => true,
     'update:activated': (value: unknown) => true,
     'update:opened': (value: unknown) => true,
+    'update:navigationIndex': (value: number) => true,
     'click:open': (value: { id: unknown, value: boolean, path: unknown[] }) => true,
     'click:activate': (value: { id: unknown, value: boolean, path: unknown[] }) => true,
     'click:select': (value: { id: unknown, value: boolean, path: unknown[] }) => true,
   },
 
-  setup (props, { slots }) {
+  setup (props, { slots, emit }) {
     const { items } = useListItems(props)
     const { themeClasses } = provideTheme(props)
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.bgColor)
@@ -175,6 +181,12 @@ export const VList = genericComponent<new <
     const baseColor = toRef(() => props.baseColor)
     const color = toRef(() => props.color)
     const isSelectable = toRef(() => (props.selectable || props.activatable))
+
+    // Track mode navigation index
+    const currentNavIndex = ref(props.navigationIndex ?? -1)
+    watch(() => props.navigationIndex, v => {
+      if (v !== undefined) currentNavIndex.value = v
+    })
 
     createList({
       filterable: props.filterable,
@@ -219,6 +231,40 @@ export const VList = genericComponent<new <
       ) focus()
     }
 
+    function getNextIndex (direction: 'next' | 'prev' | 'first' | 'last'): number {
+      const itemCount = items.value.length
+      if (itemCount === 0) return -1
+
+      let nextIdx: number
+
+      if (direction === 'first') {
+        nextIdx = 0
+      } else if (direction === 'last') {
+        nextIdx = itemCount - 1
+      } else {
+        nextIdx = currentNavIndex.value + (direction === 'next' ? 1 : -1)
+
+        if (nextIdx < 0) nextIdx = itemCount - 1
+        if (nextIdx >= itemCount) nextIdx = 0
+      }
+
+      const startIdx = nextIdx
+      let attempts = 0
+      while (attempts < itemCount) {
+        const item = items.value[nextIdx]
+        if (item && item.type !== 'divider' && item.type !== 'subheader') {
+          return nextIdx
+        }
+        nextIdx += direction === 'next' || direction === 'last' ? 1 : -1
+        if (nextIdx < 0) nextIdx = itemCount - 1
+        if (nextIdx >= itemCount) nextIdx = 0
+        if (nextIdx === startIdx) return -1
+        attempts++
+      }
+
+      return -1
+    }
+
     function onKeydown (e: KeyboardEvent) {
       const target = e.target as HTMLElement
 
@@ -228,19 +274,48 @@ export const VList = genericComponent<new <
         return
       }
 
-      if (e.key === 'ArrowDown') {
-        focus('next')
-      } else if (e.key === 'ArrowUp') {
-        focus('prev')
-      } else if (e.key === 'Home') {
-        focus('first')
-      } else if (e.key === 'End') {
-        focus('last')
+      let handled = false
+
+      if (props.navigationMode === 'track') {
+        let nextIdx: number | null = null
+
+        if (e.key === 'ArrowDown') {
+          nextIdx = getNextIndex('next')
+          handled = true
+        } else if (e.key === 'ArrowUp') {
+          nextIdx = getNextIndex('prev')
+          handled = true
+        } else if (e.key === 'Home') {
+          nextIdx = getNextIndex('first')
+          handled = true
+        } else if (e.key === 'End') {
+          nextIdx = getNextIndex('last')
+          handled = true
+        }
+
+        if (handled && nextIdx !== null && nextIdx !== -1) {
+          currentNavIndex.value = nextIdx
+          emit('update:navigationIndex', nextIdx)
+        }
       } else {
-        return
+        if (e.key === 'ArrowDown') {
+          focus('next')
+          handled = true
+        } else if (e.key === 'ArrowUp') {
+          focus('prev')
+          handled = true
+        } else if (e.key === 'Home') {
+          focus('first')
+          handled = true
+        } else if (e.key === 'End') {
+          focus('last')
+          handled = true
+        }
       }
 
-      e.preventDefault()
+      if (handled) {
+        e.preventDefault()
+      }
     }
 
     function onMousedown (e: MouseEvent) {
@@ -303,6 +378,7 @@ export const VList = genericComponent<new <
       children,
       parents,
       getPath,
+      navigationIndex: computed(() => currentNavIndex.value),
     }
   },
 })
