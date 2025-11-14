@@ -276,8 +276,8 @@ importers:
         specifier: ^2.0.4
         version: 2.0.4(vue@3.5.21(typescript@5.8.3))
       '@vuetify/one':
-        specifier: ^2.5.1
-        version: 2.5.1(@mdi/js@7.4.47(patch_hash=3c2a78b1509745df3a3100e3e59075dd87718e67632cc14dc64dd9ac34098f9f))(@vue/compiler-sfc@3.5.21)(lodash-es@4.17.21)(vite@7.1.5(@types/node@24.4.0)(sass-embedded@1.87.0)(sass@1.87.0)(terser@5.44.0)(yaml@2.8.1))(vue-router@4.5.0(vue@3.5.21(typescript@5.8.3)))(vue@3.5.21(typescript@5.8.3))(vuetify@packages+vuetify)
+        specifier: ^2.6.1
+        version: 2.6.1(@mdi/js@7.4.47(patch_hash=3c2a78b1509745df3a3100e3e59075dd87718e67632cc14dc64dd9ac34098f9f))(@vue/compiler-sfc@3.5.21)(lodash-es@4.17.21)(vite@7.1.5(@types/node@24.4.0)(sass-embedded@1.87.0)(sass@1.87.0)(terser@5.44.0)(yaml@2.8.1))(vue-router@4.5.0(vue@3.5.21(typescript@5.8.3)))(vue@3.5.21(typescript@5.8.3))(vuetify@packages+vuetify)
       algoliasearch:
         specifier: ^4.24.0
         version: 4.24.0
@@ -3270,8 +3270,8 @@ packages:
       vue: ^3.0.0
       vuetify: ^3.0.0
 
-  '@vuetify/one@2.5.1':
-    resolution: {integrity: sha512-BoAuBubM+oVcNW0z1g+695s8vLtntfqAEQ7pZnm+HlgnrkrSJbPZW0aNi6ns0nFk35hDHw7jb6mbxqZeDQDYtA==}
+  '@vuetify/one@2.6.1':
+    resolution: {integrity: sha512-kMK+0uSZJoKbAUxXhcz+JQSb7T+vxN/oAZXHqZZkEopu1h1IjLJ5lWEi+n01L1UGAIDMY6owpe7iNdtVQ5CDZg==}
     peerDependencies:
       '@mdi/js': 7.4.47
       lodash-es: ^4.17.21
@@ -11889,7 +11889,7 @@ snapshots:
       vue: 3.5.21(typescript@5.8.3)
       vuetify: link:packages/vuetify
 
-  '@vuetify/one@2.5.1(@mdi/js@7.4.47(patch_hash=3c2a78b1509745df3a3100e3e59075dd87718e67632cc14dc64dd9ac34098f9f))(@vue/compiler-sfc@3.5.21)(lodash-es@4.17.21)(vite@7.1.5(@types/node@24.4.0)(sass-embedded@1.87.0)(sass@1.87.0)(terser@5.44.0)(yaml@2.8.1))(vue-router@4.5.0(vue@3.5.21(typescript@5.8.3)))(vue@3.5.21(typescript@5.8.3))(vuetify@packages+vuetify)':
+  '@vuetify/one@2.6.1(@mdi/js@7.4.47(patch_hash=3c2a78b1509745df3a3100e3e59075dd87718e67632cc14dc64dd9ac34098f9f))(@vue/compiler-sfc@3.5.21)(lodash-es@4.17.21)(vite@7.1.5(@types/node@24.4.0)(sass-embedded@1.87.0)(sass@1.87.0)(terser@5.44.0)(yaml@2.8.1))(vue-router@4.5.0(vue@3.5.21(typescript@5.8.3)))(vue@3.5.21(typescript@5.8.3))(vuetify@packages+vuetify)':
     dependencies:
       '@mdi/js': 7.4.47(patch_hash=3c2a78b1509745df3a3100e3e59075dd87718e67632cc14dc64dd9ac34098f9f)
       lodash-es: 4.17.21

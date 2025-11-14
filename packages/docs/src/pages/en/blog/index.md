@@ -18,6 +18,14 @@ Latest news, updates, and stories about Vuetify.
 
 <br>
 
+## October 2025 Update
+
+🖊️ John Leider • 📅 November 11th, 2025
+
+October focused on refinement and reliability, delivering critical accessibility improvements with enhanced focus trap functionality, optimized VDataTable performance for large datasets, and refined components across the board. The month also saw the launch of Vuetify Link, our new URL shortening service, and significant updates to the Vuetify MCP server with HTTP transport support. We made substantial progress on v0 composables, laying the groundwork for Vuetify 4.0... { .text-medium-emphasis }
+
+[Read More](/blog/october-2025-update/) { .text-end }
+
 ## September 2025 Update
 
 🖊️ John Leider • 📅 October 12th, 2025
