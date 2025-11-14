@@ -4,17 +4,17 @@ export class Box {
   width: number
   height: number
 
-  constructor (args: DOMRect | {
+  constructor (args: Element | {
     x: number
     y: number
     width: number
     height: number
   }) {
     const pageScale = document.body.currentCSSZoom ?? 1
-    const ignoreZoom = (args as any).top === undefined // detect DOMRect without breaking in jsdom
-    const factor = ignoreZoom ? 1 : 1 + (1 - pageScale) / pageScale
+    const isElement = args instanceof Element
+    const factor = isElement ? 1 + (1 - pageScale) / pageScale : 1
 
-    const { x, y, width, height } = args
+    const { x, y, width, height } = isElement ? args.getBoundingClientRect() : args
 
     this.x = x * factor
     this.y = y * factor
@@ -53,7 +53,7 @@ export function getTargetBox (target: HTMLElement | [x: number, y: number]): Box
       height: 0 * factor,
     })
   } else {
-    return new Box(target.getBoundingClientRect())
+    return new Box(target)
   }
 }
 
@@ -76,6 +76,6 @@ export function getElementBox (el: HTMLElement) {
       })
     }
   } else {
-    return new Box(el.getBoundingClientRect())
+    return new Box(el)
   }
 }
