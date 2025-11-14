@@ -23,7 +23,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeVariantProps } from '@/composables/variant'
 
 // Utilities
-import { computed, ref, shallowRef, toRef, watch } from 'vue'
+import { computed, ref, shallowRef, toRef } from 'vue'
 import {
   EventProp,
   focusChild,
