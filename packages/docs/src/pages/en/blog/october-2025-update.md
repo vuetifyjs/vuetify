@@ -132,7 +132,6 @@ The team has been working diligently to enhance component reliability and functi
 
 * **VTreeview & VList**: Improved node selection reliability for more predictable behavior in complex tree structures
 * **VBreadcrumbs**: Added `item-props` support to enable text truncation for long breadcrumb items
-* **VList**: Enhanced semantic HTML with proper accessibility attributes and roles
 
 **Form Components**
 
