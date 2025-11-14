@@ -51,7 +51,6 @@ The following is a list of all planned components for the year 2025.
 | Name                                                       | Entering Labs | Production Release |
 |------------------------------------------------------------|---------------|--------------------|
 | [v-icon-btn](/components/icon-buttons/)                    | *             | Q4 2025            |
-| [v-hotkey](/components/hotkeys/)                           | *             | Q2 2026            |
 | [v-video](https://github.com/vuetifyjs/vuetify/pull/21460) | *             | TBD                |
 | [v-pie](https://github.com/vuetifyjs/vuetify/pull/21176)   | *             | TBD                |
 | v-command-palette                                          | TBD           | TBD                |
@@ -73,8 +72,9 @@ The following are the already released **minor** and **major** version updates. 
 - **Target Release:** Q4 2025
 - **Notes:** [v3.10 Release](/getting-started/release-notes/?version=v3.11.0)
 - **Overview:**
-  - Introduced 1 new components to the main framework from Labs:
+  - Introduced 2 new components to the main framework from Labs:
     - [v-calendar](/components/calendars/)
+    - [v-hotkey](/components/hotkeys/)
 - **Milestone Issues:** [Github Issues](https://github.com/vuetifyjs/vuetify/milestone/82)
 
 ### v3.10 (Argos)
