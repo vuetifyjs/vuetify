@@ -9,8 +9,8 @@
     "lines": "Designates a **minimum-height** for all children `v-list-item` components. This prop uses [line-clamp](https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-line-clamp) and is not supported in all browsers.",
     "link": "Applies `v-list-item` hover styles. Useful when using the item is an _activator_.",
     "nav": "An alternative styling that reduces `v-list-item` width and rounds the corners. Typically used with **[v-navigation-drawer](/components/navigation-drawers)**.",
-    "navigationIndex": "Specifies the currently selected navigation index when using `navigationMode=\"track\"`. Can be used with `v-model:navigationIndex` for two-way binding. When set, overrides the internal navigation state.",
-    "navigationMode": "Determines keyboard navigation behavior. **focus** (default) moves DOM focus to items, suitable for traditional lists. **track** updates an index without moving focus, ideal for command palettes and autocomplete components where an external element retains focus.",
+    "navigationIndex": "Specifies the currently selected navigation index when using `navigationStrategy=\"track\"`. Can be used with `v-model:navigationIndex` for two-way binding. When set, overrides the internal navigation state.",
+    "navigationStrategy": "Determines keyboard navigation behavior. **focus** (default) moves DOM focus to items, suitable for traditional lists. **track** updates an index without moving focus, ideal for command palettes and autocomplete components where an external element retains focus.",
     "subheader": "Removes the top padding from `v-list-subheader` components. When used as a **String**, renders a subheader for you.",
     "slim": "Reduces horizontal spacing for badges, icons, tooltips, and avatars within slim list items to create a more compact visual representation.",
     "collapseIcon": "Icon to display when the list item is expanded.",
@@ -22,7 +22,7 @@
     "click:open": "Emitted when the list item is opened.",
     "click:select": "Emitted when the list item is selected.",
     "update:activated": "Emitted when the list item is activated.",
-    "update:navigationIndex": "Emitted when keyboard navigation occurs in `navigationMode=\"track\"`. The event payload is the new index of the selected item. Automatically skips non-selectable items like dividers and subheaders.",
+    "update:navigationIndex": "Emitted when keyboard navigation occurs in `navigationStrategy=\"track\"`. The event payload is the new index of the selected item. Automatically skips non-selectable items like dividers and subheaders.",
     "update:opened": "Emitted when the list item is opened.",
     "update:selected": "Emitted when the list item is selected."
   },
@@ -39,7 +39,7 @@
     "children": "The nested list items within the component.",
     "focus": "Focus the list item.",
     "getPath": "Get the position of an item within the nested structure.",
-    "navigationIndex": "A computed ref that returns the current navigation index when using `navigationMode=\"track\"`. Returns -1 when no item is selected or when using `navigationMode=\"focus\"`.",
+    "navigationIndex": "A computed ref that returns the current navigation index when using `navigationStrategy=\"track\"`. Returns -1 when no item is selected or when using `navigationStrategy=\"focus\"`.",
     "open": "Open the list item.",
     "parents": "The parent list items within the component."
   }

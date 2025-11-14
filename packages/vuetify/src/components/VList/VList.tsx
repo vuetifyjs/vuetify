@@ -16,13 +16,14 @@ import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { IconValue } from '@/composables/icons'
 import { makeItemsProps } from '@/composables/list-items'
 import { makeNestedProps, useNested } from '@/composables/nested/nested'
+import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeVariantProps } from '@/composables/variant'
 
 // Utilities
-import { computed, ref, shallowRef, toRef, watch } from 'vue'
+import { computed, ref, shallowRef, toRef } from 'vue'
 import {
   EventProp,
   focusChild,
@@ -105,7 +106,7 @@ export const makeVListProps = propsFactory({
   },
   slim: Boolean,
   nav: Boolean,
-  navigationMode: {
+  navigationStrategy: {
     type: String as PropType<'focus' | 'track'>,
     default: 'focus',
   },
@@ -182,11 +183,13 @@ export const VList = genericComponent<new <
     const color = toRef(() => props.color)
     const isSelectable = toRef(() => (props.selectable || props.activatable))
 
-    // Track mode navigation index
-    const currentNavIndex = ref(props.navigationIndex ?? -1)
-    watch(() => props.navigationIndex, v => {
-      if (v !== undefined) currentNavIndex.value = v
-    })
+    // Track strategy navigation index
+    const currentNavIndex = useProxiedModel(
+      props,
+      'navigationIndex',
+      -1,
+      v => v ?? -1
+    )
 
     createList({
       filterable: props.filterable,
@@ -235,30 +238,30 @@ export const VList = genericComponent<new <
       const itemCount = items.value.length
       if (itemCount === 0) return -1
 
-      let nextIdx: number
+      let nextIndex: number
 
       if (direction === 'first') {
-        nextIdx = 0
+        nextIndex = 0
       } else if (direction === 'last') {
-        nextIdx = itemCount - 1
+        nextIndex = itemCount - 1
       } else {
-        nextIdx = currentNavIndex.value + (direction === 'next' ? 1 : -1)
+        nextIndex = currentNavIndex.value + (direction === 'next' ? 1 : -1)
 
-        if (nextIdx < 0) nextIdx = itemCount - 1
-        if (nextIdx >= itemCount) nextIdx = 0
+        if (nextIndex < 0) nextIndex = itemCount - 1
+        if (nextIndex >= itemCount) nextIndex = 0
       }
 
-      const startIdx = nextIdx
+      const startIndex = nextIndex
       let attempts = 0
       while (attempts < itemCount) {
-        const item = items.value[nextIdx]
+        const item = items.value[nextIndex]
         if (item && item.type !== 'divider' && item.type !== 'subheader') {
-          return nextIdx
+          return nextIndex
         }
-        nextIdx += direction === 'next' || direction === 'last' ? 1 : -1
-        if (nextIdx < 0) nextIdx = itemCount - 1
-        if (nextIdx >= itemCount) nextIdx = 0
-        if (nextIdx === startIdx) return -1
+        nextIndex += direction === 'next' || direction === 'last' ? 1 : -1
+        if (nextIndex < 0) nextIndex = itemCount - 1
+        if (nextIndex >= itemCount) nextIndex = 0
+        if (nextIndex === startIndex) return -1
         attempts++
       }
 
@@ -276,7 +279,7 @@ export const VList = genericComponent<new <
 
       let handled = false
 
-      if (props.navigationMode === 'track') {
+      if (props.navigationStrategy === 'track') {
         let nextIdx: number | null = null
 
         if (e.key === 'ArrowDown') {
@@ -295,7 +298,6 @@ export const VList = genericComponent<new <
 
         if (handled && nextIdx !== null && nextIdx !== -1) {
           currentNavIndex.value = nextIdx
-          emit('update:navigationIndex', nextIdx)
         }
       } else {
         if (e.key === 'ArrowDown') {
