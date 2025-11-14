@@ -183,7 +183,7 @@ export const VList = genericComponent<new <
     const color = toRef(() => props.color)
     const isSelectable = toRef(() => (props.selectable || props.activatable))
 
-    const currentNavIndex = useProxiedModel(
+    const navigationIndex = useProxiedModel(
       props,
       'navigationIndex',
       -1,
@@ -244,7 +244,7 @@ export const VList = genericComponent<new <
       } else if (direction === 'last') {
         nextIndex = itemCount - 1
       } else {
-        nextIndex = currentNavIndex.value + (direction === 'next' ? 1 : -1)
+        nextIndex = navigationIndex.value + (direction === 'next' ? 1 : -1)
 
         if (nextIndex < 0) nextIndex = itemCount - 1
         if (nextIndex >= itemCount) nextIndex = 0
@@ -296,7 +296,7 @@ export const VList = genericComponent<new <
         }
 
         if (handled && nextIdx !== null && nextIdx !== -1) {
-          currentNavIndex.value = nextIdx
+          navigationIndex.value = nextIdx
         }
       } else {
         if (e.key === 'ArrowDown') {
@@ -379,7 +379,7 @@ export const VList = genericComponent<new <
       children,
       parents,
       getPath,
-      navigationIndex: computed(() => currentNavIndex.value),
+      navigationIndex,
     }
   },
 })
