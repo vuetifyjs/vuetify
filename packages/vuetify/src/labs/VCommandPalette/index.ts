@@ -1,7 +1,2 @@
 export { VCommandPalette } from './VCommandPalette'
 export { VCommandPaletteItemComponent } from './VCommandPaletteItem'
-export type { VCommandPaletteItem as VCommandPaletteItemType } from './types'
-export { isActionItem, isSubheader, isDivider, isSelectableItem } from './types'
-export { useCommandPaletteNavigation } from './composables/useCommandPaletteNavigation'
-export { useCommandPaletteContext, provideCommandPaletteContext } from './composables/useCommandPaletteContext'
-export type { VCommandPaletteContextType } from './composables/useCommandPaletteContext'
