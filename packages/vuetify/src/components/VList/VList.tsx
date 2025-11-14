@@ -183,7 +183,6 @@ export const VList = genericComponent<new <
     const color = toRef(() => props.color)
     const isSelectable = toRef(() => (props.selectable || props.activatable))
 
-    // Track strategy navigation index
     const currentNavIndex = useProxiedModel(
       props,
       'navigationIndex',
