@@ -426,17 +426,15 @@ export const VSelect = genericComponent<new <
               <>
                 <select
                   hidden
-                  multiple={ props.multiple || undefined }
+                  multiple={ props.multiple }
                   name={ autocomplete.fieldName.value }
                 >
-                  { items.value.map((item, index) => (
+                  { items.value.map(item => (
                     <option
-                      key={ index }
-                      value={ String(item.value) }
+                      key={ item.value }
+                      value={ item.value }
                       selected={ selectedValues.value.includes(item.value) }
-                    >
-                      { item.title }
-                    </option>
+                    />
                   ))}
                 </select>
 
