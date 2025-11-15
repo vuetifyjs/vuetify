@@ -163,7 +163,6 @@ export const VSelect = genericComponent<new <
     const form = useForm(props)
     const autocomplete = useAutocomplete(props)
     const selectedValues = computed(() => model.value.map(selection => selection.value))
-    const displayValue = computed(() => model.value.map(v => v.props.title).join(', '))
     const isFocused = shallowRef(false)
 
     let keyboardLookupPrefix = ''
@@ -390,8 +389,8 @@ export const VSelect = genericComponent<new <
         <VTextField
           ref={ vTextFieldRef }
           { ...textFieldProps }
+          modelValue={ model.value.map(v => v.props.title).join(', ') }
           name={ undefined }
-          modelValue={ displayValue.value }
           onUpdate:modelValue={ onModelUpdate }
           v-model:focused={ isFocused.value }
           validationValue={ model.externalValue }
