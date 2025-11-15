@@ -650,6 +650,7 @@ export const VCombobox = genericComponent<new <
                   return (
                     <div
                       key={ item.value }
+                      aria-hidden="true"
                       class={[
                         'v-combobox__selection',
                         index === selectionIndex.value && [

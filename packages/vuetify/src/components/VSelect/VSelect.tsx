@@ -574,7 +574,7 @@ export const VSelect = genericComponent<new <
                   if (hasSlot && !slotContent) return undefined
 
                   return (
-                    <div key={ item.value } class="v-select__selection">
+                    <div key={ item.value } class="v-select__selection" aria-hidden="true">
                       { hasChips ? (
                         !slots.chip ? (
                           <VChip
