@@ -163,7 +163,6 @@ export const VSelect = genericComponent<new <
     const form = useForm(props)
     const autocomplete = useAutocomplete(props)
     const selectedValues = computed(() => model.value.map(selection => selection.value))
-    const formValue = computed(() => selectedValues.value.join(', '))
     const displayValue = computed(() => model.value.map(v => v.props.title).join(', '))
     const isFocused = shallowRef(false)
 
@@ -425,11 +424,21 @@ export const VSelect = genericComponent<new <
             ...slots,
             default: () => (
               <>
-                <input
-                  type="hidden"
+                <select
+                  hidden
+                  multiple={ props.multiple || undefined }
                   name={ autocomplete.fieldName.value }
-                  value={ formValue.value }
-                />
+                >
+                  { items.value.map((item, index) => (
+                    <option
+                      key={ index }
+                      value={ String(item.value) }
+                      selected={ selectedValues.value.includes(item.value) }
+                    >
+                      { item.title }
+                    </option>
+                  ))}
+                </select>
 
                 <VMenu
                   id={ menuId.value }
