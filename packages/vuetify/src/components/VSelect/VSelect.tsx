@@ -16,6 +16,7 @@ import { VVirtualScroll } from '@/components/VVirtualScroll'
 
 // Composables
 import { useScrolling } from './useScrolling'
+import { useAutocomplete } from '@/composables/autocomplete'
 import { useForm } from '@/composables/form'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { IconValue } from '@/composables/icons'
@@ -160,7 +161,10 @@ export const VSelect = genericComponent<new <
         : model.value.length
     })
     const form = useForm(props)
+    const autocomplete = useAutocomplete(props)
     const selectedValues = computed(() => model.value.map(selection => selection.value))
+    const formValue = computed(() => selectedValues.value.join(', '))
+    const displayValue = computed(() => model.value.map(v => v.props.title).join(', '))
     const isFocused = shallowRef(false)
 
     let keyboardLookupPrefix = ''
@@ -387,7 +391,8 @@ export const VSelect = genericComponent<new <
         <VTextField
           ref={ vTextFieldRef }
           { ...textFieldProps }
-          modelValue={ model.value.map(v => v.props.value).join(', ') }
+          name={ undefined }
+          modelValue={ displayValue.value }
           onUpdate:modelValue={ onModelUpdate }
           v-model:focused={ isFocused.value }
           validationValue={ model.externalValue }
@@ -420,6 +425,12 @@ export const VSelect = genericComponent<new <
             ...slots,
             default: () => (
               <>
+                <input
+                  type="hidden"
+                  name={ autocomplete.fieldName.value }
+                  value={ formValue.value }
+                />
+
                 <VMenu
                   id={ menuId.value }
                   ref={ vMenuRef }
