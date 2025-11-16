@@ -106,9 +106,11 @@
     text-align: center
     margin: $calendar-weekly-day-label-margin
 
-    .v-btn
+    .v-icon-btn
       font-size: $calendar-weekly-day-label-font-size
-      text-transform: none
+
+      &:focus > .v-icon-btn__overlay
+        opacity: calc(.25 * var(--v-theme-overlay-multiplier))
 
   .v-calendar-weekly__day-month
     position: absolute
@@ -119,4 +121,3 @@
     left: $calendar-weekly-day-month-left
     height: $calendar-weekly-day-label-size
     line-height: $calendar-weekly-day-label-size
-
