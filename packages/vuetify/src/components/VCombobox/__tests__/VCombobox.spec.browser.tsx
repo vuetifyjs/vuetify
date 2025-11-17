@@ -493,16 +493,19 @@ describe('VCombobox', () => {
     await expect.element(input).toHaveAttribute('placeholder', 'Placeholder')
 
     await rerender({ label: 'Label' })
-    await expect.element(input).not.toBeDisplayed()
+    await expect.element(input).toBeDisplayed()
+    expect(Number(window.getComputedStyle(input, '::placeholder').opacity)).toBe(0)
 
     await userEvent.click(input)
     await expect.element(input).toHaveAttribute('placeholder', 'Placeholder')
     await expect.element(input).toBeDisplayed()
+    expect(Number(window.getComputedStyle(input, '::placeholder').opacity)).toBeGreaterThan(0.2)
 
     await userEvent.tab()
     await rerender({ persistentPlaceholder: true })
     await expect.element(input).toHaveAttribute('placeholder', 'Placeholder')
     await expect.element(input).toBeDisplayed()
+    expect(Number(window.getComputedStyle(input, '::placeholder').opacity)).toBeGreaterThan(0.2)
 
     await rerender({ modelValue: 'Foobar' })
     await expect.element(input).not.toHaveAttribute('placeholder')

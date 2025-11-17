@@ -11,6 +11,10 @@
     .v-field
       --v-textarea-control-height: var(--v-input-control-height)
 
+      &:not(.v-field--no-label, .v-field--active)
+        input::placeholder
+          opacity: 0
+
     .v-field__field
       --v-input-control-height: var(--v-textarea-control-height)
 
@@ -40,13 +44,7 @@
       .v-field__input
         resize: none
 
-    .v-field--no-label,
-    .v-field--active
-      textarea
-        opacity: 1
-
     textarea
-      opacity: 0
       flex: 1
       min-width: 0
       height: 100%
