@@ -345,6 +345,9 @@ export const VDatePicker = genericComponent<new <
 
       const before = adapter.date(arrBefore[arrBefore.length - 1])
       const after = adapter.date(arrAfter[arrAfter.length - 1])
+
+      if (adapter.isSameDay(before, after)) return
+
       const newMonth = adapter.getMonth(after)
       const newYear = adapter.getYear(after)
 
