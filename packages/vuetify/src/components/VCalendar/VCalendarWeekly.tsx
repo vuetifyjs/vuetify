@@ -3,11 +3,10 @@ import { VIconBtn } from '@/labs/VIconBtn'
 
 // Composables
 import { makeCalendarBaseProps, useCalendarBase } from './composables/calendarBase'
-import { useTheme } from '@/composables'
+import { useDate, useTheme } from '@/composables'
 
 // Utilities
 import { computed } from 'vue'
-import { weekNumber } from './util/dateTimeUtils'
 import {
   createDayList,
   createNativeLocaleFormatter,
@@ -35,10 +34,7 @@ export const VCalendarWeekly = defineComponent({
       type: Boolean,
       default: true,
     },
-    localeFirstDayOfYear: {
-      type: [String, Number],
-      default: 0,
-    },
+    localeFirstDayOfYear: [String, Number],
     showMonthOnFirst: {
       type: Boolean,
       default: true,
@@ -56,6 +52,7 @@ export const VCalendarWeekly = defineComponent({
     const base = useCalendarBase(props)
 
     const theme = useTheme()
+    const adapter = useDate()
 
     const parsedMinWeeks = computed((): number => {
       return parseInt(String(props.minWeeks))
@@ -177,12 +174,10 @@ export const VCalendarWeekly = defineComponent({
     }
 
     function getWeekNumber (determineDay: CalendarTimestamp) {
-      return weekNumber(
-        determineDay.year,
-        determineDay.month - 1,
-        determineDay.day,
+      return adapter.getWeek(
+        adapter.date(determineDay.date),
         base.parsedWeekdays.value[0],
-        parseInt(String(props.localeFirstDayOfYear))
+        props.localeFirstDayOfYear,
       )
     }
 
