@@ -12,9 +12,7 @@ export type SlotDefaults = {
   [slotName: string]: Record<string, unknown>
 }
 
-export type ComponentDefaults = Record<string, unknown> & {
-  [slotKey: `#${string}`]: Record<string, unknown>
-}
+export type ComponentDefaults = Record<string, unknown>
 
 export type DefaultsInstance = undefined | {
   [key: string]: undefined | ComponentDefaults
