@@ -8,6 +8,7 @@ import {
   createDayList,
   createIntervalList,
   createNativeLocaleFormatter,
+  getDayIdentifier,
   MINUTES_IN_DAY,
   parseTime,
   updateMinutes,
@@ -204,8 +205,12 @@ export function useCalendarWithIntervals (props: CalendarWithIntervalsProps) {
     return minutes / parsedIntervalMinutes.value * parsedIntervalHeight.value
   }
 
-  function timeToY (time: VTime, clamp = true): number | false {
-    let y = timeDelta(time)
+  function timeToY (
+    time: VTime | CalendarTimestamp,
+    targetDateOrClamp: CalendarTimestamp | boolean = true
+  ): number | false {
+    const clamp = targetDateOrClamp !== false
+    let y = timeDelta(time, typeof targetDateOrClamp !== 'boolean' ? targetDateOrClamp : undefined)
 
     if (y !== false) {
       y *= bodyHeight.value
@@ -223,15 +228,24 @@ export function useCalendarWithIntervals (props: CalendarWithIntervalsProps) {
     return y
   }
 
-  function timeDelta (time: VTime): number | false {
-    const minutes = parseTime(time)
+  function timeDelta (time: VTime | CalendarTimestamp, targetDate?: CalendarTimestamp): number | false {
+    let minutes = parseTime(time)
 
     if (minutes === false) {
       return false
     }
 
-    const min: number = firstMinute.value
     const gap: number = parsedIntervalCount.value * parsedIntervalMinutes.value
+
+    if (targetDate && typeof time === 'object' && 'day' in time) {
+      const a = getDayIdentifier(time)
+      const b = getDayIdentifier(targetDate)
+      if (a > b) {
+        minutes += (a - b) * gap
+      }
+    }
+
+    const min: number = firstMinute.value
 
     return (minutes - min) / gap
   }
