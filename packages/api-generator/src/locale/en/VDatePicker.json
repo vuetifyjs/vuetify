@@ -20,7 +20,6 @@
     "headerDateFormat": "Allows you to customize the format of the date selection text that appears in the header of the calendar.",
     "inputMode": "Toggles between showing dates or inputs.",
     "locale": "Sets the locale. Accepts a string with a BCP 47 language tag.",
-    "localeFirstDayOfYear": "Sets the day that determines the first week of the year, starting with 0 for **Sunday**. For ISO 8601 this should be 4.",
     "max": "Maximum allowed date/month (ISO 8601 format).",
     "min": "Minimum allowed date/month (ISO 8601 format).",
     "modeIcon": "Icon displayed next to the current month and year, toggles year selection when clicked.",
