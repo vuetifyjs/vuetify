@@ -603,6 +603,7 @@ export const VAutocomplete = genericComponent<new <
                   return (
                     <div
                       key={ item.value }
+                      aria-hidden="true"
                       class={[
                         'v-autocomplete__selection',
                         index === selectionIndex.value && [
