@@ -141,7 +141,14 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
       calculateVisibleItems,
       scrollToIndex,
     } = useVirtual(props, flatItems)
-    const displayItems = computed(() => computedItems.value.map(item => item.raw))
+
+    const displayItems = computed(() =>
+      computedItems.value
+        .map(item => ({
+          ...item.raw,
+          _virtualIndex: item.index,
+        }))
+    )
 
     useOptions({
       sortBy,
@@ -248,7 +255,7 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
                                     { ...itemSlotProps.props }
                                     ref={ itemRef }
                                     key={ itemSlotProps.internalItem.index }
-                                    index={ itemSlotProps.internalItem.index }
+                                    index={ itemSlotProps.index }
                                     v-slots={ slots }
                                   />
                                 )
