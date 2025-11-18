@@ -23,7 +23,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeVariantProps } from '@/composables/variant'
 
 // Utilities
-import { computed, ref, shallowRef, toRef } from 'vue'
+import { computed, nextTick, ref, shallowRef, toRef, watch } from 'vue'
 import {
   EventProp,
   focusChild,
@@ -176,7 +176,7 @@ export const VList = genericComponent<new <
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props)
-    const { children, open, parents, select, getPath } = useNested(props)
+    const { children, open, parents, select, activate, getPath } = useNested(props)
     const lineClasses = toRef(() => props.lines ? `v-list--${props.lines}-line` : undefined)
     const activeColor = toRef(() => props.activeColor)
     const baseColor = toRef(() => props.baseColor)
@@ -218,6 +218,31 @@ export const VList = genericComponent<new <
 
     const isFocused = shallowRef(false)
     const contentRef = ref<HTMLElement>()
+
+    // Activate and scroll to item when navigationIndex changes in track mode
+    watch(navigationIndex, index => {
+      if (props.navigationStrategy !== 'track' || index === -1) return
+
+      const item = items.value[index]
+      if (item && item.type !== 'divider' && item.type !== 'subheader') {
+        activate(item.value, true)
+
+        // Scroll the activated item into view
+        nextTick(() => {
+          if (!contentRef.value) return
+
+          const listItems = contentRef.value.querySelectorAll('.v-list-item')
+          const targetItem = Array.from(listItems).find((el: Element) => {
+            return el.getAttribute('data-value') === String(item.value)
+          }) as HTMLElement
+
+          if (targetItem) {
+            targetItem.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
+          }
+        })
+      }
+    })
+
     function onFocusin (e: FocusEvent) {
       isFocused.value = true
     }
