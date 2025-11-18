@@ -233,6 +233,16 @@ export const VList = genericComponent<new <
       ) focus()
     }
 
+    function getNavigationDirection (key: string): 'next' | 'prev' | 'first' | 'last' | null {
+      switch (key) {
+        case 'ArrowDown': return 'next'
+        case 'ArrowUp': return 'prev'
+        case 'Home': return 'first'
+        case 'End': return 'last'
+        default: return null
+      }
+    }
+
     function getNextIndex (direction: 'next' | 'prev' | 'first' | 'last'): number {
       const itemCount = items.value.length
       if (itemCount === 0) return -1
@@ -276,46 +286,18 @@ export const VList = genericComponent<new <
         return
       }
 
-      let handled = false
+      const direction = getNavigationDirection(e.key)
 
-      if (props.navigationStrategy === 'track') {
-        let nextIdx: number | null = null
-
-        if (e.key === 'ArrowDown') {
-          nextIdx = getNextIndex('next')
-          handled = true
-        } else if (e.key === 'ArrowUp') {
-          nextIdx = getNextIndex('prev')
-          handled = true
-        } else if (e.key === 'Home') {
-          nextIdx = getNextIndex('first')
-          handled = true
-        } else if (e.key === 'End') {
-          nextIdx = getNextIndex('last')
-          handled = true
-        }
-
-        if (handled && nextIdx !== null && nextIdx !== -1) {
-          navigationIndex.value = nextIdx
-        }
-      } else {
-        if (e.key === 'ArrowDown') {
-          focus('next')
-          handled = true
-        } else if (e.key === 'ArrowUp') {
-          focus('prev')
-          handled = true
-        } else if (e.key === 'Home') {
-          focus('first')
-          handled = true
-        } else if (e.key === 'End') {
-          focus('last')
-          handled = true
-        }
-      }
-
-      if (handled) {
+      if (direction !== null) {
         e.preventDefault()
+        if (props.navigationStrategy === 'track') {
+          const nextIdx = getNextIndex(direction)
+          if (nextIdx !== -1) {
+            navigationIndex.value = nextIdx
+          }
+        } else {
+          focus(direction)
+        }
       }
     }
 
