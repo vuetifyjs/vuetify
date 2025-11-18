@@ -14,7 +14,7 @@ import {
   getDayIdentifier,
   validateNumber,
 } from './util/timestamp'
-import { defineComponent, getPrefixedEventHandlers, useRender } from '@/util'
+import { defineComponent, getPrefixedEventHandlers, noop, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -231,6 +231,7 @@ export const VCalendarWeekly = defineComponent({
           activeColor={ props.color }
           variant={ props.color ? 'flat' : 'tonal' }
           baseVariant="text"
+          onUpdate:active={ noop }
           { ...events }
         >
           { hasMonth
