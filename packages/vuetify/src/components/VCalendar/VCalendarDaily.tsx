@@ -136,7 +136,7 @@ export const VCalendarDaily = defineComponent({
         <VIconBtn
           active={ day.present }
           activeColor={ props.color }
-          variant={ props.color ? 'flat' : 'tonal' }
+          variant="outlined"
           baseVariant="text"
           onUpdate:active={ noop }
           { ...events }
