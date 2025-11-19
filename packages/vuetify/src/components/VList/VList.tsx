@@ -23,7 +23,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeVariantProps } from '@/composables/variant'
 
 // Utilities
-import { computed, ref, shallowRef, toRef } from 'vue'
+import { computed, ref, shallowRef, toRef, watch } from 'vue'
 import {
   EventProp,
   focusChild,
@@ -176,15 +176,16 @@ export const VList = genericComponent<new <
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props)
-    const { children, open, parents, select, getPath } = useNested(props)
+
+    const scrollToActive = toRef(() => props.navigationStrategy === 'track')
+    const { children, open, parents, select, activate, getPath } = useNested(props, scrollToActive)
     const lineClasses = toRef(() => props.lines ? `v-list--${props.lines}-line` : undefined)
     const activeColor = toRef(() => props.activeColor)
     const baseColor = toRef(() => props.baseColor)
     const color = toRef(() => props.color)
     const isSelectable = toRef(() => (props.selectable || props.activatable))
 
-    // Track strategy navigation index
-    const currentNavIndex = useProxiedModel(
+    const navigationIndex = useProxiedModel(
       props,
       'navigationIndex',
       -1,
@@ -214,11 +215,22 @@ export const VList = genericComponent<new <
         nav: toRef(() => props.nav),
         slim: toRef(() => props.slim),
         variant: toRef(() => props.variant),
+        tabindex: toRef(() => props.navigationStrategy === 'track' ? -1 : undefined),
       },
     })
 
     const isFocused = shallowRef(false)
     const contentRef = ref<HTMLElement>()
+
+    watch(navigationIndex, async index => {
+      if (props.navigationStrategy !== 'track' || index === -1) return
+
+      const item = items.value[index]
+      if (item && item.type !== 'divider' && item.type !== 'subheader') {
+        activate(item.value, true)
+      }
+    })
+
     function onFocusin (e: FocusEvent) {
       isFocused.value = true
     }
@@ -234,6 +246,16 @@ export const VList = genericComponent<new <
       ) focus()
     }
 
+    function getNavigationDirection (key: string): 'next' | 'prev' | 'first' | 'last' | null {
+      switch (key) {
+        case 'ArrowDown': return 'next'
+        case 'ArrowUp': return 'prev'
+        case 'Home': return 'first'
+        case 'End': return 'last'
+        default: return null
+      }
+    }
+
     function getNextIndex (direction: 'next' | 'prev' | 'first' | 'last'): number {
       const itemCount = items.value.length
       if (itemCount === 0) return -1
@@ -245,7 +267,7 @@ export const VList = genericComponent<new <
       } else if (direction === 'last') {
         nextIndex = itemCount - 1
       } else {
-        nextIndex = currentNavIndex.value + (direction === 'next' ? 1 : -1)
+        nextIndex = navigationIndex.value + (direction === 'next' ? 1 : -1)
 
         if (nextIndex < 0) nextIndex = itemCount - 1
         if (nextIndex >= itemCount) nextIndex = 0
@@ -277,46 +299,18 @@ export const VList = genericComponent<new <
         return
       }
 
-      let handled = false
+      const direction = getNavigationDirection(e.key)
 
-      if (props.navigationStrategy === 'track') {
-        let nextIdx: number | null = null
-
-        if (e.key === 'ArrowDown') {
-          nextIdx = getNextIndex('next')
-          handled = true
-        } else if (e.key === 'ArrowUp') {
-          nextIdx = getNextIndex('prev')
-          handled = true
-        } else if (e.key === 'Home') {
-          nextIdx = getNextIndex('first')
-          handled = true
-        } else if (e.key === 'End') {
-          nextIdx = getNextIndex('last')
-          handled = true
-        }
-
-        if (handled && nextIdx !== null && nextIdx !== -1) {
-          currentNavIndex.value = nextIdx
-        }
-      } else {
-        if (e.key === 'ArrowDown') {
-          focus('next')
-          handled = true
-        } else if (e.key === 'ArrowUp') {
-          focus('prev')
-          handled = true
-        } else if (e.key === 'Home') {
-          focus('first')
-          handled = true
-        } else if (e.key === 'End') {
-          focus('last')
-          handled = true
-        }
-      }
-
-      if (handled) {
+      if (direction !== null) {
         e.preventDefault()
+        if (props.navigationStrategy === 'track') {
+          const nextIdx = getNextIndex(direction)
+          if (nextIdx !== -1) {
+            navigationIndex.value = nextIdx
+          }
+        } else {
+          focus(direction)
+        }
       }
     }
 
@@ -380,7 +374,7 @@ export const VList = genericComponent<new <
       children,
       parents,
       getPath,
-      navigationIndex: computed(() => currentNavIndex.value),
+      navigationIndex,
     }
   },
 })

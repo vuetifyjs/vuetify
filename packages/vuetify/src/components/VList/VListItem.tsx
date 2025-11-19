@@ -27,7 +27,7 @@ import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant
 import vRipple from '@/directives/ripple'
 
 // Utilities
-import { computed, nextTick, onBeforeMount, toDisplayString, toRef, watch } from 'vue'
+import { computed, nextTick, onBeforeMount, ref, toDisplayString, toRef, watch } from 'vue'
 import { deprecate, EventProp, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -97,6 +97,7 @@ export const makeVListItemProps = propsFactory({
     default: undefined,
   },
   value: null,
+  tabindex: [Number, String],
 
   onClick: EventProp<[MouseEvent | KeyboardEvent]>(),
   onClickOnce: EventProp<[MouseEvent]>(),
@@ -126,6 +127,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
 
   setup (props, { attrs, slots, emit }) {
     const link = useLink(props, attrs)
+    const rootEl = ref<HTMLElement>()
     const id = computed(() => props.value === undefined ? link.href.value : props.value)
     const {
       activate,
@@ -138,6 +140,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
       root,
       parent,
       openOnSelect,
+      scrollToActive,
       id: uid,
     } = useNestedItem(id, () => props.disabled, false)
     const list = useList()
@@ -172,6 +175,10 @@ export const VListItem = genericComponent<VListItemSlots>()({
     watch(() => link.isActive?.value, val => {
       if (!val) return
       handleActiveLink()
+    })
+    watch(isActivated, val => {
+      if (!val || !scrollToActive) return
+      rootEl.value?.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
     })
     onBeforeMount(() => {
       if (link.isActive?.value) {
@@ -260,6 +267,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
       return (
         <Tag
           { ...link.linkProps }
+          ref={ rootEl }
           class={[
             'v-list-item',
             {
@@ -286,7 +294,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
             dimensionStyles.value,
             props.style,
           ]}
-          tabindex={ isClickable.value ? (list ? -2 : 0) : undefined }
+          tabindex={ props.tabindex !== undefined ? props.tabindex : (isClickable.value ? (list ? -2 : 0) : undefined) }
           aria-selected={ ariaSelected.value }
           role={ role.value }
           onClick={ onClick }
