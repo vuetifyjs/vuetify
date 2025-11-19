@@ -7,7 +7,6 @@ import { useTheme } from '@/composables'
 
 // Utilities
 import { computed } from 'vue'
-import { weekNumber } from './util/dateTimeUtils'
 import {
   createDayList,
   createNativeLocaleFormatter,
@@ -34,10 +33,6 @@ export const VCalendarWeekly = defineComponent({
     shortWeekdays: {
       type: Boolean,
       default: true,
-    },
-    localeFirstDayOfYear: {
-      type: [String, Number],
-      default: 0,
     },
     showMonthOnFirst: {
       type: Boolean,
@@ -177,13 +172,7 @@ export const VCalendarWeekly = defineComponent({
     }
 
     function getWeekNumber (determineDay: CalendarTimestamp) {
-      return weekNumber(
-        determineDay.year,
-        determineDay.month - 1,
-        determineDay.day,
-        base.parsedWeekdays.value[0],
-        parseInt(String(props.localeFirstDayOfYear))
-      )
+      return base.getWeekNumber(determineDay)
     }
 
     function genWeekNumber (weekNumber: number) {
