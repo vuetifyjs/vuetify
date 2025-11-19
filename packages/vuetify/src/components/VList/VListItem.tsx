@@ -178,7 +178,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
     })
     watch(isActivated, val => {
       if (!val || !scrollToActive) return
-      rootEl.value?.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
+      rootEl.value?.scrollIntoView({ block: 'nearest', behavior: 'instant' })
     })
     onBeforeMount(() => {
       if (link.isActive?.value) {
