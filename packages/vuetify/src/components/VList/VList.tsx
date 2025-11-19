@@ -215,6 +215,7 @@ export const VList = genericComponent<new <
         nav: toRef(() => props.nav),
         slim: toRef(() => props.slim),
         variant: toRef(() => props.variant),
+        tabindex: toRef(() => props.navigationStrategy === 'track' ? -1 : undefined),
       },
     })
 

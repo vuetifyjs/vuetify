@@ -8,7 +8,8 @@
     "value": "The value used for selection. Obtained from [`v-list`](/api/v-list)'s `v-model:selected` when the item is selected.",
     "lines": "The line declaration specifies the minimum height of the item and can also be controlled from v-list with the same prop.",
     "nav": "Reduces the width v-list-item takes up as well as adding a border radius.",
-    "slim": "Reduces horizontal spacing for badges, icons, tooltips, and avatars to create a more compact visual representation."
+    "slim": "Reduces horizontal spacing for badges, icons, tooltips, and avatars to create a more compact visual representation.",
+    "tabindex": "Controls the tabindex of the list item. When set, overrides the default tabindex behavior. Automatically set to -1 by VList when using `navigationStrategy=\"track\"` to prevent Tab key navigation into items."
   },
   "exposed": {
     "activate": "Activate the list item.",

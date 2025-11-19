@@ -97,6 +97,7 @@ export const makeVListItemProps = propsFactory({
     default: undefined,
   },
   value: null,
+  tabindex: [Number, String],
 
   onClick: EventProp<[MouseEvent | KeyboardEvent]>(),
   onClickOnce: EventProp<[MouseEvent]>(),
@@ -293,7 +294,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
             dimensionStyles.value,
             props.style,
           ]}
-          tabindex={ isClickable.value ? (list ? -2 : 0) : undefined }
+          tabindex={ props.tabindex !== undefined ? props.tabindex : (isClickable.value ? (list ? -2 : 0) : undefined) }
           aria-selected={ ariaSelected.value }
           role={ role.value }
           onClick={ onClick }
