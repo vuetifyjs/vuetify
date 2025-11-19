@@ -119,6 +119,17 @@ export const VCommandPalette = genericComponent()({
     })
 
     /**
+     * Prepare items for VList with proper value assignment
+     * VList's items prop enables automatic activation and scroll-to-active
+     */
+    const itemsForList = computed(() => {
+      return filteredItems.value.map((item, idx) => ({
+        ...item,
+        value: idx,
+      }))
+    })
+
+    /**
      * Initialize navigation composable
      */
     const navigation = useCommandPaletteNavigation({
@@ -270,25 +281,42 @@ export const VCommandPalette = genericComponent()({
                   <VList
                     key="list"
                     class="v-command-palette__list"
-                    role="listbox"
+                    items={ itemsForList.value }
+                    itemType="type"
+                    activatable
                     navigationStrategy="track"
                     navigationIndex={ navigation.selectedIndex.value }
                     onUpdate:navigationIndex={ navigation.setSelectedIndex }
+                    role="listbox"
                     aria-label={ `${filteredItems.value.length} options available` }
                     aria-activedescendant={ navigation.activeDescendantId.value }
-                  >
-                    { filteredItems.value.map((item, index) => (
-                      <VCommandPaletteItemComponent
-                        key={ `item-${index}` }
-                        item={ item }
-                        index={ index }
-                        isSelected={ navigation.selectedIndex.value === index }
-                        onExecute={ (event: any) => {
-                          navigation.executeSelected(event)
-                        }}
-                      />
-                    ))}
-                  </VList>
+                    v-slots={{
+                      item: ({ item, index }: any) => (
+                        <VCommandPaletteItemComponent
+                          key={ `item-${index}` }
+                          item={ item.raw }
+                          index={ index }
+                          onExecute={ (event: any) => {
+                            navigation.executeSelected(event)
+                          }}
+                        />
+                      ),
+                      divider: ({ item, index }: any) => (
+                        <VCommandPaletteItemComponent
+                          key={ `divider-${index}` }
+                          item={ item.raw }
+                          index={ index }
+                        />
+                      ),
+                      subheader: ({ item, index }: any) => (
+                        <VCommandPaletteItemComponent
+                          key={ `subheader-${index}` }
+                          item={ item.raw }
+                          index={ index }
+                        />
+                      ),
+                    }}
+                  />
                 ) : (
                   <div key="no-data" class="pa-4 text-center text-disabled">
                     { /* @ts-expect-error slots type is inferred as 'default' only */ }

@@ -32,10 +32,6 @@ export const makeVCommandPaletteItemProps = propsFactory({
     type: Number,
     required: true,
   },
-  isSelected: {
-    type: Boolean,
-    default: false,
-  },
   onExecute: Function as PropType<(event: MouseEvent | KeyboardEvent) => void>,
 }, 'VCommandPaletteItem')
 
@@ -78,10 +74,8 @@ export const VCommandPaletteItemComponent = genericComponent()({
             prependAvatar={ item.prependAvatar }
             appendIcon={ item.appendIcon }
             appendAvatar={ item.appendAvatar }
-            active={ props.isSelected }
             onClick={ handleClick }
             role="option"
-            aria-selected={ props.isSelected }
             v-slots={{
               append: item.hotkey ? () => <VHotkey keys={ item.hotkey } /> : undefined,
             }}
