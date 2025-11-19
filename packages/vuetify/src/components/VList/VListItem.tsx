@@ -294,7 +294,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
             dimensionStyles.value,
             props.style,
           ]}
-          tabindex={ props.tabindex !== undefined ? props.tabindex : (isClickable.value ? (list ? -2 : 0) : undefined) }
+          tabindex={ props.tabindex ?? (isClickable.value ? (list ? -2 : 0) : undefined) }
           aria-selected={ ariaSelected.value }
           role={ role.value }
           onClick={ onClick }
