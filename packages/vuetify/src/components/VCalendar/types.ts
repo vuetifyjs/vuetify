@@ -62,6 +62,7 @@ export interface CalendarDaySlotScope extends CalendarTimestamp {
   index: number
   week: CalendarTimestamp[]
   category: CalendarCategory
+  intervalRange?: [number, number]
 }
 
 export type CalendarTimeToY = (

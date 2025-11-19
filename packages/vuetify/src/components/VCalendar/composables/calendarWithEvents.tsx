@@ -13,6 +13,7 @@ import { CalendarEventOverlapModes } from '../modes'
 import {
   isEventHiddenOn,
   isEventOn,
+  isEventOnDay,
   isEventOverlapping,
   isEventStart,
   parseEvent,
@@ -348,7 +349,7 @@ export function useCalendarWithEvents (props: CalendarWithEventsProps, slots: an
     const dayIdentifier = getDayIdentifier(day)
     const start = event.startIdentifier >= dayIdentifier
     const end = event.endIdentifier > dayIdentifier
-    const top = start ? day.timeToY(event.start) : 0
+    const top = day.timeToY(event.start, day)
     const bottom = day.timeToY(event.end, day)
     const height = Math.max(props.eventHeight || 0, bottom - top)
     const scope = { eventParsed: event, day, start, end, timed: true }
@@ -523,10 +524,9 @@ export function useCalendarWithEvents (props: CalendarWithEventsProps, slots: an
   }
 
   function getEventsForDayTimed (day: CalendarDaySlotScope): CalendarEventParsed[] {
-    const identifier = getDayIdentifier(day)
     return parsedEvents.value.filter(
       event => !event.allDay &&
-        isEventOn(event, identifier) &&
+        isEventOnDay(event, day, day.intervalRange) &&
         isEventForCategory(event, day.category)
     )
   }

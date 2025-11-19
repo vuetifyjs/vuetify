@@ -184,6 +184,10 @@ export function useCalendarWithIntervals (props: CalendarWithIntervalsProps) {
     scope.timeDelta = timeDelta
     scope.minutesToPixels = minutesToPixels
     scope.week = days.value
+    scope.intervalRange = [
+      firstMinute.value,
+      firstMinute.value + parsedIntervalCount.value * parsedIntervalMinutes.value,
+    ]
     return scope
   }
 
@@ -210,18 +214,19 @@ export function useCalendarWithIntervals (props: CalendarWithIntervalsProps) {
     targetDateOrClamp: CalendarTimestamp | boolean = true
   ): number | false {
     const clamp = targetDateOrClamp !== false
-    let y = timeDelta(time, typeof targetDateOrClamp !== 'boolean' ? targetDateOrClamp : undefined)
+    const targetDate = typeof targetDateOrClamp !== 'boolean' ? targetDateOrClamp : undefined
 
-    if (y !== false) {
-      y *= bodyHeight.value
+    let y = timeDelta(time, targetDate)
+    if (y === false) return y
 
-      if (clamp) {
-        if (y < 0) {
-          y = 0
-        }
-        if (y > bodyHeight.value) {
-          y = bodyHeight.value
-        }
+    y *= bodyHeight.value
+
+    if (clamp) {
+      if (y < 0) {
+        y = 0
+      }
+      if (y > bodyHeight.value) {
+        y = bodyHeight.value
       }
     }
 
