@@ -1,6 +1,6 @@
 <template>
   <v-responsive :class="theme.current.value.dark ? '' : 'bg-primary'">
-    <HomeBgGradient color="primary" />
+    <HomeCommonGradient color="primary" />
 
     <v-container class="pa-6 text-left">
       <v-row justify="center">

@@ -3,17 +3,11 @@
     <v-defaults-provider :defaults="defaults">
       <v-card class="py-16" elevation="0">
         <v-container class="pt-0">
-          <HomeBgGradient />
-
-          <h4 class="text-h4 font-weight-bold mb-5">
-            Component Gallery
-          </h4>
-
-          <v-responsive class="mx-auto mb-10" max-width="700">
-            <h6 class="text-h6 font-weight-regular text-medium-emphasis">
-              Vuetify provides a comprehensive collection of components that can be used to build your application.
-            </h6>
-          </v-responsive>
+          <HomeCommonTitle
+            class="mb-10"
+            description="Vuetify provides a comprehensive collection of components that can be used to build your application."
+            title="Component Gallery"
+          />
 
           <v-sheet class="mx-auto" color="transparent" max-width="1200px">
             <v-card
@@ -68,7 +62,7 @@
                   <v-app-bar-title>Vuetify</v-app-bar-title>
 
                   <template #append>
-                    <v-btn icon="mdi-bell-outline" />
+                    <v-icon icon="mdi-bell-outline" />
 
                     <v-divider class="mx-4 align-self-center" length="40%" vertical />
 
@@ -197,7 +191,7 @@
     },
   ]
 
-  const selectedComponentCategory = ref(components[0])
+  const selectedComponentCategory = shallowRef(components[0])
 </script>
 
 <style scoped>

@@ -1,22 +1,19 @@
 <template>
-  <v-responsive class="pb-16">
-    <HomeBgGradient opacity-class="opacity-10" />
+  <v-responsive class="py-16">
+    <HomeCommonGradient opacity-class="opacity-10" />
 
-    <v-container class="pt-10">
-      <v-icon class="mb-5" color="primary" size="60">
-        mdi-store-outline
-      </v-icon>
-
-      <h4 class="text-h4 font-weight-bold mb-5">
-        Vuetify Store
-      </h4>
-
-      <v-responsive class="mx-auto mb-10" max-width="700">
-        <h6 class="text-h6 font-weight-regular text-medium-emphasis">
-          Browse our collection of premium templates, themes and UI kits.
-          All themes are built with Vuetify and are available for everyone.
-        </h6>
-      </v-responsive>
+    <v-container class="pt-0">
+      <HomeCommonTitle
+        class="mb-10"
+        description="Browse our collection of premium templates, themes and UI kits. All themes are built with Vuetify and are available for everyone."
+        title="Vuetify Store"
+      >
+        <template #subtitle>
+          <v-icon class="mb-5" color="primary" size="60">
+            mdi-store-outline
+          </v-icon>
+        </template>
+      </HomeCommonTitle>
 
       <v-row v-if="!items.length">
         <v-col

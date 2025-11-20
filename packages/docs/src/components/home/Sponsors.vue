@@ -1,25 +1,23 @@
 <template>
   <v-responsive class="pb-16">
-    <HomeBgGradient />
+    <HomeCommonGradient opacity-class="opacity-10" />
 
     <v-container class="pt-10">
-      <v-icon class="mb-5" color="red-lighten-2" size="60">
-        mdi-heart-outline
-      </v-icon>
 
-      <h4 class="text-h4 font-weight-bold mb-5">
-        Sponsors & Backers
-      </h4>
-
-      <v-responsive class="mx-auto my-5" max-width="700">
-        <h6 class="text-h6 font-weight-regular text-medium-emphasis">
-          Vuetify is proudly supported by these amazing companies and individuals. If you'd
-          like to join them, please consider sponsoring Vuetify's development.
-        </h6>
-      </v-responsive>
+      <HomeCommonTitle
+        class="mb-5"
+        description="Vuetify is proudly supported by these amazing companies and individuals. If you'd like to join them, please consider sponsoring Vuetify's development."
+        title="Sponsors & Backers"
+      >
+        <template #subtitle>
+          <v-icon class="mb-5" color="red-lighten-2" size="60">
+            mdi-heart-outline
+          </v-icon>
+        </template>
+      </HomeCommonTitle>
 
       <v-btn
-        class="text-none"
+        class="text-none my-5"
         color="primary"
         prepend-icon="mdi-heart-outline"
         rounded="lg"
@@ -28,19 +26,27 @@
         flat
       />
 
-      <div class="mt-16">
-        <HomeMarquee :items="sponsors">
-          <template #default="{ item }">
+      <v-responsive class="mt-5 mx-auto" max-width="800">
+        <v-row
+          justify="center"
+          dense
+        >
+          <v-col
+            v-for="sponsor in sponsors"
+            :key="sponsor.slug"
+            class="d-flex align-center justify-center ma-1"
+            cols="auto"
+          >
             <SponsorCard
-              :comfortable="Number(item.metadata.tier) === 2"
-              :compact="Number(item.metadata.tier) > 2"
-              :sponsor="item"
+              :comfortable="Number(sponsor.metadata.tier) === 2"
+              :compact="Number(sponsor.metadata.tier) > 2"
+              :sponsor="sponsor"
               v-bind="$attrs"
-              :width="Number(item.metadata.tier) > 1 && smAndDown ? 90 : undefined"
+              :width="Number(sponsor.metadata.tier) > 1 && smAndDown ? 90 : undefined"
             />
-          </template>
-        </HomeMarquee>
-      </div>
+          </v-col>
+        </v-row>
+      </v-responsive>
     </v-container>
   </v-responsive>
 </template>

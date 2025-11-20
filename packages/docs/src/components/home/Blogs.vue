@@ -1,21 +1,14 @@
 <template>
   <v-responsive class="py-16">
-    <HomeBgGradient opacity-class="opacity-10" />
+    <HomeCommonGradient opacity-class="opacity-10" />
 
     <v-container class="pt-0">
-      <div class="mb-16 text-center">
-        <p class="text-primary font-weight-bold mb-2">
-          Latest news and updates
-        </p>
-
-        <h4 class="text-h4 font-weight-bold mb-2">
-          Vuetify Blog
-        </h4>
-
-        <h6 class="text-h6 font-weight-regular text-medium-emphasis">
-          Stay up to date with the latest news and updates from the Vuetify team.
-        </h6>
-      </div>
+      <HomeCommonTitle
+        class="mb-16"
+        description="Stay up to date with the latest news and updates from the Vuetify team."
+        subtitle="Latest news and updates"
+        title="Vuetify Blog"
+      />
 
       <v-row align="center" class="text-left" justify="space-between">
         <v-col v-if="latestBlog" cols="12" md="7">

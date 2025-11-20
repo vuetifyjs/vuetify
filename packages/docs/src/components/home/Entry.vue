@@ -127,7 +127,7 @@
       </v-row>
     </v-container>
 
-    <HomeBgGradient color="primary" />
+    <HomeCommonGradient color="primary" />
   </v-responsive>
 </template>
 

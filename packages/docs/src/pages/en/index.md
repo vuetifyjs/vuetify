@@ -10,31 +10,23 @@ meta:
 
 <HomeSpecialSponsor />
 
-<HomeEcosystem />
-
-<v-divider />
-
 <HomeGalleryComponents />
 
 <v-divider />
 
 <HomeSponsors />
 
-<v-divider color="primary" />
-
-<HomeTooling />
-
 <v-divider />
+
+<HomeEcosystem />
+
+<v-divider  />
 
 <HomeVuetifyOne />
 
-<v-divider color="primary" />
-
-<HomeSupport />
-
 <v-divider />
 
-<HomeBlogs />
+<HomeTooling />
 
 <v-divider color="primary" />
 
@@ -44,7 +36,13 @@ meta:
 
 <HomeStore />
 
-<v-divider thickness="2" color="primary" />
+<v-divider color="primary" />
+
+<HomeSupport />
+
+<v-divider />
+
+<HomeBlogs />
 
 <HomeDiscord />
 

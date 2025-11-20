@@ -1,23 +1,16 @@
 <template>
   <v-responsive class="py-15">
     <v-container>
-      <div class="mb-10">
-        <p class="text-primary font-weight-bold mb-3">
-          A complete Vue ecosystem
-        </p>
+      <HomeCommonGradient opacity-class="opacity-10" />
 
-        <h4 class="text-h4 font-weight-bold mb-5">
-          More than just Components
-        </h4>
+      <HomeCommonTitle
+        class="mb-10"
+        description="Vuetify is a complete Vue ecosystem that provides you with all of the tools necessary to create beautiful content rich web applications."
+        subtitle="A complete Vue ecosystem"
+        title="More than just Components"
+      />
 
-        <v-responsive class="mx-auto mb-15" max-width="700">
-          <h6 class="text-h6 font-weight-regular text-medium-emphasis">
-            Vuetify is a complete Vue ecosystem that provides you with all of the tools necessary to create beautiful content rich web applications.
-          </h6>
-        </v-responsive>
-      </div>
-
-      <HomeMarquee :items="features" class="my-5">
+      <HomeCommonMarquee :items="features" class="my-5">
         <template #default="{ item }">
           <v-img
             :src="item.image"
@@ -25,7 +18,7 @@
             width="200"
           />
         </template>
-      </HomeMarquee>
+      </HomeCommonMarquee>
     </v-container>
   </v-responsive>
 </template>

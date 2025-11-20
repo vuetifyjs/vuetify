@@ -1,6 +1,6 @@
 <template>
   <v-responsive class="py-5">
-    <HomeBgGradient color="primary" opacity-class="opacity-10" />
+    <HomeCommonGradient color="primary" opacity-class="opacity-10" />
 
     <v-container class="text-center text-md-left py-16">
       <v-row align="center">

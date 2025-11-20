@@ -2,7 +2,7 @@
   <v-responsive v-if="specialSponsor">
     <v-divider color="primary" />
 
-    <HomeBgGradient
+    <HomeCommonGradient
       :opacity-class="isDark ? 'opacity-40' : 'opacity-20'"
       color="primary"
     />
