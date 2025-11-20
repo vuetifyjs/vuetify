@@ -42,9 +42,11 @@ meta:
 
 <v-divider />
 
-<HomeBlogs />
-
 <HomeDiscord />
+
+<v-divider />
+
+<HomeBlogs />
 
 <script setup>
   const theme = useTheme()

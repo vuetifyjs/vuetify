@@ -94,7 +94,7 @@
                   v-if="!selectedComponent.isNavigationHiden"
                   v-model="drawer"
                   :rail="selectedComponent.hasRailsDrawer"
-                  color="surface-bright"
+                  color="surface"
                 >
                   <v-list
                     :items="components"

@@ -1,7 +1,5 @@
 <template>
-  <v-responsive :class="theme.current.value.dark ? '' : 'bg-primary'">
-    <HomeCommonGradient color="primary" />
-
+  <v-responsive :class="theme.current.value.dark ? 'bg-surface' : 'bg-primary'">
     <v-container class="pa-6 text-left">
       <v-row justify="center">
         <v-col

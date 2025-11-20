@@ -9,10 +9,10 @@
         sm="6"
       >
         <v-card
-          color="primary"
+          class="border-sm border-opacity-50"
           elevation="0"
           rounded="lg"
-          variant="tonal"
+          variant="outlined"
         >
           <v-card-item class="pt-4" height="64">
             <v-card-title class="py-0 text-caption">{{ item.subtitle }}</v-card-title>
@@ -20,7 +20,7 @@
             <v-card-title class="py-0">{{ item.title }}</v-card-title>
 
             <template #append>
-              <v-icon :icon="item.icon" color="primary" size="30" />
+              <v-icon :icon="item.icon" size="30" />
             </template>
           </v-card-item>
         </v-card>
