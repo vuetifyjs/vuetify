@@ -11,7 +11,7 @@
     <v-img
       v-if="props.image"
       :src="props.image"
-      class="mr-4"
+      class="mr-4 my-2"
       max-height="80"
       width="120"
     />

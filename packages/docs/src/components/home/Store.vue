@@ -28,38 +28,46 @@
         </v-col>
       </v-row>
 
-      <v-data-iterator
+      <v-slide-group
         v-else
-        :items="items"
-        :items-per-page="itemsPerPage"
-        :page="page"
+        class="mb-10"
+        content-class="mx-3"
+        show-arrows
       >
-        <template #default="{ items: _items }">
-          <v-row class="my-10">
-            <v-col
-              v-for="product in _items"
-              :key="product.raw.id"
-              cols="12"
-              sm="3"
-            >
-              <a
-                :href="`https://store.vuetifyjs.com/products/${product.raw.handle}`"
-                class="d-block text-decoration-none"
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                <DocThemeCard
-                  :product="{
-                    title: product.raw.title,
-                    src: product.raw.image,
-                  }"
-                  class="text-center"
-                />
-              </a>
-            </v-col>
-          </v-row>
+        <template #next>
+          <v-btn
+            class="mb-15"
+            icon="mdi-chevron-right"
+          />
         </template>
-      </v-data-iterator>
+        <template #prev>
+          <v-btn
+            class="mb-15"
+            icon="mdi-chevron-left"
+          />
+        </template>
+
+        <v-slide-group-item
+          v-for="product in items"
+          :key="product.id"
+        >
+          <a
+            :href="`https://store.vuetifyjs.com/products/${product.handle}`"
+            class="d-block text-decoration-none mx-5"
+            rel="noopener noreferrer"
+            style="width: 300px"
+            target="_blank"
+          >
+            <DocThemeCard
+              :product="{
+                title: product.title,
+                src: product.image,
+              }"
+              class="text-center"
+            />
+          </a>
+        </v-slide-group-item>
+      </v-slide-group>
 
       <v-btn
         append-icon="mdi-open-in-new"
@@ -81,15 +89,6 @@
 
 <script setup lang="ts">
   import type { ShopifyProduct } from '@vuetify/one'
-
-  defineProps({
-    itemsPerPage: {
-      type: [Number, String],
-      default: 4,
-    },
-  })
-
-  const page = shallowRef(1)
 
   const products = useProductsStore()
 
