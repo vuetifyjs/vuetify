@@ -23,8 +23,9 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeVariantProps } from '@/composables/variant'
 
 // Utilities
-import { computed, ref, shallowRef, toRef, watch } from 'vue'
+import { computed, ref, shallowRef, toRef } from 'vue'
 import {
+  convertToUnit,
   EventProp,
   focusChild,
   genericComponent,
@@ -105,6 +106,8 @@ export const makeVListProps = propsFactory({
     default: 'one',
   },
   slim: Boolean,
+  prependGap: [Number, String],
+  indent: [Number, String],
   nav: Boolean,
   navigationStrategy: {
     type: String as PropType<'focus' | 'track'>,
@@ -179,11 +182,12 @@ export const VList = genericComponent<new <
 
     const scrollToActive = toRef(() => props.navigationStrategy === 'track')
     const returnObject = toRef(() => props.returnObject)
-    const { children, open, parents, select, activate, getPath } = useNested(props, {
+    const { children, open, parents, select, getPath } = useNested(props, {
       items,
       returnObject,
       scrollToActive,
     })
+
     const lineClasses = toRef(() => props.lines ? `v-list--${props.lines}-line` : undefined)
     const activeColor = toRef(() => props.activeColor)
     const baseColor = toRef(() => props.baseColor)
@@ -230,15 +234,6 @@ export const VList = genericComponent<new <
 
     const isFocused = shallowRef(false)
     const contentRef = ref<HTMLElement>()
-
-    watch(navigationIndex, async index => {
-      if (props.navigationStrategy !== 'track' || index === -1) return
-
-      const item = items.value[index]
-      if (item && item.type !== 'divider' && item.type !== 'subheader') {
-        activate(item.value, true)
-      }
-    }, { immediate: true })
 
     function onFocusin (e: FocusEvent) {
       isFocused.value = true
@@ -334,6 +329,11 @@ export const VList = genericComponent<new <
     }
 
     useRender(() => {
+      const indent = props.indent ??
+        (props.prependGap
+          ? Number(props.prependGap) + 24
+          : undefined)
+
       return (
         <props.tag
           ref={ contentRef }
@@ -354,6 +354,11 @@ export const VList = genericComponent<new <
             props.class,
           ]}
           style={[
+            {
+              '--v-list-indent': convertToUnit(indent),
+              '--v-list-group-prepend': indent ? '0px' : undefined,
+              '--v-list-prepend-gap': convertToUnit(props.prependGap),
+            },
             backgroundColorStyles.value,
             dimensionStyles.value,
             props.style,

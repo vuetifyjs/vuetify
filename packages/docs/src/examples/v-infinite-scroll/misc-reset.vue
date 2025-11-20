@@ -3,8 +3,16 @@
     <div class="d-flex ga-3 mb-2">
       <v-chip>Server items: {{ serverItems.length }}</v-chip>
       <v-chip>Loaded items: {{ items.length }}</v-chip>
+      <v-spacer></v-spacer>
+      <v-checkbox v-model="showEmptyText" hide-details="" label="show empty text"></v-checkbox>
     </div>
-    <v-infinite-scroll ref="scroll" height="300" side="both" @load="load">
+    <v-infinite-scroll
+      ref="scroll"
+      :empty-text="showEmptyText ? 'No more records' : ''"
+      height="300"
+      side="both"
+      @load="load"
+    >
       <template v-for="(item, index) in items" :key="index">
         <div :class="['px-2', index % 2 === 0 ? 'bg-grey-lighten-2' : '']">
           Item number {{ item }}
@@ -26,6 +34,7 @@
   const infiniteScrollRef = useTemplateRef('scroll')
 
   const items = ref([])
+  const showEmptyText = ref(false)
 
   let firstId = 0
   let lastId = 0
@@ -80,6 +89,7 @@
     data: () => {
       return {
         items: [],
+        showEmptyText: false,
         serverItems: Array.from({ length: 30 }, () => ++lastId),
       }
     },

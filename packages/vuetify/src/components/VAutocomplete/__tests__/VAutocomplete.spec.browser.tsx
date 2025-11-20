@@ -463,17 +463,20 @@ describe('VAutocomplete', () => {
     expect(input).toHaveAttribute('placeholder', 'Placeholder')
 
     await rerender({ label: 'Label' })
-    await expect.element(input).not.toBeDisplayed()
+    await expect.element(input).toBeDisplayed()
+    expect(Number(window.getComputedStyle(input, '::placeholder').opacity)).toBe(0)
 
     input.focus()
     await waitAnimationFrame()
     expect(input).toHaveAttribute('placeholder', 'Placeholder')
     await expect.element(input).toBeDisplayed()
+    expect(Number(window.getComputedStyle(input, '::placeholder').opacity)).toBeGreaterThan(0.2)
 
     input.blur()
     await rerender({ persistentPlaceholder: true })
     expect(input).toHaveAttribute('placeholder', 'Placeholder')
     await expect.element(input).toBeDisplayed()
+    expect(Number(window.getComputedStyle(input, '::placeholder').opacity)).toBeGreaterThan(0.2)
 
     await rerender({ modelValue: 'Foobar' })
     expect(input).not.toHaveAttribute('placeholder')

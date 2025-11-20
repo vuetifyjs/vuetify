@@ -252,6 +252,14 @@ Color packs are handy for quickly applying a color to a component but mostly unu
 );
 ```
 
+```ts { resource="src/plugins/vuetify.ts" }
+export default createVuetify({
+  theme: {
+    layers: true,
+  },
+})
+```
+
 Import order of stylesheets becomes much more important with layers enabled, `import 'vuetify/styles'` or a file containing `@use 'vuetify'` **must** be loaded *before* any components or the CSS reset will take precedence over component styles and break everything.
 
 - If you have separate plugin files make sure to import vuetify's before `App.vue`.

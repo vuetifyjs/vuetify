@@ -50,6 +50,9 @@ export default {
       previousMonth: 'Vorheriger Monat',
       nextMonth: 'Nächster Monat',
       selectYear: 'Jahr auswählen',
+      previousYear: 'Vorheriges Jahr',
+      nextYear: 'Nächstes Jahr',
+      selectMonth: 'Monat auswählen',
       selectDate: '{0}',
       currentDate: 'Heute, {0}',
     },
@@ -85,6 +88,9 @@ export default {
     am: 'AM',
     pm: 'PM',
     title: 'Uhrzeit auswählen',
+    hour: 'Stunde',
+    minute: 'Minuten',
+    second: 'Sekunden',
   },
   pagination: {
     ariaLabel: {
@@ -141,6 +147,7 @@ export default {
     space: 'Leertaste',
     plus: 'plus',
     shortcut: 'Tastenkürzel: {0}',
+    or: 'oder',
   },
   video: {
     play: 'Abspielen',

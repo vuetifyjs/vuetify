@@ -22,7 +22,7 @@ import { makeFilterProps, useFilter } from '@/composables/filter'
 
 // Utilities
 import { computed, toRef, toRefs } from 'vue'
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { DeepReadonly, UnwrapRef } from 'vue'
@@ -85,7 +85,7 @@ export const makeDataTableProps = propsFactory({
   ...makeDataTableItemsProps(),
   ...makeDataTableSelectProps(),
   ...makeDataTableSortProps(),
-  ...makeVDataTableHeadersProps(),
+  ...omit(makeVDataTableHeadersProps(), ['multiSort']),
   ...makeVTableProps(),
 }, 'DataTable')
 
@@ -128,7 +128,7 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
 
   setup (props, { attrs, slots }) {
     const { groupBy } = createGroupBy(props)
-    const { sortBy, multiSort, mustSort } = createSort(props)
+    const { initialSortOrder, sortBy, multiSort, mustSort } = createSort(props)
     const { page, itemsPerPage } = createPagination(props)
     const { disableSort } = toRefs(props)
 
@@ -152,7 +152,7 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
       customKeyFilter: filterFunctions,
     })
 
-    const { toggleSort } = provideSort({ sortBy, multiSort, mustSort, page })
+    const { toggleSort } = provideSort({ initialSortOrder, sortBy, multiSort, mustSort, page })
     const { sortByWithGroups, opened, extractRows, isGroupOpen, toggleGroup } = provideGroupBy({ groupBy, sortBy, disableSort })
 
     const { sortedItems } = useSortedItems(props, filteredItems, sortByWithGroups, {
@@ -222,7 +222,7 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
 
     useRender(() => {
       const dataTableFooterProps = VDataTableFooter.filterProps(props)
-      const dataTableHeadersProps = VDataTableHeaders.filterProps(props)
+      const dataTableHeadersProps = VDataTableHeaders.filterProps(omit(props, ['multiSort']))
       const dataTableRowsProps = VDataTableRows.filterProps(props)
       const tableProps = VTable.filterProps(props)
 
@@ -249,6 +249,7 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
                   <thead key="thead">
                     <VDataTableHeaders
                       { ...dataTableHeadersProps }
+                      multiSort={ !!props.multiSort }
                       v-slots={ slots }
                     />
                   </thead>

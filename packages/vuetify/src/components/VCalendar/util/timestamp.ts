@@ -246,9 +246,10 @@ export function updateHasTime (timestamp: CalendarTimestamp, hasTime: boolean, n
 
 export function updateMinutes (timestamp: CalendarTimestamp, minutes: number, now?: CalendarTimestamp): CalendarTimestamp {
   timestamp.hasTime = true
-  timestamp.hour = Math.floor(minutes / MINUTES_IN_HOUR)
-  timestamp.minute = minutes % MINUTES_IN_HOUR
-  timestamp.time = getTime(timestamp)
+  timestamp.hour = 0
+  timestamp.minute = 0
+  nextMinutes(timestamp, minutes)
+  updateFormatted(timestamp)
   if (now) {
     updateRelative(timestamp, now, true)
   }
@@ -324,7 +325,7 @@ export function getTime (timestamp: CalendarTimestamp): string {
 
 export function nextMinutes (timestamp: CalendarTimestamp, minutes: number): CalendarTimestamp {
   timestamp.minute += minutes
-  while (timestamp.minute > MINUTES_IN_HOUR) {
+  while (timestamp.minute >= MINUTES_IN_HOUR) {
     timestamp.minute -= MINUTES_IN_HOUR
     timestamp.hour++
     if (timestamp.hour >= HOURS_IN_DAY) {
@@ -458,8 +459,13 @@ export function createDayList (
   return days
 }
 
-export function createIntervalList (timestamp: CalendarTimestamp, first: number,
-  minutes: number, count: number, now?: CalendarTimestamp): CalendarTimestamp[] {
+export function createIntervalList (
+  timestamp: CalendarTimestamp,
+  first: number,
+  minutes: number,
+  count: number,
+  now?: CalendarTimestamp
+): CalendarTimestamp[] {
   const intervals: CalendarTimestamp[] = []
 
   for (let i = 0; i < count; i++) {

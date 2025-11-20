@@ -1,8 +1,10 @@
 // Components
 import { makeVTreeviewChildrenProps, VTreeviewChildren } from './VTreeviewChildren'
 import { makeVListProps, useListItems, VList } from '@/components/VList/VList'
+import { VListItem } from '@/components/VList/VListItem'
 
 // Composables
+import { useLocale } from '@/composables'
 import { provideDefaults } from '@/composables/defaults'
 import { makeFilterProps, useFilter } from '@/composables/filter'
 import { useProxiedModel } from '@/composables/proxiedModel'
@@ -31,6 +33,11 @@ export const makeVTreeviewProps = propsFactory({
   openAll: Boolean,
   indentLines: [Boolean, String] as PropType<boolean | IndentLinesVariant>,
   search: String,
+  hideNoData: Boolean,
+  noDataText: {
+    type: String,
+    default: '$vuetify.noDataText',
+  },
 
   ...makeFilterProps({ filterKeys: ['title'] }),
   ...omit(makeVTreeviewChildrenProps(), [
@@ -53,7 +60,9 @@ export const VTreeview = genericComponent<new <T>(
   props: {
     items?: T[]
   },
-  slots: VTreeviewChildrenSlots<T>
+  slots: VTreeviewChildrenSlots<T> & {
+    'no-data': never
+  }
 ) => GenericProps<typeof props, typeof slots>>()({
   name: 'VTreeview',
 
@@ -69,6 +78,7 @@ export const VTreeview = genericComponent<new <T>(
   },
 
   setup (props, { slots, emit }) {
+    const { t } = useLocale()
     const { items } = useListItems(props)
     const activeColor = toRef(() => props.activeColor)
     const baseColor = toRef(() => props.baseColor)
@@ -175,6 +185,9 @@ export const VTreeview = genericComponent<new <T>(
           v-model:activated={ activated.value }
           v-model:selected={ selected.value }
         >
+          { visibleIds.value?.size === 0 && !props.hideNoData && (
+            slots['no-data']?.() ?? (<VListItem key="no-data" title={ t(props.noDataText) } />)
+          )}
           <VTreeviewChildren
             { ...treeviewChildrenProps }
             density={ props.density }

@@ -1,14 +1,17 @@
 // Composables
 import { useTimes } from './times'
 import { computeColor } from '@/composables/color'
+import { useDate } from '@/composables/date'
 import { provideLocale } from '@/composables/locale'
 
 // Utilities
 import { computed } from 'vue'
 import {
   createDayList,
-  createNativeLocaleFormatter, getEndOfMonth,
-  getEndOfWeek, getStartOfMonth,
+  createNativeLocaleFormatter,
+  getEndOfMonth,
+  getEndOfWeek,
+  getStartOfMonth,
   getStartOfWeek,
   getTimestampIdentifier,
   getWeekdaySkips,
@@ -39,6 +42,8 @@ export const makeCalendarBaseProps = propsFactory({
     default: () => [0, 1, 2, 3, 4, 5, 6],
     validate: validateWeekdays,
   },
+  firstDayOfWeek: [Number, String],
+  firstDayOfYear: [Number, String],
   weekdayFormat: {
     type: Function as PropType<CalendarFormatter>,
     default: null,
@@ -64,6 +69,8 @@ export interface CalendarBaseProps {
   start: string | number | Date
   end: string | number | Date | undefined
   weekdays: string | number[]
+  firstDayOfWeek: number | string | undefined
+  firstDayOfYear: number | string | undefined
   weekdayFormat: CalendarFormatter | string | undefined
   dayFormat: CalendarFormatter | string | undefined
   locale: string | undefined
@@ -74,6 +81,8 @@ export interface CalendarBaseProps {
 export function useCalendarBase (props: CalendarBaseProps) {
   const { times } = useTimes({ now: props.now })
   const locale = provideLocale(props)
+
+  const adapter = useDate()
 
   const parsedStart = computed((): CalendarTimestamp => {
     if (props.type === 'month') {
@@ -100,9 +109,15 @@ export function useCalendarBase (props: CalendarBaseProps) {
   })
 
   const parsedWeekdays = computed((): number[] => {
-    return Array.isArray(props.weekdays)
+    const weekdays = Array.isArray(props.weekdays)
       ? props.weekdays
       : (props.weekdays || '').split(',').map(x => parseInt(x, 10))
+
+    const first = adapter.toJsDate(adapter.startOfWeek(adapter.date(), props.firstDayOfWeek)).getDay()
+    return [
+      ...weekdays.toSorted().filter(v => v >= first),
+      ...weekdays.toSorted().filter(v => v < first),
+    ]
   })
 
   const effectiveWeekdays = computed((): number[] => {
@@ -170,6 +185,14 @@ export function useCalendarBase (props: CalendarBaseProps) {
     }
   }
 
+  function getWeekNumber (timestamp: CalendarTimestamp): number {
+    return adapter.getWeek(
+      adapter.date(timestamp.date),
+      props.firstDayOfWeek,
+      props.firstDayOfYear,
+    )
+  }
+
   function _getStartOfWeek (timestamp: CalendarTimestamp): CalendarTimestamp {
     return getStartOfWeek(timestamp, parsedWeekdays.value, times.today)
   }
@@ -196,6 +219,7 @@ export function useCalendarBase (props: CalendarBaseProps) {
     weekdayFormatter,
     getColorProps,
     getRelativeClasses,
+    getWeekNumber,
     getStartOfWeek: _getStartOfWeek,
     getEndOfWeek: _getEndOfWeek,
     getFormatter,

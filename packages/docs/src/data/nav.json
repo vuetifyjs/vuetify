@@ -148,6 +148,7 @@
       "textareas",
       { "divider": true },
       { "subheader": "data-and-display" },
+      "calendars",
       "confirm-edit",
       "data-iterators",
       {
@@ -165,6 +166,7 @@
           "virtual-tables"
         ]
       },
+      "hotkeys",
       "sparklines",
       "infinite-scroller",
       "tables",
@@ -249,10 +251,6 @@
     "items": [
       "introduction",
       {
-        "title": "calendars",
-        "subfolder": "components"
-      },
-      {
         "title": "color-inputs",
         "subfolder": "components"
       },
@@ -282,10 +280,6 @@
       },
       {
         "title": "mask-inputs",
-        "subfolder": "components"
-      },
-      {
-        "title": "hotkeys",
         "subfolder": "components"
       },
       {

@@ -53,15 +53,25 @@ Inset dividers are moved 72px to the right. This will cause them to line up with
 
 <ExamplesExample file="v-divider/prop-inset" />
 
+#### Gradient
+
+Easily enable fading effect with **gradient** prop for a modern look.
+
+<ExamplesExample file="v-divider/prop-gradient" />
+
 #### Vertical
 
 Vertical dividers give you more tools for unique layouts.
 
 <ExamplesExample file="v-divider/prop-vertical" />
 
-#### Thickness
+### Slots
 
-By using the **thickness** prop, the thickness of the divider can be adjusted to the desired value.
+#### Default
+
+When you pass any content to be placed in between dividers simply by utilizing the default slot.
+
+<ExamplesExample file="v-divider/slot-default" />
 
 ### Misc
 

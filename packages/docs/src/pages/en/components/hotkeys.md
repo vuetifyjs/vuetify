@@ -10,7 +10,7 @@ related:
   - /components/icons/
   - /components/toolbars/
 features:
-  github: /labs/VHotkey/
+  github: /components/VHotkey/
   label: 'C: VHotkey'
   report: true
 ---
@@ -21,9 +21,7 @@ The `v-hotkey` component renders keyboard shortcuts in a visually consistent and
 
 <PageFeatures />
 
-::: success
-This feature was introduced in [v3.9.0](/getting-started/release-notes/?version=v3.9.0)
-:::
+<DocIntroduced version="3.11.0" />
 
 ## Usage
 

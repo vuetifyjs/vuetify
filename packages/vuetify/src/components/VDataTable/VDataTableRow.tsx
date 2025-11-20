@@ -37,6 +37,7 @@ export type VDataTableRowSlots<T> = {
 }
 
 export const makeVDataTableRowProps = propsFactory({
+  color: String,
   index: Number,
   item: Object as PropType<DataTableItem>,
   cellProps: [Object, Function] as PropType<CellProps<any>>,
@@ -163,12 +164,14 @@ export const VDataTableRow = genericComponent<new <T>(
                     return slots['item.data-table-select']?.({
                       ...slotProps,
                       props: {
+                        color: props.color,
                         disabled: !item.selectable,
                         modelValue: isSelected([item]),
                         onClick: withModifiers(() => toggleSelect(item), ['stop']),
                       },
                     }) ?? (
                       <VCheckboxBtn
+                        color={ props.color }
                         disabled={ !item.selectable }
                         density={ props.density }
                         modelValue={ isSelected([item]) }

@@ -28,7 +28,7 @@ import vRipple from '@/directives/ripple'
 
 // Utilities
 import { computed, nextTick, onBeforeMount, ref, toDisplayString, toRef, watch } from 'vue'
-import { deprecate, EventProp, genericComponent, propsFactory, useRender } from '@/util'
+import { convertToUnit, deprecate, EventProp, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -88,6 +88,7 @@ export const makeVListItemProps = propsFactory({
     default: true,
   },
   slim: Boolean,
+  prependGap: [Number, String],
   subtitle: {
     type: [String, Number, Boolean],
     default: undefined,
@@ -303,6 +304,9 @@ export const VListItem = genericComponent<VListItemSlots>()({
             props.class,
           ]}
           style={[
+            {
+              '--v-list-prepend-gap': convertToUnit(props.prependGap),
+            },
             colorStyles.value,
             dimensionStyles.value,
             props.style,

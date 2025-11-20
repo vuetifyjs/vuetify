@@ -1,8 +1,8 @@
-@use '../../components/VKbd/variables' as vkdb;
+@use '../VKbd/variables' as vkbd;
 @use '../../styles/settings';
 
 $hotkey-gap: 4px !default;
-$hotkey-icon-max-width: 0.75em !default;
+$hotkey-icon-size: 0.75rem !default;
 $hotkey-divider-opacity: var(--v-medium-emphasis-opacity) !default;
 $hotkey-divider-font-size: 1em !default;
 $hotkey-combination-gap: 2px !default;
@@ -14,9 +14,8 @@ $hotkey-disabled-opacity: 0.26 !default;
 
 
 $hotkey-inline-font-size: 1em !default;
-$hotkey-inline-line-height: vkdb.$kbd-line-height !default;
-$hotkey-inline-padding: 2px 4px !default;
-$hotkey-inline-min-width: vkdb.$kbd-min-width !default;
+$hotkey-inline-padding: 1px 4px 0 !default;
+$hotkey-inline-min-width: vkbd.$kbd-min-width !default;
 $hotkey-inline-icon-max-height: calc(1ex + 2px) !default;
 $hotkey-inline-divider-font-size: 1em !default;
 
