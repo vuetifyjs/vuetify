@@ -1,7 +1,7 @@
 <template>
   <v-theme-provider :theme="currentTheme">
     <v-defaults-provider :defaults="defaults">
-      <v-card class="py-16" elevation="0">
+      <v-card class="py-16" color="background" elevation="0">
         <v-container class="pt-0">
           <HomeCommonTitle
             class="mb-10"
