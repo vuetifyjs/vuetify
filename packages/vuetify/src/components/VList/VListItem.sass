@@ -32,7 +32,8 @@
         transition: opacity .2s ease-in-out
         @include tools.absolute(true)
 
-      &:focus-visible::after
+      &:focus-visible::after,
+      &--focus-visible::after
         opacity: calc(.15 * var(--v-theme-overlay-multiplier))
 
     &__prepend,

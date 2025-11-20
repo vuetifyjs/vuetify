@@ -97,6 +97,7 @@ export const makeVListItemProps = propsFactory({
     default: undefined,
   },
   value: null,
+  index: Number,
   tabindex: [Number, String],
 
   onClick: EventProp<[MouseEvent | KeyboardEvent]>(),
@@ -155,6 +156,12 @@ export const VListItem = genericComponent<VListItemSlots>()({
       props.link !== false &&
       (props.link || link.isClickable.value || isSelectable.value)
     )
+    const isKeyboardFocused = computed(() =>
+      list &&
+      list.navigationStrategy.value === 'track' &&
+      props.index !== undefined &&
+      list.keyboardFocusedIndex.value === props.index
+    )
     const role = computed(() => list ? (isLink.value ? 'link' : isSelectable.value ? 'option' : 'listitem') : undefined)
     const ariaSelected = computed(() => {
       if (!isSelectable.value) return undefined
@@ -178,6 +185,10 @@ export const VListItem = genericComponent<VListItemSlots>()({
     })
     watch(isActivated, val => {
       if (!val || !scrollToActive) return
+      rootEl.value?.scrollIntoView({ block: 'nearest', behavior: 'instant' })
+    })
+    watch(isKeyboardFocused, val => {
+      if (!val) return
       rootEl.value?.scrollIntoView({ block: 'nearest', behavior: 'instant' })
     })
     onBeforeMount(() => {
@@ -268,6 +279,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
         <Tag
           { ...link.linkProps }
           ref={ rootEl }
+          id={ props.index !== undefined ? `v-list-item-${props.index}` : undefined }
           class={[
             'v-list-item',
             {
@@ -277,6 +289,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
               'v-list-item--nav': props.nav,
               'v-list-item--prepend': !hasPrepend && list?.hasPrepend.value,
               'v-list-item--slim': props.slim,
+              'v-list-item--focus-visible': isKeyboardFocused.value,
               [`${props.activeClass}`]: props.activeClass && isActive.value,
             },
             themeClasses.value,

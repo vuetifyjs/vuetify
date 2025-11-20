@@ -178,7 +178,12 @@ export const VList = genericComponent<new <
     const { roundedClasses } = useRounded(props)
 
     const scrollToActive = toRef(() => props.navigationStrategy === 'track')
-    const { children, open, parents, select, activate, getPath } = useNested(props, scrollToActive)
+    const returnObject = toRef(() => props.returnObject)
+    const { children, open, parents, select, activate, getPath } = useNested(props, {
+      items,
+      returnObject,
+      scrollToActive,
+    })
     const lineClasses = toRef(() => props.lines ? `v-list--${props.lines}-line` : undefined)
     const activeColor = toRef(() => props.activeColor)
     const baseColor = toRef(() => props.baseColor)
@@ -192,8 +197,12 @@ export const VList = genericComponent<new <
       v => v ?? -1
     )
 
+    const navigationStrategyRef = toRef(() => props.navigationStrategy)
+
     createList({
       filterable: props.filterable,
+      keyboardFocusedIndex: navigationIndex,
+      navigationStrategy: navigationStrategyRef,
     })
 
     provideDefaults({
@@ -229,7 +238,7 @@ export const VList = genericComponent<new <
       if (item && item.type !== 'divider' && item.type !== 'subheader') {
         activate(item.value, true)
       }
-    })
+    }, { immediate: true })
 
     function onFocusin (e: FocusEvent) {
       isFocused.value = true
@@ -304,9 +313,9 @@ export const VList = genericComponent<new <
       if (direction !== null) {
         e.preventDefault()
         if (props.navigationStrategy === 'track') {
-          const nextIdx = getNextIndex(direction)
-          if (nextIdx !== -1) {
-            navigationIndex.value = nextIdx
+          const nextIndex = getNextIndex(direction)
+          if (nextIndex !== -1) {
+            navigationIndex.value = nextIndex
           }
         } else {
           focus(direction)
@@ -351,7 +360,11 @@ export const VList = genericComponent<new <
           ]}
           tabindex={ props.disabled ? -1 : 0 }
           role={ isSelectable.value ? 'listbox' : 'list' }
-          aria-activedescendant={ undefined }
+          aria-activedescendant={
+            props.navigationStrategy === 'track' && navigationIndex.value >= 0
+              ? `v-list-item-${navigationIndex.value}`
+              : undefined
+          }
           onFocusin={ onFocusin }
           onFocusout={ onFocusout }
           onFocus={ onFocus }
