@@ -13,6 +13,7 @@ import { CalendarEventOverlapModes } from '../modes'
 import {
   isEventHiddenOn,
   isEventOn,
+  isEventOnDay,
   isEventOverlapping,
   isEventStart,
   parseEvent,
@@ -41,7 +42,7 @@ import type {
 // Constants
 const WIDTH_FULL = 100
 const WIDTH_START = 95
-const MINUTES_IN_DAY = 1440
+// const MINUTES_IN_DAY = 1440
 
 type VEventGetter<D> = (day: D) => CalendarEventParsed[]
 type VEventVisualToNode<D> = (visual: CalendarEventVisual, day: D) => VNode | false
@@ -333,8 +334,8 @@ export function useCalendarWithEvents (props: CalendarWithEventsProps, slots: an
   }
 
   function genTimedEvent ({ event, left, width }: CalendarEventVisual, day: CalendarDayBodySlotScope): VNode | false {
-    const endDelta = day.timeDelta(event.end)
-    const startDelta = day.timeDelta(event.start)
+    const startDelta = day.timeDelta(event.start, day)
+    const endDelta = day.timeDelta(event.end, day)
     if (
       endDelta === false ||
       startDelta === false ||
@@ -348,8 +349,8 @@ export function useCalendarWithEvents (props: CalendarWithEventsProps, slots: an
     const dayIdentifier = getDayIdentifier(day)
     const start = event.startIdentifier >= dayIdentifier
     const end = event.endIdentifier > dayIdentifier
-    const top = start ? day.timeToY(event.start) : 0
-    const bottom = end ? day.timeToY(MINUTES_IN_DAY) : day.timeToY(event.end)
+    const top = day.timeToY(event.start, day)
+    const bottom = day.timeToY(event.end, day)
     const height = Math.max(props.eventHeight || 0, bottom - top)
     const scope = { eventParsed: event, day, start, end, timed: true }
 
@@ -523,10 +524,9 @@ export function useCalendarWithEvents (props: CalendarWithEventsProps, slots: an
   }
 
   function getEventsForDayTimed (day: CalendarDaySlotScope): CalendarEventParsed[] {
-    const identifier = getDayIdentifier(day)
     return parsedEvents.value.filter(
       event => !event.allDay &&
-        isEventOn(event, identifier) &&
+        isEventOnDay(event, day, day.intervalRange) &&
         isEventForCategory(event, day.category)
     )
   }

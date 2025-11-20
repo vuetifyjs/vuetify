@@ -1,7 +1,9 @@
 import {
+  copyTimestamp,
   getDayIdentifier,
   getTimestampIdentifier,
   isTimedless,
+  nextMinutes,
   parseTimestamp,
   updateHasTime,
 } from './timestamp'
@@ -39,6 +41,24 @@ export function parseEvent (
 
 export function isEventOn (event: CalendarEventParsed, dayIdentifier: number): boolean {
   return dayIdentifier >= event.startIdentifier && dayIdentifier <= event.endIdentifier
+}
+
+export function isEventOnDay (
+  event: CalendarEventParsed,
+  day: CalendarTimestamp,
+  inRange?: [number, number]
+): boolean {
+  if (inRange) {
+    const dayStart = nextMinutes(copyTimestamp(day), inRange[0])
+    const dayEnd = nextMinutes(copyTimestamp(day), inRange[1])
+
+    const starts = event.startTimestampIdentifier < getTimestampIdentifier(dayEnd)
+    const ends = event.endTimestampIdentifier > getTimestampIdentifier(dayStart)
+
+    return starts && ends
+  }
+
+  return isEventOn(event, getDayIdentifier(day))
 }
 
 export function isEventHiddenOn (event: CalendarEventParsed, day: CalendarTimestamp): boolean {
