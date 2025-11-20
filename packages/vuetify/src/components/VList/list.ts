@@ -33,8 +33,6 @@ type InjectedListOptions = {
 }
 
 export function createList (options: InjectedListOptions = { filterable: false }) {
-  const { filterable, keyboardFocusedIndex = shallowRef(-1), navigationStrategy = shallowRef('focus') } = options
-
   const parent = inject(ListKey, {
     filterable: false,
     hasPrepend: shallowRef(false),
@@ -42,6 +40,12 @@ export function createList (options: InjectedListOptions = { filterable: false }
     keyboardFocusedIndex: shallowRef(-1),
     navigationStrategy: shallowRef('focus' as 'focus' | 'track'),
   })
+
+  const {
+    filterable,
+    keyboardFocusedIndex = parent.keyboardFocusedIndex,
+    navigationStrategy = parent.navigationStrategy,
+  } = options
 
   const data = {
     filterable: parent.filterable || filterable,
