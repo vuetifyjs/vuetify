@@ -63,19 +63,7 @@
       <v-col cols="12" md="6">
         <v-card elevation="0" rounded="lg" title="Transactions" border>
           <template #append>
-            <v-btn variant="text" icon>
-              <v-icon icon="mdi-dots-horizontal" />
-
-              <v-menu activator="parent" location="bottom end">
-                <v-list>
-                  <v-list-item title="View report" link />
-
-                  <v-list-item title="Edit report" link />
-
-                  <v-list-item title="Mark as done" link />
-                </v-list>
-              </v-menu>
-            </v-btn>
+            <div class="my-5" />
           </template>
 
           <template #text>
@@ -111,19 +99,7 @@
       <v-col cols="12" md="6">
         <v-card elevation="0" rounded="lg" title="Summary" border>
           <template #append>
-            <v-btn variant="text" icon>
-              <v-icon icon="mdi-dots-horizontal" />
-
-              <v-menu activator="parent" location="bottom end">
-                <v-list>
-                  <v-list-item title="View report" link />
-
-                  <v-list-item title="Edit report" link />
-
-                  <v-list-item title="Mark as done" link />
-                </v-list>
-              </v-menu>
-            </v-btn>
+            <div class="my-5" />
           </template>
 
           <template #text>

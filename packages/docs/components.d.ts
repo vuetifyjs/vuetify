@@ -137,6 +137,7 @@ declare module 'vue' {
     HomeGalleryComponents: typeof import('./src/components/home/Gallery/Components.vue')['default']
     HomeGalleryData: typeof import('./src/components/home/Gallery/Data.vue')['default']
     HomeGalleryForm: typeof import('./src/components/home/Gallery/Form.vue')['default']
+    HomeGalleryLogin: typeof import('./src/components/home/Gallery/Login.vue')['default']
     HomeGallerySelection: typeof import('./src/components/home/Gallery/Selection.vue')['default']
     HomeLogo: typeof import('./src/components/home/Logo.vue')['default']
     HomeSnips: typeof import('./src/components/home/Snips.vue')['default']

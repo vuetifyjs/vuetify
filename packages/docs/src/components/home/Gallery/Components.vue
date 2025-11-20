@@ -49,7 +49,13 @@
                   <span>Vuetify Gallery</span>
                 </v-system-bar>
 
-                <v-app-bar class="ps-4" color="primary" elevation="0" flat>
+                <v-app-bar
+                  v-if="!selectedComponent.isNavigationHiden"
+                  class="ps-4"
+                  color="primary"
+                  elevation="0"
+                  flat
+                >
                   <v-app-bar-nav-icon class="mr-3" @click="drawer = !drawer" />
 
                   <v-avatar
@@ -62,10 +68,6 @@
                   <v-app-bar-title>Vuetify</v-app-bar-title>
 
                   <template #append>
-                    <v-icon icon="mdi-bell-outline" />
-
-                    <v-divider class="mx-4 align-self-center" length="40%" vertical />
-
                     <v-btn class="text-none me-1 px-3" height="48" slim>
                       <template #prepend>
                         <v-avatar color="surface-light" image="https://cdn.vuetifyjs.com/images/john.png" size="32" start />
@@ -75,9 +77,9 @@
 
                       <v-menu activator="parent">
                         <v-list density="compact" nav>
-                          <v-list-item title="Settings" link />
+                          <v-list-item title="Settings" link @click="selectedComponent = formComponent" />
 
-                          <v-list-item title="Logout" link />
+                          <v-list-item title="Logout" @click="selectedComponent = loginComponent" />
                         </v-list>
                       </v-menu>
 
@@ -89,8 +91,9 @@
                 </v-app-bar>
 
                 <v-navigation-drawer
+                  v-if="!selectedComponent.isNavigationHiden"
                   v-model="drawer"
-                  :rail="selectedComponentCategory.hasRailsDrawer"
+                  :rail="selectedComponent.hasRailsDrawer"
                   color="surface-bright"
                 >
                   <v-list
@@ -102,10 +105,10 @@
                       v-for="(item, i) in components"
                       :key="i"
                       v-bind="item"
-                      :active="item.title === selectedComponentCategory.title"
+                      :active="item.title === selectedComponent.title"
                       active-class="text-primary"
                       nav
-                      @click="selectedComponentCategory = item"
+                      @click="selectedComponent = item"
                     />
                   </v-list>
 
@@ -116,6 +119,7 @@
                       title="Settings"
                       link
                       nav
+                      @click="selectedComponent = formComponent"
                     />
                   </template>
                 </v-navigation-drawer>
@@ -129,7 +133,8 @@
                   >
                     <v-slide-x-transition>
                       <component
-                        :is="selectedComponentCategory.component"
+                        :is="selectedComponent.component"
+                        @login="selectedComponent = components[0]"
                       />
                     </v-slide-x-transition>
                   </v-sheet>
@@ -146,9 +151,19 @@
 <script setup lang="ts">
   import { defineAsyncComponent } from 'vue'
 
+  interface SelectedComponent {
+    title: string
+    prependIcon?: string
+    component: Component
+    hasRailsDrawer?: boolean
+    link?: boolean
+    isNavigationHiden?: boolean
+  }
+
   const Form = defineAsyncComponent(() => import('@/components/home/Gallery/Form.vue'))
   const Data = defineAsyncComponent(() => import('@/components/home/Gallery/Data.vue'))
   const Chat = defineAsyncComponent(() => import('@/components/home/Gallery/Chat/Chat.vue'))
+  const Login = defineAsyncComponent(() => import('@/components/home/Gallery/Login.vue'))
 
   const theme = useTheme()
 
@@ -169,19 +184,27 @@
   const drawer = ref(true)
   const currentTheme = ref(theme.name.value)
 
-  const components: { title: string; prependIcon: string; component?: Component; hasRailsDrawer?: boolean, link?: boolean }[] = [
+  const loginComponent: SelectedComponent = {
+    title: 'Login',
+    component: Login,
+    isNavigationHiden: true,
+  }
+
+  const formComponent: SelectedComponent = {
+    title: 'Form',
+    prependIcon: 'mdi-circle-edit-outline',
+    link: true,
+    component: Form,
+  }
+
+  const components: SelectedComponent[] = [
     {
       title: 'Dashboard',
       prependIcon: 'mdi-view-dashboard-outline',
       link: true,
       component: Data,
     },
-    {
-      title: 'Form',
-      prependIcon: 'mdi-circle-edit-outline',
-      link: true,
-      component: Form,
-    },
+    formComponent,
     {
       title: 'Chat',
       component: Chat,
@@ -191,7 +214,7 @@
     },
   ]
 
-  const selectedComponentCategory = shallowRef(components[0])
+  const selectedComponent = shallowRef<SelectedComponent>(components[0])
 </script>
 
 <style scoped>
