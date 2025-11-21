@@ -163,6 +163,7 @@ Utility classes are a powerful feature of Vuetify, but they can also be unnecess
     "height-screen": false,
     "height": false,
     "justify-content": false,
+    "justify-items": false,
     "left": false,
     "margin-bottom": false,
     "margin-end": false,
