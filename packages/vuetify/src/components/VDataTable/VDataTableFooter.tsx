@@ -106,7 +106,7 @@ export const VDataTableFooter = genericComponent<{ prepend: never }>()({
           { slots.prepend?.() }
 
           <div class="v-data-table-footer__items-per-page">
-            <span aria-label={ t(props.itemsPerPageText) }>{ t(props.itemsPerPageText) }</span>
+            <span>{ t(props.itemsPerPageText) }</span>
 
             <VSelect
               items={ itemsPerPageOptions.value }
@@ -114,6 +114,7 @@ export const VDataTableFooter = genericComponent<{ prepend: never }>()({
               onUpdate:modelValue={ v => setItemsPerPage(Number(v)) }
               density="compact"
               variant="outlined"
+              aria-label={ t(props.itemsPerPageText) }
               hideDetails
             />
           </div>
