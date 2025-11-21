@@ -1,8 +1,8 @@
 <template>
   <v-app>
     <v-container>
-      <v-breadcrumbs :items="items" :max-items="3" />
-      <v-breadcrumbs :items="items" :max-items="3" collapse-in-menu />
+      <v-breadcrumbs :items="items" :total-visible="3" />
+      <v-breadcrumbs :items="items" :total-visible="3" collapse-in-menu />
     </v-container>
   </v-app>
 </template>

@@ -81,9 +81,9 @@ You can use the `title` slot to customize each breadcrumb title.
 
 #### Collapsed breadcrumbs
 
-You can use the `maxItems` prop to redefine the maximum number of breadcrumb items displayed before the component collapses.
+You can use the `totalVisible` prop to redefine the maximum number of breadcrumb items displayed before the component collapses.
 
-<ExamplesExample file="v-breadcrumbs/slot-max-items" />
+<ExamplesExample file="v-breadcrumbs/slot-total-visible" />
 
 #### Collapsed with menu
 

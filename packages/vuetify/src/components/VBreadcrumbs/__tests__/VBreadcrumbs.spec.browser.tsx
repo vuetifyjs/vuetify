@@ -4,7 +4,7 @@ import { VBreadcrumbsDivider } from '../VBreadcrumbsDivider'
 import { VBreadcrumbsItem } from '../VBreadcrumbsItem'
 
 // Utilities
-import { render, screen } from '@test'
+import { render, screen, userEvent } from '@test'
 
 describe('VBreadcrumbs', () => {
   it('should use item slot', async () => {
@@ -111,30 +111,32 @@ describe('VBreadcrumbs', () => {
     expect(screen.getByText('-')).toBeVisible()
   })
 
-  it('should collapse into ellipsis when items exceed maxItems', async () => {
+  it('should collapse into ellipsis when items exceed totalVisible', async () => {
     render(() => (
       <VBreadcrumbs
         items={['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']}
-        maxItems={ 5 }
+        totalVisible={ 5 }
       />
     ))
 
-    const ellipsisBtn = screen.getByCSS('button .mdi-dots-horizontal')
-    expect(ellipsisBtn).toBeVisible()
+    const ellipsis = screen.getByText('...')
+    expect(ellipsis).toBeVisible()
+    expect(ellipsis).toHaveClass('v-breadcrumbs-item--ellipsis')
   })
 
-  it('should expand all items when ellipsis is clicked', async () => {
+  it('should expand all items when ellipsis is clicked and collapseInMenu = false', async () => {
     render(() => (
       <VBreadcrumbs
         items={['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']}
-        maxItems={ 5 }
+        totalVisible={ 5 }
+        collapseInMenu={ false }
       />
     ))
 
-    const ellipsisBtn = screen.getByCSS('button .mdi-dots-horizontal')
-    expect(ellipsisBtn).toBeVisible()
+    const ellipsis = screen.getByText('...')
+    expect(ellipsis).toBeVisible()
 
-    await ellipsisBtn.click()
+    await userEvent.click(ellipsis)
 
     const items = screen.getAllByCSS('.v-breadcrumbs-item')
     expect(items).toHaveLength(8)
@@ -149,16 +151,17 @@ describe('VBreadcrumbs', () => {
           { title: 'c', href: '/c' },
           { title: 'd' },
         ]}
-        maxItems={ 3 }
+        totalVisible={ 3 }
         collapseInMenu
       />
     ))
 
-    const activator = screen.getByCSS('button .mdi-dots-horizontal')
-    expect(activator).toBeVisible()
+    const ellipsis = screen.getByText('...')
+    expect(ellipsis).toBeVisible()
 
-    await activator.click()
+    await userEvent.click(ellipsis)
 
+    // Le menu doit maintenant être rendu
     const listItems = screen.getAllByText(/b|c/)
     expect(listItems).toHaveLength(2)
   })
@@ -167,13 +170,13 @@ describe('VBreadcrumbs', () => {
     render(() => (
       <VBreadcrumbs
         items={['a', 'b', 'c', 'd']}
-        maxItems={ 3 }
+        totalVisible={ 3 }
         collapseInMenu={ false }
       />
     ))
 
-    const activator = screen.getByCSS('button .mdi-dots-horizontal')
-    expect(activator).toBeVisible()
+    const ellipsis = screen.getByText('...')
+    expect(ellipsis).toBeVisible()
 
     const menu = screen.queryByCSS('.v-menu')
     expect(menu).toBeNull()

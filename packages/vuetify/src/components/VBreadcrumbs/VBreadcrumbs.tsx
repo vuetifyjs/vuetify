@@ -4,7 +4,6 @@ import './VBreadcrumbs.sass'
 // Components
 import { VBreadcrumbsDivider } from './VBreadcrumbsDivider'
 import { VBreadcrumbsItem } from './VBreadcrumbsItem'
-import { VBtn } from '../VBtn'
 import { VIcon } from '../VIcon'
 import { VList, VListItem, VListItemTitle } from '../VList'
 import { VMenu } from '../VMenu'
@@ -20,8 +19,8 @@ import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 
 // Utilities
-import { computed, ref, toRef } from 'vue'
-import { genericComponent, isObject, propsFactory, useRender } from '@/util'
+import { computed, ref, toRef, watch } from 'vue'
+import { genericComponent, isObject, noop, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -46,16 +45,17 @@ export const makeVBreadcrumbsProps = propsFactory({
     type: String,
     default: '/',
   },
+  ellipsis: {
+    type: String,
+    default: '...',
+  },
   icon: IconValue,
   items: {
     type: Array as PropType<readonly BreadcrumbItem[]>,
     default: () => ([]),
   },
   itemProps: Boolean,
-  maxItems: {
-    type: Number,
-    default: 8,
-  },
+  totalVisible: Number,
 
   ...makeComponentProps(),
   ...makeDensityProps(),
@@ -99,12 +99,16 @@ export const VBreadcrumbs = genericComponent<new <T extends BreadcrumbItem>(
     const items = computed(() => props.items.map(item => {
       return typeof item === 'string' ? { item: { title: item }, raw: item } : { item, raw: item }
     }))
-    const showEllipsis = computed(() => items.value.length >= props.maxItems)
+    const showEllipsis = toRef(() => props.totalVisible ? items.value.length > props.totalVisible : false)
     const enableEllipsis = ref(showEllipsis.value)
 
     const onClickEllipsis = () => {
       enableEllipsis.value = false
     }
+
+    watch(showEllipsis, (value: boolean) => {
+      enableEllipsis.value = value
+    })
 
     useRender(() => {
       const hasPrepend = !!(slots.prepend || props.icon)
@@ -112,20 +116,19 @@ export const VBreadcrumbs = genericComponent<new <T extends BreadcrumbItem>(
       return (
         <props.tag
           aria-label="breadcrumbs"
+          class={[
+            'v-breadcrumbs',
+            backgroundColorClasses.value,
+            densityClasses.value,
+            roundedClasses.value,
+            props.class,
+          ]}
+          style={[
+            backgroundColorStyles.value,
+            props.style,
+          ]}
         >
-          <ol
-            class={[
-              'v-breadcrumbs',
-              backgroundColorClasses.value,
-              densityClasses.value,
-              roundedClasses.value,
-              props.class,
-            ]}
-            style={[
-              backgroundColorStyles.value,
-              props.style,
-            ]}
-          >
+          <ol>
           { hasPrepend && (
             <li key="prepend" class="v-breadcrumbs__prepend">
               { !slots.prepend ? (
@@ -193,38 +196,26 @@ export const VBreadcrumbs = genericComponent<new <T extends BreadcrumbItem>(
               <VBreadcrumbsDivider />
 
               <VBreadcrumbsItem
-                disabled={ false }
-                onClick={ onClickEllipsis }
+                tabindex="0"
+                onClick={ props.collapseInMenu ? noop : onClickEllipsis }
+                class="v-breadcrumbs-item--ellipsis"
               >
+                { props.ellipsis }
                 { props.collapseInMenu ? (
-                <VMenu>
-                  {{
-                    activator: ({ props: activatorProps }) => (
-                      <VBtn
-                        icon="mdi-dots-horizontal"
-                        variant="text"
-                        size="x-small"
-                        { ...activatorProps }
-                      />
-                    ),
-                    default: () => (
-                      <VList>
-                        { items.value.slice(1, items.value.length - 1).map(({ item }, index) => (
-                          <VListItem key={ index } value={ index } component="a" href={ 'href' in item ? item.href : undefined }>
-                            <VListItemTitle>{ item.title }</VListItemTitle>
-                          </VListItem>
-                        ))}
-                      </VList>
-                    ),
-                  }}
-                </VMenu>
-                ) : (
-                  <VBtn
-                    icon="mdi-dots-horizontal"
-                    variant="text"
-                    size="x-small"
-                  />
-                )}
+                  <VMenu activator="parent">
+                    {{
+                      default: () => (
+                        <VList>
+                          { items.value.slice(1, items.value.length - 1).map(({ item }, index) => (
+                            <VListItem key={ index } value={ index } component="a" href={ 'href' in item ? item.href : undefined }>
+                              <VListItemTitle>{ item.title }</VListItemTitle>
+                            </VListItem>
+                          ))}
+                        </VList>
+                      ),
+                    }}
+                  </VMenu>
+                ) : null }
               </VBreadcrumbsItem>
 
               <VBreadcrumbsDivider />

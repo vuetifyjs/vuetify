@@ -1,5 +1,5 @@
 <template>
-  <v-breadcrumbs :items="items" :max-items="3" collapse-in-menu>
+  <v-breadcrumbs :items="items" :total-visible="3" collapse-in-menu>
   </v-breadcrumbs>
 </template>
 
