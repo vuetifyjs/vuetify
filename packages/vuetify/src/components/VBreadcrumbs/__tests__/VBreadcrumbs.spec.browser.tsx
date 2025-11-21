@@ -42,7 +42,7 @@ describe('VBreadcrumbs', () => {
 
   it('should use color', () => {
     render(() => (
-      <VBreadcrumbs items={['hello', 'world']} color="primary"></VBreadcrumbs>
+      <VBreadcrumbs items={['hello', 'world']} color="primary" activeColor="primary"></VBreadcrumbs>
     ))
 
     const items = screen.getAllByCSS('.v-breadcrumbs-item')

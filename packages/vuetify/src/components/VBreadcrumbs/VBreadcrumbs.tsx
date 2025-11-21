@@ -55,6 +55,12 @@ export const makeVBreadcrumbsProps = propsFactory({
     default: () => ([]),
   },
   itemProps: Boolean,
+  listProps: {
+    type: Object as PropType<VList['$props']>,
+  },
+  menuProps: {
+    type: Object as PropType<VMenu['$props']>,
+  },
   totalVisible: Number,
 
   ...makeComponentProps(),
@@ -72,6 +78,7 @@ export const VBreadcrumbs = genericComponent<new <T extends BreadcrumbItem>(
     title: { item: InternalBreadcrumbItem, index: number }
     divider: { item: T, index: number }
     item: { item: InternalBreadcrumbItem, index: number }
+    'list-item': { item: InternalBreadcrumbItem, index: number }
     default: never
   }
 ) => GenericProps<typeof props, typeof slots>>()({
@@ -99,15 +106,15 @@ export const VBreadcrumbs = genericComponent<new <T extends BreadcrumbItem>(
     const items = computed(() => props.items.map(item => {
       return typeof item === 'string' ? { item: { title: item }, raw: item } : { item, raw: item }
     }))
-    const showEllipsis = toRef(() => props.totalVisible ? items.value.length > props.totalVisible : false)
-    const enableEllipsis = ref(showEllipsis.value)
+    const ellipsisEnabled = toRef(() => props.totalVisible ? items.value.length > props.totalVisible : false)
+    const hasEllipsis = ref(ellipsisEnabled.value)
 
     const onClickEllipsis = () => {
-      enableEllipsis.value = false
+      hasEllipsis.value = false
     }
 
-    watch(showEllipsis, (value: boolean) => {
-      enableEllipsis.value = value
+    watch(ellipsisEnabled, (value: boolean) => {
+      hasEllipsis.value = value
     })
 
     useRender(() => {
@@ -153,12 +160,13 @@ export const VBreadcrumbs = genericComponent<new <T extends BreadcrumbItem>(
             </li>
           )}
 
-          { !enableEllipsis.value && items.value.map(({ item, raw }, index, array) => (
+          { !hasEllipsis.value && items.value.map(({ item, raw }, index, array) => (
             <>
               { slots.item?.({ item, index }) ?? (
                 <VBreadcrumbsItem
                   key={ index }
                   disabled={ index >= array.length - 1 }
+                  active={ index === array.length - 1 }
                   { ...(typeof item === 'string' ? { title: item } : item) }
                   { ...(props.itemProps && isObject(raw) ? raw : {}) }
                   v-slots={{
@@ -177,7 +185,7 @@ export const VBreadcrumbs = genericComponent<new <T extends BreadcrumbItem>(
             </>
           ))}
 
-          { enableEllipsis.value && (
+          { hasEllipsis.value && (
             <>
               { (() => {
                 const { item } = items.value[0]
@@ -202,15 +210,23 @@ export const VBreadcrumbs = genericComponent<new <T extends BreadcrumbItem>(
               >
                 { props.ellipsis }
                 { props.collapseInMenu ? (
-                  <VMenu activator="parent">
+                  <VMenu
+                    activator="parent"
+                    { ...props.menuProps }
+                  >
                     {{
                       default: () => (
-                        <VList>
-                          { items.value.slice(1, items.value.length - 1).map(({ item }, index) => (
-                            <VListItem key={ index } value={ index } component="a" href={ 'href' in item ? item.href : undefined }>
-                              <VListItemTitle>{ item.title }</VListItemTitle>
-                            </VListItem>
-                          ))}
+                        <VList { ...props.listProps }>
+                          { items.value.slice(1, items.value.length - 1).map(({ item }, index) => {
+                            if (slots['list-item']) {
+                              return slots['list-item']({ item, index })
+                            }
+                            return (
+                              <VListItem key={ index } value={ index } href={ 'href' in item ? item.href : undefined }>
+                                <VListItemTitle>{ item.title }</VListItemTitle>
+                              </VListItem>
+                            )
+                          })}
                         </VList>
                       ),
                     }}
@@ -228,6 +244,7 @@ export const VBreadcrumbs = genericComponent<new <T extends BreadcrumbItem>(
                     { slots.item?.({ item, index: lastIndex }) ?? (
                       <VBreadcrumbsItem
                         disabled
+                        active
                         { ...(typeof item === 'string' ? { title: item } : item) }
                       />
                     )}
