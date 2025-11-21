@@ -12,6 +12,7 @@
   "slots": {
     "divider": "The slot used for dividers.",
     "prepend": "The slot used for prepend content.",
-    "title": "The slot used to display the title of each breadcrumb."
+    "title": "The slot used to display the title of each breadcrumb.",
+    "listItem": "The slot used for customizing each item inside the contextual menu when breadcrumbs items are collapsed."
   }
 }

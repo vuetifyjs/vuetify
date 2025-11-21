@@ -90,3 +90,9 @@ You can use the `totalVisible` prop to redefine the maximum number of breadcrumb
 You can use the `collapseInMenu` prop to display the collapsed breadcrumb items inside a dropdown menu.
 
 <ExamplesExample file="v-breadcrumbs/slot-collapse-in-menu" />
+
+#### Collapsed with custom menu
+
+You can use the `list-item` slot to customize how each breadcrumb item is rendered inside the collapsed menu when `collapseInMenu` is enabled.
+
+<ExamplesExample file="v-breadcrumbs/slot-list-item" />
