@@ -4,6 +4,9 @@ import { VTooltip } from '@/components/VTooltip'
 // Composables
 import { useDirectiveComponent } from '@/composables/directiveComponent'
 
+// Utilities
+import { isObject } from '@/util'
+
 // Types
 import type { DirectiveBinding } from 'vue'
 import type { Anchor } from '@/util'
