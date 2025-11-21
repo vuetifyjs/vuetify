@@ -14,8 +14,12 @@ export interface TooltipDirectiveBinding extends Omit<DirectiveBinding<string>, 
 }
 
 export const Tooltip = useDirectiveComponent<TooltipDirectiveBinding>(VTooltip, binding => {
+  const disabled = isObject(binding.value)
+    ? !binding.value.text
+    : ['', false, null].includes(binding.value) // undefined means true
+
   return {
-    activator: (binding.value === null || binding.value === false) ? null : 'parent',
+    activator: disabled ? null : 'parent',
     location: binding.arg?.replace('-', ' '),
     text: typeof binding.value === 'boolean' ? undefined : binding.value,
   }
