@@ -78,3 +78,15 @@ To customize the divider, use the `divider` slot.
 You can use the `title` slot to customize each breadcrumb title.
 
 <ExamplesExample file="v-breadcrumbs/slot-title" />
+
+#### Collapsed breadcrumbs
+
+You can use the `maxItems` prop to redefine the maximum number of breadcrumb items displayed before the component collapses.
+
+<ExamplesExample file="v-breadcrumbs/slot-max-items" />
+
+#### Collapsed with menu
+
+You can use the `collapseInMenu` prop to display the collapsed breadcrumb items inside a dropdown menu.
+
+<ExamplesExample file="v-breadcrumbs/slot-collapse-in-menu" />

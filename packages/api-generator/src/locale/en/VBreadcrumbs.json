@@ -1,10 +1,12 @@
 {
   "props": {
+    "collapseInMenu": "When true, overflowing breadcrumb items are collapsed into a contextual menu rather than a static ellipsis.",
     "divider": "Specifies the dividing character between items.",
     "icons": "Specifies that the dividers between items are [v-icon](/components/icons)s.",
     "justifyCenter": "Align the breadcrumbs center.",
     "justifyEnd": "Align the breadcrumbs at the end.",
-    "large": "Increase the font-size of the breadcrumb item text to 16px (14px default)."
+    "large": "Increase the font-size of the breadcrumb item text to 16px (14px default).",
+    "maxItems": "Determines how many breadcrumb items can be shown before middle items are collapsed."
   },
   "slots": {
     "divider": "The slot used for dividers.",

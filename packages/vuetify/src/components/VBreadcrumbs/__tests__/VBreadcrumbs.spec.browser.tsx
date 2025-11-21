@@ -110,4 +110,72 @@ describe('VBreadcrumbs', () => {
     expect(screen.getByText('/')).toBeVisible()
     expect(screen.getByText('-')).toBeVisible()
   })
+
+  it('should collapse into ellipsis when items exceed maxItems', async () => {
+    render(() => (
+      <VBreadcrumbs
+        items={['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']}
+        maxItems={ 5 }
+      />
+    ))
+
+    const ellipsisBtn = screen.getByCSS('button .mdi-dots-horizontal')
+    expect(ellipsisBtn).toBeVisible()
+  })
+
+  it('should expand all items when ellipsis is clicked', async () => {
+    render(() => (
+      <VBreadcrumbs
+        items={['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']}
+        maxItems={ 5 }
+      />
+    ))
+
+    const ellipsisBtn = screen.getByCSS('button .mdi-dots-horizontal')
+    expect(ellipsisBtn).toBeVisible()
+
+    await ellipsisBtn.click()
+
+    const items = screen.getAllByCSS('.v-breadcrumbs-item')
+    expect(items).toHaveLength(8)
+  })
+
+  it('should show a VMenu when collapseInMenu = true', async () => {
+    render(() => (
+      <VBreadcrumbs
+        items={[
+          { title: 'a' },
+          { title: 'b', href: '/b' },
+          { title: 'c', href: '/c' },
+          { title: 'd' },
+        ]}
+        maxItems={ 3 }
+        collapseInMenu
+      />
+    ))
+
+    const activator = screen.getByCSS('button .mdi-dots-horizontal')
+    expect(activator).toBeVisible()
+
+    await activator.click()
+
+    const listItems = screen.getAllByText(/b|c/)
+    expect(listItems).toHaveLength(2)
+  })
+
+  it('should not use VMenu when collapseInMenu = false', () => {
+    render(() => (
+      <VBreadcrumbs
+        items={['a', 'b', 'c', 'd']}
+        maxItems={ 3 }
+        collapseInMenu={ false }
+      />
+    ))
+
+    const activator = screen.getByCSS('button .mdi-dots-horizontal')
+    expect(activator).toBeVisible()
+
+    const menu = screen.queryByCSS('.v-menu')
+    expect(menu).toBeNull()
+  })
 })
