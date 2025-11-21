@@ -1,0 +1,37 @@
+@use '../../styles/tools';
+
+@include tools.layer('components') {
+  .v-command-palette {
+    &__list {
+      overflow-y: auto;
+
+      .v-list-item {
+        &--active {
+          background-color: rgba(var(--v-theme-primary), 0.12);
+
+          &:hover {
+            background-color: rgba(var(--v-theme-primary), 0.16);
+          }
+        }
+
+        &:hover {
+          background-color: rgba(var(--v-theme-on-surface), 0.08);
+        }
+
+        &:focus-visible {
+          outline: 2px solid rgb(var(--v-theme-primary));
+          outline-offset: -2px;
+        }
+      }
+
+      .v-list-subheader {
+        opacity: 0.7;
+        user-select: none;
+      }
+
+      .v-divider {
+        margin-block: 4px;
+      }
+    }
+  }
+}

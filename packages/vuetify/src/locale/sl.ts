@@ -124,6 +124,9 @@ export default {
     notEmpty: 'Izberite vsaj eno vrednost',
     pattern: 'Neveljaven format',
   },
+  command: {
+    search: 'Vnesite ukaz ali iščite...',
+  },
   hotkey: {
     then: 'nato',
     ctrl: 'Ctrl',
