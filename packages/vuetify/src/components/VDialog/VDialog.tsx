@@ -124,13 +124,6 @@ export const VDialog = genericComponent<OverlaySlots>()({
       emit('afterLeave')
     }
 
-    watch(isActive, async val => {
-      if (!val) {
-        await nextTick()
-        overlay.value!.activatorEl?.focus({ preventScroll: true })
-      }
-    })
-
     useRender(() => {
       const overlayProps = VOverlay.filterProps(props)
       const activatorProps = mergeProps({

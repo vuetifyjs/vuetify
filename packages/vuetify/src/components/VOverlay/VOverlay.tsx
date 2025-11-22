@@ -27,6 +27,7 @@ import vClickOutside from '@/directives/click-outside'
 import {
   computed,
   mergeProps,
+  nextTick,
   onBeforeUnmount,
   ref,
   Teleport,
@@ -170,8 +171,12 @@ export const VOverlay = genericComponent<OverlaySlots>()({
     const isMounted = useHydration()
     const { scopeId } = useScopeId()
 
+    let _returnFocusToActivator = true
+
     watch(() => props.disabled, v => {
-      if (v) isActive.value = false
+      if (v) {
+        closeWithoutReturningFocus()
+      }
     })
 
     const { contentStyles, updateLocation } = useLocationStrategies(props, {
@@ -192,7 +197,9 @@ export const VOverlay = genericComponent<OverlaySlots>()({
     function onClickOutside (e: MouseEvent) {
       emit('click:outside', e)
 
-      if (!props.persistent) isActive.value = false
+      if (!props.persistent) {
+        closeWithoutReturningFocus()
+      }
       else animateClick()
     }
 
@@ -202,6 +209,19 @@ export const VOverlay = genericComponent<OverlaySlots>()({
         !props.scrim || e.target === scrimEl.value || (e instanceof MouseEvent && e.shadowTarget === scrimEl.value)
       )
     }
+
+    function closeWithoutReturningFocus () {
+      _returnFocusToActivator = false
+      isActive.value = false
+      setTimeout(() => _returnFocusToActivator = true, 100)
+    }
+
+    watch(isActive, async val => {
+      if (!val && _returnFocusToActivator) {
+        await nextTick()
+        activatorEl.value?.focus({ preventScroll: true })
+      }
+    })
 
     IN_BROWSER && watch(isActive, val => {
       if (val) {
@@ -241,8 +261,11 @@ export const VOverlay = genericComponent<OverlaySlots>()({
       useBackButton(router, next => {
         if (globalTop.value && isActive.value) {
           next(false)
-          if (!props.persistent) isActive.value = false
-          else animateClick()
+          if (!props.persistent) {
+            closeWithoutReturningFocus()
+          } else {
+            animateClick()
+          }
         } else {
           next()
         }
@@ -370,6 +393,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
       globalTop,
       localTop,
       updateLocation,
+      closeWithoutReturningFocus,
     }
   },
 })
