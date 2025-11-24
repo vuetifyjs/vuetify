@@ -244,10 +244,20 @@ export const VList = genericComponent<new <
     }
 
     function onFocus (e: FocusEvent) {
-      if (
+      if (props.navigationStrategy === 'track') {
+        if (!~navigationIndex.value) {
+          navigationIndex.value = 0
+        }
+      } else if (
         !isFocused.value &&
         !(e.relatedTarget && contentRef.value?.contains(e.relatedTarget as Node))
       ) focus()
+    }
+
+    function onBlur () {
+      if (props.navigationStrategy === 'track') {
+        navigationIndex.value = -1
+      }
     }
 
     function getNavigationDirection (key: string): 'next' | 'prev' | 'first' | 'last' | null {
@@ -373,6 +383,7 @@ export const VList = genericComponent<new <
           onFocusin={ onFocusin }
           onFocusout={ onFocusout }
           onFocus={ onFocus }
+          onBlur={ onBlur }
           onKeydown={ onKeydown }
           onMousedown={ onMousedown }
         >
