@@ -124,6 +124,9 @@ export default {
     notEmpty: 'Пожалуйста, выберите хотя бы одно значение',
     pattern: 'Недопустимый формат',
   },
+  command: {
+    search: 'Введите команду или введите...',
+  },
   hotkey: {
     then: 'затем',
     ctrl: 'Ctrl',

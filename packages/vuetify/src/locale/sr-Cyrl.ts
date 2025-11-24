@@ -124,6 +124,9 @@ export default {
     notEmpty: 'Изаберите бар једну вредност',
     pattern: 'Неважећи формат',
   },
+  command: {
+    search: 'Унесите команду или претражите...',
+  },
   hotkey: {
     then: 'затим',
     ctrl: 'Ctrl',

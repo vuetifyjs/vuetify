@@ -16,13 +16,14 @@ import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { IconValue } from '@/composables/icons'
 import { makeItemsProps } from '@/composables/list-items'
 import { makeNestedProps, useNested } from '@/composables/nested/nested'
+import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeVariantProps } from '@/composables/variant'
 
 // Utilities
-import { computed, ref, shallowRef, toRef } from 'vue'
+import { computed, ref, shallowRef, toRef, watch } from 'vue'
 import {
   EventProp,
   focusChild,
@@ -105,6 +106,11 @@ export const makeVListProps = propsFactory({
   },
   slim: Boolean,
   nav: Boolean,
+  navigationStrategy: {
+    type: String as PropType<'focus' | 'track'>,
+    default: 'focus',
+  },
+  navigationIndex: Number,
 
   'onClick:open': EventProp<[{ id: unknown, value: boolean, path: unknown[] }]>(),
   'onClick:select': EventProp<[{ id: unknown, value: boolean, path: unknown[] }]>(),
@@ -155,12 +161,13 @@ export const VList = genericComponent<new <
     'update:selected': (value: unknown) => true,
     'update:activated': (value: unknown) => true,
     'update:opened': (value: unknown) => true,
+    'update:navigationIndex': (value: number) => true,
     'click:open': (value: { id: unknown, value: boolean, path: unknown[] }) => true,
     'click:activate': (value: { id: unknown, value: boolean, path: unknown[] }) => true,
     'click:select': (value: { id: unknown, value: boolean, path: unknown[] }) => true,
   },
 
-  setup (props, { slots }) {
+  setup (props, { slots, emit }) {
     const { items } = useListItems(props)
     const { themeClasses } = provideTheme(props)
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.bgColor)
@@ -169,12 +176,21 @@ export const VList = genericComponent<new <
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props)
-    const { children, open, parents, select, getPath } = useNested(props)
+
+    const scrollToActive = toRef(() => props.navigationStrategy === 'track')
+    const { children, open, parents, select, activate, getPath } = useNested(props, scrollToActive)
     const lineClasses = toRef(() => props.lines ? `v-list--${props.lines}-line` : undefined)
     const activeColor = toRef(() => props.activeColor)
     const baseColor = toRef(() => props.baseColor)
     const color = toRef(() => props.color)
     const isSelectable = toRef(() => (props.selectable || props.activatable))
+
+    const navigationIndex = useProxiedModel(
+      props,
+      'navigationIndex',
+      -1,
+      v => v ?? -1
+    )
 
     createList({
       filterable: props.filterable,
@@ -199,11 +215,22 @@ export const VList = genericComponent<new <
         nav: toRef(() => props.nav),
         slim: toRef(() => props.slim),
         variant: toRef(() => props.variant),
+        tabindex: toRef(() => props.navigationStrategy === 'track' ? -1 : undefined),
       },
     })
 
     const isFocused = shallowRef(false)
     const contentRef = ref<HTMLElement>()
+
+    watch(navigationIndex, async index => {
+      if (props.navigationStrategy !== 'track' || index === -1) return
+
+      const item = items.value[index]
+      if (item && item.type !== 'divider' && item.type !== 'subheader') {
+        activate(item.value, true)
+      }
+    })
+
     function onFocusin (e: FocusEvent) {
       isFocused.value = true
     }
@@ -219,6 +246,50 @@ export const VList = genericComponent<new <
       ) focus()
     }
 
+    function getNavigationDirection (key: string): 'next' | 'prev' | 'first' | 'last' | null {
+      switch (key) {
+        case 'ArrowDown': return 'next'
+        case 'ArrowUp': return 'prev'
+        case 'Home': return 'first'
+        case 'End': return 'last'
+        default: return null
+      }
+    }
+
+    function getNextIndex (direction: 'next' | 'prev' | 'first' | 'last'): number {
+      const itemCount = items.value.length
+      if (itemCount === 0) return -1
+
+      let nextIndex: number
+
+      if (direction === 'first') {
+        nextIndex = 0
+      } else if (direction === 'last') {
+        nextIndex = itemCount - 1
+      } else {
+        nextIndex = navigationIndex.value + (direction === 'next' ? 1 : -1)
+
+        if (nextIndex < 0) nextIndex = itemCount - 1
+        if (nextIndex >= itemCount) nextIndex = 0
+      }
+
+      const startIndex = nextIndex
+      let attempts = 0
+      while (attempts < itemCount) {
+        const item = items.value[nextIndex]
+        if (item && item.type !== 'divider' && item.type !== 'subheader') {
+          return nextIndex
+        }
+        nextIndex += direction === 'next' || direction === 'last' ? 1 : -1
+        if (nextIndex < 0) nextIndex = itemCount - 1
+        if (nextIndex >= itemCount) nextIndex = 0
+        if (nextIndex === startIndex) return -1
+        attempts++
+      }
+
+      return -1
+    }
+
     function onKeydown (e: KeyboardEvent) {
       const target = e.target as HTMLElement
 
@@ -228,19 +299,19 @@ export const VList = genericComponent<new <
         return
       }
 
-      if (e.key === 'ArrowDown') {
-        focus('next')
-      } else if (e.key === 'ArrowUp') {
-        focus('prev')
-      } else if (e.key === 'Home') {
-        focus('first')
-      } else if (e.key === 'End') {
-        focus('last')
-      } else {
-        return
-      }
+      const direction = getNavigationDirection(e.key)
 
-      e.preventDefault()
+      if (direction !== null) {
+        e.preventDefault()
+        if (props.navigationStrategy === 'track') {
+          const nextIdx = getNextIndex(direction)
+          if (nextIdx !== -1) {
+            navigationIndex.value = nextIdx
+          }
+        } else {
+          focus(direction)
+        }
+      }
     }
 
     function onMousedown (e: MouseEvent) {
@@ -303,6 +374,7 @@ export const VList = genericComponent<new <
       children,
       parents,
       getPath,
+      navigationIndex,
     }
   },
 })

@@ -78,6 +78,7 @@ The following is a list of available and up-and-coming components for use with L
 |------------------------------------------------------|------------------------------------------------------------|------------------------------------------------------------|
 | [v-calendar](/components/calendars/)                 | A calendar component                                       | [v3.10.0](/getting-started/release-notes/?version=v3.10.0) |
 | [v-color-input](/components/color-inputs/)           | A color input component                                    | [vTBD](/getting-started/release-notes/?version=vTBD)       |
+| [v-command-palette](/components/command-palettes/)   | A keyboard-driven command palette component                | [vTBD](/getting-started/release-notes/?version=vTBD)       |
 | [v-date-input](/components/date-inputs/)             | A date input component                                     | [v3.6.0](/getting-started/release-notes/?version=v3.6.0)   |
 | [v-pull-to-refresh](/components/pull-to-refresh/)    | A component to update content by screen swipes             | [v3.6.0](/getting-started/release-notes/?version=v3.6.0)   |
 | [v-stepper-vertical](/components/vertical-steppers/) | Vertical version of v-stepper                              | [v3.6.5](/getting-started/release-notes/?version=v3.6.5)   |
