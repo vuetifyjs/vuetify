@@ -161,7 +161,6 @@ describe('VBreadcrumbs', () => {
 
     await userEvent.click(ellipsis)
 
-    // Le menu doit maintenant être rendu
     const listItems = screen.getAllByText(/b|c/)
     expect(listItems).toHaveLength(2)
   })
