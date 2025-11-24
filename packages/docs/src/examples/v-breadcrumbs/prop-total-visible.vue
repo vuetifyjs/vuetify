@@ -1,5 +1,7 @@
 <template>
-  <v-breadcrumbs :items="items" :total-visible="3">
+  <v-breadcrumbs :items="items" :total-visible="4">
+  </v-breadcrumbs>
+  <v-breadcrumbs :items="items" :total-visible="3" collapse-in-menu>
   </v-breadcrumbs>
 </template>
 
