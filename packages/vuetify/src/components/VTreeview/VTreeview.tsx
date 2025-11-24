@@ -8,7 +8,7 @@ import { makeFilterProps, useFilter } from '@/composables/filter'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, provide, ref, toRaw, toRef } from 'vue'
+import { computed, provide, ref, toRaw, toRef, watch } from 'vue'
 import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
@@ -101,6 +101,23 @@ export const VTreeview = genericComponent<new <T>(
           ...getChildren(itemVal),
         ].map(toRaw)
       }))
+    })
+
+    watch(filteredItems, val => {
+      if (!search.value) return
+      const getPath = vListRef.value?.getPath
+      if (!getPath) return
+      const filteredItemsAncestors = val.flatMap(item => {
+        const itemVal = props.returnObject ? item.raw : item.props.value
+        return getPath(itemVal).slice(0, -1)
+      })
+      const newOpened = new Set([
+        ...opened.value,
+        ...filteredItemsAncestors
+      ])
+      if (opened.value.length !== newOpened.size) {
+        emit('update:opened', [...newOpened])
+      }
     })
 
     function getChildren (id: unknown) {
