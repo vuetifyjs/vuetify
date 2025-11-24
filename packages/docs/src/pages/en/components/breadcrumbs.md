@@ -59,6 +59,12 @@ Breadcrumbs separator can be set using `divider` property.
 
 <ExamplesExample file="v-breadcrumbs/prop-divider" />
 
+#### Total visible
+
+You can use the `total-visible` prop to limit the visible items. Items that exceed limit are displayed after clicking on "..." item. The default behavior can be changed with `collapse-in-menu` to display the collapsed items inside a dropdown menu.
+
+<ExamplesExample file="v-breadcrumbs/prop-total-visible" />
+
 ### Slots
 
 #### Prepend
@@ -79,20 +85,8 @@ You can use the `title` slot to customize each breadcrumb title.
 
 <ExamplesExample file="v-breadcrumbs/slot-title" />
 
-#### Collapsed breadcrumbs
+#### Menu list item
 
-You can use the `totalVisible` prop to redefine the maximum number of breadcrumb items displayed before the component collapses.
-
-<ExamplesExample file="v-breadcrumbs/slot-total-visible" />
-
-#### Collapsed with menu
-
-You can use the `collapseInMenu` prop to display the collapsed breadcrumb items inside a dropdown menu.
-
-<ExamplesExample file="v-breadcrumbs/slot-collapse-in-menu" />
-
-#### Collapsed with custom menu
-
-You can use the `list-item` slot to customize how each breadcrumb item is rendered inside the collapsed menu when `collapseInMenu` is enabled.
+You can use the `list-item` slot to customize how each breadcrumb item is rendered inside the collapsed menu when `collapse-in-menu` is enabled.
 
 <ExamplesExample file="v-breadcrumbs/slot-list-item" />
