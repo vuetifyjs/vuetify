@@ -246,7 +246,7 @@ export const VList = genericComponent<new <
     function onFocus (e: FocusEvent) {
       if (props.navigationStrategy === 'track') {
         if (!~navigationIndex.value) {
-          navigationIndex.value = 0
+          navigationIndex.value = getNextIndex('first')
         }
       } else if (
         !isFocused.value &&
@@ -294,7 +294,7 @@ export const VList = genericComponent<new <
         if (item && item.type !== 'divider' && item.type !== 'subheader') {
           return nextIndex
         }
-        nextIndex += direction === 'next' || direction === 'last' ? 1 : -1
+        nextIndex += direction === 'next' || direction === 'first' ? 1 : -1
         if (nextIndex < 0) nextIndex = itemCount - 1
         if (nextIndex >= itemCount) nextIndex = 0
         if (nextIndex === startIndex) return -1
