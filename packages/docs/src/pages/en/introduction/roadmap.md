@@ -68,9 +68,9 @@ The following are the already released **minor** and **major** version updates. 
 
 ### v3.11 (Harbinger)
 
-- **Released:**
+- **Released:** November 2025
 - **Target Release:** Q4 2025
-- **Notes:** [v3.10 Release](/getting-started/release-notes/?version=v3.11.0)
+- **Notes:** [v3.11 Release](/getting-started/release-notes/?version=v3.11.0)
 - **Overview:**
   - Introduced 2 new components to the main framework from Labs:
     - [v-calendar](/components/calendars/)
