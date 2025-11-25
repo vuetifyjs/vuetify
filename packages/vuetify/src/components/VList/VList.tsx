@@ -23,7 +23,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeVariantProps } from '@/composables/variant'
 
 // Utilities
-import { computed, ref, shallowRef, toRef, useId } from 'vue'
+import { computed, ref, shallowRef, toRef, useId, watch } from 'vue'
 import {
   convertToUnit,
   EventProp,
@@ -209,6 +209,15 @@ export const VList = genericComponent<new <
       keyboardFocusedIndex: navigationIndex,
       navigationStrategy: navigationStrategyRef,
       uid,
+    })
+
+    watch(items, newItems => {
+      if (
+        props.navigationStrategy === 'track' &&
+        navigationIndex.value >= newItems.length
+      ) {
+        navigationIndex.value = -1
+      }
     })
 
     provideDefaults({
