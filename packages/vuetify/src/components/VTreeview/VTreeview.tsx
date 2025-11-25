@@ -113,7 +113,7 @@ export const VTreeview = genericComponent<new <T>(
       })
       const newOpened = new Set([
         ...opened.value,
-        ...filteredItemsAncestors
+        ...filteredItemsAncestors,
       ])
       if (opened.value.length !== newOpened.size) {
         emit('update:opened', [...newOpened])
