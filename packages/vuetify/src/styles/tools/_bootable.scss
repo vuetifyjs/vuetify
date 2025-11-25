@@ -1,3 +1,5 @@
-@mixin bootable()
-  &:not([data-booted="true"])
-    transition: none !important
+@mixin bootable {
+  &:not([data-booted="true"]) {
+    transition: none !important;
+  }
+}

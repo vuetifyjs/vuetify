@@ -1,5 +1,5 @@
 // Styles
-import './VNavigationDrawer.sass'
+import './VNavigationDrawer.scss'
 
 // Components
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'

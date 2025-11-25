@@ -1,5 +1,5 @@
 // Styles
-import './NAME.sass'
+import './NAME.scss'
 
 // Components
 

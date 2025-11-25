@@ -1,5 +1,5 @@
 // Styles
-import './VOtpInput.sass'
+import './VOtpInput.scss'
 
 // Components
 import { makeVFieldProps, VField } from '@/components/VField/VField'

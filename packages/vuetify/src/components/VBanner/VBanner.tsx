@@ -1,5 +1,5 @@
 // Styles
-import './VBanner.sass'
+import './VBanner.scss'
 
 // Components
 import { VBannerActions } from './VBannerActions'

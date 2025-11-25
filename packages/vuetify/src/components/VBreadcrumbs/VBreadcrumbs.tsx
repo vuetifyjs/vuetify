@@ -1,5 +1,5 @@
 // Styles
-import './VBreadcrumbs.sass'
+import './VBreadcrumbs.scss'
 
 // Components
 import { VBreadcrumbsDivider } from './VBreadcrumbsDivider'

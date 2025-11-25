@@ -1,5 +1,5 @@
 // Styles
-import './VAppBar.sass'
+import './VAppBar.scss'
 
 // Components
 import { makeVToolbarProps, VToolbar } from '@/components/VToolbar/VToolbar'

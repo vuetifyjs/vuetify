@@ -1,5 +1,5 @@
 // Styles
-import './VInfiniteScroll.sass'
+import './VInfiniteScroll.scss'
 
 // Components
 import { VBtn } from '@/components/VBtn'

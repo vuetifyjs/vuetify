@@ -1,5 +1,5 @@
 // Styles
-import './VColorPickerCanvas.sass'
+import './VColorPickerCanvas.scss'
 
 // Composables
 import { makeComponentProps } from '@/composables/component'

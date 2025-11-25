@@ -1,5 +1,5 @@
 // Styles
-import './VDataTable.sass'
+import './VDataTable.scss'
 
 // Components
 import { makeVDataTableFooterProps, VDataTableFooter } from './VDataTableFooter'

@@ -1,5 +1,5 @@
 // Styles
-import './VSelect.sass'
+import './VSelect.scss'
 
 // Components
 import { VDialogTransition } from '@/components/transitions'

@@ -1,5 +1,5 @@
 // Styles
-import './VRating.sass'
+import './VRating.scss'
 
 // Components
 import { VBtn } from '@/components/VBtn'

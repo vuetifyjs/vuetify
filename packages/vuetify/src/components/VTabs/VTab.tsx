@@ -1,5 +1,5 @@
 // Styles
-import './VTab.sass'
+import './VTab.scss'
 
 // Components
 import { makeVBtnProps, VBtn } from '@/components/VBtn/VBtn'

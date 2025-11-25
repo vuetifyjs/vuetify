@@ -1,5 +1,5 @@
 // Styles
-import './VRadioGroup.sass'
+import './VRadioGroup.scss'
 
 // Components
 import { makeVInputProps, VInput } from '@/components/VInput/VInput'

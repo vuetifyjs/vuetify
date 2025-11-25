@@ -1,5 +1,5 @@
 // Styles
-import './VRipple.sass'
+import './VRipple.scss'
 
 // Utilities
 import { isObject } from '@/util'

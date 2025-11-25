@@ -1,5 +1,5 @@
 // Styles
-import './VFileInput.sass'
+import './VFileInput.scss'
 
 // Components
 import { VChip } from '@/components/VChip'

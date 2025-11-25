@@ -1,5 +1,5 @@
 // Styles
-import './VColorPicker.sass'
+import './VColorPicker.scss'
 
 // Components
 import { VColorPickerCanvas } from './VColorPickerCanvas'

@@ -1,5 +1,5 @@
 // Styles
-import './VListItem.sass'
+import './VListItem.scss'
 
 // Components
 import { VListItemSubtitle } from './VListItemSubtitle'

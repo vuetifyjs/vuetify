@@ -1,5 +1,5 @@
 // Styles
-import './VPullToRefresh.sass'
+import './VPullToRefresh.scss'
 
 // Components
 import { VIcon } from '@/components/VIcon'

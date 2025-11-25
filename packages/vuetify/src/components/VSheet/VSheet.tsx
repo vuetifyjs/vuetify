@@ -1,5 +1,5 @@
 // Styles
-import './VSheet.sass'
+import './VSheet.scss'
 
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'

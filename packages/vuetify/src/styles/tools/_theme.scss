@@ -1,4 +1,6 @@
-@mixin theme ($background, $color)
-  &
-    background: $background
-    color: $color
+@mixin theme($background, $color) {
+  & {
+    background: $background;
+    color: $color;
+  }
+}

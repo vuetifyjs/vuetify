@@ -1,5 +1,5 @@
 // Styles
-import './VAlert.sass'
+import './VAlert.scss'
 
 // Components
 import { VAlertTitle } from './VAlertTitle'

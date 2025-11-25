@@ -1,5 +1,5 @@
 // Styles
-import './VNumberInput.sass'
+import './VNumberInput.scss'
 
 // Components
 import { VBtn } from '@/components/VBtn'

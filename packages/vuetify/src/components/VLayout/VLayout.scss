@@ -1,11 +1,14 @@
-@use '../../styles/tools'
+@use '../../styles/tools';
 
-@include tools.layer('components')
-  .v-layout
-    --v-scrollbar-offset: 0px
-    display: flex
-    flex: 1 1 auto
+@include tools.layer('components') {
+  .v-layout {
+    --v-scrollbar-offset: 0px;
+    display: flex;
+    flex: 1 1 auto;
 
-    &--full-height
-      --v-scrollbar-offset: inherit
-      height: 100%
+    &--full-height {
+      --v-scrollbar-offset: inherit;
+      height: 100%;
+    }
+  }
+}

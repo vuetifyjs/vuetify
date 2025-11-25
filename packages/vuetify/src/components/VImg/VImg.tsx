@@ -1,5 +1,5 @@
 // Styles
-import './VImg.sass'
+import './VImg.scss'
 
 // Components
 import { makeVResponsiveProps, VResponsive } from '@/components/VResponsive/VResponsive'

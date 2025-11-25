@@ -1,5 +1,5 @@
 // Styles
-import './VDivider.sass'
+import './VDivider.scss'
 
 // Composables
 import { useTextColor } from '@/composables/color'

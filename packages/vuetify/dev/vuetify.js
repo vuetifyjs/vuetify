@@ -1,5 +1,5 @@
 import '@mdi/font/css/materialdesignicons.css'
-import '@/styles/main.sass'
+import '@/styles/main.scss'
 
 import { createVuetify } from '@/framework'
 import * as directives from '@/directives'

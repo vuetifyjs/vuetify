@@ -1,5 +1,5 @@
 // Styles
-import './VStepper.sass'
+import './VStepper.scss'
 
 // Components
 import { VStepperSymbol } from './shared'

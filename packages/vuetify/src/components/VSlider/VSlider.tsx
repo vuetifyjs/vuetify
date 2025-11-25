@@ -1,5 +1,5 @@
 // Styles
-import './VSlider.sass'
+import './VSlider.scss'
 
 // Components
 import { VSliderThumb } from './VSliderThumb'

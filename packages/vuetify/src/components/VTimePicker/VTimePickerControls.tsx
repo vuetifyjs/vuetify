@@ -1,5 +1,5 @@
 // Styles
-import './VTimePickerControls.sass'
+import './VTimePickerControls.scss'
 
 // Components
 import { VTimePickerField } from './VTimePickerField'

@@ -1,5 +1,5 @@
 // Styles
-import './VSelectionControl.sass'
+import './VSelectionControl.scss'
 
 // Components
 import { VIcon } from '@/components/VIcon'

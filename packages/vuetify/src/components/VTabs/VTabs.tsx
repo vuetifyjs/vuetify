@@ -1,5 +1,5 @@
 // Styles
-import './VTabs.sass'
+import './VTabs.scss'
 
 // Components
 import { makeVTabProps, VTab } from './VTab'

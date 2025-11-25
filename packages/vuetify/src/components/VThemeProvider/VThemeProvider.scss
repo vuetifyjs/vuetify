@@ -1,6 +1,8 @@
-@use '../../styles/tools'
+@use '../../styles/tools';
 
-@include tools.layer('components')
-  .v-theme-provider
-    background: rgb(var(--v-theme-background))
-    color: rgb(var(--v-theme-on-background))
+@include tools.layer('components') {
+  .v-theme-provider {
+    background: rgb(var(--v-theme-background));
+    color: rgb(var(--v-theme-on-background));
+  }
+}

@@ -1,7 +1,7 @@
 /* eslint-disable local-rules/sort-imports */
 
 // Styles
-import './styles/main.sass'
+import './styles/main.scss'
 
 // Components
 import * as blueprints from './blueprints'

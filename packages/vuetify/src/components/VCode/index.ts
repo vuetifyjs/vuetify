@@ -1,5 +1,5 @@
 // Styles
-import './VCode.sass'
+import './VCode.scss'
 
 // Utilities
 import { createSimpleFunctional } from '@/util'

@@ -1,10 +1,13 @@
-@use '../../styles/settings'
-@use '../../styles/tools'
+@use '../../styles/settings';
+@use '../../styles/tools';
 
-@include tools.layer('components')
-  .v-layout-item
-    position: absolute
-    transition: 0.2s settings.$standard-easing
+@include tools.layer('components') {
+  .v-layout-item {
+    position: absolute;
+    transition: 0.2s settings.$standard-easing;
+  }
 
-  .v-layout-item--absolute
-    position: absolute
+  .v-layout-item--absolute {
+    position: absolute;
+  }
+}

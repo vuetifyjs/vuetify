@@ -1,11 +1,15 @@
-@use 'sass:selector'
+@use 'sass:selector';
 
-@mixin rtl()
+@mixin rtl {
   @at-root #{selector.append('.v-locale--is-rtl', &)},
-  .v-locale--is-rtl &
-    @content
+  .v-locale--is-rtl & {
+    @content;
+  }
+}
 
-@mixin ltr()
+@mixin ltr {
   @at-root #{selector.append('.v-locale--is-ltr', &)},
-  .v-locale--is-ltr &
-    @content
+  .v-locale--is-ltr & {
+    @content;
+  }
+}

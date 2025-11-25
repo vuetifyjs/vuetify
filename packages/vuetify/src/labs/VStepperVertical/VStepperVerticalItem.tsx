@@ -1,5 +1,5 @@
 // Styles
-import './VStepperVerticalItem.sass'
+import './VStepperVerticalItem.scss'
 
 // Components
 import { VStepperVerticalActions } from './VStepperVerticalActions'

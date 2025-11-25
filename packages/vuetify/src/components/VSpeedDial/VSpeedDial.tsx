@@ -1,5 +1,5 @@
 // Styles
-import './VSpeedDial.sass'
+import './VSpeedDial.scss'
 
 // Components
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'

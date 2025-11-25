@@ -1,5 +1,5 @@
 // Styles
-import './VTreeviewItem.sass'
+import './VTreeviewItem.scss'
 
 // Components
 import { VAvatar } from '@/components/VAvatar'

@@ -1,5 +1,5 @@
 // Styles
-import './VLocaleProvider.sass'
+import './VLocaleProvider.scss'
 
 // Composables
 import { makeComponentProps } from '@/composables/component'

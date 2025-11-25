@@ -1,5 +1,5 @@
 // Styles
-import './VFileUpload.sass'
+import './VFileUpload.scss'
 
 // Components
 import { VFileUploadItem } from './VFileUploadItem'

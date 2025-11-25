@@ -1,5 +1,5 @@
 // Styles
-import '../VSlider/VSlider.sass'
+import '../VSlider/VSlider.scss'
 
 // Components
 import { makeVInputProps, VInput } from '@/components/VInput/VInput'

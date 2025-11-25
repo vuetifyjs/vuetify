@@ -1,7 +1,7 @@
 /* eslint-disable complexity */
 
 // Styles
-import './VCard.sass'
+import './VCard.scss'
 
 // Components
 import { VCardActions } from './VCardActions'

@@ -1,5 +1,5 @@
 // Styles
-import './VPie.sass'
+import './VPie.scss'
 
 // Components
 import { makeVPieSegmentProps, VPieSegment } from './VPieSegment'

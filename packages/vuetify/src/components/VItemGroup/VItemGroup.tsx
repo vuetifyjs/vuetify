@@ -1,5 +1,5 @@
 // Styles
-import './VItemGroup.sass'
+import './VItemGroup.scss'
 
 // Composables
 import { makeComponentProps } from '@/composables/component'

@@ -1,5 +1,5 @@
 // Styles
-import './VLabel.sass'
+import './VLabel.scss'
 
 // Composables
 import { makeComponentProps } from '@/composables/component'

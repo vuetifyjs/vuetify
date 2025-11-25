@@ -1,12 +1,15 @@
-@use '../../styles/tools'
-@use './variables' as *
+@use '../../styles/tools';
+@use './variables' as *;
 
-@include tools.layer('components')
-  .v-selection-control-group
-    grid-area: $selection-control-group-grid-area
-    display: flex
-    flex-direction: column
+@include tools.layer('components') {
+  .v-selection-control-group {
+    grid-area: $selection-control-group-grid-area;
+    display: flex;
+    flex-direction: column;
 
-    &--inline
-      flex-direction: row
-      flex-wrap: wrap
+    &--inline {
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+  }
+}

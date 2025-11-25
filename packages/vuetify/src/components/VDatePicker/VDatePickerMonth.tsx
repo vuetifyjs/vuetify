@@ -1,5 +1,5 @@
 // Styles
-import './VDatePickerMonth.sass'
+import './VDatePickerMonth.scss'
 
 // Components
 import { VBadge } from '@/components/VBadge'

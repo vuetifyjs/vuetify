@@ -1,5 +1,5 @@
 // Styles
-import './VBadge.sass'
+import './VBadge.scss'
 
 // Components
 import { VIcon } from '@/components/VIcon'

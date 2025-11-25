@@ -1,5 +1,5 @@
 // Styles
-import './calendarWithEvents.sass'
+import './calendarWithEvents.scss'
 
 // Composables
 import { useCalendarBase } from './calendarBase'

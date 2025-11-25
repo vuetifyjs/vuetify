@@ -1,5 +1,5 @@
 // Styles
-import './VAutocomplete.sass'
+import './VAutocomplete.scss'
 
 // Components
 import { VAvatar } from '@/components/VAvatar'

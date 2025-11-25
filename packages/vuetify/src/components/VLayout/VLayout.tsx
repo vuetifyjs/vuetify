@@ -1,5 +1,5 @@
 // Styles
-import './VLayout.sass'
+import './VLayout.scss'
 
 // Composables
 import { makeComponentProps } from '@/composables/component'

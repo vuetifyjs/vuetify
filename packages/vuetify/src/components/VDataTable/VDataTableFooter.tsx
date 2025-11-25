@@ -1,5 +1,5 @@
 // Styles
-import './VDataTableFooter.sass'
+import './VDataTableFooter.scss'
 
 // Components
 import { VPagination } from '@/components/VPagination'

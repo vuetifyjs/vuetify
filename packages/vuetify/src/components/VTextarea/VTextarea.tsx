@@ -1,6 +1,6 @@
 // Styles
-import './VTextarea.sass'
-import '../VTextField/VTextField.sass'
+import './VTextarea.scss'
+import '../VTextField/VTextField.scss'
 
 // Components
 import { VCounter } from '@/components/VCounter/VCounter'

@@ -1,5 +1,5 @@
 // Styles
-import './VCombobox.sass'
+import './VCombobox.scss'
 
 // Components
 import { VAvatar } from '@/components/VAvatar'

@@ -1,5 +1,5 @@
 // Styles
-import './VApp.sass'
+import './VApp.scss'
 
 // Composables
 import { makeComponentProps } from '@/composables/component'

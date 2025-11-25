@@ -1,5 +1,5 @@
 // Styles
-import './VTimePicker.sass'
+import './VTimePicker.scss'
 
 // Components
 import { VTimePickerClock } from './VTimePickerClock'

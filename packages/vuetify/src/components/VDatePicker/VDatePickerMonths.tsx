@@ -1,5 +1,5 @@
 // Styles
-import './VDatePickerMonths.sass'
+import './VDatePickerMonths.scss'
 
 // Components
 import { VBtn } from '@/components/VBtn'

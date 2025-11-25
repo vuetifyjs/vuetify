@@ -1,5 +1,5 @@
 // Styles
-import './VTable.sass'
+import './VTable.scss'
 
 // Composables
 import { makeComponentProps } from '@/composables/component'

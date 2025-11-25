@@ -1,6 +1,6 @@
 /* eslint-disable complexity */
 // Styles
-import './VChip.sass'
+import './VChip.scss'
 
 // Components
 import { VExpandXTransition } from '@/components/transitions'

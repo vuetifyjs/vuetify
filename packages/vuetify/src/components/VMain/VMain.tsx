@@ -1,5 +1,5 @@
 // Styles
-import './VMain.sass'
+import './VMain.scss'
 
 // Composables
 import { makeComponentProps } from '@/composables/component'
