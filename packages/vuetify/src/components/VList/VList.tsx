@@ -211,11 +211,8 @@ export const VList = genericComponent<new <
       uid,
     })
 
-    watch(items, newItems => {
-      if (
-        props.navigationStrategy === 'track' &&
-        navigationIndex.value >= newItems.length
-      ) {
+    watch(items, () => {
+      if (props.navigationStrategy === 'track') {
         navigationIndex.value = -1
       }
     })
