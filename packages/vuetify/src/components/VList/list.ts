@@ -1,5 +1,5 @@
 // Utilities
-import { computed, inject, provide, shallowRef } from 'vue'
+import { computed, inject, provide, shallowRef, useId } from 'vue'
 
 // Types
 import type { InjectionKey, MaybeRefOrGetter, Ref } from 'vue'
@@ -24,12 +24,14 @@ export const ListKey: InjectionKey<{
   updateHasPrepend: (value: boolean) => void
   keyboardFocusedIndex: Ref<number>
   navigationStrategy: Ref<'focus' | 'track'>
+  uid: string
 }> = Symbol.for('vuetify:list')
 
 type InjectedListOptions = {
   filterable: MaybeRefOrGetter<boolean>
   keyboardFocusedIndex?: Ref<number>
   navigationStrategy?: Ref<'focus' | 'track'>
+  uid?: string
 }
 
 export function createList (options: InjectedListOptions = { filterable: false }) {
@@ -39,12 +41,14 @@ export function createList (options: InjectedListOptions = { filterable: false }
     updateHasPrepend: () => null,
     keyboardFocusedIndex: shallowRef(-1),
     navigationStrategy: shallowRef('focus' as 'focus' | 'track'),
+    uid: '',
   })
 
   const {
     filterable,
     keyboardFocusedIndex = parent.keyboardFocusedIndex,
     navigationStrategy = parent.navigationStrategy,
+    uid = parent.uid || useId(),
   } = options
 
   const data = {
@@ -55,6 +59,7 @@ export function createList (options: InjectedListOptions = { filterable: false }
     },
     keyboardFocusedIndex,
     navigationStrategy,
+    uid,
   }
 
   provide(ListKey, data)

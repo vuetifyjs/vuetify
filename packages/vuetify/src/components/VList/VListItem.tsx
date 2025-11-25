@@ -280,7 +280,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
         <Tag
           { ...link.linkProps }
           ref={ rootEl }
-          id={ props.index !== undefined ? `v-list-item-${props.index}` : undefined }
+          id={ props.index !== undefined && list ? `v-list-item-${list.uid}-${props.index}` : undefined }
           class={[
             'v-list-item',
             {

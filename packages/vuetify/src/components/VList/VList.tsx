@@ -23,7 +23,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeVariantProps } from '@/composables/variant'
 
 // Utilities
-import { computed, ref, shallowRef, toRef } from 'vue'
+import { computed, ref, shallowRef, toRef, useId } from 'vue'
 import {
   convertToUnit,
   EventProp,
@@ -202,11 +202,13 @@ export const VList = genericComponent<new <
     )
 
     const navigationStrategyRef = toRef(() => props.navigationStrategy)
+    const uid = useId()
 
     createList({
       filterable: props.filterable,
       keyboardFocusedIndex: navigationIndex,
       navigationStrategy: navigationStrategyRef,
+      uid,
     })
 
     provideDefaults({
@@ -377,7 +379,7 @@ export const VList = genericComponent<new <
           role={ isSelectable.value ? 'listbox' : 'list' }
           aria-activedescendant={
             props.navigationStrategy === 'track' && navigationIndex.value >= 0
-              ? `v-list-item-${navigationIndex.value}`
+              ? `v-list-item-${uid}-${navigationIndex.value}`
               : undefined
           }
           onFocusin={ onFocusin }
