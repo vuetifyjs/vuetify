@@ -14,9 +14,12 @@
   </v-app>
 </template>
 
-<style lang="sass">
-#vue-component-framework
-  h1, h2, h3, h4, h5, h6
-    > a
-      display: none
+<style lang="scss">
+#vue-component-framework {
+  h1, h2, h3, h4, h5, h6 {
+    > a {
+      display: none;
+    }
+  }
+}
 </style>

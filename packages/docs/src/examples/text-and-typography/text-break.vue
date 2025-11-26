@@ -12,7 +12,8 @@
   </div>
 </template>
 
-<style lang="sass">
-  .custom-transform-class
-    text-transform: uppercase
+<style lang="scss">
+  .custom-transform-class {
+    text-transform: uppercase;
+  }
 </style>

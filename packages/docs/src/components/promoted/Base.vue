@@ -40,11 +40,14 @@
   }
 </script>
 
-<style lang="sass">
-  .v-app-ad
-    a
-      text-decoration: none
+<style lang="scss">
+  .v-app-ad {
+    a {
+      text-decoration: none;
+    }
 
-    .v-markdown p
-      margin-bottom: 0
+    .v-markdown p {
+      margin-bottom: 0;
+    }
+  }
 </style>

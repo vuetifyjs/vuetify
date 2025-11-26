@@ -52,8 +52,10 @@
   const tag = computed(() => isExternal.value ? 'a' : 'router-link')
 </script>
 
-<style lang="sass">
-  .app-link
-    p
-      margin-bottom: 0
+<style lang="scss">
+  .app-link {
+    p {
+      margin-bottom: 0;
+    }
+  }
 </style>

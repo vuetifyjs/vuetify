@@ -88,11 +88,14 @@
   }
 </script>
 
-<style lang="sass">
-  .v-vuetify--promoted
-    p
-      line-height: 1.1
+<style lang="scss">
+  .v-vuetify--promoted {
+    p {
+      line-height: 1.1;
+    }
 
-    .v-markdown p strong
-      font-weight: 700
+    .v-markdown p strong {
+      font-weight: 700;
+    }
+  }
 </style>

@@ -20,8 +20,10 @@
   //
 </script>
 
-<style lang="sass" scoped>
-  :deep(ul)
-    li > p
-      margin: 0
+<style lang="scss" scoped>
+  :deep(ul) {
+    li > p {
+      margin: 0;
+    }
+  }
 </style>

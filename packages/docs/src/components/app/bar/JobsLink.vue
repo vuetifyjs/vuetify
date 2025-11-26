@@ -26,7 +26,8 @@
   })
 </script>
 
-<style lang="sass">
-  .jobs-link .v-btn:not(:hover)::before
-    display: none
+<style lang="scss">
+  .jobs-link .v-btn:not(:hover)::before {
+    display: none;
+  }
 </style>

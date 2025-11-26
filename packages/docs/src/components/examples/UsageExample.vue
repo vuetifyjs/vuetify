@@ -218,13 +218,16 @@
   }
 </script>
 
-<style lang="sass" scoped>
-  .usage-example
-    ::v-deep(.v-text-field)
-      margin-bottom: 8px
+<style lang="scss" scoped>
+  .usage-example {
+    ::v-deep(.v-text-field) {
+      margin-bottom: 8px;
+    }
+  }
 
   // Hack to get around navigation-drawer default bgColor
   // TODO: find a better way
-  ::v-deep(.v-select__content .v-list)
-    background: rgb(var(--v-theme-surface)) !important
+  ::v-deep(.v-select__content .v-list) {
+    background: rgb(var(--v-theme-surface)) !important;
+  }
 </style>

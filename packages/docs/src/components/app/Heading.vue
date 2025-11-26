@@ -38,20 +38,23 @@
   const classes = computed(() => ['v-heading', 'mb-2', HEADING_CLASSES[props.level]])
 </script>
 
-<style lang="sass">
-  .v-heading
-    display: inline-block
-    position: relative
+<style lang="scss">
+  .v-heading {
+    display: inline-block;
+    position: relative;
 
-    > a
-      bottom: 0
-      font-size: .75em
-      left: 0
-      margin: 0 -.7em
-      position: absolute
-      right: 0
-      top: 0
+    > a {
+      bottom: 0;
+      font-size: .75em;
+      left: 0;
+      margin: 0 -.7em;
+      position: absolute;
+      right: 0;
+      top: 0;
 
-      &:not(:hover):not(:focus)
-        opacity: 0
+      &:not(:hover):not(:focus) {
+        opacity: 0;
+      }
+    }
+  }
 </style>
