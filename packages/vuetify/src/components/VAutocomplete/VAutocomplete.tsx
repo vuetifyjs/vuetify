@@ -598,6 +598,7 @@ export const VAutocomplete = genericComponent<new <
                     )
                     : undefined
 
+                  const closable = props.closableChips && !props.readonly && !form.isReadonly
                   if (hasSlot && !slotContent) return undefined
 
                   return (
@@ -616,7 +617,7 @@ export const VAutocomplete = genericComponent<new <
                         !slots.chip ? (
                           <VChip
                             key="chip"
-                            closable={ props.closableChips }
+                            closable={ closable }
                             size="small"
                             text={ item.title }
                             disabled={ item.props.disabled }
@@ -627,7 +628,7 @@ export const VAutocomplete = genericComponent<new <
                             key="chip-defaults"
                             defaults={{
                               VChip: {
-                                closable: props.closableChips,
+                                closable,
                                 size: 'small',
                                 text: item.title,
                               },
