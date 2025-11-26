@@ -661,7 +661,7 @@ export const VCombobox = genericComponent<new <
                     )
                     : undefined
 
-                  const closable = props.closableChips && !props.readonly && !form.isReadonly
+                  const closable = computed(() => props.closableChips && !props.readonly && !form.isReadonly.value)
                   if (hasSlot && !slotContent) return undefined
 
                   return (
@@ -680,7 +680,7 @@ export const VCombobox = genericComponent<new <
                         !slots.chip ? (
                           <VChip
                             key="chip"
-                            closable={ closable }
+                            closable={ closable.value }
                             size="small"
                             text={ item.title }
                             disabled={ item.props.disabled }
@@ -691,7 +691,7 @@ export const VCombobox = genericComponent<new <
                             key="chip-defaults"
                             defaults={{
                               VChip: {
-                                closable,
+                                closable: closable.value,
                                 size: 'small',
                                 text: item.title,
                               },
