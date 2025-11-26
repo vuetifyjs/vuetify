@@ -114,7 +114,8 @@
   }
 </script>
 
-<style lang="sass" scoped>
-  :deep(.v-card-item)
-    max-width: 100%
+<style lang="scss" scoped>
+  :deep(.v-card-item) {
+    max-width: 100%;
+  }
 </style>

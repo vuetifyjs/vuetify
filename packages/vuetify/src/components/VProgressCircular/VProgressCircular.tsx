@@ -1,5 +1,5 @@
 // Styles
-import './VProgressCircular.sass'
+import './VProgressCircular.scss'
 
 // Composables
 import { useTextColor } from '@/composables/color'

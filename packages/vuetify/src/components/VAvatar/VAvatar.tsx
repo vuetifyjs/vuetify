@@ -1,5 +1,5 @@
 // Styles
-import './VAvatar.sass'
+import './VAvatar.scss'
 
 // Components
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'

@@ -1,5 +1,5 @@
 // Styles
-import './VResponsive.sass'
+import './VResponsive.scss'
 
 // Composables
 import { makeComponentProps } from '@/composables/component'

@@ -1,5 +1,5 @@
 // Styles
-import './VSwitch.sass'
+import './VSwitch.scss'
 
 // Components
 import { VScaleTransition } from '@/components/transitions'

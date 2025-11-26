@@ -1,5 +1,5 @@
 // Styles
-import './VVideo.sass'
+import './VVideo.scss'
 
 // Components
 import { makeVVideoControlsProps, VVideoControls } from './VVideoControls'

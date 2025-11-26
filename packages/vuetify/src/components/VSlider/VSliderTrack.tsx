@@ -1,5 +1,5 @@
 // Styles
-import './VSliderTrack.sass'
+import './VSliderTrack.scss'
 
 // Components
 import { VSliderSymbol } from './slider'

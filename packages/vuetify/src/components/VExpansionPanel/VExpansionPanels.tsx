@@ -1,5 +1,5 @@
 // Styles
-import './VExpansionPanel.sass'
+import './VExpansionPanel.scss'
 
 // Components
 import { VExpansionPanelSymbol } from './shared'

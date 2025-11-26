@@ -2,7 +2,7 @@
 /* eslint-disable */
 
 // Styles
-import './VOverflowBtn.sass'
+import './VOverflowBtn.scss'
 
 // Extensions
 import VSelect from '../VSelect/VSelect'

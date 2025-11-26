@@ -1,5 +1,5 @@
 // Styles
-import './VColorPickerEdit.sass'
+import './VColorPickerEdit.scss'
 
 // Components
 import { VBtn } from '@/components/VBtn'

@@ -1,5 +1,5 @@
 // Styles
-import './VIcon.sass'
+import './VIcon.scss'
 
 // Composables
 import { useTextColor } from '@/composables/color'

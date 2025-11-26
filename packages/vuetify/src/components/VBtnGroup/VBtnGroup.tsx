@@ -1,5 +1,5 @@
 // Styles
-import './VBtnGroup.sass'
+import './VBtnGroup.scss'
 
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'

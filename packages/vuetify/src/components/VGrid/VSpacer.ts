@@ -1,5 +1,5 @@
 // Styles
-import './VGrid.sass'
+import './VGrid.scss'
 
 // Utilities
 import { createSimpleFunctional } from '@/util'

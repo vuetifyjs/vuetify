@@ -15,8 +15,10 @@
   }
 </script>
 
-<style lang="sass">
-  .app-table
-    tbody > tr > td:first-child
-      white-space: nowrap
+<style lang="scss">
+  .app-table {
+    tbody > tr > td:first-child {
+      white-space: nowrap;
+    }
+  }
 </style>

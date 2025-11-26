@@ -1,5 +1,5 @@
 // Styles
-import './VVirtualScroll.sass'
+import './VVirtualScroll.scss'
 
 // Components
 import { VVirtualScrollItem } from './VVirtualScrollItem'

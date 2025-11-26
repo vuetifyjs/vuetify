@@ -34,15 +34,18 @@
   const { smAndUp } = useDisplay()
 </script>
 
-<style lang="sass">
-  .v-vuetify
-    .powered-by
-      color: rgba(0, 0, 0, .6)
-      font-size: 0.625rem
-      font-weight: 400
-      letter-spacing: 0.09375rem
-      text-transform: uppercase
+<style lang="scss">
+  .v-vuetify {
+    .powered-by {
+      color: rgba(0, 0, 0, .6);
+      font-size: 0.625rem;
+      font-weight: 400;
+      letter-spacing: 0.09375rem;
+      text-transform: uppercase;
+    }
 
-    &.theme--dark .powered-by
-      color: inherit
+    &.theme--dark .powered-by {
+      color: inherit;
+    }
+  }
 </style>

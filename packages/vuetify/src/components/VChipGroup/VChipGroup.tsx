@@ -1,5 +1,5 @@
 // Styles
-import './VChipGroup.sass'
+import './VChipGroup.scss'
 
 // Components
 import { makeVSlideGroupProps, VSlideGroup } from '@/components/VSlideGroup/VSlideGroup'

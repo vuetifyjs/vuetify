@@ -1,5 +1,5 @@
 // Styles
-import './VToolbar.sass'
+import './VToolbar.scss'
 
 // Components
 import { VToolbarTitle } from './VToolbarTitle'

@@ -214,9 +214,12 @@
   }
 </script>
 
-<style lang="sass">
-  .team-member
-    .v-markdown
-      > p
-        margin: 0
+<style lang="scss">
+  .team-member {
+    .v-markdown {
+      > p {
+        margin: 0;
+      }
+    }
+  }
 </style>

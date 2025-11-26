@@ -1,5 +1,5 @@
 // Styles
-import './VMessages.sass'
+import './VMessages.scss'
 
 // Components
 import { VSlideYTransition } from '@/components/transitions'

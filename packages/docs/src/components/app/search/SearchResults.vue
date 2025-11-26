@@ -143,11 +143,12 @@
   }
 </script>
 
-<style lang="sass" scoped>
+<style lang="scss" scoped>
 //.v-list .v-list-item
 //  min-height: 0
 
-:deep(mark)
-  background: rgb(33, 150, 243, 30%)
-  color: inherit
+:deep(mark) {
+  background: rgb(33, 150, 243, 30%);
+  color: inherit;
+}
 </style>

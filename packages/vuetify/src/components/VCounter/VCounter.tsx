@@ -1,5 +1,5 @@
 // Styles
-import './VCounter.sass'
+import './VCounter.scss'
 
 // Components
 import { VSlideYTransition } from '@/components/transitions'

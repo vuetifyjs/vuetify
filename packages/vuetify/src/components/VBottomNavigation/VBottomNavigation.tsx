@@ -1,5 +1,5 @@
 // Styles
-import './VBottomNavigation.sass'
+import './VBottomNavigation.scss'
 
 // Components
 import { VBtnToggleSymbol } from '@/components/VBtnToggle/VBtnToggle'

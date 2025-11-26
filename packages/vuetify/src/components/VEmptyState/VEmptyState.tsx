@@ -1,5 +1,5 @@
 // Styles
-import './VEmptyState.sass'
+import './VEmptyState.scss'
 
 // Components
 import { VBtn } from '@/components/VBtn'

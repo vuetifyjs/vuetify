@@ -1,5 +1,5 @@
 // Styles
-import './VInput.sass'
+import './VInput.scss'
 
 // Components
 import { useInputIcon } from '@/components/VInput/InputIcon'

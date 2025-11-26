@@ -1,5 +1,5 @@
 // Styles
-import './VTooltip.sass'
+import './VTooltip.scss'
 
 // Components
 import { VOverlay } from '@/components/VOverlay'

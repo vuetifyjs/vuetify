@@ -1,5 +1,5 @@
 // Styles
-import './VSystemBar.sass'
+import './VSystemBar.scss'
 
 // Composables
 import { useBackgroundColor } from '@/composables/color'

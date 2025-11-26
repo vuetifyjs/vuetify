@@ -1,5 +1,5 @@
 // Styles
-import './VSnackbar.sass'
+import './VSnackbar.scss'
 
 // Components
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'

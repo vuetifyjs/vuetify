@@ -1,5 +1,5 @@
 // Styles
-import './VOverlay.sass'
+import './VOverlay.scss'
 
 // Composables
 import { makeLocationStrategyProps, useLocationStrategies } from './locationStrategies'

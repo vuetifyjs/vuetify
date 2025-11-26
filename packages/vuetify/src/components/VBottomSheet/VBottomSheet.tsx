@@ -1,5 +1,5 @@
 // Styles
-import './VBottomSheet.sass'
+import './VBottomSheet.scss'
 
 // Components
 import { makeVDialogProps, VDialog } from '@/components/VDialog/VDialog'

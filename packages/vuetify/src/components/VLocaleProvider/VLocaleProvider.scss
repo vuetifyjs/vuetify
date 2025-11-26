@@ -1,0 +1,7 @@
+@use '../../styles/tools';
+
+@include tools.layer('components') {
+  .v-locale-provider {
+    display: contents;
+  }
+}

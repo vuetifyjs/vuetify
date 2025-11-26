@@ -1,4 +1,0 @@
-@mixin position($positions, $important: false)
-  @each $position in $positions
-    &--#{$position}
-      position: #{$position} if($important, !important, null)

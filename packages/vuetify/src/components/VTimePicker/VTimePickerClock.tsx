@@ -1,5 +1,5 @@
 // Styles
-import './VTimePickerClock.sass'
+import './VTimePickerClock.scss'
 
 // Composables
 import { useBackgroundColor, useTextColor } from '@/composables/color'

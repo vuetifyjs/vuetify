@@ -29,8 +29,7 @@
         @each $property in $properties {
           #{$property}: $value;
         }
-      }
-      @else {
+      } @else {
         #{$properties}: $value;
       }
     }

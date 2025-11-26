@@ -54,7 +54,8 @@
   }
 </script>
 
-<style lang="sass">
-  .v-app-tooltip-btn__content p
-    margin: 0
+<style lang="scss">
+  .v-app-tooltip-btn__content p {
+    margin: 0;
+  }
 </style>

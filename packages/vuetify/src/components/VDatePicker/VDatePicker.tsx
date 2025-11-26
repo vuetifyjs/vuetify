@@ -1,5 +1,5 @@
 // Styles
-import './VDatePicker.sass'
+import './VDatePicker.scss'
 
 // Components
 import { makeVDatePickerControlsProps, VDatePickerControls } from './VDatePickerControls'

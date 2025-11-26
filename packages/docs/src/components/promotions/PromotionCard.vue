@@ -55,17 +55,19 @@
   })
 </script>
 
-<style lang="sass">
-  .v-promotion-card
-    font-size: 0.75rem
-    position: relative
+<style lang="scss">
+  .v-promotion-card {
+    font-size: 0.75rem;
+    position: relative;
 
-    &__via
-      position: absolute
-      display: inline-block
-      bottom: .5rem
-      right: .5rem
-      font-size: 0.625rem
-      letter-spacing: 0.09375rem
-      font-weight: 400
+    &__via {
+      position: absolute;
+      display: inline-block;
+      bottom: .5rem;
+      right: .5rem;
+      font-size: 0.625rem;
+      letter-spacing: 0.09375rem;
+      font-weight: 400;
+    }
+  }
 </style>

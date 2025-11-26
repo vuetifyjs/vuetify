@@ -59,55 +59,68 @@
   const isDark = computed(() => theme.current.value.dark)
 </script>
 
-<style lang="sass">
-  #carbonads-script
-    width: 100%
+<style lang="scss">
+  #carbonads-script {
+    width: 100%;
+  }
 
   #carbonads,
   #carbonads_1,
-  #carbonads_2
-    width: 100%
+  #carbonads_2 {
+    width: 100%;
 
-    > span
-      display: flex
-      position: relative
+    > span {
+      display: flex;
+      position: relative;
+    }
 
-    .carbon-wrap
-      display: flex
+    .carbon-wrap {
+      display: flex;
+    }
 
     .carbon-text,
-    .carbon-poweredby
-      max-width: 200px
-      padding: 0 0 0 16px
-      text-decoration: none
+    .carbon-poweredby {
+      max-width: 200px;
+      padding: 0 0 0 16px;
+      text-decoration: none;
+    }
 
-    .carbon-img
-      display: inline-flex
-      margin: 0.5rem
+    .carbon-img {
+      display: inline-flex;
+      margin: 0.5rem;
 
-      img
-        border-radius: 4px 0 0 4px
-        max-height: 100px
+      img {
+        border-radius: 4px 0 0 4px;
+        max-height: 100px;
+      }
+    }
 
-    .carbon-text
-      color: inherit
-      font-size: 0.75rem
-      padding: 0.475rem
+    .carbon-text {
+      color: inherit;
+      font-size: 0.75rem;
+      padding: 0.475rem;
+    }
 
-    .carbon-poweredby
-      bottom: 0.5rem
-      font-size: 0.625rem
-      font-weight: 400
-      letter-spacing: 0.09375rem
-      position: absolute
-      right: 0.5rem
-      text-transform: uppercase
+    .carbon-poweredby {
+      bottom: 0.5rem;
+      font-size: 0.625rem;
+      font-weight: 400;
+      letter-spacing: 0.09375rem;
+      position: absolute;
+      right: 0.5rem;
+      text-transform: uppercase;
+    }
+  }
 
-  .v-app-ad.theme--light
-    .carbon-poweredby
-      color: rgba(0, 0, 0, .6)
+  .v-app-ad.theme--light {
+    .carbon-poweredby {
+      color: rgba(0, 0, 0, .6);
+    }
+  }
 
-  .v-app-ad.theme--dark
-    .carbon-poweredby
-      color: inherit
+  .v-app-ad.theme--dark {
+    .carbon-poweredby {
+      color: inherit;
+    }
+  }
 </style>

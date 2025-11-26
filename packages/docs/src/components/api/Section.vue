@@ -93,30 +93,40 @@
   watch(() => props.name, fetchApiData)
 </script>
 
-<style lang="sass">
-  .api-table
-    .regular-row td
-      padding: 8px 16px !important
+<style lang="scss">
+  .api-table {
+    .regular-row td {
+      padding: 8px 16px !important;
+    }
 
-    .regular-row.has-extra-row td
-      border-bottom: none !important
+    .regular-row.has-extra-row td {
+      border-bottom: none !important;
+    }
 
-    .extra-row:hover
-      background: initial !important
+    .extra-row:hover {
+      background: initial !important;
+    }
 
-    .extra-row td
-      padding: 8px 0 !important
+    .extra-row td {
+      padding: 8px 0 !important;
+    }
 
-    .v-markdown :deep(p)
-      margin-bottom: 0
+    .v-markdown :deep(p) {
+      margin-bottom: 0;
+    }
 
-    .token.operator
-      background: none
+    .token.operator {
+      background: none;
+    }
+  }
 
-  .name-item
-    white-space: nowrap
+  .name-item {
+    white-space: nowrap;
 
-    &:not(:hover):not(:focus)
-      span
-        opacity: 0
+    &:not(:hover):not(:focus) {
+      span {
+        opacity: 0;
+      }
+    }
+  }
 </style>

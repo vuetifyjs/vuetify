@@ -1,5 +1,5 @@
 // Styles
-import './VCarousel.sass'
+import './VCarousel.scss'
 
 // Components
 import { VBtn } from '@/components/VBtn'

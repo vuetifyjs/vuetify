@@ -1,5 +1,5 @@
 import 'roboto-fontface'
-import '@/styles/main.sass'
+import '@/styles/main.scss'
 import { beforeAll, beforeEach, expect } from 'vitest'
 import { cleanup } from '@testing-library/vue'
 import { commands, page } from '@vitest/browser/context'

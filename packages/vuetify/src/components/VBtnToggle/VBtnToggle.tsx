@@ -1,5 +1,5 @@
 // Styles
-import './VBtnToggle.sass'
+import './VBtnToggle.scss'
 
 // Components
 import { makeVBtnGroupProps, VBtnGroup } from '@/components/VBtnGroup/VBtnGroup'

@@ -1,5 +1,5 @@
 // Styles
-import './VList.sass'
+import './VList.scss'
 
 // Components
 import { VListChildren } from './VListChildren'

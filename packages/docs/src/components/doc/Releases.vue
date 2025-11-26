@@ -299,11 +299,15 @@
   // }
 </script>
 
-<style lang="sass">
-  .notes-autocomplete
-    > .v-list.v-select-list
-      background: transparent !important
-  .releases
-    img
-      max-width: 100%
+<style lang="scss">
+  .notes-autocomplete {
+    > .v-list.v-select-list {
+      background: transparent !important;
+    }
+  }
+  .releases {
+    img {
+      max-width: 100%;
+    }
+  }
 </style>

@@ -1,5 +1,5 @@
 // Styles
-import './VColorInput.sass'
+import './VColorInput.scss'
 
 // Components
 import { VAvatar } from '@/components/VAvatar'

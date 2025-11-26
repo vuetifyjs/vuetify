@@ -1,5 +1,5 @@
 // Styles
-import './VPagination.sass'
+import './VPagination.scss'
 
 // Components
 import { VBtn } from '../VBtn'

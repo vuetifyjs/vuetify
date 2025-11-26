@@ -211,21 +211,27 @@
   const dark = computed(() => theme.current.value.dark)
 </script>
 
-<style lang="sass" scoped>
-  #app-toc
-    ul
-      list-style-type: none
+<style lang="scss" scoped>
+  #app-toc {
+    ul {
+      list-style-type: none;
+    }
 
-    li
-      border-left: 2px solid rgb(var(--v-theme-on-surface-variant))
+    li {
+      border-left: 2px solid rgb(var(--v-theme-on-surface-variant));
 
-      &.router-link-active
-        border-left-color: currentColor
+      &.router-link-active {
+        border-left-color: currentColor;
+      }
+    }
 
-    .v-toc-link
-      color: inherit
+    .v-toc-link {
+      color: inherit;
+    }
 
-    :deep(.v-navigation-drawer__content)
-      height: auto
-      margin-right: 12px
+    :deep(.v-navigation-drawer__content) {
+      height: auto;
+      margin-right: 12px;
+    }
+  }
 </style>

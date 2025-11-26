@@ -16,7 +16,8 @@
   const { t } = useI18n()
 </script>
 
-<style lang="sass">
-  .v-example-missing > p
-    margin: 0
+<style lang="scss">
+  .v-example-missing > p {
+    margin: 0;
+  }
 </style>

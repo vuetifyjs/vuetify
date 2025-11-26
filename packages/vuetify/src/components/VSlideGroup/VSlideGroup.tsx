@@ -1,5 +1,5 @@
 // Styles
-import './VSlideGroup.sass'
+import './VSlideGroup.scss'
 
 // Components
 import { VFadeTransition } from '@/components/transitions'

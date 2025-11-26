@@ -1,5 +1,5 @@
 // Styles
-import './VSelectionControlGroup.sass'
+import './VSelectionControlGroup.scss'
 
 // Composables
 import { makeComponentProps } from '@/composables/component'

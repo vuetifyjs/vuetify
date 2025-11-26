@@ -1,5 +1,5 @@
 // Styles
-import './VParallax.sass'
+import './VParallax.scss'
 
 // Components
 import { VImg } from '@/components/VImg'

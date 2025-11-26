@@ -1,5 +1,5 @@
 // Styles
-import './VSkeletonLoader.sass'
+import './VSkeletonLoader.scss'
 
 // Composables
 import { useBackgroundColor } from '@/composables/color'

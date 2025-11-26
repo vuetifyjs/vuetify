@@ -1,5 +1,5 @@
 // Styles
-import './VFooter.sass'
+import './VFooter.scss'
 
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'

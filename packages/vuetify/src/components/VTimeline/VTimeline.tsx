@@ -1,5 +1,5 @@
 // Styles
-import './VTimeline.sass'
+import './VTimeline.scss'
 
 // Composables
 import { makeComponentProps } from '@/composables/component'

@@ -1,6 +1,0 @@
-@use '../settings'
-
-@mixin density($name, $densities)
-  @each $density, $multiplier in $densities
-    .#{$name}--density-#{$density}
-      @content($multiplier * settings.$spacer)

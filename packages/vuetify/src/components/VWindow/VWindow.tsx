@@ -1,5 +1,5 @@
 // Styles
-import './VWindow.sass'
+import './VWindow.scss'
 
 // Components
 import { VBtn } from '@/components/VBtn'

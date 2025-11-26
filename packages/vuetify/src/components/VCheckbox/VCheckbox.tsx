@@ -1,5 +1,5 @@
 // Styles
-import './VCheckbox.sass'
+import './VCheckbox.scss'
 
 // Components
 import { makeVCheckboxBtnProps, VCheckboxBtn } from './VCheckboxBtn'

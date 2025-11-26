@@ -1,5 +1,5 @@
 // Styles
-import './VPicker.sass'
+import './VPicker.scss'
 
 // Components
 import { VPickerTitle } from './VPickerTitle'

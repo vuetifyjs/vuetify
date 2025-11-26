@@ -1,5 +1,5 @@
 // Styles
-import './VField.sass'
+import './VField.scss'
 
 // Components
 import { VFieldLabel } from './VFieldLabel'

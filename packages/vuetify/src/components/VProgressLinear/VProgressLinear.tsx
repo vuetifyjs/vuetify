@@ -1,5 +1,5 @@
 // Styles
-import './VProgressLinear.sass'
+import './VProgressLinear.scss'
 
 // Composables
 import { useBackgroundColor, useTextColor } from '@/composables/color'
