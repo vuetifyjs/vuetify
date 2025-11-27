@@ -91,6 +91,9 @@ export default defineConfig(configEnv => {
                         '--start-maximized',
                         '--disable-infobars',
                         process.env.TEST_BAIL && '--auto-open-devtools-for-tabs',
+                        // I have no idea why this is needed, it throws "WebDriverError: session
+                        // not created: Chrome instance exited" without it
+                        process.env.CI && '--no-sandbox',
                       ].filter(v => !!v) as string[],
                     },
                   },
