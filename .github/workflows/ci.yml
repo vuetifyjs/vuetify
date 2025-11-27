@@ -74,10 +74,12 @@ jobs:
     needs: pre_job
     if: needs.pre_job.outputs.should_skip != 'true'
     runs-on: ubuntu-24.04
+    container:
+      image: mcr.microsoft.com/playwright:v1.57.0-noble
+      options: --user 1001
     steps:
       - uses: actions/checkout@v4
       - uses: vuetifyjs/setup-action@master
-      - run: pnpm exec playwright install chromium --with-deps
       - run: pnpm run test --project browser
         working-directory: ./packages/vuetify
       - uses: actions/upload-artifact@v4
