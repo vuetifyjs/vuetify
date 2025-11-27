@@ -146,7 +146,7 @@
     "@testing-library/vue": "^8.1.0",
     "@types/resize-observer-browser": "^0.1.11",
     "@vitejs/plugin-vue-jsx": "^5.1.2",
-    "@vitest/browser-webdriverio": "^4.0.13",
+    "@vitest/browser-playwright": "^4.0.13",
     "@vitest/coverage-istanbul": "^4.0.13",
     "@vitest/ui": "^4.0.13",
     "@vue/reactivity": "^3.5.25",
@@ -186,7 +186,7 @@
     "vue": "^3.5.25",
     "vue-i18n": "^11.1.12",
     "vue-router": "^4.6.3",
-    "webdriverio": "^9.20.1"
+    "playwright": "^1.57.0"
   },
   "peerDependencies": {
     "typescript": ">=4.7",

@@ -9,14 +9,18 @@ ignoredBuiltDependencies:
   - '@percy/core'
   - edgedriver
   - geckodriver
+  - unrs-resolver
   - vue-demi
 
 linkWorkspacePackages: deep
 
-minimumReleaseAge: 4320 # 3 days
+minimumReleaseAge: 4320
+
 minimumReleaseAgeExclude:
   - '@vuetify/one'
   - '@vuetify/testing-library-dom'
+  - playwright
+  - playwright-core
 
 nodeLinker: hoisted
 
@@ -35,6 +39,7 @@ overrides:
 patchedDependencies:
   '@mdi/js@7.4.47': patches/@mdi__js@7.4.47.patch
   '@testing-library/vue': patches/@testing-library__vue.patch
+  playwright-core: patches/playwright-core.patch
 
 peerDependencyRules:
   allowedVersions:

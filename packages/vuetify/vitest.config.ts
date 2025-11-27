@@ -1,5 +1,5 @@
 import { defineConfig, mergeConfig } from 'vitest/config'
-import { webdriverio } from '@vitest/browser-webdriverio'
+import { playwright } from '@vitest/browser-playwright'
 import viteConfig from './vite.config'
 import AutoImport from 'unplugin-auto-import/vite'
 import { fileURLToPath } from 'node:url'
@@ -81,21 +81,22 @@ export default defineConfig(configEnv => {
               include: ['**/*.spec.browser.{ts,tsx}'],
               setupFiles: ['../test/setup/browser-setup.ts'],
               bail: process.env.TEST_BAIL ? 1 : undefined,
+              // maxWorkers: 100,
               browser: {
                 enabled: true,
-                provider: webdriverio({
-                  capabilities: {
-                    browserVersion: '142',
-                    'goog:chromeOptions': {
-                      args: [
-                        '--start-maximized',
-                        '--disable-infobars',
-                        process.env.TEST_BAIL && '--auto-open-devtools-for-tabs',
-                        // I have no idea why this is needed, it throws "WebDriverError: session
-                        // not created: Chrome instance exited" without it
-                        process.env.CI && '--no-sandbox',
-                      ].filter(v => !!v) as string[],
-                    },
+                provider: playwright({
+                  actionTimeout: 5000,
+                  contextOptions: {
+                    reducedMotion: 'reduce',
+                    permissions: ['clipboard-write', 'clipboard-read'],
+                  },
+                  launchOptions: {
+                    ignoreDefaultArgs: ['--hide-scrollbars'],
+                    args: [
+                      '--start-maximized',
+                      '--disable-infobars',
+                      process.env.TEST_BAIL && '--auto-open-devtools-for-tabs',
+                    ].filter(v => !!v) as string[],
                   },
                 }),
                 ui: false,
@@ -103,7 +104,7 @@ export default defineConfig(configEnv => {
                 screenshotDirectory: '../test/__screenshots__',
                 commands,
                 instances: [{
-                  browser: 'chrome',
+                  browser: 'chromium',
                 }],
                 viewport: {
                   width: 1280,

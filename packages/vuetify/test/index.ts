@@ -44,6 +44,10 @@ export const waitIdle = () => {
   return new Promise(resolve => requestIdleCallback(resolve, { timeout: 500 }))
 }
 
+export const click = (el: Element) => {
+  return commands.click(page.elementLocator(el).selector)
+}
+
 export const waitForClickable = (el: Element) => {
   return commands.waitForClickable(page.elementLocator(el).selector)
 }

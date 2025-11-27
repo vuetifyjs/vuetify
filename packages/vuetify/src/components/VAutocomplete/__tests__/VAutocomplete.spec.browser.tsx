@@ -329,7 +329,7 @@ describe('VAutocomplete', () => {
     await userEvent.click(options[0])
 
     await userEvent.click(element)
-    await userEvent.keyboard('{Ctrl>}a{/Ctrl}{Backspace}')
+    await userEvent.keyboard('{ControlOrMeta>}a{/ControlOrMeta}{Backspace}')
     await userEvent.click(document.body)
 
     expect(element).not.toHaveTextContent('Item 1')
@@ -449,7 +449,8 @@ describe('VAutocomplete', () => {
       />
     ))
 
-    await userEvent.type(element, 'f')
+    await userEvent.click(element)
+    await userEvent.keyboard('f')
     await expect.poll(() => screen.findAllByRole('option')).toHaveLength(2)
     expect(selectedItems.value).toBeUndefined()
   })
@@ -463,19 +464,19 @@ describe('VAutocomplete', () => {
     expect(input).toHaveAttribute('placeholder', 'Placeholder')
 
     await rerender({ label: 'Label' })
-    await expect.element(input).toBeDisplayed()
+    await expect.element(input).toBeVisible()
     expect(Number(window.getComputedStyle(input, '::placeholder').opacity)).toBe(0)
 
     input.focus()
     await waitAnimationFrame()
     expect(input).toHaveAttribute('placeholder', 'Placeholder')
-    await expect.element(input).toBeDisplayed()
+    await expect.element(input).toBeVisible()
     expect(Number(window.getComputedStyle(input, '::placeholder').opacity)).toBeGreaterThan(0.2)
 
     input.blur()
     await rerender({ persistentPlaceholder: true })
     expect(input).toHaveAttribute('placeholder', 'Placeholder')
-    await expect.element(input).toBeDisplayed()
+    await expect.element(input).toBeVisible()
     expect(Number(window.getComputedStyle(input, '::placeholder').opacity)).toBeGreaterThan(0.2)
 
     await rerender({ modelValue: 'Foobar' })
@@ -652,7 +653,7 @@ describe('VAutocomplete', () => {
     })
 
     await userEvent.click(element)
-    await expect.poll(() => screen.findByRole('listbox')).toBeDisplayed()
+    await expect.poll(() => screen.findByRole('listbox')).toBeVisible()
 
     await userEvent.click(screen.getAllByRole('option')[0])
     await rerender({ items: ['Foo', 'Bar', 'test', 'test 2'] })
@@ -698,7 +699,7 @@ describe('VAutocomplete', () => {
       <VAutocomplete onUpdate:focused={ onFocus } />
     ))
 
-    await userEvent.click(element, { y: 1 })
+    await userEvent.click(element, { position: { x: 10, y: 55 } })
 
     expect(onFocus).toHaveBeenCalledTimes(1)
   })
