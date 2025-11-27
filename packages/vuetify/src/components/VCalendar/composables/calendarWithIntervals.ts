@@ -8,6 +8,7 @@ import {
   createDayList,
   createIntervalList,
   createNativeLocaleFormatter,
+  getDayIdentifier,
   MINUTES_IN_DAY,
   parseTime,
   updateMinutes,
@@ -183,6 +184,10 @@ export function useCalendarWithIntervals (props: CalendarWithIntervalsProps) {
     scope.timeDelta = timeDelta
     scope.minutesToPixels = minutesToPixels
     scope.week = days.value
+    scope.intervalRange = [
+      firstMinute.value,
+      firstMinute.value + parsedIntervalCount.value * parsedIntervalMinutes.value,
+    ]
     return scope
   }
 
@@ -204,34 +209,48 @@ export function useCalendarWithIntervals (props: CalendarWithIntervalsProps) {
     return minutes / parsedIntervalMinutes.value * parsedIntervalHeight.value
   }
 
-  function timeToY (time: VTime, clamp = true): number | false {
-    let y = timeDelta(time)
+  function timeToY (
+    time: VTime | CalendarTimestamp,
+    targetDateOrClamp: CalendarTimestamp | boolean = true
+  ): number | false {
+    const clamp = targetDateOrClamp !== false
+    const targetDate = typeof targetDateOrClamp !== 'boolean' ? targetDateOrClamp : undefined
 
-    if (y !== false) {
-      y *= bodyHeight.value
+    let y = timeDelta(time, targetDate)
+    if (y === false) return y
 
-      if (clamp) {
-        if (y < 0) {
-          y = 0
-        }
-        if (y > bodyHeight.value) {
-          y = bodyHeight.value
-        }
+    y *= bodyHeight.value
+
+    if (clamp) {
+      if (y < 0) {
+        y = 0
+      }
+      if (y > bodyHeight.value) {
+        y = bodyHeight.value
       }
     }
 
     return y
   }
 
-  function timeDelta (time: VTime): number | false {
-    const minutes = parseTime(time)
+  function timeDelta (time: VTime | CalendarTimestamp, targetDate?: CalendarTimestamp): number | false {
+    let minutes = parseTime(time)
 
     if (minutes === false) {
       return false
     }
 
-    const min: number = firstMinute.value
     const gap: number = parsedIntervalCount.value * parsedIntervalMinutes.value
+
+    if (targetDate && typeof time === 'object' && 'day' in time) {
+      const a = getDayIdentifier(time)
+      const b = getDayIdentifier(targetDate)
+      if (a > b) {
+        minutes += (a - b) * gap
+      }
+    }
+
+    const min: number = firstMinute.value
 
     return (minutes - min) / gap
   }

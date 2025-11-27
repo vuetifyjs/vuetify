@@ -792,6 +792,70 @@ describe('VSelect', () => {
     expect(screen.getAllByCSS('.v-checkbox-btn input:checked')).toHaveLength(1)
   })
 
+  describe('native form submission', () => {
+    const items = [
+      { title: 'Item 1', value: 1 },
+      { title: 'Item 2', value: 2 },
+      { title: 'Item 3', value: 3 },
+    ]
+
+    it('should include selected value in form data for single selection', async () => {
+      let submittedData: FormData | null = null
+
+      render(() => (
+        <form
+          onSubmit={ e => {
+            e.preventDefault()
+            submittedData = new FormData(e.target as HTMLFormElement)
+          }}
+        >
+          <VSelect
+            name="select"
+            items={ items }
+            modelValue={ items[0] }
+          />
+          <button type="submit">Submit</button>
+        </form>
+      ))
+
+      const submitButton = screen.getByRole('button', { name: 'Submit' })
+      await userEvent.click(submitButton)
+
+      expect(submittedData).not.toBeNull()
+      expect(submittedData!.get('select')).toBe('1')
+    })
+
+    it('should include selected values in form data for multiple selection', async () => {
+      let submittedData: FormData | null = null
+
+      render(() => (
+        <form
+          onSubmit={ e => {
+            e.preventDefault()
+            submittedData = new FormData(e.target as HTMLFormElement)
+          }}
+        >
+          <VSelect
+            multiple
+            name="select"
+            items={ items }
+            modelValue={[items[0], items[1]]}
+          />
+          <button type="submit">Submit</button>
+        </form>
+      ))
+
+      const submitButton = screen.getByRole('button', { name: 'Submit' })
+      await userEvent.click(submitButton)
+
+      expect(submittedData).not.toBeNull()
+      const select = submittedData!.getAll('select')
+      expect(select).toHaveLength(2)
+      expect(select).toContain('1')
+      expect(select).toContain('2')
+    })
+  })
+
   describe('Showcase', () => {
     generate({ stories })
   })

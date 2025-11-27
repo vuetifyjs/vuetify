@@ -16,6 +16,7 @@ import { VVirtualScroll } from '@/components/VVirtualScroll'
 
 // Composables
 import { useScrolling } from './useScrolling'
+import { useAutocomplete } from '@/composables/autocomplete'
 import { useForm } from '@/composables/form'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { IconValue } from '@/composables/icons'
@@ -160,6 +161,7 @@ export const VSelect = genericComponent<new <
         : model.value.length
     })
     const form = useForm(props)
+    const autocomplete = useAutocomplete(props)
     const selectedValues = computed(() => model.value.map(selection => selection.value))
     const isFocused = shallowRef(false)
 
@@ -387,7 +389,8 @@ export const VSelect = genericComponent<new <
         <VTextField
           ref={ vTextFieldRef }
           { ...textFieldProps }
-          modelValue={ model.value.map(v => v.props.value).join(', ') }
+          modelValue={ model.value.map(v => v.props.title).join(', ') }
+          name={ undefined }
           onUpdate:modelValue={ onModelUpdate }
           v-model:focused={ isFocused.value }
           validationValue={ model.externalValue }
@@ -420,6 +423,20 @@ export const VSelect = genericComponent<new <
             ...slots,
             default: () => (
               <>
+                <select
+                  hidden
+                  multiple={ props.multiple }
+                  name={ autocomplete.fieldName.value }
+                >
+                  { items.value.map(item => (
+                    <option
+                      key={ item.value }
+                      value={ item.value }
+                      selected={ selectedValues.value.includes(item.value) }
+                    />
+                  ))}
+                </select>
+
                 <VMenu
                   id={ menuId.value }
                   ref={ vMenuRef }
@@ -528,7 +545,7 @@ export const VSelect = genericComponent<new <
                     select(item, false)
                   }
 
-                  const slotProps = {
+                  const slotProps = mergeProps(VChip.filterProps(item.props), {
                     'onClick:close': onChipClose,
                     onKeydown (e: KeyboardEvent) {
                       if (e.key !== 'Enter' && e.key !== ' ') return
@@ -544,7 +561,7 @@ export const VSelect = genericComponent<new <
                     },
                     modelValue: true,
                     'onUpdate:modelValue': undefined,
-                  }
+                  })
 
                   const hasSlot = hasChips ? !!slots.chip : !!slots.selection
                   const slotContent = hasSlot

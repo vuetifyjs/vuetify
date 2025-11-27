@@ -19,7 +19,9 @@ beforeEach(async () => {
 expect.extend({
   /** .toBeVisible but using wdio's isDisplayed */
   async toBeDisplayed (received: Element) {
-    const isDisplayed = await commands.isDisplayed(page.elementLocator(received).selector)
+    const isDisplayed = received != null && (
+      await commands.isDisplayed(page.elementLocator(received).selector)
+    )
 
     return {
       pass: isDisplayed,

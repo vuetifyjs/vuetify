@@ -66,7 +66,6 @@ export const makeVFieldProps = propsFactory({
   },
   color: String,
   baseColor: String,
-  details: Boolean,
   dirty: Boolean,
   disabled: {
     type: Boolean,
@@ -119,6 +118,7 @@ export const VField = genericComponent<new <T>(
 
   props: {
     id: String,
+    details: Boolean,
 
     ...makeFocusProps(),
     ...makeVFieldProps(),

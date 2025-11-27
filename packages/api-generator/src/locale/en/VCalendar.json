@@ -33,7 +33,6 @@
     "intervalMinutes": "The number of minutes the intervals are in the `day` view. A common interval is 60 minutes so the intervals are an hour.",
     "intervalStyle": "Returns CSS styling to apply to the interval.",
     "locale": "The locale of the calendar.",
-    "localeFirstDayOfYear": "Sets the day that determines the first week of the year, starting with 0 for **Sunday**. For ISO 8601 this should be 4.",
     "maxDays": "The maximum number of days to display in the custom calendar if an `end` day is not set.",
     "minWeeks": "The minimum number of weeks to display in the `month` or `week` view.",
     "monthFormat": "Formats month string that appears in a day to specified locale",

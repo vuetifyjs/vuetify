@@ -50,6 +50,9 @@ export default {
       previousMonth: 'Předchozí měsíc',
       nextMonth: 'Další měsíc',
       selectYear: 'Vyberte rok',
+      previousYear: 'Předchozí rok',
+      nextYear: 'Další rok',
+      selectMonth: 'Vyberte měsíc',
       selectDate: '{0}',
       currentDate: 'Dnes, {0}',
     },
@@ -85,6 +88,9 @@ export default {
     am: 'Dopoledne',
     pm: 'Odpoledne',
     title: 'Vyberte čas',
+    hour: 'Hodina',
+    minute: 'Minuty',
+    second: 'Sekundy',
   },
   pagination: {
     ariaLabel: {
@@ -141,6 +147,7 @@ export default {
     space: 'Mezerník',
     plus: 'plus',
     shortcut: 'Klávesová zkratka: {0}',
+    or: 'nebo',
   },
   video: {
     play: 'Přehrát',

@@ -9,7 +9,7 @@ related:
   - /components/time-pickers
   - /components/cards
 features:
-  github: /labs/VCalendar/
+  github: /components/VCalendar/
   label: 'C: VCalendar'
   report: true
 ---
@@ -20,23 +20,7 @@ The `v-calendar` component is used to display information in a daily, weekly, mo
 
 <PageFeatures />
 
-::: warning
-This feature requires [v3.10.0](/getting-started/release-notes/?version=v3.4.9)
-:::
-
-## Installation
-
-Labs components require manual import and registration with the Vuetify instance.
-
-```js { resource="src/plugins/vuetify.js" }
-import { VCalendar } from 'vuetify/labs/VCalendar'
-
-export default createVuetify({
-  components: {
-    VCalendar,
-  },
-})
-```
+<DocIntroduced version="3.11.0" />
 
 ## Usage
 

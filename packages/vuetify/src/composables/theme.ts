@@ -42,6 +42,7 @@ export type ThemeOptions = false | {
   themes?: Record<string, ThemeDefinition>
   stylesheetId?: string
   scope?: string
+  layers?: boolean
 }
 export type ThemeDefinition = DeepPartial<InternalThemeDefinition>
 
@@ -56,6 +57,7 @@ interface InternalThemeOptions {
   scope?: string
   scoped: boolean
   utilities: boolean
+  layers?: boolean
 }
 
 interface VariationsOptions {
@@ -415,17 +417,23 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
         }
       }
 
-      lines.push(
-        '@layer background {\n',
-        ...bgLines.map(v => `  ${v}`),
-        '}\n',
-        '@layer foreground {\n',
-        ...fgLines.map(v => `  ${v}`),
-        '}\n',
-      )
+      if (parsedOptions.layers) {
+        lines.push(
+          '@layer background {\n',
+          ...bgLines.map(v => `  ${v}`),
+          '}\n',
+          '@layer foreground {\n',
+          ...fgLines.map(v => `  ${v}`),
+          '}\n',
+        )
+      } else {
+        lines.push(...bgLines, ...fgLines)
+      }
     }
 
-    return '@layer vuetify.theme {\n' + lines.map(v => `  ${v}`).join('') + '\n}'
+    return parsedOptions.layers
+      ? '@layer vuetify.theme {\n' + lines.map(v => `  ${v}`).join('') + '\n}'
+      : lines.map((str, i) => (i === 0 ? str : `    ${str}`)).join('')
   })
 
   const themeClasses = toRef(() => parsedOptions.isDisabled ? undefined : `${parsedOptions.prefix}theme--${name.value}`)

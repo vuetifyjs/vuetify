@@ -5,154 +5,158 @@ describe('hotkey-parsing.ts', () => {
   describe('splitKeyCombination', () => {
     // Basic combinations
     it('should split simple combinations with +', () => {
-      expect(splitKeyCombination('ctrl+k')).toEqual(['ctrl', 'k'])
+      expect(splitKeyCombination('ctrl+k')).toEqual({ keys: ['ctrl', 'k'], separators: ['+'] })
     })
 
     it('should split simple combinations with _', () => {
-      expect(splitKeyCombination('shift_tab')).toEqual(['shift', 'tab'])
+      expect(splitKeyCombination('shift_tab')).toEqual({ keys: ['shift', 'tab'], separators: ['_'] })
+    })
+
+    it('should split simple combinations with /', () => {
+      expect(splitKeyCombination('up/down')).toEqual({ keys: ['arrowup', 'arrowdown'], separators: ['/'] })
     })
 
     // Multiple modifiers and keys
     it('should handle multiple modifiers', () => {
-      expect(splitKeyCombination('ctrl+shift+k')).toEqual(['ctrl', 'shift', 'k'])
+      expect(splitKeyCombination('ctrl+shift+k').keys).toEqual(['ctrl', 'shift', 'k'])
     })
 
     it('should handle multiple primary keys', () => {
-      expect(splitKeyCombination('k+j')).toEqual(['k', 'j'])
+      expect(splitKeyCombination('k+j').keys).toEqual(['k', 'j'])
     })
 
     it('should handle mixed separators', () => {
-      expect(splitKeyCombination('alt_shift+t')).toEqual(['alt', 'shift', 't'])
+      expect(splitKeyCombination('alt_shift+t').keys).toEqual(['alt', 'shift', 't'])
     })
 
     // Literal keys
     it('should handle single literal keys', () => {
       // '-' is the only reachable literal key
-      expect(splitKeyCombination('-')).toEqual(['-'])
+      expect(splitKeyCombination('-').keys).toEqual(['-'])
 
       // '+' and '_' are not reachable literal keys and should be invalid
-      expect(splitKeyCombination('+')).toEqual([])
+      expect(splitKeyCombination('+').keys).toEqual([])
       expect('[Vue warn]: Vuetify: Invalid hotkey combination: "+" has invalid structure').toHaveBeenTipped()
 
-      expect(splitKeyCombination('_')).toEqual([])
+      expect(splitKeyCombination('_').keys).toEqual([])
       expect('[Vue warn]: Vuetify: Invalid hotkey combination: "_" has invalid structure').toHaveBeenTipped()
     })
 
     // Combinations with doubled literals
     it('should treat doubled literal + as invalid', () => {
-      expect(splitKeyCombination('ctrl++')).toEqual([])
+      expect(splitKeyCombination('ctrl++').keys).toEqual([])
       expect('[Vue warn]: Vuetify: Invalid hotkey combination: "ctrl++" has invalid structure').toHaveBeenTipped()
     })
 
     it('should treat doubled literal _ as invalid', () => {
-      expect(splitKeyCombination('ctrl__')).toEqual([])
+      expect(splitKeyCombination('ctrl__').keys).toEqual([])
       expect('[Vue warn]: Vuetify: Invalid hotkey combination: "ctrl__" has invalid structure').toHaveBeenTipped()
     })
 
     it('should handle doubled literal -', () => {
-      expect(splitKeyCombination('shift--')).toEqual(['shift', '-'])
+      expect(splitKeyCombination('shift--').keys).toEqual(['shift', '-'])
     })
 
     it('should handle combination with literal minus', () => {
-      expect(splitKeyCombination('ctrl+-')).toEqual(['ctrl', '-'])
+      expect(splitKeyCombination('ctrl+-').keys).toEqual(['ctrl', '-'])
     })
 
     // Invalid combinations
     it('should return empty array for empty string', () => {
-      expect(splitKeyCombination('')).toEqual([])
+      expect(splitKeyCombination('').keys).toEqual([])
       expect('[Vue warn]: Vuetify: Invalid hotkey combination: empty string provided').toHaveBeenTipped()
     })
 
     it('should return empty array for leading separators', () => {
-      expect(splitKeyCombination('+a')).toEqual([])
+      expect(splitKeyCombination('+a').keys).toEqual([])
       expect('[Vue warn]: Vuetify: Invalid hotkey combination: "+a" has invalid structure').toHaveBeenTipped()
-      expect(splitKeyCombination('_a')).toEqual([])
+      expect(splitKeyCombination('_a').keys).toEqual([])
       expect('[Vue warn]: Vuetify: Invalid hotkey combination: "_a" has invalid structure').toHaveBeenTipped()
     })
 
     it('should return empty array for trailing separators', () => {
-      expect(splitKeyCombination('a+')).toEqual([])
+      expect(splitKeyCombination('a+').keys).toEqual([])
       expect('[Vue warn]: Vuetify: Invalid hotkey combination: "a+" has invalid structure').toHaveBeenTipped()
-      expect(splitKeyCombination('a_')).toEqual([])
+      expect(splitKeyCombination('a_').keys).toEqual([])
       expect('[Vue warn]: Vuetify: Invalid hotkey combination: "a_" has invalid structure').toHaveBeenTipped()
     })
 
     it('should return empty array for standalone doubled separators', () => {
-      expect(splitKeyCombination('++')).toEqual([])
+      expect(splitKeyCombination('++').keys).toEqual([])
       expect('[Vue warn]: Vuetify: Invalid hotkey combination: "++" has invalid structure').toHaveBeenTipped()
-      expect(splitKeyCombination('--')).toEqual([])
+      expect(splitKeyCombination('--').keys).toEqual([])
       expect('[Vue warn]: Vuetify: Invalid hotkey combination: "--" has invalid structure').toHaveBeenTipped()
-      expect(splitKeyCombination('__')).toEqual([])
+      expect(splitKeyCombination('__').keys).toEqual([])
       expect('[Vue warn]: Vuetify: Invalid hotkey combination: "__" has invalid structure').toHaveBeenTipped()
     })
 
     // Combinations starting with doubled literal separators
     it('should treat combinations starting with doubled + literal as invalid', () => {
-      expect(splitKeyCombination('++k')).toEqual([])
+      expect(splitKeyCombination('++k').keys).toEqual([])
       expect('[Vue warn]: Vuetify: Invalid hotkey combination: "++k" has invalid structure').toHaveBeenTipped()
     })
 
     // Key aliases from centralized key-aliases.ts
     it('should handle centralized key aliases', () => {
-      expect(splitKeyCombination('control+k')).toEqual(['ctrl', 'k'])
-      expect(splitKeyCombination('command+s')).toEqual(['cmd', 's'])
-      expect(splitKeyCombination('option+tab')).toEqual(['alt', 'tab'])
-      expect(splitKeyCombination('up')).toEqual(['arrowup'])
-      expect(splitKeyCombination('esc')).toEqual(['escape'])
-      expect(splitKeyCombination('minus')).toEqual(['-'])
-      expect(splitKeyCombination('hyphen')).toEqual(['-'])
+      expect(splitKeyCombination('control+k').keys).toEqual(['ctrl', 'k'])
+      expect(splitKeyCombination('command+s').keys).toEqual(['cmd', 's'])
+      expect(splitKeyCombination('option+tab').keys).toEqual(['alt', 'tab'])
+      expect(splitKeyCombination('up').keys).toEqual(['arrowup'])
+      expect(splitKeyCombination('esc').keys).toEqual(['escape'])
+      expect(splitKeyCombination('minus').keys).toEqual(['-'])
+      expect(splitKeyCombination('hyphen').keys).toEqual(['-'])
     })
 
     it('should handle all key aliases consistently', () => {
       // Modifier aliases
-      expect(splitKeyCombination('control')).toEqual(['ctrl'])
-      expect(splitKeyCombination('command')).toEqual(['cmd'])
-      expect(splitKeyCombination('option')).toEqual(['alt'])
+      expect(splitKeyCombination('control').keys).toEqual(['ctrl'])
+      expect(splitKeyCombination('command').keys).toEqual(['cmd'])
+      expect(splitKeyCombination('option').keys).toEqual(['alt'])
 
       // Arrow key aliases
-      expect(splitKeyCombination('up')).toEqual(['arrowup'])
-      expect(splitKeyCombination('down')).toEqual(['arrowdown'])
-      expect(splitKeyCombination('left')).toEqual(['arrowleft'])
-      expect(splitKeyCombination('right')).toEqual(['arrowright'])
+      expect(splitKeyCombination('up').keys).toEqual(['arrowup'])
+      expect(splitKeyCombination('down').keys).toEqual(['arrowdown'])
+      expect(splitKeyCombination('left').keys).toEqual(['arrowleft'])
+      expect(splitKeyCombination('right').keys).toEqual(['arrowright'])
 
       // Common key aliases
-      expect(splitKeyCombination('esc')).toEqual(['escape'])
-      expect(splitKeyCombination('return')).toEqual(['enter'])
-      expect(splitKeyCombination('del')).toEqual(['delete'])
-      expect(splitKeyCombination('space')).toEqual([' '])
-      expect(splitKeyCombination('spacebar')).toEqual([' '])
+      expect(splitKeyCombination('esc').keys).toEqual(['escape'])
+      expect(splitKeyCombination('return').keys).toEqual(['enter'])
+      expect(splitKeyCombination('del').keys).toEqual(['delete'])
+      expect(splitKeyCombination('space').keys).toEqual([' '])
+      expect(splitKeyCombination('spacebar').keys).toEqual([' '])
 
       // Symbol aliases
-      expect(splitKeyCombination('minus')).toEqual(['-'])
-      expect(splitKeyCombination('hyphen')).toEqual(['-'])
+      expect(splitKeyCombination('minus').keys).toEqual(['-'])
+      expect(splitKeyCombination('hyphen').keys).toEqual(['-'])
     })
 
     it('should handle key aliases in complex combinations', () => {
-      expect(splitKeyCombination('control+option+up')).toEqual(['ctrl', 'alt', 'arrowup'])
-      expect(splitKeyCombination('command+shift+esc')).toEqual(['cmd', 'shift', 'escape'])
-      expect(splitKeyCombination('control+return')).toEqual(['ctrl', 'enter'])
-      expect(splitKeyCombination('alt+del')).toEqual(['alt', 'delete'])
-      expect(splitKeyCombination('shift+minus')).toEqual(['shift', '-'])
+      expect(splitKeyCombination('control+option+up').keys).toEqual(['ctrl', 'alt', 'arrowup'])
+      expect(splitKeyCombination('command+shift+esc').keys).toEqual(['cmd', 'shift', 'escape'])
+      expect(splitKeyCombination('control+return').keys).toEqual(['ctrl', 'enter'])
+      expect(splitKeyCombination('alt+del').keys).toEqual(['alt', 'delete'])
+      expect(splitKeyCombination('shift+minus').keys).toEqual(['shift', '-'])
     })
 
     it('should handle case insensitive key aliases', () => {
-      expect(splitKeyCombination('CONTROL+K')).toEqual(['ctrl', 'k'])
-      expect(splitKeyCombination('Command+S')).toEqual(['cmd', 's'])
-      expect(splitKeyCombination('OPTION+TAB')).toEqual(['alt', 'tab'])
-      expect(splitKeyCombination('UP')).toEqual(['arrowup'])
-      expect(splitKeyCombination('ESC')).toEqual(['escape'])
-      expect(splitKeyCombination('MINUS')).toEqual(['-'])
+      expect(splitKeyCombination('CONTROL+K').keys).toEqual(['ctrl', 'k'])
+      expect(splitKeyCombination('Command+S').keys).toEqual(['cmd', 's'])
+      expect(splitKeyCombination('OPTION+TAB').keys).toEqual(['alt', 'tab'])
+      expect(splitKeyCombination('UP').keys).toEqual(['arrowup'])
+      expect(splitKeyCombination('ESC').keys).toEqual(['escape'])
+      expect(splitKeyCombination('MINUS').keys).toEqual(['-'])
     })
 
     it('should handle mixed case aliases in combinations', () => {
-      expect(splitKeyCombination('Control+Option+Up')).toEqual(['ctrl', 'alt', 'arrowup'])
-      expect(splitKeyCombination('COMMAND+shift+ESC')).toEqual(['cmd', 'shift', 'escape'])
+      expect(splitKeyCombination('Control+Option+Up').keys).toEqual(['ctrl', 'alt', 'arrowup'])
+      expect(splitKeyCombination('COMMAND+shift+ESC').keys).toEqual(['cmd', 'shift', 'escape'])
     })
 
     it('should handle meta key correctly for cross-platform use', () => {
-      expect(splitKeyCombination('meta+s')).toEqual(['meta', 's'])
-      expect(splitKeyCombination('meta+shift+z')).toEqual(['meta', 'shift', 'z'])
-      expect(splitKeyCombination('meta+alt+p')).toEqual(['meta', 'alt', 'p'])
+      expect(splitKeyCombination('meta+s').keys).toEqual(['meta', 's'])
+      expect(splitKeyCombination('meta+shift+z').keys).toEqual(['meta', 'shift', 'z'])
+      expect(splitKeyCombination('meta+alt+p').keys).toEqual(['meta', 'alt', 'p'])
     })
   })
 
@@ -244,13 +248,13 @@ describe('hotkey-parsing.ts', () => {
       expect(combinations).toEqual(['ctrl+shift+a', 'alt+-', 'k'])
 
       const first = splitKeyCombination(combinations[0])
-      expect(first).toEqual(['ctrl', 'shift', 'a'])
+      expect(first.keys).toEqual(['ctrl', 'shift', 'a'])
 
       const second = splitKeyCombination(combinations[1])
-      expect(second).toEqual(['alt', '-'])
+      expect(second.keys).toEqual(['alt', '-'])
 
       const third = splitKeyCombination(combinations[2])
-      expect(third).toEqual(['k'])
+      expect(third.keys).toEqual(['k'])
     })
   })
 })

@@ -50,6 +50,9 @@ export default {
       previousMonth: 'Bulan sebelumnya',
       nextMonth: 'Bulan berikutnya',
       selectYear: 'Pilih tahun',
+      previousYear: 'Tahun sebelumnya',
+      nextYear: 'Tahun berikutnya',
+      selectMonth: 'Pilih bulan',
       selectDate: '{0}',
       currentDate: 'Hari ini, {0}',
     },
@@ -85,6 +88,9 @@ export default {
     am: 'AM',
     pm: 'PM',
     title: 'Pilih Waktu',
+    hour: 'Jam',
+    minute: 'Menit',
+    second: 'Detik',
   },
   pagination: {
     ariaLabel: {
@@ -141,6 +147,7 @@ export default {
     space: 'Spasi',
     plus: 'plus',
     shortcut: 'Pintasan keyboard: {0}',
+    or: 'atau',
   },
   video: {
     play: 'Putar',

@@ -493,16 +493,19 @@ describe('VCombobox', () => {
     await expect.element(input).toHaveAttribute('placeholder', 'Placeholder')
 
     await rerender({ label: 'Label' })
-    await expect.element(input).not.toBeDisplayed()
+    await expect.element(input).toBeDisplayed()
+    expect(Number(window.getComputedStyle(input, '::placeholder').opacity)).toBe(0)
 
     await userEvent.click(input)
     await expect.element(input).toHaveAttribute('placeholder', 'Placeholder')
     await expect.element(input).toBeDisplayed()
+    expect(Number(window.getComputedStyle(input, '::placeholder').opacity)).toBeGreaterThan(0.2)
 
     await userEvent.tab()
     await rerender({ persistentPlaceholder: true })
     await expect.element(input).toHaveAttribute('placeholder', 'Placeholder')
     await expect.element(input).toBeDisplayed()
+    expect(Number(window.getComputedStyle(input, '::placeholder').opacity)).toBeGreaterThan(0.2)
 
     await rerender({ modelValue: 'Foobar' })
     await expect.element(input).not.toHaveAttribute('placeholder')
@@ -800,6 +803,22 @@ describe('VCombobox', () => {
     await expect.poll(() => screen.queryAllByRole('option')).toHaveLength(0)
     await userEvent.click(element)
     await expect.poll(() => screen.queryAllByRole('option')).toHaveLength(1)
+  })
+
+  it('should create new items when pasting with line break characters', async () => {
+    const model = ref(null)
+    render(() => (
+      <VCombobox
+        v-model={ model.value }
+        multiple
+        delimiters={[',']}
+      />
+    ))
+
+    await userEvent.tab()
+    navigator.clipboard.writeText('foo,\nbar')
+    await userEvent.paste()
+    expect(model.value).toEqual(['foo', 'bar'])
   })
 
   describe('Showcase', () => {

@@ -6,6 +6,9 @@ autoInstallPeers: false
 ignoreWorkspaceRootCheck: true
 
 ignoredBuiltDependencies:
+  - '@percy/core'
+  - edgedriver
+  - geckodriver
   - vue-demi
 
 linkWorkspacePackages: deep
@@ -17,10 +20,7 @@ minimumReleaseAgeExclude:
 nodeLinker: hoisted
 
 onlyBuiltDependencies:
-  - '@percy/core'
-  - edgedriver
-  - esbuild
-  - geckodriver
+  - esbuild@0.25.9
 
 overrides:
   '@testing-library/dom': npm:@vuetify/testing-library-dom@1.0.2

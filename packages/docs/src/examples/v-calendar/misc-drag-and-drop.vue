@@ -345,7 +345,7 @@
   }
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 .v-event-draggable {
   padding-left: 6px;
 }

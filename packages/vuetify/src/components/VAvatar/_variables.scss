@@ -4,7 +4,7 @@
 @use "../../styles/tools/functions";
 
 // Defaults
-$avatar-background: var(--v-theme-surface) !default;
+$avatar-background: rgb(var(--v-theme-surface)) !default;
 $avatar-border-radius: map.get(variables.$rounded, 'circle') !default;
 $avatar-border-color: settings.$border-color-root !default;
 $avatar-border-radius: map.get(settings.$rounded, 0) !default;

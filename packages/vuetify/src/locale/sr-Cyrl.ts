@@ -50,6 +50,9 @@ export default {
       previousMonth: 'Previous month',
       nextMonth: 'Next month',
       selectYear: 'Select year',
+      previousYear: 'Претходна година',
+      nextYear: 'Следећа година',
+      selectMonth: 'Изаберите месец',
       selectDate: '{0}',
       currentDate: 'Today, {0}',
     },
@@ -85,6 +88,9 @@ export default {
     am: 'АМ',
     pm: 'ПМ',
     title: 'Изаберите време',
+    hour: 'Сат',
+    minute: 'Минути',
+    second: 'Секунде',
   },
   pagination: {
     ariaLabel: {
@@ -141,6 +147,7 @@ export default {
     space: 'Размак',
     plus: 'плус',
     shortcut: 'Пречица на тастатури: {0}',
+    or: 'или',
   },
   video: {
     play: 'Пусти',

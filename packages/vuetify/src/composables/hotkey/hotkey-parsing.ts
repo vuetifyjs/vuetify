@@ -11,27 +11,26 @@ export const MODIFIERS = ['ctrl', 'shift', 'alt', 'meta', 'cmd']
  * A combination is a set of keys that must be pressed simultaneously.
  * e.g. `ctrl+k`, `shift--`
  */
-export function splitKeyCombination (combination: string, isInternal = false): string[] {
+export function splitKeyCombination (combination: string, isInternal = false): { keys: string[], separators: string[] } {
+  const emptyResult = { keys: [], separators: [] }
   if (!combination) {
     if (!isInternal) consoleWarn('Invalid hotkey combination: empty string provided')
-    return []
+    return emptyResult
   }
 
   // --- VALIDATION ---
-  const startsWithPlusOrUnderscore = combination.startsWith('+') || combination.startsWith('_')
 
   const hasInvalidLeadingSeparator = (
-    // Starts with a single '+' or '_' followed by a non-separator character (e.g. '+a', '_a')
-    startsWithPlusOrUnderscore &&
-    !(combination.startsWith('++') || combination.startsWith('__'))
+    combination.length > 1 &&
+    // Starts with a single separator followed by a non-separator character (e.g. '+a', '_a')
+    ['+', '/', '_'].some(v => combination.startsWith(v)) &&
+    !['++', '//', '__'].some(v => combination.startsWith(v))
   )
 
   const hasInvalidStructure = (
-    // Invalid leading separator patterns
-    (combination.length > 1 && hasInvalidLeadingSeparator) ||
+    hasInvalidLeadingSeparator ||
     // Disallow literal + or _ keys (they require shift)
-    combination.includes('++') || combination.includes('__') ||
-    combination === '+' || combination === '_' ||
+    combination.includes('++') || combination.includes('__') || combination === '+' || combination === '_' ||
     // Ends with a separator that is not part of a doubled literal
     (combination.length > 1 && (combination.endsWith('+') || combination.endsWith('_')) && combination.at(-2) !== combination.at(-1)) ||
     // Stand-alone doubled separators (dangling)
@@ -40,14 +39,16 @@ export function splitKeyCombination (combination: string, isInternal = false): s
 
   if (hasInvalidStructure) {
     if (!isInternal) consoleWarn(`Invalid hotkey combination: "${combination}" has invalid structure`)
-    return []
+    return emptyResult
   }
 
   const keys: string[] = []
+  const separators: string[] = []
   let buffer = ''
 
-  const flushBuffer = () => {
+  const flushBuffer = (separator?: string) => {
     if (buffer) {
+      separator && separators.push(separator)
       keys.push(normalizeKey(buffer))
       buffer = ''
     }
@@ -57,13 +58,13 @@ export function splitKeyCombination (combination: string, isInternal = false): s
     const char = combination[i]
     const nextChar = combination[i + 1]
 
-    if (char === '+' || char === '_' || char === '-') {
+    if (['+', '/', '_', '-'].includes(char)) {
       if (char === nextChar) {
-        flushBuffer()
+        flushBuffer(char)
         keys.push(char)
         i++
-      } else if (char === '+' || char === '_') {
-        flushBuffer()
+      } else if (['+', '/', '_'].includes(char)) {
+        flushBuffer(char)
       } else {
         buffer += char
       }
@@ -78,14 +79,14 @@ export function splitKeyCombination (combination: string, isInternal = false): s
   const hasInvalidMinus = keys.some(key => key.length > 1 && key.includes('-') && key !== '--')
   if (hasInvalidMinus) {
     if (!isInternal) consoleWarn(`Invalid hotkey combination: "${combination}" has invalid structure`)
-    return []
+    return emptyResult
   }
 
   if (keys.length === 0 && combination) {
-    return [normalizeKey(combination)]
+    return { keys: [normalizeKey(combination)], separators }
   }
 
-  return keys
+  return { keys, separators }
 }
 
 /**
@@ -122,11 +123,11 @@ export function splitKeySequence (str: string): string[] {
       const prevChar = str[i - 1]
       const prevPrevChar = i > 1 ? str[i - 2] : undefined
 
-      const precededBySinglePlusOrUnderscore = (
-        (prevChar === '+' || prevChar === '_') && prevPrevChar !== '+'
+      const precededBySeparator = (
+        (['+', '_'].includes(prevChar)) && !['+', '/'].includes(prevPrevChar ?? '')
       )
 
-      if (precededBySinglePlusOrUnderscore) {
+      if (precededBySeparator) {
         // Treat as part of the combination (e.g., 'ctrl+-')
         buffer += char
         i++
@@ -166,7 +167,7 @@ export function splitKeySequence (str: string): string[] {
   }
 
   // Validate that each part of the sequence is a valid combination
-  const areAllValid = collapsed.every(s => splitKeyCombination(s, true).length > 0)
+  const areAllValid = collapsed.every(s => splitKeyCombination(s, true).keys.length > 0)
 
   if (!areAllValid) {
     consoleWarn(`Invalid hotkey sequence: "${str}" contains invalid combinations`)

@@ -3,7 +3,7 @@ import { Box } from '@/util/box'
 
 /** @see https://stackoverflow.com/a/57876601/2074736 */
 export function nullifyTransforms (el: HTMLElement): Box {
-  const rect = new Box(el.getBoundingClientRect())
+  const rect = new Box(el)
   const style = getComputedStyle(el)
   const tx = style.transform
 

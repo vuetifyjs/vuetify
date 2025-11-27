@@ -61,6 +61,7 @@ export const VPicker = genericComponent<VPickerSlots>()({
             <div
               key="header"
               class={[
+                'v-picker__header-wrapper',
                 backgroundColorClasses.value,
               ]}
               style={[

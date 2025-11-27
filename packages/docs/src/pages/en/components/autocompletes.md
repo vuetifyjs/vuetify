@@ -101,13 +101,11 @@ This is required for virtual scrolling to work properly — without it, only par
 
 ### Misc
 
-<!--
 #### Asynchronous items
 
-Sometimes you need to load data externally based upon a search query. Use the `search-input` prop with the **.sync** modifier when using the `autocomplete` prop. We also make use of the new `cache-items` prop. This will keep a unique list of all items that have been passed to the `items` prop and is **REQUIRED** when using asynchronous items and the **multiple** prop.
+Sometimes you need to load data externally based upon a search query. Simply bind to the `search` prop with the **v-model** and watch for the changes to the reactive variable. Make sure to apply debounce and avoid race conditions.
 
 <ExamplesExample file="v-autocomplete/misc-asynchronous-items" />
--->
 
 #### State selector
 

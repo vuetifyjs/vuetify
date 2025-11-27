@@ -517,7 +517,7 @@ export function findChildrenWithProvide (
   } else if (Array.isArray(vnode.children)) {
     return vnode.children.map(child => findChildrenWithProvide(key, child)).flat(1)
   } else if (vnode.component) {
-    if (Object.getOwnPropertySymbols(vnode.component.provides).includes(key as symbol)) {
+    if (Object.getOwnPropertyDescriptor(vnode.component.provides, key as symbol)) {
       return [vnode.component]
     } else if (vnode.component.subTree) {
       return findChildrenWithProvide(key, vnode.component.subTree).flat(1)

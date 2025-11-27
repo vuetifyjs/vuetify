@@ -156,16 +156,11 @@ export default defineNuxtConfig({
   build: {
     transpile: ['vuetify'],
   },
-  modules: [
-    (_options, nuxt) => {
-      nuxt.hooks.hook('vite:extendConfig', (config) => {
-        // @ts-expect-error
-        config.plugins.push(vuetify({ autoImport: true }))
-      })
-    },
-    //...
-  ],
   vite: {
+    plugins: [
+      // @ts-expect-error
+      vuetify({ autoImport: true }),
+    ]
     vue: {
       template: {
         transformAssetUrls,

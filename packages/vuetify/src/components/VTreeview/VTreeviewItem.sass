@@ -29,7 +29,7 @@
 
     .v-list-item--slim > .v-list-item__prepend
       > .v-icon ~ .v-list-item__spacer
-        width: $treeview-item-spacer-width
+        width: var(--v-list-prepend-gap, $treeview-item-spacer-width)
 
       &:not(:has(.v-list-item-action))
         > .v-icon

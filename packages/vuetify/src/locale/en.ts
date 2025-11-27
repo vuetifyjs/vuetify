@@ -50,6 +50,9 @@ export default {
       previousMonth: 'Previous month',
       nextMonth: 'Next month',
       selectYear: 'Select year',
+      previousYear: 'Previous year',
+      nextYear: 'Next year',
+      selectMonth: 'Select month',
       selectDate: '{0}', // Full date format
       currentDate: 'Today, {0}',
     },
@@ -85,6 +88,9 @@ export default {
     am: 'AM',
     pm: 'PM',
     title: 'Select Time',
+    hour: 'Hour',
+    minute: 'Minute',
+    second: 'Second',
   },
   pagination: {
     ariaLabel: {
@@ -141,6 +147,7 @@ export default {
     option: 'Option',
     plus: 'plus',
     shortcut: 'Keyboard shortcut: {0}',
+    or: 'or',
   },
   video: {
     play: 'Play',

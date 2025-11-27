@@ -89,6 +89,9 @@ export const makeVSnackbarProps = propsFactory({
   }), [
     'persistent',
     'noClickAnimation',
+    'retainFocus',
+    'captureFocus',
+    'disableInitialFocus',
     'scrim',
     'scrollStrategy',
     'stickToTarget',
