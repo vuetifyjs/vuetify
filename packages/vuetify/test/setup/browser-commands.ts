@@ -1,4 +1,4 @@
-/// <reference types="@vitest/browser/providers/webdriverio" />
+/// <reference types="@vitest/browser-webdriverio" />
 /// <reference types="./percy.d.ts" />
 
 import type { BrowserCommandContext } from 'vitest/node'
@@ -24,6 +24,15 @@ function drag (ctx: BrowserCommandContext, start: [number, number], ...moves: nu
   for (const move of moves) {
     action.move({ x: move[0], y: move[1], duration: 10 })
   }
+  action.up()
+  return action.perform()
+}
+
+function click (ctx: BrowserCommandContext, x: number, y: number) {
+  const action = ctx.browser.action('pointer')
+  action.move({ x, y })
+  action.down()
+  action.pause(10)
   action.up()
   return action.perform()
 }
@@ -96,6 +105,7 @@ function clearAbortTimeout (ctx: BrowserCommandContext) {
 
 export const commands = {
   drag,
+  click,
   scroll,
   isDisplayed,
   percySnapshot,

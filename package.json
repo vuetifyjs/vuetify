@@ -65,7 +65,7 @@
     "eslint-plugin-sonarjs": "^0.25.1",
     "eslint-plugin-vue": "^10.6.0",
     "eslint-plugin-vuetify": "^2.5.3",
-    "glob": "^11.0.1",
+    "glob": "^11.1.0",
     "husky": "^9.1.7",
     "inquirer": "^12.6.0",
     "lodash-es": "^4.17.21",

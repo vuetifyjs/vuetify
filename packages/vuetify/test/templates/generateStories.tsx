@@ -5,7 +5,7 @@
 import type { FunctionalComponent } from 'vue'
 import type { JSXComponent } from '@/util'
 import { it } from 'vitest'
-import { commands, page } from '@vitest/browser/context'
+import { commands, page } from 'vitest/browser'
 import { render } from '@test'
 
 type Stories = Record<string, JSX.Element>

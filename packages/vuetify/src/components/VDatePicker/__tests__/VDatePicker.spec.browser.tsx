@@ -4,7 +4,7 @@ import { VDatePicker } from '..'
 // Utilities
 import { render, screen, userEvent, wait } from '@test'
 import { within } from '@testing-library/vue'
-import { commands } from '@vitest/browser/context'
+import { commands } from 'vitest/browser'
 import { ref } from 'vue'
 
 describe('VDatePicker', () => {

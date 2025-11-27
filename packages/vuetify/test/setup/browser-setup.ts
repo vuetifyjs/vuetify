@@ -2,7 +2,7 @@ import 'roboto-fontface'
 import '@/styles/main.sass'
 import { beforeAll, beforeEach, expect } from 'vitest'
 import { cleanup } from '@testing-library/vue'
-import { commands, page } from '@vitest/browser/context'
+import { commands, page } from 'vitest/browser'
 
 beforeAll(async () => {
   await commands.setFocusEmulationEnabled()

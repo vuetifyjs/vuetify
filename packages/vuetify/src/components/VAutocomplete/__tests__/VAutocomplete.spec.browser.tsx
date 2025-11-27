@@ -5,7 +5,7 @@ import { VForm } from '@/components/VForm'
 // Utilities
 import { generate, render, screen, userEvent, wait, waitAnimationFrame, waitIdle } from '@test'
 import { findAllByRole, queryAllByRole, within } from '@testing-library/vue'
-import { commands } from '@vitest/browser/context'
+import { commands } from 'vitest/browser'
 import { cloneVNode, ref } from 'vue'
 
 const variants = ['underlined', 'outlined', 'filled', 'solo', 'plain'] as const
