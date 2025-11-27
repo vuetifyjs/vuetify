@@ -211,6 +211,7 @@ function genDefaults () {
     stylesheetId: 'vuetify-theme-stylesheet',
     scoped: false,
     utilities: true,
+    layers: true,
   }
 }
 
