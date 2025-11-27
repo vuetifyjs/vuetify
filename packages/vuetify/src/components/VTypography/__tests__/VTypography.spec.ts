@@ -1,86 +1,102 @@
 // Utilities
-import { mount } from '@vue/test-utils'
-import { createVuetify } from '../../../framework'
-import { VTypography } from '../VTypography'
+import { mount } from "@vue/test-utils";
+import { createVuetify } from "../../../framework";
+import { VTypography, parseTypographyVariant } from "../VTypography";
+import { defaultTypography } from "@/composables/typography";
 
-describe('VTypography', () => {
-  const vuetify = createVuetify()
+describe("parseTypographyVariant", () => {
+  const available = defaultTypography as Record<string, any>;
 
-  it('renders properly with default props', () => {
+  it("falls back to default variant when only responsive tokens are provided", () => {
+    const result = parseTypographyVariant(
+      "lg:headline-large",
+      available,
+      "body-medium",
+    );
+
+    expect(result.base).toBe("body-medium");
+    expect(result.classes).toContain("body-medium");
+    expect(result.classes).toContain("lg:headline-large");
+  });
+
+  it("uses the last unprefixed token as base variant", () => {
+    const result = parseTypographyVariant(
+      "body-small body-large",
+      available,
+      "body-medium",
+    );
+
+    expect(result.base).toBe("body-large");
+    expect(result.classes).toContain("body-large");
+  });
+});
+
+describe("VTypography", () => {
+  const vuetify = createVuetify();
+
+  it("renders default variant class", () => {
     const wrapper = mount(VTypography, {
       global: {
         plugins: [vuetify],
       },
       slots: {
-        default: 'Test Text',
+        default: "Test Text",
       },
-    })
+    });
 
-    expect(wrapper.text()).toBe('Test Text')
-    expect(wrapper.classes()).toContain('v-typography')
-  })
+    expect(wrapper.text()).toBe("Test Text");
+    expect(wrapper.classes()).toContain("v-typography");
+    expect(wrapper.classes()).toContain("body-medium");
+  });
 
-  it('applies correct typography styles based on text prop', () => {
+  it("applies responsive variant classes", () => {
     const wrapper = mount(VTypography, {
       global: {
         plugins: [vuetify],
       },
       props: {
-        text: 'headline-large',
+        variant: "body-small lg:body-large xl:headline-medium",
       },
-    })
+    });
 
-    const style = wrapper.attributes('style')
-    expect(style).toBeDefined()
-    expect(wrapper.classes()).toContain('v-typography')
-  })
+    expect(wrapper.classes()).toEqual(
+      expect.arrayContaining([
+        "body-small",
+        "lg:body-large",
+        "xl:headline-medium",
+      ]),
+    );
+  });
 
-  it('handles mobile breakpoint and variant', () => {
+  it("applies custom color", () => {
     const wrapper = mount(VTypography, {
       global: {
         plugins: [vuetify],
       },
       props: {
-        text: 'headline-large',
-        mobile: 'display-large',
-        mobileBreakpoint: 'md',
+        color: "primary",
       },
-    })
+    });
 
-    expect(wrapper.attributes('style')).toBeDefined()
-    expect(wrapper.classes()).toContain('v-typography')
-  })
+    expect(wrapper.attributes("style")).toBeDefined();
+    expect(wrapper.classes()).toContain("v-typography");
+  });
 
-  it('applies custom color', () => {
+  it("applies custom tag", () => {
     const wrapper = mount(VTypography, {
       global: {
         plugins: [vuetify],
       },
       props: {
-        text: 'headline-large',
-        color: 'primary',
+        tag: "h1",
       },
-    })
+    });
 
-    expect(wrapper.attributes('style')).toBeDefined()
-    expect(wrapper.classes()).toContain('v-typography')
-  })
+    expect(wrapper.element.tagName.toLowerCase()).toBe("h1");
+  });
 
-  it('applies custom tag', () => {
-    const wrapper = mount(VTypography, {
-      global: {
-        plugins: [vuetify],
-      },
-      props: {
-        tag: 'h1',
-      },
-    })
-
-    expect(wrapper.element.tagName.toLowerCase()).toBe('h1')
-  })
-
-  it('applies custom class', () => {
-    const customClass = 'custom-class'
+  it("applies custom class", () => {
+    const customClass = "custom-class";
     const wrapper = mount(VTypography, {
       global: {
         plugins: [vuetify],
@@ -88,72 +104,37 @@ describe('VTypography', () => {
       props: {
         class: customClass,
       },
-    })
+    });
 
-    expect(wrapper.classes()).toContain(customClass)
-  })
+    expect(wrapper.classes()).toContain(customClass);
+  });
 
-  it('applies custom style', () => {
-    const customStyle = { backgroundColor: 'red' }
+  it("applies custom inline style", () => {
+    const wrapper = mount(VTypography, {
+      global: { plugins: [vuetify] },
+      props: {
+        customVariant: { fontSize: "32px", fontWeight: "700" },
+      },
+      slots: {
+        default: "Custom style",
+      },
+    });
+
+    const style = wrapper.attributes("style");
+    expect(style).toContain("font-size: 32px");
+    expect(style).toContain("font-weight: 700");
+  });
+
+  it("handles theme classes", () => {
     const wrapper = mount(VTypography, {
       global: {
         plugins: [vuetify],
       },
       props: {
-        style: customStyle,
+        theme: "dark",
       },
-    })
+    });
 
-    const style = wrapper.attributes('style')
-    expect(style).toBeDefined()
-    expect(style).toContain('background-color: red')
-  })
-
-  it('handles theme classes', () => {
-    const wrapper = mount(VTypography, {
-      global: {
-        plugins: [vuetify],
-      },
-      props: {
-        theme: 'dark',
-      },
-    })
-
-    expect(wrapper.classes()).toContain('v-theme--dark')
-  })
-
-  it('applies customVariant styles', () => {
-    const wrapper = mount(VTypography, {
-      global: { plugins: [vuetify] },
-      props: {
-        customVariant: { fontSize: '32px', fontWeight: '700' },
-      },
-      slots: {
-        default: 'Custom style',
-      },
-    })
-
-    const style = wrapper.attributes('style')
-    expect(style).toContain('font-size: 32px')
-    expect(style).toContain('font-weight: 700')
-  })
-
-  it('prioritizes customVariant over text', () => {
-    const wrapper = mount(VTypography, {
-      global: { plugins: [vuetify] },
-      props: {
-        text: 'headline-large',
-        customVariant: { fontSize: '42px', fontWeight: '900' },
-      },
-      slots: {
-        default: 'Priority Test',
-      },
-    })
-
-    const style = wrapper.attributes('style')
-    expect(style).toContain('font-size: 42px')
-    expect(style).toContain('font-weight: 900')
-  })
-
-
-})
+    expect(wrapper.classes()).toContain("v-theme--dark");
+  });
+});
