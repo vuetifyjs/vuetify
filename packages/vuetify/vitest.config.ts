@@ -81,7 +81,6 @@ export default defineConfig(configEnv => {
               include: ['**/*.spec.browser.{ts,tsx}'],
               setupFiles: ['../test/setup/browser-setup.ts'],
               bail: process.env.TEST_BAIL ? 1 : undefined,
-              // maxWorkers: 100,
               browser: {
                 enabled: true,
                 provider: playwright({
@@ -96,7 +95,7 @@ export default defineConfig(configEnv => {
                       '--start-maximized',
                       '--disable-infobars',
                       process.env.TEST_BAIL && '--auto-open-devtools-for-tabs',
-                    ].filter(v => !!v) as string[],
+                    ].filter(v => v != null),
                   },
                 }),
                 ui: false,

@@ -73,8 +73,21 @@ async function percySnapshot (ctx: BrowserCommandContext, name: string, options?
 
 async function waitStable (ctx: BrowserCommandContext, selector: string) {
   const el = ctx.iframe.locator(selector)
-  await el.waitFor()
-  await el.elementHandle().then(e => e?.waitForElementState('stable'))
+  const handles = await el.elementHandles()
+  if (handles.length > 1) {
+    await Promise.all(
+      handles.map(h => Promise.any([
+        h.waitForElementState('stable', { timeout: 1000 }),
+        h.waitForElementState('hidden', { timeout: 1000 }),
+      ]))
+    )
+  } else {
+    await Promise.all(
+      handles.map(h =>
+        h.waitForElementState('stable', { timeout: 1000 }),
+      )
+    )
+  }
 }
 
 async function waitForClickable (ctx: BrowserCommandContext, selector: string) {

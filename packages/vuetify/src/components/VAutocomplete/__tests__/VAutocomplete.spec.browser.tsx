@@ -3,7 +3,7 @@ import { VAutocomplete } from '../VAutocomplete'
 import { VForm } from '@/components/VForm'
 
 // Utilities
-import { generate, render, screen, userEvent, wait, waitAnimationFrame, waitIdle } from '@test'
+import { generate, render, screen, userEvent, waitAnimationFrame, waitIdle } from '@test'
 import { findAllByRole, queryAllByRole, within } from '@testing-library/vue'
 import { commands } from 'vitest/browser'
 import { cloneVNode, ref } from 'vue'
@@ -83,7 +83,7 @@ describe('VAutocomplete', () => {
     ))
 
     await userEvent.click(container)
-    await wait(100) // waitStable was very flaky here
+    await commands.waitStable('.v-list')
 
     const menu = await screen.findByRole('listbox')
 
@@ -182,7 +182,7 @@ describe('VAutocomplete', () => {
     ))
 
     await userEvent.click(container)
-    await wait(100)
+    await commands.waitStable('.v-list')
 
     const menu = await screen.findByRole('listbox')
 

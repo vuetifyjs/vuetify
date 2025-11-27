@@ -2,10 +2,10 @@
 import { VDatePicker } from '..'
 
 // Utilities
-import { render, screen, userEvent, wait } from '@test'
+import { render, screen, userEvent, waitIdle } from '@test'
 import { within } from '@testing-library/vue'
 import { commands } from 'vitest/browser'
-import { ref } from 'vue'
+import { nextTick, ref } from 'vue'
 
 describe('VDatePicker', () => {
   it('selects a range of dates', async () => {
@@ -61,7 +61,8 @@ describe('VDatePicker', () => {
     await commands.abortAfter(5000, 'VDatePicker infinite loop detection')
 
     firstDay.value = -1.5
-    await wait(100)
+    await nextTick()
+    await waitIdle()
 
     await userEvent.click(await screen.findByText(21))
     await userEvent.click(await screen.findByText(7))

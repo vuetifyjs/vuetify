@@ -3,7 +3,7 @@ import { VCombobox } from '../VCombobox'
 import { VForm } from '@/components/VForm'
 
 // Utilities
-import { generate, render, screen, userEvent, wait, waitAnimationFrame, waitIdle } from '@test'
+import { generate, render, screen, userEvent, waitAnimationFrame, waitIdle } from '@test'
 import { commands } from 'vitest/browser'
 import { cloneVNode, ref } from 'vue'
 
@@ -93,7 +93,7 @@ describe('VCombobox', () => {
       ))
 
       await userEvent.click(element)
-      await wait(100)
+      await commands.waitStable('.v-list')
       await userEvent.click((await screen.findAllByRole('option'))[0])
       expect(model.value).toStrictEqual(items[0])
       await expect.poll(() => search.value).toBe(items[0].title)
@@ -143,7 +143,7 @@ describe('VCombobox', () => {
       const input = screen.getByCSS('input')
 
       await userEvent.click(element)
-      await wait(100)
+      await commands.waitStable('.v-list')
       await userEvent.click(screen.getAllByRole('option')[0])
       expect(model.value).toStrictEqual([items[0]])
       expect(search.value).toBeUndefined()
@@ -369,7 +369,7 @@ describe('VCombobox', () => {
       ))
 
       await userEvent.click(element)
-      await wait(100)
+      await commands.waitStable('.v-list')
 
       const options = await screen.findAllByRole('option', { selected: true })
       expect(options).toHaveLength(2)
@@ -477,7 +477,7 @@ describe('VCombobox', () => {
     ))
 
     await userEvent.click(element)
-    await wait(100)
+    await commands.waitStable('.v-list')
 
     await userEvent.click(screen.getAllByRole('option')[0])
 
@@ -752,7 +752,7 @@ describe('VCombobox', () => {
     ))
 
     await userEvent.click(element)
-    await wait(100)
+    await commands.waitStable('.v-list')
     await userEvent.click(screen.getAllByRole('option')[0])
     await expect.poll(() => model.value).toStrictEqual({ title: 'Item 1', value: 'item1' })
 

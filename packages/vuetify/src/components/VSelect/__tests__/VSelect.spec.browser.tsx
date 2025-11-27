@@ -4,7 +4,7 @@ import { VForm } from '@/components/VForm'
 import { VListItem } from '@/components/VList'
 
 // Utilities
-import { commands, generate, render, screen, userEvent, wait, waitForClickable } from '@test'
+import { commands, generate, render, screen, userEvent, waitForClickable } from '@test'
 import { getAllByRole } from '@testing-library/vue'
 import { cloneVNode, computed, nextTick, ref } from 'vue'
 
@@ -778,7 +778,7 @@ describe('VSelect', () => {
     ))
 
     await userEvent.click(element)
-    await wait(100)
+    await commands.waitStable('.v-list')
 
     const options = screen.getAllByRole('option')
     expect(options).toHaveLength(3)
