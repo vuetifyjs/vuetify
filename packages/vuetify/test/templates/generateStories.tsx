@@ -1,12 +1,14 @@
+/// <reference types="@vizzly-testing/vitest" />
+
 /**
  * Utilities for generating formatted mount functions
  * Some utility functions for mounting these generated examples inside of tests
  */
 import type { FunctionalComponent } from 'vue'
 import type { JSXComponent } from '@/util'
-import { it } from 'vitest'
-import { commands, page } from 'vitest/browser'
-import { render } from '@test'
+import { expect, it } from 'vitest'
+import { page } from 'vitest/browser'
+import { render, waitIdle } from '@test'
 
 type Stories = Record<string, JSX.Element>
 type Props = Record<string, boolean | any[]>
@@ -112,7 +114,9 @@ export const generate = ({ props, stories, component }: GenerateConfiguration) =
   }
 
   return it('renders everything', async () => {
-    render(() => (
+    await page.viewport(600, 800)
+
+    const { element } = render(() => (
       <>
         { exampleStories && (
           <>
@@ -136,10 +140,17 @@ export const generate = ({ props, stories, component }: GenerateConfiguration) =
       suite = suite.suite
     }
 
+    await page.viewport(600, document.body.scrollHeight)
+    await waitIdle()
+    await expect(element).toMatchScreenshot(name.trim(), {
+      properties: { mobile: true },
+    })
+
     await page.viewport(1280, document.body.scrollHeight)
-    await commands.percySnapshot(name.trim())
-    await page.screenshot()
-    await page.viewport(1280, 800)
+    await waitIdle()
+    await expect(element).toMatchScreenshot(name.trim(), {
+      properties: { mobile: false },
+    })
   })
 }
 
