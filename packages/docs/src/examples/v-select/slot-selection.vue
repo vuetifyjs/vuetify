@@ -6,7 +6,7 @@
     multiple
   >
     <template v-slot:selection="{ item, index }">
-      <v-chip v-if="index < 2" :text="item.title"></v-chip>
+      <v-chip v-if="index < 2" :text="item"></v-chip>
 
       <span
         v-if="index === 2"

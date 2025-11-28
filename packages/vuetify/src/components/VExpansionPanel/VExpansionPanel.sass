@@ -33,39 +33,41 @@
     position: relative
     z-index: 1
 
-    &:not(&--variant-accordion)
-      > :not(:first-child):not(:last-child):not(.v-expansion-panel--active):not(.v-expansion-panel--before-active)
-        border-bottom-left-radius: 0 !important
-        border-bottom-right-radius: 0 !important
+    @include tools.layer('overrides')
+      &:not(&--variant-accordion)
+        > :not(:first-child):not(:last-child):not(.v-expansion-panel--active):not(.v-expansion-panel--before-active)
+          border-bottom-left-radius: 0
+          border-bottom-right-radius: 0
 
-      > :not(:first-child):not(:last-child):not(.v-expansion-panel--active):not(.v-expansion-panel--after-active)
-        border-top-left-radius: 0 !important
-        border-top-right-radius: 0 !important
+        > :not(:first-child):not(:last-child):not(.v-expansion-panel--active):not(.v-expansion-panel--after-active)
+          border-top-left-radius: 0
+          border-top-right-radius: 0
 
-      > :first-child:not(:last-child):not(.v-expansion-panel--active):not(.v-expansion-panel--before-active)
-        border-bottom-left-radius: 0 !important
-        border-bottom-right-radius: 0 !important
+        > :first-child:not(:last-child):not(.v-expansion-panel--active):not(.v-expansion-panel--before-active)
+          border-bottom-left-radius: 0
+          border-bottom-right-radius: 0
 
-      > :last-child:not(:first-child):not(.v-expansion-panel--active):not(.v-expansion-panel--after-active)
-        border-top-left-radius: 0 !important
-        border-top-right-radius: 0 !important
+        > :last-child:not(:first-child):not(.v-expansion-panel--active):not(.v-expansion-panel--after-active)
+          border-top-left-radius: 0
+          border-top-right-radius: 0
+
+      &--variant-accordion
+        > :first-child:not(:last-child)
+          border-bottom-left-radius: 0
+          border-bottom-right-radius: 0
+
+        > :last-child:not(:first-child)
+          border-top-left-radius: 0
+          border-top-right-radius: 0
+
+          .v-expansion-panel-title--active
+            border-bottom-left-radius: initial
+            border-bottom-right-radius: initial
+
+        > :not(:first-child):not(:last-child)
+          border-radius: 0
 
     &--variant-accordion
-      > :first-child:not(:last-child)
-        border-bottom-left-radius: 0 !important
-        border-bottom-right-radius: 0 !important
-
-      > :last-child:not(:first-child)
-        border-top-left-radius: 0 !important
-        border-top-right-radius: 0 !important
-
-        .v-expansion-panel-title--active
-          border-bottom-left-radius: initial
-          border-bottom-right-radius: initial
-
-      > :not(:first-child):not(:last-child)
-        border-radius: 0 !important
-
       .v-expansion-panel-title__overlay
         transition: 0.3s border-radius settings.$standard-easing
 

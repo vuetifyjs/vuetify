@@ -4,7 +4,8 @@
 @include tools.layer('components')
   .v-color-picker-preview__alpha
     .v-slider-track__background
-      background-color: transparent !important
+      @include tools.layer('overrides')
+        background-color: transparent
 
       @include tools.ltr()
         background-image: linear-gradient(to right, transparent, var(--v-color-picker-color-hsv))
@@ -54,7 +55,8 @@
     position: relative
     width: 100%
 
-    margin: 0 !important
+    @include tools.layer('overrides')
+      margin: 0
 
     .v-slider-track__fill
       display: none

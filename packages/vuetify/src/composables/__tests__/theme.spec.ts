@@ -159,19 +159,13 @@ describe('createTheme', () => {
   })
 
   it('should allow for themes to be scoped', () => {
-    const scope = '#my-app'
     const theme = createTheme({
-      scope,
+      scope: '#my-app',
     })
 
     theme.install(app)
 
-    const scopedStyles = document.getElementById('vuetify-theme-stylesheet')!.innerHTML
-    const selectors = scopedStyles.split('\n').filter(line => line.includes('{')).map(line => line.trim())
-    selectors.forEach(selector => {
-      expect(selector.startsWith(`:where(${scope})`)).toBe(true)
-      expect(selector).not.toContain(':root')
-    })
+    expect(document.head).toMatchSnapshot()
   })
 
   it('should properly integrate with unhead when available', async () => {
@@ -272,17 +266,6 @@ describe('createTheme', () => {
     theme.change('nonexistent')
     expect(consoleMock).toHaveBeenCalledWith('[Vue warn]: Vuetify: Theme "nonexistent" not found on the Vuetify theme instance')
     consoleMock.mockReset()
-  })
-
-  it('should generate utility classes without !important', async () => {
-    const theme = createTheme({ unimportant: true })
-
-    theme.install(app)
-
-    const stylesheet = document.getElementById('vuetify-theme-stylesheet')
-    const css = stylesheet!.innerHTML
-
-    expect(css).not.toContain('!important')
   })
 
   it('should generate utility classes with a custom prefix', async () => {

@@ -57,8 +57,4 @@
       @if meta.type-of($value) == 'list' and list.length($properties) == list.length($value)
         $val: list.nth($value, $i)
       @if $val != false
-        // Check if unimportant property exists.
-        // This allows you to conditional skip
-        // defining a property as important.
-        $unimportant: map.get($utility, unimportant)
-        #{$property}: #{meta.inspect($val) if(list.index($unimportant, $property), null, !important)}
+        #{$property}: #{meta.inspect($val)}

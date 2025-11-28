@@ -55,6 +55,7 @@
     "activeIcon": "mdi-palette",
     "items": [
       "css-reset",
+      "layers",
       "transitions",
       "colors",
       { "divider": true },

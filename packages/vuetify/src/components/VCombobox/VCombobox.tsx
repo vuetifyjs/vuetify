@@ -100,9 +100,9 @@ export const VCombobox = genericComponent<new <
     'onUpdate:modelValue'?: (value: V) => void
   },
   slots: Omit<VInputSlots & VFieldSlots, 'default'> & {
-    item: { item: ListItem<Item>, index: number, props: Record<string, unknown> }
-    chip: { item: ListItem<Item>, index: number, props: Record<string, unknown> }
-    selection: { item: ListItem<Item>, index: number }
+    item: { item: Item, internalItem: ListItem<Item>, index: number, props: Record<string, unknown> }
+    chip: { item: Item, internalItem: ListItem<Item>, index: number, props: Record<string, unknown> }
+    selection: { item: Item, internalItem: ListItem<Item>, index: number }
     subheader: { props: Record<string, unknown>, index: number }
     divider: { props: Record<string, unknown>, index: number }
     'prepend-item': never
@@ -583,7 +583,8 @@ export const VCombobox = genericComponent<new <
                           }
 
                           return slots.item?.({
-                            item,
+                            item: item.raw,
+                            internalItem: item,
                             index,
                             props: itemProps,
                           }) ?? (
@@ -656,8 +657,8 @@ export const VCombobox = genericComponent<new <
                   const slotContent = hasSlot
                     ? ensureValidVNode(
                       hasChips.value
-                        ? slots.chip!({ item, index, props: slotProps })
-                        : slots.selection!({ item, index })
+                        ? slots.chip!({ item: item.raw, internalItem: item, index, props: slotProps })
+                        : slots.selection!({ item: item.raw, internalItem: item, index })
                     )
                     : undefined
 
