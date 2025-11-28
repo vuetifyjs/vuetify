@@ -51,6 +51,9 @@ export type VDataTableVirtualSlots<T> = VDataTableRowsSlots<T> & VDataTableHeade
   item: {
     itemRef: TemplateRef
   }
+  'expanded-row': {
+    itemRef: TemplateRef
+  }
 }
 
 export const makeVDataTableVirtualProps = propsFactory({
@@ -120,7 +123,11 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
       sortRawFunctions,
     })
     const { flatItems } = useGroupedItems(sortedItems, groupBy, opened, () => !!slots['group-summary'])
-
+    const virtualItems = computed(() =>
+      props.showExpand
+        ? flatItems.value.flatMap(item => [item, { type: 'placeholder' }])
+        : flatItems.value
+    )
     const allItems = computed(() => extractRows(flatItems.value))
 
     const { isSelected, select, selectAll, toggleSelect, someSelected, allSelected } = provideSelection(props, {
@@ -140,8 +147,13 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
       handleScrollend,
       calculateVisibleItems,
       scrollToIndex,
-    } = useVirtual(props, flatItems)
-    const displayItems = computed(() => computedItems.value.map(item => item.raw))
+    } = useVirtual(props, virtualItems)
+
+    const displayItems = computed(() =>
+      computedItems.value
+        .filter(item => (item as any).raw.type !== 'placeholder')
+        .map(item => item.raw)
+    )
 
     useOptions({
       sortBy,
@@ -241,7 +253,9 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
                             <VVirtualScrollItem
                               key={ itemSlotProps.internalItem.index }
                               renderless
-                              onUpdate:height={ height => handleItemResize(itemSlotProps.internalItem.index, height) }
+                              onUpdate:height={ height =>
+                                handleItemResize(itemSlotProps.internalItem.index * (props.showExpand ? 2 : 1), height)
+                              }
                             >
                               { ({ itemRef }) => (
                                 slots.item?.({ ...itemSlotProps, itemRef }) ?? (
@@ -254,6 +268,15 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
                                   />
                                 )
                               )}
+                            </VVirtualScrollItem>
+                          ),
+                          'expanded-row': slotProps => (
+                            <VVirtualScrollItem
+                              key={ `${slotProps.internalItem.index}-expanded` }
+                              renderless
+                              onUpdate:height={ height => handleItemResize(slotProps.internalItem.index * 2 + 1, height) }
+                            >
+                              { ({ itemRef }) => slots['expanded-row']?.({ ...slotProps, itemRef }) }
                             </VVirtualScrollItem>
                           ),
                         }}
