@@ -543,7 +543,6 @@ export const VSelect = genericComponent<new <
 
                     select(item, false)
                   }
-
                   const slotProps = mergeProps(VChip.filterProps(item.props), {
                     'onClick:close': onChipClose,
                     onKeydown (e: KeyboardEvent) {
@@ -571,6 +570,7 @@ export const VSelect = genericComponent<new <
                     )
                     : undefined
 
+                  const closable = computed(() => props.closableChips && !props.readonly && !form.isReadonly.value)
                   if (hasSlot && !slotContent) return undefined
 
                   return (
@@ -579,7 +579,7 @@ export const VSelect = genericComponent<new <
                         !slots.chip ? (
                           <VChip
                             key="chip"
-                            closable={ props.closableChips }
+                            closable={ closable.value }
                             size="small"
                             text={ item.title }
                             disabled={ item.props.disabled }
@@ -590,7 +590,7 @@ export const VSelect = genericComponent<new <
                             key="chip-defaults"
                             defaults={{
                               VChip: {
-                                closable: props.closableChips,
+                                closable: closable.value,
                                 size: 'small',
                                 text: item.title,
                               },
