@@ -39,6 +39,7 @@ overrides:
 patchedDependencies:
   '@mdi/js@7.4.47': patches/@mdi__js@7.4.47.patch
   '@testing-library/vue': patches/@testing-library__vue.patch
+  '@vitest/browser': patches/@vitest__browser.patch
   playwright-core: patches/playwright-core.patch
 
 peerDependencyRules:

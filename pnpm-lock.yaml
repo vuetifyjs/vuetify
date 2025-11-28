@@ -20,6 +20,9 @@ patchedDependencies:
   '@testing-library/vue':
     hash: 15ba1e1b9f291286e3951cdf39b2e27f55b6727bc0315792f3e4558c0a3a7db8
     path: patches/@testing-library__vue.patch
+  '@vitest/browser':
+    hash: f7740a93ed6857057d054d6d43d156a886605c0182ed06aa66dfbd682939c3f3
+    path: patches/@vitest__browser.patch
   playwright-core:
     hash: be7446f2a75303dc1fce05913c13dad66a8c466d103eb5627c9092726d2e3430
     path: patches/playwright-core.patch
@@ -11472,7 +11475,7 @@ snapshots:
 
   '@vitest/browser-playwright@4.0.13(playwright@1.57.0)(vite@7.2.4(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.94.2)(terser@5.44.0)(yaml@2.8.1))(vitest@4.0.13)':
     dependencies:
-      '@vitest/browser': 4.0.13(vite@7.2.4(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.94.2)(terser@5.44.0)(yaml@2.8.1))(vitest@4.0.13)
+      '@vitest/browser': 4.0.13(patch_hash=f7740a93ed6857057d054d6d43d156a886605c0182ed06aa66dfbd682939c3f3)(vite@7.2.4(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.94.2)(terser@5.44.0)(yaml@2.8.1))(vitest@4.0.13)
       '@vitest/mocker': 4.0.13(vite@7.2.4(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.94.2)(terser@5.44.0)(yaml@2.8.1))
       playwright: 1.57.0
       tinyrainbow: 3.0.3
@@ -11483,7 +11486,7 @@ snapshots:
       - utf-8-validate
       - vite
 
-  '@vitest/browser@4.0.13(vite@7.2.4(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.94.2)(terser@5.44.0)(yaml@2.8.1))(vitest@4.0.13)':
+  '@vitest/browser@4.0.13(patch_hash=f7740a93ed6857057d054d6d43d156a886605c0182ed06aa66dfbd682939c3f3)(vite@7.2.4(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.94.2)(terser@5.44.0)(yaml@2.8.1))(vitest@4.0.13)':
     dependencies:
       '@vitest/mocker': 4.0.13(vite@7.2.4(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.94.2)(terser@5.44.0)(yaml@2.8.1))
       '@vitest/utils': 4.0.13
