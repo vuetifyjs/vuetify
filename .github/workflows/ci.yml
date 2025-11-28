@@ -76,12 +76,11 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
-      - uses: vuetifyjs/setup-action@master
       - uses: actions/cache@v4
         with:
           path: ~/.cache/ms-playwright
           key: ${{ runner.os }}-playwright-${{ hashFiles('./pnpm-lock.yaml') }}
-      - run: pnpm exec playwright install chromium
+      - uses: vuetifyjs/setup-action@master
       - run: pnpm run test --project browser
         working-directory: ./packages/vuetify
       - uses: actions/upload-artifact@v4
