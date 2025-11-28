@@ -63,6 +63,7 @@ export const makeVDataTableHeadersProps = propsFactory({
   disableSort: Boolean,
   fixedHeader: Boolean,
   multiSort: Boolean,
+  initialSortOrder: String as PropType<'asc' | 'desc'>,
   sortAscIcon: {
     type: IconValue,
     default: '$sortAsc',
@@ -117,9 +118,9 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
     function getSortIcon (column: InternalDataTableHeader) {
       const item = sortBy.value.find(item => item.key === column.key)
 
-      if (!item) return props.sortAscIcon
-
-      return item.order === 'asc' ? props.sortAscIcon : props.sortDescIcon
+      return (!item && props.initialSortOrder === 'asc') || item?.order === 'asc'
+        ? props.sortAscIcon
+        : props.sortDescIcon
     }
 
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.color)
