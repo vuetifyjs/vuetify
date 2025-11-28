@@ -127,8 +127,8 @@ export const VMaskInput = genericComponent<VMaskInputSlots>()({
     async function onCut (e: Event) {
       e.preventDefault()
 
-      copySelectionToClipboard(e)
-      deleteSelection(e)
+      await copySelectionToClipboard(e)
+      await deleteSelection(e)
     }
 
     async function onPaste (e: ClipboardEvent) {
@@ -150,12 +150,12 @@ export const VMaskInput = genericComponent<VMaskInputSlots>()({
       }
     }
 
-    function copySelectionToClipboard (e: Event) {
+    async function copySelectionToClipboard (e: Event) {
       const inputElement = e.target as HTMLInputElement
       const start = inputElement.selectionStart || 0
       const end = inputElement.selectionEnd || 0
       const selectedText = inputElement.value.substring(start, end)
-      navigator.clipboard.writeText(selectedText)
+      await navigator.clipboard.writeText(selectedText)
     }
 
     async function deleteSelection (e: Event) {

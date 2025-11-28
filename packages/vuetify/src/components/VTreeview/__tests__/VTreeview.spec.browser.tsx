@@ -318,9 +318,16 @@ describe.each([
         ))
 
         await userEvent.click(screen.getByText(/Vuetify/).parentElement!.previousElementSibling!)
-        await expect.element(screen.getByText(/Core/)).toBeDisplayed()
+        await expect.element(screen.getByText(/Core/)).toBeVisible()
         await userEvent.click(screen.getByText(/Vuetify/).parentElement!.previousElementSibling!)
-        await expect.poll(() => screen.queryByText(/Core/)).not.toBeDisplayed()
+        // eslint-disable-next-line vitest/no-conditional-in-test
+        if (itemsRegistration === 'render') {
+          // eslint-disable-next-line vitest/no-conditional-expect
+          await expect.poll(() => screen.queryByText(/Core/)).not.toBeVisible()
+        } else {
+          // eslint-disable-next-line vitest/no-conditional-expect
+          await expect.poll(() => screen.queryByText(/Core/)).toBeNull()
+        }
       })
 
       it('open-all should work', async () => {

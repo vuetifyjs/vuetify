@@ -4,7 +4,7 @@ import { VForm } from '@/components/VForm'
 import { VListItem } from '@/components/VList'
 
 // Utilities
-import { commands, generate, render, screen, userEvent, wait, waitForClickable } from '@test'
+import { commands, generate, render, screen, userEvent, waitForClickable } from '@test'
 import { getAllByRole } from '@testing-library/vue'
 import { cloneVNode, computed, nextTick, ref } from 'vue'
 
@@ -723,7 +723,7 @@ describe('VSelect', () => {
         <VSelect onUpdate:focused={ onFocus } />
       ))
 
-      await userEvent.click(element, { y: 1 })
+      await userEvent.click(element, { position: { x: 10, y: 55 } })
 
       expect(onFocus).toHaveBeenCalledTimes(1)
     })
@@ -739,7 +739,7 @@ describe('VSelect', () => {
     expect(inputField).toHaveAttribute('aria-label', 'Open')
     expect(inputField.getAttribute('aria-controls')).toMatch(/^menu-v-\d+/)
 
-    await userEvent.click(inputField)
+    await userEvent.click(inputField, { force: true })
     await commands.waitStable('.v-list')
 
     expect(inputField).toHaveAttribute('aria-expanded', 'true')
@@ -778,7 +778,7 @@ describe('VSelect', () => {
     ))
 
     await userEvent.click(element)
-    await wait(100)
+    await commands.waitStable('.v-list')
 
     const options = screen.getAllByRole('option')
     expect(options).toHaveLength(3)
