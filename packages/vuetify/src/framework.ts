@@ -14,13 +14,17 @@ import { defineComponent, IN_BROWSER, mergeDeep } from '@/util'
 
 // Types
 import type { App, ComponentPublicInstance, InjectionKey } from 'vue'
-import type { DateOptions } from '@/composables/date'
-import type { DefaultsOptions } from '@/composables/defaults'
-import type { DisplayOptions, SSROptions } from '@/composables/display'
-import type { GoToOptions } from '@/composables/goto'
-import type { IconOptions } from '@/composables/icons'
-import type { LocaleOptions, RtlOptions } from '@/composables/locale'
-import type { ThemeOptions } from '@/composables/theme'
+import type {
+  DateOptions,
+  DefaultsOptions,
+  DisplayOptions,
+  GoToOptions,
+  IconOptions,
+  LocaleOptions,
+  RtlOptions,
+  SSROptions,
+  ThemeOptions,
+} from './internal-types'
 
 // Exports
 export * from './composables'
