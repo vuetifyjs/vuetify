@@ -71,6 +71,9 @@ export const makeVTabsProps = propsFactory({
     default: undefined,
   },
   hideSlider: Boolean,
+  inset: Boolean,
+  insetPadding: [String, Number],
+  insetRadius: [String, Number],
   sliderColor: String,
 
   ...pick(makeVTabProps(), ['spaced', 'sliderTransition', 'sliderTransitionDuration']),
@@ -109,6 +112,7 @@ export const VTabs = genericComponent<new <T = TabItem>(
         direction: toRef(props, 'direction'),
         stacked: toRef(props, 'stacked'),
         fixed: toRef(props, 'fixedTabs'),
+        inset: toRef(props, 'inset'),
         sliderColor: toRef(props, 'sliderColor'),
         sliderTransition: toRef(props, 'sliderTransition'),
         sliderTransitionDuration: toRef(props, 'sliderTransitionDuration'),
@@ -132,6 +136,7 @@ export const VTabs = genericComponent<new <T = TabItem>(
               {
                 'v-tabs--fixed-tabs': props.fixedTabs,
                 'v-tabs--grow': props.grow,
+                'v-tabs--inset': props.inset,
                 'v-tabs--stacked': props.stacked,
               },
               densityClasses.value,
@@ -139,7 +144,11 @@ export const VTabs = genericComponent<new <T = TabItem>(
               props.class,
             ]}
             style={[
-              { '--v-tabs-height': convertToUnit(props.height) },
+              {
+                '--v-tabs-height': convertToUnit(props.height),
+                '--v-tabs-inset-padding': props.inset ? convertToUnit(props.insetPadding) : undefined,
+                '--v-tabs-inset-radius': props.inset ? convertToUnit(props.insetRadius) : undefined,
+              },
               backgroundColorStyles.value,
               props.style,
             ]}

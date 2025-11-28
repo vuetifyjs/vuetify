@@ -3,7 +3,7 @@ import { VNumberInput } from '../VNumberInput'
 import { VForm } from '@/components/VForm'
 
 // Utilities
-import { render, screen, userEvent } from '@test'
+import { click, commands, render, screen, userEvent } from '@test'
 import { nextTick, ref } from 'vue'
 
 describe('VNumberInput', () => {
@@ -71,13 +71,13 @@ describe('VNumberInput', () => {
         <VNumberInput v-model={ model.value } readonly />
       ))
 
-      await userEvent.click(screen.getByTestId('increment'))
+      await click(screen.getByTestId('increment'))
       expect(model.value).toBe(1)
 
-      await userEvent.click(screen.getByTestId('decrement'))
+      await click(screen.getByTestId('decrement'))
       expect(model.value).toBe(1)
 
-      await userEvent.click(element)
+      await click(element)
       await userEvent.keyboard('{ArrowUp}')
       expect(model.value).toBe(1)
 
@@ -94,13 +94,13 @@ describe('VNumberInput', () => {
         </VForm>
       ))
 
-      await userEvent.click(screen.getByTestId('increment'))
+      await click(screen.getByTestId('increment'))
       expect(model.value).toBe(1)
 
-      await userEvent.click(screen.getByTestId('decrement'))
+      await click(screen.getByTestId('decrement'))
       expect(model.value).toBe(1)
 
-      await userEvent.click(element)
+      await click(element)
       await userEvent.keyboard('{ArrowUp}')
       expect(model.value).toBe(1)
 
@@ -267,7 +267,7 @@ describe('VNumberInput', () => {
       <VNumberInput onUpdate:focused={ onFocus } />
     ))
 
-    await userEvent.click(element, { y: 1 })
+    await userEvent.click(element, { position: { x: 10, y: 55 } })
 
     expect(onFocus).toHaveBeenCalledTimes(1)
   })
@@ -292,8 +292,10 @@ describe('VNumberInput', () => {
       ))
       const input = element.querySelector('input') as HTMLInputElement
       input.focus()
-      navigator.clipboard.writeText(text)
+      const lock = await commands.getLock()
+      await navigator.clipboard.writeText(text)
       await userEvent.paste()
+      await commands.releaseLock(lock)
       expect(model.value).toBe(expected)
     })
 
@@ -318,8 +320,10 @@ describe('VNumberInput', () => {
       ))
       const input = element.querySelector('input') as HTMLInputElement
       input.focus()
-      navigator.clipboard.writeText(text)
+      const lock = await commands.getLock()
+      await navigator.clipboard.writeText(text)
       await userEvent.paste()
+      await commands.releaseLock(lock)
       input.blur()
       expect(model.value).toBe(expected)
     })

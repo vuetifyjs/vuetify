@@ -174,7 +174,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
 
     const isOutOfRange = computed(() => {
       if (_lastParsedValue.value === null) return false
-      const numberFromText = Number(_inputText.value)
+      const numberFromText = Number(_inputText.value?.replace(decimalSeparator.value, '.'))
       return numberFromText !== clamp(numberFromText, props.min, props.max)
     })
 

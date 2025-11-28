@@ -5,7 +5,7 @@ import './VTab.sass'
 import { makeVBtnProps, VBtn } from '@/components/VBtn/VBtn'
 
 // Composables
-import { useTextColor } from '@/composables/color'
+import { useBackgroundColor, useTextColor } from '@/composables/color'
 import { forwardRefs } from '@/composables/forwardRefs'
 
 // Utilities
@@ -24,6 +24,7 @@ export const makeVTabProps = propsFactory({
   sliderTransition: String as PropType<'shift' | 'grow' | 'fade'>,
   sliderTransitionDuration: [String, Number],
   hideSlider: Boolean,
+  inset: Boolean,
 
   direction: {
     type: String as PropType<'horizontal' | 'vertical'>,
@@ -49,7 +50,14 @@ export const VTab = genericComponent<VBtnSlots>()({
   props: makeVTabProps(),
 
   setup (props, { slots, attrs }) {
-    const { textColorClasses: sliderColorClasses, textColorStyles: sliderColorStyles } = useTextColor(() => props.sliderColor)
+    const {
+      textColorClasses: sliderColorClasses,
+      textColorStyles: sliderColorStyles,
+    } = useTextColor(() => props.sliderColor)
+    const {
+      backgroundColorClasses: insetColorClasses,
+      backgroundColorStyles: insetColorStyles,
+    } = useBackgroundColor(() => props.sliderColor)
 
     const rootEl = ref<VBtn>()
     const sliderEl = ref<HTMLElement>()
@@ -133,8 +141,12 @@ export const VTab = genericComponent<VBtnSlots>()({
           class={[
             'v-tab',
             props.class,
+            isSelected.value && props.inset ? insetColorClasses.value : [],
           ]}
-          style={ props.style }
+          style={[
+            props.style,
+            isSelected.value && props.inset ? insetColorStyles.value : [],
+          ]}
           tabindex={ isSelected.value ? 0 : -1 }
           role="tab"
           aria-selected={ String(isSelected.value) }

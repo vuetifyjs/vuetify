@@ -50,6 +50,9 @@ export default {
       previousMonth: 'Forrige måned',
       nextMonth: 'Neste måned',
       selectYear: 'Velg år',
+      previousYear: 'Forrige år',
+      nextYear: 'Neste år',
+      selectMonth: 'Velg måned',
       selectDate: '{0}',
       currentDate: 'I dag, {0}',
     },
@@ -85,6 +88,9 @@ export default {
     am: 'AM',
     pm: 'PM',
     title: 'Velg tid',
+    hour: 'Time',
+    minute: 'Minutter',
+    second: 'Sekunder',
   },
   pagination: {
     ariaLabel: {
@@ -141,6 +147,7 @@ export default {
     space: 'Mellomrom',
     plus: 'pluss',
     shortcut: 'Tastatursnarveier: {0}',
+    or: 'eller',
   },
   video: {
     play: 'Spill av',

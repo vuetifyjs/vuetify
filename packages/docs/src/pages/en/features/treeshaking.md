@@ -63,19 +63,18 @@ module.exports = {
 ```
 
 ::: tab Nuxt
-<p class="ma-4">Nuxt also uses the vite plugin but needs some extra configuration to load it in the correct order:</p>
+<p class="ma-4">Nuxt also uses the vite plugin:</p>
 
 ```js { resource="nuxt.config.js" }
 import vuetify from 'vite-plugin-vuetify'
 
 export default defineNuxtConfig({
-  modules: [
-    async (options, nuxt) => {
-      nuxt.hooks.hook('vite:extendConfig', config => config.plugins.push(
-        vuetify()
-      ))
-    },
-  ],
+  //...
+  vite: {
+    plugins: [
+      vuetify(),
+    ]
+  },
 })
 ```
 

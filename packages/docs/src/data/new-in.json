@@ -91,9 +91,17 @@
       "events": "3.11.0",
       "eventColor": "3.11.0",
       "controlHeight": "3.8.0",
+      "controlVariant": "3.11.0",
       "firstDayOfYear": "3.10.0",
       "headerColor": "3.8.0",
-      "hideTitle": "3.10.0"
+      "headerDateFormat": "3.11.0",
+      "hideTitle": "3.10.0",
+      "landscape": "3.11.0",
+      "landscapeHeaderWidth": "3.11.0",
+      "noMonthPicker": "3.11.0"
+    },
+    "slots": {
+      "controls": "3.11.0"
     }
   },
   "VDataIterator": {
@@ -140,6 +148,8 @@
   },
   "VDialog": {
     "props": {
+      "captureFocus": "3.11.0",
+      "retainFocus": "3.11.0",
       "stickToTarget": "3.10.0",
       "viewportMargin": "3.11.0"
     }
@@ -193,14 +203,24 @@
       "glow": "3.8.0"
     }
   },
+  "VList": {
+    "props": {
+      "indent": "3.11.0",
+      "itemsRegistration": "3.11.0",
+      "prependGap": "3.11.0"
+    }
+  },
   "VListItem": {
     "props": {
       "baseColor": "3.3.0",
+      "prependGap": "3.11.0",
       "slim": "3.4.0"
     }
   },
   "VMenu": {
     "props": {
+      "captureFocus": "3.11.0",
+      "retainFocus": "3.11.0",
       "stickToTarget": "3.10.0",
       "submenu": "3.7.0",
       "viewportMargin": "3.11.0"
@@ -208,6 +228,8 @@
   },
   "VNavigationDrawer": {
     "props": {
+      "captureFocus": "3.11.0",
+      "retainFocus": "3.11.0",
       "persistent": "3.6.0"
     }
   },
@@ -218,6 +240,8 @@
   },
   "VOverlay": {
     "props": {
+      "captureFocus": "3.11.0",
+      "retainFocus": "3.11.0",
       "stickToTarget": "3.10.0",
       "viewportMargin": "3.11.0"
     }
@@ -264,6 +288,11 @@
       "text": "3.4.0"
     }
   },
+  "VStepper": {
+    "props": {
+      "itemProps": "3.11.0"
+    }
+  },
   "VSwitch": {
     "slots": {
       "thumb": "3.5.0",
@@ -273,6 +302,7 @@
   },
   "VTab": {
     "props": {
+      "inset": "3.11.2",
       "text": "3.2.0",
       "spaced": "3.10.0",
       "sliderTransition": "3.11.0",
@@ -281,6 +311,9 @@
   },
   "VTabs": {
     "props": {
+      "inset": "3.11.0",
+      "insetPadding": "3.11.0",
+      "insetRadius": "3.11.0",
       "spaced": "3.10.0",
       "sliderTransition": "3.11.0",
       "sliderTransitionDuration": "3.11.0"
@@ -290,6 +323,11 @@
       "prev": "3.11.0"
     }
   },
+  "VTextarea": {
+    "props": {
+      "maxHeight": "3.11.0"
+    }
+  },
   "VTextField": {
     "props": {
       "autocomplete": "3.10.0"
@@ -297,8 +335,10 @@
   },
   "VTimePicker": {
     "props": {
+      "density": "3.11.0",
       "hideTitle": "3.10.0",
-      "period": "3.10.0"
+      "period": "3.10.0",
+      "variant": "3.11.0"
     }
   },
   "VTreeview": {
@@ -307,7 +347,8 @@
       "hideNoData": "3.10.0",
       "noDataText": "3.10.0",
       "separateRoots": "3.9.0",
-      "indentLines": "3.9.0"
+      "indentLines": "3.9.0",
+      "itemsRegistration": "3.11.0"
     },
     "slots": {
       "header": "3.10.0",

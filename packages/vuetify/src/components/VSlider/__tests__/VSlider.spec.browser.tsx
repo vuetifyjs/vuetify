@@ -2,7 +2,7 @@
 import { VSlider } from '../VSlider'
 
 // Utilities
-import { commands, generate, page, render, screen, userEvent, wait } from '@test'
+import { commands, generate, page, render, screen, userEvent } from '@test'
 import { ref } from 'vue'
 
 const stories = {
@@ -77,8 +77,7 @@ describe('VSlider', () => {
 
     expect(screen.getByCSS('.v-slider-thumb__label')).not.toBeVisible()
     await userEvent.click(screen.getByCSS('.v-slider-thumb'))
-    await wait(100)
-    expect(screen.getByCSS('.v-slider-thumb__label')).toBeVisible()
+    await expect.element(screen.getByCSS('.v-slider-thumb__label')).toBeVisible()
   })
 
   it('should respect step prop', async () => {

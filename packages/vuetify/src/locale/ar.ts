@@ -50,6 +50,9 @@ export default {
       previousMonth: 'الشهر السابق',
       nextMonth: 'الشهر التالي',
       selectYear: 'اختر السنة',
+      previousYear: 'السنة السابقة',
+      nextYear: 'السنة التالية',
+      selectMonth: 'اختر الشهر',
       selectDate: '{0}',
       currentDate: 'اليوم، {0}',
     },
@@ -84,7 +87,10 @@ export default {
   timePicker: {
     am: 'صباحاً',
     pm: 'مساءً',
-    title: 'Select Time',
+    title: 'حدد الوقت',
+    hour: 'ساعة',
+    minute: 'دقائق',
+    second: 'ثواني',
   },
   pagination: {
     ariaLabel: {
@@ -141,6 +147,7 @@ export default {
     space: 'مسافة',
     plus: 'زائد',
     shortcut: 'اختصار لوحة المفاتيح: {0}',
+    or: 'or',
   },
   video: {
     play: 'تشغيل',

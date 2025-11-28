@@ -2,25 +2,25 @@
 import './VTimePicker.sass'
 
 // Components
-import { pad } from './util'
 import { VTimePickerClock } from './VTimePickerClock'
 import { VTimePickerControls } from './VTimePickerControls'
 import { makeVPickerProps, VPicker } from '@/labs/VPicker/VPicker'
 
 // Composables
+import { makeDensityProps, useDensity } from '@/composables/density'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, onMounted, ref, watch } from 'vue'
+import { computed, onMounted, ref, toRef, watch } from 'vue'
+import { convert12to24, convert24to12, pad } from './util'
 import { createRange, genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import type { VTimePickerViewMode } from './shared'
+import type { Period, VTimePickerViewMode } from './shared'
 import type { VPickerSlots } from '@/labs/VPicker/VPicker'
 
-type Period = 'am' | 'pm'
 type AllowFunction = (val: number) => boolean
 
 const rangeHours24 = createRange(24)
@@ -29,6 +29,8 @@ const rangeHours12pm = rangeHours12am.map(v => v + 12)
 const range60 = createRange(60)
 
 export type VTimePickerSlots = Omit<VPickerSlots, 'header'>
+
+type Variant = 'dial' | 'input'
 
 export const makeVTimePickerProps = propsFactory({
   allowedHours: [Function, Array] as PropType<AllowFunction | number[]>,
@@ -54,7 +56,12 @@ export const makeVTimePickerProps = propsFactory({
   readonly: Boolean,
   scrollable: Boolean,
   useSeconds: Boolean,
+  variant: {
+    type: String as PropType<Variant>,
+    default: 'dial',
+  },
   ...omit(makeVPickerProps({ title: '$vuetify.timePicker.title' }), ['landscape']),
+  ...makeDensityProps(),
 }, 'VTimePicker')
 
 export const VTimePicker = genericComponent<VTimePickerSlots>()({
@@ -67,12 +74,13 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
     'update:minute': (val: number) => true,
     'update:period': (val: Period) => true,
     'update:second': (val: number) => true,
-    'update:modelValue': (val: string) => true,
+    'update:modelValue': (val: string | null) => true,
     'update:viewMode': (val: VTimePickerViewMode) => true,
   },
 
   setup (props, { emit, slots }) {
     const { t } = useLocale()
+    const { densityClasses } = useDensity(props)
     const inputHour = ref(null as number | null)
     const inputMinute = ref(null as number | null)
     const inputSecond = ref(null as number | null)
@@ -171,9 +179,40 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
       return props.format === 'ampm'
     })
 
+    const shouldClear = toRef(() => {
+      return props.modelValue !== null &&
+        inputHour.value === null &&
+        inputMinute.value === null &&
+        (!props.useSeconds || inputSecond.value === null)
+    })
+
+    function emitValue () {
+      const value = genValue()
+
+      if (value !== null && value !== props.modelValue) {
+        emit('update:modelValue', value)
+      }
+      if (shouldClear.value) {
+        emit('update:modelValue', null)
+      }
+    }
+
+    watch(inputHour, emitValue)
+    watch(inputMinute, emitValue)
+    watch(inputSecond, emitValue)
+
     watch(() => props.period, val => setPeriod(val))
 
     watch(() => props.modelValue, val => setInputData(val))
+
+    watch(() => props.useSeconds, (val, old) => {
+      if (old && !val && viewMode.value === 'second') {
+        viewMode.value = 'minute'
+      }
+      if (!val && inputSecond.value !== null) {
+        inputSecond.value = null
+      }
+    })
 
     onMounted(() => {
       setInputData(props.modelValue)
@@ -185,19 +224,6 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
       }
 
       return null
-    }
-
-    function emitValue () {
-      const value = genValue()
-      if (value !== null) emit('update:modelValue', value)
-    }
-
-    function convert24to12 (hour: number) {
-      return hour ? ((hour - 1) % 12 + 1) : 12
-    }
-
-    function convert12to24 (hour: number, period: Period) {
-      return hour % 12 + (period === 'pm' ? 12 : 0)
     }
 
     function setInputData (value: string | null | Date) {
@@ -297,7 +323,7 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
     }
 
     useRender(() => {
-      const pickerProps = VPicker.filterProps(props)
+      const pickerProps = omit(VPicker.filterProps(props), ['hideHeader'])
       const timePickerControlsProps = VTimePickerControls.filterProps(props)
       const timePickerClockProps = VTimePickerClock.filterProps(omit(props, ['format', 'modelValue', 'min', 'max']))
 
@@ -307,8 +333,11 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
           color={ undefined }
           class={[
             'v-time-picker',
+            `v-time-picker--variant-${props.variant}`,
             props.class,
+            densityClasses.value,
           ]}
+          hideHeader={ props.hideHeader && props.variant !== 'input' }
           style={ props.style }
           v-slots={{
             title: () => slots.title?.() ?? (
@@ -325,7 +354,10 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
                 period={ period.value }
                 second={ inputSecond.value as number }
                 viewMode={ viewMode.value }
+                onUpdate:hour={ (val: number) => inputHour.value = val }
+                onUpdate:minute={ (val: number) => inputMinute.value = val }
                 onUpdate:period={ (val: Period) => setPeriod(val) }
+                onUpdate:second={ (val: number) => inputSecond.value = val }
                 onUpdate:viewMode={ (value: VTimePickerViewMode) => (viewMode.value = value) }
                 ref={ controlsRef }
               />
