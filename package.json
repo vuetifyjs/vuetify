@@ -12,7 +12,7 @@
     "lint": "pnpm run -r --parallel --stream lint",
     "lint:fix": "pnpm run -r --parallel lint:fix",
     "version": "node scripts/confirm-npm-tag.js",
-    "prepare": "husky; node scripts/post-install.js; pnpm exec playwright install chromium",
+    "prepare": "husky; node scripts/post-install.js; $CI || pnpm exec playwright install chromium",
     "postversion": "node scripts/post-release-merge.js",
     "clean": "pnpm -r exec rm -r node_modules && rm -r node_modules",
     "changelog": "conventional-changelog -u -p vuetify",

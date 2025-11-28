@@ -70,6 +70,7 @@ jobs:
           path: ~/.cache/ms-playwright
           key: ${{ runner.os }}-playwright-${{ hashFiles('./pnpm-lock.yaml') }}
       - uses: vuetifyjs/setup-action@master
+      - run: pnpm exec playwright install chromium
       - run: pnpm run test
         working-directory: ./packages/vuetify
       - uses: actions/upload-artifact@v4
