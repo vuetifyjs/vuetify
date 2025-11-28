@@ -58,19 +58,8 @@ jobs:
         env:
           SCOPES: ${{ matrix.scopes }}
 
-  test-unit:
-    name: Test (Unit)
-    needs: pre_job
-    if: needs.pre_job.outputs.should_skip != 'true'
-    runs-on: ubuntu-24.04
-    steps:
-      - uses: actions/checkout@v4
-      - uses: vuetifyjs/setup-action@master
-      - run: pnpm run test --project unit
-        working-directory: ./packages/vuetify
-
-  test-e2e:
-    name: Test (e2e)
+  test:
+    name: Test
     needs: pre_job
     if: needs.pre_job.outputs.should_skip != 'true'
     runs-on: ubuntu-24.04
@@ -81,7 +70,7 @@ jobs:
           path: ~/.cache/ms-playwright
           key: ${{ runner.os }}-playwright-${{ hashFiles('./pnpm-lock.yaml') }}
       - uses: vuetifyjs/setup-action@master
-      - run: pnpm run test --project browser
+      - run: pnpm run test
         working-directory: ./packages/vuetify
       - uses: actions/upload-artifact@v4
         if: failure()
@@ -92,7 +81,7 @@ jobs:
           overwrite: true
 
   deploy:
-    needs: [lint, test-unit, test-e2e, build-vuetify]
+    needs: [lint, test, build-vuetify]
     runs-on: ubuntu-24.04
     if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v') && github.repository_owner == 'vuetifyjs'
     environment: production
@@ -159,7 +148,7 @@ jobs:
           path: packages/docs/dist
 
   publish-docs:
-    needs: [lint, test-unit, build-docs]
+    needs: [lint, test, build-docs]
     runs-on: ubuntu-24.04
     environment: ${{ github.ref_name }}
     steps:
