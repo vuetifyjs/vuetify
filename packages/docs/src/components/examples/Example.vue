@@ -196,6 +196,19 @@
     set: val => _theme.value = val,
   })
 
+  const exampleMeta = computed<Record<string, any>>(() => {
+    const meta = (component.value as any)?.exampleMeta
+
+    if (!meta) return {}
+
+    try {
+      return JSON.parse(meta)
+    } catch (e) {
+      console.error('Invalid example meta for', props.file, e)
+      return {}
+    }
+  })
+
   const playgroundLink = computed(() => {
     if (!isLoaded.value || isError.value) return null
 
@@ -207,6 +220,10 @@
       resources.imports,
       setup,
     )
+  })
+
+  const figmaLink = computed(() => {
+    return exampleMeta.value.figma ?? null
   })
 
   const actions = computed(() => [
@@ -221,6 +238,13 @@
       href: playgroundLink.value,
       target: '_blank',
       hide: xs.value,
+    },
+    {
+      icon: '$figma',
+      path: 'view-in-figma',
+      href: figmaLink.value,
+      target: '_blank',
+      hide: xs.value || !figmaLink.value,
     },
     {
       icon: 'mdi-github',
