@@ -1,4 +1,5 @@
 import { defineConfig, mergeConfig } from 'vitest/config'
+import { playwright } from '@vitest/browser-playwright'
 import viteConfig from './vite.config'
 import AutoImport from 'unplugin-auto-import/vite'
 import { fileURLToPath } from 'node:url'
@@ -63,7 +64,7 @@ export default defineConfig(configEnv => {
             resolve: {
               alias: {
                 // Vite logs a warning for this even if we just re-export it without using anything
-                '@vitest/browser/context': fileURLToPath(new URL('test/contextStub.ts', import.meta.url)),
+                'vitest/browser': fileURLToPath(new URL('test/contextStub.ts', import.meta.url)),
               },
             },
             test: {
@@ -82,26 +83,27 @@ export default defineConfig(configEnv => {
               bail: process.env.TEST_BAIL ? 1 : undefined,
               browser: {
                 enabled: true,
-                provider: 'webdriverio',
+                provider: playwright({
+                  actionTimeout: 5000,
+                  contextOptions: {
+                    reducedMotion: 'reduce',
+                    permissions: ['clipboard-write', 'clipboard-read'],
+                  },
+                  launchOptions: {
+                    ignoreDefaultArgs: ['--hide-scrollbars'],
+                    args: [
+                      '--start-maximized',
+                      '--disable-infobars',
+                      process.env.TEST_BAIL && '--auto-open-devtools-for-tabs',
+                    ].filter(v => v != null),
+                  },
+                }),
                 ui: false,
                 headless: !process.env.TEST_BAIL,
                 screenshotDirectory: '../test/__screenshots__',
                 commands,
                 instances: [{
-                  browser: 'chrome',
-                  capabilities: {
-                    browserVersion: '142',
-                    'goog:chromeOptions': {
-                      args: [
-                        '--start-maximized',
-                        '--disable-infobars',
-                        process.env.TEST_BAIL && '--auto-open-devtools-for-tabs',
-                        // I have no idea why this is needed, it throws "WebDriverError: session
-                        // not created: probably user data directory is already in use" without it
-                        process.env.CI && '--no-sandbox',
-                      ].filter(v => !!v) as string[],
-                    },
-                  },
+                  browser: 'chromium',
                 }],
                 viewport: {
                   width: 1280,

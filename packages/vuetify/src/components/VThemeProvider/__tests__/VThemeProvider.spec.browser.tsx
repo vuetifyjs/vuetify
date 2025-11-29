@@ -33,6 +33,6 @@ describe('VThemeProvider', () => {
       </VThemeProvider>
     ))
 
-    await expect(screen.getByCSS('.v-theme-provider')).toBeDisplayed()
+    await expect(screen.getByCSS('.v-theme-provider')).toBeVisible()
   })
 })

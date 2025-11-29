@@ -85,7 +85,7 @@ export const makeDataTableProps = propsFactory({
   ...makeDataTableItemsProps(),
   ...makeDataTableSelectProps(),
   ...makeDataTableSortProps(),
-  ...omit(makeVDataTableHeadersProps(), ['multiSort']),
+  ...omit(makeVDataTableHeadersProps(), ['multiSort', 'initialSortOrder']),
   ...makeVTableProps(),
 }, 'DataTable')
 

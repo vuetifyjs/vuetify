@@ -175,8 +175,8 @@ describe('VNavigationDrawer', () => {
 
     visible.value = true
 
-    await expect.element(screen.getByCSS('.v-navigation-drawer')).toBeOnScreen()
-    await expect.element(screen.getByCSS('.v-navigation-drawer__scrim')).toBeOnScreen()
+    await expect.element(screen.getByCSS('.v-navigation-drawer')).toBeInViewport()
+    await expect.element(screen.getByCSS('.v-navigation-drawer__scrim')).toBeInViewport()
   })
 
   it('should position drawer scrim correctly in rtl locale', async () => {
@@ -193,8 +193,8 @@ describe('VNavigationDrawer', () => {
 
     visible.value = true
 
-    await expect.element(screen.getByCSS('.v-navigation-drawer')).toBeOnScreen()
-    await expect.element(screen.getByCSS('.v-navigation-drawer__scrim')).toBeOnScreen()
+    await expect.element(screen.getByCSS('.v-navigation-drawer')).toBeInViewport()
+    await expect.element(screen.getByCSS('.v-navigation-drawer__scrim')).toBeInViewport()
   })
 
   describe('Showcase', () => {
