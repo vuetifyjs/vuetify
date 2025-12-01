@@ -526,11 +526,11 @@ importers:
         specifier: ^4.0.13
         version: 4.0.13(vitest@4.0.13)
       '@vizzly-testing/cli':
-        specifier: ^0.14.0
-        version: 0.14.0(typescript@5.8.3)
+        specifier: ^0.16.2
+        version: 0.16.2(typescript@5.8.3)
       '@vizzly-testing/vitest':
-        specifier: ^0.0.2
-        version: 0.0.2(@vizzly-testing/cli@0.14.0(typescript@5.8.3))(vitest@4.0.13)
+        specifier: ^0.0.3
+        version: 0.0.3(@vizzly-testing/cli@0.16.2(typescript@5.8.3))(vitest@4.0.13)
       '@vue/reactivity':
         specifier: ^3.5.25
         version: 3.5.25
@@ -3314,17 +3314,17 @@ packages:
   '@vitest/utils@4.0.13':
     resolution: {integrity: sha512-ydozWyQ4LZuu8rLp47xFUWis5VOKMdHjXCWhs1LuJsTNKww+pTHQNK4e0assIB9K80TxFyskENL6vCu3j34EYA==}
 
-  '@vizzly-testing/cli@0.14.0':
-    resolution: {integrity: sha512-Ea/oVKWs2fUeZfs7q3SWg3aqqFB0n7Jqy6vPDuJeD/Al6Mdia/ds6UePNOfa6AW5wx/SkMFaZ2QDdtT3XJbk+w==}
+  '@vizzly-testing/cli@0.16.2':
+    resolution: {integrity: sha512-UkYQHLnFvGgWYawP1F2iU9b6OPrxIsyxz9vw5nF+2BRi2oEKF4VqG0XEQdWPByX3t/weSllzPHhOyZthmcvl2A==}
     engines: {node: '>=22.0.0'}
     hasBin: true
 
-  '@vizzly-testing/honeydiff@0.3.1':
-    resolution: {integrity: sha512-OjkwUbWf3iUyfg3Dl8Ejw7WNWbsJDw0tr+mM70VZCOLBQ+SeaqLOmfyyyAlYyRB3qqQ8txfKrb1TJnn2v2b60A==}
+  '@vizzly-testing/honeydiff@0.4.3':
+    resolution: {integrity: sha512-x7V+V/R8TmFNqHInmXjlDgJBhmKnliCXxXZyZ3XoHP6lwnMAjtvRnoLrPl2CFn4AHKllxPT4ofyMUb+VoJprLQ==}
     engines: {node: '>=22.0.0'}
 
-  '@vizzly-testing/vitest@0.0.2':
-    resolution: {integrity: sha512-NsKaUuLnTj4YJpsvNrGfvcVz0On77gAweT0ccvTOMF80TiXuFA+LdQZSfwHDNQCWLIaWAWAHf+zsd4Y/M+n01Q==}
+  '@vizzly-testing/vitest@0.0.3':
+    resolution: {integrity: sha512-zN22L/WM3NDBdxKBjDNV/ZcUpF+0pI3CkaTGEuvg4LXHt09Nuy8FLwp6JwjWlIaFOK0qkA28nVWtAZUpN1bpjA==}
     engines: {node: '>=22.0.0'}
     peerDependencies:
       '@vizzly-testing/cli': '>=0.12.0'
@@ -11602,23 +11602,23 @@ snapshots:
       '@vitest/pretty-format': 4.0.13
       tinyrainbow: 3.0.3
 
-  '@vizzly-testing/cli@0.14.0(typescript@5.8.3)':
+  '@vizzly-testing/cli@0.16.2(typescript@5.8.3)':
     dependencies:
-      '@vizzly-testing/honeydiff': 0.3.1
+      '@vizzly-testing/honeydiff': 0.4.3
       commander: 14.0.2
       cosmiconfig: 9.0.0(typescript@5.8.3)
       dotenv: 17.2.3
       form-data: 4.0.0
-      glob: 11.1.0
+      glob: 13.0.0
       zod: 4.1.13
     transitivePeerDependencies:
       - typescript
 
-  '@vizzly-testing/honeydiff@0.3.1': {}
+  '@vizzly-testing/honeydiff@0.4.3': {}
 
-  '@vizzly-testing/vitest@0.0.2(@vizzly-testing/cli@0.14.0(typescript@5.8.3))(vitest@4.0.13)':
+  '@vizzly-testing/vitest@0.0.3(@vizzly-testing/cli@0.16.2(typescript@5.8.3))(vitest@4.0.13)':
     dependencies:
-      '@vizzly-testing/cli': 0.14.0(typescript@5.8.3)
+      '@vizzly-testing/cli': 0.16.2(typescript@5.8.3)
       vitest: 4.0.13(@types/debug@4.1.12)(@types/node@24.10.1)(@vitest/browser-playwright@4.0.13)(@vitest/ui@4.0.13)(happy-dom@8.9.0(encoding@0.1.13))(jsdom@27.2.0)(sass-embedded@1.93.3)(sass@1.94.2)(terser@5.44.0)(yaml@2.8.1)
 
   '@volar/language-core@2.4.23':
