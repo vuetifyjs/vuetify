@@ -180,12 +180,10 @@ export const VList = genericComponent<new <
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props)
 
-    const scrollToActive = toRef(() => props.navigationStrategy === 'track')
-    const returnObject = toRef(() => props.returnObject)
     const { children, open, parents, select, getPath } = useNested(props, {
       items,
-      returnObject,
-      scrollToActive,
+      returnObject: toRef(() => props.returnObject),
+      scrollToActive: toRef(() => props.navigationStrategy === 'track'),
     })
 
     const lineClasses = toRef(() => props.lines ? `v-list--${props.lines}-line` : undefined)
@@ -201,13 +199,12 @@ export const VList = genericComponent<new <
       v => v ?? -1
     )
 
-    const navigationStrategyRef = toRef(() => props.navigationStrategy)
     const uid = useId()
 
     createList({
       filterable: props.filterable,
       trackingIndex: navigationIndex,
-      navigationStrategy: navigationStrategyRef,
+      navigationStrategy: toRef(() => props.navigationStrategy),
       uid,
     })
 
