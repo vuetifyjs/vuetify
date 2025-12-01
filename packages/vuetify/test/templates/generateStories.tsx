@@ -6,6 +6,7 @@
  */
 import type { FunctionalComponent } from 'vue'
 import type { JSXComponent } from '@/util'
+import { shallowRef } from 'vue'
 import { expect, it } from 'vitest'
 import { page } from 'vitest/browser'
 import { render, waitIdle } from '@test'
@@ -114,9 +115,10 @@ export const generate = ({ props, stories, component }: GenerateConfiguration) =
   }
 
   return it('renders everything', async () => {
+    const defaultTheme = shallowRef('light')
     await page.viewport(600, 800)
 
-    const { element } = render(() => (
+    render(() => (
       <>
         { exampleStories && (
           <>
@@ -131,26 +133,35 @@ export const generate = ({ props, stories, component }: GenerateConfiguration) =
           </>
         )}
       </>
-    ))
+    ), null, {
+      theme: {
+        defaultTheme: defaultTheme as any,
+      },
+    })
 
     let suite = (globalThis as any).__vitest_worker__.current
     let name = ''
     while (suite) {
-      name = suite.name + ' ' + name
+      if (suite.name !== 'Showcase') {
+        name = suite.name + ' ' + name
+      }
       suite = suite.suite
     }
 
-    await page.viewport(600, document.body.scrollHeight)
-    await waitIdle()
-    await expect(element).toMatchScreenshot(name.trim(), {
-      properties: { mobile: true },
-    })
+    for (const theme of ['light', 'dark']) {
+      defaultTheme.value = theme
+      await page.viewport(600, document.body.scrollHeight)
+      await waitIdle()
+      await expect.soft(page).toMatchScreenshot(name.trim() + ' ' + theme, {
+        properties: { viewport: 'mobile', theme },
+      })
 
-    await page.viewport(1280, document.body.scrollHeight)
-    await waitIdle()
-    await expect(element).toMatchScreenshot(name.trim(), {
-      properties: { mobile: false },
-    })
+      await page.viewport(1280, document.body.scrollHeight)
+      await waitIdle()
+      await expect.soft(page).toMatchScreenshot(name.trim() + ' ' + theme, {
+        properties: { viewport: 'desktop', theme },
+      })
+    }
   })
 }
 
