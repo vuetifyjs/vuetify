@@ -4,10 +4,10 @@ import './VBreadcrumbs.sass'
 // Components
 import { VBreadcrumbsDivider } from './VBreadcrumbsDivider'
 import { VBreadcrumbsItem } from './VBreadcrumbsItem'
-import { VIcon } from '../VIcon'
-import { VList, VListItem, VListItemTitle } from '../VList'
-import { VMenu } from '../VMenu'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
+import { VIcon } from '@/components/VIcon'
+import { VList, VListItem } from '@/components/VList'
+import { VMenu } from '@/components/VMenu'
 
 // Composables
 import { useBackgroundColor } from '@/composables/color'
@@ -20,7 +20,7 @@ import { makeTagProps } from '@/composables/tag'
 
 // Utilities
 import { computed, ref, toRef, watch } from 'vue'
-import { genericComponent, isObject, noop, propsFactory, useRender } from '@/util'
+import { clamp, genericComponent, isObject, noop, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -30,6 +30,7 @@ import type { GenericProps } from '@/util'
 export type InternalBreadcrumbItem = Partial<LinkProps> & {
   title: string
   disabled?: boolean
+  ellipsis?: boolean
 }
 
 export type BreadcrumbItem = string | InternalBreadcrumbItem
@@ -59,16 +60,9 @@ export const makeVBreadcrumbsProps = propsFactory({
     default: () => ([]),
   },
   itemProps: Boolean,
-  listProps: {
-    type: Object as PropType<VList['$props']>,
-  },
-  menuProps: {
-    type: Object as PropType<VMenu['$props']>,
-  },
-  totalVisible: {
-    type: Number,
-    default: Number.MAX_VALUE,
-  },
+  listProps: Object as PropType<VList['$props']>,
+  menuProps: Object as PropType<VMenu['$props']>,
+  totalVisible: [Number, String],
 
   ...makeComponentProps(),
   ...makeDensityProps(),
@@ -85,7 +79,7 @@ export const VBreadcrumbs = genericComponent<new <T extends BreadcrumbItem>(
     title: { item: InternalBreadcrumbItem, index: number }
     divider: { item: T, index: number }
     item: { item: InternalBreadcrumbItem, index: number }
-    'list-item': { item: InternalBreadcrumbItem, index: number }
+    'list-item': { item: InternalBreadcrumbItem, index: number, isCurrentPage: boolean }
     default: never
   }
 ) => GenericProps<typeof props, typeof slots>>()({
@@ -110,35 +104,97 @@ export const VBreadcrumbs = genericComponent<new <T extends BreadcrumbItem>(
       },
     })
 
-    const items = computed(() => props.items.map(item =>
-      typeof item === 'string' ? { item: { title: item }, raw: item } : { item, raw: item }
-    ))
-    const ellipsisEnabled = toRef(() => items.value.length > props.totalVisible)
-    const hasEllipsis = ref(ellipsisEnabled.value)
-    const collapseStartIndex = toRef(() => Math.min(props.collapseFrom, props.totalVisible))
-    const collapseEndIndex = toRef(() => collapseStartIndex.value + items.value.length - props.totalVisible)
-    const visibleItemsStart = toRef(() =>
-      collapseStartIndex.value < items.value.length ? items.value.slice(0, collapseStartIndex.value) : items.value
-    )
-    const collapsedItems = toRef(() =>
-      items.value.slice(collapseStartIndex.value, collapseEndIndex.value)
-    )
-    const visibleItemsEnd = toRef(() => {
-      const sliceIndex = props.totalVisible - collapseStartIndex.value
-
-      return sliceIndex <= 0 ? [] : items.value.slice(-sliceIndex)
+    const totalVisible = computed(() => {
+      return props.totalVisible != null
+        ? parseInt(props.totalVisible, 10)
+        : Number.MAX_SAFE_INTEGER
     })
 
-    const collapse = () => {
-      hasEllipsis.value = ellipsisEnabled.value
-    }
-    const onClickEllipsis = () => {
-      hasEllipsis.value = false
+    const items = computed(() => props.items
+      .map(item =>
+        typeof item === 'string'
+          ? { item: { title: item } as InternalBreadcrumbItem, raw: item }
+          : { item, raw: item }
+      )
+    )
+
+    const ellipsisEnabled = toRef(() => items.value.length > totalVisible.value)
+    const collapsed = ref(ellipsisEnabled.value)
+    const collapseStartIndex = toRef(() => clamp(props.collapseFrom, 0, totalVisible.value))
+    const collapsedItemsCount = toRef(() => collapsed.value
+      ? clamp(items.value.length - totalVisible.value, 0, items.value.length - collapseStartIndex.value)
+      : 0
+    )
+
+    const menuItems = computed(() => collapsedItemsCount.value
+      ? items.value.slice(collapseStartIndex.value, collapseStartIndex.value + collapsedItemsCount.value)
+      : []
+    )
+
+    const visibleItems = computed(() => collapsedItemsCount.value
+      ? [
+        ...items.value.slice(0, collapseStartIndex.value),
+        { item: { title: props.ellipsis, ellipsis: true }, raw: '' },
+        ...items.value.slice(collapseStartIndex.value + collapsedItemsCount.value),
+      ]
+      : items.value
+    )
+
+    function collapse () {
+      collapsed.value = ellipsisEnabled.value
     }
 
-    watch(ellipsisEnabled, (value: boolean) => {
-      hasEllipsis.value = value
-    })
+    function onClickEllipsis () {
+      collapsed.value = false
+    }
+
+    watch(ellipsisEnabled, val => collapsed.value = val)
+
+    const ellipsisItem = () => (
+      <VBreadcrumbsItem
+        tabindex="0"
+        onClick={ props.collapseInMenu ? noop : onClickEllipsis }
+        onKeydown={ (e: KeyboardEvent) => {
+          if (!['Enter', ' '].includes(e.key)) return
+          e.preventDefault()
+          props.collapseInMenu ? (e.currentTarget as HTMLElement | null)?.click() : onClickEllipsis()
+        }}
+        class="v-breadcrumbs-item--ellipsis"
+        role="button"
+        aria-haspopup={ props.collapseInMenu ? 'menu' : undefined }
+        aria-expanded={ !collapsed.value }
+        aria-label="show more breadcrumb items"
+      >
+        { props.ellipsis }
+
+        { props.collapseInMenu ? (
+          <VMenu activator="parent" { ...props.menuProps } role="menu" aria-label="hidden breadcrumb items">
+            {{
+              default: () => (
+                <VList { ...props.listProps }>
+                  { menuItems.value.map(({ item }, index) => {
+                    const hasTrailingItems = collapseStartIndex.value + collapsedItemsCount.value < items.value.length
+                    const isCurrentPage = !hasTrailingItems && index === menuItems.value.length - 1
+                    return slots['list-item']?.({ item, index, isCurrentPage }) ?? (
+                      <VListItem
+                        key={ index }
+                        value={ index }
+                        active={ isCurrentPage }
+                        aria-current={ isCurrentPage ? 'page' : undefined }
+                        disabled={ isCurrentPage }
+                        href={ 'href' in item ? item.href : undefined }
+                        title={ item.title }
+                        role="menuitem"
+                      />
+                    )
+                  })}
+                </VList>
+              ),
+            }}
+          </VMenu>
+        ) : null }
+      </VBreadcrumbsItem>
+    )
 
     useRender(() => {
       const hasPrepend = !!(slots.prepend || props.icon)
@@ -183,19 +239,23 @@ export const VBreadcrumbs = genericComponent<new <T extends BreadcrumbItem>(
             </li>
           )}
 
-          { !hasEllipsis.value && items.value.map(({ item, raw }, index, array) => (
+          { visibleItems.value.map(({ item, raw }, index, array) => (
             <>
               { slots.item?.({ item, index }) ?? (
-                <VBreadcrumbsItem
-                  key={ index }
-                  disabled={ index >= array.length - 1 }
-                  active={ index === array.length - 1 }
-                  { ...(typeof item === 'string' ? { title: item } : item) }
-                  { ...(props.itemProps && isObject(raw) ? raw : {}) }
-                  v-slots={{
-                    default: slots.title ? () => slots.title?.({ item, index }) : undefined,
-                  }}
-                />
+                item.ellipsis
+                  ? ellipsisItem()
+                  : (
+                    <VBreadcrumbsItem
+                      key={ index }
+                      disabled={ index >= array.length - 1 }
+                      active={ index === array.length - 1 }
+                      { ...(typeof item === 'string' ? { title: item } : item) }
+                      { ...(props.itemProps && isObject(raw) ? raw : {}) }
+                      v-slots={{
+                        default: slots.title ? () => slots.title?.({ item, index }) : undefined,
+                      }}
+                    />
+                  )
               )}
 
               { index < array.length - 1 && (
@@ -208,114 +268,15 @@ export const VBreadcrumbs = genericComponent<new <T extends BreadcrumbItem>(
             </>
           ))}
 
-          { hasEllipsis.value && (
-            <>
-              { (() => {
-                return visibleItemsStart.value.map(({ item }, i) => {
-                  const isLast = i === visibleItemsStart.value.length - 1
-
-                  return (
-                    <>
-                      { slots.item?.({ item, index: i }) ?? (
-                        <VBreadcrumbsItem
-                          key={ i }
-                          disabled={ false }
-                          { ...(typeof item === 'string' ? { title: item } : item) }
-                        />
-                      )}
-
-                      { !isLast && (
-                        <VBreadcrumbsDivider />
-                      )}
-                    </>
-                  )
-                })
-              })()}
-
-              { collapseStartIndex.value > 0 && <VBreadcrumbsDivider /> }
-
-              <VBreadcrumbsItem
-                tabindex="0"
-                onClick={ props.collapseInMenu ? noop : onClickEllipsis }
-                onKeydown={ (e: KeyboardEvent) => {
-                  if (!['Enter', ' '].includes(e.key)) return
-                  e.preventDefault()
-                  props.collapseInMenu ? (e.currentTarget as HTMLElement | null)?.click() : onClickEllipsis()
-                }}
-                class="v-breadcrumbs-item--ellipsis"
-                role="button"
-                aria-haspopup={ props.collapseInMenu ? 'menu' : undefined }
-                aria-expanded={ !hasEllipsis.value }
-                aria-label="show more breadcrumb items"
-              >
-                { props.ellipsis }
-
-                { props.collapseInMenu ? (
-                  <VMenu activator="parent" { ...props.menuProps } role="menu" aria-label="hidden breadcrumb items">
-                    {{
-                      default: () => (
-                        <VList { ...props.listProps }>
-                          { collapsedItems.value.map(({ item }, index) => {
-                            const isLastCollapsedItem = index === collapsedItems.value.length - 1
-                            const isCurrentPage = !visibleItemsEnd.value.length && isLastCollapsedItem
-                            if (slots['list-item']) {
-                              return slots['list-item']({ item, index })
-                            }
-                            return (
-                              <VListItem
-                                key={ index }
-                                value={ index }
-                                active={ isCurrentPage }
-                                aria-current={ isCurrentPage ? 'page' : undefined }
-                                disabled={ isCurrentPage }
-                                href={ 'href' in item ? item.href : undefined }
-                                role="menuitem"
-                              >
-                                <VListItemTitle>{ item.title }</VListItemTitle>
-                              </VListItem>
-                            )
-                          })}
-                        </VList>
-                      ),
-                    }}
-                  </VMenu>
-                ) : null }
-              </VBreadcrumbsItem>
-
-              { visibleItemsEnd.value.length > 0 && <VBreadcrumbsDivider /> }
-
-              { (() => {
-                return visibleItemsEnd.value.map(({ item }, i) => {
-                  const isLast = i === visibleItemsEnd.value.length - 1
-
-                  return (
-                    <>
-                      { slots.item?.({ item, index: i }) ?? (
-                        <VBreadcrumbsItem
-                          key={ i }
-                          disabled={ i === items.value.length - 1 }
-                          active={ i === items.value.length - 1 }
-                          { ...(typeof item === 'string' ? { title: item } : item) }
-                        />
-                      )}
-
-                      { !isLast && (
-                        <VBreadcrumbsDivider key={ `divider-last-${i}` } />
-                      )}
-                    </>
-                  )
-                })
-              })()}
-            </>
-          )}
-
           { slots.default?.() }
           </ol>
         </props.tag>
       )
     })
 
-    return { collapse }
+    return {
+      collapse,
+    }
   },
 })
 
