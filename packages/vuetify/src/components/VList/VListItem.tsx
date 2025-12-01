@@ -157,11 +157,11 @@ export const VListItem = genericComponent<VListItemSlots>()({
       props.link !== false &&
       (props.link || link.isClickable.value || isSelectable.value)
     )
-    const isKeyboardFocused = computed(() =>
+    const isTracked = computed(() =>
       list &&
       list.navigationStrategy.value === 'track' &&
       props.index !== undefined &&
-      list.keyboardFocusedIndex.value === props.index
+      list.trackingIndex.value === props.index
     )
     const role = computed(() => list ? (isLink.value ? 'link' : isSelectable.value ? 'option' : 'listitem') : undefined)
     const ariaSelected = computed(() => {
@@ -188,7 +188,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
       if (!val || !scrollToActive) return
       rootEl.value?.scrollIntoView({ block: 'nearest', behavior: 'instant' })
     })
-    watch(isKeyboardFocused, val => {
+    watch(isTracked, val => {
       if (!val) return
       rootEl.value?.scrollIntoView({ block: 'nearest', behavior: 'instant' })
     })
@@ -290,7 +290,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
               'v-list-item--nav': props.nav,
               'v-list-item--prepend': !hasPrepend && list?.hasPrepend.value,
               'v-list-item--slim': props.slim,
-              'v-list-item--focus-visible': isKeyboardFocused.value,
+              'v-list-item--focus-visible': isTracked.value,
               [`${props.activeClass}`]: props.activeClass && isActive.value,
             },
             themeClasses.value,

@@ -22,14 +22,14 @@ export const ListKey: InjectionKey<{
   filterable: MaybeRefOrGetter<boolean>
   hasPrepend: Ref<boolean>
   updateHasPrepend: (value: boolean) => void
-  keyboardFocusedIndex: Ref<number>
+  trackingIndex: Ref<number>
   navigationStrategy: Ref<'focus' | 'track'>
   uid: string
 }> = Symbol.for('vuetify:list')
 
 type InjectedListOptions = {
   filterable: MaybeRefOrGetter<boolean>
-  keyboardFocusedIndex?: Ref<number>
+  trackingIndex?: Ref<number>
   navigationStrategy?: Ref<'focus' | 'track'>
   uid?: string
 }
@@ -39,14 +39,14 @@ export function createList (options: InjectedListOptions = { filterable: false }
     filterable: false,
     hasPrepend: shallowRef(false),
     updateHasPrepend: () => null,
-    keyboardFocusedIndex: shallowRef(-1),
+    trackingIndex: shallowRef(-1),
     navigationStrategy: shallowRef('focus' as 'focus' | 'track'),
     uid: '',
   })
 
   const {
     filterable,
-    keyboardFocusedIndex = parent.keyboardFocusedIndex,
+    trackingIndex = parent.trackingIndex,
     navigationStrategy = parent.navigationStrategy,
     uid = parent.uid || useId(),
   } = options
@@ -57,7 +57,7 @@ export function createList (options: InjectedListOptions = { filterable: false }
     updateHasPrepend: (value: boolean) => {
       if (value) data.hasPrepend.value = value
     },
-    keyboardFocusedIndex,
+    trackingIndex,
     navigationStrategy,
     uid,
   }

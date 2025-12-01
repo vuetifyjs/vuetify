@@ -206,7 +206,7 @@ export const VList = genericComponent<new <
 
     createList({
       filterable: props.filterable,
-      keyboardFocusedIndex: navigationIndex,
+      trackingIndex: navigationIndex,
       navigationStrategy: navigationStrategyRef,
       uid,
     })
