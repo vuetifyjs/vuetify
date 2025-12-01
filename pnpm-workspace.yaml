@@ -21,7 +21,7 @@ minimumReleaseAgeExclude:
   - playwright
   - playwright-core
   - '@vizzly-testing/vitest@0.0.3'
-  - '@vizzly-testing/cli@0.16.2'
+  - '@vizzly-testing/cli@0.16.3'
   - '@vizzly-testing/honeydiff@0.4.3'
 
 nodeLinker: hoisted
