@@ -267,8 +267,8 @@ importers:
   packages/docs:
     dependencies:
       '@cosmicjs/sdk':
-        specifier: ^1.5.2
-        version: 1.5.2
+        specifier: ^1.5.6
+        version: 1.5.6
       '@sentry/vue':
         specifier: ^9.12.0
         version: 9.12.0(pinia@3.0.4(typescript@5.8.3)(vue@3.5.25(typescript@5.8.3)))(vue@3.5.25(typescript@5.8.3))
@@ -1347,8 +1347,8 @@ packages:
       conventional-commits-parser:
         optional: true
 
-  '@cosmicjs/sdk@1.5.2':
-    resolution: {integrity: sha512-FiZE+SvLaDWpTlFXywjyX9frCdf7oSoz1lPivsA0+ch7HxKFgkC6QCg9fxE5+LbtRGEJsI1tthqlaME83dnNUQ==}
+  '@cosmicjs/sdk@1.5.6':
+    resolution: {integrity: sha512-5GcFMJLlcBpsmZj0FvP98/F09GaQVUVKidRjeioBogoy2k8YpwRykHFSR3rWERH5c92fy7jJsACUJScm7qRoDg==}
 
   '@cspotcode/source-map-support@0.8.1':
     resolution: {integrity: sha512-IchNf6dN4tHoMFIn/7OE8LWZ19Y6q/67Bmf6vnGREv8RSbBVb9LPJxEcnwrcwX6ixSvaiGoomAUvu4YSxXrVgw==}
@@ -9420,7 +9420,7 @@ snapshots:
       conventional-commits-filter: 5.0.0
       conventional-commits-parser: 6.2.1
 
-  '@cosmicjs/sdk@1.5.2':
+  '@cosmicjs/sdk@1.5.6':
     dependencies:
       axios: 1.7.2
       form-data: 4.0.0
