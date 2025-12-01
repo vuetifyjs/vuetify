@@ -1,6 +1,6 @@
 import 'roboto-fontface'
 import '@/styles/main.sass'
-import { beforeAll, beforeEach } from 'vitest'
+import { afterEach, beforeAll, beforeEach } from 'vitest'
 import { cleanup } from '@testing-library/vue'
 import { commands, page } from 'vitest/browser'
 
@@ -16,4 +16,15 @@ beforeEach(async () => {
   // fails we can inspect what has happened
   cleanup()
   await page.viewport(1280, 800)
+})
+
+afterEach(async ctx => {
+  if (
+    ctx.task.result?.state === 'fail' &&
+    ctx.task.name !== 'Showcase' &&
+    !ctx.task.result.errors?.every(e => e.message.startsWith('Visual difference detected'))
+  ) {
+    // vizzly disables screenshotOnFailure
+    await page.screenshot()
+  }
 })
