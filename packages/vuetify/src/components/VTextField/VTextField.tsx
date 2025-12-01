@@ -138,7 +138,9 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
         callEvent(props['onClick:clear'], e)
       })
     }
-    function onInput (e: Event) {
+    function onInput (e: InputEvent) {
+      if (e.isComposing) return
+
       const el = e.target as HTMLInputElement
 
       if (!(
@@ -165,6 +167,10 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
         if (start != null) el.selectionStart = start - offset
         if (end != null) el.selectionEnd = end - offset
       })
+    }
+
+    function onCompositionend (e: CompositionEvent) {
+      model.value = e.data
     }
 
     useRender(() => {
@@ -230,6 +236,7 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
                         ref={ val => inputRef.value = controlRef.value = val as HTMLInputElement }
                         value={ model.value }
                         onInput={ onInput }
+                        onCompositionend={ onCompositionend }
                         v-intersect={[{
                           handler: onIntersect,
                         }, null, ['once']]}
