@@ -171,7 +171,7 @@ export const VDatePicker = genericComponent<new <
         : formattedDate
     })
 
-    const date = toRef(() => adapter.parseISO(`${year.value}-${month.value + 1}-01`))
+    const date = toRef(() => adapter.parseISO(`${year.value}-${String(month.value + 1).padStart(2, '0')}-01`))
     const monthYearText = toRef(() => adapter.format(date.value, 'monthAndYear'))
     const monthText = toRef(() => adapter.format(date.value, 'monthShort'))
     const yearText = toRef(() => adapter.format(date.value, 'year'))
