@@ -102,7 +102,7 @@ export const makeExamplesFromProps = (props: Props, Component: JSXComponent): Ex
  * @param configuration
  * @returns
  */
-export const generate = ({ props, stories, component }: GenerateConfiguration) => {
+export const showcase = ({ props, stories, component }: GenerateConfiguration) => {
   let exampleStories: Example[]
   let exampleProps: Example[]
   if (stories) {
@@ -114,7 +114,7 @@ export const generate = ({ props, stories, component }: GenerateConfiguration) =
     exampleProps = makeExamplesFromProps(props, component)
   }
 
-  return it('renders everything', async () => {
+  return it('Showcase', async () => {
     const defaultTheme = shallowRef('light')
     await page.viewport(600, 800)
 
