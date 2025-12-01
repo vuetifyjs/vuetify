@@ -6,7 +6,6 @@ autoInstallPeers: false
 ignoreWorkspaceRootCheck: true
 
 ignoredBuiltDependencies:
-  - '@percy/core'
   - edgedriver
   - geckodriver
   - unrs-resolver
