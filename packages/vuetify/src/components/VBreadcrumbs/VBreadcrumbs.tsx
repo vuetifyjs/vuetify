@@ -19,7 +19,7 @@ import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 
 // Utilities
-import { computed, ref, toRef, watch } from 'vue'
+import { computed, shallowRef, toRef, watch } from 'vue'
 import { clamp, genericComponent, isObject, noop, propsFactory, useRender } from '@/util'
 
 // Types
@@ -119,7 +119,9 @@ export const VBreadcrumbs = genericComponent<new <T extends BreadcrumbItem>(
     )
 
     const ellipsisEnabled = toRef(() => items.value.length > totalVisible.value)
-    const collapsed = ref(ellipsisEnabled.value)
+    const collapsed = shallowRef(ellipsisEnabled.value)
+    const menu = shallowRef(false)
+
     const collapseStartIndex = toRef(() => clamp(props.collapseFrom, 0, totalVisible.value))
     const collapsedItemsCount = toRef(() => collapsed.value
       ? clamp(items.value.length - totalVisible.value, 0, items.value.length - collapseStartIndex.value)
@@ -142,33 +144,40 @@ export const VBreadcrumbs = genericComponent<new <T extends BreadcrumbItem>(
 
     function collapse () {
       collapsed.value = ellipsisEnabled.value
+      menu.value = false
     }
 
     function onClickEllipsis () {
-      collapsed.value = false
+      if (props.collapseInMenu) {
+        menu.value = true
+      } else {
+        collapsed.value = false
+      }
     }
 
-    watch(ellipsisEnabled, val => collapsed.value = val)
+    watch(ellipsisEnabled, collapse)
 
     const ellipsisItem = () => (
       <VBreadcrumbsItem
         tabindex="0"
         onClick={ props.collapseInMenu ? noop : onClickEllipsis }
-        onKeydown={ (e: KeyboardEvent) => {
-          if (!['Enter', ' '].includes(e.key)) return
-          e.preventDefault()
-          props.collapseInMenu ? (e.currentTarget as HTMLElement | null)?.click() : onClickEllipsis()
-        }}
+        onKeydown={ (e: KeyboardEvent) => { ['Enter', ' '].includes(e.key) && onClickEllipsis() } }
         class="v-breadcrumbs-item--ellipsis"
         role="button"
         aria-haspopup={ props.collapseInMenu ? 'menu' : undefined }
-        aria-expanded={ !collapsed.value }
+        aria-expanded={ !collapsed.value || menu.value }
         aria-label="show more breadcrumb items"
       >
         { props.ellipsis }
 
         { props.collapseInMenu ? (
-          <VMenu activator="parent" { ...props.menuProps } role="menu" aria-label="hidden breadcrumb items">
+          <VMenu
+            activator="parent"
+            v-model={ menu.value }
+            role="menu"
+            aria-label="hidden breadcrumb items"
+            { ...props.menuProps }
+          >
             {{
               default: () => (
                 <VList { ...props.listProps }>
@@ -241,22 +250,21 @@ export const VBreadcrumbs = genericComponent<new <T extends BreadcrumbItem>(
 
           { visibleItems.value.map(({ item, raw }, index, array) => (
             <>
-              { slots.item?.({ item, index }) ?? (
-                item.ellipsis
-                  ? ellipsisItem()
-                  : (
-                    <VBreadcrumbsItem
-                      key={ index }
-                      disabled={ index >= array.length - 1 }
-                      active={ index === array.length - 1 }
-                      { ...(typeof item === 'string' ? { title: item } : item) }
-                      { ...(props.itemProps && isObject(raw) ? raw : {}) }
-                      v-slots={{
-                        default: slots.title ? () => slots.title?.({ item, index }) : undefined,
-                      }}
-                    />
-                  )
-              )}
+              { item.ellipsis
+                ? ellipsisItem()
+                : slots.item?.({ item, index }) ?? (
+                  <VBreadcrumbsItem
+                    key={ index }
+                    disabled={ index >= array.length - 1 }
+                    active={ index === array.length - 1 }
+                    { ...(typeof item === 'string' ? { title: item } : item) }
+                    { ...(props.itemProps && isObject(raw) ? raw : {}) }
+                    v-slots={{
+                      default: slots.title ? () => slots.title?.({ item, index }) : undefined,
+                    }}
+                  />
+                )
+              }
 
               { index < array.length - 1 && (
                 <VBreadcrumbsDivider
