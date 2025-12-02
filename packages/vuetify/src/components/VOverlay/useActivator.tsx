@@ -128,9 +128,9 @@ export function useActivator (
       isHovered = false
       runCloseDelay()
     },
-    onFocus: (e: FocusEvent) => {
-      if (matchesSelector(e.target as HTMLElement, ':focus-visible') === false) return
+    onFocusin: (e: FocusEvent) => {
       if (reopenLock.value) return
+      if (matchesSelector(e.target as HTMLElement, ':focus-visible') === false) return
 
       isFocused = true
       e.stopPropagation()
@@ -157,7 +157,7 @@ export function useActivator (
       events.onMouseleave = availableEvents.onMouseleave
     }
     if (openOnFocus.value) {
-      events.onFocus = availableEvents.onFocus
+      events.onFocusin = availableEvents.onFocusin
       events.onBlur = availableEvents.onBlur
     }
 

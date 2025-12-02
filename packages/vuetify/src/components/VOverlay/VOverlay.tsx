@@ -38,6 +38,7 @@ import {
 import {
   animate,
   convertToUnit,
+  focusableChildren,
   genericComponent,
   getCurrentInstance,
   getScrollParent,
@@ -226,11 +227,29 @@ export const VOverlay = genericComponent<OverlaySlots>()({
       isActive.value = false
     }
 
+    function returnFocus () {
+      if (!activatorEl.value) return
+      const activatorParent = activatorEl.value?.parentElement as HTMLElement
+      if (!activatorParent) return
+
+      let target
+      const focusableInParent = focusableChildren(activatorParent)
+      if (focusableInParent.includes(activatorEl.value)) {
+        target = activatorEl.value
+      } else {
+        const focusableWithin = focusableChildren(activatorEl.value)
+        const firstInputWithin = focusableWithin.find(x => ['INPUT', 'TEXTAREA'].includes(x.tagName))
+        target = firstInputWithin ?? focusableWithin[0]
+      }
+
+      target?.focus({ preventScroll: true })
+    }
+
     watch(isActive, val => {
       if (!val) {
         reopenLock.value = true
         if (returnFocusToActivator.value) {
-          activatorEl.value?.focus({ preventScroll: true })
+          returnFocus()
         }
       }
     }, { flush: 'pre' })
@@ -254,12 +273,8 @@ export const VOverlay = genericComponent<OverlaySlots>()({
         if (!contentEl.value?.contains(document.activeElement)) {
           emit('keydown', e)
         }
-        if (!props.persistent) {
-          isActive.value = false
-          if (contentEl.value?.contains(document.activeElement)) {
-            activatorEl.value?.focus()
-          }
-        } else animateClick()
+        if (!props.persistent) isActive.value = false
+        else animateClick()
       }
     }
     function onKeydownSelf (e: KeyboardEvent) {
