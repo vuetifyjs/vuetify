@@ -107,6 +107,8 @@
 
   // Utilities
   import { getExample } from 'virtual:examples'
+
+  // Types
   import type { Component } from 'vue'
 
   const { xs } = useDisplay()
