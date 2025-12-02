@@ -107,6 +107,7 @@
 
   // Utilities
   import { getExample } from 'virtual:examples'
+  import type { Component } from 'vue'
 
   const { xs } = useDisplay()
   const { t } = useI18n()
@@ -141,7 +142,13 @@
   const isEager = shallowRef(false)
   const copied = shallowRef(false)
 
-  const component = shallowRef()
+  type ExampleComponentType = Component & {
+    playgroundResources?: string
+    playgroundSetup?: string
+    exampleMeta?: string
+  }
+
+  const component = shallowRef<ExampleComponentType | undefined>()
   const code = shallowRef<string>()
   const ExampleComponent = computed(() => {
     return isError.value ? ExampleMissing : isLoaded.value ? component.value : null
@@ -197,7 +204,7 @@
   })
 
   const exampleMeta = computed<Record<string, any>>(() => {
-    const meta = (component.value as any)?.exampleMeta
+    const meta = component.value?.exampleMeta
 
     if (!meta) return {}
 
@@ -210,7 +217,7 @@
   })
 
   const playgroundLink = computed(() => {
-    if (!isLoaded.value || isError.value) return null
+    if (!isLoaded.value || isError.value || !component.value) return null
 
     const resources = JSON.parse(component.value.playgroundResources || '{}')
     const setup = component.value.playgroundSetup?.trim()
@@ -223,7 +230,7 @@
   })
 
   const figmaLink = computed(() => {
-    return exampleMeta.value.figma ?? null
+    return exampleMeta.value.figma
   })
 
   const actions = computed(() => [
