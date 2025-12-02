@@ -73,9 +73,15 @@ export const makeActivatorProps = propsFactory({
 
 export function useActivator (
   props: ActivatorProps,
-  { isActive, isTop, contentEl }: {
+  {
+    isActive,
+    isTop,
+    reopenLock,
+    contentEl,
+  }: {
     isActive: Ref<boolean>
     isTop: Ref<boolean>
+    reopenLock: Ref<boolean>
     contentEl: Ref<HTMLElement | undefined>
   }
 ) {
@@ -124,6 +130,7 @@ export function useActivator (
     },
     onFocus: (e: FocusEvent) => {
       if (matchesSelector(e.target as HTMLElement, ':focus-visible') === false) return
+      if (reopenLock.value) return
 
       isFocused = true
       e.stopPropagation()

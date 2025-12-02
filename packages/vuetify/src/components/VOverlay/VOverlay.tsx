@@ -30,6 +30,7 @@ import {
   mergeProps,
   onBeforeUnmount,
   ref,
+  shallowRef,
   Teleport,
   Transition,
   watch,
@@ -155,13 +156,25 @@ export const VOverlay = genericComponent<OverlaySlots>()({
       return typeof props.scrim === 'string' ? props.scrim : null
     })
     const { globalTop, localTop, stackStyles } = useStack(isActive, () => props.zIndex, props._disableGlobalStack)
+
+    const reopenLock = shallowRef(false)
+    watch(reopenLock, v => v && setTimeout(() => reopenLock.value = false, 50))
+
+    const returnFocusToActivator = shallowRef(true)
+    watch(returnFocusToActivator, v => v && setTimeout(() => returnFocusToActivator.value = false, 50))
+
     const {
       activatorEl, activatorRef,
       target, targetEl, targetRef,
       activatorEvents,
       contentEvents,
       scrimEvents,
-    } = useActivator(props, { isActive, isTop: localTop, contentEl })
+    } = useActivator(props, {
+      isActive,
+      isTop: localTop,
+      contentEl,
+      reopenLock,
+    })
     const { teleportTarget } = useTeleport(() => {
       const target = props.attach || props.contained
       if (target) return target
@@ -174,7 +187,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
     const { scopeId } = useScopeId()
 
     watch(() => props.disabled, v => {
-      if (v) isActive.value = false
+      if (v) closeWithoutReturningFocus()
     })
 
     const { contentStyles, updateLocation } = useLocationStrategies(props, {
@@ -195,7 +208,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
     function onClickOutside (e: MouseEvent) {
       emit('click:outside', e)
 
-      if (!props.persistent) isActive.value = false
+      if (!props.persistent) closeWithoutReturningFocus()
       else animateClick()
     }
 
@@ -207,6 +220,20 @@ export const VOverlay = genericComponent<OverlaySlots>()({
     }
 
     useFocusTrap(props, { isActive, localTop, contentEl, activatorEl })
+
+    function closeWithoutReturningFocus () {
+      returnFocusToActivator.value = false
+      isActive.value = false
+    }
+
+    watch(isActive, val => {
+      if (!val) {
+        reopenLock.value = true
+        if (returnFocusToActivator.value) {
+          activatorEl.value?.focus({ preventScroll: true })
+        }
+      }
+    }, { flush: 'pre' })
 
     IN_BROWSER && watch(isActive, val => {
       if (val) {
@@ -246,7 +273,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
       useBackButton(router, next => {
         if (globalTop.value && isActive.value) {
           next(false)
-          if (!props.persistent) isActive.value = false
+          if (!props.persistent) closeWithoutReturningFocus()
           else animateClick()
         } else {
           next()
@@ -375,6 +402,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
       globalTop,
       localTop,
       updateLocation,
+      closeWithoutReturningFocus,
     }
   },
 })
