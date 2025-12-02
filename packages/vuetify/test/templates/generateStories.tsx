@@ -6,8 +6,7 @@
  */
 import type { FunctionalComponent } from 'vue'
 import type { JSXComponent } from '@/util'
-import { shallowRef } from 'vue'
-import { expect, it } from 'vitest'
+import { describe, expect, it } from 'vitest'
 import { page } from 'vitest/browser'
 import { render, waitIdle } from '@test'
 
@@ -114,54 +113,47 @@ export const showcase = ({ props, stories, component }: GenerateConfiguration) =
     exampleProps = makeExamplesFromProps(props, component)
   }
 
-  return it('Showcase', async () => {
-    const defaultTheme = shallowRef('light')
-    await page.viewport(600, 800)
+  return describe('Showcase', () => {
+    it.each([
+      ['light', 'mobile'],
+      ['light', 'desktop'],
+      ['dark', 'mobile'],
+      ['dark', 'desktop'],
+    ] as const)('%s %s', async (theme, device) => {
+      render(() => (
+        <>
+          { exampleStories && (
+            <>
+              <h2 class="mx-4 mt-10 mb-4">Stories</h2>
+              { exampleStories.map(s => s.mount()) }
+            </>
+          )}
+          { exampleProps && (
+            <>
+              <h2 class="mx-4 mt-10 mb-4">Props</h2>
+              { exampleProps.map(s => s.mount()) }
+            </>
+          )}
+        </>
+      ), null, {
+        theme: {
+          defaultTheme: theme,
+        },
+      })
 
-    render(() => (
-      <>
-        { exampleStories && (
-          <>
-            <h2 class="mx-4 mt-10 mb-4">Stories</h2>
-            { exampleStories.map(s => s.mount()) }
-          </>
-        )}
-        { exampleProps && (
-          <>
-            <h2 class="mx-4 mt-10 mb-4">Props</h2>
-            { exampleProps.map(s => s.mount()) }
-          </>
-        )}
-      </>
-    ), null, {
-      theme: {
-        defaultTheme: defaultTheme as any,
-      },
-    })
-
-    let suite = (globalThis as any).__vitest_worker__.current
-    let name = ''
-    while (suite) {
-      if (suite.name !== 'Showcase') {
+      let suite = (globalThis as any).__vitest_worker__.current.suite.suite
+      let name = ''
+      while (suite) {
         name = suite.name + ' ' + name
+        suite = suite.suite
       }
-      suite = suite.suite
-    }
 
-    for (const theme of ['light', 'dark']) {
-      defaultTheme.value = theme
-      await page.viewport(600, document.body.scrollHeight)
+      await page.viewport({ mobile: 600, desktop: 1280 }[device], document.body.scrollHeight)
       await waitIdle()
       await expect.soft(page).toMatchScreenshot(name.trim() + ' ' + theme, {
-        properties: { viewport: 'mobile', theme },
+        properties: { device, theme },
       })
-
-      await page.viewport(1280, document.body.scrollHeight)
-      await waitIdle()
-      await expect.soft(page).toMatchScreenshot(name.trim() + ' ' + theme, {
-        properties: { viewport: 'desktop', theme },
-      })
-    }
+    })
   })
 }
 
