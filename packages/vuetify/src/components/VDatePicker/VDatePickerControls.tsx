@@ -52,6 +52,10 @@ export const makeVDatePickerControlsProps = propsFactory({
     type: [Boolean, String, Array] as PropType<boolean | string | string[] | null>,
     default: null,
   },
+  readonly: {
+    type: Boolean,
+    defauly: null,
+  },
   nextIcon: {
     type: IconValue,
     default: '$next',

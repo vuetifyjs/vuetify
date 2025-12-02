@@ -13,6 +13,7 @@ import type { PropType } from 'vue'
 export interface CalendarProps {
   allowedDates: unknown[] | ((date: unknown) => boolean) | undefined
   disabled: boolean
+  readonly: boolean
   displayValue?: unknown
   modelValue: unknown[] | undefined
   max: unknown
@@ -58,6 +59,10 @@ export const makeCalendarProps = propsFactory({
   disabled: {
     type: Boolean,
     default: null,
+  },
+  readonly: {
+    type: Boolean,
+    defauly: null,
   },
   displayValue: null as any as PropType<unknown>,
   modelValue: Array as PropType<unknown[]>,
@@ -218,7 +223,7 @@ export function useCalendar (props: CalendarProps) {
   const { minDate, maxDate } = useCalendarRange(props)
 
   function isDisabled (value: unknown) {
-    if (props.disabled) return true
+    if (props.disabled || props.readonly) return true
 
     const date = adapter.date(value)
 
