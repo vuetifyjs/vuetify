@@ -598,7 +598,7 @@ export const VAutocomplete = genericComponent<new <
                     )
                     : undefined
 
-                  const closable = computed(() => props.closableChips && !props.readonly && !form.isReadonly.value)
+                  const closable = computed(() => props.closableChips && !props.readonly && !props.disabled && !form.isReadonly.value)
                   if (hasSlot && !slotContent) return undefined
 
                   return (
