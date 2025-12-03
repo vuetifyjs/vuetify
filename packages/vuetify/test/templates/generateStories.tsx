@@ -113,8 +113,7 @@ export const showcase = ({ props, stories, component }: GenerateConfiguration) =
     exampleProps = makeExamplesFromProps(props, component)
   }
 
-  const _describe = process.env.TEST_TDD_ONLY ? describe.only : describe
-  return _describe('Showcase', () => {
+  return describe('Showcase', () => {
     it.each([
       ['light', 'mobile'],
       ['light', 'desktop'],

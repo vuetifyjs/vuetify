@@ -11,11 +11,22 @@ beforeAll(async () => {
   await commands.setReduceMotionEnabled()
 })
 
-beforeEach(async () => {
+beforeEach(async ctx => {
   // Cleanup before not after, so if the test
   // fails we can inspect what has happened
   cleanup()
   await page.viewport(1280, 800)
+
+  if (process.env.TEST_TDD_ONLY) {
+    let suite = ctx.task.suite
+    while (suite) {
+      if (suite.name === 'Showcase') {
+        return
+      }
+      suite = suite.suite
+    }
+    ctx.skip()
+  }
 })
 
 afterEach(async ctx => {
