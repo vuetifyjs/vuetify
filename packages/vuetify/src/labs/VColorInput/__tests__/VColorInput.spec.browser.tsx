@@ -11,7 +11,7 @@ describe('VColorInput', () => {
       <VColorInput onUpdate:focused={ onFocus } />
     ))
 
-    await userEvent.click(element, { y: 1 })
+    await userEvent.click(element, { position: { x: 92, y: 55 } })
 
     expect(onFocus).toHaveBeenCalledTimes(1)
   })

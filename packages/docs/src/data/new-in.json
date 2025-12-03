@@ -303,6 +303,7 @@
   },
   "VTab": {
     "props": {
+      "inset": "3.11.2",
       "text": "3.2.0",
       "spaced": "3.10.0",
       "sliderTransition": "3.11.0",

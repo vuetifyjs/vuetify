@@ -63,6 +63,7 @@ export const makeVDataTableHeadersProps = propsFactory({
   disableSort: Boolean,
   fixedHeader: Boolean,
   multiSort: Boolean,
+  initialSortOrder: String as PropType<'asc' | 'desc'>,
   sortAscIcon: {
     type: IconValue,
     default: '$sortAsc',
@@ -117,9 +118,9 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
     function getSortIcon (column: InternalDataTableHeader) {
       const item = sortBy.value.find(item => item.key === column.key)
 
-      if (!item) return props.sortAscIcon
-
-      return item.order === 'asc' ? props.sortAscIcon : props.sortDescIcon
+      return (!item && props.initialSortOrder === 'asc') || item?.order === 'asc'
+        ? props.sortAscIcon
+        : props.sortDescIcon
     }
 
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.color)
@@ -247,6 +248,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
       const displayItems = computed<ItemProps['items']>(() => {
         return columns.value.filter(column => column?.sortable && !props.disableSort)
       })
+      const showSelectColumn = columns.value.find(column => column.key === 'data-table-select')
 
       return (
         <VDataTableColumn
@@ -269,18 +271,17 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
               multiple={ props.multiSort }
               variant="underlined"
               onClick:clear={ () => sortBy.value = [] }
-              onClick:append={ () => selectAll(!allSelected.value) }
             >
               {{
-                append: () => (
+                append: showSelectColumn ? () => (
                   <VCheckboxBtn
                     color={ props.color }
                     density="compact"
                     modelValue={ allSelected.value }
                     indeterminate={ someSelected.value && !allSelected.value }
-                    onUpdate:modelValue={ selectAll }
+                    onUpdate:modelValue={ () => selectAll(!allSelected.value) }
                   />
-                ),
+                ) : undefined,
                 chip: props => (
                   <VChip
                     onClick={ props.item.raw?.sortable ? () => toggleSort(props.item.raw) : undefined }

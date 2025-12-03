@@ -72,6 +72,8 @@ describe('VWindow', () => {
       </VWindow>
     ))
 
+    await commands.waitStable('.v-window')
+
     let arrows = screen.getAllByCSS('.v-window__controls > .v-btn')
     expect(arrows).toHaveLength(1)
     await userEvent.click(arrows[0])
@@ -216,6 +218,7 @@ describe('VWindow', () => {
       </VWindow>
     ))
 
+    await commands.waitStable('.v-window')
     const arrows = screen.getAllByCSS('.v-window__controls > .v-btn')
     await userEvent.click(arrows[0])
     expect(screen.getByCSS('.v-window-item--active h1')).toHaveTextContent('3. baz')

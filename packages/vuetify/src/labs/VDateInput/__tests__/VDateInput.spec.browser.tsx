@@ -12,7 +12,7 @@ describe('VDateInput', () => {
       <VDateInput onUpdate:focused={ onFocus } />
     ))
 
-    await userEvent.click(element, { y: 1 })
+    await userEvent.click(element, { position: { x: 92, y: 55 } })
 
     expect(onFocus).toHaveBeenCalledTimes(1)
   })
@@ -144,7 +144,7 @@ describe('VDateInput', () => {
     })
 
     it(`should reset if empty string is inputted`, async () => {
-      const { element, emitted, getByRole } = render(
+      const { emitted, getByRole } = render(
         <VDateInput
           modelValue={ new Date() }
         />
@@ -152,7 +152,6 @@ describe('VDateInput', () => {
 
       const input = getByRole('textbox')
       await userEvent.clear(input)
-      await userEvent.click(element)
       await userEvent.keyboard('{Enter}')
 
       const date = emitted<Date[]>('update:modelValue')![0][0]

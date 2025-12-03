@@ -2,6 +2,7 @@
   "props": {
     "direction": "Changes the direction of the tabs. Can be either `horizontal` or `vertical`.",
     "hideSlider": "Hides the active tab slider component (no exit or enter animation).",
+    "inset": "Changes the slider to take full height. Automatically propagated from VTabs.",
     "fixed": "Forces component to take up all available space up to their maximum width (300px), and centers it.",
     "sliderColor": "Applies specified color to the slider when active on that component - supports utility colors (for example `success` or `purple`) or css color (`#033` or `rgba(255, 0, 0, 0.5)`). Find a list of built-in classes on the [colors page](/styles/colors#material-colors).",
     "sliderTransition": "Changes slider transition to one of the predefined animation presets.",

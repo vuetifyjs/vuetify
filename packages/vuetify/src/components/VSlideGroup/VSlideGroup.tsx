@@ -78,6 +78,7 @@ export const makeVSlideGroupProps = propsFactory({
         'always',
         'desktop',
         'mobile',
+        'never',
       ].includes(v)
     ),
   },
@@ -352,6 +353,8 @@ export const VSlideGroup = genericComponent<new <T>(
 
     const hasAffixes = computed(() => {
       switch (props.showArrows) {
+        case 'never': return false
+
         // Always show arrows on desktop & mobile
         case 'always': return true
 
