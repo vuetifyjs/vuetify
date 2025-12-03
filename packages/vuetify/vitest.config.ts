@@ -47,6 +47,9 @@ export default defineConfig(configEnv => {
         preTransformRequests: false,
       },
       clearScreen: !IS_RUN,
+      define: {
+        'process.env.TEST_TDD_ONLY': process.env.TEST_TDD_ONLY,
+      },
       test: {
         watch: false,
         slowTestThreshold: Infinity,

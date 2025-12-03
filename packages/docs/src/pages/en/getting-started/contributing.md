@@ -129,10 +129,11 @@ Vuetify uses [Vitest](https://vitest.dev/) for unit tests, [Vitest browser mode]
 - `pnpm test:browser` - run only browser tests
 - `pnpm test:open` - run browser tests in a chrome window
   - use this if you need devtools to debug a failing test
+- `pnpm test:screen` - run only screenshot tests, saves a report to `.vizzly/report/index.html`
 - `pnpm tdd` - start the vizzly dev server, follow with `test`, `test:browser`, or `test:open` to actually run tests. Screenshot baselines and diffs can be managed and viewed at http://localhost:47392/
   - run `pnpm tdd:stop` when you're done to kill the background process
 
-The test commands all accept a list of test names to filter by, eg. `pnpm test textfield textarea` to only run VTextField and VTextarea tests.
+The `test:*` commands all accept a list of test names to filter by, eg. `pnpm test textfield textarea` to only run VTextField and VTextarea tests.
 
 ##### Visual regression workflow
 
