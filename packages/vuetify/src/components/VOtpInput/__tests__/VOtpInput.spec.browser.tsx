@@ -1,7 +1,7 @@
 import { VOtpInput } from '../VOtpInput'
 
 // Utilities
-import { commands, generate, render, screen, userEvent } from '@test'
+import { commands, render, screen, showcase, userEvent } from '@test'
 import { ref } from 'vue'
 
 const stories = {
@@ -173,7 +173,5 @@ describe('VOtpInput', () => {
     expect(inputs[5]).toHaveFocus()
   })
 
-  describe('Showcase', () => {
-    generate({ stories })
-  })
+  showcase({ stories })
 })

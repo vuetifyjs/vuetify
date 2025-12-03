@@ -4,7 +4,7 @@ import { VBtn } from '@/components/VBtn'
 import { VMenu } from '@/components/VMenu'
 
 // Utilities
-import { commands, generate, render, screen, userEvent, wait } from '@test'
+import { commands, render, screen, showcase, userEvent, wait } from '@test'
 import { cloneVNode } from 'vue'
 
 const variants = ['underlined', 'outlined', 'filled', 'solo', 'plain'] as const
@@ -133,7 +133,5 @@ describe('VTextField', () => {
     expect(element).toHaveTextContent('0')
   })
 
-  describe('Showcase', () => {
-    generate({ stories })
-  })
+  showcase({ stories })
 })

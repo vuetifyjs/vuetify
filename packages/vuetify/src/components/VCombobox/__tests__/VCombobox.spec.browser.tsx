@@ -3,7 +3,7 @@ import { VCombobox } from '../VCombobox'
 import { VForm } from '@/components/VForm'
 
 // Utilities
-import { generate, render, screen, userEvent, waitAnimationFrame, waitIdle } from '@test'
+import { render, screen, showcase, userEvent, waitAnimationFrame, waitIdle } from '@test'
 import { commands } from 'vitest/browser'
 import { cloneVNode, ref } from 'vue'
 
@@ -826,7 +826,5 @@ describe('VCombobox', () => {
     expect(model.value).toEqual(['foo', 'bar'])
   })
 
-  describe('Showcase', () => {
-    generate({ stories })
-  })
+  showcase({ stories })
 })
