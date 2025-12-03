@@ -85,9 +85,11 @@ export const makeVTabsProps = propsFactory({
   ...makeTagProps(),
 }, 'VTabs')
 
-export const VTabs = genericComponent<new <T = TabItem>(
+export const VTabs = genericComponent<new <TModel, T = TabItem>(
   props: {
     items?: T[]
+    modelValue?: TModel
+    'onUpdate:modelValue'?: (value: TModel) => void
   },
   slots: VTabsSlots<T>
 ) => GenericProps<typeof props, typeof slots>>()({
@@ -96,7 +98,7 @@ export const VTabs = genericComponent<new <T = TabItem>(
   props: makeVTabsProps(),
 
   emits: {
-    'update:modelValue': (v: unknown) => true,
+    'update:modelValue': (v: any) => true,
   },
 
   setup (props, { attrs, slots }) {
