@@ -112,8 +112,6 @@ export const generate = ({ props, stories, component }: GenerateConfiguration) =
   }
 
   return it('renders everything', async () => {
-    await page.viewport(1280, 825)
-
     render(() => (
       <>
         { exampleStories && (
@@ -138,8 +136,10 @@ export const generate = ({ props, stories, component }: GenerateConfiguration) =
       suite = suite.suite
     }
 
+    await page.viewport(1280, document.body.scrollHeight)
     await commands.percySnapshot(name.trim())
     await page.screenshot()
+    await page.viewport(1280, 800)
   })
 }
 

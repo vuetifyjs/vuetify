@@ -17,7 +17,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import vIntersect from '@/directives/intersect'
 
 // Utilities
-import { cloneVNode, computed, nextTick, ref } from 'vue'
+import { cloneVNode, computed, nextTick, ref, withDirectives } from 'vue'
 import { callEvent, filterInputAttrs, genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
@@ -230,9 +230,6 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
                         ref={ val => inputRef.value = controlRef.value = val as HTMLInputElement }
                         value={ model.value }
                         onInput={ onInput }
-                        v-intersect={[{
-                          handler: onIntersect,
-                        }, null, ['once']]}
                         autofocus={ props.autofocus }
                         readonly={ isReadonly.value }
                         disabled={ isDisabled.value }
@@ -259,15 +256,18 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
                           </span>
                         )}
 
-                        { slots.default ? (
-                          <div
-                            class={ fieldClass }
-                            data-no-activator=""
-                          >
-                            { slots.default() }
-                            { inputNode }
-                          </div>
-                        ) : cloneVNode(inputNode, { class: fieldClass })}
+                        { withDirectives(
+                          slots.default ? (
+                            <div
+                              class={ fieldClass }
+                              data-no-activator=""
+                            >
+                              { slots.default() }
+                              { inputNode }
+                            </div>
+                          ) : cloneVNode(inputNode, { class: fieldClass }),
+                          [[vIntersect, onIntersect, null, { once: true }]],
+                        )}
 
                         { props.suffix && (
                           <span class="v-text-field__suffix">

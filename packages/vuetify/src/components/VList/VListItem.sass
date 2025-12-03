@@ -23,6 +23,10 @@
     @include tools.rounded($list-item-border-radius)
     @include tools.variant($list-item-variants...)
 
+    &--focus-visible
+      .v-list-item__overlay
+        opacity: calc(#{map.get(settings.$states, 'focus')} * var(--v-theme-overlay-multiplier))
+
     @supports selector(:focus-visible)
       &::after
         pointer-events: none
@@ -32,7 +36,8 @@
         transition: opacity .2s ease-in-out
         @include tools.absolute(true)
 
-      &:focus-visible::after
+      &:focus-visible::after,
+      &--focus-visible::after
         opacity: calc(.15 * var(--v-theme-overlay-multiplier))
 
     &__prepend,
@@ -359,6 +364,9 @@
           opacity: 1
           color: highlighttext !important
           forced-color-adjust: preserve-parent-color
+
+      &--focus-visible::after
+        opacity: 1
 
       @supports selector(:focus-visible)
         &::after
