@@ -233,7 +233,7 @@
       icon: copied.value ? 'mdi-check' : 'mdi-clipboard-multiple-outline',
       path: 'copy-example-source',
       onClick: async () => {
-        navigator.clipboard.writeText(
+        await navigator.clipboard.writeText(
           sections.value.map(section => section.content).join('\n')
         )
 

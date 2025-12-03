@@ -1,7 +1,7 @@
 import { VMaskInput } from '../VMaskInput'
 
 // Utilities
-import { render, screen, userEvent } from '@test'
+import { commands, render, screen, userEvent } from '@test'
 import { ref } from 'vue'
 
 describe('VMaskInput', () => {
@@ -259,7 +259,7 @@ describe('VMaskInput', () => {
 
         await insertCaretAt(inputCaret[0], inputCaret[1])
 
-        await userEvent.keyboard('{Ctrl>}x{/Ctrl}')
+        await userEvent.keyboard('{ControlOrMeta>}x{/ControlOrMeta}')
         expect(model.value).toBe(outputText)
         expect(input.selectionStart).toBe(outputCaret)
       })
@@ -333,10 +333,11 @@ describe('VMaskInput', () => {
       ])('should work as expected when pasting', async ({ defaultModel, defaultMask, inputText, inputCaret, outputText, outputCaret }) => {
         const { input, model, insertCaretAt } = renderComponent({ defaultModel, defaultMask })
 
-        navigator.clipboard.writeText(inputText)
-
         await insertCaretAt(inputCaret[0], inputCaret[1])
+        const lock = await commands.getLock()
+        await navigator.clipboard.writeText(inputText)
         await userEvent.paste()
+        await commands.releaseLock(lock)
 
         expect(model.value).toBe(outputText)
         expect(input.selectionStart).toBe(outputCaret)
