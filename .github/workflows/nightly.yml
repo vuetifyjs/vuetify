@@ -96,7 +96,7 @@ jobs:
         env:
           FULL_VERSION: ${{ steps.nightly-release.outputs.full-version }}
 
-  percy:
+  vizzly:
     name: Visual regression tests
     runs-on: ubuntu-24.04
     if: ${{ github.event_name == 'schedule' && github.repository_owner == 'vuetifyjs' }}
@@ -115,10 +115,7 @@ jobs:
           fi
       - uses: vuetifyjs/setup-action@master
       - run: echo "COMMIT=$(git rev-parse HEAD)" >> $GITHUB_ENV
-      - run: pnpm test:percy
+      - run: pnpm vizzly run "pnpm test:browser"
         working-directory: ./packages/vuetify
         env:
-          PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
-          PERCY_BRANCH: master
-          PERCY_TARGET_BRANCH: master
-          PERCY_COMMIT: ${{ env.COMMIT }}
+          VIZZLY_TOKEN: ${{ secrets.VIZZLY_TOKEN }}

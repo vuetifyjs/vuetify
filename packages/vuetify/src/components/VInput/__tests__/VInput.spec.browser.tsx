@@ -2,7 +2,7 @@
 import { VInput } from '../VInput'
 
 // Utilities
-import { generate } from '@test'
+import { showcase } from '@test'
 import { cloneVNode } from 'vue'
 
 const densities = ['default', 'comfortable', 'compact']
@@ -25,7 +25,5 @@ const stories = Object.fromEntries(Object.entries({
 )]))
 
 describe('VInput', () => {
-  describe('Showcase', () => {
-    generate({ stories })
-  })
+  showcase({ stories })
 })

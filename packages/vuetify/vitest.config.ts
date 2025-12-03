@@ -1,5 +1,6 @@
 import { defineConfig, mergeConfig } from 'vitest/config'
 import { playwright } from '@vitest/browser-playwright'
+import { vizzlyPlugin } from '@vizzly-testing/vitest'
 import viteConfig from './vite.config'
 import AutoImport from 'unplugin-auto-import/vite'
 import { fileURLToPath } from 'node:url'
@@ -22,6 +23,7 @@ export default defineConfig(configEnv => {
         exclude: ['@vue/test-utils'],
       },
       plugins: [
+        vizzlyPlugin(),
         AutoImport({
           include: '**/*.spec.?(browser.)@(ts|tsx)',
           imports: {
@@ -45,6 +47,9 @@ export default defineConfig(configEnv => {
         preTransformRequests: false,
       },
       clearScreen: !IS_RUN,
+      define: {
+        'process.env.TEST_TDD_ONLY': process.env.TEST_TDD_ONLY,
+      },
       test: {
         watch: false,
         slowTestThreshold: Infinity,
@@ -52,6 +57,7 @@ export default defineConfig(configEnv => {
         reporters: process.env.GITHUB_ACTIONS
           ? [['default', { summary: false }], 'github-actions']
           : [IS_RUN ? 'dot' : ['default', { summary: false }]],
+        attachmentsDir: '../test/__attachments__',
         coverage: {
           provider: 'istanbul',
           reporter: ['html', 'text-summary'],

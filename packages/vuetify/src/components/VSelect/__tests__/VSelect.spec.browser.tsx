@@ -4,7 +4,7 @@ import { VForm } from '@/components/VForm'
 import { VListItem } from '@/components/VList'
 
 // Utilities
-import { commands, generate, render, screen, userEvent, waitForClickable } from '@test'
+import { commands, render, screen, showcase, userEvent, waitForClickable } from '@test'
 import { getAllByRole } from '@testing-library/vue'
 import { cloneVNode, computed, nextTick, ref } from 'vue'
 
@@ -856,7 +856,5 @@ describe('VSelect', () => {
     })
   })
 
-  describe('Showcase', () => {
-    generate({ stories })
-  })
+  showcase({ stories })
 })

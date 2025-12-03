@@ -1,7 +1,7 @@
 import { VBtn } from '../VBtn'
 
 // Utilities
-import { generate, gridOn, render, screen, userEvent } from '@test'
+import { gridOn, render, screen, showcase, userEvent } from '@test'
 import { ref } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
@@ -244,7 +244,5 @@ describe('VBtn', () => {
     })
   })
 
-  describe('Showcase', () => {
-    generate({ stories, props, component: VBtn })
-  })
+  showcase({ stories, props, component: VBtn })
 })

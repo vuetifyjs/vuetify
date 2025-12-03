@@ -75,7 +75,11 @@ describe('goto', () => {
     await userEvent.click(start)
     await expect.poll(() => window.scrollX).toBeCloseTo(755, -1)
 
+    expect('target is not reachable').not.toHaveBeenTipped()
+
     await userEvent.click(end)
     await expect.poll(() => window.scrollX).toBe(0)
+
+    expect('target is not reachable').not.toHaveBeenTipped()
   })
 })

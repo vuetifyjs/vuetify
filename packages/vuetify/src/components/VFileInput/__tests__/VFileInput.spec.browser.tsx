@@ -2,7 +2,7 @@
 import { VFileInput } from '../VFileInput'
 
 // Utilities
-import { CenteredGrid, generate, render, screen, userEvent } from '@test'
+import { CenteredGrid, render, screen, showcase, userEvent } from '@test'
 import { cloneVNode, defineComponent, ref } from 'vue'
 
 const oneMBFile = new File([new ArrayBuffer(1021576)], '1MB file')
@@ -186,7 +186,5 @@ describe('VFileInput', () => {
     expect(input.files).toHaveLength(0)
   })
 
-  describe('Showcase', () => {
-    generate({ stories })
-  })
+  showcase({ stories })
 })

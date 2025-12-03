@@ -1,19 +1,6 @@
 /// <reference types="@vitest/browser-playwright" />
-/// <reference types="./percy.d.ts" />
 
 import type { BrowserCommandContext } from 'vitest/node'
-import percy from '@percy/sdk-utils'
-import type { PercyOptions } from '@percy/sdk-utils'
-import { createRequire } from 'node:module'
-import { readFileSync } from 'node:fs'
-import path from 'upath'
-
-const require = createRequire(import.meta.url)
-
-const pkg = JSON.parse(readFileSync('../../package.json', 'utf8'))
-const pwkg = JSON.parse(readFileSync(path.resolve(require.resolve('playwright'), '../package.json'), 'utf8'))
-const CLIENT_INFO = `${pkg.name}/${pkg.version}`
-const ENV_INFO = `${pwkg.name}/${pwkg.version}`
 
 async function drag (ctx: BrowserCommandContext, start: [number, number], ...moves: number[][]) {
   const cdp = await ctx.provider.getCDPSession!(ctx.sessionId)
@@ -43,31 +30,6 @@ async function click (ctx: BrowserCommandContext, ...args: [string] | [number, n
     await el?.click()
   } else {
     await ctx.page.mouse.click(...args)
-  }
-}
-
-async function percySnapshot (ctx: BrowserCommandContext, name: string, options?: PercyOptions) {
-  if (!(await percy.isPercyEnabled())) return
-
-  const frame = await ctx.frame()
-  try {
-    const dom = await percy.fetchPercyDOM()
-    await frame.addScriptTag({ content: dom })
-
-    const domSnapshot = await frame.evaluate(opt => (window as any).PercyDOM.serialize(opt), options)
-
-    await percy.postSnapshot({
-      ...options,
-      environmentInfo: ENV_INFO,
-      clientInfo: CLIENT_INFO,
-      url: ctx.page.url(),
-      domSnapshot,
-      name,
-    })
-  } catch (err) {
-    const log = percy.logger('webdriverio')
-    log.error(`Could not take DOM snapshot "${name}"`)
-    log.error(err)
   }
 }
 
@@ -154,7 +116,6 @@ function clearAbortTimeout (ctx: BrowserCommandContext) {
 export const commands = {
   drag,
   click,
-  percySnapshot,
   waitStable,
   waitForClickable,
   setFocusEmulationEnabled,

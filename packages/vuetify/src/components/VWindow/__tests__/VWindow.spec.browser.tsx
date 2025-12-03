@@ -3,7 +3,7 @@ import { VWindow } from '../VWindow'
 import { VWindowItem } from '../VWindowItem'
 
 // Utilities
-import { commands, generate, page, render, screen, userEvent } from '@test'
+import { commands, page, render, screen, showcase, userEvent } from '@test'
 
 const stories = {
   'Without arrows': (
@@ -247,7 +247,5 @@ describe('VWindow', () => {
     expect(screen.getByCSS('.v-window-item--active h1')).toHaveTextContent('1. foo')
   })
 
-  describe('Showcase', () => {
-    generate({ stories })
-  })
+  showcase({ stories })
 })

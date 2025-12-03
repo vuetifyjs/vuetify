@@ -3,7 +3,7 @@ import { VToolbar } from '..'
 import { VBtn } from '@/components/VBtn'
 
 // Utilities
-import { generate } from '@test'
+import { showcase } from '@test'
 
 const stories = {
   'With title': <VToolbar title="foo" />,
@@ -19,7 +19,5 @@ const stories = {
 }
 
 describe('VToolbar', () => {
-  describe('Showcase', () => {
-    generate({ stories })
-  })
+  showcase({ stories })
 })

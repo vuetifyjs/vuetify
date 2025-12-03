@@ -2,7 +2,7 @@
 import { VSlider } from '../VSlider'
 
 // Utilities
-import { commands, generate, page, render, screen, userEvent } from '@test'
+import { commands, page, render, screen, showcase, userEvent } from '@test'
 import { ref } from 'vue'
 
 const stories = {
@@ -165,7 +165,5 @@ describe('VSlider', () => {
     expect(new Set(values)).toEqual(new Set([2.0011, 6.0051, 10]))
   })
 
-  describe('Showcase', () => {
-    generate({ stories })
-  })
+  showcase({ stories })
 })

@@ -5,7 +5,7 @@ import { VLocaleProvider } from '@/components/VLocaleProvider'
 import { VMain } from '@/components/VMain'
 
 // Utilities
-import { commands, generate, page, render, screen, userEvent } from '@test'
+import { commands, page, render, screen, showcase, userEvent } from '@test'
 import { ref } from 'vue'
 
 const stories = {
@@ -197,7 +197,5 @@ describe('VNavigationDrawer', () => {
     await expect.element(screen.getByCSS('.v-navigation-drawer__scrim')).toBeInViewport()
   })
 
-  describe('Showcase', () => {
-    generate({ stories })
-  })
+  showcase({ stories })
 })
