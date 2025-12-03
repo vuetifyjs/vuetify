@@ -120,6 +120,16 @@ export const showcase = ({ props, stories, component }: GenerateConfiguration) =
       ['dark', 'mobile'],
       ['dark', 'desktop'],
     ] as const)('%s %s', async (theme, device) => {
+      const style = document.createElement('style')
+      style.innerHTML = `
+        *, *::before, *::after {
+          animation-duration: 0s !important;
+          animation-delay: 0s !important;
+          transition-duration: 0s !important;
+          transition-delay: 0s !important;
+        }`
+      document.head.append(style)
+
       render(() => (
         <>
           { exampleStories && (
