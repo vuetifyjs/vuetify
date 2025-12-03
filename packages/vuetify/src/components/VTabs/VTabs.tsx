@@ -98,7 +98,7 @@ export const VTabs = genericComponent<new <TModel, T = TabItem>(
   props: makeVTabsProps(),
 
   emits: {
-    'update:modelValue': (v: any) => true,
+    'update:modelValue': (v: unknown) => true,
   },
 
   setup (props, { attrs, slots }) {
