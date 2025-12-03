@@ -9,9 +9,7 @@
         title="Vuetify Store"
       >
         <template #subtitle>
-          <v-icon class="mb-5" color="primary" size="60">
-            mdi-store-outline
-          </v-icon>
+          <v-img :src="`https://cdn.vuetifyjs.com/docs/images/one/logos/vstore.png`" class="mb-4" height="64" />
         </template>
       </HomeCommonTitle>
 

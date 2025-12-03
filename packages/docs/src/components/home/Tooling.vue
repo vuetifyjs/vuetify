@@ -10,7 +10,7 @@
         title="Vuetify Tooling"
       />
 
-      <v-row class="text-left mb-10">
+      <v-row class="text-left mb-10" justify="center">
         <v-col
           v-for="(item, i) in features"
           :key="i"
@@ -37,27 +37,28 @@
   const features = computed(() => [
     {
       title: 'Vuetify Create',
-      // TODO: Use proper image
-      image: `https://cdn.vuetifyjs.com/docs/images/logos/vcreate-logo-${isDark.value ? 'dark' : 'light'}.png`,
+      image: `https://cdn.vuetifyjs.com/docs/images/one/logos/vcreate-logo-${isDark.value ? 'dark' : 'light'}.png`,
       description: `Scaffold your next Vuetify application with just a few commands. Perfect for getting started with Vuetify.`,
     },
     {
-      title: 'Figma UI Kit',
-      // TODO: Use proper image
-      image: 'https://upload.wikimedia.org/wikipedia/commons/3/33/Figma-logo.svg',
+      title: 'Vuetify UI Kit',
+      image: `https://cdn.vuetifyjs.com/docs/images/one/logos/vuikit-logo-${isDark.value ? 'dark' : 'light'}.png`,
       description: `Fully optimized for Figma and based on Material Design - Vuetify UI Kit. You can use it to create your own Vuetify components and use them in your projects.`,
     },
     {
       title: 'Vuetify ESLint Config',
-      description: `An opinionated eslint config for Vuetify, crafted to keep your code clean and consistent! You can use it to keep your code clean and consistent.`,
-      // TODO: Use proper image
-      image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/ESLint_logo.svg/1200px-ESLint_logo.svg.png',
+      description: 'An opinionated eslint config for Vuetify, crafted to keep your code clean and consistent! You can use it to keep your code clean and consistent.',
+      image: `https://cdn.vuetifyjs.com/docs/images/one/logos/vloader-logo-${isDark.value ? 'dark' : 'light'}.png`,
     },
     {
       title: 'Vuetify ESLint Plugin',
-      // TODO: Use proper image
-      image: 'https://cdn.vuetifyjs.com/docs/images/logos/vuetify-logo-light-atom.svg',
+      image: `https://cdn.vuetifyjs.com/docs/images/one/logos/vloader-logo-${isDark.value ? 'dark' : 'light'}.png`,
       description: `Version upgrade automation eslint plugin, to keep your code clean and consistent! You can use it to keep your code clean and consistent.`,
+    },
+    {
+      title: 'Vuetify Loader',
+      image: `https://cdn.vuetifyjs.com/docs/images/one/logos/vloader-logo-${isDark.value ? 'dark' : 'light'}.png`,
+      description: `A Vite and Webpack loader that automatically imports Vuetify components and styles on demand to reduce bundle size.`,
     },
   ])
 </script>

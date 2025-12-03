@@ -13,7 +13,7 @@
       <HomeCommonMarquee :items="features" class="my-5">
         <template #default="{ item }">
           <v-img
-            :src="item.image"
+            :src="`https://cdn.vuetifyjs.com/docs/images/one/logos/${item.image}-logo-${theme.current.value.dark ? 'dark' : 'light'}.png`"
             class="px-6"
             width="200"
           />
@@ -27,44 +27,44 @@
   const theme = useTheme()
   const features = computed(() => [
     {
-      description: 'Vuetify MCP is a tool for managing your Vuetify projects. You can manage your projects and see the status of the project.',
-      image: `https://cdn.vuetifyjs.com/docs/images/logos/vone-logo-${theme.current.value.dark ? 'dark' : 'light'}.png`,
+      description: '',
+      image: 'vplay',
     },
     {
-      description: 'Vuetify MCP is a tool for managing your Vuetify projects. You can manage your projects and see the status of the project.',
-      image: `https://cdn.vuetifyjs.com/docs/images/logos/v0-logo-${theme.current.value.dark ? 'dark' : 'light'}.png`,
+      description: '',
+      image: 'vbin',
     },
     {
-      image: `https://cdn.vuetifyjs.com/docs/images/one/logos/vplay-logo-${theme.current.value.dark ? 'dark' : 'light'}.png`,
-      description: 'You can use Vuetify Playground to experiment with Vuetify components and see how they work.',
+      description: '',
+      image: 'vlink',
     },
     {
-      description: 'Bin is a tool for sharing code snippets. You can save your snippets with a unique URL.',
-      image: `https://cdn.vuetifyjs.com/docs/images/one/logos/vbin-logo-${theme.current.value.dark ? 'dark' : 'light'}.png`,
+      description: '',
+      image: 'vstudio',
     },
     {
-      description: 'Vuetify Link can be used to shorten long URLs. You can save them for later use.',
-      image: `https://cdn.vuetifyjs.com/docs/images/one/logos/vlink-logo-${theme.current.value.dark ? 'dark' : 'light'}.png`,
+      description: '',
+      image: 'vsnips',
     },
     {
-      description: 'Vuetify Studio is a tool for creating Vuetify components. You can create your own components and share them with others.',
-      image: `https://cdn.vuetifyjs.com/docs/images/one/logos/vstudio-logo-${theme.current.value.dark ? 'dark' : 'light'}.png`,
+      description: '',
+      image: 'vstore',
     },
     {
-      description: 'Vuetify Issues is a tool for reporting issues with Vuetify. You can report issues and see the status of the issue.',
-      image: `https://cdn.vuetifyjs.com/docs/images/one/logos/vissues-logo-${theme.current.value.dark ? 'dark' : 'light'}.png`,
+      description: '',
+      image: 'vissues',
     },
     {
-      description: 'Vuetify MCP is a tool for managing your Vuetify projects. You can manage your projects and see the status of the project.',
-      image: `https://cdn.vuetifyjs.com/docs/images/logos/vmcp-logo-${theme.current.value.dark ? 'dark' : 'light'}.png`,
+      description: '',
+      image: 'vmcp',
     },
     {
-      description: 'Vuetify MCP is a tool for managing your Vuetify projects. You can manage your projects and see the status of the project.',
-      image: `https://cdn.vuetifyjs.com/docs/images/logos/vsnips-logo-${theme.current.value.dark ? 'dark' : 'light'}.png`,
+      description: '',
+      image: 'vuikit',
     },
     {
-      description: 'Vuetify MCP is a tool for managing your Vuetify projects. You can manage your projects and see the status of the project.',
-      image: `https://cdn.vuetifyjs.com/docs/images/logos/vloader-logo-${theme.current.value.dark ? 'dark' : 'light'}.png`,
+      description: '',
+      image: 'vloader',
     },
   ])
 </script>

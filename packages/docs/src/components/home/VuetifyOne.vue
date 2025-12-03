@@ -34,39 +34,33 @@
   const toolings = computed(() => [
     {
       name: 'Vuetify Play',
-      image: `https://cdn.vuetifyjs.com/docs/images/logos/vplay-logo-${isDark.value ? 'dark' : 'light'}.png`,
-      description:
-        'Interactive playground to experiment with Vuetify components. Create, save, and share your projects with the community.',
+      image: `https://cdn.vuetifyjs.com/docs/images/one/logos/vplay-logo-${isDark.value ? 'dark' : 'light'}.png`,
+      description: 'An interactive playground to experiment with Vuetify components and features in real-time.',
     },
     {
       name: 'Vuetify Bin',
-      image: `https://cdn.vuetifyjs.com/docs/images/logos/vbin-logo-${isDark.value ? 'dark' : 'light'}.png`,
-      description:
-        'Save and share code snippets instantly. Features complete syntax highlighting and code formatting for a seamless experience.',
+      image: `https://cdn.vuetifyjs.com/docs/images/one/logos/vbin-logo-${isDark.value ? 'dark' : 'light'}.png`,
+      description: 'A code sharing platform tailored for Vuetify projects, enabling easy collaboration and sharing of code snippets.',
+    },
+    {
+      name: 'Vuetify Studio',
+      image: `https://cdn.vuetifyjs.com/docs/images/one/logos/vstudio-logo-${isDark.value ? 'dark' : 'light'}.png`,
+      description: 'A visual development environment for building Vuetify applications with drag-and-drop components and real-time previews.',
     },
     {
       name: 'Vuetify Link',
       image: `https://cdn.vuetifyjs.com/docs/images/one/logos/vlink-logo-${isDark.value ? 'dark' : 'light'}.png`,
-      description:
-        'Generate shareable links to documentation, components, and resources. Simplify collaboration and streamline your workflow.',
-    },
-    {
-      name: 'Vuetify Studio',
-      image: `https://cdn.vuetifyjs.com/docs/images/logos/vstudio-logo-${isDark.value ? 'dark' : 'light'}.png`,
-      description:
-        'Visual design tool for building Vuetify applications. Drag and drop components to create beautiful interfaces in minutes.',
+      description: 'A URL shortening service designed for Vuetify developers to create and manage short links efficiently.',
     },
     {
       name: 'Vuetify Issues',
-      image: `https://cdn.vuetifyjs.com/docs/images/logos/vissues-logo-${isDark.value ? 'dark' : 'light'}.png`,
-      description:
-        'Integrated issue tracking for Vuetify projects. Report bugs, request features, and stay updated with development progress.',
+      image: `https://cdn.vuetifyjs.com/docs/images/one/logos/vissues-logo-${isDark.value ? 'dark' : 'light'}.png`,
+      description: 'Easily report issues and request features for projects in the Vuetify Ecosystem.',
     },
     {
       name: 'Vuetify MCP',
-      image: `https://cdn.vuetifyjs.com/docs/images/logos/vloader-logo-${isDark.value ? 'dark' : 'light'}.png`,
-      description:
-        'Modular component provider for seamless integration. Access pre-built components and utilities to accelerate development.',
+      image: `https://cdn.vuetifyjs.com/docs/images/one/logos/vmcp-logo-${isDark.value ? 'dark' : 'light'}.png`,
+      description: 'Model Context Protocol (MCP) server providing Vuetify component information and documentation to any MCP-compatible client or IDE.',
     },
   ])
 </script>

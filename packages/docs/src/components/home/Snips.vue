@@ -54,5 +54,5 @@
 <script setup lang="ts">
   const theme = useTheme()
 
-  const src = computed(() => `https://cdn.vuetifyjs.com/docs/images/logos/vsnips-logo-${theme.current.value.dark ? 'dark' : 'light'}.png`)
+  const src = computed(() => `https://cdn.vuetifyjs.com/docs/images/one/logos/vsnips-logo-${theme.current.value.dark ? 'dark' : 'light'}.png`)
 </script>
