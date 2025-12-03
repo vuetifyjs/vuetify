@@ -27,7 +27,7 @@ import { useMenuActivator } from '@/composables/menuActivator'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, mergeProps, nextTick, ref, shallowRef, watch } from 'vue'
+import { computed, mergeProps, nextTick, ref, shallowRef, toRef, watch } from 'vue'
 import {
   checkPrintable,
   deepEqual,
@@ -661,7 +661,8 @@ export const VCombobox = genericComponent<new <
                     )
                     : undefined
 
-                  const closable = computed(() => props.closableChips && !props.readonly && !props.disabled && !form.isReadonly.value)
+                  const allowsChanges = toRef(() => !props.readonly && !props.disabled && !form.isReadonly.value && !form.isDisabled.value)
+                  const closableChips = toRef(() => props.closableChips && allowsChanges.value)
                   if (hasSlot && !slotContent) return undefined
 
                   return (
@@ -680,7 +681,7 @@ export const VCombobox = genericComponent<new <
                         !slots.chip ? (
                           <VChip
                             key="chip"
-                            closable={ closable.value }
+                            closable={ closableChips.value }
                             size="small"
                             text={ item.title }
                             disabled={ item.props.disabled }
@@ -691,7 +692,7 @@ export const VCombobox = genericComponent<new <
                             key="chip-defaults"
                             defaults={{
                               VChip: {
-                                closable: closable.value,
+                                closable: closableChips.value,
                                 size: 'small',
                                 text: item.title,
                               },
