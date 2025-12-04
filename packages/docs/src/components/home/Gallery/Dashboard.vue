@@ -8,39 +8,36 @@
         md="3"
         sm="6"
       >
-        <v-card
-          class="border-sm border-opacity-50"
+        <v-list
           elevation="0"
+          lines="two"
           rounded="lg"
-          variant="outlined"
+          border
         >
-          <v-card-item class="pt-4" height="64">
-            <v-card-title class="py-0 text-caption">{{ item.subtitle }}</v-card-title>
+          <v-list-item>
+            <v-list-item-title class="text-caption">{{ item.subtitle }}</v-list-item-title>
 
-            <v-card-title class="py-0">{{ item.title }}</v-card-title>
+            <v-list-item-title>{{ item.title }}</v-list-item-title>
 
             <template #append>
-              <v-icon :icon="item.icon" size="30" />
+              <v-icon :color="item.color" :icon="item.icon" size="30" />
             </template>
-          </v-card-item>
-        </v-card>
+          </v-list-item>
+        </v-list>
       </v-col>
     </v-row>
 
-    <v-card class="my-5" elevation="0" rounded="lg" title="Recent Orders">
-      <div class="px-4">
+    <v-card class="my-5" elevation="0" rounded="lg" title="Recent Orders" border>
+      <template #text>
         <v-text-field
           v-model="search"
-          density="compact"
           placeholder="Search"
           prepend-inner-icon="mdi-magnify"
           variant="outlined"
           hide-details
           rounded
         />
-      </div>
 
-      <div class="px-4">
         <v-data-table :headers="headers" :items="tableItems" :search="search" hide-default-footer>
           <template #item.name="{ item }">
             <div class="d-flex align-center ga-4">
@@ -51,13 +48,25 @@
           </template>
 
           <template #item.status="{ item }">
-            <v-chip :text="item.status" color="primary" size="small" label />
+            <v-chip
+              :color="item.status === 'Completed' ? 'success' : 'warning'"
+              :text="item.status"
+              border="current sm"
+              size="x-small"
+              label
+            />
+          </template>
+
+          <template #item.rating="{ item }">
+            <div class="d-flex align-center justify-end">
+              ({{ item.rating }})
+
+              <v-icon color="orange" icon="mdi-star" />
+            </div>
           </template>
         </v-data-table>
-      </div>
+      </template>
     </v-card>
-
-    <v-divider class="my-5" />
 
     <v-row>
       <v-col cols="12" md="6">
@@ -78,9 +87,9 @@
             >
               <template #prepend>
                 <v-avatar
+                  :color="item.color"
                   :icon="item.icon"
                   :text="item.initials"
-                  color="primary"
                   variant="tonal"
                   rounded
                 />
@@ -151,7 +160,7 @@
     { title: 'Amount', key: 'amount', value: item => `$${item.amount}` },
     { title: 'Vendor', key: 'vendor' },
     { title: 'Status', key: 'status' },
-    { title: 'Rating', key: 'rating' },
+    { title: 'Rating', key: 'rating', align: 'end' },
   ]
 
   const tableItems = [
@@ -202,21 +211,25 @@
       subtitle: 'Total subscribers',
       title: '23,412',
       icon: 'mdi-account-group-outline',
+      color: 'blue',
     },
     {
       subtitle: 'Total revenue',
       title: '$14,301',
       icon: 'mdi-star-outline',
+      color: 'green',
     },
     {
       subtitle: 'Total orders',
       title: '402',
       icon: 'mdi-cart-outline',
+      color: 'orange',
     },
     {
       subtitle: 'Total products',
       title: '76',
       icon: 'mdi-shape-outline',
+      color: 'red',
     },
   ]
 
@@ -226,36 +239,42 @@
       initials: 'JL',
       amount: '+$36.11',
       subtitle: '21 Mar 8:00PM',
+      color: 'success',
     },
     {
       title: 'ATM withdrawal',
       initials: '$',
       amount: '-$20.00',
       subtitle: '21 Mar 6:00PM',
+      color: 'warning',
     },
     {
       title: 'Jane Doe',
       initials: 'JD',
       amount: '+$45.00',
       subtitle: '21 Mar 4:00PM',
+      color: 'success',
     },
     {
       title: 'Amazon',
       initials: 'A',
       amount: '-$99.99',
       subtitle: '21 Mar 10:00AM',
+      color: 'orange',
     },
     {
       title: 'Water Bill',
       initials: 'W',
       amount: '-$25.00',
       subtitle: '16 Mar 9:00AM',
+      color: 'info',
     },
     {
       title: 'Electricity Bill',
       initials: 'E',
       amount: '-$45.00',
       subtitle: '14 Mar 8:00AM',
+      color: 'purple',
     },
   ]
 

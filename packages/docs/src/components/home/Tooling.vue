@@ -4,61 +4,105 @@
 
     <v-container>
       <HomeCommonTitle
-        class="mb-16"
+        class="mb-10"
         description="Vuetify provides a suite of tools for managing your Vuetify projects."
         subtitle="Tools & Resources"
         title="Vuetify Tooling"
       />
 
-      <v-row class="text-left mb-10" justify="center">
-        <v-col
-          v-for="(item, i) in features"
-          :key="i"
-          cols="12"
-          lg="6"
-          sm="6"
-        >
-          <HomeCommonCard
-            :description="item.description"
-            :image="item.image"
-            :title="item.title"
-          />
-        </v-col>
-      </v-row>
+      <v-card class="mx-auto" max-width="900" rounded="xl" border flat>
+        <v-table density="comfortable" hover>
+          <thead>
+            <tr>
+              <th class="text-left">Tool</th>
+              <th class="text-left">Type</th>
+              <th class="text-left d-none d-sm-table-cell">Description</th>
+            </tr>
+          </thead>
+
+          <tbody class="text-start">
+            <v-hover v-for="(item, i) in tools" :key="i">
+              <template #default="{ isHovering, props: hoverProps }">
+                <tr v-bind="hoverProps">
+                  <td>
+                    <div class="d-flex align-center ga-3 py-2">
+                      <v-avatar :color="item.color" rounded="lg" variant="tonal">
+                        <v-icon :icon="item.icon" />
+                      </v-avatar>
+
+                      <div>
+                        <a
+                          :href="item.href"
+                          class="font-weight-medium inline-block on-surface text-decoration-none"
+                          rel="noopener"
+                          target="_blank"
+                        >
+                          {{ item.title }}
+
+                          <v-icon :class="isHovering ? 'opacity-100' : 'opacity-0'" icon="mdi-open-in-new" size="xs" />
+                        </a>
+                        <div class="text-caption text-medium-emphasis d-sm-none">{{ item.type }}</div>
+                      </div>
+                    </div>
+                  </td>
+
+                  <td class="text-no-wrap">
+                    <v-chip :color="item.color" :text="item.type" size="small" variant="tonal" />
+                  </td>
+
+                  <td class="text-medium-emphasis d-none d-sm-table-cell">
+                    {{ item.description }}
+                  </td>
+                </tr>
+              </template></v-hover>
+          </tbody>
+        </v-table>
+      </v-card>
     </v-container>
   </v-responsive>
 </template>
 
 <script setup lang="ts">
-  const theme = useTheme()
-
-  const isDark = computed(() => theme.current.value.dark)
-
-  const features = computed(() => [
+  const tools = [
     {
       title: 'Vuetify Create',
-      image: `https://cdn.vuetifyjs.com/docs/images/one/logos/vcreate-logo-${isDark.value ? 'dark' : 'light'}.png`,
-      description: `Scaffold your next Vuetify application with just a few commands. Perfect for getting started with Vuetify.`,
+      icon: 'mdi-console',
+      type: 'CLI',
+      color: 'success',
+      description: 'Scaffold your next Vuetify application with just a few commands.',
+      href: 'https://github.com/vuetifyjs/create/',
     },
     {
       title: 'Vuetify UI Kit',
-      image: `https://cdn.vuetifyjs.com/docs/images/one/logos/vuikit-logo-${isDark.value ? 'dark' : 'light'}.png`,
-      description: `Fully optimized for Figma and based on Material Design - Vuetify UI Kit. You can use it to create your own Vuetify components and use them in your projects.`,
+      icon: 'mdi-palette-outline',
+      type: 'Design',
+      color: 'purple',
+      description: 'Figma UI Kit based on Material Design for creating custom components.',
+      href: 'https://github.com/vuetifyjs/create/',
     },
     {
       title: 'Vuetify ESLint Config',
-      description: 'An opinionated eslint config for Vuetify, crafted to keep your code clean and consistent! You can use it to keep your code clean and consistent.',
-      image: `https://cdn.vuetifyjs.com/docs/images/one/logos/vloader-logo-${isDark.value ? 'dark' : 'light'}.png`,
+      icon: 'mdi-code-tags-check',
+      type: 'Linting',
+      color: 'info',
+      description: 'Opinionated ESLint config to keep your code clean and consistent.',
+      href: 'https://github.com/vuetifyjs/eslint-config-vuetify',
     },
     {
       title: 'Vuetify ESLint Plugin',
-      image: `https://cdn.vuetifyjs.com/docs/images/one/logos/vloader-logo-${isDark.value ? 'dark' : 'light'}.png`,
-      description: `Version upgrade automation eslint plugin, to keep your code clean and consistent! You can use it to keep your code clean and consistent.`,
+      icon: 'mdi-arrow-up-bold-circle-outline',
+      type: 'Linting',
+      color: 'info',
+      description: 'Automated version upgrade plugin for seamless migrations.',
+      href: 'https://github.com/vuetifyjs/eslint-plugin-vuetify',
     },
     {
       title: 'Vuetify Loader',
-      image: `https://cdn.vuetifyjs.com/docs/images/one/logos/vloader-logo-${isDark.value ? 'dark' : 'light'}.png`,
-      description: `A Vite and Webpack loader that automatically imports Vuetify components and styles on demand to reduce bundle size.`,
+      icon: 'mdi-package-variant-closed',
+      type: 'Build',
+      color: 'warning',
+      description: 'Vite and Webpack loader for automatic component imports.',
+      href: 'https://github.com/vuetifyjs/vuetify-loader',
     },
-  ])
+  ]
 </script>

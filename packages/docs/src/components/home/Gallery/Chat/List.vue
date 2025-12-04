@@ -14,7 +14,6 @@
         v-model="searchTerm"
         bg-color="surface-light"
         class="mt-5"
-        density="compact"
         placeholder="Search"
         prepend-inner-icon="mdi-magnify"
         rounded="xl"
@@ -69,6 +68,5 @@
 
   const searchTerm = ref('')
 
-  const filteredChats = computed(() =>
-    props.chats.filter(chat => chat.name.toLowerCase().includes(searchTerm.value.toLowerCase())))
+  const filteredChats = computed(() => props.chats.filter(chat => chat.name.toLowerCase().includes(searchTerm.value.toLowerCase())))
 </script>

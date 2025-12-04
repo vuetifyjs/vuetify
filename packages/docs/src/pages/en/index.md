@@ -24,13 +24,13 @@ meta:
 
 <HomeVuetifyOne />
 
+<v-divider length="50" class="mx-auto" color="primary" thickness="6"></v-divider>
+
+<HomeSnips />
+
 <v-divider />
 
 <HomeTooling />
-
-<v-divider color="primary" />
-
-<HomeSnips />
 
 <v-divider />
 

@@ -29,7 +29,7 @@
       <v-slide-group
         v-else
         class="mb-10"
-        content-class="mx-3"
+        content-class="mx-3 rounded-lg"
         show-arrows
       >
         <template #next>
@@ -77,10 +77,9 @@
         rounded="lg"
         size="large"
         target="_blank"
+        text="See More Templates"
         variant="flat"
-      >
-        Shop More
-      </v-btn>
+      />
     </v-container>
   </v-responsive>
 </template>

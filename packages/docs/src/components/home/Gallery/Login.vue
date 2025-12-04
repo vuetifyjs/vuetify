@@ -1,9 +1,10 @@
 <template>
   <v-container class="h-100 pa-4" fluid>
     <v-row align="center" class="h-100" justify="center">
-      <v-sheet class="flex-1-1 px-4" color="background" max-width="420">
+      <v-sheet class="flex-1-1 px-4" color="transparent" max-width="420">
         <v-img
           class="mx-auto mb-4"
+          height="60"
           max-width="60"
           src="https://vuetifyjs.b-cdn.net/docs/images/logos/v.svg"
         />
@@ -12,21 +13,20 @@
 
         <v-sheet border="opacity-25 thin" class="overflow-hidden" rounded="lg">
           <v-text-field
-            density="compact"
             placeholder="Email"
             rounded="lg"
+            value="john@vuetifyjs.com"
             variant="solo"
-            flat
             hide-details
           />
 
           <v-divider />
 
           <v-text-field
-            density="compact"
             placeholder="Password"
+            type="password"
+            value="vuetify"
             variant="solo"
-            flat
             hide-details
           />
         </v-sheet>

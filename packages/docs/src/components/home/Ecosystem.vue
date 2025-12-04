@@ -1,8 +1,6 @@
 <template>
   <v-responsive class="py-15">
     <v-container>
-      <HomeCommonGradient opacity-class="opacity-10" />
-
       <HomeCommonTitle
         class="mb-10"
         description="Vuetify is a complete Vue ecosystem that provides you with all of the tools necessary to create beautiful content rich web applications."
@@ -12,11 +10,15 @@
 
       <HomeCommonMarquee :items="features" class="my-5">
         <template #default="{ item }">
-          <v-img
-            :src="`https://cdn.vuetifyjs.com/docs/images/one/logos/${item.image}-logo-${theme.current.value.dark ? 'dark' : 'light'}.png`"
-            class="px-6"
-            width="200"
-          />
+          <a :href="item.href" :title="`Visit ${item.href}`" target="_blank">
+            <v-img
+              :alt="item.image"
+              :src="`https://cdn.vuetifyjs.com/docs/images/one/logos/${item.image}-logo-${theme.current.value.dark ? 'dark' : 'light'}.png`"
+              height="40"
+              width="150"
+              contain
+            />
+          </a>
         </template>
       </HomeCommonMarquee>
     </v-container>
@@ -27,43 +29,43 @@
   const theme = useTheme()
   const features = computed(() => [
     {
-      description: '',
+      href: 'https://play.vuetifyjs.com',
       image: 'vplay',
     },
     {
-      description: '',
+      href: 'https://bin.vuetifyjs.com',
       image: 'vbin',
     },
     {
-      description: '',
+      href: 'https://link.vuetifyjs.com',
       image: 'vlink',
     },
     {
-      description: '',
+      href: 'https://studio.vuetifyjs.com',
       image: 'vstudio',
     },
     {
-      description: '',
+      href: 'https://snips.vuetifyjs.com',
       image: 'vsnips',
     },
     {
-      description: '',
+      href: 'https://store.vuetifyjs.com',
       image: 'vstore',
     },
     {
-      description: '',
+      href: 'https://issues.vuetifyjs.com',
       image: 'vissues',
     },
     {
-      description: '',
+      href: 'https://github.com/vuetifyjs/mcp/',
       image: 'vmcp',
     },
     {
-      description: '',
+      href: 'https://store.vuetifyjs.com/products/vuetify-ui-kit-figma',
       image: 'vuikit',
     },
     {
-      description: '',
+      href: 'https://github.com/vuetifyjs/vuetify-loader',
       image: 'vloader',
     },
   ])

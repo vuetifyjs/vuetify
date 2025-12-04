@@ -20,11 +20,13 @@
           <div class="my-5">
             <v-btn
               :to="rpath('introduction/enterprise-support/')"
+              append-icon="mdi-open-in-new"
               class="mr-4 text-none"
               color="primary"
               rounded="lg"
               size="large"
-              text="Learn More"
+              target="_blank"
+              text="Get Support Now"
               variant="flat"
             />
           </div>

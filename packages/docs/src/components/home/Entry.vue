@@ -22,6 +22,7 @@
           <div class="d-flex flex-wrap ga-4 justify-start my-5">
             <v-btn
               :to="rpath('/getting-started/installation/')"
+              append-icon="mdi-page-next"
               class="text-none"
               color="primary"
               rounded="lg"
@@ -31,12 +32,13 @@
             />
 
             <v-btn
-              append-icon="mdi-chevron-right"
+              :to="rpath('/getting-started/why-vuetify')"
+              append-icon="$vuetify-outline"
               class="text-none"
               color="primary"
               rounded="lg"
               size="large"
-              text="Explore Ecosystem"
+              text="Why Vuetify?"
               variant="tonal"
               flat
             />
@@ -47,15 +49,16 @@
               <v-sheet
                 class="px-2 py-2 d-inline-flex align-center text-mono text-body-2 text-no-wrap"
                 color="surface"
+                rounded="lg"
                 border
-                rounded
                 v-bind="props"
               >
 
                 <v-menu offset="4">
-                  <template #activator="{ props: iconProps }">
+                  <template #activator="{ props: iconProps, isActive }">
                     <v-icon-btn
                       v-bind="iconProps"
+                      :rotate="isActive ? 180 : 0"
                       class="mr-2"
                       color="primary"
                       cursor="pointer"
@@ -72,13 +75,10 @@
                     <v-list-item
                       v-for="manager in packageManagers"
                       :key="manager"
+                      :title="manager"
                       :value="manager"
                       @click="selectedPackageManager = manager"
-                    >
-                      <v-list-item-title>
-                        {{ manager }}
-                      </v-list-item-title>
-                    </v-list-item>
+                    />
                   </v-list>
                 </v-menu>
 
@@ -104,8 +104,8 @@
             <v-sheet
               class="pa-1 ps-3 d-inline-flex align-center justify-space-between"
               color="surface"
+              rounded="lg"
               border
-              rounded
             >
               <span class="text-body-2 me-2">Latest</span>
 

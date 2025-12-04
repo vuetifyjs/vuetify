@@ -1,6 +1,6 @@
 <template>
   <v-responsive class="py-10">
-    <HomeCommonGradient opacity-class="opacity-10" />
+    <HomeCommonGradient color="primary" opacity-class="opacity-10" />
 
     <v-container>
       <HomeCommonTitle
@@ -9,17 +9,19 @@
         title="Vuetify One"
       />
 
-      <v-row class="text-left my-10">
+      <v-row class="text-left mt-10">
         <v-col
           v-for="(item, i) in toolings"
           :key="i"
           cols="12"
-          lg="6"
-          sm="6"
+          lg="4"
+          sm="4"
         >
           <HomeCommonCard
             :description="item.description"
-            :image="item.image"
+            :href="item.href"
+            :image="`https://cdn.vuetifyjs.com/docs/images/one/logos/${item.image}-logo-${isDark ? 'dark' : 'light'}.png`"
+            target="_blank"
           />
         </v-col>
       </v-row>
@@ -34,33 +36,39 @@
   const toolings = computed(() => [
     {
       name: 'Vuetify Play',
-      image: `https://cdn.vuetifyjs.com/docs/images/one/logos/vplay-logo-${isDark.value ? 'dark' : 'light'}.png`,
+      image: 'vplay',
       description: 'An interactive playground to experiment with Vuetify components and features in real-time.',
+      href: 'https://play.vuetifyjs.com',
     },
     {
       name: 'Vuetify Bin',
-      image: `https://cdn.vuetifyjs.com/docs/images/one/logos/vbin-logo-${isDark.value ? 'dark' : 'light'}.png`,
+      image: 'vbin',
       description: 'A code sharing platform tailored for Vuetify projects, enabling easy collaboration and sharing of code snippets.',
+      href: 'https://bin.vuetifyjs.com',
     },
     {
       name: 'Vuetify Studio',
-      image: `https://cdn.vuetifyjs.com/docs/images/one/logos/vstudio-logo-${isDark.value ? 'dark' : 'light'}.png`,
+      image: 'vstudio',
       description: 'A visual development environment for building Vuetify applications with drag-and-drop components and real-time previews.',
+      href: 'https://studio.vuetifyjs.com',
     },
     {
       name: 'Vuetify Link',
-      image: `https://cdn.vuetifyjs.com/docs/images/one/logos/vlink-logo-${isDark.value ? 'dark' : 'light'}.png`,
+      image: 'vlink',
       description: 'A URL shortening service designed for Vuetify developers to create and manage short links efficiently.',
-    },
-    {
-      name: 'Vuetify Issues',
-      image: `https://cdn.vuetifyjs.com/docs/images/one/logos/vissues-logo-${isDark.value ? 'dark' : 'light'}.png`,
-      description: 'Easily report issues and request features for projects in the Vuetify Ecosystem.',
+      href: 'https://link.vuetifyjs.com',
     },
     {
       name: 'Vuetify MCP',
-      image: `https://cdn.vuetifyjs.com/docs/images/one/logos/vmcp-logo-${isDark.value ? 'dark' : 'light'}.png`,
-      description: 'Model Context Protocol (MCP) server providing Vuetify component information and documentation to any MCP-compatible client or IDE.',
+      image: 'vmcp',
+      description: 'Model Context Protocol (MCP) server providing Vuetify component information and documentation.',
+      href: 'https://github.com/vuetifyjs/mcp/',
+    },
+    {
+      name: 'Vuetify Issues',
+      image: 'vissues',
+      description: 'Easily report issues and request features for projects in the Vuetify Ecosystem.',
+      href: 'https://issues.vuetifyjs.com',
     },
   ])
 </script>

@@ -16,22 +16,35 @@
               elevation="0"
               rounded="lg"
             >
-              <div class="d-flex flex-wrap align-center justify-center">
+              <div class="d-flex flex-wrap align-center justify-center ga-2 mb-2">
                 <div
-                  v-for="(config, themeName) in themes"
+                  v-for="(config, themeName) in themeConfigs"
                   :key="themeName"
-                  class="d-flex flex-column align-center justify-center mr-3 my-3"
+                  class="d-flex flex-column align-center justify-center"
                 >
                   <v-avatar
-                    :color="config.colors.primary"
+                    :color="config.theme.colors.primary"
                     class="d-flex align-center justify-center cursor-pointer"
-                    height="50"
-                    width="50"
+                    height="32"
+                    size="32"
+                    width="32"
                     @click="currentTheme = themeName"
                   >
                     <v-icon v-if="currentTheme === themeName" icon="mdi-check" />
                   </v-avatar>
                 </div>
+
+                <v-divider class="mx-2 align-self-center" length="18" vertical />
+
+                <v-avatar
+                  class="cursor-pointer"
+                  size="32"
+                  border
+                  v-tooltip:top="density"
+                  @click="cycleDensity"
+                >
+                  <v-icon :icon="densityIcon" size="small" />
+                </v-avatar>
               </div>
             </v-card>
 
@@ -70,14 +83,14 @@
                   <template #append>
                     <v-btn class="text-none me-1 px-3" height="48" slim>
                       <template #prepend>
-                        <v-avatar color="surface-light" image="https://cdn.vuetifyjs.com/images/john.png" size="32" start />
+                        <v-avatar color="surface-light" image="https://avatars.githubusercontent.com/u/9064066?v=4" size="32" start />
                       </template>
 
                       <span class="hidden-sm-and-down">John Leider</span>
 
                       <v-menu activator="parent">
                         <v-list density="compact" nav>
-                          <v-list-item title="Settings" link @click="selectedComponent = formComponent" />
+                          <v-list-item title="Settings" link @click="selectedComponent = settingsComponent" />
 
                           <v-list-item title="Logout" @click="selectedComponent = loginComponent" />
                         </v-list>
@@ -98,9 +111,11 @@
                 >
                   <v-list
                     :items="components"
-                    density="compact"
                     nav
+                    slim
                   >
+                    <v-list-subheader>Application</v-list-subheader>
+
                     <v-list-item
                       v-for="(item, i) in components"
                       :key="i"
@@ -114,12 +129,15 @@
 
                   <template #append>
                     <v-list-item
+                      :active="selectedComponent.title === 'Settings'"
+                      active-class="text-primary"
                       class="ma-2"
                       prepend-icon="mdi-cog-outline"
                       title="Settings"
                       link
                       nav
-                      @click="selectedComponent = formComponent"
+                      slim
+                      @click="selectedComponent = settingsComponent"
                     />
                   </template>
                 </v-navigation-drawer>
@@ -131,7 +149,7 @@
                     height="600"
                     max-width="100%"
                   >
-                    <v-slide-x-transition>
+                    <v-slide-x-transition mode="out-in">
                       <component
                         :is="selectedComponent.component"
                         @login="selectedComponent = components[0]"
@@ -160,29 +178,54 @@
     isNavigationHiden?: boolean
   }
 
-  const Form = defineAsyncComponent(() => import('@/components/home/Gallery/Form.vue'))
-  const Data = defineAsyncComponent(() => import('@/components/home/Gallery/Data.vue'))
+  const Settings = defineAsyncComponent(() => import('@/components/home/Gallery/Settings.vue'))
+  const Dashboard = defineAsyncComponent(() => import('@/components/home/Gallery/Dashboard.vue'))
   const Chat = defineAsyncComponent(() => import('@/components/home/Gallery/Chat/Chat.vue'))
+  const Analytics = defineAsyncComponent(() => import('@/components/home/Gallery/Analytics.vue'))
   const Login = defineAsyncComponent(() => import('@/components/home/Gallery/Login.vue'))
+
+  type Density = 'default' | 'comfortable' | 'compact'
 
   const theme = useTheme()
 
-  const defaults = {
-    VCard: {
-      elevation: 5,
-    },
-  }
-
-  const themes = {
-    light: theme.themes.value.light,
-    dark: theme.themes.value.dark,
-    nebula: theme.themes.value.nebula,
-    odyssey: theme.themes.value.odyssey,
-    blackguard: theme.themes.value.blackguard,
+  const themeConfigs = {
+    light: { theme: theme.themes.value.light, density: 'default' as Density },
+    dark: { theme: theme.themes.value.dark, density: 'default' as Density },
+    blackguard: { theme: theme.themes.value.blackguard, density: 'comfortable' as Density },
+    polaris: { theme: theme.themes.value.polaris, density: 'comfortable' as Density },
+    nebula: { theme: theme.themes.value.nebula, density: 'compact' as Density },
+    odyssey: { theme: theme.themes.value.odyssey, density: 'compact' as Density },
   }
 
   const drawer = ref(true)
   const currentTheme = ref(theme.name.value)
+  const density = shallowRef<Density>('default')
+
+  const densities: Density[] = ['default', 'comfortable', 'compact']
+
+  const densityIcon = computed(() => {
+    const icons: Record<Density, string> = {
+      default: 'mdi-unfold-more-horizontal',
+      comfortable: 'mdi-unfold-less-horizontal',
+      compact: 'mdi-arrow-collapse-vertical',
+    }
+    return icons[density.value]
+  })
+
+  function cycleDensity () {
+    const index = densities.indexOf(density.value)
+    density.value = densities[(index + 1) % densities.length]
+  }
+
+  const defaults = computed(() => {
+    const isCompact = density.value === 'compact'
+
+    return {
+      global: { density: density.value },
+      VCard: { elevation: 5 },
+      VAvatar: isCompact ? { size: 32 } : {},
+    }
+  })
 
   const loginComponent: SelectedComponent = {
     title: 'Login',
@@ -190,11 +233,11 @@
     isNavigationHiden: true,
   }
 
-  const formComponent: SelectedComponent = {
-    title: 'Form',
-    prependIcon: 'mdi-circle-edit-outline',
+  const settingsComponent: SelectedComponent = {
+    title: 'Settings',
+    prependIcon: 'mdi-cog-outline',
     link: true,
-    component: Form,
+    component: Settings,
   }
 
   const components: SelectedComponent[] = [
@@ -202,9 +245,14 @@
       title: 'Dashboard',
       prependIcon: 'mdi-view-dashboard-outline',
       link: true,
-      component: Data,
+      component: Dashboard,
     },
-    formComponent,
+    {
+      title: 'Analytics',
+      prependIcon: 'mdi-chart-line',
+      link: true,
+      component: Analytics,
+    },
     {
       title: 'Chat',
       component: Chat,

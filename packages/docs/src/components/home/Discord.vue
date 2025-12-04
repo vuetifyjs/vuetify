@@ -1,5 +1,5 @@
 <template>
-  <v-responsive :class="theme.current.value.dark ? 'bg-surface' : 'bg-primary'">
+  <v-sheet color="#5662f6">
     <v-container class="pa-6 text-left">
       <v-row justify="center">
         <v-col
@@ -21,17 +21,20 @@
           <v-btn
             append-icon="mdi-open-in-new"
             class="mr-4 text-none"
+            href="https://community.vuetifyjs.com/"
+            rel="noopener noreferrer"
             rounded="lg"
             size="large"
-            text="Join Discord"
+            target="_blank"
+            text="Join Our Discord"
             variant="outlined"
           />
         </v-col>
       </v-row>
     </v-container>
-  </v-responsive>
+  </v-sheet>
 </template>
 
 <script setup lang="ts">
-  const theme = useTheme()
+  //
 </script>

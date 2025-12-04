@@ -1,32 +1,25 @@
 <template>
   <v-responsive class="pb-16">
-    <HomeCommonGradient opacity-class="opacity-10" />
+    <HomeCommonGradient color="red-lighten-2" opacity-class="opacity-10" position="center" />
 
     <v-container class="pt-10">
 
       <HomeCommonTitle
-        class="mb-5"
+        class="mb-9"
         description="Vuetify is proudly supported by these amazing companies and individuals. If you'd like to join them, please consider sponsoring Vuetify's development."
         title="Sponsors & Backers"
       >
         <template #subtitle>
-          <v-icon class="mb-5" color="red-lighten-2" size="60">
-            mdi-heart-outline
-          </v-icon>
+          <v-icon
+            class="mb-5"
+            color="red-lighten-2"
+            icon="mdi-heart-outline"
+            size="60"
+          />
         </template>
       </HomeCommonTitle>
 
-      <v-btn
-        class="text-none my-5"
-        color="primary"
-        prepend-icon="mdi-heart-outline"
-        rounded="lg"
-        size="large"
-        text="Become a Sponsor"
-        flat
-      />
-
-      <v-responsive class="mt-5 mx-auto" max-width="800">
+      <v-responsive class="mx-auto" max-width="800">
         <v-row
           justify="center"
           dense
@@ -47,6 +40,19 @@
           </v-col>
         </v-row>
       </v-responsive>
+
+      <v-hover v-slot="{ props: hoverProps, isHovering }">
+        <v-btn
+          v-bind="hoverProps"
+          :append-icon="isHovering ? 'mdi-heart' : 'mdi-heart-outline'"
+          class="text-none mt-9"
+          color="primary"
+          rounded="lg"
+          size="large"
+          text="Become a Sponsor"
+          flat
+        />
+      </v-hover>
     </v-container>
   </v-responsive>
 </template>

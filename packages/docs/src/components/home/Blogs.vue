@@ -42,13 +42,15 @@
             <v-card-text class="pl-0 pt-2">
               <div class="d-flex align-center ga-2 text-subtitle-2 text-medium-emphasis">
                 <v-icon size="small">mdi-circle-edit-outline</v-icon>
-                {{ latestBlog.personName }}
+                {{ latestBlog.author }}
 
                 <v-btn
+                  :to="latestBlog.to"
+                  append-icon="mdi-page-next"
                   class="text-none px-0 ml-5"
                   color="primary"
                   text="Read more"
-                  variant="text"
+                  variant="plain"
                 />
               </div>
             </v-card-text>
@@ -79,7 +81,16 @@
             <v-card-text class="text-body-2 text-medium-emphasis pt-2">
               <div class="d-flex align-center ga-2 text-body-2 text-medium-emphasis">
                 <v-icon size="small">mdi-circle-edit-outline</v-icon>
-                {{ item.personName }}
+                {{ item.author }}
+
+                <v-btn
+                  :to="item.to"
+                  append-icon="mdi-page-next"
+                  class="text-none px-0 ml-5"
+                  color="primary"
+                  text="Read more"
+                  variant="plain"
+                />
               </div>
             </v-card-text>
 
@@ -98,10 +109,9 @@
         rounded="lg"
         size="large"
         target="_blank"
+        text="Read More Posts"
         variant="flat"
-      >
-        All Blogs
-      </v-btn>
+      />
 
     </v-container>
   </v-responsive>
@@ -112,23 +122,26 @@
 
   const items = [
     {
-      image: 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      image: 'https://cdn.vuetifyjs.com/docs/images/blog/october-2025-update/october-hero.png',
+      title: 'October 2025 Update',
+      shortDescription: 'October\'s development cycle focused on polish and developer experience. We delivered critical accessibility improvements with enhanced focus trap functionality, optimized VDataTable performance, and refined components across the board. The month also saw the launch of Vuetify Link and significant updates to the Vuetify MCP server.',
+      date: 'Nov 11, 2025',
+      author: 'John Leider',
+      to: rpath('/blog/october-2025-update'),
+    },
+    {
+      title: 'September 2025 Update',
+      shortDescription: 'Assembling the building blocks for Vuetify\'s next phase with our new Figma UI Kit and foundational v0 composables.',
+      date: 'Oct 12, 2025',
+      author: 'John Leider',
+      to: rpath('/blog/september-2025-update'),
+    },
+    {
       title: 'August 2025 Update',
-      shortDescription: 'August marks a pivotal moment in Vuetify’s evolution as we prepare to release the pre-alpha of Vuetify0 (v0), launch our redesigned issues page, and continue delivering powerful components and improvements. This month brings exciting developments including the “Mastering Vuetify Theming',
-      date: 'Apr 5, 2023',
-      personName: 'John Leider',
-    },
-    {
-      title: 'July 2025 Update',
-      shortDescription: 'Earum molestias dolores autem quam natus. Aut velit fugiat excepturi minus voluptatem rerum voluptas. Ea rerum nemo quaerat...',
-      date: 'Sep 15, 2023',
-      personName: 'John Leider',
-    },
-    {
-      title: 'State of the Union 2024 - Post Mortem',
-      shortDescription: 'Qui voluptatum molestiae sint et atque facere. Distinctio ipsum voluptatum asperiores fuga consequatur aliquam.',
-      date: 'Feb 20, 2022',
-      personName: 'John Leider',
+      shortDescription: 'Vuetify0 pre-alpha release, redesigned issues page, and powerful new components.',
+      date: 'Sep 9, 2025',
+      author: 'John Leider',
+      to: rpath('/blog/august-2025-update'),
     },
   ]
 
