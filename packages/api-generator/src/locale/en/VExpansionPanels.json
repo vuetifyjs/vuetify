@@ -6,6 +6,7 @@
     "flat": "Removes the expansion-panel's elevation and borders.",
     "hover": "Applies a background-color shift on hover to expansion panel headers.",
     "inset": "Makes the expansion panel open with a inset style.",
+    "modelValue": "Controls expanded panel(s). Defaults to an empty array when using **multiple** prop. It is recommended to set unique `value` prop for the panels inside, otherwise index is used instead.",
     "popout": "Makes the expansion-panel open with an popout style.",
     "readonly": "Makes the entire expansion panel read only.",
     "static": "Remove title size expansion when selected.",

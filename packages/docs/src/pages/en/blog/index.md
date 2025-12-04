@@ -18,6 +18,22 @@ Latest news, updates, and stories about Vuetify.
 
 <br>
 
+## October 2025 Update
+
+🖊️ John Leider • 📅 November 11th, 2025
+
+October focused on refinement and reliability, delivering critical accessibility improvements with enhanced focus trap functionality, optimized VDataTable performance for large datasets, and refined components across the board. The month also saw the launch of Vuetify Link, our new URL shortening service, and significant updates to the Vuetify MCP server with HTTP transport support. We made substantial progress on v0 composables, laying the groundwork for Vuetify 4.0... { .text-medium-emphasis }
+
+[Read More](/blog/october-2025-update/) { .text-end }
+
+## September 2025 Update
+
+🖊️ John Leider • 📅 October 12th, 2025
+
+September marks significant progress as we assemble the building blocks for Vuetify's next phase. From revolutionary design-to-development workflows with our new Figma UI Kit to foundational v0 composables, September has been about connecting the pieces that will define the future of Vue development. This update includes the release of v3.10.0 (Argo), updated Figma UI Kit, new Vuetify0 composables, and over 60 bug fixes and features... { .text-medium-emphasis }
+
+[Read More](/blog/september-2025-update/) { .text-end }
+
 ## August 2025 Update
 
 🖊️ John Leider • 📅 September 9th, 2025

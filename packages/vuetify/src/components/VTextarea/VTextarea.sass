@@ -6,20 +6,30 @@
 
 @include tools.layer('components')
   .v-textarea
+    --v-textarea-max-height: initial
+
     .v-field
       --v-textarea-control-height: var(--v-input-control-height)
+
+      &:not(.v-field--no-label, .v-field--active)
+        input::placeholder
+          opacity: 0
 
     .v-field__field
       --v-input-control-height: var(--v-textarea-control-height)
 
     .v-field__input
+      max-height: var(--v-textarea-max-height)
+
       $a: calc((var(--v-field-padding-top, 0) + var(--v-input-padding-top, 0)) - 6px)
       $b: calc(var(--v-field-padding-top, 0) + var(--v-input-padding-top, 0) + 4px)
+      $c: calc(100% - var(--v-textarea-scroll-bar-width, 16px))
 
       flex: 1 1 auto
       outline: none
-      -webkit-mask-image: linear-gradient(to bottom, transparent, transparent $a, black $b)
-      mask-image: linear-gradient(to bottom, transparent, transparent $a, black $b)
+
+      -webkit-mask-image: linear-gradient(to bottom, transparent, transparent $a, black $b), linear-gradient(to right, transparent, transparent $c, black $c)
+      mask-image: linear-gradient(to bottom, transparent, transparent $a, black $b), linear-gradient(to right, transparent, transparent $c, black $c)
 
       &.v-textarea__sizer
         visibility: hidden
@@ -34,13 +44,7 @@
       .v-field__input
         resize: none
 
-    .v-field--no-label,
-    .v-field--active
-      textarea
-        opacity: 1
-
     textarea
-      opacity: 0
       flex: 1
       min-width: 0
       height: 100%

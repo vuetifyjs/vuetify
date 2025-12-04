@@ -58,6 +58,9 @@ export const md3: Blueprint = {
     VFileInput: {
       variant: 'outlined',
     },
+    VList: {
+      prependGap: 16,
+    },
     VNavigationDrawer: {
       // VList: {
       //   nav: true,

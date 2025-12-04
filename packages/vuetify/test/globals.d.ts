@@ -3,8 +3,6 @@ import type { CustomCommands } from './setup/browser-commands.ts'
 interface CustomMatchers<R = unknown> {
   toHaveBeenTipped: () => R
   toHaveBeenWarned: () => R
-  toBeOnScreen: () => Promise<R>
-  toBeDisplayed: () => Promise<R>
 }
 
 declare module 'vitest' {
@@ -12,6 +10,6 @@ declare module 'vitest' {
   interface AsymmetricMatchersContaining extends CustomMatchers {}
 }
 
-declare module '@vitest/browser/context' {
+declare module 'vitest/browser' {
   interface BrowserCommands extends CustomCommands {}
 }

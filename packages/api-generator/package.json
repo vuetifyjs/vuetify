@@ -1,7 +1,7 @@
 {
   "name": "@vuetify/api-generator",
   "type": "module",
-  "version": "3.10.4",
+  "version": "3.11.2",
   "private": true,
   "description": "",
   "scripts": {
@@ -14,9 +14,9 @@
   "dependencies": {
     "deepmerge": "^4.3.1",
     "piscina": "^4.9.2",
-    "prettier": "^3.5.3",
+    "prettier": "^3.6.2",
     "ts-morph": "^25.0.1",
-    "vue": "^3.5.21",
+    "vue": "^3.5.25",
     "vuetify": "workspace:*"
   },
   "devDependencies": {

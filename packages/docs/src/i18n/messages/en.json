@@ -242,6 +242,7 @@
   "newsletter": "Newsletter",
   "notifications": "Notifications",
   "not-found": "Not Found",
+  "one": "One",
   "open-github-release": "Open GitHub release",
   "open-in-vuetify-bin": "Open in Vuetify Bin",
   "open-issues": "Open issues",
@@ -367,5 +368,6 @@
   "view-source": "View source",
   "viewport": "Viewport",
   "vuetify": "Vuetify",
+  "vuetify-one": "Vuetify One",
   "x": "Xitter"
 }

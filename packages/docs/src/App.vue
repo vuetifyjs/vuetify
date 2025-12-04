@@ -91,9 +91,7 @@
     }
 
     watchEffect(() => {
-      theme.global.name.value = (
-        user.one.theme === 'system' ? systemTheme.value : user.one.theme
-      )
+      theme.change(user.one.theme === 'system' ? systemTheme.value : user.one.theme)
     })
 
     watch(theme.global.name, themeTransition)

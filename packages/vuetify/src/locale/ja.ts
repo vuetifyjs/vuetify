@@ -50,6 +50,9 @@ export default {
       previousMonth: '前の月',
       nextMonth: '次の月',
       selectYear: '年を選択',
+      previousYear: '前の年',
+      nextYear: '次の年',
+      selectMonth: '月を選択',
       selectDate: '{0}',
       currentDate: '今日、{0}',
     },
@@ -85,6 +88,9 @@ export default {
     am: '午前',
     pm: '午後',
     title: '時間を選択',
+    hour: '時',
+    minute: '分',
+    second: '秒',
   },
   pagination: {
     ariaLabel: {
@@ -141,6 +147,7 @@ export default {
     space: 'スペース',
     plus: 'プラス',
     shortcut: 'キーボードショートカット: {0}',
+    or: 'または',
   },
   video: {
     play: '再生',

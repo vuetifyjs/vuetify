@@ -9,7 +9,9 @@ export function useAutofocus (props: AutofocusProps) {
   ) {
     if (!props.autofocus || !isIntersecting) return
 
-    (entries[0].target as HTMLInputElement)?.focus?.()
+    const el = entries[0].target
+    const target = (el.matches('input,textarea') ? el : el.querySelector('input,textarea')) as HTMLElement | null
+    target?.focus()
   }
 
   return {

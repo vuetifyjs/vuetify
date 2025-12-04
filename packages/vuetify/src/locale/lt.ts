@@ -50,6 +50,9 @@ export default {
       previousMonth: 'Ankstesnis mėnuo',
       nextMonth: 'Kitas mėnuo',
       selectYear: 'Pasirinkite metus',
+      previousYear: 'Praėję metai',
+      nextYear: 'Kiti metai',
+      selectMonth: 'Pasirinkite mėnesį',
       selectDate: '{0}',
       currentDate: 'Šiandien, {0}',
     },
@@ -85,6 +88,9 @@ export default {
     am: 'AM',
     pm: 'PM',
     title: 'Pasirinkite laiką',
+    hour: 'Valanda',
+    minute: 'Minutės',
+    second: 'Sekundės',
   },
   pagination: {
     ariaLabel: {
@@ -141,6 +147,7 @@ export default {
     space: 'Tarpas',
     plus: 'plius',
     shortcut: 'Klaviatūros trumpinys: {0}',
+    or: 'arba',
   },
   video: {
     play: 'Groti',

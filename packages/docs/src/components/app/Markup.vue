@@ -181,7 +181,7 @@
   async function copy () {
     const el = root.value?.$el.querySelector('code')
 
-    navigator.clipboard.writeText(displayedCode.value || el?.innerText || '')
+    await navigator.clipboard.writeText(displayedCode.value || el?.innerText || '')
 
     clicked.value = true
 

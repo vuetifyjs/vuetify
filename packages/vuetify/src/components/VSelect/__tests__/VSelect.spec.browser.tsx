@@ -4,9 +4,9 @@ import { VForm } from '@/components/VForm'
 import { VListItem } from '@/components/VList'
 
 // Utilities
-import { commands, generate, render, screen, userEvent, waitForClickable } from '@test'
+import { commands, render, screen, showcase, userEvent, waitForClickable } from '@test'
 import { getAllByRole } from '@testing-library/vue'
-import { cloneVNode, nextTick, ref } from 'vue'
+import { cloneVNode, computed, nextTick, ref } from 'vue'
 
 const variants = ['underlined', 'outlined', 'filled', 'solo', 'plain'] as const
 const densities = ['default', 'comfortable', 'compact'] as const
@@ -723,7 +723,7 @@ describe('VSelect', () => {
         <VSelect onUpdate:focused={ onFocus } />
       ))
 
-      await userEvent.click(element, { y: 1 })
+      await userEvent.click(element, { position: { x: 10, y: 55 } })
 
       expect(onFocus).toHaveBeenCalledTimes(1)
     })
@@ -739,7 +739,7 @@ describe('VSelect', () => {
     expect(inputField).toHaveAttribute('aria-label', 'Open')
     expect(inputField.getAttribute('aria-controls')).toMatch(/^menu-v-\d+/)
 
-    await userEvent.click(inputField)
+    await userEvent.click(inputField, { force: true })
     await commands.waitStable('.v-list')
 
     expect(inputField).toHaveAttribute('aria-expanded', 'true')
@@ -752,7 +752,109 @@ describe('VSelect', () => {
     expect(inputField).toHaveAttribute('aria-label', 'Open')
   })
 
-  describe('Showcase', () => {
-    generate({ stories })
+  // https://github.com/vuetifyjs/vuetify/issues/22052
+  it('should keep the checkboxes in sync with the model', async () => {
+    const items = [
+      { title: 'Both', value: 'both' },
+      { title: 'Option A', value: 'a' },
+      { title: 'Option B', value: 'b' },
+    ]
+
+    const model = ref<string[]>([])
+    const selectModel = computed({
+      get: () => model.value.length === 2 ? ['both'] : model.value,
+      set: val => model.value = val.includes('both') ? ['a', 'b'] : val,
+    })
+
+    const { element } = render(() => (
+      <VSelect
+        v-model={ selectModel.value }
+        items={ items }
+        multiple
+        itemProps={ (item: any) =>
+          (selectModel.value?.includes('both') && item.value !== 'both') ? { disabled: true } : {}
+        }
+      />
+    ))
+
+    await userEvent.click(element)
+    await commands.waitStable('.v-list')
+
+    const options = screen.getAllByRole('option')
+    expect(options).toHaveLength(3)
+
+    await userEvent.click(screen.getAllByCSS('.v-checkbox-btn input')[1])
+    await userEvent.click(screen.getAllByCSS('.v-checkbox-btn input')[2])
+
+    await expect.poll(() => model.value).toStrictEqual(['a', 'b'])
+    expect(selectModel.value).toStrictEqual(['both'])
+    expect(screen.getAllByCSS('.v-checkbox-btn input')[0]).toBeChecked()
+    expect(screen.getAllByCSS('.v-checkbox-btn input:checked')).toHaveLength(1)
   })
+
+  describe('native form submission', () => {
+    const items = [
+      { title: 'Item 1', value: 1 },
+      { title: 'Item 2', value: 2 },
+      { title: 'Item 3', value: 3 },
+    ]
+
+    it('should include selected value in form data for single selection', async () => {
+      let submittedData: FormData | null = null
+
+      render(() => (
+        <form
+          onSubmit={ e => {
+            e.preventDefault()
+            submittedData = new FormData(e.target as HTMLFormElement)
+          }}
+        >
+          <VSelect
+            name="select"
+            items={ items }
+            modelValue={ items[0] }
+          />
+          <button type="submit">Submit</button>
+        </form>
+      ))
+
+      const submitButton = screen.getByRole('button', { name: 'Submit' })
+      await userEvent.click(submitButton)
+
+      expect(submittedData).not.toBeNull()
+      expect(submittedData!.get('select')).toBe('1')
+    })
+
+    it('should include selected values in form data for multiple selection', async () => {
+      let submittedData: FormData | null = null
+
+      render(() => (
+        <form
+          onSubmit={ e => {
+            e.preventDefault()
+            submittedData = new FormData(e.target as HTMLFormElement)
+          }}
+        >
+          <VSelect
+            multiple
+            name="select"
+            items={ items }
+            modelValue={[items[0], items[1]]}
+          />
+          <button type="submit">Submit</button>
+        </form>
+      ))
+
+      const submitButton = screen.getByRole('button', { name: 'Submit' })
+      await userEvent.click(submitButton)
+
+      expect(submittedData).not.toBeNull()
+      const select = submittedData!.getAll('select')
+      expect(select).toHaveLength(2)
+      expect(select).toContain('1')
+      expect(select).toContain('2')
+    })
+  })
+
+  showcase({ stories })
 })

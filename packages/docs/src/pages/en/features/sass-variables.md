@@ -136,24 +136,35 @@ Utility classes are a powerful feature of Vuetify, but they can also be unnecess
     "align-items": false,
     "align-self": false,
     "border-bottom": false,
+    "border-current": false,
     "border-end": false,
     "border-opacity": false,
     "border-start": false,
     "border-style": false,
     "border-top": false,
     "border": false,
+    "bottom": false,
+    "cursor": false,
     "display": false,
+    "fill-height": false,
     "flex-direction": false,
     "flex-grow": false,
     "flex-shrink": false,
     "flex-wrap": false,
     "flex": false,
-    "float-ltr": false,
-    "float-rtl": false,
+    "float:ltr": false,
+    "float:rtl": false,
     "float": false,
     "font-italic": false,
     "font-weight": false,
+    "gap-column": false,
+    "gap-row": false,
+    "gap": false,
+    "height-screen": false,
+    "height": false,
     "justify-content": false,
+    "justify-items": false,
+    "left": false,
     "margin-bottom": false,
     "margin-end": false,
     "margin-left": false,
@@ -172,6 +183,7 @@ Utility classes are a powerful feature of Vuetify, but they can also be unnecess
     "negative-margin-x": false,
     "negative-margin-y": false,
     "negative-margin": false,
+    "opacity": false,
     "order": false,
     "overflow-wrap": false,
     "overflow-x": false,
@@ -186,6 +198,8 @@ Utility classes are a powerful feature of Vuetify, but they can also be unnecess
     "padding-x": false,
     "padding-y": false,
     "padding": false,
+    "position": false,
+    "right": false,
     "rounded-bottom-end": false,
     "rounded-bottom-start": false,
     "rounded-bottom": false,
@@ -201,8 +215,10 @@ Utility classes are a powerful feature of Vuetify, but they can also be unnecess
     "text-opacity": false,
     "text-overflow": false,
     "text-transform": false,
+    "top": false,
     "typography": false,
     "white-space": false,
+    "width": false,
   ),
 );
 ```
@@ -235,6 +251,14 @@ Color packs are handy for quickly applying a color to a component but mostly unu
 @forward 'vuetify/settings' with (
   $layers: true,
 );
+```
+
+```ts { resource="src/plugins/vuetify.ts" }
+export default createVuetify({
+  theme: {
+    layers: true,
+  },
+})
 ```
 
 Import order of stylesheets becomes much more important with layers enabled, `import 'vuetify/styles'` or a file containing `@use 'vuetify'` **must** be loaded *before* any components or the CSS reset will take precedence over component styles and break everything.

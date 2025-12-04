@@ -25,7 +25,6 @@ import { transformItem, useItems } from '@/composables/list-items'
 import { useLocale } from '@/composables/locale'
 import { useMenuActivator } from '@/composables/menuActivator'
 import { useProxiedModel } from '@/composables/proxiedModel'
-import { makeTransitionProps } from '@/composables/transition'
 
 // Utilities
 import { computed, mergeProps, nextTick, ref, shallowRef, watch } from 'vue'
@@ -79,7 +78,6 @@ export const makeVComboboxProps = propsFactory({
     modelValue: null,
     role: 'combobox',
   }), ['validationValue', 'dirty', 'appendInnerIcon']),
-  ...makeTransitionProps({ transition: false }),
 }, 'VCombobox')
 
 type ItemType<T> = T extends readonly (infer U)[] ? U : never
@@ -151,6 +149,7 @@ export const VCombobox = genericComponent<new <
     const hasSelectionSlot = computed(() => hasChips.value || !!slots.selection)
 
     const _search = shallowRef(!props.multiple && !hasSelectionSlot.value ? model.value[0]?.title ?? '' : '')
+    const _searchLock = shallowRef<string | null>(null)
 
     const search = computed<string>({
       get: () => {
@@ -158,22 +157,17 @@ export const VCombobox = genericComponent<new <
       },
       set: async (val: string | null) => {
         _search.value = val ?? ''
-        if (!props.multiple && !hasSelectionSlot.value) {
+        if (val === null || (val === '' && !props.multiple && !hasSelectionSlot.value)) {
+          model.value = []
+        } else if (!props.multiple && !hasSelectionSlot.value) {
           model.value = [transformItem(props, val)]
           nextTick(() => vVirtualScrollRef.value?.scrollToIndex(0))
         }
 
         if (val && props.multiple && props.delimiters?.length) {
-          const signsToMatch = props.delimiters.map(escapeForRegex).join('|')
-          const values = val.split(new RegExp(`(?:${signsToMatch})+`))
+          const values = splitByDelimiters(val)
           if (values.length > 1) {
-            for (let v of values) {
-              v = v.trim()
-              if (v) {
-                select(transformItem(props, v))
-                await nextTick()
-              }
-            }
+            selectMultiple(values)
             _search.value = ''
           }
         }
@@ -193,11 +187,11 @@ export const VCombobox = genericComponent<new <
     const { filteredItems, getMatches } = useFilter(
       props,
       items,
-      () => props.alwaysFilter || !isPristine.value ? search.value : ''
+      () => _searchLock.value ?? (props.alwaysFilter || !isPristine.value ? search.value : '')
     )
 
     const displayItems = computed(() => {
-      if (props.hideSelected) {
+      if (props.hideSelected && _searchLock.value === null) {
         return filteredItems.value.filter(filteredItem => !model.value.some(s => s.value === filteredItem.value))
       }
       return filteredItems.value
@@ -296,16 +290,11 @@ export const VCombobox = genericComponent<new <
         menu.value = false
       }
 
-      if (['Enter', 'Escape', 'Tab'].includes(e.key)) {
-        if (
-          highlightFirst.value &&
-          ['Enter', 'Tab'].includes(e.key) &&
-          !model.value.some(({ value }) => value === displayItems.value[0].value)
-        ) {
-          select(filteredItems.value[0])
-        }
-
-        isPristine.value = true
+      if (highlightFirst.value &&
+        ['Enter', 'Tab'].includes(e.key) &&
+        !model.value.some(({ value }) => value === displayItems.value[0].value)
+      ) {
+        select(filteredItems.value[0])
       }
 
       if (e.key === 'ArrowDown' && highlightFirst.value) {
@@ -313,7 +302,7 @@ export const VCombobox = genericComponent<new <
       }
 
       if (e.key === 'Enter' && search.value) {
-        select(transformItem(props, search.value))
+        select(transformItem(props, search.value), true, true)
         if (hasSelectionSlot.value) _search.value = ''
       }
 
@@ -368,6 +357,15 @@ export const VCombobox = genericComponent<new <
         selectionIndex.value = -1
       }
     }
+    function onPaste (e: ClipboardEvent) {
+      const clipboardText = e?.clipboardData?.getData('Text') ?? ''
+      const values = splitByDelimiters(clipboardText)
+
+      if (values.length > 1 && props.multiple) {
+        e.preventDefault()
+        selectMultiple(values)
+      }
+    }
     function onAfterEnter () {
       if (props.eager) {
         vVirtualScrollRef.value?.calculateVisibleItems()
@@ -375,12 +373,13 @@ export const VCombobox = genericComponent<new <
     }
     function onAfterLeave () {
       if (isFocused.value) {
-        isPristine.value = true
         vTextFieldRef.value?.focus()
       }
+      isPristine.value = true
+      _searchLock.value = null
     }
     /** @param set - null means toggle */
-    function select (item: ListItem | undefined, set: boolean | null = true) {
+    function select (item: ListItem | undefined, set: boolean | null = true, keepMenu = false) {
       if (!item || item.props.disabled) return
 
       if (props.multiple) {
@@ -401,16 +400,32 @@ export const VCombobox = genericComponent<new <
       } else {
         const add = set !== false
         model.value = add ? [item] : []
+        if ((!isPristine.value || props.alwaysFilter) && _search.value) {
+          _searchLock.value = _search.value
+        }
         _search.value = add && !hasSelectionSlot.value ? item.title : ''
 
         // watch for search watcher to trigger
         nextTick(() => {
-          menu.value = false
+          menu.value = keepMenu
           isPristine.value = true
         })
       }
     }
-
+    function splitByDelimiters (val: string) {
+      const effectiveDelimiters = ['\n', ...props.delimiters ?? []]
+      const signsToMatch = effectiveDelimiters.map(escapeForRegex).join('|')
+      return val.split(new RegExp(`(?:${signsToMatch})+`))
+    }
+    async function selectMultiple (values: string[]) {
+      for (let value of values) {
+        value = value.trim()
+        if (value) {
+          select(transformItem(props, value))
+          await nextTick()
+        }
+      }
+    }
     function onFocusin (e: FocusEvent) {
       isFocused.value = true
       setTimeout(() => {
@@ -419,9 +434,6 @@ export const VCombobox = genericComponent<new <
     }
     function onFocusout (e: FocusEvent) {
       listHasFocus.value = false
-    }
-    function onUpdateModelValue (v: any) {
-      if (v == null || (v === '' && !props.multiple && !hasSelectionSlot.value)) model.value = []
     }
 
     watch(isFocused, (val, oldVal) => {
@@ -446,8 +458,8 @@ export const VCombobox = genericComponent<new <
       }
     })
 
-    watch(menu, () => {
-      if (!props.hideSelected && menu.value && model.value.length) {
+    watch(menu, val => {
+      if (!props.hideSelected && val && model.value.length && isPristine.value) {
         const index = displayItems.value.findIndex(
           item => model.value.some(s => (props.valueComparator || deepEqual)(s.value, item.value))
         )
@@ -455,6 +467,8 @@ export const VCombobox = genericComponent<new <
           index >= 0 && vVirtualScrollRef.value?.scrollToIndex(index)
         })
       }
+
+      if (val) _searchLock.value = null
     })
 
     watch(items, (newVal, oldVal) => {
@@ -480,7 +494,6 @@ export const VCombobox = genericComponent<new <
           ref={ vTextFieldRef }
           { ...textFieldProps }
           v-model={ search.value }
-          onUpdate:modelValue={ onUpdateModelValue }
           v-model:focused={ isFocused.value }
           validationValue={ model.externalValue }
           counterValue={ counterValue.value }
@@ -502,6 +515,7 @@ export const VCombobox = genericComponent<new <
           onClick:clear={ onClear }
           onMousedown:control={ onMousedownControl }
           onKeydown={ onKeydown }
+          onPaste={ onPaste }
           aria-expanded={ ariaExpanded.value }
           aria-controls={ ariaControls.value }
         >
@@ -520,7 +534,6 @@ export const VCombobox = genericComponent<new <
                   maxHeight={ 310 }
                   openOnClick={ false }
                   closeOnContentClick={ false }
-                  transition={ props.transition }
                   onAfterEnter={ onAfterEnter }
                   onAfterLeave={ onAfterLeave }
                   { ...props.menuProps }
@@ -584,6 +597,7 @@ export const VCombobox = genericComponent<new <
                                       modelValue={ isSelected }
                                       ripple={ false }
                                       tabindex="-1"
+                                      onClick={ (event: MouseEvent) => event.preventDefault() }
                                     />
                                   ) : undefined }
 
@@ -620,7 +634,7 @@ export const VCombobox = genericComponent<new <
                     select(item, false)
                   }
 
-                  const slotProps = {
+                  const slotProps = mergeProps(VChip.filterProps(item.props), {
                     'onClick:close': onChipClose,
                     onKeydown (e: KeyboardEvent) {
                       if (e.key !== 'Enter' && e.key !== ' ') return
@@ -636,7 +650,7 @@ export const VCombobox = genericComponent<new <
                     },
                     modelValue: true,
                     'onUpdate:modelValue': undefined,
-                  }
+                  })
 
                   const hasSlot = hasChips.value ? !!slots.chip : !!slots.selection
                   const slotContent = hasSlot

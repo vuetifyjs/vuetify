@@ -173,7 +173,7 @@ If you are building custom Vuetify components that need to hook into the locale 
 
 ## vue-i18n
 
-If you are using the vue-i18n library, you can very easily integrate it with Vuetify. This allows you to keep all of your translations in one place. Simply use the spread operator to import the existing Vuetify messages and add the corresponding language changes. Then hook up vue-i18n to Vuetify by using the provided adapter function (as seen in the example below).
+If you are using the vue-i18n library, you can very easily integrate it with Vuetify. This allows you to keep all of your translations in one place. Simply create an entry for $vuetify within your messages and add the corresponding language changes. Then hook up vue-i18n to Vuetify by using the provided adapter function (as seen in the example below).
 
 ```js { resource="src/main.js" }
 import { createApp } from 'vue'
@@ -184,19 +184,21 @@ import { en, sv } from 'vuetify/locale'
 
 const messages = {
   en: {
-    ...en,
-    dataFooter: {
-      ...en.dataFooter,
-      itemsPerPageText: 'Items per page:',
-      pageText: '{0}-{1} of {2}',
+    $vuetify: {
+      ...en,
+      dataIterator: {
+        rowsPerPageText: 'Items per page:',
+        pageText: '{0}-{1} of {2}',
+      },
     },
   },
   sv: {
-    ...sv,
-    dataFooter: {
-      ...sv.dataFooter,
-      itemsPerPageText: 'Element per sida:',
-      pageText: '{0}-{1} av {2}',
+    $vuetify: {
+      ...sv,
+      dataIterator: {
+        rowsPerPageText: 'Element per sida:',
+        pageText: '{0}-{1} av {2}',
+      },
     },
   },
 }
