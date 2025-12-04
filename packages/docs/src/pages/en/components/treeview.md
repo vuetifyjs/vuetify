@@ -8,6 +8,7 @@ meta:
 related:
   - /components/lists/
   - /components/timelines/
+  - /components/autocompletes/
 features:
   label: 'C: VTreeview'
   report: true
@@ -19,25 +20,7 @@ The `v-treeview` component is useful for displaying large amounts of nested data
 
 <PageFeatures />
 
-::: warning
-
-This feature requires [v3.5.9](/getting-started/release-notes/?version=v3.5.9)
-
-:::
-
-## Installation
-
-Labs components require manual import and registration with the Vuetify instance.
-
-```js { resource="src/plugins/vuetify.js" }
-import { VTreeview } from 'vuetify/labs/VTreeview'
-
-export default createVuetify({
-  components: {
-    VTreeview,
-  },
-})
-```
+<DocIntroduced version="3.9.0" />
 
 ## Usage
 
@@ -53,14 +36,25 @@ A basic example of the treeview component.
 | - | - |
 | [v-treeview](/api/v-treeview/) | Primary Component |
 | [v-treeview-item](/api/v-treeview-item/) | Sub-component used to display a single treeview node |
-| [v-treeview-children](/api/v-treeview-children/) | Sub-component used to display a single treeview node's children |
 | [v-treeview-group](/api/v-treeview-group/) | Sub-component used to display a single treeview node's children |
 
 <ApiInline hide-links />
 
-## Examples
+::: info
+
+There is a [bug](https://github.com/vuejs/babel-plugin-jsx/issues/712) related to how [babel-plugin-jsx](https://github.com/vuejs/babel-plugin-jsx) renders templates that degrades VTreeview performance. We are tracking the issue [here](https://github.com/vuetifyjs/vuetify/issues/19919).
+
+:::
+
+## Guide
+
+The `v-treeview` component is useful for displaying large amounts of nested data. It is a tree structure that can be expanded and collapsed, allowing users to navigate through the hierarchy of items.
+
+It is built on top of the [v-list](/components/lists/) component, which provides the basic structure and functionality for displaying lists of items. The `v-treeview` component extends this functionality by adding support for hierarchical data, allowing users to expand and collapse items to reveal or hide their children.
 
 ### Props
+
+The `v-treeview` component has several props that allow you to customize its appearance and behavior.
 
 #### Activatable
 
@@ -92,12 +86,6 @@ If **item-props** is set to `true` then the whole item will be spread. In the fo
 
 <ExamplesExample file="v-treeview/prop-item-props" />
 
-#### Load children
-
-You can dynamically load child data by supplying a _Promise_ callback to the **load-children** prop. This callback will be executed the first time a user tries to expand an item that has a children property that is an empty array.
-
-<ExamplesExample file="v-treeview/prop-load-children" />
-
 #### Open all
 
 Treeview nodes can be pre-opened on page load.
@@ -110,11 +98,11 @@ You can make treeview nodes rounded.
 
 <ExamplesExample file="v-treeview/prop-rounded" /> -->
 
-<!-- #### Selectable
+#### Fluid
 
-You can easily select treeview nodes and children.
+The **fluid** prop removes the extra indentation used to line up children. This is useful when you want to reduce the horizontal space used by the treeview.
 
-<ExamplesExample file="v-treeview/prop-selectable" /> -->
+<ExamplesExample file="v-treeview/prop-fluid" />
 
 #### Selected color
 
@@ -128,30 +116,62 @@ Treeview now supports two different selection types. The default type is **'leaf
 
 <ExamplesExample file="v-treeview/prop-selection-type" />
 
-<!-- #### Shaped
+#### Load children
 
-Shaped treeview's have rounded borders on one side of the nodes.
+You can dynamically load child data by supplying a _Promise_ callback to the **load-children** prop. This callback will be executed the first time a user tries to expand an item that has a children property that is an empty array.
 
-<ExamplesExample file="v-treeview/prop-shaped" /> -->
+<ExamplesExample file="v-treeview/prop-load-children" />
 
 ### Slots
 
-#### Prepend
+The `v-treeview` component has several slots that allow you to customize the appearance and behavior of its items.
+
+#### Append and prepend
 
 Using the the **prepend** slot we are able to create an intuitive file explorer.
 
 <ExamplesExample file="v-treeview/slot-append-and-label" />
 
-### Misc
+Both **append**, and **prepend** slots get additional information about the item: `depth`, `path` (from indexes), `isFirst`, `isLast` and the `index` within the children list.
 
-#### Search and filter
+<ExamplesExample file="v-treeview/slot-append-and-prepend-item" />
+
+#### No data
+
+When searching within the treeview, you might want to show custom **no-data** slot to provide context or immediate action.
+
+<ExamplesExample file="v-treeview/slot-no-data" />
+
+#### Title
+
+In this example we use a custom **title** slot to apply a line-through the treeview item's text when selected.
+
+<ExamplesExample file="v-treeview/slot-title" />
+
+#### Toggle
+
+Here, a custom **toggle** slot is utilized to assign a specific color and variant to the button depending on the state of the item.
+
+<ExamplesExample file="v-treeview/slot-toggle" />
+
+## Examples
+
+The following are a collection of examples that demonstrate more advanced and real world use of the `v-treeview` component.
+
+### Search and filter
 
 Easily filter your treeview by using the **search** prop. You can easily apply your custom filtering function if you need case-sensitive or fuzzy filtering by setting the **custom-filter** prop. This works similar to the [v-autocomplete](/components/autocompletes) component.
 
 <ExamplesExample file="v-treeview/misc-search-and-filter" />
 
-#### Selectable icons
+### Selectable icons
 
 Customize the **on**, **off** and **indeterminate** icons for your selectable tree. Combine with other advanced functionality like API loaded items.
 
 <ExamplesExample file="v-treeview/misc-selectable-icons" />
+
+### Indent lines
+
+The `v-treeview` component can be configured to show indent lines. The `indent-lines` prop controls lines visibility and the variant.
+
+<ExamplesExample file="v-treeview/misc-indent-lines" />

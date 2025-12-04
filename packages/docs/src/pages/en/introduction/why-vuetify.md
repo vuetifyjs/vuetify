@@ -16,7 +16,7 @@ Learn more about what Vuetify is, how to create an application from scratch, bro
 
 <PageFeatures />
 
-<VoPromotionsCardVuetify slug="vuetify-snips" />
+<PromotedEntry slug="vuetify-snips" />
 
 ## What is Vuetify?
 
@@ -26,8 +26,6 @@ Since its initial release in 2014, [Vue.js](https://vuejs.org/) has grown to be 
 * [Features at a glance](#feature-guides)
 
 ## Getting started
-
-<VoPromotionsCardHighlight slug="vuemastery-getting-started" class="mb-4" />
 
 The fastest way to try Vuetify is in the browser at [Vuetify Play](https://play.vuetifyjs.com/). For a complete list of installation options please navigate to the [Installation page](/getting-started/installation/).
 
@@ -101,5 +99,6 @@ Learn more about the inner workings of Vuetify and become a skilled **v-develope
 | [SASS variables](/features/sass-variables/) | Intermediate | 10 min |
 | [Blueprints](/features/blueprints/) | Advanced | 10 min |
 | [Treeshaking](/features/treeshaking/) | Advanced | 15 min |
+| [Hotkeys](/features/hotkey/) | Advanced | 10 min |
 
 Can't find what you're looking for? Help us improve! Please reach out to [hello@vuetifyjs.com](mailto:hello@vuetifyjs.com) with your feedback or join us in the Vuetify [Discord community](https://community.vuetifyjs.com/).

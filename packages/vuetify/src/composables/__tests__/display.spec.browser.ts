@@ -2,7 +2,7 @@
 import { createDisplay } from '../display'
 
 // Utilities
-import { page } from '@vitest/browser/context'
+import { page } from '@test'
 import { effectScope } from 'vue'
 
 const breakpoints = [
@@ -186,15 +186,15 @@ describe('display', () => {
         description: 'WSXGA+ (landscape)',
         width: 1680,
         height: 1050,
-        name: 'lg',
+        name: 'xl',
       },
       [
-        'lg',
+        'xl',
         'smAndUp',
         'mdAndUp',
-        'lgAndDown',
         'lgAndUp',
         'xlAndDown',
+        'xlAndUp',
       ],
     ],
     [

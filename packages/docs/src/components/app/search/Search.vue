@@ -7,7 +7,7 @@
     @click="shouldLoad = true"
   >
     <span :class="mdAndUp && 'me-n1'">
-      <span v-if="smAndUp">
+      <span v-if="lgAndUp">
         {{ t('search.label') }}
       </span>
 
@@ -18,7 +18,7 @@
         ]"
       >
         <span v-if="mdAndUp">
-          {{ t(`search.key-hint${user.slashSearch ? '-slash' : platform.mac ? '-mac' : ''}`) }}
+          {{ t(`search.key-hint${user.ecosystem.docs.slashSearch ? '-slash' : platform.mac ? '-mac' : ''}`) }}
         </span>
       </span>
     </span>
@@ -38,7 +38,7 @@
   const SearchDialog = defineAsyncComponent(() => import('@/components/app/search/SearchDialog.vue'))
 
   const { t } = useI18n()
-  const { smAndUp, smAndDown, mdAndUp, xs, platform } = useDisplay()
+  const { smAndUp, smAndDown, mdAndUp, lgAndUp, xs, platform } = useDisplay()
   const { query } = useRoute()
   const user = useUserStore()
 
@@ -68,7 +68,7 @@
 
   function onDocumentKeydown (e: KeyboardEvent) {
     const modifierKey = platform.value.mac ? e.metaKey : e.ctrlKey
-    const isSearchKey = user.slashSearch ? e.key === '/' : modifierKey && e.key === 'k'
+    const isSearchKey = user.ecosystem.docs.slashSearch ? e.key === '/' : modifierKey && e.key === 'k'
 
     if (!model.value && isSearchKey) {
       e.preventDefault()

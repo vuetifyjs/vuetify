@@ -21,3 +21,10 @@
     },
   }
 </script>
+
+<style scoped>
+  .v-slider :deep(> .v-input__control) {
+    /* overrides $slider-vertical-min-height: 300px */
+    min-height: 150px;
+  }
+</style>

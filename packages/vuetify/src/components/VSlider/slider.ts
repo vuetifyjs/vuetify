@@ -1,6 +1,7 @@
 /* eslint-disable max-statements */
 // Composables
 import { makeElevationProps } from '@/composables/elevation'
+import { useForm } from '@/composables/form'
 import { useRtl } from '@/composables/locale'
 import { makeRoundedProps } from '@/composables/rounded'
 
@@ -23,17 +24,18 @@ type SliderProvide = {
   color: Ref<string | undefined>
   decimals: Ref<number>
   direction: Ref<'vertical' | 'horizontal'>
-  disabled: Ref<boolean | null | undefined>
+  disabled: Ref<boolean>
   elevation: Ref<number | string | undefined>
   min: Ref<number>
   max: Ref<number>
   mousePressed: Ref<boolean>
+  noKeyboard: Ref<boolean>
   numTicks: Ref<number>
   onSliderMousedown: (e: MouseEvent) => void
   onSliderTouchstart: (e: TouchEvent) => void
   parseMouseMove: (e: MouseEvent | TouchEvent) => number | void
   position: (val: number) => number
-  readonly: Ref<boolean | null | undefined>
+  readonly: Ref<boolean>
   rounded: Ref<boolean | number | string | undefined>
   roundValue: (value: number) => number
   thumbLabel: Ref<boolean | string | undefined>
@@ -42,6 +44,7 @@ type SliderProvide = {
   step: Ref<number>
   thumbSize: Ref<number>
   thumbColor: Ref<string | undefined>
+  thumbLabelColor: Ref<string | undefined>
   trackColor: Ref<string | undefined>
   trackFillColor: Ref<string | undefined>
   trackSize: Ref<number>
@@ -129,6 +132,7 @@ export const makeSliderProps = propsFactory({
     validator: (v: any) => ['vertical', 'horizontal'].includes(v),
   },
   reverse: Boolean,
+  noKeyboard: Boolean,
 
   ...makeRoundedProps(),
   ...makeElevationProps({
@@ -149,7 +153,7 @@ type SliderData = {
 export const useSteps = (props: SliderProps) => {
   const min = computed(() => parseFloat(props.min))
   const max = computed(() => parseFloat(props.max))
-  const step = computed(() => +props.step > 0 ? parseFloat(props.step) : 0)
+  const step = computed(() => Number(props.step) > 0 ? parseFloat(props.step) : 0)
   const decimals = computed(() => Math.max(getDecimals(step.value), getDecimals(min.value)))
 
   function roundValue (value: string | number) {
@@ -159,7 +163,11 @@ export const useSteps = (props: SliderProps) => {
 
     const clamped = clamp(value, min.value, max.value)
     const offset = min.value % step.value
-    const newValue = Math.round((clamped - offset) / step.value) * step.value + offset
+    let newValue = Math.round((clamped - offset) / step.value) * step.value + offset
+
+    if (clamped > newValue && newValue + step.value > max.value) {
+      newValue = max.value
+    }
 
     return parseFloat(Math.min(newValue, max.value).toFixed(decimals.value))
   }
@@ -182,8 +190,9 @@ export const useSlider = ({
   onSliderMove: (data: SliderData) => void
   getActiveThumb: (e: MouseEvent | TouchEvent) => HTMLElement
 }) => {
+  const form = useForm(props)
   const { isRtl } = useRtl()
-  const isReversed = toRef(props, 'reverse')
+  const isReversed = toRef(() => props.reverse)
   const vertical = computed(() => props.direction === 'vertical')
   const indexFromEnd = computed(() => vertical.value !== isReversed.value)
 
@@ -193,11 +202,11 @@ export const useSlider = ({
   const tickSize = computed(() => parseInt(props.tickSize, 10))
   const trackSize = computed(() => parseInt(props.trackSize, 10))
   const numTicks = computed(() => (max.value - min.value) / step.value)
-  const disabled = toRef(props, 'disabled')
 
-  const thumbColor = computed(() => props.error || props.disabled ? undefined : props.thumbColor ?? props.color)
-  const trackColor = computed(() => props.error || props.disabled ? undefined : props.trackColor ?? props.color)
-  const trackFillColor = computed(() => props.error || props.disabled ? undefined : props.trackFillColor ?? props.color)
+  const thumbColor = computed(() => props.error || form.isDisabled.value ? undefined : props.thumbColor ?? props.color)
+  const thumbLabelColor = computed(() => props.error || form.isDisabled.value ? undefined : props.thumbColor)
+  const trackColor = computed(() => props.error || form.isDisabled.value ? undefined : props.trackColor ?? props.color)
+  const trackFillColor = computed(() => props.error || form.isDisabled.value ? undefined : props.trackFillColor ?? props.color)
 
   const mousePressed = shallowRef(false)
 
@@ -222,7 +231,7 @@ export const useSlider = ({
     const clickOffset = getPosition(e, position)
 
     // It is possible for left to be NaN, force to number
-    let clickPos = Math.min(Math.max((clickOffset - trackStart - startOffset.value) / trackLength, 0), 1) || 0
+    let clickPos = clamp((clickOffset - trackStart - startOffset.value) / trackLength) || 0
 
     if (vertical ? indexFromEnd.value : indexFromEnd.value !== isRtl.value) clickPos = 1 - clickPos
 
@@ -296,6 +305,8 @@ export const useSlider = ({
   }
 
   function onSliderMousedown (e: MouseEvent) {
+    if (e.button !== 0) return
+
     e.preventDefault()
 
     handleStart(e)
@@ -309,7 +320,7 @@ export const useSlider = ({
     return clamp(isNaN(percentage) ? 0 : percentage, 0, 100)
   }
 
-  const showTicks = toRef(props, 'showTicks')
+  const showTicks = toRef(() => props.showTicks)
   const parsedTicks = computed<Tick[]>(() => {
     if (!showTicks.value) return []
 
@@ -334,33 +345,35 @@ export const useSlider = ({
 
   const data: SliderProvide = {
     activeThumbRef,
-    color: toRef(props, 'color'),
+    color: toRef(() => props.color),
     decimals,
-    disabled,
-    direction: toRef(props, 'direction'),
-    elevation: toRef(props, 'elevation'),
+    disabled: form.isDisabled,
+    direction: toRef(() => props.direction),
+    elevation: toRef(() => props.elevation),
     hasLabels,
     isReversed,
     indexFromEnd,
     min,
     max,
     mousePressed,
+    noKeyboard: toRef(() => props.noKeyboard),
     numTicks,
     onSliderMousedown,
     onSliderTouchstart,
     parsedTicks,
     parseMouseMove,
     position,
-    readonly: toRef(props, 'readonly'),
-    rounded: toRef(props, 'rounded'),
+    readonly: form.isReadonly,
+    rounded: toRef(() => props.rounded),
     roundValue,
     showTicks,
     startOffset,
     step,
     thumbSize,
     thumbColor,
-    thumbLabel: toRef(props, 'thumbLabel'),
-    ticks: toRef(props, 'ticks'),
+    thumbLabelColor,
+    thumbLabel: toRef(() => props.thumbLabel),
+    ticks: toRef(() => props.ticks),
     tickSize,
     trackColor,
     trackContainerRef,

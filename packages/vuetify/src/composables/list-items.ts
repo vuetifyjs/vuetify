@@ -1,5 +1,5 @@
 // Utilities
-import { computed, shallowRef, toRaw, watchEffect } from 'vue'
+import { computed, shallowRef, watchEffect } from 'vue'
 import { deepEqual, getPropertyFromItem, isPrimitive, omit, pick, propsFactory } from '@/util'
 
 // Types
@@ -14,7 +14,8 @@ export interface ListItem<T = any> extends InternalItem<T> {
     title: string
     value: any
   }
-  children?: ListItem<T>[]
+  children: ListItem<T>[] | undefined
+  type: string
 }
 
 export interface ItemProps {
@@ -23,6 +24,7 @@ export interface ItemProps {
   itemValue: SelectItemKey
   itemChildren: SelectItemKey
   itemProps: SelectItemKey
+  itemType: SelectItemKey
   returnObject: boolean
   valueComparator: typeof deepEqual | undefined
 }
@@ -49,11 +51,20 @@ export const makeItemsProps = propsFactory({
     type: [Boolean, String, Array, Function] as PropType<SelectItemKey>,
     default: 'props',
   },
+  itemType: {
+    type: [Boolean, String, Array, Function] as PropType<SelectItemKey>,
+    default: 'type',
+  },
   returnObject: Boolean,
   valueComparator: Function as PropType<typeof deepEqual>,
 }, 'list-items')
 
-export function transformItem (props: Omit<ItemProps, 'items'>, item: any): ListItem {
+const itemTypes = new Set(['item', 'divider', 'subheader'])
+
+export function transformItem (
+  props: Pick<ItemProps, typeof transformItem.neededProps[number]>,
+  item: any
+): ListItem {
   const title = getPropertyFromItem(item, props.itemTitle, item)
   const value = getPropertyFromItem(item, props.itemValue, title)
   const children = getPropertyFromItem(item, props.itemChildren)
@@ -65,6 +76,11 @@ export function transformItem (props: Omit<ItemProps, 'items'>, item: any): List
       : undefined
     : getPropertyFromItem(item, props.itemProps)
 
+  let type = getPropertyFromItem(item, props.itemType, 'item')
+  if (!itemTypes.has(type)) {
+    type = 'item'
+  }
+
   const _props = {
     title,
     value,
@@ -72,23 +88,29 @@ export function transformItem (props: Omit<ItemProps, 'items'>, item: any): List
   }
 
   return {
+    type,
     title: String(_props.title ?? ''),
     value: _props.value,
     props: _props,
-    children: Array.isArray(children) ? transformItems(props, children) : undefined,
+    children: type === 'item' && Array.isArray(children) ? transformItems(props, children) : undefined,
     raw: item,
   }
 }
 
-export function transformItems (props: Omit<ItemProps, 'items'>, items: ItemProps['items']) {
-  const _props = pick(props, [
-    'itemTitle',
-    'itemValue',
-    'itemChildren',
-    'itemProps',
-    'returnObject',
-    'valueComparator',
-  ])
+transformItem.neededProps = [
+  'itemTitle',
+  'itemValue',
+  'itemChildren',
+  'itemProps',
+  'itemType',
+] as const
+
+export function transformItems (
+  props: Pick<ItemProps, typeof transformItem.neededProps[number]>,
+  items: ItemProps['items']
+) {
+  // avoid reactive access in the loop
+  const _props = pick(props, transformItem.neededProps)
 
   const array: ListItem[] = []
   for (const item of items) {
@@ -128,7 +150,6 @@ export function useItems (props: ItemProps) {
   function transformIn (value: any[]): ListItem[] {
     // Cache unrefed values outside the loop,
     // proxy getters can be slow when you call them a billion times
-    const _value = toRaw(value)
     const _items = itemsMap.value
     const _allItems = items.value
     const _keylessItems = keylessItems.value
@@ -136,17 +157,10 @@ export function useItems (props: ItemProps) {
     const _returnObject = props.returnObject
     const hasValueComparator = !!props.valueComparator
     const valueComparator = props.valueComparator || deepEqual
-    const _props = pick(props, [
-      'itemTitle',
-      'itemValue',
-      'itemChildren',
-      'itemProps',
-      'returnObject',
-      'valueComparator',
-    ])
+    const _props = pick(props, transformItem.neededProps)
 
     const returnValue: ListItem[] = []
-    main: for (const v of _value) {
+    main: for (const v of value) {
       // When the model value is null, return an InternalItem
       // based on null only if null is one of the items
       if (!_hasNullItem && v === null) continue

@@ -9,7 +9,7 @@ import {
 import { deepEqual, getCurrentInstance, hasEvent, IN_BROWSER, propsFactory } from '@/util'
 
 // Types
-import type { ComputedRef, PropType, Ref, SetupContext } from 'vue'
+import type { PropType, Ref, SetupContext } from 'vue'
 import type {
   RouterLink as _RouterLink,
   useLink as _useLink,
@@ -17,7 +17,6 @@ import type {
   RouteLocationNormalizedLoaded,
   RouteLocationRaw,
   Router,
-  UseLinkOptions,
 } from 'vue-router'
 import type { EventProp } from '@/util'
 
@@ -36,6 +35,7 @@ export interface LinkProps {
   replace: boolean | undefined
   to: RouteLocationRaw | undefined
   exact: boolean | undefined
+  disabled: boolean | undefined
 }
 
 export interface LinkListeners {
@@ -44,8 +44,9 @@ export interface LinkListeners {
 }
 
 export interface UseLink extends Omit<Partial<ReturnType<typeof _useLink>>, 'href'> {
-  isLink: ComputedRef<boolean>
-  isClickable: ComputedRef<boolean>
+  isLink: Readonly<Ref<boolean>>
+  isRouterLink: Readonly<Ref<boolean>>
+  isClickable: Readonly<Ref<boolean>>
   href: Ref<string | undefined>
   linkProps: Record<string, string | undefined>
 }
@@ -53,27 +54,27 @@ export interface UseLink extends Omit<Partial<ReturnType<typeof _useLink>>, 'hre
 export function useLink (props: LinkProps & LinkListeners, attrs: SetupContext['attrs']): UseLink {
   const RouterLink = resolveDynamicComponent('RouterLink') as typeof _RouterLink | string
 
-  const isLink = computed(() => !!(props.href || props.to))
+  const isLink = toRef(() => !!(props.href || props.to))
   const isClickable = computed(() => {
     return isLink?.value || hasEvent(attrs, 'click') || hasEvent(props, 'click')
   })
 
   if (typeof RouterLink === 'string' || !('useLink' in RouterLink)) {
-    const href = toRef(props, 'href')
+    const href = toRef(() => props.href)
     return {
       isLink,
+      isRouterLink: toRef(() => false),
       isClickable,
       href,
       linkProps: reactive({ href }),
     }
   }
-  // vue-router useLink `to` prop needs to be reactive and useLink will crash if undefined
-  const linkProps = computed(() => ({
-    ...props,
-    to: toRef(() => props.to || ''),
-  }))
 
-  const routerLink = RouterLink.useLink(linkProps.value as UseLinkOptions)
+  // vue-router useLink `to` prop needs to be reactive and useLink will crash if undefined
+  const routerLink = RouterLink.useLink({
+    to: toRef(() => props.to || ''),
+    replace: toRef(() => props.replace),
+  })
   // Actual link needs to be undefined when to prop is not used
   const link = computed(() => props.to ? routerLink : undefined)
   const route = useRoute()
@@ -85,9 +86,11 @@ export function useLink (props: LinkProps & LinkListeners, attrs: SetupContext['
     return link.value.isExactActive?.value && deepEqual(link.value.route.value.query, route.value.query)
   })
   const href = computed(() => props.to ? link.value?.route.value.href : props.href)
+  const isRouterLink = toRef(() => !!props.to)
 
   return {
     isLink,
+    isRouterLink,
     isClickable,
     isActive,
     route: link.value?.route,
@@ -95,7 +98,9 @@ export function useLink (props: LinkProps & LinkListeners, attrs: SetupContext['
     href,
     linkProps: reactive({
       href,
-      'aria-current': computed(() => isActive.value ? 'page' : undefined),
+      'aria-current': toRef(() => isActive.value ? 'page' : undefined),
+      'aria-disabled': toRef(() => props.disabled && isLink.value ? 'true' : undefined),
+      tabindex: toRef(() => props.disabled && isLink.value ? '-1' : undefined),
     }),
   }
 }

@@ -5,10 +5,8 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
   CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
-  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
 jobs:
   pre_job:
@@ -17,7 +15,7 @@ jobs:
       should_skip: ${{ steps.skip_check.outputs.should_skip }}
     steps:
       - id: skip_check
-        if: ${{ !startswith(github.ref, 'refs/tags/v') && github.ref != 'refs/heads/master' }}
+        if: ${{ !startsWith(github.ref, 'refs/tags/v') && github.ref_name != 'master' }}
         uses: fkirc/skip-duplicate-actions@master
         with:
           skip_after_successful_duplicate: 'true'
@@ -48,7 +46,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        scopes: ['--scope vuetify --scope @vuetify/api-generator', '--scope vuetifyjs.com']
+        scopes: ['--filter vuetify --filter @vuetify/api-generator', '--filter vuetifyjs.com']
     steps:
       - uses: actions/checkout@v4
       - uses: actions/download-artifact@v4
@@ -56,36 +54,41 @@ jobs:
           name: vuetify-dist
           path: packages/vuetify
       - uses: vuetifyjs/setup-action@master
-      - run: pnpm lerna run lint $SCOPES
+      - run: pnpm run $SCOPES lint
         env:
           SCOPES: ${{ matrix.scopes }}
 
-  test-unit:
-    name: Test (Unit)
+  test:
+    name: Test
     needs: pre_job
     if: needs.pre_job.outputs.should_skip != 'true'
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('./pnpm-lock.yaml') }}
       - uses: vuetifyjs/setup-action@master
-      - run: pnpm run test --project unit
+      - run: pnpm exec playwright install chromium
+      - run: pnpm run test
         working-directory: ./packages/vuetify
-
-  test-e2e:
-    name: Test (e2e)
-    needs: pre_job
-    if: needs.pre_job.outputs.should_skip != 'true'
-    runs-on: ubuntu-24.04
-    steps:
-      - uses: actions/checkout@v4
-      - uses: vuetifyjs/setup-action@master
-      - run: pnpm run test --project browser
-        working-directory: ./packages/vuetify
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: Test screenshots
+          path: packages/vuetify/test/__screenshots__
+          if-no-files-found: ignore
+          overwrite: true
 
   deploy:
-    needs: [lint, test-unit, test-e2e, build-vuetify]
+    needs: [lint, test, build-vuetify]
     runs-on: ubuntu-24.04
-    if: github.event_name == 'push' && startswith(github.ref, 'refs/tags/v') && github.repository_owner == 'vuetifyjs'
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v') && github.repository_owner == 'vuetifyjs'
+    environment: production
+    permissions:
+      contents: write
+      id-token: write
     steps:
       - uses: actions/checkout@v4
         with:
@@ -96,12 +99,10 @@ jobs:
           path: packages/vuetify
       - uses: vuetifyjs/setup-action@master
       - run: pnpm build api
-      - run: echo "RELEASE_TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+      - run: npm install -g npm@latest
       - name: NPM Release
-        run: bash scripts/deploy.sh
-        env:
-          NPM_API_KEY: ${{ secrets.NPM_TOKEN }}
-          RELEASE_TAG: ${{ env.RELEASE_TAG }}
+        run: |
+          npm publish ./packages/vuetify --tag $(node ./scripts/parse-npm-tag.js $GITHUB_REF_NAME)
       - name: GitHub release
         id: create_release
         run: pnpm conventional-github-releaser -p vuetify
@@ -112,7 +113,11 @@ jobs:
   build-docs:
     name: Build docs
     needs: [pre_job, build-vuetify]
-    if: needs.pre_job.outputs.should_skip != 'true' && github.event_name == 'push' && github.repository_owner == 'vuetifyjs' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/next')
+    if: >
+      needs.pre_job.outputs.should_skip != 'true' &&
+      github.event_name == 'push' &&
+      github.repository_owner == 'vuetifyjs' &&
+      contains(toJSON('["master", "dev", "next"]'), github.ref_name)
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
@@ -125,7 +130,7 @@ jobs:
       - run: pnpm build api
       - run: pnpm build docs
         env:
-          NODE_OPTIONS: --max-old-space-size=4096
+          NODE_OPTIONS: --max-old-space-size=8192
           VITE_COSMIC_2_BUCKET_SLUG: ${{ secrets.COSMIC_2_BUCKET_SLUG }}
           VITE_COSMIC_2_BUCKET_READ_KEY: ${{ secrets.COSMIC_2_BUCKET_READ_KEY }}
           VITE_COSMIC_BUCKET_SLUG: ${{ secrets.COSMIC_BUCKET_SLUG }}
@@ -137,13 +142,14 @@ jobs:
           VITE_EMAILJS_TEMPLATE_ID: ${{ secrets.EMAILJS_TEMPLATE_ID }}
           VITE_API_SERVER_URL: ${{ secrets.API_SERVER_URL }}
           VITE_GITHUB_SHA: ${{ github.sha }}
+          VITE_GITHUB_REF: ${{ github.ref_name }}
       - uses: actions/upload-artifact@v4
         with:
           name: docs-dist
           path: packages/docs/dist
 
   publish-docs:
-    needs: [lint, test-unit, build-docs]
+    needs: [lint, test, build-docs]
     runs-on: ubuntu-24.04
     environment: ${{ github.ref_name }}
     steps:

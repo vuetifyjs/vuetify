@@ -23,15 +23,38 @@ export const md2: Blueprint = {
     },
     VCheckbox: {
       color: 'secondary',
+      indentDetails: true,
     },
     VCombobox: {
       variant: 'filled',
+    },
+    VDatePicker: {
+      color: 'primary',
+      controlHeight: 56,
+      elevation: 2,
+      rounded: 'md',
+      controlVariant: 'modal',
+
+      VBtn: {
+        color: 'high-emphasis',
+        rounded: 'circle',
+      },
+    },
+    VRadioGroup: {
+      indentDetails: true,
     },
     VSelect: {
       variant: 'filled',
     },
     VSlider: {
       color: 'primary',
+      indentDetails: true,
+    },
+    VRangeSlider: {
+      indentDetails: true,
+    },
+    VSwitch: {
+      indentDetails: true,
     },
     VTabs: {
       color: 'primary',

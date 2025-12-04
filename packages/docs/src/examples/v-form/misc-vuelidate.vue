@@ -33,6 +33,7 @@
       v-model="state.checkbox"
       :error-messages="v$.checkbox.$errors.map(e => e.$message)"
       label="Do you agree?"
+      indent-details
       required
       @blur="v$.checkbox.$touch"
       @change="v$.checkbox.$touch"

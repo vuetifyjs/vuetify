@@ -12,6 +12,7 @@ $button-color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity)) !
 $button-banner-actions-padding: 0 8px !default; // @deprecated
 $button-pagination-active-overlay-opacity: var(--v-border-opacity) !default;
 $button-pagination-border-radius: settings.$border-radius-root !default;
+$button-pagination-padding-inline: 5px !default;
 $button-pagination-rounded-border-radius: map.get(settings.$rounded, 'circle') !default;
 $button-border-color: settings.$border-color-root !default;
 $button-border-radius: settings.$border-radius-root !default;
@@ -27,7 +28,7 @@ $button-font-size: tools.map-deep-get(settings.$typography, 'button', 'size') !d
 $button-font-weight: tools.map-deep-get(settings.$typography, 'button', 'weight') !default;
 $button-height: 36px !default;
 $button-stacked-height: 72px !default;
-$button-stacked-icon-margin: 4px !default;
+$button-stacked-gap: 4px !default;
 $button-icon-border-radius: map.get(settings.$rounded, 'circle') !default;
 $button-icon-font-size: 1rem !default;
 $button-line-height: normal !default;

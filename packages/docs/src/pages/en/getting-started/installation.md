@@ -20,8 +20,6 @@ Get started with Vuetify, the world’s most popular Vue.js framework for buildi
 
 <PageFeatures />
 
-<VoPromotionsCardHighlight slug="vuemastery-getting-started" />
-
 ## Installation
 
 Vuetify has support for multiple different installation paths with the most common scaffolding tool being [create-vuetify](https://github.com/vuetifyjs/create-vuetify)
@@ -82,7 +80,7 @@ cd vuetify-project
 pnpm dev
 ```
 
-<VoPromotionsCardVuetify slug="vuetify-one" />
+<PromotedEntry />
 
 ## Using Nuxt 3
 
@@ -158,16 +156,11 @@ export default defineNuxtConfig({
   build: {
     transpile: ['vuetify'],
   },
-  modules: [
-    (_options, nuxt) => {
-      nuxt.hooks.hook('vite:extendConfig', (config) => {
-        // @ts-expect-error
-        config.plugins.push(vuetify({ autoImport: true }))
-      })
-    },
-    //...
-  ],
   vite: {
+    plugins: [
+      // @ts-expect-error
+      vuetify({ autoImport: true }),
+    ]
     vue: {
       template: {
         transformAssetUrls,
@@ -226,34 +219,38 @@ Alternatively, you can use the [vuetify-nuxt-module](https://github.com/vuetifyj
 
 Check the [documentation](https://nuxt.vuetifyjs.com/) for more information on how to use it.
 
-## Using Laravel Mix
+## Using Laravel
 
-```js
+The `createApp()` setup may differ, especially if your Laravel application uses [inertiajs](https://inertiajs.com/client-side-setup). As long as you chain with`.use()`, Vuetify should be properly registered and available.
+
+```js  { data-resource=resources/js/app.ts }
 import { createApp } from 'vue'
 
 // Vuetify
 import '@mdi/font/css/materialdesignicons.css'
 import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
-import * as components from 'vuetify/components'
-import * as directives from 'vuetify/directives'
 
-// Components
-import App from './App.vue'
+const app = createApp()
 
-const vuetify = createVuetify({
-  components,
-  directives
+// Register Vuetify as plugin
+const vuetify = createVuetify()
+app.use(vuetify).mount("#app")
+```
+
+```js { data-resource=vite-config.ts }
+import vuetify from 'vite-plugin-vuetify'
+// ... other imports
+
+export default defineConfig({
+  plugins: [
+    // ... other plugins
+    vuetify({ autoImport: true }),
+  ],
 })
-
-createApp(App).use(vuetify).mount('#app')
 ```
 
-To import the fonts you need to add to webpack.mix.js:
-
-```js
-mix.copy('node_modules/@mdi/font/fonts/', 'dist/fonts/')
-```
+If font is defined at `resources/views/app.blade.php`, Vuetify's font settings will not take effect.
 
 ## Using CDN
 
@@ -339,7 +336,7 @@ import { createVuetify } from 'vuetify'
 const vuetify = createVuetify({ components, directives })
 
 export default {
-  ...DefaultTheme,
+  extends: DefaultTheme,
   enhanceApp({ app }) {
     app.use(vuetify)
   },
@@ -401,6 +398,106 @@ createApp(App).use(vuetify).mount('#app')
 This will include all components and directives regardless of whether or not you are using them. If you instead only want to include used components, have a look at the [Vite](https://npmjs.com/package/vite-plugin-vuetify) or [Webpack](https://npmjs.com/package/webpack-plugin-vuetify) plugins, depending on your setup. The plugins also makes it possible to customize SCSS variables.
 
 Lastly, do not forget to install [icons](/features/icon-fonts/).
+
+## Fonts
+
+Vuetify uses Roboto as its default font. To ensure your project renders correctly, you need to add the Roboto font yourself. We recommend using @fontsource/roboto or bundling with unplugin-fonts which is the default used in [vuetify-create](https://github.com/vuetifyjs/create) installations.
+
+### Option A — Install via @fontsource/roboto
+
+::: tabs
+
+```bash [pnpm]
+pnpm i @fontsource/roboto
+```
+
+```bash [yarn]
+yarn add @fontsource/roboto
+```
+
+```bash [npm]
+npm i @fontsource/roboto
+```
+
+```bash [bun]
+bun add @fontsource/roboto
+```
+
+:::
+
+Then import the styles you need in your main.ts or main.js:
+
+```js
+import '@fontsource/roboto/100.css'
+import '@fontsource/roboto/300.css'
+import '@fontsource/roboto/400.css'
+import '@fontsource/roboto/500.css'
+import '@fontsource/roboto/700.css'
+import '@fontsource/roboto/900.css'
+
+/* optional italic styles */
+import '@fontsource/roboto/100-italic.css'
+import '@fontsource/roboto/300-italic.css'
+import '@fontsource/roboto/400-italic.css'
+import '@fontsource/roboto/500-italic.css'
+import '@fontsource/roboto/700-italic.css'
+import '@fontsource/roboto/900-italic.css'
+```
+
+### Option B — Install via unplugin-fonts + @fontsource  (recommended)
+
+::: tabs
+
+```bash [pnpm]
+pnpm i --save-dev unplugin-fonts
+pnpm i @fontsource/roboto
+```
+
+```bash [yarn]
+yarn add --save-dev unplugin-fonts
+yarn add @fontsource/roboto
+```
+
+```bash [npm]
+npm i --save-dev unplugin-fonts
+npm i @fontsource/roboto
+```
+
+```bash [bun]
+bun add --save-dev unplugin-fonts
+bun add @fontsource/roboto
+```
+
+:::
+
+Update your vite.config.ts:
+
+```ts
+import { defineConfig } from 'vite'
+import ViteFonts from 'unplugin-fonts/vite'
+
+export default defineConfig({
+  plugins: [
+    ViteFonts({
+      fontsource: {
+        families: [
+          {
+            name: 'Roboto',
+            weights: [100, 300, 400, 500, 700, 900],
+            styles: ['normal', 'italic'],
+          },
+        ],
+      },
+    }),
+  ],
+})
+```
+
+And import the generated CSS once in your main.ts or main.js:
+
+```ts
+import 'unfonts.css'
+```
 
 ## SSR caveats
 

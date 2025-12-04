@@ -1,5 +1,5 @@
 // Utilities
-import { computed, inject, onScopeDispose, reactive, shallowRef, toRefs, watchEffect } from 'vue'
+import { computed, inject, onScopeDispose, reactive, shallowRef, toRef, toRefs, watchEffect } from 'vue'
 import { getCurrentInstanceName, mergeDeep, propsFactory } from '@/util'
 import { IN_BROWSER, SUPPORTS_TOUCH } from '@/util/globals'
 
@@ -88,10 +88,10 @@ const defaultDisplayOptions: DisplayOptions = {
   thresholds: {
     xs: 0,
     sm: 600,
-    md: 960,
-    lg: 1280,
-    xl: 1920,
-    xxl: 2560,
+    md: 840,
+    lg: 1145,
+    xl: 1545,
+    xxl: 2138,
   },
 }
 
@@ -248,7 +248,7 @@ export function useDisplay (
     }
   })
 
-  const displayClasses = computed(() => {
+  const displayClasses = toRef(() => {
     if (!name) return {}
 
     return { [`${name}--mobile`]: mobile.value }

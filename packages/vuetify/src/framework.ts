@@ -1,9 +1,10 @@
 // Composables
+import { createIcons } from './icons'
 import { createDate, DateAdapterSymbol, DateOptionsSymbol } from '@/composables/date/date'
 import { createDefaults, DefaultsSymbol } from '@/composables/defaults'
 import { createDisplay, DisplaySymbol } from '@/composables/display'
 import { createGoTo, GoToSymbol } from '@/composables/goto'
-import { createIcons, IconSymbol } from '@/composables/icons'
+import { IconSymbol } from '@/composables/icons'
 import { createLocale, LocaleSymbol } from '@/composables/locale'
 import { createTheme, ThemeSymbol } from '@/composables/theme'
 
@@ -20,8 +21,10 @@ import type { GoToOptions } from '@/composables/goto'
 import type { IconOptions } from '@/composables/icons'
 import type { LocaleOptions, RtlOptions } from '@/composables/locale'
 import type { ThemeOptions } from '@/composables/theme'
+
+// Exports
 export * from './composables'
-export type { DateOptions, DateInstance, DateModule } from '@/composables/date'
+export * from './types'
 
 export interface VuetifyOptions {
   aliases?: Record<string, any>

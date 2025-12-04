@@ -1,5 +1,6 @@
 @use 'sass:math'
 @use 'sass:map'
+@use 'sass:meta'
 @use '../../styles/settings'
 @use '../../styles/tools'
 @use './mixins' as *
@@ -9,9 +10,8 @@
   .v-btn
     align-items: center
     border-radius: $button-border-radius
-    display: inline-grid
-    grid-template-areas: "prepend content append"
-    grid-template-columns: max-content auto max-content
+    display: inline-flex
+    flex-direction: row
     font-weight: $button-font-weight
     justify-content: center
     letter-spacing: $button-text-letter-spacing
@@ -28,6 +28,10 @@
     user-select: none
     vertical-align: $button-vertical-align
     flex-shrink: 0
+
+    .v-locale--is-rtl &
+      @if meta.type-of($button-text-letter-spacing) == 'number'
+        text-indent: -1 * $button-text-letter-spacing
 
     @at-root
       @include button-sizes()
@@ -79,6 +83,16 @@
       flex: 1 0 auto
       min-width: 100%
 
+    &--spaced
+      .v-btn__content
+        flex-grow: 1
+
+      &.v-btn--spaced-start > .v-btn__content
+        justify-content: end
+
+      &.v-btn--spaced-end > .v-btn__content
+        justify-content: start
+
     &--disabled
       pointer-events: none
 
@@ -117,11 +131,10 @@
         opacity: 0
 
     &--stacked
-      grid-template-areas: "prepend" "content" "append"
-      grid-template-columns: auto
-      grid-template-rows: max-content max-content max-content
-      justify-items: center
-      align-content: center
+      align-items: center
+      flex-direction: column
+      justify-content: center
+      gap: $button-stacked-gap
 
       .v-btn__content
         flex-direction: column
@@ -132,14 +145,6 @@
       .v-btn__content > .v-icon--start,
       .v-btn__content > .v-icon--end
         margin-inline: 0
-
-      .v-btn__prepend,
-      .v-btn__content > .v-icon--start
-        margin-bottom: $button-stacked-icon-margin
-
-      .v-btn__append,
-      .v-btn__content > .v-icon--end
-        margin-top: $button-stacked-icon-margin
 
       @at-root
         @include button-sizes($button-stacked-sizes, true)
@@ -193,21 +198,18 @@
     transition: $button-content-transition
 
   .v-btn__prepend
-    grid-area: prepend
     margin-inline: $button-margin-start $button-margin-end
 
     .v-btn--slim &
       margin-inline-start: 0
 
   .v-btn__append
-    grid-area: append
     margin-inline: $button-margin-end $button-margin-start
 
     .v-btn--slim &
       margin-inline-end: 0
 
   .v-btn__content
-    grid-area: content
     justify-content: center
     white-space: $button-white-space
 
@@ -234,6 +236,9 @@
   // VPagination
   .v-pagination
     .v-btn
+      width: auto
+      padding-inline: $button-pagination-padding-inline
+      @include button-density('min-width', $button-icon-density)
       @include tools.rounded($button-pagination-border-radius)
 
       &--rounded
@@ -242,5 +247,20 @@
       &__overlay
         transition: none
 
+    &__prev,
+    &__next
+      .v-btn
+        padding-inline: 0
+        @include button-density('width', $button-icon-density)
+
     .v-pagination__item--is-active .v-btn__overlay
       opacity: $button-pagination-active-overlay-opacity
+
+@media (forced-colors: active)
+  .v-btn
+    &:not(&--variant-text, &--variant-plain)
+      border: thin solid
+
+    &:focus-visible
+      outline: 2px solid
+      outline-offset: 2px

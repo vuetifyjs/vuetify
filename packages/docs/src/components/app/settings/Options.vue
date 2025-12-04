@@ -13,6 +13,8 @@
 
     <AppSettingsOptionsPinOption />
 
+    <AppSettingsOptionsRailDrawerOption />
+
     <AppSettingsOptionsCodeOption />
 
     <AppSettingsOptionsApiOption />

@@ -15,9 +15,9 @@ describe('VBottomNavigation', () => {
       </VLayout>
     ))
     const navigation = screen.getByCSS('.v-bottom-navigation')
-    expect.element(navigation).toHaveStyle({ height: '200px' })
+    await expect.element(navigation).toHaveStyle({ height: '200px' })
     height.value = 150
-    expect.element(navigation).toHaveStyle({ height: '150px' })
+    await expect.element(navigation).toHaveStyle({ height: '150px' })
   })
 
   it('supports density', async () => {
@@ -28,11 +28,11 @@ describe('VBottomNavigation', () => {
       </VLayout>
     ))
     const navigation = screen.getByCSS('.v-bottom-navigation')
-    expect.element(navigation).toHaveStyle({ height: '56px' })
+    await expect.element(navigation).toHaveStyle({ height: '56px' })
     density.value = 'comfortable'
-    expect.element(navigation).toHaveStyle({ height: '48px' })
-    density.value = 'comfortable'
-    expect.element(navigation).toHaveStyle({ height: '40px' })
+    await expect.element(navigation).toHaveStyle({ height: '48px' })
+    density.value = 'compact'
+    await expect.element(navigation).toHaveStyle({ height: '40px' })
   })
 
   it('is not visible when inactive', async () => {
@@ -43,8 +43,8 @@ describe('VBottomNavigation', () => {
       </VLayout>
     ))
     const navigation = screen.getByCSS('.v-bottom-navigation')
-    expect.element(navigation).toHaveClass('v-bottom-navigation--active')
+    await expect.element(navigation).toHaveClass('v-bottom-navigation--active')
     active.value = false
-    expect.element(navigation).not.toHaveClass('v-bottom-navigation--active')
+    await expect.element(navigation).not.toHaveClass('v-bottom-navigation--active')
   })
 })

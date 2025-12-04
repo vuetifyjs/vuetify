@@ -1,6 +1,6 @@
-import fs from 'fs'
-import { capitalize } from './helpers/text'
-import type { ComponentData, DirectiveData } from './types'
+import fs from 'node:fs'
+import { capitalize } from './helpers/text.ts'
+import type { ComponentData, DirectiveData } from './types.ts'
 import pkg from '../package.json' with { type: 'json' }
 
 export const createWebTypesApi = (componentData: ComponentData[], directiveData: DirectiveData[]) => {

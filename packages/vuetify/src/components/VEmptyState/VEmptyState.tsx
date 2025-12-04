@@ -17,7 +17,6 @@ import { makeSizeProps } from '@/composables/size'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
-import { toRef } from 'vue'
 import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -75,7 +74,7 @@ export const VEmptyState = genericComponent<VEmptyStateSlots>()({
 
   setup (props, { emit, slots }) {
     const { themeClasses } = provideTheme(props)
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'bgColor'))
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.bgColor)
     const { dimensionStyles } = useDimension(props)
     const { displayClasses } = useDisplay()
 
@@ -185,7 +184,9 @@ export const VEmptyState = genericComponent<VEmptyStateSlots>()({
                   VBtn: {
                     class: 'v-empty-state__action-btn',
                     color: props.color ?? 'surface-variant',
+                    href: props.href,
                     text: props.actionText,
+                    to: props.to,
                   },
                 }}
               >

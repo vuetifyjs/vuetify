@@ -1,7 +1,7 @@
 <template>
   <v-select
     :items="items"
-    :menu-props="{ top: true, offsetY: true }"
+    :menu-props="{ scrim: true, scrollStrategy: 'close' }"
     label="Label"
   ></v-select>
 </template>

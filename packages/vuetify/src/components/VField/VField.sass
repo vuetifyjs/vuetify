@@ -8,16 +8,16 @@
 @include tools.layer('components')
   /* region INPUT */
   .v-field
-    display: grid
-    grid-template-areas: "prepend-inner field clear append-inner"
-    grid-template-columns: min-content minmax(0, 1fr) min-content min-content
+    align-items: center
+    display: flex
+    flex-direction: row
+    gap: $field-gap
     font-size: $field-font-size
     letter-spacing: $field-letter-spacing
     max-width: $field-max-width
     border-radius: $field-border-radius
     contain: layout
     flex: 1 0
-    grid-area: control
     position: relative
 
     --v-theme-overlay-multiplier: 1
@@ -169,7 +169,6 @@
 
   .v-field__field
     flex: 1 0
-    grid-area: field
     position: relative
     align-items: flex-start
     display: flex
@@ -177,14 +176,9 @@
   /* endregion */
   /* region AFFIXES */
   .v-field__prepend-inner
-    grid-area: prepend-inner
     padding-inline-end: var(--v-field-padding-after)
 
-  .v-field__clearable
-    grid-area: clear
-
   .v-field__append-inner
-    grid-area: append-inner
     padding-inline-start: var(--v-field-padding-after)
 
   .v-field__append-inner,
@@ -219,7 +213,8 @@
       opacity: var(--v-medium-emphasis-opacity)
 
     .v-field--disabled &,
-    .v-field--error &
+    .v-field--error &,
+    .v-field--glow.v-field--focused &
       > .v-icon
         opacity: 1
 
@@ -231,9 +226,11 @@
     cursor: pointer
     opacity: 0
     overflow: hidden
-    margin-inline: $field-clearable-margin
     transition: $field-transition-timing
     transition-property: opacity, transform, width
+
+    @media (prefers-reduced-motion: reduce)
+      transition-property: opacity
 
     .v-field--focused &,
     .v-field--persistent-clear &
@@ -258,9 +255,11 @@
     position: absolute
     top: var(--v-input-padding-top)
     transform-origin: left center
-    transition: $field-transition-timing
-    transition-property: opacity, transform
     z-index: 1
+
+    @media (prefers-reduced-motion: no-preference)
+      transition: $field-transition-timing
+      transition-property: opacity, transform
 
     .v-field--variant-underlined &,
     .v-field--variant-plain &
@@ -378,7 +377,9 @@
       &__end
         border: 0 solid currentColor
         opacity: var(--v-field-border-opacity)
-        transition: opacity $field-subtle-transition-timing
+
+        @media (prefers-reduced-motion: no-preference)
+          transition: opacity $field-subtle-transition-timing
 
       &__start
         flex: 0 0 $field-control-affixed-padding
@@ -418,7 +419,6 @@
         &::before,
         &::after
           opacity: var(--v-field-border-opacity)
-          transition: opacity $field-subtle-transition-timing
 
           @include tools.absolute(true)
 
@@ -545,3 +545,8 @@
       opacity: 0
 
   /* endregion */
+
+  @media (forced-colors: active)
+    .v-field
+      .v-progress-linear
+        border: none

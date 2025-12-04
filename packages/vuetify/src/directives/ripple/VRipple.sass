@@ -36,6 +36,10 @@
         transition: $ripple-animation-transition-in
         opacity: $ripple-animation-visible-opacity
 
+        @media (prefers-reduced-motion: reduce)
+          transition-property: opacity
+          transition-duration: 0.1s
+
       &--out
         transition: $ripple-animation-transition-out
         opacity: 0

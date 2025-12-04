@@ -1,4 +1,3 @@
-FROM nginx:alpine
-EXPOSE 80
-COPY ./packages/docs/dist /usr/share/nginx/html
-COPY ./packages/docs/build/nginx.conf /etc/nginx/nginx.conf
+FROM caddy:2.10.2-alpine
+COPY ./packages/docs/dist /srv
+COPY ./packages/docs/build/Caddyfile /etc/caddy/Caddyfile

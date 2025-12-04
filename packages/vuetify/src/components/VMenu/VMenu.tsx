@@ -18,12 +18,11 @@ import {
   computed,
   inject,
   mergeProps,
-  nextTick,
   onBeforeUnmount,
   onDeactivated,
   provide,
   ref,
-  shallowRef,
+  shallowRef, toRef,
   useId,
   watch,
 } from 'vue'
@@ -33,7 +32,6 @@ import {
   focusChild,
   genericComponent,
   getNextElement,
-  IN_BROWSER,
   isClickInsideElement,
   omit,
   propsFactory,
@@ -41,7 +39,6 @@ import {
 } from '@/util'
 
 // Types
-import type { Component } from 'vue'
 import type { OverlaySlots } from '@/components/VOverlay/VOverlay'
 
 export const makeVMenuProps = propsFactory({
@@ -51,6 +48,7 @@ export const makeVMenuProps = propsFactory({
   submenu: Boolean,
 
   ...omit(makeVOverlayProps({
+    captureFocus: true,
     closeDelay: 250,
     closeOnContentClick: true,
     locationStrategy: 'connected' as const,
@@ -58,7 +56,7 @@ export const makeVMenuProps = propsFactory({
     openDelay: 300,
     scrim: false,
     scrollStrategy: 'reposition' as const,
-    transition: { component: VDialogTransition as Component },
+    transition: { component: VDialogTransition },
   }), ['absolute']),
 }, 'VMenu')
 
@@ -77,7 +75,7 @@ export const VMenu = genericComponent<OverlaySlots>()({
     const { isRtl } = useRtl()
 
     const uid = useId()
-    const id = computed(() => props.id || `v-menu-${uid}`)
+    const id = toRef(() => props.id || `v-menu-${uid}`)
 
     const overlay = ref<VOverlay>()
 
@@ -103,46 +101,13 @@ export const VMenu = genericComponent<OverlaySlots>()({
       },
     })
 
-    onBeforeUnmount(() => {
-      parent?.unregister()
-      document.removeEventListener('focusin', onFocusIn)
-    })
+    onBeforeUnmount(() => parent?.unregister())
     onDeactivated(() => isActive.value = false)
 
-    async function onFocusIn (e: FocusEvent) {
-      const before = e.relatedTarget as HTMLElement | null
-      const after = e.target as HTMLElement | null
-
-      await nextTick()
-
-      if (
-        isActive.value &&
-        before !== after &&
-        overlay.value?.contentEl &&
-        // We're the topmost menu
-        overlay.value?.globalTop &&
-        // It isn't the document or the menu body
-        ![document, overlay.value.contentEl].includes(after!) &&
-        // It isn't inside the menu body
-        !overlay.value.contentEl.contains(after)
-      ) {
-        const focusable = focusableChildren(overlay.value.contentEl)
-        focusable[0]?.focus()
-      }
-    }
-
     watch(isActive, val => {
-      if (val) {
-        parent?.register()
-        if (IN_BROWSER) {
-          document.addEventListener('focusin', onFocusIn, { once: true })
-        }
-      } else {
-        parent?.unregister()
-        if (IN_BROWSER) {
-          document.removeEventListener('focusin', onFocusIn)
-        }
-      }
+      val
+        ? parent?.register()
+        : parent?.unregister()
     }, { immediate: true })
 
     function onClickOutside (e: MouseEvent) {
@@ -165,7 +130,7 @@ export const VMenu = genericComponent<OverlaySlots>()({
           e.shiftKey ? 'prev' : 'next',
           (el: HTMLElement) => el.tabIndex >= 0
         )
-        if (!nextElement) {
+        if (!nextElement && !props.retainFocus) {
           isActive.value = false
           overlay.value?.activatorEl?.focus()
         }
@@ -212,6 +177,7 @@ export const VMenu = genericComponent<OverlaySlots>()({
         'aria-haspopup': 'menu',
         'aria-expanded': String(isActive.value),
         'aria-controls': id.value,
+        'aria-owns': id.value,
         onKeydown: onActivatorKeydown,
       }, props.activatorProps)
     )

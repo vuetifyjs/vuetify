@@ -20,7 +20,7 @@ describe('v-resize', () => {
     const el = {}
 
     Resize.mounted!(el as HTMLElement, { value: callback, instance } as any)
-    expect(callback).toHaveBeenCalled()
+    expect(callback).toHaveBeenCalledWith()
     expect(window.addEventListener).toHaveBeenCalledWith('resize', callback, { passive: true })
 
     Resize.unmounted!(el as HTMLElement, { value: callback, instance } as any)

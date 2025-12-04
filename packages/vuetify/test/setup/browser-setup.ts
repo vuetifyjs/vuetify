@@ -1,8 +1,15 @@
 import 'roboto-fontface'
 import '@/styles/main.sass'
-import { beforeEach } from 'vitest'
+import { beforeAll, beforeEach } from 'vitest'
 import { cleanup } from '@testing-library/vue'
-import { page } from '@vitest/browser/context'
+import { commands, page } from 'vitest/browser'
+
+beforeAll(async () => {
+  await commands.setFocusEmulationEnabled()
+
+  // contextOptions.reducedMotion doesn't seem to do anything for some reason
+  await commands.setReduceMotionEnabled()
+})
 
 beforeEach(async () => {
   // Cleanup before not after, so if the test

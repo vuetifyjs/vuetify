@@ -2,9 +2,7 @@
   <v-row class="fill-height">
     <v-col>
       <v-sheet height="64">
-        <v-toolbar
-          flat
-        >
+        <v-toolbar flat>
           <v-btn
             class="me-4"
             color="grey-darken-2"
@@ -38,7 +36,6 @@
           <v-toolbar-title v-if="calendar">
             {{ calendar.title }}
           </v-toolbar-title>
-          <v-spacer></v-spacer>
           <v-menu location="bottom end">
             <template v-slot:activator="{ props }">
               <v-btn
@@ -101,7 +98,6 @@
                 <v-icon>mdi-pencil</v-icon>
               </v-btn>
               <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
-              <v-spacer></v-spacer>
               <v-btn icon>
                 <v-icon>mdi-heart</v-icon>
               </v-btn>
@@ -153,7 +149,7 @@
     calendar.value.checkChange()
   })
 
-  function viewDay ({ date }) {
+  function viewDay (nativeEvent, { date }) {
     focus.value = date
     type.value = 'day'
   }
@@ -169,7 +165,7 @@
   function next () {
     calendar.value.next()
   }
-  function showEvent ({ nativeEvent, event }) {
+  function showEvent (nativeEvent, { event }) {
     const open = () => {
       selectedEvent.value = event
       selectedElement.value = nativeEvent.target
@@ -232,7 +228,7 @@
       this.$refs.calendar.checkChange()
     },
     methods: {
-      viewDay ({ date }) {
+      viewDay (nativeEvent, { date }) {
         this.focus = date
         this.type = 'day'
       },
@@ -248,7 +244,7 @@
       next () {
         this.$refs.calendar.next()
       },
-      showEvent ({ nativeEvent, event }) {
+      showEvent (nativeEvent, { event }) {
         const open = () => {
           this.selectedEvent = event
           this.selectedElement = nativeEvent.target

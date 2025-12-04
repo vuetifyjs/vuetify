@@ -11,9 +11,9 @@ features:
   report: true
 ---
 
-# Display helpers
+# Display
 
-The display helpers allow you to control the display of content. This includes being conditionally visible based upon the current viewport, or the actual element display type.
+Display helpers control content visibility and display type based on the viewport.
 
 <PageFeatures />
 
@@ -77,11 +77,11 @@ The display helpers allow you to control the display of content. This includes b
 | **d-sr-only** | display: none; |
 | **d-sr-only-focusable** | display: none; { style="max-height: 420px;" fixed-header } |
 
-<VoPromotionsCardVuetify />
+<PromotedEntry />
 
 <FeaturesBreakpointsTable />
 
-## Display
+## Usage
 
 Specify the element's `display` property. These classes can be applied to all breakpoints from `xs` to `xxl`. When using a base class,`.d-{value}`, it is inferred to be `.d-xs-{value}`.
 

@@ -42,12 +42,6 @@ a `v-snackbar` in its simplest form displays a temporary and closable notificati
 
 ### Props
 
-#### Multi line
-
-The **multi-line** property extends the height of the `v-snackbar` to give you a little more room for content.
-
-<ExamplesExample file="v-snackbar/prop-multi-line" />
-
 #### Timeout
 
 The **timeout** property lets you customize the delay before the `v-snackbar` is hidden.

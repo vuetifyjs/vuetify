@@ -1,0 +1,143 @@
+@use '../../styles/settings';
+@use '../../styles/tools';
+@use './variables' as *;
+
+@include tools.layer('components') {
+  .v-icon-btn {
+    @include tools.border($icon-btn-border...);
+    @include tools.rounded($icon-btn-border-radius);
+    @include tools.states('.v-icon-btn__overlay');
+    @include tools.variant($icon-btn-variants...);
+
+    & {
+      align-items: center;
+      cursor: pointer;
+      display: inline-flex;
+      flex: none;
+      font-size: $icon-btn-font-size;
+      font-weight: $icon-btn-font-weight;
+      line-height: $icon-btn-line-height;
+      height: #{$icon-btn-height};
+      justify-content: center;
+      outline: none;
+      position: relative;
+      transition-property: width, height, transform;
+      transition: 0.2s settings.$standard-easing;
+      vertical-align: middle;
+      width: #{$icon-btn-width};
+
+      @supports selector(:focus-visible) {
+        &::after {
+          pointer-events: none;
+          border: 2px solid currentColor;
+          border-radius: inherit;
+          opacity: 0;
+          transition: opacity .2s ease-in-out;
+          @include tools.absolute(true);
+        }
+
+        &:focus-visible::after {
+          opacity: calc(.25 * var(--v-theme-overlay-multiplier));
+        }
+      }
+    }
+
+    &--disabled,
+    &--loading,
+    &--readonly {
+      pointer-events: none;
+    }
+
+    &--disabled {
+      opacity: $icon-btn-disabled-opacity;
+    }
+
+    &--start {
+      margin-inline-end: $icon-btn-margin-start;
+    }
+
+    &--end {
+      margin-inline-start: $icon-btn-margin-end;
+    }
+  }
+
+  .v-icon-btn__content {
+    align-items: center;
+    justify-content: center;
+    display: inline-flex;
+    transition: inherit;
+    transition-property: transform;
+    transform: rotate(var(--v-icon-btn-rotate, 0deg));
+
+    .v-icon-btn--loading & {
+      opacity: 0;
+    }
+
+    .v-icon {
+      transition: 0.2s settings.$standard-easing;
+      transition-property: opacity, font-size, width, height;
+      transform-origin: center;
+    }
+  }
+
+  .v-icon-btn__loader {
+    align-items: center;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+
+  .v-icon-btn__overlay,
+  .v-icon-btn__underlay {
+    border-radius: inherit;
+    pointer-events: none;
+
+    @include tools.absolute();
+  }
+
+  .v-icon-btn__overlay {
+    background-color: currentColor;
+    opacity: 0;
+    transition: opacity .2s ease-in-out;
+
+    .v-icon-btn--active:not(:hover) & {
+      --v-activated-opacity: 0;
+    }
+  }
+
+  @media (forced-colors: active) {
+    .v-icon-btn {
+      &:focus-visible {
+        outline: 2px solid;
+        outline-offset: 2px;
+      }
+
+      &:not(&--active):hover,
+      &:not(&--active):focus {
+        color: highlight !important;
+      }
+
+      &--active:not(&--disabled),
+      &--active:not(&--disabled)[class*="bg-"]
+      {
+        outline-color: canvastext !important;
+        background: highlight !important;
+        color: highlighttext !important;
+      }
+
+      &--disabled {
+        color: graytext;
+      }
+
+      &__overlay,
+      &__underlay,
+      .v-icon {
+        forced-color-adjust: preserve-parent-color;
+      }
+    }
+  }
+}

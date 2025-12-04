@@ -71,7 +71,6 @@ function useCountdown (milliseconds: () => number) {
 }
 
 export const makeVSnackbarProps = propsFactory({
-  multiLine: Boolean,
   text: String,
   timer: [Boolean, String],
   timeout: {
@@ -87,7 +86,17 @@ export const makeVSnackbarProps = propsFactory({
   ...makeThemeProps(),
   ...omit(makeVOverlayProps({
     transition: 'v-snackbar-transition',
-  }), ['persistent', 'noClickAnimation', 'scrim', 'scrollStrategy']),
+  }), [
+    'persistent',
+    'noClickAnimation',
+    'retainFocus',
+    'captureFocus',
+    'disableInitialFocus',
+    'scrim',
+    'scrollStrategy',
+    'stickToTarget',
+    'viewportMargin',
+  ]),
 }, 'VSnackbar')
 
 export const VSnackbar = genericComponent<VSnackbarSlots>()({
@@ -195,7 +204,6 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
             'v-snackbar',
             {
               'v-snackbar--active': isActive.value,
-              'v-snackbar--multi-line': props.multiLine && !props.vertical,
               'v-snackbar--timer': !!props.timer,
               'v-snackbar--vertical': props.vertical,
             },
@@ -242,7 +250,7 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
                 ref={ timerRef }
                 color={ typeof props.timer === 'string' ? props.timer : 'info' }
                 max={ props.timeout }
-                model-value={ countdown.time.value }
+                modelValue={ countdown.time.value }
               />
             </div>
           )}

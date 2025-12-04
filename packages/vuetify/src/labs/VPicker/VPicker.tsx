@@ -10,7 +10,6 @@ import { makeVSheetProps, VSheet } from '@/components/VSheet/VSheet'
 import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
-import { toRef } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -23,9 +22,11 @@ export type VPickerSlots = {
 
 export const makeVPickerProps = propsFactory({
   bgColor: String,
+  divided: Boolean,
   landscape: Boolean,
   title: String,
   hideHeader: Boolean,
+  hideTitle: Boolean,
 
   ...makeVSheetProps(),
 }, 'VPicker')
@@ -36,10 +37,10 @@ export const VPicker = genericComponent<VPickerSlots>()({
   props: makeVPickerProps(),
 
   setup (props, { slots }) {
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.color)
     useRender(() => {
       const sheetProps = VSheet.filterProps(props)
-      const hasTitle = !!(props.title || slots.title)
+      const hasTitle = !props.hideTitle && !!(props.title || slots.title)
 
       return (
         <VSheet
@@ -48,6 +49,7 @@ export const VPicker = genericComponent<VPickerSlots>()({
           class={[
             'v-picker',
             {
+              'v-picker--divided': props.divided,
               'v-picker--landscape': props.landscape,
               'v-picker--with-actions': !!slots.actions,
             },
@@ -59,6 +61,7 @@ export const VPicker = genericComponent<VPickerSlots>()({
             <div
               key="header"
               class={[
+                'v-picker__header-wrapper',
                 backgroundColorClasses.value,
               ]}
               style={[
