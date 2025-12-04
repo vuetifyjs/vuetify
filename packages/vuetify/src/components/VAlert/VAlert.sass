@@ -145,15 +145,15 @@
     word-break: $alert-title-word-break
     word-wrap: $alert-title-word-wrap
 
-@media (forced-colors: active)
-  .v-alert
-    &:not(&--variant-text, &--variant-plain)
-      border-style: solid
+  @media (forced-colors: active)
+    .v-alert
+      &:not(&--variant-text, &--variant-plain)
+        border-style: solid
 
-    &--variant-outlined,
-    &--variant-tonal
-      border-width: medium
+      &--variant-outlined,
+      &--variant-tonal
+        border-width: medium
 
-    &--variant-elevated,
-    &--variant-flat
-      border-width: thick
+      &--variant-elevated,
+      &--variant-flat
+        border-width: thick
