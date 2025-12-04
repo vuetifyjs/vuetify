@@ -87,19 +87,19 @@ export const defaultTypography = {
     fontWeight: 500,
     letterSpacing: '0.5px',
   },
-  'custom-variant': {
-    fontSize: '99px',
-    lineHeight: '100px',
-    fontWeight: 900,
-    letterSpacing: '1px',
-  },
 } as const
 
 export type TypographyVariant = keyof typeof defaultTypography;
-export type TypographyStyle = (typeof defaultTypography)[TypographyVariant];
-export type TypographyOptions = Partial<
-  Record<TypographyVariant, Partial<TypographyStyle>>
->;
+export type TypographyStyle = (typeof defaultTypography)[TypographyVariant] & {
+  fontFamily?: string
+};
+
+export interface TypographyOptions {
+  responsive?: boolean
+  merge?: boolean
+  variants?: Partial<Record<TypographyVariant, TypographyStyle | null>>
+  variables?: Record<string, string>
+}
 
 export const TYPOGRAPHY_BREAKPOINTS = ['sm', 'md', 'lg', 'xl', 'xxl'] as const
 export type TypographyBreakpoint = (typeof TYPOGRAPHY_BREAKPOINTS)[number];
@@ -118,9 +118,35 @@ function toKebabCase (value: string) {
   return value.replace(/([A-Z])/g, '-$1').toLowerCase()
 }
 
-function stringifyStyle (style: TypographyStyle) {
+function genTypographyVariables (variables: Record<string, string>): string {
+  const lines: string[] = [':root{']
+  for (const [key, value] of Object.entries(variables)) {
+    lines.push(`--v-typography--${key}:${value};`)
+  }
+  lines.push('}')
+  return lines.join('')
+}
+
+function stringifyStyle (
+  style: TypographyStyle,
+  variables?: Record<string, string>,
+): string {
   return Object.entries(style)
-    .map(([key, val]) => `${toKebabCase(key)}: ${val}`)
+    .map(([key, val]) => {
+      const cssKey = toKebabCase(key)
+      let cssValue = String(val)
+
+      if (key === 'fontFamily' && variables) {
+        if (cssValue.startsWith('var(')) {
+          return `${cssKey}:${cssValue}`
+        }
+        if (variables[cssValue]) {
+          cssValue = `var(--v-typography--${cssValue})`
+        }
+      }
+
+      return `${cssKey}:${cssValue}`
+    })
     .join('; ')
 }
 
@@ -129,27 +155,42 @@ function escapeClass (value: string) {
 }
 
 function genTypographyCss (
-  definitions: Record<TypographyVariant, TypographyStyle>,
-) {
-  const lines: string[] = [
+  definitions: Record<TypographyVariant, TypographyStyle | null>,
+  responsive = true,
+  variables?: Record<string, string>,
+): string {
+  const lines: string[] = []
+
+  if (variables && Object.keys(variables).length > 0) {
+    lines.push(genTypographyVariables(variables))
+  }
+
+  lines.push(
     '.v-typography{display:block;line-height:1.5;text-decoration:none;text-transform:none;margin:0;padding:0;}',
-  ]
+  )
 
   for (const [variant, style] of Object.entries(definitions)) {
+    if (!style) continue
     lines.push(
-      `.v-typography.${escapeClass(variant)}{${stringifyStyle(style as TypographyStyle)}}`,
+      `.v-typography.${escapeClass(variant)}{${stringifyStyle(style as TypographyStyle, variables)}}`,
     )
   }
 
-  for (const [breakpoint, width] of Object.entries(DISPLAY_MIN_WIDTH)) {
-    lines.push(`@media (min-width: ${width}px){`)
-    for (const [variant, style] of Object.entries(definitions)) {
-      const responsiveClass = `${breakpoint}:${variant}`
-      lines.push(
-        `.v-typography.${escapeClass(responsiveClass)}{${stringifyStyle(style as TypographyStyle)}}`,
-      )
+  if (responsive) {
+    for (const [breakpoint, width] of Object.entries(DISPLAY_MIN_WIDTH)) {
+      lines.push(`@media (min-width: ${width}px){`)
+      for (const [variant, style] of Object.entries(definitions)) {
+        if (!style) continue
+        const parts = (variant as string).split('-')
+        const name = parts[0]
+        const size = parts.slice(1).join('-')
+        const responsiveClass = `${name}-${breakpoint}-${size}`
+        lines.push(
+          `.v-typography.${escapeClass(responsiveClass)}{${stringifyStyle(style as TypographyStyle, variables)}}`,
+        )
+      }
+      lines.push('}')
     }
-    lines.push('}')
   }
 
   return lines.join('\n')
@@ -182,24 +223,57 @@ export const TypographySymbol: InjectionKey<TypographyInstance> =
   Symbol.for('vuetify:typography')
 
 export function createTypography (
-  config?: TypographyOptions,
-): TypographyInstance & { install: (app: App) => void } {
-  const styles = ref(
-    mergeDeep({ ...defaultTypography }, config ?? {}) as Record<
+  config?: TypographyOptions | false,
+): (TypographyInstance & { install: (app: App) => void }) | null {
+  if (config === false) {
+    return null
+  }
+
+  const options = config ?? {}
+  const shouldMerge = options.merge !== false
+  const responsive = options.responsive !== false
+  const variables = options.variables
+
+  let definitions: Record<TypographyVariant, TypographyStyle | null>
+
+  if (options.variants) {
+    if (shouldMerge) {
+      definitions = mergeDeep(
+        { ...defaultTypography },
+        options.variants,
+      ) as Record<TypographyVariant, TypographyStyle | null>
+    } else {
+      definitions = Object.fromEntries(
+        Object.keys(defaultTypography).map(variant => [
+          variant,
+          options.variants?.[variant as TypographyVariant] ?? null,
+        ]),
+      ) as Record<TypographyVariant, TypographyStyle | null>
+    }
+  } else {
+    definitions = { ...defaultTypography } as Record<
       TypographyVariant,
-      TypographyStyle
-    >,
+      TypographyStyle | null
+    >
+  }
+
+  const styles = ref(
+    Object.fromEntries(
+      Object.entries(definitions).filter(([, style]) => style !== null),
+    ) as Record<TypographyVariant, TypographyStyle>,
   )
-  const css = computed(() => genTypographyCss(styles.value))
+  const css = computed(() =>
+    genTypographyCss(definitions, responsive, variables),
+  )
 
   watchEffect(() => {
     upsertTypographyStyles(css.value)
   })
 
   const instance: TypographyInstance = {
-    styles,
+    styles: styles as Ref<Record<TypographyVariant, TypographyStyle>>,
     css,
-    getStyle: variant => styles.value[variant],
+    getStyle: variant => styles.value[variant] as TypographyStyle,
   }
 
   function install (app: App) {

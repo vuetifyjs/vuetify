@@ -7,20 +7,20 @@ import { createTypography } from '../typography'
 import { createVuetify } from '@/framework'
 
 describe('VTypography', () => {
-  const typographyInstance = createTypography({
-    'custom-variant': {
-      fontSize: '99px',
-      lineHeight: '100px',
-      fontWeight: 900,
-      letterSpacing: '1px',
-    },
-  })
-
   const vuetify = createVuetify({
     blueprint: {
       defaults: {},
     },
-    typography: typographyInstance.styles.value,
+    typography: {
+      variants: {
+        'custom-variant': {
+          fontSize: '99px',
+          lineHeight: '100px',
+          fontWeight: 900,
+          letterSpacing: '1px',
+        },
+      } as any,
+    },
   })
 
   it('should inject and use the default typography style', () => {
@@ -117,5 +117,107 @@ describe('VTypography', () => {
     expect(wrapper.classes()).toContain('body-medium')
     expect(wrapper.attributes('style')).toContain('font-size: 20px')
     expect(wrapper.attributes('style')).toContain('font-weight: bold')
+  })
+
+  it('should generate CSS variables for typography variables', () => {
+    const typographyInstance = createTypography({
+      variables: {
+        'body-family': 'Inter',
+        'heading-family': '"Open Sans", sans-serif',
+      },
+    })
+
+    expect(typographyInstance).toBeTruthy()
+    expect(typographyInstance!.css.value).toContain(':root{')
+    expect(typographyInstance!.css.value).toContain(
+      '--v-typography--body-family:Inter;',
+    )
+    expect(typographyInstance!.css.value).toContain(
+      '--v-typography--heading-family:"Open Sans", sans-serif;',
+    )
+  })
+
+  it('should use typography variables in fontFamily', () => {
+    const typographyInstance = createTypography({
+      variables: {
+        'body-family': 'Inter',
+      },
+      variants: {
+        'body-medium': {
+          fontSize: '14px',
+          lineHeight: '20px',
+          fontWeight: 400,
+          letterSpacing: '0.25px',
+          fontFamily: 'body-family',
+        },
+      },
+    })
+
+    expect(typographyInstance).toBeTruthy()
+    expect(typographyInstance!.css.value).toContain(
+      'font-family:var(--v-typography--body-family)',
+    )
+  })
+
+  it('should accept direct CSS variables in fontFamily', () => {
+    const typographyInstance = createTypography({
+      variants: {
+        'body-medium': {
+          fontSize: '14px',
+          lineHeight: '20px',
+          fontWeight: 400,
+          letterSpacing: '0.25px',
+          fontFamily: 'var(--my-custom-font)',
+        },
+      },
+    })
+
+    expect(typographyInstance).toBeTruthy()
+    expect(typographyInstance!.css.value).toContain(
+      'font-family:var(--my-custom-font)',
+    )
+  })
+
+  it('should support theme-linked variables', () => {
+    const typographyInstance = createTypography({
+      variables: {
+        'heading-family': 'var(--v-theme--heading-family)',
+        'body-family': 'var(--v-theme--body-family)',
+      },
+    })
+
+    expect(typographyInstance).toBeTruthy()
+    expect(typographyInstance!.css.value).toContain(
+      '--v-typography--heading-family:var(--v-theme--heading-family);',
+    )
+    expect(typographyInstance!.css.value).toContain(
+      '--v-typography--body-family:var(--v-theme--body-family);',
+    )
+  })
+
+  it('should work with responsive and merge options', () => {
+    const typographyInstance = createTypography({
+      variables: {
+        'body-family': 'Inter',
+      },
+      responsive: true,
+      merge: true,
+      variants: {
+        'body-medium': {
+          fontSize: '14px',
+          lineHeight: '20px',
+          fontWeight: 400,
+          letterSpacing: '0.25px',
+          fontFamily: 'body-family',
+        },
+      },
+    })
+
+    expect(typographyInstance).toBeTruthy()
+    expect(typographyInstance!.css.value).toContain(':root{')
+    expect(typographyInstance!.css.value).toContain('@media (min-width:')
+    expect(typographyInstance!.css.value).toContain(
+      'font-family:var(--v-typography--body-family)',
+    )
   })
 })

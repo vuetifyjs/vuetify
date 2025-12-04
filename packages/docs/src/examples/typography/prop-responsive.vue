@@ -1,31 +1,27 @@
 <template>
   <div class="d-flex flex-column gap-4">
     <VTypography
-      variant="display-large"
+      variant="headline-large"
+      sm="display-large"
       color="primary"
     >
-      Display Large
+      Responsive Text (sm)
     </VTypography>
 
     <VTypography
-      variant="headline-large"
+      variant="body-large"
+      md="headline-large"
       color="secondary"
     >
-      Headline Large
+      Responsive Text (md)
     </VTypography>
 
     <VTypography
-      variant="body-medium"
+      variant="body-small"
+      lg="body-large"
       color="error"
     >
-      Body Medium
-    </VTypography>
-
-    <VTypography
-      variant="label-small"
-      color="success"
-    >
-      Label Small
+      Responsive Text (lg)
     </VTypography>
   </div>
 </template>
@@ -33,3 +29,4 @@
 <script setup>
 //
 </script>
+

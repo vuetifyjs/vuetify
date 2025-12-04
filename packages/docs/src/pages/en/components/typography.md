@@ -27,16 +27,16 @@ The VTypography component provides a way to display text with different styles a
 
 The component supports different text variants from Material Design.
 
-<Example file="typography/variants" />
+<Example file="typography/prop-variants" />
 
 #### Responsive
 
-You can specify different text styles for mobile devices.
+You can specify different text styles for different breakpoints using responsive props.
 
-<Example file="typography/responsive" />
+<Example file="typography/prop-responsive" />
 
 #### Colors
 
 Apply different colors to your text.
 
-<Example file="typography/colors" />
+<Example file="typography/prop-colors" />

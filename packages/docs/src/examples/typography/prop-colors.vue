@@ -19,8 +19,6 @@
 </template>
 
 <script setup>
-import { VTypography } from 'vuetify/components'
-
 const colors = [
   'primary',
   'secondary',
@@ -30,3 +28,4 @@ const colors = [
   'info',
 ]
 </script>
+

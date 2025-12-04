@@ -1,37 +1,7 @@
-// Composables
-import { defaultTypography } from '@/composables/typography'
-
 // Utilities
 import { mount } from '@vue/test-utils'
 import { createVuetify } from '../../../framework'
-import { parseTypographyVariant, VTypography } from '../VTypography'
-
-describe('parseTypographyVariant', () => {
-  const available = defaultTypography as Record<string, any>
-
-  it('falls back to default variant when only responsive tokens are provided', () => {
-    const result = parseTypographyVariant(
-      'lg:headline-large',
-      available,
-      'body-medium',
-    )
-
-    expect(result.base).toBe('body-medium')
-    expect(result.classes).toContain('body-medium')
-    expect(result.classes).toContain('lg:headline-large')
-  })
-
-  it('uses the last unprefixed token as base variant', () => {
-    const result = parseTypographyVariant(
-      'body-small body-large',
-      available,
-      'body-medium',
-    )
-
-    expect(result.base).toBe('body-large')
-    expect(result.classes).toContain('body-large')
-  })
-})
+import { VTypography } from '../VTypography'
 
 describe('VTypography', () => {
   const vuetify = createVuetify()
@@ -57,15 +27,17 @@ describe('VTypography', () => {
         plugins: [vuetify],
       },
       props: {
-        variant: 'body-small lg:body-large xl:headline-medium',
+        variant: 'body-small',
+        lg: 'body-large',
+        xl: 'headline-medium',
       },
     })
 
     expect(wrapper.classes()).toEqual(
       expect.arrayContaining([
         'body-small',
-        'lg:body-large',
-        'xl:headline-medium',
+        'body-lg-large',
+        'headline-xl-medium',
       ]),
     )
   })

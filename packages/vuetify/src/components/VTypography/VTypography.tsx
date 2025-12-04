@@ -5,7 +5,6 @@ import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import {
   TYPOGRAPHY_BREAKPOINTS,
-
   useTypography,
 } from '@/composables/typography'
 
@@ -15,9 +14,8 @@ import { consoleWarn, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import type { TypographyBreakpoint, TypographyStyle, TypographyVariant } from '@/composables/typography'
+import type { TypographyStyle, TypographyVariant } from '@/composables/typography'
 
-const RESPONSIVE_BREAKPOINT_SET = new Set(TYPOGRAPHY_BREAKPOINTS)
 const DEFAULT_VARIANT: TypographyVariant = 'body-medium'
 
 function isTypographyVariant (
@@ -27,56 +25,16 @@ function isTypographyVariant (
   return value in available
 }
 
-function isResponsiveBreakpoint (value: string): value is TypographyBreakpoint {
-  return RESPONSIVE_BREAKPOINT_SET.has(value as TypographyBreakpoint)
-}
-
-export function parseTypographyVariant (
-  value: string | undefined,
-  available: Record<string, TypographyStyle>,
-  fallback: TypographyVariant,
-) {
-  const tokens = (value ?? '').split(/\s+/).filter(Boolean)
-  const classes = new Set<string>()
-  let baseVariant = fallback
-
-  for (const token of tokens) {
-    const [maybeBreakpoint, variantCandidate] = token.split(':')
-
-    if (variantCandidate && isResponsiveBreakpoint(maybeBreakpoint)) {
-      if (!isTypographyVariant(variantCandidate, available)) {
-        consoleWarn(`Unknown typography variant "${variantCandidate}"`)
-        continue
-      }
-
-      classes.add(`${maybeBreakpoint}:${variantCandidate}`)
-      continue
-    }
-
-    if (!isTypographyVariant(token, available)) {
-      consoleWarn(`Unknown typography variant "${token}"`)
-      continue
-    }
-
-    baseVariant = token
-    classes.add(baseVariant)
-  }
-
-  if (!classes.size || !classes.has(baseVariant)) {
-    classes.add(baseVariant)
-  }
-
-  return {
-    base: baseVariant,
-    classes: Array.from(classes),
-  }
-}
-
 export const makeVTypographyProps = propsFactory({
   variant: {
     type: String,
     default: DEFAULT_VARIANT,
   },
+  sm: String,
+  md: String,
+  lg: String,
+  xl: String,
+  xxl: String,
   customVariant: {
     type: Object as PropType<Partial<CSSStyleDeclaration>>,
     default: undefined,
@@ -98,11 +56,34 @@ export const VTypography = genericComponent()({
     const { textColorClasses, textColorStyles } = useTextColor(() => props.color)
     const typography = useTypography()
 
-    const parsedVariant = computed(() => parseTypographyVariant(
-      props.variant,
-      typography.styles.value,
-      DEFAULT_VARIANT,
-    ))
+    const classes = computed(() => {
+      const classList: string[] = ['v-typography']
+      const available = typography.styles.value
+
+      const baseVariant = props.variant || DEFAULT_VARIANT
+      if (isTypographyVariant(baseVariant, available)) {
+        classList.push(baseVariant)
+      } else {
+        consoleWarn(`Unknown typography variant "${baseVariant}"`)
+        classList.push(DEFAULT_VARIANT)
+      }
+
+      for (const breakpoint of TYPOGRAPHY_BREAKPOINTS) {
+        const responsiveVariant = props[breakpoint]
+        if (responsiveVariant) {
+          if (isTypographyVariant(responsiveVariant, available)) {
+            const parts = responsiveVariant.split('-')
+            const name = parts[0]
+            const size = parts.slice(1).join('-')
+            classList.push(`${name}-${breakpoint}-${size}`)
+          } else {
+            consoleWarn(`Unknown typography variant "${responsiveVariant}" for breakpoint "${breakpoint}"`)
+          }
+        }
+      }
+
+      return classList
+    })
 
     const currentStyle = computed(() => {
       return {
@@ -119,10 +100,9 @@ export const VTypography = genericComponent()({
     useRender(() => (
       <props.tag
         class={[
-          'v-typography',
+          ...classes.value,
           themeClasses.value,
           textColorClasses.value,
-          ...parsedVariant.value.classes,
           props.class,
         ]}
         style={[
