@@ -35,7 +35,7 @@ describe('VTypography', () => {
 
     expect(wrapper.text()).toBe('Test text')
     expect(wrapper.classes()).toContain('v-typography')
-    expect(wrapper.attributes('style')).toContain('font-size')
+    expect(wrapper.classes()).toContain('body-medium')
   })
 
   it('should render with a custom variant', () => {
@@ -52,8 +52,8 @@ describe('VTypography', () => {
     })
 
     expect(wrapper.text()).toBe('Custom Style')
-    expect(wrapper.attributes('style')).toContain('font-size: 99px')
-    expect(wrapper.attributes('style')).toContain('line-height: 100px')
+    expect(wrapper.classes()).toContain('v-typography')
+    expect(wrapper.classes()).toContain('custom-variant')
   })
 
   it('should apply color class and style', () => {
@@ -90,5 +90,29 @@ describe('VTypography', () => {
 
     expect(wrapper.element.tagName.toLowerCase()).toBe('h2')
     expect(wrapper.text()).toBe('Heading')
+  })
+
+  it('should apply customVariant styles inline', () => {
+    const wrapper = mount(VTypography, {
+      global: {
+        plugins: [vuetify],
+      },
+      props: {
+        variant: 'body-medium',
+        customVariant: {
+          fontSize: '20px',
+          fontWeight: 'bold',
+        },
+      },
+      slots: {
+        default: () => 'Custom Style',
+      },
+    })
+
+    expect(wrapper.text()).toBe('Custom Style')
+    expect(wrapper.classes()).toContain('v-typography')
+    expect(wrapper.classes()).toContain('body-medium')
+    expect(wrapper.attributes('style')).toContain('font-size: 20px')
+    expect(wrapper.attributes('style')).toContain('font-weight: bold')
   })
 })
