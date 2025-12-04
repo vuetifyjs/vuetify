@@ -2,7 +2,7 @@
 import { VList, VListItem } from '..'
 
 // Utilities
-import { generate, render, screen, userEvent } from '@test'
+import { render, screen, showcase, userEvent } from '@test'
 import { ref } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
@@ -153,7 +153,5 @@ describe('VList', () => {
     expect(selectedItem.value).toEqual([items[1]])
   })
 
-  describe('Showcase', () => {
-    generate({ stories })
-  })
+  showcase({ stories })
 })

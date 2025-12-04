@@ -3,7 +3,7 @@ import { VRating } from '../VRating'
 import { VBtn } from '@/components/VBtn'
 
 // Utilities
-import { click, generate, render, screen, userEvent } from '@test'
+import { click, render, screen, showcase, userEvent } from '@test'
 import { nextTick, ref } from 'vue'
 
 const stories = {
@@ -169,7 +169,5 @@ describe('VRating', () => {
     expect(model.value).toBe(2)
   })
 
-  describe('Showcase', () => {
-    generate({ stories })
-  })
+  showcase({ stories })
 })
