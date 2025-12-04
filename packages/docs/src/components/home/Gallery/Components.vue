@@ -114,7 +114,9 @@
                     nav
                     slim
                   >
-                    <v-list-subheader>Application</v-list-subheader>
+                    <v-list-subheader v-if="!selectedComponent.hasRailsDrawer">
+                      Application
+                    </v-list-subheader>
 
                     <v-list-item
                       v-for="(item, i) in components"

@@ -1,5 +1,7 @@
 <template>
   <v-responsive class="py-15">
+    <HomeCommonGradient opacity-class="opacity-10" />
+
     <v-container>
       <HomeCommonTitle
         class="mb-10"

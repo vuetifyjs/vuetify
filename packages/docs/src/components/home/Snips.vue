@@ -1,5 +1,7 @@
 <template>
   <v-img position="top" src="https://vuetifyjs.b-cdn.net/docs/images/one/snips/hero.svg">
+    <HomeCommonGradient color="primary" opacity-class="opacity-10" />
+
     <v-container class="text-center text-md-left py-16">
       <v-row align="center">
         <v-col cols="12" md="6">
@@ -49,10 +51,12 @@
 
         </v-col>
 
-        <v-col class="mb-n16" cols="12" md="6">
-          <v-responsive max-height="500">
-            <SnipsExample />
-          </v-responsive>
+        <v-col class="mb-n16 d-none d-md-block" cols="12" md="6">
+          <div class="fade-gradient">
+            <v-responsive max-height="500">
+              <SnipsExample />
+            </v-responsive>
+          </div>
         </v-col>
       </v-row>
     </v-container>
@@ -63,3 +67,21 @@
   import SnipsExample from './SnipsExample.vue'
   const src = computed(() => `https://cdn.vuetifyjs.com/docs/images/one/logos/vsnips.png`)
 </script>
+
+<style scoped>
+.fade-gradient {
+  position: relative;
+  height: 100%;
+  pointer-events: none;
+}
+
+.fade-gradient::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 50%;
+  background: linear-gradient(to bottom, transparent, rgb(var(--v-theme-background)));
+}
+</style>

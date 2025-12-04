@@ -1,6 +1,6 @@
 <template>
   <v-container class="pa-md-6" fluid>
-    <v-row dense>
+    <v-row>
       <v-col
         v-for="(item, i) in items"
         :key="i"
@@ -8,48 +8,38 @@
         md="6"
         sm="6"
       >
-        <v-hover v-slot="{ isHovering, props: hoverProps }">
-          <v-card
-            class="mx-auto pa-2"
-            elevation="2"
-            rounded="lg"
-            variant="elevated"
-            v-bind="hoverProps"
-          >
-            <v-img
-              :aspect-ratio="16/9"
-              :src="item.image"
-              class="cursor-pointer"
-              block
-              cover
-            >
-              <div class="fill-height d-flex align-center justify-center">
-                <v-fade-transition>
-                  <div v-if="isHovering" class="fill-height w-100 d-flex align-top justify-end pa-2">
-                    <v-btn
-                      :ripple="false"
-                      class="text-none"
-                      color="white"
-                      icon="mdi-eye"
-                      size="small"
-                      variant="tonal"
-                    />
-                  </div>
-                </v-fade-transition>
-              </div>
-            </v-img>
+        <v-card
+          class="mx-auto"
+          elevation="2"
+          rounded="lg"
+          v-bind="hoverProps"
+        >
+          <v-img
+            :aspect-ratio="16/7"
+            :src="item.image"
+            class="cursor-pointer ma-2 mb-0 rounded-lg"
+            cover
+          />
 
-            <div class="d-flex justify-space-between mt-3 align-center">
+          <div class="pt-1 pa-3">
+            <div class="d-flex justify-space-between align-center">
               <span class="text-body-1 font-weight-bold text-truncate">{{ item.title }}</span>
-              <span class="text-medium-emphasis text-caption">{{ item.createdAt }}</span>
+
+              <v-btn
+                color="grey"
+                icon="mdi-heart"
+                size="x-small"
+                variant="text"
+              />
             </div>
 
-            <div class="d-flex align-center ga-2 mt-1">
-              <v-avatar :image="item.avatar" size="24" />
-              <span class="text-medium-emphasis text-caption">Published by {{ item.creator }}</span>
+            <div class="d-flex align-center ga-1 text-caption text-medium-emphasis">
+              <v-icon icon="mdi-calendar-blank-outline" size="small" />
+              {{ item.createdAt }}
             </div>
-          </v-card>
-        </v-hover>
+
+          </div>
+        </v-card>
       </v-col>
     </v-row>
   </v-container>
@@ -60,58 +50,46 @@
     {
       title: 'Misty Mountains',
       image: 'https://images.unsplash.com/photo-1485470733090-0aae1788d5af',
-      creator: 'John Leider',
-      avatar: 'https://randomuser.me/api/portraits/men/27.jpg',
-      createdAt: '2024-01-15',
+      createdAt: '1st Dec 2025',
     },
     {
       title: 'Lake Reflection',
       image: 'https://images.unsplash.com/photo-1475070929565-c985b496cb9f',
-      creator: 'Hayden Brown',
-      avatar: 'https://randomuser.me/api/portraits/women/74.jpg',
-      createdAt: '2024-02-10',
+      createdAt: '2nd Dec 2025',
     },
     {
       title: 'Forest Sunrise',
       image: 'https://images.unsplash.com/photo-1513836279014-a89f7a76ae86',
-      creator: 'Mo Hassan',
-      avatar: 'https://randomuser.me/api/portraits/men/68.jpg',
-      createdAt: '2024-03-15',
+      createdAt: '3rd Dec 2025',
     },
     {
       title: 'Mountain Vista',
       image: 'https://images.unsplash.com/photo-1519681393784-d120267933ba',
-      creator: 'Sara Johnson',
-      avatar: 'https://randomuser.me/api/portraits/women/71.jpg',
-      createdAt: '2024-04-20',
+      createdAt: '4th Dec 2025',
     },
     {
       title: 'Lava Dripping',
       image: 'https://images.unsplash.com/photo-1475598322381-f1b499717dda',
-      creator: 'Matt Barrie',
-      avatar: 'https://randomuser.me/api/portraits/men/89.jpg',
-      createdAt: '2024-04-20',
+      createdAt: '5th Dec 2025',
     },
     {
       title: 'Lightning Storm',
       image: 'https://images.unsplash.com/photo-1431440869543-efaf3388c585',
-      creator: 'Emily Davis',
-      avatar: 'https://randomuser.me/api/portraits/women/4.jpg',
-      createdAt: '2024-04-20',
+      createdAt: '6th Dec 2025',
     },
     {
       title: 'Rock Monolith',
       image: 'https://images.unsplash.com/photo-1496347646636-ea47f7d6b37b',
       creator: 'Natalie Smith',
       avatar: 'https://randomuser.me/api/portraits/women/24.jpg',
-      createdAt: '2024-04-20',
+      createdAt: '7th Dec 2025',
     },
     {
       title: 'Northern Lights',
       image: 'https://images.unsplash.com/photo-1491466424936-e304919aada7',
       creator: 'Jason Doe',
       avatar: 'https://randomuser.me/api/portraits/men/64.jpg',
-      createdAt: '2024-04-20',
+      createdAt: '8th Dec 2025',
     },
   ]
 </script>

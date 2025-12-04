@@ -24,6 +24,8 @@ meta:
 
 <HomeVuetifyOne />
 
+<v-divider  />
+
 <HomeTooling />
 
 <v-divider />

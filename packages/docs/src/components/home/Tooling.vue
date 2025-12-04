@@ -31,7 +31,7 @@
                 <tr v-bind="hoverProps">
                   <td>
                     <div class="d-flex align-center ga-3 py-2">
-                      <v-avatar :color="item.color" rounded="lg" variant="tonal">
+                      <v-avatar :color="item.color" rounded="xl" variant="tonal">
                         <v-icon :icon="item.icon" />
                       </v-avatar>
 

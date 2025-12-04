@@ -1,6 +1,8 @@
 <template>
   <v-responsive class="pb-16">
-    <HomeCommonGradient color="red-lighten-2" opacity-class="opacity-10" position="center" />
+    <HomeCommonGradient opacity-class="opacity-10" />
+
+    <HomeCommonGradient opacity-class="opacity-40" position="center" />
 
     <v-container class="pt-10">
 

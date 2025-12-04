@@ -4,9 +4,8 @@
       <v-col
         v-for="(item, i) in statItems"
         :key="i"
-        cols="12"
+        cols="6"
         md="3"
-        sm="6"
       >
         <v-list
           elevation="0"

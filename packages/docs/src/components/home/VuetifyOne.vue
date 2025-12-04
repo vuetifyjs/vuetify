@@ -1,6 +1,6 @@
 <template>
   <v-responsive class="py-10">
-    <HomeCommonGradient color="primary" opacity-class="opacity-10" />
+    <HomeCommonGradient opacity-class="opacity-10" />
 
     <v-container>
       <HomeCommonTitle
