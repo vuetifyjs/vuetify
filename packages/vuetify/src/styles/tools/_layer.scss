@@ -1,13 +1,9 @@
 @use '../settings';
 
 @mixin layer ($name) {
-  @if (settings.$layers) {
-    @at-root (without: layer) {
-      @layer vuetify.#{$name} {
-        @content;
-      }
+  @at-root (without: layer) {
+    @layer vuetify.#{$name} {
+      @content;
     }
-  } @else {
-    @content;
   }
 }
