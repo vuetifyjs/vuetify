@@ -358,7 +358,7 @@ describe('VCommandPalette', () => {
       expect(listbox).toHaveAttribute('aria-activedescendant')
 
       const options = screen.getAllByRole('option')
-      expect(options.length).toBe(4) // 4 action items, not divider/subheader
+      expect(options).toHaveLength(4) // 4 action items, not divider/subheader
       options.forEach(option => {
         expect(option).toHaveAttribute('aria-selected')
       })
