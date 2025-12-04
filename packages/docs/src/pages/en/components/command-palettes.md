@@ -27,7 +27,7 @@ This feature was introduced as a labs component and is available for testing and
 
 ## Usage
 
-The command palette displays a searchable list of commands in a dialog. Users can type to filter items and press Enter or click to execute commands. Use the **items** prop to provide commands and the **v-model** to control visibility.
+The command palette displays a searchable list of commands in a dialog. Users can type to filter items and press Enter or click to execute commands.
 
 <ExamplesUsage name="v-command-palette" />
 
@@ -42,35 +42,25 @@ The command palette displays a searchable list of commands in a dialog. Users ca
 
 <ApiInline hide-links />
 
-## Guide
+## Examples
 
-The `v-command-palette` component is designed to provide a fast, keyboard-driven interface for executing commands and navigating your application. It's built on top of `v-dialog` and provides keyboard navigation, search filtering, and customizable hotkeys.
-
-### Props
-
-The component provides several props to customize the command palette's behavior and appearance.
+Below is a collection of simple to complex examples.
 
 #### Items
 
-The **items** prop accepts an array of command palette items. Items support three types via a discriminated union:
-
-- **Action items**: Interactive commands with optional icons, subtitles, navigation, and hotkeys
-- **Subheaders**: Section labels to organize commands
-- **Dividers**: Visual separators between command groups
-
-Action items can include properties like `title`, `subtitle`, `prependIcon`, `appendIcon`, `value`, `onClick`, `to`, `href`, and `hotkey`.
+The **items** prop accepts an array of command palette items. Items support action items (interactive commands), subheaders (section labels), and dividers (visual separators).
 
 <ExamplesExample file="v-command-palette/prop-items" />
 
-#### Global Hotkey
+#### Hotkey
 
-Use the **hotkey** prop to register a global keyboard shortcut that toggles the command palette. The shortcut is automatically registered when the component mounts and unregistered when it's destroyed. Individual items can also have their own **hotkey** property for quick access to specific commands.
+Use the **hotkey** prop to register a global keyboard shortcut that toggles the command palette. Individual items can also have their own **hotkey** property for quick access.
 
 <ExamplesExample file="v-command-palette/prop-hotkey" />
 
-#### Dialog Configuration
+#### Dialog configuration
 
-The command palette is built on `v-dialog` and supports dialog-related props. Use **location** to control positioning, **activator** for activation patterns, and **dialog-props** to pass additional props to the underlying dialog component.
+The command palette is built on `v-dialog` and supports dialog-related props. Use **location** to control positioning, **activator** for activation patterns, and **dialog-props** to pass additional props.
 
 <ExamplesExample file="v-command-palette/prop-dialog" />
 
@@ -80,42 +70,7 @@ The search input automatically filters items based on their **title** and **subt
 
 The **placeholder** prop customizes the search input's placeholder text, while **no-data-text** customizes the message shown when no items match the search query.
 
-### Slots
-
-The component provides slots for customizing the command palette's layout.
-
-#### Prepend
-
-The **prepend** slot renders content above the search input, inside the command palette card. Use this for headers, instructions, or custom UI elements.
-
-#### Append
-
-The **append** slot renders content below the items list. Use this for footers, help text, or additional actions.
-
-#### No-data
-
-The **no-data** slot provides custom content when no items match the search query, replacing the default no-data message.
-
-### Events
-
-The component emits several events for tracking state and user interactions.
-
-#### click:item
-
-Emitted when a user clicks or activates a command (via Enter key). The event payload includes the selected item and the triggering event. The palette automatically closes after this event unless prevented.
-
-```vue
-<v-command-palette
-  :items="items"
-  @click:item="handleCommand"
-/>
-```
-
-#### update:modelValue and update:search
-
-Use `v-model` to control dialog visibility and `v-model:search` to monitor or control the search query.
-
-### Keyboard Navigation
+### Keyboard navigation
 
 The command palette supports full keyboard navigation:
 
@@ -206,4 +161,5 @@ The `v-command-palette` component follows accessibility best practices:
 - Maintains focus within the dialog while open
 - Returns focus to the previously focused element on close
 - Supports full keyboard navigation without mouse interaction
+
 

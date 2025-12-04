@@ -35,7 +35,7 @@
 
       <v-text-field
         v-model="hotkey"
-        hint="Try 'meta+k' or 'ctrl+shift+p'"
+        hint="Try 'ctrl+shift+p' or 'meta+j'"
         label="Global Hotkey"
         persistent-hint
       ></v-text-field>
@@ -51,7 +51,7 @@
   const snackbar = ref(false)
   const selectedItem = ref('')
   const placeholder = ref('Search commands...')
-  const hotkey = ref('meta+k')
+  const hotkey = ref('ctrl+shift+p')
   const options = []
 
   const items = [

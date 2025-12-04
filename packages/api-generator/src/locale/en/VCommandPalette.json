@@ -1,26 +1,23 @@
 {
   "props": {
-    "modelValue": "Controls the visibility state of the command palette dialog. When `true`, the palette is open; when `false`, it's closed.",
-    "search": "The current search query string. Can be used with `v-model:search` to control or monitor the search input value.",
-    "items": "Array of command palette items to display. Supports three item types via discriminated union: action items (with `type: 'item'` or no type), subheaders (with `type: 'subheader'`), and dividers (with `type: 'divider'`). Action items can include properties like `title`, `subtitle`, `prependIcon`, `appendIcon`, `hotkey`, `onClick`, `to`, and `href` for navigation and interaction.",
-    "filterKeys": "Array of item property keys to use when filtering items by the search query. By default filters on `['title', 'subtitle']`. Can be customized to search additional fields.",
-    "filterMode": "Controls the filtering algorithm used for search. Accepts standard filter modes for matching behavior.",
-    "placeholder": "Placeholder text displayed in the search input field. Defaults to the locale string for command search.",
-    "hotkey": "Global keyboard shortcut to toggle the command palette. Accepts hotkey strings like `'meta+k'` or `'ctrl+shift+p'`. The shortcut is automatically registered and unregistered based on component lifecycle.",
-    "noDataText": "Text displayed when no items match the current search query. Defaults to the standard `$vuetify.noDataText` locale string.",
-    "location": "Controls the position of the dialog on screen. Inherits from `v-dialog`'s location prop, supporting values like `'top'`, `'bottom'`, `'start'`, `'end'`, and combinations.",
-    "activator": "Designates a component to act as the activator for the command palette. Can be set to `'parent'` to use the parent element, or accepts other activator configurations from `v-dialog`.",
-    "dialogProps": "Object containing additional props to pass through to the underlying `v-dialog` component. Useful for customizing dialog behavior like `persistent`, `fullscreen`, `scrollable`, etc."
+    "modelValue": "Controls the visibility of the command palette dialog. Use `v-model` for two-way binding.",
+    "search": "The current search query. Use `v-model:search` to control or monitor the search input value.",
+    "items": "Array of command palette items. Objects should have **title** and optionally **subtitle**, **prependIcon**, **appendIcon**, **prependAvatar**, **appendAvatar**, **hotkey**, **onClick**, **to**, **href**, and **value** properties. Use `type: 'subheader'` with a **title** for section headers, or `type: 'divider'` for visual separators between groups.",
+    "hotkey": "Global keyboard shortcut to toggle the palette. Accepts hotkey strings like `'ctrl+shift+p'` or `'meta+j'`. The shortcut is automatically registered on mount and cleaned up on unmount.",
+    "placeholder": "Placeholder text displayed in the search input. Defaults to the `$vuetify.command.search` locale string.",
+    "noDataText": "Text displayed when no items match the current search query. Defaults to `$vuetify.noDataText`.",
+    "location": "Controls the position of the dialog. Supports values like `'top'`, `'bottom'`, `'center'` and combinations. Passed to the underlying **v-dialog**.",
+    "activator": "Element to use as the activator. Set to `'parent'` to use the parent element, or provide a CSS selector or element reference. Passed to the underlying **v-dialog**.",
+    "dialogProps": "Additional props to pass through to the underlying **v-dialog** component. Useful for customizing behavior like `persistent`, `fullscreen`, `width`, `maxWidth`, etc."
   },
   "events": {
-    "update:modelValue": "Emitted when the dialog visibility state changes. Event payload is a boolean indicating the new open/closed state.",
-    "update:search": "Emitted when the search query changes. Event payload is the new search string value.",
-    "click:item": "Emitted when a command palette item is clicked or activated via keyboard (Enter key). Event payload includes the clicked item object and the triggering event (MouseEvent or KeyboardEvent). The palette automatically closes after this event unless prevented."
+    "update:modelValue": "Emitted when the dialog visibility changes.",
+    "update:search": "Emitted when the search query changes.",
+    "click:item": "Emitted when an item is clicked or activated via Enter key. The payload includes the selected item object and the triggering event (MouseEvent or KeyboardEvent). The palette automatically closes after this event."
   },
   "slots": {
-    "prepend": "Content to display above the search input, inside the command palette card. Useful for headers, instructions, or custom UI elements.",
-    "append": "Content to display below the items list, inside the command palette card. Useful for footers, help text, or additional actions.",
+    "prepend": "Content to render above the search input, inside the command palette card. Useful for headers, breadcrumbs, or instructions.",
+    "append": "Content to render below the items list, inside the command palette card. Useful for footers, keyboard shortcut hints, or additional actions.",
     "no-data": "Custom content to display when no items match the search query. Replaces the default no-data message."
   }
 }
-

@@ -6,7 +6,7 @@
       variant="tonal"
     >
       <div class="d-flex align-center justify-space-between">
-        <span>Press <v-hotkey keys="meta+k" inline></v-hotkey> to open the command palette</span>
+        <span>Press <v-hotkey keys="ctrl+shift+p" inline></v-hotkey> to open the command palette</span>
       </div>
     </v-alert>
 
@@ -14,7 +14,7 @@
       v-model="dialog"
       v-model:search="search"
       :items="items"
-      hotkey="meta+k"
+      hotkey="ctrl+shift+p"
       placeholder="Type a command or search..."
       @click:item="handleItemClick"
     ></v-command-palette>

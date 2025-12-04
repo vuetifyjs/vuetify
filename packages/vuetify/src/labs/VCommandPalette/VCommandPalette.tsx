@@ -8,7 +8,7 @@ import { VTextField } from '@/components/VTextField'
 import { provideCommandPaletteContext } from './composables/useCommandPaletteContext'
 import { useCommandPaletteNavigation } from './composables/useCommandPaletteNavigation'
 import { makeDensityProps, useDensity } from '@/composables/density'
-import { makeFilterProps } from '@/composables/filter'
+import { makeFilterProps, useFilter } from '@/composables/filter'
 import { useHotkey } from '@/composables/hotkey'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
@@ -66,19 +66,13 @@ export const VCommandPalette = genericComponent()({
     const dialogRef = ref<InstanceType<typeof VDialog>>()
     const previouslyFocusedElement = shallowRef<HTMLElement | null>(null)
 
-    const filteredItems = computed(() => {
-      if (!searchQuery.value || !searchQuery.value.trim()) {
-        return props.items
-      }
+    const internalItems = computed(() =>
+      props.items.map((item, index) => ({ value: index, raw: item }))
+    )
 
-      const query = searchQuery.value.toLowerCase()
+    const { filteredItems: filterResult } = useFilter(props, internalItems, searchQuery)
 
-      return props.items.filter(item => {
-        const titleMatch = 'title' in item && item.title && String(item.title).toLowerCase().includes(query)
-        const subtitleMatch = 'subtitle' in item && item.subtitle && String(item.subtitle).toLowerCase().includes(query)
-        return titleMatch || subtitleMatch
-      })
-    })
+    const filteredItems = computed(() => filterResult.value.map(item => item.raw))
 
     const itemsForList = computed(() => {
       return filteredItems.value.map((item, idx) => ({
