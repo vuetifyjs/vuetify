@@ -3,7 +3,7 @@
     <VTypography
       v-for="variant in variants"
       :key="variant"
-      :text="variant"
+      :variant="variant"
     >
       {{ variant }}
     </VTypography>

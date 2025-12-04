@@ -3,14 +3,14 @@
     <VTypography
       v-for="color in colors"
       :key="color"
-      text="body-large"
+      variant="body-large"
       :color="color"
     >
       Text in {{ color }} color
     </VTypography>
 
     <VTypography
-      text="body-large"
+      variant="body-large"
       color="#FF9800"
     >
       Custom color (hex)

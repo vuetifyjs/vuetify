@@ -13,7 +13,7 @@ import { createLocale, LocaleSymbol } from "@/composables/locale";
 import { createTheme, ThemeSymbol } from "@/composables/theme";
 import {
   createTypography,
-  TypographyConfig,
+  TypographyOptions,
   TypographySymbol,
 } from "@/composables/typography";
 // Utilities

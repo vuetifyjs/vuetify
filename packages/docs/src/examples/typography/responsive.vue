@@ -1,27 +1,21 @@
 <template>
   <div class="d-flex flex-column gap-4">
     <VTypography
-      text="display-large"
-      mobile="headline-large"
-      mobileBreakpoint="sm"
+      variant="headline-large sm:display-large"
       color="primary"
     >
       Responsive Text (sm)
     </VTypography>
 
     <VTypography
-      text="headline-large"
-      mobile="body-large"
-      mobileBreakpoint="md"
+      variant="body-large md:headline-large"
       color="secondary"
     >
       Responsive Text (md)
     </VTypography>
 
     <VTypography
-      text="body-large"
-      mobile="body-small"
-      mobileBreakpoint="lg"
+      variant="body-small lg:body-large"
       color="error"
     >
       Responsive Text (lg)
