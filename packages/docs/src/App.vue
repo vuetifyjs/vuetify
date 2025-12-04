@@ -169,6 +169,11 @@
   a:not(:hover)
     text-decoration: none
 
+  h1 + p
+    font-size: 1.25rem
+    font-weight: 300
+    margin-top: 0
+
   p :is(a, a:visited)
     color: rgb(var(--v-theme-primary))
 
