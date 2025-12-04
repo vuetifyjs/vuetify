@@ -1,18 +1,21 @@
-import { computed } from 'vue'
-import type { PropType } from 'vue'
-
+// Composables
 import { useTextColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { genericComponent, propsFactory, useRender, consoleWarn } from '@/util'
 import {
-  useTypography,
-  type TypographyVariant,
-  type TypographyStyle,
   TYPOGRAPHY_BREAKPOINTS,
-  type TypographyBreakpoint,
+
+  useTypography,
 } from '@/composables/typography'
+
+// Utilities
+import { computed } from 'vue'
+import { consoleWarn, genericComponent, propsFactory, useRender } from '@/util'
+
+// Types
+import type { PropType } from 'vue'
+import type { TypographyBreakpoint, TypographyStyle, TypographyVariant } from '@/composables/typography'
 
 const RESPONSIVE_BREAKPOINT_SET = new Set(TYPOGRAPHY_BREAKPOINTS)
 const DEFAULT_VARIANT: TypographyVariant = 'body-medium'
@@ -59,9 +62,7 @@ export function parseTypographyVariant (
     classes.add(baseVariant)
   }
 
-  if (!classes.size) {
-    classes.add(baseVariant)
-  } else if (!classes.has(baseVariant)) {
+  if (!classes.size || !classes.has(baseVariant)) {
     classes.add(baseVariant)
   }
 

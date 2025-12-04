@@ -1,7 +1,10 @@
-import { mount } from '@vue/test-utils'
-import { createVuetify } from '@/framework'
-import { createTypography } from '../typography'
+// Components
 import { VTypography } from '@/components/VTypography/VTypography'
+
+// Utilities
+import { mount } from '@vue/test-utils'
+import { createTypography } from '../typography'
+import { createVuetify } from '@/framework'
 
 describe('VTypography', () => {
   const typographyInstance = createTypography({
