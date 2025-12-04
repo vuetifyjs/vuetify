@@ -12,6 +12,7 @@
 
       <v-text-field
         v-model="searchTerm"
+        autocomplete="off"
         bg-color="surface-light"
         class="mt-5"
         placeholder="Search"

@@ -30,6 +30,7 @@
       <template #text>
         <v-text-field
           v-model="search"
+          autocomplete="off"
           placeholder="Search"
           prepend-inner-icon="mdi-magnify"
           variant="outlined"
