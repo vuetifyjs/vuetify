@@ -1,0 +1,18 @@
+@use '../../styles/tools';
+
+@include tools.layer('components') {
+  .v-command-palette {
+    &__list {
+      overflow-y: auto;
+
+      .v-list-subheader {
+        opacity: 0.7;
+        user-select: none;
+      }
+
+      .v-divider {
+        margin-block: 4px;
+      }
+    }
+  }
+}
