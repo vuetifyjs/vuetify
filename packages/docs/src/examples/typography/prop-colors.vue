@@ -9,12 +9,22 @@
       Text in {{ color }} color
     </VTypography>
 
-    <VTypography color="#FF9800" variant="body-large">
+    <VTypography
+      color="#FF9800"
+      variant="body-large"
+    >
       Custom color (hex)
     </VTypography>
   </div>
 </template>
 
 <script setup>
-const colors = ["primary", "secondary", "success", "error", "warning", "info"];
+  const colors = [
+    'primary',
+    'secondary',
+    'success',
+    'error',
+    'warning',
+    'info',
+  ]
 </script>
