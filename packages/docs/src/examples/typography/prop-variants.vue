@@ -7,18 +7,18 @@
 </template>
 
 <script setup>
-const variants = [
-  "display-large",
-  "display-medium",
-  "display-small",
-  "headline-large",
-  "headline-medium",
-  "headline-small",
-  "body-large",
-  "body-medium",
-  "body-small",
-  "label-large",
-  "label-medium",
-  "label-small",
-];
+  const variants = [
+    'display-large',
+    'display-medium',
+    'display-small',
+    'headline-large',
+    'headline-medium',
+    'headline-small',
+    'body-large',
+    'body-medium',
+    'body-small',
+    'label-large',
+    'label-medium',
+    'label-small',
+  ]
 </script>

@@ -3,29 +3,18 @@
     <VTypography
       v-for="color in colors"
       :key="color"
-      variant="body-large"
       :color="color"
+      variant="body-large"
     >
       Text in {{ color }} color
     </VTypography>
 
-    <VTypography
-      variant="body-large"
-      color="#FF9800"
-    >
+    <VTypography color="#FF9800" variant="body-large">
       Custom color (hex)
     </VTypography>
   </div>
 </template>
 
 <script setup>
-const colors = [
-  'primary',
-  'secondary',
-  'success',
-  'error',
-  'warning',
-  'info',
-]
+const colors = ["primary", "secondary", "success", "error", "warning", "info"];
 </script>
-
