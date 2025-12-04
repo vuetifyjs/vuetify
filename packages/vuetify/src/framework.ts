@@ -1,78 +1,78 @@
 // Composables
-import { createIcons } from "./icons";
+import { createIcons } from './icons'
 import {
   createDate,
   DateAdapterSymbol,
   DateOptionsSymbol,
-} from "@/composables/date/date";
-import { createDefaults, DefaultsSymbol } from "@/composables/defaults";
-import { createDisplay, DisplaySymbol } from "@/composables/display";
-import { createGoTo, GoToSymbol } from "@/composables/goto";
-import { IconSymbol } from "@/composables/icons";
-import { createLocale, LocaleSymbol } from "@/composables/locale";
-import { createTheme, ThemeSymbol } from "@/composables/theme";
-import { createTypography, TypographySymbol } from "@/composables/typography";
+} from '@/composables/date/date'
+import { createDefaults, DefaultsSymbol } from '@/composables/defaults'
+import { createDisplay, DisplaySymbol } from '@/composables/display'
+import { createGoTo, GoToSymbol } from '@/composables/goto'
+import { IconSymbol } from '@/composables/icons'
+import { createLocale, LocaleSymbol } from '@/composables/locale'
+import { createTheme, ThemeSymbol } from '@/composables/theme'
+import { createTypography, TypographySymbol } from '@/composables/typography'
 
 // Utilities
-import { effectScope, nextTick, reactive } from "vue";
-import { defineComponent, IN_BROWSER, mergeDeep } from "@/util";
+import { effectScope, nextTick, reactive } from 'vue'
+import { defineComponent, IN_BROWSER, mergeDeep } from '@/util'
 
 // Types
-import type { App, ComponentPublicInstance, InjectionKey } from "vue";
-import type { DateOptions } from "@/composables/date";
-import type { DefaultsOptions } from "@/composables/defaults";
-import type { DisplayOptions, SSROptions } from "@/composables/display";
-import type { GoToOptions } from "@/composables/goto";
-import type { IconOptions } from "@/composables/icons";
-import type { LocaleOptions, RtlOptions } from "@/composables/locale";
-import type { ThemeOptions } from "@/composables/theme";
-import type { TypographyOptions } from "@/composables/typography";
+import type { App, ComponentPublicInstance, InjectionKey } from 'vue'
+import type { DateOptions } from '@/composables/date'
+import type { DefaultsOptions } from '@/composables/defaults'
+import type { DisplayOptions, SSROptions } from '@/composables/display'
+import type { GoToOptions } from '@/composables/goto'
+import type { IconOptions } from '@/composables/icons'
+import type { LocaleOptions, RtlOptions } from '@/composables/locale'
+import type { ThemeOptions } from '@/composables/theme'
+import type { TypographyOptions } from '@/composables/typography'
 
 // Exports
-export * from "./composables";
-export * from "./types";
+export * from './composables'
+export * from './types'
 
 export interface VuetifyOptions {
-  aliases?: Record<string, any>;
-  blueprint?: Blueprint;
-  components?: Record<string, any>;
-  date?: DateOptions;
-  directives?: Record<string, any>;
-  defaults?: DefaultsOptions;
-  display?: DisplayOptions;
-  goTo?: GoToOptions;
-  theme?: ThemeOptions;
-  icons?: IconOptions;
-  locale?: LocaleOptions & RtlOptions;
-  ssr?: SSROptions;
-  typography?: TypographyOptions;
+  aliases?: Record<string, any>
+  blueprint?: Blueprint
+  components?: Record<string, any>
+  date?: DateOptions
+  directives?: Record<string, any>
+  defaults?: DefaultsOptions
+  display?: DisplayOptions
+  goTo?: GoToOptions
+  theme?: ThemeOptions
+  icons?: IconOptions
+  locale?: LocaleOptions & RtlOptions
+  ssr?: SSROptions
+  typography?: TypographyOptions
 }
 
-export interface Blueprint extends Omit<VuetifyOptions, "blueprint"> {}
+export interface Blueprint extends Omit<VuetifyOptions, 'blueprint'> {}
 
-export function createVuetify(vuetify: VuetifyOptions = {}) {
-  const { blueprint, ...rest } = vuetify;
-  const options: VuetifyOptions = mergeDeep(blueprint, rest);
-  const { aliases = {}, components = {}, directives = {} } = options;
+export function createVuetify (vuetify: VuetifyOptions = {}) {
+  const { blueprint, ...rest } = vuetify
+  const options: VuetifyOptions = mergeDeep(blueprint, rest)
+  const { aliases = {}, components = {}, directives = {} } = options
 
-  const scope = effectScope();
+  const scope = effectScope()
   return scope.run(() => {
-    const defaults = createDefaults(options.defaults);
-    const display = createDisplay(options.display, options.ssr);
-    const theme = createTheme(options.theme);
-    const icons = createIcons(options.icons);
-    const locale = createLocale(options.locale);
-    const date = createDate(options.date, locale);
-    const goTo = createGoTo(options.goTo, locale);
-    const typography = createTypography(options.typography ?? undefined);
+    const defaults = createDefaults(options.defaults)
+    const display = createDisplay(options.display, options.ssr)
+    const theme = createTheme(options.theme)
+    const icons = createIcons(options.icons)
+    const locale = createLocale(options.locale)
+    const date = createDate(options.date, locale)
+    const goTo = createGoTo(options.goTo, locale)
+    const typography = createTypography(options.typography ?? undefined)
 
-    function install(app: App) {
+    function install (app: App) {
       for (const key in directives) {
-        app.directive(key, directives[key]);
+        app.directive(key, directives[key])
       }
 
       for (const key in components) {
-        app.component(key, components[key]);
+        app.component(key, components[key])
       }
 
       for (const key in aliases) {
@@ -83,47 +83,47 @@ export function createVuetify(vuetify: VuetifyOptions = {}) {
             name: key,
             aliasName: aliases[key].name,
           }),
-        );
+        )
       }
 
-      const appScope = effectScope();
+      const appScope = effectScope()
       appScope.run(() => {
-        theme.install(app);
-      });
-      app.onUnmount(() => appScope.stop());
+        theme.install(app)
+      })
+      app.onUnmount(() => appScope.stop())
 
-      app.provide(DefaultsSymbol, defaults);
-      app.provide(DisplaySymbol, display);
-      app.provide(ThemeSymbol, theme);
-      app.provide(IconSymbol, icons);
-      app.provide(LocaleSymbol, locale);
-      app.provide(DateOptionsSymbol, date.options);
-      app.provide(DateAdapterSymbol, date.instance);
-      app.provide(GoToSymbol, goTo);
+      app.provide(DefaultsSymbol, defaults)
+      app.provide(DisplaySymbol, display)
+      app.provide(ThemeSymbol, theme)
+      app.provide(IconSymbol, icons)
+      app.provide(LocaleSymbol, locale)
+      app.provide(DateOptionsSymbol, date.options)
+      app.provide(DateAdapterSymbol, date.instance)
+      app.provide(GoToSymbol, goTo)
       if (typography) {
-        app.provide(TypographySymbol, typography);
+        app.provide(TypographySymbol, typography)
       }
 
       if (IN_BROWSER && options.ssr) {
         if (app.$nuxt) {
-          app.$nuxt.hook("app:suspense:resolve", () => {
-            display.update();
-          });
+          app.$nuxt.hook('app:suspense:resolve', () => {
+            display.update()
+          })
         } else {
-          const { mount } = app;
+          const { mount } = app
           app.mount = (...args) => {
-            const vm = mount(...args);
-            nextTick(() => display.update());
-            app.mount = mount;
-            return vm;
-          };
+            const vm = mount(...args)
+            nextTick(() => display.update())
+            app.mount = mount
+            return vm
+          }
         }
       }
 
-      if (typeof __VUE_OPTIONS_API__ !== "boolean" || __VUE_OPTIONS_API__) {
+      if (typeof __VUE_OPTIONS_API__ !== 'boolean' || __VUE_OPTIONS_API__) {
         app.mixin({
           computed: {
-            $vuetify() {
+            $vuetify () {
               return reactive({
                 defaults: inject.call(this, DefaultsSymbol),
                 display: inject.call(this, DisplaySymbol),
@@ -134,15 +134,15 @@ export function createVuetify(vuetify: VuetifyOptions = {}) {
                 typography: typography
                   ? inject.call(this, TypographySymbol)
                   : null,
-              });
+              })
             },
           },
-        });
+        })
       }
     }
 
-    function unmount() {
-      scope.stop();
+    function unmount () {
+      scope.stop()
     }
 
     return {
@@ -156,23 +156,23 @@ export function createVuetify(vuetify: VuetifyOptions = {}) {
       date,
       goTo,
       typography,
-    };
-  })!;
+    }
+  })!
 }
 
-export const version = __VUETIFY_VERSION__;
-createVuetify.version = version;
+export const version = __VUETIFY_VERSION__
+createVuetify.version = version
 
 // Vue's inject() can only be used in setup
-function inject(
+function inject (
   this: ComponentPublicInstance,
   key: InjectionKey<any> | string,
 ) {
-  const vm = this.$;
+  const vm = this.$
 
-  const provides = vm.parent?.provides ?? vm.vnode.appContext?.provides;
+  const provides = vm.parent?.provides ?? vm.vnode.appContext?.provides
 
   if (provides && (key as any) in provides) {
-    return provides[key as string];
+    return provides[key as string]
   }
 }
