@@ -308,15 +308,4 @@ describe('createTheme', () => {
     expect(css).not.toContain('.text-primary')
     expect(css).not.toContain('.border-primary')
   })
-
-  it('should generate layers', async () => {
-    const theme = createTheme({ layers: true })
-
-    theme.install(app)
-
-    const stylesheet = document.getElementById('vuetify-theme-stylesheet')
-    const css = stylesheet!.innerHTML
-
-    expect(css).toContain('@layer vuetify.theme {')
-  })
 })

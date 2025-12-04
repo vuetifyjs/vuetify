@@ -341,6 +341,7 @@
       .v-list-item__overlay
         opacity: calc(#{map.get(settings.$states, 'hover')} * var(--v-theme-overlay-multiplier))
 
+@include tools.layer('trumps')
   @media (forced-colors: active)
     .v-list-item
       &--link:not(&--active)
@@ -353,16 +354,16 @@
         [class*="v-list-item-"],
         [class*="v-list-item-"] > *,
         .v-icon
-          color: highlight !important
+          color: highlight
 
       &--active:not(&--variant-text, &--variant-plain):not(&--disabled)
-        background: highlight !important
+        background: highlight
 
         [class*="v-list-item-"],
         [class*="v-list-item-"] > *,
         .v-icon
           opacity: 1
-          color: highlighttext !important
+          color: highlighttext
           forced-color-adjust: preserve-parent-color
 
       &--focus-visible::after

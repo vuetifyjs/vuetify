@@ -316,30 +316,6 @@ export default createVuetify({
 })
 ```
 
-## Theme layers
-
-The `layers` option can be used to enable a [css cascade layer](https://developer.mozilla.org/en-US/docs/Web/CSS/@layer) for the theme:
-
-```ts { resource="src/plugins/vuetify.ts" }
-export default createVuetify({
-  theme: {
-    layers: true,
-  },
-})
-```
-
-which generates the theme layer with two sub-layers (background and foreground):
-
-```css
-@layer vuetify.theme {
-  :root { /* ... */ }
-  @layer background { /* ... */ }
-  @layer foreground { /* ... */ }
-}
-```
-
-`$layers` should also be enabled in SASS for theme colors to override component defaults correctly, see [SASS variables](/features/sass-variables/#enabling-css-cascade-layers) for more information.
-
 ## Theme object structure
 
 ```ts

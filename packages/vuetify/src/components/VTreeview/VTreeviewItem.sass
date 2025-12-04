@@ -104,4 +104,5 @@
       width: 0px
 
     .v-list-group__items .v-list-item
-      padding-inline-start: calc(var(--indent-padding)) !important
+      @include tools.layer('overrides')
+        padding-inline-start: calc(var(--indent-padding))
