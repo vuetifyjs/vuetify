@@ -6,7 +6,12 @@
         description="Vuetify is a complete Vue ecosystem that provides you with all of the tools necessary to create beautiful content rich web applications."
         subtitle="A complete Vue ecosystem"
         title="More than just Components"
-      />
+      >
+
+        <template #top>
+          <v-img :src="`https://cdn.vuetifyjs.com/docs/images/one/logos/vuetify.png`" class="mb-4" height="64" />
+        </template>
+      </HomeCommonTitle>
 
       <HomeCommonMarquee :items="features" class="my-5">
         <template #default="{ item }">

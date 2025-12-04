@@ -7,7 +7,11 @@
         description="A unified platform providing powerful all Ecosystem Tools in one place. Build faster, collaborate better, and create stunning Vuetify applications."
         subtitle="Everything in One Place"
         title="Vuetify One"
-      />
+      >
+        <template #top>
+          <v-img :src="`https://cdn.vuetifyjs.com/docs/images/one/logos/vone.png`" class="mb-4" height="88" />
+        </template>
+      </HomeCommonTitle>
 
       <v-row class="text-left mt-10">
         <v-col
@@ -15,13 +19,26 @@
           :key="i"
           cols="12"
           lg="4"
-          sm="4"
+          sm="6"
         >
           <HomeCommonCard
             :description="item.description"
             :href="item.href"
             :image="`https://cdn.vuetifyjs.com/docs/images/one/logos/${item.image}-logo-${isDark ? 'dark' : 'light'}.png`"
             target="_blank"
+          />
+        </v-col>
+
+        <v-col class="text-center mt-6" cols="12">
+          <v-btn
+            :to="rpath('/one/')"
+            append-icon="mdi-page-next"
+            class="mr-4 text-none"
+            color="primary"
+            rounded="lg"
+            size="large"
+            text="See Subscription Benefits"
+            variant="flat"
           />
         </v-col>
       </v-row>

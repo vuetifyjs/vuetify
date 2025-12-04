@@ -8,7 +8,12 @@
         description="Vuetify provides a suite of tools for managing your Vuetify projects."
         subtitle="Tools & Resources"
         title="Vuetify Tooling"
-      />
+      >
+
+        <template #top>
+          <v-img :src="`https://cdn.vuetifyjs.com/docs/images/one/logos/vloader.png`" class="mb-4" height="64" />
+        </template>
+      </HomeCommonTitle>
 
       <v-card class="mx-auto" max-width="900" rounded="xl" border flat>
         <v-table density="comfortable" hover>

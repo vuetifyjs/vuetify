@@ -22,7 +22,6 @@
           <div class="d-flex flex-wrap ga-4 justify-start my-5">
             <v-btn
               :to="rpath('/getting-started/installation/')"
-              append-icon="mdi-page-next"
               class="text-none"
               color="primary"
               rounded="lg"

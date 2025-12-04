@@ -6,9 +6,10 @@
       <HomeCommonTitle
         class="mb-10"
         description="Browse our collection of premium templates, themes and UI kits. All themes are built with Vuetify and are available for everyone."
+        subtitle="Premium Templates & Themes"
         title="Vuetify Store"
       >
-        <template #subtitle>
+        <template #top>
           <v-img :src="`https://cdn.vuetifyjs.com/docs/images/one/logos/vstore.png`" class="mb-4" height="64" />
         </template>
       </HomeCommonTitle>

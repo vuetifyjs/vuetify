@@ -1,5 +1,7 @@
 <template>
   <div>
+    <slot name="top" />
+
     <slot name="subtitle">
       <p v-if="props.subtitle" class="text-primary font-weight-bold mb-3">
         {{ props.subtitle }}

@@ -9,7 +9,7 @@
             title="Component Gallery"
           />
 
-          <v-sheet class="mx-auto" color="transparent" max-width="1200px">
+          <v-sheet class="mx-auto" color="transparent" max-width="1200">
             <v-card
               class="my-1"
               color="transparent"
