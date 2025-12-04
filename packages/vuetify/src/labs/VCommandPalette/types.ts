@@ -1,10 +1,3 @@
-/**
- * VCommandPalette Type Definitions
- *
- * Provides strict typing for command palette items and related functionality.
- * Uses discriminated unions for type safety and includes runtime type guards.
- */
-
 // Types
 import type { RouteLocationRaw } from 'vue-router'
 

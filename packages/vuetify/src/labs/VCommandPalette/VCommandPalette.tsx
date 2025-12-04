@@ -1,10 +1,3 @@
-/**
- * VCommandPalette Component
- *
- * A keyboard-driven command palette component that provides a searchable
- * dialog interface for executing commands and actions.
- */
-
 // Components
 import { VCard, VCardText } from '@/components/VCard'
 import { VDialog } from '@/components/VDialog'
@@ -12,6 +5,8 @@ import { VList } from '@/components/VList'
 import { VTextField } from '@/components/VTextField'
 
 // Composables
+import { provideCommandPaletteContext } from './composables/useCommandPaletteContext'
+import { useCommandPaletteNavigation } from './composables/useCommandPaletteNavigation'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeFilterProps } from '@/composables/filter'
 import { useHotkey } from '@/composables/hotkey'
@@ -26,53 +21,30 @@ import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType, Ref, VNode } from 'vue'
-
-// Internal
-import { provideCommandPaletteContext } from './composables/useCommandPaletteContext'
-import { useCommandPaletteNavigation } from './composables/useCommandPaletteNavigation'
-import { isActionItem } from './types'
-
-// Types
 import type { VCommandPaletteItem as VCommandPaletteItemType } from './types'
-
-// Internal
+import { isActionItem } from './types'
 import { VCommandPaletteItemComponent } from './VCommandPaletteItem'
 
 export const makeVCommandPaletteProps = propsFactory({
-  // === Model/State ===
   modelValue: Boolean,
   search: String,
-
-  // === Items & Content ===
   items: {
     type: Array as PropType<VCommandPaletteItemType[]>,
     default: () => [],
   },
-
-  // === Search/Filter Props ===
-  ...makeFilterProps({
-    filterKeys: ['title', 'subtitle'],
-  }),
-
-  // === UX Props ===
   placeholder: String,
   hotkey: String,
   noDataText: String,
-
-  // === Dialog Props (first-class) ===
   location: String,
   activator: [String, Object],
   dialogProps: Object as PropType<Record<string, any>>,
 
-  // === Appearance Props ===
+  ...makeFilterProps({ filterKeys: ['title', 'subtitle'] }),
   ...makeThemeProps(),
   ...makeDensityProps(),
   ...makeTransitionProps(),
 }, 'VCommandPalette')
 
-/**
- * VCommandPalette Component
- */
 export const VCommandPalette = genericComponent()({
   name: 'VCommandPalette',
 
@@ -86,24 +58,14 @@ export const VCommandPalette = genericComponent()({
 
   setup (props, { emit, slots }) {
     const { t } = useLocale()
-
-    // Dialog state
     const isOpen = useProxiedModel(props, 'modelValue')
     const searchQuery = useProxiedModel(props, 'search') as Ref<string>
-
-    // Theme and density
     const { themeClasses } = provideTheme(props)
     const { densityClasses } = useDensity(props)
-
-    // Refs for focus management
     const searchInputRef = ref<InstanceType<typeof VTextField>>()
     const dialogRef = ref<InstanceType<typeof VDialog>>()
     const previouslyFocusedElement = shallowRef<HTMLElement | null>(null)
 
-    /**
-     * Simple filter implementation for MVP
-     * Filters items based on search query matching title and subtitle
-     */
     const filteredItems = computed(() => {
       if (!searchQuery.value || !searchQuery.value.trim()) {
         return props.items
@@ -118,10 +80,6 @@ export const VCommandPalette = genericComponent()({
       })
     })
 
-    /**
-     * Prepare items for VList with proper value assignment
-     * VList's items prop enables automatic activation and scroll-to-active
-     */
     const itemsForList = computed(() => {
       return filteredItems.value.map((item, idx) => ({
         ...item,
@@ -129,9 +87,6 @@ export const VCommandPalette = genericComponent()({
       }))
     })
 
-    /**
-     * Initialize navigation composable
-     */
     const navigation = useCommandPaletteNavigation({
       filteredItems,
       onItemClick: (item, event) => {
@@ -143,9 +98,6 @@ export const VCommandPalette = genericComponent()({
       },
     })
 
-    /**
-     * Provide context for future custom layout support
-     */
     provideCommandPaletteContext({
       items: computed(() => props.items),
       filteredItems,
@@ -154,18 +106,12 @@ export const VCommandPalette = genericComponent()({
       setSelectedIndex: navigation.setSelectedIndex,
     })
 
-    /**
-     * Register global hotkey to toggle palette
-     */
     if (props.hotkey) {
       useHotkey(props.hotkey, () => {
         isOpen.value = !isOpen.value
       })
     }
 
-    /**
-     * Register item-level hotkeys (only when palette is open)
-     */
     watchEffect(onCleanup => {
       if (!isOpen.value) {
         return
@@ -196,18 +142,62 @@ export const VCommandPalette = genericComponent()({
       })
     })
 
-    /**
-     * Handle dialog open/close for focus management
-     */
+    function findNextSelectableIndex (startIndex: number, direction: 1 | -1): number {
+      const items = filteredItems.value
+      if (items.length === 0) return -1
+
+      let index = startIndex
+      const maxIterations = items.length
+
+      for (let i = 0; i < maxIterations; i++) {
+        index += direction
+        if (index >= items.length) index = 0
+        if (index < 0) index = items.length - 1
+
+        if (isActionItem(items[index])) {
+          return index
+        }
+      }
+
+      return -1
+    }
+
+    function handleSearchKeydown (e: KeyboardEvent) {
+      switch (e.key) {
+        case 'ArrowDown': {
+          e.preventDefault()
+          const nextIndex = findNextSelectableIndex(navigation.selectedIndex.value, 1)
+          if (nextIndex !== -1) {
+            navigation.setSelectedIndex(nextIndex)
+          }
+          break
+        }
+        case 'ArrowUp': {
+          e.preventDefault()
+          const prevIndex = findNextSelectableIndex(navigation.selectedIndex.value, -1)
+          if (prevIndex !== -1) {
+            navigation.setSelectedIndex(prevIndex)
+          }
+          break
+        }
+        case 'Enter':
+          e.preventDefault()
+          navigation.executeSelected(e)
+          break
+        case 'Escape':
+          e.preventDefault()
+          isOpen.value = false
+          break
+      }
+    }
+
     watch(isOpen, (newValue, oldValue) => {
       if (newValue && !oldValue) {
         previouslyFocusedElement.value = document.activeElement as HTMLElement | null
         searchQuery.value = ''
         navigation.reset()
 
-        // Auto-select first item
         nextTick(() => {
-          navigation.setSelectedIndex(0)
           const input = searchInputRef.value?.$el?.querySelector('input')
           if (input) {
             input.focus()
@@ -221,9 +211,6 @@ export const VCommandPalette = genericComponent()({
       }
     })
 
-    /**
-     * Compute merged dialog props
-     */
     const computedDialogProps = computed(() => {
       const baseProps: Record<string, any> = {
         modelValue: isOpen.value,
@@ -272,6 +259,7 @@ export const VCommandPalette = genericComponent()({
                   variant="solo"
                   flat
                   bgColor="transparent"
+                  onKeydown={ handleSearchKeydown }
                 />
               </div>
 
@@ -287,28 +275,28 @@ export const VCommandPalette = genericComponent()({
                     navigationIndex={ navigation.selectedIndex.value }
                     onUpdate:navigationIndex={ navigation.setSelectedIndex }
                     v-slots={{
-                      item: ({ item, index }: any) => (
+                      item: ({ props }: { props: any }) => (
                         <VCommandPaletteItemComponent
-                          key={ `item-${index}` }
-                          item={ item.raw }
-                          index={ index }
+                          key={ `item-${props.index}` }
+                          item={ props }
+                          index={ props.index }
                           onExecute={ (event: any) => {
                             navigation.executeSelected(event)
                           }}
                         />
                       ),
-                      divider: ({ item, index }: any) => (
+                      divider: ({ props }: { props: any }) => (
                         <VCommandPaletteItemComponent
-                          key={ `divider-${index}` }
-                          item={ item.raw }
-                          index={ index }
+                          key={ `divider-${props.value}` }
+                          item={{ type: 'divider' as const, ...props }}
+                          index={ props.value }
                         />
                       ),
-                      subheader: ({ item, index }: any) => (
+                      subheader: ({ props }: { props: any }) => (
                         <VCommandPaletteItemComponent
-                          key={ `subheader-${index}` }
-                          item={ item.raw }
-                          index={ index }
+                          key={ `subheader-${props.value}` }
+                          item={{ type: 'subheader' as const, ...props }}
+                          index={ props.value }
                         />
                       ),
                     }}

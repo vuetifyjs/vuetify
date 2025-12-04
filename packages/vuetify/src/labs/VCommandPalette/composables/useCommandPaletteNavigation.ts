@@ -1,16 +1,10 @@
-/**
- * useCommandPaletteNavigation Composable
- *
- * Manages selection state for the command palette.
- * Keyboard navigation is now handled by VList in 'track' mode.
- */
-
 // Utilities
-import { ref, watch } from 'vue'
+import { ref, shallowRef, watch } from 'vue'
 
 // Types
 import type { ComputedRef, Ref } from 'vue'
 import type { VCommandPaletteItem } from '../types'
+import { isActionItem } from '../types'
 
 export interface UseCommandPaletteNavigationOptions {
   filteredItems: ComputedRef<VCommandPaletteItem[]>
@@ -25,40 +19,53 @@ export interface UseCommandPaletteNavigationReturn {
   setSelectedIndex: (index: number) => void
 }
 
-/**
- * Composable for managing command palette selection state
- *
- * VList handles keyboard navigation in 'track' mode.
- * This composable manages the selected index and execution logic.
- */
+function getItemKey (item: VCommandPaletteItem): string | undefined {
+  if (!isActionItem(item)) return undefined
+  return item.value !== undefined ? String(item.value) : item.title
+}
+
+function findFirstSelectableIndex (items: VCommandPaletteItem[]): number {
+  return items.findIndex(item => isActionItem(item))
+}
+
 export function useCommandPaletteNavigation (
   options: UseCommandPaletteNavigationOptions
 ): UseCommandPaletteNavigationReturn {
-  const selectedIndex = ref(-1)
+  const selectedIndex = ref(0)
+  const selectedItemKey = shallowRef<string | undefined>(undefined)
 
-  /**
-   * Auto-select first item when items change
-   */
-  watch(() => options.filteredItems.value.length, newLength => {
-    if (newLength > 0 && selectedIndex.value === -1) {
-      selectedIndex.value = 0
-    } else if (newLength === 0) {
+  watch(() => options.filteredItems.value, (newItems, oldItems) => {
+    if (newItems.length === 0) {
       selectedIndex.value = -1
-    } else if (selectedIndex.value >= newLength) {
-      selectedIndex.value = newLength - 1
+      selectedItemKey.value = undefined
+      return
     }
+
+    if (selectedItemKey.value !== undefined) {
+      const newIndex = newItems.findIndex(item =>
+        isActionItem(item) && getItemKey(item) === selectedItemKey.value
+      )
+      if (newIndex !== -1) {
+        selectedIndex.value = newIndex
+        return
+      }
+    }
+
+    const firstSelectableIndex = findFirstSelectableIndex(newItems)
+    if (firstSelectableIndex !== -1) {
+      selectedIndex.value = firstSelectableIndex
+      selectedItemKey.value = getItemKey(newItems[firstSelectableIndex])
+      return
+    }
+
+    selectedIndex.value = 0
+    selectedItemKey.value = undefined
   }, { immediate: true })
 
-  /**
-   * Get the currently selected item
-   */
   function getSelectedItem (): VCommandPaletteItem | undefined {
     return options.filteredItems.value[selectedIndex.value]
   }
 
-  /**
-   * Execute the currently selected item
-   */
   function executeSelected (event: KeyboardEvent | MouseEvent) {
     const item = getSelectedItem()
     if (item) {
@@ -66,20 +73,30 @@ export function useCommandPaletteNavigation (
     }
   }
 
-  /**
-   * Reset navigation state
-   * Called when palette opens
-   */
   function reset () {
-    selectedIndex.value = -1
+    const items = options.filteredItems.value
+
+    if (items.length === 0) {
+      selectedIndex.value = -1
+      selectedItemKey.value = undefined
+      return
+    }
+
+    const firstSelectableIndex = findFirstSelectableIndex(items)
+    if (firstSelectableIndex !== -1) {
+      selectedIndex.value = firstSelectableIndex
+      selectedItemKey.value = getItemKey(items[firstSelectableIndex])
+      return
+    }
+
+    selectedIndex.value = 0
+    selectedItemKey.value = undefined
   }
 
-  /**
-   * Set selected index directly
-   * Called by VList when keyboard navigation occurs
-   */
   function setSelectedIndex (index: number) {
     selectedIndex.value = index
+    const item = options.filteredItems.value[index]
+    selectedItemKey.value = item ? getItemKey(item) : undefined
   }
 
   return {

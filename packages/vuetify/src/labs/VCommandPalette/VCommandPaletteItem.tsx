@@ -1,10 +1,3 @@
-/**
- * VCommandPaletteItem Subcomponent
- *
- * Renders individual items in the command palette list.
- * Handles action items, subheaders, and dividers with appropriate styling.
- */
-
 // Components
 import { VDivider } from '@/components/VDivider'
 import { VHotkey } from '@/components/VHotkey'
@@ -15,12 +8,8 @@ import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType, VNode } from 'vue'
-
-// Internal
-import { isActionItem, isDivider, isSubheader } from './types'
-
-// Types
 import type { VCommandPaletteItem } from './types'
+import { isActionItem, isDivider, isSubheader } from './types'
 
 export const makeVCommandPaletteItemProps = propsFactory({
   item: {
