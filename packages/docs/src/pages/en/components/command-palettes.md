@@ -46,6 +46,8 @@ The command palette displays a searchable list of commands in a dialog. Users ca
 
 Below is a collection of simple to complex examples.
 
+### Props
+
 #### Items
 
 The **items** prop accepts an array of command palette items. Items support action items (interactive commands), subheaders (section labels), and dividers (visual separators).
@@ -64,7 +66,7 @@ The command palette is built on `v-dialog` and supports dialog-related props. Us
 
 <ExamplesExample file="v-command-palette/prop-dialog" />
 
-#### Search and Filtering
+### Filtering
 
 The search input automatically filters items based on their **title** and **subtitle** properties. Use **v-model:search** to control or monitor the search query. The **filter-keys** prop can customize which item properties are searched.
 
@@ -80,77 +82,6 @@ The command palette supports full keyboard navigation:
 - **Typing**: Filters commands by title and subtitle
 - **Per-item hotkeys**: Execute specific commands directly (when palette is open)
 
-### Accessibility
-
-The command palette includes built-in accessibility features:
-
-- Proper ARIA roles and labels for screen readers
-- Keyboard navigation with focus management
-- Active descendant tracking for assistive technologies
-- Automatic focus return when closing
-
-## Examples
-
-The following examples demonstrate advanced usage patterns for the command palette component.
-
-### With Router Navigation
-
-Action items support the **to** prop for Vue Router navigation and **href** for external links:
-
-```vue
-<v-command-palette
-  :items="[
-    {
-      title: 'Dashboard',
-      to: '/dashboard',
-      prependIcon: 'mdi-view-dashboard'
-    },
-    {
-      title: 'Documentation',
-      href: 'https://vuetifyjs.com',
-      prependIcon: 'mdi-book-open-variant'
-    }
-  ]"
-/>
-```
-
-### Custom onClick Handlers
-
-Use the **onClick** property on action items to execute custom logic:
-
-```vue
-<script setup>
-const items = [
-  {
-    title: 'Toggle Theme',
-    subtitle: 'Switch between light and dark mode',
-    prependIcon: 'mdi-theme-light-dark',
-    onClick: () => {
-      // Toggle theme logic
-      theme.global.name.value = theme.global.current.value.dark ? 'light' : 'dark'
-    }
-  }
-]
-</script>
-```
-
-### Item Types
-
-Organize commands with subheaders and dividers:
-
-```vue
-<script setup>
-const items = [
-  { title: 'New File', value: 'file' },
-  { title: 'New Folder', value: 'folder' },
-  { type: 'divider' },
-  { type: 'subheader', title: 'Recent' },
-  { title: 'Project Alpha', value: 'alpha' },
-  { title: 'Project Beta', value: 'beta' },
-]
-</script>
-```
-
 ## Accessibility
 
 The `v-command-palette` component follows accessibility best practices:
@@ -161,5 +92,3 @@ The `v-command-palette` component follows accessibility best practices:
 - Maintains focus within the dialog while open
 - Returns focus to the previously focused element on close
 - Supports full keyboard navigation without mouse interaction
-
-
