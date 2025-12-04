@@ -18,6 +18,16 @@ Latest news, updates, and stories about Vuetify.
 
 <br>
 
+## Vuetify Project baseline with Nuxt and UnoCSS
+
+🖊️ Jacek Czarniecki • 📅 December 11th, 2025
+
+Let's dive deep into configuring Vuetify with UnoCSS to optimize CSS bundle for performance and tap into widely recognized utility classes from TailwindCSS v4. We will ensure the project foundation works with themes, typography, and breakpoints without compromises... { .text-medium-emphasis }
+
+[Read More](/blog/building-with-nuxt-and-unocss/) { .text-end }
+
+<br>
+
 ## October 2025 Update
 
 🖊️ John Leider • 📅 November 11th, 2025
