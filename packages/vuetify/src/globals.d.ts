@@ -20,11 +20,11 @@ declare global {
       centered?: boolean
       class?: string
       circle?: boolean
-      touched?: boolean
-      isTouch?: boolean
+      active: Set<string>
       showTimer?: number
       showTimerCommit?: (() => void) | null
       keyDownHandler?: ((e: KeyboardEvent) => void) | null
+      keyUpHandler?: ((e: KeyboardEvent) => void) | null
     }
     _observe?: Record<number, {
       init: boolean

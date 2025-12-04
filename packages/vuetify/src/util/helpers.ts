@@ -171,7 +171,7 @@ export const keyValues: Record<string, string> = Object.freeze({
   tab: 'Tab',
   delete: 'Delete',
   esc: 'Escape',
-  space: 'Space',
+  space: ' ',
   up: 'ArrowUp',
   down: 'ArrowDown',
   left: 'ArrowLeft',
