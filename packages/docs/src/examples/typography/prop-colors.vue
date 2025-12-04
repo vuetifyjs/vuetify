@@ -16,5 +16,5 @@
 </template>
 
 <script setup>
-  const colors = ['primary', 'secondary', 'success', 'error', 'warning', 'info']
+const colors = ["primary", "secondary", "success", "error", "warning", "info"];
 </script>
