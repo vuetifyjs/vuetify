@@ -41,15 +41,3 @@ export type VCommandPaletteItem =
 export function isActionItem (item: any): item is VCommandPaletteActionItem {
   return !item.type || item.type === 'item'
 }
-
-export function isSubheader (item: any): item is VCommandPaletteSubheader {
-  return item.type === 'subheader'
-}
-
-export function isDivider (item: any): item is VCommandPaletteDivider {
-  return item.type === 'divider'
-}
-
-export function isSelectableItem (item: any): item is VCommandPaletteActionItem {
-  return isActionItem(item)
-}

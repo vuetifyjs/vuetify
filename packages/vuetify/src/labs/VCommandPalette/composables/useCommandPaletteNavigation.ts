@@ -94,6 +94,10 @@ export function useCommandPaletteNavigation (
   }
 
   function setSelectedIndex (index: number) {
+    // Ignore VList's reset to -1 when we have items - we manage selection on filter changes
+    if (index === -1 && options.filteredItems.value.length > 0) {
+      return
+    }
     selectedIndex.value = index
     const item = options.filteredItems.value[index]
     selectedItemKey.value = item ? getItemKey(item) : undefined

@@ -1,19 +1,17 @@
 // Components
-import { VDivider } from '@/components/VDivider'
 import { VHotkey } from '@/components/VHotkey'
-import { VListItem, VListSubheader } from '@/components/VList'
+import { VListItem } from '@/components/VList'
 
 // Utilities
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
-import type { PropType, VNode } from 'vue'
-import type { VCommandPaletteItem } from './types'
-import { isActionItem, isDivider, isSubheader } from './types'
+import type { PropType } from 'vue'
+import type { VCommandPaletteActionItem } from './types'
 
 export const makeVCommandPaletteItemProps = propsFactory({
   item: {
-    type: Object as PropType<VCommandPaletteItem>,
+    type: Object as PropType<VCommandPaletteActionItem>,
     required: true,
   },
   index: {
@@ -29,47 +27,21 @@ export const VCommandPaletteItemComponent = genericComponent()({
   props: makeVCommandPaletteItemProps(),
 
   setup (props) {
-    function handleClick (event: MouseEvent | KeyboardEvent) {
-      props.onExecute?.(event)
-    }
-
-    useRender((): VNode => {
-      if (isDivider(props.item)) {
-        return <VDivider key={ `divider-${props.index}` } />
-      }
-
-      if (isSubheader(props.item)) {
-        const item = props.item
-        return (
-          <VListSubheader
-            key={ `subheader-${props.index}` }
-            title={ item.title }
-          />
-        )
-      }
-
-      if (isActionItem(props.item)) {
-        const item = props.item
-        return (
-          <VListItem
-            key={ `item-${props.index}` }
-            index={ props.index }
-            title={ item.title }
-            subtitle={ item.subtitle }
-            prependIcon={ item.prependIcon }
-            prependAvatar={ item.prependAvatar }
-            appendIcon={ item.appendIcon }
-            appendAvatar={ item.appendAvatar }
-            onClick={ handleClick }
-            v-slots={{
-              append: item.hotkey ? () => <VHotkey keys={ item.hotkey } /> : undefined,
-            }}
-          />
-        )
-      }
-
-      return <div key={ `item-${props.index}` } />
-    })
+    useRender(() => (
+      <VListItem
+        index={ props.index }
+        title={ props.item.title }
+        subtitle={ props.item.subtitle }
+        prependIcon={ props.item.prependIcon }
+        prependAvatar={ props.item.prependAvatar }
+        appendIcon={ props.item.appendIcon }
+        appendAvatar={ props.item.appendAvatar }
+        onClick={ props.onExecute }
+        v-slots={{
+          append: props.item.hotkey ? () => <VHotkey keys={ props.item.hotkey } /> : undefined,
+        }}
+      />
+    ))
   },
 })
 

@@ -280,23 +280,7 @@ export const VCommandPalette = genericComponent()({
                           key={ `item-${props.index}` }
                           item={ props }
                           index={ props.index }
-                          onExecute={ (event: any) => {
-                            navigation.executeSelected(event)
-                          }}
-                        />
-                      ),
-                      divider: ({ props }: { props: any }) => (
-                        <VCommandPaletteItemComponent
-                          key={ `divider-${props.value}` }
-                          item={{ type: 'divider' as const, ...props }}
-                          index={ props.value }
-                        />
-                      ),
-                      subheader: ({ props }: { props: any }) => (
-                        <VCommandPaletteItemComponent
-                          key={ `subheader-${props.value}` }
-                          item={{ type: 'subheader' as const, ...props }}
-                          index={ props.value }
+                          onExecute={ navigation.executeSelected }
                         />
                       ),
                     }}
