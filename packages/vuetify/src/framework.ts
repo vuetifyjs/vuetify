@@ -1,12 +1,17 @@
 // Composables
 import { createIcons } from './icons'
-import { createDate, DateAdapterSymbol, DateOptionsSymbol } from '@/composables/date/date'
+import {
+  createDate,
+  DateAdapterSymbol,
+  DateOptionsSymbol,
+} from '@/composables/date/date'
 import { createDefaults, DefaultsSymbol } from '@/composables/defaults'
 import { createDisplay, DisplaySymbol } from '@/composables/display'
 import { createGoTo, GoToSymbol } from '@/composables/goto'
 import { IconSymbol } from '@/composables/icons'
 import { createLocale, LocaleSymbol } from '@/composables/locale'
 import { createTheme, ThemeSymbol } from '@/composables/theme'
+import { createTypography, TypographySymbol } from '@/composables/typography'
 
 // Utilities
 import { effectScope, nextTick, reactive } from 'vue'
@@ -21,6 +26,7 @@ import type { GoToOptions } from '@/composables/goto'
 import type { IconOptions } from '@/composables/icons'
 import type { LocaleOptions, RtlOptions } from '@/composables/locale'
 import type { ThemeOptions } from '@/composables/theme'
+import type { TypographyOptions } from '@/composables/typography'
 
 // Exports
 export * from './composables'
@@ -39,6 +45,7 @@ export interface VuetifyOptions {
   icons?: IconOptions
   locale?: LocaleOptions & RtlOptions
   ssr?: SSROptions
+  typography?: TypographyOptions
 }
 
 export interface Blueprint extends Omit<VuetifyOptions, 'blueprint'> {}
@@ -46,11 +53,7 @@ export interface Blueprint extends Omit<VuetifyOptions, 'blueprint'> {}
 export function createVuetify (vuetify: VuetifyOptions = {}) {
   const { blueprint, ...rest } = vuetify
   const options: VuetifyOptions = mergeDeep(blueprint, rest)
-  const {
-    aliases = {},
-    components = {},
-    directives = {},
-  } = options
+  const { aliases = {}, components = {}, directives = {} } = options
 
   const scope = effectScope()
   return scope.run(() => {
@@ -61,6 +64,7 @@ export function createVuetify (vuetify: VuetifyOptions = {}) {
     const locale = createLocale(options.locale)
     const date = createDate(options.date, locale)
     const goTo = createGoTo(options.goTo, locale)
+    const typography = createTypography(options.typography ?? undefined)
 
     function install (app: App) {
       for (const key in directives) {
@@ -72,11 +76,14 @@ export function createVuetify (vuetify: VuetifyOptions = {}) {
       }
 
       for (const key in aliases) {
-        app.component(key, defineComponent({
-          ...aliases[key],
-          name: key,
-          aliasName: aliases[key].name,
-        }))
+        app.component(
+          key,
+          defineComponent({
+            ...aliases[key],
+            name: key,
+            aliasName: aliases[key].name,
+          }),
+        )
       }
 
       const appScope = effectScope()
@@ -93,6 +100,9 @@ export function createVuetify (vuetify: VuetifyOptions = {}) {
       app.provide(DateOptionsSymbol, date.options)
       app.provide(DateAdapterSymbol, date.instance)
       app.provide(GoToSymbol, goTo)
+      if (typography) {
+        app.provide(TypographySymbol, typography)
+      }
 
       if (IN_BROWSER && options.ssr) {
         if (app.$nuxt) {
@@ -121,6 +131,9 @@ export function createVuetify (vuetify: VuetifyOptions = {}) {
                 icons: inject.call(this, IconSymbol),
                 locale: inject.call(this, LocaleSymbol),
                 date: inject.call(this, DateAdapterSymbol),
+                typography: typography
+                  ? inject.call(this, TypographySymbol)
+                  : null,
               })
             },
           },
@@ -142,6 +155,7 @@ export function createVuetify (vuetify: VuetifyOptions = {}) {
       locale,
       date,
       goTo,
+      typography,
     }
   })!
 }
@@ -150,12 +164,15 @@ export const version = __VUETIFY_VERSION__
 createVuetify.version = version
 
 // Vue's inject() can only be used in setup
-function inject (this: ComponentPublicInstance, key: InjectionKey<any> | string) {
+function inject (
+  this: ComponentPublicInstance,
+  key: InjectionKey<any> | string,
+) {
   const vm = this.$
 
   const provides = vm.parent?.provides ?? vm.vnode.appContext?.provides
 
   if (provides && (key as any) in provides) {
-    return provides[(key as string)]
+    return provides[key as string]
   }
 }
