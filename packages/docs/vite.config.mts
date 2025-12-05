@@ -372,6 +372,7 @@ export default defineConfig(({ command, mode, isSsrBuild }) => {
         'markdown-it-emoji/bare.js',
         'markdown-it-container',
         'markdown-it/lib/token.mjs',
+        'markdown-it-multimd-table',
         'lodash-es',
         'fflate',
         '@cosmicjs/sdk',

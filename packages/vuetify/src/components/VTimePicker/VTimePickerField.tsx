@@ -53,6 +53,7 @@ export const VTimePickerField = genericComponent()({
         <div>
           <VTextField
             ref={ vTextInputRef }
+            _as="VTimePickerField"
             autocomplete="off"
             class={[
               'v-time-picker-controls__time__field',

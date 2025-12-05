@@ -6,7 +6,7 @@ import { useRtl } from '@/composables/locale'
 import { makeRoundedProps } from '@/composables/rounded'
 
 // Utilities
-import { computed, nextTick, provide, ref, shallowRef, toRef } from 'vue'
+import { computed, nextTick, onScopeDispose, provide, ref, shallowRef, toRef } from 'vue'
 import { clamp, createRange, getDecimals, propsFactory } from '@/util'
 
 // Types
@@ -314,6 +314,12 @@ export const useSlider = ({
     window.addEventListener('mousemove', onMouseMove, moveListenerOptions)
     window.addEventListener('mouseup', onSliderMouseUp, { passive: false })
   }
+
+  onScopeDispose(() => {
+    window.removeEventListener('touchmove', onMouseMove)
+    window.removeEventListener('mousemove', onMouseMove)
+    window.removeEventListener('mouseup', onSliderMouseUp)
+  })
 
   const position = (val: number) => {
     const percentage = (val - min.value) / (max.value - min.value) * 100

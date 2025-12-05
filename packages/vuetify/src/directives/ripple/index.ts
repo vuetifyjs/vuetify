@@ -308,7 +308,7 @@ function updateRipple (el: HTMLElement, binding: RippleDirectiveBinding, wasEnab
     el.addEventListener('mouseup', rippleHide)
     el.addEventListener('mouseleave', rippleHide)
 
-    el.addEventListener('keydown', e => keyboardRippleShow(e, allowedKeys))
+    el.addEventListener('keydown', el._ripple.keyDownHandler)
     el.addEventListener('keyup', keyboardRippleHide)
 
     el.addEventListener('blur', focusRippleHide)
@@ -321,19 +321,26 @@ function updateRipple (el: HTMLElement, binding: RippleDirectiveBinding, wasEnab
 }
 
 function removeListeners (el: HTMLElement) {
-  el.removeEventListener('mousedown', rippleShow)
+  el.removeEventListener('touchstart', rippleStop)
+  el.removeEventListener('mousedown', rippleStop)
+
   el.removeEventListener('touchstart', rippleShow)
   el.removeEventListener('touchend', rippleHide)
   el.removeEventListener('touchmove', rippleCancelShow)
   el.removeEventListener('touchcancel', rippleHide)
+
+  el.removeEventListener('mousedown', rippleShow)
   el.removeEventListener('mouseup', rippleHide)
   el.removeEventListener('mouseleave', rippleHide)
+
   if (el._ripple?.keyDownHandler) {
     el.removeEventListener('keydown', el._ripple.keyDownHandler)
   }
   el.removeEventListener('keyup', keyboardRippleHide)
-  el.removeEventListener('dragstart', rippleHide)
+
   el.removeEventListener('blur', focusRippleHide)
+
+  el.removeEventListener('dragstart', rippleHide)
 }
 
 function mounted (el: HTMLElement, binding: RippleDirectiveBinding) {

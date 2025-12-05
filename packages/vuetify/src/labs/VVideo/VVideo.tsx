@@ -249,6 +249,8 @@ export const VVideo = genericComponent<VVideoSlots>()({
 
     onBeforeUnmount(() => {
       videoRef.value?.removeEventListener('timeupdate', onTimeupdate)
+      document.body.removeEventListener('keydown', fullscreenExitShortcut)
+      document.removeEventListener('fullscreenchange', onFullscreenExit)
     })
 
     function focusSlider () {
