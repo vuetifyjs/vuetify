@@ -229,6 +229,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
         disabled: toRef(() => props.disabled),
         error: toRef(() => props.error),
         variant: toRef(() => props.variant),
+        rounded: toRef(() => props.rounded),
       },
     }, { scoped: true })
 

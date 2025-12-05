@@ -79,7 +79,7 @@ export const makeVDatePickerProps = propsFactory({
   },
   landscapeHeaderWidth: [Number, String],
 
-  ...makeVDatePickerControlsProps(),
+  ...omit(makeVDatePickerControlsProps(), ['active', 'monthText', 'yearText']),
   ...makeVDatePickerMonthProps({
     weeksInMonth: 'static' as const,
   }),
@@ -201,7 +201,7 @@ export const VDatePicker = genericComponent<new <
           const prevYearEnd = adapter.addDays(adapter.startOfYear(_date), -1)
 
           adapter.isAfter(minDate.value, prevMonthEnd) && targets.push('prev-month')
-          adapter.isAfter(minDate.value, prevYearEnd) && targets.push('next-year')
+          adapter.isAfter(minDate.value, prevYearEnd) && targets.push('prev-year')
         }
 
         if (maxDate.value) {
