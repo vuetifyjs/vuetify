@@ -247,3 +247,41 @@ export const trunkSelectStrategy = (mandatory?: boolean): SelectStrategy => {
 
   return strategy
 }
+
+export const branchSelectStrategy = (mandatory?: boolean): SelectStrategy => {
+  const parentStrategy = classicSelectStrategy(mandatory)
+
+  const strategy: SelectStrategy = {
+    select: parentStrategy.select,
+    in: (v, children, parents, disabled) => {
+      let map = new Map()
+
+      for (const id of (v || [])) {
+        if (children.has(id)) continue
+        map = strategy.select({
+          id,
+          value: true,
+          selected: map,
+          children,
+          parents,
+          disabled,
+        })
+      }
+
+      return map
+    },
+    out: v => {
+      const arr = []
+
+      for (const [key, value] of v.entries()) {
+        if (value === 'on' || value === 'indeterminate') {
+          arr.push(key)
+        }
+      }
+
+      return arr
+    },
+  }
+
+  return strategy
+}
