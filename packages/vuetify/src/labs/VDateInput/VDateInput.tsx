@@ -69,7 +69,6 @@ export const makeVDateInputProps = propsFactory({
     hideHeader: true,
     showAdjacentMonths: true,
   }), [
-    'active',
     'location',
     'rounded',
     'height',
