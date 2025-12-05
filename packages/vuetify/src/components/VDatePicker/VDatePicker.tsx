@@ -79,7 +79,7 @@ export const makeVDatePickerProps = propsFactory({
   },
   landscapeHeaderWidth: [Number, String],
 
-  ...makeVDatePickerControlsProps(),
+  ...omit(makeVDatePickerControlsProps(), ['active', 'monthText', 'yearText']),
   ...makeVDatePickerMonthProps({
     weeksInMonth: 'static' as const,
   }),
