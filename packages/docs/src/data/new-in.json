@@ -239,6 +239,11 @@
       "autocomplete": "3.10.0"
     }
   },
+  "VOtpInput": {
+    "props": {
+      "density": "3.12.0"
+    }
+  },
   "VOverlay": {
     "props": {
       "captureFocus": "3.11.0",
