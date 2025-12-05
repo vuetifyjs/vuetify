@@ -86,7 +86,7 @@ export const defaultTypography = {
     fontWeight: 500,
     letterSpacing: '0.5px',
   },
-} as Record<string, TypographyStyle>
+} as Record<TypographyVariant, TypographyStyle>
 
 export type TypographyVariant = `${string}-${string}`
 export type TypographyStyle = CSSProperties
