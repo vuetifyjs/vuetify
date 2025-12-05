@@ -63,6 +63,8 @@
 </template>
 
 <script setup>
+  import { ref } from 'vue'
+
   // v-dialog
   const dialog = ref(false)
   const activator = ref(null)
