@@ -1,4 +1,5 @@
 export * from './VColorInput'
+export * from './VCommandPalette'
 export * from './VDateInput'
 export * from './VFileUpload'
 export * from './VIconBtn'

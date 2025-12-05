@@ -130,6 +130,9 @@ export default {
     notEmpty: 'Kérlek, válassz legalább egy értéket',
     pattern: 'Érvénytelen formátum',
   },
+  command: {
+    search: 'Írjon be parancsot vagy keressen...',
+  },
   hotkey: {
     then: 'majd',
     ctrl: 'Ctrl',
