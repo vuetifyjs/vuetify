@@ -212,6 +212,7 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
                 role={ props.role }
                 { ...omit(fieldProps, ['onClick:clear']) }
                 id={ id.value }
+                labelId={ `${id.value}-label` }
                 active={ isActive.value || isDirty.value }
                 dirty={ isDirty.value || props.dirty }
                 disabled={ isDisabled.value }
@@ -241,6 +242,7 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
                         type={ props.type }
                         onFocus={ focus }
                         onBlur={ blur }
+                        aria-labelledby={ `${id.value}-label` }
                         { ...slotProps }
                         { ...inputAttrs }
                       />

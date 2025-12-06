@@ -11,6 +11,10 @@ export default {
     noResultsText: 'Không tìm thấy kết quả nào',
     loadingText: 'Đang tải...',
   },
+  selectionControl: {
+    checked: 'Đã chọn',
+    unchecked: 'Chưa chọn',
+  },
   dataTable: {
     itemsPerPageText: 'Số hàng mỗi trang:',
     ariaLabel: {

@@ -11,6 +11,10 @@ export default {
     noResultsText: 'Eşleşen veri bulunamadı',
     loadingText: 'Yükleniyor... Lütfen bekleyin.',
   },
+  selectionControl: {
+    checked: 'Seçili',
+    unchecked: 'Seçili değil',
+  },
   dataTable: {
     itemsPerPageText: 'Sayfa başına satır:',
     ariaLabel: {

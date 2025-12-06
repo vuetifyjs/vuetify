@@ -11,6 +11,10 @@ export default {
     noResultsText: 'Nisu pronađene odgovarajuće stavke',
     loadingText: 'Učitavanje...',
   },
+  selectionControl: {
+    checked: 'Označeno',
+    unchecked: 'Nije označeno',
+  },
   dataTable: {
     itemsPerPageText: 'Redaka po stranici:',
     ariaLabel: {

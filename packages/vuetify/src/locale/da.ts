@@ -11,6 +11,10 @@ export default {
     noResultsText: 'Ingen matchende data fundet',
     loadingText: 'Indhenter data...',
   },
+  selectionControl: {
+    checked: 'Markeret',
+    unchecked: 'Ikke markeret',
+  },
   dataTable: {
     itemsPerPageText: 'Rækker pr. side:',
     ariaLabel: {
