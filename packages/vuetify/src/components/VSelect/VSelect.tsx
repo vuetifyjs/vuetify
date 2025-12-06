@@ -454,6 +454,13 @@ export const VSelect = genericComponent<new <
                   onAfterLeave={ onAfterLeave }
                   { ...computedMenuProps.value }
                 >
+
+                  { slots['list-header'] && (
+                    <div class="v-select__list-header">
+                      { slots['list-header']() }
+                    </div>
+                  )}
+
                   { hasList && (
                     <VList
                       ref={ listRef }
@@ -471,12 +478,6 @@ export const VSelect = genericComponent<new <
                       { ...props.listProps }
                     >
                       { slots['prepend-item']?.() }
-
-                      { slots['list-header'] && (
-                        <div class="v-select__list-header">
-                          { slots['list-header']() }
-                        </div>
-                      )}
 
                       { !displayItems.value.length && !props.hideNoData && (slots['no-data']?.() ?? (
                         <VListItem key="no-data" title={ t(props.noDataText) } />
