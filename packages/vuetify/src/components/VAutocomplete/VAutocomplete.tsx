@@ -534,6 +534,10 @@ export const VAutocomplete = genericComponent<new <
                                       modelValue={ isSelected }
                                       ripple={ false }
                                       tabindex="-1"
+                                      aria-label={ isSelected
+                                        ? t('$vuetify.selectionControl.checked')
+                                        : t('$vuetify.selectionControl.unchecked')
+                                      }
                                       onClick={ (event: MouseEvent) => event.preventDefault() }
                                     />
                                   ) : undefined }

@@ -11,6 +11,10 @@ export default {
     noResultsText: 'Ningún elemento coincide con la búsqueda',
     loadingText: 'Cargando...',
   },
+  selectionControl: {
+    checked: 'Marcado',
+    unchecked: 'No marcado',
+  },
   dataTable: {
     itemsPerPageText: 'Filas por página:',
     ariaLabel: {

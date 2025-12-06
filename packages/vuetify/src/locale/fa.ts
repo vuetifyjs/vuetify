@@ -11,6 +11,10 @@ export default {
     noResultsText: 'نتیجه‌ای یافت نشد',
     loadingText: 'در حال بارگذاری...',
   },
+  selectionControl: {
+    checked: 'انتخاب شده',
+    unchecked: 'انتخاب نشده',
+  },
   dataTable: {
     itemsPerPageText: 'ردیف در صفحه:',
     ariaLabel: {

@@ -11,6 +11,10 @@ export default {
     noResultsText: 'Sense dades per mostrar',
     loadingText: 'Carregant...',
   },
+  selectionControl: {
+    checked: 'Marcat',
+    unchecked: 'No marcat',
+  },
   dataTable: {
     itemsPerPageText: 'Files per pàgina:',
     ariaLabel: {
