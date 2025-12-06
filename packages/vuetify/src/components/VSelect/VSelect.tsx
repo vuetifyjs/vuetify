@@ -128,6 +128,7 @@ export const VSelect = genericComponent<new <
     'prepend-item': never
     'append-item': never
     'no-data': never
+    'list-header': never
   }
 ) => GenericProps<typeof props, typeof slots>>()({
   name: 'VSelect',
@@ -482,6 +483,12 @@ export const VSelect = genericComponent<new <
                     >
                       { slots['prepend-item']?.() }
 
+                      { slots['list-header'] && (
+                        <div class="v-select__list-header">
+                          { slots['list-header']() }
+                        </div>
+                      )}
+
                       { !displayItems.value.length && !props.hideNoData && (slots['no-data']?.() ?? (
                         <VListItem key="no-data" title={ t(props.noDataText) } />
                       ))}
@@ -649,7 +656,7 @@ export const VSelect = genericComponent<new <
               </>
             ),
           }}
-        </VTextField>
+          </VTextField>
       )
     })
 
