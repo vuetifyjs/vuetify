@@ -127,6 +127,7 @@ export const VSelect = genericComponent<new <
     'prepend-item': never
     'append-item': never
     'no-data': never
+    'list-header': never
   }
 ) => GenericProps<typeof props, typeof slots>>()({
   name: 'VSelect',
@@ -453,6 +454,13 @@ export const VSelect = genericComponent<new <
                   onAfterLeave={ onAfterLeave }
                   { ...computedMenuProps.value }
                 >
+
+                  { slots['list-header'] && (
+                    <div>
+                      { slots['list-header']() }
+                    </div>
+                  )}
+
                   { hasList && (
                     <VList
                       ref={ listRef }
@@ -627,7 +635,7 @@ export const VSelect = genericComponent<new <
               </>
             ),
           }}
-        </VTextField>
+          </VTextField>
       )
     })
 
