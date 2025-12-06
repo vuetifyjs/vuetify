@@ -11,6 +11,10 @@ export default {
     noResultsText: 'Neboli nájdené žiadne záznamy',
     loadingText: 'Načítavam položky...',
   },
+  selectionControl: {
+    checked: 'Označené',
+    unchecked: 'Neoznačené',
+  },
   dataTable: {
     itemsPerPageText: 'Počet riadkov na stránku:',
     ariaLabel: {

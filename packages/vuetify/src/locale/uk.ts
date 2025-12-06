@@ -11,6 +11,10 @@ export default {
     noResultsText: 'В результаті пошуку нічого не знайдено',
     loadingText: 'Завантаження...',
   },
+  selectionControl: {
+    checked: 'Вибрано',
+    unchecked: 'Не вибрано',
+  },
   dataTable: {
     itemsPerPageText: 'Рядків на сторінці:',
     ariaLabel: {

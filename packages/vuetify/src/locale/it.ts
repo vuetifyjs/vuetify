@@ -11,6 +11,10 @@ export default {
     noResultsText: 'Nessun risultato trovato',
     loadingText: 'Caricamento in corso...',
   },
+  selectionControl: {
+    checked: 'Selezionato',
+    unchecked: 'Non selezionato',
+  },
   dataTable: {
     itemsPerPageText: 'Righe per pagina:',
     ariaLabel: {

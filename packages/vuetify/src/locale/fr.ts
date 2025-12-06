@@ -11,6 +11,10 @@ export default {
     noResultsText: 'Aucun enregistrement correspondant trouvé',
     loadingText: `Chargement de l'élément...`,
   },
+  selectionControl: {
+    checked: 'Coché',
+    unchecked: 'Decoché',
+  },
   dataTable: {
     itemsPerPageText: 'Lignes par page :',
     ariaLabel: {
