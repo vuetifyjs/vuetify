@@ -456,7 +456,7 @@ export const VSelect = genericComponent<new <
                 >
 
                   { slots['list-header'] && (
-                    <div class="v-select__list-header">
+                    <div>
                       { slots['list-header']() }
                     </div>
                   )}
