@@ -67,7 +67,7 @@ export const VCommandPalette = genericComponent()({
     const previouslyFocusedElement = shallowRef<HTMLElement | null>(null)
 
     const internalItems = computed(() =>
-      props.items.map((item, index) => ({ value: index, raw: item }))
+      props.items.map((item, index) => ({ value: index, raw: item, title: item.title }))
     )
 
     const { filteredItems: filterResult } = useFilter(props, internalItems, searchQuery)
