@@ -36,7 +36,7 @@ export type ComponentEvents = Events<__component__>
 type Slot<T extends any[] = any[]> = (...args: T) => VNodeChild
 type Slots<
   T extends { $props: any },
-  S = '$children' extends keyof T['$props'] ? Exclude<T['$props']['$children'], VNodeChild> : never
+  S = '$children' extends keyof T['$props'] ? Exclude<T['$props']['$children'], VNodeChild | { $stable?: boolean }> : never
 > = '$children' extends keyof T['$props']
   ? ExcludeEmpty<{ [K in keyof S]-?: Exclude<S[K], undefined> extends Slot<infer A> ? A[0] : never }>
   : never
@@ -55,4 +55,15 @@ type ExtractExposed<T> = T extends ComponentOptionsBase<any, infer B, any, any, 
 
 type Pretty<T> = { [K in keyof T]: UnwrapRef<T[K]> }
 
-export type ComponentExposed = Pretty<UnionToIntersection<ExtractExposed<__component__['$options']>>>
+// Filter out HTMLInputElement props from exposed
+type CleanHTMLInputElement<T> = {
+  // If key is in HTMLInputElement
+  [K in keyof T as K extends keyof HTMLInputElement
+    ? // If value is the same type in HTMLInputElement
+      T[K] extends HTMLInputElement[K]
+      ? never
+      : K
+    : K]: T[K];
+};
+
+export type ComponentExposed = Pretty<CleanHTMLInputElement<UnionToIntersection<ExtractExposed<__component__['$options']>>>>

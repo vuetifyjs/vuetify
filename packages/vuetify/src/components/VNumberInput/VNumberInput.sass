@@ -1,0 +1,78 @@
+@use 'sass:selector'
+@use '../../styles/tools'
+@use './variables' as *
+
+@include tools.layer('components')
+  .v-number-input
+    input[type="number"]
+      -moz-appearance: textfield
+
+      &::-webkit-outer-spin-button,
+      &::-webkit-inner-spin-button
+        -webkit-appearance: none
+
+    .v-field
+      &:has(.v-field__prepend-inner > .v-number-input__control:first-child)
+        padding-inline-start: 0
+
+      &:has(.v-field__append-inner > .v-number-input__control:last-child)
+        padding-inline-end: 0
+
+    .v-field__prepend-inner:has(.v-number-input__control)
+      > .v-icon
+        margin-inline-end: 4px
+
+      > hr + .v-icon,
+      > .v-number-input__control + .v-icon
+        margin-inline: 8px 0
+
+    .v-field__append-inner:has(.v-number-input__control)
+      > .v-icon
+        margin-inline-start: 4px
+
+      > .v-icon:has(+ hr),
+      > .v-icon:has(+ .v-number-input__control)
+        margin-inline: 0 8px
+
+    .v-field__clearable:has(+ .v-field__append-inner > hr:first-child)
+      margin-inline-end: 8px
+
+    &--inset
+      .v-divider
+        height: $number-input-inset-divider-size
+        width: $number-input-inset-divider-size
+        align-self: center
+
+    &--split
+      .v-field__input
+        text-align: center
+
+    &--stacked
+      .v-number-input__control
+        flex-direction: column-reverse
+        .v-btn
+          flex: 1
+
+      .v-field--variant-underlined
+        > .v-field__prepend-inner:has(.v-number-input__control),
+        > .v-field__append-inner:has(.v-number-input__control)
+          // drop input padding
+          padding-top: var(--v-field-padding-top)
+          // and pass it down
+          > *:not(.v-number-input__control, .v-divider--vertical)
+            margin-top: var(--v-input-padding-top, 0)
+
+    &--hide-input
+      .v-field
+        flex: none
+        &__input
+          width: 0
+          padding-inline: 0
+
+    &__control
+      display: flex
+      height: 100%
+
+      .v-btn
+        background-color: transparent
+        border-radius: 0

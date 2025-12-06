@@ -45,7 +45,7 @@ Applies a custom float across any breakpoint with responsive float utilities.
 | **float-xl-end** |  float: end; |
 | **float-xl-none** |  float: none; { style="max-height: 420px;" fixed-header } |
 
-<VoPromotionsCardVuetify />
+<PromotedEntry />
 
 <FeaturesBreakpointsTable />
 

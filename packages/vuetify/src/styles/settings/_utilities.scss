@@ -117,6 +117,16 @@ $utilities: () !default;
           space-evenly: space-evenly,
         )
       ),
+      "justify-items": (
+        responsive: true,
+        property: justify-items,
+        values: (
+          start: flex-start,
+          end: flex-end,
+          center: center,
+          stretch: stretch,
+        )
+      ),
       "align-items": (
         responsive: true,
         property: align-items,
@@ -416,6 +426,11 @@ $utilities: () !default;
         property: border-width border-style border-color,
         class: border,
         values: variables.$borders
+      ),
+      "border-current": (
+        property: border-color,
+        class: border,
+        values: (current: currentColor)
       ),
       "border-opacity": (
         property: --v-border-opacity,

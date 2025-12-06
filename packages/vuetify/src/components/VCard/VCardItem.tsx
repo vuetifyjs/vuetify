@@ -9,8 +9,10 @@ import { VIcon } from '@/components/VIcon'
 import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps } from '@/composables/density'
 import { IconValue } from '@/composables/icons'
+import { makeTagProps } from '@/composables/tag'
 
 // Utilities
+import { toDisplayString } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 export type VCardItemSlots = {
@@ -26,11 +28,18 @@ export const makeCardItemProps = propsFactory({
   appendIcon: IconValue,
   prependAvatar: String,
   prependIcon: IconValue,
-  subtitle: [String, Number],
-  title: [String, Number],
+  subtitle: {
+    type: [String, Number, Boolean],
+    default: undefined,
+  },
+  title: {
+    type: [String, Number, Boolean],
+    default: undefined,
+  },
 
   ...makeComponentProps(),
   ...makeDensityProps(),
+  ...makeTagProps(),
 }, 'VCardItem')
 
 export const VCardItem = genericComponent<VCardItemSlots>()({
@@ -48,7 +57,7 @@ export const VCardItem = genericComponent<VCardItemSlots>()({
       const hasSubtitle = !!(props.subtitle != null || slots.subtitle)
 
       return (
-        <div
+        <props.tag
           class={[
             'v-card-item',
             props.class,
@@ -98,13 +107,13 @@ export const VCardItem = genericComponent<VCardItemSlots>()({
           <div class="v-card-item__content">
             { hasTitle && (
               <VCardTitle key="title">
-                { slots.title?.() ?? props.title }
+                { slots.title?.() ?? toDisplayString(props.title) }
               </VCardTitle>
             )}
 
             { hasSubtitle && (
               <VCardSubtitle key="subtitle">
-                { slots.subtitle?.() ?? props.subtitle }
+                { slots.subtitle?.() ?? toDisplayString(props.subtitle) }
               </VCardSubtitle>
             )}
 
@@ -150,7 +159,7 @@ export const VCardItem = genericComponent<VCardItemSlots>()({
               )}
            </div>
           )}
-        </div>
+        </props.tag>
       )
     })
 

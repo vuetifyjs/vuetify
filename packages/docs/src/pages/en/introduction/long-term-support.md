@@ -15,7 +15,7 @@ Vuetify provides long-term support to the last major release for 18 months for c
 
 <PageFeatures />
 
-<VoPromotionsCardVuetify />
+<PromotedEntry />
 
 We understand that many projects that utilize Vuetify have development cycles that prevent upgrading to the latest version. In order to provide developers and businesses peace of mind when adopting Vuetify, we commit to at minimum of **6 months** for critical bugs and security vulnerabilities for the latest _minor_ of the last _major_ release.
 

@@ -1,7 +1,7 @@
 // Utilities
-import { computed } from 'vue'
+import { computed, useId } from 'vue'
 import { makeLineProps } from './util/line'
-import { genericComponent, getPropertyFromItem, getUid, propsFactory, useRender } from '@/util'
+import { genericComponent, getPropertyFromItem, PREFERS_REDUCED_MOTION, propsFactory, useRender } from '@/util'
 
 // Types
 export type VBarlineSlots = {
@@ -42,7 +42,7 @@ export const VBarline = genericComponent<VBarlineSlots>()({
   props: makeVBarlineProps(),
 
   setup (props, { slots }) {
-    const uid = getUid()
+    const uid = useId()
     const id = computed(() => props.id || `barline-${uid}`)
     const autoDrawDuration = computed(() => Number(props.autoDrawDuration) || 500)
 
@@ -73,6 +73,7 @@ export const VBarline = genericComponent<VBarlineSlots>()({
       boundary: Boundary
     ): Bar[] {
       const { minX, maxX, minY, maxY } = boundary
+
       const totalValues = values.length
       let maxValue = props.max != null ? Number(props.max) : Math.max(...values)
       let minValue = props.min != null ? Number(props.min) : Math.min(...values)
@@ -80,7 +81,7 @@ export const VBarline = genericComponent<VBarlineSlots>()({
       if (minValue > 0 && props.min == null) minValue = 0
       if (maxValue < 0 && props.max == null) maxValue = 0
 
-      const gridX = maxX / totalValues
+      const gridX = maxX / (totalValues === 1 ? 2 : totalValues)
       const gridY = (maxY - minY) / ((maxValue - minValue) || 1)
       const horizonY = maxY - Math.abs(minValue * gridY)
 
@@ -90,7 +91,7 @@ export const VBarline = genericComponent<VBarlineSlots>()({
         return {
           x: minX + index * gridX,
           y: horizonY - height +
-            +(value < 0) * height,
+            Number(value < 0) * height,
           height,
           value,
         }
@@ -122,7 +123,10 @@ export const VBarline = genericComponent<VBarlineSlots>()({
     })
 
     const bars = computed(() => genBars(items.value, boundary.value))
-    const offsetX = computed(() => (Math.abs(bars.value[0].x - bars.value[1].x) - lineWidth.value) / 2)
+    const offsetX = computed(() => bars.value.length === 1
+      ? (boundary.value.maxX - lineWidth.value) / 2
+      : (Math.abs(bars.value[0].x - (bars.value[1].x)) - lineWidth.value) / 2
+    )
     const smooth = computed(() => typeof props.smooth === 'boolean' ? (props.smooth ? 2 : 0) : Number(props.smooth))
 
     useRender(() => {
@@ -159,7 +163,7 @@ export const VBarline = genericComponent<VBarlineSlots>()({
                     rx={ smooth.value }
                     ry={ smooth.value }
                 >
-                  { props.autoDraw && (
+                  { props.autoDraw && !PREFERS_REDUCED_MOTION() && (
                     <>
                       <animate
                         attributeName="y"

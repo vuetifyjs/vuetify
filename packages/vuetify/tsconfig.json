@@ -4,13 +4,11 @@
     "src",
     "dev",
   ],
-  "exclude": ["types-temp", "**/*.spec.cy.ts", "**/*.spec.cy.tsx"],
+  "exclude": ["**/*.spec.cy.ts", "**/*.spec.cy.tsx"],
   "compilerOptions": {
-    "baseUrl": ".",
-    "outDir": "./types-temp",
     "paths": {
-      "@/*": ["src/*"],
-      "@test": ["test/index.ts"]
+      "@/*": ["./src/*"],
+      "@test": ["./test/index.ts"]
     },
     "types": [
       "node",

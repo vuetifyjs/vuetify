@@ -11,8 +11,14 @@
     .v-timeline-divider__dot
       background: $timeline-dot-divider-background
 
+      @media (forced-colors: active)
+        border: 2px solid
+
     .v-timeline-divider__inner-dot
       background: $timeline-inner-dot-divider-background
+
+      @media (forced-colors: active)
+        background-color: transparent !important
 
   .v-timeline
     display: grid
@@ -23,24 +29,30 @@
       grid-column-gap: $timeline-item-padding
       width: 100%
 
-      .v-timeline-item:nth-child(2n)
+      .v-timeline--side-end > .v-timeline-item,
+      &:not(.v-timeline--side-start) > .v-timeline-item--side-end,
+      &:not(.v-timeline--side-start) > .v-timeline-item:nth-child(2n+1):not(.v-timeline-item--side-start)
         .v-timeline-item__body
           grid-row: 3
+          align-self: flex-start
           padding-block-start: $timeline-item-padding
 
         .v-timeline-item__opposite
           grid-row: 1
-          padding-block-end: $timeline-item-padding
           align-self: flex-end
+          padding-block-end: $timeline-item-padding
 
-      .v-timeline-item:nth-child(2n+1)
+      .v-timeline--side-start > .v-timeline-item,
+      &:not(.v-timeline--side-end) > .v-timeline-item--side-start,
+      &:not(.v-timeline--side-end) > .v-timeline-item:nth-child(2n):not(.v-timeline-item--side-end)
         .v-timeline-item__body
           grid-row: 1
-          padding-block-end: $timeline-item-padding
           align-self: flex-end
+          padding-block-end: $timeline-item-padding
 
         .v-timeline-item__opposite
           grid-row: 3
+          align-self: flex-start
           padding-block-start: $timeline-item-padding
 
     @include vertical(true)
@@ -53,18 +65,25 @@
       @include timeline-last-item()
         padding-block-end: $timeline-item-padding
 
-      .v-timeline-item:nth-child(2n)
+      .v-timeline--side-start > .v-timeline-item,
+      &:not(.v-timeline--side-end) > .v-timeline-item--side-start,
+      &:not(.v-timeline--side-end) > .v-timeline-item:nth-child(2n):not(.v-timeline-item--side-end)
         .v-timeline-item__body
           grid-column: 1
+          justify-self: flex-end
           padding-inline-end: $timeline-item-padding
 
         .v-timeline-item__opposite
           grid-column: 3
+          justify-self: flex-start
           padding-inline-start: $timeline-item-padding
 
-      .v-timeline-item:nth-child(2n+1)
+      .v-timeline--side-end > .v-timeline-item,
+      &:not(.v-timeline--side-start) > .v-timeline-item--side-end,
+      &:not(.v-timeline--side-start) > .v-timeline-item:nth-child(2n+1):not(.v-timeline-item--side-start)
         .v-timeline-item__body
           grid-column: 3
+          justify-self: flex-start
           padding-inline-start: $timeline-item-padding
 
         .v-timeline-item__opposite
@@ -111,6 +130,9 @@
       width: $timeline-divider-line-thickness
       top: $timeline-line-start
 
+    @media (forced-colors: active)
+      background: canvastext
+
   .v-timeline-divider__after
     background: $timeline-divider-line-background
     position: absolute
@@ -125,6 +147,9 @@
       height: $timeline-line-size
       width: $timeline-divider-line-thickness
       bottom: $timeline-line-start
+
+    @media (forced-colors: active)
+      background: canvastext
 
   .v-timeline-item:first-child
     .v-timeline-divider__before
@@ -260,20 +285,22 @@
       @include horizontal(true)
         .v-timeline-item__body
           grid-row: 3
+          align-self: flex-start
           padding-block-end: initial
           padding-block-start: $timeline-item-padding
 
         .v-timeline-item__opposite
           grid-row: 1
+          align-self: flex-end
           padding-block-end: $timeline-item-padding
           padding-block-start: initial
 
       @include vertical(true)
         .v-timeline-item__body
           grid-column: 3
+          justify-self: flex-start
           padding-inline-start: $timeline-item-padding
           padding-inline-end: initial
-          justify-self: flex-start
 
         .v-timeline-item__opposite
           grid-column: 1
@@ -286,11 +313,13 @@
       @include horizontal(true)
         .v-timeline-item__body
           grid-row: 1
+          align-self: flex-end
           padding-block-end: $timeline-item-padding
           padding-block-start: initial
 
         .v-timeline-item__opposite
           grid-row: 3
+          align-self: flex-start
           padding-block-end: initial
           padding-block-start: $timeline-item-padding
 
@@ -302,8 +331,8 @@
 
         .v-timeline-item__opposite
           grid-column: 3
-          padding-inline-start: $timeline-item-padding
           justify-self: flex-start
+          padding-inline-start: $timeline-item-padding
 
   // Fill dot
   .v-timeline-divider--fill-dot

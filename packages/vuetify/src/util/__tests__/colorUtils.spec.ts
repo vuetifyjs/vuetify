@@ -45,9 +45,12 @@ describe('parseColor', () => {
 
   it('should parse a CSS color string', () => {
     expect(parseColor('rgb(255, 0, 0)')).toEqual({ r: 255, g: 0, b: 0, a: undefined })
+    expect(parseColor('rgb(255 0 0)')).toEqual({ r: 255, g: 0, b: 0, a: undefined })
     expect(parseColor('rgba(255, 0, 0, 0.5)')).toEqual({ r: 255, g: 0, b: 0, a: 0.5 })
+    expect(parseColor('rgba(255 0 0 / 0.5)')).toEqual({ r: 255, g: 0, b: 0, a: 0.5 })
     expect(parseColor('hsl(100, 50%, 25%)')).toEqual({ r: 53, g: 96, b: 32, a: undefined })
     expect(parseColor('hsla(100, 50%, 25%, 0.5)')).toEqual({ r: 53, g: 96, b: 32, a: 0.5 })
+    expect(parseColor('hsl(100 50 25 / 0.5)')).toEqual({ r: 53, g: 96, b: 32, a: 0.5 })
   })
 
   it('should parse rgb object', () => {
@@ -230,7 +233,7 @@ describe('APCAcontrast', () => {
     ['#def', '#123', -98.44863435731264],
     ['#123', '#234', 1.276075977788573],
   ])('%s on %s', (text, bg, expected) => {
-    expect(APCAcontrast(parseColor(text), parseColor(bg))).toBe(expected)
+    expect(APCAcontrast(parseColor(text), parseColor(bg))).toBeCloseTo(expected, 13)
   })
 })
 

@@ -11,12 +11,13 @@ import { makeVSelectionControlProps, VSelectionControl } from '@/components/VSel
 
 // Composables
 import { useFocus } from '@/composables/focus'
+import { forwardRefs } from '@/composables/forwardRefs'
 import { LoaderSlot, useLoader } from '@/composables/loader'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, ref } from 'vue'
-import { filterInputAttrs, genericComponent, getUid, IN_BROWSER, propsFactory, useRender } from '@/util'
+import { ref, toRef, useId } from 'vue'
+import { filterInputAttrs, genericComponent, propsFactory, SUPPORTS_MATCH_MEDIA, useRender } from '@/util'
 
 // Types
 import type { ComputedRef, Ref } from 'vue'
@@ -79,16 +80,17 @@ export const VSwitch = genericComponent<new <T>(
     const { loaderClasses } = useLoader(props)
     const { isFocused, focus, blur } = useFocus(props)
     const control = ref<VSelectionControl>()
-    const isForcedColorsModeActive = IN_BROWSER && window.matchMedia('(forced-colors: active)').matches
+    const inputRef = ref<VInput>()
+    const isForcedColorsModeActive = SUPPORTS_MATCH_MEDIA && window.matchMedia('(forced-colors: active)').matches
 
-    const loaderColor = computed(() => {
+    const loaderColor = toRef(() => {
       return typeof props.loading === 'string' && props.loading !== ''
         ? props.loading
         : props.color
     })
 
-    const uid = getUid()
-    const id = computed(() => props.id || `switch-${uid}`)
+    const uid = useId()
+    const id = toRef(() => props.id || `switch-${uid}`)
 
     function onChange () {
       if (indeterminate.value) {
@@ -108,6 +110,7 @@ export const VSwitch = genericComponent<new <T>(
 
       return (
         <VInput
+          ref={ inputRef }
           class={[
             'v-switch',
             { 'v-switch--flat': props.flat },
@@ -243,7 +246,7 @@ export const VSwitch = genericComponent<new <T>(
       )
     })
 
-    return {}
+    return forwardRefs({}, inputRef)
   },
 })
 

@@ -4,10 +4,11 @@ import { useResizeObserver } from '@/composables/resizeObserver'
 
 // Utilities
 import { computed, nextTick, onScopeDispose, ref, shallowRef, watch, watchEffect } from 'vue'
-import { clamp, debounce, IN_BROWSER, isObject, propsFactory } from '@/util'
+import { clamp, debounce, getPropertyFromItem, IN_BROWSER, propsFactory } from '@/util'
 
 // Types
-import type { Ref } from 'vue'
+import type { PropType, Ref } from 'vue'
+import type { SelectItemKey } from '@/util'
 
 const UP = -1
 const DOWN = 1
@@ -16,13 +17,18 @@ const DOWN = 1
 const BUFFER_PX = 100
 
 type VirtualProps = {
-  itemHeight?: number | string
-  height?: number | string
+  itemHeight: number | string | null | undefined
+  itemKey: SelectItemKey
+  height: number | string | undefined
 }
 
 export const makeVirtualProps = propsFactory({
   itemHeight: {
     type: [Number, String],
+    default: null,
+  },
+  itemKey: {
+    type: [String, Array, Function] as PropType<SelectItemKey>,
     default: null,
   },
   height: [Number, String],
@@ -82,7 +88,7 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
     const start = performance.now()
     offsets[0] = 0
     const length = items.value.length
-    for (let i = 1; i <= length - 1; i++) {
+    for (let i = 1; i <= length; i++) {
       offsets[i] = (offsets[i - 1] || 0) + getSize(i - 1)
     }
     updateTime.value = Math.max(updateTime.value, performance.now() - start)
@@ -125,8 +131,13 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
   }
 
   function calculateOffset (index: number) {
-    index = clamp(index, 0, items.value.length - 1)
-    return offsets[index] || 0
+    index = clamp(index, 0, items.value.length)
+    const whole = Math.floor(index)
+    const fraction = index % 1
+    const next = whole + 1
+    const wholeOffset = offsets[whole] || 0
+    const nextOffset = offsets[next] || wholeOffset
+    return wholeOffset + (nextOffset - wholeOffset) * fraction
   }
 
   function calculateIndex (scrollTop: number) {
@@ -191,7 +202,7 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
     raf = requestAnimationFrame(_calculateVisibleItems)
   }
   function _calculateVisibleItems () {
-    if (!containerRef.value || !viewportHeight.value) return
+    if (!containerRef.value || !viewportHeight.value || !itemHeight.value) return
     const scrollTop = lastScrollTop - markerOffset
     const direction = Math.sign(scrollVelocity)
 
@@ -235,11 +246,14 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
   }
 
   const computedItems = computed(() => {
-    return items.value.slice(first.value, last.value).map((item, index) => ({
-      raw: item,
-      index: index + first.value,
-      key: (isObject(item) && 'value' in item) ? item.value : index + first.value,
-    }))
+    return items.value.slice(first.value, last.value).map((item, index) => {
+      const _index = index + first.value
+      return {
+        raw: item,
+        index: _index,
+        key: getPropertyFromItem(item, props.itemKey, _index),
+      }
+    })
   })
 
   watch(items, () => {
@@ -247,7 +261,7 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
     offsets = Array.from({ length: items.value.length })
     updateOffsets.immediate()
     calculateVisibleItems()
-  }, { deep: true })
+  }, { deep: 1 })
 
   return {
     calculateVisibleItems,

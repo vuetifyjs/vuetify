@@ -10,7 +10,7 @@ meta:
   import AboutTeamMember from '@/components/about/TeamMember.vue'
   import { VSparkline } from 'vuetify'
 
-  const teams = useTeamStore()
+  const teams = useTeamMembersStore()
   const kael = computed(() => teams.members.find(member => member.github === 'KaelWD'))
 </script>
 
@@ -20,7 +20,7 @@ meta:
 
 🖊️ John Leider • 📅 September 8th, 2024
 
-<VoPromotionsCardVuetify />
+<PromotedEntry />
 
 ---
 

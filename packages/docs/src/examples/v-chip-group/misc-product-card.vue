@@ -3,7 +3,7 @@
     class="mx-auto"
     max-width="400"
   >
-    <v-card-title>
+    <v-card-title class="d-flex">
       <h2 class="text-h4">Shirt Blouse</h2>
 
       <v-spacer></v-spacer>
@@ -22,7 +22,8 @@
 
       <v-chip-group
         v-model="selection"
-        selected-class="text-deep-purple-accent-4"
+        selected-class="v-chip--selected v-chip--variant-tonal text-deep-purple-accent-4"
+        variant="outlined"
         mandatory
       >
         <v-chip
@@ -30,7 +31,6 @@
           :key="size"
           :text="size"
           :value="size"
-          variant="outlined"
         ></v-chip>
       </v-chip-group>
     </v-card-text>

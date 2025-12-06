@@ -7,6 +7,7 @@ import { VIcon } from '@/components/VIcon'
 // Composables
 import { useBackgroundColor, useTextColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
+import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { IconValue } from '@/composables/icons'
 import { useLocale } from '@/composables/locale'
 import { makeLocationProps, useLocation } from '@/composables/location'
@@ -16,7 +17,6 @@ import { makeThemeProps, useTheme } from '@/composables/theme'
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 
 // Utilities
-import { toRef } from 'vue'
 import { genericComponent, pickWithRest, propsFactory, useRender } from '@/util'
 
 export type VBadgeSlots = {
@@ -51,6 +51,7 @@ export const makeVBadgeProps = propsFactory({
   ...makeTagProps(),
   ...makeThemeProps(),
   ...makeTransitionProps({ transition: 'scale-rotate-transition' }),
+  ...makeDimensionProps(),
 }, 'VBadge')
 
 export const VBadge = genericComponent<VBadgeSlots>()({
@@ -61,10 +62,10 @@ export const VBadge = genericComponent<VBadgeSlots>()({
   props: makeVBadgeProps(),
 
   setup (props, ctx) {
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.color)
     const { roundedClasses } = useRounded(props)
     const { t } = useLocale()
-    const { textColorClasses, textColorStyles } = useTextColor(toRef(props, 'textColor'))
+    const { textColorClasses, textColorStyles } = useTextColor(() => props.textColor)
     const { themeClasses } = useTheme()
 
     const { locationStyles } = useLocation(props, true, side => {
@@ -73,16 +74,18 @@ export const VBadge = genericComponent<VBadgeSlots>()({
         : (props.dot ? 8 : 12)
 
       return base + (
-        ['top', 'bottom'].includes(side) ? +(props.offsetY ?? 0)
-        : ['left', 'right'].includes(side) ? +(props.offsetX ?? 0)
+        ['top', 'bottom'].includes(side) ? Number(props.offsetY ?? 0)
+        : ['left', 'right'].includes(side) ? Number(props.offsetX ?? 0)
         : 0
       )
     })
 
+    const { dimensionStyles } = useDimension(props)
+
     useRender(() => {
       const value = Number(props.content)
       const content = (!props.max || isNaN(value)) ? props.content
-        : value <= +props.max ? value
+        : value <= Number(props.max) ? value
         : `${props.max}+`
 
       const [badgeAttrs, attrs] = pickWithRest(ctx.attrs as Record<string, any>, [
@@ -124,6 +127,7 @@ export const VBadge = genericComponent<VBadgeSlots>()({
                 style={[
                   backgroundColorStyles.value,
                   textColorStyles.value,
+                  dimensionStyles.value,
                   props.inline ? {} : locationStyles.value,
                 ]}
                 aria-atomic="true"

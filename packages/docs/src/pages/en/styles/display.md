@@ -77,7 +77,7 @@ Display helpers control content visibility and display type based on the viewpor
 | **d-sr-only** | display: none; |
 | **d-sr-only-focusable** | display: none; { style="max-height: 420px;" fixed-header } |
 
-<VoPromotionsCardVuetify />
+<PromotedEntry />
 
 <FeaturesBreakpointsTable />
 

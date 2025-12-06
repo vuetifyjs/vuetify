@@ -18,7 +18,7 @@ import { makeTagProps } from '@/composables/tag'
 
 // Utilities
 import { computed, toRef } from 'vue'
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { genericComponent, isObject, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -47,6 +47,7 @@ export const makeVBreadcrumbsProps = propsFactory({
     type: Array as PropType<readonly BreadcrumbItem[]>,
     default: () => ([]),
   },
+  itemProps: Boolean,
 
   ...makeComponentProps(),
   ...makeDensityProps(),
@@ -71,19 +72,19 @@ export const VBreadcrumbs = genericComponent<new <T extends BreadcrumbItem>(
   props: makeVBreadcrumbsProps(),
 
   setup (props, { slots }) {
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'bgColor'))
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.bgColor)
     const { densityClasses } = useDensity(props)
     const { roundedClasses } = useRounded(props)
 
     provideDefaults({
       VBreadcrumbsDivider: {
-        divider: toRef(props, 'divider'),
+        divider: toRef(() => props.divider),
       },
       VBreadcrumbsItem: {
-        activeClass: toRef(props, 'activeClass'),
-        activeColor: toRef(props, 'activeColor'),
-        color: toRef(props, 'color'),
-        disabled: toRef(props, 'disabled'),
+        activeClass: toRef(() => props.activeClass),
+        activeColor: toRef(() => props.activeColor),
+        color: toRef(() => props.color),
+        disabled: toRef(() => props.disabled),
       },
     })
 
@@ -139,6 +140,7 @@ export const VBreadcrumbs = genericComponent<new <T extends BreadcrumbItem>(
                   key={ index }
                   disabled={ index >= array.length - 1 }
                   { ...(typeof item === 'string' ? { title: item } : item) }
+                  { ...(props.itemProps && isObject(raw) ? raw : {}) }
                   v-slots={{
                     default: slots.title ? () => slots.title?.({ item, index }) : undefined,
                   }}

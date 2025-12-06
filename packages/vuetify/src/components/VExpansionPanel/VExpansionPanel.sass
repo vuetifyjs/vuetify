@@ -78,6 +78,9 @@
     transition-property: margin-top, border-radius, border, max-width
     border-radius: $expansion-panel-border-radius
 
+    @media (prefers-reduced-motion: reduce)
+      transition-property: border-radius, border
+
     &:not(:first-child)::after
       border-top-style: solid
       border-top-width: thin
@@ -124,9 +127,11 @@
     outline: none
     padding: $expansion-panel-title-padding
     position: relative
-    transition: .3s min-height settings.$standard-easing
     width: 100%
     justify-content: space-between
+
+    @media (prefers-reduced-motion: no-preference)
+      transition: .3s min-height settings.$standard-easing
 
     @include tools.states('.v-expansion-panel-title__overlay', false)
 

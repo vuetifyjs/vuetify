@@ -15,29 +15,12 @@
 <script setup>
   const { t } = useI18n()
   const items = computed(() => ([
-    { subheader: t('social') },
-    {
-      title: 'X',
-      href: 'https://x.com/vuetifyjs',
-      appendIcon: '$x',
-    },
-    {
-      title: 'Discord',
-      href: 'https://community.vuetifyjs.com/',
-      appendIcon: '$discord',
-    },
-    {
-      title: 'github',
-      href: 'https://github.com/vuetifyjs/vuetify',
-      appendIcon: 'mdi-github',
-    },
-    {
-      title: 'reddit',
-      href: 'https://reddit.com/r/vuetifyjs',
-      appendIcon: 'mdi-reddit',
-    },
-    { divider: true },
     { subheader: t('tools') },
+    {
+      title: 'vuetify-one',
+      to: rpath('/one/'),
+      appendIcon: '$vuetify-outline',
+    },
     {
       title: 'awesome',
       href: 'https://github.com/vuetifyjs/awesome-vuetify',
@@ -46,7 +29,7 @@
     {
       title: 'brand-kit',
       to: rpath('/resources/brand-kit/'),
-      appendIcon: '$vuetify-outline',
+      appendIcon: 'mdi-image-outline',
     },
     {
       title: 'create',
@@ -87,6 +70,38 @@
       title: 'ui-kits',
       to: rpath('/resources/ui-kits/'),
       appendIcon: 'mdi-vector-difference-ab',
+    },
+    { divider: true },
+    { subheader: t('social') },
+    {
+      title: 'Blog',
+      to: rpath('/blog'),
+      appendIcon: 'mdi-post-outline',
+    },
+    {
+      title: 'X',
+      href: 'https://x.com/vuetifyjs',
+      appendIcon: '$x',
+    },
+    {
+      title: 'bluesky',
+      href: 'https://bsky.app/profile/vuetify.bsky.social',
+      appendIcon: 'mdi-bluesky',
+    },
+    {
+      title: 'Discord',
+      href: 'https://community.vuetifyjs.com/',
+      appendIcon: '$discord',
+    },
+    {
+      title: 'github',
+      href: 'https://github.com/vuetifyjs/vuetify',
+      appendIcon: 'mdi-github',
+    },
+    {
+      title: 'reddit',
+      href: 'https://reddit.com/r/vuetifyjs',
+      appendIcon: 'mdi-reddit',
     },
   ]))
 </script>

@@ -92,7 +92,7 @@ Use border utilities to quickly style the border-radius of any element.
 | **rounded-s-circle** | border-inline-start-radius: 50%; |
 | **rounded-s-shaped** | border-inline-start-radius: 24px; border-inline-end-radius: 0; { style="max-height: 420px;" fixed-header } |
 
-<VoPromotionsCardVuetify />
+<PromotedEntry />
 
 ## Usage
 

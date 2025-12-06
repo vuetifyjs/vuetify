@@ -24,6 +24,9 @@
           &--floating
             top: 0px
 
+    .v-field__input
+      word-break: break-word
+
     input[type="file"]
       height: 100%
       left: 0
@@ -31,6 +34,10 @@
       position: absolute
       top: 0
       width: 100%
+      z-index: 0
+
+    &--dragging input[type="file"]
+      z-index: 1
 
     .v-input__details
       padding-inline: $file-input-details-padding-inline

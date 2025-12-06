@@ -1,9 +1,9 @@
 <template>
   <v-bottom-sheet v-model="sheet">
-    <template v-slot:activator="{ props }">
-      <div class="text-center">
+    <template v-slot:activator="{ props: activatorProps }">
+      <div class="text-center pa-8">
         <v-btn
-          v-bind="props"
+          v-bind="activatorProps"
           color="purple"
           size="x-large"
           text="Click Me"
@@ -12,7 +12,7 @@
     </template>
 
     <v-list>
-      <v-list-subheader>Open in</v-list-subheader>
+      <v-list-subheader title="Open in"></v-list-subheader>
 
       <v-list-item
         v-for="tile in tiles"
@@ -26,8 +26,9 @@
 </template>
 
 <script setup>
-  import { ref } from 'vue'
+  import { shallowRef } from 'vue'
 
+  const sheet = shallowRef(false)
   const tiles = [
     { img: 'keep.png', title: 'Keep' },
     { img: 'inbox.png', title: 'Inbox' },
@@ -35,8 +36,6 @@
     { img: 'messenger.png', title: 'Messenger' },
     { img: 'google.png', title: 'Google+' },
   ]
-
-  const sheet = ref(false)
 </script>
 
 <script>

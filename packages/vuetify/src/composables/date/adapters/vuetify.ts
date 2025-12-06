@@ -1,163 +1,46 @@
 // Utilities
-import { createRange, padStart } from '@/util'
+import { consoleWarn, createRange, padStart } from '@/util'
 
 // Types
 import type { DateAdapter } from '../DateAdapter'
 
 type CustomDateFormat = Intl.DateTimeFormatOptions | ((date: Date, formatString: string, locale: string) => string)
 
-const firstDay: Record<string, number> = {
-  '001': 1,
-  AD: 1,
-  AE: 6,
-  AF: 6,
-  AG: 0,
-  AI: 1,
-  AL: 1,
-  AM: 1,
-  AN: 1,
-  AR: 1,
-  AS: 0,
-  AT: 1,
-  AU: 1,
-  AX: 1,
-  AZ: 1,
-  BA: 1,
-  BD: 0,
-  BE: 1,
-  BG: 1,
-  BH: 6,
-  BM: 1,
-  BN: 1,
-  BR: 0,
-  BS: 0,
-  BT: 0,
-  BW: 0,
-  BY: 1,
-  BZ: 0,
-  CA: 0,
-  CH: 1,
-  CL: 1,
-  CM: 1,
-  CN: 1,
-  CO: 0,
-  CR: 1,
-  CY: 1,
-  CZ: 1,
-  DE: 1,
-  DJ: 6,
-  DK: 1,
-  DM: 0,
-  DO: 0,
-  DZ: 6,
-  EC: 1,
-  EE: 1,
-  EG: 6,
-  ES: 1,
-  ET: 0,
-  FI: 1,
-  FJ: 1,
-  FO: 1,
-  FR: 1,
-  GB: 1,
-  'GB-alt-variant': 0,
-  GE: 1,
-  GF: 1,
-  GP: 1,
-  GR: 1,
-  GT: 0,
-  GU: 0,
-  HK: 0,
-  HN: 0,
-  HR: 1,
-  HU: 1,
-  ID: 0,
-  IE: 1,
-  IL: 0,
-  IN: 0,
-  IQ: 6,
-  IR: 6,
-  IS: 1,
-  IT: 1,
-  JM: 0,
-  JO: 6,
-  JP: 0,
-  KE: 0,
-  KG: 1,
-  KH: 0,
-  KR: 0,
-  KW: 6,
-  KZ: 1,
-  LA: 0,
-  LB: 1,
-  LI: 1,
-  LK: 1,
-  LT: 1,
-  LU: 1,
-  LV: 1,
-  LY: 6,
-  MC: 1,
-  MD: 1,
-  ME: 1,
-  MH: 0,
-  MK: 1,
-  MM: 0,
-  MN: 1,
-  MO: 0,
-  MQ: 1,
-  MT: 0,
-  MV: 5,
-  MX: 0,
-  MY: 1,
-  MZ: 0,
-  NI: 0,
-  NL: 1,
-  NO: 1,
-  NP: 0,
-  NZ: 1,
-  OM: 6,
-  PA: 0,
-  PE: 0,
-  PH: 0,
-  PK: 0,
-  PL: 1,
-  PR: 0,
-  PT: 0,
-  PY: 0,
-  QA: 6,
-  RE: 1,
-  RO: 1,
-  RS: 1,
-  RU: 1,
-  SA: 0,
-  SD: 6,
-  SE: 1,
-  SG: 0,
-  SI: 1,
-  SK: 1,
-  SM: 1,
-  SV: 0,
-  SY: 6,
-  TH: 0,
-  TJ: 1,
-  TM: 1,
-  TR: 1,
-  TT: 0,
-  TW: 0,
-  UA: 1,
-  UM: 0,
-  US: 0,
-  UY: 1,
-  UZ: 1,
-  VA: 1,
-  VE: 0,
-  VI: 0,
-  VN: 1,
-  WS: 0,
-  XK: 1,
-  YE: 0,
-  ZA: 0,
-  ZW: 0,
+function weekInfo (locale: string): { firstDay: number, firstWeekSize: number } | null {
+  // https://simplelocalize.io/data/locales/
+  // then `new Intl.Locale(...).getWeekInfo()`
+  const code = locale.slice(-2).toUpperCase()
+  switch (true) {
+    case locale === 'GB-alt-variant': {
+      return { firstDay: 0, firstWeekSize: 4 }
+    }
+    case locale === '001': {
+      return { firstDay: 1, firstWeekSize: 1 }
+    }
+    case `AG AS BD BR BS BT BW BZ CA CO DM DO ET GT GU HK HN ID IL IN JM JP KE
+    KH KR LA MH MM MO MT MX MZ NI NP PA PE PH PK PR PY SA SG SV TH TT TW UM US
+    VE VI WS YE ZA ZW`.includes(code): {
+      return { firstDay: 0, firstWeekSize: 1 }
+    }
+    case `AI AL AM AR AU AZ BA BM BN BY CL CM CN CR CY EC GE HR KG KZ LB LK LV
+    MD ME MK MN MY NZ RO RS SI TJ TM TR UA UY UZ VN XK`.includes(code): {
+      return { firstDay: 1, firstWeekSize: 1 }
+    }
+    case `AD AN AT AX BE BG CH CZ DE DK EE ES FI FJ FO FR GB GF GP GR HU IE IS
+    IT LI LT LU MC MQ NL NO PL RE RU SE SK SM VA`.includes(code): {
+      return { firstDay: 1, firstWeekSize: 4 }
+    }
+    case `AE AF BH DJ DZ EG IQ IR JO KW LY OM QA SD SY`.includes(code): {
+      return { firstDay: 6, firstWeekSize: 1 }
+    }
+    case code === 'MV': {
+      return { firstDay: 5, firstWeekSize: 1 }
+    }
+    case code === 'PT': {
+      return { firstDay: 0, firstWeekSize: 4 }
+    }
+    default: return null
+  }
 }
 
 function getWeekArray (date: Date, locale: string, firstDayOfWeek?: number) {
@@ -165,7 +48,7 @@ function getWeekArray (date: Date, locale: string, firstDayOfWeek?: number) {
   let currentWeek = []
   const firstDayOfMonth = startOfMonth(date)
   const lastDayOfMonth = endOfMonth(date)
-  const first = firstDayOfWeek ?? firstDay[locale.slice(-2).toUpperCase()] ?? 0
+  const first = firstDayOfWeek ?? weekInfo(locale)?.firstDay ?? 0
   const firstDayWeekIndex = (firstDayOfMonth.getDay() - first + 7) % 7
   const lastDayWeekIndex = (lastDayOfMonth.getDay() - first + 7) % 7
 
@@ -202,7 +85,13 @@ function getWeekArray (date: Date, locale: string, firstDayOfWeek?: number) {
 }
 
 function startOfWeek (date: Date, locale: string, firstDayOfWeek?: number) {
-  const day = firstDayOfWeek ?? firstDay[locale.slice(-2).toUpperCase()] ?? 0
+  let day = (firstDayOfWeek ?? weekInfo(locale)?.firstDay ?? 0) % 7
+
+  // prevent infinite loop
+  if (![0, 1, 2, 3, 4, 5, 6].includes(day)) {
+    consoleWarn('Invalid firstDayOfWeek, expected discrete number in range [0-6]')
+    day = 0
+  }
 
   const d = new Date(date)
   while (d.getDay() !== day) {
@@ -213,7 +102,7 @@ function startOfWeek (date: Date, locale: string, firstDayOfWeek?: number) {
 
 function endOfWeek (date: Date, locale: string) {
   const d = new Date(date)
-  const lastDay = ((firstDay[locale.slice(-2).toUpperCase()] ?? 0) + 6) % 7
+  const lastDay = ((weekInfo(locale)?.firstDay ?? 0) + 6) % 7
   while (d.getDay() !== lastDay) {
     d.setDate(d.getDate() + 1)
   }
@@ -259,13 +148,13 @@ function date (value?: any): Date | null {
 
 const sundayJanuarySecond2000 = new Date(2000, 0, 2)
 
-function getWeekdays (locale: string, firstDayOfWeek?: number) {
-  const daysFromSunday = firstDayOfWeek ?? firstDay[locale.slice(-2).toUpperCase()] ?? 0
+function getWeekdays (locale: string, firstDayOfWeek?: number, weekdayFormat?: 'long' | 'short' | 'narrow') {
+  const daysFromSunday = firstDayOfWeek ?? weekInfo(locale)?.firstDay ?? 0
 
   return createRange(7).map(i => {
     const weekday = new Date(sundayJanuarySecond2000)
     weekday.setDate(sundayJanuarySecond2000.getDate() + daysFromSunday + i)
-    return new Intl.DateTimeFormat(locale, { weekday: 'narrow' }).format(weekday)
+    return new Intl.DateTimeFormat(locale, { weekday: weekdayFormat ?? 'narrow' }).format(weekday)
   })
 }
 
@@ -285,7 +174,7 @@ function format (
   let options: Intl.DateTimeFormatOptions = {}
   switch (formatString) {
     case 'fullDate':
-      options = { year: 'numeric', month: 'long', day: 'numeric' }
+      options = { year: 'numeric', month: 'short', day: 'numeric' }
       break
     case 'fullDateWithWeekday':
       options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
@@ -424,6 +313,61 @@ function getYear (date: Date) {
 
 function getMonth (date: Date) {
   return date.getMonth()
+}
+
+function getWeek (date: Date, locale: string, firstDayOfWeek?: number, firstDayOfYear?: number) {
+  const weekInfoFromLocale = weekInfo(locale)
+  const weekStart = firstDayOfWeek ?? weekInfoFromLocale?.firstDay ?? 0
+  const minWeekSize = weekInfoFromLocale?.firstWeekSize ?? 1
+
+  return firstDayOfYear !== undefined
+    ? calculateWeekWithFirstDayOfYear(date, locale, weekStart, firstDayOfYear)
+    : calculateWeekWithMinWeekSize(date, locale, weekStart, minWeekSize)
+}
+
+function calculateWeekWithFirstDayOfYear (date: Date, locale: string, weekStart: number, firstDayOfYear: number) {
+  const firstDayOfYearOffset = (7 + firstDayOfYear - weekStart) % 7
+  const currentWeekStart = startOfWeek(date, locale, weekStart)
+  const currentWeekEnd = addDays(currentWeekStart, 6)
+
+  function yearStartWeekdayOffset (year: number) {
+    return (7 + new Date(year, 0, 1).getDay() - weekStart) % 7
+  }
+
+  let year = getYear(currentWeekStart)
+  if (year < getYear(currentWeekEnd) && yearStartWeekdayOffset(year + 1) <= firstDayOfYearOffset) {
+    year++
+  }
+
+  const yearStart = new Date(year, 0, 1)
+  const offset = yearStartWeekdayOffset(year)
+  const d1w1 = offset <= firstDayOfYearOffset
+    ? addDays(yearStart, -offset)
+    : addDays(yearStart, 7 - offset)
+
+  return 1 + getDiff(endOfDay(currentWeekStart), startOfDay(d1w1), 'weeks')
+}
+
+function calculateWeekWithMinWeekSize (date: Date, locale: string, weekStart: number, minWeekSize: number) {
+  const currentWeekStart = startOfWeek(date, locale, weekStart)
+  const currentWeekEnd = addDays(startOfWeek(date, locale, weekStart), 6)
+
+  function firstWeekSize (year: number) {
+    const yearStart = new Date(year, 0, 1)
+    return 7 - getDiff(yearStart, startOfWeek(yearStart, locale, weekStart), 'days')
+  }
+
+  let year = getYear(currentWeekStart)
+  if (year < getYear(currentWeekEnd) && firstWeekSize(year + 1) >= minWeekSize) {
+    year++
+  }
+
+  const yearStart = new Date(year, 0, 1)
+  const size = firstWeekSize(year)
+  const d1w1 = size >= minWeekSize
+    ? addDays(yearStart, size - 7)
+    : addDays(yearStart, size)
+  return 1 + getDiff(endOfDay(currentWeekStart), startOfDay(d1w1), 'weeks')
 }
 
 function getDate (date: Date) {
@@ -605,11 +549,13 @@ export class VuetifyDateAdapter implements DateAdapter<Date> {
   }
 
   getWeekArray (date: Date, firstDayOfWeek?: number | string) {
-    return getWeekArray(date, this.locale, firstDayOfWeek ? Number(firstDayOfWeek) : undefined)
+    const firstDay = firstDayOfWeek !== undefined ? Number(firstDayOfWeek) : undefined
+    return getWeekArray(date, this.locale, firstDay)
   }
 
   startOfWeek (date: Date, firstDayOfWeek?: number | string): Date {
-    return startOfWeek(date, this.locale, firstDayOfWeek ? Number(firstDayOfWeek) : undefined)
+    const firstDay = firstDayOfWeek !== undefined ? Number(firstDayOfWeek) : undefined
+    return startOfWeek(date, this.locale, firstDay)
   }
 
   endOfWeek (date: Date): Date {
@@ -688,8 +634,9 @@ export class VuetifyDateAdapter implements DateAdapter<Date> {
     return getDiff(date, comparing, unit)
   }
 
-  getWeekdays (firstDayOfWeek?: number | string) {
-    return getWeekdays(this.locale, firstDayOfWeek ? Number(firstDayOfWeek) : undefined)
+  getWeekdays (firstDayOfWeek?: number | string, weekdayFormat?: 'long' | 'short' | 'narrow') {
+    const firstDay = firstDayOfWeek !== undefined ? Number(firstDayOfWeek) : undefined
+    return getWeekdays(this.locale, firstDay, weekdayFormat)
   }
 
   getYear (date: Date) {
@@ -698,6 +645,12 @@ export class VuetifyDateAdapter implements DateAdapter<Date> {
 
   getMonth (date: Date) {
     return getMonth(date)
+  }
+
+  getWeek (date: Date, firstDayOfWeek?: number | string, firstDayOfYear?: number | string) {
+    const firstDay = firstDayOfWeek !== undefined ? Number(firstDayOfWeek) : undefined
+    const firstWeekStart = firstDayOfYear !== undefined ? Number(firstDayOfYear) : undefined
+    return getWeek(date, this.locale, firstDay, firstWeekStart)
   }
 
   getDate (date: Date) {

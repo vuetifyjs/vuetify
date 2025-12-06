@@ -16,7 +16,7 @@ Vuetify is an [MIT licensed](https://github.com/vuetifyjs/vuetify/blob/master/LI
 
 <PageFeatures />
 
-<VoPromotionsCardVuetify />
+<PromotedEntry />
 
 ## Preamble
 
@@ -30,7 +30,7 @@ One-time donations can be made through [PayPal](https://paypal.me/vuetify).
 
 Recurring pledges come with **exclusive** perks such as priority GitHub issues, application auditing, and having your logo placed on this website.
 
-- [Become a backer or sponsor via GitHub](https://github.com/sponsors/johnleider) or [Patreon](https://www.patreon.com/vuetify) (goes directly to Vuetify to support John and Heather).
+- [Become a backer or sponsor via GitHub](https://github.com/sponsors/johnleider).
 - [Become a backer or sponsor through Open Collective](https://opencollective.com/vuetify) (a transparent fund for supporting the development and maintenance of Vuetify).
 
 ## Current Project Sponsors
