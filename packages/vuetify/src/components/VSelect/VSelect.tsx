@@ -319,11 +319,6 @@ export const VSelect = genericComponent<new <
         })
       }
     }
-    function onBlur (e: FocusEvent) {
-      if (!listRef.value?.$el.contains(e.relatedTarget as HTMLElement)) {
-        menu.value = false
-      }
-    }
     function onAfterEnter () {
       if (props.eager) {
         vVirtualScrollRef.value?.calculateVisibleItems()
@@ -412,7 +407,6 @@ export const VSelect = genericComponent<new <
           placeholder={ placeholder }
           onClick:clear={ onClear }
           onMousedown:control={ onMousedownControl }
-          onBlur={ onBlur }
           onKeydown={ onKeydown }
           aria-expanded={ ariaExpanded.value }
           aria-controls={ ariaControls.value }
