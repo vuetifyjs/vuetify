@@ -24,7 +24,7 @@ import { genericComponent, getPropertyFromItem, pick, propsFactory, useRender } 
 // Types
 import type { PropType } from 'vue'
 import type { StepperItem, StepperItemSlot } from './VStepperItem'
-import type { SelectItemKey } from '@/util'
+import type { GenericProps, SelectItemKey } from '@/util'
 
 export type VStepperSlot = {
   prev: () => void
@@ -87,7 +87,13 @@ export const makeVStepperProps = propsFactory({
   ...pick(makeVStepperActionsProps(), ['prevText', 'nextText']),
 }, 'VStepper')
 
-export const VStepper = genericComponent<VStepperSlots>()({
+export const VStepper = genericComponent<new <TModel>(
+  props: {
+    modelValue?: TModel
+    'onUpdate:modelValue'?: (value: TModel) => void
+  },
+  slots: VStepperSlots
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VStepper',
 
   props: makeVStepperProps(),

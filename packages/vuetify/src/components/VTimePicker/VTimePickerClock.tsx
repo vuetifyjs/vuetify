@@ -5,7 +5,7 @@ import './VTimePickerClock.sass'
 import { useBackgroundColor, useTextColor } from '@/composables/color'
 
 // Utilities
-import { computed, ref, watch } from 'vue'
+import { computed, onScopeDispose, ref, watch } from 'vue'
 import { debounce, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -216,16 +216,22 @@ export const VTimePickerClock = genericComponent()({
 
     function onMouseUp (e: MouseEvent | TouchEvent) {
       e.stopPropagation()
-      window.removeEventListener('mousemove', onDragMove)
-      window.removeEventListener('touchmove', onDragMove)
-      window.removeEventListener('mouseup', onMouseUp)
-      window.removeEventListener('touchend', onMouseUp)
+      removeListeners()
 
       isDragging.value = false
       if (valueOnMouseUp.value !== null && isAllowed(valueOnMouseUp.value)) {
         emit('change', valueOnMouseUp.value)
       }
     }
+
+    function removeListeners () {
+      window.removeEventListener('mousemove', onDragMove)
+      window.removeEventListener('touchmove', onDragMove)
+      window.removeEventListener('mouseup', onMouseUp)
+      window.removeEventListener('touchend', onMouseUp)
+    }
+
+    onScopeDispose(removeListeners)
 
     useRender(() => {
       return (

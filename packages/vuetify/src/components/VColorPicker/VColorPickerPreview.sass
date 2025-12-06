@@ -67,3 +67,19 @@
   .v-color-picker-preview__eye-dropper
     position: relative
     margin-right: $color-picker-preview-dropper-margin
+
+  @media (forced-colors: active)
+    .v-color-picker-preview
+
+      &__dot
+        border-style: solid
+        
+        > div
+          forced-color-adjust: preserve-parent-color
+      
+      &__sliders
+        forced-color-adjust: preserve-parent-color
+
+      .v-slider-thumb__surface
+        background: transparent
+        border: solid canvastext

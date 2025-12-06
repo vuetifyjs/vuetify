@@ -56,9 +56,17 @@ export const makeVTreeviewProps = propsFactory({
   modelValue: Array,
 }, 'VTreeview')
 
-export const VTreeview = genericComponent<new <T>(
+export const VTreeview = genericComponent<new <T, O, A, S, M>(
   props: {
     items?: T[]
+    opened?: O
+    activated?: A
+    selected?: S
+    modelValue?: M
+    'onUpdate:opened'?: (value: O) => void
+    'onUpdate:activated'?: (value: A) => void
+    'onUpdate:selected'?: (value: S) => void
+    'onUpdate:modelValue'?: (value: M) => void
   },
   slots: VTreeviewChildrenSlots<T> & {
     'no-data': never
