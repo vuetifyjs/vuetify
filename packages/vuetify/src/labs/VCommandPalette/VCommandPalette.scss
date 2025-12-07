@@ -2,9 +2,17 @@
 
 @include tools.layer('components') {
   .v-command-palette {
-    &__list {
-      overflow-y: auto;
+    > .v-overlay__content > .v-sheet {
+      display: flex;
+      flex: 1 1 100%;
+      flex-direction: column;
+    }
 
+    &__content {
+      overflow-y: auto;
+    }
+
+    &__list {
       .v-list-subheader {
         opacity: 0.7;
         user-select: none;

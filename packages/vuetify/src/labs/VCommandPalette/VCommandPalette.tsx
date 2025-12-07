@@ -1,7 +1,10 @@
+// Styles
+import './VCommandPalette.scss'
+
 // Components
-import { VCard, VCardText } from '@/components/VCard'
 import { VDialog } from '@/components/VDialog'
 import { VList } from '@/components/VList'
+import { VSheet } from '@/components/VSheet'
 import { VTextField } from '@/components/VTextField'
 
 // Composables
@@ -240,7 +243,7 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
       >
         {{
           default: () => (
-            <VCard
+            <VSheet
               class={[
                 themeClasses.value,
                 densityClasses.value,
@@ -263,7 +266,7 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
                 />
               </div>
 
-              <VCardText class="pa-0">
+              <div class="v-command-palette__content">
                 { filteredItems.value.length > 0 ? (
                   <VList
                     key="list"
@@ -290,10 +293,10 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
                     { slots['no-data']?.() || (props.noDataText || t('$vuetify.noDataText')) }
                   </div>
                 )}
-              </VCardText>
+              </div>
 
               { slots.append?.() }
-            </VCard>
+            </VSheet>
           ),
         }}
       </VDialog>
