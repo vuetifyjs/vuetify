@@ -1,5 +1,5 @@
 // Utilities
-import { ref, shallowRef, watch } from 'vue'
+import { readonly, ref, shallowRef, watch } from 'vue'
 
 // Types
 import type { ComputedRef, Ref } from 'vue'
@@ -12,7 +12,7 @@ export interface UseCommandPaletteNavigationOptions {
 }
 
 export interface UseCommandPaletteNavigationReturn {
-  selectedIndex: Ref<number>
+  selectedIndex: Readonly<Ref<number>>
   getSelectedItem: () => VCommandPaletteItem | undefined
   executeSelected: (event: KeyboardEvent | MouseEvent) => void
   reset: () => void
@@ -104,7 +104,7 @@ export function useCommandPaletteNavigation (
   }
 
   return {
-    selectedIndex,
+    selectedIndex: readonly(selectedIndex),
     getSelectedItem,
     executeSelected,
     reset,
