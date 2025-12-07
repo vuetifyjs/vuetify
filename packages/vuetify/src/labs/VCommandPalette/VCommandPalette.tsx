@@ -45,7 +45,14 @@ export const makeVCommandPaletteProps = propsFactory({
   ...makeTransitionProps(),
 }, 'VCommandPalette')
 
-export const VCommandPalette = genericComponent()({
+export type VCommandPaletteSlots = {
+  default: never
+  prepend: never
+  append: never
+  'no-data': never
+}
+
+export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
   name: 'VCommandPalette',
 
   props: makeVCommandPaletteProps(),
@@ -239,8 +246,7 @@ export const VCommandPalette = genericComponent()({
                 densityClasses.value,
               ]}
             >
-              { /* @ts-expect-error slots type is inferred as 'default' only */ }
-              { (slots.prepend as any)?.() }
+              { slots.prepend?.() }
 
               <div class="px-4 py-2">
                 <VTextField
@@ -281,14 +287,12 @@ export const VCommandPalette = genericComponent()({
                   />
                 ) : (
                   <div key="no-data" class="pa-4 text-center text-disabled">
-                    { /* @ts-expect-error slots type is inferred as 'default' only */ }
-                    { (slots['no-data'] as any)?.() || (props.noDataText || t('$vuetify.noDataText')) }
+                    { slots['no-data']?.() || (props.noDataText || t('$vuetify.noDataText')) }
                   </div>
                 )}
               </VCardText>
 
-              { /* @ts-expect-error slots type is inferred as 'default' only */ }
-              { (slots.append as any)?.() }
+              { slots.append?.() }
             </VCard>
           ),
         }}
