@@ -202,10 +202,7 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
         navigation.reset()
 
         nextTick(() => {
-          const input = searchInputRef.value?.$el?.querySelector('input')
-          if (input) {
-            input.focus()
-          }
+          searchInputRef.value?.controlRef?.focus()
         })
       } else if (!newValue && oldValue) {
         nextTick(() => {
