@@ -72,8 +72,8 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
     const searchQuery = useProxiedModel(props, 'search') as Ref<string>
     const { themeClasses } = provideTheme(props)
     const { densityClasses } = useDensity(props)
-    const searchInputRef = ref<InstanceType<typeof VTextField>>()
-    const dialogRef = ref<InstanceType<typeof VDialog>>()
+    const searchInputRef = ref<VTextField>()
+    const dialogRef = ref<VDialog>()
     const previouslyFocusedElement = shallowRef<HTMLElement | null>(null)
 
     const internalItems = computed(() =>
