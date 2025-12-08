@@ -140,7 +140,7 @@ export const VDataTableRow = genericComponent<new <T>(
           return (
             <VDataTableColumn
               align={ column.align }
-              indent={ column.intent }
+              indent={ column.indent }
               class={{
                 'v-data-table__td--expanded-row': column.key === 'data-table-expand',
                 'v-data-table__td--select-row': column.key === 'data-table-select',
