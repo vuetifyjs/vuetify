@@ -147,7 +147,6 @@ export const VSelect = genericComponent<new <
     const { t } = useLocale()
     const vTextFieldRef = ref<VTextField>()
     const vMenuRef = ref<VMenu>()
-    const menuContentRef = ref<VSheet>()
     const vVirtualScrollRef = ref<VVirtualScroll>()
     const { items, transformIn, transformOut } = useItems(props)
     const model = useProxiedModel(
@@ -336,9 +335,10 @@ export const VSelect = genericComponent<new <
       }
     }
     function onBlur (e: FocusEvent) {
+      const target = e.target as Element
       if (
-        !vTextFieldRef.value?.$el.contains(e.target) &&
-        !menuContentRef.value?.$el.contains(e.target)
+        !vTextFieldRef.value?.$el.contains(target) &&
+        !vMenuRef.value?.contentEl?.contains(target)
       ) {
         menu.value = false
       }
@@ -471,7 +471,10 @@ export const VSelect = genericComponent<new <
                   { ...computedMenuProps.value }
                 >
 
-                  <VSheet ref={ menuContentRef }>
+                  <VSheet
+                    onFocusin={ onFocusin }
+                    onMousedown={ (e: MouseEvent) => e.preventDefault() }
+                  >
                     { slots['list-header'] && (
                       <header>
                         { slots['list-header']() }
@@ -484,9 +487,7 @@ export const VSelect = genericComponent<new <
                         ref={ listRef }
                         selected={ selectedValues.value }
                         selectStrategy={ props.multiple ? 'independent' : 'single-independent' }
-                        onMousedown={ (e: MouseEvent) => e.preventDefault() }
                         onKeydown={ onListKeydown }
-                        onFocusin={ onFocusin }
                         tabindex="-1"
                         selectable
                         aria-live="polite"
