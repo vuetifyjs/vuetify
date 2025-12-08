@@ -12,6 +12,7 @@ import { VIcon } from '@/components/VIcon'
 import { useInputIcon } from '@/components/VInput/InputIcon'
 import { VList, VListItem, VListSubheader } from '@/components/VList'
 import { VMenu } from '@/components/VMenu'
+import { VSheet } from '@/components/VSheet'
 import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextField'
 import { VVirtualScroll } from '@/components/VVirtualScroll'
 
@@ -145,6 +146,7 @@ export const VSelect = genericComponent<new <
     const { t } = useLocale()
     const vTextFieldRef = ref<VTextField>()
     const vMenuRef = ref<VMenu>()
+    const headerRef = ref<HTMLDivElement>()
     const vVirtualScrollRef = ref<VVirtualScroll>()
     const { items, transformIn, transformOut } = useItems(props)
     const model = useProxiedModel(
@@ -333,7 +335,10 @@ export const VSelect = genericComponent<new <
       }
     }
     function onBlur (e: FocusEvent) {
-      if (!listRef.value?.$el.contains(e.relatedTarget as HTMLElement)) {
+      const target = e.relatedTarget as HTMLElement
+
+      if (!listRef.value?.$el.contains(target) &&
+      !headerRef.value?.contains(target)) {
         menu.value = false
       }
     }
@@ -465,8 +470,9 @@ export const VSelect = genericComponent<new <
                   { ...computedMenuProps.value }
                 >
 
+                <VSheet style="display: flex; flex-direction: column;">
                   { slots['list-header'] && (
-                    <div>
+                      <div ref={ headerRef } >
                       { slots['list-header']() }
                     </div>
                   )}
@@ -554,8 +560,10 @@ export const VSelect = genericComponent<new <
                       </VVirtualScroll>
 
                       { slots['append-item']?.() }
-                    </VList>
+                      </VList>
+
                   )}
+                      </VSheet>
                 </VMenu>
 
                 { model.value.map((item, index) => {
