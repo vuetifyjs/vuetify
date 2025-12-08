@@ -12,10 +12,13 @@ $chip-border-thin-width: thin !default;
 $chip-border-width: 0 !default;
 $chip-close-size: 18px !default;
 $chip-color: rgb(var(--v-theme-on-surface-variant)) !default;
-$chip-density: ("default": 0, "comfortable": -1, "compact": -2) !default;
+$chip-density: (
+  "default": 0,
+  "comfortable": -1,
+  "compact": -2) !default;
 $chip-disabled-opacity: 0.3 !default;
 $chip-elevation: 1 !default;
-$chip-font-size: tools.map-deep-get(settings.$typography, "button", "size") !default;
+$chip-font-size: tools.map-deep-get(settings.$typography, 'label-large', 'size') !default;
 $chip-font-weight: 400 !default;
 $chip-height: 32px !default;
 $chip-icon-size-multiplier: calc(18/21) !default;
@@ -30,13 +33,12 @@ $chip-white-space: nowrap !default;
 $chip-sizes: (
   "height": $chip-height,
   "font-size": $chip-font-size,
-) !default;
+  ) !default;
 
 $chip-border: (
   $chip-border-color,
   $chip-border-style,
-  $chip-border-width
-) !default;
+  $chip-border-width) !default;
 
 $chip-variants: (
   $chip-background,
@@ -44,4 +46,4 @@ $chip-variants: (
   $chip-elevation,
   $chip-plain-opacity,
   'v-chip'
-) !default;
+  ) !default;

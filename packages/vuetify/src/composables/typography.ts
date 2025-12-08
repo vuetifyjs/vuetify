@@ -1,10 +1,11 @@
+// composables/typography.ts
 // Utilities
 import { computed, inject, ref, watchEffect } from 'vue'
 import { mergeDeep } from '@/util'
 import { IN_BROWSER } from '@/util/globals'
 
 // Types
-import type { App, CSSProperties, InjectionKey, Ref } from 'vue'
+import type { App, InjectionKey, Ref } from 'vue'
 
 export const defaultTypography = {
   'display-large': {
@@ -86,10 +87,12 @@ export const defaultTypography = {
     fontWeight: 500,
     letterSpacing: '0.5px',
   },
-} as Record<TypographyVariant, TypographyStyle>
+} as const
 
-export type TypographyVariant = `${string}-${string}`
-export type TypographyStyle = CSSProperties
+export type TypographyVariant = keyof typeof defaultTypography;
+export type TypographyStyle = (typeof defaultTypography)[TypographyVariant] & {
+  fontFamily?: string
+};
 
 export interface TypographyOptions {
   responsive?: boolean
@@ -99,7 +102,7 @@ export interface TypographyOptions {
 }
 
 export const TYPOGRAPHY_BREAKPOINTS = ['sm', 'md', 'lg', 'xl', 'xxl'] as const
-export type TypographyBreakpoint = (typeof TYPOGRAPHY_BREAKPOINTS)[number]
+export type TypographyBreakpoint = (typeof TYPOGRAPHY_BREAKPOINTS)[number];
 
 const DISPLAY_MIN_WIDTH: Record<TypographyBreakpoint, number> = {
   sm: 600,

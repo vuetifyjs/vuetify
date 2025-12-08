@@ -8,18 +8,18 @@ $system-bar-border-radius: map.get(settings.$rounded, 0) !default;
 $system-bar-color: rgba(var(--v-theme-on-surface-light), var(--v-high-emphasis-opacity)) !default;
 $system-bar-elevation: 0 !default;
 $system-bar-flex: 1 1 auto !default;
-$system-bar-font-size: tools.map-deep-get(settings.$typography, 'caption', 'size') !default;
-$system-bar-font-weight: tools.map-deep-get(settings.$typography, 'caption', 'weight') !default;
+$system-bar-font-size: tools.map-deep-get(settings.$typography, 'label-small', 'size') !default;
+$system-bar-font-weight: tools.map-deep-get(settings.$typography, 'label-small', 'weight') !default;
 $system-bar-height: 24px !default;
 $system-bar-icon-opacity: var(--v-medium-emphasis-opacity) !default;
 $system-bar-justify-content: flex-end !default;
-$system-bar-letter-spacing: tools.map-deep-get(settings.$typography, 'caption', 'letter-spacing') !default;
+$system-bar-letter-spacing: tools.map-deep-get(settings.$typography, 'label-small', 'letter-spacing') !default;
 $system-bar-lights-out-background: rgba(var(--v-theme-background), 0.7) !default;
-$system-bar-line-height: tools.map-deep-get(settings.$typography, 'caption', 'line-height') !default;
+$system-bar-line-height: tools.map-deep-get(settings.$typography, 'label-small', 'line-height') !default;
 $system-bar-padding-x: 8px !default;
 $system-bar-positions: absolute fixed !default;
 $system-bar-text-align: end !default;
-$system-bar-text-transform: tools.map-deep-get(settings.$typography, 'caption', 'text-transform') !default;
+$system-bar-text-transform: tools.map-deep-get(settings.$typography, 'label-small', 'text-transform') !default;
 $system-bar-window-height: 32px !default;
 
 // Lists

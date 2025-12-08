@@ -14,7 +14,7 @@ $bottom-navigation-border-thin-width: thin !default;
 $bottom-navigation-border-width: 0 !default;
 $bottom-navigation-button-color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity)) !default;
 $bottom-navigation-color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity)) !default;
-$bottom-navigation-content-font-size: functions.map-deep-get(variables.$typography, 'caption', 'size') !default;
+$bottom-navigation-content-font-size: functions.map-deep-get(variables.$typography, 'label-small', 'size') !default;
 $bottom-navigation-elevation: 4 !default;
 $bottom-navigation-flat-elevation: 0 !default;
 $bottom-navigation-height: 100% !default;
