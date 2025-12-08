@@ -19,7 +19,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeTransitionProps } from '@/composables/transition'
 
 // Utilities
-import { computed, nextTick, ref, shallowRef, watch, watchEffect } from 'vue'
+import { computed, nextTick, onUnmounted, ref, shallowRef, watch, watchEffect } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -120,8 +120,10 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
       setSelectedIndex: navigation.setSelectedIndex,
     })
 
+    // Register main hotkey with cleanup
+    let hotkeyUnsubscribe: (() => void) | undefined
     if (props.hotkey) {
-      useHotkey(props.hotkey, () => {
+      hotkeyUnsubscribe = useHotkey(props.hotkey, () => {
         isOpen.value = !isOpen.value
       })
     }
@@ -240,6 +242,14 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
       }
 
       return baseProps
+    })
+
+    // Cleanup on unmount to prevent memory leaks
+    onUnmounted(() => {
+      // Clean up main hotkey listener
+      hotkeyUnsubscribe?.()
+      // Clear DOM reference
+      previouslyFocusedElement.value = null
     })
 
     useRender((): VNode => (
