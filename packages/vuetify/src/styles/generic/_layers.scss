@@ -7,7 +7,7 @@
   // This replaces hacks like .v-btn.v-btn and most of !important
   @layer overrides;
 
-  @layer theme.background, theme.foreground, utilities;
+  @layer theme.background, theme.foreground, typography, utilities;
 
   // Only use for rules that need to override theme or utils
   @layer trumps;

@@ -128,6 +128,7 @@ describe('VTypography', () => {
     })
 
     expect(typographyInstance).toBeTruthy()
+    expect(typographyInstance!.css.value).toContain('@layer vuetify.typography')
     expect(typographyInstance!.css.value).toContain(':root{')
     expect(typographyInstance!.css.value).toContain(
       '--v-typography--body-family:Inter;',

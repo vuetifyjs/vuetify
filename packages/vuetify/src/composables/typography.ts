@@ -193,7 +193,7 @@ function genTypographyCss (
     }
   }
 
-  return lines.join('\n')
+  return '@layer vuetify.typography {\n' + lines.map(v => `  ${v}`).join('\n') + '\n}'
 }
 
 function upsertTypographyStyles (styles: string) {
