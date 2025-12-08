@@ -653,7 +653,7 @@ export const VSelect = genericComponent<new <
               </>
             ),
           }}
-          </VTextField>
+        </VTextField>
       )
     })
 
