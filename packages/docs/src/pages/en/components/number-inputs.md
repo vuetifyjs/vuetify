@@ -2,7 +2,7 @@
 emphasized: true
 meta:
   title: Number inputs
-  description: The Number input component is used for ...
+  description: The number input component provides a clean interface for entering numeric values with increment and decrement controls.
   keywords: Number, vuetify number input component, vue number component
 related:
   - /components/inputs/

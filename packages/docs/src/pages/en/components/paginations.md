@@ -6,7 +6,6 @@ meta:
   keywords: pagination, vuetify pagination component, vue pagination component
 related:
   - /components/data-tables/basics/
-  - /components/data-tables/pagination/
   - /components/tables/
 features:
   figma: true
