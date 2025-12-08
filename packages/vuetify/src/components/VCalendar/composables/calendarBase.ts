@@ -5,7 +5,7 @@ import { useDate } from '@/composables/date'
 import { provideLocale } from '@/composables/locale'
 
 // Utilities
-import { computed } from 'vue'
+import { computed, toRef } from 'vue'
 import {
   createDayList,
   createNativeLocaleFormatter,
@@ -81,6 +81,8 @@ export interface CalendarBaseProps {
 export function useCalendarBase (props: CalendarBaseProps) {
   const { times, updateTimes } = useTimes({ now: props.now })
   const locale = provideLocale(props)
+  const date = useDate()
+  const currentLocale = toRef(() => props.locale || date.locale)
 
   const adapter = useDate()
 
@@ -156,7 +158,7 @@ export function useCalendarBase (props: CalendarBaseProps) {
     }
 
     return createNativeLocaleFormatter(
-      locale.current.value,
+      currentLocale.value,
       () => ({ timeZone: 'UTC', day: 'numeric' })
     )
   })
@@ -167,7 +169,7 @@ export function useCalendarBase (props: CalendarBaseProps) {
     }
 
     return createNativeLocaleFormatter(
-      locale.current.value,
+      currentLocale.value,
       (_tms, short) => ({ timeZone: 'UTC', weekday: short ? 'short' : 'long' })
     )
   })
@@ -202,12 +204,13 @@ export function useCalendarBase (props: CalendarBaseProps) {
   }
 
   function getFormatter (options: Intl.DateTimeFormatOptions): CalendarFormatter {
-    return createNativeLocaleFormatter(locale.current.value, () => options)
+    return createNativeLocaleFormatter(currentLocale.value, () => options)
   }
 
   return {
     times,
     locale,
+    currentLocale,
     parsedValue,
     parsedWeekdays,
     effectiveWeekdays,

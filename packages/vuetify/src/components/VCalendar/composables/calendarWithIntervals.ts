@@ -144,7 +144,7 @@ export function useCalendarWithIntervals (props: CalendarWithIntervalsProps) {
     }
 
     return createNativeLocaleFormatter(
-      base.locale.current.value,
+      base.currentLocale.value,
       (tms, short) => (
         !short ? { timeZone: 'UTC', hour: '2-digit', minute: '2-digit' }
         : tms.minute === 0 ? { timeZone: 'UTC', hour: 'numeric' }

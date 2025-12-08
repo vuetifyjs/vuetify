@@ -93,7 +93,7 @@ export const VCalendarWeekly = defineComponent({
       }
 
       return createNativeLocaleFormatter(
-        base.locale.current.value,
+        base.currentLocale.value,
         (_tms, short) => ({ timeZone: 'UTC', month: short ? 'short' : 'long' })
       )
     })
