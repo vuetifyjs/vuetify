@@ -11,6 +11,10 @@ export default {
     noResultsText: 'Не найдено подходящих записей',
     loadingText: 'Запись загружается...',
   },
+  selectionControl: {
+    checked: 'Выбрано',
+    unchecked: 'Не выбрано',
+  },
   dataTable: {
     itemsPerPageText: 'Строк на странице:',
     ariaLabel: {

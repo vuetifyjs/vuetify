@@ -11,6 +11,10 @@ export default {
     noResultsText: 'Tidak ditemukan catatan yang cocok',
     loadingText: 'Memuat data...',
   },
+  selectionControl: {
+    checked: 'Dipilih',
+    unchecked: 'Tidak dipilih',
+  },
   dataTable: {
     itemsPerPageText: 'Baris per halaman:',
     ariaLabel: {

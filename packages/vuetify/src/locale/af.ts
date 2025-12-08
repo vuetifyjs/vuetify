@@ -11,6 +11,10 @@ export default {
     noResultsText: 'Geen ooreenstemmende resultate is gevind nie',
     loadingText: 'Laai item...',
   },
+  selectionControl: {
+    checked: 'Gemerk',
+    unchecked: 'Nie gemerk nie',
+  },
   dataTable: {
     itemsPerPageText: 'Rye per bladsy:',
     ariaLabel: {

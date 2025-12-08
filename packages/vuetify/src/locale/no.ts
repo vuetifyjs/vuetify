@@ -11,6 +11,10 @@ export default {
     noResultsText: 'Fant ingen matchende elementer.',
     loadingText: 'Laster...',
   },
+  selectionControl: {
+    checked: 'Valgt',
+    unchecked: 'Ikke valgt',
+  },
   dataTable: {
     itemsPerPageText: 'Rader per side:',
     ariaLabel: {

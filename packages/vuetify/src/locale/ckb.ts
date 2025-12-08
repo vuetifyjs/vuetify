@@ -11,6 +11,10 @@ export default {
     noResultsText: 'هیچ تۆمارێکی هاوتا نەدۆزرایەوە',
     loadingText: 'بارکردنی ئایتمەکان...',
   },
+  selectionControl: {
+    checked: 'دیاریکراوە',
+    unchecked: 'دیارینەکراوە',
+  },
   dataTable: {
     itemsPerPageText: 'ڕیزەکان بۆ هەر پەڕەیەک:',
     ariaLabel: {
