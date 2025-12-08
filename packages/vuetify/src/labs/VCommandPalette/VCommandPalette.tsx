@@ -244,11 +244,8 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
       return baseProps
     })
 
-    // Cleanup on unmount to prevent memory leaks
     onUnmounted(() => {
-      // Clean up main hotkey listener
       hotkeyUnsubscribe?.()
-      // Clear DOM reference
       previouslyFocusedElement.value = null
     })
 
