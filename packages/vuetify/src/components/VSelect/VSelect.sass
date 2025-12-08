@@ -47,6 +47,10 @@
       @at-root #{selector.append('.v-menu > .v-overlay__content', &)}
         @include tools.rounded($select-content-border-radius)
 
+      > .v-sheet
+        display: flex
+        flex-direction: column
+
     &__selection
       display: inline-flex
       align-items: center
@@ -70,4 +74,3 @@
 
       .v-select--active-menu &
         transform: rotate(180deg)
-        
