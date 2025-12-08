@@ -71,7 +71,6 @@ export const makeVFieldProps = propsFactory({
     type: Boolean,
     default: null,
   },
-  labelId: String,
   glow: Boolean,
   error: Boolean,
   flat: Boolean,
@@ -120,6 +119,7 @@ export const VField = genericComponent<new <T>(
   props: {
     id: String,
     details: Boolean,
+    labelId: String,
 
     ...makeFocusProps(),
     ...makeVFieldProps(),
@@ -310,7 +310,13 @@ export const VField = genericComponent<new <T>(
             )}
 
             { hasLabel.value && (
-              <VFieldLabel key="label" id={ props.labelId } ref={ labelRef } for={ id.value }>
+              <VFieldLabel
+                key="label"
+                ref={ labelRef }
+                id={ props.labelId }
+                for={ id.value }
+                aria-hidden={ hasFloatingLabel.value && isActive.value }
+              >
                 { label() }
               </VFieldLabel>
             )}

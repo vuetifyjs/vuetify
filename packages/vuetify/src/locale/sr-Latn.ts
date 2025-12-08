@@ -11,10 +11,6 @@ export default {
     noResultsText: 'Nijedan zapis nije pronađen',
     loadingText: 'Učitavanje stavki...',
   },
-  selectionControl: {
-    checked: 'Odabrano',
-    unchecked: 'Nije odabrano',
-  },
   dataTable: {
     itemsPerPageText: 'Redova po stranici:',
     ariaLabel: {

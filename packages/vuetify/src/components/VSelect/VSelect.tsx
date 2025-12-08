@@ -190,7 +190,7 @@ export const VSelect = genericComponent<new <
       },
     })
 
-    const { menuId, ariaExpanded, ariaControls, ariaLabel } = useMenuActivator(props, menu)
+    const { menuId, ariaExpanded, ariaControls } = useMenuActivator(props, menu)
 
     const computedMenuProps = computed(() => {
       return {
@@ -416,8 +416,6 @@ export const VSelect = genericComponent<new <
           onKeydown={ onKeydown }
           aria-expanded={ ariaExpanded.value }
           aria-controls={ ariaControls.value }
-          aria-label={ ariaLabel.value }
-          title={ ariaLabel.value }
         >
           {{
             ...slots,
@@ -483,6 +481,8 @@ export const VSelect = genericComponent<new <
                             ref: itemRef,
                             key: item.value,
                             onClick: () => select(item, null),
+                            'aria-posinset': index + 1,
+                            'aria-setsize': displayItems.value.length,
                           })
 
                           if (item.type === 'divider') {
@@ -512,10 +512,7 @@ export const VSelect = genericComponent<new <
                                         modelValue={ isSelected }
                                         ripple={ false }
                                         tabindex="-1"
-                                        aria-label={ isSelected
-                                          ? t('$vuetify.selectionControl.checked')
-                                          : t('$vuetify.selectionControl.unchecked')
-                                        }
+                                        aria-hidden
                                         onClick={ (event: MouseEvent) => event.preventDefault() }
                                       />
                                     ) : undefined }

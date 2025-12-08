@@ -11,10 +11,6 @@ export default {
     noResultsText: 'לא נמצאו תוצאות מתאימות',
     loadingText: 'טוען פריט...',
   },
-  selectionControl: {
-    checked: 'נבחר',
-    unchecked: 'לא נבחר',
-  },
   dataTable: {
     itemsPerPageText: 'שורות לעמוד:',
     ariaLabel: {
