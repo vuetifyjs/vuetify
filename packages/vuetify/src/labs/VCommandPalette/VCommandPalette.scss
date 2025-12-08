@@ -8,8 +8,18 @@
       flex-direction: column;
     }
 
+    &__input-container {
+      padding: 8px 16px;
+    }
+
     &__content {
       overflow-y: auto;
+    }
+
+    &__no-data {
+      padding: 16px;
+      text-align: center;
+      opacity: 0.6;
     }
 
     &__list {

@@ -14,6 +14,7 @@ export interface UseCommandPaletteNavigationOptions {
 export interface UseCommandPaletteNavigationReturn {
   selectedIndex: Readonly<Ref<number>>
   getSelectedItem: () => VCommandPaletteItem | undefined
+  execute: (index: number, event: KeyboardEvent | MouseEvent) => void
   executeSelected: (event: KeyboardEvent | MouseEvent) => void
   reset: () => void
   setSelectedIndex: (index: number) => void
@@ -66,6 +67,13 @@ export function useCommandPaletteNavigation (
     return options.filteredItems.value[selectedIndex.value]
   }
 
+  function execute (index: number, event: KeyboardEvent | MouseEvent) {
+    const item = options.filteredItems.value[index]
+    if (item) {
+      options.onItemClick(item, event)
+    }
+  }
+
   function executeSelected (event: KeyboardEvent | MouseEvent) {
     const item = getSelectedItem()
     if (item) {
@@ -106,6 +114,7 @@ export function useCommandPaletteNavigation (
   return {
     selectedIndex: readonly(selectedIndex),
     getSelectedItem,
+    execute,
     executeSelected,
     reset,
     setSelectedIndex,

@@ -36,6 +36,10 @@ export const makeVCommandPaletteProps = propsFactory({
     default: () => [],
   },
   placeholder: String,
+  inputIcon: {
+    type: String,
+    default: 'mdi-magnify',
+  },
   hotkey: String,
   noDataText: String,
   location: String,
@@ -52,6 +56,7 @@ export type VCommandPaletteSlots = {
   default: never
   prepend: never
   append: never
+  input: never
   'no-data': never
 }
 
@@ -77,7 +82,12 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
     const previouslyFocusedElement = shallowRef<HTMLElement | null>(null)
 
     const internalItems = computed(() =>
-      props.items.map((item, index) => ({ value: index, raw: item, title: item.title }))
+      props.items.map((item, index) => ({
+        value: index,
+        raw: item,
+        ...('title' in item && { title: item.title }),
+        ...('subtitle' in item && { subtitle: item.subtitle }),
+      }))
     )
 
     const { filteredItems: filterResult } = useFilter(props, internalItems, searchQuery)
@@ -248,19 +258,21 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
             >
               { slots.prepend?.() }
 
-              <div class="px-4 py-2">
-                <VTextField
-                  ref={ searchInputRef }
-                  v-model={ searchQuery.value }
-                  placeholder={ props.placeholder || t('$vuetify.command.search') }
-                  prependInnerIcon="mdi-magnify"
-                  singleLine
-                  hideDetails
-                  variant="solo"
-                  flat
-                  bgColor="transparent"
-                  onKeydown={ handleSearchKeydown }
-                />
+              <div class="v-command-palette__input-container">
+                { slots.input?.() ?? (
+                  <VTextField
+                    ref={ searchInputRef }
+                    v-model={ searchQuery.value }
+                    placeholder={ props.placeholder || t('$vuetify.command.search') }
+                    prependInnerIcon={ props.inputIcon }
+                    singleLine
+                    hideDetails
+                    variant="solo"
+                    flat
+                    bgColor="transparent"
+                    onKeydown={ handleSearchKeydown }
+                  />
+                )}
               </div>
 
               <div class="v-command-palette__content">
@@ -270,6 +282,7 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
                     class="v-command-palette__list"
                     items={ itemsForList.value }
                     itemType="type"
+                    itemProps
                     activatable
                     navigationStrategy="track"
                     navigationIndex={ navigation.selectedIndex.value }
@@ -280,13 +293,13 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
                           key={ `item-${props.index}` }
                           item={ props }
                           index={ props.index }
-                          onExecute={ navigation.executeSelected }
+                          onExecute={ (event: MouseEvent | KeyboardEvent) => navigation.execute(props.index, event) }
                         />
                       ),
                     }}
                   />
                 ) : (
-                  <div key="no-data" class="pa-4 text-center text-disabled">
+                  <div key="no-data" class="v-command-palette__no-data">
                     { slots['no-data']?.() || (props.noDataText || t('$vuetify.noDataText')) }
                   </div>
                 )}
