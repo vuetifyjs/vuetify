@@ -336,9 +336,10 @@ export const VSelect = genericComponent<new <
       }
     }
     function onBlur (e: FocusEvent) {
-      const target = e.relatedTarget as HTMLElement
-
-      if (!menuContentRef.value?.$el.contains(target)) {
+      if (
+        !vTextFieldRef.value?.$el.contains(e.target) &&
+        !menuContentRef.value?.$el.contains(e.target)
+      ) {
         menu.value = false
       }
     }
