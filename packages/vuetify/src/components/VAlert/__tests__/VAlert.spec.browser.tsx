@@ -1,7 +1,7 @@
 import { VAlert } from '..'
 
 // Utilities
-import { generate, render, screen } from '@test'
+import { render, screen, showcase } from '@test'
 
 const defaultColors = ['success', 'info', 'warning', 'error', 'invalid']
 
@@ -40,7 +40,5 @@ describe('VAlert', () => {
     })
   })
 
-  describe('Showcase', () => {
-    generate({ stories, props, component: VAlert })
-  })
+  showcase({ stories, props, component: VAlert })
 })

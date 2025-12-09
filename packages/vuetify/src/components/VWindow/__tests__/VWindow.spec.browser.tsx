@@ -3,7 +3,7 @@ import { VWindow } from '../VWindow'
 import { VWindowItem } from '../VWindowItem'
 
 // Utilities
-import { commands, generate, page, render, screen, userEvent } from '@test'
+import { commands, page, render, screen, showcase, userEvent } from '@test'
 
 const stories = {
   'Without arrows': (
@@ -71,6 +71,8 @@ describe('VWindow', () => {
         </VWindowItem>
       </VWindow>
     ))
+
+    await commands.waitStable('.v-window')
 
     let arrows = screen.getAllByCSS('.v-window__controls > .v-btn')
     expect(arrows).toHaveLength(1)
@@ -216,6 +218,7 @@ describe('VWindow', () => {
       </VWindow>
     ))
 
+    await commands.waitStable('.v-window')
     const arrows = screen.getAllByCSS('.v-window__controls > .v-btn')
     await userEvent.click(arrows[0])
     expect(screen.getByCSS('.v-window-item--active h1')).toHaveTextContent('3. baz')
@@ -244,7 +247,5 @@ describe('VWindow', () => {
     expect(screen.getByCSS('.v-window-item--active h1')).toHaveTextContent('1. foo')
   })
 
-  describe('Showcase', () => {
-    generate({ stories })
-  })
+  showcase({ stories })
 })

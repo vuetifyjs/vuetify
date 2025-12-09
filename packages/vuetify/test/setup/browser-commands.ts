@@ -1,81 +1,100 @@
-/// <reference types="@vitest/browser/providers/webdriverio" />
-/// <reference types="./percy.d.ts" />
+/// <reference types="@vitest/browser-playwright" />
 
 import type { BrowserCommandContext } from 'vitest/node'
-import percy from '@percy/sdk-utils'
-import type { PercyOptions } from '@percy/sdk-utils'
-import { createRequire } from 'node:module'
-import { readFileSync } from 'node:fs'
-import path from 'upath'
 
-const require = createRequire(import.meta.url)
-
-const pkg = JSON.parse(readFileSync('../../package.json', 'utf8'))
-const wdioPkg = JSON.parse(readFileSync(path.resolve(require.resolve('webdriverio'), '../../package.json'), 'utf8'))
-const CLIENT_INFO = `${pkg.name}/${pkg.version}`
-const ENV_INFO = `${wdioPkg.name}/${wdioPkg.version}`
-
-function drag (ctx: BrowserCommandContext, start: [number, number], ...moves: number[][]) {
-  const action = ctx.browser.action('pointer', {
-    parameters: { pointerType: 'touch' },
+async function drag (ctx: BrowserCommandContext, start: [number, number], ...moves: number[][]) {
+  const cdp = await ctx.provider.getCDPSession!(ctx.sessionId)
+  await cdp.send('Input.dispatchTouchEvent', {
+    type: 'touchStart',
+    touchPoints: [{ x: start[0], y: start[1] }],
   })
-  action.move({ x: start[0], y: start[1] })
-  action.down()
+  await cdp.send('Input.dispatchTouchEvent', {
+    type: 'touchMove',
+    touchPoints: [{ x: start[0], y: start[1] }],
+  })
   for (const move of moves) {
-    action.move({ x: move[0], y: move[1], duration: 10 })
-  }
-  action.up()
-  return action.perform()
-}
-
-function scroll (ctx: BrowserCommandContext, x: number, y: number) {
-  return ctx.browser.scroll(x, y)
-}
-
-function isDisplayed (ctx: BrowserCommandContext, selector: string, withinViewport = false) {
-  return ctx.browser.$(selector).isDisplayed({ withinViewport })
-}
-
-async function percySnapshot (ctx: BrowserCommandContext, name: string, options?: PercyOptions) {
-  if (!(await percy.isPercyEnabled())) return
-
-  try {
-    const dom = await percy.fetchPercyDOM()
-    await ctx.browser.executeScript(dom, [])
-
-    const domSnapshot = await ctx.browser.executeScript('return PercyDOM.serialize(arguments[0])', [options])
-
-    await percy.postSnapshot({
-      ...options,
-      environmentInfo: ENV_INFO,
-      clientInfo: CLIENT_INFO,
-      url: await ctx.browser.getUrl(),
-      domSnapshot,
-      name,
+    await cdp.send('Input.dispatchTouchEvent', {
+      type: 'touchMove',
+      touchPoints: [{ x: move[0], y: move[1] }],
     })
-  } catch (err) {
-    const log = percy.logger('webdriverio')
-    log.error(`Could not take DOM snapshot "${name}"`)
-    log.error(err)
+  }
+  await cdp.send('Input.dispatchTouchEvent', {
+    type: 'touchEnd',
+    touchPoints: [{ x: moves.at(-1)![0], y: moves.at(-1)![1] }],
+  })
+}
+
+async function click (ctx: BrowserCommandContext, ...args: [string] | [number, number]) {
+  if (args.length === 1) {
+    const el = await ctx.page.$(args[0])
+    await el?.click()
+  } else {
+    await ctx.page.mouse.click(...args)
   }
 }
 
 async function waitStable (ctx: BrowserCommandContext, selector: string) {
-  return ctx.browser.$(selector).waitForStable()
+  const el = ctx.iframe.locator(selector)
+  const handles = await el.elementHandles()
+  if (handles.length > 1) {
+    await Promise.all(
+      handles.map(h => Promise.any([
+        h.waitForElementState('stable', { timeout: 1000 }),
+        h.waitForElementState('hidden', { timeout: 1000 }),
+      ]))
+    )
+  } else {
+    await Promise.all(
+      handles.map(h =>
+        h.waitForElementState('stable', { timeout: 1000 }),
+      )
+    )
+  }
 }
 
 async function waitForClickable (ctx: BrowserCommandContext, selector: string) {
-  return ctx.browser.$(selector).waitForClickable()
+  (await ctx.page.$(selector))?.click({ trial: true })
 }
 
 async function setFocusEmulationEnabled (ctx: BrowserCommandContext) {
-  return ctx.browser.sendCommand('Emulation.setFocusEmulationEnabled', { enabled: true })
+  const cdp = await ctx.provider.getCDPSession!(ctx.sessionId)
+  await cdp.send('Emulation.setFocusEmulationEnabled', { enabled: true })
 }
 
 async function setReduceMotionEnabled (ctx: BrowserCommandContext) {
-  return ctx.browser.sendCommand('Emulation.setEmulatedMedia', {
-    features: [{ name: 'prefers-reduced-motion', value: 'reduce' }],
+  await ctx.page.emulateMedia({
+    reducedMotion: 'reduce',
   })
+}
+
+/**
+ * Use this to run some async code in only one test at a time
+ *
+ * ```js
+ * const lock = await commands.getLock()
+ * // no other code using getLock can run until this is done
+ * await a()
+ * await b()
+ * await commands.releaseLock(lock)
+ * ```
+ */
+async function getLock () {
+  const _lastLock = getLock.lastLock
+
+  const lock = Promise.withResolvers<void>()
+  const id = getLock.lockCount++
+  getLock.locks.set(id, lock)
+  getLock.lastLock = lock.promise
+  await _lastLock
+
+  return id
+}
+getLock.lockCount = 0
+getLock.locks = new Map<number, PromiseWithResolvers<void>>()
+getLock.lastLock = Promise.resolve()
+
+async function releaseLock (ctx: BrowserCommandContext, lock: number) {
+  getLock.locks.get(lock)!.resolve()
 }
 
 let abortTimeout: ReturnType<typeof setTimeout>
@@ -96,15 +115,15 @@ function clearAbortTimeout (ctx: BrowserCommandContext) {
 
 export const commands = {
   drag,
-  scroll,
-  isDisplayed,
-  percySnapshot,
+  click,
   waitStable,
   waitForClickable,
   setFocusEmulationEnabled,
   setReduceMotionEnabled,
   abortAfter,
   clearAbortTimeout,
+  getLock,
+  releaseLock,
 }
 
 export type CustomCommands = {

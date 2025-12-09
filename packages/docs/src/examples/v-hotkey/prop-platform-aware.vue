@@ -7,7 +7,7 @@
     >
       <div class="d-flex align-center">
         <div>
-          <strong>Platform Detection:</strong> Currently detected as {{ display.platform.isMac ? 'Mac' : 'PC' }}
+          <strong>Platform Detection:</strong> Currently detected as {{ isMac ? 'Mac' : 'PC' }}
         </div>
       </div>
     </v-alert>
@@ -145,11 +145,13 @@
 
 <script setup>
   import { computed, ref } from 'vue'
-  import { useDisplay } from 'vuetify'
 
   const displayMode = ref('icon')
   const platform = ref('mac')
-  const display = useDisplay()
+
+  const isMac = computed(() => {
+    return typeof navigator !== 'undefined' && /macintosh/i.test(navigator.userAgent)
+  })
 
   const effectivePlatform = computed(() => {
     return platform.value
@@ -166,8 +168,8 @@
     },
 
     computed: {
-      display () {
-        return this.$vuetify.display
+      isMac () {
+        return typeof navigator !== 'undefined' && /macintosh/i.test(navigator.userAgent)
       },
 
       effectivePlatform () {

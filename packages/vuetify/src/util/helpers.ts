@@ -4,9 +4,13 @@ import {
   capitalize,
   Comment,
   Fragment,
+  isProxy,
+  isReactive,
+  isRef,
   isVNode,
   reactive,
   shallowRef,
+  toRaw,
   toRef,
   unref,
   watchEffect,
@@ -43,33 +47,6 @@ export function getNestedValue (obj: any, path: (string | number)[], fallback?: 
   if (obj == null) return fallback
 
   return obj[path[last]] === undefined ? fallback : obj[path[last]]
-}
-
-export function deepEqual (a: any, b: any): boolean {
-  if (a === b) return true
-
-  if (
-    a instanceof Date &&
-    b instanceof Date &&
-    a.getTime() !== b.getTime()
-  ) {
-    // If the values are Date, compare them as timestamps
-    return false
-  }
-
-  if (a !== Object(a) || b !== Object(b)) {
-    // If the values aren't objects, they were already checked for equality
-    return false
-  }
-
-  const props = Object.keys(a)
-
-  if (props.length !== Object.keys(b).length) {
-    // Different number of props, don't bother to check
-    return false
-  }
-
-  return props.every(p => deepEqual(a[p], b[p]))
 }
 
 export function getObjectValueByPath (obj: any, path?: string | null, fallback?: any): any {
@@ -420,41 +397,6 @@ export function debounce (fn: Function, delay: MaybeRef<number>) {
   return wrap
 }
 
-export function throttle<T extends (...args: any[]) => any> (
-  fn: T,
-  delay: number,
-  options = { leading: true, trailing: true },
-) {
-  let timeoutId = 0
-  let lastExec = 0
-  let throttling = false
-
-  const wrap = (...args: Parameters<T>): void | ReturnType<T> => {
-    clearTimeout(timeoutId)
-    const now = Date.now()
-    const elapsed = now - lastExec
-
-    if (!throttling || elapsed >= delay) {
-      lastExec = now
-    }
-    if ((!throttling && options.leading) || elapsed >= delay) {
-      window.setTimeout(() => fn(...args)) // ignore 'fn' executin errors
-    }
-
-    throttling = true
-    timeoutId = window.setTimeout(() => {
-      throttling = false
-      if (options.trailing) {
-        fn(...args)
-      }
-    }, delay)
-  }
-
-  wrap.clear = () => clearTimeout(timeoutId)
-  wrap.immediate = fn
-  return wrap
-}
-
 export function clamp (value: number, min = 0, max = 1) {
   return Math.max(min, Math.min(max, value))
 }
@@ -575,7 +517,7 @@ export function findChildrenWithProvide (
   } else if (Array.isArray(vnode.children)) {
     return vnode.children.map(child => findChildrenWithProvide(key, child)).flat(1)
   } else if (vnode.component) {
-    if (Object.getOwnPropertySymbols(vnode.component.provides).includes(key as symbol)) {
+    if (Object.getOwnPropertyDescriptor(vnode.component.provides, key as symbol)) {
       return [vnode.component]
     } else if (vnode.component.subTree) {
       return findChildrenWithProvide(key, vnode.component.subTree).flat(1)
@@ -886,3 +828,23 @@ export function onlyDefinedProps (props: Record<string, any>) {
 }
 
 export type NonEmptyArray<T> = [T, ...T[]]
+
+export function deepToRaw<T extends {}> (value: T): T {
+  const objectIterator = (input: any): any => {
+    if (Array.isArray(input)) {
+      return input.map(item => objectIterator(item))
+    }
+    if (isRef(input) || isReactive(input) || isProxy(input)) {
+      return objectIterator(toRaw(input))
+    }
+    if (isPlainObject(input)) {
+      return Object.keys(input).reduce((acc, key) => {
+        acc[key as keyof typeof acc] = objectIterator(input[key])
+        return acc
+      }, {} as T)
+    }
+    return input
+  }
+
+  return objectIterator(value)
+}

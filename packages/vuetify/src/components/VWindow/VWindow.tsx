@@ -158,9 +158,9 @@ export const VWindow = genericComponent<new <T>(
       if (itemsLength <= 2) {
         isReversed.value = newVal < oldVal
       } else if (newVal === lastIndex && oldVal === 0) {
-        isReversed.value = true
-      } else if (newVal === 0 && oldVal === lastIndex) {
         isReversed.value = false
+      } else if (newVal === 0 && oldVal === lastIndex) {
+        isReversed.value = true
       } else {
         isReversed.value = newVal < oldVal
       }
@@ -275,9 +275,11 @@ export const VWindow = genericComponent<new <T>(
         ]}
         style={[
           props.style,
-          props.transitionDuration && !PREFERS_REDUCED_MOTION
-            ? { '--v-window-transition-duration': convertToUnit(props.transitionDuration, 'ms') }
-            : undefined,
+          {
+            '--v-window-transition-duration': !PREFERS_REDUCED_MOTION()
+              ? convertToUnit(props.transitionDuration, 'ms')
+              : null,
+          },
         ]}
         v-touch={ touchOptions.value }
       >

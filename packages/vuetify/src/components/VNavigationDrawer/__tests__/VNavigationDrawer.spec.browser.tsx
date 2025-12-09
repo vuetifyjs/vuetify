@@ -5,7 +5,7 @@ import { VLocaleProvider } from '@/components/VLocaleProvider'
 import { VMain } from '@/components/VMain'
 
 // Utilities
-import { commands, generate, page, render, screen, userEvent } from '@test'
+import { commands, page, render, screen, showcase, userEvent } from '@test'
 import { ref } from 'vue'
 
 const stories = {
@@ -175,8 +175,8 @@ describe('VNavigationDrawer', () => {
 
     visible.value = true
 
-    await expect.element(screen.getByCSS('.v-navigation-drawer')).toBeOnScreen()
-    await expect.element(screen.getByCSS('.v-navigation-drawer__scrim')).toBeOnScreen()
+    await expect.element(screen.getByCSS('.v-navigation-drawer')).toBeInViewport()
+    await expect.element(screen.getByCSS('.v-navigation-drawer__scrim')).toBeInViewport()
   })
 
   it('should position drawer scrim correctly in rtl locale', async () => {
@@ -193,11 +193,9 @@ describe('VNavigationDrawer', () => {
 
     visible.value = true
 
-    await expect.element(screen.getByCSS('.v-navigation-drawer')).toBeOnScreen()
-    await expect.element(screen.getByCSS('.v-navigation-drawer__scrim')).toBeOnScreen()
+    await expect.element(screen.getByCSS('.v-navigation-drawer')).toBeInViewport()
+    await expect.element(screen.getByCSS('.v-navigation-drawer__scrim')).toBeInViewport()
   })
 
-  describe('Showcase', () => {
-    generate({ stories })
-  })
+  showcase({ stories })
 })

@@ -16,6 +16,7 @@ import { VVirtualScroll } from '@/components/VVirtualScroll'
 
 // Composables
 import { useScrolling } from './useScrolling'
+import { useAutocomplete } from '@/composables/autocomplete'
 import { useForm } from '@/composables/form'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { IconValue } from '@/composables/icons'
@@ -26,7 +27,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeTransitionProps } from '@/composables/transition'
 
 // Utilities
-import { computed, mergeProps, nextTick, ref, shallowRef, watch } from 'vue'
+import { computed, mergeProps, nextTick, ref, shallowRef, toRef, watch } from 'vue'
 import {
   camelizeProps,
   checkPrintable,
@@ -160,11 +161,13 @@ export const VSelect = genericComponent<new <
         : model.value.length
     })
     const form = useForm(props)
+    const autocomplete = useAutocomplete(props)
     const selectedValues = computed(() => model.value.map(selection => selection.value))
     const isFocused = shallowRef(false)
+    const closableChips = toRef(() => props.closableChips && !form.isReadonly.value && !form.isDisabled.value)
 
     let keyboardLookupPrefix = ''
-    let keyboardLookupIndex = -1
+    let keyboardLookupIndex = 0
     let keyboardLookupLastTime: number
 
     const displayItems = computed(() => {
@@ -188,7 +191,7 @@ export const VSelect = genericComponent<new <
       },
     })
 
-    const { menuId, ariaExpanded, ariaControls, ariaLabel } = useMenuActivator(props, menu)
+    const { menuId, ariaExpanded, ariaControls } = useMenuActivator(props, menu)
 
     const computedMenuProps = computed(() => {
       return {
@@ -202,6 +205,7 @@ export const VSelect = genericComponent<new <
 
     const listRef = ref<VList>()
     const listEvents = useScrolling(listRef, vTextFieldRef)
+
     function onClear (e: MouseEvent) {
       if (props.openOnClear) {
         menu.value = true
@@ -246,7 +250,7 @@ export const VSelect = genericComponent<new <
       const now = performance.now()
       if (now - keyboardLookupLastTime > KEYBOARD_LOOKUP_THRESHOLD) {
         keyboardLookupPrefix = ''
-        keyboardLookupIndex = -1
+        keyboardLookupIndex = 0
       }
       keyboardLookupPrefix += e.key.toLowerCase()
       keyboardLookupLastTime = now
@@ -259,12 +263,13 @@ export const VSelect = genericComponent<new <
         if (keyboardLookupPrefix.at(-1) === keyboardLookupPrefix.at(-2)) {
           // No matches but we have a repeated letter, try the next item with that prefix
           keyboardLookupPrefix = keyboardLookupPrefix.slice(0, -1)
+          keyboardLookupIndex++
           result = findItemBase()
           if (result) return result
         }
 
         // Still nothing, wrap around to the top
-        keyboardLookupIndex = -1
+        keyboardLookupIndex = 0
         result = findItemBase()
         if (result) return result
 
@@ -273,7 +278,7 @@ export const VSelect = genericComponent<new <
         return findItemBase()
       }
       function findItemBase () {
-        for (let i = keyboardLookupIndex + 1; i < items.length; i++) {
+        for (let i = keyboardLookupIndex; i < items.length; i++) {
           const _item = items[i]
           if (_item.title.toLowerCase().startsWith(keyboardLookupPrefix)) {
             return [_item, i] as const
@@ -387,7 +392,8 @@ export const VSelect = genericComponent<new <
         <VTextField
           ref={ vTextFieldRef }
           { ...textFieldProps }
-          modelValue={ model.value.map(v => v.props.value).join(', ') }
+          modelValue={ model.value.map(v => v.props.title).join(', ') }
+          name={ undefined }
           onUpdate:modelValue={ onModelUpdate }
           v-model:focused={ isFocused.value }
           validationValue={ model.externalValue }
@@ -413,13 +419,25 @@ export const VSelect = genericComponent<new <
           onKeydown={ onKeydown }
           aria-expanded={ ariaExpanded.value }
           aria-controls={ ariaControls.value }
-          aria-label={ ariaLabel.value }
-          title={ ariaLabel.value }
         >
           {{
             ...slots,
-            default: () => (
+            default: ({ id }) => (
               <>
+                <select
+                  hidden
+                  multiple={ props.multiple }
+                  name={ autocomplete.fieldName.value }
+                >
+                  { items.value.map(item => (
+                    <option
+                      key={ item.value }
+                      value={ item.value }
+                      selected={ selectedValues.value.includes(item.value) }
+                    />
+                  ))}
+                </select>
+
                 <VMenu
                   id={ menuId.value }
                   ref={ vMenuRef }
@@ -447,7 +465,8 @@ export const VSelect = genericComponent<new <
                       tabindex="-1"
                       selectable
                       aria-live="polite"
-                      aria-label={ `${props.label}-list` }
+                      aria-labelledby={ `${id.value}-label` }
+                      aria-multiselectable={ props.multiple }
                       color={ props.itemColor ?? props.color }
                       { ...listEvents }
                       { ...props.listProps }
@@ -466,6 +485,8 @@ export const VSelect = genericComponent<new <
                             ref: itemRef,
                             key: item.value,
                             onClick: () => select(item, null),
+                            'aria-posinset': index + 1,
+                            'aria-setsize': displayItems.value.length,
                           })
 
                           if (item.type === 'divider') {
@@ -495,6 +516,7 @@ export const VSelect = genericComponent<new <
                                         modelValue={ isSelected }
                                         ripple={ false }
                                         tabindex="-1"
+                                        aria-hidden
                                         onClick={ (event: MouseEvent) => event.preventDefault() }
                                       />
                                     ) : undefined }
@@ -527,7 +549,7 @@ export const VSelect = genericComponent<new <
                     select(item, false)
                   }
 
-                  const slotProps = {
+                  const slotProps = mergeProps(VChip.filterProps(item.props), {
                     'onClick:close': onChipClose,
                     onKeydown (e: KeyboardEvent) {
                       if (e.key !== 'Enter' && e.key !== ' ') return
@@ -543,7 +565,7 @@ export const VSelect = genericComponent<new <
                     },
                     modelValue: true,
                     'onUpdate:modelValue': undefined,
-                  }
+                  })
 
                   const hasSlot = hasChips ? !!slots.chip : !!slots.selection
                   const slotContent = hasSlot
@@ -562,7 +584,7 @@ export const VSelect = genericComponent<new <
                         !slots.chip ? (
                           <VChip
                             key="chip"
-                            closable={ props.closableChips }
+                            closable={ closableChips.value }
                             size="small"
                             text={ item.title }
                             disabled={ item.props.disabled }
@@ -573,7 +595,7 @@ export const VSelect = genericComponent<new <
                             key="chip-defaults"
                             defaults={{
                               VChip: {
-                                closable: props.closableChips,
+                                closable: closableChips.value,
                                 size: 'small',
                                 text: item.title,
                               },
@@ -605,6 +627,7 @@ export const VSelect = genericComponent<new <
                     class="v-select__menu-icon"
                     color={ vTextFieldRef.value?.fieldIconColor }
                     icon={ props.menuIcon }
+                    aria-hidden
                   />
                 ) : undefined }
               </>

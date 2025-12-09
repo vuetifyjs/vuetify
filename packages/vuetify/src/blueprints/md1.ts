@@ -33,6 +33,7 @@ export const md1: Blueprint = {
       controlHeight: 44,
       elevation: 1,
       rounded: 0,
+      controlVariant: 'modal',
 
       VBtn: {
         color: 'high-emphasis',

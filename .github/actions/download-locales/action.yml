@@ -10,7 +10,23 @@ inputs:
 runs:
   using: composite
   steps:
+    - id: get-date
+      run: |
+        echo "date=$(/bin/date -u "+%Y%m%d")" >> $GITHUB_OUTPUT
+      shell: bash
+    - uses: actions/cache@v4
+      id: cache-crowdin
+      with:
+        key: crowdin-${{ inputs.crowdin-branch }}-${{ steps.get-date.outputs.date }}
+        path: |-
+          packages/api-generator/src/locale/**/*.json
+          !packages/api-generator/src/locale/en/**/*.json
+          packages/docs/src/pages/**/*.md
+          !packages/docs/src/pages/en/**/*.md
+          packages/docs/src/i18n/messages/*.json
+          !packages/docs/src/i18n/messages/en.json
     - name: Download eo-UY
+      if: ${{ steps.cache-crowdin.outputs.cache-hit != 'true' }}
       uses: crowdin/github-action@v2.7.1
       with:
         download_language: eo
@@ -21,6 +37,7 @@ runs:
         export_only_approved: false
         crowdin_branch_name: ${{ inputs.crowdin-branch }}
     - name: Download es-MX
+      if: ${{ steps.cache-crowdin.outputs.cache-hit != 'true' }}
       uses: crowdin/github-action@v2.7.1
       with:
         download_language: es-MX
@@ -31,6 +48,7 @@ runs:
         export_only_approved: false
         crowdin_branch_name: ${{ inputs.crowdin-branch }}
     - name: Download ja-JP
+      if: ${{ steps.cache-crowdin.outputs.cache-hit != 'true' }}
       uses: crowdin/github-action@v2.7.1
       with:
         download_language: ja
@@ -41,6 +59,7 @@ runs:
         export_only_approved: false
         crowdin_branch_name: ${{ inputs.crowdin-branch }}
     - name: Download zh-CN
+      if: ${{ steps.cache-crowdin.outputs.cache-hit != 'true' }}
       uses: crowdin/github-action@v2.7.1
       with:
         download_language: zh-CN

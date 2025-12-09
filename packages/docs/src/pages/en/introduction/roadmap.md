@@ -2,7 +2,7 @@
 meta:
   nav: Roadmap
   title: The Vuetify roadmap
-  description: The upcoming planned features and new functionality coming to Vuetify. New components, new directives, and much much more!.
+  description: The upcoming planned features and new functionality coming to Vuetify. New components, new directives, and much much more!
   keywords: vuetify roadmap, future plans, new vuetify features
 related:
   - /introduction/long-term-support/
@@ -26,7 +26,6 @@ The following is a list of all planned components for the year 2025.
 
 | Version                                                                 | Planned Release |
 |-------------------------------------------------------------------------|-----------------|
-| [v3.11](https://github.com/vuetifyjs/vuetify/milestone/82)              | Q4 2025         |
 | [v4.0 (Revisionist)](https://github.com/vuetifyjs/vuetify/milestone/62) | Q4 2025         |
 | [v4.1](https://github.com/vuetifyjs/vuetify/milestone/77)               | TBD             |
 
@@ -52,8 +51,6 @@ The following is a list of all planned components for the year 2025.
 | Name                                                       | Entering Labs | Production Release |
 |------------------------------------------------------------|---------------|--------------------|
 | [v-icon-btn](/components/icon-buttons/)                    | *             | Q4 2025            |
-| [v-calendar](/components/calendars/)                       | *             | Q2 2026            |
-| [v-hotkey](/components/hotkeys/)                           | *             | Q2 2026            |
 | [v-video](https://github.com/vuetifyjs/vuetify/pull/21460) | *             | TBD                |
 | [v-pie](https://github.com/vuetifyjs/vuetify/pull/21176)   | *             | TBD                |
 | v-command-palette                                          | TBD           | TBD                |
@@ -68,6 +65,17 @@ The following is a list of all planned components for the year 2025.
 ## Released
 
 The following are the already released **minor** and **major** version updates. Find more information on the [latest releases](https://github.com/vuetifyjs/vuetify/releases/latest) on GitHub.
+
+### v3.11 (Harbinger)
+
+- **Released:** November 2025
+- **Target Release:** Q4 2025
+- **Notes:** [v3.11 Release](/getting-started/release-notes/?version=v3.11.0)
+- **Overview:**
+  - Introduced 2 new components to the main framework from Labs:
+    - [v-calendar](/components/calendars/)
+    - [v-hotkey](/components/hotkeys/)
+- **Milestone Issues:** [Github Issues](https://github.com/vuetifyjs/vuetify/milestone/82)
 
 ### v3.10 (Argos)
 
